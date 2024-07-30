@@ -19,10 +19,10 @@ class SlideAndScaleAnimation extends StatefulWidget {
   });
 
   @override
-  _SlideAndScaleAnimationState createState() => _SlideAndScaleAnimationState();
+  SlideAndScaleAnimationState createState() => SlideAndScaleAnimationState();
 }
 
-class _SlideAndScaleAnimationState extends State<SlideAndScaleAnimation>
+class SlideAndScaleAnimationState extends State<SlideAndScaleAnimation>
     with SingleTickerProviderStateMixin {
   late final AnimationController _animationController;
   late final Animation<double> _scaleAnimation;

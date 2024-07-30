@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:blur/blur.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dantotsu/Adaptor/MediaAdaptor.dart';
@@ -11,17 +9,19 @@ import 'package:dantotsu/Theme/ThemeManager.dart';
 import 'package:dantotsu/api/Anilist/Anilist.dart';
 import 'package:dantotsu/api/Anilist/AnilistQueries.dart';
 import 'package:flutter/material.dart';
+import 'package:kenburns_nullsafety/kenburns_nullsafety.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   final int userId;
+
   const HomeScreen({super.key, required this.userId});
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  HomeScreenState createState() => HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
+class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   List<String?>? banner;
   bool _areImagesLoaded = false;
   Map<String, List<media>>? list;
@@ -70,6 +70,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     });
   }
 
+  Future<void> refresh() async {
+    await Future.wait([
+      getBanner(),
+      getList(),
+    ]);
+  }
+
   @override
   void dispose() {
     _listController.dispose();
@@ -79,72 +86,86 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final isDarkMode = Provider.of<ThemeNotifier>(context).isDarkMode;
-    final topInset = MediaQuery.of(context).padding.top;
-    final backgroundHeight = 212.0 + topInset;
+    const topInset = 0.0;
+    const backgroundHeight = 212.0 + topInset;
 
     return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          SliverToBoxAdapter(
-            child: Column(
-              children: [
-                SizedBox(
-                  height: backgroundHeight,
-                  child: Consumer<AnilistData>(
-                    builder: (context, data, child) {
-                      if (!data.initialized || !_areImagesLoaded) {
-                        return const Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      }
-                      _listController.forward();
+      body: RefreshIndicator(
+        onRefresh: refresh,
+        child: CustomScrollView(
+          physics: const BouncingScrollPhysics(),
+          slivers: [
+            SliverToBoxAdapter(
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: backgroundHeight,
+                    child: Consumer<AnilistData>(
+                      builder: (context, data, child) {
+                        if (!data.initialized || !_areImagesLoaded) {
+                          return Stack(children: [
+                            Container(
+                              margin: const EdgeInsets.only(
+                                left: 34.0,
+                                right: 16.0,
+                                bottom: backgroundHeight / 2 - 2,
+                                top: backgroundHeight / 2 - 2,
+                              ),
+                              width: double.infinity,
+                              child: const LinearProgressIndicator(),
+                            )
+                          ]);
+                        }
+                        _listController.forward();
 
-                      return Stack(
-                        fit: StackFit.expand,
-                        children: [
-                          _buildBackgroundImage(data.bg ?? '', topInset),
-                          _buildAvatar(data, topInset),
-                          _buildUserInfo(data, isDarkMode, topInset),
-                          _buildCards(topInset),
-                        ],
-                      );
-                    },
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SliverList(
-            delegate: SliverChildListDelegate(
-              [
-                Consumer<AnilistData>(builder: (context, data, child) {
-                  return Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 16, 0, 16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        _buildSection(
-                            'Continue Watching', list?['currentAnime'] ?? []),
-                        _buildSection(
-                            'Favorite Anime', list?['favoriteAnime'] ?? []),
-                        _buildSection('Planned Anime',
-                            list?['currentAnimePlanned'] ?? []),
-                        _buildSection(
-                            'Continue Reading', list?['currentManga'] ?? []),
-                        _buildSection(
-                            'Favorite Manga', list?['favoriteManga'] ?? []),
-                        _buildSection('Planned Manga',
-                            list?['currentMangaPlanned'] ?? []),
-                        _buildSection(
-                            'Recommended', list?['recommendations'] ?? []),
-                      ],
+                        return Stack(
+                          fit: StackFit.expand,
+                          children: [
+                            _buildBackgroundImage(data.bg ?? '', topInset),
+                            _buildAvatar(data, topInset),
+                            _buildUserInfo(data, isDarkMode, topInset),
+                            _buildCards(topInset),
+                          ],
+                        );
+                      },
                     ),
-                  );
-                }),
-              ],
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+            SliverList(
+              delegate: SliverChildListDelegate(
+                [
+                  Consumer<AnilistData>(builder: (context, data, child) {
+                    return Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 16, 0, 16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _buildSection(
+                              'Continue Watching', list?['currentAnime'] ?? []),
+                          _buildSection(
+                              'Favorite Anime', list?['favoriteAnime'] ?? []),
+                          _buildSection('Planned Anime',
+                              list?['currentAnimePlanned'] ?? []),
+                          _buildSection(
+                              'Continue Reading', list?['currentManga'] ?? []),
+                          _buildSection(
+                              'Favorite Manga', list?['favoriteManga'] ?? []),
+                          _buildSection('Planned Manga',
+                              list?['currentMangaPlanned'] ?? []),
+                          _buildSection(
+                              'Recommended', list?['recommendations'] ?? []),
+                          const SizedBox(height: 128),
+                        ],
+                      ),
+                    );
+                  }),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -160,15 +181,18 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       height: 212.0 + topInset,
       child: Stack(
         children: [
-          CachedNetworkImage(
-            imageUrl: imageUrl,
-            fit: BoxFit.cover,
-            width: double.infinity,
-            height: 180,
+          KenBurns(
+            maxScale: 1.5,
+            child: CachedNetworkImage(
+              imageUrl: imageUrl,
+              fit: BoxFit.cover,
+              width: double.infinity,
+              height: 212+ topInset,
+            ),
           ),
           Container(
             width: double.infinity,
-            height: 212,
+            height: 212+ topInset,
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: gradientColors,
@@ -257,7 +281,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 fontWeight: FontWeight.bold,
                 fontSize: 16.0,
                 color:
-                    isDarkMode ? Colors.white : Colors.black.withOpacity(0.6),
+                isDarkMode ? Colors.white : Colors.black.withOpacity(0.6),
               ),
             ),
             const SizedBox(height: 2.0),
@@ -320,7 +344,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               context,
               'MANGA LIST',
               const AnimeScreen(),
-              // Assuming AnimeScreen is used for both lists
               banner?[1],
             ),
           ],
@@ -396,31 +419,37 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Text(
-            title,
-            style: const TextStyle(
-              fontFamily: 'Poppins',
-              color: Colors.white,
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        ),
-        const SizedBox(height: 16),
-        AnimatedSwitcher(
-          duration: const Duration(milliseconds: 300),
-          child: mediaList.isEmpty
-              ? const SizedBox(
+        if (mediaList.isEmpty)
+          const SizedBox(
             height: 250,
             child: Center(
               child: CircularProgressIndicator(),
             ),
           )
-              : MediaGrid(type: 0, mediaList: mediaList),
-        ),
-        const SizedBox(height: 4),
+        else
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 28.0),
+                child: Text(
+                  title,
+                  style: const TextStyle(
+                    fontFamily: 'Poppins',
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
+              AnimatedSwitcher(
+                duration: const Duration(milliseconds: 300),
+                child: MediaGrid(type: 0, mediaList: mediaList),
+              ),
+              const SizedBox(height: 4),
+            ],
+          ),
       ],
     );
   }

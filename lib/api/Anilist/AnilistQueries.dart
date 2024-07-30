@@ -306,8 +306,8 @@ Future<String?> bannerImage(String type, int id) async {
 
 Future<List<String?>> getBannerImages(int id) async {
   final b = <String?>[null, null];
-  b[0] = await bannerImage("ANIME",id);
-  b[1] = await bannerImage("MANGA",id);
+  b[0] = await bannerImage("ANIME", id);
+  b[1] = await bannerImage("MANGA", id);
   return b;
 }
 
@@ -343,12 +343,10 @@ Future<Map<String, List<media>>> initHomePage(int id) async {
 
     List<String> queries = [];
     if (toShow[0]) {
-      queries
-          .add(
+      queries.add(
           """currentAnime: ${continueMediaQuery("ANIME", "CURRENT", id)}""");
       queries.add(
-          """repeatingAnime: ${continueMediaQuery(
-              "ANIME", "REPEATING", id)}""");
+          """repeatingAnime: ${continueMediaQuery("ANIME", "REPEATING", id)}""");
     }
     if (toShow[1]) {
       queries.add("""favoriteAnime: ${favMediaQuery(true, 1, id)}""");
@@ -358,12 +356,10 @@ Future<Map<String, List<media>>> initHomePage(int id) async {
           """plannedAnime: ${continueMediaQuery("ANIME", "PLANNING", id)}""");
     }
     if (toShow[3]) {
-      queries
-          .add(
+      queries.add(
           """currentManga: ${continueMediaQuery("MANGA", "CURRENT", id)}""");
       queries.add(
-          """repeatingManga: ${continueMediaQuery(
-              "MANGA", "REPEATING", id)}""");
+          """repeatingManga: ${continueMediaQuery("MANGA", "REPEATING", id)}""");
     }
     if (toShow[4]) {
       queries.add("""favoriteManga: ${favMediaQuery(false, 1, id)}""");
@@ -375,11 +371,9 @@ Future<Map<String, List<media>>> initHomePage(int id) async {
     if (toShow[6]) {
       queries.add("""recommendationQuery: ${recommendationQuery()}""");
       queries.add(
-          """recommendationPlannedQueryAnime: ${recommendationPlannedQuery(
-              "ANIME", id)}""");
+          """recommendationPlannedQueryAnime: ${recommendationPlannedQuery("ANIME", id)}""");
       queries.add(
-          """recommendationPlannedQueryManga: ${recommendationPlannedQuery(
-              "MANGA", id)}""");
+          """recommendationPlannedQueryManga: ${recommendationPlannedQuery("MANGA", id)}""");
     }
 
     String query = "{${queries.join(",")}}";
@@ -412,23 +406,23 @@ Future<Map<String, List<media>>> initHomePage(int id) async {
           removedMedia.add(media);
         }
       }
-
-      /*List<int> list = await PrefManager.getVal<List<int>>("continue${type}List") ?? [];
-    if (list.isNotEmpty) {
-      for (var id in list.reversed) {
-        if (subMap.containsKey(id)) {
-          returnArray.add(subMap[id]!);
+      List<int> list =
+          await PrefManager.getVal<List<int>>("continue${type}List") ?? [];
+      if (list.isNotEmpty) {
+        for (var id in list.reversed) {
+          if (subMap.containsKey(id)) {
+            returnArray.add(subMap[id]!);
+          }
         }
-      }
-      for (var media in subMap.values) {
-        if (!returnArray.contains(media)) {
-          returnArray.add(media);
+        for (var media in subMap.values) {
+          if (!returnArray.contains(media)) {
+            returnArray.add(media);
+          }
         }
+      } else {
+        returnArray.addAll(subMap.values);
       }
-    } else {
 
-    }*/
-      returnArray.addAll(subMap.values);
       returnMap["current$type"] = returnArray;
     }
 
@@ -502,17 +496,20 @@ Future<Map<String, List<media>>> initHomePage(int id) async {
     if (toShow[6]) {
       Map<int, media> subMap = {};
 
-      var recommendations = response?.data?.recommendationQuery?.recommendations ?? [];
+      var recommendations =
+          response?.data?.recommendationQuery?.recommendations ?? [];
       for (var entry in recommendations) {
         var mediaRecommendation = entry.mediaRecommendation;
         if (mediaRecommendation != null) {
           var media = mediaData(mediaRecommendation);
           media.relation = mediaRecommendation.type?.toString() ?? "";
           subMap[media.id] = media;
-                }
+        }
       }
-      var animePlannedLists = response?.data?.recommendationPlannedQueryAnime?.lists
-          ?.expand((x) => x.entries ?? []) ?? [];
+      var animePlannedLists = response
+              ?.data?.recommendationPlannedQueryAnime?.lists
+              ?.expand((x) => x.entries ?? []) ??
+          [];
       for (var entry in animePlannedLists) {
         var media = mediaListData(entry);
         if (['RELEASING', 'FINISHED'].contains(media.status)) {
@@ -521,8 +518,10 @@ Future<Map<String, List<media>>> initHomePage(int id) async {
         }
       }
 
-      var mangaPlannedLists = response?.data?.recommendationPlannedQueryManga?.lists
-          ?.expand((x) => x.entries ?? []) ?? [];
+      var mangaPlannedLists = response
+              ?.data?.recommendationPlannedQueryManga?.lists
+              ?.expand((x) => x.entries ?? []) ??
+          [];
       for (var entry in mangaPlannedLists) {
         var media = mediaListData(entry);
         if (['RELEASING', 'FINISHED'].contains(media.status)) {

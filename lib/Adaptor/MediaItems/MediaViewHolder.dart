@@ -3,9 +3,9 @@ import 'package:dantotsu/DataClass/Media.dart';
 import 'package:flutter/material.dart';
 
 class MediaViewHolder extends StatelessWidget {
-  final media Media;
+  final media mediaInfo;
 
-  const MediaViewHolder({super.key, required this.Media});
+  const MediaViewHolder({super.key, required this.mediaInfo});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class MediaViewHolder extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(16.0),
               child: CachedNetworkImage(
-                imageUrl: Media.cover ?? '',
+                imageUrl: mediaInfo.cover ?? '',
                 fit: BoxFit.cover,
                 width: double.infinity,
                 height: 154,
@@ -29,13 +29,13 @@ class MediaViewHolder extends StatelessWidget {
                 ),
               ),
             ),
-            if (Media.status == 'RELEASING') _buildReleasingIndicator(),
+            if (mediaInfo.status == 'RELEASING') _buildReleasingIndicator(),
             _buildScoreBadge(context),
           ],
         ),
         const SizedBox(height: 8),
         Text(
-          Media.userPreferredName,
+          mediaInfo.userPreferredName,
           style: const TextStyle(
             fontFamily: 'Poppins',
             fontSize: 14,
@@ -49,7 +49,7 @@ class MediaViewHolder extends StatelessWidget {
           text: TextSpan(
             children: [
               TextSpan(
-                text: '${Media.userProgress ?? "~"}',
+                text: '${mediaInfo.userProgress ?? "~"}',
                 style: TextStyle(
                   fontFamily: 'Poppins',
                   color: theme.secondary,
@@ -65,9 +65,9 @@ class MediaViewHolder extends StatelessWidget {
                 ),
               ),
               TextSpan(
-                text: Media.anime == null
-                    ? "${Media.manga?.totalChapters ?? "~"}"
-                    : formatMediaInfo(Media),
+                text: mediaInfo.anime == null
+                    ? "${mediaInfo.manga?.totalChapters ?? "~"}"
+                    : formatMediaInfo(mediaInfo),
                 style: const TextStyle(
                   fontFamily: 'Poppins',
                   color: Colors.grey,
@@ -113,7 +113,7 @@ class MediaViewHolder extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 8.2, vertical: 2.2),
         decoration: BoxDecoration(
-          color: Media.userScore == 0 ? theme.primary : theme.tertiary,
+          color: mediaInfo.userScore == 0 ? theme.primary : theme.tertiary,
           borderRadius: const BorderRadius.only(
             bottomRight: Radius.circular(16.0),
             topLeft: Radius.circular(17.0),
@@ -125,9 +125,9 @@ class MediaViewHolder extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 2.0),
               child: Text(
-                ((Media.userScore == 0
-                    ? Media.meanScore ?? 0
-                    : Media.userScore ?? 0) /
+                ((mediaInfo.userScore == 0
+                    ? mediaInfo.meanScore ?? 0
+                    : mediaInfo.userScore ?? 0) /
                     10.0)
                     .toString(),
                 style: TextStyle(

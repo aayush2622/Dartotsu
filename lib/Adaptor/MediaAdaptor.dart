@@ -1,8 +1,6 @@
 import 'dart:ui';
-
+import 'package:dantotsu/Function.dart';
 import 'package:flutter/material.dart';
-import 'package:visibility_detector/visibility_detector.dart';
-
 import '../Animation/ScaleAnimation.dart';
 import '../DataClass/Media.dart';
 import '../Screens/SettingsBottomSheet.dart';
@@ -15,12 +13,11 @@ class MediaGrid extends StatefulWidget {
   const MediaGrid({super.key, required this.type, required this.mediaList});
 
   @override
-  _MediaGridState createState() => _MediaGridState();
+  MediaGridState createState() => MediaGridState();
 }
 
-class _MediaGridState extends State<MediaGrid> with TickerProviderStateMixin {
+class MediaGridState extends State<MediaGrid> {
   late List<media> _mediaList;
-  final ValueNotifier<Set<int>> _visibleItems = ValueNotifier<Set<int>>({});
 
   @override
   void initState() {
@@ -35,24 +32,7 @@ class _MediaGridState extends State<MediaGrid> with TickerProviderStateMixin {
       setState(() {
         _mediaList = widget.mediaList;
       });
-      _visibleItems.value = {};
     }
-  }
-
-  @override
-  void dispose() {
-    _visibleItems.dispose();
-    super.dispose();
-  }
-
-  void _onVisibilityChanged(int index, bool visible) {
-    final newSet = {..._visibleItems.value};
-    if (visible) {
-      newSet.add(index);
-    } else {
-      newSet.remove(index);
-    }
-    _visibleItems.value = newSet;
   }
 
   @override
@@ -72,27 +52,25 @@ class _MediaGridState extends State<MediaGrid> with TickerProviderStateMixin {
             scrollDirection: Axis.horizontal,
             itemCount: _mediaList.length,
             itemBuilder: (context, index) {
-
-              return VisibilityDetector(
-                key: Key('item-$index'),
-                onVisibilityChanged: (visibilityInfo) {
-                  _onVisibilityChanged(
-                      index, visibilityInfo.visibleFraction > 0.0);
-                },
-                child: SlideAndScaleAnimation(
-                  initialScale: 0.0,
-                  finalScale: 1.0,
-                  initialOffset: const Offset(1.0, 0.0),
-                  finalOffset: Offset.zero,
-                  duration: const Duration(milliseconds: 200),
-                  child: GestureDetector(
-                    onTap: () {},
-                    onLongPress: () => settingsBottomSheet(context),
-                    child: Container(
-                      width: 102,
-                      margin: const EdgeInsets.symmetric(horizontal: 6.5),
-                      child: MediaViewHolder(Media: _mediaList[index]),
-                    ),
+              final isFirst = index == 0;
+              final isLast = index == _mediaList.length - 1;
+              final margin = EdgeInsets.only(
+                left: isFirst ? 24.0 : 6.5,
+                right: isLast ? 24.0 : 6.5,
+              );
+              return SlideAndScaleAnimation(
+                initialScale: 0.0,
+                finalScale: 1.0,
+                initialOffset: const Offset(1.0, 0.0),
+                finalOffset: Offset.zero,
+                duration: const Duration(milliseconds: 200),
+                child: GestureDetector(
+                  onTap: () => snackString(_mediaList[index].name),
+                  onLongPress: () => settingsBottomSheet(context),
+                  child: Container(
+                    width: 102,
+                    margin: margin,
+                    child: MediaViewHolder(mediaInfo: _mediaList[index]),
                   ),
                 ),
               );

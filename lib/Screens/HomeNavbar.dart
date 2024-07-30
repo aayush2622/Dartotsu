@@ -2,7 +2,7 @@ import 'package:dantotsu/Theme/Colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../Theme/ThemeManager.dart';
+import '../Theme/ThemeManager.dart';
 
 class FloatingBottomNavBar extends StatelessWidget {
   final int selectedIndex;

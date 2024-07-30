@@ -1,12 +1,12 @@
+import 'package:dantotsu/Adaptor/SettingsAdaptor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:dantotsu/api/Anilist/Data/data.dart';
 import 'package:dantotsu/api/Anilist/Anilist.dart';
-import 'package:dantotsu/prefManager.dart';
+import 'DataClass/Setting.dart';
+import 'Screens/HomeNavbar.dart';
 import 'Theme/ThemeManager.dart';
-import 'Theme/Themes/blue.dart';
-import 'screens/Home/HomeNavbar.dart';
 import 'screens/Anime/AnimeScreen.dart';
 import 'screens/Home/HomeScreen.dart';
 
@@ -24,7 +24,7 @@ void main() async {
     ),
   );
 }
-
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -40,6 +40,7 @@ class MyApp extends StatelessWidget {
       ),
     );
     return MaterialApp(
+      navigatorKey: navigatorKey,
       title: 'Dantotsu',
       debugShowCheckedModeBanner: false,
       themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
@@ -53,10 +54,10 @@ class MainActivity extends StatefulWidget {
   const MainActivity({super.key});
 
   @override
-  _MainActivityState createState() => _MainActivityState();
+  MainActivityState createState() => MainActivityState();
 }
 
-class _MainActivityState extends State<MainActivity> {
+class MainActivityState extends State<MainActivity> {
   int _selectedIndex = 1;
 
   void _onTabSelected(int index) {
@@ -69,18 +70,17 @@ class _MainActivityState extends State<MainActivity> {
   Widget build(BuildContext context) {
     final themeNotifier = Provider.of<ThemeNotifier>(context);
     final token = Provider.of<AnilistToken>(context).token;
-    final data = Provider.of<AnilistData>(context).initialized;
+    final data = Provider.of<AnilistData>(context);
     return Scaffold(
       body: Stack(
         children: [
-          SingleChildScrollView( // Make the content scrollable
+          SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.only(top: 50),
               child: Column(
                 children: [
-                  buildDarkModeSwitch(themeNotifier),
-                  buildOledModeSwitch(themeNotifier),
-                  ThemeDropdown(), // Added dropdown for theme selection
+                  settings(themeNotifier),
+                  const ThemeDropdown(),
                 ],
               ),
             ),
@@ -91,7 +91,7 @@ class _MainActivityState extends State<MainActivity> {
               const AnimeScreen(),
               token.isEmpty
                   ? const Center(child: Text('LoginPage'))
-                  : data == true ? HomeScreen(userId: Provider.of<AnilistData>(context).userid!) : const SizedBox(
+                  : data.initialized == true ? HomeScreen(userId: data.userid!) : const SizedBox(
                 child: Center(
                   child: CircularProgressIndicator(),
                 ),
@@ -107,23 +107,30 @@ class _MainActivityState extends State<MainActivity> {
       ),
     );
   }
-
-  Widget buildDarkModeSwitch(ThemeNotifier themeNotifier) {
-    return SwitchListTile(
-      title: const Text('Dark Mode'),
-      value: themeNotifier.isDarkMode,
-      onChanged: (bool value) async {
-        themeNotifier.setDarkMode(value);
-      },
-    );
-  }
-  Widget buildOledModeSwitch(ThemeNotifier themeNotifier) {
-    return SwitchListTile(
-      title: const Text('OLED Mode'),
-      value: themeNotifier.isOled,
-      onChanged: (bool value) async {
-        themeNotifier.setOled(value);
-      },
+  Widget settings(ThemeNotifier themeNotifier){
+    return SettingsAdaptor(
+      settings: [
+        Setting(
+          type: SettingType.switchType,
+          name: 'Dark Mode',
+          description: 'Enable Dark Mode',
+          icon: Icons.dark_mode,
+          isChecked: themeNotifier.isDarkMode,
+          onSwitchChange: (bool value) async {
+            themeNotifier.setDarkMode(value);
+          },
+        ),
+        Setting(
+          type: SettingType.switchType,
+          name: 'OLED Mode',
+          description: 'Enable OLED Mode',
+          icon: Icons.brightness_1,
+          isChecked: themeNotifier.isOled,
+          onSwitchChange: (bool value) async {
+            themeNotifier.setOled(value);
+          },
+        ),
+      ],
     );
   }
 }

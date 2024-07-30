@@ -1,8 +1,11 @@
 import 'dart:convert';
 import 'dart:core';
+
+import 'package:dantotsu/Function.dart';
 import 'package:dantotsu/api/Anilist/AnilistQueries.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
+
 import '../../prefManager.dart';
 
 class AnilistData extends ChangeNotifier {
@@ -41,7 +44,7 @@ class AnilistData extends ChangeNotifier {
       if (data) {
         notifyListeners();
       }
-    }else {
+    } else {
       notifyListeners();
     }
   }
@@ -66,7 +69,8 @@ class AnilistData extends ChangeNotifier {
       titleLanguage = options.titleLanguage?.name;
       staffNameLanguage = options.staffNameLanguage?.name;
       airingNotifications = options.airingNotifications ?? false;
-      restrictMessagesToFollowing = options.restrictMessagesToFollowing ?? false;
+      restrictMessagesToFollowing =
+          options.restrictMessagesToFollowing ?? false;
       timezone = options.timezone;
       activityMergeTime = options.activityMergeTime;
     }
@@ -86,33 +90,40 @@ class AnilistToken extends ChangeNotifier {
   String _token = '';
 
   String get token => _token;
+
   AnilistToken() {
     _initialize();
   }
+
   Future<void> _initialize() async {
     _token = await PrefManager.getVal("AnilistToken") ?? "";
     notifyListeners();
   }
-  void saveToken(String token) async{
-      await PrefManager.setVal("AnilistToken", token);
-      _token = token;
+
+  void saveToken(String token) async {
+    await PrefManager.setVal("AnilistToken", token);
+    _token = token;
   }
-  void removeToken() async{
+
+  void removeToken() async {
     await PrefManager.setVal("AnilistToken", "");
     _token = "";
   }
 }
 
 Future<T?> executeQuery<T>(
-    String query, {
-      String variables = "",
-      bool force = false,
-      bool useToken = true,
-    }) async {
+  String query, {
+  String variables = "",
+  bool force = false,
+  bool useToken = true,
+  bool show = true,
+}) async {
   try {
     String? token = await PrefManager.getVal("AnilistToken");
     int rateLimitReset = 0;
     if (rateLimitReset > DateTime.now().millisecondsSinceEpoch ~/ 1000) {
+      snackString(
+          "Rate limited after ${rateLimitReset - DateTime.now().millisecondsSinceEpoch ~/ 1000} seconds");
       throw Exception(
           "Rate limited after ${rateLimitReset - DateTime.now().millisecondsSinceEpoch ~/ 1000} seconds");
     }
@@ -130,22 +141,26 @@ Future<T?> executeQuery<T>(
         Uri.parse("https://graphql.anilist.co/"),
         headers: headers,
         body: data,
-        // adjust timeout and cache as needed
       );
       final Map<String, dynamic> jsonResponse =
-      json.decode("{\"response\":${response.body}}");
-      int.parse(response.headers['X-RateLimit-Remaining'] ?? '-1');
+          json.decode("{\"response\":${response.body}}");
+      var remaining =
+          int.parse(response.headers['x-ratelimit-remaining'] ?? '-1');
+      debugPrint("Remaining requests: $remaining");
+      int.parse(response.headers['x-ratelimit-limit'] ?? '-1');
       if (response.statusCode == 429) {
         final int retry = int.parse(response.headers['Retry-After'] ?? '-1');
         final int passedLimitReset =
-        int.parse(response.headers['X-RateLimit-Reset'] ?? '0');
+            int.parse(response.headers['x-ratelimit-limit'] ?? '0');
         if (retry > 0) {
           rateLimitReset = passedLimitReset;
         }
+        snackString("Rate limited after $retry seconds");
         throw Exception("Rate limited after $retry seconds");
       }
       if (!response.body.startsWith("{")) {
-        throw Exception();
+        snackString(
+            "Seems like Anilist is down, maybe try using a VPN or you can wait for it to come back.");
       }
       if (jsonResponse.containsKey('errors')) {
         return null;
@@ -155,6 +170,7 @@ Future<T?> executeQuery<T>(
       return null;
     }
   } catch (e) {
+    if (show) snackString("Error fetching Anilist data: ${e.toString()}");
     return null;
   }
 }
@@ -182,4 +198,3 @@ class TypeFactory {
     return factory(json) as T;
   }
 }
-
