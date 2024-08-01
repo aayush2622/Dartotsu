@@ -1,6 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-class PrefManager {
+class PrefManager { // simplified version of shared preferences
+
   static Future<void> setVal<T>(String key, T value) async {
         final prefs = await SharedPreferences.getInstance();
     if (value is int) {

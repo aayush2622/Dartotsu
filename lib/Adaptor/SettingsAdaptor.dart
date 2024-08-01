@@ -9,7 +9,7 @@ class SettingsAdaptor extends StatelessWidget {
   const SettingsAdaptor({super.key, required this.settings});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) { // adaptor for settings so that it can be reused, see Settings.dart to see what can be passed
     return Column(
       children: settings.map((setting) {
         switch (setting.type) {

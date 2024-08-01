@@ -8,7 +8,7 @@ class SettingItem extends StatelessWidget {
   const SettingItem({super.key, required this.setting});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) { // setting item type: normal
     if (!setting.isVisible) return const SizedBox.shrink();
 
     return GestureDetector(
@@ -54,7 +54,7 @@ class SettingSwitchItem extends StatelessWidget {
   const SettingSwitchItem({super.key, required this.setting});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) { // setting item type: switch
     if (!setting.isVisible) return const SizedBox.shrink();
 
     return GestureDetector(

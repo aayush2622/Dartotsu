@@ -36,7 +36,7 @@ class MediaGridState extends State<MediaGrid> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) { // grid view for media
     return SizedBox(
       height: 250,
       child: AnimatedSwitcher(

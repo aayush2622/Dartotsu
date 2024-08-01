@@ -8,13 +8,13 @@ class Setting {
   final String description;
   final IconData icon;
   final bool isVisible;
-  final bool isActivity;
-  final bool isChecked;
-  final Function()? onClick;
+  final bool isActivity; // for type normal only
+  final bool isChecked; // for type switchType only
+  final Function()? onClick; // for type normal only
   final Function()? onLongClick;
-  final Function(bool)? onSwitchChange;
-  final Widget Function(BuildContext)? attach;
-  final Widget Function(BuildContext)? attachToSwitch;
+  final Function(bool)? onSwitchChange; // for type switchType only
+  final Widget Function(BuildContext)? attach; // for type normal only, to attach more widget after the description
+  final Widget Function(BuildContext)? attachToSwitch; // for type switchType only, to attach more widget after the description
 
   Setting({
     required this.type,

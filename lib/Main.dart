@@ -1,9 +1,11 @@
 import 'package:dantotsu/Adaptor/SettingsAdaptor.dart';
+import 'package:dantotsu/api/Anilist/Anilist.dart';
+import 'package:dantotsu/api/Anilist/Data/data.dart';
+import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:dantotsu/api/Anilist/Data/data.dart';
-import 'package:dantotsu/api/Anilist/Anilist.dart';
+
 import 'DataClass/Setting.dart';
 import 'Screens/HomeNavbar.dart';
 import 'Theme/ThemeManager.dart';
@@ -24,7 +26,9 @@ void main() async {
     ),
   );
 }
+
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -34,18 +38,28 @@ class MyApp extends StatelessWidget {
     final isDarkMode = themeManager.isDarkMode;
     final isOled = themeManager.isOled;
     final theme = themeManager.theme;
+    final useMaterialYou = themeManager.useMaterialYou;
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
       ),
     );
-    return MaterialApp(
-      navigatorKey: navigatorKey,
-      title: 'Dantotsu',
-      debugShowCheckedModeBanner: false,
-      themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
-      theme: getTheme(theme, isOled, isDarkMode),
-      home: const MainActivity(),
+    return DynamicColorBuilder(
+      builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
+        return MaterialApp(
+          navigatorKey: navigatorKey,
+          title: 'Dantotsu',
+          debugShowCheckedModeBanner: false,
+          theme: useMaterialYou && lightDynamic != null
+              ? ThemeData(colorScheme: lightDynamic)
+              : getTheme(theme, isOled, false),
+          darkTheme: useMaterialYou && darkDynamic != null
+              ? ThemeData(colorScheme: darkDynamic)
+              : getTheme(theme, isOled, true),
+          themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
+          home: const MainActivity(),
+        );
+      },
     );
   }
 }
@@ -91,11 +105,13 @@ class MainActivityState extends State<MainActivity> {
               const AnimeScreen(),
               token.isEmpty
                   ? const Center(child: Text('LoginPage'))
-                  : data.initialized == true ? HomeScreen(userId: data.userid!) : const SizedBox(
-                child: Center(
-                  child: CircularProgressIndicator(),
-                ),
-              ),
+                  : data.initialized == true
+                      ? HomeScreen(userId: data.userid!)
+                      : const SizedBox(
+                          child: Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                        ),
               const Center(child: Text('Manga Screen')),
             ],
           ),
@@ -107,7 +123,8 @@ class MainActivityState extends State<MainActivity> {
       ),
     );
   }
-  Widget settings(ThemeNotifier themeNotifier){
+
+  Widget settings(ThemeNotifier themeNotifier) { //
     return SettingsAdaptor(
       settings: [
         Setting(
@@ -130,6 +147,16 @@ class MainActivityState extends State<MainActivity> {
             themeNotifier.setOled(value);
           },
         ),
+        Setting(
+          type: SettingType.switchType,
+          name: 'Material You',
+          description: 'Enable Material You',
+          icon: Icons.palette,
+          isChecked: themeNotifier.useMaterialYou,
+          onSwitchChange: (bool value) async {
+            themeNotifier.setMaterialYou(value);
+          },
+        )
       ],
     );
   }

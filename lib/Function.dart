@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 
 import 'Main.dart';
 
-Future<void> snackString(
+Future<void> snackString( // to copy string to clipboard
   String? s, {
   String? clipboard,
 }) async {
@@ -64,7 +64,7 @@ Future<void> snackString(
   }
 }
 
-Future<bool> imageLoaded(String? imageUrl) async {
+Future<bool> imageLoaded(String? imageUrl) async { // to render images then remove progress bar
   if (imageUrl == null) return false;
   final Completer<bool> completer = Completer();
   final Image image = Image.network(imageUrl);

@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:blur/blur.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dantotsu/Adaptor/MediaAdaptor.dart';
@@ -11,6 +13,8 @@ import 'package:dantotsu/api/Anilist/AnilistQueries.dart';
 import 'package:flutter/material.dart';
 import 'package:kenburns_nullsafety/kenburns_nullsafety.dart';
 import 'package:provider/provider.dart';
+
+import '../../Theme/Colors.dart';
 
 class HomeScreen extends StatefulWidget {
   final int userId;
@@ -93,7 +97,12 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       body: RefreshIndicator(
         onRefresh: refresh,
         child: CustomScrollView(
-          physics: const BouncingScrollPhysics(),
+          scrollBehavior: ScrollConfiguration.of(context).copyWith(
+            dragDevices: {
+              PointerDeviceKind.touch,
+              PointerDeviceKind.mouse,
+            },
+          ),
           slivers: [
             SliverToBoxAdapter(
               child: Column(
@@ -107,13 +116,38 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                             Container(
                               margin: const EdgeInsets.only(
                                 left: 34.0,
-                                right: 16.0,
-                                bottom: backgroundHeight / 2 - 2,
-                                top: backgroundHeight / 2 - 2,
+                                right: 126.0,
+                                top: backgroundHeight / 2 - 44,
                               ),
                               width: double.infinity,
                               child: const LinearProgressIndicator(),
-                            )
+                            ),
+                            Positioned(
+                              right: 34,
+                              top: 36 + topInset,
+                              child: Container(
+                                width: 52.0,
+                                height: 52.0,
+                                decoration: BoxDecoration(
+                                  color: Provider.of<ThemeNotifier>(context).isDarkMode ? greyNavDark : greyNavLight,
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                    color: Colors.white,
+                                    width: 1.0,
+                                  ),
+                                ),
+                                child: const Center(
+                                  child: CircleAvatar(
+                                    backgroundColor: Colors.transparent,
+                                    radius: 26.0,
+                                    child: Icon(
+                                      Icons.settings,
+                                      size: 24.0,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
                           ]);
                         }
                         _listController.forward();
@@ -187,12 +221,12 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               imageUrl: imageUrl,
               fit: BoxFit.cover,
               width: double.infinity,
-              height: 212+ topInset,
+              height: 212 + topInset,
             ),
           ),
           Container(
             width: double.infinity,
-            height: 212+ topInset,
+            height: 212 + topInset,
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: gradientColors,
@@ -281,7 +315,7 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 fontWeight: FontWeight.bold,
                 fontSize: 16.0,
                 color:
-                isDarkMode ? Colors.white : Colors.black.withOpacity(0.6),
+                    isDarkMode ? Colors.white : Colors.black.withOpacity(0.6),
               ),
             ),
             const SizedBox(height: 2.0),

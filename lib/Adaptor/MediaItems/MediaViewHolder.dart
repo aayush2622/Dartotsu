@@ -8,7 +8,7 @@ class MediaViewHolder extends StatelessWidget {
   const MediaViewHolder({super.key, required this.mediaInfo});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) { // holder for media
     final theme = Theme.of(context).colorScheme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

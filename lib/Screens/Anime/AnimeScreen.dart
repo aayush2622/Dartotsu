@@ -6,7 +6,7 @@ class AnimeScreen extends StatelessWidget {
   const AnimeScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) { // test screen
     return Scaffold(
       appBar: AppBar(
         title: const Text('Anime'),

@@ -18,9 +18,13 @@ class ThemeNotifier extends ChangeNotifier {
   bool _isDarkMode = false;
   bool _isOled = false;
   String _theme = 'purple';
+  bool _useMaterialYou = false;
+
   bool get isDarkMode => _isDarkMode;
   bool get isOled => _isOled;
   String get theme => _theme;
+  bool get useMaterialYou => _useMaterialYou;
+
   ThemeNotifier() {
     _initialize();
   }
@@ -29,30 +33,39 @@ class ThemeNotifier extends ChangeNotifier {
     _isDarkMode = await PrefManager.getVal("isDarkTheme") ?? false;
     _isOled = await PrefManager.getVal("isOled") ?? false;
     _theme = await PrefManager.getVal("theme") ?? 'purple';
+    _useMaterialYou = await PrefManager.getVal("useMaterialYou") ?? false;
     notifyListeners();
   }
 
   Future<void> setDarkMode(bool isDarkMode) async {
     _isDarkMode = isDarkMode;
     await PrefManager.setVal("isDarkTheme", isDarkMode);
-    if (!isDarkMode){
+    if (!isDarkMode) {
       _isOled = false;
       await PrefManager.setVal("isOled", false);
     }
     notifyListeners();
   }
+
   Future<void> setOled(bool isOled) async {
     _isOled = isOled;
     await PrefManager.setVal("isOled", isOled);
-    if (isOled){
+    if (isOled) {
       _isDarkMode = true;
       await PrefManager.setVal("isDarkTheme", true);
     }
     notifyListeners();
   }
+
   Future<void> setTheme(String theme) async {
     _theme = theme;
     await PrefManager.setVal("theme", theme);
+    notifyListeners();
+  }
+
+  Future<void> setMaterialYou(bool useMaterialYou) async {
+    _useMaterialYou = useMaterialYou;
+    await PrefManager.setVal("useMaterialYou", useMaterialYou);
     notifyListeners();
   }
 }

@@ -8,7 +8,7 @@ import 'package:http/http.dart' as http;
 
 import '../../prefManager.dart';
 
-class AnilistData extends ChangeNotifier {
+class AnilistData extends ChangeNotifier { // user data that can be used in app already init on app start
   String? token;
   String? username;
   int? userid;
@@ -165,7 +165,7 @@ Future<T?> executeQuery<T>(
       if (jsonResponse.containsKey('errors')) {
         return null;
       }
-      return TypeFactory.get<T>(jsonResponse["response"]);
+      return TypeFactory.get<T>(jsonResponse["response"]); // pass json type in registerAllTypes() in data.dart eg: TypeFactory.create<MediaResponse>((json) => MediaResponse.fromJson(json));
     } else {
       return null;
     }
