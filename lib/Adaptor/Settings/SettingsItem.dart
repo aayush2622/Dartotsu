@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../DataClass/Setting.dart';
+import '../../DataClass/Setting.dart';
 
 class SettingItem extends StatelessWidget {
   final Setting setting;
@@ -15,11 +15,11 @@ class SettingItem extends StatelessWidget {
       onTap: setting.onClick,
       onLongPress: setting.onLongClick,
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
+        padding: const EdgeInsets.symmetric(vertical: 25.0, horizontal: 0.0),
         child: Row(
           children: [
             Icon(setting.icon, color: Theme.of(context).primaryColor),
-            const SizedBox(width: 16.0),
+            const SizedBox(width: 24.0),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -31,8 +31,9 @@ class SettingItem extends StatelessWidget {
                           fontFamily: 'Poppins')),
                   Text(setting.description,
                       style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16.0,
+                          fontWeight: FontWeight.w600,
+
+                          color: Colors.grey,
                           fontFamily: 'Poppins')),
                   if (setting.attach != null) setting.attach!(context),
                 ],
@@ -60,11 +61,11 @@ class SettingSwitchItem extends StatelessWidget {
     return GestureDetector(
       onLongPress: setting.onLongClick,
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
+        padding: const EdgeInsets.symmetric(vertical: 18.0, horizontal: 0.0),
         child: Row(
           children: [
             Icon(setting.icon, color: Theme.of(context).primaryColor),
-            const SizedBox(width: 16.0),
+            const SizedBox(width: 24.0),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

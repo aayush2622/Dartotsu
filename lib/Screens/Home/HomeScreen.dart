@@ -2,11 +2,11 @@ import 'dart:ui';
 
 import 'package:blur/blur.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:dantotsu/Adaptor/MediaAdaptor.dart';
+import 'package:dantotsu/Adaptor/Media/MediaAdaptor.dart';
 import 'package:dantotsu/DataClass/Media.dart';
 import 'package:dantotsu/Function.dart';
 import 'package:dantotsu/Screens/Anime/AnimeScreen.dart';
-import 'package:dantotsu/Screens/SettingsBottomSheet.dart';
+import 'package:dantotsu/Screens/Settings/SettingsBottomSheet.dart';
 import 'package:dantotsu/Theme/ThemeManager.dart';
 import 'package:dantotsu/api/Anilist/Anilist.dart';
 import 'package:dantotsu/api/Anilist/AnilistQueries.dart';
@@ -16,6 +16,11 @@ import 'package:provider/provider.dart';
 
 import '../../Theme/Colors.dart';
 
+/*
+TODO
+Refresh everytime media data change
+get status bar height and give to: var topInset
+*/
 class HomeScreen extends StatefulWidget {
   final int userId;
 

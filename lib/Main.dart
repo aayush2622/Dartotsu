@@ -1,19 +1,28 @@
-import 'package:dantotsu/Adaptor/SettingsAdaptor.dart';
+import 'dart:io';
+
+import 'package:dantotsu/Adaptor/Settings/SettingsAdaptor.dart';
 import 'package:dantotsu/api/Anilist/Anilist.dart';
 import 'package:dantotsu/api/Anilist/Data/data.dart';
+import 'package:dantotsu/prefManager.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:win32_registry/win32_registry.dart';
 
 import 'DataClass/Setting.dart';
 import 'Screens/HomeNavbar.dart';
+import 'Screens/Login/LoginScreen.dart';
 import 'Theme/ThemeManager.dart';
 import 'screens/Anime/AnimeScreen.dart';
 import 'screens/Home/HomeScreen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await PrefManager.init();
+  if (Platform.isWindows) {
+    await register('dantotsu');
+  }
   registerAllTypes();
   runApp(
     MultiProvider(
@@ -49,6 +58,7 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           navigatorKey: navigatorKey,
           title: 'Dantotsu',
+          themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
           debugShowCheckedModeBanner: false,
           theme: useMaterialYou && lightDynamic != null
               ? ThemeData(colorScheme: lightDynamic)
@@ -56,7 +66,6 @@ class MyApp extends StatelessWidget {
           darkTheme: useMaterialYou && darkDynamic != null
               ? ThemeData(colorScheme: darkDynamic)
               : getTheme(theme, isOled, true),
-          themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
           home: const MainActivity(),
         );
       },
@@ -104,7 +113,7 @@ class MainActivityState extends State<MainActivity> {
             children: [
               const AnimeScreen(),
               token.isEmpty
-                  ? const Center(child: Text('LoginPage'))
+                  ? const LoginScreen()
                   : data.initialized == true
                       ? HomeScreen(userId: data.userid!)
                       : const SizedBox(
@@ -159,5 +168,31 @@ class MainActivityState extends State<MainActivity> {
         )
       ],
     );
+  }
+}
+Future<void> register(String scheme) async {
+  try {
+    String appPath = Platform.resolvedExecutable;
+
+    String protocolRegKey = 'Software\\Classes\\$scheme';
+    RegistryValue protocolRegValue = const RegistryValue(
+      'URL',
+      RegistryValueType.string,
+      '',
+    );
+    String protocolCmdRegKey = 'shell\\open\\command';
+    RegistryValue protocolCmdRegValue = RegistryValue(
+      '',
+      RegistryValueType.string,
+      '"$appPath" "%1"',
+    );
+
+    final regKey = Registry.currentUser.createKey(protocolRegKey);
+    regKey.createValue(protocolRegValue);
+    regKey.createKey(protocolCmdRegKey).createValue(protocolCmdRegValue);
+
+    print('Registration successful for scheme: $scheme');
+  } catch (e) {
+    print('Failed to register scheme: $e');
   }
 }

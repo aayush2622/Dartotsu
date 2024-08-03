@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:icons_plus/icons_plus.dart';
 
-/*
-TODO
-
-Change Icons of Anilist and Github
- */
+import '../../Function.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -12,79 +10,83 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context).colorScheme;
-    // print(theme);
+
     return Scaffold(
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // App Name
+            const SizedBox(height: 64),
             Text(
-              'Dantotsu', // Replace with your app name
+              'Dantotsu',
               style: TextStyle(
                 fontFamily: 'Poppins',
+                fontWeight: FontWeight.w100,
                 fontSize: 64,
-                color: Theme.of(context).primaryColor,
+                color: theme.primary,
               ),
             ),
-            const SizedBox(height: 80), // Margin top
-
-            // Slogan
+            const SizedBox(height: 8),
             const Text(
-              'The NEW Best Anime & Manga app for Android.', // Replace with your slogan
+              'The NEW Best Anime & Manga app\nor Android.',
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 16),
+              style: TextStyle(fontSize: 14),
             ),
-            const SizedBox(height: 32), // Space between slogan and button
-
-            // Login Button
+            const SizedBox(height: 38),
             ElevatedButton.icon(
-              onPressed: () {
-                // Handle login button tap
-              },
-              icon: Icon(
-                Icons.animation, // Path to your icon asset
-                color: Theme.of(context).colorScheme.onPrimaryContainer,
+              onPressed: () {},
+              icon: Padding(
+                padding: const EdgeInsets.only(right: 24.0),
+                child: SvgPicture.asset(
+                  'assets/svg/anilist.svg',
+                  width: 18,
+                  height: 18,
+                  color: theme.onPrimaryContainer,
+                ),
               ),
               label: Text(
-                'Login', // Replace with your login text
+                'Login',
                 style: TextStyle(
                   fontFamily: 'Poppins',
-                  color: Theme.of(context).colorScheme.onPrimaryContainer,
-                  fontWeight: FontWeight.bold
+                  color: theme.onPrimaryContainer,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
               style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                backgroundColor: theme.primaryContainer,
+                padding: const EdgeInsets.only(
+                top: 26,
+                bottom: 26,
+                left: 24,
+                right: 42,
+              ),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16),
                 ),
               ),
             ),
-            const SizedBox(height: 16), // Margin bottom for button
-
-            // Social Icons
+            const SizedBox(height: 24),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                _socialIcon(Icons.discord, 'Discord',theme),
-                _socialIcon(Icons.whatshot, 'GitHub',theme),
-                _socialIcon(Icons.telegram, 'Telegram',theme),
+                _buildSocialIcon(Icons.discord, 'https://discord.gg/4HPZ5nAWw'),
+                const SizedBox(width: 16),
+                _buildSocialIcon(Bootstrap.github, 'https://github.com/aayush2622/dantotsu-pc'),
+                const SizedBox(width: 16),
+                _buildSocialIcon(Icons.telegram_sharp, 'https://t.me/+gzBCQExtLQo1YTNh'),
               ],
             ),
-            const SizedBox(height: 16), // Space between social icons and the next section
-
-            // Restore Settings
+            const SizedBox(height: 16),
             GestureDetector(
-              onTap: () {
-                // Handle restore settings tap
-              },
+              onTap: () {},
               child: Text(
-                'Restore Settings', // Replace with your restore settings text
+                'Restore Settings',
                 style: TextStyle(
-                  fontFamily: 'PoppinsBold',
-                  color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5),
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.bold,
+                  decoration: TextDecoration.underline,
+                  color: theme.onSurface.withOpacity(0.6),
                   fontSize: 11,
                 ),
               ),
@@ -95,13 +97,12 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  Widget _socialIcon( IconData assetPath,String description,theme) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Icon(
-        assetPath,
-        color:theme.primary,
-      ),
+  Widget _buildSocialIcon(IconData icon, String url) {
+    return IconButton(
+      color: Colors.grey.shade800,
+      iconSize: 36,
+      icon: Icon(icon),
+      onPressed: () => openLinkInBrowser(url),
     );
   }
 }

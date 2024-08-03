@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:dantotsu/Function.dart';
 import 'package:dantotsu/api/Anilist/Data/media.dart';
 import 'package:dantotsu/api/Anilist/Data/staff.dart';
 import 'package:dantotsu/api/Anilist/Data/user.dart';
@@ -253,9 +254,11 @@ Future<media?> mediaDetails(media media) async {
     response = await executeQuery(query, force: true, useToken: false);
     if (response?.data?.media != null) {
       //print("adult");
+      snackString('Adult Stuff? Adult Stuff? ( ͡° ͜ʖ ͡° )');
       parse();
     } else {
       //print("huh");
+      snackString('Error getting data from Anilist.');
     }
   }
   return media;
@@ -271,8 +274,8 @@ Future<media?> getMedia(int id, {bool mal = true}) async {
 }
 
 Future<String?> bannerImage(String type, int id) async {
-  var url = await PrefManager.getVal<String>("banner_${type}_url");
-  var time = await PrefManager.getVal<int>("banner_${type}_time");
+  var url = PrefManager.getVal<String>("banner_${type}_url");
+  var time = PrefManager.getVal<int>("banner_${type}_time");
   bool checkTime() {
     if (time == null) return true;
     return DateTime.now()
@@ -294,8 +297,8 @@ Future<String?> bannerImage(String type, int id) async {
     bannerImages.shuffle(Random());
     var random = bannerImages.isNotEmpty ? bannerImages.first : null;
 
-    await PrefManager.setVal("banner_${type}_url", random);
-    await PrefManager.setVal(
+    PrefManager.setVal("banner_${type}_url", random);
+    PrefManager.setVal(
         "banner_${type}_time", DateTime.now().millisecondsSinceEpoch);
 
     return random;
@@ -335,60 +338,41 @@ String favMediaQuery(bool anime, int page, int? id) {
 
 Future<Map<String, List<media>>> initHomePage(int id) async {
   try {
-    final removeList = await PrefManager.getVal<Set<int>>("removeList") ?? {};
+    final removeList = PrefManager.getVal<Set<int>>("removeList") ?? {};
     const hidePrivate = true;
     List<media> removedMedia = [];
-    final toShow = await PrefManager.getVal<List<bool>>("HomeLayout") ??
-        [true, true, true, true, true, true, true];
+    final toShow = PrefManager.getVal<List<bool>>("HomeLayout") ?? List.filled(7, true);
 
     List<String> queries = [];
     if (toShow[0]) {
-      queries.add(
-          """currentAnime: ${continueMediaQuery("ANIME", "CURRENT", id)}""");
-      queries.add(
-          """repeatingAnime: ${continueMediaQuery("ANIME", "REPEATING", id)}""");
+      queries.add("""currentAnime: ${continueMediaQuery("ANIME", "CURRENT", id)}""");
+      queries.add("""repeatingAnime: ${continueMediaQuery("ANIME", "REPEATING", id)}""");
     }
-    if (toShow[1]) {
-      queries.add("""favoriteAnime: ${favMediaQuery(true, 1, id)}""");
-    }
-    if (toShow[2]) {
-      queries.add(
-          """plannedAnime: ${continueMediaQuery("ANIME", "PLANNING", id)}""");
-    }
+    if (toShow[1]) queries.add("""favoriteAnime: ${favMediaQuery(true, 1, id)}""");
+    if (toShow[2]) queries.add("""plannedAnime: ${continueMediaQuery("ANIME", "PLANNING", id)}""");
     if (toShow[3]) {
-      queries.add(
-          """currentManga: ${continueMediaQuery("MANGA", "CURRENT", id)}""");
-      queries.add(
-          """repeatingManga: ${continueMediaQuery("MANGA", "REPEATING", id)}""");
+      queries.add("""currentManga: ${continueMediaQuery("MANGA", "CURRENT", id)}""");
+      queries.add("""repeatingManga: ${continueMediaQuery("MANGA", "REPEATING", id)}""");
     }
-    if (toShow[4]) {
-      queries.add("""favoriteManga: ${favMediaQuery(false, 1, id)}""");
-    }
-    if (toShow[5]) {
-      queries.add(
-          """plannedManga: ${continueMediaQuery("MANGA", "PLANNING", id)}""");
-    }
+    if (toShow[4]) queries.add("""favoriteManga: ${favMediaQuery(false, 1, id)}""");
+    if (toShow[5]) queries.add("""plannedManga: ${continueMediaQuery("MANGA", "PLANNING", id)}""");
     if (toShow[6]) {
       queries.add("""recommendationQuery: ${recommendationQuery()}""");
-      queries.add(
-          """recommendationPlannedQueryAnime: ${recommendationPlannedQuery("ANIME", id)}""");
-      queries.add(
-          """recommendationPlannedQueryManga: ${recommendationPlannedQuery("MANGA", id)}""");
+      queries.add("""recommendationPlannedQueryAnime: ${recommendationPlannedQuery("ANIME", id)}""");
+      queries.add("""recommendationPlannedQueryManga: ${recommendationPlannedQuery("MANGA", id)}""");
     }
 
     String query = "{${queries.join(",")}}";
     var response = await executeQuery<UserListResponse>(query);
     Map<String, List<media>> returnMap = {};
 
-    Future<void> processMedia(String type, List<MediaList>? currentMedia,
-        List<MediaList>? repeatingMedia) async {
+    void processMedia(String type, List<MediaList>? currentMedia, List<MediaList>? repeatingMedia) {
       Map<int, media> subMap = {};
       List<media> returnArray = [];
 
-      for (var entry in (currentMedia ?? [])) {
+      for (var entry in (currentMedia ?? []) + (repeatingMedia ?? [])) {
         var media = mediaListData(entry);
-        if (!removeList.contains(media.id) &&
-            (!hidePrivate || !media.isListPrivate)) {
+        if (!removeList.contains(media.id) && (!hidePrivate || !media.isListPrivate)) {
           media.cameFromContinue = true;
           subMap[media.id] = media;
         } else {
@@ -396,29 +380,12 @@ Future<Map<String, List<media>>> initHomePage(int id) async {
         }
       }
 
-      for (var entry in (repeatingMedia ?? [])) {
-        var media = mediaListData(entry);
-        if (!removeList.contains(media.id) &&
-            (!hidePrivate || !media.isListPrivate)) {
-          media.cameFromContinue = true;
-          subMap[media.id] = media;
-        } else {
-          removedMedia.add(media);
-        }
-      }
-      List<int> list =
-          await PrefManager.getVal<List<int>>("continue${type}List") ?? [];
+      var list = PrefManager.getVal<List<int>>("continue${type}List") ?? [];
       if (list.isNotEmpty) {
         for (var id in list.reversed) {
-          if (subMap.containsKey(id)) {
-            returnArray.add(subMap[id]!);
-          }
+          if (subMap.containsKey(id)) returnArray.add(subMap[id]!);
         }
-        for (var media in subMap.values) {
-          if (!returnArray.contains(media)) {
-            returnArray.add(media);
-          }
-        }
+        returnArray.addAll(subMap.values.where((m) => !returnArray.contains(m)));
       } else {
         returnArray.addAll(subMap.values);
       }
@@ -426,56 +393,21 @@ Future<Map<String, List<media>>> initHomePage(int id) async {
       returnMap["current$type"] = returnArray;
     }
 
-    if (toShow[0]) {
-      processMedia(
-          "Anime",
-          response?.data?.currentAnime?.lists
-              ?.expand((x) => x.entries ?? [])
-              .cast<MediaList>()
-              .toList(),
-          response?.data?.repeatingAnime?.lists
-              ?.expand((x) => x.entries ?? [])
-              .cast<MediaList>()
-              .toList());
+    List<MediaList> getMediaList(List<MediaListGroup>? lists) {
+      return (lists?.expand((x) => x.entries ?? []).cast<MediaList>().toList() ?? []).reversed.toList();
     }
-    if (toShow[2]) {
-      processMedia(
-          "AnimePlanned",
-          response?.data?.plannedAnime?.lists
-              ?.expand((x) => x.entries ?? [])
-              .cast<MediaList>()
-              .toList(),
-          null);
-    }
-    if (toShow[3]) {
-      processMedia(
-          "Manga",
-          response?.data?.currentManga?.lists
-              ?.expand((x) => x.entries ?? [])
-              .cast<MediaList>()
-              .toList(),
-          response?.data?.repeatingManga?.lists
-              ?.expand((x) => x.entries ?? [])
-              .cast<MediaList>()
-              .toList());
-    }
-    if (toShow[5]) {
-      processMedia(
-          "MangaPlanned",
-          response?.data?.plannedManga?.lists
-              ?.expand((x) => x.entries ?? [])
-              .cast<MediaList>()
-              .toList(),
-          null);
-    }
+
+    if (toShow[0]) processMedia("Anime", getMediaList(response?.data?.currentAnime?.lists), getMediaList(response?.data?.repeatingAnime?.lists));
+    if (toShow[2]) processMedia("AnimePlanned", getMediaList(response?.data?.plannedAnime?.lists), null);
+    if (toShow[3]) processMedia("Manga", getMediaList(response?.data?.currentManga?.lists), getMediaList(response?.data?.repeatingManga?.lists));
+    if (toShow[5]) processMedia("MangaPlanned", getMediaList(response?.data?.plannedManga?.lists), null);
 
     void processFavorites(String type, List<MediaEdge>? favorites) {
       List<media> returnArray = [];
       for (var entry in (favorites ?? [])) {
         var media = mediaEdgeData(entry);
         media.isFav = true;
-        if (!removeList.contains(media.id) &&
-            (!hidePrivate || !media.isListPrivate)) {
+        if (!removeList.contains(media.id) && (!hidePrivate || !media.isListPrivate)) {
           returnArray.add(media);
         } else {
           removedMedia.add(media);
@@ -484,20 +416,13 @@ Future<Map<String, List<media>>> initHomePage(int id) async {
       returnMap["favorite$type"] = returnArray;
     }
 
-    if (toShow[1]) {
-      processFavorites(
-          "Anime", response?.data?.favoriteAnime?.favourites?.anime?.edges);
-    }
-    if (toShow[4]) {
-      processFavorites(
-          "Manga", response?.data?.favoriteManga?.favourites?.manga?.edges);
-    }
+    if (toShow[1]) processFavorites("Anime", response?.data?.favoriteAnime?.favourites?.anime?.edges);
+    if (toShow[4]) processFavorites("Manga", response?.data?.favoriteManga?.favourites?.manga?.edges);
 
     if (toShow[6]) {
       Map<int, media> subMap = {};
 
-      var recommendations =
-          response?.data?.recommendationQuery?.recommendations ?? [];
+      var recommendations = response?.data?.recommendationQuery?.recommendations ?? [];
       for (var entry in recommendations) {
         var mediaRecommendation = entry.mediaRecommendation;
         if (mediaRecommendation != null) {
@@ -506,38 +431,30 @@ Future<Map<String, List<media>>> initHomePage(int id) async {
           subMap[media.id] = media;
         }
       }
-      var animePlannedLists = response
-              ?.data?.recommendationPlannedQueryAnime?.lists
-              ?.expand((x) => x.entries ?? []) ??
-          [];
-      for (var entry in animePlannedLists) {
+
+      Iterable<dynamic> combineIterables(Iterable<dynamic>? first, Iterable<dynamic>? second) {
+        return (first ?? []).followedBy(second ?? []);
+      }
+
+      for (var entry in combineIterables(
+          response?.data?.recommendationPlannedQueryAnime?.lists?.expand((x) => x.entries ?? []),
+          response?.data?.recommendationPlannedQueryManga?.lists?.expand((x) => x.entries ?? [])
+      )) {
         var media = mediaListData(entry);
         if (['RELEASING', 'FINISHED'].contains(media.status)) {
-          media.relation = 'Anime Planned';
+          media.relation = entry is MediaList ? 'Anime Planned' : 'Manga Planned';
           subMap[media.id] = media;
         }
       }
 
-      var mangaPlannedLists = response
-              ?.data?.recommendationPlannedQueryManga?.lists
-              ?.expand((x) => x.entries ?? []) ??
-          [];
-      for (var entry in mangaPlannedLists) {
-        var media = mediaListData(entry);
-        if (['RELEASING', 'FINISHED'].contains(media.status)) {
-          media.relation = 'Manga Planned';
-          subMap[media.id] = media;
-        }
-      }
-
-      List<media> list = subMap.values.toList()
-        ..sort((a, b) => b.meanScore!.compareTo(a.meanScore ?? 0));
+      List<media> list = subMap.values.toList()..sort((a, b) => b.meanScore!.compareTo(a.meanScore ?? 0));
       returnMap["recommendations"] = list;
     }
 
     returnMap["hidden"] = removedMedia.toSet().toList();
     return returnMap;
   } catch (e) {
+    // Handle exception
     return {};
   }
 }

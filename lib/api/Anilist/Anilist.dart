@@ -38,7 +38,7 @@ class AnilistData extends ChangeNotifier { // user data that can be used in app 
   }
 
   Future<void> _initialize() async {
-    String? token = await PrefManager.getVal<String>("AnilistToken");
+    String? token = PrefManager.getVal<String>("AnilistToken");
     if (token != null) {
       var data = await get();
       if (data) {
@@ -60,7 +60,7 @@ class AnilistData extends ChangeNotifier { // user data that can be used in app 
     chapterRead = data.statistics?.manga?.chaptersRead;
     adult = data.options?.displayAdultContent ?? false;
     unreadNotificationCount = data.unreadNotificationCount ?? 0;
-    final unread = await PrefManager.getVal<int>('UnreadCommentNotifications');
+    final unread = PrefManager.getVal<int>('UnreadCommentNotifications');
     unreadNotificationCount += unread ?? 0;
     initialized = true;
 
@@ -96,17 +96,17 @@ class AnilistToken extends ChangeNotifier {
   }
 
   Future<void> _initialize() async {
-    _token = await PrefManager.getVal("AnilistToken") ?? "";
+    _token = PrefManager.getVal("AnilistToken") ?? "";
     notifyListeners();
   }
 
   void saveToken(String token) async {
-    await PrefManager.setVal("AnilistToken", token);
+    PrefManager.setVal("AnilistToken", token);
     _token = token;
   }
 
   void removeToken() async {
-    await PrefManager.setVal("AnilistToken", "");
+    PrefManager.setVal("AnilistToken", "");
     _token = "";
   }
 }
@@ -119,7 +119,7 @@ Future<T?> executeQuery<T>(
   bool show = true,
 }) async {
   try {
-    String? token = await PrefManager.getVal("AnilistToken");
+    String? token = PrefManager.getVal("AnilistToken");
     int rateLimitReset = 0;
     if (rateLimitReset > DateTime.now().millisecondsSinceEpoch ~/ 1000) {
       snackString(

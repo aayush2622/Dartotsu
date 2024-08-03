@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-import '../DataClass/Setting.dart';
+import '../../DataClass/Setting.dart';
 import 'SettingsItem.dart';
 
 class SettingsAdaptor extends StatelessWidget {

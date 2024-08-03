@@ -1,10 +1,10 @@
 import 'dart:ui';
 import 'package:dantotsu/Function.dart';
 import 'package:flutter/material.dart';
-import '../Animation/ScaleAnimation.dart';
-import '../DataClass/Media.dart';
-import '../Screens/SettingsBottomSheet.dart';
-import 'MediaItems/MediaViewHolder.dart';
+import '../../Animation/ScaleAnimation.dart';
+import '../../DataClass/Media.dart';
+import '../../Screens/Settings/SettingsBottomSheet.dart';
+import 'MediaViewHolder.dart';
 
 class MediaGrid extends StatefulWidget {
   final int type;

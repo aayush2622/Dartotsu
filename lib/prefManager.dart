@@ -1,63 +1,75 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-class PrefManager { // simplified version of shared preferences
+class PrefManager {
+  static SharedPreferences? _prefs;
 
-  static Future<void> setVal<T>(String key, T value) async {
-        final prefs = await SharedPreferences.getInstance();
+  // Call this method at the start of your app
+  static Future<void> init() async {
+    _prefs = await SharedPreferences.getInstance();
+  }
+
+  static void setVal<T>(String key, T value) {
+    if (_prefs == null) {
+      throw Exception('SharedPreferences not initialized. Call PrefManager.init() first.');
+    }
+
     if (value is int) {
-      await prefs.setInt(key, value);
+      _prefs!.setInt(key, value);
     } else if (value is double) {
-      await prefs.setDouble(key, value);
+      _prefs!.setDouble(key, value);
     } else if (value is bool) {
-      await prefs.setBool(key, value);
+      _prefs!.setBool(key, value);
     } else if (value is String) {
-      await prefs.setString(key, value);
+      _prefs!.setString(key, value);
     } else if (value is List<String>) {
-      await prefs.setStringList(key, value);
+      _prefs!.setStringList(key, value);
     } else if (value is List<bool>) {
       final boolListAsString = value.map((e) => e.toString()).toList();
-      await prefs.setStringList(key, boolListAsString);
+      _prefs!.setStringList(key, boolListAsString);
     } else if (value is Set<int>) {
       final setListAsString = value.map((e) => e.toString()).toList();
-      await prefs.setStringList(key, setListAsString);
+      _prefs!.setStringList(key, setListAsString);
     } else if (value is List<int>) {
       final intListAsString = value.map((e) => e.toString()).toList();
-      await prefs.setStringList(key, intListAsString);
+      _prefs!.setStringList(key, intListAsString);
     } else {
       throw Exception('Invalid value type');
     }
   }
 
-  static Future<T?> getVal<T>(String key) async {
-    final prefs = await SharedPreferences.getInstance();
+  static T? getVal<T>(String key) {
+    if (_prefs == null) {
+      throw Exception('SharedPreferences not initialized. Call PrefManager.init() first.');
+    }
+
     if (T == List<bool>) {
-      final stringList = prefs.getStringList(key);
+      final stringList = _prefs!.getStringList(key);
       if (stringList != null) {
         return stringList.map((e) => e == 'true').toList() as T;
       }
       return null;
     } else if (T == List<String>) {
-      return prefs.getStringList(key) as T?;
+      return _prefs!.getStringList(key) as T?;
     } else if (T == Set<int>) {
-      final stringList = prefs.getStringList(key);
+      final stringList = _prefs!.getStringList(key);
       if (stringList != null) {
         return stringList.map((e) => int.parse(e)).toSet() as T;
       }
       return null;
     } else if (T == List<int>) {
-      final stringList = prefs.getStringList(key);
+      final stringList = _prefs!.getStringList(key);
       if (stringList != null) {
         return stringList.map((e) => int.parse(e)).toList() as T;
       }
       return null;
     } else if (T == int) {
-      return prefs.getInt(key) as T?;
+      return _prefs!.getInt(key) as T?;
     } else if (T == double) {
-      return prefs.getDouble(key) as T?;
+      return _prefs!.getDouble(key) as T?;
     } else if (T == bool) {
-      return prefs.getBool(key) as T?;
+      return _prefs!.getBool(key) as T?;
     } else if (T == String) {
-      return prefs.getString(key) as T?;
+      return _prefs!.getString(key) as T?;
     } else {
       throw Exception('Invalid value type');
     }

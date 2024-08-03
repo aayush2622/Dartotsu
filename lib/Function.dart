@@ -2,10 +2,12 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'Main.dart';
 
-Future<void> snackString( // to copy string to clipboard
+Future<void> snackString(
+  // to copy string to clipboard
   String? s, {
   String? clipboard,
 }) async {
@@ -31,7 +33,7 @@ Future<void> snackString( // to copy string to clipboard
                   ),
                 ),
                 backgroundColor: theme.surface,
-                duration: const Duration(seconds: 1),
+                duration: const Duration(milliseconds: 45),
               ),
             );
             Clipboard.setData(ClipboardData(text: clipboard ?? s));
@@ -51,10 +53,11 @@ Future<void> snackString( // to copy string to clipboard
         behavior: SnackBarBehavior.floating,
         margin: EdgeInsets.only(
           bottom: MediaQuery.of(context).viewInsets.bottom + 32,
-          left: 16,
-          right: 16,
+          left: 32,
+          right: 32,
         ),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        duration: const Duration(seconds: 2),
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
@@ -64,7 +67,18 @@ Future<void> snackString( // to copy string to clipboard
   }
 }
 
-Future<bool> imageLoaded(String? imageUrl) async { // to render images then remove progress bar
+Future<void> openLinkInBrowser(String url) async {
+  var uri = Uri.parse(url);
+  if (await canLaunchUrl(uri)) {
+    await launchUrl(uri);
+    debugPrint('Opening $url in your browser!');
+  } else {
+    debugPrint('Oops! I couldn\'t open $url. Maybe it\'s broken?');
+  }
+}
+
+Future<bool> imageLoaded(String? imageUrl) async {
+  // to render images then remove progress bar
   if (imageUrl == null) return false;
   final Completer<bool> completer = Completer();
   final Image image = Image.network(imageUrl);

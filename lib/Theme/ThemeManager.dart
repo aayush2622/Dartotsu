@@ -30,42 +30,42 @@ class ThemeNotifier extends ChangeNotifier {
   }
 
   Future<void> _initialize() async {
-    _isDarkMode = await PrefManager.getVal("isDarkTheme") ?? false;
-    _isOled = await PrefManager.getVal("isOled") ?? false;
-    _theme = await PrefManager.getVal("theme") ?? 'purple';
-    _useMaterialYou = await PrefManager.getVal("useMaterialYou") ?? false;
+    _isDarkMode = PrefManager.getVal("isDarkTheme") ?? false;
+    _isOled = PrefManager.getVal("isOled") ?? false;
+    _theme = PrefManager.getVal("theme") ?? 'purple';
+    _useMaterialYou = PrefManager.getVal("useMaterialYou") ?? false;
     notifyListeners();
   }
 
   Future<void> setDarkMode(bool isDarkMode) async {
     _isDarkMode = isDarkMode;
-    await PrefManager.setVal("isDarkTheme", isDarkMode);
+    PrefManager.setVal("isDarkTheme", isDarkMode);
     if (!isDarkMode) {
       _isOled = false;
-      await PrefManager.setVal("isOled", false);
+      PrefManager.setVal("isOled", false);
     }
     notifyListeners();
   }
 
   Future<void> setOled(bool isOled) async {
     _isOled = isOled;
-    await PrefManager.setVal("isOled", isOled);
+    PrefManager.setVal("isOled", isOled);
     if (isOled) {
       _isDarkMode = true;
-      await PrefManager.setVal("isDarkTheme", true);
+     PrefManager.setVal("isDarkTheme", true);
     }
     notifyListeners();
   }
 
   Future<void> setTheme(String theme) async {
     _theme = theme;
-    await PrefManager.setVal("theme", theme);
+    PrefManager.setVal("theme", theme);
     notifyListeners();
   }
 
   Future<void> setMaterialYou(bool useMaterialYou) async {
     _useMaterialYou = useMaterialYou;
-    await PrefManager.setVal("useMaterialYou", useMaterialYou);
+    PrefManager.setVal("useMaterialYou", useMaterialYou);
     notifyListeners();
   }
 }
