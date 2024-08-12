@@ -15,7 +15,7 @@ class SettingItem extends StatelessWidget {
       onTap: setting.onClick,
       onLongPress: setting.onLongClick,
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 25.0, horizontal: 0.0),
+        padding: const EdgeInsets.symmetric(vertical: 22.0, horizontal: 0.0),
         child: Row(
           children: [
             Icon(setting.icon, color: Theme.of(context).primaryColor),
@@ -29,6 +29,7 @@ class SettingItem extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                           fontSize: 16.0,
                           fontFamily: 'Poppins')),
+                  const SizedBox(height: 6),
                   Text(setting.description,
                       style: const TextStyle(
                           fontWeight: FontWeight.w600,
@@ -61,7 +62,7 @@ class SettingSwitchItem extends StatelessWidget {
     return GestureDetector(
       onLongPress: setting.onLongClick,
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 18.0, horizontal: 0.0),
+        padding: const EdgeInsets.symmetric(vertical: 22.0, horizontal: 0.0),
         child: Row(
           children: [
             Icon(setting.icon, color: Theme.of(context).primaryColor),

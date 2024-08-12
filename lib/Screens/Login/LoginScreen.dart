@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:icons_plus/icons_plus.dart';
 
-import '../../Function.dart';
+import '../../Functions/Function.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -35,13 +35,14 @@ class LoginScreen extends StatelessWidget {
             ),
             const SizedBox(height: 38),
             ElevatedButton.icon(
-              onPressed: () {},
+              onPressed: () => openLinkInBrowser('https://anilist.co/api/v2/oauth/authorize?client_id=14959&redirect_uridantotsu://anilist&response_type=code'),
               icon: Padding(
                 padding: const EdgeInsets.only(right: 24.0),
                 child: SvgPicture.asset(
                   'assets/svg/anilist.svg',
                   width: 18,
                   height: 18,
+                  // ignore: deprecated_member_use
                   color: theme.onPrimaryContainer,
                 ),
               ),

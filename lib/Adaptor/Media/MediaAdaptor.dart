@@ -1,22 +1,27 @@
-import 'dart:ui';
-import 'package:dantotsu/Function.dart';
+import 'dart:async';
+
+import 'package:dantotsu/Functions/Extensions.dart';
 import 'package:flutter/material.dart';
+
 import '../../Animation/ScaleAnimation.dart';
 import '../../DataClass/Media.dart';
+import '../../Functions/Function.dart';
 import '../../Screens/Settings/SettingsBottomSheet.dart';
+import '../../Widgets/ScrollConfig.dart';
+import 'MediaPageSmallViewHolder.dart';
 import 'MediaViewHolder.dart';
 
-class MediaGrid extends StatefulWidget {
+class MediaAdaptor extends StatefulWidget {
   final int type;
   final List<media> mediaList;
 
-  const MediaGrid({super.key, required this.type, required this.mediaList});
+  const MediaAdaptor({super.key, required this.type, required this.mediaList});
 
   @override
   MediaGridState createState() => MediaGridState();
 }
 
-class MediaGridState extends State<MediaGrid> {
+class MediaGridState extends State<MediaAdaptor> {
   late List<media> _mediaList;
 
   @override
@@ -26,7 +31,7 @@ class MediaGridState extends State<MediaGrid> {
   }
 
   @override
-  void didUpdateWidget(covariant MediaGrid oldWidget) {
+  void didUpdateWidget(covariant MediaAdaptor oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.mediaList != widget.mediaList) {
       setState(() {
@@ -36,18 +41,24 @@ class MediaGridState extends State<MediaGrid> {
   }
 
   @override
-  Widget build(BuildContext context) { // grid view for media
+  Widget build(BuildContext context) {
+    switch (widget.type) {
+      case 0:
+        return _buildGridLayout();
+      case 1:
+        return LargeView(mediaList: _mediaList);
+      default:
+        return const SizedBox();
+    }
+  }
+
+  Widget _buildGridLayout() {
     return SizedBox(
       height: 250,
       child: AnimatedSwitcher(
         duration: const Duration(milliseconds: 500),
-        child: ScrollConfiguration(
-          behavior: ScrollConfiguration.of(context).copyWith(
-            dragDevices: {
-              PointerDeviceKind.touch,
-              PointerDeviceKind.mouse,
-            },
-          ),
+        child: ScrollConfig(
+          context,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             itemCount: _mediaList.length,
@@ -73,6 +84,74 @@ class MediaGridState extends State<MediaGrid> {
                     child: MediaViewHolder(mediaInfo: _mediaList[index]),
                   ),
                 ),
+              );
+            },
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class LargeView extends StatefulWidget {
+  final List<media> mediaList;
+
+  const LargeView({super.key, required this.mediaList});
+
+  @override
+  LargeViewState createState() => LargeViewState();
+}
+
+class LargeViewState extends State<LargeView> {
+  late PageController _pageController;
+  Timer? _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController();
+    _startAutoScroll();
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  void _startAutoScroll() {
+    _timer?.cancel();
+    _timer = Timer.periodic(const Duration(seconds: 4), (Timer timer) {
+      if (_pageController.hasClients) {
+        final page = _pageController.page?.toInt() ?? 0;
+        final nextPage = (page + 1) % widget.mediaList.length;
+        _pageController.animateToPage(
+          nextPage,
+          duration: const Duration(milliseconds: 500),
+          curve: Curves.easeInOut,
+        );
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 464.statusBar(),
+      child: AnimatedSwitcher(
+        duration: const Duration(milliseconds: 500),
+        child: ScrollConfig(
+          context,
+          child: PageView.builder(
+            controller: _pageController,
+            scrollDirection: Axis.horizontal,
+            itemCount: widget.mediaList.length,
+            itemBuilder: (context, index) {
+              return GestureDetector(
+                onTap: () => snackString(widget.mediaList[index].name),
+                onLongPress: () => settingsBottomSheet(context),
+                child: MediaPageSmallViewHolder(widget.mediaList[index]),
               );
             },
           ),

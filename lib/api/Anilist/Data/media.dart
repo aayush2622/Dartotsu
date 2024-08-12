@@ -124,7 +124,7 @@ class Media {
 
 @JsonSerializable()
 class MediaTitle {
-  String romaji;
+  String? romaji;
   String? english;
   String? native;
   String userPreferred;

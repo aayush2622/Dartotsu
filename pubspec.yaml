@@ -41,16 +41,19 @@ dependencies:
   visibility_detector: ^0.2.0
   kenburns_nullsafety: ^1.0.1
   url_launcher: ^6.3.0
-  app_links: ^6.1.4
   cupertino_icons: ^1.0.6
   dynamic_color: ^1.7.0
-  win32_registry: ^1.1.4
   flutter_svg: ^2.0.4
+  material_color_utilities: ^0.11.1
+  flutter_colorpicker: ^1.1.0
+  msix: ^3.16.7
+  protocol_handler: ^0.2.0
+  get: ^4.6.6
   icons_plus: ^5.0.0 # https://pub.dev/packages/icons_plus
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_launcher_icons: ^0.10.0
+  flutter_launcher_icons: ^0.13.1
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -61,7 +64,12 @@ dev_dependencies:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
-
+msix_config:
+  protocol_activation: dantotsu
+  display_name: Dantotsu
+  msix_version: 1.0.0.0
+  logo_path: assets/images/logo.png
+  capabilities: internetClient
 # The following section is specific to Flutter packages.
 flutter:
   uses-material-design: true
@@ -83,7 +91,6 @@ flutter:
 
 flutter_icons:
   # C:\flutter\bin\flutter.bat  pub run flutter_launcher_icons:main
-  android: true
   ios: true
   image_path: "assets/images/logo.png"
   windows:

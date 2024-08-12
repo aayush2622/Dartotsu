@@ -24,8 +24,8 @@ Widget buildDropdownMenu({
           borderRadius: BorderRadius.circular(borderRadius),
           borderSide: BorderSide(color: borderColor ?? Colors.transparent),
         ),
-        hoverColor:  Colors.transparent,
-        focusColor:  Colors.transparent,
+        hoverColor: Colors.transparent,
+        focusColor: Colors.transparent,
       ),
       child: DropdownButtonHideUnderline(
         child: DropdownButton<String>(
@@ -35,7 +35,7 @@ Widget buildDropdownMenu({
               onChanged(newValue);
             }
           },
-            items: options.map((String option) {
+          items: options.map((String option) {
             final displayName = option[0].toUpperCase() + option.substring(1);
             return DropdownMenuItem<String>(
               value: option,

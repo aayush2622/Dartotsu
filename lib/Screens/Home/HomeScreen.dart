@@ -1,30 +1,36 @@
-import 'dart:ui';
-
 import 'package:blur/blur.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:dantotsu/Adaptor/Media/MediaAdaptor.dart';
+import 'package:dantotsu/Animation/SlideUpAnimation.dart';
 import 'package:dantotsu/DataClass/Media.dart';
-import 'package:dantotsu/Function.dart';
-import 'package:dantotsu/Screens/Anime/AnimeScreen.dart';
+import 'package:dantotsu/Functions/Function.dart';
+import 'package:dantotsu/Functions/Extensions.dart';
+import 'package:dantotsu/Screens/Login/LoginScreen.dart';
 import 'package:dantotsu/Screens/Settings/SettingsBottomSheet.dart';
-import 'package:dantotsu/Theme/ThemeManager.dart';
+import 'package:dantotsu/Theme/ThemeProvider.dart';
+import 'package:dantotsu/Widgets/CustomElevatedButton.dart';
 import 'package:dantotsu/api/Anilist/Anilist.dart';
 import 'package:dantotsu/api/Anilist/AnilistQueries.dart';
 import 'package:flutter/material.dart';
 import 'package:kenburns_nullsafety/kenburns_nullsafety.dart';
 import 'package:provider/provider.dart';
 
-import '../../Theme/Colors.dart';
+import '../../Animation/SlideInAnimation.dart';
+import '../../DataClass/MediaSection.dart';
+import '../../Prefrerences/PrefManager.dart';
+import '../../Prefrerences/Prefrences.dart';
+import '../../Widgets/Home/LoadingWidget.dart';
+import '../../Widgets/Home/NotificationBadge.dart';
+import '../../Widgets/Media/MediaCard.dart';
+import '../../Widgets/Media/MediaSection.dart';
+import '../../Widgets/ScrollConfig.dart';
+import '../Anime/AnimeScreen.dart';
 
-/*
-TODO
-Refresh everytime media data change
+/* TODO
 get status bar height and give to: var topInset
+list button, more button
 */
 class HomeScreen extends StatefulWidget {
-  final int userId;
-
-  const HomeScreen({super.key, required this.userId});
+  const HomeScreen({super.key});
 
   @override
   HomeScreenState createState() => HomeScreenState();
@@ -34,81 +40,60 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   List<String?>? banner;
   bool _areImagesLoaded = false;
   Map<String, List<media>>? list;
-  late AnimationController _listController;
-  late Animation<Offset> _slideUpAnimation;
-
+  late AnilistData userData;
   @override
   void initState() {
     super.initState();
-    _listController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 300),
-    );
-    _slideUpAnimation = Tween<Offset>(
-      begin: const Offset(0, 1),
-      end: Offset.zero,
-    ).animate(CurvedAnimation(
-      parent: _listController,
-      curve: Curves.easeInOut,
-    ));
-
-    getBanner();
-    getList();
+    load(context);
   }
 
-  Future<void> getBanner() async {
-    final data = await getBannerImages(widget.userId);
+
+  Future<void> load(BuildContext context) async {
+    userData = Provider.of<AnilistData>(context, listen: false);
+    if (!userData.initialized) {
+      await userData.get();
+    }
+    await _loadBanner();
+
+    await _loadList();
+  }
+
+  Future<void> _loadBanner() async {
+    setState(() => banner = null);
+    final data = await getBannerImages(userData.userid!);
     setState(() {
       banner = data;
       _areImagesLoaded = false;
     });
+
     if (banner != null) {
       final futures = banner!.map((url) => imageLoaded(url)).toList();
-      Future.wait(futures).then((results) {
-        setState(() {
-          _areImagesLoaded = results.every((result) => result == true);
-        });
+      final results = await Future.wait(futures);
+
+      setState(() {
+        _areImagesLoaded = results.every((result) => result == true);
       });
     }
   }
 
-  Future<void> getList() async {
-    final data = await initHomePage(widget.userId);
-    setState(() {
-      list = data;
-    });
-  }
-
-  Future<void> refresh() async {
-    await Future.wait([
-      getBanner(),
-      getList(),
-    ]);
-  }
-
-  @override
-  void dispose() {
-    _listController.dispose();
-    super.dispose();
+  Future<void> _loadList() async {
+    setState(() => list = null);
+    final data = await initHomePage(userData.userid!);
+    setState(() => list = data);
   }
 
   @override
   Widget build(BuildContext context) {
     final isDarkMode = Provider.of<ThemeNotifier>(context).isDarkMode;
-    const topInset = 0.0;
-    const backgroundHeight = 212.0 + topInset;
+    var backgroundHeight = 212.statusBar();
+    var theme = Theme.of(context).colorScheme;
 
     return Scaffold(
       body: RefreshIndicator(
-        onRefresh: refresh,
-        child: CustomScrollView(
-          scrollBehavior: ScrollConfiguration.of(context).copyWith(
-            dragDevices: {
-              PointerDeviceKind.touch,
-              PointerDeviceKind.mouse,
-            },
-          ),
-          slivers: [
+        onRefresh: () => load(context),
+        child: CustomScrollConfig(
+          context,
+          children: [
             SliverToBoxAdapter(
               child: Column(
                 children: [
@@ -117,53 +102,17 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     child: Consumer<AnilistData>(
                       builder: (context, data, child) {
                         if (!data.initialized || !_areImagesLoaded) {
-                          return Stack(children: [
-                            Container(
-                              margin: const EdgeInsets.only(
-                                left: 34.0,
-                                right: 126.0,
-                                top: backgroundHeight / 2 - 44,
-                              ),
-                              width: double.infinity,
-                              child: const LinearProgressIndicator(),
-                            ),
-                            Positioned(
-                              right: 34,
-                              top: 36 + topInset,
-                              child: Container(
-                                width: 52.0,
-                                height: 52.0,
-                                decoration: BoxDecoration(
-                                  color: Provider.of<ThemeNotifier>(context).isDarkMode ? greyNavDark : greyNavLight,
-                                  shape: BoxShape.circle,
-                                  border: Border.all(
-                                    color: Colors.white,
-                                    width: 1.0,
-                                  ),
-                                ),
-                                child: const Center(
-                                  child: CircleAvatar(
-                                    backgroundColor: Colors.transparent,
-                                    radius: 26.0,
-                                    child: Icon(
-                                      Icons.settings,
-                                      size: 24.0,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ]);
+                          if (!data.initialized) {
+                            return LoadingWidget(theme: theme);
+                          }
                         }
-                        _listController.forward();
-
                         return Stack(
                           fit: StackFit.expand,
                           children: [
-                            _buildBackgroundImage(data.bg ?? '', topInset),
-                            _buildAvatar(data, topInset),
-                            _buildUserInfo(data, isDarkMode, topInset),
-                            _buildCards(topInset),
+                            _buildBackgroundImage(data.bg ?? ''),
+                            _buildAvatar(data),
+                            _buildUserInfo(data, isDarkMode),
+                            _buildCards(),
                           ],
                         );
                       },
@@ -175,41 +124,101 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             SliverList(
               delegate: SliverChildListDelegate(
                 [
-                  Consumer<AnilistData>(builder: (context, data, child) {
-                    return Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 16, 0, 16),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          _buildSection(
-                              'Continue Watching', list?['currentAnime'] ?? []),
-                          _buildSection(
-                              'Favorite Anime', list?['favoriteAnime'] ?? []),
-                          _buildSection('Planned Anime',
-                              list?['currentAnimePlanned'] ?? []),
-                          _buildSection(
-                              'Continue Reading', list?['currentManga'] ?? []),
-                          _buildSection(
-                              'Favorite Manga', list?['favoriteManga'] ?? []),
-                          _buildSection('Planned Manga',
-                              list?['currentMangaPlanned'] ?? []),
-                          _buildSection(
-                              'Recommended', list?['recommendations'] ?? []),
-                          const SizedBox(height: 128),
-                        ],
-                      ),
-                    );
-                  }),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: buildMediaSections(context),
+                    ),
+                  ),
                 ],
               ),
-            ),
+            )
           ],
         ),
       ),
     );
   }
 
-  Widget _buildBackgroundImage(String imageUrl, double topInset) {
+
+  List<Widget> buildMediaSections(BuildContext  context) {
+    final mediaSections = [
+      MediaSectionData(
+        title: 'Continue Watching',
+        list: list?['currentAnime'],
+        icon: Icons.movie_filter_rounded,
+        message: 'All caught up, when New?',
+        buttonText: 'Browse\nAnime',
+      ),
+      MediaSectionData(
+        title: 'Favorite Anime',
+        list: list?['favoriteAnime'],
+        icon: Icons.heart_broken,
+        message:
+            'Looks like you don\'t like anything,\nTry liking a show to keep it here.',
+      ),
+      MediaSectionData(
+        title: 'Planned Anime',
+        list: list?['currentAnimePlanned'],
+        icon: Icons.movie_filter_rounded,
+        message: 'All caught up, when New?',
+        buttonText: 'Browse\nAnime',
+      ),
+      MediaSectionData(
+        title: 'Continue Reading',
+        list: list?['currentManga'],
+        icon: Icons.import_contacts,
+        message: 'All caught up, when New?',
+        buttonText: 'Browse\nManga',
+      ),
+      MediaSectionData(
+        title: 'Favorite Manga',
+        list: list?['favoriteManga'],
+        icon: Icons.heart_broken,
+        message:
+            'Looks like you don\'t like anything,\nTry liking a show to keep it here.',
+      ),
+      MediaSectionData(
+        title: 'Planned Manga',
+        list: list?['currentMangaPlanned'],
+        icon: Icons.import_contacts,
+        message: 'All caught up, when New?',
+        buttonText: 'Browse\nManga',
+      ),
+      MediaSectionData(
+        title: 'Recommended',
+        list: list?['recommendations'],
+        icon: Icons.auto_awesome,
+        message: 'Watch/Read some Anime or Manga to get Recommendations',
+      )
+    ];
+
+    var toShow = PrefManager.getVal(PrefName.homeLayout);
+    List<Widget> sectionWidgets = [];
+    mediaSections.asMap().forEach((index, section) {
+      if (toShow[index]) {
+        sectionWidgets.add(
+          MediaSection(
+            context: context,
+            title: section.title,
+            mediaList: section.list,
+            customNullListIndicator: _buildNullIndicator(
+              context,
+              section.icon,
+              section.message,
+              section.buttonText,
+              section.onPressed,
+            ),
+          ),
+        );
+      }
+    });
+    sectionWidgets.add(const SizedBox(height: 128));
+
+    return sectionWidgets;
+  }
+
+  Widget _buildBackgroundImage(String imageUrl) {
     final isDarkMode = Provider.of<ThemeNotifier>(context).isDarkMode;
     final theme = Theme.of(context).colorScheme.surface;
     final gradientColors = isDarkMode
@@ -217,7 +226,7 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         : [Colors.white.withOpacity(0.2), theme];
 
     return SizedBox(
-      height: 212.0 + topInset,
+      height: 212.statusBar(),
       child: Stack(
         children: [
           KenBurns(
@@ -226,12 +235,12 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               imageUrl: imageUrl,
               fit: BoxFit.cover,
               width: double.infinity,
-              height: 212 + topInset,
+              height: 212.statusBar(),
             ),
           ),
           Container(
             width: double.infinity,
-            height: 212 + topInset,
+            height: 212.statusBar(),
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: gradientColors,
@@ -251,12 +260,11 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     );
   }
 
-  Widget _buildAvatar(AnilistData data, double topInset) {
+  Widget _buildAvatar(AnilistData data) {
     return Positioned(
       right: 34,
-      top: 36 + topInset,
-      child: SlideTransition(
-        position: _slideUpAnimation,
+      top: 3.statusBar(),
+      child: SlideUpAnimation(
         child: Stack(
           children: [
             GestureDetector(
@@ -273,27 +281,7 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               Positioned(
                 right: 0,
                 bottom: -2,
-                child: Container(
-                  padding: const EdgeInsets.all(4),
-                  decoration: const BoxDecoration(
-                    color: Color(0xFFC6140A),
-                    shape: BoxShape.circle,
-                  ),
-                  constraints: const BoxConstraints(
-                    minWidth: 18,
-                    minHeight: 18,
-                  ),
-                  child: Text(
-                    data.unreadNotificationCount.toString(),
-                    style: const TextStyle(
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xFFF3F3F3),
-                      fontSize: 12,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
+                child: NotificationBadge(count: data.unreadNotificationCount)
               ),
           ],
         ),
@@ -301,15 +289,13 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     );
   }
 
-  Widget _buildUserInfo(AnilistData data, bool isDarkMode, double topInset) {
+  Widget _buildUserInfo(AnilistData data, bool isDarkMode) {
     final theme = Theme.of(context).colorScheme;
-
     return Positioned(
-      top: 36.0 + topInset,
+      top: 36.statusBar(),
       left: 34.0,
       right: 16.0,
-      child: SlideTransition(
-        position: _slideUpAnimation,
+      child: SlideUpAnimation(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -363,27 +349,26 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     );
   }
 
-  Widget _buildCards(double topInset) {
+  Widget _buildCards() {
     return Positioned(
-      top: 132.0 + topInset,
+      top: 132.statusBar(),
       left: 8.0,
       right: 8.0,
-      child: SlideTransition(
-        position: _slideUpAnimation,
+      child: SlideInAnimation(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            _buildCard(
+            MediaCard(
               context,
               'ANIME LIST',
-              const AnimeScreen(),
-              banner?[0],
+              const LoginScreen(),
+              banner?[0] ?? 'https://bit.ly/31bsIHq',
             ),
-            _buildCard(
+            MediaCard(
               context,
               'MANGA LIST',
               const AnimeScreen(),
-              banner?[1],
+              banner?[1] ?? 'https://bit.ly/2ZGfcuG',
             ),
           ],
         ),
@@ -391,105 +376,33 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     );
   }
 
-  Widget _buildCard(BuildContext context, String title, StatelessWidget route,
-      String? imageUrl) {
-    double height = 72;
-    final theme = Theme.of(context).colorScheme;
-    var screenWidth = MediaQuery.of(context).size.width;
-    double width = screenWidth * 0.4;
-    if (width > 256) width = 256;
-    double radius = width * 0.07;
+  List<Widget> _buildNullIndicator(BuildContext context, IconData? icon,
+      String? message, String? buttonLabel, void Function()? onPressed) {
+    var theme = Theme.of(context).colorScheme;
 
-    return GestureDetector(
-      onTap: () => Navigator.push(
-          context, MaterialPageRoute(builder: (context) => route)),
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(radius),
-        ),
-        clipBehavior: Clip.antiAlias,
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            CachedNetworkImage(
-              imageUrl: imageUrl ??
-                  (title == "ANIME LIST"
-                      ? 'https://bit.ly/31bsIHq'
-                      : 'https://bit.ly/2ZGfcuG'),
-              fit: BoxFit.cover,
-              width: width,
-              height: height,
-            ),
-            Container(
-              width: width,
-              height: height,
-              color: Colors.black.withOpacity(0.5),
-              child: Center(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const SizedBox(height: 9.0),
-                    Text(
-                      title,
-                      style: const TextStyle(
-                        fontFamily: 'Poppins',
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),
-                    Container(
-                      height: 3.0,
-                      width: 64.0,
-                      color: theme.primary,
-                      margin: const EdgeInsets.only(bottom: 4.0),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
+    return [
+      Icon(
+        icon,
+        color: theme.onSurface.withOpacity(0.58),
+        size: 32,
+      ),
+      Text(
+        message ?? '',
+        style: TextStyle(
+          fontFamily: 'Poppins',
+          fontSize: 14,
+          color: theme.onSurface.withOpacity(0.58),
         ),
       ),
-    );
-  }
-
-  Widget _buildSection(String title, List<media> mediaList) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        if (mediaList.isEmpty)
-          const SizedBox(
-            height: 250,
-            child: Center(
-              child: CircularProgressIndicator(),
-            ),
-          )
-        else
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 28.0),
-                child: Text(
-                  title,
-                  style: const TextStyle(
-                    fontFamily: 'Poppins',
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 16),
-              AnimatedSwitcher(
-                duration: const Duration(milliseconds: 300),
-                child: MediaGrid(type: 0, mediaList: mediaList),
-              ),
-              const SizedBox(height: 4),
-            ],
-          ),
-      ],
-    );
+      if (buttonLabel != null) ...[
+        const SizedBox(height: 24.0),
+        CustomElevatedButton(
+          context: context,
+          onPressed: onPressed ?? () {},
+          label: buttonLabel,
+        ),
+      ]
+    ];
   }
 }
+

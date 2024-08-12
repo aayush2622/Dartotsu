@@ -1,12 +1,15 @@
 import 'dart:ui';
 
+import 'package:dantotsu/Screens/Settings/SettingsThemeScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:icons_plus/icons_plus.dart';
+import 'package:provider/provider.dart';
 
 import '../../Adaptor/Settings/SettingsAdaptor.dart';
 import '../../DataClass/Setting.dart';
-import '../../Function.dart';
+import '../../Functions/Function.dart';
+import '../../Widgets/SettingsHeader.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -19,12 +22,20 @@ class SettingsScreen extends StatelessWidget {
           dragDevices: {
             PointerDeviceKind.touch,
             PointerDeviceKind.mouse,
+            PointerDeviceKind.trackpad
           },
         ),
         physics: const BouncingScrollPhysics(),
         slivers: [
-          const SliverToBoxAdapter(
-            child: SettingsHeader(),
+          SliverToBoxAdapter(
+            child: SettingsHeader(
+                context,
+                'Settings',
+                Image.asset(
+                  'assets/images/icon.png',
+                  width: 96,
+                  height: 96,
+                )),
           ),
           SliverPadding(
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
@@ -32,7 +43,7 @@ class SettingsScreen extends StatelessWidget {
               delegate: SliverChildListDelegate(
                 [
                   SettingsAdaptor(
-                    settings: _buildSettings(),
+                    settings: _buildSettings(context),
                   ),
                   const SizedBox(height: 24),
                   const InfoSection(),
@@ -46,14 +57,16 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 
-  List<Setting> _buildSettings() {
+  List<Setting> _buildSettings(BuildContext context) {
     return [
       Setting(
         type: SettingType.normal,
         name: 'Account',
         description: 'Anilist, MAL and Discord.\nWhat more could you need?',
         icon: Icons.person,
-        onClick: () {},
+        onClick: () => {
+
+        },
         isActivity: true,
       ),
       Setting(
@@ -61,7 +74,9 @@ class SettingsScreen extends StatelessWidget {
         name: 'Theme',
         description: 'Change the vibe of your app',
         icon: Icons.palette_outlined,
-        onClick: () {},
+        onClick: () {
+          navigateToPage(context, const SettingsThemeScreen());
+        },
         isActivity: true,
       ),
       Setting(
@@ -69,7 +84,9 @@ class SettingsScreen extends StatelessWidget {
         name: 'Common',
         description: 'Change the vibe of your app',
         icon: Icons.lightbulb_outline,
-        onClick: () {},
+        onClick: () {
+
+        },
         isActivity: true,
       ),
       Setting(
@@ -124,62 +141,6 @@ class SettingsScreen extends StatelessWidget {
   }
 }
 
-class SettingsHeader extends StatelessWidget {
-  const SettingsHeader({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    var theme = Theme.of(context).colorScheme;
-    return SizedBox(
-      height: 200,
-      child: Stack(
-        children: [
-          Positioned(
-            top: 42,
-            left: 24,
-            child: Card(
-              elevation: 0,
-              color: theme.surface,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: IconButton(
-                icon: Icon(Icons.arrow_back_ios_new, color: theme.onSurface),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ),
-          ),
-          Positioned(
-            top: 112,
-            left: 32,
-            right: 16,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  'Settings',
-                  style: TextStyle(
-                    fontSize: 28,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Image.asset(
-                  'assets/images/icon.png',
-                  width: 96,
-                  height: 96,
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
 class InfoSection extends StatelessWidget {
   const InfoSection({super.key});
 
@@ -200,10 +161,16 @@ class InfoSection extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         Center(
-          child: SvgPicture.asset(
-            'assets/svg/bmc-button.svg',
-            width: 170,
-            height: 48,
+          child: IconButton(
+            color: Colors.grey.shade800,
+            iconSize: 38,
+            icon: SvgPicture.asset(
+              'assets/svg/bmc-button.svg',
+              width: 170,
+              height: 48,
+            ),
+            onPressed: () =>
+                openLinkInBrowser('https://www.buymeacoffee.com/aayush262'),
           ),
         ),
         const SizedBox(height: 16),
@@ -232,8 +199,8 @@ class InfoSection extends StatelessWidget {
               color: Colors.grey.shade800,
               iconSize: 32,
               icon: const Icon(Bootstrap.github),
-              onPressed: () =>
-                  openLinkInBrowser('https://github.com/aayush2622/dantotsu-pc'),
+              onPressed: () => openLinkInBrowser(
+                  'https://github.com/aayush2622/dantotsu-pc'),
             ),
             const SizedBox(width: 16),
             IconButton(

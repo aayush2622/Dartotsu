@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 class AniListAuth {
   final String clientId;
@@ -40,8 +41,7 @@ class AniListAuth {
     if (response.statusCode == 200) {
       final Map<String, dynamic> responseData = json.decode(response.body);
       final String accessToken = responseData['access_token'];
-      print('Access Token: $accessToken');
-      // Handle access token, e.g., save it in a provider or local storage
+      debugPrint('Access Token: $accessToken');
     } else {
       throw 'Failed to exchange code for token';
     }

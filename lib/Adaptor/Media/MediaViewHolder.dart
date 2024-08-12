@@ -2,6 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dantotsu/DataClass/Media.dart';
 import 'package:flutter/material.dart';
 
+import '../../Widgets/Media/MediaReleaseingIndicator.dart';
+import '../../Widgets/Media/MediaScoreBadge.dart';
+
 class MediaViewHolder extends StatelessWidget {
   final media mediaInfo;
 
@@ -29,8 +32,8 @@ class MediaViewHolder extends StatelessWidget {
                 ),
               ),
             ),
-            if (mediaInfo.status == 'RELEASING') _buildReleasingIndicator(),
-            _buildScoreBadge(context),
+            if (mediaInfo.status == 'RELEASING') ReleasingIndicator(),
+            ScoreBadge(context, mediaInfo),
           ],
         ),
         const SizedBox(height: 8),
@@ -78,74 +81,6 @@ class MediaViewHolder extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-
-  Widget _buildReleasingIndicator() {
-    return Positioned(
-      bottom: -3,
-      left: -2,
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8.0),
-        ),
-        child: Container(
-          width: 16,
-          height: 16,
-          decoration: BoxDecoration(
-            color: const Color(0xFF6BF170),
-            border: Border.all(
-              color: const Color(0xFF208358),
-              width: 2.0,
-            ),
-            borderRadius: BorderRadius.circular(8.0),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildScoreBadge(BuildContext context) {
-    final theme = Theme.of(context).colorScheme;
-    return Positioned(
-      bottom: 0,
-      right: 0,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 8.2, vertical: 2.2),
-        decoration: BoxDecoration(
-          color: mediaInfo.userScore == 0 ? theme.primary : theme.tertiary,
-          borderRadius: const BorderRadius.only(
-            bottomRight: Radius.circular(16.0),
-            topLeft: Radius.circular(17.0),
-            bottomLeft: Radius.circular(-1.0),
-          ),
-        ),
-        child: Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 2.0),
-              child: Text(
-                ((mediaInfo.userScore == 0
-                    ? mediaInfo.meanScore ?? 0
-                    : mediaInfo.userScore ?? 0) /
-                    10.0)
-                    .toString(),
-                style: TextStyle(
-                  fontFamily: 'Poppins',
-                  color: theme.onPrimary,
-                  fontWeight: FontWeight.w800,
-                  fontSize: 12,
-                ),
-              ),
-            ),
-            Icon(
-              Icons.star_rounded,
-              color: theme.onPrimary,
-              size: 12,
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

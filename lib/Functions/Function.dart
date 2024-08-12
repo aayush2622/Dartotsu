@@ -4,13 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'Main.dart';
+import '../Main.dart';
 
 Future<void> snackString(
-  // to copy string to clipboard
-  String? s, {
-  String? clipboard,
-}) async {
+    String? s, {
+      String? clipboard,
+    }) async {
   var context = navigatorKey.currentContext;
   var theme = Theme.of(context!).colorScheme;
   try {
@@ -21,22 +20,7 @@ Future<void> snackString(
             ScaffoldMessenger.of(context).hideCurrentSnackBar();
           },
           onLongPress: () {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(
-                  'Copied to clipboard',
-                  style: TextStyle(
-                    fontFamily: 'Poppins',
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.bold,
-                    color: theme.onSurface,
-                  ),
-                ),
-                backgroundColor: theme.surface,
-                duration: const Duration(milliseconds: 45),
-              ),
-            );
-            Clipboard.setData(ClipboardData(text: clipboard ?? s));
+            copyToClipboard(clipboard ?? s);
           },
           child: Text(
             s,
@@ -67,6 +51,27 @@ Future<void> snackString(
   }
 }
 
+void copyToClipboard(String text) {
+  var context = navigatorKey.currentContext;
+  var theme = Theme.of(context!).colorScheme;
+  Clipboard.setData(ClipboardData(text: text));
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: Text(
+        'Copied to clipboard',
+        style: TextStyle(
+          fontFamily: 'Poppins',
+          fontSize: 16.0,
+          fontWeight: FontWeight.bold,
+          color: theme.onSurface,
+        ),
+      ),
+      backgroundColor: theme.surface,
+      duration: const Duration(milliseconds: 45),
+    ),
+  );
+}
+
 Future<void> openLinkInBrowser(String url) async {
   var uri = Uri.parse(url);
   if (await canLaunchUrl(uri)) {
@@ -77,8 +82,16 @@ Future<void> openLinkInBrowser(String url) async {
   }
 }
 
+void navigateToPage(BuildContext context, Widget page) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => page),
+  );
+}
+
 Future<bool> imageLoaded(String? imageUrl) async {
   // to render images then remove progress bar
+
   if (imageUrl == null) return false;
   final Completer<bool> completer = Completer();
   final Image image = Image.network(imageUrl);

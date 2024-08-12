@@ -1,18 +1,173 @@
+import 'dart:convert';
 import 'dart:math';
 
-import 'package:dantotsu/Function.dart';
-import 'package:dantotsu/api/Anilist/Data/media.dart';
-import 'package:dantotsu/api/Anilist/Data/staff.dart';
-import 'package:dantotsu/api/Anilist/Data/user.dart';
-import 'package:dantotsu/prefManager.dart';
+import 'package:dantotsu/Functions/Function.dart';
+import 'package:dantotsu/Prefrerences/Prefrences.dart';
 
 import '../../DataClass/Author.dart';
 import '../../DataClass/Character.dart';
 import '../../DataClass/Media.dart';
+import '../../DataClass/SearchResults.dart';
 import '../../DataClass/User.dart';
+import '../../Prefrerences/PrefManager.dart';
 import 'Anilist.dart';
 import 'Data/data.dart';
+import 'Data/media.dart';
+import 'Data/page.dart';
+import 'Data/staff.dart';
+import 'Data/user.dart';
 
+class AnilistQueries{
+
+  Future<SearchResults?> search({
+    required String type,
+    int? page,
+    int? perPage,
+    String? search,
+    String? sort,
+    List<String>? genres,
+    List<String>? tags,
+    String? status,
+    String? source,
+    String? format,
+    String? countryOfOrigin,
+    bool isAdult = false,
+    bool? onList,
+    List<String>? excludedGenres,
+    List<String>? excludedTags,
+    int? startYear,
+    int? seasonYear,
+    String? season,
+    int? id,
+    bool hd = false,
+    bool adultOnly = false,
+  }) async {
+    String query = """
+query (\$page: Int = 1, \$id: Int, \$type: MediaType, \$isAdult: Boolean = false, \$search: String, \$format: [MediaFormat], \$status: MediaStatus, \$countryOfOrigin: CountryCode, \$source: MediaSource, \$season: MediaSeason, \$seasonYear: Int, \$year: String, \$onList: Boolean, \$yearLesser: FuzzyDateInt, \$yearGreater: FuzzyDateInt, \$episodeLesser: Int, \$episodeGreater: Int, \$durationLesser: Int, \$durationGreater: Int, \$chapterLesser: Int, \$chapterGreater: Int, \$volumeLesser: Int, \$volumeGreater: Int, \$licensedBy: [String], \$isLicensed: Boolean, \$genres: [String], \$excludedGenres: [String], \$tags: [String], \$excludedTags: [String], \$minimumTagRank: Int, \$sort: [MediaSort] = [POPULARITY_DESC, SCORE_DESC, START_DATE_DESC]) {
+  Page(page: \$page, perPage: ${perPage ?? 50}) {
+    pageInfo {
+      total
+      perPage
+      currentPage
+      lastPage
+      hasNextPage
+    }
+    media(id: \$id, type: \$type, season: \$season, format_in: \$format, status: \$status, countryOfOrigin: \$countryOfOrigin, source: \$source, search: \$search, onList: \$onList, seasonYear: \$seasonYear, startDate_like: \$year, startDate_lesser: \$yearLesser, startDate_greater: \$yearGreater, episodes_lesser: \$episodeLesser, episodes_greater: \$episodeGreater, duration_lesser: \$durationLesser, duration_greater: \$durationGreater, chapters_lesser: \$chapterLesser, chapters_greater: \$chapterGreater, volumes_lesser: \$volumeLesser, volumes_greater: \$volumeGreater, licensedBy_in: \$licensedBy, isLicensed: \$isLicensed, genre_in: \$genres, genre_not_in: \$excludedGenres, tag_in: \$tags, tag_not_in: \$excludedTags, minimumTagRank: \$minimumTagRank, sort: \$sort, isAdult: \$isAdult) {
+      id
+      idMal
+      isAdult
+      status
+      chapters
+      episodes
+      nextAiringEpisode {
+        episode
+      }
+      type
+      genres
+      meanScore
+      isFavourite
+      format
+      bannerImage
+      coverImage {
+        large
+        extraLarge
+      }
+      title {
+        english
+        romaji
+        userPreferred
+      }
+      mediaListEntry {
+        progress
+        private
+        score(format: POINT_100)
+        status
+      }
+    }
+  }
+}
+""";
+
+    final Map<String, dynamic> variables = {
+      "type": type,
+      "isAdult": isAdult,
+      if (adultOnly) "isAdult": true,
+      if (onList != null) "onList": onList,
+      if (page != null) "page": page,
+      if (id != null) "id": id,
+      if (type == "ANIME" && seasonYear != null) "seasonYear": seasonYear,
+      if (type == "MANGA" && startYear != null) "yearGreater": startYear * 10000,
+      if (type == "MANGA" && startYear != null)
+        "yearLesser": (startYear + 1) * 10000,
+      if (season != null) "season": season,
+      if (search != null) "search": search,
+      if (source != null) "source": source,
+      if (sort != null) "sort": sort,
+      if (status != null) "status": status,
+      if (format != null) "format": format.replaceAll(" ", "_"),
+      if (countryOfOrigin != null) "countryOfOrigin": countryOfOrigin,
+      if (genres != null && genres.isNotEmpty) "genres": genres,
+      if (excludedGenres != null && excludedGenres.isNotEmpty)
+        "excludedGenres":
+        excludedGenres.map((g) => g.replaceAll("Not ", "")).toList(),
+      if (tags != null && tags.isNotEmpty) "tags": tags,
+      if (excludedTags != null && excludedTags.isNotEmpty)
+        "excludedTags":
+        excludedTags.map((t) => t.replaceAll("Not ", "")).toList(),
+    };
+
+    final response = (await executeQuery<PageResponse>(query,
+        variables: jsonEncode(variables), force: true))
+        ?.data
+        ?.page;
+    if (response?.media != null) {
+      List<media> responseArray = [];
+
+      response?.media?.forEach((i) {
+        String userStatus = i.mediaListEntry?.status?.name ?? '';
+
+        List<String> genresArr = [];
+        i.genres?.forEach((genre) {
+          genresArr.add(genre);
+        });
+
+        media mediaInfo = mediaData(i);
+        if (!hd) mediaInfo.cover = i.coverImage?.large ?? '';
+        mediaInfo.relation = (onList == true) ? userStatus : null;
+        mediaInfo.genres = genresArr;
+
+        responseArray.add(mediaInfo);
+      });
+
+      var pageInfo = response?.pageInfo;
+      if (pageInfo == null) return null;
+
+      return SearchResults(
+        type: type,
+        perPage: perPage,
+        search: search,
+        sort: sort,
+        isAdult: isAdult,
+        onList: onList,
+        genres: genres,
+        excludedGenres: excludedGenres,
+        tags: tags,
+        excludedTags: excludedTags,
+        status: status,
+        source: source,
+        format: format,
+        countryOfOrigin: countryOfOrigin,
+        startYear: startYear,
+        seasonYear: seasonYear,
+        season: season,
+        results: responseArray,
+        page: pageInfo.currentPage ?? 0,
+        hasNextPage: pageInfo.hasNextPage == true,
+      );
+    }
+    return null;
+  }
+}
 Future<media?> mediaDetails(media media) async {
   var query =
       "{Media(id:${media.id}){id favourites popularity episodes chapters streamingEpisodes {title thumbnail url site} mediaListEntry{id status score(format:POINT_100)progress private notes repeat customLists updatedAt startedAt{year month day}completedAt{year month day}}reviews(perPage:3, sort:SCORE_DESC){nodes{id mediaId mediaType summary body(asHtml:true) rating ratingAmount userRating score private siteUrl createdAt updatedAt user{id name bannerImage avatar{medium large}}}} isFavourite siteUrl idMal nextAiringEpisode{episode airingAt}source countryOfOrigin format duration season seasonYear startDate{year month day}endDate{year month day}genres studios(isMain:true){nodes{id name siteUrl}}description trailer{site id}synonyms tags{name rank isMediaSpoiler}characters(sort:[ROLE,FAVOURITES_DESC],perPage:25,page:1){edges{role voiceActors { id name { first middle last full native userPreferred } image { large medium } languageV2 } node{id image{medium}name{userPreferred}isFavourite}}}relations{edges{relationType(version:2)node{id idMal mediaListEntry{progress private score(format:POINT_100)status}episodes chapters nextAiringEpisode{episode}popularity meanScore isAdult isFavourite format title{english romaji userPreferred}type status(version:2)bannerImage coverImage{large}}}}staffPreview:staff(perPage:8,sort:[RELEVANCE,ID]){edges{role node{id image{large medium}name{userPreferred}}}}recommendations(sort:RATING_DESC){nodes{mediaRecommendation{id idMal mediaListEntry{progress private score(format:POINT_100)status}episodes chapters nextAiringEpisode{episode}meanScore isAdult isFavourite format title{english romaji userPreferred}type status(version:2)bannerImage coverImage{large}}}}externalLinks{url site}}Page(page:1){pageInfo{total perPage currentPage lastPage hasNextPage}mediaList(isFollowing:true,sort:[STATUS],mediaId:${media.id}){id status score(format: POINT_100) progress progressVolumes user{id name avatar{large medium}}}}}";
@@ -128,7 +283,6 @@ Future<media?> mediaDetails(media media) async {
     }
     if (fetchedMedia.recommendations != null) {
       media.recommendations = [];
-
       fetchedMedia.recommendations?.nodes?.forEach((i) {
         var mediaRecommendation = i.mediaRecommendation;
         if (mediaRecommendation != null) {
@@ -253,11 +407,9 @@ Future<media?> mediaDetails(media media) async {
   } else {
     response = await executeQuery(query, force: true, useToken: false);
     if (response?.data?.media != null) {
-      //print("adult");
       snackString('Adult Stuff? Adult Stuff? ( ͡° ͜ʖ ͡° )');
       parse();
     } else {
-      //print("huh");
       snackString('Error getting data from Anilist.');
     }
   }
@@ -274,8 +426,8 @@ Future<media?> getMedia(int id, {bool mal = true}) async {
 }
 
 Future<String?> bannerImage(String type, int id) async {
-  var url = PrefManager.getVal<String>("banner_${type}_url");
-  var time = PrefManager.getVal<int>("banner_${type}_time");
+  var url = PrefManager.getCustomVal<String>("banner_${type}_url");
+  var time = PrefManager.getCustomVal<int>("banner_${type}_time");
   bool checkTime() {
     if (time == null) return true;
     return DateTime.now()
@@ -297,8 +449,8 @@ Future<String?> bannerImage(String type, int id) async {
     bannerImages.shuffle(Random());
     var random = bannerImages.isNotEmpty ? bannerImages.first : null;
 
-    PrefManager.setVal("banner_${type}_url", random);
-    PrefManager.setVal(
+    PrefManager.setCustomVal("banner_${type}_url", random);
+    PrefManager.setCustomVal(
         "banner_${type}_time", DateTime.now().millisecondsSinceEpoch);
 
     return random;
@@ -320,6 +472,7 @@ Future<User?> getUserData() async {
   return response?.data?.user;
 }
 
+//home page
 String recommendationQuery() {
   return 'Page(page: 1, perPage:30) { pageInfo { total currentPage hasNextPage } recommendations(sort: RATING_DESC, onList: true) { rating userRating mediaRecommendation { id idMal isAdult mediaListEntry { progress private score(format:POINT_100) status } chapters isFavourite format episodes nextAiringEpisode {episode} popularity meanScore isFavourite format title {english romaji userPreferred } type status(version: 2) bannerImage coverImage { large } } } }';
 }
@@ -338,41 +491,59 @@ String favMediaQuery(bool anime, int page, int? id) {
 
 Future<Map<String, List<media>>> initHomePage(int id) async {
   try {
-    final removeList = PrefManager.getVal<Set<int>>("removeList") ?? {};
+    final removeList = PrefManager.getVal(PrefName.removeList);
     const hidePrivate = true;
     List<media> removedMedia = [];
-    final toShow = PrefManager.getVal<List<bool>>("HomeLayout") ?? List.filled(7, true);
+    final toShow = PrefManager.getVal(PrefName.homeLayout);
 
     List<String> queries = [];
     if (toShow[0]) {
-      queries.add("""currentAnime: ${continueMediaQuery("ANIME", "CURRENT", id)}""");
-      queries.add("""repeatingAnime: ${continueMediaQuery("ANIME", "REPEATING", id)}""");
+      queries.add(
+          """currentAnime: ${continueMediaQuery("ANIME", "CURRENT", id)}""");
+      queries.add(
+          """repeatingAnime: ${continueMediaQuery("ANIME", "REPEATING", id)}""");
     }
-    if (toShow[1]) queries.add("""favoriteAnime: ${favMediaQuery(true, 1, id)}""");
-    if (toShow[2]) queries.add("""plannedAnime: ${continueMediaQuery("ANIME", "PLANNING", id)}""");
+    if (toShow[1]) {
+      queries.add("""favoriteAnime: ${favMediaQuery(true, 1, id)}""");
+    }
+    if (toShow[2]) {
+      queries.add(
+          """plannedAnime: ${continueMediaQuery("ANIME", "PLANNING", id)}""");
+    }
     if (toShow[3]) {
-      queries.add("""currentManga: ${continueMediaQuery("MANGA", "CURRENT", id)}""");
-      queries.add("""repeatingManga: ${continueMediaQuery("MANGA", "REPEATING", id)}""");
+      queries.add(
+          """currentManga: ${continueMediaQuery("MANGA", "CURRENT", id)}""");
+      queries.add(
+          """repeatingManga: ${continueMediaQuery("MANGA", "REPEATING", id)}""");
     }
-    if (toShow[4]) queries.add("""favoriteManga: ${favMediaQuery(false, 1, id)}""");
-    if (toShow[5]) queries.add("""plannedManga: ${continueMediaQuery("MANGA", "PLANNING", id)}""");
+    if (toShow[4]) {
+      queries.add("""favoriteManga: ${favMediaQuery(false, 1, id)}""");
+    }
+    if (toShow[5]) {
+      queries.add(
+          """plannedManga: ${continueMediaQuery("MANGA", "PLANNING", id)}""");
+    }
     if (toShow[6]) {
       queries.add("""recommendationQuery: ${recommendationQuery()}""");
-      queries.add("""recommendationPlannedQueryAnime: ${recommendationPlannedQuery("ANIME", id)}""");
-      queries.add("""recommendationPlannedQueryManga: ${recommendationPlannedQuery("MANGA", id)}""");
+      queries.add(
+          """recommendationPlannedQueryAnime: ${recommendationPlannedQuery("ANIME", id)}""");
+      queries.add(
+          """recommendationPlannedQueryManga: ${recommendationPlannedQuery("MANGA", id)}""");
     }
 
     String query = "{${queries.join(",")}}";
     var response = await executeQuery<UserListResponse>(query);
     Map<String, List<media>> returnMap = {};
 
-    void processMedia(String type, List<MediaList>? currentMedia, List<MediaList>? repeatingMedia) {
+    void processMedia(String type, List<MediaList>? currentMedia,
+        List<MediaList>? repeatingMedia) {
       Map<int, media> subMap = {};
       List<media> returnArray = [];
 
       for (var entry in (currentMedia ?? []) + (repeatingMedia ?? [])) {
         var media = mediaListData(entry);
-        if (!removeList.contains(media.id) && (!hidePrivate || !media.isListPrivate)) {
+        if (!removeList.contains(media.id) &&
+            (!hidePrivate || !media.isListPrivate)) {
           media.cameFromContinue = true;
           subMap[media.id] = media;
         } else {
@@ -380,12 +551,14 @@ Future<Map<String, List<media>>> initHomePage(int id) async {
         }
       }
 
-      var list = PrefManager.getVal<List<int>>("continue${type}List") ?? [];
+      var list =
+          PrefManager.getCustomVal<List<int>>("continue${type}List") ?? [];
       if (list.isNotEmpty) {
         for (var id in list.reversed) {
           if (subMap.containsKey(id)) returnArray.add(subMap[id]!);
         }
-        returnArray.addAll(subMap.values.where((m) => !returnArray.contains(m)));
+        returnArray
+            .addAll(subMap.values.where((m) => !returnArray.contains(m)));
       } else {
         returnArray.addAll(subMap.values);
       }
@@ -394,20 +567,39 @@ Future<Map<String, List<media>>> initHomePage(int id) async {
     }
 
     List<MediaList> getMediaList(List<MediaListGroup>? lists) {
-      return (lists?.expand((x) => x.entries ?? []).cast<MediaList>().toList() ?? []).reversed.toList();
+      return (lists
+                  ?.expand((x) => x.entries ?? [])
+                  .cast<MediaList>()
+                  .toList() ??
+              [])
+          .reversed
+          .toList();
     }
 
-    if (toShow[0]) processMedia("Anime", getMediaList(response?.data?.currentAnime?.lists), getMediaList(response?.data?.repeatingAnime?.lists));
-    if (toShow[2]) processMedia("AnimePlanned", getMediaList(response?.data?.plannedAnime?.lists), null);
-    if (toShow[3]) processMedia("Manga", getMediaList(response?.data?.currentManga?.lists), getMediaList(response?.data?.repeatingManga?.lists));
-    if (toShow[5]) processMedia("MangaPlanned", getMediaList(response?.data?.plannedManga?.lists), null);
+    if (toShow[0]) {
+      processMedia("Anime", getMediaList(response?.data?.currentAnime?.lists),
+          getMediaList(response?.data?.repeatingAnime?.lists));
+    }
+    if (toShow[2]) {
+      processMedia("AnimePlanned",
+          getMediaList(response?.data?.plannedAnime?.lists), null);
+    }
+    if (toShow[3]) {
+      processMedia("Manga", getMediaList(response?.data?.currentManga?.lists),
+          getMediaList(response?.data?.repeatingManga?.lists));
+    }
+    if (toShow[5]) {
+      processMedia("MangaPlanned",
+          getMediaList(response?.data?.plannedManga?.lists), null);
+    }
 
     void processFavorites(String type, List<MediaEdge>? favorites) {
       List<media> returnArray = [];
       for (var entry in (favorites ?? [])) {
         var media = mediaEdgeData(entry);
         media.isFav = true;
-        if (!removeList.contains(media.id) && (!hidePrivate || !media.isListPrivate)) {
+        if (!removeList.contains(media.id) &&
+            (!hidePrivate || !media.isListPrivate)) {
           returnArray.add(media);
         } else {
           removedMedia.add(media);
@@ -416,13 +608,20 @@ Future<Map<String, List<media>>> initHomePage(int id) async {
       returnMap["favorite$type"] = returnArray;
     }
 
-    if (toShow[1]) processFavorites("Anime", response?.data?.favoriteAnime?.favourites?.anime?.edges);
-    if (toShow[4]) processFavorites("Manga", response?.data?.favoriteManga?.favourites?.manga?.edges);
+    if (toShow[1]) {
+      processFavorites(
+          "Anime", response?.data?.favoriteAnime?.favourites?.anime?.edges);
+    }
+    if (toShow[4]) {
+      processFavorites(
+          "Manga", response?.data?.favoriteManga?.favourites?.manga?.edges);
+    }
 
     if (toShow[6]) {
       Map<int, media> subMap = {};
 
-      var recommendations = response?.data?.recommendationQuery?.recommendations ?? [];
+      var recommendations =
+          response?.data?.recommendationQuery?.recommendations ?? [];
       for (var entry in recommendations) {
         var mediaRecommendation = entry.mediaRecommendation;
         if (mediaRecommendation != null) {
@@ -432,22 +631,26 @@ Future<Map<String, List<media>>> initHomePage(int id) async {
         }
       }
 
-      Iterable<dynamic> combineIterables(Iterable<dynamic>? first, Iterable<dynamic>? second) {
+      Iterable<dynamic> combineIterables(
+          Iterable<dynamic>? first, Iterable<dynamic>? second) {
         return (first ?? []).followedBy(second ?? []);
       }
 
       for (var entry in combineIterables(
-          response?.data?.recommendationPlannedQueryAnime?.lists?.expand((x) => x.entries ?? []),
-          response?.data?.recommendationPlannedQueryManga?.lists?.expand((x) => x.entries ?? [])
-      )) {
+          response?.data?.recommendationPlannedQueryAnime?.lists
+              ?.expand((x) => x.entries ?? []),
+          response?.data?.recommendationPlannedQueryManga?.lists
+              ?.expand((x) => x.entries ?? []))) {
         var media = mediaListData(entry);
         if (['RELEASING', 'FINISHED'].contains(media.status)) {
-          media.relation = entry is MediaList ? 'Anime Planned' : 'Manga Planned';
+          media.relation =
+              entry is MediaList ? 'Anime Planned' : 'Manga Planned';
           subMap[media.id] = media;
         }
       }
 
-      List<media> list = subMap.values.toList()..sort((a, b) => b.meanScore!.compareTo(a.meanScore ?? 0));
+      List<media> list = subMap.values.toList()
+        ..sort((a, b) => b.meanScore!.compareTo(a.meanScore ?? 0));
       returnMap["recommendations"] = list;
     }
 
@@ -457,4 +660,275 @@ Future<Map<String, List<media>>> initHomePage(int id) async {
     // Handle exception
     return {};
   }
+}
+
+// anime and manga page
+
+List<media> mediaList(Page? media1) {
+  final combinedList = <media>[];
+  if (media1 != null && media1.media != null) {
+    for (var media in media1.media!) {
+      combinedList.add(mediaData(media));
+    }
+  }
+  return combinedList;
+}
+
+String buildQueryString(String sort, String type,
+    {String? format, String? country}) {
+  final includeList =
+      (type == "ANIME" && !PrefManager.getVal(PrefName.includeAnimeList))
+          ? "onList:false"
+          : (type == "MANGA" && !PrefManager.getVal(PrefName.includeMangaList))
+              ? "onList:false"
+              : "";
+
+  final isAdult = PrefManager.getVal(PrefName.adultOnly) ? "isAdult:true" : "";
+  final formatFilter = format != null ? "format:$format, " : "";
+  final countryFilter = country != null ? "countryOfOrigin:$country, " : "";
+
+  return """Page(page:1,perPage:50){pageInfo{hasNextPage total}media(sort:$sort, type:$type, $formatFilter $countryFilter $includeList $isAdult){id idMal status chapters episodes nextAiringEpisode{episode} isAdult type meanScore isFavourite format bannerImage countryOfOrigin coverImage{large} title{english romaji userPreferred} mediaListEntry{progress private score(format:POINT_100) status}}}""";
+}
+
+String recentAnimeUpdates(int page) {
+  final currentTime = DateTime.now().millisecondsSinceEpoch ~/ 1000;
+  return """Page(page:$page,perPage:50){pageInfo{hasNextPage total}airingSchedules(airingAt_greater:0 airingAt_lesser:${currentTime - 10000} sort:TIME_DESC){episode airingAt media{id idMal status chapters episodes nextAiringEpisode{episode} isAdult type meanScore isFavourite format bannerImage countryOfOrigin coverImage{large} title{english romaji userPreferred} mediaListEntry{progress private score(format:POINT_100) status}}}}""";
+}
+
+String queryAnimeList() {
+  return '''
+    {
+      recentUpdates: ${recentAnimeUpdates(1)} 
+      recentUpdates2: ${recentAnimeUpdates(2)} 
+      trendingMovies: ${buildQueryString("POPULARITY_DESC", "ANIME", format: "MOVIE")} 
+      topRated: ${buildQueryString("SCORE_DESC", "ANIME")} 
+      mostFav: ${buildQueryString("FAVOURITES_DESC", "ANIME")}
+    }
+  ''';
+}
+
+String queryMangaList() {
+  return '''
+    {
+      trendingManga: ${buildQueryString("POPULARITY_DESC", "MANGA", country: "JP")} 
+      trendingManhwa: ${buildQueryString("POPULARITY_DESC", "MANGA", country: "KR")} 
+      trendingNovel: ${buildQueryString("POPULARITY_DESC", "MANGA", format: "NOVEL", country: "JP")} 
+      topRated: ${buildQueryString("SCORE_DESC", "MANGA")} 
+      mostFav: ${buildQueryString("FAVOURITES_DESC", "MANGA")}
+    }
+  ''';
+}
+
+Future<Map<String, List<media>>> loadAnimeList() async {
+  final list = <String, List<media>>{};
+
+  List<media>? filterRecentUpdates(Page? page) {
+    final listOnly = PrefManager.getVal(PrefName.recentlyListOnly);
+    final adultOnly = PrefManager.getVal(PrefName.adultOnly);
+    final idArr = <int>{};
+
+    if (page == null || page.airingSchedules == null) return [];
+
+    return page.airingSchedules
+        ?.where((i) {
+          final media = i.media;
+          if (media == null || idArr.contains(media.id)) return false;
+
+          final shouldAdd = (!listOnly &&
+                  media.countryOfOrigin == "JP" &&
+                  adultOnly &&
+                  media.isAdult == true) ||
+              (!listOnly &&
+                  !adultOnly &&
+                  media.countryOfOrigin == "JP" &&
+                  media.isAdult == false) ||
+              (listOnly && media.mediaListEntry != null);
+
+          if (shouldAdd) {
+            idArr.add(media.id);
+            return true;
+          }
+          return false;
+        })
+        .map((i) => mediaData(i.media!))
+        .toList();
+  }
+
+  final animeList =
+      await executeQuery<AnimeListResponse>(queryAnimeList(), force: true);
+
+  if (animeList?.data != null) {
+    list["recentUpdates"] =
+        filterRecentUpdates(animeList?.data?.recentUpdates)!;
+    list["trendingMovies"] = mediaList(animeList?.data?.trendingMovies);
+    list["topRated"] = mediaList(animeList?.data?.topRated);
+    list["mostFav"] = mediaList(animeList?.data?.mostFav);
+  }
+
+  return list;
+}
+
+Future<Map<String, List<media>>> loadMangaList() async {
+  final list = <String, List<media>>{};
+
+  final mangaList =
+      await executeQuery<MangaListResponse>(queryMangaList(), force: true);
+
+  if (mangaList?.data != null) {
+    list["trendingManga"] = mediaList(mangaList?.data?.trendingManga);
+    list["trendingManhwa"] = mediaList(mangaList?.data?.trendingManhwa);
+    list["trendingNovel"] = mediaList(mangaList?.data?.trendingNovel);
+    list["topRated"] = mediaList(mangaList?.data?.topRated);
+    list["mostFav"] = mediaList(mangaList?.data?.mostFav);
+  }
+  return list;
+}
+
+Future<SearchResults?> search({
+  required String type,
+  int? page,
+  int? perPage,
+  String? search,
+  String? sort,
+  List<String>? genres,
+  List<String>? tags,
+  String? status,
+  String? source,
+  String? format,
+  String? countryOfOrigin,
+  bool isAdult = false,
+  bool? onList,
+  List<String>? excludedGenres,
+  List<String>? excludedTags,
+  int? startYear,
+  int? seasonYear,
+  String? season,
+  int? id,
+  bool hd = false,
+  bool adultOnly = false,
+}) async {
+  String query = """
+query (\$page: Int = 1, \$id: Int, \$type: MediaType, \$isAdult: Boolean = false, \$search: String, \$format: [MediaFormat], \$status: MediaStatus, \$countryOfOrigin: CountryCode, \$source: MediaSource, \$season: MediaSeason, \$seasonYear: Int, \$year: String, \$onList: Boolean, \$yearLesser: FuzzyDateInt, \$yearGreater: FuzzyDateInt, \$episodeLesser: Int, \$episodeGreater: Int, \$durationLesser: Int, \$durationGreater: Int, \$chapterLesser: Int, \$chapterGreater: Int, \$volumeLesser: Int, \$volumeGreater: Int, \$licensedBy: [String], \$isLicensed: Boolean, \$genres: [String], \$excludedGenres: [String], \$tags: [String], \$excludedTags: [String], \$minimumTagRank: Int, \$sort: [MediaSort] = [POPULARITY_DESC, SCORE_DESC, START_DATE_DESC]) {
+  Page(page: \$page, perPage: ${perPage ?? 50}) {
+    pageInfo {
+      total
+      perPage
+      currentPage
+      lastPage
+      hasNextPage
+    }
+    media(id: \$id, type: \$type, season: \$season, format_in: \$format, status: \$status, countryOfOrigin: \$countryOfOrigin, source: \$source, search: \$search, onList: \$onList, seasonYear: \$seasonYear, startDate_like: \$year, startDate_lesser: \$yearLesser, startDate_greater: \$yearGreater, episodes_lesser: \$episodeLesser, episodes_greater: \$episodeGreater, duration_lesser: \$durationLesser, duration_greater: \$durationGreater, chapters_lesser: \$chapterLesser, chapters_greater: \$chapterGreater, volumes_lesser: \$volumeLesser, volumes_greater: \$volumeGreater, licensedBy_in: \$licensedBy, isLicensed: \$isLicensed, genre_in: \$genres, genre_not_in: \$excludedGenres, tag_in: \$tags, tag_not_in: \$excludedTags, minimumTagRank: \$minimumTagRank, sort: \$sort, isAdult: \$isAdult) {
+      id
+      idMal
+      isAdult
+      status
+      chapters
+      episodes
+      nextAiringEpisode {
+        episode
+      }
+      type
+      genres
+      meanScore
+      isFavourite
+      format
+      bannerImage
+      coverImage {
+        large
+        extraLarge
+      }
+      title {
+        english
+        romaji
+        userPreferred
+      }
+      mediaListEntry {
+        progress
+        private
+        score(format: POINT_100)
+        status
+      }
+    }
+  }
+}
+""";
+
+  final Map<String, dynamic> variables = {
+    "type": type,
+    "isAdult": isAdult,
+    if (adultOnly) "isAdult": true,
+    if (onList != null) "onList": onList,
+    if (page != null) "page": page,
+    if (id != null) "id": id,
+    if (type == "ANIME" && seasonYear != null) "seasonYear": seasonYear,
+    if (type == "MANGA" && startYear != null) "yearGreater": startYear * 10000,
+    if (type == "MANGA" && startYear != null)
+      "yearLesser": (startYear + 1) * 10000,
+    if (season != null) "season": season,
+    if (search != null) "search": search,
+    if (source != null) "source": source,
+    if (sort != null) "sort": sort,
+    if (status != null) "status": status,
+    if (format != null) "format": format.replaceAll(" ", "_"),
+    if (countryOfOrigin != null) "countryOfOrigin": countryOfOrigin,
+    if (genres != null && genres.isNotEmpty) "genres": genres,
+    if (excludedGenres != null && excludedGenres.isNotEmpty)
+      "excludedGenres":
+          excludedGenres.map((g) => g.replaceAll("Not ", "")).toList(),
+    if (tags != null && tags.isNotEmpty) "tags": tags,
+    if (excludedTags != null && excludedTags.isNotEmpty)
+      "excludedTags":
+          excludedTags.map((t) => t.replaceAll("Not ", "")).toList(),
+  };
+
+  final response = (await executeQuery<PageResponse>(query,
+          variables: jsonEncode(variables), force: true))
+      ?.data
+      ?.page;
+  if (response?.media != null) {
+    List<media> responseArray = [];
+
+    response?.media?.forEach((i) {
+      String userStatus = i.mediaListEntry?.status?.name ?? '';
+
+      List<String> genresArr = [];
+      i.genres?.forEach((genre) {
+        genresArr.add(genre);
+      });
+
+      media mediaInfo = mediaData(i);
+      if (!hd) mediaInfo.cover = i.coverImage?.large ?? '';
+      mediaInfo.relation = (onList == true) ? userStatus : null;
+      mediaInfo.genres = genresArr;
+
+      responseArray.add(mediaInfo);
+    });
+
+    var pageInfo = response?.pageInfo;
+    if (pageInfo == null) return null;
+
+    return SearchResults(
+      type: type,
+      perPage: perPage,
+      search: search,
+      sort: sort,
+      isAdult: isAdult,
+      onList: onList,
+      genres: genres,
+      excludedGenres: excludedGenres,
+      tags: tags,
+      excludedTags: excludedTags,
+      status: status,
+      source: source,
+      format: format,
+      countryOfOrigin: countryOfOrigin,
+      startYear: startYear,
+      seasonYear: seasonYear,
+      season: season,
+      results: responseArray,
+      page: pageInfo.currentPage ?? 0,
+      hasNextPage: pageInfo.hasNextPage == true,
+    );
+  }
+  return null;
 }

@@ -1,14 +1,16 @@
 import 'dart:convert';
 import 'dart:core';
 
-import 'package:dantotsu/Function.dart';
-import 'package:dantotsu/api/Anilist/AnilistQueries.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
-import '../../prefManager.dart';
+import '../../Functions/Function.dart';
+import '../../Prefrerences/PrefManager.dart';
+import '../../Prefrerences/Prefrences.dart';
+import 'AnilistQueries.dart';
 
-class AnilistData extends ChangeNotifier { // user data that can be used in app already init on app start
+class AnilistData extends ChangeNotifier {
+  // user data that can be used in app already init on app start
   String? token;
   String? username;
   int? userid;
@@ -38,20 +40,24 @@ class AnilistData extends ChangeNotifier { // user data that can be used in app 
   }
 
   Future<void> _initialize() async {
-    String? token = PrefManager.getVal<String>("AnilistToken");
-    if (token != null) {
+    var token = PrefManager.getVal(PrefName.anilistToken);
+    if (token != "") {
       var data = await get();
       if (data) {
         notifyListeners();
       }
     } else {
+      initialized = true;
       notifyListeners();
     }
   }
 
   Future<bool> get() async {
     var data = (await getUserData());
-    if (data == null) return false;
+    if (data == null) {
+      initialized = true;
+      return false;
+    }
     userid = data.id;
     username = data.name;
     bg = data.bannerImage;
@@ -60,8 +66,8 @@ class AnilistData extends ChangeNotifier { // user data that can be used in app 
     chapterRead = data.statistics?.manga?.chaptersRead;
     adult = data.options?.displayAdultContent ?? false;
     unreadNotificationCount = data.unreadNotificationCount ?? 0;
-    final unread = PrefManager.getVal<int>('UnreadCommentNotifications');
-    unreadNotificationCount += unread ?? 0;
+    final unread = PrefManager.getVal(PrefName.unReadCommentNotifications);
+    unreadNotificationCount += unread;
     initialized = true;
 
     final options = data.options;
@@ -84,6 +90,28 @@ class AnilistData extends ChangeNotifier { // user data that can be used in app 
     }
     return true;
   }
+
+  void removeAllData() {
+    userid = null;
+    username = null;
+    bg = null;
+    avatar = null;
+    episodesWatched = null;
+    chapterRead = null;
+    adult = false;
+    unreadNotificationCount = 0;
+    titleLanguage = null;
+    staffNameLanguage = null;
+    airingNotifications = false;
+    restrictMessagesToFollowing = false;
+    scoreFormat = null;
+    rowOrder = null;
+    activityMergeTime = null;
+    timezone = null;
+    animeCustomLists = null;
+    mangaCustomLists = null;
+    initialized = false;
+  }
 }
 
 class AnilistToken extends ChangeNotifier {
@@ -96,18 +124,20 @@ class AnilistToken extends ChangeNotifier {
   }
 
   Future<void> _initialize() async {
-    _token = PrefManager.getVal("AnilistToken") ?? "";
+    _token = PrefManager.getVal(PrefName.anilistToken);
     notifyListeners();
   }
 
   void saveToken(String token) async {
-    PrefManager.setVal("AnilistToken", token);
+    PrefManager.setVal(PrefName.anilistToken, token);
     _token = token;
+    notifyListeners();
   }
 
   void removeToken() async {
-    PrefManager.setVal("AnilistToken", "");
-    _token = "";
+    PrefManager.removeVal(PrefName.anilistToken);
+    _token = '';
+    notifyListeners();
   }
 }
 
@@ -119,7 +149,7 @@ Future<T?> executeQuery<T>(
   bool show = true,
 }) async {
   try {
-    String? token = PrefManager.getVal("AnilistToken");
+    String token = PrefManager.getVal(PrefName.anilistToken);
     int rateLimitReset = 0;
     if (rateLimitReset > DateTime.now().millisecondsSinceEpoch ~/ 1000) {
       snackString(
@@ -134,8 +164,8 @@ Future<T?> executeQuery<T>(
       'Accept': 'application/json',
     };
 
-    if (token != null || force) {
-      if (token != null && useToken) headers['Authorization'] = 'Bearer $token';
+    if (token != '' || force) {
+      if (token != '' && useToken) headers['Authorization'] = 'Bearer $token';
 
       final response = await http.post(
         Uri.parse("https://graphql.anilist.co/"),
@@ -165,7 +195,8 @@ Future<T?> executeQuery<T>(
       if (jsonResponse.containsKey('errors')) {
         return null;
       }
-      return TypeFactory.get<T>(jsonResponse["response"]); // pass json type in registerAllTypes() in data.dart eg: TypeFactory.create<MediaResponse>((json) => MediaResponse.fromJson(json));
+      return TypeFactory.get<T>(jsonResponse[
+          "response"]); // pass json type in registerAllTypes() in data.dart eg: TypeFactory.create<MediaResponse>((json) => MediaResponse.fromJson(json));
     } else {
       return null;
     }
@@ -180,6 +211,58 @@ const List<String> authorRoles = [
   "Story & Art",
   "Story",
 ];
+const List<String> sortBy = [
+  "SCORE_DESC",
+  "POPULARITY_DESC",
+  "TRENDING_DESC",
+  "START_DATE_DESC",
+  "TITLE_ENGLISH",
+  "TITLE_ENGLISH_DESC",
+  "SCORE"
+];
+final int currentMonth = DateTime.now().month;
+
+int get currentSeason {
+  if (currentMonth >= 0 && currentMonth <= 2) {
+    return 0;
+  } else if (currentMonth >= 3 && currentMonth <= 5) {
+    return 1;
+  } else if (currentMonth >= 6 && currentMonth <= 8) {
+    return 2;
+  } else if (currentMonth >= 9 && currentMonth <= 11) {
+    return 3;
+  } else {
+    return 0;
+  }
+}
+
+int currentYear = DateTime.now().year;
+
+List<String> seasons = ["WINTER", "SPRING", "SUMMER", "FALL"];
+
+Map<String, int> getSeason(bool next) {
+  int newSeason = next ? currentSeason + 1 : currentSeason - 1;
+  int newYear = currentYear;
+
+  if (newSeason > 3) {
+    newSeason = 0;
+    newYear++;
+  } else if (newSeason < 0) {
+    newSeason = 3;
+    newYear--;
+  }
+
+  return {seasons[newSeason]: newYear};
+}
+
+// Get the list of current seasons with previous, current, and next seasons
+List<Map<String, int>> get currentSeasons {
+  return [
+    getSeason(false),
+    {seasons[currentSeason]: currentYear},
+    getSeason(true),
+  ];
+}
 
 typedef FromJson<T> = T Function(Map<String, dynamic> json);
 

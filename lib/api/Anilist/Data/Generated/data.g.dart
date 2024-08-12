@@ -18,50 +18,53 @@ Map<String, dynamic> _$UserListResponseToJson(UserListResponse instance) =>
       'data': instance.data,
     };
 
-UserListData _$UserListDataFromJson(Map<String, dynamic> json) => UserListData()
-  ..currentAnime = json['currentAnime'] == null
-      ? null
-      : MediaListCollection.fromJson(
-          json['currentAnime'] as Map<String, dynamic>)
-  ..repeatingAnime = json['repeatingAnime'] == null
-      ? null
-      : MediaListCollection.fromJson(
-          json['repeatingAnime'] as Map<String, dynamic>)
-  ..favoriteAnime = json['favoriteAnime'] == null
-      ? null
-      : User.fromJson(json['favoriteAnime'] as Map<String, dynamic>)
-  ..plannedAnime = json['plannedAnime'] == null
-      ? null
-      : MediaListCollection.fromJson(
-          json['plannedAnime'] as Map<String, dynamic>)
-  ..currentManga = json['currentManga'] == null
-      ? null
-      : MediaListCollection.fromJson(
-          json['currentManga'] as Map<String, dynamic>)
-  ..repeatingManga = json['repeatingManga'] == null
-      ? null
-      : MediaListCollection.fromJson(
-          json['repeatingManga'] as Map<String, dynamic>)
-  ..favoriteManga = json['favoriteManga'] == null
-      ? null
-      : User.fromJson(json['favoriteManga'] as Map<String, dynamic>)
-  ..plannedManga = json['plannedManga'] == null
-      ? null
-      : MediaListCollection.fromJson(
-          json['plannedManga'] as Map<String, dynamic>)
-  ..recommendationQuery = json['recommendationQuery'] == null
-      ? null
-      : Page.fromJson(json['recommendationQuery'] as Map<String, dynamic>)
-  ..recommendationPlannedQueryAnime =
-      json['recommendationPlannedQueryAnime'] == null
+UserListData _$UserListDataFromJson(Map<String, dynamic> json) => UserListData(
+      currentAnime: json['currentAnime'] == null
           ? null
           : MediaListCollection.fromJson(
-              json['recommendationPlannedQueryAnime'] as Map<String, dynamic>)
-  ..recommendationPlannedQueryManga =
-      json['recommendationPlannedQueryManga'] == null
+              json['currentAnime'] as Map<String, dynamic>),
+      repeatingAnime: json['repeatingAnime'] == null
           ? null
           : MediaListCollection.fromJson(
-              json['recommendationPlannedQueryManga'] as Map<String, dynamic>);
+              json['repeatingAnime'] as Map<String, dynamic>),
+      favoriteAnime: json['favoriteAnime'] == null
+          ? null
+          : User.fromJson(json['favoriteAnime'] as Map<String, dynamic>),
+      plannedAnime: json['plannedAnime'] == null
+          ? null
+          : MediaListCollection.fromJson(
+              json['plannedAnime'] as Map<String, dynamic>),
+      currentManga: json['currentManga'] == null
+          ? null
+          : MediaListCollection.fromJson(
+              json['currentManga'] as Map<String, dynamic>),
+      repeatingManga: json['repeatingManga'] == null
+          ? null
+          : MediaListCollection.fromJson(
+              json['repeatingManga'] as Map<String, dynamic>),
+      favoriteManga: json['favoriteManga'] == null
+          ? null
+          : User.fromJson(json['favoriteManga'] as Map<String, dynamic>),
+      plannedManga: json['plannedManga'] == null
+          ? null
+          : MediaListCollection.fromJson(
+              json['plannedManga'] as Map<String, dynamic>),
+      recommendationQuery: json['recommendationQuery'] == null
+          ? null
+          : Page.fromJson(json['recommendationQuery'] as Map<String, dynamic>),
+      recommendationPlannedQueryAnime:
+          json['recommendationPlannedQueryAnime'] == null
+              ? null
+              : MediaListCollection.fromJson(
+                  json['recommendationPlannedQueryAnime']
+                      as Map<String, dynamic>),
+      recommendationPlannedQueryManga:
+          json['recommendationPlannedQueryManga'] == null
+              ? null
+              : MediaListCollection.fromJson(
+                  json['recommendationPlannedQueryManga']
+                      as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$UserListDataToJson(UserListData instance) =>
     <String, dynamic>{
@@ -157,4 +160,101 @@ ViewerData _$ViewerDataFromJson(Map<String, dynamic> json) => ViewerData(
 Map<String, dynamic> _$ViewerDataToJson(ViewerData instance) =>
     <String, dynamic>{
       'Viewer': instance.user,
+    };
+
+AnimeListResponse _$AnimeListResponseFromJson(Map<String, dynamic> json) =>
+    AnimeListResponse(
+      data: json['data'] == null
+          ? null
+          : AnimeListData.fromJson(json['data'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$AnimeListResponseToJson(AnimeListResponse instance) =>
+    <String, dynamic>{
+      'data': instance.data,
+    };
+
+AnimeListData _$AnimeListDataFromJson(Map<String, dynamic> json) =>
+    AnimeListData(
+      recentUpdates: json['recentUpdates'] == null
+          ? null
+          : Page.fromJson(json['recentUpdates'] as Map<String, dynamic>),
+      trendingMovies: json['trendingMovies'] == null
+          ? null
+          : Page.fromJson(json['trendingMovies'] as Map<String, dynamic>),
+      topRated: json['topRated'] == null
+          ? null
+          : Page.fromJson(json['topRated'] as Map<String, dynamic>),
+      mostFav: json['mostFav'] == null
+          ? null
+          : Page.fromJson(json['mostFav'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$AnimeListDataToJson(AnimeListData instance) =>
+    <String, dynamic>{
+      'recentUpdates': instance.recentUpdates,
+      'trendingMovies': instance.trendingMovies,
+      'topRated': instance.topRated,
+      'mostFav': instance.mostFav,
+    };
+
+MangaListResponse _$MangaListResponseFromJson(Map<String, dynamic> json) =>
+    MangaListResponse(
+      data: json['data'] == null
+          ? null
+          : MangaListData.fromJson(json['data'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$MangaListResponseToJson(MangaListResponse instance) =>
+    <String, dynamic>{
+      'data': instance.data,
+    };
+
+MangaListData _$MangaListDataFromJson(Map<String, dynamic> json) =>
+    MangaListData(
+      trendingManga: json['trendingManga'] == null
+          ? null
+          : Page.fromJson(json['trendingManga'] as Map<String, dynamic>),
+      trendingManhwa: json['trendingManhwa'] == null
+          ? null
+          : Page.fromJson(json['trendingManhwa'] as Map<String, dynamic>),
+      trendingNovel: json['trendingNovel'] == null
+          ? null
+          : Page.fromJson(json['trendingNovel'] as Map<String, dynamic>),
+      topRated: json['topRated'] == null
+          ? null
+          : Page.fromJson(json['topRated'] as Map<String, dynamic>),
+      mostFav: json['mostFav'] == null
+          ? null
+          : Page.fromJson(json['mostFav'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$MangaListDataToJson(MangaListData instance) =>
+    <String, dynamic>{
+      'trendingManga': instance.trendingManga,
+      'trendingManhwa': instance.trendingManhwa,
+      'trendingNovel': instance.trendingNovel,
+      'topRated': instance.topRated,
+      'mostFav': instance.mostFav,
+    };
+
+PageResponse _$PageResponseFromJson(Map<String, dynamic> json) => PageResponse(
+      data: json['data'] == null
+          ? null
+          : MediaData.fromJson(json['data'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$PageResponseToJson(PageResponse instance) =>
+    <String, dynamic>{
+      'data': instance.data,
+    };
+
+PageData _$PageDataFromJson(Map<String, dynamic> json) => PageData(
+      page: json['Page'] == null
+          ? null
+          : Page.fromJson(json['Page'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$PageDataToJson(PageData instance) => <String, dynamic>{
+      'Page': instance.page,
     };

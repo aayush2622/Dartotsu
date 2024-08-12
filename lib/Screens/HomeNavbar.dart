@@ -2,7 +2,7 @@ import 'package:dantotsu/Theme/Colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../Theme/ThemeManager.dart';
+import '../Theme/ThemeProvider.dart';
 
 class FloatingBottomNavBar extends StatelessWidget {
   final int selectedIndex;
@@ -129,3 +129,4 @@ class _NavItem {
     required this.label,
   });
 }
+

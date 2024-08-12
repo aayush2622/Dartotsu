@@ -206,7 +206,7 @@ const _$MediaSourceEnumMap = {
 };
 
 MediaTitle _$MediaTitleFromJson(Map<String, dynamic> json) => MediaTitle(
-      romaji: json['romaji'] as String,
+      romaji: json['romaji'] as String?,
       english: json['english'] as String?,
       native: json['native'] as String?,
       userPreferred: json['userPreferred'] as String,

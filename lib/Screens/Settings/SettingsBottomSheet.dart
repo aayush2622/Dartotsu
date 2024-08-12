@@ -1,10 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dantotsu/Functions/Function.dart';
+import 'package:dantotsu/Prefrerences/Prefrences.dart';
 import 'package:dantotsu/Screens/Settings/SettingsScreen.dart';
+import 'package:dantotsu/Widgets/AlertDialogBuilder.dart';
 import 'package:dantotsu/api/Anilist/Anilist.dart';
-import 'package:dantotsu/prefManager.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../Prefrerences/PrefManager.dart';
 
 class BottomSheetContent extends StatefulWidget {
   const BottomSheetContent({super.key});
@@ -20,8 +23,8 @@ class BottomSheetContentState extends State<BottomSheetContent> {
   @override
   void initState() {
     super.initState();
-    incognito = PrefManager.getVal<bool>('incognito') ?? false;
-    offline = PrefManager.getVal<bool>('offline') ?? false;
+    incognito = PrefManager.getVal(PrefName.incognito) ;
+    offline = PrefManager.getVal(PrefName.offlineMode) ;
   }
 
   @override
@@ -45,13 +48,13 @@ class BottomSheetContentState extends State<BottomSheetContent> {
                   CircleAvatar(
                     radius: 26.0,
                     backgroundImage:
-                    userData.avatar != null && userData.avatar!.isNotEmpty
-                        ? CachedNetworkImageProvider(userData.avatar!)
-                        : null,
+                        userData.avatar != null && userData.avatar!.isNotEmpty
+                            ? CachedNetworkImageProvider(userData.avatar!)
+                            : null,
                     backgroundColor: Colors.transparent,
                     child: userData.avatar == null || userData.avatar!.isEmpty
                         ? Icon(Icons.person,
-                        color: Theme.of(context).primaryColor)
+                            color: Theme.of(context).primaryColor)
                         : null,
                   ),
                   const SizedBox(width: 16),
@@ -70,7 +73,12 @@ class BottomSheetContentState extends State<BottomSheetContent> {
                         const SizedBox(height: 4),
                         GestureDetector(
                           onTap: () {
-                            // Provider.of<AnilistToken>(context).removeToken();
+                            context.customAlertDialog()
+                              ..setTitle('Logout')
+                              ..setMessage('Are you sure you want to logout?')
+                              ..setPosButton('Yes', () => snackString("test"))
+                              ..setNegButton('No', null)
+                              ..show();
                           },
                           child: Text(
                             'Logout',
@@ -93,9 +101,10 @@ class BottomSheetContentState extends State<BottomSheetContent> {
                         Padding(
                           padding: const EdgeInsets.all(14.0),
                           child: Icon(
-                            userData.unreadNotificationCount > 0 ?
-                            Icons.notifications_active : Icons.notifications_none,
-                            color: Colors.white,
+                            userData.unreadNotificationCount > 0
+                                ? Icons.notifications_active
+                                : Icons.notifications_none,
+                            color: Theme.of(context).colorScheme.onSurface,
                             size: 22,
                           ),
                         ),
@@ -140,7 +149,7 @@ class BottomSheetContentState extends State<BottomSheetContent> {
                 isChecked: incognito,
                 onChanged: (bool value) {
                   setState(() {
-                    PrefManager.setVal('incognito', value);
+                    PrefManager.setVal(PrefName.incognito, value);
                     incognito = value;
                   });
                 }),
@@ -152,16 +161,19 @@ class BottomSheetContentState extends State<BottomSheetContent> {
                 isChecked: offline,
                 onChanged: (bool value) {
                   setState(() {
-                    PrefManager.setVal('offline', value);
+                    PrefManager.setVal(PrefName.offlineMode, value);
                     offline = value;
                   });
                 }),
             const SizedBox(height: 10.0),
-            _buildListTile(context, 'Activities', Icons.inbox, const SettingsScreen()),
+            _buildListTile(
+                context, 'Activities', Icons.inbox, const SettingsScreen()),
             const SizedBox(height: 10.0),
-            _buildListTile(context, 'Extension', Icons.extension, const SettingsScreen()),
+            _buildListTile(
+                context, 'Extension', Icons.extension, const SettingsScreen()),
             const SizedBox(height: 10.0),
-            _buildListTile(context, 'Settings', Icons.settings, const SettingsScreen()),
+            _buildListTile(
+                context, 'Settings', Icons.settings, const SettingsScreen()),
             const SizedBox(height: 8.0),
           ],
         ),
@@ -171,11 +183,10 @@ class BottomSheetContentState extends State<BottomSheetContent> {
 
   Widget _buildSwitchListTile(
       {required BuildContext context,
-        required String title,
-        required IconData icon,
-        required bool isChecked,
-        Function(bool)? onChanged}) {
-
+      required String title,
+      required IconData icon,
+      required bool isChecked,
+      Function(bool)? onChanged}) {
     return SwitchListTile(
       title: Text(
         title,
@@ -193,25 +204,25 @@ class BottomSheetContentState extends State<BottomSheetContent> {
   }
 
   Widget _buildListTile(
-      BuildContext context, String title, IconData icon, StatelessWidget open) {
+      BuildContext context, String title, IconData icon, Widget open) {
     return ListTile(
-      title: Text(
-        title,
-        style: TextStyle(
-          fontFamily: 'Poppins',
-          color: Theme.of(context).colorScheme.onSurface,
-          fontWeight: FontWeight.w600,
-          fontSize: 14,
+        title: Text(
+          title,
+          style: TextStyle(
+            fontFamily: 'Poppins',
+            color: Theme.of(context).colorScheme.onSurface,
+            fontWeight: FontWeight.w600,
+            fontSize: 14,
+          ),
         ),
-      ),
-      leading: Icon(icon, color: Theme.of(context).primaryColor),
-      onTap: () => Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => open),
-      ),
-    );
+        leading: Icon(icon, color: Theme.of(context).primaryColor),
+        onTap: () {
+          Navigator.of(context).pop();
+          navigateToPage(context, open);
+        });
   }
 }
+
 void settingsBottomSheet(BuildContext context) {
   showModalBottomSheet(
     context: context,
