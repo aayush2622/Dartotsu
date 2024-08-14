@@ -35,7 +35,7 @@ class LoginScreen extends StatelessWidget {
             ),
             const SizedBox(height: 38),
             ElevatedButton.icon(
-              onPressed: () => openLinkInBrowser('https://anilist.co/api/v2/oauth/authorize?client_id=14959&redirect_uridantotsu://anilist&response_type=code'),
+              onPressed: () => openLinkInBrowser('https://anilist.co/api/v2/oauth/authorize?client_id=14959&response_type=token'),
               icon: Padding(
                 padding: const EdgeInsets.only(right: 24.0),
                 child: SvgPicture.asset(

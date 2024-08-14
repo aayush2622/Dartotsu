@@ -49,13 +49,13 @@ class AnimeScreenState extends State<AnimeScreen> {
 
   Future<void> _loadTrending(int s) async {
     setState(() => mediaDataList = null);
-    var currentSeasonMap = currentSeasons[s];
+    var currentSeasonMap = Anilist.currentSeasons[s];
     var season = currentSeasonMap.keys.first;
     var year = currentSeasonMap.values.first;
     var trending = (await Anilist.query.search(
         type: 'ANIME',
         perPage: 12,
-        sort: sortBy[2],
+        sort: AnilistController.sortBy[2],
         season: season,
         seasonYear: year,
         hd: true))
@@ -65,7 +65,7 @@ class AnimeScreenState extends State<AnimeScreen> {
 
   Future<void> _loadList() async {
     setState(() => list = null);
-    final data = await loadAnimeList();
+    final data = await Anilist.query.loadAnimeList();
     setState(() => list = data);
   }
 
@@ -141,9 +141,9 @@ class AnimeScreenContent extends StatelessWidget {
       children: [
         SizedBox(
           height: 486.statusBar(),
-          child: Consumer<AnilistData>(
-            builder: (context, data, child) {
-              if (!data.initialized) {
+            child: Builder(
+            builder: (context) {
+              if (!Anilist.isInitialized) {
                 return LoadingWidget(theme: theme);
               }
               return Stack(
@@ -155,7 +155,6 @@ class AnimeScreenContent extends StatelessWidget {
                         : const Center(child: CircularProgressIndicator()),
                   ),
                   MediaSearchBar(
-                    data: data,
                     theme: theme,
                     title: "ANIME",
                   ),

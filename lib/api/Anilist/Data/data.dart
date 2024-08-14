@@ -1,9 +1,9 @@
 
-import 'package:dantotsu/api/Anilist/Anilist.dart';
 import 'package:dantotsu/api/Anilist/Data/page.dart';
 import 'package:dantotsu/api/Anilist/Data/user.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+import '../../AnilistNew.dart';
 import 'media.dart';
 
 part 'Generated/data.g.dart';

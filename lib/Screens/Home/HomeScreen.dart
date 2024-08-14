@@ -23,6 +23,7 @@ import '../../Widgets/Home/NotificationBadge.dart';
 import '../../Widgets/Media/MediaCard.dart';
 import '../../Widgets/Media/MediaSection.dart';
 import '../../Widgets/ScrollConfig.dart';
+import '../../api/AnilistNew.dart';
 import '../Anime/AnimeScreen.dart';
 
 /* TODO
@@ -40,7 +41,6 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   List<String?>? banner;
   bool _areImagesLoaded = false;
   Map<String, List<media>>? list;
-  late AnilistData userData;
   @override
   void initState() {
     super.initState();
@@ -49,18 +49,13 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
 
   Future<void> load(BuildContext context) async {
-    userData = Provider.of<AnilistData>(context, listen: false);
-    if (!userData.initialized) {
-      await userData.get();
-    }
     await _loadBanner();
-
     await _loadList();
   }
 
   Future<void> _loadBanner() async {
     setState(() => banner = null);
-    final data = await getBannerImages(userData.userid!);
+    final data = await Anilist.query.getBannerImages();
     setState(() {
       banner = data;
       _areImagesLoaded = false;
@@ -78,7 +73,7 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   Future<void> _loadList() async {
     setState(() => list = null);
-    final data = await initHomePage(userData.userid!);
+    final data = await Anilist.query.initHomePage();
     setState(() => list = data);
   }
 
@@ -99,19 +94,17 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 children: [
                   SizedBox(
                     height: backgroundHeight,
-                    child: Consumer<AnilistData>(
-                      builder: (context, data, child) {
-                        if (!data.initialized || !_areImagesLoaded) {
-                          if (!data.initialized) {
-                            return LoadingWidget(theme: theme);
-                          }
+                    child: Builder(
+                      builder: (context) {
+                        if (!Anilist.isInitialized || !_areImagesLoaded) {
+                          return LoadingWidget(theme: theme);
                         }
                         return Stack(
                           fit: StackFit.expand,
                           children: [
-                            _buildBackgroundImage(data.bg ?? ''),
-                            _buildAvatar(data),
-                            _buildUserInfo(data, isDarkMode),
+                            _buildBackgroundImage(),
+                            _buildAvatar(),
+                            _buildUserInfo(isDarkMode),
                             _buildCards(),
                           ],
                         );
@@ -218,7 +211,7 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     return sectionWidgets;
   }
 
-  Widget _buildBackgroundImage(String imageUrl) {
+  Widget _buildBackgroundImage() {
     final isDarkMode = Provider.of<ThemeNotifier>(context).isDarkMode;
     final theme = Theme.of(context).colorScheme.surface;
     final gradientColors = isDarkMode
@@ -232,7 +225,7 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           KenBurns(
             maxScale: 1.5,
             child: CachedNetworkImage(
-              imageUrl: imageUrl,
+              imageUrl: Anilist.bg ?? '',
               fit: BoxFit.cover,
               width: double.infinity,
               height: 212.statusBar(),
@@ -260,10 +253,10 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     );
   }
 
-  Widget _buildAvatar(AnilistData data) {
+  Widget _buildAvatar() {
     return Positioned(
       right: 34,
-      top: 3.statusBar(),
+      top: 36.statusBar(),
       child: SlideUpAnimation(
         child: Stack(
           children: [
@@ -272,16 +265,16 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               child: CircleAvatar(
                 backgroundColor: Colors.transparent,
                 radius: 26.0,
-                backgroundImage: data.avatar != null && data.avatar!.isNotEmpty
-                    ? CachedNetworkImageProvider(data.avatar!)
+                backgroundImage: Anilist.avatar != null && Anilist.avatar!.isNotEmpty
+                    ? CachedNetworkImageProvider(Anilist.avatar!)
                     : const NetworkImage(""),
               ),
             ),
-            if (data.unreadNotificationCount > 0)
+            if (Anilist.unreadNotificationCount > 0)
               Positioned(
                 right: 0,
                 bottom: -2,
-                child: NotificationBadge(count: data.unreadNotificationCount)
+                child: NotificationBadge(count: Anilist.unreadNotificationCount)
               ),
           ],
         ),
@@ -289,7 +282,7 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     );
   }
 
-  Widget _buildUserInfo(AnilistData data, bool isDarkMode) {
+  Widget _buildUserInfo(bool isDarkMode) {
     final theme = Theme.of(context).colorScheme;
     return Positioned(
       top: 36.statusBar(),
@@ -300,7 +293,7 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              data.username ?? "",
+              Anilist.username ?? "",
               style: TextStyle(
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.bold,
@@ -310,10 +303,10 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               ),
             ),
             const SizedBox(height: 2.0),
-            _buildInfoRow('Episodes Watched', data.episodesWatched.toString(),
+            _buildInfoRow('Episodes Watched', Anilist.episodesWatched.toString(),
                 theme.primary),
             _buildInfoRow(
-                'Chapters Read', data.chapterRead.toString(), theme.primary),
+                'Chapters Read', Anilist.chapterRead.toString(), theme.primary),
           ],
         ),
       ),

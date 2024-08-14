@@ -10,6 +10,7 @@ import '../../Adaptor/Settings/SettingsAdaptor.dart';
 import '../../DataClass/Setting.dart';
 import '../../Functions/Function.dart';
 import '../../Widgets/SettingsHeader.dart';
+import '../../api/AnilistNew.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -64,9 +65,7 @@ class SettingsScreen extends StatelessWidget {
         name: 'Account',
         description: 'Anilist, MAL and Discord.\nWhat more could you need?',
         icon: Icons.person,
-        onClick: () => {
-
-        },
+        onClick: () {},
         isActivity: true,
       ),
       Setting(

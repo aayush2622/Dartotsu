@@ -1,4 +1,3 @@
-import 'package:dantotsu/Functions/Function.dart';
 import 'package:dantotsu/Screens/Anime/AnimeScreen.dart';
 import 'package:dantotsu/api/Anilist/Anilist.dart';
 import 'package:dantotsu/api/Anilist/Data/data.dart';
@@ -15,6 +14,7 @@ import 'Screens/Login/LoginScreen.dart';
 import 'Screens/Manga/MangaScreen.dart';
 import 'Theme/ThemeManager.dart';
 import 'Theme/ThemeProvider.dart';
+import 'api/AnilistNew.dart';
 import 'screens/Home/HomeScreen.dart';
 
 void main() async {
@@ -22,12 +22,12 @@ void main() async {
   await PrefManager.init();
   await protocolHandler.register('dantotsu');
   registerAllTypes();
+
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => ThemeNotifier()),
         ChangeNotifierProvider(create: (_) => AnilistToken()),
-        ChangeNotifierProvider(create: (_) => AnilistData()),
       ],
       child: const MyApp(),
     ),
@@ -43,6 +43,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeManager = Provider.of<ThemeNotifier>(context);
     final isDarkMode = themeManager.isDarkMode;
+    Anilist.query.getUserData();
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
           statusBarColor: Colors.transparent,
@@ -94,8 +95,8 @@ class MainActivityState extends State<MainActivity> with ProtocolListener {
 
   @override
   Widget build(BuildContext context) {
-    final token = Provider.of<AnilistToken>(context).token;
-    final data = Provider.of<AnilistData>(context);
+    var token = Provider.of<AnilistToken>(context).token;
+
     return Scaffold(
       body: Stack(
         children: [
@@ -103,11 +104,7 @@ class MainActivityState extends State<MainActivity> with ProtocolListener {
             index: _selectedIndex,
             children: [
               const AnimeScreen(),
-              token.isEmpty
-                  ? const LoginScreen()
-                  : data.initialized
-                      ? const HomeScreen()
-                      : const Center(child: CircularProgressIndicator()),
+              token.isEmpty ? const LoginScreen() : const HomeScreen(),
               const MangaScreen(),
             ],
           ),
@@ -122,6 +119,9 @@ class MainActivityState extends State<MainActivity> with ProtocolListener {
 
   @override
   void onProtocolUrlReceived(String url) {
-    snackString(url);
+    final token = RegExp(r'(?<=access_token=).+(?=&token_type)')
+        .firstMatch(url.toString())
+        ?.group(0);
+    debugPrint(token);
   }
 }

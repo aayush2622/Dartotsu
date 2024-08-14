@@ -15,6 +15,7 @@ import '../../Widgets/Media/MediaSection.dart';
 import '../../Widgets/ScrollConfig.dart';
 import '../../api/Anilist/Anilist.dart';
 import '../../api/Anilist/AnilistQueries.dart';
+import '../../api/AnilistNew.dart';
 import '../Anime/AnimeScreen.dart';
 
 class MangaScreen extends StatefulWidget {
@@ -46,12 +47,12 @@ class MangaScreenState extends State<MangaScreen> {
 
     final country = type == 'MANHWA' ? 'KR' : 'JP';
     final format = type == 'NOVEL' ? 'NOVEL' : null;
-    final trending = (await search(
+    final trending = (await Anilist.query.search(
       type: 'MANGA',
       countryOfOrigin: country,
       format: format,
       perPage: 50,
-      sort: sortBy[2],
+      sort: AnilistController.sortBy[2],
       hd: true,
     ))?.results;
 
@@ -60,7 +61,7 @@ class MangaScreenState extends State<MangaScreen> {
 
   Future<void> _loadList() async {
     setState(() => list = null);
-    final data = await loadMangaList();
+    final data = await Anilist.query.loadMangaList();
     setState(() => list = data);
   }
 
@@ -138,9 +139,9 @@ class MangaScreenContent extends StatelessWidget {
       children: [
         SizedBox(
           height: 486.statusBar(),
-          child: Consumer<AnilistData>(
-            builder: (context, data, child) {
-              if (!data.initialized) {
+          child: Builder(
+            builder: (context) {
+              if (!Anilist.isInitialized) {
                 return LoadingWidget(theme: theme);
               }
               return Stack(
@@ -152,7 +153,6 @@ class MangaScreenContent extends StatelessWidget {
                         : const Center(child: CircularProgressIndicator()),
                   ),
                   MediaSearchBar(
-                    data: data,
                     theme: theme,
                     title: "MANGA",
                   ),

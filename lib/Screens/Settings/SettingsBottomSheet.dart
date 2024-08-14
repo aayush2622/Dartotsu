@@ -3,11 +3,10 @@ import 'package:dantotsu/Functions/Function.dart';
 import 'package:dantotsu/Prefrerences/Prefrences.dart';
 import 'package:dantotsu/Screens/Settings/SettingsScreen.dart';
 import 'package:dantotsu/Widgets/AlertDialogBuilder.dart';
-import 'package:dantotsu/api/Anilist/Anilist.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import '../../Prefrerences/PrefManager.dart';
+import '../../api/AnilistNew.dart';
 
 class BottomSheetContent extends StatefulWidget {
   const BottomSheetContent({super.key});
@@ -29,7 +28,7 @@ class BottomSheetContentState extends State<BottomSheetContent> {
 
   @override
   Widget build(BuildContext context) {
-    final userData = Provider.of<AnilistData>(context);
+    final userData = Anilist;
 
     return SingleChildScrollView(
       child: Container(
