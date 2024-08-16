@@ -2,10 +2,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dantotsu/Functions/Extensions.dart';
 import 'package:dantotsu/Screens/Login/LoginScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
 import '../../Animation/SlideUpAnimation.dart';
+import '../../Functions/Function.dart';
 import '../../Screens/Settings/SettingsBottomSheet.dart';
-import '../../api/AnilistNew.dart';
+import '../../api/Anilist/Anilist.dart';
 import 'AvtarWidget.dart';
 import 'NotificationBadge.dart';
 
@@ -27,14 +29,8 @@ class MediaSearchBar extends StatelessWidget {
         children: [
           Expanded(
             child: GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const LoginScreen(),
-                  ),
-                );
-              },
+              onTap: () => navigateToPage(context, const LoginScreen())
+              ,
               child: AbsorbPointer(
                 child: TextField(
                   decoration: InputDecoration(
@@ -65,33 +61,32 @@ class MediaSearchBar extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 8),
-          Anilist.avatar == null || Anilist.avatar!.isEmpty
+          Obx(() => Anilist.avatar.value == null || Anilist.avatar.value!.isEmpty
               ? GestureDetector(
-                  child: AvatarWidget(theme: theme, icon: Icons.settings),
-                  onTap: () => settingsBottomSheet(context),
-                )
+            child: AvatarWidget(theme: theme, icon: Icons.settings),
+            onTap: () => settingsBottomSheet(context),
+          )
               : SlideUpAnimation(
-                  child: Stack(
-                    children: [
-                      GestureDetector(
-                        onTap: () => settingsBottomSheet(context),
-                        child: CircleAvatar(
-                          backgroundColor: Colors.transparent,
-                          radius: 26.0,
-                          backgroundImage:
-                              CachedNetworkImageProvider(Anilist.avatar!),
-                        ),
-                      ),
-                      if (Anilist.unreadNotificationCount > 0)
-                        Positioned(
-                          right: 0,
-                          bottom: -2,
-                          child: NotificationBadge(
-                              count: Anilist.unreadNotificationCount),
-                        ),
-                    ],
+            child: Stack(
+              children: [
+                GestureDetector(
+                  onTap: () => settingsBottomSheet(context),
+                  child: CircleAvatar(
+                    backgroundColor: Colors.transparent,
+                    radius: 26.0,
+                    backgroundImage: CachedNetworkImageProvider(Anilist.avatar.value!),
                   ),
                 ),
+                if (Anilist.unreadNotificationCount > 0)
+                  Positioned(
+                    right: 0,
+                    bottom: -2,
+                    child: NotificationBadge(count: Anilist.unreadNotificationCount),
+                  ),
+              ],
+            ),
+          ),
+          ),
         ],
       ),
     );

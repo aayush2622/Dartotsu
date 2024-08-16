@@ -1,19 +1,18 @@
 import 'package:blur/blur.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dantotsu/Animation/SlideUpAnimation.dart';
-import 'package:dantotsu/DataClass/Media.dart';
-import 'package:dantotsu/Functions/Function.dart';
 import 'package:dantotsu/Functions/Extensions.dart';
+import 'package:dantotsu/Functions/Function.dart';
 import 'package:dantotsu/Screens/Login/LoginScreen.dart';
 import 'package:dantotsu/Screens/Settings/SettingsBottomSheet.dart';
 import 'package:dantotsu/Theme/ThemeProvider.dart';
 import 'package:dantotsu/Widgets/CustomElevatedButton.dart';
-import 'package:dantotsu/api/Anilist/Anilist.dart';
-import 'package:dantotsu/api/Anilist/AnilistQueries.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:kenburns_nullsafety/kenburns_nullsafety.dart';
 import 'package:provider/provider.dart';
 
+import '../../api/Anilist/AnilistViewModel.dart';
 import '../../Animation/SlideInAnimation.dart';
 import '../../DataClass/MediaSection.dart';
 import '../../Prefrerences/PrefManager.dart';
@@ -23,11 +22,10 @@ import '../../Widgets/Home/NotificationBadge.dart';
 import '../../Widgets/Media/MediaCard.dart';
 import '../../Widgets/Media/MediaSection.dart';
 import '../../Widgets/ScrollConfig.dart';
-import '../../api/AnilistNew.dart';
+import '../../api/Anilist/Anilist.dart';
 import '../Anime/AnimeScreen.dart';
 
 /* TODO
-get status bar height and give to: var topInset
 list button, more button
 */
 class HomeScreen extends StatefulWidget {
@@ -38,43 +36,30 @@ class HomeScreen extends StatefulWidget {
 }
 
 class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
-  List<String?>? banner;
-  bool _areImagesLoaded = false;
-  Map<String, List<media>>? list;
+  final _viewModel = AnilistHomeViewModel;
+
   @override
   void initState() {
     super.initState();
-    load(context);
+    load();
   }
 
+  var running = true;
 
-  Future<void> load(BuildContext context) async {
-    await _loadBanner();
-    await _loadList();
-  }
-
-  Future<void> _loadBanner() async {
-    setState(() => banner = null);
-    final data = await Anilist.query.getBannerImages();
-    setState(() {
-      banner = data;
-      _areImagesLoaded = false;
+  Future<void> load() async {
+    final live = Refresh.getOrPut(1, false);
+    ever(live, (shouldRefresh) async {
+      if (running && shouldRefresh) {
+        setState(() => running = false);
+        await getUserId(() => setState(() => running = true));
+        await Future.wait([
+          _viewModel.setListImages(),
+          _viewModel.initHomePage(),
+        ]);
+        live.value = false;
+      }
     });
-
-    if (banner != null) {
-      final futures = banner!.map((url) => imageLoaded(url)).toList();
-      final results = await Future.wait(futures);
-
-      setState(() {
-        _areImagesLoaded = results.every((result) => result == true);
-      });
-    }
-  }
-
-  Future<void> _loadList() async {
-    setState(() => list = null);
-    final data = await Anilist.query.initHomePage();
-    setState(() => list = data);
+    Refresh.activity[1]?.value = true;
   }
 
   @override
@@ -85,7 +70,9 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
     return Scaffold(
       body: RefreshIndicator(
-        onRefresh: () => load(context),
+        onRefresh: () async {
+          Refresh.activity[1]?.value = true;
+        },
         child: CustomScrollConfig(
           context,
           children: [
@@ -96,7 +83,7 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     height: backgroundHeight,
                     child: Builder(
                       builder: (context) {
-                        if (!Anilist.isInitialized || !_areImagesLoaded) {
+                        if (!running) {
                           return LoadingWidget(theme: theme);
                         }
                         return Stack(
@@ -119,10 +106,9 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 [
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: buildMediaSections(context),
-                    ),
+                    child: Obx(() {
+                      return Column(children: buildMediaSections(context));
+                    }),
                   ),
                 ],
               ),
@@ -133,54 +119,53 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     );
   }
 
-
-  List<Widget> buildMediaSections(BuildContext  context) {
+  List<Widget> buildMediaSections(BuildContext context) {
     final mediaSections = [
       MediaSectionData(
         title: 'Continue Watching',
-        list: list?['currentAnime'],
+        list: _viewModel.animeContinue.value,
         icon: Icons.movie_filter_rounded,
         message: 'All caught up, when New?',
         buttonText: 'Browse\nAnime',
       ),
       MediaSectionData(
         title: 'Favorite Anime',
-        list: list?['favoriteAnime'],
+        list: _viewModel.animeFav.value,
         icon: Icons.heart_broken,
         message:
             'Looks like you don\'t like anything,\nTry liking a show to keep it here.',
       ),
       MediaSectionData(
         title: 'Planned Anime',
-        list: list?['currentAnimePlanned'],
+        list: _viewModel.animePlanned.value,
         icon: Icons.movie_filter_rounded,
         message: 'All caught up, when New?',
         buttonText: 'Browse\nAnime',
       ),
       MediaSectionData(
         title: 'Continue Reading',
-        list: list?['currentManga'],
+        list: _viewModel.mangaContinue.value,
         icon: Icons.import_contacts,
         message: 'All caught up, when New?',
         buttonText: 'Browse\nManga',
       ),
       MediaSectionData(
         title: 'Favorite Manga',
-        list: list?['favoriteManga'],
+        list: _viewModel.mangaFav.value,
         icon: Icons.heart_broken,
         message:
             'Looks like you don\'t like anything,\nTry liking a show to keep it here.',
       ),
       MediaSectionData(
         title: 'Planned Manga',
-        list: list?['currentMangaPlanned'],
+        list: _viewModel.mangaPlanned.value,
         icon: Icons.import_contacts,
         message: 'All caught up, when New?',
         buttonText: 'Browse\nManga',
       ),
       MediaSectionData(
         title: 'Recommended',
-        list: list?['recommendations'],
+        list: _viewModel.recommendation.value,
         icon: Icons.auto_awesome,
         message: 'Watch/Read some Anime or Manga to get Recommendations',
       )
@@ -265,17 +250,18 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               child: CircleAvatar(
                 backgroundColor: Colors.transparent,
                 radius: 26.0,
-                backgroundImage: Anilist.avatar != null && Anilist.avatar!.isNotEmpty
-                    ? CachedNetworkImageProvider(Anilist.avatar!)
-                    : const NetworkImage(""),
+                backgroundImage:
+                    Anilist.avatar.value != null && Anilist.avatar.value!.isNotEmpty
+                        ? CachedNetworkImageProvider(Anilist.avatar.value!)
+                        : const NetworkImage(""),
               ),
             ),
             if (Anilist.unreadNotificationCount > 0)
               Positioned(
-                right: 0,
-                bottom: -2,
-                child: NotificationBadge(count: Anilist.unreadNotificationCount)
-              ),
+                  right: 0,
+                  bottom: -2,
+                  child: NotificationBadge(
+                      count: Anilist.unreadNotificationCount)),
           ],
         ),
       ),
@@ -303,8 +289,8 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               ),
             ),
             const SizedBox(height: 2.0),
-            _buildInfoRow('Episodes Watched', Anilist.episodesWatched.toString(),
-                theme.primary),
+            _buildInfoRow('Episodes Watched',
+                Anilist.episodesWatched.toString(), theme.primary),
             _buildInfoRow(
                 'Chapters Read', Anilist.chapterRead.toString(), theme.primary),
           ],
@@ -348,23 +334,25 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       left: 8.0,
       right: 8.0,
       child: SlideInAnimation(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            MediaCard(
-              context,
-              'ANIME LIST',
-              const LoginScreen(),
-              banner?[0] ?? 'https://bit.ly/31bsIHq',
-            ),
-            MediaCard(
-              context,
-              'MANGA LIST',
-              const AnimeScreen(),
-              banner?[1] ?? 'https://bit.ly/2ZGfcuG',
-            ),
-          ],
-        ),
+        child: Obx(() {
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              MediaCard(
+                context,
+                'ANIME LIST',
+                const LoginScreen(),
+                _viewModel.listImages.value[0] ?? 'https://bit.ly/31bsIHq',
+              ),
+              MediaCard(
+                context,
+                'MANGA LIST',
+                const AnimeScreen(),
+                _viewModel.listImages.value[1] ?? 'https://bit.ly/2ZGfcuG',
+              ),
+            ],
+          );
+        }),
       ),
     );
   }
@@ -398,4 +386,3 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     ];
   }
 }
-

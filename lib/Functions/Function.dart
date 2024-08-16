@@ -2,9 +2,25 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../Main.dart';
+
+class RefreshController extends GetxController {
+  var activity = <int, RxBool>{};
+
+  void all() {
+    activity.forEach((key, value) {
+      activity[key]?.value = true;
+    });
+  }
+
+  RxBool getOrPut(int key, bool initialValue) {
+    return activity.putIfAbsent(key, () => RxBool(initialValue));
+  }
+}
+final RefreshController Refresh = Get.put(RefreshController(), permanent: true);
 
 Future<void> snackString(
     String? s, {
@@ -87,20 +103,4 @@ void navigateToPage(BuildContext context, Widget page) {
     context,
     MaterialPageRoute(builder: (context) => page),
   );
-}
-
-Future<bool> imageLoaded(String? imageUrl) async {
-  // to render images then remove progress bar
-
-  if (imageUrl == null) return false;
-  final Completer<bool> completer = Completer();
-  final Image image = Image.network(imageUrl);
-  final ImageStreamListener listener =
-      ImageStreamListener((ImageInfo info, bool syncCall) {
-    completer.complete(true);
-  }, onError: (dynamic exception, StackTrace? stackTrace) {
-    completer.complete(false);
-  });
-  image.image.resolve(const ImageConfiguration()).addListener(listener);
-  return completer.future;
 }

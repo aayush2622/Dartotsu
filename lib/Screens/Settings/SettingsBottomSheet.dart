@@ -4,9 +4,10 @@ import 'package:dantotsu/Prefrerences/Prefrences.dart';
 import 'package:dantotsu/Screens/Settings/SettingsScreen.dart';
 import 'package:dantotsu/Widgets/AlertDialogBuilder.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
 import '../../Prefrerences/PrefManager.dart';
-import '../../api/AnilistNew.dart';
+import '../../api/Anilist/Anilist.dart';
 
 class BottomSheetContent extends StatefulWidget {
   const BottomSheetContent({super.key});
@@ -22,8 +23,8 @@ class BottomSheetContentState extends State<BottomSheetContent> {
   @override
   void initState() {
     super.initState();
-    incognito = PrefManager.getVal(PrefName.incognito) ;
-    offline = PrefManager.getVal(PrefName.offlineMode) ;
+    incognito = PrefManager.getVal(PrefName.incognito);
+    offline = PrefManager.getVal(PrefName.offlineMode);
   }
 
   @override
@@ -47,50 +48,73 @@ class BottomSheetContentState extends State<BottomSheetContent> {
                   CircleAvatar(
                     radius: 26.0,
                     backgroundImage:
-                        userData.avatar != null && userData.avatar!.isNotEmpty
-                            ? CachedNetworkImageProvider(userData.avatar!)
+                        userData.avatar.value != null && userData.avatar.value!.isNotEmpty
+                            ? CachedNetworkImageProvider(userData.avatar.value!)
                             : null,
                     backgroundColor: Colors.transparent,
-                    child: userData.avatar == null || userData.avatar!.isEmpty
+                    child: userData.avatar.value == null || userData.avatar.value!.isEmpty
                         ? Icon(Icons.person,
                             color: Theme.of(context).primaryColor)
                         : null,
                   ),
                   const SizedBox(width: 16),
                   Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          userData.username ?? '',
-                          style: const TextStyle(
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w600,
-                            fontSize: 14,
-                          ),
-                        ),
-                        const SizedBox(height: 4),
-                        GestureDetector(
-                          onTap: () {
-                            context.customAlertDialog()
-                              ..setTitle('Logout')
-                              ..setMessage('Are you sure you want to logout?')
-                              ..setPosButton('Yes', () => snackString("test"))
-                              ..setNegButton('No', null)
-                              ..show();
-                          },
-                          child: Text(
-                            'Logout',
-                            style: TextStyle(
-                              fontFamily: 'Poppins',
-                              color: Theme.of(context).colorScheme.secondary,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 14,
+                    child: Obx(() {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          if (Anilist.token.value.isNotEmpty) ...[
+                            Text(
+                              Anilist.username ?? "",
+                              style: const TextStyle(
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w600,
+                                fontSize: 14,
+                              ),
                             ),
-                          ),
-                        )
-                      ],
-                    ),
+                            const SizedBox(height: 4),
+                            GestureDetector(
+                              onTap: () {
+                                context.customAlertDialog()
+                                  ..setTitle('Logout')
+                                  ..setMessage('Are you sure you want to logout?')
+                                  ..setPosButton('Yes', () {
+                                    Anilist.removeSavedToken();
+                                    Navigator.of(context).pop();
+                                  })
+                                  ..setNegButton('No', null)
+                                  ..show();
+                              },
+                              child: Text(
+                                'Logout',
+                                style: TextStyle(
+                                  fontFamily: 'Poppins',
+                                  color: Theme.of(context).colorScheme.secondary,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ),
+                          ] else ...[
+                            GestureDetector(
+                              onTap: () {
+                                openLinkInBrowser('https://anilist.co/api/v2/oauth/authorize?client_id=14959&response_type=token');
+                                Navigator.of(context).pop();
+                              },
+                              child: Text(
+                                'Login',
+                                style: TextStyle(
+                                  fontFamily: 'Poppins',
+                                  color: Theme.of(context).colorScheme.secondary,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ],
+                      );
+                    }),
                   ),
                   GestureDetector(
                     onTap: () {},

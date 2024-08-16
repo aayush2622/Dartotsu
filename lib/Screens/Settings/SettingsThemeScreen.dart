@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 
 import '../../Adaptor/Settings/SettingsAdaptor.dart';
 import '../../DataClass/Setting.dart';
-import '../../Functions/Function.dart';
 import '../../Prefrerences/PrefManager.dart';
 import '../../Prefrerences/Prefrences.dart';
 import '../../Theme/CustomColorPicker.dart';

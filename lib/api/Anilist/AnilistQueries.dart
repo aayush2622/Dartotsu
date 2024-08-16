@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:dantotsu/Functions/Function.dart';
 import 'package:dantotsu/Prefrerences/Prefrences.dart';
+import 'package:dantotsu/api/Anilist/Anilist.dart' show Anilist;
 
 import '../../DataClass/Author.dart';
 import '../../DataClass/Character.dart';
@@ -10,13 +11,15 @@ import '../../DataClass/Media.dart';
 import '../../DataClass/SearchResults.dart';
 import '../../DataClass/User.dart';
 import '../../Prefrerences/PrefManager.dart';
-import '../AnilistNew.dart';
+
 import 'Data/data.dart';
 import 'Data/media.dart';
 import 'Data/page.dart';
 import 'Data/staff.dart';
 
 class AnilistQueries{
+  final Future<T?> Function<T>(String query, {String variables, bool force, bool useToken, bool show}) executeQuery;
+  AnilistQueries(this.executeQuery);
 
   Future<bool> getUserData() async {
       var response = await executeQuery<ViewerResponse>(
@@ -28,7 +31,7 @@ class AnilistQueries{
       Anilist.userid = user.id;
       Anilist.username = user.name;
       Anilist.bg = user.bannerImage;
-      Anilist.avatar = user.avatar?.medium;
+      Anilist.avatar.value = user.avatar?.medium;
       Anilist.episodesWatched = user.statistics?.anime?.episodesWatched;
       Anilist.chapterRead = user.statistics?.manga?.chaptersRead;
       Anilist.adult = user.options?.displayAdultContent ?? false;
@@ -243,7 +246,7 @@ class AnilistQueries{
         if (edges == null) return null;
         try {
           return edges
-              .firstWhere((edge) => AnilistController.authorRoles.contains(edge.role?.trim()));
+              .firstWhere((edge) => Anilist.authorRoles.contains(edge.role?.trim()));
         } catch (e) {
           return null;
         }

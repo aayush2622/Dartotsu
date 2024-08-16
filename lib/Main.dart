@@ -1,10 +1,11 @@
+import 'package:dantotsu/api/Anilist/AnilistViewModel.dart';
 import 'package:dantotsu/Screens/Anime/AnimeScreen.dart';
-import 'package:dantotsu/api/Anilist/Anilist.dart';
 import 'package:dantotsu/api/Anilist/Data/data.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:protocol_handler/protocol_handler.dart';
 import 'package:provider/provider.dart';
 
@@ -14,7 +15,7 @@ import 'Screens/Login/LoginScreen.dart';
 import 'Screens/Manga/MangaScreen.dart';
 import 'Theme/ThemeManager.dart';
 import 'Theme/ThemeProvider.dart';
-import 'api/AnilistNew.dart';
+import 'api/Anilist/Anilist.dart';
 import 'screens/Home/HomeScreen.dart';
 
 void main() async {
@@ -22,12 +23,11 @@ void main() async {
   await PrefManager.init();
   await protocolHandler.register('dantotsu');
   registerAllTypes();
-
+  AnilistHomeViewModel.loadMain();
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => ThemeNotifier()),
-        ChangeNotifierProvider(create: (_) => AnilistToken()),
       ],
       child: const MyApp(),
     ),
@@ -43,7 +43,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeManager = Provider.of<ThemeNotifier>(context);
     final isDarkMode = themeManager.isDarkMode;
-    Anilist.query.getUserData();
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
           statusBarColor: Colors.transparent,
@@ -95,19 +94,21 @@ class MainActivityState extends State<MainActivity> with ProtocolListener {
 
   @override
   Widget build(BuildContext context) {
-    var token = Provider.of<AnilistToken>(context).token;
-
     return Scaffold(
       body: Stack(
         children: [
-          IndexedStack(
-            index: _selectedIndex,
-            children: [
-              const AnimeScreen(),
-              token.isEmpty ? const LoginScreen() : const HomeScreen(),
-              const MangaScreen(),
-            ],
-          ),
+          Obx(() {
+            return IndexedStack(
+              index: _selectedIndex,
+              children: [
+                const AnimeScreen(),
+                Anilist.token.value.isNotEmpty
+                    ? const HomeScreen()
+                    : const LoginScreen(),
+                const MangaScreen(),
+              ],
+            );
+          }),
           FloatingBottomNavBar(
             selectedIndex: _selectedIndex,
             onTabSelected: _onTabSelected,
@@ -118,10 +119,10 @@ class MainActivityState extends State<MainActivity> with ProtocolListener {
   }
 
   @override
-  void onProtocolUrlReceived(String url) {
+  void onProtocolUrlReceived(String url){
     final token = RegExp(r'(?<=access_token=).+(?=&token_type)')
         .firstMatch(url.toString())
         ?.group(0);
-    debugPrint(token);
+    if (token != null) Anilist.saveToken(token);
   }
 }
