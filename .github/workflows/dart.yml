@@ -2,8 +2,9 @@ name: Dart Build and Release
 
 on:
   push:
-    tags:
-      - 'v*'   # Triggers on version tags like v1.0, v1.0.0, etc.
+    branches:
+      - main
+  
   workflow_dispatch:
 
 jobs:
@@ -21,7 +22,7 @@ jobs:
     - name: Set up Flutter
       uses: subosito/flutter-action@v2
       with:
-        flutter-version: '3.13.0'
+        flutter-version: '3.5.0'
 
     - name: Install dependencies
       run: flutter pub get
