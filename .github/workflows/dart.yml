@@ -1,0 +1,153 @@
+name: Dart Build and Release
+
+on:
+  push:
+    tags:
+      - 'v*'   # Triggers on version tags like v1.0, v1.0.0, etc.
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        platform: [android, ios, web, linux, windows, macos]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: 'stable'
+
+    - name: Install dependencies
+      run: flutter pub get
+
+    - name: Build for Android
+      if: matrix.platform == 'android'
+      run: flutter build apk --release
+      continue-on-error: true
+
+    - name: Build for iOS
+      if: matrix.platform == 'ios'
+      run: flutter build ios --release --no-codesign
+      continue-on-error: true
+
+    - name: Build for Web
+      if: matrix.platform == 'web'
+      run: flutter build web --release
+      continue-on-error: true
+
+    - name: Build for Linux
+      if: matrix.platform == 'linux'
+      run: flutter build linux --release
+      continue-on-error: true
+
+    - name: Build for Windows
+      if: matrix.platform == 'windows'
+      run: flutter build windows --release
+      continue-on-error: true
+
+    - name: Build for macOS
+      if: matrix.platform == 'macos'
+      run: flutter build macos --release
+      continue-on-error: true
+
+    - name: Archive build artifacts
+      if: matrix.platform == 'android'
+      run: mv build/app/outputs/flutter-apk/app-release.apk ${{ github.workspace }}/android-app-release.apk
+
+    - if: matrix.platform == 'ios'
+      run: mv build/ios/ipa/*.ipa ${{ github.workspace }}/ios-app-release.ipa
+
+    - if: matrix.platform == 'web'
+      run: zip -r web-release.zip build/web && mv web-release.zip ${{ github.workspace }}/web-release.zip
+
+    - if: matrix.platform == 'linux'
+      run: mv build/linux/runner/release/bundle/* ${{ github.workspace }}/linux-app-release.tar.gz
+
+    - if: matrix.platform == 'windows'
+      run: zip -r windows-release.zip build/windows/runner/release && mv windows-release.zip ${{ github.workspace }}/windows-app-release.zip
+
+    - if: matrix.platform == 'macos'
+      run: mv build/macos/Build/Products/Release/*.app ${{ github.workspace }}/macos-app-release.zip
+
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        draft: false
+        prerelease: false
+
+    - name: Upload Android APK
+      if: matrix.platform == 'android'
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ${{ github.workspace }}/android-app-release.apk
+        asset_name: android-app-release.apk
+        asset_content_type: application/vnd.android.package-archive
+
+    - name: Upload iOS IPA
+      if: matrix.platform == 'ios'
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ${{ github.workspace }}/ios-app-release.ipa
+        asset_name: ios-app-release.ipa
+        asset_content_type: application/octet-stream
+
+    - name: Upload Web Release
+      if: matrix.platform == 'web'
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ${{ github.workspace }}/web-release.zip
+        asset_name: web-release.zip
+        asset_content_type: application/zip
+
+    - name: Upload Linux Release
+      if: matrix.platform == 'linux'
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ${{ github.workspace }}/linux-app-release.tar.gz
+        asset_name: linux-app-release.tar.gz
+        asset_content_type: application/gzip
+
+    - name: Upload Windows Release
+      if: matrix.platform == 'windows'
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ${{ github.workspace }}/windows-app-release.zip
+        asset_name: windows-app-release.zip
+        asset_content_type: application/zip
+
+    - name: Upload macOS Release
+      if: matrix.platform == 'macos'
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ${{ github.workspace }}/macos-app-release.zip
+        asset_name: macos-app-release.zip
+        asset_content_type: application/zip
