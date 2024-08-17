@@ -101,6 +101,6 @@ Future<void> openLinkInBrowser(String url) async {
 void navigateToPage(BuildContext context, Widget page) {
   Navigator.push(
     context,
-    MaterialPageRoute(builder: (context) => page),
+    MaterialPageRoute(builder: (context) =>  page),
   );
 }

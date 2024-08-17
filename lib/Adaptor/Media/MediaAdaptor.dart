@@ -8,6 +8,7 @@ import '../../DataClass/Media.dart';
 import '../../Functions/Function.dart';
 import '../../Screens/Settings/SettingsBottomSheet.dart';
 import '../../Widgets/ScrollConfig.dart';
+import '../../Screens/Info/MediaInfoPage.dart';
 import 'MediaPageSmallViewHolder.dart';
 import 'MediaViewHolder.dart';
 
@@ -76,7 +77,7 @@ class MediaGridState extends State<MediaAdaptor> {
                 finalOffset: Offset.zero,
                 duration: const Duration(milliseconds: 200),
                 child: GestureDetector(
-                  onTap: () => snackString(_mediaList[index].name),
+                  onTap: () => navigateToPage(context,MediaInfoPage(mediaTitle:_mediaList[index].name.toString())),
                   onLongPress: () => settingsBottomSheet(context),
                   child: Container(
                     width: 102,
@@ -149,7 +150,8 @@ class LargeViewState extends State<LargeView> {
             itemCount: widget.mediaList.length,
             itemBuilder: (context, index) {
               return GestureDetector(
-                onTap: () => snackString(widget.mediaList[index].name),
+                // onTap: () => snackString(widget.mediaList[index].name),
+                onTap: () => navigateToPage(context,MediaInfoPage(mediaTitle: widget.mediaList[index].name.toString(),)) ,
                 onLongPress: () => settingsBottomSheet(context),
                 child: MediaPageSmallViewHolder(widget.mediaList[index]),
               );
