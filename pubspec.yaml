@@ -50,6 +50,7 @@ dependencies:
   protocol_handler: ^0.2.0
   get: ^4.6.6
   icons_plus: ^5.0.0 # https://pub.dev/packages/icons_plus
+  google_fonts: ^6.2.1
 dev_dependencies:
   flutter_test:
     sdk: flutter
