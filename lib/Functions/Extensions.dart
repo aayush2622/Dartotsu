@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-import '../Main.dart';
+import '../main.dart';
 
 extension IntExtension on int {
   double statusBar() {

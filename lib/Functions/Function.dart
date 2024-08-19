@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../Main.dart';
+import '../main.dart';
 
 class RefreshController extends GetxController {
   var activity = <int, RxBool>{};
