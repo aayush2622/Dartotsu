@@ -1,23 +1,18 @@
 import 'dart:convert';
-import 'dart:core';
-
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-
-import '../../../Prefrerences/PrefManager.dart';
-import '../../../Prefrerences/Prefrences.dart';
 import '../../Functions/Function.dart';
+import '../../Preferences/PrefManager.dart';
+import '../../Preferences/Prefrences.dart';
 import 'AnilistMutations.dart';
 import 'AnilistQueries.dart';
 
-class AnilistController extends GetxController {
-  late final AnilistQueries query;
-  final AnilistMutations mutation = AnilistMutations();
+var Anilist = Get.put(_AnilistController());
 
-  AnilistController() {
-    query = AnilistQueries(executeQuery);
-  }
+class _AnilistController extends GetxController {
+  late final AnilistQueries query;
+  late final AnilistMutations mutation;
 
   var token = "".obs;
   String? username;
@@ -30,7 +25,7 @@ class AnilistController extends GetxController {
   List<String>? genres;
   Map<bool, List<String>>? tags;
   int rateLimitReset = 0;
-  bool isInitialized = false;
+  var isInitialized = false.obs;
   bool adult = false;
   String? titleLanguage;
   String? staffNameLanguage;
@@ -43,79 +38,53 @@ class AnilistController extends GetxController {
   List<String>? animeCustomLists;
   List<String>? mangaCustomLists;
 
-  List<String> sortBy = [
-    "SCORE_DESC",
-    "POPULARITY_DESC",
-    "TRENDING_DESC",
-    "START_DATE_DESC",
-    "TITLE_ENGLISH",
-    "TITLE_ENGLISH_DESC",
-    "SCORE"
+  final List<String> sortBy = [
+    "SCORE_DESC", "POPULARITY_DESC", "TRENDING_DESC", "START_DATE_DESC",
+    "TITLE_ENGLISH", "TITLE_ENGLISH_DESC", "SCORE"
   ];
 
-  List<String> authorRoles = [
-    "Original Creator",
-    "Story & Art",
-    "Story",
-  ];
-
-  List<String> seasons = [
-    "WINTER",
-    "SPRING",
-    "SUMMER",
-    "FALL"
-  ];
-
-
-  int currentYear = DateTime.now().year;
-
+  final List<String> authorRoles = ["Original Creator", "Story & Art", "Story"];
+  final List<String> seasons = ["WINTER", "SPRING", "SUMMER", "FALL"];
+  final int currentYear = DateTime.now().year;
   final int currentMonth = DateTime.now().month;
+
+  _AnilistController() {
+    query = AnilistQueries(_executeQuery);
+    mutation = AnilistMutations(_executeQuery);
+  }
+
   int get currentSeason {
-    if (currentMonth >= 0 && currentMonth <= 2) {
-      return 0;
-    } else if (currentMonth >= 3 && currentMonth <= 5) {
-      return 1;
-    } else if (currentMonth >= 6 && currentMonth <= 8) {
-      return 2;
-    } else if (currentMonth >= 9 && currentMonth <= 11) {
-      return 3;
-    } else {
-      return 0;
-    }
+    if (currentMonth <= 2) return 0;
+    if (currentMonth <= 5) return 1;
+    if (currentMonth <= 8) return 2;
+    return 3;
   }
+
   Map<String, int> getSeason(bool next) {
-    int newSeason = next ? currentSeason + 1 : currentSeason - 1;
-    int newYear = currentYear;
-
-    if (newSeason > 3) {
-      newSeason = 0;
-      newYear++;
-    } else if (newSeason < 0) {
-      newSeason = 3;
-      newYear--;
-    }
-    return {seasons[newSeason]: newYear};
+    int season = currentSeason + (next ? 1 : -1);
+    int year = currentYear;
+    if (season > 3) { season = 0; year++; }
+    if (season < 0) { season = 3; year--; }
+    return {seasons[season]: year};
   }
 
-  List<Map<String, int>> get currentSeasons {
-    return [
-      getSeason(false),
-      {seasons[currentSeason]: currentYear},
-      getSeason(true),
-    ];
-  }
+  List<Map<String, int>> get currentSeasons => [
+    getSeason(false),
+    {seasons[currentSeason]: currentYear},
+    getSeason(true),
+  ];
 
-  bool getSavedToken(){
+  bool getSavedToken() {
     token.value = PrefManager.getVal(PrefName.anilistToken);
     return token.isNotEmpty;
   }
 
-  void saveToken(String token) async {
+  Future<void> saveToken(String token) async {
     PrefManager.setVal(PrefName.anilistToken, token);
     this.token.value = token;
   }
 
-  void removeSavedToken(){
+  void removeSavedToken() {
     token.value = '';
     username = null;
     adult = false;
@@ -126,10 +95,10 @@ class AnilistController extends GetxController {
     chapterRead = null;
     unreadNotificationCount = 0;
     PrefManager.removeVal(PrefName.anilistToken);
-    Anilist.isInitialized = false;
+    isInitialized.value = false;
   }
 
-  Future<T?> executeQuery<T>(
+  Future<T?> _executeQuery<T>(
       String query, {
         String variables = "",
         bool force = false,
@@ -137,56 +106,43 @@ class AnilistController extends GetxController {
         bool show = true,
       }) async {
     try {
-      int rateLimitReset = 0;
       if (rateLimitReset > DateTime.now().millisecondsSinceEpoch ~/ 1000) {
-        snackString(
-            "Rate limited after ${rateLimitReset - DateTime.now().millisecondsSinceEpoch ~/ 1000} seconds");
-        throw Exception(
-            "Rate limited after ${rateLimitReset - DateTime.now().millisecondsSinceEpoch ~/ 1000} seconds");
+        final secondsLeft = rateLimitReset - DateTime.now().millisecondsSinceEpoch ~/ 1000;
+        snackString("Rate limited, wait ${secondsLeft}s");
+        throw Exception("Rate limited, wait ${secondsLeft}s");
       }
 
-      final data = jsonEncode({"query": query, "variables": variables});
-      final headers = <String, String>{
+      final headers = {
         'Content-Type': 'application/json; charset=UTF-8',
         'Accept': 'application/json',
+        if (token.isNotEmpty && useToken) 'Authorization': 'Bearer ${token.value}',
       };
 
-      if (token.value != '' || force) {
-        if (token.value != '' && useToken) headers['Authorization'] = 'Bearer ${token.value}';
+      final response = await http.post(
+        Uri.parse("https://graphql.anilist.co/"),
+        headers: headers,
+        body: jsonEncode({"query": query, "variables": variables}),
+      );
 
-        final response = await http.post(
-          Uri.parse("https://graphql.anilist.co/"),
-          headers: headers,
-          body: data,
-        );
-        final Map<String, dynamic> jsonResponse =
-        json.decode("{\"response\":${response.body}}");
-        var remaining =
-        int.parse(response.headers['x-ratelimit-remaining'] ?? '-1');
-        debugPrint("Remaining requests: $remaining");
-        int.parse(response.headers['x-ratelimit-limit'] ?? '-1');
-        if (response.statusCode == 429) {
-          final int retry = int.parse(response.headers['Retry-After'] ?? '-1');
-          final int passedLimitReset =
-          int.parse(response.headers['x-ratelimit-limit'] ?? '0');
-          if (retry > 0) {
-            rateLimitReset = passedLimitReset;
-          }
-          snackString("Rate limited after $retry seconds");
-          throw Exception("Rate limited after $retry seconds");
-        }
-        if (!response.body.startsWith("{")) {
-          snackString(
-              "Seems like Anilist is down, maybe try using a VPN or you can wait for it to come back.");
-        }
-        if (jsonResponse.containsKey('errors')) {
-          return null;
-        }
-        return TypeFactory.get<T>(jsonResponse[
-        "response"]); // pass json type in registerAllTypes() in data.dart eg: TypeFactory.create<MediaResponse>((json) => MediaResponse.fromJson(json));
-      } else {
-        return null;
+      final remaining = int.parse(response.headers['x-ratelimit-remaining'] ?? '-1');
+      debugPrint("Remaining requests: $remaining");
+
+      if (response.statusCode == 429) {
+        final retry = int.parse(response.headers['Retry-After'] ?? '-1');
+        rateLimitReset = int.parse(response.headers['x-ratelimit-limit'] ?? '0');
+        snackString("Rate limited, retry after $retry seconds");
+        throw Exception("Rate limited, retry after $retry seconds");
       }
+
+      final jsonResponse = json.decode(response.body);
+      if (!response.body.startsWith("{")) {
+        snackString("Anilist seems down, maybe use a VPN or wait.");
+        throw Exception("Anilist API down");
+      }
+
+      if (jsonResponse.containsKey('errors')) return null;
+
+      return TypeFactory.get<T>(jsonResponse);
     } catch (e) {
       if (show) snackString("Error fetching Anilist data: ${e.toString()}");
       return null;
@@ -194,22 +150,16 @@ class AnilistController extends GetxController {
   }
 }
 
-final AnilistController Anilist = Get.put(AnilistController());
-
 typedef FromJson<T> = T Function(Map<String, dynamic> json);
 
 class TypeFactory {
   static final Map<Type, FromJson> _factories = {};
 
-  static void create<T>(FromJson<T> factory) {
-    _factories[T] = factory;
-  }
+  static void create<T>(FromJson<T> factory) => _factories[T] = factory;
 
   static T get<T>(Map<String, dynamic> json) {
     final factory = _factories[T];
-    if (factory == null) {
-      throw Exception('Factory for type $T is not registered');
-    }
+    if (factory == null) throw Exception('Factory for type $T is not registered');
     return factory(json) as T;
   }
 }

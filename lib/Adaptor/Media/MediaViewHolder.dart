@@ -11,7 +11,8 @@ class MediaViewHolder extends StatelessWidget {
   const MediaViewHolder({super.key, required this.mediaInfo});
 
   @override
-  Widget build(BuildContext context) { // holder for media
+  Widget build(BuildContext context) {
+    // holder for media
     final theme = Theme.of(context).colorScheme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -23,12 +24,12 @@ class MediaViewHolder extends StatelessWidget {
               child: CachedNetworkImage(
                 imageUrl: mediaInfo.cover ?? '',
                 fit: BoxFit.cover,
-                width: double.infinity,
-                height: 154,
+                width: 108,
+                height: 160,
                 placeholder: (context, url) => Container(
                   color: Colors.white12,
-                  width: double.infinity,
-                  height: 154,
+                  width: 108,
+                  height: 160,
                 ),
               ),
             ),

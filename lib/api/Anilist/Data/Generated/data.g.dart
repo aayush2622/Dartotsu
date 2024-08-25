@@ -182,20 +182,20 @@ AnimeListData _$AnimeListDataFromJson(Map<String, dynamic> json) =>
       trendingMovies: json['trendingMovies'] == null
           ? null
           : Page.fromJson(json['trendingMovies'] as Map<String, dynamic>),
-      topRated: json['topRated'] == null
+      topRatedSeries: json['topRatedSeries'] == null
           ? null
-          : Page.fromJson(json['topRated'] as Map<String, dynamic>),
-      mostFav: json['mostFav'] == null
+          : Page.fromJson(json['topRatedSeries'] as Map<String, dynamic>),
+      mostFavSeries: json['mostFavSeries'] == null
           ? null
-          : Page.fromJson(json['mostFav'] as Map<String, dynamic>),
+          : Page.fromJson(json['mostFavSeries'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$AnimeListDataToJson(AnimeListData instance) =>
     <String, dynamic>{
       'recentUpdates': instance.recentUpdates,
       'trendingMovies': instance.trendingMovies,
-      'topRated': instance.topRated,
-      'mostFav': instance.mostFav,
+      'topRatedSeries': instance.topRatedSeries,
+      'mostFavSeries': instance.mostFavSeries,
     };
 
 MangaListResponse _$MangaListResponseFromJson(Map<String, dynamic> json) =>

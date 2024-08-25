@@ -1,7 +1,9 @@
+
 import 'dart:ui';
 
 
 import 'package:dantotsu/Screens/Settings/SettingsThemeScreen.dart';
+import 'package:dantotsu/api/Discord/Discord.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:icons_plus/icons_plus.dart';
@@ -56,7 +58,6 @@ class SettingsScreen extends StatelessWidget {
       ),
     );
   }
-
   List<Setting> _buildSettings(BuildContext context) {
     return [
       Setting(
@@ -64,7 +65,7 @@ class SettingsScreen extends StatelessWidget {
         name: 'Account',
         description: 'Anilist, MAL and Discord.\nWhat more could you need?',
         icon: Icons.person,
-        onClick: () {},
+        onClick: () {Discord.warning(context);},
         isActivity: true,
       ),
       Setting(
@@ -82,9 +83,7 @@ class SettingsScreen extends StatelessWidget {
         name: 'Common',
         description: 'Change the vibe of your app',
         icon: Icons.lightbulb_outline,
-        onClick: () {
-
-        },
+        onClick: () {},
         isActivity: true,
       ),
       Setting(

@@ -1,12 +1,11 @@
 import 'package:dantotsu/Functions/Extensions.dart';
 import 'package:flutter/material.dart';
 
+import '../../Screens/Settings/SettingsBottomSheet.dart';
 import 'AvtarWidget.dart';
 
 class LoadingWidget extends StatelessWidget {
-  final ColorScheme theme;
-
-  const LoadingWidget({super.key, required this.theme});
+  const LoadingWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,10 +23,10 @@ class LoadingWidget extends StatelessWidget {
         Positioned(
           right: 34,
           top: 36.statusBar(),
-          child: AvatarWidget(
-            theme: theme,
-            icon: Icons.settings,
-          ),
+          child: GestureDetector(
+            child: const AvatarWidget(icon: Icons.settings),
+            onTap: () => settingsBottomSheet(context),
+          )
         ),
       ],
     );

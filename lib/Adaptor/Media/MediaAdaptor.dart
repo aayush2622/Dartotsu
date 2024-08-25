@@ -40,6 +40,7 @@ class MediaGridState extends State<MediaAdaptor> {
       });
     }
   }
+
   @override
   Widget build(BuildContext context) {
     switch (widget.type) {
@@ -69,7 +70,6 @@ class MediaGridState extends State<MediaAdaptor> {
                 left: isFirst ? 24.0 : 6.5,
                 right: isLast ? 24.0 : 6.5,
               );
-              // debugPrint(_mediaList[index].toString());
               return SlideAndScaleAnimation(
                 initialScale: 0.0,
                 finalScale: 1.0,
@@ -77,7 +77,8 @@ class MediaGridState extends State<MediaAdaptor> {
                 finalOffset: Offset.zero,
                 duration: const Duration(milliseconds: 200),
                 child: GestureDetector(
-                  onTap: () => navigateToPage(context,MediaInfoPage(mediaTitle: _mediaList[index].name.toString(),cover: _mediaList[index].cover,banner: _mediaList[index].banner,status: _mediaList[index].status,mediaList: _mediaList,)),
+                  onTap: () =>
+                      navigateToPage(context, MediaInfoPage(_mediaList[index])),
                   onLongPress: () => settingsBottomSheet(context),
                   child: Container(
                     width: 102,
@@ -139,7 +140,7 @@ class LargeViewState extends State<LargeView> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 464.statusBar(),
+      height: 464 + (0.statusBar() * 2),
       child: AnimatedSwitcher(
         duration: const Duration(milliseconds: 500),
         child: ScrollConfig(
@@ -150,8 +151,9 @@ class LargeViewState extends State<LargeView> {
             itemCount: widget.mediaList.length,
             itemBuilder: (context, index) {
               return GestureDetector(
-                // onTap: () => snackString(widget.mediaList[index].name),
-                onTap: () => navigateToPage(context,MediaInfoPage(mediaTitle: widget.mediaList[index].name.toString(),cover: widget.mediaList[index].cover,banner: widget.mediaList[index].banner,status: widget.mediaList[index].status,mediaList: widget.mediaList,)) ,
+                onTap: () =>
+                    navigateToPage(
+                        context, MediaInfoPage(widget.mediaList[index])),
                 onLongPress: () => settingsBottomSheet(context),
                 child: MediaPageSmallViewHolder(widget.mediaList[index]),
               );

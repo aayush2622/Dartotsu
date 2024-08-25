@@ -94,8 +94,6 @@ class MangaScreenState extends State<MangaScreen> {
   List<Widget> _buildMediaSections() {
     final mediaSections = [
       MediaSectionData(
-          title: 'Trending Manga', list: _viewModel.popularManga.value),
-      MediaSectionData(
           title: 'Trending Manhwa', list: _viewModel.popularManhwa.value),
       MediaSectionData(
           title: 'Trending Novels', list: _viewModel.popularNovel.value),
@@ -131,10 +129,7 @@ class MangaScreenState extends State<MangaScreen> {
                       ? MediaAdaptor(type: 1, mediaList: mediaDataList)
                       : const Center(child: CircularProgressIndicator()),
                 ),
-                MediaSearchBar(
-                  theme: theme,
-                  title: "MANGA",
-                ),
+                const MediaSearchBar(title: "MANGA",),
                 Positioned(
                   bottom: 92,
                   left: 8.0,
@@ -179,7 +174,7 @@ class MangaScreenState extends State<MangaScreen> {
                 const SizedBox(height: 16),
               ],
             )
-          : LoadingWidget(theme: theme),
+          : const LoadingWidget(),
     );
   }
 }

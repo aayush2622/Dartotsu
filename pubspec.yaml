@@ -44,13 +44,18 @@ dependencies:
   cupertino_icons: ^1.0.6
   dynamic_color: ^1.7.0
   flutter_svg: ^2.0.4
-  material_color_utilities: 0.8.0
-  flutter_colorpicker: ^1.1.0
+  flex_color_scheme: ^7.3.1
+  flex_color_picker: ^3.4.1
   msix: ^3.16.7
   protocol_handler: ^0.2.0
   get: ^4.6.6
+  webview_windows: ^0.4.0
+  webview_flutter: ^4.9.0
+  flutter_markdown: ^0.7.3+1
+  web_socket_channel: ^3.0.1
+  path_provider: ^2.1.4
+  flutter_local_notifications: ^17.2.2
   icons_plus: ^5.0.0 # https://pub.dev/packages/icons_plus
-  google_fonts: ^6.2.1
 dev_dependencies:
   flutter_test:
     sdk: flutter

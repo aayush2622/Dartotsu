@@ -6,8 +6,8 @@ import 'package:provider/provider.dart';
 
 import '../../Adaptor/Settings/SettingsAdaptor.dart';
 import '../../DataClass/Setting.dart';
-import '../../Prefrerences/PrefManager.dart';
-import '../../Prefrerences/Prefrences.dart';
+import '../../Preferences/PrefManager.dart';
+import '../../Preferences/Prefrences.dart';
 import '../../Theme/CustomColorPicker.dart';
 import '../../Theme/ThemeManager.dart';
 import '../../Theme/ThemeProvider.dart';
@@ -130,30 +130,28 @@ class SettingsThemeScreen extends StatelessWidget {
         description: 'Does not belong here',
         icon: Icons.palette,
         onClick: () async {
-          final List<String> views = [
-            'Continue Watching',
-            'Favourite Anime',
-            'Planned Anime',
-            'Continue Reading',
-            'Favourite Manga',
-            'Planned Manga',
-            'Recommended',
-          ];
-          final set = PrefManager.getVal(PrefName.homeLayout);
+          final List<String> views = PrefManager.getVal(PrefName.homeLayoutOrder);
+          final List<bool> checkedState = PrefManager.getVal(PrefName.homeLayout);
+          List<String> tempReorderedItems = List<String>.from(views);
+          List<bool> tempCheckedState = List<bool>.from(checkedState);
+
           context.customAlertDialog()
-            ..setTitle('Show/Hide Layouts on Home')
-            ..multiChoiceItems(
-              views,
-              set,
-              (selectedItems) {
-                for (int i = 0; i < selectedItems.length; i++) {
-                  set[i] = selectedItems[i];
-                }
+            ..setTitle('Manage Layouts on Home')
+            ..reorderableMultiSelectableItems(
+              tempReorderedItems,
+              tempCheckedState,
+                  (reorderedItems) {
+                tempReorderedItems = reorderedItems;
+              },
+                  (newCheckedState) {
+                tempCheckedState = newCheckedState;
               },
             )
             ..setPosButton('OK', () {
-              PrefManager.setVal(PrefName.homeLayout, set);
+              PrefManager.setVal(PrefName.homeLayoutOrder, tempReorderedItems);
+              PrefManager.setVal(PrefName.homeLayout, tempCheckedState);
             })
+            ..setNegButton("Cancel", null)
             ..show();
         },
       )

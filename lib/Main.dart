@@ -1,3 +1,4 @@
+
 import 'package:dantotsu/api/Anilist/AnilistViewModel.dart';
 import 'package:dantotsu/Screens/Anime/AnimeScreen.dart';
 import 'package:dantotsu/api/Anilist/Data/data.dart';
@@ -9,7 +10,8 @@ import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:protocol_handler/protocol_handler.dart';
 import 'package:provider/provider.dart';
 
-import 'Prefrerences/PrefManager.dart';
+
+import 'Preferences/PrefManager.dart';
 import 'Screens/HomeNavbar.dart';
 import 'Screens/Login/LoginScreen.dart';
 import 'Screens/Manga/MangaScreen.dart';

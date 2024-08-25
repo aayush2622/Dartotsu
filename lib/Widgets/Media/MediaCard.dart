@@ -10,7 +10,7 @@ Widget MediaCard(BuildContext context, String title, Widget route,
   var screenWidth = MediaQuery.of(context).size.width;
   double width = screenWidth * 0.4;
   if (width > 256) width = 256;
-  double radius = width * 0.07;
+  double radius = 10;
 
   return GestureDetector(
     onTap: () => navigateToPage(context, route),

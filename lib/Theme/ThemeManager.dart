@@ -118,3 +118,39 @@ class ThemeDropdown extends StatelessWidget {
     );
   }
 }
+
+// TODO Implement the DNS dropdown
+class DnsDropdown extends StatelessWidget {
+  const DnsDropdown({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final dnsOptions = [
+      'None',
+      'Cloudflare',
+      'Google',
+      'AdGuard',
+      'Quad9',
+      'AliDNS',
+      'DNSPod',
+      '360',
+      'Quad101',
+      'Mullvad',
+      'Controld',
+      'Njalla',
+      'Shecan',
+      'Libre'
+    ];
+
+    final currentDnsProvider = dnsOptions[0];
+
+    return buildDropdownMenu(
+      context: context,
+      currentValue: currentDnsProvider,
+      options: dnsOptions,
+      onChanged: (String newValue) {
+      },
+      prefixIcon: Icons.dns,
+    );
+  }
+}

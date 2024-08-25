@@ -1,12 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dantotsu/Functions/Function.dart';
-import 'package:dantotsu/Prefrerences/Prefrences.dart';
+import 'package:dantotsu/Preferences/Prefrences.dart';
 import 'package:dantotsu/Screens/Settings/SettingsScreen.dart';
 import 'package:dantotsu/Widgets/AlertDialogBuilder.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
-import '../../Prefrerences/PrefManager.dart';
+import '../../Preferences/PrefManager.dart';
 import '../../api/Anilist/Anilist.dart';
 
 class BottomSheetContent extends StatefulWidget {

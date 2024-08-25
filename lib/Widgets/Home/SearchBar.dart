@@ -12,17 +12,16 @@ import 'AvtarWidget.dart';
 import 'NotificationBadge.dart';
 
 class MediaSearchBar extends StatelessWidget {
-  final ColorScheme theme;
   final String title;
 
   const MediaSearchBar({
     super.key,
-    required this.theme,
     required this.title,
   });
 
   @override
   Widget build(BuildContext context) {
+    var theme = Theme.of(context).colorScheme;
     return Padding(
       padding: EdgeInsets.fromLTRB(32, 36.statusBar(), 32, 24),
       child: Row(
@@ -61,32 +60,10 @@ class MediaSearchBar extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 8),
-          Obx(() => Anilist.avatar.value == null || Anilist.avatar.value!.isEmpty
-              ? GestureDetector(
-            child: AvatarWidget(theme: theme, icon: Icons.settings),
+           GestureDetector(
+            child: const AvatarWidget(icon: Icons.settings),
             onTap: () => settingsBottomSheet(context),
           )
-              : SlideUpAnimation(
-            child: Stack(
-              children: [
-                GestureDetector(
-                  onTap: () => settingsBottomSheet(context),
-                  child: CircleAvatar(
-                    backgroundColor: Colors.transparent,
-                    radius: 26.0,
-                    backgroundImage: CachedNetworkImageProvider(Anilist.avatar.value!),
-                  ),
-                ),
-                if (Anilist.unreadNotificationCount > 0)
-                  Positioned(
-                    right: 0,
-                    bottom: -2,
-                    child: NotificationBadge(count: Anilist.unreadNotificationCount),
-                  ),
-              ],
-            ),
-          ),
-          ),
         ],
       ),
     );

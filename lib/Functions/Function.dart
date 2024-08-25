@@ -1,13 +1,15 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:url_launcher/url_launcher.dart';
-
+import 'package:http/http.dart' as http;
 import '../Main.dart';
 
-class RefreshController extends GetxController {
+class _RefreshController extends GetxController {
   var activity = <int, RxBool>{};
 
   void all() {
@@ -20,7 +22,7 @@ class RefreshController extends GetxController {
     return activity.putIfAbsent(key, () => RxBool(initialValue));
   }
 }
-final RefreshController Refresh = Get.put(RefreshController(), permanent: true);
+var Refresh = Get.put(_RefreshController(), permanent: true);
 
 Future<void> snackString(
     String? s, {
@@ -103,4 +105,35 @@ void navigateToPage(BuildContext context, Widget page) {
     context,
     MaterialPageRoute(builder: (context) =>  page),
   );
+}
+
+Future<void> downloadImage(String url, String filename) async {
+  String getFileExtension(String? contentType) {
+    if (contentType == null) return 'jpg';
+    if (contentType.contains('jpeg')) return 'jpg';
+    if (contentType.contains('png')) return 'png';
+    if (contentType.contains('gif')) return 'gif';
+    // Add other formats as needed
+    return 'jpg'; // Default extension
+  }
+  try {
+    Directory directory = await getApplicationDocumentsDirectory();
+    String filePath = '${directory.path}/$filename';
+    var response = await http.get(Uri.parse(url));
+
+    if (response.statusCode == 200) {
+      String? contentType = response.headers['content-type'];
+      String fileExtension = getFileExtension(contentType);
+
+      filePath += '.$fileExtension';
+      File file = File(filePath);
+      await file.writeAsBytes(response.bodyBytes);
+
+      print('Image downloaded and saved to $filePath');
+    } else {
+      print('Failed to download image. Status code: ${response.statusCode}');
+    }
+  } catch (e) {
+    print('Error downloading image: $e');
+  }
 }

@@ -5,14 +5,23 @@ import 'package:get/get.dart';
 
 import '../../DataClass/Media.dart';
 import '../../DataClass/SearchResults.dart';
+import '../Discord/Discord.dart';
 import 'Anilist.dart';
 
+var run = true;
 Future<void> getUserId(Function() block) async {
-  if (!Anilist.isInitialized) {
+  bool? notLogged;
+  if (!Anilist.isInitialized.value && run) {
+    run = false;
     if (await Anilist.query.getUserData()) {
       debugPrint('Anilist user data loaded');
     } else {
+      notLogged = true;
       snackString('Error loading Anilist user data');
+    }
+  } else if ((!Anilist.isInitialized.value || !(notLogged == true) ) && !run) {
+    while (!Anilist.isInitialized.value) {
+      await Future.delayed(const Duration(milliseconds: 100));
     }
   }
   block();
@@ -89,8 +98,9 @@ class _AnilistHomeViewModel extends GetxController {
 
   Future<void> loadMain() async {
     Anilist.getSavedToken();
-    /*MAL.getSavedToken();
     Discord.getSavedToken();
+    /*MAL.getSavedToken();
+
 
 
       if (PrefManager.getVal(PrefName.CheckUpdate) ?? false) {
@@ -113,8 +123,8 @@ class _AnilistAnimeViewModel extends GetxController {
   var animePopular = Rx<List<media>?>(null);
   var updated = Rx<List<media>?>(null);
   var popularMovies = Rx<List<media>?>(null);
-  var topRatedAnime = Rxn<List<media>>();
-  var mostFavAnime = Rxn<List<media>>();
+  var topRatedSeries = Rxn<List<media>>();
+  var mostFavSeries = Rxn<List<media>>();
 
   Future<void> loadTrending(int s) async {
     this.trending.value = null;
@@ -171,15 +181,15 @@ class _AnilistAnimeViewModel extends GetxController {
     final list = await Anilist.query.loadAnimeList();
     updated.value = list["recentUpdates"];
     popularMovies.value = list["trendingMovies"];
-    topRatedAnime.value = list["topRated"];
-    mostFavAnime.value = list["mostFav"];
+    topRatedSeries.value = list["topRatedSeries"];
+    mostFavSeries.value = list["mostFavSeries"];
   }
 
   void resetAnimePageData() {
     updated.value = null;
     popularMovies.value = null;
-    topRatedAnime.value = null;
-    mostFavAnime.value = null;
+    topRatedSeries.value = null;
+    mostFavSeries.value = null;
   }
 }
 
@@ -191,7 +201,6 @@ class _AnilistMangaViewModel extends GetxController {
   var type = 'MANGA';
   var trending = Rx<List<media>?>(null);
   var mangaPopular = Rx<List<media>?>(null);
-  var popularManga = Rxn<List<media>>();
   var popularManhwa = Rxn<List<media>>();
   var popularNovel = Rxn<List<media>>();
   var topRatedManga = Rxn<List<media>>();
@@ -251,7 +260,6 @@ class _AnilistMangaViewModel extends GetxController {
   Future<void> loadAll() async {
     resetMangaPageData();
     final list = await Anilist.query.loadMangaList();
-    popularManga.value = list["trendingManga"];
     popularManhwa.value = list["trendingManhwa"];
     popularNovel.value = list["trendingNovel"];
     topRatedManga.value = list["topRated"];
@@ -259,7 +267,6 @@ class _AnilistMangaViewModel extends GetxController {
   }
 
   void resetMangaPageData() {
-    popularManga.value = null;
     popularManhwa.value = null;
     popularNovel.value = null;
     topRatedManga.value = null;

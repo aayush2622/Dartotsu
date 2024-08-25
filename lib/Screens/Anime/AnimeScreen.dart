@@ -97,11 +97,10 @@ class AnimeScreenState extends State<AnimeScreen> {
       MediaSectionData(
           title: 'Trending Movies', list: _viewModel.popularMovies.value),
       MediaSectionData(
-          title: 'Top Rated', list: _viewModel.topRatedAnime.value),
+          title: 'Top Rated Series', list: _viewModel.topRatedSeries.value),
       MediaSectionData(
-          title: 'Most Favourite', list: _viewModel.mostFavAnime.value),
+          title: 'Most Favourite Series', list: _viewModel.mostFavSeries.value),
     ];
-
     return mediaSections
         .map((section) => MediaSection(
               context: context,
@@ -128,7 +127,7 @@ class AnimeScreenState extends State<AnimeScreen> {
                       ? MediaAdaptor(type: 1, mediaList: mediaDataList)
                       : const Center(child: CircularProgressIndicator()),
                 ),
-                MediaSearchBar(theme: theme, title: "ANIME"),
+                const MediaSearchBar(title: "ANIME"),
                 Positioned(
                   bottom: 92,
                   left: 8.0,
@@ -174,7 +173,7 @@ class AnimeScreenState extends State<AnimeScreen> {
                 const SizedBox(height: 16),
               ],
             )
-          : LoadingWidget(theme: theme),
+          : const LoadingWidget(),
     );
   }
 }

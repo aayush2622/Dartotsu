@@ -1,40 +1,40 @@
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:kenburns_nullsafety/kenburns_nullsafety.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import '../../Widgets/Info/InfoWidget.dart';
+import 'package:dantotsu/Functions/Extensions.dart';
+import 'package:flutter/material.dart';
+import 'package:kenburns_nullsafety/kenburns_nullsafety.dart';
+
 import '../../DataClass/Media.dart';
 
-class MediaInfoPage extends StatelessWidget {
-  final String mediaTitle;
-  final String? cover;
-  final String? banner;
-  final String? status;
-  final List<media> mediaList;
+class MediaInfoPage extends StatefulWidget {
+  final media mediaData;
+
   const MediaInfoPage(
-      {super.key,
-      required this.mediaTitle,
-      required this.cover,
-      required this.banner,
-      required this.status,
-      required this.mediaList,});
+    this.mediaData, {
+    super.key,
+  });
+
+  @override
+  MediaInfoPageState createState() => MediaInfoPageState();
+}
+
+class MediaInfoPageState extends State<MediaInfoPage> {
   @override
   Widget build(BuildContext context) {
+    var mediaData = widget.mediaData;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          SliverAppBar(
-            pinned: true,
-            floating: false,
-            expandedHeight: 384.0,
-            flexibleSpace: FlexibleSpaceBar(
+          SliverToBoxAdapter(
+            child: SizedBox(
+                height: 384 + (0.statusBar() * 2), child: _buildMediaSection()),
+            /*FlexibleSpaceBar(
               background: Stack(
                 fit: StackFit.expand,
                 children: [
                   KenBurns(
                       maxScale: 1.5,
                       child: CachedNetworkImage(
-                        imageUrl: banner.toString(),
+                        imageUrl: mediaData.banner.toString(),
                         fit: BoxFit.cover,
                         width: double.infinity,
                         height: 108,
@@ -45,7 +45,8 @@ class MediaInfoPage extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Container(
-                          height: 48.0, //change this to change the transparent black box
+                          height: 48.0,
+                          //change this to change the transparent black box
                           decoration: BoxDecoration(
                             gradient: LinearGradient(
                               begin: Alignment.topCenter,
@@ -72,14 +73,14 @@ class MediaInfoPage extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(
                                       16.0), // Similar to roundedImageView
                                   child: CachedNetworkImage(
-                                    imageUrl: cover.toString(),
+                                    imageUrl: mediaData.cover.toString(),
                                     fit: BoxFit.cover,
                                   ),
                                 ),
                               ),
                               Text(
-                                mediaTitle, // Replace with your title
-                                style: GoogleFonts.poppins(
+                                mediaData.userPreferredName, // Replace with your title
+                                style: TextStyle(
                                   fontSize: 16.0,
                                   fontWeight: FontWeight.bold,
                                   color:
@@ -90,8 +91,8 @@ class MediaInfoPage extends StatelessWidget {
                               ),
                               const SizedBox(height: 4.0),
                               Text(
-                                status.toString(), // Replace with your status
-                                style: GoogleFonts.poppins(
+                                mediaData.status.toString(), // Replace with your status
+                                style: TextStyle(
                                   fontSize: 14.0,
                                   fontWeight: FontWeight.bold,
                                   color: Theme.of(context).colorScheme.primary,
@@ -101,7 +102,7 @@ class MediaInfoPage extends StatelessWidget {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 32.0 ),
+                          padding: const EdgeInsets.symmetric(horizontal: 32.0),
                           child: ElevatedButton(
                             onPressed: () {},
                             style: ElevatedButton.styleFrom(
@@ -114,7 +115,7 @@ class MediaInfoPage extends StatelessWidget {
                             ),
                             child: Text(
                               'Add to List',
-                              style: GoogleFonts.poppins(
+                              style: TextStyle(
                                 fontSize: 14.0,
                                 fontWeight: FontWeight.bold,
                                 color: Theme.of(context).colorScheme.secondary,
@@ -127,14 +128,7 @@ class MediaInfoPage extends StatelessWidget {
                   ),
                 ],
               ),
-            ),
-            actions: [
-              IconButton(
-                icon: const Icon(Icons.close),
-                onPressed: () => Navigator.of(context).pop(),
-                color: Theme.of(context).colorScheme.onSurface,
-              ),
-            ],
+            ),*/
           ),
           SliverToBoxAdapter(
             child: Column(
@@ -147,7 +141,7 @@ class MediaInfoPage extends StatelessWidget {
                       Expanded(
                         child: Text(
                           'Watched 10 out of 10', // Replace with your text
-                          style: GoogleFonts.poppins(
+                          style: TextStyle(
                             fontSize: 16.0,
                             fontWeight: FontWeight.normal,
                             color: Theme.of(context).colorScheme.onSurface,
@@ -157,7 +151,7 @@ class MediaInfoPage extends StatelessWidget {
                         ),
                       ),
                       IconButton(
-                        icon:const  Icon(Icons.favorite_border),
+                        icon: const Icon(Icons.favorite_border),
                         onPressed: () {
                           // Favorite action
                         },
@@ -171,7 +165,7 @@ class MediaInfoPage extends StatelessWidget {
                     ],
                   ),
                 ),
-                InfoWidget(mediaTitle: mediaTitle , mediaList: mediaList,),
+
                 // Add your ViewPager2 equivalent widget here
               ],
             ),
@@ -179,7 +173,7 @@ class MediaInfoPage extends StatelessWidget {
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items:const  [
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
@@ -194,13 +188,43 @@ class MediaInfoPage extends StatelessWidget {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // Add your comment action here
-        },
-        child: const Icon(Icons.add),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+    );
+  }
+
+  Widget _buildMediaSection() {
+    return Stack(
+      children: [
+        Positioned(
+          child: KenBurns(
+              maxScale: 2.5,
+              minAnimationDuration : const Duration(milliseconds: 6000),
+              maxAnimationDuration : const Duration(milliseconds: 20000),
+              child: CachedNetworkImage(
+                imageUrl: widget.mediaData.banner ?? '',
+                fit: BoxFit.cover,
+                width: double.infinity,
+                height: 384.statusBar(),
+              )),
+        ),
+        Positioned(
+          bottom: 0,
+          left: 0,
+          right: 0,
+          child: Container(
+            height: 48.0,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Colors.transparent,
+                  Colors.black.withOpacity(0.66),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

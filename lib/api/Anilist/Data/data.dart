@@ -1,4 +1,3 @@
-
 import 'package:dantotsu/api/Anilist/Data/page.dart';
 import 'package:dantotsu/api/Anilist/Data/user.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -11,11 +10,15 @@ part 'Generated/data.g.dart';
 void registerAllTypes() {
   TypeFactory.create<PageResponse>((json) => PageResponse.fromJson(json));
   TypeFactory.create<MediaResponse>((json) => MediaResponse.fromJson(json));
-  TypeFactory.create<MediaListCollectionResponse>((json) => MediaListCollectionResponse.fromJson(json));
+  TypeFactory.create<MediaListCollectionResponse>(
+      (json) => MediaListCollectionResponse.fromJson(json));
   TypeFactory.create<ViewerResponse>((json) => ViewerResponse.fromJson(json));
-  TypeFactory.create<UserListResponse>((json) => UserListResponse.fromJson(json));
-  TypeFactory.create<AnimeListResponse>((json) => AnimeListResponse.fromJson(json));
-  TypeFactory.create<MangaListResponse>((json) => MangaListResponse.fromJson(json));
+  TypeFactory.create<UserListResponse>(
+      (json) => UserListResponse.fromJson(json));
+  TypeFactory.create<AnimeListResponse>(
+      (json) => AnimeListResponse.fromJson(json));
+  TypeFactory.create<MangaListResponse>(
+      (json) => MangaListResponse.fromJson(json));
 }
 
 @JsonSerializable()
@@ -25,13 +28,14 @@ class UserListResponse {
 
   UserListResponse({this.data});
 
-  factory UserListResponse.fromJson(Map<String, dynamic> json) => _$UserListResponseFromJson(json);
+  factory UserListResponse.fromJson(Map<String, dynamic> json) =>
+      _$UserListResponseFromJson(json);
+
   Map<String, dynamic> toJson() => _$UserListResponseToJson(this);
 }
 
 @JsonSerializable()
 class UserListData {
-
   MediaListCollection? currentAnime;
   MediaListCollection? repeatingAnime;
   User? favoriteAnime;
@@ -55,7 +59,8 @@ class UserListData {
     this.plannedManga,
     this.recommendationQuery,
     this.recommendationPlannedQueryAnime,
-    this.recommendationPlannedQueryManga,});
+    this.recommendationPlannedQueryManga,
+  });
 
   factory UserListData.fromJson(Map<String, dynamic> json) =>
       _$UserListDataFromJson(json);
@@ -70,7 +75,9 @@ class MediaResponse {
 
   MediaResponse({this.data});
 
-  factory MediaResponse.fromJson(Map<String, dynamic> json) => _$MediaResponseFromJson(json);
+  factory MediaResponse.fromJson(Map<String, dynamic> json) =>
+      _$MediaResponseFromJson(json);
+
   Map<String, dynamic> toJson() => _$MediaResponseToJson(this);
 }
 
@@ -80,7 +87,8 @@ class MediaData {
   final Media? media;
   @JsonKey(name: 'Page')
   final Page? page;
-  MediaData({this.media,this.page});
+
+  MediaData({this.media, this.page});
 
   factory MediaData.fromJson(Map<String, dynamic> json) =>
       _$MediaDataFromJson(json);
@@ -89,7 +97,7 @@ class MediaData {
 }
 
 @JsonSerializable()
-class MediaListCollectionResponse{
+class MediaListCollectionResponse {
   @JsonKey(name: 'data')
   final MediaListCollectionData? data;
 
@@ -102,7 +110,7 @@ class MediaListCollectionResponse{
 }
 
 @JsonSerializable()
-class MediaListCollectionData{
+class MediaListCollectionData {
   @JsonKey(name: 'MediaListCollection')
   final MediaListCollection? mediaListCollection;
 
@@ -157,14 +165,14 @@ class AnimeListResponse {
 class AnimeListData {
   Page? recentUpdates;
   Page? trendingMovies;
-  Page? topRated;
-  Page? mostFav;
+  Page? topRatedSeries;
+  Page? mostFavSeries;
 
   AnimeListData({
     this.recentUpdates,
     this.trendingMovies,
-    this.topRated,
-    this.mostFav,
+    this.topRatedSeries,
+    this.mostFavSeries,
   });
 
   factory AnimeListData.fromJson(Map<String, dynamic> json) =>
@@ -215,7 +223,9 @@ class PageResponse {
 
   PageResponse({this.data});
 
-  factory PageResponse.fromJson(Map<String, dynamic> json) => _$PageResponseFromJson(json);
+  factory PageResponse.fromJson(Map<String, dynamic> json) =>
+      _$PageResponseFromJson(json);
+
   Map<String, dynamic> toJson() => _$PageResponseToJson(this);
 }
 
@@ -223,6 +233,7 @@ class PageResponse {
 class PageData {
   @JsonKey(name: 'Page')
   final Page? page;
+
   PageData({this.page});
 
   factory PageData.fromJson(Map<String, dynamic> json) =>

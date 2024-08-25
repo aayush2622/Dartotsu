@@ -4,7 +4,6 @@ import 'package:dantotsu/Animation/SlideUpAnimation.dart';
 import 'package:dantotsu/Functions/Extensions.dart';
 import 'package:dantotsu/Functions/Function.dart';
 import 'package:dantotsu/Screens/Login/LoginScreen.dart';
-import 'package:dantotsu/Screens/Settings/SettingsBottomSheet.dart';
 import 'package:dantotsu/Theme/ThemeProvider.dart';
 import 'package:dantotsu/Widgets/CustomElevatedButton.dart';
 import 'package:flutter/material.dart';
@@ -12,18 +11,20 @@ import 'package:get/get.dart';
 import 'package:kenburns_nullsafety/kenburns_nullsafety.dart';
 import 'package:provider/provider.dart';
 
-import '../../api/Anilist/AnilistViewModel.dart';
 import '../../Animation/SlideInAnimation.dart';
 import '../../DataClass/MediaSection.dart';
-import '../../Prefrerences/PrefManager.dart';
-import '../../Prefrerences/Prefrences.dart';
+import '../../Preferences/PrefManager.dart';
+import '../../Preferences/Prefrences.dart';
+import '../../Widgets/Home/AvtarWidget.dart';
 import '../../Widgets/Home/LoadingWidget.dart';
 import '../../Widgets/Home/NotificationBadge.dart';
 import '../../Widgets/Media/MediaCard.dart';
 import '../../Widgets/Media/MediaSection.dart';
 import '../../Widgets/ScrollConfig.dart';
 import '../../api/Anilist/Anilist.dart';
+import '../../api/Anilist/AnilistViewModel.dart';
 import '../Anime/AnimeScreen.dart';
+import '../Settings/SettingsBottomSheet.dart';
 
 /* TODO
 list button, more button
@@ -64,10 +65,7 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    final isDarkMode = Provider.of<ThemeNotifier>(context).isDarkMode;
     var backgroundHeight = 212.statusBar();
-    var theme = Theme.of(context).colorScheme;
-
     return Scaffold(
       body: RefreshIndicator(
         onRefresh: () async {
@@ -84,14 +82,14 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     child: Builder(
                       builder: (context) {
                         if (!running) {
-                          return LoadingWidget(theme: theme);
+                          return const LoadingWidget();
                         }
                         return Stack(
                           fit: StackFit.expand,
                           children: [
                             _buildBackgroundImage(),
                             _buildAvatar(),
-                            _buildUserInfo(isDarkMode),
+                            _buildUserInfo(),
                             _buildCards(),
                           ],
                         );
@@ -129,7 +127,7 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         buttonText: 'Browse\nAnime',
       ),
       MediaSectionData(
-        title: 'Favorite Anime',
+        title: 'Favourite Anime',
         list: _viewModel.animeFav.value,
         icon: Icons.heart_broken,
         message:
@@ -150,7 +148,7 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         buttonText: 'Browse\nManga',
       ),
       MediaSectionData(
-        title: 'Favorite Manga',
+        title: 'Favourite Manga',
         list: _viewModel.mangaFav.value,
         icon: Icons.heart_broken,
         message:
@@ -171,9 +169,23 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       )
     ];
 
+    var homeLayoutOrder = PrefManager.getVal(PrefName.homeLayoutOrder);
     var toShow = PrefManager.getVal(PrefName.homeLayout);
+
+    List<MediaSectionData> getOrderedMediaSections() {
+      final Map<String, MediaSectionData> sectionMap = {
+        for (var section in mediaSections) section.title: section
+      };
+
+      return homeLayoutOrder
+          .map((title) => sectionMap[title])
+          .whereType<MediaSectionData>()
+          .toList();
+    }
+
     List<Widget> sectionWidgets = [];
-    mediaSections.asMap().forEach((index, section) {
+    var order = getOrderedMediaSections();
+    order.asMap().forEach((index, section) {
       if (toShow[index]) {
         sectionWidgets.add(
           MediaSection(
@@ -240,62 +252,73 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   Widget _buildAvatar() {
     return Positioned(
-      right: 34,
+      right: 32,
       top: 36.statusBar(),
       child: SlideUpAnimation(
         child: Stack(
           children: [
             GestureDetector(
               onTap: () => settingsBottomSheet(context),
-              child: CircleAvatar(
-                backgroundColor: Colors.transparent,
-                radius: 26.0,
-                backgroundImage:
-                    Anilist.avatar.value != null && Anilist.avatar.value!.isNotEmpty
-                        ? CachedNetworkImageProvider(Anilist.avatar.value!)
-                        : const NetworkImage(""),
-              ),
+              child: const AvatarWidget(icon: Icons.settings),
             ),
             if (Anilist.unreadNotificationCount > 0)
               Positioned(
-                  right: 0,
-                  bottom: -2,
-                  child: NotificationBadge(
-                      count: Anilist.unreadNotificationCount)),
+                right: 0,
+                bottom: -2,
+                child: NotificationBadge(
+                  count: Anilist.unreadNotificationCount,
+                ),
+              ),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildUserInfo(bool isDarkMode) {
+  Widget _buildUserInfo() {
     final theme = Theme.of(context).colorScheme;
+    final isDarkMode = Provider.of<ThemeNotifier>(context).isDarkMode;
     return Positioned(
-      top: 36.statusBar(),
-      left: 34.0,
-      right: 16.0,
-      child: SlideUpAnimation(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              Anilist.username ?? "",
-              style: TextStyle(
-                fontFamily: 'Poppins',
-                fontWeight: FontWeight.bold,
-                fontSize: 16.0,
-                color:
-                    isDarkMode ? Colors.white : Colors.black.withOpacity(0.6),
+        top: 36.statusBar(),
+        left: 34.0,
+        right: 16.0,
+        child: SlideUpAnimation(
+          child: Row(children: [
+            GestureDetector(
+              onTap: () => settingsBottomSheet(context),
+              child: CircleAvatar(
+                backgroundColor: Colors.transparent,
+                radius: 26.0,
+                backgroundImage: Anilist.avatar.value != null &&
+                    Anilist.avatar.value!.isNotEmpty
+                    ? CachedNetworkImageProvider(Anilist.avatar.value!)
+                    : const NetworkImage(""),
               ),
             ),
-            const SizedBox(height: 2.0),
-            _buildInfoRow('Episodes Watched',
-                Anilist.episodesWatched.toString(), theme.primary),
-            _buildInfoRow(
-                'Chapters Read', Anilist.chapterRead.toString(), theme.primary),
-          ],
-        ),
-      ),
+            const SizedBox(width: 12),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  Anilist.username ?? "",
+                  style: TextStyle(
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16.0,
+                    color: isDarkMode
+                        ? Colors.white
+                        : Colors.black.withOpacity(0.6),
+                  ),
+                ),
+                const SizedBox(height: 2.0),
+                _buildInfoRow('Episodes Watched',
+                    Anilist.episodesWatched.toString(), theme.primary),
+                _buildInfoRow('Chapters Read', Anilist.chapterRead.toString(),
+                    theme.primary),
+              ],
+            ),
+          ]),
+        )
     );
   }
 

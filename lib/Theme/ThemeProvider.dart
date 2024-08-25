@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../Prefrerences/Prefrences.dart';
-import '../Prefrerences/PrefManager.dart';
+import '../Preferences/Prefrences.dart';
+import '../Preferences/PrefManager.dart';
 
 class ThemeNotifier extends ChangeNotifier {
   bool _isDarkMode = false;

@@ -36,8 +36,8 @@ class MediaPageSmallViewHolder extends StatelessWidget {
             child: SizedBox.expand(),
           ),
           Padding(
-            padding: EdgeInsets.only(bottom:24, top : 0.statusBar()),
-            child:  _buildContent(context, theme),
+            padding: EdgeInsets.only(bottom: 24, top: 0.statusBar()),
+            child: _buildContent(context, theme),
           ),
         ],
       ),
@@ -128,26 +128,31 @@ class MediaPageSmallViewHolder extends StatelessWidget {
   }
 
   Widget _buildMediaCover() {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(16.0),
-      child: CachedNetworkImage(
-        imageUrl: mediaInfo.cover ?? '',
-        fit: BoxFit.cover,
-        width: 108,
-        height: 160,
-        placeholder: (context, url) => Container(
-          color: Colors.white12,
+    return Hero(
+      tag: 'mediaCover-${mediaInfo.id}',
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(16.0),
+        child: CachedNetworkImage(
+          imageUrl: mediaInfo.cover ?? '',
+          fit: BoxFit.cover,
           width: 108,
           height: 160,
+          placeholder: (context, url) => Container(
+            color: Colors.white12,
+            width: 108,
+            height: 160,
+          ),
         ),
-      ),
+      )
     );
   }
 
   Widget _buildAdditionalInfo(ColorScheme theme) {
     final isAnime = mediaInfo.anime != null;
     final mediaType = isAnime ? "Episodes" : "Chapters";
-    final mediaCount = isAnime ? formatMediaInfo(mediaInfo) : "${mediaInfo.manga?.totalChapters ?? "??"}";
+    final mediaCount = isAnime
+        ? formatMediaInfo(mediaInfo)
+        : "${mediaInfo.manga?.totalChapters ?? "??"}";
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
