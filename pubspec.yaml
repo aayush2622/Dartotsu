@@ -38,7 +38,7 @@ dependencies:
   shared_preferences: ^2.2.2
   cached_network_image: ^3.2.0
   blur: ^4.0.0
-  visibility_detector: ^0.2.0
+  visibility_detector: ^0.4.0+2
   kenburns_nullsafety: ^1.0.1
   url_launcher: ^6.3.0
   cupertino_icons: ^1.0.6
@@ -66,7 +66,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^3.0.0
+  flutter_lints: ^4.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

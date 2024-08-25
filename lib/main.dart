@@ -18,8 +18,8 @@ import 'Screens/Manga/MangaScreen.dart';
 import 'Theme/ThemeManager.dart';
 import 'Theme/ThemeProvider.dart';
 import 'api/Anilist/Anilist.dart';
-import 'screens/Home/HomeScreen.dart';
-
+// import 'screens/Home/HomeScreen.dart';
+import 'package:dantotsu/Screens/Home/HomeScreen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await PrefManager.init();
