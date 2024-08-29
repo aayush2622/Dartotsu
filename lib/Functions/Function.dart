@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:http/http.dart' as http;
-import '../Main.dart';
+import '../main.dart';
 
 class _RefreshController extends GetxController {
   var activity = <int, RxBool>{};
