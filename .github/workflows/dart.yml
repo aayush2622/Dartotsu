@@ -17,6 +17,7 @@ jobs:
       - run: flutter build apk
       - name: Android Apk Release
         uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -40,6 +41,7 @@ jobs:
           directory: build\windows\x64\runner\Release
       - name: Windows Archive Release
         uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
