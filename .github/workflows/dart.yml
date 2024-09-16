@@ -40,7 +40,7 @@ jobs:
           directory: build\windows\x64\runner\Release
       - name: Upload Windows ZIP to Discord
         shell: pwsh
-        run: ./scripts/upload-to-discord.ps1 -webhookUrl ${{ secrets.DISCORD_WEBHOOK_URL }} -filePath build/app/outputs/flutter-apk/app-release.apk
+        run: ./scripts/upload-to-discord.ps1 -webhookUrl ${{ secrets.DISCORD_WEBHOOK_URL }} -filePath build\windows\x64\runner\Release\Dantotsu-${{github.sha}}-windows.zip
   build_linux:
     runs-on: ubuntu-latest
     steps:
