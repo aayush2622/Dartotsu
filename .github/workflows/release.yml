@@ -1,4 +1,4 @@
-name: CI
+name: RELEASE
 on:
   push:
     tags: 
@@ -6,6 +6,10 @@ on:
 jobs:
   build_android:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      repository-projects: write
     steps:
       - name: Cloing repository
         uses: actions/checkout@v4
