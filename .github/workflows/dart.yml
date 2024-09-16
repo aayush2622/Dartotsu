@@ -13,13 +13,14 @@ jobs:
         with:
           flutter-version: 3.24.1
       - run: flutter pub get
-      - run: flutter build apk
+      - run: flutter build apk --split-per-abi
 
       - name: Upload APK to Discord
         run: |
-          curl -F "payload_json={\"content\": \"New ${{ github.sha}}\"}" \
-             -F "file=@build/app/outputs/flutter-apk/app-release.apk" \
+          curl -F "payload_json={\"content\": \"Android x86_64 ${{ github.sha}}\"}" \
+             -F "file=@build/app/outputs/flutter-apk/app-x86_64-release.apk" \
              ${{ secrets.DISCORD_WEBHOOK_URL }}
+        
   build_windows:
     runs-on: windows-latest
     steps:
@@ -38,10 +39,8 @@ jobs:
           filename: Dantotsu-${{github.sha}}-windows.zip
           directory: build\windows\x64\runner\Release
       - name: Upload Windows ZIP to Discord
-        run: |
-            curl -F "payload_json={\"content\": \"New ${{ github.sha}}\"}" \
-               -F "file=@build\windows\x64\runner\Release\Dantotsu-${{github.sha}}-windows.zip" \
-               ${{ secrets.DISCORD_WEBHOOK_URL }}
+        shell: pwsh
+        run: ./scripts/upload-to-discord.ps1 -webhookUrl ${{ secrets.DISCORD_WEBHOOK_URL }} -filePath build/app/outputs/flutter-apk/app-release.apk
   build_linux:
     runs-on: ubuntu-latest
     steps:
@@ -64,7 +63,7 @@ jobs:
             directory: build/linux/x64/release/bundle
       - name: Upload Linux ZIP to Discord
         run: |
-            curl -F "payload_json={\"content\": \"New ${{ github.sha}}\"}" \
+            curl -F "payload_json={\"content\": \"Linux ${{ github.sha}}\"}" \
                -F "file=@build/linux/x64/release/bundle/Dantotsu-${{github.sha}}-linux.zip" \
                ${{ secrets.DISCORD_WEBHOOK_URL }}
   build_ios_and_macos:
@@ -87,6 +86,6 @@ jobs:
             directory: build/macos/Build/Products/Release
       - name: Upload MacOs ZIP to Discord
         run: |
-            curl -F "payload_json={\"content\": \"New ${{ github.sha}}\"}" \
+            curl -F "payload_json={\"content\": \"Macos ${{ github.sha}}\"}" \
                -F "file=@build/macos/Build/Products/Release/Dantotsu-${{github.sha}}-macos.zip" \
                ${{ secrets.DISCORD_WEBHOOK_URL }}
