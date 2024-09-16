@@ -1,7 +1,8 @@
 name: CI
 on:
   push:
-    branches: main
+    tags: 
+      - "v*.*.*"
 jobs:
   build_android:
     runs-on: ubuntu-latest
@@ -14,6 +15,10 @@ jobs:
           flutter-version: 3.24.1
       - run: flutter pub get
       - run: flutter build apk
+      - name: Android Apk Release
+        uses: softprops/action-gh-release@v2
+        with:
+            files: build/app/outputs/flutter-apk/app-release.apk
   build_windows:
     runs-on: windows-latest
     steps:
