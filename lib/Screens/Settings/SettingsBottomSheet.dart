@@ -1,7 +1,10 @@
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dantotsu/Functions/Function.dart';
 import 'package:dantotsu/Preferences/Prefrences.dart';
+import 'package:dantotsu/Screens/Login/LoginScreen.dart';
 import 'package:dantotsu/Screens/Settings/SettingsScreen.dart';
+import 'package:dantotsu/Screens/Extensions/ExtensionScreen.dart';
 import 'package:dantotsu/Widgets/AlertDialogBuilder.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
@@ -45,18 +48,21 @@ class BottomSheetContentState extends State<BottomSheetContent> {
               padding: const EdgeInsets.only(left: 2.0, right: 24.0),
               child: (Row(
                 children: [
-                  CircleAvatar(
-                    radius: 26.0,
-                    backgroundImage:
-                        userData.avatar.value != null && userData.avatar.value!.isNotEmpty
-                            ? CachedNetworkImageProvider(userData.avatar.value!)
-                            : null,
-                    backgroundColor: Colors.transparent,
-                    child: userData.avatar.value == null || userData.avatar.value!.isEmpty
-                        ? Icon(Icons.person,
-                            color: Theme.of(context).primaryColor)
-                        : null,
-                  ),
+                  Obx(() {
+                    return CircleAvatar(
+                      radius: 26.0,
+                      backgroundImage: userData.avatar.value != null &&
+                              userData.avatar.value!.isNotEmpty
+                          ? CachedNetworkImageProvider(userData.avatar.value!)
+                          : null,
+                      backgroundColor: Colors.transparent,
+                      child: userData.avatar.value == null ||
+                              userData.avatar.value!.isEmpty
+                          ? Icon(Icons.person,
+                              color: Theme.of(context).primaryColor)
+                          : null,
+                    );
+                  }),
                   const SizedBox(width: 16),
                   Expanded(
                     child: Obx(() {
@@ -75,21 +81,23 @@ class BottomSheetContentState extends State<BottomSheetContent> {
                             const SizedBox(height: 4),
                             GestureDetector(
                               onTap: () {
-                                context.customAlertDialog()
+                                AlertDialogBuilder(context)
                                   ..setTitle('Logout')
-                                  ..setMessage('Are you sure you want to logout?')
-                                  ..setPosButton('Yes', () {
+                                  ..setMessage(
+                                      'Are you sure you want to logout?')
+                                  ..setPositiveButton('Yes', () {
                                     Anilist.removeSavedToken();
                                     Navigator.of(context).pop();
                                   })
-                                  ..setNegButton('No', null)
+                                  ..setNegativeButton('No', null)
                                   ..show();
                               },
                               child: Text(
                                 'Logout',
                                 style: TextStyle(
                                   fontFamily: 'Poppins',
-                                  color: Theme.of(context).colorScheme.secondary,
+                                  color:
+                                      Theme.of(context).colorScheme.secondary,
                                   fontWeight: FontWeight.w600,
                                   fontSize: 14,
                                 ),
@@ -97,15 +105,14 @@ class BottomSheetContentState extends State<BottomSheetContent> {
                             ),
                           ] else ...[
                             GestureDetector(
-                              onTap: () {
-                                openLinkInBrowser('https://anilist.co/api/v2/oauth/authorize?client_id=14959&response_type=token');
-                                Navigator.of(context).pop();
-                              },
+                              onTap: () =>
+                                  navigateToPage(context, const LoginScreen()),
                               child: Text(
                                 'Login',
                                 style: TextStyle(
                                   fontFamily: 'Poppins',
-                                  color: Theme.of(context).colorScheme.secondary,
+                                  color:
+                                      Theme.of(context).colorScheme.secondary,
                                   fontWeight: FontWeight.w600,
                                   fontSize: 14,
                                 ),
@@ -193,7 +200,7 @@ class BottomSheetContentState extends State<BottomSheetContent> {
                 context, 'Activities', Icons.inbox, const SettingsScreen()),
             const SizedBox(height: 10.0),
             _buildListTile(
-                context, 'Extension', Icons.extension, const SettingsScreen()),
+                context, 'Extension', Icons.extension, const ExtensionScreen()),
             const SizedBox(height: 10.0),
             _buildListTile(
                 context, 'Settings', Icons.settings, const SettingsScreen()),

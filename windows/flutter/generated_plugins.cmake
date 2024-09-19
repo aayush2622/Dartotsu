@@ -4,9 +4,16 @@
 
 list(APPEND FLUTTER_PLUGIN_LIST
   dynamic_color
+  flutter_qjs
+  isar_flutter_libs
+  permission_handler_windows
   protocol_handler_windows
+  screen_brightness_windows
+  screen_retriever
+  universal_video_controls
   url_launcher_windows
   webview_windows
+  window_manager
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST

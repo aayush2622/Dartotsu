@@ -128,9 +128,7 @@ class MediaPageSmallViewHolder extends StatelessWidget {
   }
 
   Widget _buildMediaCover() {
-    return Hero(
-      tag: 'mediaCover-${mediaInfo.id}',
-      child: ClipRRect(
+    return  ClipRRect(
         borderRadius: BorderRadius.circular(16.0),
         child: CachedNetworkImage(
           imageUrl: mediaInfo.cover ?? '',
@@ -143,8 +141,8 @@ class MediaPageSmallViewHolder extends StatelessWidget {
             height: 160,
           ),
         ),
-      )
-    );
+      );
+
   }
 
   Widget _buildAdditionalInfo(ColorScheme theme) {

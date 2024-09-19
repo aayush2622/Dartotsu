@@ -134,6 +134,9 @@ class media {
     this.idKitsu,
     this.cameFromContinue = false,
   });
+
+  String mainName() =>name ?? nameMAL ?? nameRomaji;
+  String mangaName() => countryOfOrigin == 'JP' ? mainName() : nameRomaji;
 }
 
 media mediaData(Media apiMedia) {

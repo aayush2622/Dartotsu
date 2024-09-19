@@ -1,7 +1,7 @@
 import 'package:dantotsu/Functions/Extensions.dart';
 import 'package:flutter/material.dart';
 
-import '../../Screens/Settings/SettingsBottomSheet.dart';
+import '../../Settings/SettingsBottomSheet.dart';
 import 'AvtarWidget.dart';
 
 class LoadingWidget extends StatelessWidget {

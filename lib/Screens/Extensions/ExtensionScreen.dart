@@ -1,0 +1,204 @@
+import 'package:dantotsu/api/Mangayomi/Model/Source.dart';
+import 'package:dantotsu/Screens/Extensions/ExtensionList.dart';
+import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:isar/isar.dart';
+
+import '../../Preferences/PrefManager.dart';
+import '../../Preferences/Prefrences.dart';
+import '../../StorageProvider.dart';
+import '../../main.dart';
+
+class ExtensionScreen extends ConsumerStatefulWidget {
+  const ExtensionScreen({super.key});
+
+  @override
+  ConsumerState<ExtensionScreen> createState() => _BrowseScreenState();
+}
+
+class _BrowseScreenState extends ConsumerState<ExtensionScreen>
+    with TickerProviderStateMixin {
+  late TabController _tabBarController;
+
+  @override
+  void initState() {
+
+    _tabBarController = TabController(length: 4, vsync: this);
+    _tabBarController.animateTo(0);
+    _tabBarController.addListener(() {
+      _chekPermission();
+      setState(() {
+        _textEditingController.clear();
+        _isSearch = false;
+      });
+    });
+    super.initState();
+  }
+
+  _chekPermission() async {
+    await StorageProvider().requestPermission();
+  }
+  final _textEditingController = TextEditingController();
+
+  bool _isSearch = false;
+
+  @override
+  Widget build(BuildContext context) {
+    var theme = Theme.of(context).colorScheme;
+    return DefaultTabController(
+      animationDuration: Duration.zero,
+      length: 4,
+      child: Scaffold(
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          title: Text(
+            'Extensions',
+            style: TextStyle(
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.bold,
+              fontSize: 16.0,
+              color: theme.primary,
+            ),
+          ),
+          actions: const [],
+          bottom: TabBar(
+            indicatorSize: TabBarIndicatorSize.label,
+            isScrollable: true, // Set to false for equal width tabs
+            controller: _tabBarController,
+            dragStartBehavior: DragStartBehavior.start,
+            tabs: [
+              Tab(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      'INSTALLED ANIME',
+                      style: TextStyle(
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14.0,
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    _extensionUpdateNumbers(context, ref, false, true),
+                  ],
+                ),
+              ),
+              Tab(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      'AVAILABLE ANIME',
+                      style: TextStyle(
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14.0,
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    _extensionUpdateNumbers(context, ref, false, false),
+                  ],
+                ),
+              ),
+              Tab(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      'INSTALLED MANGA',
+                      style: TextStyle(
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14.0,
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    _extensionUpdateNumbers(context, ref, false, true),
+                  ],
+                ),
+              ),
+              Tab(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      'AVAILABLE MANGA',
+                      style: TextStyle(
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14.0,
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    _extensionUpdateNumbers(context, ref, true, false),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+        body: TabBarView(
+          controller: _tabBarController,
+          children: [
+            Extension(
+              installed: true,
+              query: _textEditingController.text,
+              isManga: false,
+            ),
+            Extension(
+              installed: false,
+              query: _textEditingController.text,
+              isManga: false,
+            ),
+            Extension(
+              installed: true,
+              query: _textEditingController.text,
+              isManga: true,
+            ),
+            Extension(
+              installed: false,
+              query: _textEditingController.text,
+              isManga: true,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+Widget _extensionUpdateNumbers(
+    BuildContext context, WidgetRef ref, bool isManga, bool installed) {
+  return StreamBuilder(
+      stream: isar.sources
+          .filter()
+          .idIsNotNull()
+          .and()
+          .isAddedEqualTo(installed)
+          .isActiveEqualTo(true)
+          .isMangaEqualTo(isManga)
+          .watch(fireImmediately: true),
+      builder: (context, snapshot) {
+        if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+          final entries = snapshot.data!
+              .where((element) => PrefManager.getVal(PrefName.NSFWExtensions)
+              ? true
+              : element.isNsfw == false)
+              .toList();
+          return entries.isEmpty
+              ? Container()
+              : Text(
+            "(${entries.length.toString()})",
+            style: const TextStyle(
+              fontSize: 12,
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.bold,
+            ),
+          );
+        }
+        return Container();
+      });
+}

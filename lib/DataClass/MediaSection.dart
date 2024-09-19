@@ -4,19 +4,20 @@ import 'package:flutter/cupertino.dart';
 import 'Media.dart';
 
 class MediaSectionData {
+  final int type;
   final String title;
   final List<media>? list;
-  final IconData? icon;
-  final String? message;
-  final String? buttonText;
-  void Function()? onPressed;
-
+  final IconData? emptyIcon;
+  final String? emptyMessage;
+  final String? emptyButtonText;
+  void Function()? emptyButtonOnPressed;
   MediaSectionData({
+    required this.type,
     required this.title,
     required this.list,
-    this.icon,
-    this.message,
-    this.buttonText,
-    this.onPressed,
+    this.emptyIcon,
+    this.emptyMessage,
+    this.emptyButtonText,
+    this.emptyButtonOnPressed,
   });
 }

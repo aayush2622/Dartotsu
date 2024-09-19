@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 // import 'package:kenburns_nullsafety/kenburns_nullsafety.dart';
-import '../../DataClass/Media.dart';
+import '../../../DataClass/Media.dart';
 
 class InfoWidget extends StatelessWidget {
 

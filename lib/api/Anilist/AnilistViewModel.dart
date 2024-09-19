@@ -1,6 +1,4 @@
 import 'package:dantotsu/DataClass/User.dart';
-import 'package:dantotsu/Functions/Function.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 import '../../DataClass/Media.dart';
@@ -8,23 +6,10 @@ import '../../DataClass/SearchResults.dart';
 import '../Discord/Discord.dart';
 import 'Anilist.dart';
 
-var run = true;
-Future<void> getUserId(Function() block) async {
-  bool? notLogged;
-  if (!Anilist.isInitialized.value && run) {
-    run = false;
-    if (await Anilist.query.getUserData()) {
-      debugPrint('Anilist user data loaded');
-    } else {
-      notLogged = true;
-      snackString('Error loading Anilist user data');
-    }
-  } else if ((!Anilist.isInitialized.value || !(notLogged == true) ) && !run) {
-    while (!Anilist.isInitialized.value) {
-      await Future.delayed(const Duration(milliseconds: 100));
-    }
+Future<void> getUserId() async {
+  if (Anilist.token.isNotEmpty) {
+    await Anilist.query.getUserData();
   }
-  block();
 }
 
 final AnilistHomeViewModel = Get.put(_AnilistHomeViewModel());
@@ -142,16 +127,6 @@ class _AnilistAnimeViewModel extends GetxController {
     this.trending.value = trending;
   }
 
-  Future<void> loadPopular(bool onList) async {
-    animePopular.value = null;
-    var popular = (await Anilist.query.search(
-            type: 'ANIME',
-            sort: Anilist.sortBy[1],
-            onList: onList ? null : false))
-        ?.results;
-    animePopular.value = popular;
-  }
-
   Future<void> loadNextPage(SearchResults r) async {
     final result = (await Anilist.query.search(
       type: r.type,
@@ -178,14 +153,19 @@ class _AnilistAnimeViewModel extends GetxController {
 
   Future<void> loadAll() async {
     resetAnimePageData();
-    final list = await Anilist.query.loadAnimeList();
+    final list = await Anilist.query.getAnimeList();
+    animePopular.value = list["popularAnime"];
+    trending.value = list["trendingAnime"];
     updated.value = list["recentUpdates"];
     popularMovies.value = list["trendingMovies"];
     topRatedSeries.value = list["topRatedSeries"];
     mostFavSeries.value = list["mostFavSeries"];
+
   }
 
   void resetAnimePageData() {
+    trending.value = null;
+    animePopular.value = null;
     updated.value = null;
     popularMovies.value = null;
     topRatedSeries.value = null;
@@ -223,16 +203,6 @@ class _AnilistMangaViewModel extends GetxController {
     this.trending.value = trending;
   }
 
-  Future<void> loadPopular(bool onList) async {
-    mangaPopular.value = null;
-    var popular = (await Anilist.query.search(
-            type: 'MANGA',
-            sort: Anilist.sortBy[1],
-            onList: onList ? null : false))
-        ?.results;
-    mangaPopular.value = popular;
-  }
-
   Future<void> loadNextPage(SearchResults r) async {
     final result = (await Anilist.query.search(
       type: r.type,
@@ -259,7 +229,9 @@ class _AnilistMangaViewModel extends GetxController {
 
   Future<void> loadAll() async {
     resetMangaPageData();
-    final list = await Anilist.query.loadMangaList();
+    final list = await Anilist.query.getMangaList();
+    trending.value = list["trending"];
+    mangaPopular.value = list["popularManga"];
     popularManhwa.value = list["trendingManhwa"];
     popularNovel.value = list["trendingNovel"];
     topRatedManga.value = list["topRated"];
@@ -267,6 +239,8 @@ class _AnilistMangaViewModel extends GetxController {
   }
 
   void resetMangaPageData() {
+    trending.value = null;
+    mangaPopular.value = null;
     popularManhwa.value = null;
     popularNovel.value = null;
     topRatedManga.value = null;

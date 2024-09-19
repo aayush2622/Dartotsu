@@ -14,6 +14,9 @@ class FloatingBottomNavBar extends StatelessWidget {
     required this.onTabSelected,
   });
 
+  void onClick(int index) {
+    onTabSelected(index);
+  }
   @override
   Widget build(BuildContext context) {
     final themeNotifier = Provider.of<ThemeNotifier>(context);

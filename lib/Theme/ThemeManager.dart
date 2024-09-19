@@ -108,7 +108,6 @@ class ThemeDropdown extends StatelessWidget {
       'ocean'
     ];
     return buildDropdownMenu(
-      context: context,
       currentValue: themeNotifier.theme.toUpperCase(),
       options: themeOptions.map((e) => e.toUpperCase()).toList(),
       onChanged: (String newValue) {
@@ -145,7 +144,6 @@ class DnsDropdown extends StatelessWidget {
     final currentDnsProvider = dnsOptions[0];
 
     return buildDropdownMenu(
-      context: context,
       currentValue: currentDnsProvider,
       options: dnsOptions,
       onChanged: (String newValue) {

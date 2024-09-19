@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 
 import '../../Adaptor/Settings/SettingsAdaptor.dart';
 import '../../DataClass/Setting.dart';
+import '../../Functions/Function.dart';
 import '../../Preferences/PrefManager.dart';
 import '../../Preferences/Prefrences.dart';
 import '../../Theme/CustomColorPicker.dart';
@@ -126,38 +127,92 @@ class SettingsThemeScreen extends StatelessWidget {
       ),
       Setting(
         type: SettingType.normal,
-        name: 'Wildcards',
+        name: 'Manage Layouts on Anime Page',
         description: 'Does not belong here',
         icon: Icons.palette,
         onClick: () async {
-          final List<String> views = PrefManager.getVal(PrefName.homeLayoutOrder);
-          final List<bool> checkedState = PrefManager.getVal(PrefName.homeLayout);
-          List<String> tempReorderedItems = List<String>.from(views);
-          List<bool> tempCheckedState = List<bool>.from(checkedState);
+          final homeLayoutMap = PrefManager.getVal(PrefName.animeLayout);
+          List<String> titles = List<String>.from(homeLayoutMap.keys.toList());
+          List<bool> checkedStates =
+              List<bool>.from(homeLayoutMap.values.toList());
 
-          context.customAlertDialog()
-            ..setTitle('Manage Layouts on Home')
+          AlertDialogBuilder(context)
+            ..setTitle('Manage Layouts on Anime Page')
             ..reorderableMultiSelectableItems(
-              tempReorderedItems,
-              tempCheckedState,
-                  (reorderedItems) {
-                tempReorderedItems = reorderedItems;
-              },
-                  (newCheckedState) {
-                tempCheckedState = newCheckedState;
-              },
+              titles,
+              checkedStates,
+              (reorderedItems) => titles = reorderedItems,
+              (newCheckedStates) => checkedStates = newCheckedStates,
             )
-            ..setPosButton('OK', () {
-              PrefManager.setVal(PrefName.homeLayoutOrder, tempReorderedItems);
-              PrefManager.setVal(PrefName.homeLayout, tempCheckedState);
+            ..setPositiveButton('OK', () {
+              PrefManager.setVal(PrefName.animeLayout,
+                  Map.fromIterables(titles, checkedStates));
+              Refresh.activity[2]?.value = true;
             })
-            ..setNegButton("Cancel", null)
+            ..setNegativeButton("Cancel", null)
             ..show();
         },
-      )
+      ),
+      Setting(
+        type: SettingType.normal,
+        name: 'Manage Layouts on Manga Page',
+        description: 'Does not belong here',
+        icon: Icons.palette,
+        onClick: () async {
+          final homeLayoutMap = PrefManager.getVal(PrefName.mangaLayout);
+          List<String> titles = List<String>.from(homeLayoutMap.keys.toList());
+          List<bool> checkedStates =
+              List<bool>.from(homeLayoutMap.values.toList());
+
+          AlertDialogBuilder(context)
+            ..setTitle('Manage Layouts on Manga Page')
+            ..reorderableMultiSelectableItems(
+              titles,
+              checkedStates,
+              (reorderedItems) => titles = reorderedItems,
+              (newCheckedStates) => checkedStates = newCheckedStates,
+            )
+            ..setPositiveButton('OK', () {
+              PrefManager.setVal(PrefName.mangaLayout,
+                  Map.fromIterables(titles, checkedStates));
+              Refresh.activity[3]?.value = true;
+            })
+            ..setNegativeButton("Cancel", null)
+            ..show();
+        },
+      ),
+      Setting(
+        type: SettingType.normal,
+        name: 'Manage Layouts on Home Page',
+        description: 'Does not belong here',
+        icon: Icons.palette,
+        onClick: () async {
+          final homeLayoutMap = PrefManager.getVal(PrefName.homeLayout);
+          List<String> titles = List<String>.from(homeLayoutMap.keys.toList());
+          List<bool> checkedStates =
+              List<bool>.from(homeLayoutMap.values.toList());
+
+          AlertDialogBuilder(context)
+            ..setTitle('Manage Layouts on Home Page')
+            ..reorderableMultiSelectableItems(
+              titles,
+              checkedStates,
+              (reorderedItems) => titles = reorderedItems,
+              (newCheckedStates) => checkedStates = newCheckedStates,
+            )
+            ..setPositiveButton('OK', () {
+              PrefManager.setVal(PrefName.homeLayout,
+                  Map.fromIterables(titles, checkedStates));
+              Refresh.activity[1]?.value = true;
+            })
+            ..setNegativeButton("Cancel", null)
+            ..show();
+        },
+      ),
     ];
   }
 }
+
 //TODO
 class ThemeSelector extends StatefulWidget {
   const ThemeSelector({super.key});
@@ -181,7 +236,8 @@ class ThemeSelectorState extends State<ThemeSelector> {
               opacity: 0.58,
               child: Text(
                 'Theme',
-                style: TextStyle(fontFamily: 'Poppins', fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    fontFamily: 'Poppins', fontWeight: FontWeight.bold),
               ),
             ),
           ),
@@ -226,4 +282,3 @@ class ThemeSelectorState extends State<ThemeSelector> {
     );
   }
 }
-

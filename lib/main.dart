@@ -1,12 +1,16 @@
-
 import 'package:dantotsu/api/Anilist/AnilistViewModel.dart';
 import 'package:dantotsu/Screens/Anime/AnimeScreen.dart';
 import 'package:dantotsu/api/Anilist/Data/data.dart';
 import 'package:dynamic_color/dynamic_color.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart' as provider;
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:intl/intl.dart';
+import 'package:isar/isar.dart';
 import 'package:protocol_handler/protocol_handler.dart';
 import 'package:provider/provider.dart';
 
@@ -15,25 +19,38 @@ import 'Preferences/PrefManager.dart';
 import 'Screens/HomeNavbar.dart';
 import 'Screens/Login/LoginScreen.dart';
 import 'Screens/Manga/MangaScreen.dart';
+import 'StorageProvider.dart';
 import 'Theme/ThemeManager.dart';
 import 'Theme/ThemeProvider.dart';
 import 'api/Anilist/Anilist.dart';
-// import 'screens/Home/HomeScreen.dart';
 import 'package:dantotsu/Screens/Home/HomeScreen.dart';
-void main() async {
+
+late Isar isar;
+void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
   await PrefManager.init();
   await protocolHandler.register('dantotsu');
+  isar = await StorageProvider().initDB(null, inspector: kDebugMode);
+  await StorageProvider().requestPermission();
   registerAllTypes();
-  AnilistHomeViewModel.loadMain();
+  iniDateFormatting();
   runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => ThemeNotifier()),
-      ],
-      child: const MyApp(),
+    provider.ProviderScope(
+      child: MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (_) => ThemeNotifier()),
+        ],
+        child: const MyApp(),
+      ),
     ),
   );
+}
+void iniDateFormatting() {
+  initializeDateFormatting();
+  final supportedLocales = DateFormat.allLocalesWithSymbols();
+  for (var locale in supportedLocales) {
+    initializeDateFormatting(locale);
+  }
 }
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -48,7 +65,9 @@ class MyApp extends StatelessWidget {
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
           statusBarColor: Colors.transparent,
-          systemNavigationBarColor: Colors.transparent),
+          systemNavigationBarColor: Colors.transparent,
+          systemNavigationBarDividerColor: Colors.transparent,
+      ),
     );
     return DynamicColorBuilder(
       builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
@@ -72,7 +91,7 @@ class MainActivity extends StatefulWidget {
   @override
   MainActivityState createState() => MainActivityState();
 }
-
+FloatingBottomNavBar? navbar;
 class MainActivityState extends State<MainActivity> with ProtocolListener {
   int _selectedIndex = 1;
 
@@ -96,6 +115,11 @@ class MainActivityState extends State<MainActivity> with ProtocolListener {
 
   @override
   Widget build(BuildContext context) {
+    AnilistHomeViewModel.loadMain();
+    navbar = FloatingBottomNavBar(
+      selectedIndex: _selectedIndex,
+      onTabSelected: _onTabSelected,
+    );
     return Scaffold(
       body: Stack(
         children: [
@@ -111,10 +135,7 @@ class MainActivityState extends State<MainActivity> with ProtocolListener {
               ],
             );
           }),
-          FloatingBottomNavBar(
-            selectedIndex: _selectedIndex,
-            onTabSelected: _onTabSelected,
-          ),
+          navbar!,
         ],
       ),
     );

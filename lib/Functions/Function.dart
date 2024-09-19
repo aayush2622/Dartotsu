@@ -1,12 +1,9 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:http/http.dart' as http;
 import '../main.dart';
 
 class _RefreshController extends GetxController {
@@ -16,8 +13,14 @@ class _RefreshController extends GetxController {
     activity.forEach((key, value) {
       activity[key]?.value = true;
     });
-  }
 
+  }
+  void allButNot(int k) {
+    activity.forEach((key, value) {
+      if (k == key) return;
+      activity[key]?.value = true;
+    });
+  }
   RxBool getOrPut(int key, bool initialValue) {
     return activity.putIfAbsent(key, () => RxBool(initialValue));
   }
@@ -26,20 +29,18 @@ var Refresh = Get.put(_RefreshController(), permanent: true);
 
 Future<void> snackString(
     String? s, {
-      String? clipboard,
+    String? clipboard,
     }) async {
-  var context = navigatorKey.currentContext;
-  var theme = Theme.of(context!).colorScheme;
-  try {
-    if (s != null) {
+  var context = navigatorKey.currentContext ?? Get.context;
+
+  if (context != null && s != null && s.isNotEmpty) {
+    var theme = Theme.of(context).colorScheme;
+
+    try {
       final snackBar = SnackBar(
         content: GestureDetector(
-          onTap: () {
-            ScaffoldMessenger.of(context).hideCurrentSnackBar();
-          },
-          onLongPress: () {
-            copyToClipboard(clipboard ?? s);
-          },
+          onTap: () => ScaffoldMessenger.of(context).hideCurrentSnackBar(),
+          onLongPress: () => copyToClipboard(clipboard ?? s),
           child: Text(
             s,
             textAlign: TextAlign.center,
@@ -62,12 +63,15 @@ Future<void> snackString(
         duration: const Duration(seconds: 2),
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    } catch (e, stackTrace) {
+      debugPrint('Error showing SnackBar: $e');
+      debugPrint(stackTrace.toString());
     }
-  } catch (e, stackTrace) {
-    debugPrint(e.toString());
-    debugPrint(stackTrace.toString());
+  } else {
+    debugPrint('No valid context or string provided.');
   }
 }
+
 
 void copyToClipboard(String text) {
   var context = navigatorKey.currentContext;
@@ -107,33 +111,3 @@ void navigateToPage(BuildContext context, Widget page) {
   );
 }
 
-Future<void> downloadImage(String url, String filename) async {
-  String getFileExtension(String? contentType) {
-    if (contentType == null) return 'jpg';
-    if (contentType.contains('jpeg')) return 'jpg';
-    if (contentType.contains('png')) return 'png';
-    if (contentType.contains('gif')) return 'gif';
-    // Add other formats as needed
-    return 'jpg'; // Default extension
-  }
-  try {
-    Directory directory = await getApplicationDocumentsDirectory();
-    String filePath = '${directory.path}/$filename';
-    var response = await http.get(Uri.parse(url));
-
-    if (response.statusCode == 200) {
-      String? contentType = response.headers['content-type'];
-      String fileExtension = getFileExtension(contentType);
-
-      filePath += '.$fileExtension';
-      File file = File(filePath);
-      await file.writeAsBytes(response.bodyBytes);
-
-      print('Image downloaded and saved to $filePath');
-    } else {
-      print('Failed to download image. Status code: ${response.statusCode}');
-    }
-  } catch (e) {
-    print('Error downloading image: $e');
-  }
-}

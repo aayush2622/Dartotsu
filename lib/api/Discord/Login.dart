@@ -1,4 +1,3 @@
-
 import 'package:dantotsu/Functions/Function.dart';
 import 'package:dantotsu/api/Discord/Discord.dart';
 import 'package:flutter/material.dart';
@@ -70,9 +69,7 @@ class LoginState extends State<Login> {
     setState(() {
       _errorMessage = message;
     });
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text(message),
-    ));
+    snackString(message);
     Navigator.of(context).pop();
   }
 
@@ -103,15 +100,12 @@ class LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
-    // Initialize the WebViewController and set up configuration
     _controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setNavigationDelegate(
         NavigationDelegate(
-          onProgress: (int progress) {
-          },
-          onPageStarted: (String url) {
-          },
+          onProgress: (int progress) {},
+          onPageStarted: (String url) {},
           onPageFinished: (String url) async {
             if (url != 'https://discord.com/login') {
               await Future.delayed(const Duration(seconds: 2));
@@ -129,10 +123,8 @@ class LoginPageState extends State<LoginPage> {
               }
             }
           },
-          onHttpError: (HttpResponseError error) {
-          },
-          onWebResourceError: (WebResourceError error) {
-          },
+          onHttpError: (HttpResponseError error) {},
+          onWebResourceError: (WebResourceError error) {},
           onNavigationRequest: (NavigationRequest request) {
             if (request.url.startsWith('https://discord.com/login')) {
               return NavigationDecision.prevent;

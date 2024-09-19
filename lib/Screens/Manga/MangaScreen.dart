@@ -1,5 +1,5 @@
-import 'package:dantotsu/api/Anilist/AnilistViewModel.dart';
 import 'package:dantotsu/Functions/Extensions.dart';
+import 'package:dantotsu/api/Anilist/AnilistViewModel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_workers/rx_workers.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
@@ -9,8 +9,10 @@ import '../../Animation/SlideInAnimation.dart';
 import '../../DataClass/Media.dart';
 import '../../DataClass/MediaSection.dart';
 import '../../Functions/Function.dart';
-import '../../Widgets/Home/LoadingWidget.dart';
-import '../../Widgets/Home/SearchBar.dart';
+import '../../Preferences/PrefManager.dart';
+import '../../Preferences/Prefrences.dart';
+import '../Home/Widgets/LoadingWidget.dart';
+import '../Home/Widgets/SearchBar.dart';
 import '../../Widgets/Media/Chips.dart';
 import '../../Widgets/Media/MediaCard.dart';
 import '../../Widgets/Media/MediaSection.dart';
@@ -48,12 +50,8 @@ class MangaScreenState extends State<MangaScreen> {
   }
 
   Future<void> _refreshData() async {
-    await getUserId(() {});
-    await Future.wait([
-      _viewModel.loadTrending('MANGA'),
-      _viewModel.loadAll(),
-      _viewModel.loadPopular(true),
-    ]);
+    await getUserId();
+    await _viewModel.loadAll();
   }
 
   @override
@@ -94,22 +92,47 @@ class MangaScreenState extends State<MangaScreen> {
   List<Widget> _buildMediaSections() {
     final mediaSections = [
       MediaSectionData(
-          title: 'Trending Manhwa', list: _viewModel.popularManhwa.value),
+          type: 0,
+          title: 'Trending Manhwa',
+          list: _viewModel.popularManhwa.value
+      ),
       MediaSectionData(
-          title: 'Trending Novels', list: _viewModel.popularNovel.value),
+          type: 0,
+          title: 'Trending Novels',
+          list: _viewModel.popularNovel.value
+      ),
       MediaSectionData(
-          title: 'Top Rated', list: _viewModel.topRatedManga.value),
+          type: 0,
+          title: 'Top Rated Manga',
+          list: _viewModel.topRatedManga.value
+      ),
       MediaSectionData(
-          title: 'Most Favourite', list: _viewModel.mostFavManga.value),
+          type: 0,
+          title: 'Most Favourite Manga',
+          list: _viewModel.mostFavManga.value
+      ),
     ];
-
-    return mediaSections
+    final mangaLayoutMap = PrefManager.getVal(PrefName.mangaLayout);
+    final sectionMap = {
+      for (var section in mediaSections) section.title: section
+    };
+    return mangaLayoutMap.entries
+        .where((entry) => entry.value)
+        .map((entry) => sectionMap[entry.key])
+        .whereType<MediaSectionData>()
         .map((section) => MediaSection(
               context: context,
+              type: section.type,
               title: section.title,
               mediaList: section.list,
             ))
         .toList()
+      ..add(MediaSection(
+        context: context,
+        type: 2,
+        title: 'Popular Manga',
+        mediaList: _viewModel.mangaPopular.value,
+      ))
       ..add(const SizedBox(height: 128));
   }
 
@@ -129,7 +152,9 @@ class MangaScreenState extends State<MangaScreen> {
                       ? MediaAdaptor(type: 1, mediaList: mediaDataList)
                       : const Center(child: CircularProgressIndicator()),
                 ),
-                const MediaSearchBar(title: "MANGA",),
+                const MediaSearchBar(
+                  title: "MANGA",
+                ),
                 Positioned(
                   bottom: 92,
                   left: 8.0,
@@ -138,11 +163,17 @@ class MangaScreenState extends State<MangaScreen> {
                     child: ChipsWidget(
                       chips: [
                         ChipData(
-                            label: 'Trending Manga', action: () => chipCall('MANGA')),
+                            label: 'Trending Manga',
+                            action: () => chipCall('MANGA')
+                        ),
                         ChipData(
-                            label: 'Trending Manhwa', action: () => chipCall('MANHWA')),
+                            label: 'Trending Manhwa',
+                            action: () => chipCall('MANHWA')
+                        ),
                         ChipData(
-                            label: 'Trending Novel', action: () => chipCall('NOVEL')),
+                            label: 'Trending Novel',
+                            action: () => chipCall('NOVEL')
+                        ),
                       ],
                     ),
                   ),

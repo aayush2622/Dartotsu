@@ -4,17 +4,19 @@ import 'package:get/get_rx/src/rx_workers/rx_workers.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
 import '../../Adaptor/Media/MediaAdaptor.dart';
-import '../../api/Anilist/AnilistViewModel.dart';
 import '../../Animation/SlideInAnimation.dart';
 import '../../DataClass/Media.dart';
 import '../../DataClass/MediaSection.dart';
 import '../../Functions/Function.dart';
-import '../../Widgets/Home/LoadingWidget.dart';
-import '../../Widgets/Home/SearchBar.dart';
+import '../../Preferences/PrefManager.dart';
+import '../../Preferences/Prefrences.dart';
+import '../Home/Widgets/LoadingWidget.dart';
+import '../Home/Widgets/SearchBar.dart';
 import '../../Widgets/Media/Chips.dart';
 import '../../Widgets/Media/MediaCard.dart';
 import '../../Widgets/Media/MediaSection.dart';
 import '../../Widgets/ScrollConfig.dart';
+import '../../api/Anilist/AnilistViewModel.dart';
 
 class AnimeScreen extends StatefulWidget {
   const AnimeScreen({super.key});
@@ -48,12 +50,8 @@ class AnimeScreenState extends State<AnimeScreen> {
   }
 
   Future<void> _refreshData() async {
-    await getUserId(() {});
-    await Future.wait([
-      _viewModel.loadTrending(1),
-      _viewModel.loadAll(),
-      _viewModel.loadPopular(true),
-    ]);
+    await getUserId();
+    await _viewModel.loadAll();
   }
 
   @override
@@ -93,21 +91,43 @@ class AnimeScreenState extends State<AnimeScreen> {
 
   List<Widget> _buildMediaSections() {
     final mediaSections = [
-      MediaSectionData(title: 'Recent Updates', list: _viewModel.updated.value),
       MediaSectionData(
-          title: 'Trending Movies', list: _viewModel.popularMovies.value),
+          type: 0, title: 'Recent Updates', list: _viewModel.updated.value),
       MediaSectionData(
-          title: 'Top Rated Series', list: _viewModel.topRatedSeries.value),
+          type: 0,
+          title: 'Trending Movies',
+          list: _viewModel.popularMovies.value),
       MediaSectionData(
-          title: 'Most Favourite Series', list: _viewModel.mostFavSeries.value),
+          type: 0,
+          title: 'Top Rated Series',
+          list: _viewModel.topRatedSeries.value),
+      MediaSectionData(
+          type: 0,
+          title: 'Most Favourite Series',
+          list: _viewModel.mostFavSeries.value,
+      ),
     ];
-    return mediaSections
+    final animeLayoutMap = PrefManager.getVal(PrefName.animeLayout);
+    final sectionMap = {
+      for (var section in mediaSections) section.title: section
+    };
+    return animeLayoutMap.entries
+        .where((entry) => entry.value)
+        .map((entry) => sectionMap[entry.key])
+        .whereType<MediaSectionData>()
         .map((section) => MediaSection(
               context: context,
+              type: section.type,
               title: section.title,
               mediaList: section.list,
             ))
         .toList()
+      ..add(MediaSection(
+        context: context,
+        type: 2,
+        title: 'Popular Anime',
+        mediaList: _viewModel.animePopular.value,
+      ))
       ..add(const SizedBox(height: 128));
   }
 

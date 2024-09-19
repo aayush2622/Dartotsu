@@ -7,7 +7,6 @@ import 'package:dantotsu/api/Discord/Discord.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:icons_plus/icons_plus.dart';
-
 import '../../Adaptor/Settings/SettingsAdaptor.dart';
 import '../../DataClass/Setting.dart';
 import '../../Functions/Function.dart';
@@ -65,7 +64,7 @@ class SettingsScreen extends StatelessWidget {
         name: 'Account',
         description: 'Anilist, MAL and Discord.\nWhat more could you need?',
         icon: Icons.person,
-        onClick: () {Discord.warning(context);},
+        onClick: () async => Discord.warning(context),
         isActivity: true,
       ),
       Setting(

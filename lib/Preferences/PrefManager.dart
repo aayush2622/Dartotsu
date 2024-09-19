@@ -1,136 +1,114 @@
-import 'package:shared_preferences/shared_preferences.dart';
+
+import 'dart:io';
+
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:path_provider/path_provider.dart';
+
+import '../Screens/Info/DataClasses/ShowResponse.dart';
 
 class Pref<T> {
+  final Location location;
   final String key;
   final T defaultValue;
 
-  const Pref(this.key, this.defaultValue);
+  const Pref(this.location, this.key, this.defaultValue);
 }
-
+enum Location {
+  General,
+  UI,
+  Player,
+  Reader,
+  Irrelevant,
+  Protected,
+}
 class PrefManager {
-  static SharedPreferences? _prefs;
+
+  static Box? _generalPreferences;
+  static Box? _uiPreferences;
+  static Box? _playerPreferences;
+  static Box? _readerPreferences;
+  static Box? _irrelevantPreferences;
+  static Box? _protectedPreferences;
 
   // Call this method at the start of the app
   static Future<void> init() async {
-    _prefs = await SharedPreferences.getInstance();
+    HiveAdapters();
+    if (_generalPreferences != null) return;
+    final dir = await getApplicationDocumentsDirectory();
+    final path = '${dir.path}/Dantotsu/preferences';
+    await Directory(path).create(recursive: true);
+    await Hive.initFlutter(path);
+    _generalPreferences = await Hive.openBox('generalPreferences');
+    _uiPreferences = await Hive.openBox('uiPreferences');
+    _playerPreferences = await Hive.openBox('playerPreferences');
+    _readerPreferences = await Hive.openBox('readerPreferences');
+    _irrelevantPreferences = await Hive.openBox('irrelevantPreferences');
+    _protectedPreferences = await Hive.openBox('protectedPreferences');
   }
-
+  static void HiveAdapters(){
+    Hive.registerAdapter(ShowResponseAdapter());
+  }
   static void setVal<T>(Pref<T> pref, T value) {
     _checkInitialization();
-    final keyString = pref.key;
-
-    if (value is int) {
-      _prefs!.setInt(keyString, value);
-    } else if (value is double) {
-      _prefs!.setDouble(keyString, value);
-    } else if (value is bool) {
-      _prefs!.setBool(keyString, value);
-    } else if (value is String) {
-      _prefs!.setString(keyString, value);
-    } else if (value is List<String>) {
-      _prefs!.setStringList(keyString, value);
-    } else if (value is List<bool>) {
-      _prefs!.setStringList(keyString, value.map((e) => e.toString()).toList());
-    } else if (value is Set<int>) {
-      _prefs!.setStringList(keyString, value.map((e) => e.toString()).toList());
-    } else if (value is List<int>) {
-      _prefs!.setStringList(keyString, value.map((e) => e.toString()).toList());
-    } else {
-      throw Exception('Invalid value type');
-    }
+    final box = _getPrefBox(pref.location);
+    box.put(pref.key, value);
   }
 
   static T getVal<T>(Pref<T> pref) {
     _checkInitialization();
-    final keyString = pref.key;
-
-    if (T == bool) {
-      return (_prefs!.getBool(keyString) ?? pref.defaultValue) as T;
-    } else if (T == String) {
-      return (_prefs!.getString(keyString) ?? pref.defaultValue) as T;
-    } else if (T == int) {
-      return (_prefs!.getInt(keyString) ?? pref.defaultValue) as T;
-    } else if (T == double) {
-      return (_prefs!.getDouble(keyString) ?? pref.defaultValue) as T;
-    } else if (T == List<String>) {
-      return (_prefs!.getStringList(keyString) ?? pref.defaultValue) as T;
-    } else if (T == List<int>) {
-      final stringList = _prefs!.getStringList(keyString);
-      return (stringList?.map((e) => int.parse(e)).toList() ?? pref.defaultValue) as T;
-    } else if (T == Set<int>) {
-      final stringList = _prefs!.getStringList(keyString);
-      return (stringList?.map((e) => int.parse(e)).toSet() ?? pref.defaultValue) as T;
-    } else if (T == List<bool>) {
-      final stringList = _prefs!.getStringList(keyString);
-      return (stringList?.map((e) => e == 'true').toList() ?? pref.defaultValue) as T;
-    } else {
-      throw Exception('Unsupported type');
+    final box = _getPrefBox(pref.location);
+    final value = box.get(pref.key, defaultValue: pref.defaultValue);
+    if (value is T) {
+      return value;
+    } else if (value is Map) {
+      if (T == Map<String, bool>) {
+        final typedMap = Map<String, bool>.from(value);
+        return typedMap as T;
+      }
+      // add more idk how to fix this shit
     }
+    return pref.defaultValue;
   }
-
   static void setCustomVal<T>(String key, T value) {
     _checkInitialization();
-    _setValue(key, value);
+    final box = _getPrefBox(Location.Irrelevant);
+    box.put(key, value);
   }
 
   static T? getCustomVal<T>(String key) {
     _checkInitialization();
-    return _getValue<T>(key);
-  }
-
-  // Helper Methods
-  static void _checkInitialization() {
-    if (_prefs == null) {
-      throw Exception('SharedPreferences not initialized. Call PrefManager.init() first.');
-    }
-  }
-
-  static void _setValue<T>(String key, T value) {
-    if (value is int) {
-      _prefs!.setInt(key, value);
-    } else if (value is double) {
-      _prefs!.setDouble(key, value);
-    } else if (value is bool) {
-      _prefs!.setBool(key, value);
-    } else if (value is String) {
-      _prefs!.setString(key, value);
-    } else if (value is List<String>) {
-      _prefs!.setStringList(key, value);
-    } else if (value is List<bool>) {
-      _prefs!.setStringList(key, value.map((e) => e.toString()).toList());
-    } else if (value is Set<int>) {
-      _prefs!.setStringList(key, value.map((e) => e.toString()).toList());
-    } else if (value is List<int>) {
-      _prefs!.setStringList(key, value.map((e) => e.toString()).toList());
-    } else {
-      throw Exception('Invalid value type');
-    }
-  }
-
-  static T? _getValue<T>(String key) {
-    if (T == bool) return _prefs!.getBool(key) as T?;
-    if (T == String) return _prefs!.getString(key) as T?;
-    if (T == int) return _prefs!.getInt(key) as T?;
-    if (T == double) return _prefs!.getDouble(key) as T?;
-    if (T == List<String>) return _prefs!.getStringList(key) as T?;
-    if (T == List<int>) {
-      final stringList = _prefs!.getStringList(key);
-      return stringList?.map((e) => int.parse(e)).toList() as T?;
-    }
-    if (T == Set<int>) {
-      final stringList = _prefs!.getStringList(key);
-      return stringList?.map((e) => int.parse(e)).toSet() as T?;
-    }
-    if (T == List<bool>) {
-      final stringList = _prefs!.getStringList(key);
-      return stringList?.map((e) => e == 'true').toList() as T?;
-    }
-
-    throw Exception('Invalid value type');
+    final box = _getPrefBox(Location.Irrelevant);
+    return box.get(key) as T?;
   }
 
   static void removeVal(Pref<dynamic> pref) {
     _checkInitialization();
-    _prefs!.remove(pref.key);
+    final box = _getPrefBox(pref.location);
+    box.delete(pref.key);
+  }
+
+  // Helper method to check initialization
+  static void _checkInitialization() {
+    if (_generalPreferences == null) {
+      throw Exception('Hive not initialized. Call PrefManager.init() first.');
+    }
+  }
+  static Box _getPrefBox(Location location) {
+    switch (location.name) {
+      case 'General':
+        return _generalPreferences!;
+      case 'UI':
+        return _uiPreferences!;
+      case 'Player':
+        return _playerPreferences!;
+      case 'Reader':
+        return _readerPreferences!;
+      case 'Irrelevant':
+        return _irrelevantPreferences!;
+      case 'Protected':
+        return _protectedPreferences!;
+      default:
+        throw Exception("Invalid box name");
+    }
   }
 }

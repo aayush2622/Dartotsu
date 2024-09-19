@@ -1,24 +1,30 @@
+import 'dart:convert';
+
 import 'package:dantotsu/api/Anilist/Data/page.dart';
 import 'package:dantotsu/api/Anilist/Data/user.dart';
 import 'package:json_annotation/json_annotation.dart';
-
 import '../Anilist.dart';
 import 'media.dart';
 
 part 'Generated/data.g.dart';
 
 void registerAllTypes() {
-  TypeFactory.create<PageResponse>((json) => PageResponse.fromJson(json));
-  TypeFactory.create<MediaResponse>((json) => MediaResponse.fromJson(json));
+  TypeFactory.create<PageResponse>(
+      (json) => PageResponse.fromJson(json));
+  TypeFactory.create<MediaResponse>(
+      (json) => MediaResponse.fromJson(json));
   TypeFactory.create<MediaListCollectionResponse>(
       (json) => MediaListCollectionResponse.fromJson(json));
-  TypeFactory.create<ViewerResponse>((json) => ViewerResponse.fromJson(json));
+  TypeFactory.create<ViewerResponse>(
+      (json) => ViewerResponse.fromJson(json));
   TypeFactory.create<UserListResponse>(
       (json) => UserListResponse.fromJson(json));
   TypeFactory.create<AnimeListResponse>(
       (json) => AnimeListResponse.fromJson(json));
   TypeFactory.create<MangaListResponse>(
       (json) => MangaListResponse.fromJson(json));
+  TypeFactory.create<JsonDecoder> (
+      (json) => jsonDecode(json as String));
 }
 
 @JsonSerializable()
@@ -163,12 +169,16 @@ class AnimeListResponse {
 
 @JsonSerializable()
 class AnimeListData {
+  Page? popularAnime;
+  Page? trendingAnime;
   Page? recentUpdates;
   Page? trendingMovies;
   Page? topRatedSeries;
   Page? mostFavSeries;
 
   AnimeListData({
+    this.popularAnime,
+    this.trendingAnime,
     this.recentUpdates,
     this.trendingMovies,
     this.topRatedSeries,
@@ -196,14 +206,16 @@ class MangaListResponse {
 
 @JsonSerializable()
 class MangaListData {
-  Page? trendingManga;
+  Page? trending;
+  Page? popularManga;
   Page? trendingManhwa;
   Page? trendingNovel;
   Page? topRated;
   Page? mostFav;
 
   MangaListData({
-    this.trendingManga,
+    this.trending,
+    this.popularManga,
     this.trendingManhwa,
     this.trendingNovel,
     this.topRated,

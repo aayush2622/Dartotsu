@@ -26,6 +26,7 @@ class _AnilistController extends GetxController {
   Map<bool, List<String>>? tags;
   int rateLimitReset = 0;
   var isInitialized = false.obs;
+  var run = true.obs;
   bool adult = false;
   String? titleLanguage;
   String? staffNameLanguage;
@@ -57,11 +58,12 @@ class _AnilistController extends GetxController {
     if (currentMonth <= 2) return 0;
     if (currentMonth <= 5) return 1;
     if (currentMonth <= 8) return 2;
-    return 3;
+    if (currentMonth <= 11) return 3;
+    return 0;
   }
 
   Map<String, int> getSeason(bool next) {
-    int season = currentSeason + (next ? 1 : -1);
+    int season = currentSeason + (next ? 0 : -2);
     int year = currentYear;
     if (season > 3) { season = 0; year++; }
     if (season < 0) { season = 3; year--; }
@@ -70,7 +72,7 @@ class _AnilistController extends GetxController {
 
   List<Map<String, int>> get currentSeasons => [
     getSeason(false),
-    {seasons[currentSeason]: currentYear},
+    {seasons[currentSeason - 1]: currentYear},
     getSeason(true),
   ];
 
@@ -82,6 +84,9 @@ class _AnilistController extends GetxController {
   Future<void> saveToken(String token) async {
     PrefManager.setVal(PrefName.anilistToken, token);
     this.token.value = token;
+    run.value = true;
+    isInitialized.value = false;
+    Refresh.allButNot(1);
   }
 
   void removeSavedToken() {
@@ -95,7 +100,9 @@ class _AnilistController extends GetxController {
     chapterRead = null;
     unreadNotificationCount = 0;
     PrefManager.removeVal(PrefName.anilistToken);
+    run.value = true;
     isInitialized.value = false;
+    Refresh.allButNot(1);
   }
 
   Future<T?> _executeQuery<T>(

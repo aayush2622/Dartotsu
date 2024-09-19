@@ -4,12 +4,13 @@ import '../../Adaptor/Media/MediaAdaptor.dart';
 import '../../DataClass/Media.dart';
 
 Widget MediaSection({
-  BuildContext? context,
+  required BuildContext context,
+  required int type,
   required String title,
   List<media>? mediaList,
   List<Widget>? customNullListIndicator,
 }) {
-  var theme = Theme.of(context!);
+  var theme = Theme.of(context);
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -25,7 +26,7 @@ Widget MediaSection({
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 28.0,right: 16),
+              padding: const EdgeInsets.only(left: 28.0, right: 16),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -43,8 +44,7 @@ Widget MediaSection({
                     transform: Matrix4.rotationZ(3.14),
                     child: IconButton(
                       icon: const Icon(Icons.arrow_back, size: 24),
-                      onPressed: () {
-                      },
+                      onPressed: () {},
                     ),
                   ),
                 ],
@@ -54,24 +54,28 @@ Widget MediaSection({
             AnimatedSwitcher(
               duration: const Duration(milliseconds: 300),
               child: mediaList.isEmpty
-                  ? SizedBox(
-                height: 250,
-                child: Center(
-                  child: customNullListIndicator?.isNotEmpty ?? false
+              ? SizedBox(
+                  height: 250,
+                  child: Center(
+                    child: customNullListIndicator?.isNotEmpty ?? false
                       ? Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: customNullListIndicator!,
-                  )
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: customNullListIndicator!,
+                        )
                       : const Text(
-                    'Nothing here',
-                    style: TextStyle(
-                      fontFamily: 'Poppins',
-                      fontSize: 16,
-                    ),
+                          'Nothing here',
+                          style: TextStyle(
+                            fontFamily: 'Poppins',
+                            fontSize: 16,
+                          ),
+                        ),
                   ),
+                )
+              : MediaAdaptor(
+                  type: type,
+                  mediaList: mediaList,
+                  // Pass the callback here
                 ),
-              )
-                  : MediaAdaptor(type: 0, mediaList: mediaList),
             ),
           ],
         )

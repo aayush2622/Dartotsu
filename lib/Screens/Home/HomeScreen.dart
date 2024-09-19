@@ -6,6 +6,7 @@ import 'package:dantotsu/Functions/Function.dart';
 import 'package:dantotsu/Screens/Login/LoginScreen.dart';
 import 'package:dantotsu/Theme/ThemeProvider.dart';
 import 'package:dantotsu/Widgets/CustomElevatedButton.dart';
+import 'package:dantotsu/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kenburns_nullsafety/kenburns_nullsafety.dart';
@@ -15,9 +16,9 @@ import '../../Animation/SlideInAnimation.dart';
 import '../../DataClass/MediaSection.dart';
 import '../../Preferences/PrefManager.dart';
 import '../../Preferences/Prefrences.dart';
-import '../../Widgets/Home/AvtarWidget.dart';
-import '../../Widgets/Home/LoadingWidget.dart';
-import '../../Widgets/Home/NotificationBadge.dart';
+import 'Widgets/AvtarWidget.dart';
+import 'Widgets/LoadingWidget.dart';
+import 'Widgets/NotificationBadge.dart';
 import '../../Widgets/Media/MediaCard.dart';
 import '../../Widgets/Media/MediaSection.dart';
 import '../../Widgets/ScrollConfig.dart';
@@ -49,18 +50,23 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   Future<void> load() async {
     final live = Refresh.getOrPut(1, false);
-    ever(live, (shouldRefresh) async {
-      if (running && shouldRefresh) {
+    ever(live, (bool shouldRefresh) async {
+      if (running && shouldRefresh && mounted) {
         setState(() => running = false);
-        await getUserId(() => setState(() => running = true));
-        await Future.wait([
-          _viewModel.setListImages(),
-          _viewModel.initHomePage(),
-        ]);
+        await _refreshData();
         live.value = false;
+        setState(() => running = true);
       }
     });
     Refresh.activity[1]?.value = true;
+  }
+
+  Future<void> _refreshData() async {
+    await getUserId();
+    await Future.wait([
+      _viewModel.setListImages(),
+      _viewModel.initHomePage(),
+    ]);
   }
 
   @override
@@ -68,9 +74,7 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     var backgroundHeight = 212.statusBar();
     return Scaffold(
       body: RefreshIndicator(
-        onRefresh: () async {
-          Refresh.activity[1]?.value = true;
-        },
+        onRefresh: () async => Refresh.activity[1]?.value = true,
         child: CustomScrollConfig(
           context,
           children: [
@@ -120,90 +124,90 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   List<Widget> buildMediaSections(BuildContext context) {
     final mediaSections = [
       MediaSectionData(
+        type: 0,
         title: 'Continue Watching',
         list: _viewModel.animeContinue.value,
-        icon: Icons.movie_filter_rounded,
-        message: 'All caught up, when New?',
-        buttonText: 'Browse\nAnime',
+        emptyIcon: Icons.movie_filter_rounded,
+        emptyMessage: 'All caught up, when New?',
+        emptyButtonText: 'Browse\nAnime',
+        emptyButtonOnPressed: () => navbar?.onClick(0),
       ),
       MediaSectionData(
+        type: 0,
         title: 'Favourite Anime',
         list: _viewModel.animeFav.value,
-        icon: Icons.heart_broken,
-        message:
+        emptyIcon: Icons.heart_broken,
+        emptyMessage:
             'Looks like you don\'t like anything,\nTry liking a show to keep it here.',
       ),
       MediaSectionData(
+        type: 0,
         title: 'Planned Anime',
         list: _viewModel.animePlanned.value,
-        icon: Icons.movie_filter_rounded,
-        message: 'All caught up, when New?',
-        buttonText: 'Browse\nAnime',
+        emptyIcon: Icons.movie_filter_rounded,
+        emptyMessage: 'All caught up, when New?',
+        emptyButtonText: 'Browse\nAnime',
+        emptyButtonOnPressed: () => navbar?.onClick(0),
       ),
       MediaSectionData(
+        type: 0,
         title: 'Continue Reading',
         list: _viewModel.mangaContinue.value,
-        icon: Icons.import_contacts,
-        message: 'All caught up, when New?',
-        buttonText: 'Browse\nManga',
+        emptyIcon: Icons.import_contacts,
+        emptyMessage: 'All caught up, when New?',
+        emptyButtonText: 'Browse\nManga',
+        emptyButtonOnPressed: () => navbar?.onClick(2),
       ),
       MediaSectionData(
+        type: 0,
         title: 'Favourite Manga',
         list: _viewModel.mangaFav.value,
-        icon: Icons.heart_broken,
-        message:
+        emptyIcon: Icons.heart_broken,
+        emptyMessage:
             'Looks like you don\'t like anything,\nTry liking a show to keep it here.',
       ),
       MediaSectionData(
+        type: 0,
         title: 'Planned Manga',
         list: _viewModel.mangaPlanned.value,
-        icon: Icons.import_contacts,
-        message: 'All caught up, when New?',
-        buttonText: 'Browse\nManga',
+        emptyIcon: Icons.import_contacts,
+        emptyMessage: 'All caught up, when New?',
+        emptyButtonText: 'Browse\nManga',
+        emptyButtonOnPressed: () => navbar?.onClick(2),
       ),
       MediaSectionData(
+        type: 0,
         title: 'Recommended',
         list: _viewModel.recommendation.value,
-        icon: Icons.auto_awesome,
-        message: 'Watch/Read some Anime or Manga to get Recommendations',
-      )
+        emptyIcon: Icons.auto_awesome,
+        emptyMessage: 'Watch/Read some Anime or Manga to get Recommendations',
+      ),
     ];
 
-    var homeLayoutOrder = PrefManager.getVal(PrefName.homeLayoutOrder);
-    var toShow = PrefManager.getVal(PrefName.homeLayout);
+    final homeLayoutMap = PrefManager.getVal(PrefName.homeLayout);
+    final sectionMap = {
+      for (var section in mediaSections) section.title: section
+    };
 
-    List<MediaSectionData> getOrderedMediaSections() {
-      final Map<String, MediaSectionData> sectionMap = {
-        for (var section in mediaSections) section.title: section
-      };
-
-      return homeLayoutOrder
-          .map((title) => sectionMap[title])
-          .whereType<MediaSectionData>()
-          .toList();
-    }
-
-    List<Widget> sectionWidgets = [];
-    var order = getOrderedMediaSections();
-    order.asMap().forEach((index, section) {
-      if (toShow[index]) {
-        sectionWidgets.add(
-          MediaSection(
-            context: context,
-            title: section.title,
-            mediaList: section.list,
-            customNullListIndicator: _buildNullIndicator(
-              context,
-              section.icon,
-              section.message,
-              section.buttonText,
-              section.onPressed,
-            ),
-          ),
-        );
-      }
-    });
-    sectionWidgets.add(const SizedBox(height: 128));
+    final sectionWidgets = homeLayoutMap.entries
+        .where((entry) => entry.value)
+        .map((entry) => sectionMap[entry.key])
+        .whereType<MediaSectionData>()
+        .map((section) => MediaSection(
+              context: context,
+              type: section.type,
+              title: section.title,
+              mediaList: section.list,
+              customNullListIndicator: _buildNullIndicator(
+                context,
+                section.emptyIcon,
+                section.emptyMessage,
+                section.emptyButtonText,
+                section.emptyButtonOnPressed,
+              ),
+            ))
+        .toList()
+      ..add(const SizedBox(height: 128));
 
     return sectionWidgets;
   }
@@ -220,7 +224,9 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       child: Stack(
         children: [
           KenBurns(
-            maxScale: 1.5,
+            minAnimationDuration : const Duration(milliseconds: 9000),
+            maxAnimationDuration : const Duration(milliseconds: 30000),
+            maxScale: 2.5,
             child: CachedNetworkImage(
               imageUrl: Anilist.bg ?? '',
               fit: BoxFit.cover,
@@ -290,7 +296,7 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 backgroundColor: Colors.transparent,
                 radius: 26.0,
                 backgroundImage: Anilist.avatar.value != null &&
-                    Anilist.avatar.value!.isNotEmpty
+                        Anilist.avatar.value!.isNotEmpty
                     ? CachedNetworkImageProvider(Anilist.avatar.value!)
                     : const NetworkImage(""),
               ),
@@ -318,8 +324,7 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               ],
             ),
           ]),
-        )
-    );
+        ));
   }
 
   Widget _buildInfoRow(String label, String value, Color valueColor) {

@@ -176,6 +176,12 @@ Map<String, dynamic> _$AnimeListResponseToJson(AnimeListResponse instance) =>
 
 AnimeListData _$AnimeListDataFromJson(Map<String, dynamic> json) =>
     AnimeListData(
+      popularAnime: json['popularAnime'] == null
+          ? null
+          : Page.fromJson(json['popularAnime'] as Map<String, dynamic>),
+      trendingAnime: json['trendingAnime'] == null
+          ? null
+          : Page.fromJson(json['trendingAnime'] as Map<String, dynamic>),
       recentUpdates: json['recentUpdates'] == null
           ? null
           : Page.fromJson(json['recentUpdates'] as Map<String, dynamic>),
@@ -192,6 +198,8 @@ AnimeListData _$AnimeListDataFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$AnimeListDataToJson(AnimeListData instance) =>
     <String, dynamic>{
+      'popularAnime': instance.popularAnime,
+      'trendingAnime': instance.trendingAnime,
       'recentUpdates': instance.recentUpdates,
       'trendingMovies': instance.trendingMovies,
       'topRatedSeries': instance.topRatedSeries,
@@ -212,9 +220,12 @@ Map<String, dynamic> _$MangaListResponseToJson(MangaListResponse instance) =>
 
 MangaListData _$MangaListDataFromJson(Map<String, dynamic> json) =>
     MangaListData(
-      trendingManga: json['trendingManga'] == null
+      trending: json['trending'] == null
           ? null
-          : Page.fromJson(json['trendingManga'] as Map<String, dynamic>),
+          : Page.fromJson(json['trending'] as Map<String, dynamic>),
+      popularManga: json['popularManga'] == null
+          ? null
+          : Page.fromJson(json['popularManga'] as Map<String, dynamic>),
       trendingManhwa: json['trendingManhwa'] == null
           ? null
           : Page.fromJson(json['trendingManhwa'] as Map<String, dynamic>),
@@ -231,7 +242,8 @@ MangaListData _$MangaListDataFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$MangaListDataToJson(MangaListData instance) =>
     <String, dynamic>{
-      'trendingManga': instance.trendingManga,
+      'trending': instance.trending,
+      'popularManga': instance.popularManga,
       'trendingManhwa': instance.trendingManhwa,
       'trendingNovel': instance.trendingNovel,
       'topRated': instance.topRated,
