@@ -2,8 +2,8 @@ import 'package:dantotsu/Functions/Extensions.dart';
 import 'package:dantotsu/Screens/Login/LoginScreen.dart';
 import 'package:flutter/material.dart';
 
-import '../../Functions/Function.dart';
-import '../../Screens/Settings/SettingsBottomSheet.dart';
+import '../../../Functions/Function.dart';
+import '../../Settings/SettingsBottomSheet.dart';
 import 'AvtarWidget.dart';
 
 class MediaSearchBar extends StatelessWidget {
