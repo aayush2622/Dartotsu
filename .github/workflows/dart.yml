@@ -272,6 +272,12 @@ jobs:
               ${{ secrets.DISCORD_WEBHOOK_URL }}
           echo "You have only send an embed to discord due to SKIP_BUILD being set to true"
 
+      - name: Upload Current SHA as Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: last-sha
+          path: last_sha.txt
+
   # build_ios_and_macos:
   #   runs-on: macos-latest
   #   steps:
