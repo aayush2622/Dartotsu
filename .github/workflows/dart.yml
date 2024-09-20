@@ -135,7 +135,7 @@ jobs:
 
           echo "Debug: Fetching contributors from GitHub"
           # Fetch contributors from GitHub
-          contributors=$(curl -s "https://api.github.com/repos/${{ github.repository }}/contributors")
+          contributors=$(curl -s "https://api.github.com/repos/aayush2622/${{ github.repository }}/contributors")
           echo "Debug: Contributors response:"
           echo "$contributors"
 
