@@ -44,9 +44,9 @@ jobs:
   build_linux:
     runs-on: ubuntu-latest
     permissions: 
-      contents: write
-      pull-requests: write
-      repository-projects: write
+      contents: read
+      pull-requests: read
+      actions: read
     steps:
       - name: Cloing repository
         uses: actions/checkout@v4
