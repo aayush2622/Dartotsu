@@ -53,11 +53,10 @@ jobs:
         with:
           fetch-depth: 0
       - name: Download last SHA artifact
-        uses: dawidd6/action-download-artifact@v3
+        uses: dawidd6/action-download-artifact@v6
         with:
           workflow: dart.yml
           name: last-sha
-          path: .
         continue-on-error: true
       - name: Get Commits Since Last Run
         run: |
