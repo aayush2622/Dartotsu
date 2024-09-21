@@ -250,7 +250,7 @@ jobs:
                         --arg thumbnail_url "$thumbnail_url" \
                         --argjson embed_color "$embed_color" \
                         '{
-                          "content": "<@&1225347048321191996>",
+                          "content": "<@everyone>",
                           "embeds": [
                             {
                               "title": "Some Updates...",
@@ -285,6 +285,23 @@ jobs:
               -d "$discord_data" \
               ${{ secrets.DISCORD_WEBHOOK_URL }}
           echo "You have only send an embed to discord due to SKIP_BUILD being set to true"
+
+          # Upload APK to Telegram
+          if [ "$SKIP_BUILD" != "true" ]; then
+            APK_PATH="app/build/outputs/apk/google/alpha/app-google-alpha.apk"
+            response=$(curl -sS -f -X POST \
+              "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKKEN}}/sendDocument" \
+              -F "chat_id=${{ secrets.TELEGRAM_CHANNEL_ID}}" \
+              -F "document=@$APK_PATH" \
+              -F "caption=New Alpha-Build dropped 🔥
+          
+          Commits:
+          ${telegram_commit_messages}
+          version: ${VERSION}" \
+              -F "parse_mode=HTML")
+          else
+            echo "Skipping Telegram message and APK upload due to SKIP_BUILD being set to true"
+          fi
 
       - name: Upload Current SHA as Artifact
         uses: actions/upload-artifact@v4
