@@ -293,6 +293,7 @@ jobs:
             echo "$message"
           done)
           telegram_commit_messages="<blockquote>${telegram_commit_messages}</blockquote>"
+          echo "$telegram_commit_messages"
 
 
           # Upload APK to Telegram
