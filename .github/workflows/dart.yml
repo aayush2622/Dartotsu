@@ -296,6 +296,7 @@ jobs:
   #     - run: flutter build macos
   #     - name: Archive App
   #       uses: thedoctor0/zip-release@master
+  #extra
   #       with:
   #           type: 'zip'
   #           filename: Dantotsu-${{github.sha}}-macos.zip
