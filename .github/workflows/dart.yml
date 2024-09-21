@@ -286,14 +286,20 @@ jobs:
               ${{ secrets.DISCORD_WEBHOOK_URL }}
           echo "You have only send an embed to discord due to SKIP_BUILD being set to true"
 
+          # Format commit messages for Telegram
+          telegram_commit_messages=$(echo "$COMMIT_LOG" | sed 's/%0A/\n/g' | while read -r line; do
+            message=$(echo "$line" | sed -E 's/● (.*) ~(.*) \[֍\]\((.*)\)/● \1 ~\2 <a href="\3">֍<\/a>/')
+            message=$(echo "$message" | sed -E 's/\[#([0-9]+)\]\((https:\/\/github\.com\/[^)]+)\)/<a href="\2">#\1<\/a>/g')
+            echo "$message"
+          done)
+          telegram_commit_messages="<blockquote>${telegram_commit_messages}</blockquote>"
+
+          
           # Upload APK to Telegram
-          if [ "$SKIP_BUILD" != "true" ]; then
-            APK_PATH="app/build/outputs/apk/google/alpha/app-google-alpha.apk"
-            response=$(curl -sS -f -X POST \
-              "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKKEN}}/sendDocument" \
-              -F "chat_id=${{ secrets.TELEGRAM_CHANNEL_ID}}" \
-              -F "document=@$APK_PATH" \
-              -F "caption=New Alpha-Build dropped 🔥
+          response=$(curl -sS -f -X POST \
+            "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKKEN}}/sendDocument" \
+            -F "chat_id=${{ secrets.TELEGRAM_CHANNEL_ID}}" \
+            -F "caption=New Alpha-Build dropped 🔥
           
           Commits:
           ${telegram_commit_messages}
