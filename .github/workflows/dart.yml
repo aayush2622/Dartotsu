@@ -300,7 +300,7 @@ jobs:
           response=$(curl -sS -f -X POST \
             "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKKEN}}/sendDocument" \
             -F "chat_id=${{ secrets.TELEGRAM_CHANNEL_ID}}" \
-            -F "document=last_sha.txt" \
+            -F "document=@last_sha.txt" \
             -F "caption=New Alpha-Build dropped 🔥
           
           Commits:
