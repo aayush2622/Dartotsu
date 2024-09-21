@@ -253,7 +253,7 @@ jobs:
                           "content": "<@everyone>",
                           "embeds": [
                             {
-                              "title": "Some Updates...",
+                              "title": "Some Updates....",
                               "color": $embed_color,
                               "fields": [
                                 {
