@@ -306,9 +306,6 @@ jobs:
           ${telegram_commit_messages}
           version: ${VERSION}" \
               -F "parse_mode=HTML")
-          else
-            echo "Skipping Telegram message and APK upload due to SKIP_BUILD being set to true"
-          fi
 
       - name: Upload Current SHA as Artifact
         uses: actions/upload-artifact@v4
