@@ -47,9 +47,9 @@ class _ExtensionScreenState extends ConsumerState<Extension> {
   }
   Future<void> _refreshData() async {
     if (widget.isManga) {
-      await ref.read(fetchMangaSourcesListProvider(id: null, reFresh: true).future);
+      await ref.watch(fetchMangaSourcesListProvider(id: null, reFresh: true).future);
     } else {
-      await ref.read(fetchAnimeSourcesListProvider(id: null, reFresh: true).future);
+      await ref.watch(fetchAnimeSourcesListProvider(id: null, reFresh: true).future);
     }
   }
   @override
