@@ -187,7 +187,7 @@ jobs:
 
 
             # Get commit count for this contributor on the main branch
-            branch_commit_count=$(git rev-list --count main --author="$login")
+            branch_commit_count=$(git rev-list --count main --author="$name")
 
 
             # Debug: Print recent_commit_counts
