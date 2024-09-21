@@ -294,7 +294,7 @@ jobs:
           done)
           telegram_commit_messages="<blockquote>${telegram_commit_messages}</blockquote>"
 
-          
+
           # Upload APK to Telegram
           response=$(curl -sS -f -X POST \
             "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKKEN}}/sendDocument" \
