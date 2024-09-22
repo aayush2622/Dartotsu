@@ -294,13 +294,14 @@ jobs:
           done)
           telegram_commit_messages="<blockquote>${telegram_commit_messages}</blockquote>"
           echo "$telegram_commit_messages"
+          touch main.txt
 
 
           # Upload APK to Telegram
           response=$(curl -sS -f -X POST \
             "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKKEN}}/sendDocument" \
             -F "chat_id=${{ secrets.TELEGRAM_CHANNEL_ID}}" \
-            -F "document=@last_sha.txt" \
+            -F "document=@main.txt" \
             -F "caption=Nuke dropped 🔥
           
           Commits:
