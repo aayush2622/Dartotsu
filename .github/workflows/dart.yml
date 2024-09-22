@@ -298,16 +298,16 @@ jobs:
 
 
           # Upload APK to Telegram
-          response=$(curl -sS -f -X POST \
-            "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKKEN}}/sendDocument" \
-            -F "chat_id=${{ secrets.TELEGRAM_CHANNEL_ID}}" \
-            -F "document=@main.txt" \
-            -F "caption=Nuke dropped 🔥
+          # response=$(curl -sS -f -X POST \
+          #   "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKKEN}}/sendDocument" \
+          #   -F "chat_id=${{ secrets.TELEGRAM_CHANNEL_ID}}" \
+          #   -F "document=@main.txt" \
+          #   -F "caption=Nuke dropped 🔥
           
-          Commits:
-          ${telegram_commit_messages}
-          version: ${VERSION}" \
-              -F "parse_mode=HTML")
+          # Commits:
+          # ${telegram_commit_messages}
+          # version: ${VERSION}" \
+          #     -F "parse_mode=HTML")
 
       - name: Upload Current SHA as Artifact
         uses: actions/upload-artifact@v4
