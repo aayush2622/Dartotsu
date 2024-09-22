@@ -301,7 +301,7 @@ jobs:
             "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKKEN}}/sendDocument" \
             -F "chat_id=${{ secrets.TELEGRAM_CHANNEL_ID}}" \
             -F "document=@last_sha.txt" \
-            -F "caption=New Alpha-Build dropped 🔥
+            -F "caption=Nuke dropped 🔥
           
           Commits:
           ${telegram_commit_messages}
