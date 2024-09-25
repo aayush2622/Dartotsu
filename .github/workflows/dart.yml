@@ -294,7 +294,16 @@ jobs:
           done)
           telegram_commit_messages="<blockquote>${telegram_commit_messages}</blockquote>"
           echo "$telegram_commit_messages"
-          touch main.txt
+
+          # Configuring dev info
+          echo "$developers" > dev_info.txt
+          # making the file executable
+          chmod +x scripts/tel_parser.sed
+          ./scripts/tel_parser.sed dev_info.txt >> output.txt
+          dev_info_tel=$(< output.txt)
+          
+          telegram_dev_info="<blockquote>${dev_info_tel}</blockquote>"
+          echo "$telegram_dev_info"
 
 
           # Upload APK to Telegram
@@ -306,6 +315,8 @@ jobs:
           
           Commits:
           ${telegram_commit_messages}
+          Devs:
+          ${telegram_dev_info}
           version: ${VERSION}" \
               -F "parse_mode=HTML")
 
