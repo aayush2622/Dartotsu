@@ -250,10 +250,10 @@ jobs:
                         --arg thumbnail_url "$thumbnail_url" \
                         --argjson embed_color "$embed_color" \
                         '{
-                          "content": "<@everyone>",
+                          "content": "@everyone",
                           "embeds": [
                             {
-                              "title": "Some Updates....",
+                              "title": "New Alpha-Build dropped 🔥",
                               "color": $embed_color,
                               "fields": [
                                 {
@@ -311,7 +311,7 @@ jobs:
             "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKKEN}}/sendDocument" \
             -F "chat_id=${{ secrets.TELEGRAM_CHANNEL_ID}}" \
             -F "document=@last_sha.txt" \
-            -F "caption=Nuke dropped 🔥
+            -F "caption=New Alpha-Build dropped 🔥
           
           Commits:
           ${telegram_commit_messages}
