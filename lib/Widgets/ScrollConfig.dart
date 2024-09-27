@@ -16,7 +16,7 @@ Widget ScrollConfig(BuildContext context, {required Widget child}) {
   );
 }
 
-Widget CustomScrollConfig(BuildContext context, {required List<Widget> children}) {
+Widget CustomScrollConfig(BuildContext context, { required List<Widget> children, Axis scrollDirection = Axis.vertical , ScrollPhysics? physics}) {
  return CustomScrollView(
    scrollBehavior: ScrollConfiguration.of(context).copyWith(
      dragDevices: {
@@ -25,6 +25,8 @@ Widget CustomScrollConfig(BuildContext context, {required List<Widget> children}
        PointerDeviceKind.trackpad
      },
    ),
+   physics: physics,
+   scrollDirection: scrollDirection,
    slivers: children,
  );
 }

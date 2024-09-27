@@ -1,6 +1,7 @@
 
 import '../api/Anilist/Data/media.dart';
 import 'Author.dart';
+import 'Episode.dart';
 
 
 class Anime {
@@ -19,14 +20,14 @@ class Anime {
   int? nextAiringEpisode;
   int? nextAiringEpisodeTime;
 
-/*
+
   String? selectedEpisode;
   Map<String, Episode>? episodes;
   String? slug;
   Map<String, Episode>? kitsuEpisodes;
   Map<String, Episode>? fillerEpisodes;
   Map<String, Episode>? anifyEpisodes;
-*/
+
 
   Anime({
     this.totalEpisodes,
@@ -39,13 +40,13 @@ class Anime {
     this.mediaAuthor,
     this.youtube,
     this.nextAiringEpisode,
-    this.nextAiringEpisodeTime
-    /*this.selectedEpisode,
+    this.nextAiringEpisodeTime,
+    this.selectedEpisode,
     this.episodes,
     this.slug,
     this.kitsuEpisodes,
     this.fillerEpisodes,
-    this.anifyEpisodes,*/
+    this.anifyEpisodes,
   })  : op = op ?? [],
         ed = ed ?? [];
 }

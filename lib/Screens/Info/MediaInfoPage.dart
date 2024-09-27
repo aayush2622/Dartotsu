@@ -1,230 +1,330 @@
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:blur/blur.dart';
 import 'package:dantotsu/Functions/Extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:kenburns_nullsafety/kenburns_nullsafety.dart';
+import 'package:provider/provider.dart';
 
 import '../../DataClass/Media.dart';
+import '../../Theme/ThemeProvider.dart';
+import '../../Widgets/CachedNetworkImage.dart';
+import 'Tabs/Watch/WatchPage.dart';
 
 class MediaInfoPage extends StatefulWidget {
   final media mediaData;
 
-  const MediaInfoPage(
-    this.mediaData, {
-    super.key,
-  });
+  const MediaInfoPage(this.mediaData, {super.key});
 
   @override
   MediaInfoPageState createState() => MediaInfoPageState();
 }
 
 class MediaInfoPageState extends State<MediaInfoPage> {
+  int _selectedIndex = 0;
+
   @override
   Widget build(BuildContext context) {
-    var mediaData = widget.mediaData;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          SliverToBoxAdapter(
-            child: SizedBox(
-                height: 384 + (0.statusBar() * 2), child: _buildMediaSection()),
-            /*FlexibleSpaceBar(
-              background: Stack(
-                fit: StackFit.expand,
-                children: [
-                  KenBurns(
-                      maxScale: 1.5,
-                      child: CachedNetworkImage(
-                        imageUrl: mediaData.banner.toString(),
-                        fit: BoxFit.cover,
-                        width: double.infinity,
-                        height: 108,
-                      )),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Container(
-                          height: 48.0,
-                          //change this to change the transparent black box
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              colors: [
-                                Colors.transparent,
-                                Colors.black.withOpacity(0.66),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 10,
-                            vertical: 10,
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(
-                                width: 108.0,
-                                height: 160.0,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(
-                                      16.0), // Similar to roundedImageView
-                                  child: CachedNetworkImage(
-                                    imageUrl: mediaData.cover.toString(),
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              ),
-                              Text(
-                                mediaData.userPreferredName, // Replace with your title
-                                style: TextStyle(
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.bold,
-                                  color:
-                                      Theme.of(context).colorScheme.onSurface,
-                                ),
-                                maxLines: 4,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              const SizedBox(height: 4.0),
-                              Text(
-                                mediaData.status.toString(), // Replace with your status
-                                style: TextStyle(
-                                  fontSize: 14.0,
-                                  fontWeight: FontWeight.bold,
-                                  color: Theme.of(context).colorScheme.primary,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 32.0),
-                          child: ElevatedButton(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(16.0),
-                              ),
-                              backgroundColor: Colors.transparent,
-                              side: BorderSide(
-                                  color: Theme.of(context).colorScheme.primary),
-                            ),
-                            child: Text(
-                              'Add to List',
-                              style: TextStyle(
-                                fontSize: 14.0,
-                                fontWeight: FontWeight.bold,
-                                color: Theme.of(context).colorScheme.secondary,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),*/
-          ),
-          SliverToBoxAdapter(
-            child: Column(
-              children: [
+          SliverToBoxAdapter(child: _buildMediaSection()),
+          SliverToBoxAdapter(child: _buildMediaDetails()),
+          SliverList(
+            delegate: SliverChildListDelegate(
+              [
                 Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: Text(
-                          'Watched 10 out of 10', // Replace with your text
-                          style: TextStyle(
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.normal,
-                            color: Theme.of(context).colorScheme.onSurface,
-                          ),
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                      IconButton(
-                        icon: const Icon(Icons.favorite_border),
-                        onPressed: () {
-                          // Favorite action
-                        },
-                      ),
-                      IconButton(
-                        icon: const Icon(Icons.share),
-                        onPressed: () {
-                          // Share action
-                        },
-                      ),
-                    ],
-                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 32),
+                  child:  _buildSliverContent(),
                 ),
-
-                // Add your ViewPager2 equivalent widget here
               ],
             ),
-          ),
+          )
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
+      bottomNavigationBar: _buildBottomNavigationBar(),
+    );
+  }
+  Widget _buildSliverContent() {
+    return IndexedStack(
+      index: _selectedIndex,
+      children: [
+        const SizedBox(),
+        WatchPage(mediaData: widget.mediaData),
+        const SizedBox(),
+      ],
+    );
+  }
+  BottomNavigationBar _buildBottomNavigationBar() {
+    return BottomNavigationBar(
+      items: const [
+        BottomNavigationBarItem(icon: Icon(Icons.info), label: 'INFO'),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.movie_filter_rounded), label: 'WATCH'),
+        BottomNavigationBarItem(icon: Icon(Icons.comment), label: 'COMMENTS'),
+      ],
+      currentIndex: _selectedIndex,
+      onTap: (index) {
+        setState(() {
+          _selectedIndex = index; // Update the selected tab index
+        });
+        // Handle tab changes accordingly
+      },
+    );
+  }
+
+  Widget _buildMediaDetails() {
+    final mediaData = widget.mediaData;
+
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 8),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: RichText(
+                  text: TextSpan(
+                    children: _buildMediaDetailsSpans(mediaData),
+                    style: TextStyle(
+                      fontFamily: 'Poppins',
+                      fontSize: 16.0,
+                      color: Theme.of(context).colorScheme.onSurface,
+                    ),
+                  ),
+                ),
+              ),
+              _buildFavoriteButton(),
+              _buildShareButton(),
+            ],
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'Search',
+        ),
+        // Add your ViewPager2 equivalent widget here
+      ],
+    );
+  }
+
+  List<TextSpan> _buildMediaDetailsSpans(media mediaData) {
+    final List<TextSpan> spans = [];
+    var theme = Theme.of(context).colorScheme;
+    if (mediaData.userStatus != null) {
+      spans.add(TextSpan(
+        text: mediaData.anime != null ? "Watched " : "Read ",
+      ));
+      spans.add(TextSpan(
+        text: "${mediaData.userProgress}",
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          color: theme.secondary,
+        ),
+      ));
+      spans.add(const TextSpan(text: " out of "));
+    } else {
+      spans.add(const TextSpan(text: "Total of "));
+    }
+
+    if (mediaData.anime != null) {
+      if (mediaData.anime!.nextAiringEpisode != -1) {
+        spans.add(TextSpan(
+            text: "${mediaData.anime!.nextAiringEpisode}",
+            style: TextStyle(
+                color: theme.onSurface, fontWeight: FontWeight.bold)));
+        spans.add(const TextSpan(
+          text: " / ",
+        ));
+      }
+      spans.add(TextSpan(
+        text: "${mediaData.anime!.totalEpisodes ?? "??"}",
+        style: TextStyle(color: theme.onSurface, fontWeight: FontWeight.bold),
+      ));
+    } else {
+      spans.add(TextSpan(
+        text: "${mediaData.manga!.totalChapters ?? "??"}",
+        style: TextStyle(color: theme.onSurface, fontWeight: FontWeight.bold),
+      ));
+    }
+    return spans;
+  }
+
+  Widget _buildFavoriteButton() {
+    return IconButton(
+      icon: widget.mediaData.isFav
+          ? const Icon(Icons.favorite)
+          : const Icon(Icons.favorite_border),
+      iconSize: 32,
+      onPressed: () {
+        // Favorite action
+      },
+    );
+  }
+
+  Widget _buildShareButton() {
+    return IconButton(
+      icon: const Icon(Icons.share),
+      iconSize: 32,
+      onPressed: () {
+        // Share action
+      },
+    );
+  }
+
+
+
+  Widget _buildMediaSection() {
+    final isDarkMode = Provider.of<ThemeNotifier>(context).isDarkMode;
+    final theme = Theme.of(context).colorScheme;
+    final gradientColors = isDarkMode
+        ? [Colors.transparent, theme.surface]
+        : [Colors.white.withOpacity(0.2), theme.surface];
+
+    return SizedBox(
+      height: 384 + (0.statusBar() * 2),
+      child: Stack(
+        children: [
+          KenBurns(
+            maxScale: 2.5,
+            minAnimationDuration: const Duration(milliseconds: 6000),
+            maxAnimationDuration: const Duration(milliseconds: 20000),
+            child: cachedNetworkImage(
+              imageUrl: widget.mediaData.banner ?? widget.mediaData.cover ?? '',
+              fit: BoxFit.cover,
+              width: double.infinity,
+              height: 384 + (0.statusBar() * 2),
+            ),
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
+          Container(
+            width: double.infinity,
+            height: 384 + (0.statusBar() * 2),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: gradientColors,
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+              ),
+            ),
           ),
+          Blur(
+            colorOpacity: 0.0,
+            blur: 10,
+            blurColor: Colors.transparent,
+            child: Container(),
+          ),
+          _buildCloseButton(theme),
+          _buildCoverImage(theme),
+          _buildAddToListButton(theme),
         ],
       ),
     );
   }
 
-  Widget _buildMediaSection() {
-    return Stack(
-      children: [
-        Positioned(
-          child: KenBurns(
-              maxScale: 2.5,
-              minAnimationDuration : const Duration(milliseconds: 6000),
-              maxAnimationDuration : const Duration(milliseconds: 20000),
-              child: CachedNetworkImage(
-                imageUrl: widget.mediaData.banner ?? '',
-                fit: BoxFit.cover,
-                width: double.infinity,
-                height: 384.statusBar(),
-              )),
-        ),
-        Positioned(
-          bottom: 0,
-          left: 0,
-          right: 0,
-          child: Container(
-            height: 48.0,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Colors.transparent,
-                  Colors.black.withOpacity(0.66),
-                ],
-              ),
+  Positioned _buildCloseButton(ColorScheme theme) {
+    return Positioned(
+      top: 14.statusBar(),
+      right: 24,
+      child: GestureDetector(
+        onTap: () => Navigator.of(context).pop(),
+        child: Card(
+          elevation: 7,
+          color: theme.surface,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: SizedBox(
+            width: 32,
+            height: 32,
+            child: Center(
+              child: Icon(Icons.close, size: 24, color: theme.onSurface),
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Positioned _buildCoverImage(ColorScheme theme) {
+    return Positioned(
+      bottom: 64,
+      left: 32,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(16.0),
+            child: cachedNetworkImage(
+              imageUrl: widget.mediaData.cover ?? '',
+              fit: BoxFit.cover,
+              width: 108,
+              height: 160,
+              placeholder: (context, url) => Container(
+                color: Colors.white12,
+                width: 108,
+                height: 160,
+              ),
+            ),
+          ),
+          const SizedBox(width: 16),
+          _buildMediaInfo(theme),
+        ],
+      ),
+    );
+  }
+
+  Column _buildMediaInfo(ColorScheme theme) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          widget.mediaData.userPreferredName,
+          style: const TextStyle(
+            fontFamily: 'Poppins',
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+          ),
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+        ),
+        const SizedBox(height: 8),
+        Text(
+          widget.mediaData.status?.replaceAll("_", " ") ?? "",
+          style: TextStyle(
+            fontSize: 14,
+            color: theme.primary,
+            fontWeight: FontWeight.bold,
+            overflow: TextOverflow.ellipsis,
+          ),
+          maxLines: 1,
+        ),
       ],
+    );
+  }
+
+  Positioned _buildAddToListButton(ColorScheme theme) {
+    return Positioned(
+      bottom: 0,
+      left: 32,
+      right: 32,
+      height: 48,
+      child: OutlinedButton(
+        onPressed: () {},
+        style: OutlinedButton.styleFrom(
+          padding: const EdgeInsets.all(8.0),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16.0),
+          ),
+          side: BorderSide(color: theme.onSurface),
+          backgroundColor: Colors.transparent,
+        ),
+        child: Text(
+          widget.mediaData.userStatus ?? 'ADD TO LIST',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 14,
+            color: theme.secondary,
+            letterSpacing: 1.25,
+          ),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
+      ),
     );
   }
 }

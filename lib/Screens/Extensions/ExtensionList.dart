@@ -8,7 +8,7 @@ import '../../api/Mangayomi/Extensions/extensions_provider.dart';
 import '../../api/Mangayomi/Extensions/fetch_anime_sources.dart';
 import '../../api/Mangayomi/Extensions/fetch_manga_sources.dart';
 import '../../api/Mangayomi/Model/Source.dart';
-import '../../Preferences/Prefrences.dart';
+import '../../Preferences/Preferences.dart';
 import '../Settings/language.dart';
 import 'ExtensionItem.dart';
 

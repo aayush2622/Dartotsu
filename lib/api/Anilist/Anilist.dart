@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import '../../Functions/Function.dart';
 import '../../Preferences/PrefManager.dart';
-import '../../Preferences/Prefrences.dart';
+import '../../Preferences/Preferences.dart';
 import 'AnilistMutations.dart';
 import 'AnilistQueries.dart';
 
@@ -15,9 +15,9 @@ class _AnilistController extends GetxController {
   late final AnilistMutations mutation;
 
   var token = "".obs;
-  String? username;
+  var username= "".obs;
   int? userid;
-  var avatar = Rx<String?>(null);
+  var avatar = "".obs;
   String? bg;
   int? episodesWatched;
   int? chapterRead;
@@ -91,10 +91,10 @@ class _AnilistController extends GetxController {
 
   void removeSavedToken() {
     token.value = '';
-    username = null;
+    username.value = '';
     adult = false;
     userid = null;
-    avatar.value = null;
+    avatar.value = '';
     bg = null;
     episodesWatched = null;
     chapterRead = null;

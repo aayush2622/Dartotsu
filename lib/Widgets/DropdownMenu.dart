@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 // Stateful Widget for Dropdown Menu
 class buildDropdownMenu extends StatefulWidget {
-  final String currentValue;
-  final List<String> options;
-  final void Function(String) onChanged;
+  final String? currentValue;
+  final List<String>? options;
+  final void Function(String)? onChanged;
   final String? labelText;
   final IconData? prefixIcon;
   final double borderRadius;
@@ -13,9 +13,9 @@ class buildDropdownMenu extends StatefulWidget {
 
   const buildDropdownMenu({
     super.key,
-    required this.currentValue,
-    required this.options,
-    required this.onChanged,
+    this.currentValue,
+    this.options,
+    this.onChanged,
     this.labelText,
     this.prefixIcon,
     this.borderRadius = 8.0,
@@ -24,11 +24,11 @@ class buildDropdownMenu extends StatefulWidget {
   });
 
   @override
-  _buildDropdownMenuState createState() => _buildDropdownMenuState();
+  buildDropdownMenuState createState() => buildDropdownMenuState();
 }
 
-class _buildDropdownMenuState extends State<buildDropdownMenu> {
-  late String _selectedValue;
+class buildDropdownMenuState extends State<buildDropdownMenu> {
+  late String? _selectedValue;
 
   @override
   void initState() {
@@ -51,19 +51,23 @@ class _buildDropdownMenuState extends State<buildDropdownMenu> {
           ),
           hoverColor: Colors.transparent,
           focusColor: Colors.transparent,
+          fillColor: Colors.transparent,
         ),
         child: DropdownButtonHideUnderline(
           child: DropdownButton<String>(
+            focusColor: Colors.transparent,
             value: _selectedValue,
             onChanged: (String? newValue) {
               if (newValue != null) {
                 setState(() {
                   _selectedValue = newValue;
                 });
-                widget.onChanged(newValue);
+                if (widget.onChanged != null) {
+                  widget.onChanged!(newValue);
+                }
               }
             },
-            items: widget.options.map((String option) {
+            items: widget.options?.map((String option) {
               final displayName = option[0].toUpperCase() + option.substring(1);
               return DropdownMenuItem<String>(
                 value: option,

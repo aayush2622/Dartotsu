@@ -28,12 +28,7 @@ import 'package:dantotsu/Screens/Home/HomeScreen.dart';
 late Isar isar;
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
-  await PrefManager.init();
-  await protocolHandler.register('dantotsu');
-  isar = await StorageProvider().initDB(null, inspector: kDebugMode);
-  await StorageProvider().requestPermission();
-  registerAllTypes();
-  iniDateFormatting();
+  await init();
   runApp(
     provider.ProviderScope(
       child: MultiProvider(
@@ -45,7 +40,13 @@ void main(List<String> args) async {
     ),
   );
 }
-void iniDateFormatting() {
+
+Future init () async {
+  await PrefManager.init();
+  await protocolHandler.register('dantotsu');
+  isar = await StorageProvider().initDB(null, inspector: kDebugMode);
+  await StorageProvider().requestPermission();
+  registerAllTypes();
   initializeDateFormatting();
   final supportedLocales = DateFormat.allLocalesWithSymbols();
   for (var locale in supportedLocales) {

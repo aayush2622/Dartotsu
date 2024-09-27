@@ -65,7 +65,6 @@ Future<void> fetchSourcesList(
               final sourc = isar.sources.getSync(source.id!)!;
               if (sourc.isAdded!) {
                 if (compareVersions(sourc.version!, source.version!) < 0) {
-                  // log("update aivalable auto update");
                   if (PrefManager.getCustomVal('autoUpdate') ?? true) {
                     final req =
                         await http.get(Uri.parse(source.sourceCodeUrl!));
@@ -97,7 +96,6 @@ Future<void> fetchSourcesList(
                         ..additionalParams = source.additionalParams ?? "");
                     });
                   } else {
-                    // log("update aivalable");
                     isar.sources.putSync(sourc..versionLast = source.version);
                   }
                 }

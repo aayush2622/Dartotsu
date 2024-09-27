@@ -2,12 +2,13 @@ import 'dart:async';
 
 import 'package:dantotsu/Adaptor/Media/MediaLargeViewHolder.dart';
 import 'package:dantotsu/Functions/Extensions.dart';
+import 'package:dantotsu/api/Discord/RPC.dart';
 import 'package:flutter/material.dart';
 
 import '../../Animation/ScaleAnimation.dart';
 import '../../DataClass/Media.dart';
 import '../../Functions/Function.dart';
-import '../../Screens/Info/WatchPage.dart';
+import '../../Screens/Info/Tabs/Watch/WatchPage.dart';
 import '../../Screens/Settings/SettingsBottomSheet.dart';
 import '../../Widgets/ScrollConfig.dart';
 import '../../Screens/Info/MediaInfoPage.dart';
@@ -73,7 +74,7 @@ class MediaGridState extends State<MediaAdaptor> {
                 finalOffset: Offset.zero,
                 duration: const Duration(milliseconds: 200),
                 child: GestureDetector(
-                  onTap: () => snackString(m.name),
+                  onTap: () => navigateToPage(context, MediaInfoPage(m)),
                   onLongPress: () => settingsBottomSheet(context),
                   child: Container(
                     width: double.maxFinite,
@@ -112,7 +113,7 @@ class MediaGridState extends State<MediaAdaptor> {
                 finalOffset: Offset.zero,
                 duration: const Duration(milliseconds: 200),
                 child: GestureDetector(
-                  onTap: () => navigateToPage(context, WatchPage(mediaData: _mediaList[index])),
+                  onTap: () => navigateToPage(context, MediaInfoPage(_mediaList[index])),
                   onLongPress: () => settingsBottomSheet(context),
                   child: Container(
                     width: 102,
@@ -186,8 +187,7 @@ class LargeViewState extends State<LargeView> {
             itemBuilder: (context, index) {
               return GestureDetector(
                 onTap: () =>
-                    navigateToPage(
-                        context, MediaInfoPage(widget.mediaList[index])),
+                    navigateToPage(context, MediaInfoPage(widget.mediaList[index])),
                 onLongPress: () => settingsBottomSheet(context),
                 child: MediaPageSmallViewHolder(widget.mediaList[index]),
               );

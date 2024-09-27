@@ -9,12 +9,12 @@ import '../../DataClass/Media.dart';
 import '../../DataClass/MediaSection.dart';
 import '../../Functions/Function.dart';
 import '../../Preferences/PrefManager.dart';
-import '../../Preferences/Prefrences.dart';
+import '../../Preferences/Preferences.dart';
 import '../Home/Widgets/LoadingWidget.dart';
 import '../Home/Widgets/SearchBar.dart';
-import '../../Widgets/Media/Chips.dart';
-import '../../Widgets/Media/MediaCard.dart';
-import '../../Widgets/Media/MediaSection.dart';
+import '../../Adaptor/Media/Widgets/Chips.dart';
+import '../../Adaptor/Media/Widgets/MediaCard.dart';
+import '../../Adaptor/Media/Widgets/MediaSection.dart';
 import '../../Widgets/ScrollConfig.dart';
 import '../../api/Anilist/AnilistViewModel.dart';
 

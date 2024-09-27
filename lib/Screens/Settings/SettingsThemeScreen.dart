@@ -1,4 +1,3 @@
-import 'dart:ui';
 
 import 'package:dantotsu/Widgets/AlertDialogBuilder.dart';
 import 'package:flutter/material.dart';
@@ -8,11 +7,12 @@ import '../../Adaptor/Settings/SettingsAdaptor.dart';
 import '../../DataClass/Setting.dart';
 import '../../Functions/Function.dart';
 import '../../Preferences/PrefManager.dart';
-import '../../Preferences/Prefrences.dart';
+import '../../Preferences/Preferences.dart';
 import '../../Theme/CustomColorPicker.dart';
 import '../../Theme/ThemeManager.dart';
 import '../../Theme/ThemeProvider.dart';
-import '../../Widgets/SettingsHeader.dart';
+import '../../Widgets/ScrollConfig.dart';
+import 'Widgets/SettingsHeader.dart';
 
 class SettingsThemeScreen extends StatelessWidget {
   const SettingsThemeScreen({super.key});
@@ -21,16 +21,9 @@ class SettingsThemeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var theme = Theme.of(context).colorScheme;
     return Scaffold(
-      body: CustomScrollView(
-        scrollBehavior: ScrollConfiguration.of(context).copyWith(
-          dragDevices: {
-            PointerDeviceKind.touch,
-            PointerDeviceKind.mouse,
-            PointerDeviceKind.trackpad
-          },
-        ),
-        physics: const BouncingScrollPhysics(),
-        slivers: [
+      body: CustomScrollConfig(
+        context,
+        children: [
           SliverToBoxAdapter(
             child: SettingsHeader(
                 context,

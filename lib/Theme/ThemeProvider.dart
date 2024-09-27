@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../Preferences/Prefrences.dart';
+import '../Preferences/Preferences.dart';
 import '../Preferences/PrefManager.dart';
 
 class ThemeNotifier extends ChangeNotifier {

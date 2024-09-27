@@ -1,7 +1,8 @@
-import 'package:cached_network_image/cached_network_image.dart';
+
 import 'package:flutter/material.dart';
 
-import '../../Functions/Function.dart';
+import '../../../Functions/Function.dart';
+import '../../../Widgets/CachedNetworkImage.dart';
 
 Widget MediaCard(BuildContext context, String title, Widget route,
     String imageUrl) {
@@ -22,7 +23,7 @@ Widget MediaCard(BuildContext context, String title, Widget route,
       child: Stack(
         alignment: Alignment.center,
         children: [
-          CachedNetworkImage(
+          cachedNetworkImage(
             imageUrl: imageUrl,
             fit: BoxFit.cover,
             width: width,

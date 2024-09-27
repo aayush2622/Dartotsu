@@ -1,5 +1,4 @@
 import 'package:blur/blur.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dantotsu/Functions/Extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:kenburns_nullsafety/kenburns_nullsafety.dart';
@@ -7,8 +6,9 @@ import 'package:provider/provider.dart';
 
 import '../../DataClass/Media.dart';
 import '../../Theme/ThemeProvider.dart';
-import '../../Widgets/Media/MediaReleaseingIndicator.dart';
-import '../../Widgets/Media/MediaScoreBadge.dart';
+import '../../Widgets/CachedNetworkImage.dart';
+import 'Widgets/MediaReleaseingIndicator.dart';
+import 'Widgets/MediaScoreBadge.dart';
 
 class MediaPageSmallViewHolder extends StatelessWidget {
   final media mediaInfo;
@@ -47,7 +47,7 @@ class MediaPageSmallViewHolder extends StatelessWidget {
   Widget _buildBackground(String? bannerUrl) {
     return KenBurns(
       maxScale: 1.5,
-      child: CachedNetworkImage(
+      child: cachedNetworkImage(
         imageUrl: bannerUrl ?? '',
         fit: BoxFit.cover,
         width: double.infinity,
@@ -130,7 +130,7 @@ class MediaPageSmallViewHolder extends StatelessWidget {
   Widget _buildMediaCover() {
     return  ClipRRect(
         borderRadius: BorderRadius.circular(16.0),
-        child: CachedNetworkImage(
+        child: cachedNetworkImage(
           imageUrl: mediaInfo.cover ?? '',
           fit: BoxFit.cover,
           width: 108,

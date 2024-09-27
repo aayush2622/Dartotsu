@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../ScrollConfig.dart';
+import '../../../Widgets/ScrollConfig.dart';
 
 class ChipsWidget extends StatelessWidget {
   final List<ChipData> chips;

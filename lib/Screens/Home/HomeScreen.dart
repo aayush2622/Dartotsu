@@ -15,12 +15,13 @@ import 'package:provider/provider.dart';
 import '../../Animation/SlideInAnimation.dart';
 import '../../DataClass/MediaSection.dart';
 import '../../Preferences/PrefManager.dart';
-import '../../Preferences/Prefrences.dart';
+import '../../Preferences/Preferences.dart';
+import '../../Widgets/CachedNetworkImage.dart';
 import 'Widgets/AvtarWidget.dart';
 import 'Widgets/LoadingWidget.dart';
 import 'Widgets/NotificationBadge.dart';
-import '../../Widgets/Media/MediaCard.dart';
-import '../../Widgets/Media/MediaSection.dart';
+import '../../Adaptor/Media/Widgets/MediaCard.dart';
+import '../../Adaptor/Media/Widgets/MediaSection.dart';
 import '../../Widgets/ScrollConfig.dart';
 import '../../api/Anilist/Anilist.dart';
 import '../../api/Anilist/AnilistViewModel.dart';
@@ -227,7 +228,7 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             minAnimationDuration : const Duration(milliseconds: 9000),
             maxAnimationDuration : const Duration(milliseconds: 30000),
             maxScale: 2.5,
-            child: CachedNetworkImage(
+            child: cachedNetworkImage(
               imageUrl: Anilist.bg ?? '',
               fit: BoxFit.cover,
               width: double.infinity,
@@ -295,10 +296,10 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               child: CircleAvatar(
                 backgroundColor: Colors.transparent,
                 radius: 26.0,
-                backgroundImage: Anilist.avatar.value != null &&
-                        Anilist.avatar.value!.isNotEmpty
-                    ? CachedNetworkImageProvider(Anilist.avatar.value!)
-                    : const NetworkImage(""),
+                backgroundImage:
+                        Anilist.avatar.value.isNotEmpty
+                    ? CachedNetworkImageProvider(Anilist.avatar.value)
+                    : null,
               ),
             ),
             const SizedBox(width: 12),
@@ -306,7 +307,7 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  Anilist.username ?? "",
+                  Anilist.username.value,
                   style: TextStyle(
                     fontFamily: 'Poppins',
                     fontWeight: FontWeight.bold,

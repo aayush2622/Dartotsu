@@ -2,14 +2,17 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:dantotsu/Preferences/PrefManager.dart';
-import 'package:dantotsu/Preferences/Prefrences.dart';
+import 'package:dantotsu/Preferences/Preferences.dart';
 import 'package:get/get.dart';
 import 'package:web_socket_channel/io.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
+import 'Discord.dart';
+
 var DiscordService = Get.put(_DiscordService());
 
-class _DiscordService extends GetxController { // NO DON'T LOOK AT THIS FILE
+class _DiscordService extends GetxController {
+  // NO DON'T LOOK AT THIS FILE
   late WebSocketChannel _webSocket;
   Timer? _heartbeatTimer;
   int? _sequence;
@@ -19,6 +22,7 @@ class _DiscordService extends GetxController { // NO DON'T LOOK AT THIS FILE
   final int _maxRetryAttempts = 10;
   int _retryAttempts = 0;
   bool isInitialized = false;
+  bool isTemp = false;
 
   Future<void> _initializeService() async {
     _connectWebSocket();
@@ -139,7 +143,7 @@ class _DiscordService extends GetxController { // NO DON'T LOOK AT THIS FILE
   }
 
   void setPresence(String presence) {
-    if (isInitialized) {
+    if (isInitialized ) {
       _setPresence(presence);
       _presenceStore = presence;
     } else {
@@ -160,14 +164,36 @@ class _DiscordService extends GetxController { // NO DON'T LOOK AT THIS FILE
     });
     isInitialized = false;
     _webSocket.sink.add(clearPresence);
-    _presenceStore = '';
     _webSocket.sink.close();
     _heartbeatTimer?.cancel();
   }
+
   void resumeRPC() {
     _initializeService();
-
   }
+
+  void testRpc() {
+    if (!isTemp){
+      isTemp = true;
+      final testRpc = jsonEncode({
+        'op': 3,
+        'd': {
+          'activities': [
+            {
+              'name': 'Dantotsu',
+              'type': 0,
+            }
+          ],
+          'afk': false,
+          'since': null,
+          'status': 'online',
+        },
+      });
+      _initializeService();
+      _presenceStore = testRpc;
+    }
+  }
+
   void stopRPC() {
     final clearPresence = jsonEncode({
       'op': 3,
@@ -179,13 +205,24 @@ class _DiscordService extends GetxController { // NO DON'T LOOK AT THIS FILE
       },
     });
     isInitialized = false;
+    isTemp = false;
     _webSocket.sink.add(clearPresence);
     _presenceStore = '';
     _webSocket.sink.close();
     _heartbeatTimer?.cancel();
   }
 
-  void _saveProfile(Map<String, dynamic> user) async {}
+  void _saveProfile(Map<String, dynamic> user) async {
+    Discord.userName.value = user['username'];
+    PrefManager.setVal(PrefName.discordUserName, user['username']);
+    var avatar =
+        'https://cdn.discordapp.com/avatars/${user['id']}/${user['avatar']}.png';
+    Discord.avatar.value = avatar;
+    PrefManager.setVal(PrefName.discordAvatar, avatar);
+    if (isTemp) {
+      stopRPC();
+    }
+  }
 
   void _onWebSocketError(dynamic error) {
     _retryAttempts++;

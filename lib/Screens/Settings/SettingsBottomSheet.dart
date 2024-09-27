@@ -1,10 +1,9 @@
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dantotsu/Functions/Function.dart';
-import 'package:dantotsu/Preferences/Prefrences.dart';
+import 'package:dantotsu/Preferences/Preferences.dart';
+import 'package:dantotsu/Screens/Extensions/ExtensionScreen.dart';
 import 'package:dantotsu/Screens/Login/LoginScreen.dart';
 import 'package:dantotsu/Screens/Settings/SettingsScreen.dart';
-import 'package:dantotsu/Screens/Extensions/ExtensionScreen.dart';
 import 'package:dantotsu/Widgets/AlertDialogBuilder.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
@@ -51,13 +50,11 @@ class BottomSheetContentState extends State<BottomSheetContent> {
                   Obx(() {
                     return CircleAvatar(
                       radius: 26.0,
-                      backgroundImage: userData.avatar.value != null &&
-                              userData.avatar.value!.isNotEmpty
-                          ? CachedNetworkImageProvider(userData.avatar.value!)
+                      backgroundImage: userData.avatar.value.isNotEmpty
+                          ? CachedNetworkImageProvider(userData.avatar.value)
                           : null,
                       backgroundColor: Colors.transparent,
-                      child: userData.avatar.value == null ||
-                              userData.avatar.value!.isEmpty
+                      child: userData.avatar.value.isEmpty
                           ? Icon(Icons.person,
                               color: Theme.of(context).primaryColor)
                           : null,
@@ -71,7 +68,7 @@ class BottomSheetContentState extends State<BottomSheetContent> {
                         children: [
                           if (Anilist.token.value.isNotEmpty) ...[
                             Text(
-                              Anilist.username ?? "",
+                              Anilist.username.value,
                               style: const TextStyle(
                                 fontFamily: 'Poppins',
                                 fontWeight: FontWeight.w600,

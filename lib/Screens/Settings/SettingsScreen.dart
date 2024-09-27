@@ -1,16 +1,13 @@
-
-import 'dart:ui';
-
-
+import 'package:dantotsu/Screens/Settings/SettingsAccountScreen.dart';
 import 'package:dantotsu/Screens/Settings/SettingsThemeScreen.dart';
-import 'package:dantotsu/api/Discord/Discord.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:icons_plus/icons_plus.dart';
 import '../../Adaptor/Settings/SettingsAdaptor.dart';
 import '../../DataClass/Setting.dart';
 import '../../Functions/Function.dart';
-import '../../Widgets/SettingsHeader.dart';
+import '../../Widgets/ScrollConfig.dart';
+import 'Widgets/SettingsHeader.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -18,16 +15,9 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomScrollView(
-        scrollBehavior: ScrollConfiguration.of(context).copyWith(
-          dragDevices: {
-            PointerDeviceKind.touch,
-            PointerDeviceKind.mouse,
-            PointerDeviceKind.trackpad
-          },
-        ),
-        physics: const BouncingScrollPhysics(),
-        slivers: [
+      body: CustomScrollConfig(
+        context,
+        children: [
           SliverToBoxAdapter(
             child: SettingsHeader(
                 context,
@@ -57,6 +47,7 @@ class SettingsScreen extends StatelessWidget {
       ),
     );
   }
+
   List<Setting> _buildSettings(BuildContext context) {
     return [
       Setting(
@@ -64,7 +55,7 @@ class SettingsScreen extends StatelessWidget {
         name: 'Account',
         description: 'Anilist, MAL and Discord.\nWhat more could you need?',
         icon: Icons.person,
-        onClick: () async => Discord.warning(context),
+        onClick: () => navigateToPage(context, const SettingsAccountScreen()),
         isActivity: true,
       ),
       Setting(
@@ -72,9 +63,7 @@ class SettingsScreen extends StatelessWidget {
         name: 'Theme',
         description: 'Change the vibe of your app',
         icon: Icons.palette_outlined,
-        onClick: () {
-          navigateToPage(context, const SettingsThemeScreen());
-        },
+        onClick: () => navigateToPage(context, const SettingsThemeScreen()),
         isActivity: true,
       ),
       Setting(

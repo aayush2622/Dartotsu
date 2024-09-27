@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:webview_windows/webview_windows.dart';
 
+import 'DiscordService.dart';
+
 class Login extends StatefulWidget {
   const Login({super.key});
 
@@ -60,9 +62,10 @@ class LoginState extends State<Login> {
   void _login(String token) async {
     if (_gotToken) return;
     _gotToken = true;
-    snackString("Logged in successfully");
+    snackString("Getting Data");
     Discord.saveToken(token);
-    Navigator.of(context).pop();
+    DiscordService.testRpc();
+    Navigator.of(context).pop(context);
   }
 
   void _handleError(String message) {
@@ -70,7 +73,7 @@ class LoginState extends State<Login> {
       _errorMessage = message;
     });
     snackString(message);
-    Navigator.of(context).pop();
+    Navigator.of(context).pop(context);
   }
 
   @override
@@ -119,7 +122,7 @@ class LoginPageState extends State<LoginPage> {
               if (token != null && token != 'null') {
                 _login(token.trim().replaceAll('"', ''));
               } else {
-                snackString("Failed to retrieve token");
+                snackString("Getting Data");
               }
             }
           },
@@ -145,6 +148,7 @@ class LoginPageState extends State<LoginPage> {
   void _login(String token) async {
     snackString("Logged in successfully");
     Discord.saveToken(token);
+    DiscordService.testRpc();
     Navigator.of(context).pop();
   }
 }

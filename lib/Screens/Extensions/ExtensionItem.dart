@@ -1,12 +1,10 @@
-import 'package:cached_network_image/cached_network_image.dart';
+
 import 'package:dantotsu/api/Mangayomi/Model/Source.dart';
-import 'package:dantotsu/api/Mangayomi/Search/get_detail.dart';
-import 'package:dantotsu/api/Mangayomi/Search/search.dart';
-import 'package:dantotsu/api/Mangayomi/Search/getVideo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:icons_plus/icons_plus.dart';
 
-import '../../main.dart';
+import '../../Widgets/CachedNetworkImage.dart';
 import '../../api/Mangayomi/Extensions/GetSourceList.dart';
 import '../../api/Mangayomi/Extensions/fetch_anime_sources.dart';
 import '../../api/Mangayomi/Extensions/fetch_manga_sources.dart';
@@ -58,16 +56,6 @@ class _ExtensionListTileWidgetState
 
     return Material(
       child: ListTile(
-        onTap: () async {
-          if (sourceNotEmpty || widget.isTestSource) {
-            if (widget.isTestSource) {
-              isar.writeTxnSync(() => isar.sources.putSync(widget.source));
-            }
-            // context.push('/extension_detail', extra: widget.source);
-          } else {
-            await _handleSourceAction();
-          }
-        },
         leading: Container(
           height: 37,
           width: 37,
@@ -77,13 +65,13 @@ class _ExtensionListTileWidgetState
           ),
           child: widget.source.iconUrl!.isEmpty
               ? const Icon(Icons.extension_rounded)
-              : CachedNetworkImage(
+              : cachedNetworkImage(
                   imageUrl: widget.source.iconUrl!,
                   fit: BoxFit.contain,
                   width: 37,
                   height: 37,
-                  errorWidget: (context, url, error) =>
-                      const Icon(Icons.extension_rounded),
+                  placeholder: (context, url) => const Icon(Icons.extension_rounded),
+                  errorWidget: (context, url, error) => const Icon(Icons.extension_rounded),
                 ),
         ),
         title: Text(widget.source.name!),
@@ -136,45 +124,58 @@ class _ExtensionListTileWidgetState
               ),
           ],
         ),
-        trailing: TextButton(
-          onPressed: widget.isTestSource || (!updateAvailable && sourceNotEmpty)
-              ? () {
-                  var media = ref.watch(searchProvider(
-                    source: widget.source,
-                    page: 1,
-                    query: 'One Piece',
-                    filterList: [],
-                  ).future);
-                  media.then((value){
-                    var url = value?.list.firstOrNull?.link;
-                    if (url == null) return;
-                    var data = ref.watch(getDetailProvider(url: url,source: widget.source).future);
-                    data.then((onValue) async {
-                      var uri =(onValue.chapters?.firstOrNull?.url);
-                      if (uri == null) return;
-                      var t =  await getVideo(source: widget.source, url: uri);
-                    });
-
-                  });
-                  // context.push('/extension_detail', extra: widget.source);
-                }
-              : _handleSourceAction,
-          child: _isLoading
-              ? const SizedBox(
-                  height: 20,
-                  width: 20,
-                  child: CircularProgressIndicator(strokeWidth: 2.0),
-                )
-              : Text(
-                  widget.isTestSource
-                      ? 'settings'
-                      : !sourceNotEmpty
-                          ? 'install'
-                          : updateAvailable
-                              ? 'update'
-                              : 'settings',
-                ),
+        trailing:  _isLoading ? const SizedBox(
+          height: 20,
+          width: 20,
+          child: CircularProgressIndicator(strokeWidth: 2.0),
+          ) : _BuildButtons(sourceNotEmpty, updateAvailable),
         ),
+    );
+  }
+
+  Widget _BuildButtons(bool sourceNotEmpty, bool updateAvailable) {
+    return !sourceNotEmpty ? IconButton(
+        onPressed: () => _handleSourceAction(),
+        icon: const Icon(Icons.download)
+    ) : SizedBox(
+      width: 84,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          IconButton(
+            onPressed: () async {
+              if (updateAvailable) {
+                setState(() {
+                  _isLoading = true;
+                });
+                widget.source.isManga!
+                    ? await ref.watch(fetchMangaSourcesListProvider(
+                    id: widget.source.id, reFresh: true)
+                    .future)
+                    : await ref.watch(fetchAnimeSourcesListProvider(
+                    id: widget.source.id, reFresh: true)
+                    .future);
+                if (mounted) {
+                  setState(() {
+                    _isLoading = false;
+                  });
+                }
+              } else {
+                // context.push('/extension_detail', extra: widget.source);
+              }
+            },
+            icon: Icon(
+              size: 18,
+                updateAvailable ? Icons.update : FontAwesome.trash_solid
+            ),
+          ),
+          IconButton(
+            onPressed: () async {
+              // context.push('/extension_detail', extra: widget.source);
+            },
+            icon: const Icon( FontAwesome.ellipsis_vertical_solid),
+          )
+        ],
       ),
     );
   }

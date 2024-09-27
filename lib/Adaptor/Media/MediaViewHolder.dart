@@ -1,9 +1,10 @@
-import 'package:cached_network_image/cached_network_image.dart';
+
 import 'package:dantotsu/DataClass/Media.dart';
 import 'package:flutter/material.dart';
 
-import '../../Widgets/Media/MediaReleaseingIndicator.dart';
-import '../../Widgets/Media/MediaScoreBadge.dart';
+import '../../Widgets/CachedNetworkImage.dart';
+import 'Widgets/MediaReleaseingIndicator.dart';
+import 'Widgets/MediaScoreBadge.dart';
 
 class MediaViewHolder extends StatelessWidget {
   final media mediaInfo;
@@ -21,7 +22,7 @@ class MediaViewHolder extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(16.0),
-              child: CachedNetworkImage(
+              child: cachedNetworkImage(
                 imageUrl: mediaInfo.cover ?? '',
                 fit: BoxFit.cover,
                 width: 108,

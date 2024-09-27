@@ -14,14 +14,14 @@ extension GetUserData on AnilistQueries {
       return true;
     }
     Anilist.run.value = false;
-    var response = (await executeQuery<ViewerResponse>(_queryUser()));
+    var response = (await executeQuery<ViewerResponse>(_queryUser));
     var user = response?.data?.user;
     if (user == null) return false;
 
     Anilist.userid = user.id;
-    Anilist.username = user.name;
+    Anilist.username.value = user.name ?? '';
     Anilist.bg = user.bannerImage;
-    Anilist.avatar.value = user.avatar?.medium;
+    Anilist.avatar.value = user.avatar?.medium ?? '';
     Anilist.episodesWatched = user.statistics?.anime?.episodesWatched;
     Anilist.chapterRead = user.statistics?.manga?.chaptersRead;
     Anilist.adult = user.options?.displayAdultContent ?? false;
@@ -51,7 +51,7 @@ extension GetUserData on AnilistQueries {
   }
 }
 
-String _queryUser() => '''{
+String _queryUser = '''{
   Viewer {
     name 
     options {

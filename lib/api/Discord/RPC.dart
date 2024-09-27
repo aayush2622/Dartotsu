@@ -4,7 +4,7 @@ import 'package:dantotsu/DataClass/Media.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../Preferences/PrefManager.dart';
-import '../../Preferences/Prefrences.dart';
+import '../../Preferences/Preferences.dart';
 import 'DiscordService.dart';
 import 'RpcExternalAsset.dart';
 

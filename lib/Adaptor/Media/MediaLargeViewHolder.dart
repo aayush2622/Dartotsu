@@ -1,13 +1,13 @@
 import 'package:blur/blur.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:kenburns_nullsafety/kenburns_nullsafety.dart';
 import 'package:provider/provider.dart';
 
 import '../../DataClass/Media.dart';
 import '../../Theme/ThemeProvider.dart';
-import '../../Widgets/Media/MediaReleaseingIndicator.dart';
-import '../../Widgets/Media/MediaScoreBadge.dart';
+import '../../Widgets/CachedNetworkImage.dart';
+import 'Widgets/MediaReleaseingIndicator.dart';
+import 'Widgets/MediaScoreBadge.dart';
 
 class MediaPageLargeViewHolder extends StatelessWidget {
   final media mediaInfo;
@@ -55,11 +55,13 @@ class MediaPageLargeViewHolder extends StatelessWidget {
               maxScale: 5.0,
               minAnimationDuration: const Duration(milliseconds: 6000),
               maxAnimationDuration: const Duration(milliseconds: 20000),
-              child: CachedNetworkImage(
+              child: cachedNetworkImage(
                 imageUrl: mediaInfo.banner ?? mediaInfo.cover ?? '',
                 fit: BoxFit.cover,
                 width: double.infinity,
                 height: 151,
+                placeholder: (context, url) => const SizedBox.shrink(),
+                errorWidget: (context, url, error) => const SizedBox.shrink(),
               ),
             ),
           ),
@@ -144,11 +146,12 @@ class MediaPageLargeViewHolder extends StatelessWidget {
   Widget _buildMediaCover() {
     return  ClipRRect(
         borderRadius: BorderRadius.circular(16.0),
-        child: CachedNetworkImage(
+        child: cachedNetworkImage(
           imageUrl: mediaInfo.cover ?? '',
           fit: BoxFit.cover,
           width: 108,
           height: 160,
+          errorWidget: (context, url, error) => const SizedBox.shrink(),
           placeholder: (context, url) => Container(
             color: Colors.white12,
             width: 108,

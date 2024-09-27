@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:dantotsu/Functions/Function.dart';
-import 'package:dantotsu/Preferences/Prefrences.dart';
+import 'package:dantotsu/Preferences/Preferences.dart';
 import 'package:dantotsu/api/Anilist/Anilist.dart' show Anilist;
 
 import '../../DataClass/Author.dart';

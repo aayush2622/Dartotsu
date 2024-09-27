@@ -59,7 +59,6 @@ class _CustomBottomDialogState extends State<CustomBottomDialog> {
                     fontSize: 20.0,
                     fontWeight: FontWeight.w600,
                     fontFamily: 'Poppins',
-
                   ),
                 ),
               ),
@@ -100,13 +99,14 @@ class _CustomBottomDialogState extends State<CustomBottomDialog> {
                 children: [
                   if (widget.negativeText != null) ...[
                     Expanded(
-                      child: ElevatedButton(
+                      child: OutlinedButton(
                         onPressed: widget.negativeCallback,
-                        style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.all(16.0),
+                        style: OutlinedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(vertical: 28.0),
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16.0),
+                            borderRadius: BorderRadius.circular(18.0),
                           ),
+                          side: BorderSide(color: theme.primary),
                         ),
                         child: Text(
                           widget.negativeText!,
@@ -124,15 +124,17 @@ class _CustomBottomDialogState extends State<CustomBottomDialog> {
                       child: ElevatedButton(
                         onPressed: widget.positiveCallback,
                         style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.all(16.0),
+                          padding: const EdgeInsets.symmetric(vertical: 28.0),
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16.0),
+                            borderRadius: BorderRadius.circular(18.0),
                           ),
+                          side: BorderSide(color: theme.primary),
                         ),
                         child: Text(
                           widget.positiveText!,
                           style: TextStyle(
-                            color: theme.onPrimary,
+                            color: theme.primary,
+                            // Text color for the filled button
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -142,7 +144,7 @@ class _CustomBottomDialogState extends State<CustomBottomDialog> {
                 ],
               ),
             ),
-            const SizedBox(height: 16.0),
+            const SizedBox(height: 0.0),// TODO: navbar padding
           ],
         ),
       ),
@@ -156,7 +158,6 @@ void showCustomBottomDialog(BuildContext context, CustomBottomDialog dialog) {
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(16.0)),
     ),
-
     builder: (context) => dialog,
   );
 }

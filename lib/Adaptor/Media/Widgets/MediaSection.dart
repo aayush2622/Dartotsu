@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../Adaptor/Media/MediaAdaptor.dart';
-import '../../DataClass/Media.dart';
+import '../MediaAdaptor.dart';
+import '../../../DataClass/Media.dart';
 
 Widget MediaSection({
   required BuildContext context,
