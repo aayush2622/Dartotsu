@@ -1,6 +1,9 @@
+import 'package:dantotsu/Screens/Info/Tabs/Info/Widgets/GenreWidget.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../DataClass/Media.dart';
+import '../Watch/Widgets/Countdown.dart';
+import '../../../../Theme/Colors.dart';
 
 class InfoPage extends StatefulWidget {
   final media mediaData;
@@ -14,6 +17,7 @@ class InfoPage extends StatefulWidget {
 class InfoPageState extends State<InfoPage> {
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context).colorScheme;
     return Card(
       elevation: 0,
       shape: RoundedRectangleBorder(
@@ -24,10 +28,13 @@ class InfoPageState extends State<InfoPage> {
           children: <Widget>[
             Container(
               padding: const EdgeInsets.symmetric(vertical: 16.0),
+              color: theme.surface,
               child: Column(
                 children: [
+                  ..._buildReleasingIn(),
                   ..._buildInfoSections(),
                   ..._buildNameSections(),
+                  ..._buildGenres(),
                 ],
               ),
             ),
@@ -37,11 +44,42 @@ class InfoPageState extends State<InfoPage> {
     );
   }
 
+  List<Widget> _buildReleasingIn() {
+    var show = (widget.mediaData.anime?.nextAiringEpisode != null &&
+        widget.mediaData.anime?.nextAiringEpisodeTime != null &&
+        (widget.mediaData.anime!.nextAiringEpisodeTime! -
+            DateTime.now().millisecondsSinceEpoch / 1000) <=
+            86400 * 28);
+    return [
+      if (show) ...[
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+                'EPISODE ${widget.mediaData.anime!.nextAiringEpisode! + 1} WILL BE RELEASED IN',
+                style: TextStyle(
+                    color: color.fg,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14)),
+          ],
+        ),
+        const SizedBox(height: 6),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            CountdownWidget(nextAiringEpisodeTime: widget.mediaData.anime!.nextAiringEpisodeTime!),
+          ],
+        ),
+        const SizedBox(height: 12),
+      ],
+    ];
+  }
+
   List<Widget> _buildInfoSections() {
     var mediaData = widget.mediaData;
     return [
       _buildInfoRow(
-          "Mean Score", _formatScore(mediaData.meanScore, mediaData.userScore)),
+          "Mean Score", _formatScore(mediaData.meanScore, 10)),
       _buildInfoRow("Status", mediaData.status?.toString()),
       _buildInfoRow("Total Episodes", mediaData.userProgress?.toString()),
       _buildInfoRow("Average Duration",
@@ -70,6 +108,11 @@ class InfoPageState extends State<InfoPage> {
       _buildDescriptionSection("Description", mediaData.description),
     ];
   }
+  List<Widget> _buildGenres(){
+    return [
+      _buildGenresSection(context),
+    ];
+  }
 
   Widget _buildInfoRow(String title, String? value) {
     if (value == null || value.isEmpty) return Container();
@@ -84,7 +127,7 @@ class InfoPageState extends State<InfoPage> {
             child: Text(
               title,
               style: TextStyle(
-                color: Colors.grey.withOpacity(0.58),
+                color: Colors.grey.withOpacity(0.68),
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -93,7 +136,7 @@ class InfoPageState extends State<InfoPage> {
             value,
             style: TextStyle(
               fontFamily: 'Poppins',
-              color: theme.primary,
+              color: theme.onSurface,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -158,6 +201,11 @@ class InfoPageState extends State<InfoPage> {
         ],
       ),
     );
+  }
+  Widget _buildGenresSection(BuildContext context){
+
+
+    return SizedBox(child: GenreWidget(context, widget.mediaData.genres) );
   }
 
   String? _formatScore(int? meanScore, int? userScore) {
