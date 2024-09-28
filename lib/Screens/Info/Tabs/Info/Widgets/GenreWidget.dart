@@ -9,20 +9,18 @@ Widget GenreWidget(BuildContext context , genre) {
   return Padding(
     padding: const EdgeInsets.symmetric(vertical: 16.0),
     child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 32.0),
-          child: Text(
+          Text(
             'Genres',
             style: TextStyle(
-              fontSize: 2,
+              fontSize: 15,
               fontFamily: 'Poppins',
               fontWeight: FontWeight.bold,
               color: theme.onSurface),
           ),
-        ),
         const SizedBox(height: 16.0),
         Flexible(
           child: Padding(
@@ -35,18 +33,10 @@ Widget GenreWidget(BuildContext context , genre) {
                 crossAxisSpacing: 16.0,
                 mainAxisSpacing: 16.0,
               ),
-              itemBuilder: (context, index) {
-                return GenreItem(context, "JUST", "https://test.com"); // Replace with actual genre item widget
+              itemBuilder: (context, index ) {
+                return GenreItem(context, genre[index]);
               },
             ),
-          ),
-        ),
-        const Padding(
-          padding: EdgeInsets.all(32.0),
-          child: SizedBox(
-            height: 48.0,
-            width: double.infinity,
-            child: CircularProgressIndicator(),
           ),
         ),
       ],
@@ -61,7 +51,7 @@ int _itemCount(genre){
 
 int _colNumber(genre, BuildContext context){
   double screenWidth = MediaQuery.of(context).size.width;
-  double itemWidth = 100.0;
+  double itemWidth = 256;
   double gapWidth = 1; // Gap between items
   int columns = ((screenWidth + gapWidth) / (itemWidth + gapWidth)).floor();
   int numItems = genre.length; // Total number of items

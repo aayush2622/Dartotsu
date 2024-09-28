@@ -1,3 +1,5 @@
+import 'package:dantotsu/Screens/Info/Tabs/Info/Widgets/ChipWidget.dart';
+import 'package:dantotsu/Widgets/ChipTags.dart';
 import 'package:dantotsu/Screens/Info/Tabs/Info/Widgets/GenreWidget.dart';
 import 'package:flutter/material.dart';
 
@@ -35,6 +37,7 @@ class InfoPageState extends State<InfoPage> {
                   ..._buildInfoSections(),
                   ..._buildNameSections(),
                   ..._buildGenres(),
+                  ..._buildTags(),
                 ],
               ),
             ),
@@ -106,11 +109,6 @@ class InfoPageState extends State<InfoPage> {
       _buildTextSection("Name (Romaji)", mediaData.nameRomaji),
       _buildTextSection("Name", mediaData.name?.toString()),
       _buildDescriptionSection("Description", mediaData.description),
-    ];
-  }
-  List<Widget> _buildGenres(){
-    return [
-      _buildGenresSection(context),
     ];
   }
 
@@ -202,11 +200,28 @@ class InfoPageState extends State<InfoPage> {
       ),
     );
   }
+
+  List<Widget> _buildGenres(){
+    return [
+      _buildGenresSection(context),
+    ];
+  }
+
+  List<Widget> _buildTags(){
+    return [
+      _buildTagsSection(),
+    ];
+  }
   Widget _buildGenresSection(BuildContext context){
 
 
-    return SizedBox(child: GenreWidget(context, widget.mediaData.genres) );
+    return GenreWidget(context, widget.mediaData.genres);
   }
+  Widget _buildTagsSection(){
+    return ChipWidget(context, widget.mediaData.tags);
+  }
+
+
 
   String? _formatScore(int? meanScore, int? userScore) {
     if (meanScore == null) return null;
