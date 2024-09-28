@@ -10,6 +10,7 @@ Widget GenreWidget(BuildContext context , genre) {
     padding: const EdgeInsets.symmetric(vertical: 16.0),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 32.0),
@@ -23,10 +24,11 @@ Widget GenreWidget(BuildContext context , genre) {
           ),
         ),
         const SizedBox(height: 16.0),
-        Expanded(
+        Flexible(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: GridView.builder(
+              shrinkWrap: true,
               itemCount: _itemCount(genre),
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: _colNumber(genre, context),
