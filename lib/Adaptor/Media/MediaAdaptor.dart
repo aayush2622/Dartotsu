@@ -2,16 +2,14 @@ import 'dart:async';
 
 import 'package:dantotsu/Adaptor/Media/MediaLargeViewHolder.dart';
 import 'package:dantotsu/Functions/Extensions.dart';
-import 'package:dantotsu/api/Discord/RPC.dart';
 import 'package:flutter/material.dart';
 
 import '../../Animation/ScaleAnimation.dart';
 import '../../DataClass/Media.dart';
 import '../../Functions/Function.dart';
-import '../../Screens/Info/Tabs/Watch/WatchPage.dart';
+import '../../Screens/Info/MediaScreen.dart';
 import '../../Screens/Settings/SettingsBottomSheet.dart';
 import '../../Widgets/ScrollConfig.dart';
-import '../../Screens/Info/MediaInfoPage.dart';
 import 'MediaPageSmallViewHolder.dart';
 import 'MediaViewHolder.dart';
 

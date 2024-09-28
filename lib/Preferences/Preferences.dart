@@ -12,7 +12,8 @@ class PrefName {
       Pref(Location.General, 'customColor', 4280391411);
   static const Pref<bool> useCustomColor =
       Pref(Location.General, 'useCustomColor', false);
-
+  static const Pref<bool> showYtButton =
+  Pref(Location.General, 'showYtButton', true);
   //home page
   static const Pref<Map<String, bool>> homeLayout =
       Pref(Location.General, 'homeLayoutOrder', {

@@ -1,7 +1,8 @@
+import 'dart:async';
+
 import 'package:dantotsu/DataClass/Media.dart';
 import 'package:dantotsu/Preferences/PrefManager.dart';
 import 'package:dantotsu/Preferences/Hive%20DataClasses/ShowResponse/ShowResponse.dart';
-import 'package:dantotsu/Screens/Info/Tabs/Watch/WatchPage.dart';
 import 'package:dantotsu/api/Mangayomi/Search/get_detail.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fuzzywuzzy/fuzzywuzzy.dart';
@@ -16,7 +17,6 @@ final WatchPageViewModel = Get.put(_WatchPageViewModel());
 class _WatchPageViewModel extends GetxController {
   var selectedMedia = Rxn<MManga?>(null);
   var status = Rxn<String>(null);
-
   reset() {
     selectedMedia.value = null;
     status.value = null;

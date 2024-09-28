@@ -1,12 +1,15 @@
 import 'package:blur/blur.dart';
 import 'package:dantotsu/Functions/Extensions.dart';
+import 'package:dantotsu/Screens/Info/Tabs/Info/InfoPage.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:kenburns_nullsafety/kenburns_nullsafety.dart';
 import 'package:provider/provider.dart';
 
 import '../../DataClass/Media.dart';
 import '../../Theme/ThemeProvider.dart';
 import '../../Widgets/CachedNetworkImage.dart';
+import 'MediaScreenViewModel.dart';
 import 'Tabs/Watch/WatchPage.dart';
 
 class MediaInfoPage extends StatefulWidget {
@@ -19,7 +22,21 @@ class MediaInfoPage extends StatefulWidget {
 }
 
 class MediaInfoPageState extends State<MediaInfoPage> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 1;
+  final _viewModel = MediaPageViewModel;
+  late media mediaData;
+
+  @override
+  void initState() {
+    super.initState();
+    _viewModel.reset();
+    load();
+  }
+
+  Future<void> load() async {
+    mediaData = widget.mediaData;
+    mediaData = await _viewModel.getMediaDetails(widget.mediaData);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +50,11 @@ class MediaInfoPageState extends State<MediaInfoPage> {
               [
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 32),
-                  child:  _buildSliverContent(),
+                  child: Obx(() {
+                    return _viewModel.dataLoaded.value
+                        ? Column(children: [_buildSliverContent()])
+                        : const Center(child: CircularProgressIndicator());
+                  }),
                 ),
               ],
             ),
@@ -43,16 +64,18 @@ class MediaInfoPageState extends State<MediaInfoPage> {
       bottomNavigationBar: _buildBottomNavigationBar(),
     );
   }
+
   Widget _buildSliverContent() {
     return IndexedStack(
       index: _selectedIndex,
       children: [
-        const SizedBox(),
-        WatchPage(mediaData: widget.mediaData),
+        InfoPage(mediaData: mediaData),
+        WatchPage(mediaData: mediaData),
         const SizedBox(),
       ],
     );
   }
+
   BottomNavigationBar _buildBottomNavigationBar() {
     return BottomNavigationBar(
       items: const [
@@ -64,16 +87,13 @@ class MediaInfoPageState extends State<MediaInfoPage> {
       currentIndex: _selectedIndex,
       onTap: (index) {
         setState(() {
-          _selectedIndex = index; // Update the selected tab index
+          _selectedIndex = index;
         });
-        // Handle tab changes accordingly
       },
     );
   }
 
   Widget _buildMediaDetails() {
-    final mediaData = widget.mediaData;
-
     return Column(
       children: [
         Padding(
@@ -84,12 +104,14 @@ class MediaInfoPageState extends State<MediaInfoPage> {
               Expanded(
                 child: RichText(
                   text: TextSpan(
-                    children: _buildMediaDetailsSpans(mediaData),
+                    children: _viewModel.buildMediaDetailsSpans(mediaData, context),
                     style: TextStyle(
                       fontFamily: 'Poppins',
                       fontSize: 16.0,
                       color: Theme.of(context).colorScheme.onSurface,
+                      overflow: TextOverflow.ellipsis,
                     ),
+
                   ),
                 ),
               ),
@@ -103,51 +125,9 @@ class MediaInfoPageState extends State<MediaInfoPage> {
     );
   }
 
-  List<TextSpan> _buildMediaDetailsSpans(media mediaData) {
-    final List<TextSpan> spans = [];
-    var theme = Theme.of(context).colorScheme;
-    if (mediaData.userStatus != null) {
-      spans.add(TextSpan(
-        text: mediaData.anime != null ? "Watched " : "Read ",
-      ));
-      spans.add(TextSpan(
-        text: "${mediaData.userProgress}",
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
-          color: theme.secondary,
-        ),
-      ));
-      spans.add(const TextSpan(text: " out of "));
-    } else {
-      spans.add(const TextSpan(text: "Total of "));
-    }
-
-    if (mediaData.anime != null) {
-      if (mediaData.anime!.nextAiringEpisode != -1) {
-        spans.add(TextSpan(
-            text: "${mediaData.anime!.nextAiringEpisode}",
-            style: TextStyle(
-                color: theme.onSurface, fontWeight: FontWeight.bold)));
-        spans.add(const TextSpan(
-          text: " / ",
-        ));
-      }
-      spans.add(TextSpan(
-        text: "${mediaData.anime!.totalEpisodes ?? "??"}",
-        style: TextStyle(color: theme.onSurface, fontWeight: FontWeight.bold),
-      ));
-    } else {
-      spans.add(TextSpan(
-        text: "${mediaData.manga!.totalChapters ?? "??"}",
-        style: TextStyle(color: theme.onSurface, fontWeight: FontWeight.bold),
-      ));
-    }
-    return spans;
-  }
-
   Widget _buildFavoriteButton() {
     return IconButton(
-      icon: widget.mediaData.isFav
+      icon: mediaData.isFav
           ? const Icon(Icons.favorite)
           : const Icon(Icons.favorite_border),
       iconSize: 32,
@@ -167,8 +147,6 @@ class MediaInfoPageState extends State<MediaInfoPage> {
     );
   }
 
-
-
   Widget _buildMediaSection() {
     final isDarkMode = Provider.of<ThemeNotifier>(context).isDarkMode;
     final theme = Theme.of(context).colorScheme;
@@ -185,7 +163,7 @@ class MediaInfoPageState extends State<MediaInfoPage> {
             minAnimationDuration: const Duration(milliseconds: 6000),
             maxAnimationDuration: const Duration(milliseconds: 20000),
             child: cachedNetworkImage(
-              imageUrl: widget.mediaData.banner ?? widget.mediaData.cover ?? '',
+              imageUrl: mediaData.banner ?? mediaData.cover ?? '',
               fit: BoxFit.cover,
               width: double.infinity,
               height: 384 + (0.statusBar() * 2),
@@ -250,7 +228,7 @@ class MediaInfoPageState extends State<MediaInfoPage> {
           ClipRRect(
             borderRadius: BorderRadius.circular(16.0),
             child: cachedNetworkImage(
-              imageUrl: widget.mediaData.cover ?? '',
+              imageUrl: mediaData.cover ?? '',
               fit: BoxFit.cover,
               width: 108,
               height: 160,
@@ -273,7 +251,7 @@ class MediaInfoPageState extends State<MediaInfoPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          widget.mediaData.userPreferredName,
+          mediaData.userPreferredName,
           style: const TextStyle(
             fontFamily: 'Poppins',
             fontSize: 16,
@@ -284,7 +262,7 @@ class MediaInfoPageState extends State<MediaInfoPage> {
         ),
         const SizedBox(height: 8),
         Text(
-          widget.mediaData.status?.replaceAll("_", " ") ?? "",
+          mediaData.status?.replaceAll("_", " ") ?? "",
           style: TextStyle(
             fontSize: 14,
             color: theme.primary,
@@ -314,7 +292,7 @@ class MediaInfoPageState extends State<MediaInfoPage> {
           backgroundColor: Colors.transparent,
         ),
         child: Text(
-          widget.mediaData.userStatus ?? 'ADD TO LIST',
+          mediaData.userStatus ?? 'ADD TO LIST',
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 14,

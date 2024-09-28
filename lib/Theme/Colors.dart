@@ -9,5 +9,6 @@ Color greyNavLight = const Color(0xFFE5E5E5);
 var isDark = PrefManager.getVal(PrefName.isDarkMode);
 
 class color {
-  Color greyNav = isDark ? const Color(0xFF222222) : const Color(0xFFE5E5E5);
+  static Color greyNav = isDark ? const Color(0xFF222222) : const Color(0xFFE5E5E5);
+  static Color fg = isDark ? const Color(0xA8EEEEEE) : const Color(0xA8000000);
 }

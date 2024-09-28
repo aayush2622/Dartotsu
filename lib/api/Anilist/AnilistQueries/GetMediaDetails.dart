@@ -185,15 +185,20 @@ extension GetMediaDetails on AnilistQueries {
 
       if (media.anime != null) {
         media.anime!.episodeDuration = fetchedMedia.duration;
-        media.anime!.season = fetchedMedia.season?.toString();
+        media.anime!.season = fetchedMedia.season?.name;
         media.anime!.seasonYear = fetchedMedia.seasonYear;
         if (fetchedMedia.studios?.nodes?.isNotEmpty == true) {
           final firstStudio = fetchedMedia.studios!.nodes![0];
-          media.anime?.mainStudio?.id = firstStudio.id;
-          media.anime?.mainStudio?.name = firstStudio.name;
+          media.anime?.mainStudio = Studio(
+            id: firstStudio.id,
+            name: firstStudio.name,
+            siteUrl: firstStudio.siteUrl,
+            isAnimationStudio: firstStudio.isAnimationStudio,
+            media:  firstStudio.media,
+          );
         }
         final authorEdge =
-            findAuthorEdge(fetchedMedia.staff?.edges?.cast<StaffEdge>());
+            findAuthorEdge(fetchedMedia.staff?.edges);
         if (authorEdge != null) {
           final authorNode = authorEdge.node;
           media.anime!.mediaAuthor = author(
@@ -220,7 +225,7 @@ extension GetMediaDetails on AnilistQueries {
         });
       } else if (media.manga != null) {
         final authorEdge =
-            findAuthorEdge(fetchedMedia.staff?.edges?.cast<StaffEdge>());
+            findAuthorEdge(fetchedMedia.staff?.edges);
         if (authorEdge != null) {
           final authorNode = authorEdge.node;
           media.manga!.mediaAuthor = author(
