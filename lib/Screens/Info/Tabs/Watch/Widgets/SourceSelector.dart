@@ -64,24 +64,39 @@ class _SourceSelectorState extends ConsumerState<SourceSelector> {
           widget.onSourceChange(source!);
         }
         var theme = Theme.of(context).colorScheme;
-        return Stack(
+        return Column(
           children: [
-            buildDropdownMenu(
-              padding: const EdgeInsets.all(0),
-              currentValue: lastUsedSource,
-              options: sourceName,
-              borderColor: theme.primary,
-              prefixIcon: Icons.source,
-              onChanged: (name) async {
-                PrefManager.setCustomVal(
-                    '${widget.mediaData.id}-lastUsedSource', name);
-                lastUsedSource = name;
-                source = installedSources
-                    .firstWhereOrNull((e) => nameAndLang(e) == lastUsedSource!);
-                if (widget.currentSource != source) {
-                  widget.onSourceChange(source!);
-                }
-              },
+            Row(
+              children: [
+                Expanded(
+                  child: buildDropdownMenu(
+                    padding: const EdgeInsets.all(0),
+                    currentValue: lastUsedSource,
+                    options: sourceName,
+                    borderColor: theme.primary,
+                    prefixIcon: Icons.source,
+                    onChanged: (name) async {
+                      PrefManager.setCustomVal(
+                          '${widget.mediaData.id}-lastUsedSource', name);
+                      lastUsedSource = name;
+                      source = installedSources.firstWhereOrNull(
+                              (e) => nameAndLang(e) == lastUsedSource!);
+                      if (widget.currentSource != source) {
+                        widget.onSourceChange(source!);
+                      }
+                    },
+                  ),
+                ),
+                const SizedBox(width: 8),
+                GestureDetector(
+                  onTap: null,
+                  child: Icon(
+                    Icons.settings,
+                    size: 32,
+                    color: theme.onSurface,
+                  ),
+                )
+              ],
             ),
           ],
         );

@@ -24,6 +24,7 @@ class WatchPage extends ConsumerStatefulWidget {
 class _WatchPageState extends ConsumerState<WatchPage> {
   Source? source;
   final _viewModel = WatchPageViewModel;
+
   @override
   void initState() {
     super.initState();
@@ -58,6 +59,8 @@ class _WatchPageState extends ConsumerState<WatchPage> {
           onSourceChange: onSourceChange,
           mediaData: widget.mediaData,
         ),
+        const SizedBox(height: 16),
+        _buildWrongTitle(),
         /*Flexible(
           child: Obx(() {
             var selectedMedia = _viewModel.selectedMedia.value;
@@ -78,6 +81,29 @@ class _WatchPageState extends ConsumerState<WatchPage> {
                         CircularProgressIndicator()); // Show a message if no chapters
           }),
         ),*/
+      ],
+    );
+  }
+
+  Widget _buildWrongTitle() {
+    var theme = Theme.of(context).colorScheme;
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        GestureDetector(
+          onTap: null,
+          child: Text(
+            'Wrong title?',
+            style: TextStyle(
+              color: theme.secondary,
+              fontWeight: FontWeight.bold,
+              fontSize: 14,
+              decoration: TextDecoration.underline,
+              decorationColor: theme.secondary,
+              textBaseline: TextBaseline.alphabetic,
+            ),
+          ),
+        )
       ],
     );
   }
@@ -105,7 +131,9 @@ class _WatchPageState extends ConsumerState<WatchPage> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            CountdownWidget(nextAiringEpisodeTime: widget.mediaData.anime!.nextAiringEpisodeTime!),
+            CountdownWidget(
+                nextAiringEpisodeTime:
+                    widget.mediaData.anime!.nextAiringEpisodeTime!),
           ],
         ),
         const SizedBox(height: 12),
@@ -120,7 +148,8 @@ class _WatchPageState extends ConsumerState<WatchPage> {
         SizedBox(
           height: 48,
           child: ElevatedButton(
-            onPressed: () => openLinkInBrowser(widget.mediaData.anime!.youtube!),
+            onPressed: () =>
+                openLinkInBrowser(widget.mediaData.anime!.youtube!),
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color(0xFFFF0000),
               padding: EdgeInsets.zero,
