@@ -5,6 +5,7 @@ import '../../../../Adaptor/Media/Widgets/Chips.dart';
 import '../../../../DataClass/Media.dart';
 import '../../../../Theme/Colors.dart';
 import '../Watch/Widgets/Countdown.dart';
+import '../../../../../Adaptor/Media/Widgets/MediaSection.dart';
 
 class InfoPage extends StatefulWidget {
   final media mediaData;
@@ -37,6 +38,8 @@ class InfoPageState extends State<InfoPage> {
                 ..._buildNameSections(),
                 GenreWidget(context, widget.mediaData.genres),
                 ..._buildTags(),
+                MediaSection(context:context ,type: 0, title: "Relations", mediaList:widget.mediaData.relations),
+                MediaSection(context:context ,type: 0, title: "Recommended", mediaList:widget.mediaData.recommendations),
               ],
           ),
         ),
@@ -123,6 +126,7 @@ class InfoPageState extends State<InfoPage> {
       ChipsWidget(chips: [..._generateChips(widget.mediaData.tags)]),
     ];
   }
+
 
   Widget _buildInfoRow(String title, String? value) {
     if (value == null || value.isEmpty) return Container();
@@ -220,6 +224,8 @@ class InfoPageState extends State<InfoPage> {
           );
     }).toList();
   }
+
+
 
   String? _formatScore(int? meanScore, int? userScore) {
     if (meanScore == null) return null;
