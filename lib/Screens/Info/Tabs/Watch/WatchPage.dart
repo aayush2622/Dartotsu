@@ -2,7 +2,7 @@ import 'package:dantotsu/Functions/Function.dart';
 import 'package:dantotsu/Screens/Info/Tabs/Watch/Widgets/SourceSelector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:get/get.dart';
 
 import '../../../../DataClass/Media.dart';
 import '../../../../Preferences/PrefManager.dart';
@@ -23,7 +23,7 @@ class WatchPage extends ConsumerStatefulWidget {
 
 class _WatchPageState extends ConsumerState<WatchPage> {
   Source? source;
-  final _viewModel = WatchPageViewModel;
+  final _viewModel = Get.put(WatchPageViewModel());
 
   @override
   void initState() {
@@ -43,25 +43,30 @@ class _WatchPageState extends ConsumerState<WatchPage> {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context).colorScheme;
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const SizedBox(height: 24),
-        ..._buildReleasingIn(),
-        ..._buildYouTubeButton(),
-        Obx(() => Text(_viewModel.status.value ?? '',
-            style: TextStyle(
-                color: theme.onSurface, fontWeight: FontWeight.bold))),
-        const SizedBox(height: 12),
-        SourceSelector(
-          currentSource: source,
-          onSourceChange: onSourceChange,
-          mediaData: widget.mediaData,
-        ),
-        const SizedBox(height: 16),
-        _buildWrongTitle(),
-        /*Flexible(
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 32.0),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ..._buildReleasingIn(),
+          ..._buildYouTubeButton(),
+          Obx(
+            () => Text(
+              _viewModel.status.value ?? '',
+              style: TextStyle(
+                  color: theme.onSurface, fontWeight: FontWeight.bold),
+            ),
+          ),
+          const SizedBox(height: 12),
+          SourceSelector(
+            currentSource: source,
+            onSourceChange: onSourceChange,
+            mediaData: widget.mediaData,
+          ),
+          const SizedBox(height: 16),
+          _buildWrongTitle(),
+          /*Flexible(
           child: Obx(() {
             var selectedMedia = _viewModel.selectedMedia.value;
             return selectedMedia?.chapters != null
@@ -81,7 +86,8 @@ class _WatchPageState extends ConsumerState<WatchPage> {
                         CircularProgressIndicator()); // Show a message if no chapters
           }),
         ),*/
-      ],
+        ],
+      ),
     );
   }
 

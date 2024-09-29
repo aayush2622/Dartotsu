@@ -12,11 +12,11 @@ import '../../../../api/Mangayomi/Eval/dart/model/m_manga.dart';
 import '../../../../api/Mangayomi/Model/Source.dart';
 import '../../../../api/Mangayomi/Search/search.dart';
 
-final WatchPageViewModel = Get.put(_WatchPageViewModel());
 
-class _WatchPageViewModel extends GetxController {
+class WatchPageViewModel extends GetxController {
   var selectedMedia = Rxn<MManga?>(null);
   var status = Rxn<String>(null);
+
   reset() {
     selectedMedia.value = null;
     status.value = null;

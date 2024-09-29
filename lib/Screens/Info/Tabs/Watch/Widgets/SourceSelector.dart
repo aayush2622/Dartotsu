@@ -95,7 +95,7 @@ class _SourceSelectorState extends ConsumerState<SourceSelector> {
                     size: 32,
                     color: theme.onSurface,
                   ),
-                )
+                ),
               ],
             ),
           ],

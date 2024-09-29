@@ -2,7 +2,7 @@ import 'package:blur/blur.dart';
 import 'package:dantotsu/Functions/Extensions.dart';
 import 'package:dantotsu/Screens/Info/Tabs/Info/InfoPage.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:get/get.dart';
 import 'package:kenburns_nullsafety/kenburns_nullsafety.dart';
 import 'package:provider/provider.dart';
 
@@ -23,13 +23,15 @@ class MediaInfoPage extends StatefulWidget {
 
 class MediaInfoPageState extends State<MediaInfoPage> {
   int _selectedIndex = 1;
-  final _viewModel = MediaPageViewModel;
+  final _viewModel = Get.put(MediaPageViewModel());
   late media mediaData;
 
   @override
   void initState() {
     super.initState();
-    _viewModel.reset();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _viewModel.reset();
+    });
     load();
   }
 
@@ -49,7 +51,7 @@ class MediaInfoPageState extends State<MediaInfoPage> {
             delegate: SliverChildListDelegate(
               [
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 32),
+                  padding: const EdgeInsets.symmetric(),
                   child: Obx(() {
                     return _viewModel.dataLoaded.value ? Column(
                       mainAxisAlignment: MainAxisAlignment.start,

@@ -5,9 +5,7 @@ import 'package:get/get.dart';
 import '../../DataClass/Media.dart';
 import '../../api/Anilist/Anilist.dart';
 
-final MediaPageViewModel = Get.put(_MediaPageViewModel());
-
-class _MediaPageViewModel extends GetxController {
+class MediaPageViewModel extends GetxController {
   var dataLoaded = false.obs;
   Future<media> getMediaDetails(media media) async {
     var data = await Anilist.query.mediaDetails(media);

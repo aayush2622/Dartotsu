@@ -26,22 +26,39 @@ class InfoPageState extends State<InfoPage> {
         borderRadius: BorderRadius.circular(0),
       ),
       child: SingleChildScrollView(
-          child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 16.0),
-            color: theme.surface,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ..._buildReleasingIn(),
-                ..._buildInfoSections(),
-                ..._buildNameSections(),
-                GenreWidget(context, widget.mediaData.genres),
-                ..._buildTags(),
-                MediaSection(context:context ,type: 0, title: "Relations", mediaList:widget.mediaData.relations),
-                MediaSection(context:context ,type: 0, title: "Recommended", mediaList:widget.mediaData.recommendations),
-              ],
-          ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 32.0),
+              color: theme.surface,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ..._buildReleasingIn(),
+                  ..._buildInfoSections(),
+                  ..._buildNameSections(),
+                  GenreWidget(context, widget.mediaData.genres),
+                  ..._buildTags(),
+                ],
+              ),
+            ),
+
+            MediaSection(
+              context: context,
+              type: 0,
+              title: "Relations",
+              mediaList: widget.mediaData.relations,
+            ),
+            MediaSection(
+              context: context,
+              type: 0,
+              title: "Recommended",
+              mediaList: widget.mediaData.recommendations,
+            ),
+          ],
         ),
       ),
     );
