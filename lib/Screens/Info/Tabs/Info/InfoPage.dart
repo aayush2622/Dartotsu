@@ -1,6 +1,10 @@
+import 'package:dantotsu/Screens/Info/Tabs/Info/Widgets/GenreWidget.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../Adaptor/Media/Widgets/Chips.dart';
 import '../../../../DataClass/Media.dart';
+import '../../../../Theme/Colors.dart';
+import '../Watch/Widgets/Countdown.dart';
 
 class InfoPage extends StatefulWidget {
   final media mediaData;
@@ -14,34 +18,70 @@ class InfoPage extends StatefulWidget {
 class InfoPageState extends State<InfoPage> {
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context).colorScheme;
     return Card(
       elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(0),
       ),
       child: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            Container(
-              padding: const EdgeInsets.symmetric(vertical: 16.0),
-              child: Column(
-                children: [
-                  ..._buildInfoSections(),
-                  ..._buildNameSections(),
-                ],
-              ),
-            ),
-          ],
+          child: Container(
+            padding: const EdgeInsets.symmetric(vertical: 16.0),
+            color: theme.surface,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ..._buildReleasingIn(),
+                ..._buildInfoSections(),
+                ..._buildNameSections(),
+                GenreWidget(context, widget.mediaData.genres),
+                ..._buildTags(),
+              ],
+          ),
         ),
       ),
     );
   }
 
+  List<Widget> _buildReleasingIn() {
+    var show = (widget.mediaData.anime?.nextAiringEpisode != null &&
+        widget.mediaData.anime?.nextAiringEpisodeTime != null &&
+        (widget.mediaData.anime!.nextAiringEpisodeTime! -
+                DateTime.now().millisecondsSinceEpoch / 1000) <=
+            86400 * 28);
+    return [
+      if (show) ...[
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+            'EPISODE ${widget.mediaData.anime!.nextAiringEpisode! + 1} WILL BE RELEASED IN',
+            style: TextStyle(
+                color: color.fg,
+                fontWeight: FontWeight.bold,
+                fontSize: 14)
+            ),
+          ],
+        ),
+        const SizedBox(height: 6),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            CountdownWidget(
+                nextAiringEpisodeTime:
+                    widget.mediaData.anime!.nextAiringEpisodeTime!),
+          ],
+        ),
+        const SizedBox(height: 12),
+      ],
+    ];
+  }
+
   List<Widget> _buildInfoSections() {
     var mediaData = widget.mediaData;
     return [
-      _buildInfoRow(
-          "Mean Score", _formatScore(mediaData.meanScore, mediaData.userScore)),
+      _buildInfoRow("Mean Score", _formatScore(mediaData.meanScore, 10)),
       _buildInfoRow("Status", mediaData.status?.toString()),
       _buildInfoRow("Total Episodes", mediaData.userProgress?.toString()),
       _buildInfoRow("Average Duration",
@@ -70,6 +110,19 @@ class InfoPageState extends State<InfoPage> {
       _buildDescriptionSection("Description", mediaData.description),
     ];
   }
+  List<Widget> _buildTags(){
+    var theme = Theme.of(context).colorScheme;
+    return [
+      Text("Tags", style: TextStyle(
+        fontSize: 15,
+        fontFamily: 'Poppins',
+        fontWeight: FontWeight.bold,
+        color: theme.onSurface,
+      )),
+      const SizedBox(height: 16.0),
+      ChipsWidget(chips: [..._generateChips(widget.mediaData.tags)]),
+    ];
+  }
 
   Widget _buildInfoRow(String title, String? value) {
     if (value == null || value.isEmpty) return Container();
@@ -84,7 +137,7 @@ class InfoPageState extends State<InfoPage> {
             child: Text(
               title,
               style: TextStyle(
-                color: Colors.grey.withOpacity(0.58),
+                color: Colors.grey.withOpacity(0.68),
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -93,7 +146,7 @@ class InfoPageState extends State<InfoPage> {
             value,
             style: TextStyle(
               fontFamily: 'Poppins',
-              color: theme.primary,
+              color: theme.onSurface,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -138,7 +191,7 @@ class InfoPageState extends State<InfoPage> {
       margin: const EdgeInsets.symmetric(vertical: 16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children:[
+        children: [
           Text(
             title,
             style: const TextStyle(
@@ -158,6 +211,14 @@ class InfoPageState extends State<InfoPage> {
         ],
       ),
     );
+  }
+
+  List<ChipData> _generateChips(List<String> labels) {
+    return labels.map((label) {
+      return ChipData(
+          label: label, action: () {} // TODO: Implement AFTER SEARCH
+          );
+    }).toList();
   }
 
   String? _formatScore(int? meanScore, int? userScore) {

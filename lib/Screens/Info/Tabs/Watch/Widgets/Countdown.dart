@@ -62,7 +62,7 @@ class CountdownWidgetState extends State<CountdownWidget> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          countdownText.isNotEmpty ? countdownText : "Loading...",
+          countdownText.isNotEmpty ? countdownText : "",
           style: TextStyle(
             color: theme.colorScheme.onSurface,
             fontWeight: FontWeight.bold,

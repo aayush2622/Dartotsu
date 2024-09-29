@@ -51,9 +51,10 @@ class MediaInfoPageState extends State<MediaInfoPage> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 32),
                   child: Obx(() {
-                    return _viewModel.dataLoaded.value
-                        ? Column(children: [_buildSliverContent()])
-                        : const Center(child: CircularProgressIndicator());
+                    return _viewModel.dataLoaded.value ? Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [_buildSliverContent()]) : const Center(child: CircularProgressIndicator());
                   }),
                 ),
               ],
@@ -104,14 +105,14 @@ class MediaInfoPageState extends State<MediaInfoPage> {
               Expanded(
                 child: RichText(
                   text: TextSpan(
-                    children: _viewModel.buildMediaDetailsSpans(mediaData, context),
+                    children:
+                        _viewModel.buildMediaDetailsSpans(mediaData, context),
                     style: TextStyle(
                       fontFamily: 'Poppins',
                       fontSize: 16.0,
                       color: Theme.of(context).colorScheme.onSurface,
                       overflow: TextOverflow.ellipsis,
                     ),
-
                   ),
                 ),
               ),
