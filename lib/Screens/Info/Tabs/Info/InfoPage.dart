@@ -1,11 +1,10 @@
-import 'package:dantotsu/Screens/Info/Tabs/Info/Widgets/ChipWidget.dart';
-import 'package:dantotsu/Widgets/ChipTags.dart';
 import 'package:dantotsu/Screens/Info/Tabs/Info/Widgets/GenreWidget.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../Adaptor/Media/Widgets/Chips.dart';
 import '../../../../DataClass/Media.dart';
-import '../Watch/Widgets/Countdown.dart';
 import '../../../../Theme/Colors.dart';
+import '../Watch/Widgets/Countdown.dart';
 
 class InfoPage extends StatefulWidget {
   final media mediaData;
@@ -26,22 +25,20 @@ class InfoPageState extends State<InfoPage> {
         borderRadius: BorderRadius.circular(0),
       ),
       child: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            Container(
-              padding: const EdgeInsets.symmetric(vertical: 16.0),
-              color: theme.surface,
-              child: Column(
-                children: [
-                  ..._buildReleasingIn(),
-                  ..._buildInfoSections(),
-                  ..._buildNameSections(),
-                  ..._buildGenres(),
-                  ..._buildTags(),
-                ],
-              ),
-            ),
-          ],
+          child: Container(
+            padding: const EdgeInsets.symmetric(vertical: 16.0),
+            color: theme.surface,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ..._buildReleasingIn(),
+                ..._buildInfoSections(),
+                ..._buildNameSections(),
+                GenreWidget(context, widget.mediaData.genres),
+                ..._buildTags(),
+              ],
+          ),
         ),
       ),
     );
@@ -51,7 +48,7 @@ class InfoPageState extends State<InfoPage> {
     var show = (widget.mediaData.anime?.nextAiringEpisode != null &&
         widget.mediaData.anime?.nextAiringEpisodeTime != null &&
         (widget.mediaData.anime!.nextAiringEpisodeTime! -
-            DateTime.now().millisecondsSinceEpoch / 1000) <=
+                DateTime.now().millisecondsSinceEpoch / 1000) <=
             86400 * 28);
     return [
       if (show) ...[
@@ -59,18 +56,21 @@ class InfoPageState extends State<InfoPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-                'EPISODE ${widget.mediaData.anime!.nextAiringEpisode! + 1} WILL BE RELEASED IN',
-                style: TextStyle(
-                    color: color.fg,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14)),
+            'EPISODE ${widget.mediaData.anime!.nextAiringEpisode! + 1} WILL BE RELEASED IN',
+            style: TextStyle(
+                color: color.fg,
+                fontWeight: FontWeight.bold,
+                fontSize: 14)
+            ),
           ],
         ),
         const SizedBox(height: 6),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            CountdownWidget(nextAiringEpisodeTime: widget.mediaData.anime!.nextAiringEpisodeTime!),
+            CountdownWidget(
+                nextAiringEpisodeTime:
+                    widget.mediaData.anime!.nextAiringEpisodeTime!),
           ],
         ),
         const SizedBox(height: 12),
@@ -81,8 +81,7 @@ class InfoPageState extends State<InfoPage> {
   List<Widget> _buildInfoSections() {
     var mediaData = widget.mediaData;
     return [
-      _buildInfoRow(
-          "Mean Score", _formatScore(mediaData.meanScore, 10)),
+      _buildInfoRow("Mean Score", _formatScore(mediaData.meanScore, 10)),
       _buildInfoRow("Status", mediaData.status?.toString()),
       _buildInfoRow("Total Episodes", mediaData.userProgress?.toString()),
       _buildInfoRow("Average Duration",
@@ -109,6 +108,19 @@ class InfoPageState extends State<InfoPage> {
       _buildTextSection("Name (Romaji)", mediaData.nameRomaji),
       _buildTextSection("Name", mediaData.name?.toString()),
       _buildDescriptionSection("Description", mediaData.description),
+    ];
+  }
+  List<Widget> _buildTags(){
+    var theme = Theme.of(context).colorScheme;
+    return [
+      Text("Tags", style: TextStyle(
+        fontSize: 15,
+        fontFamily: 'Poppins',
+        fontWeight: FontWeight.bold,
+        color: theme.onSurface,
+      )),
+      const SizedBox(height: 16.0),
+      ChipsWidget(chips: [..._generateChips(widget.mediaData.tags)]),
     ];
   }
 
@@ -179,7 +191,7 @@ class InfoPageState extends State<InfoPage> {
       margin: const EdgeInsets.symmetric(vertical: 16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children:[
+        children: [
           Text(
             title,
             style: const TextStyle(
@@ -201,27 +213,13 @@ class InfoPageState extends State<InfoPage> {
     );
   }
 
-  List<Widget> _buildGenres(){
-    return [
-      _buildGenresSection(context),
-    ];
+  List<ChipData> _generateChips(List<String> labels) {
+    return labels.map((label) {
+      return ChipData(
+          label: label, action: () {} // TODO: Implement AFTER SEARCH
+          );
+    }).toList();
   }
-
-  List<Widget> _buildTags(){
-    return [
-      _buildTagsSection(),
-    ];
-  }
-  Widget _buildGenresSection(BuildContext context){
-
-
-    return GenreWidget(context, widget.mediaData.genres);
-  }
-  Widget _buildTagsSection(){
-    return ChipWidget(context, widget.mediaData.tags);
-  }
-
-
 
   String? _formatScore(int? meanScore, int? userScore) {
     if (meanScore == null) return null;
