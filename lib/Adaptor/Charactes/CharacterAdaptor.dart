@@ -1,17 +1,12 @@
 import 'dart:async';
-
-import 'package:dantotsu/Adaptor/Media/MediaLargeViewHolder.dart';
 import 'package:dantotsu/Functions/Extensions.dart';
 import 'package:flutter/material.dart';
 
 import '../../Animation/ScaleAnimation.dart';
 import '../../DataClass/Character.dart';
-import '../../Functions/Function.dart';
 import '../../Screens/Settings/SettingsBottomSheet.dart';
 import '../../Widgets/ScrollConfig.dart';
 import 'CharacterViewHolder.dart';
-// import 'MediaPageSmallViewHolder.dart';
-// import 'MediaViewHolder.dart';
 
 class CharacterAdaptor extends StatefulWidget {
   final int type;
