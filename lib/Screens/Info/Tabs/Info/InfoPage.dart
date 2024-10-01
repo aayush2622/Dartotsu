@@ -1,4 +1,5 @@
 import 'package:dantotsu/Adaptor/Charactes/Widgets/CharacterSection.dart';
+import 'package:dantotsu/Adaptor/Charactes/Widgets/StaffSection.dart';
 import 'package:dantotsu/Screens/Info/Tabs/Info/Widgets/GenreWidget.dart';
 import 'package:flutter/material.dart';
 
@@ -33,7 +34,8 @@ class InfoPageState extends State<InfoPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 32.0),
+              padding:
+                  const EdgeInsets.symmetric(vertical: 16.0, horizontal: 32.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,7 +48,6 @@ class InfoPageState extends State<InfoPage> {
                 ],
               ),
             ),
-
             MediaSection(
               context: context,
               type: 0,
@@ -59,7 +60,16 @@ class InfoPageState extends State<InfoPage> {
               title: "Recommended",
               mediaList: widget.mediaData.recommendations,
             ),
-            CharacterSection(context: context, type: 0, title: "Characters",characterList: widget.mediaData.characters),
+            CharacterSection(
+                context: context,
+                type: 0,
+                title: "Characters",
+                characterList: widget.mediaData.characters),
+            StaffSection(
+                context: context,
+                type: 0,
+                title: "Staff",
+                staffList: widget.mediaData.staff),
           ],
         ),
       ),
@@ -78,12 +88,11 @@ class InfoPageState extends State<InfoPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-            'EPISODE ${widget.mediaData.anime!.nextAiringEpisode! + 1} WILL BE RELEASED IN',
-            style: TextStyle(
-                color: color.fg,
-                fontWeight: FontWeight.bold,
-                fontSize: 14)
-            ),
+                'EPISODE ${widget.mediaData.anime!.nextAiringEpisode! + 1} WILL BE RELEASED IN',
+                style: TextStyle(
+                    color: color.fg,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14)),
           ],
         ),
         const SizedBox(height: 6),
@@ -132,20 +141,21 @@ class InfoPageState extends State<InfoPage> {
       _buildDescriptionSection("Description", mediaData.description),
     ];
   }
-  List<Widget> _buildTags(){
+
+  List<Widget> _buildTags() {
     var theme = Theme.of(context).colorScheme;
     return [
-      Text("Tags", style: TextStyle(
-        fontSize: 15,
-        fontFamily: 'Poppins',
-        fontWeight: FontWeight.bold,
-        color: theme.onSurface,
-      )),
+      Text("Tags",
+          style: TextStyle(
+            fontSize: 15,
+            fontFamily: 'Poppins',
+            fontWeight: FontWeight.bold,
+            color: theme.onSurface,
+          )),
       const SizedBox(height: 16.0),
       ChipsWidget(chips: [..._generateChips(widget.mediaData.tags)]),
     ];
   }
-
 
   Widget _buildInfoRow(String title, String? value) {
     if (value == null || value.isEmpty) return Container();
@@ -243,8 +253,6 @@ class InfoPageState extends State<InfoPage> {
           );
     }).toList();
   }
-
-
 
   String? _formatScore(int? meanScore, int? userScore) {
     if (meanScore == null) return null;
