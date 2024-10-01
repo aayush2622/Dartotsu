@@ -23,6 +23,7 @@ class InfoPageState extends State<InfoPage> {
     final theme = Theme.of(context).colorScheme;
     return Card(
       elevation: 0,
+      color: theme.surface,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(0),
       ),
@@ -33,7 +34,6 @@ class InfoPageState extends State<InfoPage> {
           children: [
             Container(
               padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 32.0),
-              color: theme.surface,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
