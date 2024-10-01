@@ -17,9 +17,17 @@ class ChipsWidget extends StatelessWidget {
           child: Center(
             child: Row(
               mainAxisSize: MainAxisSize.min,
-              children: chips.map((chipData) {
+              children: chips.asMap().entries.map((entry) {
+                final index = entry.key;
+                final chipData = entry.value;
+                final isFirst = index == 0;
+                final isLast = index == chips.length - 1;
+
                 return Padding(
-                  padding: const EdgeInsets.only(right: 12.0),
+                  padding: EdgeInsets.only(
+                    left: isFirst ? 24.0 : 6.5,
+                    right: isLast ? 24.0 : 6.5,
+                  ),
                   child: ActionChip(
                     label: Text(
                       chipData.label,
@@ -33,7 +41,8 @@ class ChipsWidget extends StatelessWidget {
                     onPressed: chipData.action,
                     shape: RoundedRectangleBorder(
                       borderRadius: const BorderRadius.all(Radius.circular(10)),
-                      side: BorderSide(color: theme.primaryContainer)),
+                      side: BorderSide(color: theme.primaryContainer),
+                    ),
                   ),
                 );
               }).toList(),

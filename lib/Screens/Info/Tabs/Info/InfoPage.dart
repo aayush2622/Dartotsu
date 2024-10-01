@@ -3,11 +3,13 @@ import 'package:dantotsu/Adaptor/Charactes/Widgets/StaffSection.dart';
 import 'package:dantotsu/Screens/Info/Tabs/Info/Widgets/GenreWidget.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../Adaptor/Media/Widgets/MediaSection.dart';
 import '../../../../Adaptor/Media/Widgets/Chips.dart';
+import '../../../../Adaptor/Media/Widgets/MediaCard.dart';
 import '../../../../DataClass/Media.dart';
 import '../../../../Theme/Colors.dart';
+import '../../MediaScreen.dart';
 import '../Watch/Widgets/Countdown.dart';
-import '../../../../../Adaptor/Media/Widgets/MediaSection.dart';
 
 class InfoPage extends StatefulWidget {
   final media mediaData;
@@ -33,27 +35,32 @@ class InfoPageState extends State<InfoPage> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 16.0, horizontal: 32.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ..._buildReleasingIn(),
-                  ..._buildInfoSections(),
-                  ..._buildNameSections(),
-                  ..._buildSynonyms(),
-                  GenreWidget(context, widget.mediaData.genres),
-                  ..._buildTags(),
-                ],
-              ),
-            ),
+            _buildWithPadding([
+              ..._buildReleasingIn(),
+              ..._buildInfoSections(),
+              ..._buildNameSections(),
+            ]),
+            ..._buildSynonyms(),
+            _buildWithPadding([GenreWidget(context, widget.mediaData.genres)]),
+            ..._buildTags(),
+            ..._buildPrequelSection(),
             MediaSection(
               context: context,
               type: 0,
               title: "Relations",
               mediaList: widget.mediaData.relations,
+            ),
+            CharacterSection(
+              context: context,
+              type: 0,
+              title: "Characters",
+              characterList: widget.mediaData.characters,
+            ),
+            StaffSection(
+              context: context,
+              type: 0,
+              title: "Staff",
+              staffList: widget.mediaData.staff,
             ),
             MediaSection(
               context: context,
@@ -61,18 +68,19 @@ class InfoPageState extends State<InfoPage> {
               title: "Recommended",
               mediaList: widget.mediaData.recommendations,
             ),
-            CharacterSection(
-                context: context,
-                type: 0,
-                title: "Characters",
-                characterList: widget.mediaData.characters),
-            StaffSection(
-                context: context,
-                type: 0,
-                title: "Staff",
-                staffList: widget.mediaData.staff),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildWithPadding(List<Widget> widgets) {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 32.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: widgets,
       ),
     );
   }
@@ -146,13 +154,18 @@ class InfoPageState extends State<InfoPage> {
   List<Widget> _buildSynonyms() {
     var theme = Theme.of(context).colorScheme;
     return [
-      Text("Synonyms",
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 32.0),
+        child: Text(
+          "Synonyms",
           style: TextStyle(
             fontSize: 15,
             fontFamily: 'Poppins',
             fontWeight: FontWeight.bold,
             color: theme.onSurface,
-          )),
+          ),
+        ),
+      ),
       const SizedBox(height: 16.0),
       ChipsWidget(chips: [..._generateSynonyms(widget.mediaData.synonyms)]),
     ];
@@ -161,15 +174,47 @@ class InfoPageState extends State<InfoPage> {
   List<Widget> _buildTags() {
     var theme = Theme.of(context).colorScheme;
     return [
-      Text("Tags",
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 32.0),
+        child: Text(
+          "Tags",
           style: TextStyle(
             fontSize: 15,
             fontFamily: 'Poppins',
             fontWeight: FontWeight.bold,
             color: theme.onSurface,
-          )),
+          ),
+        ),
+      ),
       const SizedBox(height: 16.0),
       ChipsWidget(chips: [..._generateChips(widget.mediaData.tags)]),
+    ];
+  }
+
+  List<Widget> _buildPrequelSection() {
+    var prequel = widget.mediaData.prequel;
+    var sequel = widget.mediaData.sequel;
+    return [
+      const SizedBox(height: 24.0),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          if (prequel != null)
+            MediaCard(
+              context,
+              'PREQUEL',
+              MediaInfoPage(prequel),
+              prequel.banner ?? prequel.cover ?? 'https://bit.ly/31bsIHq',
+            ),
+          if (sequel != null)
+            MediaCard(
+              context,
+              'SEQUEL',
+              MediaInfoPage(sequel),
+              sequel.banner ?? sequel.cover ?? 'https://bit.ly/2ZGfcuG',
+            ),
+        ],
+      )
     ];
   }
 
@@ -181,7 +226,7 @@ class InfoPageState extends State<InfoPage> {
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
+        children: [
           Expanded(
             child: Text(
               title,
@@ -261,11 +306,12 @@ class InfoPageState extends State<InfoPage> {
       ),
     );
   }
+
   List<ChipData> _generateSynonyms(List<String> labels) {
     return labels.map((label) {
       return ChipData(
           label: label, action: () {} // TODO: Implement AFTER SEARCH
-      );
+          );
     }).toList();
   }
 
