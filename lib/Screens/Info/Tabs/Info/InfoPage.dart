@@ -43,6 +43,7 @@ class InfoPageState extends State<InfoPage> {
                   ..._buildReleasingIn(),
                   ..._buildInfoSections(),
                   ..._buildNameSections(),
+                  ..._buildSynonyms(),
                   GenreWidget(context, widget.mediaData.genres),
                   ..._buildTags(),
                 ],
@@ -139,6 +140,21 @@ class InfoPageState extends State<InfoPage> {
       _buildTextSection("Name (Romaji)", mediaData.nameRomaji),
       _buildTextSection("Name", mediaData.name?.toString()),
       _buildDescriptionSection("Description", mediaData.description),
+    ];
+  }
+
+  List<Widget> _buildSynonyms() {
+    var theme = Theme.of(context).colorScheme;
+    return [
+      Text("Synonyms",
+          style: TextStyle(
+            fontSize: 15,
+            fontFamily: 'Poppins',
+            fontWeight: FontWeight.bold,
+            color: theme.onSurface,
+          )),
+      const SizedBox(height: 16.0),
+      ChipsWidget(chips: [..._generateSynonyms(widget.mediaData.synonyms)]),
     ];
   }
 
@@ -244,6 +260,13 @@ class InfoPageState extends State<InfoPage> {
         ],
       ),
     );
+  }
+  List<ChipData> _generateSynonyms(List<String> labels) {
+    return labels.map((label) {
+      return ChipData(
+          label: label, action: () {} // TODO: Implement AFTER SEARCH
+      );
+    }).toList();
   }
 
   List<ChipData> _generateChips(List<String> labels) {
