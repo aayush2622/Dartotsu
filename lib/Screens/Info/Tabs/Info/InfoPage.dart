@@ -1,3 +1,4 @@
+import 'package:dantotsu/Adaptor/Charactes/Widgets/CharacterSection.dart';
 import 'package:dantotsu/Screens/Info/Tabs/Info/Widgets/GenreWidget.dart';
 import 'package:flutter/material.dart';
 
@@ -58,6 +59,7 @@ class InfoPageState extends State<InfoPage> {
               title: "Recommended",
               mediaList: widget.mediaData.recommendations,
             ),
+            CharacterSection(context: context, type: 0, title: "Characters",characterList: widget.mediaData.characters),
           ],
         ),
       ),
