@@ -55,7 +55,7 @@ class CharacterViewHolder extends StatelessWidget {
                 style: TextStyle(
                   fontFamily: 'Poppins',
                   fontSize: 12.0,
-                  color: Colors.white.withOpacity(0.58),
+                  color: theme.onSurface.withOpacity(0.58),
                 ),
                 overflow: TextOverflow.ellipsis,
               ),

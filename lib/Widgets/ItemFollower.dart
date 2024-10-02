@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 import '../../../Widgets/CachedNetworkImage.dart';
 import '../DataClass/User.dart';
+import '../api/Anilist/Anilist.dart';
 
 Widget ItemFollower(BuildContext context, userData follower) {
   final theme = Theme.of(context).colorScheme;
+  String user;
+  if(Anilist.username == follower.name){
+    user = "YOU";
+  }else{
+    user = follower.name;
+  }
   return Padding(
     padding: const EdgeInsets.all(8.0),
     child: Column(
@@ -34,6 +41,7 @@ Widget ItemFollower(BuildContext context, userData follower) {
                 bottom: 0,
                 child: Container(
                   width: 80,
+                  height: 30,
                   padding:
                       const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                   decoration: BoxDecoration(
@@ -71,8 +79,8 @@ Widget ItemFollower(BuildContext context, userData follower) {
             style: TextStyle(
               fontFamily: 'Poppins',
               fontSize: 12,
-              fontStyle: FontStyle.normal,
-              color: Colors.white.withOpacity(0.58),
+              fontWeight: FontWeight.bold,
+              color: theme.onSurface.withOpacity(0.58),
             ),
           ),
         ),
@@ -81,10 +89,11 @@ Widget ItemFollower(BuildContext context, userData follower) {
 
         // Profile Username
         Text(
-          follower.name, // Replace with localized string if necessary
+          user, // Replace with localized string if necessary
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 14,
+            fontWeight: FontWeight.bold,
             color: theme.onSurface,
           ),
         ),
@@ -108,7 +117,7 @@ Widget ItemFollower(BuildContext context, userData follower) {
                "/${follower.totalEpisodes}",
                 style: TextStyle(
                   fontSize: 14,
-                  color: Colors.white.withOpacity(0.58),
+                  color: theme.onSurface.withOpacity(0.58),
                 ),
               ),
             ],
