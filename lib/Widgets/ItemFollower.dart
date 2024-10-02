@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../../Widgets/CachedNetworkImage.dart';
+import '../DataClass/User.dart';
 
-Widget ItemFollower(BuildContext context, String imgUrl, double userScore,
-    String status, String username, String watched, String total) {
+Widget ItemFollower(BuildContext context, userData follower) {
   final theme = Theme.of(context).colorScheme;
   return Padding(
     padding: const EdgeInsets.all(8.0),
@@ -24,7 +24,7 @@ Widget ItemFollower(BuildContext context, String imgUrl, double userScore,
                 height: 92,
                 color: Colors.transparent,
                 child: cachedNetworkImage(
-                  imageUrl: imgUrl,
+                  imageUrl: follower.pfp.toString(),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -35,18 +35,19 @@ Widget ItemFollower(BuildContext context, String imgUrl, double userScore,
                 child: Container(
                   width: 80,
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                   decoration: BoxDecoration(
-                    color: userScore == 0 ? theme.primary : theme.tertiary,
-                    borderRadius: BorderRadius.circular(20),
+                    color: follower.score == 0 ? theme.primary : theme.tertiary,
+                    borderRadius: const BorderRadius.only(topLeft: Radius.circular(30),topRight: Radius.circular(30), bottomLeft: Radius.circular(100),bottomRight: Radius.circular(100)),
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(userScore.toString(),
+                      Text(follower.score.toString(),
                           style: TextStyle(
                               fontFamily: "Poppins",
                               fontSize: 14,
+                              fontWeight: FontWeight.bold,
                               color: theme.onPrimary)),
                       Icon(
                         Icons.star_rounded,
@@ -65,7 +66,7 @@ Widget ItemFollower(BuildContext context, String imgUrl, double userScore,
         Visibility(
           visible: true, // set to false if you want it hidden by default
           child: Text(
-            status, // Replace with localized string if necessary
+            follower.status.toString(), // Replace with localized string if necessary
             textAlign: TextAlign.center,
             style: TextStyle(
               fontFamily: 'Poppins',
@@ -80,7 +81,7 @@ Widget ItemFollower(BuildContext context, String imgUrl, double userScore,
 
         // Profile Username
         Text(
-          username, // Replace with localized string if necessary
+          follower.name, // Replace with localized string if necessary
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 14,
@@ -97,14 +98,14 @@ Widget ItemFollower(BuildContext context, String imgUrl, double userScore,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                watched,
+                follower.progress.toString(),
                 style: TextStyle(
                   fontSize: 14,
                   color: Theme.of(context).colorScheme.secondary,
                 ),
               ),
               Text(
-               "/$total",
+               "/${follower.totalEpisodes}",
                 style: TextStyle(
                   fontSize: 14,
                   color: Colors.white.withOpacity(0.58),

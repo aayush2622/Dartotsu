@@ -18,7 +18,7 @@ Widget FollowerWidget(BuildContext context, List<userData>? follower) {
               spacing: 8.0,
               runSpacing: 0.0,
               children: List.generate(follower.length, (index) {
-                return ItemFollower(context, follower[index].pfp.toString(), follower[index].score ?? 0.0, follower[index].status.toString(), follower[index].name, follower[index].progress.toString(), follower[index].totalEpisodes.toString());
+                return ItemFollower(context, follower[index]);
               }),
             ),
           ),

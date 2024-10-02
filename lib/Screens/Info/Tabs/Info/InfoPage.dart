@@ -1,5 +1,6 @@
 import 'package:dantotsu/Adaptor/Charactes/Widgets/CharacterSection.dart';
 import 'package:dantotsu/Adaptor/Charactes/Widgets/StaffSection.dart';
+import 'package:dantotsu/Screens/Info/Tabs/Info/Widgets/FollowerWidget.dart';
 import 'package:dantotsu/Screens/Info/Tabs/Info/Widgets/GenreWidget.dart';
 import 'package:flutter/material.dart';
 
@@ -41,6 +42,7 @@ class InfoPageState extends State<InfoPage> {
               ..._buildNameSections(),
             ]),
             ..._buildSynonyms(),
+            FollowerWidget(context, widget.mediaData.users),
             _buildWithPadding([GenreWidget(context, widget.mediaData.genres)]),
             ..._buildTags(),
             ..._buildPrequelSection(),
