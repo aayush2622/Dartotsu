@@ -34,11 +34,24 @@ class _SourceSelectorState extends ConsumerState<SourceSelector> {
     return Material(
         child: sources.when(
       data: (List<Source> sources) {
-        var installedSources = sources
+        List installedSources = sources
             .where((source) => source.isAdded!)
             .toList()
             .reversed
             .toList();
+
+        if (installedSources.isEmpty) {
+          return const Column(
+            children: [
+              buildDropdownMenu(
+                padding: EdgeInsets.all(0),
+                currentValue: 'No sources installed',
+                options: ['No sources installed'],
+                prefixIcon: Icons.source,
+              ),
+            ],
+          );
+        }
 
         String nameAndLang(Source source) {
           bool isDuplicateName =
@@ -80,7 +93,7 @@ class _SourceSelectorState extends ConsumerState<SourceSelector> {
                           '${widget.mediaData.id}-lastUsedSource', name);
                       lastUsedSource = name;
                       source = installedSources.firstWhereOrNull(
-                              (e) => nameAndLang(e) == lastUsedSource!);
+                          (e) => nameAndLang(e) == lastUsedSource!);
                       if (widget.currentSource != source) {
                         widget.onSourceChange(source!);
                       }

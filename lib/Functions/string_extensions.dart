@@ -11,6 +11,10 @@ extension StringExtensions on String {
     return split(pattern).last;
   }
 
+  bool isEqualTo(String? other) {
+  return this == other;
+  }
+
   String substringBefore(String pattern) {
     final endIndex = indexOf(pattern);
     if (endIndex == -1) return substring(0);

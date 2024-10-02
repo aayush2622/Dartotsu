@@ -72,7 +72,6 @@ class MediaGridState extends State<CharacterAdaptor> {
                 duration: const Duration(milliseconds: 200),
                 child: GestureDetector(
                   onTap: () =>(),
-                  onLongPress: () => settingsBottomSheet(context),
                   child: Container(
                     width: 102,
                     margin: margin,

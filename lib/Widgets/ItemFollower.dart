@@ -1,3 +1,4 @@
+import 'package:dantotsu/Functions/string_extensions.dart';
 import 'package:flutter/material.dart';
 import '../../../Widgets/CachedNetworkImage.dart';
 import '../DataClass/User.dart';
@@ -5,12 +6,7 @@ import '../api/Anilist/Anilist.dart';
 
 Widget ItemFollower(BuildContext context, userData follower) {
   final theme = Theme.of(context).colorScheme;
-  String user;
-  if(Anilist.username == follower.name){
-    user = "YOU";
-  }else{
-    user = follower.name;
-  }
+  String user = (Anilist.username.value.isEqualTo(follower.name)) ? "YOU" : follower.name;
   return Padding(
     padding: const EdgeInsets.all(8.0),
     child: Column(
@@ -127,3 +123,4 @@ Widget ItemFollower(BuildContext context, userData follower) {
     ),
   );
 }
+

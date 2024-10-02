@@ -31,7 +31,7 @@ class _BrowseScreenState extends ConsumerState<ExtensionScreen>
       _checkPermission();
       setState(() {
         _textEditingController.clear();
-        _isSearch = false;
+        //_isSearch = false;
       });
     });
     super.initState();
@@ -42,7 +42,7 @@ class _BrowseScreenState extends ConsumerState<ExtensionScreen>
   }
   final _textEditingController = TextEditingController();
 
-  bool _isSearch = false;
+  //bool _isSearch = false;
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context).colorScheme;

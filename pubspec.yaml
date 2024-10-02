@@ -43,6 +43,7 @@ dependencies:
   hive_flutter: ^1.1.0
 
   # UI Components
+  expandable_text: 2.3.0
   cached_network_image: ^3.2.0
   flutter_svg: ^2.0.4
   flex_color_scheme: ^7.3.1

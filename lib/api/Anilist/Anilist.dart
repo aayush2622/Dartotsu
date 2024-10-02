@@ -10,7 +10,7 @@ import 'AnilistQueries.dart';
 
 var Anilist = Get.put(_AnilistController());
 
-class _AnilistController extends GetxController {
+class _AnilistController extends GetxController { // TODO: better login page
   late final AnilistQueries query;
   late final AnilistMutations mutation;
 
