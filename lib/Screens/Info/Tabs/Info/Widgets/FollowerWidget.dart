@@ -8,50 +8,59 @@ import '../../../../../Widgets/ItemFollower.dart';
 import '../../../../../Widgets/ScrollConfig.dart';
 import '../../../../../api/Anilist/Anilist.dart';
 
-Widget FollowerWidget(BuildContext context, List<userData>? follower) {
-  if (follower == null) return const SizedBox();
-  int targetIndex = follower.indexWhere((user) => Anilist.username.value.isEqualTo(user.name) );
-  if (targetIndex != -1) {
-    userData target = follower[targetIndex];
-    follower.removeAt(targetIndex);
-    follower.insert(0, target);
-  }
-  return SizedBox(
-    height: 250,
-    child: AnimatedSwitcher(
-      duration: const Duration(milliseconds: 500),
+class FollowerWidget extends StatelessWidget {
+  final List<userData>? follower;
+
+  const FollowerWidget({super.key, this.follower});
+
+  @override
+  Widget build(BuildContext context) {
+    if (follower == null || follower!.isEmpty) return const SizedBox();
+
+    final followers = List<userData>.from(follower!);
+    final targetIndex = followers.indexWhere((user) => Anilist.username.value.isEqualTo(user.name));
+    if (targetIndex != -1) {
+      final targetUser = followers.removeAt(targetIndex);
+      followers.insert(0, targetUser);
+    }
+
+    const animationDuration = Duration(milliseconds: 200);
+    const paddingValue = 24.0;
+    const marginValue = 6.5;
+
+    return SizedBox(
+      height: 250,
       child: ScrollConfig(
         context,
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
-          itemCount: follower.length,
+          itemCount: followers.length,
+          padding: const EdgeInsets.symmetric(horizontal: paddingValue),
           itemBuilder: (context, index) {
-            final isFirst = index == 0;
-            final isLast = index == follower.length - 1;
             final margin = EdgeInsets.only(
-              left: isFirst ? 24.0 : 6.5,
-              right: isLast ? 24.0 : 6.5,
+              left: index == 0 ? paddingValue : marginValue,
+              right: index == followers.length - 1 ? paddingValue : marginValue,
             );
+
             return SlideAndScaleAnimation(
               initialScale: 0.0,
               finalScale: 1.0,
               initialOffset: const Offset(1.0, 0.0),
               finalOffset: Offset.zero,
-              duration: const Duration(milliseconds: 200),
+              duration: animationDuration,
               child: GestureDetector(
-                onTap: () => snackString('ss'),
-                onLongPress: () => snackString('s'),
+                onTap: () => snackString('Tapped'),
+                onLongPress: () => snackString('Long Pressed'),
                 child: Container(
                   width: 102,
                   margin: margin,
-                  child: ItemFollower(context, follower[index]),
+                  child: ItemFollower(context, followers[index]),
                 ),
               ),
             );
           },
         ),
       ),
-    ),
-  );
+    );
+  }
 }
-

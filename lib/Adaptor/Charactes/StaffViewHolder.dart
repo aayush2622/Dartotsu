@@ -1,4 +1,3 @@
-
 import 'package:dantotsu/DataClass/Author.dart';
 import 'package:flutter/material.dart';
 
@@ -15,23 +14,17 @@ class StaffViewHolder extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Card(
-          elevation: 4.0,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16.0),
-          ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(16.0),
-            child: cachedNetworkImage(
-              imageUrl: staffInfo.image ?? '',
-              fit: BoxFit.cover,
+        ClipRRect(
+          borderRadius: BorderRadius.circular(16.0),
+          child: cachedNetworkImage(
+            imageUrl: staffInfo.image ?? '',
+            fit: BoxFit.cover,
+            width: 108,
+            height: 160,
+            placeholder: (context, url) => Container(
+              color: Colors.white12,
               width: 108,
               height: 160,
-              placeholder: (context, url) => Container(
-                color: Colors.white12,
-                width: 108,
-                height: 160,
-              ),
             ),
           ),
         ),
@@ -44,7 +37,6 @@ class StaffViewHolder extends StatelessWidget {
               style: TextStyle(
                 fontFamily: 'Poppins',
                 fontSize: 14,
-                fontWeight: FontWeight.bold,
                 color: theme.onSurface,
               ),
             ),
@@ -56,6 +48,7 @@ class StaffViewHolder extends StatelessWidget {
                   fontFamily: 'Poppins',
                   fontSize: 12.0,
                   color: theme.onSurface.withOpacity(0.58),
+                  fontStyle: FontStyle.italic,
                 ),
                 overflow: TextOverflow.ellipsis,
               ),
@@ -66,4 +59,3 @@ class StaffViewHolder extends StatelessWidget {
     );
   }
 }
-

@@ -1,6 +1,6 @@
 part of '../AnilistQueries.dart';
 
-extension GetBannerImages on AnilistQueries {
+extension on AnilistQueries {
   Future<List<String?>> _getBannerImages() async {
     final b = <String?>[null, null];
     b[0] = await _bannerImage("ANIME");

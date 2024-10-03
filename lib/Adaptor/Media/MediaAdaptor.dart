@@ -16,8 +16,8 @@ import 'MediaViewHolder.dart';
 class MediaAdaptor extends StatefulWidget {
   final int type;
   final List<media> mediaList;
-
-  const MediaAdaptor({super.key, required this.type, required this.mediaList});
+  final bool isLarge;
+  const MediaAdaptor({super.key, required this.type, required this.mediaList, this.isLarge = false});
 
   @override
   MediaGridState createState() => MediaGridState();
@@ -88,8 +88,9 @@ class MediaGridState extends State<MediaAdaptor> {
     );
   }
   Widget _buildGridLayout() {
+    var height = widget.isLarge ? 270.0 : 250.0;
     return SizedBox(
-      height: 250,
+      height: height,
       child: AnimatedSwitcher(
         duration: const Duration(milliseconds: 500),
         child: ScrollConfig(
@@ -116,7 +117,7 @@ class MediaGridState extends State<MediaAdaptor> {
                   child: Container(
                     width: 102,
                     margin: margin,
-                    child: MediaViewHolder(mediaInfo: _mediaList[index]),
+                    child: MediaViewHolder(mediaInfo: _mediaList[index], isLarge: widget.isLarge),
                   ),
                 ),
               );

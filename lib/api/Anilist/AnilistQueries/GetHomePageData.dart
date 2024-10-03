@@ -1,6 +1,6 @@
 part of '../AnilistQueries.dart';
 
-extension GetHomePageData on AnilistQueries {
+extension on AnilistQueries {
   Future<Map<String, List<media>>> _initHomePage() async {
     try {
       final removeList = PrefManager.getVal(PrefName.removeList);

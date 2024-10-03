@@ -1,16 +1,17 @@
-import 'package:dantotsu/Adaptor/Charactes/Widgets/CharacterSection.dart';
-import 'package:dantotsu/Adaptor/Charactes/Widgets/StaffSection.dart';
+import 'package:dantotsu/Adaptor/Charactes/Widgets/EntitySection.dart';
+import 'package:dantotsu/Functions/Function.dart';
 import 'package:dantotsu/Screens/Info/Tabs/Info/Widgets/FollowerWidget.dart';
 import 'package:dantotsu/Screens/Info/Tabs/Info/Widgets/GenreWidget.dart';
+import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
+import 'package:html/parser.dart' as html_parser;
 
 import '../../../../../Adaptor/Media/Widgets/MediaSection.dart';
 import '../../../../Adaptor/Media/Widgets/Chips.dart';
 import '../../../../Adaptor/Media/Widgets/MediaCard.dart';
 import '../../../../DataClass/Media.dart';
-import '../../../../Theme/Colors.dart';
 import '../../MediaScreen.dart';
-import '../Watch/Widgets/Countdown.dart';
+import '../../Widgets/Releasing.dart';
 
 class InfoPage extends StatefulWidget {
   final media mediaData;
@@ -37,30 +38,31 @@ class InfoPageState extends State<InfoPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildWithPadding([
-              ..._buildReleasingIn(),
+              ...releasingIn(widget.mediaData),
               ..._buildInfoSections(),
               ..._buildNameSections(),
             ]),
-            ..._buildSynonyms(),
-            FollowerWidget(context, widget.mediaData.users),
+            ..._buildSynonyms(theme),
+            FollowerWidget(follower: widget.mediaData.users),
             _buildWithPadding([GenreWidget(context, widget.mediaData.genres)]),
-            ..._buildTags(),
+            ..._buildTags(theme),
             ..._buildPrequelSection(),
             MediaSection(
               context: context,
               type: 0,
               title: "Relations",
               mediaList: widget.mediaData.relations,
+              isLarge: true,
             ),
-            CharacterSection(
+            entitySection(
               context: context,
-              type: 0,
+              type: EntityType.Character,
               title: "Characters",
               characterList: widget.mediaData.characters,
             ),
-            StaffSection(
+            entitySection(
               context: context,
-              type: 0,
+              type: EntityType.Staff,
               title: "Staff",
               staffList: widget.mediaData.staff,
             ),
@@ -70,6 +72,7 @@ class InfoPageState extends State<InfoPage> {
               title: "Recommended",
               mediaList: widget.mediaData.recommendations,
             ),
+            const SizedBox(height: 64.0),
           ],
         ),
       ),
@@ -87,59 +90,75 @@ class InfoPageState extends State<InfoPage> {
     );
   }
 
-  List<Widget> _buildReleasingIn() {
-    var show = (widget.mediaData.anime?.nextAiringEpisode != null &&
-        widget.mediaData.anime?.nextAiringEpisodeTime != null &&
-        (widget.mediaData.anime!.nextAiringEpisodeTime! -
-                DateTime.now().millisecondsSinceEpoch / 1000) <=
-            86400 * 28);
-    return [
-      if (show) ...[
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-                'EPISODE ${widget.mediaData.anime!.nextAiringEpisode! + 1} WILL BE RELEASED IN',
-                style: TextStyle(
-                    color: color.fg,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14)),
-          ],
-        ),
-        const SizedBox(height: 6),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            CountdownWidget(
-                nextAiringEpisodeTime:
-                    widget.mediaData.anime!.nextAiringEpisodeTime!),
-          ],
-        ),
-        const SizedBox(height: 12),
-      ],
-    ];
-  }
-
   List<Widget> _buildInfoSections() {
     var mediaData = widget.mediaData;
+    bool isAnime = mediaData.anime != null;
+    String infoTotal;
+    if (mediaData.anime?.nextAiringEpisode != -1) {
+      infoTotal =
+          "${mediaData.anime?.nextAiringEpisode} | ${mediaData.anime?.totalEpisodes ?? "~"}";
+    } else {
+      infoTotal = (mediaData.anime?.totalEpisodes ?? "~").toString();
+    }
     return [
-      _buildInfoRow("Mean Score", _formatScore(mediaData.meanScore, 10)),
-      _buildInfoRow("Status", mediaData.status?.toString()),
-      _buildInfoRow("Total Episodes", mediaData.userProgress?.toString()),
-      _buildInfoRow("Average Duration",
-          _formatEpisodeDuration(mediaData.anime?.episodeDuration)),
       _buildInfoRow(
-          "Format", mediaData.format?.toString().replaceAll("_", " ")),
+        title: "Mean Score",
+        value: _formatScore(mediaData.meanScore, 10),
+      ),
       _buildInfoRow(
-          "Source", mediaData.source?.toString().replaceAll("_", " ")),
-      _buildInfoRow("Studio", mediaData.anime?.mainStudio?.name),
-      _buildInfoRow("Author", mediaData.anime?.mediaAuthor?.name),
-      _buildInfoRow("Season",
-          _formatSeason(mediaData.anime?.season, mediaData.anime?.seasonYear)),
-      _buildInfoRow("Start Date", mediaData.startDate?.getFormattedDate()),
-      _buildInfoRow("End Date", mediaData.endDate?.getFormattedDate()),
-      _buildInfoRow("Popularity", mediaData.popularity?.toString()),
-      _buildInfoRow("Favorites", mediaData.favourites?.toString()),
+        title: "Status",
+        value: mediaData.status?.toString(),
+      ),
+      _buildInfoRow(
+        title: "Total ${isAnime ? "Episodes" : "Chapters"}",
+        value: infoTotal,
+      ),
+      _buildInfoRow(
+        title: "Average Duration",
+        value: _formatEpisodeDuration(mediaData.anime?.episodeDuration),
+      ),
+      _buildInfoRow(
+        title: "Format",
+        value: mediaData.format?.toString().replaceAll("_", " "),
+      ),
+      _buildInfoRow(
+        title: "Source",
+        value: mediaData.source?.toString().replaceAll("_", " "),
+      ),
+      _buildInfoRow(
+        title: "Studio",
+        value: mediaData.anime?.mainStudio?.name,
+        onClick: () => snackString("Coming SOON"),
+      ),
+      _buildInfoRow(
+        title: "Author",
+        value: mediaData.anime?.mediaAuthor?.name ??
+            mediaData.manga?.mediaAuthor?.name,
+        onClick: () => snackString("Coming SOON"),
+      ),
+      _buildInfoRow(
+        title: "Season",
+        value: _formatSeason(
+          mediaData.anime?.season,
+          mediaData.anime?.seasonYear,
+        ),
+      ),
+      _buildInfoRow(
+        title: "Start Date",
+        value: mediaData.startDate?.getFormattedDate(),
+      ),
+      _buildInfoRow(
+        title: "End Date",
+        value: mediaData.endDate?.getFormattedDate() ?? "??",
+      ),
+      _buildInfoRow(
+        title: "Popularity",
+        value: mediaData.popularity?.toString(),
+      ),
+      _buildInfoRow(
+        title: "Favorites",
+        value: mediaData.favourites?.toString(),
+      ),
     ];
   }
 
@@ -149,49 +168,43 @@ class InfoPageState extends State<InfoPage> {
       const SizedBox(height: 16.0),
       _buildTextSection("Name (Romaji)", mediaData.nameRomaji),
       _buildTextSection("Name", mediaData.name?.toString()),
-      _buildDescriptionSection("Description", mediaData.description),
+      _buildDescriptionSection("Synopsis", mediaData.description),
     ];
   }
 
-  List<Widget> _buildSynonyms() {
-    var theme = Theme.of(context).colorScheme;
-    return [
-      Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 32.0),
-        child: Text(
-          "Synonyms",
-          style: TextStyle(
-            fontSize: 15,
-            fontFamily: 'Poppins',
-            fontWeight: FontWeight.bold,
-            color: theme.onSurface,
+  List<Widget> _buildSynonyms(ColorScheme theme) => [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 32.0),
+          child: Text(
+            "Synonyms",
+            style: TextStyle(
+              fontSize: 15,
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.bold,
+              color: theme.onSurface,
+            ),
           ),
         ),
-      ),
-      const SizedBox(height: 16.0),
-      ChipsWidget(chips: [..._generateSynonyms(widget.mediaData.synonyms)]),
-    ];
-  }
+        const SizedBox(height: 16.0),
+        ChipsWidget(chips: [..._generateSynonyms(widget.mediaData.synonyms)]),
+      ];
 
-  List<Widget> _buildTags() {
-    var theme = Theme.of(context).colorScheme;
-    return [
-      Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 32.0),
-        child: Text(
-          "Tags",
-          style: TextStyle(
-            fontSize: 15,
-            fontFamily: 'Poppins',
-            fontWeight: FontWeight.bold,
-            color: theme.onSurface,
+  List<Widget> _buildTags(ColorScheme theme) => [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 32.0),
+          child: Text(
+            "Tags",
+            style: TextStyle(
+              fontSize: 15,
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.bold,
+              color: theme.onSurface,
+            ),
           ),
         ),
-      ),
-      const SizedBox(height: 16.0),
-      ChipsWidget(chips: [..._generateChips(widget.mediaData.tags)]),
-    ];
-  }
+        const SizedBox(height: 16.0),
+        ChipsWidget(chips: [..._generateChips(widget.mediaData.tags)]),
+      ];
 
   List<Widget> _buildPrequelSection() {
     var prequel = widget.mediaData.prequel;
@@ -220,30 +233,50 @@ class InfoPageState extends State<InfoPage> {
     ];
   }
 
-  Widget _buildInfoRow(String title, String? value) {
-    if (value == null || value.isEmpty) return Container();
+  Widget _buildInfoRow({
+    required String title,
+    String? value,
+    VoidCallback? onClick,
+  }) {
+    if (value == null || value.isEmpty) {
+      return Container();
+    }
 
     final theme = Theme.of(context).colorScheme;
+    bool isClickable = onClick != null;
+
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      padding: const EdgeInsets.symmetric(vertical: 4.0),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Expanded(
+            flex: 3,
             child: Text(
               title,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
               style: TextStyle(
-                color: Colors.grey.withOpacity(0.68),
-                fontWeight: FontWeight.bold,
+                color: theme.onSurface.withOpacity(0.52),
+                fontWeight: FontWeight.w600,
               ),
             ),
           ),
-          Text(
-            value,
-            style: TextStyle(
-              fontFamily: 'Poppins',
-              color: theme.onSurface,
-              fontWeight: FontWeight.bold,
+          const SizedBox(width: 8),
+          Expanded(
+            flex: 2,
+            child: GestureDetector(
+              onTap: isClickable ? onClick : null,
+              child: Text(
+                value,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.end,
+                style: TextStyle(
+                  fontFamily: 'Poppins',
+                  color: isClickable ? theme.primary : theme.onSurface,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
           ),
         ],
@@ -253,7 +286,7 @@ class InfoPageState extends State<InfoPage> {
 
   Widget _buildTextSection(String title, String? content) {
     if (content == null || content.isEmpty) return Container();
-
+    var theme = Theme.of(context).colorScheme;
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8.0),
       child: Column(
@@ -262,17 +295,24 @@ class InfoPageState extends State<InfoPage> {
         children: [
           Text(
             title,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
             style: TextStyle(
-              color: Colors.grey.withOpacity(0.58),
+              color: theme.onSurface.withOpacity(0.58),
               fontWeight: FontWeight.bold,
             ),
           ),
           const SizedBox(height: 4.0),
-          Text(
-            content,
-            style: const TextStyle(
-              fontFamily: 'Poppins',
-              fontWeight: FontWeight.bold,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 32.0),
+            child: Text(
+              content,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
         ],
@@ -282,7 +322,9 @@ class InfoPageState extends State<InfoPage> {
 
   Widget _buildDescriptionSection(String title, String? content) {
     if (content == null || content.isEmpty) return Container();
-
+    var theme = Theme.of(context).colorScheme;
+    final document = html_parser.parse(content);
+    final String markdownContent = document.body?.text ?? "";
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 16.0),
       child: Column(
@@ -290,19 +332,19 @@ class InfoPageState extends State<InfoPage> {
         children: [
           Text(
             title,
-            style: const TextStyle(
+            style: TextStyle(
+              fontSize: 15,
               fontFamily: 'Poppins',
-              fontSize: 16.0,
+              fontWeight: FontWeight.bold,
+              color: theme.onSurface,
             ),
           ),
           const SizedBox(height: 8.0),
-          Text(
-            content,
-            maxLines: 5,
-            overflow: TextOverflow.ellipsis,
-            style: const TextStyle(
-              fontFamily: 'Poppins',
-            ),
+          ExpandableText(
+            markdownContent,
+            maxLines: 3,
+            expandText: 'show more',
+            collapseText: 'show less',
           ),
         ],
       ),

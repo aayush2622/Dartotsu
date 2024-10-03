@@ -15,12 +15,7 @@ class CharacterViewHolder extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Card(
-          elevation: 4.0,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16.0),
-          ),
-          child: ClipRRect(
+         ClipRRect(
             borderRadius: BorderRadius.circular(16.0),
             child: cachedNetworkImage(
               imageUrl: charInfo.image ?? '',
@@ -34,7 +29,6 @@ class CharacterViewHolder extends StatelessWidget {
               ),
             ),
           ),
-        ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -44,7 +38,6 @@ class CharacterViewHolder extends StatelessWidget {
               style: TextStyle(
                 fontFamily: 'Poppins',
                 fontSize: 14,
-                fontWeight: FontWeight.bold,
                 color: theme.onSurface,
               ),
             ),
@@ -53,9 +46,9 @@ class CharacterViewHolder extends StatelessWidget {
               child: Text(
                 charInfo.role ?? "",
                 style: TextStyle(
-                  fontFamily: 'Poppins',
                   fontSize: 12.0,
                   color: theme.onSurface.withOpacity(0.58),
+                  fontStyle: FontStyle.italic,
                 ),
                 overflow: TextOverflow.ellipsis,
               ),

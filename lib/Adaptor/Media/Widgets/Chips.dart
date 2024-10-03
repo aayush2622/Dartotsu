@@ -1,3 +1,4 @@
+import 'package:dantotsu/Functions/Function.dart';
 import 'package:flutter/material.dart';
 
 import '../../../Widgets/ScrollConfig.dart';
@@ -9,7 +10,9 @@ class ChipsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context).colorScheme;
+    final theme = Theme
+        .of(context)
+        .colorScheme;
     return ScrollConfig(context,
         child: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
@@ -17,7 +20,10 @@ class ChipsWidget extends StatelessWidget {
           child: Center(
             child: Row(
               mainAxisSize: MainAxisSize.min,
-              children: chips.asMap().entries.map((entry) {
+              children: chips
+                  .asMap()
+                  .entries
+                  .map((entry) {
                 final index = entry.key;
                 final chipData = entry.value;
                 final isFirst = index == 0;
@@ -28,20 +34,24 @@ class ChipsWidget extends StatelessWidget {
                     left: isFirst ? 24.0 : 6.5,
                     right: isLast ? 24.0 : 6.5,
                   ),
-                  child: ActionChip(
-                    label: Text(
-                      chipData.label,
-                      style: TextStyle(
-                        fontFamily: 'Poppins',
-                        fontSize: 14.0,
-                        fontWeight: FontWeight.bold,
-                        color: theme.onSurface,
+                  child: GestureDetector(
+                    onLongPress: () => copyToClipboard(chipData.label),
+                    child: ActionChip(
+                      label: Text(
+                        chipData.label,
+                        style: TextStyle(
+                          fontFamily: 'Poppins',
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.bold,
+                          color: theme.onSurface,
+                        ),
                       ),
-                    ),
-                    onPressed: chipData.action,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: const BorderRadius.all(Radius.circular(10)),
-                      side: BorderSide(color: theme.primaryContainer),
+                      onPressed: chipData.action,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: const BorderRadius.all(
+                            Radius.circular(10)),
+                        side: BorderSide(color: theme.primaryContainer),
+                      ),
                     ),
                   ),
                 );

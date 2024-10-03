@@ -1,4 +1,3 @@
-
 import 'package:dantotsu/DataClass/Media.dart';
 import 'package:flutter/material.dart';
 
@@ -8,8 +7,10 @@ import 'Widgets/MediaScoreBadge.dart';
 
 class MediaViewHolder extends StatelessWidget {
   final media mediaInfo;
+  final bool isLarge;
 
-  const MediaViewHolder({super.key, required this.mediaInfo});
+  const MediaViewHolder(
+      {super.key, required this.mediaInfo, this.isLarge = false});
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +39,37 @@ class MediaViewHolder extends StatelessWidget {
             ScoreBadge(context, mediaInfo),
           ],
         ),
+        if (isLarge && mediaInfo.relation != null) ...[
+          const SizedBox(height: 8),
+          Center(
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  mediaInfo.anime != null
+                      ? Icons.movie_filter_rounded
+                      : Icons.import_contacts,
+                  size: 16,
+                  color: theme.onSurface.withOpacity(0.58),
+                ),
+                const SizedBox(width: 4),
+                Text(
+                  mediaInfo.relation ?? "",
+                  style: TextStyle(
+                    fontFamily: 'Poppins',
+                    fontSize: 12,
+                    fontWeight: FontWeight.w400,
+                    fontStyle: FontStyle.italic,
+                    color: theme.onSurface.withOpacity(0.58),
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
+            ),
+          ),
+
+        ],
         const SizedBox(height: 8),
         Text(
           mediaInfo.userPreferredName,

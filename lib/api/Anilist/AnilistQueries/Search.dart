@@ -1,6 +1,6 @@
 part of '../AnilistQueries.dart';
 
-extension Search on AnilistQueries {
+extension on AnilistQueries {
   Future<SearchResults?> _search({
     required String type,
     int? page,

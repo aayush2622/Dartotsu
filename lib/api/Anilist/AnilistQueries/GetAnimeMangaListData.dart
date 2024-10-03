@@ -1,6 +1,6 @@
 part of '../AnilistQueries.dart';
 
-extension GetAnimeMangaListData on AnilistQueries {
+extension on AnilistQueries {
   Future<Map<String, List<media>>> _getAnimeList() async {
     final list = <String, List<media>>{};
 

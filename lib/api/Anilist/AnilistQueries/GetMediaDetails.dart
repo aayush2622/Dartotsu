@@ -1,6 +1,6 @@
 part of '../AnilistQueries.dart';
 
-extension GetMediaDetails on AnilistQueries {
+extension on AnilistQueries {
   Future<media?> _mediaDetails(media media) async {
     var response = (await executeQuery<MediaResponse>(_queryMedia(media), force: true));
     if (response == null) return null;

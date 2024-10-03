@@ -2,7 +2,7 @@ part of '../AnilistQueries.dart';
 
 
 
-extension GetUserData on AnilistQueries {
+extension on AnilistQueries {
   Future<bool> _getUserData() async {
     if (Anilist.isInitialized.value == true){
       return true;

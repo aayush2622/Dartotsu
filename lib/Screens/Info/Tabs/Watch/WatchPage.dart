@@ -9,8 +9,9 @@ import '../../../../Preferences/PrefManager.dart';
 import '../../../../Preferences/Preferences.dart';
 import '../../../../Theme/Colors.dart';
 import '../../../../api/Mangayomi/Model/Source.dart';
+import '../../Widgets/Releasing.dart';
 import 'WatchPageViewModel.dart';
-import 'Widgets/Countdown.dart';
+import '../../Widgets/Countdown.dart';
 
 class WatchPage extends ConsumerStatefulWidget {
   final media mediaData;
@@ -49,7 +50,7 @@ class _WatchPageState extends ConsumerState<WatchPage> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ..._buildReleasingIn(),
+          ...releasingIn(widget.mediaData),
           ..._buildYouTubeButton(),
           Obx(
             () => Text(
@@ -114,38 +115,6 @@ class _WatchPageState extends ConsumerState<WatchPage> {
     );
   }
 
-  List<Widget> _buildReleasingIn() {
-    var show = (widget.mediaData.anime?.nextAiringEpisode != null &&
-        widget.mediaData.anime?.nextAiringEpisodeTime != null &&
-        (widget.mediaData.anime!.nextAiringEpisodeTime! -
-                DateTime.now().millisecondsSinceEpoch / 1000) <=
-            86400 * 28);
-    return [
-      if (show) ...[
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-                'EPISODE ${widget.mediaData.anime!.nextAiringEpisode! + 1} WILL BE RELEASED IN',
-                style: TextStyle(
-                    color: color.fg,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14)),
-          ],
-        ),
-        const SizedBox(height: 6),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            CountdownWidget(
-                nextAiringEpisodeTime:
-                    widget.mediaData.anime!.nextAiringEpisodeTime!),
-          ],
-        ),
-        const SizedBox(height: 12),
-      ],
-    ];
-  }
 
   List<Widget> _buildYouTubeButton() {
     return [

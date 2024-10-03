@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
 
-import '../MediaAdaptor.dart';
-import '../../../DataClass/Media.dart';
+import '../../../../DataClass/Character.dart';
+import '../../../DataClass/Author.dart';
+import '../EntityAdaptor.dart';
 
-Widget MediaSection({
+Widget entitySection({
   required BuildContext context,
-  required int type,
+  required EntityType type,
   required String title,
-  bool isLarge = false,
-  List<media>? mediaList,
+  List<character>? characterList,
+  List<author>? staffList,
   List<Widget>? customNullListIndicator,
 }) {
   var theme = Theme.of(context);
+  var list = type == EntityType.Character ? characterList : staffList;
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      if (mediaList == null)
+      if (list == null)
         const SizedBox(
           height: 250,
           child: Center(
@@ -31,7 +33,6 @@ Widget MediaSection({
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  // Make the text take up available space
                   Expanded(
                     child: Text(
                       title,
@@ -45,6 +46,7 @@ Widget MediaSection({
                       ),
                     ),
                   ),
+                  // Use a rotated IconButton
                   Transform(
                     alignment: Alignment.center,
                     transform: Matrix4.rotationZ(3.14),
@@ -59,33 +61,38 @@ Widget MediaSection({
             const SizedBox(height: 8),
             AnimatedSwitcher(
               duration: const Duration(milliseconds: 300),
-              child: mediaList.isEmpty
-              ? SizedBox(
-                  height: 250,
-                  child: Center(
-                    child: customNullListIndicator?.isNotEmpty ?? false
-                      ? Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: customNullListIndicator!,
-                        )
-                      : const Text(
-                          'Nothing here',
-                          style: TextStyle(
-                            fontFamily: 'Poppins',
-                            fontSize: 16,
-                          ),
-                        ),
-                  ),
-                )
-              : MediaAdaptor(
-                  type: type,
-                  mediaList: mediaList,
-                  isLarge:isLarge ,
-                  // Pass the callback here
-                ),
+              child: list.isEmpty
+                  ? SizedBox(
+                      height: 250,
+                      child: Center(
+                        child: customNullListIndicator?.isNotEmpty ?? false
+                            ? Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: customNullListIndicator!,
+                              )
+                            : const Text(
+                                'Nothing here',
+                                style: TextStyle(
+                                  fontFamily: 'Poppins',
+                                  fontSize: 16,
+                                ),
+                              ),
+                      ),
+                    )
+                  : EntityAdaptor(
+                      type: type,
+                      characterList: characterList,
+                      staffList: staffList,
+                      // Pass the callback here
+                    ),
             ),
           ],
         )
     ],
   );
+}
+
+enum EntityType {
+  Character,
+  Staff,
 }

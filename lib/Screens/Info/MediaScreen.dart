@@ -53,10 +53,12 @@ class MediaInfoPageState extends State<MediaInfoPage> {
                 Padding(
                   padding: const EdgeInsets.symmetric(),
                   child: Obx(() {
-                    return _viewModel.dataLoaded.value ? Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [_buildSliverContent()]) : const Center(child: CircularProgressIndicator());
+                    return _viewModel.dataLoaded.value
+                        ? Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [_buildSliverContent()])
+                        : const Center(child: CircularProgressIndicator());
                   }),
                 ),
               ],
@@ -113,9 +115,10 @@ class MediaInfoPageState extends State<MediaInfoPage> {
                       fontFamily: 'Poppins',
                       fontSize: 16.0,
                       color: Theme.of(context).colorScheme.onSurface,
-                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
               _buildFavoriteButton(),
@@ -123,7 +126,6 @@ class MediaInfoPageState extends State<MediaInfoPage> {
             ],
           ),
         ),
-        // Add your ViewPager2 equivalent widget here
       ],
     );
   }
@@ -270,8 +272,8 @@ class MediaInfoPageState extends State<MediaInfoPage> {
             fontSize: 14,
             color: theme.primary,
             fontWeight: FontWeight.bold,
-            overflow: TextOverflow.ellipsis,
           ),
+          overflow: TextOverflow.ellipsis,
           maxLines: 1,
         ),
       ],
