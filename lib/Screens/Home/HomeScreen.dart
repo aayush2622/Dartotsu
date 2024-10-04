@@ -3,7 +3,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dantotsu/Animation/SlideUpAnimation.dart';
 import 'package:dantotsu/Functions/Extensions.dart';
 import 'package:dantotsu/Functions/Function.dart';
-import 'package:dantotsu/Screens/Login/LoginScreen.dart';
+import 'package:dantotsu/Screens/AnimeList/AnimeListScreen.dart';
+// import 'package:dantotsu/Screens/Login/LoginScreen.dart';
+import 'package:dantotsu/Screens/MangaList/MangaList.dart';
 import 'package:dantotsu/Theme/ThemeProvider.dart';
 import 'package:dantotsu/Widgets/CustomElevatedButton.dart';
 import 'package:dantotsu/main.dart';
@@ -25,7 +27,7 @@ import '../../Adaptor/Media/Widgets/MediaSection.dart';
 import '../../Widgets/ScrollConfig.dart';
 import '../../api/Anilist/Anilist.dart';
 import '../../api/Anilist/AnilistViewModel.dart';
-import '../Anime/AnimeScreen.dart';
+// import '../Anime/AnimeScreen.dart';
 import '../Settings/SettingsBottomSheet.dart';
 
 /* TODO
@@ -370,13 +372,13 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               MediaCard(
                 context,
                 'ANIME LIST',
-                const LoginScreen(),
+                const AnimeListScreen(),
                 _viewModel.listImages.value[0] ?? 'https://bit.ly/31bsIHq',
               ),
               MediaCard(
                 context,
                 'MANGA LIST',
-                const AnimeScreen(),
+                const MangaListScreen(),
                 _viewModel.listImages.value[1] ?? 'https://bit.ly/2ZGfcuG',
               ),
             ],
