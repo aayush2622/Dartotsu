@@ -1,10 +1,34 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '../data.dart';
+part of 'data.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
+
+UserListsResponse _$UserListsResponseFromJson(Map<String, dynamic> json) =>
+    UserListsResponse(
+      data: json['data'] == null
+          ? null
+          : UserListsData.fromJson(json['data'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$UserListsResponseToJson(UserListsResponse instance) =>
+    <String, dynamic>{
+      'data': instance.data,
+    };
+
+UserListsData _$UserListsDataFromJson(Map<String, dynamic> json) =>
+    UserListsData(
+      user: json['User'] == null
+          ? null
+          : User.fromJson(json['User'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$UserListsDataToJson(UserListsData instance) =>
+    <String, dynamic>{
+      'User': instance.user,
+    };
 
 UserListResponse _$UserListResponseFromJson(Map<String, dynamic> json) =>
     UserListResponse(

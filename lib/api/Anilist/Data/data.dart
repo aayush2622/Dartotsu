@@ -6,9 +6,11 @@ import 'package:json_annotation/json_annotation.dart';
 import '../Anilist.dart';
 import 'media.dart';
 
-part 'Generated/data.g.dart';
+part 'data.g.dart';
 
 void registerAllTypes() {
+  TypeFactory.create<JsonDecoder> (
+      (json) => jsonDecode(json as String));
   TypeFactory.create<PageResponse>(
       (json) => PageResponse.fromJson(json));
   TypeFactory.create<MediaResponse>(
@@ -23,9 +25,36 @@ void registerAllTypes() {
       (json) => AnimeListResponse.fromJson(json));
   TypeFactory.create<MangaListResponse>(
       (json) => MangaListResponse.fromJson(json));
-  TypeFactory.create<JsonDecoder> (
-      (json) => jsonDecode(json as String));
+  TypeFactory.create<UserListsResponse>(
+      (json) => UserListsResponse.fromJson(json));
 }
+
+@JsonSerializable()
+class UserListsResponse {
+  @JsonKey(name: 'data')
+  final UserListsData? data;
+
+  UserListsResponse({this.data});
+
+  factory UserListsResponse.fromJson(Map<String, dynamic> json) =>
+      _$UserListsResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$UserListsResponseToJson(this);
+}
+
+@JsonSerializable()
+class UserListsData {
+  @JsonKey(name: 'User')
+  final User? user;
+
+  UserListsData({this.user});
+
+  factory UserListsData.fromJson(Map<String, dynamic> json) =>
+      _$UserListsDataFromJson(json);
+
+  Map<String, dynamic> toJson() => _$UserListsDataToJson(this);
+}
+
 
 @JsonSerializable()
 class UserListResponse {
@@ -37,7 +66,6 @@ class UserListResponse {
   factory UserListResponse.fromJson(Map<String, dynamic> json) =>
       _$UserListResponseFromJson(json);
 
-  Map<String, dynamic> toJson() => _$UserListResponseToJson(this);
 }
 
 @JsonSerializable()
@@ -253,3 +281,4 @@ class PageData {
 
   Map<String, dynamic> toJson() => _$PageDataToJson(this);
 }
+

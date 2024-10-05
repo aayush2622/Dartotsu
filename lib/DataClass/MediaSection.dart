@@ -10,11 +10,13 @@ class MediaSectionData {
   final IconData? emptyIcon;
   final String? emptyMessage;
   final String? emptyButtonText;
+  final bool isLarge;
   void Function()? emptyButtonOnPressed;
   MediaSectionData({
     required this.type,
     required this.title,
     required this.list,
+    this.isLarge = false,
     this.emptyIcon,
     this.emptyMessage,
     this.emptyButtonText,

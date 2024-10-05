@@ -1,6 +1,5 @@
 import 'package:blur/blur.dart';
 import 'package:flutter/material.dart';
-import 'package:kenburns_nullsafety/kenburns_nullsafety.dart';
 import 'package:provider/provider.dart';
 
 import '../../DataClass/Media.dart';
@@ -51,11 +50,7 @@ class MediaPageLargeViewHolder extends StatelessWidget {
           SizedBox(
             height: 151,
             width: double.infinity,
-            child: KenBurns(
-              maxScale: 5.0,
-              minAnimationDuration: const Duration(milliseconds: 6000),
-              maxAnimationDuration: const Duration(milliseconds: 20000),
-              child: cachedNetworkImage(
+            child: cachedNetworkImage(
                 imageUrl: mediaInfo.banner ?? mediaInfo.cover ?? '',
                 fit: BoxFit.cover,
                 width: double.infinity,
@@ -63,7 +58,6 @@ class MediaPageLargeViewHolder extends StatelessWidget {
                 placeholder: (context, url) => const SizedBox.shrink(),
                 errorWidget: (context, url, error) => const SizedBox.shrink(),
               ),
-            ),
           ),
           _buildGradientOverlay(gradientColors),
           _buildBlurEffect(),

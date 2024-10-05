@@ -40,9 +40,9 @@ class _AnilistHomeViewModel extends GetxController {
     }
   }*/
 
-  Future<void> initHomePage() async {
+  Future<void> loadAll() async {
     resetHomePageData();
-
+    await Anilist.query.getMediaLists(anime: true, userId: Anilist.userid ?? 0);
     final res = await Anilist.query.initHomePage();
     if (res["currentAnime"] != null) {
       animeContinue.value = res["currentAnime"];

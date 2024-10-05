@@ -3,7 +3,8 @@ import 'dart:math';
 
 import 'package:dantotsu/Functions/Function.dart';
 import 'package:dantotsu/Preferences/Preferences.dart';
-import 'package:dantotsu/api/Anilist/Anilist.dart' show Anilist;
+import 'package:dantotsu/api/Anilist/Anilist.dart';
+import 'package:flutter_qjs/quickjs/ffi.dart';
 
 import '../../DataClass/Author.dart';
 import '../../DataClass/Character.dart';
@@ -24,7 +25,7 @@ part 'AnilistQueries/GetMediaDetails.dart';
 part 'AnilistQueries/GetUserData.dart';
 part 'AnilistQueries/Search.dart';
 part 'AnilistQueries/GetAnimeMangaListData.dart';
-
+part 'AnilistQueries/GetUserMediaList.dart';
 
 class AnilistQueries {
   final Future<T?> Function<T>(String query,
@@ -48,6 +49,25 @@ class AnilistQueries {
   /// Initializes and returns media data for the homepage in the form of a map.
   /// The keys are section names, and values are lists of [media] objects.
   Future<Map<String, List<media>>> initHomePage() => _initHomePage();
+
+
+  /// Fetches the user's media lists.
+  ///
+  /// Required:
+  /// - [anime]: If true, fetches anime lists. If false, fetches manga lists.
+  /// - [userId]: The user's ID.
+  /// - [sortOrder]: Sort order for the lists.
+  /// Returns a map where the keys are list categories and values are lists of [media] objects.
+  Future<Map<String, List<media>>> getMediaLists({
+    required bool anime,
+    required int userId,
+    String? sortOrder,
+  }) =>
+      _getMediaLists(
+      anime: anime,
+      userId: userId,
+      sortOrder: sortOrder,
+  );
 
   /// Retrieves a list of banner image URLs for the homepage.
   /// Returns a list of [String] representing the URLs.

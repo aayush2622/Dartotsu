@@ -3,9 +3,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dantotsu/Animation/SlideUpAnimation.dart';
 import 'package:dantotsu/Functions/Extensions.dart';
 import 'package:dantotsu/Functions/Function.dart';
-import 'package:dantotsu/Screens/AnimeList/AnimeListScreen.dart';
-// import 'package:dantotsu/Screens/Login/LoginScreen.dart';
-import 'package:dantotsu/Screens/MangaList/MangaList.dart';
 import 'package:dantotsu/Theme/ThemeProvider.dart';
 import 'package:dantotsu/Widgets/CustomElevatedButton.dart';
 import 'package:dantotsu/main.dart';
@@ -19,6 +16,7 @@ import '../../DataClass/MediaSection.dart';
 import '../../Preferences/PrefManager.dart';
 import '../../Preferences/Preferences.dart';
 import '../../Widgets/CachedNetworkImage.dart';
+import '../MediaList/MediaList.dart';
 import 'Widgets/AvtarWidget.dart';
 import 'Widgets/LoadingWidget.dart';
 import 'Widgets/NotificationBadge.dart';
@@ -27,7 +25,6 @@ import '../../Adaptor/Media/Widgets/MediaSection.dart';
 import '../../Widgets/ScrollConfig.dart';
 import '../../api/Anilist/Anilist.dart';
 import '../../api/Anilist/AnilistViewModel.dart';
-// import '../Anime/AnimeScreen.dart';
 import '../Settings/SettingsBottomSheet.dart';
 
 /* TODO
@@ -68,7 +65,7 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     await getUserId();
     await Future.wait([
       _viewModel.setListImages(),
-      _viewModel.initHomePage(),
+      _viewModel.loadAll(),
     ]);
   }
 
@@ -183,6 +180,7 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         title: 'Recommended',
         list: _viewModel.recommendation.value,
         emptyIcon: Icons.auto_awesome,
+        isLarge: true,
         emptyMessage: 'Watch/Read some Anime or Manga to get Recommendations',
       ),
     ];
@@ -201,6 +199,7 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               type: section.type,
               title: section.title,
               mediaList: section.list,
+              isLarge: section.isLarge,
               customNullListIndicator: _buildNullIndicator(
                 context,
                 section.emptyIcon,
@@ -372,13 +371,13 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               MediaCard(
                 context,
                 'ANIME LIST',
-                const AnimeListScreen(),
+                const MediaListScreen(anime: true),
                 _viewModel.listImages.value[0] ?? 'https://bit.ly/31bsIHq',
               ),
               MediaCard(
                 context,
                 'MANGA LIST',
-                const MangaListScreen(),
+                const MediaListScreen(anime: false),
                 _viewModel.listImages.value[1] ?? 'https://bit.ly/2ZGfcuG',
               ),
             ],

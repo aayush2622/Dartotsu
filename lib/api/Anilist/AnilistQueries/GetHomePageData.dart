@@ -8,7 +8,6 @@ extension on AnilistQueries {
       List<media> removedMedia = [];
       final homeLayoutMap = PrefManager.getVal(PrefName.homeLayout);
 
-
       var response =
           await executeQuery<UserListResponse>(_queryHomeList());
       Map<String, List<media>> returnMap = {};
@@ -64,8 +63,6 @@ extension on AnilistQueries {
             .reversed
             .toList();
       }
-
-      // Define processing mappings
       Map<String, void Function()> processMappings = {
         'Continue Watching': () {
           processMedia(
@@ -104,13 +101,13 @@ extension on AnilistQueries {
             var mediaRecommendation = entry.mediaRecommendation;
             if (mediaRecommendation != null) {
               var media = mediaData(mediaRecommendation);
-              media.relation = mediaRecommendation.type?.toString() ?? "";
+              media.relation = mediaRecommendation.type?.name ?? "";
               subMap[media.id] = media;
             }
           }
 
-          Iterable<dynamic> combineIterables(
-              Iterable<dynamic>? first, Iterable<dynamic>? second) {
+          Iterable<MediaList> combineIterables(
+              Iterable<MediaList>? first, Iterable<MediaList>? second) {
             return (first ?? []).followedBy(second ?? []);
           }
 
@@ -121,14 +118,13 @@ extension on AnilistQueries {
                   ?.expand((x) => x.entries ?? []))) {
             var media = mediaListData(entry);
             if (['RELEASING', 'FINISHED'].contains(media.status)) {
-              media.relation =
-                  entry is MediaList ? 'Anime Planned' : 'Manga Planned';
+              media.relation = entry.media?.type?.name ?? "" ;
               subMap[media.id] = media;
             }
           }
 
           List<media> list = subMap.values.toList()
-            ..sort((a, b) => b.meanScore!.compareTo(a.meanScore ?? 0));
+            ..sort((a, b) => (b.meanScore ?? 0).compareTo(a.meanScore ?? 0));
           returnMap["recommendations"] = list;
         },
       };
@@ -140,7 +136,6 @@ extension on AnilistQueries {
       returnMap["hidden"] = removedMedia.toSet().toList();
       return returnMap;
     } catch (e) {
-      // Handle exception
       return {};
     }
   }
