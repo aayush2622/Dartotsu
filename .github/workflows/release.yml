@@ -52,7 +52,7 @@ jobs:
       - name: Release Windows Zip
         uses: softprops/action-gh-release@v2
         with:
-            files: build\windows\x64\runner\Release\Dantotsu-${{github.sha}}-windows.zip
+            files: build/windows/x64/runner/Release/Dantotsu-${{github.sha}}-windows.zip
         
     
   build_linux:
@@ -79,7 +79,7 @@ jobs:
             type: 'zip'
             filename: Dantotsu-${{github.sha}}-linux.zip
             directory: build/linux/x64/release/bundle
-      - name: Release Windows Zip
+      - name: Release Linux Zip
         uses: softprops/action-gh-release@v2
         with:
             files: build/linux/x64/release/bundle/Dantotsu-${{github.sha}}-linux.zip
