@@ -1,6 +1,5 @@
 import 'package:dantotsu/DataClass/Media.dart';
 import 'package:flutter/cupertino.dart';
-
 import '../../../Theme/Colors.dart';
 import 'Countdown.dart';
 
@@ -15,12 +14,18 @@ List<Widget> releasingIn(media mediaData) {
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
+          Flexible(
+            child: Text(
               'EPISODE ${mediaData.anime!.nextAiringEpisode! + 1} WILL BE RELEASED IN',
               style: TextStyle(
-                  color: color.fg,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 14)),
+                color: color.fg,
+                fontWeight: FontWeight.bold,
+                fontSize: 14,
+              ),
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
+            ),
+          ),
         ],
       ),
       const SizedBox(height: 6),
@@ -28,8 +33,8 @@ List<Widget> releasingIn(media mediaData) {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           CountdownWidget(
-              nextAiringEpisodeTime:
-              mediaData.anime!.nextAiringEpisodeTime!),
+            nextAiringEpisodeTime: mediaData.anime!.nextAiringEpisodeTime!,
+          ),
         ],
       ),
       const SizedBox(height: 12),

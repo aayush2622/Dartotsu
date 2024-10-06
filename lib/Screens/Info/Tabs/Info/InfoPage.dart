@@ -23,9 +23,11 @@ class InfoPage extends StatefulWidget {
 }
 
 class InfoPageState extends State<InfoPage> {
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context).colorScheme;
+    var type = widget.mediaData.anime != null ? "ANIME" : "MANGA";
     return Card(
       elevation: 0,
       color: theme.surface,
@@ -43,7 +45,7 @@ class InfoPageState extends State<InfoPage> {
               ..._buildNameSections(),
             ]),
             ..._buildSynonyms(theme),
-            FollowerWidget(follower: widget.mediaData.users),
+            FollowerWidget(follower: widget.mediaData.users,type: type),
             _buildWithPadding([GenreWidget(context, widget.mediaData.genres)]),
             ..._buildTags(theme),
             ..._buildPrequelSection(),

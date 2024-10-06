@@ -10,8 +10,8 @@ import '../../../../../api/Anilist/Anilist.dart';
 
 class FollowerWidget extends StatelessWidget {
   final List<userData>? follower;
-
-  const FollowerWidget({super.key, this.follower});
+  final String type;
+  const FollowerWidget({super.key, this.follower, required this.type});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class FollowerWidget extends StatelessWidget {
     }
 
     const animationDuration = Duration(milliseconds: 200);
-    const paddingValue = 24.0;
+    const paddingValue = 12.0;
     const marginValue = 6.5;
 
     return SizedBox(
@@ -54,7 +54,7 @@ class FollowerWidget extends StatelessWidget {
                 child: Container(
                   width: 102,
                   margin: margin,
-                  child: ItemFollower(context, followers[index]),
+                  child: ItemFollower(context, followers[index], type),
                 ),
               ),
             );

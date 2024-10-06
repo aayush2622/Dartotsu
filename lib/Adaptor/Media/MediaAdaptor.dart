@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:dantotsu/Adaptor/Media/MediaLargeViewHolder.dart';
 import 'package:dantotsu/Functions/Extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import '../../Animation/ScaleAnimation.dart';
 import '../../DataClass/Media.dart';
@@ -17,7 +18,12 @@ class MediaAdaptor extends StatefulWidget {
   final int type;
   final List<media> mediaList;
   final bool isLarge;
-  const MediaAdaptor({super.key, required this.type, required this.mediaList, this.isLarge = false});
+
+  const MediaAdaptor(
+      {super.key,
+      required this.type,
+      required this.mediaList,
+      this.isLarge = false});
 
   @override
   MediaGridState createState() => MediaGridState();
@@ -51,17 +57,41 @@ class MediaGridState extends State<MediaAdaptor> {
         return LargeView(mediaList: _mediaList);
       case 2:
         return _buildListLayout();
+      case 3:
+        return _buildStaggeredGrid();
       default:
         return const SizedBox();
     }
   }
+
+  Widget _buildStaggeredGrid() {
+    final screenWidth = MediaQuery.of(context).size.width;
+    var crossAxisCount = ((screenWidth) / 120).floor();
+    if (crossAxisCount < 1) crossAxisCount = 1;
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
+      child: StaggeredGrid.count(
+        crossAxisCount: crossAxisCount,
+        children: List.generate(_mediaList.length, (index) {
+          return GestureDetector(
+            onTap: () => navigateToPage(context, MediaInfoPage(_mediaList[index])),
+            onLongPress: () => settingsBottomSheet(context),
+            child: SizedBox(
+              width: 102,
+              height: 250,
+              child: MediaViewHolder(mediaInfo: _mediaList[index], isLarge: widget.isLarge),
+            )
+          );
+        }),
+      ),
+    );
+  }
+
   Widget _buildListLayout() {
     return AnimatedSwitcher(
       duration: const Duration(milliseconds: 500),
       child: Container(
-        constraints: const BoxConstraints(
-          maxHeight: double.infinity
-        ),
+        constraints: const BoxConstraints(maxHeight: double.infinity),
         child: SingleChildScrollView(
           child: Column(
             children: _mediaList.map((m) {
@@ -76,7 +106,8 @@ class MediaGridState extends State<MediaAdaptor> {
                   onLongPress: () => settingsBottomSheet(context),
                   child: Container(
                     width: double.maxFinite,
-                    margin: const EdgeInsets.symmetric(horizontal: 18, vertical: 4),
+                    margin:
+                        const EdgeInsets.symmetric(horizontal: 18, vertical: 4),
                     child: MediaPageLargeViewHolder(m),
                   ),
                 ),
@@ -87,6 +118,7 @@ class MediaGridState extends State<MediaAdaptor> {
       ),
     );
   }
+
   Widget _buildGridLayout() {
     var height = widget.isLarge ? 270.0 : 250.0;
     return SizedBox(
@@ -112,12 +144,14 @@ class MediaGridState extends State<MediaAdaptor> {
                 finalOffset: Offset.zero,
                 duration: const Duration(milliseconds: 200),
                 child: GestureDetector(
-                  onTap: () => navigateToPage(context, MediaInfoPage(_mediaList[index])),
+                  onTap: () =>
+                      navigateToPage(context, MediaInfoPage(_mediaList[index])),
                   onLongPress: () => settingsBottomSheet(context),
                   child: Container(
                     width: 102,
                     margin: margin,
-                    child: MediaViewHolder(mediaInfo: _mediaList[index], isLarge: widget.isLarge),
+                    child: MediaViewHolder(
+                        mediaInfo: _mediaList[index], isLarge: widget.isLarge),
                   ),
                 ),
               );
@@ -185,8 +219,8 @@ class LargeViewState extends State<LargeView> {
             itemCount: widget.mediaList.length,
             itemBuilder: (context, index) {
               return GestureDetector(
-                onTap: () =>
-                    navigateToPage(context, MediaInfoPage(widget.mediaList[index])),
+                onTap: () => navigateToPage(
+                    context, MediaInfoPage(widget.mediaList[index])),
                 onLongPress: () => settingsBottomSheet(context),
                 child: MediaPageSmallViewHolder(widget.mediaList[index]),
               );

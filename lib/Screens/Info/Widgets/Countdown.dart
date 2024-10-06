@@ -67,9 +67,10 @@ class CountdownWidgetState extends State<CountdownWidget> {
             color: theme.colorScheme.onSurface,
             fontWeight: FontWeight.bold,
             fontSize: 16,
-            overflow: TextOverflow.ellipsis,
+
           ),
-          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+          maxLines: 1,
         ),
       ],
     );

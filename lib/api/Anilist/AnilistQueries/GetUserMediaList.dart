@@ -55,9 +55,9 @@ extension on AnilistQueries {
       }
     });
 
-    /*sorted['All'] = all;
+    sorted['All'] = all;
 
-    final listSort = anime
+    /*final listSort = anime
         ? PrefManager.getVal(PrefName.AnimeListSortOrder)
         : PrefManager.getVal(PrefName.MangaListSortOrder);
     final sort = listSort ?? sortOrder ?? options?.rowOrder;

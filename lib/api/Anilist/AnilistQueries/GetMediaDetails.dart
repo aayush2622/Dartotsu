@@ -127,24 +127,24 @@ extension on AnilistQueries {
         media.review = fetchedMedia.reviews?.nodes;
       }
       if (user?.mediaList?.isNotEmpty == true) {
+        final uniqueUsers = <int>{};
         media.users = (user?.mediaList?.where((item) {
-              final user = item.user;
-              return user != null;
-            }).map((item) {
-              final user = item.user!;
-              return userData(
-                id: user.id,
-                name: user.name ?? "Unknown",
-                pfp: user.avatar?.large,
-                banner: "",
-                status: item.status?.name ?? "",
-                score: item.score ?? 0,
-                progress: item.progress ?? 0,
-                totalEpisodes:
-                    fetchedMedia.episodes ?? fetchedMedia.chapters ?? 0,
-              );
-            }).toList() ??
-            []);
+          final user = item.user;
+          return user != null && uniqueUsers.add(user.id);
+        }).map((item) {
+          final user = item.user!;
+          return userData(
+            id: user.id,
+            name: user.name ?? "Unknown",
+            pfp: user.avatar?.large,
+            banner: "",
+            status: item.status?.name ?? "",
+            score: item.score ?? 0,
+            progress: item.progress ?? 0,
+            totalEpisodes:
+            fetchedMedia.episodes ?? fetchedMedia.chapters,
+          );
+        }).toList() ?? []);
       }
       if (fetchedMedia.mediaListEntry != null) {
         final mediaListEntry = fetchedMedia.mediaListEntry!;

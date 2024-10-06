@@ -1,8 +1,7 @@
 
+import 'package:dantotsu/Adaptor/Media/MediaAdaptor.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-
-import '../../Adaptor/Media/Widgets/MediaSection.dart';
 import '../../Widgets/ScrollConfig.dart';
 import 'MediaListViewModel.dart';
 
@@ -42,19 +41,33 @@ class MediaListTabsState extends State<MediaListTabs> with TickerProviderStateMi
 
   @override
   Widget build(BuildContext context) {
+    var theme = Theme.of(context).colorScheme;
     return ScrollConfig(
         context,
         child: DefaultTabController(
           length: widget.viewModel.listImages.value!.keys.length,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TabBar(
                 indicatorSize: TabBarIndicatorSize.label,
                 isScrollable: true,
                 dragStartBehavior: DragStartBehavior.start,
                 controller: _tabController,
+                labelStyle: const TextStyle(
+                  fontFamily: 'Poppins',
+                  fontSize: 14.0,
+                  fontWeight: FontWeight.w600,
+                ),
+                unselectedLabelStyle: TextStyle(
+                  fontFamily: 'Poppins',
+                  fontSize: 14.0,
+                  color: theme.onSurface.withOpacity(0.48),
+                  fontWeight: FontWeight.w600,
+                ),
                 tabs: widget.viewModel.listImages.value!.keys.map((String tabTitle) {
-                  return Tab(text: tabTitle);
+                  return Tab(text: '${tabTitle.toUpperCase()} (${widget.viewModel.listImages.value![tabTitle]!.length})');
                 }).toList(),
               ),
               Expanded(
@@ -62,7 +75,9 @@ class MediaListTabsState extends State<MediaListTabs> with TickerProviderStateMi
                   controller: _tabController,
                   children: widget.viewModel.listImages.value!.keys.map((String tabTitle) {
                     final mediaList = widget.viewModel.listImages.value![tabTitle]!;
-                    return MediaSection(mediaList: mediaList, context: context,title: '', type: 0);
+                    return SingleChildScrollView(
+                      child: MediaAdaptor(mediaList: mediaList, type: 3),
+                    );
                   }).toList(),
                 ),
               ),
