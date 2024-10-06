@@ -10,7 +10,12 @@ jobs:
       contents: write
       pull-requests: write
       repository-projects: write
+
     steps:
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'oracle'
+          java-version: '17'
       - name: Cloing repository
         uses: actions/checkout@v4
       - name: Setup Flutter
