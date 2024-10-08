@@ -42,7 +42,7 @@ class CharacterScreenState extends State<CharacterScreen> {
                 child: Column(
                   children: [
                     _buildDescriptionSection("Details", widget.characterInfo.description),
-                    entitySection(context: context, type: EntityType.Character, title: "Voice Actors"),
+                    entitySection(context: context, type: EntityType.Staff, title: "Voice Actors",staffList: widget.characterInfo.voiceActor),
                   ],
                 ))
           ]))
