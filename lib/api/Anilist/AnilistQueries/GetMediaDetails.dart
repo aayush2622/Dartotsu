@@ -48,6 +48,10 @@ extension on AnilistQueries {
                 banner: media.banner ?? media.cover,
                 isFav: node.isFavourite ?? false,
                 role: i.role?.toString() ?? "",
+                description: node.description ?? "",
+                gender: node.gender,
+
+                //Add roles here
                 voiceActor: (i.voiceActors?.map((voiceActor) {
                       return author(
                           id: voiceActor.id,
@@ -375,6 +379,8 @@ String _queryMedia(media media) => '''{
         }
         node {
           id
+          description
+          gender
           image {
             medium
           }

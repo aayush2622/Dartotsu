@@ -41,8 +41,27 @@ class CharacterScreenState extends State<CharacterScreen> {
                 padding: const EdgeInsets.symmetric(),
                 child: Column(
                   children: [
-                    _buildDescriptionSection("Details", widget.characterInfo.description),
-                    entitySection(context: context, type: EntityType.Staff, title: "Voice Actors",staffList: widget.characterInfo.voiceActor),
+                    _buildDescriptionSection(
+                      "Details",
+                      widget.characterInfo.description,
+                      widget.characterInfo.age ?? "null",
+                      widget.characterInfo.gender ?? "null",
+                      widget.characterInfo.dateOfBirth.toString(),
+                    ),
+                    entitySection(
+                      context: context,
+                      type: EntityType.Staff,
+                      title: "Voice Actors",
+                      staffList: widget.characterInfo.voiceActor,
+                    ),
+                    if (widget.characterInfo.roles?.isNotEmpty ?? false)
+                    MediaSection(
+                      context: context,
+                      type: 0,
+                      title: "Roles",
+                      mediaList: widget.characterInfo.roles,
+                      isLarge: true,
+                    ),
                   ],
                 ))
           ]))
@@ -191,13 +210,22 @@ class CharacterScreenState extends State<CharacterScreen> {
     );
   }
 
-  Widget _buildDescriptionSection(String title, String? content) {
-    if (content == null || content.isEmpty) return Container();
+  Widget _buildDescriptionSection(String title, String? content, String age,
+      String gender, String birthday) {
     var theme = Theme.of(context).colorScheme;
+    if (content == null || content.isEmpty) {
+      return Text("Character Description not Available ",
+          style: TextStyle(
+            fontSize: 15,
+            fontFamily: 'Poppins',
+            fontWeight: FontWeight.bold,
+            color: theme.onSurface.withOpacity(0.4),
+          ));
+    }
     final document = html_parser.parse(content);
-    final String markdownContent = document.body?.text ?? "";
+    final String markdownContent = document.body?.text ?? " ";
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 16.0),
+      margin: const EdgeInsets.symmetric(vertical: 16.0,horizontal: 16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -211,11 +239,27 @@ class CharacterScreenState extends State<CharacterScreen> {
             ),
           ),
           const SizedBox(height: 8.0),
+          Text(
+            "Age: $age \n"
+            "Birthday: $birthday \n"
+            "Gender: $gender \n",
+            style: TextStyle(
+                fontSize: 12,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.bold,
+                color: theme.onSurface.withOpacity(0.4)),
+          ),
           ExpandableText(
             markdownContent,
             maxLines: 3,
             expandText: 'show more',
             collapseText: 'show less',
+            style: TextStyle(
+              fontSize: 12,
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.bold,
+              color: theme.onSurface.withOpacity(0.4),
+            ),
           ),
         ],
       ),
