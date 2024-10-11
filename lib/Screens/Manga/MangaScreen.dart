@@ -3,21 +3,24 @@ import 'package:dantotsu/api/Anilist/AnilistViewModel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_workers/rx_workers.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:provider/provider.dart';
 
 import '../../Adaptor/Media/MediaAdaptor.dart';
+import '../../Adaptor/Media/Widgets/Chips.dart';
+import '../../Adaptor/Media/Widgets/MediaCard.dart';
+import '../../Adaptor/Media/Widgets/MediaSection.dart';
 import '../../Animation/SlideInAnimation.dart';
 import '../../DataClass/Media.dart';
 import '../../DataClass/MediaSection.dart';
 import '../../Functions/Function.dart';
 import '../../Preferences/PrefManager.dart';
 import '../../Preferences/Preferences.dart';
-import '../Home/Widgets/LoadingWidget.dart';
-import '../Home/Widgets/SearchBar.dart';
-import '../../Adaptor/Media/Widgets/Chips.dart';
-import '../../Adaptor/Media/Widgets/MediaCard.dart';
-import '../../Adaptor/Media/Widgets/MediaSection.dart';
+import '../../Theme/Colors.dart';
+import '../../Theme/ThemeProvider.dart';
 import '../../Widgets/ScrollConfig.dart';
 import '../Anime/AnimeScreen.dart';
+import '../Home/Widgets/LoadingWidget.dart';
+import '../Home/Widgets/SearchBar.dart';
 
 class MangaScreen extends StatefulWidget {
   const MangaScreen({super.key});
@@ -33,7 +36,14 @@ class MangaScreenState extends State<MangaScreen> {
   @override
   void initState() {
     super.initState();
+    _viewModel.scrollController.addListener(_viewModel.scrollListener);
     _initialize();
+  }
+
+  @override
+  void dispose() {
+    _viewModel.scrollController.dispose();
+    super.dispose();
   }
 
   Future<void> _initialize() async {
@@ -59,33 +69,75 @@ class MangaScreenState extends State<MangaScreen> {
     final theme = Theme.of(context).colorScheme;
 
     return Scaffold(
-      body: RefreshIndicator(
-        onRefresh: () async => Refresh.activity[3]?.value = true,
-        child: CustomScrollConfig(
-          context,
-          children: [
-            Obx(
-              () => SliverToBoxAdapter(
-                child: _mangaScreenContent(
-                  mediaDataList: _viewModel.trending.value,
-                  theme: theme,
-                  chipCall: _viewModel.loadTrending,
+        body: Stack(
+      children: [
+        RefreshIndicator(
+          onRefresh: () async => Refresh.activity[3]?.value = true,
+          child: CustomScrollConfig(
+            context,
+            controller: _viewModel.scrollController,
+            children: [
+              Obx(
+                () => SliverToBoxAdapter(
+                  child: _mangaScreenContent(
+                    mediaDataList: _viewModel.trending.value,
+                    theme: theme,
+                    chipCall: _viewModel.loadTrending,
+                  ),
                 ),
               ),
-            ),
-            SliverList(
-              delegate: SliverChildListDelegate(
-                [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8),
-                    child: Obx(() => Column(children: _buildMediaSections())),
-                  ),
-                ],
+              SliverList(
+                delegate: SliverChildListDelegate(
+                  [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      child: Obx(
+                        () => Column(children: [
+                          ..._buildMediaSections(),
+                          SizedBox(
+                            height: 216,
+                            child: Center(
+                              child: !_viewModel.loadMore.value
+                                  ? const CircularProgressIndicator()
+                                  : const SizedBox(height: 216),
+                            ),
+                          ),
+                        ]),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
+        _BuildScrollToTop(),
+      ],
+    ));
+  }
+
+  Widget _BuildScrollToTop() {
+    var theme = Provider.of<ThemeNotifier>(context);
+    return Positioned(
+      bottom: 72.0 + 32.bottomBar(),
+      left: (0.screenWidth() / 2) - 24.0,
+      child: Obx(() => _viewModel.scrollToTop.value
+          ? Container(
+              decoration: BoxDecoration(
+                color: theme.isDarkMode ? greyNavDark : greyNavLight,
+                borderRadius: BorderRadius.circular(64.0),
+              ),
+              padding: const EdgeInsets.all(4.0),
+              child: IconButton(
+                icon: const Icon(Icons.arrow_upward),
+                onPressed: () => _viewModel.scrollController.animateTo(
+                  0,
+                  duration: const Duration(milliseconds: 500),
+                  curve: Curves.easeInOut,
+                ),
+              ),
+            )
+          : const SizedBox()),
     );
   }
 
@@ -94,23 +146,19 @@ class MangaScreenState extends State<MangaScreen> {
       MediaSectionData(
           type: 0,
           title: 'Trending Manhwa',
-          list: _viewModel.popularManhwa.value
-      ),
+          list: _viewModel.popularManhwa.value),
       MediaSectionData(
           type: 0,
           title: 'Trending Novels',
-          list: _viewModel.popularNovel.value
-      ),
+          list: _viewModel.popularNovel.value),
       MediaSectionData(
           type: 0,
           title: 'Top Rated Manga',
-          list: _viewModel.topRatedManga.value
-      ),
+          list: _viewModel.topRatedManga.value),
       MediaSectionData(
           type: 0,
           title: 'Most Favourite Manga',
-          list: _viewModel.mostFavManga.value
-      ),
+          list: _viewModel.mostFavManga.value),
     ];
     final mangaLayoutMap = PrefManager.getVal(PrefName.mangaLayout);
     final sectionMap = {
@@ -132,8 +180,7 @@ class MangaScreenState extends State<MangaScreen> {
         type: 2,
         title: 'Popular Manga',
         mediaList: _viewModel.mangaPopular.value,
-      ))
-      ..add(const SizedBox(height: 128));
+      ));
   }
 
   Widget _mangaScreenContent({
@@ -164,16 +211,13 @@ class MangaScreenState extends State<MangaScreen> {
                       chips: [
                         ChipData(
                             label: 'Trending Manga',
-                            action: () => chipCall('MANGA')
-                        ),
+                            action: () => chipCall('MANGA')),
                         ChipData(
                             label: 'Trending Manhwa',
-                            action: () => chipCall('MANHWA')
-                        ),
+                            action: () => chipCall('MANHWA')),
                         ChipData(
                             label: 'Trending Novel',
-                            action: () => chipCall('NOVEL')
-                        ),
+                            action: () => chipCall('NOVEL')),
                       ],
                     ),
                   ),

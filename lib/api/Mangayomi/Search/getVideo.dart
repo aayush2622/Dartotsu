@@ -19,5 +19,5 @@ Future<List<Video>> getVideo(
       videos.add(video);
     }
   }
-  return videos;
+  return videos..sort((a, b) => a.quality.compareTo(b.quality));
 }

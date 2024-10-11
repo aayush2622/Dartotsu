@@ -11,11 +11,14 @@ class MediaSectionData {
   final String? emptyMessage;
   final String? emptyButtonText;
   final bool isLarge;
+  final ScrollController? scrollController;
   void Function()? emptyButtonOnPressed;
+
   MediaSectionData({
     required this.type,
     required this.title,
     required this.list,
+    this.scrollController,
     this.isLarge = false,
     this.emptyIcon,
     this.emptyMessage,

@@ -2,21 +2,24 @@ import 'package:dantotsu/Functions/Extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_workers/rx_workers.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:provider/provider.dart';
 
 import '../../Adaptor/Media/MediaAdaptor.dart';
+import '../../Adaptor/Media/Widgets/Chips.dart';
+import '../../Adaptor/Media/Widgets/MediaCard.dart';
+import '../../Adaptor/Media/Widgets/MediaSection.dart';
 import '../../Animation/SlideInAnimation.dart';
 import '../../DataClass/Media.dart';
 import '../../DataClass/MediaSection.dart';
 import '../../Functions/Function.dart';
 import '../../Preferences/PrefManager.dart';
 import '../../Preferences/Preferences.dart';
-import '../Home/Widgets/LoadingWidget.dart';
-import '../Home/Widgets/SearchBar.dart';
-import '../../Adaptor/Media/Widgets/Chips.dart';
-import '../../Adaptor/Media/Widgets/MediaCard.dart';
-import '../../Adaptor/Media/Widgets/MediaSection.dart';
+import '../../Theme/Colors.dart';
+import '../../Theme/ThemeProvider.dart';
 import '../../Widgets/ScrollConfig.dart';
 import '../../api/Anilist/AnilistViewModel.dart';
+import '../Home/Widgets/LoadingWidget.dart';
+import '../Home/Widgets/SearchBar.dart';
 
 class AnimeScreen extends StatefulWidget {
   const AnimeScreen({super.key});
@@ -33,7 +36,14 @@ class AnimeScreenState extends State<AnimeScreen> {
   @override
   void initState() {
     super.initState();
+    _viewModel.scrollController.addListener(_viewModel.scrollListener);
     _initialize();
+  }
+
+  @override
+  void dispose() {
+    _viewModel.scrollController.dispose();
+    super.dispose();
   }
 
   Future<void> _initialize() async {
@@ -57,60 +67,108 @@ class AnimeScreenState extends State<AnimeScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context).colorScheme;
-
     return Scaffold(
-      body: RefreshIndicator(
-        onRefresh: () async => Refresh.activity[2]?.value = true,
-        child: CustomScrollConfig(
-          context,
-          children: [
-            Obx(
-              () => SliverToBoxAdapter(
-                child: _buildAnimeScreenContent(
-                  mediaDataList: _viewModel.trending.value,
-                  theme: theme,
-                  chipCall: _viewModel.loadTrending,
+      body: Stack(
+        children: [
+          RefreshIndicator(
+            onRefresh: () async => Refresh.activity[2]?.value = true,
+            child: CustomScrollConfig(
+              controller: _viewModel.scrollController,
+              context,
+              children: [
+                Obx(
+                  () => SliverToBoxAdapter(
+                    child: _buildAnimeScreenContent(
+                      mediaDataList: _viewModel.trending.value,
+                      theme: theme,
+                      chipCall: _viewModel.loadTrending,
+                    ),
+                  ),
+                ),
+                SliverList(
+                  delegate: SliverChildListDelegate(
+                    [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8),
+                        child: Obx(
+                          () => Column(children: [
+                            ..._buildMediaSections(),
+                            SizedBox(
+                              height: 216,
+                              child: Center(
+                                child: !_viewModel.loadMore.value
+                                    ? const CircularProgressIndicator()
+                                    : const SizedBox(height: 216),
+                              ),
+                            ),
+                          ]),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          _buildScrollToTop()
+        ],
+      ),
+    );
+  }
+
+  Widget _buildScrollToTop() {
+    var theme = Provider.of<ThemeNotifier>(context);
+    return Positioned(
+      bottom: 72.0 + 32.bottomBar(),
+      left: (0.screenWidth() / 2) - 24.0,
+      child: Obx(() => _viewModel.scrollToTop.value
+          ? Container(
+              decoration: BoxDecoration(
+                color: theme.isDarkMode ? greyNavDark : greyNavLight,
+                borderRadius: BorderRadius.circular(64.0),
+              ),
+              padding: const EdgeInsets.all(4.0),
+              child: IconButton(
+                icon: const Icon(Icons.arrow_upward),
+                onPressed: () => _viewModel.scrollController.animateTo(
+                  0,
+                  duration: const Duration(milliseconds: 500),
+                  curve: Curves.easeInOut,
                 ),
               ),
-            ),
-            SliverList(
-              delegate: SliverChildListDelegate(
-                [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8),
-                    child: Obx(() => Column(children: _buildMediaSections())),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
+            )
+          : const SizedBox()),
     );
   }
 
   List<Widget> _buildMediaSections() {
     final mediaSections = [
       MediaSectionData(
-          type: 0, title: 'Recent Updates', list: _viewModel.updated.value),
+        type: 0,
+        title: 'Recent Updates',
+        list: _viewModel.updated.value,
+      ),
       MediaSectionData(
-          type: 0,
-          title: 'Trending Movies',
-          list: _viewModel.popularMovies.value),
+        type: 0,
+        title: 'Trending Movies',
+        list: _viewModel.popularMovies.value,
+      ),
       MediaSectionData(
-          type: 0,
-          title: 'Top Rated Series',
-          list: _viewModel.topRatedSeries.value),
+        type: 0,
+        title: 'Top Rated Series',
+        list: _viewModel.topRatedSeries.value,
+      ),
       MediaSectionData(
-          type: 0,
-          title: 'Most Favourite Series',
-          list: _viewModel.mostFavSeries.value,
+        type: 0,
+        title: 'Most Favourite Series',
+        list: _viewModel.mostFavSeries.value,
       ),
     ];
     final animeLayoutMap = PrefManager.getVal(PrefName.animeLayout);
     final sectionMap = {
       for (var section in mediaSections) section.title: section
     };
+
     return animeLayoutMap.entries
         .where((entry) => entry.value)
         .map((entry) => sectionMap[entry.key])
@@ -120,15 +178,14 @@ class AnimeScreenState extends State<AnimeScreen> {
               type: section.type,
               title: section.title,
               mediaList: section.list,
+              scrollController: section.scrollController,
             ))
         .toList()
       ..add(MediaSection(
-        context: context,
-        type: 2,
-        title: 'Popular Anime',
-        mediaList: _viewModel.animePopular.value,
-      ))
-      ..add(const SizedBox(height: 128));
+          context: context,
+          type: 2,
+          title: 'Popular Anime',
+          mediaList: _viewModel.animePopular.value));
   }
 
   Widget _buildAnimeScreenContent({

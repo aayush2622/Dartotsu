@@ -18,12 +18,14 @@ class MediaAdaptor extends StatefulWidget {
   final int type;
   final List<media> mediaList;
   final bool isLarge;
+  final ScrollController? scrollController;
 
   const MediaAdaptor(
       {super.key,
       required this.type,
       required this.mediaList,
-      this.isLarge = false});
+      this.isLarge = false,
+      this.scrollController});
 
   @override
   MediaGridState createState() => MediaGridState();
@@ -72,48 +74,61 @@ class MediaGridState extends State<MediaAdaptor> {
       padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
       child: StaggeredGrid.count(
         crossAxisCount: crossAxisCount,
-        children: List.generate(_mediaList.length, (index) {
-          return GestureDetector(
-            onTap: () => navigateToPage(context, MediaInfoPage(_mediaList[index])),
-            onLongPress: () => settingsBottomSheet(context),
-            child: SizedBox(
-              width: 102,
-              height: 250,
-              child: MediaViewHolder(mediaInfo: _mediaList[index], isLarge: widget.isLarge),
-            )
-          );
-        }),
+        children: List.generate(
+          _mediaList.length,
+          (index) {
+            return GestureDetector(
+              onTap: () => navigateToPage(
+                context,
+                MediaInfoPage(_mediaList[index]),
+              ),
+              onLongPress: () => settingsBottomSheet(context),
+              child: SizedBox(
+                width: 102,
+                height: 250,
+                child: MediaViewHolder(
+                  mediaInfo: _mediaList[index],
+                  isLarge: widget.isLarge,
+                ),
+              ),
+            );
+          },
+        ),
       ),
     );
   }
 
   Widget _buildListLayout() {
+
     return AnimatedSwitcher(
       duration: const Duration(milliseconds: 500),
       child: Container(
         constraints: const BoxConstraints(maxHeight: double.infinity),
-        child: SingleChildScrollView(
-          child: Column(
-            children: _mediaList.map((m) {
-              return SlideAndScaleAnimation(
-                initialScale: 0.0,
-                finalScale: 1.0,
-                initialOffset: const Offset(1.0, 0.0),
-                finalOffset: Offset.zero,
-                duration: const Duration(milliseconds: 200),
-                child: GestureDetector(
-                  onTap: () => navigateToPage(context, MediaInfoPage(m)),
-                  onLongPress: () => settingsBottomSheet(context),
-                  child: Container(
-                    width: double.maxFinite,
-                    margin:
-                        const EdgeInsets.symmetric(horizontal: 18, vertical: 4),
-                    child: MediaPageLargeViewHolder(m),
-                  ),
+        child: ListView.builder(
+          shrinkWrap: true,
+          controller: widget.scrollController,
+          itemCount: _mediaList.length,
+          itemBuilder: (context, index) {
+            final m = _mediaList[index];
+
+            return SlideAndScaleAnimation(
+              initialScale: 0.0,
+              finalScale: 1.0,
+              initialOffset: const Offset(1.0, 0.0),
+              finalOffset: Offset.zero,
+              duration: const Duration(milliseconds: 200),
+              child: GestureDetector(
+                onTap: () => navigateToPage(context, MediaInfoPage(m)),
+                onLongPress: () => settingsBottomSheet(context),
+                child: Container(
+                  width:  double.infinity,
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 18, vertical: 4),
+                  child: MediaPageLargeViewHolder(m),
                 ),
-              );
-            }).toList(),
-          ),
+              ),
+            );
+          },
         ),
       ),
     );
@@ -128,6 +143,7 @@ class MediaGridState extends State<MediaAdaptor> {
         child: ScrollConfig(
           context,
           child: ListView.builder(
+            controller: widget.scrollController,
             scrollDirection: Axis.horizontal,
             itemCount: _mediaList.length,
             itemBuilder: (context, index) {

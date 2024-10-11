@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class AlertDialogBuilder {
   final BuildContext context;
   String? _title;
+  Widget? _titleWidget;
   String? _message;
   String? _positiveButtonTitle;
   String? _negativeButtonTitle;
@@ -39,7 +40,7 @@ class AlertDialogBuilder {
       _with(() => _onDismiss = onDismiss);
 
   AlertDialogBuilder setTitle(String? title) => _with(() => _title = title);
-
+  AlertDialogBuilder setTitleWidget(Widget? w) => _with(() => _titleWidget = w);
   AlertDialogBuilder setMessage(String? message) =>
       _with(() => _message = message);
 
@@ -108,7 +109,7 @@ class AlertDialogBuilder {
       builder: (BuildContext context) {
         _onShow?.call();
         return AlertDialog(
-          title: Text(_title ?? ''),
+          title: _titleWidget ?? Text(_title ?? ''),
           titleTextStyle: TextStyle(
               fontSize: 20, fontWeight: FontWeight.bold, color: theme.primary),
           content: StatefulBuilder(

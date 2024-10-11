@@ -7,11 +7,12 @@ import 'package:get/get.dart';
 import '../../../../DataClass/Media.dart';
 import '../../../../Preferences/PrefManager.dart';
 import '../../../../Preferences/Preferences.dart';
-import '../../../../Theme/Colors.dart';
+import '../../../../Widgets/CustomBottomDialog.dart';
+import '../../../../api/Mangayomi/Eval/dart/model/video.dart';
 import '../../../../api/Mangayomi/Model/Source.dart';
+import '../../../../api/Mangayomi/Search/getVideo.dart';
 import '../../Widgets/Releasing.dart';
 import 'WatchPageViewModel.dart';
-import '../../Widgets/Countdown.dart';
 
 class WatchPage extends ConsumerStatefulWidget {
   final media mediaData;
@@ -44,13 +45,12 @@ class _WatchPageState extends ConsumerState<WatchPage> {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context).colorScheme;
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 32.0),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ...releasingIn(widget.mediaData),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        ...releasingIn(widget.mediaData,context),
+        _buildWithPadding([
           ..._buildYouTubeButton(),
           Obx(
             () => Text(
@@ -67,27 +67,75 @@ class _WatchPageState extends ConsumerState<WatchPage> {
           ),
           const SizedBox(height: 16),
           _buildWrongTitle(),
-          /*Flexible(
-          child: Obx(() {
-            var selectedMedia = _viewModel.selectedMedia.value;
-            return selectedMedia?.chapters != null
-                ? ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: selectedMedia?.chapters!.length,
-                    itemBuilder: (context, index) {
-                      return ListTile(
-                        title: Text(selectedMedia?.chapters![index].name ?? ''),
-                        subtitle: Text(
-                            selectedMedia?.chapters![index].dateUpload ?? ''),
-                      );
-                    },
-                  )
-                : const Center(
-                    child:
-                        CircularProgressIndicator()); // Show a message if no chapters
-          }),
-        ),*/
-        ],
+        ]),
+        Obx(() {
+          var selectedMedia = _viewModel.selectedMedia.value;
+          var chapters = selectedMedia?.chapters;
+          return chapters != null
+              ? ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: chapters.length,
+                  itemBuilder: (context, index) {
+                    return GestureDetector(
+                      onTap: () async {
+                        var dialog = CustomBottomDialog(
+                          title: 'Select episode',
+                          viewList: [
+                            FutureBuilder<List<Video>>(
+                              future: getVideo(
+                                  source: source!,
+                                  url: chapters[index].url ?? ''),
+                              builder: (context, snapshot) {
+                                if (snapshot.connectionState ==
+                                    ConnectionState.waiting) {
+                                  return const Center(
+                                      child: CircularProgressIndicator());
+                                } else if (snapshot.hasError) {
+                                  return Center(
+                                      child: Text('Error: ${snapshot.error}'));
+                                } else if (!snapshot.hasData ||
+                                    snapshot.data!.isEmpty) {
+                                  return const Center(
+                                      child: Text('No episodes found.'));
+                                }
+                                var episodeList = snapshot.data!;
+                                return Column(
+                                  children: [
+                                    for (var episode in episodeList)
+                                      ListTile(
+                                        title: Text(episode.quality),
+                                        onTap: () {
+                                          openLinkInBrowser(episode.url);
+                                        },
+                                      ),
+                                  ],
+                                );
+                              },
+                            ),
+                          ],
+                        );
+                        showCustomBottomDialog(context, dialog);
+                      },
+                      child: ListTile(
+                        title: Text(chapters[index].name ?? ''),
+                        subtitle: Text(chapters[index].dateUpload ?? ''),
+                      ),
+                    );
+                  },
+                )
+              : const Center(child: CircularProgressIndicator());
+        }),
+      ],
+    );
+  }
+
+  Widget _buildWithPadding(List<Widget> widgets) {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 32.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: widgets,
       ),
     );
   }
@@ -114,7 +162,6 @@ class _WatchPageState extends ConsumerState<WatchPage> {
       ],
     );
   }
-
 
   List<Widget> _buildYouTubeButton() {
     return [

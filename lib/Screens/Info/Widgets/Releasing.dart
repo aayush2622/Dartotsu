@@ -1,9 +1,12 @@
 import 'package:dantotsu/DataClass/Media.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
 import '../../../Theme/Colors.dart';
+import '../../../Theme/ThemeProvider.dart';
 import 'Countdown.dart';
 
-List<Widget> releasingIn(media mediaData) {
+List<Widget> releasingIn(media mediaData, BuildContext context) {
+  var theme = Provider.of<ThemeNotifier>(context);
   var show = (mediaData.anime?.nextAiringEpisode != null &&
       mediaData.anime?.nextAiringEpisodeTime != null &&
       (mediaData.anime!.nextAiringEpisodeTime! -
@@ -18,7 +21,7 @@ List<Widget> releasingIn(media mediaData) {
             child: Text(
               'EPISODE ${mediaData.anime!.nextAiringEpisode! + 1} WILL BE RELEASED IN',
               style: TextStyle(
-                color: color.fg,
+                color: theme.isDarkMode ? fgDark : fgLight ,
                 fontWeight: FontWeight.bold,
                 fontSize: 14,
               ),

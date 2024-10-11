@@ -2,18 +2,19 @@ import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:isar/isar.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:http/http.dart' as http;
 
 import '../../../main.dart';
 import '../Eval/dart/service.dart';
 import '../Eval/javascript/service.dart';
 import '../Model/Source.dart';
+import '../http/m_client.dart';
 Future<void> fetchSourcesList(
     {int? id,
       required bool refresh,
       required String sourcesIndexUrl,
       required AutoDisposeRef ref,
       required bool isManga}) async {
+  final http = MClient.init(reqcopyWith: {'useDartHttpClient': true});
   final req = await http.get(Uri.parse(sourcesIndexUrl));
 
   final sourceList =

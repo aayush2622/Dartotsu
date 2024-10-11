@@ -3,10 +3,14 @@ import 'package:flutter_qjs/quickjs/ffi.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../../DataClass/Media.dart';
+import '../../../../../Functions/Function.dart';
 import '../../../../../Preferences/PrefManager.dart';
 import '../../../../../Widgets/DropdownMenu.dart';
 import '../../../../../api/Mangayomi/Extensions/extensions_provider.dart';
 import '../../../../../api/Mangayomi/Model/Source.dart';
+import '../../../../../api/Mangayomi/extension_preferences_providers.dart';
+import '../../../../../api/Mangayomi/get_source_preference.dart';
+import '../../../../Extensions/ExtensionSettings/ExtensionSettings.dart';
 import '../../../../Settings/language.dart';
 
 class SourceSelector extends ConsumerStatefulWidget {
@@ -102,7 +106,19 @@ class _SourceSelectorState extends ConsumerState<SourceSelector> {
                 ),
                 const SizedBox(width: 8),
                 GestureDetector(
-                  onTap: null,
+                  onTap: () {
+                    var sourcePreference = getSourcePreference(source: source)
+                        .map(
+                            (e) => getSourcePreferenceEntry(e.key!, source.id!))
+                        .toList();
+                    navigateToPage(
+                      context,
+                      SourcePreferenceWidget(
+                        source: source,
+                        sourcePreference: sourcePreference,
+                      ),
+                    );
+                  },
                   child: Icon(
                     Icons.settings,
                     size: 32,

@@ -161,6 +161,7 @@ media mediaData(Media apiMedia) {
     favourites: apiMedia.favourites,
     popularity: apiMedia.popularity,
     format: apiMedia.format?.name,
+    genres: apiMedia.genres ?? [],
     timeUntilAiring:
         (apiMedia.nextAiringEpisode?.timeUntilAiring?.toInt() ?? 0) * 1000,
     anime: apiMedia.type == MediaType.ANIME

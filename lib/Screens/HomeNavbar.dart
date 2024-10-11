@@ -1,3 +1,4 @@
+import 'package:dantotsu/Functions/Extensions.dart';
 import 'package:dantotsu/Theme/Colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -20,7 +21,6 @@ class FloatingBottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeNotifier = Provider.of<ThemeNotifier>(context);
-    final bottomInset = MediaQuery.of(context).padding.bottom;
     // Define the navigation items
     final navItems = [
       _NavItem(index: 0, icon: Icons.movie_filter_rounded, label: 'ANIME'),
@@ -29,7 +29,7 @@ class FloatingBottomNavBar extends StatelessWidget {
     ];
 
     return Positioned(
-      bottom: bottomInset + 32.0,
+      bottom: 32.bottomBar(),
       left: 0,
       right: 0,
       child: Align(

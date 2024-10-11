@@ -204,6 +204,7 @@ String _buildQueryString(String sort, String type,
       meanScore 
       isFavourite 
       format 
+      genres
       bannerImage 
       countryOfOrigin 
       coverImage{

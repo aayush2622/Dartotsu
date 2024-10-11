@@ -16,8 +16,9 @@ Widget ScrollConfig(BuildContext context, {required Widget child}) {
   );
 }
 
-Widget CustomScrollConfig(BuildContext context, { required List<Widget> children, Axis scrollDirection = Axis.vertical , ScrollPhysics? physics}) {
+Widget CustomScrollConfig(BuildContext context, { required List<Widget> children, Axis scrollDirection = Axis.vertical , ScrollPhysics? physics, ScrollController? controller}) {
  return CustomScrollView(
+   controller: controller,
    scrollBehavior: ScrollConfiguration.of(context).copyWith(
      dragDevices: {
        PointerDeviceKind.touch,

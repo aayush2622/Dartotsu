@@ -28,19 +28,13 @@ class InfoPageState extends State<InfoPage> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context).colorScheme;
     var type = widget.mediaData.anime != null ? "ANIME" : "MANGA";
-    return Card(
-      elevation: 0,
-      color: theme.surface,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(0),
-      ),
-      child: SingleChildScrollView(
+    return  SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            ...releasingIn(widget.mediaData,context),
             _buildWithPadding([
-              ...releasingIn(widget.mediaData),
               ..._buildInfoSections(),
               ..._buildNameSections(),
             ]),
@@ -81,8 +75,7 @@ class InfoPageState extends State<InfoPage> {
             const SizedBox(height: 64.0),
           ],
         ),
-      ),
-    );
+      );
   }
 
   Widget _buildWithPadding(List<Widget> widgets) {

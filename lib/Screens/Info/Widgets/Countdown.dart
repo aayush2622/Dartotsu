@@ -65,7 +65,7 @@ class CountdownWidgetState extends State<CountdownWidget> {
           countdownText.isNotEmpty ? countdownText : "",
           style: TextStyle(
             color: theme.colorScheme.onSurface,
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w600,
             fontSize: 16,
 
           ),

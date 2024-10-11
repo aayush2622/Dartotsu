@@ -193,19 +193,6 @@ class MediaPageLargeViewHolder extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(width: 16),
-        Expanded(
-          child: Text(
-            mediaInfo.genres.join(" • "),
-            textAlign: TextAlign.end,
-            style: TextStyle(
-              fontSize: 14,
-              color: theme.onSurface.withOpacity(0.66),
-              overflow: TextOverflow.ellipsis,
-            ),
-            maxLines: 1,
-          ),
-        ),
       ],
     );
   }

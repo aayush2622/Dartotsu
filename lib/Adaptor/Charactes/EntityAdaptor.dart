@@ -25,12 +25,10 @@ class EntityAdaptor extends StatefulWidget {
 class EntityAdaptorState extends State<EntityAdaptor> {
   @override
   Widget build(BuildContext context) {
-    return _buildCharacterLayout(
-        widget.type, widget.characterList, widget.staffList);
+    return _buildCharacterLayout(widget.characterList, widget.staffList);
   }
 
   Widget _buildCharacterLayout(
-    final EntityType type,
     final List<character>? characterList,
     final List<author>? staffList,
   ) {

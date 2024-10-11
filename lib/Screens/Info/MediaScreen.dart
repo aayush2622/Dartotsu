@@ -53,12 +53,11 @@ class MediaInfoPageState extends State<MediaInfoPage> {
                 Padding(
                   padding: const EdgeInsets.symmetric(),
                   child: Obx(() {
-                    return _viewModel.dataLoaded.value
-                        ? Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [_buildSliverContent()])
-                        : const Center(child: CircularProgressIndicator());
+                    return _viewModel.dataLoaded.value ? Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [_buildSliverContent()],
+                      ) : const Center(child: CircularProgressIndicator());
                   }),
                 ),
               ],
