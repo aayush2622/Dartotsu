@@ -1,6 +1,7 @@
 import 'package:dantotsu/Adaptor/Charactes/StaffViewHolder.dart';
 import 'package:dantotsu/Functions/Function.dart';
 import 'package:dantotsu/Screens/Character/CharacterScreen.dart';
+import 'package:dantotsu/Screens/Staff/StaffScreen.dart';
 import 'package:flutter/material.dart';
 
 import '../../Animation/ScaleAnimation.dart';
@@ -59,7 +60,7 @@ class EntityAdaptorState extends State<EntityAdaptor> {
                 finalOffset: Offset.zero,
                 duration: const Duration(milliseconds: 200),
                 child: GestureDetector(
-                    onTap: () =>listType == EntityType.Character ? navigateToPage(context,CharacterScreen(characterInfo:characterList![index])) : snackString('${staffList![index]}'),
+                    onTap: () =>listType == EntityType.Character ? navigateToPage(context,CharacterScreen(characterInfo:characterList![index])) :navigateToPage(context,StaffScreen(staffInfo:staffList![index])),
                   child: Container(
                     width: 102,
                     margin: margin,

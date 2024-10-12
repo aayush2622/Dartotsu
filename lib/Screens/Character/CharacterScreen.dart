@@ -23,11 +23,6 @@ class CharacterScreen extends StatefulWidget {
 class CharacterScreenState extends State<CharacterScreen> {
   @override
   Widget build(BuildContext context) {
-    final isDarkMode = Provider.of<ThemeNotifier>(context).isDarkMode;
-    final theme = Theme.of(context).colorScheme;
-    final gradientColors = isDarkMode
-        ? [Colors.transparent, theme.surface]
-        : [Colors.white.withOpacity(0.2), theme.surface];
     return Scaffold(
       body: CustomScrollView(
         slivers: [
