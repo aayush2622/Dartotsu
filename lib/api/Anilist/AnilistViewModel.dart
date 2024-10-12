@@ -36,16 +36,13 @@ class _AnilistHomeViewModel extends GetxController {
     listImages.value = await Anilist.query.getBannerImages();
   }
 
-  /* Future<void> initUserStatus() async {
-    final res = await Anilist.query.getUserStatus();
-    if (res != null) {
-      userStatus.value = res;
-    }
-  }*/
-
   Future<void> loadAll() async {
     resetHomePageData();
     final res = await Anilist.query.initHomePage();
+    _setMediaList(res);
+  }
+
+  void _setMediaList(Map<String, dynamic> res) {
     if (res["currentAnime"] != null) {
       animeContinue.value = res["currentAnime"];
     }
@@ -86,48 +83,63 @@ class _AnilistHomeViewModel extends GetxController {
   Future<void> loadMain() async {
     Anilist.getSavedToken();
     Discord.getSavedToken();
-    /*MAL.getSavedToken();
-
-
-
-      if (PrefManager.getVal(PrefName.CheckUpdate) ?? false) {
-        AppUpdater.check(context, false);
-      }
-    */
-
-    /* final ret = await Anilist.query.getGenresAndTags();
-    genres.value = ret;*/
   }
 }
 
+abstract class AnilistViewModel extends GetxController {
+  var page = 1;
+  var scrollToTop = false.obs;
+  var loadMore = true.obs;
+  var canLoadMore = true.obs;
+  var scrollController = ScrollController();
+
+  void resetPageData();
+
+  Future<void> loadAll();
+
+  Future<void> loadNextPage();
+
+  bool _canScroll() {
+    final maxScrollExtent = scrollController.position.maxScrollExtent;
+    final currentScroll = scrollController.offset;
+    return currentScroll > (maxScrollExtent * 0.1);
+  }
+
+  Future<void> scrollListener() async {
+    var scroll = scrollController.position;
+    if (scroll.pixels >= scroll.maxScrollExtent - 50 && loadMore.value) {
+      loadMore.value = false;
+      if (canLoadMore.value) {
+        await loadNextPage();
+      } else {
+        snackString('DAMN! YOU TRULY ARE JOBLESS\nYOU REACHED THE END');
+      }
+    }
+    scrollToTop.value = _canScroll();
+  }
+}
+
+// Anime ViewModel
 final AnilistAnimeViewModel = Get.put(_AnilistAnimeViewModel());
 
-class _AnilistAnimeViewModel extends GetxController {
-  var type = 'ANIME';
+class _AnilistAnimeViewModel extends AnilistViewModel {
   var trending = Rx<List<media>?>(null);
   var animePopular = Rx<List<media>?>(null);
   var updated = Rx<List<media>?>(null);
   var popularMovies = Rx<List<media>?>(null);
   var topRatedSeries = Rxn<List<media>>();
   var mostFavSeries = Rxn<List<media>>();
-  var scrollToTop = false.obs;
-  var loadMore = true.obs;
-  var scrollController = ScrollController();
 
-  Future<void> scrollListener() async {
-    if (scrollController.position.pixels >=
-            scrollController.position.maxScrollExtent - 50 &&
-        loadMore.value) {
-      loadMore.value = false;
-      await loadNextPage();
-    }
-    scrollToTop.value = _canScroll();
-  }
-
-  bool _canScroll() {
-    final maxScrollExtent = scrollController.position.maxScrollExtent;
-    final currentScroll = scrollController.offset;
-    return currentScroll > (maxScrollExtent * 0.1);
+  @override
+  Future<void> loadAll() async {
+    resetPageData();
+    final list = await Anilist.query.getAnimeList();
+    trending.value = list["trendingAnime"];
+    animePopular.value = list["popularAnime"];
+    updated.value = list["recentUpdates"];
+    popularMovies.value = list["trendingMovies"];
+    topRatedSeries.value = list["topRatedSeries"];
+    mostFavSeries.value = list["mostFavSeries"];
   }
 
   Future<void> loadTrending(int s) async {
@@ -145,73 +157,78 @@ class _AnilistAnimeViewModel extends GetxController {
         ?.results;
     this.trending.value = trending;
   }
-  var page = 1;
 
+  @override
   Future<void> loadNextPage() async {
-    final result = (await Anilist.query.search(
+    final result = await Anilist.query.search(
       type: 'ANIME',
       page: page + 1,
       perPage: 50,
       sort: Anilist.sortBy[1],
       adultOnly: PrefManager.getVal(PrefName.adultOnly),
       onList: PrefManager.getVal(PrefName.includeAnimeList),
-    ))?.results;
+    );
     page++;
-    if (result != null) animePopular.value = [...?animePopular.value, ...result];
+    if (result != null) {
+      canLoadMore.value = result.hasNextPage;
+      animePopular.value = [...?animePopular.value, ...result.results];
+    }
     loadMore.value = true;
   }
 
-  Future<void> loadAll() async {
-    resetAnimePageData();
-    final list = await Anilist.query.getAnimeList();
-    animePopular.value = list["popularAnime"];
-    trending.value = list["trendingAnime"];
-    updated.value = list["recentUpdates"];
-    popularMovies.value = list["trendingMovies"];
-    topRatedSeries.value = list["topRatedSeries"];
-    mostFavSeries.value = list["mostFavSeries"];
-  }
-
-  void resetAnimePageData() {
+  @override
+  void resetPageData() {
     trending.value = null;
     animePopular.value = null;
     updated.value = null;
     popularMovies.value = null;
     topRatedSeries.value = null;
     mostFavSeries.value = null;
+    loadMore.value = true;
+    canLoadMore.value = true;
     page = 1;
   }
 }
 
+// Manga ViewModel
 final AnilistMangaViewModel = Get.put(_AnilistMangaViewModel());
 
-class _AnilistMangaViewModel extends GetxController {
-  var searched = false;
-  var notSet = true;
-  var type = 'MANGA';
+class _AnilistMangaViewModel extends AnilistViewModel {
   var trending = Rx<List<media>?>(null);
   var mangaPopular = Rx<List<media>?>(null);
   var popularManhwa = Rxn<List<media>>();
   var popularNovel = Rxn<List<media>>();
   var topRatedManga = Rxn<List<media>>();
   var mostFavManga = Rxn<List<media>>();
-  var scrollToTop = false.obs;
-  var loadMore = true.obs;
-  var scrollController = ScrollController();
 
-  Future<void> scrollListener() async {
-    if (scrollController.position.pixels >=
-        scrollController.position.maxScrollExtent - 50 && loadMore.value) {
-      loadMore.value = false;
-      await loadNextPage();
-    }
-    scrollToTop.value = _canScroll();
+  @override
+  Future<void> loadAll() async {
+    resetPageData();
+    final list = await Anilist.query.getMangaList();
+    trending.value = list["trending"];
+    mangaPopular.value = list["popularManga"];
+    popularManhwa.value = list["trendingManhwa"];
+    popularNovel.value = list["trendingNovel"];
+    topRatedManga.value = list["topRated"];
+    mostFavManga.value = list["mostFav"];
   }
 
-  bool _canScroll() {
-    final maxScrollExtent = scrollController.position.maxScrollExtent;
-    final currentScroll = scrollController.offset;
-    return currentScroll > (maxScrollExtent * 0.1);
+  @override
+  Future<void> loadNextPage() async {
+    final result = await Anilist.query.search(
+      type: 'MANGA',
+      page: page + 1,
+      perPage: 50,
+      sort: Anilist.sortBy[1],
+      adultOnly: PrefManager.getVal(PrefName.adultOnly),
+      onList: PrefManager.getVal(PrefName.includeMangaList),
+    );
+    page++;
+    if (result != null) {
+      canLoadMore.value = result.hasNextPage;
+      mangaPopular.value = [...?mangaPopular.value, ...result.results];
+    }
+    loadMore.value = true;
   }
 
   Future<void> loadTrending(String type) async {
@@ -225,45 +242,21 @@ class _AnilistMangaViewModel extends GetxController {
       perPage: 50,
       sort: Anilist.sortBy[2],
       hd: true,
-    ))?.results;
+    ))
+        ?.results;
     this.trending.value = trending;
   }
 
-  var page = 0;
-
-  Future<void> loadNextPage() async {
-    final result = (await Anilist.query.search(
-      type: 'MANGA',
-      page: page + 1,
-      perPage: 50,
-      sort: Anilist.sortBy[1],
-      adultOnly: PrefManager.getVal(PrefName.adultOnly),
-      onList: PrefManager.getVal(PrefName.includeMangaList),
-    ))?.results;
-    page++;
-    if (result != null) {
-      mangaPopular.value = [...?mangaPopular.value, ...result];
-    }
-    loadMore.value = true;
-  }
-
-  Future<void> loadAll() async {
-    resetMangaPageData();
-    final list = await Anilist.query.getMangaList();
-    trending.value = list["trending"];
-    mangaPopular.value = list["popularManga"];
-    popularManhwa.value = list["trendingManhwa"];
-    popularNovel.value = list["trendingNovel"];
-    topRatedManga.value = list["topRated"];
-    mostFavManga.value = list["mostFav"];
-  }
-
-  void resetMangaPageData() {
+  @override
+  void resetPageData() {
     trending.value = null;
     mangaPopular.value = null;
     popularManhwa.value = null;
     popularNovel.value = null;
     topRatedManga.value = null;
     mostFavManga.value = null;
+    loadMore.value = true;
+    canLoadMore.value = true;
+    page = 1;
   }
 }

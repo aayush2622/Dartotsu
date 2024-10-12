@@ -1,9 +1,7 @@
 import 'package:dantotsu/Functions/Extensions.dart';
+import 'package:dantotsu/Screens/BaseMediaScreen.dart';
 import 'package:dantotsu/api/Anilist/AnilistViewModel.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_rx/src/rx_workers/rx_workers.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
-import 'package:provider/provider.dart';
 
 import '../../Adaptor/Media/MediaAdaptor.dart';
 import '../../Adaptor/Media/Widgets/Chips.dart';
@@ -12,12 +10,8 @@ import '../../Adaptor/Media/Widgets/MediaSection.dart';
 import '../../Animation/SlideInAnimation.dart';
 import '../../DataClass/Media.dart';
 import '../../DataClass/MediaSection.dart';
-import '../../Functions/Function.dart';
 import '../../Preferences/PrefManager.dart';
 import '../../Preferences/Preferences.dart';
-import '../../Theme/Colors.dart';
-import '../../Theme/ThemeProvider.dart';
-import '../../Widgets/ScrollConfig.dart';
 import '../Anime/AnimeScreen.dart';
 import '../Home/Widgets/LoadingWidget.dart';
 import '../Home/Widgets/SearchBar.dart';
@@ -29,119 +23,23 @@ class MangaScreen extends StatefulWidget {
   MangaScreenState createState() => MangaScreenState();
 }
 
-class MangaScreenState extends State<MangaScreen> {
+class MangaScreenState extends BaseMediaScreen<MangaScreen> {
   final _viewModel = AnilistMangaViewModel;
-  bool running = true;
 
   @override
-  void initState() {
-    super.initState();
-    _viewModel.scrollController.addListener(_viewModel.scrollListener);
-    _initialize();
-  }
+  get viewModel => _viewModel;
 
   @override
-  void dispose() {
-    _viewModel.scrollController.dispose();
-    super.dispose();
-  }
-
-  Future<void> _initialize() async {
-    final live = Refresh.getOrPut(3, false);
-    ever(live, (bool shouldRefresh) async {
-      if (running && shouldRefresh) {
-        setState(() => running = false);
-        await _refreshData();
-        live.value = false;
-        setState(() => running = true);
-      }
-    });
-    Refresh.activity[3]?.value = true;
-  }
-
-  Future<void> _refreshData() async {
-    await getUserId();
-    await _viewModel.loadAll();
-  }
+  get refreshID => 3;
 
   @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context).colorScheme;
+  screenContent() => _buildMangaScreenContent(
+        mediaDataList: _viewModel.trending.value,
+        chipCall: _viewModel.loadTrending,
+      );
 
-    return Scaffold(
-        body: Stack(
-      children: [
-        RefreshIndicator(
-          onRefresh: () async => Refresh.activity[3]?.value = true,
-          child: CustomScrollConfig(
-            context,
-            controller: _viewModel.scrollController,
-            children: [
-              Obx(
-                () => SliverToBoxAdapter(
-                  child: _mangaScreenContent(
-                    mediaDataList: _viewModel.trending.value,
-                    theme: theme,
-                    chipCall: _viewModel.loadTrending,
-                  ),
-                ),
-              ),
-              SliverList(
-                delegate: SliverChildListDelegate(
-                  [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8),
-                      child: Obx(
-                        () => Column(children: [
-                          ..._buildMediaSections(),
-                          SizedBox(
-                            height: 216,
-                            child: Center(
-                              child: !_viewModel.loadMore.value
-                                  ? const CircularProgressIndicator()
-                                  : const SizedBox(height: 216),
-                            ),
-                          ),
-                        ]),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-        _BuildScrollToTop(),
-      ],
-    ));
-  }
-
-  Widget _BuildScrollToTop() {
-    var theme = Provider.of<ThemeNotifier>(context);
-    return Positioned(
-      bottom: 72.0 + 32.bottomBar(),
-      left: (0.screenWidth() / 2) - 24.0,
-      child: Obx(() => _viewModel.scrollToTop.value
-          ? Container(
-              decoration: BoxDecoration(
-                color: theme.isDarkMode ? greyNavDark : greyNavLight,
-                borderRadius: BorderRadius.circular(64.0),
-              ),
-              padding: const EdgeInsets.all(4.0),
-              child: IconButton(
-                icon: const Icon(Icons.arrow_upward),
-                onPressed: () => _viewModel.scrollController.animateTo(
-                  0,
-                  duration: const Duration(milliseconds: 500),
-                  curve: Curves.easeInOut,
-                ),
-              ),
-            )
-          : const SizedBox()),
-    );
-  }
-
-  List<Widget> _buildMediaSections() {
+  @override
+  get mediaSections {
     final mediaSections = [
       MediaSectionData(
           type: 0,
@@ -183,9 +81,8 @@ class MangaScreenState extends State<MangaScreen> {
       ));
   }
 
-  Widget _mangaScreenContent({
+  Widget _buildMangaScreenContent({
     required List<media>? mediaDataList,
-    required ColorScheme theme,
     required Future<void> Function(String) chipCall,
   }) {
     return SizedBox(
@@ -210,14 +107,17 @@ class MangaScreenState extends State<MangaScreen> {
                     child: ChipsWidget(
                       chips: [
                         ChipData(
-                            label: 'Trending Manga',
-                            action: () => chipCall('MANGA')),
+                          label: 'Trending Manga',
+                          action: () => chipCall('MANGA'),
+                        ),
                         ChipData(
-                            label: 'Trending Manhwa',
-                            action: () => chipCall('MANHWA')),
+                          label: 'Trending Manhwa',
+                          action: () => chipCall('MANHWA'),
+                        ),
                         ChipData(
-                            label: 'Trending Novel',
-                            action: () => chipCall('NOVEL')),
+                          label: 'Trending Novel',
+                          action: () => chipCall('NOVEL'),
+                        ),
                       ],
                     ),
                   ),
