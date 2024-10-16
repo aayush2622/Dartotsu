@@ -49,6 +49,7 @@ jobs:
           type: 'zip'
           filename: Dantotsu-${{github.sha}}-windows.zip
           directory: build\windows\x64\runner\Release
+      - run: ls build\windows\x64\runner\Release
       - name: Release Windows Zip
         uses: softprops/action-gh-release@v2
         with:
