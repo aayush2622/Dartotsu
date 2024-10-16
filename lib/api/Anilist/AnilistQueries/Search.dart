@@ -22,8 +22,8 @@ extension on AnilistQueries {
     String? season,
     int? id,
     bool hd = false,
-    bool adultOnly = false,
   }) async {
+    var adultOnly = PrefManager.getVal(PrefName.adultOnly);
     final Map<String, dynamic> variables = {
       "type": type,
       "isAdult": isAdult,
@@ -54,9 +54,7 @@ extension on AnilistQueries {
     };
 
     final response = (await executeQuery<PageResponse>(_querySearch(perPage),
-            variables: jsonEncode(variables), force: true))
-        ?.data
-        ?.page;
+            variables: jsonEncode(variables), force: true))?.data?.page;
     if (response?.media != null) {
       List<media> responseArray = [];
 

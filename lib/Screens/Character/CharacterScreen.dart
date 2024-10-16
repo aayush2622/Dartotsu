@@ -1,15 +1,15 @@
-import 'package:blur/blur.dart';
 import 'package:dantotsu/Adaptor/Charactes/Widgets/EntitySection.dart';
 import 'package:dantotsu/Adaptor/Media/Widgets/MediaSection.dart';
 import 'package:dantotsu/DataClass/Character.dart';
-import 'package:dantotsu/Functions/Extensions.dart';
 import 'package:dantotsu/Theme/ThemeProvider.dart';
 import 'package:dantotsu/Widgets/CachedNetworkImage.dart';
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
+import 'package:html/parser.dart' as html_parser;
 import 'package:kenburns_nullsafety/kenburns_nullsafety.dart';
 import 'package:provider/provider.dart';
-import 'package:html/parser.dart' as html_parser;
+
+import '../../Functions/Function.dart';
 
 class CharacterScreen extends StatefulWidget {
   final character characterInfo;
@@ -21,40 +21,37 @@ class CharacterScreen extends StatefulWidget {
 }
 
 class CharacterScreenState extends State<CharacterScreen> {
+  late ColorScheme theme;
+  late double statusBarHeight;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    theme = Theme.of(context).colorScheme;
+    statusBarHeight = MediaQuery.of(context).padding.top;
+  }
+
   @override
   Widget build(BuildContext context) {
-    final isDarkMode = Provider.of<ThemeNotifier>(context).isDarkMode;
-    final theme = Theme.of(context).colorScheme;
-    final gradientColors = isDarkMode
-        ? [Colors.transparent, theme.surface]
-        : [Colors.white.withOpacity(0.2), theme.surface];
     return Scaffold(
       body: CustomScrollView(
         slivers: [
           SliverToBoxAdapter(child: _buildCharacterSection()),
-          SliverToBoxAdapter(
-            child: _buildUtilButtons(),
-          ),
+          SliverToBoxAdapter(child: _buildUtilButtons()),
           SliverList(
-              delegate: SliverChildListDelegate([
-            Padding(
-                padding: const EdgeInsets.symmetric(),
-                child: Column(
-                  children: [
-                    _buildDescriptionSection(
-                      "Details",
-                      widget.characterInfo.description,
-                      widget.characterInfo.age ?? "null",
-                      widget.characterInfo.gender ?? "null",
-                      widget.characterInfo.dateOfBirth.toString(),
-                    ),
+            delegate: SliverChildListDelegate([
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildDescriptionSection(),
+                  if (widget.characterInfo.voiceActor?.isNotEmpty ?? false)
                     entitySection(
                       context: context,
                       type: EntityType.Staff,
                       title: "Voice Actors",
                       staffList: widget.characterInfo.voiceActor,
                     ),
-                    if (widget.characterInfo.roles?.isNotEmpty ?? false)
+                  if (widget.characterInfo.roles?.isNotEmpty ?? false)
                     MediaSection(
                       context: context,
                       type: 0,
@@ -62,28 +59,25 @@ class CharacterScreenState extends State<CharacterScreen> {
                       mediaList: widget.characterInfo.roles,
                       isLarge: true,
                     ),
-                  ],
-                ))
-          ]))
+                ],
+              ),
+            ]),
+          ),
         ],
       ),
     );
   }
 
   Widget _buildUtilButtons() {
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 8),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              _buildFavoriteButton(),
-              _buildShareButton(),
-            ],
-          ),
-        ),
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 8),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          _buildFavoriteButton(),
+          _buildShareButton(),
+        ],
+      ),
     );
   }
 
@@ -103,63 +97,62 @@ class CharacterScreenState extends State<CharacterScreen> {
     return IconButton(
       icon: const Icon(Icons.share),
       iconSize: 32,
-      onPressed: () {
-        // Share action
-      },
+      onPressed: () => shareLink('https://anilist.co/character/${widget.characterInfo.id}'),
     );
   }
 
   Widget _buildCharacterSection() {
-    final isDarkMode = Provider.of<ThemeNotifier>(context).isDarkMode;
-    final theme = Theme.of(context).colorScheme;
-    final gradientColors = isDarkMode
+    final gradientColors = Provider.of<ThemeNotifier>(context).isDarkMode
         ? [Colors.transparent, theme.surface]
         : [Colors.white.withOpacity(0.2), theme.surface];
 
     return SizedBox(
-      height: 384 + (0.statusBar() * 2),
+      height: 384 + (statusBarHeight * 2),
       child: Stack(
         children: [
-          KenBurns(
-            maxScale: 2.5,
-            minAnimationDuration: const Duration(milliseconds: 6000),
-            maxAnimationDuration: const Duration(milliseconds: 20000),
-            child: cachedNetworkImage(
-              imageUrl: widget.characterInfo.banner ??
-                  widget.characterInfo.image ??
-                  '',
-              fit: BoxFit.cover,
-              width: double.infinity,
-              height: 384 + (0.statusBar() * 2),
-            ),
-          ),
-          Container(
-            width: double.infinity,
-            height: 384 + (0.statusBar() * 2),
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: gradientColors,
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-              ),
-            ),
-          ),
-          Blur(
-            colorOpacity: 0.0,
-            blur: 10,
-            blurColor: Colors.transparent,
-            child: Container(),
-          ),
-          _buildCloseButton(theme),
-          _buildCoverImage(theme),
+          _buildKenBurnsBackground(),
+          _buildGradientOverlay(gradientColors),
+          _buildCloseButton(),
+          _buildCoverImage(),
         ],
       ),
     );
   }
 
-  Positioned _buildCloseButton(ColorScheme theme) {
+  Widget _buildKenBurnsBackground() {
+    return KenBurns(
+      maxScale: 2.5,
+      minAnimationDuration: const Duration(milliseconds: 6000),
+      maxAnimationDuration: const Duration(milliseconds: 20000),
+      child: cachedNetworkImage(
+        imageUrl:
+            widget.characterInfo.banner ?? widget.characterInfo.image ?? '',
+        fit: BoxFit.cover,
+        width: double.infinity,
+        height: 384 + (statusBarHeight * 2),
+        placeholder: (context, url) =>
+            const Center(child: CircularProgressIndicator()),
+      ),
+    );
+  }
+
+  Widget _buildGradientOverlay(List<Color> gradientColors) {
+    return Container(
+      width: double.infinity,
+      height: 384 + (statusBarHeight * 2),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: gradientColors,
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+        ),
+      ),
+    );
+  }
+
+  Positioned _buildCloseButton() {
     return Positioned(
-      top: 14.statusBar(),
+      top: statusBarHeight + 14,
       right: 24,
       child: GestureDetector(
         onTap: () => Navigator.of(context).pop(),
@@ -169,19 +162,42 @@ class CharacterScreenState extends State<CharacterScreen> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
-          child: SizedBox(
+          child: const SizedBox(
             width: 32,
             height: 32,
-            child: Center(
-              child: Icon(Icons.close, size: 24, color: theme.onSurface),
-            ),
+            child: Center(child: Icon(Icons.close, size: 24)),
           ),
         ),
       ),
     );
   }
 
-  Column _buildCharacterInfo(ColorScheme theme) {
+  Positioned _buildCoverImage() {
+    return Positioned(
+      bottom: 64,
+      left: 32,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(16.0),
+            child: cachedNetworkImage(
+              imageUrl: widget.characterInfo.image ?? '',
+              fit: BoxFit.cover,
+              width: 108,
+              height: 160,
+              placeholder: (context, url) => const SizedBox(
+                  width: 108, height: 160, child: CircularProgressIndicator()),
+            ),
+          ),
+          const SizedBox(width: 16),
+          _buildCharacterInfo(),
+        ],
+      ),
+    );
+  }
+
+  Column _buildCharacterInfo() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -210,27 +226,42 @@ class CharacterScreenState extends State<CharacterScreen> {
     );
   }
 
-  Widget _buildDescriptionSection(String title, String? content, String age,
-      String gender, String birthday) {
-    var theme = Theme.of(context).colorScheme;
-    if (content == null || content.isEmpty) {
-      return Text("Character Description not Available ",
-          style: TextStyle(
-            fontSize: 15,
-            fontFamily: 'Poppins',
-            fontWeight: FontWeight.bold,
-            color: theme.onSurface.withOpacity(0.4),
-          ));
+  String convertSpoilers(String content) {
+    final spoilerRegex = RegExp(r'~!(.*?)!~');
+    return content.replaceAllMapped(spoilerRegex, (match) {
+      return '||${match.group(1)}||';
+    });
+  }
+
+  Widget _buildDescriptionSection() {
+    var content = widget.characterInfo.description ?? '';
+    var age = widget.characterInfo.age ?? "";
+    var gender = widget.characterInfo.gender ?? "";
+    var birthday = widget.characterInfo.dateOfBirth.toString();
+
+    if (content.isEmpty) {
+      return Text(
+        "Character Description not Available",
+        style: TextStyle(
+          fontSize: 15,
+          fontFamily: 'Poppins',
+          fontWeight: FontWeight.bold,
+          color: theme.onSurface.withOpacity(0.4),
+        ),
+      );
     }
+
     final document = html_parser.parse(content);
-    final String markdownContent = document.body?.text ?? " ";
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 16.0,horizontal: 16.0),
+    String markdownContent = document.body?.text ?? " ";
+    markdownContent = convertSpoilers(markdownContent);
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Text(
-            title,
+            "Details",
             style: TextStyle(
               fontSize: 15,
               fontFamily: 'Poppins',
@@ -238,19 +269,18 @@ class CharacterScreenState extends State<CharacterScreen> {
               color: theme.onSurface,
             ),
           ),
-          const SizedBox(height: 8.0),
+          const SizedBox(height: 8),
           Text(
-            "Age: $age \n"
-            "Birthday: $birthday \n"
-            "Gender: $gender \n",
+            "Age: $age \nBirthday: $birthday \nGender: $gender \n",
             style: TextStyle(
-                fontSize: 12,
-                fontFamily: 'Poppins',
-                fontWeight: FontWeight.bold,
-                color: theme.onSurface.withOpacity(0.4)),
+              fontSize: 12,
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.bold,
+              color: theme.onSurface.withOpacity(0.4),
+            ),
           ),
           ExpandableText(
-            markdownContent,
+            markdownContent.replaceAll('__', ''),
             maxLines: 3,
             expandText: 'show more',
             collapseText: 'show less',
@@ -261,34 +291,6 @@ class CharacterScreenState extends State<CharacterScreen> {
               color: theme.onSurface.withOpacity(0.4),
             ),
           ),
-        ],
-      ),
-    );
-  }
-
-  Positioned _buildCoverImage(ColorScheme theme) {
-    return Positioned(
-      bottom: 64,
-      left: 32,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(16.0),
-            child: cachedNetworkImage(
-              imageUrl: widget.characterInfo.image ?? '',
-              fit: BoxFit.cover,
-              width: 108,
-              height: 160,
-              placeholder: (context, url) => Container(
-                color: Colors.white12,
-                width: 108,
-                height: 160,
-              ),
-            ),
-          ),
-          const SizedBox(width: 16),
-          _buildCharacterInfo(theme),
         ],
       ),
     );

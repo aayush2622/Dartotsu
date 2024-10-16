@@ -1,5 +1,7 @@
 
 
+import 'package:dantotsu/api/Mangayomi/Eval/dart/model/m_chapter.dart';
+
 class Episode {
   String number;
   String? link;
@@ -10,6 +12,9 @@ class Episode {
   bool? filler;
   String? date;
 
+  //SEpisode from Mangayomi
+  MChapter? mChapter;
+
   Episode({
     required this.number,
     this.link,
@@ -19,5 +24,6 @@ class Episode {
     this.thumb,
     this.filler,
     this.date,
+    this.mChapter,
   });
 }

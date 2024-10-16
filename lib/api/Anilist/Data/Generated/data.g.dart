@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'data.dart';
+part of '../data.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
@@ -293,4 +293,60 @@ PageData _$PageDataFromJson(Map<String, dynamic> json) => PageData(
 
 Map<String, dynamic> _$PageDataToJson(PageData instance) => <String, dynamic>{
       'Page': instance.page,
+    };
+
+GenreCollectionResponse _$GenreCollectionResponseFromJson(
+        Map<String, dynamic> json) =>
+    GenreCollectionResponse(
+      data: json['data'] == null
+          ? null
+          : GenreCollectionData.fromJson(json['data'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$GenreCollectionResponseToJson(
+        GenreCollectionResponse instance) =>
+    <String, dynamic>{
+      'data': instance.data,
+    };
+
+GenreCollectionData _$GenreCollectionDataFromJson(Map<String, dynamic> json) =>
+    GenreCollectionData(
+      genreCollection: (json['GenreCollection'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+    );
+
+Map<String, dynamic> _$GenreCollectionDataToJson(
+        GenreCollectionData instance) =>
+    <String, dynamic>{
+      'GenreCollection': instance.genreCollection,
+    };
+
+MediaTagCollectionResponse _$MediaTagCollectionResponseFromJson(
+        Map<String, dynamic> json) =>
+    MediaTagCollectionResponse(
+      data: json['data'] == null
+          ? null
+          : MediaTagCollectionData.fromJson(
+              json['data'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$MediaTagCollectionResponseToJson(
+        MediaTagCollectionResponse instance) =>
+    <String, dynamic>{
+      'data': instance.data,
+    };
+
+MediaTagCollectionData _$MediaTagCollectionDataFromJson(
+        Map<String, dynamic> json) =>
+    MediaTagCollectionData(
+      mediaTagCollection: (json['MediaTagCollection'] as List<dynamic>?)
+          ?.map((e) => MediaTag.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$MediaTagCollectionDataToJson(
+        MediaTagCollectionData instance) =>
+    <String, dynamic>{
+      'MediaTagCollection': instance.mediaTagCollection,
     };

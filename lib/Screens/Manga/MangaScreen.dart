@@ -2,13 +2,13 @@ import 'package:dantotsu/Functions/Extensions.dart';
 import 'package:dantotsu/Screens/BaseMediaScreen.dart';
 import 'package:dantotsu/api/Anilist/AnilistViewModel.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
 import '../../Adaptor/Media/MediaAdaptor.dart';
 import '../../Adaptor/Media/Widgets/Chips.dart';
 import '../../Adaptor/Media/Widgets/MediaCard.dart';
 import '../../Adaptor/Media/Widgets/MediaSection.dart';
 import '../../Animation/SlideInAnimation.dart';
-import '../../DataClass/Media.dart';
 import '../../DataClass/MediaSection.dart';
 import '../../Preferences/PrefManager.dart';
 import '../../Preferences/Preferences.dart';
@@ -33,10 +33,7 @@ class MangaScreenState extends BaseMediaScreen<MangaScreen> {
   get refreshID => 3;
 
   @override
-  screenContent() => _buildMangaScreenContent(
-        mediaDataList: _viewModel.trending.value,
-        chipCall: _viewModel.loadTrending,
-      );
+  get screenContent => Obx(() => _buildMangaScreenContent());
 
   @override
   get mediaSections {
@@ -81,75 +78,72 @@ class MangaScreenState extends BaseMediaScreen<MangaScreen> {
       ));
   }
 
-  Widget _buildMangaScreenContent({
-    required List<media>? mediaDataList,
-    required Future<void> Function(String) chipCall,
-  }) {
+  Widget _buildMangaScreenContent() {
+    var mediaDataList = _viewModel.trending.value;
+    var chipCall = _viewModel.loadTrending;
     return SizedBox(
       height: 486.statusBar(),
-      child: running
-          ? Stack(
-              children: [
-                SizedBox(
-                  height: 464.statusBar(),
-                  child: mediaDataList != null
-                      ? MediaAdaptor(type: 1, mediaList: mediaDataList)
-                      : const Center(child: CircularProgressIndicator()),
-                ),
-                const MediaSearchBar(
-                  title: "MANGA",
-                ),
-                Positioned(
-                  bottom: 92,
-                  left: 8.0,
-                  right: 8.0,
-                  child: Center(
-                    child: ChipsWidget(
-                      chips: [
-                        ChipData(
-                          label: 'Trending Manga',
-                          action: () => chipCall('MANGA'),
-                        ),
-                        ChipData(
-                          label: 'Trending Manhwa',
-                          action: () => chipCall('MANHWA'),
-                        ),
-                        ChipData(
-                          label: 'Trending Novel',
-                          action: () => chipCall('NOVEL'),
-                        ),
-                      ],
-                    ),
+      child: running ? Stack(
+        children: [
+          SizedBox(
+            height: 464.statusBar(),
+            child: mediaDataList != null
+              ? MediaAdaptor(type: 1, mediaList: mediaDataList)
+              : const Center(child: CircularProgressIndicator()),
+          ),
+          const MediaSearchBar(
+            title: "MANGA",
+          ),
+          Positioned(
+            bottom: 92,
+            left: 8.0,
+            right: 8.0,
+            child: Center(
+              child: ChipsWidget(
+                chips: [
+                  ChipData(
+                    label: 'Trending Manga',
+                    action: () => chipCall('MANGA'),
                   ),
-                ),
-                Positioned(
-                  bottom: 0,
-                  left: 8.0,
-                  right: 8.0,
-                  child: SlideInAnimation(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        MediaCard(
-                          context,
-                          'GENRE',
-                          const AnimeScreen(),
-                          "https://s4.anilist.co/file/anilistcdn/media/manga/banner/105778-wk5qQ7zAaTGl.jpg",
-                        ),
-                        MediaCard(
-                          context,
-                          'TOP SCORE',
-                          const AnimeScreen(),
-                          "https://s4.anilist.co/file/anilistcdn/media/manga/banner/30002-3TuoSMl20fUX.jpg",
-                        ),
-                      ],
-                    ),
+                  ChipData(
+                    label: 'Trending Manhwa',
+                    action: () => chipCall('MANHWA'),
                   ),
-                ),
-                const SizedBox(height: 16),
-              ],
-            )
-          : const LoadingWidget(),
+                  ChipData(
+                    label: 'Trending Novel',
+                    action: () => chipCall('NOVEL'),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 0,
+            left: 8.0,
+            right: 8.0,
+            child: SlideInAnimation(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  MediaCard(
+                    context,
+                    'GENRE',
+                    const AnimeScreen(),
+                    "https://s4.anilist.co/file/anilistcdn/media/manga/banner/105778-wk5qQ7zAaTGl.jpg",
+                  ),
+                  MediaCard(
+                    context,
+                    'TOP SCORE',
+                    const AnimeScreen(),
+                    "https://s4.anilist.co/file/anilistcdn/media/manga/banner/30002-3TuoSMl20fUX.jpg",
+                  ),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(height: 16),
+        ],
+      ) : const LoadingWidget(),
     );
   }
 }

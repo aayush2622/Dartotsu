@@ -10,6 +10,7 @@ list(APPEND FLUTTER_PLUGIN_LIST
   protocol_handler_windows
   screen_brightness_windows
   screen_retriever
+  share_plus
   universal_video_controls
   url_launcher_windows
   webview_windows

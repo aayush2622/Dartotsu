@@ -13,6 +13,7 @@
 #include <protocol_handler_windows/protocol_handler_windows_plugin_c_api.h>
 #include <screen_brightness_windows/screen_brightness_windows_plugin.h>
 #include <screen_retriever/screen_retriever_plugin.h>
+#include <share_plus/share_plus_windows_plugin_c_api.h>
 #include <universal_video_controls/universal_video_controls_plugin_c_api.h>
 #include <url_launcher_windows/url_launcher_windows.h>
 #include <webview_windows/webview_windows_plugin.h>
@@ -33,6 +34,8 @@ void RegisterPlugins(flutter::PluginRegistry* registry) {
       registry->GetRegistrarForPlugin("ScreenBrightnessWindowsPlugin"));
   ScreenRetrieverPluginRegisterWithRegistrar(
       registry->GetRegistrarForPlugin("ScreenRetrieverPlugin"));
+  SharePlusWindowsPluginCApiRegisterWithRegistrar(
+      registry->GetRegistrarForPlugin("SharePlusWindowsPluginCApi"));
   UniversalVideoControlsPluginCApiRegisterWithRegistrar(
       registry->GetRegistrarForPlugin("UniversalVideoControlsPluginCApi"));
   UrlLauncherWindowsRegisterWithRegistrar(

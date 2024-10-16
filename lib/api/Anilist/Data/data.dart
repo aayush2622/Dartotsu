@@ -6,7 +6,7 @@ import 'package:json_annotation/json_annotation.dart';
 import '../Anilist.dart';
 import 'media.dart';
 
-part 'data.g.dart';
+part 'Generated/data.g.dart';
 
 void registerAllTypes() {
   TypeFactory.create<JsonDecoder> (
@@ -27,6 +27,10 @@ void registerAllTypes() {
       (json) => MangaListResponse.fromJson(json));
   TypeFactory.create<UserListsResponse>(
       (json) => UserListsResponse.fromJson(json));
+  TypeFactory.create<GenreCollectionResponse>(
+      (json) => GenreCollectionResponse.fromJson(json));
+  TypeFactory.create<MediaTagCollectionResponse>(
+      (json) => MediaTagCollectionResponse.fromJson(json));
 }
 
 @JsonSerializable()
@@ -282,3 +286,54 @@ class PageData {
   Map<String, dynamic> toJson() => _$PageDataToJson(this);
 }
 
+@JsonSerializable()
+class GenreCollectionResponse {
+  @JsonKey(name: 'data')
+  final GenreCollectionData? data;
+
+  GenreCollectionResponse({this.data});
+
+  factory GenreCollectionResponse.fromJson(Map<String, dynamic> json) =>
+      _$GenreCollectionResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$GenreCollectionResponseToJson(this);
+}
+
+@JsonSerializable()
+class GenreCollectionData {
+  @JsonKey(name: 'GenreCollection')
+  final List<String>? genreCollection;
+
+  GenreCollectionData({this.genreCollection});
+
+  factory GenreCollectionData.fromJson(Map<String, dynamic> json) =>
+      _$GenreCollectionDataFromJson(json);
+
+  Map<String, dynamic> toJson() => _$GenreCollectionDataToJson(this);
+}
+
+@JsonSerializable()
+class MediaTagCollectionResponse {
+  @JsonKey(name: 'data')
+  final MediaTagCollectionData? data;
+
+  MediaTagCollectionResponse({this.data});
+
+  factory MediaTagCollectionResponse.fromJson(Map<String, dynamic> json) =>
+      _$MediaTagCollectionResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$MediaTagCollectionResponseToJson(this);
+}
+
+@JsonSerializable()
+class MediaTagCollectionData {
+  @JsonKey(name: 'MediaTagCollection')
+  final List<MediaTag>? mediaTagCollection;
+
+  MediaTagCollectionData({this.mediaTagCollection});
+
+  factory MediaTagCollectionData.fromJson(Map<String, dynamic> json) =>
+      _$MediaTagCollectionDataFromJson(json);
+
+  Map<String, dynamic> toJson() => _$MediaTagCollectionDataToJson(this);
+}

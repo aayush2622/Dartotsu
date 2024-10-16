@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../main.dart';
+import 'package:share_plus/share_plus.dart';
 
 class _RefreshController extends GetxController {
   var activity = <int, RxBool>{};
@@ -111,3 +112,6 @@ void navigateToPage(BuildContext context, Widget page) {
   );
 }
 
+void shareLink(String link) {
+  Share.share(link, subject: link);
+}

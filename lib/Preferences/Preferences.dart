@@ -75,4 +75,12 @@ class PrefName {
       Pref(Location.Protected, 'discordUserName', '');
   static const Pref<String> discordAvatar =
       Pref(Location.Protected, 'discordAvatar', '');
+
+  // irrelevant
+  static const Pref<List<String>> GenresList =
+      Pref(Location.Irrelevant, 'GenresList', []);
+  static const Pref<List<String>> TagsListIsAdult =
+      Pref(Location.Irrelevant, 'TagsListIsAdult', []);
+  static const Pref<List<String>> TagsListNonAdult =
+      Pref(Location.Irrelevant, 'TagsListNonAdult', []);
 }

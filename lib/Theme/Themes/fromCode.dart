@@ -6,7 +6,7 @@ ThemeData getCustomLightTheme(int color) {
   final flexThemeData = FlexThemeData.light(
     colors: schemeColor,
     primary: schemeColor.primary,
-    blendLevel: 5, // Adjust as needed
+    blendLevel: 5,
   );
 
   return ThemeData(
@@ -37,8 +37,7 @@ ThemeData getCustomDarkTheme(int color) {
   final flexThemeData = FlexThemeData.dark(
     colors: schemeColor,
     primary: schemeColor.primary,
-
-    blendLevel: 5,
+    blendLevel: 23,
   );
 
   return ThemeData(

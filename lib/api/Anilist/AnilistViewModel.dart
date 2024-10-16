@@ -15,9 +15,45 @@ Future<void> getUserId() async {
   }
 }
 
+abstract class AnilistViewModel extends GetxController {
+  var page = 1;
+  var scrollToTop = false.obs;
+  var loadMore = true.obs;
+  var canLoadMore = true.obs;
+
+  var scrollController = ScrollController();
+
+  void resetPageData();
+
+  bool get paging => true;
+
+  Future<void> loadAll();
+
+  Future<void>? loadNextPage() => null;
+
+  bool _canScroll() {
+    final maxScrollExtent = scrollController.position.maxScrollExtent;
+    final currentScroll = scrollController.offset;
+    return currentScroll > (maxScrollExtent * 0.1);
+  }
+
+  Future<void> scrollListener() async {
+    var scroll = scrollController.position;
+    if (scroll.pixels >= scroll.maxScrollExtent - 50 && loadMore.value) {
+      loadMore.value = false;
+      if (canLoadMore.value) {
+        await loadNextPage();
+      } else {
+        snackString('DAMN! YOU TRULY ARE JOBLESS\nYOU REACHED THE END');
+      }
+    }
+    scrollToTop.value = _canScroll();
+  }
+}
+
 final AnilistHomeViewModel = Get.put(_AnilistHomeViewModel());
 
-class _AnilistHomeViewModel extends GetxController {
+class _AnilistHomeViewModel extends AnilistViewModel {
   var listImages = Rx<List<String?>>([null, null]);
   var animeContinue = Rx<List<media>?>(null);
   var animeFav = Rx<List<media>?>(null);
@@ -36,8 +72,19 @@ class _AnilistHomeViewModel extends GetxController {
     listImages.value = await Anilist.query.getBannerImages();
   }
 
+  @override
+  get paging => false;
+
+  @override
   Future<void> loadAll() async {
-    resetHomePageData();
+    await Future.wait([
+      loadList(),
+      setListImages(),
+    ]);
+  }
+
+  Future<void> loadList() async {
+    resetPageData();
     final res = await Anilist.query.initHomePage();
     _setMediaList(res);
   }
@@ -69,7 +116,8 @@ class _AnilistHomeViewModel extends GetxController {
     }
   }
 
-  void resetHomePageData() {
+  @override
+  void resetPageData() {
     animeContinue.value = null;
     animeFav.value = null;
     animePlanned.value = null;
@@ -83,50 +131,19 @@ class _AnilistHomeViewModel extends GetxController {
   Future<void> loadMain() async {
     Anilist.getSavedToken();
     Discord.getSavedToken();
-  }
-}
-
-abstract class AnilistViewModel extends GetxController {
-  var page = 1;
-  var scrollToTop = false.obs;
-  var loadMore = true.obs;
-  var canLoadMore = true.obs;
-  var scrollController = ScrollController();
-
-  void resetPageData();
-
-  Future<void> loadAll();
-
-  Future<void> loadNextPage();
-
-  bool _canScroll() {
-    final maxScrollExtent = scrollController.position.maxScrollExtent;
-    final currentScroll = scrollController.offset;
-    return currentScroll > (maxScrollExtent * 0.1);
+    Anilist.query.getGenresAndTags();
   }
 
-  Future<void> scrollListener() async {
-    var scroll = scrollController.position;
-    if (scroll.pixels >= scroll.maxScrollExtent - 50 && loadMore.value) {
-      loadMore.value = false;
-      if (canLoadMore.value) {
-        await loadNextPage();
-      } else {
-        snackString('DAMN! YOU TRULY ARE JOBLESS\nYOU REACHED THE END');
-      }
-    }
-    scrollToTop.value = _canScroll();
-  }
 }
 
 // Anime ViewModel
 final AnilistAnimeViewModel = Get.put(_AnilistAnimeViewModel());
 
 class _AnilistAnimeViewModel extends AnilistViewModel {
-  var trending = Rx<List<media>?>(null);
-  var animePopular = Rx<List<media>?>(null);
-  var updated = Rx<List<media>?>(null);
-  var popularMovies = Rx<List<media>?>(null);
+  var trending = Rxn<List<media>>();
+  var animePopular = Rxn<List<media>>();
+  var updated = Rxn<List<media>>();
+  var popularMovies = Rxn<List<media>>();
   var topRatedSeries = Rxn<List<media>>();
   var mostFavSeries = Rxn<List<media>>();
 
@@ -147,15 +164,16 @@ class _AnilistAnimeViewModel extends AnilistViewModel {
     var currentSeasonMap = Anilist.currentSeasons[s];
     var season = currentSeasonMap.keys.first;
     var year = currentSeasonMap.values.first;
-    var trending = (await Anilist.query.search(
-            type: 'ANIME',
-            perPage: 12,
-            sort: Anilist.sortBy[2],
-            season: season,
-            seasonYear: year,
-            hd: true))
-        ?.results;
-    this.trending.value = trending;
+    var trending = await Anilist.query.search(
+      type: 'ANIME',
+      perPage: 12,
+      sort: Anilist.sortBy[2],
+      season: season,
+      seasonYear: year,
+      hd: true,
+    );
+
+    this.trending.value = trending?.results;
   }
 
   @override
@@ -165,7 +183,6 @@ class _AnilistAnimeViewModel extends AnilistViewModel {
       page: page + 1,
       perPage: 50,
       sort: Anilist.sortBy[1],
-      adultOnly: PrefManager.getVal(PrefName.adultOnly),
       onList: PrefManager.getVal(PrefName.includeAnimeList),
     );
     page++;
@@ -194,8 +211,8 @@ class _AnilistAnimeViewModel extends AnilistViewModel {
 final AnilistMangaViewModel = Get.put(_AnilistMangaViewModel());
 
 class _AnilistMangaViewModel extends AnilistViewModel {
-  var trending = Rx<List<media>?>(null);
-  var mangaPopular = Rx<List<media>?>(null);
+  var trending = Rxn<List<media>>();
+  var mangaPopular = Rxn<List<media>>();
   var popularManhwa = Rxn<List<media>>();
   var popularNovel = Rxn<List<media>>();
   var topRatedManga = Rxn<List<media>>();
@@ -220,7 +237,6 @@ class _AnilistMangaViewModel extends AnilistViewModel {
       page: page + 1,
       perPage: 50,
       sort: Anilist.sortBy[1],
-      adultOnly: PrefManager.getVal(PrefName.adultOnly),
       onList: PrefManager.getVal(PrefName.includeMangaList),
     );
     page++;
@@ -235,16 +251,16 @@ class _AnilistMangaViewModel extends AnilistViewModel {
     this.trending.value = null;
     final country = type == 'MANHWA' ? 'KR' : 'JP';
     final format = type == 'NOVEL' ? 'NOVEL' : null;
-    final trending = (await Anilist.query.search(
+    final trending = await Anilist.query.search(
       type: 'MANGA',
       countryOfOrigin: country,
       format: format,
       perPage: 50,
       sort: Anilist.sortBy[2],
       hd: true,
-    ))
-        ?.results;
-    this.trending.value = trending;
+    );
+
+    this.trending.value = trending?.results;
   }
 
   @override

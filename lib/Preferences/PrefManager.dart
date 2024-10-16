@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 
-import 'Hive DataClasses/ShowResponse/ShowResponse.dart';
+import 'HiveDataClasses/ShowResponse/ShowResponse.dart';
 
 class Pref<T> {
   final Location location;

@@ -26,8 +26,10 @@ part 'AnilistQueries/GetUserData.dart';
 part 'AnilistQueries/Search.dart';
 part 'AnilistQueries/GetAnimeMangaListData.dart';
 part 'AnilistQueries/GetUserMediaList.dart';
+part 'AnilistQueries/GetGenresAndTags.dart';
 
 class AnilistQueries {
+  // main function in the [AnilistQueries.dart]
   final Future<T?> Function<T>(String query,
       {String variables, bool force, bool useToken, bool show}) executeQuery;
 
@@ -50,6 +52,9 @@ class AnilistQueries {
   /// The keys are section names, and values are lists of [media] objects.
   Future<Map<String, List<media>>> initHomePage() => _initHomePage();
 
+  /// Fetches Genres and Tags data.
+  /// Returns a [bool] indicating success.
+  Future<bool> getGenresAndTags() => _getGenresAndTags();
 
   /// Fetches the user's media lists.
   ///
@@ -121,7 +126,6 @@ class AnilistQueries {
     String? season,
     int? id,
     bool hd = false,
-    bool adultOnly = false,
   }) =>
       _search(
         type: type,
@@ -144,7 +148,6 @@ class AnilistQueries {
         season: season,
         id: id,
         hd: hd,
-        adultOnly: adultOnly,
       );
 }
 

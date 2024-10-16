@@ -1,54 +1,41 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dantotsu/Screens/Settings/BaseSettingsScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart'; // For Obx
+import 'package:get/get.dart';
 
 import '../../Functions/Function.dart';
 import '../../Widgets/AlertDialogBuilder.dart';
-import '../../Widgets/ScrollConfig.dart';
-import 'Widgets/SettingsHeader.dart';
 import '../../api/Anilist/Anilist.dart';
 import '../../api/Discord/Discord.dart';
 
-class SettingsAccountScreen extends StatelessWidget {
+class SettingsAccountScreen extends StatefulWidget {
   const SettingsAccountScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    var theme = Theme.of(context).colorScheme;
-    return Scaffold(
-      body: CustomScrollConfig(
-        context,
-        children: [
-          SliverToBoxAdapter(
-            child: SettingsHeader(
-              context,
-              'Accounts',
-              Padding(
-                padding: const EdgeInsets.only(right: 16),
-                child: Icon(
-                  size: 52,
-                  Icons.person,
-                  color: theme.onSurface,
-                ),
-              ),
-            ),
-          ),
-          SliverPadding(
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
-            sliver: SliverList(
-              delegate: SliverChildListDelegate(
-                [
-                  ..._buildSettings(context),
-                  const SizedBox(height: 42),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+  State<StatefulWidget> createState() => SettingsAccountScreenState();
+
+}
+class SettingsAccountScreenState extends BaseSettingsScreen {
+
+  @override
+  String get title => 'Accounts';
+
+  @override
+  Widget get icon => Padding(
+    padding: const EdgeInsets.only(right: 16),
+    child: Icon(
+      size: 52,
+      Icons.person,
+      color: Theme.of(context).colorScheme.onSurface,
+    ),
+  );
+
+  @override
+  List<Widget> get settingsList => [
+    ..._buildSettings(context),
+    const SizedBox(height: 42),
+  ];
 
   List<Widget> _buildSettings(BuildContext context) {
     var theme = Theme.of(context).colorScheme;

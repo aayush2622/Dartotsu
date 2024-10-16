@@ -7,6 +7,7 @@ import 'package:kenburns_nullsafety/kenburns_nullsafety.dart';
 import 'package:provider/provider.dart';
 
 import '../../DataClass/Media.dart';
+import '../../Functions/Function.dart';
 import '../../Theme/ThemeProvider.dart';
 import '../../Widgets/CachedNetworkImage.dart';
 import 'MediaScreenViewModel.dart';
@@ -53,11 +54,13 @@ class MediaInfoPageState extends State<MediaInfoPage> {
                 Padding(
                   padding: const EdgeInsets.symmetric(),
                   child: Obx(() {
-                    return _viewModel.dataLoaded.value ? Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [_buildSliverContent()],
-                      ) : const Center(child: CircularProgressIndicator());
+                    return _viewModel.dataLoaded.value
+                        ? Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [_buildSliverContent()],
+                          )
+                        : const Center(child: CircularProgressIndicator());
                   }),
                 ),
               ],
@@ -146,7 +149,9 @@ class MediaInfoPageState extends State<MediaInfoPage> {
       icon: const Icon(Icons.share),
       iconSize: 32,
       onPressed: () {
-        // Share action
+        if (mediaData.shareLink != null) {
+          shareLink(mediaData.shareLink!);
+        }
       },
     );
   }
@@ -191,7 +196,9 @@ class MediaInfoPageState extends State<MediaInfoPage> {
             child: Container(),
           ),
           _buildCloseButton(theme),
-          _buildCoverImage(theme),
+          Padding(
+              padding: EdgeInsets.only(top: 64.statusBar(), left: 32),
+              child: _buildMediaInfo(theme)),
           _buildAddToListButton(theme),
         ],
       ),
@@ -222,59 +229,63 @@ class MediaInfoPageState extends State<MediaInfoPage> {
     );
   }
 
-  Positioned _buildCoverImage(ColorScheme theme) {
-    return Positioned(
-      bottom: 64,
-      left: 32,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(16.0),
-            child: cachedNetworkImage(
-              imageUrl: mediaData.cover ?? '',
-              fit: BoxFit.cover,
-              width: 108,
-              height: 160,
-              placeholder: (context, url) => Container(
-                color: Colors.white12,
-                width: 108,
-                height: 160,
-              ),
-            ),
-          ),
-          const SizedBox(width: 16),
-          _buildMediaInfo(theme),
-        ],
+  Widget _buildCoverImage() {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(16.0),
+      child: cachedNetworkImage(
+        imageUrl: mediaData.cover ?? '',
+        fit: BoxFit.cover,
+        width: 108,
+        height: 160,
+        placeholder: (context, url) => Container(
+          color: Colors.white12,
+          width: 108,
+          height: 160,
+        ),
       ),
     );
   }
 
-  Column _buildMediaInfo(ColorScheme theme) {
+  Widget _buildMediaInfo(ColorScheme theme) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          mediaData.userPreferredName,
-          style: const TextStyle(
-            fontFamily: 'Poppins',
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-          ),
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis,
-        ),
-        const SizedBox(height: 8),
-        Text(
-          mediaData.status?.replaceAll("_", " ") ?? "",
-          style: TextStyle(
-            fontSize: 14,
-            color: theme.primary,
-            fontWeight: FontWeight.bold,
-          ),
-          overflow: TextOverflow.ellipsis,
-          maxLines: 1,
-        ),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            _buildCoverImage(),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 92),
+                  Text(
+                    mediaData.userPreferredName,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    maxLines: 3,
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    mediaData.status?.replaceAll("_", " ") ?? "",
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: theme.primary,
+                      fontWeight: FontWeight.bold,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    maxLines: 1,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        )
       ],
     );
   }

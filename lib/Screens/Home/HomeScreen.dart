@@ -2,7 +2,6 @@ import 'package:blur/blur.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dantotsu/Animation/SlideUpAnimation.dart';
 import 'package:dantotsu/Functions/Extensions.dart';
-import 'package:dantotsu/Functions/Function.dart';
 import 'package:dantotsu/Theme/ThemeProvider.dart';
 import 'package:dantotsu/Widgets/CustomElevatedButton.dart';
 import 'package:dantotsu/main.dart';
@@ -11,25 +10,22 @@ import 'package:get/get.dart';
 import 'package:kenburns_nullsafety/kenburns_nullsafety.dart';
 import 'package:provider/provider.dart';
 
+import '../../Adaptor/Media/Widgets/MediaCard.dart';
+import '../../Adaptor/Media/Widgets/MediaSection.dart';
 import '../../Animation/SlideInAnimation.dart';
 import '../../DataClass/MediaSection.dart';
 import '../../Preferences/PrefManager.dart';
 import '../../Preferences/Preferences.dart';
 import '../../Widgets/CachedNetworkImage.dart';
+import '../../api/Anilist/Anilist.dart';
+import '../../api/Anilist/AnilistViewModel.dart';
+import '../BaseMediaScreen.dart';
 import '../MediaList/MediaList.dart';
+import '../Settings/SettingsBottomSheet.dart';
 import 'Widgets/AvtarWidget.dart';
 import 'Widgets/LoadingWidget.dart';
 import 'Widgets/NotificationBadge.dart';
-import '../../Adaptor/Media/Widgets/MediaCard.dart';
-import '../../Adaptor/Media/Widgets/MediaSection.dart';
-import '../../Widgets/ScrollConfig.dart';
-import '../../api/Anilist/Anilist.dart';
-import '../../api/Anilist/AnilistViewModel.dart';
-import '../Settings/SettingsBottomSheet.dart';
 
-/* TODO
-list button, more button
-*/
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -37,91 +33,20 @@ class HomeScreen extends StatefulWidget {
   HomeScreenState createState() => HomeScreenState();
 }
 
-class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
+class HomeScreenState extends BaseMediaScreen<HomeScreen> {
   final _viewModel = AnilistHomeViewModel;
 
   @override
-  void initState() {
-    super.initState();
-    load();
-  }
-
-  var running = true;
-
-  Future<void> load() async {
-    final live = Refresh.getOrPut(1, false);
-    ever(live, (bool shouldRefresh) async {
-      if (running && shouldRefresh && mounted) {
-        setState(() => running = false);
-        await _refreshData();
-        live.value = false;
-        setState(() => running = true);
-      }
-    });
-    Refresh.activity[1]?.value = true;
-  }
-
-  Future<void> _refreshData() async {
-    await getUserId();
-    await Future.wait([
-      _viewModel.setListImages(),
-      _viewModel.loadAll(),
-    ]);
-  }
+  get viewModel => _viewModel;
 
   @override
-  Widget build(BuildContext context) {
-    var backgroundHeight = 212.statusBar();
-    return Scaffold(
-      body: RefreshIndicator(
-        onRefresh: () async => Refresh.activity[1]?.value = true,
-        child: CustomScrollConfig(
-          context,
-          children: [
-            SliverToBoxAdapter(
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: backgroundHeight,
-                    child: Builder(
-                      builder: (context) {
-                        if (!running) {
-                          return const LoadingWidget();
-                        }
-                        return Stack(
-                          fit: StackFit.expand,
-                          children: [
-                            _buildBackgroundImage(),
-                            _buildAvatar(),
-                            _buildUserInfo(),
-                            _buildCards(),
-                          ],
-                        );
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SliverList(
-              delegate: SliverChildListDelegate(
-                [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8),
-                    child: Obx(() {
-                      return Column(children: buildMediaSections(context));
-                    }),
-                  ),
-                ],
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
+  get refreshID => 1;
 
-  List<Widget> buildMediaSections(BuildContext context) {
+  @override
+  get screenContent => _buildHomeScreenContent();
+
+  @override
+  get mediaSections {
     final mediaSections = [
       MediaSectionData(
         type: 0,
@@ -214,6 +139,33 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     return sectionWidgets;
   }
 
+  Widget _buildHomeScreenContent() {
+    var backgroundHeight = 212.statusBar();
+    return Column(
+      children: [
+        SizedBox(
+          height: backgroundHeight,
+          child: Builder(
+            builder: (context) {
+              if (!running) {
+                return const LoadingWidget();
+              }
+              return Stack(
+                fit: StackFit.expand,
+                children: [
+                  _buildBackgroundImage(),
+                  _buildAvatar(),
+                  _buildUserInfo(),
+                  _buildCards(),
+                ],
+              );
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
   Widget _buildBackgroundImage() {
     final isDarkMode = Provider.of<ThemeNotifier>(context).isDarkMode;
     final theme = Theme.of(context).colorScheme.surface;
@@ -226,8 +178,8 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       child: Stack(
         children: [
           KenBurns(
-            minAnimationDuration : const Duration(milliseconds: 9000),
-            maxAnimationDuration : const Duration(milliseconds: 30000),
+            minAnimationDuration: const Duration(milliseconds: 9000),
+            maxAnimationDuration: const Duration(milliseconds: 30000),
             maxScale: 2.5,
             child: cachedNetworkImage(
               imageUrl: Anilist.bg ?? '',
@@ -297,8 +249,7 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               child: CircleAvatar(
                 backgroundColor: Colors.transparent,
                 radius: 26.0,
-                backgroundImage:
-                        Anilist.avatar.value.isNotEmpty
+                backgroundImage: Anilist.avatar.value.isNotEmpty
                     ? CachedNetworkImageProvider(Anilist.avatar.value)
                     : null,
               ),

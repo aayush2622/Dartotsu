@@ -92,7 +92,9 @@ class MainActivity extends StatefulWidget {
   @override
   MainActivityState createState() => MainActivityState();
 }
+
 FloatingBottomNavBar? navbar;
+
 class MainActivityState extends State<MainActivity> with ProtocolListener {
   int _selectedIndex = 1;
 

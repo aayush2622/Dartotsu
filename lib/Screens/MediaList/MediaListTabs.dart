@@ -22,7 +22,7 @@ class MediaListTabsState extends State<MediaListTabs> with TickerProviderStateMi
   void initState() {
     super.initState();
     _tabController = TabController(
-      length: widget.viewModel.listImages.value!.keys.length,
+      length: widget.viewModel.mediaList.value!.keys.length,
       vsync: this,
     );
   }
@@ -30,10 +30,12 @@ class MediaListTabsState extends State<MediaListTabs> with TickerProviderStateMi
   @override
   void didUpdateWidget(MediaListTabs oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.viewModel.listImages.value!.keys.length != widget.viewModel.listImages.value!.keys.length) {
+    var mediaListOld = oldWidget.viewModel.mediaList.value!;
+    var mediaListNew = widget.viewModel.mediaList.value!;
+    if (mediaListOld.keys.length != mediaListNew.keys.length) {
       _tabController?.dispose();
       _tabController = TabController(
-        length: widget.viewModel.listImages.value!.keys.length,
+        length: mediaListNew.keys.length,
         vsync: this,
       );
     }
@@ -41,11 +43,12 @@ class MediaListTabsState extends State<MediaListTabs> with TickerProviderStateMi
 
   @override
   Widget build(BuildContext context) {
+    var mediaList = widget.viewModel.mediaList.value!;
     var theme = Theme.of(context).colorScheme;
     return ScrollConfig(
         context,
         child: DefaultTabController(
-          length: widget.viewModel.listImages.value!.keys.length,
+          length: mediaList.keys.length,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -57,26 +60,25 @@ class MediaListTabsState extends State<MediaListTabs> with TickerProviderStateMi
                 controller: _tabController,
                 labelStyle: const TextStyle(
                   fontFamily: 'Poppins',
+                  fontWeight: FontWeight.bold,
                   fontSize: 14.0,
-                  fontWeight: FontWeight.w600,
                 ),
                 unselectedLabelStyle: TextStyle(
                   fontFamily: 'Poppins',
+                  fontWeight: FontWeight.bold,
                   fontSize: 14.0,
                   color: theme.onSurface.withOpacity(0.48),
-                  fontWeight: FontWeight.w600,
                 ),
-                tabs: widget.viewModel.listImages.value!.keys.map((String tabTitle) {
-                  return Tab(text: '${tabTitle.toUpperCase()} (${widget.viewModel.listImages.value![tabTitle]!.length})');
+                tabs: mediaList.keys.map((String tabTitle) {
+                  return Tab(text: '${tabTitle.toUpperCase()} (${mediaList[tabTitle]!.length})');
                 }).toList(),
               ),
               Expanded(
                 child: TabBarView(
                   controller: _tabController,
-                  children: widget.viewModel.listImages.value!.keys.map((String tabTitle) {
-                    final mediaList = widget.viewModel.listImages.value![tabTitle]!;
+                  children: mediaList.keys.map((String tabTitle) {
                     return SingleChildScrollView(
-                      child: MediaAdaptor(mediaList: mediaList, type: 3),
+                      child: MediaAdaptor(mediaList: mediaList[tabTitle]!, type: 3),
                     );
                   }).toList(),
                 ),

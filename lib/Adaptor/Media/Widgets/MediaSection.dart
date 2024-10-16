@@ -10,6 +10,7 @@ Widget MediaSection({
   List<media>? mediaList,
   List<Widget>? customNullListIndicator,
   ScrollController? scrollController,
+  Function(int index)? onMediaTap,
 }) {
   var theme = Theme.of(context);
 
@@ -68,20 +69,17 @@ Widget MediaSection({
   }
 
   Widget buildMediaContent() {
-    return mediaList == null
-        ? const SizedBox(
+    return mediaList == null ? const SizedBox(
       height: 250,
       child: Center(
         child: CircularProgressIndicator(),
       ),
-    )
-        : mediaList.isEmpty
-        ? buildEmptyState()
-        : MediaAdaptor(
+    ) : mediaList.isEmpty ? buildEmptyState() : MediaAdaptor(
       type: type,
       mediaList: mediaList,
       isLarge: isLarge,
       scrollController: scrollController,
+      onMediaTap: onMediaTap,
     );
   }
 

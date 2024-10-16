@@ -1,4 +1,4 @@
-
+import 'package:dantotsu/Screens/Settings/BaseSettingsScreen.dart';
 import 'package:dantotsu/Widgets/AlertDialogBuilder.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -11,55 +11,41 @@ import '../../Preferences/Preferences.dart';
 import '../../Theme/CustomColorPicker.dart';
 import '../../Theme/ThemeManager.dart';
 import '../../Theme/ThemeProvider.dart';
-import '../../Widgets/ScrollConfig.dart';
-import 'Widgets/SettingsHeader.dart';
 
-class SettingsThemeScreen extends StatelessWidget {
+class SettingsThemeScreen extends StatefulWidget {
   const SettingsThemeScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    var theme = Theme.of(context).colorScheme;
-    return Scaffold(
-      body: CustomScrollConfig(
-        context,
-        children: [
-          SliverToBoxAdapter(
-            child: SettingsHeader(
-                context,
-                'Theme',
-                Padding(
-                  padding: const EdgeInsets.only(right: 16),
-                  child: Icon(
-                    size: 52,
-                    Icons.color_lens_outlined,
-                    color: theme.onSurface,
-                  ),
-                )),
-          ),
-          SliverPadding(
-            padding: const EdgeInsets.symmetric(vertical: 20),
-            sliver: SliverList(
-              delegate: SliverChildListDelegate(
-                [
-                  const ThemeDropdown(),
-                  const SizedBox(height: 8),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 24,
-                    ),
-                    child: SettingsAdaptor(
-                      settings: _buildSettings(context),
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ),
-        ],
+  State<StatefulWidget> createState() => SettingsThemeScreenState();
+}
+class SettingsThemeScreenState extends BaseSettingsScreen {
+
+  @override
+  String get title => 'Theme';
+
+  @override
+  Widget get icon => Padding(
+    padding: const EdgeInsets.only(right: 16),
+    child: Icon(
+      size: 52,
+      Icons.color_lens_outlined,
+      color: Theme.of(context).colorScheme.onSurface,
+    ),
+  );
+
+  @override
+  List<Widget> get settingsList => [
+    const ThemeDropdown(),
+    const SizedBox(height: 8),
+    Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 24,
       ),
-    );
-  }
+      child: SettingsAdaptor(
+        settings: _buildSettings(context),
+      ),
+    )
+  ];
 
   List<Setting> _buildSettings(BuildContext context) {
     final themeNotifier = Provider.of<ThemeNotifier>(context);
@@ -204,74 +190,7 @@ class SettingsThemeScreen extends StatelessWidget {
       ),
     ];
   }
+
+
 }
 
-//TODO
-class ThemeSelector extends StatefulWidget {
-  const ThemeSelector({super.key});
-
-  @override
-  ThemeSelectorState createState() => ThemeSelectorState();
-}
-
-class ThemeSelectorState extends State<ThemeSelector> {
-  int selectedMode = 0;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Expanded(
-            child: Opacity(
-              opacity: 0.58,
-              child: Text(
-                'Theme',
-                style: TextStyle(
-                    fontFamily: 'Poppins', fontWeight: FontWeight.bold),
-              ),
-            ),
-          ),
-          _buildThemeButton(
-            icon: Icons.brightness_high,
-            mode: 1,
-          ),
-          const SizedBox(width: 8),
-          _buildThemeButton(
-            icon: Icons.brightness_4,
-            mode: 2,
-          ),
-          const SizedBox(width: 8),
-          _buildThemeButton(
-            icon: Icons.brightness_auto,
-            mode: 0,
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildThemeButton({required IconData icon, required int mode}) {
-    return Card(
-      color: Colors.grey.shade800,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
-      elevation: 0,
-      child: IconButton(
-        icon: Icon(icon),
-        iconSize: 24,
-        onPressed: () {
-          setState(() {
-            selectedMode = mode; // Update the selected mode
-          });
-        },
-        color: selectedMode == mode
-            ? Colors.white.withOpacity(1.0)
-            : Colors.white.withOpacity(0.33),
-      ),
-    );
-  }
-}

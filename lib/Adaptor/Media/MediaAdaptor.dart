@@ -19,13 +19,16 @@ class MediaAdaptor extends StatefulWidget {
   final List<media> mediaList;
   final bool isLarge;
   final ScrollController? scrollController;
+  final Function(int index)? onMediaTap;
 
-  const MediaAdaptor(
-      {super.key,
-      required this.type,
-      required this.mediaList,
-      this.isLarge = false,
-      this.scrollController});
+  const MediaAdaptor({
+    super.key,
+    required this.type,
+    required this.mediaList,
+    this.isLarge = false,
+    this.scrollController,
+    this.onMediaTap,
+  });
 
   @override
   MediaGridState createState() => MediaGridState();
@@ -73,15 +76,19 @@ class MediaGridState extends State<MediaAdaptor> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
       child: StaggeredGrid.count(
+        crossAxisSpacing: 16,
         crossAxisCount: crossAxisCount,
         children: List.generate(
           _mediaList.length,
           (index) {
             return GestureDetector(
-              onTap: () => navigateToPage(
-                context,
-                MediaInfoPage(_mediaList[index]),
-              ),
+              onTap: () {
+                if (widget.onMediaTap != null) {
+                  widget.onMediaTap!(index);
+                } else {
+                  navigateToPage(context, MediaInfoPage(_mediaList[index]));
+                }
+              },
               onLongPress: () => settingsBottomSheet(context),
               child: SizedBox(
                 width: 102,
@@ -99,7 +106,6 @@ class MediaGridState extends State<MediaAdaptor> {
   }
 
   Widget _buildListLayout() {
-
     return AnimatedSwitcher(
       duration: const Duration(milliseconds: 500),
       child: Container(
@@ -109,8 +115,6 @@ class MediaGridState extends State<MediaAdaptor> {
           controller: widget.scrollController,
           itemCount: _mediaList.length,
           itemBuilder: (context, index) {
-            final m = _mediaList[index];
-
             return SlideAndScaleAnimation(
               initialScale: 0.0,
               finalScale: 1.0,
@@ -118,13 +122,19 @@ class MediaGridState extends State<MediaAdaptor> {
               finalOffset: Offset.zero,
               duration: const Duration(milliseconds: 200),
               child: GestureDetector(
-                onTap: () => navigateToPage(context, MediaInfoPage(m)),
+                onTap: () {
+                  if (widget.onMediaTap != null) {
+                    widget.onMediaTap!(index);
+                  } else {
+                    navigateToPage(context, MediaInfoPage(_mediaList[index]));
+                  }
+                },
                 onLongPress: () => settingsBottomSheet(context),
                 child: Container(
-                  width:  double.infinity,
+                  width: double.infinity,
                   margin:
                       const EdgeInsets.symmetric(horizontal: 18, vertical: 4),
-                  child: MediaPageLargeViewHolder(m),
+                  child: MediaPageLargeViewHolder(_mediaList[index]),
                 ),
               ),
             );
@@ -160,8 +170,13 @@ class MediaGridState extends State<MediaAdaptor> {
                 finalOffset: Offset.zero,
                 duration: const Duration(milliseconds: 200),
                 child: GestureDetector(
-                  onTap: () =>
-                      navigateToPage(context, MediaInfoPage(_mediaList[index])),
+                  onTap: () {
+                    if (widget.onMediaTap != null) {
+                      widget.onMediaTap!(index);
+                    } else {
+                      navigateToPage(context, MediaInfoPage(_mediaList[index]));
+                    }
+                  },
                   onLongPress: () => settingsBottomSheet(context),
                   child: Container(
                     width: 102,

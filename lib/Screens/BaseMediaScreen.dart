@@ -10,14 +10,13 @@ import '../Widgets/ScrollConfig.dart';
 import '../api/Anilist/AnilistViewModel.dart';
 
 abstract class BaseMediaScreen<T extends StatefulWidget> extends State<T> {
-
   AnilistViewModel get viewModel;
 
   int get refreshID;
 
   List<Widget> get mediaSections;
 
-  Widget screenContent();
+  Widget get screenContent;
 
   @override
   void initState() {
@@ -41,7 +40,7 @@ abstract class BaseMediaScreen<T extends StatefulWidget> extends State<T> {
     Refresh.activity[refreshID]?.value = true;
   }
 
-  refreshData() async {
+  Future<void> refreshData() async {
     await getUserId();
     await viewModel.loadAll();
   }
@@ -63,7 +62,7 @@ abstract class BaseMediaScreen<T extends StatefulWidget> extends State<T> {
               context,
               controller: viewModel.scrollController,
               children: [
-                Obx(() => SliverToBoxAdapter(child: screenContent())),
+                SliverToBoxAdapter(child: screenContent),
                 SliverList(
                   delegate: SliverChildListDelegate(
                     [
@@ -72,48 +71,53 @@ abstract class BaseMediaScreen<T extends StatefulWidget> extends State<T> {
                         child: Obx(
                           () => Column(children: [
                             ...mediaSections,
-                            SizedBox(
-                              height: 216,
-                              child: Center(child: !viewModel.loadMore.value && viewModel.canLoadMore.value
-                                  ? const CircularProgressIndicator()
-                                  : const SizedBox(height: 216),
+                            if (viewModel.paging)
+                              SizedBox(
+                                height: 216,
+                                child: Center(
+                                  child: !viewModel.loadMore.value &&
+                                          viewModel.canLoadMore.value
+                                      ? const CircularProgressIndicator()
+                                      : const SizedBox(height: 216),
+                                ),
                               ),
-                            ),
                           ]),
                         ),
-                      ),
+                      )
                     ],
                   ),
                 ),
               ],
             ),
           ),
-          _BuildScrollToTop(),
+          _buildScrollToTop(),
         ],
       ),
     );
   }
 
-  Widget _BuildScrollToTop() {
+  Widget _buildScrollToTop() {
     var theme = Provider.of<ThemeNotifier>(context);
     return Positioned(
       bottom: 72.0 + 32.bottomBar(),
       left: (0.screenWidth() / 2) - 24.0,
-      child: Obx(() => viewModel.scrollToTop.value ? Container(
-        decoration: BoxDecoration(
-          color: theme.isDarkMode ? greyNavDark : greyNavLight,
-          borderRadius: BorderRadius.circular(64.0),
-        ),
-        padding: const EdgeInsets.all(4.0),
-        child: IconButton(
-          icon: const Icon(Icons.arrow_upward),
-          onPressed: () => viewModel.scrollController.animateTo(
-            0,
-            duration: const Duration(milliseconds: 500),
-            curve: Curves.easeInOut,
-          ),
-        ),
-      ) : const SizedBox()),
+      child: Obx(() => viewModel.scrollToTop.value
+          ? Container(
+              decoration: BoxDecoration(
+                color: theme.isDarkMode ? greyNavDark : greyNavLight,
+                borderRadius: BorderRadius.circular(64.0),
+              ),
+              padding: const EdgeInsets.all(4.0),
+              child: IconButton(
+                icon: const Icon(Icons.arrow_upward),
+                onPressed: () => viewModel.scrollController.animateTo(
+                  0,
+                  duration: const Duration(milliseconds: 500),
+                  curve: Curves.easeInOut,
+                ),
+              ),
+            )
+          : const SizedBox()),
     );
   }
 }

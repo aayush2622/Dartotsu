@@ -152,7 +152,7 @@ class _CustomBottomDialogState extends State<CustomBottomDialog> {
   }
 }
 
-void showCustomBottomDialog(BuildContext context, CustomBottomDialog dialog) {
+void showCustomBottomDialog(BuildContext context, Widget dialog) {
   showModalBottomSheet(
     context: context,
     shape: const RoundedRectangleBorder(

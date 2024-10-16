@@ -30,14 +30,17 @@ class MediaListScreenState extends State<MediaListScreen> {
         elevation: 0,
         backgroundColor: Colors.transparent,
         title: Text(
-          Anilist.username.value ?? '',
+          "${Anilist.username.value } ${widget.anime ? 'Anime' : 'Manga'} List",
           style: TextStyle(
             fontFamily: 'Poppins',
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w600,
             fontSize: 16.0,
             color: theme.primary,
           ),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
         ),
+
         iconTheme: IconThemeData(color: theme.primary),
 
       ),
@@ -46,7 +49,7 @@ class MediaListScreenState extends State<MediaListScreen> {
           return const Center(child: CircularProgressIndicator());
         }
 
-        if (_viewModel.listImages.value == null || _viewModel.listImages.value!.isEmpty) {
+        if (_viewModel.mediaList.value == null || _viewModel.mediaList.value!.isEmpty) {
           return const Center(child: Text('No data available'));
         }
 

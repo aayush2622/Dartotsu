@@ -1,51 +1,41 @@
+import 'package:dantotsu/Screens/Settings/BaseSettingsScreen.dart';
 import 'package:dantotsu/Screens/Settings/SettingsAccountScreen.dart';
 import 'package:dantotsu/Screens/Settings/SettingsThemeScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:icons_plus/icons_plus.dart';
+
 import '../../Adaptor/Settings/SettingsAdaptor.dart';
 import '../../DataClass/Setting.dart';
 import '../../Functions/Function.dart';
-import '../../Widgets/ScrollConfig.dart';
-import 'Widgets/SettingsHeader.dart';
 
-class SettingsScreen extends StatelessWidget {
+class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: CustomScrollConfig(
-        context,
-        children: [
-          SliverToBoxAdapter(
-            child: SettingsHeader(
-                context,
-                'Settings',
-                Image.asset(
-                  'assets/images/icon.png',
-                  width: 96,
-                  height: 96,
-                )),
-          ),
-          SliverPadding(
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
-            sliver: SliverList(
-              delegate: SliverChildListDelegate(
-                [
-                  SettingsAdaptor(
-                    settings: _buildSettings(context),
-                  ),
-                  const SizedBox(height: 24),
-                  const InfoSection(),
-                  const SizedBox(height: 42),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
+  State<StatefulWidget> createState() => SettingsScreenState();
+}
+
+class SettingsScreenState extends BaseSettingsScreen {
+
+  @override
+  String get title => 'Settings';
+
+  @override
+  Widget get icon => Image.asset(
+        'assets/images/icon.png',
+        width: 96,
+        height: 96,
+      );
+
+  @override
+  List<Widget> get settingsList {
+    return [
+      SettingsAdaptor(settings: _buildSettings(context)),
+      const SizedBox(height: 24),
+      const InfoSection(),
+      const SizedBox(height: 42),
+    ];
   }
 
   List<Setting> _buildSettings(BuildContext context) {

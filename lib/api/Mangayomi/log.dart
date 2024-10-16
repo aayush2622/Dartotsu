@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+
 import 'dart:async';
 
 class Logger {
@@ -14,9 +14,9 @@ class Logger {
   static List<(LoggerLevel, String, DateTime)> get logs => _logs;
 
   static void add(LoggerLevel level, String content) {
-    if (kDebugMode) {
+    /*if (kDebugMode) {
       print(content);
-    }
+    }*/
     _logStreamController.add((level, content, DateTime.now()));
     _logs.add((level, content, DateTime.now()));
   }

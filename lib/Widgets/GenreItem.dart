@@ -5,10 +5,7 @@ import '../../../Functions/Function.dart';
 import '../../../Widgets/CachedNetworkImage.dart';
 
 Widget GenreItem(BuildContext context, String title, {Widget? route, String? imageUrl}) {
-  double height = 46;
-  var screenWidth = MediaQuery.of(context).size.width;
-  double width = screenWidth * 0.4;
-  if (width > 154) width = 154;
+  double height = 54;
   double radius = 16;
 
   return GestureDetector(
@@ -25,11 +22,11 @@ Widget GenreItem(BuildContext context, String title, {Widget? route, String? ima
             cachedNetworkImage(
               imageUrl: imageUrl,
               fit: BoxFit.cover,
-              width: width,
+              width: double.infinity,
               height: height,
             ),
           Container(
-            width: width,
+            width: double.infinity,
             height: height,
             color: Colors.black.withOpacity(0.6),
             child: Center(
@@ -44,6 +41,8 @@ Widget GenreItem(BuildContext context, String title, {Widget? route, String? ima
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                     ),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
                   ),
                 ],
               ),

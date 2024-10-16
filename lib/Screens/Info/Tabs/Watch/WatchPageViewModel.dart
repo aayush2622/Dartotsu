@@ -1,25 +1,31 @@
 import 'dart:async';
 
+import 'package:dantotsu/DataClass/Episode.dart';
 import 'package:dantotsu/DataClass/Media.dart';
+import 'package:dantotsu/Preferences/HiveDataClasses/ShowResponse/ShowResponse.dart';
 import 'package:dantotsu/Preferences/PrefManager.dart';
-import 'package:dantotsu/Preferences/Hive%20DataClasses/ShowResponse/ShowResponse.dart';
+import 'package:dantotsu/Screens/Info/Tabs/Watch/Widgets/WrongTitle.dart';
+import 'package:dantotsu/api/Mangayomi/Eval/dart/model/m_chapter.dart';
 import 'package:dantotsu/api/Mangayomi/Search/get_detail.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:fuzzywuzzy/fuzzywuzzy.dart';
 import 'package:get/get.dart';
 
+import '../../../../Widgets/CustomBottomDialog.dart';
 import '../../../../api/Mangayomi/Eval/dart/model/m_manga.dart';
 import '../../../../api/Mangayomi/Model/Source.dart';
 import '../../../../api/Mangayomi/Search/search.dart';
-
+import 'Functions/ParseChapterNumber.dart';
 
 class WatchPageViewModel extends GetxController {
   var selectedMedia = Rxn<MManga?>(null);
   var status = Rxn<String>(null);
+  var episodeList = Rxn<List<Episode>>(null);
 
   reset() {
     selectedMedia.value = null;
     status.value = null;
+    episodeList.value = null;
   }
 
   Future<void> searchMedia(Source source, media mediaData) async {
@@ -39,7 +45,7 @@ class WatchPageViewModel extends GetxController {
     MManga? response;
     debugPrint("Searching : ${mediaData.mainName()}");
     status.value = "Searching : ${mediaData.mainName()}";
-    final mediaFuture = searchTest(
+    final mediaFuture = search(
       source: source,
       page: 1,
       query: mediaData.mainName(),
@@ -67,7 +73,7 @@ class WatchPageViewModel extends GetxController {
             100) {
       debugPrint("Searching : ${mediaData.nameRomaji}");
       status.value = "Searching : ${mediaData.nameRomaji}";
-      final mediaFuture = searchTest(
+      final mediaFuture = search(
         source: source,
         page: 1,
         query: mediaData.nameRomaji,
@@ -129,16 +135,37 @@ class WatchPageViewModel extends GetxController {
 
   void _getEpisode(MManga media, Source source) async {
     if (media.link == null) return;
-    var mediaFuture = getDetailTest(url: media.link!, source: source);
-    var mediaD = await mediaFuture;
+    var m = await getDetail(url: media.link!, source: source);
 
-    var mediaData = MManga(
-      name: media.name,
-      imageUrl: media.imageUrl,
-      link: media.link,
-      chapters: mediaD.chapters?.reversed.toList(),
-      description: mediaD.description,
-    );
-    selectedMedia.value = mediaData;
+    var chapters = m.chapters;
+    episodeList.value =
+        chapters?.reversed.map((e) => MChapterToEpisode(e, media)).toList();
   }
+
+  Future<void> wrongTitle(
+      BuildContext context, Source source, media mediaData) async {
+    var dialog = WrongTitleDialog(
+        source: source,
+        mediaData: mediaData,
+        selectedMedia: selectedMedia,
+        saveShowResponse: _saveShowResponse,
+        episodeList: episodeList,
+        getEpisode: _getEpisode);
+
+    showCustomBottomDialog(context, dialog);
+  }
+}
+
+Episode MChapterToEpisode(MChapter chapter, MManga? selectedMedia) {
+  var episodeNumber = ChapterRecognition()
+      .parseChapterNumber(selectedMedia?.name ?? '', chapter.name ?? '');
+  return Episode(
+    number: episodeNumber != -1 ? episodeNumber.toString() : chapter.name ?? '',
+    link: chapter.url,
+    title: chapter.name,
+    thumb: null,
+    desc: null,
+    filler: false,
+    mChapter: chapter,
+  );
 }
