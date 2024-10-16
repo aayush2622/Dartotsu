@@ -25,7 +25,7 @@ jobs:
       - run: flutter pub get
       - run: flutter build apk
       - name: Android Apk Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@master
         with:
             files: build/app/outputs/flutter-apk/app-release.apk
   build_windows:
@@ -51,7 +51,7 @@ jobs:
           directory: build\windows\x64\runner\Release
       - run: ls build\windows\x64\runner\Release
       - name: Release Windows Zip
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@master
         with:
             files: build/windows/x64/runner/Release/Dantotsu-${{github.sha}}-windows.zip
         
@@ -81,7 +81,7 @@ jobs:
             filename: Dantotsu-${{github.sha}}-linux.zip
             directory: build/linux/x64/release/bundle
       - name: Release Linux Zip
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@master
         with:
             files: build/linux/x64/release/bundle/Dantotsu-${{github.sha}}-linux.zip
   build_ios_and_macos:
@@ -100,7 +100,7 @@ jobs:
       - run: flutter pub get
       - run: flutter build ios --release --no-codesign
       - name: Release ios App
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@master
         with:
             files: build/ios/iphoneos/Runner.app
       - run: flutter build macos
@@ -111,6 +111,6 @@ jobs:
             filename: Dantotsu-${{github.sha}}-macos.zip
             directory: build/macos/Build/Products/Release
       - name: Release MacOS Zip
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@master
         with:
             files: build/macos/Build/Products/Release/Dantotsu-${{github.sha}}-macos.zip
