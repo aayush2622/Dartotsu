@@ -250,7 +250,7 @@ jobs:
                         --arg thumbnail_url "$thumbnail_url" \
                         --argjson embed_color "$embed_color" \
                         '{
-                          "content": "@",
+                          "content": "@everyone",
                           "embeds": [
                             {
                               "title": "New Alpha-Build dropped 🔥",
