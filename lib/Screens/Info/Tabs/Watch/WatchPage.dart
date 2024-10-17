@@ -1,6 +1,6 @@
+import 'package:dantotsu/Adaptor/Episode/EpisodeAdaptor.dart';
 import 'package:dantotsu/Functions/Function.dart';
 import 'package:dantotsu/Screens/Info/Tabs/Watch/Widgets/SourceSelector.dart';
-import 'package:dantotsu/Widgets/CachedNetworkImage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -33,15 +33,16 @@ class _WatchPageState extends State<WatchPage> {
         Get.put(WatchPageViewModel(), tag: widget.mediaData.id.toString());
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _viewModel.reset();
-      load();
+      loadEpisodes();
     });
   }
 
-  void load() async {
+  void loadEpisodes() async {
     if (widget.mediaData.anime != null) {
-      _viewModel.getAnifyEpisodes(widget.mediaData);
-      _viewModel.getKitsuEpisodes(widget.mediaData);
-      _viewModel.getFillerEpisodes(widget.mediaData);
+      await Future.wait([
+        _viewModel.getEpisodeData(widget.mediaData),
+        _viewModel.getFillerEpisodes(widget.mediaData),
+      ]);
     }
   }
 
@@ -58,19 +59,27 @@ class _WatchPageState extends State<WatchPage> {
   Widget build(BuildContext context) {
     var theme = Theme.of(context).colorScheme;
     return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ...releasingIn(widget.mediaData, context),
-        _buildWithPadding([
+        _buildContent(theme),
+        _buildEpisodeList(),
+      ],
+    );
+  }
+
+  Widget _buildContent(ColorScheme theme) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 32.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
           ..._buildYouTubeButton(),
-          Obx(
-            () => Text(
-              _viewModel.status.value ?? '',
-              style: TextStyle(
-                  color: theme.onSurface, fontWeight: FontWeight.bold),
-            ),
-          ),
+          Obx(() => Text(
+                _viewModel.status.value ?? '',
+                style: TextStyle(
+                    color: theme.onSurface, fontWeight: FontWeight.bold),
+              )),
           const SizedBox(height: 12),
           SourceSelector(
             currentSource: source,
@@ -79,19 +88,7 @@ class _WatchPageState extends State<WatchPage> {
           ),
           const SizedBox(height: 16),
           _buildWrongTitle(),
-        ]),
-        _buildEpisodeList(),
-      ],
-    );
-  }
-
-  Widget _buildWithPadding(List<Widget> widgets) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 32.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: widgets,
+        ],
       ),
     );
   }
@@ -99,141 +96,126 @@ class _WatchPageState extends State<WatchPage> {
   Widget _buildEpisodeList() {
     return Obx(() {
       var episodeList = _viewModel.episodeList.value;
-      if (episodeList == null || episodeList.isEmpty) {
+      if (episodeList == null || episodeList.isEmpty ) {
         return const Center(child: CircularProgressIndicator());
       }
-      episodeList.forEach((number, episode) {
-        episode.title = _viewModel.anifyEpisodeList.value?[number]?.title ??
-            _viewModel.kitsuEpisodeList.value?[number]?.title ??
-            episode.title ??
-            '';
-
-        episode.desc = _viewModel.anifyEpisodeList.value?[number]?.desc ??
-            _viewModel.kitsuEpisodeList.value?[number]?.desc ??
-            episode.desc ??
-            '';
-
-        episode.thumb = _viewModel.anifyEpisodeList.value?[number]?.thumb ??
-            _viewModel.kitsuEpisodeList.value?[number]?.thumb ??
-            episode.thumb ??
-            widget.mediaData.banner ??
-            widget.mediaData.cover;
-
-        episode.filler =
-            _viewModel.fillerEpisodesList.value?[number]?.filler == true;
-      });
-
-      final total = episodeList.values.length;
-      final divisions = total / 10;
-      var chunkSize = (divisions < 25)
-          ? 25
-          : (divisions < 50)
-              ? 50
-              : 100;
-      List<List<Episode>> chunks = [];
-      var episodeValues = episodeList.values.toList();
-      for (var i = 0; i < episodeValues.length; i += chunkSize) {
-        chunks.add(episodeValues.sublist(
-            i,
-            i + chunkSize > episodeValues.length
-                ? episodeValues.length
-                : i + chunkSize));
+      if (!_viewModel.episodeDataLoaded.value) {
+        return const Center(child: CircularProgressIndicator());
       }
-      final RxInt selectedChunkIndex = 0.obs;
-      String targetEpisodeNumber = widget.mediaData.userProgress.toString();
 
-      for (var chunkIndex = 0; chunkIndex < chunks.length; chunkIndex++) {
-        if (chunks[chunkIndex]
-            .any((episode) => episode.number == targetEpisodeNumber)) {
-          selectedChunkIndex.value = chunkIndex;
-          break;
-        }
-      }
+      updateEpisodeDetails(episodeList);
+
+      final chunks =
+          _chunkEpisodes(episodeList, _calculateChunkSize(episodeList));
+      final selectedChunkIndex = _findSelectedChunkIndex(
+          chunks, widget.mediaData.userProgress.toString());
 
       return Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ScrollConfig(
-            context,
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Obx(
-                () => chunks.length > 1
-                    ? Row(
-                        children: List.generate(chunks.length, (index) {
-                          String f = chunks[index].first.number;
-                          String l = chunks[index].last.number;
-                          return Padding(
-                            padding: EdgeInsets.only(
-                                left: index == 0 ? 32.0 : 6.0,
-                                right: index == chunks.length - 1 ? 32.0 : 6.0),
-                            child: ChoiceChip(
-                              showCheckmark: false,
-                              label: Text('$f - $l',
-                                  style: const TextStyle(
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.bold,
-                                  )),
-                              selected: selectedChunkIndex.value == index,
-                              onSelected: (bool selected) {
-                                if (selected) {
-                                  selectedChunkIndex.value = index;
-                                }
-                              },
-                            ),
-                          );
-                        }),
-                      )
-                    : const SizedBox(),
-              ),
-            ),
-          ),
-          // List of episodes
+          _buildChunkSelector(chunks, selectedChunkIndex),
           Flexible(
             fit: FlexFit.loose,
-            child: Obx(() => ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: chunks[selectedChunkIndex.value].length,
-                  itemBuilder: (context, index) {
-                    var episode = chunks[selectedChunkIndex.value][index];
-                    return GestureDetector(
-                      onTap: () async {
-                        // Handle tap action
-                      },
-                      child: ListTile(
-                        leading: cachedNetworkImage(
-                          imageUrl: episode.thumb,
-                          width: 70,
-                          height: 80,
-                          fit: BoxFit.cover,
-                        ),
-                        title: Text(
-                          episode.title ?? 'Episode ${episode.number}',
-                          style: TextStyle(
-                            color: episode.filler == true
-                                ? Colors.black
-                                : Colors.grey,
-                          ),
-                        ),
-                        subtitle: Text(
-                          episode.desc ?? '',
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            color: episode.filler == true
-                                ? Colors.black
-                                : Colors.grey,
-                          ),
-                        ),
-                      ),
-                    );
-                  },
+            child: Obx(() => EpisodeAdaptor(
+                  type: 0,
+                  episodeList: chunks[selectedChunkIndex.value],
+                  lastWatched: widget.mediaData.userProgress,
                 )),
           ),
         ],
       );
     });
+  }
+
+  Widget _buildChunkSelector(
+      List<List<Episode>> chunks, RxInt selectedChunkIndex) {
+    if (chunks.length < 2) {
+      return const SizedBox();
+    }
+    return ScrollConfig(
+      context,
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          children: List.generate(chunks.length, (index) {
+            return Padding(
+              padding: EdgeInsets.only(
+                  left: index == 0 ? 32.0 : 6.0,
+                  right: index == chunks.length - 1 ? 32.0 : 6.0),
+              child: Obx(() => ChoiceChip(
+                    showCheckmark: false,
+                    label: Text(
+                        '${chunks[index].first.number} - ${chunks[index].last.number}',
+                        style: const TextStyle(
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.bold)),
+                    selected: selectedChunkIndex.value == index,
+                    onSelected: (bool selected) {
+                      if (selected) {
+                        selectedChunkIndex.value = index;
+                      }
+                    },
+                  )),
+            );
+          }),
+        ),
+      ),
+    );
+  }
+
+  void updateEpisodeDetails(Map<String, Episode> episodeList) {
+    episodeList.forEach((number, episode) {
+      episode.title = _viewModel.anifyEpisodeList.value?[number]?.title ??
+          _viewModel.kitsuEpisodeList.value?[number]?.title ??
+          episode.title ??
+          '';
+      episode.desc = _viewModel.anifyEpisodeList.value?[number]?.desc ??
+          _viewModel.kitsuEpisodeList.value?[number]?.desc ??
+          episode.desc ??
+          '';
+      episode.thumb = _viewModel.anifyEpisodeList.value?[number]?.thumb ??
+          _viewModel.kitsuEpisodeList.value?[number]?.thumb ??
+          episode.thumb ??
+          widget.mediaData.banner ??
+          widget.mediaData.cover;
+      episode.filler =
+          _viewModel.fillerEpisodesList.value?[number]?.filler == true;
+    });
+  }
+
+  int _calculateChunkSize(Map<String, Episode> episodeList) {
+    final total = episodeList.values.length;
+    final divisions = total / 10;
+    return (divisions < 25)
+        ? 25
+        : (divisions < 50)
+            ? 50
+            : 100;
+  }
+
+  List<List<Episode>> _chunkEpisodes(
+      Map<String, Episode> episodeList, int chunkSize) {
+    final episodeValues = episodeList.values.toList();
+    return List.generate(
+        (episodeValues.length / chunkSize).ceil(),
+        (index) => episodeValues.sublist(
+              index * chunkSize,
+              (index + 1) * chunkSize > episodeValues.length
+                  ? episodeValues.length
+                  : (index + 1) * chunkSize,
+            ));
+  }
+
+  RxInt _findSelectedChunkIndex(
+      List<List<Episode>> chunks, String targetEpisodeNumber) {
+    for (var chunkIndex = 0; chunkIndex < chunks.length; chunkIndex++) {
+      if (chunks[chunkIndex]
+          .any((episode) => episode.number == targetEpisodeNumber)) {
+        return chunkIndex.obs;
+      }
+    }
+    return 0.obs;
   }
 
   Widget _buildWrongTitle() {
@@ -261,83 +243,41 @@ class _WatchPageState extends State<WatchPage> {
   }
 
   List<Widget> _buildYouTubeButton() {
+    if (widget.mediaData.anime?.youtube == null ||
+        !PrefManager.getVal(PrefName.showYtButton)) {
+      return [];
+    }
+
     return [
-      if (widget.mediaData.anime?.youtube != null &&
-          PrefManager.getVal(PrefName.showYtButton)) ...[
-        SizedBox(
-          height: 48,
-          child: ElevatedButton(
-            onPressed: () =>
-                openLinkInBrowser(widget.mediaData.anime!.youtube!),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFFFF0000),
-              padding: EdgeInsets.zero,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12.0),
-              ),
-            ),
-            child: const Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.play_circle_fill,
-                  color: Colors.white,
-                ),
-                SizedBox(width: 8),
-                Text(
-                  'Play on YouTube',
-                  style: TextStyle(
+      SizedBox(
+        height: 48,
+        child: ElevatedButton(
+          onPressed: () => openLinkInBrowser(widget.mediaData.anime!.youtube!),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: const Color(0xFFFF0000),
+            padding: EdgeInsets.zero,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12.0)),
+          ),
+          child: const Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(Icons.play_circle_fill, color: Colors.white),
+              SizedBox(width: 8),
+              Text(
+                'Play on YouTube',
+                style: TextStyle(
                     fontFamily: 'Poppins',
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  maxLines: 2,
-                ),
-              ],
-            ),
+                    overflow: TextOverflow.ellipsis),
+                maxLines: 2,
+              ),
+            ],
           ),
         ),
-        const SizedBox(height: 32),
-      ],
+      ),
+      const SizedBox(height: 32),
     ];
   }
 }
-/*
-var dialog = CustomBottomDialog(
-  title: 'Select episode',
-  viewList: [
-    FutureBuilder<List<Video>>(
-      future: getVideo(
-          source: source!,
-          url: chapters[index].url ?? ''),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState ==
-            ConnectionState.waiting) {
-          return const Center(
-              child: CircularProgressIndicator());
-        } else if (snapshot.hasError) {
-          return Center(
-              child: Text('Error: ${snapshot.error}'));
-        } else if (!snapshot.hasData ||
-            snapshot.data!.isEmpty) {
-          return const Center(
-              child: Text('No episodes found.'));
-        }
-        var episodeList = snapshot.data!;
-        return Column(
-          children: [
-            for (var episode in episodeList)
-              ListTile(
-                title: Text(episode.quality),
-                onTap: () {
-                  openLinkInBrowser(episode.url);
-                },
-              ),
-          ],
-        );
-      },
-    ),
-  ],
-);
-showCustomBottomDialog(context, dialog);*/

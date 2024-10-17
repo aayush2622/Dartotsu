@@ -70,7 +70,6 @@ class MediaGridState extends State<MediaAdaptor> {
   }
 
   Widget _buildStaggeredGrid() {
-
     return LayoutBuilder(
       builder: (context, constraints) {
         final parentWidth = constraints.maxWidth;

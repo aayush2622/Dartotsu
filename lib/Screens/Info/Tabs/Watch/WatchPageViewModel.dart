@@ -35,6 +35,7 @@ class WatchPageViewModel extends GetxController {
     anifyEpisodeList.value = null;
     kitsuEpisodeList.value = null;
     fillerEpisodesList.value = null;
+    episodeDataLoaded.value = false;
   }
 
   Future<void> searchMedia(Source source, media mediaData) async {
@@ -154,15 +155,13 @@ class WatchPageViewModel extends GetxController {
           }) ?? [],
     );
   }
-
-  Future<void> getAnifyEpisodes(media mediaData) async {
-    var res = await Anify.fetchAndParseMetadata(mediaData);
-    anifyEpisodeList.value ??= res;
-  }
-
-  Future<void> getKitsuEpisodes(media mediaData) async {
-    var res = await Kitsu.getKitsuEpisodesDetails(mediaData);
-    kitsuEpisodeList.value ??= res;
+  var episodeDataLoaded = false.obs;
+  Future<void> getEpisodeData(media mediaData) async {
+    var a = await Anify.fetchAndParseMetadata(mediaData);
+    var k = await Kitsu.getKitsuEpisodesDetails(mediaData);
+    anifyEpisodeList.value ??= a;
+    kitsuEpisodeList.value ??= k;
+    episodeDataLoaded.value = true;
   }
 
   Future<void> getFillerEpisodes(media mediaData) async {

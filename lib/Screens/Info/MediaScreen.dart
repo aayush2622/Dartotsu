@@ -23,7 +23,7 @@ class MediaInfoPage extends StatefulWidget {
 }
 
 class MediaInfoPageState extends State<MediaInfoPage> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 1;
   final _viewModel = Get.put(MediaPageViewModel());
   late media mediaData;
   late ScrollController _scrollController;
