@@ -26,14 +26,22 @@ class MediaInfoPageState extends State<MediaInfoPage> {
   int _selectedIndex = 0;
   final _viewModel = Get.put(MediaPageViewModel());
   late media mediaData;
+  late ScrollController _scrollController;
 
   @override
   void initState() {
     super.initState();
+    _scrollController = ScrollController();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _viewModel.reset();
     });
     load();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 
   Future<void> load() async {
@@ -43,8 +51,10 @@ class MediaInfoPageState extends State<MediaInfoPage> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: CustomScrollView(
+        controller: _scrollController,
         slivers: [
           SliverToBoxAdapter(child: _buildMediaSection()),
           SliverToBoxAdapter(child: _buildMediaDetails()),
@@ -77,7 +87,7 @@ class MediaInfoPageState extends State<MediaInfoPage> {
       index: _selectedIndex,
       children: [
         InfoPage(mediaData: mediaData),
-        WatchPage(mediaData: mediaData),
+        WatchPage(key: ValueKey(mediaData.id), mediaData: mediaData),
         const SizedBox(),
       ],
     );

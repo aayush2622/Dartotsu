@@ -15,7 +15,7 @@ class WrongTitleDialog extends StatefulWidget {
   final media mediaData;
   final Rxn<MManga?> selectedMedia;
   final Function(media, MManga?, Source, {bool selected}) saveShowResponse;
-  final Rxn<List<Episode>> episodeList;
+  final Rxn<Map<String, Episode>> episodeList;
   final Function(MManga, Source) getEpisode;
 
   const WrongTitleDialog({
@@ -123,13 +123,13 @@ class WrongTitleDialogState extends State<WrongTitleDialog> {
                       ))
                   .toList();
               return MediaAdaptor(
-                type: 0,
+                type: 3,
                 mediaList: mediaList,
                 onMediaTap: (i) {
                   setState(() {
                     widget.selectedMedia.value = list[i];
                     widget.saveShowResponse(widget.mediaData, list[i], widget.source, selected: true);
-                    widget.episodeList.value = [];
+                    widget.episodeList.value = null;
                     widget.getEpisode(list[i], widget.source);
                     Navigator.of(context).pop();
                   });

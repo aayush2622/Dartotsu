@@ -1,16 +1,17 @@
-
-
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 Widget cachedNetworkImage({
-  required String imageUrl,
+  required String? imageUrl,
   BoxFit? fit,
   double? width,
   double? height,
   Widget Function(BuildContext, String)? placeholder,
   Widget Function(BuildContext, String, Object)? errorWidget,
 }) {
+  if (imageUrl == null || imageUrl.isEmpty ) {
+    return Icon(Icons.image_not_supported,weight: width);
+  }
   return CachedNetworkImage(
     imageUrl: imageUrl,
     fit: fit,

@@ -70,38 +70,43 @@ class MediaGridState extends State<MediaAdaptor> {
   }
 
   Widget _buildStaggeredGrid() {
-    final screenWidth = MediaQuery.of(context).size.width;
-    var crossAxisCount = ((screenWidth) / 120).floor();
-    if (crossAxisCount < 1) crossAxisCount = 1;
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
-      child: StaggeredGrid.count(
-        crossAxisSpacing: 16,
-        crossAxisCount: crossAxisCount,
-        children: List.generate(
-          _mediaList.length,
-          (index) {
-            return GestureDetector(
-              onTap: () {
-                if (widget.onMediaTap != null) {
-                  widget.onMediaTap!(index);
-                } else {
-                  navigateToPage(context, MediaInfoPage(_mediaList[index]));
-                }
+
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final parentWidth = constraints.maxWidth;
+        var crossAxisCount = (parentWidth / 124).floor();
+        if (crossAxisCount < 1) crossAxisCount = 1;
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
+          child: StaggeredGrid.count(
+            crossAxisSpacing: 16,
+            crossAxisCount: crossAxisCount,
+            children: List.generate(
+              _mediaList.length,
+                  (index) {
+                return GestureDetector(
+                  onTap: () {
+                    if (widget.onMediaTap != null) {
+                      widget.onMediaTap!(index);
+                    } else {
+                      navigateToPage(context, MediaInfoPage(_mediaList[index]));
+                    }
+                  },
+                  onLongPress: () => settingsBottomSheet(context),
+                  child: SizedBox(
+                    width: 108,
+                    height: 250,
+                    child: MediaViewHolder(
+                      mediaInfo: _mediaList[index],
+                      isLarge: widget.isLarge,
+                    ),
+                  ),
+                );
               },
-              onLongPress: () => settingsBottomSheet(context),
-              child: SizedBox(
-                width: 102,
-                height: 250,
-                child: MediaViewHolder(
-                  mediaInfo: _mediaList[index],
-                  isLarge: widget.isLarge,
-                ),
-              ),
-            );
-          },
-        ),
-      ),
+            ),
+          ),
+        );
+      },
     );
   }
 

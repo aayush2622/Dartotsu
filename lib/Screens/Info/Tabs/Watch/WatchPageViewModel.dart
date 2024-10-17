@@ -5,6 +5,7 @@ import 'package:dantotsu/DataClass/Media.dart';
 import 'package:dantotsu/Preferences/HiveDataClasses/ShowResponse/ShowResponse.dart';
 import 'package:dantotsu/Preferences/PrefManager.dart';
 import 'package:dantotsu/Screens/Info/Tabs/Watch/Widgets/WrongTitle.dart';
+import 'package:dantotsu/api/EpisodeDetails/Anify/Anify.dart';
 import 'package:dantotsu/api/Mangayomi/Eval/dart/model/m_chapter.dart';
 import 'package:dantotsu/api/Mangayomi/Search/get_detail.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,8 @@ import 'package:fuzzywuzzy/fuzzywuzzy.dart';
 import 'package:get/get.dart';
 
 import '../../../../Widgets/CustomBottomDialog.dart';
+import '../../../../api/EpisodeDetails/Jikan/Jikan.dart';
+import '../../../../api/EpisodeDetails/Kitsu/Kitsu.dart';
 import '../../../../api/Mangayomi/Eval/dart/model/m_manga.dart';
 import '../../../../api/Mangayomi/Model/Source.dart';
 import '../../../../api/Mangayomi/Search/search.dart';
@@ -20,12 +23,18 @@ import 'Functions/ParseChapterNumber.dart';
 class WatchPageViewModel extends GetxController {
   var selectedMedia = Rxn<MManga?>(null);
   var status = Rxn<String>(null);
-  var episodeList = Rxn<List<Episode>>(null);
+  var episodeList = Rxn<Map<String, Episode>>(null);
+  var anifyEpisodeList = Rxn<Map<String, Episode>>(null);
+  var kitsuEpisodeList = Rxn<Map<String, Episode>>(null);
+  var fillerEpisodesList = Rxn<Map<String, Episode>>(null);
 
   reset() {
     selectedMedia.value = null;
     status.value = null;
     episodeList.value = null;
+    anifyEpisodeList.value = null;
+    kitsuEpisodeList.value = null;
+    fillerEpisodesList.value = null;
   }
 
   Future<void> searchMedia(Source source, media mediaData) async {
@@ -138,8 +147,27 @@ class WatchPageViewModel extends GetxController {
     var m = await getDetail(url: media.link!, source: source);
 
     var chapters = m.chapters;
-    episodeList.value =
-        chapters?.reversed.map((e) => MChapterToEpisode(e, media)).toList();
+    episodeList.value = Map.fromEntries(
+      chapters?.reversed.map((e) {
+            final episode = MChapterToEpisode(e, media);
+            return MapEntry(episode.number, episode);
+          }) ?? [],
+    );
+  }
+
+  Future<void> getAnifyEpisodes(media mediaData) async {
+    var res = await Anify.fetchAndParseMetadata(mediaData);
+    anifyEpisodeList.value ??= res;
+  }
+
+  Future<void> getKitsuEpisodes(media mediaData) async {
+    var res = await Kitsu.getKitsuEpisodesDetails(mediaData);
+    kitsuEpisodeList.value ??= res;
+  }
+
+  Future<void> getFillerEpisodes(media mediaData) async {
+    var res = await Jikan.getEpisodes(mediaData);
+    fillerEpisodesList.value ??= res;
   }
 
   Future<void> wrongTitle(
@@ -154,6 +182,7 @@ class WatchPageViewModel extends GetxController {
 
     showCustomBottomDialog(context, dialog);
   }
+
 }
 
 Episode MChapterToEpisode(MChapter chapter, MManga? selectedMedia) {

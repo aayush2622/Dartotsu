@@ -1,7 +1,7 @@
 import 'package:dantotsu/Functions/Function.dart';
 import 'package:dantotsu/Screens/Info/Tabs/Watch/Widgets/SourceSelector.dart';
+import 'package:dantotsu/Widgets/CachedNetworkImage.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 
 import '../../../../DataClass/Episode.dart';
@@ -13,23 +13,36 @@ import '../../../../api/Mangayomi/Model/Source.dart';
 import '../../Widgets/Releasing.dart';
 import 'WatchPageViewModel.dart';
 
-class WatchPage extends ConsumerStatefulWidget {
+class WatchPage extends StatefulWidget {
   final media mediaData;
 
   const WatchPage({super.key, required this.mediaData});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _WatchPageState();
+  State<StatefulWidget> createState() => _WatchPageState();
 }
 
-class _WatchPageState extends ConsumerState<WatchPage> {
+class _WatchPageState extends State<WatchPage> {
   Source? source;
-  final _viewModel = Get.put(WatchPageViewModel());
+  late WatchPageViewModel _viewModel;
 
   @override
   void initState() {
     super.initState();
-    _viewModel.reset();
+    _viewModel =
+        Get.put(WatchPageViewModel(), tag: widget.mediaData.id.toString());
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _viewModel.reset();
+      load();
+    });
+  }
+
+  void load() async {
+    if (widget.mediaData.anime != null) {
+      _viewModel.getAnifyEpisodes(widget.mediaData);
+      _viewModel.getKitsuEpisodes(widget.mediaData);
+      _viewModel.getFillerEpisodes(widget.mediaData);
+    }
   }
 
   void onSourceChange(Source source) {
@@ -85,24 +98,47 @@ class _WatchPageState extends ConsumerState<WatchPage> {
 
   Widget _buildEpisodeList() {
     return Obx(() {
-      var chapters = _viewModel.episodeList.value;
-
-      if (chapters == null || chapters.isEmpty) {
+      var episodeList = _viewModel.episodeList.value;
+      if (episodeList == null || episodeList.isEmpty) {
         return const Center(child: CircularProgressIndicator());
       }
-      final total = chapters.length;
+      episodeList.forEach((number, episode) {
+        episode.title = _viewModel.anifyEpisodeList.value?[number]?.title ??
+            _viewModel.kitsuEpisodeList.value?[number]?.title ??
+            episode.title ??
+            '';
+
+        episode.desc = _viewModel.anifyEpisodeList.value?[number]?.desc ??
+            _viewModel.kitsuEpisodeList.value?[number]?.desc ??
+            episode.desc ??
+            '';
+
+        episode.thumb = _viewModel.anifyEpisodeList.value?[number]?.thumb ??
+            _viewModel.kitsuEpisodeList.value?[number]?.thumb ??
+            episode.thumb ??
+            widget.mediaData.banner ??
+            widget.mediaData.cover;
+
+        episode.filler =
+            _viewModel.fillerEpisodesList.value?[number]?.filler == true;
+      });
+
+      final total = episodeList.values.length;
       final divisions = total / 10;
       var chunkSize = (divisions < 25)
           ? 25
           : (divisions < 50)
-          ? 50
-          : 100;
+              ? 50
+              : 100;
       List<List<Episode>> chunks = [];
-      for (var i = 0; i < chapters.length; i += chunkSize) {
-        chunks.add(chapters.sublist(i,
-            i + chunkSize > chapters.length ? chapters.length : i + chunkSize));
+      var episodeValues = episodeList.values.toList();
+      for (var i = 0; i < episodeValues.length; i += chunkSize) {
+        chunks.add(episodeValues.sublist(
+            i,
+            i + chunkSize > episodeValues.length
+                ? episodeValues.length
+                : i + chunkSize));
       }
-
       final RxInt selectedChunkIndex = 0.obs;
       String targetEpisodeNumber = widget.mediaData.userProgress.toString();
 
@@ -123,29 +159,33 @@ class _WatchPageState extends ConsumerState<WatchPage> {
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Obx(
-                () => Row(
-                  children: List.generate(chunks.length, (index) {
-                    String f = chunks[index].first.number;
-                    String l = chunks[index].last.number;
-                    return Padding(
-                      padding:  EdgeInsets.only(left: index == 0 ? 32.0 : 6.0, right: index == chunks.length - 1 ? 32.0 : 6.0),
-                      child: ChoiceChip(
-                        showCheckmark: false,
-                        label: Text('$f - $l',
-                            style: const TextStyle(
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.bold,
-                            )),
-                        selected: selectedChunkIndex.value == index,
-                        onSelected: (bool selected) {
-                          if (selected) {
-                            selectedChunkIndex.value = index;
-                          }
-                        },
-                      ),
-                    );
-                  }),
-                ),
+                () => chunks.length > 1
+                    ? Row(
+                        children: List.generate(chunks.length, (index) {
+                          String f = chunks[index].first.number;
+                          String l = chunks[index].last.number;
+                          return Padding(
+                            padding: EdgeInsets.only(
+                                left: index == 0 ? 32.0 : 6.0,
+                                right: index == chunks.length - 1 ? 32.0 : 6.0),
+                            child: ChoiceChip(
+                              showCheckmark: false,
+                              label: Text('$f - $l',
+                                  style: const TextStyle(
+                                    fontFamily: 'Poppins',
+                                    fontWeight: FontWeight.bold,
+                                  )),
+                              selected: selectedChunkIndex.value == index,
+                              onSelected: (bool selected) {
+                                if (selected) {
+                                  selectedChunkIndex.value = index;
+                                }
+                              },
+                            ),
+                          );
+                        }),
+                      )
+                    : const SizedBox(),
               ),
             ),
           ),
@@ -162,8 +202,30 @@ class _WatchPageState extends ConsumerState<WatchPage> {
                         // Handle tap action
                       },
                       child: ListTile(
-                        title: Text(episode.title ?? ''),
-                        subtitle: Text(episode.number),
+                        leading: cachedNetworkImage(
+                          imageUrl: episode.thumb,
+                          width: 70,
+                          height: 80,
+                          fit: BoxFit.cover,
+                        ),
+                        title: Text(
+                          episode.title ?? 'Episode ${episode.number}',
+                          style: TextStyle(
+                            color: episode.filler == true
+                                ? Colors.black
+                                : Colors.grey,
+                          ),
+                        ),
+                        subtitle: Text(
+                          episode.desc ?? '',
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            color: episode.filler == true
+                                ? Colors.black
+                                : Colors.grey,
+                          ),
+                        ),
                       ),
                     );
                   },
