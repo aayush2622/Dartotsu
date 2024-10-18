@@ -10,6 +10,7 @@ import '../../DataClass/Media.dart';
 import '../../Functions/Function.dart';
 import '../../Theme/ThemeProvider.dart';
 import '../../Widgets/CachedNetworkImage.dart';
+import '../../Widgets/ScrollConfig.dart';
 import 'MediaScreenViewModel.dart';
 import 'Tabs/Watch/WatchPage.dart';
 
@@ -23,39 +24,36 @@ class MediaInfoPage extends StatefulWidget {
 }
 
 class MediaInfoPageState extends State<MediaInfoPage> {
-  int _selectedIndex = 1;
+  int _selectedIndex = 0;
   final _viewModel = Get.put(MediaPageViewModel());
   late media mediaData;
-  late ScrollController _scrollController;
 
   @override
   void initState() {
     super.initState();
-    _scrollController = ScrollController();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _viewModel.reset();
     });
     load();
   }
 
-  @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
-  }
+  var loaded = false;
 
   Future<void> load() async {
     mediaData = widget.mediaData;
     mediaData = await _viewModel.getMediaDetails(widget.mediaData);
+    setState(() {
+      loaded = true;
+    });
+
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-      body: CustomScrollView(
-        controller: _scrollController,
-        slivers: [
+      body: CustomScrollConfig(
+        context,
+        children: [
           SliverToBoxAdapter(child: _buildMediaSection()),
           SliverToBoxAdapter(child: _buildMediaDetails()),
           SliverList(
@@ -63,15 +61,11 @@ class MediaInfoPageState extends State<MediaInfoPage> {
               [
                 Padding(
                   padding: const EdgeInsets.symmetric(),
-                  child: Obx(() {
-                    return _viewModel.dataLoaded.value
-                        ? Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [_buildSliverContent()],
-                          )
-                        : const Center(child: CircularProgressIndicator());
-                  }),
+                  child: loaded ? Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [_buildSliverContent()],
+                  ) : const Center(child: CircularProgressIndicator()),
                 ),
               ],
             ),

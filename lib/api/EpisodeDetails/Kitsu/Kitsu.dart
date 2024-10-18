@@ -7,7 +7,7 @@ import 'package:json_annotation/json_annotation.dart';
 import '../../../DataClass/Episode.dart';
 import '../../../DataClass/Media.dart';
 
-part 'Kitsu.g.dart'; // For JSON serialization code generation
+part 'Kitsu.g.dart';
 
 class Kitsu {
   static Future<KitsuResponse?> getKitsuData(String query) async {
