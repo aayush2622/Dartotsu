@@ -1,3 +1,3 @@
 # dantotsu-pc
-- just
+- jus
 - haa
