@@ -4,6 +4,7 @@
 
 list(APPEND FLUTTER_PLUGIN_LIST
   dynamic_color
+  flutter_inappwebview_windows
   flutter_qjs
   isar_flutter_libs
   permission_handler_windows

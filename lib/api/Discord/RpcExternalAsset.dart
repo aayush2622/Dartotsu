@@ -2,26 +2,23 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
-class RPCExternalAsset {
-  final String applicationId;
-  final String token;
+import '../../Preferences/PrefManager.dart';
+import '../../Preferences/Preferences.dart';
+import 'Discord.dart';
 
-  RPCExternalAsset({
-    required this.applicationId,
-    required this.token,
-
-  });
-
-  Future<String?> getDiscordUri(String imageUrl) async {
-    final String api = "https://discord.com/api/v9/applications/$applicationId/external-assets";
-    if (imageUrl.startsWith("mp:")) return imageUrl;
+extension DiscordUrlExtension on String {
+  Future<String?> getDiscordUrl() async {
+    var token = PrefManager.getVal(PrefName.discordToken);
+    if (token.isEmpty) return null;
+    const String api = "https://discord.com/api/v9/applications/$applicationId/external-assets";
+    if (startsWith("mp:")) return this;
     final response = await http.post(
       Uri.parse(api),
       headers: {
         'Authorization': token,
         'Content-Type': 'application/json',
       },
-      body: jsonEncode({"urls": [imageUrl]}),
+      body: jsonEncode({"urls": [this]}),
     );
 
     if (response.statusCode == 200) {

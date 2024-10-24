@@ -21,8 +21,10 @@ abstract class BaseMediaScreen<T extends StatefulWidget> extends State<T> {
   @override
   void initState() {
     super.initState();
-    viewModel.scrollController.addListener(viewModel.scrollListener);
-    _initialize();
+    if (mounted) {
+      viewModel.scrollController.addListener(viewModel.scrollListener);
+      _initialize();
+    }
   }
 
   bool running = true;
@@ -45,11 +47,6 @@ abstract class BaseMediaScreen<T extends StatefulWidget> extends State<T> {
     await viewModel.loadAll();
   }
 
-  @override
-  void dispose() {
-    viewModel.scrollController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {

@@ -72,7 +72,7 @@ class MClient {
           [];
     } else {
       cookies = (await flutter_inappwebview.CookieManager.instance()
-              .getCookies(url: Uri.parse(url)))
+              .getCookies(url: flutter_inappwebview.WebUri(url)))
           .map((e) => "${e.name}=${e.value}")
           .toList();
     }

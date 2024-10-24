@@ -29,8 +29,7 @@ class _WatchPageState extends State<WatchPage> {
   @override
   void initState() {
     super.initState();
-    _viewModel =
-        Get.put(WatchPageViewModel(), tag: widget.mediaData.id.toString());
+    _viewModel = Get.put(WatchPageViewModel(), tag: widget.mediaData.id.toString());
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _viewModel.reset();
       loadEpisodes();
@@ -99,8 +98,10 @@ class _WatchPageState extends State<WatchPage> {
       if (episodeList == null || episodeList.isEmpty ) {
         return const Center(child: CircularProgressIndicator());
       }
-      if (!_viewModel.episodeDataLoaded.value) {
-        return const Center(child: CircularProgressIndicator());
+      if (widget.mediaData.anime != null) {
+        if (!_viewModel.episodeDataLoaded.value) {
+          return const Center(child: CircularProgressIndicator());
+        }
       }
 
       updateEpisodeDetails(episodeList);
@@ -120,7 +121,7 @@ class _WatchPageState extends State<WatchPage> {
             child: Obx(() => EpisodeAdaptor(
                   type: 0,
                   episodeList: chunks[selectedChunkIndex.value],
-                  lastWatched: widget.mediaData.userProgress,
+                  mediaData: widget.mediaData,
                 )),
           ),
         ],

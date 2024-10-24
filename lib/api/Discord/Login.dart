@@ -1,19 +1,19 @@
-import 'package:dantotsu/Functions/Function.dart';
 import 'package:dantotsu/api/Discord/Discord.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:webview_windows/webview_windows.dart';
 
+import '../../Functions/Function.dart';
 import 'DiscordService.dart';
 
-class Login extends StatefulWidget {
-  const Login({super.key});
+class WindowsLogin extends StatefulWidget {
+  const WindowsLogin({super.key});
 
   @override
-  LoginState createState() => LoginState();
+  WindowsLoginState createState() => WindowsLoginState();
 }
 
-class LoginState extends State<Login> {
+class WindowsLoginState extends State<WindowsLogin> {
   final WebviewController _controller = WebviewController();
   bool _isWebViewReady = false;
   String? _errorMessage;
@@ -33,9 +33,7 @@ class LoginState extends State<Login> {
         }
       });
       await _controller.loadUrl('https://discord.com/login');
-      setState(() {
-        _isWebViewReady = true;
-      });
+      setState(() => _isWebViewReady = true);
     } catch (e) {
       _handleError('WebView initialization failed: $e');
     }
@@ -62,18 +60,16 @@ class LoginState extends State<Login> {
   void _login(String token) async {
     if (_gotToken) return;
     _gotToken = true;
-    snackString("Getting Data");
     Discord.saveToken(token);
+    snackString("Getting Data");
     DiscordService.testRpc();
-    Navigator.of(context).pop(context);
+    Navigator.of(context).pop();
   }
 
   void _handleError(String message) {
-    setState(() {
-      _errorMessage = message;
-    });
+    setState(() => _errorMessage = message);
     snackString(message);
-    Navigator.of(context).pop(context);
+    Navigator.of(context).pop();
   }
 
   @override
@@ -90,64 +86,89 @@ class LoginState extends State<Login> {
   }
 }
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class MobileLogin extends StatefulWidget {
+  const MobileLogin({super.key});
 
   @override
-  LoginPageState createState() => LoginPageState();
+  MobileLoginState createState() => MobileLoginState();
 }
 
-class LoginPageState extends State<LoginPage> {
+class MobileLoginState extends State<MobileLogin> {
   late final WebViewController _controller;
+  bool _isWebViewReady = false;
+  String? _errorMessage;
 
   @override
   void initState() {
     super.initState();
-    _controller = WebViewController()
-      ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..setNavigationDelegate(
-        NavigationDelegate(
-          onProgress: (int progress) {},
-          onPageStarted: (String url) {},
-          onPageFinished: (String url) async {
-            if (url != 'https://discord.com/login') {
-              await Future.delayed(const Duration(seconds: 2));
-              final result = await _controller.runJavaScriptReturningResult('''
+    _initializeWebView();
+  }
+
+  Future<void> _initializeWebView() async {
+    try {
+      _controller = WebViewController()
+        ..setJavaScriptMode(JavaScriptMode.unrestricted)
+        ..setNavigationDelegate(
+          NavigationDelegate(
+            onPageFinished: (String url) async {
+              if (url != 'https://discord.com/login') {
+                _extractToken();
+              }
+            },
+            onNavigationRequest: (NavigationRequest request) {
+              if (request.url.startsWith('https://discord.com/login')) {
+                return NavigationDecision.prevent;
+              }
+              return NavigationDecision.navigate;
+            },
+          ),
+        )
+        ..loadRequest(Uri.parse('https://discord.com/login'));
+      setState(() => _isWebViewReady = true);
+    } catch (e) {
+      _handleError('WebView initialization failed: $e');
+    }
+  }
+
+  Future<void> _extractToken() async {
+    await Future.delayed(const Duration(seconds: 2));
+    final result = (await _controller.runJavaScriptReturningResult('''
                   (function() {
-                    const wreq = (webpackChunkdiscord_app.push([[''],{},e=>{m=[];for(let c in e.c)m.push(e.c[c])}]),m).find(m=>m?.exports?.default?.getToken!==void 0).exports.default.getToken();
+                    const wreq = (webpackChunkdiscord_app.push([[''],{},e=>{m=[];for(let c in e.c)m.push(e.c[c])}]),m)
+                      .find(m=>m?.exports?.default?.getToken!==void 0).exports.default.getToken();
                     return wreq;
                   })();
-                ''');
-              final String? token = result as String?;
-              if (token != null && token != 'null') {
-                _login(token.trim().replaceAll('"', ''));
-              } else {
-                snackString("Getting Data");
-              }
-            }
-          },
-          onHttpError: (HttpResponseError error) {},
-          onWebResourceError: (WebResourceError error) {},
-          onNavigationRequest: (NavigationRequest request) {
-            if (request.url.startsWith('https://discord.com/login')) {
-              return NavigationDecision.prevent;
-            }
-            return NavigationDecision.navigate;
-          },
-        ),
-      )
-      ..loadRequest(Uri.parse('https://discord.com/login'));
+                ''')).toString();
+
+    if (result.isNotEmpty && result != 'null') {
+      _login(result.trim().replaceAll('"', ''));
+    } else {
+      _handleError('Failed to retrieve token');
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: WebViewWidget(controller: _controller),
+      body: _isWebViewReady
+          ? WebViewWidget(controller: _controller)
+          : Center(
+              child: _errorMessage != null
+                  ? Text(_errorMessage!)
+                  : const CircularProgressIndicator()),
     );
   }
+
+  void _handleError(String message) {
+    setState(() => _errorMessage = message);
+    snackString(message);
+    Navigator.of(context).pop();
+  }
+
   void _login(String token) async {
     snackString("Logged in successfully");
     Discord.saveToken(token);
+    snackString("Getting Data");
     DiscordService.testRpc();
     Navigator.of(context).pop();
   }

@@ -2,14 +2,20 @@ import 'package:flutter/widgets.dart';
 
 import '../../Animation/ScaleAnimation.dart';
 import '../../DataClass/Episode.dart';
+import '../../DataClass/Media.dart';
+import '../../api/Discord/Discord.dart';
 import 'EpisodeListViewHolder.dart';
 
 class EpisodeAdaptor extends StatefulWidget {
   final int type;
   final List<Episode> episodeList;
-  final int? lastWatched;
+  final media mediaData;
+
   const EpisodeAdaptor(
-      {super.key, required this.type, required this.episodeList, required this.lastWatched});
+      {super.key,
+      required this.type,
+      required this.episodeList,
+      required this.mediaData});
 
   @override
   EpisodeAdaptorState createState() => EpisodeAdaptorState();
@@ -56,8 +62,11 @@ class EpisodeAdaptorState extends State<EpisodeAdaptor> {
           itemCount: episodeList.length,
           itemBuilder: (context, index) {
             bool isWatched;
-            if (widget.lastWatched != null && widget.lastWatched! > 0) {
-              isWatched = widget.lastWatched! >= int.parse(episodeList[index].number);
+            if (widget.mediaData.userProgress != null &&
+                widget.mediaData.userProgress! > 0) {
+              isWatched =
+                  double.parse(widget.mediaData.userProgress!.toString()) >=
+                      double.parse(episodeList[index].number);
             } else {
               isWatched = false;
             }
@@ -68,15 +77,19 @@ class EpisodeAdaptorState extends State<EpisodeAdaptor> {
               finalOffset: Offset.zero,
               duration: const Duration(milliseconds: 200),
               child: GestureDetector(
-                onTap: () {},
+                onTap: () => Discord.setRpc(
+                  widget.mediaData,
+                  episodeList[index],
+                  episodeList.last.number,
+                ),
                 child: Container(
                   width: double.infinity,
                   margin:
-                  const EdgeInsets.symmetric(horizontal: 18, vertical: 4),
+                      const EdgeInsets.symmetric(horizontal: 18, vertical: 4),
                   child: Opacity(
-                  opacity: isWatched ? 0.5 : 1.0,
-                  child: EpisodeListView(episode: episodeList[index]),
-                ),
+                    opacity: isWatched ? 0.5 : 1.0,
+                    child: EpisodeListView(episode: episodeList[index]),
+                  ),
                 ),
               ),
             );
@@ -86,4 +99,3 @@ class EpisodeAdaptorState extends State<EpisodeAdaptor> {
     );
   }
 }
-

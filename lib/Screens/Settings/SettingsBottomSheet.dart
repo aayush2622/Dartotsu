@@ -102,8 +102,7 @@ class BottomSheetContentState extends State<BottomSheetContent> {
                             ),
                           ] else ...[
                             GestureDetector(
-                              onTap: () =>
-                                  navigateToPage(context, const LoginScreen()),
+                              onTap: () => Anilist.login(context),
                               child: Text(
                                 'Login',
                                 style: TextStyle(

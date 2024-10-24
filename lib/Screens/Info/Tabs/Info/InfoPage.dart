@@ -28,8 +28,7 @@ class InfoPageState extends State<InfoPage> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context).colorScheme;
     var type = widget.mediaData.anime != null ? "ANIME" : "MANGA";
-    return  SingleChildScrollView(
-        child: Column(
+    return  Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -74,8 +73,7 @@ class InfoPageState extends State<InfoPage> {
               ),
             const SizedBox(height: 64.0),
           ],
-        ),
-      );
+        );
   }
 
   Widget _buildWithPadding(List<Widget> widgets) {

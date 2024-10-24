@@ -1,4 +1,3 @@
-import 'package:dantotsu/Widgets/AlertDialogBuilder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:icons_plus/icons_plus.dart';
@@ -38,33 +37,11 @@ class LoginScreen extends StatelessWidget {
             const SizedBox(height: 38),
             _buildLoginButton(
               context,
-              onPressed: () => openLinkInBrowser(
-                  'https://anilist.co/api/v2/oauth/authorize?client_id=14959&response_type=token'),
+              onPressed: () => Anilist.login(context),
               icon: 'assets/svg/anilist.svg',
-              label: 'Login from Browser',
+              label: 'Login',
             ),
-            const SizedBox(height: 16),
-            _buildLoginButton(
-              context,
-              onPressed: () {
-                openLinkInBrowser(
-                    'https://anilist.co/api/v2/oauth/authorize?client_id=21003&response_type=token');
-                var token = '';
-                AlertDialogBuilder(context)
-                  ..setTitle('Login with token')
-                  ..setMessage('Please paste the token here')
-                  ..setCustomView(
-                    TextField(
-                      onChanged: (value) => (token = value),
-                    ),
-                  )
-                  ..setPositiveButton('Ok', () async => Anilist.saveToken(token))
-                  ..setNegativeButton('Cancel', null)
-                  ..show();
-              },
-              icon: 'assets/svg/anilist.svg',
-              label: 'Login with token',
-            ),
+
             const SizedBox(height: 24),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,

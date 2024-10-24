@@ -33,7 +33,7 @@ class EpisodeListView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _buildEpisodeHeader(context, theme),
-          if (episode.desc != null)
+          if (episode.desc != null && episode.desc!.isNotEmpty)
             _buildEpisodeDescription(theme),
         ],
       ),

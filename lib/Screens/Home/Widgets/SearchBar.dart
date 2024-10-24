@@ -3,6 +3,7 @@ import 'package:dantotsu/Screens/Login/LoginScreen.dart';
 import 'package:flutter/material.dart';
 
 import '../../../Functions/Function.dart';
+import '../../../api/Anilist/Anilist.dart';
 import '../../Settings/SettingsBottomSheet.dart';
 import 'AvtarWidget.dart';
 
@@ -23,8 +24,7 @@ class MediaSearchBar extends StatelessWidget {
         children: [
           Expanded(
             child: GestureDetector(
-              onTap: () => navigateToPage(context, const LoginScreen())
-              ,
+              onTap: () => Anilist.login(context),
               child: AbsorbPointer(
                 child: TextField(
                   decoration: InputDecoration(

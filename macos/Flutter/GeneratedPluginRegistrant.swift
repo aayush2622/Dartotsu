@@ -6,6 +6,7 @@ import FlutterMacOS
 import Foundation
 
 import dynamic_color
+import flutter_inappwebview_macos
 import flutter_local_notifications
 import flutter_qjs
 import isar_flutter_libs
@@ -15,7 +16,7 @@ import protocol_handler_macos
 import screen_brightness_macos
 import screen_retriever
 import share_plus
-import sqflite
+import sqflite_darwin
 import universal_video_controls
 import url_launcher_macos
 import video_player_avfoundation
@@ -25,6 +26,7 @@ import window_manager
 
 func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
   DynamicColorPlugin.register(with: registry.registrar(forPlugin: "DynamicColorPlugin"))
+  InAppWebViewFlutterPlugin.register(with: registry.registrar(forPlugin: "InAppWebViewFlutterPlugin"))
   FlutterLocalNotificationsPlugin.register(with: registry.registrar(forPlugin: "FlutterLocalNotificationsPlugin"))
   FlutterQjsPlugin.register(with: registry.registrar(forPlugin: "FlutterQjsPlugin"))
   IsarFlutterLibsPlugin.register(with: registry.registrar(forPlugin: "IsarFlutterLibsPlugin"))

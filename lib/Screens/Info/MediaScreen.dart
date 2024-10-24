@@ -93,8 +93,12 @@ class MediaInfoPageState extends State<MediaInfoPage> {
         BottomNavigationBarItem(icon: Icon(Icons.info), label: 'INFO'),
         BottomNavigationBarItem(
             icon: Icon(Icons.movie_filter_rounded), label: 'WATCH'),
-        BottomNavigationBarItem(icon: Icon(Icons.comment), label: 'COMMENTS'),
+        BottomNavigationBarItem(icon: Icon(Icons.chat_bubble_rounded), label: 'COMMENTS'),
       ],
+      selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
+      unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
+      iconSize: 26,
+
       currentIndex: _selectedIndex,
       onTap: (index) {
         setState(() {

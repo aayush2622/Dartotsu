@@ -40,6 +40,7 @@ class WatchPageViewModel extends GetxController {
 
   Future<void> searchMedia(Source source, media mediaData) async {
     selectedMedia.value = null;
+    episodeList.value = null;
     var saved = _loadShowResponse(source, mediaData);
     if (saved != null) {
       var response = MManga(
@@ -53,7 +54,6 @@ class WatchPageViewModel extends GetxController {
       return;
     }
     MManga? response;
-    debugPrint("Searching : ${mediaData.mainName()}");
     status.value = "Searching : ${mediaData.mainName()}";
     final mediaFuture = search(
       source: source,
@@ -81,7 +81,6 @@ class WatchPageViewModel extends GetxController {
         ratio(response.name!.toLowerCase(),
                 mediaData.mainName().toLowerCase()) <
             100) {
-      debugPrint("Searching : ${mediaData.nameRomaji}");
       status.value = "Searching : ${mediaData.nameRomaji}";
       final mediaFuture = search(
         source: source,
@@ -102,8 +101,7 @@ class WatchPageViewModel extends GetxController {
           : [];
       var closestRomaji = sortedRomajiResults.firstOrNull;
       if (response == null) {
-        debugPrint(
-            "No exact match found in results. Using closest match from RomajiResults.");
+
         response = closestRomaji;
       } else {
         var romajiRatio = ratio(closestRomaji?.name?.toLowerCase() ?? '',
@@ -111,8 +109,6 @@ class WatchPageViewModel extends GetxController {
         var mainNameRatio = ratio(
             response.name!.toLowerCase(), mediaData.mainName().toLowerCase());
         if (romajiRatio > mainNameRatio) {
-          debugPrint(
-              "Romaji match is better than main name match. Using Romaji match.");
           response = closestRomaji;
         }
       }

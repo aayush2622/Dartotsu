@@ -5,8 +5,11 @@ import 'package:http/http.dart' as http;
 import '../../Functions/Function.dart';
 import '../../Preferences/PrefManager.dart';
 import '../../Preferences/Preferences.dart';
+import '../../Widgets/CustomBottomDialog.dart';
 import 'AnilistMutations.dart';
 import 'AnilistQueries.dart';
+import 'AnilistViewModel.dart';
+import 'Login.dart' as anilist_login;
 
 var Anilist = Get.put(_AnilistController());
 
@@ -88,7 +91,9 @@ class _AnilistController extends GetxController { // TODO: better login page
     isInitialized.value = false;
     Refresh.allButNot(1);
   }
-
+  void login(BuildContext context){
+    showCustomBottomDialog(context, anilist_login.login(context));
+  }
   void removeSavedToken() {
     token.value = '';
     username.value = '';
@@ -99,7 +104,11 @@ class _AnilistController extends GetxController { // TODO: better login page
     episodesWatched = null;
     chapterRead = null;
     unreadNotificationCount = 0;
+    AnilistHomeViewModel.resetPageData();
+
     PrefManager.removeVal(PrefName.anilistToken);
+    PrefManager.setCustomVal<String>("banner_ANIME_url", '');
+    PrefManager.setCustomVal<String>("banner_MANGA_url", '');
     run.value = true;
     isInitialized.value = false;
     Refresh.allButNot(1);
