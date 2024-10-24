@@ -77,11 +77,7 @@ class EpisodeAdaptorState extends State<EpisodeAdaptor> {
               finalOffset: Offset.zero,
               duration: const Duration(milliseconds: 200),
               child: GestureDetector(
-                onTap: () => Discord.setRpc(
-                  widget.mediaData,
-                  episodeList[index],
-                  episodeList.last.number,
-                ),
+                onTap: () {},
                 child: Container(
                   width: double.infinity,
                   margin:
