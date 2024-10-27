@@ -115,3 +115,66 @@ jobs:
         uses: softprops/action-gh-release@master
         with:
             files: build/macos/Build/Products/Release/Dantotsu_MacOS_${{github.ref_name}}.zip
+  upload_download_url:
+    runs-on: ubuntu-latest
+    needs: [build_android,build_windows,build_linux,build_ios_and_macos]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install GitHub CLI
+        run: |
+          sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key C99B11DEB97541F0
+          curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+          echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+          sudo apt update
+          sudo apt install gh -y
+
+      - name: Authenticate GitHub CLI
+        run: echo "${{secrets.FINE_GRAIN_TOKEN}}" | gh auth login --with-token
+
+      - name: Fetch latest release assets with gh
+        id: fetch_assets
+        run: |
+          gh release view --repo ${{github.repository}} ${{github.ref_name}} --json assets --jq '.assets[].url' > asset_links.txt
+
+      - name: Print fetched List
+        run: cat asset_links.txt
+
+      - name: Read, sort, and format links from the file
+        id: format_links
+        run: |
+          # Read links from the file
+          LINKS=$(cat asset_links.txt | sort)
+          
+          # Initialize the message
+          MESSAGE="**Dantotsu ${{github.ref_name}} Downloads:**\n\n"
+          
+          # Loop through each link and format them
+          while IFS= read -r LINK; do
+            if [[ $LINK == *"Android"* ]]; then
+              MESSAGE+="• [Android]($LINK)\n"
+            elif [[ $LINK == *"IOS"* ]]; then
+              MESSAGE+="• [iOS]($LINK)\n"
+            elif [[ $LINK == *"Linux"* ]]; then
+              MESSAGE+="• [Linux]($LINK)\n"
+            elif [[ $LINK == *"MacOS"* ]]; then
+              MESSAGE+="• [macOS]($LINK)\n"
+            elif [[ $LINK == *"Windows"* ]]; then
+              MESSAGE+="• [Windows]($LINK)\n"
+            fi
+          done <<< "$LINKS"
+
+          # Save the message to an environment variable
+          echo "MESSAGE=$MESSAGE" >> $GITHUB_ENV
+      - name: Send message to Discord
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          MESSAGE: ${{ env.MESSAGE }}
+        run: |
+          # Send the message to Discord using the webhook
+          curl -H "Content-Type: application/json" \
+            -X POST \
+            -d "{\"content\": \"$MESSAGE\"}" \
+            $DISCORD_WEBHOOK_URL
+          
