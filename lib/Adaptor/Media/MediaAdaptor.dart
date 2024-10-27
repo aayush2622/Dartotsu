@@ -114,35 +114,37 @@ class MediaGridState extends State<MediaAdaptor> {
       duration: const Duration(milliseconds: 500),
       child: Container(
         constraints: const BoxConstraints(maxHeight: double.infinity),
-        child: ListView.builder(
-          shrinkWrap: true,
-          controller: widget.scrollController,
-          itemCount: _mediaList.length,
-          itemBuilder: (context, index) {
-            return SlideAndScaleAnimation(
-              initialScale: 0.0,
-              finalScale: 1.0,
-              initialOffset: const Offset(1.0, 0.0),
-              finalOffset: Offset.zero,
-              duration: const Duration(milliseconds: 200),
-              child: GestureDetector(
-                onTap: () {
-                  if (widget.onMediaTap != null) {
-                    widget.onMediaTap!(index);
-                  } else {
-                    navigateToPage(context, MediaInfoPage(_mediaList[index]));
-                  }
-                },
-                onLongPress: () => settingsBottomSheet(context),
-                child: Container(
-                  width: double.infinity,
-                  margin:
-                      const EdgeInsets.symmetric(horizontal: 18, vertical: 4),
-                  child: MediaPageLargeViewHolder(_mediaList[index]),
+        child: PrimaryScrollController(
+          controller: widget.scrollController ?? ScrollController(),
+          child: ListView.builder(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: _mediaList.length,
+            itemBuilder: (context, index) {
+              return SlideAndScaleAnimation(
+                initialScale: 0.0,
+                finalScale: 1.0,
+                initialOffset: const Offset(0.0, -1.0),
+                finalOffset: const Offset(0.0, 0.0),
+                duration: const Duration(milliseconds: 200),
+                child: GestureDetector(
+                  onTap: () {
+                    if (widget.onMediaTap != null) {
+                      widget.onMediaTap!(index);
+                    } else {
+                      navigateToPage(context, MediaInfoPage(_mediaList[index]));
+                    }
+                  },
+                  onLongPress: () => settingsBottomSheet(context),
+                  child: Container(
+                    width: double.infinity,
+                    margin: const EdgeInsets.symmetric(horizontal: 18, vertical: 4),
+                    child: MediaPageLargeViewHolder(_mediaList[index]),
+                  ),
                 ),
-              ),
-            );
-          },
+              );
+            },
+          ),
         ),
       ),
     );
