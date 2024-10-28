@@ -59,7 +59,7 @@ class MediaGridState extends State<MediaAdaptor> {
       case 0:
         return _buildGridLayout();
       case 1:
-        return LargeView(mediaList: _mediaList);
+        return _buildLargeView();
       case 2:
         return _buildListLayout();
       case 3:
@@ -197,6 +197,10 @@ class MediaGridState extends State<MediaAdaptor> {
         ),
       ),
     );
+  }
+
+  Widget _buildLargeView() {
+    return LargeView(mediaList: _mediaList);
   }
 }
 

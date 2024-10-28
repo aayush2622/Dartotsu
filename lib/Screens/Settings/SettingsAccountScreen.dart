@@ -53,7 +53,7 @@ class SettingsAccountScreenState extends BaseSettingsScreen {
           ..setPositiveButton('Yes', Anilist.removeSavedToken)
           ..setNegativeButton('No', null)
           ..show(),
-        onLogIn: () => snackString('Anilist'),
+        onLogIn: () => Anilist.login(context),
         onAvatarTap: () => snackString('Avatar Tapped'),
         onIconTap: () => snackString('Edit Icon Tapped'),
         onIconLongTap: () => snackString('Long Pressed'),

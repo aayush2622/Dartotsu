@@ -1,3 +1,4 @@
+import '../Preferences/HiveDataClasses/Selected/Selected.dart';
 import '../api/Anilist/Data/media.dart';
 import '../api/Anilist/Data/others.dart';
 import '../api/Anilist/Data/fuzzyData.dart';
@@ -22,7 +23,7 @@ class media {
   String? banner;
   String? relation;
   int? favourites;
-
+  bool? minimal = false;
   bool isAdult;
   bool isFav = false;
   bool notify = false;
@@ -88,6 +89,7 @@ class media {
     this.banner,
     this.relation,
     this.favourites,
+    this.minimal = false,
     required this.isAdult,
     this.isFav = false,
     this.notify = false,

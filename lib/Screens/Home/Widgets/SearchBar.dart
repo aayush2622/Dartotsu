@@ -1,8 +1,6 @@
 import 'package:dantotsu/Functions/Extensions.dart';
-import 'package:dantotsu/Screens/Login/LoginScreen.dart';
 import 'package:flutter/material.dart';
 
-import '../../../Functions/Function.dart';
 import '../../../api/Anilist/Anilist.dart';
 import '../../Settings/SettingsBottomSheet.dart';
 import 'AvtarWidget.dart';

@@ -1,6 +1,7 @@
 
 import 'dart:io';
 
+import 'package:dantotsu/Preferences/HiveDataClasses/Selected/Selected.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -47,6 +48,7 @@ class PrefManager {
   }
   static void HiveAdapters(){
     Hive.registerAdapter(ShowResponseAdapter());
+    Hive.registerAdapter(SelectedAdapter());
   }
   static void setVal<T>(Pref<T> pref, T value) {
     _checkInitialization();

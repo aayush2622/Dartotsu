@@ -3,7 +3,6 @@ import 'package:flutter/widgets.dart';
 import '../../Animation/ScaleAnimation.dart';
 import '../../DataClass/Episode.dart';
 import '../../DataClass/Media.dart';
-import '../../api/Discord/Discord.dart';
 import 'EpisodeListViewHolder.dart';
 
 class EpisodeAdaptor extends StatefulWidget {
@@ -44,7 +43,7 @@ class EpisodeAdaptorState extends State<EpisodeAdaptor> {
       case 0:
         return _buildListLayout();
       case 1:
-        return const SizedBox();
+        return _buildListLayout();
       case 2:
         return const SizedBox();
       default:

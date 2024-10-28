@@ -10,7 +10,7 @@ import 'Anilist.dart';
 CustomBottomDialog login(BuildContext context) {
   var theme = Theme.of(context).colorScheme;
   return CustomBottomDialog(
-    title: "Login",
+    title: "Login to Anilist",
     viewList: [
       const SizedBox(height: 38),
       _buildLoginButton(
@@ -35,12 +35,11 @@ CustomBottomDialog login(BuildContext context) {
             ..setMessage('Please paste the token here')
             ..setCustomView(
               TextField(
+                decoration: const InputDecoration(hintText: 'Token'),
                 onChanged: (value) => (token = value),
               ),
             )
-            ..setPositiveButton('Ok', () async {
-              await Anilist.saveToken(token);
-            })
+            ..setPositiveButton('Ok', () async => await Anilist.saveToken(token))
             ..setNegativeButton('Cancel', null)
             ..setOnDismissListener(() => Navigator.pop(context))
             ..show();

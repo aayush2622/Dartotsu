@@ -2,7 +2,7 @@ import 'package:hive/hive.dart';
 
 part 'ShowResponse.g.dart';
 
-@HiveType(typeId: 0) // Unique typeId for Hive
+@HiveType(typeId: 0)
 class ShowResponse {
   @HiveField(0)
   final String name;

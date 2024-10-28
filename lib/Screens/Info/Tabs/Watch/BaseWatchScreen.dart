@@ -1,0 +1,131 @@
+import 'package:dantotsu/DataClass/Media.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+
+import '../../../../Functions/Function.dart';
+import '../../../../Preferences/PrefManager.dart';
+import '../../../../Preferences/Preferences.dart';
+import '../../../../api/Mangayomi/Model/Source.dart';
+import '../../Widgets/Releasing.dart';
+import 'BaseParser.dart';
+import 'Widgets/SourceSelector.dart';
+
+abstract class BaseWatchScreen<T extends StatefulWidget> extends State<T> {
+  Source? source;
+
+  BaseParser get viewModel;
+
+  media get mediaData;
+
+  List<Widget> widgetList = [];
+
+  void onSourceChange(Source source) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      setState(() {
+        this.source = source;
+        viewModel.searchMedia(source, mediaData);
+      });
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    var theme = Theme.of(context).colorScheme;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        ...releasingIn(mediaData, context),
+        _buildContent(theme),
+        ...widgetList,
+      ],
+    );
+  }
+
+  Widget _buildContent(ColorScheme theme) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 32.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ..._buildYouTubeButton(),
+          Obx(() => Text(
+                viewModel.status.value ?? '',
+                style: TextStyle(
+                    color: theme.onSurface, fontWeight: FontWeight.bold),
+              )),
+          const SizedBox(height: 12),
+          SourceSelector(
+            currentSource: source,
+            onSourceChange: onSourceChange,
+            mediaData: mediaData,
+          ),
+          const SizedBox(height: 16),
+          _buildWrongTitle(),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildWrongTitle() {
+    var theme = Theme.of(context).colorScheme;
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        GestureDetector(
+          onTap: () async =>
+              viewModel.wrongTitle(context, source!, mediaData, null),
+          child: Text(
+            'Wrong title?',
+            style: TextStyle(
+              color: theme.secondary,
+              fontWeight: FontWeight.bold,
+              fontSize: 14,
+              decoration: TextDecoration.underline,
+              decorationColor: theme.secondary,
+              textBaseline: TextBaseline.alphabetic,
+            ),
+          ),
+        )
+      ],
+    );
+  }
+
+  List<Widget> _buildYouTubeButton() {
+    if (mediaData.anime?.youtube == null ||
+        !PrefManager.getVal(PrefName.showYtButton)) {
+      return [];
+    }
+
+    return [
+      SizedBox(
+        height: 48,
+        child: ElevatedButton(
+          onPressed: () => openLinkInBrowser(mediaData.anime!.youtube!),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: const Color(0xFFFF0000),
+            padding: EdgeInsets.zero,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12.0)),
+          ),
+          child: const Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(Icons.play_circle_fill, color: Colors.white),
+              SizedBox(width: 8),
+              Text(
+                'Play on YouTube',
+                style: TextStyle(
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                    overflow: TextOverflow.ellipsis),
+                maxLines: 2,
+              ),
+            ],
+          ),
+        ),
+      ),
+      const SizedBox(height: 32),
+    ];
+  }
+}

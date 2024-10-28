@@ -1,6 +1,7 @@
 import 'package:blur/blur.dart';
 import 'package:dantotsu/Functions/Extensions.dart';
 import 'package:dantotsu/Screens/Info/Tabs/Info/InfoPage.dart';
+import 'package:dantotsu/Screens/Info/Tabs/Watch/Anime/AnimeWatchScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kenburns_nullsafety/kenburns_nullsafety.dart';
@@ -45,31 +46,23 @@ class MediaInfoPageState extends State<MediaInfoPage> {
     setState(() {
       loaded = true;
     });
-
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomScrollConfig(
-        context,
+      body: Column(
         children: [
-          SliverToBoxAdapter(child: _buildMediaSection()),
-          SliverToBoxAdapter(child: _buildMediaDetails()),
-          SliverList(
-            delegate: SliverChildListDelegate(
-              [
-                Padding(
-                  padding: const EdgeInsets.symmetric(),
-                  child: loaded ? Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [_buildSliverContent()],
-                  ) : const Center(child: CircularProgressIndicator()),
-                ),
-              ],
+          _buildMediaSection(),
+          _buildMediaDetails(),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(),
+              child: loaded
+                  ? _buildSliverContent()
+                  : const Center(child: CircularProgressIndicator()),
             ),
-          )
+          ),
         ],
       ),
       bottomNavigationBar: _buildBottomNavigationBar(),
@@ -80,25 +73,54 @@ class MediaInfoPageState extends State<MediaInfoPage> {
     return IndexedStack(
       index: _selectedIndex,
       children: [
-        InfoPage(mediaData: mediaData),
-        WatchPage(key: ValueKey(mediaData.id), mediaData: mediaData),
+        CustomScrollConfig(
+          context,
+          children: [
+            SliverList(
+              delegate: SliverChildListDelegate([
+                InfoPage(mediaData: mediaData),
+              ]),
+            ),
+          ],
+        ),
+        CustomScrollConfig(
+          context,
+          children: [
+            SliverList(
+              delegate: SliverChildListDelegate([
+                if (mediaData.anime != null)
+                  AnimeWatchScreen(mediaData: mediaData)
+                else
+                  WatchPage(mediaData: mediaData),
+              ]),
+            ),
+          ],
+        ),
         const SizedBox(),
       ],
     );
   }
 
   BottomNavigationBar _buildBottomNavigationBar() {
+    var isAnime = mediaData.anime != null;
     return BottomNavigationBar(
-      items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.info), label: 'INFO'),
+      items: [
+        const BottomNavigationBarItem(
+          icon: Icon(Icons.info),
+          label: 'INFO',
+        ),
         BottomNavigationBarItem(
-            icon: Icon(Icons.movie_filter_rounded), label: 'WATCH'),
-        BottomNavigationBarItem(icon: Icon(Icons.chat_bubble_rounded), label: 'COMMENTS'),
+          icon: Icon(isAnime ? Icons.movie_filter_rounded : Icons.import_contacts),
+          label: isAnime ? 'WATCH' : 'READ',
+        ),
+        const BottomNavigationBarItem(
+          icon: Icon(Icons.chat_bubble_rounded),
+          label: 'COMMENTS',
+        ),
       ],
       selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
       unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
       iconSize: 26,
-
       currentIndex: _selectedIndex,
       onTap: (index) {
         setState(() {

@@ -2,7 +2,6 @@ import 'package:dantotsu/Adaptor/Media/MediaAdaptor.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
-import '../../../../../DataClass/Episode.dart';
 import '../../../../../DataClass/Media.dart';
 import '../../../../../Widgets/CustomBottomDialog.dart';
 import '../../../../../api/Mangayomi/Eval/dart/model/m_manga.dart';
@@ -12,20 +11,14 @@ import '../../../../../api/Mangayomi/Search/search.dart';
 
 class WrongTitleDialog extends StatefulWidget {
   final Source source;
-  final media mediaData;
-  final Rxn<MManga?> selectedMedia;
-  final Function(media, MManga?, Source, {bool selected}) saveShowResponse;
-  final Rxn<Map<String, Episode>> episodeList;
-  final Function(MManga, Source) getEpisode;
+  final Rxn<MManga?>? selectedMedia;
+  final Function(MManga)? onChanged;
 
   const WrongTitleDialog({
     super.key,
     required this.source,
-    required this.mediaData,
-    required this.selectedMedia,
-    required this.saveShowResponse,
-    required this.episodeList,
-    required this.getEpisode,
+    this.selectedMedia,
+    this.onChanged,
   });
 
   @override
@@ -33,20 +26,19 @@ class WrongTitleDialog extends StatefulWidget {
 }
 
 class WrongTitleDialogState extends State<WrongTitleDialog> {
-  TextEditingController textEditingController = TextEditingController();
+  final TextEditingController textEditingController = TextEditingController();
   late Future<MPages?> searchFuture;
-  String searchText = '';
 
   @override
   void initState() {
     super.initState();
-    searchText = widget.selectedMedia.value?.name ?? '';
-    textEditingController.text = searchText;
-    searchFuture = _performSearch(searchText);
+    final initialSearchText = widget.selectedMedia?.value?.name ?? '';
+    textEditingController.text = initialSearchText;
+    searchFuture = _performSearch(initialSearchText);
   }
 
-  Future<MPages?> _performSearch(String query) async {
-    return await search(
+  Future<MPages?> _performSearch(String query) {
+    return search(
       source: widget.source,
       page: 1,
       query: query,
@@ -56,89 +48,92 @@ class WrongTitleDialogState extends State<WrongTitleDialog> {
 
   void _onSubmitted(String value) {
     setState(() {
-      searchText = value;
       searchFuture = _performSearch(value);
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    var theme = Theme.of(context).colorScheme;
+    final theme = Theme.of(context).colorScheme;
 
     return CustomBottomDialog(
       title: widget.source.name,
       viewList: [
-        TextField(
-          controller: textEditingController,
-          onSubmitted: _onSubmitted,
-          style: TextStyle(
-            fontFamily: 'Poppins',
-            fontWeight: FontWeight.w600,
-            fontSize: 14.0,
-            color: theme.onSurface,
-          ),
-          decoration: InputDecoration(
-            suffixIcon: Icon(Icons.search, color: theme.onSurface),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(28),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(28),
-              borderSide: BorderSide(
-                color: theme.primaryContainer,
-                width: 1.0,
-              ),
-            ),
-            filled: true,
-            fillColor: Colors.grey.withOpacity(0.2),
-          ),
-        ),
+        _buildSearchInput(theme),
         const SizedBox(height: 16.0),
         FutureBuilder<MPages?>(
           future: searchFuture,
           builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
-            } else if (!snapshot.hasData || snapshot.data!.list.isEmpty) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: Text(
-                  'No results found',
-                  style: TextStyle(
-                    color: theme.error,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              );
-            } else {
-              var list = snapshot.data!.list;
-              var mediaList = snapshot.data!.list
-                  .map((e) => media(
-                        id: e.hashCode,
-                        name: e.name,
-                        cover: e.imageUrl,
-                        nameRomaji: e.name ?? '',
-                        userPreferredName: e.name ?? '',
-                        isAdult: false,
-                      ))
-                  .toList();
-              return MediaAdaptor(
-                type: 3,
-                mediaList: mediaList,
-                onMediaTap: (i) {
-                  setState(() {
-                    widget.selectedMedia.value = list[i];
-                    widget.saveShowResponse(widget.mediaData, list[i], widget.source, selected: true);
-                    widget.episodeList.value = null;
-                    widget.getEpisode(list[i], widget.source);
-                    Navigator.of(context).pop();
-                  });
-                },
-              );
-            }
+            return _buildResultList(snapshot, theme);
           },
         ),
       ],
+    );
+  }
+
+  Widget _buildSearchInput(ColorScheme theme) {
+    return TextField(
+      controller: textEditingController,
+      onSubmitted: _onSubmitted,
+      style: TextStyle(
+        fontFamily: 'Poppins',
+        fontWeight: FontWeight.w600,
+        fontSize: 14.0,
+        color: theme.onSurface,
+      ),
+      decoration: InputDecoration(
+        suffixIcon: Icon(Icons.search, color: theme.onSurface),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(28),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(28),
+          borderSide: BorderSide(
+            color: theme.primaryContainer,
+            width: 1.0,
+          ),
+        ),
+        filled: true,
+        fillColor: Colors.grey.withOpacity(0.2),
+      ),
+    );
+  }
+
+  Widget _buildResultList(AsyncSnapshot<MPages?> snapshot, ColorScheme theme) {
+    if (snapshot.connectionState == ConnectionState.waiting) {
+      return const Center(child: CircularProgressIndicator());
+    } else if (snapshot.hasError || !snapshot.hasData || snapshot.data!.list.isEmpty) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        child: Text(
+          'No results found',
+          style: TextStyle(
+            color: theme.error,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      );
+    }
+
+    final mediaList = snapshot.data!.list.map((e) {
+      return media(
+        id: e.hashCode,
+        name: e.name,
+        cover: e.imageUrl,
+        nameRomaji: e.name ?? '',
+        userPreferredName: e.name ?? '',
+        isAdult: false,
+        minimal: true,
+      );
+    }).toList();
+
+    return MediaAdaptor(
+      type: 3,
+      mediaList: mediaList,
+      onMediaTap: (i) {
+        widget.onChanged?.call(snapshot.data!.list[i]);
+        Navigator.of(context).pop();
+      },
     );
   }
 }

@@ -44,7 +44,8 @@ class PrefName {
       Pref(Location.General, 'recentlyListOnly', false);
   static const Pref<bool> NSFWExtensions =
       Pref(Location.General, 'NSFWExtensions', true);
-
+  static const Pref<int> AnimeDefaultView =
+      Pref(Location.General, 'AnimeDefaultView', 0);
   //manga page
   static const Pref<Map<String, bool>> mangaLayout =
       Pref(Location.General, 'mangaLayoutOrder', {
