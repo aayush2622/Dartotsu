@@ -94,60 +94,62 @@ class AnimeWatchScreenState extends BaseWatchScreen<AnimeWatchScreen> {
 
   Widget _buildTitle(Rx<int?> viewType) {
     return Padding(
-        padding: const EdgeInsets.only(left: 32, right: 32, bottom: 16),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const Text(
-              'Episode',
-              style: TextStyle(
-                fontFamily: 'Poppins',
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
-              ),
-              overflow: TextOverflow.ellipsis,
-              maxLines: 1,
+      padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const Text(
+            'Episode',
+            style: TextStyle(
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
             ),
-            Row(
-              children: [
-                _buildIconButtons(viewType),
-              ],
-            ),
-          ],
-        ));
+            overflow: TextOverflow.ellipsis,
+            maxLines: 1,
+          ),
+          _buildIconButtons(viewType),
+        ],
+      ),
+    );
   }
 
   Widget _buildIconButtons(Rx<int?> viewType) {
-    var theme = Theme.of(context).colorScheme;
+    final theme = Theme.of(context).colorScheme;
+    final icons = [
+      Icons.view_list_sharp,
+      Icons.grid_view_rounded,
+      Icons.view_comfy_sharp,
+    ];
+
     return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        IconButton(
-          icon: Transform(
-            alignment: Alignment.center,
-            transform: Matrix4.rotationY(3.14159),
-            child: const Icon(Icons.view_list_sharp),
+      children: List.generate(icons.length, (index) {
+        return Padding(
+          padding: const EdgeInsets.only(left: 10),
+          child: IconButton(
+            icon: Transform(
+              alignment: Alignment.center,
+              transform: index == 0 ? Matrix4.rotationY(3.14159) : Matrix4.identity(),
+              child: Icon(icons[index]),
+            ),
+            iconSize: 24,
+            color: viewType.value == index
+                ? theme.onSurface
+                : theme.onSurface.withOpacity(0.33),
+            onPressed: () {
+              viewType.value = index;
+              changeViewType(index);
+            },
           ),
-          iconSize: 24,
-          color: theme.onSurface,
-          onPressed: () => viewType.value = 0,
-        ),
-        const SizedBox(width: 10),
-        IconButton(
-          icon: const Icon(Icons.grid_view_rounded),
-          iconSize: 24,
-          color: theme.onSurface,
-          onPressed: () => viewType.value = 1,
-        ),
-        const SizedBox(width: 10),
-        IconButton(
-          icon: const Icon(Icons.view_comfy_sharp),
-          iconSize: 24,
-          color: theme.onSurface,
-          onPressed: () => viewType.value = 2,
-        ),
-      ],
+        );
+      }),
     );
+  }
+
+  void changeViewType(int? viewType) {
+    final type = _viewModel.loadSelected(mediaData);
+    type.recyclerStyle = viewType;
+    _viewModel.saveSelected(mediaData.id, type);
   }
 
   Widget _buildChunkSelector(
