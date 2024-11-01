@@ -1,0 +1,77 @@
+part of '../AnilistQueries.dart';
+extension on AnilistQueries {
+
+  Future<List<media>> _getCalendarData() async {
+    int page = 1;
+    List<media> mediaList = [];
+
+    Future<Page?> execute(int page) async => (await executeQuery<PageResponse>(_queryCalendar(page),force: true))?.data?.page;
+
+    Page? result;
+    do {
+      result = await execute(page);
+      if (result != null && result.airingSchedules != null) {
+        mediaList.addAll(result.airingSchedules!
+            .where((m) =>
+                m.media != null &&
+                m.media!.countryOfOrigin == "JP" &&
+                (!Anilist.adult || m.media!.isAdult == false))
+            .map((j) {
+          final mediaItem = mediaData(j.media!);
+          mediaItem.relation = "${j.episode},${j.airingAt}";
+          return mediaItem;
+        }).toList());
+        page++;
+      }
+    } while (result?.pageInfo?.hasNextPage == true);
+
+    return mediaList.reversed.toList();
+  }
+
+  _queryCalendar(int page){
+    final int curr = DateTime.now().millisecondsSinceEpoch ~/ 1000;
+    return '''{
+      Page(page: $page, perPage: 50) {
+        pageInfo {
+          hasNextPage
+          total
+        }
+        airingSchedules(
+          airingAt_greater: ${curr - 86400},
+          airingAt_lesser: ${curr + (86400 * 6)},
+          sort: TIME_DESC
+        ) {
+          episode
+          airingAt
+          media {
+            id
+            idMal
+            status
+            chapters
+            episodes
+            nextAiringEpisode { episode }
+            isAdult
+            type
+            meanScore
+            isFavourite
+            format
+            bannerImage
+            countryOfOrigin
+            coverImage { large }
+            title {
+              english
+              romaji
+              userPreferred
+            }
+            mediaListEntry {
+              progress
+              private
+              score(format: POINT_100)
+              status
+            }
+          }
+        }
+      }
+    }''';
+  }
+}

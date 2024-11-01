@@ -27,6 +27,7 @@ part 'AnilistQueries/Search.dart';
 part 'AnilistQueries/GetAnimeMangaListData.dart';
 part 'AnilistQueries/GetUserMediaList.dart';
 part 'AnilistQueries/GetGenresAndTags.dart';
+part 'AnilistQueries/GetCalendarData.dart';
 
 class AnilistQueries {
   // main function in the [AnilistQueries.dart]
@@ -85,6 +86,10 @@ class AnilistQueries {
   /// Fetches the user's manga list.
   /// Returns a map where the keys are list categories and values are lists of [media] objects.
   Future<Map<String, List<media>>> getMangaList() => _getMangaList();
+
+  /// Fetches the user's calender data.
+  /// Returns a list of [media] objects.
+  Future<List<media>> getCalendarData() => _getCalendarData();
 
   /// Searches for media based on various parameters.
   ///
