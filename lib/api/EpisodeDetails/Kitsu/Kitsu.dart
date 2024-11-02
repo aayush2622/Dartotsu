@@ -9,25 +9,7 @@ import '../../../DataClass/Media.dart';
 part 'Kitsu.g.dart';
 
 class Kitsu {
-  static Future<KitsuResponse?> getKitsuData(String query) async {
-    final headers = {
-      "Content-Type": "application/json",
-      "Accept": "application/json",
-    };
 
-    try {
-      final response = await http.post(
-        Uri.parse('https://kitsu.app/api/graphql'),
-        headers: headers,
-        body: jsonEncode({"query": query}),
-      );
-      final json = await decodeToString(response);
-      return KitsuResponse.fromJson(jsonDecode(json!));
-    } catch (e) {
-      debugPrint("Error fetching Kitsu data: $e");
-      return null;
-    }
-  }
 
   static Future<Map<String, Episode>?> getKitsuEpisodesDetails(media mediaData) async {
     final query = '''
@@ -55,14 +37,14 @@ class Kitsu {
     }
     ''';
 
-    final result = await getKitsuData(query);
-    if (result == null || result.data?.lookupMapping == null) {
+    final result =(await getKitsuData(query))?.data?.lookupMapping;
+    if (result == null) {
       return null;
     }
 
-    mediaData.idKitsu = result.data?.lookupMapping?.id;
+    mediaData.idKitsu = result.id;
 
-    final episodesMap = result.data?.lookupMapping?.episodes?.nodes?.asMap().map((_, ep) {
+    final episodesMap = result.episodes?.nodes?.asMap().map((_, ep) {
       return MapEntry(
         ep?.number?.toString() ?? '',
         Episode(
@@ -84,6 +66,26 @@ class Kitsu {
       return utf8.decode(res.bodyBytes);
     } else {
       return res.body;
+    }
+  }
+
+  static Future<KitsuResponse?> getKitsuData(String query) async {
+    final headers = {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+    };
+
+    try {
+      final response = await http.post(
+        Uri.parse('https://kitsu.io/api/graphql'),
+        headers: headers,
+        body: jsonEncode({"query": query}),
+      );
+      final json = await decodeToString(response);
+      return KitsuResponse.fromJson(jsonDecode(json!));
+    } catch (e) {
+      debugPrint("Error fetching Kitsu data: $e");
+      return null;
     }
   }
 }

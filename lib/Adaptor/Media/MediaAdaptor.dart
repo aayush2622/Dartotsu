@@ -9,7 +9,6 @@ import '../../Animation/ScaleAnimation.dart';
 import '../../DataClass/Media.dart';
 import '../../Functions/Function.dart';
 import '../../Screens/Info/MediaScreen.dart';
-import '../../Screens/Settings/SettingsBottomSheet.dart';
 import '../../Widgets/ScrollConfig.dart';
 import 'MediaPageSmallViewHolder.dart';
 import 'MediaViewHolder.dart';
@@ -70,6 +69,7 @@ class MediaGridState extends State<MediaAdaptor> {
   }
 
   Widget _buildStaggeredGrid() {
+    var height = widget.isLarge ? 270.0 : 250.0;
     return LayoutBuilder(
       builder: (context, constraints) {
         final parentWidth = constraints.maxWidth;
@@ -91,10 +91,10 @@ class MediaGridState extends State<MediaAdaptor> {
                       navigateToPage(context, MediaInfoPage(_mediaList[index]));
                     }
                   },
-                  onLongPress: () => settingsBottomSheet(context),
+                  onLongPress: () {},
                   child: SizedBox(
                     width: 108,
-                    height: 250,
+                    height: height,
                     child: MediaViewHolder(
                       mediaInfo: _mediaList[index],
                       isLarge: widget.isLarge,
@@ -135,7 +135,7 @@ class MediaGridState extends State<MediaAdaptor> {
                       navigateToPage(context, MediaInfoPage(_mediaList[index]));
                     }
                   },
-                  onLongPress: () => settingsBottomSheet(context),
+                  onLongPress:() {},
                   child: Container(
                     width: double.infinity,
                     margin: const EdgeInsets.symmetric(horizontal: 18, vertical: 4),
@@ -183,7 +183,7 @@ class MediaGridState extends State<MediaAdaptor> {
                       navigateToPage(context, MediaInfoPage(_mediaList[index]));
                     }
                   },
-                  onLongPress: () => settingsBottomSheet(context),
+                  onLongPress: () {},
                   child: Container(
                     width: 102,
                     margin: margin,
@@ -262,7 +262,7 @@ class LargeViewState extends State<LargeView> {
               return GestureDetector(
                 onTap: () => navigateToPage(
                     context, MediaInfoPage(widget.mediaList[index])),
-                onLongPress: () => settingsBottomSheet(context),
+                onLongPress: () {},
                 child: MediaPageSmallViewHolder(widget.mediaList[index]),
               );
             },

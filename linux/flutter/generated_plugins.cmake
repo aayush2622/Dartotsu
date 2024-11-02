@@ -6,7 +6,7 @@ list(APPEND FLUTTER_PLUGIN_LIST
   dynamic_color
   flutter_qjs
   isar_flutter_libs
-  screen_retriever
+  screen_retriever_linux
   universal_video_controls
   url_launcher_linux
   window_manager

@@ -83,7 +83,7 @@ class EpisodeAdaptorState extends State<EpisodeAdaptor> {
                       const EdgeInsets.symmetric(horizontal: 18, vertical: 4),
                   child: Opacity(
                     opacity: isWatched ? 0.5 : 1.0,
-                    child: EpisodeListView(episode: episodeList[index]),
+                    child: EpisodeListView(episode: episodeList[index], isWatched: isWatched,),
                   ),
                 ),
               ),

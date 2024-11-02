@@ -1,3 +1,4 @@
+import 'package:dantotsu/Functions/Extensions.dart';
 import 'package:flutter/material.dart';
 
 class CustomBottomDialog extends StatefulWidget {
@@ -92,7 +93,9 @@ class _CustomBottomDialogState extends State<CustomBottomDialog> {
               ),
               const SizedBox(height: 16.0),
             ],
-            const SizedBox(height: 16.0),
+            if (widget.negativeText != null || widget.positiveText != null) ...[
+              const SizedBox(height: 16.0),
+            ],
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Row(
@@ -144,7 +147,7 @@ class _CustomBottomDialogState extends State<CustomBottomDialog> {
                 ],
               ),
             ),
-            const SizedBox(height: 0.0),// TODO: navbar padding
+            SizedBox(height: 0.bottomBar()),// TODO: test navbar padding
           ],
         ),
       ),
@@ -154,6 +157,8 @@ class _CustomBottomDialogState extends State<CustomBottomDialog> {
 
 void showCustomBottomDialog(BuildContext context, Widget dialog) {
   showModalBottomSheet(
+    enableDrag: true,
+    isScrollControlled: true,
     context: context,
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(16.0)),

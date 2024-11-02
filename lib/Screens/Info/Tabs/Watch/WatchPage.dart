@@ -62,7 +62,18 @@ class _WatchPageState extends State<WatchPage> {
       children: [
         ...releasingIn(widget.mediaData, context),
         _buildContent(theme),
-        _buildEpisodeList(),
+        if (source != null)
+          _buildEpisodeList()
+        else
+           Center(
+            child: Text(
+              'Install a source from extension page to start ${widget.mediaData.anime != null ? 'watching' : 'reading'}',
+              style: const TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
       ],
     );
   }
@@ -86,7 +97,7 @@ class _WatchPageState extends State<WatchPage> {
             mediaData: widget.mediaData,
           ),
           const SizedBox(height: 16),
-          _buildWrongTitle(),
+          if (source != null) _buildWrongTitle(),
         ],
       ),
     );

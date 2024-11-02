@@ -1,9 +1,8 @@
+import 'package:dantotsu/Functions/Function.dart';
 import 'package:dantotsu/api/Mangayomi/Model/settings.dart';
 import 'package:http_interceptor/http_interceptor.dart';
 import 'dart:async';
 import 'dart:io';
-import 'package:flutter_inappwebview/flutter_inappwebview.dart'
-    as flutter_inappwebview;
 import 'package:http/io_client.dart';
 import '../http/rhttp/rhttp.dart' as rhttp;
 
@@ -71,10 +70,10 @@ class MClient {
               .toList() ??
           [];
     } else {
-      cookies = (await flutter_inappwebview.CookieManager.instance()
+      /*cookies = (await flutter_inappwebview.CookieManager.instance()
               .getCookies(url: flutter_inappwebview.WebUri(url)))
           .map((e) => "${e.name}=${e.value}")
-          .toList();
+          .toList();*/
     }
 
     if (cookies.isNotEmpty) {
@@ -177,7 +176,7 @@ class LoggerInterceptor extends InterceptorContract {
     Logger.add(LoggerLevel.info,
         "----- Response -----\n${response.request?.method}: ${response.request?.url}, statusCode: ${response.statusCode} ${cloudflare ? "Failed to bypass Cloudflare" : ""}");
     if (cloudflare) {
-      botToast("${response.statusCode} Failed to bypass Cloudflare");
+      snackString("${response.statusCode} Failed to bypass Cloudflare");
     }
     return response;
   }

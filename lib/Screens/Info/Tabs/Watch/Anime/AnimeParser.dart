@@ -3,6 +3,8 @@ import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
 import '../../../../../DataClass/Episode.dart';
 import '../../../../../DataClass/Media.dart';
+import '../../../../../Preferences/PrefManager.dart';
+import '../../../../../Preferences/Preferences.dart';
 import '../../../../../api/EpisodeDetails/Anify/Anify.dart';
 import '../../../../../api/EpisodeDetails/Jikan/Jikan.dart';
 import '../../../../../api/EpisodeDetails/Kitsu/Kitsu.dart';
@@ -17,6 +19,7 @@ class AnimeParser extends BaseParser {
   var anifyEpisodeList = Rxn<Map<String, Episode>>(null);
   var kitsuEpisodeList = Rxn<Map<String, Episode>>(null);
   var fillerEpisodesList = Rxn<Map<String, Episode>>(null);
+  var viewType = 0.obs;
 
   @override
   void reset() {
@@ -25,6 +28,15 @@ class AnimeParser extends BaseParser {
     anifyEpisodeList.value = null;
     kitsuEpisodeList.value = null;
     fillerEpisodesList.value = null;
+  }
+
+  void init(media mediaData) async {
+    viewType.value = mediaData.selected?.recyclerStyle ??
+        PrefManager.getVal(PrefName.AnimeDefaultView);
+    await Future.wait([
+      getEpisodeData(mediaData),
+      getFillerEpisodes(mediaData),
+    ]);
   }
 
   @override
@@ -36,9 +48,9 @@ class AnimeParser extends BaseParser {
   }
 
   @override
-  Future<void> searchMedia(source, mediaData,{onFinish}) async {
+  Future<void> searchMedia(source, mediaData, {onFinish}) async {
     episodeList.value = null;
-    super.searchMedia(source, mediaData, onFinish: () => getEpisode(selectedMedia.value!, source));
+    super.searchMedia(source, mediaData, onFinish: (r) => getEpisode(r, source));
   }
 
   void getEpisode(MManga media, Source source) async {
@@ -48,10 +60,10 @@ class AnimeParser extends BaseParser {
     var chapters = m.chapters;
     episodeList.value = Map.fromEntries(
       chapters?.reversed.map((e) {
-            final episode = MChapterToEpisode(e, media);
-            return MapEntry(episode.number, episode);
-          }) ??
-          [],
+          final episode = MChapterToEpisode(e, media);
+          return MapEntry(episode.number, episode);
+        },
+      ) ?? [],
     );
   }
 
@@ -69,18 +81,19 @@ class AnimeParser extends BaseParser {
     var res = await Jikan.getEpisodes(mediaData);
     fillerEpisodesList.value ??= res;
   }
+
+  Episode MChapterToEpisode(MChapter chapter, MManga? selectedMedia) {
+    var episodeNumber = ChapterRecognition()
+        .parseChapterNumber(selectedMedia?.name ?? '', chapter.name ?? '');
+    return Episode(
+      number: episodeNumber != -1 ? episodeNumber.toString() : chapter.name ?? '',
+      link: chapter.url,
+      title: chapter.name,
+      thumb: null,
+      desc: null,
+      filler: false,
+      mChapter: chapter,
+    );
+  }
 }
 
-Episode MChapterToEpisode(MChapter chapter, MManga? selectedMedia) {
-  var episodeNumber = ChapterRecognition()
-      .parseChapterNumber(selectedMedia?.name ?? '', chapter.name ?? '');
-  return Episode(
-    number: episodeNumber != -1 ? episodeNumber.toString() : chapter.name ?? '',
-    link: chapter.url,
-    title: chapter.name,
-    thumb: null,
-    desc: null,
-    filler: false,
-    mChapter: chapter,
-  );
-}

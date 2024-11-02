@@ -2,6 +2,7 @@ import 'package:blur/blur.dart';
 import 'package:dantotsu/Functions/Extensions.dart';
 import 'package:dantotsu/Screens/Info/Tabs/Info/InfoPage.dart';
 import 'package:dantotsu/Screens/Info/Tabs/Watch/Anime/AnimeWatchScreen.dart';
+import 'package:dantotsu/Screens/Info/Tabs/Watch/Manga/MangaWatchScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kenburns_nullsafety/kenburns_nullsafety.dart';
@@ -51,59 +52,49 @@ class MediaInfoPageState extends State<MediaInfoPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+      body: CustomScrollConfig(
+        context,
         children: [
-          _buildMediaSection(),
-          _buildMediaDetails(),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(),
-              child: loaded
-                  ? _buildSliverContent()
-                  : const Center(child: CircularProgressIndicator()),
+          SliverToBoxAdapter(child: _buildMediaSection()),
+          SliverToBoxAdapter(child: _buildMediaDetails()),
+          SliverList(
+            delegate: SliverChildListDelegate(
+              [
+                Padding(
+                  padding: const EdgeInsets.symmetric(),
+                  child: loaded ? Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [_buildSliverContent()],
+                  ) : const Center(child: CircularProgressIndicator()),
+                ),
+              ],
             ),
-          ),
+          )
         ],
       ),
       bottomNavigationBar: _buildBottomNavigationBar(),
     );
   }
-
   Widget _buildSliverContent() {
     return IndexedStack(
       index: _selectedIndex,
       children: [
-        CustomScrollConfig(
-          context,
-          children: [
-            SliverList(
-              delegate: SliverChildListDelegate([
-                InfoPage(mediaData: mediaData),
-              ]),
-            ),
-          ],
-        ),
-        CustomScrollConfig(
-          context,
-          children: [
-            SliverList(
-              delegate: SliverChildListDelegate([
-                if (mediaData.anime != null)
-                  AnimeWatchScreen(mediaData: mediaData)
-                else
-                  WatchPage(mediaData: mediaData),
-              ]),
-            ),
-          ],
-        ),
+        InfoPage(mediaData: mediaData),
+        if (mediaData.anime != null)
+          AnimeWatchScreen(mediaData: mediaData)
+        else
+          MangaWatchScreen(mediaData: mediaData),
         const SizedBox(),
       ],
     );
   }
 
+
   BottomNavigationBar _buildBottomNavigationBar() {
     var isAnime = mediaData.anime != null;
     return BottomNavigationBar(
+      backgroundColor: Theme.of(context).colorScheme.surface,
       items: [
         const BottomNavigationBarItem(
           icon: Icon(Icons.info),

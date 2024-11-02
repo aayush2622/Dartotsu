@@ -6,7 +6,7 @@ class ChapterRecognition {
 
   final _unwantedWhiteSpace = RegExp(r"\s(?=extra|special|omake)");
 
-  int parseChapterNumber(String mangaTitle, String chapterName) {
+   dynamic parseChapterNumber(String mangaTitle, String chapterName) {
     var name = chapterName.toLowerCase();
 
     name = name.replaceAll(mangaTitle.toLowerCase(), "").trim();
@@ -20,15 +20,19 @@ class ChapterRecognition {
     const ch = r"(?<=ch\.)";
     var match = RegExp("$ch $numberPat").firstMatch(name);
     if (match != null) {
-      return _getChapterNumberFromMatch(match).toInt();
+      return _convertToIntIfWhole(_getChapterNumberFromMatch(match));
     }
 
     match = RegExp(_numberPattern).firstMatch(name);
     if (match != null) {
-      return _getChapterNumberFromMatch(match).toInt();
+      return _convertToIntIfWhole(_getChapterNumberFromMatch(match));
     }
 
     return 0;
+  }
+
+  dynamic _convertToIntIfWhole(double value) {
+    return value % 1 == 0 ? value.toInt() : value;
   }
 
   double _getChapterNumberFromMatch(Match match) {

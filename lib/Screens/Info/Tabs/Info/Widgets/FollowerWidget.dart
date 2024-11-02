@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../../Animation/ScaleAnimation.dart';
 import '../../../../../DataClass/User.dart';
-import '../../../../../Widgets/ItemFollower.dart';
+import 'ItemFollower.dart';
 import '../../../../../Widgets/ScrollConfig.dart';
 import '../../../../../api/Anilist/Anilist.dart';
 

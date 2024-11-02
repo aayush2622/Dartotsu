@@ -36,7 +36,7 @@ class StorageProvider {
       return Directory(dbDir);
     }
   }
-  Future<Isar> initDB(String? path, {bool? inspector = false}) async {
+  Future<Isar> initDB(String? path, {bool inspector = false}) async {
     Directory? dir;
     if (path == null) {
       dir = await getDatabaseDirectory();
@@ -51,7 +51,7 @@ class StorageProvider {
       SettingsSchema,
       SourcePreferenceSchema,
       SourcePreferenceStringValueSchema,
-    ], directory: dir!.path, name: "dantotsuDb", inspector: inspector!);
+    ], directory: dir!.path, name: "dantotsuDb", inspector: inspector);
 
     if (isar.settings.filter().idEqualTo(227).isEmptySync()) {
       isar.writeTxnSync(

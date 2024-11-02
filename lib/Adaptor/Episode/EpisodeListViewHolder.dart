@@ -9,8 +9,10 @@ import '../../DataClass/Episode.dart';
 
 class EpisodeListView extends StatelessWidget {
   final Episode episode;
+  final bool isWatched;
 
-  const EpisodeListView({super.key, required this.episode});
+  const EpisodeListView(
+      {super.key, required this.episode, required this.isWatched});
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +20,9 @@ class EpisodeListView extends StatelessWidget {
     final themeManager = Provider.of<ThemeNotifier>(context);
     final isDark = themeManager.isDarkMode;
 
-    Color cardColor = (episode.filler ?? false) ?
-    (isDark ? fillerDark : fillerLight) :
-    theme.surfaceContainerLowest;
+    Color cardColor = (episode.filler ?? false)
+        ? (isDark ? fillerDark : fillerLight)
+        : theme.surfaceContainerHighest;
 
     return Card(
       margin: const EdgeInsets.all(8),
@@ -44,7 +46,7 @@ class EpisodeListView extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        _buildThumbnail(theme),
+        _buildThumbnail(context, theme),
         Expanded(
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 8),
@@ -76,7 +78,7 @@ class EpisodeListView extends StatelessWidget {
     );
   }
 
-  Widget _buildThumbnail(ColorScheme theme) {
+  Widget _buildThumbnail(BuildContext context, ColorScheme theme) {
     return Card(
       margin: const EdgeInsets.all(8),
       shape: RoundedRectangleBorder(
@@ -85,9 +87,8 @@ class EpisodeListView extends StatelessWidget {
       elevation: 4,
       color: theme.surfaceContainerLowest,
       child: Stack(
-        alignment: Alignment.center,
+        alignment: Alignment.bottomCenter,
         children: [
-          const CircularProgressIndicator(),
           ClipRRect(
             borderRadius: BorderRadius.circular(16.0),
             child: cachedNetworkImage(
@@ -99,6 +100,9 @@ class EpisodeListView extends StatelessWidget {
                 color: Colors.white12,
                 width: 164,
                 height: 109,
+                child: const Center(
+                  child: CircularProgressIndicator(),
+                ),
               ),
             ),
           ),
@@ -116,7 +120,8 @@ class EpisodeListView extends StatelessWidget {
               ),
               child: Padding(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: 6.0, vertical: 4.0,
+                  horizontal: 6.0,
+                  vertical: 4.0,
                 ),
                 child: Text(
                   episode.number,
@@ -128,6 +133,26 @@ class EpisodeListView extends StatelessWidget {
                   ),
                 ),
               ),
+            ),
+          ),
+          if (isWatched)
+            Positioned(
+              bottom: 6,
+              left: 3,
+              child: Icon(
+                Icons.remove_red_eye,
+                color: theme.onSurface,
+                size: 26,
+              ),
+            ),
+          SizedBox(
+            width: 142,
+            child: LinearProgressIndicator(
+              value: 0.7,
+              backgroundColor: Colors.grey,
+              valueColor:
+                  AlwaysStoppedAnimation<Color>(Theme.of(context).primaryColor),
+              minHeight: 3,
             ),
           ),
         ],
@@ -146,8 +171,8 @@ class EpisodeListView extends StatelessWidget {
           fontWeight: FontWeight.w400,
         ),
         maxLines: 3,
-        expandText: 'show more',
-        collapseText: 'show less',
+        expandText: 'Show more',
+        collapseText: 'Show less',
       ),
     );
   }

@@ -1,6 +1,7 @@
 import 'package:dantotsu/Functions/Extensions.dart';
 import 'package:flutter/material.dart';
 
+import '../../../Widgets/CustomBottomDialog.dart';
 import '../../Settings/SettingsBottomSheet.dart';
 import 'AvtarWidget.dart';
 
@@ -25,7 +26,7 @@ class LoadingWidget extends StatelessWidget {
           top: 36.statusBar(),
           child: GestureDetector(
             child: const AvatarWidget(icon: Icons.settings),
-            onTap: () => settingsBottomSheet(context),
+            onTap: () => showCustomBottomDialog(context, const SettingsBottomSheet()),
           )
         ),
       ],

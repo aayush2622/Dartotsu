@@ -53,7 +53,7 @@ class MediaListScreenState extends State<MediaListScreen> {
           return const Center(child: Text('No data available'));
         }
 
-        return MediaListTabs(viewModel: _viewModel);
+        return MediaListTabs(data: _viewModel.mediaList.value!);
       }),
     );
   }

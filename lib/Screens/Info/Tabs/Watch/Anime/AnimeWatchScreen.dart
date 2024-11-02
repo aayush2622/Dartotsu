@@ -6,8 +6,6 @@ import 'package:get/get.dart';
 
 import '../../../../../Adaptor/Episode/EpisodeAdaptor.dart';
 import '../../../../../DataClass/Episode.dart';
-import '../../../../../Preferences/PrefManager.dart';
-import '../../../../../Preferences/Preferences.dart';
 import '../../../../../Widgets/ScrollConfig.dart';
 import 'AnimeParser.dart';
 
@@ -36,17 +34,8 @@ class AnimeWatchScreenState extends BaseWatchScreen<AnimeWatchScreen> {
     widget.mediaData.selected = _viewModel.loadSelected(widget.mediaData);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _viewModel.reset();
-      loadEpisodes();
+      _viewModel.init(widget.mediaData);
     });
-  }
-
-  void loadEpisodes() async {
-    if (mediaData.anime != null) {
-      await Future.wait([
-        _viewModel.getEpisodeData(widget.mediaData),
-        _viewModel.getFillerEpisodes(widget.mediaData),
-      ]);
-    }
   }
 
   @override
@@ -71,84 +60,80 @@ class AnimeWatchScreenState extends BaseWatchScreen<AnimeWatchScreen> {
         widget.mediaData.userProgress.toString(),
       );
 
-      var viewType = (mediaData.selected?.recyclerStyle ??
-              PrefManager.getVal(PrefName.AnimeDefaultView))
-          .obs;
       return Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildTitle(viewType),
+          _buildTitle(),
           _buildChunkSelector(chunks, selectedChunkIndex),
-          Obx(
-            () => EpisodeAdaptor(
-              type: viewType.value!,
-              episodeList: chunks[selectedChunkIndex.value],
-              mediaData: widget.mediaData,
-            ),
-          ),
+          Obx(() => EpisodeAdaptor(
+            type: _viewModel.viewType.value,
+            episodeList: chunks[selectedChunkIndex.value],
+            mediaData: widget.mediaData,
+          )),
         ],
       );
     });
   }
 
-  Widget _buildTitle(Rx<int?> viewType) {
+  Widget _buildTitle() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           const Text(
-            'Episode',
+            'Episodes',
             style: TextStyle(
               fontFamily: 'Poppins',
               fontWeight: FontWeight.bold,
-              fontSize: 18,
+              fontSize: 16,
             ),
             overflow: TextOverflow.ellipsis,
             maxLines: 1,
           ),
-          _buildIconButtons(viewType),
+          _buildIconButtons(),
         ],
       ),
     );
   }
 
-  Widget _buildIconButtons(Rx<int?> viewType) {
+  Widget _buildIconButtons() {
     final theme = Theme.of(context).colorScheme;
     final icons = [
       Icons.view_list_sharp,
       Icons.grid_view_rounded,
-      Icons.view_comfy_sharp,
+      Icons.view_comfy_rounded,
     ];
+    var viewType = _viewModel.viewType;
 
-    return Row(
-      children: List.generate(icons.length, (index) {
-        return Padding(
-          padding: const EdgeInsets.only(left: 10),
-          child: IconButton(
-            icon: Transform(
-              alignment: Alignment.center,
-              transform: index == 0 ? Matrix4.rotationY(3.14159) : Matrix4.identity(),
-              child: Icon(icons[index]),
+    return Obx((){
+      return Row(
+        children: List.generate(icons.length, (index) {
+          return Padding(
+            padding: const EdgeInsets.only(left: 10),
+            child: IconButton(
+              icon: Transform(
+                alignment: Alignment.center,
+                transform: index == 0 ? Matrix4.rotationY(3.14159) : Matrix4.identity(),
+                child: Icon(icons[index]),
+              ),
+              iconSize: 24,
+              color: viewType.value == index
+                  ? theme.onSurface
+                  : theme.onSurface.withOpacity(0.33),
+              onPressed: () => changeViewType(viewType,index),
             ),
-            iconSize: 24,
-            color: viewType.value == index
-                ? theme.onSurface
-                : theme.onSurface.withOpacity(0.33),
-            onPressed: () {
-              viewType.value = index;
-              changeViewType(index);
-            },
-          ),
-        );
-      }),
-    );
+          );
+        }),
+      );
+    });
   }
 
-  void changeViewType(int? viewType) {
-    final type = _viewModel.loadSelected(mediaData);
-    type.recyclerStyle = viewType;
+  void changeViewType(RxInt viewType, int index) {
+    var type = _viewModel.loadSelected(mediaData);
+    viewType.value = index;
+    type.recyclerStyle = index;
     _viewModel.saveSelected(mediaData.id, type);
   }
 

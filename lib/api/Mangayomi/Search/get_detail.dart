@@ -1,10 +1,7 @@
-import 'package:riverpod_annotation/riverpod_annotation.dart';
-
 import '../Eval/dart/model/m_manga.dart';
 import '../Eval/dart/service.dart';
 import '../Eval/javascript/service.dart';
 import '../Model/Source.dart';
-
 
 Future<MManga> getDetail({
   required String url,

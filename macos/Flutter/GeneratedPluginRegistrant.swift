@@ -6,7 +6,6 @@ import FlutterMacOS
 import Foundation
 
 import dynamic_color
-import flutter_inappwebview_macos
 import flutter_local_notifications
 import flutter_qjs
 import isar_flutter_libs
@@ -14,7 +13,7 @@ import package_info_plus
 import path_provider_foundation
 import protocol_handler_macos
 import screen_brightness_macos
-import screen_retriever
+import screen_retriever_macos
 import share_plus
 import sqflite_darwin
 import universal_video_controls
@@ -26,7 +25,6 @@ import window_manager
 
 func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
   DynamicColorPlugin.register(with: registry.registrar(forPlugin: "DynamicColorPlugin"))
-  InAppWebViewFlutterPlugin.register(with: registry.registrar(forPlugin: "InAppWebViewFlutterPlugin"))
   FlutterLocalNotificationsPlugin.register(with: registry.registrar(forPlugin: "FlutterLocalNotificationsPlugin"))
   FlutterQjsPlugin.register(with: registry.registrar(forPlugin: "FlutterQjsPlugin"))
   IsarFlutterLibsPlugin.register(with: registry.registrar(forPlugin: "IsarFlutterLibsPlugin"))
@@ -34,7 +32,7 @@ func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
   PathProviderPlugin.register(with: registry.registrar(forPlugin: "PathProviderPlugin"))
   ProtocolHandlerMacosPlugin.register(with: registry.registrar(forPlugin: "ProtocolHandlerMacosPlugin"))
   ScreenBrightnessMacosPlugin.register(with: registry.registrar(forPlugin: "ScreenBrightnessMacosPlugin"))
-  ScreenRetrieverPlugin.register(with: registry.registrar(forPlugin: "ScreenRetrieverPlugin"))
+  ScreenRetrieverMacosPlugin.register(with: registry.registrar(forPlugin: "ScreenRetrieverMacosPlugin"))
   SharePlusMacosPlugin.register(with: registry.registrar(forPlugin: "SharePlusMacosPlugin"))
   SqflitePlugin.register(with: registry.registrar(forPlugin: "SqflitePlugin"))
   UniversalVideoControlsPlugin.register(with: registry.registrar(forPlugin: "UniversalVideoControlsPlugin"))

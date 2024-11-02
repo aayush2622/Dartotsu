@@ -73,7 +73,7 @@ class MediaViewHolder extends StatelessWidget {
           const SizedBox(width: 4),
           Flexible(
             child: Text(
-              mediaInfo.relation ?? "",
+              mediaInfo.relation?.replaceAll("_", " ") ?? "",
               style: TextStyle(
                 fontFamily: 'Poppins',
                 fontSize: 12,

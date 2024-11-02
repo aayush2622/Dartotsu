@@ -170,6 +170,7 @@ class WatchPageViewModel extends GetxController {
     var dialog = WrongTitleDialog(
         source: source,
         selectedMedia: selectedMedia,
+        mediaData: mediaData,
         onChanged: (m) {
          selectedMedia.value = m;
          _saveShowResponse(mediaData, m, source, selected: true);

@@ -22,7 +22,7 @@ class SourceSelector extends ConsumerStatefulWidget {
       {super.key,
       this.currentSource,
       required this.onSourceChange,
-      required this.mediaData});
+      required this.mediaData,});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _SourceSelectorState();
@@ -36,6 +36,7 @@ class _SourceSelectorState extends ConsumerState<SourceSelector> {
         : ref.watch(getExtensionsStreamProvider(true));
 
     return Material(
+      color: Colors.transparent,
         child: sources.when(
       data: (List<Source> sources) {
         List installedSources = sources
@@ -45,6 +46,7 @@ class _SourceSelectorState extends ConsumerState<SourceSelector> {
             .toList();
 
         if (installedSources.isEmpty) {
+
           return const Column(
             children: [
               buildDropdownMenu(

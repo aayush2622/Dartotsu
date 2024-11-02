@@ -2,12 +2,10 @@ import 'package:dantotsu/api/Anilist/AnilistViewModel.dart';
 import 'package:dantotsu/Screens/Anime/AnimeScreen.dart';
 import 'package:dantotsu/api/Anilist/Data/data.dart';
 import 'package:dynamic_color/dynamic_color.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' as provider;
-import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:get/get.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:isar/isar.dart';
@@ -41,10 +39,11 @@ void main(List<String> args) async {
   );
 }
 
-Future init () async {
+Future init() async {
+  Get.config(enableLog: false);
   await PrefManager.init();
   await protocolHandler.register('dantotsu');
-  isar = await StorageProvider().initDB(null, inspector: kDebugMode);
+  isar = await StorageProvider().initDB(null);
   await StorageProvider().requestPermission();
   registerAllTypes();
   initializeDateFormatting();

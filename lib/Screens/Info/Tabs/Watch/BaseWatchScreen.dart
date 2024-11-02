@@ -30,18 +30,31 @@ abstract class BaseWatchScreen<T extends StatefulWidget> extends State<T> {
 
   @override
   Widget build(BuildContext context) {
-    var theme = Theme.of(context).colorScheme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ...releasingIn(mediaData, context),
-        _buildContent(theme),
-        ...widgetList,
+        _buildContent(),
+        if (source != null)
+          ...widgetList
+        else
+          Center(
+            child: Text(
+              'Install a source from extension page to start ${mediaData.anime != null ? 'watching' : 'reading'}',
+              style: const TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
       ],
     );
   }
 
-  Widget _buildContent(ColorScheme theme) {
+  Widget _buildContent() {
+    var theme = Theme.of(context).colorScheme;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 32.0),
       child: Column(
@@ -51,7 +64,9 @@ abstract class BaseWatchScreen<T extends StatefulWidget> extends State<T> {
           Obx(() => Text(
                 viewModel.status.value ?? '',
                 style: TextStyle(
-                    color: theme.onSurface, fontWeight: FontWeight.bold),
+                  color: theme.onSurface,
+                  fontWeight: FontWeight.bold,
+                ),
               )),
           const SizedBox(height: 12),
           SourceSelector(
@@ -60,7 +75,7 @@ abstract class BaseWatchScreen<T extends StatefulWidget> extends State<T> {
             mediaData: mediaData,
           ),
           const SizedBox(height: 16),
-          _buildWrongTitle(),
+          if (source != null) _buildWrongTitle(),
         ],
       ),
     );
@@ -72,10 +87,9 @@ abstract class BaseWatchScreen<T extends StatefulWidget> extends State<T> {
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         GestureDetector(
-          onTap: () async =>
-              viewModel.wrongTitle(context, source!, mediaData, null),
+          onTap: () => viewModel.wrongTitle(context, source!, mediaData, null),
           child: Text(
-            'Wrong title?',
+            'Wrong Title?',
             style: TextStyle(
               color: theme.secondary,
               fontWeight: FontWeight.bold,
@@ -92,9 +106,8 @@ abstract class BaseWatchScreen<T extends StatefulWidget> extends State<T> {
 
   List<Widget> _buildYouTubeButton() {
     if (mediaData.anime?.youtube == null ||
-        !PrefManager.getVal(PrefName.showYtButton)) {
-      return [];
-    }
+        !PrefManager.getVal(PrefName.showYtButton)) return [];
+
 
     return [
       SizedBox(
@@ -105,7 +118,8 @@ abstract class BaseWatchScreen<T extends StatefulWidget> extends State<T> {
             backgroundColor: const Color(0xFFFF0000),
             padding: EdgeInsets.zero,
             shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12.0)),
+              borderRadius: BorderRadius.circular(12.0),
+            ),
           ),
           child: const Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -115,11 +129,12 @@ abstract class BaseWatchScreen<T extends StatefulWidget> extends State<T> {
               Text(
                 'Play on YouTube',
                 style: TextStyle(
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                    overflow: TextOverflow.ellipsis),
-                maxLines: 2,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               ),
             ],
           ),

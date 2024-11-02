@@ -2,13 +2,14 @@
 import 'package:dantotsu/Adaptor/Media/MediaAdaptor.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import '../../DataClass/Media.dart';
 import '../../Widgets/ScrollConfig.dart';
 import 'MediaListViewModel.dart';
 
 class MediaListTabs extends StatefulWidget {
-  final MediaListViewModel viewModel;
+  final Map<String, List<media>> data;
 
-const MediaListTabs({super.key, required this.viewModel});
+const MediaListTabs({super.key, required this.data});
 
 @override
 MediaListTabsState createState() => MediaListTabsState();
@@ -22,7 +23,7 @@ class MediaListTabsState extends State<MediaListTabs> with TickerProviderStateMi
   void initState() {
     super.initState();
     _tabController = TabController(
-      length: widget.viewModel.mediaList.value!.keys.length,
+      length: widget.data.keys.length,
       vsync: this,
     );
   }
@@ -30,8 +31,8 @@ class MediaListTabsState extends State<MediaListTabs> with TickerProviderStateMi
   @override
   void didUpdateWidget(MediaListTabs oldWidget) {
     super.didUpdateWidget(oldWidget);
-    var mediaListOld = oldWidget.viewModel.mediaList.value!;
-    var mediaListNew = widget.viewModel.mediaList.value!;
+    var mediaListOld = oldWidget.data;
+    var mediaListNew = widget.data;
     if (mediaListOld.keys.length != mediaListNew.keys.length) {
       _tabController?.dispose();
       _tabController = TabController(
@@ -43,7 +44,7 @@ class MediaListTabsState extends State<MediaListTabs> with TickerProviderStateMi
 
   @override
   Widget build(BuildContext context) {
-    var mediaList = widget.viewModel.mediaList.value!;
+    var mediaList = widget.data;
     var theme = Theme.of(context).colorScheme;
     return ScrollConfig(
         context,

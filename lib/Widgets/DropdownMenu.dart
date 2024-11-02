@@ -39,15 +39,18 @@ class buildDropdownMenuState extends State<buildDropdownMenu> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: widget.padding ?? const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      padding: widget.padding ??
+          const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       child: InputDecorator(
         decoration: InputDecoration(
           labelText: widget.labelText,
-          prefixIcon: widget.prefixIcon != null ? Icon(widget.prefixIcon) : null,
+          prefixIcon:
+              widget.prefixIcon != null ? Icon(widget.prefixIcon) : null,
           contentPadding: const EdgeInsets.symmetric(horizontal: 8.0),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(widget.borderRadius),
-            borderSide: BorderSide(color: widget.borderColor ?? Colors.transparent),
+            borderSide:
+                BorderSide(color: widget.borderColor ?? Colors.transparent),
           ),
           hoverColor: Colors.transparent,
           focusColor: Colors.transparent,
@@ -71,11 +74,16 @@ class buildDropdownMenuState extends State<buildDropdownMenu> {
               final displayName = option[0].toUpperCase() + option.substring(1);
               return DropdownMenuItem<String>(
                 value: option,
-                child: Text(displayName,
-                    style: const TextStyle(
-                        fontFamily: 'Poppins',
-                        fontSize: 14,
-                        fontWeight: FontWeight.w700)),
+                child: Text(
+                  displayName,
+                  style: const TextStyle(
+                    fontFamily: 'Poppins',
+                    fontSize: 14,
+                    fontWeight: FontWeight.w700,
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
               );
             }).toList(),
           ),

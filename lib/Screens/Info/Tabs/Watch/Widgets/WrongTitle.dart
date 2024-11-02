@@ -12,11 +12,13 @@ import '../../../../../api/Mangayomi/Search/search.dart';
 class WrongTitleDialog extends StatefulWidget {
   final Source source;
   final Rxn<MManga?>? selectedMedia;
+  final media mediaData;
   final Function(MManga)? onChanged;
 
   const WrongTitleDialog({
     super.key,
     required this.source,
+    required this.mediaData,
     this.selectedMedia,
     this.onChanged,
   });
@@ -32,7 +34,7 @@ class WrongTitleDialogState extends State<WrongTitleDialog> {
   @override
   void initState() {
     super.initState();
-    final initialSearchText = widget.selectedMedia?.value?.name ?? '';
+    final initialSearchText = widget.selectedMedia?.value?.name ??  widget.mediaData.mainName(); '';
     textEditingController.text = initialSearchText;
     searchFuture = _performSearch(initialSearchText);
   }

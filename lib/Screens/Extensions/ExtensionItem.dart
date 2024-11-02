@@ -63,6 +63,7 @@ class _ExtensionListTileWidgetState
 
     return Material(
       child: ListTile(
+        tileColor: theme.surface,
         leading: Container(
           height: 37,
           width: 37,

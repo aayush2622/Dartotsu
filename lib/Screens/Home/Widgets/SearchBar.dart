@@ -1,8 +1,9 @@
 import 'package:dantotsu/Functions/Extensions.dart';
 import 'package:flutter/material.dart';
 
+import '../../../Widgets/CustomBottomDialog.dart';
 import '../../../api/Anilist/Anilist.dart';
-import '../../Settings/SettingsBottomSheet.dart';
+import '../../Settings/settingsBottomSheet.dart';
 import 'AvtarWidget.dart';
 
 class MediaSearchBar extends StatelessWidget {
@@ -55,7 +56,7 @@ class MediaSearchBar extends StatelessWidget {
           const SizedBox(width: 8),
            GestureDetector(
             child: const AvatarWidget(icon: Icons.settings),
-            onTap: () => settingsBottomSheet(context),
+            onTap: () => showCustomBottomDialog(context, const SettingsBottomSheet()),
           )
         ],
       ),

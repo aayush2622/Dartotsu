@@ -17,6 +17,7 @@ import '../../DataClass/MediaSection.dart';
 import '../../Preferences/PrefManager.dart';
 import '../../Preferences/Preferences.dart';
 import '../../Widgets/CachedNetworkImage.dart';
+import '../../Widgets/CustomBottomDialog.dart';
 import '../../api/Anilist/Anilist.dart';
 import '../../api/Anilist/AnilistViewModel.dart';
 import '../BaseMediaScreen.dart';
@@ -218,7 +219,7 @@ class HomeScreenState extends BaseMediaScreen<HomeScreen> {
         child: Stack(
           children: [
             GestureDetector(
-              onTap: () => settingsBottomSheet(context),
+              onTap: () => showCustomBottomDialog(context, const SettingsBottomSheet()),
               child: const AvatarWidget(icon: Icons.settings),
             ),
             if (Anilist.unreadNotificationCount > 0)
@@ -245,7 +246,7 @@ class HomeScreenState extends BaseMediaScreen<HomeScreen> {
         child: SlideUpAnimation(
           child: Row(children: [
             GestureDetector(
-              onTap: () => settingsBottomSheet(context),
+              onTap: () {},
               child: CircleAvatar(
                 backgroundColor: Colors.transparent,
                 radius: 26.0,

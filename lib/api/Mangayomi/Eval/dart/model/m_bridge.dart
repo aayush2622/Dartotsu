@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:bot_toast/bot_toast.dart';
 import 'package:dantotsu/Functions/string_extensions.dart';
 import 'package:dantotsu/api/Mangayomi/Eval/dart/model/video.dart';
 import 'package:dantotsu/api/Mangayomi/Eval/javascript/http.dart';
@@ -634,30 +633,6 @@ final List<String> _dateFormats = [
   "MMMM d, yyyy",
   "MMM dd,yyyy"
 ];
-
-void botToast(String title,
-    {int second = 10,
-    double? fontSize,
-    double alignX = 0,
-    double alignY = 0.99}) {
-  final assets = [
-    'assets/app_icons/icon-black.png',
-    'assets/app_icons/icon-red.png'
-  ];
-  BotToast.showNotification(
-    onlyOne: true,
-    dismissDirections: [DismissDirection.horizontal, DismissDirection.down],
-    align: Alignment(alignX, alignY),
-    duration: Duration(seconds: second),
-    animationDuration: const Duration(milliseconds: 200),
-    animationReverseDuration: const Duration(milliseconds: 200),
-    leading: (_) => Image.asset((assets..shuffle()).first, height: 25),
-    title: (_) => Text(
-      title,
-      style: TextStyle(fontSize: fontSize),
-    ),
-  );
-}
 
 (encrypt.Encrypter, encrypt.IV) _encrypt(String keyy, String ivv) {
   final key = encrypt.Key.fromUtf8(keyy);
