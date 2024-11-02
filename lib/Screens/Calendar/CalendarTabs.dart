@@ -1,26 +1,28 @@
-import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+
+import '../../Adaptor/Media/MediaAdaptor.dart';
+import '../../DataClass/Media.dart';
 import '../../Widgets/ScrollConfig.dart';
-import 'CalendarViewModel.dart';
 
-class CalendarTabs extends StatefulWidget{
-  final CalendarViewModel  viewModel;
+class CalendarTabs extends StatefulWidget {
+  final Map<String, List<media>> data;
 
-  const CalendarTabs({super.key,required this.viewModel});
+  const CalendarTabs({super.key, required this.data});
 
   @override
   CalendarTabsState createState() => CalendarTabsState();
 }
 
-
-class CalendarTabsState extends State<CalendarTabs> with TickerProviderStateMixin {
+class CalendarTabsState extends State<CalendarTabs>
+    with TickerProviderStateMixin {
   TabController? _tabController;
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(
-      length: widget.viewModel.calendarData.value!.length,
+      length: widget.data.keys.length,
       vsync: this,
     );
   }
@@ -28,8 +30,8 @@ class CalendarTabsState extends State<CalendarTabs> with TickerProviderStateMixi
   @override
   void didUpdateWidget(CalendarTabs oldWidget) {
     super.didUpdateWidget(oldWidget);
-    var mediaListOld = oldWidget.viewModel.calendarData.value!;
-    var mediaListNew = widget.viewModel.calendarData.value!;
+    var mediaListOld = oldWidget.data.values;
+    var mediaListNew = widget.data.values;
     if (mediaListOld.length != mediaListNew.length) {
       _tabController?.dispose();
       _tabController = TabController(
@@ -39,26 +41,54 @@ class CalendarTabsState extends State<CalendarTabs> with TickerProviderStateMixi
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
-    var calendarData = widget.viewModel.calendarData.value!;
-    if (kDebugMode) {
-      print(calendarData);
-
-    }var theme = Theme.of(context).colorScheme;
-    return ScrollConfig(
-        context,
+    var calendarData = widget.data;
+    var theme = Theme.of(context).colorScheme;
+    return ScrollConfig(context,
         child: DefaultTabController(
-            length: calendarData.length,
-            child:  const Column(
+            length: calendarData.keys.length,
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("tabs")
+                TabBar(
+                  indicatorSize: TabBarIndicatorSize.label,
+                  isScrollable: true,
+                  dragStartBehavior: DragStartBehavior.start,
+                  controller: _tabController,
+                  labelStyle: const TextStyle(
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14.0,
+                  ),
+                  unselectedLabelStyle: TextStyle(
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14.0,
+                    color: theme.onSurface.withOpacity(0.48),
+                  ),
+                  tabs: calendarData.keys.map((String tabTitle) {
+                    return Tab(
+                        text:
+                            '${tabTitle.toUpperCase()} (${calendarData[tabTitle]!.length})');
+                  }).toList(),
+                ),
+                Expanded(
+                  child: TabBarView(
+                    controller: _tabController,
+                    children: calendarData.keys.map((String tabTitle) {
+                      return SingleChildScrollView(
+                        child: MediaAdaptor(
+                          mediaList: calendarData[tabTitle]!,
+                          type: 3,
+                          isLarge: true,
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                ),
               ],
-            )
-        )
-    );
+            )));
   }
 }

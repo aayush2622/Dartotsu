@@ -12,7 +12,7 @@ class CalendarScreen extends StatefulWidget {
 
 class CalendarScreenState extends State<CalendarScreen> {
   final _viewModel = Get.put(CalendarViewModel());
-
+  bool showOnlyLibrary = false;
   @override
   void initState() {
     super.initState();
@@ -38,6 +38,21 @@ class CalendarScreenState extends State<CalendarScreen> {
           overflow: TextOverflow.ellipsis,
         ),
         iconTheme: IconThemeData(color: theme.primary),
+        actions: [
+          IconButton(
+            icon: Icon(
+              showOnlyLibrary
+                  ? Icons.collections_bookmark
+                  : Icons.library_books,
+            ),
+            onPressed: () {
+              setState(() {
+                showOnlyLibrary = !showOnlyLibrary;
+              });
+              _viewModel.loadAll(showOnlyLibrary: showOnlyLibrary);
+            },
+          ),
+        ],
       ),
 
       body: Obx((){
@@ -49,7 +64,7 @@ class CalendarScreenState extends State<CalendarScreen> {
           return const Center(child: Text('No data available'));
         }
 
-        return CalendarTabs(viewModel: _viewModel);
+        return CalendarTabs(data: _viewModel.calendarData.value!,);
       }),
     );
   }
