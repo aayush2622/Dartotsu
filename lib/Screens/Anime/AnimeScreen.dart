@@ -1,5 +1,5 @@
 import 'package:dantotsu/Functions/Extensions.dart';
-import 'package:dantotsu/Screens/Calendar/Calendar.dart';
+import 'package:dantotsu/Screens/Calendar/CalendarScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 

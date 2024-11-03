@@ -2,13 +2,11 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
-import '../../Preferences/PrefManager.dart';
-import '../../Preferences/Preferences.dart';
 import 'Discord.dart';
 
 extension DiscordUrlExtension on String {
   Future<String?> getDiscordUrl() async {
-    var token = PrefManager.getVal(PrefName.discordToken);
+    var token = Discord.token.value;
     if (token.isEmpty) return null;
     const String api = "https://discord.com/api/v9/applications/$applicationId/external-assets";
     if (startsWith("mp:")) return this;

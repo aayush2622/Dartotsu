@@ -16,7 +16,7 @@ import 'RpcExternalAsset.dart';
 
 const String applicationId = "1163925779692912771";
 const String smallImage =
-    "mp:external/GJEe4hKzr8w56IW6ZKQz43HFVEo8pOtA_C-dJiWwxKo/https/cdn.discordapp.com/app-icons/1163925779692912771/f6b42d41dfdf0b56fcc79d4a12d2ac66.png";
+    "mp:external/9NqpMxXs4ZNQtMG42L7hqINW92GqqDxgxS9Oh0Sp880/%3Fsize%3D48%26quality%3Dlossless%26name%3DDantotsu/https/cdn.discordapp.com/emojis/1167344924874784828.gif";
 const String smallImageAniList =
     "mp:external/rHOIjjChluqQtGyL_UHk6Z4oAqiVYlo_B7HSGPLSoUg/%3Fsize%3D128/https/cdn.discordapp.com/icons/210521487378087947/a_f54f910e2add364a3da3bb2f2fce0c72.webp";
 
@@ -79,6 +79,7 @@ class _DiscordController extends GetxController {
   }
 
   Future<void> setRpc(media mediaData, Episode episode, String total) async {
+    var isAnime = mediaData.anime != null;
     try {
       final Map<String, dynamic> rpc = {
         'op': 3,
@@ -88,7 +89,7 @@ class _DiscordController extends GetxController {
               'application_id': applicationId,
               'name': mediaData.userPreferredName,
               'details': episode.title,
-              'state': '${episode.number} / $total',
+              'state': '${isAnime ? "Episode" : "Chapter"}: ${episode.number}/$total',
               'type': 3,
               'timestamps': null,
               'assets': {
@@ -98,12 +99,12 @@ class _DiscordController extends GetxController {
                 'small_text': 'Dantotsu',
               },
               'buttons': [
-                'View ${mediaData.anime != null ? 'Anime' : 'Manga'}',
-                '${mediaData.anime != null ? 'Watch' : 'Read'} on Dantotsu',
+                'View ${isAnime ? 'Anime' : 'Manga'}',
+                '${isAnime ? 'Watch' : 'Read'} on Dantotsu',
               ],
               'metadata': {
                 'button_urls': [
-                  'https://anilist.co/${mediaData.anime != null ? 'anime' : 'manga'}/${mediaData.id}',
+                  'https://anilist.co/${isAnime ? 'anime' : 'manga'}/${mediaData.id}',
                   'https://dantotsu.app/',
                 ],
               },

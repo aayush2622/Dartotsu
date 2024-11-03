@@ -21,7 +21,7 @@ import '../../Widgets/CustomBottomDialog.dart';
 import '../../api/Anilist/Anilist.dart';
 import '../../api/Anilist/AnilistViewModel.dart';
 import '../BaseMediaScreen.dart';
-import '../MediaList/MediaList.dart';
+import '../MediaList/MediaListScreen.dart';
 import '../Settings/SettingsBottomSheet.dart';
 import 'Widgets/AvtarWidget.dart';
 import 'Widgets/LoadingWidget.dart';

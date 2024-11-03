@@ -1,7 +1,8 @@
-import 'package:dantotsu/Screens/Calendar/CalendarTabs.dart';
 import 'package:dantotsu/Screens/Calendar/CalendarViewModel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../MediaList/MediaListTabs.dart';
 
 class CalendarScreen extends StatefulWidget {
   const CalendarScreen({super.key});
@@ -13,10 +14,11 @@ class CalendarScreen extends StatefulWidget {
 class CalendarScreenState extends State<CalendarScreen> {
   final _viewModel = Get.put(CalendarViewModel());
   bool showOnlyLibrary = false;
+
   @override
   void initState() {
     super.initState();
-    _viewModel.loadAll();
+    _viewModel.loadAll(showOnlyLibrary: showOnlyLibrary);
   }
 
   @override
@@ -54,17 +56,21 @@ class CalendarScreenState extends State<CalendarScreen> {
           ),
         ],
       ),
-
-      body: Obx((){
+      body: Obx(() {
         if (_viewModel.isLoading.value) {
           return const Center(child: CircularProgressIndicator());
         }
 
-        if (_viewModel.calendarData.value == null || _viewModel.calendarData.value!.isEmpty) {
+        if (_viewModel.calendarData.value == null ||
+            _viewModel.calendarData.value!.isEmpty) {
           return const Center(child: Text('No data available'));
         }
 
-        return CalendarTabs(data: _viewModel.calendarData.value!,);
+        return MediaListTabs(
+          data: _viewModel.calendarData.value!,
+          initialIndex: 1,
+          isLarge: true,
+        );
       }),
     );
   }

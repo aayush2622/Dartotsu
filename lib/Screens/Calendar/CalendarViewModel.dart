@@ -7,15 +7,14 @@ import '../../api/Anilist/Anilist.dart';
 
 class CalendarViewModel extends GetxController {
   var calendarData =  Rxn<Map<String, List<media>>>();
-  var calendar = RxMap<String, List<media>>();
-
-  Map<String, List<media>>? cachedAllCalendarData;
-  Map<String, List<media>>? cachedLibraryCalendarData;
+  var cachedAllCalendarData = Rxn<Map<String, List<media>>>();
+  var cachedLibraryCalendarData = Rxn<Map<String, List<media>>>();
   var isLoading = false.obs;
+
   Future<void> loadAll({bool showOnlyLibrary = false}) async {
     try{
       isLoading.value = true;
-      if (cachedAllCalendarData == null || cachedLibraryCalendarData == null) {
+      if (cachedAllCalendarData.value == null || cachedLibraryCalendarData.value == null) {
         final res = await Anilist.query.getCalendarData();
 
         final DateFormat df = DateFormat.yMMMMEEEEd();
@@ -43,11 +42,11 @@ class CalendarViewModel extends GetxController {
           }
         }
 
-        cachedAllCalendarData = allMap;
-        cachedLibraryCalendarData = libraryMap;
+        cachedAllCalendarData.value = allMap;
+        cachedLibraryCalendarData.value = libraryMap;
       }
 
-      calendarData.value = (showOnlyLibrary ? cachedLibraryCalendarData ?? {} : cachedAllCalendarData ?? {});
+      calendarData.value = (showOnlyLibrary ? cachedLibraryCalendarData.value ?? {} : cachedAllCalendarData.value ?? {});
     }finally{
       isLoading.value = false;
     }

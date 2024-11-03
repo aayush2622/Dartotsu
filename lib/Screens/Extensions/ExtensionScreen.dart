@@ -24,17 +24,16 @@ class _BrowseScreenState extends ConsumerState<ExtensionScreen>
 
   @override
   void initState() {
-
+    super.initState();
+    _checkPermission();
     _tabBarController = TabController(length: 4, vsync: this);
     _tabBarController.animateTo(0);
     _tabBarController.addListener(() {
-      _checkPermission();
       setState(() {
         _textEditingController.clear();
         //_isSearch = false;
       });
     });
-    super.initState();
   }
 
   _checkPermission() async {
