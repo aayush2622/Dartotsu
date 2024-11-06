@@ -7,14 +7,16 @@ import '../../api/Anilist/Anilist.dart';
 
 class MediaPageViewModel extends GetxController {
   var dataLoaded = false.obs;
+
+  media? cacheMediaData;
+
   Future<media> getMediaDetails(media media) async {
     var data = await Anilist.query.mediaDetails(media);
     dataLoaded.value = true;
-    return data ?? media;
+    cacheMediaData = data ?? media;
+    return cacheMediaData!;
   }
-  reset(){
-    dataLoaded.value = false;
-  }
+
   List<TextSpan> buildMediaDetailsSpans(media mediaData, BuildContext context) {
     final List<TextSpan> spans = [];
     var theme = Theme.of(context).colorScheme;

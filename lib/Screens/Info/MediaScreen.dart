@@ -14,7 +14,6 @@ import '../../Theme/ThemeProvider.dart';
 import '../../Widgets/CachedNetworkImage.dart';
 import '../../Widgets/ScrollConfig.dart';
 import 'MediaScreenViewModel.dart';
-import 'Tabs/Watch/WatchPage.dart';
 
 class MediaInfoPage extends StatefulWidget {
   final media mediaData;
@@ -27,15 +26,14 @@ class MediaInfoPage extends StatefulWidget {
 
 class MediaInfoPageState extends State<MediaInfoPage> {
   int _selectedIndex = 0;
-  final _viewModel = Get.put(MediaPageViewModel());
+  late MediaPageViewModel _viewModel;
+
   late media mediaData;
 
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _viewModel.reset();
-    });
+    _viewModel = Get.put(MediaPageViewModel(), tag: widget.mediaData.id.toString());
     load();
   }
 
@@ -43,10 +41,14 @@ class MediaInfoPageState extends State<MediaInfoPage> {
 
   Future<void> load() async {
     mediaData = widget.mediaData;
-    mediaData = await _viewModel.getMediaDetails(widget.mediaData);
-    setState(() {
-      loaded = true;
-    });
+
+    if (!_viewModel.dataLoaded.value) {
+      mediaData = await _viewModel.getMediaDetails(widget.mediaData);
+    } else {
+      mediaData = _viewModel.cacheMediaData!;
+    }
+
+    setState(() => loaded = true);
   }
 
   @override
@@ -62,11 +64,13 @@ class MediaInfoPageState extends State<MediaInfoPage> {
               [
                 Padding(
                   padding: const EdgeInsets.symmetric(),
-                  child: loaded ? Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [_buildSliverContent()],
-                  ) : const Center(child: CircularProgressIndicator()),
+                  child: loaded
+                      ? Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [_buildSliverContent()],
+                        )
+                      : const Center(child: CircularProgressIndicator()),
                 ),
               ],
             ),
@@ -76,6 +80,7 @@ class MediaInfoPageState extends State<MediaInfoPage> {
       bottomNavigationBar: _buildBottomNavigationBar(),
     );
   }
+
   Widget _buildSliverContent() {
     return IndexedStack(
       index: _selectedIndex,
@@ -90,7 +95,6 @@ class MediaInfoPageState extends State<MediaInfoPage> {
     );
   }
 
-
   BottomNavigationBar _buildBottomNavigationBar() {
     var isAnime = mediaData.anime != null;
     return BottomNavigationBar(
@@ -101,7 +105,8 @@ class MediaInfoPageState extends State<MediaInfoPage> {
           label: 'INFO',
         ),
         BottomNavigationBarItem(
-          icon: Icon(isAnime ? Icons.movie_filter_rounded : Icons.import_contacts),
+          icon: Icon(
+              isAnime ? Icons.movie_filter_rounded : Icons.import_contacts),
           label: isAnime ? 'WATCH' : 'READ',
         ),
         const BottomNavigationBarItem(
