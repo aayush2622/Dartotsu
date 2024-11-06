@@ -42,10 +42,9 @@ class Jikan {
       } else if (response.statusCode == 429) {
         return eps;
       } else {
-        throw Exception('Error: ${response.statusCode}');
+        break;
       }
     }
-
     return eps;
   }
 }
