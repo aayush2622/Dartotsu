@@ -11,9 +11,10 @@ class MediaPageViewModel extends GetxController {
   media? cacheMediaData;
 
   Future<media> getMediaDetails(media media) async {
-    var data = await Anilist.query.mediaDetails(media);
-    dataLoaded.value = true;
-    cacheMediaData = data ?? media;
+    if (cacheMediaData == null) {
+      cacheMediaData = (await Anilist.query.mediaDetails(media)) ?? media;
+      dataLoaded.value = true;
+    }
     return cacheMediaData!;
   }
 

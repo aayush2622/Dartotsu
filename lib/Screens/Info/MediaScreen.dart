@@ -35,19 +35,14 @@ class MediaInfoPageState extends State<MediaInfoPage> {
     super.initState();
     _viewModel =
         Get.put(MediaPageViewModel(), tag: widget.mediaData.id.toString());
-    load();
+    mediaData = widget.mediaData;
+    loadData();
   }
 
   var loaded = false;
 
-  Future<void> load() async {
-    mediaData = widget.mediaData;
-
-    if (!_viewModel.dataLoaded.value) {
-      mediaData = await _viewModel.getMediaDetails(widget.mediaData);
-    } else {
-      mediaData = _viewModel.cacheMediaData!;
-    }
+  Future<void> loadData() async {
+    mediaData = await _viewModel.getMediaDetails(widget.mediaData);
 
     setState(() => loaded = true);
   }

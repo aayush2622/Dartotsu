@@ -209,11 +209,7 @@ class AnimeWatchScreenState extends BaseWatchScreen<AnimeWatchScreen> {
   int _calculateChunkSize(Map<String, Episode> episodeList) {
     final total = episodeList.values.length;
     final divisions = total / 10;
-    return (divisions < 25)
-        ? 25
-        : (divisions < 50)
-            ? 50
-            : 100;
+    return (divisions < 25) ? 25 : (divisions < 50) ? 50 : 100;
   }
 
   List<List<Episode>> _chunkEpisodes(
