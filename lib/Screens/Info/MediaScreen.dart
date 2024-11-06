@@ -33,7 +33,8 @@ class MediaInfoPageState extends State<MediaInfoPage> {
   @override
   void initState() {
     super.initState();
-    _viewModel = Get.put(MediaPageViewModel(), tag: widget.mediaData.id.toString());
+    _viewModel =
+        Get.put(MediaPageViewModel(), tag: widget.mediaData.id.toString());
     load();
   }
 
@@ -106,7 +107,8 @@ class MediaInfoPageState extends State<MediaInfoPage> {
         ),
         BottomNavigationBarItem(
           icon: Icon(
-              isAnime ? Icons.movie_filter_rounded : Icons.import_contacts),
+            isAnime ? Icons.movie_filter_rounded : Icons.import_contacts,
+          ),
           label: isAnime ? 'WATCH' : 'READ',
         ),
         const BottomNavigationBarItem(

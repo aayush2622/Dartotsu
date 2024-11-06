@@ -11,8 +11,6 @@ import 'BaseParser.dart';
 import 'Widgets/SourceSelector.dart';
 
 abstract class BaseWatchScreen<T extends StatefulWidget> extends State<T> {
-  Source? source;
-
   BaseParser get viewModel;
 
   media get mediaData;
@@ -22,7 +20,7 @@ abstract class BaseWatchScreen<T extends StatefulWidget> extends State<T> {
   void onSourceChange(Source source) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       setState(() {
-        this.source = source;
+        viewModel.source.value = source;
         viewModel.searchMedia(source, mediaData);
       });
     });
@@ -35,7 +33,7 @@ abstract class BaseWatchScreen<T extends StatefulWidget> extends State<T> {
       children: [
         ...releasingIn(mediaData, context),
         _buildContent(),
-        if (source != null)
+        if (viewModel.source.value != null)
           ...widgetList
         else
           Center(
@@ -70,12 +68,12 @@ abstract class BaseWatchScreen<T extends StatefulWidget> extends State<T> {
               )),
           const SizedBox(height: 12),
           SourceSelector(
-            currentSource: source,
+            currentSource: viewModel.source.value,
             onSourceChange: onSourceChange,
             mediaData: mediaData,
           ),
           const SizedBox(height: 16),
-          if (source != null) _buildWrongTitle(),
+          if (viewModel.source.value != null) _buildWrongTitle(),
         ],
       ),
     );
@@ -87,7 +85,7 @@ abstract class BaseWatchScreen<T extends StatefulWidget> extends State<T> {
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         GestureDetector(
-          onTap: () => viewModel.wrongTitle(context, source!, mediaData, null),
+          onTap: () => viewModel.wrongTitle(context, mediaData, null),
           child: Text(
             'Wrong Title?',
             style: TextStyle(

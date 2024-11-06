@@ -31,9 +31,10 @@ class AnimeWatchScreenState extends BaseWatchScreen<AnimeWatchScreen> {
   void initState() {
     super.initState();
     _viewModel = Get.put(AnimeParser(), tag: widget.mediaData.id.toString());
+
     widget.mediaData.selected = _viewModel.loadSelected(widget.mediaData);
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _viewModel.reset();
       _viewModel.init(widget.mediaData);
     });
   }

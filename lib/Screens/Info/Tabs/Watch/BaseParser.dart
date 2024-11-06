@@ -15,12 +15,8 @@ import 'Widgets/WrongTitle.dart';
 abstract class BaseParser extends GetxController {
   var selectedMedia = Rxn<MManga?>(null);
   var status = Rxn<String>(null);
+  var source = Rxn<Source>(null);
 
-  @mustCallSuper
-  void reset() {
-    selectedMedia.value = null;
-    status.value = null;
-  }
 
   void saveSelected(int id , Selected data) {
     PrefManager.setCustomVal("Selected-$id", data);
@@ -165,16 +161,15 @@ abstract class BaseParser extends GetxController {
 
   Future<void> wrongTitle(
       BuildContext context,
-      Source source,
       media mediaData,
       Function(MManga)? onChange) async {
     var dialog = WrongTitleDialog(
-        source: source,
+        source: source.value!,
         mediaData: mediaData,
         selectedMedia: selectedMedia,
         onChanged: (m) {
           selectedMedia.value = m;
-          _saveShowResponse(mediaData, m, source, selected: true);
+          _saveShowResponse(mediaData, m, source.value!, selected: true);
           onChange?.call(m);
         });
     showCustomBottomDialog(context, dialog);

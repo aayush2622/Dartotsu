@@ -20,17 +20,11 @@ class AnimeParser extends BaseParser {
   var kitsuEpisodeList = Rxn<Map<String, Episode>>(null);
   var fillerEpisodesList = Rxn<Map<String, Episode>>(null);
   var viewType = 0.obs;
+  var dataLoaded = false.obs;
 
-  @override
-  void reset() {
-    super.reset();
-    episodeList.value = null;
-    anifyEpisodeList.value = null;
-    kitsuEpisodeList.value = null;
-    fillerEpisodesList.value = null;
-  }
 
   void init(media mediaData) async {
+    if (dataLoaded.value) return;
     viewType.value = mediaData.selected?.recyclerStyle ??
         PrefManager.getVal(PrefName.AnimeDefaultView);
     await Future.wait([
@@ -40,10 +34,10 @@ class AnimeParser extends BaseParser {
   }
 
   @override
-  Future<void> wrongTitle(context, source, mediaData, onChange) async {
-    super.wrongTitle(context, source, mediaData, (m) {
+  Future<void> wrongTitle(context, mediaData, onChange) async {
+    super.wrongTitle(context, mediaData, (m) {
       episodeList.value = null;
-      getEpisode(m, source);
+      getEpisode(m, source.value!);
     });
   }
 
@@ -56,7 +50,7 @@ class AnimeParser extends BaseParser {
   void getEpisode(MManga media, Source source) async {
     if (media.link == null) return;
     var m = await getDetail(url: media.link!, source: source);
-
+    dataLoaded.value = true;
     var chapters = m.chapters;
     episodeList.value = Map.fromEntries(
       chapters?.reversed.map((e) {
