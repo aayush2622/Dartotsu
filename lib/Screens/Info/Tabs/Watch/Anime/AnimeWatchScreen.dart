@@ -181,6 +181,11 @@ class AnimeWatchScreenState extends BaseWatchScreen<AnimeWatchScreen> {
   }
 
   void updateEpisodeDetails(Map<String, Episode> episodeList) {
+    widget.mediaData.anime?.totalEpisodes = episodeList.length;
+    widget.mediaData.anime?.episodes = episodeList;
+    widget.mediaData.anime?.fillerEpisodes = _viewModel.fillerEpisodesList.value;
+    widget.mediaData.anime?.kitsuEpisodes = _viewModel.kitsuEpisodeList.value;
+    widget.mediaData.anime?.anifyEpisodes = _viewModel.anifyEpisodeList.value;
     episodeList.forEach((number, episode) {
       episode.title = _viewModel.anifyEpisodeList.value?[number]?.title ??
           _viewModel.kitsuEpisodeList.value?[number]?.title ??

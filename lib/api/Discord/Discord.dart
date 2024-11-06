@@ -78,8 +78,15 @@ class _DiscordController extends GetxController {
     showCustomBottomDialog(context, dialog);
   }
 
-  Future<void> setRpc(media mediaData, Episode episode, String total) async {
+  Future<void> setRpc(media mediaData, Episode episode) async {
     var isAnime = mediaData.anime != null;
+    var totalFromSource = isAnime ? mediaData.anime!.episodes?.values.last.number : mediaData.manga!.chapters?.values.last.number;
+    var total = isAnime ? mediaData.anime?.totalEpisodes.toString() : mediaData.manga?.totalChapters.toString() ?? totalFromSource ?? "??";
+    DateTime startTime = DateTime.now();
+    DateTime endTime = startTime.add(const Duration(minutes: 24));
+    int startTimestamp = startTime.millisecondsSinceEpoch;
+    int endTimestamp = endTime.millisecondsSinceEpoch;
+
     try {
       final Map<String, dynamic> rpc = {
         'op': 3,
@@ -91,7 +98,10 @@ class _DiscordController extends GetxController {
               'details': episode.title,
               'state': '${isAnime ? "Episode" : "Chapter"}: ${episode.number}/$total',
               'type': 3,
-              'timestamps': null,
+              "timestamps": {
+                "end": endTimestamp,
+                "start": startTimestamp
+              },
               'assets': {
                 'large_image': await mediaData.cover?.getDiscordUrl(),
                 'large_text': mediaData.userPreferredName,
