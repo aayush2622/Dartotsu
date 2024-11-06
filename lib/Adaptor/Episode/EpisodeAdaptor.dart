@@ -1,8 +1,10 @@
+import 'package:dantotsu/Functions/string_extensions.dart';
 import 'package:flutter/widgets.dart';
 
 import '../../Animation/ScaleAnimation.dart';
 import '../../DataClass/Episode.dart';
 import '../../DataClass/Media.dart';
+import '../../api/Discord/Discord.dart';
 import 'EpisodeListViewHolder.dart';
 
 class EpisodeAdaptor extends StatefulWidget {
@@ -64,8 +66,8 @@ class EpisodeAdaptorState extends State<EpisodeAdaptor> {
             if (widget.mediaData.userProgress != null &&
                 widget.mediaData.userProgress! > 0) {
               isWatched =
-                  double.parse(widget.mediaData.userProgress!.toString()) >=
-                      double.parse(episodeList[index].number);
+                  widget.mediaData.userProgress!.toString().toDouble() >=
+                      episodeList[index].number.toDouble();
             } else {
               isWatched = false;
             }
@@ -76,14 +78,14 @@ class EpisodeAdaptorState extends State<EpisodeAdaptor> {
               finalOffset: Offset.zero,
               duration: const Duration(milliseconds: 200),
               child: GestureDetector(
-                onTap: () {},
+                onTap: () => Discord.setRpc(widget.mediaData, episodeList[index]),
                 child: Container(
                   width: double.infinity,
                   margin:
                       const EdgeInsets.symmetric(horizontal: 18, vertical: 4),
                   child: Opacity(
                     opacity: isWatched ? 0.5 : 1.0,
-                    child: EpisodeListView(episode: episodeList[index], isWatched: isWatched,),
+                    child: EpisodeListView(episode: episodeList[index], isWatched: isWatched,mediaData: widget.mediaData),
                   ),
                 ),
               ),

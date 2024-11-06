@@ -1,3 +1,4 @@
+import 'package:dantotsu/Functions/string_extensions.dart';
 import 'package:dantotsu/Theme/Colors.dart';
 import 'package:dantotsu/Theme/ThemeProvider.dart';
 import 'package:dantotsu/Widgets/CachedNetworkImage.dart';
@@ -6,13 +7,15 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../DataClass/Episode.dart';
+import '../../DataClass/Media.dart';
+import 'Widget/HandleProgress.dart';
 
 class EpisodeListView extends StatelessWidget {
   final Episode episode;
   final bool isWatched;
-
+  final media mediaData;
   const EpisodeListView(
-      {super.key, required this.episode, required this.isWatched});
+      {super.key, required this.episode, required this.isWatched, required this.mediaData});
 
   @override
   Widget build(BuildContext context) {
@@ -145,16 +148,12 @@ class EpisodeListView extends StatelessWidget {
                 size: 26,
               ),
             ),
-          SizedBox(
-            width: 142,
-            child: LinearProgressIndicator(
-              value: 0.7,
-              backgroundColor: Colors.grey,
-              valueColor:
-                  AlwaysStoppedAnimation<Color>(Theme.of(context).primaryColor),
-              minHeight: 3,
-            ),
-          ),
+          handleProgress(
+            context: context,
+            mediaId: mediaData.id,
+            ep: episode.number.toInt(),
+            width: 142
+          )
         ],
       ),
     );

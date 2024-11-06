@@ -11,6 +11,14 @@ extension StringExtensions on String {
     return split(pattern).last;
   }
 
+  double toDouble() {
+    return double.parse(this);
+  }
+
+  int toInt() {
+    return int.parse(this);
+  }
+
   bool isEqualTo(String? other) {
   return this == other;
   }
