@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../Widgets/CustomBottomDialog.dart';
 import '../../../api/Anilist/Anilist.dart';
-import '../../Settings/settingsBottomSheet.dart';
+import '../../Settings/SettingsBottomSheet.dart';
 import 'AvtarWidget.dart';
 
 class MediaSearchBar extends StatelessWidget {
