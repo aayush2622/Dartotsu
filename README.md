@@ -33,4 +33,4 @@ You can come hang out with our awesome community, request new features, and repo
 
 ## LICENSE 📜
 
-DantotsuRe is licensed under the Unabandon Public License (UPL). More info can be found [here.](LICENSE.md)
+DantotsuRe is licensed under the GNU Affero General Public License v3.0. More info can be found [here.](https://github.com/aayush2622/DantotsuRe/blob/main/LICENSE)
