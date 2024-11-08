@@ -18,7 +18,7 @@
                     <group android:name="group_1">
                         <path
                             android:name="path"
-                            android:fillColor="#ff00f4"
+                            android:fillColor="#28c7fe"
                             android:pathData="M 128 128 L 640 128 L 640 639.96 L 128 639.96 Z"
                             android:strokeWidth="1" />
                         <group
@@ -27,7 +27,7 @@
                             android:pivotY="384">
                             <path
                                 android:name="path_2"
-                                android:fillColor="#d300e5"
+                                android:fillColor="#26c7f3"
                                 android:pathData="M 384 211.74 C 338.331 211.74 294.486 229.901 262.194 262.194 C 229.901 294.486 211.74 338.331 211.74 384 C 211.74 429.669 229.901 473.514 262.194 505.806 C 294.486 538.099 338.331 556.26 384 556.26 C 429.669 556.26 473.514 538.099 505.806 505.806 C 538.099 473.514 556.26 429.669 556.26 384 C 556.26 338.331 538.099 294.486 505.806 262.194 C 473.514 229.901 429.669 211.74 384 211.74 Z"
                                 android:strokeWidth="1" />
                         </group>
@@ -42,7 +42,7 @@
                                     android:rotation="-90">
                                     <path
                                         android:name="path_1"
-                                        android:fillColor="#7000b8"
+                                        android:fillColor="#08b08f"
                                         android:pathData="M 128 128 L 128 463.26 C 151.32 466.96 175.23 468.89 199.58 468.89 C 411.17 468.89 588.92 323.99 639.01 128 L 128 128 Z"
                                         android:strokeWidth="1" />
                                     <clip-path
@@ -64,7 +64,7 @@
                                     android:rotation="-90">
                                     <path
                                         android:name="path_3"
-                                        android:fillColor="#9000d1"
+                                        android:fillColor="#19ccb6"
                                         android:pathData="M 128 128 L 128 463.26 C 151.32 466.96 175.23 468.89 199.58 468.89 C 411.17 468.89 588.92 323.99 639.01 128 L 128 128 Z"
                                         android:strokeWidth="1" />
                                 </group>
@@ -88,7 +88,7 @@
                                 android:pivotY="440">
                                 <path
                                     android:name="path_4"
-                                    android:fillColor="#a800d9"
+                                    android:fillColor="#20d4d3"
                                     android:pathData="M 539.28 128 C 503.71 317.07 337.72 460.12 138.31 460.12 C 134.86 460.12 131.42 460.06 128 459.98 L 128 465.73 C 168.23 476.19 210.43 481.78 253.93 481.78 C 409.53 481.78 548.48 410.55 640 298.94 L 640 128.01 L 539.28 128.01 Z"
                                     android:strokeWidth="1" />
                             </group>
