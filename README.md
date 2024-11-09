@@ -8,9 +8,6 @@
 </p>
 
 <p align="center">
-   <a href="https://github.com/aayush2622/Dartotsu/latest"><img src="https://img.shields.io/github/v/release/aayush2622/DantotsuRe?style=for-the-badge&logoColor=168b94&label=Stable&labelColor=1b94bd&color=1fa8b3" alt="Latest Stable Release"/></a>
-   <!--<a href="https://github.com/aayush2622/DantotsuRe/latest/"><img src="https://img.shields.io/github/v/release/aayush2622/DantotsuRe?style=for-the-badge&include_prereleases&logoColor=087a87&label=Beta&labelColor=168b94&color=1fa8b3" alt="Latest Pre-release"/></a>
-   <a href="https://github.com/aayush2622/DantotsuRe/releases/latest"><img src="https://img.shields.io/github/v/release/aayush2622/DantotsuRe?style=for-the-badge&display_name=tag&label=Alpha&labelColor=087a87&color=168b94" alt="Latest Alpha Release"/></a>-->
    <a href="https://www.codefactor.io/repository/github/aayush2622/DantotsuRe"><img src="https://img.shields.io/codefactor/grade/github/aayush2622/DantotsuRe?style=for-the-badge&label=Codefactor&labelColor=1b94bd&color=087a87" alt="CodeFactor"/></a>
    <!--<a href="https://hosted.weblate.org/engage/Dantotsu"><img alt="Weblate project translated" src="https://img.shields.io/weblate/progress/Dantotsu?label=Translated&labelColor=087a87&color=168b94&style=for-the-badge"></a>-->
    <a href="https://github.com/aayush2622/DantotsuRe/commits/main"><img src="https://img.shields.io/github/last-commit/aayush2622/DantotsuRe?label=Latest Commit&style=for-the-badge&labelColor=087a87&color=168b94" alt="GitHub Last Commit"></a>
@@ -18,9 +15,15 @@
 
 # **Dartotsu** 🌟
 
-Dartotsu is an [AniList](https://anilist.co/) exclusive client.
+**Dartotsu** is a complete rewrite of the original [Dantotsu](https://github.com/rebelonion/Dantotsu/) in Flutter, designed as an exclusive [AniList](https://anilist.co/) client.
+> **Note:** This project is currently under development and is not ready for public use.
 
-> **Dartotsu** is a complete rewrite of the original [Dantotsu](https://github.com/rebelonion/Dantotsu/) in Flutter.
+## Downloads
+<p align="center">
+   <a href="https://github.com/aayush2622/Dartotsu/latest"><img src="https://img.shields.io/github/v/release/aayush2622/DantotsuRe?style=for-the-badge&logoColor=168b94&label=Stable&labelColor=1b94bd&color=1fa8b3" alt="Latest Stable Release"/></a>
+   <!--<a href="https://github.com/aayush2622/DantotsuRe/latest/"><img src="https://img.shields.io/github/v/release/aayush2622/DantotsuRe?style=for-the-badge&include_prereleases&logoColor=087a87&label=Beta&labelColor=168b94&color=1fa8b3" alt="Latest Pre-release"/></a>
+   <a href="https://github.com/aayush2622/DantotsuRe/releases/latest"><img src="https://img.shields.io/github/v/release/aayush2622/DantotsuRe?style=for-the-badge&display_name=tag&label=Alpha&labelColor=087a87&color=168b94" alt="Latest Alpha Release"/></a>-->
+</p>
 
 ## Disclaimer
 - The developer of this application is not liable for any misuse or legal issues arising from its use and is not affiliated with any content providers. This application hosts zero content.
