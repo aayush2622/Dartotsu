@@ -20,9 +20,7 @@
 
 Dartotsu is an [AniList](https://anilist.co/) exclusive client.
 
-> **Dantotsu** is a complete rewrite of the original [Dantotsu](https://github.com/rebelonion/Dantotsu/) in Flutter.
-
-> **Dantotsu (断トツ; Dan-totsu)** means "the best of the best" in Japanese. Try it out and decide for yourself!
+> **Dartotsu** is a complete rewrite of the original [Dantotsu](https://github.com/rebelonion/Dantotsu/) in Flutter.
 
 ## Disclaimer
 - The developer of this application is not liable for any misuse or legal issues arising from its use and is not affiliated with any content providers. This application hosts zero content.
@@ -46,7 +44,7 @@ Join our communities to stay updated and contribute to the discussion
 <a href="https://t.me/Dantotsu_alpha" style="display: inline-block;"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" height="40" style="vertical-align: middle;"></a>
 
 ## Contribute
-We welcome contributions, from translations to new features. For inquiries, join our [Discord server](https://discord.gg/eTa2GKtE) or [Telegram group](https://t.me/Dantotsu_alpha). Pull requests are welcome; check the [open issues](https://github.com/aayush2622/Dartotsu/issues) for guidance on major changes.
+We welcome contributions, from translations to new features. For inquiries, join our [Discord server](https://discord.gg/eTa2GKtE) or [Telegram group](https://t.me/Dantotsu_alpha). Pull requests are welcome; check the [open issues](https://github.com/aayush2622/DantotsuRe/issues) for guidance on major changes.
 <!--<details>
 <summary>Weblate Translation Graph</summary>
 <a href="https://hosted.weblate.org/projects/echo/#languages"><img src="https://hosted.weblate.org/widget/echo/app/multi-auto.svg" alt="Translation status" /></a>
