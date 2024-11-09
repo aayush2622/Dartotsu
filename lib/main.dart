@@ -39,7 +39,6 @@ void main(List<String> args) async {
 }
 
 Future init() async {
-  Get.config(enableLog: false);
   await PrefManager.init();
   await protocolHandler.register('dantotsu');
   isar = await StorageProvider().initDB(null);
