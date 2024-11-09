@@ -3,8 +3,8 @@
 </p>
 
 <p align="center">
-   <img src="https://img.shields.io/badge/platforms-android_ios_windows_linux_macos-1b94bd?style=for-the-badge&labelColor=1b94bd&color=28c7fe"/>
-   <a href="https://github.com/aayush2622/DantotsuRe/releases"><img src="https://img.shields.io/github/downloads/aayush2622/DantotsuRe/total?label=Downloads&color=28c7fe&logo=android&logoColor=1a8fa6&style=for-the-badge&labelColor=1b94bd"></a>
+   <img src="https://img.shields.io/badge/platforms-android_ios_windows_linux_macos-1b94bd?style=for-the-badge&labelColor=2d8bb5&color=3e94db"/>
+   <a href="https://github.com/aayush2622/DantotsuRe/releases"><img src="https://img.shields.io/github/downloads/aayush2622/DantotsuRe/total?label=Downloads&color=3e94db&logo=android&logoColor=1a8fa6&style=for-the-badge&labelColor=2d8bb5"></a>
 </p>
 
 <p align="center">
