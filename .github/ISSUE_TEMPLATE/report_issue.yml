@@ -1,6 +1,6 @@
 name: 🐛 Issue Report
 description: Report a bug or problem in Dartotsu.
-labels: [Bug]
+labels: [bug]
 body:
   - type: textarea
     id: steps-to-reproduce
