@@ -73,7 +73,7 @@ jobs:
           - Once resolved, we'll notify you of the fix or provide a workaround.
           **👥 Connect with Us**  
           - **[Discord](https://discord.gg/eTa2GKtE)**: Engage with our community and ask questions.  
-          #- **[Telegram](https://t.me/)**: Reach out for real-time discussions and updates.
+          // **[Telegram](https://t.me/)**: Reach out for real-time discussions and updates.
           We're working hard to resolve the issue and appreciate your patience!
           `;
           await github.rest.issues.createComment({
