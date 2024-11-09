@@ -63,4 +63,4 @@ Your efforts are invaluable.
 </a>
 
 ## License
-Dartotsu is licensed under the Unabandon Public License (UPL). More info can be found [here](LICENSE.md).
+Dantotsu is licensed under the GNU Affero General Public License (AGPL). More info can be found [here](LICENSE.md).
