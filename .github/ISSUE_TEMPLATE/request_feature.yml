@@ -1,6 +1,6 @@
 name: 🚀 Feature Request
 description: Propose a new feature to enhance Dartotsu.
-labels: [New Feature]
+labels: [enhancement]
 body:
   - type: textarea
     id: feature-summary
