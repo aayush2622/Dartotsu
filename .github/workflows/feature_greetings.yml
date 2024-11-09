@@ -21,7 +21,7 @@ jobs:
         ISSUE_NUMBER=$(jq -r '.issue.number' "$GITHUB_EVENT_PATH")
         LABELS=$(gh issue view $ISSUE_NUMBER --json labels --jq '.labels[].name')
         
-        if echo "$LABELS" | grep -q 'New Feature'; then
+        if echo "$LABELS" | grep -q 'enhancement'; then
           echo "This issue is labeled as a feature request. Checking if the issue creator is the repository owner."
           echo "skip_label_check=false" >> $GITHUB_ENV
         else
