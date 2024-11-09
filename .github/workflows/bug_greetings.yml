@@ -18,7 +18,7 @@ jobs:
         ISSUE_NUMBER=$(jq -r '.issue.number' "$GITHUB_EVENT_PATH")
         LABELS=$(gh issue view $ISSUE_NUMBER --json labels --jq '.labels[].name')
         
-        if echo "$LABELS" | grep -q 'Bug'; then
+        if echo "$LABELS" | grep -q 'bug'; then
           echo "This issue is labeled as a bug report. Checking if the issue creator is the repository owner."
           echo "skip_label_check=false" >> $GITHUB_ENV
         else
