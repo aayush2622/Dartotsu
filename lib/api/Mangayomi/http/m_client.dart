@@ -7,7 +7,6 @@ import 'package:http/io_client.dart';
 import '../http/rhttp/rhttp.dart' as rhttp;
 
 import '../../../main.dart';
-import '../Eval/dart/model/m_bridge.dart';
 import '../Eval/dart/model/m_source.dart';
 import '../log.dart';
 

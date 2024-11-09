@@ -77,8 +77,7 @@ class AnimeParser extends BaseParser {
   }
 
   Episode MChapterToEpisode(MChapter chapter, MManga? selectedMedia) {
-    var episodeNumber = ChapterRecognition()
-        .parseChapterNumber(selectedMedia?.name ?? '', chapter.name ?? '');
+    var episodeNumber = ChapterRecognition.parseChapterNumber(selectedMedia?.name ?? '', chapter.name ?? '');
     return Episode(
       number: episodeNumber != -1 ? episodeNumber.toString() : chapter.name ?? '',
       link: chapter.url,

@@ -30,7 +30,7 @@ part 'AnilistQueries/GetGenresAndTags.dart';
 part 'AnilistQueries/GetCalendarData.dart';
 
 class AnilistQueries {
-  // main function in the [AnilistQueries.dart]
+  // main function in the [Anilist.dart]
   final Future<T?> Function<T>(String query,
       {String variables, bool force, bool useToken, bool show}) executeQuery;
 
@@ -155,4 +155,3 @@ class AnilistQueries {
         hd: hd,
       );
 }
-

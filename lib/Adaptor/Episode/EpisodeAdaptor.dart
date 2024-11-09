@@ -59,6 +59,7 @@ class EpisodeAdaptorState extends State<EpisodeAdaptor> {
       child: Container(
         constraints: const BoxConstraints(maxHeight: double.infinity),
         child: ListView.builder(
+          physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           itemCount: episodeList.length,
           itemBuilder: (context, index) {

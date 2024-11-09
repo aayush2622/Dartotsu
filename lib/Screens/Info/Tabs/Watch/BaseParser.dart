@@ -18,7 +18,7 @@ abstract class BaseParser extends GetxController {
   var source = Rxn<Source>(null);
 
 
-  void saveSelected(int id , Selected data) {
+  void saveSelected(int id, Selected data) {
     PrefManager.setCustomVal("Selected-$id", data);
   }
 
@@ -26,7 +26,8 @@ abstract class BaseParser extends GetxController {
     return PrefManager.getCustomVal("Selected-${mediaData.id}") ?? Selected();
   }
 
-  Future<void> searchMedia(Source source, media mediaData, {Function(MManga response)? onFinish}) async {
+  Future<void> searchMedia(Source source, media mediaData,
+      {Function(MManga response)? onFinish}) async {
     selectedMedia.value = null;
     var saved = _loadShowResponse(source, mediaData);
     if (saved != null) {
@@ -53,20 +54,20 @@ abstract class BaseParser extends GetxController {
 
     List<MManga> sortedResults = media!.list.isNotEmpty
         ? (media.list
-          ..sort((a, b) {
-            final aRatio = ratio(
-                a.name!.toLowerCase(), mediaData.mainName().toLowerCase());
-            final bRatio = ratio(
-                b.name!.toLowerCase(), mediaData.mainName().toLowerCase());
-            return bRatio.compareTo(aRatio);
-          }))
+      ..sort((a, b) {
+        final aRatio = ratio(
+            a.name!.toLowerCase(), mediaData.mainName().toLowerCase());
+        final bRatio = ratio(
+            b.name!.toLowerCase(), mediaData.mainName().toLowerCase());
+        return bRatio.compareTo(aRatio);
+      }))
         : [];
     sortedResults.firstOrNull;
     response = sortedResults.firstOrNull;
 
     if (response == null ||
         ratio(response.name!.toLowerCase(),
-                mediaData.mainName().toLowerCase()) <
+            mediaData.mainName().toLowerCase()) <
             100) {
       status.value = "Searching : ${mediaData.nameRomaji}";
       final mediaFuture = search(
@@ -78,13 +79,13 @@ abstract class BaseParser extends GetxController {
       final media = await mediaFuture;
       List<MManga> sortedRomajiResults = media!.list.isNotEmpty
           ? (media.list
-            ..sort((a, b) {
-              final aRatio = ratio(
-                  a.name!.toLowerCase(), mediaData.nameRomaji.toLowerCase());
-              final bRatio = ratio(
-                  b.name!.toLowerCase(), mediaData.nameRomaji.toLowerCase());
-              return bRatio.compareTo(aRatio);
-            }))
+        ..sort((a, b) {
+          final aRatio = ratio(
+              a.name!.toLowerCase(), mediaData.nameRomaji.toLowerCase());
+          final bRatio = ratio(
+              b.name!.toLowerCase(), mediaData.nameRomaji.toLowerCase());
+          return bRatio.compareTo(aRatio);
+        }))
           : [];
       var closestRomaji = sortedRomajiResults.firstOrNull;
       if (response == null) {
@@ -99,7 +100,7 @@ abstract class BaseParser extends GetxController {
         }
       }
     }
-    if (response == null){
+    if (response == null) {
       for (var synonym in mediaData.synonyms) {
         if (_isEnglish(synonym)) {
           status.value = "Searching : $synonym";
@@ -113,14 +114,17 @@ abstract class BaseParser extends GetxController {
           List<MManga> sortedResults = media!.list.isNotEmpty
               ? (media.list
             ..sort((a, b) {
-              final aRatio = ratio(a.name!.toLowerCase(), synonym.toLowerCase());
-              final bRatio = ratio(b.name!.toLowerCase(), synonym.toLowerCase());
+              final aRatio = ratio(
+                  a.name!.toLowerCase(), synonym.toLowerCase());
+              final bRatio = ratio(
+                  b.name!.toLowerCase(), synonym.toLowerCase());
               return bRatio.compareTo(aRatio);
             }))
               : [];
           var closest = sortedResults.firstOrNull;
           if (closest != null) {
-            if (ratio(closest.name!.toLowerCase(), synonym.toLowerCase()) > 90) {
+            if (ratio(closest.name!.toLowerCase(), synonym.toLowerCase()) >
+                90) {
               response = closest;
               break;
             }
@@ -150,19 +154,18 @@ abstract class BaseParser extends GetxController {
   _saveShowResponse(media mediaData, MManga response, Source source,
       {bool selected = false}) {
     status.value =
-        selected ? "Selected : ${response.name}" : "Found : ${response.name}";
+    selected ? "Selected : ${response.name}" : "Found : ${response.name}";
     var show = ShowResponse(
         name: response.name!,
         link: response.link!,
         coverUrl: response.imageUrl!);
     PrefManager.setCustomVal<ShowResponse>(
         "${source.name}_${mediaData.id}_source", show);
-    }
+  }
 
-  Future<void> wrongTitle(
-      BuildContext context,
+  Future<void> wrongTitle(BuildContext context,
       media mediaData,
-      Function(MManga)? onChange) async {
+      Function(MManga)? onChange,) async {
     var dialog = WrongTitleDialog(
         source: source.value!,
         mediaData: mediaData,

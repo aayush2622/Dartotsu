@@ -58,6 +58,8 @@ class EpisodeResponse {
 
   factory EpisodeResponse.fromJson(Map<String, dynamic> json) =>
       _$EpisodeResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$EpisodeResponseToJson(this);
 }
 
 @JsonSerializable()
@@ -70,6 +72,8 @@ class Datum {
   Datum({required this.malID, this.title, required this.filler});
 
   factory Datum.fromJson(Map<String, dynamic> json) => _$DatumFromJson(json);
+
+  Map<String, dynamic> toJson() => _$DatumToJson(this);
 }
 
 @JsonSerializable()
@@ -81,4 +85,6 @@ class Pagination {
 
   factory Pagination.fromJson(Map<String, dynamic> json) =>
       _$PaginationFromJson(json);
+
+  Map<String, dynamic> toJson() => _$PaginationToJson(this);
 }

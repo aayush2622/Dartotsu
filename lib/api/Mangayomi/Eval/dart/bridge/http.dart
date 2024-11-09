@@ -6,7 +6,6 @@ import 'package:flutter/foundation.dart';
 import 'package:http_interceptor/http_interceptor.dart';
 
 import '../../../http/m_client.dart';
-import '../model/m_bridge.dart';
 import 'm_source.dart';
 
 /// dart_eval wrapper for [InterceptedClient]
