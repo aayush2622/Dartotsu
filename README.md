@@ -4,16 +4,18 @@
 
 <p align="center">
    <img src="https://img.shields.io/badge/platforms-android_ios_windows_linux_macos-blueviolet?style=for-the-badge"/>
-   <a href="https://github.com/aayush2622/DantotsuRe/releases"><img src="https://img.shields.io/github/downloads/aayush2622/DantotsuRe/total?color=%233DDC84&logo=android&logoColor=%23fff&style=for-the-badge"></a>
+<a href="https://github.com/aayush2622/DantotsuRe/releases"><img src="https://img.shields.io/github/downloads/aayush2622/DantotsuRe/total?color=%23FF4500&logo=android&logoColor=%23FFD700&style=for-the-badge"></a>
 </p>
 
 <p align="center">
   <a href="https://github.com/aayush2622/Dartotsu/latest"><img src="https://img.shields.io/github/v/release/aayush2622/DantotsuRe?style=for-the-badge&logoColor=06599d&label=Stable&labelColor=06599d&color=043b69" alt="Latest Stable Release"/></a>
    <!--<a href="https://github.com/aayush2622/DantotsuRe/latest/"><img src="https://img.shields.io/github/v/release/aayush2622/DantotsuRe?style=for-the-badge&include_prereleases&logoColor=2c2c47&label=Beta&color=818cf8" alt="Latest Pre-release"/></a>
    <a href="https://github.com/aayush2622/DantotsuRe/releases/latest"><img src="https://img.shields.io/github/v/release/aayush2622/DantotsuRe?style=for-the-badge&display_name=tag&label=Alpha&color=e23629" alt="Latest Alpha Release"/></a>-->
-   <a href="https://www.codefactor.io/repository/github/aayush2622/DantotsuRe"><img src="https://img.shields.io/codefactor/grade/github/aayush2622/DantotsuRe?style=for-the-badge&label=Codefactor" alt="CodeFactor"/></a>
+<a href="https://www.codefactor.io/repository/github/aayush2622/DantotsuRe">
+    <img src="https://img.shields.io/codefactor/grade/github/aayush2622/DantotsuRe?style=for-the-badge&label=Codefactor&logoColor=33ff57&labelColor=33ff57&color=39c700" alt="CodeFactor"/></a>
+  </a>
    <!--<a href="https://hosted.weblate.org/engage/Dantotsu"><img alt="Weblate project translated" src="https://img.shields.io/weblate/progress/Dantotsu?label=Translated&style=flat-square"></a>-->
-   <a href="https://github.com/aayush2622/DantotsuRe/commits/main"><img src="https://img.shields.io/github/last-commit/aayush2622/DantotsuRe?label=Latest Commit&style=for-the-badge" alt="GitHub Last Commit"></a>
+<a href="https://github.com/aayush2622/DantotsuRe/commits/main"><img src="https://img.shields.io/github/last-commit/aayush2622/DantotsuRe?label=Latest Commit&style=for-the-badge&logoColor=3357ff&labelColor=3357ff&color=0039c7" alt="GitHub Last Commit">
 </p>
 
 # **Dartotsu** 🌟
