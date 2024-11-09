@@ -9,8 +9,8 @@
 
 <p align="center">
   <a href="https://github.com/aayush2622/Dartotsu/latest"><img src="https://img.shields.io/github/v/release/aayush2622/DantotsuRe?style=for-the-badge&logoColor=06599d&label=Stable&labelColor=06599d&color=043b69" alt="Latest Stable Release"/></a>
-   <a href="https://github.com/aayush2622/DantotsuRe/latest/"><img src="https://img.shields.io/github/v/release/aayush2622/DantotsuRe?style=for-the-badge&include_prereleases&logoColor=2c2c47&label=Beta&color=818cf8" alt="Latest Pre-release"/></a>
-   <a href="https://github.com/aayush2622/DantotsuRe/releases/latest"><img src="https://img.shields.io/github/v/release/aayush2622/DantotsuRe?style=for-the-badge&display_name=tag&label=Alpha&color=e23629" alt="Latest Alpha Release"/></a>
+   <!--<a href="https://github.com/aayush2622/DantotsuRe/latest/"><img src="https://img.shields.io/github/v/release/aayush2622/DantotsuRe?style=for-the-badge&include_prereleases&logoColor=2c2c47&label=Beta&color=818cf8" alt="Latest Pre-release"/></a>
+   <a href="https://github.com/aayush2622/DantotsuRe/releases/latest"><img src="https://img.shields.io/github/v/release/aayush2622/DantotsuRe?style=for-the-badge&display_name=tag&label=Alpha&color=e23629" alt="Latest Alpha Release"/></a>-->
    <a href="https://www.codefactor.io/repository/github/aayush2622/DantotsuRe"><img src="https://img.shields.io/codefactor/grade/github/aayush2622/DantotsuRe?style=for-the-badge&label=Codefactor" alt="CodeFactor"/></a>
    <!--<a href="https://hosted.weblate.org/engage/Dantotsu"><img alt="Weblate project translated" src="https://img.shields.io/weblate/progress/Dantotsu?label=Translated&style=flat-square"></a>-->
    <a href="https://github.com/aayush2622/DantotsuRe/commits/main"><img src="https://img.shields.io/github/last-commit/aayush2622/DantotsuRe?label=Latest Commit&style=for-the-badge" alt="GitHub Last Commit"></a>
