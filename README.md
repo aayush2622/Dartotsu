@@ -3,14 +3,14 @@
 </p>
 
 <p align="center">
-   <img src="https://img.shields.io/badge/platforms-android_ios_windows_linux_macos-1b94bd?style=for-the-badge&labelColor=2d8bb5&color=3e94db"/>
-   <a href="https://github.com/aayush2622/DantotsuRe/releases"><img src="https://img.shields.io/github/downloads/aayush2622/DantotsuRe/total?label=Downloads&color=3e94db&logo=android&logoColor=1a8fa6&style=for-the-badge&labelColor=2d8bb5"></a>
+   <img src="https://img.shields.io/badge/platforms-android_ios_windows_linux_macos-06599d?style=for-the-badge&labelColor=043b69&color=00b16a"/>
+   <a href="https://github.com/aayush2622/DantotsuRe/releases"><img src="https://img.shields.io/github/downloads/aayush2622/DantotsuRe/total?label=Downloads&color=00b16a&logo=android&logoColor=1a8fa6&style=for-the-badge&labelColor=043b69"></a>
 </p>
 
 <p align="center">
-   <a href="https://www.codefactor.io/repository/github/aayush2622/DantotsuRe"><img src="https://img.shields.io/codefactor/grade/github/aayush2622/DantotsuRe?style=for-the-badge&label=Codefactor&labelColor=1b94bd&color=087a87" alt="CodeFactor"/></a>
+   <a href="https://www.codefactor.io/repository/github/aayush2622/DantotsuRe"><img src="https://img.shields.io/codefactor/grade/github/aayush2622/DantotsuRe?style=for-the-badge&label=Codefactor&labelColor=06599d&color=00b16a" alt="CodeFactor"/></a>
    <!--<a href="https://hosted.weblate.org/engage/Dantotsu"><img alt="Weblate project translated" src="https://img.shields.io/weblate/progress/Dantotsu?label=Translated&labelColor=087a87&color=168b94&style=for-the-badge"></a>-->
-   <a href="https://github.com/aayush2622/DantotsuRe/commits/main"><img src="https://img.shields.io/github/last-commit/aayush2622/DantotsuRe?label=Latest Commit&style=for-the-badge&labelColor=087a87&color=168b94" alt="GitHub Last Commit"></a>
+   <a href="https://github.com/aayush2622/DantotsuRe/commits/main"><img src="https://img.shields.io/github/last-commit/aayush2622/DantotsuRe?label=Latest Commit&style=for-the-badge&labelColor=06599d&color=00b16a" alt="GitHub Last Commit"></a>
 </p>
 
 # **Dartotsu** 🌟
