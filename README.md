@@ -3,26 +3,27 @@
 </p>
 
 <p align="center">
-   <img src="https://img.shields.io/badge/platforms-android_ios_windows_linux_macos-blueviolet?style=for-the-badge"/>
-   <a href="https://github.com/aayush2622/DantotsuRe/releases"><img src="https://img.shields.io/github/downloads/aayush2622/DantotsuRe/total?color=%233DDC84&logo=android&logoColor=%23fff&style=for-the-badge"></a>
+   <img src="https://img.shields.io/badge/platforms-android_ios_windows_linux_macos-06599d?style=for-the-badge&labelColor=043b69&color=00b16a"/>
+   <a href="https://github.com/aayush2622/DantotsuRe/releases"><img src="https://img.shields.io/github/downloads/aayush2622/DantotsuRe/total?label=Downloads&color=00b16a&logo=android&logoColor=1a8fa6&style=for-the-badge&labelColor=043b69"></a>
 </p>
 
 <p align="center">
-  <a href="https://github.com/aayush2622/Dartotsu/latest"><img src="https://img.shields.io/github/v/release/aayush2622/DantotsuRe?style=for-the-badge&logoColor=06599d&label=Stable&labelColor=06599d&color=043b69" alt="Latest Stable Release"/></a>
-   <!--<a href="https://github.com/aayush2622/DantotsuRe/latest/"><img src="https://img.shields.io/github/v/release/aayush2622/DantotsuRe?style=for-the-badge&include_prereleases&logoColor=2c2c47&label=Beta&color=818cf8" alt="Latest Pre-release"/></a>
-   <a href="https://github.com/aayush2622/DantotsuRe/releases/latest"><img src="https://img.shields.io/github/v/release/aayush2622/DantotsuRe?style=for-the-badge&display_name=tag&label=Alpha&color=e23629" alt="Latest Alpha Release"/></a>-->
-   <a href="https://www.codefactor.io/repository/github/aayush2622/DantotsuRe"><img src="https://img.shields.io/codefactor/grade/github/aayush2622/DantotsuRe?style=for-the-badge&label=Codefactor" alt="CodeFactor"/></a>
-   <!--<a href="https://hosted.weblate.org/engage/Dantotsu"><img alt="Weblate project translated" src="https://img.shields.io/weblate/progress/Dantotsu?label=Translated&style=flat-square"></a>-->
-   <a href="https://github.com/aayush2622/DantotsuRe/commits/main"><img src="https://img.shields.io/github/last-commit/aayush2622/DantotsuRe?label=Latest Commit&style=for-the-badge" alt="GitHub Last Commit"></a>
+   <a href="https://www.codefactor.io/repository/github/aayush2622/DantotsuRe"><img src="https://img.shields.io/codefactor/grade/github/aayush2622/DantotsuRe?style=for-the-badge&label=Codefactor&labelColor=06599d&color=00b16a" alt="CodeFactor"/></a>
+   <!--<a href="https://hosted.weblate.org/engage/Dantotsu"><img alt="Weblate project translated" src="https://img.shields.io/weblate/progress/Dantotsu?label=Translated&labelColor=087a87&color=168b94&style=for-the-badge"></a>-->
+   <a href="https://github.com/aayush2622/DantotsuRe/commits/main"><img src="https://img.shields.io/github/last-commit/aayush2622/DantotsuRe?label=Latest Commit&style=for-the-badge&labelColor=06599d&color=00b16a" alt="GitHub Last Commit"></a>
 </p>
 
 # **Dartotsu** 🌟
 
-Dartotsu is an [AniList](https://anilist.co/) exclusive client.
+**Dartotsu** is a complete rewrite of the original [Dantotsu](https://github.com/rebelonion/Dantotsu/) in Flutter, designed as an exclusive [AniList](https://anilist.co/) client.
+> **Note:** This project is currently under development and is not ready for public use.
 
-> **Dantotsu** is a complete rewrite of the original [Dantotsu](https://github.com/rebelonion/Dantotsu/) in Flutter.
-
-> **Dantotsu (断トツ; Dan-totsu)** means "the best of the best" in Japanese. Try it out and decide for yourself!
+## Downloads
+<p align="center">
+   <a href="https://github.com/aayush2622/Dartotsu/latest"><img src="https://img.shields.io/github/v/release/aayush2622/DantotsuRe?style=for-the-badge&logoColor=168b94&label=Stable&labelColor=06599d&color=043b69" alt="Latest Stable Release"/></a>
+   <!--<a href="https://github.com/aayush2622/DantotsuRe/latest/"><img src="https://img.shields.io/github/v/release/aayush2622/DantotsuRe?style=for-the-badge&include_prereleases&logoColor=087a87&label=Beta&labelColor=168b94&color=1fa8b3" alt="Latest Pre-release"/></a>
+   <a href="https://github.com/aayush2622/DantotsuRe/releases/latest"><img src="https://img.shields.io/github/v/release/aayush2622/DantotsuRe?style=for-the-badge&display_name=tag&label=Alpha&labelColor=087a87&color=168b94" alt="Latest Alpha Release"/></a>-->
+</p>
 
 ## Disclaimer
 - The developer of this application is not liable for any misuse or legal issues arising from its use and is not affiliated with any content providers. This application hosts zero content.
@@ -30,7 +31,7 @@ Dartotsu is an [AniList](https://anilist.co/) exclusive client.
 - This project is created strictly for educational purposes.
 
 ## Support Us
-<!--<a href='https://ko-fi.com/I2I5C3UUV' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://storage.ko-fi.com/cdn/kofi1.png?v=3' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>-->
+<a href='https://buymeacoffee.com/aayush262' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://storage.ko-fi.com/cdn/kofi1.png?v=3' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
 > ⭐ **Star This Repository To Support The Developer And Encourage The Development Of The Application!**
 <details>
   <summary>Star History</summary>
@@ -46,7 +47,7 @@ Join our communities to stay updated and contribute to the discussion
 <a href="https://t.me/Dantotsu_alpha" style="display: inline-block;"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" height="40" style="vertical-align: middle;"></a>
 
 ## Contribute
-We welcome contributions, from translations to new features. For inquiries, join our [Discord server](https://discord.gg/eTa2GKtE) or [Telegram group](https://t.me/Dantotsu_alpha). Pull requests are welcome; check the [open issues](https://github.com/aayush2622/Dartotsu/issues) for guidance on major changes.
+We welcome contributions, from translations to new features. For inquiries, join our [Discord server](https://discord.gg/eTa2GKtE) or [Telegram group](https://t.me/Dantotsu_alpha). Pull requests are welcome; check the [open issues](https://github.com/aayush2622/DantotsuRe/issues) for guidance on major changes.
 <!--<details>
 <summary>Weblate Translation Graph</summary>
 <a href="https://hosted.weblate.org/projects/echo/#languages"><img src="https://hosted.weblate.org/widget/echo/app/multi-auto.svg" alt="Translation status" /></a>
@@ -65,4 +66,4 @@ Your efforts are invaluable.
 </a>
 
 ## License
-Dartotsu is licensed under the Unabandon Public License (UPL). More info can be found [here](LICENSE.md).
+Dantotsu is licensed under the Unabandon Public License (UPL). More info can be found [here](LICENSE.md).
