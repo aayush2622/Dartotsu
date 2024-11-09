@@ -4,6 +4,6 @@ contact_links:
     url: https://discord.gg/eTa2GKtE
     about: Get support, ask questions, and join the community discussions.
 
-  #- name: 📱 Dartotsu Help on Telegram
-  #  url: https://t.me/
-  #  about: Connect with the community, ask questions, and get help directly on Telegram.
+  - name: 📱 Dartotsu Help on Telegram
+    url: https://t.me/Dantotsu_alpha
+    about: Connect with the community, ask questions, and get help directly on Telegram.
