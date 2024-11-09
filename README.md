@@ -8,12 +8,12 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/aayush2622/Dartotsu/latest"><img src="https://img.shields.io/github/v/release/aayush2622/Dartotsu?style=for-the-badge&logoColor=06599d&label=Stable&labelColor=06599d&color=043b69" alt="Latest Stable Release"/></a>
-   <a href="https://github.com/aayush2622/Dartotsu/latest/"><img src="https://img.shields.io/github/v/release/aayush2622/Dartotsu?style=for-the-badge&include_prereleases&logoColor=2c2c47&label=Beta&color=818cf8" alt="Latest Pre-release"/></a>
-   <a href="https://github.com/aayush2622/Dartotsu/releases/latest"><img src="https://img.shields.io/github/v/release/aayush2622/Dartotsu?style=for-the-badge&display_name=tag&label=Alpha&color=e23629" alt="Latest Alpha Release"/></a>
-   <a href="https://www.codefactor.io/repository/github/aayush2622/Dartotsu"><img src="https://img.shields.io/codefactor/grade/github/aayush2622/Dartotsu?style=for-the-badge&label=Codefactor" alt="CodeFactor"/></a>
+  <a href="https://github.com/aayush2622/Dartotsu/latest"><img src="https://img.shields.io/github/v/release/aayush2622/DantotsuRe?style=for-the-badge&logoColor=06599d&label=Stable&labelColor=06599d&color=043b69" alt="Latest Stable Release"/></a>
+   <a href="https://github.com/aayush2622/DantotsuRe/latest/"><img src="https://img.shields.io/github/v/release/aayush2622/DantotsuRe?style=for-the-badge&include_prereleases&logoColor=2c2c47&label=Beta&color=818cf8" alt="Latest Pre-release"/></a>
+   <a href="https://github.com/aayush2622/DantotsuRe/releases/latest"><img src="https://img.shields.io/github/v/release/aayush2622/DantotsuRe?style=for-the-badge&display_name=tag&label=Alpha&color=e23629" alt="Latest Alpha Release"/></a>
+   <a href="https://www.codefactor.io/repository/github/aayush2622/DantotsuRe"><img src="https://img.shields.io/codefactor/grade/github/aayush2622/DantotsuRe?style=for-the-badge&label=Codefactor" alt="CodeFactor"/></a>
    <!--<a href="https://hosted.weblate.org/engage/Dantotsu"><img alt="Weblate project translated" src="https://img.shields.io/weblate/progress/Dantotsu?label=Translated&style=flat-square"></a>-->
-   <a href="https://github.com/aayush2622/Dartotsu/commits/main"><img src="https://img.shields.io/github/last-commit/aayush2622/Dartotsu?label=Latest Commit&style=for-the-badge" alt="GitHub Last Commit"></a>
+   <a href="https://github.com/aayush2622/DantotsuRe/commits/main"><img src="https://img.shields.io/github/last-commit/aayush2622/DantotsuRe?label=Latest Commit&style=for-the-badge" alt="GitHub Last Commit"></a>
 </p>
 
 # **Dartotsu** 🌟
@@ -34,8 +34,8 @@ Dartotsu is an [AniList](https://anilist.co/) exclusive client.
 > ⭐ **Star This Repository To Support The Developer And Encourage The Development Of The Application!**
 <details>
   <summary>Star History</summary>
-  <a href="https://github.com/aayush2622/Dartotsu/stargazers">
-      <img alt="Star History Chart" src="https://starchart.cc/aayush2622/Dartotsu.svg?variant=adaptive" width="370" height="235" />
+  <a href="https://github.com/aayush2622/DantotsuRe/stargazers">
+      <img alt="Star History Chart" src="https://starchart.cc/aayush2622/DantotsuRe.svg?variant=adaptive" width="370" height="235" />
   </a>
 </details>
 
@@ -56,12 +56,12 @@ We welcome contributions, from translations to new features. For inquiries, join
 A heartfelt thank you to everyone who has contributed to the development of Dartotsu.
 Your efforts are invaluable.
 
-<a href="https://github.com/aayush2622/Dartotsu/graphs/contributors">
-  <img alt="GitHub contributors" src="https://img.shields.io/github/contributors/aayush2622/Dartotsu?style=flat-square&label=Contributors%20%3A&labelColor=%230f1318&color=%230f1318" align="left">
+<a href="https://github.com/aayush2622/DantotsuRe/graphs/contributors">
+  <img alt="GitHub contributors" src="https://img.shields.io/github/contributors/aayush2622/DantotsuRe?style=flat-square&label=Contributors%20%3A&labelColor=%230f1318&color=%230f1318" align="left">
 </a>
 <br>
-<a href="https://github.com/aayush2622/Dartotsu/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=aayush2622/Dartotsu" alt="Contributors">
+<a href="https://github.com/aayush2622/DantotsuRe/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=aayush2622/DantotsuRe" alt="Contributors">
 </a>
 
 ## License
