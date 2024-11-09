@@ -9,11 +9,11 @@
 
 <p align="center">
   <a href="https://github.com/aayush2622/Dartotsu/latest"><img src="https://img.shields.io/github/v/release/aayush2622/Dartotsu?style=flat-square&logoColor=06599d&label=Stable&labelColor=06599d&color=043b69" alt="Latest Stable Release"/></a>
-   <a href="https://github.com/aayush2622/Dartotsu/latest/"><img src="https://img.shields.io/github/v/release/aayush2622/Dartotsu?include_prereleases&logoColor=2c2c47&label=Beta&color=818cf8&style=flat-square" alt="Latest Pre-release"/></a>
-   <a href="https://github.com/aayush2622/Dartotsu/releases/latest"><img src="https://img.shields.io/github/v/release/aayush2622/Dartotsu?display_name=tag&style=flat-square&label=Nightly&color=e23629" alt="Latest Alpha Release"/></a>
-   <a href="https://www.codefactor.io/repository/github/aayush2622/Dartotsu"><img src="https://img.shields.io/codefactor/grade/github/aayush2622/Dartotsu?style=flat-square&label=Codefactor" alt="CodeFactor"/></a>
+   <a href="https://github.com/aayush2622/Dartotsu/latest/"><img src="https://img.shields.io/github/v/release/aayush2622/Dartotsu?include_prereleases&logoColor=2c2c47&label=Beta&color=818cf8&style=flat" alt="Latest Pre-release"/></a>
+   <a href="https://github.com/aayush2622/Dartotsu/releases/latest"><img src="https://img.shields.io/github/v/release/aayush2622/Dartotsu?display_name=tag&style=flat&label=Nightly&color=e23629" alt="Latest Alpha Release"/></a>
+   <a href="https://www.codefactor.io/repository/github/aayush2622/Dartotsu"><img src="https://img.shields.io/codefactor/grade/github/aayush2622/Dartotsu?style=flat&label=Codefactor" alt="CodeFactor"/></a>
    <!--<a href="https://hosted.weblate.org/engage/Dantotsu"><img alt="Weblate project translated" src="https://img.shields.io/weblate/progress/Dantotsu?label=Translated&style=flat-square"></a>-->
-   <a href="https://github.com/aayush2622/Dartotsu/commits/main"><img src="https://img.shields.io/github/last-commit/aayush2622/Dartotsu?label=Latest Commit&style=flat-square" alt="GitHub Last Commit"></a>
+   <a href="https://github.com/aayush2622/Dartotsu/commits/main"><img src="https://img.shields.io/github/last-commit/aayush2622/Dartotsu?label=Latest Commit&style=flat" alt="GitHub Last Commit"></a>
 </p>
 
 # **Dartotsu** 🌟
