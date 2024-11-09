@@ -3,17 +3,17 @@
 </p>
 
 <p align="center">
-   <img src="https://img.shields.io/badge/platforms-android_ios_windows_linux_macos-blueviolet?style=for-the-badge"/>
-   <a href="https://github.com/aayush2622/DantotsuRe/releases"><img src="https://img.shields.io/github/downloads/aayush2622/DantotsuRe/total?color=%233DDC84&logo=android&logoColor=%23fff&style=for-the-badge"></a>
+   <img src="https://img.shields.io/badge/platforms-android_ios_windows_linux_macos-1b94bd?style=for-the-badge&labelColor=1b94bd&color=28c7fe"/>
+   <a href="https://github.com/aayush2622/DantotsuRe/releases"><img src="https://img.shields.io/github/downloads/aayush2622/DantotsuRe/total?label=Downloads&color=28c7fe&logo=android&logoColor=1a8fa6&style=for-the-badge&labelColor=1b94bd"></a>
 </p>
 
 <p align="center">
-  <a href="https://github.com/aayush2622/Dartotsu/latest"><img src="https://img.shields.io/github/v/release/aayush2622/DantotsuRe?style=for-the-badge&logoColor=06599d&label=Stable&labelColor=06599d&color=043b69" alt="Latest Stable Release"/></a>
-   <!--<a href="https://github.com/aayush2622/DantotsuRe/latest/"><img src="https://img.shields.io/github/v/release/aayush2622/DantotsuRe?style=for-the-badge&include_prereleases&logoColor=2c2c47&label=Beta&color=818cf8" alt="Latest Pre-release"/></a>
-   <a href="https://github.com/aayush2622/DantotsuRe/releases/latest"><img src="https://img.shields.io/github/v/release/aayush2622/DantotsuRe?style=for-the-badge&display_name=tag&label=Alpha&color=e23629" alt="Latest Alpha Release"/></a>-->
-   <a href="https://www.codefactor.io/repository/github/aayush2622/DantotsuRe"><img src="https://img.shields.io/codefactor/grade/github/aayush2622/DantotsuRe?style=for-the-badge&label=Codefactor" alt="CodeFactor"/></a>
-   <!--<a href="https://hosted.weblate.org/engage/Dantotsu"><img alt="Weblate project translated" src="https://img.shields.io/weblate/progress/Dantotsu?label=Translated&style=flat-square"></a>-->
-   <a href="https://github.com/aayush2622/DantotsuRe/commits/main"><img src="https://img.shields.io/github/last-commit/aayush2622/DantotsuRe?label=Latest Commit&style=for-the-badge" alt="GitHub Last Commit"></a>
+   <a href="https://github.com/aayush2622/Dartotsu/latest"><img src="https://img.shields.io/github/v/release/aayush2622/DantotsuRe?style=for-the-badge&logoColor=168b94&label=Stable&labelColor=1b94bd&color=1fa8b3" alt="Latest Stable Release"/></a>
+   <!--<a href="https://github.com/aayush2622/DantotsuRe/latest/"><img src="https://img.shields.io/github/v/release/aayush2622/DantotsuRe?style=for-the-badge&include_prereleases&logoColor=087a87&label=Beta&labelColor=168b94&color=1fa8b3" alt="Latest Pre-release"/></a>
+   <a href="https://github.com/aayush2622/DantotsuRe/releases/latest"><img src="https://img.shields.io/github/v/release/aayush2622/DantotsuRe?style=for-the-badge&display_name=tag&label=Alpha&labelColor=087a87&color=168b94" alt="Latest Alpha Release"/></a>-->
+   <a href="https://www.codefactor.io/repository/github/aayush2622/DantotsuRe"><img src="https://img.shields.io/codefactor/grade/github/aayush2622/DantotsuRe?style=for-the-badge&label=Codefactor&labelColor=1b94bd&color=087a87" alt="CodeFactor"/></a>
+   <!--<a href="https://hosted.weblate.org/engage/Dantotsu"><img alt="Weblate project translated" src="https://img.shields.io/weblate/progress/Dantotsu?label=Translated&labelColor=087a87&color=168b94&style=for-the-badge"></a>-->
+   <a href="https://github.com/aayush2622/DantotsuRe/commits/main"><img src="https://img.shields.io/github/last-commit/aayush2622/DantotsuRe?label=Latest Commit&style=for-the-badge&labelColor=087a87&color=168b94" alt="GitHub Last Commit"></a>
 </p>
 
 # **Dartotsu** 🌟
@@ -30,7 +30,7 @@ Dartotsu is an [AniList](https://anilist.co/) exclusive client.
 - This project is created strictly for educational purposes.
 
 ## Support Us
-<!--<a href='https://ko-fi.com/I2I5C3UUV' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://storage.ko-fi.com/cdn/kofi1.png?v=3' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>-->
+<a href='https://buymeacoffee.com/aayush262' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://storage.ko-fi.com/cdn/kofi1.png?v=3' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
 > ⭐ **Star This Repository To Support The Developer And Encourage The Development Of The Application!**
 <details>
   <summary>Star History</summary>
