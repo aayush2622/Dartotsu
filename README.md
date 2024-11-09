@@ -1,12 +1,10 @@
 <p align="center">
-   <img src="https://pbxt.replicate.delivery/2PX94viD6lJSDVayQrGyDH7CGu7IjQ6e8HEtOGDeelefXRdOC/out.png" alt="Dantotsu Banner" width="100%">
+   <img src="https://files.catbox.moe/o63zh1.png" alt="Dantotsu Banner" width="100%">
 </p>
 
 <p align="center">
    <img src="https://img.shields.io/badge/platforms-android_ios_windows_linux_macos-blueviolet?style=for-the-badge"/>
    <a href="https://github.com/aayush2622/Dartotsu/releases"><img src="https://img.shields.io/github/downloads/aayush2622/Dartotsu/total?color=%233DDC84&logo=android&logoColor=%23fff&style=for-the-badge"></a>
-   <a href="https://discord.gg/eTa2GKtE"><img src="https://img.shields.io/discord/1298924753846931476.svg?style=for-the-badge&logo=discord&colorB=7289DA"></a>
-   <a href="https://web.telegram.org/k/#@Dantotsu_alpha"><img src="https://img.shields.io/badge/Telegram-Join-7289DA?style=for-the-badge&logo=telegram&logoColor=white"></a>
 </p>
 
 <p align="center">
@@ -45,10 +43,10 @@ Dartotsu is an [AniList](https://anilist.co/) exclusive client.
 Join our communities to stay updated and contribute to the discussion
 
 <a href="https://discord.gg/eTa2GKtE" style="margin-right: 10px; display: inline-block;"><img src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/discord-round-color-icon.png" alt="Discord" height="40" style="vertical-align: middle;"></a>
-<!--<a href="https://t.me/echo_app" style="display: inline-block;"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" height="40" style="vertical-align: middle;"></a>-->
+<a href="https://t.me/Dantotsu_alpha" style="display: inline-block;"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" height="40" style="vertical-align: middle;"></a>
 
 ## Contribute
-We welcome contributions, from translations to new features. For inquiries, join our [Discord server](https://discord.gg/eTa2GKtE) <!--or [Telegram group](https://t.me/echo_app)-->. Pull requests are welcome; check the [open issues](https://github.com/aayush2622/Dartotsu/issues) for guidance on major changes.
+We welcome contributions, from translations to new features. For inquiries, join our [Discord server](https://discord.gg/eTa2GKtE) or [Telegram group](https://t.me/Dantotsu_alpha). Pull requests are welcome; check the [open issues](https://github.com/aayush2622/Dartotsu/issues) for guidance on major changes.
 <!--<details>
 <summary>Weblate Translation Graph</summary>
 <a href="https://hosted.weblate.org/projects/echo/#languages"><img src="https://hosted.weblate.org/widget/echo/app/multi-auto.svg" alt="Translation status" /></a>
