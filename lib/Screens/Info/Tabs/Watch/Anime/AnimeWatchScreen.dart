@@ -10,7 +10,7 @@ import '../../../../../Widgets/ScrollConfig.dart';
 import 'AnimeParser.dart';
 
 class AnimeWatchScreen extends StatefulWidget {
-  final media mediaData;
+  final Media mediaData;
 
   const AnimeWatchScreen({super.key, required this.mediaData});
 
@@ -22,7 +22,7 @@ class AnimeWatchScreenState extends BaseWatchScreen<AnimeWatchScreen> {
   late AnimeParser _viewModel;
 
   @override
-  media get mediaData => widget.mediaData;
+  Media get mediaData => widget.mediaData;
 
   @override
   BaseParser get viewModel => _viewModel;

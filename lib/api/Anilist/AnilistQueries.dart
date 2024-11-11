@@ -13,7 +13,7 @@ import '../../DataClass/SearchResults.dart';
 import '../../DataClass/User.dart';
 import '../../Preferences/PrefManager.dart';
 import 'Data/data.dart';
-import 'Data/media.dart';
+import 'Data/media.dart' as api;
 import 'Data/page.dart';
 import 'Data/staff.dart';
 
@@ -42,16 +42,16 @@ class AnilistQueries {
   /// Retrieves media details for the given [id].
   ///
   /// If [mal] is true, it will use MyAnimeList's mapping for the ID.
-  /// Returns a [media] object if found.
-  Future<media?> getMedia(int id, {bool mal = true}) => _getMedia(id, mal: mal);
+  /// Returns a [Media] object if found.
+  Future<Media?> getMedia(int id, {bool mal = true}) => _getMedia(id, mal: mal);
 
   /// Fetches additional media details for the provided [media] object.
   /// Returns an updated [media] object.
-  Future<media?> mediaDetails(media media) => _mediaDetails(media);
+  Future<Media?> mediaDetails(Media media) => _mediaDetails(media);
 
   /// Initializes and returns media data for the homepage in the form of a map.
-  /// The keys are section names, and values are lists of [media] objects.
-  Future<Map<String, List<media>>> initHomePage() => _initHomePage();
+  /// The keys are section names, and values are lists of [Media] objects.
+  Future<Map<String, List<Media>>> initHomePage() => _initHomePage();
 
   /// Fetches Genres and Tags data.
   /// Returns a [bool] indicating success.
@@ -63,8 +63,8 @@ class AnilistQueries {
   /// - [anime]: If true, fetches anime lists. If false, fetches manga lists.
   /// - [userId]: The user's ID.
   /// - [sortOrder]: Sort order for the lists.
-  /// Returns a map where the keys are list categories and values are lists of [media] objects.
-  Future<Map<String, List<media>>> getMediaLists({
+  /// Returns a map where the keys are list categories and values are lists of [Media] objects.
+  Future<Map<String, List<Media>>> getMediaLists({
     required bool anime,
     required int userId,
     String? sortOrder,
@@ -80,16 +80,16 @@ class AnilistQueries {
   Future<List<String?>> getBannerImages() => _getBannerImages();
 
   /// Fetches the user's anime list.
-  /// Returns a map where the keys are list categories and values are lists of [media] objects.
-  Future<Map<String, List<media>>> getAnimeList() => _getAnimeList();
+  /// Returns a map where the keys are list categories and values are lists of [Media] objects.
+  Future<Map<String, List<Media>>> getAnimeList() => _getAnimeList();
 
   /// Fetches the user's manga list.
-  /// Returns a map where the keys are list categories and values are lists of [media] objects.
-  Future<Map<String, List<media>>> getMangaList() => _getMangaList();
+  /// Returns a map where the keys are list categories and values are lists of [Media] objects.
+  Future<Map<String, List<Media>>> getMangaList() => _getMangaList();
 
   /// Fetches the user's calender data.
-  /// Returns a list of [media] objects.
-  Future<List<media>> getCalendarData() => _getCalendarData();
+  /// Returns a list of [Media] objects.
+  Future<List<Media>> getCalendarData() => _getCalendarData();
 
   /// Searches for media based on various parameters.
   ///

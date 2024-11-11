@@ -6,9 +6,9 @@ import 'Widgets/SettingsHeader.dart';
 abstract class BaseSettingsScreen<T extends StatefulWidget> extends State<T> {
   List<Widget> get settingsList;
 
-  String get title;
+  String title();
 
-  Widget get icon;
+  Widget icon();
 
   @override
   Widget build(BuildContext context) {
@@ -19,8 +19,8 @@ abstract class BaseSettingsScreen<T extends StatefulWidget> extends State<T> {
           SliverToBoxAdapter(
             child: SettingsHeader(
               context,
-              title,
-              icon,
+              title(),
+              icon(),
             ),
           ),
           SliverPadding(

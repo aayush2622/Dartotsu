@@ -7,7 +7,7 @@ class author {
   String? name;
   String? image;
   String? role;
-  Map<String, List<media>>? yearMedia;
+  Map<String, List<Media>>? yearMedia;
   List<Character>? character;
 
   author({

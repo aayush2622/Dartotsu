@@ -6,9 +6,9 @@ import '../../DataClass/Media.dart';
 import '../../api/Anilist/Anilist.dart';
 
 class CalendarViewModel extends GetxController {
-  var calendarData =  Rxn<Map<String, List<media>>>();
-  var cachedAllCalendarData = Rxn<Map<String, List<media>>>();
-  var cachedLibraryCalendarData = Rxn<Map<String, List<media>>>();
+  var calendarData =  Rxn<Map<String, List<Media>>>();
+  var cachedAllCalendarData = Rxn<Map<String, List<Media>>>();
+  var cachedLibraryCalendarData = Rxn<Map<String, List<Media>>>();
   var isLoading = false.obs;
 
   Future<void> loadAll({bool showOnlyLibrary = false}) async {
@@ -18,8 +18,8 @@ class CalendarViewModel extends GetxController {
         final res = await Anilist.query.getCalendarData();
 
         final DateFormat df = DateFormat.yMMMMEEEEd();
-        final Map<String, List<media>> allMap = {};
-        final Map<String, List<media>> libraryMap = {};
+        final Map<String, List<Media>> allMap = {};
+        final Map<String, List<Media>> libraryMap = {};
         final Map<String, List<int>> idMap = {};
 
         final int userId = Anilist.userid ?? 0;
@@ -31,7 +31,7 @@ class CalendarViewModel extends GetxController {
           final String dateInfo = df.format(DateTime.fromMillisecondsSinceEpoch(v[1] * 1000));
 
           final list = allMap.putIfAbsent(dateInfo, () => []);
-          final List<media>? libraryList = libraryMediaIds.contains(item.id) ? libraryMap.putIfAbsent(dateInfo, () => []) : null;
+          final List<Media>? libraryList = libraryMediaIds.contains(item.id) ? libraryMap.putIfAbsent(dateInfo, () => []) : null;
           final idList = idMap.putIfAbsent(dateInfo, () => []);
 
           item.relation = "Episode ${v[0]}";

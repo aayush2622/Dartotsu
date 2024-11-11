@@ -55,15 +55,15 @@ final AnilistHomeViewModel = Get.put(_AnilistHomeViewModel());
 
 class _AnilistHomeViewModel extends AnilistViewModel {
   var listImages = Rx<List<String?>>([null, null]);
-  var animeContinue = Rx<List<media>?>(null);
-  var animeFav = Rx<List<media>?>(null);
-  var animePlanned = Rx<List<media>?>(null);
-  var mangaContinue = Rx<List<media>?>(null);
-  var mangaFav = Rx<List<media>?>(null);
-  var mangaPlanned = Rx<List<media>?>(null);
-  var recommendation = Rx<List<media>?>(null);
+  var animeContinue = Rx<List<Media>?>(null);
+  var animeFav = Rx<List<Media>?>(null);
+  var animePlanned = Rx<List<Media>?>(null);
+  var mangaContinue = Rx<List<Media>?>(null);
+  var mangaFav = Rx<List<Media>?>(null);
+  var mangaPlanned = Rx<List<Media>?>(null);
+  var recommendation = Rx<List<Media>?>(null);
   var userStatus = Rx<List<userData>?>(null);
-  var hidden = Rx<List<media>?>(null);
+  var hidden = Rx<List<Media>?>(null);
   var empty = Rxn<bool>(null);
   var genres = Rxn<bool>(null);
   var loaded = false.obs;
@@ -140,12 +140,12 @@ class _AnilistHomeViewModel extends AnilistViewModel {
 final AnilistAnimeViewModel = Get.put(_AnilistAnimeViewModel());
 
 class _AnilistAnimeViewModel extends AnilistViewModel {
-  var trending = Rxn<List<media>>();
-  var animePopular = Rxn<List<media>>();
-  var updated = Rxn<List<media>>();
-  var popularMovies = Rxn<List<media>>();
-  var topRatedSeries = Rxn<List<media>>();
-  var mostFavSeries = Rxn<List<media>>();
+  var trending = Rxn<List<Media>>();
+  var animePopular = Rxn<List<Media>>();
+  var updated = Rxn<List<Media>>();
+  var popularMovies = Rxn<List<Media>>();
+  var topRatedSeries = Rxn<List<Media>>();
+  var mostFavSeries = Rxn<List<Media>>();
 
   @override
   Future<void> loadAll() async {
@@ -211,12 +211,12 @@ class _AnilistAnimeViewModel extends AnilistViewModel {
 final AnilistMangaViewModel = Get.put(_AnilistMangaViewModel());
 
 class _AnilistMangaViewModel extends AnilistViewModel {
-  var trending = Rxn<List<media>>();
-  var mangaPopular = Rxn<List<media>>();
-  var popularManhwa = Rxn<List<media>>();
-  var popularNovel = Rxn<List<media>>();
-  var topRatedManga = Rxn<List<media>>();
-  var mostFavManga = Rxn<List<media>>();
+  var trending = Rxn<List<Media>>();
+  var mangaPopular = Rxn<List<Media>>();
+  var popularManhwa = Rxn<List<Media>>();
+  var popularNovel = Rxn<List<Media>>();
+  var topRatedManga = Rxn<List<Media>>();
+  var mostFavManga = Rxn<List<Media>>();
 
   @override
   Future<void> loadAll() async {

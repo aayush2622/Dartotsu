@@ -126,7 +126,6 @@ flutter:
 
   # Assets
   assets:
-    - assets/images/icon.png
     - assets/images/logo.png
     - assets/svg/bmc-button.svg
     - assets/svg/anilist.svg

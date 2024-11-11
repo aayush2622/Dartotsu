@@ -11,7 +11,7 @@ import 'Widgets/MediaReleaseingIndicator.dart';
 import 'Widgets/MediaScoreBadge.dart';
 
 class MediaPageSmallViewHolder extends StatelessWidget {
-  final media mediaInfo;
+  final Media mediaInfo;
 
   const MediaPageSmallViewHolder(this.mediaInfo, {super.key});
 
@@ -201,7 +201,7 @@ class MediaPageSmallViewHolder extends StatelessWidget {
   }
 }
 
-String formatMediaInfo(media media) {
+String formatMediaInfo(Media media) {
   final nextAiringEpisode = media.anime?.nextAiringEpisode;
   final totalEpisodes = media.anime?.totalEpisodes?.toString() ?? "??";
 

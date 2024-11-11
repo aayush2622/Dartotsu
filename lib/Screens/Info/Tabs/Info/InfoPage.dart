@@ -14,7 +14,7 @@ import '../../MediaScreen.dart';
 import '../../Widgets/Releasing.dart';
 
 class InfoPage extends StatefulWidget {
-  final media mediaData;
+  final Media mediaData;
 
   const InfoPage({super.key, required this.mediaData});
 

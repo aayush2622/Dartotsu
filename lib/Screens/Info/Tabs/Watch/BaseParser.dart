@@ -22,11 +22,11 @@ abstract class BaseParser extends GetxController {
     PrefManager.setCustomVal("Selected-$id", data);
   }
 
-  Selected loadSelected(media mediaData) {
+  Selected loadSelected(Media mediaData) {
     return PrefManager.getCustomVal("Selected-${mediaData.id}") ?? Selected();
   }
 
-  Future<void> searchMedia(Source source, media mediaData,
+  Future<void> searchMedia(Source source, Media mediaData,
       {Function(MManga response)? onFinish}) async {
     selectedMedia.value = null;
     var saved = _loadShowResponse(source, mediaData);
@@ -146,12 +146,12 @@ abstract class BaseParser extends GetxController {
     return englishRegex.hasMatch(name);
   }
 
-  ShowResponse? _loadShowResponse(Source source, media mediaData) {
+  ShowResponse? _loadShowResponse(Source source, Media mediaData) {
     return PrefManager.getCustomVal<ShowResponse?>(
         "${source.name}_${mediaData.id}_source");
   }
 
-  _saveShowResponse(media mediaData, MManga response, Source source,
+  _saveShowResponse(Media mediaData, MManga response, Source source,
       {bool selected = false}) {
     status.value =
     selected ? "Selected : ${response.name}" : "Found : ${response.name}";
@@ -164,7 +164,7 @@ abstract class BaseParser extends GetxController {
   }
 
   Future<void> wrongTitle(BuildContext context,
-      media mediaData,
+      Media mediaData,
       Function(MManga)? onChange,) async {
     var dialog = WrongTitleDialog(
         source: source.value!,

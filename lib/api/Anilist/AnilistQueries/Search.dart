@@ -56,7 +56,7 @@ extension on AnilistQueries {
     final response = (await executeQuery<PageResponse>(_querySearch(perPage),
             variables: jsonEncode(variables), force: true))?.data?.page;
     if (response?.media != null) {
-      List<media> responseArray = [];
+      List<Media> responseArray = [];
 
       response?.media?.forEach((i) {
         String userStatus = i.mediaListEntry?.status?.name ?? '';
@@ -66,7 +66,7 @@ extension on AnilistQueries {
           genresArr.add(genre);
         });
 
-        media mediaInfo = mediaData(i);
+        Media mediaInfo = mediaData(i);
         if (!hd) mediaInfo.cover = i.coverImage?.large ?? '';
         mediaInfo.relation = (onList == true) ? userStatus : null;
         mediaInfo.genres = genresArr;

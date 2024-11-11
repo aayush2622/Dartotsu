@@ -78,7 +78,7 @@ class _DiscordController extends GetxController {
     showCustomBottomDialog(context, dialog);
   }
 
-  Future<void> setRpc(media mediaData, Episode episode) async {
+  Future<void> setRpc(Media mediaData, Episode episode) async {
     var isAnime = mediaData.anime != null;
     var totalFromSource = isAnime ? mediaData.anime!.episodes?.values.last.number : mediaData.manga!.chapters?.values.last.number;
     var total = isAnime ? mediaData.anime?.totalEpisodes.toString() : mediaData.manga?.totalChapters.toString() ?? totalFromSource ?? "??";

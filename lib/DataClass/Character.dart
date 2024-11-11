@@ -14,7 +14,7 @@ class character {
   String? age;
   String? gender;
   FuzzyDate? dateOfBirth;
-  List<media>? roles;
+  List<Media>? roles;
   List<author>? voiceActor;
 
   character({

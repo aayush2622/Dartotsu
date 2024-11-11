@@ -6,7 +6,7 @@ import 'Media.dart';
 class MediaSectionData {
   final int type;
   final String title;
-  final List<media>? list;
+  final List<Media>? list;
   final IconData? emptyIcon;
   final String? emptyMessage;
   final String? emptyButtonText;

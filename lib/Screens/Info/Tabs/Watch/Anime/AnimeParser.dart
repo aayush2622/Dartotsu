@@ -23,7 +23,7 @@ class AnimeParser extends BaseParser {
   var dataLoaded = false.obs;
 
 
-  void init(media mediaData) async {
+  void init(Media mediaData) async {
     if (dataLoaded.value) return;
     viewType.value = mediaData.selected?.recyclerStyle ??
         PrefManager.getVal(PrefName.AnimeDefaultView);
@@ -63,7 +63,7 @@ class AnimeParser extends BaseParser {
 
   var episodeDataLoaded = false.obs;
 
-  Future<void> getEpisodeData(media mediaData) async {
+  Future<void> getEpisodeData(Media mediaData) async {
     var a = await Anify.fetchAndParseMetadata(mediaData);
     var k = await Kitsu.getKitsuEpisodesDetails(mediaData);
     anifyEpisodeList.value ??= a;
@@ -71,7 +71,7 @@ class AnimeParser extends BaseParser {
     episodeDataLoaded.value = true;
   }
 
-  Future<void> getFillerEpisodes(media mediaData) async {
+  Future<void> getFillerEpisodes(Media mediaData) async {
     var res = await Jikan.getEpisodes(mediaData);
     fillerEpisodesList.value ??= res;
   }

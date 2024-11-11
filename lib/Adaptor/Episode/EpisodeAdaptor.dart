@@ -10,7 +10,7 @@ import 'EpisodeListViewHolder.dart';
 class EpisodeAdaptor extends StatefulWidget {
   final int type;
   final List<Episode> episodeList;
-  final media mediaData;
+  final Media mediaData;
 
   const EpisodeAdaptor(
       {super.key,
