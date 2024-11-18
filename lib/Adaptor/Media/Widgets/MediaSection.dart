@@ -7,7 +7,7 @@ Widget MediaSection({
   required int type,
   required String title,
   bool isLarge = false,
-  List<media>? mediaList,
+  List<Media>? mediaList,
   List<Widget>? customNullListIndicator,
   ScrollController? scrollController,
   Function(int index)? onMediaTap,

@@ -8,9 +8,9 @@ import '../../api/Anilist/Anilist.dart';
 class MediaPageViewModel extends GetxController {
   var dataLoaded = false.obs;
 
-  media? cacheMediaData;
+  Media? cacheMediaData;
 
-  Future<media> getMediaDetails(media media) async {
+  Future<Media> getMediaDetails(Media media) async {
     if (cacheMediaData == null) {
       cacheMediaData = (await Anilist.query.mediaDetails(media)) ?? media;
       dataLoaded.value = true;
@@ -18,7 +18,7 @@ class MediaPageViewModel extends GetxController {
     return cacheMediaData!;
   }
 
-  List<TextSpan> buildMediaDetailsSpans(media mediaData, BuildContext context) {
+  List<TextSpan> buildMediaDetailsSpans(Media mediaData, BuildContext context) {
     final List<TextSpan> spans = [];
     var theme = Theme.of(context).colorScheme;
     if (mediaData.userStatus != null) {

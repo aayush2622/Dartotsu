@@ -323,13 +323,13 @@ class HomeScreenState extends BaseMediaScreen<HomeScreen> {
               MediaCard(
                 context,
                 'ANIME LIST',
-                const MediaListScreen(anime: true),
+                MediaListScreen(anime: true, id: Anilist.userid!),
                 _viewModel.listImages.value[0] ?? 'https://bit.ly/31bsIHq',
               ),
               MediaCard(
                 context,
                 'MANGA LIST',
-                const MediaListScreen(anime: false),
+                MediaListScreen(anime: false, id: Anilist.userid!),
                 _viewModel.listImages.value[1] ?? 'https://bit.ly/2ZGfcuG',
               ),
             ],

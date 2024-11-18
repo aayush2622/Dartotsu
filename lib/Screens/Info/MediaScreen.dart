@@ -16,7 +16,7 @@ import '../../Widgets/ScrollConfig.dart';
 import 'MediaScreenViewModel.dart';
 
 class MediaInfoPage extends StatefulWidget {
-  final media mediaData;
+  final Media mediaData;
 
   const MediaInfoPage(this.mediaData, {super.key});
 
@@ -28,7 +28,7 @@ class MediaInfoPageState extends State<MediaInfoPage> {
   int _selectedIndex = 0;
   late MediaPageViewModel _viewModel;
 
-  late media mediaData;
+  late Media mediaData;
 
   @override
   void initState() {

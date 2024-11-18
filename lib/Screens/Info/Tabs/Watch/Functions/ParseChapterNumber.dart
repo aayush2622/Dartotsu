@@ -1,12 +1,12 @@
 class ChapterRecognition {
-  final _numberPattern = r"([0-9]+)(\.[0-9]+)?(\.?[a-z]+)?";
+  static const _numberPattern = r"([0-9]+)(\.[0-9]+)?(\.?[a-z]+)?";
 
-  final _unwanted =
+  static final _unwanted =
   RegExp(r"\b(?:v|ver|vol|version|volume|season|s)[^a-z]?[0-9]+");
 
-  final _unwantedWhiteSpace = RegExp(r"\s(?=extra|special|omake)");
+  static final _unwantedWhiteSpace = RegExp(r"\s(?=extra|special|omake)");
 
-   dynamic parseChapterNumber(String mangaTitle, String chapterName) {
+   static dynamic parseChapterNumber(String mangaTitle, String chapterName) {
     var name = chapterName.toLowerCase();
 
     name = name.replaceAll(mangaTitle.toLowerCase(), "").trim();
@@ -16,7 +16,7 @@ class ChapterRecognition {
     name = name.replaceAll(_unwantedWhiteSpace, "");
 
     name = name.replaceAll(_unwanted, "");
-    final numberPat = "*$_numberPattern";
+    const numberPat = "*$_numberPattern";
     const ch = r"(?<=ch\.)";
     var match = RegExp("$ch $numberPat").firstMatch(name);
     if (match != null) {
@@ -31,11 +31,11 @@ class ChapterRecognition {
     return 0;
   }
 
-  dynamic _convertToIntIfWhole(double value) {
+  static dynamic _convertToIntIfWhole(double value) {
     return value % 1 == 0 ? value.toInt() : value;
   }
 
-  double _getChapterNumberFromMatch(Match match) {
+  static double _getChapterNumberFromMatch(Match match) {
     final initial = double.parse(match.group(1)!);
     final subChapterDecimal = match.group(2);
     final subChapterAlpha = match.group(3);
@@ -43,7 +43,7 @@ class ChapterRecognition {
     return initial + addition;
   }
 
-  double _checkForDecimal(String? decimal, String? alpha) {
+  static double _checkForDecimal(String? decimal, String? alpha) {
     if (decimal != null && decimal.isNotEmpty) {
       return double.parse(decimal);
     }
@@ -67,7 +67,7 @@ class ChapterRecognition {
     return 0.0;
   }
 
-  double _parseAlphaPostFix(String alpha) {
+  static double _parseAlphaPostFix(String alpha) {
     final number = alpha.codeUnitAt(0) - ('a'.codeUnitAt(0) - 1);
     if (number >= 10) return 0.0;
     return number / 10.0;

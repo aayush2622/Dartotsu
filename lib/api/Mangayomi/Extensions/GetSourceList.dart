@@ -1,34 +1,69 @@
 import 'dart:convert';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:isar/isar.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 
 import '../../../main.dart';
 import '../Eval/dart/service.dart';
 import '../Eval/javascript/service.dart';
 import '../Model/Source.dart';
 import '../http/m_client.dart';
+
 Future<void> fetchSourcesList(
     {int? id,
-      required bool refresh,
-      required String sourcesIndexUrl,
-      required AutoDisposeRef ref,
-      required bool isManga}) async {
+    required bool refresh,
+    required String sourcesIndexUrl,
+    required Ref ref,
+    required bool isManga}) async {
   final http = MClient.init(reqcopyWith: {'useDartHttpClient': true});
   final req = await http.get(Uri.parse(sourcesIndexUrl));
 
   final sourceList =
-  (jsonDecode(req.body) as List).map((e) => Source.fromJson(e)).toList();
+      (jsonDecode(req.body) as List).map((e) => Source.fromJson(e)).toList();
 
-  final info = await PackageInfo.fromPlatform();
   isar.writeTxnSync(() async {
     for (var source in sourceList) {
-      if (source.appMinVerReq != null) {
-        if (compareVersions(info.version, source.appMinVerReq!) > -1) {
-          if ((source.isManga ?? true) == isManga) {
-            if (id != null) {
-              if (id == source.id) {
-                final sourc = isar.sources.getSync(id)!;
+      if ((source.isManga ?? true) == isManga) {
+        if (id != null) {
+          if (id == source.id) {
+            final sourc = isar.sources.getSync(id)!;
+            final req = await http.get(Uri.parse(source.sourceCodeUrl!));
+            final headers = getSourceHeaders(source..sourceCode = req.body);
+            isar.writeTxnSync(() {
+              isar.sources.putSync(sourc
+                ..headers = jsonEncode(headers)
+                ..isAdded = true
+                ..sourceCode = req.body
+                ..sourceCodeUrl = source.sourceCodeUrl
+                ..id = id
+                ..apiUrl = source.apiUrl
+                ..baseUrl = source.baseUrl
+                ..dateFormat = source.dateFormat
+                ..dateFormatLocale = source.dateFormatLocale
+                ..hasCloudflare = source.hasCloudflare
+                ..iconUrl = source.iconUrl
+                ..typeSource = source.typeSource
+                ..lang = source.lang
+                ..isNsfw = source.isNsfw
+                ..name = source.name
+                ..version = source.version
+                ..versionLast = source.version
+                ..isManga = source.isManga
+                ..isFullData = source.isFullData ?? false
+                ..appMinVerReq = source.appMinVerReq
+                ..sourceCodeLanguage = source.sourceCodeLanguage
+                ..additionalParams = source.additionalParams ?? "");
+            });
+            // log("successfully installed or updated");
+          }
+        } else if (isar.sources.getSync(source.id!) != null) {
+          // log("exist");
+          final sourc = isar.sources.getSync(source.id!)!;
+          if (sourc.isAdded!) {
+            if (compareVersions(sourc.version!, source.version!) < 0) {
+              // log("update aivalable auto update");
+              if (4 / 1 == 0) {
+                // auto Update
                 final req = await http.get(Uri.parse(source.sourceCodeUrl!));
                 final headers = getSourceHeaders(source..sourceCode = req.body);
                 isar.writeTxnSync(() {
@@ -37,7 +72,7 @@ Future<void> fetchSourcesList(
                     ..isAdded = true
                     ..sourceCode = req.body
                     ..sourceCodeUrl = source.sourceCodeUrl
-                    ..id = id
+                    ..id = source.id
                     ..apiUrl = source.apiUrl
                     ..baseUrl = source.baseUrl
                     ..dateFormat = source.dateFormat
@@ -56,74 +91,34 @@ Future<void> fetchSourcesList(
                     ..sourceCodeLanguage = source.sourceCodeLanguage
                     ..additionalParams = source.additionalParams ?? "");
                 });
-                // log("successfully installed or updated");
+              } else {
+                // log("update aivalable");
+                isar.sources.putSync(sourc..versionLast = source.version);
               }
-            } else if (isar.sources.getSync(source.id!) != null) {
-              // log("exist");
-              final sourc = isar.sources.getSync(source.id!)!;
-              if (sourc.isAdded!) {
-                if (compareVersions(sourc.version!, source.version!) < 0) {
-                  // log("update aivalable auto update");
-                  if (4/1 == 0) { // auto Update
-                    final req =
-                    await http.get(Uri.parse(source.sourceCodeUrl!));
-                    final headers =
-                    getSourceHeaders(source..sourceCode = req.body);
-                    isar.writeTxnSync(() {
-                      isar.sources.putSync(sourc
-                        ..headers = jsonEncode(headers)
-                        ..isAdded = true
-                        ..sourceCode = req.body
-                        ..sourceCodeUrl = source.sourceCodeUrl
-                        ..id = source.id
-                        ..apiUrl = source.apiUrl
-                        ..baseUrl = source.baseUrl
-                        ..dateFormat = source.dateFormat
-                        ..dateFormatLocale = source.dateFormatLocale
-                        ..hasCloudflare = source.hasCloudflare
-                        ..iconUrl = source.iconUrl
-                        ..typeSource = source.typeSource
-                        ..lang = source.lang
-                        ..isNsfw = source.isNsfw
-                        ..name = source.name
-                        ..version = source.version
-                        ..versionLast = source.version
-                        ..isManga = source.isManga
-                        ..isFullData = source.isFullData ?? false
-                        ..appMinVerReq = source.appMinVerReq
-                        ..sourceCodeLanguage = source.sourceCodeLanguage
-                        ..additionalParams = source.additionalParams ?? "");
-                    });
-                  } else {
-                    // log("update aivalable");
-                    isar.sources.putSync(sourc..versionLast = source.version);
-                  }
-                }
-              }
-            } else {
-              isar.sources.putSync(Source()
-                ..sourceCodeUrl = source.sourceCodeUrl
-                ..id = source.id
-                ..sourceCode = source.sourceCode
-                ..apiUrl = source.apiUrl
-                ..baseUrl = source.baseUrl
-                ..dateFormat = source.dateFormat
-                ..dateFormatLocale = source.dateFormatLocale
-                ..hasCloudflare = source.hasCloudflare
-                ..iconUrl = source.iconUrl
-                ..typeSource = source.typeSource
-                ..lang = source.lang
-                ..isNsfw = source.isNsfw
-                ..name = source.name
-                ..version = source.version
-                ..versionLast = source.version
-                ..isManga = source.isManga
-                ..sourceCodeLanguage = source.sourceCodeLanguage
-                ..isFullData = source.isFullData ?? false
-                ..appMinVerReq = source.appMinVerReq);
-              // log("new source");
             }
           }
+        } else {
+          isar.sources.putSync(Source()
+            ..sourceCodeUrl = source.sourceCodeUrl
+            ..id = source.id
+            ..sourceCode = source.sourceCode
+            ..apiUrl = source.apiUrl
+            ..baseUrl = source.baseUrl
+            ..dateFormat = source.dateFormat
+            ..dateFormatLocale = source.dateFormatLocale
+            ..hasCloudflare = source.hasCloudflare
+            ..iconUrl = source.iconUrl
+            ..typeSource = source.typeSource
+            ..lang = source.lang
+            ..isNsfw = source.isNsfw
+            ..name = source.name
+            ..version = source.version
+            ..versionLast = source.version
+            ..isManga = source.isManga
+            ..sourceCodeLanguage = source.sourceCodeLanguage
+            ..isFullData = source.isFullData ?? false
+            ..appMinVerReq = source.appMinVerReq);
+          // log("new source");
         }
       }
     }
@@ -139,11 +134,11 @@ void checkIfSourceIsObsolete(List<Source> sourceList, bool isManga) {
       .findAllSync()) {
     if (sourceList.isNotEmpty && !(source.isLocal ?? false)) {
       final ids =
-      sourceList.where((e) => e.id != null).map((e) => e.id).toList();
+          sourceList.where((e) => e.id != null).map((e) => e.id).toList();
       if (ids.isNotEmpty) {
         if (!ids.contains(source.id)) {
           isar.writeTxnSync(
-                  () => isar.sources.putSync(source..isObsolete = true));
+              () => isar.sources.putSync(source..isObsolete = true));
         }
       }
     }

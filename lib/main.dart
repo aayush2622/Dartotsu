@@ -1,6 +1,5 @@
 import 'package:dantotsu/api/Anilist/AnilistViewModel.dart';
 import 'package:dantotsu/Screens/Anime/AnimeScreen.dart';
-import 'package:dantotsu/api/Anilist/Data/data.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -40,12 +39,11 @@ void main(List<String> args) async {
 }
 
 Future init() async {
-  Get.config(enableLog: false);
   await PrefManager.init();
   await protocolHandler.register('dantotsu');
   isar = await StorageProvider().initDB(null);
   await StorageProvider().requestPermission();
-  registerAllTypes();
+  TypeFactory.registerAllTypes();
   initializeDateFormatting();
   final supportedLocales = DateFormat.allLocalesWithSymbols();
   for (var locale in supportedLocales) {

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:dantotsu/api/Anilist/Data/data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -177,5 +178,29 @@ class TypeFactory {
     final factory = _factories[T];
     if (factory == null) throw Exception('Factory for type $T is not registered');
     return factory(json) as T;
+  }
+  static void registerAllTypes() {
+    TypeFactory.create<JsonDecoder> (
+            (json) => jsonDecode(json as String));
+    TypeFactory.create<PageResponse>(
+            (json) => PageResponse.fromJson(json));
+    TypeFactory.create<MediaResponse>(
+            (json) => MediaResponse.fromJson(json));
+    TypeFactory.create<MediaListCollectionResponse>(
+            (json) => MediaListCollectionResponse.fromJson(json));
+    TypeFactory.create<ViewerResponse>(
+            (json) => ViewerResponse.fromJson(json));
+    TypeFactory.create<UserListResponse>(
+            (json) => UserListResponse.fromJson(json));
+    TypeFactory.create<AnimeListResponse>(
+            (json) => AnimeListResponse.fromJson(json));
+    TypeFactory.create<MangaListResponse>(
+            (json) => MangaListResponse.fromJson(json));
+    TypeFactory.create<UserListsResponse>(
+            (json) => UserListsResponse.fromJson(json));
+    TypeFactory.create<GenreCollectionResponse>(
+            (json) => GenreCollectionResponse.fromJson(json));
+    TypeFactory.create<MediaTagCollectionResponse>(
+            (json) => MediaTagCollectionResponse.fromJson(json));
   }
 }

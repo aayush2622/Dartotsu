@@ -19,10 +19,10 @@ class SettingsAccountScreen extends StatefulWidget {
 class SettingsAccountScreenState extends BaseSettingsScreen {
 
   @override
-  String get title => 'Accounts';
+  String title() => 'Accounts';
 
   @override
-  Widget get icon => Padding(
+  Widget icon() => Padding(
     padding: const EdgeInsets.only(right: 16),
     child: Icon(
       size: 52,

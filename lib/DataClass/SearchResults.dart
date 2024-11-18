@@ -19,7 +19,7 @@ class SearchResults {
   int? startYear;
   String? season;
   int page;
-  List<media> results;
+  List<Media> results;
   bool hasNextPage;
 
   SearchResults({

@@ -4,10 +4,13 @@ import 'package:dantotsu/Screens/Settings/SettingsThemeScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:icons_plus/icons_plus.dart';
+import 'package:provider/provider.dart';
 
 import '../../Adaptor/Settings/SettingsAdaptor.dart';
 import '../../DataClass/Setting.dart';
 import '../../Functions/Function.dart';
+import '../../Services/BaseFunctions.dart';
+import '../../Services/SourceSwitcher.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -17,23 +20,25 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class SettingsScreenState extends BaseSettingsScreen {
+  @override
+  String title() => 'Settings';
 
   @override
-  String get title => 'Settings';
-
-  @override
-  Widget get icon => Image.asset(
-        'assets/images/icon.png',
-        width: 96,
-        height: 96,
-      );
+  Widget icon() => ClipOval(
+    child: Image.asset(
+      'assets/images/logo.png',
+      width: 64,
+      height: 64,
+      fit: BoxFit.cover,
+    ),
+  );
 
   @override
   List<Widget> get settingsList {
     return [
       SettingsAdaptor(settings: _buildSettings(context)),
       const SizedBox(height: 24),
-      const InfoSection(),
+      _buildInfoSection(context),
       const SizedBox(height: 42),
     ];
   }
@@ -114,13 +119,8 @@ class SettingsScreenState extends BaseSettingsScreen {
       ),
     ];
   }
-}
 
-class InfoSection extends StatelessWidget {
-  const InfoSection({super.key});
-
-  @override
-  Widget build(BuildContext context) {
+  Widget _buildInfoSection(BuildContext context) {
     var theme = Theme.of(context).colorScheme;
     return Column(
       children: [
@@ -174,8 +174,8 @@ class InfoSection extends StatelessWidget {
               color: Colors.grey.shade800,
               iconSize: 32,
               icon: const Icon(Bootstrap.github),
-              onPressed: () => openLinkInBrowser(
-                  'https://github.com/aayush2622/dantotsu-pc'),
+              onPressed: () =>
+                  openLinkInBrowser('https://github.com/aayush2622/dartotsu'),
             ),
             const SizedBox(width: 16),
             IconButton(

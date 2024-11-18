@@ -1,7 +1,7 @@
 part of '../AnilistQueries.dart';
 
 extension on AnilistQueries {
-  Future<Map<String, List<media>>> _getMediaLists({
+  Future<Map<String, List<Media>>> _getMediaLists({
     required bool anime,
     required int userId,
     String? sortOrder,
@@ -9,9 +9,9 @@ extension on AnilistQueries {
     final response = await executeQuery<MediaListCollectionResponse>(
         _queryUser(userId, anime));
 
-    final Map<String, List<media>> sorted = {};
-    final Map<String, List<media>> unsorted = {};
-    final List<media> all = [];
+    final Map<String, List<Media>> sorted = {};
+    final Map<String, List<Media>> unsorted = {};
+    final List<Media> all = [];
     final List<int> allIds = [];
 
     final lists = response?.data?.mediaListCollection?.lists;
@@ -87,12 +87,12 @@ extension on AnilistQueries {
     return sorted;
   }
 
-  Future<List<media>> favMedia(bool anime, {int? id}) async {
+  Future<List<Media>> favMedia(bool anime, {int? id}) async {
     bool hasNextPage = true;
     int page = 0;
     id ??= Anilist.userid;
 
-    Future<List<media>> getNextPage(int page) async {
+    Future<List<Media>> getNextPage(int page) async {
       final response = await executeQuery<UserListsResponse>(
           '''{${_favMediaQuery(anime, page, id: id)}}''');
       final favourites = response?.data?.user?.favourites;
@@ -108,12 +108,12 @@ extension on AnilistQueries {
                 }
                 return null;
               })
-              .whereType<media>()
+              .whereType<Media>()
               .toList() ??
           [];
     }
 
-    List<media> responseArray = [];
+    List<Media> responseArray = [];
     while (hasNextPage) {
       page++;
       responseArray.addAll(await getNextPage(page));

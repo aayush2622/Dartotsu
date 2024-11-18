@@ -16,7 +16,7 @@ import '../../../../Settings/language.dart';
 class SourceSelector extends ConsumerStatefulWidget {
   final Source? currentSource;
   final Function(Source source) onSourceChange;
-  final media mediaData;
+  final Media mediaData;
 
   const SourceSelector({
     super.key,

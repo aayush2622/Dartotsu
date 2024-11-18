@@ -1,21 +1,21 @@
 part of '../AnilistQueries.dart';
 
 extension on AnilistQueries {
-  Future<Map<String, List<media>>> _initHomePage() async {
+  Future<Map<String, List<Media>>> _initHomePage() async {
     try {
       final removeList = PrefManager.getVal(PrefName.removeList);
       const hidePrivate = true;
-      List<media> removedMedia = [];
+      List<Media> removedMedia = [];
       final homeLayoutMap = PrefManager.getVal(PrefName.homeLayout);
 
       var response =
           await executeQuery<UserListResponse>(_queryHomeList());
-      Map<String, List<media>> returnMap = {};
+      Map<String, List<Media>> returnMap = {};
 
-      void processMedia(String type, List<MediaList>? currentMedia,
-          List<MediaList>? repeatingMedia) {
-        Map<int, media> subMap = {};
-        List<media> returnArray = [];
+      void processMedia(String type, List<api.MediaList>? currentMedia,
+          List<api.MediaList>? repeatingMedia) {
+        Map<int, Media> subMap = {};
+        List<Media> returnArray = [];
 
         for (var entry in (currentMedia ?? []) + (repeatingMedia ?? [])) {
           var media = mediaListData(entry);
@@ -41,8 +41,8 @@ extension on AnilistQueries {
         returnMap["current$type"] = returnArray;
       }
 
-      void processFavorites(String type, List<MediaEdge>? favorites) {
-        List<media> returnArray = [];
+      void processFavorites(String type, List<api.MediaEdge>? favorites) {
+        List<Media> returnArray = [];
         for (var entry in (favorites ?? [])) {
           var media = mediaEdgeData(entry);
           media.isFav = true;
@@ -56,9 +56,9 @@ extension on AnilistQueries {
         returnMap["favorite$type"] = returnArray;
       }
 
-      List<MediaList> getMediaList(List<MediaListGroup>? lists) {
+      List<api.MediaList> getMediaList(List<api.MediaListGroup>? lists) {
         return (lists?.expand((x) => x.entries ?? []) ?? [])
-            .cast<MediaList>()
+            .cast<api.MediaList>()
             .toList()
             .reversed
             .toList();
@@ -93,7 +93,7 @@ extension on AnilistQueries {
               getMediaList(response?.data?.plannedManga?.lists), null);
         },
         'Recommended': () {
-          Map<int, media> subMap = {};
+          Map<int, Media> subMap = {};
 
           var recommendations =
               response?.data?.recommendationQuery?.recommendations ?? [];
@@ -106,8 +106,8 @@ extension on AnilistQueries {
             }
           }
 
-          Iterable<MediaList> combineIterables(
-              Iterable<MediaList>? first, Iterable<MediaList>? second) {
+          Iterable<api.MediaList> combineIterables(
+              Iterable<api.MediaList>? first, Iterable<api.MediaList>? second) {
             return (first ?? []).followedBy(second ?? []);
           }
 
@@ -123,7 +123,7 @@ extension on AnilistQueries {
             }
           }
 
-          List<media> list = subMap.values.toList()
+          List<Media> list = subMap.values.toList()
             ..sort((a, b) => (b.meanScore ?? 0).compareTo(a.meanScore ?? 0));
           returnMap["recommendations"] = list;
         },

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../DataClass/Media.dart';
 
-Widget ScoreBadge(BuildContext context, media mediaInfo) {
+Widget ScoreBadge(BuildContext context, Media mediaInfo) {
   final theme = Theme.of(context).colorScheme;
   return Positioned(
     bottom: 0,

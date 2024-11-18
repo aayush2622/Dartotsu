@@ -10,7 +10,7 @@ import 'EpisodeListViewHolder.dart';
 class EpisodeAdaptor extends StatefulWidget {
   final int type;
   final List<Episode> episodeList;
-  final media mediaData;
+  final Media mediaData;
 
   const EpisodeAdaptor(
       {super.key,
@@ -59,6 +59,7 @@ class EpisodeAdaptorState extends State<EpisodeAdaptor> {
       child: Container(
         constraints: const BoxConstraints(maxHeight: double.infinity),
         child: ListView.builder(
+          physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           itemCount: episodeList.length,
           itemBuilder: (context, index) {

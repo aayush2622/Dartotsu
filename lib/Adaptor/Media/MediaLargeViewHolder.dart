@@ -9,7 +9,7 @@ import 'Widgets/MediaReleaseingIndicator.dart';
 import 'Widgets/MediaScoreBadge.dart';
 
 class MediaPageLargeViewHolder extends StatelessWidget {
-  final media mediaInfo;
+  final Media mediaInfo;
 
   const MediaPageLargeViewHolder(this.mediaInfo, {super.key});
 
@@ -198,7 +198,7 @@ class MediaPageLargeViewHolder extends StatelessWidget {
   }
 }
 
-String formatMediaInfo(media media) {
+String formatMediaInfo(Media media) {
   final nextAiringEpisode = media.anime?.nextAiringEpisode;
   final totalEpisodes = media.anime?.totalEpisodes?.toString() ?? "??";
 

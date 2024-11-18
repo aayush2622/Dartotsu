@@ -6,7 +6,7 @@ import '../../DataClass/Media.dart';
 import '../../Widgets/ScrollConfig.dart';
 
 class MediaListTabs extends StatefulWidget {
-  final Map<String, List<media>> data;
+  final Map<String, List<Media>> data;
   final int initialIndex;
   final bool isLarge;
 

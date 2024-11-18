@@ -6,8 +6,8 @@ import 'MediaListTabs.dart';
 
 class MediaListScreen extends StatefulWidget {
   final bool anime;
-
-  const MediaListScreen({super.key, required this.anime});
+  final int id;
+  const MediaListScreen({super.key, required this.anime, required this.id});
 
   @override
   MediaListScreenState createState() => MediaListScreenState();
@@ -19,7 +19,7 @@ class MediaListScreenState extends State<MediaListScreen> {
   @override
   void initState() {
     super.initState();
-    _viewModel.loadAll(anime: widget.anime, userId: Anilist.userid ?? 0);
+    _viewModel.loadAll(anime: widget.anime, userId: widget.id);
   }
 
   @override

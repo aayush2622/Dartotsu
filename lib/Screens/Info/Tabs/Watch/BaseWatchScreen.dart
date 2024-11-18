@@ -13,7 +13,7 @@ import 'Widgets/SourceSelector.dart';
 abstract class BaseWatchScreen<T extends StatefulWidget> extends State<T> {
   BaseParser get viewModel;
 
-  media get mediaData;
+  Media get mediaData;
 
   List<Widget> widgetList = [];
 

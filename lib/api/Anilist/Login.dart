@@ -8,7 +8,6 @@ import '../../Widgets/CustomBottomDialog.dart';
 import 'Anilist.dart';
 
 CustomBottomDialog login(BuildContext context) {
-  var theme = Theme.of(context).colorScheme;
   return CustomBottomDialog(
     title: "Login to Anilist",
     viewList: [

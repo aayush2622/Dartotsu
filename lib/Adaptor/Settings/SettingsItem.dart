@@ -33,7 +33,6 @@ class SettingItem extends StatelessWidget {
                   Text(setting.description,
                       style: const TextStyle(
                           fontWeight: FontWeight.w600,
-
                           color: Colors.grey,
                           fontFamily: 'Poppins')),
                   if (setting.attach != null) setting.attach!(context),
@@ -91,8 +90,8 @@ class SettingSwitchItem extends StatelessWidget {
                           fontSize: 14.0,
                           color: Colors.grey,
                           fontFamily: 'Poppins')),
-                  if (setting.attachToSwitch != null)
-                    setting.attachToSwitch!(context),
+                  if (setting.attach != null)
+                    setting.attach!(context),
                 ],
               ),
             ),

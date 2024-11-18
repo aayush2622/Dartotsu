@@ -85,7 +85,8 @@ class _ExtensionListTileWidgetState
                 ),
         ),
         title: Text(widget.source.name!),
-        titleTextStyle: const TextStyle(
+        titleTextStyle: TextStyle(
+          color: theme.onSurface,
           fontFamily: 'Poppins',
           fontWeight: FontWeight.bold,
           fontSize: 15.0,

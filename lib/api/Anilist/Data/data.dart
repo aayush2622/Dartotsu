@@ -1,37 +1,9 @@
-import 'dart:convert';
-
 import 'package:dantotsu/api/Anilist/Data/page.dart';
 import 'package:dantotsu/api/Anilist/Data/user.dart';
 import 'package:json_annotation/json_annotation.dart';
-import '../Anilist.dart';
 import 'media.dart';
 
 part 'Generated/data.g.dart';
-
-void registerAllTypes() {
-  TypeFactory.create<JsonDecoder> (
-      (json) => jsonDecode(json as String));
-  TypeFactory.create<PageResponse>(
-      (json) => PageResponse.fromJson(json));
-  TypeFactory.create<MediaResponse>(
-      (json) => MediaResponse.fromJson(json));
-  TypeFactory.create<MediaListCollectionResponse>(
-      (json) => MediaListCollectionResponse.fromJson(json));
-  TypeFactory.create<ViewerResponse>(
-      (json) => ViewerResponse.fromJson(json));
-  TypeFactory.create<UserListResponse>(
-      (json) => UserListResponse.fromJson(json));
-  TypeFactory.create<AnimeListResponse>(
-      (json) => AnimeListResponse.fromJson(json));
-  TypeFactory.create<MangaListResponse>(
-      (json) => MangaListResponse.fromJson(json));
-  TypeFactory.create<UserListsResponse>(
-      (json) => UserListsResponse.fromJson(json));
-  TypeFactory.create<GenreCollectionResponse>(
-      (json) => GenreCollectionResponse.fromJson(json));
-  TypeFactory.create<MediaTagCollectionResponse>(
-      (json) => MediaTagCollectionResponse.fromJson(json));
-}
 
 @JsonSerializable()
 class UserListsResponse {
@@ -70,6 +42,7 @@ class UserListResponse {
   factory UserListResponse.fromJson(Map<String, dynamic> json) =>
       _$UserListResponseFromJson(json);
 
+  Map<String, dynamic> toJson() => _$UserListResponseToJson(this);
 }
 
 @JsonSerializable()

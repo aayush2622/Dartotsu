@@ -21,10 +21,10 @@ class SettingsThemeScreen extends StatefulWidget {
 class SettingsThemeScreenState extends BaseSettingsScreen {
 
   @override
-  String get title => 'Theme';
+  String title() =>  'Theme';
 
   @override
-  Widget get icon => Padding(
+  Widget icon() => Padding(
     padding: const EdgeInsets.only(right: 16),
     child: Icon(
       size: 52,

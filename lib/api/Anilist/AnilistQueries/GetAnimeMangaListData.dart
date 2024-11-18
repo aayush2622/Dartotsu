@@ -1,10 +1,10 @@
 part of '../AnilistQueries.dart';
 
 extension on AnilistQueries {
-  Future<Map<String, List<media>>> _getAnimeList() async {
-    final list = <String, List<media>>{};
+  Future<Map<String, List<Media>>> _getAnimeList() async {
+    final list = <String, List<Media>>{};
 
-    List<media>? filterRecentUpdates(Page? page) {
+    List<Media>? filterRecentUpdates(Page? page) {
       final listOnly = PrefManager.getVal(PrefName.recentlyListOnly);
       final adultOnly = PrefManager.getVal(PrefName.adultOnly);
       final idArr = <int>{};
@@ -58,8 +58,8 @@ extension on AnilistQueries {
     return list;
   }
 
-  Future<Map<String, List<media>>> _getMangaList() async {
-    final list = <String, List<media>>{};
+  Future<Map<String, List<Media>>> _getMangaList() async {
+    final list = <String, List<Media>>{};
     final mangaLayoutMap = PrefManager.getVal(PrefName.mangaLayout);
     final mangaList =
         await executeQuery<MangaListResponse>(_queryMangaList(), force: true);
@@ -145,10 +145,10 @@ String _queryMangaList() {
   return "{$generateOrderedQueries}";
 }
 
-List<media> _mediaList(Page? media1) {
-  final combinedList = <media>[];
-  if (media1 != null && media1.media != null) {
-    for (var media in media1.media!) {
+List<Media> _mediaList(Page? media) {
+  final combinedList = <Media>[];
+  if (media != null && media.media != null) {
+    for (var media in media.media!) {
       combinedList.add(mediaData(media));
     }
   }

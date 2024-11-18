@@ -7,7 +7,7 @@ import '../BaseWatchScreen.dart';
 import 'MangaParser.dart';
 
 class MangaWatchScreen extends StatefulWidget {
-  final media mediaData;
+  final Media mediaData;
 
   const MangaWatchScreen({super.key, required this.mediaData});
 
@@ -19,7 +19,7 @@ class MangaWatchScreenState extends BaseWatchScreen<MangaWatchScreen> {
   late MangaParser _viewModel;
 
   @override
-  media get mediaData => widget.mediaData;
+  Media get mediaData => widget.mediaData;
 
   @override
   BaseParser get viewModel => _viewModel;

@@ -11,7 +11,7 @@ part 'Kitsu.g.dart';
 class Kitsu {
 
 
-  static Future<Map<String, Episode>?> getKitsuEpisodesDetails(media mediaData) async {
+  static Future<Map<String, Episode>?> getKitsuEpisodesDetails(Media mediaData) async {
     final query = '''
     query {
       lookupMapping(externalId: ${mediaData.id}, externalSite: ANILIST_ANIME) {

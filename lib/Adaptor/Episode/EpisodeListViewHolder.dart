@@ -13,7 +13,7 @@ import 'Widget/HandleProgress.dart';
 class EpisodeListView extends StatelessWidget {
   final Episode episode;
   final bool isWatched;
-  final media mediaData;
+  final Media mediaData;
   const EpisodeListView(
       {super.key, required this.episode, required this.isWatched, required this.mediaData});
 

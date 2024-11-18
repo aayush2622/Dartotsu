@@ -6,7 +6,7 @@ import 'Widgets/MediaReleaseingIndicator.dart';
 import 'Widgets/MediaScoreBadge.dart';
 
 class MediaViewHolder extends StatelessWidget {
-  final media mediaInfo;
+  final Media mediaInfo;
   final bool isLarge;
 
   const MediaViewHolder({
@@ -139,7 +139,7 @@ class MediaViewHolder extends StatelessWidget {
   }
 }
 
-String formatMediaInfo(media media) {
+String formatMediaInfo(Media media) {
   final nextAiringEpisode = media.anime?.nextAiringEpisode;
   final totalEpisodes = media.anime?.totalEpisodes?.toString() ?? "~";
   return nextAiringEpisode != null && nextAiringEpisode != -1

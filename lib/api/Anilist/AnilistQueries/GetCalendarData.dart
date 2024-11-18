@@ -1,9 +1,9 @@
 part of '../AnilistQueries.dart';
 extension on AnilistQueries {
 
-  Future<List<media>> _getCalendarData() async {
+  Future<List<Media>> _getCalendarData() async {
     int page = 1;
-    List<media> mediaList = [];
+    List<Media> mediaList = [];
 
     Future<Page?> execute(int page) async => (await executeQuery<PageResponse>(_queryCalendar(page),force: true))?.data?.page;
 

@@ -4,7 +4,6 @@ import 'package:dantotsu/api/Mangayomi/Eval/dart/model/video.dart';
 import 'package:dantotsu/api/Mangayomi/Eval/javascript/http.dart';
 import 'package:dart_eval/dart_eval_bridge.dart';
 import 'package:dart_eval/stdlib/core.dart';
-import 'package:flutter/material.dart';
 import 'package:html/dom.dart' hide Text;
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';

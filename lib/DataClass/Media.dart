@@ -1,5 +1,5 @@
 import '../Preferences/HiveDataClasses/Selected/Selected.dart';
-import '../api/Anilist/Data/media.dart';
+import '../api/Anilist/Data/media.dart' as api;
 import '../api/Anilist/Data/others.dart';
 import '../api/Anilist/Data/fuzzyData.dart';
 import 'Anime.dart';
@@ -8,7 +8,7 @@ import 'Character.dart';
 import 'Manga.dart';
 import 'User.dart';
 
-class media {
+class Media {
   final Anime? anime;
   final Manga? manga;
   final int id;
@@ -60,10 +60,10 @@ class media {
   List<character>? characters;
   List<Review>? review;
   List<author>? staff;
-  media? prequel;
-  media? sequel;
-  List<media>? relations;
-  List<media>? recommendations;
+  Media? prequel;
+  Media? sequel;
+  List<Media>? relations;
+  List<Media>? recommendations;
   List<userData>? users;
   String? vrvId;
   String? crunchySlug;
@@ -71,12 +71,12 @@ class media {
   String? nameMAL;
   String? shareLink;
   Selected? selected;
-  List<MediaStreamingEpisode>? streamingEpisodes;
+  List<api.MediaStreamingEpisode>? streamingEpisodes;
   String? idKitsu;
 
   bool cameFromContinue = false;
 
-  media({
+  Media({
     this.anime,
     this.manga,
     required this.id,
@@ -141,8 +141,8 @@ class media {
   String mangaName() => countryOfOrigin == 'JP' ? mainName() : nameRomaji;
 }
 
-media mediaData(Media apiMedia) {
-  return media(
+Media mediaData(api.Media apiMedia) {
+  return Media(
     id: apiMedia.id,
     idMAL: apiMedia.idMal,
     name: apiMedia.title?.english,
@@ -166,25 +166,25 @@ media mediaData(Media apiMedia) {
     genres: apiMedia.genres ?? [],
     timeUntilAiring:
         (apiMedia.nextAiringEpisode?.timeUntilAiring?.toInt() ?? 0) * 1000,
-    anime: apiMedia.type == MediaType.ANIME
+    anime: apiMedia.type == api.MediaType.ANIME
         ? Anime(
             totalEpisodes: apiMedia.episodes,
             nextAiringEpisode:
                 (apiMedia.nextAiringEpisode?.episode?.toInt() ?? 0) - 1,
           )
         : null,
-    manga: apiMedia.type == MediaType.MANGA
+    manga: apiMedia.type == api.MediaType.MANGA
         ? Manga(totalChapters: apiMedia.chapters)
         : null,
   );
 }
 
-media mediaEdgeData(MediaEdge apiMediaEdge) {
+Media mediaEdgeData(api.MediaEdge apiMediaEdge) {
   var media = mediaData(apiMediaEdge.node!);
   media.relation= apiMediaEdge.relationType?.name;
   return media;
 }
-media mediaListData(MediaList mediaList) {
+Media mediaListData(api.MediaList mediaList) {
   var media = mediaData(mediaList.media!);
   media.userProgress = mediaList.progress;
   media.isListPrivate = mediaList.private ?? false;

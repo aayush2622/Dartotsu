@@ -8,7 +8,7 @@ import '../../../DataClass/Episode.dart';
 part 'Anify.g.dart';
 
 class Anify {
-  static Future<Map<String, Episode>> fetchAndParseMetadata(media mediaData) async {
+  static Future<Map<String, Episode>> fetchAndParseMetadata(Media mediaData) async {
     final response = await http.get(Uri.parse('https://anify.eltik.cc/content-metadata/${mediaData.id}'));
     if (response.statusCode == 200) {
       final List<dynamic> jsonResponse = jsonDecode(response.body) as List<dynamic>;

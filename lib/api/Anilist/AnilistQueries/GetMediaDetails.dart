@@ -1,7 +1,7 @@
 part of '../AnilistQueries.dart';
 
 extension on AnilistQueries {
-  Future<media?> _mediaDetails(media media) async {
+  Future<Media?> _mediaDetails(Media media) async {
     var response = (await executeQuery<MediaResponse>(_queryMedia(media), force: true));
     if (response == null) return null;
     void parse() {
@@ -193,7 +193,7 @@ extension on AnilistQueries {
         media.anime!.seasonYear = fetchedMedia.seasonYear;
         if (fetchedMedia.studios?.nodes?.isNotEmpty == true) {
           final firstStudio = fetchedMedia.studios!.nodes![0];
-          media.anime?.mainStudio = Studio(
+          media.anime?.mainStudio = api.Studio(
             id: firstStudio.id,
             name: firstStudio.name,
             siteUrl: firstStudio.siteUrl,
@@ -256,7 +256,7 @@ extension on AnilistQueries {
     return media;
   }
 }
-String _queryMedia(media media) => '''{
+String _queryMedia(Media media) => '''{
   Media(id:${media.id}) {
     id
     favourites

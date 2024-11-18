@@ -15,7 +15,7 @@ import 'MediaViewHolder.dart';
 
 class MediaAdaptor extends StatefulWidget {
   final int type;
-  final List<media> mediaList;
+  final List<Media> mediaList;
   final bool isLarge;
   final ScrollController? scrollController;
   final Function(int index)? onMediaTap;
@@ -34,7 +34,7 @@ class MediaAdaptor extends StatefulWidget {
 }
 
 class MediaGridState extends State<MediaAdaptor> {
-  late List<media> _mediaList;
+  late List<Media> _mediaList;
 
   @override
   void initState() {
@@ -205,7 +205,7 @@ class MediaGridState extends State<MediaAdaptor> {
 }
 
 class LargeView extends StatefulWidget {
-  final List<media> mediaList;
+  final List<Media> mediaList;
 
   const LargeView({super.key, required this.mediaList});
 
@@ -221,7 +221,7 @@ class LargeViewState extends State<LargeView> {
   void initState() {
     super.initState();
     _pageController = PageController();
-    _startAutoScroll();
+    if (widget.mediaList.isNotEmpty) _startAutoScroll();
   }
 
   @override

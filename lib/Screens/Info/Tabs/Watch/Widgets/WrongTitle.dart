@@ -12,7 +12,7 @@ import '../../../../../api/Mangayomi/Search/search.dart';
 class WrongTitleDialog extends StatefulWidget {
   final Source source;
   final Rxn<MManga?>? selectedMedia;
-  final media mediaData;
+  final Media mediaData;
   final Function(MManga)? onChanged;
 
   const WrongTitleDialog({
@@ -118,7 +118,7 @@ class WrongTitleDialogState extends State<WrongTitleDialog> {
     }
 
     final mediaList = snapshot.data!.list.map((e) {
-      return media(
+      return Media(
         id: e.hashCode,
         name: e.name,
         cover: e.imageUrl,

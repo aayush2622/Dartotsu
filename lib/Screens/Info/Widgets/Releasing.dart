@@ -5,7 +5,7 @@ import '../../../Theme/Colors.dart';
 import '../../../Theme/ThemeProvider.dart';
 import 'Countdown.dart';
 
-List<Widget> releasingIn(media mediaData, BuildContext context) {
+List<Widget> releasingIn(Media mediaData, BuildContext context) {
   var theme = Provider.of<ThemeNotifier>(context);
   var show = (mediaData.anime?.nextAiringEpisode != null &&
       mediaData.anime?.nextAiringEpisodeTime != null &&
