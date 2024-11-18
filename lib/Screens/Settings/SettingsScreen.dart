@@ -9,8 +9,6 @@ import 'package:provider/provider.dart';
 import '../../Adaptor/Settings/SettingsAdaptor.dart';
 import '../../DataClass/Setting.dart';
 import '../../Functions/Function.dart';
-import '../../Services/BaseFunctions.dart';
-import '../../Services/SourceSwitcher.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
