@@ -3,44 +3,7 @@ on:
   push:
     branches: main
 jobs:
-  # build_android:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Cloing repository
-  #       uses: actions/checkout@v4
-  #     - name: Setup Flutter
-  #       uses: subosito/flutter-action@v2
-  #       with:
-  #         flutter-version: 3.24.1
-  #     - run: flutter pub get
-  #     - run: flutter build apk --split-per-abi
 
-  #     - name: Upload APK to Discord
-  #       run: |
-  #         curl -F "payload_json={\"content\": \"Android x86_64 ${{ github.sha}}\"}" \
-  #            -F "file=@build/app/outputs/flutter-apk/app-x86_64-release.apk" \
-  #            ${{ secrets.DISCORD_WEBHOOK_URL }}
-        
-  # build_windows:
-  #   runs-on: windows-latest
-  #   steps:
-  #     - name: Cloing repository
-  #       uses: actions/checkout@v4
-  #     - name: Setup Flutter
-  #       uses: subosito/flutter-action@v2
-  #       with:
-  #         flutter-version: 3.24.1
-  #     - run: flutter pub get
-  #     - run: flutter build windows
-  #     - name: Archive App
-  #       uses: thedoctor0/zip-release@master
-  #       with:
-  #         type: 'zip'
-  #         filename: Dantotsu-${{github.sha}}-windows.zip
-  #         directory: build\windows\x64\runner\Release
-  #     - name: Upload Windows ZIP to Discord
-  #       shell: pwsh
-  #       run: ./scripts/upload-to-discord.ps1 -webhookUrl ${{ secrets.DISCORD_WEBHOOK_URL }} -filePath build\windows\x64\runner\Release\Dantotsu-${{github.sha}}-windows.zip
   build_linux:
     runs-on: ubuntu-latest
     permissions: 
@@ -88,21 +51,17 @@ jobs:
         continue-on-error: true
       - name: Save Current SHA for Next Run
         run: echo ${{ github.sha }} > last_sha.txt
-      # - name: Setup Flutter
-      #   uses: subosito/flutter-action@v2
-      #   with:
-      #     flutter-version: 3.24.1
-      # - run: |
-      #     sudo apt-get update -y
-      #     sudo apt-get install -y ninja-build libgtk-3-dev
-      # - run: flutter pub get
-      # - run: flutter build linux
-      # - name: Archive app
-      #   uses: thedoctor0/zip-release@master
-      #   with:
-      #       type: 'zip'
-      #       filename: Dantotsu-${{github.sha}}-linux.zip
-      #       directory: build/linux/x64/release/bundle
+
+      # checking if to ping or not
+
+      - name: Check for noPing 
+        id: check_noping 
+        run: | 
+          if [[ "${{ github.event.head_commit.message }}" == *"[noPing]"* ]]; then 
+            echo "ping_variable=noping" >> $GITHUB_ENV 
+          else 
+            echo "ping_variable=<@&1298926901833895986>" >> $GITHUB_ENV 
+          fi
       - name: Upload APK to Discord and Telegram
         shell: bash
         run: |
@@ -250,7 +209,7 @@ jobs:
                         --arg thumbnail_url "$thumbnail_url" \
                         --argjson embed_color "$embed_color" \
                         '{
-                          "content": "<@&1298926901833895986>",
+                          "content": "${{env.ping_variable}}",
                           "embeds": [
                             {
                               "title": "New Alpha-Build dropped 🔥",
