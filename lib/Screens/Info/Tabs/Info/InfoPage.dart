@@ -91,7 +91,8 @@ class InfoPageState extends State<InfoPage> {
     var mediaData = widget.mediaData;
     bool isAnime = mediaData.anime != null;
     String infoTotal;
-    if (mediaData.anime?.nextAiringEpisode != -1) {
+    if (mediaData.anime?.nextAiringEpisode != -1 &&
+        mediaData.anime?.nextAiringEpisode != null) {
       infoTotal =
           "${mediaData.anime?.nextAiringEpisode} | ${mediaData.anime?.totalEpisodes ?? "~"}";
     } else {

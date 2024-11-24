@@ -7,9 +7,10 @@ import 'package:dantotsu/Widgets/AlertDialogBuilder.dart';
 import 'package:dantotsu/Widgets/CustomBottomDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:provider/provider.dart';
 
 import '../../Preferences/PrefManager.dart';
-import '../../api/Anilist/Anilist.dart';
+import '../../Services/ServiceSwitcher.dart';
 
 class SettingsBottomSheet extends StatefulWidget {
   const SettingsBottomSheet({super.key});
@@ -31,6 +32,7 @@ class SettingsBottomSheetState extends State<SettingsBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
+    var service = Provider.of<MediaServiceProvider>(context,listen: false).currentService.data;
     return CustomBottomDialog(
       viewList: [
         Padding(
@@ -40,11 +42,11 @@ class SettingsBottomSheetState extends State<SettingsBottomSheet> {
               Obx(() {
                 return CircleAvatar(
                   radius: 26.0,
-                  backgroundImage: Anilist.avatar.value.isNotEmpty
-                      ? CachedNetworkImageProvider(Anilist.avatar.value)
+                  backgroundImage: service.avatar.value.isNotEmpty
+                      ? CachedNetworkImageProvider(service.avatar.value)
                       : null,
                   backgroundColor: Colors.transparent,
-                  child: Anilist.avatar.value.isEmpty
+                  child: service.avatar.value.isEmpty
                       ? Icon(Icons.person,
                           color: Theme.of(context).primaryColor)
                       : null,
@@ -56,9 +58,9 @@ class SettingsBottomSheetState extends State<SettingsBottomSheet> {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      if (Anilist.token.value.isNotEmpty) ...[
+                      if (service.token.value.isNotEmpty) ...[
                         Text(
-                          Anilist.username.value,
+                          service.username.value,
                           style: const TextStyle(
                             fontFamily: 'Poppins',
                             fontWeight: FontWeight.w600,
@@ -72,7 +74,7 @@ class SettingsBottomSheetState extends State<SettingsBottomSheet> {
                               ..setTitle('Logout')
                               ..setMessage('Are you sure you want to logout?')
                               ..setPositiveButton('Yes', () {
-                                Anilist.removeSavedToken();
+                                service.removeSavedToken();
                                 Navigator.of(context).pop();
                               })
                               ..setNegativeButton('No', null)
@@ -90,7 +92,7 @@ class SettingsBottomSheetState extends State<SettingsBottomSheet> {
                         ),
                       ] else ...[
                         GestureDetector(
-                          onTap: () => Anilist.login(context),
+                          onTap: () => service.login(context),
                           child: Text(
                             'Login',
                             style: TextStyle(
@@ -114,14 +116,14 @@ class SettingsBottomSheetState extends State<SettingsBottomSheet> {
                     Padding(
                       padding: const EdgeInsets.all(14.0),
                       child: Icon(
-                        Anilist.unreadNotificationCount > 0
+                        service.unreadNotificationCount > 0
                             ? Icons.notifications_active
                             : Icons.notifications_none,
                         color: Theme.of(context).colorScheme.onSurface,
                         size: 22,
                       ),
                     ),
-                    if (Anilist.unreadNotificationCount > 0)
+                    if (service.unreadNotificationCount > 0)
                       Positioned(
                         right: 0,
                         bottom: -2,
@@ -137,7 +139,7 @@ class SettingsBottomSheetState extends State<SettingsBottomSheet> {
                           ),
                           child: Center(
                             child: Text(
-                              Anilist.unreadNotificationCount.toString(),
+                              service.unreadNotificationCount.toString(),
                               style: const TextStyle(
                                 fontFamily: 'Poppins',
                                 fontWeight: FontWeight.w600,

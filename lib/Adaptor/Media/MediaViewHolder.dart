@@ -26,7 +26,7 @@ class MediaViewHolder extends StatelessWidget {
         if (isLarge && mediaInfo.relation != null) _buildRelationRow(theme),
         const SizedBox(height: 8),
         _buildMediaTitle(),
-        if (mediaInfo.minimal != true) ...[
+        if (mediaInfo.minimal != true && mediaInfo.mal != true) ...[
           const SizedBox(height: 2),
           _buildProgressInfo(theme),
         ],
@@ -66,7 +66,9 @@ class MediaViewHolder extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Icon(
-            mediaInfo.anime != null ? Icons.movie_filter_rounded : Icons.import_contacts,
+            mediaInfo.anime != null
+                ? Icons.movie_filter_rounded
+                : Icons.import_contacts,
             size: 16,
             color: theme.onSurface.withOpacity(0.58),
           ),
@@ -125,7 +127,9 @@ class MediaViewHolder extends StatelessWidget {
           ),
           TextSpan(
             text: mediaInfo.anime == null
-                ? "${mediaInfo.manga?.totalChapters ?? "~"}"
+                ? mediaInfo.manga?.totalChapters != 0
+                    ? "${mediaInfo.manga?.totalChapters ?? "~"}"
+                    : "~"
                 : formatMediaInfo(mediaInfo),
             style: const TextStyle(
               fontFamily: 'Poppins',
@@ -141,8 +145,10 @@ class MediaViewHolder extends StatelessWidget {
 
 String formatMediaInfo(Media media) {
   final nextAiringEpisode = media.anime?.nextAiringEpisode;
-  final totalEpisodes = media.anime?.totalEpisodes?.toString() ?? "~";
+  final totalEpisodes = media.anime?.totalEpisodes != 0
+      ? "${media.anime?.totalEpisodes ?? "~"}"
+      : "~";
   return nextAiringEpisode != null && nextAiringEpisode != -1
-      ? "$nextAiringEpisode | $totalEpisodes"
+      ? "$nextAiringEpisode / $totalEpisodes"
       : totalEpisodes;
 }

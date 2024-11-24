@@ -88,7 +88,7 @@ extension on AnilistQueries {
         media.relations = [];
 
         fetchedMedia.relations?.edges?.forEach((mediaEdge) {
-          final m = mediaEdgeData(mediaEdge);
+          final m = Media.mediaEdgeData(mediaEdge);
           media.relations?.add(m);
 
           if (m.relation == "SEQUEL") {
@@ -122,7 +122,7 @@ extension on AnilistQueries {
           var mediaRecommendation = i.mediaRecommendation;
           if (mediaRecommendation != null) {
             media.recommendations?.add(
-              mediaData(mediaRecommendation),
+              Media.mediaData(mediaRecommendation),
             );
           }
         });

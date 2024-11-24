@@ -15,7 +15,7 @@ class MediaListViewModel extends GetxController {
     try {
       if (mediaList.value != null) return;
       isLoading.value = true;
-      mediaList.value = await Anilist.query.getMediaLists(anime: anime, userId: userId, sortOrder: sortOrder);
+      mediaList.value = await Anilist.query!.getMediaLists(anime: anime, userId: userId, sortOrder: sortOrder);
     } finally {
       isLoading.value = false;
     }

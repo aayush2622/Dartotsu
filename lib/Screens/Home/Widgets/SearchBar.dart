@@ -2,7 +2,6 @@ import 'package:dantotsu/Functions/Extensions.dart';
 import 'package:flutter/material.dart';
 
 import '../../../Widgets/CustomBottomDialog.dart';
-import '../../../api/Anilist/Anilist.dart';
 import '../../Settings/SettingsBottomSheet.dart';
 import 'AvtarWidget.dart';
 
@@ -23,7 +22,7 @@ class MediaSearchBar extends StatelessWidget {
         children: [
           Expanded(
             child: GestureDetector(
-              onTap: () => Anilist.login(context),
+              onTap: () {},
               child: AbsorbPointer(
                 child: TextField(
                   decoration: InputDecoration(

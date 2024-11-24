@@ -150,7 +150,9 @@ class MediaPageSmallViewHolder extends StatelessWidget {
     final mediaType = isAnime ? "Episodes" : "Chapters";
     final mediaCount = isAnime
         ? formatMediaInfo(mediaInfo)
-        : "${mediaInfo.manga?.totalChapters ?? "??"}";
+        : mediaInfo.manga?.totalChapters != 0
+        ? "${mediaInfo.manga?.totalChapters ?? "??"}"
+        : "??";
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -203,9 +205,11 @@ class MediaPageSmallViewHolder extends StatelessWidget {
 
 String formatMediaInfo(Media media) {
   final nextAiringEpisode = media.anime?.nextAiringEpisode;
-  final totalEpisodes = media.anime?.totalEpisodes?.toString() ?? "??";
-
+  final totalEpisodes = media.anime?.totalEpisodes != 0
+      ? "${media.anime?.totalEpisodes ?? "??"}"
+      : "??";
   return nextAiringEpisode != null && nextAiringEpisode != -1
       ? "$nextAiringEpisode / $totalEpisodes"
       : totalEpisodes;
 }
+

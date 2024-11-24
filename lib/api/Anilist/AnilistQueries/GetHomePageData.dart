@@ -6,7 +6,7 @@ extension on AnilistQueries {
       final removeList = PrefManager.getVal(PrefName.removeList);
       const hidePrivate = true;
       List<Media> removedMedia = [];
-      final homeLayoutMap = PrefManager.getVal(PrefName.homeLayout);
+      final homeLayoutMap = PrefManager.getVal(PrefName.anilistHomeLayout);
 
       var response =
           await executeQuery<UserListResponse>(_queryHomeList());
@@ -18,7 +18,7 @@ extension on AnilistQueries {
         List<Media> returnArray = [];
 
         for (var entry in (currentMedia ?? []) + (repeatingMedia ?? [])) {
-          var media = mediaListData(entry);
+          var media = Media.mediaListData(entry);
           if (!removeList.contains(media.id) &&
               (!hidePrivate || !media.isListPrivate)) {
             media.cameFromContinue = true;
@@ -44,7 +44,7 @@ extension on AnilistQueries {
       void processFavorites(String type, List<api.MediaEdge>? favorites) {
         List<Media> returnArray = [];
         for (var entry in (favorites ?? [])) {
-          var media = mediaEdgeData(entry);
+          var media = Media.mediaEdgeData(entry);
           media.isFav = true;
           if (!removeList.contains(media.id) &&
               (!hidePrivate || !media.isListPrivate)) {
@@ -100,7 +100,7 @@ extension on AnilistQueries {
           for (var entry in recommendations) {
             var mediaRecommendation = entry.mediaRecommendation;
             if (mediaRecommendation != null) {
-              var media = mediaData(mediaRecommendation);
+              var media = Media.mediaData(mediaRecommendation);
               media.relation = mediaRecommendation.type?.name ?? "";
               subMap[media.id] = media;
             }
@@ -116,7 +116,7 @@ extension on AnilistQueries {
                   ?.expand((x) => x.entries ?? []),
               response?.data?.recommendationPlannedQueryManga?.lists
                   ?.expand((x) => x.entries ?? []))) {
-            var media = mediaListData(entry);
+            var media = Media.mediaListData(entry);
             if (['RELEASING', 'FINISHED'].contains(media.status)) {
               media.relation = entry.media?.type?.name ?? "" ;
               subMap[media.id] = media;
@@ -141,7 +141,7 @@ extension on AnilistQueries {
   }
 }
 String _queryHomeList(){
-  final homeLayoutMap = PrefManager.getVal(PrefName.homeLayout);
+  final homeLayoutMap = PrefManager.getVal(PrefName.anilistHomeLayout);
   final Map<String, List<String>> queryMappings = {
     'Continue Watching': [
       "currentAnime: ${_continueMediaQuery("ANIME", "CURRENT")}",

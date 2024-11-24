@@ -1,5 +1,6 @@
+import 'package:dantotsu/Screens/Manga/MangaScreen.dart';
 import 'package:dantotsu/api/Anilist/AnilistViewModel.dart';
-import 'package:dantotsu/Screens/Anime/AnimeScreen.dart';
+import 'package:dantotsu/api/EpisodeDetails/GetMediaIDs/GetMediaIDs.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,18 +12,19 @@ import 'package:isar/isar.dart';
 import 'package:protocol_handler/protocol_handler.dart';
 import 'package:provider/provider.dart';
 
-
 import 'Preferences/PrefManager.dart';
+import 'Screens/Anime/AnimeScreen.dart';
+import 'Screens/Home/HomeScreen.dart';
 import 'Screens/HomeNavbar.dart';
-import 'Screens/Login/LoginScreen.dart';
-import 'Screens/Manga/MangaScreen.dart';
+import 'Services/ServiceSwitcher.dart';
 import 'StorageProvider.dart';
 import 'Theme/ThemeManager.dart';
 import 'Theme/ThemeProvider.dart';
 import 'api/Anilist/Anilist.dart';
-import 'package:dantotsu/Screens/Home/HomeScreen.dart';
+import 'api/TypeFactory.dart';
 
 late Isar isar;
+
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
   await init();
@@ -31,6 +33,7 @@ void main(List<String> args) async {
       child: MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (_) => ThemeNotifier()),
+          ChangeNotifierProvider(create: (_) => MediaServiceProvider()),
         ],
         child: const MyApp(),
       ),
@@ -44,6 +47,7 @@ Future init() async {
   isar = await StorageProvider().initDB(null);
   await StorageProvider().requestPermission();
   TypeFactory.registerAllTypes();
+  await GetMediaIDs.getData();
   initializeDateFormatting();
   final supportedLocales = DateFormat.allLocalesWithSymbols();
   for (var locale in supportedLocales) {
@@ -62,9 +66,9 @@ class MyApp extends StatelessWidget {
     final isDarkMode = themeManager.isDarkMode;
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
-          statusBarColor: Colors.transparent,
-          systemNavigationBarColor: Colors.transparent,
-          systemNavigationBarDividerColor: Colors.transparent,
+        statusBarColor: Colors.transparent,
+        systemNavigationBarColor: Colors.transparent,
+        systemNavigationBarDividerColor: Colors.transparent,
       ),
     );
     return DynamicColorBuilder(
@@ -115,7 +119,8 @@ class MainActivityState extends State<MainActivity> with ProtocolListener {
 
   @override
   Widget build(BuildContext context) {
-    AnilistHomeViewModel.loadMain();
+    Get.put(AnilistHomeViewModel()).loadMain();
+    var service = Provider.of<MediaServiceProvider>(context).currentService;
     navbar = FloatingBottomNavBar(
       selectedIndex: _selectedIndex,
       onTabSelected: _onTabSelected,
@@ -130,7 +135,7 @@ class MainActivityState extends State<MainActivity> with ProtocolListener {
                 const AnimeScreen(),
                 Anilist.token.value.isNotEmpty
                     ? const HomeScreen()
-                    : const LoginScreen(),
+                    : service.LoginScreen(),
                 const MangaScreen(),
               ],
             );
@@ -142,10 +147,11 @@ class MainActivityState extends State<MainActivity> with ProtocolListener {
   }
 
   @override
-  void onProtocolUrlReceived(String url){
+  void onProtocolUrlReceived(String url) {
+    var service = Provider.of<MediaServiceProvider>(context).Anilist.data;
     final token = RegExp(r'(?<=access_token=).+(?=&token_type)')
         .firstMatch(url.toString())
         ?.group(0);
-    if (token != null) Anilist.saveToken(token);
+    if (token != null) service.saveToken(token);
   }
 }

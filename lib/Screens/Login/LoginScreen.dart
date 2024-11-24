@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:icons_plus/icons_plus.dart';
+import 'package:provider/provider.dart';
 
 import '../../Functions/Function.dart';
-import '../../api/Anilist/Anilist.dart';
+import '../../Services/ServiceSwitcher.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class LoginScreenAnilist extends StatelessWidget {
+  const LoginScreenAnilist({super.key});
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context).colorScheme;
-
+    var anilist = Provider.of<MediaServiceProvider>(context,listen: false).Anilist.data;
     return Scaffold(
       body: Center(
         child: Column(
@@ -37,7 +38,7 @@ class LoginScreen extends StatelessWidget {
             const SizedBox(height: 38),
             _buildLoginButton(
               context,
-              onPressed: () => Anilist.login(context),
+              onPressed: () => anilist.login(context),
               icon: 'assets/svg/anilist.svg',
               label: 'Login',
             ),

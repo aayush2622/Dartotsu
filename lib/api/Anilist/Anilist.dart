@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:dantotsu/api/Anilist/Data/data.dart';
+import 'package:dantotsu/Services/BaseServiceData.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -7,31 +7,19 @@ import '../../Functions/Function.dart';
 import '../../Preferences/PrefManager.dart';
 import '../../Preferences/Preferences.dart';
 import '../../Widgets/CustomBottomDialog.dart';
+import '../TypeFactory.dart';
 import 'AnilistMutations.dart';
 import 'AnilistQueries.dart';
 import 'AnilistViewModel.dart';
 import 'Login.dart' as anilist_login;
 
-var Anilist = Get.put(_AnilistController());
+var Anilist = Get.put(AnilistController());
+class AnilistController extends BaseServiceData { // TODO: better login page
 
-class _AnilistController extends GetxController { // TODO: better login page
-  late final AnilistQueries query;
   late final AnilistMutations mutation;
-
-  var token = "".obs;
-  var username= "".obs;
-  int? userid;
-  var avatar = "".obs;
-  String? bg;
-  int? episodesWatched;
-  int? chapterRead;
-  int unreadNotificationCount = 0;
   List<String>? genres;
   Map<bool, List<String>>? tags;
   int rateLimitReset = 0;
-  var isInitialized = false.obs;
-  var run = true.obs;
-  bool adult = false;
   String? titleLanguage;
   String? staffNameLanguage;
   bool airingNotifications = false;
@@ -53,9 +41,9 @@ class _AnilistController extends GetxController { // TODO: better login page
   final int currentYear = DateTime.now().year;
   final int currentMonth = DateTime.now().month;
 
-  _AnilistController() {
-    query = AnilistQueries(_executeQuery);
-    mutation = AnilistMutations(_executeQuery);
+  AnilistController() {
+    query = AnilistQueries(executeQuery);
+    mutation = AnilistMutations(executeQuery);
   }
 
   int get currentSeason {
@@ -80,11 +68,12 @@ class _AnilistController extends GetxController { // TODO: better login page
     getSeason(true),
   ];
 
+  @override
   bool getSavedToken() {
     token.value = PrefManager.getVal(PrefName.anilistToken);
     return token.isNotEmpty;
   }
-
+  @override
   Future<void> saveToken(String token) async {
     PrefManager.setVal(PrefName.anilistToken, token);
     this.token.value = token;
@@ -92,9 +81,11 @@ class _AnilistController extends GetxController { // TODO: better login page
     isInitialized.value = false;
     Refresh.allButNot(1);
   }
+  @override
   void login(BuildContext context){
     showCustomBottomDialog(context, anilist_login.login(context));
   }
+  @override
   void removeSavedToken() {
     token.value = '';
     username.value = '';
@@ -105,7 +96,7 @@ class _AnilistController extends GetxController { // TODO: better login page
     episodesWatched = null;
     chapterRead = null;
     unreadNotificationCount = 0;
-    AnilistHomeViewModel.resetPageData();
+    Get.put(AnilistHomeViewModel()).resetPageData();
 
     PrefManager.removeVal(PrefName.anilistToken);
     PrefManager.setCustomVal<String>("banner_ANIME_url", '');
@@ -115,7 +106,7 @@ class _AnilistController extends GetxController { // TODO: better login page
     Refresh.allButNot(1);
   }
 
-  Future<T?> _executeQuery<T>(
+  Future<T?> executeQuery<T>(
       String query, {
         String variables = "",
         bool force = false,
@@ -167,40 +158,3 @@ class _AnilistController extends GetxController { // TODO: better login page
   }
 }
 
-typedef FromJson<T> = T Function(Map<String, dynamic> json);
-
-class TypeFactory {
-  static final Map<Type, FromJson> _factories = {};
-
-  static void create<T>(FromJson<T> factory) => _factories[T] = factory;
-
-  static T get<T>(Map<String, dynamic> json) {
-    final factory = _factories[T];
-    if (factory == null) throw Exception('Factory for type $T is not registered');
-    return factory(json) as T;
-  }
-  static void registerAllTypes() {
-    TypeFactory.create<JsonDecoder> (
-            (json) => jsonDecode(json as String));
-    TypeFactory.create<PageResponse>(
-            (json) => PageResponse.fromJson(json));
-    TypeFactory.create<MediaResponse>(
-            (json) => MediaResponse.fromJson(json));
-    TypeFactory.create<MediaListCollectionResponse>(
-            (json) => MediaListCollectionResponse.fromJson(json));
-    TypeFactory.create<ViewerResponse>(
-            (json) => ViewerResponse.fromJson(json));
-    TypeFactory.create<UserListResponse>(
-            (json) => UserListResponse.fromJson(json));
-    TypeFactory.create<AnimeListResponse>(
-            (json) => AnimeListResponse.fromJson(json));
-    TypeFactory.create<MangaListResponse>(
-            (json) => MangaListResponse.fromJson(json));
-    TypeFactory.create<UserListsResponse>(
-            (json) => UserListsResponse.fromJson(json));
-    TypeFactory.create<GenreCollectionResponse>(
-            (json) => GenreCollectionResponse.fromJson(json));
-    TypeFactory.create<MediaTagCollectionResponse>(
-            (json) => MediaTagCollectionResponse.fromJson(json));
-  }
-}

@@ -1,18 +1,18 @@
 import 'package:dantotsu/Functions/Extensions.dart';
-import 'package:dantotsu/Screens/Calendar/CalendarScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:provider/provider.dart';
 
 import '../../Adaptor/Media/MediaAdaptor.dart';
 import '../../Adaptor/Media/Widgets/Chips.dart';
 import '../../Adaptor/Media/Widgets/MediaCard.dart';
-import '../../Adaptor/Media/Widgets/MediaSection.dart';
 import '../../Animation/SlideInAnimation.dart';
-import '../../DataClass/MediaSection.dart';
-import '../../Preferences/PrefManager.dart';
-import '../../Preferences/Preferences.dart';
-import '../../api/Anilist/AnilistViewModel.dart';
-import '../BaseMediaScreen.dart';
+import '../../Functions/Function.dart';
+import '../../Services/Screens/BaseAnimeScreen.dart';
+import '../../Services/ServiceSwitcher.dart';
+import '../../Theme/Colors.dart';
+import '../../Theme/ThemeProvider.dart';
+import '../../Widgets/ScrollConfig.dart';
 import '../Home/Widgets/LoadingWidget.dart';
 import '../Home/Widgets/SearchBar.dart';
 
@@ -23,130 +23,146 @@ class AnimeScreen extends StatefulWidget {
   AnimeScreenState createState() => AnimeScreenState();
 }
 
-class AnimeScreenState extends BaseMediaScreen<AnimeScreen> {
-  final _viewModel = AnilistAnimeViewModel;
+class AnimeScreenState extends State<AnimeScreen> {
 
   @override
-  get viewModel => _viewModel;
-
-  @override
-  get refreshID => 2;
-
-  @override
-  get screenContent => Obx(() => _buildAnimeScreenContent());
-
-  @override
-  get mediaSections {
-    final mediaSections = [
-      MediaSectionData(
-        type: 0,
-        title: 'Recent Updates',
-        list: _viewModel.updated.value,
+  Widget build(BuildContext context) {
+    var service = Provider.of<MediaServiceProvider>(context).currentService;
+    var screen = service.animeScreen;
+    if (screen == null) return service.notImplemented(widget.runtimeType.toString());
+    screen.init();
+    return Scaffold(
+      body: Stack(
+        children: [
+          _buildRefreshContent(screen),
+          _buildScrollToTopButton(screen),
+        ],
       ),
-      MediaSectionData(
-        type: 0,
-        title: 'Trending Movies',
-        list: _viewModel.popularMovies.value,
-      ),
-      MediaSectionData(
-        type: 0,
-        title: 'Top Rated Series',
-        list: _viewModel.topRatedSeries.value,
-      ),
-      MediaSectionData(
-        type: 0,
-        title: 'Most Favourite Series',
-        list: _viewModel.mostFavSeries.value,
-      ),
-    ];
-    final animeLayoutMap = PrefManager.getVal(PrefName.animeLayout);
-    final sectionMap = {
-      for (var section in mediaSections) section.title: section
-    };
-
-    return animeLayoutMap.entries
-        .where((entry) => entry.value)
-        .map((entry) => sectionMap[entry.key])
-        .whereType<MediaSectionData>()
-        .map((section) => MediaSection(
-              context: context,
-              type: section.type,
-              title: section.title,
-              mediaList: section.list,
-              scrollController: section.scrollController,
-            ))
-        .toList()
-      ..add(MediaSection(
-          context: context,
-          type: 2,
-          title: 'Popular Anime',
-          mediaList: _viewModel.animePopular.value));
+    );
   }
 
-  Widget _buildAnimeScreenContent() {
-    var mediaDataList = _viewModel.trending.value;
-    var chipCall = _viewModel.loadTrending;
-    return SizedBox(
-      height: 486.statusBar(),
-      child: running ? Stack(
+  Widget _buildRefreshContent(BaseAnimeScreen service) {
+    return RefreshIndicator(
+      onRefresh: () async =>
+      Refresh.activity[service.refreshID]?.value = true,
+      child: CustomScrollConfig(
+        context,
+        controller: service.scrollController,
         children: [
-          SizedBox(
-            height: 464.statusBar(),
-            child: mediaDataList != null
-                ? MediaAdaptor(type: 1, mediaList: mediaDataList)
-                : const Center(child: CircularProgressIndicator()),
-          ),
-          const MediaSearchBar(title: "ANIME"),
-          Positioned(
-            bottom: 92,
-            left: 8.0,
-            right: 8.0,
-            child: Center(
-              child: ChipsWidget(
-                chips: [
-                  ChipData(
-                    label: 'This Season',
-                    action: () => chipCall(1),
-                  ),
-                  ChipData(
-                    label: 'Next Season',
-                    action: () => chipCall(2),
-                  ),
-                  ChipData(
-                    label: 'Previous Season',
-                    action: () => chipCall(0),
-                  ),
-                ],
+          SliverToBoxAdapter(child: _buildAnimeScreenContent(service)),
+          SliverList(
+            delegate: SliverChildListDelegate([
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                child: Obx(() => _buildMediaContent(service)),
               ),
-            ),
+            ]),
           ),
-          Positioned(
-            bottom: 0,
-            left: 8.0,
-            right: 8.0,
-            child: SlideInAnimation(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  MediaCard(
-                    context,
-                    'GENRES',
-                    const AnimeScreen(),
-                    "https://s4.anilist.co/file/anilistcdn/media/anime/banner/16498-8jpFCOcDmneX.jpg",
-                  ),
-                  MediaCard(
-                    context,
-                    'CALENDAR',
-                    const CalendarScreen(),
-                    "https://s4.anilist.co/file/anilistcdn/media/anime/banner/125367-hGPJLSNfprO3.jpg",
-                  ),
-                ],
-              ),
-            ),
-          ),
-          const SizedBox(height: 16),
         ],
-      ) : const LoadingWidget(),
+      ),
+    );
+  }
+
+  Widget _buildScrollToTopButton(BaseAnimeScreen service) {
+    var theme = Provider.of<ThemeNotifier>(context);
+    return Positioned(
+      bottom: 72.0 + 32.bottomBar(),
+      left: (0.screenWidth() / 2) - 24.0,
+      child: Obx(() => service.scrollToTop.value
+          ? Container(
+        decoration: BoxDecoration(
+          color: theme.isDarkMode ? greyNavDark : greyNavLight,
+          borderRadius: BorderRadius.circular(64.0),
+        ),
+        padding: const EdgeInsets.all(4.0),
+        child: IconButton(
+          icon: const Icon(Icons.arrow_upward),
+          onPressed: () => service.scrollController.animateTo(
+            0,
+            duration: const Duration(milliseconds: 500),
+            curve: Curves.easeInOut,
+          ),
+        ),
+      )
+          : const SizedBox()),
+    );
+  }
+
+  Widget _buildAnimeScreenContent(BaseAnimeScreen service) {
+    return Obx(() {
+      var mediaDataList = service.trending.value;
+      var chipCall = service.loadTrending;
+      return SizedBox(
+        height: 486.statusBar(),
+        child: service.running.value
+            ? Stack(
+          children: [
+            SizedBox(
+              height: 464.statusBar(),
+              child: mediaDataList != null
+                  ? MediaAdaptor(type: 1, mediaList: mediaDataList)
+                  : const Center(child: CircularProgressIndicator()),
+            ),
+            const MediaSearchBar(title: "ANIME"),
+            Positioned(
+              bottom: 92,
+              left: 8.0,
+              right: 8.0,
+              child: Center(
+                child: ChipsWidget(
+                  chips: [
+                    ChipData(label: 'This Season', action: () => chipCall(1)),
+                    ChipData(label: 'Next Season', action: () => chipCall(2)),
+                    ChipData(label: 'Previous Season', action: () => chipCall(0)),
+                  ],
+                ),
+              ),
+            ),
+            Positioned(
+              bottom: 0,
+              left: 8.0,
+              right: 8.0,
+              child: SlideInAnimation(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    MediaCard(
+                      context,
+                      'GENRES',
+                      const Text(""),
+                      "https://s4.anilist.co/file/anilistcdn/media/anime/banner/16498-8jpFCOcDmneX.jpg",
+                    ),
+                    MediaCard(
+                      context,
+                      'CALENDAR',
+                      const Text(""),
+                      "https://s4.anilist.co/file/anilistcdn/media/anime/banner/125367-hGPJLSNfprO3.jpg",
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        )
+          : const LoadingWidget(),
+      );
+    });
+  }
+
+  Widget _buildMediaContent(BaseAnimeScreen service) {
+    return Column(
+      children: [
+        ...service.mediaContent(context),
+        if (service.paging)
+          SizedBox(
+            height: 216,
+            child: Center(
+              child: !service.loadMore.value && service.canLoadMore.value
+                  ? const CircularProgressIndicator()
+                  : const SizedBox(height: 216),
+            ),
+          ),
+      ],
     );
   }
 }

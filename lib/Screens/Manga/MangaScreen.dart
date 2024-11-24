@@ -1,18 +1,18 @@
 import 'package:dantotsu/Functions/Extensions.dart';
-import 'package:dantotsu/Screens/BaseMediaScreen.dart';
-import 'package:dantotsu/api/Anilist/AnilistViewModel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:provider/provider.dart';
 
 import '../../Adaptor/Media/MediaAdaptor.dart';
 import '../../Adaptor/Media/Widgets/Chips.dart';
 import '../../Adaptor/Media/Widgets/MediaCard.dart';
-import '../../Adaptor/Media/Widgets/MediaSection.dart';
 import '../../Animation/SlideInAnimation.dart';
-import '../../DataClass/MediaSection.dart';
-import '../../Preferences/PrefManager.dart';
-import '../../Preferences/Preferences.dart';
-import '../Anime/AnimeScreen.dart';
+import '../../Functions/Function.dart';
+import '../../Services/Screens/BaseMangaScreen.dart';
+import '../../Services/ServiceSwitcher.dart';
+import '../../Theme/Colors.dart';
+import '../../Theme/ThemeProvider.dart';
+import '../../Widgets/ScrollConfig.dart';
 import '../Home/Widgets/LoadingWidget.dart';
 import '../Home/Widgets/SearchBar.dart';
 
@@ -23,127 +23,158 @@ class MangaScreen extends StatefulWidget {
   MangaScreenState createState() => MangaScreenState();
 }
 
-class MangaScreenState extends BaseMediaScreen<MangaScreen> {
-  final _viewModel = AnilistMangaViewModel;
+class MangaScreenState extends State<MangaScreen> {
 
   @override
-  get viewModel => _viewModel;
-
-  @override
-  get refreshID => 3;
-
-  @override
-  get screenContent => Obx(() => _buildMangaScreenContent());
-
-  @override
-  get mediaSections {
-    final mediaSections = [
-      MediaSectionData(
-          type: 0,
-          title: 'Trending Manhwa',
-          list: _viewModel.popularManhwa.value),
-      MediaSectionData(
-          type: 0,
-          title: 'Trending Novels',
-          list: _viewModel.popularNovel.value),
-      MediaSectionData(
-          type: 0,
-          title: 'Top Rated Manga',
-          list: _viewModel.topRatedManga.value),
-      MediaSectionData(
-          type: 0,
-          title: 'Most Favourite Manga',
-          list: _viewModel.mostFavManga.value),
-    ];
-    final mangaLayoutMap = PrefManager.getVal(PrefName.mangaLayout);
-    final sectionMap = {
-      for (var section in mediaSections) section.title: section
-    };
-    return mangaLayoutMap.entries
-        .where((entry) => entry.value)
-        .map((entry) => sectionMap[entry.key])
-        .whereType<MediaSectionData>()
-        .map((section) => MediaSection(
-              context: context,
-              type: section.type,
-              title: section.title,
-              mediaList: section.list,
-            ))
-        .toList()
-      ..add(MediaSection(
-        context: context,
-        type: 2,
-        title: 'Popular Manga',
-        mediaList: _viewModel.mangaPopular.value,
-      ));
+  Widget build(BuildContext context) {
+    var service = Provider.of<MediaServiceProvider>(context).currentService;
+    var screen = service.mangaScreen;
+    if (screen == null) return service.notImplemented(widget.runtimeType.toString());
+    screen.init();
+    return Scaffold(
+      body: Stack(
+        children: [
+          _buildRefreshContent(screen),
+          _buildScrollToTopButton(screen),
+        ],
+      ),
+    );
   }
 
-  Widget _buildMangaScreenContent() {
-    var mediaDataList = _viewModel.trending.value;
-    var chipCall = _viewModel.loadTrending;
-    return SizedBox(
-      height: 486.statusBar(),
-      child: running ? Stack(
+  Widget _buildRefreshContent(BaseMangaScreen service) {
+    return RefreshIndicator(
+      onRefresh: () async =>
+      Refresh.activity[service.refreshID]?.value = true,
+      child: CustomScrollConfig(
+        context,
+        controller: service.scrollController,
         children: [
-          SizedBox(
-            height: 464.statusBar(),
-            child: mediaDataList != null
-              ? MediaAdaptor(type: 1, mediaList: mediaDataList)
-              : const Center(child: CircularProgressIndicator()),
-          ),
-          const MediaSearchBar(
-            title: "MANGA",
-          ),
-          Positioned(
-            bottom: 92,
-            left: 8.0,
-            right: 8.0,
-            child: Center(
-              child: ChipsWidget(
-                chips: [
-                  ChipData(
-                    label: 'Trending Manga',
-                    action: () => chipCall('MANGA'),
-                  ),
-                  ChipData(
-                    label: 'Trending Manhwa',
-                    action: () => chipCall('MANHWA'),
-                  ),
-                  ChipData(
-                    label: 'Trending Novel',
-                    action: () => chipCall('NOVEL'),
-                  ),
-                ],
+          SliverToBoxAdapter(child: _buildMangaScreenContent(service)),
+          SliverList(
+            delegate: SliverChildListDelegate([
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                child: Obx(() => _buildMediaContent(service)),
               ),
-            ),
+            ]),
           ),
-          Positioned(
-            bottom: 0,
-            left: 8.0,
-            right: 8.0,
-            child: SlideInAnimation(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  MediaCard(
-                    context,
-                    'GENRE',
-                    const AnimeScreen(),
-                    "https://s4.anilist.co/file/anilistcdn/media/manga/banner/105778-wk5qQ7zAaTGl.jpg",
-                  ),
-                  MediaCard(
-                    context,
-                    'TOP SCORE',
-                    const AnimeScreen(),
-                    "https://s4.anilist.co/file/anilistcdn/media/manga/banner/30002-3TuoSMl20fUX.jpg",
-                  ),
-                ],
-              ),
-            ),
-          ),
-          const SizedBox(height: 16),
         ],
-      ) : const LoadingWidget(),
+      ),
+    );
+  }
+
+  Widget _buildScrollToTopButton(BaseMangaScreen service) {
+    var theme = Provider.of<ThemeNotifier>(context);
+    return Positioned(
+      bottom: 72.0 + 32.bottomBar(),
+      left: (0.screenWidth() / 2) - 24.0,
+      child: Obx(() => service.scrollToTop.value
+          ? Container(
+        decoration: BoxDecoration(
+          color: theme.isDarkMode ? greyNavDark : greyNavLight,
+          borderRadius: BorderRadius.circular(64.0),
+        ),
+        padding: const EdgeInsets.all(4.0),
+        child: IconButton(
+          icon: const Icon(Icons.arrow_upward),
+          onPressed: () => service.scrollController.animateTo(
+            0,
+            duration: const Duration(milliseconds: 500),
+            curve: Curves.easeInOut,
+          ),
+        ),
+      )
+          : const SizedBox()),
+    );
+  }
+
+  Widget _buildMangaScreenContent(BaseMangaScreen service) {
+    return Obx(() {
+      var mediaDataList = service.trending.value;
+      var chipCall = service.loadTrending;
+      return SizedBox(
+        height: 486.statusBar(),
+        child: service.running.value
+            ? Stack(
+          children: [
+            SizedBox(
+              height: 464.statusBar(),
+              child: mediaDataList != null
+                  ? MediaAdaptor(type: 1, mediaList: mediaDataList)
+                  : const Center(child: CircularProgressIndicator()),
+            ),
+            const MediaSearchBar(
+              title: "MANGA",
+            ),
+            Positioned(
+              bottom: 92,
+              left: 8.0,
+              right: 8.0,
+              child: Center(
+                child: ChipsWidget(
+                  chips: [
+                    ChipData(
+                      label: 'Trending Manga',
+                      action: () => chipCall('MANGA'),
+                    ),
+                    ChipData(
+                      label: 'Trending Manhwa',
+                      action: () => chipCall('MANHWA'),
+                    ),
+                    ChipData(
+                      label: 'Trending Novel',
+                      action: () => chipCall('NOVEL'),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Positioned(
+              bottom: 0,
+              left: 8.0,
+              right: 8.0,
+              child: SlideInAnimation(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    MediaCard(
+                      context,
+                      'GENRE',
+                      const Text(''),
+                      "https://s4.anilist.co/file/anilistcdn/media/manga/banner/105778-wk5qQ7zAaTGl.jpg",
+                    ),
+                    MediaCard(
+                      context,
+                      'TOP SCORE',
+                      const Text(''),
+                      "https://s4.anilist.co/file/anilistcdn/media/manga/banner/30002-3TuoSMl20fUX.jpg",
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
+          ],
+        )
+            : const LoadingWidget(),
+      );
+    });
+  }
+
+  Widget _buildMediaContent(BaseMangaScreen service) {
+    return Column(
+      children: [
+        ...service.mediaContent(context),
+        if (service.paging)
+          SizedBox(
+            height: 216,
+            child: Center(
+              child: !service.loadMore.value && service.canLoadMore.value
+                  ? const CircularProgressIndicator()
+                  : const SizedBox(height: 216),
+            ),
+          ),
+      ],
     );
   }
 }

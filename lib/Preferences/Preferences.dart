@@ -1,6 +1,9 @@
 import 'PrefManager.dart';
 
 class PrefName {
+  static const Pref<String> source =
+      Pref(Location.General, 'source', 'ANILIST');
+
   //theme
   static const Pref<bool> isDarkMode =
       Pref(Location.General, 'isDarkMode', false);
@@ -13,9 +16,10 @@ class PrefName {
   static const Pref<bool> useCustomColor =
       Pref(Location.General, 'useCustomColor', false);
   static const Pref<bool> showYtButton =
-  Pref(Location.General, 'showYtButton', true);
+      Pref(Location.General, 'showYtButton', true);
+
   //home page
-  static const Pref<Map<String, bool>> homeLayout =
+  static const Pref<Map<String, bool>> anilistHomeLayout =
       Pref(Location.General, 'homeLayoutOrder', {
     'Continue Watching': true,
     'Favourite Anime': false,
@@ -29,9 +33,17 @@ class PrefName {
       Pref(Location.General, 'removeList', {});
 
   //anime page
-  static const Pref<Map<String, bool>> animeLayout =
+  static const Pref<Map<String, bool>> anilistAnimeLayout =
       Pref(Location.General, 'animeLayoutOrder', {
     'Recent Updates': true,
+    'Trending Movies': true,
+    'Top Rated Series': true,
+    'Most Favourite Series': true,
+  });
+
+  static const Pref<Map<String, bool>> malAnimeLayout =
+      Pref(Location.General, 'malAnimeLayoutOrder', {
+    'Top Airing': true,
     'Trending Movies': true,
     'Top Rated Series': true,
     'Most Favourite Series': true,
@@ -46,9 +58,18 @@ class PrefName {
       Pref(Location.General, 'NSFWExtensions', true);
   static const Pref<int> AnimeDefaultView =
       Pref(Location.General, 'AnimeDefaultView', 0);
+
   //manga page
-  static const Pref<Map<String, bool>> mangaLayout =
+  static const Pref<Map<String, bool>> anilistMangaLayout =
       Pref(Location.General, 'mangaLayoutOrder', {
+    'Trending Manhwa': true,
+    'Trending Novels': true,
+    'Top Rated Manga': true,
+    'Most Favourite Manga': true,
+  });
+
+  static const Pref<Map<String, bool>> malMangaLayout =
+      Pref(Location.General, 'malMangaLayoutOrder', {
     'Trending Manhwa': true,
     'Trending Novels': true,
     'Top Rated Manga': true,
@@ -68,8 +89,7 @@ class PrefName {
   //Protection
   static const Pref<String> anilistToken =
       Pref(Location.Protected, 'AnilistToken', '');
-  static const Pref<String> malToken =
-      Pref(Location.Protected, 'MalToken', '');
+  static const Pref<String> malToken = Pref(Location.Protected, 'MalToken', '');
   static const Pref<String> discordToken =
       Pref(Location.Protected, 'DiscordToken', '');
   static const Pref<String> discordUserName =

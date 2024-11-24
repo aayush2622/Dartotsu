@@ -116,24 +116,11 @@ class WrongTitleDialogState extends State<WrongTitleDialog> {
         ),
       );
     }
-
-    final mediaList = snapshot.data!.list.map((e) {
-      return Media(
-        id: e.hashCode,
-        name: e.name,
-        cover: e.imageUrl,
-        nameRomaji: e.name ?? '',
-        userPreferredName: e.name ?? '',
-        isAdult: false,
-        minimal: true,
-      );
-    }).toList();
-
     return MediaAdaptor(
       type: 3,
-      mediaList: mediaList,
-      onMediaTap: (i) {
-        widget.onChanged?.call(snapshot.data!.list[i]);
+      mediaList: snapshot.data!.toMedia(),
+      onMediaTap: (index, media) {
+        widget.onChanged?.call(snapshot.data!.list[index]);
         Navigator.of(context).pop();
       },
     );

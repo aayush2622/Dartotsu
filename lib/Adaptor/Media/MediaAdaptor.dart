@@ -18,7 +18,7 @@ class MediaAdaptor extends StatefulWidget {
   final List<Media> mediaList;
   final bool isLarge;
   final ScrollController? scrollController;
-  final Function(int index)? onMediaTap;
+  final Function(int index,Media media)? onMediaTap;
 
   const MediaAdaptor({
     super.key,
@@ -86,7 +86,7 @@ class MediaGridState extends State<MediaAdaptor> {
                 return GestureDetector(
                   onTap: () {
                     if (widget.onMediaTap != null) {
-                      widget.onMediaTap!(index);
+                      widget.onMediaTap!(index, _mediaList[index]);
                     } else {
                       navigateToPage(context, MediaInfoPage(_mediaList[index]));
                     }
@@ -130,7 +130,7 @@ class MediaGridState extends State<MediaAdaptor> {
                 child: GestureDetector(
                   onTap: () {
                     if (widget.onMediaTap != null) {
-                      widget.onMediaTap!(index);
+                      widget.onMediaTap!(index, _mediaList[index]);
                     } else {
                       navigateToPage(context, MediaInfoPage(_mediaList[index]));
                     }
@@ -178,7 +178,7 @@ class MediaGridState extends State<MediaAdaptor> {
                 child: GestureDetector(
                   onTap: () {
                     if (widget.onMediaTap != null) {
-                      widget.onMediaTap!(index);
+                      widget.onMediaTap!(index, _mediaList[index]);
                     } else {
                       navigateToPage(context, MediaInfoPage(_mediaList[index]));
                     }

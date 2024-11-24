@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../api/Anilist/Anilist.dart';
+import 'package:provider/provider.dart';
+import '../../Services/ServiceSwitcher.dart';
 import 'MediaListViewModel.dart';
 import 'MediaListTabs.dart';
 
@@ -25,12 +26,13 @@ class MediaListScreenState extends State<MediaListScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context).colorScheme;
+    var service = Provider.of<MediaServiceProvider>(context).currentService.data;
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
         title: Text(
-          "${Anilist.username.value } ${widget.anime ? 'Anime' : 'Manga'} List",
+          "${service.username.value } ${widget.anime ? 'Anime' : 'Manga'} List",
           style: TextStyle(
             fontFamily: 'Poppins',
             fontWeight: FontWeight.w600,

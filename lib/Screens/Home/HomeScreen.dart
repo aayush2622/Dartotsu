@@ -1,30 +1,27 @@
 import 'package:blur/blur.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:dantotsu/Animation/SlideUpAnimation.dart';
 import 'package:dantotsu/Functions/Extensions.dart';
-import 'package:dantotsu/Theme/ThemeProvider.dart';
-import 'package:dantotsu/Widgets/CustomElevatedButton.dart';
-import 'package:dantotsu/main.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:kenburns_nullsafety/kenburns_nullsafety.dart';
 import 'package:provider/provider.dart';
 
 import '../../Adaptor/Media/Widgets/MediaCard.dart';
-import '../../Adaptor/Media/Widgets/MediaSection.dart';
 import '../../Animation/SlideInAnimation.dart';
-import '../../DataClass/MediaSection.dart';
-import '../../Preferences/PrefManager.dart';
-import '../../Preferences/Preferences.dart';
+import '../../Animation/SlideUpAnimation.dart';
+import '../../Functions/Function.dart';
+import '../../Services/BaseServiceData.dart';
+import '../../Services/Screens/BaseHomeScreen.dart';
+import '../../Services/ServiceSwitcher.dart';
+import '../../Theme/Colors.dart';
+import '../../Theme/ThemeProvider.dart';
 import '../../Widgets/CachedNetworkImage.dart';
 import '../../Widgets/CustomBottomDialog.dart';
-import '../../api/Anilist/Anilist.dart';
-import '../../api/Anilist/AnilistViewModel.dart';
-import '../BaseMediaScreen.dart';
+import '../../Widgets/ScrollConfig.dart';
+import '../Home/Widgets/LoadingWidget.dart';
 import '../MediaList/MediaListScreen.dart';
 import '../Settings/SettingsBottomSheet.dart';
 import 'Widgets/AvtarWidget.dart';
-import 'Widgets/LoadingWidget.dart';
 import 'Widgets/NotificationBadge.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -34,130 +31,90 @@ class HomeScreen extends StatefulWidget {
   HomeScreenState createState() => HomeScreenState();
 }
 
-class HomeScreenState extends BaseMediaScreen<HomeScreen> {
-  final _viewModel = AnilistHomeViewModel;
-
+class HomeScreenState extends State<HomeScreen> {
   @override
-  get viewModel => _viewModel;
-
-  @override
-  get refreshID => 1;
-
-  @override
-  get screenContent => _buildHomeScreenContent();
-
-  @override
-  get mediaSections {
-    final mediaSections = [
-      MediaSectionData(
-        type: 0,
-        title: 'Continue Watching',
-        list: _viewModel.animeContinue.value,
-        emptyIcon: Icons.movie_filter_rounded,
-        emptyMessage: 'All caught up, when New?',
-        emptyButtonText: 'Browse\nAnime',
-        emptyButtonOnPressed: () => navbar?.onClick(0),
+  Widget build(BuildContext context) {
+    var service = Provider.of<MediaServiceProvider>(context).currentService;
+    var screen = service.homeScreen;
+    var data = service.data;
+    if (screen == null) {
+      return service.notImplemented(widget.runtimeType.toString());
+    }
+    screen.init();
+    return Scaffold(
+      body: Stack(
+        children: [
+          _buildRefreshContent(screen, data),
+          _buildScrollToTopButton(screen),
+        ],
       ),
-      MediaSectionData(
-        type: 0,
-        title: 'Favourite Anime',
-        list: _viewModel.animeFav.value,
-        emptyIcon: Icons.heart_broken,
-        emptyMessage:
-            'Looks like you don\'t like anything,\nTry liking a show to keep it here.',
-      ),
-      MediaSectionData(
-        type: 0,
-        title: 'Planned Anime',
-        list: _viewModel.animePlanned.value,
-        emptyIcon: Icons.movie_filter_rounded,
-        emptyMessage: 'All caught up, when New?',
-        emptyButtonText: 'Browse\nAnime',
-        emptyButtonOnPressed: () => navbar?.onClick(0),
-      ),
-      MediaSectionData(
-        type: 0,
-        title: 'Continue Reading',
-        list: _viewModel.mangaContinue.value,
-        emptyIcon: Icons.import_contacts,
-        emptyMessage: 'All caught up, when New?',
-        emptyButtonText: 'Browse\nManga',
-        emptyButtonOnPressed: () => navbar?.onClick(2),
-      ),
-      MediaSectionData(
-        type: 0,
-        title: 'Favourite Manga',
-        list: _viewModel.mangaFav.value,
-        emptyIcon: Icons.heart_broken,
-        emptyMessage:
-            'Looks like you don\'t like anything,\nTry liking a show to keep it here.',
-      ),
-      MediaSectionData(
-        type: 0,
-        title: 'Planned Manga',
-        list: _viewModel.mangaPlanned.value,
-        emptyIcon: Icons.import_contacts,
-        emptyMessage: 'All caught up, when New?',
-        emptyButtonText: 'Browse\nManga',
-        emptyButtonOnPressed: () => navbar?.onClick(2),
-      ),
-      MediaSectionData(
-        type: 0,
-        title: 'Recommended',
-        list: _viewModel.recommendation.value,
-        emptyIcon: Icons.auto_awesome,
-        isLarge: true,
-        emptyMessage: 'Watch/Read some Anime or Manga to get Recommendations',
-      ),
-    ];
-
-    final homeLayoutMap = PrefManager.getVal(PrefName.homeLayout);
-    final sectionMap = {
-      for (var section in mediaSections) section.title: section
-    };
-
-    final sectionWidgets = homeLayoutMap.entries
-        .where((entry) => entry.value)
-        .map((entry) => sectionMap[entry.key])
-        .whereType<MediaSectionData>()
-        .map((section) => MediaSection(
-              context: context,
-              type: section.type,
-              title: section.title,
-              mediaList: section.list,
-              isLarge: section.isLarge,
-              customNullListIndicator: _buildNullIndicator(
-                context,
-                section.emptyIcon,
-                section.emptyMessage,
-                section.emptyButtonText,
-                section.emptyButtonOnPressed,
-              ),
-            ))
-        .toList()
-      ..add(const SizedBox(height: 128));
-
-    return sectionWidgets;
+    );
   }
 
-  Widget _buildHomeScreenContent() {
+  Widget _buildRefreshContent(BaseHomeScreen service, BaseServiceData data) {
+    return RefreshIndicator(
+      onRefresh: () async => Refresh.activity[service.refreshID]?.value = true,
+      child: CustomScrollConfig(
+        context,
+        controller: service.scrollController,
+        children: [
+          SliverToBoxAdapter(child: _buildHomeScreenContent(service, data)),
+          SliverList(
+            delegate: SliverChildListDelegate([
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                child: Obx(() => _buildMediaContent(service)),
+              ),
+            ]),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildScrollToTopButton(BaseHomeScreen service) {
+    var theme = Provider.of<ThemeNotifier>(context);
+    return Positioned(
+      bottom: 72.0 + 32.bottomBar(),
+      left: (0.screenWidth() / 2) - 24.0,
+      child: Obx(() => service.scrollToTop.value
+          ? Container(
+              decoration: BoxDecoration(
+                color: theme.isDarkMode ? greyNavDark : greyNavLight,
+                borderRadius: BorderRadius.circular(64.0),
+              ),
+              padding: const EdgeInsets.all(4.0),
+              child: IconButton(
+                icon: const Icon(Icons.arrow_upward),
+                onPressed: () => service.scrollController.animateTo(
+                  0,
+                  duration: const Duration(milliseconds: 500),
+                  curve: Curves.easeInOut,
+                ),
+              ),
+            )
+          : const SizedBox()),
+    );
+  }
+
+  Widget _buildHomeScreenContent(BaseHomeScreen service, BaseServiceData data) {
     var backgroundHeight = 212.statusBar();
     return Column(
       children: [
         SizedBox(
           height: backgroundHeight,
-          child: Builder(
-            builder: (context) {
-              if (!running) {
+          child: Obx(
+            () {
+              if (!service.running.value) {
                 return const LoadingWidget();
               }
               return Stack(
                 fit: StackFit.expand,
                 children: [
-                  _buildBackgroundImage(),
-                  _buildAvatar(),
-                  _buildUserInfo(),
-                  _buildCards(),
+                  _buildBackgroundImage(data),
+                  _buildAvatar(data),
+                  _buildUserInfo(data),
+                  _buildCards(service, data),
                 ],
               );
             },
@@ -166,8 +123,7 @@ class HomeScreenState extends BaseMediaScreen<HomeScreen> {
       ],
     );
   }
-
-  Widget _buildBackgroundImage() {
+  Widget _buildBackgroundImage(BaseServiceData data) {
     final isDarkMode = Provider.of<ThemeNotifier>(context).isDarkMode;
     final theme = Theme.of(context).colorScheme.surface;
     final gradientColors = isDarkMode
@@ -183,7 +139,7 @@ class HomeScreenState extends BaseMediaScreen<HomeScreen> {
             maxAnimationDuration: const Duration(milliseconds: 30000),
             maxScale: 2.5,
             child: cachedNetworkImage(
-              imageUrl: Anilist.bg ?? '',
+              imageUrl: data.bg ?? '',
               fit: BoxFit.cover,
               width: double.infinity,
               height: 212.statusBar(),
@@ -211,7 +167,7 @@ class HomeScreenState extends BaseMediaScreen<HomeScreen> {
     );
   }
 
-  Widget _buildAvatar() {
+  Widget _buildAvatar(BaseServiceData data) {
     return Positioned(
       right: 32,
       top: 36.statusBar(),
@@ -219,15 +175,16 @@ class HomeScreenState extends BaseMediaScreen<HomeScreen> {
         child: Stack(
           children: [
             GestureDetector(
-              onTap: () => showCustomBottomDialog(context, const SettingsBottomSheet()),
+              onTap: () =>
+                  showCustomBottomDialog(context, const SettingsBottomSheet()),
               child: const AvatarWidget(icon: Icons.settings),
             ),
-            if (Anilist.unreadNotificationCount > 0)
+            if (data.unreadNotificationCount > 0)
               Positioned(
                 right: 0,
                 bottom: -2,
                 child: NotificationBadge(
-                  count: Anilist.unreadNotificationCount,
+                  count: data.unreadNotificationCount,
                 ),
               ),
           ],
@@ -235,8 +192,7 @@ class HomeScreenState extends BaseMediaScreen<HomeScreen> {
       ),
     );
   }
-
-  Widget _buildUserInfo() {
+  Widget _buildUserInfo(BaseServiceData data) {
     final theme = Theme.of(context).colorScheme;
     final isDarkMode = Provider.of<ThemeNotifier>(context).isDarkMode;
     return Positioned(
@@ -250,8 +206,8 @@ class HomeScreenState extends BaseMediaScreen<HomeScreen> {
               child: CircleAvatar(
                 backgroundColor: Colors.transparent,
                 radius: 26.0,
-                backgroundImage: Anilist.avatar.value.isNotEmpty
-                    ? CachedNetworkImageProvider(Anilist.avatar.value)
+                backgroundImage: data.avatar.value.isNotEmpty
+                    ? CachedNetworkImageProvider(data.avatar.value)
                     : null,
               ),
             ),
@@ -260,7 +216,7 @@ class HomeScreenState extends BaseMediaScreen<HomeScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  Anilist.username.value,
+                  data.username.value,
                   style: TextStyle(
                     fontFamily: 'Poppins',
                     fontWeight: FontWeight.bold,
@@ -272,8 +228,8 @@ class HomeScreenState extends BaseMediaScreen<HomeScreen> {
                 ),
                 const SizedBox(height: 2.0),
                 _buildInfoRow('Episodes Watched',
-                    Anilist.episodesWatched.toString(), theme.primary),
-                _buildInfoRow('Chapters Read', Anilist.chapterRead.toString(),
+                    data.episodesWatched.toString(), theme.primary),
+                _buildInfoRow('Chapters Read', data.chapterRead.toString(),
                     theme.primary),
               ],
             ),
@@ -310,7 +266,7 @@ class HomeScreenState extends BaseMediaScreen<HomeScreen> {
     );
   }
 
-  Widget _buildCards() {
+  Widget _buildCards(BaseHomeScreen service, BaseServiceData data) {
     return Positioned(
       top: 132.statusBar(),
       left: 8.0,
@@ -323,14 +279,14 @@ class HomeScreenState extends BaseMediaScreen<HomeScreen> {
               MediaCard(
                 context,
                 'ANIME LIST',
-                MediaListScreen(anime: true, id: Anilist.userid!),
-                _viewModel.listImages.value[0] ?? 'https://bit.ly/31bsIHq',
+                MediaListScreen(anime: true, id: data.userid!),
+                service.listImages.value[0] ?? 'https://bit.ly/31bsIHq',
               ),
               MediaCard(
                 context,
                 'MANGA LIST',
-                MediaListScreen(anime: false, id: Anilist.userid!),
-                _viewModel.listImages.value[1] ?? 'https://bit.ly/2ZGfcuG',
+                MediaListScreen(anime: false, id: data.userid!),
+                service.listImages.value[1] ?? 'https://bit.ly/2ZGfcuG',
               ),
             ],
           );
@@ -339,32 +295,20 @@ class HomeScreenState extends BaseMediaScreen<HomeScreen> {
     );
   }
 
-  List<Widget> _buildNullIndicator(BuildContext context, IconData? icon,
-      String? message, String? buttonLabel, void Function()? onPressed) {
-    var theme = Theme.of(context).colorScheme;
-
-    return [
-      Icon(
-        icon,
-        color: theme.onSurface.withOpacity(0.58),
-        size: 32,
-      ),
-      Text(
-        message ?? '',
-        style: TextStyle(
-          fontFamily: 'Poppins',
-          fontSize: 14,
-          color: theme.onSurface.withOpacity(0.58),
-        ),
-      ),
-      if (buttonLabel != null) ...[
-        const SizedBox(height: 24.0),
-        CustomElevatedButton(
-          context: context,
-          onPressed: onPressed ?? () {},
-          label: buttonLabel,
-        ),
-      ]
-    ];
+  Widget _buildMediaContent(BaseHomeScreen service) {
+    return Column(
+      children: [
+        ...service.mediaContent(context),
+        if (service.paging)
+          SizedBox(
+            height: 216,
+            child: Center(
+              child: !service.loadMore.value && service.canLoadMore.value
+                  ? const CircularProgressIndicator()
+                  : const SizedBox(height: 216),
+            ),
+          ),
+      ],
+    );
   }
 }

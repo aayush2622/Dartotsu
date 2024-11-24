@@ -110,7 +110,7 @@ class SettingsThemeScreenState extends BaseSettingsScreen {
         description: 'Does not belong here',
         icon: Icons.palette,
         onClick: () async {
-          final homeLayoutMap = PrefManager.getVal(PrefName.animeLayout);
+          final homeLayoutMap = PrefManager.getVal(PrefName.anilistAnimeLayout);
           List<String> titles = List<String>.from(homeLayoutMap.keys.toList());
           List<bool> checkedStates =
               List<bool>.from(homeLayoutMap.values.toList());
@@ -124,7 +124,7 @@ class SettingsThemeScreenState extends BaseSettingsScreen {
               (newCheckedStates) => checkedStates = newCheckedStates,
             )
             ..setPositiveButton('OK', () {
-              PrefManager.setVal(PrefName.animeLayout,
+              PrefManager.setVal(PrefName.anilistAnimeLayout,
                   Map.fromIterables(titles, checkedStates));
               Refresh.activity[2]?.value = true;
             })
@@ -138,7 +138,7 @@ class SettingsThemeScreenState extends BaseSettingsScreen {
         description: 'Does not belong here',
         icon: Icons.palette,
         onClick: () async {
-          final homeLayoutMap = PrefManager.getVal(PrefName.mangaLayout);
+          final homeLayoutMap = PrefManager.getVal(PrefName.anilistMangaLayout);
           List<String> titles = List<String>.from(homeLayoutMap.keys.toList());
           List<bool> checkedStates =
               List<bool>.from(homeLayoutMap.values.toList());
@@ -152,7 +152,7 @@ class SettingsThemeScreenState extends BaseSettingsScreen {
               (newCheckedStates) => checkedStates = newCheckedStates,
             )
             ..setPositiveButton('OK', () {
-              PrefManager.setVal(PrefName.mangaLayout,
+              PrefManager.setVal(PrefName.anilistMangaLayout,
                   Map.fromIterables(titles, checkedStates));
               Refresh.activity[3]?.value = true;
             })
@@ -166,7 +166,7 @@ class SettingsThemeScreenState extends BaseSettingsScreen {
         description: 'Does not belong here',
         icon: Icons.palette,
         onClick: () async {
-          final homeLayoutMap = PrefManager.getVal(PrefName.homeLayout);
+          final homeLayoutMap = PrefManager.getVal(PrefName.anilistHomeLayout);
           List<String> titles = List<String>.from(homeLayoutMap.keys.toList());
           List<bool> checkedStates =
               List<bool>.from(homeLayoutMap.values.toList());
@@ -180,7 +180,7 @@ class SettingsThemeScreenState extends BaseSettingsScreen {
               (newCheckedStates) => checkedStates = newCheckedStates,
             )
             ..setPositiveButton('OK', () {
-              PrefManager.setVal(PrefName.homeLayout,
+              PrefManager.setVal(PrefName.anilistHomeLayout,
                   Map.fromIterables(titles, checkedStates));
               Refresh.activity[1]?.value = true;
             })

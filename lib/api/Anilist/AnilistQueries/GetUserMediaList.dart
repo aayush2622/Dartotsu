@@ -22,7 +22,7 @@ extension on AnilistQueries {
       unsorted[name] = [];
       list.entries?.forEach((entry) {
         if (entry.media == null) return;
-        final media = mediaListData(entry);
+        final media = Media.mediaListData(entry);
         unsorted[name]!.add(media);
         if (!allIds.contains(media.id)) {
           allIds.add(media.id);
@@ -102,7 +102,7 @@ extension on AnilistQueries {
       return apiMediaList?.edges
               ?.map((e) {
                 if (e.node != null) {
-                  var media = mediaData(e.node!);
+                  var media = Media.mediaData(e.node!);
                   media.isFav = true;
                   return media;
                 }

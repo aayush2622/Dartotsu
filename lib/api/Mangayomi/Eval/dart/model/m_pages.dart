@@ -1,8 +1,10 @@
+import '../../../../../DataClass/Media.dart';
 import 'm_manga.dart';
 
 class MPages {
   List<MManga> list;
   bool hasNextPage;
+
   MPages({required this.list, this.hasNextPage = false});
 
   factory MPages.fromJson(Map<String, dynamic> json) {
@@ -17,4 +19,18 @@ class MPages {
         'list': list.map((v) => v.toJson()).toList(),
         'hasNextPage': hasNextPage,
       };
+
+  List<Media> toMedia() {
+    return list.map((e) {
+      return Media(
+        id: e.hashCode,
+        name: e.name,
+        cover: e.imageUrl,
+        nameRomaji: e.name ?? '',
+        userPreferredName: e.name ?? '',
+        isAdult: false,
+        minimal: true,
+      );
+    }).toList();
+  }
 }

@@ -1,5 +1,6 @@
 import 'package:dantotsu/Functions/Function.dart';
 import 'package:dantotsu/api/Mangayomi/Model/settings.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:http_interceptor/http_interceptor.dart';
 import 'dart:async';
 import 'dart:io';
@@ -174,6 +175,7 @@ class LoggerInterceptor extends InterceptorContract {
         ["cloudflare-nginx", "cloudflare"].contains(response.headers["server"]);
     Logger.add(LoggerLevel.info,
         "----- Response -----\n${response.request?.method}: ${response.request?.url}, statusCode: ${response.statusCode} ${cloudflare ? "Failed to bypass Cloudflare" : ""}");
+    debugPrint("----- Response -----\n${response.request?.method}: ${response.request?.url}, statusCode: ${response.statusCode} ${cloudflare ? "Failed to bypass Cloudflare" : ""}");
     if (cloudflare) {
       snackString("${response.statusCode} Failed to bypass Cloudflare");
     }

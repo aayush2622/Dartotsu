@@ -32,11 +32,11 @@ extension on AnilistQueries {
             }
             return false;
           })
-          .map((i) => mediaData(i.media!))
+          .map((i) => Media.mediaData(i.media!))
           .toList();
     }
 
-    final animeLayoutMap = PrefManager.getVal(PrefName.animeLayout);
+    final animeLayoutMap = PrefManager.getVal(PrefName.anilistAnimeLayout);
     final animeList =
         await executeQuery<AnimeListResponse>(_queryAnimeList(), force: true);
     Map<String, void Function()> returnMap = {
@@ -60,7 +60,7 @@ extension on AnilistQueries {
 
   Future<Map<String, List<Media>>> _getMangaList() async {
     final list = <String, List<Media>>{};
-    final mangaLayoutMap = PrefManager.getVal(PrefName.mangaLayout);
+    final mangaLayoutMap = PrefManager.getVal(PrefName.anilistMangaLayout);
     final mangaList =
         await executeQuery<MangaListResponse>(_queryMangaList(), force: true);
 
@@ -85,7 +85,7 @@ extension on AnilistQueries {
 }
 
 String _queryAnimeList() {
-  final animeLayoutMap = PrefManager.getVal(PrefName.animeLayout);
+  final animeLayoutMap = PrefManager.getVal(PrefName.anilistAnimeLayout);
   var currentSeasonMap = Anilist.currentSeasons[1];
   var season = currentSeasonMap.keys.first;
   var year = currentSeasonMap.values.first;
@@ -117,7 +117,7 @@ String _queryAnimeList() {
 }
 
 String _queryMangaList() {
-  final mangaLayoutMap = PrefManager.getVal(PrefName.mangaLayout);
+  final mangaLayoutMap = PrefManager.getVal(PrefName.anilistMangaLayout);
   final extra = [
     'trending: ${_buildQueryString("TRENDING_DESC", "MANGA", perPage: 12, country: "JP")}',
     'popularManga: ${_buildQueryString("POPULARITY_DESC", "MANGA",perPage: 50, country: "JP")}',
@@ -149,7 +149,7 @@ List<Media> _mediaList(Page? media) {
   final combinedList = <Media>[];
   if (media != null && media.media != null) {
     for (var media in media.media!) {
-      combinedList.add(mediaData(media));
+      combinedList.add(Media.mediaData(media));
     }
   }
   return combinedList;

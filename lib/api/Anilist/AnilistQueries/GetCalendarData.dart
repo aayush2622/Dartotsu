@@ -17,7 +17,7 @@ extension on AnilistQueries {
                 m.media!.countryOfOrigin == "JP" &&
                 (!Anilist.adult || m.media!.isAdult == false))
             .map((j) {
-          final mediaItem = mediaData(j.media!);
+          final mediaItem = Media.mediaData(j.media!);
           mediaItem.relation = "${j.episode},${j.airingAt}";
           return mediaItem;
         }).toList());

@@ -1,39 +1,88 @@
 import 'dart:convert';
-
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_qjs/quickjs/ffi.dart';
 import 'package:http/http.dart' as http;
 import 'package:json_annotation/json_annotation.dart';
 
 part 'GetMediaIDs.g.dart';
 
-List<AnimeID>? _animeList;
+enum AnimeIDType {
+  anilistId,
+  kitsuId,
+  malId,
+  animePlanetId,
+  anisearchId,
+  anidbId,
+  notifyMoeId,
+  imdbId,
+  livechartId,
+  thetvdbId,
+  themoviedbId;
 
-class GetMediaIDs {// use if ever needed
-
-  static Future<AnimeID?> fetchAndFindIds(int anilistId) async {
-    if (_animeList == null) {
-      await _getData();
+  String get fieldName {
+    switch (this) {
+      case AnimeIDType.anilistId:
+        return 'anilist_id';
+      case AnimeIDType.kitsuId:
+        return 'kitsu_id';
+      case AnimeIDType.malId:
+        return 'mal_id';
+      case AnimeIDType.animePlanetId:
+        return 'anime-planet_id';
+      case AnimeIDType.anisearchId:
+        return 'anisearch_id';
+      case AnimeIDType.anidbId:
+        return 'anidb_id';
+      case AnimeIDType.notifyMoeId:
+        return 'notify.moe_id';
+      case AnimeIDType.imdbId:
+        return 'imdb_id';
+      case AnimeIDType.livechartId:
+        return 'livechart_id';
+      case AnimeIDType.thetvdbId:
+        return 'thetvdb_id';
+      case AnimeIDType.themoviedbId:
+        return 'themoviedb_id';
     }
-    return _animeList?.firstWhereOrNull((entry) => entry.anilistId == anilistId);
+  }
+}
+
+class GetMediaIDs {
+
+  static List<AnimeID>? _animeListFuture;
+
+  static AnimeID? fromID({
+    required AnimeIDType type,
+    required dynamic id,
+  }) {
+    final animeList = _animeListFuture;
+    final fieldName = type.fieldName;
+    return animeList?.firstWhereOrNull(
+          (entry) => entry.toJson()[fieldName] == id,
+    );
   }
 
-  static Future<void> _getData() async {
+  static Future<List<AnimeID>?> getData() async {
+    if (_animeListFuture != null) {
+      return _animeListFuture;
+    }
     final url = Uri.parse(
         'https://raw.githubusercontent.com/Fribb/anime-lists/refs/heads/master/anime-list-full.json');
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
       List<dynamic> jsonData = jsonDecode(response.body);
-      _animeList = jsonData.map((e) => AnimeID.fromJson(e)).toList();
+      _animeListFuture = jsonData.map((e) => AnimeID.fromJson(e)).toList();
+      return _animeListFuture;
     } else {
       debugPrint('Failed to load data: ${response.statusCode}');
-      return;
+      return null;
     }
   }
 }
 
-//@JsonSerializable()
+
+@JsonSerializable()
 class AnimeID {
   @JsonKey(name: 'anime-planet_id')
   final String? animePlanetId;
@@ -61,14 +110,14 @@ class AnimeID {
 
   AnimeID({
     this.animePlanetId,
+    this.anisearchId,
+    this.anidbId,
     this.kitsuId,
     this.malId,
     this.type,
+    this.notifyMoeId,
     this.anilistId,
     this.imdbId,
-    this.anisearchId,
-    this.anidbId,
-    this.notifyMoeId,
     this.livechartId,
     this.thetvdbId,
     this.themoviedbId,

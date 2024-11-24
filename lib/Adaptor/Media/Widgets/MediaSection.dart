@@ -10,7 +10,7 @@ Widget MediaSection({
   List<Media>? mediaList,
   List<Widget>? customNullListIndicator,
   ScrollController? scrollController,
-  Function(int index)? onMediaTap,
+  Function(int index,Media media)? onMediaTap,
 }) {
   var theme = Theme.of(context);
 

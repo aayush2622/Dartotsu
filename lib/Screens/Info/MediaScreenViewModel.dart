@@ -12,7 +12,7 @@ class MediaPageViewModel extends GetxController {
 
   Future<Media> getMediaDetails(Media media) async {
     if (cacheMediaData == null) {
-      cacheMediaData = (await Anilist.query.mediaDetails(media)) ?? media;
+      cacheMediaData = (await Anilist.query!.mediaDetails(media)) ?? media;
       dataLoaded.value = true;
     }
     return cacheMediaData!;
@@ -38,7 +38,8 @@ class MediaPageViewModel extends GetxController {
     }
 
     if (mediaData.anime != null) {
-      if (mediaData.anime!.nextAiringEpisode != -1) {
+      if (mediaData.anime!.nextAiringEpisode != -1 &&
+          mediaData.anime!.nextAiringEpisode != null) {
         spans.add(TextSpan(
             text: "${mediaData.anime!.nextAiringEpisode}",
             style: TextStyle(
@@ -47,15 +48,30 @@ class MediaPageViewModel extends GetxController {
           text: " / ",
         ));
       }
-      spans.add(TextSpan(
-        text: "${mediaData.anime!.totalEpisodes ?? "??"}",
-        style: TextStyle(color: theme.onSurface, fontWeight: FontWeight.bold),
-      ));
+      if (mediaData.anime!.totalEpisodes != null && mediaData.anime!.totalEpisodes == 0) {
+        spans.add(TextSpan(
+          text: "${mediaData.anime!.totalEpisodes}",
+          style: TextStyle(color: theme.onSurface, fontWeight: FontWeight.bold),
+        ));
+      } else {
+        spans.add(TextSpan(
+          text: "??",
+          style: TextStyle(color: theme.onSurface, fontWeight: FontWeight.bold),
+        ));
+      }
+
     } else {
-      spans.add(TextSpan(
-        text: "${mediaData.manga!.totalChapters ?? "??"}",
-        style: TextStyle(color: theme.onSurface, fontWeight: FontWeight.bold),
-      ));
+      if (mediaData.manga!.totalChapters != null && mediaData.manga!.totalChapters == 0) {
+        spans.add(TextSpan(
+          text: "${mediaData.manga!.totalChapters}",
+          style: TextStyle(color: theme.onSurface, fontWeight: FontWeight.bold),
+        ));
+      } else {
+        spans.add(TextSpan(
+          text: "??",
+          style: TextStyle(color: theme.onSurface, fontWeight: FontWeight.bold),
+        ));
+      }
     }
     return spans;
   }

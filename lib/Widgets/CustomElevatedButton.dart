@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 Widget CustomElevatedButton({
   required BuildContext context,
-  required VoidCallback onPressed,
+  required VoidCallback? onPressed,
   required String label,
   Widget? iconWidget,
 }) {

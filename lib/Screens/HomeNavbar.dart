@@ -3,7 +3,10 @@ import 'package:dantotsu/Theme/Colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../Services/MediaService.dart';
+import '../Services/ServiceSwitcher.dart';
 import '../Theme/ThemeProvider.dart';
+import '../Widgets/CustomBottomDialog.dart';
 
 class FloatingBottomNavBar extends StatelessWidget {
   final int selectedIndex;
@@ -67,13 +70,46 @@ class FloatingBottomNavBar extends StatelessWidget {
       ),
     );
   }
-
+  void showBottomDialog(BuildContext context) {
+    List<MediaServiceType> mediaServices = MediaServiceType.values;
+    var provider = Provider.of<MediaServiceProvider>(context, listen: false);
+    var t = CustomBottomDialog(
+      viewList: [
+        ListView.builder(
+          shrinkWrap: true,
+          itemCount: mediaServices.length,
+          itemBuilder: (context, index) {
+            MediaServiceType service = mediaServices[index];
+            return ListTile(
+              selected: provider.currentService.type == service,
+              leading: service.iconUrl,
+              title: Text(
+                service.name,
+                style: const TextStyle(
+                  fontFamily: 'Poppins',
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              onTap: () {
+                provider.switchService(service);
+                Navigator.pop(context);
+              },
+            );
+          },
+        ),
+      ],
+      title: 'Select Media Service',
+    );
+    showCustomBottomDialog(context, t);
+  }
   Widget _buildNavItem(_NavItem item, BuildContext context) {
     final theme = Theme.of(context).colorScheme;
     final isSelected = item.index == selectedIndex;
 
     return GestureDetector(
       onTap: () => onTabSelected(item.index),
+      onLongPress: () => showBottomDialog(context),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 300),
         alignment: Alignment.center,

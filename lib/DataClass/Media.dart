@@ -1,5 +1,7 @@
 import '../Preferences/HiveDataClasses/Selected/Selected.dart';
-import '../api/Anilist/Data/media.dart' as api;
+import '../api/Anilist/Data/media.dart' as anilistApi;
+import '../api/EpisodeDetails/GetMediaIDs/GetMediaIDs.dart';
+import '../api/MyAnimeList/Data/media.dart' as malApi;
 import '../api/Anilist/Data/others.dart';
 import '../api/Anilist/Data/fuzzyData.dart';
 import 'Anime.dart';
@@ -71,10 +73,12 @@ class Media {
   String? nameMAL;
   String? shareLink;
   Selected? selected;
-  List<api.MediaStreamingEpisode>? streamingEpisodes;
+  List<anilistApi.MediaStreamingEpisode>? streamingEpisodes;
   String? idKitsu;
 
   bool cameFromContinue = false;
+  bool mal = false;
+  bool kitsu = false;
 
   Media({
     this.anime,
@@ -135,62 +139,104 @@ class Media {
     this.streamingEpisodes,
     this.idKitsu,
     this.cameFromContinue = false,
+    this.mal = false,
+    this.kitsu = false,
   });
 
-  String mainName() =>name ?? nameMAL ?? nameRomaji;
+  String mainName() => name ?? nameMAL ?? nameRomaji;
+
   String mangaName() => countryOfOrigin == 'JP' ? mainName() : nameRomaji;
+
+  //Anilist
+  static Media mediaData(anilistApi.Media apiMedia) {
+    return Media(
+      id: apiMedia.id,
+      idMAL: apiMedia.idMal,
+      name: apiMedia.title?.english,
+      nameRomaji: apiMedia.title?.romaji ?? '',
+      userPreferredName: apiMedia.title?.userPreferred ?? '',
+      cover: apiMedia.coverImage?.large ?? apiMedia.coverImage?.medium,
+      banner: apiMedia.bannerImage,
+      status: apiMedia.status?.name,
+      isFav: apiMedia.isFavourite ?? false,
+      isAdult: apiMedia.isAdult ?? false,
+      isListPrivate: apiMedia.mediaListEntry?.private ?? false,
+      userProgress: apiMedia.mediaListEntry?.progress,
+      userScore: apiMedia.mediaListEntry?.score?.toInt() ?? 0,
+      userStatus: apiMedia.mediaListEntry?.status?.name,
+      meanScore: apiMedia.meanScore,
+      startDate: apiMedia.startDate,
+      endDate: apiMedia.endDate,
+      favourites: apiMedia.favourites,
+      popularity: apiMedia.popularity,
+      format: apiMedia.format?.name,
+      genres: apiMedia.genres ?? [],
+      timeUntilAiring:
+      (apiMedia.nextAiringEpisode?.timeUntilAiring?.toInt() ?? 0) * 1000,
+      anime: apiMedia.type == anilistApi.MediaType.ANIME
+          ? Anime(
+        totalEpisodes: apiMedia.episodes,
+        nextAiringEpisode:
+        (apiMedia.nextAiringEpisode?.episode?.toInt() ?? 0) - 1,
+      )
+          : null,
+      manga: apiMedia.type == anilistApi.MediaType.MANGA
+          ? Manga(totalChapters: apiMedia.chapters)
+          : null,
+    );
+  }
+
+  static Media mediaEdgeData(anilistApi.MediaEdge apiMediaEdge) {
+    var media = mediaData(apiMediaEdge.node!);
+    media.relation = apiMediaEdge.relationType?.name;
+    return media;
+  }
+
+  static Media mediaListData(anilistApi.MediaList mediaList) {
+    var media = mediaData(mediaList.media!);
+    media.userProgress = mediaList.progress;
+    media.isListPrivate = mediaList.private ?? false;
+    media.userScore = mediaList.score?.toInt() ?? 0;
+    media.userStatus = mediaList.status?.name;
+    media.userUpdatedAt = mediaList.updatedAt;
+    media.genres = mediaList.media?.genres ?? [];
+    return media;
+  }
+
+  //MyAnimeList
+  static Media fromMal(malApi.Media apiMedia) {
+    String mapAiringStatus(String status) {
+      switch (status) {
+        case 'finished_airing':
+          return 'FINISHED';
+        case 'currently_airing':
+          return 'RELEASING';
+        case 'not_yet_aired':
+          return 'NOT_YET_RELEASED';
+        default:
+          return 'UNKNOWN';
+      }
+    }
+    return Media(
+        id: GetMediaIDs
+            .fromID(type: AnimeIDType.malId, id: apiMedia.id!)
+            ?.anilistId ?? apiMedia.id!,
+        idMAL: apiMedia.id,
+        name: apiMedia.title ?? '',
+        nameRomaji: apiMedia.alternativeTitles?.ja ?? '',
+        userPreferredName: apiMedia.title ?? '',
+        cover: apiMedia.mainPicture?.medium ?? '',
+        banner: apiMedia.mainPicture?.large ?? apiMedia.mainPicture?.medium ?? '',
+        status: mapAiringStatus(apiMedia.status ?? ''),
+        isAdult: apiMedia.nsfw == 'black',
+        userProgress: apiMedia.myListStatus?.numEpisodesWatched ?? apiMedia.myListStatus?.numChaptersRead,
+        userScore: ((apiMedia.myListStatus?.score ?? 0) * 10).toInt(),
+        meanScore: ((apiMedia.mean ?? 0) * 10).toInt(),
+        genres: apiMedia.genres?.map((genre) => genre.name ?? '').toList() ?? [],
+        anime: apiMedia.numEpisodes != null ? Anime(totalEpisodes: apiMedia.numEpisodes) : null,
+        manga: apiMedia.numChapters != null ? Manga(totalChapters: apiMedia.numChapters) : null
+    );
+  }
 }
 
-Media mediaData(api.Media apiMedia) {
-  return Media(
-    id: apiMedia.id,
-    idMAL: apiMedia.idMal,
-    name: apiMedia.title?.english,
-    nameRomaji: apiMedia.title?.romaji ?? '',
-    userPreferredName: apiMedia.title?.userPreferred ?? '',
-    cover: apiMedia.coverImage?.large ?? apiMedia.coverImage?.medium,
-    banner: apiMedia.bannerImage,
-    status: apiMedia.status?.name,
-    isFav: apiMedia.isFavourite ?? false,
-    isAdult: apiMedia.isAdult ?? false,
-    isListPrivate: apiMedia.mediaListEntry?.private ?? false,
-    userProgress: apiMedia.mediaListEntry?.progress,
-    userScore: apiMedia.mediaListEntry?.score?.toInt() ?? 0,
-    userStatus: apiMedia.mediaListEntry?.status?.name,
-    meanScore: apiMedia.meanScore,
-    startDate: apiMedia.startDate,
-    endDate: apiMedia.endDate,
-    favourites: apiMedia.favourites,
-    popularity: apiMedia.popularity,
-    format: apiMedia.format?.name,
-    genres: apiMedia.genres ?? [],
-    timeUntilAiring:
-        (apiMedia.nextAiringEpisode?.timeUntilAiring?.toInt() ?? 0) * 1000,
-    anime: apiMedia.type == api.MediaType.ANIME
-        ? Anime(
-            totalEpisodes: apiMedia.episodes,
-            nextAiringEpisode:
-                (apiMedia.nextAiringEpisode?.episode?.toInt() ?? 0) - 1,
-          )
-        : null,
-    manga: apiMedia.type == api.MediaType.MANGA
-        ? Manga(totalChapters: apiMedia.chapters)
-        : null,
-  );
-}
 
-Media mediaEdgeData(api.MediaEdge apiMediaEdge) {
-  var media = mediaData(apiMediaEdge.node!);
-  media.relation= apiMediaEdge.relationType?.name;
-  return media;
-}
-Media mediaListData(api.MediaList mediaList) {
-  var media = mediaData(mediaList.media!);
-  media.userProgress = mediaList.progress;
-  media.isListPrivate = mediaList.private ?? false;
-  media.userScore = mediaList.score?.toInt() ?? 0;
-  media.userStatus = mediaList.status?.name;
-  media.userUpdatedAt = mediaList.updatedAt;
-  media.genres = mediaList.media?.genres ?? [];
-  return media;
-}

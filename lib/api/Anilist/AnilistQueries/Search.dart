@@ -66,7 +66,7 @@ extension on AnilistQueries {
           genresArr.add(genre);
         });
 
-        Media mediaInfo = mediaData(i);
+        Media mediaInfo = Media.mediaData(i);
         if (!hd) mediaInfo.cover = i.coverImage?.large ?? '';
         mediaInfo.relation = (onList == true) ? userStatus : null;
         mediaInfo.genres = genresArr;

@@ -34,7 +34,7 @@ Future<Color?> showColorPickerDialog(
             colorCodeHasColor: true,
           ),
         ),
-        actions: <Widget>[
+        actions: [
           TextButton(
             child: Text('Cancel',style: TextStyle(color: theme.primary, fontWeight: FontWeight.bold)),
             onPressed: () {

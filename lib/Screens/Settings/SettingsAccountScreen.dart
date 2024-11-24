@@ -3,10 +3,11 @@ import 'package:dantotsu/Screens/Settings/BaseSettingsScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
 import '../../Functions/Function.dart';
+import '../../Services/ServiceSwitcher.dart';
 import '../../Widgets/AlertDialogBuilder.dart';
-import '../../api/Anilist/Anilist.dart';
 import '../../api/Discord/Discord.dart';
 
 class SettingsAccountScreen extends StatefulWidget {
@@ -39,6 +40,7 @@ class SettingsAccountScreenState extends BaseSettingsScreen {
 
   List<Widget> _buildSettings(BuildContext context) {
     var theme = Theme.of(context).colorScheme;
+    var Anilist = Provider.of<MediaServiceProvider>(context).Anilist.data;
     return [
       _buildAccountSection(
         context,

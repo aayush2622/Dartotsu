@@ -11,7 +11,7 @@ import 'Anilist.dart';
 
 Future<void> getUserId() async {
   if (Anilist.token.isNotEmpty) {
-    await Anilist.query.getUserData();
+    await Anilist.query!.getUserData();
   }
 }
 
@@ -20,16 +20,32 @@ abstract class AnilistViewModel extends GetxController {
   var scrollToTop = false.obs;
   var loadMore = true.obs;
   var canLoadMore = true.obs;
-
+  var running = true.obs;
   var scrollController = ScrollController();
 
   void resetPageData();
+
+  int get refreshID;
 
   bool get paging => true;
 
   Future<void> loadAll();
 
   Future<void>? loadNextPage() => null;
+
+  void init() {
+    final live = Refresh.getOrPut(refreshID, false);
+    ever(live, (bool shouldRefresh) async {
+      if (running.value && shouldRefresh) {
+        running.value = false;
+        await getUserId();
+        await loadAll();
+        live.value = false;
+        running.value = true;
+      }
+    });
+    Refresh.activity[refreshID]?.value = true;
+  }
 
   bool _canScroll() {
     final maxScrollExtent = scrollController.position.maxScrollExtent;
@@ -51,9 +67,7 @@ abstract class AnilistViewModel extends GetxController {
   }
 }
 
-final AnilistHomeViewModel = Get.put(_AnilistHomeViewModel());
-
-class _AnilistHomeViewModel extends AnilistViewModel {
+class AnilistHomeViewModel extends AnilistViewModel {
   var listImages = Rx<List<String?>>([null, null]);
   var animeContinue = Rx<List<Media>?>(null);
   var animeFav = Rx<List<Media>?>(null);
@@ -64,12 +78,9 @@ class _AnilistHomeViewModel extends AnilistViewModel {
   var recommendation = Rx<List<Media>?>(null);
   var userStatus = Rx<List<userData>?>(null);
   var hidden = Rx<List<Media>?>(null);
-  var empty = Rxn<bool>(null);
-  var genres = Rxn<bool>(null);
-  var loaded = false.obs;
 
   Future<void> setListImages() async {
-    listImages.value = await Anilist.query.getBannerImages();
+    listImages.value = await Anilist.query!.getBannerImages();
   }
 
   @override
@@ -85,11 +96,11 @@ class _AnilistHomeViewModel extends AnilistViewModel {
 
   Future<void> loadList() async {
     resetPageData();
-    final res = await Anilist.query.initHomePage();
-    _setMediaList(res);
+    final res = await Anilist.query!.initHomePage();
+    _setMediaList(res!);
   }
 
-  void _setMediaList(Map<String, dynamic> res) {
+  void _setMediaList(Map<String, List<Media>> res) {
     if (res["currentAnime"] != null) {
       animeContinue.value = res["currentAnime"];
     }
@@ -131,15 +142,15 @@ class _AnilistHomeViewModel extends AnilistViewModel {
   Future<void> loadMain() async {
     Anilist.getSavedToken();
     Discord.getSavedToken();
-    Anilist.query.getGenresAndTags();
+    Anilist.query?.getGenresAndTags();
   }
 
+  @override
+  int get refreshID => 1;
 }
 
 // Anime ViewModel
-final AnilistAnimeViewModel = Get.put(_AnilistAnimeViewModel());
-
-class _AnilistAnimeViewModel extends AnilistViewModel {
+class AnilistAnimeViewModel extends AnilistViewModel {
   var trending = Rxn<List<Media>>();
   var animePopular = Rxn<List<Media>>();
   var updated = Rxn<List<Media>>();
@@ -150,7 +161,7 @@ class _AnilistAnimeViewModel extends AnilistViewModel {
   @override
   Future<void> loadAll() async {
     resetPageData();
-    final list = await Anilist.query.getAnimeList();
+    final list = await Anilist.query!.getAnimeList();
     trending.value = list["trendingAnime"];
     animePopular.value = list["popularAnime"];
     updated.value = list["recentUpdates"];
@@ -164,7 +175,7 @@ class _AnilistAnimeViewModel extends AnilistViewModel {
     var currentSeasonMap = Anilist.currentSeasons[s];
     var season = currentSeasonMap.keys.first;
     var year = currentSeasonMap.values.first;
-    var trending = await Anilist.query.search(
+    var trending = await Anilist.query!.search(
       type: 'ANIME',
       perPage: 12,
       sort: Anilist.sortBy[2],
@@ -178,7 +189,7 @@ class _AnilistAnimeViewModel extends AnilistViewModel {
 
   @override
   Future<void> loadNextPage() async {
-    final result = await Anilist.query.search(
+    final result = await Anilist.query!.search(
       type: 'ANIME',
       page: page + 1,
       perPage: 50,
@@ -205,12 +216,12 @@ class _AnilistAnimeViewModel extends AnilistViewModel {
     canLoadMore.value = true;
     page = 1;
   }
+
+  @override
+  int get refreshID => 2;
 }
 
-// Manga ViewModel
-final AnilistMangaViewModel = Get.put(_AnilistMangaViewModel());
-
-class _AnilistMangaViewModel extends AnilistViewModel {
+class AnilistMangaViewModel extends AnilistViewModel {
   var trending = Rxn<List<Media>>();
   var mangaPopular = Rxn<List<Media>>();
   var popularManhwa = Rxn<List<Media>>();
@@ -221,7 +232,7 @@ class _AnilistMangaViewModel extends AnilistViewModel {
   @override
   Future<void> loadAll() async {
     resetPageData();
-    final list = await Anilist.query.getMangaList();
+    final list = await Anilist.query!.getMangaList();
     trending.value = list["trending"];
     mangaPopular.value = list["popularManga"];
     popularManhwa.value = list["trendingManhwa"];
@@ -232,7 +243,7 @@ class _AnilistMangaViewModel extends AnilistViewModel {
 
   @override
   Future<void> loadNextPage() async {
-    final result = await Anilist.query.search(
+    final result = await Anilist.query!.search(
       type: 'MANGA',
       page: page + 1,
       perPage: 50,
@@ -251,7 +262,7 @@ class _AnilistMangaViewModel extends AnilistViewModel {
     this.trending.value = null;
     final country = type == 'MANHWA' ? 'KR' : 'JP';
     final format = type == 'NOVEL' ? 'NOVEL' : null;
-    final trending = await Anilist.query.search(
+    final trending = await Anilist.query!.search(
       type: 'MANGA',
       countryOfOrigin: country,
       format: format,
@@ -275,4 +286,7 @@ class _AnilistMangaViewModel extends AnilistViewModel {
     canLoadMore.value = true;
     page = 1;
   }
+
+  @override
+  int get refreshID => 3;
 }

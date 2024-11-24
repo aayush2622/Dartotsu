@@ -1,3 +1,4 @@
+import 'package:dantotsu/DataClass/Media.dart';
 import 'package:dart_eval/dart_eval_bridge.dart';
 import 'package:dart_eval/stdlib/core.dart';
 
@@ -90,4 +91,19 @@ class $MPages implements MPages, $Instance {
         'list': list.map((v) => v.toJson()).toList(),
         'hasNextPage': hasNextPage,
       };
+
+  @override
+  List<Media> toMedia() {
+    return list.map((e) {
+      return Media(
+        id: e.hashCode,
+        name: e.name,
+        cover: e.imageUrl,
+        nameRomaji: e.name ?? '',
+        userPreferredName: e.name ?? '',
+        isAdult: false,
+        minimal: true,
+      );
+    }).toList();
+  }
 }

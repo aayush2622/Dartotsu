@@ -151,7 +151,7 @@ class EpisodeListView extends StatelessWidget {
           handleProgress(
             context: context,
             mediaId: mediaData.id,
-            ep: episode.number.toInt(),
+            ep: episode.number.toDouble().toInt(),
             width: 142
           )
         ],

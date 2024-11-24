@@ -51,13 +51,13 @@ class MediaPageLargeViewHolder extends StatelessWidget {
             height: 151,
             width: double.infinity,
             child: cachedNetworkImage(
-                imageUrl: mediaInfo.banner ?? mediaInfo.cover ?? '',
-                fit: BoxFit.cover,
-                width: double.infinity,
-                height: 151,
-                placeholder: (context, url) => const SizedBox.shrink(),
-                errorWidget: (context, url, error) => const SizedBox.shrink(),
-              ),
+              imageUrl: mediaInfo.banner ?? mediaInfo.cover ?? '',
+              fit: BoxFit.cover,
+              width: double.infinity,
+              height: 151,
+              placeholder: (context, url) => const SizedBox.shrink(),
+              errorWidget: (context, url, error) => const SizedBox.shrink(),
+            ),
           ),
           _buildGradientOverlay(gradientColors),
           _buildBlurEffect(),
@@ -138,21 +138,21 @@ class MediaPageLargeViewHolder extends StatelessWidget {
   }
 
   Widget _buildMediaCover() {
-    return  ClipRRect(
-        borderRadius: BorderRadius.circular(16.0),
-        child: cachedNetworkImage(
-          imageUrl: mediaInfo.cover ?? '',
-          fit: BoxFit.cover,
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(16.0),
+      child: cachedNetworkImage(
+        imageUrl: mediaInfo.cover ?? '',
+        fit: BoxFit.cover,
+        width: 108,
+        height: 160,
+        errorWidget: (context, url, error) => const SizedBox.shrink(),
+        placeholder: (context, url) => Container(
+          color: Colors.white12,
           width: 108,
           height: 160,
-          errorWidget: (context, url, error) => const SizedBox.shrink(),
-          placeholder: (context, url) => Container(
-            color: Colors.white12,
-            width: 108,
-            height: 160,
-          ),
         ),
-      );
+      ),
+    );
   }
 
   Widget _buildAdditionalInfo(ColorScheme theme) {
@@ -160,7 +160,9 @@ class MediaPageLargeViewHolder extends StatelessWidget {
     final mediaType = isAnime ? "Episodes" : "Chapters";
     final mediaCount = isAnime
         ? formatMediaInfo(mediaInfo)
-        : "${mediaInfo.manga?.totalChapters ?? "??"}";
+        : mediaInfo.manga?.totalChapters != 0
+            ? "${mediaInfo.manga?.totalChapters ?? "??"}"
+            : "??";
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -200,8 +202,9 @@ class MediaPageLargeViewHolder extends StatelessWidget {
 
 String formatMediaInfo(Media media) {
   final nextAiringEpisode = media.anime?.nextAiringEpisode;
-  final totalEpisodes = media.anime?.totalEpisodes?.toString() ?? "??";
-
+  final totalEpisodes = media.anime?.totalEpisodes != 0
+      ? "${media.anime?.totalEpisodes ?? "??"}"
+      : "??";
   return nextAiringEpisode != null && nextAiringEpisode != -1
       ? "$nextAiringEpisode / $totalEpisodes"
       : totalEpisodes;

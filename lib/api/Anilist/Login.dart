@@ -1,13 +1,15 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 
 import '../../Functions/Function.dart';
+import '../../Services/ServiceSwitcher.dart';
 import '../../Widgets/AlertDialogBuilder.dart';
 import '../../Widgets/CustomBottomDialog.dart';
-import 'Anilist.dart';
 
 CustomBottomDialog login(BuildContext context) {
+  var anilist = Provider.of<MediaServiceProvider>(context,listen: false).Anilist.data;
   return CustomBottomDialog(
     title: "Login to Anilist",
     viewList: [
@@ -38,7 +40,7 @@ CustomBottomDialog login(BuildContext context) {
                 onChanged: (value) => (token = value),
               ),
             )
-            ..setPositiveButton('Ok', () async => await Anilist.saveToken(token))
+            ..setPositiveButton('Ok', () async => await anilist.saveToken(token))
             ..setNegativeButton('Cancel', null)
             ..setOnDismissListener(() => Navigator.pop(context))
             ..show();

@@ -15,7 +15,7 @@ class CalendarViewModel extends GetxController {
     try{
       isLoading.value = true;
       if (cachedAllCalendarData.value == null || cachedLibraryCalendarData.value == null) {
-        final res = await Anilist.query.getCalendarData();
+        final res = await Anilist.query!.getCalendarData();
 
         final DateFormat df = DateFormat.yMMMMEEEEd();
         final Map<String, List<Media>> allMap = {};
@@ -23,7 +23,7 @@ class CalendarViewModel extends GetxController {
         final Map<String, List<int>> idMap = {};
 
         final int userId = Anilist.userid ?? 0;
-        final userLibrary = await Anilist.query.getMediaLists(userId: userId, anime: true);
+        final userLibrary = await Anilist.query!.getMediaLists(userId: userId, anime: true);
         final libraryMediaIds = userLibrary.values.expand((list) => list).map((m) => m.id).toList();
 
         for (var item in res) {
