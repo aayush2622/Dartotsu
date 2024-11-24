@@ -45,7 +45,18 @@ class _SourceSelectorState extends ConsumerState<SourceSelector> {
               .toList()
               .reversed
               .toList();
-
+          if (installedSources.isEmpty) {
+            return const Column(
+              children: [
+                buildDropdownMenu(
+                  padding: EdgeInsets.all(0),
+                  currentValue: 'No sources installed',
+                  options: ['No sources installed'],
+                  prefixIcon: Icons.source,
+                ),
+              ],
+            );
+          }
           String nameAndLang(Source source) {
             bool isDuplicateName =
                 installedSources.where((s) => s.name == source.name).length > 1;
@@ -72,18 +83,7 @@ class _SourceSelectorState extends ConsumerState<SourceSelector> {
           }
           var theme = Theme.of(context).colorScheme;
 
-          if (installedSources.isEmpty) {
-            return const Column(
-              children: [
-                buildDropdownMenu(
-                  padding: EdgeInsets.all(0),
-                  currentValue: 'No sources installed',
-                  options: ['No sources installed'],
-                  prefixIcon: Icons.source,
-                ),
-              ],
-            );
-          }
+
           return Column(
             children: [
               Row(
