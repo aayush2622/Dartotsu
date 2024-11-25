@@ -1,5 +1,6 @@
 import 'package:dantotsu/DataClass/Media.dart';
 import 'package:dantotsu/DataClass/SearchResults.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 import '../../Preferences/PrefManager.dart';
@@ -107,4 +108,6 @@ class MalQueries extends Queries {
     // TODO: implement search
     throw UnimplementedError();
   }
+
+
 }

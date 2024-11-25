@@ -29,6 +29,7 @@ class MalAnimeScreen extends BaseAnimeScreen {
 
   @override
   Future<void> loadAll() async {
+    await getUserId();
     resetPageData();
     final list = await Mal.query!.getAnimeList();
     updated.value = list["topAiring"];
@@ -74,8 +75,8 @@ class MalAnimeScreen extends BaseAnimeScreen {
     var currentSeasonMap = Mal.currentSeasons[page];
     var season = currentSeasonMap.keys.first;
     var year = currentSeasonMap.values.first;
-    var trending =
-        await (Mal.query as MalQueries?)!.getTrending(year: year.toString(), season: season);
+    var trending = await (Mal.query as MalQueries?)!
+        .getTrending(year: year.toString(), season: season);
     this.trending.value = trending;
   }
 
@@ -108,21 +109,25 @@ class MalAnimeScreen extends BaseAnimeScreen {
       for (var section in mediaSections) section.title: section
     };
     return animeLayoutMap.entries
-        .where((entry) => entry.value)
-        .map((entry) => sectionMap[entry.key])
-        .whereType<MediaSectionData>()
-        .map((section) => MediaSection(
-              context: context,
-              type: section.type,
-              title: section.title,
-              mediaList: section.list,
-              scrollController: section.scrollController,
-            ))
-        .toList()
-      ..add(MediaSection(
+      .where((entry) => entry.value)
+      .map((entry) => sectionMap[entry.key])
+      .whereType<MediaSectionData>()
+      .map(
+        (section) => MediaSection(
+          context: context,
+          type: section.type,
+          title: section.title,
+          mediaList: section.list,
+          scrollController: section.scrollController,
+        ),
+      )
+      .toList()
+    ..add(
+      MediaSection(
           context: context,
           type: 2,
           title: 'Popular Anime',
-          mediaList: animePopular.value));
+          mediaList: animePopular.value),
+    );
   }
 }

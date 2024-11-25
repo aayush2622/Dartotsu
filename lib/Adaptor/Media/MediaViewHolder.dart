@@ -149,6 +149,6 @@ String formatMediaInfo(Media media) {
       ? "${media.anime?.totalEpisodes ?? "~"}"
       : "~";
   return nextAiringEpisode != null && nextAiringEpisode != -1
-      ? "$nextAiringEpisode / $totalEpisodes"
+      ? "$nextAiringEpisode | $totalEpisodes"
       : totalEpisodes;
 }

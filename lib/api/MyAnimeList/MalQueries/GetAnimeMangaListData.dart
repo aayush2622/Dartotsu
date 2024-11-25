@@ -6,7 +6,11 @@ extension on MalQueries {
 
   Future<List<Media>> fetchMediaList(String endpoint) async {
     final response = await externalQuery<MediaResponse>(endpoint);
-    return response?.data
+    return await compute(_processMediaResponse, response?.data);
+  }
+
+  List<Media> _processMediaResponse(List<Datum>? data) {
+    return data
             ?.where((m) => m.node != null)
             .map((m) => Media.fromMal(m.node!))
             .toList() ??
@@ -47,7 +51,6 @@ extension on MalQueries {
 
     var endpoints = extra + generateOrderedQueries;
     final results = await Future.wait(endpoints.map(fetchMediaList));
-
     int resultIndex = 2;
     queryMappings.forEach((key, _) {
       if (animeLayoutMap[key] == true) {
@@ -104,17 +107,17 @@ extension on MalQueries {
     return list;
   }
 
-  Future<List<Media>> _getTrending({String? year, String? season}) async { // season also gets manga type
-
-
-    var anime = '${MalStrings.endPoint}anime/season/$year/$season?limit=15&offset=1&sort=anime_num_list_users&$field';
-    var manga = '${MalStrings.endPoint}manga/ranking?offset=0&ranking_type=$season&limit=15&$field';
-    return fetchMediaList(year != null ? anime : manga);
+  Future<List<Media>> _getTrending({String? year, String? season}) async {
+    // season also gets manga type
+    var anime =
+        '${MalStrings.endPoint}anime/season/$year/$season?limit=15&offset=1&sort=anime_num_list_users&$field';
+    var manga =
+        '${MalStrings.endPoint}manga/ranking?offset=0&ranking_type=$season&limit=15&$field';
+    return await fetchMediaList(year != null ? anime : manga);
   }
 
   Future<List<Media>> _loadNextPage(String type, int page) async {
-
-    return fetchMediaList(
+    return await fetchMediaList(
         '${MalStrings.endPoint}$type/ranking?offset=${page * 50}&ranking_type=bypopularity&limit=50&$field');
   }
 }

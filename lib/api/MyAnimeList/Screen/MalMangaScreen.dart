@@ -29,6 +29,7 @@ class MalMangaScreen extends BaseMangaScreen {
 
   @override
   Future<void> loadAll() async {
+    await getUserId();
     resetPageData();
     final list = await Mal.query!.getMangaList();
     trending.value = list["trendingManga"];
