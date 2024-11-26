@@ -10,6 +10,7 @@ completeLanguageName(String lang) {
 
 final languagesMap = {
   'All': 'all',
+  'অসমীয়া': 'as',
   'Français': 'fr',
   'Català': 'ca',
   'English': 'en',
