@@ -1,6 +1,6 @@
 completeLanguageName(String lang) {
   lang = lang.toLowerCase();
-  for (var element in languagesMap.entries) {
+  for (var element in sortedLanguagesMap.entries) {
     if (element.value.toLowerCase() == lang) {
       return element.key;
     }
