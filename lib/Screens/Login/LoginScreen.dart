@@ -45,12 +45,7 @@ class LoginScreenState extends State<LoginScreen> {
               style: TextStyle(fontSize: 14),
             ),
             const SizedBox(height: 38),
-            _buildLoginButton(
-              context,
-              onPressed: () => screen.login(context),
-              icon: service.iconPath,
-              label: 'Login',
-            ),
+            _buildLoginButton(context),
             const SizedBox(height: 24),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -84,24 +79,22 @@ class LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget _buildLoginButton(BuildContext context,
-      {required Function() onPressed,
-        required String icon,
-        required String label}) {
+  Widget _buildLoginButton(BuildContext context) {
     final theme = Theme.of(context).colorScheme;
+    var service = Provider.of<MediaServiceProvider>(context).currentService;
     return ElevatedButton.icon(
-      onPressed: () => onPressed(),
+      onPressed: () => service.data.login(context),
       icon: Padding(
         padding: const EdgeInsets.only(right: 24.0),
         child: loadSvg(
-          icon,
+          service.iconPath,
           width: 18,
           height: 18,
           color: theme.onPrimaryContainer,
         ),
       ),
       label: Text(
-        label,
+        'Login',
         style: TextStyle(
           fontFamily: 'Poppins',
           color: theme.onPrimaryContainer,

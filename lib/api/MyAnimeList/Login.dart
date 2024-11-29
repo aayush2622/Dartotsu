@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_web_auth_2/flutter_web_auth_2.dart';
 import 'package:http/http.dart' as http;
+
 import '../../Functions/Function.dart';
 import '../../Preferences/HiveDataClasses/MalToken/MalToken.dart';
 import '../../Widgets/CustomBottomDialog.dart';
@@ -15,26 +16,26 @@ CustomBottomDialog login(BuildContext context) {
   return CustomBottomDialog(
     title: "Login to MyAnimeList",
     viewList: [
-      const SizedBox(height: 38),
+      const SizedBox(height: 12),
       _buildLoginButton(
         context,
         onPressed: () async {
           Navigator.pop(context);
           final secureRandom = Random.secure();
-          final codeVerifierBytes = List<int>.generate(96, (_) => secureRandom.nextInt(256));
+          final codeVerifierBytes =
+              List<int>.generate(96, (_) => secureRandom.nextInt(256));
 
           final codeChallenge = base64UrlEncode(codeVerifierBytes)
               .replaceAll('=', '')
               .replaceAll('+', '-')
               .replaceAll('/', '_');
 
-          var url = 'https://myanimelist.net/v1/oauth2/authorize?response_type=code&client_id=${MalStrings.clientId}&code_challenge=$codeChallenge';
+          var url =
+              'https://myanimelist.net/v1/oauth2/authorize?response_type=code&client_id=${MalStrings.clientId}&code_challenge=$codeChallenge';
 
           var response = await FlutterWebAuth2.authenticate(
             options: const FlutterWebAuth2Options(
-                windowName: 'Dartotsu',
-                useWebview: true
-            ),
+                windowName: 'Dartotsu', useWebview: true),
             url: url,
             callbackUrlScheme: 'dantotsu',
           );
@@ -50,10 +51,9 @@ CustomBottomDialog login(BuildContext context) {
         icon: 'assets/svg/mal.svg',
         label: 'Login from Browser',
       ),
-      const SizedBox(height: 16),
+      const SizedBox(height: 24),
     ],
   );
-
 }
 
 Future<ResponseToken> fetchToken({
@@ -74,17 +74,20 @@ Future<ResponseToken> fetchToken({
 
   if (response.statusCode == 200) {
     final jsonResponse = jsonDecode(response.body);
-    var token =  ResponseToken.fromJson(jsonResponse);
-    token.expiresIn = DateTime.now().add(Duration(seconds: token.expiresIn)).millisecondsSinceEpoch;
+    var token = ResponseToken.fromJson(jsonResponse);
+    token.expiresIn = DateTime.now()
+        .add(Duration(seconds: token.expiresIn))
+        .millisecondsSinceEpoch;
     return token;
   } else {
     throw Exception('Failed to fetch token: ${response.statusCode}');
   }
 }
+
 Widget _buildLoginButton(BuildContext context,
     {required Function() onPressed,
-      required String icon,
-      required String label}) {
+    required String icon,
+    required String label}) {
   final theme = Theme.of(context).colorScheme;
   return ElevatedButton.icon(
     onPressed: () => onPressed(),
