@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:dantotsu/Functions/string_extensions.dart';
 import 'package:http_interceptor/http_interceptor.dart';
 
@@ -13,6 +14,7 @@ class VoeExtractor {
       r'(http|https)://([\w_-]+(?:\.[\w_-]+)+)([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])');
 
   final base64Regex = RegExp(r"'.*'");
+
   Future<List<Video>> videosFromUrl(String url, String? prefix) async {
     try {
       final response = await client.get(Uri.parse(url));

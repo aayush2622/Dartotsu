@@ -11,6 +11,7 @@ class Mp4uploadExtractor {
   static const String referer = "https://mp4upload.com/";
   final InterceptedClient client =
       MClient.init(reqcopyWith: {'useDartHttpClient': true});
+
   Future<List<Video>> videosFromUrl(String url, Map<String, String> headers,
       {String prefix = '', String suffix = ''}) async {
     final newHeaders = Map<String, String>.from(headers)

@@ -2,20 +2,22 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 
+import '../../Functions/Function.dart';
+import '../../Preferences/HiveDataClasses/MalToken/MalToken.dart';
+import '../../Preferences/PrefManager.dart';
+import '../../Preferences/Preferences.dart';
 import '../../Services/BaseServiceData.dart';
+import '../../Widgets/CustomBottomDialog.dart';
+import 'Login.dart' as MalLogin;
 import '../TypeFactory.dart';
 import 'MalQueries.dart';
 import 'MalQueries/MalStrings.dart';
-import 'package:http/http.dart' as http;
 
-var mal = Get.put(MalController());
+var Mal = Get.put(MalController());
 
 class MalController extends BaseServiceData {
-
-  @override
-  RxString get token => ''.obs;
-
   MalController() {
     query = MalQueries(executeQuery);
   }
@@ -35,38 +37,110 @@ class MalController extends BaseServiceData {
   Map<String, int> getSeason(bool next) {
     int season = currentSeason + (next ? 1 : -1);
     int year = currentYear;
-    if (season > 3) { season = 0; year++; }
-    if (season < 0) { season = 3; year--; }
+    if (season > 3) {
+      season = 0;
+      year++;
+    }
+    if (season < 0) {
+      season = 3;
+      year--;
+    }
     return {seasons[season]: year};
   }
 
   List<Map<String, int>> get currentSeasons => [
-    getSeason(false),
-    {seasons[currentSeason]: currentYear},
-    getSeason(true),
-  ];
+        getSeason(false),
+        {seasons[currentSeason]: currentYear},
+        getSeason(true),
+      ];
 
   @override
   bool getSavedToken() {
-    // TODO: implement getSavedToken
-    throw UnimplementedError();
+    var malToken = PrefManager.getVal(PrefName.malToken);
+    if (malToken == null) return false;
+    token.value = malToken.accessToken;
+
+    if (token.isNotEmpty) {
+      getToken().then((m) {
+        query?.getUserData();
+      });
+    }
+    return token.isNotEmpty;
+  }
+
+  final _loadingToken = false.obs;
+
+  Future<void> getToken() async {
+    var malToken = PrefManager.getVal(PrefName.malToken);
+    if (malToken == null) return;
+    if (DateTime.now().millisecondsSinceEpoch > malToken.expiresIn) {
+      if (_loadingToken.value) {
+        while (_loadingToken.value == true) {
+          await Future.delayed(const Duration(milliseconds: 100));
+        }
+        return;
+      }
+      _loadingToken.value = true;
+      malToken = await refreshToken();
+      if (malToken == null) return;
+    }
+    token.value = malToken.accessToken;
   }
 
   @override
-  void login(BuildContext context) {
-    // TODO: implement login
-  }
+  void login(BuildContext context) => showCustomBottomDialog(context, MalLogin.login(context));
 
   @override
   void removeSavedToken() {
-    // TODO: implement removeSavedToken
+    PrefManager.removeVal(PrefName.malToken);
+    token.value = '';
+    username.value = '';
+    adult = false;
+    userid = null;
+    avatar.value = '';
+    bg = null;
+    episodesWatched = null;
+    chapterRead = null;
+    unreadNotificationCount = 0;
   }
 
   @override
-  Future<void> saveToken(String token) {
-    // TODO: implement saveToken
-    throw UnimplementedError();
+  Future<void> saveToken(String token) async {
+    var res = ResponseToken.fromJson(json.decode(token));
+    PrefManager.setVal(PrefName.malToken, res);
+    run.value = true;
+    isInitialized.value = false;
+    this.token.value = res.accessToken;
+    Refresh.all();
   }
+
+  Future<ResponseToken?> refreshToken() async {
+    final malToken = PrefManager.getVal(PrefName.malToken);
+    if (malToken == null) {
+      throw Exception('Failed to load refresh token');
+    }
+    final response = await http.post(
+      Uri.parse('https://myanimelist.net/v1/oauth2/token'),
+      body: {
+        'client_id': MalStrings.clientId,
+        'grant_type': 'refresh_token',
+        'refresh_token': malToken.refreshToken,
+      },
+    );
+
+    if (response.statusCode == 200) {
+      final res = ResponseToken.fromJson(json.decode(response.body));
+      res.expiresIn += DateTime.now().millisecondsSinceEpoch;
+      PrefManager.setVal(PrefName.malToken, res);
+      token.value = res.accessToken;
+      _loadingToken.value = false;
+      return res;
+    } else {
+      throw Exception('Failed to refresh token');
+    }
+  }
+
+  final rateLimiter = RateLimiter();
 
   Future<T?> executeQuery<T>(
     String url, {
@@ -74,27 +148,64 @@ class MalController extends BaseServiceData {
     bool withNoHeaders = false,
     bool force = false,
     bool useToken = true,
-    bool includeNsfw = false,
     bool show = true,
   }) async {
-    if (adult && includeNsfw) {
+    await getToken();
+    if (!rateLimiter.canMakeRequest()) {
+      final secondsLeft =
+          rateLimiter.resetTime.difference(DateTime.now()).inSeconds;
+      debugPrint(
+          "Rate limited. Wait ${secondsLeft}s before making new requests.");
+      throw Exception("Rate limited. Wait ${secondsLeft}s.");
+    }
+    if (adult) {
       String op = Uri.dataFromString(url).queryParameters.isEmpty ? "?" : "&";
       url = "$url${op}nsfw=${adult ? '1' : '0'}";
     }
+
     headers ??= <String, String>{};
     if (!withNoHeaders) {
       headers["X-MAL-Client-ID"] = MalStrings.clientId;
       headers["Accept"] = "application/json";
-      /*if (useToken) {
+      if (useToken) {
         headers["Authorization"] = "Bearer ${token.value}";
-      }*/
+      }
     }
-
     final response = await http.get(
       Uri.parse(url),
       headers: headers,
     );
+
+    rateLimiter.increment();
+    debugPrint("Remaining Mal requests: ${rateLimiter.remainingRequests}");
+
     final jsonResponse = json.decode(response.body);
     return TypeFactory.get<T>(jsonResponse);
+  }
+}
+
+class RateLimiter {
+  static const int maxRequestsPerMinute = 60;
+  int requestCount = 0;
+  late DateTime resetTime;
+
+  RateLimiter() {
+    resetTime = DateTime.now().add(const Duration(minutes: 1));
+  }
+
+  bool canMakeRequest() {
+    if (DateTime.now().isAfter(resetTime)) {
+      requestCount = 0;
+      resetTime = DateTime.now().add(const Duration(minutes: 1));
+    }
+    return requestCount < maxRequestsPerMinute;
+  }
+
+  void increment() {
+    requestCount++;
+  }
+
+  int get remainingRequests {
+    return maxRequestsPerMinute - requestCount;
   }
 }

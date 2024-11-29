@@ -18,34 +18,34 @@ class SettingsThemeScreen extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => SettingsThemeScreenState();
 }
-class SettingsThemeScreenState extends BaseSettingsScreen {
 
+class SettingsThemeScreenState extends BaseSettingsScreen {
   @override
-  String title() =>  'Theme';
+  String title() => 'Theme';
 
   @override
   Widget icon() => Padding(
-    padding: const EdgeInsets.only(right: 16),
-    child: Icon(
-      size: 52,
-      Icons.color_lens_outlined,
-      color: Theme.of(context).colorScheme.onSurface,
-    ),
-  );
+        padding: const EdgeInsets.only(right: 16),
+        child: Icon(
+          size: 52,
+          Icons.color_lens_outlined,
+          color: Theme.of(context).colorScheme.onSurface,
+        ),
+      );
 
   @override
   List<Widget> get settingsList => [
-    const ThemeDropdown(),
-    const SizedBox(height: 8),
-    Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 24,
-      ),
-      child: SettingsAdaptor(
-        settings: _buildSettings(context),
-      ),
-    )
-  ];
+        const ThemeDropdown(),
+        const SizedBox(height: 8),
+        Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 24,
+          ),
+          child: SettingsAdaptor(
+            settings: _buildSettings(context),
+          ),
+        )
+      ];
 
   List<Setting> _buildSettings(BuildContext context) {
     final themeNotifier = Provider.of<ThemeNotifier>(context);
@@ -190,7 +190,4 @@ class SettingsThemeScreenState extends BaseSettingsScreen {
       ),
     ];
   }
-
-
 }
-

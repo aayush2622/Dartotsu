@@ -5,8 +5,9 @@ import '../../DataClass/Media.dart';
 import '../../api/Anilist/Anilist.dart';
 
 class MediaListViewModel extends GetxController {
-  var mediaList= Rxn<Map<String, List<Media>>>();
+  var mediaList = Rxn<Map<String, List<Media>>>();
   var isLoading = false.obs;
+
   Future<void> loadAll({
     required bool anime,
     required int userId,
@@ -15,7 +16,8 @@ class MediaListViewModel extends GetxController {
     try {
       if (mediaList.value != null) return;
       isLoading.value = true;
-      mediaList.value = await Anilist.query!.getMediaLists(anime: anime, userId: userId, sortOrder: sortOrder);
+      mediaList.value = await Anilist.query!
+          .getMediaLists(anime: anime, userId: userId, sortOrder: sortOrder);
     } finally {
       isLoading.value = false;
     }

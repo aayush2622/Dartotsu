@@ -39,7 +39,8 @@ final ThemeData lavenderLightTheme = ThemeData(
     iconTheme: IconThemeData(color: Color(0xFFFFFFFF)),
   ),
   textTheme: const TextTheme(
-    headlineLarge: TextStyle(color: Color(0xFF1C1B1E), fontSize: 20, fontWeight: FontWeight.bold),
+    headlineLarge: TextStyle(
+        color: Color(0xFF1C1B1E), fontSize: 20, fontWeight: FontWeight.bold),
     bodyLarge: TextStyle(color: Color(0xFF1C1B1E)),
   ),
   fontFamily: 'Poppins',
@@ -84,7 +85,8 @@ final ThemeData lavenderDarkTheme = ThemeData(
     iconTheme: IconThemeData(color: Color(0xFF381E72)),
   ),
   textTheme: const TextTheme(
-    headlineLarge: TextStyle(color: Color(0xFF381E72), fontSize: 20, fontWeight: FontWeight.bold),
+    headlineLarge: TextStyle(
+        color: Color(0xFF381E72), fontSize: 20, fontWeight: FontWeight.bold),
     bodyLarge: TextStyle(color: Color(0xFFE6E1E6)),
   ),
   fontFamily: 'Poppins',

@@ -26,15 +26,15 @@ class MangaChapter {
 
   MangaChapter.from(MangaChapter chapter)
       : this(
-    number: chapter.number,
-    link: chapter.link,
-    title: chapter.title,
-    description: chapter.description,
-    mChapter: chapter.mChapter,
-    scanlator: chapter.scanlator,
-    date: chapter.date,
-    progress: chapter.progress,
-  );
+          number: chapter.number,
+          link: chapter.link,
+          title: chapter.title,
+          description: chapter.description,
+          mChapter: chapter.mChapter,
+          scanlator: chapter.scanlator,
+          date: chapter.date,
+          progress: chapter.progress,
+        );
 
   List<MangaImage> get images => _images;
 
@@ -44,7 +44,8 @@ class MangaChapter {
 
     for (int i = 0; i <= ((images.length - 1) / 2).floor(); i++) {
       final int index = i * 2;
-      _dualPages.add(MapEntry(_images[index], index + 1 < _images.length ? _images[index + 1] : null));
+      _dualPages.add(MapEntry(_images[index],
+          index + 1 < _images.length ? _images[index + 1] : null));
     }
   }
 
@@ -54,6 +55,7 @@ class MangaChapter {
 class MangaImage {
   final String url;
   final bool useTransformation;
+
   //final Page? page;
 
   MangaImage({
@@ -63,11 +65,12 @@ class MangaImage {
   });
 
   // Constructor that accepts a String URL
-  MangaImage.fromUrl(String url, {bool useTransformation = false,// Page? page
-  })
-      : this(
-    url: url,
-    useTransformation: useTransformation,
-    //page: page,
-  );
+  MangaImage.fromUrl(
+    String url, {
+    bool useTransformation = false, // Page? page
+  }) : this(
+          url: url,
+          useTransformation: useTransformation,
+          //page: page,
+        );
 }

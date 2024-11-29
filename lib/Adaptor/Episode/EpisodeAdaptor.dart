@@ -79,14 +79,18 @@ class EpisodeAdaptorState extends State<EpisodeAdaptor> {
               finalOffset: Offset.zero,
               duration: const Duration(milliseconds: 200),
               child: GestureDetector(
-                onTap: () => Discord.setRpc(widget.mediaData, episodeList[index]),
+                onTap: () => Discord.setRpc(widget.mediaData,
+                    episode: episodeList[index]),
                 child: Container(
                   width: double.infinity,
                   margin:
                       const EdgeInsets.symmetric(horizontal: 18, vertical: 4),
                   child: Opacity(
                     opacity: isWatched ? 0.5 : 1.0,
-                    child: EpisodeListView(episode: episodeList[index], isWatched: isWatched,mediaData: widget.mediaData),
+                    child: EpisodeListView(
+                        episode: episodeList[index],
+                        isWatched: isWatched,
+                        mediaData: widget.mediaData),
                   ),
                 ),
               ),

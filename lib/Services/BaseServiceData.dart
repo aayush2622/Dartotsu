@@ -8,7 +8,7 @@ abstract class BaseServiceData extends GetxController {
 
   RxBool isInitialized = false.obs;
   RxString token = "".obs;
-  RxString username= "".obs;
+  RxString username = "".obs;
   RxString avatar = "".obs;
   RxBool run = true.obs;
   bool adult = false;

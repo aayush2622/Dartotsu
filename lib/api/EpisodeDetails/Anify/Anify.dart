@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:dantotsu/DataClass/Media.dart';
 import 'package:http/http.dart' as http;
 import 'package:json_annotation/json_annotation.dart';
@@ -8,25 +9,30 @@ import '../../../DataClass/Episode.dart';
 part 'Anify.g.dart';
 
 class Anify {
-  static Future<Map<String, Episode>> fetchAndParseMetadata(Media mediaData) async {
-    final response = await http.get(Uri.parse('https://anify.eltik.cc/content-metadata/${mediaData.id}'));
+  static Future<Map<String, Episode>> fetchAndParseMetadata(
+      Media mediaData) async {
+    final response = await http.get(
+        Uri.parse('https://anify.eltik.cc/content-metadata/${mediaData.id}'));
     if (response.statusCode == 200) {
-      final List<dynamic> jsonResponse = jsonDecode(response.body) as List<dynamic>;
+      final List<dynamic> jsonResponse =
+          jsonDecode(response.body) as List<dynamic>;
 
-      List<AnifyElement> anifyElements = jsonResponse.map((json) => AnifyElement.fromJson(json)).toList();
+      List<AnifyElement> anifyElements =
+          jsonResponse.map((json) => AnifyElement.fromJson(json)).toList();
 
       if (anifyElements.isNotEmpty) {
         return anifyElements.first.data?.asMap().map((_, datum) {
-          return MapEntry(
-            datum.number.toString(),
-            Episode(
-              number: datum.number.toString(),
-              title: datum.title,
-              desc: datum.description,
-              thumb: datum.img,
-            ),
-          );
-        }) ?? {};
+              return MapEntry(
+                datum.number.toString(),
+                Episode(
+                  number: datum.number.toString(),
+                  title: datum.title,
+                  desc: datum.description,
+                  thumb: datum.img,
+                ),
+              );
+            }) ??
+            {};
       }
     }
     return {};
@@ -41,7 +47,9 @@ class AnifyElement {
 
   AnifyElement({this.providerID, this.data});
 
-  factory AnifyElement.fromJson(Map<String, dynamic> json) => _$AnifyElementFromJson(json);
+  factory AnifyElement.fromJson(Map<String, dynamic> json) =>
+      _$AnifyElementFromJson(json);
+
   Map<String, dynamic> toJson() => _$AnifyElementToJson(this);
 }
 
@@ -70,9 +78,6 @@ class Datum {
   });
 
   factory Datum.fromJson(Map<String, dynamic> json) => _$DatumFromJson(json);
+
   Map<String, dynamic> toJson() => _$DatumToJson(this);
 }
-
-
-
-

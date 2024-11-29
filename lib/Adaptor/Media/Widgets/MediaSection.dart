@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import '../MediaAdaptor.dart';
+
 import '../../../DataClass/Media.dart';
+import '../MediaAdaptor.dart';
 
 Widget MediaSection({
   required BuildContext context,
@@ -10,7 +11,7 @@ Widget MediaSection({
   List<Media>? mediaList,
   List<Widget>? customNullListIndicator,
   ScrollController? scrollController,
-  Function(int index,Media media)? onMediaTap,
+  Function(int index, Media media)? onMediaTap,
 }) {
   var theme = Theme.of(context);
 
@@ -54,33 +55,37 @@ Widget MediaSection({
       child: Center(
         child: customNullListIndicator?.isNotEmpty ?? false
             ? Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: customNullListIndicator!,
-        )
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: customNullListIndicator!,
+              )
             : const Text(
-          'Nothing here',
-          style: TextStyle(
-            fontFamily: 'Poppins',
-            fontSize: 16,
-          ),
-        ),
+                'Nothing here',
+                style: TextStyle(
+                  fontFamily: 'Poppins',
+                  fontSize: 16,
+                ),
+              ),
       ),
     );
   }
 
   Widget buildMediaContent() {
-    return mediaList == null ? const SizedBox(
-      height: 250,
-      child: Center(
-        child: CircularProgressIndicator(),
-      ),
-    ) : mediaList.isEmpty ? buildEmptyState() : MediaAdaptor(
-      type: type,
-      mediaList: mediaList,
-      isLarge: isLarge,
-      scrollController: scrollController,
-      onMediaTap: onMediaTap,
-    );
+    return mediaList == null
+        ? const SizedBox(
+            height: 250,
+            child: Center(
+              child: CircularProgressIndicator(),
+            ),
+          )
+        : mediaList.isEmpty
+            ? buildEmptyState()
+            : MediaAdaptor(
+                type: type,
+                mediaList: mediaList,
+                isLarge: isLarge,
+                scrollController: scrollController,
+                onMediaTap: onMediaTap,
+              );
   }
 
   return Column(

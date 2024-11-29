@@ -24,12 +24,12 @@ class MangaScreen extends StatefulWidget {
 }
 
 class MangaScreenState extends State<MangaScreen> {
-
   @override
   Widget build(BuildContext context) {
     var service = Provider.of<MediaServiceProvider>(context).currentService;
     var screen = service.mangaScreen;
-    if (screen == null) return service.notImplemented(widget.runtimeType.toString());
+    if (screen == null)
+      return service.notImplemented(widget.runtimeType.toString());
     screen.init();
     return Scaffold(
       body: Stack(
@@ -43,8 +43,7 @@ class MangaScreenState extends State<MangaScreen> {
 
   Widget _buildRefreshContent(BaseMangaScreen service) {
     return RefreshIndicator(
-      onRefresh: () async =>
-      Refresh.activity[service.refreshID]?.value = true,
+      onRefresh: () async => Refresh.activity[service.refreshID]?.value = true,
       child: CustomScrollConfig(
         context,
         controller: service.scrollController,
@@ -70,20 +69,20 @@ class MangaScreenState extends State<MangaScreen> {
       left: (0.screenWidth() / 2) - 24.0,
       child: Obx(() => service.scrollToTop.value
           ? Container(
-        decoration: BoxDecoration(
-          color: theme.isDarkMode ? greyNavDark : greyNavLight,
-          borderRadius: BorderRadius.circular(64.0),
-        ),
-        padding: const EdgeInsets.all(4.0),
-        child: IconButton(
-          icon: const Icon(Icons.arrow_upward),
-          onPressed: () => service.scrollController.animateTo(
-            0,
-            duration: const Duration(milliseconds: 500),
-            curve: Curves.easeInOut,
-          ),
-        ),
-      )
+              decoration: BoxDecoration(
+                color: theme.isDarkMode ? greyNavDark : greyNavLight,
+                borderRadius: BorderRadius.circular(64.0),
+              ),
+              padding: const EdgeInsets.all(4.0),
+              child: IconButton(
+                icon: const Icon(Icons.arrow_upward),
+                onPressed: () => service.scrollController.animateTo(
+                  0,
+                  duration: const Duration(milliseconds: 500),
+                  curve: Curves.easeInOut,
+                ),
+              ),
+            )
           : const SizedBox()),
     );
   }
@@ -96,66 +95,66 @@ class MangaScreenState extends State<MangaScreen> {
         height: 486.statusBar(),
         child: service.running.value
             ? Stack(
-          children: [
-            SizedBox(
-              height: 464.statusBar(),
-              child: mediaDataList != null
-                  ? MediaAdaptor(type: 1, mediaList: mediaDataList)
-                  : const Center(child: CircularProgressIndicator()),
-            ),
-            const MediaSearchBar(
-              title: "MANGA",
-            ),
-            Positioned(
-              bottom: 92,
-              left: 8.0,
-              right: 8.0,
-              child: Center(
-                child: ChipsWidget(
-                  chips: [
-                    ChipData(
-                      label: 'Trending Manga',
-                      action: () => chipCall('MANGA'),
+                children: [
+                  SizedBox(
+                    height: 464.statusBar(),
+                    child: mediaDataList != null
+                        ? MediaAdaptor(type: 1, mediaList: mediaDataList)
+                        : const Center(child: CircularProgressIndicator()),
+                  ),
+                  const MediaSearchBar(
+                    title: "MANGA",
+                  ),
+                  Positioned(
+                    bottom: 92,
+                    left: 8.0,
+                    right: 8.0,
+                    child: Center(
+                      child: ChipsWidget(
+                        chips: [
+                          ChipData(
+                            label: 'Trending Manga',
+                            action: () => chipCall('MANGA'),
+                          ),
+                          ChipData(
+                            label: 'Trending Manhwa',
+                            action: () => chipCall('MANHWA'),
+                          ),
+                          ChipData(
+                            label: 'Trending Novel',
+                            action: () => chipCall('NOVEL'),
+                          ),
+                        ],
+                      ),
                     ),
-                    ChipData(
-                      label: 'Trending Manhwa',
-                      action: () => chipCall('MANHWA'),
+                  ),
+                  Positioned(
+                    bottom: 0,
+                    left: 8.0,
+                    right: 8.0,
+                    child: SlideInAnimation(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          MediaCard(
+                            context,
+                            'GENRE',
+                            const Text(''),
+                            "https://s4.anilist.co/file/anilistcdn/media/manga/banner/105778-wk5qQ7zAaTGl.jpg",
+                          ),
+                          MediaCard(
+                            context,
+                            'TOP SCORE',
+                            const Text(''),
+                            "https://s4.anilist.co/file/anilistcdn/media/manga/banner/30002-3TuoSMl20fUX.jpg",
+                          ),
+                        ],
+                      ),
                     ),
-                    ChipData(
-                      label: 'Trending Novel',
-                      action: () => chipCall('NOVEL'),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Positioned(
-              bottom: 0,
-              left: 8.0,
-              right: 8.0,
-              child: SlideInAnimation(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    MediaCard(
-                      context,
-                      'GENRE',
-                      const Text(''),
-                      "https://s4.anilist.co/file/anilistcdn/media/manga/banner/105778-wk5qQ7zAaTGl.jpg",
-                    ),
-                    MediaCard(
-                      context,
-                      'TOP SCORE',
-                      const Text(''),
-                      "https://s4.anilist.co/file/anilistcdn/media/manga/banner/30002-3TuoSMl20fUX.jpg",
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(height: 16),
-          ],
-        )
+                  ),
+                  const SizedBox(height: 16),
+                ],
+              )
             : const LoadingWidget(),
       );
     });

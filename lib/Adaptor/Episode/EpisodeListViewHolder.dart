@@ -14,8 +14,12 @@ class EpisodeListView extends StatelessWidget {
   final Episode episode;
   final bool isWatched;
   final Media mediaData;
+
   const EpisodeListView(
-      {super.key, required this.episode, required this.isWatched, required this.mediaData});
+      {super.key,
+      required this.episode,
+      required this.isWatched,
+      required this.mediaData});
 
   @override
   Widget build(BuildContext context) {
@@ -149,11 +153,10 @@ class EpisodeListView extends StatelessWidget {
               ),
             ),
           handleProgress(
-            context: context,
-            mediaId: mediaData.id,
-            ep: episode.number.toDouble().toInt(),
-            width: 142
-          )
+              context: context,
+              mediaId: mediaData.id,
+              ep: episode.number.toDouble().toInt(),
+              width: 142)
         ],
       ),
     );

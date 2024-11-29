@@ -1,25 +1,35 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_web_auth_2/flutter_web_auth_2.dart';
 
 import '../../Functions/Function.dart';
-import '../../Services/ServiceSwitcher.dart';
 import '../../Widgets/AlertDialogBuilder.dart';
 import '../../Widgets/CustomBottomDialog.dart';
+import 'Anilist.dart';
 
 CustomBottomDialog login(BuildContext context) {
-  var anilist = Provider.of<MediaServiceProvider>(context,listen: false).Anilist.data;
   return CustomBottomDialog(
     title: "Login to Anilist",
     viewList: [
       const SizedBox(height: 38),
       _buildLoginButton(
         context,
-        onPressed: () {
-          openLinkInBrowser(
-              'https://anilist.co/api/v2/oauth/authorize?client_id=14959&response_type=token');
+        onPressed: () async {
           Navigator.pop(context);
+          const url =
+              'https://anilist.co/api/v2/oauth/authorize?client_id=14959&response_type=token';
+          var response = await FlutterWebAuth2.authenticate(
+            options: const FlutterWebAuth2Options(
+              windowName: 'Dartotsu',
+              useWebview: true
+            ),
+            url: url,
+            callbackUrlScheme: 'dantotsu',
+          );
+          final token = RegExp(r'(?<=access_token=).+(?=&token_type)')
+              .firstMatch(response.toString())
+              ?.group(0);
+          if (token != null) Anilist.saveToken(token);
         },
         icon: 'assets/svg/anilist.svg',
         label: 'Login from Browser',
@@ -40,7 +50,8 @@ CustomBottomDialog login(BuildContext context) {
                 onChanged: (value) => (token = value),
               ),
             )
-            ..setPositiveButton('Ok', () async => await anilist.saveToken(token))
+            ..setPositiveButton(
+                'Ok', () async => await Anilist.saveToken(token))
             ..setNegativeButton('Cancel', null)
             ..setOnDismissListener(() => Navigator.pop(context))
             ..show();
@@ -52,10 +63,11 @@ CustomBottomDialog login(BuildContext context) {
     ],
   );
 }
+
 Widget _buildLoginButton(BuildContext context,
     {required Function() onPressed,
-      required String icon,
-      required String label}) {
+    required String icon,
+    required String label}) {
   final theme = Theme.of(context).colorScheme;
   return ElevatedButton.icon(
     onPressed: () => onPressed(),

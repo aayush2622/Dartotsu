@@ -1,5 +1,3 @@
-
-
 import 'package:dantotsu/Functions/string_extensions.dart';
 
 import '../../../Model/Manga.dart';
@@ -63,6 +61,7 @@ class MManga {
                     .toList()
                 : []);
   }
+
   Map<String, dynamic> toJson() => {
         'name': name,
         'link': link,

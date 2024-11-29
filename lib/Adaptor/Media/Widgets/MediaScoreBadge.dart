@@ -23,9 +23,9 @@ Widget ScoreBadge(BuildContext context, Media mediaInfo) {
             padding: const EdgeInsets.only(top: 2.0),
             child: Text(
               ((mediaInfo.userScore == 0
-                  ? mediaInfo.meanScore ?? 0
-                  : mediaInfo.userScore ?? 0) /
-                  10.0)
+                          ? mediaInfo.meanScore ?? 0
+                          : mediaInfo.userScore ?? 0) /
+                      10.0)
                   .toString(),
               style: TextStyle(
                 fontFamily: 'Poppins',

@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:dantotsu/api/Mangayomi/dom_extensions.dart';
 import 'package:flutter_qjs/flutter_qjs.dart';
 import 'package:html/dom.dart';
@@ -6,9 +7,12 @@ import 'package:html/parser.dart';
 
 class JsDomSelector {
   late JavascriptRuntime runtime;
+
   JsDomSelector(this.runtime);
+
   final Map<int, Element?> _elements = {};
   int _elementKey = 0;
+
   void init() {
     runtime.onMessage('get_doc_element', (dynamic args) {
       final input = args[0];

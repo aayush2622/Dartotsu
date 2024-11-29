@@ -18,7 +18,8 @@ class SlideUpAnimation extends StatefulWidget {
   SlideUpAnimationState createState() => SlideUpAnimationState();
 }
 
-class SlideUpAnimationState extends State<SlideUpAnimation> with SingleTickerProviderStateMixin {
+class SlideUpAnimationState extends State<SlideUpAnimation>
+    with SingleTickerProviderStateMixin {
   late final AnimationController _animationController;
   late final Animation<Offset> _slideAnimation;
 

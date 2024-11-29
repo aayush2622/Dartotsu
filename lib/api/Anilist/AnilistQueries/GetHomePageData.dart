@@ -8,8 +8,7 @@ extension on AnilistQueries {
       List<Media> removedMedia = [];
       final homeLayoutMap = PrefManager.getVal(PrefName.anilistHomeLayout);
 
-      var response =
-          await executeQuery<UserListResponse>(_queryHomeList());
+      var response = await executeQuery<UserListResponse>(_queryHomeList());
       Map<String, List<Media>> returnMap = {};
 
       void processMedia(String type, List<api.MediaList>? currentMedia,
@@ -63,6 +62,7 @@ extension on AnilistQueries {
             .reversed
             .toList();
       }
+
       Map<String, void Function()> processMappings = {
         'Continue Watching': () {
           processMedia(
@@ -118,7 +118,7 @@ extension on AnilistQueries {
                   ?.expand((x) => x.entries ?? []))) {
             var media = Media.mediaListData(entry);
             if (['RELEASING', 'FINISHED'].contains(media.status)) {
-              media.relation = entry.media?.type?.name ?? "" ;
+              media.relation = entry.media?.type?.name ?? "";
               subMap[media.id] = media;
             }
           }
@@ -130,7 +130,8 @@ extension on AnilistQueries {
       };
 
       homeLayoutMap.entries
-          .where((entry) => entry.value && processMappings.containsKey(entry.key))
+          .where(
+              (entry) => entry.value && processMappings.containsKey(entry.key))
           .forEach((entry) => processMappings[entry.key]!());
 
       returnMap["hidden"] = removedMedia.toSet().toList();
@@ -140,7 +141,8 @@ extension on AnilistQueries {
     }
   }
 }
-String _queryHomeList(){
+
+String _queryHomeList() {
   final homeLayoutMap = PrefManager.getVal(PrefName.anilistHomeLayout);
   final Map<String, List<String>> queryMappings = {
     'Continue Watching': [
@@ -173,6 +175,7 @@ String _queryHomeList(){
       .join(",");
   return "{$generateOrderedQueries}";
 }
+
 String _recommendationQuery() => '''
   Page(page: 1, perPage: 30) { 
     pageInfo { 

@@ -1,5 +1,7 @@
+import 'package:collection/collection.dart';
 import 'package:dantotsu/DataClass/Media.dart';
 import 'package:dantotsu/DataClass/SearchResults.dart';
+import 'package:dantotsu/api/MyAnimeList/Data/userData.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
@@ -7,10 +9,13 @@ import '../../Preferences/PrefManager.dart';
 import '../../Preferences/Preferences.dart';
 import '../../Services/Api/Queries.dart';
 import 'Data/data.dart';
+import 'Data/user.dart';
 import 'Mal.dart';
 import 'MalQueries/MalStrings.dart';
 
 part 'MalQueries/GetAnimeMangaListData.dart';
+part 'MalQueries/GetHomePageData.dart';
+part 'MalQueries/GetUserData.dart';
 
 class MalQueries extends Queries {
   Future<T?> Function<T>(
@@ -19,11 +24,10 @@ class MalQueries extends Queries {
     bool withNoHeaders,
     bool force,
     bool useToken,
-    bool includeNsfw,
     bool show,
-  }) externalQuery;
+  }) executeQuery;
 
-  MalQueries(this.externalQuery);
+  MalQueries(this.executeQuery);
 
   @override
   Future<Map<String, List<Media>>> getAnimeList() => _getAnimeList();
@@ -49,9 +53,11 @@ class MalQueries extends Queries {
   @override
   Future<Map<String, List<Media>>> getMangaList() => _getMangaList();
 
-  Future<List<Media>> getTrending({String? year, String? season}) => _getTrending(year: year, season: season);
+  Future<List<Media>> getTrending({String? year, String? season}) =>
+      _getTrending(year: year, season: season);
 
-  Future<List<Media>> loadNextPage(String type, int page) => _loadNextPage(type, page);
+  Future<List<Media>> loadNextPage(String type, int page) =>
+      _loadNextPage(type, page);
 
   @override
   Future<Media?>? getMedia(int id, {bool mal = true}) {
@@ -67,15 +73,10 @@ class MalQueries extends Queries {
   }
 
   @override
-  Future<bool>? getUserData() {
-    return null;
-  }
+  Future<bool>? getUserData() => _getUserData();
 
   @override
-  Future<Map<String, List<Media>>>? initHomePage() {
-    // TODO: implement initHomePage
-    throw UnimplementedError();
-  }
+  Future<Map<String, List<Media>>>? initHomePage() => _initHomePage();
 
   @override
   Future<Media?>? mediaDetails(Media media) {
@@ -108,6 +109,4 @@ class MalQueries extends Queries {
     // TODO: implement search
     throw UnimplementedError();
   }
-
-
 }

@@ -1,4 +1,3 @@
-
 import 'package:dantotsu/DataClass/Character.dart';
 import 'package:flutter/material.dart';
 
@@ -15,20 +14,20 @@ class CharacterViewHolder extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-         ClipRRect(
-            borderRadius: BorderRadius.circular(16.0),
-            child: cachedNetworkImage(
-              imageUrl: charInfo.image ?? '',
-              fit: BoxFit.cover,
+        ClipRRect(
+          borderRadius: BorderRadius.circular(16.0),
+          child: cachedNetworkImage(
+            imageUrl: charInfo.image ?? '',
+            fit: BoxFit.cover,
+            width: 108,
+            height: 160,
+            placeholder: (context, url) => Container(
+              color: Colors.white12,
               width: 108,
               height: 160,
-              placeholder: (context, url) => Container(
-                color: Colors.white12,
-                width: 108,
-                height: 160,
-              ),
             ),
           ),
+        ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -59,4 +58,3 @@ class CharacterViewHolder extends StatelessWidget {
     );
   }
 }
-

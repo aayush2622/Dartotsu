@@ -4,13 +4,14 @@ import 'package:flutter/material.dart';
 
 import '../../../../../Animation/ScaleAnimation.dart';
 import '../../../../../DataClass/User.dart';
-import 'ItemFollower.dart';
 import '../../../../../Widgets/ScrollConfig.dart';
 import '../../../../../api/Anilist/Anilist.dart';
+import 'ItemFollower.dart';
 
 class FollowerWidget extends StatelessWidget {
   final List<userData>? follower;
   final String type;
+
   const FollowerWidget({super.key, this.follower, required this.type});
 
   @override
@@ -18,7 +19,8 @@ class FollowerWidget extends StatelessWidget {
     if (follower == null || follower!.isEmpty) return const SizedBox();
 
     final followers = List<userData>.from(follower!);
-    final targetIndex = followers.indexWhere((user) => Anilist.username.value.isEqualTo(user.name));
+    final targetIndex = followers
+        .indexWhere((user) => Anilist.username.value.isEqualTo(user.name));
     if (targetIndex != -1) {
       final targetUser = followers.removeAt(targetIndex);
       followers.insert(0, targetUser);

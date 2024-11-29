@@ -38,7 +38,8 @@ final ThemeData oriaxLightTheme = ThemeData(
     iconTheme: IconThemeData(color: Color(0xFFFFFFFF)),
   ),
   textTheme: const TextTheme(
-    headlineLarge: TextStyle(color: Color(0xFF201A19), fontSize: 20, fontWeight: FontWeight.bold),
+    headlineLarge: TextStyle(
+        color: Color(0xFF201A19), fontSize: 20, fontWeight: FontWeight.bold),
     bodyLarge: TextStyle(color: Color(0xFF201A19)),
   ),
   fontFamily: 'Poppins',
@@ -82,7 +83,8 @@ final ThemeData oriaxDarkTheme = ThemeData(
     iconTheme: IconThemeData(color: Color(0xFF322E0A)),
   ),
   textTheme: const TextTheme(
-    headlineLarge: TextStyle(color: Color(0xFF322E0A), fontSize: 20, fontWeight: FontWeight.bold),
+    headlineLarge: TextStyle(
+        color: Color(0xFF322E0A), fontSize: 20, fontWeight: FontWeight.bold),
     bodyLarge: TextStyle(color: Color(0xFFEDE0DE)),
   ),
   fontFamily: 'Poppins',

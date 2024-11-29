@@ -11,8 +11,8 @@ class OtherService extends MediaService {
   BaseServiceData get data => Other;
 
   @override
-  MediaServiceType get type => MediaServiceType.Other;
+  BaseAnimeScreen? get animeScreen => Get.put(OtherAnimeScreen());
 
   @override
-  BaseAnimeScreen? get animeScreen => Get.put(OtherAnimeScreen());
+  String get iconPath => "assets/svg/discord.svg";
 }

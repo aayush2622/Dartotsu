@@ -22,7 +22,6 @@ class AnimeParser extends BaseParser {
   var viewType = 0.obs;
   var dataLoaded = false.obs;
 
-
   void init(Media mediaData) async {
     if (dataLoaded.value) return;
     viewType.value = mediaData.selected?.recyclerStyle ??
@@ -44,7 +43,8 @@ class AnimeParser extends BaseParser {
   @override
   Future<void> searchMedia(source, mediaData, {onFinish}) async {
     episodeList.value = null;
-    super.searchMedia(source, mediaData, onFinish: (r) => getEpisode(r, source));
+    super
+        .searchMedia(source, mediaData, onFinish: (r) => getEpisode(r, source));
   }
 
   void getEpisode(MManga media, Source source) async {
@@ -53,11 +53,13 @@ class AnimeParser extends BaseParser {
     dataLoaded.value = true;
     var chapters = m.chapters;
     episodeList.value = Map.fromEntries(
-      chapters?.reversed.map((e) {
-          final episode = MChapterToEpisode(e, media);
-          return MapEntry(episode.number, episode);
-        },
-      ) ?? [],
+      chapters?.reversed.map(
+            (e) {
+              final episode = MChapterToEpisode(e, media);
+              return MapEntry(episode.number, episode);
+            },
+          ) ??
+          [],
     );
   }
 
@@ -77,9 +79,11 @@ class AnimeParser extends BaseParser {
   }
 
   Episode MChapterToEpisode(MChapter chapter, MManga? selectedMedia) {
-    var episodeNumber = ChapterRecognition.parseChapterNumber(selectedMedia?.name ?? '', chapter.name ?? '');
+    var episodeNumber = ChapterRecognition.parseChapterNumber(
+        selectedMedia?.name ?? '', chapter.name ?? '');
     return Episode(
-      number: episodeNumber != -1 ? episodeNumber.toString() : chapter.name ?? '',
+      number:
+          episodeNumber != -1 ? episodeNumber.toString() : chapter.name ?? '',
       link: chapter.url,
       title: chapter.name,
       thumb: null,
@@ -89,4 +93,3 @@ class AnimeParser extends BaseParser {
     );
   }
 }
-

@@ -39,7 +39,8 @@ final ThemeData greenLightTheme = ThemeData(
     iconTheme: IconThemeData(color: Color(0xFFFFFFFF)),
   ),
   textTheme: const TextTheme(
-    headlineLarge: TextStyle(color: Color(0xFF1B1C18), fontSize: 20, fontWeight: FontWeight.bold),
+    headlineLarge: TextStyle(
+        color: Color(0xFF1B1C18), fontSize: 20, fontWeight: FontWeight.bold),
     bodyLarge: TextStyle(color: Color(0xFF1B1C18)),
   ),
   fontFamily: 'Poppins',
@@ -84,10 +85,9 @@ final ThemeData greenDarkTheme = ThemeData(
     iconTheme: IconThemeData(color: Color(0xFF1D3700)),
   ),
   textTheme: const TextTheme(
-    headlineLarge: TextStyle(color: Color(0xFF1D3700), fontSize: 20, fontWeight: FontWeight.bold),
+    headlineLarge: TextStyle(
+        color: Color(0xFF1D3700), fontSize: 20, fontWeight: FontWeight.bold),
     bodyLarge: TextStyle(color: Color(0xFFE3E3DB)),
   ),
   fontFamily: 'Poppins',
 );
-
-

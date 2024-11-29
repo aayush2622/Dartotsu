@@ -19,7 +19,7 @@ AnimeID _$AnimeIDFromJson(Map<String, dynamic> json) => AnimeID(
       livechartId: (json['livechart_id'] as num?)?.toInt(),
       thetvdbId: (json['thetvdb_id'] as num?)?.toInt(),
       themoviedbId: json['themoviedb_id'].toString(),
-);
+    );
 
 Map<String, dynamic> _$AnimeIDToJson(AnimeID instance) => <String, dynamic>{
       'anime-planet_id': instance.animePlanetId,
@@ -34,4 +34,4 @@ Map<String, dynamic> _$AnimeIDToJson(AnimeID instance) => <String, dynamic>{
       'livechart_id': instance.livechartId,
       'thetvdb_id': instance.thetvdbId,
       'themoviedb_id': instance.themoviedbId,
-};
+    };

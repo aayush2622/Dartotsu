@@ -1,6 +1,7 @@
 import 'package:dantotsu/Functions/Function.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+
 import '../../../../../Widgets/GenreItem.dart';
 
 Widget GenreWidget(BuildContext context, List<String> genre) {
@@ -30,20 +31,18 @@ Widget GenreWidget(BuildContext context, List<String> genre) {
           crossAxisCount: crossAxisCount,
           children: List.generate(
             genre.length,
-                (index) {
+            (index) {
               return GestureDetector(
                 onTap: () {},
                 onLongPress: () => copyToClipboard(genre[index]),
                 child: SizedBox(
-                  width: 154,
-                  height: 54,
-                  child: GenreItem(context, genre[index].toUpperCase())
-                ),
+                    width: 154,
+                    height: 54,
+                    child: GenreItem(context, genre[index].toUpperCase())),
               );
             },
           ),
         ),
-
       ],
     ),
   );

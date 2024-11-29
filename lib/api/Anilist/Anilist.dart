@@ -1,8 +1,10 @@
 import 'dart:convert';
+
 import 'package:dantotsu/Services/BaseServiceData.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+
 import '../../Functions/Function.dart';
 import '../../Preferences/PrefManager.dart';
 import '../../Preferences/Preferences.dart';
@@ -14,7 +16,9 @@ import 'AnilistViewModel.dart';
 import 'Login.dart' as anilist_login;
 
 var Anilist = Get.put(AnilistController());
-class AnilistController extends BaseServiceData { // TODO: better login page
+
+class AnilistController extends BaseServiceData {
+  // TODO: better login page
 
   late final AnilistMutations mutation;
   List<String>? genres;
@@ -32,8 +36,13 @@ class AnilistController extends BaseServiceData { // TODO: better login page
   List<String>? mangaCustomLists;
 
   final List<String> sortBy = [
-    "SCORE_DESC", "POPULARITY_DESC", "TRENDING_DESC", "START_DATE_DESC",
-    "TITLE_ENGLISH", "TITLE_ENGLISH_DESC", "SCORE"
+    "SCORE_DESC",
+    "POPULARITY_DESC",
+    "TRENDING_DESC",
+    "START_DATE_DESC",
+    "TITLE_ENGLISH",
+    "TITLE_ENGLISH_DESC",
+    "SCORE"
   ];
 
   final List<String> authorRoles = ["Original Creator", "Story & Art", "Story"];
@@ -57,22 +66,34 @@ class AnilistController extends BaseServiceData { // TODO: better login page
   Map<String, int> getSeason(bool next) {
     int season = currentSeason + (next ? 0 : -2);
     int year = currentYear;
-    if (season > 3) { season = 0; year++; }
-    if (season < 0) { season = 3; year--; }
+    if (season > 3) {
+      season = 0;
+      year++;
+    }
+    if (season < 0) {
+      season = 3;
+      year--;
+    }
     return {seasons[season]: year};
   }
 
   List<Map<String, int>> get currentSeasons => [
-    getSeason(false),
-    {seasons[currentSeason - 1]: currentYear},
-    getSeason(true),
-  ];
+        getSeason(false),
+        {seasons[currentSeason - 1]: currentYear},
+        getSeason(true),
+      ];
 
   @override
   bool getSavedToken() {
     token.value = PrefManager.getVal(PrefName.anilistToken);
+
+    if(token.isNotEmpty) {
+      query?.getUserData();
+    }
+
     return token.isNotEmpty;
   }
+
   @override
   Future<void> saveToken(String token) async {
     PrefManager.setVal(PrefName.anilistToken, token);
@@ -81,10 +102,11 @@ class AnilistController extends BaseServiceData { // TODO: better login page
     isInitialized.value = false;
     Refresh.allButNot(1);
   }
+
   @override
-  void login(BuildContext context){
-    showCustomBottomDialog(context, anilist_login.login(context));
-  }
+  void login(BuildContext context) => showCustomBottomDialog(context, anilist_login.login(context));
+
+
   @override
   void removeSavedToken() {
     token.value = '';
@@ -107,15 +129,16 @@ class AnilistController extends BaseServiceData { // TODO: better login page
   }
 
   Future<T?> executeQuery<T>(
-      String query, {
-        String variables = "",
-        bool force = false,
-        bool useToken = true,
-        bool show = true,
-      }) async {
+    String query, {
+    String variables = "",
+    bool force = false,
+    bool useToken = true,
+    bool show = true,
+  }) async {
     try {
       if (rateLimitReset > DateTime.now().millisecondsSinceEpoch ~/ 1000) {
-        final secondsLeft = rateLimitReset - DateTime.now().millisecondsSinceEpoch ~/ 1000;
+        final secondsLeft =
+            rateLimitReset - DateTime.now().millisecondsSinceEpoch ~/ 1000;
         snackString("Rate limited, wait ${secondsLeft}s");
         throw Exception("Rate limited, wait ${secondsLeft}s");
       }
@@ -123,7 +146,8 @@ class AnilistController extends BaseServiceData { // TODO: better login page
       final headers = {
         'Content-Type': 'application/json; charset=UTF-8',
         'Accept': 'application/json',
-        if (token.isNotEmpty && useToken) 'Authorization': 'Bearer ${token.value}',
+        if (token.isNotEmpty && useToken)
+          'Authorization': 'Bearer ${token.value}',
       };
 
       final response = await http.post(
@@ -132,12 +156,14 @@ class AnilistController extends BaseServiceData { // TODO: better login page
         body: jsonEncode({"query": query, "variables": variables}),
       );
 
-      final remaining = int.parse(response.headers['x-ratelimit-remaining'] ?? '-1');
-      debugPrint("Remaining requests: $remaining");
+      final remaining =
+          int.parse(response.headers['x-ratelimit-remaining'] ?? '-1');
+      debugPrint("Remaining Anilist requests: $remaining");
 
       if (response.statusCode == 429) {
         final retry = int.parse(response.headers['Retry-After'] ?? '-1');
-        rateLimitReset = int.parse(response.headers['x-ratelimit-limit'] ?? '0');
+        rateLimitReset =
+            int.parse(response.headers['x-ratelimit-limit'] ?? '0');
         snackString("Rate limited, retry after $retry seconds");
         throw Exception("Rate limited, retry after $retry seconds");
       }
@@ -157,4 +183,3 @@ class AnilistController extends BaseServiceData { // TODO: better login page
     }
   }
 }
-

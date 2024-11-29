@@ -11,6 +11,9 @@ abstract class BaseMediaScreen extends GetxController {
   var running = true.obs;
   var scrollController = ScrollController();
   var initialLoad = false;
+
+  List<Widget> mediaContent(BuildContext context);
+
   void resetPageData();
 
   int get refreshID;

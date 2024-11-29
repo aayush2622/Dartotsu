@@ -41,6 +41,7 @@ class Page {
   });
 
   factory Page.fromJson(Map<String, dynamic> json) => _$PageFromJson(json);
+
   Map<String, dynamic> toJson() => _$PageToJson(this);
 }
 
@@ -60,6 +61,8 @@ class PageInfo {
     this.hasNextPage,
   });
 
-  factory PageInfo.fromJson(Map<String, dynamic> json) => _$PageInfoFromJson(json);
+  factory PageInfo.fromJson(Map<String, dynamic> json) =>
+      _$PageInfoFromJson(json);
+
   Map<String, dynamic> toJson() => _$PageInfoToJson(this);
 }

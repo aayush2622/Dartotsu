@@ -6,5 +6,4 @@ import 'BaseMediaScreen.dart';
 abstract class BaseHomeScreen extends BaseMediaScreen {
   var listImages = Rx<List<String?>>([null, null]);
 
-  List<Widget> mediaContent(BuildContext context);
 }

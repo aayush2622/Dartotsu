@@ -1,46 +1,43 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dantotsu/Screens/Settings/BaseSettingsScreen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 
 import '../../Functions/Function.dart';
-import '../../Services/ServiceSwitcher.dart';
 import '../../Widgets/AlertDialogBuilder.dart';
+import '../../Widgets/LoadSvg.dart';
+import '../../api/Anilist/Anilist.dart';
 import '../../api/Discord/Discord.dart';
+import '../../api/MyAnimeList/Mal.dart';
 
 class SettingsAccountScreen extends StatefulWidget {
   const SettingsAccountScreen({super.key});
 
   @override
   State<StatefulWidget> createState() => SettingsAccountScreenState();
-
 }
-class SettingsAccountScreenState extends BaseSettingsScreen {
 
+class SettingsAccountScreenState extends BaseSettingsScreen {
   @override
   String title() => 'Accounts';
 
   @override
   Widget icon() => Padding(
-    padding: const EdgeInsets.only(right: 16),
-    child: Icon(
-      size: 52,
-      Icons.person,
-      color: Theme.of(context).colorScheme.onSurface,
-    ),
-  );
+        padding: const EdgeInsets.only(right: 16),
+        child: Icon(
+          size: 52,
+          Icons.person,
+          color: Theme.of(context).colorScheme.onSurface,
+        ),
+      );
 
   @override
   List<Widget> get settingsList => [
-    ..._buildSettings(context),
-    const SizedBox(height: 42),
-  ];
+        ..._buildSettings(context),
+        const SizedBox(height: 42),
+      ];
 
   List<Widget> _buildSettings(BuildContext context) {
-    var theme = Theme.of(context).colorScheme;
-    var Anilist = Provider.of<MediaServiceProvider>(context).Anilist.data;
     return [
       _buildAccountSection(
         context,
@@ -60,14 +57,28 @@ class SettingsAccountScreenState extends BaseSettingsScreen {
         onIconTap: () => snackString('Edit Icon Tapped'),
         onIconLongTap: () => snackString('Long Pressed'),
       ),
+      _buildAccountSection(
+        context,
+        iconPath: 'assets/svg/mal.svg',
+        title: 'Anilist',
+        isLoggedIn: Mal.token,
+        username: Mal.username,
+        avatarUrl: Mal.avatar,
+        onLogOut: () => AlertDialogBuilder(context)
+          ..setTitle('Logout Mal')
+          ..setMessage('Are you sure you want to logout?')
+          ..setPositiveButton('Yes', Mal.removeSavedToken)
+          ..setNegativeButton('No', null)
+          ..show(),
+        onLogIn: () => Mal.login(context),
+        onAvatarTap: () => snackString('Avatar Tapped'),
+        onIconTap: () => snackString('Edit Icon Tapped'),
+        onIconLongTap: () => snackString('Long Pressed'),
+      ),
       const SizedBox(height: 16),
       _buildAccountSection(
         context,
-        icon: Icon(
-          Icons.discord,
-          size: 26,
-          color: theme.primary,
-        ),
+        iconPath: 'assets/svg/discord.svg',
         title: 'Discord',
         isLoggedIn: Discord.token,
         username: Discord.userName,
@@ -103,7 +114,7 @@ class SettingsAccountScreenState extends BaseSettingsScreen {
     var theme = Theme.of(context).colorScheme;
 
     final leadingIcon = iconPath != null
-        ? SvgPicture.asset(
+        ? loadSvg(
             iconPath,
             width: 26,
             height: 26,

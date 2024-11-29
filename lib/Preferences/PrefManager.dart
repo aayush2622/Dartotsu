@@ -1,10 +1,10 @@
-
 import 'dart:io';
 
 import 'package:dantotsu/Preferences/HiveDataClasses/Selected/Selected.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 
+import 'HiveDataClasses/MalToken/MalToken.dart';
 import 'HiveDataClasses/ShowResponse/ShowResponse.dart';
 
 class Pref<T> {
@@ -14,6 +14,7 @@ class Pref<T> {
 
   const Pref(this.location, this.key, this.defaultValue);
 }
+
 enum Location {
   General,
   UI,
@@ -22,8 +23,8 @@ enum Location {
   Irrelevant,
   Protected,
 }
-class PrefManager {
 
+class PrefManager {
   static Box? _generalPreferences;
   static Box? _uiPreferences;
   static Box? _playerPreferences;
@@ -46,10 +47,13 @@ class PrefManager {
     _irrelevantPreferences = await Hive.openBox('irrelevantPreferences');
     _protectedPreferences = await Hive.openBox('protectedPreferences');
   }
-  static void HiveAdapters(){
+
+  static void HiveAdapters() {
     Hive.registerAdapter(ShowResponseAdapter());
     Hive.registerAdapter(SelectedAdapter());
+    Hive.registerAdapter(ResponseTokenAdapter());
   }
+
   static void setVal<T>(Pref<T> pref, T value) {
     _checkInitialization();
     final box = _getPrefBox(pref.location);
@@ -71,6 +75,7 @@ class PrefManager {
     }
     return pref.defaultValue;
   }
+
   static void setCustomVal<T>(String key, T value) {
     _checkInitialization();
     final box = _getPrefBox(Location.Irrelevant);
@@ -95,6 +100,7 @@ class PrefManager {
       throw Exception('Hive not initialized. Call PrefManager.init() first.');
     }
   }
+
   static Box _getPrefBox(Location location) {
     switch (location.name) {
       case 'General':

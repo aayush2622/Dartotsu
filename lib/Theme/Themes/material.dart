@@ -1,14 +1,14 @@
-
 import 'package:flutter/material.dart';
 
-ThemeData materialThemeLight(ColorScheme theme){
+ThemeData materialThemeLight(ColorScheme theme) {
   return ThemeData(
     primaryColor: theme.primary,
     colorScheme: theme,
     fontFamily: 'Poppins',
   );
 }
-ThemeData materialThemeDark(ColorScheme theme){
+
+ThemeData materialThemeDark(ColorScheme theme) {
   return ThemeData(
     primaryColor: theme.primary,
     colorScheme: theme,
@@ -16,5 +16,3 @@ ThemeData materialThemeDark(ColorScheme theme){
     fontFamily: 'Poppins',
   );
 }
-
-

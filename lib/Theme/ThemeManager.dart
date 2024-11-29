@@ -4,8 +4,8 @@ import 'package:provider/provider.dart';
 import '../Widgets/DropdownMenu.dart';
 import 'Colors.dart';
 import 'ThemeProvider.dart';
-import 'Themes/fromCode.dart';
 import 'Themes/blue.dart';
+import 'Themes/fromCode.dart';
 import 'Themes/green.dart';
 import 'Themes/lavender.dart';
 import 'Themes/material.dart';
@@ -16,10 +16,10 @@ import 'Themes/purple.dart';
 import 'Themes/red.dart';
 import 'Themes/saikou.dart';
 
-ThemeData getTheme(ColorScheme? material,ThemeNotifier themeManager) {
+ThemeData getTheme(ColorScheme? material, ThemeNotifier themeManager) {
   final isOled = themeManager.isOled;
   final theme = themeManager.theme;
-  final useMaterial= themeManager.useMaterialYou;
+  final useMaterial = themeManager.useMaterialYou;
   final useCustomColor = themeManager.useCustomColor;
   final customColor = themeManager.customColor;
   final isDarkMode = themeManager.isDarkMode;
@@ -52,7 +52,7 @@ ThemeData getTheme(ColorScheme? material,ThemeNotifier themeManager) {
     case 'ocean':
       baseTheme = isDarkMode ? oceanDarkTheme : oceanLightTheme;
       break;
-  /*case AppTheme.monochrome:
+    /*case AppTheme.monochrome:
       baseTheme = isDarkMode ? monochromeDarkTheme : monochromeLightTheme;
       break;*/
     default:
@@ -60,16 +60,21 @@ ThemeData getTheme(ColorScheme? material,ThemeNotifier themeManager) {
       break;
   }
   if (useMaterial && material != null) {
-    baseTheme = isDarkMode ? materialThemeDark(material) : materialThemeLight(material);
+    baseTheme =
+        isDarkMode ? materialThemeDark(material) : materialThemeLight(material);
   }
   if (useCustomColor) {
-    baseTheme = isDarkMode ? getCustomDarkTheme(customColor) : getCustomLightTheme(customColor);
+    baseTheme = isDarkMode
+        ? getCustomDarkTheme(customColor)
+        : getCustomLightTheme(customColor);
   }
   return baseTheme.copyWith(
-    scaffoldBackgroundColor: isOled ? Colors.black : baseTheme.scaffoldBackgroundColor,
+    scaffoldBackgroundColor:
+        isOled ? Colors.black : baseTheme.scaffoldBackgroundColor,
     colorScheme: baseTheme.colorScheme.copyWith(
       surface: isOled ? Colors.black : baseTheme.colorScheme.surface,
-      surfaceContainerHighest: isOled ? greyNavDark : baseTheme.colorScheme.surfaceContainerHighest,
+      surfaceContainerHighest:
+          isOled ? greyNavDark : baseTheme.colorScheme.surfaceContainerHighest,
     ),
     switchTheme: SwitchThemeData(
       thumbColor: WidgetStateProperty.resolveWith<Color>((states) {
@@ -87,7 +92,6 @@ ThemeData getTheme(ColorScheme? material,ThemeNotifier themeManager) {
       ),
     ),
   );
-
 }
 
 class ThemeDropdown extends StatelessWidget {
@@ -146,8 +150,7 @@ class DnsDropdown extends StatelessWidget {
     return buildDropdownMenu(
       currentValue: currentDnsProvider,
       options: dnsOptions,
-      onChanged: (String newValue) {
-      },
+      onChanged: (String newValue) {},
       prefixIcon: Icons.dns,
     );
   }

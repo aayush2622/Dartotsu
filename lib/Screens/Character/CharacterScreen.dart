@@ -97,7 +97,8 @@ class CharacterScreenState extends State<CharacterScreen> {
     return IconButton(
       icon: const Icon(Icons.share),
       iconSize: 32,
-      onPressed: () => shareLink('https://anilist.co/character/${widget.characterInfo.id}'),
+      onPressed: () =>
+          shareLink('https://anilist.co/character/${widget.characterInfo.id}'),
     );
   }
 

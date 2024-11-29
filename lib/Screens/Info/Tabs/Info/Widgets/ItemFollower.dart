@@ -10,9 +10,7 @@ Widget ItemFollower(BuildContext context, userData follower, String type) {
   String user =
       (Anilist.username.value.isEqualTo(follower.name)) ? "YOU" : follower.name;
   String status = (follower.status == "CURRENT")
-      ? (type == "ANIME"
-      ? 'WATCHING'
-      : 'READING')
+      ? (type == "ANIME" ? 'WATCHING' : 'READING')
       : (follower.status ?? "");
   return Padding(
     padding: const EdgeInsets.all(8.0),
@@ -45,8 +43,7 @@ Widget ItemFollower(BuildContext context, userData follower, String type) {
                 decoration: BoxDecoration(
                   color: follower.score == 0.0 ? theme.primary : theme.tertiary,
                   shape: BoxShape.rectangle,
-                  borderRadius: BorderRadius.circular(
-                      124.0),
+                  borderRadius: BorderRadius.circular(124.0),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,

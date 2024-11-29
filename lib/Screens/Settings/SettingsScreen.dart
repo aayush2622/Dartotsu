@@ -22,13 +22,13 @@ class SettingsScreenState extends BaseSettingsScreen {
 
   @override
   Widget icon() => ClipOval(
-    child: Image.asset(
-      'assets/images/logo.png',
-      width: 64,
-      height: 64,
-      fit: BoxFit.cover,
-    ),
-  );
+        child: Image.asset(
+          'assets/images/logo.png',
+          width: 64,
+          height: 64,
+          fit: BoxFit.cover,
+        ),
+      );
 
   @override
   List<Widget> get settingsList {

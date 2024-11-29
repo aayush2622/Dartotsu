@@ -1,28 +1,25 @@
-
 part of '../AnilistQueries.dart';
 
-extension on AnilistQueries{
+extension on AnilistQueries {
   Future<bool> _getGenresAndTags() async {
-    List<String> genres=  PrefManager.getVal(PrefName.GenresList);
-    List<String> adultTags =  PrefManager.getVal(PrefName.TagsListIsAdult);
-    List<String> nonAdultTags =  PrefManager.getVal(PrefName.TagsListNonAdult);
+    List<String> genres = PrefManager.getVal(PrefName.GenresList);
+    List<String> adultTags = PrefManager.getVal(PrefName.TagsListIsAdult);
+    List<String> nonAdultTags = PrefManager.getVal(PrefName.TagsListNonAdult);
 
     Map<bool, List<String>>? tags;
     if (adultTags.isEmpty || nonAdultTags.isEmpty) {
       tags = null;
     } else {
-      tags = {
-        true: adultTags..sort(),
-        false: nonAdultTags..sort()
-      };
+      tags = {true: adultTags..sort(), false: nonAdultTags..sort()};
     }
 
     if (genres.isEmpty) {
       var genreResponse = (await executeQuery<GenreCollectionResponse>(
-          """{GenreCollection}""",
-          force: true,
-          useToken: false,
-      ))?.data;
+        """{GenreCollection}""",
+        force: true,
+        useToken: false,
+      ))
+          ?.data;
 
       var genreCollection = genreResponse?.genreCollection;
       if (genreCollection != null) {
@@ -33,9 +30,10 @@ extension on AnilistQueries{
 
     if (tags == null) {
       var tagResponse = (await executeQuery<MediaTagCollectionResponse>(
-          """{ MediaTagCollection { name isAdult } }""",
-          force: true,
-      ))?.data;
+        """{ MediaTagCollection { name isAdult } }""",
+        force: true,
+      ))
+          ?.data;
 
       var mediaTagCollection = tagResponse?.mediaTagCollection;
       if (mediaTagCollection != null) {
@@ -50,10 +48,7 @@ extension on AnilistQueries{
           }
         }
 
-        tags = {
-          true: adult,
-          false: nonAdult
-        };
+        tags = {true: adult, false: nonAdult};
 
         PrefManager.setVal(PrefName.TagsListIsAdult, adult);
         PrefManager.setVal(PrefName.TagsListNonAdult, nonAdult);

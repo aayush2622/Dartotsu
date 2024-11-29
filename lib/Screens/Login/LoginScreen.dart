@@ -1,18 +1,27 @@
+import 'package:dantotsu/Widgets/LoadSvg.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:provider/provider.dart';
 
 import '../../Functions/Function.dart';
 import '../../Services/ServiceSwitcher.dart';
 
-class LoginScreenAnilist extends StatelessWidget {
-  const LoginScreenAnilist({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
+  @override
+  LoginScreenState createState() => LoginScreenState();
+}
+
+class LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context).colorScheme;
-    var anilist = Provider.of<MediaServiceProvider>(context,listen: false).Anilist.data;
+    var service = Provider.of<MediaServiceProvider>(context).currentService;
+    var screen = service.loginScreen;
+    if (screen == null) {
+      return service.notImplemented(widget.runtimeType.toString());
+    }
     return Scaffold(
       body: Center(
         child: Column(
@@ -21,7 +30,7 @@ class LoginScreenAnilist extends StatelessWidget {
           children: [
             const SizedBox(height: 64),
             Text(
-              'Dantotsu',
+              'Dartotsu',
               style: TextStyle(
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.w100,
@@ -31,18 +40,17 @@ class LoginScreenAnilist extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             const Text(
-              'The NEW Best Anime & Manga app\nor Android.',
+              'The NEW Best Anime & Manga app\nfor idk.',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 14),
             ),
             const SizedBox(height: 38),
             _buildLoginButton(
               context,
-              onPressed: () => anilist.login(context),
-              icon: 'assets/svg/anilist.svg',
+              onPressed: () => screen.login(context),
+              icon: service.iconPath,
               label: 'Login',
             ),
-
             const SizedBox(height: 24),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -50,7 +58,7 @@ class LoginScreenAnilist extends StatelessWidget {
                 _buildSocialIcon(Icons.discord, 'https://discord.gg/4HPZ5nAWw'),
                 const SizedBox(width: 16),
                 _buildSocialIcon(Bootstrap.github,
-                    'https://github.com/aayush2622/dantotsu-pc'),
+                    'https://github.com/aayush2622/dartotsu'),
                 const SizedBox(width: 16),
                 _buildSocialIcon(
                     Icons.telegram_sharp, 'https://t.me/+gzBCQExtLQo1YTNh'),
@@ -78,18 +86,17 @@ class LoginScreenAnilist extends StatelessWidget {
 
   Widget _buildLoginButton(BuildContext context,
       {required Function() onPressed,
-      required String icon,
-      required String label}) {
+        required String icon,
+        required String label}) {
     final theme = Theme.of(context).colorScheme;
     return ElevatedButton.icon(
       onPressed: () => onPressed(),
       icon: Padding(
         padding: const EdgeInsets.only(right: 24.0),
-        child: SvgPicture.asset(
+        child: loadSvg(
           icon,
           width: 18,
           height: 18,
-          // ignore: deprecated_member_use
           color: theme.onPrimaryContainer,
         ),
       ),

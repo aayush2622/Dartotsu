@@ -1,4 +1,3 @@
-
 class userData {
   final int id;
   final String name;
@@ -9,6 +8,7 @@ class userData {
   final int? progress;
   final int? totalEpisodes;
   final int? nextAiringEpisode;
+
   //final List<Activity> activity;
 
   userData({

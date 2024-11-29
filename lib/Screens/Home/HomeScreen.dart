@@ -123,6 +123,7 @@ class HomeScreenState extends State<HomeScreen> {
       ],
     );
   }
+
   Widget _buildBackgroundImage(BaseServiceData data) {
     final isDarkMode = Provider.of<ThemeNotifier>(context).isDarkMode;
     final theme = Theme.of(context).colorScheme.surface;
@@ -192,6 +193,7 @@ class HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+
   Widget _buildUserInfo(BaseServiceData data) {
     final theme = Theme.of(context).colorScheme;
     final isDarkMode = Provider.of<ThemeNotifier>(context).isDarkMode;
@@ -279,13 +281,13 @@ class HomeScreenState extends State<HomeScreen> {
               MediaCard(
                 context,
                 'ANIME LIST',
-                MediaListScreen(anime: true, id: data.userid!),
+                MediaListScreen(anime: true, id: data.userid ?? 0),
                 service.listImages.value[0] ?? 'https://bit.ly/31bsIHq',
               ),
               MediaCard(
                 context,
                 'MANGA LIST',
-                MediaListScreen(anime: false, id: data.userid!),
+                MediaListScreen(anime: false, id: data.userid ?? 0),
                 service.listImages.value[1] ?? 'https://bit.ly/2ZGfcuG',
               ),
             ],

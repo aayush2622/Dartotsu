@@ -1,5 +1,6 @@
 import 'package:dantotsu/Functions/Extensions.dart';
 import 'package:dantotsu/Theme/Colors.dart';
+import 'package:dantotsu/Widgets/LoadSvg.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -21,6 +22,7 @@ class FloatingBottomNavBar extends StatelessWidget {
   void onClick(int index) {
     onTabSelected(index);
   }
+
   @override
   Widget build(BuildContext context) {
     final themeNotifier = Provider.of<ThemeNotifier>(context);
@@ -70,21 +72,29 @@ class FloatingBottomNavBar extends StatelessWidget {
       ),
     );
   }
+
   void showBottomDialog(BuildContext context) {
-    List<MediaServiceType> mediaServices = MediaServiceType.values;
+    // Get all registered services
+    List<MediaService> mediaServices = MediaService.allServices;
     var provider = Provider.of<MediaServiceProvider>(context, listen: false);
+
     var t = CustomBottomDialog(
       viewList: [
         ListView.builder(
           shrinkWrap: true,
           itemCount: mediaServices.length,
           itemBuilder: (context, index) {
-            MediaServiceType service = mediaServices[index];
+            MediaService service = mediaServices[index];
             return ListTile(
-              selected: provider.currentService.type == service,
-              leading: service.iconUrl,
+              selected: provider.currentService.runtimeType == service.runtimeType,
+              leading: loadSvg(
+                service.iconPath,
+                width: 32.0,
+                height: 32.0,
+                color: Theme.of(context).colorScheme.primary,
+              ),
               title: Text(
-                service.name,
+                service.runtimeType.toString().replaceAll('Service', ''),
                 style: const TextStyle(
                   fontFamily: 'Poppins',
                   fontSize: 16.0,
@@ -92,7 +102,7 @@ class FloatingBottomNavBar extends StatelessWidget {
                 ),
               ),
               onTap: () {
-                provider.switchService(service);
+                provider.switchService(service.runtimeType.toString());
                 Navigator.pop(context);
               },
             );
@@ -101,8 +111,10 @@ class FloatingBottomNavBar extends StatelessWidget {
       ],
       title: 'Select Media Service',
     );
+
     showCustomBottomDialog(context, t);
   }
+
   Widget _buildNavItem(_NavItem item, BuildContext context) {
     final theme = Theme.of(context).colorScheme;
     final isSelected = item.index == selectedIndex;
@@ -168,4 +180,3 @@ class _NavItem {
     required this.label,
   });
 }
-

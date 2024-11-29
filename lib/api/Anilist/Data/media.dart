@@ -1,11 +1,12 @@
 import 'package:dantotsu/api/Anilist/Data/user.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import 'others.dart';
-import 'staff.dart';
 import 'character.dart';
 import 'fuzzyData.dart';
+import 'others.dart';
 import 'recommendations.dart';
+import 'staff.dart';
+
 part 'Generated/media.g.dart';
 
 @JsonSerializable()
@@ -628,7 +629,6 @@ class ReviewEdge {
   Map<String, dynamic> toJson() => _$ReviewEdgeToJson(this);
 }
 
-
 @JsonSerializable()
 class PageInfo {
   int? total;
@@ -649,8 +649,9 @@ class PageInfo {
 
   Map<String, dynamic> toJson() => _$PageInfoToJson(this);
 }
+
 @JsonSerializable()
-class Author{
+class Author {
   int id;
   String? name;
   String? image;
@@ -667,5 +668,3 @@ class Author{
     this.character,
   });
 }
-
-

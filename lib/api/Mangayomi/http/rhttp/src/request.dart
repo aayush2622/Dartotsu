@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:flutter/foundation.dart';
+
 import 'package:dantotsu/api/Mangayomi/http/rhttp/src/model/exception.dart';
 import 'package:dantotsu/api/Mangayomi/http/rhttp/src/model/request.dart';
 import 'package:dantotsu/api/Mangayomi/http/rhttp/src/model/response.dart';
@@ -7,6 +7,7 @@ import 'package:dantotsu/api/Mangayomi/http/rhttp/src/model/settings.dart';
 import 'package:dantotsu/api/Mangayomi/http/src/rust/api/rhttp/error.dart' as rust_error;
 import 'package:dantotsu/api/Mangayomi/http/src/rust/api/rhttp/http.dart' as rust;
 import 'package:dantotsu/api/Mangayomi/http/src/rust/lib.dart' as rust_lib;
+import 'package:flutter/foundation.dart';
 
 /// Non-Generated helper function that is used by
 /// the client and also by the static class.

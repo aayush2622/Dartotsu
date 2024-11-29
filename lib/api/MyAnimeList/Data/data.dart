@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+
 import 'media.dart';
 
 part 'Generated/data.g.dart';
@@ -15,10 +16,10 @@ class MediaResponse {
     this.paging,
   });
 
-  factory MediaResponse.fromJson(Map<String, dynamic> json) => _$AFromJson(json);
+  factory MediaResponse.fromJson(Map<String, dynamic> json) =>
+      _$AFromJson(json);
 
   Map<String, dynamic> toJson() => _$AToJson(this);
-
 }
 
 @JsonSerializable()

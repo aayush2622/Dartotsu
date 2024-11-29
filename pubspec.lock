@@ -174,6 +174,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.1"
+  carousel_slider:
+    dependency: "direct main"
+    description:
+      name: carousel_slider
+      sha256: "7b006ec356205054af5beaef62e2221160ea36b90fb70a35e4deacd49d0349ae"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.0.0"
   characters:
     dependency: transitive
     description:
@@ -215,7 +223,7 @@ packages:
     source: hosted
     version: "4.10.0"
   collection:
-    dependency: "direct overridden"
+    dependency: "direct main"
     description:
       name: collection
       sha256: "2f5709ae4d3d59dd8f7cd309b4e023046b57d8a6c82130785d2b0e5868084e76"
@@ -294,6 +302,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.7.10"
+  desktop_webview_window:
+    dependency: transitive
+    description:
+      name: desktop_webview_window
+      sha256: "57cf20d81689d5cbb1adfd0017e96b669398a669d927906073b0e42fc64111c0"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.3"
   directed_graph:
     dependency: transitive
     description:
@@ -505,6 +521,22 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_web_auth_2:
+    dependency: "direct main"
+    description:
+      name: flutter_web_auth_2
+      sha256: "30f4fbdfadabd7ec381aed7804e289cf520209f0e515279190ab67671527ad97"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.0.2"
+  flutter_web_auth_2_platform_interface:
+    dependency: transitive
+    description:
+      name: flutter_web_auth_2_platform_interface
+      sha256: "222264d4979e9372c90e441736a62d800481e4a9c860cc2c235d1d605a118a2b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.0.1"
   flutter_web_plugins:
     dependency: transitive
     description: flutter
@@ -1046,54 +1078,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.5.1"
-  protocol_handler:
-    dependency: "direct main"
-    description:
-      name: protocol_handler
-      sha256: dc2e2dcb1e0e313c3f43827ec3fa6d98adee6e17edc0c3923ac67efee87479a9
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.2.0"
-  protocol_handler_android:
-    dependency: transitive
-    description:
-      name: protocol_handler_android
-      sha256: "82eb860ca42149e400328f54b85140329a1766d982e94705b68271f6ca73895c"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.2.0"
-  protocol_handler_ios:
-    dependency: transitive
-    description:
-      name: protocol_handler_ios
-      sha256: "0d3a56b8c1926002cb1e32b46b56874759f4dcc8183d389b670864ac041b6ec2"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.2.0"
-  protocol_handler_macos:
-    dependency: transitive
-    description:
-      name: protocol_handler_macos
-      sha256: "6eb8687a84e7da3afbc5660ce046f29d7ecf7976db45a9dadeae6c87147dd710"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.2.0"
-  protocol_handler_platform_interface:
-    dependency: transitive
-    description:
-      name: protocol_handler_platform_interface
-      sha256: "53776b10526fdc25efdf1abcf68baf57fdfdb75342f4101051db521c9e3f3e5b"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.2.0"
-  protocol_handler_windows:
-    dependency: transitive
-    description:
-      name: protocol_handler_windows
-      sha256: d8f3a58938386aca2c76292757392f4d059d09f11439d6d896d876ebe997f2c4
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.2.0"
   provider:
     dependency: "direct main"
     description:
@@ -1299,6 +1283,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.99"
+  smooth_page_indicator:
+    dependency: "direct main"
+    description:
+      name: smooth_page_indicator
+      sha256: "3b28b0c545fa67ed9e5997d9f9720d486f54c0c607e056a1094544e36934dff3"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.0+3"
   source_gen:
     dependency: transitive
     description:
@@ -1747,14 +1739,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.7.2"
-  win32_registry:
-    dependency: transitive
-    description:
-      name: win32_registry
-      sha256: "21ec76dfc731550fd3e2ce7a33a9ea90b828fdf19a5c3bcf556fa992cfa99852"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.1.5"
   window_manager:
     dependency: transitive
     description:
@@ -1763,6 +1747,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.4.3"
+  window_to_front:
+    dependency: transitive
+    description:
+      name: window_to_front
+      sha256: "7aef379752b7190c10479e12b5fd7c0b9d92adc96817d9e96c59937929512aee"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.3"
   xdg_directories:
     dependency: transitive
     description:

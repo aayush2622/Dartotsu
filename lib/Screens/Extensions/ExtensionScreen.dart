@@ -1,5 +1,5 @@
-import 'package:dantotsu/api/Mangayomi/Model/Source.dart';
 import 'package:dantotsu/Screens/Extensions/ExtensionList.dart';
+import 'package:dantotsu/api/Mangayomi/Model/Source.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -39,6 +39,7 @@ class _BrowseScreenState extends ConsumerState<ExtensionScreen>
   _checkPermission() async {
     await StorageProvider().requestPermission();
   }
+
   final _textEditingController = TextEditingController();
 
   //bool _isSearch = false;
@@ -106,7 +107,8 @@ class _BrowseScreenState extends ConsumerState<ExtensionScreen>
     );
   }
 
-  Widget _buildTab(BuildContext context, String label, bool isManga, bool installed) {
+  Widget _buildTab(
+      BuildContext context, String label, bool isManga, bool installed) {
     return Tab(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -127,35 +129,35 @@ class _BrowseScreenState extends ConsumerState<ExtensionScreen>
   }
 }
 
-Widget _extensionUpdateNumbers(BuildContext context, bool isManga, bool installed) {
+Widget _extensionUpdateNumbers(
+    BuildContext context, bool isManga, bool installed) {
   return StreamBuilder(
-    stream: isar.sources
-        .filter()
-        .idIsNotNull()
-        .and()
-        .isAddedEqualTo(installed)
-        .isActiveEqualTo(true)
-        .isMangaEqualTo(isManga)
-        .watch(fireImmediately: true),
-    builder: (context, snapshot) {
-      if (snapshot.hasData && snapshot.data!.isNotEmpty) {
-        final entries = snapshot.data!
-            .where((element) => PrefManager.getVal(PrefName.NSFWExtensions)
-            ? true
-            : element.isNsfw == false)
-            .toList();
-        return entries.isEmpty
-            ? Container()
-            : Text(
-          "(${entries.length.toString()})",
-          style: const TextStyle(
-            fontSize: 12,
-            fontFamily: 'Poppins',
-            fontWeight: FontWeight.bold,
-          ),
-        );
-      }
-      return Container();
-    }
-  );
+      stream: isar.sources
+          .filter()
+          .idIsNotNull()
+          .and()
+          .isAddedEqualTo(installed)
+          .isActiveEqualTo(true)
+          .isMangaEqualTo(isManga)
+          .watch(fireImmediately: true),
+      builder: (context, snapshot) {
+        if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+          final entries = snapshot.data!
+              .where((element) => PrefManager.getVal(PrefName.NSFWExtensions)
+                  ? true
+                  : element.isNsfw == false)
+              .toList();
+          return entries.isEmpty
+              ? Container()
+              : Text(
+                  "(${entries.length.toString()})",
+                  style: const TextStyle(
+                    fontSize: 12,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.bold,
+                  ),
+                );
+        }
+        return Container();
+      });
 }

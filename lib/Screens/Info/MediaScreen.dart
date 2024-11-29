@@ -17,8 +17,9 @@ import 'MediaScreenViewModel.dart';
 
 class MediaInfoPage extends StatefulWidget {
   final Media mediaData;
+  final String tag;
 
-  const MediaInfoPage(this.mediaData, {super.key});
+  const MediaInfoPage(this.mediaData, this.tag, {super.key});
 
   @override
   MediaInfoPageState createState() => MediaInfoPageState();
@@ -43,8 +44,7 @@ class MediaInfoPageState extends State<MediaInfoPage> {
 
   Future<void> loadData() async {
     mediaData = await _viewModel.getMediaDetails(widget.mediaData);
-
-    setState(() => loaded = true);
+    if (mounted) setState(() => loaded = true);
   }
 
   @override
@@ -253,17 +253,20 @@ class MediaInfoPageState extends State<MediaInfoPage> {
   }
 
   Widget _buildCoverImage() {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(16.0),
-      child: cachedNetworkImage(
-        imageUrl: mediaData.cover ?? '',
-        fit: BoxFit.cover,
-        width: 108,
-        height: 160,
-        placeholder: (context, url) => Container(
-          color: Colors.white12,
+    return Hero(
+      tag: widget.tag,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(16.0),
+        child: cachedNetworkImage(
+          imageUrl: mediaData.cover ?? '',
+          fit: BoxFit.cover,
           width: 108,
           height: 160,
+          placeholder: (context, url) => Container(
+            color: Colors.white12,
+            width: 108,
+            height: 160,
+          ),
         ),
       ),
     );

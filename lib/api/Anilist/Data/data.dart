@@ -1,6 +1,7 @@
 import 'package:dantotsu/api/Anilist/Data/page.dart';
 import 'package:dantotsu/api/Anilist/Data/user.dart';
 import 'package:json_annotation/json_annotation.dart';
+
 import 'media.dart';
 
 part 'Generated/data.g.dart';
@@ -30,7 +31,6 @@ class UserListsData {
 
   Map<String, dynamic> toJson() => _$UserListsDataToJson(this);
 }
-
 
 @JsonSerializable()
 class UserListResponse {

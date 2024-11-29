@@ -14,18 +14,19 @@ extension on AnilistQueries {
     bool checkTime() {
       if (time == null) return true;
       return DateTime.now()
-          .difference(DateTime.fromMillisecondsSinceEpoch(time))
-          .inDays >
+              .difference(DateTime.fromMillisecondsSinceEpoch(time))
+              .inDays >
           1;
     }
 
     if (url == null || url.isEmpty || checkTime()) {
-      final response = await executeQuery<MediaListCollectionResponse>(_queryBanner(type));
+      final response =
+          await executeQuery<MediaListCollectionResponse>(_queryBanner(type));
       final bannerImages = response?.data?.mediaListCollection?.lists
-          ?.expand((list) => list.entries ?? [])
-          .map((entry) => entry.media?.bannerImage)
-          .where((imageUrl) => imageUrl != null && imageUrl != 'null')
-          .toList() ??
+              ?.expand((list) => list.entries ?? [])
+              .map((entry) => entry.media?.bannerImage)
+              .where((imageUrl) => imageUrl != null && imageUrl != 'null')
+              .toList() ??
           [];
       bannerImages.shuffle(Random());
       var random = bannerImages.isNotEmpty ? bannerImages.first : null;
@@ -41,7 +42,7 @@ extension on AnilistQueries {
   }
 }
 
-String _queryBanner(String type)=> '''{
+String _queryBanner(String type) => '''{
   MediaListCollection(
     userId: ${Anilist.userid}, 
     type: $type, 
@@ -60,4 +61,3 @@ String _queryBanner(String type)=> '''{
   } 
 }
 ''';
-

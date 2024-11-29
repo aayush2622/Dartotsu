@@ -1,7 +1,9 @@
 import 'package:isar/isar.dart';
 
 import 'Source.dart';
+
 part 'settings.g.dart';
+
 const defaultUserAgent =
     "Mozilla/5.0 (Linux; Android 13; 22081212UG Build/TKQ1.220829.002; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/114.0.5735.131 Mobile Safari/537.36";
 
@@ -406,7 +408,9 @@ class Settings {
     markEpisodeAsSeenType = json['markEpisodeAsSeenType'];
     defaultSkipIntroLength = json['defaultSkipIntroLength'];
     defaultDoubleTapToSkipLength = json['defaultDoubleTapToSkipLength'];
-    defaultPlayBackSpeed = json['defaultPlayBackSpeed'] is double ? json['defaultPlayBackSpeed'] : (json['defaultPlayBackSpeed'] as int).toDouble();
+    defaultPlayBackSpeed = json['defaultPlayBackSpeed'] is double
+        ? json['defaultPlayBackSpeed']
+        : (json['defaultPlayBackSpeed'] as int).toDouble();
     updateProgressAfterReading = json['updateProgressAfterReading'];
     enableAniSkip = json['enableAniSkip'];
     enableAutoSkip = json['enableAutoSkip'];
@@ -568,6 +572,7 @@ enum BackgroundColor { black, grey, white, automatic }
 class MCookie {
   String? host;
   String? cookie;
+
   MCookie({this.host, this.cookie});
 
   MCookie.fromJson(Map<String, dynamic> json) {
@@ -582,7 +587,9 @@ class MCookie {
 class SortLibraryManga {
   bool? reverse;
   int? index;
+
   SortLibraryManga({this.reverse = false, this.index = 0});
+
   SortLibraryManga.fromJson(Map<String, dynamic> json) {
     index = json['index'];
     reverse = json['reverse'];
@@ -596,7 +603,9 @@ class SortChapter {
   int? mangaId;
   bool? reverse;
   int? index;
+
   SortChapter({this.mangaId, this.reverse = false, this.index = 1});
+
   SortChapter.fromJson(Map<String, dynamic> json) {
     index = json['index'];
     mangaId = json['mangaId'];
@@ -611,7 +620,9 @@ class SortChapter {
 class ChapterFilterDownloaded {
   int? mangaId;
   int? type;
+
   ChapterFilterDownloaded({this.mangaId, this.type = 0});
+
   ChapterFilterDownloaded.fromJson(Map<String, dynamic> json) {
     mangaId = json['mangaId'];
     type = json['type'];
@@ -624,7 +635,9 @@ class ChapterFilterDownloaded {
 class ChapterFilterUnread {
   int? mangaId;
   int? type;
+
   ChapterFilterUnread({this.mangaId, this.type = 0});
+
   ChapterFilterUnread.fromJson(Map<String, dynamic> json) {
     mangaId = json['mangaId'];
     type = json['type'];
@@ -637,7 +650,9 @@ class ChapterFilterUnread {
 class ChapterFilterBookmarked {
   int? mangaId;
   int? type;
+
   ChapterFilterBookmarked({this.mangaId, this.type = 0});
+
   ChapterFilterBookmarked.fromJson(Map<String, dynamic> json) {
     mangaId = json['mangaId'];
     type = json['type'];
@@ -653,6 +668,7 @@ class ChapterPageurls {
   List<String>? headers;
 
   ChapterPageurls({this.chapterId, this.urls});
+
   ChapterPageurls.fromJson(Map<String, dynamic> json) {
     chapterId = json['chapterId'];
     urls = json['headers']?.cast<String>();
@@ -669,6 +685,7 @@ class ChapterPageIndex {
   int? index;
 
   ChapterPageIndex({this.chapterId, this.index});
+
   ChapterPageIndex.fromJson(Map<String, dynamic> json) {
     chapterId = json['chapterId'];
     index = json['index'];
@@ -683,6 +700,7 @@ class PersonalReaderMode {
 
   @enumerated
   ReaderMode readerMode = ReaderMode.vertical;
+
   PersonalReaderMode({this.mangaId, this.readerMode = ReaderMode.vertical});
 
   PersonalReaderMode.fromJson(Map<String, dynamic> json) {
@@ -699,6 +717,7 @@ class AutoScrollPages {
   int? mangaId;
   double? pageOffset;
   bool? autoScroll;
+
   AutoScrollPages(
       {this.mangaId, this.pageOffset = 10, this.autoScroll = false});
 
@@ -718,6 +737,7 @@ class PersonalPageMode {
 
   @enumerated
   PageMode pageMode = PageMode.onePage;
+
   PersonalPageMode({this.mangaId, this.pageMode = PageMode.onePage});
 
   PersonalPageMode.fromJson(Map<String, dynamic> json) {
@@ -746,6 +766,7 @@ class FilterScanlator {
   List<String>? scanlators;
 
   FilterScanlator({this.mangaId, this.scanlators});
+
   FilterScanlator.fromJson(Map<String, dynamic> json) {
     mangaId = json['mangaId'];
     scanlators = json['scanlators']?.cast<String>();
@@ -759,6 +780,7 @@ class FilterScanlator {
 class L10nLocale {
   String? languageCode;
   String? countryCode;
+
   L10nLocale({this.languageCode, this.countryCode});
 
   L10nLocale.fromJson(Map<String, dynamic> json) {
@@ -776,7 +798,9 @@ class CustomColorFilter {
   int? r;
   int? g;
   int? b;
+
   CustomColorFilter({this.a, this.r, this.g, this.b});
+
   CustomColorFilter.fromJson(Map<String, dynamic> json) {
     a = json['a'];
     r = json['r'];
@@ -804,6 +828,7 @@ class PlayerSubtitleSettings {
   int? backgroundColorR;
   int? backgroundColorG;
   int? backgroundColorB;
+
   PlayerSubtitleSettings(
       {this.fontSize = 45,
       this.useBold = true,
@@ -820,6 +845,7 @@ class PlayerSubtitleSettings {
       this.backgroundColorR = 0,
       this.backgroundColorG = 0,
       this.backgroundColorB = 0});
+
   PlayerSubtitleSettings.fromJson(Map<String, dynamic> json) {
     fontSize = json['fontSize'];
     useBold = json['useBold'];

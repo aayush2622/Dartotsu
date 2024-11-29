@@ -55,7 +55,6 @@ ThemeData getCustomDarkTheme(int color) {
         fontSize: 20,
         fontWeight: FontWeight.bold,
       ),
-
       bodyLarge: TextStyle(
         color: flexThemeData.colorScheme.onSurface,
       ),
@@ -63,5 +62,3 @@ ThemeData getCustomDarkTheme(int color) {
     fontFamily: 'Poppins',
   );
 }
-
-

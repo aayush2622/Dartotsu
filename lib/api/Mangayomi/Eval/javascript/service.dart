@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:dantotsu/api/Mangayomi/Eval/javascript/preferences.dart';
 import 'package:dantotsu/api/Mangayomi/Eval/javascript/utils.dart';
 import 'package:flutter_qjs/flutter_qjs.dart';
@@ -17,6 +18,7 @@ import 'http.dart';
 class JsExtensionService {
   late JavascriptRuntime runtime;
   late Source? source;
+
   JsExtensionService(this.source);
 
   void _init() {

@@ -1,4 +1,4 @@
-class MalStrings{
+class MalStrings {
   static const String endPoint = "https://api.myanimelist.net/v2/";
 
   /// User EndPoint
@@ -17,7 +17,6 @@ class MalStrings{
   static const String charaEnd = "${htmlEnd}character.php";
 
   static const String clientId = '86b35cf02205a0303da3aaea1c9e33f3';
-
 
   static const String oauthEndPoint =
       "https://myanimelist.net/v1/oauth2/authorize";
@@ -47,5 +46,4 @@ class MalStrings{
   static const String jikanV4 = "https://api.jikan.moe/v4/";
 
   static const String dalWeb = 'https://dailyanimelist.web.app/';
-
 }

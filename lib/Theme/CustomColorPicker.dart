@@ -9,12 +9,13 @@ Future<Color?> showColorPickerDialog(
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text('Pick a color',style: TextStyle(color: theme.primary, fontWeight: FontWeight.bold)),
+        title: Text('Pick a color',
+            style:
+                TextStyle(color: theme.primary, fontWeight: FontWeight.bold)),
         content: SingleChildScrollView(
           child: ColorPicker(
             wheelDiameter: 300,
             wheelWidth: 10,
-
             borderRadius: 24,
             color: selectedColor,
             onColorChanged: (Color color) {
@@ -36,13 +37,17 @@ Future<Color?> showColorPickerDialog(
         ),
         actions: [
           TextButton(
-            child: Text('Cancel',style: TextStyle(color: theme.primary, fontWeight: FontWeight.bold)),
+            child: Text('Cancel',
+                style: TextStyle(
+                    color: theme.primary, fontWeight: FontWeight.bold)),
             onPressed: () {
               Navigator.of(context).pop();
             },
           ),
           TextButton(
-            child: Text('Select',style: TextStyle(color: theme.primary, fontWeight: FontWeight.bold)),
+            child: Text('Select',
+                style: TextStyle(
+                    color: theme.primary, fontWeight: FontWeight.bold)),
             onPressed: () {
               Navigator.of(context).pop(selectedColor);
             },

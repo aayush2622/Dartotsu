@@ -2,7 +2,8 @@ part of '../AnilistQueries.dart';
 
 extension on AnilistQueries {
   Future<Media?> _mediaDetails(Media media) async {
-    var response = (await executeQuery<MediaResponse>(_queryMedia(media), force: true));
+    var response =
+        (await executeQuery<MediaResponse>(_queryMedia(media), force: true));
     if (response == null) return null;
     void parse() {
       var fetchedMedia = response?.data?.media;
@@ -23,7 +24,8 @@ extension on AnilistQueries {
       if (fetchedMedia.trailer != null &&
           fetchedMedia.trailer!.site != null &&
           fetchedMedia.trailer!.site.toString() == "youtube") {
-        media.trailer = "https://www.youtube.com/embed/${fetchedMedia.trailer!.id.toString().trim()}";
+        media.trailer =
+            "https://www.youtube.com/embed/${fetchedMedia.trailer!.id.toString().trim()}";
       } else {
         media.trailer = null;
       }
@@ -133,22 +135,22 @@ extension on AnilistQueries {
       if (user?.mediaList?.isNotEmpty == true) {
         final uniqueUsers = <int>{};
         media.users = (user?.mediaList?.where((item) {
-          final user = item.user;
-          return user != null && uniqueUsers.add(user.id);
-        }).map((item) {
-          final user = item.user!;
-          return userData(
-            id: user.id,
-            name: user.name ?? "Unknown",
-            pfp: user.avatar?.large,
-            banner: "",
-            status: item.status?.name ?? "",
-            score: item.score ?? 0,
-            progress: item.progress ?? 0,
-            totalEpisodes:
-            fetchedMedia.episodes ?? fetchedMedia.chapters,
-          );
-        }).toList() ?? []);
+              final user = item.user;
+              return user != null && uniqueUsers.add(user.id);
+            }).map((item) {
+              final user = item.user!;
+              return userData(
+                id: user.id,
+                name: user.name ?? "Unknown",
+                pfp: user.avatar?.large,
+                banner: "",
+                status: item.status?.name ?? "",
+                score: item.score ?? 0,
+                progress: item.progress ?? 0,
+                totalEpisodes: fetchedMedia.episodes ?? fetchedMedia.chapters,
+              );
+            }).toList() ??
+            []);
       }
       if (fetchedMedia.mediaListEntry != null) {
         final mediaListEntry = fetchedMedia.mediaListEntry!;
@@ -198,11 +200,10 @@ extension on AnilistQueries {
             name: firstStudio.name,
             siteUrl: firstStudio.siteUrl,
             isAnimationStudio: firstStudio.isAnimationStudio,
-            media:  firstStudio.media,
+            media: firstStudio.media,
           );
         }
-        final authorEdge =
-            findAuthorEdge(fetchedMedia.staff?.edges);
+        final authorEdge = findAuthorEdge(fetchedMedia.staff?.edges);
         if (authorEdge != null) {
           final authorNode = authorEdge.node;
           media.anime!.mediaAuthor = author(
@@ -228,8 +229,7 @@ extension on AnilistQueries {
           }
         });
       } else if (media.manga != null) {
-        final authorEdge =
-            findAuthorEdge(fetchedMedia.staff?.edges);
+        final authorEdge = findAuthorEdge(fetchedMedia.staff?.edges);
         if (authorEdge != null) {
           final authorNode = authorEdge.node;
           media.manga!.mediaAuthor = author(
@@ -245,7 +245,8 @@ extension on AnilistQueries {
     if (response.data?.media != null) {
       parse();
     } else {
-      response = await executeQuery(_queryMedia(media), force: true, useToken: false);
+      response =
+          await executeQuery(_queryMedia(media), force: true, useToken: false);
       if (response?.data?.media != null) {
         snackString('Adult Stuff? Adult Stuff? ( ͡° ͜ʖ ͡° )');
         parse();
@@ -256,6 +257,7 @@ extension on AnilistQueries {
     return media;
   }
 }
+
 String _queryMedia(Media media) => '''{
   Media(id:${media.id}) {
     id

@@ -29,6 +29,5 @@ class ShowResponse {
     this.otherNames = const [],
     this.total,
     this.extra,
-
   });
 }

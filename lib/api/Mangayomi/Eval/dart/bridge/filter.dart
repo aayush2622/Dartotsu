@@ -1,5 +1,6 @@
 import 'package:dart_eval/dart_eval_bridge.dart';
 import 'package:dart_eval/stdlib/core.dart';
+
 import '../model/filter.dart';
 
 class $FilterList implements FilterList, $Instance {
@@ -545,6 +546,7 @@ class $TextFilter implements TextFilter, $Instance {
 
   @override
   String? get type => $value.type ?? '';
+
   @override
   String get name => $value.name;
 

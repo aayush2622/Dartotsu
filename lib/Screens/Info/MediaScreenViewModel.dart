@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -48,7 +47,8 @@ class MediaPageViewModel extends GetxController {
           text: " / ",
         ));
       }
-      if (mediaData.anime!.totalEpisodes != null && mediaData.anime!.totalEpisodes == 0) {
+      if (mediaData.anime!.totalEpisodes != null &&
+          mediaData.anime!.totalEpisodes != 0) {
         spans.add(TextSpan(
           text: "${mediaData.anime!.totalEpisodes}",
           style: TextStyle(color: theme.onSurface, fontWeight: FontWeight.bold),
@@ -59,9 +59,9 @@ class MediaPageViewModel extends GetxController {
           style: TextStyle(color: theme.onSurface, fontWeight: FontWeight.bold),
         ));
       }
-
     } else {
-      if (mediaData.manga!.totalChapters != null && mediaData.manga!.totalChapters == 0) {
+      if (mediaData.manga!.totalChapters != null &&
+          mediaData.manga!.totalChapters == 0) {
         spans.add(TextSpan(
           text: "${mediaData.manga!.totalChapters}",
           style: TextStyle(color: theme.onSurface, fontWeight: FontWeight.bold),

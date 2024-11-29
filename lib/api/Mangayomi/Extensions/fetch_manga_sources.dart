@@ -1,8 +1,8 @@
-
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../Preferences/PrefManager.dart';
 import 'GetSourceList.dart';
+
 part 'fetch_manga_sources.g.dart';
 
 @riverpod

@@ -8,10 +8,12 @@ import 'Widgets/MediaScoreBadge.dart';
 class MediaViewHolder extends StatelessWidget {
   final Media mediaInfo;
   final bool isLarge;
+  final String tag;
 
   const MediaViewHolder({
     super.key,
     required this.mediaInfo,
+    required this.tag,
     this.isLarge = false,
   });
 
@@ -37,17 +39,20 @@ class MediaViewHolder extends StatelessWidget {
   Widget _buildCoverImage(BuildContext context) {
     return Stack(
       children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(16.0),
-          child: cachedNetworkImage(
-            imageUrl: mediaInfo.cover ?? '',
-            fit: BoxFit.cover,
-            width: 108,
-            height: 160,
-            placeholder: (context, url) => Container(
-              color: Colors.white12,
+        Hero(
+          tag: tag,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(16.0),
+            child: cachedNetworkImage(
+              imageUrl: mediaInfo.cover ?? '',
+              fit: BoxFit.cover,
               width: 108,
               height: 160,
+              placeholder: (context, url) => Container(
+                color: Colors.white12,
+                width: 108,
+                height: 160,
+              ),
             ),
           ),
         ),

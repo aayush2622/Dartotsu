@@ -1,8 +1,8 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import 'staff.dart';
 import 'fuzzyData.dart';
 import 'media.dart';
+import 'staff.dart';
 
 part 'Generated/character.g.dart';
 
@@ -73,6 +73,7 @@ class CharacterEdge {
   final String? role;
   final String? name;
   final List<Staff>? voiceActors;
+
   // Uncomment if needed
   // final List<StaffRoleType>? voiceActorRoles;
   final List<Media>? media;

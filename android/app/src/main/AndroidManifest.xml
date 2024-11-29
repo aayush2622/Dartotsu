@@ -31,15 +31,15 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <intent-filter android:label="Anilist Login for Dantotsu">
+        </activity>
+        <activity
+            android:name="com.linusu.flutter_web_auth.CallbackActivity"
+            android:exported="true">
+            <intent-filter android:label="Login for Dartotsu">
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="anilist"
-                    android:scheme="dantotsu" />
+                <data android:scheme="dantotsu" android:host="callback" />
             </intent-filter>
         </activity>
         <!-- Don't delete the meta-data below.

@@ -10,10 +10,12 @@ Widget CustomElevatedButton({
 
   return ElevatedButton.icon(
     onPressed: onPressed,
-    icon: iconWidget != null ? Padding(
-      padding: const EdgeInsets.only(right: 24.0),
-      child: iconWidget,
-    ) : const SizedBox.shrink(),
+    icon: iconWidget != null
+        ? Padding(
+            padding: const EdgeInsets.only(right: 24.0),
+            child: iconWidget,
+          )
+        : const SizedBox.shrink(),
     label: Text(
       textAlign: TextAlign.center,
       label,

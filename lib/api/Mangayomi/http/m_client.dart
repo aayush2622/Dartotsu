@@ -1,14 +1,15 @@
+import 'dart:async';
+import 'dart:io';
+
 import 'package:dantotsu/Functions/Function.dart';
 import 'package:dantotsu/api/Mangayomi/Model/settings.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:http_interceptor/http_interceptor.dart';
-import 'dart:async';
-import 'dart:io';
 import 'package:http/io_client.dart';
-import '../http/rhttp/rhttp.dart' as rhttp;
+import 'package:http_interceptor/http_interceptor.dart';
 
 import '../../../main.dart';
 import '../Eval/dart/model/m_source.dart';
+import '../http/rhttp/rhttp.dart' as rhttp;
 import '../log.dart';
 
 class MClient {

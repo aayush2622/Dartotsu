@@ -1,11 +1,14 @@
 part of '../AnilistQueries.dart';
-extension on AnilistQueries {
 
+extension on AnilistQueries {
   Future<List<Media>> _getCalendarData() async {
     int page = 1;
     List<Media> mediaList = [];
 
-    Future<Page?> execute(int page) async => (await executeQuery<PageResponse>(_queryCalendar(page),force: true))?.data?.page;
+    Future<Page?> execute(int page) async =>
+        (await executeQuery<PageResponse>(_queryCalendar(page), force: true))
+            ?.data
+            ?.page;
 
     Page? result;
     do {
@@ -28,7 +31,7 @@ extension on AnilistQueries {
     return mediaList.reversed.toList();
   }
 
-  _queryCalendar(int page){
+  _queryCalendar(int page) {
     final int curr = DateTime.now().millisecondsSinceEpoch ~/ 1000;
     return '''{
       Page(page: $page, perPage: 50) {

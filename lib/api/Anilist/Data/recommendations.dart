@@ -1,5 +1,6 @@
 import 'package:dantotsu/api/Anilist/Data/user.dart';
 import 'package:json_annotation/json_annotation.dart';
+
 import 'media.dart';
 
 part 'Generated/recommendations.g.dart';
@@ -20,7 +21,9 @@ class Recommendation {
     this.user,
   });
 
-  factory Recommendation.fromJson(Map<String, dynamic> json) => _$RecommendationFromJson(json);
+  factory Recommendation.fromJson(Map<String, dynamic> json) =>
+      _$RecommendationFromJson(json);
+
   Map<String, dynamic> toJson() => _$RecommendationToJson(this);
 }
 
@@ -33,6 +36,8 @@ class RecommendationConnection {
     this.nodes,
   });
 
-  factory RecommendationConnection.fromJson(Map<String, dynamic> json) => _$RecommendationConnectionFromJson(json);
+  factory RecommendationConnection.fromJson(Map<String, dynamic> json) =>
+      _$RecommendationConnectionFromJson(json);
+
   Map<String, dynamic> toJson() => _$RecommendationConnectionToJson(this);
 }

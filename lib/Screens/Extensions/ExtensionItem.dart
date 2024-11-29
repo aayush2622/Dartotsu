@@ -135,99 +135,103 @@ class _ExtensionListTileWidgetState
               ),
           ],
         ),
-        trailing: _isLoading ? const SizedBox(
-          height: 20,
-          width: 20,
-          child: CircularProgressIndicator(strokeWidth: 2.0),
-        ) : _BuildButtons(sourceNotEmpty, updateAvailable),
+        trailing: _isLoading
+            ? const SizedBox(
+                height: 20,
+                width: 20,
+                child: CircularProgressIndicator(strokeWidth: 2.0),
+              )
+            : _BuildButtons(sourceNotEmpty, updateAvailable),
       ),
     );
   }
 
   Widget _BuildButtons(bool sourceNotEmpty, bool updateAvailable) {
-    return !sourceNotEmpty ? IconButton(
-      onPressed: () => _handleSourceAction(),
-      icon: const Icon(Icons.download)) : SizedBox(
-      width: 84,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          IconButton(
-            onPressed: () async {
-              if (updateAvailable) {
-                setState(() => _isLoading = true);
-                widget.source.isManga!
-                    ? await ref.watch(fetchMangaSourcesListProvider(
-                            id: widget.source.id, reFresh: true)
-                        .future)
-                    : await ref.watch(fetchAnimeSourcesListProvider(
-                            id: widget.source.id, reFresh: true)
-                        .future);
-                if (mounted) {
-                  setState(() => _isLoading = false);
-                }
-              } else {
-                AlertDialogBuilder(context)
-                  ..setTitle("Delete Extension")
-                  ..setMessage(
-                      "Are you sure you want to delete this extension?")
-                  ..setPositiveButton("Yes", () async {
-                    final sourcePrefsIds = isar.sourcePreferences
-                        .filter()
-                        .sourceIdEqualTo(widget.source.id!)
-                        .findAllSync()
-                        .map((e) => e.id!)
-                        .toList();
-                    final sourcePrefsStringIds = isar
-                        .sourcePreferenceStringValues
-                        .filter()
-                        .sourceIdEqualTo(widget.source.id!)
-                        .findAllSync()
-                        .map((e) => e.id)
-                        .toList();
-                    isar.writeTxnSync(() {
-                      if (widget.source.isObsolete ?? false) {
-                        isar.sources.deleteSync(widget.source.id!);
-                      } else {
-                        isar.sources.putSync(widget.source
-                          ..sourceCode = ""
-                          ..isAdded = false
-                          ..isPinned = false);
+    return !sourceNotEmpty
+        ? IconButton(
+            onPressed: () => _handleSourceAction(),
+            icon: const Icon(Icons.download))
+        : SizedBox(
+            width: 84,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconButton(
+                  onPressed: () async {
+                    if (updateAvailable) {
+                      setState(() => _isLoading = true);
+                      widget.source.isManga!
+                          ? await ref.watch(fetchMangaSourcesListProvider(
+                                  id: widget.source.id, reFresh: true)
+                              .future)
+                          : await ref.watch(fetchAnimeSourcesListProvider(
+                                  id: widget.source.id, reFresh: true)
+                              .future);
+                      if (mounted) {
+                        setState(() => _isLoading = false);
                       }
-                      isar.sourcePreferences
-                          .deleteAllSync(sourcePrefsIds);
-                      isar.sourcePreferenceStringValues
-                          .deleteAllSync(sourcePrefsStringIds);
-                    });
-                  })
-                  ..setNegativeButton("No", null)
-                  ..show();
-              }
-            },
-            icon: Icon(
-              size: 18,
-              updateAvailable ? Icons.update : FontAwesome.trash_solid,
-            ),
-          ),
-          IconButton(
-            onPressed: () async {
-              var sourcePreference = getSourcePreference(
-                      source: widget.source)
-                  .map((e) =>
-                      getSourcePreferenceEntry(e.key!, widget.source.id!))
-                  .toList();
-              navigateToPage(
-                context,
-                SourcePreferenceWidget(
-                  source: widget.source,
-                  sourcePreference: sourcePreference,
+                    } else {
+                      AlertDialogBuilder(context)
+                        ..setTitle("Delete Extension")
+                        ..setMessage(
+                            "Are you sure you want to delete this extension?")
+                        ..setPositiveButton("Yes", () async {
+                          final sourcePrefsIds = isar.sourcePreferences
+                              .filter()
+                              .sourceIdEqualTo(widget.source.id!)
+                              .findAllSync()
+                              .map((e) => e.id!)
+                              .toList();
+                          final sourcePrefsStringIds = isar
+                              .sourcePreferenceStringValues
+                              .filter()
+                              .sourceIdEqualTo(widget.source.id!)
+                              .findAllSync()
+                              .map((e) => e.id)
+                              .toList();
+                          isar.writeTxnSync(() {
+                            if (widget.source.isObsolete ?? false) {
+                              isar.sources.deleteSync(widget.source.id!);
+                            } else {
+                              isar.sources.putSync(widget.source
+                                ..sourceCode = ""
+                                ..isAdded = false
+                                ..isPinned = false);
+                            }
+                            isar.sourcePreferences
+                                .deleteAllSync(sourcePrefsIds);
+                            isar.sourcePreferenceStringValues
+                                .deleteAllSync(sourcePrefsStringIds);
+                          });
+                        })
+                        ..setNegativeButton("No", null)
+                        ..show();
+                    }
+                  },
+                  icon: Icon(
+                    size: 18,
+                    updateAvailable ? Icons.update : FontAwesome.trash_solid,
+                  ),
                 ),
-              );
-            },
-            icon: const Icon(FontAwesome.ellipsis_vertical_solid),
-          )
-        ],
-      ),
-    );
+                IconButton(
+                  onPressed: () async {
+                    var sourcePreference = getSourcePreference(
+                            source: widget.source)
+                        .map((e) =>
+                            getSourcePreferenceEntry(e.key!, widget.source.id!))
+                        .toList();
+                    navigateToPage(
+                      context,
+                      SourcePreferenceWidget(
+                        source: widget.source,
+                        sourcePreference: sourcePreference,
+                      ),
+                    );
+                  },
+                  icon: const Icon(FontAwesome.ellipsis_vertical_solid),
+                )
+              ],
+            ),
+          );
   }
 }

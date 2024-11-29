@@ -32,9 +32,10 @@ class OtherAnimeScreen extends BaseAnimeScreen {
       page: 1,
       query: '',
       filterList: [],
-    ))?.toMedia();
+    ))
+        ?.toMedia();
     trending.value = result;
-      _buildSections(installedSources);
+    _buildSections(installedSources);
   }
 
   Future<void> _buildSections(List<Source> s) async {

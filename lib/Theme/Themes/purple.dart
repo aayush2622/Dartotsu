@@ -39,7 +39,8 @@ final ThemeData purpleLightTheme = ThemeData(
     iconTheme: IconThemeData(color: Color(0xFFFFFFFF)),
   ),
   textTheme: const TextTheme(
-    headlineLarge: TextStyle(color: Color(0xFF1D1B1E), fontSize: 20, fontWeight: FontWeight.bold),
+    headlineLarge: TextStyle(
+        color: Color(0xFF1D1B1E), fontSize: 20, fontWeight: FontWeight.bold),
     bodyLarge: TextStyle(color: Color(0xFF1D1B1E)),
   ),
   fontFamily: 'Poppins',
@@ -84,7 +85,8 @@ final ThemeData purpleDarkTheme = ThemeData(
     iconTheme: IconThemeData(color: Color(0xFF4A1765)),
   ),
   textTheme: const TextTheme(
-    headlineLarge: TextStyle(color: Color(0xFF4A1765), fontSize: 20, fontWeight: FontWeight.bold),
+    headlineLarge: TextStyle(
+        color: Color(0xFF4A1765), fontSize: 20, fontWeight: FontWeight.bold),
     bodyLarge: TextStyle(color: Color(0xFFE8E0E5)),
   ),
   fontFamily: 'Poppins',

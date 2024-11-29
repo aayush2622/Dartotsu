@@ -6,6 +6,7 @@ import '../../extension_preferences_providers.dart';
 class JsPreferences {
   late JavascriptRuntime runtime;
   late Source? source;
+
   JsPreferences(this.runtime, this.source);
 
   void init() {

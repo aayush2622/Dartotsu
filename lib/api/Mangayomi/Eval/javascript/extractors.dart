@@ -1,12 +1,14 @@
 import 'dart:convert';
+
 import 'package:flutter_qjs/flutter_qjs.dart';
-import 'http.dart';
 
 import '../dart/model/m_bridge.dart';
 import '../dart/model/video.dart';
+import 'http.dart';
 
 class JsVideosExtractors {
   late JavascriptRuntime runtime;
+
   JsVideosExtractors(this.runtime);
 
   void init() {

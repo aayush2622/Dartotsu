@@ -65,7 +65,8 @@ Media _$MediaFromJson(Map<String, dynamic> json) => Media(
               json['characters'] as Map<String, dynamic>),
       staff: json['staffPreview'] == null
           ? null
-          : StaffConnection.fromJson(json['staffPreview'] as Map<String, dynamic>),
+          : StaffConnection.fromJson(
+              json['staffPreview'] as Map<String, dynamic>),
       studios: json['studios'] == null
           ? null
           : StudioConnection.fromJson(json['studios'] as Map<String, dynamic>),

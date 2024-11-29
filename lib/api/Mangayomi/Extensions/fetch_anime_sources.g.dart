@@ -172,6 +172,7 @@ class _FetchAnimeSourcesListProviderElement
 
   @override
   int? get id => (origin as FetchAnimeSourcesListProvider).id;
+
   @override
   bool get reFresh => (origin as FetchAnimeSourcesListProvider).reFresh;
 }

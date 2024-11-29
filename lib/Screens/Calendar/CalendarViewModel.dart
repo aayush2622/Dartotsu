@@ -6,15 +6,16 @@ import '../../DataClass/Media.dart';
 import '../../api/Anilist/Anilist.dart';
 
 class CalendarViewModel extends GetxController {
-  var calendarData =  Rxn<Map<String, List<Media>>>();
+  var calendarData = Rxn<Map<String, List<Media>>>();
   var cachedAllCalendarData = Rxn<Map<String, List<Media>>>();
   var cachedLibraryCalendarData = Rxn<Map<String, List<Media>>>();
   var isLoading = false.obs;
 
   Future<void> loadAll({bool showOnlyLibrary = false}) async {
-    try{
+    try {
       isLoading.value = true;
-      if (cachedAllCalendarData.value == null || cachedLibraryCalendarData.value == null) {
+      if (cachedAllCalendarData.value == null ||
+          cachedLibraryCalendarData.value == null) {
         final res = await Anilist.query!.getCalendarData();
 
         final DateFormat df = DateFormat.yMMMMEEEEd();
@@ -23,15 +24,21 @@ class CalendarViewModel extends GetxController {
         final Map<String, List<int>> idMap = {};
 
         final int userId = Anilist.userid ?? 0;
-        final userLibrary = await Anilist.query!.getMediaLists(userId: userId, anime: true);
-        final libraryMediaIds = userLibrary.values.expand((list) => list).map((m) => m.id).toList();
+        final userLibrary =
+            await Anilist.query!.getMediaLists(userId: userId, anime: true);
+        final libraryMediaIds =
+            userLibrary.values.expand((list) => list).map((m) => m.id).toList();
 
         for (var item in res) {
-          final List<int> v = item.relation?.split(",").map((e) => int.parse(e)).toList() ?? [];
-          final String dateInfo = df.format(DateTime.fromMillisecondsSinceEpoch(v[1] * 1000));
+          final List<int> v =
+              item.relation?.split(",").map((e) => int.parse(e)).toList() ?? [];
+          final String dateInfo =
+              df.format(DateTime.fromMillisecondsSinceEpoch(v[1] * 1000));
 
           final list = allMap.putIfAbsent(dateInfo, () => []);
-          final List<Media>? libraryList = libraryMediaIds.contains(item.id) ? libraryMap.putIfAbsent(dateInfo, () => []) : null;
+          final List<Media>? libraryList = libraryMediaIds.contains(item.id)
+              ? libraryMap.putIfAbsent(dateInfo, () => [])
+              : null;
           final idList = idMap.putIfAbsent(dateInfo, () => []);
 
           item.relation = "Episode ${v[0]}";
@@ -46,12 +53,11 @@ class CalendarViewModel extends GetxController {
         cachedLibraryCalendarData.value = libraryMap;
       }
 
-      calendarData.value = (showOnlyLibrary ? cachedLibraryCalendarData.value ?? {} : cachedAllCalendarData.value ?? {});
-    }finally{
+      calendarData.value = (showOnlyLibrary
+          ? cachedLibraryCalendarData.value ?? {}
+          : cachedAllCalendarData.value ?? {});
+    } finally {
       isLoading.value = false;
     }
   }
-
-
-
 }

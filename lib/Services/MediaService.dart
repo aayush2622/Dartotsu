@@ -1,12 +1,25 @@
+import 'package:dantotsu/Services/Screens/BaseLoginScreen.dart';
+import 'package:dantotsu/api/Other/OtherService.dart';
 import 'package:flutter/material.dart';
 
+import '../api/Anilist/AnilistService.dart';
+import '../api/Kitsu/KitsuService.dart';
+import '../api/MyAnimeList/MalService.dart';
 import 'BaseServiceData.dart';
 import 'Screens/BaseAnimeScreen.dart';
 import 'Screens/BaseHomeScreen.dart';
 import 'Screens/BaseMangaScreen.dart';
 
 abstract class MediaService {
-  MediaServiceType get type;
+  static final List<MediaService> _instances = [];
+
+  MediaService() {
+    _instances.add(this);
+  }
+
+  static List<MediaService> get allServices => List.unmodifiable(_instances);
+
+  String get iconPath;
 
   BaseServiceData get data;
 
@@ -16,31 +29,19 @@ abstract class MediaService {
 
   BaseMangaScreen? mangaScreen;
 
-  Widget LoginScreen() => notImplemented("LoginScreen"); // not like this
+  BaseLoginScreen? loginScreen;
 
   notImplemented(String name) {
     return Center(
-      child: Text("$name not implemented on ${type.name}"),
+      child: Text(
+          "$name not implemented on ${runtimeType.toString().replaceAll('Service', '')}"),
     );
   }
 }
 
-enum MediaServiceType {
-  ANILIST,
-  KITSU,
-  MAL,
-  Other;
-
-  Icon get iconUrl {
-    switch (this) {
-      case MediaServiceType.ANILIST:
-        return const Icon(Icons.tv);
-      case MediaServiceType.KITSU:
-        return const Icon(Icons.calendar_month);
-      case MediaServiceType.MAL:
-        return const Icon(Icons.calendar_today);
-      default:
-        return const Icon(Icons.ac_unit);
-    }
-  }
+void initializeMediaServices() {
+  AnilistService();
+  MalService();
+  KitsuService();
+  OtherService();
 }

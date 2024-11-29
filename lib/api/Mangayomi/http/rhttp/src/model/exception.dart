@@ -1,7 +1,9 @@
 import 'dart:typed_data';
-import 'request.dart';
+
 import 'package:dantotsu/api/Mangayomi/http/src/rust/api/rhttp/error.dart' as rust;
 import 'package:dantotsu/api/Mangayomi/http/src/rust/api/rhttp/http.dart' as rust_http;
+
+import 'request.dart';
 
 /// The base class for all exceptions thrown by the `rhttp` library
 /// or by interceptors.

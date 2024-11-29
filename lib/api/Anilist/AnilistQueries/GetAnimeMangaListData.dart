@@ -42,19 +42,19 @@ extension on AnilistQueries {
     Map<String, void Function()> returnMap = {
       'Recent Updates': () => list["recentUpdates"] =
           filterRecentUpdates(animeList?.data?.recentUpdates)!,
-      'Trending Movies': () async =>
-          list["trendingMovies"] = await _mediaList(animeList?.data?.trendingMovies),
-      'Top Rated Series': () async =>
-          list["topRatedSeries"] = await _mediaList(animeList?.data?.topRatedSeries),
-      'Most Favourite Series': () async =>
-          list["mostFavSeries"] = await _mediaList(animeList?.data?.mostFavSeries),
+      'Trending Movies': () async => list["trendingMovies"] =
+          await _mediaList(animeList?.data?.trendingMovies),
+      'Top Rated Series': () async => list["topRatedSeries"] =
+          await _mediaList(animeList?.data?.topRatedSeries),
+      'Most Favourite Series': () async => list["mostFavSeries"] =
+          await _mediaList(animeList?.data?.mostFavSeries),
     };
     animeLayoutMap.entries
         .where((entry) => entry.value && returnMap.containsKey(entry.key))
         .forEach((entry) => returnMap[entry.key]!());
 
     list["popularAnime"] = await _mediaList(animeList?.data?.popularAnime);
-    list["trendingAnime"] =await _mediaList(animeList?.data?.trendingAnime);
+    list["trendingAnime"] = await _mediaList(animeList?.data?.trendingAnime);
     return list;
   }
 
@@ -65,10 +65,10 @@ extension on AnilistQueries {
         await executeQuery<MangaListResponse>(_queryMangaList(), force: true);
 
     Map<String, void Function()> returnMap = {
-      'Trending Manhwa': () async =>
-          list["trendingManhwa"] = await _mediaList(mangaList?.data?.trendingManhwa),
-      'Trending Novels': () async =>
-          list["trendingNovel"] =  await _mediaList(mangaList?.data?.trendingNovel),
+      'Trending Manhwa': () async => list["trendingManhwa"] =
+          await _mediaList(mangaList?.data?.trendingManhwa),
+      'Trending Novels': () async => list["trendingNovel"] =
+          await _mediaList(mangaList?.data?.trendingNovel),
       'Top Rated Manga': () async =>
           list["topRated"] = await _mediaList(mangaList?.data?.topRated),
       'Most Favourite Manga': () async =>
@@ -78,8 +78,8 @@ extension on AnilistQueries {
         .where((entry) => entry.value && returnMap.containsKey(entry.key))
         .forEach((entry) => returnMap[entry.key]!());
 
-    list["popularManga"] =await _mediaList(mangaList?.data?.popularManga);
-    list["trending"] =await _mediaList(mangaList?.data?.trending);
+    list["popularManga"] = await _mediaList(mangaList?.data?.popularManga);
+    list["trending"] = await _mediaList(mangaList?.data?.trending);
     return list;
   }
 }
@@ -120,7 +120,7 @@ String _queryMangaList() {
   final mangaLayoutMap = PrefManager.getVal(PrefName.anilistMangaLayout);
   final extra = [
     'trending: ${_buildQueryString("TRENDING_DESC", "MANGA", perPage: 12, country: "JP")}',
-    'popularManga: ${_buildQueryString("POPULARITY_DESC", "MANGA",perPage: 50, country: "JP")}',
+    'popularManga: ${_buildQueryString("POPULARITY_DESC", "MANGA", perPage: 50, country: "JP")}',
   ];
   final Map<String, List<String>> queryMappings = {
     'Trending Manhwa': [

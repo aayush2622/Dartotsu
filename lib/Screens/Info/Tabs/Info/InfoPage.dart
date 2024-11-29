@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:dantotsu/Adaptor/Charactes/Widgets/EntitySection.dart';
 import 'package:dantotsu/Functions/Function.dart';
 import 'package:dantotsu/Screens/Info/Tabs/Info/Widgets/FollowerWidget.dart';
@@ -23,57 +25,56 @@ class InfoPage extends StatefulWidget {
 }
 
 class InfoPageState extends State<InfoPage> {
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context).colorScheme;
     var type = widget.mediaData.anime != null ? "ANIME" : "MANGA";
-    return  Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ...releasingIn(widget.mediaData,context),
-            _buildWithPadding([
-              ..._buildInfoSections(),
-              ..._buildNameSections(),
-            ]),
-            ..._buildSynonyms(theme),
-            FollowerWidget(follower: widget.mediaData.users,type: type),
-            _buildWithPadding([GenreWidget(context, widget.mediaData.genres)]),
-            ..._buildTags(theme),
-            ..._buildPrequelSection(),
-            if (widget.mediaData.relations?.isNotEmpty ?? false)
-              MediaSection(
-                context: context,
-                type: 0,
-                title: "Relations",
-                mediaList: widget.mediaData.relations,
-                isLarge: true,
-              ),
-            if (widget.mediaData.characters?.isNotEmpty ?? false)
-              entitySection(
-                context: context,
-                type: EntityType.Character,
-                title: "Characters",
-                characterList: widget.mediaData.characters,
-              ),
-            if (widget.mediaData.staff?.isNotEmpty ?? false)
-              entitySection(
-                context: context,
-                type: EntityType.Staff,
-                title: "Staff",
-                staffList: widget.mediaData.staff,
-              ),
-            if (widget.mediaData.recommendations?.isNotEmpty ?? false)
-              MediaSection(
-                context: context,
-                type: 0,
-                title: "Recommended",
-                mediaList: widget.mediaData.recommendations,
-              ),
-            const SizedBox(height: 64.0),
-          ],
-        );
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        ...releasingIn(widget.mediaData, context),
+        _buildWithPadding([
+          ..._buildInfoSections(),
+          ..._buildNameSections(),
+        ]),
+        ..._buildSynonyms(theme),
+        FollowerWidget(follower: widget.mediaData.users, type: type),
+        _buildWithPadding([GenreWidget(context, widget.mediaData.genres)]),
+        ..._buildTags(theme),
+        ..._buildPrequelSection(),
+        if (widget.mediaData.relations?.isNotEmpty ?? false)
+          MediaSection(
+            context: context,
+            type: 0,
+            title: "Relations",
+            mediaList: widget.mediaData.relations,
+            isLarge: true,
+          ),
+        if (widget.mediaData.characters?.isNotEmpty ?? false)
+          entitySection(
+            context: context,
+            type: EntityType.Character,
+            title: "Characters",
+            characterList: widget.mediaData.characters,
+          ),
+        if (widget.mediaData.staff?.isNotEmpty ?? false)
+          entitySection(
+            context: context,
+            type: EntityType.Staff,
+            title: "Staff",
+            staffList: widget.mediaData.staff,
+          ),
+        if (widget.mediaData.recommendations?.isNotEmpty ?? false)
+          MediaSection(
+            context: context,
+            type: 0,
+            title: "Recommended",
+            mediaList: widget.mediaData.recommendations,
+          ),
+        const SizedBox(height: 64.0),
+      ],
+    );
   }
 
   Widget _buildWithPadding(List<Widget> widgets) {
@@ -207,6 +208,9 @@ class InfoPageState extends State<InfoPage> {
   List<Widget> _buildPrequelSection() {
     var prequel = widget.mediaData.prequel;
     var sequel = widget.mediaData.sequel;
+    final random = Random().nextInt(100000);
+    final prequelTag = '${prequel?.id}$random';
+    final sequelTag = '${sequel?.id}$random';
     return [
       const SizedBox(height: 24.0),
       Row(
@@ -216,14 +220,14 @@ class InfoPageState extends State<InfoPage> {
             MediaCard(
               context,
               'PREQUEL',
-              MediaInfoPage(prequel),
+              MediaInfoPage(prequel,prequelTag),
               prequel.banner ?? prequel.cover ?? 'https://bit.ly/31bsIHq',
             ),
           if (sequel != null)
             MediaCard(
               context,
               'SEQUEL',
-              MediaInfoPage(sequel),
+              MediaInfoPage(sequel, sequelTag),
               sequel.banner ?? sequel.cover ?? 'https://bit.ly/2ZGfcuG',
             ),
         ],

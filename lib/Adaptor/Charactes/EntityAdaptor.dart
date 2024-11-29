@@ -60,7 +60,11 @@ class EntityAdaptorState extends State<EntityAdaptor> {
                 finalOffset: Offset.zero,
                 duration: const Duration(milliseconds: 200),
                 child: GestureDetector(
-                    onTap: () =>listType == EntityType.Character ? navigateToPage(context,CharacterScreen(characterInfo:characterList![index])) :navigateToPage(context,StaffScreen(staffInfo:staffList![index])),
+                  onTap: () => listType == EntityType.Character
+                      ? navigateToPage(context,
+                          CharacterScreen(characterInfo: characterList![index]))
+                      : navigateToPage(
+                          context, StaffScreen(staffInfo: staffList![index])),
                   child: Container(
                     width: 102,
                     margin: margin,

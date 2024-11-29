@@ -17,7 +17,6 @@ abstract class BaseParser extends GetxController {
   var status = Rxn<String>(null);
   var source = Rxn<Source>(null);
 
-
   void saveSelected(int id, Selected data) {
     PrefManager.setCustomVal("Selected-$id", data);
   }
@@ -54,20 +53,20 @@ abstract class BaseParser extends GetxController {
 
     List<MManga> sortedResults = media!.list.isNotEmpty
         ? (media.list
-      ..sort((a, b) {
-        final aRatio = ratio(
-            a.name!.toLowerCase(), mediaData.mainName().toLowerCase());
-        final bRatio = ratio(
-            b.name!.toLowerCase(), mediaData.mainName().toLowerCase());
-        return bRatio.compareTo(aRatio);
-      }))
+          ..sort((a, b) {
+            final aRatio = ratio(
+                a.name!.toLowerCase(), mediaData.mainName().toLowerCase());
+            final bRatio = ratio(
+                b.name!.toLowerCase(), mediaData.mainName().toLowerCase());
+            return bRatio.compareTo(aRatio);
+          }))
         : [];
     sortedResults.firstOrNull;
     response = sortedResults.firstOrNull;
 
     if (response == null ||
         ratio(response.name!.toLowerCase(),
-            mediaData.mainName().toLowerCase()) <
+                mediaData.mainName().toLowerCase()) <
             100) {
       status.value = "Searching : ${mediaData.nameRomaji}";
       final mediaFuture = search(
@@ -79,13 +78,13 @@ abstract class BaseParser extends GetxController {
       final media = await mediaFuture;
       List<MManga> sortedRomajiResults = media!.list.isNotEmpty
           ? (media.list
-        ..sort((a, b) {
-          final aRatio = ratio(
-              a.name!.toLowerCase(), mediaData.nameRomaji.toLowerCase());
-          final bRatio = ratio(
-              b.name!.toLowerCase(), mediaData.nameRomaji.toLowerCase());
-          return bRatio.compareTo(aRatio);
-        }))
+            ..sort((a, b) {
+              final aRatio = ratio(
+                  a.name!.toLowerCase(), mediaData.nameRomaji.toLowerCase());
+              final bRatio = ratio(
+                  b.name!.toLowerCase(), mediaData.nameRomaji.toLowerCase());
+              return bRatio.compareTo(aRatio);
+            }))
           : [];
       var closestRomaji = sortedRomajiResults.firstOrNull;
       if (response == null) {
@@ -113,13 +112,13 @@ abstract class BaseParser extends GetxController {
           final media = await mediaFuture;
           List<MManga> sortedResults = media!.list.isNotEmpty
               ? (media.list
-            ..sort((a, b) {
-              final aRatio = ratio(
-                  a.name!.toLowerCase(), synonym.toLowerCase());
-              final bRatio = ratio(
-                  b.name!.toLowerCase(), synonym.toLowerCase());
-              return bRatio.compareTo(aRatio);
-            }))
+                ..sort((a, b) {
+                  final aRatio =
+                      ratio(a.name!.toLowerCase(), synonym.toLowerCase());
+                  final bRatio =
+                      ratio(b.name!.toLowerCase(), synonym.toLowerCase());
+                  return bRatio.compareTo(aRatio);
+                }))
               : [];
           var closest = sortedResults.firstOrNull;
           if (closest != null) {
@@ -154,7 +153,7 @@ abstract class BaseParser extends GetxController {
   _saveShowResponse(Media mediaData, MManga response, Source source,
       {bool selected = false}) {
     status.value =
-    selected ? "Selected : ${response.name}" : "Found : ${response.name}";
+        selected ? "Selected : ${response.name}" : "Found : ${response.name}";
     var show = ShowResponse(
         name: response.name!,
         link: response.link!,
@@ -163,9 +162,11 @@ abstract class BaseParser extends GetxController {
         "${source.name}_${mediaData.id}_source", show);
   }
 
-  Future<void> wrongTitle(BuildContext context,
-      Media mediaData,
-      Function(MManga)? onChange,) async {
+  Future<void> wrongTitle(
+    BuildContext context,
+    Media mediaData,
+    Function(MManga)? onChange,
+  ) async {
     var dialog = WrongTitleDialog(
         source: source.value!,
         mediaData: mediaData,

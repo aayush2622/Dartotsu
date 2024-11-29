@@ -1,6 +1,6 @@
 import 'dart:async';
-import '../../../src/rust/api/rhttp/http.dart' as rust;
 
+import '../../../src/rust/api/rhttp/http.dart' as rust;
 import '../../../src/rust/lib.dart' as rust_lib;
 
 

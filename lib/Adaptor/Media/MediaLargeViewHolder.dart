@@ -10,8 +10,9 @@ import 'Widgets/MediaScoreBadge.dart';
 
 class MediaPageLargeViewHolder extends StatelessWidget {
   final Media mediaInfo;
+  final String tag;
 
-  const MediaPageLargeViewHolder(this.mediaInfo, {super.key});
+  const MediaPageLargeViewHolder(this.mediaInfo, this.tag, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -138,21 +139,23 @@ class MediaPageLargeViewHolder extends StatelessWidget {
   }
 
   Widget _buildMediaCover() {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(16.0),
-      child: cachedNetworkImage(
-        imageUrl: mediaInfo.cover ?? '',
-        fit: BoxFit.cover,
-        width: 108,
-        height: 160,
-        errorWidget: (context, url, error) => const SizedBox.shrink(),
-        placeholder: (context, url) => Container(
-          color: Colors.white12,
-          width: 108,
-          height: 160,
-        ),
-      ),
-    );
+    return Hero(
+        tag: tag,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(16.0),
+          child: cachedNetworkImage(
+            imageUrl: mediaInfo.cover ?? '',
+            fit: BoxFit.cover,
+            width: 108,
+            height: 160,
+            errorWidget: (context, url, error) => const SizedBox.shrink(),
+            placeholder: (context, url) => Container(
+              color: Colors.white12,
+              width: 108,
+              height: 160,
+            ),
+          ),
+        ));
   }
 
   Widget _buildAdditionalInfo(ColorScheme theme) {

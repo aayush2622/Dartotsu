@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:grouped_list/sliver_grouped_list.dart';
 
+import '../../Preferences/Preferences.dart';
 import '../../api/Mangayomi/Extensions/GetSourceList.dart';
 import '../../api/Mangayomi/Extensions/extensions_provider.dart';
 import '../../api/Mangayomi/Extensions/fetch_anime_sources.dart';
 import '../../api/Mangayomi/Extensions/fetch_manga_sources.dart';
 import '../../api/Mangayomi/Model/Source.dart';
-import '../../Preferences/Preferences.dart';
 import '../Settings/language.dart';
 import 'ExtensionItem.dart';
 
@@ -40,21 +40,28 @@ class _ExtensionScreenState extends ConsumerState<Extension> {
 
   Future<void> _fetchData() async {
     if (widget.isManga) {
-      await ref.read(fetchMangaSourcesListProvider(id: null, reFresh: false).future);
+      await ref
+          .read(fetchMangaSourcesListProvider(id: null, reFresh: false).future);
     } else {
-      await ref.read(fetchAnimeSourcesListProvider(id: null, reFresh: false).future);
+      await ref
+          .read(fetchAnimeSourcesListProvider(id: null, reFresh: false).future);
     }
   }
+
   Future<void> _refreshData() async {
     if (widget.isManga) {
-      return await ref.refresh(fetchMangaSourcesListProvider(id: null, reFresh: true).future);
+      return await ref.refresh(
+          fetchMangaSourcesListProvider(id: null, reFresh: true).future);
     } else {
-      return await ref.refresh(fetchAnimeSourcesListProvider(id: null, reFresh: true).future);
+      return await ref.refresh(
+          fetchAnimeSourcesListProvider(id: null, reFresh: true).future);
     }
   }
+
   @override
   Widget build(BuildContext context) {
-    final streamExtensions = ref.watch(getExtensionsStreamProvider(widget.isManga));
+    final streamExtensions =
+        ref.watch(getExtensionsStreamProvider(widget.isManga));
 
     return RefreshIndicator(
       onRefresh: _refreshData,
@@ -73,10 +80,8 @@ class _ExtensionScreenState extends ConsumerState<Extension> {
               child: CustomScrollView(
                 controller: _scrollController,
                 slivers: [
-                  if (widget.installed)
-                    _buildUpdatePendingList(updateEntries),
-                  if (widget.installed)
-                    _buildInstalledList(installedEntries),
+                  if (widget.installed) _buildUpdatePendingList(updateEntries),
+                  if (widget.installed) _buildInstalledList(installedEntries),
                   if (!widget.installed)
                     _buildNotInstalledList(notInstalledEntries),
                 ],
@@ -97,10 +102,12 @@ class _ExtensionScreenState extends ConsumerState<Extension> {
 
   List<Source> _filterData(List<Source> data) {
     return data
-        .where((element) => widget.query.isEmpty ||
-        element.name!.toLowerCase().contains(widget.query.toLowerCase()))
-        .where((element) => PrefManager.getVal(PrefName.NSFWExtensions) ||
-        element.isNsfw == false)
+        .where((element) =>
+            widget.query.isEmpty ||
+            element.name!.toLowerCase().contains(widget.query.toLowerCase()))
+        .where((element) =>
+            PrefManager.getVal(PrefName.NSFWExtensions) ||
+            element.isNsfw == false)
         .toList();
   }
 
@@ -113,7 +120,8 @@ class _ExtensionScreenState extends ConsumerState<Extension> {
 
   List<Source> _getUpdateEntries(List<Source> data) {
     return data
-        .where((element) => compareVersions(element.version!, element.versionLast!) < 0)
+        .where((element) =>
+            compareVersions(element.version!, element.versionLast!) < 0)
         .where((element) => element.isAdded!)
         .toList();
   }
@@ -125,7 +133,8 @@ class _ExtensionScreenState extends ConsumerState<Extension> {
         .toList();
   }
 
-  SliverGroupedListView<Source, String> _buildUpdatePendingList(List<Source> updateEntries) {
+  SliverGroupedListView<Source, String> _buildUpdatePendingList(
+      List<Source> updateEntries) {
     return SliverGroupedListView<Source, String>(
       elements: updateEntries,
       groupBy: (element) => "",
@@ -142,8 +151,12 @@ class _ExtensionScreenState extends ConsumerState<Extension> {
               onPressed: () async {
                 for (var source in updateEntries) {
                   source.isManga!
-                      ? await ref.watch(fetchMangaSourcesListProvider(id: source.id, reFresh: true).future)
-                      : await ref.watch(fetchAnimeSourcesListProvider(id: source.id, reFresh: true).future);
+                      ? await ref.watch(fetchMangaSourcesListProvider(
+                              id: source.id, reFresh: true)
+                          .future)
+                      : await ref.watch(fetchAnimeSourcesListProvider(
+                              id: source.id, reFresh: true)
+                          .future);
                 }
               },
               child: const Text(
@@ -154,14 +167,16 @@ class _ExtensionScreenState extends ConsumerState<Extension> {
           ],
         ),
       ),
-      itemBuilder: (context, Source element) => ExtensionListTileWidget(source: element),
+      itemBuilder: (context, Source element) =>
+          ExtensionListTileWidget(source: element),
       groupComparator: (group1, group2) => group1.compareTo(group2),
       itemComparator: (item1, item2) => item1.name!.compareTo(item2.name!),
       order: GroupedListOrder.ASC,
     );
   }
 
-  SliverGroupedListView<Source, String> _buildInstalledList(List<Source> installedEntries) {
+  SliverGroupedListView<Source, String> _buildInstalledList(
+      List<Source> installedEntries) {
     return SliverGroupedListView<Source, String>(
       elements: installedEntries,
       groupBy: (element) => "",
@@ -169,14 +184,16 @@ class _ExtensionScreenState extends ConsumerState<Extension> {
         padding: EdgeInsets.symmetric(horizontal: 12),
         child: SizedBox(),
       ),
-      itemBuilder: (context, Source element) => ExtensionListTileWidget(source: element),
+      itemBuilder: (context, Source element) =>
+          ExtensionListTileWidget(source: element),
       groupComparator: (group1, group2) => group1.compareTo(group2),
       itemComparator: (item1, item2) => item1.name!.compareTo(item2.name!),
       order: GroupedListOrder.ASC,
     );
   }
 
-  SliverGroupedListView<Source, String> _buildNotInstalledList(List<Source> notInstalledEntries) {
+  SliverGroupedListView<Source, String> _buildNotInstalledList(
+      List<Source> notInstalledEntries) {
     return SliverGroupedListView<Source, String>(
       elements: notInstalledEntries,
       groupBy: (element) => completeLanguageName(element.lang!.toLowerCase()),
@@ -191,7 +208,8 @@ class _ExtensionScreenState extends ConsumerState<Extension> {
           ],
         ),
       ),
-      itemBuilder: (context, Source element) => ExtensionListTileWidget(source: element),
+      itemBuilder: (context, Source element) =>
+          ExtensionListTileWidget(source: element),
       groupComparator: (group1, group2) => group1.compareTo(group2),
       itemComparator: (item1, item2) => item1.name!.compareTo(item2.name!),
       order: GroupedListOrder.ASC,

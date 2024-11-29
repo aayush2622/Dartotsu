@@ -1,4 +1,3 @@
-
 import '../api/Anilist/Data/character.dart';
 import 'Media.dart';
 

@@ -36,7 +36,8 @@ final ThemeData cyanLightTheme = ThemeData(
     iconTheme: IconThemeData(color: Color(0xFFFFFFFF)),
   ),
   textTheme: const TextTheme(
-    headlineLarge: TextStyle(color: Color(0xFFFFFFFF), fontSize: 20, fontWeight: FontWeight.bold),
+    headlineLarge: TextStyle(
+        color: Color(0xFFFFFFFF), fontSize: 20, fontWeight: FontWeight.bold),
     bodyLarge: TextStyle(color: Color(0xFF191C1E)),
   ),
   fontFamily: 'Poppins',
@@ -78,7 +79,8 @@ final ThemeData cyanDarkTheme = ThemeData(
     iconTheme: IconThemeData(color: Color(0xFF00344C)),
   ),
   textTheme: const TextTheme(
-    headlineLarge: TextStyle(color: Color(0xFF00344C), fontSize: 20, fontWeight: FontWeight.bold),
+    headlineLarge: TextStyle(
+        color: Color(0xFF00344C), fontSize: 20, fontWeight: FontWeight.bold),
     bodyLarge: TextStyle(color: Color(0xFFE2E2E5)),
   ),
   fontFamily: 'Poppins',

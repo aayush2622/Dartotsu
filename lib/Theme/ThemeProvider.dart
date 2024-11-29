@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../Preferences/Preferences.dart';
 import '../Preferences/PrefManager.dart';
+import '../Preferences/Preferences.dart';
 
 class ThemeNotifier extends ChangeNotifier {
   bool _isDarkMode = false;
@@ -12,10 +12,15 @@ class ThemeNotifier extends ChangeNotifier {
   int _customColor = 4280391411;
 
   bool get isDarkMode => _isDarkMode;
+
   bool get isOled => _isOled;
+
   String get theme => _theme;
+
   bool get useMaterialYou => _useMaterialYou;
+
   bool get useCustomColor => _useCustomColor;
+
   int get customColor => _customColor;
 
   ThemeNotifier() {
@@ -47,7 +52,7 @@ class ThemeNotifier extends ChangeNotifier {
     PrefManager.setVal(PrefName.isOled, isOled);
     if (isOled) {
       _isDarkMode = true;
-     PrefManager.setVal(PrefName.isDarkMode, true);
+      PrefManager.setVal(PrefName.isDarkMode, true);
     }
     notifyListeners();
   }
@@ -63,26 +68,26 @@ class ThemeNotifier extends ChangeNotifier {
   Future<void> setMaterialYou(bool useMaterialYou) async {
     _useMaterialYou = useMaterialYou;
     PrefManager.setVal(PrefName.useMaterialYou, useMaterialYou);
-    if (useMaterialYou){
+    if (useMaterialYou) {
       _useCustomColor = false;
       PrefManager.setVal(PrefName.useCustomColor, false);
     }
     notifyListeners();
   }
+
   Future<void> useCustomTheme(bool useCustomTheme) async {
     _useCustomColor = useCustomTheme;
     PrefManager.setVal(PrefName.useCustomColor, useCustomTheme);
-    if (useCustomTheme){
+    if (useCustomTheme) {
       _useMaterialYou = false;
       PrefManager.setVal(PrefName.useMaterialYou, false);
     }
     notifyListeners();
   }
+
   Future<void> setCustomColor(Color color) async {
     _customColor = color.value;
     PrefManager.setVal(PrefName.customColor, color.value);
     notifyListeners();
   }
-
 }
-

@@ -18,6 +18,8 @@ export 'src/model/exception.dart'
         RhttpUnknownException;
 export 'src/model/header.dart';
 export 'src/model/request.dart' show BaseHttpRequest, HttpRequest;
+export 'src/model/response.dart'
+    show HttpResponse, HttpBytesResponse, HttpStreamResponse, HttpVersion;
 export 'src/model/settings.dart'
     show
         ClientSettings,
@@ -25,5 +27,3 @@ export 'src/model/settings.dart'
         RedirectSettings,
         TlsSettings,
         ClientCertificate;
-export 'src/model/response.dart'
-    show HttpResponse, HttpBytesResponse, HttpStreamResponse, HttpVersion;

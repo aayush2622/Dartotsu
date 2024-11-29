@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-class SlideAndScaleAnimation extends StatefulWidget { // animation for media scrolling
+class SlideAndScaleAnimation extends StatefulWidget {
+  // animation for media scrolling
   final Widget child;
   final Duration duration;
   final double initialScale;

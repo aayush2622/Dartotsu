@@ -109,25 +109,25 @@ class MalAnimeScreen extends BaseAnimeScreen {
       for (var section in mediaSections) section.title: section
     };
     return animeLayoutMap.entries
-      .where((entry) => entry.value)
-      .map((entry) => sectionMap[entry.key])
-      .whereType<MediaSectionData>()
-      .map(
-        (section) => MediaSection(
-          context: context,
-          type: section.type,
-          title: section.title,
-          mediaList: section.list,
-          scrollController: section.scrollController,
-        ),
-      )
-      .toList()
-    ..add(
-      MediaSection(
-          context: context,
-          type: 2,
-          title: 'Popular Anime',
-          mediaList: animePopular.value),
-    );
+        .where((entry) => entry.value)
+        .map((entry) => sectionMap[entry.key])
+        .whereType<MediaSectionData>()
+        .map(
+          (section) => MediaSection(
+            context: context,
+            type: section.type,
+            title: section.title,
+            mediaList: section.list,
+            scrollController: section.scrollController,
+          ),
+        )
+        .toList()
+      ..add(
+        MediaSection(
+            context: context,
+            type: 2,
+            title: 'Popular Anime',
+            mediaList: animePopular.value),
+      );
   }
 }

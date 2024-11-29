@@ -1,16 +1,17 @@
 import 'dart:convert';
+
 import 'package:dantotsu/Functions/string_extensions.dart';
 import 'package:dantotsu/api/Mangayomi/Eval/dart/model/video.dart';
 import 'package:dantotsu/api/Mangayomi/Eval/javascript/http.dart';
 import 'package:dart_eval/dart_eval_bridge.dart';
 import 'package:dart_eval/stdlib/core.dart';
+import 'package:encrypt/encrypt.dart' as encrypt;
 import 'package:html/dom.dart' hide Text;
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:js_packer/js_packer.dart';
 import 'package:json_path/json_path.dart';
 import 'package:xpath_selector_html_parser/xpath_selector_html_parser.dart';
-import 'package:encrypt/encrypt.dart' as encrypt;
 
 import '../../../Model/Manga.dart';
 import '../../../anime_extractors/dood_extractor.dart';

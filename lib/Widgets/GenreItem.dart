@@ -1,15 +1,15 @@
-
 import 'package:flutter/material.dart';
 
 import '../../../Functions/Function.dart';
 import '../../../Widgets/CachedNetworkImage.dart';
 
-Widget GenreItem(BuildContext context, String title, {Widget? route, String? imageUrl}) {
+Widget GenreItem(BuildContext context, String title,
+    {Widget? route, String? imageUrl}) {
   double height = 54;
   double radius = 16;
 
   return GestureDetector(
-    onTap: () =>  route != null ? navigateToPage(context, route) : null,
+    onTap: () => route != null ? navigateToPage(context, route) : null,
     child: Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(radius),
@@ -52,5 +52,4 @@ Widget GenreItem(BuildContext context, String title, {Widget? route, String? ima
       ),
     ),
   );
-
 }

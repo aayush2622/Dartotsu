@@ -1,5 +1,6 @@
 import 'package:dantotsu/Services/Screens/BaseAnimeScreen.dart';
 import 'package:dantotsu/Services/Screens/BaseHomeScreen.dart';
+import 'package:dantotsu/Services/Screens/BaseLoginScreen.dart';
 import 'package:dantotsu/Services/Screens/BaseMangaScreen.dart';
 import 'package:dantotsu/api/Anilist/Screen/AnilistAnimeScreen.dart';
 import 'package:flutter/cupertino.dart';
@@ -13,8 +14,12 @@ import 'Screen/AnilistHomeScreen.dart';
 import 'Screen/AnilistMangaScreen.dart';
 
 class AnilistService extends MediaService {
+  AnilistService() {
+    Anilist.getSavedToken();
+  }
+
   @override
-  MediaServiceType get type => MediaServiceType.ANILIST;
+  String get iconPath => "assets/svg/anilist.svg";
 
   @override
   BaseServiceData get data => Anilist;
@@ -28,7 +33,14 @@ class AnilistService extends MediaService {
   @override
   BaseMangaScreen get mangaScreen => Get.put(AnilistMangaScreen(Anilist));
 
-
   @override
-  Widget LoginScreen() => const LoginScreenAnilist();
+  BaseLoginScreen get loginScreen => Get.put(AnilistLoginScreen(Anilist));
+}
+
+class AnilistLoginScreen extends BaseLoginScreen {
+  final AnilistController Anilist;
+
+  AnilistLoginScreen(this.Anilist);
+  @override
+  void login(BuildContext context) => Anilist.login(context);
 }

@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
@@ -8,7 +9,8 @@ extension DiscordUrlExtension on String {
   Future<String?> getDiscordUrl() async {
     var token = Discord.token.value;
     if (token.isEmpty) return null;
-    const String api = "https://discord.com/api/v9/applications/$applicationId/external-assets";
+    const String api =
+        "https://discord.com/api/v9/applications/$applicationId/external-assets";
     if (startsWith("mp:")) return this;
     final response = await http.post(
       Uri.parse(api),
@@ -16,7 +18,9 @@ extension DiscordUrlExtension on String {
         'Authorization': token,
         'Content-Type': 'application/json',
       },
-      body: jsonEncode({"urls": [this]}),
+      body: jsonEncode({
+        "urls": [this]
+      }),
     );
 
     if (response.statusCode == 200) {

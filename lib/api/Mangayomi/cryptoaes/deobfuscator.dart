@@ -3,33 +3,34 @@ class Deobfuscator {
     int idx = 0;
     final brackets = ['[', '('];
     final evaluatedString = StringBuffer();
-    
+
     while (idx < inputString.length) {
       final chr = inputString[idx];
-      
+
       if (!brackets.contains(chr)) {
         idx++;
         continue;
       }
-      
+
       final closingIndex = getMatchingBracketIndex(idx, inputString);
-      
+
       if (chr == '[') {
         final digit = calculateDigit(inputString.substring(idx, closingIndex));
         evaluatedString.write(digit);
       } else {
         evaluatedString.write('.');
-        
+
         if (inputString[closingIndex + 1] == '[') {
-          final skippingIndex = getMatchingBracketIndex(closingIndex + 1, inputString);
+          final skippingIndex = getMatchingBracketIndex(
+              closingIndex + 1, inputString);
           idx = skippingIndex + 1;
           continue;
         }
       }
-      
+
       idx = closingIndex + 1;
     }
-    
+
     return evaluatedString.toString();
   }
 
@@ -50,16 +51,20 @@ class Deobfuscator {
   }
 
   static String calculateDigit(String inputSubString) {
-    final digit = RegExp(r"\!\+\[\]").allMatches(inputSubString).length;
-    
+    final digit = RegExp(r"\!\+\[\]")
+        .allMatches(inputSubString)
+        .length;
+
     if (digit == 0) {
-      if (RegExp(r"\+\[\]").allMatches(inputSubString).length == 1) {
+      if (RegExp(r"\+\[\]")
+          .allMatches(inputSubString)
+          .length == 1) {
         return '0';
       }
     } else if (digit >= 1 && digit <= 9) {
       return digit.toString();
     }
-    
+
     return '-'; // Illegal digit
   }
 }

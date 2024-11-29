@@ -7,27 +7,36 @@ class Setting {
   ///
   /// [SettingType.switchType]: for setting that can be switched on/off
   final SettingType type;
+
   /// Title of the setting
   final String name;
+
   /// Description of the setting
   final String description;
+
   /// Icon of the setting
   final IconData icon;
+
   /// [isVisible]: to determine whether the setting is visible or not
   final bool isVisible;
+
   /// [isActivity]: to determine whether the setting has arrow icon at the end only for [SettingType.normal]
   final bool isActivity;
+
   /// [isChecked]: to determine whether the switch is on or off only for [SettingType.switchType]
   final bool isChecked;
+
   /// [onClick]: function to be executed when the setting is clicked only for [SettingType.normal]
   final Function()? onClick;
+
   /// [onLongClick]: function to be executed when the setting is long clicked only for [SettingType.normal]
   final Function()? onLongClick;
+
   /// [onSwitchChange]: function to be executed when the switch is changed only for [SettingType.switchType]
   final Function(bool)? onSwitchChange;
+
   /// [attach]: additional widget to be attached to the setting
   final Widget Function(BuildContext)? attach;
-
 
   Setting({
     required this.type,

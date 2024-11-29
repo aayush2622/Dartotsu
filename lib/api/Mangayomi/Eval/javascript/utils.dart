@@ -7,6 +7,7 @@ import '../dart/model/m_bridge.dart';
 
 class JsUtils {
   late JavascriptRuntime runtime;
+
   JsUtils(this.runtime);
 
   void init() {

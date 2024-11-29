@@ -3,9 +3,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:url_launcher/url_launcher.dart';
-import '../main.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import '../main.dart';
 
 class _RefreshController extends GetxController {
   var activity = <int, RxBool>{};
@@ -14,24 +15,26 @@ class _RefreshController extends GetxController {
     activity.forEach((key, value) {
       activity[key]?.value = true;
     });
-
   }
+
   void allButNot(int k) {
     activity.forEach((key, value) {
       if (k == key) return;
       activity[key]?.value = true;
     });
   }
+
   RxBool getOrPut(int key, bool initialValue) {
     return activity.putIfAbsent(key, () => RxBool(initialValue));
   }
 }
+
 var Refresh = Get.put(_RefreshController(), permanent: true);
 
 Future<void> snackString(
-    String? s, {
-    String? clipboard,
-    }) async {
+  String? s, {
+  String? clipboard,
+}) async {
   var context = navigatorKey.currentContext ?? Get.context;
 
   if (context != null && s != null && s.isNotEmpty) {
@@ -73,7 +76,6 @@ Future<void> snackString(
   }
 }
 
-
 void copyToClipboard(String text) {
   var context = navigatorKey.currentContext;
   var theme = Theme.of(context!).colorScheme;
@@ -108,7 +110,7 @@ Future<void> openLinkInBrowser(String url) async {
 void navigateToPage(BuildContext context, Widget page) {
   Navigator.push(
     context,
-    MaterialPageRoute(builder: (context) =>  page),
+    MaterialPageRoute(builder: (context) => page),
   );
 }
 

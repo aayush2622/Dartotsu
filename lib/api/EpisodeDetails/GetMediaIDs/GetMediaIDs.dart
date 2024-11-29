@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_qjs/quickjs/ffi.dart';
 import 'package:http/http.dart' as http;
@@ -48,7 +49,6 @@ enum AnimeIDType {
 }
 
 class GetMediaIDs {
-
   static List<AnimeID>? _animeListFuture;
 
   static AnimeID? fromID({
@@ -58,7 +58,7 @@ class GetMediaIDs {
     final animeList = _animeListFuture;
     final fieldName = type.fieldName;
     return animeList?.firstWhereOrNull(
-          (entry) => entry.toJson()[fieldName] == id,
+      (entry) => entry.toJson()[fieldName] == id,
     );
   }
 
@@ -80,7 +80,6 @@ class GetMediaIDs {
     }
   }
 }
-
 
 @JsonSerializable()
 class AnimeID {

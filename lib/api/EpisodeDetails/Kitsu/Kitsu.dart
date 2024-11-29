@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:json_annotation/json_annotation.dart';
@@ -9,9 +10,8 @@ import '../../../DataClass/Media.dart';
 part 'Kitsu.g.dart';
 
 class Kitsu {
-
-
-  static Future<Map<String, Episode>?> getKitsuEpisodesDetails(Media mediaData) async {
+  static Future<Map<String, Episode>?> getKitsuEpisodesDetails(
+      Media mediaData) async {
     final query = '''
     query {
       lookupMapping(externalId: ${mediaData.id}, externalSite: ANILIST_ANIME) {
@@ -37,7 +37,7 @@ class Kitsu {
     }
     ''';
 
-    final result =(await getKitsuData(query))?.data?.lookupMapping;
+    final result = (await getKitsuData(query))?.data?.lookupMapping;
     if (result == null) {
       return null;
     }
@@ -45,16 +45,17 @@ class Kitsu {
     mediaData.idKitsu = result.id;
 
     final episodesMap = result.episodes?.nodes?.asMap().map((_, ep) {
-      return MapEntry(
-        ep?.number?.toString() ?? '',
-        Episode(
-          number: ep?.number.toString() ?? '',
-          title: ep?.titles?.canonical,
-          desc: ep?.description?.en,
-          thumb: ep?.thumbnail?.original?.url,
-        ),
-      );
-    }) ?? {};
+          return MapEntry(
+            ep?.number?.toString() ?? '',
+            Episode(
+              number: ep?.number.toString() ?? '',
+              title: ep?.titles?.canonical,
+              desc: ep?.description?.en,
+              thumb: ep?.thumbnail?.original?.url,
+            ),
+          );
+        }) ??
+        {};
 
     return episodesMap;
   }
@@ -98,6 +99,7 @@ class KitsuResponse {
 
   factory KitsuResponse.fromJson(Map<String, dynamic> json) =>
       _$KitsuResponseFromJson(json);
+
   Map<String, dynamic> toJson() => _$KitsuResponseToJson(this);
 }
 
@@ -108,6 +110,7 @@ class Data {
   Data({this.lookupMapping});
 
   factory Data.fromJson(Map<String, dynamic> json) => _$DataFromJson(json);
+
   Map<String, dynamic> toJson() => _$DataToJson(this);
 }
 
@@ -120,6 +123,7 @@ class LookupMapping {
 
   factory LookupMapping.fromJson(Map<String, dynamic> json) =>
       _$LookupMappingFromJson(json);
+
   Map<String, dynamic> toJson() => _$LookupMappingToJson(this);
 }
 
@@ -131,6 +135,7 @@ class Episodes {
 
   factory Episodes.fromJson(Map<String, dynamic> json) =>
       _$EpisodesFromJson(json);
+
   Map<String, dynamic> toJson() => _$EpisodesToJson(this);
 }
 
@@ -144,6 +149,7 @@ class Node {
   Node({this.number, this.titles, this.description, this.thumbnail});
 
   factory Node.fromJson(Map<String, dynamic> json) => _$NodeFromJson(json);
+
   Map<String, dynamic> toJson() => _$NodeToJson(this);
 }
 
@@ -155,6 +161,7 @@ class Description {
 
   factory Description.fromJson(Map<String, dynamic> json) =>
       _$DescriptionFromJson(json);
+
   Map<String, dynamic> toJson() => _$DescriptionToJson(this);
 }
 
@@ -166,6 +173,7 @@ class Thumbnail {
 
   factory Thumbnail.fromJson(Map<String, dynamic> json) =>
       _$ThumbnailFromJson(json);
+
   Map<String, dynamic> toJson() => _$ThumbnailToJson(this);
 }
 
@@ -177,6 +185,7 @@ class Original {
 
   factory Original.fromJson(Map<String, dynamic> json) =>
       _$OriginalFromJson(json);
+
   Map<String, dynamic> toJson() => _$OriginalToJson(this);
 }
 
@@ -187,5 +196,6 @@ class Titles {
   Titles({this.canonical});
 
   factory Titles.fromJson(Map<String, dynamic> json) => _$TitlesFromJson(json);
+
   Map<String, dynamic> toJson() => _$TitlesToJson(this);
 }

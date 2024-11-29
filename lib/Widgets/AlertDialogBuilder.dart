@@ -40,7 +40,9 @@ class AlertDialogBuilder {
       _with(() => _onDismiss = onDismiss);
 
   AlertDialogBuilder setTitle(String? title) => _with(() => _title = title);
+
   AlertDialogBuilder setTitleWidget(Widget? w) => _with(() => _titleWidget = w);
+
   AlertDialogBuilder setMessage(String? message) =>
       _with(() => _message = message);
 

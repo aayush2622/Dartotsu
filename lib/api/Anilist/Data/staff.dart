@@ -64,6 +64,7 @@ class Staff {
   });
 
   factory Staff.fromJson(Map<String, dynamic> json) => _$StaffFromJson(json);
+
   Map<String, dynamic> toJson() => _$StaffToJson(this);
 }
 
@@ -73,7 +74,9 @@ class StaffName {
 
   StaffName({this.userPreferred});
 
-  factory StaffName.fromJson(Map<String, dynamic> json) => _$StaffNameFromJson(json);
+  factory StaffName.fromJson(Map<String, dynamic> json) =>
+      _$StaffNameFromJson(json);
+
   Map<String, dynamic> toJson() => _$StaffNameToJson(this);
 }
 
@@ -84,7 +87,9 @@ class StaffConnection {
 
   StaffConnection({this.edges, this.nodes});
 
-  factory StaffConnection.fromJson(Map<String, dynamic> json) => _$StaffConnectionFromJson(json);
+  factory StaffConnection.fromJson(Map<String, dynamic> json) =>
+      _$StaffConnectionFromJson(json);
+
   Map<String, dynamic> toJson() => _$StaffConnectionToJson(this);
 }
 
@@ -92,9 +97,12 @@ class StaffConnection {
 class StaffImage {
   String? large;
   String? medium;
+
   StaffImage({this.large, this.medium});
 
-  factory StaffImage.fromJson(Map<String, dynamic> json) => _$StaffImageFromJson(json);
+  factory StaffImage.fromJson(Map<String, dynamic> json) =>
+      _$StaffImageFromJson(json);
+
   Map<String, dynamic> toJson() => _$StaffImageToJson(this);
 }
 
@@ -105,6 +113,8 @@ class StaffEdge {
 
   StaffEdge({this.role, this.node});
 
-  factory StaffEdge.fromJson(Map<String, dynamic> json) => _$StaffEdgeFromJson(json);
+  factory StaffEdge.fromJson(Map<String, dynamic> json) =>
+      _$StaffEdgeFromJson(json);
+
   Map<String, dynamic> toJson() => _$StaffEdgeToJson(this);
 }

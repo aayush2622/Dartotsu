@@ -106,7 +106,6 @@ abstract class BaseWatchScreen<T extends StatefulWidget> extends State<T> {
     if (mediaData.anime?.youtube == null ||
         !PrefManager.getVal(PrefName.showYtButton)) return [];
 
-
     return [
       SizedBox(
         height: 48,

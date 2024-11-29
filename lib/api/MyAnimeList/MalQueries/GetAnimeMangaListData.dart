@@ -4,24 +4,22 @@ extension on MalQueries {
   static const field =
       "fields=mean,num_list_users,status,nsfw,mean,my_list_status,num_episodes,num_chapters,genres";
 
-  Future<List<Media>> fetchMediaList(String endpoint) async {
-    final response = await externalQuery<MediaResponse>(endpoint);
-    return await compute(_processMediaResponse, response?.data);
-  }
-
-  List<Media> _processMediaResponse(List<Datum>? data) {
-    return data
-            ?.where((m) => m.node != null)
-            .map((m) => Media.fromMal(m.node!))
-            .toList() ??
-        [];
+  Future<List<Media>> processMediaResponse(MediaResponse? data) async {
+    return await compute(
+        (data) =>
+            data
+                ?.where((m) => m.node != null)
+                .map((m) => Media.fromMal(m.node!))
+                .toList() ??
+            [],
+        data?.data);
   }
 
   Future<Map<String, List<Media>>> _getAnimeList() async {
     final list = <String, List<Media>>{};
     final animeLayoutMap = PrefManager.getVal(PrefName.malAnimeLayout);
 
-    var currentSeasonMap = mal.currentSeasons[1];
+    var currentSeasonMap = Mal.currentSeasons[1];
     var season = currentSeasonMap.keys.first;
     var year = currentSeasonMap.values.first;
 
@@ -50,17 +48,18 @@ extension on MalQueries {
         .toList();
 
     var endpoints = extra + generateOrderedQueries;
-    final results = await Future.wait(endpoints.map(fetchMediaList));
-    int resultIndex = 2;
-    queryMappings.forEach((key, _) {
+    final results =
+        await Future.wait(endpoints.map(executeQuery<MediaResponse>));
+    int resultIndex = 1;
+    queryMappings.forEach((key, _) async {
       if (animeLayoutMap[key] == true) {
-        list[key.camelCase!] = results[resultIndex];
         resultIndex++;
+        list[key.camelCase!] = await processMediaResponse(results[resultIndex]);
       }
     });
 
-    list["popularAnime"] = results[0];
-    list["trendingAnime"] = results[1];
+    list["popularAnime"] = await processMediaResponse(results[0]);
+    list["trendingAnime"] = await processMediaResponse(results[1]);
 
     return list;
   }
@@ -93,17 +92,18 @@ extension on MalQueries {
         .toList();
 
     var endpoints = extra + generateOrderedQueries;
-    final results = await Future.wait(endpoints.map(fetchMediaList));
+    final results =
+        await Future.wait(endpoints.map(executeQuery<MediaResponse>));
 
-    int resultIndex = 2;
-    queryMappings.forEach((key, _) {
+    int resultIndex = 1;
+    queryMappings.forEach((key, _) async {
       if (mangaLayoutMap[key] == true) {
-        list[key.camelCase!] = results[resultIndex];
         resultIndex++;
+        list[key.camelCase!] = await processMediaResponse(results[resultIndex]);
       }
     });
-    list["popularManga"] = results[0];
-    list["trendingManga"] = results[1];
+    list["popularManga"] = await processMediaResponse(results[0]);
+    list["trendingManga"] = await processMediaResponse(results[1]);
     return list;
   }
 
@@ -113,11 +113,12 @@ extension on MalQueries {
         '${MalStrings.endPoint}anime/season/$year/$season?limit=15&offset=1&sort=anime_num_list_users&$field';
     var manga =
         '${MalStrings.endPoint}manga/ranking?offset=0&ranking_type=$season&limit=15&$field';
-    return await fetchMediaList(year != null ? anime : manga);
+    return await processMediaResponse(
+        await executeQuery<MediaResponse>(year != null ? anime : manga));
   }
 
   Future<List<Media>> _loadNextPage(String type, int page) async {
-    return await fetchMediaList(
-        '${MalStrings.endPoint}$type/ranking?offset=${page * 50}&ranking_type=bypopularity&limit=50&$field');
+    return await processMediaResponse(await executeQuery<MediaResponse>(
+        '${MalStrings.endPoint}$type/ranking?offset=${page * 50}&ranking_type=bypopularity&limit=50&$field'));
   }
 }

@@ -1,5 +1,7 @@
 import 'package:isar/isar.dart';
+
 import '../Eval/dart/model/m_source.dart';
+
 part 'Source.g.dart';
 
 @collection
@@ -62,31 +64,31 @@ class Source {
 
   Source(
       {this.id = 0,
-        this.name = '',
-        this.baseUrl = '',
-        this.lang = '',
-        this.typeSource = '',
-        this.iconUrl = '',
-        this.dateFormat = '',
-        this.dateFormatLocale = '',
-        this.isActive = true,
-        this.isAdded = false,
-        this.isNsfw = false,
-        this.isFullData = false,
-        this.hasCloudflare = false,
-        this.isPinned = false,
-        this.lastUsed = false,
-        this.apiUrl = "",
-        this.sourceCodeUrl = "",
-        this.version = "0.0.1",
-        this.versionLast = "0.0.1",
-        this.sourceCode = '',
-        this.headers = '',
-        this.isManga = true,
-        this.appMinVerReq = "",
-        this.additionalParams = "",
-        this.isLocal = false,
-        this.isObsolete = false});
+      this.name = '',
+      this.baseUrl = '',
+      this.lang = '',
+      this.typeSource = '',
+      this.iconUrl = '',
+      this.dateFormat = '',
+      this.dateFormatLocale = '',
+      this.isActive = true,
+      this.isAdded = false,
+      this.isNsfw = false,
+      this.isFullData = false,
+      this.hasCloudflare = false,
+      this.isPinned = false,
+      this.lastUsed = false,
+      this.apiUrl = "",
+      this.sourceCodeUrl = "",
+      this.version = "0.0.1",
+      this.versionLast = "0.0.1",
+      this.sourceCode = '',
+      this.headers = '',
+      this.isManga = true,
+      this.appMinVerReq = "",
+      this.additionalParams = "",
+      this.isLocal = false,
+      this.isObsolete = false});
 
   Source.fromJson(Map<String, dynamic> json) {
     apiUrl = json['apiUrl'];
@@ -116,38 +118,38 @@ class Source {
     isObsolete = json['isObsolete'];
     isLocal = json['isLocal'];
     sourceCodeLanguage =
-    SourceCodeLanguage.values[json['sourceCodeLanguage'] ?? 0];
+        SourceCodeLanguage.values[json['sourceCodeLanguage'] ?? 0];
   }
 
   Map<String, dynamic> toJson() => {
-    'apiUrl': apiUrl,
-    'appMinVerReq': appMinVerReq,
-    'baseUrl': baseUrl,
-    'dateFormat': dateFormat,
-    'dateFormatLocale': dateFormatLocale,
-    'hasCloudflare': hasCloudflare,
-    'headers': headers,
-    'iconUrl': iconUrl,
-    'id': id,
-    'isActive': isActive,
-    'isAdded': isAdded,
-    'isFullData': isFullData,
-    'isManga': isManga,
-    'isNsfw': isNsfw,
-    'isPinned': isPinned,
-    'lang': lang,
-    'lastUsed': lastUsed,
-    'name': name,
-    'sourceCode': sourceCode,
-    'sourceCodeUrl': sourceCodeUrl,
-    'typeSource': typeSource,
-    'version': version,
-    'versionLast': versionLast,
-    'additionalParams': additionalParams,
-    'sourceCodeLanguage': sourceCodeLanguage.index,
-    'isObsolete': isObsolete,
-    'isLocal': isLocal
-  };
+        'apiUrl': apiUrl,
+        'appMinVerReq': appMinVerReq,
+        'baseUrl': baseUrl,
+        'dateFormat': dateFormat,
+        'dateFormatLocale': dateFormatLocale,
+        'hasCloudflare': hasCloudflare,
+        'headers': headers,
+        'iconUrl': iconUrl,
+        'id': id,
+        'isActive': isActive,
+        'isAdded': isAdded,
+        'isFullData': isFullData,
+        'isManga': isManga,
+        'isNsfw': isNsfw,
+        'isPinned': isPinned,
+        'lang': lang,
+        'lastUsed': lastUsed,
+        'name': name,
+        'sourceCode': sourceCode,
+        'sourceCodeUrl': sourceCodeUrl,
+        'typeSource': typeSource,
+        'version': version,
+        'versionLast': versionLast,
+        'additionalParams': additionalParams,
+        'sourceCodeLanguage': sourceCodeLanguage.index,
+        'isObsolete': isObsolete,
+        'isLocal': isLocal
+      };
 
   bool get isTorrent => (typeSource?.toLowerCase() ?? "") == "torrent";
 

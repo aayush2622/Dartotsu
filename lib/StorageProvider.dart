@@ -2,14 +2,15 @@ import 'dart:io';
 
 import 'package:dantotsu/api/Mangayomi/Model/settings.dart';
 import 'package:isar/isar.dart';
+import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:path/path.dart' as path;
 
 import 'api/Mangayomi/Eval/dart/model/source_preference.dart';
 import 'api/Mangayomi/Model/Manga.dart';
 import 'api/Mangayomi/Model/Source.dart';
 import 'api/Mangayomi/Model/chapter.dart';
+
 class StorageProvider {
   Future<bool> requestPermission() async {
     Permission permission = Permission.manageExternalStorage;
@@ -26,6 +27,7 @@ class StorageProvider {
     }
     return true;
   }
+
   Future<Directory?> getDatabaseDirectory() async {
     final dir = await getApplicationDocumentsDirectory();
     if (Platform.isAndroid || Platform.isIOS || Platform.isMacOS) {
@@ -36,6 +38,7 @@ class StorageProvider {
       return Directory(dbDir);
     }
   }
+
   Future<Isar> initDB(String? path, {bool inspector = false}) async {
     Directory? dir;
     if (path == null) {
@@ -55,7 +58,7 @@ class StorageProvider {
 
     if (isar.settings.filter().idEqualTo(227).isEmptySync()) {
       isar.writeTxnSync(
-            () {
+        () {
           isar.settings.putSync(Settings());
         },
       );

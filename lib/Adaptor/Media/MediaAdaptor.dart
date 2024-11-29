@@ -1,6 +1,5 @@
-import 'dart:async';
-
-import 'package:dantotsu/Adaptor/Media/MediaLargeViewHolder.dart';
+import 'dart:math';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dantotsu/Functions/Extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -10,6 +9,7 @@ import '../../DataClass/Media.dart';
 import '../../Functions/Function.dart';
 import '../../Screens/Info/MediaScreen.dart';
 import '../../Widgets/ScrollConfig.dart';
+import 'MediaLargeViewHolder.dart';
 import 'MediaPageSmallViewHolder.dart';
 import 'MediaViewHolder.dart';
 
@@ -18,7 +18,7 @@ class MediaAdaptor extends StatefulWidget {
   final List<Media> mediaList;
   final bool isLarge;
   final ScrollController? scrollController;
-  final Function(int index,Media media)? onMediaTap;
+  final Function(int index, Media media)? onMediaTap;
 
   const MediaAdaptor({
     super.key,
@@ -56,11 +56,11 @@ class MediaGridState extends State<MediaAdaptor> {
   Widget build(BuildContext context) {
     switch (widget.type) {
       case 0:
-        return _buildGridLayout();
+        return _buildHorizontalList();
       case 1:
-        return _buildLargeView();
+        return _buildCarouselView();
       case 2:
-        return _buildListLayout();
+        return _buildVerticalList();
       case 3:
         return _buildStaggeredGrid();
       default:
@@ -68,206 +68,145 @@ class MediaGridState extends State<MediaAdaptor> {
     }
   }
 
-  Widget _buildStaggeredGrid() {
-    var height = widget.isLarge ? 270.0 : 250.0;
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final parentWidth = constraints.maxWidth;
-        var crossAxisCount = (parentWidth / 124).floor();
-        if (crossAxisCount < 1) crossAxisCount = 1;
-        return Padding(
-          padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
-          child: StaggeredGrid.count(
-            crossAxisSpacing: 16,
-            crossAxisCount: crossAxisCount,
-            children: List.generate(
-              _mediaList.length,
-                  (index) {
-                return GestureDetector(
-                  onTap: () {
-                    if (widget.onMediaTap != null) {
-                      widget.onMediaTap!(index, _mediaList[index]);
-                    } else {
-                      navigateToPage(context, MediaInfoPage(_mediaList[index]));
-                    }
-                  },
-                  onLongPress: () {},
-                  child: SizedBox(
-                    width: 108,
-                    height: height,
-                    child: MediaViewHolder(
-                      mediaInfo: _mediaList[index],
-                      isLarge: widget.isLarge,
-                    ),
-                  ),
-                );
-              },
-            ),
-          ),
-        );
-      },
-    );
+  String _generateTag(int index) => '${_mediaList[index].id}${Random().nextInt(100000)}';
+
+  void _handleMediaTap(int index, Media media, String tag) {
+    if (widget.onMediaTap != null) {
+      widget.onMediaTap!(index, media);
+    } else {
+      navigateToPage(context, MediaInfoPage(media, tag));
+    }
   }
 
-  Widget _buildListLayout() {
-    return AnimatedSwitcher(
-      duration: const Duration(milliseconds: 500),
-      child: Container(
-        constraints: const BoxConstraints(maxHeight: double.infinity),
-        child: PrimaryScrollController(
-          controller: widget.scrollController ?? ScrollController(),
-          child: ListView.builder(
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemCount: _mediaList.length,
-            itemBuilder: (context, index) {
-              return SlideAndScaleAnimation(
-                initialScale: 0.0,
-                finalScale: 1.0,
-                initialOffset: const Offset(0.0, -1.0),
-                finalOffset: const Offset(0.0, 0.0),
-                duration: const Duration(milliseconds: 200),
-                child: GestureDetector(
-                  onTap: () {
-                    if (widget.onMediaTap != null) {
-                      widget.onMediaTap!(index, _mediaList[index]);
-                    } else {
-                      navigateToPage(context, MediaInfoPage(_mediaList[index]));
-                    }
-                  },
-                  onLongPress:() {},
-                  child: Container(
-                    width: double.infinity,
-                    margin: const EdgeInsets.symmetric(horizontal: 18, vertical: 4),
-                    child: MediaPageLargeViewHolder(_mediaList[index]),
-                  ),
-                ),
-              );
-            },
-          ),
-        ),
+
+  Widget _buildAnimatedMediaItem({
+    required Widget child,
+    required String tag,
+    required int index,
+    Offset initialOffset = Offset.zero,
+  }) {
+    return SlideAndScaleAnimation(
+      initialScale: 0.0,
+      finalScale: 1.0,
+      initialOffset: initialOffset,
+      finalOffset: Offset.zero,
+      duration: const Duration(milliseconds: 200),
+      child: GestureDetector(
+        onTap: () => _handleMediaTap(index, _mediaList[index], tag),
+        child: child,
       ),
     );
   }
 
-  Widget _buildGridLayout() {
+  Widget _buildHorizontalList() {
     var height = widget.isLarge ? 270.0 : 250.0;
     return SizedBox(
       height: height,
-      child: AnimatedSwitcher(
-        duration: const Duration(milliseconds: 500),
-        child: ScrollConfig(
-          context,
-          child: ListView.builder(
-            controller: widget.scrollController,
-            scrollDirection: Axis.horizontal,
-            itemCount: _mediaList.length,
-            itemBuilder: (context, index) {
-              final isFirst = index == 0;
-              final isLast = index == _mediaList.length - 1;
-              final margin = EdgeInsets.only(
-                left: isFirst ? 24.0 : 6.5,
-                right: isLast ? 24.0 : 6.5,
-              );
-              return SlideAndScaleAnimation(
-                initialScale: 0.0,
-                finalScale: 1.0,
-                initialOffset: const Offset(1.0, 0.0),
-                finalOffset: Offset.zero,
-                duration: const Duration(milliseconds: 200),
-                child: GestureDetector(
-                  onTap: () {
-                    if (widget.onMediaTap != null) {
-                      widget.onMediaTap!(index, _mediaList[index]);
-                    } else {
-                      navigateToPage(context, MediaInfoPage(_mediaList[index]));
-                    }
-                  },
-                  onLongPress: () {},
-                  child: Container(
-                    width: 102,
-                    margin: margin,
-                    child: MediaViewHolder(
-                        mediaInfo: _mediaList[index], isLarge: widget.isLarge),
-                  ),
+      child: ScrollConfig(
+        context,
+        child: ListView.builder(
+          controller: widget.scrollController,
+          scrollDirection: Axis.horizontal,
+          itemCount: _mediaList.length,
+          itemBuilder: (context, index) {
+            final tag = _generateTag(index);
+            return Container(
+              width: 102,
+              margin: const EdgeInsets.symmetric(horizontal: 6.5).copyWith(
+                left: index == 0 ? 24.0 : 6.5,
+                right: index == _mediaList.length - 1 ? 24.0 : 6.5,
+              ),
+              child: _buildAnimatedMediaItem(
+                child: MediaViewHolder(
+                  mediaInfo: _mediaList[index],
+                  isLarge: widget.isLarge,
+                  tag: tag,
                 ),
-              );
-            },
+                tag: tag,
+                index: index,
+                initialOffset: const Offset(1.0, 0.0),
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCarouselView() {
+    return SizedBox(
+      height: 464 + (0.statusBar() * 2),
+      child: ScrollConfig(
+        context,
+        child: CarouselSlider.builder(
+          itemCount: _mediaList.length,
+          itemBuilder: (context, index, realIndex) {
+            final tag = _generateTag(index);
+            return GestureDetector(
+              onTap: () => _handleMediaTap(index, _mediaList[index], tag),
+              child: MediaPageSmallViewHolder(_mediaList[index], tag),
+            );
+          },
+          options: CarouselOptions(
+            height: 464 + (0.statusBar() * 2),
+            viewportFraction: 1,
+            autoPlay: true,
+            autoPlayInterval: const Duration(seconds: 5),
+            autoPlayAnimationDuration: const Duration(milliseconds: 800),
+            autoPlayCurve: Curves.fastOutSlowIn,
           ),
         ),
       ),
     );
   }
 
-  Widget _buildLargeView() {
-    return LargeView(mediaList: _mediaList);
-  }
-}
-
-class LargeView extends StatefulWidget {
-  final List<Media> mediaList;
-
-  const LargeView({super.key, required this.mediaList});
-
-  @override
-  LargeViewState createState() => LargeViewState();
-}
-
-class LargeViewState extends State<LargeView> {
-  late PageController _pageController;
-  Timer? _timer;
-
-  @override
-  void initState() {
-    super.initState();
-    _pageController = PageController();
-    if (widget.mediaList.isNotEmpty) _startAutoScroll();
-  }
-
-  @override
-  void dispose() {
-    _timer?.cancel();
-    _pageController.dispose();
-    super.dispose();
+  Widget _buildVerticalList() {
+    return ScrollConfig(
+      context,
+      child: ListView.builder(
+        controller: widget.scrollController,
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        itemCount: _mediaList.length,
+        itemBuilder: (context, index) {
+          final tag = _generateTag(index);
+          return Container(
+            margin: const EdgeInsets.symmetric(horizontal: 18, vertical: 4),
+            child: _buildAnimatedMediaItem(
+              child: MediaPageLargeViewHolder(_mediaList[index], tag),
+              tag: tag,
+              index: index,
+              initialOffset: const Offset(0.0, -1.0),
+            ),
+          );
+        },
+      ),
+    );
   }
 
-  void _startAutoScroll() {
-    _timer?.cancel();
-    _timer = Timer.periodic(const Duration(seconds: 4), (Timer timer) {
-      if (_pageController.hasClients) {
-        final page = _pageController.page?.toInt() ?? 0;
-        final nextPage = (page + 1) % widget.mediaList.length;
-        _pageController.animateToPage(
-          nextPage,
-          duration: const Duration(milliseconds: 500),
-          curve: Curves.easeInOut,
-        );
-      }
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 464 + (0.statusBar() * 2),
-      child: AnimatedSwitcher(
-        duration: const Duration(milliseconds: 500),
-        child: ScrollConfig(
-          context,
-          child: PageView.builder(
-            controller: _pageController,
-            scrollDirection: Axis.horizontal,
-            itemCount: widget.mediaList.length,
-            itemBuilder: (context, index) {
-              return GestureDetector(
-                onTap: () => navigateToPage(
-                    context, MediaInfoPage(widget.mediaList[index])),
-                onLongPress: () {},
-                child: MediaPageSmallViewHolder(widget.mediaList[index]),
-              );
-            },
-          ),
-        ),
+  Widget _buildStaggeredGrid() {
+    var height = widget.isLarge ? 270.0 : 250.0;
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: StaggeredGrid.count(
+        crossAxisSpacing: 16,
+        crossAxisCount: max(1, (MediaQuery.of(context).size.width / 124).floor()),
+        children: List.generate(_mediaList.length, (index) {
+          final tag = _generateTag(index);
+          return SizedBox(
+            width: 108,
+            height: height,
+            child: _buildAnimatedMediaItem(
+              child: MediaViewHolder(
+                mediaInfo: _mediaList[index],
+                isLarge: widget.isLarge,
+                tag: tag,
+              ),
+              tag: tag,
+              index: index,
+            ),
+          );
+        }),
       ),
     );
   }

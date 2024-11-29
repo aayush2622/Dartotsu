@@ -1,10 +1,8 @@
 part of '../AnilistQueries.dart';
 
-
-
 extension on AnilistQueries {
   Future<bool> _getUserData() async {
-    if (Anilist.isInitialized.value == true){
+    if (Anilist.isInitialized.value == true) {
       return true;
     }
     if (Anilist.run.value == false) {

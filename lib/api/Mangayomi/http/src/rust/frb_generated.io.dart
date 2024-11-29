@@ -3,16 +3,18 @@
 
 // ignore_for_file: unused_import, unused_element, unnecessary_import, duplicate_ignore, invalid_use_of_internal_member, annotate_overrides, non_constant_identifier_names, curly_braces_in_flow_control_structures, prefer_const_literals_to_create_immutables, unused_field
 
+import 'dart:async';
+import 'dart:convert';
+import 'dart:ffi' as ffi;
+
+import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated_io.dart';
+
 import 'api/image.dart';
 import 'api/rhttp/client.dart';
 import 'api/rhttp/error.dart';
 import 'api/rhttp/http.dart';
-import 'dart:async';
-import 'dart:convert';
-import 'dart:ffi' as ffi;
 import 'frb_generated.dart';
 import 'lib.dart';
-import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated_io.dart';
 
 abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   RustLibApiImplPlatform({

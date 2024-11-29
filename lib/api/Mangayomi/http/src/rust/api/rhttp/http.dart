@@ -3,12 +3,14 @@
 
 // ignore_for_file: invalid_use_of_internal_member, unused_import, unnecessary_import
 
+import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
+import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
+
 import '../../frb_generated.dart';
 import '../../lib.dart';
 import 'client.dart';
 import 'error.dart';
-import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
-import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
+
 part 'http.freezed.dart';
 
 // These functions are ignored because they are not marked as `pub`: `build_cancel_tokens`, `from_version`, `header_to_vec`, `make_http_request_helper`, `make_http_request_receive_stream_inner`, `register_client_internal`, `to_method`

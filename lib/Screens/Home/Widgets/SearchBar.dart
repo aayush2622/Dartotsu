@@ -53,9 +53,10 @@ class MediaSearchBar extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 8),
-           GestureDetector(
+          GestureDetector(
             child: const AvatarWidget(icon: Icons.settings),
-            onTap: () => showCustomBottomDialog(context, const SettingsBottomSheet()),
+            onTap: () =>
+                showCustomBottomDialog(context, const SettingsBottomSheet()),
           )
         ],
       ),

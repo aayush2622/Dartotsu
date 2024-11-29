@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'media.g.dart';
+part 'Generated/media.g.dart';
 
 @JsonSerializable()
 class Media {
@@ -109,10 +109,12 @@ class MyListStatus {
     this.finishDate,
   });
 
-  factory MyListStatus.fromJson(Map<String, dynamic> json) => _$MyListStatusFromJson(json);
+  factory MyListStatus.fromJson(Map<String, dynamic> json) =>
+      _$MyListStatusFromJson(json);
 
   Map<String, dynamic> toJson() => _$MyListStatusToJson(this);
 }
+
 @JsonSerializable()
 class Ranking {
   @JsonKey(name: "rank")

@@ -1,4 +1,5 @@
 import 'package:isar/isar.dart';
+
 part 'source_preference.g.dart';
 
 @collection

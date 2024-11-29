@@ -34,7 +34,9 @@ class WrongTitleDialogState extends State<WrongTitleDialog> {
   @override
   void initState() {
     super.initState();
-    final initialSearchText = widget.selectedMedia?.value?.name ??  widget.mediaData.mainName(); '';
+    final initialSearchText =
+        widget.selectedMedia?.value?.name ?? widget.mediaData.mainName();
+    '';
     textEditingController.text = initialSearchText;
     searchFuture = _performSearch(initialSearchText);
   }
@@ -104,7 +106,9 @@ class WrongTitleDialogState extends State<WrongTitleDialog> {
   Widget _buildResultList(AsyncSnapshot<MPages?> snapshot, ColorScheme theme) {
     if (snapshot.connectionState == ConnectionState.waiting) {
       return const Center(child: CircularProgressIndicator());
-    } else if (snapshot.hasError || !snapshot.hasData || snapshot.data!.list.isEmpty) {
+    } else if (snapshot.hasError ||
+        !snapshot.hasData ||
+        snapshot.data!.list.isEmpty) {
       return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: Text(

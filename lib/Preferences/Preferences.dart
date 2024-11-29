@@ -1,3 +1,4 @@
+import 'HiveDataClasses/MalToken/MalToken.dart';
 import 'PrefManager.dart';
 
 class PrefName {
@@ -28,6 +29,18 @@ class PrefName {
     'Favourite Manga': false,
     'Planned Manga': false,
     'Recommended': true,
+  });
+
+  static const Pref<Map<String, bool>> malHomeLayout =
+      Pref(Location.General, 'malHomeLayoutOrder', {
+    'Continue Watching': true,
+    'OnHold Anime': false,
+    'Planned Anime': true,
+    'Dropped Anime': false,
+    'Continue Reading': true,
+    'OnHold Manga': false,
+    'Planned Manga': true,
+    'Dropped Manga': false,
   });
   static const Pref<Set<int>> removeList =
       Pref(Location.General, 'removeList', {});
@@ -89,7 +102,8 @@ class PrefName {
   //Protection
   static const Pref<String> anilistToken =
       Pref(Location.Protected, 'AnilistToken', '');
-  static const Pref<String> malToken = Pref(Location.Protected, 'MalToken', '');
+  static const Pref<ResponseToken?> malToken =
+      Pref(Location.Protected, 'MalToken', null);
   static const Pref<String> discordToken =
       Pref(Location.Protected, 'DiscordToken', '');
   static const Pref<String> discordUserName =

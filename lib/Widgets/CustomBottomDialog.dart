@@ -147,7 +147,7 @@ class _CustomBottomDialogState extends State<CustomBottomDialog> {
                 ],
               ),
             ),
-            SizedBox(height: 0.bottomBar()),// TODO: test navbar padding
+            SizedBox(height: 0.bottomBar()), // TODO: test navbar padding
           ],
         ),
       ),

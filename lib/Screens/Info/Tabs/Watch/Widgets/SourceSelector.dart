@@ -83,7 +83,6 @@ class _SourceSelectorState extends ConsumerState<SourceSelector> {
           }
           var theme = Theme.of(context).colorScheme;
 
-
           return Column(
             children: [
               Row(

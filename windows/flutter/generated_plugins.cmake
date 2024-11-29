@@ -3,11 +3,11 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
+  desktop_webview_window
   dynamic_color
   flutter_qjs
   isar_flutter_libs
   permission_handler_windows
-  protocol_handler_windows
   screen_brightness_windows
   screen_retriever_windows
   share_plus
@@ -15,6 +15,7 @@ list(APPEND FLUTTER_PLUGIN_LIST
   url_launcher_windows
   webview_windows
   window_manager
+  window_to_front
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST

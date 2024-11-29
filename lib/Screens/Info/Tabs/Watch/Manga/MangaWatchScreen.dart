@@ -29,11 +29,8 @@ class MangaWatchScreenState extends BaseWatchScreen<MangaWatchScreen> {
     super.initState();
     _viewModel = Get.put(MangaParser(), tag: widget.mediaData.id.toString());
     widget.mediaData.selected = _viewModel.loadSelected(widget.mediaData);
-
   }
 
   @override
   get widgetList => [];
-
-  
 }

@@ -12,8 +12,9 @@ import 'Widgets/MediaScoreBadge.dart';
 
 class MediaPageSmallViewHolder extends StatelessWidget {
   final Media mediaInfo;
+  final String tag;
 
-  const MediaPageSmallViewHolder(this.mediaInfo, {super.key});
+  const MediaPageSmallViewHolder(this.mediaInfo, this.tag, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -128,7 +129,9 @@ class MediaPageSmallViewHolder extends StatelessWidget {
   }
 
   Widget _buildMediaCover() {
-    return  ClipRRect(
+    return Hero(
+      tag: tag,
+      child: ClipRRect(
         borderRadius: BorderRadius.circular(16.0),
         child: cachedNetworkImage(
           imageUrl: mediaInfo.cover ?? '',
@@ -141,8 +144,8 @@ class MediaPageSmallViewHolder extends StatelessWidget {
             height: 160,
           ),
         ),
-      );
-
+      ),
+    );
   }
 
   Widget _buildAdditionalInfo(ColorScheme theme) {
@@ -151,8 +154,8 @@ class MediaPageSmallViewHolder extends StatelessWidget {
     final mediaCount = isAnime
         ? formatMediaInfo(mediaInfo)
         : mediaInfo.manga?.totalChapters != 0
-        ? "${mediaInfo.manga?.totalChapters ?? "??"}"
-        : "??";
+            ? "${mediaInfo.manga?.totalChapters ?? "??"}"
+            : "??";
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -212,4 +215,3 @@ String formatMediaInfo(Media media) {
       ? "$nextAiringEpisode / $totalEpisodes"
       : totalEpisodes;
 }
-

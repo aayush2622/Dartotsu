@@ -30,6 +30,7 @@ class User {
   });
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+
   Map<String, dynamic> toJson() => _$UserToJson(this);
 }
 
@@ -55,21 +56,16 @@ class UserOptions {
     this.restrictMessagesToFollowing,
   });
 
-  factory UserOptions.fromJson(Map<String, dynamic> json) => _$UserOptionsFromJson(json);
+  factory UserOptions.fromJson(Map<String, dynamic> json) =>
+      _$UserOptionsFromJson(json);
+
   Map<String, dynamic> toJson() => _$UserOptionsToJson(this);
 }
 
-enum UserTitleLanguage {
-  ENGLISH,
-  ROMAJI,
-  NATIVE
-}
+enum UserTitleLanguage { ENGLISH, ROMAJI, NATIVE }
 
-enum UserStaffNameLanguage {
-  ROMAJI_WESTERN,
-  ROMAJI,
-  NATIVE
-}
+enum UserStaffNameLanguage { ROMAJI_WESTERN, ROMAJI, NATIVE }
+
 @JsonSerializable()
 class UserAvatar {
   final String? large;
@@ -80,7 +76,9 @@ class UserAvatar {
     this.medium,
   });
 
-  factory UserAvatar.fromJson(Map<String, dynamic> json) => _$UserAvatarFromJson(json);
+  factory UserAvatar.fromJson(Map<String, dynamic> json) =>
+      _$UserAvatarFromJson(json);
+
   Map<String, dynamic> toJson() => _$UserAvatarToJson(this);
 }
 
@@ -94,7 +92,9 @@ class UserStatisticTypes {
     this.manga,
   });
 
-  factory UserStatisticTypes.fromJson(Map<String, dynamic> json) => _$UserStatisticTypesFromJson(json);
+  factory UserStatisticTypes.fromJson(Map<String, dynamic> json) =>
+      _$UserStatisticTypesFromJson(json);
+
   Map<String, dynamic> toJson() => _$UserStatisticTypesToJson(this);
 }
 
@@ -118,7 +118,9 @@ class UserStatistics {
     this.volumesRead,
   });
 
-  factory UserStatistics.fromJson(Map<String, dynamic> json) => _$UserStatisticsFromJson(json);
+  factory UserStatistics.fromJson(Map<String, dynamic> json) =>
+      _$UserStatisticsFromJson(json);
+
   Map<String, dynamic> toJson() => _$UserStatisticsToJson(this);
 }
 
@@ -138,7 +140,9 @@ class Favourites {
     this.studios,
   });
 
-  factory Favourites.fromJson(Map<String, dynamic> json) => _$FavouritesFromJson(json);
+  factory Favourites.fromJson(Map<String, dynamic> json) =>
+      _$FavouritesFromJson(json);
+
   Map<String, dynamic> toJson() => _$FavouritesToJson(this);
 }
 
@@ -156,7 +160,9 @@ class MediaListOptions {
     this.mangaList,
   });
 
-  factory MediaListOptions.fromJson(Map<String, dynamic> json) => _$MediaListOptionsFromJson(json);
+  factory MediaListOptions.fromJson(Map<String, dynamic> json) =>
+      _$MediaListOptionsFromJson(json);
+
   Map<String, dynamic> toJson() => _$MediaListOptionsToJson(this);
 }
 
@@ -172,6 +178,8 @@ class MediaListTypeOptions {
     this.customLists,
   });
 
-  factory MediaListTypeOptions.fromJson(Map<String, dynamic> json) => _$MediaListTypeOptionsFromJson(json);
+  factory MediaListTypeOptions.fromJson(Map<String, dynamic> json) =>
+      _$MediaListTypeOptionsFromJson(json);
+
   Map<String, dynamic> toJson() => _$MediaListTypeOptionsToJson(this);
 }

@@ -1,11 +1,10 @@
-
 import 'package:flutter/material.dart';
 
 import '../../../Functions/Function.dart';
 import '../../../Widgets/CachedNetworkImage.dart';
 
-Widget MediaCard(BuildContext context, String title, Widget route,
-    String imageUrl) {
+Widget MediaCard(
+    BuildContext context, String title, Widget route, String imageUrl) {
   double height = 72;
   final theme = Theme.of(context).colorScheme;
   var screenWidth = MediaQuery.of(context).size.width;
@@ -61,5 +60,4 @@ Widget MediaCard(BuildContext context, String title, Widget route,
       ),
     ),
   );
-
 }

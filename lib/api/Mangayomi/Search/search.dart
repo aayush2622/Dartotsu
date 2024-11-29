@@ -8,9 +8,9 @@ import '../Model/Source.dart';
 
 Future<MPages?> search(
     {required Source source,
-      required String query,
-      required int page,
-      required List<dynamic> filterList}) async {
+    required String query,
+    required int page,
+    required List<dynamic> filterList}) async {
   MPages? manga;
   if (source.sourceCodeLanguage == SourceCodeLanguage.dart) {
     manga = await DartExtensionService(source).search(query, page, filterList);

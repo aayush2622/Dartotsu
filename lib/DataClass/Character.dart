@@ -1,4 +1,3 @@
-
 import '../api/Anilist/Data/fuzzyData.dart';
 import 'Author.dart';
 import 'Media.dart';

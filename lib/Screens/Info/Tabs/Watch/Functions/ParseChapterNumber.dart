@@ -2,11 +2,11 @@ class ChapterRecognition {
   static const _numberPattern = r"([0-9]+)(\.[0-9]+)?(\.?[a-z]+)?";
 
   static final _unwanted =
-  RegExp(r"\b(?:v|ver|vol|version|volume|season|s)[^a-z]?[0-9]+");
+      RegExp(r"\b(?:v|ver|vol|version|volume|season|s)[^a-z]?[0-9]+");
 
   static final _unwantedWhiteSpace = RegExp(r"\s(?=extra|special|omake)");
 
-   static dynamic parseChapterNumber(String mangaTitle, String chapterName) {
+  static dynamic parseChapterNumber(String mangaTitle, String chapterName) {
     var name = chapterName.toLowerCase();
 
     name = name.replaceAll(mangaTitle.toLowerCase(), "").trim();

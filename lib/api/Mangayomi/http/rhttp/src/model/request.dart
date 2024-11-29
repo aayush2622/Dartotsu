@@ -1,9 +1,10 @@
 import 'dart:typed_data';
 
+import 'package:dantotsu/api/Mangayomi/http/src/rust/api/rhttp/http.dart' as rust;
+
 import '../client/rhttp_client.dart';
 import 'cancel_token.dart';
 import 'settings.dart';
-import 'package:dantotsu/api/Mangayomi/http/src/rust/api/rhttp/http.dart' as rust;
 
 
 

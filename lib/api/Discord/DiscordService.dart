@@ -143,7 +143,7 @@ class _DiscordService extends GetxController {
   }
 
   void setPresence(String presence) {
-    if (isInitialized ) {
+    if (isInitialized) {
       _setPresence(presence);
       _presenceStore = presence;
     } else {
@@ -173,7 +173,7 @@ class _DiscordService extends GetxController {
   }
 
   void testRpc() {
-    if (!isTemp){
+    if (!isTemp) {
       isTemp = true;
       final testRpc = jsonEncode({
         'op': 3,

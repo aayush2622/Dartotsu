@@ -1,5 +1,7 @@
 import 'dart:typed_data';
+
 import 'package:dart_eval/dart_eval.dart';
+
 import '../plugin.dart';
 
 Runtime runtimeEval(Uint8List bytecode) {

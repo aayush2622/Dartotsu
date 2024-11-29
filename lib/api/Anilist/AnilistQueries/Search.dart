@@ -54,7 +54,9 @@ extension on AnilistQueries {
     };
 
     final response = (await executeQuery<PageResponse>(_querySearch(perPage),
-            variables: jsonEncode(variables), force: true))?.data?.page;
+            variables: jsonEncode(variables), force: true))
+        ?.data
+        ?.page;
     if (response?.media != null) {
       List<Media> responseArray = [];
 

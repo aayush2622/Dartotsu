@@ -6,14 +6,7 @@ import '../../DataClass/Media.dart';
 import '../../Functions/Function.dart';
 import '../../Preferences/PrefManager.dart';
 import '../../Preferences/Preferences.dart';
-import '../Discord/Discord.dart';
 import 'Anilist.dart';
-
-Future<void> getUserId() async {
-  if (Anilist.token.isNotEmpty) {
-    await Anilist.query!.getUserData();
-  }
-}
 
 abstract class AnilistViewModel extends GetxController {
   var page = 1;
@@ -38,7 +31,6 @@ abstract class AnilistViewModel extends GetxController {
     ever(live, (bool shouldRefresh) async {
       if (running.value && shouldRefresh) {
         running.value = false;
-        await getUserId();
         await loadAll();
         live.value = false;
         running.value = true;
@@ -140,8 +132,6 @@ class AnilistHomeViewModel extends AnilistViewModel {
   }
 
   Future<void> loadMain() async {
-    Anilist.getSavedToken();
-    Discord.getSavedToken();
     Anilist.query?.getGenresAndTags();
   }
 

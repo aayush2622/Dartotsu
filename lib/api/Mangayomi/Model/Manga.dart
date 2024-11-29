@@ -1,5 +1,7 @@
 import 'package:isar/isar.dart';
+
 import 'chapter.dart';
+
 part 'Manga.g.dart';
 
 @collection

@@ -68,10 +68,10 @@ class AnimeWatchScreenState extends BaseWatchScreen<AnimeWatchScreen> {
           _buildTitle(),
           _buildChunkSelector(chunks, selectedChunkIndex),
           Obx(() => EpisodeAdaptor(
-            type: _viewModel.viewType.value,
-            episodeList: chunks[selectedChunkIndex.value],
-            mediaData: widget.mediaData,
-          )),
+                type: _viewModel.viewType.value,
+                episodeList: chunks[selectedChunkIndex.value],
+                mediaData: widget.mediaData,
+              )),
         ],
       );
     });
@@ -108,7 +108,7 @@ class AnimeWatchScreenState extends BaseWatchScreen<AnimeWatchScreen> {
     ];
     var viewType = _viewModel.viewType;
 
-    return Obx((){
+    return Obx(() {
       return Row(
         children: List.generate(icons.length, (index) {
           return Padding(
@@ -116,14 +116,16 @@ class AnimeWatchScreenState extends BaseWatchScreen<AnimeWatchScreen> {
             child: IconButton(
               icon: Transform(
                 alignment: Alignment.center,
-                transform: index == 0 ? Matrix4.rotationY(3.14159) : Matrix4.identity(),
+                transform: index == 0
+                    ? Matrix4.rotationY(3.14159)
+                    : Matrix4.identity(),
                 child: Icon(icons[index]),
               ),
               iconSize: 24,
               color: viewType.value == index
                   ? theme.onSurface
                   : theme.onSurface.withOpacity(0.33),
-              onPressed: () => changeViewType(viewType,index),
+              onPressed: () => changeViewType(viewType, index),
             ),
           );
         }),
@@ -184,7 +186,8 @@ class AnimeWatchScreenState extends BaseWatchScreen<AnimeWatchScreen> {
   void updateEpisodeDetails(Map<String, Episode> episodeList) {
     widget.mediaData.anime?.totalEpisodes = episodeList.length;
     widget.mediaData.anime?.episodes = episodeList;
-    widget.mediaData.anime?.fillerEpisodes = _viewModel.fillerEpisodesList.value;
+    widget.mediaData.anime?.fillerEpisodes =
+        _viewModel.fillerEpisodesList.value;
     widget.mediaData.anime?.kitsuEpisodes = _viewModel.kitsuEpisodeList.value;
     widget.mediaData.anime?.anifyEpisodes = _viewModel.anifyEpisodeList.value;
     episodeList.forEach((number, episode) {
@@ -209,7 +212,11 @@ class AnimeWatchScreenState extends BaseWatchScreen<AnimeWatchScreen> {
   int _calculateChunkSize(Map<String, Episode> episodeList) {
     final total = episodeList.values.length;
     final divisions = total / 10;
-    return (divisions < 25) ? 25 : (divisions < 50) ? 50 : 100;
+    return (divisions < 25)
+        ? 25
+        : (divisions < 50)
+            ? 50
+            : 100;
   }
 
   List<List<Episode>> _chunkEpisodes(

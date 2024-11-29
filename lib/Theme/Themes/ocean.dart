@@ -39,7 +39,8 @@ final ThemeData oceanLightTheme = ThemeData(
     iconTheme: IconThemeData(color: Color(0xFFFFFFFF)),
   ),
   textTheme: const TextTheme(
-    headlineLarge: TextStyle(color: Color(0xFF1A1C1B), fontSize: 20, fontWeight: FontWeight.bold),
+    headlineLarge: TextStyle(
+        color: Color(0xFF1A1C1B), fontSize: 20, fontWeight: FontWeight.bold),
     bodyLarge: TextStyle(color: Color(0xFF1A1C1B)),
   ),
   fontFamily: 'Poppins',
@@ -84,7 +85,8 @@ final ThemeData oceanDarkTheme = ThemeData(
     iconTheme: IconThemeData(color: Color(0xFF003730)),
   ),
   textTheme: const TextTheme(
-    headlineLarge: TextStyle(color: Color(0xFF003730), fontSize: 20, fontWeight: FontWeight.bold),
+    headlineLarge: TextStyle(
+        color: Color(0xFF003730), fontSize: 20, fontWeight: FontWeight.bold),
     bodyLarge: TextStyle(color: Color(0xFFE0E3E2)),
   ),
   fontFamily: 'Poppins',

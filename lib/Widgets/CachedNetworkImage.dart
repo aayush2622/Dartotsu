@@ -9,8 +9,8 @@ Widget cachedNetworkImage({
   Widget Function(BuildContext, String)? placeholder,
   Widget Function(BuildContext, String, Object)? errorWidget,
 }) {
-  if (imageUrl == null || imageUrl.isEmpty ) {
-    return Icon(Icons.image_not_supported,weight: width);
+  if (imageUrl == null || imageUrl.isEmpty) {
+    return Icon(Icons.image_not_supported, weight: width ?? 24);
   }
   return CachedNetworkImage(
     imageUrl: imageUrl,
@@ -18,6 +18,7 @@ Widget cachedNetworkImage({
     width: width,
     height: height,
     placeholder: placeholder ?? (context, url) => const SizedBox.shrink(),
-    errorWidget: errorWidget ?? (context, url, error) => const SizedBox.shrink(),
+    errorWidget:
+        errorWidget ?? (context, url, error) => const SizedBox.shrink(),
   );
 }

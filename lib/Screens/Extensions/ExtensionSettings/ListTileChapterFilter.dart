@@ -4,11 +4,12 @@ class ListTileChapterFilter extends StatelessWidget {
   final String label;
   final int type;
   final VoidCallback onTap;
+
   const ListTileChapterFilter(
       {super.key,
-        required this.label,
-        required this.type,
-        required this.onTap});
+      required this.label,
+      required this.type,
+      required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -18,8 +19,8 @@ class ListTileChapterFilter extends StatelessWidget {
       value: type == 0
           ? false
           : type == 1
-          ? true
-          : null,
+              ? true
+              : null,
       title: Text(
         label,
         style: const TextStyle(fontSize: 14),

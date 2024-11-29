@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:flutter_qjs/flutter_qjs.dart';
 import 'package:http_interceptor/http_interceptor.dart';
 
@@ -6,6 +7,7 @@ import '../../http/m_client.dart';
 
 class JsHttpClient {
   late JavascriptRuntime runtime;
+
   JsHttpClient(this.runtime);
 
   void init() {

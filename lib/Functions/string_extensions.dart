@@ -20,7 +20,7 @@ extension StringExtensions on String {
   }
 
   bool isEqualTo(String? other) {
-  return this == other;
+    return this == other;
   }
 
   String substringBefore(String pattern) {
