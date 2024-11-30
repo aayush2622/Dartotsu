@@ -28,8 +28,9 @@ class MangaScreenState extends State<MangaScreen> {
   Widget build(BuildContext context) {
     var service = Provider.of<MediaServiceProvider>(context).currentService;
     var screen = service.mangaScreen;
-    if (screen == null)
+    if (screen == null) {
       return service.notImplemented(widget.runtimeType.toString());
+    }
     screen.init();
     return Scaffold(
       body: Stack(
