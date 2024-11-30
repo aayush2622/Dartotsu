@@ -547,9 +547,9 @@ jobs:
             token: ${{secrets.TELEGRAM_BOT_TOKKEN}}
             message: |
                 🎉 *Build Notification* 🎉
-                🔹 **APK**: ${{ github.env.apk_message}}
-                🔹 **Windows**: ${{ github.env.windows_message }}
-                🔹 **Linux**: ${{ github.env.linux_message }}
+                🔹 **APK**: ${{ env.apk_message}}
+                🔹 **Windows**: ${{ env.windows_message }}
+                🔹 **Linux**: ${{ env.linux_message }}
 
           
 
