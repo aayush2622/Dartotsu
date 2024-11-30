@@ -203,18 +203,13 @@ jobs:
           filename: Dantotsu_Linux_${{github.ref_name}}.zip
           directory: build/linux/x64/release/bundle
 
-      # Step 8: Release to GitHub
-      - name: Release Linux Zip
-        uses: softprops/action-gh-release@master
-        with:
-          files: build/linux/x64/release/bundle/Dantotsu_Linux_${{github.ref_name}}.zip
 
-      # Step 9: Verify archive creation
+      # Step 8: Verify archive creation
       - name: List Release Directory
         run: ls build/linux/x64/release/bundle
         shell: pwsh
 
-      # Step 10: Upload to Google Drive
+      # Step 9: Upload to Google Drive
       - name: Upload File To Google Drive
         id: gdriveUpload
         uses: hoatruongdev09/google-drive-file-upload-github-action@v1.1
@@ -434,7 +429,7 @@ jobs:
                           --arg thumbnail_url "$thumbnail_url" \
                           --arg embed_color "$embed_color" \
                           '{
-                            "content": "${{github.env.ping_variable}}",
+                            "content": "${{env.ping_variable}}",
                             "embeds": [
                               {
                                 "title": "New Alpha-Build dropped 🔥",
