@@ -242,7 +242,7 @@ jobs:
       - name: Download last SHA artifact
         uses: dawidd6/action-download-artifact@v6
         with:
-          workflow: handleCommit.yml
+          workflow: dart.yml
           name: last-sha
         continue-on-error: true
 
