@@ -20,8 +20,8 @@
 
 ## Downloads
 <p align="center">
-   <a href="https://github.com/aayush2622/Dartotsu/latest"><img src="https://img.shields.io/github/v/release/aayush2622/Dartotsu?style=for-the-badge&logoColor=168b94&label=Stable&labelColor=06599d&color=043b69" alt="Latest Stable Release"/></a>
-   <!--<a href="https://github.com/aayush2622/Dartotsu/latest/"><img src="https://img.shields.io/github/v/release/aayush2622/Dartotsu?style=for-the-badge&include_prereleases&logoColor=087a87&label=Beta&labelColor=168b94&color=1fa8b3" alt="Latest Pre-release"/></a>
+   <a href="https://github.com/aayush2622/Dartotsu/releases/latest"><img src="https://img.shields.io/github/v/release/aayush2622/Dartotsu?style=for-the-badge&logoColor=168b94&label=Stable&labelColor=06599d&color=043b69" alt="Latest Stable Release"/></a>
+   <!--<a href="https://github.com/aayush2622/Dartotsu/releases/latest"><img src="https://img.shields.io/github/v/release/aayush2622/Dartotsu?style=for-the-badge&include_prereleases&logoColor=087a87&label=Beta&labelColor=168b94&color=1fa8b3" alt="Latest Pre-release"/></a>
    <a href="https://github.com/aayush2622/Dartotsu/releases/latest"><img src="https://img.shields.io/github/v/release/aayush2622/Dartotsu?style=for-the-badge&display_name=tag&label=Alpha&labelColor=087a87&color=168b94" alt="Latest Alpha Release"/></a>-->
 </p>
 
