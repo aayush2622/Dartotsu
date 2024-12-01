@@ -43,6 +43,7 @@ void main(List<String> args) async {
 
 Future init() async {
   Get.isLogEnable = false;
+
   await PrefManager.init();
   initializeMediaServices();
   isar = await StorageProvider().initDB(null);
