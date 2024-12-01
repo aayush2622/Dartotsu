@@ -333,7 +333,7 @@ class MediaInfoPageState extends State<MediaInfoPage> {
           backgroundColor: Colors.transparent,
         ),
         child: Text(
-          mediaData.userStatus ?? 'ADD TO LIST',
+          mediaData.userStatus?.toUpperCase() ?? 'ADD TO LIST',
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 14,

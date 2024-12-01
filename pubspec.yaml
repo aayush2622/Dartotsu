@@ -16,6 +16,8 @@ dependencies:
   flutter:
     sdk: flutter
 
+  flutter_localizations:
+    sdk: flutter
   # State Management
   flutter_riverpod: ^2.6.1
   riverpod_annotation: ^2.6.1
@@ -115,7 +117,7 @@ dependency_overrides:
 # Flutter-specific configurations
 flutter:
   uses-material-design: true
-
+  generate: true
   # Fonts
   fonts:
     - family: Poppins
@@ -136,6 +138,7 @@ flutter:
     - assets/svg/discord.svg
     - assets/svg/kitsu.svg
     - assets/svg/mal.svg
+
 
 # Flutter Launcher Icons Configuration
 # dart run flutter_launcher_icons

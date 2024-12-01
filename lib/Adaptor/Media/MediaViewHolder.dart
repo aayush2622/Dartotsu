@@ -150,9 +150,7 @@ class MediaViewHolder extends StatelessWidget {
 
 String formatMediaInfo(Media media) {
   final nextAiringEpisode = media.anime?.nextAiringEpisode;
-  final totalEpisodes = media.anime?.totalEpisodes != 0
-      ? "${media.anime?.totalEpisodes ?? "~"}"
-      : "~";
+  final totalEpisodes =  "${media.anime?.totalEpisodes ?? "~"}";
   return nextAiringEpisode != null && nextAiringEpisode != -1
       ? "$nextAiringEpisode | $totalEpisodes"
       : totalEpisodes;

@@ -34,15 +34,25 @@ class InfoPageState extends State<InfoPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ...releasingIn(widget.mediaData, context),
+
         _buildWithPadding([
           ..._buildInfoSections(),
           ..._buildNameSections(),
         ]),
-        ..._buildSynonyms(theme),
+
+        if (widget.mediaData.synonyms.isNotEmpty)
+          ..._buildSynonyms(theme),
+
         FollowerWidget(follower: widget.mediaData.users, type: type),
-        _buildWithPadding([GenreWidget(context, widget.mediaData.genres)]),
-        ..._buildTags(theme),
+
+        if (widget.mediaData.genres.isNotEmpty)
+          _buildWithPadding([GenreWidget(context, widget.mediaData.genres)]),
+
+        if (widget.mediaData.tags.isNotEmpty)
+          ..._buildTags(theme),
+
         ..._buildPrequelSection(),
+
         if (widget.mediaData.relations?.isNotEmpty ?? false)
           MediaSection(
             context: context,
@@ -51,6 +61,7 @@ class InfoPageState extends State<InfoPage> {
             mediaList: widget.mediaData.relations,
             isLarge: true,
           ),
+
         if (widget.mediaData.characters?.isNotEmpty ?? false)
           entitySection(
             context: context,
@@ -58,6 +69,7 @@ class InfoPageState extends State<InfoPage> {
             title: "Characters",
             characterList: widget.mediaData.characters,
           ),
+
         if (widget.mediaData.staff?.isNotEmpty ?? false)
           entitySection(
             context: context,
@@ -65,6 +77,7 @@ class InfoPageState extends State<InfoPage> {
             title: "Staff",
             staffList: widget.mediaData.staff,
           ),
+
         if (widget.mediaData.recommendations?.isNotEmpty ?? false)
           MediaSection(
             context: context,
@@ -72,6 +85,7 @@ class InfoPageState extends State<InfoPage> {
             title: "Recommended",
             mediaList: widget.mediaData.recommendations,
           ),
+
         const SizedBox(height: 64.0),
       ],
     );
@@ -91,10 +105,6 @@ class InfoPageState extends State<InfoPage> {
   List<Widget> _buildInfoSections() {
     var mediaData = widget.mediaData;
     bool isAnime = mediaData.anime != null;
-
-    mediaData.anime?.totalEpisodes = (mediaData.anime?.totalEpisodes == 0)
-        ? null
-        : mediaData.anime?.totalEpisodes;
 
     String infoTotal = (mediaData.anime?.nextAiringEpisode != null &&
             mediaData.anime?.nextAiringEpisode != -1)

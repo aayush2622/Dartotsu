@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../../Adaptor/Settings/SettingsAdaptor.dart';
 import '../../DataClass/Setting.dart';
 import '../../Functions/Function.dart';
+import '../../Theme/LanguageSwitcher.dart';
 import '../../Preferences/PrefManager.dart';
 import '../../Preferences/Preferences.dart';
 import '../../Theme/CustomColorPicker.dart';
@@ -36,6 +37,7 @@ class SettingsThemeScreenState extends BaseSettingsScreen {
   @override
   List<Widget> get settingsList => [
         const ThemeDropdown(),
+        languageSwitcher(context),
         const SizedBox(height: 8),
         Padding(
           padding: const EdgeInsets.symmetric(
@@ -52,7 +54,7 @@ class SettingsThemeScreenState extends BaseSettingsScreen {
     return [
       Setting(
         type: SettingType.switchType,
-        name: 'Dark Mode',
+        name: getString.enableDarkMode,
         description: 'Enable Dark Mode',
         icon: Icons.dark_mode,
         isChecked: themeNotifier.isDarkMode,
