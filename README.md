@@ -43,11 +43,11 @@
 ## Official Communities
 Join our communities to stay updated and contribute to the discussion
 
-<a href="https://discord.gg/eTa2GKtE" style="margin-right: 10px; display: inline-block;"><img src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/discord-round-color-icon.png" alt="Discord" height="40" style="vertical-align: middle;"></a>
-<a href="https://t.me/Dantotsu_alpha" style="display: inline-block;"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" height="40" style="vertical-align: middle;"></a>
+<a href="https://discord.gg/eyQdCpdubF" style="margin-right: 10px; display: inline-block;"><img src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/discord-round-color-icon.png" alt="Discord" height="40" style="vertical-align: middle;"></a>
+<a href="https://t.me/Dartotsu" style="display: inline-block;"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" height="40" style="vertical-align: middle;"></a>
 
 ## Contribute
-We welcome contributions, from translations to new features. For inquiries, join our [Discord server](https://discord.gg/eTa2GKtE) or [Telegram group](https://t.me/Dantotsu_alpha). Pull requests are welcome; check the [open issues](https://github.com/aayush2622/Dartotsu/issues) for guidance on major changes.
+We welcome contributions, from translations to new features. For inquiries, join our [Discord server](https://discord.gg/eyQdCpdubF) or [Telegram group](https://t.me/Dartotsu). Pull requests are welcome; check the [open issues](https://github.com/aayush2622/Dartotsu/issues) for guidance on major changes.
 <!--<details>
 <summary>Weblate Translation Graph</summary>
 <a href="https://hosted.weblate.org/projects/echo/#languages"><img src="https://hosted.weblate.org/widget/echo/app/multi-auto.svg" alt="Translation status" /></a>
