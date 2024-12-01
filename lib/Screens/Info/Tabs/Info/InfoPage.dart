@@ -91,14 +91,16 @@ class InfoPageState extends State<InfoPage> {
   List<Widget> _buildInfoSections() {
     var mediaData = widget.mediaData;
     bool isAnime = mediaData.anime != null;
-    String infoTotal;
-    if (mediaData.anime?.nextAiringEpisode != -1 &&
-        mediaData.anime?.nextAiringEpisode != null) {
-      infoTotal =
-          "${mediaData.anime?.nextAiringEpisode} | ${mediaData.anime?.totalEpisodes ?? "~"}";
-    } else {
-      infoTotal = (mediaData.anime?.totalEpisodes ?? "~").toString();
-    }
+
+    mediaData.anime?.totalEpisodes = (mediaData.anime?.totalEpisodes == 0)
+        ? null
+        : mediaData.anime?.totalEpisodes;
+
+    String infoTotal = (mediaData.anime?.nextAiringEpisode != null &&
+            mediaData.anime?.nextAiringEpisode != -1)
+        ? "${mediaData.anime?.nextAiringEpisode} | ${mediaData.anime?.totalEpisodes ?? "~"}"
+        : (mediaData.anime?.totalEpisodes ?? "~").toString();
+
     return [
       _buildInfoRow(
         title: "Mean Score",
@@ -220,7 +222,7 @@ class InfoPageState extends State<InfoPage> {
             MediaCard(
               context,
               'PREQUEL',
-              MediaInfoPage(prequel,prequelTag),
+              MediaInfoPage(prequel, prequelTag),
               prequel.banner ?? prequel.cover ?? 'https://bit.ly/31bsIHq',
             ),
           if (sequel != null)

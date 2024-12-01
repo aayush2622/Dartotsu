@@ -6,6 +6,7 @@ import '../../../Adaptor/Media/Widgets/MediaSection.dart';
 import '../../../DataClass/Media.dart';
 import '../../../DataClass/MediaSection.dart';
 import '../../../DataClass/User.dart';
+import '../../../Functions/Function.dart';
 import '../../../Preferences/PrefManager.dart';
 import '../../../Preferences/Preferences.dart';
 import '../../../Widgets/CustomElevatedButton.dart';
@@ -83,7 +84,7 @@ class AnilistHomeScreen extends BaseHomeScreen {
   }
 
   @override
-  int get refreshID => 12;
+  int get refreshID => RefreshId.Anilist.homePage;
 
   @override
   void resetPageData() {

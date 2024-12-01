@@ -17,6 +17,12 @@ class _RefreshController extends GetxController {
     });
   }
 
+  void refreshService(RefreshId group) {
+    for (var id in group.ids) {
+      activity[id]?.value = true;
+    }
+  }
+
   void allButNot(int k) {
     activity.forEach((key, value) {
       if (k == key) return;
@@ -28,6 +34,32 @@ class _RefreshController extends GetxController {
     return activity.putIfAbsent(key, () => RxBool(initialValue));
   }
 }
+
+enum RefreshId {
+  Anilist,
+  Mal,
+  Kitsu;
+
+  List<int> get ids => List.generate(3, (index) => baseId + index);
+
+  int get baseId {
+    switch (this) {
+      case RefreshId.Anilist:
+        return 10;
+      case RefreshId.Mal:
+        return 20;
+      case RefreshId.Kitsu:
+        return 30;
+    }
+  }
+
+  int get animePage => baseId;
+
+  int get mangaPage => baseId + 1;
+
+  int get homePage => baseId + 2;
+}
+
 
 var Refresh = Get.put(_RefreshController(), permanent: true);
 
@@ -77,7 +109,7 @@ Future<void> snackString(
 }
 
 void copyToClipboard(String text) {
-  var context = navigatorKey.currentContext;
+  var context = navigatorKey.currentContext ?? Get.context;
   var theme = Theme.of(context!).colorScheme;
   Clipboard.setData(ClipboardData(text: text));
   ScaffoldMessenger.of(context).showSnackBar(

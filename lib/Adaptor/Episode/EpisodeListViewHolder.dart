@@ -156,7 +156,8 @@ class EpisodeListView extends StatelessWidget {
               context: context,
               mediaId: mediaData.id,
               ep: episode.number.toDouble().toInt(),
-              width: 142)
+              width: 142,
+          )
         ],
       ),
     );

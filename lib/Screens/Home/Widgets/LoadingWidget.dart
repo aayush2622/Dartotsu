@@ -1,4 +1,5 @@
 import 'package:dantotsu/Functions/Extensions.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../Widgets/CustomBottomDialog.dart';
@@ -6,10 +7,7 @@ import '../../Settings/SettingsBottomSheet.dart';
 import 'AvtarWidget.dart';
 
 class LoadingWidget extends StatelessWidget {
-  final bool topPadding;
-  final bool icon;
-
-  const LoadingWidget({super.key, this.topPadding = true, this.icon = true});
+  const LoadingWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,20 +17,19 @@ class LoadingWidget extends StatelessWidget {
           padding: EdgeInsets.only(
             left: 34.0,
             right: 126.0,
-            top: topPadding ? 36.statusBar() : 0,
+            top: 64.statusBar(),
           ),
           width: double.infinity,
           child: const LinearProgressIndicator(),
         ),
-        if (icon)
-          Positioned(
-              right: 34,
-              top: 36.statusBar(),
-              child: GestureDetector(
-                child: const AvatarWidget(icon: Icons.settings),
-                onTap: () => showCustomBottomDialog(
-                    context, const SettingsBottomSheet()),
-              )),
+        Positioned(
+            right: 34,
+            top: 36.statusBar(),
+            child: GestureDetector(
+              child: const AvatarWidget(icon: Icons.settings),
+              onTap: () => showCustomBottomDialog(context, const SettingsBottomSheet()),
+            )
+        ),
       ],
     );
   }

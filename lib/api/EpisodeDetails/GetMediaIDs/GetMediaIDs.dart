@@ -81,7 +81,6 @@ class GetMediaIDs {
   }
 }
 
-@JsonSerializable()
 class AnimeID {
   @JsonKey(name: 'anime-planet_id')
   final String? animePlanetId;

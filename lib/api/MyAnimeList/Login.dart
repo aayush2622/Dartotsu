@@ -8,7 +8,6 @@ import 'package:flutter_web_auth_2/flutter_web_auth_2.dart';
 import 'package:http/http.dart' as http;
 
 import '../../Functions/Function.dart';
-import '../../Preferences/HiveDataClasses/MalToken/MalToken.dart';
 import '../../Widgets/CustomBottomDialog.dart';
 import 'Mal.dart';
 
@@ -41,11 +40,11 @@ CustomBottomDialog login(BuildContext context) {
           );
           final code = Uri.parse(response).queryParameters['code'] ?? '';
           snackString('Getting Token');
-          final token = jsonEncode(await fetchToken(
+          final token = await fetchToken(
             clientId: MalStrings.clientId,
             code: code,
             codeVerifier: codeChallenge,
-          ));
+          );
           await Mal.saveToken(token);
         },
         icon: 'assets/svg/mal.svg',
@@ -56,7 +55,7 @@ CustomBottomDialog login(BuildContext context) {
   );
 }
 
-Future<ResponseToken> fetchToken({
+Future<String> fetchToken({
   required String clientId,
   required String code,
   required String codeVerifier,
@@ -73,12 +72,7 @@ Future<ResponseToken> fetchToken({
   );
 
   if (response.statusCode == 200) {
-    final jsonResponse = jsonDecode(response.body);
-    var token = ResponseToken.fromJson(jsonResponse);
-    token.expiresIn = DateTime.now()
-        .add(Duration(seconds: token.expiresIn))
-        .millisecondsSinceEpoch;
-    return token;
+    return response.body;
   } else {
     throw Exception('Failed to fetch token: ${response.statusCode}');
   }

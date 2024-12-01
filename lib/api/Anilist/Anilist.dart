@@ -12,13 +12,11 @@ import '../../Widgets/CustomBottomDialog.dart';
 import '../TypeFactory.dart';
 import 'AnilistMutations.dart';
 import 'AnilistQueries.dart';
-import 'AnilistViewModel.dart';
 import 'Login.dart' as anilist_login;
 
 var Anilist = Get.put(AnilistController());
 
 class AnilistController extends BaseServiceData {
-  // TODO: better login page
 
   late final AnilistMutations mutation;
   List<String>? genres;
@@ -64,13 +62,12 @@ class AnilistController extends BaseServiceData {
   }
 
   Map<String, int> getSeason(bool next) {
-    int season = currentSeason + (next ? 0 : -2);
+    int season = currentSeason + (next ? 1 : -1);
     int year = currentYear;
     if (season > 3) {
       season = 0;
       year++;
-    }
-    if (season < 0) {
+    } else if (season < 0) {
       season = 3;
       year--;
     }
@@ -79,7 +76,7 @@ class AnilistController extends BaseServiceData {
 
   List<Map<String, int>> get currentSeasons => [
         getSeason(false),
-        {seasons[currentSeason - 1]: currentYear},
+        {seasons[currentSeason]: currentYear},
         getSeason(true),
       ];
 
@@ -100,12 +97,12 @@ class AnilistController extends BaseServiceData {
     this.token.value = token;
     run.value = true;
     isInitialized.value = false;
-    Refresh.allButNot(1);
+    query?.getUserData();
+    Refresh.refreshService(RefreshId.Anilist);
   }
 
   @override
   void login(BuildContext context) => showCustomBottomDialog(context, anilist_login.login(context));
-
 
   @override
   void removeSavedToken() {
@@ -118,14 +115,12 @@ class AnilistController extends BaseServiceData {
     episodesWatched = null;
     chapterRead = null;
     unreadNotificationCount = 0;
-    Get.put(AnilistHomeViewModel()).resetPageData();
-
     PrefManager.removeVal(PrefName.anilistToken);
     PrefManager.setCustomVal<String>("banner_ANIME_url", '');
     PrefManager.setCustomVal<String>("banner_MANGA_url", '');
     run.value = true;
     isInitialized.value = false;
-    Refresh.allButNot(1);
+    Refresh.refreshService(RefreshId.Anilist);
   }
 
   Future<T?> executeQuery<T>(

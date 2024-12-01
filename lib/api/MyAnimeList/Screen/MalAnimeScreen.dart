@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import '../../../Adaptor/Media/Widgets/MediaSection.dart';
 import '../../../DataClass/Media.dart';
 import '../../../DataClass/MediaSection.dart';
+import '../../../Functions/Function.dart';
 import '../../../Preferences/PrefManager.dart';
 import '../../../Preferences/Preferences.dart';
 import '../../../Services/Screens/BaseAnimeScreen.dart';
@@ -41,7 +42,7 @@ class MalAnimeScreen extends BaseAnimeScreen {
   }
 
   @override
-  int get refreshID => 20;
+  int get refreshID => RefreshId.Mal.animePage;
 
   @override
   void resetPageData() {

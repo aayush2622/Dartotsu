@@ -42,12 +42,13 @@ void main(List<String> args) async {
 }
 
 Future init() async {
+  Get.isLogEnable = false;
   await PrefManager.init();
   initializeMediaServices();
   isar = await StorageProvider().initDB(null);
   await StorageProvider().requestPermission();
   TypeFactory.registerAllTypes();
-  await GetMediaIDs.getData();
+  GetMediaIDs.getData();
   initializeDateFormatting();
   final supportedLocales = DateFormat.allLocalesWithSymbols();
   for (var locale in supportedLocales) {

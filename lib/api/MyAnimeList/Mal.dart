@@ -102,16 +102,19 @@ class MalController extends BaseServiceData {
     episodesWatched = null;
     chapterRead = null;
     unreadNotificationCount = 0;
+    Refresh.refreshService(RefreshId.Mal);
   }
 
   @override
   Future<void> saveToken(String token) async {
     var res = ResponseToken.fromJson(json.decode(token));
+    res.expiresIn += DateTime.now().millisecondsSinceEpoch;
     PrefManager.setVal(PrefName.malToken, res);
     run.value = true;
     isInitialized.value = false;
     this.token.value = res.accessToken;
-    Refresh.all();
+    query?.getUserData();
+    Refresh.refreshService(RefreshId.Mal);
   }
 
   Future<ResponseToken?> refreshToken() async {

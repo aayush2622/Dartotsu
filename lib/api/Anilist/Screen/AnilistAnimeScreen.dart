@@ -4,6 +4,7 @@ import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
 import '../../../Adaptor/Media/Widgets/MediaSection.dart';
 import '../../../DataClass/MediaSection.dart';
+import '../../../Functions/Function.dart';
 import '../../../Preferences/PrefManager.dart';
 import '../../../Preferences/Preferences.dart';
 import '../../../Services/Screens/BaseAnimeScreen.dart';
@@ -40,7 +41,7 @@ class AnilistAnimeScreen extends BaseAnimeScreen {
   }
 
   @override
-  int get refreshID => 10;
+  int get refreshID => RefreshId.Anilist.animePage;
 
   @override
   void resetPageData() {

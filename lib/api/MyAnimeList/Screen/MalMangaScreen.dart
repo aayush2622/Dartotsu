@@ -4,6 +4,7 @@ import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import '../../../Adaptor/Media/Widgets/MediaSection.dart';
 import '../../../DataClass/Media.dart';
 import '../../../DataClass/MediaSection.dart';
+import '../../../Functions/Function.dart';
 import '../../../Preferences/PrefManager.dart';
 import '../../../Preferences/Preferences.dart';
 import '../../../Services/Screens/BaseMangaScreen.dart';
@@ -41,7 +42,7 @@ class MalMangaScreen extends BaseMangaScreen {
   }
 
   @override
-  int get refreshID => 21;
+  int get refreshID => RefreshId.Mal.mangaPage;
 
   @override
   void resetPageData() {
