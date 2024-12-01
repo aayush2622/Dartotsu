@@ -72,8 +72,8 @@ jobs:
           - You may be asked for additional details or clarification if needed.  
           - Once resolved, we'll notify you of the fix or provide a workaround.
           **👥 Connect with Us**  
-          - **[Discord](https://discord.gg/eTa2GKtE)**: Engage with our community and ask questions.  
-          - **[Telegram](https://t.me/Dantotsu_alpha)**: Reach out for real-time discussions and updates.
+          - **[Discord](https://discord.gg/eyQdCpdubF)**: Engage with our community and ask questions.  
+          - **[Telegram](https://t.me/Dartotsu)**: Reach out for real-time discussions and updates.
           We're working hard to resolve the issue and appreciate your patience!
           `;
           await github.rest.issues.createComment({

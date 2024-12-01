@@ -50,13 +50,13 @@ class LoginScreenState extends State<LoginScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                _buildSocialIcon(Icons.discord, 'https://discord.gg/4HPZ5nAWw'),
+                _buildSocialIcon(Icons.discord, 'https://discord.gg/eyQdCpdubF'),
                 const SizedBox(width: 16),
                 _buildSocialIcon(Bootstrap.github,
                     'https://github.com/aayush2622/dartotsu'),
                 const SizedBox(width: 16),
                 _buildSocialIcon(
-                    Icons.telegram_sharp, 'https://t.me/+gzBCQExtLQo1YTNh'),
+                    Icons.telegram_sharp, 'https://t.me/Dartotsu'),
               ],
             ),
             const SizedBox(height: 16),
