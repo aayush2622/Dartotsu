@@ -164,7 +164,7 @@ class SettingsScreenState extends BaseSettingsScreen {
               iconSize: 38,
               icon: const Icon(Icons.discord),
               onPressed: () =>
-                  openLinkInBrowser('https://discord.gg/4HPZ5nAWw'),
+                  openLinkInBrowser('https://discord.gg/eyQdCpdubF'),
             ),
             const SizedBox(width: 16),
             IconButton(
@@ -180,7 +180,7 @@ class SettingsScreenState extends BaseSettingsScreen {
               iconSize: 38,
               icon: const Icon(Icons.telegram_sharp),
               onPressed: () =>
-                  openLinkInBrowser('https://t.me/+gzBCQExtLQo1YTNh'),
+                  openLinkInBrowser('https://t.me/Dartotsu'),
             ),
           ],
         ),
