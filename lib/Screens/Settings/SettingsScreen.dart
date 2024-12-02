@@ -122,7 +122,7 @@ class SettingsScreenState extends BaseSettingsScreen {
     return Column(
       children: [
         Text(
-          'Want to support Dantotsu\'s Maintainer?\nConsider Donating',
+          getString.supportMaintainer,
           textAlign: TextAlign.center,
           style: TextStyle(
             fontFamily: 'Poppins',
