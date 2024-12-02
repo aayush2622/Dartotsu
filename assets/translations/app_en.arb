@@ -1,5 +1,4 @@
 {
-  "enableDarkMode": "Enable Dark Mode",
   "account": "Account",
   "accountDescription": "Manage your AniList, MAL, and Discord accounts effortlessly",
   "theme": "Theme",
@@ -18,4 +17,24 @@
   "notificationsDescription": "Configure how and when you receive notifications",
   "about": "About",
   "aboutDescription": "Learn more about the app and its creators"
+
+  
+  "darkMode": "Dark Mode",
+  "enableDarkMode": "Enable Dark Mode"
+  "oledThemeVariant": "OLED theme Variant",
+  "oledThemeVariantDescription": "Enable OLED Mode",
+  "materialYou": "Material You",
+  "materialYouDescription": "Use the same color as your wallpaper",
+  "customTheme": "Custom theme",
+  "customThemeDescription": "Use your own color for the theme",
+  "colorPicker": "Color Picker",
+  "colorPickerDescription": "Choose a color",
+  "manageAnimeLayouts": "Manage Layouts on Anime Page",
+  "manageAnimeLayoutsDescription": "Does not belong here",
+  "manageMangaLayouts": "Manage Layouts on Manga Page",
+  "manageMangaLayoutsDescription": "Does not belong here",
+  "manageHomeLayouts": "Manage Layouts on Home Page",
+  "manageHomeLayoutsDescription": "Does not belong here"
+  "positiveButton": "OK",
+  "negativeButton": "Cancel"
 }
