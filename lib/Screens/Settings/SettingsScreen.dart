@@ -8,6 +8,7 @@ import 'package:icons_plus/icons_plus.dart';
 import '../../Adaptor/Settings/SettingsAdaptor.dart';
 import '../../DataClass/Setting.dart';
 import '../../Functions/Function.dart';
+import '../../Theme/LanguageSwitcher.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -44,72 +45,72 @@ class SettingsScreenState extends BaseSettingsScreen {
     return [
       Setting(
         type: SettingType.normal,
-        name: 'Account',
-        description: 'Anilist, MAL and Discord.\nWhat more could you need?',
+        name: getString.account,
+        description: getString.accountDescription,
         icon: Icons.person,
         onClick: () => navigateToPage(context, const SettingsAccountScreen()),
         isActivity: true,
       ),
       Setting(
         type: SettingType.normal,
-        name: 'Theme',
-        description: 'Change the vibe of your app',
+        name: getString.theme,
+        description: getString.themeDescription,
         icon: Icons.palette_outlined,
         onClick: () => navigateToPage(context, const SettingsThemeScreen()),
         isActivity: true,
       ),
       Setting(
         type: SettingType.normal,
-        name: 'Common',
-        description: 'Change the vibe of your app',
+        name: getString.common,
+        description: getString.commonDescription,
         icon: Icons.lightbulb_outline,
         onClick: () {},
         isActivity: true,
       ),
       Setting(
         type: SettingType.normal,
-        name: 'Anime',
-        description: 'Change the vibe of your app',
+        name: getString.anime,
+        description: getString.animeDescription,
         icon: Icons.movie_filter_rounded,
         onClick: () {},
         isActivity: true,
       ),
       Setting(
         type: SettingType.normal,
-        name: 'Manga',
-        description: 'Change the vibe of your app',
+        name: getString.manga,
+        description: getString.mangaDescription,
         icon: Icons.import_contacts,
         onClick: () {},
         isActivity: true,
       ),
       Setting(
         type: SettingType.normal,
-        name: 'Extensions',
-        description: 'Change the vibe of your app',
+        name: getString.extensions,
+        description: getString.extensionsDescription,
         icon: Icons.extension,
         onClick: () {},
         isActivity: true,
       ),
       Setting(
         type: SettingType.normal,
-        name: 'Add-ons',
-        description: 'Change the vibe of your app',
+        name: getString.addons,
+        description: getString.addonsDescription,
         icon: Icons.restaurant,
         onClick: () {},
         isActivity: true,
       ),
       Setting(
         type: SettingType.normal,
-        name: 'Notifications',
-        description: 'Change the vibe of your app',
+        name: getString.notifications,
+        description: getString.notificationsDescription,
         icon: Icons.notifications_none,
         onClick: () {},
         isActivity: true,
       ),
       Setting(
         type: SettingType.normal,
-        name: 'About',
-        description: 'Change the vibe of your app',
+        name: getString.about,
+        description: getString.aboutDescription,
         icon: Icons.info,
         onClick: () {},
         isActivity: true,
@@ -122,7 +123,7 @@ class SettingsScreenState extends BaseSettingsScreen {
     return Column(
       children: [
         Text(
-          'Want to support Dantotsu\'s Maintainer?\nConsider Donating',
+          getString.supportMaintainer,
           textAlign: TextAlign.center,
           style: TextStyle(
             fontFamily: 'Poppins',
@@ -146,10 +147,10 @@ class SettingsScreenState extends BaseSettingsScreen {
           ),
         ),
         const SizedBox(height: 16),
-        const Text(
-          'No donation goal atm',
+        Text(
+          getString.donationGoal,
           textAlign: TextAlign.center,
-          style: TextStyle(
+          style: const TextStyle(
             fontFamily: 'Poppins',
             fontSize: 14,
             color: Colors.grey,
@@ -179,8 +180,7 @@ class SettingsScreenState extends BaseSettingsScreen {
               color: Colors.grey.shade800,
               iconSize: 38,
               icon: const Icon(Icons.telegram_sharp),
-              onPressed: () =>
-                  openLinkInBrowser('https://t.me/Dartotsu'),
+              onPressed: () => openLinkInBrowser('https://t.me/Dartotsu'),
             ),
           ],
         ),
