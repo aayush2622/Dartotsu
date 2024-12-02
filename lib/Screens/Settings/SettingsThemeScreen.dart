@@ -125,12 +125,12 @@ class SettingsThemeScreenState extends BaseSettingsScreen {
               (reorderedItems) => titles = reorderedItems,
               (newCheckedStates) => checkedStates = newCheckedStates,
             )
-            ..setPositiveButton(getString.positiveButton, () {
+            ..setPositiveButton("Ok", () {
               PrefManager.setVal(PrefName.anilistAnimeLayout,
                   Map.fromIterables(titles, checkedStates));
               Refresh.activity[2]?.value = true;
             })
-            ..setNegativeButton(getString.negativeButton, null)
+            ..setNegativeButton("Cancel", null)
             ..show();
         },
       ),
@@ -153,12 +153,12 @@ class SettingsThemeScreenState extends BaseSettingsScreen {
               (reorderedItems) => titles = reorderedItems,
               (newCheckedStates) => checkedStates = newCheckedStates,
             )
-            ..setPositiveButton(getString.positiveButton, () {
+            ..setPositiveButton("Ok", () {
               PrefManager.setVal(PrefName.anilistMangaLayout,
                   Map.fromIterables(titles, checkedStates));
               Refresh.activity[3]?.value = true;
             })
-            ..setNegativeButton(getString.negativeButton, null)
+            ..setNegativeButton("Cancel", null)
             ..show();
         },
       ),
@@ -181,12 +181,12 @@ class SettingsThemeScreenState extends BaseSettingsScreen {
               (reorderedItems) => titles = reorderedItems,
               (newCheckedStates) => checkedStates = newCheckedStates,
             )
-            ..setPositiveButton(getString.positiveButton, () {
+            ..setPositiveButton("Ok", () {
               PrefManager.setVal(PrefName.anilistHomeLayout,
                   Map.fromIterables(titles, checkedStates));
               Refresh.activity[1]?.value = true;
             })
-            ..setNegativeButton(getString.negativeButton, null)
+            ..setNegativeButton("Cancel", null)
             ..show();
         },
       ),
