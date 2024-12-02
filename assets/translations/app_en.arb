@@ -16,8 +16,9 @@
   "notifications": "Notifications",
   "notificationsDescription": "Configure how and when you receive notifications",
   "about": "About",
-  "aboutDescription": "Learn more about the app and its creators"
-  "supportMaintainer": "Want to support Dantotsu's Maintainer?\nConsider Donating"
+  "aboutDescription": "Learn more about the app and its creators",
+  "supportMaintainer": "Want to support Dantotsu's Maintainer?\nConsider Donating",
+  "donationGoal": "No donation goal atm",
 
   "darkMode": "Dark Mode",
   "enableDarkMode": "Enable Dark Mode"
@@ -36,5 +37,5 @@
   "manageHomeLayouts": "Manage Layouts on Home Page",
   "manageHomeLayoutsDescription": "Does not belong here"
   "positiveButton": "OK",
-  "negativeButton": "Cancel"
+  "negativeButton": "Cancel",
 }
