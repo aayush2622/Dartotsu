@@ -21,9 +21,9 @@
   "donationGoal": "No donation goal atm",
 
   "darkMode": "Dark Mode",
-  "enableDarkMode": "Enable Dark Mode"
-  "oledThemeVariant": "OLED theme Variant",
-  "oledThemeVariantDescription": "Enable OLED Mode",
+  "enableDarkMode": "Enable Dark Mode",
+  "oldThemeVariant": "OLED theme Variant",
+  "oldThemeVariantDescription": "Enable OLED Mode",
   "materialYou": "Material You",
   "materialYouDescription": "Use the same color as your wallpaper",
   "customTheme": "Custom theme",
@@ -35,7 +35,7 @@
   "manageMangaLayouts": "Manage Layouts on Manga Page",
   "manageMangaLayoutsDescription": "Does not belong here",
   "manageHomeLayouts": "Manage Layouts on Home Page",
-  "manageHomeLayoutsDescription": "Does not belong here"
+  "manageHomeLayoutsDescription": "Does not belong here",
   "Ok": "OK",
-  "Cancel": "Cancel",
+  "Cancel": "Cancel"
 }
