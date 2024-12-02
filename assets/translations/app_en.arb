@@ -22,8 +22,8 @@
 
   "darkMode": "Dark Mode",
   "enableDarkMode": "Enable Dark Mode",
-  "oldThemeVariant": "OLED theme Variant",
-  "oldThemeVariantDescription": "Enable OLED Mode",
+  "oledThemeVariant": "OLED theme Variant",
+  "oledThemeVariantDescription": "Enable OLED Mode",
   "materialYou": "Material You",
   "materialYouDescription": "Use the same color as your wallpaper",
   "customTheme": "Custom theme",

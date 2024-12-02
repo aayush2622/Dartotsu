@@ -8,6 +8,7 @@ import 'package:icons_plus/icons_plus.dart';
 import '../../Adaptor/Settings/SettingsAdaptor.dart';
 import '../../DataClass/Setting.dart';
 import '../../Functions/Function.dart';
+import '../../Theme/LanguageSwitcher.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -33,15 +34,15 @@ class SettingsScreenState extends BaseSettingsScreen {
   @override
   List<Widget> get settingsList {
     return [
-        SettingsAdaptor(settings: _buildSettings(context)),
-        const SizedBox(height: 24),
-        _buildInfoSection(context),
-        const SizedBox(height: 42),
-      ];
-    }
-  
-    List<Setting> _buildSettings(BuildContext context) {
-      return [
+      SettingsAdaptor(settings: _buildSettings(context)),
+      const SizedBox(height: 24),
+      _buildInfoSection(context),
+      const SizedBox(height: 42),
+    ];
+  }
+
+  List<Setting> _buildSettings(BuildContext context) {
+    return [
       Setting(
         type: SettingType.normal,
         name: getString.account,
@@ -146,10 +147,10 @@ class SettingsScreenState extends BaseSettingsScreen {
           ),
         ),
         const SizedBox(height: 16),
-        const Text(
+        Text(
           getString.donationGoal,
           textAlign: TextAlign.center,
-          style: TextStyle(
+          style: const TextStyle(
             fontFamily: 'Poppins',
             fontSize: 14,
             color: Colors.grey,
@@ -179,8 +180,7 @@ class SettingsScreenState extends BaseSettingsScreen {
               color: Colors.grey.shade800,
               iconSize: 38,
               icon: const Icon(Icons.telegram_sharp),
-              onPressed: () =>
-                  openLinkInBrowser('https://t.me/Dartotsu'),
+              onPressed: () => openLinkInBrowser('https://t.me/Dartotsu'),
             ),
           ],
         ),
