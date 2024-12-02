@@ -55,6 +55,24 @@ jobs:
           flutter-version: 3.24.1
           cache: true
 
+          # Download the keystore file (from GitHub Secrets or other storage)
+      - name: Download keystore
+        env:
+          KEYSTORE_BASE64: ${{ secrets.APK_SIGN }}
+        run: echo "$KEYSTORE_BASE64" | base64 --decode > android/app/dartotsu.jks
+
+      # Set up environment variables for signing
+      - name: Set up signing variables
+        env:
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS}}
+        run: |
+          echo "storePassword=$KEYSTORE_PASSWORD" > android/key.properties
+          echo "keyPassword=$KEY_PASSWORD" >> android/key.properties
+          echo "keyAlias=$KEY_ALIAS" >> android/key.properties
+          echo "storeFile=dartotsu.jks" >> android/key.properties
+
       # Configure Gradle for faster builds
       - name: Configure Gradle
         run: |
@@ -65,7 +83,7 @@ jobs:
 
       # Optimize Flutter build
       - run: flutter pub get
-      - run: flutter build apk --release --split-debug-info --shrink
+      - run: flutter build apk --release 
       
       - name: Rename APK
         run: mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/Dantotsu_Android_${{github.ref_name}}.apk
