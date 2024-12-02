@@ -36,6 +36,6 @@
   "manageMangaLayoutsDescription": "Does not belong here",
   "manageHomeLayouts": "Manage Layouts on Home Page",
   "manageHomeLayoutsDescription": "Does not belong here",
-  "Ok": "OK",
-  "Cancel": "Cancel"
+  "ok": "OK",
+  "cancel": "Cancel"
 }
