@@ -147,7 +147,7 @@ class SettingsScreenState extends BaseSettingsScreen {
         ),
         const SizedBox(height: 16),
         const Text(
-          'No donation goal atm',
+          getString.donationGoal,
           textAlign: TextAlign.center,
           style: TextStyle(
             fontFamily: 'Poppins',
