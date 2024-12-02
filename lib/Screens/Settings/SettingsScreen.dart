@@ -33,88 +33,88 @@ class SettingsScreenState extends BaseSettingsScreen {
   @override
   List<Widget> get settingsList {
     return [
-      SettingsAdaptor(settings: _buildSettings(context)),
-      const SizedBox(height: 24),
-      _buildInfoSection(context),
-      const SizedBox(height: 42),
-    ];
-  }
-
-  List<Setting> _buildSettings(BuildContext context) {
-    return [
-      Setting(
-        type: SettingType.normal,
-        name: 'Account',
-        description: 'Anilist, MAL and Discord.\nWhat more could you need?',
-        icon: Icons.person,
-        onClick: () => navigateToPage(context, const SettingsAccountScreen()),
-        isActivity: true,
-      ),
-      Setting(
-        type: SettingType.normal,
-        name: 'Theme',
-        description: 'Change the vibe of your app',
-        icon: Icons.palette_outlined,
-        onClick: () => navigateToPage(context, const SettingsThemeScreen()),
-        isActivity: true,
-      ),
-      Setting(
-        type: SettingType.normal,
-        name: 'Common',
-        description: 'Change the vibe of your app',
-        icon: Icons.lightbulb_outline,
-        onClick: () {},
-        isActivity: true,
-      ),
-      Setting(
-        type: SettingType.normal,
-        name: 'Anime',
-        description: 'Change the vibe of your app',
-        icon: Icons.movie_filter_rounded,
-        onClick: () {},
-        isActivity: true,
-      ),
-      Setting(
-        type: SettingType.normal,
-        name: 'Manga',
-        description: 'Change the vibe of your app',
-        icon: Icons.import_contacts,
-        onClick: () {},
-        isActivity: true,
-      ),
-      Setting(
-        type: SettingType.normal,
-        name: 'Extensions',
-        description: 'Change the vibe of your app',
-        icon: Icons.extension,
-        onClick: () {},
-        isActivity: true,
-      ),
-      Setting(
-        type: SettingType.normal,
-        name: 'Add-ons',
-        description: 'Change the vibe of your app',
-        icon: Icons.restaurant,
-        onClick: () {},
-        isActivity: true,
-      ),
-      Setting(
-        type: SettingType.normal,
-        name: 'Notifications',
-        description: 'Change the vibe of your app',
-        icon: Icons.notifications_none,
-        onClick: () {},
-        isActivity: true,
-      ),
-      Setting(
-        type: SettingType.normal,
-        name: 'About',
-        description: 'Change the vibe of your app',
-        icon: Icons.info,
-        onClick: () {},
-        isActivity: true,
-      ),
-    ];
+        SettingsAdaptor(settings: _buildSettings(context)),
+        const SizedBox(height: 24),
+        _buildInfoSection(context),
+        const SizedBox(height: 42),
+      ];
+    }
+  
+    List<Setting> _buildSettings(BuildContext context) {
+      return [
+    Setting(
+      type: SettingType.normal,
+      name: getString.account,
+      description: getString.accountDescription,
+      icon: Icons.person,
+      onClick: () => navigateToPage(context, const SettingsAccountScreen()),
+      isActivity: true,
+    ),
+    Setting(
+      type: SettingType.normal,
+      name: getString.theme,
+      description: getString.themeDescription,
+      icon: Icons.palette_outlined,
+      onClick: () => navigateToPage(context, const SettingsThemeScreen()),
+      isActivity: true,
+    ),
+    Setting(
+      type: SettingType.normal,
+      name: getString.common,
+      description: getString.commonDescription,
+      icon: Icons.lightbulb_outline,
+      onClick: () {},
+      isActivity: true,
+    ),
+    Setting(
+      type: SettingType.normal,
+      name: getString.anime,
+      description: getString.animeDescription,
+      icon: Icons.movie_filter_rounded,
+      onClick: () {},
+      isActivity: true,
+    ),
+    Setting(
+      type: SettingType.normal,
+      name: getString.manga,
+      description: getString.mangaDescription,
+      icon: Icons.import_contacts,
+      onClick: () {},
+      isActivity: true,
+    ),
+    Setting(
+      type: SettingType.normal,
+      name: getString.extensions,
+      description: getString.extensionsDescription,
+      icon: Icons.extension,
+      onClick: () {},
+      isActivity: true,
+    ),
+    Setting(
+      type: SettingType.normal,
+      name: getString.addons,
+      description: getString.addonsDescription,
+      icon: Icons.restaurant,
+      onClick: () {},
+      isActivity: true,
+    ),
+    Setting(
+      type: SettingType.normal,
+      name: getString.notifications,
+      description: getString.notificationsDescription,
+      icon: Icons.notifications_none,
+      onClick: () {},
+      isActivity: true,
+    ),
+    Setting(
+      type: SettingType.normal,
+      name: getString.about,
+      description: getString.aboutDescription,
+      icon: Icons.info,
+      onClick: () {},
+      isActivity: true,
+    ),
+  ];
   }
 
   Widget _buildInfoSection(BuildContext context) {
