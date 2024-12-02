@@ -57,7 +57,7 @@ class buildDropdownMenuState extends State<buildDropdownMenu> {
           fillColor: Colors.transparent,
         ),
         child: DropdownButtonHideUnderline(
-          child: DropdownButton<String>(
+          child: DropdownButton(
             focusColor: Colors.transparent,
             value: _selectedValue,
             onChanged: (String? newValue) {
@@ -72,7 +72,7 @@ class buildDropdownMenuState extends State<buildDropdownMenu> {
             },
             items: widget.options?.map((String option) {
               final displayName = option[0].toUpperCase() + option.substring(1);
-              return DropdownMenuItem<String>(
+              return DropdownMenuItem(
                 value: option,
                 child: Text(
                   displayName,

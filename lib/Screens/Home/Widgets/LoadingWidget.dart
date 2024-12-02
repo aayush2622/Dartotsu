@@ -1,5 +1,4 @@
 import 'package:dantotsu/Functions/Extensions.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../Widgets/CustomBottomDialog.dart';
@@ -27,9 +26,9 @@ class LoadingWidget extends StatelessWidget {
             top: 36.statusBar(),
             child: GestureDetector(
               child: const AvatarWidget(icon: Icons.settings),
-              onTap: () => showCustomBottomDialog(context, const SettingsBottomSheet()),
-            )
-        ),
+              onTap: () =>
+                  showCustomBottomDialog(context, const SettingsBottomSheet()),
+            )),
       ],
     );
   }

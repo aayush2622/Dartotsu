@@ -1,16 +1,19 @@
+import 'dart:ui';
+
 import 'package:dantotsu/Screens/Login/LoginScreen.dart';
 import 'package:dantotsu/Screens/Manga/MangaScreen.dart';
 import 'package:dantotsu/api/EpisodeDetails/GetMediaIDs/GetMediaIDs.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' as provider;
 import 'package:get/get.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:isar/isar.dart';
 import 'package:provider/provider.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'Preferences/PrefManager.dart';
 import 'Screens/Anime/AnimeScreen.dart';
 import 'Screens/Home/HomeScreen.dart';
@@ -43,7 +46,6 @@ void main(List<String> args) async {
 
 Future init() async {
   Get.isLogEnable = false;
-
   await PrefManager.init();
   initializeMediaServices();
   isar = await StorageProvider().initDB(null);
@@ -76,6 +78,14 @@ class MyApp extends StatelessWidget {
     return DynamicColorBuilder(
       builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
         return GetMaterialApp(
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: AppLocalizations.supportedLocales,
+          locale: const Locale('en'),
           navigatorKey: navigatorKey,
           title: 'Dartotsu',
           themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
@@ -98,7 +108,7 @@ class MainActivity extends StatefulWidget {
 
 FloatingBottomNavBar? navbar;
 
-class MainActivityState extends State<MainActivity>{
+class MainActivityState extends State<MainActivity> {
   int _selectedIndex = 1;
 
   void _onTabSelected(int index) => setState(() => _selectedIndex = index);
@@ -111,6 +121,7 @@ class MainActivityState extends State<MainActivity>{
       selectedIndex: _selectedIndex,
       onTabSelected: _onTabSelected,
     );
+
     return Scaffold(
       body: Stack(
         children: [
@@ -131,5 +142,4 @@ class MainActivityState extends State<MainActivity>{
       ),
     );
   }
-
 }

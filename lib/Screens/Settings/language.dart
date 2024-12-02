@@ -1,4 +1,4 @@
-completeLanguageName(String lang) {
+String completeLanguageName(String lang) {
   lang = lang.toLowerCase();
   for (var element in sortedLanguagesMap.entries) {
     if (element.value.toLowerCase() == lang) {
@@ -7,7 +7,15 @@ completeLanguageName(String lang) {
   }
   return lang.toUpperCase();
 }
-
+String completeLanguageCode(String lang) {
+  lang = lang.toLowerCase();
+  for (var element in sortedLanguagesMap.entries) {
+    if (element.key.toLowerCase() == lang) {
+      return element.value;
+    }
+  }
+  return lang.toUpperCase();
+}
 final sortedLanguagesMap = {
   "all": "All",
   "Afrikaans": "af",

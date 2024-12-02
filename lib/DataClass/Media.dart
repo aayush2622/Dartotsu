@@ -245,30 +245,35 @@ class Media {
     }
 
     return Media(
-        id: GetMediaIDs.fromID(type: AnimeIDType.malId, id: apiMedia.id!)
-                ?.anilistId ??
-            apiMedia.id!,
-        idMAL: apiMedia.id,
-        name: apiMedia.title ?? '',
-        nameRomaji: apiMedia.alternativeTitles?.ja ?? apiMedia.title ?? '',
-        userPreferredName: apiMedia.title ?? '',
-        cover: apiMedia.mainPicture?.medium ?? '',
-        banner:
-            apiMedia.mainPicture?.large ?? apiMedia.mainPicture?.medium ?? '',
-        status: mapAiringStatus(apiMedia.status ?? ''),
-        isAdult: apiMedia.nsfw == 'black',
-        userStatus: apiMedia.myListStatus?.status,
-        userProgress: apiMedia.myListStatus?.numEpisodesWatched ??
-            apiMedia.myListStatus?.numChaptersRead,
-        userScore: ((apiMedia.myListStatus?.score ?? 0) * 10).toInt(),
-        meanScore: ((apiMedia.mean ?? 0) * 10).toInt(),
-        genres:
-            apiMedia.genres?.map((genre) => genre.name ?? '').toList() ?? [],
-        anime: getMediaType(apiMedia.mediaType) == anilistApi.MediaType.ANIME
-            ? Anime(totalEpisodes: apiMedia.numEpisodes)
-            : null,
-        manga: getMediaType(apiMedia.mediaType) == anilistApi.MediaType.MANGA
-            ? Manga(totalChapters: apiMedia.numChapters)
-            : null);
+      id: GetMediaIDs.fromID(type: AnimeIDType.malId, id: apiMedia.id!)
+              ?.anilistId ??
+          apiMedia.id!,
+      idMAL: apiMedia.id,
+      name: apiMedia.title ?? '',
+      nameRomaji: apiMedia.alternativeTitles?.ja ?? apiMedia.title ?? '',
+      userPreferredName: apiMedia.title ?? '',
+      cover: apiMedia.mainPicture?.medium ?? '',
+      banner: apiMedia.mainPicture?.large ?? apiMedia.mainPicture?.medium ?? '',
+      status: mapAiringStatus(apiMedia.status ?? ''),
+      isAdult: apiMedia.nsfw == 'black',
+      userStatus: apiMedia.myListStatus?.status,
+      userProgress: apiMedia.myListStatus?.numEpisodesWatched ??
+          apiMedia.myListStatus?.numChaptersRead,
+      userScore: ((apiMedia.myListStatus?.score ?? 0) * 10).toInt(),
+      meanScore: ((apiMedia.mean ?? 0) * 10).toInt(),
+      genres: apiMedia.genres?.map((genre) => genre.name ?? '').toList() ?? [],
+      anime: getMediaType(apiMedia.mediaType) == anilistApi.MediaType.ANIME
+          ? Anime(
+              totalEpisodes:
+                  apiMedia.numEpisodes != 0 ? apiMedia.numEpisodes : null,
+            )
+          : null,
+      manga: getMediaType(apiMedia.mediaType) == anilistApi.MediaType.MANGA
+          ? Manga(
+              totalChapters:
+                  apiMedia.numChapters != 0 ? apiMedia.numChapters : null,
+            )
+          : null,
+    );
   }
 }

@@ -6,7 +6,6 @@ import 'package:dantotsu/api/Anilist/Screen/AnilistAnimeScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-import '../../Screens/Login/LoginScreen.dart';
 import '../../Services/BaseServiceData.dart';
 import '../../Services/MediaService.dart';
 import 'Anilist.dart';

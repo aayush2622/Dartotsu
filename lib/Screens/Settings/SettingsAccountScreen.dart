@@ -60,7 +60,7 @@ class SettingsAccountScreenState extends BaseSettingsScreen {
       _buildAccountSection(
         context,
         iconPath: 'assets/svg/mal.svg',
-        title: 'Anilist',
+        title: 'MyAnimeList',
         isLoggedIn: Mal.token,
         username: Mal.username,
         avatarUrl: Mal.avatar,
