@@ -54,8 +54,8 @@ class SettingsThemeScreenState extends BaseSettingsScreen {
     return [
       Setting(
         type: SettingType.switchType,
-        name: getString.enableDarkMode,
-        description: 'Enable Dark Mode',
+        name: getString.darkMode,
+        description: getString.enableDarkMode,
         icon: Icons.dark_mode,
         isChecked: themeNotifier.isDarkMode,
         onSwitchChange: (bool value) async {
@@ -64,8 +64,8 @@ class SettingsThemeScreenState extends BaseSettingsScreen {
       ),
       Setting(
         type: SettingType.switchType,
-        name: 'OLED theme Variant',
-        description: 'Enable OLED Mode',
+        name: getString.oledThemeVariant,
+        description: getString.oledThemeVariantDescription,
         icon: Icons.brightness_4,
         isChecked: themeNotifier.isOled,
         onSwitchChange: (bool value) async {
@@ -74,8 +74,8 @@ class SettingsThemeScreenState extends BaseSettingsScreen {
       ),
       Setting(
         type: SettingType.switchType,
-        name: 'Material You',
-        description: 'Use the same color as your wallpaper',
+        name: getString.materialYou,
+        description: getString.materialYouDescription,
         icon: Icons.new_releases,
         //isVisible: Platform.isAndroid,
         isChecked: themeNotifier.useMaterialYou,
@@ -85,8 +85,8 @@ class SettingsThemeScreenState extends BaseSettingsScreen {
       ),
       Setting(
         type: SettingType.switchType,
-        name: 'Custom theme',
-        description: 'Use your own color for the theme',
+        name: getString.customTheme,
+        description: getString.customThemeDescription,
         icon: Icons.color_lens_outlined,
         isChecked: themeNotifier.useCustomColor,
         onSwitchChange: (bool value) async {
@@ -95,8 +95,8 @@ class SettingsThemeScreenState extends BaseSettingsScreen {
       ),
       Setting(
         type: SettingType.normal,
-        name: 'Color Picker',
-        description: 'Choose a color',
+        name: getString.colorPicker,
+        description: getString.colorPickerDescription,
         icon: Icons.color_lens_outlined,
         onClick: () async {
           var color = themeNotifier.customColor;
@@ -108,8 +108,8 @@ class SettingsThemeScreenState extends BaseSettingsScreen {
       ),
       Setting(
         type: SettingType.normal,
-        name: 'Manage Layouts on Anime Page',
-        description: 'Does not belong here',
+        name: getString.manageAnimeLayouts,
+        description: getString.manageAnimeLayoutsDescription,
         icon: Icons.palette,
         onClick: () async {
           final homeLayoutMap = PrefManager.getVal(PrefName.anilistAnimeLayout);
@@ -118,26 +118,26 @@ class SettingsThemeScreenState extends BaseSettingsScreen {
               List<bool>.from(homeLayoutMap.values.toList());
 
           AlertDialogBuilder(context)
-            ..setTitle('Manage Layouts on Anime Page')
+            ..setTitle(getString.manageAnimeLayouts)
             ..reorderableMultiSelectableItems(
               titles,
               checkedStates,
               (reorderedItems) => titles = reorderedItems,
               (newCheckedStates) => checkedStates = newCheckedStates,
             )
-            ..setPositiveButton('OK', () {
+            ..setPositiveButton(getString.positiveButton, () {
               PrefManager.setVal(PrefName.anilistAnimeLayout,
                   Map.fromIterables(titles, checkedStates));
               Refresh.activity[2]?.value = true;
             })
-            ..setNegativeButton("Cancel", null)
+            ..setNegativeButton(getString.negativeButton, null)
             ..show();
         },
       ),
       Setting(
         type: SettingType.normal,
-        name: 'Manage Layouts on Manga Page',
-        description: 'Does not belong here',
+        name: getString.manageMangaLayouts,
+        description: getString.manageMangaLayoutsDescription,
         icon: Icons.palette,
         onClick: () async {
           final homeLayoutMap = PrefManager.getVal(PrefName.anilistMangaLayout);
@@ -146,26 +146,26 @@ class SettingsThemeScreenState extends BaseSettingsScreen {
               List<bool>.from(homeLayoutMap.values.toList());
 
           AlertDialogBuilder(context)
-            ..setTitle('Manage Layouts on Manga Page')
+            ..setTitle(getString.manageMangaLayouts)
             ..reorderableMultiSelectableItems(
               titles,
               checkedStates,
               (reorderedItems) => titles = reorderedItems,
               (newCheckedStates) => checkedStates = newCheckedStates,
             )
-            ..setPositiveButton('OK', () {
+            ..setPositiveButton(getString.positiveButton, () {
               PrefManager.setVal(PrefName.anilistMangaLayout,
                   Map.fromIterables(titles, checkedStates));
               Refresh.activity[3]?.value = true;
             })
-            ..setNegativeButton("Cancel", null)
+            ..setNegativeButton(getString.negativeButton, null)
             ..show();
         },
       ),
       Setting(
         type: SettingType.normal,
-        name: 'Manage Layouts on Home Page',
-        description: 'Does not belong here',
+        name: getString.manageHomeLayouts,
+        description: getString.manageHomeLayoutsDescription,
         icon: Icons.palette,
         onClick: () async {
           final homeLayoutMap = PrefManager.getVal(PrefName.anilistHomeLayout);
@@ -174,19 +174,19 @@ class SettingsThemeScreenState extends BaseSettingsScreen {
               List<bool>.from(homeLayoutMap.values.toList());
 
           AlertDialogBuilder(context)
-            ..setTitle('Manage Layouts on Home Page')
+            ..setTitle(getString.manageHomeLayouts)
             ..reorderableMultiSelectableItems(
               titles,
               checkedStates,
               (reorderedItems) => titles = reorderedItems,
               (newCheckedStates) => checkedStates = newCheckedStates,
             )
-            ..setPositiveButton('OK', () {
+            ..setPositiveButton(getString.positiveButton, () {
               PrefManager.setVal(PrefName.anilistHomeLayout,
                   Map.fromIterables(titles, checkedStates));
               Refresh.activity[1]?.value = true;
             })
-            ..setNegativeButton("Cancel", null)
+            ..setNegativeButton(getString.negativeButton, null)
             ..show();
         },
       ),
