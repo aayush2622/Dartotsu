@@ -1,3 +1,21 @@
 {
   "enableDarkMode": "Enable Dark Mode",
+  "account": "Account",
+  "accountDescription": "Manage your AniList, MAL, and Discord accounts effortlessly",
+  "theme": "Theme",
+  "themeDescription": "Customize the appearance and vibe of your app",
+  "common": "Common",
+  "commonDescription": "Access general settings for seamless app usage",
+  "anime": "Anime",
+  "animeDescription": "Personalize and manage your anime preferences",
+  "manga": "Manga",
+  "mangaDescription": "Organize and tailor your manga experience",
+  "extensions": "Extensions",
+  "extensionsDescription": "Install and manage extensions for added functionality",
+  "addons": "Add-ons",
+  "addonsDescription": "Explore additional features to enhance your app",
+  "notifications": "Notifications",
+  "notificationsDescription": "Configure how and when you receive notifications",
+  "about": "About",
+  "aboutDescription": "Learn more about the app and its creators"
 }
