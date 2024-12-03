@@ -557,21 +557,6 @@ jobs:
           curl -H "Content-Type: application/json" \
                -d "{\"content\": \"${APK_MESSAGE}\n${WINDOWS_MESSAGE}\n${LINUX_MESSAGE}\"}" \
                "${{ secrets.DISCORD_WEBHOOK_URL }}"
-
-        # Send Telegram Message
-      # - name: Send Telegram Notification
-      #   uses: appleboy/telegram-action@master
-      #   with:
-      #       to: ${{ secrets.TELEGRAM_CHANNEL_ID }}
-      #       token: ${{secrets.TELEGRAM_BOT_TOKKEN}}
-      #       disable_notification: true
-      #       format: markdown
-
-      #       message: |
-      #           🎉 *Build Notification* 🎉
-      #           🔹 **APK**: ${{ env.apk_message}}
-      #           🔹 **Windows**: ${{ env.windows_message }}
-      #           🔹 **Linux**: ${{ env.linux_message }}
       - name: Send Telegram Notification
         run: |
             response=$(curl -sS -f -X POST \
