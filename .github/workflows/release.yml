@@ -86,7 +86,7 @@ jobs:
         with:
             files: build/linux/x64/release/bundle/Dantotsu_Linux_${{github.ref_name}}.zip
   build_ios_and_macos:
-    runs-on: macos-latest
+    runs-on: macos-12
     permissions: 
         contents: write
         pull-requests: write
