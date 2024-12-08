@@ -34,7 +34,9 @@ CustomBottomDialog login(BuildContext context) {
 
           var response = await FlutterWebAuth2.authenticate(
             options: const FlutterWebAuth2Options(
-                windowName: 'Dartotsu', useWebview: true),
+              windowName: 'Dartotsu',
+              useWebview: true,
+            ),
             url: url,
             callbackUrlScheme: 'dantotsu',
           );

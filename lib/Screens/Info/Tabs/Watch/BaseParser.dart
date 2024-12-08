@@ -1,3 +1,4 @@
+import 'package:dantotsu/Services/MediaService.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fuzzywuzzy/fuzzywuzzy.dart';
 import 'package:get/get.dart';
@@ -18,11 +19,13 @@ abstract class BaseParser extends GetxController {
   var source = Rxn<Source>(null);
 
   void saveSelected(int id, Selected data) {
-    PrefManager.setCustomVal("Selected-$id", data);
+    var sourceName = getService().getName;
+    PrefManager.setCustomVal("Selected-$id-$sourceName", data);
   }
 
   Selected loadSelected(Media mediaData) {
-    return PrefManager.getCustomVal("Selected-${mediaData.id}") ?? Selected();
+    var sourceName = getService().getName;
+    return PrefManager.getCustomVal("Selected-${mediaData.id}-$sourceName") ?? Selected();
   }
 
   Future<void> searchMedia(Source source, Media mediaData,

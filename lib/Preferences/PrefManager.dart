@@ -68,10 +68,8 @@ class PrefManager {
       return value;
     } else if (value is Map) {
       if (T == Map<String, bool>) {
-        final typedMap = Map<String, bool>.from(value);
-        return typedMap as T;
+        return Map<String, bool>.from(value) as T;
       }
-      // add more idk how to fix this shit
     }
     return pref.defaultValue;
   }

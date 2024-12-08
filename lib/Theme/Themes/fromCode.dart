@@ -3,10 +3,13 @@ import 'package:flutter/material.dart';
 
 ThemeData getCustomLightTheme(int color) {
   final schemeColor = FlexSchemeColor.from(primary: Color(color));
+
   final flexThemeData = FlexThemeData.light(
-    colors: schemeColor,
+    colors: schemeColor.copyWith(
+      primaryLightRef: schemeColor.primary,
+    ),
     primary: schemeColor.primary,
-    blendLevel: 5,
+    blendLevel: 18,
   );
 
   return ThemeData(
@@ -35,9 +38,11 @@ ThemeData getCustomLightTheme(int color) {
 ThemeData getCustomDarkTheme(int color) {
   final schemeColor = FlexSchemeColor.from(primary: Color(color));
   final flexThemeData = FlexThemeData.dark(
-    colors: schemeColor,
+    colors:schemeColor.copyWith(
+      primaryLightRef: schemeColor.primary,
+    ),
     primary: schemeColor.primary,
-    blendLevel: 23,
+    blendLevel: 18,
   );
 
   return ThemeData(

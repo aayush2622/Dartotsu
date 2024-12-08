@@ -1,8 +1,6 @@
+import 'package:dantotsu/Services/MediaService.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
-
-import '../../Services/ServiceSwitcher.dart';
 import 'MediaListTabs.dart';
 import 'MediaListViewModel.dart';
 
@@ -17,11 +15,12 @@ class MediaListScreen extends StatefulWidget {
 }
 
 class MediaListScreenState extends State<MediaListScreen> {
-  final _viewModel = Get.put(MediaListViewModel());
+  late final MediaListViewModel _viewModel;
 
   @override
   void initState() {
     super.initState();
+    _viewModel = Get.put(MediaListViewModel(), tag: widget.anime ? 'anime' : 'manga');
     _viewModel.loadAll(anime: widget.anime, userId: widget.id);
   }
 
@@ -29,7 +28,7 @@ class MediaListScreenState extends State<MediaListScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context).colorScheme;
     var service =
-        Provider.of<MediaServiceProvider>(context).currentService.data;
+        getService().data;
     return Scaffold(
       appBar: AppBar(
         elevation: 0,

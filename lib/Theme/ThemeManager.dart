@@ -77,81 +77,42 @@ ThemeData getTheme(ColorScheme? material, ThemeNotifier themeManager) {
           isOled ? greyNavDark : baseTheme.colorScheme.surfaceContainerHighest,
     ),
     switchTheme: SwitchThemeData(
-      thumbColor: WidgetStateProperty.resolveWith<Color>((states) {
+      thumbColor: WidgetStateProperty.resolveWith((states) {
         return states.contains(WidgetState.selected)
             ? baseTheme.colorScheme.surface
             : baseTheme.colorScheme.primary;
       }),
-      trackColor: WidgetStateProperty.resolveWith<Color>((states) {
+      trackColor: WidgetStateProperty.resolveWith((states) {
         return states.contains(WidgetState.selected)
             ? baseTheme.colorScheme.primary
             : baseTheme.colorScheme.surfaceContainerHighest;
       }),
-      overlayColor: WidgetStateProperty.all<Color>(
+      overlayColor: WidgetStateProperty.all(
         baseTheme.colorScheme.primary.withOpacity(0.2),
       ),
     ),
   );
 }
 
-class ThemeDropdown extends StatelessWidget {
-  const ThemeDropdown({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final themeNotifier = Provider.of<ThemeNotifier>(context);
-    final themeOptions = [
-      'blue',
-      'green',
-      'purple',
-      'pink',
-      'oriax',
-      'saikou',
-      'red',
-      'lavender',
-      'ocean'
-    ];
-    return buildDropdownMenu(
-      currentValue: themeNotifier.theme.toUpperCase(),
-      options: themeOptions.map((e) => e.toUpperCase()).toList(),
-      onChanged: (String newValue) {
-        themeNotifier.setTheme(newValue.toLowerCase());
-      },
-      prefixIcon: Icons.color_lens,
-    );
-  }
-}
-
-// TODO Implement the DNS dropdown
-class DnsDropdown extends StatelessWidget {
-  const DnsDropdown({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final dnsOptions = [
-      'None',
-      'Cloudflare',
-      'Google',
-      'AdGuard',
-      'Quad9',
-      'AliDNS',
-      'DNSPod',
-      '360',
-      'Quad101',
-      'Mullvad',
-      'Controld',
-      'Njalla',
-      'Shecan',
-      'Libre'
-    ];
-
-    final currentDnsProvider = dnsOptions[0];
-
-    return buildDropdownMenu(
-      currentValue: currentDnsProvider,
-      options: dnsOptions,
-      onChanged: (String newValue) {},
-      prefixIcon: Icons.dns,
-    );
-  }
+Widget themeDropdown(BuildContext context) {
+  final themeNotifier = Provider.of<ThemeNotifier>(context);
+  final themeOptions = [
+    'blue',
+    'green',
+    'purple',
+    'pink',
+    'oriax',
+    'saikou',
+    'red',
+    'lavender',
+    'ocean'
+  ];
+  return buildDropdownMenu(
+    currentValue: themeNotifier.theme.toUpperCase(),
+    options: themeOptions.map((e) => e.toUpperCase()).toList(),
+    onChanged: (String newValue) {
+      themeNotifier.setTheme(newValue.toLowerCase());
+    },
+    prefixIcon: Icons.color_lens,
+  );
 }

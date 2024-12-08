@@ -69,29 +69,29 @@ class MalHomeScreen extends BaseHomeScreen {
   void _setMediaList(Map<String, List<Media>> res) {
     var listImage = <String?>[];
     if (res["Watching"] != null) {
-      animeContinue.value = res["Watching"];
+      animeContinue.value = res["Watching"] ?? [] ;
     }
     if (res["OnHold"] != null) {
-      animeOnHold.value = res["OnHold"];
+      animeOnHold.value = res["OnHold"] ?? [];
     }
     if (res["Dropped"] != null) {
-      animeDropped.value = res["Dropped"];
+      animeDropped.value = res["Dropped"] ?? [];
     }
     if (res["PlanToWatch"] != null) {
-      animePlanned.value = res["PlanToWatch"];
+      animePlanned.value = res["PlanToWatch"] ?? [];
     }
 
     if (res["Reading"] != null) {
-      mangaContinue.value = res["Reading"];
+      mangaContinue.value = res["Reading"] ?? [] ;
     }
     if (res["OnHoldReading"] != null) {
-      mangaOnHold.value = res["OnHoldReading"];
+      mangaOnHold.value = res["OnHoldReading"] ?? [];
     }
     if (res["DroppedReading"] != null) {
-      mangaDropped.value = res["DroppedReading"];
+      mangaDropped.value = res["DroppedReading"] ?? [];
     }
     if (res["PlanToRead"] != null) {
-      mangaPlanned.value = res["PlanToRead"];
+      mangaPlanned.value = res["PlanToRead"] ?? [];
     }
     listImage.add(
         (List.from(res["Watching"] ?? [])..shuffle(Random())).first.banner);

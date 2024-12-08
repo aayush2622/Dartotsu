@@ -8,13 +8,9 @@ list(APPEND FLUTTER_PLUGIN_LIST
   flutter_qjs
   isar_flutter_libs
   permission_handler_windows
-  screen_brightness_windows
-  screen_retriever_windows
   share_plus
-  universal_video_controls
   url_launcher_windows
   webview_windows
-  window_manager
   window_to_front
 )
 

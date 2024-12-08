@@ -8,8 +8,8 @@ import '../../Adaptor/Media/Widgets/Chips.dart';
 import '../../Adaptor/Media/Widgets/MediaCard.dart';
 import '../../Animation/SlideInAnimation.dart';
 import '../../Functions/Function.dart';
+import '../../Services/MediaService.dart';
 import '../../Services/Screens/BaseMangaScreen.dart';
-import '../../Services/ServiceSwitcher.dart';
 import '../../Theme/Colors.dart';
 import '../../Theme/ThemeProvider.dart';
 import '../../Widgets/ScrollConfig.dart';
@@ -26,7 +26,7 @@ class MangaScreen extends StatefulWidget {
 class MangaScreenState extends State<MangaScreen> {
   @override
   Widget build(BuildContext context) {
-    var service = Provider.of<MediaServiceProvider>(context).currentService;
+    var service = getService();
     var screen = service.mangaScreen;
     if (screen == null) {
       return service.notImplemented(widget.runtimeType.toString());

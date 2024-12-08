@@ -12,14 +12,18 @@ import 'Widget/HandleProgress.dart';
 
 class EpisodeListView extends StatelessWidget {
   final Episode episode;
-  final bool isWatched;
   final Media mediaData;
+  final bool isWatched;
 
-  const EpisodeListView(
-      {super.key,
-      required this.episode,
-      required this.isWatched,
-      required this.mediaData});
+  EpisodeListView({
+    super.key,
+    required this.episode,
+    required this.mediaData,
+  }) : isWatched =
+            (mediaData.userProgress != null && mediaData.userProgress! > 0)
+                ? mediaData.userProgress!.toString().toDouble() >=
+                    episode.number.toDouble()
+                : false;
 
   @override
   Widget build(BuildContext context) {
@@ -31,20 +35,23 @@ class EpisodeListView extends StatelessWidget {
         ? (isDark ? fillerDark : fillerLight)
         : theme.surfaceContainerHighest;
 
-    return Card(
-      margin: const EdgeInsets.all(8),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
-      elevation: 4,
-      color: cardColor,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _buildEpisodeHeader(context, theme),
-          if (episode.desc != null && episode.desc!.isNotEmpty)
-            _buildEpisodeDescription(theme),
-        ],
+    return Opacity(
+      opacity: isWatched ? 0.5 : 1.0,
+      child: Card(
+        margin: const EdgeInsets.all(8),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(18),
+        ),
+        elevation: 4,
+        color: cardColor,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildEpisodeHeader(context, theme),
+            if (episode.desc != null && episode.desc!.isNotEmpty)
+              _buildEpisodeDescription(theme),
+          ],
+        ),
       ),
     );
   }
@@ -87,7 +94,6 @@ class EpisodeListView extends StatelessWidget {
 
   Widget _buildThumbnail(BuildContext context, ColorScheme theme) {
     return Card(
-      margin: const EdgeInsets.all(8),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
       ),
@@ -153,10 +159,10 @@ class EpisodeListView extends StatelessWidget {
               ),
             ),
           handleProgress(
-              context: context,
-              mediaId: mediaData.id,
-              ep: episode.number.toDouble().toInt(),
-              width: 142,
+            context: context,
+            mediaId: mediaData.id,
+            ep: episode.number.toDouble().toInt(),
+            width: 142,
           )
         ],
       ),

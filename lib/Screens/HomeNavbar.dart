@@ -94,7 +94,7 @@ class FloatingBottomNavBar extends StatelessWidget {
                 color: Theme.of(context).colorScheme.primary,
               ),
               title: Text(
-                service.runtimeType.toString().replaceAll('Service', ''),
+                service.getName,
                 style: const TextStyle(
                   fontFamily: 'Poppins',
                   fontSize: 16.0,

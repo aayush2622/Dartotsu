@@ -27,8 +27,7 @@ class MediaServiceProvider with ChangeNotifier {
     }
   }
 
-  MediaService? _findService(String serviceName) {
-    return MediaService.allServices.firstWhereOrNull(
-        (service) => service.runtimeType.toString() == serviceName);
-  }
+  MediaService? _findService(String serviceName) =>
+      MediaService.allServices.firstWhereOrNull(
+          (service) => service.runtimeType.toString() == serviceName);
 }

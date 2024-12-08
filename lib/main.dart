@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:dantotsu/Screens/Login/LoginScreen.dart';
 import 'package:dantotsu/Screens/Manga/MangaScreen.dart';
 import 'package:dantotsu/api/EpisodeDetails/GetMediaIDs/GetMediaIDs.dart';
@@ -116,7 +114,7 @@ class MainActivityState extends State<MainActivity> {
   @override
   Widget build(BuildContext context) {
     Discord.getSavedToken();
-    var service = Provider.of<MediaServiceProvider>(context).currentService;
+    var service = getService();
     navbar = FloatingBottomNavBar(
       selectedIndex: _selectedIndex,
       onTabSelected: _onTabSelected,

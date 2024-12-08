@@ -1,4 +1,3 @@
-import 'package:dantotsu/Functions/string_extensions.dart';
 import 'package:flutter/widgets.dart';
 
 import '../../Animation/ScaleAnimation.dart';
@@ -63,15 +62,6 @@ class EpisodeAdaptorState extends State<EpisodeAdaptor> {
           shrinkWrap: true,
           itemCount: episodeList.length,
           itemBuilder: (context, index) {
-            bool isWatched;
-            if (widget.mediaData.userProgress != null &&
-                widget.mediaData.userProgress! > 0) {
-              isWatched =
-                  widget.mediaData.userProgress!.toString().toDouble() >=
-                      episodeList[index].number.toDouble();
-            } else {
-              isWatched = false;
-            }
             return SlideAndScaleAnimation(
               initialScale: 0.0,
               finalScale: 1.0,
@@ -85,12 +75,9 @@ class EpisodeAdaptorState extends State<EpisodeAdaptor> {
                   width: double.infinity,
                   margin:
                       const EdgeInsets.symmetric(horizontal: 18, vertical: 4),
-                  child: Opacity(
-                    opacity: isWatched ? 0.5 : 1.0,
-                    child: EpisodeListView(
-                        episode: episodeList[index],
-                        isWatched: isWatched,
-                        mediaData: widget.mediaData),
+                  child: EpisodeListView(
+                    episode: episodeList[index],
+                    mediaData: widget.mediaData,
                   ),
                 ),
               ),

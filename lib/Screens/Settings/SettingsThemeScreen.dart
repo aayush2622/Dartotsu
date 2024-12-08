@@ -36,7 +36,7 @@ class SettingsThemeScreenState extends BaseSettingsScreen {
 
   @override
   List<Widget> get settingsList => [
-        const ThemeDropdown(),
+        themeDropdown(context),
         languageSwitcher(context),
         const SizedBox(height: 8),
         Padding(
