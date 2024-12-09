@@ -68,7 +68,14 @@ class SettingSwitchItem extends StatefulWidget {
 }
 
 class SettingSwitchItemState extends State<SettingSwitchItem> {
+  late bool _isChecked; // Local state for the switch
   bool _isHovered = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _isChecked = widget.setting.isChecked; // Initialize local state
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +85,11 @@ class SettingSwitchItemState extends State<SettingSwitchItem> {
       onEnter: (_) => setState(() => _isHovered = true),
       onExit: (_) => setState(() => _isHovered = false),
       child: GestureDetector(
-        onTap: () => widget.setting.onSwitchChange!(!widget.setting.isChecked),
+        onTap: () {
+          final newValue = !_isChecked;
+          setState(() => _isChecked = newValue);
+          widget.setting.onSwitchChange?.call(newValue);
+        },
         onLongPress: widget.setting.onLongClick,
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
@@ -113,8 +124,11 @@ class SettingSwitchItemState extends State<SettingSwitchItem> {
                         GestureDetector(
                           behavior: HitTestBehavior.translucent,
                           child: Switch(
-                            value: widget.setting.isChecked,
-                            onChanged: widget.setting.onSwitchChange,
+                            value: _isChecked, // Use local state
+                            onChanged: (value) {
+                              setState(() => _isChecked = value); // Update local state
+                              widget.setting.onSwitchChange?.call(value); // Trigger callback
+                            },
                           ),
                         ),
                       ],

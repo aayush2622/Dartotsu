@@ -43,9 +43,12 @@ class PrefName {
     'Dropped Manga': false,
   });
   static const Pref<List<int>> anilistRemoveList =
-      Pref(Location.General, 'removeList', []);
+      Pref(Location.General, 'anilistRemoveList', []);
   static const Pref<List<int>> malRemoveList =
-  Pref(Location.General, 'removeList', []);
+      Pref(Location.General, 'malRemoveList', []);
+  static const Pref<bool> anilistHidePrivate =
+      Pref(Location.General, 'anilistHidePrivate', false);
+
   //anime page
   static const Pref<Map<String, bool>> anilistAnimeLayout =
       Pref(Location.General, 'animeLayoutOrder', {

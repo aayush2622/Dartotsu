@@ -4,7 +4,7 @@ extension on AnilistQueries {
   Future<Map<String, List<Media>>> _initHomePage() async {
     try {
       final removeList = PrefManager.getVal(PrefName.anilistRemoveList);
-      const hidePrivate = true;
+      final hidePrivate = PrefManager.getVal(PrefName.anilistHidePrivate);
       List<Media> removedMedia = [];
       final homeLayoutMap = PrefManager.getVal(PrefName.anilistHomeLayout);
 

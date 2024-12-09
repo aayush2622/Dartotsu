@@ -164,27 +164,34 @@ class MalHomeScreen extends BaseHomeScreen {
     final sectionMap = {
       for (var section in mediaSections) section.title: section
     };
-
     final sectionWidgets = homeLayoutMap.entries
         .where((entry) => entry.value)
         .map((entry) => sectionMap[entry.key])
         .whereType<MediaSectionData>()
-        .map((section) => MediaSection(
-              context: context,
-              type: section.type,
-              title: section.title,
-              mediaList: section.list,
-              isLarge: section.isLarge,
-              onLongPressTitle: section.onLongPressTitle,
-              customNullListIndicator: _buildNullIndicator(
-                context,
-                section.emptyIcon,
-                section.emptyMessage,
-                section.emptyButtonText,
-                section.emptyButtonOnPressed,
-              ),
-            ))
-        .toList()
+        .toList();
+
+    if (sectionWidgets.isNotEmpty) {
+      sectionWidgets.first.onLongPressTitle =
+          () => showHidden.value = !showHidden.value;
+    }
+
+    final result = sectionWidgets.map((section) {
+      return MediaSection(
+        context: context,
+        type: section.type,
+        title: section.title,
+        mediaList: section.list,
+        isLarge: section.isLarge,
+        onLongPressTitle: section.onLongPressTitle,
+        customNullListIndicator: _buildNullIndicator(
+          context,
+          section.emptyIcon,
+          section.emptyMessage,
+          section.emptyButtonText,
+          section.emptyButtonOnPressed,
+        ),
+      );
+    }).toList()
       ..add(const SizedBox(height: 128));
 
     var hiddenMedia = MediaSection(
@@ -205,12 +212,12 @@ class MalHomeScreen extends BaseHomeScreen {
     return [
       Obx(() {
         if (showHidden.value) {
-          sectionWidgets.insert(0, hiddenMedia);
+          result.insert(0, hiddenMedia);
         } else {
-          sectionWidgets.remove(hiddenMedia);
+          result.remove(hiddenMedia);
         }
         return Column(
-          children: sectionWidgets,
+          children: result,
         );
       }),
     ];

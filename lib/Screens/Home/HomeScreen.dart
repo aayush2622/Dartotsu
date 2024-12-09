@@ -194,123 +194,6 @@ class HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  void contactPage(BuildContext context) {
-    var theme = Theme.of(context).colorScheme;
-    var t = CustomBottomDialog(
-      title: 'Contact Us',
-      viewList: [
-        Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Name',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: theme.onPrimaryContainer,
-                  fontFamily: 'Poppins',
-                ),
-              ),
-              const SizedBox(height: 8.0),
-              TextField(
-                decoration: InputDecoration(
-                  hintText: 'Enter your name',
-                  hintStyle: const TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontFamily: 'Poppins',
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(16.0),
-                  ),
-                  prefixIcon: const Icon(Icons.person),
-                ),
-              ),
-              const SizedBox(height: 16.0),
-              Text(
-                'Email',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: theme.onPrimaryContainer,
-                ),
-              ),
-              const SizedBox(height: 8.0),
-              TextField(
-                decoration: InputDecoration(
-                  hintText: 'Enter your email',
-                  hintStyle: const TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontFamily: 'Poppins',
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(16.0),
-                  ),
-                  prefixIcon: const Icon(Icons.email),
-                ),
-              ),
-              const SizedBox(height: 16.0),
-              Text(
-                'Message',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: theme.onPrimaryContainer,
-                ),
-              ),
-              const SizedBox(height: 8.0),
-              TextField(
-                maxLines: 4,
-                decoration: InputDecoration(
-                  hintText: 'Write your message here...',
-                  hintStyle: const TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontFamily: 'Poppins',
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(16.0),
-                  ),
-                  //prefixIcon: const Icon(Icons.message),
-                ),
-              ),
-              const SizedBox(height: 24.0),
-              Center(
-                child: ElevatedButton.icon(
-                  onPressed: () {},
-                  icon: const Padding(
-                    padding: EdgeInsets.only(left: 6.0),
-                    child: Icon(Icons.send),
-                  ),
-                  iconAlignment: IconAlignment.end,
-                  label: Text(
-                    'Submit',
-                    style: TextStyle(
-                      fontFamily: 'Poppins',
-                      color: theme.onPrimaryContainer,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: theme.primaryContainer,
-                    padding: const EdgeInsets.only(
-                      top: 26,
-                      bottom: 26,
-                      left: 24,
-                      right: 42,
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-
-    showCustomBottomDialog(context, t);
-  }
-
   Widget _buildUserInfo(BaseServiceData data) {
     final theme = Theme.of(context).colorScheme;
     final isDarkMode = Provider.of<ThemeNotifier>(context).isDarkMode;
@@ -321,7 +204,7 @@ class HomeScreenState extends State<HomeScreen> {
         child: SlideUpAnimation(
           child: Row(children: [
             GestureDetector(
-              onTap: () => contactPage(context),
+              onTap: () {},
               child: CircleAvatar(
                 backgroundColor: Colors.transparent,
                 radius: 26.0,
