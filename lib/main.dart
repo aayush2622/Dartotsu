@@ -28,10 +28,6 @@ late Isar isar;
 
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
-  FlutterError.onError = (FlutterErrorDetails details) {
-    print(details);
-  };
-
   await init();
   runApp(
     provider.ProviderScope(

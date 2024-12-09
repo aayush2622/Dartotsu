@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../Functions/Function.dart';
+import '../../Theme/LanguageSwitcher.dart';
 import '../../Widgets/AlertDialogBuilder.dart';
 import '../../Widgets/LoadSvg.dart';
 import '../../api/Anilist/Anilist.dart';
@@ -19,7 +20,7 @@ class SettingsAccountScreen extends StatefulWidget {
 
 class SettingsAccountScreenState extends BaseSettingsScreen {
   @override
-  String title() => 'Accounts';
+  String title() => getString.account;
 
   @override
   Widget icon() => Padding(

@@ -111,7 +111,7 @@ class MalHomeScreen extends BaseHomeScreen {
         list: animeOnHold.value,
         emptyIcon: Icons.movie_filter_rounded,
         emptyMessage:
-            'Looks like you haven\'t put anything on hold,\nTry putting a show on hold to keep it here.',
+            'Looks like you haven\'t put anything on hold.',
       ),
       MediaSectionData(
         type: 0,
@@ -144,7 +144,7 @@ class MalHomeScreen extends BaseHomeScreen {
         list: mangaOnHold.value,
         emptyIcon: Icons.import_contacts,
         emptyMessage:
-            'Looks like you haven\'t put anything on hold,\nTry putting a show on hold to keep it here.',
+            'Looks like you haven\'t put anything on hold.',
       ),
       MediaSectionData(
         type: 0,

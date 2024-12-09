@@ -9,6 +9,10 @@ import '../../Adaptor/Settings/SettingsAdaptor.dart';
 import '../../DataClass/Setting.dart';
 import '../../Functions/Function.dart';
 import '../../Theme/LanguageSwitcher.dart';
+import 'SettingsAboutScreen.dart';
+import 'SettingsAnimeScreen.dart';
+import 'SettingsCommonScreen.dart';
+import 'SettingsMangaScreen.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -19,7 +23,7 @@ class SettingsScreen extends StatefulWidget {
 
 class SettingsScreenState extends BaseSettingsScreen {
   @override
-  String title() => 'Settings';
+  String title() => getString.settings;
 
   @override
   Widget icon() => ClipOval(
@@ -64,7 +68,7 @@ class SettingsScreenState extends BaseSettingsScreen {
         name: getString.common,
         description: getString.commonDescription,
         icon: Icons.lightbulb_outline,
-        onClick: () {},
+        onClick: () => navigateToPage(context, const SettingsCommonScreen()),
         isActivity: true,
       ),
       Setting(
@@ -72,7 +76,7 @@ class SettingsScreenState extends BaseSettingsScreen {
         name: getString.anime,
         description: getString.animeDescription,
         icon: Icons.movie_filter_rounded,
-        onClick: () {},
+        onClick: () => navigateToPage(context, const SettingsAnimeScreen()),
         isActivity: true,
       ),
       Setting(
@@ -80,7 +84,7 @@ class SettingsScreenState extends BaseSettingsScreen {
         name: getString.manga,
         description: getString.mangaDescription,
         icon: Icons.import_contacts,
-        onClick: () {},
+        onClick: () => navigateToPage(context, const SettingsMangaScreen()),
         isActivity: true,
       ),
       Setting(
@@ -88,15 +92,7 @@ class SettingsScreenState extends BaseSettingsScreen {
         name: getString.extensions,
         description: getString.extensionsDescription,
         icon: Icons.extension,
-        onClick: () {},
-        isActivity: true,
-      ),
-      Setting(
-        type: SettingType.normal,
-        name: getString.addons,
-        description: getString.addonsDescription,
-        icon: Icons.restaurant,
-        onClick: () {},
+        onClick: () => snackString('Extensions'),
         isActivity: true,
       ),
       Setting(
@@ -104,7 +100,7 @@ class SettingsScreenState extends BaseSettingsScreen {
         name: getString.notifications,
         description: getString.notificationsDescription,
         icon: Icons.notifications_none,
-        onClick: () {},
+        onClick: () => snackString('Notifications'),
         isActivity: true,
       ),
       Setting(
@@ -112,7 +108,7 @@ class SettingsScreenState extends BaseSettingsScreen {
         name: getString.about,
         description: getString.aboutDescription,
         icon: Icons.info,
-        onClick: () {},
+        onClick: () => navigateToPage(context, const SettingsAboutScreen()),
         isActivity: true,
       ),
     ];

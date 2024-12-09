@@ -7,8 +7,9 @@ import 'package:dantotsu/Widgets/AlertDialogBuilder.dart';
 import 'package:dantotsu/Widgets/CustomBottomDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:provider/provider.dart';
 import '../../Preferences/PrefManager.dart';
-import '../../Services/MediaService.dart';
+import '../../Services/ServiceSwitcher.dart';
 
 class SettingsBottomSheet extends StatefulWidget {
   const SettingsBottomSheet({super.key});
@@ -30,7 +31,9 @@ class SettingsBottomSheetState extends State<SettingsBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
-    var service = getService(listen: false).data;
+    var service = Provider.of<MediaServiceProvider>(context, listen: false)
+        .currentService
+        .data;
     return CustomBottomDialog(
       viewList: [
         Padding(

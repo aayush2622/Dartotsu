@@ -1,14 +1,10 @@
 import 'package:dantotsu/Screens/Settings/BaseSettingsScreen.dart';
-import 'package:dantotsu/Widgets/AlertDialogBuilder.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../Adaptor/Settings/SettingsAdaptor.dart';
 import '../../DataClass/Setting.dart';
-import '../../Functions/Function.dart';
 import '../../Theme/LanguageSwitcher.dart';
-import '../../Preferences/PrefManager.dart';
-import '../../Preferences/Preferences.dart';
 import '../../Theme/CustomColorPicker.dart';
 import '../../Theme/ThemeManager.dart';
 import '../../Theme/ThemeProvider.dart';
@@ -22,7 +18,7 @@ class SettingsThemeScreen extends StatefulWidget {
 
 class SettingsThemeScreenState extends BaseSettingsScreen {
   @override
-  String title() => 'Theme';
+  String title() => getString.theme;
 
   @override
   Widget icon() => Padding(
@@ -38,15 +34,9 @@ class SettingsThemeScreenState extends BaseSettingsScreen {
   List<Widget> get settingsList => [
         themeDropdown(context),
         languageSwitcher(context),
-        const SizedBox(height: 8),
-        Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 24,
-          ),
-          child: SettingsAdaptor(
-            settings: _buildSettings(context),
-          ),
-        )
+        SettingsAdaptor(
+          settings: _buildSettings(context),
+        ),
       ];
 
   List<Setting> _buildSettings(BuildContext context) {
@@ -104,90 +94,6 @@ class SettingsThemeScreenState extends BaseSettingsScreen {
           if (newColor != null) {
             themeNotifier.setCustomColor(newColor);
           }
-        },
-      ),
-      Setting(
-        type: SettingType.normal,
-        name: getString.manageAnimeLayouts,
-        description: getString.manageAnimeLayoutsDescription,
-        icon: Icons.palette,
-        onClick: () async {
-          final homeLayoutMap = PrefManager.getVal(PrefName.anilistAnimeLayout);
-          List<String> titles = List<String>.from(homeLayoutMap.keys.toList());
-          List<bool> checkedStates =
-              List<bool>.from(homeLayoutMap.values.toList());
-
-          AlertDialogBuilder(context)
-            ..setTitle(getString.manageAnimeLayouts)
-            ..reorderableMultiSelectableItems(
-              titles,
-              checkedStates,
-              (reorderedItems) => titles = reorderedItems,
-              (newCheckedStates) => checkedStates = newCheckedStates,
-            )
-            ..setPositiveButton(getString.ok, () {
-              PrefManager.setVal(PrefName.anilistAnimeLayout,
-                  Map.fromIterables(titles, checkedStates));
-              Refresh.activity[2]?.value = true;
-            })
-            ..setNegativeButton(getString.cancel, null)
-            ..show();
-        },
-      ),
-      Setting(
-        type: SettingType.normal,
-        name: getString.manageMangaLayouts,
-        description: getString.manageMangaLayoutsDescription,
-        icon: Icons.palette,
-        onClick: () async {
-          final homeLayoutMap = PrefManager.getVal(PrefName.anilistMangaLayout);
-          List<String> titles = List<String>.from(homeLayoutMap.keys.toList());
-          List<bool> checkedStates =
-              List<bool>.from(homeLayoutMap.values.toList());
-
-          AlertDialogBuilder(context)
-            ..setTitle(getString.manageMangaLayouts)
-            ..reorderableMultiSelectableItems(
-              titles,
-              checkedStates,
-              (reorderedItems) => titles = reorderedItems,
-              (newCheckedStates) => checkedStates = newCheckedStates,
-            )
-            ..setPositiveButton(getString.ok, () {
-              PrefManager.setVal(PrefName.anilistMangaLayout,
-                  Map.fromIterables(titles, checkedStates));
-              Refresh.activity[3]?.value = true;
-            })
-            ..setNegativeButton(getString.cancel, null)
-            ..show();
-        },
-      ),
-      Setting(
-        type: SettingType.normal,
-        name: getString.manageHomeLayouts,
-        description: getString.manageHomeLayoutsDescription,
-        icon: Icons.palette,
-        onClick: () async {
-          final homeLayoutMap = PrefManager.getVal(PrefName.anilistHomeLayout);
-          List<String> titles = List<String>.from(homeLayoutMap.keys.toList());
-          List<bool> checkedStates =
-              List<bool>.from(homeLayoutMap.values.toList());
-
-          AlertDialogBuilder(context)
-            ..setTitle(getString.manageHomeLayouts)
-            ..reorderableMultiSelectableItems(
-              titles,
-              checkedStates,
-              (reorderedItems) => titles = reorderedItems,
-              (newCheckedStates) => checkedStates = newCheckedStates,
-            )
-            ..setPositiveButton(getString.ok, () {
-              PrefManager.setVal(PrefName.anilistHomeLayout,
-                  Map.fromIterables(titles, checkedStates));
-              Refresh.activity[1]?.value = true;
-            })
-            ..setNegativeButton(getString.cancel, null)
-            ..show();
         },
       ),
     ];
