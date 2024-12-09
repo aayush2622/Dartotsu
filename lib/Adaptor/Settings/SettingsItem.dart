@@ -15,6 +15,8 @@ class SettingItem extends StatelessWidget {
     return ListTile(
       onTap: setting.onClick,
       onLongPress: setting.onLongClick,
+      hoverColor: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
+
       title: Row(
         children: [
           Icon(setting.icon, color: Theme.of(context).primaryColor),
@@ -51,58 +53,89 @@ class SettingItem extends StatelessWidget {
           ? Icon(Icons.arrow_forward_ios, color: Theme.of(context).primaryColor)
           : null,
       contentPadding:
-          const EdgeInsets.symmetric(vertical: 8.0, horizontal: 0.0),
+          const EdgeInsets.symmetric(vertical: 8.0),
     );
   }
 }
 
-class SettingSwitchItem extends StatelessWidget {
+class SettingSwitchItem extends StatefulWidget {
   final Setting setting;
 
   const SettingSwitchItem({super.key, required this.setting});
 
   @override
-  Widget build(BuildContext context) {
-    // setting item type: switch
-    if (!setting.isVisible) return const SizedBox.shrink();
+  SettingSwitchItemState createState() => SettingSwitchItemState();
+}
 
-    return GestureDetector(
-      onLongPress: setting.onLongClick,
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 22.0, horizontal: 0.0),
-        child: Row(
-          children: [
-            Icon(setting.icon, color: Theme.of(context).primaryColor),
-            const SizedBox(width: 24.0),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(setting.name,
-                          style: const TextStyle(
+class SettingSwitchItemState extends State<SettingSwitchItem> {
+  bool _isHovered = false;
+
+  @override
+  Widget build(BuildContext context) {
+    if (!widget.setting.isVisible) return const SizedBox.shrink();
+
+    return MouseRegion(
+      onEnter: (_) => setState(() => _isHovered = true),
+      onExit: (_) => setState(() => _isHovered = false),
+      child: GestureDetector(
+        onTap: () => widget.setting.onSwitchChange!(!widget.setting.isChecked),
+        onLongPress: widget.setting.onLongClick,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          decoration: BoxDecoration(
+            color: _isHovered
+                ? Theme.of(context).colorScheme.secondary.withOpacity(0.1)
+                : Colors.transparent,
+          ),
+          child: Row(
+            children: [
+              Icon(widget.setting.icon, color: Theme.of(context).primaryColor),
+              const SizedBox(width: 24.0),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            widget.setting.name,
+                            style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 16.0,
-                              fontFamily: 'Poppins')),
-                      Switch(
-                        value: setting.isChecked,
-                        onChanged: setting.onSwitchChange,
-                      ),
-                    ],
-                  ),
-                  Text(setting.description,
+                              fontFamily: 'Poppins',
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        GestureDetector(
+                          behavior: HitTestBehavior.translucent,
+                          child: Switch(
+                            value: widget.setting.isChecked,
+                            onChanged: widget.setting.onSwitchChange,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 6.0),
+                    Text(
+                      widget.setting.description,
                       style: const TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 14.0,
-                          color: Colors.grey,
-                          fontFamily: 'Poppins')),
-                  if (setting.attach != null) setting.attach!(context),
-                ],
+                        fontWeight: FontWeight.w600,
+                        fontSize: 14.0,
+                        color: Colors.grey,
+                        fontFamily: 'Poppins',
+                      ),
+                    ),
+                    if (widget.setting.attach != null)
+                      widget.setting.attach!(context),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
