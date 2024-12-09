@@ -3,7 +3,6 @@ import 'package:dantotsu/Screens/Settings/BaseSettingsScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../Functions/Function.dart';
 import '../../Theme/LanguageSwitcher.dart';
 import '../../Widgets/AlertDialogBuilder.dart';
 import '../../Widgets/LoadSvg.dart';
@@ -33,10 +32,7 @@ class SettingsAccountScreenState extends BaseSettingsScreen {
       );
 
   @override
-  List<Widget> get settingsList => [
-        ..._buildSettings(context),
-        const SizedBox(height: 42),
-      ];
+  List<Widget> get settingsList => _buildSettings(context);
 
   List<Widget> _buildSettings(BuildContext context) {
     return [
@@ -54,9 +50,6 @@ class SettingsAccountScreenState extends BaseSettingsScreen {
           ..setNegativeButton('No', null)
           ..show(),
         onLogIn: () => Anilist.login(context),
-        onAvatarTap: () => snackString('Avatar Tapped'),
-        onIconTap: () => snackString('Edit Icon Tapped'),
-        onIconLongTap: () => snackString('Long Pressed'),
       ),
       _buildAccountSection(
         context,
@@ -72,9 +65,6 @@ class SettingsAccountScreenState extends BaseSettingsScreen {
           ..setNegativeButton('No', null)
           ..show(),
         onLogIn: () => Mal.login(context),
-        onAvatarTap: () => snackString('Avatar Tapped'),
-        onIconTap: () => snackString('Edit Icon Tapped'),
-        onIconLongTap: () => snackString('Long Pressed'),
       ),
       const SizedBox(height: 16),
       _buildAccountSection(
@@ -91,9 +81,6 @@ class SettingsAccountScreenState extends BaseSettingsScreen {
           ..setNegativeButton('No', null)
           ..show(),
         onLogIn: () => Discord.warning(context),
-        onAvatarTap: () => snackString('Discord Avatar Tapped'),
-        onIconTap: () => snackString('Discord Edit Icon Tapped'),
-        onIconLongTap: () => snackString('Discord Long Pressed'),
       ),
     ];
   }
@@ -108,20 +95,14 @@ class SettingsAccountScreenState extends BaseSettingsScreen {
     required RxString avatarUrl,
     required Function() onLogOut,
     required Function() onLogIn,
-    required Function() onAvatarTap,
-    required Function() onIconTap,
-    required Function() onIconLongTap,
+    Function()? onAvatarTap,
+    Function()? onIconTap,
+    Function()? onIconLongTap,
   }) {
     var theme = Theme.of(context).colorScheme;
 
     final leadingIcon = iconPath != null
-        ? loadSvg(
-            iconPath,
-            width: 26,
-            height: 26,
-            // ignore: deprecated_member_use
-            color: theme.primary,
-          )
+        ? loadSvg(iconPath, width: 26, height: 26, color: theme.primary)
         : icon!;
 
     return Obx(() => isLoggedIn.value.isNotEmpty
@@ -137,8 +118,8 @@ class SettingsAccountScreenState extends BaseSettingsScreen {
     RxString username,
     RxString avatarUrl,
     Function() onPressed,
-    Function() onAvatarTap,
-    Function() onIconTap,
+    Function()? onAvatarTap,
+    Function()? onIconTap,
     Function()? onIconLongTap,
   ) {
     var theme = Theme.of(context).colorScheme;
@@ -170,22 +151,23 @@ class SettingsAccountScreenState extends BaseSettingsScreen {
             ]),
             Row(
               children: [
-                GestureDetector(
-                  onTap: onIconTap,
-                  onLongPress: onIconLongTap,
-                  child: Container(
-                    padding: const EdgeInsets.all(8.0),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: theme.primary,
-                    ),
-                    child: Icon(
-                      Icons.question_mark, // Small icon
-                      size: 14,
-                      color: theme.surface,
+                if (onIconTap != null || onIconLongTap != null)
+                  GestureDetector(
+                    onTap: onIconTap,
+                    onLongPress: onIconLongTap,
+                    child: Container(
+                      padding: const EdgeInsets.all(8.0),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: theme.primary,
+                      ),
+                      child: Icon(
+                        Icons.question_mark, // Small icon
+                        size: 14,
+                        color: theme.surface,
+                      ),
                     ),
                   ),
-                ),
                 const SizedBox(width: 8),
                 GestureDetector(
                   onTap: onAvatarTap,

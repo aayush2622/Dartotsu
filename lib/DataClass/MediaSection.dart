@@ -12,6 +12,7 @@ class MediaSectionData {
   final bool isLarge;
   final ScrollController? scrollController;
   void Function()? emptyButtonOnPressed;
+  void Function()? onLongPressTitle;
 
   MediaSectionData({
     required this.type,
@@ -23,5 +24,6 @@ class MediaSectionData {
     this.emptyMessage,
     this.emptyButtonText,
     this.emptyButtonOnPressed,
+    this.onLongPressTitle,
   });
 }

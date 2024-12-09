@@ -12,6 +12,7 @@ Widget MediaSection({
   List<Widget>? customNullListIndicator,
   ScrollController? scrollController,
   Function(int index, Media media)? onMediaTap,
+  void Function()? onLongPressTitle,
 }) {
   var theme = Theme.of(context);
 
@@ -23,15 +24,18 @@ Widget MediaSection({
         children: [
           // Title Text
           Expanded(
-            child: Text(
-              title,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                fontFamily: 'Poppins',
-                color: theme.colorScheme.onSurface,
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
+            child: GestureDetector(
+              onLongPress: onLongPressTitle,
+              child: Text(
+                title,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  fontFamily: 'Poppins',
+                  color: theme.colorScheme.onSurface,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
           ),

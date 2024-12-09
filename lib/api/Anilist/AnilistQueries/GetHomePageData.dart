@@ -3,7 +3,7 @@ part of '../AnilistQueries.dart';
 extension on AnilistQueries {
   Future<Map<String, List<Media>>> _initHomePage() async {
     try {
-      final removeList = PrefManager.getVal(PrefName.removeList);
+      final removeList = PrefManager.getVal(PrefName.anilistRemoveList);
       const hidePrivate = true;
       List<Media> removedMedia = [];
       final homeLayoutMap = PrefManager.getVal(PrefName.anilistHomeLayout);

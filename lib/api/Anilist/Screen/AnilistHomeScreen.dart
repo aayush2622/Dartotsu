@@ -1,6 +1,7 @@
 import 'package:dantotsu/Services/Screens/BaseHomeScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
 import '../../../Adaptor/Media/Widgets/MediaSection.dart';
 import '../../../DataClass/Media.dart';
@@ -57,30 +58,14 @@ class AnilistHomeScreen extends BaseHomeScreen {
   }
 
   void _setMediaList(Map<String, List<Media>> res) {
-    if (res["currentAnime"] != null) {
-      animeContinue.value = res["currentAnime"];
-    }
-    if (res["favoriteAnime"] != null) {
-      animeFav.value = res["favoriteAnime"];
-    }
-    if (res["currentAnimePlanned"] != null) {
-      animePlanned.value = res["currentAnimePlanned"];
-    }
-    if (res["currentManga"] != null) {
-      mangaContinue.value = res["currentManga"];
-    }
-    if (res["favoriteManga"] != null) {
-      mangaFav.value = res["favoriteManga"];
-    }
-    if (res["currentMangaPlanned"] != null) {
-      mangaPlanned.value = res["currentMangaPlanned"];
-    }
-    if (res["recommendations"] != null) {
-      recommendation.value = res["recommendations"];
-    }
-    if (res["hidden"] != null) {
-      hidden.value = res["hidden"];
-    }
+    animeContinue.value = res["currentAnime"] ?? [];
+    animeFav.value = res["favoriteAnime"] ?? [];
+    animePlanned.value = res["currentAnimePlanned"] ?? [];
+    mangaContinue.value = res["currentManga"] ?? [];
+    mangaFav.value = res["favoriteManga"] ?? [];
+    mangaPlanned.value = res["currentMangaPlanned"] ?? [];
+    recommendation.value = res["recommendations"] ?? [];
+    hidden.value = res["hidden"] ?? [];
   }
 
   @override
@@ -100,6 +85,8 @@ class AnilistHomeScreen extends BaseHomeScreen {
 
   @override
   List<Widget> mediaContent(BuildContext context) {
+    var showHidden = false.obs;
+
     final mediaSections = [
       MediaSectionData(
         type: 0,
@@ -109,6 +96,7 @@ class AnilistHomeScreen extends BaseHomeScreen {
         emptyMessage: 'All caught up, when New?',
         emptyButtonText: 'Browse\nAnime',
         emptyButtonOnPressed: () => navbar?.onClick(0),
+        onLongPressTitle: () => showHidden.value = !showHidden.value,
       ),
       MediaSectionData(
         type: 0,
@@ -167,7 +155,6 @@ class AnilistHomeScreen extends BaseHomeScreen {
     final sectionMap = {
       for (var section in mediaSections) section.title: section
     };
-
     final sectionWidgets = homeLayoutMap.entries
         .where((entry) => entry.value)
         .map((entry) => sectionMap[entry.key])
@@ -178,6 +165,7 @@ class AnilistHomeScreen extends BaseHomeScreen {
               title: section.title,
               mediaList: section.list,
               isLarge: section.isLarge,
+              onLongPressTitle: section.onLongPressTitle,
               customNullListIndicator: _buildNullIndicator(
                 context,
                 section.emptyIcon,
@@ -189,7 +177,33 @@ class AnilistHomeScreen extends BaseHomeScreen {
         .toList()
       ..add(const SizedBox(height: 128));
 
-    return sectionWidgets;
+    var hiddenMedia = MediaSection(
+      context: context,
+      type: 0,
+      title: 'Hidden Media',
+      mediaList: hidden.value,
+      onLongPressTitle: () => showHidden.value = !showHidden.value,
+      customNullListIndicator: _buildNullIndicator(
+        context,
+        Icons.visibility_off,
+        'No hidden media found',
+        null,
+        null,
+      ),
+    );
+
+    return [
+      Obx(() {
+        if (showHidden.value) {
+          sectionWidgets.insert(0, hiddenMedia);
+        } else {
+          sectionWidgets.remove(hiddenMedia);
+        }
+        return Column(
+          children: sectionWidgets,
+        );
+      }),
+    ];
   }
 
   List<Widget> _buildNullIndicator(BuildContext context, IconData? icon,

@@ -69,20 +69,14 @@ class MalHomeScreen extends BaseHomeScreen {
   void _setMediaList(Map<String, List<Media>> res) {
     var listImage = <String?>[];
     animeContinue.value = res["Watching"] ?? [];
-
     animeOnHold.value = res["OnHold"] ?? [];
-
     animeDropped.value = res["Dropped"] ?? [];
-
     animePlanned.value = res["PlanToWatch"] ?? [];
-
     mangaContinue.value = res["Reading"] ?? [];
-
     mangaOnHold.value = res["OnHoldReading"] ?? [];
-
     mangaDropped.value = res["DroppedReading"] ?? [];
-
     mangaPlanned.value = res["PlanToRead"] ?? [];
+    hidden.value = res["hidden"] ?? [];
 
     listImage.add(
         (List.from(res["Watching"] ?? [])..shuffle(Random())).first.banner);
@@ -95,6 +89,7 @@ class MalHomeScreen extends BaseHomeScreen {
 
   @override
   List<Widget> mediaContent(BuildContext context) {
+    var showHidden = false.obs;
     final mediaSections = [
       MediaSectionData(
         type: 0,
@@ -104,6 +99,7 @@ class MalHomeScreen extends BaseHomeScreen {
         emptyMessage: 'All caught up, when New?',
         emptyButtonText: 'Browse\nAnime',
         emptyButtonOnPressed: () => navbar?.onClick(0),
+        onLongPressTitle: () => showHidden.value = !showHidden.value,
       ),
       MediaSectionData(
         type: 0,
@@ -179,6 +175,7 @@ class MalHomeScreen extends BaseHomeScreen {
               title: section.title,
               mediaList: section.list,
               isLarge: section.isLarge,
+              onLongPressTitle: section.onLongPressTitle,
               customNullListIndicator: _buildNullIndicator(
                 context,
                 section.emptyIcon,
@@ -190,7 +187,33 @@ class MalHomeScreen extends BaseHomeScreen {
         .toList()
       ..add(const SizedBox(height: 128));
 
-    return sectionWidgets;
+    var hiddenMedia = MediaSection(
+      context: context,
+      type: 0,
+      title: 'Hidden Media',
+      mediaList: hidden.value,
+      onLongPressTitle: () => showHidden.value = !showHidden.value,
+      customNullListIndicator: _buildNullIndicator(
+        context,
+        Icons.visibility_off,
+        'No hidden media found',
+        null,
+        null,
+      ),
+    );
+
+    return [
+      Obx(() {
+        if (showHidden.value) {
+          sectionWidgets.insert(0, hiddenMedia);
+        } else {
+          sectionWidgets.remove(hiddenMedia);
+        }
+        return Column(
+          children: sectionWidgets,
+        );
+      }),
+    ];
   }
 
   List<Widget> _buildNullIndicator(BuildContext context, IconData? icon,

@@ -20,12 +20,16 @@ extension on MalQueries {
         m.node?.mediaType = 'manga';
       });
 
+      final removeList = PrefManager.getVal(PrefName.malRemoveList);
+      List<Media> removedMedia = [];
+
       var animeList = groupBy(await processMediaResponse(results[0]),
           (m) => m.userStatus ?? 'other');
       var mangaList = groupBy(await processMediaResponse(results[1]),
           (m) => m.userStatus ?? 'other');
 
       Map<String, List<Media>> returnMap = {};
+
       if (animeList['watching'] != null) {
         returnMap['Watching'] = animeList['watching']!;
       }
@@ -51,6 +55,23 @@ extension on MalQueries {
       if (mangaList['plan_to_read'] != null) {
         returnMap['PlanToRead'] = mangaList['plan_to_read']!;
       }
+
+      List<Media> mediaToRemove = [];
+
+      for (var m in returnMap.values) {
+        for (var media in m) {
+          if (removeList.contains(media.id)) {
+            mediaToRemove.add(media);
+          }
+        }
+      }
+      for (var media in mediaToRemove) {
+        removedMedia.add(media);
+        for (var element in returnMap.values) {
+          element.remove(media);
+        }
+      }
+      returnMap['hidden'] = removedMedia;
       return returnMap;
     } catch (e) {
       return {};
