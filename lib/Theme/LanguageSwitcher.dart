@@ -11,6 +11,7 @@ Widget languageSwitcher(BuildContext context) {
   final languageOptions = _getSupportedLanguages(context);
 
   return buildDropdownMenu(
+    padding: const EdgeInsets.symmetric(vertical: 12.0),
     currentValue: completeLanguageName(Get.locale!.languageCode.toUpperCase()),
     options: languageOptions.map((e) => completeLanguageName(e.toUpperCase())).toList(),
     onChanged: (String newValue) {

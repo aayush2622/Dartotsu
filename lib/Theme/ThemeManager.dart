@@ -108,6 +108,7 @@ Widget themeDropdown(BuildContext context) {
     'ocean'
   ];
   return buildDropdownMenu(
+    padding: const EdgeInsets.symmetric(vertical: 12.0),
     currentValue: themeNotifier.theme.toUpperCase(),
     options: themeOptions.map((e) => e.toUpperCase()).toList(),
     onChanged: (String newValue) {

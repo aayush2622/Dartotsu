@@ -1,6 +1,5 @@
 import 'package:dantotsu/Functions/Extensions.dart';
 import 'package:dantotsu/Screens/Calendar/CalendarScreen.dart';
-import 'package:dantotsu/Services/MediaService.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:provider/provider.dart';
@@ -11,6 +10,7 @@ import '../../Adaptor/Media/Widgets/MediaCard.dart';
 import '../../Animation/SlideInAnimation.dart';
 import '../../Functions/Function.dart';
 import '../../Services/Screens/BaseAnimeScreen.dart';
+import '../../Services/ServiceSwitcher.dart';
 import '../../Theme/Colors.dart';
 import '../../Theme/ThemeProvider.dart';
 import '../../Widgets/ScrollConfig.dart';
@@ -27,7 +27,7 @@ class AnimeScreen extends StatefulWidget {
 class AnimeScreenState extends State<AnimeScreen> {
   @override
   Widget build(BuildContext context) {
-    var service = getService();
+    var service = Provider.of<MediaServiceProvider>(context).currentService;
     var screen = service.animeScreen;
     if (screen == null) {
       return service.notImplemented(widget.runtimeType.toString());

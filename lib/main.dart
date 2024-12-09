@@ -28,6 +28,10 @@ late Isar isar;
 
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
+  FlutterError.onError = (FlutterErrorDetails details) {
+    print(details);
+  };
+
   await init();
   runApp(
     provider.ProviderScope(
@@ -114,7 +118,7 @@ class MainActivityState extends State<MainActivity> {
   @override
   Widget build(BuildContext context) {
     Discord.getSavedToken();
-    var service = getService();
+    var service = Provider.of<MediaServiceProvider>(context).currentService;
     navbar = FloatingBottomNavBar(
       selectedIndex: _selectedIndex,
       onTabSelected: _onTabSelected,

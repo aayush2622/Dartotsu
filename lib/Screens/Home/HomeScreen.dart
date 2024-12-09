@@ -1,7 +1,6 @@
 import 'package:blur/blur.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dantotsu/Functions/Extensions.dart';
-import 'package:dantotsu/Services/MediaService.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:kenburns_nullsafety/kenburns_nullsafety.dart';
@@ -13,6 +12,7 @@ import '../../Animation/SlideUpAnimation.dart';
 import '../../Functions/Function.dart';
 import '../../Services/BaseServiceData.dart';
 import '../../Services/Screens/BaseHomeScreen.dart';
+import '../../Services/ServiceSwitcher.dart';
 import '../../Theme/Colors.dart';
 import '../../Theme/ThemeProvider.dart';
 import '../../Widgets/CachedNetworkImage.dart';
@@ -34,7 +34,7 @@ class HomeScreen extends StatefulWidget {
 class HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    var service = getService();
+    var service = Provider.of<MediaServiceProvider>(context).currentService;
     var screen = service.homeScreen;
     var data = service.data;
     if (screen == null) {

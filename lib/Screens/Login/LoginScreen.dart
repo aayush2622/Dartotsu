@@ -1,8 +1,9 @@
 import 'package:dantotsu/Widgets/LoadSvg.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
+import 'package:provider/provider.dart';
 import '../../Functions/Function.dart';
-import '../../Services/MediaService.dart';
+import '../../Services/ServiceSwitcher.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -15,7 +16,7 @@ class LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context).colorScheme;
-    var service = getService();
+    var service = Provider.of<MediaServiceProvider>(context).currentService;
     var screen = service.loginScreen;
     if (screen == null) {
       return service.notImplemented(widget.runtimeType.toString());
@@ -79,7 +80,7 @@ class LoginScreenState extends State<LoginScreen> {
 
   Widget _buildLoginButton(BuildContext context) {
     final theme = Theme.of(context).colorScheme;
-    var service = getService();
+    var service = Provider.of<MediaServiceProvider>(context).currentService;
     return ElevatedButton.icon(
       onPressed: () => service.data.login(context),
       icon: Padding(

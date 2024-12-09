@@ -68,31 +68,22 @@ class MalHomeScreen extends BaseHomeScreen {
 
   void _setMediaList(Map<String, List<Media>> res) {
     var listImage = <String?>[];
-    if (res["Watching"] != null) {
-      animeContinue.value = res["Watching"] ?? [] ;
-    }
-    if (res["OnHold"] != null) {
-      animeOnHold.value = res["OnHold"] ?? [];
-    }
-    if (res["Dropped"] != null) {
-      animeDropped.value = res["Dropped"] ?? [];
-    }
-    if (res["PlanToWatch"] != null) {
-      animePlanned.value = res["PlanToWatch"] ?? [];
-    }
+    animeContinue.value = res["Watching"] ?? [];
 
-    if (res["Reading"] != null) {
-      mangaContinue.value = res["Reading"] ?? [] ;
-    }
-    if (res["OnHoldReading"] != null) {
-      mangaOnHold.value = res["OnHoldReading"] ?? [];
-    }
-    if (res["DroppedReading"] != null) {
-      mangaDropped.value = res["DroppedReading"] ?? [];
-    }
-    if (res["PlanToRead"] != null) {
-      mangaPlanned.value = res["PlanToRead"] ?? [];
-    }
+    animeOnHold.value = res["OnHold"] ?? [];
+
+    animeDropped.value = res["Dropped"] ?? [];
+
+    animePlanned.value = res["PlanToWatch"] ?? [];
+
+    mangaContinue.value = res["Reading"] ?? [];
+
+    mangaOnHold.value = res["OnHoldReading"] ?? [];
+
+    mangaDropped.value = res["DroppedReading"] ?? [];
+
+    mangaPlanned.value = res["PlanToRead"] ?? [];
+
     listImage.add(
         (List.from(res["Watching"] ?? [])..shuffle(Random())).first.banner);
     listImage
@@ -136,9 +127,7 @@ class MalHomeScreen extends BaseHomeScreen {
         title: 'Dropped Anime',
         list: animeDropped.value,
         emptyIcon: Icons.movie_filter_rounded,
-        emptyMessage: 'All caught up, when New?',
-        emptyButtonText: 'Browse\nAnime',
-        emptyButtonOnPressed: () => navbar?.onClick(0),
+        emptyMessage: 'You haven\'t dropped any anime yet.',
       ),
       MediaSectionData(
         type: 0,
@@ -171,9 +160,7 @@ class MalHomeScreen extends BaseHomeScreen {
         title: 'Dropped Manga',
         list: mangaDropped.value,
         emptyIcon: Icons.import_contacts,
-        emptyMessage: 'All caught up, when New?',
-        emptyButtonText: 'Browse\nManga',
-        emptyButtonOnPressed: () => navbar?.onClick(2),
+        emptyMessage: 'You haven\'t dropped any manga yet.',
       ),
     ];
 
