@@ -18,7 +18,6 @@ import 'http.dart';
 class JsExtensionService {
   late JavascriptRuntime runtime;
   late Source? source;
-
   JsExtensionService(this.source);
 
   void _init() {
@@ -33,6 +32,9 @@ class JsExtensionService {
 class MProvider {
     get source() {
         return JSON.parse('${jsonEncode(source!.toMSource().toJson())}');
+    }
+    get supportsLatest() {
+        throw new Error("supportsLatest not implemented");
     }
     getHeaders(url) {
         throw new Error("getHeaders not implemented");
@@ -84,10 +86,21 @@ var extention = new DefaultExtension();
     }
   }
 
+  bool get supportsLatest {
+    _init();
+    try {
+      return jsonDecode(runtime
+          .evaluate('JSON.stringify(extention.supportsLatest)')
+          .stringResult) as bool;
+    } catch (e) {
+      return true;
+    }
+  }
+
   Future<MPages> getPopular(int page) async {
     _init();
     final res = (await runtime.handlePromise(await runtime
-            .evaluateAsync('jsonStringify(() => extention.getPopular($page))')))
+        .evaluateAsync('jsonStringify(() => extention.getPopular($page))')))
         .stringResult;
 
     return MPages.fromJson(jsonDecode(res));
@@ -96,7 +109,7 @@ var extention = new DefaultExtension();
   Future<MPages> getLatestUpdates(int page) async {
     _init();
     final res = (await runtime.handlePromise(await runtime.evaluateAsync(
-            'jsonStringify(() => extention.getLatestUpdates($page))')))
+        'jsonStringify(() => extention.getLatestUpdates($page))')))
         .stringResult;
 
     return MPages.fromJson(jsonDecode(res));
@@ -105,7 +118,7 @@ var extention = new DefaultExtension();
   Future<MPages> search(String query, int page, String filters) async {
     _init();
     final res = (await runtime.handlePromise(await runtime.evaluateAsync(
-            'jsonStringify(() => extention.search("$query",$page,$filters))')))
+        'jsonStringify(() => extention.search("$query",$page,$filters))')))
         .stringResult;
 
     return MPages.fromJson(jsonDecode(res));
@@ -114,7 +127,7 @@ var extention = new DefaultExtension();
   Future<MManga> getDetail(String url) async {
     _init();
     final res = (await runtime.handlePromise(await runtime
-            .evaluateAsync('jsonStringify(() => extention.getDetail(`$url`))')))
+        .evaluateAsync('jsonStringify(() => extention.getDetail(`$url`))')))
         .stringResult;
     return MManga.fromJson(jsonDecode(res));
   }
@@ -122,24 +135,24 @@ var extention = new DefaultExtension();
   Future<List<PageUrl>> getPageList(String url) async {
     _init();
     final res = (await runtime.handlePromise(await runtime.evaluateAsync(
-            'jsonStringify(() => extention.getPageList(`$url`))')))
+        'jsonStringify(() => extention.getPageList(`$url`))')))
         .stringResult;
     return (jsonDecode(res) as List)
         .map((e) => e is String
-            ? PageUrl(e.toString().trim())
-            : PageUrl.fromJson((e as Map).toMapStringDynamic!))
+        ? PageUrl(e.toString().trim())
+        : PageUrl.fromJson((e as Map).toMapStringDynamic!))
         .toList();
   }
 
   Future<List<Video>> getVideoList(String url) async {
     _init();
     final res = (await runtime.handlePromise(await runtime.evaluateAsync(
-            'jsonStringify(() => extention.getVideoList(`$url`))')))
+        'jsonStringify(() => extention.getVideoList(`$url`))')))
         .stringResult;
 
     return (jsonDecode(res) as List)
         .where((element) =>
-            element['url'] != null && element['originalUrl'] != null)
+    element['url'] != null && element['originalUrl'] != null)
         .map((e) => Video.fromJson(e))
         .toList()
         .toSet()

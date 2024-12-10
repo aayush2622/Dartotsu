@@ -20,6 +20,7 @@ import '../../../anime_extractors/gogocdn_extractor.dart';
 import '../../../anime_extractors/mp4upload_extractor.dart';
 import '../../../anime_extractors/mytv_extractor.dart';
 import '../../../anime_extractors/okru_extractor.dart';
+import '../../../anime_extractors/quarkuc_extractor.dart';
 import '../../../anime_extractors/sendvid_extractor.dart';
 import '../../../anime_extractors/sibnet_extractor.dart';
 import '../../../anime_extractors/streamlare_extractor.dart';
@@ -79,7 +80,7 @@ class MBridge {
       //Return one attr
       else if (query.nodes.length == 1) {
         String attr =
-            query.attr != null ? query.attr!.trim().trimLeft().trimRight() : "";
+        query.attr != null ? query.attr!.trim().trimLeft().trimRight() : "";
         if (attr.isNotEmpty) {
           attrs = [attr];
         }
@@ -284,7 +285,7 @@ class MBridge {
             date,
             dateFormat,
             dateFormatLocale,
-            (val) {
+                (val) {
               dateFormat = val.$1;
               dateFormatLocale = val.$2;
               error = val.$3;
@@ -342,6 +343,34 @@ class MBridge {
     }
     return await Mp4uploadExtractor()
         .videosFromUrl(url, newHeaders, prefix: prefix, suffix: suffix);
+  }
+
+  static Future<List<Map<String, String>>> quarkFilesExtractor(
+      List<String> url, String cookie) async {
+    QuarkUcExtractor quark = QuarkUcExtractor();
+    await quark.initCloudDrive(cookie, CloudDriveType.quark);
+    return await quark.videoFilesFromUrl(url);
+  }
+
+  static Future<List<Map<String, String>>> ucFilesExtractor(
+      List<String> url, String cookie) async {
+    QuarkUcExtractor uc = QuarkUcExtractor();
+    await uc.initCloudDrive(cookie, CloudDriveType.uc);
+    return await uc.videoFilesFromUrl(url);
+  }
+
+  static Future<List<Video>> quarkVideosExtractor(
+      String url, String cookie) async {
+    QuarkUcExtractor quark = QuarkUcExtractor();
+    await quark.initCloudDrive(cookie, CloudDriveType.quark);
+    return await quark.videosFromUrl(url);
+  }
+
+  static Future<List<Video>> ucVideosExtractor(
+      String url, String cookie) async {
+    QuarkUcExtractor uc = QuarkUcExtractor();
+    await uc.initCloudDrive(cookie, CloudDriveType.uc);
+    return await uc.videosFromUrl(url);
   }
 
   static Future<List<Video>> streamTapeExtractor(
@@ -405,7 +434,7 @@ class MBridge {
       ]).anyWordIn(date)) {
         return cal.subtract(Duration(hours: number)).millisecondsSinceEpoch;
       } else if (WordSet(
-              ["menit", "dakika", "min", "minute", "minuto", "นาที", "دقائق"])
+          ["menit", "dakika", "min", "minute", "minuto", "นาที", "دقائق"])
           .anyWordIn(date)) {
         return cal.subtract(Duration(minutes: number)).millisecondsSinceEpoch;
       } else if (WordSet(["detik", "segundo", "second", "วินาที", "sec"])
@@ -445,8 +474,8 @@ class MBridge {
         final cleanedDate = date
             .split(" ")
             .map((it) => it.contains(RegExp(r"\d\D\D"))
-                ? it.replaceAll(RegExp(r"\D"), "")
-                : it)
+            ? it.replaceAll(RegExp(r"\D"), "")
+            : it)
             .join(" ");
         return DateFormat(dateFormat, dateFormatLocale)
             .parse(cleanedDate)
@@ -487,8 +516,8 @@ class MBridge {
               final cleanedDate = date
                   .split(" ")
                   .map((it) => it.contains(RegExp(r"\d\D\D"))
-                      ? it.replaceAll(RegExp(r"\D"), "")
-                      : it)
+                  ? it.replaceAll(RegExp(r"\D"), "")
+                  : it)
                   .join(" ");
               return DateFormat(dateFormat, locale)
                   .parse(cleanedDate)

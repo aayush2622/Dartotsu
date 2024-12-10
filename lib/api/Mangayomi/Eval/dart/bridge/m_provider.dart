@@ -23,7 +23,7 @@ import 'm_video.dart';
 
 class $MProvider extends MProvider with $Bridge<MProvider> {
   static $MProvider $construct(
-          Runtime runtime, $Value? target, List<$Value?> args) =>
+      Runtime runtime, $Value? target, List<$Value?> args) =>
       $MProvider();
 
   static const $type = BridgeTypeRef(
@@ -329,6 +329,82 @@ class $MProvider extends MProvider with $Bridge<MProvider> {
                     'prefix',
                     BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.string),
                         nullable: true),
+                    false),
+              ]),
+        ),
+        'quarkVideosExtractor': BridgeMethodDef(
+          BridgeFunctionDef(
+              returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.future, [
+                BridgeTypeRef(CoreTypes.list, [$MVideo.$type])
+              ])),
+              params: [
+                BridgeParameter(
+                    'url',
+                    BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.string)),
+                    false),
+                BridgeParameter(
+                    'cookie',
+                    BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.string)),
+                    false),
+              ]),
+        ),
+        'ucVideosExtractor': BridgeMethodDef(
+          BridgeFunctionDef(
+              returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.future, [
+                BridgeTypeRef(CoreTypes.list, [$MVideo.$type])
+              ])),
+              params: [
+                BridgeParameter(
+                    'url',
+                    BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.string)),
+                    false),
+                BridgeParameter(
+                    'cookie',
+                    BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.string)),
+                    false),
+              ]),
+        ),
+        'quarkFilesExtractor': BridgeMethodDef(
+          BridgeFunctionDef(
+              returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.future, [
+                BridgeTypeRef(CoreTypes.list, [
+                  BridgeTypeRef(CoreTypes.map, [
+                    BridgeTypeRef(CoreTypes.string),
+                    BridgeTypeRef(CoreTypes.string)
+                  ])
+                ])
+              ])),
+              params: [
+                BridgeParameter(
+                    'url',
+                    BridgeTypeAnnotation(BridgeTypeRef(
+                        CoreTypes.list, [BridgeTypeRef(CoreTypes.string)])),
+                    false),
+                BridgeParameter(
+                    'cookie',
+                    BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.string)),
+                    false),
+              ]),
+        ),
+        'ucFilesExtractor': BridgeMethodDef(
+          BridgeFunctionDef(
+              returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.future, [
+                BridgeTypeRef(CoreTypes.list, [
+                  BridgeTypeRef(CoreTypes.map, [
+                    BridgeTypeRef(CoreTypes.string),
+                    BridgeTypeRef(CoreTypes.string)
+                  ])
+                ])
+              ])),
+              params: [
+                BridgeParameter(
+                    'url',
+                    BridgeTypeAnnotation(BridgeTypeRef(
+                        CoreTypes.list, [BridgeTypeRef(CoreTypes.string)])),
+                    false),
+                BridgeParameter(
+                    'cookie',
+                    BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.string)),
                     false),
               ]),
         ),
@@ -750,7 +826,7 @@ class $MProvider extends MProvider with $Bridge<MProvider> {
         'print': BridgeMethodDef(
             BridgeFunctionDef(
                 returns:
-                    BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.voidType)),
+                BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.voidType)),
                 params: [
                   BridgeParameter(
                       'object',
@@ -770,202 +846,231 @@ class $MProvider extends MProvider with $Bridge<MProvider> {
   $Value? $bridgeGet(String identifier) {
     return switch (identifier) {
       'print' => $Function((_, __, List<$Value?> args) {
-          Logger.add(LoggerLevel.warning, "${args[0]!.$reified}");
-          return null;
-        }),
+        Logger.add(LoggerLevel.warning, "${args[0]!.$reified}");
+        return null;
+      }),
       'evalJs' => $Function((_, __, List<$Value?> args) {
-          final runtime = getJavascriptRuntime();
-          return $Future.wrap(runtime
-              .evaluateAsync(args[0]!.$reified)
-              .then((value) => $String(value.stringResult)));
-        }),
+        final runtime = getJavascriptRuntime();
+        return $Future.wrap(runtime
+            .evaluateAsync(args[0]!.$reified)
+            .then((value) => $String(value.stringResult)));
+      }),
       'getUrlWithoutDomain' => $Function((_, __, List<$Value?> args) {
-          final uri = Uri.parse(args[0]!.$value.replaceAll(' ', '%20'));
-          String out = uri.path;
-          if (uri.query.isNotEmpty) {
-            out += '?${uri.query}';
-          }
-          if (uri.fragment.isNotEmpty) {
-            out += '#${uri.fragment}';
-          }
-          return $String(out);
-        }),
+        final uri = Uri.parse(args[0]!.$value.replaceAll(' ', '%20'));
+        String out = uri.path;
+        if (uri.query.isNotEmpty) {
+          out += '?${uri.query}';
+        }
+        if (uri.fragment.isNotEmpty) {
+          out += '#${uri.fragment}';
+        }
+        return $String(out);
+      }),
       'parseHtml' => $Function((_, __, List<$Value?> args) {
-          final res = MBridge.parsHtml(args[0]!.$reified);
-          return $MDocument.wrap(res);
-        }),
+        final res = MBridge.parsHtml(args[0]!.$reified);
+        return $MDocument.wrap(res);
+      }),
       'getPreferenceValue' => $Function((_, __, List<$Value?> args) {
-          final value =
-              getPreferenceValue(args[0]!.$reified, args[1]!.$reified);
-          if (value is String) {
-            return $String(value);
-          } else if (value is bool) {
-            return $bool(value);
-          }
-          return $List.wrap(value.map((e) => $String(e)).toList());
-        }),
-      'getPrefStringValue' => $Function((_, __, List<$Value?> args) {
-          final value = getSourcePreferenceStringValue(
-              args[0]!.$reified, args[1]!.$reified, args[2]!.$reified);
+        final value =
+        getPreferenceValue(args[0]!.$reified, args[1]!.$reified);
+        if (value is String) {
           return $String(value);
-        }),
+        } else if (value is bool) {
+          return $bool(value);
+        }
+        return $List.wrap(value.map((e) => $String(e)).toList());
+      }),
+      'getPrefStringValue' => $Function((_, __, List<$Value?> args) {
+        final value = getSourcePreferenceStringValue(
+            args[0]!.$reified, args[1]!.$reified, args[2]!.$reified);
+        return $String(value);
+      }),
       'setPrefStringValue' => $Function((_, __, List<$Value?> args) {
-          setSourcePreferenceStringValue(
-              args[0]!.$reified, args[1]!.$reified, args[2]!.$reified);
-          return;
-        }),
+        setSourcePreferenceStringValue(
+            args[0]!.$reified, args[1]!.$reified, args[2]!.$reified);
+        return;
+      }),
       "cryptoHandler" => $Function((_, __, List<$Value?> args) {
-          return $String(MBridge.cryptoHandler(args[0]!.$value, args[1]!.$value,
-              args[2]!.$value, args[3]!.$value));
-        }),
+        return $String(MBridge.cryptoHandler(args[0]!.$value, args[1]!.$value,
+            args[2]!.$value, args[3]!.$value));
+      }),
       "encryptAESCryptoJS" => $Function((_, __, List<$Value?> args) {
-          return $String(
-              MBridge.encryptAESCryptoJS(args[0]!.$value, args[1]!.$value));
-        }),
+        return $String(
+            MBridge.encryptAESCryptoJS(args[0]!.$value, args[1]!.$value));
+      }),
       "decryptAESCryptoJS" => $Function((_, __, List<$Value?> args) {
-          return $String(
-              MBridge.decryptAESCryptoJS(args[0]!.$value, args[1]!.$value));
-        }),
+        return $String(
+            MBridge.decryptAESCryptoJS(args[0]!.$value, args[1]!.$value));
+      }),
       "deobfuscateJsPassword" => $Function((_, __, List<$Value?> args) {
-          return $String(MBridge.deobfuscateJsPassword(args[0]!.$value));
-        }),
+        return $String(MBridge.deobfuscateJsPassword(args[0]!.$value));
+      }),
 
-      ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
 
       "substringAfter" => $Function((_, __, List<$Value?> args) {
-          return $String(
-              MBridge.substringAfter(args[0]!.$value, args[1]!.$value));
-        }),
+        return $String(
+            MBridge.substringAfter(args[0]!.$value, args[1]!.$value));
+      }),
       "substringBefore" => $Function((_, __, List<$Value?> args) {
-          return $String(
-              MBridge.substringBefore(args[0]!.$value, args[1]!.$value));
-        }),
+        return $String(
+            MBridge.substringBefore(args[0]!.$value, args[1]!.$value));
+      }),
       "substringBeforeLast" => $Function((_, __, List<$Value?> args) {
-          return $String(
-              MBridge.substringBeforeLast(args[0]!.$value, args[1]!.$value));
-        }),
+        return $String(
+            MBridge.substringBeforeLast(args[0]!.$value, args[1]!.$value));
+      }),
       "substringAfterLast" => $Function((_, __, List<$Value?> args) {
-          return $String(
-              MBridge.substringAfterLast(args[0]!.$value, args[1]!.$value));
-        }),
+        return $String(
+            MBridge.substringAfterLast(args[0]!.$value, args[1]!.$value));
+      }),
 
-      ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
 
       "sibnetExtractor" => $Function((_, __, List<$Value?> args) => $Future
           .wrap(MBridge.sibnetExtractor(args[0]!.$value, args[1]?.$value ?? "")
-              .then((value) =>
-                  $List.wrap(value.map((e) => _toMVideo(e)).toList())))),
+          .then((value) =>
+          $List.wrap(value.map((e) => _toMVideo(e)).toList())))),
       "myTvExtractor" => $Function((_, __, List<$Value?> args) => $Future.wrap(
           MBridge.myTvExtractor(args[0]!.$value).then(
-              (value) => $List.wrap(value.map((e) => _toMVideo(e)).toList())))),
+                  (value) => $List.wrap(value.map((e) => _toMVideo(e)).toList())))),
       "okruExtractor" => $Function((_, __, List<$Value?> args) => $Future.wrap(
           MBridge.okruExtractor(args[0]!.$value).then(
-              (value) => $List.wrap(value.map((e) => _toMVideo(e)).toList())))),
+                  (value) => $List.wrap(value.map((e) => _toMVideo(e)).toList())))),
       "voeExtractor" => $Function((_, __, List<$Value?> args) => $Future.wrap(
           MBridge.voeExtractor(args[0]!.$value, args[1]?.$value).then(
-              (value) => $List.wrap(value.map((e) => _toMVideo(e)).toList())))),
+                  (value) => $List.wrap(value.map((e) => _toMVideo(e)).toList())))),
       "vidBomExtractor" => $Function((_, __, List<$Value?> args) =>
           $Future.wrap(MBridge.vidBomExtractor(args[0]!.$value).then(
-              (value) => $List.wrap(value.map((e) => _toMVideo(e)).toList())))),
+                  (value) => $List.wrap(value.map((e) => _toMVideo(e)).toList())))),
       "streamlareExtractor" => $Function((_, __, List<$Value?> args) =>
           $Future.wrap(MBridge.streamlareExtractor(
-                  args[0]!.$value, args[1]?.$value, args[2]?.$value)
+              args[0]!.$value, args[1]?.$value, args[2]?.$value)
               .then((value) =>
-                  $List.wrap(value.map((e) => _toMVideo(e)).toList())))),
+              $List.wrap(value.map((e) => _toMVideo(e)).toList())))),
       "sendVidExtractor" => $Function((_, __, List<$Value?> args) =>
           $Future.wrap(MBridge.sendVidExtractor(
-                  args[0]!.$value, args[1]?.$value, args[2]?.$value)
+              args[0]!.$value, args[1]?.$value, args[2]?.$value)
               .then((value) =>
-                  $List.wrap(value.map((e) => _toMVideo(e)).toList())))),
+              $List.wrap(value.map((e) => _toMVideo(e)).toList())))),
       "yourUploadExtractor" => $Function((_, __, List<$Value?> args) =>
           $Future.wrap(MBridge.yourUploadExtractor(args[0]!.$value,
-                  args[1]?.$value, args[2]?.$value, args[3]?.$value ?? "")
+              args[1]?.$value, args[2]?.$value, args[3]?.$value ?? "")
               .then((value) =>
-                  $List.wrap(value.map((e) => _toMVideo(e)).toList())))),
+              $List.wrap(value.map((e) => _toMVideo(e)).toList())))),
       "gogoCdnExtractor" => $Function((_, __, List<$Value?> args) =>
           $Future.wrap(MBridge.gogoCdnExtractor(args[0]!.$value).then(
-              (value) => $List.wrap(value.map((e) => _toMVideo(e)).toList())))),
+                  (value) => $List.wrap(value.map((e) => _toMVideo(e)).toList())))),
       "doodExtractor" => $Function((_, __, List<$Value?> args) => $Future.wrap(
           MBridge.doodExtractor(args[0]!.$value, args[1]?.$value).then(
-              (value) => $List.wrap(value.map((e) => _toMVideo(e)).toList())))),
+                  (value) => $List.wrap(value.map((e) => _toMVideo(e)).toList())))),
       "streamTapeExtractor" => $Function((_, __, List<$Value?> args) => $Future
           .wrap(MBridge.streamTapeExtractor(args[0]!.$value, args[1]!.$value)
-              .then((value) =>
-                  $List.wrap(value.map((e) => _toMVideo(e)).toList())))),
+          .then((value) =>
+          $List.wrap(value.map((e) => _toMVideo(e)).toList())))),
       "mp4UploadExtractor" => $Function((_, __, List<$Value?> args) =>
           $Future.wrap(MBridge.mp4UploadExtractor(args[0]!.$value,
-                  args[1]!.$value, args[2]?.$value, args[3]!.$value)
+              args[1]!.$value, args[2]?.$value, args[3]!.$value)
               .then((value) =>
-                  $List.wrap(value.map((e) => _toMVideo(e)).toList())))),
+              $List.wrap(value.map((e) => _toMVideo(e)).toList())))),
       "streamWishExtractor" => $Function((_, __, List<$Value?> args) => $Future
           .wrap(MBridge.streamWishExtractor(args[0]!.$value, args[1]!.$value)
-              .then((value) =>
-                  $List.wrap(value.map((e) => _toMVideo(e)).toList())))),
+          .then((value) =>
+          $List.wrap(value.map((e) => _toMVideo(e)).toList())))),
       "filemoonExtractor" => $Function((_, __, List<$Value?> args) =>
           $Future.wrap(MBridge.filemoonExtractor(
-                  args[0]!.$value, args[1]?.$value ?? "", args[2]?.$value ?? "")
+              args[0]!.$value, args[1]?.$value ?? "", args[2]?.$value ?? "")
               .then((value) =>
-                  $List.wrap(value.map((e) => _toMVideo(e)).toList())))),
+              $List.wrap(value.map((e) => _toMVideo(e)).toList())))),
+      "quarkVideosExtractor" => $Function((_, __, List<$Value?> args) => $Future
+          .wrap(MBridge.quarkVideosExtractor(args[0]!.$value, args[1]!.$value)
+          .then((value) =>
+          $List.wrap(value.map((e) => _toMVideo(e)).toList())))),
+      "ucVideosExtractor" => $Function((_, __, List<$Value?> args) => $Future
+          .wrap(MBridge.ucVideosExtractor(args[0]!.$value, args[1]!.$value)
+          .then((value) =>
+          $List.wrap(value.map((e) => _toMVideo(e)).toList())))),
+      "quarkFilesExtractor" => $Function((_, __, List<$Value?> args) =>
+          $Future.wrap(
+              MBridge.quarkFilesExtractor(args[0]!.$value, args[1]!.$value)
+                  .then((value) {
+                return $List.wrap(value
+                    .map((e) => $Map.wrap({
+                  $String('name'): $String(e['name'] ?? ''),
+                  $String('url'): $String(e['url'] ?? ''),
+                }))
+                    .toList());
+              }))),
+      "ucFilesExtractor" => $Function((_, __, List<$Value?> args) => $Future
+          .wrap(MBridge.ucFilesExtractor(args[0]!.$value, args[1]!.$value)
+          .then((value) {
+        return $List.wrap(value
+            .map((e) => $Map.wrap({
+          $String('name'): $String(e['name'] ?? ''),
+          $String('url'): $String(e['url'] ?? ''),
+        }))
+            .toList());
+      }))),
       "toVideo" => $Function((_, __, List<$Value?> args) {
-          final value = MBridge.toVideo(
-              args[0]!.$value,
-              args[1]!.$value,
-              args[2]!.$value,
-              args[3]?.$value,
-              args[4]?.$value,
-              args[5]?.$value);
-          return _toMVideo(value);
-        }),
+        final value = MBridge.toVideo(
+            args[0]!.$value,
+            args[1]!.$value,
+            args[2]!.$value,
+            args[3]?.$value,
+            args[4]?.$value,
+            args[5]?.$value);
+        return _toMVideo(value);
+      }),
 
-      ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
       "unpackJsAndCombine" => MBridge.unpackJsAndCombine,
       "unpackJs" => MBridge.unpackJs,
       "regExp" => $Function((_, __, List<$Value?> args) {
-          return $String(MBridge.regExp(args[0]!.$value, args[1]!.$value,
-              args[2]!.$value, args[3]!.$value, args[4]!.$value));
-        }),
+        return $String(MBridge.regExp(args[0]!.$value, args[1]!.$value,
+            args[2]!.$value, args[3]!.$value, args[4]!.$value));
+      }),
       "jsonPathToString" => MBridge.jsonPathToString,
       "jsonPathToList" => MBridge.jsonPathToList,
       "sortMapList" => $Function((_, __, List<$Value?> args) {
-          List list = args[0]!.$value;
-          if (list is $List) {
-            list = list.$reified;
+        List list = args[0]!.$value;
+        if (list is $List) {
+          list = list.$reified;
+        }
+        list = list.map((e) {
+          if (e is $Map<$Value?, $Value?>) {
+            return e.$reified;
           }
-          list = list.map((e) {
-            if (e is $Map<$Value?, $Value?>) {
-              return e.$reified;
-            }
-            return e;
-          }).toList();
-          return $String(jsonEncode(
-              MBridge.sortMapList(list, args[1]!.$value, args[2]!.$value)));
-        }),
+          return e;
+        }).toList();
+        return $String(jsonEncode(
+            MBridge.sortMapList(list, args[1]!.$value, args[2]!.$value)));
+      }),
       "getMapValue" => $Function((_, __, List<$Value?> args) {
-          return $String(MBridge.getMapValue(
-            args[0]!.$value,
-            args[1]!.$value,
-            args[2]?.$value ?? false,
-          ));
-        }),
+        return $String(MBridge.getMapValue(
+          args[0]!.$value,
+          args[1]!.$value,
+          args[2]?.$value ?? false,
+        ));
+      }),
       "parseStatus" => $Function((_, __, List<$Value?> args) {
-          List<dynamic> argss2 = [];
-          if (args[1]!.$value is List<$Value>) {
-            argss2 = args[1]!.$value as List<$Value>;
-          } else {
-            argss2 = args[1]!.$value as List<dynamic>;
-          }
-          return $MStatus.wrap(MBridge.parseStatus(args[0]!.$value, argss2));
-        }),
+        List<dynamic> argss2 = [];
+        if (args[1]!.$value is List<$Value>) {
+          argss2 = args[1]!.$value as List<$Value>;
+        } else {
+          argss2 = args[1]!.$value as List<dynamic>;
+        }
+        return $MStatus.wrap(MBridge.parseStatus(args[0]!.$value, argss2));
+      }),
       "parseDates" => $Function((_, __, List<$Value?> args) {
-          return $List.wrap(MBridge.parseDates(
-                  args[0]!.$value, args[1]!.$value, args[2]!.$value)
-              .map((e) => $String(e))
-              .toList());
-        }),
+        return $List.wrap(MBridge.parseDates(
+            args[0]!.$value, args[1]!.$value, args[2]!.$value)
+            .map((e) => $String(e))
+            .toList());
+      }),
       "xpath" => MBridge.xpath,
       _ => $Function((_, __, List<$Value?> args) {
-          throw UnimplementedError('Unknown property $identifier');
-        }),
+        throw UnimplementedError('Unknown property $identifier');
+      }),
     };
   }
 
@@ -1059,13 +1164,13 @@ class $MProvider extends MProvider with $Bridge<MProvider> {
         ..subtitles = $List.wrap(e.subtitles == null
             ? []
             : e.subtitles!
-                .map((t) => $MTrack.wrap(Track(file: t.file, label: t.label)))
-                .toList())
+            .map((t) => $MTrack.wrap(Track(file: t.file, label: t.label)))
+            .toList())
         ..audios = $List.wrap(e.audios == null
             ? []
             : e.audios!
-                .map((t) => $MTrack.wrap(Track(file: t.file, label: t.label)))
-                .toList()));
+            .map((t) => $MTrack.wrap(Track(file: t.file, label: t.label)))
+            .toList()));
 
   _toValueList(List filters) {
     return (filters).map((e) {
