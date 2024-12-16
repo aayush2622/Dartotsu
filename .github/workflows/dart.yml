@@ -245,7 +245,7 @@ jobs:
       pull-requests: write
       repository-projects: write
     outputs:
-      zip_link: ${{steps.gdriveUpload.outputs.web-content-link}}
+      ipa_link: ${{steps.gdriveUpload.outputs.web-content-link}}
     steps:
       # Step 1: Clone repository
       - name: Cloning repository
@@ -271,16 +271,24 @@ jobs:
           ln -s ../Runner.app
           cd ..
           zip -r Dartotsu-iOS-${{ github.ref_name }}.ipa Payload
-          ls
-          cd Payload
-          ls
-          pwd
+
+            # Step 9: Upload to Google Drive
+      #Step 5 Upload ipa file to google drive
+      - name: Upload File To Google Drive
+        id: gdriveUpload
+        uses: hoatruongdev09/google-drive-file-upload-github-action@v1.1
+        with:
+          file-path: build/ios/iphoneos/Dartotsu-iOS-main.ipa
+          upload-name: Dartotsu-iOS-main.ipa
+          upload-to-folder-id: 1nWYex54zd58SVitJUCva91_4k1PPTdP3
+          service-account-json: "${{secrets.GOOGLE_KEY}}"
+          overrwrite: true
         
 
 
   sendMessage:
     runs-on: ubuntu-latest
-    needs: [build_android, build_windows, build_linux]
+    needs: [build_android, build_windows, build_linux,build_ios]
     if: always()
     permissions:
       contents: read
@@ -566,6 +574,7 @@ jobs:
           APK_DOWNLOAD_LINK: ${{ needs.build_android.outputs.apk_link }}
           WINDOWS_DOWNLOAD_LINK: ${{ needs.build_windows.outputs.zip_link }}
           LINUX_DOWNLOAD_LINK: ${{needs.build_linux.outputs.zip_link}}
+          IOS_DOWNLOAD_LINK: ${{needs.build_ios.outputs.ipa_link}}
         run: |
           # Check if APK_DOWNLOAD_LINK is not empty
           if [[ -n "$APK_DOWNLOAD_LINK" ]]; then
@@ -588,13 +597,21 @@ jobs:
             LINUX_MESSAGE="No LINUX link available"
           fi
 
+          # Check if IOS_DOWNLOAD_LINK is not empty
+          if [[ -n "$IOS_DOWNLOAD_LINK" ]]; then
+            IOS_MESSAGE="[Download IOS IPA]($IOS_DOWNLOAD_LINK)"
+          else
+            IOS_MESSAGE="No IOS link available"
+          fi
+
             echo "apk_message=$APK_MESSAGE" >> $GITHUB_ENV
             echo "windows_message=$WINDOWS_MESSAGE" >> $GITHUB_ENV
             echo "linux_message=$LINUX_MESSAGE" >> $GITHUB_ENV
+            echo "ios_message=$IOS_MESSAGE" >> $GITHUB_ENV
 
           # Prepare and send the Discord message
           curl -H "Content-Type: application/json" \
-               -d "{\"content\": \"${APK_MESSAGE}\n${WINDOWS_MESSAGE}\n${LINUX_MESSAGE}\"}" \
+               -d "{\"content\": \"${APK_MESSAGE}\n${WINDOWS_MESSAGE}\n${LINUX_MESSAGE}\n${IOS_MESSAGE}\"}" \
                "${{ secrets.DISCORD_WEBHOOK_URL }}"
       - name: Send Telegram Notification
         run: |
@@ -608,3 +625,4 @@ jobs:
             🔹 **APK**: ${{ env.apk_message }}
             🔹 **Windows**: ${{ env.windows_message }}
             🔹 **Linux**: ${{ env.linux_message }}")
+            🔹 **IOS**: ${{ env.ios_message }}")
