@@ -620,5 +620,5 @@ jobs:
               -F "text=🎉 *Build Notification* 🎉
             🔹 **APK**: ${{ env.apk_message }}
             🔹 **Windows**: ${{ env.windows_message }}
-            🔹 **Linux**: ${{ env.linux_message }}")
+            🔹 **Linux**: ${{ env.linux_message }}
             🔹 **IOS**: ${{ env.ios_message }}")
