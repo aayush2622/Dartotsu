@@ -11,12 +11,12 @@ jobs:
     if: contains(github.event.head_commit.message, '[build.apk]') ||  contains(github.event.head_commit.message, '[build]')
     outputs:
       apk_link: ${{steps.gdriveUpload.outputs.web-content-link}}
-    
+
     permissions:
       contents: write
       pull-requests: read
       actions: read
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -46,8 +46,8 @@ jobs:
 
       - uses: actions/setup-java@v4
         with:
-          distribution: 'oracle'
-          java-version: '17'
+          distribution: "oracle"
+          java-version: "17"
 
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
@@ -83,8 +83,8 @@ jobs:
 
       # Optimize Flutter build
       - run: flutter pub get
-      - run: flutter build apk --release 
-      
+      - run: flutter build apk --release
+
       - name: Rename APK
         run: mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/Dantotsu_Android_${{github.ref_name}}.apk
 
@@ -103,12 +103,12 @@ jobs:
     if: contains(github.event.head_commit.message, '[build.windows]') ||  contains(github.event.head_commit.message, '[build]')
     outputs:
       zip_link: ${{steps.gdriveUpload.outputs.web-content-link}}
-    
+
     permissions:
       contents: write
       pull-requests: write
       repository-projects: write
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -148,10 +148,10 @@ jobs:
       - name: Archive App
         uses: thedoctor0/zip-release@master
         with:
-          type: 'zip'
+          type: "zip"
           filename: Dantotsu_Windows_${{github.ref_name}}.zip
           directory: build\windows\x64\runner\Release
-          
+
       # Verify archive creation
       - name: List Release Directory
         run: ls build\windows\x64\runner\Release
@@ -170,7 +170,7 @@ jobs:
   build_linux:
     runs-on: ubuntu-latest
     if: contains(github.event.head_commit.message, '[build.linux]')
-    permissions: 
+    permissions:
       contents: write
       pull-requests: write
       repository-projects: write
@@ -217,10 +217,9 @@ jobs:
       - name: Archive app
         uses: thedoctor0/zip-release@master
         with:
-          type: 'zip'
+          type: "zip"
           filename: Dantotsu_Linux_${{github.ref_name}}.zip
           directory: build/linux/x64/release/bundle
-
 
       # Step 8: Verify archive creation
       - name: List Release Directory
@@ -238,12 +237,51 @@ jobs:
           service-account-json: "${{secrets.GOOGLE_KEY}}"
           overrwrite: true
 
+  build_ios:
+    runs-on: macos-latest
+    if: contains(github.event.head_commit.message, '[build.ios]')
+    permissions:
+      contents: write
+      pull-requests: write
+      repository-projects: write
+    outputs:
+      zip_link: ${{steps.gdriveUpload.outputs.web-content-link}}
+    steps:
+      # Step 1: Clone repository
+      - name: Cloning repository
+        uses: actions/checkout@v4
+
+      # Step 2: Setup Flutter
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 3.24.1
+          cache: true
+
+      # Step 3 Get Dependencies
+      - name: Get Dependencies
+        run: flutter pub get
+      #Step 4 Build app for iOS
+      - name: Build iOS
+        run: |
+          flutter build ios --release --no-codesign
+          cd build/ios/iphoneos
+          mkdir -p Payload
+          cd Payload
+          ln -s ../Runner.app
+          cd ..
+          zip -r Dartotsu-iOS-${{ github.ref_name }}.ipa Payload
+          mv Dartotsu-iOS-${{ github.ref_name }}.ipa ../../../
+          ls
+          pwd
+        
+
 
   sendMessage:
     runs-on: ubuntu-latest
-    needs: [build_android,build_windows,build_linux]
+    needs: [build_android, build_windows, build_linux]
     if: always()
-    permissions: 
+    permissions:
       contents: read
       pull-requests: read
       actions: read
@@ -292,9 +330,9 @@ jobs:
       - name: Save Current SHA for Next Run
         run: echo ${{ github.sha }} > last_sha.txt
 
-      - name: Check for noPing 
-        id: check_noping 
-        run: | 
+      - name: Check for noPing
+        id: check_noping
+        run: |
           if [[ "${{ github.event.head_commit.message }}" == *"[Ping]"* ]]; then 
             echo "ping_variable=<@&1298926901833895986>" >> $GITHUB_ENV 
           else 
@@ -303,225 +341,225 @@ jobs:
       - name: Upload APK to Discord and Telegram
         shell: bash
         run: |
-            # Prepare Discord embed
-            fetch_user_details() {
-              local login=$1
-              user_details=$(curl -s "https://api.github.com/users/$login")
-              name=$(echo "$user_details" | jq -r '.name // .login')
-              login=$(echo "$user_details" | jq -r '.login')
-              avatar_url=$(echo "$user_details" | jq -r '.avatar_url')
-              echo "$name|$login|$avatar_url"
-            }
-  
-            # Additional information for the goats
-            declare -A additional_info
-            additional_info["ibo"]="\n Discord: <@951737931159187457>\n AniList: [takarealist112](<https://anilist.co/user/5790266/>)"
-            additional_info["aayush262"]="\n Discord: <@918825160654598224>\n AniList: [aayush262](<https://anilist.co/user/5144645/>)"
-            additional_info["Ankit Grai"]="\n Discord: <@1125628254330560623>\n AniList: [bheshnarayan](<https://anilist.co/user/6417303/>)\n X: [grayankit01](<https://x.com/grayankit01>)"
-            # Decimal color codes for contributors
-            declare -A contributor_colors
-            default_color="#ff9b46"
-            contributor_colors["grayankit"]="#ff9b46"
-            contributor_colors["aayush262"]="#5d689d"
-            contributor_colors["Sadwhy"]="#ff7e95"
-            contributor_colors["rebelonion"]="#d4e5ed"
-            hex_to_decimal() { printf '%d' "0x${1#"#"}"; }
-  
-            # Count recent commits and create an associative array
-            declare -A recent_commit_counts
-            echo "Debug: Processing COMMIT_LOG:"
-            echo "$COMMIT_LOG"
-            while read -r count name; do
-                recent_commit_counts["$name"]=$count
-                echo "Debug: Commit count for $name: $count"
-            done < <(echo "$COMMIT_LOG" | sed 's/%0A/\n/g' | grep -oP '(?<=~)[^[]*' | sort | uniq -c | sort -rn)
-  
-            echo "Debug: Fetching contributors from GitHub"
-            # Fetch contributors from GitHub
-            contributors=$(curl -L \
-            -H "Accept: application/vnd.github+json" \
-            -H "Authorization: Bearer ${{secrets.FINE_GRAIN_TOKEN}}" \
-            -H "X-GitHub-Api-Version: 2022-11-28" \
-            https://api.github.com/repos/${{github.repository}}/contributors)
-            echo "Debug: Contributors response:"
-            echo "$contributors"
-  
-            # Create a sorted list of contributors based on recent commit counts
-            sorted_contributors=$(for login in $(echo "$contributors" | jq -r '.[].login'); do
-                user_info=$(fetch_user_details "$login")
-                name=$(echo "$user_info" | cut -d'|' -f1)
-                count=${recent_commit_counts["$name"]:-0}
-                echo "$count|$login"
-            done | sort -rn | cut -d'|' -f2)
-  
-            # Initialize needed variables
-            developers=""
-            committers_count=0
-            max_commits=0
-            top_contributor=""
-            top_contributor_count=0
-            top_contributor_avatar=""
-            embed_color=$default_color
-  
-            # Process contributors in the new order
-            while read -r login; do
+          # Prepare Discord embed
+          fetch_user_details() {
+            local login=$1
+            user_details=$(curl -s "https://api.github.com/users/$login")
+            name=$(echo "$user_details" | jq -r '.name // .login')
+            login=$(echo "$user_details" | jq -r '.login')
+            avatar_url=$(echo "$user_details" | jq -r '.avatar_url')
+            echo "$name|$login|$avatar_url"
+          }
+
+          # Additional information for the goats
+          declare -A additional_info
+          additional_info["ibo"]="\n Discord: <@951737931159187457>\n AniList: [takarealist112](<https://anilist.co/user/5790266/>)"
+          additional_info["aayush262"]="\n Discord: <@918825160654598224>\n AniList: [aayush262](<https://anilist.co/user/5144645/>)"
+          additional_info["Ankit Grai"]="\n Discord: <@1125628254330560623>\n AniList: [bheshnarayan](<https://anilist.co/user/6417303/>)\n X: [grayankit01](<https://x.com/grayankit01>)"
+          # Decimal color codes for contributors
+          declare -A contributor_colors
+          default_color="#ff9b46"
+          contributor_colors["grayankit"]="#ff9b46"
+          contributor_colors["aayush262"]="#5d689d"
+          contributor_colors["Sadwhy"]="#ff7e95"
+          contributor_colors["rebelonion"]="#d4e5ed"
+          hex_to_decimal() { printf '%d' "0x${1#"#"}"; }
+
+          # Count recent commits and create an associative array
+          declare -A recent_commit_counts
+          echo "Debug: Processing COMMIT_LOG:"
+          echo "$COMMIT_LOG"
+          while read -r count name; do
+              recent_commit_counts["$name"]=$count
+              echo "Debug: Commit count for $name: $count"
+          done < <(echo "$COMMIT_LOG" | sed 's/%0A/\n/g' | grep -oP '(?<=~)[^[]*' | sort | uniq -c | sort -rn)
+
+          echo "Debug: Fetching contributors from GitHub"
+          # Fetch contributors from GitHub
+          contributors=$(curl -L \
+          -H "Accept: application/vnd.github+json" \
+          -H "Authorization: Bearer ${{secrets.FINE_GRAIN_TOKEN}}" \
+          -H "X-GitHub-Api-Version: 2022-11-28" \
+          https://api.github.com/repos/${{github.repository}}/contributors)
+          echo "Debug: Contributors response:"
+          echo "$contributors"
+
+          # Create a sorted list of contributors based on recent commit counts
+          sorted_contributors=$(for login in $(echo "$contributors" | jq -r '.[].login'); do
               user_info=$(fetch_user_details "$login")
               name=$(echo "$user_info" | cut -d'|' -f1)
-              login=$(echo "$user_info" | cut -d'|' -f2)
-              avatar_url=$(echo "$user_info" | cut -d'|' -f3)
-            
-            # Only process if they have recent commits
-            commit_count=${recent_commit_counts["$name"]:-0}
-            if [ $commit_count -gt 0 ]; then
-              # Update top contributor information
-              if [ $commit_count -gt $max_commits ]; then
-                max_commits=$commit_count
-                top_contributors=("$login")
-                top_contributor_count=1
-                top_contributor_avatar="$avatar_url"
-                embed_color=$(hex_to_decimal "${contributor_colors[$name]:-$default_color}")
-              elif [ $commit_count -eq $max_commits ]; then
-                top_contributors+=("$login")
-                top_contributor_count=$((top_contributor_count + 1))
-                embed_color=$default_color
-              fi
-              echo "Debug top contributors:"
-              echo "$top_contributors"
-  
-  
-              # Get commit count for this contributor on the main branch
-              branch_commit_count=$(git log --author="$login" --author="$name" --oneline | awk '!seen[$0]++' | wc -l)
-  
-              # Debug: Print recent_commit_counts
-              echo "Debug: recent_commit_counts contents:"
-              for key in "${!recent_commit_counts[@]}"; do
-                echo "$key: ${recent_commit_counts[$key]}"
-              done
-  
-              extra_info="${additional_info[$name]}"
-              if [ -n "$extra_info" ]; then
-                extra_info=$(echo "$extra_info" | sed 's/\\n/\n- /g')
-              fi
-  
-              # Construct the developer entry
-              developer_entry="◗ **${name}** ${extra_info}
-            - Github: [${login}](https://github.com/${login})
-            - Commits: ${branch_commit_count}"
-            
-  
-  
-              # Add the entry to developers, with a newline if it's not the first entry
-              if [ -n "$developers" ]; then
-                developers="${developers}
-            ${developer_entry}"
-                else
-                  developers="${developer_entry}"
-                fi
-                committers_count=$((committers_count + 1))
-              fi
-            done <<< "$sorted_contributors"
-  
-            # Set the thumbnail URL and color based on top contributor(s)
-            if [ $top_contributor_count -eq 1 ]; then
-              thumbnail_url="$top_contributor_avatar"
-            else
-              thumbnail_url="https://i.imgur.com/5o3Y9Jb.gif"
+              count=${recent_commit_counts["$name"]:-0}
+              echo "$count|$login"
+          done | sort -rn | cut -d'|' -f2)
+
+          # Initialize needed variables
+          developers=""
+          committers_count=0
+          max_commits=0
+          top_contributor=""
+          top_contributor_count=0
+          top_contributor_avatar=""
+          embed_color=$default_color
+
+          # Process contributors in the new order
+          while read -r login; do
+            user_info=$(fetch_user_details "$login")
+            name=$(echo "$user_info" | cut -d'|' -f1)
+            login=$(echo "$user_info" | cut -d'|' -f2)
+            avatar_url=$(echo "$user_info" | cut -d'|' -f3)
+
+          # Only process if they have recent commits
+          commit_count=${recent_commit_counts["$name"]:-0}
+          if [ $commit_count -gt 0 ]; then
+            # Update top contributor information
+            if [ $commit_count -gt $max_commits ]; then
+              max_commits=$commit_count
+              top_contributors=("$login")
+              top_contributor_count=1
+              top_contributor_avatar="$avatar_url"
+              embed_color=$(hex_to_decimal "${contributor_colors[$name]:-$default_color}")
+            elif [ $commit_count -eq $max_commits ]; then
+              top_contributors+=("$login")
+              top_contributor_count=$((top_contributor_count + 1))
               embed_color=$default_color
             fi
-  
-            # Truncate field values
-            max_length=1000
-            commit_messages=$(echo "$COMMIT_LOG" | sed 's/%0A/\n/g; s/^/\n/')
-            if [ ${#developers} -gt $max_length ]; then
-              developers="${developers:0:$max_length}... (truncated)"
+            echo "Debug top contributors:"
+            echo "$top_contributors"
+
+
+            # Get commit count for this contributor on the main branch
+            branch_commit_count=$(git log --author="$login" --author="$name" --oneline | awk '!seen[$0]++' | wc -l)
+
+            # Debug: Print recent_commit_counts
+            echo "Debug: recent_commit_counts contents:"
+            for key in "${!recent_commit_counts[@]}"; do
+              echo "$key: ${recent_commit_counts[$key]}"
+            done
+
+            extra_info="${additional_info[$name]}"
+            if [ -n "$extra_info" ]; then
+              extra_info=$(echo "$extra_info" | sed 's/\\n/\n- /g')
             fi
-            if [ ${#commit_messages} -gt $max_length ]; then
-              commit_messages="${commit_messages:0:$max_length}... (truncated)"
+
+            # Construct the developer entry
+            developer_entry="◗ **${name}** ${extra_info}
+          - Github: [${login}](https://github.com/${login})
+          - Commits: ${branch_commit_count}"
+
+
+
+            # Add the entry to developers, with a newline if it's not the first entry
+            if [ -n "$developers" ]; then
+              developers="${developers}
+          ${developer_entry}"
+              else
+                developers="${developer_entry}"
+              fi
+              committers_count=$((committers_count + 1))
             fi
-            # Construct Discord payload
-            discord_data=$(jq -nc \
-                          --arg field_value "$commit_messages" \
-                          --arg author_value "$developers" \
-                          --arg footer_text "Version $VERSION" \
-                          --arg timestamp "$(date -u +%Y-%m-%dT%H:%M:%S.000Z)" \
-                          --arg thumbnail_url "$thumbnail_url" \
-                          --arg embed_color "$embed_color" \
-                          '{
-                            "content": "${{env.ping_variable}}",
-                            "embeds": [
-                              {
-                                "title": "New Alpha-Build dropped 🔥",
-                                "color": $embed_color,
-                                "fields": [
-                                  {
-                                    "name": "Commits:",
-                                    "value": $field_value,
-                                    "inline": true
-                                  },
-                                  {
-                                    "name": "Developers:",
-                                    "value": $author_value,
-                                    "inline": false
-                                  }
-                                ],
-                                "footer": {
-                                  "text": $footer_text
+          done <<< "$sorted_contributors"
+
+          # Set the thumbnail URL and color based on top contributor(s)
+          if [ $top_contributor_count -eq 1 ]; then
+            thumbnail_url="$top_contributor_avatar"
+          else
+            thumbnail_url="https://i.imgur.com/5o3Y9Jb.gif"
+            embed_color=$default_color
+          fi
+
+          # Truncate field values
+          max_length=1000
+          commit_messages=$(echo "$COMMIT_LOG" | sed 's/%0A/\n/g; s/^/\n/')
+          if [ ${#developers} -gt $max_length ]; then
+            developers="${developers:0:$max_length}... (truncated)"
+          fi
+          if [ ${#commit_messages} -gt $max_length ]; then
+            commit_messages="${commit_messages:0:$max_length}... (truncated)"
+          fi
+          # Construct Discord payload
+          discord_data=$(jq -nc \
+                        --arg field_value "$commit_messages" \
+                        --arg author_value "$developers" \
+                        --arg footer_text "Version $VERSION" \
+                        --arg timestamp "$(date -u +%Y-%m-%dT%H:%M:%S.000Z)" \
+                        --arg thumbnail_url "$thumbnail_url" \
+                        --arg embed_color "$embed_color" \
+                        '{
+                          "content": "${{env.ping_variable}}",
+                          "embeds": [
+                            {
+                              "title": "New Alpha-Build dropped 🔥",
+                              "color": $embed_color,
+                              "fields": [
+                                {
+                                  "name": "Commits:",
+                                  "value": $field_value,
+                                  "inline": true
                                 },
-                                "timestamp": $timestamp,
-                                "thumbnail": {
-                                  "url": $thumbnail_url
+                                {
+                                  "name": "Developers:",
+                                  "value": $author_value,
+                                  "inline": false
                                 }
+                              ],
+                              "footer": {
+                                "text": $footer_text
+                              },
+                              "timestamp": $timestamp,
+                              "thumbnail": {
+                                "url": $thumbnail_url
                               }
-                            ],
-                            "attachments": []
-                          }')
-            echo "Debug: Final Discord payload is this:"
-            echo "$discord_data"
-            # Send Discord message
-            curl -H "Content-Type: application/json" \
-                -d "$discord_data" \
-                ${{ secrets.DISCORD_WEBHOOK_URL }}
+                            }
+                          ],
+                          "attachments": []
+                        }')
+          echo "Debug: Final Discord payload is this:"
+          echo "$discord_data"
+          # Send Discord message
+          curl -H "Content-Type: application/json" \
+              -d "$discord_data" \
+              ${{ secrets.DISCORD_WEBHOOK_URL }}
 
-            # Format commit messages for Telegram
-            telegram_commit_messages=$(echo "$COMMIT_LOG" | sed 's/%0A/\n/g' | while read -r line; do
-                message=$(echo "$line" | sed -E 's/● (.*) ~(.*) \[֍\]\((.*)\)/● \1 ~\2 <a href="\3">֍<\/a>/')
-                message=$(echo "$message" | sed -E 's/\[#([0-9]+)\]\((https:\/\/github\.com\/[^)]+)\)/<a href="\2">#\1<\/a>/g')
-                echo "$message"
-            done)
-            telegram_commit_messages="<blockquote>${telegram_commit_messages}</blockquote>"
-            echo "$telegram_commit_messages"
+          # Format commit messages for Telegram
+          telegram_commit_messages=$(echo "$COMMIT_LOG" | sed 's/%0A/\n/g' | while read -r line; do
+              message=$(echo "$line" | sed -E 's/● (.*) ~(.*) \[֍\]\((.*)\)/● \1 ~\2 <a href="\3">֍<\/a>/')
+              message=$(echo "$message" | sed -E 's/\[#([0-9]+)\]\((https:\/\/github\.com\/[^)]+)\)/<a href="\2">#\1<\/a>/g')
+              echo "$message"
+          done)
+          telegram_commit_messages="<blockquote>${telegram_commit_messages}</blockquote>"
+          echo "$telegram_commit_messages"
 
-            # Configuring dev info
-            echo "$developers" > dev_info.txt
-            # making the file executable
-            chmod +x scripts/tel_parser.sed
-            ./scripts/tel_parser.sed dev_info.txt >> output.txt
-            dev_info_tel=$(< output.txt)
-            
-            telegram_dev_info="<blockquote>${dev_info_tel}</blockquote>"
-            echo "$telegram_dev_info"
+          # Configuring dev info
+          echo "$developers" > dev_info.txt
+          # making the file executable
+          chmod +x scripts/tel_parser.sed
+          ./scripts/tel_parser.sed dev_info.txt >> output.txt
+          dev_info_tel=$(< output.txt)
+
+          telegram_dev_info="<blockquote>${dev_info_tel}</blockquote>"
+          echo "$telegram_dev_info"
 
 
-            # Upload APK to Telegram
-            response=$(curl -sS -f -X POST \
-                "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKKEN}}/sendDocument" \
-                -F "chat_id=${{ secrets.TELEGRAM_CHANNEL_ID}}" \
-                -F "message_thread_id=${{secrets.TELEGRAM_THREAD_ID}}" \
-                -F "document=@last_sha.txt" \
-                -F "caption=New Alpha-Build dropped 🔥
-            
-            Commits:
-            ${telegram_commit_messages}
-            Devs:
-            ${telegram_dev_info}
-            version: ${VERSION}" \
-                -F "parse_mode=HTML")
-  
+          # Upload APK to Telegram
+          response=$(curl -sS -f -X POST \
+              "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKKEN}}/sendDocument" \
+              -F "chat_id=${{ secrets.TELEGRAM_CHANNEL_ID}}" \
+              -F "message_thread_id=${{secrets.TELEGRAM_THREAD_ID}}" \
+              -F "document=@last_sha.txt" \
+              -F "caption=New Alpha-Build dropped 🔥
+
+          Commits:
+          ${telegram_commit_messages}
+          Devs:
+          ${telegram_dev_info}
+          version: ${VERSION}" \
+              -F "parse_mode=HTML")
+
       - name: Upload Current SHA as Artifact
         uses: actions/upload-artifact@v4
         with:
-            name: last-sha
-            path: last_sha.txt
+          name: last-sha
+          path: last_sha.txt
       - name: Send Discord Notification with Download Links
         env:
           APK_DOWNLOAD_LINK: ${{ needs.build_android.outputs.apk_link }}
@@ -534,7 +572,7 @@ jobs:
           else
             APK_MESSAGE="No APK link available"
           fi
-      
+
           # Check if WINDOWS_DOWNLOAD_LINK is not empty
           if [[ -n "$WINDOWS_DOWNLOAD_LINK" ]]; then
             WINDOWS_MESSAGE="[Download Windows ZIP]($WINDOWS_DOWNLOAD_LINK)"
@@ -552,28 +590,20 @@ jobs:
             echo "apk_message=$APK_MESSAGE" >> $GITHUB_ENV
             echo "windows_message=$WINDOWS_MESSAGE" >> $GITHUB_ENV
             echo "linux_message=$LINUX_MESSAGE" >> $GITHUB_ENV
-      
+
           # Prepare and send the Discord message
           curl -H "Content-Type: application/json" \
                -d "{\"content\": \"${APK_MESSAGE}\n${WINDOWS_MESSAGE}\n${LINUX_MESSAGE}\"}" \
                "${{ secrets.DISCORD_WEBHOOK_URL }}"
       - name: Send Telegram Notification
         run: |
-            response=$(curl -sS -f -X POST \
-                "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKKEN}}/sendMessage" \
-                -F "chat_id=${{ secrets.TELEGRAM_CHANNEL_ID}}" \
-                -F "message_thread_id=${{secrets.TELEGRAM_THREAD_ID}}" \
-                -F parse_mode="Markdown" \
-                -F disable_notification=true \
-                -F "text=🎉 *Build Notification* 🎉
-              🔹 **APK**: ${{ env.apk_message }}
-              🔹 **Windows**: ${{ env.windows_message }}
-              🔹 **Linux**: ${{ env.linux_message }}")
-
-
-        
-
-          
-
-
-
+          response=$(curl -sS -f -X POST \
+              "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKKEN}}/sendMessage" \
+              -F "chat_id=${{ secrets.TELEGRAM_CHANNEL_ID}}" \
+              -F "message_thread_id=${{secrets.TELEGRAM_THREAD_ID}}" \
+              -F parse_mode="Markdown" \
+              -F disable_notification=true \
+              -F "text=🎉 *Build Notification* 🎉
+            🔹 **APK**: ${{ env.apk_message }}
+            🔹 **Windows**: ${{ env.windows_message }}
+            🔹 **Linux**: ${{ env.linux_message }}")
