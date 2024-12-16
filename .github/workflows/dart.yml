@@ -273,6 +273,8 @@ jobs:
           zip -r Dartotsu-iOS-${{ github.ref_name }}.ipa Payload
           mv Dartotsu-iOS-${{ github.ref_name }}.ipa ../../../
           ls
+          cd Payload
+          ls
           pwd
         
 
