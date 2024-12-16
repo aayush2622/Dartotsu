@@ -271,8 +271,6 @@ jobs:
           ln -s ../Runner.app
           cd ..
           zip -r Dartotsu-iOS-${{ github.ref_name }}.ipa Payload
-
-            # Step 9: Upload to Google Drive
       #Step 5 Upload ipa file to google drive
       - name: Upload File To Google Drive
         id: gdriveUpload
@@ -283,12 +281,10 @@ jobs:
           upload-to-folder-id: 1nWYex54zd58SVitJUCva91_4k1PPTdP3
           service-account-json: "${{secrets.GOOGLE_KEY}}"
           overrwrite: true
-        
-
 
   sendMessage:
     runs-on: ubuntu-latest
-    needs: [build_android, build_windows, build_linux,build_ios]
+    needs: [build_android, build_windows, build_linux, build_ios]
     if: always()
     permissions:
       contents: read
