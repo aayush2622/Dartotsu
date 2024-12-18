@@ -230,7 +230,7 @@ class MalHomeScreen extends BaseHomeScreen {
     return [
       Icon(
         icon,
-        color: theme.onSurface.withOpacity(0.58),
+        color: theme.onSurface.withValues(alpha: 0.58),
         size: 32,
       ),
       Text(
@@ -238,7 +238,7 @@ class MalHomeScreen extends BaseHomeScreen {
         style: TextStyle(
           fontFamily: 'Poppins',
           fontSize: 14,
-          color: theme.onSurface.withOpacity(0.58),
+          color: theme.onSurface.withValues(alpha: 0.58),
         ),
       ),
       if (buttonLabel != null) ...[

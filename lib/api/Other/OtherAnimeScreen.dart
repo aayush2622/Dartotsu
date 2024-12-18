@@ -23,10 +23,8 @@ class OtherAnimeScreen extends BaseAnimeScreen {
     final sourcesAsyncValue =
         await container.read(getExtensionsStreamProvider(false).future);
     final installedSources = sourcesAsyncValue
-        .where((source) => source.isAdded!)
-        .toList()
-        .reversed
-        .toList();
+        ..where((source) => source.isAdded!)
+        ..reversed;
     var result = (await search(
       source: installedSources.first,
       page: 1,

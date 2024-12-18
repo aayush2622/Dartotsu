@@ -1,3 +1,5 @@
+import 'package:collection/collection.dart';
+import 'package:dantotsu/Functions/string_extensions.dart';
 import 'package:dantotsu/Screens/Info/Tabs/Watch/BaseParser.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
@@ -33,32 +35,59 @@ class AnimeParser extends BaseParser {
   }
 
   @override
-  Future<void> wrongTitle(context, mediaData, onChange) async {
-    super.wrongTitle(context, mediaData, (m) {
+  Future<void> wrongTitle(
+    context,
+    mediaData,
+    onChange,
+  ) async {
+    super.wrongTitle(context, mediaData, (
+      m,
+    ) {
       episodeList.value = null;
       getEpisode(m, source.value!);
     });
   }
 
   @override
-  Future<void> searchMedia(source, mediaData, {onFinish}) async {
+  Future<void> searchMedia(
+    source,
+    mediaData, {
+    onFinish,
+  }) async {
     episodeList.value = null;
-    super
-        .searchMedia(source, mediaData, onFinish: (r) => getEpisode(r, source));
+    super.searchMedia(
+      source,
+      mediaData,
+      onFinish: (r) => getEpisode(r, source),
+    );
   }
 
   void getEpisode(MManga media, Source source) async {
     if (media.link == null) return;
     var m = await getDetail(url: media.link!, source: source);
+
     dataLoaded.value = true;
     var chapters = m.chapters;
+    var isFirst = true;
+    var shouldNormalize = false;
+
     episodeList.value = Map.fromEntries(
-      chapters?.reversed.map(
-            (e) {
-              final episode = MChapterToEpisode(e, media);
-              return MapEntry(episode.number, episode);
-            },
-          ) ??
+      chapters?.reversed.mapIndexed((index, chapter) {
+        final episode = MChapterToEpisode(chapter, media);
+
+        if (isFirst) {
+          isFirst = false;
+          if (episode.number.toDouble() > 3.0) {
+            shouldNormalize = true;
+          }
+        }
+
+        if (shouldNormalize) {
+          episode.number = (index + 1).toString();
+        }
+
+        return MapEntry(episode.number, episode);
+      }) ??
           [],
     );
   }

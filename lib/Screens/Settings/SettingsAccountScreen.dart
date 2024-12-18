@@ -162,7 +162,7 @@ class SettingsAccountScreenState extends BaseSettingsScreen {
                         color: theme.primary,
                       ),
                       child: Icon(
-                        Icons.question_mark, // Small icon
+                        Icons.question_mark,
                         size: 14,
                         color: theme.surface,
                       ),

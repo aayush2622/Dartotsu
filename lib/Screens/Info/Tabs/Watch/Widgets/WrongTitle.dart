@@ -98,7 +98,7 @@ class WrongTitleDialogState extends State<WrongTitleDialog> {
           ),
         ),
         filled: true,
-        fillColor: Colors.grey.withOpacity(0.2),
+        fillColor: Colors.grey.withValues(alpha: 0.2),
       ),
     );
   }

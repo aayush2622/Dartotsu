@@ -77,7 +77,7 @@ Widget ItemFollower(BuildContext context, userData follower, String type) {
             fontSize: 12,
             fontStyle: FontStyle.italic,
             fontWeight: FontWeight.w600,
-            color: theme.onSurface.withOpacity(0.58),
+            color: theme.onSurface.withValues(alpha: 0.58),
           ),
         ),
         const SizedBox(height: 8),
@@ -106,7 +106,7 @@ Widget ItemFollower(BuildContext context, userData follower, String type) {
               " | ${follower.totalEpisodes ?? "~"}",
               style: TextStyle(
                 fontSize: 14,
-                color: theme.onSurface.withOpacity(0.58),
+                color: theme.onSurface.withValues(alpha: 0.58),
               ),
             ),
           ],

@@ -2,16 +2,20 @@ import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
 
 Future<Color?> showColorPickerDialog(
-    BuildContext context, Color initialColor) async {
+    BuildContext context, Color initialColor, {bool showTransparent = true}) async {
   Color selectedColor = initialColor;
   var theme = Theme.of(context).colorScheme;
   final Color? result = await showDialog<Color>(
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text('Pick a color',
-            style:
-                TextStyle(color: theme.primary, fontWeight: FontWeight.bold)),
+        title: Text(
+          'Pick a color',
+          style: TextStyle(
+            color: theme.primary,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         content: SingleChildScrollView(
           child: ColorPicker(
             wheelDiameter: 300,
@@ -36,21 +40,52 @@ Future<Color?> showColorPickerDialog(
           ),
         ),
         actions: [
-          TextButton(
-            child: Text('Cancel',
-                style: TextStyle(
-                    color: theme.primary, fontWeight: FontWeight.bold)),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-          TextButton(
-            child: Text('Select',
-                style: TextStyle(
-                    color: theme.primary, fontWeight: FontWeight.bold)),
-            onPressed: () {
-              Navigator.of(context).pop(selectedColor);
-            },
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              if (showTransparent)
+                TextButton(
+                  child: Text(
+                    'Transparent',
+                    style: TextStyle(
+                      color: theme.primary,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  onPressed: () {
+                    selectedColor = Colors.transparent;
+                    Navigator.of(context).pop(selectedColor);
+                  },
+                ),
+              Row(
+                children: [
+                  TextButton(
+                    child: Text(
+                      'Cancel',
+                      style: TextStyle(
+                        color: theme.primary,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  TextButton(
+                    child: Text(
+                      'Select',
+                      style: TextStyle(
+                        color: theme.primary,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pop(selectedColor);
+                    },
+                  ),
+                ],
+              ),
+            ],
           ),
         ],
       );

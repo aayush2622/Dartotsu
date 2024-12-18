@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
 import '../../DataClass/Media.dart';
-import '../../api/Anilist/Anilist.dart';
+import '../../Services/ServiceSwitcher.dart';
 
 class MediaPageViewModel extends GetxController {
   var dataLoaded = false.obs;
 
   Media? cacheMediaData;
 
-  Future<Media> getMediaDetails(Media media) async {
+  Future<Media> getMediaDetails(Media media, BuildContext context) async {
+    var service = Provider.of<MediaServiceProvider>(context, listen: false).currentService;
     if (cacheMediaData == null) {
-      cacheMediaData = (await Anilist.query!.mediaDetails(media)) ?? media;
+      cacheMediaData = (await service.data.query!.mediaDetails(media)) ?? media;
       dataLoaded.value = true;
     }
     return cacheMediaData!;

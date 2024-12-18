@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 
 import '../../../../../Adaptor/Episode/EpisodeAdaptor.dart';
 import '../../../../../DataClass/Episode.dart';
-import '../../../../../Widgets/ScrollConfig.dart';
+import '../Widgets/BuildChunkSelector.dart';
 import 'AnimeParser.dart';
 
 class AnimeWatchScreen extends StatefulWidget {
@@ -54,24 +54,25 @@ class AnimeWatchScreenState extends BaseWatchScreen<AnimeWatchScreen> {
       }
 
       updateEpisodeDetails(episodeList);
-      final chunks =
-          _chunkEpisodes(episodeList, _calculateChunkSize(episodeList));
-      final selectedChunkIndex = _findSelectedChunkIndex(
-        chunks,
-        widget.mediaData.userProgress.toString(),
-      );
+      var (chunks, selectedChunkIndex) =
+      buildChunks(context, episodeList, widget.mediaData.userProgress.toString());
 
       return Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _buildTitle(),
-          _buildChunkSelector(chunks, selectedChunkIndex),
-          Obx(() => EpisodeAdaptor(
-                type: _viewModel.viewType.value,
-                episodeList: chunks[selectedChunkIndex.value],
-                mediaData: widget.mediaData,
-              )),
+          buildChunkSelector(context,chunks, selectedChunkIndex),
+          Container(
+            margin:
+            const EdgeInsets.symmetric(horizontal: 18, vertical: 4),
+            child: Obx(() => EpisodeAdaptor(
+              type: _viewModel.viewType.value,
+              source: _viewModel.source.value!,
+              episodeList: chunks[selectedChunkIndex.value],
+              mediaData: widget.mediaData,
+            )),
+          )
         ],
       );
     });
@@ -124,7 +125,7 @@ class AnimeWatchScreenState extends BaseWatchScreen<AnimeWatchScreen> {
               iconSize: 24,
               color: viewType.value == index
                   ? theme.onSurface
-                  : theme.onSurface.withOpacity(0.33),
+                  : theme.onSurface.withValues(alpha: 0.33),
               onPressed: () => changeViewType(viewType, index),
             ),
           );
@@ -140,51 +141,7 @@ class AnimeWatchScreenState extends BaseWatchScreen<AnimeWatchScreen> {
     _viewModel.saveSelected(mediaData.id, type);
   }
 
-  Widget _buildChunkSelector(
-    List<List<Episode>> chunks,
-    RxInt selectedChunkIndex,
-  ) {
-    if (chunks.length < 2) {
-      return const SizedBox();
-    }
-    return ScrollConfig(
-      context,
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Row(
-          children: List.generate(
-            chunks.length,
-            (index) {
-              return Padding(
-                padding: EdgeInsets.only(
-                    left: index == 0 ? 32.0 : 6.0,
-                    right: index == chunks.length - 1 ? 32.0 : 6.0),
-                child: Obx(
-                  () => ChoiceChip(
-                    showCheckmark: false,
-                    label: Text(
-                        '${chunks[index].first.number} - ${chunks[index].last.number}',
-                        style: const TextStyle(
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.bold)),
-                    selected: selectedChunkIndex.value == index,
-                    onSelected: (bool selected) {
-                      if (selected) {
-                        selectedChunkIndex.value = index;
-                      }
-                    },
-                  ),
-                ),
-              );
-            },
-          ),
-        ),
-      ),
-    );
-  }
-
   void updateEpisodeDetails(Map<String, Episode> episodeList) {
-    widget.mediaData.anime?.totalEpisodes = episodeList.length;
     widget.mediaData.anime?.episodes = episodeList;
     widget.mediaData.anime?.fillerEpisodes =
         _viewModel.fillerEpisodesList.value;
@@ -207,39 +164,5 @@ class AnimeWatchScreenState extends BaseWatchScreen<AnimeWatchScreen> {
       episode.filler =
           _viewModel.fillerEpisodesList.value?[number]?.filler == true;
     });
-  }
-
-  int _calculateChunkSize(Map<String, Episode> episodeList) {
-    final total = episodeList.values.length;
-    final divisions = total / 10;
-    return (divisions < 25)
-        ? 25
-        : (divisions < 50)
-            ? 50
-            : 100;
-  }
-
-  List<List<Episode>> _chunkEpisodes(
-      Map<String, Episode> episodeList, int chunkSize) {
-    final episodeValues = episodeList.values.toList();
-    return List.generate(
-        (episodeValues.length / chunkSize).ceil(),
-        (index) => episodeValues.sublist(
-              index * chunkSize,
-              (index + 1) * chunkSize > episodeValues.length
-                  ? episodeValues.length
-                  : (index + 1) * chunkSize,
-            ));
-  }
-
-  RxInt _findSelectedChunkIndex(
-      List<List<Episode>> chunks, String targetEpisodeNumber) {
-    for (var chunkIndex = 0; chunkIndex < chunks.length; chunkIndex++) {
-      if (chunks[chunkIndex]
-          .any((episode) => episode.number == targetEpisodeNumber)) {
-        return chunkIndex.obs;
-      }
-    }
-    return 0.obs;
   }
 }

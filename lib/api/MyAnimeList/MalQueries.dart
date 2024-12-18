@@ -79,10 +79,7 @@ class MalQueries extends Queries {
   Future<Map<String, List<Media>>>? initHomePage() => _initHomePage();
 
   @override
-  Future<Media?>? mediaDetails(Media media) {
-    // TODO: implement mediaDetails
-    throw UnimplementedError();
-  }
+  Future<Media?>? mediaDetails(Media media) => null;
 
   @override
   Future<SearchResults?> search(

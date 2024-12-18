@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 
 import '../../DataClass/Media.dart';
 import '../../Functions/Function.dart';
+import '../../Services/ServiceSwitcher.dart';
 import '../../Theme/ThemeProvider.dart';
 import '../../Widgets/CachedNetworkImage.dart';
 import '../../Widgets/ScrollConfig.dart';
@@ -34,8 +35,8 @@ class MediaInfoPageState extends State<MediaInfoPage> {
   @override
   void initState() {
     super.initState();
-    _viewModel =
-        Get.put(MediaPageViewModel(), tag: widget.mediaData.id.toString());
+    var service = Provider.of<MediaServiceProvider>(context, listen: false).currentService;
+    _viewModel = Get.put(MediaPageViewModel(), tag: "${widget.mediaData.id.toString()}-${service.getName}");
     mediaData = widget.mediaData;
     loadData();
   }
@@ -43,7 +44,7 @@ class MediaInfoPageState extends State<MediaInfoPage> {
   var loaded = false;
 
   Future<void> loadData() async {
-    mediaData = await _viewModel.getMediaDetails(widget.mediaData);
+    mediaData = await _viewModel.getMediaDetails(widget.mediaData, context);
     if (mounted) setState(() => loaded = true);
   }
 
@@ -184,7 +185,7 @@ class MediaInfoPageState extends State<MediaInfoPage> {
     final theme = Theme.of(context).colorScheme;
     final gradientColors = isDarkMode
         ? [Colors.transparent, theme.surface]
-        : [Colors.white.withOpacity(0.2), theme.surface];
+        : [Colors.white.withValues(alpha: 0.2), theme.surface];
 
     return SizedBox(
       height: 384 + (0.statusBar() * 2),

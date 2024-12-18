@@ -90,7 +90,7 @@ class SettingsThemeScreenState extends BaseSettingsScreen {
         icon: Icons.color_lens_outlined,
         onClick: () async {
           var color = themeNotifier.customColor;
-          Color? newColor = await showColorPickerDialog(context, Color(color));
+          Color? newColor = await showColorPickerDialog(context, Color(color),showTransparent: false);
           if (newColor != null) {
             themeNotifier.setCustomColor(newColor);
           }

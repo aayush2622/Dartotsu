@@ -75,7 +75,7 @@ class MediaViewHolder extends StatelessWidget {
                 ? Icons.movie_filter_rounded
                 : Icons.import_contacts,
             size: 16,
-            color: theme.onSurface.withOpacity(0.58),
+            color: theme.onSurface.withValues(alpha: 0.58),
           ),
           const SizedBox(width: 4),
           Flexible(
@@ -86,7 +86,7 @@ class MediaViewHolder extends StatelessWidget {
                 fontSize: 12,
                 fontWeight: FontWeight.w400,
                 fontStyle: FontStyle.italic,
-                color: theme.onSurface.withOpacity(0.58),
+                color: theme.onSurface.withValues(alpha: 0.58),
               ),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,

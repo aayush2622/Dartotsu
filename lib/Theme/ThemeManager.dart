@@ -69,6 +69,7 @@ ThemeData getTheme(ColorScheme? material, ThemeNotifier themeManager) {
         : getCustomLightTheme(customColor);
   }
   return baseTheme.copyWith(
+
     scaffoldBackgroundColor:
         isOled ? Colors.black : baseTheme.scaffoldBackgroundColor,
     colorScheme: baseTheme.colorScheme.copyWith(
@@ -88,7 +89,7 @@ ThemeData getTheme(ColorScheme? material, ThemeNotifier themeManager) {
             : baseTheme.colorScheme.surfaceContainerHighest;
       }),
       overlayColor: WidgetStateProperty.all(
-        baseTheme.colorScheme.primary.withOpacity(0.2),
+        baseTheme.colorScheme.primary.withValues(alpha: 0.2),
       ),
     ),
   );

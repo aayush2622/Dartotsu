@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-enum SettingType { normal, switchType }
+enum SettingType { normal, switchType, slider, inputBox }
 
 class Setting {
   /// [SettingType.normal]: for setting that can be clicked
@@ -38,6 +38,21 @@ class Setting {
   /// [attach]: additional widget to be attached to the setting
   final Widget Function(BuildContext)? attach;
 
+  /// [minValue]: Min value only for [SettingType.slider] and [SettingType.inputBox]
+  final int? minValue;
+
+  /// [maxValue]: Max value only for [SettingType.slider] and [SettingType.inputBox]
+  final int? maxValue;
+
+  /// [initialValue]: Initial value only for [SettingType.slider] and [SettingType.inputBox]
+  final int? initialValue;
+
+  /// [onSliderChange]: function to be executed when the slider value changes only for [SettingType.slider]
+  final Function(int)? onSliderChange;
+
+  /// [onInputChange]: function to be executed when the input value changes only for [SettingType.inputBox]
+  final Function(int)? onInputChange;
+
   Setting({
     required this.type,
     required this.name,
@@ -50,5 +65,10 @@ class Setting {
     this.onLongClick,
     this.onSwitchChange,
     this.attach,
+    this.minValue,
+    this.maxValue,
+    this.initialValue,
+    this.onSliderChange,
+    this.onInputChange,
   });
 }

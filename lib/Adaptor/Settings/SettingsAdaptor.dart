@@ -18,6 +18,10 @@ class SettingsAdaptor extends StatelessWidget {
             return SettingItem(setting: setting);
           case SettingType.switchType:
             return SettingSwitchItem(setting: setting);
+          case SettingType.slider:
+            return SettingSliderItem(setting: setting);
+          case SettingType.inputBox:
+            return SettingInputBoxItem(setting: setting);
         }
       }).toList(),
     );

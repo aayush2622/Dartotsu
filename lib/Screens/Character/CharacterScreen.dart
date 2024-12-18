@@ -105,7 +105,7 @@ class CharacterScreenState extends State<CharacterScreen> {
   Widget _buildCharacterSection() {
     final gradientColors = Provider.of<ThemeNotifier>(context).isDarkMode
         ? [Colors.transparent, theme.surface]
-        : [Colors.white.withOpacity(0.2), theme.surface];
+        : [Colors.white.withValues(alpha: 0.2), theme.surface];
 
     return SizedBox(
       height: 384 + (statusBarHeight * 2),
@@ -247,7 +247,7 @@ class CharacterScreenState extends State<CharacterScreen> {
           fontSize: 15,
           fontFamily: 'Poppins',
           fontWeight: FontWeight.bold,
-          color: theme.onSurface.withOpacity(0.4),
+          color: theme.onSurface.withValues(alpha: 0.4),
         ),
       );
     }
@@ -277,7 +277,7 @@ class CharacterScreenState extends State<CharacterScreen> {
               fontSize: 12,
               fontFamily: 'Poppins',
               fontWeight: FontWeight.bold,
-              color: theme.onSurface.withOpacity(0.4),
+              color: theme.onSurface.withValues(alpha: 0.4),
             ),
           ),
           ExpandableText(
@@ -289,7 +289,7 @@ class CharacterScreenState extends State<CharacterScreen> {
               fontSize: 12,
               fontFamily: 'Poppins',
               fontWeight: FontWeight.bold,
-              color: theme.onSurface.withOpacity(0.4),
+              color: theme.onSurface.withValues(alpha: 0.4),
             ),
           ),
         ],

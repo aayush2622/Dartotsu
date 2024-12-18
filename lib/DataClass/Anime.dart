@@ -1,3 +1,5 @@
+import 'package:dantotsu/Preferences/HiveDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
+
 import '../api/Anilist/Data/media.dart';
 import 'Author.dart';
 import 'Episode.dart';
@@ -24,7 +26,7 @@ class Anime {
   Map<String, Episode>? kitsuEpisodes;
   Map<String, Episode>? fillerEpisodes;
   Map<String, Episode>? anifyEpisodes;
-
+  PlayerSettings? playerSettings;
   Anime({
     this.totalEpisodes,
     this.episodeDuration,
@@ -43,6 +45,7 @@ class Anime {
     this.kitsuEpisodes,
     this.fillerEpisodes,
     this.anifyEpisodes,
+    this.playerSettings,
   })  : op = op ?? [],
         ed = ed ?? [];
 }

@@ -59,11 +59,16 @@ dependencies:
   kenburns_nullsafety: ^1.0.1
 
   # Platform Specific
+  media_kit: ^1.1.11
+  media_kit_video: ^1.2.5
+  media_kit_libs_video: ^1.0.5
+  window_manager: ^0.4.3
   permission_handler: ^11.3.1
   webview_windows: ^0.4.0
   webview_flutter: ^4.10.0
-
+  wakelock_plus: ^1.2.8
   # Miscellaneous
+  file_picker: ^8.1.4
   share_plus: ^10.1.2
   url_launcher: ^6.3.1
   dynamic_color: ^1.7.0

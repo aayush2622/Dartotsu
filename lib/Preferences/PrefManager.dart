@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:dantotsu/Preferences/HiveDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
 import 'package:dantotsu/Preferences/HiveDataClasses/Selected/Selected.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
@@ -37,7 +38,7 @@ class PrefManager {
     HiveAdapters();
     if (_generalPreferences != null) return;
     final dir = await getApplicationDocumentsDirectory();
-    final path = '${dir.path}/Dantotsu/preferences';
+    final path = '${dir.path}/Dartotsu/preferences';
     await Directory(path).create(recursive: true);
     await Hive.initFlutter(path);
     _generalPreferences = await Hive.openBox('generalPreferences');
@@ -52,6 +53,7 @@ class PrefManager {
     Hive.registerAdapter(ShowResponseAdapter());
     Hive.registerAdapter(SelectedAdapter());
     Hive.registerAdapter(ResponseTokenAdapter());
+    Hive.registerAdapter(PlayerSettingsAdapter());
   }
 
   static void setVal<T>(Pref<T> pref, T value) {
@@ -83,7 +85,7 @@ class PrefManager {
   static T? getCustomVal<T>(String key) {
     _checkInitialization();
     final box = _getPrefBox(Location.Irrelevant);
-    return box.get(key) as T?;
+    return box.get(key) as T? ;
   }
 
   static void removeVal(Pref<dynamic> pref) {

@@ -21,12 +21,12 @@ abstract class BaseParser extends GetxController {
   var source = Rxn<Source>(null);
 
   void saveSelected(int id, Selected data) {
-    var sourceName = Provider.of<MediaServiceProvider>(Get.context!).currentService.getName;
+    var sourceName = Provider.of<MediaServiceProvider>(Get.context!,listen: false).currentService.getName;
     PrefManager.setCustomVal("Selected-$id-$sourceName", data);
   }
 
   Selected loadSelected(Media mediaData) {
-    var sourceName = Provider.of<MediaServiceProvider>(Get.context!).currentService.getName;
+    var sourceName = Provider.of<MediaServiceProvider>(Get.context!,listen: false).currentService.getName;
     return PrefManager.getCustomVal("Selected-${mediaData.id}-$sourceName") ?? Selected();
   }
 

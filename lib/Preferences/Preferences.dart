@@ -1,3 +1,5 @@
+import 'package:dantotsu/Preferences/HiveDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
+
 import 'HiveDataClasses/MalToken/MalToken.dart';
 import 'PrefManager.dart';
 
@@ -102,6 +104,13 @@ class PrefName {
       Pref(Location.General, 'incognito', false);
   static const Pref<bool> offlineMode =
       Pref(Location.General, 'offline', false);
+
+  //Player
+  static const Pref<bool> cursedSpeed =
+      Pref(Location.Player, 'cursedSpeed', false);
+
+  static Pref<PlayerSettings> playerSettings =
+      Pref(Location.Player, 'playerSettings', PlayerSettings());
 
   //Protection
   static const Pref<String> anilistToken =

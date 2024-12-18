@@ -67,7 +67,7 @@ class LoginScreenState extends State<LoginScreen> {
                   fontFamily: 'Poppins',
                   fontWeight: FontWeight.bold,
                   decoration: TextDecoration.underline,
-                  color: theme.onSurface.withOpacity(0.6),
+                  color: theme.onSurface.withValues(alpha: 0.6),
                   fontSize: 11,
                 ),
               ),

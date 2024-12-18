@@ -10,8 +10,10 @@ import 'package:get/get.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:isar/isar.dart';
+import 'package:media_kit/media_kit.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:window_manager/window_manager.dart';
 import 'Preferences/PrefManager.dart';
 import 'Screens/Anime/AnimeScreen.dart';
 import 'Screens/Home/HomeScreen.dart';
@@ -43,11 +45,12 @@ void main(List<String> args) async {
 }
 
 Future init() async {
-  Get.isLogEnable = false;
+  MediaKit.ensureInitialized();
   await PrefManager.init();
   initializeMediaServices();
   isar = await StorageProvider().initDB(null);
   await StorageProvider().requestPermission();
+  await windowManager.ensureInitialized();
   TypeFactory.registerAllTypes();
   GetMediaIDs.getData();
   initializeDateFormatting();

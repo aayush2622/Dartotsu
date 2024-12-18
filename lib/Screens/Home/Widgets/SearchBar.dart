@@ -45,7 +45,7 @@ class MediaSearchBar extends StatelessWidget {
                       ),
                     ),
                     filled: true,
-                    fillColor: Colors.grey.withOpacity(0.2),
+                    fillColor: Colors.grey.withValues(alpha: 0.2),
                   ),
                   readOnly: true,
                 ),

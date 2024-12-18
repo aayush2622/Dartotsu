@@ -15,8 +15,8 @@ class SettingItem extends StatelessWidget {
     return ListTile(
       onTap: setting.onClick,
       onLongPress: setting.onLongClick,
-      hoverColor: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
-
+      hoverColor:
+          Theme.of(context).colorScheme.secondary.withValues(alpha: 0.1),
       title: Row(
         children: [
           Icon(setting.icon, color: Theme.of(context).primaryColor),
@@ -52,8 +52,7 @@ class SettingItem extends StatelessWidget {
       trailing: setting.isActivity
           ? Icon(Icons.arrow_forward_ios, color: Theme.of(context).primaryColor)
           : null,
-      contentPadding:
-          const EdgeInsets.symmetric(vertical: 8.0),
+      contentPadding: const EdgeInsets.symmetric(vertical: 8.0),
     );
   }
 }
@@ -68,13 +67,13 @@ class SettingSwitchItem extends StatefulWidget {
 }
 
 class SettingSwitchItemState extends State<SettingSwitchItem> {
-  late bool _isChecked; // Local state for the switch
+  late bool _isChecked;
   bool _isHovered = false;
 
   @override
   void initState() {
     super.initState();
-    _isChecked = widget.setting.isChecked; // Initialize local state
+    _isChecked = widget.setting.isChecked;
   }
 
   @override
@@ -96,7 +95,7 @@ class SettingSwitchItemState extends State<SettingSwitchItem> {
           padding: const EdgeInsets.symmetric(vertical: 8.0),
           decoration: BoxDecoration(
             color: _isHovered
-                ? Theme.of(context).colorScheme.secondary.withOpacity(0.1)
+                ? Theme.of(context).colorScheme.secondary.withValues(alpha: 0.1)
                 : Colors.transparent,
           ),
           child: Row(
@@ -124,16 +123,16 @@ class SettingSwitchItemState extends State<SettingSwitchItem> {
                         GestureDetector(
                           behavior: HitTestBehavior.translucent,
                           child: Switch(
-                            value: _isChecked, // Use local state
+                            value: _isChecked,
                             onChanged: (value) {
-                              setState(() => _isChecked = value); // Update local state
-                              widget.setting.onSwitchChange?.call(value); // Trigger callback
+                              setState(() => _isChecked = value);
+                              widget.setting.onSwitchChange?.call(value);
                             },
                           ),
                         ),
                       ],
                     ),
-                    const SizedBox(height: 6.0),
+                    const SizedBox(height: 2.0),
                     Text(
                       widget.setting.description,
                       style: const TextStyle(
@@ -152,6 +151,229 @@ class SettingSwitchItemState extends State<SettingSwitchItem> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class SettingSliderItem extends StatefulWidget {
+  final Setting setting;
+
+  const SettingSliderItem({super.key, required this.setting});
+
+  @override
+  SettingSliderItemState createState() => SettingSliderItemState();
+}
+
+class SettingSliderItemState extends State<SettingSliderItem> {
+  late int _sliderValue;
+
+  @override
+  void initState() {
+    super.initState();
+    _sliderValue = widget.setting.initialValue ?? 0;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (!widget.setting.isVisible) return const SizedBox.shrink();
+    var theme = Theme.of(context);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        ListTile(
+          contentPadding: const EdgeInsets.only(right: 8),
+          title: Row(
+            children: [
+              Icon(widget.setting.icon, color: Theme.of(context).primaryColor),
+              const SizedBox(width: 24.0),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      widget.setting.name,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16.0,
+                        fontFamily: 'Poppins',
+                      ),
+                    ),
+                    const SizedBox(height: 6),
+                    Text(
+                      widget.setting.description,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w600,
+                        color: Colors.grey,
+                        fontFamily: 'Poppins',
+                        fontSize: 14,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          trailing: Text(
+            _sliderValue.toString(),
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 14,
+            ),
+          ),
+        ),
+        Container(
+          width: double.infinity,
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    widget.setting.minValue?.toStringAsFixed(0) ?? '0',
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w600,
+                      color: Colors.grey,
+                      fontSize: 14,
+                    ),
+                  ),
+                  Expanded(
+                    child: SliderTheme(
+                      data: SliderTheme.of(context).copyWith(
+                        activeTrackColor: theme.colorScheme.primary,
+                        inactiveTrackColor:
+                            theme.colorScheme.onSurface.withOpacity(0.4),
+                        thumbColor: theme.colorScheme.primary,
+                        overlayColor:
+                            theme.colorScheme.primary.withOpacity(0.2),
+                        valueIndicatorColor: theme.colorScheme.primary,
+                      ),
+                      child: Slider.adaptive(
+                        min: (widget.setting.minValue ?? 0).toDouble(),
+                        max: (widget.setting.maxValue ?? 1).toDouble(),
+                        value: _sliderValue.toDouble(),
+                        divisions: (widget.setting.maxValue ?? 100.0).toInt(),
+                        onChanged: (value) {
+                          setState(() {
+                            _sliderValue = value.toInt();
+                          });
+                          widget.setting.onSliderChange?.call(value.toInt());
+                        },
+                      ),
+                    ),
+                  ),
+                  Text(
+                    widget.setting.maxValue?.toStringAsFixed(0) ?? '100',
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w600,
+                      color: Colors.grey,
+                      fontSize: 14,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class SettingInputBoxItem extends StatefulWidget {
+  final Setting setting;
+
+  const SettingInputBoxItem({super.key, required this.setting});
+
+  @override
+  SettingInputBoxItemState createState() => SettingInputBoxItemState();
+}
+
+class SettingInputBoxItemState extends State<SettingInputBoxItem> {
+  late int _inputValue;
+
+  @override
+  void initState() {
+    super.initState();
+    _inputValue = widget.setting.initialValue ?? 0;
+  }
+
+  void _increaseValue() {
+    if (_inputValue < (widget.setting.maxValue ?? double.maxFinite).toInt()) {
+      setState(() {
+        _inputValue++;
+      });
+      widget.setting.onInputChange?.call(_inputValue);
+    }
+  }
+
+  void _decreaseValue() {
+    if (_inputValue > (widget.setting.minValue ?? 0)) {
+      setState(() {
+        _inputValue--;
+      });
+      widget.setting.onInputChange?.call(_inputValue);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (!widget.setting.isVisible) return const SizedBox.shrink();
+
+    return ListTile(
+      title: Row(
+        children: [
+          Icon(widget.setting.icon, color: Theme.of(context).primaryColor),
+          const SizedBox(width: 24.0),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  widget.setting.name,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16.0,
+                    fontFamily: 'Poppins',
+                  ),
+                ),
+                const SizedBox(height: 6),
+                Text(
+                  widget.setting.description,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w600,
+                    color: Colors.grey,
+                    fontFamily: 'Poppins',
+                    fontSize: 14,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+      trailing: widget.setting.type == SettingType.inputBox
+          ? Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IconButton(
+                  icon:
+                      Icon(Icons.remove, color: Theme.of(context).primaryColor),
+                  onPressed: _decreaseValue,
+                ),
+                Text(
+                  _inputValue.toString(),
+                  style: const TextStyle(fontSize: 16.0),
+                ),
+                IconButton(
+                  icon: Icon(Icons.add, color: Theme.of(context).primaryColor),
+                  onPressed: _increaseValue,
+                ),
+              ],
+            )
+          : null,
+      contentPadding: const EdgeInsets.symmetric(vertical: 8.0),
     );
   }
 }

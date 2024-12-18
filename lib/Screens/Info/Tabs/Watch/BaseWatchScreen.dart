@@ -36,15 +36,18 @@ abstract class BaseWatchScreen<T extends StatefulWidget> extends State<T> {
         if (viewModel.source.value != null)
           ...widgetList
         else
-          Center(
-            child: Text(
-              'Install a source from extension page to start ${mediaData.anime != null ? 'watching' : 'reading'}',
-              style: const TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 32.0),
+            child: Center(
+              child: Text(
+                'Install a source from extension page to start ${mediaData.anime != null ? 'watching' : 'reading'}',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
               ),
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
             ),
           ),
       ],
@@ -104,7 +107,9 @@ abstract class BaseWatchScreen<T extends StatefulWidget> extends State<T> {
 
   List<Widget> _buildYouTubeButton() {
     if (mediaData.anime?.youtube == null ||
-        !PrefManager.getVal(PrefName.showYtButton)) return [];
+        !PrefManager.getVal(PrefName.showYtButton)) {
+      return [];
+    }
 
     return [
       SizedBox(

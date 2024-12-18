@@ -42,7 +42,7 @@ class MediaPageLargeViewHolder extends StatelessWidget {
     final isDarkMode = Provider.of<ThemeNotifier>(context).isDarkMode;
     final gradientColors = isDarkMode
         ? [Colors.transparent, theme.surfaceContainerLow]
-        : [Colors.white.withOpacity(0.2), theme.surfaceContainerLow];
+        : [Colors.white.withValues(alpha: 0.2), theme.surfaceContainerLow];
 
     return SizedBox(
       height: 152,
@@ -191,7 +191,7 @@ class MediaPageLargeViewHolder extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 14,
                     fontFamily: 'Poppins',
-                    color: theme.onSurface.withOpacity(0.66),
+                    color: theme.onSurface.withValues(alpha: 0.66),
                   ),
                 ),
               ],

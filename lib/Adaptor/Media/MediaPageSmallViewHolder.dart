@@ -22,7 +22,7 @@ class MediaPageSmallViewHolder extends StatelessWidget {
     final theme = Theme.of(context).colorScheme;
     final gradientColors = isDarkMode
         ? [Colors.transparent, theme.surface]
-        : [Colors.white.withOpacity(0.2), theme.surface];
+        : [Colors.white.withValues(alpha: 0.2), theme.surface];
     return Scaffold(
       body: Stack(
         children: [
@@ -181,7 +181,7 @@ class MediaPageSmallViewHolder extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 14,
                     fontFamily: 'Poppins',
-                    color: theme.onSurface.withOpacity(0.66),
+                    color: theme.onSurface.withValues(alpha: 0.66),
                   ),
                 ),
               ],
@@ -195,7 +195,7 @@ class MediaPageSmallViewHolder extends StatelessWidget {
             textAlign: TextAlign.end,
             style: TextStyle(
               fontSize: 14,
-              color: theme.onSurface.withOpacity(0.66),
+              color: theme.onSurface.withValues(alpha: 0.66),
               overflow: TextOverflow.ellipsis,
             ),
             maxLines: 1,

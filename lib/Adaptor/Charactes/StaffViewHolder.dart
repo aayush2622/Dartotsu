@@ -47,7 +47,7 @@ class StaffViewHolder extends StatelessWidget {
                 style: TextStyle(
                   fontFamily: 'Poppins',
                   fontSize: 12.0,
-                  color: theme.onSurface.withOpacity(0.58),
+                  color: theme.onSurface.withValues(alpha: 0.58),
                   fontStyle: FontStyle.italic,
                 ),
                 overflow: TextOverflow.ellipsis,

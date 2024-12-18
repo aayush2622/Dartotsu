@@ -129,7 +129,7 @@ class HomeScreenState extends State<HomeScreen> {
     final theme = Theme.of(context).colorScheme.surface;
     final gradientColors = isDarkMode
         ? [Colors.transparent, theme]
-        : [Colors.white.withOpacity(0.2), theme];
+        : [Colors.white.withValues(alpha: 0.2), theme];
 
     return SizedBox(
       height: 212.statusBar(),
@@ -225,7 +225,7 @@ class HomeScreenState extends State<HomeScreen> {
                     fontSize: 16.0,
                     color: isDarkMode
                         ? Colors.white
-                        : Colors.black.withOpacity(0.6),
+                        : Colors.black.withValues(alpha: 0.6),
                   ),
                 ),
                 const SizedBox(height: 2.0),
@@ -250,8 +250,8 @@ class HomeScreenState extends State<HomeScreen> {
             fontFamily: 'Poppins',
             fontSize: 12.0,
             color: isDarkMode
-                ? Colors.white.withOpacity(0.58)
-                : Colors.black.withOpacity(0.58),
+                ? Colors.white.withValues(alpha: 0.58)
+                : Colors.black.withValues(alpha: 0.58),
           ),
         ),
         const SizedBox(width: 4.0),

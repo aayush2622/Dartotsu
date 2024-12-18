@@ -75,7 +75,7 @@ class MediaListTabsState extends State<MediaListTabs>
                     fontFamily: 'Poppins',
                     fontWeight: FontWeight.bold,
                     fontSize: 14.0,
-                    color: theme.onSurface.withOpacity(0.48),
+                    color: theme.onSurface.withValues(alpha: 0.48),
                   ),
                   tabs: mediaList.keys.map((String tabTitle) {
                     return Tab(

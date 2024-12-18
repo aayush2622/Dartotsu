@@ -1,21 +1,32 @@
-import 'package:flutter/widgets.dart';
+import 'package:dantotsu/Functions/Function.dart';
+import 'package:dantotsu/api/Mangayomi/Eval/dart/model/video.dart';
+import 'package:dantotsu/api/Mangayomi/Search/getVideo.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../Animation/ScaleAnimation.dart';
 import '../../DataClass/Episode.dart';
 import '../../DataClass/Media.dart';
-import '../../api/Discord/Discord.dart';
+import '../../Screens/Info/Tabs/Watch/Anime/Player/Player.dart';
+import '../../Widgets/CustomBottomDialog.dart';
+import '../../api/Mangayomi/Model/Source.dart';
 import 'EpisodeListViewHolder.dart';
 
 class EpisodeAdaptor extends StatefulWidget {
   final int type;
+  final Source source;
   final List<Episode> episodeList;
   final Media mediaData;
+  final VoidCallback? onEpisodeClick;
 
-  const EpisodeAdaptor(
-      {super.key,
-      required this.type,
-      required this.episodeList,
-      required this.mediaData});
+  const EpisodeAdaptor({
+    super.key,
+    required this.type,
+    required this.source,
+    required this.episodeList,
+    required this.mediaData,
+    this.onEpisodeClick,
+  });
 
   @override
   EpisodeAdaptorState createState() => EpisodeAdaptorState();
@@ -69,12 +80,15 @@ class EpisodeAdaptorState extends State<EpisodeAdaptor> {
               finalOffset: Offset.zero,
               duration: const Duration(milliseconds: 200),
               child: GestureDetector(
-                onTap: () => Discord.setRpc(widget.mediaData,
-                    episode: episodeList[index]),
-                child: Container(
+                onTap: () => onEpisodeClick(
+                  context,
+                  episodeList[index],
+                  widget.source,
+                  widget.mediaData,
+                  widget.onEpisodeClick,
+                ),
+                child: SizedBox(
                   width: double.infinity,
-                  margin:
-                      const EdgeInsets.symmetric(horizontal: 18, vertical: 4),
                   child: EpisodeListView(
                     episode: episodeList[index],
                     mediaData: widget.mediaData,
@@ -87,4 +101,57 @@ class EpisodeAdaptorState extends State<EpisodeAdaptor> {
       ),
     );
   }
+}
+
+void onEpisodeClick(
+  BuildContext context,
+  Episode episode,
+  Source source,
+  Media mediaData,
+  VoidCallback? onEpisodeClick,
+) {
+  var episodeDialog = CustomBottomDialog(
+    title: 'Select Source',
+    viewList: [
+      FutureBuilder<List<Video>>(
+        future: getVideo(source: source, url: episode.link!),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else if (snapshot.hasData) {
+            var videos = snapshot.data!;
+            return ListView.builder(
+              shrinkWrap: true,
+              itemCount: videos.length,
+              itemBuilder: (context, index) {
+                var item = videos[index];
+                return ListTile(
+                  title: Text(item.quality),
+                  onTap: () {
+                    onEpisodeClick?.call();
+                    Get.back();
+                    navigateToPage(
+                      context,
+                      MediaPlayer(
+                        media: mediaData,
+                        index: index,
+                        videos: videos,
+                        currentEpisode: episode,
+                        source: source,
+                      ),
+                    );
+                  },
+                );
+              },
+            );
+          } else {
+            return const Center(child: Text('No sources available'));
+          }
+        },
+      ),
+    ],
+  );
+  showCustomBottomDialog(context, episodeDialog);
 }

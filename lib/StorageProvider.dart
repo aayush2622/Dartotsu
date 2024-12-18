@@ -33,7 +33,7 @@ class StorageProvider {
     if (Platform.isAndroid || Platform.isIOS || Platform.isMacOS) {
       return dir;
     } else {
-      String dbDir = path.join(dir.path, 'Dantotsu', 'databases');
+      String dbDir = path.join(dir.path, 'Dartotsu', 'databases');
       await Directory(dbDir).create(recursive: true);
       return Directory(dbDir);
     }
@@ -54,7 +54,7 @@ class StorageProvider {
       SettingsSchema,
       SourcePreferenceSchema,
       SourcePreferenceStringValueSchema,
-    ], directory: dir!.path, name: "dantotsuDb", inspector: inspector);
+    ], directory: dir!.path, name: "dartotsuDb", inspector: inspector);
 
     if (isar.settings.filter().idEqualTo(227).isEmptySync()) {
       isar.writeTxnSync(

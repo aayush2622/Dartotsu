@@ -1,3 +1,4 @@
+import 'package:dantotsu/Screens/Settings/SettingsPlayerScreen.dart';
 import 'package:flutter/material.dart';
 import '../../Adaptor/Settings/SettingsAdaptor.dart';
 import '../../DataClass/Setting.dart';
@@ -32,6 +33,19 @@ class SettingsAnimeScreenState extends BaseSettingsScreen {
   @override
   List<Widget> get settingsList {
     return [
+      SettingsAdaptor(
+        settings: [
+          Setting(
+            type: SettingType.normal,
+            name: 'Player Settings',
+            description: 'Change player settings',
+            icon: Icons.video_settings,
+            isActivity: true,
+            onClick: () => navigateToPage(
+                context, const SettingsPlayerScreen()),
+          ),
+        ],
+      ),
       Text(
         getString.anilist,
         style: const TextStyle(

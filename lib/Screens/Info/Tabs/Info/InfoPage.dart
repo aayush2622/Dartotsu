@@ -7,11 +7,13 @@ import 'package:dantotsu/Screens/Info/Tabs/Info/Widgets/GenreWidget.dart';
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
 import 'package:html/parser.dart' as html_parser;
+import 'package:provider/provider.dart';
 
 import '../../../../../Adaptor/Media/Widgets/MediaSection.dart';
 import '../../../../Adaptor/Media/Widgets/Chips.dart';
 import '../../../../Adaptor/Media/Widgets/MediaCard.dart';
 import '../../../../DataClass/Media.dart';
+import '../../../../Services/ServiceSwitcher.dart';
 import '../../MediaScreen.dart';
 import '../../Widgets/Releasing.dart';
 
@@ -28,6 +30,12 @@ class InfoPageState extends State<InfoPage> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context).colorScheme;
+
+    var service = Provider.of<MediaServiceProvider>(context).currentService;
+    if (service.data.query?.mediaDetails == null) {
+      return service.notImplemented(widget.runtimeType.toString());
+    }
+
     var type = widget.mediaData.anime != null ? "ANIME" : "MANGA";
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -270,7 +278,7 @@ class InfoPageState extends State<InfoPage> {
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
-                color: theme.onSurface.withOpacity(0.52),
+                color: theme.onSurface.withValues(alpha: 0.52),
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -312,7 +320,7 @@ class InfoPageState extends State<InfoPage> {
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(
-              color: theme.onSurface.withOpacity(0.58),
+              color: theme.onSurface.withValues(alpha: 0.58),
               fontWeight: FontWeight.bold,
             ),
           ),
