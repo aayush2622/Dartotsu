@@ -77,6 +77,8 @@ class MediaPlayerState extends State<MediaPlayer>
 
   void _configureSystemSettings() {
     SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
