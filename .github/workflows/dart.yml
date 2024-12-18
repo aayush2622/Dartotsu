@@ -52,7 +52,7 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: 3.24.1
+          flutter-version: 3.27.1
           cache: true
 
           # Download the keystore file (from GitHub Secrets or other storage)
@@ -131,7 +131,7 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: 3.24.1
+          flutter-version: 3.27.1
           cache: true
 
       # Enable Windows desktop support
@@ -185,7 +185,7 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: 3.24.1
+          flutter-version: 3.27.1
           cache: true
 
       # Step 3: Setup system dependencies
@@ -255,7 +255,7 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: 3.24.1
+          flutter-version: 3.27.1
           cache: true
 
       # Step 3 Get Dependencies
