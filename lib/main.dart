@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dantotsu/Screens/Login/LoginScreen.dart';
 import 'package:dantotsu/Screens/Manga/MangaScreen.dart';
 import 'package:dantotsu/api/EpisodeDetails/GetMediaIDs/GetMediaIDs.dart';
@@ -25,7 +27,6 @@ import 'Theme/ThemeManager.dart';
 import 'Theme/ThemeProvider.dart';
 import 'api/Discord/Discord.dart';
 import 'api/TypeFactory.dart';
-
 late Isar isar;
 
 void main(List<String> args) async {
@@ -50,7 +51,9 @@ Future init() async {
   isar = await StorageProvider().initDB(null);
   await StorageProvider().requestPermission();
   MediaKit.ensureInitialized();
-  await windowManager.ensureInitialized();
+  if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+    await WindowManager.instance.ensureInitialized();
+  }
   TypeFactory.registerAllTypes();
   GetMediaIDs.getData();
   initializeDateFormatting();
