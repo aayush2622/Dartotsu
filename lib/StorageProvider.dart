@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dantotsu/api/Mangayomi/Model/settings.dart';
+import 'package:flutter/services.dart';
 import 'package:isar/isar.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
@@ -13,18 +14,33 @@ import 'api/Mangayomi/Model/chapter.dart';
 
 class StorageProvider {
   Future<bool> requestPermission() async {
-    Permission permission = Permission.manageExternalStorage;
     if (Platform.isAndroid) {
-      if (await permission.isGranted) {
+      if (await Permission.videos.isDenied ||
+          await Permission.videos.isPermanentlyDenied) {
+        final state = await Permission.videos.request();
+        if (!state.isGranted) {
+          await SystemNavigator.pop();
+        }
+      }
+      // Audio permissions.
+      if (await Permission.audio.isDenied ||
+          await Permission.audio.isPermanentlyDenied) {
+        final state = await Permission.audio.request();
+        if (!state.isGranted) {
+          await SystemNavigator.pop();
+        }
+      }
+      if (await Permission.manageExternalStorage.isGranted) {
         return true;
       } else {
-        final result = await permission.request();
+        final result = await Permission.manageExternalStorage.request();
         if (result == PermissionStatus.granted) {
           return true;
         }
         return false;
       }
     }
+
     return true;
   }
 

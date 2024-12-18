@@ -45,11 +45,11 @@ void main(List<String> args) async {
 }
 
 Future init() async {
-  MediaKit.ensureInitialized();
   await PrefManager.init();
   initializeMediaServices();
   isar = await StorageProvider().initDB(null);
   await StorageProvider().requestPermission();
+  MediaKit.ensureInitialized();
   await windowManager.ensureInitialized();
   TypeFactory.registerAllTypes();
   GetMediaIDs.getData();
