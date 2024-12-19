@@ -79,6 +79,7 @@ class MediaPlayerState extends State<MediaPlayer>
     );
     if (isMobile) {
       _setLandscapeMode(true);
+      _handleVolumeAndBrightness();
     }
   }
 
@@ -108,7 +109,6 @@ class MediaPlayerState extends State<MediaPlayer>
     focusNode.dispose();
     if (Platform.isAndroid || Platform.isIOS) {
       _setLandscapeMode(false);
-      _handleVolumeAndBrightness();
     }
     super.dispose();
   }
@@ -195,15 +195,12 @@ class MediaPlayerState extends State<MediaPlayer>
                   final delta = e.delta.dy;
                   final Offset position = e.localPosition;
 
-                  if (position.dx <=
-                      MediaQuery.of(context).size.width / 2) {
-                    final brightness = _brightnessValue.value -
-                        delta / 500;
+                  if (position.dx <= MediaQuery.of(context).size.width / 2) {
+                    final brightness = _brightnessValue.value - delta / 500;
                     final result = brightness.clamp(0.0, 1.0);
                     setBrightness(result);
                   } else {
-                    final volume = _volumeValue.value -
-                        delta / 500;
+                    final volume = _volumeValue.value - delta / 500;
                     final result = volume.clamp(0.0, 1.0);
                     setVolume(result);
                   }
@@ -258,27 +255,20 @@ class MediaPlayerState extends State<MediaPlayer>
   final _volumeValue = 0.0.obs;
   final _brightnessValue = 0.0.obs;
 
-  void _handleVolumeAndBrightness() {
-    Future.microtask(() async {
-      try {
-        VolumeController().showSystemUI = false;
-        _volumeValue.value = await VolumeController().getVolume();
-        VolumeController().listener((value) {
-          if (mounted && !_volumeInterceptEventStream) {
-            _volumeValue.value = value;
-          }
-        });
-      } catch (_) {}
+  Future<void> _handleVolumeAndBrightness() async {
+    VolumeController().showSystemUI = false;
+    _volumeValue.value = await VolumeController().getVolume();
+    VolumeController().listener((value) {
+      if (mounted && !_volumeInterceptEventStream) {
+        _volumeValue.value = value;
+      }
     });
-    Future.microtask(() async {
-      try {
-        _brightnessValue.value = await ScreenBrightness().current;
-        ScreenBrightness().onCurrentBrightnessChanged.listen((value) {
-          if (mounted) {
-            _brightnessValue.value = value;
-          }
-        });
-      } catch (_) {}
+
+    _brightnessValue.value = await ScreenBrightness().current;
+    ScreenBrightness().onCurrentBrightnessChanged.listen((value) {
+      if (mounted) {
+        _brightnessValue.value = value;
+      }
     });
   }
 
