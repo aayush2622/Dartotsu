@@ -33,7 +33,6 @@ class MediaPlayer extends StatefulWidget {
   final int index;
   final List<v.Video> videos;
   final Episode currentEpisode;
-
   final Source source;
 
   const MediaPlayer({
@@ -62,6 +61,8 @@ class MediaPlayerState extends State<MediaPlayer>
   var showEpisodes = false.obs;
   var isMobile = Platform.isAndroid || Platform.isIOS;
   final focusNode = FocusNode();
+  bool _isCursorVisible = true;
+  Timer? _hideCursorTimer;
 
   @override
   void initState() {
@@ -81,6 +82,23 @@ class MediaPlayerState extends State<MediaPlayer>
       _setLandscapeMode(true);
       _handleVolumeAndBrightness();
     }
+  }
+
+  void _onMouseMoved(PointerEvent event) {
+    // Show the cursor if hidden
+    if (!_isCursorVisible) {
+      setState(() {
+        _isCursorVisible = true;
+      });
+    }
+
+    // Restart the timer to hide the cursor after inactivity
+    _hideCursorTimer?.cancel();
+    _hideCursorTimer = Timer(const Duration(seconds: 2), () {
+      setState(() {
+        _isCursorVisible = false;
+      });
+    });
   }
 
   void _initializePlayer() {
@@ -103,6 +121,7 @@ class MediaPlayerState extends State<MediaPlayer>
 
   @override
   void dispose() {
+    _hideCursorTimer?.cancel();
     _leftAnimationController.dispose();
     _rightAnimationController.dispose();
     videoPlayerController.dispose();
@@ -131,45 +150,50 @@ class MediaPlayerState extends State<MediaPlayer>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: LayoutBuilder(
-        builder: (context, constraints) {
-          const double minWidth = 250;
-          final double availableWidth = constraints.maxWidth;
+    return MouseRegion(
+      onHover: _onMouseMoved,
+      cursor:
+          _isCursorVisible ? SystemMouseCursors.basic : SystemMouseCursors.none,
+      child: Scaffold(
+        body: LayoutBuilder(
+          builder: (context, constraints) {
+            const double minWidth = 250;
+            final double availableWidth = constraints.maxWidth;
 
-          double episodePanelWidth =
-              (availableWidth / 3).clamp(minWidth, availableWidth);
+            double episodePanelWidth =
+                (availableWidth / 3).clamp(minWidth, availableWidth);
 
-          return StatefulBuilder(
-            builder: (context, setState) {
-              return Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _buildVideoPlayer(availableWidth, episodePanelWidth),
-                  Obx(() {
-                    if (!showEpisodes.value) {
-                      return const SizedBox();
-                    }
-                    return GestureDetector(
-                      onHorizontalDragUpdate: (details) {
-                        setState(() => episodePanelWidth =
-                            (episodePanelWidth - details.delta.dx)
-                                .clamp(minWidth, availableWidth));
-                      },
-                      child: SizedBox(
-                        width: episodePanelWidth,
-                        child: SingleChildScrollView(
-                          padding: const EdgeInsets.all(8.0),
-                          child: _buildEpisodeList(),
+            return StatefulBuilder(
+              builder: (context, setState) {
+                return Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _buildVideoPlayer(availableWidth, episodePanelWidth),
+                    Obx(() {
+                      if (!showEpisodes.value) {
+                        return const SizedBox();
+                      }
+                      return GestureDetector(
+                        onHorizontalDragUpdate: (details) {
+                          setState(() => episodePanelWidth =
+                              (episodePanelWidth - details.delta.dx)
+                                  .clamp(minWidth, availableWidth));
+                        },
+                        child: SizedBox(
+                          width: episodePanelWidth,
+                          child: SingleChildScrollView(
+                            padding: const EdgeInsets.all(8.0),
+                            child: _buildEpisodeList(),
+                          ),
                         ),
-                      ),
-                    );
-                  }),
-                ],
-              );
-            },
-          );
-        },
+                      );
+                    }),
+                  ],
+                );
+              },
+            );
+          },
+        ),
       ),
     );
   }
@@ -183,7 +207,6 @@ class MediaPlayerState extends State<MediaPlayer>
         child: Stack(
           alignment: Alignment.center,
           children: [
-            videoPlayerController.playerWidget(),
             KeyboardListener(
               focusNode: focusNode,
               onKeyEvent: _handleKeyPress,
