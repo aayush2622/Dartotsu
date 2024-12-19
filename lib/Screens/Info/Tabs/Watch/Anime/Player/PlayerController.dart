@@ -348,21 +348,22 @@ class _PlayerControllerState extends State<PlayerController> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          if (hasPreviousEpisode)
-            _buildControlButton(
-              icon: Icons.skip_previous_rounded,
-              size: 42,
-              onPressed: () {
-                _controller.pause();
-                onEpisodeClick(
-                  context,
-                  episodeList[index - 1],
-                  source,
-                  media,
-                  () => Get.back(),
-                );
-              },
-            ),
+          (hasPreviousEpisode
+              ? _buildControlButton(
+                  icon: Icons.skip_previous_rounded,
+                  size: 42,
+                  onPressed: () {
+                    _controller.pause();
+                    onEpisodeClick(
+                      context,
+                      episodeList[index - 1],
+                      source,
+                      media,
+                      () => Get.back(),
+                    );
+                  },
+                )
+              : const SizedBox(width: 42)),
           const SizedBox(width: 36),
           Obx(
             () => _controller.isBuffering.value
@@ -376,21 +377,22 @@ class _PlayerControllerState extends State<PlayerController> {
                   ),
           ),
           const SizedBox(width: 36),
-          if (hasNextEpisode)
-            _buildControlButton(
-              icon: Icons.skip_next_rounded,
-              size: 42,
-              onPressed: () {
-                _controller.pause();
-                onEpisodeClick(
-                  context,
-                  episodeList[index + 1],
-                  source,
-                  media,
-                  () => Get.back(),
-                );
-              },
-            ),
+          hasNextEpisode
+              ? _buildControlButton(
+                  icon: Icons.skip_next_rounded,
+                  size: 42,
+                  onPressed: () {
+                    _controller.pause();
+                    onEpisodeClick(
+                      context,
+                      episodeList[index + 1],
+                      source,
+                      media,
+                      () => Get.back(),
+                    );
+                  },
+                )
+              : const SizedBox(width: 42),
         ],
       ),
     );

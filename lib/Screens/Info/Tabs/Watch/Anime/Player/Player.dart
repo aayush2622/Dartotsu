@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'dart:math';
 
 import 'package:dantotsu/Preferences/HiveDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
@@ -8,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import 'package:screen_brightness/screen_brightness.dart';
+import 'package:volume_controller/volume_controller.dart';
 
 import '../../../../../../Adaptor/Episode/EpisodeAdaptor.dart';
 import '../../../../../../DataClass/Episode.dart';
@@ -23,6 +26,7 @@ import '../../Widgets/BuildChunkSelector.dart';
 import 'Platform/BasePlayer.dart';
 import 'Platform/WindowsPlayer.dart';
 import 'PlayerController.dart';
+import 'Widgets/Indicator.dart';
 
 class MediaPlayer extends StatefulWidget {
   final m.Media media;
@@ -56,13 +60,13 @@ class MediaPlayerState extends State<MediaPlayer>
   var showControls = true;
   var viewType = 0.obs;
   var showEpisodes = false.obs;
+  var mobile = Platform.isAndroid || Platform.isIOS;
   final focusNode = FocusNode();
 
   @override
   void initState() {
     super.initState();
     focusNode.requestFocus();
-    _configureSystemSettings();
     _loadPlayerSettings();
     _initializePlayer();
     _leftAnimationController = AnimationController(
@@ -73,23 +77,14 @@ class MediaPlayerState extends State<MediaPlayer>
       duration: const Duration(milliseconds: 1000),
       vsync: this,
     );
-  }
-
-  void _configureSystemSettings() {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.landscapeLeft,
-      DeviceOrientation.landscapeRight,
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+    if (mobile) {
+      _setLandscapeMode(true);
+    }
   }
 
   void _initializePlayer() {
     currentQuality = widget.videos[widget.index];
-
     videoPlayerController = WindowsPlayer(resizeMode, settings);
-
     videoPlayerController.open(currentQuality.url);
   }
 
@@ -107,9 +102,31 @@ class MediaPlayerState extends State<MediaPlayer>
 
   @override
   void dispose() {
+    _leftAnimationController.dispose();
+    _rightAnimationController.dispose();
     videoPlayerController.dispose();
     focusNode.dispose();
+    if (Platform.isAndroid || Platform.isIOS) {
+      _setLandscapeMode(false);
+      _handleVolumeAndBrightness();
+    }
     super.dispose();
+  }
+
+  void _setLandscapeMode(bool state) {
+    if (state) {
+      SystemChrome.setPreferredOrientations(
+          [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
+      SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
+    } else {
+      SystemChrome.setPreferredOrientations([
+        DeviceOrientation.portraitUp,
+        DeviceOrientation.portraitDown,
+        DeviceOrientation.landscapeLeft,
+        DeviceOrientation.landscapeRight
+      ]);
+      SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+    }
   }
 
   @override
@@ -164,6 +181,7 @@ class MediaPlayerState extends State<MediaPlayer>
             ? availableWidth - episodePanelWidth
             : availableWidth,
         child: Stack(
+          alignment: Alignment.center,
           children: [
             videoPlayerController.playerWidget(),
             KeyboardListener(
@@ -173,6 +191,23 @@ class MediaPlayerState extends State<MediaPlayer>
                 behavior: HitTestBehavior.opaque,
                 onTapDown: (_) => setState(() => showControls = !showControls),
                 onDoubleTapDown: (t) => _handleDoubleTap(t),
+                onVerticalDragUpdate: (e) async {
+                  final delta = e.delta.dy;
+                  final Offset position = e.localPosition;
+
+                  if (position.dx <=
+                      MediaQuery.of(context).size.width / 2) {
+                    final brightness = _brightnessValue.value -
+                        delta / 500;
+                    final result = brightness.clamp(0.0, 1.0);
+                    setBrightness(result);
+                  } else {
+                    final volume = _volumeValue.value -
+                        delta / 500;
+                    final result = volume.clamp(0.0, 1.0);
+                    setVolume(result);
+                  }
+                },
                 child: AnimatedOpacity(
                   opacity: showControls ? 0.5 : 0.0,
                   duration: const Duration(milliseconds: 300),
@@ -181,7 +216,25 @@ class MediaPlayerState extends State<MediaPlayer>
               ),
             ),
             _buildVideoOverlay(),
-            _buildRippleEffect()
+            _buildRippleEffect(),
+            AnimatedOpacity(
+              curve: Curves.easeInOut,
+              opacity: _volumeIndicator.value ? 1.0 : 0.0,
+              duration: const Duration(milliseconds: 300),
+              child: MediaIndicatorBuilder(
+                value: _volumeValue,
+                isVolumeIndicator: true,
+              ),
+            ),
+            AnimatedOpacity(
+              curve: Curves.easeInOut,
+              opacity: _brightnessIndicator.value ? 1.0 : 0.0,
+              duration: const Duration(milliseconds: 300),
+              child: MediaIndicatorBuilder(
+                value: _brightnessValue,
+                isVolumeIndicator: false,
+              ),
+            ),
           ],
         ),
       );
@@ -199,6 +252,70 @@ class MediaPlayerState extends State<MediaPlayer>
         ),
       ),
     );
+  }
+
+  var _volumeInterceptEventStream = false;
+  final _volumeValue = 0.0.obs;
+  final _brightnessValue = 0.0.obs;
+
+  void _handleVolumeAndBrightness() {
+    Future.microtask(() async {
+      try {
+        VolumeController().showSystemUI = false;
+        _volumeValue.value = await VolumeController().getVolume();
+        VolumeController().listener((value) {
+          if (mounted && !_volumeInterceptEventStream) {
+            _volumeValue.value = value;
+          }
+        });
+      } catch (_) {}
+    });
+    Future.microtask(() async {
+      try {
+        _brightnessValue.value = await ScreenBrightness().current;
+        ScreenBrightness().onCurrentBrightnessChanged.listen((value) {
+          if (mounted) {
+            _brightnessValue.value = value;
+          }
+        });
+      } catch (_) {}
+    });
+  }
+
+  final _volumeIndicator = false.obs;
+  final _brightnessIndicator = false.obs;
+  Timer? _volumeTimer;
+  Timer? _brightnessTimer;
+
+  Future<void> setVolume(double value) async {
+    if (!mobile) return;
+    try {
+      VolumeController().setVolume(value);
+    } catch (_) {}
+    _volumeValue.value = value;
+    _volumeIndicator.value = true;
+    _volumeInterceptEventStream = true;
+    _volumeTimer?.cancel();
+    _volumeTimer = Timer(const Duration(milliseconds: 200), () {
+      if (mounted) {
+        _volumeIndicator.value = false;
+        _volumeInterceptEventStream = false;
+      }
+    });
+  }
+
+  Future<void> setBrightness(double value) async {
+    if (!mobile) return;
+    try {
+      await ScreenBrightness().setScreenBrightness(value);
+    } catch (_) {}
+    _brightnessIndicator.value = true;
+    _brightnessTimer?.cancel();
+    _brightnessTimer = Timer(const Duration(milliseconds: 200), () {
+      if (mounted) {
+        _brightnessIndicator.value = false;
+      }
+    });
   }
 
   final doubleTapLabel = 0.obs;

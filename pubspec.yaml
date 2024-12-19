@@ -67,6 +67,8 @@ dependencies:
   webview_windows: ^0.4.0
   webview_flutter: ^4.10.0
   wakelock_plus: ^1.2.8
+  volume_controller: ^2.0.8
+  screen_brightness: ^0.2.2 #dont change
   # Miscellaneous
   file_picker: ^8.1.4
   share_plus: ^10.1.2
