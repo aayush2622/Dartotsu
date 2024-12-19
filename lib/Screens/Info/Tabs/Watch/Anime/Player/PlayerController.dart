@@ -55,6 +55,7 @@ class _PlayerControllerState extends State<PlayerController> {
     currentEpisode = widget.player.widget.currentEpisode;
     source = widget.player.widget.source;
     showEpisodes = widget.player.showEpisodes;
+    resizeMode = widget.player.resizeMode;
 
     settings = media.anime!.playerSettings!;
     fitType = settings.resizeMode;
