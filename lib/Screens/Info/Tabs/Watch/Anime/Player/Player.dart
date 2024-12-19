@@ -56,13 +56,11 @@ class MediaPlayerState extends State<MediaPlayer>
   late PlayerSettings settings;
   late AnimationController _leftAnimationController;
   late AnimationController _rightAnimationController;
-  var showControls = true;
+  var showControls = true.obs;
   var viewType = 0.obs;
   var showEpisodes = false.obs;
   var isMobile = Platform.isAndroid || Platform.isIOS;
   final focusNode = FocusNode();
-  bool _isCursorVisible = true;
-  Timer? _hideCursorTimer;
 
   @override
   void initState() {
@@ -84,20 +82,19 @@ class MediaPlayerState extends State<MediaPlayer>
     }
   }
 
-  void _onMouseMoved(PointerEvent event) {
-    // Show the cursor if hidden
-    if (!_isCursorVisible) {
-      setState(() {
-        _isCursorVisible = true;
-      });
-    }
+  final _isCursorVisible = true.obs;
+  Timer? _hideCursorTimer;
 
-    // Restart the timer to hide the cursor after inactivity
+  void _onMouseMoved(PointerEvent event) {
+    if (!_isCursorVisible.value) {
+      _isCursorVisible.value = true;
+      showControls.value = true;
+    }
     _hideCursorTimer?.cancel();
-    _hideCursorTimer = Timer(const Duration(seconds: 2), () {
-      setState(() {
-        _isCursorVisible = false;
-      });
+    _hideCursorTimer = Timer(const Duration(seconds: 3), () {
+      _isCursorVisible.value = false;
+
+      showControls.value = false;
     });
   }
 
@@ -150,51 +147,56 @@ class MediaPlayerState extends State<MediaPlayer>
 
   @override
   Widget build(BuildContext context) {
-    return MouseRegion(
-      onHover: _onMouseMoved,
-      cursor:
-          _isCursorVisible ? SystemMouseCursors.basic : SystemMouseCursors.none,
-      child: Scaffold(
-        body: LayoutBuilder(
-          builder: (context, constraints) {
-            const double minWidth = 250;
-            final double availableWidth = constraints.maxWidth;
+    return Obx(
+      () {
+        return MouseRegion(
+          onHover: _onMouseMoved,
+          cursor: _isCursorVisible.value
+              ? SystemMouseCursors.basic
+              : SystemMouseCursors.none,
+          child: Scaffold(
+            body: LayoutBuilder(
+              builder: (context, constraints) {
+                const double minWidth = 250;
+                final double availableWidth = constraints.maxWidth;
 
-            double episodePanelWidth =
-                (availableWidth / 3).clamp(minWidth, availableWidth);
+                double episodePanelWidth =
+                    (availableWidth / 3).clamp(minWidth, availableWidth);
 
-            return StatefulBuilder(
-              builder: (context, setState) {
-                return Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _buildVideoPlayer(availableWidth, episodePanelWidth),
-                    Obx(() {
-                      if (!showEpisodes.value) {
-                        return const SizedBox();
-                      }
-                      return GestureDetector(
-                        onHorizontalDragUpdate: (details) {
-                          setState(() => episodePanelWidth =
-                              (episodePanelWidth - details.delta.dx)
-                                  .clamp(minWidth, availableWidth));
-                        },
-                        child: SizedBox(
-                          width: episodePanelWidth,
-                          child: SingleChildScrollView(
-                            padding: const EdgeInsets.all(8.0),
-                            child: _buildEpisodeList(),
-                          ),
-                        ),
-                      );
-                    }),
-                  ],
+                return StatefulBuilder(
+                  builder: (context, setState) {
+                    return Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _buildVideoPlayer(availableWidth, episodePanelWidth),
+                        Obx(() {
+                          if (!showEpisodes.value) {
+                            return const SizedBox();
+                          }
+                          return GestureDetector(
+                            onHorizontalDragUpdate: (details) {
+                              setState(() => episodePanelWidth =
+                                  (episodePanelWidth - details.delta.dx)
+                                      .clamp(minWidth, availableWidth));
+                            },
+                            child: SizedBox(
+                              width: episodePanelWidth,
+                              child: SingleChildScrollView(
+                                padding: const EdgeInsets.all(8.0),
+                                child: _buildEpisodeList(),
+                              ),
+                            ),
+                          );
+                        }),
+                      ],
+                    );
+                  },
                 );
               },
-            );
-          },
-        ),
-      ),
+            ),
+          ),
+        );
+      },
     );
   }
 
@@ -207,12 +209,13 @@ class MediaPlayerState extends State<MediaPlayer>
         child: Stack(
           alignment: Alignment.center,
           children: [
+            videoPlayerController.playerWidget(),
             KeyboardListener(
               focusNode: focusNode,
               onKeyEvent: _handleKeyPress,
               child: GestureDetector(
                 behavior: HitTestBehavior.opaque,
-                onTapDown: (_) => setState(() => showControls = !showControls),
+                onTapDown: (_) => showControls.value = !showControls.value,
                 onDoubleTapDown: (t) => _handleDoubleTap(t),
                 onVerticalDragUpdate: (e) async {
                   final delta = e.delta.dy;
@@ -229,7 +232,7 @@ class MediaPlayerState extends State<MediaPlayer>
                   }
                 },
                 child: AnimatedOpacity(
-                  opacity: showControls ? 0.5 : 0.0,
+                  opacity: showControls.value ? 0.5 : 0.0,
                   duration: const Duration(milliseconds: 300),
                   child: Container(color: Colors.black),
                 ),
@@ -262,16 +265,18 @@ class MediaPlayerState extends State<MediaPlayer>
   }
 
   Widget _buildVideoOverlay() {
-    return Positioned.fill(
-      child: AnimatedOpacity(
-        opacity: showControls ? 1 : 0,
-        duration: const Duration(milliseconds: 300),
-        child: IgnorePointer(
-          ignoring: !showControls,
-          child: PlayerController(player: this),
+    return Obx(() {
+      return Positioned.fill(
+        child: AnimatedOpacity(
+          opacity: showControls.value ? 1 : 0,
+          duration: const Duration(milliseconds: 300),
+          child: IgnorePointer(
+            ignoring: !showControls.value,
+            child: PlayerController(player: this),
+          ),
         ),
-      ),
-    );
+      );
+    });
   }
 
   var _volumeInterceptEventStream = false;
