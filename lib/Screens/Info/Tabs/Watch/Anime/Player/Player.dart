@@ -60,7 +60,7 @@ class MediaPlayerState extends State<MediaPlayer>
   var showControls = true;
   var viewType = 0.obs;
   var showEpisodes = false.obs;
-  var mobile = Platform.isAndroid || Platform.isIOS;
+  var isMobile = Platform.isAndroid || Platform.isIOS;
   final focusNode = FocusNode();
 
   @override
@@ -77,7 +77,7 @@ class MediaPlayerState extends State<MediaPlayer>
       duration: const Duration(milliseconds: 1000),
       vsync: this,
     );
-    if (mobile) {
+    if (isMobile) {
       _setLandscapeMode(true);
     }
   }
@@ -288,7 +288,7 @@ class MediaPlayerState extends State<MediaPlayer>
   Timer? _brightnessTimer;
 
   Future<void> setVolume(double value) async {
-    if (!mobile) return;
+    if (!isMobile) return;
     try {
       VolumeController().setVolume(value);
     } catch (_) {}
@@ -305,7 +305,7 @@ class MediaPlayerState extends State<MediaPlayer>
   }
 
   Future<void> setBrightness(double value) async {
-    if (!mobile) return;
+    if (!isMobile) return;
     try {
       await ScreenBrightness().setScreenBrightness(value);
     } catch (_) {}
