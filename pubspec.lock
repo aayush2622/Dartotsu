@@ -473,14 +473,6 @@ packages:
       url: "https://github.com/kodjodevf/flutter_qjs.git"
     source: git
     version: "0.0.1"
-  flutter_riverpod:
-    dependency: "direct main"
-    description:
-      name: flutter_riverpod
-      sha256: "9532ee6db4a943a1ed8383072a2e3eeda041db5657cdf6d2acecf3c21ecbe7e1"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.6.1"
   flutter_rust_bridge:
     dependency: "direct main"
     description:
@@ -691,22 +683,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.1.2"
-  isar:
-    dependency: "direct main"
-    description:
-      name: isar
-      sha256: "9f61cc74d160f9ed85ef30baf2f9c51cc0d027ae701dbc0051087800d14a9501"
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.0.0-dev.3"
-  isar_flutter_libs:
-    dependency: "direct main"
-    description:
-      name: isar_flutter_libs
-      sha256: "2db3c5c34fa78c13837da1055a6e05d3f1d8a4d039bd95a94c24b6368c19f10f"
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.0.0-dev.3"
   js:
     dependency: transitive
     description:
@@ -1182,22 +1158,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.2.0"
-  riverpod:
-    dependency: transitive
-    description:
-      name: riverpod
-      sha256: "59062512288d3056b2321804332a13ffdd1bf16df70dcc8e506e411280a72959"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.6.1"
-  riverpod_annotation:
-    dependency: "direct main"
-    description:
-      name: riverpod_annotation
-      sha256: e14b0bf45b71326654e2705d462f21b958f987087be850afd60578fcd502d1b8
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.6.1"
   rxdart:
     dependency: transitive
     description:
@@ -1427,14 +1387,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.12.0"
-  state_notifier:
-    dependency: transitive
-    description:
-      name: state_notifier
-      sha256: b8677376aa54f2d7c58280d5a007f9e8774f1968d1fb1c096adcb4792fba29bb
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.0"
   stream_channel:
     dependency: transitive
     description:
