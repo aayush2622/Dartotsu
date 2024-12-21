@@ -114,10 +114,10 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: issueNumber,
-              body: `# Not Our Business!
-                    Dartotsu doesn't maintain extensions.
-                    If the extension doesn't work, we cannot help you.
-                    Contact the owner of the respective repository for extension-related problems.`
+              body: "# Not Our Business!\n" +
+                    "Dartotsu doesn't maintain extensions.\n" +
+                    "If the extension doesn't work, we cannot help you.\n" +
+                    "Contact the owner of the respective repository for extension-related problems."
             });
 
             await github.rest.issues.addLabels({
