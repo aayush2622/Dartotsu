@@ -13,6 +13,7 @@ Widget cachedNetworkImage({
     return Icon(Icons.image_not_supported, weight: width ?? 24);
   }
   return CachedNetworkImage(
+    filterQuality: FilterQuality.high,
     imageUrl: imageUrl,
     fit: fit,
     width: width,

@@ -2,6 +2,7 @@ import 'package:dantotsu/Functions/Function.dart';
 import 'package:dantotsu/api/Mangayomi/Eval/dart/model/video.dart';
 import 'package:dantotsu/api/Mangayomi/Search/getVideo.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 
 import '../../Animation/ScaleAnimation.dart';
@@ -11,6 +12,7 @@ import '../../Screens/Info/Tabs/Watch/Anime/Player/Player.dart';
 import '../../Widgets/CustomBottomDialog.dart';
 import '../../api/Mangayomi/Model/Source.dart';
 import 'EpisodeListViewHolder.dart';
+import 'EpisodeGridViewHolder.dart';
 
 class EpisodeAdaptor extends StatefulWidget {
   final int type;
@@ -55,7 +57,7 @@ class EpisodeAdaptorState extends State<EpisodeAdaptor> {
       case 0:
         return _buildListLayout();
       case 1:
-        return _buildListLayout();
+        return _buildGridLayout();
       case 2:
         return const SizedBox();
       default:
@@ -99,6 +101,56 @@ class EpisodeAdaptorState extends State<EpisodeAdaptor> {
           },
         ),
       ),
+    );
+  }
+
+  Widget _buildGridLayout() {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final parentWidth = constraints.maxWidth;
+        var crossAxisCount = (parentWidth / 180).floor();
+        if (crossAxisCount < 1) crossAxisCount = 1;
+        return AnimatedSwitcher(
+          duration: const Duration(milliseconds: 500),
+          child: Padding(
+            padding:
+                const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
+            child: StaggeredGrid.count(
+              crossAxisCount: crossAxisCount,
+              children: List.generate(
+                episodeList.length,
+                (index) {
+                  return SlideAndScaleAnimation(
+                    initialScale: 0.0,
+                    finalScale: 1.0,
+                    initialOffset: const Offset(1.0, 0.0),
+                    finalOffset: Offset.zero,
+                    duration: const Duration(milliseconds: 200),
+                    child: GestureDetector(
+                      onTap: () => onEpisodeClick(
+                        context,
+                        episodeList[index],
+                        widget.source,
+                        widget.mediaData,
+                        widget.onEpisodeClick,
+                      ),
+                      onLongPress: () {},
+                      child: SizedBox(
+                        width: 180,
+                        height: 120,
+                        child: EpisodeCardView(
+                          episode: episodeList[index],
+                          mediaData: widget.mediaData,
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }

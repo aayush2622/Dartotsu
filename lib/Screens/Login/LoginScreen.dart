@@ -39,7 +39,7 @@ class LoginScreenState extends State<LoginScreen> {
               ),
             ),
             const SizedBox(height: 8),
-            const Text(
+            Text(
               getString.appTagline,
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 14),

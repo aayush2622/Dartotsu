@@ -112,7 +112,7 @@ List<Widget> playerSettings(
         ),
       ],
     ),
-    const Text(
+    Text(
       getString.subtitles,
       style: TextStyle(
         fontSize: 14,
