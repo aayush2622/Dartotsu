@@ -1,7 +1,7 @@
 name: Extension Issue Handling
 on:
   issues:
-    types: [opened, labeled]
+    types: [opened]
 
 jobs:
   handle-extension-issues:
@@ -21,7 +21,7 @@ jobs:
           for repo in "${REPOS[@]}"; do
             echo "Fetching from $repo"
             curl -sL "$repo" | jq -r '.[].name' | \
-            sed -E 's/^(Aniyomi:|Tachiyomi:)//' | \
+            sed -E 's/^(Aniyomi:|Tachiyomi:|Mangayomi:)//' | \
             tr '[:upper:]' '[:lower:]' | \
             sed -E 's/[^a-z0-9]//g' >> $EXTENSIONS_FILE
           done
