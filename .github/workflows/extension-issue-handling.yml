@@ -17,10 +17,8 @@ jobs:
             "https://kodjodevf.github.io/mangayomi-extensions/index.json"
             "https://kodjodevf.github.io/mangayomi-extensions/anime_index.json"
           )
-
           EXTENSIONS_FILE=extensions.txt
           > $EXTENSIONS_FILE
-
           for repo in "${REPOS[@]}"; do
             echo "Fetching from $repo"
             curl -sL "$repo" | jq -r '.[].name' | \
@@ -28,13 +26,8 @@ jobs:
             tr '[:upper:]' '[:lower:]' | \
             sed -E 's/[^a-z0-9]//g' >> $EXTENSIONS_FILE
           done
-
-          sed -E 's/^[0-9]+//' $EXTENSIONS_FILE > temp.txt && mv temp.txt $EXTENSIONS_FILE
           sort -u $EXTENSIONS_FILE -o $EXTENSIONS_FILE
-
-          EXTENSIONS_LIST=$(paste -sd'|' $EXTENSIONS_FILE)
-          echo "extensions_list=$EXTENSIONS_LIST" >> $GITHUB_OUTPUT
-          cat $EXTENSIONS_FILE
+          echo "extensions_list=$(cat $EXTENSIONS_FILE | tr '\n' '|')" >> $GITHUB_OUTPUT
 
       - name: Check Issue Content
         if: github.event.action == 'opened'
@@ -46,31 +39,29 @@ jobs:
         run: |
           CLEAN_TITLE=$(echo "$ISSUE_TITLE" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9]//g')
           CLEAN_BODY=$(echo "$ISSUE_BODY" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9]//g')
-
+          echo "Clean title: $CLEAN_TITLE"
+          echo "Clean body: $CLEAN_BODY"
+          IFS='|' read -ra EXTENSIONS_ARRAY <<< "$EXTENSIONS"
+          
           EXTENSION_REGEX_PATTERNS=(
             ".*(extension|extensions|repo|repositories|source|sources|stream|server).*not working.*"
             ".*(extension|extensions|repo|repositories|source|sources|stream|server).*doesn't work.*"
             ".*(extension|extensions|repo|repositories|source|sources|stream|server).*does not work.*"
             ".*(extension|extensions|repo|repositories|source|sources|stream|server).*cant work.*"
             ".*(extension|extensions|repo|repositories|source|sources|stream|server).*can't work.*"
-          
             ".*(no|can't find|cannot find|missing).*extension(s)?.*"
             ".*(no|can't find|cannot find|missing).*repo(s|sitories)?.*"
             ".*(no|can't find|cannot find|missing).*source(s)?.*"
             ".*(no|can't find|cannot find|missing).*stream(s)?.*"
             ".*(no|can't find|cannot find|missing).*server.*"
-          
             ".*(server|stream).*not available.*"
             ".*(server|stream).*unavailable.*"
             ".*(server|stream).*down.*"
-          
             ".*{.*}.*(extension|repo|repositories|source|sources).*not working.*"
             ".*{.*}.*(extension|repo|repositories|source|sources).*issue.*"
             ".*{.*}.*(extension|repo|repositories|source|sources).*problem.*"
-          
             ".*(extension|extensions|repo|repositories|source|sources|stream|server).*not available.*"
             ".*(extension|extensions|repo|repositories|source|sources|stream|server).*missing.*"
-          
             ".*nothing came up.*source.*look elsewhere.*"
             ".*no results.*source.*look somewhere else.*"
             ".*no content.*source.*"
@@ -87,19 +78,17 @@ jobs:
           done
 
           if [ "$IS_EXTENSION_ISSUE" = false ]; then
-            EXTENSIONS_FILE=extensions.txt
-            while IFS= read -r ext; do
-              # Debug output
-              echo "Checking extension: $ext"
-              echo "Clean title: $CLEAN_TITLE"
-              echo "Clean body: $CLEAN_BODY"
-              
-              if [[ "$CLEAN_TITLE" == *"$ext"* ]] || [[ "$CLEAN_BODY" == *"$ext"* ]]; then
-                IS_EXTENSION_ISSUE=true
-                MATCHED_EXTENSION="$ext"
-                break
+            for ext in "${EXTENSIONS_ARRAY[@]}"; do
+              if [ ! -z "$ext" ]; then
+                echo "Checking extension: $ext"
+                if [[ "$CLEAN_TITLE" == *"$ext"* ]] || [[ "$CLEAN_BODY" == *"$ext"* ]]; then
+                  IS_EXTENSION_ISSUE=true
+                  MATCHED_EXTENSION="$ext"
+                  echo "Found matching extension: $ext"
+                  break
+                fi
               fi
-            done < "$EXTENSIONS_FILE"
+            done
           fi
 
           if [ "$IS_EXTENSION_ISSUE" = true ]; then
