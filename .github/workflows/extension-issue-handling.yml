@@ -1,7 +1,7 @@
 name: Extension Issue Handling
 on:
   issues:
-    types: [opened, labeled]
+    types: [opened]
 
 jobs:
   handle-extension-issues:
@@ -33,6 +33,7 @@ jobs:
 
           EXTENSIONS_LIST=$(paste -sd'|' $EXTENSIONS_FILE)
           echo "extensions_list=$EXTENSIONS_LIST" >> $GITHUB_OUTPUT
+          echo "Number of Extensions: $(wc -l < $EXTENSIONS_FILE)"
           cat $EXTENSIONS_FILE
 
       - name: Check Issue Content
@@ -46,37 +47,36 @@ jobs:
           CLEAN_TITLE=$(echo "$ISSUE_TITLE" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9]//g')
           CLEAN_BODY=$(echo "$ISSUE_BODY" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9]//g')
 
+          echo "Cleaned Title: $CLEAN_TITLE"
+          echo "Cleaned Body: $CLEAN_BODY"
+
+          EXTENSIONS_FILE=extensions.txt
+          IS_EXTENSION_ISSUE=false
+          MATCHED_EXTENSION=""
+
           EXTENSION_REGEX_PATTERNS=(
             ".*(extension|extensions|repo|repositories|source|sources|stream|server).*not working.*"
             ".*(extension|extensions|repo|repositories|source|sources|stream|server).*doesn't work.*"
             ".*(extension|extensions|repo|repositories|source|sources|stream|server).*does not work.*"
             ".*(extension|extensions|repo|repositories|source|sources|stream|server).*cant work.*"
             ".*(extension|extensions|repo|repositories|source|sources|stream|server).*can't work.*"
-          
             ".*(no|can't find|cannot find|missing).*extension(s)?.*"
             ".*(no|can't find|cannot find|missing).*repo(s|sitories)?.*"
             ".*(no|can't find|cannot find|missing).*source(s)?.*"
             ".*(no|can't find|cannot find|missing).*stream(s)?.*"
             ".*(no|can't find|cannot find|missing).*server.*"
-          
             ".*(server|stream).*not available.*"
             ".*(server|stream).*unavailable.*"
             ".*(server|stream).*down.*"
-          
             ".*{.*}.*(extension|repo|repositories|source|sources).*not working.*"
             ".*{.*}.*(extension|repo|repositories|source|sources).*issue.*"
             ".*{.*}.*(extension|repo|repositories|source|sources).*problem.*"
-          
             ".*(extension|extensions|repo|repositories|source|sources|stream|server).*not available.*"
             ".*(extension|extensions|repo|repositories|source|sources|stream|server).*missing.*"
-          
             ".*nothing came up.*source.*look elsewhere.*"
             ".*no results.*source.*look somewhere else.*"
             ".*no content.*source.*"
           )
-
-          IS_EXTENSION_ISSUE=false
-          MATCHED_EXTENSION=""
 
           for pattern in "${EXTENSION_REGEX_PATTERNS[@]}"; do
             if [[ "$CLEAN_TITLE" =~ $pattern ]] || [[ "$CLEAN_BODY" =~ $pattern ]]; then
@@ -85,10 +85,9 @@ jobs:
             fi
           done
 
-          if [ "$IS_EXTENSION_ISSUE" = false ]; then
-            EXTENSIONS_FILE=extensions.txt
+          if [ "$IS_EXTENSION_ISSUE" = false ] && [ -n "$CLEAN_BODY" ]; then
             while IFS= read -r ext; do
-              if [[ "$CLEAN_TITLE" == *"$ext"* ]] || [[ "$CLEAN_BODY" == *"$ext"* ]]; then
+              if [[ "$CLEAN_BODY" == *"$ext"* ]]; then
                 IS_EXTENSION_ISSUE=true
                 MATCHED_EXTENSION="$ext"
                 break
@@ -96,8 +95,10 @@ jobs:
             done < "$EXTENSIONS_FILE"
           fi
 
+          echo "Is Extension Issue: $IS_EXTENSION_ISSUE"
+          echo "Matched Extension: $MATCHED_EXTENSION"
+
           if [ "$IS_EXTENSION_ISSUE" = true ]; then
-            echo "Matched Extension: $MATCHED_EXTENSION"
             echo "is_extension_issue=true" >> $GITHUB_OUTPUT
             echo "detected_extension=$MATCHED_EXTENSION" >> $GITHUB_OUTPUT
           else
@@ -113,6 +114,28 @@ jobs:
             const issueNumber = context.issue.number;
             const reportedExtension = "${{ steps.check-issue.outputs.detected_extension || 'Unknown Extension' }}";
 
+            const currentLabels = await github.rest.issues.listLabelsOnIssue({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issueNumber
+            });
+
+            for (const label of currentLabels.data) {
+              await github.rest.issues.removeLabel({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issueNumber,
+                name: label.name
+              });
+            }
+
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issueNumber,
+              labels: ['wontfix']
+            });
+
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -121,13 +144,6 @@ jobs:
                     Dartotsu doesn't maintain extensions.
                     If the extension doesn't work, we cannot help you.
                     Contact the owner of the respective repository for extension-related problems.`
-            });
-
-            await github.rest.issues.addLabels({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: issueNumber,
-              labels: ['wontfix']
             });
 
             await github.rest.issues.update({
