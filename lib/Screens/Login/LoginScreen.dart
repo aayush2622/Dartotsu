@@ -2,6 +2,7 @@ import 'package:dantotsu/Widgets/LoadSvg.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:provider/provider.dart';
+import '../../Theme/LanguageSwitcher.dart';
 import '../../Functions/Function.dart';
 import '../../Services/ServiceSwitcher.dart';
 
@@ -29,7 +30,7 @@ class LoginScreenState extends State<LoginScreen> {
           children: [
             const SizedBox(height: 64),
             Text(
-              'Dartotsu',
+              getString.appName,
               style: TextStyle(
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.w100,
@@ -39,7 +40,7 @@ class LoginScreenState extends State<LoginScreen> {
             ),
             const SizedBox(height: 8),
             const Text(
-              'The NEW Best Anime & Manga app\nfor idk.',
+              getString.appTagline,
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 14),
             ),
@@ -62,7 +63,7 @@ class LoginScreenState extends State<LoginScreen> {
             GestureDetector(
               onTap: () {},
               child: Text(
-                'Restore Settings',
+                getString.restoreSettings,
                 style: TextStyle(
                   fontFamily: 'Poppins',
                   fontWeight: FontWeight.bold,
@@ -93,7 +94,7 @@ class LoginScreenState extends State<LoginScreen> {
         ),
       ),
       label: Text(
-        'Login',
+        getString.login,
         style: TextStyle(
           fontFamily: 'Poppins',
           color: theme.onPrimaryContainer,

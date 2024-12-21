@@ -6,6 +6,7 @@ import '../../Preferences/PrefManager.dart';
 import '../../Preferences/Preferences.dart';
 import '../../Theme/CustomColorPicker.dart';
 import '../../Widgets/AlertDialogBuilder.dart';
+import '../../Theme/LanguageSwitcher.dart';
 import 'BaseSettingsScreen.dart';
 
 class SettingsPlayerScreen extends StatefulWidget {
@@ -17,7 +18,7 @@ class SettingsPlayerScreen extends StatefulWidget {
 
 class SettingsPlayerScreenState extends BaseSettingsScreen {
   @override
-  String title() => 'Player Settings';
+  String title() => getString.playerSettingsTitle;
 
   @override
   Widget icon() => Padding(
@@ -47,8 +48,8 @@ List<Widget> playerSettings(
       settings: [
         Setting(
           type: SettingType.switchType,
-          name: 'Cursed Speed',
-          description: 'For people who are too busy with life',
+          name: getString.cursedSpeed,
+          description: getString.cursedSpeedDescription,
           icon: Icons.accessible_forward,
           isChecked: PrefManager.getVal(PrefName.cursedSpeed),
           onSwitchChange: (value) {
@@ -57,13 +58,13 @@ List<Widget> playerSettings(
         ),
         Setting(
           type: SettingType.normal,
-          name: 'Speed',
-          description: 'Default speed for player',
+          name: getString.speed,
+          description: getString.speedDescription,
           icon: Icons.speed,
           onClick: () {
             var cursed = PrefManager.getVal(PrefName.cursedSpeed);
             AlertDialogBuilder(context)
-              ..setTitle('Speed')
+              ..setTitle(getString.speed)
               ..singleChoiceItems(
                 speedMap(cursed),
                 !speedMap(cursed).contains(playerSettings.speed)
@@ -79,12 +80,12 @@ List<Widget> playerSettings(
         ),
         Setting(
           type: SettingType.normal,
-          name: 'Resize mode',
-          description: 'Default resize mode for player',
+          name: getString.resizeMode,
+          description: getString.resizeModeDescription,
           icon: Icons.fit_screen,
           onClick: () {
             AlertDialogBuilder(context)
-              ..setTitle('Resize Mode')
+              ..setTitle(getString.resizeMode)
               ..singleChoiceItems(
                 resizeStringMap.values.toList(),
                 playerSettings.resizeMode,
@@ -98,8 +99,8 @@ List<Widget> playerSettings(
         ),
         Setting(
           type: SettingType.inputBox,
-          name: 'Skip Button',
-          description: 'Skip button duration',
+          name: getString.skipButton,
+          description: getString.skipButtonDescription,
           icon: Icons.fit_screen,
           maxValue: 1000,
           minValue: 0,
@@ -112,7 +113,7 @@ List<Widget> playerSettings(
       ],
     ),
     const Text(
-      'Subtitles',
+      getString.subtitles,
       style: TextStyle(
         fontSize: 14,
         fontWeight: FontWeight.bold,
@@ -123,8 +124,8 @@ List<Widget> playerSettings(
       settings: [
         Setting(
           type: SettingType.switchType,
-          name: 'Show Subtitles',
-          description: 'Show subtitles by default',
+          name: getString.showSubtitles,
+          description: getString.showSubtitlesDescription,
           icon: Icons.subtitles,
           isChecked: playerSettings.showSubtitle,
           onSwitchChange: (value) {
@@ -135,12 +136,12 @@ List<Widget> playerSettings(
         Setting(
           //TODO: Add subtitle fonts
           type: SettingType.normal,
-          name: "Font Family",
-          description: "Subtitle font family",
+          name: getString.fontFamily,
+          description: getString.fontFamilyDescription,
           icon: Icons.font_download,
           onClick: () {
             AlertDialogBuilder(context)
-              ..setTitle('Font Family')
+              ..setTitle(getString.fontFamily)
               ..singleChoiceItems(
                 ['Poppins', 'Roboto', 'Arial', 'Times New Roman'],
                 ['Poppins', 'Roboto', 'Arial', 'Times New Roman']
@@ -157,8 +158,8 @@ List<Widget> playerSettings(
         ),
         Setting(
           type: SettingType.slider,
-          name: "Font Size",
-          description: "Subtitle font size",
+          name: getString.fontSize,
+          description: getString.fontSizeDescription,
           icon: Icons.format_size,
           maxValue: 100,
           minValue: 10,
@@ -171,8 +172,8 @@ List<Widget> playerSettings(
         ),
         Setting(
           type: SettingType.slider,
-          name: "Font Weight",
-          description: "Subtitle font weight",
+          name: getString.fontWeight,
+          description: getString.fontWeightDescription,
           maxValue: 8,
           minValue: 4,
           initialValue: playerSettings.subtitleWeight,
@@ -185,8 +186,8 @@ List<Widget> playerSettings(
         ),
         Setting(
           type: SettingType.slider,
-          name: "Bottom Padding",
-          description: "Subtitle bottom padding",
+          name: getString.bottomPadding,
+          description: getString.bottomPaddingDescription,
           icon: Icons.format_line_spacing,
           maxValue: 100,
           minValue: 0,
@@ -199,8 +200,8 @@ List<Widget> playerSettings(
         ),
         Setting(
           type: SettingType.normal,
-          name: "Font Color",
-          description: "Subtitle font color",
+          name: getString.fontColor,
+          description: getString.fontColorDescription,
           icon: Icons.color_lens,
           onClick: () async {
             var color = playerSettings.subtitleColor;
@@ -215,8 +216,8 @@ List<Widget> playerSettings(
         ),
         Setting(
           type: SettingType.normal,
-          name: "Background Color",
-          description: "Subtitle background color",
+          name: getString.backgroundColor,
+          description: getString.backgroundColorDescription,
           icon: Icons.color_lens,
           onClick: () async {
             var color = playerSettings.subtitleBackgroundColor;
@@ -232,8 +233,8 @@ List<Widget> playerSettings(
 
         Setting(
           type: SettingType.normal,
-          name: "Outline Color",
-          description: "Subtitle outline color",
+          name: getString.outlineColor,
+          description: getString.outlineColorDescription,
           icon: Icons.color_lens,
           onClick: () async {
             var color = playerSettings.subtitleOutlineColor;
@@ -254,7 +255,7 @@ List<Widget> playerSettings(
       children: [
         const SizedBox(height: 32),
         Text(
-          'Subtitle Preview',
+          getString.subtitlePreview,
           style: TextStyle(
             fontSize: playerSettings.subtitleSize.toDouble(),
             fontFamily: playerSettings.subtitleFont,
