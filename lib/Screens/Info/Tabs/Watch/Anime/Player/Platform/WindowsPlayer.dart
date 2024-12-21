@@ -42,8 +42,8 @@ class WindowsPlayer extends BasePlayer {
       videoController.player.setVolume(volume);
 
   @override
-  Future<void> open(String url) async =>
-      videoController.player.open(Media(url));
+  Future<void> open(String url,Duration duration) async =>
+      videoController.player.open(Media(url,start: duration));
 
   @override
   Future<void> setSubtitle(String subtitleUri, String language) =>
@@ -58,6 +58,7 @@ class WindowsPlayer extends BasePlayer {
 
   @override
   void listenToPlayerStream() {
+
     videoController.player.stream.position
         .listen((e) => currentTime.value = _formatTime(e.inSeconds));
     videoController.player.stream.duration

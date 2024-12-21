@@ -8,8 +8,8 @@ class PrefName {
       Pref(Location.General, 'source', 'ANILIST');
 
   //theme
-  static const Pref<bool> isDarkMode =
-      Pref(Location.General, 'isDarkMode', false);
+  static const Pref<int> isDarkMode =
+      Pref(Location.General, 'isDarkMode', 0);
   static const Pref<bool> isOled = Pref(Location.General, 'isOled', false);
   static const Pref<bool> useMaterialYou =
       Pref(Location.General, 'useMaterialYou', false);

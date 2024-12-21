@@ -60,6 +60,7 @@ class _PlayerControllerState extends State<PlayerController> {
     settings = media.anime!.playerSettings!;
     fitType = settings.resizeMode;
     WakelockPlus.enable();
+    initFullScreen();
     _controller = widget.player.videoPlayerController;
     currentQuality = videos[widget.player.widget.index];
     _controller.listenToPlayerStream();
@@ -70,6 +71,8 @@ class _PlayerControllerState extends State<PlayerController> {
     WakelockPlus.disable();
     super.dispose();
   }
+  Future initFullScreen() async =>
+    isFullScreen.value = await WindowManager.instance.isFullScreen();
 
   String _formatTime(int seconds) {
     final hours = seconds ~/ 3600;
@@ -123,7 +126,8 @@ class _PlayerControllerState extends State<PlayerController> {
         children: [
           Row(
             children: [
-              Text(_controller.currentTime.value),
+              Text(_controller.currentTime.value,
+                  style: const TextStyle(color: Colors.white),),
               Text(
                 " / ",
                 style: TextStyle(
@@ -533,7 +537,7 @@ class _PlayerControllerState extends State<PlayerController> {
           style: ElevatedButton.styleFrom(
             padding: const EdgeInsets.symmetric(horizontal: 12),
             backgroundColor:
-                Theme.of(context).colorScheme.surface.withValues(alpha: 0.2),
+                Colors.black.withValues(alpha: 0.2),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15),
               side: BorderSide(
@@ -608,7 +612,7 @@ class _PlayerControllerState extends State<PlayerController> {
                   return;
                 }
                 currentQuality = videos[index];
-                _controller.open(currentQuality.url);
+                _controller.open(currentQuality.url, _controller.currentPosition.value);
                 Get.back();
               },
             );

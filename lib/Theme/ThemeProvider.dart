@@ -28,7 +28,19 @@ class ThemeNotifier extends ChangeNotifier {
   }
 
   Future<void> _initialize() async {
-    _isDarkMode = PrefManager.getVal(PrefName.isDarkMode);
+    var darkMode = PrefManager.getVal(PrefName.isDarkMode);
+    bool isDark;
+
+    if (darkMode == 0) {
+      isDark = WidgetsBinding.instance.window.platformBrightness == Brightness.dark;
+      PrefManager.setVal(PrefName.isDarkMode, isDark ? 1 : 2);
+    } else if (darkMode == 1) {
+      isDark = true;
+    } else{
+      isDark = false;
+    }
+
+    _isDarkMode = isDark;
     _isOled = PrefManager.getVal(PrefName.isOled);
     _theme = PrefManager.getVal(PrefName.theme);
     _useMaterialYou = PrefManager.getVal(PrefName.useMaterialYou);
@@ -39,7 +51,7 @@ class ThemeNotifier extends ChangeNotifier {
 
   Future<void> setDarkMode(bool isDarkMode) async {
     _isDarkMode = isDarkMode;
-    PrefManager.setVal(PrefName.isDarkMode, isDarkMode);
+    PrefManager.setVal(PrefName.isDarkMode, _isDarkMode ? 1 : 2);
     if (!isDarkMode) {
       _isOled = false;
       PrefManager.setVal(PrefName.isOled, false);
@@ -52,7 +64,7 @@ class ThemeNotifier extends ChangeNotifier {
     PrefManager.setVal(PrefName.isOled, isOled);
     if (isOled) {
       _isDarkMode = true;
-      PrefManager.setVal(PrefName.isDarkMode, true);
+      PrefManager.setVal(PrefName.isDarkMode, _isDarkMode ? 1 : 2);
     }
     notifyListeners();
   }

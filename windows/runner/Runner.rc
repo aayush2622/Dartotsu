@@ -89,11 +89,11 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "com.aayush262" "\0"
+            VALUE "CompanyName", "ani.aayush262" "\0"
             VALUE "FileDescription", "Dantotsu" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
             VALUE "InternalName", "Dantotsu" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2024 com.aayush262. All rights reserved." "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2024 ani.aayush262. All rights reserved." "\0"
             VALUE "OriginalFilename", "Dantotsu.exe" "\0"
             VALUE "ProductName", "Dantotsu" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"

@@ -16,7 +16,7 @@ abstract class BasePlayer extends GetxController {
   Future<void> playOrPause();
   Future<void> setVolume(double volume);
   Future<void> setRate(double rate);
-  Future<void> open(String url);
+  Future<void> open(String url,Duration duration);
   Future<void> setSubtitle(String subtitleUri, String language);
 
   void listenToPlayerStream();

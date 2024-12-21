@@ -1,10 +1,10 @@
 import 'package:dantotsu/Screens/Settings/BaseSettingsScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:dantotsu/Theme/LanguageSwitcher.dart';
 import '../../Adaptor/Settings/SettingsAdaptor.dart';
+
 import '../../DataClass/Setting.dart';
-import '../../Theme/LanguageSwitcher.dart';
 import '../../Theme/CustomColorPicker.dart';
 import '../../Theme/ThemeManager.dart';
 import '../../Theme/ThemeProvider.dart';

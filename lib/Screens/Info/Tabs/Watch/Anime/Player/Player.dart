@@ -101,7 +101,7 @@ class MediaPlayerState extends State<MediaPlayer>
   void _initializePlayer() {
     currentQuality = widget.videos[widget.index];
     videoPlayerController = WindowsPlayer(resizeMode, settings);
-    videoPlayerController.open(currentQuality.url);
+    videoPlayerController.open(currentQuality.url, Duration.zero);
   }
 
   void _loadPlayerSettings() {
@@ -175,9 +175,11 @@ class MediaPlayerState extends State<MediaPlayer>
                           }
                           return GestureDetector(
                             onHorizontalDragUpdate: (details) {
-                              setState(() => episodePanelWidth =
-                                  (episodePanelWidth - details.delta.dx)
-                                      .clamp(minWidth, availableWidth));
+                              setState(
+                                () => episodePanelWidth =
+                                    (episodePanelWidth - details.delta.dx)
+                                        .clamp(minWidth, availableWidth),
+                              );
                             },
                             child: SizedBox(
                               width: episodePanelWidth,
@@ -551,8 +553,35 @@ class MediaPlayerState extends State<MediaPlayer>
         _skipSegments(false);
       } else if (event.logicalKey == LogicalKeyboardKey.space) {
         videoPlayerController.playOrPause();
+      } else if (event.logicalKey == LogicalKeyboardKey.enter) {
+        showEpisodes.value = !showEpisodes.value;
+      } else if (RegExp(r'^[0-9]$').hasMatch(event.logicalKey.keyLabel)) {
+        var keyNumber = int.parse(event.logicalKey.keyLabel);
+
+        var videoDurationSeconds =
+            _timeStringToSeconds(videoPlayerController.maxTime.value);
+        var targetSeconds = (keyNumber / 10) * videoDurationSeconds;
+
+        if (keyNumber == 1) {
+          targetSeconds = 0;
+        } else if (keyNumber == 0) {
+          targetSeconds = videoDurationSeconds.toDouble();
+        } else {
+          targetSeconds = (keyNumber / 10) * videoDurationSeconds;
+        }
+
+        videoPlayerController.seek(Duration(seconds: targetSeconds.toInt()));
       }
     }
+  }
+
+  int _timeStringToSeconds(String time) {
+    final parts = time.split(':').map(int.parse).toList();
+    if (parts.length == 2) return parts[0] * 60 + parts[1];
+    if (parts.length == 3) {
+      return parts[0] * 3600 + parts[1] * 60 + parts[2];
+    }
+    return 0;
   }
 
   void changeViewType(RxInt viewType, int index) {

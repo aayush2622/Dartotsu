@@ -9,7 +9,7 @@
 -keep class androidx.lifecycle.** { *; }
 
 # Keep your custom package classes (optimize to specific ones if possible)
--keep class com.aayush262.** { *; }
+-keep class ani.aayush262.** { *; }
 
 # Keep Gson models (optimize to specific models if possible)
 -keep class com.google.gson.** { *; }

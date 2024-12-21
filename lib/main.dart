@@ -112,7 +112,14 @@ class MainActivity extends StatefulWidget {
 
 FloatingBottomNavBar? navbar;
 
-class MainActivityState extends State<MainActivity> {
+class MainActivityState extends State<MainActivity> with WidgetsBindingObserver {
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
   int _selectedIndex = 1;
 
   void _onTabSelected(int index) => setState(() => _selectedIndex = index);
@@ -120,29 +127,48 @@ class MainActivityState extends State<MainActivity> {
   @override
   Widget build(BuildContext context) {
     Discord.getSavedToken();
-    var service = Provider.of<MediaServiceProvider>(context).currentService;
+    var service = Provider
+        .of<MediaServiceProvider>(context)
+        .currentService;
     navbar = FloatingBottomNavBar(
       selectedIndex: _selectedIndex,
       onTabSelected: _onTabSelected,
     );
 
-    return Scaffold(
-      body: Stack(
-        children: [
-          Obx(() {
-            return IndexedStack(
-              index: _selectedIndex,
-              children: [
-                const AnimeScreen(),
-                service.data.token.value.isNotEmpty
-                    ? const HomeScreen()
-                    : const LoginScreen(),
-                const MangaScreen(),
-              ],
-            );
-          }),
-          navbar!,
-        ],
+    return RawKeyboardListener(
+      focusNode: FocusNode(),
+      autofocus: true,
+      onKey: (RawKeyEvent event) async {
+        if (event is RawKeyDownEvent ) {
+          if (event.logicalKey == LogicalKeyboardKey.escape) {
+            if (Navigator.of(context).canPop()) {
+              Navigator.of(context).pop();
+            }
+          }
+          if (event.logicalKey == LogicalKeyboardKey.f11) {
+            WindowManager.instance.setFullScreen(!await WindowManager.instance.isFullScreen());
+          }
+
+        }
+      },
+      child: Scaffold(
+        body: Stack(
+          children: [
+            Obx(() {
+              return IndexedStack(
+                index: _selectedIndex,
+                children: [
+                  const AnimeScreen(),
+                  service.data.token.value.isNotEmpty
+                      ? const HomeScreen()
+                      : const LoginScreen(),
+                  const MangaScreen(),
+                ],
+              );
+            }),
+            navbar!,
+          ],
+        ),
       ),
     );
   }

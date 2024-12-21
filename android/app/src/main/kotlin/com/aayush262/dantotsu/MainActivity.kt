@@ -1,4 +1,4 @@
-package com.aayush262.dantotsu
+package ani.aayush262.dartotsu
 
 import io.flutter.embedding.android.FlutterActivity
 
