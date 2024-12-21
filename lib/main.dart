@@ -48,8 +48,8 @@ void main(List<String> args) async {
 Future init() async {
   await PrefManager.init();
   initializeMediaServices();
-  isar = await StorageProvider().initDB(null);
   await StorageProvider().requestPermission();
+  isar = await StorageProvider().initDB(null);
   MediaKit.ensureInitialized();
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
     await WindowManager.instance.ensureInitialized();
