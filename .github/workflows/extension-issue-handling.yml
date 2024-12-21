@@ -21,7 +21,7 @@ jobs:
           for repo in "${REPOS[@]}"; do
             echo "Fetching from $repo"
             curl -sL "$repo" | jq -r '.[].name' | \
-            sed -E 's/^(Aniyomi:|Tachiyomi:)//' | \
+            sed -E 's/^(Aniyomi:|Tachiyomi:|Mangayomi:)//' | \
             tr '[:upper:]' '[:lower:]' | \
             sed -E 's/[^a-z0-9]//g' >> $EXTENSIONS_FILE
           done
@@ -30,7 +30,7 @@ jobs:
 
           EXTENSIONS_LIST=$(paste -sd'|' $EXTENSIONS_FILE)
           echo "extensions_list=$EXTENSIONS_LIST" >> $GITHUB_OUTPUT
-          echo "Number of Extensions: $(wc -l < $EXTENSIONS_FILE)"  # Added log for number of extensions
+          echo "Number of Extensions: $(wc -l < $EXTENSIONS_FILE)" 
           cat $EXTENSIONS_FILE
 
       - name: Check Issue Content
@@ -144,7 +144,7 @@ jobs:
               repo: context.repo.repo,
               issue_number: issueNumber,
               body: `# Not Our Business!
-                    Dantotsu doesn't maintain extensions.
+                    Dartotsu doesn't maintain extensions.
                     If the extension doesn't work, we cannot help you.
                     Contact the owner of the respective repository for extension-related problems.`
             });
