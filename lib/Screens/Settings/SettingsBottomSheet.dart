@@ -72,17 +72,17 @@ class SettingsBottomSheetState extends State<SettingsBottomSheet> {
                         GestureDetector(
                           onTap: () {
                             AlertDialogBuilder(context)
-                              ..setTitle('Logout')
-                              ..setMessage('Are you sure you want to logout?')
-                              ..setPositiveButton('Yes', () {
+                              ..setTitle(getString.logout)
+                              ..setMessage(getString.logoutConfirmation)
+                              ..setPositiveButton(getString.yes, () {
                                 service.removeSavedToken();
                                 Navigator.of(context).pop();
                               })
-                              ..setNegativeButton('No', null)
+                              ..setNegativeButton(getString.no, null)
                               ..show();
                           },
                           child: Text(
-                            'Logout',
+                            getString.logout,
                             style: TextStyle(
                               fontFamily: 'Poppins',
                               color: Theme.of(context).colorScheme.secondary,
@@ -95,7 +95,7 @@ class SettingsBottomSheetState extends State<SettingsBottomSheet> {
                         GestureDetector(
                           onTap: () => service.login(context),
                           child: Text(
-                            'Login',
+                            getString.login,
                             style: TextStyle(
                               fontFamily: 'Poppins',
                               color: Theme.of(context).colorScheme.secondary,
@@ -160,7 +160,7 @@ class SettingsBottomSheetState extends State<SettingsBottomSheet> {
         const SizedBox(height: 24.0),
         _buildSwitchListTile(
             context: context,
-            title: 'Incognito Mode',
+            title: getString.incognitoMode,
             icon: Icons.person,
             isChecked: incognito,
             onChanged: (bool value) {
@@ -172,7 +172,7 @@ class SettingsBottomSheetState extends State<SettingsBottomSheet> {
         const SizedBox(height: 12.0),
         _buildSwitchListTile(
             context: context,
-            title: 'Offline Mode',
+            title: getString.offlineMode,
             icon: Icons.download,
             isChecked: offline,
             onChanged: (bool value) {
@@ -183,13 +183,13 @@ class SettingsBottomSheetState extends State<SettingsBottomSheet> {
             }),
         const SizedBox(height: 10.0),
         _buildListTile(
-            context, 'Activities', Icons.inbox, const SettingsScreen()),
+            context, getString.activities, Icons.inbox, const SettingsScreen()),
         const SizedBox(height: 10.0),
         _buildListTile(
-            context, 'Extension', Icons.extension, const ExtensionScreen()),
+            context, getString.extension, Icons.extension, const ExtensionScreen()),
         const SizedBox(height: 10.0),
         _buildListTile(
-            context, 'Settings', Icons.settings, const SettingsScreen()),
+            context, getString.settings, Icons.settings, const SettingsScreen()),
       ],
     );
   }
