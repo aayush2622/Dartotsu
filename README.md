@@ -3,19 +3,19 @@
 </p>
 
 <p align="center">
-   <img src="https://img.shields.io/badge/platforms-android_ios_windows_linux_macos-06599d?style=for-the-badge&labelColor=043b69&color=00b16a"/>
-   <a href="https://github.com/aayush2622/Dartotsu/releases"><img src="https://img.shields.io/github/downloads/aayush2622/Dartotsu/total?label=Downloads&color=00b16a&logo=android&logoColor=1a8fa6&style=for-the-badge&labelColor=043b69"></a>
+   <img src="https://img.shields.io/badge/platforms-android_ios_windows_linux_macos-06599d?style=for-the-badge&labelColor=009bb1&color=054e57"/>
+   <a href="https://github.com/aayush2622/Dartotsu/releases"><img src="https://img.shields.io/github/downloads/aayush2622/Dartotsu/total?label=Downloads&logo=android&logoColor=1a8fa6&style=for-the-badge&labelColor=009bb1&color=054e57"></a>
 </p>
 
 <p align="center">
-   <a href="https://www.codefactor.io/repository/github/aayush2622/Dartotsu"><img src="https://img.shields.io/codefactor/grade/github/aayush2622/Dartotsu?style=for-the-badge&label=Codefactor&labelColor=06599d&color=00b16a" alt="CodeFactor"/></a>
-   <!--<a href="https://hosted.weblate.org/engage/Dantotsu"><img alt="Weblate project translated" src="https://img.shields.io/weblate/progress/Dantotsu?label=Translated&labelColor=087a87&color=168b94&style=for-the-badge"></a>-->
-   <a href="https://github.com/aayush2622/Dartotsu/commits/main"><img src="https://img.shields.io/github/last-commit/aayush2622/Dartotsu?label=Latest Commit&style=for-the-badge&labelColor=06599d&color=00b16a" alt="GitHub Last Commit"></a>
+   <a href="https://www.codefactor.io/repository/github/aayush2622/Dartotsu"><img src="https://img.shields.io/codefactor/grade/github/aayush2622/Dartotsu?style=for-the-badge&label=Codefactor&labelColor=009bb1&color=054e57" alt="CodeFactor"/></a>
+   <a href="https://hosted.weblate.org/engage/dartotsu/"><img alt="Weblate project translated" src="https://img.shields.io/weblate/progress/dartotsu?label=Translated&labelColor=009bb1&color=054e57&style=for-the-badge"></a>
+   <a href="https://github.com/aayush2622/Dartotsu/commits/main"><img src="https://img.shields.io/github/last-commit/aayush2622/Dartotsu?label=Latest Commit&style=for-the-badge&labelColor=009bb1&color=054e57" alt="GitHub Last Commit"></a>
 </p>
 
 # **Dartotsu** 🌟
 
-**Dartotsu** is a complete rewrite of the original [Dantotsu](https://github.com/rebelonion/Dantotsu/) in Flutter, designed as an exclusive [AniList](https://anilist.co/) client.
+**Dartotsu** is a complete rewrite of [Dantotsu](https://github.com/rebelonion/Dantotsu/) in Flutter. It's a hybrid [**AniList**](https://anilist.co/) and [**MyAnimeList**](https://myanimelist.net/) tracking client, with support for [**Simkl**](https://simkl.com/) and [**Kitsu**](https://kitsu.io/) coming soon!  
 > **Note:** This project is currently under development and is not ready for public use.
 
 ## Downloads
@@ -26,9 +26,9 @@
 </p>
 
 ## Disclaimer
-- The developer of this application is not liable for any misuse or legal issues arising from its use and is not affiliated with any content providers. This application hosts zero content.
-- Dartotsu does not condone piracy.
-- This project is created strictly for educational purposes.
+- Dartotsu is intended for tracking use only; the user manages any external sources.
+- The developer disclaims all liability for misuse, including legal issues from external sources. For any issues, contact the respective content providers.
+- Dartotsu is for educational purposes only and does not condone piracy. Users are responsible for their actions.
 
 ## Support Us
 <a href='https://buymeacoffee.com/aayush262' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://storage.ko-fi.com/cdn/kofi1.png?v=3' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
@@ -48,10 +48,10 @@ Join our communities to stay updated and contribute to the discussion
 
 ## Contribute
 We welcome contributions, from translations to new features. For inquiries, join our [Discord server](https://discord.gg/eyQdCpdubF) or [Telegram group](https://t.me/Dartotsu). Pull requests are welcome; check the [open issues](https://github.com/aayush2622/Dartotsu/issues) for guidance on major changes.
-<!--<details>
+<details>
 <summary>Weblate Translation Graph</summary>
-<a href="https://hosted.weblate.org/projects/echo/#languages"><img src="https://hosted.weblate.org/widget/echo/app/multi-auto.svg" alt="Translation status" /></a>
-</details>-->
+<a href="https://hosted.weblate.org/projects/dartotsu/dartotsu/#languages"><img src="https://hosted.weblate.org/widget/dartotsu/dartotsu/multi-auto.svg" alt="Translation status" /></a>
+</details>
 
 ## Acknowledgments
 A heartfelt thank you to everyone who has contributed to the development of Dartotsu.
