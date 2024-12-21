@@ -5,6 +5,9 @@ on:
 
 jobs:
   handle-extension-issues:
+    permissions:
+      contents: write
+      issues: write
     runs-on: ubuntu-latest
     steps:
       - name: Fetch Extensions from Repositories
@@ -116,7 +119,7 @@ jobs:
               issue_number: issueNumber,
               body: `# Not Our Business!
                     Dartotsu doesn't maintain extensions.
-                    If the extension doesn't work, we cannot help you.\n
+                    If the extension doesn't work, we cannot help you.
                     Contact the owner of the respective repository for extension-related problems.`
             });
 
