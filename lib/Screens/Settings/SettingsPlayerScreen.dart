@@ -6,6 +6,7 @@ import '../../Preferences/PrefManager.dart';
 import '../../Preferences/Preferences.dart';
 import '../../Theme/CustomColorPicker.dart';
 import '../../Widgets/AlertDialogBuilder.dart';
+import '../../Theme/LanguageSwitcher.dart';
 import 'BaseSettingsScreen.dart';
 
 class SettingsPlayerScreen extends StatefulWidget {
