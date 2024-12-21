@@ -29,6 +29,7 @@ jobs:
             sed -E 's/[^a-z0-9]//g' >> $EXTENSIONS_FILE
           done
 
+          sed -E 's/^[0-9]+//' $EXTENSIONS_FILE > temp.txt && mv temp.txt $EXTENSIONS_FILE
           sort -u $EXTENSIONS_FILE -o $EXTENSIONS_FILE
 
           EXTENSIONS_LIST=$(paste -sd'|' $EXTENSIONS_FILE)
@@ -88,6 +89,11 @@ jobs:
           if [ "$IS_EXTENSION_ISSUE" = false ]; then
             EXTENSIONS_FILE=extensions.txt
             while IFS= read -r ext; do
+              # Debug output
+              echo "Checking extension: $ext"
+              echo "Clean title: $CLEAN_TITLE"
+              echo "Clean body: $CLEAN_BODY"
+              
               if [[ "$CLEAN_TITLE" == *"$ext"* ]] || [[ "$CLEAN_BODY" == *"$ext"* ]]; then
                 IS_EXTENSION_ISSUE=true
                 MATCHED_EXTENSION="$ext"
