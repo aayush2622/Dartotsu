@@ -45,8 +45,8 @@ class SettingsCommonScreenState extends BaseSettingsScreen {
         settings: [
           Setting(
             type: SettingType.switchType,
-            name: 'Hide Private',
-            description: 'Hide private media from the home page',
+            name: getString.hidePrivate,
+            description: getString.hidePrivateDescription,
             icon: Icons.visibility_off,
             isChecked: PrefManager.getVal(PrefName.anilistHidePrivate),
             onSwitchChange: (value) {
