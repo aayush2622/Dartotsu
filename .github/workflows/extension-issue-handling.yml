@@ -5,9 +5,6 @@ on:
 
 jobs:
   handle-extension-issues:
-    permissions:
-      contents: write
-      issues: write
     runs-on: ubuntu-latest
     steps:
       - name: Fetch Extensions from Repositories
@@ -17,17 +14,24 @@ jobs:
             "https://kodjodevf.github.io/mangayomi-extensions/index.json"
             "https://kodjodevf.github.io/mangayomi-extensions/anime_index.json"
           )
+
           EXTENSIONS_FILE=extensions.txt
           > $EXTENSIONS_FILE
+
           for repo in "${REPOS[@]}"; do
             echo "Fetching from $repo"
             curl -sL "$repo" | jq -r '.[].name' | \
-            sed -E 's/^(Aniyomi:|Tachiyomi:|Mangayomi:)//' | \
+            sed -E 's/^(Aniyomi:|Tachiyomi:)//' | \
             tr '[:upper:]' '[:lower:]' | \
             sed -E 's/[^a-z0-9]//g' >> $EXTENSIONS_FILE
           done
+
           sort -u $EXTENSIONS_FILE -o $EXTENSIONS_FILE
-          echo "extensions_list=$(cat $EXTENSIONS_FILE | tr '\n' '|')" >> $GITHUB_OUTPUT
+
+          EXTENSIONS_LIST=$(paste -sd'|' $EXTENSIONS_FILE)
+          echo "extensions_list=$EXTENSIONS_LIST" >> $GITHUB_OUTPUT
+          echo "Number of Extensions: $(wc -l < $EXTENSIONS_FILE)"  # Added log for number of extensions
+          cat $EXTENSIONS_FILE
 
       - name: Check Issue Content
         if: github.event.action == 'opened'
@@ -39,29 +43,34 @@ jobs:
         run: |
           CLEAN_TITLE=$(echo "$ISSUE_TITLE" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9]//g')
           CLEAN_BODY=$(echo "$ISSUE_BODY" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9]//g')
-          echo "Clean title: $CLEAN_TITLE"
-          echo "Clean body: $CLEAN_BODY"
-          IFS='|' read -ra EXTENSIONS_ARRAY <<< "$EXTENSIONS"
-          
+
+          echo "Cleaned Title: $CLEAN_TITLE"  # Added log for cleaned title
+          echo "Cleaned Body: $CLEAN_BODY"    # Added log for cleaned body
+
           EXTENSION_REGEX_PATTERNS=(
             ".*(extension|extensions|repo|repositories|source|sources|stream|server).*not working.*"
             ".*(extension|extensions|repo|repositories|source|sources|stream|server).*doesn't work.*"
             ".*(extension|extensions|repo|repositories|source|sources|stream|server).*does not work.*"
             ".*(extension|extensions|repo|repositories|source|sources|stream|server).*cant work.*"
             ".*(extension|extensions|repo|repositories|source|sources|stream|server).*can't work.*"
+          
             ".*(no|can't find|cannot find|missing).*extension(s)?.*"
             ".*(no|can't find|cannot find|missing).*repo(s|sitories)?.*"
             ".*(no|can't find|cannot find|missing).*source(s)?.*"
             ".*(no|can't find|cannot find|missing).*stream(s)?.*"
             ".*(no|can't find|cannot find|missing).*server.*"
+          
             ".*(server|stream).*not available.*"
             ".*(server|stream).*unavailable.*"
             ".*(server|stream).*down.*"
+          
             ".*{.*}.*(extension|repo|repositories|source|sources).*not working.*"
             ".*{.*}.*(extension|repo|repositories|source|sources).*issue.*"
             ".*{.*}.*(extension|repo|repositories|source|sources).*problem.*"
+          
             ".*(extension|extensions|repo|repositories|source|sources|stream|server).*not available.*"
             ".*(extension|extensions|repo|repositories|source|sources|stream|server).*missing.*"
+          
             ".*nothing came up.*source.*look elsewhere.*"
             ".*no results.*source.*look somewhere else.*"
             ".*no content.*source.*"
@@ -77,22 +86,22 @@ jobs:
             fi
           done
 
+          # Check if title or body contains extensions
           if [ "$IS_EXTENSION_ISSUE" = false ]; then
-            for ext in "${EXTENSIONS_ARRAY[@]}"; do
-              if [ ! -z "$ext" ]; then
-                echo "Checking extension: $ext"
-                if [[ "$CLEAN_TITLE" == *"$ext"* ]] || [[ "$CLEAN_BODY" == *"$ext"* ]]; then
-                  IS_EXTENSION_ISSUE=true
-                  MATCHED_EXTENSION="$ext"
-                  echo "Found matching extension: $ext"
-                  break
-                fi
+            EXTENSIONS_FILE=extensions.txt
+            while IFS= read -r ext; do
+              if [[ "$CLEAN_TITLE" == *"$ext"* ]] || [[ "$CLEAN_BODY" == *"$ext"* ]]; then
+                IS_EXTENSION_ISSUE=true
+                MATCHED_EXTENSION="$ext"
+                break
               fi
-            done
+            done < "$EXTENSIONS_FILE"
           fi
 
+          echo "Is Extension Issue: $IS_EXTENSION_ISSUE"
+          echo "Matched Extension: $MATCHED_EXTENSION"    
+
           if [ "$IS_EXTENSION_ISSUE" = true ]; then
-            echo "Matched Extension: $MATCHED_EXTENSION"
             echo "is_extension_issue=true" >> $GITHUB_OUTPUT
             echo "detected_extension=$MATCHED_EXTENSION" >> $GITHUB_OUTPUT
           else
@@ -123,21 +132,21 @@ jobs:
               });
             }
 
-            await github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: issueNumber,
-              body: `# Not Our Business!
-                    Dartotsu doesn't maintain extensions.
-                    If the extension doesn't work, we cannot help you.
-                    Contact the owner of the respective repository for extension-related problems.`
-            });
-
             await github.rest.issues.addLabels({
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: issueNumber,
               labels: ['wontfix']
+            });
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issueNumber,
+              body: `# Not Our Business!
+                    Dantotsu doesn't maintain extensions.
+                    If the extension doesn't work, we cannot help you.
+                    Contact the owner of the respective repository for extension-related problems.`
             });
 
             await github.rest.issues.update({
