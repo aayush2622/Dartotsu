@@ -6,6 +6,7 @@ import 'package:dantotsu/Widgets/AlertDialogBuilder.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:dantotsu/Adaptor/Episode/EpisodeAdaptor.dart';
@@ -16,6 +17,9 @@ import 'package:dantotsu/Preferences/HiveDataClasses/DefaultPlayerSettings/Defau
 import 'package:dantotsu/Widgets/CustomBottomDialog.dart';
 import 'package:dantotsu/api/Mangayomi/Eval/dart/model/video.dart' as v;
 import 'package:dantotsu/api/Mangayomi/Model/Source.dart';
+import '../../../../../../Services/ServiceSwitcher.dart';
+import '../../../../../../api/Discord/Discord.dart';
+import '../../../../../../api/Discord/DiscordService.dart';
 import '../../../../../Settings/SettingsPlayerScreen.dart';
 import 'Platform/BasePlayer.dart';
 import 'Player.dart';
@@ -64,15 +68,67 @@ class _PlayerControllerState extends State<PlayerController> {
     _controller = widget.player.videoPlayerController;
     currentQuality = videos[widget.player.widget.index];
     _controller.listenToPlayerStream();
+    _onInit(context);
+  }
+
+  Future<void> _onInit(BuildContext context) async {
+    while (_controller.maxTime.value == '00:00') {
+      await Future.delayed(const Duration(milliseconds: 100));
+    }
+    setRpc();
+    if (context.mounted) {
+      var sourceName = Provider.of<MediaServiceProvider>(context, listen: false)
+          .currentService
+          .getName;
+      var currentProgress = PrefManager.getCustomVal<int>(
+          "${media.id}-${currentEpisode.number}-$sourceName-current");
+      _controller.seek(Duration(seconds: currentProgress ?? 0));
+    }
+    _controller.currentPosition.listen((v) {
+      if (v.inSeconds > 0) {
+        _saveProgress(v.inSeconds);
+      }
+    });
+
+    var list = PrefManager.getCustomVal<List<int>>("continueAnimeList") ?? [];
+    if (list.contains(media.id)) list.remove(media.id);
+
+    list.add(media.id);
+    PrefManager.setCustomVal("continueAnimeList", list);
+  }
+
+  Future<void> _saveProgress(int currentProgress) async {
+    var sourceName = Provider.of<MediaServiceProvider>(context, listen: false)
+        .currentService
+        .getName;
+    var maxProgress = _controller.maxTime.value;
+    PrefManager.setCustomVal<int>(
+        "${media.id}-${currentEpisode.number}-$sourceName-current",
+        currentProgress);
+    PrefManager.setCustomVal<int>(
+        "${media.id}-${currentEpisode.number}-$sourceName-max",
+        _timeStringToSeconds(maxProgress).toInt());
+  }
+
+  Future<void> setRpc() async {
+    Discord.setRpc(
+      media,
+      episode: currentEpisode,
+      eTime: _timeStringToSeconds(
+        _controller.maxTime.value,
+      ).toInt(),
+    );
   }
 
   @override
   void dispose() {
+    DiscordService.stopRPC();
     WakelockPlus.disable();
     super.dispose();
   }
+
   Future initFullScreen() async =>
-    isFullScreen.value = await WindowManager.instance.isFullScreen();
+      isFullScreen.value = await WindowManager.instance.isFullScreen();
 
   String _formatTime(int seconds) {
     final hours = seconds ~/ 3600;
@@ -126,8 +182,10 @@ class _PlayerControllerState extends State<PlayerController> {
         children: [
           Row(
             children: [
-              Text(_controller.currentTime.value,
-                  style: const TextStyle(color: Colors.white),),
+              Text(
+                _controller.currentTime.value,
+                style: const TextStyle(color: Colors.white),
+              ),
               Text(
                 " / ",
                 style: TextStyle(
@@ -536,8 +594,7 @@ class _PlayerControllerState extends State<PlayerController> {
           },
           style: ElevatedButton.styleFrom(
             padding: const EdgeInsets.symmetric(horizontal: 12),
-            backgroundColor:
-                Colors.black.withValues(alpha: 0.2),
+            backgroundColor: Colors.black.withValues(alpha: 0.2),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15),
               side: BorderSide(
@@ -612,7 +669,8 @@ class _PlayerControllerState extends State<PlayerController> {
                   return;
                 }
                 currentQuality = videos[index];
-                _controller.open(currentQuality.url, _controller.currentPosition.value);
+                _controller.open(
+                    currentQuality.url, _controller.currentPosition.value);
                 Get.back();
               },
             );

@@ -70,7 +70,7 @@ class AnimeParser extends BaseParser {
     var chapters = m.chapters;
     var isFirst = true;
     var shouldNormalize = false;
-
+    var additionalIndex=0;
     episodeList.value = Map.fromEntries(
       chapters?.reversed.mapIndexed((index, chapter) {
         final episode = MChapterToEpisode(chapter, media);
@@ -83,13 +83,20 @@ class AnimeParser extends BaseParser {
         }
 
         if (shouldNormalize) {
-          episode.number = (index + 1).toString();
+          if (episode.number.toDouble() % 1 != 0) {
+            additionalIndex--;
+            var remainder = (episode.number.toDouble() % 1).toStringAsFixed(2).toDouble();
+            episode.number = (index + 1 + remainder + additionalIndex).toString();
+          } else {
+            episode.number = (index + 1 + additionalIndex).toString();
+          }
         }
 
         return MapEntry(episode.number, episode);
       }) ??
           [],
     );
+    episodeList.value;
   }
 
   var episodeDataLoaded = false.obs;

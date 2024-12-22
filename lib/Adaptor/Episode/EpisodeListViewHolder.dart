@@ -97,6 +97,7 @@ class EpisodeListView extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
       ),
+      clipBehavior: Clip.hardEdge,
       elevation: 4,
       color: theme.surfaceContainerLowest,
       child: Stack(
@@ -161,8 +162,8 @@ class EpisodeListView extends StatelessWidget {
           handleProgress(
             context: context,
             mediaId: mediaData.id,
-            ep: episode.number.toDouble().toInt(),
-            width: 142,
+            ep: episode.number,
+            width: 162,
           )
         ],
       ),

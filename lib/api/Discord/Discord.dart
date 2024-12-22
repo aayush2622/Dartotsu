@@ -16,7 +16,7 @@ import 'RpcExternalAsset.dart';
 
 const String applicationId = "1163925779692912771";
 const String smallImage =
-    "mp:external/9NqpMxXs4ZNQtMG42L7hqINW92GqqDxgxS9Oh0Sp880/%3Fsize%3D48%26quality%3Dlossless%26name%3DDantotsu/https/cdn.discordapp.com/emojis/1167344924874784828.gif";
+    "https://cdn.discordapp.com/emojis/1305525420938100787.gif?size=48&animated=true&name=dartotsu";
 const String smallImageAniList =
     "mp:external/rHOIjjChluqQtGyL_UHk6Z4oAqiVYlo_B7HSGPLSoUg/%3Fsize%3D128/https/cdn.discordapp.com/icons/210521487378087947/a_f54f910e2add364a3da3bb2f2fce0c72.webp";
 
@@ -81,7 +81,10 @@ class _DiscordController extends GetxController {
   Future<void> setRpc(
     Media mediaData, {
     Episode? episode,
+    int? eTime,
   }) async {
+    if (token.isEmpty) return;
+
     var isAnime = mediaData.anime != null;
     var totalFromSource = isAnime
         ? mediaData.anime!.episodes?.values.last.number
@@ -90,7 +93,7 @@ class _DiscordController extends GetxController {
         ? mediaData.anime?.totalEpisodes.toString()
         : mediaData.manga?.totalChapters.toString() ?? totalFromSource ?? "??";
     DateTime startTime = DateTime.now();
-    DateTime endTime = startTime.add(const Duration(minutes: 24));
+    DateTime endTime = startTime.add(Duration(seconds: eTime?.toInt() ?? 24 * 60));
     int startTimestamp = startTime.millisecondsSinceEpoch;
     int endTimestamp = endTime.millisecondsSinceEpoch;
 
@@ -108,19 +111,19 @@ class _DiscordController extends GetxController {
               'type': 3,
               "timestamps": {"end": endTimestamp, "start": startTimestamp},
               'assets': {
-                'large_image': await mediaData.cover?.getDiscordUrl(),
+                'large_image': await (episode?.thumb ?? mediaData.cover)?.getDiscordUrl(),
                 'large_text': mediaData.userPreferredName,
-                'small_image': smallImage,
-                'small_text': 'Dantotsu',
+                'small_image': await smallImage.getDiscordUrl(),
+                'small_text': 'Dartotsu',
               },
               'buttons': [
                 'View ${isAnime ? 'Anime' : 'Manga'}',
-                '${isAnime ? 'Watch' : 'Read'} on Dantotsu',
+                '${isAnime ? 'Watch' : 'Read'} on Dartotsu',
               ],
               'metadata': {
                 'button_urls': [
                   'https://anilist.co/${isAnime ? 'anime' : 'manga'}/${mediaData.id}',
-                  'https://dantotsu.app/',
+                  'https://github.com/aayush2622/Dartotsu',
                 ],
               },
             },

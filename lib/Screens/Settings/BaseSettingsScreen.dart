@@ -10,6 +10,8 @@ abstract class BaseSettingsScreen<T extends StatefulWidget> extends State<T> {
 
   Widget icon();
 
+  Future<void> onIconPressed() async {}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,19 +63,22 @@ abstract class BaseSettingsScreen<T extends StatefulWidget> extends State<T> {
             top: 124.statusBar(),
             left: 32,
             right: 16,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  title,
-                  style: const TextStyle(
-                    fontSize: 28,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.bold,
+            child: GestureDetector(
+              onTap: onIconPressed,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    title,
+                    style: const TextStyle(
+                      fontSize: 28,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-                icon,
-              ],
+                  icon,
+                ],
+              ),
             ),
           ),
         ],

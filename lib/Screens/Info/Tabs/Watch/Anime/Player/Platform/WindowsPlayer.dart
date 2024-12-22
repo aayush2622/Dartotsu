@@ -58,7 +58,6 @@ class WindowsPlayer extends BasePlayer {
 
   @override
   void listenToPlayerStream() {
-
     videoController.player.stream.position
         .listen((e) => currentTime.value = _formatTime(e.inSeconds));
     videoController.player.stream.duration

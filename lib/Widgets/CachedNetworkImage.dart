@@ -9,7 +9,14 @@ Widget cachedNetworkImage({
   Widget Function(BuildContext, String)? placeholder,
   Widget Function(BuildContext, String, Object)? errorWidget,
 }) {
-  if (imageUrl == null || imageUrl.isEmpty) {
+  if ((imageUrl == null || imageUrl.isEmpty)) {
+    if (placeholder != null ){
+      return SizedBox(
+        width: width,
+        height: height,
+        child: Container(),
+      );
+    }
     return Icon(Icons.image_not_supported, weight: width ?? 24);
   }
   return CachedNetworkImage(

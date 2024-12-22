@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../Preferences/PrefManager.dart';
+import '../../../Services/ServiceSwitcher.dart';
 
 Widget handleProgress({
   required BuildContext context,
   required int mediaId,
-  required int ep,
+  required dynamic ep,
   required double width,
 }) {
-  var currentProgress = PrefManager.getCustomVal<int>("${mediaId}_$ep");
-  var maxProgress = PrefManager.getCustomVal<int>("${mediaId}_${ep}_max");
+  var sourceName= Provider
+      .of<MediaServiceProvider>(context)
+      .currentService.getName;
+  var currentProgress = PrefManager.getCustomVal<int>("$mediaId-$ep-$sourceName-current");
+  var maxProgress = PrefManager.getCustomVal<int>("$mediaId-$ep-$sourceName-max");
   if (currentProgress == null || maxProgress == null || maxProgress == 0) {
     return const SizedBox.shrink();
   }
@@ -18,7 +23,7 @@ Widget handleProgress({
 
   return SizedBox(
     width: width,
-    height: 3,
+    height: 3.4,
     child: Stack(
       children: [
         Container(

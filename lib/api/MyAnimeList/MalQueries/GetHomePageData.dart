@@ -2,7 +2,7 @@ part of '../MalQueries.dart';
 
 extension on MalQueries {
   static const field =
-      "fields=mean,num_list_users,status,nsfw,mean,my_list_status,num_episodes,num_chapters,genres";
+      "fields=mean,num_list_users,status,nsfw,mean,my_list_status,num_episodes,num_chapters,genres,media_type";
 
   Future<Map<String, List<Media>>> _initHomePage() async {
     try {

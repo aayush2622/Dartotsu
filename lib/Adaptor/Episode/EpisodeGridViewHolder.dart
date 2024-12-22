@@ -6,6 +6,7 @@ import 'package:dantotsu/Theme/ThemeProvider.dart';
 import '../../DataClass/Episode.dart';
 import '../../DataClass/Media.dart';
 import '../../Theme/Colors.dart';
+import 'Widget/HandleProgress.dart';
 
 class EpisodeCardView extends StatelessWidget {
   final Episode episode;
@@ -24,8 +25,6 @@ class EpisodeCardView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context).colorScheme;
-    final themeManager = Provider.of<ThemeNotifier>(context);
-    final isDark = themeManager.isDarkMode;
 
     Color cardColor = isWatched
         ? theme.surface.withOpacity(0.5)
@@ -36,9 +35,11 @@ class EpisodeCardView extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
       ),
+      clipBehavior: Clip.hardEdge,
       elevation: 4,
       color: cardColor,
       child: Stack(
+        alignment: Alignment.bottomCenter,
         children: [
           _buildBackgroundImage(context),
           if (episode.filler ?? false) _fillerColor(context),
@@ -46,6 +47,12 @@ class EpisodeCardView extends StatelessWidget {
           if (isWatched) _buildWatchedOverlay(context),
           if (isWatched) _buildWatchedIcon(context),
           _buildNumber(context),
+          handleProgress(
+            context: context,
+            mediaId: mediaData.id,
+            ep: episode.number,
+            width: 162,
+          )
         ],
       ),
     );

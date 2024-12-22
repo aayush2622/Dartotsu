@@ -1,5 +1,12 @@
+import 'package:dantotsu/DataClass/Episode.dart';
+import 'package:dantotsu/Functions/Function.dart';
+import 'package:dantotsu/api/Mangayomi/Eval/dart/model/video.dart';
+import 'package:dantotsu/api/Mangayomi/Model/Source.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import '../../Adaptor/Settings/SettingsAdaptor.dart';
+import '../../DataClass/Anime.dart';
+import '../../DataClass/Media.dart';
 import '../../DataClass/Setting.dart';
 import '../../Preferences/HiveDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
 import '../../Preferences/PrefManager.dart';
@@ -7,6 +14,7 @@ import '../../Preferences/Preferences.dart';
 import '../../Theme/CustomColorPicker.dart';
 import '../../Widgets/AlertDialogBuilder.dart';
 import '../../Theme/LanguageSwitcher.dart';
+import '../Info/Tabs/Watch/Anime/Player/Player.dart';
 import 'BaseSettingsScreen.dart';
 
 class SettingsPlayerScreen extends StatefulWidget {
@@ -34,11 +42,13 @@ class SettingsPlayerScreenState extends BaseSettingsScreen {
   List<Widget> get settingsList {
     return playerSettings(context, setState);
   }
+
+  @override
+  Future<void> onIconPressed() async => openPlayer(context);
 }
 
 List<Widget> playerSettings(
     BuildContext context, void Function(void Function()) setState) {
-
   void savePlayerSettings(PlayerSettings playerSettings) =>
       PrefManager.setVal(PrefName.playerSettings, playerSettings);
 
@@ -230,7 +240,6 @@ List<Widget> playerSettings(
             }
           },
         ),
-
         Setting(
           type: SettingType.normal,
           name: getString.outlineColor,
@@ -259,7 +268,8 @@ List<Widget> playerSettings(
           style: TextStyle(
             fontSize: playerSettings.subtitleSize.toDouble(),
             fontFamily: playerSettings.subtitleFont,
-            fontWeight: FontWeight.values[playerSettings.subtitleWeight.toInt()],
+            fontWeight:
+                FontWeight.values[playerSettings.subtitleWeight.toInt()],
             backgroundColor: Color(
               playerSettings.subtitleBackgroundColor,
             ),
@@ -286,6 +296,60 @@ List<Widget> playerSettings(
       ],
     ),
   ];
+}
+
+Future<void> openPlayer(BuildContext context) async {
+  const allowedExtensions = [
+    'mp4',
+    'mkv',
+    'webm',
+    'avi',
+    'mov',
+    'wmv',
+    'flv',
+    'm4v',
+    '3gp',
+    'mpg',
+    'mpeg',
+    'ogv',
+    'ts',
+    'm3u8',
+  ];
+
+  final result = await FilePicker.platform.pickFiles(
+    type: FileType.custom,
+    allowedExtensions: allowedExtensions,
+  );
+
+  if (result == null) return;
+
+  final pickedFile = result.files.first;
+
+  if (!context.mounted) return;
+
+  final episode = Episode(number: '1', title: pickedFile.name);
+  final media = Media(
+    id: 1,
+    nameRomaji: 'Local',
+    userPreferredName: 'Local',
+    isAdult: false,
+    anime: Anime(
+      playerSettings: PrefManager.getVal(PrefName.playerSettings),
+      episodes: {'1': episode},
+    ),
+  );
+
+  navigateToPage(
+    context,
+    MediaPlayer(
+      isOffline: true,
+      videos: [Video(pickedFile.path!, 'Media', pickedFile.path!)],
+      currentEpisode: episode,
+      index: 0,
+      source: Source(),
+      media: media,
+    ),
+  );
 }
 
 List<String> speedMap(bool cursed) => cursed

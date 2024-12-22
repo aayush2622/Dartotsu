@@ -34,7 +34,7 @@ class MediaPlayer extends StatefulWidget {
   final List<v.Video> videos;
   final Episode currentEpisode;
   final Source source;
-
+  final bool isOffline;
   const MediaPlayer({
     super.key,
     required this.media,
@@ -42,6 +42,7 @@ class MediaPlayer extends StatefulWidget {
     required this.videos,
     required this.currentEpisode,
     required this.source,
+    this.isOffline = false,
   });
 
   @override
@@ -66,7 +67,13 @@ class MediaPlayerState extends State<MediaPlayer>
   void initState() {
     super.initState();
     focusNode.requestFocus();
-    _loadPlayerSettings();
+    if (!widget.isOffline) {
+      _loadPlayerSettings();
+    } else{
+      resizeMode = BoxFit.contain.obs;
+      settings = widget.media.anime!.playerSettings!;
+    }
+
     _initializePlayer();
     _leftAnimationController = AnimationController(
       duration: const Duration(milliseconds: 1000),
@@ -118,15 +125,16 @@ class MediaPlayerState extends State<MediaPlayer>
 
   @override
   void dispose() {
+    super.dispose();
+    videoPlayerController.dispose();
     _hideCursorTimer?.cancel();
     _leftAnimationController.dispose();
     _rightAnimationController.dispose();
-    videoPlayerController.dispose();
+
     focusNode.dispose();
     if (Platform.isAndroid || Platform.isIOS) {
       _setLandscapeMode(false);
     }
-    super.dispose();
   }
 
   void _setLandscapeMode(bool state) {
@@ -468,6 +476,7 @@ class MediaPlayerState extends State<MediaPlayer>
   }
 
   Widget _buildEpisodeList() {
+
     Map<String, Episode> episodeList = widget.media.anime?.episodes ?? {};
     var (chunk, selected) =
         buildChunks(context, episodeList, widget.media.userProgress.toString());
