@@ -1,10 +1,13 @@
 import 'package:dantotsu/Screens/Info/Tabs/Watch/BaseParser.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../../Adaptor/Chapter/ChapterAdaptor.dart';
 import '../../../../../DataClass/Media.dart';
 import '../BaseWatchScreen.dart';
 import 'MangaParser.dart';
+import 'Widget/BuildChunkSelector.dart';
+import 'Widget/ContinueCard.dart';
 
 class MangaWatchScreen extends StatefulWidget {
   final Media mediaData;
@@ -29,8 +32,108 @@ class MangaWatchScreenState extends BaseWatchScreen<MangaWatchScreen> {
     super.initState();
     _viewModel = Get.put(MangaParser(), tag: widget.mediaData.id.toString());
     widget.mediaData.selected = _viewModel.loadSelected(widget.mediaData);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _viewModel.init(widget.mediaData);
+    });
   }
 
   @override
-  get widgetList => [];
+  get widgetList => [_buildChapterList()];
+
+  Widget _buildChapterList() {
+    return Obx(() {
+      var chapterList = _viewModel.chapterList.value;
+      if (chapterList == null || chapterList.isEmpty) {
+        return const Center(child: CircularProgressIndicator());
+      }
+
+      var (chunks, selectedChunkIndex) = buildChunks(
+          context, chapterList, widget.mediaData.userProgress.toString());
+      var selectedChapter = chapterList.firstWhereOrNull((element) => element.number == ((widget.mediaData.userProgress ?? 0) + 1).toString());
+      return Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildTitle(),
+          ContinueCard(
+            mediaData: widget.mediaData,
+            chapter: selectedChapter,
+            source: _viewModel.source.value!,
+          ),
+          buildChunkSelector(context, chunks, selectedChunkIndex),
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 18, vertical: 4),
+            child: Obx(() => ChapterAdaptor(
+              type: _viewModel.viewType.value,
+              source: _viewModel.source.value!,
+              chapterList: chunks[selectedChunkIndex.value],
+              mediaData: widget.mediaData,
+            )),
+          )
+        ],
+      );
+    });
+  }
+
+  Widget _buildTitle() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 2),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const Text(
+            'Chapter',
+            style: TextStyle(
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+            ),
+            overflow: TextOverflow.ellipsis,
+            maxLines: 1,
+          ),
+          _buildIconButtons(),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildIconButtons() {
+    final theme = Theme.of(context).colorScheme;
+    final icons = [
+      Icons.view_list_sharp,
+      Icons.view_comfy_rounded,
+    ];
+    var viewType = _viewModel.viewType;
+
+    return Obx(() {
+      return Row(
+        children: List.generate(icons.length, (index) {
+          return Padding(
+            padding: const EdgeInsets.only(left: 10),
+            child: IconButton(
+              icon: Transform(
+                alignment: Alignment.center,
+                transform: index == 0
+                    ? Matrix4.rotationY(3.14159)
+                    : Matrix4.identity(),
+                child: Icon(icons[index]),
+              ),
+              iconSize: 24,
+              color: viewType.value == index
+                  ? theme.onSurface
+                  : theme.onSurface.withValues(alpha: 0.33),
+              onPressed: () => changeViewType(viewType, index),
+            ),
+          );
+        }),
+      );
+    });
+  }
+
+  void changeViewType(RxInt viewType, int index) {
+    var type = _viewModel.loadSelected(mediaData);
+    viewType.value = index;
+    type.recyclerStyle = index;
+    _viewModel.saveSelected(mediaData.id, type);
+  }
 }

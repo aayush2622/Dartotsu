@@ -11,6 +11,7 @@ import '../../DataClass/Media.dart';
 import '../../Screens/Info/Tabs/Watch/Anime/Player/Player.dart';
 import '../../Widgets/CustomBottomDialog.dart';
 import '../../api/Mangayomi/Model/Source.dart';
+import 'EpisodeCompactViewHolder.dart';
 import 'EpisodeListViewHolder.dart';
 import 'EpisodeGridViewHolder.dart';
 
@@ -59,9 +60,9 @@ class EpisodeAdaptorState extends State<EpisodeAdaptor> {
       case 1:
         return _buildGridLayout();
       case 2:
-        return const SizedBox();
+        return _buildCompactView();
       default:
-        return const SizedBox();
+        return _buildListLayout();
     }
   }
 
@@ -138,6 +139,54 @@ class EpisodeAdaptorState extends State<EpisodeAdaptor> {
                         width: 180,
                         height: 120,
                         child: EpisodeCardView(
+                          episode: episodeList[index],
+                          mediaData: widget.mediaData,
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+  Widget _buildCompactView(){
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final parentWidth = constraints.maxWidth;
+        var crossAxisCount = (parentWidth / 82).floor();
+        if (crossAxisCount < 1) crossAxisCount = 1;
+        return AnimatedSwitcher(
+          duration: const Duration(milliseconds: 500),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
+            child: StaggeredGrid.count(
+              crossAxisCount: crossAxisCount,
+              children: List.generate(
+                episodeList.length,
+                    (index) {
+                  return SlideAndScaleAnimation(
+                    initialScale: 0.0,
+                    finalScale: 1.0,
+                    initialOffset: const Offset(1.0, 0.0),
+                    finalOffset: Offset.zero,
+                    duration: const Duration(milliseconds: 200),
+                    child: GestureDetector(
+                      onTap: () => onEpisodeClick(
+                        context,
+                        episodeList[index],
+                        widget.source,
+                        widget.mediaData,
+                        widget.onEpisodeClick,
+                      ),
+                      onLongPress: () {},
+                      child: SizedBox(
+                        width: 82,
+                        height: 82,
+                        child: EpisodeCompactView(
                           episode: episodeList[index],
                           mediaData: widget.mediaData,
                         ),

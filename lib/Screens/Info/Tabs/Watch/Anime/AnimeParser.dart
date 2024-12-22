@@ -96,7 +96,6 @@ class AnimeParser extends BaseParser {
       }) ??
           [],
     );
-    episodeList.value;
   }
 
   var episodeDataLoaded = false.obs;

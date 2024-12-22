@@ -83,13 +83,13 @@ class _PlayerControllerState extends State<PlayerController> {
       var currentProgress = PrefManager.getCustomVal<int>(
           "${media.id}-${currentEpisode.number}-$sourceName-current");
       _controller.seek(Duration(seconds: currentProgress ?? 0));
-    }
-    _controller.currentPosition.listen((v) {
-      if (v.inSeconds > 0) {
-        _saveProgress(v.inSeconds);
-      }
-    });
 
+      _controller.currentPosition.listen((v) {
+        if (v.inSeconds > 0) {
+          _saveProgress(v.inSeconds);
+        }
+      });
+    }
     var list = PrefManager.getCustomVal<List<int>>("continueAnimeList") ?? [];
     if (list.contains(media.id)) list.remove(media.id);
 

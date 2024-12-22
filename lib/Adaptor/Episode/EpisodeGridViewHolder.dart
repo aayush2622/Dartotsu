@@ -42,10 +42,11 @@ class EpisodeCardView extends StatelessWidget {
         alignment: Alignment.bottomCenter,
         children: [
           _buildBackgroundImage(context),
-          if (episode.filler ?? false) _fillerColor(context),
+
           _buildEpisodeInfo(context),
           if (isWatched) _buildWatchedOverlay(context),
           if (isWatched) _buildWatchedIcon(context),
+          if (episode.filler ?? false) _fillerColor(context),
           _buildNumber(context),
           handleProgress(
             context: context,
@@ -60,13 +61,10 @@ class EpisodeCardView extends StatelessWidget {
   Widget _fillerColor(BuildContext context) {
     final themeManager = Provider.of<ThemeNotifier>(context);
     final isDark = themeManager.isDarkMode;
-    var color= !(episode.filler ?? false)
-        ? (isDark ? fillerDark : fillerLight)
-        : Colors.transparent;
-    return Card(
-      elevation: 4,
-      color: color,
-      child: Container()
+    return  Positioned(
+      child: Container(
+        color: isDark ? fillerDark : fillerLight,
+      ),
     );
   }
   Widget _buildNumber(BuildContext context) {

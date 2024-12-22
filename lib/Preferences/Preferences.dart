@@ -77,6 +77,8 @@ class PrefName {
       Pref(Location.General, 'NSFWExtensions', true);
   static const Pref<int> AnimeDefaultView =
       Pref(Location.General, 'AnimeDefaultView', 0);
+  static const Pref<int> MangaDefaultView =
+      Pref(Location.General, 'MangaDefaultView', 0);
 
   //manga page
   static const Pref<Map<String, bool>> anilistMangaLayout =

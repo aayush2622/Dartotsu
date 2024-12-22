@@ -22,7 +22,7 @@ import '../../../../../../api/Mangayomi/Eval/dart/model/video.dart' as v;
 import '../../../../../../api/Mangayomi/Model/Source.dart';
 import '../../../../../Settings/SettingsPlayerScreen.dart';
 
-import '../../Widgets/BuildChunkSelector.dart';
+import '../Widget/BuildChunkSelector.dart';
 import 'Platform/BasePlayer.dart';
 import 'Platform/WindowsPlayer.dart';
 import 'PlayerController.dart';

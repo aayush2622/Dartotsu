@@ -6,8 +6,8 @@ import 'package:get/get.dart';
 
 import '../../../../../Adaptor/Episode/EpisodeAdaptor.dart';
 import '../../../../../DataClass/Episode.dart';
-import '../Widgets/BuildChunkSelector.dart';
-import '../Widgets/ContinueCard.dart';
+import 'Widget/BuildChunkSelector.dart';
+import 'Widget/ContinueCard.dart';
 import 'AnimeParser.dart';
 
 class AnimeWatchScreen extends StatefulWidget {
