@@ -113,8 +113,7 @@ class EpisodeAdaptorState extends State<EpisodeAdaptor> {
         return AnimatedSwitcher(
           duration: const Duration(milliseconds: 500),
           child: Padding(
-            padding:
-                const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
+            padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
             child: StaggeredGrid.count(
               crossAxisCount: crossAxisCount,
               children: List.generate(

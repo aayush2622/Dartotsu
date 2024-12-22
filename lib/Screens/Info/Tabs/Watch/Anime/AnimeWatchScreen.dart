@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import '../../../../../Adaptor/Episode/EpisodeAdaptor.dart';
 import '../../../../../DataClass/Episode.dart';
 import '../Widgets/BuildChunkSelector.dart';
+import '../Widgets/ContinueCard.dart';
 import 'AnimeParser.dart';
 
 class AnimeWatchScreen extends StatefulWidget {
@@ -54,24 +55,30 @@ class AnimeWatchScreenState extends BaseWatchScreen<AnimeWatchScreen> {
       }
 
       updateEpisodeDetails(episodeList);
-      var (chunks, selectedChunkIndex) =
-      buildChunks(context, episodeList, widget.mediaData.userProgress.toString());
 
+      var (chunks, selectedChunkIndex) = buildChunks(
+          context, episodeList, widget.mediaData.userProgress.toString());
+
+      var selectedEpisode = episodeList[((widget.mediaData.userProgress ?? 0) + 1).toString()];
       return Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _buildTitle(),
-          buildChunkSelector(context,chunks, selectedChunkIndex),
+          ContinueCard(
+            mediaData: widget.mediaData,
+            episode: selectedEpisode,
+            source: _viewModel.source.value!,
+          ),
+          buildChunkSelector(context, chunks, selectedChunkIndex),
           Container(
-            margin:
-            const EdgeInsets.symmetric(horizontal: 18, vertical: 4),
+            margin: const EdgeInsets.symmetric(horizontal: 18, vertical: 4),
             child: Obx(() => EpisodeAdaptor(
-              type: _viewModel.viewType.value,
-              source: _viewModel.source.value!,
-              episodeList: chunks[selectedChunkIndex.value],
-              mediaData: widget.mediaData,
-            )),
+                  type: _viewModel.viewType.value,
+                  source: _viewModel.source.value!,
+                  episodeList: chunks[selectedChunkIndex.value],
+                  mediaData: widget.mediaData,
+                )),
           )
         ],
       );
@@ -80,7 +87,7 @@ class AnimeWatchScreenState extends BaseWatchScreen<AnimeWatchScreen> {
 
   Widget _buildTitle() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 2),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
