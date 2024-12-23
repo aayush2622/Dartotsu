@@ -5,7 +5,6 @@ import 'dart:math';
 import 'package:dantotsu/Preferences/HiveDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
 import 'package:dantotsu/Preferences/PrefManager.dart';
 import 'package:dantotsu/Preferences/Preferences.dart';
-import 'package:dantotsu/Screens/Info/Tabs/Watch/Anime/Player/Platform/AndroidPlayer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -26,6 +25,7 @@ import '../../../../../Settings/SettingsPlayerScreen.dart';
 import '../Widget/BuildChunkSelector.dart';
 import 'Platform/BasePlayer.dart';
 import 'Platform/WindowsPlayer.dart';
+import 'Platform/AndroidPlayer.dart';
 import 'PlayerController.dart';
 import 'Widgets/Indicator.dart';
 
