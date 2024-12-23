@@ -142,10 +142,13 @@ jobs:
       #clean flutter when needed
       - name: Cleaning Flutter if needed
         id: check_noping
+        shell: pwsh
         run: |
-          if [[ "${{ github.event.head_commit.message }}" == *"[clean]"* ]]; then 
-            flutter clean 
-          fi
+          if ("${{ github.event.head_commit.message }}" -like "*[clean]*") {
+            flutter clean
+          }
+
+
 
       # Enable Windows desktop support
       - name: Enable Windows desktop support
