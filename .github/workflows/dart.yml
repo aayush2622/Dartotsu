@@ -127,12 +127,25 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-flutter-
 
+      - name: Set up Signing Tool
+        run: |
+          mkdir $env:USERPROFILE\certs
+          [System.IO.File]::WriteAllBytes("$env:USERPROFILE\certs\Dartotsu.pfx", [Convert]::FromBase64String("${{secrets.PFX_FILE}}"))
+
       # Setup Flutter with caching
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
           flutter-version: 3.27.1
           cache: true
+
+      #clean flutter when needed
+      - name: Cleaning Flutter if needed
+        id: check_noping
+        run: |
+          if [[ "${{ github.event.head_commit.message }}" == *"[clean]"* ]]; then 
+            flutter clean 
+          fi
 
       # Enable Windows desktop support
       - name: Enable Windows desktop support
@@ -141,29 +154,24 @@ jobs:
       # Get dependencies with cached packages
       - run: flutter pub get
 
-      # Build Windows executable with optimizations
-      - run: flutter build windows --release
+      - name: Extract Version
+        id: get_version
+        run: |
+          $version = (Get-Content pubspec.yaml | Select-String -Pattern 'version: ([\d.]+)').Matches.Groups[1].Value
+          echo "version=$version" >> $env:GITHUB_ENV
 
-      # Archive the release
-      - name: Archive App
-        uses: thedoctor0/zip-release@master
-        with:
-          type: "zip"
-          filename: Dantotsu_Windows_${{github.ref_name}}.zip
-          directory: build\windows\x64\runner\Release
+      - name: Build and Sign Setup
+        run: |
+          dart run inno_bundle:build --sign-tool-params '"C:\Program Files (x86)\Windows Kits\10\bin\10.0.19041.0\x64\signtool.exe" sign /fd sha256 /f "C:\Users\runneradmin\certs\Dartotsu.pfx" /p "${{secrets.PFX_PASSWORD}}" /t http://timestamp.digicert.com /v $f' --release
 
-      # Verify archive creation
-      - name: List Release Directory
-        run: ls build\windows\x64\runner\Release
-        shell: pwsh
 
       # Upload to Google Drive
       - name: Upload File To Google Drive
         id: gdriveUpload
         uses: hoatruongdev09/google-drive-file-upload-github-action@v1.1
         with:
-          file-path: build/windows/x64/runner/Release/Dantotsu_Windows_${{github.ref_name}}.zip
-          upload-name: Dartotsu_windows.zip
+          file-path: build\windows\x64\installer\Release\Dartotsu-x86_64-${{env.vesrion}}-Installer.exe
+          upload-name: Dartotsu_windows.exe
           upload-to-folder-id: 1nWYex54zd58SVitJUCva91_4k1PPTdP3
           service-account-json: "${{secrets.GOOGLE_KEY}}"
           overrwrite: true
