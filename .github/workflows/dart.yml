@@ -173,7 +173,7 @@ jobs:
         id: gdriveUpload
         uses: hoatruongdev09/google-drive-file-upload-github-action@v1.1
         with:
-          file-path: build\windows\x64\installer\Release\Dartotsu-x86_64-${{env.vesrion}}-Installer.exe
+          file-path: build\windows\x64\installer\Release\Dartotsu-x86_64-${{env.version}}-Installer.exe
           upload-name: Dartotsu_windows.exe
           upload-to-folder-id: 1nWYex54zd58SVitJUCva91_4k1PPTdP3
           service-account-json: "${{secrets.GOOGLE_KEY}}"
