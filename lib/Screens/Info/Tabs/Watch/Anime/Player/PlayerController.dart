@@ -64,7 +64,7 @@ class _PlayerControllerState extends State<PlayerController> {
     settings = media.anime!.playerSettings!;
     fitType = settings.resizeMode;
     WakelockPlus.enable();
-    initFullScreen();
+    if (!widget.player.isMobile) initFullScreen();
     _controller = widget.player.videoPlayerController;
     currentQuality = videos[widget.player.widget.index];
     _controller.listenToPlayerStream();

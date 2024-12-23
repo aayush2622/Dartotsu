@@ -5,6 +5,7 @@ import 'dart:math';
 import 'package:dantotsu/Preferences/HiveDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
 import 'package:dantotsu/Preferences/PrefManager.dart';
 import 'package:dantotsu/Preferences/Preferences.dart';
+import 'package:dantotsu/Screens/Info/Tabs/Watch/Anime/Player/Platform/AndroidPlayer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -107,7 +108,11 @@ class MediaPlayerState extends State<MediaPlayer>
 
   void _initializePlayer() {
     currentQuality = widget.videos[widget.index];
-    videoPlayerController = WindowsPlayer(resizeMode, settings);
+    if (PrefManager.getCustomVal<bool>('tempPlayer') ?? false) {
+      videoPlayerController = AndroidPlayer();
+    } else {
+      videoPlayerController = WindowsPlayer(resizeMode, settings);
+    }
     videoPlayerController.open(currentQuality.url, Duration.zero);
   }
 

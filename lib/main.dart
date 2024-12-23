@@ -27,6 +27,7 @@ import 'Theme/ThemeManager.dart';
 import 'Theme/ThemeProvider.dart';
 import 'api/Discord/Discord.dart';
 import 'api/TypeFactory.dart';
+import 'package:fvp/fvp.dart' as fvp;
 late Isar isar;
 
 void main(List<String> args) async {
@@ -54,7 +55,7 @@ Future init() async {
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
     await WindowManager.instance.ensureInitialized();
   }
-  
+  fvp.registerWith();
   TypeFactory.registerAllTypes();
   GetMediaIDs.getData();
   initializeDateFormatting();

@@ -6,10 +6,10 @@ import '../../../../../../DataClass/Chapter.dart';
 import '../../../../../../Widgets/ScrollConfig.dart';
 
 (List<List<Chapter>> chunks, RxInt selectedChunkIndex) buildChunks(
-    BuildContext context,
-    List<Chapter> chapterList,
-    String selectedEpisode,
-    ) {
+  BuildContext context,
+  List<Chapter> chapterList,
+  String selectedEpisode,
+) {
   final chunks = _chunkEpisodes(chapterList, _calculateChunkSize(chapterList));
   final selectedChunkIndex = _findSelectedChunkIndex(
     chunks,
@@ -24,20 +24,19 @@ int _calculateChunkSize(List<Chapter> chapterList) {
   return (divisions < 25)
       ? 25
       : (divisions < 50)
-      ? 50
-      : 100;
+          ? 50
+          : 100;
 }
 
-List<List<Chapter>> _chunkEpisodes(
-List<Chapter> chapterList, int chunkSize) {
+List<List<Chapter>> _chunkEpisodes(List<Chapter> chapterList, int chunkSize) {
   return List.generate(
       (chapterList.length / chunkSize).ceil(),
-          (index) => chapterList.sublist(
-        index * chunkSize,
-        (index + 1) * chunkSize > chapterList.length
-            ? chapterList.length
-            : (index + 1) * chunkSize,
-      ));
+      (index) => chapterList.sublist(
+            index * chunkSize,
+            (index + 1) * chunkSize > chapterList.length
+                ? chapterList.length
+                : (index + 1) * chunkSize,
+          ));
 }
 
 RxInt _findSelectedChunkIndex(
@@ -50,11 +49,13 @@ RxInt _findSelectedChunkIndex(
   }
   return 0.obs;
 }
+
 Widget buildChunkSelector(
-    BuildContext context,
-    List<List<Chapter>> chunks,
-    RxInt selectedChunkIndex,
-    ) {
+  BuildContext context,
+  List<List<Chapter>> chunks,
+  RxInt selectedChunkIndex,
+    RxBool isReversed,
+) {
   if (chunks.length < 2) {
     return const SizedBox();
   }
@@ -65,19 +66,21 @@ Widget buildChunkSelector(
       child: Row(
         children: List.generate(
           chunks.length,
-              (index) {
+          (index) {
             return Padding(
               padding: EdgeInsets.only(
                   left: index == 0 ? 32.0 : 6.0,
                   right: index == chunks.length - 1 ? 32.0 : 6.0),
               child: Obx(
-                    () => ChoiceChip(
+                () => ChoiceChip(
                   showCheckmark: false,
                   label: Text(
-                      '${chunks[index].first.number} - ${chunks[index].last.number}',
-                      style: const TextStyle(
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.bold)),
+                    !isReversed.value
+                        ? '${chunks[index].first.number} - ${chunks[index].last.number}'
+                        : '${chunks[index].last.number} - ${chunks[index].first.number}',
+                    style: const TextStyle(
+                        fontFamily: 'Poppins', fontWeight: FontWeight.bold),
+                  ),
                   selected: selectedChunkIndex.value == index,
                   onSelected: (bool selected) {
                     if (selected) {

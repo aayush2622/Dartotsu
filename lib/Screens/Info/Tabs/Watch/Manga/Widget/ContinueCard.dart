@@ -1,10 +1,8 @@
 import 'package:dantotsu/Widgets/CachedNetworkImage.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../../Adaptor/Episode/EpisodeAdaptor.dart';
 import '../../../../../../Adaptor/Episode/Widget/HandleProgress.dart';
 import '../../../../../../DataClass/Chapter.dart';
-import '../../../../../../DataClass/Episode.dart';
 import '../../../../../../DataClass/Media.dart';
 import '../../../../../../api/Mangayomi/Model/Source.dart';
 

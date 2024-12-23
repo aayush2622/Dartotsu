@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 Widget ScrollConfig(BuildContext context, {required Widget child}) {
   return ScrollConfiguration(
     behavior: ScrollConfiguration.of(context).copyWith(
+      physics: const BouncingScrollPhysics(),
       dragDevices: {
         PointerDeviceKind.touch,
         PointerDeviceKind.mouse,

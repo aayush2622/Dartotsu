@@ -55,9 +55,9 @@ class _DiscordController extends GetxController {
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 32.0),
           child: Text(
-            "By logging in, your discord will now show what you are watching & reading on Dantotsu\n\n\n"
-            "If you are on invisible mode, logging in will make you online, when you open Dantotsu.\n\n"
-            "This does break the Discord TOS. \nAlthough Discord has never banned anyone for using Custom Rich Presence(what Dantotsu uses), You have still been warned.\n\nDantotsu is not responsible for anything that happens to your account.",
+            "By logging in, your discord will now show what you are watching & reading on Dartotsu\n\n\n"
+            "If you are on invisible mode, logging in will make you online, when you open Dartotsu.\n\n"
+            "This does break the Discord TOS. \nAlthough Discord has never banned anyone for using Custom Rich Presence(what Dartotsu uses), You have still been warned.\n\nDantotsu is not responsible for anything that happens to your account.",
           ),
         )
       ],

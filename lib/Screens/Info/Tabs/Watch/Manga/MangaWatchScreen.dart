@@ -1,8 +1,10 @@
 import 'package:dantotsu/Screens/Info/Tabs/Watch/BaseParser.dart';
+import 'package:dantotsu/Widgets/AlertDialogBuilder.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../../Adaptor/Chapter/ChapterAdaptor.dart';
+import '../../../../../DataClass/Chapter.dart';
 import '../../../../../DataClass/Media.dart';
 import '../BaseWatchScreen.dart';
 import 'MangaParser.dart';
@@ -39,40 +41,69 @@ class MangaWatchScreenState extends BaseWatchScreen<MangaWatchScreen> {
 
   @override
   get widgetList => [_buildChapterList()];
+  var isReversed = true.obs;
 
   Widget _buildChapterList() {
-    return Obx(() {
-      var chapterList = _viewModel.chapterList.value;
-      if (chapterList == null || chapterList.isEmpty) {
-        return const Center(child: CircularProgressIndicator());
-      }
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _buildTitle(),
+        Obx(() {
+          var chapterList = _viewModel.chapterList.value;
+          if (chapterList == null || chapterList.isEmpty) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          var (chunks, initChunkIndex) = buildChunks(
+              context, chapterList, widget.mediaData.userProgress.toString());
+          var selectedChapter = chapterList.firstWhereOrNull((element) =>
+              element.number ==
+              ((widget.mediaData.userProgress ?? 0) + 1).toString());
 
-      var (chunks, selectedChunkIndex) = buildChunks(
-          context, chapterList, widget.mediaData.userProgress.toString());
-      var selectedChapter = chapterList.firstWhereOrNull((element) => element.number == ((widget.mediaData.userProgress ?? 0) + 1).toString());
-      return Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _buildTitle(),
-          ContinueCard(
-            mediaData: widget.mediaData,
-            chapter: selectedChapter,
-            source: _viewModel.source.value!,
-          ),
-          buildChunkSelector(context, chunks, selectedChunkIndex),
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 18, vertical: 4),
-            child: Obx(() => ChapterAdaptor(
-              type: _viewModel.viewType.value,
-              source: _viewModel.source.value!,
-              chapterList: chunks[selectedChunkIndex.value],
-              mediaData: widget.mediaData,
-            )),
-          )
-        ],
-      );
-    });
+          RxInt selectedChunkIndex = (-1).obs;
+          selectedChunkIndex = selectedChunkIndex.value == -1
+              ? initChunkIndex
+              : selectedChunkIndex;
+
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ContinueCard(
+                mediaData: widget.mediaData,
+                chapter: selectedChapter,
+                source: _viewModel.source.value!,
+              ),
+              buildChunkSelector(
+                context,
+                chunks,
+                selectedChunkIndex,
+                isReversed,
+              ),
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 18, vertical: 4),
+                child: Obx(() {
+                  List<List<Chapter>> reversed;
+                  if (isReversed.value) {
+                    reversed = chunks
+                        .map((element) => element.reversed.toList())
+                        .toList();
+                  } else {
+                    reversed = chunks;
+                  }
+                  return ChapterAdaptor(
+                    type: _viewModel.viewType.value,
+                    source: _viewModel.source.value!,
+                    chapterList: reversed[selectedChunkIndex.value],
+                    mediaData: widget.mediaData,
+                  );
+                }),
+              )
+            ],
+          );
+        })
+      ],
+    );
   }
 
   Widget _buildTitle() {
@@ -81,7 +112,7 @@ class MangaWatchScreenState extends BaseWatchScreen<MangaWatchScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Text(
+          Expanded(child: const Text(
             'Chapter',
             style: TextStyle(
               fontFamily: 'Poppins',
@@ -90,7 +121,19 @@ class MangaWatchScreenState extends BaseWatchScreen<MangaWatchScreen> {
             ),
             overflow: TextOverflow.ellipsis,
             maxLines: 1,
+          ),),
+          IconButton(
+            onPressed: () => toggleScanlators(),
+            icon: Icon(Icons.filter_list,),
           ),
+          Obx(() {
+            return IconButton(
+              onPressed: () => isReversed.value = !isReversed.value,
+              icon: Icon(isReversed.value
+                  ? Icons.arrow_downward
+                  : Icons.arrow_upward,),
+            );
+          }),
           _buildIconButtons(),
         ],
       ),
@@ -128,6 +171,51 @@ class MangaWatchScreenState extends BaseWatchScreen<MangaWatchScreen> {
         }),
       );
     });
+  }
+
+  var chapters = <Chapter>[];
+  var selectedScanlators = <bool>[];
+  var init = true;
+
+  void toggleScanlators() {
+    var chapterList = init ? _viewModel.chapterList.value : chapters;
+    if (chapterList == null || chapterList.isEmpty) return;
+
+    if (init) {
+      chapters = chapterList;
+      init = false;
+    }
+
+    var uniqueScanlators = {
+      for (var element in chapters)
+        if (element.mChapter?.scanlator != null) element.mChapter!.scanlator!
+    };
+    var allScanlators = uniqueScanlators.toList();
+
+    selectedScanlators = selectedScanlators.isEmpty
+        ? List<bool>.filled(allScanlators.length, true)
+        : selectedScanlators;
+
+    var tempList = <bool>[];
+    AlertDialogBuilder(context)
+      ..setTitle('Scanlators')
+      ..multiChoiceItems(
+        allScanlators,
+        selectedScanlators,
+        (selected) {
+          tempList = selected;
+        },
+      )
+      ..setPositiveButton('Ok', () {
+        selectedScanlators = tempList;
+        _viewModel.chapterList.value = chapters.where((element) {
+          var scanlator = element.mChapter?.scanlator;
+          return scanlator == null ||
+              selectedScanlators[allScanlators.indexOf(scanlator)];
+        }).toList();
+      })
+      ..setNegativeButton('Cancel', () {})
+      ..show();
   }
 
   void changeViewType(RxInt viewType, int index) {

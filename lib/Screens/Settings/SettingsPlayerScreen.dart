@@ -67,6 +67,16 @@ List<Widget> playerSettings(
           },
         ),
         Setting(
+          type: SettingType.switchType,
+          name: 'Use Temporary player',
+          description: 'NOT RECOMMENDED',
+          icon: Icons.play_arrow_sharp,
+          isChecked: PrefManager.getCustomVal<bool>('tempPlayer') ?? false,
+          onSwitchChange: (value) {
+            PrefManager.setCustomVal('tempPlayer', value);
+          },
+        ),
+        Setting(
           type: SettingType.normal,
           name: getString.speed,
           description: getString.speedDescription,

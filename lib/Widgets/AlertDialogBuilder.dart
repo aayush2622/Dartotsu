@@ -113,10 +113,14 @@ class AlertDialogBuilder {
         return AlertDialog(
           title: _titleWidget ?? Text(_title ?? ''),
           titleTextStyle: TextStyle(
-              fontSize: 20, fontWeight: FontWeight.bold, color: theme.primary),
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: theme.primary,
+          ),
           content: StatefulBuilder(
-              builder: (BuildContext context, StateSetter setState) =>
-                  _buildContent(setState)),
+            builder: (BuildContext context, StateSetter setState) =>
+                _buildContent(setState),
+          ),
           actions: _buildActions(),
         );
       },
