@@ -109,7 +109,7 @@ class MediaPlayerState extends State<MediaPlayer>
   void _initializePlayer() {
     currentQuality = widget.videos[widget.index];
     if (PrefManager.getCustomVal<bool>('tempPlayer') ?? false) {
-      videoPlayerController = AndroidPlayer();
+      videoPlayerController = AndroidPlayer(currentQuality.url,resizeMode);
     } else {
       videoPlayerController = WindowsPlayer(resizeMode, settings);
     }

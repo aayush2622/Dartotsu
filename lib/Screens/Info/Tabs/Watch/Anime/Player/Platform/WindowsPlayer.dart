@@ -52,8 +52,8 @@ class WindowsPlayer extends BasePlayer {
 
   @override
   void dispose() {
-    player.dispose();
     super.dispose();
+    player.dispose();
   }
 
   @override

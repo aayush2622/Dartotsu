@@ -122,9 +122,10 @@ class _PlayerControllerState extends State<PlayerController> {
 
   @override
   void dispose() {
-    DiscordService.stopRPC();
-    WakelockPlus.disable();
     super.dispose();
+    if (Discord.token.isNotEmpty) DiscordService.stopRPC();
+    WakelockPlus.disable();
+
   }
 
   Future initFullScreen() async =>

@@ -7,7 +7,7 @@ abstract class BasePlayer extends GetxController {
   Rx<Duration> currentPosition = const Duration(seconds: 0).obs;
   RxString maxTime = "00:00".obs;
   RxString bufferingTime = "00:00".obs;
-  RxBool isBuffering = false.obs;
+  RxBool isBuffering = true.obs;
   RxBool isPlaying = false.obs;
 
   Future<void> seek(Duration duration);
