@@ -54,6 +54,7 @@ Future init() async {
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
     await WindowManager.instance.ensureInitialized();
   }
+  
   TypeFactory.registerAllTypes();
   GetMediaIDs.getData();
   initializeDateFormatting();
