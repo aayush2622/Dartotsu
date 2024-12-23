@@ -139,14 +139,6 @@ jobs:
           flutter-version: 3.27.1
           cache: true
 
-      #clean flutter when needed
-      - name: Cleaning Flutter if needed
-        id: check_noping
-        shell: pwsh
-        run: |
-          if ("${{ github.event.head_commit.message }}" -like "*[clean]*") {
-            flutter clean
-          }
 
 
 
