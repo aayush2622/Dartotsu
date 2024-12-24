@@ -68,8 +68,6 @@ dependencies:
   wakelock_plus: ^1.2.8
   volume_controller: ^2.0.8
   screen_brightness: ^2.0.1 #dont change
-  fvp: ^0.29.0
-  video_player: ^2.9.2
   # Miscellaneous
   file_picker: ^8.1.4
   share_plus: ^10.1.2

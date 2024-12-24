@@ -1,3 +1,4 @@
+/*
 import 'package:dantotsu/Screens/Info/Tabs/Watch/Anime/Player/Platform/BasePlayer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
@@ -98,3 +99,4 @@ class AndroidPlayer extends BasePlayer {
     videoController.dispose();
   }
 }
+*/

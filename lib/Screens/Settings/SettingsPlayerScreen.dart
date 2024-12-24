@@ -39,9 +39,7 @@ class SettingsPlayerScreenState extends BaseSettingsScreen {
       );
 
   @override
-  List<Widget> get settingsList {
-    return playerSettings(context, setState);
-  }
+  List<Widget> get settingsList => playerSettings(context, setState);
 
   @override
   Future<void> onIconPressed() async => openPlayer(context);
@@ -64,16 +62,6 @@ List<Widget> playerSettings(
           isChecked: PrefManager.getVal(PrefName.cursedSpeed),
           onSwitchChange: (value) {
             PrefManager.setVal(PrefName.cursedSpeed, value);
-          },
-        ),
-        Setting(
-          type: SettingType.switchType,
-          name: 'Use Temporary player',
-          description: 'NOT RECOMMENDED',
-          icon: Icons.play_arrow_sharp,
-          isChecked: PrefManager.getCustomVal<bool>('tempPlayer') ?? false,
-          onSwitchChange: (value) {
-            PrefManager.setCustomVal('tempPlayer', value);
           },
         ),
         Setting(
