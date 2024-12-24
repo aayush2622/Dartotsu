@@ -25,8 +25,8 @@
    <a href="https://github.com/aayush2622/Dartotsu/releases/latest"><img src="https://img.shields.io/github/v/release/aayush2622/Dartotsu?style=for-the-badge&display_name=tag&label=Alpha&labelColor=087a87&color=168b94" alt="Latest Alpha Release"/></a>-->
 </p>
 
-## 📝 Terms of Use
-By using this repository, you agree to our [Terms of Use](TOS.md).
+## 📝 Terms of Service
+By using this repository, you agree to our [Terms of Service](TOS.md).
 
 ## ⚠️ Disclaimer  
 - **Purpose**: Dartotsu is a hybrid tracking and management tool for anime, manga, manhwa, and other media supported by AniList and MyAnimeList. This application is designed for educational use only.  
