@@ -1,4 +1,4 @@
-## Terms of Use
+## Terms of Service
 
 By downloading, installing, or using this repository, you agree to:
 - Use the code in compliance with all applicable laws.
