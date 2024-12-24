@@ -26,7 +26,7 @@
 </p>
 
 ## ⚠️ Disclaimer  
-- **Purpose**: Dartotsu is a hybrid tracking and management tool for anime, manga, manhwa, and other media supported by AniList and MyAnimeList. This application is designed for educational use and legal streaming service integration.  
+- **Purpose**: Dartotsu is a hybrid tracking and management tool for anime, manga, manhwa, and other media supported by AniList and MyAnimeList. This application is designed for educational use only.  
 - **Content Policy**: Dartotsu does not provide, maintain, or host streaming extensions or copyrighted content.  
 - **Responsibility**: Users are responsible for their actions. The developer disclaims all liability for misuse, including legal issues with third-party content or external sources. Any legal action should be taken against the providers of extensions, not Dartotsu.
 
