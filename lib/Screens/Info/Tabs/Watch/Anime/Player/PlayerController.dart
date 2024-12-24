@@ -72,18 +72,21 @@ class _PlayerControllerState extends State<PlayerController> {
   }
 
   Future<void> _onInit(BuildContext context) async {
+    var sourceName = Provider.of<MediaServiceProvider>(context, listen: false)
+        .currentService
+        .getName;
+    var currentProgress = PrefManager.getCustomVal<int>(
+      "${media.id}-${currentEpisode.number}-$sourceName-current",
+    );
+
     while (_controller.maxTime.value == '00:00') {
       await Future.delayed(const Duration(milliseconds: 100));
     }
-    setRpc();
-    if (context.mounted) {
-      var sourceName = Provider.of<MediaServiceProvider>(context, listen: false)
-          .currentService
-          .getName;
-      var currentProgress = PrefManager.getCustomVal<int>(
-          "${media.id}-${currentEpisode.number}-$sourceName-current");
-      _controller.seek(Duration(seconds: currentProgress ?? 0));
 
+    setRpc();
+
+    if (context.mounted) {
+      _controller.seek(Duration(seconds: currentProgress ?? 0));
       _controller.currentPosition.listen((v) {
         if (v.inSeconds > 0) {
           _saveProgress(v.inSeconds);
@@ -94,7 +97,7 @@ class _PlayerControllerState extends State<PlayerController> {
     if (list.contains(media.id)) list.remove(media.id);
 
     list.add(media.id);
-    PrefManager.setCustomVal("continueAnimeList", list);
+    PrefManager.setCustomVal<List<int>>("continueAnimeList", list);
   }
 
   Future<void> _saveProgress(int currentProgress) async {

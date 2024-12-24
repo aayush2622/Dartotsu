@@ -84,6 +84,7 @@ class WindowsPlayer extends BasePlayer {
   @override
   Widget playerWidget() {
     return Video(
+      filterQuality: FilterQuality.medium,
       subtitleViewConfiguration: SubtitleViewConfiguration(
         visible: settings.showSubtitle,
         style: TextStyle(

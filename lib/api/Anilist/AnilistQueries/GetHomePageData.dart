@@ -27,12 +27,16 @@ extension on AnilistQueries {
           }
         }
 
-        List<int> list =
-            PrefManager.getCustomVal<List<int>>("continue${type}List") ?? [];
+        List<int> list = PrefManager.getCustomVal<List<int>>("continue${type}List") ?? [];
         if (list.isNotEmpty) {
-          returnArray.addAll(list.reversed.map((id) => subMap[id]!));
-          returnArray
-              .addAll(subMap.values.where((m) => !returnArray.contains(m)));
+          returnArray.addAll(
+              list.reversed
+                  .where((id) => subMap.containsKey(id))
+                  .map((id) => subMap[id]!)
+          );
+          returnArray.addAll(
+              subMap.values.where((m) => !returnArray.contains(m))
+          );
         } else {
           returnArray.addAll(subMap.values);
         }
