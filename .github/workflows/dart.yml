@@ -83,21 +83,44 @@ jobs:
 
       # Optimize Flutter build
       - run: flutter pub get
-      - run: flutter build apk --release
+      - run: flutter build apk --release --split-per-abi
 
-      - name: Rename APK
-        run: mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/Dantotsu_Android_${{github.ref_name}}.apk
+      - name: Rename APKs
+        run: |
+          for file in build/app/outputs/flutter-apk/app-*-release.apk; do
+            abi=$(basename $file | sed 's/app-\(.*\)-release.apk/\1/')
+            mv $file build/app/outputs/flutter-apk/Dartotsu_Android_${abi}_${{github.ref_name}}.apk
+          done
+          ls build/app/outputs/flutter-apk
 
-      - name: Upload File To Google Drive
-        id: gdriveUpload
+
+      - name: Upload arm64 File To Google Drive
+        id: gdriveUpload_arm64
         uses: hoatruongdev09/google-drive-file-upload-github-action@v1.1
         with:
-          file-path: build/app/outputs/flutter-apk/Dantotsu_Android_${{github.ref_name}}.apk
-          upload-name: Dartotsu.apk
-          upload-to-folder-id: 1nWYex54zd58SVitJUCva91_4k1PPTdP3
+          file-path: build/app/outputs/flutter-apk/Dartotsu_Android_arm64-v8a_main.apk
+          upload-name: Dartotsu_Android_arm64-v8a_${{github.ref_name}}.apk
+          upload-to-folder-id: 1S4QzdKz7ZofhiF5GAvjMdBvYK7YhndKM
           service-account-json: "${{secrets.GOOGLE_KEY}}"
           overrwrite: true
-
+      - name: Upload armeabi File To Google Drive
+        id: gdriveUpload_armeabi
+        uses: hoatruongdev09/google-drive-file-upload-github-action@v1.1
+        with:
+          file-path: build/app/outputs/flutter-apk/Dartotsu_Android_armeabi-v7a_main.apk
+          upload-name: Dartotsu_Android_armeabi-v7a_${{github.ref_name}}.apk
+          upload-to-folder-id: 1S4QzdKz7ZofhiF5GAvjMdBvYK7YhndKM
+          service-account-json: "${{secrets.GOOGLE_KEY}}"
+          overrwrite: true
+      - name: Upload x86 File To Google Drive
+        id: gdriveUpload_x86
+        uses: hoatruongdev09/google-drive-file-upload-github-action@v1.1
+        with:
+          file-path: build/app/outputs/flutter-apk/Dartotsu_Android_x86_64_main.apk
+          upload-name: Dartotsu_Android_x86_64_${{github.ref_name}}.apk
+          upload-to-folder-id: 1S4QzdKz7ZofhiF5GAvjMdBvYK7YhndKM
+          service-account-json: "${{secrets.GOOGLE_KEY}}"
+          overrwrite: true
   build_windows:
     runs-on: windows-latest
     if: contains(github.event.head_commit.message, '[build.windows]') ||  contains(github.event.head_commit.message, '[build]')
