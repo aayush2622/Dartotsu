@@ -602,28 +602,28 @@ jobs:
           if [[ -n "$APK_DOWNLOAD_LINK" ]]; then
             APK_MESSAGE="[Download APK](https://drive.google.com/drive/folders/1S4QzdKz7ZofhiF5GAvjMdBvYK7YhndKM)"
           else
-            APK_MESSAGE="No APK link available"
+            APK_MESSAGE=""
           fi
 
           # Check if WINDOWS_DOWNLOAD_LINK is not empty
           if [[ -n "$WINDOWS_DOWNLOAD_LINK" ]]; then
             WINDOWS_MESSAGE="[Download Windows ZIP]($WINDOWS_DOWNLOAD_LINK)"
           else
-            WINDOWS_MESSAGE="No Windows link available"
+            WINDOWS_MESSAGE=""
           fi
 
           # Check if LINUX_DOWNLOAD_LINK is not empty
           if [[ -n "$LINUX_DOWNLOAD_LINK" ]]; then
             LINUX_MESSAGE="[Download LINUX ZIP]($LINUX_DOWNLOAD_LINK)"
           else
-            LINUX_MESSAGE="No LINUX link available"
+            LINUX_MESSAGE=""
           fi
 
           # Check if IOS_DOWNLOAD_LINK is not empty
           if [[ -n "$IOS_DOWNLOAD_LINK" ]]; then
             IOS_MESSAGE="[Download IOS IPA]($IOS_DOWNLOAD_LINK)"
           else
-            IOS_MESSAGE="No IOS link available"
+            IOS_MESSAGE=""
           fi
 
             echo "apk_message=$APK_MESSAGE" >> $GITHUB_ENV
@@ -644,7 +644,7 @@ jobs:
               -F parse_mode="Markdown" \
               -F disable_notification=true \
               -F "text=🎉 *Build Notification* 🎉
-            🔹 **APK**: ${{ env.apk_message }}
-            🔹 **Windows**: ${{ env.windows_message }}
-            🔹 **Linux**: ${{ env.linux_message }}
-            🔹 **IOS**: ${{ env.ios_message }}")
+            ${{ env.apk_message }}
+            ${{ env.windows_message }}
+            ${{ env.linux_message }}
+            ${{ env.ios_message }}")
