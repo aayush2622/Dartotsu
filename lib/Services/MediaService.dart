@@ -1,9 +1,7 @@
 import 'package:dantotsu/Services/Screens/BaseLoginScreen.dart';
-import 'package:dantotsu/api/Other/OtherService.dart';
 import 'package:flutter/material.dart';
 
 import '../api/Anilist/AnilistService.dart';
-import '../api/Kitsu/KitsuService.dart';
 import '../api/MyAnimeList/MalService.dart';
 import 'BaseServiceData.dart';
 import 'Screens/BaseAnimeScreen.dart';

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../../DataClass/Chapter.dart';
 import '../../DataClass/Media.dart';
 import '../../Screens/Info/Tabs/Watch/Manga/DateFormat.dart';
-import '../Episode/Widget/HandleProgress.dart';
 
 class ChapterListView extends StatelessWidget {
   final Chapter chapter;
@@ -121,25 +120,4 @@ class ChapterListView extends StatelessWidget {
     );
   }
 
-  Widget _buildThumbnail(BuildContext context, ColorScheme theme) {
-    return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
-      clipBehavior: Clip.hardEdge,
-      elevation: 4,
-      color: theme.surfaceContainerLowest,
-      child: Stack(
-        alignment: Alignment.bottomCenter,
-        children: [
-          handleProgress(
-            context: context,
-            mediaId: mediaData.id,
-            ep: chapter.number,
-            width: 162,
-          )
-        ],
-      ),
-    );
-  }
 }

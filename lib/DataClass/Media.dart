@@ -151,7 +151,8 @@ class Media {
   static Media mediaData(anilistApi.Media apiMedia) {
     return Media(
       id: apiMedia.id,
-      idMAL: apiMedia.idMal,
+      idMAL: apiMedia.idMal ?? GetMediaIDs.fromID(type: AnimeIDType.anilistId, id: apiMedia.id)
+          ?.malId,
       name: apiMedia.title?.english,
       nameRomaji: apiMedia.title?.romaji ?? '',
       userPreferredName: apiMedia.title?.userPreferred ?? '',

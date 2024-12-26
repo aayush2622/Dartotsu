@@ -25,7 +25,6 @@ import '../../../../../Settings/SettingsPlayerScreen.dart';
 import '../Widget/BuildChunkSelector.dart';
 import 'Platform/BasePlayer.dart';
 import 'Platform/WindowsPlayer.dart';
-import 'Platform/AndroidPlayer.dart';
 import 'PlayerController.dart';
 import 'Widgets/Indicator.dart';
 
@@ -125,13 +124,13 @@ class MediaPlayerState extends State<MediaPlayer>
   }
 
   @override
-  void dispose() {
+  void dispose(){
     super.dispose();
     videoPlayerController.dispose();
     _hideCursorTimer?.cancel();
     _leftAnimationController.dispose();
     _rightAnimationController.dispose();
-
+    ScreenBrightness().setApplicationScreenBrightness(_defaultBrightness);
     focusNode.dispose();
     if (Platform.isAndroid || Platform.isIOS) {
       _setLandscapeMode(false);
@@ -294,6 +293,7 @@ class MediaPlayerState extends State<MediaPlayer>
   final _volumeValue = 0.0.obs;
   final _brightnessValue = 0.0.obs;
 
+  var _defaultBrightness = 0.0;
   Future<void> _handleVolumeAndBrightness() async {
     VolumeController().showSystemUI = false;
     _volumeValue.value = await VolumeController().getVolume();
@@ -302,8 +302,8 @@ class MediaPlayerState extends State<MediaPlayer>
         _volumeValue.value = value;
       }
     });
-
-    _brightnessValue.value = await ScreenBrightness().current;
+    _defaultBrightness = await ScreenBrightness().system;
+    _brightnessValue.value = await ScreenBrightness().application;
     ScreenBrightness().onCurrentBrightnessChanged.listen((value) {
       if (mounted) {
         _brightnessValue.value = value;
@@ -336,7 +336,7 @@ class MediaPlayerState extends State<MediaPlayer>
   Future<void> setBrightness(double value) async {
     if (!isMobile) return;
     try {
-      await ScreenBrightness().setScreenBrightness(value);
+      await ScreenBrightness().setApplicationScreenBrightness(value);
     } catch (_) {}
     _brightnessIndicator.value = true;
     _brightnessTimer?.cancel();
