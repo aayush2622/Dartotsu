@@ -9,29 +9,32 @@ import '../../../DataClass/Episode.dart';
 part 'Anify.g.dart';
 
 class Anify {
-  static Future<Map<String, Episode>> fetchAndParseMetadata(
-      Media mediaData) async {
+  static Future<Map<String, Episode>> fetchAndParseMetadata(Media mediaData) async {
+    var ids = [105310]; // hardcode incorrect ids
+
+    if (ids.contains(mediaData.id)) return {};
+
     final response = await http.get(
         Uri.parse('https://anify.eltik.cc/content-metadata/${mediaData.id}'));
     if (response.statusCode == 200) {
       final List<dynamic> jsonResponse =
-          jsonDecode(response.body) as List<dynamic>;
+      jsonDecode(response.body) as List<dynamic>;
 
       List<AnifyElement> anifyElements =
-          jsonResponse.map((json) => AnifyElement.fromJson(json)).toList();
+      jsonResponse.map((json) => AnifyElement.fromJson(json)).toList();
 
       if (anifyElements.isNotEmpty) {
         return anifyElements.first.data?.asMap().map((_, datum) {
-              return MapEntry(
-                datum.number.toString(),
-                Episode(
-                  number: datum.number.toString(),
-                  title: datum.title,
-                  desc: datum.description,
-                  thumb: datum.img,
-                ),
-              );
-            }) ??
+          return MapEntry(
+            datum.number.toString(),
+            Episode(
+              number: datum.number.toString(),
+              title: datum.title,
+              desc: datum.description,
+              thumb: datum.img,
+            ),
+          );
+        }) ??
             {};
       }
     }

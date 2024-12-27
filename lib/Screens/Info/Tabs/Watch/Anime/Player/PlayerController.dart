@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:dantotsu/Functions/string_extensions.dart';
 import 'package:dantotsu/Preferences/PrefManager.dart';
 import 'package:dantotsu/Preferences/Preferences.dart';
 import 'package:dantotsu/Widgets/AlertDialogBuilder.dart';
@@ -20,6 +21,7 @@ import 'package:dantotsu/api/Mangayomi/Model/Source.dart';
 import '../../../../../../Services/ServiceSwitcher.dart';
 import '../../../../../../api/Discord/Discord.dart';
 import '../../../../../../api/Discord/DiscordService.dart';
+import '../../../../../../api/EpisodeDetails/Aniskip/Aniskip.dart';
 import '../../../../../Settings/SettingsPlayerScreen.dart';
 import 'Platform/BasePlayer.dart';
 import 'Player.dart';
@@ -47,7 +49,8 @@ class _PlayerControllerState extends State<PlayerController> {
   late v.Video currentQuality;
   late PlayerSettings settings;
   late int fitType;
-
+  final timeStamps = <Stamp>[].obs;
+  final timeStampsText = ''.obs;
   final isFullScreen = false.obs;
   final isControlsLocked = false.obs;
 
@@ -82,17 +85,25 @@ class _PlayerControllerState extends State<PlayerController> {
     while (_controller.maxTime.value == '00:00') {
       await Future.delayed(const Duration(milliseconds: 100));
     }
+    setDiscordRpc();
 
-    setRpc();
+    timeStamps.value = await AniSkip.getResult(
+      malId: media.idMAL,
+      episodeNumber: currentEpisode.number.toInt(),
+      episodeLength: _timeStringToSeconds(_controller.maxTime.value).toInt(),
+      useProxyForTimeStamps: false,
+    ) ?? [];
 
-    if (context.mounted) {
-      _controller.seek(Duration(seconds: currentProgress ?? 0));
-      _controller.currentPosition.listen((v) {
-        if (v.inSeconds > 0) {
-          _saveProgress(v.inSeconds);
-        }
-      });
-    }
+    _controller.seek(Duration(seconds: currentProgress ?? 0));
+    _controller.currentPosition.listen((v) {
+      if (v.inSeconds > 0) {
+        _saveProgress(v.inSeconds);
+        timeStampsText.value = timeStamps
+            .firstWhereOrNull((e) => e.interval.startTime <= v.inSeconds && e.interval.endTime >= v.inSeconds)
+            ?.getType() ?? '';
+      }
+    });
+
     var list = PrefManager.getCustomVal<List<int>>("continueAnimeList") ?? [];
     if (list.contains(media.id)) list.remove(media.id);
 
@@ -113,7 +124,7 @@ class _PlayerControllerState extends State<PlayerController> {
         _timeStringToSeconds(maxProgress).toInt());
   }
 
-  Future<void> setRpc() async {
+  Future<void> setDiscordRpc() async {
     Discord.setRpc(
       media,
       episode: currentEpisode,
@@ -125,7 +136,7 @@ class _PlayerControllerState extends State<PlayerController> {
 
   @override
   void dispose() {
-    if (Discord.token.isNotEmpty) DiscordService.stopRPC();
+    if (DiscordService.isInitialized) DiscordService.stopRPC();
     super.dispose();
     WakelockPlus.disable();
   }
@@ -201,6 +212,14 @@ class _PlayerControllerState extends State<PlayerController> {
                   color: Colors.white.withValues(alpha: 0.5),
                 ),
               ),
+              Obx(
+                () => Text(
+                  " $timeStampsText",
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+              ),
             ],
           ),
           if (!isControlsLocked.value) _buildSkipButton(),
@@ -212,44 +231,102 @@ class _PlayerControllerState extends State<PlayerController> {
   Widget _buildProgressBar() {
     return SizedBox(
       height: 20,
-      child: IgnorePointer(
-        ignoring: isControlsLocked.value,
-        child: SliderTheme(
-          data: SliderThemeData(
-            trackHeight: 1.8,
-            thumbColor: Theme.of(context).colorScheme.primary,
-            activeTrackColor: Theme.of(context).colorScheme.primary,
-            inactiveTrackColor: const Color.fromARGB(255, 121, 121, 121),
-            secondaryActiveTrackColor: const Color.fromARGB(255, 167, 167, 167),
-            thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 6),
-            overlayShape: SliderComponentShape.noThumb,
+      child: Column(
+        children: [
+          IgnorePointer(
+            ignoring: isControlsLocked.value,
+            child: SliderTheme(
+              data: SliderThemeData(
+                trackHeight: 1.8,
+                thumbColor: Theme.of(context).colorScheme.primary,
+                activeTrackColor: Theme.of(context).colorScheme.primary,
+                inactiveTrackColor: const Color.fromARGB(255, 121, 121, 121),
+                secondaryActiveTrackColor:
+                    const Color.fromARGB(255, 167, 167, 167),
+                thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 6),
+                overlayShape: SliderComponentShape.noThumb,
+              ),
+              child: Obx(
+                () {
+                  var bufferingValue =
+                      _timeStringToSeconds(_controller.bufferingTime.value);
+                  var currentValue =
+                      _timeStringToSeconds(_controller.currentTime.value);
+                  var maxValue =
+                      _timeStringToSeconds(_controller.maxTime.value);
+
+                  return Stack(
+                    children: [
+                      Slider(
+                        min: 0,
+                        max: maxValue > 0 ? maxValue : 1,
+                        value: currentValue.clamp(0.0, maxValue),
+                        secondaryTrackValue:
+                            bufferingValue.clamp(0.0, maxValue),
+                        secondaryActiveColor: Colors.white,
+                        onChangeStart: (_) => _controller.pause(),
+                        onChangeEnd: (val) async {
+                          _controller.seek(Duration(seconds: val.toInt()));
+                          _controller.play();
+                        },
+                        onChanged: (double value) => _controller
+                            .currentTime.value = _formatTime(value.toInt()),
+                      ),
+                      Positioned.fill(
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                            left: 7.0,
+                            right: 8.0,
+                            top: 4.5,
+                          ),
+                          child: LayoutBuilder(
+                            builder: (context, constraints) {
+                              var trackWidth = constraints.maxWidth;
+                              return Stack(
+                                children: timeStamps.map(
+                                  (timestamp) {
+                                    var startPosition =
+                                        (timestamp.interval.startTime / maxValue) *
+                                            trackWidth;
+                                    var endPosition =
+                                        (timestamp.interval.endTime / maxValue) * trackWidth;
+
+                                    return Positioned(
+                                      left:
+                                          startPosition.clamp(0.0, trackWidth),
+                                      child: Row(
+                                        children: [
+                                          SizedBox(
+                                            width: endPosition - startPosition,
+                                            child: _buildDot(),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                ).toList(),
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              ),
+            ),
           ),
-          child: Stack(
-            children: [
-              Obx(() {
-                var currentValue =
-                    _timeStringToSeconds(_controller.currentTime.value);
-                var maxValue = _timeStringToSeconds(_controller.maxTime.value);
-                var bufferingValue =
-                    _timeStringToSeconds(_controller.bufferingTime.value);
-                return Slider(
-                  min: 0,
-                  max: maxValue > 0 ? maxValue : 1,
-                  value: currentValue.clamp(0.0, maxValue),
-                  secondaryTrackValue: bufferingValue.clamp(0.0, maxValue),
-                  secondaryActiveColor: Colors.white,
-                  onChangeStart: (_) => _controller.pause(),
-                  onChangeEnd: (val) async {
-                    _controller.seek(Duration(seconds: val.toInt()));
-                    _controller.play();
-                  },
-                  onChanged: (double value) => _controller.currentTime.value =
-                      _formatTime(value.toInt()),
-                );
-              }),
-            ],
-          ),
-        ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDot() {
+    return Container(
+      height: 3,
+      decoration: BoxDecoration(
+        color: Color.fromARGB(255, 56, 192, 41),
+        shape: BoxShape.rectangle,
       ),
     );
   }
@@ -607,18 +684,25 @@ class _PlayerControllerState extends State<PlayerController> {
           ),
           child: SizedBox(
             height: 46,
-            width: 56,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(
-                  "+${settings.skipDuration}",
-                  style: const TextStyle(
-                    fontSize: 14,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.bold,
-                  ),
+                Obx(
+                  () {
+                    return Text(
+                      timeStampsText.value != ''
+                          ? timeStamps
+                              .firstWhere((e) => e.getType() == timeStampsText.value)
+                              .getType()
+                          : "+${settings.skipDuration}s",
+                      style: const TextStyle(
+                        fontSize: 14,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.bold,
+                      ),
+                    );
+                  },
                 ),
                 const Icon(
                   Icons.fast_forward_rounded,
@@ -634,6 +718,13 @@ class _PlayerControllerState extends State<PlayerController> {
   }
 
   void _fastForward(int seconds) {
+    if (timeStampsText.value != '') {
+      var current = timeStamps.firstWhere(
+        (element) => element.getType() == timeStampsText.value
+      );
+      _controller.seek(Duration(seconds: current.interval.endTime.toInt()));
+      return;
+    }
     var currentTime = _timeStringToSeconds(_controller.currentTime.value);
     var maxTime = _timeStringToSeconds(_controller.maxTime.value);
     var newTime = currentTime + seconds;

@@ -146,7 +146,7 @@ class MBridge {
     }
   }
 
-  ///Read values in parsed JSON object and return resut to List<String>
+  ///Read values in parsed JSON object and return resut to List&lt;String&gt;
   static const $Function jsonPathToList = $Function(_jsonPathToList);
 
   static $Value? _jsonPathToList(_, __, List<$Value?> args) {

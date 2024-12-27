@@ -56,7 +56,7 @@ Future init() async {
   }
 
   TypeFactory.registerAllTypes();
-  GetMediaIDs.getData();
+  await GetMediaIDs.getData();
   initializeDateFormatting();
   final supportedLocales = DateFormat.allLocalesWithSymbols();
   for (var locale in supportedLocales) {
