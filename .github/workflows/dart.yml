@@ -607,7 +607,7 @@ jobs:
 
           # Check if WINDOWS_DOWNLOAD_LINK is not empty
           if [[ -n "$WINDOWS_DOWNLOAD_LINK" ]]; then
-            WINDOWS_MESSAGE="[Download Windows ZIP]($WINDOWS_DOWNLOAD_LINK)"
+            WINDOWS_MESSAGE="[Download Windows Installer]($WINDOWS_DOWNLOAD_LINK)"
           else
             WINDOWS_MESSAGE=""
           fi
