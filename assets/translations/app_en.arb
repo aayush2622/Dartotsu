@@ -8,6 +8,8 @@
   "animeDescription": "Personalize and manage your anime preferences",
   "anilist": "AniList",
   "appName": "Dartotsu",
+  "chapters": "Chapters",
+  "episodes": "Episodes",
   "appTagline": "The NEW Best App For\nTracking Anime & Manga",
   "backgroundColor": "Background Color",
   "backgroundColorDescription": "Subtitle background color",
@@ -81,5 +83,14 @@
   "supportMaintainer": "Want to support Dartotsu's Maintainer?\nConsider Donating",
   "theme": "Theme",
   "themeDescription": "Customize the appearance and vibe of your app",
-  "yes": "Yes"
+  "yes": "Yes",
+  "options": "Options",
+  "layout": "Layout",
+  "grid": "Grid",
+  "list": "List",
+  "compact": "Compact",
+  "sort": "Sort",
+  "utd": "Up to Down",
+  "dtu": "Down to Up",
+  "scanlators": "Scanlators"
 }

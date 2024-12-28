@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:dantotsu/DataClass/Media.dart';
 import 'package:dantotsu/Screens/Info/Tabs/Watch/BaseParser.dart';
 import 'package:dantotsu/Screens/Info/Tabs/Watch/BaseWatchScreen.dart';
@@ -6,9 +7,10 @@ import 'package:get/get.dart';
 
 import '../../../../../Adaptor/Episode/EpisodeAdaptor.dart';
 import '../../../../../DataClass/Episode.dart';
+import '../../../../../Theme/LanguageSwitcher.dart';
+import 'AnimeParser.dart';
 import 'Widget/BuildChunkSelector.dart';
 import 'Widget/ContinueCard.dart';
-import 'AnimeParser.dart';
 
 class AnimeWatchScreen extends StatefulWidget {
   final Media mediaData;
@@ -49,17 +51,22 @@ class AnimeWatchScreenState extends BaseWatchScreen<AnimeWatchScreen> {
       if (episodeList == null || episodeList.isEmpty) {
         return const Center(child: CircularProgressIndicator());
       }
-
       if (!_viewModel.episodeDataLoaded.value) {
         return const Center(child: CircularProgressIndicator());
       }
-
       updateEpisodeDetails(episodeList);
 
-      var (chunks, selectedChunkIndex) = buildChunks(
+      var (chunks, initChunkIndex) = buildChunks(
           context, episodeList, widget.mediaData.userProgress.toString());
 
-      var selectedEpisode = episodeList[((widget.mediaData.userProgress ?? 0) + 1).toString()];
+      var selectedEpisode = episodeList.values.firstWhereOrNull((element) =>
+          element.number ==
+          ((widget.mediaData.userProgress ?? 0) + 1).toString());
+
+      RxInt selectedChunkIndex = (-1).obs;
+
+      selectedChunkIndex =
+          selectedChunkIndex.value == -1 ? initChunkIndex : selectedChunkIndex;
       return Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -70,15 +77,26 @@ class AnimeWatchScreenState extends BaseWatchScreen<AnimeWatchScreen> {
             episode: selectedEpisode,
             source: _viewModel.source.value!,
           ),
-          buildChunkSelector(context, chunks, selectedChunkIndex),
+          ChunkSelector(
+            context,
+            chunks,
+            selectedChunkIndex,
+            _viewModel.reversed,
+          ),
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 18, vertical: 4),
-            child: Obx(() => EpisodeAdaptor(
-                  type: _viewModel.viewType.value,
-                  source: _viewModel.source.value!,
-                  episodeList: chunks[selectedChunkIndex.value],
-                  mediaData: widget.mediaData,
-                )),
+            child: Obx(() {
+              List<List<Episode>> reversed = _viewModel.reversed.value
+                  ? chunks.map((element) => element.reversed.toList())
+                  .toList()
+                  : chunks;
+              return EpisodeAdaptor(
+                type: _viewModel.viewType.value,
+                source: _viewModel.source.value!,
+                episodeList: reversed[selectedChunkIndex.value],
+                mediaData: widget.mediaData,
+              );
+            }),
           )
         ],
       );
@@ -91,61 +109,28 @@ class AnimeWatchScreenState extends BaseWatchScreen<AnimeWatchScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Text(
-            'Episodes',
-            style: TextStyle(
-              fontFamily: 'Poppins',
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
+          Expanded(
+            child: Text(
+              getString.episodes,
+              style: TextStyle(
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+              ),
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
             ),
-            overflow: TextOverflow.ellipsis,
-            maxLines: 1,
           ),
-          _buildIconButtons(),
+          IconButton(
+            onPressed: () => _viewModel.settingsDialog(context, mediaData),
+            icon: Icon(
+              Icons.menu_rounded,
+              color: Theme.of(context).colorScheme.onSurface,
+            ),
+          ),
         ],
       ),
     );
-  }
-
-  Widget _buildIconButtons() {
-    final theme = Theme.of(context).colorScheme;
-    final icons = [
-      Icons.view_list_sharp,
-      Icons.grid_view_rounded,
-      Icons.view_comfy_rounded,
-    ];
-    var viewType = _viewModel.viewType;
-
-    return Obx(() {
-      return Row(
-        children: List.generate(icons.length, (index) {
-          return Padding(
-            padding: const EdgeInsets.only(left: 10),
-            child: IconButton(
-              icon: Transform(
-                alignment: Alignment.center,
-                transform: index == 0
-                    ? Matrix4.rotationY(3.14159)
-                    : Matrix4.identity(),
-                child: Icon(icons[index]),
-              ),
-              iconSize: 24,
-              color: viewType.value == index
-                  ? theme.onSurface
-                  : theme.onSurface.withValues(alpha: 0.33),
-              onPressed: () => changeViewType(viewType, index),
-            ),
-          );
-        }),
-      );
-    });
-  }
-
-  void changeViewType(RxInt viewType, int index) {
-    var type = _viewModel.loadSelected(mediaData);
-    viewType.value = index;
-    type.recyclerStyle = index;
-    _viewModel.saveSelected(mediaData.id, type);
   }
 
   void updateEpisodeDetails(Map<String, Episode> episodeList) {

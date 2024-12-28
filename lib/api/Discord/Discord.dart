@@ -88,7 +88,7 @@ class _DiscordController extends GetxController {
     var isAnime = mediaData.anime != null;
     var totalFromSource = isAnime
         ? mediaData.anime!.episodes?.values.last.number
-        : mediaData.manga!.chapters?.values.last.number;
+        : mediaData.manga!.chapters?.last.number;
     var total = isAnime
         ? mediaData.anime?.totalEpisodes.toString()
         : mediaData.manga?.totalChapters.toString() ?? totalFromSource ?? "??";

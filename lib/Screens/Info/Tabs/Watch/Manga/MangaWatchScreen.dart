@@ -54,8 +54,10 @@ class MangaWatchScreenState extends BaseWatchScreen<MangaWatchScreen> {
           if (chapterList == null || chapterList.isEmpty) {
             return const Center(child: CircularProgressIndicator());
           }
+          widget.mediaData.manga?.chapters = chapterList;
           var (chunks, initChunkIndex) = buildChunks(
               context, chapterList, widget.mediaData.userProgress.toString());
+
           var selectedChapter = chapterList.firstWhereOrNull((element) =>
               element.number ==
               ((widget.mediaData.userProgress ?? 0) + 1).toString());
@@ -83,14 +85,13 @@ class MangaWatchScreenState extends BaseWatchScreen<MangaWatchScreen> {
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 18, vertical: 4),
                 child: Obx(() {
-                  List<List<Chapter>> reversed;
-                  if (_viewModel.reversed.value) {
-                    reversed = chunks
-                        .map((element) => element.reversed.toList())
-                        .toList();
-                  } else {
-                    reversed = chunks;
-                  }
+
+                  List<List<Chapter>> reversed = _viewModel.reversed.value
+                      ? chunks
+                          .map((element) => element.reversed.toList())
+                          .toList()
+                      : chunks;
+
                   return ChapterAdaptor(
                     type: _viewModel.viewType.value,
                     source: _viewModel.source.value!,
@@ -124,117 +125,16 @@ class MangaWatchScreenState extends BaseWatchScreen<MangaWatchScreen> {
               maxLines: 1,
             ),
           ),
+
           IconButton(
-            onPressed: () => toggleScanlators(),
+            onPressed: () => _viewModel.settingsDialog(context, mediaData),
             icon: Icon(
-              Icons.filter_list,
+              Icons.menu_rounded,
+              color: Theme.of(context).colorScheme.onSurface,
             ),
           ),
-          Obx(() {
-            return IconButton(
-              onPressed: () {
-                _viewModel.reversed.value = !_viewModel.reversed.value;
-                var type = _viewModel.loadSelected(mediaData);
-                type.recyclerReversed = _viewModel.reversed.value;
-                _viewModel.saveSelected(mediaData.id, type);
-              },
-              icon: Icon(
-                _viewModel.reversed.value
-                    ? Icons.arrow_downward
-                    : Icons.arrow_upward,
-              ),
-            );
-          }),
-          _buildIconButtons(),
         ],
       ),
     );
-  }
-
-  Widget _buildIconButtons() {
-    final theme = Theme.of(context).colorScheme;
-    final icons = [
-      Icons.view_list_sharp,
-      Icons.view_comfy_rounded,
-    ];
-    var viewType = _viewModel.viewType;
-
-    return Obx(() {
-      return Row(
-        children: List.generate(icons.length, (index) {
-          return Padding(
-            padding: const EdgeInsets.only(left: 10),
-            child: IconButton(
-              icon: Transform(
-                alignment: Alignment.center,
-                transform: index == 0
-                    ? Matrix4.rotationY(3.14159)
-                    : Matrix4.identity(),
-                child: Icon(icons[index]),
-              ),
-              iconSize: 24,
-              color: viewType.value == index
-                  ? theme.onSurface
-                  : theme.onSurface.withValues(alpha: 0.33),
-              onPressed: () => changeViewType(viewType, index),
-            ),
-          );
-        }),
-      );
-    });
-  }
-
-  void changeViewType(RxInt viewType, int index) {
-    var type = _viewModel.loadSelected(mediaData);
-    viewType.value = index;
-    type.recyclerStyle = index;
-    _viewModel.saveSelected(mediaData.id, type);
-  }
-
-  var chapters = <Chapter>[];
-  var selectedScanlators = <bool>[];
-  var init = true;
-
-  void toggleScanlators() {
-    var chapterList = init ? _viewModel.chapterList.value : chapters;
-    if (chapterList == null || chapterList.isEmpty) return;
-
-    if (init) {
-      chapters = chapterList;
-      init = false;
-    }
-
-    var uniqueScanlators = {
-      for (var element in chapters)
-        if (element.mChapter?.scanlator != null) element.mChapter!.scanlator!
-    };
-    var allScanlators = uniqueScanlators.toList();
-
-    if (allScanlators.isEmpty || allScanlators.length == 1) return;
-
-    selectedScanlators = selectedScanlators.isEmpty
-        ? List<bool>.filled(allScanlators.length, true)
-        : selectedScanlators;
-
-    var tempList = <bool>[];
-    AlertDialogBuilder(context)
-      ..setTitle('Scanlators')
-      ..multiChoiceItems(
-        allScanlators,
-        selectedScanlators,
-        (selected) {
-          tempList = selected;
-        },
-      )
-      ..setPositiveButton(getString.ok, () {
-        selectedScanlators = tempList;
-        _viewModel.chapterList.value = chapters.where((element) {
-          var scanlator = element.mChapter?.scanlator;
-          return scanlator == null ||
-              selectedScanlators[allScanlators.indexOf(scanlator)];
-        }).toList();
-      })
-      ..setNegativeButton(getString.cancel, () {})
-      ..show();
   }
 }

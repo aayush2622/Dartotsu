@@ -1,10 +1,12 @@
+
+import 'package:dantotsu/DataClass/Chapter.dart';
+
 import 'Author.dart';
-import 'MangaChapter.dart';
 
 class Manga {
   int? totalChapters;
   String? selectedChapter;
-  Map<String, MangaChapter>? chapters;
+  List<Chapter>? chapters;
   String? slug;
   author? mediaAuthor;
 

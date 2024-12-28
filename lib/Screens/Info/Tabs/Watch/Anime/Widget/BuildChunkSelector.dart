@@ -51,10 +51,11 @@ RxInt _findSelectedChunkIndex(
   }
   return 0.obs;
 }
-Widget buildChunkSelector(
+Widget ChunkSelector(
     BuildContext context,
     List<List<Episode>> chunks,
     RxInt selectedChunkIndex,
+    RxBool isReversed,
     ) {
   if (chunks.length < 2) {
     return const SizedBox();
@@ -75,7 +76,9 @@ Widget buildChunkSelector(
                     () => ChoiceChip(
                   showCheckmark: false,
                   label: Text(
-                      '${chunks[index].first.number} - ${chunks[index].last.number}',
+                      !isReversed.value
+                          ? '${chunks[index].first.number} - ${chunks[index].last.number}'
+                          : '${chunks[index].last.number} - ${chunks[index].first.number}',
                       style: const TextStyle(
                           fontFamily: 'Poppins',
                           fontWeight: FontWeight.bold)),

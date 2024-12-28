@@ -21,7 +21,7 @@ import '../../../../../../Widgets/ScrollConfig.dart';
 import '../../../../../../api/Mangayomi/Eval/dart/model/video.dart' as v;
 import '../../../../../../api/Mangayomi/Model/Source.dart';
 import '../../../../../Settings/SettingsPlayerScreen.dart';
-
+import '../Widget/AnimeCompactSettings.dart';
 import '../Widget/BuildChunkSelector.dart';
 import 'Platform/BasePlayer.dart';
 import 'Platform/WindowsPlayer.dart';
@@ -35,6 +35,7 @@ class MediaPlayer extends StatefulWidget {
   final Episode currentEpisode;
   final Source source;
   final bool isOffline;
+
   const MediaPlayer({
     super.key,
     required this.media,
@@ -59,6 +60,7 @@ class MediaPlayerState extends State<MediaPlayer>
   late AnimationController _rightAnimationController;
   var showControls = true.obs;
   var viewType = 0.obs;
+  var reverse = false.obs;
   var showEpisodes = false.obs;
   var isMobile = Platform.isAndroid || Platform.isIOS;
   final focusNode = FocusNode();
@@ -69,7 +71,7 @@ class MediaPlayerState extends State<MediaPlayer>
     focusNode.requestFocus();
     if (!widget.isOffline) {
       _loadPlayerSettings();
-    } else{
+    } else {
       resizeMode = BoxFit.contain.obs;
       settings = widget.media.anime!.playerSettings!;
     }
@@ -121,10 +123,13 @@ class MediaPlayerState extends State<MediaPlayer>
         PrefManager.getVal(PrefName.AnimeDefaultView) ??
         0;
     viewType = type.obs;
+
+    var r = loadSelected(widget.media).recyclerReversed;
+    reverse = r.obs;
   }
 
   @override
-  void dispose(){
+  void dispose() {
     super.dispose();
     videoPlayerController.dispose();
     _hideCursorTimer?.cancel();
@@ -294,6 +299,7 @@ class MediaPlayerState extends State<MediaPlayer>
   final _brightnessValue = 0.0.obs;
 
   var _defaultBrightness = 0.0;
+
   Future<void> _handleVolumeAndBrightness() async {
     VolumeController().showSystemUI = false;
     _volumeValue.value = await VolumeController().getVolume();
@@ -477,10 +483,13 @@ class MediaPlayerState extends State<MediaPlayer>
   }
 
   Widget _buildEpisodeList() {
-
     Map<String, Episode> episodeList = widget.media.anime?.episodes ?? {};
-    var (chunk, selected) =
+    var (chunk, initChunkIndex) =
         buildChunks(context, episodeList, widget.media.userProgress.toString());
+    RxInt selectedChunkIndex = (-1).obs;
+    selectedChunkIndex =
+        selectedChunkIndex.value == -1 ? initChunkIndex : selectedChunkIndex;
+
     return ScrollConfig(
       context,
       child: Column(
@@ -489,15 +498,25 @@ class MediaPlayerState extends State<MediaPlayer>
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           _buildTitle(),
-          buildChunkSelector(context, chunk, selected),
+          ChunkSelector(
+            context,
+            chunk,
+            selectedChunkIndex,
+            reverse,
+          ),
           Obx(
-            () => EpisodeAdaptor(
-              type: viewType.value,
-              source: widget.source,
-              episodeList: chunk[selected.value],
-              mediaData: widget.media,
-              onEpisodeClick: () => Get.back(),
-            ),
+            () {
+              List<List<Episode>> reversed = reverse.value
+                  ? chunk.map((element) => element.reversed.toList()).toList()
+                  : chunk;
+              return EpisodeAdaptor(
+                type: viewType.value,
+                source: widget.source,
+                episodeList: reversed[selectedChunkIndex.value],
+                mediaData: widget.media,
+                onEpisodeClick: () => Get.back(),
+              );
+            },
           ),
         ],
       ),
@@ -520,40 +539,27 @@ class MediaPlayerState extends State<MediaPlayer>
             overflow: TextOverflow.ellipsis,
             maxLines: 1,
           ),
-          _buildIconButtons(),
+          IconButton(
+            onPressed: () => settingsDialog(context, widget.media),
+            icon: Icon(
+              Icons.menu_rounded,
+              color: Theme.of(context).colorScheme.onSurface,
+            ),
+          ),
         ],
       ),
     );
   }
 
-  Widget _buildIconButtons() {
-    final theme = Theme.of(context).colorScheme;
-    final icons = [
-      Icons.view_list_sharp,
-      Icons.grid_view_rounded,
-      Icons.view_comfy_rounded,
-    ];
-    return Obx(() {
-      return Wrap(
-        spacing: 8.0,
-        children: List.generate(icons.length, (index) {
-          return IconButton(
-            icon: Transform(
-              alignment: Alignment.center,
-              transform:
-                  index == 0 ? Matrix4.rotationY(3.14159) : Matrix4.identity(),
-              child: Icon(icons[index]),
-            ),
-            iconSize: 24,
-            color: viewType.value == index
-                ? theme.onSurface
-                : theme.onSurface.withValues(alpha: 0.33),
-            onPressed: () => changeViewType(viewType, index),
-          );
-        }),
-      );
-    });
-  }
+  void settingsDialog(BuildContext context, m.Media media) =>
+      AnimeCompactSettings(
+        context,
+        media,
+        (i) {
+          viewType.value = i.recyclerStyle!;
+          reverse.value = i.recyclerReversed;
+        },
+      ).showDialog();
 
   void _handleKeyPress(KeyEvent event) {
     if (event is KeyDownEvent) {

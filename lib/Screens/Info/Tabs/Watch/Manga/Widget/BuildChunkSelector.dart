@@ -54,7 +54,7 @@ Widget buildChunkSelector(
   BuildContext context,
   List<List<Chapter>> chunks,
   RxInt selectedChunkIndex,
-    RxBool isReversed,
+  RxBool isReversed,
 ) {
   if (chunks.length < 2) {
     return const SizedBox();
@@ -79,7 +79,9 @@ Widget buildChunkSelector(
                         ? '${chunks[index].first.number} - ${chunks[index].last.number}'
                         : '${chunks[index].last.number} - ${chunks[index].first.number}',
                     style: const TextStyle(
-                        fontFamily: 'Poppins', fontWeight: FontWeight.bold),
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   selected: selectedChunkIndex.value == index,
                   onSelected: (bool selected) {

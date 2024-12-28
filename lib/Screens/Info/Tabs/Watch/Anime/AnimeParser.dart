@@ -1,12 +1,11 @@
 import 'package:collection/collection.dart';
 import 'package:dantotsu/Functions/string_extensions.dart';
 import 'package:dantotsu/Screens/Info/Tabs/Watch/BaseParser.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
 import '../../../../../DataClass/Episode.dart';
 import '../../../../../DataClass/Media.dart';
-import '../../../../../Preferences/PrefManager.dart';
-import '../../../../../Preferences/Preferences.dart';
 import '../../../../../api/EpisodeDetails/Anify/Anify.dart';
 import '../../../../../api/EpisodeDetails/Jikan/Jikan.dart';
 import '../../../../../api/EpisodeDetails/Kitsu/Kitsu.dart';
@@ -15,6 +14,7 @@ import '../../../../../api/Mangayomi/Eval/dart/model/m_manga.dart';
 import '../../../../../api/Mangayomi/Model/Source.dart';
 import '../../../../../api/Mangayomi/Search/get_detail.dart';
 import '../Functions/ParseChapterNumber.dart';
+import 'Widget/AnimeCompactSettings.dart';
 
 class AnimeParser extends BaseParser {
   var episodeList = Rxn<Map<String, Episode>>(null);
@@ -22,17 +22,33 @@ class AnimeParser extends BaseParser {
   var kitsuEpisodeList = Rxn<Map<String, Episode>>(null);
   var fillerEpisodesList = Rxn<Map<String, Episode>>(null);
   var viewType = 0.obs;
-  var dataLoaded = false.obs;
 
   void init(Media mediaData) async {
     if (dataLoaded.value) return;
-    viewType.value = mediaData.selected?.recyclerStyle ??
-        PrefManager.getVal(PrefName.AnimeDefaultView);
+
+    initSettings(mediaData);
     await Future.wait([
       getEpisodeData(mediaData),
       getFillerEpisodes(mediaData),
     ]);
   }
+
+  var dataLoaded = false.obs;
+  var reversed = false.obs;
+  void initSettings(Media mediaData) {
+    var selected = loadSelected(mediaData);
+    viewType.value = selected.recyclerStyle!;
+    reversed.value = selected.recyclerReversed;
+  }
+  void settingsDialog(BuildContext context, Media media) =>
+      AnimeCompactSettings(
+        context,
+        media,
+        (s) {
+          viewType.value = s.recyclerStyle!;
+          reversed.value = s.recyclerReversed;
+        },
+      ).showDialog();
 
   @override
   Future<void> wrongTitle(
@@ -70,30 +86,33 @@ class AnimeParser extends BaseParser {
     var chapters = m.chapters;
     var isFirst = true;
     var shouldNormalize = false;
-    var additionalIndex=0;
+    var additionalIndex = 0;
     episodeList.value = Map.fromEntries(
       chapters?.reversed.mapIndexed((index, chapter) {
-        final episode = MChapterToEpisode(chapter, media);
+            final episode = MChapterToEpisode(chapter, media);
 
-        if (isFirst) {
-          isFirst = false;
-          if (episode.number.toDouble() > 3.0) {
-            shouldNormalize = true;
-          }
-        }
+            if (isFirst) {
+              isFirst = false;
+              if (episode.number.toDouble() > 3.0) {
+                shouldNormalize = true;
+              }
+            }
 
-        if (shouldNormalize) {
-          if (episode.number.toDouble() % 1 != 0) {
-            additionalIndex--;
-            var remainder = (episode.number.toDouble() % 1).toStringAsFixed(2).toDouble();
-            episode.number = (index + 1 + remainder + additionalIndex).toString();
-          } else {
-            episode.number = (index + 1 + additionalIndex).toString();
-          }
-        }
+            if (shouldNormalize) {
+              if (episode.number.toDouble() % 1 != 0) {
+                additionalIndex--;
+                var remainder = (episode.number.toDouble() % 1)
+                    .toStringAsFixed(2)
+                    .toDouble();
+                episode.number =
+                    (index + 1 + remainder + additionalIndex).toString();
+              } else {
+                episode.number = (index + 1 + additionalIndex).toString();
+              }
+            }
 
-        return MapEntry(episode.number, episode);
-      }) ??
+            return MapEntry(episode.number, episode);
+          }) ??
           [],
     );
   }

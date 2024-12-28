@@ -11,6 +11,7 @@ import '../../DataClass/Setting.dart';
 import '../../Preferences/HiveDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
 import '../../Preferences/PrefManager.dart';
 import '../../Preferences/Preferences.dart';
+import '../../StorageProvider.dart';
 import '../../Theme/CustomColorPicker.dart';
 import '../../Widgets/AlertDialogBuilder.dart';
 import '../../Theme/LanguageSwitcher.dart';
