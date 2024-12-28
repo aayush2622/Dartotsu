@@ -1,3 +1,4 @@
+import 'package:dantotsu/api/Mangayomi/Model/Manga.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_qjs/quickjs/ffi.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -32,9 +33,12 @@ class SourceSelector extends ConsumerStatefulWidget {
 class _SourceSelectorState extends ConsumerState<SourceSelector> {
   @override
   Widget build(BuildContext context) {
-    final sources = widget.mediaData.anime != null
-        ? ref.watch(getExtensionsStreamProvider(false))
-        : ref.watch(getExtensionsStreamProvider(true));
+    var isAnime = widget.mediaData.anime != null;
+    final sources = isAnime
+        ? ref.watch(getExtensionsStreamProvider(ItemType.anime))
+        : widget.mediaData.format?.toLowerCase() == 'novel'
+            ? ref.watch(getExtensionsStreamProvider(ItemType.novel))
+            : ref.watch(getExtensionsStreamProvider(ItemType.manga));
 
     return Material(
       color: Colors.transparent,

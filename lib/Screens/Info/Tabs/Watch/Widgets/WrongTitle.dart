@@ -34,6 +34,7 @@ class WrongTitleDialogState extends State<WrongTitleDialog> {
   @override
   void initState() {
     super.initState();
+    focusNode = FocusNode();
     final initialSearchText =
         widget.selectedMedia?.value?.name ?? widget.mediaData.mainName();
     '';

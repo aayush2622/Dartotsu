@@ -1,4 +1,5 @@
 import 'package:dantotsu/Screens/Extensions/ExtensionList.dart';
+import 'package:dantotsu/Widgets/AlertDialogBuilder.dart';
 import 'package:dantotsu/api/Mangayomi/Model/Source.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,9 @@ import '../../Preferences/PrefManager.dart';
 import '../../Preferences/Preferences.dart';
 import '../../StorageProvider.dart';
 import '../../Widgets/ScrollConfig.dart';
+import '../../api/Mangayomi/Model/Manga.dart';
 import '../../main.dart';
+import '../Settings/language.dart';
 
 class ExtensionScreen extends ConsumerStatefulWidget {
   const ExtensionScreen({super.key});
@@ -26,7 +29,7 @@ class _BrowseScreenState extends ConsumerState<ExtensionScreen>
   void initState() {
     super.initState();
     _checkPermission();
-    _tabBarController = TabController(length: 4, vsync: this);
+    _tabBarController = TabController(length: 6, vsync: this);
     _tabBarController.animateTo(0);
     _tabBarController.addListener(() {
       setState(() {
@@ -41,15 +44,15 @@ class _BrowseScreenState extends ConsumerState<ExtensionScreen>
   }
 
   final _textEditingController = TextEditingController();
+  late var _selectedLanguage = 'all';
 
-  //bool _isSearch = false;
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context).colorScheme;
     return ScrollConfig(
       context,
       child: DefaultTabController(
-        length: 4,
+        length: 6,
         child: Scaffold(
           appBar: AppBar(
             elevation: 0,
@@ -64,41 +67,129 @@ class _BrowseScreenState extends ConsumerState<ExtensionScreen>
               ),
             ),
             iconTheme: IconThemeData(color: theme.primary),
-            bottom: TabBar(
-              indicatorSize: TabBarIndicatorSize.label,
-              isScrollable: true,
-              controller: _tabBarController,
-              dragStartBehavior: DragStartBehavior.start,
-              tabs: [
-                _buildTab(context, 'INSTALLED ANIME', false, true),
-                _buildTab(context, 'AVAILABLE ANIME', false, false),
-                _buildTab(context, 'INSTALLED MANGA', true, true),
-                _buildTab(context, 'AVAILABLE MANGA', true, false),
-              ],
-            ),
+            actions: [
+              IconButton(
+                icon: Icon(Icons.language_rounded, color: theme.primary),
+                onPressed: () {
+                  AlertDialogBuilder(context)
+                    ..setTitle('Language')
+                    ..singleChoiceItems(
+                      sortedLanguagesMap.keys.toList(),
+                      sortedLanguagesMap.keys
+                          .toList()
+                          .indexOf(_selectedLanguage),
+                      (index) {
+                        setState(() => _selectedLanguage =
+                            sortedLanguagesMap.keys.elementAt(index));
+                      },
+                    )
+                    ..show();
+                },
+              ),
+              SizedBox(width: 8.0),
+            ],
           ),
-          body: TabBarView(
-            controller: _tabBarController,
+          body: Column(
             children: [
-              Extension(
-                installed: true,
-                query: _textEditingController.text,
-                isManga: false,
+              TabBar(
+                indicatorSize: TabBarIndicatorSize.label,
+                isScrollable: true,
+                controller: _tabBarController,
+                dragStartBehavior: DragStartBehavior.start,
+                tabs: [
+                  _buildTab(
+                      context, ItemType.anime, 'INSTALLED ANIME', false, true),
+                  _buildTab(
+                      context, ItemType.anime, 'AVAILABLE ANIME', false, false),
+                  _buildTab(
+                      context, ItemType.manga, 'INSTALLED MANGA', true, true),
+                  _buildTab(
+                      context, ItemType.manga, 'AVAILABLE MANGA', true, false),
+                  _buildTab(
+                      context, ItemType.novel, 'INSTALLED NOVEL', false, true),
+                  _buildTab(
+                      context, ItemType.novel, 'AVAILABLE NOVEL', false, false),
+                ],
               ),
-              Extension(
-                installed: false,
-                query: _textEditingController.text,
-                isManga: false,
+              const SizedBox(height: 8.0),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: TextField(
+                  style: TextStyle(
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14.0,
+                    color: theme.onSurface,
+                  ),
+                  controller: _textEditingController,
+                  decoration: InputDecoration(
+                    hintText: 'Search',
+                    hintStyle: TextStyle(
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14.0,
+                      color: theme.onSurface,
+                    ),
+                    suffixIcon: Icon(Icons.search, color: theme.onSurface),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(28),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(28),
+                      borderSide: BorderSide(
+                        color: theme.primaryContainer,
+                        width: 1.0,
+                      ),
+                    ),
+                    filled: true,
+                    fillColor: Colors.grey.withOpacity(0.2),
+                  ),
+                  onChanged: (value) => setState(() {}),
+                ),
               ),
-              Extension(
-                installed: true,
-                query: _textEditingController.text,
-                isManga: true,
-              ),
-              Extension(
-                installed: false,
-                query: _textEditingController.text,
-                isManga: true,
+              const SizedBox(height: 8.0),
+              Expanded(
+                child: TabBarView(
+                  controller: _tabBarController,
+                  children: [
+                    Extension(
+                      installed: true,
+                      query: _textEditingController.text,
+                      itemType: ItemType.anime,
+                      selectedLanguage: _selectedLanguage,
+                    ),
+                    Extension(
+                      installed: false,
+                      query: _textEditingController.text,
+                      itemType: ItemType.anime,
+                      selectedLanguage: _selectedLanguage,
+                    ),
+                    Extension(
+                      installed: true,
+                      query: _textEditingController.text,
+                      itemType: ItemType.manga,
+                      selectedLanguage: _selectedLanguage,
+                    ),
+                    Extension(
+                      installed: false,
+                      query: _textEditingController.text,
+                      itemType: ItemType.manga,
+                      selectedLanguage: _selectedLanguage,
+                    ),
+                    Extension(
+                      installed: true,
+                      query: _textEditingController.text,
+                      itemType: ItemType.novel,
+                      selectedLanguage: _selectedLanguage,
+                    ),
+                    Extension(
+                      installed: false,
+                      query: _textEditingController.text,
+                      itemType: ItemType.novel,
+                      selectedLanguage: _selectedLanguage,
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
@@ -107,8 +198,8 @@ class _BrowseScreenState extends ConsumerState<ExtensionScreen>
     );
   }
 
-  Widget _buildTab(
-      BuildContext context, String label, bool isManga, bool installed) {
+  Widget _buildTab(BuildContext context, ItemType itemType, String label,
+      bool isManga, bool installed) {
     return Tab(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -122,42 +213,52 @@ class _BrowseScreenState extends ConsumerState<ExtensionScreen>
             ),
           ),
           const SizedBox(width: 8),
-          _extensionUpdateNumbers(context, isManga, installed),
+          _extensionUpdateNumbers(
+              context, itemType, installed, _selectedLanguage),
         ],
       ),
     );
   }
 }
 
-Widget _extensionUpdateNumbers(
-    BuildContext context, bool isManga, bool installed) {
+Widget _extensionUpdateNumbers(BuildContext context, ItemType itemType,
+    bool installed, String selectedLanguage) {
   return StreamBuilder(
-      stream: isar.sources
-          .filter()
-          .idIsNotNull()
-          .and()
-          .isAddedEqualTo(installed)
-          .isActiveEqualTo(true)
-          .isMangaEqualTo(isManga)
-          .watch(fireImmediately: true),
-      builder: (context, snapshot) {
-        if (snapshot.hasData && snapshot.data!.isNotEmpty) {
-          final entries = snapshot.data!
-              .where((element) => PrefManager.getVal(PrefName.NSFWExtensions)
+    stream: isar.sources
+        .filter()
+        .idIsNotNull()
+        .and()
+        .isAddedEqualTo(installed)
+        .isActiveEqualTo(true)
+        .itemTypeEqualTo(itemType)
+        .watch(fireImmediately: true),
+    builder: (context, snapshot) {
+      if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+        final entries = snapshot.data!
+            .where(
+              (element) => PrefManager.getVal(PrefName.NSFWExtensions)
                   ? true
-                  : element.isNsfw == false)
-              .toList();
-          return entries.isEmpty
-              ? Container()
-              : Text(
-                  "(${entries.length.toString()})",
-                  style: const TextStyle(
-                    fontSize: 12,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.bold,
-                  ),
-                );
-        }
-        return Container();
-      });
+                  : element.isNsfw == false,
+            )
+            .where(
+              (element) => selectedLanguage != 'all'
+                  ? element.lang!.toLowerCase() ==
+                      completeLanguageCode(selectedLanguage)
+                  : true,
+            )
+            .toList();
+        return entries.isEmpty
+            ? Container()
+            : Text(
+                "(${entries.length.toString()})",
+                style: const TextStyle(
+                  fontSize: 12,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.bold,
+                ),
+              );
+      }
+      return Container();
+    },
+  );
 }

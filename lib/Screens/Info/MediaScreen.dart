@@ -35,8 +35,10 @@ class MediaInfoPageState extends State<MediaInfoPage> {
   @override
   void initState() {
     super.initState();
-    var service = Provider.of<MediaServiceProvider>(context, listen: false).currentService;
-    _viewModel = Get.put(MediaPageViewModel(), tag: "${widget.mediaData.id.toString()}-${service.getName}");
+    var service = Provider.of<MediaServiceProvider>(context, listen: false)
+        .currentService;
+    _viewModel = Get.put(MediaPageViewModel(),
+        tag: "${widget.mediaData.id.toString()}-${service.getName}");
     mediaData = widget.mediaData;
     loadData();
   }
@@ -103,7 +105,11 @@ class MediaInfoPageState extends State<MediaInfoPage> {
         ),
         BottomNavigationBarItem(
           icon: Icon(
-            isAnime ? Icons.movie_filter_rounded : Icons.import_contacts,
+            isAnime
+                ? Icons.movie_filter_rounded
+                : mediaData.format?.toLowerCase() != 'novel'
+                    ? Icons.import_contacts
+                    : Icons.book_rounded,
           ),
           label: isAnime ? 'WATCH' : 'READ',
         ),

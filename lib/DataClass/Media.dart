@@ -263,6 +263,7 @@ class Media {
       userScore: ((apiMedia.myListStatus?.score ?? 0) * 10).toInt(),
       meanScore: ((apiMedia.mean ?? 0) * 10).toInt(),
       genres: apiMedia.genres?.map((genre) => genre.name ?? '').toList() ?? [],
+      format: apiMedia.mediaType,
       anime: getMediaType(apiMedia.mediaType) == anilistApi.MediaType.ANIME
           ? Anime(
               totalEpisodes:

@@ -15,11 +15,12 @@ class MangaParser extends BaseParser {
   var chapterList = Rxn<List<Chapter>>(null);
   var viewType = 0.obs;
   var dataLoaded = false.obs;
-
+  var reversed = false.obs;
   void init(Media mediaData) async {
     if (dataLoaded.value) return;
     viewType.value = mediaData.selected?.recyclerStyle ??
         PrefManager.getVal(PrefName.MangaDefaultView);
+    reversed.value = mediaData.selected?.recyclerReversed ?? false;
   }
 
   @override

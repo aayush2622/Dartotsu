@@ -19,7 +19,9 @@ class MPages {
         'list': list.map((v) => v.toJson()).toList(),
         'hasNextPage': hasNextPage,
       };
+}
 
+extension M on MPages {
   List<Media> toMedia() {
     return list.map((e) {
       return Media(

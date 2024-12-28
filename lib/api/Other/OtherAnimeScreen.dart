@@ -1,4 +1,5 @@
 import 'package:dantotsu/Functions/Function.dart';
+import 'package:dantotsu/api/Mangayomi/Eval/dart/model/m_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
@@ -7,6 +8,7 @@ import '../../Adaptor/Media/Widgets/MediaSection.dart';
 import '../../DataClass/Media.dart';
 import '../../Services/Screens/BaseAnimeScreen.dart';
 import '../Mangayomi/Extensions/extensions_provider.dart';
+import '../Mangayomi/Model/Manga.dart';
 import '../Mangayomi/Model/Source.dart';
 import '../Mangayomi/Search/search.dart';
 
@@ -21,7 +23,7 @@ class OtherAnimeScreen extends BaseAnimeScreen {
     resetPageData();
     final container = ProviderContainer();
     final sourcesAsyncValue =
-        await container.read(getExtensionsStreamProvider(false).future);
+        await container.read(getExtensionsStreamProvider(ItemType.anime).future);
     final installedSources = sourcesAsyncValue
         ..where((source) => source.isAdded!)
         ..reversed;

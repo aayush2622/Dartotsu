@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import '../../../../../Adaptor/Chapter/ChapterAdaptor.dart';
 import '../../../../../DataClass/Chapter.dart';
 import '../../../../../DataClass/Media.dart';
+import '../../../../../Theme/LanguageSwitcher.dart';
 import '../BaseWatchScreen.dart';
 import 'MangaParser.dart';
 import 'Widget/BuildChunkSelector.dart';
@@ -41,7 +42,6 @@ class MangaWatchScreenState extends BaseWatchScreen<MangaWatchScreen> {
 
   @override
   get widgetList => [_buildChapterList()];
-  var isReversed = true.obs;
 
   Widget _buildChapterList() {
     return Column(
@@ -78,13 +78,13 @@ class MangaWatchScreenState extends BaseWatchScreen<MangaWatchScreen> {
                 context,
                 chunks,
                 selectedChunkIndex,
-                isReversed,
+                _viewModel.reversed,
               ),
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 18, vertical: 4),
                 child: Obx(() {
                   List<List<Chapter>> reversed;
-                  if (isReversed.value) {
+                  if (_viewModel.reversed.value) {
                     reversed = chunks
                         .map((element) => element.reversed.toList())
                         .toList();
@@ -112,26 +112,37 @@ class MangaWatchScreenState extends BaseWatchScreen<MangaWatchScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Expanded(child: const Text(
-            'Chapter',
-            style: TextStyle(
-              fontFamily: 'Poppins',
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
+          Expanded(
+            child: Text(
+              getString.chapters,
+              style: TextStyle(
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+              ),
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
             ),
-            overflow: TextOverflow.ellipsis,
-            maxLines: 1,
-          ),),
+          ),
           IconButton(
             onPressed: () => toggleScanlators(),
-            icon: Icon(Icons.filter_list,),
+            icon: Icon(
+              Icons.filter_list,
+            ),
           ),
           Obx(() {
             return IconButton(
-              onPressed: () => isReversed.value = !isReversed.value,
-              icon: Icon(isReversed.value
-                  ? Icons.arrow_downward
-                  : Icons.arrow_upward,),
+              onPressed: () {
+                _viewModel.reversed.value = !_viewModel.reversed.value;
+                var type = _viewModel.loadSelected(mediaData);
+                type.recyclerReversed = _viewModel.reversed.value;
+                _viewModel.saveSelected(mediaData.id, type);
+              },
+              icon: Icon(
+                _viewModel.reversed.value
+                    ? Icons.arrow_downward
+                    : Icons.arrow_upward,
+              ),
             );
           }),
           _buildIconButtons(),
@@ -173,6 +184,13 @@ class MangaWatchScreenState extends BaseWatchScreen<MangaWatchScreen> {
     });
   }
 
+  void changeViewType(RxInt viewType, int index) {
+    var type = _viewModel.loadSelected(mediaData);
+    viewType.value = index;
+    type.recyclerStyle = index;
+    _viewModel.saveSelected(mediaData.id, type);
+  }
+
   var chapters = <Chapter>[];
   var selectedScanlators = <bool>[];
   var init = true;
@@ -192,6 +210,8 @@ class MangaWatchScreenState extends BaseWatchScreen<MangaWatchScreen> {
     };
     var allScanlators = uniqueScanlators.toList();
 
+    if (allScanlators.isEmpty || allScanlators.length == 1) return;
+
     selectedScanlators = selectedScanlators.isEmpty
         ? List<bool>.filled(allScanlators.length, true)
         : selectedScanlators;
@@ -206,7 +226,7 @@ class MangaWatchScreenState extends BaseWatchScreen<MangaWatchScreen> {
           tempList = selected;
         },
       )
-      ..setPositiveButton('Ok', () {
+      ..setPositiveButton(getString.ok, () {
         selectedScanlators = tempList;
         _viewModel.chapterList.value = chapters.where((element) {
           var scanlator = element.mChapter?.scanlator;
@@ -214,14 +234,7 @@ class MangaWatchScreenState extends BaseWatchScreen<MangaWatchScreen> {
               selectedScanlators[allScanlators.indexOf(scanlator)];
         }).toList();
       })
-      ..setNegativeButton('Cancel', () {})
+      ..setNegativeButton(getString.cancel, () {})
       ..show();
-  }
-
-  void changeViewType(RxInt viewType, int index) {
-    var type = _viewModel.loadSelected(mediaData);
-    viewType.value = index;
-    type.recyclerStyle = index;
-    _viewModel.saveSelected(mediaData.id, type);
   }
 }

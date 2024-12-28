@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:dantotsu/Functions/string_extensions.dart';
 import 'package:dantotsu/api/Mangayomi/Eval/javascript/http.dart';
 import 'package:dart_eval/dart_eval_bridge.dart';
 import 'package:dart_eval/stdlib/core.dart';
@@ -96,6 +97,13 @@ class $MProvider extends MProvider with $Bridge<MProvider> {
             returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.future, [
               BridgeTypeRef(CoreTypes.list, [$MVideo.$type])
             ])),
+            params: [
+              BridgeParameter('url',
+                  BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.string)), false),
+            ])),
+        'getHtmlContent': BridgeMethodDef(BridgeFunctionDef(
+            returns: BridgeTypeAnnotation(BridgeTypeRef(
+                CoreTypes.future, [BridgeTypeRef(CoreTypes.string)])),
             params: [
               BridgeParameter('url',
                   BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.string)), false),
@@ -856,15 +864,7 @@ class $MProvider extends MProvider with $Bridge<MProvider> {
             .then((value) => $String(value.stringResult)));
       }),
       'getUrlWithoutDomain' => $Function((_, __, List<$Value?> args) {
-        final uri = Uri.parse(args[0]!.$value.replaceAll(' ', '%20'));
-        String out = uri.path;
-        if (uri.query.isNotEmpty) {
-          out += '?${uri.query}';
-        }
-        if (uri.fragment.isNotEmpty) {
-          out += '#${uri.fragment}';
-        }
-        return $String(out);
+        return $String((args[0]!.$value as String).getUrlWithoutDomain);
       }),
       'parseHtml' => $Function((_, __, List<$Value?> args) {
         final res = MBridge.parsHtml(args[0]!.$reified);
@@ -1148,6 +1148,10 @@ class $MProvider extends MProvider with $Bridge<MProvider> {
 
     return list.map((e) => (e is $Value ? e.$reified : e) as Video).toList();
   }
+
+  @override
+  Future<String> getHtmlContent(String url) async =>
+      await $_invoke('getHtmlContent', [$String(url)]);
 
   @override
   Map<String, String> get headers {

@@ -11,6 +11,8 @@ import '../../Widgets/CachedNetworkImage.dart';
 import '../../api/Mangayomi/Extensions/GetSourceList.dart';
 import '../../api/Mangayomi/Extensions/fetch_anime_sources.dart';
 import '../../api/Mangayomi/Extensions/fetch_manga_sources.dart';
+import '../../api/Mangayomi/Extensions/fetch_novel_sources.dart';
+import '../../api/Mangayomi/Model/Manga.dart';
 import '../../api/Mangayomi/extension_preferences_providers.dart';
 import '../../api/Mangayomi/get_source_preference.dart';
 import '../../main.dart';
@@ -39,15 +41,17 @@ class _ExtensionListTileWidgetState
   Future<void> _handleSourceAction() async {
     setState(() => _isLoading = true);
 
-    if (widget.source.isManga!) {
-      await ref.read(
-          fetchMangaSourcesListProvider(id: widget.source.id, reFresh: true)
-              .future);
-    } else {
-      await ref.read(
-          fetchAnimeSourcesListProvider(id: widget.source.id, reFresh: true)
-              .future);
-    }
+    widget.source.itemType == ItemType.manga
+        ? await ref.watch(fetchMangaSourcesListProvider(
+        id: widget.source.id, reFresh: true)
+        .future)
+        : widget.source.itemType == ItemType.anime
+        ? await ref.watch(fetchAnimeSourcesListProvider(
+        id: widget.source.id, reFresh: true)
+        .future)
+        : await ref.watch(fetchNovelSourcesListProvider(
+        id: widget.source.id, reFresh: true)
+        .future);
 
     if (mounted) setState(() => _isLoading = false);
   }
@@ -160,13 +164,17 @@ class _ExtensionListTileWidgetState
                   onPressed: () async {
                     if (updateAvailable) {
                       setState(() => _isLoading = true);
-                      widget.source.isManga!
+                      widget.source.itemType == ItemType.manga
                           ? await ref.watch(fetchMangaSourcesListProvider(
-                                  id: widget.source.id, reFresh: true)
-                              .future)
-                          : await ref.watch(fetchAnimeSourcesListProvider(
-                                  id: widget.source.id, reFresh: true)
-                              .future);
+                          id: widget.source.id, reFresh: true)
+                          .future)
+                          : widget.source.itemType == ItemType.anime
+                          ? await ref.watch(fetchAnimeSourcesListProvider(
+                          id: widget.source.id, reFresh: true)
+                          .future)
+                          : await ref.watch(fetchNovelSourcesListProvider(
+                          id: widget.source.id, reFresh: true)
+                          .future);
                       if (mounted) {
                         setState(() => _isLoading = false);
                       }
