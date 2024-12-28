@@ -89,6 +89,7 @@ class WindowsPlayer extends BasePlayer {
         visible: settings.showSubtitle,
         style: TextStyle(
           fontSize: settings.subtitleSize.toDouble(),
+          fontWeight: FontWeight.values[settings.subtitleWeight.toInt()],
           fontFamily: settings.subtitleFont,
           backgroundColor: Color(settings.subtitleBackgroundColor),
           color: Color(settings.subtitleColor),

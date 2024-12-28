@@ -30,7 +30,7 @@ class WrongTitleDialog extends StatefulWidget {
 class WrongTitleDialogState extends State<WrongTitleDialog> {
   final TextEditingController textEditingController = TextEditingController();
   late Future<MPages?> searchFuture;
-
+  late FocusNode focusNode;
   @override
   void initState() {
     super.initState();
@@ -40,6 +40,18 @@ class WrongTitleDialogState extends State<WrongTitleDialog> {
     '';
     textEditingController.text = initialSearchText;
     searchFuture = _performSearch(initialSearchText);
+
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      focusNode.requestFocus();
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose;
+    textEditingController.dispose();
+    focusNode.dispose();
   }
 
   Future<MPages?> _performSearch(String query) {
@@ -66,7 +78,7 @@ class WrongTitleDialogState extends State<WrongTitleDialog> {
       viewList: [
         _buildSearchInput(theme),
         const SizedBox(height: 16.0),
-        FutureBuilder<MPages?>(
+        FutureBuilder(
           future: searchFuture,
           builder: (context, snapshot) {
             return _buildResultList(snapshot, theme);
@@ -78,6 +90,7 @@ class WrongTitleDialogState extends State<WrongTitleDialog> {
 
   Widget _buildSearchInput(ColorScheme theme) {
     return TextField(
+      focusNode: focusNode,
       controller: textEditingController,
       onSubmitted: _onSubmitted,
       style: TextStyle(

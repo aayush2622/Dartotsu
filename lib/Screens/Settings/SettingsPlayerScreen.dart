@@ -297,26 +297,10 @@ List<Widget> playerSettings(
 }
 
 Future<void> openPlayer(BuildContext context) async {
-  const allowedExtensions = [
-    'mp4',
-    'mkv',
-    'webm',
-    'avi',
-    'mov',
-    'wmv',
-    'flv',
-    'm4v',
-    '3gp',
-    'mpg',
-    'mpeg',
-    'ogv',
-    'ts',
-    'm3u8',
-  ];
-
+  if (!await StorageProvider().videoPermission()) return;
   final result = await FilePicker.platform.pickFiles(
     type: FileType.custom,
-    allowedExtensions: allowedExtensions,
+    allowedExtensions: vidMap,
   );
 
   if (result == null) return;
@@ -349,6 +333,40 @@ Future<void> openPlayer(BuildContext context) async {
     ),
   );
 }
+
+List<String> vidMap = [
+  'mp4',
+  'mkv',
+  'webm',
+  'avi',
+  'mov',
+  'wmv',
+  'flv',
+  'm4v',
+  '3gp',
+  'mpg',
+  'mpeg',
+  'ogv',
+  'ts',
+  'm3u8',
+];
+
+List<String> subMap = [
+  'srt',
+  'ass',
+  'ssa',
+  'vtt',
+  'sub',
+  'txt',
+  'dfxp',
+  'smi',
+  'stl',
+  'idx',
+  'ttml',
+  'sbv',
+  'lrc',
+  'xml'
+];
 
 List<String> speedMap(bool cursed) => cursed
     ? [

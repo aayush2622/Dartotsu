@@ -88,19 +88,24 @@ class _PlayerControllerState extends State<PlayerController> {
     setDiscordRpc();
 
     timeStamps.value = await AniSkip.getResult(
-      malId: media.idMAL,
-      episodeNumber: currentEpisode.number.toInt(),
-      episodeLength: _timeStringToSeconds(_controller.maxTime.value).toInt(),
-      useProxyForTimeStamps: false,
-    ) ?? [];
+          malId: media.idMAL,
+          episodeNumber: currentEpisode.number.toInt(),
+          episodeLength:
+              _timeStringToSeconds(_controller.maxTime.value).toInt(),
+          useProxyForTimeStamps: false,
+        ) ??
+        [];
 
     _controller.seek(Duration(seconds: currentProgress ?? 0));
     _controller.currentPosition.listen((v) {
       if (v.inSeconds > 0) {
         _saveProgress(v.inSeconds);
         timeStampsText.value = timeStamps
-            .firstWhereOrNull((e) => e.interval.startTime <= v.inSeconds && e.interval.endTime >= v.inSeconds)
-            ?.getType() ?? '';
+                .firstWhereOrNull((e) =>
+                    e.interval.startTime <= v.inSeconds &&
+                    e.interval.endTime >= v.inSeconds)
+                ?.getType() ??
+            '';
       }
     });
 
@@ -213,12 +218,14 @@ class _PlayerControllerState extends State<PlayerController> {
                 ),
               ),
               Obx(
-                () => Text(
-                  " $timeStampsText",
+                () => timeStampsText.value != '' ? Text(
+                  "  • $timeStampsText",
                   style: TextStyle(
                     color: Colors.white,
+                    fontWeight: FontWeight.w300,
+                    fontFamily: 'Poppins-SemiBold',
                   ),
-                ),
+                ) : const SizedBox(),
               ),
             ],
           ),
@@ -264,10 +271,8 @@ class _PlayerControllerState extends State<PlayerController> {
                         secondaryTrackValue:
                             bufferingValue.clamp(0.0, maxValue),
                         secondaryActiveColor: Colors.white,
-                        onChangeStart: (_) => _controller.pause(),
                         onChangeEnd: (val) async {
                           _controller.seek(Duration(seconds: val.toInt()));
-                          _controller.play();
                         },
                         onChanged: (double value) => _controller
                             .currentTime.value = _formatTime(value.toInt()),
@@ -275,9 +280,9 @@ class _PlayerControllerState extends State<PlayerController> {
                       Positioned.fill(
                         child: Padding(
                           padding: const EdgeInsets.only(
-                            left: 7.0,
-                            right: 8.0,
-                            top: 4.5,
+                            left: 3.0,
+                            right: 5.0,
+                            top: 4.4,
                           ),
                           child: LayoutBuilder(
                             builder: (context, constraints) {
@@ -286,10 +291,13 @@ class _PlayerControllerState extends State<PlayerController> {
                                 children: timeStamps.map(
                                   (timestamp) {
                                     var startPosition =
-                                        (timestamp.interval.startTime / maxValue) *
+                                        (timestamp.interval.startTime /
+                                                maxValue) *
                                             trackWidth;
                                     var endPosition =
-                                        (timestamp.interval.endTime / maxValue) * trackWidth;
+                                        (timestamp.interval.endTime /
+                                                maxValue) *
+                                            trackWidth;
 
                                     return Positioned(
                                       left:
@@ -298,7 +306,7 @@ class _PlayerControllerState extends State<PlayerController> {
                                         children: [
                                           SizedBox(
                                             width: endPosition - startPosition,
-                                            child: _buildDot(),
+                                            child: _buildLine(),
                                           ),
                                         ],
                                       ),
@@ -321,9 +329,9 @@ class _PlayerControllerState extends State<PlayerController> {
     );
   }
 
-  Widget _buildDot() {
+  Widget _buildLine() {
     return Container(
-      height: 3,
+      height: 3.4,
       decoration: BoxDecoration(
         color: Color.fromARGB(255, 56, 192, 41),
         shape: BoxShape.rectangle,
@@ -588,52 +596,33 @@ class _PlayerControllerState extends State<PlayerController> {
       title: "Subtitles",
       viewList: [_buildSubtitleList(sub)],
       negativeText: "Add Subtitle",
-      negativeCallback: () {
-        FilePicker.platform.pickFiles(
+      negativeCallback: () async {
+        var file = await FilePicker.platform.pickFiles(
           type: FileType.custom,
-          allowedExtensions: [
-            'srt',
-            'ass',
-            'ssa',
-            'vtt',
-            'sub',
-            'txt',
-            'dfxp',
-            'smi',
-            'stl',
-            'idx',
-            'ttml',
-            'sbv',
-            'lrc',
-            'xml'
-          ],
-        ).then(
-          (value) {
-            if (value != null) {
-              if (sub) {
-                currentQuality.subtitles = [
-                  v.Track(
-                    file: value.files.single.path ?? "",
-                    label: value.files.single.name,
-                  ),
-                ];
-              } else {
-                currentQuality.subtitles?.add(
-                  v.Track(
-                    file: value.files.single.path ?? "",
-                    label: value.files.single.name,
-                  ),
-                );
-              }
-              _controller.setSubtitle(
-                value.files.single.path ?? "",
-                value.files.single.name,
-              );
-              Get.back();
-              _controller.play();
-            }
-          },
+          allowedExtensions: subMap,
         );
+        if (file == null) return;
+        if (sub) {
+          currentQuality.subtitles = [
+            v.Track(
+              file: file.files.single.path ?? "",
+              label: file.files.single.name,
+            ),
+          ];
+        } else {
+          currentQuality.subtitles?.add(
+            v.Track(
+              file: file.files.single.path ?? "",
+              label: file.files.single.name,
+            ),
+          );
+        }
+        _controller.setSubtitle(
+          file.files.single.path ?? "",
+          file.files.single.name,
+        );
+        Get.back();
+        _controller.play();
       },
     );
     showCustomBottomDialog(context, subtitlesDialog);
@@ -693,7 +682,8 @@ class _PlayerControllerState extends State<PlayerController> {
                     return Text(
                       timeStampsText.value != ''
                           ? timeStamps
-                              .firstWhere((e) => e.getType() == timeStampsText.value)
+                              .firstWhere(
+                                  (e) => e.getType() == timeStampsText.value)
                               .getType()
                           : "+${settings.skipDuration}s",
                       style: const TextStyle(
@@ -719,9 +709,8 @@ class _PlayerControllerState extends State<PlayerController> {
 
   void _fastForward(int seconds) {
     if (timeStampsText.value != '') {
-      var current = timeStamps.firstWhere(
-        (element) => element.getType() == timeStampsText.value
-      );
+      var current = timeStamps
+          .firstWhere((element) => element.getType() == timeStampsText.value);
       _controller.seek(Duration(seconds: current.interval.endTime.toInt()));
       return;
     }

@@ -48,7 +48,7 @@ class EpisodeCompactView extends StatelessWidget {
               context: context,
               mediaId: mediaData.id,
               ep: episode.number,
-              width: 162,
+              width: double.infinity,
             ),
           ),
 
