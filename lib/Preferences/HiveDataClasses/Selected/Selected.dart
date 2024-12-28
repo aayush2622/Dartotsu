@@ -29,7 +29,7 @@ class Selected {
 
   Selected({
     this.window = 0,
-    this.recyclerStyle,
+    this.recyclerStyle = 0,
     this.recyclerReversed = false,
     this.chip = 0,
     this.sourceIndex = 0,
