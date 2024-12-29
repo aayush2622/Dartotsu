@@ -92,5 +92,13 @@
   "sort": "Sort",
   "utd": "Up to Down",
   "dtu": "Down to Up",
-  "scanlators": "Scanlators"
+  "scanlators": "Scanlators",
+  "installedAnime": "Installed Anime",
+  "availableAnime": "Available Anime",
+  "installedManga": "Installed Manga",
+  "availableManga": "Available Manga",
+  "installedNovel": "Installed Novel",
+  "availableNovel": "Available Novel",
+  "language": "Language",
+  "search": "Search"
 }
