@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:dantotsu/Theme/LanguageSwitcher.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -93,7 +94,8 @@ class MalHomeScreen extends BaseHomeScreen {
     final mediaSections = [
       MediaSectionData(
         type: 0,
-        title: 'Continue Watching',
+        title: getString.continueWatching,
+        pairTitle: 'Continue Watching',
         list: animeContinue.value,
         emptyIcon: Icons.movie_filter_rounded,
         emptyMessage: 'All caught up, when New?',
@@ -103,7 +105,8 @@ class MalHomeScreen extends BaseHomeScreen {
       ),
       MediaSectionData(
         type: 0,
-        title: 'OnHold Anime',
+        title: getString.onHoldAnime,
+        pairTitle: 'OnHold Anime',
         list: animeOnHold.value,
         emptyIcon: Icons.movie_filter_rounded,
         emptyMessage:
@@ -111,7 +114,8 @@ class MalHomeScreen extends BaseHomeScreen {
       ),
       MediaSectionData(
         type: 0,
-        title: 'Planned Anime',
+        title: getString.plannedAnime,
+        pairTitle: 'Planned Anime',
         list: animePlanned.value,
         emptyIcon: Icons.movie_filter_rounded,
         emptyMessage: 'All caught up, when New?',
@@ -120,14 +124,16 @@ class MalHomeScreen extends BaseHomeScreen {
       ),
       MediaSectionData(
         type: 0,
-        title: 'Dropped Anime',
+        title: getString.droppedAnime,
+        pairTitle: 'Dropped Anime',
         list: animeDropped.value,
         emptyIcon: Icons.movie_filter_rounded,
         emptyMessage: 'You haven\'t dropped any anime yet.',
       ),
       MediaSectionData(
         type: 0,
-        title: 'Continue Reading',
+        title: getString.continueReading,
+        pairTitle: 'Continue Reading',
         list: mangaContinue.value,
         emptyIcon: Icons.import_contacts,
         emptyMessage: 'All caught up, when New?',
@@ -136,7 +142,8 @@ class MalHomeScreen extends BaseHomeScreen {
       ),
       MediaSectionData(
         type: 0,
-        title: 'OnHold Manga',
+        title: getString.onHoldManga,
+        pairTitle: 'OnHold Manga',
         list: mangaOnHold.value,
         emptyIcon: Icons.import_contacts,
         emptyMessage:
@@ -144,7 +151,8 @@ class MalHomeScreen extends BaseHomeScreen {
       ),
       MediaSectionData(
         type: 0,
-        title: 'Planned Manga',
+        title: getString.plannedManga,
+        pairTitle: 'Planned Manga',
         list: mangaPlanned.value,
         emptyIcon: Icons.import_contacts,
         emptyMessage: 'All caught up, when New?',
@@ -153,7 +161,8 @@ class MalHomeScreen extends BaseHomeScreen {
       ),
       MediaSectionData(
         type: 0,
-        title: 'Dropped Manga',
+        title: getString.droppedManga,
+        pairTitle: 'Dropped Manga',
         list: mangaDropped.value,
         emptyIcon: Icons.import_contacts,
         emptyMessage: 'You haven\'t dropped any manga yet.',
@@ -162,7 +171,7 @@ class MalHomeScreen extends BaseHomeScreen {
 
     final homeLayoutMap = PrefManager.getVal(PrefName.malHomeLayout);
     final sectionMap = {
-      for (var section in mediaSections) section.title: section
+      for (var section in mediaSections) section.pairTitle: section
     };
     final sectionWidgets = homeLayoutMap.entries
         .where((entry) => entry.value)

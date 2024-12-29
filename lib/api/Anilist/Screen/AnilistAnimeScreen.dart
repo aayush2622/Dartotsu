@@ -8,6 +8,7 @@ import '../../../Functions/Function.dart';
 import '../../../Preferences/PrefManager.dart';
 import '../../../Preferences/Preferences.dart';
 import '../../../Services/Screens/BaseAnimeScreen.dart';
+import '../../../Theme/LanguageSwitcher.dart';
 import '../Anilist.dart' hide Anilist;
 
 class AnilistAnimeScreen extends BaseAnimeScreen {
@@ -95,28 +96,32 @@ class AnilistAnimeScreen extends BaseAnimeScreen {
     final mediaSections = [
       MediaSectionData(
         type: 0,
-        title: 'Recent Updates',
+        title: getString.recentUpdates,
+        pairTitle: 'Recent Updates',
         list: updated.value,
       ),
       MediaSectionData(
         type: 0,
-        title: 'Trending Movies',
+        title: getString.trendingMovies,
+        pairTitle: 'Trending Movies',
         list: popularMovies.value,
       ),
       MediaSectionData(
         type: 0,
-        title: 'Top Rated Series',
+        title: getString.topRatedSeries,
+        pairTitle: 'Top Rated Series',
         list: topRatedSeries.value,
       ),
       MediaSectionData(
         type: 0,
-        title: 'Most Favourite Series',
+        title: getString.mostFavouriteSeries,
+        pairTitle: 'Most Favourite Series',
         list: mostFavSeries.value,
       ),
     ];
     final animeLayoutMap = PrefManager.getVal(PrefName.anilistAnimeLayout);
     final sectionMap = {
-      for (var section in mediaSections) section.title: section
+      for (var section in mediaSections) section.pairTitle: section
     };
     return animeLayoutMap.entries
         .where((entry) => entry.value)
@@ -133,7 +138,7 @@ class AnilistAnimeScreen extends BaseAnimeScreen {
       ..add(MediaSection(
           context: context,
           type: 2,
-          title: 'Popular Anime',
+          title: getString.popularAnime,
           mediaList: animePopular.value));
   }
 }

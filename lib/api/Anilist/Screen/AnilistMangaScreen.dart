@@ -8,6 +8,7 @@ import '../../../Functions/Function.dart';
 import '../../../Preferences/PrefManager.dart';
 import '../../../Preferences/Preferences.dart';
 import '../../../Services/Screens/BaseMangaScreen.dart';
+import '../../../Theme/LanguageSwitcher.dart';
 import '../Anilist.dart';
 
 class AnilistMangaScreen extends BaseMangaScreen {
@@ -93,17 +94,33 @@ class AnilistMangaScreen extends BaseMangaScreen {
   List<Widget> mediaContent(BuildContext context) {
     final mediaSections = [
       MediaSectionData(
-          type: 0, title: 'Trending Manhwa', list: popularManhwa.value),
+        type: 0,
+        title: getString.trendingManhwa,
+        pairTitle: 'Trending Manhwa',
+        list: popularManhwa.value,
+      ),
       MediaSectionData(
-          type: 0, title: 'Trending Novels', list: popularNovel.value),
+        type: 0,
+        title: getString.trendingNovels,
+        pairTitle: 'Trending Novels',
+        list: popularNovel.value,
+      ),
       MediaSectionData(
-          type: 0, title: 'Top Rated Manga', list: topRatedManga.value),
+        type: 0,
+        title: getString.topRatedManga,
+        pairTitle: 'Top Rated Manga',
+        list: topRatedManga.value,
+      ),
       MediaSectionData(
-          type: 0, title: 'Most Favourite Manga', list: mostFavManga.value),
+        type: 0,
+        title: getString.mostFavouriteManga,
+        pairTitle: 'Most Favourite Manga',
+        list: mostFavManga.value,
+      ),
     ];
     final mangaLayoutMap = PrefManager.getVal(PrefName.anilistMangaLayout);
     final sectionMap = {
-      for (var section in mediaSections) section.title: section
+      for (var section in mediaSections) section.pairTitle: section
     };
     return mangaLayoutMap.entries
         .where((entry) => entry.value)
@@ -120,7 +137,7 @@ class AnilistMangaScreen extends BaseMangaScreen {
         MediaSection(
           context: context,
           type: 2,
-          title: 'Popular Manga',
+          title: getString.popularManga,
           mediaList: mangaPopular.value,
         ),
       );
