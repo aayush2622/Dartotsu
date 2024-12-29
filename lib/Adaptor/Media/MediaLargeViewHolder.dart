@@ -92,7 +92,10 @@ class MediaPageLargeViewHolder extends StatelessWidget {
 
   Widget _buildContent(BuildContext context, ColorScheme theme) {
     return Padding(
-      padding: const EdgeInsets.only(left: 16),
+      padding: EdgeInsets.only(
+        left: Directionality.of(context) == TextDirection.rtl ? 0.0 : 16.0,
+        right: Directionality.of(context) == TextDirection.rtl ? 16.0 : 0.0,
+      ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,

@@ -69,8 +69,13 @@ Widget buildChunkSelector(
           (index) {
             return Padding(
               padding: EdgeInsets.only(
-                  left: index == 0 ? 32.0 : 6.0,
-                  right: index == chunks.length - 1 ? 32.0 : 6.0),
+                left: Directionality.of(context) == TextDirection.rtl
+                    ? (index == chunks.length - 1 ? 32.0 : 6.0)
+                    : (index == 0 ? 32.0 : 6.0),
+                right: Directionality.of(context) == TextDirection.rtl
+                    ? (index == 0 ? 32.0 : 6.0)
+                    : (index == chunks.length - 1 ? 32.0 : 6.0),
+              ),
               child: Obx(
                 () => ChoiceChip(
                   showCheckmark: false,

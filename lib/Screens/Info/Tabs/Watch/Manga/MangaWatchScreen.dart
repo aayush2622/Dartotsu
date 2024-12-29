@@ -1,5 +1,4 @@
 import 'package:dantotsu/Screens/Info/Tabs/Watch/BaseParser.dart';
-import 'package:dantotsu/Widgets/AlertDialogBuilder.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

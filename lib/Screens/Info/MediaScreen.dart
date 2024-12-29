@@ -10,8 +10,8 @@ import 'package:provider/provider.dart';
 
 import '../../DataClass/Media.dart';
 import '../../Functions/Function.dart';
-import '../../Theme/LanguageSwitcher.dart';
 import '../../Services/ServiceSwitcher.dart';
+import '../../Theme/LanguageSwitcher.dart';
 import '../../Theme/ThemeProvider.dart';
 import '../../Widgets/CachedNetworkImage.dart';
 import '../../Widgets/ScrollConfig.dart';
@@ -228,7 +228,15 @@ class MediaInfoPageState extends State<MediaInfoPage> {
           ),
           _buildCloseButton(theme),
           Padding(
-              padding: EdgeInsets.only(top: 64.statusBar(), left: 32),
+              padding: EdgeInsets.only(
+                top: 64.statusBar(),
+                left: Directionality.of(context) == TextDirection.rtl
+                    ? 0.0
+                    : 32.0,
+                right: Directionality.of(context) == TextDirection.rtl
+                    ? 32.0
+                    : 0.0,
+              ),
               child: _buildMediaInfo(theme)),
           _buildAddToListButton(theme),
         ],

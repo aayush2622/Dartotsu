@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:dantotsu/Screens/Login/LoginScreen.dart';
 import 'package:dantotsu/Screens/Manga/MangaScreen.dart';
-import 'package:dantotsu/api/EpisodeDetails/GetMediaIDs/GetMediaIDs.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -47,15 +46,17 @@ void main(List<String> args) async {
 
 Future init() async {
   await PrefManager.init();
-  initializeMediaServices();
   await StorageProvider().requestPermission();
   isar = await StorageProvider().initDB(null);
+
+  initializeMediaServices();
   MediaKit.ensureInitialized();
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
     await WindowManager.instance.ensureInitialized();
   }
+
   TypeFactory.registerAllTypes();
-  await GetMediaIDs.getData();
+
   initializeDateFormatting();
   final supportedLocales = DateFormat.allLocalesWithSymbols();
   for (var locale in supportedLocales) {

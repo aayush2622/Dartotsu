@@ -170,7 +170,8 @@ class HomeScreenState extends State<HomeScreen> {
 
   Widget _buildAvatar(BaseServiceData data) {
     return Positioned(
-      right: 32,
+      left: Directionality.of(context) == TextDirection.rtl ? 32 : null,
+      right: Directionality.of(context) == TextDirection.ltr ? 32 : null,
       top: 36.statusBar(),
       child: SlideUpAnimation(
         child: Stack(

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 import '../../Functions/Function.dart';
+import '../../api/EpisodeDetails/GetMediaIDs/GetMediaIDs.dart';
 
 abstract class BaseMediaScreen extends GetxController {
   var page = 1;
@@ -31,7 +32,10 @@ abstract class BaseMediaScreen extends GetxController {
     ever(live, (bool shouldRefresh) async {
       if (running.value && shouldRefresh) {
         running.value = false;
-        await loadAll();
+        await Future.wait([
+          loadAll(),
+          GetMediaIDs.getData(),
+        ]);
         initialLoad = true;
         live.value = false;
         running.value = true;

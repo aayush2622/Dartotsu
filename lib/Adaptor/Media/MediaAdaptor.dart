@@ -120,9 +120,13 @@ class MediaGridState extends State<MediaAdaptor> {
             final tag = _generateTag(index);
             return Container(
               width: 102,
-              margin: const EdgeInsets.symmetric(horizontal: 6.5).copyWith(
-                left: index == 0 ? 24.0 : 6.5,
-                right: index == _mediaList.length - 1 ? 24.0 : 6.5,
+              margin: EdgeInsets.symmetric(horizontal: 6.5).copyWith(
+                left: Directionality.of(context) == TextDirection.rtl
+                    ? (index == _mediaList.length - 1 ? 24.0 : 6.5)
+                    : (index == 0 ? 24.0 : 6.5),
+                right: Directionality.of(context) == TextDirection.rtl
+                    ? (index == 0 ? 24.0 : 6.5)
+                    : (index == _mediaList.length - 1 ? 24.0 : 6.5),
               ),
               child: _buildAnimatedMediaItem(
                 child: MediaViewHolder(

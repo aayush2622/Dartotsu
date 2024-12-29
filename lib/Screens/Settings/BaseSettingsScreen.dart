@@ -44,7 +44,8 @@ abstract class BaseSettingsScreen<T extends StatefulWidget> extends State<T> {
         children: [
           Positioned(
             top: 42.statusBar(),
-            left: 24,
+            left: Directionality.of(context) == TextDirection.rtl ? null : 24,
+            right: Directionality.of(context) == TextDirection.rtl ? 24 : null,
             child: Card(
               elevation: 0,
               color: theme.surface,

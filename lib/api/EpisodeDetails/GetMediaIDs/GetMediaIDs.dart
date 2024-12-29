@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_qjs/quickjs/ffi.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:json_annotation/json_annotation.dart';
 
@@ -61,8 +61,16 @@ class GetMediaIDs {
       (entry) => entry.toJson()[fieldName] == id,
     );
   }
-
+  static var loading = true.obs;
+  static var loaded = false.obs;
   static Future<List<AnimeID>?> getData() async {
+    if (loaded.value) {
+      while (loading.value) {
+        await Future.delayed(Duration(milliseconds: 100));
+      }
+      return _animeListFuture;
+    }
+    loaded.value = true;
     if (_animeListFuture != null) {
       return _animeListFuture;
     }
@@ -73,6 +81,7 @@ class GetMediaIDs {
     if (response.statusCode == 200) {
       List<dynamic> jsonData = jsonDecode(response.body);
       _animeListFuture = jsonData.map((e) => AnimeID.fromJson(e)).toList();
+      loading.value = false;
       return _animeListFuture;
     } else {
       debugPrint('Failed to load data: ${response.statusCode}');
