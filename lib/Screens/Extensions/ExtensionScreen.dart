@@ -12,6 +12,7 @@ import '../../StorageProvider.dart';
 import '../../Widgets/ScrollConfig.dart';
 import '../../api/Mangayomi/Model/Manga.dart';
 import '../../main.dart';
+import '../Screens/Settings/language.dart';
 import '../Settings/language.dart';
 
 class ExtensionScreen extends ConsumerStatefulWidget {
@@ -57,8 +58,7 @@ class _BrowseScreenState extends ConsumerState<ExtensionScreen>
           appBar: AppBar(
             elevation: 0,
             backgroundColor: Colors.transparent,
-            title: Text(
-              'Extensions',
+            title: Text(getString.extensions),
               style: TextStyle(
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.bold,
@@ -72,7 +72,7 @@ class _BrowseScreenState extends ConsumerState<ExtensionScreen>
                 icon: Icon(Icons.language_rounded, color: theme.primary),
                 onPressed: () {
                   AlertDialogBuilder(context)
-                    ..setTitle('Language')
+                    ..setTitle(getString.language)
                     ..singleChoiceItems(
                       sortedLanguagesMap.keys.toList(),
                       sortedLanguagesMap.keys
@@ -97,19 +97,19 @@ class _BrowseScreenState extends ConsumerState<ExtensionScreen>
                 controller: _tabBarController,
                 dragStartBehavior: DragStartBehavior.start,
                 tabs: [
-                  _buildTab(
-                      context, ItemType.anime, 'INSTALLED ANIME', false, true),
-                  _buildTab(
-                      context, ItemType.anime, 'AVAILABLE ANIME', false, false),
-                  _buildTab(
-                      context, ItemType.manga, 'INSTALLED MANGA', true, true),
-                  _buildTab(
-                      context, ItemType.manga, 'AVAILABLE MANGA', true, false),
-                  _buildTab(
-                      context, ItemType.novel, 'INSTALLED NOVEL', false, true),
-                  _buildTab(
-                      context, ItemType.novel, 'AVAILABLE NOVEL', false, false),
-                ],
+                _buildTab(
+                    context, ItemType.anime, getString.installedAnime, false, true),
+                _buildTab(
+                    context, ItemType.anime, getString.availableAnime, false, false),
+                _buildTab(
+                    context, ItemType.manga, getString.installedManga, true, true),
+                _buildTab(
+                    context, ItemType.manga, getString.availableManga, true, false),
+                _buildTab(
+                    context, ItemType.novel, getString.installedNovel, false, true),
+                _buildTab(
+                    context, ItemType.novel, getString.availableNovel, false, false),
+              ],
               ),
               const SizedBox(height: 8.0),
               Padding(
@@ -123,7 +123,7 @@ class _BrowseScreenState extends ConsumerState<ExtensionScreen>
                   ),
                   controller: _textEditingController,
                   decoration: InputDecoration(
-                    hintText: 'Search',
+                    hintText: getString.search,
                     hintStyle: TextStyle(
                       fontFamily: 'Poppins',
                       fontWeight: FontWeight.bold,
