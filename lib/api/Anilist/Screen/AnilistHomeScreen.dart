@@ -10,10 +10,10 @@ import '../../../DataClass/User.dart';
 import '../../../Functions/Function.dart';
 import '../../../Preferences/PrefManager.dart';
 import '../../../Preferences/Preferences.dart';
+import '../../../Theme/LanguageSwitcher.dart';
 import '../../../Widgets/CustomElevatedButton.dart';
 import '../../../main.dart';
 import '../Anilist.dart';
-import '../Screens/Settings/language.dart';
 
 class AnilistHomeScreen extends BaseHomeScreen {
   final AnilistController Anilist;
@@ -92,15 +92,17 @@ class AnilistHomeScreen extends BaseHomeScreen {
       MediaSectionData(
         type: 0,
         title: getString.continueWatching,
+        pairTitle: 'Continue Watching',
         list: animeContinue.value,
         emptyIcon: Icons.movie_filter_rounded,
         emptyMessage: getString.allCaughtUpNew,
-        emptyButtonText: getString.browseAnime
+        emptyButtonText: getString.browseAnime,
         emptyButtonOnPressed: () => navbar?.onClick(0),
       ),
       MediaSectionData(
         type: 0,
         title: getString.favouriteAnime,
+        pairTitle: 'Favourite Anime',
         list: animeFav.value,
         emptyIcon: Icons.heart_broken,
         emptyMessage:
@@ -109,6 +111,7 @@ class AnilistHomeScreen extends BaseHomeScreen {
       MediaSectionData(
         type: 0,
         title: getString.plannedAnime,
+        pairTitle: 'Planned Anime',
         list: animePlanned.value,
         emptyIcon: Icons.movie_filter_rounded,
         emptyMessage: getString.allCaughtUpNew,
@@ -118,6 +121,7 @@ class AnilistHomeScreen extends BaseHomeScreen {
       MediaSectionData(
         type: 0,
         title: getString.continueReading,
+        pairTitle: 'Continue Reading',
         list: mangaContinue.value,
         emptyIcon: Icons.import_contacts,
         emptyMessage: getString.allCaughtUpNew,
@@ -127,6 +131,7 @@ class AnilistHomeScreen extends BaseHomeScreen {
       MediaSectionData(
         type: 0,
         title: getString.favouriteManga,
+        pairTitle: 'Favourite Manga',
         list: mangaFav.value,
         emptyIcon: Icons.heart_broken,
         emptyMessage:
@@ -135,6 +140,7 @@ class AnilistHomeScreen extends BaseHomeScreen {
       MediaSectionData(
         type: 0,
         title: getString.plannedManga,
+        pairTitle: 'Planned Manga',
         list: mangaPlanned.value,
         emptyIcon: Icons.import_contacts,
         emptyMessage: getString.allCaughtUpNew,
@@ -144,6 +150,7 @@ class AnilistHomeScreen extends BaseHomeScreen {
       MediaSectionData(
         type: 0,
         title: getString.recommended,
+        pairTitle: 'Recommended',
         list: recommendation.value,
         emptyIcon: Icons.auto_awesome,
         isLarge: true,
@@ -153,7 +160,7 @@ class AnilistHomeScreen extends BaseHomeScreen {
 
     final homeLayoutMap = PrefManager.getVal(PrefName.anilistHomeLayout);
     final sectionMap = {
-      for (var section in mediaSections) section.title: section
+      for (var section in mediaSections) section.pairTitle : section
     };
     final sectionWidgets = homeLayoutMap.entries
         .where((entry) => entry.value)

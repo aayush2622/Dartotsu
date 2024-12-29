@@ -1,3 +1,4 @@
+import 'package:dantotsu/Theme/LanguageSwitcher.dart';
 import 'package:dantotsu/api/MyAnimeList/MalQueries.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -86,28 +87,32 @@ class MalAnimeScreen extends BaseAnimeScreen {
     final mediaSections = [
       MediaSectionData(
         type: 0,
-        title: 'Top Airing',
+        title: getString.topAiring,
+        pairTitle: 'Top Airing',
         list: updated.value,
       ),
       MediaSectionData(
         type: 0,
-        title: 'Trending Movies',
+        title: getString.trendingMovies,
+        pairTitle: 'Trending Movies',
         list: popularMovies.value,
       ),
       MediaSectionData(
         type: 0,
-        title: 'Top Rated Series',
+        title: getString.topRatedSeries,
+        pairTitle: 'Top Rated Series',
         list: topRatedSeries.value,
       ),
       MediaSectionData(
         type: 0,
-        title: 'Most Favourite Series',
+        title: getString.mostFavouriteSeries,
+        pairTitle: 'Most Favourite Series',
         list: mostFavSeries.value,
       ),
     ];
     final animeLayoutMap = PrefManager.getVal(PrefName.malAnimeLayout);
     final sectionMap = {
-      for (var section in mediaSections) section.title: section
+      for (var section in mediaSections) section.pairTitle : section
     };
     return animeLayoutMap.entries
         .where((entry) => entry.value)
