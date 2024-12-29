@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 
 import '../../DataClass/Media.dart';
 import '../../Functions/Function.dart';
-import '../Screens/Settings/language.dart';
+import '../../Theme/LanguageSwitcher.dart';
 import '../../Services/ServiceSwitcher.dart';
 import '../../Theme/ThemeProvider.dart';
 import '../../Widgets/CachedNetworkImage.dart';
@@ -100,8 +100,8 @@ class MediaInfoPageState extends State<MediaInfoPage> {
     return BottomNavigationBar(
       backgroundColor: Theme.of(context).colorScheme.surface,
       items: [
-        const BottomNavigationBarItem(
-          icon: Icon(Icons.info),
+        BottomNavigationBarItem(
+          icon: const Icon(Icons.info),
           label: getString.info,
         ),
         BottomNavigationBarItem(
@@ -114,7 +114,7 @@ class MediaInfoPageState extends State<MediaInfoPage> {
           ),
           label: isAnime ? getString.watch : getString.read,
         ),
-        const BottomNavigationBarItem(
+        BottomNavigationBarItem(
           icon: Icon(Icons.chat_bubble_rounded),
           label: getString.comments,
         ),

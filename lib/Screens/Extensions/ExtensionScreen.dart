@@ -12,7 +12,7 @@ import '../../StorageProvider.dart';
 import '../../Widgets/ScrollConfig.dart';
 import '../../api/Mangayomi/Model/Manga.dart';
 import '../../main.dart';
-import '../Screens/Settings/language.dart';
+import '../../Theme/LanguageSwitcher.dart';
 import '../Settings/language.dart';
 
 class ExtensionScreen extends ConsumerStatefulWidget {
@@ -58,7 +58,7 @@ class _BrowseScreenState extends ConsumerState<ExtensionScreen>
           appBar: AppBar(
             elevation: 0,
             backgroundColor: Colors.transparent,
-            title: Text(getString.extensions),
+            title: Text(getString.extensions,
               style: TextStyle(
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.bold,
