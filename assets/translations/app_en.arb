@@ -4,6 +4,7 @@
   "account": "Account",
   "accountDescription": "Manage your AniList, MAL, and Discord accounts effortlessly",
   "activities": "Activities",
+  "addToList": "ADD TO LIST",
   "anime": "Anime",
   "animeDescription": "Personalize and manage your anime preferences",
   "anilist": "AniList",
@@ -20,6 +21,7 @@
   "chapters": "Chapters",
   "colorPicker": "Color Picker",
   "colorPickerDescription": "Choose a color",
+  "comments": "COMMENTS",
   "common": "Common",
   "commonDescription": "Access general settings for seamless app usage",
   "compact": "Compact",
@@ -49,6 +51,7 @@
   "hidePrivateDescription": "Hide private media from the home page",
   "incognitoMode": "Incognito Mode",
   "incognitoModeDescription": "Browse without saving your activity",
+  "info": "INFO",
   "installedAnime": "Installed Anime",
   "installedManga": "Installed Manga",
   "installedNovel": "Installed Novel",
@@ -81,6 +84,7 @@
   "outlineColor": "Outline Color",
   "outlineColorDescription": "Subtitle outline color",
   "playerSettingsTitle": "Player Settings",
+  "read": "READ",
   "resizeMode": "Resize mode",
   "resizeModeDescription": "Default resize mode for player",
   "restoreSettings": "Restore Settings",
@@ -100,5 +104,6 @@
   "theme": "Theme",
   "themeDescription": "Customize the appearance and vibe of your app",
   "utd": "Up to Down",
+  "watch": "WATCH",
   "yes": "Yes"
 }
