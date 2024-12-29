@@ -9,6 +9,7 @@ import '../../../Preferences/PrefManager.dart';
 import '../../../Preferences/Preferences.dart';
 import '../../../Services/Screens/BaseAnimeScreen.dart';
 import '../Anilist.dart' hide Anilist;
+import '../Screens/Settings/language.dart';
 
 class AnilistAnimeScreen extends BaseAnimeScreen {
   final AnilistController Anilist;
@@ -95,22 +96,22 @@ class AnilistAnimeScreen extends BaseAnimeScreen {
     final mediaSections = [
       MediaSectionData(
         type: 0,
-        title: 'Recent Updates',
+        title: getString.recentUpdates,
         list: updated.value,
       ),
       MediaSectionData(
         type: 0,
-        title: 'Trending Movies',
+        title: getString.trendingMovies,
         list: popularMovies.value,
       ),
       MediaSectionData(
         type: 0,
-        title: 'Top Rated Series',
+        title: getString.topRatedSeries,
         list: topRatedSeries.value,
       ),
       MediaSectionData(
         type: 0,
-        title: 'Most Favourite Series',
+        title: getString.mostFavouriteSeries,
         list: mostFavSeries.value,
       ),
     ];
@@ -133,7 +134,7 @@ class AnilistAnimeScreen extends BaseAnimeScreen {
       ..add(MediaSection(
           context: context,
           type: 2,
-          title: 'Popular Anime',
+          title: getString.popularAnime,
           mediaList: animePopular.value));
   }
 }
