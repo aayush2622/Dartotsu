@@ -168,5 +168,9 @@
   "allCaughtUpNew": "كده خلاص، امتي الجديد ؟",
   "@allCaughtUpNew": {},
   "addToList": "الاضافة الي القائمة",
-  "@addToList": {}
+  "@addToList": {},
+  "availableManga": "مصادر المانجا المتاحة",
+  "@availableManga": {},
+  "availableAnime": "مصادر الانمي المتاحة",
+  "@availableAnime": {}
 }
