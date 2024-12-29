@@ -13,6 +13,7 @@ import '../../../Preferences/Preferences.dart';
 import '../../../Widgets/CustomElevatedButton.dart';
 import '../../../main.dart';
 import '../Anilist.dart';
+import '../Screens/Settings/language.dart';
 
 class AnilistHomeScreen extends BaseHomeScreen {
   final AnilistController Anilist;
@@ -90,63 +91,63 @@ class AnilistHomeScreen extends BaseHomeScreen {
     final mediaSections = [
       MediaSectionData(
         type: 0,
-        title: 'Continue Watching',
+        title: getString.continueWatching,
         list: animeContinue.value,
         emptyIcon: Icons.movie_filter_rounded,
-        emptyMessage: 'All caught up, when New?',
-        emptyButtonText: 'Browse\nAnime',
+        emptyMessage: getString.allCaughtUpNew,
+        emptyButtonText: getString.browseAnime
         emptyButtonOnPressed: () => navbar?.onClick(0),
       ),
       MediaSectionData(
         type: 0,
-        title: 'Favourite Anime',
+        title: getString.favouriteAnime,
         list: animeFav.value,
         emptyIcon: Icons.heart_broken,
         emptyMessage:
-            'Looks like you don\'t like anything,\nTry liking a show to keep it here.',
+            getString.noFavouritesAnime,
       ),
       MediaSectionData(
         type: 0,
-        title: 'Planned Anime',
+        title: getString.plannedAnime,
         list: animePlanned.value,
         emptyIcon: Icons.movie_filter_rounded,
-        emptyMessage: 'All caught up, when New?',
-        emptyButtonText: 'Browse\nAnime',
+        emptyMessage: getString.allCaughtUpNew,
+        emptyButtonText: getString.browseAnime,
         emptyButtonOnPressed: () => navbar?.onClick(0),
       ),
       MediaSectionData(
         type: 0,
-        title: 'Continue Reading',
+        title: getString.continueReading,
         list: mangaContinue.value,
         emptyIcon: Icons.import_contacts,
-        emptyMessage: 'All caught up, when New?',
-        emptyButtonText: 'Browse\nManga',
+        emptyMessage: getString.allCaughtUpNew,
+        emptyButtonText: getString.browseManga,
         emptyButtonOnPressed: () => navbar?.onClick(2),
       ),
       MediaSectionData(
         type: 0,
-        title: 'Favourite Manga',
+        title: getString.favouriteManga,
         list: mangaFav.value,
         emptyIcon: Icons.heart_broken,
         emptyMessage:
-            'Looks like you don\'t like anything,\nTry liking a show to keep it here.',
+            getString.noFavouritesManga,
       ),
       MediaSectionData(
         type: 0,
-        title: 'Planned Manga',
+        title: getString.plannedManga,
         list: mangaPlanned.value,
         emptyIcon: Icons.import_contacts,
-        emptyMessage: 'All caught up, when New?',
-        emptyButtonText: 'Browse\nManga',
+        emptyMessage: getString.allCaughtUpNew,
+        emptyButtonText: getString.browseManga,
         emptyButtonOnPressed: () => navbar?.onClick(2),
       ),
       MediaSectionData(
         type: 0,
-        title: 'Recommended',
+        title: getString.recommended,
         list: recommendation.value,
         emptyIcon: Icons.auto_awesome,
         isLarge: true,
-        emptyMessage: 'Watch/Read some Anime or Manga to get Recommendations',
+        emptyMessage: getString.recommendationsEmptyMessage,
       ),
     ];
 
@@ -187,13 +188,13 @@ class AnilistHomeScreen extends BaseHomeScreen {
     var hiddenMedia = MediaSection(
       context: context,
       type: 0,
-      title: 'Hidden Media',
+      title: getString.hiddenMedia,
       mediaList: hidden.value,
       onLongPressTitle: () => showHidden.value = !showHidden.value,
       customNullListIndicator: _buildNullIndicator(
         context,
         Icons.visibility_off,
-        'No hidden media found',
+        getString.noHiddenMediaFound,
         null,
         null,
       ),
