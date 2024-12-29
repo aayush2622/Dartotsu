@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 
 import '../../DataClass/Media.dart';
 import '../../Functions/Function.dart';
+import '../Screens/Settings/language.dart';
 import '../../Services/ServiceSwitcher.dart';
 import '../../Theme/ThemeProvider.dart';
 import '../../Widgets/CachedNetworkImage.dart';
@@ -101,7 +102,7 @@ class MediaInfoPageState extends State<MediaInfoPage> {
       items: [
         const BottomNavigationBarItem(
           icon: Icon(Icons.info),
-          label: 'INFO',
+          label: getString.info,
         ),
         BottomNavigationBarItem(
           icon: Icon(
@@ -111,11 +112,11 @@ class MediaInfoPageState extends State<MediaInfoPage> {
                     ? Icons.import_contacts
                     : Icons.book_rounded,
           ),
-          label: isAnime ? 'WATCH' : 'READ',
+          label: isAnime ? getString.watch : getString.read,
         ),
         const BottomNavigationBarItem(
           icon: Icon(Icons.chat_bubble_rounded),
-          label: 'COMMENTS',
+          label: getString.comments,
         ),
       ],
       selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
@@ -340,7 +341,7 @@ class MediaInfoPageState extends State<MediaInfoPage> {
           backgroundColor: Colors.transparent,
         ),
         child: Text(
-          mediaData.userStatus?.toUpperCase() ?? 'ADD TO LIST',
+          mediaData.userStatus?.toUpperCase() ?? getString.addToList,
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 14,
