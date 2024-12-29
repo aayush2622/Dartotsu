@@ -97,19 +97,19 @@ class _BrowseScreenState extends ConsumerState<ExtensionScreen>
                 controller: _tabBarController,
                 dragStartBehavior: DragStartBehavior.start,
                 tabs: [
-                _buildTab(
-                    context, ItemType.anime, getString.installedAnime, false, true),
-                _buildTab(
-                    context, ItemType.anime, getString.availableAnime, false, false),
-                _buildTab(
-                    context, ItemType.manga, getString.installedManga, true, true),
-                _buildTab(
-                    context, ItemType.manga, getString.availableManga, true, false),
-                _buildTab(
-                    context, ItemType.novel, getString.installedNovel, false, true),
-                _buildTab(
-                    context, ItemType.novel, getString.availableNovel, false, false),
-              ],
+                  _buildTab(
+                      context, ItemType.anime, getString.installedAnime, false, true),
+                  _buildTab(
+                      context, ItemType.anime, getString.availableAnime, false, false),
+                  _buildTab(
+                      context, ItemType.manga, getString.installedManga, true, true),
+                  _buildTab(
+                      context, ItemType.manga, getString.availableManga, true, false),
+                  _buildTab(
+                      context, ItemType.novel, getString.installedNovel, false, true),
+                  _buildTab(
+                      context, ItemType.novel, getString.availableNovel, false, false),
+                ],
               ),
               const SizedBox(height: 8.0),
               Padding(
