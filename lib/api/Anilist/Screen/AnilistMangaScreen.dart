@@ -9,6 +9,7 @@ import '../../../Preferences/PrefManager.dart';
 import '../../../Preferences/Preferences.dart';
 import '../../../Services/Screens/BaseMangaScreen.dart';
 import '../Anilist.dart';
+import '../Screens/Settings/language.dart';
 
 class AnilistMangaScreen extends BaseMangaScreen {
   final AnilistController Anilist;
@@ -93,13 +94,13 @@ class AnilistMangaScreen extends BaseMangaScreen {
   List<Widget> mediaContent(BuildContext context) {
     final mediaSections = [
       MediaSectionData(
-          type: 0, title: 'Trending Manhwa', list: popularManhwa.value),
+          type: 0, title: getString.trendingManhwa, list: popularManhwa.value),
       MediaSectionData(
-          type: 0, title: 'Trending Novels', list: popularNovel.value),
+          type: 0, title: getString.trendingNovels, list: popularNovel.value),
       MediaSectionData(
-          type: 0, title: 'Top Rated Manga', list: topRatedManga.value),
+          type: 0, title: getString.topRatedManga, list: topRatedManga.value),
       MediaSectionData(
-          type: 0, title: 'Most Favourite Manga', list: mostFavManga.value),
+          type: 0, title: getString.mostFavouriteManga, list: mostFavManga.value),
     ];
     final mangaLayoutMap = PrefManager.getVal(PrefName.anilistMangaLayout);
     final sectionMap = {
@@ -120,7 +121,7 @@ class AnilistMangaScreen extends BaseMangaScreen {
         MediaSection(
           context: context,
           type: 2,
-          title: 'Popular Manga',
+          title: getString.popularManga,
           mediaList: mangaPopular.value,
         ),
       );
