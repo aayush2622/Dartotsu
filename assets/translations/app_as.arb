@@ -272,5 +272,7 @@
   "test": "পৰীক্ষা",
   "@test": {},
   "recentUpdates": "শেহতীয়া আপডেটসমূহ",
-  "@recentUpdates": {}
+  "@recentUpdates": {},
+  "allCaughtUpNew": "সকলো হ'ল, নতুন কি চাবা?",
+  "@allCaughtUpNew": {}
 }
