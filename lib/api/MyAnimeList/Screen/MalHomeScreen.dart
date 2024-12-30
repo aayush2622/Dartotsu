@@ -110,7 +110,7 @@ class MalHomeScreen extends BaseHomeScreen {
         list: animeOnHold.value,
         emptyIcon: Icons.movie_filter_rounded,
         emptyMessage:
-            'Looks like you haven\'t put anything on hold.',
+            getString.noOnHoldAnime,
       ),
       MediaSectionData(
         type: 0,
@@ -128,7 +128,7 @@ class MalHomeScreen extends BaseHomeScreen {
         pairTitle: 'Dropped Anime',
         list: animeDropped.value,
         emptyIcon: Icons.movie_filter_rounded,
-        emptyMessage: 'You haven\'t dropped any anime yet.',
+        emptyMessage: getString.noDroppedAnime,
       ),
       MediaSectionData(
         type: 0,
@@ -147,7 +147,7 @@ class MalHomeScreen extends BaseHomeScreen {
         list: mangaOnHold.value,
         emptyIcon: Icons.import_contacts,
         emptyMessage:
-            'Looks like you haven\'t put anything on hold.',
+            getString.noOnHoldManga,
       ),
       MediaSectionData(
         type: 0,
@@ -165,7 +165,7 @@ class MalHomeScreen extends BaseHomeScreen {
         pairTitle: 'Dropped Manga',
         list: mangaDropped.value,
         emptyIcon: Icons.import_contacts,
-        emptyMessage: 'You haven\'t dropped any manga yet.',
+        emptyMessage: getString.noDroppedManga,
       ),
     ];
 
