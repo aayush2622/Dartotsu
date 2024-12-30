@@ -132,7 +132,8 @@ class MalAnimeScreen extends BaseAnimeScreen {
         MediaSection(
             context: context,
             type: 2,
-            title: 'Popular Anime',
+            title: getString.popularAnime,
+            pairTitle: 'Popular Anime',
             mediaList: animePopular.value),
       );
   }
