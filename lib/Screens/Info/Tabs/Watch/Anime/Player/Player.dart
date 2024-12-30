@@ -5,7 +5,6 @@ import 'dart:math';
 import 'package:dantotsu/Preferences/HiveDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
 import 'package:dantotsu/Preferences/PrefManager.dart';
 import 'package:dantotsu/Preferences/Preferences.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -92,16 +91,14 @@ class MediaPlayerState extends State<MediaPlayer>
     }
   }
 
-  final _isCursorVisible = true.obs;
   Timer? _hideCursorTimer;
+
   void _onMouseMoved() {
-    if (!_isCursorVisible.value) {
-      _isCursorVisible.value = true;
+    if (!showControls.value) {
       showControls.value = true;
     }
     _hideCursorTimer?.cancel();
     _hideCursorTimer = Timer(const Duration(seconds: 3), () {
-      _isCursorVisible.value = false;
       showControls.value = false;
     });
   }
@@ -110,6 +107,7 @@ class MediaPlayerState extends State<MediaPlayer>
     currentQuality = widget.videos[widget.index];
     videoPlayerController = WindowsPlayer(resizeMode, settings);
     videoPlayerController.open(currentQuality.url, Duration.zero);
+    _onMouseMoved();
   }
 
   void _loadPlayerSettings() {
@@ -161,39 +159,35 @@ class MediaPlayerState extends State<MediaPlayer>
   Widget build(BuildContext context) {
     return Obx(
           () {
-        return GestureDetector(
-          onTap: _onMouseMoved,
-          onPanUpdate: (_) => _onMouseMoved(),
-          child: MouseRegion(
-            onHover:(_) => _onMouseMoved(),
-            cursor: defaultTargetPlatform == TargetPlatform.macOS || defaultTargetPlatform == TargetPlatform.windows
-                ? (_isCursorVisible.value
-                ? SystemMouseCursors.basic
-                : SystemMouseCursors.none)
-                : SystemMouseCursors.basic,
-            child: Scaffold(
-              body: LayoutBuilder(
-                builder: (context, constraints) {
-                  const double minWidth = 250;
-                  final double availableWidth = constraints.maxWidth;
+        return MouseRegion(
+          onHover: (_) => _onMouseMoved(),
+          cursor: showControls.value
+              ? SystemMouseCursors.basic
+              : SystemMouseCursors.none,
+          child: Scaffold(
+            body: LayoutBuilder(
+              builder: (context, constraints) {
+                const double minWidth = 250;
+                final double availableWidth = constraints.maxWidth;
 
-                  double episodePanelWidth =
-                  (availableWidth / 3).clamp(minWidth, availableWidth);
+                double episodePanelWidth =
+                    (availableWidth / 3).clamp(minWidth, availableWidth);
 
-                  return StatefulBuilder(
-                    builder: (context, setState) {
-                      return Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          _buildVideoPlayer(availableWidth, episodePanelWidth),
-                          Obx(() {
+                return StatefulBuilder(
+                  builder: (context, setState) {
+                    return Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _buildVideoPlayer(availableWidth, episodePanelWidth),
+                        Obx(
+                          () {
                             if (!showEpisodes.value) {
                               return const SizedBox();
                             }
                             return GestureDetector(
                               onHorizontalDragUpdate: (details) {
                                 setState(
-                                      () => episodePanelWidth =
+                                  () => episodePanelWidth =
                                       (episodePanelWidth - details.delta.dx)
                                           .clamp(minWidth, availableWidth),
                                 );
@@ -206,13 +200,13 @@ class MediaPlayerState extends State<MediaPlayer>
                                 ),
                               ),
                             );
-                          }),
-                        ],
-                      );
-                    },
-                  );
-                },
-              ),
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
             ),
           ),
         );
@@ -235,12 +229,12 @@ class MediaPlayerState extends State<MediaPlayer>
               onKeyEvent: _handleKeyPress,
               child: GestureDetector(
                 behavior: HitTestBehavior.opaque,
-                onTapDown: (_) => showControls.value = !showControls.value,
+                onTapDown: (_) => _onMouseMoved(),
+                onPanUpdate: (_) => _onMouseMoved(),
                 onDoubleTapDown: (t) => _handleDoubleTap(t),
                 onVerticalDragUpdate: (e) async {
                   final delta = e.delta.dy;
                   final Offset position = e.localPosition;
-
                   if (position.dx <= MediaQuery.of(context).size.width / 2) {
                     final brightness = _brightnessValue.value - delta / 500;
                     final result = brightness.clamp(0.0, 1.0);
