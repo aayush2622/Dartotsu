@@ -9,7 +9,7 @@ import 'Anilist.dart';
 
 CustomBottomDialog login(BuildContext context) {
   return CustomBottomDialog(
-    title: "Login to Anilist",
+    title: getString.loginToAniList,
     viewList: [
       const SizedBox(height: 38),
       _buildLoginButton(
