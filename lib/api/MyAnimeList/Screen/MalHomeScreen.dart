@@ -110,7 +110,7 @@ class MalHomeScreen extends BaseHomeScreen {
         list: animeOnHold.value,
         emptyIcon: Icons.movie_filter_rounded,
         emptyMessage:
-            getString.noOnHoldAnime,
+            getString.noOnHold,
       ),
       MediaSectionData(
         type: 0,
@@ -147,7 +147,7 @@ class MalHomeScreen extends BaseHomeScreen {
         list: mangaOnHold.value,
         emptyIcon: Icons.import_contacts,
         emptyMessage:
-            getString.noOnHoldManga,
+            getString.noOnHold,
       ),
       MediaSectionData(
         type: 0,
