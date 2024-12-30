@@ -270,5 +270,15 @@
   "info": "معلومات",
   "@info": {},
   "test": "test",
-  "@test": {}
+  "@test": {},
+  "loginToMAL": "تسجيل الدخول إلي MyAnimeList",
+  "@loginToMAL": {},
+  "noDroppedAnime": "انت لم تترك أي انمي حتي الآن.",
+  "@noDroppedAnime": {},
+  "noDroppedManga": "انت لم تترك أي مانجا حتي الآن.",
+  "@noDroppedManga": {},
+  "noOnHold": "إنت لم توقف أي شئ حتي الآن.",
+  "@noOnHold": {},
+  "loginToAniList": "تسجيل الدخول إلي Anilist",
+  "@loginToAniList": {}
 }
