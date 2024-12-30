@@ -8,6 +8,7 @@ import 'package:flutter_web_auth_2/flutter_web_auth_2.dart';
 import 'package:http/http.dart' as http;
 
 import '../../Functions/Function.dart';
+import '../../Theme/LanguageSwitcher.dart';
 import '../../Widgets/CustomBottomDialog.dart';
 import 'Mal.dart';
 

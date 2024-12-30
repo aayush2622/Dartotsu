@@ -133,7 +133,6 @@ class MalAnimeScreen extends BaseAnimeScreen {
             context: context,
             type: 2,
             title: getString.popularAnime,
-            pairTitle: 'Popular Anime',
             mediaList: animePopular.value),
       );
   }

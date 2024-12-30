@@ -133,12 +133,15 @@ class AnilistAnimeScreen extends BaseAnimeScreen {
               title: section.title,
               mediaList: section.list,
               scrollController: section.scrollController,
-            ))
+          ),
+        )
         .toList()
       ..add(MediaSection(
           context: context,
           type: 2,
           title: getString.popularAnime,
-          mediaList: animePopular.value));
+          mediaList: animePopular.value,
+        ),
+      );
   }
 }
