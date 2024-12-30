@@ -69,6 +69,8 @@
   "layout": "Layout",
   "list": "List",
   "login": "Login",
+  "loginToAniList": "Login to Anilist",
+  "loginToMAL": "Login to MyAnimeList",
   "logout": "Logout",
   "logoutConfirmation": "Are you sure you want to logout?",
   "mal": "MyAnimeList",
