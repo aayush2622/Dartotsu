@@ -11,6 +11,7 @@ import '../../../Functions/Function.dart';
 import '../../../Preferences/PrefManager.dart';
 import '../../../Preferences/Preferences.dart';
 import '../../../Services/Screens/BaseHomeScreen.dart';
+import '../../../Theme/LanguageSwitcher.dart';
 import '../../../Widgets/CustomElevatedButton.dart';
 import '../../../main.dart';
 import '../Mal.dart';
