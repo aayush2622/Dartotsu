@@ -128,7 +128,8 @@ class MalMangaScreen extends BaseMangaScreen {
         MediaSection(
           context: context,
           type: 2,
-          title: 'Popular Manga',
+          title: getString.popularManga,
+          pairTitle: 'Popular Manga',
           mediaList: mangaPopular.value,
         ),
       );
