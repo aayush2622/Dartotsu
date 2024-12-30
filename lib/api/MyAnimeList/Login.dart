@@ -13,7 +13,7 @@ import 'Mal.dart';
 
 CustomBottomDialog login(BuildContext context) {
   return CustomBottomDialog(
-    title: "Login to MyAnimeList",
+    title: getString.loginToMAL, 
     viewList: [
       const SizedBox(height: 12),
       _buildLoginButton(
