@@ -5,6 +5,7 @@ import 'dart:math';
 import 'package:dantotsu/Preferences/HiveDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
 import 'package:dantotsu/Preferences/PrefManager.dart';
 import 'package:dantotsu/Preferences/Preferences.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -93,8 +94,7 @@ class MediaPlayerState extends State<MediaPlayer>
 
   final _isCursorVisible = true.obs;
   Timer? _hideCursorTimer;
-
-  void _onMouseMoved(PointerEvent event) {
+  void _onMouseMoved() {
     if (!_isCursorVisible.value) {
       _isCursorVisible.value = true;
       showControls.value = true;
@@ -102,7 +102,6 @@ class MediaPlayerState extends State<MediaPlayer>
     _hideCursorTimer?.cancel();
     _hideCursorTimer = Timer(const Duration(seconds: 3), () {
       _isCursorVisible.value = false;
-
       showControls.value = false;
     });
   }
@@ -146,7 +145,7 @@ class MediaPlayerState extends State<MediaPlayer>
     if (state) {
       SystemChrome.setPreferredOrientations(
           [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
-      SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
+      SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     } else {
       SystemChrome.setPreferredOrientations([
         DeviceOrientation.portraitUp,
@@ -161,53 +160,59 @@ class MediaPlayerState extends State<MediaPlayer>
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () {
-        return MouseRegion(
-          onHover: _onMouseMoved,
-          cursor: _isCursorVisible.value
-              ? SystemMouseCursors.basic
-              : SystemMouseCursors.none,
-          child: Scaffold(
-            body: LayoutBuilder(
-              builder: (context, constraints) {
-                const double minWidth = 250;
-                final double availableWidth = constraints.maxWidth;
+          () {
+        return GestureDetector(
+          onTap: _onMouseMoved,
+          onPanUpdate: (_) => _onMouseMoved(),
+          child: MouseRegion(
+            onHover:(_) => _onMouseMoved(),
+            cursor: defaultTargetPlatform == TargetPlatform.macOS || defaultTargetPlatform == TargetPlatform.windows
+                ? (_isCursorVisible.value
+                ? SystemMouseCursors.basic
+                : SystemMouseCursors.none)
+                : SystemMouseCursors.basic,
+            child: Scaffold(
+              body: LayoutBuilder(
+                builder: (context, constraints) {
+                  const double minWidth = 250;
+                  final double availableWidth = constraints.maxWidth;
 
-                double episodePanelWidth =
-                    (availableWidth / 3).clamp(minWidth, availableWidth);
+                  double episodePanelWidth =
+                  (availableWidth / 3).clamp(minWidth, availableWidth);
 
-                return StatefulBuilder(
-                  builder: (context, setState) {
-                    return Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        _buildVideoPlayer(availableWidth, episodePanelWidth),
-                        Obx(() {
-                          if (!showEpisodes.value) {
-                            return const SizedBox();
-                          }
-                          return GestureDetector(
-                            onHorizontalDragUpdate: (details) {
-                              setState(
-                                () => episodePanelWidth =
-                                    (episodePanelWidth - details.delta.dx)
-                                        .clamp(minWidth, availableWidth),
-                              );
-                            },
-                            child: SizedBox(
-                              width: episodePanelWidth,
-                              child: SingleChildScrollView(
-                                padding: const EdgeInsets.all(8.0),
-                                child: _buildEpisodeList(),
+                  return StatefulBuilder(
+                    builder: (context, setState) {
+                      return Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _buildVideoPlayer(availableWidth, episodePanelWidth),
+                          Obx(() {
+                            if (!showEpisodes.value) {
+                              return const SizedBox();
+                            }
+                            return GestureDetector(
+                              onHorizontalDragUpdate: (details) {
+                                setState(
+                                      () => episodePanelWidth =
+                                      (episodePanelWidth - details.delta.dx)
+                                          .clamp(minWidth, availableWidth),
+                                );
+                              },
+                              child: SizedBox(
+                                width: episodePanelWidth,
+                                child: SingleChildScrollView(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: _buildEpisodeList(),
+                                ),
                               ),
-                            ),
-                          );
-                        }),
-                      ],
-                    );
-                  },
-                );
-              },
+                            );
+                          }),
+                        ],
+                      );
+                    },
+                  );
+                },
+              ),
             ),
           ),
         );
@@ -483,9 +488,10 @@ class MediaPlayerState extends State<MediaPlayer>
   }
 
   Widget _buildEpisodeList() {
-    Map<String, Episode> episodeList = widget.media.anime?.episodes ?? {};
+    var episodeList = widget.media.anime?.episodes ?? {};
     var (chunk, initChunkIndex) =
         buildChunks(context, episodeList, widget.media.userProgress.toString());
+
     RxInt selectedChunkIndex = (-1).obs;
     selectedChunkIndex =
         selectedChunkIndex.value == -1 ? initChunkIndex : selectedChunkIndex;
@@ -506,7 +512,7 @@ class MediaPlayerState extends State<MediaPlayer>
           ),
           Obx(
             () {
-              List<List<Episode>> reversed = reverse.value
+              var reversed = reverse.value
                   ? chunk.map((element) => element.reversed.toList()).toList()
                   : chunk;
               return EpisodeAdaptor(
@@ -540,7 +546,7 @@ class MediaPlayerState extends State<MediaPlayer>
             maxLines: 1,
           ),
           IconButton(
-            onPressed: () => settingsDialog(context, widget.media),
+            onPressed: () => settingsDialog(),
             icon: Icon(
               Icons.menu_rounded,
               color: Theme.of(context).colorScheme.onSurface,
@@ -551,10 +557,10 @@ class MediaPlayerState extends State<MediaPlayer>
     );
   }
 
-  void settingsDialog(BuildContext context, m.Media media) =>
+  void settingsDialog() =>
       AnimeCompactSettings(
         context,
-        media,
+        widget.media,
         (i) {
           viewType.value = i.recyclerStyle!;
           reverse.value = i.recyclerReversed;

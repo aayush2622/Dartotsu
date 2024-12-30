@@ -18,7 +18,7 @@ Widget languageSwitcher(BuildContext context) {
       final newLocale = Locale(completeLanguageCode(newValue).toLowerCase());
       Get.updateLocale(newLocale);
     },
-    prefixIcon: Icons.language,
+    prefixIcon: Icons.translate,
   );
 }
 

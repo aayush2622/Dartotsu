@@ -1,23 +1,24 @@
 import 'dart:io';
 
+import 'package:dantotsu/Adaptor/Episode/EpisodeAdaptor.dart';
+import 'package:dantotsu/DataClass/Episode.dart';
+import 'package:dantotsu/DataClass/Media.dart' as m;
+import 'package:dantotsu/Functions/Function.dart';
 import 'package:dantotsu/Functions/string_extensions.dart';
+import 'package:dantotsu/Preferences/HiveDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
 import 'package:dantotsu/Preferences/PrefManager.dart';
 import 'package:dantotsu/Preferences/Preferences.dart';
 import 'package:dantotsu/Widgets/AlertDialogBuilder.dart';
+import 'package:dantotsu/Widgets/CustomBottomDialog.dart';
+import 'package:dantotsu/api/Mangayomi/Eval/dart/model/video.dart' as v;
+import 'package:dantotsu/api/Mangayomi/Model/Source.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
 import 'package:window_manager/window_manager.dart';
-import 'package:dantotsu/Adaptor/Episode/EpisodeAdaptor.dart';
-import 'package:dantotsu/DataClass/Episode.dart';
-import 'package:dantotsu/DataClass/Media.dart' as m;
-import 'package:dantotsu/Functions/Function.dart';
-import 'package:dantotsu/Preferences/HiveDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
-import 'package:dantotsu/Widgets/CustomBottomDialog.dart';
-import 'package:dantotsu/api/Mangayomi/Eval/dart/model/video.dart' as v;
-import 'package:dantotsu/api/Mangayomi/Model/Source.dart';
+
 import '../../../../../../Services/ServiceSwitcher.dart';
 import '../../../../../../api/Discord/Discord.dart';
 import '../../../../../../api/Discord/DiscordService.dart';
@@ -85,30 +86,11 @@ class _PlayerControllerState extends State<PlayerController> {
     while (_controller.maxTime.value == '00:00') {
       await Future.delayed(const Duration(milliseconds: 100));
     }
-    setDiscordRpc();
 
-    timeStamps.value = await AniSkip.getResult(
-          malId: media.idMAL,
-          episodeNumber: currentEpisode.number.toInt(),
-          episodeLength:
-              _timeStringToSeconds(_controller.maxTime.value).toInt(),
-          useProxyForTimeStamps: false,
-        ) ??
-        [];
+    setDiscordRpc();
+    setTimeStamps();
 
     _controller.seek(Duration(seconds: currentProgress ?? 0));
-    _controller.currentPosition.listen((v) {
-      if (v.inSeconds > 0) {
-        _saveProgress(v.inSeconds);
-        timeStampsText.value = timeStamps
-                .firstWhereOrNull((e) =>
-                    e.interval.startTime <= v.inSeconds &&
-                    e.interval.endTime >= v.inSeconds)
-                ?.getType() ??
-            '';
-      }
-    });
-
     var list = PrefManager.getCustomVal<List<int>>("continueAnimeList") ?? [];
     if (list.contains(media.id)) list.remove(media.id);
 
@@ -127,6 +109,28 @@ class _PlayerControllerState extends State<PlayerController> {
     PrefManager.setCustomVal<int>(
         "${media.id}-${currentEpisode.number}-$sourceName-max",
         _timeStringToSeconds(maxProgress).toInt());
+  }
+
+  Future<void> setTimeStamps() async {
+    timeStamps.value = await AniSkip.getResult(
+          malId: media.idMAL,
+          episodeNumber: currentEpisode.number.toInt(),
+          episodeLength:
+              _timeStringToSeconds(_controller.maxTime.value).toInt(),
+          useProxyForTimeStamps: false,
+        ) ??
+        [];
+
+    _controller.currentPosition.listen((v) {
+      if (v.inSeconds > 0) {
+        _saveProgress(v.inSeconds);
+        timeStampsText.value = timeStamps
+            .firstWhereOrNull((e) =>
+        e.interval.startTime <= v.inSeconds &&
+            e.interval.endTime >= v.inSeconds,
+        )?.getType() ?? '';
+      }
+    });
   }
 
   Future<void> setDiscordRpc() async {

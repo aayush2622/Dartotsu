@@ -33,6 +33,7 @@ class SettingsCommonScreenState extends BaseSettingsScreen {
   @override
   List<Widget> get settingsList {
     return [
+      languageSwitcher(context),
       Text(
         getString.anilist,
         style: const TextStyle(

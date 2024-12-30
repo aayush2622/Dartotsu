@@ -33,7 +33,6 @@ class SettingsThemeScreenState extends BaseSettingsScreen {
   @override
   List<Widget> get settingsList => [
         themeDropdown(context),
-        languageSwitcher(context),
         SettingsAdaptor(
           settings: _buildSettings(context),
         ),
