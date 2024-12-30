@@ -213,8 +213,6 @@
   "@mostFavouriteManga": {},
   "mostFavouriteSeries": "اكثر الانميات تفضيلا",
   "@mostFavouriteSeries": {},
-  "noFavouritesManga": "انت مش عاجبك حاجة ولا ايه؟\nجرب تعمل لايك علي حاجة عشان تظهر هنا.",
-  "@noFavouritesManga": {},
   "noHiddenMediaFound": "لا يوجد محتوي مخفي",
   "@noHiddenMediaFound": {},
   "options": "اختيارات",
@@ -271,8 +269,6 @@
   "@layout": {},
   "info": "معلومات",
   "@info": {},
-  "noFavouritesAnime": "انت مش عاجبك حاجة ولا ايه؟\nجرب تعمل لايك علي حاجة عشان تظهر هنا.",
-  "@noFavouritesAnime": {},
   "test": "test",
   "@test": {}
 }
