@@ -3,13 +3,14 @@ import 'package:flutter_svg/svg.dart';
 import 'package:flutter_web_auth_2/flutter_web_auth_2.dart';
 
 import '../../Functions/Function.dart';
+import '../../Theme/LanguageSwitcher.dart';
 import '../../Widgets/AlertDialogBuilder.dart';
 import '../../Widgets/CustomBottomDialog.dart';
 import 'Anilist.dart';
 
 CustomBottomDialog login(BuildContext context) {
   return CustomBottomDialog(
-    title: "Login to Anilist",
+    title: getString.loginToAniList,
     viewList: [
       const SizedBox(height: 38),
       _buildLoginButton(

@@ -98,8 +98,8 @@ class MalHomeScreen extends BaseHomeScreen {
         pairTitle: 'Continue Watching',
         list: animeContinue.value,
         emptyIcon: Icons.movie_filter_rounded,
-        emptyMessage: 'All caught up, when New?',
-        emptyButtonText: 'Browse\nAnime',
+        emptyMessage: getString.allCaughtUpNew,
+        emptyButtonText: getString.browseAnime,
         emptyButtonOnPressed: () => navbar?.onClick(0),
         onLongPressTitle: () => showHidden.value = !showHidden.value,
       ),
@@ -110,7 +110,7 @@ class MalHomeScreen extends BaseHomeScreen {
         list: animeOnHold.value,
         emptyIcon: Icons.movie_filter_rounded,
         emptyMessage:
-            'Looks like you haven\'t put anything on hold.',
+            getString.noOnHold,
       ),
       MediaSectionData(
         type: 0,
@@ -118,8 +118,8 @@ class MalHomeScreen extends BaseHomeScreen {
         pairTitle: 'Planned Anime',
         list: animePlanned.value,
         emptyIcon: Icons.movie_filter_rounded,
-        emptyMessage: 'All caught up, when New?',
-        emptyButtonText: 'Browse\nAnime',
+        emptyMessage: getString.allCaughtUpNew,
+        emptyButtonText: getString.browseAnime,
         emptyButtonOnPressed: () => navbar?.onClick(0),
       ),
       MediaSectionData(
@@ -128,7 +128,7 @@ class MalHomeScreen extends BaseHomeScreen {
         pairTitle: 'Dropped Anime',
         list: animeDropped.value,
         emptyIcon: Icons.movie_filter_rounded,
-        emptyMessage: 'You haven\'t dropped any anime yet.',
+        emptyMessage: getString.noDroppedAnime,
       ),
       MediaSectionData(
         type: 0,
@@ -136,8 +136,8 @@ class MalHomeScreen extends BaseHomeScreen {
         pairTitle: 'Continue Reading',
         list: mangaContinue.value,
         emptyIcon: Icons.import_contacts,
-        emptyMessage: 'All caught up, when New?',
-        emptyButtonText: 'Browse\nManga',
+        emptyMessage: getString.allCaughtUpNew,
+        emptyButtonText: getString.browseAnime,
         emptyButtonOnPressed: () => navbar?.onClick(2),
       ),
       MediaSectionData(
@@ -147,7 +147,7 @@ class MalHomeScreen extends BaseHomeScreen {
         list: mangaOnHold.value,
         emptyIcon: Icons.import_contacts,
         emptyMessage:
-            'Looks like you haven\'t put anything on hold.',
+            getString.noOnHold,
       ),
       MediaSectionData(
         type: 0,
@@ -155,8 +155,8 @@ class MalHomeScreen extends BaseHomeScreen {
         pairTitle: 'Planned Manga',
         list: mangaPlanned.value,
         emptyIcon: Icons.import_contacts,
-        emptyMessage: 'All caught up, when New?',
-        emptyButtonText: 'Browse\nManga',
+        emptyMessage: getString.allCaughtUpNew,
+        emptyButtonText: getString.browseAnime,
         emptyButtonOnPressed: () => navbar?.onClick(2),
       ),
       MediaSectionData(
@@ -165,7 +165,7 @@ class MalHomeScreen extends BaseHomeScreen {
         pairTitle: 'Dropped Manga',
         list: mangaDropped.value,
         emptyIcon: Icons.import_contacts,
-        emptyMessage: 'You haven\'t dropped any manga yet.',
+        emptyMessage: getString.noDroppedManga,
       ),
     ];
 
@@ -206,13 +206,13 @@ class MalHomeScreen extends BaseHomeScreen {
     var hiddenMedia = MediaSection(
       context: context,
       type: 0,
-      title: 'Hidden Media',
+      title: getString.hiddenMedia,
       mediaList: hidden.value,
       onLongPressTitle: () => showHidden.value = !showHidden.value,
       customNullListIndicator: _buildNullIndicator(
         context,
         Icons.visibility_off,
-        'No hidden media found',
+        getString.noHiddenMediaFound,
         null,
         null,
       ),

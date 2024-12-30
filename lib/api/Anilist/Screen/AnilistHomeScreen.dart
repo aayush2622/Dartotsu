@@ -106,7 +106,7 @@ class AnilistHomeScreen extends BaseHomeScreen {
         list: animeFav.value,
         emptyIcon: Icons.heart_broken,
         emptyMessage:
-            getString.noFavouritesAnime,
+            getString.noFavourites,
       ),
       MediaSectionData(
         type: 0,
@@ -135,7 +135,7 @@ class AnilistHomeScreen extends BaseHomeScreen {
         list: mangaFav.value,
         emptyIcon: Icons.heart_broken,
         emptyMessage:
-            getString.noFavouritesManga,
+            getString.noFavourites,
       ),
       MediaSectionData(
         type: 0,
