@@ -270,5 +270,17 @@
   "recentUpdates": "শেহতীয়া আপডেটসমূহ",
   "@recentUpdates": {},
   "allCaughtUpNew": "সকলো হ'ল, নতুন কি চাবা?",
-  "@allCaughtUpNew": {}
+  "@allCaughtUpNew": {},
+  "loginToMAL": "MyAnimeList ত লগইন কৰক",
+  "@loginToMAL": {},
+  "noDroppedAnime": "আপুনি এতিয়াও কোনো এনিমে আঁতৰোৱা নাই।",
+  "@noDroppedAnime": {},
+  "noDroppedManga": "আপুনি এতিয়াও কোনো মাংগা আঁতৰোৱা নাই।",
+  "@noDroppedManga": {},
+  "noFavourites": "দেখাত একো ভাল নালাগে,\nইয়াত ৰাখিবলৈ এটা শ্ব’ লাইক কৰি চাওক।",
+  "@noFavourites": {},
+  "noOnHold": "দেখাত একো স্থগিত ৰখা নাই।",
+  "@noOnHold": {},
+  "loginToAniList": "Anilist ত লগইন কৰক",
+  "@loginToAniList": {}
 }
