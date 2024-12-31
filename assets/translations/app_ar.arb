@@ -280,5 +280,7 @@
   "noOnHold": "إنت لم توقف أي شئ حتي الآن.",
   "@noOnHold": {},
   "loginToAniList": "تسجيل الدخول إلي Anilist",
-  "@loginToAniList": {}
+  "@loginToAniList": {},
+  "noFavourites": "يبدو أنك لا تحب شيئا،\nحاول الإعجاب بالعرض للاحتفاظ به هنا.",
+  "@noFavourites": {}
 }
