@@ -270,5 +270,15 @@
   "test": "Test",
   "@test": {},
   "supportMaintainer": "Želite li podržati održavatelja Dartotsua?\nRazmislite o donaciji",
-  "@supportMaintainer": {}
+  "@supportMaintainer": {},
+  "loginToAniList": "Prijavite se na Anilist",
+  "@loginToAniList": {},
+  "noDroppedAnime": "Još nisi izbacio nijedan anime.",
+  "@noDroppedAnime": {},
+  "noDroppedManga": "Još niste izbacili nijednu manga.",
+  "@noDroppedManga": {},
+  "noOnHold": "Čini se da ništa niste stavili na čekanje.",
+  "@noOnHold": {},
+  "noFavourites": "Izgleda da ti se ništa ne sviđa,\nPokušajte označiti da vam se emisija sviđa da biste je zadržali ovdje.",
+  "@noFavourites": {}
 }
