@@ -58,7 +58,7 @@ We welcome contributions, from translations to new features. For inquiries, join
 
 ## 🤵 Visitors
 
-<img src="https://count.getloli.com/@dawndartotsu?name=dawndartotsu&theme=rule34&padding=8&offset=0&align=top&scale=1&pixelated=1&darkmode=auto" />
+<img src="https://count.getloli.com/@aayush2622?name=dartotsu&theme=rule34&padding=8&offset=0&align=top&scale=1&pixelated=1&darkmode=auto" />
 
 ## 🙏 Acknowledgments
 A heartfelt thank you to everyone who has contributed to the development of Dartotsu.
