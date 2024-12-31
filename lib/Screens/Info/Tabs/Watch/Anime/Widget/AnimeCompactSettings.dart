@@ -26,7 +26,7 @@ class AnimeCompactSettings {
 
   void get _initialiseSettings {
     settings = loadSelected();
-    viewType.value = settings.recyclerStyle!;
+    viewType.value = settings.recyclerStyle;
     reverse.value = settings.recyclerReversed;
   }
 

@@ -18,7 +18,7 @@ class SelectedAdapter extends TypeAdapter<Selected> {
     };
     return Selected(
       window: fields[0] as int,
-      recyclerStyle: fields[1] as int?,
+      recyclerStyle: fields[1] as int,
       recyclerReversed: fields[2] as bool,
       chip: fields[3] as int,
       sourceIndex: fields[4] as int,

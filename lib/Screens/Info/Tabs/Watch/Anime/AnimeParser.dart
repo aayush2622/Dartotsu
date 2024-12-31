@@ -37,7 +37,7 @@ class AnimeParser extends BaseParser {
   var reversed = false.obs;
   void initSettings(Media mediaData) {
     var selected = loadSelected(mediaData);
-    viewType.value = selected.recyclerStyle!;
+    viewType.value = selected.recyclerStyle;
     reversed.value = selected.recyclerReversed;
   }
   void settingsDialog(BuildContext context, Media media) =>
@@ -45,7 +45,7 @@ class AnimeParser extends BaseParser {
         context,
         media,
         (s) {
-          viewType.value = s.recyclerStyle!;
+          viewType.value = s.recyclerStyle;
           reversed.value = s.recyclerReversed;
         },
       ).showDialog();

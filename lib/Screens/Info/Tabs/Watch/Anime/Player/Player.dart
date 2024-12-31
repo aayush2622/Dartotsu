@@ -75,7 +75,6 @@ class MediaPlayerState extends State<MediaPlayer>
       resizeMode = BoxFit.contain.obs;
       settings = widget.media.anime!.playerSettings!;
     }
-
     _initializePlayer();
     _leftAnimationController = AnimationController(
       duration: const Duration(milliseconds: 1000),
@@ -94,9 +93,7 @@ class MediaPlayerState extends State<MediaPlayer>
   Timer? _hideCursorTimer;
 
   void _onMouseMoved() {
-    if (!showControls.value) {
-      showControls.value = true;
-    }
+    if (!showControls.value) showControls.value = true;
     _hideCursorTimer?.cancel();
     _hideCursorTimer = Timer(const Duration(seconds: 3), () {
       showControls.value = false;
@@ -116,13 +113,8 @@ class MediaPlayerState extends State<MediaPlayer>
     widget.media.anime?.playerSettings = settings;
 
     resizeMode = (resizeMap[settings.resizeMode] ?? BoxFit.contain).obs;
-    var type = loadSelected(widget.media).recyclerStyle ??
-        PrefManager.getVal(PrefName.AnimeDefaultView) ??
-        0;
-    viewType = type.obs;
-
-    var r = loadSelected(widget.media).recyclerReversed;
-    reverse = r.obs;
+    viewType = loadSelected(widget.media).recyclerStyle.obs;
+    reverse = loadSelected(widget.media).recyclerReversed.obs;
   }
 
   @override
@@ -556,7 +548,7 @@ class MediaPlayerState extends State<MediaPlayer>
         context,
         widget.media,
         (i) {
-          viewType.value = i.recyclerStyle!;
+          viewType.value = i.recyclerStyle;
           reverse.value = i.recyclerReversed;
         },
       ).showDialog();

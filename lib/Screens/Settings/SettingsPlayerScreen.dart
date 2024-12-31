@@ -48,8 +48,10 @@ class SettingsPlayerScreenState extends BaseSettingsScreen {
 
 List<Widget> playerSettings(
     BuildContext context, void Function(void Function()) setState) {
-  void savePlayerSettings(PlayerSettings playerSettings) =>
-      PrefManager.setVal(PrefName.playerSettings, playerSettings);
+  void savePlayerSettings(PlayerSettings playerSettings) {
+    PrefManager.setVal(PrefName.playerSettings, playerSettings);
+    setState(() {});
+  }
 
   var playerSettings = PrefManager.getVal(PrefName.playerSettings);
   return [
@@ -159,7 +161,6 @@ List<Widget> playerSettings(
                   playerSettings.subtitleFont =
                       ['Poppins', 'Roboto', 'Arial', 'Times New Roman'][value];
                   savePlayerSettings(playerSettings);
-                  setState(() {});
                 },
               )
               ..show();
@@ -176,7 +177,6 @@ List<Widget> playerSettings(
           onSliderChange: (value) {
             playerSettings.subtitleSize = value;
             savePlayerSettings(playerSettings);
-            setState(() {});
           },
         ),
         Setting(
@@ -190,7 +190,6 @@ List<Widget> playerSettings(
           onSliderChange: (value) {
             playerSettings.subtitleWeight = value;
             savePlayerSettings(playerSettings);
-            setState(() {});
           },
         ),
         Setting(
@@ -204,7 +203,7 @@ List<Widget> playerSettings(
           onSliderChange: (value) {
             playerSettings.subtitleBottomPadding = value;
             savePlayerSettings(playerSettings);
-            setState(() {});
+
           },
         ),
         Setting(
@@ -219,7 +218,7 @@ List<Widget> playerSettings(
             if (newColor != null) {
               playerSettings.subtitleColor = newColor.value;
               savePlayerSettings(playerSettings);
-              setState(() {});
+
             }
           },
         ),
@@ -235,7 +234,7 @@ List<Widget> playerSettings(
             if (newColor != null) {
               playerSettings.subtitleBackgroundColor = newColor.value;
               savePlayerSettings(playerSettings);
-              setState(() {});
+
             }
           },
         ),
@@ -251,7 +250,6 @@ List<Widget> playerSettings(
             if (newColor != null) {
               playerSettings.subtitleOutlineColor = newColor.value;
               savePlayerSettings(playerSettings);
-              setState(() {});
             }
           },
         ),

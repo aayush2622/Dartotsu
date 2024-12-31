@@ -130,7 +130,8 @@ class _PlayerControllerState extends State<PlayerController> {
             e.interval.endTime >= v.inSeconds,
         )?.getType() ?? '';
       }
-    });
+      },
+    );
   }
 
   Future<void> setDiscordRpc() async {
@@ -145,8 +146,8 @@ class _PlayerControllerState extends State<PlayerController> {
 
   @override
   void dispose() {
-    if (DiscordService.isInitialized) DiscordService.stopRPC();
     super.dispose();
+    if (DiscordService.isInitialized) DiscordService.stopRPC();
     WakelockPlus.disable();
   }
 

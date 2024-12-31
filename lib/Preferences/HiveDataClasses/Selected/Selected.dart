@@ -7,7 +7,7 @@ class Selected {
   @HiveField(0)
   int window;
   @HiveField(1)
-  int? recyclerStyle;
+  int recyclerStyle;
   @HiveField(2)
   bool recyclerReversed;
   @HiveField(3)
