@@ -56,6 +56,10 @@ We welcome contributions, from translations to new features. For inquiries, join
 <a href="https://hosted.weblate.org/projects/dartotsu/dartotsu/#languages"><img src="https://hosted.weblate.org/widget/dartotsu/dartotsu/multi-auto.svg" alt="Translation status" /></a>
 </details>
 
+## 🤵 Visitors
+
+<img src="https://count.getloli.com/@dawndartotsu?name=dawndartotsu&theme=rule34&padding=8&offset=0&align=top&scale=1&pixelated=1&darkmode=auto" />
+
 ## 🙏 Acknowledgments
 A heartfelt thank you to everyone who has contributed to the development of Dartotsu.
 Your efforts are invaluable.
