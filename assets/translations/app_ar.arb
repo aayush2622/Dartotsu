@@ -432,5 +432,40 @@
     }
   },
   "manhwa": "مانهوا",
-  "@manhwa": {}
+  "@manhwa": {},
+  "manageLayoutDescription": "يمكنك تغيير شكل صفحة {page} عن طريق سحب العناصر وإفلاتها",
+  "@manageLayoutDescription": {
+    "placeholders": {
+      "page": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Home",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "manageLayout": "تعديل شكل صفحة {page} علي خدمة {service}",
+  "@manageLayout": {
+    "placeholders": {
+      "service": {
+        "type": "String",
+        "examples": [
+          "Anilist",
+          "MAL"
+        ]
+      },
+      "page": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Home",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "pickColor": "اختر لون",
+  "@pickColor": {}
 }
