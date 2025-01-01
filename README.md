@@ -1,5 +1,5 @@
 <p align="center">
-   <img src="https://files.catbox.moe/tnm1sr.png" alt="Dantotsu Banner" width="100%">
+   <img src="https://files.catbox.moe/tnm1sr.png" alt="Dartotsu Banner" width="100%">
 </p>
 
 <p align="center">
