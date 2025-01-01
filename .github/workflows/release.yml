@@ -24,11 +24,11 @@ jobs:
           flutter-version: 3.24.1
       - run: flutter pub get
       - run: flutter build apk
-      - run: mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/Dantotsu_Android_${{github.ref_name}}.apk
+      - run: mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/Dartotsu_Android_${{github.ref_name}}.apk
       - name: Android Apk Release
         uses: softprops/action-gh-release@master
         with:
-            files: build/app/outputs/flutter-apk/Dantotsu_Android_${{github.ref_name}}.apk
+            files: build/app/outputs/flutter-apk/Dartotsu_Android_${{github.ref_name}}.apk
   build_windows:
     runs-on: windows-latest
     permissions: 
@@ -48,13 +48,13 @@ jobs:
         uses: thedoctor0/zip-release@master
         with:
           type: 'zip'
-          filename: Dantotsu_Windows_${{github.ref_name}}.zip
+          filename: Dartotsu_Windows_${{github.ref_name}}.zip
           directory: build\windows\x64\runner\Release
       - run: ls build\windows\x64\runner\Release
       - name: Release Windows Zip
         uses: softprops/action-gh-release@master
         with:
-            files: build/windows/x64/runner/Release/Dantotsu_Windows_${{github.ref_name}}.zip
+            files: build/windows/x64/runner/Release/Dartotsu_Windows_${{github.ref_name}}.zip
         
     
   build_linux:
@@ -79,12 +79,12 @@ jobs:
         uses: thedoctor0/zip-release@master
         with:
             type: 'zip'
-            filename: Dantotsu_Linux_${{github.ref_name}}.zip
+            filename: Dartotsu_Linux_${{github.ref_name}}.zip
             directory: build/linux/x64/release/bundle
       - name: Release Linux Zip
         uses: softprops/action-gh-release@master
         with:
-            files: build/linux/x64/release/bundle/Dantotsu_Linux_${{github.ref_name}}.zip
+            files: build/linux/x64/release/bundle/Dartotsu_Linux_${{github.ref_name}}.zip
   build_ios_and_macos:
     runs-on: macos-13
     permissions: 
@@ -109,12 +109,12 @@ jobs:
         uses: thedoctor0/zip-release@master
         with:
             type: 'zip'
-            filename: Dantotsu_MacOS_${{github.ref_name}}.zip
+            filename: Dartotsu_MacOS_${{github.ref_name}}.zip
             directory: build/macos/Build/Products/Release
       - name: Release MacOS Zip
         uses: softprops/action-gh-release@master
         with:
-            files: build/macos/Build/Products/Release/Dantotsu_MacOS_${{github.ref_name}}.zip
+            files: build/macos/Build/Products/Release/Dartotsu_MacOS_${{github.ref_name}}.zip
   upload_download_url:
     runs-on: ubuntu-latest
     needs: [build_android,build_windows,build_linux,build_ios_and_macos]
@@ -148,7 +148,7 @@ jobs:
           LINKS=$(cat asset_links.txt | sort)
           
           # Initialize the message
-          MESSAGE="**Dantotsu ${{github.ref_name}} Downloads:**\n\n"
+          MESSAGE="**Dartotsu ${{github.ref_name}} Downloads:**\n\n"
           
           # Loop through each link and format them
           while IFS= read -r LINK; do

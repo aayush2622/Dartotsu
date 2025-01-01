@@ -180,7 +180,7 @@ class _DiscordService extends GetxController {
         'd': {
           'activities': [
             {
-              'name': 'Dantotsu',
+              'name': 'Dartotsu',
               'type': 0,
             }
           ],

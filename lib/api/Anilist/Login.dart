@@ -25,7 +25,7 @@ CustomBottomDialog login(BuildContext context) {
               useWebview: true
             ),
             url: url,
-            callbackUrlScheme: 'dantotsu',
+            callbackUrlScheme: 'dartotsu',
           );
           final token = RegExp(r'(?<=access_token=).+(?=&token_type)')
               .firstMatch(response.toString())
