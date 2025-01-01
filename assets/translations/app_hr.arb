@@ -280,5 +280,7 @@
   "noOnHold": "Čini se da ništa niste stavili na čekanje.",
   "@noOnHold": {},
   "noFavourites": "Izgleda da ti se ništa ne sviđa,\nPokušajte označiti da vam se emisija sviđa da biste je zadržali ovdje.",
-  "@noFavourites": {}
+  "@noFavourites": {},
+  "loginToMAL": "",
+  "@loginToMAL": {}
 }
