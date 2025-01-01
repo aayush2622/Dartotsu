@@ -1,0 +1,177 @@
+# Query: dantotsu
+# ContextLines: 1
+
+44 results - 18 files
+
+README.md:
+   1  <p align="center">
+   2:    <img src="https://files.catbox.moe/tnm1sr.png" alt="Dantotsu Banner" width="100%">
+   3  </p>
+
+  17  
+  18: **Dartotsu** is a complete rewrite of [Dantotsu](https://github.com/rebelonion/Dantotsu/) in Flutter. It's a hybrid [**AniList**](https://anilist.co/) and [**MyAnimeList**](https://myanimelist.net/) tracking client, with support for [**Simkl**](https://simkl.com/) and [**Kitsu**](https://kitsu.io/) coming soon!  
+  19  > **Note:** This project is currently under development and is not ready for public use.
+
+.github/workflows/dart.yml:
+    1: name: Dartotsu Build Workflow
+    2  on:
+
+  246            type: "zip"
+  247:           filename: Dartotsu_Linux_${{github.ref_name}}.zip
+  248            directory: build/linux/x64/release/bundle
+
+  259          with:
+  260:           file-path: build/linux/x64/release/bundle/Dartotsu_Linux_${{github.ref_name}}.zip
+  261            upload-name: Dartotsu_linux.zip
+
+.github/workflows/release.yml:
+   26        - run: flutter build apk
+   27:       - run: mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/Dartotsu_Android_${{github.ref_name}}.apk
+   28        - name: Android Apk Release
+
+   30          with:
+   31:             files: build/app/outputs/flutter-apk/Dartotsu_Android_${{github.ref_name}}.apk
+   32    build_windows:
+
+   50            type: 'zip'
+   51:           filename: Dartotsu_Windows_${{github.ref_name}}.zip
+   52            directory: build\windows\x64\runner\Release
+
+   56          with:
+   57:             files: build/windows/x64/runner/Release/Dartotsu_Windows_${{github.ref_name}}.zip
+   58          
+
+   81              type: 'zip'
+   82:             filename: Dartotsu_Linux_${{github.ref_name}}.zip
+   83              directory: build/linux/x64/release/bundle
+
+   86          with:
+   87:             files: build/linux/x64/release/bundle/Dartotsu_Linux_${{github.ref_name}}.zip
+   88    build_ios_and_macos:
+
+  111              type: 'zip'
+  112:             filename: Dartotsu_MacOS_${{github.ref_name}}.zip
+  113              directory: build/macos/Build/Products/Release
+
+  116          with:
+  117:             files: build/macos/Build/Products/Release/Dartotsu_MacOS_${{github.ref_name}}.zip
+  118    upload_download_url:
+
+  150            # Initialize the message
+  151:           MESSAGE="**Dartotsu ${{github.ref_name}} Downloads:**\n\n"
+  152            
+
+android/app/src/main/AndroidManifest.xml:
+  46                  <category android:name="android.intent.category.BROWSABLE" />
+  47:                 <data android:scheme="dartotsu" android:host="anilist" />
+  48              </intent-filter>
+
+  53                  <category android:name="android.intent.category.BROWSABLE" />
+  54:                 <data android:scheme="dartotsu" android:host="mal" />
+  55              </intent-filter>
+
+assets/translations/app_as.arb:
+  1  {
+  2:   "appName": "Dartotsu",
+  3    "@appName": {},
+
+assets/translations/app_te.arb:
+  11    "@animeDescription": {},
+  12:   "appName": "Dartotsu",
+  13    "@appName": {},
+
+ios/Runner/Info.plist:
+  39          <array>
+  40:           <string>dartotsu</string>
+  41          </array>
+
+lib/api/Anilist/Login.dart:
+  27              url: url,
+  28:             callbackUrlScheme: 'dartotsu',
+  29            );
+
+lib/api/Discord/Discord.dart:
+  59              "If you are on invisible mode, logging in will make you online, when you open Dartotsu.\n\n"
+  60:             "This does break the Discord TOS. \nAlthough Discord has never banned anyone for using Custom Rich Presence(what Dartotsu uses), You have still been warned.\n\nDantotsu is not responsible for anything that happens to your account.",
+  61            ),
+
+lib/api/Discord/DiscordService.dart:
+  182              {
+  183:               'name': 'Dartotsu',
+  184                'type': 0,
+
+lib/api/Mangayomi/Eval/dart/compiler/compiler.dart:
+  11    final program = compiler.compile({
+  12:     'dantotsu': {'main.dart': code}
+  13    });
+
+lib/api/MyAnimeList/Login.dart:
+  41              url: url,
+  42:             callbackUrlScheme: 'dartotsu',
+  43            );
+
+linux/CMakeLists.txt:
+  6  # the on-disk name of your application.
+  7: set(BINARY_NAME "dartotsu")
+  8  # The unique GTK application identifier for this application. See:
+
+macos/Runner/Info.plist:
+  37          			<array>
+  38:         				<string>dartotsu</string>
+  39          			</array>
+
+macos/Runner/Configs/AppInfo.xcconfig:
+  7  // The application's name. By default this is also the title of the Flutter window.
+  8: PRODUCT_NAME = dartotsu
+  9  
+
+macos/Runner.xcodeproj/project.pbxproj:
+   66  		335BBD1A22A9A15E00E9071D /* GeneratedPluginRegistrant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratedPluginRegistrant.swift; sourceTree = "<group>"; };
+   67: 		33CC10ED2044A3C60003C045 /* dartotsu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "dantotsu.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+   68  		33CC10F02044A3C60003C045 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+
+  133  			children = (
+  134: 				33CC10ED2044A3C60003C045 /* dartotsu.app */,
+  135  				331C80D5294CF71000263BE5 /* RunnerTests.xctest */,
+
+  219  			productName = Runner;
+  220: 			productReference = 33CC10ED2044A3C60003C045 /* dartotsu.app */;
+  221  			productType = "com.apple.product-type.application";
+
+  390  				SWIFT_VERSION = 5.0;
+  391: 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/dartotsu.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/dartotsu";
+  392  			};
+
+  404  				SWIFT_VERSION = 5.0;
+  405: 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/dartotsu.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/dartotsu";
+  406  			};
+
+  418  				SWIFT_VERSION = 5.0;
+  419: 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/dartotsu.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/dartotsu";
+  420  			};
+
+macos/Runner.xcodeproj/xcshareddata/xcschemes/Runner.xcscheme:
+  17                 BlueprintIdentifier = "33CC10EC2044A3C60003C045"
+  18:                BuildableName = "dartotsu.app"
+  19                 BlueprintName = "Runner"
+
+  33              BlueprintIdentifier = "33CC10EC2044A3C60003C045"
+  34:             BuildableName = "dartotsu.app"
+  35              BlueprintName = "Runner"
+
+  67              BlueprintIdentifier = "33CC10EC2044A3C60003C045"
+  68:             BuildableName = "dartotsu.app"
+  69              BlueprintName = "Runner"
+
+  84              BlueprintIdentifier = "33CC10EC2044A3C60003C045"
+  85:             BuildableName = "dartotsu.app"
+  86              BlueprintName = "Runner"
+
+web/index.html:
+  26    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  27:   <meta name="apple-mobile-web-app-title" content="dartotsu">
+  28    <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  32  
+  33:   <title>dartotsu</title>
+  34    <link rel="manifest" href="manifest.json">
