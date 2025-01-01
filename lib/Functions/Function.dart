@@ -146,7 +146,7 @@ void navigateToPage(BuildContext context, Widget page) {
   );
 }
 
-void shareLink(String link) {
-  Share.share(link, subject: link);
-}
+void shareLink(String link) => Share.share(link, subject: link);
 
+void shareFile(String path, String text) =>
+    Share.shareXFiles([XFile(path)], text: text);

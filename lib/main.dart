@@ -29,7 +29,6 @@ import 'Theme/ThemeProvider.dart';
 import 'api/Discord/Discord.dart';
 import 'api/TypeFactory.dart';
 import 'logger.dart';
-
 late Isar isar;
 
 void main(List<String> args) async {
@@ -50,12 +49,12 @@ void main(List<String> args) async {
         ),
       );
     },
-    (error, stackTrace) {
-      Logger.log('Uncaught error: $error\n$stackTrace');
+    (error, stackTrace) async {
+      await Logger.log('Uncaught error: $error\n$stackTrace');
     },
     zoneSpecification: ZoneSpecification(
-      print: (Zone self, ZoneDelegate parent, Zone zone, String message) {
-        Logger.log(message);
+      print: (Zone self, ZoneDelegate parent, Zone zone, String message) async {
+        await Logger.log(message);
         parent.print(zone, message);
       },
     ),
@@ -81,6 +80,13 @@ Future init() async {
     initializeDateFormatting(locale);
   }
 
+  Get.config(
+    enableLog: true,
+    logWriterCallback: (text, {isError = false}) async {
+      await Logger.log(text);
+      debugPrint(text);
+    },
+  );
 }
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();

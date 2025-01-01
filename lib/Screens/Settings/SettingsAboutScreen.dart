@@ -1,6 +1,10 @@
 import 'package:dantotsu/Theme/LanguageSwitcher.dart';
 import 'package:flutter/material.dart';
 
+import '../../Adaptor/Settings/SettingsAdaptor.dart';
+import '../../DataClass/Setting.dart';
+import '../../Functions/Function.dart';
+import '../../StorageProvider.dart';
 import 'BaseSettingsScreen.dart';
 
 class SettingsAboutScreen extends StatefulWidget {
@@ -26,7 +30,25 @@ class SettingsAboutScreenState extends BaseSettingsScreen {
 
   @override
   List<Widget> get settingsList {
-    return [];
+    return [
+      SettingsAdaptor(
+        settings: _buildSettings(context),
+      ),
+    ];
   }
 
+  List<Setting> _buildSettings(BuildContext context) {
+    return [
+      Setting(
+        type: SettingType.normal,
+        name: "Log File",
+        description: "Share the log file",
+        icon: Icons.share,
+        onClick: () async {
+          var path = (await StorageProvider().getDefaultDirectory())?.path;
+          shareFile("$path\\appLogs.txt", "LogFile");
+        },
+      ),
+    ];
+  }
 }

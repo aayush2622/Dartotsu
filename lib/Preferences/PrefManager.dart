@@ -1,10 +1,10 @@
-import 'dart:io';
+
 
 import 'package:dantotsu/Preferences/HiveDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
 import 'package:dantotsu/Preferences/HiveDataClasses/Selected/Selected.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:path_provider/path_provider.dart';
 
+import '../StorageProvider.dart';
 import 'HiveDataClasses/MalToken/MalToken.dart';
 import 'HiveDataClasses/ShowResponse/ShowResponse.dart';
 
@@ -37,10 +37,8 @@ class PrefManager {
   static Future<void> init() async {
     HiveAdapters();
     if (_generalPreferences != null) return;
-    final dir = await getApplicationDocumentsDirectory();
-    final path = '${dir.path}/Dartotsu/preferences';
-    await Directory(path).create(recursive: true);
-    await Hive.initFlutter(path);
+    final path = await StorageProvider().getPreferenceDirectory();
+    await Hive.initFlutter(path?.path);
     _generalPreferences = await Hive.openBox('generalPreferences');
     _uiPreferences = await Hive.openBox('uiPreferences');
     _playerPreferences = await Hive.openBox('playerPreferences');

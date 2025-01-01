@@ -4,29 +4,24 @@ import 'package:dantotsu/StorageProvider.dart';
 
 class Logger {
   static File? _logFile;
-  static IOSink? _logSink;
-
+  static List<String> logs = [];
   static Future<void> init() async {
     final directory = await StorageProvider().getDefaultDirectory();
     if (directory != null) {
-      _logFile = File('${directory.path}/appLogs.txt');
-
+      _logFile = File('${directory.path}\\appLogs.txt');
       if (await _logFile!.exists()) {
         await _logFile!.delete();
       }
-      _logSink = _logFile?.openWrite(mode: FileMode.append);
-
+      await _logFile!.create();
     }
   }
 
-  static void log(String message) {
-    final timestamp = DateTime.now().toIso8601String();
+  static Future<void> log(String message) async {
+    final now = DateTime.now().toLocal();
+    final timestamp =
+        '${now.day.toString().padLeft(2, '0')}/${now.month.toString().padLeft(2, '0')}/${now.year.toString().padLeft(4, '0')} ${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}:${now.second.toString().padLeft(2, '0')}';
     final logMessage = '[$timestamp] $message\n';
-    _logSink?.write(logMessage);
-    _logSink?.flush();
-  }
-
-  static Future<void> dispose() async {
-    await _logSink?.close();
+    logs.add(logMessage);
+    await _logFile!.writeAsString(logs.join());
   }
 }

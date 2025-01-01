@@ -26,6 +26,7 @@ class StorageProvider {
     }
     return true;
   }
+
   Future<bool> videoPermission() async {
     if (Platform.isAndroid) {
       if (await Permission.videos.isDenied ||
@@ -58,6 +59,11 @@ class StorageProvider {
   Future<Directory?> getDefaultDirectory() async {
     return getCustomDirectory();
   }
+
+  Future<Directory?> getPreferenceDirectory() async {
+    return getCustomDirectory(subPath: 'preferences');
+  }
+
   Future<Isar> initDB(String? path, {bool inspector = false}) async {
     Directory? dir;
     if (path == null) {
