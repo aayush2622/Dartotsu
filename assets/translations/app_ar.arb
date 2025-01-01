@@ -81,7 +81,7 @@
   "@donationGoal": {},
   "enableDarkMode": "تفعيل الوضع المظلم",
   "@enableDarkMode": {},
-  "extension": "إضافة",
+  "extension": "{count, plural, =1 {امتداد} other {امتدادات}}",
   "@extension": {},
   "extensionsDescription": "تثبيت وإدارة الإضافات لإضافة وظائف إضافية",
   "@extensionsDescription": {},
@@ -105,7 +105,7 @@
   "@incognitoModeDescription": {},
   "login": "تسجيل الدخول",
   "@login": {},
-  "logout": "تسجيل الخروج",
+  "logout": "تسجيل الخروج من {type}",
   "@logout": {},
   "mal": "MyAnimeList",
   "@mal": {},
@@ -187,18 +187,250 @@
   "@topAiring": {},
   "utd": "من الأعلي الي الأسفل",
   "@utd": {},
-  "watch": "شاهد",
+  "watch": "المشاهدة",
   "@watch": {},
   "language": "اللغة",
   "@language": {},
-  "list": "القائمة",
+  "list": "قائمة {type}",
   "@list": {},
   "layout": "الشكل",
   "@layout": {},
-  "info": "معلومات",
+  "info": "المعلومات",
   "@info": {},
   "noOnHold": "إنت لم توقف أي شئ حتي الآن.",
   "@noOnHold": {},
   "noFavourites": "يبدو أنك لا تحب شيئا،\nحاول الإعجاب بالعرض للاحتفاظ به هنا.",
-  "@noFavourites": {}
+  "@noFavourites": {},
+  "manhua": "مانهوا (صينية)",
+  "@manhua": {},
+  "home": "الصفحة الرئيسية",
+  "@home": {},
+  "novel": "رواية(نوڤل)",
+  "@novel": {},
+  "ln": "رواية خفيفة",
+  "@ln": {},
+  "series": "سلسلة",
+  "@series": {},
+  "episode": "{count, plural, =1 {حلقة} other {حلقات}}",
+  "@episode": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "volume": "{count, plural, =1 {مجلد} other {مجلدات}}",
+  "@volume": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "genres": "الأنواع",
+  "@genres": {},
+  "calendar": "التقويم",
+  "@calendar": {},
+  "confirmLogout": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
+  "@confirmLogout": {},
+  "gridView": "وضع الشبكة",
+  "@gridView": {},
+  "listView": "وضع القائمة",
+  "@listView": {},
+  "chapterRead": "فصول تم مشاهدتها",
+  "@chapterRead": {},
+  "installed": "{type} المثبتة",
+  "@installed": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Extensions"
+        ]
+      }
+    }
+  },
+  "trending": "{type} الشائعة",
+  "@trending": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "mostFavourite": "اكثر {type} تفضيلا",
+  "@mostFavourite": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga",
+          "Manhwa"
+        ]
+      }
+    }
+  },
+  "topRated": "اعلي {type} تقييما",
+  "@topRated": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga",
+          "Manhwa",
+          "Series"
+        ]
+      }
+    }
+  },
+  "thisSeason": "هذا الموسم",
+  "@thisSeason": {},
+  "nextSeason": "الموسم القادم",
+  "@nextSeason": {},
+  "previousSeason": "الموسم السابق",
+  "@previousSeason": {},
+  "onHold": "ال{type} المتوقفة",
+  "@onHold": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "favorite": "{type} المفضلة",
+  "@favorite": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "kitsu": "Kitsu",
+  "@kitsu": {},
+  "loginTo": "سجل الدخول الي {service}",
+  "@loginTo": {
+    "placeholders": {
+      "service": {
+        "type": "String",
+        "examples": [
+          "Anilist",
+          "MyAnimeList",
+          "Kitsu",
+          "Discord"
+        ]
+      }
+    }
+  },
+  "activity": "{count, plural, =1 {نشاط} other {أنشطة}}",
+  "@activity": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "movie": "{count, plural, =1 {فيلم} other {افلام}}",
+  "@movie": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "compactView": "وضع مضغوط",
+  "@compactView": {},
+  "planned": "{type} المخطط لها",
+  "@planned": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "episodeWatched": "حلقات تم مشاهدتها",
+  "@episodeWatched": {},
+  "browse": "تصفح {type}",
+  "@browse": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "available": "{type} المتاحة",
+  "@available": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "popular": "{type} مشهورة",
+  "@popular": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga",
+          "Manhwa"
+        ]
+      }
+    }
+  },
+  "season": "موسم",
+  "@season": {},
+  "chapter": "{count, plural, =1 {فصل} other {فصول}}",
+  "@chapter": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "noDropped": "انت لم تترك أي {type} بعد.",
+  "@noDropped": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "manhwa": "مانهوا",
+  "@manhwa": {}
 }
