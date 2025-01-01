@@ -248,7 +248,7 @@
   "@manhwa": {},
   "calendar": "ক্যালেণ্ডাৰ",
   "@calendar": {},
-  "manageLayoutDescription": "আপুনি {name} পৃষ্ঠাৰ পৰা আইটেমসমূহ টানি আৰু ৰাখি {type} লেআউট পৰিচালনা কৰিব পাৰে।",
+  "manageLayoutDescription": "আপুনি {page} পৃষ্ঠাৰ অৱস্থান ড্ৰেগ আৰু ড্ৰপ কৰি সামগ্ৰীসমূহ পৰিচালনা কৰিব পাৰে।",
   "@manageLayoutDescription": {
     "placeholders": {
       "type": {
@@ -437,7 +437,7 @@
       }
     }
   },
-  "manageLayout": "{name} পৃষ্ঠাৰ বাবে {type} পৰিকল্পনা ব্যৱস্থাপনা কৰক",
+  "manageLayout": "{service} ৰ বাবে {page} পৃষ্ঠাৰ অৱস্থান পৰিচালনা কৰক",
   "@manageLayout": {
     "placeholders": {
       "type": {
@@ -472,5 +472,7 @@
     }
   },
   "novel": "উপন্যাস",
-  "@novel": {}
+  "@novel": {},
+  "pickColor": "এটা ৰঙ বাচক",
+  "@pickColor": {}
 }
