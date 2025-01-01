@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:dantotsu/Functions/string_extensions.dart';
-import 'package:dantotsu/api/Mangayomi/Eval/javascript/http.dart';
+import 'package:dartotsu/Functions/string_extensions.dart';
+import 'package:dartotsu/api/Mangayomi/Eval/javascript/http.dart';
 import 'package:dart_eval/dart_eval_bridge.dart';
 import 'package:dart_eval/stdlib/core.dart';
 import 'package:flutter_qjs/flutter_qjs.dart';

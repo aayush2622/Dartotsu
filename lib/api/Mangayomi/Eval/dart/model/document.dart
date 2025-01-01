@@ -1,4 +1,4 @@
-import 'package:dantotsu/api/Mangayomi/dom_extensions.dart';
+import 'package:dartotsu/api/Mangayomi/dom_extensions.dart';
 import 'package:html/dom.dart';
 
 import 'element.dart';

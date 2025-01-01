@@ -1,5 +1,5 @@
-import 'package:dantotsu/api/Mangayomi/Eval/dart/runtime/runtime.dart';
-import 'package:dantotsu/api/Mangayomi/Eval/javascript/http.dart';
+import 'package:dartotsu/api/Mangayomi/Eval/dart/runtime/runtime.dart';
+import 'package:dartotsu/api/Mangayomi/Eval/javascript/http.dart';
 import 'package:dart_eval/dart_eval_bridge.dart';
 import 'package:dart_eval/stdlib/core.dart';
 
@@ -26,7 +26,7 @@ class DartExtensionService implements ExtensionService {
 
     final runtime = runtimeEval(bytecode);
 
-    return runtime.executeLib('package:dantotsu/main.dart', 'main',
+    return runtime.executeLib('package:dartotsu/main.dart', 'main',
         [$MSource.wrap(source.toMSource())]) as MProvider;
   }
 

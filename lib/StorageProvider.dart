@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:dantotsu/api/Mangayomi/Model/settings.dart';
+import 'package:dartotsu/api/Mangayomi/Model/settings.dart';
 import 'package:isar/isar.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';

@@ -1,6 +1,6 @@
-import 'package:dantotsu/api/Anilist/Data/recommendations.dart';
-import 'package:dantotsu/api/Anilist/Data/staff.dart';
-import 'package:dantotsu/api/Anilist/Data/user.dart';
+import 'package:dartotsu/api/Anilist/Data/recommendations.dart';
+import 'package:dartotsu/api/Anilist/Data/staff.dart';
+import 'package:dartotsu/api/Anilist/Data/user.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'character.dart';

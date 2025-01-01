@@ -1,5 +1,5 @@
-import 'package:dantotsu/Services/BaseServiceData.dart';
-import 'package:dantotsu/api/Other/OtherAnimeScreen.dart';
+import 'package:dartotsu/Services/BaseServiceData.dart';
+import 'package:dartotsu/api/Other/OtherAnimeScreen.dart';
 import 'package:get/get.dart';
 
 import '../../Services/MediaService.dart';

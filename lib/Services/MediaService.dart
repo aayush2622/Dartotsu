@@ -1,4 +1,4 @@
-import 'package:dantotsu/Services/Screens/BaseLoginScreen.dart';
+import 'package:dartotsu/Services/Screens/BaseLoginScreen.dart';
 import 'package:flutter/material.dart';
 
 import '../api/Anilist/AnilistService.dart';

@@ -1,4 +1,4 @@
-import 'package:dantotsu/api/Discord/Discord.dart';
+import 'package:dartotsu/api/Discord/Discord.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:webview_windows/webview_windows.dart';

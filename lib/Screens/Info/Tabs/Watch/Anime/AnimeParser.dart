@@ -1,6 +1,6 @@
 import 'package:collection/collection.dart';
-import 'package:dantotsu/Functions/string_extensions.dart';
-import 'package:dantotsu/Screens/Info/Tabs/Watch/BaseParser.dart';
+import 'package:dartotsu/Functions/string_extensions.dart';
+import 'package:dartotsu/Screens/Info/Tabs/Watch/BaseParser.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 

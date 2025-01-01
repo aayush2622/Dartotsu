@@ -1,4 +1,4 @@
-import 'package:dantotsu/api/Mangayomi/Eval/dart/model/m_chapter.dart';
+import 'package:dartotsu/api/Mangayomi/Eval/dart/model/m_chapter.dart';
 
 class Episode {
   String number;

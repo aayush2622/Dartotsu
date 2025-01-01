@@ -3,7 +3,7 @@ import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:media_kit_video/media_kit_video.dart';
 
-import 'package:dantotsu/Preferences/HiveDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
+import 'package:dartotsu/Preferences/HiveDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
 import 'BasePlayer.dart';
 
 class WindowsPlayer extends BasePlayer {

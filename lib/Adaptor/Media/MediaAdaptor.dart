@@ -1,6 +1,6 @@
 import 'dart:math';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:dantotsu/Functions/Extensions.dart';
+import 'package:dartotsu/Functions/Extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 

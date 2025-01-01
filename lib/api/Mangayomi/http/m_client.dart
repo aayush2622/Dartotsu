@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:dantotsu/Functions/Function.dart';
-import 'package:dantotsu/api/Mangayomi/Model/settings.dart';
+import 'package:dartotsu/Functions/Function.dart';
+import 'package:dartotsu/api/Mangayomi/Model/settings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/io_client.dart';
 import 'package:http_interceptor/http_interceptor.dart';

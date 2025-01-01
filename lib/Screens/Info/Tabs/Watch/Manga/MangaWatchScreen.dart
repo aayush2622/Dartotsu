@@ -1,4 +1,4 @@
-import 'package:dantotsu/Screens/Info/Tabs/Watch/BaseParser.dart';
+import 'package:dartotsu/Screens/Info/Tabs/Watch/BaseParser.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

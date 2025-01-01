@@ -1,4 +1,4 @@
-import 'package:dantotsu/api/Mangayomi/Eval/javascript/http.dart';
+import 'package:dartotsu/api/Mangayomi/Eval/javascript/http.dart';
 
 class PageUrl {
   String url;

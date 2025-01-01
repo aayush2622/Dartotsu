@@ -1,4 +1,4 @@
-import 'package:dantotsu/api/Mangayomi/reg_exp_matcher.dart';
+import 'package:dartotsu/api/Mangayomi/reg_exp_matcher.dart';
 import 'package:html/dom.dart';
 import 'package:pseudom/pseudom.dart' as pseudom;
 import 'package:xpath_selector_html_parser/xpath_selector_html_parser.dart';

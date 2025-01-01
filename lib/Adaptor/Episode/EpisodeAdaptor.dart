@@ -1,6 +1,6 @@
-import 'package:dantotsu/Functions/Function.dart';
-import 'package:dantotsu/api/Mangayomi/Eval/dart/model/video.dart';
-import 'package:dantotsu/api/Mangayomi/Search/getVideo.dart';
+import 'package:dartotsu/Functions/Function.dart';
+import 'package:dartotsu/api/Mangayomi/Eval/dart/model/video.dart';
+import 'package:dartotsu/api/Mangayomi/Search/getVideo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';

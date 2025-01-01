@@ -1,4 +1,4 @@
-import 'package:dantotsu/Preferences/HiveDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
+import 'package:dartotsu/Preferences/HiveDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
 
 import '../api/Anilist/Data/media.dart';
 import 'Author.dart';

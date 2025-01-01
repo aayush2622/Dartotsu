@@ -1,5 +1,5 @@
-import 'package:dantotsu/Functions/string_extensions.dart';
-import 'package:dantotsu/api/Mangayomi/anime_extractors/streamlare_extractor.dart';
+import 'package:dartotsu/Functions/string_extensions.dart';
+import 'package:dartotsu/api/Mangayomi/anime_extractors/streamlare_extractor.dart';
 import 'package:http_interceptor/http_interceptor.dart';
 import 'package:js_packer/js_packer.dart';
 

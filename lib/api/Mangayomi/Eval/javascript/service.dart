@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:dantotsu/api/Mangayomi/Eval/javascript/preferences.dart';
-import 'package:dantotsu/api/Mangayomi/Eval/javascript/utils.dart';
+import 'package:dartotsu/api/Mangayomi/Eval/javascript/preferences.dart';
+import 'package:dartotsu/api/Mangayomi/Eval/javascript/utils.dart';
 import 'package:flutter_qjs/flutter_qjs.dart';
 
 import '../../Model/Source.dart';

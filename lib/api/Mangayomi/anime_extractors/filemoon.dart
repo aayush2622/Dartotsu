@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:dantotsu/Functions/string_extensions.dart';
+import 'package:dartotsu/Functions/string_extensions.dart';
 import 'package:http_interceptor/http_interceptor.dart';
 import 'package:js_packer/js_packer.dart';
 

@@ -1,4 +1,4 @@
-import 'package:dantotsu/Preferences/HiveDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
+import 'package:dartotsu/Preferences/HiveDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
 
 import 'HiveDataClasses/MalToken/MalToken.dart';
 import 'PrefManager.dart';

@@ -1,4 +1,4 @@
-import 'package:dantotsu/api/Anilist/Data/user.dart';
+import 'package:dartotsu/api/Anilist/Data/user.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'media.dart';

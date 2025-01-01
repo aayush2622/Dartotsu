@@ -1,8 +1,8 @@
-import 'package:dantotsu/Services/Screens/BaseAnimeScreen.dart';
-import 'package:dantotsu/Services/Screens/BaseHomeScreen.dart';
-import 'package:dantotsu/Services/Screens/BaseLoginScreen.dart';
-import 'package:dantotsu/Services/Screens/BaseMangaScreen.dart';
-import 'package:dantotsu/api/Anilist/Screen/AnilistAnimeScreen.dart';
+import 'package:dartotsu/Services/Screens/BaseAnimeScreen.dart';
+import 'package:dartotsu/Services/Screens/BaseHomeScreen.dart';
+import 'package:dartotsu/Services/Screens/BaseLoginScreen.dart';
+import 'package:dartotsu/Services/Screens/BaseMangaScreen.dart';
+import 'package:dartotsu/api/Anilist/Screen/AnilistAnimeScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 

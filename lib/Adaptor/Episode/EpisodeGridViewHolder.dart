@@ -1,8 +1,8 @@
-import 'package:dantotsu/Functions/string_extensions.dart';
+import 'package:dartotsu/Functions/string_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:dantotsu/Widgets/CachedNetworkImage.dart';
-import 'package:dantotsu/Theme/ThemeProvider.dart';
+import 'package:dartotsu/Widgets/CachedNetworkImage.dart';
+import 'package:dartotsu/Theme/ThemeProvider.dart';
 import '../../DataClass/Episode.dart';
 import '../../DataClass/Media.dart';
 import '../../Theme/Colors.dart';

@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:dantotsu/Screens/Login/LoginScreen.dart';
-import 'package:dantotsu/Screens/Manga/MangaScreen.dart';
+import 'package:dartotsu/Screens/Login/LoginScreen.dart';
+import 'package:dartotsu/Screens/Manga/MangaScreen.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

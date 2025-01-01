@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:dantotsu/Services/BaseServiceData.dart';
+import 'package:dartotsu/Services/BaseServiceData.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;

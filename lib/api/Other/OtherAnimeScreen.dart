@@ -1,5 +1,5 @@
-import 'package:dantotsu/Functions/Function.dart';
-import 'package:dantotsu/api/Mangayomi/Eval/dart/model/m_pages.dart';
+import 'package:dartotsu/Functions/Function.dart';
+import 'package:dartotsu/api/Mangayomi/Eval/dart/model/m_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';

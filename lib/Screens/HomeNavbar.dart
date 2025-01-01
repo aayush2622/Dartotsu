@@ -1,6 +1,6 @@
-import 'package:dantotsu/Functions/Extensions.dart';
-import 'package:dantotsu/Theme/Colors.dart';
-import 'package:dantotsu/Widgets/LoadSvg.dart';
+import 'package:dartotsu/Functions/Extensions.dart';
+import 'package:dartotsu/Theme/Colors.dart';
+import 'package:dartotsu/Widgets/LoadSvg.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

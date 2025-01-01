@@ -1,4 +1,4 @@
-import 'package:dantotsu/api/Mangayomi/Model/Manga.dart';
+import 'package:dartotsu/api/Mangayomi/Model/Manga.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_qjs/quickjs/ffi.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

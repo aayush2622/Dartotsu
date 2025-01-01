@@ -1,7 +1,7 @@
-import 'package:dantotsu/Adaptor/Charactes/StaffViewHolder.dart';
-import 'package:dantotsu/Functions/Function.dart';
-import 'package:dantotsu/Screens/Character/CharacterScreen.dart';
-import 'package:dantotsu/Screens/Staff/StaffScreen.dart';
+import 'package:dartotsu/Adaptor/Charactes/StaffViewHolder.dart';
+import 'package:dartotsu/Functions/Function.dart';
+import 'package:dartotsu/Screens/Character/CharacterScreen.dart';
+import 'package:dartotsu/Screens/Staff/StaffScreen.dart';
 import 'package:flutter/material.dart';
 
 import '../../Animation/ScaleAnimation.dart';

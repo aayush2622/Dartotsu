@@ -1,8 +1,8 @@
 import 'package:blur/blur.dart';
-import 'package:dantotsu/Functions/Extensions.dart';
-import 'package:dantotsu/Screens/Info/Tabs/Info/InfoPage.dart';
-import 'package:dantotsu/Screens/Info/Tabs/Watch/Anime/AnimeWatchScreen.dart';
-import 'package:dantotsu/Screens/Info/Tabs/Watch/Manga/MangaWatchScreen.dart';
+import 'package:dartotsu/Functions/Extensions.dart';
+import 'package:dartotsu/Screens/Info/Tabs/Info/InfoPage.dart';
+import 'package:dartotsu/Screens/Info/Tabs/Watch/Anime/AnimeWatchScreen.dart';
+import 'package:dartotsu/Screens/Info/Tabs/Watch/Manga/MangaWatchScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kenburns_nullsafety/kenburns_nullsafety.dart';

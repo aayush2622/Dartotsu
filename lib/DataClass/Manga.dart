@@ -1,5 +1,5 @@
 
-import 'package:dantotsu/DataClass/Chapter.dart';
+import 'package:dartotsu/DataClass/Chapter.dart';
 
 import 'Author.dart';
 

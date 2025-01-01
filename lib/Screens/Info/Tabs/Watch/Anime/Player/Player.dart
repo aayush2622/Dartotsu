@@ -2,9 +2,9 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:math';
 
-import 'package:dantotsu/Preferences/HiveDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
-import 'package:dantotsu/Preferences/PrefManager.dart';
-import 'package:dantotsu/Preferences/Preferences.dart';
+import 'package:dartotsu/Preferences/HiveDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
+import 'package:dartotsu/Preferences/PrefManager.dart';
+import 'package:dartotsu/Preferences/Preferences.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

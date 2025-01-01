@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:dantotsu/Preferences/HiveDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
-import 'package:dantotsu/Preferences/HiveDataClasses/Selected/Selected.dart';
+import 'package:dartotsu/Preferences/HiveDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
+import 'package:dartotsu/Preferences/HiveDataClasses/Selected/Selected.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 

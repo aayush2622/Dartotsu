@@ -1,9 +1,9 @@
 import 'dart:convert';
-import 'package:dantotsu/api/Mangayomi/dom_extensions.dart';
+import 'package:dartotsu/api/Mangayomi/dom_extensions.dart';
 import 'package:html/dom.dart';
 import 'package:html/parser.dart';
 import 'package:http_interceptor/http_interceptor.dart';
-import 'package:dantotsu/Functions/string_extensions.dart';
+import 'package:dartotsu/Functions/string_extensions.dart';
 import '../Eval/dart/model/video.dart';
 import '../http/m_client.dart';
 import 'package:path/path.dart' as path;

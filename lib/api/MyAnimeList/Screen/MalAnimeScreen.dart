@@ -1,5 +1,5 @@
-import 'package:dantotsu/Theme/LanguageSwitcher.dart';
-import 'package:dantotsu/api/MyAnimeList/MalQueries.dart';
+import 'package:dartotsu/Theme/LanguageSwitcher.dart';
+import 'package:dartotsu/api/MyAnimeList/MalQueries.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 

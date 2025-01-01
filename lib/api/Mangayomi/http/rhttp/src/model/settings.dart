@@ -1,8 +1,8 @@
 import 'dart:typed_data';
 
-import 'package:dantotsu/api/Mangayomi/http/src/rust/api/rhttp/client.dart' as rust_client;
+import 'package:dartotsu/api/Mangayomi/http/src/rust/api/rhttp/client.dart' as rust_client;
 
-export 'package:dantotsu/api/Mangayomi/http/src/rust/api/rhttp/client.dart' show TlsVersion;
+export 'package:dartotsu/api/Mangayomi/http/src/rust/api/rhttp/client.dart' show TlsVersion;
 
 const _keepBaseUrl = '__rhttp_keep__';
 const _keepDuration = Duration(microseconds: -9999);

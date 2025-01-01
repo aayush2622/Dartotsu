@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:math';
 
-import 'package:dantotsu/api/MyAnimeList/MalQueries/MalStrings.dart';
+import 'package:dartotsu/api/MyAnimeList/MalQueries/MalStrings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_web_auth_2/flutter_web_auth_2.dart';

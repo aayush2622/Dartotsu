@@ -1,4 +1,4 @@
-import 'package:dantotsu/Screens/Settings/SettingsPlayerScreen.dart';
+import 'package:dartotsu/Screens/Settings/SettingsPlayerScreen.dart';
 import 'package:flutter/material.dart';
 import '../../Adaptor/Settings/SettingsAdaptor.dart';
 import '../../DataClass/Setting.dart';
