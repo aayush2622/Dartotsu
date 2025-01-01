@@ -37,7 +37,7 @@
         <string></string>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>dantotsu</string>
+          <string>dartotsu</string>
         </array>
       </dict>
     </array>

@@ -39,7 +39,7 @@ CustomBottomDialog login(BuildContext context) {
               useWebview: true,
             ),
             url: url,
-            callbackUrlScheme: 'dantotsu',
+            callbackUrlScheme: 'dartotsu',
           );
           final code = Uri.parse(response).queryParameters['code'] ?? '';
           snackString('Getting Token');
