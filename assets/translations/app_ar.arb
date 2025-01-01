@@ -33,7 +33,7 @@
   "@fontSize": {},
   "fontWeight": "وزن الخط",
   "@fontWeight": {},
-  "manga": "مانجا",
+  "manga": "المانجا",
   "@manga": {},
   "mangaDescription": "تنظيم وتخصيص تجربتك مع المانجا",
   "@mangaDescription": {},
@@ -57,7 +57,7 @@
   "@themeDescription": {},
   "yes": "نعم",
   "@yes": {},
-  "anime": "انمي",
+  "anime": "الانمي",
   "@anime": {},
   "animeDescription": "تخصيص وإدارة تفضيلات الانمي الخاصة بك",
   "@animeDescription": {},
@@ -97,7 +97,7 @@
   "@fontWeightDescription": {},
   "hidePrivate": "إخفاء المحتوى الخاص",
   "@hidePrivate": {},
-  "hidePrivateDescription": "إخفاء المحتوى الخاص من الصفحة الرئيسية",
+  "hidePrivateDescription": "إخفاء المحتوى الخاص من الصفحة الرئيسية.",
   "@hidePrivateDescription": {},
   "incognitoMode": "وضع التصفح الخفي",
   "@incognitoMode": {},
@@ -201,9 +201,9 @@
   "@noOnHold": {},
   "noFavourites": "يبدو أنك لا تحب شيئا،\nحاول الإعجاب بالعرض للاحتفاظ به هنا.",
   "@noFavourites": {},
-  "manhua": "مانهوا (صينية)",
+  "manhua": "المانهوا (صينية)",
   "@manhua": {},
-  "home": "الصفحة الرئيسية",
+  "home": "الرئيسية",
   "@home": {},
   "novel": "رواية(نوڤل)",
   "@novel": {},
@@ -431,7 +431,7 @@
       }
     }
   },
-  "manhwa": "مانهوا",
+  "manhwa": "المانهوا",
   "@manhwa": {},
   "manageLayoutDescription": "يمكنك تغيير شكل صفحة {page} عن طريق سحب العناصر وإفلاتها",
   "@manageLayoutDescription": {
@@ -446,7 +446,7 @@
       }
     }
   },
-  "manageLayout": "تعديل شكل صفحة {page} علي خدمة {service}",
+  "manageLayout": "تعديل شكل خدمة {service} علي صفحة {page}",
   "@manageLayout": {
     "placeholders": {
       "service": {
