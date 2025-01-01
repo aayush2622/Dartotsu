@@ -114,7 +114,7 @@ class MangaWatchScreenState extends BaseWatchScreen<MangaWatchScreen> {
         children: [
           Expanded(
             child: Text(
-              getString.chapters,
+              getString.chapter(2),
               style: TextStyle(
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.bold,

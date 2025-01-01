@@ -45,8 +45,8 @@ class SettingsMangaScreenState extends BaseSettingsScreen {
         settings: [
           Setting(
             type: SettingType.normal,
-            name: getString.manageMangaLayouts,
-            description: getString.manageMangaLayoutsDescription,
+            name: getString.manageLayout(getString.anilist,getString.manga),
+            description: getString.manageLayoutDescription(getString.anilist,getString.manga),
             icon: Icons.tune,
             onClick: () async {
               final homeLayoutMap =
@@ -57,7 +57,7 @@ class SettingsMangaScreenState extends BaseSettingsScreen {
                   List<bool>.from(homeLayoutMap.values.toList());
 
               AlertDialogBuilder(context)
-                ..setTitle(getString.manageMangaLayouts)
+                ..setTitle(getString.manageLayout(getString.anilist,getString.manga))
                 ..reorderableMultiSelectableItems(
                   titles,
                   checkedStates,
@@ -90,8 +90,8 @@ class SettingsMangaScreenState extends BaseSettingsScreen {
         settings: [
           Setting(
             type: SettingType.normal,
-            name: getString.manageMangaLayouts,
-            description: getString.manageMangaLayoutsDescription,
+            name: getString.manageLayout(getString.mal,getString.manga),
+            description: getString.manageLayoutDescription(getString.mal,getString.manga),
             icon: Icons.tune,
             onClick: () async {
               final homeLayoutMap = PrefManager.getVal(PrefName.malMangaLayout);
@@ -101,7 +101,7 @@ class SettingsMangaScreenState extends BaseSettingsScreen {
                   List<bool>.from(homeLayoutMap.values.toList());
 
               AlertDialogBuilder(context)
-                ..setTitle(getString.manageMangaLayouts)
+                ..setTitle(getString.manageLayout(getString.mal,getString.manga))
                 ..reorderableMultiSelectableItems(
                   titles,
                   checkedStates,

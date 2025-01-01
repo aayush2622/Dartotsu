@@ -1,5 +1,6 @@
 import 'package:dantotsu/Functions/Extensions.dart';
 import 'package:dantotsu/Theme/Colors.dart';
+import 'package:dantotsu/Theme/LanguageSwitcher.dart';
 import 'package:dantotsu/Widgets/LoadSvg.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -28,9 +29,9 @@ class FloatingBottomNavBar extends StatelessWidget {
     final themeNotifier = Provider.of<ThemeNotifier>(context);
     // Define the navigation items
     final navItems = [
-      _NavItem(index: 0, icon: Icons.movie_filter_rounded, label: 'ANIME'),
-      _NavItem(index: 1, icon: Icons.home_rounded, label: 'HOME'),
-      _NavItem(index: 2, icon: Icons.import_contacts, label: 'MANGA'),
+      _NavItem(index: 0, icon: Icons.movie_filter_rounded, label: getString.anime.toUpperCase()),
+      _NavItem(index: 1, icon: Icons.home_rounded, label: getString.home.toUpperCase()),
+      _NavItem(index: 2, icon: Icons.import_contacts, label: getString.manga.toUpperCase()),
     ];
 
     return Positioned(

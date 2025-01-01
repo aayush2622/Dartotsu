@@ -1,6 +1,7 @@
 import 'package:blur/blur.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dantotsu/Functions/Extensions.dart';
+import 'package:dantotsu/Theme/LanguageSwitcher.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:kenburns_nullsafety/kenburns_nullsafety.dart';
@@ -76,7 +77,7 @@ class HomeScreenState extends State<HomeScreen> {
     var theme = Provider.of<ThemeNotifier>(context);
     return Positioned(
       bottom: 72.0 + 32.bottomBar(),
-      left: (0.screenWidth() / 2) - 24.0,
+      left: (0.screenWidthWithContext(context) / 2) - 24.0,
       child: Obx(() => service.scrollToTop.value
           ? Container(
               decoration: BoxDecoration(
@@ -230,9 +231,9 @@ class HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 const SizedBox(height: 2.0),
-                _buildInfoRow('Episodes Watched',
+                _buildInfoRow(getString.episodeWatched,
                     data.episodesWatched.toString(), theme.primary),
-                _buildInfoRow('Chapters Read', data.chapterRead.toString(),
+                _buildInfoRow(getString.chapterRead, data.chapterRead.toString(),
                     theme.primary),
               ],
             ),
@@ -281,13 +282,13 @@ class HomeScreenState extends State<HomeScreen> {
             children: [
               MediaCard(
                 context,
-                'ANIME LIST',
+                getString.list(getString.anime).toUpperCase(),
                 MediaListScreen(anime: true, id: data.userid ?? 0),
                 service.listImages.value[0] ?? 'https://bit.ly/31bsIHq',
               ),
               MediaCard(
                 context,
-                'MANGA LIST',
+                getString.list(getString.manga).toUpperCase(),
                 MediaListScreen(anime: false, id: data.userid ?? 0),
                 service.listImages.value[1] ?? 'https://bit.ly/2ZGfcuG',
               ),

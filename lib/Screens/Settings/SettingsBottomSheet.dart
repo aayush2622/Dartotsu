@@ -32,9 +32,11 @@ class SettingsBottomSheetState extends State<SettingsBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
-    var service = Provider.of<MediaServiceProvider>(context, listen: false)
-        .currentService
-        .data;
+    var s = Provider.of<MediaServiceProvider>(context, listen: false)
+        .currentService;
+
+    var service = s.data;
+
     return CustomBottomDialog(
       viewList: [
         Padding(
@@ -73,8 +75,8 @@ class SettingsBottomSheetState extends State<SettingsBottomSheet> {
                         GestureDetector(
                           onTap: () {
                             AlertDialogBuilder(context)
-                              ..setTitle(getString.logout)
-                              ..setMessage(getString.logoutConfirmation)
+                              ..setTitle(getString.logout(s.getName))
+                              ..setMessage(getString.confirmLogout)
                               ..setPositiveButton(getString.yes, () {
                                 service.removeSavedToken();
                                 Navigator.of(context).pop();
@@ -83,7 +85,7 @@ class SettingsBottomSheetState extends State<SettingsBottomSheet> {
                               ..show();
                           },
                           child: Text(
-                            getString.logout,
+                            getString.logout(""),
                             style: TextStyle(
                               fontFamily: 'Poppins',
                               color: Theme.of(context).colorScheme.secondary,
@@ -184,10 +186,10 @@ class SettingsBottomSheetState extends State<SettingsBottomSheet> {
             }),
         const SizedBox(height: 10.0),
         _buildListTile(
-            context, getString.activities, Icons.inbox, const SettingsScreen()),
+            context, getString.activity(2), Icons.inbox, const SettingsScreen()),
         const SizedBox(height: 10.0),
         _buildListTile(
-            context, getString.extension, Icons.extension, const ExtensionScreen()),
+            context, getString.extension(2), Icons.extension, const ExtensionScreen()),
         const SizedBox(height: 10.0),
         _buildListTile(
             context, getString.settings, Icons.settings, const SettingsScreen()),

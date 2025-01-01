@@ -33,7 +33,7 @@ class MangaCompactSettings {
 
   void get _initialiseSettings {
     settings = loadSelected();
-    viewType.value = settings.recyclerStyle!;
+    viewType.value = settings.recyclerStyle;
     reverse.value = settings.recyclerReversed;
   }
 
@@ -71,8 +71,8 @@ class MangaCompactSettings {
       Icons.view_comfy_rounded,
     ];
     final descriptions = [
-      getString.list,
-      getString.compact,
+      getString.listView,
+      getString.compactView,
     ];
 
     return Obx(

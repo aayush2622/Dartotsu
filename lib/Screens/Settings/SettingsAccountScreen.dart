@@ -39,30 +39,30 @@ class SettingsAccountScreenState extends BaseSettingsScreen {
       _buildAccountSection(
         context,
         iconPath: 'assets/svg/anilist.svg',
-        title: 'Anilist',
+        title: getString.anilist,
         isLoggedIn: Anilist.token,
         username: Anilist.username,
         avatarUrl: Anilist.avatar,
         onLogOut: () => AlertDialogBuilder(context)
-          ..setTitle('Logout Anilist')
-          ..setMessage('Are you sure you want to logout?')
-          ..setPositiveButton('Yes', Anilist.removeSavedToken)
-          ..setNegativeButton('No', null)
+          ..setTitle(getString.logout(getString.anilist))
+          ..setMessage(getString.confirmLogout)
+          ..setPositiveButton(getString.yes, Anilist.removeSavedToken)
+          ..setNegativeButton(getString.no, null)
           ..show(),
         onLogIn: () => Anilist.login(context),
       ),
       _buildAccountSection(
         context,
         iconPath: 'assets/svg/mal.svg',
-        title: 'MyAnimeList',
+        title: getString.mal,
         isLoggedIn: Mal.token,
         username: Mal.username,
         avatarUrl: Mal.avatar,
         onLogOut: () => AlertDialogBuilder(context)
-          ..setTitle('Logout Mal')
-          ..setMessage('Are you sure you want to logout?')
-          ..setPositiveButton('Yes', Mal.removeSavedToken)
-          ..setNegativeButton('No', null)
+          ..setTitle(getString.logout(getString.mal))
+          ..setMessage(getString.confirmLogout)
+          ..setPositiveButton(getString.yes, Mal.removeSavedToken)
+          ..setNegativeButton(getString.no, null)
           ..show(),
         onLogIn: () => Mal.login(context),
       ),
@@ -70,15 +70,15 @@ class SettingsAccountScreenState extends BaseSettingsScreen {
       _buildAccountSection(
         context,
         iconPath: 'assets/svg/discord.svg',
-        title: 'Discord',
+        title: getString.discord,
         isLoggedIn: Discord.token,
         username: Discord.userName,
         avatarUrl: Discord.avatar,
         onLogOut: () => AlertDialogBuilder(context)
-          ..setTitle('Logout Discord')
-          ..setMessage('Are you sure you want to logout?')
-          ..setPositiveButton('Yes', Discord.removeSavedToken)
-          ..setNegativeButton('No', null)
+          ..setTitle(getString.logout(getString.discord))
+          ..setMessage(getString.confirmLogout)
+          ..setPositiveButton(getString.yes, Discord.removeSavedToken)
+          ..setNegativeButton(getString.no, null)
           ..show(),
         onLogIn: () => Discord.warning(context),
       ),
@@ -140,7 +140,7 @@ class SettingsAccountScreenState extends BaseSettingsScreen {
                 ),
               ),
               Text(
-                'Logout',
+                getString.logout(""),
                 style: TextStyle(
                   color: theme.onSurface,
                   fontSize: 14,
@@ -194,8 +194,8 @@ class SettingsAccountScreenState extends BaseSettingsScreen {
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Text(
-            'Login',
+          Text(
+            getString.login,
             style: TextStyle(
               fontSize: 14,
               fontFamily: 'Poppins',

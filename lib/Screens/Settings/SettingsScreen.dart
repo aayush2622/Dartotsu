@@ -89,7 +89,7 @@ class SettingsScreenState extends BaseSettingsScreen {
       ),
       Setting(
         type: SettingType.normal,
-        name: getString.extensions,
+        name: getString.extension(2),
         description: getString.extensionsDescription,
         icon: Icons.extension,
         onClick: () => snackString('Extensions'),

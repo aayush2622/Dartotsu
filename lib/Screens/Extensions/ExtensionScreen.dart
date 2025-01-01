@@ -58,7 +58,7 @@ class _BrowseScreenState extends ConsumerState<ExtensionScreen>
           appBar: AppBar(
             elevation: 0,
             backgroundColor: Colors.transparent,
-            title: Text(getString.extensions,
+            title: Text(getString.extension(2),
               style: TextStyle(
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.bold,
@@ -98,17 +98,17 @@ class _BrowseScreenState extends ConsumerState<ExtensionScreen>
                 dragStartBehavior: DragStartBehavior.start,
                 tabs: [
                   _buildTab(
-                      context, ItemType.anime, getString.installedAnime, false, true),
+                      context, ItemType.anime, getString.installed(getString.anime), false, true),
                   _buildTab(
-                      context, ItemType.anime, getString.availableAnime, false, false),
+                      context, ItemType.anime, getString.available(getString.anime), false, false),
                   _buildTab(
-                      context, ItemType.manga, getString.installedManga, true, true),
+                      context, ItemType.manga, getString.installed(getString.manga), true, true),
                   _buildTab(
-                      context, ItemType.manga, getString.availableManga, true, false),
+                      context, ItemType.manga, getString.available(getString.manga), true, false),
                   _buildTab(
-                      context, ItemType.novel, getString.installedNovel, false, true),
+                      context, ItemType.novel, getString.installed(getString.novel), false, true),
                   _buildTab(
-                      context, ItemType.novel, getString.availableNovel, false, false),
+                      context, ItemType.novel, getString.available(getString.novel), false, false),
                 ],
               ),
               const SizedBox(height: 8.0),

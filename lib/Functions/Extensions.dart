@@ -18,7 +18,9 @@ extension IntExtension on int {
     var context = navigatorKey.currentContext ?? Get.context;
     return MediaQuery.of(context!).size.width;
   }
-
+  double screenWidthWithContext(BuildContext context) {
+    return MediaQuery.of(context).size.width;
+  }
   double screenHeight() {
     var context = navigatorKey.currentContext ?? Get.context;
     return MediaQuery.of(context!).size.height;

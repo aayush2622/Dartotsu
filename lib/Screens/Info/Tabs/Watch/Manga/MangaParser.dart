@@ -26,7 +26,7 @@ class MangaParser extends BaseParser {
   var toggledScanlators = Rxn<List<bool>>(null);
   void initSettings(Media mediaData) {
     var selected = loadSelected(mediaData);
-    viewType.value = selected.recyclerStyle!;
+    viewType.value = selected.recyclerStyle;
     reversed.value = selected.recyclerReversed;
   }
 
@@ -37,7 +37,7 @@ class MangaParser extends BaseParser {
         scanlator.value,
         toggledScanlators.value,
         (s,t) {
-          viewType.value = s.recyclerStyle!;
+          viewType.value = s.recyclerStyle;
           reversed.value = s.recyclerReversed;
           toggledScanlators.value = t;
           chapterList.value = unModifiedChapterList.value?.where((element) {

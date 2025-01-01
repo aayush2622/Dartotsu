@@ -57,8 +57,8 @@ class SettingsCommonScreenState extends BaseSettingsScreen {
           ),
           Setting(
             type: SettingType.normal,
-            name: getString.manageHomeLayouts,
-            description: getString.manageHomeLayoutsDescription,
+            name: getString.manageLayout(getString.anilist,getString.home),
+            description: getString.manageLayoutDescription(getString.anilist,getString.home),
             icon: Icons.tune,
             onClick: () async {
               final homeLayoutMap =
@@ -69,7 +69,7 @@ class SettingsCommonScreenState extends BaseSettingsScreen {
                   List<bool>.from(homeLayoutMap.values.toList());
 
               AlertDialogBuilder(context)
-                ..setTitle(getString.manageHomeLayouts)
+                ..setTitle(getString.manageLayout(getString.anilist,getString.home))
                 ..reorderableMultiSelectableItems(
                   titles,
                   checkedStates,
@@ -99,8 +99,8 @@ class SettingsCommonScreenState extends BaseSettingsScreen {
         settings: [
           Setting(
             type: SettingType.normal,
-            name: getString.manageHomeLayouts,
-            description: getString.manageHomeLayoutsDescription,
+            name: getString.manageLayout(getString.mal,getString.home),
+            description: getString.manageLayoutDescription(getString.mal,getString.home),
             icon: Icons.tune,
             onClick: () async {
               final homeLayoutMap = PrefManager.getVal(PrefName.malHomeLayout);
@@ -110,7 +110,7 @@ class SettingsCommonScreenState extends BaseSettingsScreen {
                   List<bool>.from(homeLayoutMap.values.toList());
 
               AlertDialogBuilder(context)
-                ..setTitle(getString.manageHomeLayouts)
+                ..setTitle(getString.manageLayout(getString.mal,getString.home))
                 ..reorderableMultiSelectableItems(
                   titles,
                   checkedStates,

@@ -96,13 +96,13 @@ class AnilistHomeScreen extends BaseHomeScreen {
         list: animeContinue.value,
         emptyIcon: Icons.movie_filter_rounded,
         emptyMessage: getString.allCaughtUpNew,
-        emptyButtonText: getString.browseAnime,
+        emptyButtonText: getString.browse(getString.anime),
         emptyButtonOnPressed: () => navbar?.onClick(0),
       ),
       MediaSectionData(
         type: 0,
-        title: getString.favouriteAnime,
-        pairTitle: 'Favourite Anime',
+        title: getString.favorite(getString.anime),
+        pairTitle: 'Favorite Anime',
         list: animeFav.value,
         emptyIcon: Icons.heart_broken,
         emptyMessage:
@@ -110,12 +110,12 @@ class AnilistHomeScreen extends BaseHomeScreen {
       ),
       MediaSectionData(
         type: 0,
-        title: getString.plannedAnime,
+        title: getString.planned(getString.anime),
         pairTitle: 'Planned Anime',
         list: animePlanned.value,
         emptyIcon: Icons.movie_filter_rounded,
         emptyMessage: getString.allCaughtUpNew,
-        emptyButtonText: getString.browseAnime,
+        emptyButtonText: getString.browse(getString.anime),
         emptyButtonOnPressed: () => navbar?.onClick(0),
       ),
       MediaSectionData(
@@ -125,13 +125,13 @@ class AnilistHomeScreen extends BaseHomeScreen {
         list: mangaContinue.value,
         emptyIcon: Icons.import_contacts,
         emptyMessage: getString.allCaughtUpNew,
-        emptyButtonText: getString.browseManga,
+        emptyButtonText: getString.browse(getString.manga),
         emptyButtonOnPressed: () => navbar?.onClick(2),
       ),
       MediaSectionData(
         type: 0,
-        title: getString.favouriteManga,
-        pairTitle: 'Favourite Manga',
+        title: getString.favorite(getString.manga),
+        pairTitle: 'Favorite Manga',
         list: mangaFav.value,
         emptyIcon: Icons.heart_broken,
         emptyMessage:
@@ -139,12 +139,12 @@ class AnilistHomeScreen extends BaseHomeScreen {
       ),
       MediaSectionData(
         type: 0,
-        title: getString.plannedManga,
+        title: getString.planned(getString.manga),
         pairTitle: 'Planned Manga',
         list: mangaPlanned.value,
         emptyIcon: Icons.import_contacts,
         emptyMessage: getString.allCaughtUpNew,
-        emptyButtonText: getString.browseManga,
+        emptyButtonText: getString.browse(getString.manga),
         emptyButtonOnPressed: () => navbar?.onClick(2),
       ),
       MediaSectionData(

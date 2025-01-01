@@ -1,5 +1,6 @@
 import 'package:dantotsu/Functions/Extensions.dart';
 import 'package:dantotsu/Screens/Calendar/CalendarScreen.dart';
+import 'package:dantotsu/Theme/LanguageSwitcher.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:provider/provider.dart';
@@ -68,7 +69,7 @@ class AnimeScreenState extends State<AnimeScreen> {
     var theme = Provider.of<ThemeNotifier>(context);
     return Positioned(
       bottom: 72.0 + 32.bottomBar(),
-      left: (0.screenWidth() / 2) - 24.0,
+      left: (0.screenWidthWithContext(context) / 2) - 24.0,
       child: Obx(() => service.scrollToTop.value
           ? Container(
               decoration: BoxDecoration(
@@ -104,7 +105,7 @@ class AnimeScreenState extends State<AnimeScreen> {
                         ? MediaAdaptor(type: 1, mediaList: mediaDataList)
                         : const Center(child: CircularProgressIndicator()),
                   ),
-                  const MediaSearchBar(title: "ANIME"),
+                  MediaSearchBar(title: getString.anime.toUpperCase()),
                   Positioned(
                     bottom: 92,
                     left: 8.0,
@@ -113,11 +114,11 @@ class AnimeScreenState extends State<AnimeScreen> {
                       child: ChipsWidget(
                         chips: [
                           ChipData(
-                              label: 'This Season', action: () => chipCall(1)),
+                              label: getString.thisSeason, action: () => chipCall(1)),
                           ChipData(
-                              label: 'Next Season', action: () => chipCall(2)),
+                              label: getString.nextSeason, action: () => chipCall(2)),
                           ChipData(
-                              label: 'Previous Season',
+                              label: getString.previousSeason,
                               action: () => chipCall(0)),
                         ],
                       ),
@@ -133,13 +134,13 @@ class AnimeScreenState extends State<AnimeScreen> {
                         children: [
                           MediaCard(
                             context,
-                            'GENRES',
+                            getString.genres.toUpperCase(),
                             const Text(""),
                             "https://s4.anilist.co/file/anilistcdn/media/anime/banner/16498-8jpFCOcDmneX.jpg",
                           ),
                           MediaCard(
                             context,
-                            'CALENDAR',
+                            getString.calendar.toUpperCase(),
                             const CalendarScreen(),
                             "https://s4.anilist.co/file/anilistcdn/media/anime/banner/125367-hGPJLSNfprO3.jpg",
                           ),

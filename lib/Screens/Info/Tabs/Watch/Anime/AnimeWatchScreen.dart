@@ -111,7 +111,7 @@ class AnimeWatchScreenState extends BaseWatchScreen<AnimeWatchScreen> {
         children: [
           Expanded(
             child: Text(
-              getString.episodes,
+              getString.episode(2),
               style: TextStyle(
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.bold,

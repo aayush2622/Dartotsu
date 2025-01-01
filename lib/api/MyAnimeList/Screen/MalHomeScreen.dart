@@ -99,13 +99,13 @@ class MalHomeScreen extends BaseHomeScreen {
         list: animeContinue.value,
         emptyIcon: Icons.movie_filter_rounded,
         emptyMessage: getString.allCaughtUpNew,
-        emptyButtonText: getString.browseAnime,
+        emptyButtonText: getString.browse(getString.anime),
         emptyButtonOnPressed: () => navbar?.onClick(0),
         onLongPressTitle: () => showHidden.value = !showHidden.value,
       ),
       MediaSectionData(
         type: 0,
-        title: getString.onHoldAnime,
+        title: getString.onHold(getString.anime),
         pairTitle: 'OnHold Anime',
         list: animeOnHold.value,
         emptyIcon: Icons.movie_filter_rounded,
@@ -114,12 +114,12 @@ class MalHomeScreen extends BaseHomeScreen {
       ),
       MediaSectionData(
         type: 0,
-        title: getString.plannedAnime,
+        title: getString.planned(getString.anime),
         pairTitle: 'Planned Anime',
         list: animePlanned.value,
         emptyIcon: Icons.movie_filter_rounded,
         emptyMessage: getString.allCaughtUpNew,
-        emptyButtonText: getString.browseAnime,
+        emptyButtonText: getString.browse(getString.anime),
         emptyButtonOnPressed: () => navbar?.onClick(0),
       ),
       MediaSectionData(
@@ -128,7 +128,7 @@ class MalHomeScreen extends BaseHomeScreen {
         pairTitle: 'Dropped Anime',
         list: animeDropped.value,
         emptyIcon: Icons.movie_filter_rounded,
-        emptyMessage: getString.noDroppedAnime,
+        emptyMessage: getString.noDropped(getString.anime),
       ),
       MediaSectionData(
         type: 0,
@@ -137,12 +137,12 @@ class MalHomeScreen extends BaseHomeScreen {
         list: mangaContinue.value,
         emptyIcon: Icons.import_contacts,
         emptyMessage: getString.allCaughtUpNew,
-        emptyButtonText: getString.browseAnime,
+        emptyButtonText: getString.browse(getString.manga),
         emptyButtonOnPressed: () => navbar?.onClick(2),
       ),
       MediaSectionData(
         type: 0,
-        title: getString.onHoldManga,
+        title: getString.onHold(getString.manga),
         pairTitle: 'OnHold Manga',
         list: mangaOnHold.value,
         emptyIcon: Icons.import_contacts,
@@ -151,12 +151,12 @@ class MalHomeScreen extends BaseHomeScreen {
       ),
       MediaSectionData(
         type: 0,
-        title: getString.plannedManga,
+        title: getString.planned(getString.manga),
         pairTitle: 'Planned Manga',
         list: mangaPlanned.value,
         emptyIcon: Icons.import_contacts,
         emptyMessage: getString.allCaughtUpNew,
-        emptyButtonText: getString.browseAnime,
+        emptyButtonText: getString.browse(getString.manga),
         emptyButtonOnPressed: () => navbar?.onClick(2),
       ),
       MediaSectionData(
@@ -165,7 +165,7 @@ class MalHomeScreen extends BaseHomeScreen {
         pairTitle: 'Dropped Manga',
         list: mangaDropped.value,
         emptyIcon: Icons.import_contacts,
-        emptyMessage: getString.noDroppedManga,
+        emptyMessage: getString.noDropped(getString.manga),
       ),
     ];
 

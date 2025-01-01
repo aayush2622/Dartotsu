@@ -102,20 +102,20 @@ class AnilistAnimeScreen extends BaseAnimeScreen {
       ),
       MediaSectionData(
         type: 0,
-        title: getString.trendingMovies,
+        title: getString.trending(getString.anime),
         pairTitle: 'Trending Movies',
         list: popularMovies.value,
       ),
       MediaSectionData(
         type: 0,
-        title: getString.topRatedSeries,
+        title: getString.topRated(getString.series),
         pairTitle: 'Top Rated Series',
         list: topRatedSeries.value,
       ),
       MediaSectionData(
         type: 0,
-        title: getString.mostFavouriteSeries,
-        pairTitle: 'Most Favourite Series',
+        title: getString.mostFavourite(getString.series),
+          pairTitle: 'Most Favourite Series',
         list: mostFavSeries.value,
       ),
     ];
@@ -139,7 +139,7 @@ class AnilistAnimeScreen extends BaseAnimeScreen {
       ..add(MediaSection(
           context: context,
           type: 2,
-          title: getString.popularAnime,
+          title: getString.popular(getString.anime),
           mediaList: animePopular.value,
         ),
       );

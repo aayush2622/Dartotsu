@@ -11,6 +11,7 @@ import '../../Functions/Function.dart';
 import '../../Services/Screens/BaseMangaScreen.dart';
 import '../../Services/ServiceSwitcher.dart';
 import '../../Theme/Colors.dart';
+import '../../Theme/LanguageSwitcher.dart';
 import '../../Theme/ThemeProvider.dart';
 import '../../Widgets/ScrollConfig.dart';
 import '../Home/Widgets/LoadingWidget.dart';
@@ -67,7 +68,7 @@ class MangaScreenState extends State<MangaScreen> {
     var theme = Provider.of<ThemeNotifier>(context);
     return Positioned(
       bottom: 72.0 + 32.bottomBar(),
-      left: (0.screenWidth() / 2) - 24.0,
+      left: (0.screenWidthWithContext(context) / 2) - 24.0,
       child: Obx(() => service.scrollToTop.value
           ? Container(
               decoration: BoxDecoration(
@@ -103,8 +104,8 @@ class MangaScreenState extends State<MangaScreen> {
                         ? MediaAdaptor(type: 1, mediaList: mediaDataList)
                         : const Center(child: CircularProgressIndicator()),
                   ),
-                  const MediaSearchBar(
-                    title: "MANGA",
+                  MediaSearchBar(
+                    title: getString.manga.toUpperCase(),
                   ),
                   Positioned(
                     bottom: 92,

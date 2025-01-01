@@ -93,19 +93,19 @@ class MalAnimeScreen extends BaseAnimeScreen {
       ),
       MediaSectionData(
         type: 0,
-        title: getString.trendingMovies,
+        title: getString.trending(getString.movie(2)),
         pairTitle: 'Trending Movies',
         list: popularMovies.value,
       ),
       MediaSectionData(
         type: 0,
-        title: getString.topRatedSeries,
+        title: getString.topRated(getString.series),
         pairTitle: 'Top Rated Series',
         list: topRatedSeries.value,
       ),
       MediaSectionData(
         type: 0,
-        title: getString.mostFavouriteSeries,
+        title: getString.mostFavourite(getString.series),
         pairTitle: 'Most Favourite Series',
         list: mostFavSeries.value,
       ),
@@ -132,7 +132,7 @@ class MalAnimeScreen extends BaseAnimeScreen {
         MediaSection(
             context: context,
             type: 2,
-            title: getString.popularAnime,
+            title: getString.popular(getString.anime),
             mediaList: animePopular.value),
       );
   }

@@ -95,25 +95,25 @@ class AnilistMangaScreen extends BaseMangaScreen {
     final mediaSections = [
       MediaSectionData(
         type: 0,
-        title: getString.trendingManhwa,
+        title: getString.trending(getString.manhwa),
         pairTitle: 'Trending Manhwa',
         list: popularManhwa.value,
       ),
       MediaSectionData(
         type: 0,
-        title: getString.trendingNovels,
+        title: getString.trending(getString.novel),
         pairTitle: 'Trending Novels',
         list: popularNovel.value,
       ),
       MediaSectionData(
         type: 0,
-        title: getString.topRatedManga,
+        title: getString.topRated(getString.manga),
         pairTitle: 'Top Rated Manga',
         list: topRatedManga.value,
       ),
       MediaSectionData(
         type: 0,
-        title: getString.mostFavouriteManga,
+        title: getString.mostFavourite(getString.manga),
         pairTitle: 'Most Favourite Manga',
         list: mostFavManga.value,
       ),
@@ -137,7 +137,7 @@ class AnilistMangaScreen extends BaseMangaScreen {
         MediaSection(
           context: context,
           type: 2,
-          title: getString.popularManga,
+          title: getString.popular(getString.anime),
           mediaList: mangaPopular.value,
         ),
       );

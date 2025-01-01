@@ -63,9 +63,9 @@ class AnimeCompactSettings {
       Icons.view_comfy_rounded,
     ];
     final descriptions = [
-      getString.list,
-      getString.grid,
-      getString.compact,
+      getString.listView,
+      getString.gridView,
+      getString.compactView,
     ];
 
     return Obx(

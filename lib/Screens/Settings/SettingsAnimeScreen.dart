@@ -58,8 +58,8 @@ class SettingsAnimeScreenState extends BaseSettingsScreen {
         settings: [
           Setting(
             type: SettingType.normal,
-            name: getString.manageAnimeLayouts,
-            description: getString.manageAnimeLayoutsDescription,
+            name: getString.manageLayout(getString.anime, getString.anilist),
+            description: getString.manageLayoutDescription(getString.anilist, getString.home),
             icon: Icons.tune,
             onClick: () async {
               final homeLayoutMap =
@@ -69,7 +69,7 @@ class SettingsAnimeScreenState extends BaseSettingsScreen {
                   List<bool>.from(homeLayoutMap.values.toList());
 
               AlertDialogBuilder(context)
-                ..setTitle(getString.manageAnimeLayouts)
+                ..setTitle(getString.manageLayout(getString.anime, getString.anilist))
                 ..reorderableMultiSelectableItems(
                   titles,
                   checkedStates,
@@ -101,8 +101,8 @@ class SettingsAnimeScreenState extends BaseSettingsScreen {
         settings: [
           Setting(
             type: SettingType.normal,
-            name: getString.manageAnimeLayouts,
-            description: getString.manageAnimeLayoutsDescription,
+            name: getString.manageLayout(getString.anime, getString.mal),
+            description: getString.manageLayoutDescription(getString.mal, getString.home),
             icon: Icons.tune,
             onClick: () async {
               final homeLayoutMap = PrefManager.getVal(PrefName.malAnimeLayout);
@@ -110,7 +110,7 @@ class SettingsAnimeScreenState extends BaseSettingsScreen {
               var checkedStates =
                   List<bool>.from(homeLayoutMap.values.toList());
               AlertDialogBuilder(context)
-                ..setTitle(getString.manageAnimeLayouts)
+                ..setTitle(getString.manageLayout(getString.anime, getString.mal))
                 ..reorderableMultiSelectableItems(
                   titles,
                   checkedStates,
