@@ -102,9 +102,10 @@
           "Home",
           "Manga"
         ]
+      }
     }
   },
-    "manageLayoutDescription": "You can manage the layout for {page} page by dragging and dropping the items",
+  "manageLayoutDescription": "You can manage the layout for {page} page by dragging and dropping the items",
   "@manageLayoutDescription": {
     "placeholders": {
       "page": {
@@ -334,7 +335,7 @@
   "bottomPadding": "Bottom Padding",
   "bottomPaddingDescription": "Subtitle bottom padding",
   "colorPicker": "Color Picker",
-    "pickColor": "Pick a color",
+  "pickColor": "Pick a color",
   "colorPickerDescription": "Choose a color",
   "about": "About",
   "aboutDescription": "Learn more about the app and its creators",
