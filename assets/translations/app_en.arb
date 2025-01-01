@@ -85,37 +85,29 @@
       }
     }
   },
-  "manageLayout": "Manage {type} Layout for {name} Page",
+  "manageLayout": "Manage {page} page Layout for {service}",
   "@manageLayout": {
     "placeholders": {
-      "type": {
+      "service": {
         "type": "String",
         "examples": [
           "Anilist",
           "MAL"
         ]
       },
-      "name": {
+      "page": {
         "type": "String",
         "examples": [
           "Anime",
           "Home",
           "Manga"
         ]
-      }
     }
   },
-  "manageLayoutDescription": "You can manage the layout for {type} by dragging and dropping the items on {name} page.",
+    "manageLayoutDescription": "You can manage the layout for {page} page by dragging and dropping the items",
   "@manageLayoutDescription": {
     "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anilist",
-          "MAL"
-        ]
-      },
-      "name": {
+      "page": {
         "type": "String",
         "examples": [
           "Anime",
@@ -342,6 +334,7 @@
   "bottomPadding": "Bottom Padding",
   "bottomPaddingDescription": "Subtitle bottom padding",
   "colorPicker": "Color Picker",
+    "pickColor": "Pick a color",
   "colorPickerDescription": "Choose a color",
   "about": "About",
   "aboutDescription": "Learn more about the app and its creators",

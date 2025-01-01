@@ -1,3 +1,4 @@
+import 'package:dantotsu/Theme/LanguageSwitcher.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +11,7 @@ Future<Color?> showColorPickerDialog(
     builder: (BuildContext context) {
       return AlertDialog(
         title: Text(
-          'Pick a color',
+          getString.pickColor,
           style: TextStyle(
             color: theme.primary,
             fontWeight: FontWeight.bold,

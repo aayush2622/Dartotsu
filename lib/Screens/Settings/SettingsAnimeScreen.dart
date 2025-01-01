@@ -58,8 +58,8 @@ class SettingsAnimeScreenState extends BaseSettingsScreen {
         settings: [
           Setting(
             type: SettingType.normal,
-            name: getString.manageLayout(getString.anime, getString.anilist),
-            description: getString.manageLayoutDescription(getString.anilist, getString.home),
+            name: getString.manageLayout(getString.anilist, getString.anime),
+            description: getString.manageLayoutDescription(getString.home),
             icon: Icons.tune,
             onClick: () async {
               final homeLayoutMap =
@@ -69,7 +69,7 @@ class SettingsAnimeScreenState extends BaseSettingsScreen {
                   List<bool>.from(homeLayoutMap.values.toList());
 
               AlertDialogBuilder(context)
-                ..setTitle(getString.manageLayout(getString.anime, getString.anilist))
+                ..setTitle(getString.manageLayout(getString.anilist, getString.anime))
                 ..reorderableMultiSelectableItems(
                   titles,
                   checkedStates,
@@ -101,8 +101,8 @@ class SettingsAnimeScreenState extends BaseSettingsScreen {
         settings: [
           Setting(
             type: SettingType.normal,
-            name: getString.manageLayout(getString.anime, getString.mal),
-            description: getString.manageLayoutDescription(getString.mal, getString.home),
+            name: getString.manageLayout(getString.home, getString.mal),
+            description: getString.manageLayoutDescription(getString.home),
             icon: Icons.tune,
             onClick: () async {
               final homeLayoutMap = PrefManager.getVal(PrefName.malAnimeLayout);
@@ -110,7 +110,7 @@ class SettingsAnimeScreenState extends BaseSettingsScreen {
               var checkedStates =
                   List<bool>.from(homeLayoutMap.values.toList());
               AlertDialogBuilder(context)
-                ..setTitle(getString.manageLayout(getString.anime, getString.mal))
+                ..setTitle(getString.manageLayout(getString.home, getString.mal))
                 ..reorderableMultiSelectableItems(
                   titles,
                   checkedStates,

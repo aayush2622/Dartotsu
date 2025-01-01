@@ -115,15 +115,15 @@ class MangaScreenState extends State<MangaScreen> {
                       child: ChipsWidget(
                         chips: [
                           ChipData(
-                            label: 'Trending Manga',
+                            label: getString.trending(getString.manga),
                             action: () => chipCall('MANGA'),
                           ),
                           ChipData(
-                            label: 'Trending Manhwa',
+                            label: getString.trending(getString.manhwa),
                             action: () => chipCall('MANHWA'),
                           ),
                           ChipData(
-                            label: 'Trending Novel',
+                            label: getString.trending(getString.novel),
                             action: () => chipCall('NOVEL'),
                           ),
                         ],
@@ -140,7 +140,7 @@ class MangaScreenState extends State<MangaScreen> {
                         children: [
                           MediaCard(
                             context,
-                            'GENRE',
+                            getString.genres,
                             const Text(''),
                             "https://s4.anilist.co/file/anilistcdn/media/manga/banner/105778-wk5qQ7zAaTGl.jpg",
                           ),

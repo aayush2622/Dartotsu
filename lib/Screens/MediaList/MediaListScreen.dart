@@ -1,4 +1,5 @@
 
+import 'package:dantotsu/Theme/LanguageSwitcher.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -36,7 +37,7 @@ class MediaListScreenState extends State<MediaListScreen> {
         elevation: 0,
         backgroundColor: Colors.transparent,
         title: Text(
-          "${service.username} ${widget.anime ? 'Anime' : 'Manga'} List",
+          "${service.username} ${getString.list(widget.anime ? getString.anime : getString.manga)}",
           style: TextStyle(
             fontFamily: 'Poppins',
             fontWeight: FontWeight.w600,

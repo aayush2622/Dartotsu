@@ -57,8 +57,8 @@ class SettingsCommonScreenState extends BaseSettingsScreen {
           ),
           Setting(
             type: SettingType.normal,
-            name: getString.manageLayout(getString.anilist,getString.home),
-            description: getString.manageLayoutDescription(getString.anilist,getString.home),
+            name: getString.manageLayout(getString.home,getString.anilist),
+            description: getString.manageLayoutDescription(getString.home),
             icon: Icons.tune,
             onClick: () async {
               final homeLayoutMap =
@@ -69,7 +69,7 @@ class SettingsCommonScreenState extends BaseSettingsScreen {
                   List<bool>.from(homeLayoutMap.values.toList());
 
               AlertDialogBuilder(context)
-                ..setTitle(getString.manageLayout(getString.anilist,getString.home))
+                ..setTitle(getString.manageLayout(getString.home,getString.anilist))
                 ..reorderableMultiSelectableItems(
                   titles,
                   checkedStates,
@@ -99,8 +99,8 @@ class SettingsCommonScreenState extends BaseSettingsScreen {
         settings: [
           Setting(
             type: SettingType.normal,
-            name: getString.manageLayout(getString.mal,getString.home),
-            description: getString.manageLayoutDescription(getString.mal,getString.home),
+            name: getString.manageLayout(getString.home,getString.mal),
+            description: getString.manageLayoutDescription(getString.home),
             icon: Icons.tune,
             onClick: () async {
               final homeLayoutMap = PrefManager.getVal(PrefName.malHomeLayout);
@@ -110,7 +110,7 @@ class SettingsCommonScreenState extends BaseSettingsScreen {
                   List<bool>.from(homeLayoutMap.values.toList());
 
               AlertDialogBuilder(context)
-                ..setTitle(getString.manageLayout(getString.mal,getString.home))
+                ..setTitle(getString.manageLayout(getString.home,getString.mal))
                 ..reorderableMultiSelectableItems(
                   titles,
                   checkedStates,
