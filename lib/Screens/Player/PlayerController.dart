@@ -23,7 +23,7 @@ import '../../../../../../Services/ServiceSwitcher.dart';
 import '../../../../../../api/Discord/Discord.dart';
 import '../../../../../../api/Discord/DiscordService.dart';
 import '../../../../../../api/EpisodeDetails/Aniskip/Aniskip.dart';
-import '../../../../../Settings/SettingsPlayerScreen.dart';
+import '../Settings/SettingsPlayerScreen.dart';
 import 'Platform/BasePlayer.dart';
 import 'Player.dart';
 

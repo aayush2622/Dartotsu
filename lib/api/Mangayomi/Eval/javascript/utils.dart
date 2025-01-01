@@ -1,8 +1,8 @@
 import 'package:flutter_qjs/flutter_qjs.dart';
 import 'package:js_packer/js_packer.dart';
 
+import '../../../../logger.dart';
 import '../../cryptoaes/js_unpacker.dart';
-import '../../log.dart';
 import '../dart/model/m_bridge.dart';
 
 class JsUtils {
@@ -12,7 +12,7 @@ class JsUtils {
 
   void init() {
     runtime.onMessage('log', (dynamic args) {
-      Logger.add(LoggerLevel.warning, "${args[0]}");
+      Logger.log("${args[0]}");
       return null;
     });
     runtime.onMessage('cryptoHandler', (dynamic args) {

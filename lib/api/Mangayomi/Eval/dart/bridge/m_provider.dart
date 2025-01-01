@@ -6,8 +6,8 @@ import 'package:dart_eval/dart_eval_bridge.dart';
 import 'package:dart_eval/stdlib/core.dart';
 import 'package:flutter_qjs/flutter_qjs.dart';
 
+import '../../../../../logger.dart';
 import '../../../extension_preferences_providers.dart';
-import '../../../log.dart';
 import '../model/filter.dart';
 import '../model/m_bridge.dart';
 import '../model/m_manga.dart';
@@ -854,7 +854,7 @@ class $MProvider extends MProvider with $Bridge<MProvider> {
   $Value? $bridgeGet(String identifier) {
     return switch (identifier) {
       'print' => $Function((_, __, List<$Value?> args) {
-        Logger.add(LoggerLevel.warning, "${args[0]!.$reified}");
+        Logger.log("${args[0]!.$reified}");
         return null;
       }),
       'evalJs' => $Function((_, __, List<$Value?> args) {

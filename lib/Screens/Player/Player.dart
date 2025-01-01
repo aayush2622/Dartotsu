@@ -5,6 +5,7 @@ import 'dart:math';
 import 'package:dantotsu/Preferences/HiveDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
 import 'package:dantotsu/Preferences/PrefManager.dart';
 import 'package:dantotsu/Preferences/Preferences.dart';
+import 'package:dantotsu/Theme/LanguageSwitcher.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -20,9 +21,9 @@ import '../../../../../../Services/ServiceSwitcher.dart';
 import '../../../../../../Widgets/ScrollConfig.dart';
 import '../../../../../../api/Mangayomi/Eval/dart/model/video.dart' as v;
 import '../../../../../../api/Mangayomi/Model/Source.dart';
-import '../../../../../Settings/SettingsPlayerScreen.dart';
-import '../Widget/AnimeCompactSettings.dart';
-import '../Widget/BuildChunkSelector.dart';
+import '../Detail/Tabs/Watch/Anime/Widget/AnimeCompactSettings.dart';
+import '../Detail/Tabs/Watch/Anime/Widget/BuildChunkSelector.dart';
+import '../Settings/SettingsPlayerScreen.dart';
 import 'Platform/BasePlayer.dart';
 import 'Platform/WindowsPlayer.dart';
 import 'PlayerController.dart';
@@ -221,7 +222,7 @@ class MediaPlayerState extends State<MediaPlayer>
               onKeyEvent: _handleKeyPress,
               child: GestureDetector(
                 behavior: HitTestBehavior.opaque,
-                onTapDown: (_) => _onMouseMoved(),
+                onTapDown: (_) => showControls.value = !showControls.value,
                 onPanUpdate: (_) => _onMouseMoved(),
                 onDoubleTapDown: (t) => _handleDoubleTap(t),
                 onVerticalDragUpdate: (e) async {
@@ -521,8 +522,8 @@ class MediaPlayerState extends State<MediaPlayer>
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Text(
-            'Episodes',
+          Text(
+            getString.episode(widget.media.anime?.episodes?.length ?? 1),
             style: TextStyle(
               fontFamily: 'Poppins',
               fontWeight: FontWeight.bold,

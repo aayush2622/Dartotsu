@@ -15,7 +15,7 @@ import '../../StorageProvider.dart';
 import '../../Theme/CustomColorPicker.dart';
 import '../../Widgets/AlertDialogBuilder.dart';
 import '../../Theme/LanguageSwitcher.dart';
-import '../Info/Tabs/Watch/Anime/Player/Player.dart';
+import '../Player/Player.dart';
 import 'BaseSettingsScreen.dart';
 
 class SettingsPlayerScreen extends StatefulWidget {

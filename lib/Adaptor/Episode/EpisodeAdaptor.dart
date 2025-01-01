@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 import '../../Animation/ScaleAnimation.dart';
 import '../../DataClass/Episode.dart';
 import '../../DataClass/Media.dart';
-import '../../Screens/Info/Tabs/Watch/Anime/Player/Player.dart';
+import '../../Screens/Player/Player.dart';
 import '../../Widgets/CustomBottomDialog.dart';
 import '../../api/Mangayomi/Model/Source.dart';
 import 'EpisodeCompactViewHolder.dart';

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:dantotsu/Screens/Login/LoginScreen.dart';
@@ -5,6 +6,7 @@ import 'package:dantotsu/Screens/Manga/MangaScreen.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' as provider;
 import 'package:get/get.dart';
@@ -13,8 +15,8 @@ import 'package:intl/intl.dart';
 import 'package:isar/isar.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:window_manager/window_manager.dart';
+
 import 'Preferences/PrefManager.dart';
 import 'Screens/Anime/AnimeScreen.dart';
 import 'Screens/Home/HomeScreen.dart';
@@ -26,20 +28,36 @@ import 'Theme/ThemeManager.dart';
 import 'Theme/ThemeProvider.dart';
 import 'api/Discord/Discord.dart';
 import 'api/TypeFactory.dart';
+import 'logger.dart';
+
 late Isar isar;
 
 void main(List<String> args) async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await init();
-  runApp(
-    provider.ProviderScope(
-      child: MultiProvider(
-        providers: [
-          ChangeNotifierProvider(create: (_) => ThemeNotifier()),
-          ChangeNotifierProvider(create: (_) => MediaServiceProvider()),
-        ],
-        child: const MyApp(),
-      ),
+  runZonedGuarded(
+    () async {
+      WidgetsFlutterBinding.ensureInitialized();
+      await Logger.init();
+      await init();
+      runApp(
+        provider.ProviderScope(
+          child: MultiProvider(
+            providers: [
+              ChangeNotifierProvider(create: (_) => ThemeNotifier()),
+              ChangeNotifierProvider(create: (_) => MediaServiceProvider()),
+            ],
+            child: const MyApp(),
+          ),
+        ),
+      );
+    },
+    (error, stackTrace) {
+      Logger.log('Uncaught error: $error\n$stackTrace');
+    },
+    zoneSpecification: ZoneSpecification(
+      print: (Zone self, ZoneDelegate parent, Zone zone, String message) {
+        Logger.log(message);
+        parent.print(zone, message);
+      },
     ),
   );
 }
@@ -62,6 +80,7 @@ Future init() async {
   for (var locale in supportedLocales) {
     initializeDateFormatting(locale);
   }
+
 }
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();

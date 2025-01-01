@@ -39,17 +39,25 @@ class StorageProvider {
     }
     return true;
   }
-  Future<Directory?> getDatabaseDirectory() async {
+  Future<Directory?> getCustomDirectory({String? subPath}) async {
     final dir = await getApplicationDocumentsDirectory();
+
     if (Platform.isAndroid || Platform.isIOS || Platform.isMacOS) {
       return dir;
     } else {
-      String dbDir = path.join(dir.path, 'Dartotsu', 'databases');
-      await Directory(dbDir).create(recursive: true);
-      return Directory(dbDir);
-    }
+      String customDir = path.join(dir.path, 'Dartotsu', subPath ?? '');
+    await Directory(customDir).create(recursive: true);
+    return Directory(customDir);
+  }
   }
 
+  Future<Directory?> getDatabaseDirectory() async {
+    return getCustomDirectory(subPath: 'databases');
+  }
+
+  Future<Directory?> getDefaultDirectory() async {
+    return getCustomDirectory();
+  }
   Future<Isar> initDB(String? path, {bool inspector = false}) async {
     Directory? dir;
     if (path == null) {
