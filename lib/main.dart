@@ -72,7 +72,6 @@ Future init() async {
   }
 
   TypeFactory.registerAllTypes();
-
   initializeDateFormatting();
   final supportedLocales = DateFormat.allLocalesWithSymbols();
   for (var locale in supportedLocales) {
