@@ -47,9 +47,9 @@ class StorageProvider {
       return dir;
     } else {
       String customDir = path.join(dir.path, 'Dartotsu', subPath ?? '');
-    await Directory(customDir).create(recursive: true);
-    return Directory(customDir);
-  }
+      await Directory(customDir).create(recursive: true);
+      return Directory(customDir);
+    }
   }
 
   Future<Directory?> getDatabaseDirectory() async {
