@@ -247,11 +247,6 @@ jobs:
           filename: Dantotsu_Linux_${{github.ref_name}}.zip
           directory: build/linux/x64/release/bundle
 
-      # Step 8: Verify archive creation
-      - name: List Release Directory
-        run: ls build/linux/x64/release/bundle
-        shell: pwsh
-
       # Step 9: Upload to Google Drive
       - name: Upload File To Google Drive
         id: gdriveUpload
