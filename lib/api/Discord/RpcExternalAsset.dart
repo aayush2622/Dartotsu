@@ -9,6 +9,7 @@ extension DiscordUrlExtension on String {
   Future<String?> getDiscordUrl() async {
     var token = Discord.token.value;
     if (token.isEmpty) return null;
+
     const String api =
         "https://discord.com/api/v9/applications/$applicationId/external-assets";
     if (startsWith("mp:")) return this;

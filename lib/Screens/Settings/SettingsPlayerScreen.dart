@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:dantotsu/DataClass/Episode.dart';
 import 'package:dantotsu/Functions/Function.dart';
 import 'package:dantotsu/api/Mangayomi/Eval/dart/model/video.dart';
@@ -310,9 +312,9 @@ Future<void> openPlayer(BuildContext context) async {
 
   final episode = Episode(number: '1', title: pickedFile.name);
   final media = Media(
-    id: 1,
-    nameRomaji: 'Local',
-    userPreferredName: 'Local',
+    id: Random().nextInt(900000000),
+    nameRomaji: 'Local file',
+    userPreferredName: 'Local file',
     isAdult: false,
     anime: Anime(
       playerSettings: PrefManager.getVal(PrefName.playerSettings),

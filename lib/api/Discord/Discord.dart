@@ -87,16 +87,19 @@ class _DiscordController extends GetxController {
 
     var isAnime = mediaData.anime != null;
     var totalFromSource = isAnime
-        ? mediaData.anime!.episodes?.values.last.number
-        : mediaData.manga!.chapters?.last.number;
-    var total = isAnime
-        ? mediaData.anime?.totalEpisodes.toString()
-        : mediaData.manga?.totalChapters.toString() ?? totalFromSource ?? "??";
+        ? mediaData.anime?.episodes?.values.last.number
+        : mediaData.manga?.chapters?.last.number;
+
+    var totalFromMedia  = isAnime
+        ? mediaData.anime?.totalEpisodes
+        : mediaData.manga?.totalChapters;
+
+    var total = (totalFromMedia ?? totalFromSource ?? "??").toString();
     DateTime startTime = DateTime.now();
     DateTime endTime = startTime.add(Duration(seconds: eTime?.toInt() ?? 24 * 60));
     int startTimestamp = startTime.millisecondsSinceEpoch;
     int endTimestamp = endTime.millisecondsSinceEpoch;
-
+    var smallIcon = await smallImage.getDiscordUrl();
     try {
       final Map<String, dynamic> rpc = {
         'op': 3,
@@ -111,9 +114,9 @@ class _DiscordController extends GetxController {
               'type': 3,
               "timestamps": {"end": endTimestamp, "start": startTimestamp},
               'assets': {
-                'large_image': await (episode?.thumb ?? mediaData.cover)?.getDiscordUrl(),
+                'large_image': await (episode?.thumb ?? mediaData.cover)?.getDiscordUrl() ?? smallIcon,
                 'large_text': mediaData.userPreferredName,
-                'small_image': await smallImage.getDiscordUrl(),
+                'small_image': smallIcon,
                 'small_text': 'Dartotsu',
               },
               'buttons': [

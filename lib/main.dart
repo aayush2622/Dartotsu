@@ -64,7 +64,6 @@ void main(List<String> args) async {
 Future init() async {
   await PrefManager.init();
   await StorageProvider().requestPermission();
-  isar = await StorageProvider().initDB(null);
 
   initializeMediaServices();
   MediaKit.ensureInitialized();
