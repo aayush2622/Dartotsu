@@ -40,8 +40,9 @@ class SettingsCommonScreenState extends BaseSettingsScreen {
           Setting(
             type: SettingType.normal,
             name: 'Custom Path',
-            description: 'Set a custom path for Anilist',
+            description: 'Set a custom path to save files\nLong press to remove',
             icon: Icons.folder,
+            onLongClick: () => PrefManager.removeVal(PrefName.customPath),
             onClick: () async {
               var path = PrefManager.getVal(PrefName.customPath);
               final result = await FilePicker.platform.getDirectoryPath(

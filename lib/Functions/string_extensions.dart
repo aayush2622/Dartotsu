@@ -18,7 +18,9 @@ extension StringExtensions on String {
   int toInt() {
     return int.parse(this);
   }
-
+  int? toNullInt() {
+    return int.tryParse(this);
+  }
   bool isEqualTo(String? other) {
     return this == other;
   }

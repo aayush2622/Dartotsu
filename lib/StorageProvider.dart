@@ -51,9 +51,22 @@ class StorageProvider {
 
     final appDir = await getApplicationDocumentsDirectory();
     if (Platform.isAndroid) {
-      basePath = useCustomPath == true ? customPath.isNotEmpty ? path.join(customPath,'Dartotsu') : "/storage/emulated/0/Dartotsu" : appDir.path;
+      basePath = useCustomPath == true
+          ? (customPath.isNotEmpty && !customPath.endsWith('Dartotsu'))
+          ? path.join(customPath, 'Dartotsu')
+          : customPath.isNotEmpty
+          ? customPath
+          : "/storage/emulated/0/Dartotsu"
+          : appDir.path;
     } else {
-      basePath = path.join(useCustomPath == true ? customPath.isNotEmpty ? customPath : appDir.path : appDir.path, 'Dartotsu');
+      basePath = path.join(
+        useCustomPath == true
+            ? (customPath.isNotEmpty && !customPath.endsWith('Dartotsu'))
+            ? customPath
+            : path.join(customPath, 'Dartotsu')
+            : appDir.path,
+        'Dartotsu',
+      );
     }
 
     final baseDirectory = Directory(basePath.fixSeparator);

@@ -96,6 +96,24 @@ class _PlayerControllerState extends State<PlayerController> {
 
     list.add(media.id);
     PrefManager.setCustomVal<List<int>>("continueAnimeList", list);
+    for (var sub in _controller.subtitles) {
+      if (sub.id == 'auto' ||sub.id == 'no') continue;
+      if (currentQuality.subtitles == null || currentQuality.subtitles!.isEmpty) {
+        currentQuality.subtitles = [
+          v.Track(
+            file: sub.id,
+            label: sub.title ?? sub.language ?? "Unknown",
+          ),
+        ];
+      } else {
+        currentQuality.subtitles?.add(
+          v.Track(
+            file: sub.id,
+            label: sub.title ?? sub.language ?? "Unknown",
+          ),
+        );
+      }
+    }
   }
 
   Future<void> _saveProgress(int currentProgress) async {
@@ -625,6 +643,7 @@ class _PlayerControllerState extends State<PlayerController> {
         _controller.setSubtitle(
           file.files.single.path ?? "",
           file.files.single.name,
+          file.files.single.path?.toNullInt() == null
         );
         Get.back();
         _controller.play();
@@ -649,6 +668,7 @@ class _PlayerControllerState extends State<PlayerController> {
               _controller.setSubtitle(
                 currentQuality.subtitles![index].file ?? "",
                 currentQuality.subtitles![index].label ?? "",
+                currentQuality.subtitles![index].file?.toNullInt() == null,
               );
               Get.back();
               _controller.play();

@@ -1,9 +1,9 @@
+import 'package:dantotsu/Preferences/HiveDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:media_kit_video/media_kit_video.dart';
 
-import 'package:dantotsu/Preferences/HiveDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
 import 'BasePlayer.dart';
 
 class WindowsPlayer extends BasePlayer {
@@ -42,13 +42,16 @@ class WindowsPlayer extends BasePlayer {
       videoController.player.setVolume(volume);
 
   @override
-  Future<void> open(String url,Duration duration) async =>
-      videoController.player.open(Media(url,start: duration));
+  Future<void> open(String url, Duration duration) async {
+    videoController.player.open(Media(url,start: duration));
+  }
 
   @override
-  Future<void> setSubtitle(String subtitleUri, String language) =>
-      videoController.player
-          .setSubtitleTrack(SubtitleTrack.uri(subtitleUri, title: language));
+  Future<void> setSubtitle(
+          String subtitleUri, String language, bool isUri) =>
+      videoController.player.setSubtitleTrack(isUri
+          ? SubtitleTrack.uri(subtitleUri, title: language)
+          : SubtitleTrack(subtitleUri, language, language, uri: false,data: false));
 
   @override
   void dispose() {
@@ -68,6 +71,8 @@ class WindowsPlayer extends BasePlayer {
         .listen((e) => currentPosition.value = e);
     videoController.player.stream.buffering.listen(isBuffering.call);
     videoController.player.stream.playing.listen(isPlaying.call);
+    videoController.player.stream.tracks
+        .listen((e) => subtitles.value = e.subtitle);
   }
 
   String _formatTime(int seconds) {
