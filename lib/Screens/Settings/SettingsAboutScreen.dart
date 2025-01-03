@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import '../../Adaptor/Settings/SettingsAdaptor.dart';
 import '../../DataClass/Setting.dart';
 import '../../Functions/Function.dart';
+import '../../Preferences/PrefManager.dart';
+import '../../Preferences/Preferences.dart';
 import '../../StorageProvider.dart';
 import 'BaseSettingsScreen.dart';
 
@@ -45,7 +47,11 @@ class SettingsAboutScreenState extends BaseSettingsScreen {
         description: "Share the log file",
         icon: Icons.share,
         onClick: () async {
-          var path = (await StorageProvider().getDirectory(useCustomPath: true))?.path;
+          var path = (await StorageProvider().getDirectory(
+            useCustomPath: true,
+            customPath: PrefManager.getVal(PrefName.customPath),
+          ))
+              ?.path;
           shareFile("$path\\appLogs.txt", "LogFile");
         },
       ),

@@ -1,7 +1,5 @@
 import 'dart:io';
 
-import 'package:dantotsu/Preferences/PrefManager.dart';
-import 'package:dantotsu/Preferences/Preferences.dart';
 import 'package:dantotsu/api/Mangayomi/Model/settings.dart';
 import 'package:isar/isar.dart';
 import 'package:path/path.dart' as path;
@@ -52,6 +50,7 @@ class StorageProvider {
 
     final appDir = await getApplicationDocumentsDirectory();
     if (Platform.isAndroid) {
+      await requestPermission();
       basePath = useCustomPath == true ? customPath.isNotEmpty ? path.join(customPath,'Dartotsu') : "/storage/emulated/0/Dartotsu" : appDir.path;
     } else {
       basePath = path.join(useCustomPath == true ? customPath.isNotEmpty ? customPath : appDir.path : appDir.path, 'Dartotsu');
