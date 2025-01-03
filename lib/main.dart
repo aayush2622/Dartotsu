@@ -49,12 +49,12 @@ void main(List<String> args) async {
         ),
       );
     },
-    (error, stackTrace) async {
-      await Logger.log('Uncaught error: $error\n$stackTrace');
+    (error, stackTrace) {
+      Logger.log('Uncaught error: $error\n$stackTrace');
     },
     zoneSpecification: ZoneSpecification(
-      print: (Zone self, ZoneDelegate parent, Zone zone, String message) async {
-        await Logger.log(message);
+      print: (Zone self, ZoneDelegate parent, Zone zone, String message) {
+        Logger.log(message);
         parent.print(zone, message);
       },
     ),
@@ -64,7 +64,7 @@ void main(List<String> args) async {
 Future init() async {
   await PrefManager.init();
   await StorageProvider().requestPermission();
-
+  isar = await StorageProvider().initDB(null);
   initializeMediaServices();
   MediaKit.ensureInitialized();
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
@@ -81,7 +81,7 @@ Future init() async {
   Get.config(
     enableLog: true,
     logWriterCallback: (text, {isError = false}) async {
-      await Logger.log(text);
+      Logger.log(text);
       debugPrint(text);
     },
   );

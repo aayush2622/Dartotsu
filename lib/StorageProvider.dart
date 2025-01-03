@@ -40,16 +40,16 @@ class StorageProvider {
     }
     return true;
   }
-  Future<Directory?> getCustomDirectory({String? subPath}) async {
-    final dir = await getApplicationDocumentsDirectory();
-
+  Future<Directory?> getCustomDirectory({String? subPath, bool useCustom = false}) async {
+    final dir = await getApplicationSupportDirectory();
+    String customDir;
     if (Platform.isAndroid || Platform.isIOS || Platform.isMacOS) {
-      return dir;
+      customDir =  path.join(dir.path, subPath ?? '');
     } else {
-      String customDir = path.join(dir.path, 'Dartotsu', subPath ?? '');
-      await Directory(customDir).create(recursive: true);
-      return Directory(customDir);
+      customDir = path.join(dir.path, 'Dartotsu', subPath ?? '');
     }
+    await Directory(customDir).create(recursive: true);
+    return Directory(customDir);
   }
 
   Future<Directory?> getDatabaseDirectory() async {
