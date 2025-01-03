@@ -1,3 +1,4 @@
+import '../../../../../DataClass/Anime.dart';
 import '../../../../../DataClass/Media.dart';
 import 'm_manga.dart';
 
@@ -22,7 +23,7 @@ class MPages {
 }
 
 extension M on MPages {
-  List<Media> toMedia() {
+  List<Media> toMedia({bool isAnime = false}) {
     return list.map((e) {
       return Media(
         id: e.hashCode,
@@ -32,6 +33,7 @@ extension M on MPages {
         userPreferredName: e.name ?? '',
         isAdult: false,
         minimal: true,
+        anime: isAnime ? Anime() : null
       );
     }).toList();
   }

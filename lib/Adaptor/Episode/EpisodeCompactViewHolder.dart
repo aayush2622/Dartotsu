@@ -31,7 +31,7 @@ class EpisodeCompactView extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
       ),
       margin: const EdgeInsets.all(8),
-      clipBehavior: Clip.hardEdge,
+      clipBehavior: Clip.antiAlias,
       elevation: 4,
       child: Stack(
         children: [

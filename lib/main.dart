@@ -113,7 +113,7 @@ class MyApp extends StatelessWidget {
             GlobalCupertinoLocalizations.delegate,
           ],
           supportedLocales: AppLocalizations.supportedLocales,
-          locale: const Locale('en'),
+          locale: Locale( PrefManager.getCustomVal("defaultLanguage") ?? 'en'),
           navigatorKey: navigatorKey,
           title: 'Dartotsu',
           themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,

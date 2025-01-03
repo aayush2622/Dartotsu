@@ -1,4 +1,4 @@
-import 'package:dantotsu/Functions/Function.dart';
+
 import 'package:dantotsu/api/Mangayomi/Eval/dart/model/m_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -12,7 +12,7 @@ import '../Mangayomi/Model/Manga.dart';
 import '../Mangayomi/Model/Source.dart';
 import '../Mangayomi/Search/search.dart';
 
-class OtherAnimeScreen extends BaseAnimeScreen {
+class ExtensionsAnimeScreen extends BaseAnimeScreen {
   var data = Rxn<Map<String, List<Media>>>({});
 
   @override
@@ -25,15 +25,15 @@ class OtherAnimeScreen extends BaseAnimeScreen {
     final sourcesAsyncValue =
         await container.read(getExtensionsStreamProvider(ItemType.anime).future);
     final installedSources = sourcesAsyncValue
-        ..where((source) => source.isAdded!)
-        ..reversed;
+        .where((source) => source.isAdded!)
+        .toList();
+
     var result = (await search(
       source: installedSources.first,
       page: 1,
-      query: '',
+      query: 'o',
       filterList: [],
-    ))
-        ?.toMedia();
+    ))?.toMedia(isAnime: true);
     trending.value = result;
     _buildSections(installedSources);
   }
@@ -48,7 +48,7 @@ class OtherAnimeScreen extends BaseAnimeScreen {
         query: '',
         filterList: [],
       ))
-          ?.toMedia();
+          ?.toMedia(isAnime: true);
       if (result != null) {
         data.value = {
           ...data.value!,
@@ -77,9 +77,6 @@ class OtherAnimeScreen extends BaseAnimeScreen {
                 type: 0,
                 title: entry.key,
                 mediaList: entry.value,
-                onMediaTap: (_, m) {
-                  snackString(m.cover);
-                },
               ),
           ],
         ),

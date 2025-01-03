@@ -34,7 +34,7 @@ class MalQueries extends Queries {
 
   @override
   Future<List<String?>> getBannerImages() {
-    // TODO: implement getBannerImages
+    // not needed for MAL
     throw UnimplementedError();
   }
 

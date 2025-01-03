@@ -1,3 +1,4 @@
+import 'package:dantotsu/Preferences/PrefManager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
@@ -17,6 +18,7 @@ Widget languageSwitcher(BuildContext context) {
     onChanged: (String newValue) {
       final newLocale = Locale(completeLanguageCode(newValue).toLowerCase());
       Get.updateLocale(newLocale);
+      PrefManager.setCustomVal("defaultLanguage", newLocale.languageCode);
     },
     prefixIcon: Icons.translate,
   );

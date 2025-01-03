@@ -97,7 +97,7 @@ class EpisodeListView extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
       ),
-      clipBehavior: Clip.hardEdge,
+      clipBehavior: Clip.antiAlias,
       elevation: 4,
       color: theme.surfaceContainerLowest,
       child: Stack(

@@ -130,7 +130,7 @@ class InfoPageState extends State<InfoPage> {
         value: mediaData.status?.toString(),
       ),
       _buildInfoRow(
-        ${getString.total} ${isAnime ? getString.totalEpisodes : getString.totalChapters},
+        title: "${getString.total} ${isAnime ? getString.totalEpisodes : getString.totalChapters}",
         value: infoTotal,
       ),
       _buildInfoRow(
@@ -366,8 +366,8 @@ class InfoPageState extends State<InfoPage> {
           ExpandableText(
             markdownContent,
             maxLines: 3,
-            expandText: getString.showMore,
-            collapseText: getString.showLess,
+            expandText: getString.expandText,
+            collapseText: getString.collapseText,
           ),
         ],
       ),

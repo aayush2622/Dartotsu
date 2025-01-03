@@ -41,11 +41,13 @@ class StorageProvider {
     return true;
   }
   Future<Directory?> getCustomDirectory({String? subPath, bool useCustom = false}) async {
-    final dir = await getApplicationSupportDirectory();
+
     String customDir;
     if (Platform.isAndroid || Platform.isIOS || Platform.isMacOS) {
+      final dir = await getApplicationSupportDirectory();
       customDir =  path.join(dir.path, subPath ?? '');
     } else {
+      final dir = await getApplicationDocumentsDirectory();
       customDir = path.join(dir.path, 'Dartotsu', subPath ?? '');
     }
     await Directory(customDir).create(recursive: true);

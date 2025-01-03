@@ -1,17 +1,17 @@
 import 'package:dantotsu/Services/BaseServiceData.dart';
-import 'package:dantotsu/api/Other/OtherAnimeScreen.dart';
+import 'package:dantotsu/api/Extensions/ExtensionsAnimeScreen.dart';
 import 'package:get/get.dart';
 
 import '../../Services/MediaService.dart';
 import '../../Services/Screens/BaseAnimeScreen.dart';
-import 'OtherData.dart';
+import 'ExtensionsData.dart';
 
-class OtherService extends MediaService {
+class ExtensionsService extends MediaService {
   @override
-  BaseServiceData get data => Other;
+  BaseServiceData get data => ExtensionsC;
 
   @override
-  BaseAnimeScreen? get animeScreen => Get.put(OtherAnimeScreen());
+  BaseAnimeScreen? get animeScreen => Get.put(ExtensionsAnimeScreen());
 
   @override
   String get iconPath => "assets/svg/discord.svg";

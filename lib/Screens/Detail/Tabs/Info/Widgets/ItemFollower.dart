@@ -24,47 +24,55 @@ Widget ItemFollower(BuildContext context, userData follower, String type) {
             Material(
               elevation: 2,
               shape: const CircleBorder(),
-              clipBehavior: Clip.hardEdge,
+              clipBehavior: Clip.antiAlias,
               child: Container(
                 width: 92,
                 height: 92,
                 color: Colors.transparent,
-                child: cachedNetworkImage(
-                  imageUrl: follower.pfp.toString(),
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-            Positioned(
-              bottom: 0,
-              child: Container(
-                width: 92,
-                height: 28,
-                decoration: BoxDecoration(
-                  color: follower.score == 0.0 ? theme.primary : theme.tertiary,
-                  shape: BoxShape.rectangle,
-                  borderRadius: BorderRadius.circular(124.0),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      ((follower.score ?? 0) / 10).toString(),
-                      style: TextStyle(
-                        fontFamily: "Poppins",
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                        color: theme.onPrimary,
+                  child: Stack(
+                    children: [
+                      cachedNetworkImage(
+                          imageUrl: follower.pfp.toString(),
+                          fit: BoxFit.cover,
+                          height: 92,
+                          width: 92),
+                      Positioned(
+                        bottom: 0,
+                        child: Container(
+                          width: 92,
+                          height: 28,
+                          decoration: BoxDecoration(
+                            color: follower.score == 0.0
+                                ? theme.primary
+                                : theme.tertiary,
+                            shape: BoxShape.rectangle,
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(256),
+                                topRight: Radius.circular(256)),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                ((follower.score ?? 0) / 10).toString(),
+                                style: TextStyle(
+                                  fontFamily: "Poppins",
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                  color: theme.onPrimary,
+                                ),
+                              ),
+                              Icon(
+                                Icons.star_rounded,
+                                color: theme.onPrimary,
+                                size: 12,
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
-                    ),
-                    Icon(
-                      Icons.star_rounded,
-                      color: theme.onPrimary,
-                      size: 12,
-                    ),
-                  ],
-                ),
-              ),
+                    ],
+                  )),
             ),
           ],
         ),

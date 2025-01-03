@@ -35,7 +35,7 @@ class EpisodeCardView extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
       ),
-      clipBehavior: Clip.hardEdge,
+      clipBehavior: Clip.antiAlias,
       elevation: 4,
       color: cardColor,
       child: Stack(
