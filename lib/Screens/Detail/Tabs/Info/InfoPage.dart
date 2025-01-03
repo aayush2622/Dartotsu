@@ -65,7 +65,7 @@ class InfoPageState extends State<InfoPage> {
           MediaSection(
             context: context,
             type: 0,
-            title: "Relations",
+            title: getString.relations,
             mediaList: widget.mediaData.relations,
             isLarge: true,
           ),
@@ -74,7 +74,7 @@ class InfoPageState extends State<InfoPage> {
           entitySection(
             context: context,
             type: EntityType.Character,
-            title: "Characters",
+            title: getString.characters,
             characterList: widget.mediaData.characters,
           ),
 
@@ -82,7 +82,7 @@ class InfoPageState extends State<InfoPage> {
           entitySection(
             context: context,
             type: EntityType.Staff,
-            title: "Staff",
+            title: getString.staff,
             staffList: widget.mediaData.staff,
           ),
 
@@ -90,7 +90,7 @@ class InfoPageState extends State<InfoPage> {
           MediaSection(
             context: context,
             type: 0,
-            title: "Recommended",
+            title: getString.recommended,
             mediaList: widget.mediaData.recommendations,
           ),
 
@@ -121,61 +121,61 @@ class InfoPageState extends State<InfoPage> {
 
     return [
       _buildInfoRow(
-        title: "Mean Score",
+        title: getString.meanScore,
         value: _formatScore(mediaData.meanScore, 10),
       ),
       _buildInfoRow(
-        title: "Status",
+        title: getString.status,
         value: mediaData.status?.toString(),
       ),
       _buildInfoRow(
-        title: "Total ${isAnime ? "Episodes" : "Chapters"}",
+        ${getString.total} ${isAnime ? getString.totalEpisodes : getString.totalChapters},
         value: infoTotal,
       ),
       _buildInfoRow(
-        title: "Average Duration",
+        title: getString.averageDuration,
         value: _formatEpisodeDuration(mediaData.anime?.episodeDuration),
       ),
       _buildInfoRow(
-        title: "Format",
+        title: getString.format,
         value: mediaData.format?.toString().replaceAll("_", " "),
       ),
       _buildInfoRow(
-        title: "Source",
+        title: getString.source,
         value: mediaData.source?.toString().replaceAll("_", " "),
       ),
       _buildInfoRow(
-        title: "Studio",
+        title: getString.studio,
         value: mediaData.anime?.mainStudio?.name,
-        onClick: () => snackString("Coming SOON"),
+        onClick: () => snackString(getString.comingSoon),
       ),
       _buildInfoRow(
-        title: "Author",
+        title: getString.author,
         value: mediaData.anime?.mediaAuthor?.name ??
             mediaData.manga?.mediaAuthor?.name,
-        onClick: () => snackString("Coming SOON"),
+        onClick: () => snackString(getString.comingSoon),
       ),
       _buildInfoRow(
-        title: "Season",
+        title: getString.season,
         value: _formatSeason(
           mediaData.anime?.season,
           mediaData.anime?.seasonYear,
         ),
       ),
       _buildInfoRow(
-        title: "Start Date",
+        title: getString.startDate,
         value: mediaData.startDate?.getFormattedDate(),
       ),
       _buildInfoRow(
-        title: "End Date",
+        title: getString.endDate,
         value: mediaData.endDate?.getFormattedDate() ?? "??",
       ),
       _buildInfoRow(
-        title: "Popularity",
+        title: getString.popularity,
         value: mediaData.popularity?.toString(),
       ),
       _buildInfoRow(
-        title: "Favorites",
+        title: getString.favorites,
         value: mediaData.favourites?.toString(),
       ),
     ];
@@ -185,9 +185,9 @@ class InfoPageState extends State<InfoPage> {
     var mediaData = widget.mediaData;
     return [
       const SizedBox(height: 16.0),
-      _buildTextSection("Name (Romaji)", mediaData.nameRomaji),
-      _buildTextSection("Name", mediaData.name?.toString()),
-      _buildDescriptionSection("Synopsis", mediaData.description),
+      _buildTextSection(getString.nameRomaji, mediaData.nameRomaji),
+      _buildTextSection(getString.name, mediaData.name?.toString()),
+      _buildDescriptionSection(getString.synopsis, mediaData.description),
     ];
   }
 
@@ -195,7 +195,7 @@ class InfoPageState extends State<InfoPage> {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 32.0),
           child: Text(
-            "Synonyms",
+            getString.synonyms,
             style: TextStyle(
               fontSize: 15,
               fontFamily: 'Poppins',
@@ -212,7 +212,7 @@ class InfoPageState extends State<InfoPage> {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 32.0),
           child: Text(
-            "Tags",
+            getString.tags,
             style: TextStyle(
               fontSize: 15,
               fontFamily: 'Poppins',
@@ -239,14 +239,14 @@ class InfoPageState extends State<InfoPage> {
           if (prequel != null)
             MediaCard(
               context,
-              'PREQUEL',
+              getString.prequel,
               MediaInfoPage(prequel, prequelTag),
               prequel.banner ?? prequel.cover ?? 'https://bit.ly/31bsIHq',
             ),
           if (sequel != null)
             MediaCard(
               context,
-              'SEQUEL',
+              getString.sequel,
               MediaInfoPage(sequel, sequelTag),
               sequel.banner ?? sequel.cover ?? 'https://bit.ly/2ZGfcuG',
             ),
@@ -365,8 +365,8 @@ class InfoPageState extends State<InfoPage> {
           ExpandableText(
             markdownContent,
             maxLines: 3,
-            expandText: 'show more',
-            collapseText: 'show less',
+            expandText: getString.showMore,
+            collapseText: getString.showLess,
           ),
         ],
       ),
