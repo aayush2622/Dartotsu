@@ -35,7 +35,6 @@ void main(List<String> args) async {
   runZonedGuarded(
     () async {
       WidgetsFlutterBinding.ensureInitialized();
-      await Logger.init();
       await init();
       runApp(
         provider.ProviderScope(
@@ -65,6 +64,7 @@ Future init() async {
   await PrefManager.init();
   await StorageProvider().requestPermission();
   isar = await StorageProvider().initDB(null);
+  await Logger.init();
   initializeMediaServices();
   MediaKit.ensureInitialized();
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {

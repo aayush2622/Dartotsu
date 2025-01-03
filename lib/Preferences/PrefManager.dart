@@ -37,7 +37,7 @@ class PrefManager {
   static Future<void> init() async {
     HiveAdapters();
     if (_generalPreferences != null) return;
-    final path = await StorageProvider().getPreferenceDirectory();
+    final path = await StorageProvider().getDirectory(subPath: 'preferences');
     await Hive.initFlutter(path?.path);
     _generalPreferences = await Hive.openBox('generalPreferences');
     _uiPreferences = await Hive.openBox('uiPreferences');

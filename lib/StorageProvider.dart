@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:dantotsu/Preferences/PrefManager.dart';
+import 'package:dantotsu/Preferences/Preferences.dart';
 import 'package:dantotsu/api/Mangayomi/Model/settings.dart';
 import 'package:isar/isar.dart';
 import 'package:path/path.dart' as path;
@@ -40,36 +42,29 @@ class StorageProvider {
     }
     return true;
   }
-  Future<Directory?> getCustomDirectory({String? subPath, bool useCustom = false}) async {
 
-    String customDir;
-    if (Platform.isAndroid || Platform.isIOS || Platform.isMacOS) {
-      final dir = await getApplicationSupportDirectory();
-      customDir =  path.join(dir.path, subPath ?? '');
+  Future<Directory?> getDirectory({
+    String? subPath,
+    String customPath = '',
+    bool? useCustomPath = false,
+  }) async {
+    String basePath;
+
+    final appDir = await getApplicationDocumentsDirectory();
+    if (Platform.isAndroid) {
+      basePath = useCustomPath == true ? customPath.isNotEmpty ? path.join(customPath,'Dartotsu') : "/storage/emulated/0/Dartotsu" : appDir.path;
     } else {
-      final dir = await getApplicationDocumentsDirectory();
-      customDir = path.join(dir.path, 'Dartotsu', subPath ?? '');
+      basePath = path.join(useCustomPath == true ? customPath.isNotEmpty ? customPath : appDir.path : appDir.path, 'Dartotsu');
     }
-    await Directory(customDir).create(recursive: true);
-    return Directory(customDir);
-  }
 
-  Future<Directory?> getDatabaseDirectory() async {
-    return getCustomDirectory(subPath: 'databases');
-  }
-
-  Future<Directory?> getDefaultDirectory() async {
-    return getCustomDirectory();
-  }
-
-  Future<Directory?> getPreferenceDirectory() async {
-    return getCustomDirectory(subPath: 'preferences');
+    final fullPath = path.join(basePath, subPath ?? '');
+    return Directory(fullPath);
   }
 
   Future<Isar> initDB(String? path, {bool inspector = false}) async {
     Directory? dir;
     if (path == null) {
-      dir = await getDatabaseDirectory();
+      dir = await getDirectory(subPath: 'databases');
     } else {
       dir = Directory(path);
     }

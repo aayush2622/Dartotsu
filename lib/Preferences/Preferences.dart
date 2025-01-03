@@ -106,7 +106,8 @@ class PrefName {
       Pref(Location.General, 'incognito', false);
   static const Pref<bool> offlineMode =
       Pref(Location.General, 'offline', false);
-
+  static const Pref<String> customPath =
+      Pref(Location.General, 'customPath', '');
   //Player
   static const Pref<bool> cursedSpeed =
       Pref(Location.Player, 'cursedSpeed', false);

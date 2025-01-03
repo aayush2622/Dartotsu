@@ -1,3 +1,4 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
 import '../../Adaptor/Settings/SettingsAdaptor.dart';
@@ -34,6 +35,27 @@ class SettingsCommonScreenState extends BaseSettingsScreen {
   List<Widget> get settingsList {
     return [
       languageSwitcher(context),
+      SettingsAdaptor(
+        settings: [
+          Setting(
+            type: SettingType.normal,
+            name: 'Custom Path',
+            description: 'Set a custom path for Anilist',
+            icon: Icons.folder,
+            onClick: () async {
+              var path = PrefManager.getVal(PrefName.customPath);
+              final result = await FilePicker.platform.getDirectoryPath(
+                dialogTitle: 'Select a directory',
+                lockParentWindow: true,
+                initialDirectory: path ,
+              );
+              if (result != null) {
+                PrefManager.setVal(PrefName.customPath, result);
+              }
+            },
+          ),
+        ],
+      ),
       Text(
         getString.anilist,
         style: const TextStyle(

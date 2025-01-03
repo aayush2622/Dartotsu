@@ -45,7 +45,7 @@ class SettingsAboutScreenState extends BaseSettingsScreen {
         description: "Share the log file",
         icon: Icons.share,
         onClick: () async {
-          var path = (await StorageProvider().getDefaultDirectory())?.path;
+          var path = (await StorageProvider().getDirectory(useCustomPath: true))?.path;
           shareFile("$path\\appLogs.txt", "LogFile");
         },
       ),
