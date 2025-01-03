@@ -125,7 +125,7 @@ class MediaPlayerState extends State<MediaPlayer>
     _hideCursorTimer?.cancel();
     _leftAnimationController.dispose();
     _rightAnimationController.dispose();
-    ScreenBrightness().setApplicationScreenBrightness(_defaultBrightness);
+    ScreenBrightness().setScreenBrightness(_defaultBrightness);
     focusNode.dispose();
     if (Platform.isAndroid || Platform.isIOS) {
       _setLandscapeMode(false);
@@ -301,7 +301,7 @@ class MediaPlayerState extends State<MediaPlayer>
       }
     });
     _defaultBrightness = await ScreenBrightness().system;
-    _brightnessValue.value = await ScreenBrightness().application;
+    _brightnessValue.value = await ScreenBrightness().current;
     ScreenBrightness().onCurrentBrightnessChanged.listen((value) {
       if (mounted) {
         _brightnessValue.value = value;
@@ -334,7 +334,7 @@ class MediaPlayerState extends State<MediaPlayer>
   Future<void> setBrightness(double value) async {
     if (!isMobile) return;
     try {
-      await ScreenBrightness().setApplicationScreenBrightness(value);
+      await ScreenBrightness().setScreenBrightness(value);
     } catch (_) {}
     _brightnessIndicator.value = true;
     _brightnessTimer?.cancel();
