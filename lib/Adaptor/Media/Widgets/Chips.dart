@@ -11,8 +11,9 @@ class ChipsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context).colorScheme;
-    return ScrollConfig(context,
-        child: SingleChildScrollView(
+    return ScrollConfig(
+      context,
+      child: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           padding: const EdgeInsets.symmetric(horizontal: 2.0),
           child: Center(
@@ -50,10 +51,12 @@ class ChipsWidget extends StatelessWidget {
                     ),
                   ),
                 );
-              }).toList(),
-            ),
+              },
+            ).toList(),
           ),
-        ));
+        ),
+      ),
+    );
   }
 }
 

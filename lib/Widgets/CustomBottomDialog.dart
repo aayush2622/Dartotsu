@@ -137,7 +137,6 @@ class _CustomBottomDialogState extends State<CustomBottomDialog> {
                           widget.positiveText!,
                           style: TextStyle(
                             color: theme.primary,
-                            // Text color for the filled button
                             fontWeight: FontWeight.bold,
                           ),
                         ),
