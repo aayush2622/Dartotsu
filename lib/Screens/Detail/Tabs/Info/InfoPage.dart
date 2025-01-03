@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:html/parser.dart' as html_parser;
 import 'package:provider/provider.dart';
 
+import 'package:dantotsu/Theme/LanguageSwitcher.dart';
 import '../../../../../Adaptor/Media/Widgets/MediaSection.dart';
 import '../../../../Adaptor/Media/Widgets/Chips.dart';
 import '../../../../Adaptor/Media/Widgets/MediaCard.dart';
