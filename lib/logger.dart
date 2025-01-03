@@ -13,20 +13,13 @@ class Logger {
     final directory = await StorageProvider()
         .getDirectory(useCustomPath: true, customPath: path);
 
-    if (directory != null) {
-      if (!await directory.exists()) {
-        await directory.create(recursive: true);
-      }
-      _logFile = File('${directory.path}/appLogs.txt');
+      _logFile = File('${directory?.path}\\appLogs.txt'.fixSeparator);
 
       if (await _logFile!.exists()) {
         await _logFile!.delete();
       }
 
       await _logFile!.create();
-    } else {
-      throw Exception('Directory is null or inaccessible.');
-    }
   }
 
   static Future<void> log(String message) async {

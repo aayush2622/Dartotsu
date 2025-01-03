@@ -56,13 +56,13 @@ class StorageProvider {
       basePath = path.join(useCustomPath == true ? customPath.isNotEmpty ? customPath : appDir.path : appDir.path, 'Dartotsu');
     }
 
-    final baseDirectory = Directory(basePath);
+    final baseDirectory = Directory(basePath.fixSeparator);
     if (!baseDirectory.existsSync()) {
       baseDirectory.createSync(recursive: true);
     }
 
     final fullPath = path.join(basePath, subPath ?? '');
-    final fullDirectory = Directory(fullPath);
+    final fullDirectory = Directory(fullPath.fixSeparator);
 
     if (subPath != null && subPath.isNotEmpty && !fullDirectory.existsSync()) {
       fullDirectory.createSync(recursive: true);
@@ -96,5 +96,14 @@ class StorageProvider {
     }
 
     return isar;
+  }
+}
+extension StringPathExtension on String {
+  String get fixSeparator {
+    if (Platform.isAndroid) {
+      return replaceAll(path.separator, '/');
+    } else {
+      return replaceAll("/", path.separator);
+    }
   }
 }

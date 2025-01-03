@@ -52,7 +52,7 @@ class SettingsAboutScreenState extends BaseSettingsScreen {
             customPath: PrefManager.getVal(PrefName.customPath),
           ))
               ?.path;
-          shareFile("$path\\appLogs.txt", "LogFile");
+          shareFile("$path\\appLogs.txt".fixSeparator, "LogFile");
         },
       ),
     ];
