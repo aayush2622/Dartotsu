@@ -13,11 +13,12 @@ import 'api/Mangayomi/Model/chapter.dart';
 
 class StorageProvider {
   Future<bool> requestPermission() async {
+    Permission permission = Permission.manageExternalStorage;
     if (Platform.isAndroid) {
-      if (await Permission.manageExternalStorage.isGranted) {
+      if (await permission.isGranted) {
         return true;
       } else {
-        final result = await Permission.manageExternalStorage.request();
+        final result = await permission.request();
         if (result == PermissionStatus.granted) {
           return true;
         }
@@ -50,7 +51,6 @@ class StorageProvider {
 
     final appDir = await getApplicationDocumentsDirectory();
     if (Platform.isAndroid) {
-      await requestPermission();
       basePath = useCustomPath == true ? customPath.isNotEmpty ? path.join(customPath,'Dartotsu') : "/storage/emulated/0/Dartotsu" : appDir.path;
     } else {
       basePath = path.join(useCustomPath == true ? customPath.isNotEmpty ? customPath : appDir.path : appDir.path, 'Dartotsu');
