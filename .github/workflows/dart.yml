@@ -384,7 +384,7 @@ jobs:
           additional_info["Ankit Grai"]="\n Discord: <@1125628254330560623>\n AniList: [bheshnarayan](<https://anilist.co/user/6417303/>)\n X: [grayankit01](<https://x.com/grayankit01>)"
           # Decimal color codes for contributors
           declare -A contributor_colors
-          default_color="16751430"
+          default_color="#911fce"
           contributor_colors["aayush262"]="#5d689d"
           contributor_colors["Sadwhy"]="#ff7e95"
           contributor_colors["rebelonion"]="#d4e5ed"
