@@ -1,4 +1,4 @@
-name: Dantotsu Build Workflow 
+name: Dantotsu Build Workflow
 on:
   push:
     branches:
