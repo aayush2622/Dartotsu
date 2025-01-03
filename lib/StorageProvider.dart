@@ -56,10 +56,20 @@ class StorageProvider {
       basePath = path.join(useCustomPath == true ? customPath.isNotEmpty ? customPath : appDir.path : appDir.path, 'Dartotsu');
     }
 
-    final fullPath = path.join(basePath, subPath ?? '');
-    return Directory(fullPath);
-  }
+    final baseDirectory = Directory(basePath);
+    if (!baseDirectory.existsSync()) {
+      baseDirectory.createSync(recursive: true);
+    }
 
+    final fullPath = path.join(basePath, subPath ?? '');
+    final fullDirectory = Directory(fullPath);
+
+    if (subPath != null && subPath.isNotEmpty && !fullDirectory.existsSync()) {
+      fullDirectory.createSync(recursive: true);
+    }
+
+    return fullDirectory;
+  }
   Future<Isar> initDB(String? path, {bool inspector = false}) async {
     Directory? dir;
     if (path == null) {

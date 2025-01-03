@@ -17,7 +17,7 @@ class Logger {
       if (!await directory.exists()) {
         await directory.create(recursive: true);
       }
-      _logFile = File('${directory.path}\\appLogs.txt');
+      _logFile = File('${directory.path}/appLogs.txt');
 
       if (await _logFile!.exists()) {
         await _logFile!.delete();
