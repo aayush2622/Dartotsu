@@ -425,7 +425,7 @@ jobs:
           top_contributor=""
           top_contributor_count=0
           top_contributor_avatar=""
-          embed_color=$default_color
+          embed_color=$(hex_to_decimal "$default_color")
 
           # Process contributors in the new order
           while read -r login; do
@@ -490,7 +490,7 @@ jobs:
             thumbnail_url="$top_contributor_avatar"
           else
             thumbnail_url="https://i.imgur.com/5o3Y9Jb.gif"
-            embed_color=$default_color
+            embed_color=$(hex_to_decimal "$default_color")
           fi
 
           # Truncate field values
