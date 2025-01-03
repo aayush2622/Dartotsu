@@ -467,5 +467,33 @@
         ]
       }
     }
-  }
+  },
+  "characters": "Personagens",
+  "@characters": {},
+  "author": "Autor",
+  "@author": {},
+  "comingSoon": "Em BREVE",
+  "@comingSoon": {},
+  "name": "Nome",
+  "@name": {},
+  "nameRomaji": "Nome (Romaji)",
+  "@nameRomaji": {},
+  "endDate": "Data De Término",
+  "@endDate": {},
+  "expandText": "Mostrar Mais",
+  "@expandText": {},
+  "favorites": "Favoritos",
+  "@favorites": {},
+  "averageDuration": "Duração Média",
+  "@averageDuration": {},
+  "collapseText": "Média",
+  "@collapseText": {},
+  "description": "Sinopse",
+  "@description": {},
+  "format": "Formato",
+  "@format": {},
+  "meanScore": "Nota Média",
+  "@meanScore": {},
+  "popularity": "Popularidade",
+  "@popularity": {}
 }
