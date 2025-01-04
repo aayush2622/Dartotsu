@@ -75,6 +75,7 @@ class WindowsLoginState extends State<WindowsLogin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: const Text('Discord Login')),
       body: _isWebViewReady
           ? Webview(_controller)
           : Center(
@@ -150,6 +151,7 @@ class MobileLoginState extends State<MobileLogin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: const Text('Discord Login')),
       body: _isWebViewReady
           ? WebViewWidget(controller: _controller)
           : Center(

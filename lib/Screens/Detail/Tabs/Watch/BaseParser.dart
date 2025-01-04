@@ -19,6 +19,7 @@ abstract class BaseParser extends GetxController {
   var selectedMedia = Rxn<MManga?>(null);
   var status = Rxn<String>(null);
   var source = Rxn<Source>(null);
+  var errorType = Rxn<ErrorType>(ErrorType.None);
 
   void saveSelected(int id, Selected data) {
     var sourceName = Provider.of<MediaServiceProvider>(Get.context!,listen: false).currentService.getName;
@@ -31,7 +32,7 @@ abstract class BaseParser extends GetxController {
   }
 
   Future<void> searchMedia(Source source, Media mediaData,
-      {Function(MManga response)? onFinish}) async {
+      {Function(MManga? response)? onFinish}) async {
     selectedMedia.value = null;
     var saved = _loadShowResponse(source, mediaData);
     if (saved != null) {
@@ -142,6 +143,7 @@ abstract class BaseParser extends GetxController {
       onFinish?.call(response);
     } else {
       status.value = "Nothing Found";
+      onFinish?.call(response);
     }
   }
 
@@ -183,4 +185,10 @@ abstract class BaseParser extends GetxController {
         });
     showCustomBottomDialog(context, dialog);
   }
+}
+
+enum ErrorType{
+  None,
+  NotFound,
+  NoResult
 }

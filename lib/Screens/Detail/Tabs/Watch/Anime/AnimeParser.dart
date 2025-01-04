@@ -78,17 +78,34 @@ class AnimeParser extends BaseParser {
     );
   }
 
-  void getEpisode(MManga media, Source source) async {
-    if (media.link == null) return;
-    var m = await getDetail(url: media.link!, source: source);
+  void getEpisode(MManga? media, Source source) async {
+    if (media == null || media.link == null){
+      episodeList.value = <String, Episode>{};
+      errorType.value = ErrorType.NotFound;
+      return;
+    }
+    MManga? m;
+    try {
+      m = await getDetail(url: media.link!, source: source).timeout(Duration(seconds: 5));
+    } catch (e) {
+      errorType.value = ErrorType.NoResult;
+      m = null;
+      return;
+    }
 
     dataLoaded.value = true;
     var chapters = m.chapters;
+    if (chapters == null) {
+      episodeList.value = <String, Episode>{};
+      errorType.value = ErrorType.NoResult;
+      return;
+    }
     var isFirst = true;
     var shouldNormalize = false;
     var additionalIndex = 0;
+
     episodeList.value = Map.fromEntries(
-      chapters?.reversed.mapIndexed((index, chapter) {
+      chapters.reversed.mapIndexed((index, chapter) {
             final episode = MChapterToEpisode(chapter, media);
 
             if (isFirst) {
@@ -112,8 +129,7 @@ class AnimeParser extends BaseParser {
             }
 
             return MapEntry(episode.number, episode);
-          }) ??
-          [],
+          }),
     );
   }
 

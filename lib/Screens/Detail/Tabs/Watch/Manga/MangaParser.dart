@@ -82,10 +82,28 @@ class MangaParser extends BaseParser {
     );
   }
 
-  void getChapter(MManga media, Source source) async {
-    if (media.link == null) return;
-    var m = await getDetail(url: media.link!, source: source);
+  void getChapter(MManga? media, Source source) async {
+    if (media == null || media.link == null) {
+      chapterList.value = <Chapter>[];
+      errorType.value = ErrorType.NotFound;
+      return;
+    }
+
+    MManga? m;
+    try {
+      m = await getDetail(url: media.link!, source: source).timeout(Duration(seconds: 5));
+    } catch (e) {
+      errorType.value = ErrorType.NoResult;
+      m = null;
+      return;
+    }
+
     dataLoaded.value = true;
+    if (m.chapters == null) {
+      chapterList.value = <Chapter>[];
+      errorType.value = ErrorType.NoResult;
+      return;
+    }
     chapterList.value = m.chapters?.reversed.map((e) => MChapterToChapter(e, media)).toList();
     unModifiedChapterList.value = chapterList.value;
     var uniqueScanlators = {

@@ -48,11 +48,25 @@ class AnimeWatchScreenState extends BaseWatchScreen<AnimeWatchScreen> {
   Widget _buildEpisodeList() {
     return Obx(() {
       var episodeList = _viewModel.episodeList.value;
-      if (episodeList == null || episodeList.isEmpty) {
+      if (episodeList == null) {
         return const Center(child: CircularProgressIndicator());
       }
+
       if (!_viewModel.episodeDataLoaded.value) {
         return const Center(child: CircularProgressIndicator());
+      }
+      if (episodeList.isEmpty){
+        return Center(
+          child: Text(
+            _viewModel.errorType.value == ErrorType.NotFound
+                ? 'Media not found'
+                : 'No episodes found',
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.onSurface,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        );
       }
       updateEpisodeDetails(episodeList);
 

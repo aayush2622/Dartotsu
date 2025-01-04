@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
@@ -42,6 +44,7 @@ class SettingsCommonScreenState extends BaseSettingsScreen {
             name: 'Custom Path',
             description: 'Set a custom path to save files\nLong press to remove',
             icon: Icons.folder,
+            isVisible: !(Platform.isIOS || Platform.isMacOS),
             onLongClick: () => PrefManager.removeVal(PrefName.customPath),
             onClick: () async {
               var path = PrefManager.getVal(PrefName.customPath);
