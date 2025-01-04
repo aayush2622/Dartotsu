@@ -113,10 +113,10 @@ class StorageProvider {
 }
 extension StringPathExtension on String {
   String get fixSeparator {
-    if (Platform.isAndroid) {
-      return replaceAll("\\" , "/");
-    } else {
+    if (Platform.isWindows) {
       return replaceAll("/", path.separator);
+    } else {
+      return replaceAll("\\" , "/");
     }
   }
 }

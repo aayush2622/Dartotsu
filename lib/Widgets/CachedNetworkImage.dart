@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 Widget cachedNetworkImage({
   required String? imageUrl,
@@ -14,11 +15,12 @@ Widget cachedNetworkImage({
       return SizedBox(
         width: width,
         height: height,
-        child: Container(),
+        child: placeholder.call(Get.context!, imageUrl ?? ""),
       );
     }
-    return Icon(Icons.image_not_supported, weight: width ?? 24);
+    return Icon(Icons.image_not_supported, weight: width ?? 24,);
   }
+
   return CachedNetworkImage(
     filterQuality: FilterQuality.high,
     imageUrl: imageUrl,

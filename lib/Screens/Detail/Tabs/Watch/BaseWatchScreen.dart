@@ -45,8 +45,9 @@ abstract class BaseWatchScreen<T extends StatefulWidget> extends State<T> {
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                 ),
-                maxLines: 2,
+                textAlign: TextAlign.center,
                 overflow: TextOverflow.ellipsis,
+                maxLines: 2,
               ),
             ),
           ),
@@ -62,13 +63,17 @@ abstract class BaseWatchScreen<T extends StatefulWidget> extends State<T> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ..._buildYouTubeButton(),
-          Obx(() => Text(
-                viewModel.status.value ?? '',
-                style: TextStyle(
-                  color: theme.onSurface,
-                  fontWeight: FontWeight.bold,
-                ),
-              )),
+          Obx(() {
+            return Text(
+              viewModel.status.value ?? '',
+              style: TextStyle(
+                color: theme.onSurface,
+                fontWeight: FontWeight.bold,
+              ),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            );
+          }),
           const SizedBox(height: 12),
           SourceSelector(
             currentSource: viewModel.source.value,

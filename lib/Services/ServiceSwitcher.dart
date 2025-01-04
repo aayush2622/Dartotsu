@@ -1,6 +1,6 @@
+import 'package:collection/collection.dart';
 import 'package:dantotsu/Preferences/PrefManager.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_qjs/quickjs/ffi.dart';
 
 import '../Preferences/Preferences.dart';
 import 'MediaService.dart';
@@ -29,5 +29,5 @@ class MediaServiceProvider with ChangeNotifier {
 
   MediaService? _findService(String serviceName) =>
       MediaService.allServices.firstWhereOrNull(
-          (service) => service.runtimeType.toString() == serviceName);
+          (s) => s.runtimeType.toString() == serviceName);
 }

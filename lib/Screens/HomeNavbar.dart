@@ -104,7 +104,6 @@ class FloatingBottomNavBar extends StatelessWidget {
               ),
               onTap: () {
                 provider.switchService(service.runtimeType.toString());
-
                 Navigator.pop(context);
               },
             );
