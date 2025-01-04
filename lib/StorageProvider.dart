@@ -50,39 +50,9 @@ class StorageProvider {
     String basePath;
 
     final appDir = await getApplicationDocumentsDirectory();
-    if (Platform.isAndroid) {
-      basePath = useCustomPath == true
-          ? (customPath.isNotEmpty && !customPath.endsWith('Dartotsu'))
-          ? path.join(customPath, 'Dartotsu')
-          : customPath.isNotEmpty
-          ? customPath
-          : "/storage/emulated/0/Dartotsu"
-          : appDir.path;
-    } else {
-      basePath = path.join(
-        useCustomPath == true
-            ? (customPath.isNotEmpty && !customPath.endsWith('Dartotsu'))
-            ? customPath
-            : path.join(customPath, 'Dartotsu')
-            : appDir.path,
-        'Dartotsu',
-      );
-    }
-
-    final baseDirectory = Directory(basePath.fixSeparator);
-    if (!baseDirectory.existsSync()) {
-      baseDirectory.createSync(recursive: true);
-    }
-
-    final fullPath = path.join(basePath, subPath ?? '');
-    final fullDirectory = Directory(fullPath.fixSeparator);
-
-    if (subPath != null && subPath.isNotEmpty && !fullDirectory.existsSync()) {
-      fullDirectory.createSync(recursive: true);
-    }
-
-    return fullDirectory;
+    return appDir;
   }
+
   Future<Isar> initDB(String? path, {bool inspector = false}) async {
     Directory? dir;
     if (path == null) {
