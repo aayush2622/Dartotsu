@@ -360,7 +360,7 @@ jobs:
         id: check_noping
         run: |
           if [[ "${{ github.event.head_commit.message }}" == *"[Ping]"* ]]; then 
-            echo "ping_variable=<@&1298926901833895986>" >> $GITHUB_ENV 
+            echo "ping_variable=<@&1324799528255225997>" >> $GITHUB_ENV 
           else 
             echo "ping_variable=noPing" >> $GITHUB_ENV 
           fi
