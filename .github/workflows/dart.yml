@@ -161,10 +161,10 @@ jobs:
         with:
           flutter-version: 3.27.1
           cache: true
-
-
-
-
+      - name: Setup NuGet.exe for use with actions
+        uses: NuGet/setup-nuget@v2.0.1
+        with:
+          nuget-version: 'latest'
       # Enable Windows desktop support
       - name: Enable Windows desktop support
         run: flutter config --enable-windows-desktop
