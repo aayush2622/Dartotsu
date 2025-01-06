@@ -34,6 +34,7 @@ class MangaParser extends BaseParser {
       MangaCompactSettings(
         context,
         media,
+        source.value,
         scanlator.value,
         toggledScanlators.value,
         (s,t) {
@@ -45,6 +46,7 @@ class MangaParser extends BaseParser {
             return scanlator == null ||
                 toggledScanlators.value![this.scanlator.value?.indexOf(scanlator) ?? 0];
           }).toList();
+
         },
       ).showDialog();
 

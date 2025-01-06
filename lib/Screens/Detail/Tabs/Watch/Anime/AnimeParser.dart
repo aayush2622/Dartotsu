@@ -44,6 +44,7 @@ class AnimeParser extends BaseParser {
       AnimeCompactSettings(
         context,
         media,
+        source.value,
         (s) {
           viewType.value = s.recyclerStyle;
           reversed.value = s.recyclerReversed;

@@ -5,6 +5,7 @@
 list(APPEND FLUTTER_PLUGIN_LIST
   desktop_webview_window
   dynamic_color
+  flutter_inappwebview_windows
   flutter_qjs
   isar_flutter_libs
   media_kit_libs_windows_video
@@ -14,7 +15,6 @@ list(APPEND FLUTTER_PLUGIN_LIST
   screen_retriever_windows
   share_plus
   url_launcher_windows
-  webview_windows
   window_manager
   window_to_front
 )

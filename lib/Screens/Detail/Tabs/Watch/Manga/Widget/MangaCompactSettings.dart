@@ -1,3 +1,5 @@
+import 'package:dantotsu/Functions/Function.dart';
+import 'package:dantotsu/Screens/WebView/WebView.dart';
 import 'package:dantotsu/Theme/LanguageSwitcher.dart';
 import 'package:dantotsu/Widgets/AlertDialogBuilder.dart';
 import 'package:flutter/material.dart';
@@ -8,19 +10,22 @@ import '../../../../../../DataClass/Media.dart';
 import '../../../../../../Preferences/HiveDataClasses/Selected/Selected.dart';
 import '../../../../../../Preferences/PrefManager.dart';
 import '../../../../../../Services/ServiceSwitcher.dart';
+import '../../../../../../api/Mangayomi/Model/Source.dart';
 
 class MangaCompactSettings {
   final BuildContext context;
   final Media media;
+  final Source? source;
   final List<String>? scanlators;
+
   List<bool>? toggledScanlators;
   final Function(Selected settings, List<bool>? toggledScanlators) onFinished;
-
   final ColorScheme theme;
 
   MangaCompactSettings(
     this.context,
     this.media,
+    this.source,
     this.scanlators,
     this.toggledScanlators,
     this.onFinished,
@@ -49,6 +54,8 @@ class MangaCompactSettings {
             _buildLayoutSettings(),
             SizedBox(height: 12),
             _buildSortSettings(),
+            SizedBox(height: 12),
+            _buildWebViewSettings(),
             SizedBox(height: 12),
             _buildScanlatorSettings(),
           ],
@@ -150,6 +157,25 @@ class MangaCompactSettings {
       },
     );
   }
+
+  Widget _buildWebViewSettings() {
+    return Row(
+      children: [
+        _buildInfo("Web View", source?.baseUrl ?? ''),
+        IconButton(
+          onPressed: () => navigateToPage(
+            context,
+            MangaWebView(url: source!.baseUrl!, title: ''),
+          ),
+          icon: Icon(
+            Icons.open_in_new_rounded,
+            size: 24,
+          ),
+        ),
+      ],
+    );
+  }
+
   Widget _buildScanlatorSettings() {
     return Row(
           children: [

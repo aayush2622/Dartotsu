@@ -5,18 +5,22 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../../DataClass/Media.dart';
+import '../../../../../../Functions/Function.dart';
 import '../../../../../../Preferences/HiveDataClasses/Selected/Selected.dart';
 import '../../../../../../Preferences/PrefManager.dart';
 import '../../../../../../Services/ServiceSwitcher.dart';
+import '../../../../../../api/Mangayomi/Model/Source.dart';
+import '../../../../../WebView/WebView.dart';
 
 class AnimeCompactSettings {
   final BuildContext context;
   final Media media;
+  final Source? source;
   final Function(Selected settings) onFinished;
 
   final ColorScheme theme;
 
-  AnimeCompactSettings(this.context, this.media, this.onFinished)
+  AnimeCompactSettings(this.context, this.media, this.source, this.onFinished)
       : theme = Theme.of(context).colorScheme;
 
   late Selected settings;
@@ -42,6 +46,8 @@ class AnimeCompactSettings {
             _buildLayoutSettings(),
             SizedBox(height: 12),
             _buildSortSettings(),
+            SizedBox(height: 12),
+            _buildWebViewSettings(),
           ],
         ),
       )
@@ -175,7 +181,23 @@ class AnimeCompactSettings {
       ),
     );
   }
-
+  Widget _buildWebViewSettings() {
+    return Row(
+      children: [
+        _buildInfo("Web View", source?.baseUrl ?? ''),
+        IconButton(
+          onPressed: () => navigateToPage(
+            context,
+            MangaWebView(url: source!.baseUrl!, title: ''),
+          ),
+          icon: Icon(
+            Icons.open_in_new_rounded,
+            size: 24,
+          ),
+        ),
+      ],
+    );
+  }
   void saveSelected() {
     var sourceName =
         Provider.of<MediaServiceProvider>(Get.context!, listen: false)

@@ -1,3 +1,4 @@
+import 'package:dantotsu/api/Mangayomi/Eval/javascript/http.dart';
 import 'package:flutter_qjs/flutter_qjs.dart';
 import 'package:js_packer/js_packer.dart';
 
@@ -33,7 +34,12 @@ class JsUtils {
     runtime.onMessage('unpackJs', (dynamic args) {
       return JSPacker(args[0]).unpack() ?? "";
     });
-
+    runtime.onMessage('evaluateJavascriptViaWebview', (dynamic args) async {
+      return await MBridge.evaluateJavascriptViaWebview(
+          args[0]!,
+          (args[1]! as Map).toMapStringString!,
+          (args[2]! as List).map((e) => e.toString()).toList());
+    });
     runtime.evaluate('''
 console.log = function (message) {
     if (typeof message === "object") {
@@ -129,6 +135,12 @@ function parseDates(value, dateFormat, dateFormatLocale) {
     return sendMessage(
         "parseDates",
         JSON.stringify([value, dateFormat, dateFormatLocale])
+    );
+}
+async function evaluateJavascriptViaWebview(url, headers, scripts) {
+    return await sendMessage(
+        "evaluateJavascriptViaWebview",
+        JSON.stringify([url, headers, scripts])
     );
 }
 ''');

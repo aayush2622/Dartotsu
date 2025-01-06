@@ -4,9 +4,11 @@ import 'dart:io';
 import 'package:dantotsu/Screens/Login/LoginScreen.dart';
 import 'package:dantotsu/Screens/Manga/MangaScreen.dart';
 import 'package:dynamic_color/dynamic_color.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' as provider;
 import 'package:get/get.dart';
@@ -29,7 +31,9 @@ import 'Theme/ThemeProvider.dart';
 import 'api/Discord/Discord.dart';
 import 'api/TypeFactory.dart';
 import 'logger.dart';
+import 'package:path/path.dart' as p;
 late Isar isar;
+WebViewEnvironment? webViewEnvironment;
 
 void main(List<String> args) async {
   runZonedGuarded(
@@ -78,6 +82,15 @@ Future init() async {
     initializeDateFormatting(locale);
   }
 
+  if (!kIsWeb && defaultTargetPlatform == TargetPlatform.windows) {
+    final availableVersion = await WebViewEnvironment.getAvailableVersion();
+    assert(availableVersion != null,
+    'Failed to find an installed WebView2 runtime or non-stable Microsoft Edge installation.');
+    final document = await StorageProvider().getDirectory();
+    webViewEnvironment = await WebViewEnvironment.create(
+        settings: WebViewEnvironmentSettings(
+            userDataFolder: p.join(document!.path, 'flutter_inappwebview'),),);
+  }
   Get.config(
     enableLog: true,
     logWriterCallback: (text, {isError = false}) async {
@@ -113,7 +126,7 @@ class MyApp extends StatelessWidget {
             GlobalCupertinoLocalizations.delegate,
           ],
           supportedLocales: AppLocalizations.supportedLocales,
-          locale: Locale(PrefManager.getCustomVal("defaultLanguage") ?? 'en'),
+          locale: Locale( loadCustomData("defaultLanguage") ?? 'en'),
           navigatorKey: navigatorKey,
           title: 'Dartotsu',
           themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,

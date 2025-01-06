@@ -547,6 +547,7 @@ class MediaPlayerState extends State<MediaPlayer>
       AnimeCompactSettings(
         context,
         widget.media,
+        widget.source,
         (i) {
           viewType.value = i.recyclerStyle;
           reverse.value = i.recyclerReversed;

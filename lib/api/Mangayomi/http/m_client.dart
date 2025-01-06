@@ -6,7 +6,8 @@ import 'package:dantotsu/api/Mangayomi/Model/settings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/io_client.dart';
 import 'package:http_interceptor/http_interceptor.dart';
-
+import 'package:flutter_inappwebview/flutter_inappwebview.dart'
+as flutter_inappwebview;
 import '../../../logger.dart';
 import '../../../main.dart';
 import '../Eval/dart/model/m_source.dart';
@@ -62,21 +63,25 @@ class MClient {
     return {HttpHeaders.cookieHeader: cookies};
   }
 
-  static Future<void> setCookie(String url, String ua, {String? cookie}) async {
+  static Future<void> setCookie(String url, String ua,
+      flutter_inappwebview.InAppWebViewController? webViewController,
+      {String? cookie}) async {
     List<String> cookies = [];
-    if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+    if (Platform.isLinux) {
       cookies = cookie
-              ?.split(RegExp('(?<=)(,)(?=[^;]+?=)'))
-              .where((cookie) => cookie.isNotEmpty)
-              .toList() ??
+          ?.split(RegExp('(?<=)(,)(?=[^;]+?=)'))
+          .where((cookie) => cookie.isNotEmpty)
+          .toList() ??
           [];
     } else {
-      /*cookies = (await flutter_inappwebview.CookieManager.instance()
-              .getCookies(url: flutter_inappwebview.WebUri(url)))
+      cookies = (await flutter_inappwebview.CookieManager.instance(
+          webViewEnvironment: webViewEnvironment)
+          .getCookies(
+          url: flutter_inappwebview.WebUri(url),
+          webViewController: webViewController))
           .map((e) => "${e.name}=${e.value}")
-          .toList();*/
+          .toList();
     }
-
     if (cookies.isNotEmpty) {
       final host = Uri.parse(url).host;
       final newCookie = cookies.join("; ");
@@ -91,14 +96,13 @@ class MClient {
         ..host = host
         ..cookie = newCookie);
       isar.writeTxnSync(
-          () => isar.settings.putSync(settings..cookiesList = cookieList));
+              () => isar.settings.putSync(settings..cookiesList = cookieList));
     }
     if (ua.isNotEmpty) {
       final settings = isar.settings.getSync(227);
       isar.writeTxnSync(() => isar.settings.putSync(settings!..userAgent = ua));
     }
   }
-
   static void deleteAllCookies(String url) {
     final cookiesList = isar.settings.getSync(227)!.cookiesList ?? [];
     List<MCookie>? cookieList = [];

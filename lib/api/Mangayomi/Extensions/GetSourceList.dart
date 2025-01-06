@@ -23,13 +23,8 @@ Future<void> fetchSourcesList(
 
   isar.writeTxnSync(() async {
     for (var source in sourceList) {
-                final itm = source.isManga == null
-              ? source.itemType
-              : source.isManga!
-              ? ItemType.manga
-              : ItemType.anime;
-          if (itm == itemType) {
-            if (id != null) {
+      if (source.itemType == itemType) {
+        if (id != null) {
               if (id == source.id) {
                 final sourc = isar.sources.getSync(id)!;
                 final req = await http.get(Uri.parse(source.sourceCodeUrl!));
