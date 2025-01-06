@@ -1,9 +1,6 @@
 import 'dart:io';
-
 import 'package:dantotsu/StorageProvider.dart';
-
 import 'Preferences/PrefManager.dart';
-import 'Preferences/Preferences.dart';
 
 class Logger {
   static File? _logFile;

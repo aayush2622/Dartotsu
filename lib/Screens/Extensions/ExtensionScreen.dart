@@ -7,7 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:isar/isar.dart';
 
 import '../../Preferences/PrefManager.dart';
-import '../../Preferences/Preferences.dart';
+
 import '../../StorageProvider.dart';
 import '../../Widgets/ScrollConfig.dart';
 import '../../api/Mangayomi/Model/Manga.dart';

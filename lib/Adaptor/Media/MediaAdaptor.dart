@@ -8,7 +8,7 @@ import '../../Animation/ScaleAnimation.dart';
 import '../../DataClass/Media.dart';
 import '../../Functions/Function.dart';
 import '../../Preferences/PrefManager.dart';
-import '../../Preferences/Preferences.dart';
+
 import '../../Screens/Detail/MediaScreen.dart';
 import '../../Widgets/ScrollConfig.dart';
 import 'MediaLargeViewHolder.dart';

@@ -6,7 +6,7 @@ import '../../../Adaptor/Media/Widgets/MediaSection.dart';
 import '../../../DataClass/MediaSection.dart';
 import '../../../Functions/Function.dart';
 import '../../../Preferences/PrefManager.dart';
-import '../../../Preferences/Preferences.dart';
+
 import '../../../Services/Screens/BaseAnimeScreen.dart';
 import '../../../Theme/LanguageSwitcher.dart';
 import '../Anilist.dart' hide Anilist;

@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:dantotsu/Functions/Function.dart';
-import 'package:dantotsu/Preferences/Preferences.dart';
 import 'package:dantotsu/api/Anilist/Anilist.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_qjs/quickjs/ffi.dart';

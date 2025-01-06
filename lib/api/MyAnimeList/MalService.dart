@@ -35,6 +35,7 @@ class MalService extends MediaService {
   @override
   BaseLoginScreen get loginScreen => Get.put(MalLoginScreen(Mal));
 }
+
 class MalLoginScreen extends BaseLoginScreen {
   final MalController Mal;
 

@@ -5,7 +5,7 @@ import '../../Adaptor/Settings/SettingsAdaptor.dart';
 import '../../DataClass/Setting.dart';
 import '../../Functions/Function.dart';
 import '../../Preferences/PrefManager.dart';
-import '../../Preferences/Preferences.dart';
+
 import '../../StorageProvider.dart';
 import 'BaseSettingsScreen.dart';
 

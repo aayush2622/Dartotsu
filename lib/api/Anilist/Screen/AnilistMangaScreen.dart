@@ -6,7 +6,7 @@ import '../../../DataClass/Media.dart';
 import '../../../DataClass/MediaSection.dart';
 import '../../../Functions/Function.dart';
 import '../../../Preferences/PrefManager.dart';
-import '../../../Preferences/Preferences.dart';
+
 import '../../../Services/Screens/BaseMangaScreen.dart';
 import '../../../Theme/LanguageSwitcher.dart';
 import '../Anilist.dart';

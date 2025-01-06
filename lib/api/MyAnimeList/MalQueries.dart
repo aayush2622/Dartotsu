@@ -6,7 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 import '../../Preferences/PrefManager.dart';
-import '../../Preferences/Preferences.dart';
+
 import '../../Services/Api/Queries.dart';
 import 'Data/data.dart';
 import 'Data/user.dart';

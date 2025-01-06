@@ -9,7 +9,7 @@ import '../../../DataClass/MediaSection.dart';
 import '../../../DataClass/User.dart';
 import '../../../Functions/Function.dart';
 import '../../../Preferences/PrefManager.dart';
-import '../../../Preferences/Preferences.dart';
+
 import '../../../Theme/LanguageSwitcher.dart';
 import '../../../Widgets/CustomElevatedButton.dart';
 import '../../../main.dart';

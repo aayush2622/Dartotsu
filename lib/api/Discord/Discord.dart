@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 import '../../DataClass/Episode.dart';
 import '../../DataClass/Media.dart';
 import '../../Preferences/PrefManager.dart';
-import '../../Preferences/Preferences.dart';
+
 import '../../Widgets/CustomBottomDialog.dart';
 import 'DiscordService.dart';
 import 'Login.dart';

@@ -8,6 +8,17 @@ import '../StorageProvider.dart';
 import 'HiveDataClasses/MalToken/MalToken.dart';
 import 'HiveDataClasses/ShowResponse/ShowResponse.dart';
 
+part 'Preferences.dart';
+
+T loadData<T>(Pref<T> pref)=> PrefManager.getVal(pref);
+
+T? loadCustomData<T>(String key)=> PrefManager.getCustomVal(key);
+
+void saveData<T>(Pref<T> pref, T value)=> PrefManager.setVal(pref, value);
+
+void saveCustomData<T>(String key, T value)=> PrefManager.setCustomVal(key, value);
+
+
 class Pref<T> {
   final Location location;
   final String key;
@@ -35,7 +46,7 @@ class PrefManager {
 
   // Call this method at the start of the app
   static Future<void> init() async {
-    HiveAdapters();
+    _hiveAdapters;
     if (_generalPreferences != null) return;
     final path = await StorageProvider().getDirectory(subPath: 'preferences');
     await Hive.initFlutter(path?.path);
@@ -47,7 +58,7 @@ class PrefManager {
     _protectedPreferences = await Hive.openBox('protectedPreferences');
   }
 
-  static void HiveAdapters() {
+  static void _hiveAdapters() {
     Hive.registerAdapter(ShowResponseAdapter());
     Hive.registerAdapter(SelectedAdapter());
     Hive.registerAdapter(ResponseTokenAdapter());

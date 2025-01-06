@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 
 import '../../Functions/Function.dart';
 import '../../Preferences/PrefManager.dart';
-import '../../Preferences/Preferences.dart';
+
 import '../../Widgets/CustomBottomDialog.dart';
 import '../TypeFactory.dart';
 import 'AnilistMutations.dart';

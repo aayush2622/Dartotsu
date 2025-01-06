@@ -7,7 +7,6 @@ import 'package:dantotsu/Functions/Function.dart';
 import 'package:dantotsu/Functions/string_extensions.dart';
 import 'package:dantotsu/Preferences/HiveDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
 import 'package:dantotsu/Preferences/PrefManager.dart';
-import 'package:dantotsu/Preferences/Preferences.dart';
 import 'package:dantotsu/Widgets/AlertDialogBuilder.dart';
 import 'package:dantotsu/Widgets/CustomBottomDialog.dart';
 import 'package:dantotsu/api/Mangayomi/Eval/dart/model/video.dart' as v;
@@ -620,30 +619,30 @@ class _PlayerControllerState extends State<PlayerController> {
       viewList: [_buildSubtitleList(sub)],
       negativeText: "Add Subtitle",
       negativeCallback: () async {
-        var file = await FilePicker.platform.pickFiles(
+        var file = (await FilePicker.platform.pickFiles(
           type: FileType.custom,
           allowedExtensions: subMap,
-        );
-        if (file == null) return;
+        ))?.files.single;
+        if (file == null || file.path == null) return;
         if (sub) {
           currentQuality.subtitles = [
             v.Track(
-              file: file.files.single.path ?? "",
-              label: file.files.single.name,
+              file: file.path,
+              label: file.name,
             ),
           ];
         } else {
           currentQuality.subtitles?.add(
             v.Track(
-              file: file.files.single.path ?? "",
-              label: file.files.single.name,
+              file: file.path ,
+              label: file.name,
             ),
           );
         }
         _controller.setSubtitle(
-          file.files.single.path ?? "",
-          file.files.single.name,
-          file.files.single.path?.toNullInt() == null
+          file.path ?? "",
+          file.name,
+          file.path?.toNullInt() == null
         );
         Get.back();
         _controller.play();
@@ -662,13 +661,14 @@ class _PlayerControllerState extends State<PlayerController> {
         shrinkWrap: true,
         itemCount: currentQuality.subtitles!.length,
         itemBuilder: (context, index) {
+          var sub = currentQuality.subtitles![index];
           return ListTile(
-            title: Text(currentQuality.subtitles![index].label ?? ""),
+            title: Text(sub.label ?? ""),
             onTap: () {
               _controller.setSubtitle(
-                currentQuality.subtitles![index].file ?? "",
-                currentQuality.subtitles![index].label ?? "",
-                currentQuality.subtitles![index].file?.toNullInt() == null,
+                sub.file ?? "",
+                sub.label ?? "",
+                sub.file?.toNullInt() == null,
               );
               Get.back();
               _controller.play();

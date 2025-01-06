@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dantotsu/Functions/Function.dart';
-import 'package:dantotsu/Preferences/Preferences.dart';
 import 'package:dantotsu/Screens/Extensions/ExtensionScreen.dart';
 import 'package:dantotsu/Screens/Settings/SettingsScreen.dart';
 import 'package:dantotsu/Widgets/AlertDialogBuilder.dart';

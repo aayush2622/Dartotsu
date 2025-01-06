@@ -15,8 +15,8 @@ class SettingItem extends StatelessWidget {
     return ListTile(
       onTap: setting.onClick,
       onLongPress: setting.onLongClick,
-      hoverColor:
-          Theme.of(context).colorScheme.secondary.withValues(alpha: 0.1),
+      hoverColor: Colors.transparent,
+      splashColor: Colors.transparent,
       title: Row(
         children: [
           Icon(setting.icon, color: Theme.of(context).primaryColor),
@@ -68,7 +68,6 @@ class SettingSwitchItem extends StatefulWidget {
 
 class SettingSwitchItemState extends State<SettingSwitchItem> {
   late bool _isChecked;
-  bool _isHovered = false;
 
   @override
   void initState() {
@@ -81,8 +80,7 @@ class SettingSwitchItemState extends State<SettingSwitchItem> {
     if (!widget.setting.isVisible) return const SizedBox.shrink();
 
     return MouseRegion(
-      onEnter: (_) => setState(() => _isHovered = true),
-      onExit: (_) => setState(() => _isHovered = false),
+      cursor: SystemMouseCursors.click,
       child: GestureDetector(
         onTap: () {
           final newValue = !_isChecked;
@@ -93,11 +91,6 @@ class SettingSwitchItemState extends State<SettingSwitchItem> {
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
           padding: const EdgeInsets.symmetric(vertical: 8.0),
-          decoration: BoxDecoration(
-            color: _isHovered
-                ? Theme.of(context).colorScheme.secondary.withValues(alpha: 0.1)
-                : Colors.transparent,
-          ),
           child: Row(
             children: [
               Icon(widget.setting.icon, color: Theme.of(context).primaryColor),
@@ -132,7 +125,6 @@ class SettingSwitchItemState extends State<SettingSwitchItem> {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 2.0),
                     Text(
                       widget.setting.description,
                       style: const TextStyle(

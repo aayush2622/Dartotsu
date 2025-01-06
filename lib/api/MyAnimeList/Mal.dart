@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 import '../../Functions/Function.dart';
 import '../../Preferences/HiveDataClasses/MalToken/MalToken.dart';
 import '../../Preferences/PrefManager.dart';
-import '../../Preferences/Preferences.dart';
+
 import '../../Services/BaseServiceData.dart';
 import '../../Widgets/CustomBottomDialog.dart';
 import 'Login.dart' as MalLogin;

@@ -1,29 +1,19 @@
-import 'package:dantotsu/Preferences/HiveDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
-
-import 'HiveDataClasses/MalToken/MalToken.dart';
-import 'PrefManager.dart';
+part of 'PrefManager.dart';
 
 class PrefName {
-  static const Pref<String> source =
-      Pref(Location.General, 'source', 'ANILIST');
+  static const source = Pref(Location.General, 'source', 'ANILIST');
 
   //theme
-  static const Pref<int> isDarkMode =
-      Pref(Location.General, 'isDarkMode', 0);
-  static const Pref<bool> isOled = Pref(Location.General, 'isOled', false);
-  static const Pref<bool> useMaterialYou =
-      Pref(Location.General, 'useMaterialYou', false);
-  static const Pref<String> theme = Pref(Location.General, 'Theme', 'purple');
-  static const Pref<int> customColor =
-      Pref(Location.General, 'customColor', 4280391411);
-  static const Pref<bool> useCustomColor =
-      Pref(Location.General, 'useCustomColor', false);
-  static const Pref<bool> showYtButton =
-      Pref(Location.General, 'showYtButton', true);
+  static const isDarkMode = Pref(Location.General, 'isDarkMode', 0);
+  static const isOled = Pref(Location.General, 'isOled', false);
+  static const useMaterialYou = Pref(Location.General, 'useMaterialYou', false);
+  static const theme = Pref(Location.General, 'Theme', 'purple');
+  static const customColor = Pref(Location.General, 'customColor', 4280391411);
+  static const useCustomColor = Pref(Location.General, 'useCustomColor', false);
+  static const showYtButton = Pref(Location.General, 'showYtButton', true);
 
   //home page
-  static const Pref<Map<String, bool>> anilistHomeLayout =
-      Pref(Location.General, 'homeLayoutOrder', {
+  static const anilistHomeLayout = Pref(Location.General, 'homeLayoutOrder', {
     'Continue Watching': true,
     'Favourite Anime': false,
     'Planned Anime': false,
@@ -33,8 +23,7 @@ class PrefName {
     'Recommended': true,
   });
 
-  static const Pref<Map<String, bool>> malHomeLayout =
-      Pref(Location.General, 'malHomeLayoutOrder', {
+  static const malHomeLayout = Pref(Location.General, 'malHomeLayoutOrder', {
     'Continue Watching': true,
     'OnHold Anime': false,
     'Planned Anime': true,
@@ -44,94 +33,77 @@ class PrefName {
     'Planned Manga': true,
     'Dropped Manga': false,
   });
-  static const Pref<List<int>> anilistRemoveList =
+  static const anilistRemoveList =
       Pref(Location.General, 'anilistRemoveList', []);
-  static const Pref<List<int>> malRemoveList =
-      Pref(Location.General, 'malRemoveList', []);
-  static const Pref<bool> anilistHidePrivate =
+  static const Pref<List<int>> malRemoveList = Pref(Location.General, 'malRemoveList', []);
+  static const anilistHidePrivate =
       Pref(Location.General, 'anilistHidePrivate', false);
 
   //anime page
-  static const Pref<Map<String, bool>> anilistAnimeLayout =
-      Pref(Location.General, 'animeLayoutOrder', {
+  static const anilistAnimeLayout = Pref(Location.General, 'animeLayoutOrder', {
     'Recent Updates': true,
     'Trending Movies': true,
     'Top Rated Series': true,
     'Most Favourite Series': true,
   });
 
-  static const Pref<Map<String, bool>> malAnimeLayout =
-      Pref(Location.General, 'malAnimeLayoutOrder', {
+  static const malAnimeLayout = Pref(Location.General, 'malAnimeLayoutOrder', {
     'Top Airing': true,
     'Trending Movies': true,
     'Top Rated Series': true,
     'Most Favourite Series': true,
   });
-  static const Pref<bool> adultOnly =
-      Pref(Location.General, 'adultOnly', false);
-  static const Pref<bool> includeAnimeList =
+  static const adultOnly = Pref(Location.General, 'adultOnly', false);
+  static const includeAnimeList =
       Pref(Location.General, 'includeAnimeList', false);
-  static const Pref<bool> recentlyListOnly =
+  static const recentlyListOnly =
       Pref(Location.General, 'recentlyListOnly', false);
-  static const Pref<bool> NSFWExtensions =
-      Pref(Location.General, 'NSFWExtensions', true);
-  static const Pref<int> AnimeDefaultView =
-      Pref(Location.General, 'AnimeDefaultView', 0);
-  static const Pref<int> MangaDefaultView =
-      Pref(Location.General, 'MangaDefaultView', 0);
+  static const NSFWExtensions = Pref(Location.General, 'NSFWExtensions', true);
+  static const AnimeDefaultView = Pref(Location.General, 'AnimeDefaultView', 0);
+  static const MangaDefaultView = Pref(Location.General, 'MangaDefaultView', 0);
 
   //manga page
-  static const Pref<Map<String, bool>> anilistMangaLayout =
-      Pref(Location.General, 'mangaLayoutOrder', {
+  static const anilistMangaLayout = Pref(Location.General, 'mangaLayoutOrder', {
     'Trending Manhwa': true,
     'Trending Novels': true,
     'Top Rated Manga': true,
     'Most Favourite Manga': true,
   });
 
-  static const Pref<Map<String, bool>> malMangaLayout =
-      Pref(Location.General, 'malMangaLayoutOrder', {
+  static const malMangaLayout = Pref(Location.General, 'malMangaLayoutOrder', {
     'Trending Manhwa': true,
     'Trending Novels': true,
     'Top Rated Manga': true,
     'Most Favourite Manga': true,
   });
-  static const Pref<bool> includeMangaList =
+  static const includeMangaList =
       Pref(Location.General, 'includeMangaList', false);
 
   //
-  static const Pref<int> unReadCommentNotifications =
+  static const unReadCommentNotifications =
       Pref(Location.General, 'unReadCommentNotifications', 0);
-  static const Pref<bool> incognito =
-      Pref(Location.General, 'incognito', false);
-  static const Pref<bool> offlineMode =
-      Pref(Location.General, 'offline', false);
-  static const Pref<String> customPath =
-      Pref(Location.General, 'customPath', '');
+  static const incognito = Pref(Location.General, 'incognito', false);
+  static const offlineMode = Pref(Location.General, 'offline', false);
+  static const customPath = Pref(Location.General, 'customPath', '');
   //Player
-  static const Pref<bool> cursedSpeed =
-      Pref(Location.Player, 'cursedSpeed', false);
+  static const cursedSpeed = Pref(Location.Player, 'cursedSpeed', false);
 
   static Pref<PlayerSettings> playerSettings =
       Pref(Location.Player, 'playerSettings', PlayerSettings());
 
   //Protection
-  static const Pref<String> anilistToken =
-      Pref(Location.Protected, 'AnilistToken', '');
-  static const Pref<ResponseToken?> malToken =
-      Pref(Location.Protected, 'MalToken', null);
-  static const Pref<String> discordToken =
-      Pref(Location.Protected, 'DiscordToken', '');
-  static const Pref<String> discordUserName =
+  static const anilistToken = Pref(Location.Protected, 'AnilistToken', '');
+  static const malToken = Pref(Location.Protected, 'MalToken', null);
+  static const discordToken = Pref(Location.Protected, 'DiscordToken', '');
+  static const discordUserName =
       Pref(Location.Protected, 'discordUserName', '');
-  static const Pref<String> discordAvatar =
-      Pref(Location.Protected, 'discordAvatar', '');
+  static const discordAvatar = Pref(Location.Protected, 'discordAvatar', '');
 
   // irrelevant
-  static const Pref<List<String>> GenresList =
-      Pref(Location.Irrelevant, 'GenresList', []);
+  static const Pref<List<String>> GenresList = Pref(Location.Irrelevant, 'GenresList', []);
   static const Pref<List<String>> TagsListIsAdult =
       Pref(Location.Irrelevant, 'TagsListIsAdult', []);
   static const Pref<List<String>> TagsListNonAdult =
       Pref(Location.Irrelevant, 'TagsListNonAdult', []);
 }
+
