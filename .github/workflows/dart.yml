@@ -68,9 +68,6 @@ jobs:
         with:
           flutter-version: 3.27.1
           cache: true
-      - name: Install CMake via SDK Manager
-        run: |
-          yes | sdkmanager --install "cmake;3.18.1"
 
           # Download the keystore file (from GitHub Secrets or other storage)
       - name: Download keystore
