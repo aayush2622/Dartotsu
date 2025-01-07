@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dantotsu/api/Mangayomi/Model/settings.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:isar/isar.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
@@ -13,19 +14,27 @@ import 'api/Mangayomi/Model/chapter.dart';
 
 class StorageProvider {
   Future<bool> requestPermission() async {
-    Permission permission = Permission.manageExternalStorage;
-    if (Platform.isAndroid) {
-      if (await permission.isGranted) {
-        return true;
-      } else {
-        final result = await permission.request();
-        if (result == PermissionStatus.granted) {
-          return true;
-        }
-        return false;
-      }
+    if (!Platform.isAndroid) {
+      return true;
     }
-    return true;
+
+    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+    final androidInfo = await deviceInfo.androidInfo;
+    if (androidInfo.version.sdkInt <= 29){
+      final storagePermission = Permission.storage;
+      if (await storagePermission.isGranted) {
+        return true;
+      }
+      final storageStatus = await storagePermission.request();
+      return storageStatus.isGranted;
+    }
+
+    final manageStoragePermission = Permission.manageExternalStorage;
+    if (await manageStoragePermission.isGranted) {
+      return true;
+    }
+    final manageStorageStatus = await manageStoragePermission.request();
+    return manageStorageStatus.isGranted;
   }
 
   Future<bool> videoPermission() async {
@@ -53,21 +62,28 @@ class StorageProvider {
     if (Platform.isIOS || Platform.isMacOS) return appDir;
 
     if (Platform.isAndroid) {
-      basePath = useCustomPath == true
-          ? (customPath.isNotEmpty && !customPath.endsWith('Dartotsu'))
-          ? path.join(customPath, 'Dartotsu')
-          : customPath.isNotEmpty
-          ? customPath
-          : "/storage/emulated/0/Dartotsu"
-          : appDir.path;
+      DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+      final androidInfo = await deviceInfo.androidInfo;
+
+      if (androidInfo.version.sdkInt <= 29) {
+        return appDir;
+      } else {
+        basePath = useCustomPath == true
+            ? (customPath.isNotEmpty && !customPath.endsWith('Dartotsu'))
+                ? path.join(customPath, 'Dartotsu')
+                : customPath.isNotEmpty
+                    ? customPath
+                    : "/storage/emulated/0/Dartotsu"
+            : appDir.path;
+      }
     } else {
       basePath = path.join(
         useCustomPath == true
-            ? (customPath.isNotEmpty && !customPath.endsWith('Dartotsu'))
-            ? customPath
-            : path.join(customPath, 'Dartotsu')
+            ? (customPath.isNotEmpty)
+                ? customPath
+                : appDir.path
             : appDir.path,
-        'Dartotsu',
+        !customPath.endsWith('Dartotsu') ? 'Dartotsu' : '',
       );
     }
 
@@ -85,6 +101,7 @@ class StorageProvider {
 
     return fullDirectory;
   }
+
   Future<Isar> initDB(String? path, {bool inspector = false}) async {
     Directory? dir;
     if (path == null) {
@@ -113,12 +130,13 @@ class StorageProvider {
     return isar;
   }
 }
+
 extension StringPathExtension on String {
   String get fixSeparator {
     if (Platform.isWindows) {
       return replaceAll("/", path.separator);
     } else {
-      return replaceAll("\\" , "/");
+      return replaceAll("\\", "/");
     }
   }
 }

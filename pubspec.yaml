@@ -74,6 +74,7 @@ dependencies:
   volume_controller: ^2.0.8 #dont change
   screen_brightness: ^2.0.1 #dont change
   # Miscellaneous
+  device_info_plus: ^11.2.0
   file_picker: ^8.1.7
   share_plus: ^10.1.3
   url_launcher: ^6.3.1
