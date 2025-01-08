@@ -15,6 +15,7 @@ Future fetchNovelSourcesList(Ref ref, {int? id, required reFresh}) async {
         refresh: reFresh,
         id: id,
         ref: ref,
-        itemType: ItemType.novel,);
+        itemType: ItemType.novel,
+    );
   }
 }

@@ -1,11 +1,16 @@
 import 'dart:async';
 
+import 'package:dantotsu/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../Animation/SlideUpAnimation.dart';
+import '../Theme/Colors.dart';
+import '../Theme/ThemeProvider.dart';
 import '../main.dart';
 
 class _RefreshController extends GetxController {
@@ -64,41 +69,43 @@ enum RefreshId {
 var Refresh = Get.put(_RefreshController(), permanent: true);
 
 Future<void> snackString(
-  String? s, {
-  String? clipboard,
-}) async {
+    String? s, {
+      String? clipboard,
+    }) async {
   var context = navigatorKey.currentContext ?? Get.context;
 
   if (context != null && s != null && s.isNotEmpty) {
     var theme = Theme.of(context).colorScheme;
-
+    Logger.log(s);
     try {
+      final scaffoldMessenger = ScaffoldMessenger.of(context);
+      scaffoldMessenger.hideCurrentSnackBar();
+      final themeNotifier = Provider.of<ThemeNotifier>(context,listen: false);
       final snackBar = SnackBar(
-        content: GestureDetector(
-          onTap: () => ScaffoldMessenger.of(context).hideCurrentSnackBar(),
-          onLongPress: () => copyToClipboard(clipboard ?? s),
-          child: Text(
-            s,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontFamily: 'Poppins',
-              fontSize: 16.0,
-              fontWeight: FontWeight.w600,
-              color: theme.onSurface,
+        backgroundColor: themeNotifier.isDarkMode ? greyNavDark : greyNavLight,
+        behavior: SnackBarBehavior.floating,
+        margin: EdgeInsets.zero,
+        elevation: 0,
+        content: SlideUpAnimation(
+          child: GestureDetector(
+            onTap: () => scaffoldMessenger.hideCurrentSnackBar(),
+            onLongPress: () => copyToClipboard(clipboard ?? s),
+            child: Text(
+              s,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontFamily: 'Poppins',
+                fontSize: 16.0,
+                fontWeight: FontWeight.w600,
+                color: theme.onSurface,
+              ),
             ),
           ),
         ),
-        backgroundColor: theme.surface,
-        behavior: SnackBarBehavior.floating,
-        margin: EdgeInsets.only(
-          bottom: MediaQuery.of(context).viewInsets.bottom + 32,
-          left: 32,
-          right: 32,
-        ),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         duration: const Duration(seconds: 2),
       );
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
+      scaffoldMessenger.showSnackBar(snackBar);
     } catch (e, stackTrace) {
       debugPrint('Error showing SnackBar: $e');
       debugPrint(stackTrace.toString());
@@ -107,7 +114,6 @@ Future<void> snackString(
     debugPrint('No valid context or string provided.');
   }
 }
-
 void copyToClipboard(String text) {
   var context = navigatorKey.currentContext ?? Get.context;
   var theme = Theme.of(context!).colorScheme;
@@ -139,7 +145,8 @@ Future<void> openLinkInBrowser(String url) async {
   }
 }
 
-void navigateToPage(BuildContext context, Widget page) {
+void navigateToPage(BuildContext context, Widget page, {bool header = true}) {
+
   Navigator.push(
     context,
     MaterialPageRoute(builder: (context) => page),

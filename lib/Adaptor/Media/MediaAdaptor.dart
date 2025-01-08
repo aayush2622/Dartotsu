@@ -7,7 +7,6 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import '../../Animation/ScaleAnimation.dart';
 import '../../DataClass/Media.dart';
 import '../../Functions/Function.dart';
-import '../../Preferences/PrefManager.dart';
 
 import '../../Screens/Detail/MediaScreen.dart';
 import '../../Widgets/ScrollConfig.dart';
@@ -95,12 +94,6 @@ class MediaGridState extends State<MediaAdaptor> {
       duration: const Duration(milliseconds: 200),
       child: GestureDetector(
         onTap: () => _handleMediaTap(index, _mediaList[index], tag),
-        onLongPress: () {
-          snackString('Added to hidden');
-          var removeList = List<int>.from(PrefManager.getVal(PrefName.malRemoveList));
-          removeList.add(_mediaList[index].id);
-          PrefManager.setVal(PrefName.malRemoveList, removeList);
-        },
         child: child,
       ),
     );
@@ -235,5 +228,4 @@ class MediaGridState extends State<MediaAdaptor> {
       },
     );
   }
-
 }

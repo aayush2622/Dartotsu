@@ -42,10 +42,8 @@ class AnilistHomeScreen extends BaseHomeScreen {
   @override
   Future<void> loadAll() async {
     await getUserId();
-    await Future.wait([
-      loadList(),
-      setListImages(),
-    ]);
+    await setListImages();
+    loadList();
   }
 
   Future<void> setListImages() async {
