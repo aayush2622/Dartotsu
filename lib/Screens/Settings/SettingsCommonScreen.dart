@@ -41,15 +41,15 @@ class SettingsCommonScreenState extends BaseSettingsScreen {
         settings: [
           Setting(
             type: SettingType.normal,
-            name: 'Custom Path',
-            description: 'Set a custom path to save files\nLong press to remove',
+            name: getString.customPath,
+            description: getString.customPathDescription,
             icon: Icons.folder,
             isVisible: !(Platform.isIOS || Platform.isMacOS),
             onLongClick: () => PrefManager.removeVal(PrefName.customPath),
             onClick: () async {
               var path = PrefManager.getVal(PrefName.customPath);
               final result = await FilePicker.platform.getDirectoryPath(
-                dialogTitle: 'Select a directory',
+                dialogTitle: getString.selectDirectory,
                 lockParentWindow: true,
                 initialDirectory: path ,
               );
