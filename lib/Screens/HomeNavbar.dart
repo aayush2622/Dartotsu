@@ -110,7 +110,7 @@ class FloatingBottomNavBar extends StatelessWidget {
           },
         ),
       ],
-      title: 'Select Media Service',
+      title: getString.selectMediaService,
     );
 
     showCustomBottomDialog(context, t);
