@@ -407,5 +407,9 @@
   "totalEpisodes": "Episodes",
   "totalChapters": "Chapters",
 
-  "selectMediaService": "Select Media Service"
+  "selectMediaService": "Select Media Service",
+
+  "customPath": "Custom Path",
+  "customPathDescription": "Set a custom path to save files\nLong press to remove",
+  "selectDirectory": "Select a directory"
 }
