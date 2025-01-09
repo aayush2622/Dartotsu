@@ -405,5 +405,7 @@
   "tags": "Tags",
   "total": "Total",
   "totalEpisodes": "Episodes",
-  "totalChapters": "Chapters"
+  "totalChapters": "Chapters",
+
+  "selectMediaService": "Select Media Service"
 }
