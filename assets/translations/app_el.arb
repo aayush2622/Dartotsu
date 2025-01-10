@@ -55,7 +55,7 @@
   "@donationGoal": {},
   "enableDarkMode": "Ενεργοποιήστε τη Σκοτεινή Λειτουργία",
   "@enableDarkMode": {},
-  "extension": "Επέκταση",
+  "extension": "{count, πλουραία, =1 {Extension} άλλα {Extensions}}",
   "@extension": {},
   "extensionsDescription": "Εγκαταστήστε και διαχειριστείτε επεκτάσεις για επιπλέον λειτουργικότητα",
   "@extensionsDescription": {},
@@ -77,7 +77,7 @@
   "@fontWeightDescription": {},
   "hidePrivate": "Απόκρυψη Ιδιωτικού",
   "@hidePrivate": {},
-  "hidePrivateDescription": "Απόκρυψη ιδιωτικών μέσων από την αρχική σελίδα",
+  "hidePrivateDescription": "Κρυμμένες ιδιωτικές σειρές από το Home page.",
   "@hidePrivateDescription": {},
   "incognitoMode": "Λειτουργία Ανώνυμης Περιήγησης",
   "@incognitoMode": {},
@@ -85,7 +85,7 @@
   "@incognitoModeDescription": {},
   "login": "Σύνδεση",
   "@login": {},
-  "logout": "Αποσύνδεση",
+  "logout": "Logout {type}",
   "@logout": {},
   "mal": "MyAnimeList",
   "@mal": {},
@@ -146,5 +146,389 @@
   "supportMaintainer": "Θέλετε να υποστηρίξετε τον συντηρητή του Dartotsu;\nΣκεφτείτε να δωρίσετε",
   "@supportMaintainer": {},
   "yes": "Ναι",
-  "@yes": {}
+  "@yes": {},
+  "calendar": "Ημερολόγιο",
+  "@calendar": {},
+  "search": "Αναζήτηση",
+  "@search": {},
+  "scanlators": "Μεταφραστές",
+  "@scanlators": {},
+  "dtu": "Υπό Ενημέρωση",
+  "@dtu": {},
+  "list": "Λίστα",
+  "@list": {
+    "placeholders": {
+      "type": {
+        "examples": "Anime list",
+        "type": "String"
+      }
+    }
+  },
+  "listView": "Προβολή Λίστας",
+  "@listView": {},
+  "compactView": "Συμπαγής Προβολή",
+  "@compactView": {},
+  "layout": "Διάταξη",
+  "@layout": {},
+  "popular": "Δημοφιλή",
+  "@popular": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga",
+          "Manhwa"
+        ]
+      }
+    }
+  },
+  "activity": "Δραστηριότητα",
+  "@activity": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "browse": "Περιήγηση",
+  "@browse": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "noFavourites": "Δεν Υπάρχουν Αγαπημένα",
+  "@noFavourites": {},
+  "noHiddenMediaFound": "Δεν Βρέθηκαν Κρυφά Μέσα",
+  "@noHiddenMediaFound": {},
+  "noOnHold": "Δεν Υπάρχουν Σε Αναμονή",
+  "@noOnHold": {},
+  "averageDuration": "Μέση Διάρκεια",
+  "@averageDuration": {},
+  "characters": "Χαρακτήρες",
+  "@characters": {},
+  "collapseText": "Σύμπτυξη Κειμένου",
+  "@collapseText": {},
+  "comingSoon": "Έρχεται Σύντομα",
+  "@comingSoon": {},
+  "description": "Περιγραφή",
+  "@description": {},
+  "relations": "Σχέσεις",
+  "@relations": {},
+  "sequel": "Συνέχεια",
+  "@sequel": {},
+  "source": "Πηγή",
+  "@source": {},
+  "staff": "Συνεργάτες",
+  "@staff": {},
+  "synopsis": "Υπόθεση",
+  "@synopsis": {},
+  "tags": "Ετικέτες",
+  "@tags": {},
+  "total": "Σύνολο",
+  "@total": {},
+  "totalEpisodes": "Σύνολο Επεισοδίων",
+  "@totalEpisodes": {},
+  "totalChapters": "Σύνολο Κεφαλαίων",
+  "@totalChapters": {},
+  "series": "Σειρές",
+  "@series": {},
+  "season": "Σεζόν",
+  "@season": {},
+  "volume": "Τόμος",
+  "@volume": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "endDate": "Ημερομηνία Λήξης",
+  "@endDate": {},
+  "expandText": "Επέκταση Κειμένου",
+  "@expandText": {},
+  "favorites": "Αγαπημένα",
+  "@favorites": {},
+  "format": "Μορφή",
+  "@format": {},
+  "meanScore": "Μέση Βαθμολογία",
+  "@meanScore": {},
+  "name": "Όνομα",
+  "@name": {},
+  "nameRomaji": "Όνομα Ρομάτζι",
+  "@nameRomaji": {},
+  "popularity": "Δημοτικότητα",
+  "@popularity": {},
+  "prequel": "Προιστορία",
+  "@prequel": {},
+  "startDate": "Ημερομηνία Έναρξης",
+  "@startDate": {},
+  "status": "Κατάσταση",
+  "@status": {},
+  "studio": "Στούντιο",
+  "@studio": {},
+  "synonyms": "Συνώνυμα",
+  "@synonyms": {},
+  "author": "Συγγραφέας",
+  "@author": {},
+  "loginTo": "Σύνδεση στο",
+  "@loginTo": {
+    "placeholders": {
+      "service": {
+        "type": "String",
+        "examples": [
+          "Anilist",
+          "MyAnimeList",
+          "Kitsu",
+          "Discord"
+        ]
+      }
+    }
+  },
+  "manhwa": "Μανχούα",
+  "@manhwa": {},
+  "manhua": "Μάνγκα",
+  "@manhua": {},
+  "home": "Αρχική",
+  "@home": {},
+  "novel": "Μυθιστόρημα",
+  "@novel": {},
+  "ln": "Λάιτ Νοβέλ",
+  "@ln": {},
+  "info": "Πληροφορίες",
+  "@info": {},
+  "comments": "Σχόλια",
+  "@comments": {},
+  "episode": "Επεισόδιο",
+  "@episode": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "chapter": "Κεφάλαιο",
+  "@chapter": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "movie": "Ταινία",
+  "@movie": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "genres": "Είδη",
+  "@genres": {},
+  "manageLayout": "Διαχείριση Διάταξης",
+  "@manageLayout": {
+    "placeholders": {
+      "service": {
+        "type": "String",
+        "examples": [
+          "Anilist",
+          "MAL"
+        ]
+      },
+      "page": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Home",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "confirmLogout": "Επιβεβαίωση Αποσύνδεσης",
+  "@confirmLogout": {},
+  "gridView": "Προβολή Πλέγματος",
+  "@gridView": {},
+  "sort": "Ταξινόμηση",
+  "@sort": {},
+  "episodeWatched": "Επεισόδιο Παρακολουθημένο",
+  "@episodeWatched": {},
+  "chapterRead": "Κεφάλαιο Διαβασμένο",
+  "@chapterRead": {},
+  "available": "Διαθέσιμο",
+  "@available": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "installed": "Εγκατεστημένο",
+  "@installed": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Extensions"
+        ]
+      }
+    }
+  },
+  "trending": "Δημοφιλή",
+  "@trending": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "mostFavourite": "Πιο Αγαπημένα",
+  "@mostFavourite": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga",
+          "Manhwa"
+        ]
+      }
+    }
+  },
+  "topRated": "Κορυφαία Αξιολόγηση",
+  "@topRated": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga",
+          "Manhwa",
+          "Series"
+        ]
+      }
+    }
+  },
+  "thisSeason": "Αυτή η Σεζόν",
+  "@thisSeason": {},
+  "nextSeason": "Επόμενη Σεζόν",
+  "@nextSeason": {},
+  "previousSeason": "Προηγούμενη Σεζόν",
+  "@previousSeason": {},
+  "planned": "Προγραμματισμένο",
+  "@planned": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "favorite": "Αγαπημένο",
+  "@favorite": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "onHold": "Σε Αναμονή",
+  "@onHold": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "noDropped": "Δεν Έχουν Διαγραφεί",
+  "@noDropped": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "droppedManga": "Διαγραμμένα Μάνγκα",
+  "@droppedManga": {},
+  "topAiring": "Κορυφαία Εποχή",
+  "@topAiring": {},
+  "watch": "Παρακολούθηση",
+  "@watch": {},
+  "language": "Γλώσσα",
+  "@language": {},
+  "recommended": "Προτεινόμενο",
+  "@recommended": {},
+  "addToList": "Προσθήκη στη Λίστα",
+  "@addToList": {},
+  "read": "Διάβασμα",
+  "@read": {},
+  "continueReading": "Συνέχεια Ανάγνωσης",
+  "@continueReading": {},
+  "continueWatching": "Συνέχεια Παρακολούθησης",
+  "@continueWatching": {},
+  "options": "Ρυθμίσεις",
+  "@options": {},
+  "recentUpdates": "Πρόσφατες Ενημερώσεις",
+  "@recentUpdates": {},
+  "recommendationsEmptyMessage": "Δεν Υπάρχουν Προτάσεις Αυτή τη Στιγμή",
+  "@recommendationsEmptyMessage": {},
+  "utd": "Ενημερωμένο",
+  "@utd": {},
+  "manageLayoutDescription": "Διαχειριστείτε την εμφάνιση της εφαρμογής σας.",
+  "@manageLayoutDescription": {
+    "placeholders": {
+      "page": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Home",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "pickColor": "Επιλογή Χρώματος",
+  "@pickColor": {},
+  "allCaughtUpNew": "Όλα τα πιωμένα, τι είναι καινούργιο?",
+  "@allCaughtUpNew": {},
+  "droppedAnime": "Διαγραμμένα Άνιμε",
+  "@droppedAnime": {},
+  "hiddenMedia": "Κρυφά Μέσα",
+  "@hiddenMedia": {},
+  "kitsu": "Kitsu",
+  "@kitsu": {}
 }

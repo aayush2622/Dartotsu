@@ -85,7 +85,7 @@
   "@donationGoal": {},
   "enableDarkMode": "启用深色模式",
   "@enableDarkMode": {},
-  "extension": "扩展",
+  "extension": "{count, plural, =1 {扩展名} other {扩展名}}",
   "@extension": {},
   "fontColor": "字体颜色",
   "@fontColor": {},
@@ -103,9 +103,9 @@
   "@fontWeightDescription": {},
   "hidePrivate": "隐藏私密",
   "@hidePrivate": {},
-  "hidePrivateDescription": "在首页隐藏私密媒体",
+  "hidePrivateDescription": "从主页隐藏私人系列。",
   "@hidePrivateDescription": {},
-  "logout": "退出登录",
+  "logout": "退出登录 {type}",
   "@logout": {},
   "notifications": "通知",
   "@notifications": {},
@@ -146,5 +146,389 @@
   "subtitles": "字幕",
   "@subtitles": {},
   "supportMaintainer": "想要支持Dartotsu的维护者吗？\n考虑捐赠",
-  "@supportMaintainer": {}
+  "@supportMaintainer": {},
+  "chapter": "{count, plural, =1 {章节} other {章节}}",
+  "@chapter": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "volume": "{count, plural, =1 {卷} other {卷}}",
+  "@volume": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "movie": "{count, plural, =1 {电影} other {电影}}",
+  "@movie": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "genres": "类型",
+  "@genres": {},
+  "calendar": "日历",
+  "@calendar": {},
+  "search": "搜索",
+  "@search": {},
+  "scanlators": "翻译组",
+  "@scanlators": {},
+  "list": "{type} 列表",
+  "@list": {
+    "placeholders": {
+      "type": {
+        "examples": "Anime list",
+        "type": "String"
+      }
+    }
+  },
+  "confirmLogout": "确认退出?",
+  "@confirmLogout": {},
+  "gridView": "网格视图",
+  "@gridView": {},
+  "listView": "列表视图",
+  "@listView": {},
+  "compactView": "紧凑视图",
+  "@compactView": {},
+  "layout": "布局",
+  "@layout": {},
+  "episodeWatched": "已观看集数",
+  "@episodeWatched": {},
+  "chapterRead": "已阅读章节",
+  "@chapterRead": {},
+  "available": "可用 {type}",
+  "@available": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "installed": "已安装 {type}",
+  "@installed": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Extensions"
+        ]
+      }
+    }
+  },
+  "trending": "趋势 {type}",
+  "@trending": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "mostFavourite": "最受欢迎 {type}",
+  "@mostFavourite": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga",
+          "Manhwa"
+        ]
+      }
+    }
+  },
+  "popular": "热门 {type}",
+  "@popular": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga",
+          "Manhwa"
+        ]
+      }
+    }
+  },
+  "topRated": "最高评分 {type}",
+  "@topRated": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga",
+          "Manhwa",
+          "Series"
+        ]
+      }
+    }
+  },
+  "thisSeason": "本季",
+  "@thisSeason": {},
+  "continueWatching": "继续观看",
+  "@continueWatching": {},
+  "endDate": "结束日期",
+  "@endDate": {},
+  "expandText": "展开",
+  "@expandText": {},
+  "popularity": "人气",
+  "@popularity": {},
+  "prequel": "前传",
+  "@prequel": {},
+  "relations": "关系",
+  "@relations": {},
+  "sequel": "续集",
+  "@sequel": {},
+  "startDate": "开始日期",
+  "@startDate": {},
+  "status": "状态",
+  "@status": {},
+  "studio": "工作室",
+  "@studio": {},
+  "synonyms": "同义词",
+  "@synonyms": {},
+  "episode": "{count, plural, =1 {剧集} other {剧集}}",
+  "@episode": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "kitsu": "Kitsu",
+  "@kitsu": {},
+  "author": "作者",
+  "@author": {},
+  "averageDuration": "平均时长",
+  "@averageDuration": {},
+  "characters": "角色",
+  "@characters": {},
+  "collapseText": "收起",
+  "@collapseText": {},
+  "comingSoon": "即将推出",
+  "@comingSoon": {},
+  "source": "来源",
+  "@source": {},
+  "staff": "工作人员",
+  "@staff": {},
+  "totalEpisodes": "总集数",
+  "@totalEpisodes": {},
+  "totalChapters": "总章节数",
+  "@totalChapters": {},
+  "description": "描述",
+  "@description": {},
+  "favorites": "收藏",
+  "@favorites": {},
+  "format": "格式",
+  "@format": {},
+  "meanScore": "平均评分",
+  "@meanScore": {},
+  "name": "名称",
+  "@name": {},
+  "nameRomaji": "罗马字名称",
+  "@nameRomaji": {},
+  "synopsis": "简介",
+  "@synopsis": {},
+  "tags": "标签",
+  "@tags": {},
+  "total": "总数",
+  "@total": {},
+  "loginTo": "登录到 {service}",
+  "@loginTo": {
+    "placeholders": {
+      "service": {
+        "type": "String",
+        "examples": [
+          "Anilist",
+          "MyAnimeList",
+          "Kitsu",
+          "Discord"
+        ]
+      }
+    }
+  },
+  "manhwa": "韩漫",
+  "@manhwa": {},
+  "manhua": "中文漫画",
+  "@manhua": {},
+  "home": "首页",
+  "@home": {},
+  "novel": "小说",
+  "@novel": {},
+  "ln": "轻小说",
+  "@ln": {},
+  "comments": "评论",
+  "@comments": {},
+  "addToList": "加入列表",
+  "@addToList": {},
+  "series": "系列",
+  "@series": {},
+  "season": "季",
+  "@season": {},
+  "nextSeason": "下季",
+  "@nextSeason": {},
+  "previousSeason": "上一季",
+  "@previousSeason": {},
+  "activity": "{count, plural, =1 {活动} other {活动}}",
+  "@activity": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "planned": "计划中 {type}",
+  "@planned": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "browse": "浏览 {type}",
+  "@browse": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "favorite": "收藏 {type}",
+  "@favorite": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "onHold": "暂缓 {type}",
+  "@onHold": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "noDropped": "您尚未删除任何 {type}。",
+  "@noDropped": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "noOnHold": "看来你还没有搁置任何事情。",
+  "@noOnHold": {},
+  "recommendationsEmptyMessage": "暂无推荐",
+  "@recommendationsEmptyMessage": {},
+  "dtu": "下载更新",
+  "@dtu": {},
+  "continueReading": "继续阅读",
+  "@continueReading": {},
+  "droppedAnime": "已弃番剧",
+  "@droppedAnime": {},
+  "droppedManga": "已弃漫画",
+  "@droppedManga": {},
+  "info": "信息",
+  "@info": {},
+  "language": "语言",
+  "@language": {},
+  "noFavourites": "看来你什么都不喜欢\n尝试喜欢某个节目并将其保留在这里。",
+  "@noFavourites": {},
+  "options": "选项",
+  "@options": {},
+  "read": "阅读",
+  "@read": {},
+  "recentUpdates": "最近更新",
+  "@recentUpdates": {},
+  "recommended": "推荐",
+  "@recommended": {},
+  "sort": "排序",
+  "@sort": {},
+  "topAiring": "本季热播",
+  "@topAiring": {},
+  "watch": "观看",
+  "@watch": {},
+  "utd": "更新日期",
+  "@utd": {},
+  "manageLayout": "管理 {service} 的 {page} 页面布局",
+  "@manageLayout": {
+    "placeholders": {
+      "service": {
+        "type": "String",
+        "examples": [
+          "Anilist",
+          "MAL"
+        ]
+      },
+      "page": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Home",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "manageLayoutDescription": "您可以通过拖放项目来管理 {page} 页面的布局",
+  "@manageLayoutDescription": {
+    "placeholders": {
+      "page": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Home",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "pickColor": "选择颜色",
+  "@pickColor": {},
+  "allCaughtUpNew": "所有人都被抓住,什么是新?",
+  "@allCaughtUpNew": {},
+  "hiddenMedia": "隐藏的媒体",
+  "@hiddenMedia": {},
+  "noHiddenMediaFound": "没有找到隐藏的媒体",
+  "@noHiddenMediaFound": {}
 }

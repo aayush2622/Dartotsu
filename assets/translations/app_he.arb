@@ -89,7 +89,7 @@
   "@donationGoal": {},
   "enableDarkMode": "הפעל מצב כהה",
   "@enableDarkMode": {},
-  "extension": "הרחבה",
+  "extension": "המונחים: המונחים: [...]",
   "@extension": {},
   "extensionsDescription": "התקן ונהל הרחבות לפונקציות נוספות",
   "@extensionsDescription": {},
@@ -111,9 +111,9 @@
   "@fontWeightDescription": {},
   "hidePrivate": "הסתר פרטי",
   "@hidePrivate": {},
-  "hidePrivateDescription": "הסתר מדיה פרטית מעמוד הבית",
+  "hidePrivateDescription": "להסתיר סדרה פרטית מתוך דף הבית.",
   "@hidePrivateDescription": {},
-  "logout": "התנתק",
+  "logout": "תגית: X7X",
   "@logout": {},
   "mal": "MyAnimeList",
   "@mal": {},
@@ -146,5 +146,389 @@
   "themeDescription": "התאם אישית את המראה והאווירה של האפליקציה שלך",
   "@themeDescription": {},
   "yes": "כן",
-  "@yes": {}
+  "@yes": {},
+  "totalEpisodes": "פרקים",
+  "@totalEpisodes": {},
+  "total": "Total",
+  "@total": {},
+  "tags": "תגיות",
+  "@tags": {},
+  "hiddenMedia": "תקשורת מוסתרת",
+  "@hiddenMedia": {},
+  "description": "Synopsis",
+  "@description": {},
+  "name": "שם השם",
+  "@name": {},
+  "mostFavourite": "הרוב המכריע (X15X)",
+  "@mostFavourite": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga",
+          "Manhwa"
+        ]
+      }
+    }
+  },
+  "endDate": "תאריך סיום",
+  "@endDate": {},
+  "meanScore": "ציון ממוצע",
+  "@meanScore": {},
+  "chapterRead": "פרק קריאה",
+  "@chapterRead": {},
+  "noHiddenMediaFound": "שום תקשורת נסתרת לא נמצאה",
+  "@noHiddenMediaFound": {},
+  "synopsis": "Synopsis",
+  "@synopsis": {},
+  "nameRomaji": "שם (Romaji)",
+  "@nameRomaji": {},
+  "gridView": "View",
+  "@gridView": {},
+  "averageDuration": "משך ממוצע",
+  "@averageDuration": {},
+  "droppedManga": "להורדה Manga",
+  "@droppedManga": {},
+  "comingSoon": "מגיע SOON",
+  "@comingSoon": {},
+  "episodeWatched": "פרק: Watched",
+  "@episodeWatched": {},
+  "popularity": "פופולריות",
+  "@popularity": {},
+  "allCaughtUpNew": "הכל נתפס, מה חדש?",
+  "@allCaughtUpNew": {},
+  "totalChapters": "פרקים",
+  "@totalChapters": {},
+  "favorites": "מועדפים",
+  "@favorites": {},
+  "movie": "המונחים: # 1 [סרטים] אחרים",
+  "@movie": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "prequel": "שאלה:",
+  "@prequel": {},
+  "planned": "מתוכנן (X8X)",
+  "@planned": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "collapseText": "להראות פחות",
+  "@collapseText": {},
+  "chapter": "שם הסרטון: Flor,=1",
+  "@chapter": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "available": "זמין (X10X)",
+  "@available": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "characters": "דמויות",
+  "@characters": {},
+  "genres": "Genres",
+  "@genres": {},
+  "author": "Author",
+  "@author": {},
+  "format": "פורמט",
+  "@format": {},
+  "expandText": "הצג עוד",
+  "@expandText": {},
+  "sequel": "SEQUEL",
+  "@sequel": {},
+  "studio": "סטודיו Studio",
+  "@studio": {},
+  "staff": "צוות",
+  "@staff": {},
+  "status": "סטטוס",
+  "@status": {},
+  "relations": "יחסים",
+  "@relations": {},
+  "source": "מקור Source",
+  "@source": {},
+  "synonyms": "אנונימיות",
+  "@synonyms": {},
+  "startDate": "התחל תאריך",
+  "@startDate": {},
+  "recommendationsEmptyMessage": "צפה/ Read Some Anime or Manga כדי לקבל המלצות",
+  "@recommendationsEmptyMessage": {},
+  "ln": "Light Novel",
+  "@ln": {},
+  "manhwa": "Manhwa",
+  "@manhwa": {},
+  "kitsu": "Kitsu",
+  "@kitsu": {},
+  "novel": "רומן",
+  "@novel": {},
+  "loginTo": "כניסה ל-X9X",
+  "@loginTo": {
+    "placeholders": {
+      "service": {
+        "type": "String",
+        "examples": [
+          "Anilist",
+          "MyAnimeList",
+          "Kitsu",
+          "Discord"
+        ]
+      }
+    }
+  },
+  "series": "סדרה",
+  "@series": {},
+  "home": "בית",
+  "@home": {},
+  "manhua": "ישוע",
+  "@manhua": {},
+  "season": "עונת העונה",
+  "@season": {},
+  "episode": "המונחים: שם הסרטון: AEpisodes",
+  "@episode": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "volume": "המונחים: המונחים: {Volumes}}",
+  "@volume": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "calendar": "לוח השנה",
+  "@calendar": {},
+  "compactView": "תצוגה קומפקטית",
+  "@compactView": {},
+  "listView": "רשימת View",
+  "@listView": {},
+  "confirmLogout": "האם אתה בטוח שברצונך להתנתק?",
+  "@confirmLogout": {},
+  "installed": "(X10X)",
+  "@installed": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Extensions"
+        ]
+      }
+    }
+  },
+  "trending": "עקבו אחרי X9X",
+  "@trending": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "popular": "פופולרי (X8X)",
+  "@popular": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga",
+          "Manhwa"
+        ]
+      }
+    }
+  },
+  "thisSeason": "העונה הזו",
+  "@thisSeason": {},
+  "nextSeason": "העונה הבאה",
+  "@nextSeason": {},
+  "topRated": "Top Rated[עריכת קוד מקור]",
+  "@topRated": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga",
+          "Manhwa",
+          "Series"
+        ]
+      }
+    }
+  },
+  "previousSeason": "העונה הקודמת",
+  "@previousSeason": {},
+  "favorite": "(X9X)",
+  "@favorite": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "activity": "המונחים: (הופנה מהדף אחר)",
+  "@activity": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "browse": "(X7X)",
+  "@browse": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "onHold": "On Hold (X8X)",
+  "@onHold": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "continueReading": "המשך קריאה",
+  "@continueReading": {},
+  "noDropped": "עדיין לא ירדתם X24X.",
+  "@noDropped": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "continueWatching": "המשך צפייה",
+  "@continueWatching": {},
+  "droppedAnime": "טיפות Anime",
+  "@droppedAnime": {},
+  "recentUpdates": "עדכונים אחרונים",
+  "@recentUpdates": {},
+  "recommended": "מומלץ",
+  "@recommended": {},
+  "scanlators": "סורקים",
+  "@scanlators": {},
+  "search": "חיפוש",
+  "@search": {},
+  "sort": "מין",
+  "@sort": {},
+  "utd": "עד למטה",
+  "@utd": {},
+  "addToList": "הוסף לרשימה",
+  "@addToList": {},
+  "comments": "הערות",
+  "@comments": {},
+  "dtu": "למטה עד Up",
+  "@dtu": {},
+  "language": "שפה",
+  "@language": {},
+  "info": "מידע",
+  "@info": {},
+  "layout": "Layout",
+  "@layout": {},
+  "list": "רשימת X0X",
+  "@list": {
+    "placeholders": {
+      "type": {
+        "examples": "Anime list",
+        "type": "String"
+      }
+    }
+  },
+  "options": "אפשרויות",
+  "@options": {},
+  "read": "Read",
+  "@read": {},
+  "topAiring": "Top Airing",
+  "@topAiring": {},
+  "watch": "Watch",
+  "@watch": {},
+  "manageLayout": "דף ה-X7X - LEout for [x30X]",
+  "@manageLayout": {
+    "placeholders": {
+      "service": {
+        "type": "String",
+        "examples": [
+          "Anilist",
+          "MAL"
+        ]
+      },
+      "page": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Home",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "manageLayoutDescription": "אתה יכול לנהל את הפריסה עבור דף X30X על ידי גרר ופיל את הפריטים",
+  "@manageLayoutDescription": {
+    "placeholders": {
+      "page": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Home",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "pickColor": "בחרו צבע",
+  "@pickColor": {},
+  "noFavourites": "נראה כאילו אתה לא אוהב שום דבר,\nנסו לאהוב הופעה כדי לשמור אותה כאן.",
+  "@noFavourites": {},
+  "noOnHold": "נראה כאילו לא עשיתם שום דבר בתחזוקה.",
+  "@noOnHold": {}
 }

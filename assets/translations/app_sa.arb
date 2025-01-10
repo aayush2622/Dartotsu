@@ -95,7 +95,7 @@
   "@bottomPaddingDescription": {},
   "fontColor": "अक्षरवर्ण",
   "@fontColor": {},
-  "hidePrivateDescription": "मुखपृष्ठत गोपनीयं माध्यमं छादयतु",
+  "hidePrivateDescription": "गृहपृष्ठे गोप्यश्रृंखलाः लुप्यन्ताम्।",
   "@hidePrivateDescription": {},
   "incognitoMode": "अज्ञातवृत्ति",
   "@incognitoMode": {},
@@ -115,7 +115,7 @@
   "@yes": {},
   "fontColorDescription": "उपशीर्षकस्य अक्षरवर्ण",
   "@fontColorDescription": {},
-  "extension": "विस्तार",
+  "extension": "{count, plural, =1 {विस्तारणम्} other {विस्तारणानि}}",
   "@extension": {},
   "fontSizeDescription": "उपशीर्षकस्य अक्षरमाप",
   "@fontSizeDescription": {},
@@ -123,7 +123,7 @@
   "@appTagline": {},
   "cursedSpeedDescription": "ये जना जीवनस्य कार्येण अतीव व्यस्ता तेषां कृते",
   "@cursedSpeedDescription": {},
-  "logout": "निर्गमनम्",
+  "logout": "निर्गमनम् {type}",
   "@logout": {},
   "outlineColor": "रेखावर्ण",
   "@outlineColor": {},
@@ -146,5 +146,389 @@
   "skipButton": "उपेक्षा बटनम्",
   "@skipButton": {},
   "skipButtonDescription": "उपेक्षा बटनस्य कालावधि",
-  "@skipButtonDescription": {}
+  "@skipButtonDescription": {},
+  "ln": "लघुनोवेल",
+  "@ln": {},
+  "home": "गृह",
+  "@home": {},
+  "novel": "उपन्यास",
+  "@novel": {},
+  "series": "श्रृंखला",
+  "@series": {},
+  "season": "ऋतुः",
+  "@season": {},
+  "episode": "{count, plural, =1 {एपिसोड} other {एपिसोड}}",
+  "@episode": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "chapter": "{count, plural, =1 {अध्याय} other {अध्याय}}",
+  "@chapter": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "volume": "{count, plural, =1 {पुट} other {पुट}}",
+  "@volume": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "calendar": "पटलिका",
+  "@calendar": {},
+  "dtu": "अवतारितम्",
+  "@dtu": {},
+  "manageLayout": "रूपरेखायाः व्यवस्थापनम्",
+  "@manageLayout": {
+    "placeholders": {
+      "service": {
+        "type": "String",
+        "examples": [
+          "Anilist",
+          "MAL"
+        ]
+      },
+      "page": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Home",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "manageLayoutDescription": "रूपरेखायाः व्यवस्थापनविवरणम्",
+  "@manageLayoutDescription": {
+    "placeholders": {
+      "page": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Home",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "confirmLogout": "क्या त्वं निश्चितमस्ति यः त्वं निर्गमयितुम् इच्छसि?",
+  "@confirmLogout": {},
+  "gridView": "विस्तृतदृष्टिः",
+  "@gridView": {},
+  "listView": "सूचीदृष्टिः",
+  "@listView": {},
+  "chapterRead": "अध्यायपठनम्",
+  "@chapterRead": {},
+  "available": "उपलब्धम्",
+  "@available": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "installed": "स्थापितम्",
+  "@installed": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Extensions"
+        ]
+      }
+    }
+  },
+  "trending": "प्रवृत्तिम्",
+  "@trending": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "mostFavourite": "अत्यन्तप्रियतम्",
+  "@mostFavourite": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga",
+          "Manhwa"
+        ]
+      }
+    }
+  },
+  "nextSeason": "अनन्तरऋतु",
+  "@nextSeason": {},
+  "activity": "क्रिया",
+  "@activity": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "popular": "लोकप्रियः",
+  "@popular": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga",
+          "Manhwa"
+        ]
+      }
+    }
+  },
+  "topRated": "श्रेष्ठमूल्याङ्कनम्",
+  "@topRated": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga",
+          "Manhwa",
+          "Series"
+        ]
+      }
+    }
+  },
+  "thisSeason": "अद्यतकालीनऋतु",
+  "@thisSeason": {},
+  "planned": "योजनायाः",
+  "@planned": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "browse": "अन्वेष",
+  "@browse": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "favorite": "प्रिय",
+  "@favorite": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "onHold": "निरोधितम्",
+  "@onHold": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "noDropped": "न किमपि निष्कासितम्",
+  "@noDropped": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "continueReading": "पठनं यथावत् जारीकुरु",
+  "@continueReading": {},
+  "continueWatching": "दर्शनं यथावत् जारीकुरु",
+  "@continueWatching": {},
+  "pickColor": "रंगं चयनय",
+  "@pickColor": {},
+  "allCaughtUpNew": "सर्वं नवीनं प्राप्तं",
+  "@allCaughtUpNew": {},
+  "recommended": "सिफ़ारिशितम्",
+  "@recommended": {},
+  "author": "लेखकः",
+  "@author": {},
+  "averageDuration": "औसतकालः",
+  "@averageDuration": {},
+  "characters": "पात्राणि",
+  "@characters": {},
+  "collapseText": "पाठं संकुचय",
+  "@collapseText": {},
+  "comingSoon": "शिघ्रं आगच्छति",
+  "@comingSoon": {},
+  "description": "विवरणम्",
+  "@description": {},
+  "endDate": "समाप्तेः दिनाङ्कः",
+  "@endDate": {},
+  "expandText": "पाठं विस्तारित करें",
+  "@expandText": {},
+  "name": "नाम",
+  "@name": {},
+  "nameRomaji": "नाम रोमाजी",
+  "@nameRomaji": {},
+  "popularity": "लोकप्रियता",
+  "@popularity": {},
+  "prequel": "पूर्वकथा",
+  "@prequel": {},
+  "favorites": "प्रियाणि",
+  "@favorites": {},
+  "format": "स्वरूप",
+  "@format": {},
+  "meanScore": "औसतांकः",
+  "@meanScore": {},
+  "relations": "संबन्धाः",
+  "@relations": {},
+  "sequel": "उत्तरकथा",
+  "@sequel": {},
+  "source": "स्रोतः",
+  "@source": {},
+  "staff": "कर्मचारीः",
+  "@staff": {},
+  "startDate": "आरंभतिथि",
+  "@startDate": {},
+  "status": "स्थिति",
+  "@status": {},
+  "studio": "स्टूडियो",
+  "@studio": {},
+  "synonyms": "समानार्थकशब्दाः",
+  "@synonyms": {},
+  "tags": "टैग्स",
+  "@tags": {},
+  "total": "कूल",
+  "@total": {},
+  "totalEpisodes": "कुलएपिसोडः",
+  "@totalEpisodes": {},
+  "totalChapters": "कुलअध्यक्षाः",
+  "@totalChapters": {},
+  "kitsu": "Kitsu",
+  "@kitsu": {},
+  "loginTo": "प्रवेशयतु {service}",
+  "@loginTo": {
+    "placeholders": {
+      "service": {
+        "type": "String",
+        "examples": [
+          "Anilist",
+          "MyAnimeList",
+          "Kitsu",
+          "Discord"
+        ]
+      }
+    }
+  },
+  "manhwa": "मन्ह्वा",
+  "@manhwa": {},
+  "manhua": "मन्हुआ",
+  "@manhua": {},
+  "movie": "चित्रपट",
+  "@movie": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "genres": "वर्गाः",
+  "@genres": {},
+  "compactView": "संक्षिप्तदृष्टिः",
+  "@compactView": {},
+  "layout": "रूपरेखा",
+  "@layout": {},
+  "episodeWatched": "एपिसोडदर्शनम्",
+  "@episodeWatched": {},
+  "previousSeason": "पूर्वऋतु",
+  "@previousSeason": {},
+  "language": "भाषा",
+  "@language": {},
+  "droppedAnime": "निष्कासितं एनीमे",
+  "@droppedAnime": {},
+  "hiddenMedia": "गुप्तमाध्यमम्",
+  "@hiddenMedia": {},
+  "recommendationsEmptyMessage": "कोणपि सिफ़ारिशा न अस्ति",
+  "@recommendationsEmptyMessage": {},
+  "addToList": "सूच्यां सम्मिलय",
+  "@addToList": {},
+  "droppedManga": "निष्कासितं मंगा",
+  "@droppedManga": {},
+  "comments": "टिप्पण्यः",
+  "@comments": {},
+  "info": "सूचना",
+  "@info": {},
+  "list": "सूची",
+  "@list": {
+    "placeholders": {
+      "type": {
+        "examples": "Anime list",
+        "type": "String"
+      }
+    }
+  },
+  "options": "विकल्पाः",
+  "@options": {},
+  "read": "पठ",
+  "@read": {},
+  "recentUpdates": "नवीनतम् अद्यतनीकरणम्",
+  "@recentUpdates": {},
+  "search": "अन्वेषण",
+  "@search": {},
+  "scanlators": "पठ्यकाः",
+  "@scanlators": {},
+  "sort": "क्रमबद्धय",
+  "@sort": {},
+  "topAiring": "श्रेष्ठवायुक्रमेण",
+  "@topAiring": {},
+  "watch": "पश्य",
+  "@watch": {},
+  "utd": "नवनीकृतम्",
+  "@utd": {},
+  "noFavourites": "कोणपि प्रियं न अस्ति",
+  "@noFavourites": {},
+  "noHiddenMediaFound": "गुप्तमाध्यमं न लभते",
+  "@noHiddenMediaFound": {},
+  "noOnHold": "निरोधितं किमपि न अस्ति",
+  "@noOnHold": {},
+  "synopsis": "सार",
+  "@synopsis": {}
 }
