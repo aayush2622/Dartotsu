@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'dart:math';
 
+import 'package:combine/combine.dart';
 import 'package:dantotsu/Functions/Function.dart';
 import 'package:dantotsu/api/Anilist/Anilist.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_qjs/quickjs/ffi.dart';
 
 import '../../DataClass/Author.dart';

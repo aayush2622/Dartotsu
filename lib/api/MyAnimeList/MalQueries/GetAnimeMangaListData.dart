@@ -5,12 +5,12 @@ extension on MalQueries {
       "fields=mean,num_list_users,status,nsfw,mean,my_list_status,num_episodes,num_chapters,genres,media_type";
 
   Future<List<Media>> processMediaResponse(MediaResponse? data) async {
-    return await compute(
-        (data) =>
-            data
-                ?.where((m) => m.node != null)
-                .map((m) => Media.fromMal(m.node!))
-                .toList() ??
+    return await CombineWorker().executeWithArg(
+            (data) =>
+        data
+            ?.where((m) => m.node != null)
+            .map((m) => Media.fromMal(m.node!))
+            .toList() ??
             [],
         data?.data);
   }

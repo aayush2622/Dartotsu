@@ -1,7 +1,6 @@
-
-
 import 'package:dantotsu/Preferences/HiveDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
 import 'package:dantotsu/Preferences/HiveDataClasses/Selected/Selected.dart';
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import '../StorageProvider.dart';
@@ -18,6 +17,9 @@ void saveData<T>(Pref<T> pref, T value)=> PrefManager.setVal(pref, value);
 
 void saveCustomData<T>(String key, T value)=> PrefManager.setCustomVal(key, value);
 
+void removeData(Pref<dynamic> pref)=> PrefManager.removeVal(pref);
+
+Rx<T?> loadLiveCustomData<T>(String key)=> PrefManager.getLiveCustomVal(key);
 
 class Pref<T> {
   final Location location;
@@ -85,6 +87,7 @@ class PrefManager {
     return pref.defaultValue;
   }
 
+
   static void setCustomVal<T>(String key, T value) {
     _checkInitialization();
     final box = _getPrefBox(Location.Irrelevant);
@@ -94,7 +97,18 @@ class PrefManager {
   static T? getCustomVal<T>(String key) {
     _checkInitialization();
     final box = _getPrefBox(Location.Irrelevant);
-    return box.get(key) as T? ;
+    final value = box.get(key);
+    if (value is T) {
+      return value;
+    } else if (value is Map) {
+      if (T == Map<String, bool>) {
+        return Map<String, bool>.from(value) as T;
+      }
+      if (T == Map<String, String>) {
+        return Map<String, String>.from(value) as T;
+      }
+    }
+    return null;
   }
 
   static void removeVal(Pref<dynamic> pref) {
@@ -103,7 +117,20 @@ class PrefManager {
     box.delete(pref.key);
   }
 
-  // Helper method to check initialization
+  static Rx<T?> getLiveCustomVal<T>(String key) {
+    _checkInitialization();
+    final box = _getPrefBox(Location.Irrelevant);
+    final value = getCustomVal<T>(key);
+    final observable = Rx<T?>(value);
+
+
+    box.listenable(keys: [key]).addListener(() {
+      final value = getCustomVal<T>(key);
+      observable.value = value;
+    });
+    return observable;
+  }
+
   static void _checkInitialization() {
     if (_generalPreferences == null) {
       throw Exception('Hive not initialized. Call PrefManager.init() first.');

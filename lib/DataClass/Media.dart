@@ -1,9 +1,12 @@
+import 'package:dantotsu/Functions/string_extensions.dart';
+
 import '../Preferences/HiveDataClasses/Selected/Selected.dart';
 import '../api/Anilist/Data/fuzzyData.dart';
 import '../api/Anilist/Data/media.dart' as anilistApi;
 import '../api/Anilist/Data/others.dart';
 import '../api/EpisodeDetails/GetMediaIDs/GetMediaIDs.dart';
 import '../api/MyAnimeList/Data/media.dart' as malApi;
+import '../api/Simkl/Data/Media.dart' as simklApi;
 import 'Anime.dart';
 import 'Author.dart';
 import 'Character.dart';
@@ -151,8 +154,9 @@ class Media {
   static Media mediaData(anilistApi.Media apiMedia) {
     return Media(
       id: apiMedia.id,
-      idMAL: apiMedia.idMal ?? GetMediaIDs.fromID(type: AnimeIDType.anilistId, id: apiMedia.id)
-          ?.malId,
+      idMAL: apiMedia.idMal ??
+          GetMediaIDs.fromID(type: AnimeIDType.anilistId, id: apiMedia.id)
+              ?.malId,
       name: apiMedia.title?.english,
       nameRomaji: apiMedia.title?.romaji ?? '',
       userPreferredName: apiMedia.title?.userPreferred ?? '',
@@ -276,6 +280,27 @@ class Media {
                   apiMedia.numChapters != 0 ? apiMedia.numChapters : null,
             )
           : null,
+    );
+  }
+
+  static Media fromSimkl(simklApi.Anime apiMedia) {
+    var cover = 'https://wsrv.nl/?url=https://simkl.in/posters/${apiMedia.show?.poster}_m.webp';
+    return Media(
+      id: apiMedia.show!.ids!.simkl!,
+      idMAL: apiMedia.show!.ids!.mal?.toNullInt(),
+      nameRomaji: apiMedia.show!.title ?? '',
+      userPreferredName: apiMedia.show!.title ?? '',
+      cover: cover,
+      banner: cover,
+      userStatus: apiMedia.status?.name,
+      userProgress: apiMedia.watchedEpisodesCount,
+      userScore: (apiMedia.userRating?.toInt() ?? 0) * 10,
+      meanScore:  0,
+      format: apiMedia.animeType != null ? 'anime' : 'movie',
+      anime: Anime(
+        totalEpisodes: apiMedia.totalEpisodesCount,
+      ),
+      isAdult: false,
     );
   }
 }

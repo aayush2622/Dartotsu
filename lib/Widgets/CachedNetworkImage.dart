@@ -18,7 +18,10 @@ Widget cachedNetworkImage({
         child: placeholder.call(Get.context!, imageUrl ?? ""),
       );
     }
-    return Icon(Icons.image_not_supported, weight: width ?? 24,);
+    return SizedBox(
+      width: width,
+      height: height,
+    );
   }
 
   return CachedNetworkImage(

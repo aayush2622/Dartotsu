@@ -94,6 +94,7 @@ class PrefName {
   //Protection
   static const anilistToken = Pref(Location.Protected, 'AnilistToken', '');
   static const malToken = Pref(Location.Protected, 'MalToken', null);
+  static const simklToken = Pref(Location.Protected, 'SimklToken', '');
   static const discordToken = Pref(Location.Protected, 'DiscordToken', '');
   static const discordUserName =
       Pref(Location.Protected, 'discordUserName', '');

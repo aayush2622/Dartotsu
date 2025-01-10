@@ -149,7 +149,7 @@ Future<List<Media>> _mediaList(Page? media) async {
   if (media == null || media.media == null) {
     return [];
   }
-  return await compute(_processMediaPage, media.media!);
+  return await CombineWorker().executeWithArg(_processMediaPage, media.media!);
 }
 
 List<Media> _processMediaPage(List<api.Media> mediaItems) {

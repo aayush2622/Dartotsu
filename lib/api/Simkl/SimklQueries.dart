@@ -1,18 +1,35 @@
-  import 'package:dantotsu/DataClass/Media.dart';
+import 'package:collection/collection.dart';
+import 'package:combine/combine.dart';
+import 'package:dantotsu/DataClass/Media.dart' as media;
 
 import 'package:dantotsu/DataClass/SearchResults.dart';
 
 import '../../Services/Api/Queries.dart';
+import 'Data/User.dart';
+import 'Data/Media.dart';
+import 'Simkl.dart';
 
-class ExtensionsQueries extends  Queries  {
+part 'SimklQueries/GetUserData.dart';
+part 'SimklQueries/GetHomePageData.dart';
+
+class SimklQueries extends Queries {
+  SimklQueries(this.executeQuery);
+  Future<T?> Function<T>(
+    String url, {
+    Map<String, String>? headers,
+    bool withNoHeaders,
+    bool useToken,
+    bool show,
+  }) executeQuery;
+
   @override
-  Future<Map<String, List<Media>>> getAnimeList() {
+  Future<Map<String, List<media.Media>>> getAnimeList() {
     // TODO: implement getAnimeList
     throw UnimplementedError();
   }
 
   @override
-  Future<List<Media>> getCalendarData() {
+  Future<List<media.Media>> getCalendarData() {
     // TODO: implement getCalendarData
     throw UnimplementedError();
   }
@@ -24,37 +41,34 @@ class ExtensionsQueries extends  Queries  {
   }
 
   @override
-  Future<Map<String, List<Media>>> getMangaList() {
+  Future<Map<String, List<media.Media>>> getMangaList() {
     // TODO: implement getMangaList
     throw UnimplementedError();
   }
 
   @override
-  Future<Media?>? getMedia(int id, {bool mal = true}) {
+  Future<media.Media?>? getMedia(int id, {bool mal = true}) {
     // TODO: implement getMedia
     throw UnimplementedError();
   }
 
   @override
-  Future<Map<String, List<Media>>> getMediaLists({required bool anime, required int userId, String? sortOrder}) {
+  Future<Map<String, List<media.Media>>> getMediaLists({required bool anime, required int userId, String? sortOrder}) {
     // TODO: implement getMediaLists
     throw UnimplementedError();
   }
 
   @override
-  Future<bool>? getUserData() {
-    // TODO: implement getUserData
-    throw UnimplementedError();
-  }
+  Future<bool>? getUserData() => _getUserData();
 
   @override
-  Future<Map<String, List<Media>>>? initHomePage() {
-    // TODO: implement initHomePage
-    throw UnimplementedError();
-  }
+  Future<Map<String, List<media.Media>>>? initHomePage() => _initHomePage();
 
   @override
-  Future<Media?>? mediaDetails(Media media) => null;
+  Future<media.Media?>? mediaDetails(media.Media media) {
+    // TODO: implement mediaDetails
+    throw UnimplementedError();
+  }
 
   @override
   Future<SearchResults?> search({required String type, int? page, int? perPage, String? search, String? sort, List<String>? genres, List<String>? tags, String? status, String? source, String? format, String? countryOfOrigin, bool isAdult = false, bool? onList, List<String>? excludedGenres, List<String>? excludedTags, int? startYear, int? seasonYear, String? season, int? id, bool hd = false}) {

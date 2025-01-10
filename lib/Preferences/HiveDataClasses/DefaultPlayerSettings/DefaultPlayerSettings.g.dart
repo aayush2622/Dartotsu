@@ -28,13 +28,14 @@ class PlayerSettingsAdapter extends TypeAdapter<PlayerSettings> {
       showSubtitle: fields[2] as bool,
       subtitleBottomPadding: fields[9] as int,
       skipDuration: fields[10] as int,
+      subtitleWeight: fields[11] as int,
     );
   }
 
   @override
   void write(BinaryWriter writer, PlayerSettings obj) {
     writer
-      ..writeByte(11)
+      ..writeByte(12)
       ..writeByte(0)
       ..write(obj.speed)
       ..writeByte(1)
@@ -56,7 +57,9 @@ class PlayerSettingsAdapter extends TypeAdapter<PlayerSettings> {
       ..writeByte(9)
       ..write(obj.subtitleBottomPadding)
       ..writeByte(10)
-      ..write(obj.skipDuration);
+      ..write(obj.skipDuration)
+      ..writeByte(11)
+      ..write(obj.subtitleWeight);
   }
 
   @override

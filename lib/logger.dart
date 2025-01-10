@@ -12,11 +12,12 @@ class Logger {
 
       _logFile = File('${directory?.path}\\appLogs.txt'.fixSeparator);
 
-      if (await _logFile!.exists()) {
+      if (await _logFile!.exists() && await _logFile!.length() > 1024 * 1024) {
         await _logFile!.delete();
       }
-
-      await _logFile!.create();
+      if (!await _logFile!.exists()) {
+        await _logFile?.create();
+      }
   }
 
   static Future<void> log(String message) async {

@@ -13,7 +13,7 @@ import '../../Widgets/ScrollConfig.dart';
 import 'MediaLargeViewHolder.dart';
 import 'MediaPageSmallViewHolder.dart';
 import 'MediaViewHolder.dart';
-
+import 'MediaExpandedViewHolder.dart';
 class MediaAdaptor extends StatefulWidget {
   final int type;
   final List<Media> mediaList;
@@ -64,6 +64,8 @@ class MediaGridState extends State<MediaAdaptor> {
         return _buildVerticalList();
       case 3:
         return _buildStaggeredGrid();
+      case 4 :
+        return _buildExpandedHorizontalList();
       default:
         return const SizedBox();
     }
@@ -98,7 +100,44 @@ class MediaGridState extends State<MediaAdaptor> {
       ),
     );
   }
-
+  Widget _buildExpandedHorizontalList() {
+    var height = widget.isLarge ? 270.0 : 250.0;
+    return SizedBox(
+      height: height,
+      child: ScrollConfig(
+        context,
+        child: ListView.builder(
+          controller: widget.scrollController,
+          scrollDirection: Axis.horizontal,
+          itemCount: _mediaList.length,
+          itemBuilder: (context, index) {
+            final tag = _generateTag(index);
+            return Container(
+              width: 250,
+              margin: EdgeInsets.symmetric(horizontal: 6.5).copyWith(
+                left: Directionality.of(context) == TextDirection.rtl
+                    ? (index == _mediaList.length - 1 ? 24.0 : 6.5)
+                    : (index == 0 ? 24.0 : 6.5),
+                right: Directionality.of(context) == TextDirection.rtl
+                    ? (index == 0 ? 24.0 : 6.5)
+                    : (index == _mediaList.length - 1 ? 24.0 : 6.5),
+              ),
+              child: _buildAnimatedMediaItem(
+                child: MediaExpandedViewHolder(
+                  mediaInfo: _mediaList[index],
+                  isLarge: widget.isLarge,
+                  tag: tag,
+                ),
+                tag: tag,
+                index: index,
+                initialOffset: const Offset(1.0, 0.0),
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
   Widget _buildHorizontalList() {
     var height = widget.isLarge ? 270.0 : 250.0;
     return SizedBox(

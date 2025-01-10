@@ -64,7 +64,7 @@ class HomeScreenState extends State<HomeScreen> {
             delegate: SliverChildListDelegate([
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8),
-                child: Obx(() => _buildMediaContent(service)),
+                child: Obx(() => _buildMediaContent()),
               ),
             ]),
           ),
@@ -199,6 +199,7 @@ class HomeScreenState extends State<HomeScreen> {
   Widget _buildUserInfo(BaseServiceData data) {
     final theme = Theme.of(context).colorScheme;
     final isDarkMode = Provider.of<ThemeNotifier>(context).isDarkMode;
+    var home = context.currentService().homeScreen!;
     return Positioned(
         top: 36.statusBar(),
         left: 34.0,
@@ -231,9 +232,9 @@ class HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 const SizedBox(height: 2.0),
-                _buildInfoRow(getString.episodeWatched,
+                _buildInfoRow(home.firstInfoString,
                     data.episodesWatched.toString(), theme.primary),
-                _buildInfoRow(getString.chapterRead, data.chapterRead.toString(),
+                _buildInfoRow(home.secondInfoString, data.chapterRead.toString(),
                     theme.primary),
               ],
             ),
@@ -299,15 +300,16 @@ class HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildMediaContent(BaseHomeScreen service) {
+  Widget _buildMediaContent() {
+    var home = context.currentService().homeScreen!;
     return Column(
       children: [
-        ...service.mediaContent(context),
-        if (service.paging)
+        ...home.mediaContent(context),
+        if (home.paging)
           SizedBox(
             height: 216,
             child: Center(
-              child: !service.loadMore.value && service.canLoadMore.value
+              child: !home.loadMore.value && home.canLoadMore.value
                   ? const CircularProgressIndicator()
                   : const SizedBox(height: 216),
             ),

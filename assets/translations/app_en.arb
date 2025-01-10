@@ -4,6 +4,7 @@
   "anilist": "AniList",
   "mal": "MyAnimeList",
   "kitsu": "Kitsu",
+  "simkl": "Simkl",
   "discord": "Discord",
   "login": "Login",
   "loginTo": "Login to {service}",

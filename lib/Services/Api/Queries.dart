@@ -38,7 +38,7 @@ abstract class Queries {
 
   /// Retrieves a list of banner image URLs for the homepage.
   /// Returns a list of [String] representing the URLs.
-  Future<List<String?>> getBannerImages();
+  Future<List<String?>> getBannerImages() => Future.value([]);
 
   /// Fetches the anime list.
   /// Returns a map where the keys are list categories and values are lists of [Media] objects.

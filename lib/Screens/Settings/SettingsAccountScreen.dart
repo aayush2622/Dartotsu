@@ -9,6 +9,7 @@ import '../../Widgets/LoadSvg.dart';
 import '../../api/Anilist/Anilist.dart';
 import '../../api/Discord/Discord.dart';
 import '../../api/MyAnimeList/Mal.dart';
+import '../../api/Simkl/Simkl.dart';
 
 class SettingsAccountScreen extends StatefulWidget {
   const SettingsAccountScreen({super.key});
@@ -65,6 +66,21 @@ class SettingsAccountScreenState extends BaseSettingsScreen {
           ..setNegativeButton(getString.no, null)
           ..show(),
         onLogIn: () => Mal.login(context),
+      ),
+      _buildAccountSection(
+        context,
+        iconPath: 'assets/svg/simkl.svg',
+        title: getString.simkl,
+        isLoggedIn: Simkl.token,
+        username: Simkl.username,
+        avatarUrl: Simkl.avatar,
+        onLogOut: () => AlertDialogBuilder(context)
+          ..setTitle(getString.logout(getString.simkl))
+          ..setMessage(getString.confirmLogout)
+          ..setPositiveButton(getString.yes, Simkl.removeSavedToken)
+          ..setNegativeButton(getString.no, null)
+          ..show(),
+        onLogIn: () => Simkl.login(context),
       ),
       const SizedBox(height: 16),
       _buildAccountSection(

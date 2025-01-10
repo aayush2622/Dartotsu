@@ -1,8 +1,8 @@
 import 'package:collection/collection.dart';
+import 'package:combine/combine.dart';
 import 'package:dantotsu/DataClass/Media.dart';
 import 'package:dantotsu/DataClass/SearchResults.dart';
 import 'package:dantotsu/api/MyAnimeList/Data/userData.dart';
-import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 import '../../Preferences/PrefManager.dart';
@@ -31,12 +31,6 @@ class MalQueries extends Queries {
 
   @override
   Future<Map<String, List<Media>>> getAnimeList() => _getAnimeList();
-
-  @override
-  Future<List<String?>> getBannerImages() {
-    // not needed for MAL
-    throw UnimplementedError();
-  }
 
   @override
   Future<List<Media>> getCalendarData() {

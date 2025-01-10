@@ -33,7 +33,7 @@ class MalService extends MediaService {
   BaseMangaScreen? get mangaScreen => Get.put(MalMangaScreen(Mal));
 
   @override
-  BaseLoginScreen get loginScreen => Get.put(MalLoginScreen(Mal));
+  BaseLoginScreen? get loginScreen => Get.put(MalLoginScreen(Mal));
 }
 
 class MalLoginScreen extends BaseLoginScreen {

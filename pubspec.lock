@@ -238,6 +238,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.19.1"
+  combine:
+    dependency: "direct main"
+    description:
+      name: combine
+      sha256: c16464b55d140871fbab5b37909e1808c2f020e46f9ba7deca59d40faabb6008
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.5.7"
   convert:
     dependency: transitive
     description:
@@ -443,6 +451,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.4.1"
+  flutter_dotenv:
+    dependency: "direct main"
+    description:
+      name: flutter_dotenv
+      sha256: b7c7be5cd9f6ef7a78429cabd2774d3c4af50e79cb2b7593e3d5d763ef95c61b
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.2.1"
   flutter_inappwebview:
     dependency: "direct main"
     description:
