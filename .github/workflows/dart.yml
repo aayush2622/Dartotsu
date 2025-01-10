@@ -264,7 +264,7 @@ jobs:
         env:
           SIMKL_SECRET: ${{ secrets.SIMKL_SECRET }}
         run: |
-          echo "SIMKL_SECRET=$SIMKL_SECRET" > .env
+          echo "SIMKL_SECRET= $SIMKL_SECRET" > .env
 
       # Step 5: Fetch Flutter dependencies
       - name: Fetch Flutter dependencies
