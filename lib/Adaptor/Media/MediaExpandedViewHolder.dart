@@ -1,7 +1,9 @@
 import 'package:dantotsu/DataClass/Media.dart';
+import 'package:dantotsu/Functions/Extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../Preferences/PrefManager.dart';
 import '../../Widgets/CachedNetworkImage.dart';
 import 'Widgets/MediaReleaseingIndicator.dart';
 import 'Widgets/MediaScoreBadge.dart';
@@ -21,10 +23,26 @@ class MediaExpandedViewHolder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context).colorScheme;
-    var thumb= ''.obs;
+    var thumb = ''.obs;
+    var key = '${context.currentService().getName}_thumbList';
+    var data = loadCustomData<Map<dynamic, dynamic>>(key);
 
+    var list = data.map(
+      (key, value) => MapEntry(
+        key.toString(),
+        (value as Map<dynamic, dynamic>).map(
+          (k, v) => MapEntry(
+            k.toString(),
+            v as String?,
+          ),
+        ),
+      ),
+    );
 
-
+    thumb.value = list[mediaInfo.id.toString()]
+            ?[((mediaInfo.userProgress ?? 0) + 1).toString()] ??
+        mediaInfo.cover ??
+        '';
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -41,7 +59,7 @@ class MediaExpandedViewHolder extends StatelessWidget {
     );
   }
 
-  Widget _buildCoverImage(BuildContext context,String? thumb) {
+  Widget _buildCoverImage(BuildContext context, String? thumb) {
     return Stack(
       children: [
         Hero(
@@ -155,7 +173,7 @@ class MediaExpandedViewHolder extends StatelessWidget {
 
 String formatMediaInfo(Media media) {
   final nextAiringEpisode = media.anime?.nextAiringEpisode;
-  final totalEpisodes =  "${media.anime?.totalEpisodes ?? "~"}";
+  final totalEpisodes = "${media.anime?.totalEpisodes ?? "~"}";
   return nextAiringEpisode != null && nextAiringEpisode != -1
       ? "$nextAiringEpisode | $totalEpisodes"
       : totalEpisodes;

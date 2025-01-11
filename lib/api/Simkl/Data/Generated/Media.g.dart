@@ -10,10 +10,61 @@ Media _$MediaFromJson(Map<String, dynamic> json) => Media(
       anime: (json['anime'] as List<dynamic>?)
           ?.map((e) => Anime.fromJson(e as Map<String, dynamic>))
           .toList(),
+      show: (json['shows'] as List<dynamic>?)
+          ?.map((e) => ShowElement.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      movies: (json['movies'] as List<dynamic>?)
+          ?.map((e) => MovieElement.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$MediaToJson(Media instance) => <String, dynamic>{
       'anime': instance.anime,
+      'shows': instance.show,
+      'movies': instance.movies,
+    };
+
+MovieElement _$MovieElementFromJson(Map<String, dynamic> json) => MovieElement(
+      lastWatchedAt: json['last_watched_at'] == null
+          ? null
+          : DateTime.parse(json['last_watched_at'] as String),
+      status: $enumDecodeNullable(_$StatusEnumMap, json['status']),
+      userRating: json['user_rating'],
+      watchedEpisodesCount: (json['watched_episodes_count'] as num?)?.toInt(),
+      totalEpisodesCount: (json['total_episodes_count'] as num?)?.toInt(),
+      notAiredEpisodesCount:
+          (json['not_aired_episodes_count'] as num?)?.toInt(),
+      movie: json['movie'] == null
+          ? null
+          : MovieMovie.fromJson(json['movie'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$MovieElementToJson(MovieElement instance) =>
+    <String, dynamic>{
+      'last_watched_at': instance.lastWatchedAt?.toIso8601String(),
+      'status': _$StatusEnumMap[instance.status],
+      'user_rating': instance.userRating,
+      'watched_episodes_count': instance.watchedEpisodesCount,
+      'total_episodes_count': instance.totalEpisodesCount,
+      'not_aired_episodes_count': instance.notAiredEpisodesCount,
+      'movie': instance.movie,
+    };
+
+MovieMovie _$MovieMovieFromJson(Map<String, dynamic> json) => MovieMovie(
+      title: json['title'] as String?,
+      poster: json['poster'] as String?,
+      year: (json['year'] as num?)?.toInt(),
+      ids: json['ids'] == null
+          ? null
+          : Ids.fromJson(json['ids'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$MovieMovieToJson(MovieMovie instance) =>
+    <String, dynamic>{
+      'title': instance.title,
+      'poster': instance.poster,
+      'year': instance.year,
+      'ids': instance.ids,
     };
 
 Anime _$AnimeFromJson(Map<String, dynamic> json) => Anime(
@@ -46,6 +97,7 @@ Map<String, dynamic> _$AnimeToJson(Anime instance) => <String, dynamic>{
       'show': instance.show,
       'anime_type': _$AnimeTypeEnumMap[instance.animeType],
     };
+
 const _$StatusEnumMap = {
   Status.COMPLETED: 'completed',
   Status.DROPPED: 'dropped',
@@ -75,6 +127,36 @@ Map<String, dynamic> _$ShowToJson(Show instance) => <String, dynamic>{
       'poster': instance.poster,
       'year': instance.year,
       'ids': instance.ids,
+    };
+
+ShowElement _$ShowElementFromJson(Map<String, dynamic> json) => ShowElement(
+      lastWatchedAt: json['last_watched_at'] == null
+          ? null
+          : DateTime.parse(json['last_watched_at'] as String),
+      status: $enumDecodeNullable(_$StatusEnumMap, json['status']),
+      userRating: json['user_rating'],
+      lastWatched: json['last_watched'] as String?,
+      nextToWatch: json['next_to_watch'] as String?,
+      watchedEpisodesCount: (json['watched_episodes_count'] as num?)?.toInt(),
+      totalEpisodesCount: (json['total_episodes_count'] as num?)?.toInt(),
+      notAiredEpisodesCount:
+          (json['not_aired_episodes_count'] as num?)?.toInt(),
+      show: json['show'] == null
+          ? null
+          : Show.fromJson(json['show'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$ShowElementToJson(ShowElement instance) =>
+    <String, dynamic>{
+      'last_watched_at': instance.lastWatchedAt?.toIso8601String(),
+      'status': _$StatusEnumMap[instance.status],
+      'user_rating': instance.userRating,
+      'last_watched': instance.lastWatched,
+      'next_to_watch': instance.nextToWatch,
+      'watched_episodes_count': instance.watchedEpisodesCount,
+      'total_episodes_count': instance.totalEpisodesCount,
+      'not_aired_episodes_count': instance.notAiredEpisodesCount,
+      'show': instance.show,
     };
 
 Ids _$IdsFromJson(Map<String, dynamic> json) => Ids(

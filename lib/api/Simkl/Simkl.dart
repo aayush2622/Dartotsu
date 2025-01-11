@@ -47,6 +47,10 @@ class SimklController extends BaseServiceData {
     unreadNotificationCount = 0;
     run.value = true;
     isInitialized.value = false;
+    removeCustomData('simklUserActivity');
+    removeCustomData('simklUserAnimeList');
+    removeCustomData('simklUserShowList');
+    removeCustomData('simklUserMovieList');
     Refresh.refreshService(RefreshId.Simkl);
   }
 

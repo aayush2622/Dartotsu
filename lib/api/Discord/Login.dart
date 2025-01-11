@@ -111,13 +111,7 @@ class LinuxLoginState extends State<LinuxLogin> {
   }
 
   Future<void> _initializeWebview() async {
-    final controller = await WebviewWindow.create(
-      configuration: CreateConfiguration(
-        windowHeight: 600,
-        windowWidth: 800,
-        title: 'Discord Login',
-      ),
-    );
+    final controller = await WebviewWindow.create();
 
     _controller = controller;
 

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:isar/isar.dart';
 import '../StorageProvider.dart';
 import 'IsarDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
@@ -14,11 +15,17 @@ T loadData<T>(Pref<T> pref) => PrefManager.getVal(pref);
 
 T loadCustomData<T>(String key) => PrefManager.getCustomVal(key);
 
+Future<Rx<T>?> loadLiveCustomData<T>(String key) => PrefManager.getLiveCustomVal(key);
+
 void saveData<T>(Pref<T> pref, T value) => PrefManager.setVal(pref, value);
 
 void saveCustomData<T>(String key, T value) => PrefManager.setCustomVal(key, value);
 
+void saveLiveCustomData<T>(String key, T value) => PrefManager.setLiveCustomVal(key, value);
+
 void removeData(Pref<dynamic> pref) => PrefManager.removeVal(pref);
+
+void removeCustomData(String key) => PrefManager.removeCustomVal(key);
 
 class Pref<T> {
   final Location location;
@@ -111,16 +118,6 @@ class PrefManager {
       }
     }
   }
-
-  static Future<void> _cacheData<T>(
-      Future<List<T>> itemsFuture, Location location) async {
-    final items = await itemsFuture;
-    for (var item in items) {
-      final key = (item as dynamic).key;
-      _cache[location]?[key] = item;
-    }
-  }
-
   static void setVal<T>(Pref<T> pref, T value) async {
     _checkInitialization();
     _cache[pref.location]?[pref.key] = value;
@@ -156,30 +153,37 @@ class PrefManager {
     return null;
   }
 
-  /*static void setLiveVal<T>(Pref<T> pref, T value) async {
+  static void setLiveCustomVal<T>(String key, T value,{Location location = Location.Irrelevant}) async {
     _checkInitialization();
-    _cache[pref.location]?[pref.key] = value;
-    final box = _getPrefBox(pref.location);
+    _cache[location]?[key] = value;
+    final box = _getPrefBox(location);
     final isar = await box?.future;
     final keyValue = KeyValue()
-      ..key = pref.key
+      ..key = key
       ..value = value;
     isar?.keyValues.putSync(keyValue);
   }
 
-  static Future<T?> getLiveVal<T>(Pref<T> pref, void Function(T) onData) async {
+  static Future<Rx<T>?> getLiveCustomVal<T>(String key, {Location location = Location.Irrelevant}) async {
     _checkInitialization();
-    final box = _getPrefBox(pref.location);
+    final box = _getPrefBox(location);
     final isar = await box?.future;
-    final stream = isar?.keyValues.getByKeySync(pref.key);
-    return stream?.value as T;
-  }*/
+    final stream = Rx(isar?.keyValues.getByKeySync(key)?.value as T);
+    return stream;
+  }
 
   static void removeVal(Pref<dynamic> pref) async {
     _checkInitialization();
     final box = _getPrefBox(pref.location);
     final isar = await box?.future;
     return isar?.writeTxn(() => isar.keyValues.deleteByKey(pref.key));
+  }
+
+  static void removeCustomVal(String key, {Location location = Location.Irrelevant}) async {
+    _checkInitialization();
+    final box = _getPrefBox(location);
+    final isar = await box?.future;
+    return isar?.writeTxn(() => isar.keyValues.deleteByKey(key));
   }
 
   static Future<void> _writeToIsar<T>(Isar? isar, String key, T value) async {

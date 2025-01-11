@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:dantotsu/Functions/Function.dart';
+import 'package:dantotsu/Preferences/PrefManager.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -20,12 +21,19 @@ class SimklHomeScreen extends BaseHomeScreen {
   var animeContinue = Rx<List<Media>?>(null);
   var animePlanned = Rx<List<Media>?>(null);
   var animeDropped = Rx<List<Media>?>(null);
+  var showContinue = Rx<List<Media>?>(null);
+  var showPlanned = Rx<List<Media>?>(null);
+  var showDropped = Rx<List<Media>?>(null);
+  var movieContinue = Rx<List<Media>?>(null);
+  var moviePlanned = Rx<List<Media>?>(null);
+  var movieDropped = Rx<List<Media>?>(null);
 
   Future<void> getUserId() async {
     if (Simkl.token.isNotEmpty) {
       await Simkl.query!.getUserData();
     }
   }
+
   @override
   get firstInfoString => 'Anime Episode Count';
 
@@ -45,17 +53,23 @@ class SimklHomeScreen extends BaseHomeScreen {
 
   void _setMediaList(Map<String, List<Media>> res) {
     var listImage = <String?>[];
-    animeContinue.value = res['watching'];
-    animePlanned.value = res['planned'];
-    animeDropped.value = res['dropped'];
+    animeContinue.value = res['watchingAnime'] ?? [];
+    animePlanned.value = res['plannedAnime'] ?? [];
+    animeDropped.value = res['droppedAnime'] ?? [];
+    showContinue.value = res['watchingShows'] ?? [];
+    showPlanned.value = res['plannedShows'] ?? [];
+    showDropped.value = res['droppedShows'] ?? [];
+    movieContinue.value = res['watchingMovies'] ?? [];
+    moviePlanned.value = res['plannedMovies'] ?? [];
+    movieDropped.value = res['droppedMovies'] ?? [];
 
-    listImage.add(
-        (List.from(res["watching"] ?? [])
-          ..shuffle(Random())).first.banner);
-    listImage
-        .add((List.from(res["watching"] ?? [])
-      ..shuffle(Random())).first.banner);
-    if (listImage.isNotEmpty) {
+    if (res['watchingAnime'] != null && res['watchingAnime']!.isNotEmpty) {
+      listImage.add((List.from(res["watchingAnime"] ?? [])..shuffle(Random()))
+          .first
+          .banner);
+      listImage.add((List.from(res["watchingAnime"] ?? [])..shuffle(Random()))
+          .first
+          .banner);
       listImages.value = listImage;
     }
   }
@@ -63,16 +77,16 @@ class SimklHomeScreen extends BaseHomeScreen {
   @override
   List<Widget> mediaContent(BuildContext context) {
     final mediaSections = [
-    MediaSectionData(
-      type: 0,
-      title: getString.continueWatching,
-      pairTitle: 'Continue Watching',
-      list: animeContinue.value,
-      emptyIcon: Icons.movie_filter_rounded,
-      emptyMessage: getString.allCaughtUpNew,
-      emptyButtonText: getString.browse(getString.anime),
-      emptyButtonOnPressed: () => navbar?.onClick(0),
-    ),
+      MediaSectionData(
+        type: 0,
+        title: getString.continueWatching,
+        pairTitle: 'Continue Watching Anime',
+        list: animeContinue.value,
+        emptyIcon: Icons.movie_filter_rounded,
+        emptyMessage: getString.allCaughtUpNew,
+        emptyButtonText: getString.browse(getString.anime),
+        emptyButtonOnPressed: () => navbar?.onClick(0),
+      ),
       MediaSectionData(
         type: 0,
         title: getString.planned(getString.anime),
@@ -91,8 +105,75 @@ class SimklHomeScreen extends BaseHomeScreen {
         emptyIcon: Icons.movie_filter_rounded,
         emptyMessage: getString.noDropped(getString.anime),
       ),
+      MediaSectionData(
+        type: 0,
+        title: getString.continueWatching,
+        pairTitle: 'Continue Watching Series',
+        list: showContinue.value,
+        emptyIcon: Icons.movie_filter_rounded,
+        emptyMessage: getString.allCaughtUpNew,
+        emptyButtonText: getString.browse(getString.series),
+        emptyButtonOnPressed: () => navbar?.onClick(2),
+      ),
+      MediaSectionData(
+        type: 0,
+        title: getString.planned(getString.series),
+        pairTitle: 'Planned Series',
+        list: showPlanned.value,
+        emptyIcon: Icons.movie_filter_rounded,
+        emptyMessage: getString.allCaughtUpNew,
+        emptyButtonText: getString.browse(getString.series),
+        emptyButtonOnPressed: () => navbar?.onClick(2),
+      ),
+      MediaSectionData(
+        type: 0,
+        title: 'Dropped Series',
+        pairTitle: 'Dropped Series',
+        list: showDropped.value,
+        emptyIcon: Icons.movie_filter_rounded,
+        emptyMessage: getString.noDropped(getString.series),
+      ),
+      MediaSectionData(
+        type: 0,
+        title: getString.continueWatching,
+        pairTitle: 'Continue Watching Movies',
+        list: movieContinue.value,
+        emptyIcon: Icons.movie_filter_rounded,
+        emptyMessage: getString.allCaughtUpNew,
+        emptyButtonText: getString.browse(getString.movie(2)),
+        emptyButtonOnPressed: () => navbar?.onClick(2),
+      ),
+      MediaSectionData(
+        type: 0,
+        title: getString.planned(getString.movie(2)),
+        pairTitle: 'Planned Movies',
+        list: moviePlanned.value,
+        emptyIcon: Icons.movie_filter_rounded,
+        emptyMessage: getString.allCaughtUpNew,
+        emptyButtonText: getString.browse(getString.movie(2)),
+        emptyButtonOnPressed: () => navbar?.onClick(2),
+      ),
+      MediaSectionData(
+        type: 0,
+        title: 'Dropped Movies',
+        pairTitle: 'Dropped Movies',
+        list: movieDropped.value,
+        emptyIcon: Icons.movie_filter_rounded,
+        emptyMessage: getString.noDropped(getString.movie(2)),
+      ),
     ];
-    final result = mediaSections.map((section) {
+
+    final homeLayoutMap = loadData(PrefName.simklHomeLayout);
+    final sectionMap = {
+      for (var section in mediaSections) section.pairTitle : section
+    };
+    final sectionWidgets = homeLayoutMap.entries
+        .where((entry) => entry.value)
+        .map((entry) => sectionMap[entry.key])
+        .whereType<MediaSectionData>()
+        .toList();
+
+    final result = sectionWidgets.map((section) {
       return MediaSection(
         context: context,
         type: section.type,
@@ -122,6 +203,11 @@ class SimklHomeScreen extends BaseHomeScreen {
     animeContinue.value = null;
     animePlanned.value = null;
     animeDropped.value = null;
+    showContinue.value = null;
+    showPlanned.value = null;
+    showDropped.value = null;
+    movieContinue.value = null;
+    moviePlanned.value = null;
+    movieDropped.value = null;
   }
-
 }

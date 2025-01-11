@@ -283,7 +283,7 @@ class Media {
     );
   }
 
-  static Media fromSimkl(simklApi.Anime apiMedia) {
+  static Media fromSimklAnime(simklApi.Anime apiMedia) {
     var cover = 'https://wsrv.nl/?url=https://simkl.in/posters/${apiMedia.show?.poster}_m.webp';
     return Media(
       id: apiMedia.show!.ids!.simkl!,
@@ -297,6 +297,46 @@ class Media {
       userScore: (apiMedia.userRating?.toInt() ?? 0) * 10,
       meanScore:  0,
       format: apiMedia.animeType != null ? 'anime' : 'movie',
+      anime: Anime(
+        totalEpisodes: apiMedia.totalEpisodesCount,
+      ),
+      isAdult: false,
+    );
+  }
+  static Media fromSimklSeries(simklApi.ShowElement apiMedia) {
+    var cover = 'https://wsrv.nl/?url=https://simkl.in/posters/${apiMedia.show?.poster}_m.webp';
+    return Media(
+      id: apiMedia.show!.ids!.simkl!,
+      idMAL: apiMedia.show?.ids!.mal?.toNullInt(),
+      nameRomaji: apiMedia.show?.title ?? '',
+      userPreferredName: apiMedia.show?.title ?? '',
+      cover: cover,
+      banner: cover,
+      userStatus: apiMedia.status?.name,
+      userProgress: apiMedia.watchedEpisodesCount,
+      userScore: (apiMedia.userRating?.toInt() ?? 0) * 10,
+      meanScore:  0,
+      format:'tvShow',
+      anime: Anime(
+        totalEpisodes: apiMedia.totalEpisodesCount,
+      ),
+      isAdult: false,
+    );
+  }
+  static Media fromSimklMovies(simklApi.MovieElement apiMedia) {
+    var cover = 'https://wsrv.nl/?url=https://simkl.in/posters/${apiMedia.movie?.poster}_m.webp';
+    return Media(
+      id: apiMedia.movie!.ids!.simkl!,
+      idMAL: apiMedia.movie!.ids!.mal?.toNullInt(),
+      nameRomaji: apiMedia.movie!.title ?? '',
+      userPreferredName: apiMedia.movie!.title ?? '',
+      cover: cover,
+      banner: cover,
+      userStatus: apiMedia.status?.name,
+      userProgress: apiMedia.watchedEpisodesCount,
+      userScore: (apiMedia.userRating?.toInt() ?? 0) * 10,
+      meanScore:  0,
+      format:'movie',
       anime: Anime(
         totalEpisodes: apiMedia.totalEpisodesCount,
       ),

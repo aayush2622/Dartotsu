@@ -173,15 +173,22 @@ class AnimeWatchScreenState extends BaseWatchScreen<AnimeWatchScreen> {
           _viewModel.fillerEpisodesList.value?[number]?.filler == true;
     });
     var key = '${context.currentService().getName}_thumbList';
-    Map<String, Map<String, String?>>? thumbList = loadCustomData(key);
+    Map<dynamic, dynamic>? t = loadCustomData(key);
 
+    var thumbList = (t)?.map(
+          (key, value) => MapEntry(
+        key.toString(),
+        (value as Map<dynamic, dynamic>).map(
+              (k, v) => MapEntry(k.toString(), v as String?),
+        ),
+      ),
+    ) ?? {};
     for (var i in episodeList.values) {
-      thumbList ??= {};
-
       thumbList[mediaData.id.toString()] ??= {};
 
       thumbList[mediaData.id.toString()]![i.number] = i.thumb;
     }
 
+    saveLiveCustomData(key, thumbList);
   }
 }

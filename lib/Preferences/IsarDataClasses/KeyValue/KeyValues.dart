@@ -41,7 +41,7 @@ extension KeyValueX on KeyValue {
       intListValue = value;
     } else if (value is List<bool>) {
       boolListValue = value;
-    } else if (value is Map<String, dynamic>) {
+    } else if (value is Map<dynamic, dynamic>) {
       serializedMapValue = jsonEncode(value); // Serialize the Map
     } else {
       throw UnsupportedError('${value.runtimeType} is not supported');

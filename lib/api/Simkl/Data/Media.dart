@@ -9,14 +9,73 @@ part 'Generated/Media.g.dart';
 class Media {
   @JsonKey(name: "anime")
   List<Anime>? anime;
-
+  @JsonKey(name: "shows")
+  List<ShowElement>? show;
+  @JsonKey(name: "movies")
+  List<MovieElement>? movies;
   Media({
     this.anime,
+    this.show,
+    this.movies,
   });
 
   factory Media.fromJson(Map<String, dynamic> json) => _$MediaFromJson(json);
 
   Map<String, dynamic> toJson() => _$MediaToJson(this);
+}
+@JsonSerializable()
+class MovieElement {
+  @JsonKey(name: "last_watched_at")
+  DateTime? lastWatchedAt;
+  @JsonKey(name: "status")
+  Status? status;
+  @JsonKey(name: "user_rating")
+  dynamic userRating;
+  @JsonKey(name: "watched_episodes_count")
+  int? watchedEpisodesCount;
+  @JsonKey(name: "total_episodes_count")
+  int? totalEpisodesCount;
+  @JsonKey(name: "not_aired_episodes_count")
+  int? notAiredEpisodesCount;
+  @JsonKey(name: "movie")
+  MovieMovie? movie;
+
+  MovieElement({
+    this.lastWatchedAt,
+    this.status,
+    this.userRating,
+    this.watchedEpisodesCount,
+    this.totalEpisodesCount,
+    this.notAiredEpisodesCount,
+    this.movie,
+  });
+
+  factory MovieElement.fromJson(Map<String, dynamic> json) => _$MovieElementFromJson(json);
+
+  Map<String, dynamic> toJson() => _$MovieElementToJson(this);
+}
+
+@JsonSerializable()
+class MovieMovie {
+  @JsonKey(name: "title")
+  String? title;
+  @JsonKey(name: "poster")
+  String? poster;
+  @JsonKey(name: "year")
+  int? year;
+  @JsonKey(name: "ids")
+  Ids? ids;
+
+  MovieMovie({
+    this.title,
+    this.poster,
+    this.year,
+    this.ids,
+  });
+
+  factory MovieMovie.fromJson(Map<String, dynamic> json) => _$MovieMovieFromJson(json);
+
+  Map<String, dynamic> toJson() => _$MovieMovieToJson(this);
 }
 
 @JsonSerializable()
@@ -102,6 +161,43 @@ class Show {
   factory Show.fromJson(Map<String, dynamic> json) => _$ShowFromJson(json);
 
   Map<String, dynamic> toJson() => _$ShowToJson(this);
+}
+@JsonSerializable()
+class ShowElement {
+  @JsonKey(name: "last_watched_at")
+  DateTime? lastWatchedAt;
+  @JsonKey(name: "status")
+  Status? status;
+  @JsonKey(name: "user_rating")
+  dynamic userRating;
+  @JsonKey(name: "last_watched")
+  String? lastWatched;
+  @JsonKey(name: "next_to_watch")
+  String? nextToWatch;
+  @JsonKey(name: "watched_episodes_count")
+  int? watchedEpisodesCount;
+  @JsonKey(name: "total_episodes_count")
+  int? totalEpisodesCount;
+  @JsonKey(name: "not_aired_episodes_count")
+  int? notAiredEpisodesCount;
+  @JsonKey(name: "show")
+  Show? show;
+
+  ShowElement({
+    this.lastWatchedAt,
+    this.status,
+    this.userRating,
+    this.lastWatched,
+    this.nextToWatch,
+    this.watchedEpisodesCount,
+    this.totalEpisodesCount,
+    this.notAiredEpisodesCount,
+    this.show,
+  });
+
+  factory ShowElement.fromJson(Map<String, dynamic> json) => _$ShowElementFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ShowElementToJson(this);
 }
 
 @JsonSerializable()

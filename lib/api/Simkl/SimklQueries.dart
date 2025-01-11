@@ -1,10 +1,14 @@
+import 'dart:convert';
+
 import 'package:collection/collection.dart';
 import 'package:combine/combine.dart';
 import 'package:dantotsu/DataClass/Media.dart' as media;
 
 import 'package:dantotsu/DataClass/SearchResults.dart';
+import 'package:dantotsu/Preferences/PrefManager.dart';
 
 import '../../Services/Api/Queries.dart';
+import 'Data/Activity.dart';
 import 'Data/User.dart';
 import 'Data/Media.dart';
 import 'Simkl.dart';
