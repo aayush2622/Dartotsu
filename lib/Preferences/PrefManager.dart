@@ -88,11 +88,26 @@ class PrefManager {
       final box = _getPrefBox(location);
       final isar = await box?.future;
       if (isar != null) {
-        _cacheData<KeyValue>(isar.keyValues.where().findAll(), location);
-        _cacheData<ShowResponse>(isar.showResponses.where().findAll(), location);
-        _cacheData<Selected>(isar.selecteds.where().findAll(), location);
-        _cacheData<ResponseToken>(isar.responseTokens.where().findAll(), location);
-        _cacheData<PlayerSettings>(isar.playerSettings.where().findAll(), location);
+        final keyValues = await isar.keyValues.where().findAll();
+        for (var item in keyValues) {
+          _cache[location]?[item.key] = item.value;
+        }
+        final showResponse = await isar.showResponses.where().findAll();
+        for (var item in showResponse) {
+          _cache[location]?[item.key] = item;
+        }
+        final selected = await isar.selecteds.where().findAll();
+        for (var item in selected) {
+          _cache[location]?[item.key] = item;
+        }
+        final responseToken = await isar.responseTokens.where().findAll();
+        for (var item in responseToken) {
+          _cache[location]?[item.key] = item;
+        }
+        final playerSettings = await isar.playerSettings.where().findAll();
+        for (var item in playerSettings) {
+          _cache[location]?[item.key] = item;
+        }
       }
     }
   }
@@ -192,7 +207,8 @@ class PrefManager {
   static void _checkInitialization() {
     if (_generalPreferences == null) {
       throw Exception(
-          'Preferences not initialized. Call PrefManager2.init() first.',);
+          'Preferences not initialized. Call PrefManager.init() first.',
+      );
     }
   }
 
