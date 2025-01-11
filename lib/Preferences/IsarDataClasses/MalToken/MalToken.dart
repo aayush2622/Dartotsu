@@ -1,17 +1,17 @@
-import 'package:hive/hive.dart';
 
+import 'package:isar/isar.dart';
 part 'MalToken.g.dart';
 
 
-@HiveType(typeId: 2)
+@collection
 class ResponseToken {
-  @HiveField(0)
+  Id id = Isar.autoIncrement;
+  @Index(unique: true, replace: true)
+  late String key;
+
   final String tokenType;
-  @HiveField(1)
   int expiresIn;
-  @HiveField(2)
   final String accessToken;
-  @HiveField(3)
   final String refreshToken;
 
   ResponseToken({

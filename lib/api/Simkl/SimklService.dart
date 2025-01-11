@@ -19,10 +19,10 @@ class SimklService extends MediaService {
   BaseServiceData get data => Simkl;
 
   @override
-  BaseHomeScreen? get homeScreen => Get.put(SimklHomeScreen(Simkl));
+  BaseHomeScreen get homeScreen => Get.put(SimklHomeScreen(Simkl),tag: "SimklHomeScreen");
 
   @override
-  BaseLoginScreen? get loginScreen => Get.put(SimklLoginScreen(Simkl));
+  BaseLoginScreen get loginScreen => Get.put(SimklLoginScreen(Simkl),tag: "SimklLoginScreen");
 
 }
 

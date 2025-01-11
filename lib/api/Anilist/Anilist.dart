@@ -84,9 +84,7 @@ class AnilistController extends BaseServiceData {
   bool getSavedToken() {
     token.value = PrefManager.getVal(PrefName.anilistToken);
 
-    if(token.isNotEmpty) {
-      query?.getUserData();
-    }
+    if(token.isNotEmpty) query?.getUserData();
 
     return token.isNotEmpty;
   }

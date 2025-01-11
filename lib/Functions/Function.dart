@@ -46,7 +46,7 @@ enum RefreshId {
   Kitsu,
   Simkl,;
 
-  List<int> get ids => List.generate(3, (index) => baseId + index);
+  List<int> get ids => List.generate(4, (index) => baseId + index);
 
   int get baseId {
     switch (this) {

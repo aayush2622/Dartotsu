@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:math';
 
-import 'package:dantotsu/Preferences/HiveDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
+import 'package:dantotsu/Preferences/IsarDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
 import 'package:dantotsu/Preferences/PrefManager.dart';
 import 'package:dantotsu/Theme/LanguageSwitcher.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +15,7 @@ import 'package:volume_controller/volume_controller.dart';
 import '../../../../../../Adaptor/Episode/EpisodeAdaptor.dart';
 import '../../../../../../DataClass/Episode.dart';
 import '../../../../../../DataClass/Media.dart' as m;
-import '../../../../../../Preferences/HiveDataClasses/Selected/Selected.dart';
+import '../../../../../../Preferences/IsarDataClasses/Selected/Selected.dart';
 import '../../../../../../Services/ServiceSwitcher.dart';
 import '../../../../../../Widgets/ScrollConfig.dart';
 import '../../../../../../api/Mangayomi/Eval/dart/model/video.dart' as v;

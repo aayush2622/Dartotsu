@@ -183,6 +183,5 @@ class AnimeWatchScreenState extends BaseWatchScreen<AnimeWatchScreen> {
       thumbList[mediaData.id.toString()]![i.number] = i.thumb;
     }
 
-    saveCustomData(key, thumbList);
   }
 }

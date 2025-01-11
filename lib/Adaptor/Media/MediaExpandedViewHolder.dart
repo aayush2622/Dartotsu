@@ -1,9 +1,7 @@
 import 'package:dantotsu/DataClass/Media.dart';
-import 'package:dantotsu/Functions/Extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../Preferences/PrefManager.dart';
 import '../../Widgets/CachedNetworkImage.dart';
 import 'Widgets/MediaReleaseingIndicator.dart';
 import 'Widgets/MediaScoreBadge.dart';
@@ -24,14 +22,9 @@ class MediaExpandedViewHolder extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context).colorScheme;
     var thumb= ''.obs;
-    var key = '${context.currentService().getName}_thumbList';
 
-    var listener = loadLiveCustomData<Map<String,Map<String,String?>>>(key);
-    thumb.value = listener.value?[mediaInfo.id.toString()]?[((mediaInfo.userProgress ?? 0) + 1).toString()] ?? mediaInfo.cover ?? '';
 
-    ever(listener, (v){
-      thumb.value = v?[mediaInfo.id.toString()]?[((mediaInfo.userProgress ?? 0) + 1).toString()] ?? mediaInfo.cover ?? '';
-    });
+
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

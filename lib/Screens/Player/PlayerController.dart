@@ -5,7 +5,7 @@ import 'package:dantotsu/DataClass/Episode.dart';
 import 'package:dantotsu/DataClass/Media.dart' as m;
 import 'package:dantotsu/Functions/Function.dart';
 import 'package:dantotsu/Functions/string_extensions.dart';
-import 'package:dantotsu/Preferences/HiveDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
+import 'package:dantotsu/Preferences/IsarDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
 import 'package:dantotsu/Preferences/PrefManager.dart';
 import 'package:dantotsu/Widgets/AlertDialogBuilder.dart';
 import 'package:dantotsu/Widgets/CustomBottomDialog.dart';

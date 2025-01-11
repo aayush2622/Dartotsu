@@ -45,15 +45,17 @@ class SimklController extends BaseServiceData {
     episodesWatched = null;
     chapterRead = null;
     unreadNotificationCount = 0;
+    run.value = true;
+    isInitialized.value = false;
     Refresh.refreshService(RefreshId.Simkl);
   }
 
   @override
   Future<void> saveToken(String token) async {
     PrefManager.setVal(PrefName.simklToken, token);
+    this.token.value = token;
     run.value = true;
     isInitialized.value = false;
-    this.token.value = token;
     query?.getUserData();
     Refresh.refreshService(RefreshId.Simkl);
   }

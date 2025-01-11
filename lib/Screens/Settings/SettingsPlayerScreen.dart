@@ -10,7 +10,7 @@ import '../../Adaptor/Settings/SettingsAdaptor.dart';
 import '../../DataClass/Anime.dart';
 import '../../DataClass/Media.dart';
 import '../../DataClass/Setting.dart';
-import '../../Preferences/HiveDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
+import '../../Preferences/IsarDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
 import '../../Preferences/PrefManager.dart';
 
 import '../../StorageProvider.dart';

@@ -1,6 +1,6 @@
 import 'package:dantotsu/Functions/string_extensions.dart';
 
-import '../Preferences/HiveDataClasses/Selected/Selected.dart';
+import '../Preferences/IsarDataClasses/Selected/Selected.dart';
 import '../api/Anilist/Data/fuzzyData.dart';
 import '../api/Anilist/Data/media.dart' as anilistApi;
 import '../api/Anilist/Data/others.dart';
