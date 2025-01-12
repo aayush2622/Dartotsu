@@ -185,6 +185,8 @@ class MalController extends BaseServiceData {
     debugPrint("Remaining Mal requests: ${rateLimiter.remainingRequests}");
 
     final jsonResponse = json.decode(response.body);
+    if (jsonResponse == null) return null;
+
     return TypeFactory.get<T>(jsonResponse);
   }
 }

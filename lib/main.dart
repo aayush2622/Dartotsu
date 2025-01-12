@@ -55,6 +55,7 @@ void main(List<String> args) async {
     },
     (error, stackTrace) {
       Logger.log('Uncaught error: $error\n$stackTrace');
+      debugPrint('Uncaught error: $error\n$stackTrace');
     },
     zoneSpecification: ZoneSpecification(
       print: (Zone self, ZoneDelegate parent, Zone zone, String message) {

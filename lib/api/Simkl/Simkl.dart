@@ -99,6 +99,8 @@ class SimklController extends BaseServiceData {
     debugPrint("Remaining Simkl requests: ${rateLimiter.remainingRequests}");
 
     final jsonResponse = json.decode(response.body);
+    if (jsonResponse == null) return null;
+
     return TypeFactory.get<T>(jsonResponse);
   }
 }

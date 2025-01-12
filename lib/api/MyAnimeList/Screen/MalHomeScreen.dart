@@ -78,11 +78,13 @@ class MalHomeScreen extends BaseHomeScreen {
     mangaPlanned.value = res["PlanToRead"] ?? [];
     hidden.value = res["hidden"] ?? [];
 
-    listImage.add(
-        (List.from(res["Watching"] ?? [])..shuffle(Random())).first.banner);
-    listImage
-        .add((List.from(res["Reading"] ?? [])..shuffle(Random())).first.banner);
-    if (listImage.isNotEmpty) {
+    if (res['Watching'] != null && res['Watching']!.isNotEmpty) {
+      listImage.add((List.from(res["Watching"] ?? [])..shuffle(Random()))
+          .first
+          .banner);
+      listImage.add((List.from(res["Watching"] ?? [])..shuffle(Random()))
+          .first
+          .banner);
       listImages.value = listImage;
     }
   }

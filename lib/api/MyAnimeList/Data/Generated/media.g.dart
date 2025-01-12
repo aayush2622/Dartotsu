@@ -98,14 +98,23 @@ MyListStatus _$MyListStatusFromJson(Map<String, dynamic> json) => MyListStatus(
       isRewatching: json['is_rewatching'] as bool?,
       updatedAt: json['updated_at'] == null
           ? null
-          : DateTime.parse(json['updated_at'] as String),
+          : DateTime.parse(formatDate(json['updated_at'] as String)),
       startDate: json['start_date'] == null
           ? null
-          : DateTime.parse(json['start_date'] as String),
+          : DateTime.parse(formatDate(json['start_date'] as String)),
       finishDate: json['finish_date'] == null
           ? null
-          : DateTime.parse(json['finish_date'] as String),
+          : DateTime.parse(formatDate(json['finish_date'] as String)),
     );
+
+String formatDate(String date) {
+  if (date.length == 4) {
+    return "$date-01-01";
+  } else if (date.length == 7) {
+    return "$date-01";
+  }
+  return date;
+}
 
 Map<String, dynamic> _$MyListStatusToJson(MyListStatus instance) =>
     <String, dynamic>{

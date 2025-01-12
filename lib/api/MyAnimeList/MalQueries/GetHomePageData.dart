@@ -74,6 +74,7 @@ extension on MalQueries {
       returnMap['hidden'] = removedMedia;
       return returnMap;
     } catch (e) {
+      Logger.log('Error in initHomePage $e');
       return {};
     }
   }

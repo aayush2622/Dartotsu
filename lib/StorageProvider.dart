@@ -60,7 +60,7 @@ class StorageProvider {
     final appDir = await getApplicationDocumentsDirectory();
 
     if (Platform.isIOS || Platform.isMacOS) {
-      final dbDir = path.join(appDir.path, 'Dartotsu', subPath ?? '');
+      final dbDir = path.join(appDir.path, 'Dartotsu', subPath ?? '').fixSeparator;
       await Directory(dbDir).create(recursive: true);
       return Directory(dbDir);
     }
