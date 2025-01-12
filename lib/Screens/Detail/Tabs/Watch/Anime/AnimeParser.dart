@@ -80,11 +80,12 @@ class AnimeParser extends BaseParser {
   }
 
   void getEpisode(MManga? media, Source source) async {
-    if (media == null || media.link == null){
+    if (media == null || media.link == null) {
       episodeList.value = <String, Episode>{};
       errorType.value = ErrorType.NotFound;
       return;
     }
+
     MManga? m;
     try {
       m = await getDetail(url: media.link!, source: source).timeout(Duration(seconds: 5));
@@ -101,39 +102,45 @@ class AnimeParser extends BaseParser {
       errorType.value = ErrorType.NoResult;
       return;
     }
+
     var isFirst = true;
     var shouldNormalize = false;
     var additionalIndex = 0;
+    var episodeNumbers = <String, int>{};
 
     episodeList.value = Map.fromEntries(
       chapters.reversed.mapIndexed((index, chapter) {
-            final episode = MChapterToEpisode(chapter, media);
+        final episode = MChapterToEpisode(chapter, media);
 
-            if (isFirst) {
-              isFirst = false;
-              if (episode.number.toDouble() > 3.0) {
-                shouldNormalize = true;
-              }
-            }
+        if (isFirst) {
+          isFirst = false;
+          if (episode.number.toDouble() > 3.0) {
+            shouldNormalize = true;
+          }
+        }
 
-            if (shouldNormalize) {
-              if (episode.number.toDouble() % 1 != 0) {
-                additionalIndex--;
-                var remainder = (episode.number.toDouble() % 1)
-                    .toStringAsFixed(2)
-                    .toDouble();
-                episode.number =
-                    (index + 1 + remainder + additionalIndex).toString();
-              } else {
-                episode.number = (index + 1 + additionalIndex).toString();
-              }
-            }
+        if (shouldNormalize) {
+          if (episode.number.toDouble() % 1 != 0) {
+            additionalIndex--;
+            var remainder = (episode.number.toDouble() % 1).toStringAsFixed(2).toDouble();
+            episode.number = (index + 1 + remainder + additionalIndex).toString();
+          } else {
+            episode.number = (index + 1 + additionalIndex).toString();
+          }
+        }
 
-            return MapEntry(episode.number, episode);
-          }),
+        var baseNumber = episode.number;
+        if (episodeNumbers.containsKey(baseNumber)) {
+          episodeNumbers[baseNumber] = episodeNumbers[baseNumber]! + 1;
+          episode.number = '$baseNumber.${episodeNumbers[baseNumber]}';
+        } else {
+          episodeNumbers[baseNumber] = 1;
+        }
+
+        return MapEntry(episode.number, episode);
+      }),
     );
   }
-
   var episodeDataLoaded = false.obs;
 
   Future<void> getEpisodeData(Media mediaData) async {

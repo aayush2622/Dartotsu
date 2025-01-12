@@ -31,6 +31,10 @@ class MovieElement {
   Status? status;
   @JsonKey(name: "user_rating")
   dynamic userRating;
+  @JsonKey(name: "rating")
+  double? rating;
+  @JsonKey(name: "release_status")
+  String? releaseStatus;
   @JsonKey(name: "watched_episodes_count")
   int? watchedEpisodesCount;
   @JsonKey(name: "total_episodes_count")
@@ -44,6 +48,8 @@ class MovieElement {
     this.lastWatchedAt,
     this.status,
     this.userRating,
+    this.rating,
+    this.releaseStatus,
     this.watchedEpisodesCount,
     this.totalEpisodesCount,
     this.notAiredEpisodesCount,
@@ -86,6 +92,10 @@ class Anime {
   Status? status;
   @JsonKey(name: "user_rating")
   int? userRating;
+  @JsonKey(name: "rating")
+  double? rating;
+  @JsonKey(name: "release_status")
+  String? releaseStatus;
   @JsonKey(name: "last_watched")
   String? lastWatched;
   @JsonKey(name: "next_to_watch")
@@ -105,6 +115,8 @@ class Anime {
     this.lastWatchedAt,
     this.status,
     this.userRating,
+    this.rating,
+    this.releaseStatus,
     this.lastWatched,
     this.nextToWatch,
     this.watchedEpisodesCount,
@@ -175,6 +187,10 @@ class ShowElement {
   dynamic userRating;
   @JsonKey(name: "last_watched")
   String? lastWatched;
+  @JsonKey(name: "rating")
+  double? rating;
+  @JsonKey(name: "release_status")
+  String? releaseStatus;
   @JsonKey(name: "next_to_watch")
   String? nextToWatch;
   @JsonKey(name: "watched_episodes_count")
@@ -190,6 +206,8 @@ class ShowElement {
     this.lastWatchedAt,
     this.status,
     this.userRating,
+    this.rating,
+    this.releaseStatus,
     this.lastWatched,
     this.nextToWatch,
     this.watchedEpisodesCount,
@@ -330,3 +348,100 @@ class EnumValues<T> {
     return reverseMap;
   }
 }
+
+@JsonSerializable()
+class MediaRatings{
+  @JsonKey(name: "anime")
+  List<Ratings>? animeRatings;
+  @JsonKey(name: "shows")
+  List<Ratings>? showRatings;
+  @JsonKey(name: "movies")
+  List<Ratings>? movieRatings;
+  MediaRatings({
+    this.animeRatings,
+    this.showRatings,
+    this.movieRatings,
+
+  });
+
+  factory MediaRatings.fromJson(Map<String, dynamic> json) => _$MediaRatingsFromJson(json);
+
+  Map<String, dynamic> toJson() => _$MediaRatingsToJson(this);
+
+}
+
+class Ratings {
+  int? id;
+  ReleaseStatus? releaseStatus;
+  int? rank;
+  SimklRating? simkl;
+
+  Ratings({
+    this.id,
+    this.releaseStatus,
+    this.rank,
+    this.simkl,
+  });
+
+  factory Ratings.fromJson(Map<String, dynamic> json) => Ratings(
+    id: json["id"],
+    releaseStatus: releaseStatusValues.map[json["release_status"]],
+    rank: json["rank"],
+    simkl: json["simkl"] == null ? null : SimklRating.fromJson(json["simkl"]),
+  );
+
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "release_status": releaseStatusValues.reverse[releaseStatus],
+    "rank": rank,
+    "simkl": simkl?.toJson(),
+  };
+}
+
+enum ReleaseStatus {
+  ENDED,
+  ONGOING,
+  UPCOMING,
+  RUMORED,
+  PLANNED,
+  IN_PRODUCTION,
+  POST_PRODUCTION,
+  CANCELED
+
+}
+
+final releaseStatusValues = EnumValues({
+  "ended": ReleaseStatus.ENDED,
+  "ongoing": ReleaseStatus.ONGOING,
+  "upcoming": ReleaseStatus.UPCOMING,
+  "rumored": ReleaseStatus.RUMORED,
+  "planned": ReleaseStatus.PLANNED,
+  "in production": ReleaseStatus.IN_PRODUCTION,
+  "post production": ReleaseStatus.POST_PRODUCTION,
+  "canceled": ReleaseStatus.CANCELED
+});
+
+class SimklRating {
+  double? rating;
+  int? votes;
+  String? droprate;
+
+  SimklRating({
+    this.rating,
+    this.votes,
+    this.droprate,
+  });
+
+  factory SimklRating.fromJson(Map<String, dynamic> json) => SimklRating(
+    rating: json["rating"]?.toDouble(),
+    votes: json["votes"],
+    droprate: json["droprate"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "rating": rating,
+    "votes": votes,
+    "droprate": droprate,
+  };
+}
+

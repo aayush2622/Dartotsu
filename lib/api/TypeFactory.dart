@@ -64,5 +64,6 @@ class TypeFactory {
     TypeFactory.create<simkl.User>((json) => simkl.User.fromJson(json));
     TypeFactory.create<simkl.Stats>((json) => simkl.Stats.fromJson(json));
     TypeFactory.create<simkl.Activity>((json) => simkl.Activity.fromJson(json));
+    TypeFactory.create<simkl.MediaRatings>((json) => simkl.MediaRatings.fromJson(json));
   }
 }

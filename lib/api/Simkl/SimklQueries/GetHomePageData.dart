@@ -11,9 +11,10 @@ Future<List<media.Media>> processShowsResponse(Media? data) async {
       (data) => data?.map((m) => media.Media.fromSimklSeries(m)).toList() ?? [],
       data?.show);
 }
+
 Future<List<media.Media>> processMovieResponse(Media? data) async {
   return await compute(
-          (data) => data?.map((m) => media.Media.fromSimklMovies(m)).toList() ?? [],
+      (data) => data?.map((m) => media.Media.fromSimklMovies(m)).toList() ?? [],
       data?.movies);
 }
 
@@ -21,28 +22,17 @@ extension on SimklQueries {
   Future<Map<String, List<media.Media>>> _initHomePage() async {
     final list = <String, List<media.Media>>{};
 
-    Future<Media?> fetchOrLoadLocalData(String key, String url,{bool useLocal = true}) async {
-      final localData = loadCustomData<String?>(key);
-      if (localData != null && localData.isNotEmpty && useLocal == true) {
-        return Media.fromJson(jsonDecode(localData));
-      } else {
-        final data = await executeQuery<Media>(url);
-        saveCustomData(key, jsonEncode(data));
-        return data;
-      }
-    }
-
     final animeList = await fetchOrLoadLocalData(
       'simklUserAnimeList',
-      'https://api.simkl.com/sync/all-items/anime/?extended=full',
+      'anime',
     );
     final showList = await fetchOrLoadLocalData(
       'simklUserShowList',
-      'https://api.simkl.com/sync/all-items/shows/?extended=full',
+      'shows',
     );
     final movieList = await fetchOrLoadLocalData(
       'simklUserMovieList',
-      'https://api.simkl.com/sync/all-items/movies/?extended=full',
+      'movies',
     );
 
     var activity = await executeQuery<Activity>(
@@ -60,10 +50,14 @@ extension on SimklQueries {
     );
 
     if (lastActivity.all != activity?.all) {
-      var isAnimeRemoved = lastActivity.anime?.removedFromList != activity?.anime?.removedFromList;
-      var isShowRemoved = lastActivity.tvShows?.removedFromList != activity?.tvShows?.removedFromList;
-      var isMovieRemoved = lastActivity.movies?.removedFromList != activity?.movies?.removedFromList;
-      if (lastActivity.anime?.all != activity?.anime?.all && !(isAnimeRemoved)) {
+      var isAnimeRemoved = lastActivity.anime?.removedFromList !=
+          activity?.anime?.removedFromList;
+      var isShowRemoved = lastActivity.tvShows?.removedFromList !=
+          activity?.tvShows?.removedFromList;
+      var isMovieRemoved = lastActivity.movies?.removedFromList !=
+          activity?.movies?.removedFromList;
+      if (lastActivity.anime?.all != activity?.anime?.all &&
+          !(isAnimeRemoved)) {
         var updaterAnimeList = await executeQuery<Media>(
           'https://api.simkl.com/sync/all-items/anime/?extended=full&date_from=${lastActivity.anime?.all}',
         );
@@ -81,16 +75,15 @@ extension on SimklQueries {
           }
           saveCustomData('simklUserAnimeList', jsonEncode(animeList));
         }
-      }else if (isAnimeRemoved){
+      } else if (isAnimeRemoved) {
         final updaterAnimeList = await fetchOrLoadLocalData(
-          'simklUserAnimeList',
-          'https://api.simkl.com/sync/all-items/anime/?extended=full',
-          useLocal: false
-        );
+            'simklUserAnimeList', 'anime',
+            useLocal: false);
         animeList?.anime = updaterAnimeList?.anime;
         saveCustomData('simklUserAnimeList', jsonEncode(updaterAnimeList));
       }
-      if (lastActivity.tvShows?.all != activity?.tvShows?.all && !isShowRemoved) {
+      if (lastActivity.tvShows?.all != activity?.tvShows?.all &&
+          !isShowRemoved) {
         var updaterShowList = await executeQuery<Media>(
           'https://api.simkl.com/sync/all-items/shows/?extended=full&date_from=${lastActivity.tvShows?.all}',
         );
@@ -108,24 +101,23 @@ extension on SimklQueries {
           }
           saveCustomData('simklUserShowList', jsonEncode(showList));
         }
-      }else if (isShowRemoved){
+      } else if (isShowRemoved) {
         final updaterShowList = await fetchOrLoadLocalData(
-          'simklUserShowList',
-          'https://api.simkl.com/sync/all-items/shows/?extended=full',
-          useLocal: false
-        );
+            'simklUserShowList', 'shows',
+            useLocal: false);
         showList?.show = updaterShowList?.show;
         saveCustomData('simklUserShowList', jsonEncode(updaterShowList));
       }
-      if (lastActivity.movies?.all != activity?.movies?.all && !isMovieRemoved) {
+      if (lastActivity.movies?.all != activity?.movies?.all &&
+          !isMovieRemoved) {
         var updaterMovieList = await executeQuery<Media>(
           'https://api.simkl.com/sync/all-items/movies/?extended=full&date_from=${lastActivity.movies?.all}',
         );
         if (movieList != null && updaterMovieList != null) {
           for (var updatedMedia in updaterMovieList.movies!) {
             final index = movieList.movies?.indexWhere(
-                  (media) =>
-              media.movie?.ids?.simkl == updatedMedia.movie?.ids?.simkl,
+              (media) =>
+                  media.movie?.ids?.simkl == updatedMedia.movie?.ids?.simkl,
             );
             if (index != -1 && index != null) {
               movieList.movies?[index] = updatedMedia;
@@ -135,12 +127,10 @@ extension on SimklQueries {
           }
           saveCustomData('simklUserMovieList', jsonEncode(movieList));
         }
-      } else if (isMovieRemoved){
+      } else if (isMovieRemoved) {
         final updaterMovieList = await fetchOrLoadLocalData(
-          'simklUserMovieList',
-          'https://api.simkl.com/sync/all-items/movies/?extended=full',
-          useLocal: false
-        );
+            'simklUserMovieList', 'movies',
+            useLocal: false);
         movieList?.movies = updaterMovieList?.movies;
         saveCustomData('simklUserMovieList', jsonEncode(updaterMovieList));
       }
@@ -173,5 +163,46 @@ extension on SimklQueries {
     list['plannedMovies'] = groupedMovieList['PLANNING'] ?? [];
     list['onHoldMovies'] = groupedMovieList['HOLD'] ?? [];
     return list;
+  }
+  Future<Media?> fetchOrLoadLocalData(String key, String type,
+      {bool useLocal = true}) async {
+    final localData = loadCustomData<String?>(key);
+    if (localData != null && localData.isNotEmpty && useLocal == true) {
+      return Media.fromJson(jsonDecode(localData));
+    } else {
+      final data = await executeQuery<Media>(
+          'https://api.simkl.com/sync/all-items/$type/?extended=full');
+      final ratings = await executeQuery<MediaRatings>(
+        'https://api.simkl.com/ratings/$type?user_watchlist=watching,plantowatch,dropped,hold&fields=simkl,rank,release_status&client_id=${SimklLogin.clientId}',
+        mapKey: type,
+      );
+      if (type == 'anime') {
+        data?.anime?.forEach((element) {
+          final rating = ratings?.animeRatings?.firstWhereOrNull(
+            (r) => r.id == element.show?.ids?.simkl,
+          );
+          element.rating = rating?.simkl?.rating;
+          element.releaseStatus = rating?.releaseStatus?.name;
+        });
+      } else if (type == 'shows') {
+        data?.show?.forEach((element) {
+          final rating = ratings?.showRatings?.firstWhereOrNull(
+            (r) => r.id == element.show?.ids?.simkl,
+          );
+          element.rating = rating?.simkl?.rating;
+          element.releaseStatus = rating?.releaseStatus?.name;
+        });
+      } else if (type == 'movies') {
+        data?.movies?.forEach((element) {
+          final rating = ratings?.movieRatings?.firstWhereOrNull(
+            (r) => r.id == element.movie?.ids?.simkl,
+          );
+          element.rating = rating?.simkl?.rating;
+          element.releaseStatus = rating?.releaseStatus?.name;
+        });
+      }
+      saveCustomData(key, jsonEncode(data));
+      return data;
+    }
   }
 }

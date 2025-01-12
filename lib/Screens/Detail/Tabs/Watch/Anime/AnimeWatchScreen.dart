@@ -189,6 +189,5 @@ class AnimeWatchScreenState extends BaseWatchScreen<AnimeWatchScreen> {
       thumbList[mediaData.id.toString()]![i.number] = i.thumb;
     }
 
-    saveLiveCustomData(key, Map<dynamic, dynamic>.from(thumbList));
   }
 }

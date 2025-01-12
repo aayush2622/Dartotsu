@@ -13,7 +13,7 @@ class MPages {
         list: json['list'] != null
             ? (json['list'] as List).map((e) => MManga.fromJson(e)).toList()
             : [],
-        hasNextPage: json['hasNextPage']);
+        hasNextPage: json['hasNextPage'] ?? false);
   }
 
   Map<String, dynamic> toJson() => {

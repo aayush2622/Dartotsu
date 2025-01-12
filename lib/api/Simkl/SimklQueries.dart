@@ -12,18 +12,22 @@ import 'Data/Activity.dart';
 import 'Data/User.dart';
 import 'Data/Media.dart';
 import 'Simkl.dart';
+import 'Login.dart' as SimklLogin;
 
 part 'SimklQueries/GetUserData.dart';
+
 part 'SimklQueries/GetHomePageData.dart';
 
 class SimklQueries extends Queries {
   SimklQueries(this.executeQuery);
+
   Future<T?> Function<T>(
     String url, {
     Map<String, String>? headers,
     bool withNoHeaders,
     bool useToken,
     bool show,
+    String mapKey,
   }) executeQuery;
 
   @override
@@ -57,7 +61,8 @@ class SimklQueries extends Queries {
   }
 
   @override
-  Future<Map<String, List<media.Media>>> getMediaLists({required bool anime, required int userId, String? sortOrder}) {
+  Future<Map<String, List<media.Media>>> getMediaLists(
+      {required bool anime, required int userId, String? sortOrder}) {
     // TODO: implement getMediaLists
     throw UnimplementedError();
   }
@@ -69,15 +74,31 @@ class SimklQueries extends Queries {
   Future<Map<String, List<media.Media>>>? initHomePage() => _initHomePage();
 
   @override
-  Future<media.Media?>? mediaDetails(media.Media media) {
-    // TODO: implement mediaDetails
-    throw UnimplementedError();
-  }
+  Future<media.Media?>? mediaDetails(media.Media media) => null;
 
   @override
-  Future<SearchResults?> search({required String type, int? page, int? perPage, String? search, String? sort, List<String>? genres, List<String>? tags, String? status, String? source, String? format, String? countryOfOrigin, bool isAdult = false, bool? onList, List<String>? excludedGenres, List<String>? excludedTags, int? startYear, int? seasonYear, String? season, int? id, bool hd = false}) {
+  Future<SearchResults?> search(
+      {required String type,
+      int? page,
+      int? perPage,
+      String? search,
+      String? sort,
+      List<String>? genres,
+      List<String>? tags,
+      String? status,
+      String? source,
+      String? format,
+      String? countryOfOrigin,
+      bool isAdult = false,
+      bool? onList,
+      List<String>? excludedGenres,
+      List<String>? excludedTags,
+      int? startYear,
+      int? seasonYear,
+      String? season,
+      int? id,
+      bool hd = false}) {
     // TODO: implement search
     throw UnimplementedError();
   }
-
 }

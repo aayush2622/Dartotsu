@@ -295,8 +295,9 @@ class Media {
       userStatus: apiMedia.status?.name,
       userProgress: apiMedia.watchedEpisodesCount,
       userScore: (apiMedia.userRating?.toInt() ?? 0) * 10,
-      meanScore:  0,
+      meanScore:  ((apiMedia.rating ?? 0) * 10).toInt(),
       format: apiMedia.animeType != null ? 'anime' : 'movie',
+      status: mapSimklAiringStatus(apiMedia.releaseStatus?.toLowerCase() ?? 'UNKNOWN'),
       anime: Anime(
         totalEpisodes: apiMedia.totalEpisodesCount,
       ),
@@ -315,7 +316,8 @@ class Media {
       userStatus: apiMedia.status?.name,
       userProgress: apiMedia.watchedEpisodesCount,
       userScore: (apiMedia.userRating?.toInt() ?? 0) * 10,
-      meanScore:  0,
+      meanScore: ((apiMedia.rating ?? 0) * 10).toInt(),
+      status: mapSimklAiringStatus(apiMedia.releaseStatus?.toLowerCase() ?? 'UNKNOWN'),
       format:'tvShow',
       anime: Anime(
         totalEpisodes: apiMedia.totalEpisodesCount,
@@ -335,12 +337,25 @@ class Media {
       userStatus: apiMedia.status?.name,
       userProgress: apiMedia.watchedEpisodesCount,
       userScore: (apiMedia.userRating?.toInt() ?? 0) * 10,
-      meanScore:  0,
+      meanScore:  ((apiMedia.rating ?? 0) * 10).toInt(),
+      status: mapSimklAiringStatus(apiMedia.releaseStatus?.toLowerCase() ?? 'UNKNOWN'),
       format:'movie',
       anime: Anime(
         totalEpisodes: apiMedia.totalEpisodesCount,
       ),
       isAdult: false,
     );
+  }
+  static String mapSimklAiringStatus(String status) {
+    switch (status) {
+      case 'ended':
+        return 'FINISHED';
+      case 'ongoing':
+        return 'RELEASING';
+      case 'upcoming':
+        return 'NOT_YET_RELEASED';
+      default:
+        return status.toUpperCase();
+    }
   }
 }

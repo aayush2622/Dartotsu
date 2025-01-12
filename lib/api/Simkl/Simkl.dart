@@ -71,6 +71,7 @@ class SimklController extends BaseServiceData {
         bool withNoHeaders = false,
         bool useToken = true,
         bool show = true,
+        String mapKey = '',
       }) async {
     if (!rateLimiter.canMakeRequest()) {
       final secondsLeft =
@@ -99,9 +100,13 @@ class SimklController extends BaseServiceData {
     debugPrint("Remaining Simkl requests: ${rateLimiter.remainingRequests}");
 
     final jsonResponse = json.decode(response.body);
-    if (jsonResponse == null) return null;
-
-    return TypeFactory.get<T>(jsonResponse);
+    if (jsonResponse is Map<String, dynamic>) {
+      return TypeFactory.get<T>(jsonResponse);
+    } else if (jsonResponse is List) {
+       var map = {mapKey: jsonResponse};
+       return TypeFactory.get<T>(map);
+    }
+    return null;
   }
 }
 class RateLimiter {

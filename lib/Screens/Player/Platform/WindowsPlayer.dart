@@ -44,15 +44,21 @@ class WindowsPlayer extends BasePlayer {
 
   @override
   Future<void> open(String url, Duration duration) async {
-    videoController.player.open(Media(url,start: duration));
+    videoController.player.open(Media(url, start: duration));
   }
 
   @override
-  Future<void> setSubtitle(
-          String subtitleUri, String language, bool isUri) =>
+  Future<void> setSubtitle(String subtitleUri, String language, bool isUri) =>
       videoController.player.setSubtitleTrack(isUri
           ? SubtitleTrack.uri(subtitleUri, title: language)
-          : SubtitleTrack(subtitleUri, language, language, uri: false,data: false));
+          : SubtitleTrack(subtitleUri, language, language,
+              uri: false, data: false));
+
+  @override
+  Future<void> setAudio(String audioUri, String language, bool isUri) async =>
+      await videoController.player.setAudioTrack(isUri
+          ? AudioTrack.uri(audioUri, title: language)
+          : AudioTrack(audioUri, language, language, uri: false));
 
   @override
   void dispose() {
@@ -110,7 +116,8 @@ class WindowsPlayer extends BasePlayer {
             ),
           ],
         ),
-        padding: EdgeInsets.only(bottom: settings.subtitleBottomPadding.toDouble()),
+        padding:
+            EdgeInsets.only(bottom: settings.subtitleBottomPadding.toDouble()),
       ),
       controller: videoController,
       controls: null,
