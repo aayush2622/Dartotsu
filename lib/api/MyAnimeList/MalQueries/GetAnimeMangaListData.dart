@@ -5,7 +5,7 @@ extension on MalQueries {
       "fields=mean,num_list_users,status,nsfw,mean,my_list_status,num_episodes,num_chapters,genres,media_type";
 
   Future<List<Media>> processMediaResponse(MediaResponse? data) async {
-    return await CombineWorker().executeWithArg(
+    return await compute(
             (data) =>
         data
             ?.where((m) => m.node != null)

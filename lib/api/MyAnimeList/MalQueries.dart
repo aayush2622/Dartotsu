@@ -1,8 +1,8 @@
 import 'package:collection/collection.dart';
-import 'package:combine/combine.dart';
 import 'package:dantotsu/DataClass/Media.dart';
 import 'package:dantotsu/DataClass/SearchResults.dart';
 import 'package:dantotsu/api/MyAnimeList/Data/userData.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 import '../../Preferences/PrefManager.dart';

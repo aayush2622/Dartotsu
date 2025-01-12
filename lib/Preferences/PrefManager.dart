@@ -178,14 +178,14 @@ class PrefManager {
     final isar = await box?.future;
     return isar?.writeTxn(() => isar.keyValues.deleteByKey(pref.key));
   }
-
+  
   static void removeCustomVal(String key, {Location location = Location.Irrelevant}) async {
     _checkInitialization();
     final box = _getPrefBox(location);
     final isar = await box?.future;
     return isar?.writeTxn(() => isar.keyValues.deleteByKey(key));
   }
-
+  
   static Future<void> _writeToIsar<T>(Isar? isar, String key, T value) async {
     if (isar == null) return;
 

@@ -238,14 +238,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.19.1"
-  combine:
-    dependency: "direct main"
-    description:
-      name: combine
-      sha256: c16464b55d140871fbab5b37909e1808c2f020e46f9ba7deca59d40faabb6008
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.5.7"
   convert:
     dependency: transitive
     description:

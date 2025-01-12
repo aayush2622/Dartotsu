@@ -171,7 +171,7 @@ class SettingsCommonScreenState extends BaseSettingsScreen {
         settings: [
           Setting(
             type: SettingType.normal,
-            name: getString.manageLayout(getString.home,getString.kitsu),
+            name: getString.manageLayout(getString.home,getString.simkl),
             description: getString.manageLayoutDescription(getString.home),
             icon: Icons.tune,
             onClick: () async {
@@ -182,7 +182,7 @@ class SettingsCommonScreenState extends BaseSettingsScreen {
               List<bool>.from(homeLayoutMap.values.toList());
 
               AlertDialogBuilder(context)
-                ..setTitle(getString.manageLayout(getString.home,getString.kitsu))
+                ..setTitle(getString.manageLayout(getString.home,getString.simkl))
                 ..reorderableMultiSelectableItems(
                   titles,
                   checkedStates,

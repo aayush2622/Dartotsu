@@ -1,4 +1,3 @@
-import 'package:dantotsu/Functions/Function.dart';
 import 'package:dantotsu/Preferences/IsarDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
@@ -32,7 +31,6 @@ class WindowsPlayer extends BasePlayer {
 
   @override
   Future<void> seek(Duration duration) async {
-    snackString('skipping ${duration.inSeconds}');
     videoController.player.seek(duration);
   }
 

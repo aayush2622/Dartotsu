@@ -20,7 +20,7 @@ Widget CustomElevatedButton({
       textAlign: TextAlign.center,
       label,
       style: TextStyle(
-        fontFamily: 'Poppins',
+        fontFamily: 'Poppins-SemiBold',
         color: theme.colorScheme.primaryContainer,
       ),
     ),
@@ -34,6 +34,7 @@ Widget CustomElevatedButton({
       ),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
+
       ),
     ),
   );

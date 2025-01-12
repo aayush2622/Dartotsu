@@ -59,7 +59,9 @@ class StorageProvider {
     String basePath;
     final appDir = await getApplicationDocumentsDirectory();
 
-    if (Platform.isIOS || Platform.isMacOS) return appDir;
+    if (Platform.isIOS || Platform.isMacOS) {
+      return Directory(path.join(appDir.path, subPath ?? '').fixSeparator);
+    }
 
     if (Platform.isAndroid) {
       basePath = useCustomPath == true
