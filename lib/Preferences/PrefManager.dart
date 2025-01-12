@@ -71,6 +71,7 @@ class PrefManager {
     _readerPreferences = await _open('readerSettings', path.path);
     _irrelevantPreferences = await _open('irrelevantSettings', path.path);
     _protectedPreferences = await _open('protectedSettings', path.path);
+    removePref();
     await _populateCache();
   }
 
@@ -174,13 +175,15 @@ class PrefManager {
 
   static void removeVal(Pref<dynamic> pref) async {
     _checkInitialization();
+    _cache[pref.location]?.remove(pref.key);
     final box = _getPrefBox(pref.location);
     final isar = await box?.future;
     return isar?.writeTxn(() => isar.keyValues.deleteByKey(pref.key));
   }
-  
+
   static void removeCustomVal(String key, {Location location = Location.Irrelevant}) async {
     _checkInitialization();
+    _cache[location]?.remove(key);
     final box = _getPrefBox(location);
     final isar = await box?.future;
     return isar?.writeTxn(() => isar.keyValues.deleteByKey(key));
@@ -233,5 +236,12 @@ class PrefManager {
       default:
         throw Exception("Invalid box name");
     }
+  }
+}
+
+void removePref(){
+  if (loadCustomData('once') ?? true){
+    removeData(PrefName.simklHomeLayout);
+    saveCustomData('once', false);
   }
 }

@@ -103,6 +103,7 @@ const _$StatusEnumMap = {
   Status.DROPPED: 'dropped',
   Status.PLANNING: 'plantowatch',
   Status.CURRENT: 'watching',
+  Status.HOLD: 'hold',
 };
 
 const _$AnimeTypeEnumMap = {
@@ -111,6 +112,7 @@ const _$AnimeTypeEnumMap = {
   AnimeType.OVA: 'ova',
   AnimeType.SPECIAL: 'special',
   AnimeType.TV: 'tv',
+  AnimeType.MUSIC_VIDEO: 'music video',
 };
 
 Show _$ShowFromJson(Map<String, dynamic> json) => Show(

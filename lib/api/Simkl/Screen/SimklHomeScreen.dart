@@ -21,12 +21,15 @@ class SimklHomeScreen extends BaseHomeScreen {
   var animeContinue = Rx<List<Media>?>(null);
   var animePlanned = Rx<List<Media>?>(null);
   var animeDropped = Rx<List<Media>?>(null);
+  var animeOnHold = Rx<List<Media>?>(null);
   var showContinue = Rx<List<Media>?>(null);
   var showPlanned = Rx<List<Media>?>(null);
   var showDropped = Rx<List<Media>?>(null);
+  var showOnHold = Rx<List<Media>?>(null);
   var movieContinue = Rx<List<Media>?>(null);
   var moviePlanned = Rx<List<Media>?>(null);
   var movieDropped = Rx<List<Media>?>(null);
+  var movieOnHold = Rx<List<Media>?>(null);
 
   Future<void> getUserId() async {
     if (Simkl.token.isNotEmpty) {
@@ -56,12 +59,15 @@ class SimklHomeScreen extends BaseHomeScreen {
     animeContinue.value = res['watchingAnime'] ?? [];
     animePlanned.value = res['plannedAnime'] ?? [];
     animeDropped.value = res['droppedAnime'] ?? [];
+    animeOnHold.value = res['onHoldAnime'] ?? [];
     showContinue.value = res['watchingShows'] ?? [];
     showPlanned.value = res['plannedShows'] ?? [];
     showDropped.value = res['droppedShows'] ?? [];
+    showOnHold.value = res['onHoldShows'] ?? [];
     movieContinue.value = res['watchingMovies'] ?? [];
     moviePlanned.value = res['plannedMovies'] ?? [];
     movieDropped.value = res['droppedMovies'] ?? [];
+    movieOnHold.value = res['onHoldMovies'] ?? [];
 
     if (res['watchingAnime'] != null && res['watchingAnime']!.isNotEmpty) {
       listImage.add((List.from(res["watchingAnime"] ?? [])..shuffle(Random()))
@@ -107,6 +113,14 @@ class SimklHomeScreen extends BaseHomeScreen {
       ),
       MediaSectionData(
         type: 0,
+        title: getString.onHold(getString.anime),
+        pairTitle: 'On Hold Anime',
+        list: animeOnHold.value,
+        emptyIcon: Icons.movie_filter_rounded,
+        emptyMessage: getString.noOnHold,
+      ),
+      MediaSectionData(
+        type: 0,
         title: getString.continueWatching,
         pairTitle: 'Continue Watching Series',
         list: showContinue.value,
@@ -135,6 +149,14 @@ class SimklHomeScreen extends BaseHomeScreen {
       ),
       MediaSectionData(
         type: 0,
+        title: 'On Hold Series',
+        pairTitle: 'On Hold Series',
+        list: showOnHold.value,
+        emptyIcon: Icons.movie_filter_rounded,
+        emptyMessage: getString.noOnHold,
+      ),
+      MediaSectionData(
+        type: 0,
         title: getString.continueWatching,
         pairTitle: 'Continue Watching Movies',
         list: movieContinue.value,
@@ -160,6 +182,14 @@ class SimklHomeScreen extends BaseHomeScreen {
         list: movieDropped.value,
         emptyIcon: Icons.movie_filter_rounded,
         emptyMessage: getString.noDropped(getString.movie(2)),
+      ),
+      MediaSectionData(
+        type: 0,
+        title: 'On Hold Movies',
+        pairTitle: 'On Hold Movies',
+        list: movieOnHold.value,
+        emptyIcon: Icons.movie_filter_rounded,
+        emptyMessage: getString.noOnHold,
       ),
     ];
 
@@ -203,11 +233,14 @@ class SimklHomeScreen extends BaseHomeScreen {
     animeContinue.value = null;
     animePlanned.value = null;
     animeDropped.value = null;
+    animeOnHold.value = null;
     showContinue.value = null;
     showPlanned.value = null;
     showDropped.value = null;
+    showOnHold.value = null;
     movieContinue.value = null;
     moviePlanned.value = null;
     movieDropped.value = null;
+    movieOnHold.value = null;
   }
 }

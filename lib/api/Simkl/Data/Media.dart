@@ -129,7 +129,9 @@ enum AnimeType {
   @JsonValue("special")
   SPECIAL,
   @JsonValue("tv")
-  TV
+  TV,
+  @JsonValue("music video")
+  MUSIC_VIDEO
 }
 
 final animeTypeValues = EnumValues({
@@ -137,7 +139,8 @@ final animeTypeValues = EnumValues({
   "ona": AnimeType.ONA,
   "ova": AnimeType.OVA,
   "special": AnimeType.SPECIAL,
-  "tv": AnimeType.TV
+  "tv": AnimeType.TV,
+  "music video": AnimeType.MUSIC_VIDEO
 });
 
 @JsonSerializable()
@@ -303,14 +306,17 @@ enum Status {
   @JsonValue("plantowatch")
   PLANNING,
   @JsonValue("watching")
-  CURRENT
+  CURRENT,
+  @JsonValue("hold")
+  HOLD
 }
 
 final statusValues = EnumValues({
   "completed": Status.COMPLETED,
   "dropped": Status.DROPPED,
   "plantowatch": Status.PLANNING,
-  "watching": Status.CURRENT
+  "watching": Status.CURRENT,
+  "hold": Status.HOLD
 });
 
 class EnumValues<T> {

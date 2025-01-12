@@ -38,12 +38,15 @@ class PrefName {
     'Continue Watching Anime': true,
     'Planned Anime': false,
     'Dropped Anime': false,
+    'On Hold Anime': false,
     'Continue Watching Series': true,
     'Planned Series': false,
     'Dropped Series': false,
+    'On Hold Series': false,
     'Continue Watching Movies': true,
     'Planned Movies': false,
     'Dropped Movies': false,
+    'On Hold Movies': false,
   });
   static const anilistRemoveList =
       Pref(Location.General, 'anilistRemoveList', []);

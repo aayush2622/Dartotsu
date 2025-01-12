@@ -163,12 +163,15 @@ extension on SimklQueries {
     list['watchingAnime'] = groupedAnimeList['CURRENT'] ?? [];
     list['droppedAnime'] = groupedAnimeList['DROPPED'] ?? [];
     list['plannedAnime'] = groupedAnimeList['PLANNING'] ?? [];
+    list['onHoldAnime'] = groupedAnimeList['HOLD'] ?? [];
     list['watchingShows'] = groupedShowList['CURRENT'] ?? [];
     list['droppedShows'] = groupedShowList['DROPPED'] ?? [];
     list['plannedShows'] = groupedShowList['PLANNING'] ?? [];
+    list['onHoldShows'] = groupedShowList['HOLS'] ?? [];
     list['watchingMovies'] = groupedMovieList['CURRENT'] ?? [];
     list['droppedMovies'] = groupedMovieList['DROPPED'] ?? [];
     list['plannedMovies'] = groupedMovieList['PLANNING'] ?? [];
+    list['onHoldMovies'] = groupedMovieList['HOLD'] ?? [];
     return list;
   }
 }
