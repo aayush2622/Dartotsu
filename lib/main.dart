@@ -33,6 +33,7 @@ import 'api/Discord/Discord.dart';
 import 'api/TypeFactory.dart';
 import 'logger.dart';
 import 'package:path/path.dart' as p;
+
 late Isar isar;
 WebViewEnvironment? webViewEnvironment;
 
@@ -67,9 +68,11 @@ void main(List<String> args) async {
 }
 
 Future init() async {
-  await dotenv.load(fileName: ".env");
-  await PrefManager.init();
   await StorageProvider().requestPermission();
+  if (!Platform.isIOS) {
+    await dotenv.load(fileName: ".env");
+  }
+  await PrefManager.init();
   isar = await StorageProvider().initDB(null);
   await Logger.init();
   initializeMediaServices();
@@ -88,11 +91,13 @@ Future init() async {
   if (!kIsWeb && defaultTargetPlatform == TargetPlatform.windows) {
     final availableVersion = await WebViewEnvironment.getAvailableVersion();
     assert(availableVersion != null,
-    'Failed to find an installed WebView2 runtime or non-stable Microsoft Edge installation.');
+        'Failed to find an installed WebView2 runtime or non-stable Microsoft Edge installation.');
     final document = await StorageProvider().getDirectory();
     webViewEnvironment = await WebViewEnvironment.create(
-        settings: WebViewEnvironmentSettings(
-            userDataFolder: p.join(document!.path, 'flutter_inappwebview'),),);
+      settings: WebViewEnvironmentSettings(
+        userDataFolder: p.join(document!.path, 'flutter_inappwebview'),
+      ),
+    );
   }
   Get.config(
     enableLog: true,
@@ -129,7 +134,7 @@ class MyApp extends StatelessWidget {
             GlobalCupertinoLocalizations.delegate,
           ],
           supportedLocales: AppLocalizations.supportedLocales,
-          locale: Locale( loadCustomData("defaultLanguage") ?? 'en'),
+          locale: Locale(loadCustomData("defaultLanguage") ?? 'en'),
           navigatorKey: navigatorKey,
           title: 'Dartotsu',
           themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
@@ -152,8 +157,8 @@ class MainActivity extends StatefulWidget {
 
 FloatingBottomNavBar? navbar;
 
-class MainActivityState extends State<MainActivity> with WidgetsBindingObserver {
-
+class MainActivityState extends State<MainActivity>
+    with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
@@ -167,9 +172,7 @@ class MainActivityState extends State<MainActivity> with WidgetsBindingObserver 
   @override
   Widget build(BuildContext context) {
     Discord.getSavedToken();
-    var service = Provider
-        .of<MediaServiceProvider>(context)
-        .currentService;
+    var service = Provider.of<MediaServiceProvider>(context).currentService;
     navbar = FloatingBottomNavBar(
       selectedIndex: _selectedIndex,
       onTabSelected: _onTabSelected,
@@ -179,16 +182,16 @@ class MainActivityState extends State<MainActivity> with WidgetsBindingObserver 
       focusNode: FocusNode(),
       autofocus: true,
       onKey: (RawKeyEvent event) async {
-        if (event is RawKeyDownEvent ) {
+        if (event is RawKeyDownEvent) {
           if (event.logicalKey == LogicalKeyboardKey.escape) {
             if (Navigator.of(context).canPop()) {
               Navigator.of(context).pop();
             }
           }
           if (event.logicalKey == LogicalKeyboardKey.f11) {
-            WindowManager.instance.setFullScreen(!await WindowManager.instance.isFullScreen());
+            WindowManager.instance
+                .setFullScreen(!await WindowManager.instance.isFullScreen());
           }
-
         }
       },
       child: Scaffold(

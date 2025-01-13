@@ -26,7 +26,7 @@ class ThemeNotifier extends ChangeNotifier {
     _initialize();
   }
 
-  Future<void> _initialize() async {
+  void _initialize() {
     var darkMode = PrefManager.getVal(PrefName.isDarkMode);
     bool isDark;
 

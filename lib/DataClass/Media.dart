@@ -296,7 +296,7 @@ class Media {
       userProgress: apiMedia.watchedEpisodesCount,
       userScore: (apiMedia.userRating?.toInt() ?? 0) * 10,
       meanScore:  ((apiMedia.rating ?? 0) * 10).toInt(),
-      format: apiMedia.animeType != null ? 'anime' : 'movie',
+      format: 'anime',
       status: mapSimklAiringStatus(apiMedia.releaseStatus?.toLowerCase() ?? 'UNKNOWN'),
       anime: Anime(
         totalEpisodes: apiMedia.totalEpisodesCount,

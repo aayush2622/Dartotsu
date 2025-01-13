@@ -227,6 +227,28 @@ void onEpisodeClick(
               itemCount: videos.length,
               itemBuilder: (context, index) {
                 var item = videos[index];
+                var allSubtitles = <Track>[];
+                var addedSubtitleTitles = <String>{};
+                for (var video in videos) {
+                  if (video.subtitles != null && video.subtitles!.length > 1) {
+                    for (var subtitle in video.subtitles!) {
+                      if (!addedSubtitleTitles.contains(subtitle.label)) {
+                        addedSubtitleTitles.add(subtitle.label ?? '');
+                        var newSubtitle = Track(
+                          label: '${subtitle.label} (from external)',
+                          file: subtitle.file,
+                        );
+                        allSubtitles.add(newSubtitle);
+                      }
+                    }
+                  }
+                }
+
+                for (var video in videos) {
+                  if (video.subtitles == null || video.subtitles!.length <= 1) {
+                    video.subtitles = List.from(allSubtitles);
+                  }
+                }
                 return ListTile(
                   title: Text(item.quality),
                   onTap: () {

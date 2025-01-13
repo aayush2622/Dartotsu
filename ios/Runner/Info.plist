@@ -71,5 +71,7 @@
 	<true/>
 	<key>UISupportsDocumentBrowser</key>
 	<true/>
+	<key>io.flutter.embedded_views_preview</key>
+    <true/>
   </dict>
 </plist>

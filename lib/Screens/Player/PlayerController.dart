@@ -140,6 +140,7 @@ class _PlayerControllerState extends State<PlayerController> {
   }
 
   Future<void> _saveProgress(int currentProgress) async {
+    if (!mounted) return;
     var sourceName = Provider.of<MediaServiceProvider>(context, listen: false)
         .currentService
         .getName;
