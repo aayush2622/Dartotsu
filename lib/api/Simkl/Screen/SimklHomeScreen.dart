@@ -26,10 +26,8 @@ class SimklHomeScreen extends BaseHomeScreen {
   var showPlanned = Rx<List<Media>?>(null);
   var showDropped = Rx<List<Media>?>(null);
   var showOnHold = Rx<List<Media>?>(null);
-  var movieContinue = Rx<List<Media>?>(null);
   var moviePlanned = Rx<List<Media>?>(null);
   var movieDropped = Rx<List<Media>?>(null);
-  var movieOnHold = Rx<List<Media>?>(null);
 
   Future<void> getUserId() async {
     if (Simkl.token.isNotEmpty) {
@@ -64,10 +62,8 @@ class SimklHomeScreen extends BaseHomeScreen {
     showPlanned.value = res['plannedShows'] ?? [];
     showDropped.value = res['droppedShows'] ?? [];
     showOnHold.value = res['onHoldShows'] ?? [];
-    movieContinue.value = res['watchingMovies'] ?? [];
     moviePlanned.value = res['plannedMovies'] ?? [];
     movieDropped.value = res['droppedMovies'] ?? [];
-    movieOnHold.value = res['onHoldMovies'] ?? [];
 
     if (res['watchingAnime'] != null && res['watchingAnime']!.isNotEmpty) {
       listImage.add((List.from(res["watchingAnime"] ?? [])..shuffle(Random()))
@@ -157,16 +153,6 @@ class SimklHomeScreen extends BaseHomeScreen {
       ),
       MediaSectionData(
         type: 0,
-        title: getString.continueWatching,
-        pairTitle: 'Continue Watching Movies',
-        list: movieContinue.value,
-        emptyIcon: Icons.movie_filter_rounded,
-        emptyMessage: getString.allCaughtUpNew,
-        emptyButtonText: getString.browse(getString.movie(2)),
-        emptyButtonOnPressed: () => navbar?.onClick(2),
-      ),
-      MediaSectionData(
-        type: 0,
         title: getString.planned(getString.movie(2)),
         pairTitle: 'Planned Movies',
         list: moviePlanned.value,
@@ -182,14 +168,6 @@ class SimklHomeScreen extends BaseHomeScreen {
         list: movieDropped.value,
         emptyIcon: Icons.movie_filter_rounded,
         emptyMessage: getString.noDropped(getString.movie(2)),
-      ),
-      MediaSectionData(
-        type: 0,
-        title: 'On Hold Movies',
-        pairTitle: 'On Hold Movies',
-        list: movieOnHold.value,
-        emptyIcon: Icons.movie_filter_rounded,
-        emptyMessage: getString.noOnHold,
       ),
     ];
 
@@ -238,9 +216,7 @@ class SimklHomeScreen extends BaseHomeScreen {
     showPlanned.value = null;
     showDropped.value = null;
     showOnHold.value = null;
-    movieContinue.value = null;
     moviePlanned.value = null;
     movieDropped.value = null;
-    movieOnHold.value = null;
   }
 }

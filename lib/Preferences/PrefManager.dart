@@ -240,8 +240,8 @@ class PrefManager {
 }
 
 void removePref(){
-  if (loadCustomData('once') ?? true){
+  if (loadCustomData('once1') ?? true){
     removeData(PrefName.simklHomeLayout);
-    saveCustomData('once', false);
+    saveCustomData('once1', false);
   }
 }

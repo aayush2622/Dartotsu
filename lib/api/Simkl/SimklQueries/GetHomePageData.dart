@@ -158,26 +158,26 @@ extension on SimklQueries {
     list['droppedShows'] = groupedShowList['DROPPED'] ?? [];
     list['plannedShows'] = groupedShowList['PLANNING'] ?? [];
     list['onHoldShows'] = groupedShowList['HOLS'] ?? [];
-    list['watchingMovies'] = groupedMovieList['CURRENT'] ?? [];
     list['droppedMovies'] = groupedMovieList['DROPPED'] ?? [];
     list['plannedMovies'] = groupedMovieList['PLANNING'] ?? [];
-    list['onHoldMovies'] = groupedMovieList['HOLD'] ?? [];
     return list;
   }
+
   Future<Media?> fetchOrLoadLocalData(String key, String type,
       {bool useLocal = true}) async {
     final localData = loadCustomData<String?>(key);
-    if (localData != null && localData.isNotEmpty && useLocal == true) {
+    if (localData != null && localData.isNotEmpty && useLocal == true && localData != 'null') {
       return Media.fromJson(jsonDecode(localData));
     } else {
       final data = await executeQuery<Media>(
           'https://api.simkl.com/sync/all-items/$type/?extended=full');
+      if (data == null) return null;
       final ratings = await executeQuery<MediaRatings>(
         'https://api.simkl.com/ratings/$type?user_watchlist=watching,plantowatch,dropped,hold&fields=simkl,rank,release_status&client_id=${SimklLogin.clientId}',
         mapKey: type,
       );
       if (type == 'anime') {
-        data?.anime?.forEach((element) {
+        data.anime?.forEach((element) {
           final rating = ratings?.animeRatings?.firstWhereOrNull(
             (r) => r.id == element.show?.ids?.simkl,
           );
@@ -185,7 +185,7 @@ extension on SimklQueries {
           element.releaseStatus = rating?.releaseStatus?.name;
         });
       } else if (type == 'shows') {
-        data?.show?.forEach((element) {
+        data.show?.forEach((element) {
           final rating = ratings?.showRatings?.firstWhereOrNull(
             (r) => r.id == element.show?.ids?.simkl,
           );
@@ -193,7 +193,7 @@ extension on SimklQueries {
           element.releaseStatus = rating?.releaseStatus?.name;
         });
       } else if (type == 'movies') {
-        data?.movies?.forEach((element) {
+        data.movies?.forEach((element) {
           final rating = ratings?.movieRatings?.firstWhereOrNull(
             (r) => r.id == element.movie?.ids?.simkl,
           );

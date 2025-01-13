@@ -43,10 +43,8 @@ class PrefName {
     'Planned Series': false,
     'Dropped Series': false,
     'On Hold Series': false,
-    'Continue Watching Movies': true,
-    'Planned Movies': false,
+    'Planned Movies': true,
     'Dropped Movies': false,
-    'On Hold Movies': false,
   });
   static const anilistRemoveList =
       Pref(Location.General, 'anilistRemoveList', []);

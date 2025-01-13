@@ -341,7 +341,7 @@ class Media {
       status: mapSimklAiringStatus(apiMedia.releaseStatus?.toLowerCase() ?? 'UNKNOWN'),
       format:'movie',
       anime: Anime(
-        totalEpisodes: apiMedia.totalEpisodesCount,
+        totalEpisodes: 1,
       ),
       isAdult: false,
     );

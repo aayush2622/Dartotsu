@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:dantotsu/api/Mangayomi/Model/settings.dart';
-import 'package:device_info_plus/device_info_plus.dart';
 import 'package:isar/isar.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
@@ -18,16 +17,18 @@ class StorageProvider {
       return true;
     }
 
-    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
-    final androidInfo = await deviceInfo.androidInfo;
-    if (androidInfo.version.sdkInt <= 29) {
+    /* DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+     final androidInfo = await deviceInfo.androidInfo;
+    if (androidInfo.version.sdkInt <= 29) { */
+
       final storagePermission = Permission.storage;
       if (await storagePermission.isGranted) {
         return true;
       }
       final storageStatus = await storagePermission.request();
       return storageStatus.isGranted;
-    }
+
+    /*}*/
 
     final manageStoragePermission = Permission.manageExternalStorage;
     if (await manageStoragePermission.isGranted) {
