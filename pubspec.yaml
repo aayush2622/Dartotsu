@@ -40,8 +40,6 @@ dependencies:
   isar_flutter_libs: 3.1.0+1
   path_provider: ^2.1.5
   path: ^1.9.0
-  hive: ^2.2.3
-  hive_flutter: ^1.1.0
 
   # UI Components
   expandable_text: 2.3.0
@@ -73,6 +71,7 @@ dependencies:
   wakelock_plus: ^1.2.8
   volume_controller: ^2.0.8 #dont change
   screen_brightness: ^2.0.1 #dont change
+
   # Miscellaneous
   device_info_plus: ^11.2.0
   file_picker: ^8.1.7
@@ -96,6 +95,7 @@ dependencies:
   flutter_web_auth_2: ^4.1.0
   carousel_slider: ^5.0.0
   smooth_page_indicator: ^1.2.0+3
+  flutter_dotenv: ^5.2.1
 # Development dependencies
 dev_dependencies:
   flutter_test:
@@ -104,7 +104,7 @@ dev_dependencies:
   flutter_lints: ^5.0.0
   
   # Code Generation
-  hive_generator: ^2.0.0
+  isar_generator: ^3.1.0+1
   json_serializable: ^6.0.1
   build_runner: ^2.1.7
   inno_bundle: ^0.7.4
@@ -147,13 +147,14 @@ flutter:
 
   # Assets
   assets:
+    - .env
     - assets/images/logo.png
     - assets/svg/bmc-button.svg
     - assets/svg/anilist.svg
     - assets/svg/discord.svg
     - assets/svg/kitsu.svg
     - assets/svg/mal.svg
-
+    - assets/svg/simkl.svg
 
 # Flutter Launcher Icons Configuration
 # dart run flutter_launcher_icons

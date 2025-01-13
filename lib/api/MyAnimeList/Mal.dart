@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 import '../../Functions/Function.dart';
-import '../../Preferences/HiveDataClasses/MalToken/MalToken.dart';
+import '../../Preferences/IsarDataClasses/MalToken/MalToken.dart';
 import '../../Preferences/PrefManager.dart';
 
 import '../../Services/BaseServiceData.dart';
@@ -102,6 +102,8 @@ class MalController extends BaseServiceData {
     episodesWatched = null;
     chapterRead = null;
     unreadNotificationCount = 0;
+    run.value = true;
+    isInitialized.value = false;
     Refresh.refreshService(RefreshId.Mal);
   }
 
@@ -109,7 +111,7 @@ class MalController extends BaseServiceData {
   Future<void> saveToken(String token) async {
     var res = ResponseToken.fromJson(json.decode(token));
     res.expiresIn += DateTime.now().millisecondsSinceEpoch;
-    PrefManager.setVal(PrefName.malToken, res);
+    PrefManager.setVal<ResponseToken?>(PrefName.malToken, res);
     run.value = true;
     isInitialized.value = false;
     this.token.value = res.accessToken;
@@ -183,6 +185,8 @@ class MalController extends BaseServiceData {
     debugPrint("Remaining Mal requests: ${rateLimiter.remainingRequests}");
 
     final jsonResponse = json.decode(response.body);
+    if (jsonResponse == null) return null;
+
     return TypeFactory.get<T>(jsonResponse);
   }
 }

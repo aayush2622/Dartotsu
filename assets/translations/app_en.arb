@@ -8,7 +8,9 @@
   "mal": "MyAnimeList",
   "@mal": {},
   "kitsu": "Kitsu",
+
   "@kitsu": {},
+  "simkl": "Simkl",
   "discord": "Discord",
   "@discord": {},
   "login": "Login",

@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import '../../Preferences/PrefManager.dart';
 
 import '../../Services/Api/Queries.dart';
+import '../../logger.dart';
 import 'Data/data.dart';
 import 'Data/user.dart';
 import 'Mal.dart';
@@ -31,12 +32,6 @@ class MalQueries extends Queries {
 
   @override
   Future<Map<String, List<Media>>> getAnimeList() => _getAnimeList();
-
-  @override
-  Future<List<String?>> getBannerImages() {
-    // not needed for MAL
-    throw UnimplementedError();
-  }
 
   @override
   Future<List<Media>> getCalendarData() {

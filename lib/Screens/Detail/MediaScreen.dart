@@ -38,8 +38,7 @@ class MediaInfoPageState extends State<MediaInfoPage> {
     super.initState();
     var service = Provider.of<MediaServiceProvider>(context, listen: false)
         .currentService;
-    _viewModel = Get.put(MediaPageViewModel(),
-        tag: "${widget.mediaData.id.toString()}-${service.getName}");
+    _viewModel = Get.put(MediaPageViewModel(), tag: "${widget.mediaData.id.toString()}-${service.getName}");
     mediaData = widget.mediaData;
     loadData();
   }

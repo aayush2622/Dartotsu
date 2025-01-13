@@ -1,8 +1,8 @@
 import 'package:dantotsu/Services/Screens/BaseLoginScreen.dart';
+import 'package:dantotsu/api/Simkl/SimklService.dart';
 import 'package:flutter/material.dart';
 
 import '../api/Anilist/AnilistService.dart';
-import '../api/Kitsu/KitsuService.dart';
 import '../api/MyAnimeList/MalService.dart';
 import '../api/Extensions/ExtensionsService.dart';
 import 'BaseServiceData.dart';
@@ -43,6 +43,6 @@ abstract class MediaService {
 void initializeMediaServices() {
   AnilistService();
   MalService();
-  KitsuService();
+  SimklService();
   ExtensionsService();
 }

@@ -24,16 +24,16 @@ class AnilistService extends MediaService {
   BaseServiceData get data => Anilist;
 
   @override
-  BaseAnimeScreen get animeScreen => Get.put(AnilistAnimeScreen(Anilist));
+  BaseAnimeScreen get animeScreen => Get.put(AnilistAnimeScreen(Anilist), tag: "AnilistAnimeScreen");
 
   @override
-  BaseHomeScreen get homeScreen => Get.put(AnilistHomeScreen(Anilist));
+  BaseHomeScreen get homeScreen => Get.put(AnilistHomeScreen(Anilist), tag: "AnilistHomeScreen");
 
   @override
-  BaseMangaScreen get mangaScreen => Get.put(AnilistMangaScreen(Anilist));
+  BaseMangaScreen get mangaScreen => Get.put(AnilistMangaScreen(Anilist), tag: "AnilistMangaScreen");
 
   @override
-  BaseLoginScreen get loginScreen => Get.put(AnilistLoginScreen(Anilist));
+  BaseLoginScreen get loginScreen => Get.put(AnilistLoginScreen(Anilist), tag: "AnilistLoginScreen");
 }
 
 class AnilistLoginScreen extends BaseLoginScreen {

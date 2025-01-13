@@ -5,7 +5,7 @@ import 'package:dantotsu/DataClass/Episode.dart';
 import 'package:dantotsu/DataClass/Media.dart' as m;
 import 'package:dantotsu/Functions/Function.dart';
 import 'package:dantotsu/Functions/string_extensions.dart';
-import 'package:dantotsu/Preferences/HiveDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
+import 'package:dantotsu/Preferences/IsarDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
 import 'package:dantotsu/Preferences/PrefManager.dart';
 import 'package:dantotsu/Widgets/AlertDialogBuilder.dart';
 import 'package:dantotsu/Widgets/CustomBottomDialog.dart';
@@ -81,38 +81,62 @@ class _PlayerControllerState extends State<PlayerController> {
     var currentProgress = PrefManager.getCustomVal<int>(
       "${media.id}-${currentEpisode.number}-$sourceName-current",
     );
-
     while (_controller.maxTime.value == '00:00') {
       await Future.delayed(const Duration(milliseconds: 100));
     }
-
+    _controller.pause();
+    _controller.isBuffering.value = true;
     setDiscordRpc();
     setTimeStamps();
 
     _controller.seek(Duration(seconds: currentProgress ?? 0));
-    var list = PrefManager.getCustomVal<List<int>>("continueAnimeList") ?? [];
-    if (list.contains(media.id)) list.remove(media.id);
+    var list = List<int>.from(
+      PrefManager.getCustomVal<List<int>>("continueAnimeList") ?? [],
+    );
+    if (list.contains(media.id)) {
+      list.remove(media.id);
+    }
 
     list.add(media.id);
     PrefManager.setCustomVal<List<int>>("continueAnimeList", list);
-    for (var sub in _controller.subtitles) {
-      if (sub.id == 'auto' ||sub.id == 'no') continue;
-      if (currentQuality.subtitles == null || currentQuality.subtitles!.isEmpty) {
-        currentQuality.subtitles = [
-          v.Track(
-            file: sub.id,
-            label: sub.title ?? sub.language ?? "Unknown",
-          ),
-        ];
-      } else {
-        currentQuality.subtitles?.add(
-          v.Track(
-            file: sub.id,
-            label: sub.title ?? sub.language ?? "Unknown",
-          ),
+
+    void processTracks(List<v.Track>? tracks, controllerTracks, String type) {
+      for (var track in controllerTracks) {
+        if (track.id == 'auto' || track.id == 'no') continue;
+        final trackEntry = v.Track(
+          file: track.id,
+          label: track.title ?? track.language ?? "Unknown",
         );
+        tracks ??= [];
+        tracks.add(trackEntry);
       }
     }
+
+    currentQuality.subtitles ??= [];
+    processTracks(currentQuality.subtitles, _controller.subtitles, "subtitle");
+
+    currentQuality.audios ??= [];
+    processTracks(currentQuality.audios, _controller.audios, "audio");
+
+    var defaultSub = currentQuality.subtitles?.firstWhereOrNull(
+      (element) => element.label == 'English',
+    );
+    var defaultAudio = currentQuality.audios?.firstWhereOrNull(
+      (element) => element.label == 'English',
+    );
+
+    await _controller.setAudio(
+      defaultAudio?.file ?? "",
+      defaultAudio?.label ?? "",
+      defaultAudio?.file?.toNullInt() == null,
+    );
+    await _controller.setSubtitle(
+      defaultSub?.file ?? "",
+      defaultSub?.label ?? "",
+      defaultSub?.file?.toNullInt() == null,
+    );
+    _controller.isBuffering.value = false;
+    _controller.play();
   }
 
   Future<void> _saveProgress(int currentProgress) async {
@@ -484,6 +508,11 @@ class _PlayerControllerState extends State<PlayerController> {
           icon: Icons.subtitles,
           onPressed: () => _subtitleDialog(),
         ),
+        const SizedBox(width: 24),
+        _buildControlButton(
+          icon: Icons.audiotrack,
+          onPressed: () => _audioDialog(),
+        ),
       ],
     );
   }
@@ -624,21 +653,13 @@ class _PlayerControllerState extends State<PlayerController> {
           allowedExtensions: subMap,
         ))?.files.single;
         if (file == null || file.path == null) return;
-        if (sub) {
-          currentQuality.subtitles = [
-            v.Track(
-              file: file.path,
-              label: file.name,
-            ),
-          ];
-        } else {
-          currentQuality.subtitles?.add(
-            v.Track(
-              file: file.path ,
-              label: file.name,
-            ),
-          );
-        }
+        currentQuality.subtitles ??= [];
+        currentQuality.subtitles!.add(
+          v.Track(
+            file: file.path,
+            label: file.name,
+          ),
+        );
         _controller.setSubtitle(
           file.path ?? "",
           file.name,
@@ -649,6 +670,37 @@ class _PlayerControllerState extends State<PlayerController> {
       },
     );
     showCustomBottomDialog(context, subtitlesDialog);
+  }
+
+  void _audioDialog() {
+    _controller.pause();
+    var audioDialog = CustomBottomDialog(
+      title: "Audio",
+      viewList: [_buildAudioList(currentQuality.audios == null)],
+        negativeText: "Add Audio",
+        negativeCallback: () async {
+          var file = (await FilePicker.platform.pickFiles(
+            type: FileType.custom,
+            allowedExtensions: audioMap,
+          ))?.files.single;
+          if (file == null || file.path == null) return;
+          currentQuality.audios ??= [];
+          currentQuality.audios!.add(
+            v.Track(
+              file: file.path,
+              label: file.name,
+            ),
+          );
+          await _controller.setAudio(
+            file.path ?? "",
+            file.name,
+            file.path?.toNullInt() == null,
+          );
+          Get.back();
+          _controller.play();
+        },
+    );
+    showCustomBottomDialog(context, audioDialog);
   }
 
   Widget _buildSubtitleList(bool sub) {
@@ -679,6 +731,33 @@ class _PlayerControllerState extends State<PlayerController> {
     }
   }
 
+  Widget _buildAudioList(bool audio) {
+    if (audio) {
+      return const Center(
+        child: Text("No audio available"),
+      );
+    } else {
+      return ListView.builder(
+        shrinkWrap: true,
+        itemCount: currentQuality.audios!.length,
+        itemBuilder: (context, index) {
+          var sub = currentQuality.audios![index];
+          return ListTile(
+            title: Text(sub.label ?? ""),
+            onTap: () {
+              _controller.setAudio(
+                sub.file ?? "",
+                sub.label ?? "",
+                sub.file?.toNullInt() == null,
+              );
+              Get.back();
+              _controller.play();
+            },
+          );
+        },
+      );
+    }
+  }
   Widget _buildSkipButton() {
     return Column(
       children: [

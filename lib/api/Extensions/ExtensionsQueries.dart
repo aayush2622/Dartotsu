@@ -12,12 +12,6 @@ class ExtensionsQueries extends  Queries  {
   }
 
   @override
-  Future<List<String?>> getBannerImages() {
-    // TODO: implement getBannerImages
-    throw UnimplementedError();
-  }
-
-  @override
   Future<List<Media>> getCalendarData() {
     // TODO: implement getCalendarData
     throw UnimplementedError();

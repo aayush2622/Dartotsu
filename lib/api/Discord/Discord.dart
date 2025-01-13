@@ -70,7 +70,7 @@ class _DiscordController extends GetxController {
         Navigator.of(context).pop();
         navigateToPage(
           context,
-          Platform.isLinux ? const SizedBox() : const MobileLogin(),
+          Platform.isLinux ? const LinuxLogin() : const MobileLogin(),
         );
       },
     );

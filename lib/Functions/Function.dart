@@ -43,9 +43,10 @@ class _RefreshController extends GetxController {
 enum RefreshId {
   Anilist,
   Mal,
-  Kitsu;
+  Kitsu,
+  Simkl,;
 
-  List<int> get ids => List.generate(3, (index) => baseId + index);
+  List<int> get ids => List.generate(4, (index) => baseId + index);
 
   int get baseId {
     switch (this) {
@@ -55,6 +56,8 @@ enum RefreshId {
         return 20;
       case RefreshId.Kitsu:
         return 30;
+      case RefreshId.Simkl:
+        return 40;
     }
   }
 

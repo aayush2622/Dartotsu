@@ -4,7 +4,9 @@ import 'Anilist/Data/data.dart' as anilist;
 import 'MyAnimeList/Data/data.dart' as mal;
 import 'MyAnimeList/Data/user.dart' as mal;
 import 'MyAnimeList/Data/userData.dart' as mal;
-
+import 'Simkl/Data/Media.dart' as simkl;
+import 'Simkl/Data/User.dart' as simkl;
+import 'Simkl/Data/Activity.dart' as simkl;
 typedef FromJson<T> = T Function(Map<String, dynamic> json);
 
 class TypeFactory {
@@ -23,6 +25,7 @@ class TypeFactory {
   static void registerAllTypes() {
     _registerAnilistTypes();
     _registerMalTypes();
+    _registerSimklTypes();
   }
 
   static void _registerAnilistTypes() {
@@ -54,5 +57,13 @@ class TypeFactory {
         (json) => mal.MediaResponse.fromJson(json));
     TypeFactory.create<mal.User>((json) => mal.User.fromJson(json));
     TypeFactory.create<mal.UserData>((json) => mal.UserData.fromJson(json));
+  }
+
+  static void _registerSimklTypes() {
+    TypeFactory.create<simkl.Media>((json) => simkl.Media.fromJson(json));
+    TypeFactory.create<simkl.User>((json) => simkl.User.fromJson(json));
+    TypeFactory.create<simkl.Stats>((json) => simkl.Stats.fromJson(json));
+    TypeFactory.create<simkl.Activity>((json) => simkl.Activity.fromJson(json));
+    TypeFactory.create<simkl.MediaRatings>((json) => simkl.MediaRatings.fromJson(json));
   }
 }

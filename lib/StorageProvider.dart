@@ -59,7 +59,11 @@ class StorageProvider {
     String basePath;
     final appDir = await getApplicationDocumentsDirectory();
 
-    if (Platform.isIOS || Platform.isMacOS) return appDir;
+    if (Platform.isIOS || Platform.isMacOS) {
+      final dbDir = path.join(appDir.path, 'Dartotsu', subPath ?? '').fixSeparator;
+      await Directory(dbDir).create(recursive: true);
+      return Directory(dbDir);
+    }
 
     if (Platform.isAndroid) {
       basePath = useCustomPath == true

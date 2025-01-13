@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../../DataClass/Media.dart';
-import '../../../../../../Preferences/HiveDataClasses/Selected/Selected.dart';
+import '../../../../../../Preferences/IsarDataClasses/Selected/Selected.dart';
 import '../../../../../../Preferences/PrefManager.dart';
 import '../../../../../../Services/ServiceSwitcher.dart';
 import '../../../../../../api/Mangayomi/Model/Source.dart';
