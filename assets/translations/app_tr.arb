@@ -63,7 +63,7 @@
   "@donationGoal": {},
   "enableDarkMode": "Karanlık Modu Etkinleştir",
   "@enableDarkMode": {},
-  "extension": "Eklenti",
+  "extension": "{count, çoğul, =1 {Exchange} diğer {Exups}}",
   "@extension": {},
   "extensionsDescription": "Ek işlevsellik için eklentileri yükleyin ve yönetin",
   "@extensionsDescription": {},
@@ -81,7 +81,7 @@
   "@fontSizeDescription": {},
   "hidePrivate": "Gizlileri Gizle",
   "@hidePrivate": {},
-  "hidePrivateDescription": "Anasayfadan özel medyaları gizleyin",
+  "hidePrivateDescription": "Home page'ten özel seriler.",
   "@hidePrivateDescription": {},
   "incognitoMode": "Gizli Mod",
   "@incognitoMode": {},
@@ -89,7 +89,7 @@
   "@incognitoModeDescription": {},
   "login": "Giriş Yap",
   "@login": {},
-  "logout": "Çıkış Yap",
+  "logout": "Logout {type}",
   "@logout": {},
   "mal": "MyAnimeList",
   "@mal": {},
@@ -146,5 +146,389 @@
   "themeDescription": "Uygulamanızın görünümünü ve havasını özelleştirin",
   "@themeDescription": {},
   "yes": "Evet",
-  "@yes": {}
+  "@yes": {},
+  "episode": "Bölüm",
+  "@episode": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "chapter": "Bölüm",
+  "@chapter": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "volume": "Cilt",
+  "@volume": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "movie": "Film",
+  "@movie": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "genres": "Türler",
+  "@genres": {},
+  "calendar": "Takvim",
+  "@calendar": {},
+  "search": "Ara",
+  "@search": {},
+  "scanlators": "Çeviri Grupları",
+  "@scanlators": {},
+  "confirmLogout": "Çıkış yapmak istediğinize emin misiniz?",
+  "@confirmLogout": {},
+  "nextSeason": "Gelecek Sezon",
+  "@nextSeason": {},
+  "previousSeason": "Önceki Sezon",
+  "@previousSeason": {},
+  "activity": "Etkinlik",
+  "@activity": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "planned": "Planlanan",
+  "@planned": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "browse": "Gözat",
+  "@browse": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "favorite": "Favori",
+  "@favorite": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "noDropped": "Bırakılan Yok",
+  "@noDropped": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "description": "Açıklama",
+  "@description": {},
+  "endDate": "Bitiş Tarihi",
+  "@endDate": {},
+  "expandText": "Genişlet",
+  "@expandText": {},
+  "favorites": "Favoriler",
+  "@favorites": {},
+  "format": "Biçim",
+  "@format": {},
+  "meanScore": "Ortalama Puan",
+  "@meanScore": {},
+  "name": "Ad",
+  "@name": {},
+  "nameRomaji": "Romaji Ad",
+  "@nameRomaji": {},
+  "popularity": "Popülerlik",
+  "@popularity": {},
+  "prequel": "Önceki",
+  "@prequel": {},
+  "staff": "Ekip",
+  "@staff": {},
+  "startDate": "Başlangıç Tarihi",
+  "@startDate": {},
+  "status": "Durum",
+  "@status": {},
+  "studio": "Stüdyo",
+  "@studio": {},
+  "synonyms": "Eş Anlamlılar",
+  "@synonyms": {},
+  "synopsis": "Özet",
+  "@synopsis": {},
+  "tags": "Etiketler",
+  "@tags": {},
+  "totalChapters": "Toplam Bölüm",
+  "@totalChapters": {},
+  "collapseText": "Daralt",
+  "@collapseText": {},
+  "relations": "İlişkiler",
+  "@relations": {},
+  "sequel": "Sonraki",
+  "@sequel": {},
+  "source": "Kaynak",
+  "@source": {},
+  "author": "Yazar",
+  "@author": {},
+  "averageDuration": "Ortalama Süre",
+  "@averageDuration": {},
+  "characters": "Karakterler",
+  "@characters": {},
+  "comingSoon": "Yakında",
+  "@comingSoon": {},
+  "total": "Toplam",
+  "@total": {},
+  "totalEpisodes": "Toplam Bölüm",
+  "@totalEpisodes": {},
+  "loginTo": "Giriş Yap",
+  "@loginTo": {
+    "placeholders": {
+      "service": {
+        "type": "String",
+        "examples": [
+          "Anilist",
+          "MyAnimeList",
+          "Kitsu",
+          "Discord"
+        ]
+      }
+    }
+  },
+  "manhwa": "Manhwa",
+  "@manhwa": {},
+  "manhua": "Manhua",
+  "@manhua": {},
+  "home": "Ana Sayfa",
+  "@home": {},
+  "novel": "Roman",
+  "@novel": {},
+  "ln": "Hafif Roman",
+  "@ln": {},
+  "addToList": "Listeye Ekle",
+  "@addToList": {},
+  "series": "Seri",
+  "@series": {},
+  "season": "Sezon",
+  "@season": {},
+  "gridView": "Izgara Görünümü",
+  "@gridView": {},
+  "listView": "Liste Görünümü",
+  "@listView": {},
+  "compactView": "Kompakt Görünüm",
+  "@compactView": {},
+  "episodeWatched": "İzlenen Bölüm",
+  "@episodeWatched": {},
+  "chapterRead": "Okunan Bölüm",
+  "@chapterRead": {},
+  "available": "Mevcut",
+  "@available": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "installed": "Yüklü",
+  "@installed": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Extensions"
+        ]
+      }
+    }
+  },
+  "trending": "Trendler",
+  "@trending": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "mostFavourite": "En Sevilen",
+  "@mostFavourite": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga",
+          "Manhwa"
+        ]
+      }
+    }
+  },
+  "popular": "Popüler",
+  "@popular": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga",
+          "Manhwa"
+        ]
+      }
+    }
+  },
+  "topAiring": "En İyi Yayınlananlar",
+  "@topAiring": {},
+  "topRated": "En Çok Oy Alanlar",
+  "@topRated": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga",
+          "Manhwa",
+          "Series"
+        ]
+      }
+    }
+  },
+  "thisSeason": "Bu Sezon",
+  "@thisSeason": {},
+  "onHold": "Beklemede",
+  "@onHold": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "allCaughtUpNew": "Bütün yakalandı, Yeni nedir?",
+  "@allCaughtUpNew": {},
+  "droppedAnime": "Bırakılan Anime",
+  "@droppedAnime": {},
+  "comments": "Yorumlar",
+  "@comments": {},
+  "continueReading": "Okumaya Devam Et",
+  "@continueReading": {},
+  "continueWatching": "İzlemeye Devam Et",
+  "@continueWatching": {},
+  "dtu": "Eski",
+  "@dtu": {},
+  "hiddenMedia": "Gizli Medya",
+  "@hiddenMedia": {},
+  "info": "Bilgi",
+  "@info": {},
+  "list": "Liste",
+  "@list": {
+    "placeholders": {
+      "type": {
+        "examples": "Anime list",
+        "type": "String"
+      }
+    }
+  },
+  "layout": "Düzen",
+  "@layout": {},
+  "language": "Dil",
+  "@language": {},
+  "options": "Seçenekler",
+  "@options": {},
+  "read": "Oku",
+  "@read": {},
+  "recentUpdates": "Son Güncellemeler",
+  "@recentUpdates": {},
+  "sort": "Sırala",
+  "@sort": {},
+  "watch": "İzle",
+  "@watch": {},
+  "utd": "Güncel",
+  "@utd": {},
+  "manageLayout": "Düzeni Yönet",
+  "@manageLayout": {
+    "placeholders": {
+      "service": {
+        "type": "String",
+        "examples": [
+          "Anilist",
+          "MAL"
+        ]
+      },
+      "page": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Home",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "manageLayoutDescription": "Düzeni kişiselleştirin",
+  "@manageLayoutDescription": {
+    "placeholders": {
+      "page": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Home",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "pickColor": "Renk Seç",
+  "@pickColor": {},
+  "droppedManga": "Bırakılan Manga",
+  "@droppedManga": {},
+  "noFavourites": "Favori Yok",
+  "@noFavourites": {},
+  "noHiddenMediaFound": "Gizli Medya Bulunamadı",
+  "@noHiddenMediaFound": {},
+  "noOnHold": "Beklemede Yok",
+  "@noOnHold": {},
+  "recommendationsEmptyMessage": "Öneriler bulunamadı",
+  "@recommendationsEmptyMessage": {},
+  "recommended": "Önerilen",
+  "@recommended": {},
+  "kitsu": "Kitsu",
+  "@kitsu": {}
 }

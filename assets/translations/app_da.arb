@@ -17,7 +17,7 @@
   "@donationGoal": {},
   "enableDarkMode": "Aktivér mørk tilstand",
   "@enableDarkMode": {},
-  "extension": "Udvidelse",
+  "extension": "{count, plural, =1 {Udvidelse} other {Udvidelses}}",
   "@extension": {},
   "fontColor": "Skriftfarve",
   "@fontColor": {},
@@ -37,7 +37,7 @@
   "@fontWeightDescription": {},
   "hidePrivate": "Skjul privat",
   "@hidePrivate": {},
-  "hidePrivateDescription": "Skjul privat indhold fra startskærmen",
+  "hidePrivateDescription": "Skjul private serier fra hjemmesiden.",
   "@hidePrivateDescription": {},
   "incognitoMode": "Inkognitotilstand",
   "@incognitoMode": {},
@@ -45,7 +45,7 @@
   "@incognitoModeDescription": {},
   "login": "Log ind",
   "@login": {},
-  "logout": "Log ud",
+  "logout": "Log ud {type}",
   "@logout": {},
   "resizeMode": "Tilpasningstilstand",
   "@resizeMode": {},
@@ -146,5 +146,389 @@
   "playerSettingsTitle": "Afspillerindstillinger",
   "@playerSettingsTitle": {},
   "speed": "Hastighed",
-  "@speed": {}
+  "@speed": {},
+  "manhwa": "Manhwa",
+  "@manhwa": {},
+  "manhua": "Manhua",
+  "@manhua": {},
+  "home": "Hjem",
+  "@home": {},
+  "novel": "Roman",
+  "@novel": {},
+  "ln": "Lettere roman",
+  "@ln": {},
+  "watch": "Se",
+  "@watch": {},
+  "addToList": "Tilføj til liste",
+  "@addToList": {},
+  "episode": "{count, plural, =1 {Episode} other {Episoder}}",
+  "@episode": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "chapter": "{count, plural, =1 {Kapitel} other {Kapitels}}",
+  "@chapter": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "volume": "{count, plural, =1 {Bind} other {Binds}}",
+  "@volume": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "movie": "{count, plural, =1 {Film} other {Films}}",
+  "@movie": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "calendar": "Kalender",
+  "@calendar": {},
+  "dtu": "Datoudgivelse",
+  "@dtu": {},
+  "list": "{type} Liste",
+  "@list": {
+    "placeholders": {
+      "type": {
+        "examples": "Anime list",
+        "type": "String"
+      }
+    }
+  },
+  "confirmLogout": "Bekræft log ud?",
+  "@confirmLogout": {},
+  "layout": "Layout",
+  "@layout": {},
+  "episodeWatched": "Episode set",
+  "@episodeWatched": {},
+  "chapterRead": "Kapitel læst",
+  "@chapterRead": {},
+  "topRated": "Top vurderet {type}",
+  "@topRated": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga",
+          "Manhwa",
+          "Series"
+        ]
+      }
+    }
+  },
+  "browse": "Gennemse {type}",
+  "@browse": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "favorite": "Favorit {type}",
+  "@favorite": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "onHold": "På hold {type}",
+  "@onHold": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "noDropped": "Du har ikke droppet nogen {type} endnu.",
+  "@noDropped": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "recommendationsEmptyMessage": "Ingen anbefalinger tilgængelige",
+  "@recommendationsEmptyMessage": {},
+  "author": "Forfatter",
+  "@author": {},
+  "averageDuration": "Gennemsnitlig varighed",
+  "@averageDuration": {},
+  "collapseText": "Skjul tekst",
+  "@collapseText": {},
+  "comingSoon": "Kommer snart",
+  "@comingSoon": {},
+  "description": "Beskrivelse",
+  "@description": {},
+  "endDate": "Slutdato",
+  "@endDate": {},
+  "expandText": "Udvid tekst",
+  "@expandText": {},
+  "favorites": "Favoritter",
+  "@favorites": {},
+  "format": "Format",
+  "@format": {},
+  "meanScore": "Gennemsnitlig score",
+  "@meanScore": {},
+  "name": "Navn",
+  "@name": {},
+  "nameRomaji": "Romaji navn",
+  "@nameRomaji": {},
+  "popularity": "Popularitet",
+  "@popularity": {},
+  "prequel": "Prequel",
+  "@prequel": {},
+  "recommended": "Anbefalet",
+  "@recommended": {},
+  "totalEpisodes": "Totale episoder",
+  "@totalEpisodes": {},
+  "totalChapters": "Totale kapitler",
+  "@totalChapters": {},
+  "relations": "Relationer",
+  "@relations": {},
+  "sequel": "Sequel",
+  "@sequel": {},
+  "source": "Kilde",
+  "@source": {},
+  "staff": "Personalet",
+  "@staff": {},
+  "startDate": "Startdato",
+  "@startDate": {},
+  "status": "Status",
+  "@status": {},
+  "studio": "Studio",
+  "@studio": {},
+  "synonyms": "Synonymer",
+  "@synonyms": {},
+  "characters": "Karakterer",
+  "@characters": {},
+  "synopsis": "Synopsis",
+  "@synopsis": {},
+  "tags": "Tags",
+  "@tags": {},
+  "total": "Total",
+  "@total": {},
+  "loginTo": "Log ind på {service}",
+  "@loginTo": {
+    "placeholders": {
+      "service": {
+        "type": "String",
+        "examples": [
+          "Anilist",
+          "MyAnimeList",
+          "Kitsu",
+          "Discord"
+        ]
+      }
+    }
+  },
+  "series": "Serie",
+  "@series": {},
+  "season": "Sæson",
+  "@season": {},
+  "genres": "Genrer",
+  "@genres": {},
+  "search": "Søg",
+  "@search": {},
+  "scanlators": "Scanlatorer",
+  "@scanlators": {},
+  "utd": "Udgivet",
+  "@utd": {},
+  "gridView": "Gittervisning",
+  "@gridView": {},
+  "listView": "Listevisning",
+  "@listView": {},
+  "compactView": "Kompakt visning",
+  "@compactView": {},
+  "available": "Tilgængelig {type}",
+  "@available": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "installed": "Installeret {type}",
+  "@installed": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Extensions"
+        ]
+      }
+    }
+  },
+  "trending": "Trendy {type}",
+  "@trending": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "mostFavourite": "Mest favoritter {type}",
+  "@mostFavourite": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga",
+          "Manhwa"
+        ]
+      }
+    }
+  },
+  "popular": "Populær {type}",
+  "@popular": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga",
+          "Manhwa"
+        ]
+      }
+    }
+  },
+  "thisSeason": "Denne sæson",
+  "@thisSeason": {},
+  "nextSeason": "Næste sæson",
+  "@nextSeason": {},
+  "previousSeason": "Forrige sæson",
+  "@previousSeason": {},
+  "language": "Sprog",
+  "@language": {},
+  "activity": "{count, plural, =1 {Aktivitet} other {Aktivitets}}",
+  "@activity": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "planned": "Planlagt {type}",
+  "@planned": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "continueWatching": "Fortsæt se",
+  "@continueWatching": {},
+  "info": "Info",
+  "@info": {},
+  "hiddenMedia": "Skjulte medier",
+  "@hiddenMedia": {},
+  "options": "Valgmuligheder",
+  "@options": {},
+  "recentUpdates": "Seneste opdateringer",
+  "@recentUpdates": {},
+  "topAiring": "Top luftning",
+  "@topAiring": {},
+  "sort": "Sorter",
+  "@sort": {},
+  "comments": "Kommentarer",
+  "@comments": {},
+  "continueReading": "Fortsæt læsning",
+  "@continueReading": {},
+  "read": "Læs",
+  "@read": {},
+  "manageLayout": "Administrer sidelayout på {page} for {service}",
+  "@manageLayout": {
+    "placeholders": {
+      "service": {
+        "type": "String",
+        "examples": [
+          "Anilist",
+          "MAL"
+        ]
+      },
+      "page": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Home",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "manageLayoutDescription": "Du kan administrere layoutet for siden {page} ved at trække og slippe elementerne",
+  "@manageLayoutDescription": {
+    "placeholders": {
+      "page": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Home",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "pickColor": "Vælg farve",
+  "@pickColor": {},
+  "allCaughtUpNew": "Alt fanget, hvad er nyt?",
+  "@allCaughtUpNew": {},
+  "droppedAnime": "Droppede anime",
+  "@droppedAnime": {},
+  "droppedManga": "Droppede manga",
+  "@droppedManga": {},
+  "noFavourites": "Det ser ud til, at du ikke kan lide noget,\nPrøv at like et show for at beholde det her.",
+  "@noFavourites": {},
+  "noHiddenMediaFound": "Ingen skjulte medier fundet",
+  "@noHiddenMediaFound": {},
+  "noOnHold": "Det ser ud til, at du ikke har sat noget i bero.",
+  "@noOnHold": {},
+  "kitsu": "Kitsu",
+  "@kitsu": {}
 }

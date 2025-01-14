@@ -146,5 +146,389 @@
   "subtitles": "Subtiṭa",
   "@subtitles": {},
   "subtitlePreview": "Nuna Subtiṭa",
-  "@subtitlePreview": {}
+  "@subtitlePreview": {},
+  "addToList": "Ƙara zuwa Jerin",
+  "@addToList": {},
+  "series": "Jerinsu",
+  "@series": {},
+  "season": "Sezon",
+  "@season": {},
+  "volume": "Kashi",
+  "@volume": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "movie": "Fim",
+  "@movie": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "scanlators": "Masu fassara",
+  "@scanlators": {},
+  "listView": "Duba Jerin",
+  "@listView": {},
+  "compactView": "Duba Mai Ƙananan Tsari",
+  "@compactView": {},
+  "layout": "Tsari",
+  "@layout": {},
+  "episodeWatched": "Karon Kallon Kashi",
+  "@episodeWatched": {},
+  "installed": "An girka",
+  "@installed": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Extensions"
+        ]
+      }
+    }
+  },
+  "previousSeason": "Sezon na baya",
+  "@previousSeason": {},
+  "activity": "Ayyuka",
+  "@activity": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "planned": "An shirya",
+  "@planned": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "browse": "Duba",
+  "@browse": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "continueReading": "Ci gaba da karatu",
+  "@continueReading": {},
+  "continueWatching": "Ci gaba da kallon",
+  "@continueWatching": {},
+  "averageDuration": "Matsakaicin Lokaci",
+  "@averageDuration": {},
+  "characters": "Haruffa",
+  "@characters": {},
+  "collapseText": "Ƙarƙashin Rubutu",
+  "@collapseText": {},
+  "description": "Bayanin",
+  "@description": {},
+  "endDate": "Ranar ƙarshe",
+  "@endDate": {},
+  "expandText": "Faɗaɗa Rubutu",
+  "@expandText": {},
+  "favorites": "Masu So",
+  "@favorites": {},
+  "format": "Tsari",
+  "@format": {},
+  "meanScore": "Matsakaicin Ƙimar",
+  "@meanScore": {},
+  "name": "Suna",
+  "@name": {},
+  "nameRomaji": "Suna a Romaji",
+  "@nameRomaji": {},
+  "popularity": "Shahararwa",
+  "@popularity": {},
+  "prequel": "Bari",
+  "@prequel": {},
+  "recommended": "An ba da shawara",
+  "@recommended": {},
+  "synopsis": "Takaitaccen Bayani",
+  "@synopsis": {},
+  "tags": "Alamar",
+  "@tags": {},
+  "total": "Jimillar",
+  "@total": {},
+  "comingSoon": "Zai zo nan gaba",
+  "@comingSoon": {},
+  "relations": "Dangantaka",
+  "@relations": {},
+  "sequel": "Ci gaba",
+  "@sequel": {},
+  "source": "Tushen",
+  "@source": {},
+  "staff": "Ma'aikata",
+  "@staff": {},
+  "startDate": "Ranar farawa",
+  "@startDate": {},
+  "status": "Matsayi",
+  "@status": {},
+  "studio": "Dakin Koyi",
+  "@studio": {},
+  "synonyms": "Ma'anar Suna",
+  "@synonyms": {},
+  "recommendationsEmptyMessage": "Babu shawarwari da aka samu",
+  "@recommendationsEmptyMessage": {},
+  "author": "Mawallafi",
+  "@author": {},
+  "totalEpisodes": "Jimillar Kashi",
+  "@totalEpisodes": {},
+  "totalChapters": "Jimillar Babin",
+  "@totalChapters": {},
+  "loginTo": "Shiga zuwa",
+  "@loginTo": {
+    "placeholders": {
+      "service": {
+        "type": "String",
+        "examples": [
+          "Anilist",
+          "MyAnimeList",
+          "Kitsu",
+          "Discord"
+        ]
+      }
+    }
+  },
+  "manhwa": "Manhwa",
+  "@manhwa": {},
+  "manhua": "Manhua",
+  "@manhua": {},
+  "home": "Gida",
+  "@home": {},
+  "novel": "Littafi",
+  "@novel": {},
+  "ln": "Littafin Litattafai na Kwana",
+  "@ln": {},
+  "episode": "Shahararrun Kashi",
+  "@episode": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "chapter": "Babi",
+  "@chapter": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "genres": "Nau'in",
+  "@genres": {},
+  "calendar": "Kalandar",
+  "@calendar": {},
+  "search": "Bincike",
+  "@search": {},
+  "utd": "Sabon Zazzagewa",
+  "@utd": {},
+  "list": "Jerin",
+  "@list": {
+    "placeholders": {
+      "type": {
+        "examples": "Anime list",
+        "type": "String"
+      }
+    }
+  },
+  "manageLayout": "Sarrafawa",
+  "@manageLayout": {
+    "placeholders": {
+      "service": {
+        "type": "String",
+        "examples": [
+          "Anilist",
+          "MAL"
+        ]
+      },
+      "page": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Home",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "confirmLogout": "Tabbatar da fita",
+  "@confirmLogout": {},
+  "gridView": "Duba grid",
+  "@gridView": {},
+  "chapterRead": "Karon Karatun Babi",
+  "@chapterRead": {},
+  "available": "Mai Samuwa",
+  "@available": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "trending": "Mafi shahararru",
+  "@trending": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "mostFavourite": "Mafi so",
+  "@mostFavourite": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga",
+          "Manhwa"
+        ]
+      }
+    }
+  },
+  "popular": "Shahararre",
+  "@popular": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga",
+          "Manhwa"
+        ]
+      }
+    }
+  },
+  "topRated": "Mafi darajar",
+  "@topRated": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga",
+          "Manhwa",
+          "Series"
+        ]
+      }
+    }
+  },
+  "thisSeason": "Wannan Sezon",
+  "@thisSeason": {},
+  "nextSeason": "Sezon na gaba",
+  "@nextSeason": {},
+  "favorite": "Mafi so",
+  "@favorite": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "onHold": "A tsaye",
+  "@onHold": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "noDropped": "Babu wanda aka janye",
+  "@noDropped": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "options": "Zaɓuɓɓuka",
+  "@options": {},
+  "noHiddenMediaFound": "Babu Media Mai ɓoye da aka samu",
+  "@noHiddenMediaFound": {},
+  "comments": "Sharhi",
+  "@comments": {},
+  "dtu": "Sabon Bincike",
+  "@dtu": {},
+  "hiddenMedia": "Daidaitaccen Media",
+  "@hiddenMedia": {},
+  "info": "Bayanan",
+  "@info": {},
+  "language": "Harshe",
+  "@language": {},
+  "noFavourites": "Babu wanda aka fi so",
+  "@noFavourites": {},
+  "read": "Karanta",
+  "@read": {},
+  "sort": "Tsara",
+  "@sort": {},
+  "topAiring": "Shahararrun Tsare-Tsare",
+  "@topAiring": {},
+  "watch": "Kallon",
+  "@watch": {},
+  "manageLayoutDescription": "Duba da sarrafa yadda zaku shirya shafukan",
+  "@manageLayoutDescription": {
+    "placeholders": {
+      "page": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Home",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "pickColor": "Zaɓi Launi",
+  "@pickColor": {},
+  "allCaughtUpNew": "Duka sabbin abubuwa an sabunta su",
+  "@allCaughtUpNew": {},
+  "droppedAnime": "An janye Anime",
+  "@droppedAnime": {},
+  "droppedManga": "An janye Manga",
+  "@droppedManga": {},
+  "noOnHold": "Babu a tsaye",
+  "@noOnHold": {},
+  "recentUpdates": "Sabbin Sabuntawa",
+  "@recentUpdates": {},
+  "kitsu": "Kitsu",
+  "@kitsu": {}
 }

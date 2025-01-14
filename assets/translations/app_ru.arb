@@ -67,7 +67,7 @@
   "@donationGoal": {},
   "enableDarkMode": "Включить тёмный режим",
   "@enableDarkMode": {},
-  "extension": "Расширение",
+  "extension": "{count, plural, =1 {Расширение} other {Расширение}}",
   "@extension": {},
   "extensionsDescription": "Устанавливайте и управляйте расширениями для дополнительных возможностей",
   "@extensionsDescription": {},
@@ -85,13 +85,13 @@
   "@fontWeight": {},
   "hidePrivate": "Скрыть личное",
   "@hidePrivate": {},
-  "hidePrivateDescription": "Скрыть личные медиа на главной странице",
+  "hidePrivateDescription": "Скрыть частные сериалы с главной страницы.",
   "@hidePrivateDescription": {},
   "incognitoMode": "Режим инкогнито",
   "@incognitoMode": {},
   "incognitoModeDescription": "Просматривайте без сохранения активности",
   "@incognitoModeDescription": {},
-  "logout": "Выйти",
+  "logout": "Выйти {type}",
   "@logout": {},
   "mal": "MyAnimeList",
   "@mal": {},
@@ -146,5 +146,389 @@
   "subtitles": "Субтитры",
   "@subtitles": {},
   "yes": "Да",
-  "@yes": {}
+  "@yes": {},
+  "trending": "{type}",
+  "@trending": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "dtu": "Вниз до вверх",
+  "@dtu": {},
+  "volume": "Счет, множественность, =1 {Volume} other {Volumes}}",
+  "@volume": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "loginTo": "Вход в {service}",
+  "@loginTo": {
+    "placeholders": {
+      "service": {
+        "type": "String",
+        "examples": [
+          "Anilist",
+          "MyAnimeList",
+          "Kitsu",
+          "Discord"
+        ]
+      }
+    }
+  },
+  "activity": "Счет, множественность, =1 {Activity} другие {Activities}}",
+  "@activity": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "topRated": "Top Rated {type}",
+  "@topRated": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga",
+          "Manhwa",
+          "Series"
+        ]
+      }
+    }
+  },
+  "previousSeason": "Предыдущий сезон",
+  "@previousSeason": {},
+  "popular": "Популярный {type}",
+  "@popular": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga",
+          "Manhwa"
+        ]
+      }
+    }
+  },
+  "confirmLogout": "Вы уверены, что хотите выйти?",
+  "@confirmLogout": {},
+  "installed": "Установка {type}",
+  "@installed": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Extensions"
+        ]
+      }
+    }
+  },
+  "mostFavourite": "Самый вкусный {type}",
+  "@mostFavourite": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga",
+          "Manhwa"
+        ]
+      }
+    }
+  },
+  "endDate": "Дата окончания",
+  "@endDate": {},
+  "chapterRead": "Глава Читать",
+  "@chapterRead": {},
+  "gridView": "Вид сетки",
+  "@gridView": {},
+  "browse": "{type}",
+  "@browse": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "comingSoon": "Иду",
+  "@comingSoon": {},
+  "episode": "Счет, множественность, =1 {Episode} другие {Episodes}}",
+  "@episode": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "episodeWatched": "Эпизод Смотреть",
+  "@episodeWatched": {},
+  "popularity": "Популярность",
+  "@popularity": {},
+  "favorites": "Любимые",
+  "@favorites": {},
+  "movie": "Счет, множественность, =1 {Movie} другие {Movies}}",
+  "@movie": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "prequel": "PREQUEL",
+  "@prequel": {},
+  "planned": "Запланировано {type}",
+  "@planned": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "language": "Язык",
+  "@language": {},
+  "collapseText": "показать меньше",
+  "@collapseText": {},
+  "chapter": "{count,плюрал, =1 {Chapter} другие {Chapters}}",
+  "@chapter": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "available": "Доступно {type}",
+  "@available": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "characters": "Персонажи",
+  "@characters": {},
+  "genres": "Жанры",
+  "@genres": {},
+  "calendar": "Календарь",
+  "@calendar": {},
+  "format": "Формат",
+  "@format": {},
+  "expandText": "показать",
+  "@expandText": {},
+  "manhua": "Manhua",
+  "@manhua": {},
+  "sequel": "SEQUEL",
+  "@sequel": {},
+  "studio": "Studio",
+  "@studio": {},
+  "staff": "Сотрудники",
+  "@staff": {},
+  "status": "Статус",
+  "@status": {},
+  "relations": "Отношения",
+  "@relations": {},
+  "source": "Источник",
+  "@source": {},
+  "synonyms": "Синонимы",
+  "@synonyms": {},
+  "startDate": "Начало Дата",
+  "@startDate": {},
+  "recommendationsEmptyMessage": "Наблюдайте за аниме или мангой, чтобы получить рекомендации",
+  "@recommendationsEmptyMessage": {},
+  "averageDuration": "Средняя продолжительность",
+  "@averageDuration": {},
+  "author": "Автор",
+  "@author": {},
+  "description": "Synopsis",
+  "@description": {},
+  "name": "Имя",
+  "@name": {},
+  "recommended": "Рекомендовано",
+  "@recommended": {},
+  "meanScore": "Средний балл",
+  "@meanScore": {},
+  "synopsis": "Synopsis",
+  "@synopsis": {},
+  "nameRomaji": "Имя (Ромаджи)",
+  "@nameRomaji": {},
+  "totalEpisodes": "Эпизоды",
+  "@totalEpisodes": {},
+  "total": "Итого",
+  "@total": {},
+  "tags": "Тэги",
+  "@tags": {},
+  "totalChapters": "Главы",
+  "@totalChapters": {},
+  "manhwa": "Manhwa",
+  "@manhwa": {},
+  "kitsu": "Kitsu",
+  "@kitsu": {},
+  "ln": "Light Novel",
+  "@ln": {},
+  "novel": "Новинка",
+  "@novel": {},
+  "series": "Серия",
+  "@series": {},
+  "home": "Домой",
+  "@home": {},
+  "addToList": "Добавить в список",
+  "@addToList": {},
+  "season": "Сезон",
+  "@season": {},
+  "compactView": "Компактный вид",
+  "@compactView": {},
+  "thisSeason": "Этот сезон",
+  "@thisSeason": {},
+  "listView": "Вид списка",
+  "@listView": {},
+  "onHold": "{type}",
+  "@onHold": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "favorite": "Любимый {type}",
+  "@favorite": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "nextSeason": "Следующий сезон",
+  "@nextSeason": {},
+  "noDropped": "Вы еще не уронили {type}.",
+  "@noDropped": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "recentUpdates": "Последние обновления",
+  "@recentUpdates": {},
+  "noOnHold": "Похоже, вы ничего не задержали.",
+  "@noOnHold": {},
+  "comments": "Комментарии",
+  "@comments": {},
+  "continueReading": "Продолжить чтение",
+  "@continueReading": {},
+  "continueWatching": "Продолжать смотреть",
+  "@continueWatching": {},
+  "info": "Информация",
+  "@info": {},
+  "list": "{type} List",
+  "@list": {
+    "placeholders": {
+      "type": {
+        "examples": "Anime list",
+        "type": "String"
+      }
+    }
+  },
+  "layout": "Layout",
+  "@layout": {},
+  "noFavourites": "Похоже, тебе ничего не нравится.\nПопытайся насладиться шоу, чтобы сохранить его здесь.",
+  "@noFavourites": {},
+  "noHiddenMediaFound": "Нет скрытых СМИ",
+  "@noHiddenMediaFound": {},
+  "options": "Параметры",
+  "@options": {},
+  "read": "Читать",
+  "@read": {},
+  "scanlators": "Скалы",
+  "@scanlators": {},
+  "search": "Поиск",
+  "@search": {},
+  "sort": "Сорт",
+  "@sort": {},
+  "topAiring": "Top Airing",
+  "@topAiring": {},
+  "watch": "Смотреть",
+  "@watch": {},
+  "utd": "Вниз",
+  "@utd": {},
+  "manageLayout": "Управление {page}",
+  "@manageLayout": {
+    "placeholders": {
+      "service": {
+        "type": "String",
+        "examples": [
+          "Anilist",
+          "MAL"
+        ]
+      },
+      "page": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Home",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "allCaughtUpNew": "Что нового?",
+  "@allCaughtUpNew": {},
+  "manageLayoutDescription": "Вы можете управлять компоновкой для страницы {page}, перетаскивая и опуская элементы",
+  "@manageLayoutDescription": {
+    "placeholders": {
+      "page": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Home",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "pickColor": "Выберите цвет",
+  "@pickColor": {},
+  "hiddenMedia": "Скрытые СМИ",
+  "@hiddenMedia": {},
+  "droppedManga": "Падение Манги",
+  "@droppedManga": {},
+  "droppedAnime": "Сброшенное аниме",
+  "@droppedAnime": {}
 }

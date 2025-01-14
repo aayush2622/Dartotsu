@@ -146,5 +146,389 @@
   "themeDescription": "I-customize ang hitsura at vibe ng iyong app",
   "@themeDescription": {},
   "yes": "Oo",
-  "@yes": {}
+  "@yes": {},
+  "manhwa": "Manhwa",
+  "@manhwa": {},
+  "manhua": "Manhua",
+  "@manhua": {},
+  "home": "Tahanan",
+  "@home": {},
+  "ln": "Liit na Nobela",
+  "@ln": {},
+  "series": "Serye",
+  "@series": {},
+  "season": "Panahon",
+  "@season": {},
+  "episode": "Episodyo",
+  "@episode": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "confirmLogout": "Kumpirmahin ang Pag-logout",
+  "@confirmLogout": {},
+  "gridView": "Grid View",
+  "@gridView": {},
+  "available": "Magagamit",
+  "@available": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "popular": "Popular",
+  "@popular": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga",
+          "Manhwa"
+        ]
+      }
+    }
+  },
+  "topRated": "Pinakamataas na Rating",
+  "@topRated": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga",
+          "Manhwa",
+          "Series"
+        ]
+      }
+    }
+  },
+  "previousSeason": "Nakaraang Panahon",
+  "@previousSeason": {},
+  "language": "Wika",
+  "@language": {},
+  "activity": "Aktibidad",
+  "@activity": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "planned": "Nakaplanong",
+  "@planned": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "favorite": "Paborito",
+  "@favorite": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "onHold": "Naka-hold",
+  "@onHold": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "noDropped": "Walang Na-drop",
+  "@noDropped": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "continueReading": "Magpatuloy sa Pagbabasa",
+  "@continueReading": {},
+  "hiddenMedia": "Naitagong Media",
+  "@hiddenMedia": {},
+  "recommendationsEmptyMessage": "Walang Inirerekomendang Nilalaman",
+  "@recommendationsEmptyMessage": {},
+  "name": "Pangalan",
+  "@name": {},
+  "nameRomaji": "Pangalan (Romaji)",
+  "@nameRomaji": {},
+  "totalEpisodes": "Kabuuang Epesodyo",
+  "@totalEpisodes": {},
+  "totalChapters": "Kabuuang Kabanata",
+  "@totalChapters": {},
+  "author": "May-akda",
+  "@author": {},
+  "averageDuration": "Karaniwang Tagal",
+  "@averageDuration": {},
+  "characters": "Mga Tauhan",
+  "@characters": {},
+  "collapseText": "I-collapse ang Teksto",
+  "@collapseText": {},
+  "comingSoon": "Malapit Nang Dumating",
+  "@comingSoon": {},
+  "description": "Paglalarawan",
+  "@description": {},
+  "endDate": "Petsa ng Pagtatapos",
+  "@endDate": {},
+  "relations": "Relasyon",
+  "@relations": {},
+  "sequel": "Sequel",
+  "@sequel": {},
+  "source": "Pinagmulan",
+  "@source": {},
+  "staff": "Mga Kawani",
+  "@staff": {},
+  "startDate": "Petsa ng Pagsisimula",
+  "@startDate": {},
+  "status": "Status",
+  "@status": {},
+  "studio": "Studio",
+  "@studio": {},
+  "synonyms": "Mga Sinonimo",
+  "@synonyms": {},
+  "expandText": "Palawakin ang Teksto",
+  "@expandText": {},
+  "favorites": "Mga Paborito",
+  "@favorites": {},
+  "format": "Pormat",
+  "@format": {},
+  "meanScore": "Karaniwang Iskor",
+  "@meanScore": {},
+  "popularity": "Kasikatan",
+  "@popularity": {},
+  "prequel": "Prequel",
+  "@prequel": {},
+  "synopsis": "Sinopsis",
+  "@synopsis": {},
+  "tags": "Mga Tag",
+  "@tags": {},
+  "total": "Kabuuan",
+  "@total": {},
+  "loginTo": "Mag-log in sa",
+  "@loginTo": {
+    "placeholders": {
+      "service": {
+        "type": "String",
+        "examples": [
+          "Anilist",
+          "MyAnimeList",
+          "Kitsu",
+          "Discord"
+        ]
+      }
+    }
+  },
+  "novel": "Nobela",
+  "@novel": {},
+  "chapter": "Kabanata",
+  "@chapter": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "volume": "Dami",
+  "@volume": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "movie": "Pelikula",
+  "@movie": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "genres": "Mga Genre",
+  "@genres": {},
+  "calendar": "Kalendaryo",
+  "@calendar": {},
+  "search": "Paghanap",
+  "@search": {},
+  "scanlators": "Mga Tagasalin",
+  "@scanlators": {},
+  "manageLayout": "Pamahalaan ang Ayos",
+  "@manageLayout": {
+    "placeholders": {
+      "service": {
+        "type": "String",
+        "examples": [
+          "Anilist",
+          "MAL"
+        ]
+      },
+      "page": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Home",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "listView": "List View",
+  "@listView": {},
+  "compactView": "Compact View",
+  "@compactView": {},
+  "episodeWatched": "Episodyo na Napanood",
+  "@episodeWatched": {},
+  "chapterRead": "Kabanatang Nabasa",
+  "@chapterRead": {},
+  "installed": "Na-install",
+  "@installed": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Extensions"
+        ]
+      }
+    }
+  },
+  "trending": "Trending",
+  "@trending": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "mostFavourite": "Pinakamamahal",
+  "@mostFavourite": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga",
+          "Manhwa"
+        ]
+      }
+    }
+  },
+  "thisSeason": "Sa Panahong Ito",
+  "@thisSeason": {},
+  "nextSeason": "Susunod na Panahon",
+  "@nextSeason": {},
+  "browse": "Mag-browse",
+  "@browse": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "addToList": "Idagdag sa Listahan",
+  "@addToList": {},
+  "continueWatching": "Magpatuloy sa Panonood",
+  "@continueWatching": {},
+  "noHiddenMediaFound": "Walang Naitagong Media na Natagpuan",
+  "@noHiddenMediaFound": {},
+  "noOnHold": "Walang Naka-hold",
+  "@noOnHold": {},
+  "allCaughtUpNew": "Lahat ng Update ay Nakuha",
+  "@allCaughtUpNew": {},
+  "noFavourites": "Walang Paborito",
+  "@noFavourites": {},
+  "comments": "Mga Komento",
+  "@comments": {},
+  "dtu": "Hindi Nai-update",
+  "@dtu": {},
+  "info": "Impormasyon",
+  "@info": {},
+  "list": "Listahan",
+  "@list": {
+    "placeholders": {
+      "type": {
+        "examples": "Anime list",
+        "type": "String"
+      }
+    }
+  },
+  "layout": "Ayos",
+  "@layout": {},
+  "options": "Mga Pagpipilian",
+  "@options": {},
+  "read": "Magbasa",
+  "@read": {},
+  "recentUpdates": "Mga Kamakailang Update",
+  "@recentUpdates": {},
+  "recommended": "Inirerekomenda",
+  "@recommended": {},
+  "sort": "Ayusin",
+  "@sort": {},
+  "topAiring": "Pinakapopular na Kasalukuyang Airing",
+  "@topAiring": {},
+  "watch": "Manood",
+  "@watch": {},
+  "utd": "Nai-update",
+  "@utd": {},
+  "manageLayoutDescription": "I-adjust ang disenyo ng layout",
+  "@manageLayoutDescription": {
+    "placeholders": {
+      "page": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Home",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "pickColor": "Pumili ng Kulay",
+  "@pickColor": {},
+  "droppedAnime": "Na-drop na Anime",
+  "@droppedAnime": {},
+  "droppedManga": "Na-drop na Manga",
+  "@droppedManga": {},
+  "kitsu": "Kitsu",
+  "@kitsu": {}
 }

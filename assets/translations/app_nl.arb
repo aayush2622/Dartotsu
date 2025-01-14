@@ -9,7 +9,7 @@
   "@colorPicker": {},
   "colorPickerDescription": "Kies een kleur",
   "@colorPickerDescription": {},
-  "extension": "Extensie",
+  "extension": "Kont, plural, Quality over Quantity (QoQ) Releases Vertaling:",
   "@extension": {},
   "theme": "Thema",
   "@theme": {},
@@ -77,7 +77,7 @@
   "@fontWeightDescription": {},
   "hidePrivate": "Verberg privé",
   "@hidePrivate": {},
-  "hidePrivateDescription": "Verberg privé media op de startpagina",
+  "hidePrivateDescription": "Verberg privé series van Homepagina.",
   "@hidePrivateDescription": {},
   "incognitoMode": "Incognito modus",
   "@incognitoMode": {},
@@ -85,7 +85,7 @@
   "@incognitoModeDescription": {},
   "login": "Inloggen",
   "@login": {},
-  "logout": "Uitloggen",
+  "logout": "Logout _",
   "@logout": {},
   "mal": "MyAnimeList",
   "@mal": {},
@@ -146,5 +146,389 @@
   "supportMaintainer": "Wil je de beheerder van Dartotsu steunen?\nOverweeg te doneren",
   "@supportMaintainer": {},
   "yes": "Ja",
-  "@yes": {}
+  "@yes": {},
+  "chapter": "Hoofdstuk",
+  "@chapter": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "genres": "Genres",
+  "@genres": {},
+  "calendar": "Agenda",
+  "@calendar": {},
+  "scanlators": "Scanlators",
+  "@scanlators": {},
+  "listView": "Lijstweergave",
+  "@listView": {},
+  "compactView": "Compacte weergave",
+  "@compactView": {},
+  "episodeWatched": "Aflevering bekeken",
+  "@episodeWatched": {},
+  "installed": "Geïnstalleerd",
+  "@installed": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Extensions"
+        ]
+      }
+    }
+  },
+  "previousSeason": "Vorige seizoen",
+  "@previousSeason": {},
+  "activity": "Activiteit",
+  "@activity": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "onHold": "In de wacht",
+  "@onHold": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "averageDuration": "Gemiddelde duur",
+  "@averageDuration": {},
+  "characters": "Personages",
+  "@characters": {},
+  "popularity": "Populariteit",
+  "@popularity": {},
+  "prequel": "Prequel",
+  "@prequel": {},
+  "synopsis": "Synopsis",
+  "@synopsis": {},
+  "tags": "Tags",
+  "@tags": {},
+  "total": "Totaal",
+  "@total": {},
+  "totalEpisodes": "Totaal afleveringen",
+  "@totalEpisodes": {},
+  "totalChapters": "Totaal hoofdstukken",
+  "@totalChapters": {},
+  "season": "Seizoen",
+  "@season": {},
+  "author": "Auteur",
+  "@author": {},
+  "format": "Formaat",
+  "@format": {},
+  "meanScore": "Gemiddelde score",
+  "@meanScore": {},
+  "name": "Naam",
+  "@name": {},
+  "nameRomaji": "Naam in Romaji",
+  "@nameRomaji": {},
+  "relations": "Relaties",
+  "@relations": {},
+  "sequel": "Sequel",
+  "@sequel": {},
+  "source": "Bron",
+  "@source": {},
+  "staff": "Personeel",
+  "@staff": {},
+  "startDate": "Startdatum",
+  "@startDate": {},
+  "status": "Status",
+  "@status": {},
+  "studio": "Studio",
+  "@studio": {},
+  "synonyms": "Synoniemen",
+  "@synonyms": {},
+  "collapseText": "Samenvouwen",
+  "@collapseText": {},
+  "comingSoon": "Komt binnenkort",
+  "@comingSoon": {},
+  "description": "Beschrijving",
+  "@description": {},
+  "endDate": "Einddatum",
+  "@endDate": {},
+  "expandText": "Uitvouwen",
+  "@expandText": {},
+  "favorites": "Favorieten",
+  "@favorites": {},
+  "loginTo": "Inloggen op",
+  "@loginTo": {
+    "placeholders": {
+      "service": {
+        "type": "String",
+        "examples": [
+          "Anilist",
+          "MyAnimeList",
+          "Kitsu",
+          "Discord"
+        ]
+      }
+    }
+  },
+  "manhwa": "Manhwa",
+  "@manhwa": {},
+  "manhua": "Manhua",
+  "@manhua": {},
+  "home": "Home",
+  "@home": {},
+  "novel": "Roman",
+  "@novel": {},
+  "ln": "Lichte Roman",
+  "@ln": {},
+  "series": "Serie",
+  "@series": {},
+  "episode": "Aflevering",
+  "@episode": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "volume": "Volume",
+  "@volume": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "movie": "Film",
+  "@movie": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "confirmLogout": "Bevestig uitloggen",
+  "@confirmLogout": {},
+  "gridView": "Rasterweergave",
+  "@gridView": {},
+  "chapterRead": "Hoofdstuk gelezen",
+  "@chapterRead": {},
+  "available": "Beschikbaar",
+  "@available": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "trending": "Trending",
+  "@trending": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "mostFavourite": "Meest favoriet",
+  "@mostFavourite": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga",
+          "Manhwa"
+        ]
+      }
+    }
+  },
+  "popular": "Populair",
+  "@popular": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga",
+          "Manhwa"
+        ]
+      }
+    }
+  },
+  "topRated": "Top beoordeeld",
+  "@topRated": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga",
+          "Manhwa",
+          "Series"
+        ]
+      }
+    }
+  },
+  "thisSeason": "Dit seizoen",
+  "@thisSeason": {},
+  "nextSeason": "Volgend seizoen",
+  "@nextSeason": {},
+  "planned": "Gepland",
+  "@planned": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "browse": "Bladeren",
+  "@browse": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "favorite": "Favoriet",
+  "@favorite": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "noDropped": "Geen afgehaakte",
+  "@noDropped": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "continueReading": "Doorgaan met lezen",
+  "@continueReading": {},
+  "continueWatching": "Doorgaan met kijken",
+  "@continueWatching": {},
+  "recommended": "Aanbevolen",
+  "@recommended": {},
+  "addToList": "Toevoegen aan lijst",
+  "@addToList": {},
+  "dtu": "Te updaten",
+  "@dtu": {},
+  "info": "Informatie",
+  "@info": {},
+  "list": "Lijst",
+  "@list": {
+    "placeholders": {
+      "type": {
+        "examples": "Anime list",
+        "type": "String"
+      }
+    }
+  },
+  "layout": "Indeling",
+  "@layout": {},
+  "noFavourites": "Geen favorieten",
+  "@noFavourites": {},
+  "options": "Opties",
+  "@options": {},
+  "read": "Lezen",
+  "@read": {},
+  "recentUpdates": "Recente updates",
+  "@recentUpdates": {},
+  "search": "Zoeken",
+  "@search": {},
+  "sort": "Sorteren",
+  "@sort": {},
+  "watch": "Kijken",
+  "@watch": {},
+  "utd": "Bijgewerkt",
+  "@utd": {},
+  "comments": "Opmerkingen",
+  "@comments": {},
+  "language": "Taal",
+  "@language": {},
+  "topAiring": "Top uitzending",
+  "@topAiring": {},
+  "manageLayout": "Beheer indeling",
+  "@manageLayout": {
+    "placeholders": {
+      "service": {
+        "type": "String",
+        "examples": [
+          "Anilist",
+          "MAL"
+        ]
+      },
+      "page": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Home",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "manageLayoutDescription": "Beheer de indeling van de lijst",
+  "@manageLayoutDescription": {
+    "placeholders": {
+      "page": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Home",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "pickColor": "Kleur kiezen",
+  "@pickColor": {},
+  "allCaughtUpNew": "Wat is New?",
+  "@allCaughtUpNew": {},
+  "droppedAnime": "Afgehaakte anime",
+  "@droppedAnime": {},
+  "droppedManga": "Afgehaakte manga",
+  "@droppedManga": {},
+  "hiddenMedia": "Verborgen media",
+  "@hiddenMedia": {},
+  "noHiddenMediaFound": "Geen verborgen media gevonden",
+  "@noHiddenMediaFound": {},
+  "noOnHold": "Geen in de wacht",
+  "@noOnHold": {},
+  "recommendationsEmptyMessage": "Geen aanbevelingen gevonden",
+  "@recommendationsEmptyMessage": {},
+  "kitsu": "Kitsu",
+  "@kitsu": {}
 }

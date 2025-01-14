@@ -23,7 +23,7 @@
   "@about": {},
   "account": "Akun",
   "@account": {},
-  "hidePrivateDescription": "Sembunyikan media pribadi dari halaman utama",
+  "hidePrivateDescription": "Sembunyikan seri pribadi dari halaman rumah.",
   "@hidePrivateDescription": {},
   "incognitoMode": "Mode Penyamaran",
   "@incognitoMode": {},
@@ -69,7 +69,7 @@
   "@enableDarkMode": {},
   "fontColor": "Warna Font",
   "@fontColor": {},
-  "extension": "Ekstensi",
+  "extension": "Sitemap =1 {Extension} lainnya {Konten}}",
   "@extension": {},
   "extensionsDescription": "Pasang dan kelola ekstensi untuk fungsionalitas tambahan",
   "@extensionsDescription": {},
@@ -89,7 +89,7 @@
   "@hidePrivate": {},
   "login": "Masuk",
   "@login": {},
-  "logout": "Keluar",
+  "logout": "Login",
   "@logout": {},
   "mal": "MyAnimeList",
   "@mal": {},
@@ -146,5 +146,389 @@
   "theme": "Tema",
   "@theme": {},
   "themeDescription": "Sesuaikan tampilan dan suasana aplikasi Anda",
-  "@themeDescription": {}
+  "@themeDescription": {},
+  "totalEpisodes": "Login",
+  "@totalEpisodes": {},
+  "continueReading": "Sitemap",
+  "@continueReading": {},
+  "thisSeason": "Musim Ini",
+  "@thisSeason": {},
+  "favorite": "Favorit {type}",
+  "@favorite": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "nextSeason": "Musim Berikutnya",
+  "@nextSeason": {},
+  "noDropped": "Anda belum menjatuhkan {type}.",
+  "@noDropped": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "manhwa": "Login",
+  "@manhwa": {},
+  "volume": "Sitemap =1 {Volume} lainnya {Volumes}}",
+  "@volume": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "novel": "Login",
+  "@novel": {},
+  "activity": "Sitemap =1 {Aktivitas} lainnya {Aktivities}}",
+  "@activity": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "continueWatching": "Sitemap",
+  "@continueWatching": {},
+  "topRated": "Nilai teratas {type}",
+  "@topRated": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga",
+          "Manhwa",
+          "Series"
+        ]
+      }
+    }
+  },
+  "previousSeason": "Musim Sebelumnya",
+  "@previousSeason": {},
+  "popular": "Populer {type}",
+  "@popular": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga",
+          "Manhwa"
+        ]
+      }
+    }
+  },
+  "mostFavourite": "Kebanyakan Favorit {type}",
+  "@mostFavourite": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga",
+          "Manhwa"
+        ]
+      }
+    }
+  },
+  "chapterRead": "Sitemap",
+  "@chapterRead": {},
+  "nameRomaji": "Nama (Romaji)",
+  "@nameRomaji": {},
+  "gridView": "Login",
+  "@gridView": {},
+  "browse": "Login",
+  "@browse": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "comingSoon": "Login",
+  "@comingSoon": {},
+  "episodeWatched": "Episode Login",
+  "@episodeWatched": {},
+  "totalChapters": "Login",
+  "@totalChapters": {},
+  "favorites": "Login",
+  "@favorites": {},
+  "movie": "Sitemap =1 {Movie} lainnya {Movies}}",
+  "@movie": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "home": "Login",
+  "@home": {},
+  "planned": "Direncanakan {type}",
+  "@planned": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "list": "{type} Daftar",
+  "@list": {
+    "placeholders": {
+      "type": {
+        "examples": "Anime list",
+        "type": "String"
+      }
+    }
+  },
+  "search": "Sitemap",
+  "@search": {},
+  "collapseText": "sitemap",
+  "@collapseText": {},
+  "addToList": "Tambahkan ke Daftar",
+  "@addToList": {},
+  "chapter": "{count, jamak, =1 {Chapter} lainnya {Chapters}}",
+  "@chapter": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "available": "Tersedia {type}",
+  "@available": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "characters": "Login",
+  "@characters": {},
+  "genres": "Login",
+  "@genres": {},
+  "calendar": "Kalender",
+  "@calendar": {},
+  "format": "Login",
+  "@format": {},
+  "expandText": "sitemap",
+  "@expandText": {},
+  "manhua": "Login",
+  "@manhua": {},
+  "sequel": "LOGIN",
+  "@sequel": {},
+  "studio": "Login",
+  "@studio": {},
+  "staff": "Login",
+  "@staff": {},
+  "status": "Login",
+  "@status": {},
+  "popularity": "Login",
+  "@popularity": {},
+  "prequel": "LOGIN",
+  "@prequel": {},
+  "relations": "Login",
+  "@relations": {},
+  "source": "Login",
+  "@source": {},
+  "synonyms": "Login",
+  "@synonyms": {},
+  "startDate": "Tanggal Mulai",
+  "@startDate": {},
+  "recommendationsEmptyMessage": "Tonton/Baca beberapa Anime atau Manga untuk mendapatkan Rekomendasi",
+  "@recommendationsEmptyMessage": {},
+  "author": "Login",
+  "@author": {},
+  "description": "Login",
+  "@description": {},
+  "endDate": "Tanggal Akhir",
+  "@endDate": {},
+  "averageDuration": "Durasi rata-rata",
+  "@averageDuration": {},
+  "total": "Sitemap",
+  "@total": {},
+  "tags": "Login",
+  "@tags": {},
+  "name": "Login",
+  "@name": {},
+  "meanScore": "Skor",
+  "@meanScore": {},
+  "synopsis": "Login",
+  "@synopsis": {},
+  "kitsu": "Login",
+  "@kitsu": {},
+  "loginTo": "Login ke {service}",
+  "@loginTo": {
+    "placeholders": {
+      "service": {
+        "type": "String",
+        "examples": [
+          "Anilist",
+          "MyAnimeList",
+          "Kitsu",
+          "Discord"
+        ]
+      }
+    }
+  },
+  "ln": "Login",
+  "@ln": {},
+  "watch": "Login",
+  "@watch": {},
+  "series": "Login",
+  "@series": {},
+  "episode": "Sitemap {Episode} lainnya {Episodes}}",
+  "@episode": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "season": "Login",
+  "@season": {},
+  "scanlators": "Login",
+  "@scanlators": {},
+  "manageLayout": "Kelola halaman {page} untuk {service}",
+  "@manageLayout": {
+    "placeholders": {
+      "service": {
+        "type": "String",
+        "examples": [
+          "Anilist",
+          "MAL"
+        ]
+      },
+      "page": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Home",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "confirmLogout": "Apakah Anda yakin ingin keluar?",
+  "@confirmLogout": {},
+  "compactView": "Tampilan yang ringkas",
+  "@compactView": {},
+  "listView": "Login",
+  "@listView": {},
+  "trending": "Tren {type}",
+  "@trending": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "installed": "Dipasang {type}",
+  "@installed": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Extensions"
+        ]
+      }
+    }
+  },
+  "onHold": "Di Hold {type}",
+  "@onHold": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "droppedAnime": "Dijatuhkan Anime",
+  "@droppedAnime": {},
+  "topAiring": "Sitemap",
+  "@topAiring": {},
+  "utd": "Sitemap",
+  "@utd": {},
+  "read": "Sitemap",
+  "@read": {},
+  "info": "Sitemap",
+  "@info": {},
+  "layout": "Login",
+  "@layout": {},
+  "comments": "Sitemap",
+  "@comments": {},
+  "hiddenMedia": "Media tersembunyi",
+  "@hiddenMedia": {},
+  "dtu": "Sitemap",
+  "@dtu": {},
+  "language": "Login",
+  "@language": {},
+  "noFavourites": "Terlihat seperti yang tidak seperti apa pun, Meme it\nCoba liking sebuah acara untuk menjaganya di sini.",
+  "@noFavourites": {},
+  "noHiddenMediaFound": "Tidak ada media tersembunyi yang ditemukan",
+  "@noHiddenMediaFound": {},
+  "options": "Login",
+  "@options": {},
+  "recentUpdates": "Update Terbaru",
+  "@recentUpdates": {},
+  "recommended": "Sitemap",
+  "@recommended": {},
+  "sort": "Login",
+  "@sort": {},
+  "allCaughtUpNew": "Semua tertangkap, apa yang baru?",
+  "@allCaughtUpNew": {},
+  "manageLayoutDescription": "Anda dapat mengelola layout untuk halaman {page} dengan menyeret dan menjatuhkan item",
+  "@manageLayoutDescription": {
+    "placeholders": {
+      "page": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Home",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "pickColor": "Pilih warna",
+  "@pickColor": {},
+  "noOnHold": "Terlihat seperti yang belum Anda masukkan apa pun di pegang.",
+  "@noOnHold": {},
+  "droppedManga": "Manga Terjatuh",
+  "@droppedManga": {}
 }

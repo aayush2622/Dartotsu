@@ -11,7 +11,7 @@
   "@common": {},
   "commonDescription": "பயன்பாட்டின் வழக்கமான அமைப்புகளை அணுகவும்",
   "@commonDescription": {},
-  "extension": "உதவி",
+  "extension": "{count, plural, =1 {உதவி} other {உதவி}}",
   "@extension": {},
   "fontSize": "எழுத்து அளவு",
   "@fontSize": {},
@@ -87,11 +87,11 @@
   "@fontWeightDescription": {},
   "hidePrivate": "தனியுரிமையை மறைக்கவும்",
   "@hidePrivate": {},
-  "hidePrivateDescription": "முகப்புப் பக்கத்தில் தனியுரிமை ஊடகங்களை மறைக்கவும்",
+  "hidePrivateDescription": "முகப்புப் பக்கத்திலிருந்து தனிப்பட்ட தொடர்களை மறை.",
   "@hidePrivateDescription": {},
   "incognitoModeDescription": "உங்கள் செயல்பாடுகளை சேமிக்காமல் உலாவவும்",
   "@incognitoModeDescription": {},
-  "logout": "வெளியேறு",
+  "logout": "வெளியேறு {type}",
   "@logout": {},
   "mal": "MyAnimeList",
   "@mal": {},
@@ -146,5 +146,389 @@
   "anilist": "AniList",
   "@anilist": {},
   "appName": "Dartotsu",
-  "@appName": {}
+  "@appName": {},
+  "ln": "Light Novel",
+  "@ln": {},
+  "volume": "{count, plural, =1 {Volume} other {Volumes}}",
+  "@volume": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "total": "Total",
+  "@total": {},
+  "novel": "Novel",
+  "@novel": {},
+  "tags": "Tags",
+  "@tags": {},
+  "popular": "Popular {type}",
+  "@popular": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga",
+          "Manhwa"
+        ]
+      }
+    }
+  },
+  "name": "Name",
+  "@name": {},
+  "mostFavourite": "Most Favourite {type}",
+  "@mostFavourite": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga",
+          "Manhwa"
+        ]
+      }
+    }
+  },
+  "meanScore": "Mean Score",
+  "@meanScore": {},
+  "series": "Series",
+  "@series": {},
+  "synopsis": "Synopsis",
+  "@synopsis": {},
+  "nameRomaji": "Name (Romaji)",
+  "@nameRomaji": {},
+  "averageDuration": "Average Duration",
+  "@averageDuration": {},
+  "comingSoon": "Coming SOON",
+  "@comingSoon": {},
+  "episode": "{count, plural, =1 {Episode} other {Episodes}}",
+  "@episode": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "popularity": "Popularity",
+  "@popularity": {},
+  "totalChapters": "Chapters",
+  "@totalChapters": {},
+  "favorites": "Favorites",
+  "@favorites": {},
+  "home": "Home",
+  "@home": {},
+  "prequel": "PREQUEL",
+  "@prequel": {},
+  "planned": "Planned {type}",
+  "@planned": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "search": "Search",
+  "@search": {},
+  "collapseText": "show less",
+  "@collapseText": {},
+  "chapter": "{count, plural, =1 {Chapter} other {Chapters}}",
+  "@chapter": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "characters": "Characters",
+  "@characters": {},
+  "genres": "Genres",
+  "@genres": {},
+  "calendar": "Calendar",
+  "@calendar": {},
+  "format": "Format",
+  "@format": {},
+  "expandText": "show more",
+  "@expandText": {},
+  "manhua": "Manhua",
+  "@manhua": {},
+  "season": "Season",
+  "@season": {},
+  "author": "Author",
+  "@author": {},
+  "sequel": "SEQUEL",
+  "@sequel": {},
+  "studio": "Studio",
+  "@studio": {},
+  "staff": "Staff",
+  "@staff": {},
+  "status": "Status",
+  "@status": {},
+  "relations": "Relations",
+  "@relations": {},
+  "source": "Source",
+  "@source": {},
+  "synonyms": "Synonyms",
+  "@synonyms": {},
+  "startDate": "Start Date",
+  "@startDate": {},
+  "description": "Synopsis",
+  "@description": {},
+  "endDate": "End Date",
+  "@endDate": {},
+  "totalEpisodes": "Episodes",
+  "@totalEpisodes": {},
+  "manhwa": "Manhwa",
+  "@manhwa": {},
+  "kitsu": "Kitsu",
+  "@kitsu": {},
+  "loginTo": "Login to {service}",
+  "@loginTo": {
+    "placeholders": {
+      "service": {
+        "type": "String",
+        "examples": [
+          "Anilist",
+          "MyAnimeList",
+          "Kitsu",
+          "Discord"
+        ]
+      }
+    }
+  },
+  "movie": "{count, plural, =1 {Movie} other {Movies}}",
+  "@movie": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "scanlators": "Scanlators",
+  "@scanlators": {},
+  "manageLayout": "Manage {page} page Layout for {service}",
+  "@manageLayout": {
+    "placeholders": {
+      "service": {
+        "type": "String",
+        "examples": [
+          "Anilist",
+          "MAL"
+        ]
+      },
+      "page": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Home",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "dtu": "Down To Up",
+  "@dtu": {},
+  "list": "{type} List",
+  "@list": {
+    "placeholders": {
+      "type": {
+        "examples": "Anime list",
+        "type": "String"
+      }
+    }
+  },
+  "confirmLogout": "நீங்கள் வெளியேற விரும்புகிறீர்களா?",
+  "@confirmLogout": {},
+  "gridView": "Grid View",
+  "@gridView": {},
+  "compactView": "Compact View",
+  "@compactView": {},
+  "listView": "List View",
+  "@listView": {},
+  "installed": "Installed {type}",
+  "@installed": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Extensions"
+        ]
+      }
+    }
+  },
+  "chapterRead": "Chapter Read",
+  "@chapterRead": {},
+  "episodeWatched": "Episode Watched",
+  "@episodeWatched": {},
+  "available": "Available {type}",
+  "@available": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "layout": "Layout",
+  "@layout": {},
+  "thisSeason": "This Season",
+  "@thisSeason": {},
+  "trending": "Trending {type}",
+  "@trending": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "topRated": "Top Rated {type}",
+  "@topRated": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga",
+          "Manhwa",
+          "Series"
+        ]
+      }
+    }
+  },
+  "nextSeason": "Next Season",
+  "@nextSeason": {},
+  "previousSeason": "Previous Season",
+  "@previousSeason": {},
+  "onHold": "On Hold {type}",
+  "@onHold": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "favorite": "Favorite {type}",
+  "@favorite": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "noDropped": "You haven't dropped any {type} yet.",
+  "@noDropped": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "activity": "{count, plural, =1 {Activity} other {Activities}}",
+  "@activity": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "browse": "Browse {type}",
+  "@browse": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "continueReading": "Continue Reading",
+  "@continueReading": {},
+  "recommendationsEmptyMessage": "Watch/Read some Anime or Manga to get Recommendations",
+  "@recommendationsEmptyMessage": {},
+  "sort": "Sort",
+  "@sort": {},
+  "options": "Options",
+  "@options": {},
+  "addToList": "Add To List",
+  "@addToList": {},
+  "comments": "Comments",
+  "@comments": {},
+  "continueWatching": "Continue Watching",
+  "@continueWatching": {},
+  "info": "Info",
+  "@info": {},
+  "language": "Language",
+  "@language": {},
+  "read": "Read",
+  "@read": {},
+  "topAiring": "Top Airing",
+  "@topAiring": {},
+  "watch": "Watch",
+  "@watch": {},
+  "utd": "Up To Down",
+  "@utd": {},
+  "manageLayoutDescription": "You can manage the layout for {page} page by dragging and dropping the items",
+  "@manageLayoutDescription": {
+    "placeholders": {
+      "page": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Home",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "pickColor": "Pick a color",
+  "@pickColor": {},
+  "noFavourites": "Looks like you don't like anything,\nTry liking a show to keep it here.",
+  "@noFavourites": {},
+  "noOnHold": "Looks like you haven't put anything on hold.",
+  "@noOnHold": {},
+  "hiddenMedia": "Hidden Media",
+  "@hiddenMedia": {},
+  "noHiddenMediaFound": "No hidden media found",
+  "@noHiddenMediaFound": {},
+  "droppedManga": "Dropped Manga",
+  "@droppedManga": {},
+  "droppedAnime": "Dropped Anime",
+  "@droppedAnime": {},
+  "allCaughtUpNew": "All caught up, when New?",
+  "@allCaughtUpNew": {},
+  "recentUpdates": "Recent Updates",
+  "@recentUpdates": {},
+  "recommended": "Recommended",
+  "@recommended": {}
 }

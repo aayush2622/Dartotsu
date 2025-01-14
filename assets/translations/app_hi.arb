@@ -73,7 +73,7 @@
   "@bottomPadding": {},
   "cursedSpeed": "श्रापित गति",
   "@cursedSpeed": {},
-  "extension": "विस्तार",
+  "extension": "{count, plural, =1 {विस्तार} other {विस्तारें}}",
   "@extension": {},
   "outlineColorDescription": "उपशीर्षक रेखा का रंग",
   "@outlineColorDescription": {},
@@ -119,7 +119,7 @@
   "@resizeMode": {},
   "incognitoModeDescription": "अपनी गतिविधि सहेजे बिना ब्राउज़ करें",
   "@incognitoModeDescription": {},
-  "logout": "लॉगआउट",
+  "logout": "लॉगआउट {type}",
   "@logout": {},
   "speedDescription": "प्लेयर के लिए डिफ़ॉल्ट गति",
   "@speedDescription": {},
@@ -129,7 +129,7 @@
   "@subtitlePreview": {},
   "fontColorDescription": "उपशीर्षक का फ़ॉन्ट रंग",
   "@fontColorDescription": {},
-  "hidePrivateDescription": "मुखपृष्ठ से निजी मीडिया छिपाएं",
+  "hidePrivateDescription": "मुखपृष्ठ से निजी श्रृंखलाएँ छुपाएँ।",
   "@hidePrivateDescription": {},
   "playerSettingsTitle": "प्लेयर सेटिंग्स",
   "@playerSettingsTitle": {},
@@ -146,5 +146,389 @@
   "fontWeight": "फ़ॉन्ट का वजन",
   "@fontWeight": {},
   "offlineMode": "ऑफ़लाइन मोड",
-  "@offlineMode": {}
+  "@offlineMode": {},
+  "kitsu": "Kitsu",
+  "@kitsu": {},
+  "loginTo": "लॉगिन करें {service}",
+  "@loginTo": {
+    "placeholders": {
+      "service": {
+        "type": "String",
+        "examples": [
+          "Anilist",
+          "MyAnimeList",
+          "Kitsu",
+          "Discord"
+        ]
+      }
+    }
+  },
+  "manhwa": "मन्हवा",
+  "@manhwa": {},
+  "manhua": "मन्हुआ",
+  "@manhua": {},
+  "home": "मुख्य पृष्ठ",
+  "@home": {},
+  "novel": "उपन्यास",
+  "@novel": {},
+  "ln": "लाइट नोवेल",
+  "@ln": {},
+  "comments": "टिप्पणियाँ",
+  "@comments": {},
+  "series": "श्रृंखला",
+  "@series": {},
+  "season": "मौसम",
+  "@season": {},
+  "episode": "{count, plural, =1 {एपिसोड} other {एपिसोड}}",
+  "@episode": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "chapter": "{count, plural, =1 {अध्या} other {अध्या}}",
+  "@chapter": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "volume": "{count, plural, =1 {खंड} other {खंड}}",
+  "@volume": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "scanlators": "स्कैनलाटर्स",
+  "@scanlators": {},
+  "dtu": "ड्रॉप किया गया",
+  "@dtu": {},
+  "manageLayout": "{service} के लिए {page} पेज लेआउट प्रबंधित करें",
+  "@manageLayout": {
+    "placeholders": {
+      "service": {
+        "type": "String",
+        "examples": [
+          "Anilist",
+          "MAL"
+        ]
+      },
+      "page": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Home",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "manageLayoutDescription": "आप आइटमों को खींचकर और छोड़ कर {page} पेज के लिए लेआउट प्रबंधित कर सकते हैं",
+  "@manageLayoutDescription": {
+    "placeholders": {
+      "page": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Home",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "confirmLogout": "क्या आप सुनिश्चित हैं कि आप लॉगआउट करना चाहते हैं?",
+  "@confirmLogout": {},
+  "gridView": "ग्रिड दृश्य",
+  "@gridView": {},
+  "listView": "सूची दृश्य",
+  "@listView": {},
+  "compactView": "संक्षिप्त दृश्य",
+  "@compactView": {},
+  "episodeWatched": "देखे गए एपिसोड",
+  "@episodeWatched": {},
+  "available": "उपलब्ध {type}",
+  "@available": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "chapterRead": "पढ़े गए अध्याय",
+  "@chapterRead": {},
+  "installed": "स्थापित {type}",
+  "@installed": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Extensions"
+        ]
+      }
+    }
+  },
+  "trending": "ट्रेंडिंग {type}",
+  "@trending": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "mostFavourite": "सबसे पसंदीदा {type}",
+  "@mostFavourite": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga",
+          "Manhwa"
+        ]
+      }
+    }
+  },
+  "popular": "लोकप्रिय {type}",
+  "@popular": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga",
+          "Manhwa"
+        ]
+      }
+    }
+  },
+  "topRated": "शीर्ष रेटेड {type}",
+  "@topRated": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga",
+          "Manhwa",
+          "Series"
+        ]
+      }
+    }
+  },
+  "thisSeason": "इस मौसम",
+  "@thisSeason": {},
+  "nextSeason": "अगला मौसम",
+  "@nextSeason": {},
+  "previousSeason": "पिछला मौसम",
+  "@previousSeason": {},
+  "language": "भाषा",
+  "@language": {},
+  "activity": "{count, plural, =1 {गतिविधि} other {गतिविधि}}",
+  "@activity": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "planned": "नियोजित {type}",
+  "@planned": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "browse": "ब्राउज़ {type}",
+  "@browse": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "favorite": "पसंदीदा {type}",
+  "@favorite": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "onHold": "होल्ड पर {type}",
+  "@onHold": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "noDropped": "आपने अभी तक कोई भी {type} नहीं छोड़ा है।",
+  "@noDropped": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "continueWatching": "देखना जारी रखें",
+  "@continueWatching": {},
+  "hiddenMedia": "छिपी हुई मीडिया",
+  "@hiddenMedia": {},
+  "noFavourites": "लगता है तुम्हें कुछ पसंद नहीं,\nकिसी शो को पसंद करके उसे यहां रखने का प्रयास करें।",
+  "@noFavourites": {},
+  "noOnHold": "ऐसा लगता है कि आपने कुछ भी रोक कर नहीं रखा है।",
+  "@noOnHold": {},
+  "recommendationsEmptyMessage": "कोई सिफारिश नहीं है",
+  "@recommendationsEmptyMessage": {},
+  "description": "विवरण",
+  "@description": {},
+  "endDate": "समाप्ति तिथि",
+  "@endDate": {},
+  "expandText": "पाठ का विस्तार करें",
+  "@expandText": {},
+  "favorites": "पसंदीदा",
+  "@favorites": {},
+  "format": "स्वरूप",
+  "@format": {},
+  "meanScore": "औसत स्कोर",
+  "@meanScore": {},
+  "name": "नाम",
+  "@name": {},
+  "nameRomaji": "नाम रोमाजी",
+  "@nameRomaji": {},
+  "popularity": "लोकप्रियता",
+  "@popularity": {},
+  "prequel": "पूर्वकथा",
+  "@prequel": {},
+  "relations": "संबंध",
+  "@relations": {},
+  "sequel": "उत्तरकथा",
+  "@sequel": {},
+  "source": "स्रोत",
+  "@source": {},
+  "staff": "कर्मचारी",
+  "@staff": {},
+  "startDate": "आरंभ तिथि",
+  "@startDate": {},
+  "status": "स्थिति",
+  "@status": {},
+  "studio": "स्टूडियो",
+  "@studio": {},
+  "synonyms": "समानार्थी शब्द",
+  "@synonyms": {},
+  "tags": "टैग",
+  "@tags": {},
+  "total": "कुल",
+  "@total": {},
+  "totalEpisodes": "कुल एपिसोड",
+  "@totalEpisodes": {},
+  "totalChapters": "कुल अध्याय",
+  "@totalChapters": {},
+  "author": "लेखक",
+  "@author": {},
+  "averageDuration": "औसत अवधि",
+  "@averageDuration": {},
+  "characters": "चरित्र",
+  "@characters": {},
+  "collapseText": "पाठ को संकुचित करें",
+  "@collapseText": {},
+  "comingSoon": "जल्द आ रहा है",
+  "@comingSoon": {},
+  "movie": "{count, plural, =1 {फिल्म} other {फिल्म}}",
+  "@movie": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "genres": "शैलियाँ",
+  "@genres": {},
+  "calendar": "कैलेंडर",
+  "@calendar": {},
+  "recommended": "सिफारिश की गई",
+  "@recommended": {},
+  "layout": "लेआउट",
+  "@layout": {},
+  "addToList": "सूची में जोड़ें",
+  "@addToList": {},
+  "droppedAnime": "ड्रॉप किया गया एनीमे",
+  "@droppedAnime": {},
+  "continueReading": "पढ़ना जारी रखें",
+  "@continueReading": {},
+  "info": "जानकारी",
+  "@info": {},
+  "list": "{type} सूची",
+  "@list": {
+    "placeholders": {
+      "type": {
+        "examples": "Anime list",
+        "type": "String"
+      }
+    }
+  },
+  "noHiddenMediaFound": "कोई छिपी हुई मीडिया नहीं मिली",
+  "@noHiddenMediaFound": {},
+  "options": "विकल्प",
+  "@options": {},
+  "read": "पढ़ें",
+  "@read": {},
+  "recentUpdates": "हाल की अपडेट्स",
+  "@recentUpdates": {},
+  "search": "खोजें",
+  "@search": {},
+  "sort": "क्रमबद्ध करें",
+  "@sort": {},
+  "topAiring": "शीर्ष प्रसारण",
+  "@topAiring": {},
+  "watch": "देखें",
+  "@watch": {},
+  "utd": "अद्यतन",
+  "@utd": {},
+  "pickColor": "रंग चुनें",
+  "@pickColor": {},
+  "allCaughtUpNew": "सभी पकड़ा, नया क्या है?",
+  "@allCaughtUpNew": {},
+  "droppedManga": "ड्रॉप किया गया मांगा",
+  "@droppedManga": {},
+  "synopsis": "सार",
+  "@synopsis": {}
 }

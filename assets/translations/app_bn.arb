@@ -75,7 +75,7 @@
   "@donationGoal": {},
   "enableDarkMode": "ডার্ক মোড সক্রিয় করুন",
   "@enableDarkMode": {},
-  "extension": "এক্সটেনশন",
+  "extension": "{count, plural, =1 {এক্সটেনশন} other {এক্সটেনশনসমূহ}}",
   "@extension": {},
   "extensionsDescription": "অতিরিক্ত কার্যকারিতা জন্য এক্সটেনশনগুলি ইনস্টল এবং পরিচালনা করুন",
   "@extensionsDescription": {},
@@ -97,7 +97,7 @@
   "@fontWeightDescription": {},
   "hidePrivate": "প্রাইভেট লুকান",
   "@hidePrivate": {},
-  "hidePrivateDescription": "হোম পেজ থেকে প্রাইভেট মিডিয়া লুকান",
+  "hidePrivateDescription": "হোম পেজ থেকে ব্যক্তিগত সিরিজ লুকান।",
   "@hidePrivateDescription": {},
   "incognitoMode": "ইনকগনিটো মোড",
   "@incognitoMode": {},
@@ -105,7 +105,7 @@
   "@incognitoModeDescription": {},
   "login": "লগইন",
   "@login": {},
-  "logout": "লগআউট",
+  "logout": "লগআউট {type}",
   "@logout": {},
   "mal": "MyAnimeList",
   "@mal": {},
@@ -146,5 +146,389 @@
   "themeDescription": "আপনার অ্যাপের চেহারা এবং অনুভূতি কাস্টমাইজ করুন",
   "@themeDescription": {},
   "yes": "হ্যাঁ",
-  "@yes": {}
+  "@yes": {},
+  "info": "তথ্য",
+  "@info": {},
+  "comments": "মন্তব্য",
+  "@comments": {},
+  "addToList": "তালিকায় যুক্ত করুন",
+  "@addToList": {},
+  "series": "সিরিজ",
+  "@series": {},
+  "season": "মৌসুম",
+  "@season": {},
+  "movie": "{count, plural, =1 {মুভি} other {মুভি}}",
+  "@movie": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "genres": "ধরণ",
+  "@genres": {},
+  "calendar": "ক্যালেন্ডার",
+  "@calendar": {},
+  "scanlators": "স্ক্যানলেটর",
+  "@scanlators": {},
+  "list": "{type} তালিকা",
+  "@list": {
+    "placeholders": {
+      "type": {
+        "examples": "Anime list",
+        "type": "String"
+      }
+    }
+  },
+  "episodeWatched": "দেখা হয়েছে",
+  "@episodeWatched": {},
+  "chapterRead": "পড়া হয়েছে",
+  "@chapterRead": {},
+  "available": "উপলব্ধ {type}",
+  "@available": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "installed": "ইনস্টলড {type}",
+  "@installed": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Extensions"
+        ]
+      }
+    }
+  },
+  "trending": "ট্রেন্ডিং {type}",
+  "@trending": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "mostFavourite": "সর্বাধিক পছন্দ {type}",
+  "@mostFavourite": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga",
+          "Manhwa"
+        ]
+      }
+    }
+  },
+  "topAiring": "শীর্ষ সম্প্রচারিত",
+  "@topAiring": {},
+  "topRated": "শীর্ষ রেটেড {type}",
+  "@topRated": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga",
+          "Manhwa",
+          "Series"
+        ]
+      }
+    }
+  },
+  "thisSeason": "এই মৌসুম",
+  "@thisSeason": {},
+  "nextSeason": "পরবর্তী মৌসুম",
+  "@nextSeason": {},
+  "previousSeason": "পূর্ববর্তী মৌসুম",
+  "@previousSeason": {},
+  "activity": "{count, plural, =1 {কর্মক্ষমতা} other {কর্মক্ষমতা}}",
+  "@activity": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "planned": "পরিকল্পিত {type}",
+  "@planned": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "browse": "ব্রাউজ {type}",
+  "@browse": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "favorite": "প্রিয় {type}",
+  "@favorite": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "onHold": "পিছনে রাখা {type}",
+  "@onHold": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "continueReading": "পড়া চালিয়ে যান",
+  "@continueReading": {},
+  "continueWatching": "দেখা চালিয়ে যান",
+  "@continueWatching": {},
+  "averageDuration": "গড় সময়কাল",
+  "@averageDuration": {},
+  "characters": "চরিত্র",
+  "@characters": {},
+  "collapseText": "টেক্সট সংকুচিত করুন",
+  "@collapseText": {},
+  "comingSoon": "শীঘ্রই আসছে",
+  "@comingSoon": {},
+  "description": "বর্ণনা",
+  "@description": {},
+  "recommended": "সুপারিশকৃত",
+  "@recommended": {},
+  "staff": "স্টাফ",
+  "@staff": {},
+  "startDate": "শুরু তারিখ",
+  "@startDate": {},
+  "status": "অবস্থা",
+  "@status": {},
+  "studio": "স্টুডিও",
+  "@studio": {},
+  "synopsis": "সারাংশ",
+  "@synopsis": {},
+  "tags": "ট্যাগ",
+  "@tags": {},
+  "total": "মোট",
+  "@total": {},
+  "totalEpisodes": "মোট এপিসোড",
+  "@totalEpisodes": {},
+  "totalChapters": "মোট অধ্যায়",
+  "@totalChapters": {},
+  "kitsu": "Kitsu",
+  "@kitsu": {},
+  "endDate": "শেষ তারিখ",
+  "@endDate": {},
+  "expandText": "টেক্সট বিস্তৃত করুন",
+  "@expandText": {},
+  "favorites": "প্রিয়",
+  "@favorites": {},
+  "format": "ফরম্যাট",
+  "@format": {},
+  "meanScore": "গড় স্কোর",
+  "@meanScore": {},
+  "name": "নাম",
+  "@name": {},
+  "nameRomaji": "নামের রোমাজি",
+  "@nameRomaji": {},
+  "popularity": "জনপ্রিয়তা",
+  "@popularity": {},
+  "prequel": "প্রিক্যুয়েল",
+  "@prequel": {},
+  "relations": "সম্পর্ক",
+  "@relations": {},
+  "sequel": "সিক্যুয়েল",
+  "@sequel": {},
+  "source": "উৎস",
+  "@source": {},
+  "synonyms": "সিনোনিম",
+  "@synonyms": {},
+  "recommendationsEmptyMessage": "কোনও সুপারিশ নেই",
+  "@recommendationsEmptyMessage": {},
+  "author": "লেখক",
+  "@author": {},
+  "loginTo": "লগইন করুন {service}",
+  "@loginTo": {
+    "placeholders": {
+      "service": {
+        "type": "String",
+        "examples": [
+          "Anilist",
+          "MyAnimeList",
+          "Kitsu",
+          "Discord"
+        ]
+      }
+    }
+  },
+  "manhwa": "মানহুয়া",
+  "@manhwa": {},
+  "manhua": "মানহুয়া",
+  "@manhua": {},
+  "home": "হোম",
+  "@home": {},
+  "novel": "নভেল",
+  "@novel": {},
+  "ln": "এলএন",
+  "@ln": {},
+  "read": "পড়ুন",
+  "@read": {},
+  "episode": "{count, plural, =1 {পর্ব} other {পর্ব}}",
+  "@episode": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "chapter": "{count, plural, =1 {অধ্যায়} other {অধ্যায়}}",
+  "@chapter": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "volume": "{count, plural, =1 {ভলিউম} other {ভলিউম}}",
+  "@volume": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "search": "অনুসন্ধান",
+  "@search": {},
+  "manageLayoutDescription": "আপনি আইটেম টেনে এবং ড্রপ করে {page} পৃষ্ঠার জন্য লেআউট পরিচালনা করতে পারেন",
+  "@manageLayoutDescription": {
+    "placeholders": {
+      "page": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Home",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "confirmLogout": "আপনি কি লগআউট করতে চান?",
+  "@confirmLogout": {},
+  "options": "বিকল্প",
+  "@options": {},
+  "gridView": "গ্রিড ভিউ",
+  "@gridView": {},
+  "listView": "তালিকা ভিউ",
+  "@listView": {},
+  "compactView": "কমপ্যাক্ট ভিউ",
+  "@compactView": {},
+  "layout": "লেআউট",
+  "@layout": {},
+  "popular": "জনপ্রিয় {type}",
+  "@popular": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga",
+          "Manhwa"
+        ]
+      }
+    }
+  },
+  "language": "ভাষা",
+  "@language": {},
+  "noDropped": "আপনি এখনও কোনো {type} বাদ দেননি।",
+  "@noDropped": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "dtu": "ডাউনলোড করা হয়েছে",
+  "@dtu": {},
+  "watch": "দেখুন",
+  "@watch": {},
+  "noHiddenMediaFound": "কোনও গোপন মিডিয়া পাওয়া যায়নি",
+  "@noHiddenMediaFound": {},
+  "utd": "আপডেটেড",
+  "@utd": {},
+  "sort": "বাছাই করুন",
+  "@sort": {},
+  "manageLayout": "{service} এর জন্য {page} পৃষ্ঠা লেআউট পরিচালনা করুন",
+  "@manageLayout": {
+    "placeholders": {
+      "service": {
+        "type": "String",
+        "examples": [
+          "Anilist",
+          "MAL"
+        ]
+      },
+      "page": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Home",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "pickColor": "রঙ চয়ন করুন",
+  "@pickColor": {},
+  "allCaughtUpNew": "সবকিছু আপডেট হয়ে গেছে?",
+  "@allCaughtUpNew": {},
+  "droppedAnime": "বাদ দেওয়া অ্যানিমে",
+  "@droppedAnime": {},
+  "droppedManga": "বাদ দেওয়া মাঙ্গা",
+  "@droppedManga": {},
+  "hiddenMedia": "গোপন মিডিয়া",
+  "@hiddenMedia": {},
+  "noFavourites": "মনে হচ্ছে তোমার কিছুই ভালো লাগে না,\nএটি এখানে রাখার জন্য একটি শো পছন্দ করার চেষ্টা করুন।",
+  "@noFavourites": {},
+  "noOnHold": "মনে হচ্ছে আপনি কিছু আটকে রাখেননি।",
+  "@noOnHold": {},
+  "recentUpdates": "সাম্প্রতিক আপডেট",
+  "@recentUpdates": {}
 }
