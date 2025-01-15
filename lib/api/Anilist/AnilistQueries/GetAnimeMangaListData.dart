@@ -149,9 +149,12 @@ Future<List<Media>> _mediaList(Page? media) async {
   if (media == null || media.media == null) {
     return [];
   }
-  return media.media!.map((media) => Media.mediaData(media)).toList();
+  return await compute(_processMediaPage, media.media!);
 }
 
+List<Media> _processMediaPage(List<api.Media> mediaItems) {
+  return mediaItems.map((media) => Media.mediaData(media)).toList();
+}
 
 String _buildQueryString(String sort, String type,
     {String? format,

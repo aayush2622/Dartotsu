@@ -6,11 +6,13 @@ class Logger {
   static File? _logFile;
   static List<String> logs = [];
   static Future<void> init() async {
+    if (Platform.isIOS) return;
+
     var path = PrefManager.getVal(PrefName.customPath);
     final directory = await StorageProvider()
         .getDirectory(useCustomPath: true, customPath: path);
 
-      _logFile = File('${directory?.path}\\appLogs.txt'.fixSeparator);
+      _logFile = File('${directory?.path}/appLogs.txt'.fixSeparator);
 
       if (await _logFile!.exists() && await _logFile!.length() > 1024 * 1024) {
         await _logFile!.delete();
@@ -21,6 +23,7 @@ class Logger {
   }
 
   static Future<void> log(String message) async {
+    if (Platform.isIOS) return;
     final now = DateTime.now().toLocal();
     final timestamp =
         '${now.day.toString().padLeft(2, '0')}/${now.month.toString().padLeft(2, '0')}/${now.year.toString().padLeft(4, '0')} ${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}:${now.second.toString().padLeft(2, '0')}';
