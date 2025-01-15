@@ -124,17 +124,20 @@ class _PlayerControllerState extends State<PlayerController> {
     var defaultAudio = currentQuality.audios?.firstWhereOrNull(
       (element) => element.label == 'English',
     );
-
-    await _controller.setAudio(
-      defaultAudio?.file ?? "",
-      defaultAudio?.label ?? "",
-      defaultAudio?.file?.toNullInt() == null,
-    );
-    await _controller.setSubtitle(
-      defaultSub?.file ?? "",
-      defaultSub?.label ?? "",
-      defaultSub?.file?.toNullInt() == null,
-    );
+    if (defaultAudio!= null) {
+      await _controller.setAudio(
+        defaultAudio.file ?? "",
+        defaultAudio.label ?? "",
+        defaultAudio.file?.toNullInt() == null,
+      );
+    }
+    if (defaultSub!= null) {
+      _controller.setSubtitle(
+        defaultSub.file ?? "",
+        defaultSub.label ?? "",
+        defaultSub.file?.toNullInt() == null,
+      );
+    }
     _controller.isBuffering.value = false;
     _controller.play();
   }
@@ -284,21 +287,23 @@ class _PlayerControllerState extends State<PlayerController> {
 
   Widget _buildProgressBar() {
     return SizedBox(
-      height: 20,
+      height: 18,
       child: Column(
         children: [
           IgnorePointer(
             ignoring: isControlsLocked.value,
             child: SliderTheme(
               data: SliderThemeData(
-                trackHeight: 1.8,
+                trackHeight: 5.8,
+
                 thumbColor: Theme.of(context).colorScheme.primary,
                 activeTrackColor: Theme.of(context).colorScheme.primary,
                 inactiveTrackColor: const Color.fromARGB(255, 121, 121, 121),
                 secondaryActiveTrackColor:
                     const Color.fromARGB(255, 167, 167, 167),
-                thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 6),
-                overlayShape: SliderComponentShape.noThumb,
+                thumbShape: SliderComponentShape.noThumb,
+                overlayShape: SliderComponentShape.noOverlay,
+                trackShape: RoundedRectSliderTrackShape(),
               ),
               child: Obx(
                 () {
