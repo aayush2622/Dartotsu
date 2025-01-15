@@ -188,7 +188,7 @@
   "@calendar": {},
   "dtu": "अवतारितम्",
   "@dtu": {},
-  "manageLayout": "रूपरेखायाः व्यवस्थापनम्",
+  "manageLayout": "{page} पृष्ठस्य विन्यासः {service} कृते प्रबन्धयन्तु",
   "@manageLayout": {
     "placeholders": {
       "service": {
@@ -208,7 +208,7 @@
       }
     }
   },
-  "manageLayoutDescription": "रूपरेखायाः व्यवस्थापनविवरणम्",
+  "manageLayoutDescription": "भवान् {page} पृष्ठस्य विन्यासं द्रव्यं कर्षयित्वा पातयित्वा च प्रबन्धयितुं शक्नोति",
   "@manageLayoutDescription": {
     "placeholders": {
       "page": {
@@ -229,7 +229,7 @@
   "@listView": {},
   "chapterRead": "अध्यायपठनम्",
   "@chapterRead": {},
-  "available": "उपलब्धम्",
+  "available": "उपलब्धम् {type}",
   "@available": {
     "placeholders": {
       "type": {
@@ -241,7 +241,7 @@
       }
     }
   },
-  "installed": "स्थापितम्",
+  "installed": "स्थापितम् {type}",
   "@installed": {
     "placeholders": {
       "type": {
@@ -252,7 +252,7 @@
       }
     }
   },
-  "trending": "प्रवृत्तिम्",
+  "trending": "प्रवृत्तिम् {type}",
   "@trending": {
     "placeholders": {
       "type": {
@@ -264,7 +264,7 @@
       }
     }
   },
-  "mostFavourite": "अत्यन्तप्रियतम्",
+  "mostFavourite": "अत्यन्तप्रियतम् {type}",
   "@mostFavourite": {
     "placeholders": {
       "type": {
@@ -279,7 +279,7 @@
   },
   "nextSeason": "अनन्तरऋतु",
   "@nextSeason": {},
-  "activity": "क्रिया",
+  "activity": "{count, plural, =1 {क्रिया} other {क्रिया}}",
   "@activity": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -288,7 +288,7 @@
       }
     }
   },
-  "popular": "लोकप्रियः",
+  "popular": "लोकप्रिय {type}",
   "@popular": {
     "placeholders": {
       "type": {
@@ -301,7 +301,7 @@
       }
     }
   },
-  "topRated": "श्रेष्ठमूल्याङ्कनम्",
+  "topRated": "श्रेष्ठमूल्याङ्कनम् {type}",
   "@topRated": {
     "placeholders": {
       "type": {
@@ -317,7 +317,7 @@
   },
   "thisSeason": "अद्यतकालीनऋतु",
   "@thisSeason": {},
-  "planned": "योजनायाः",
+  "planned": "योजनाया {type}",
   "@planned": {
     "placeholders": {
       "type": {
@@ -329,7 +329,7 @@
       }
     }
   },
-  "browse": "अन्वेष",
+  "browse": "अन्वेष {type}",
   "@browse": {
     "placeholders": {
       "type": {
@@ -341,7 +341,7 @@
       }
     }
   },
-  "favorite": "प्रिय",
+  "favorite": "प्रिय {type}",
   "@favorite": {
     "placeholders": {
       "type": {
@@ -353,7 +353,7 @@
       }
     }
   },
-  "onHold": "निरोधितम्",
+  "onHold": "निरोधितम् {type}",
   "@onHold": {
     "placeholders": {
       "type": {
@@ -365,7 +365,7 @@
       }
     }
   },
-  "noDropped": "न किमपि निष्कासितम्",
+  "noDropped": "भवता अद्यापि कोऽपि {type} न पातितः।",
   "@noDropped": {
     "placeholders": {
       "type": {
@@ -383,7 +383,7 @@
   "@continueWatching": {},
   "pickColor": "रंगं चयनय",
   "@pickColor": {},
-  "allCaughtUpNew": "सर्वं नवीनं प्राप्तं",
+  "allCaughtUpNew": "सर्वे गृहीताः, किं नवीनम्?",
   "@allCaughtUpNew": {},
   "recommended": "सिफ़ारिशितम्",
   "@recommended": {},
@@ -461,7 +461,7 @@
   "@manhwa": {},
   "manhua": "मन्हुआ",
   "@manhua": {},
-  "movie": "चित्रपट",
+  "movie": "{count, plural, =1 {चित्रपट} other {चित्रपट}}",
   "@movie": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -496,7 +496,7 @@
   "@comments": {},
   "info": "सूचना",
   "@info": {},
-  "list": "सूची",
+  "list": "{type} सूची",
   "@list": {
     "placeholders": {
       "type": {
@@ -523,12 +523,14 @@
   "@watch": {},
   "utd": "नवनीकृतम्",
   "@utd": {},
-  "noFavourites": "कोणपि प्रियं न अस्ति",
+  "noFavourites": "भवतः किमपि न रोचते इव दृश्यते,\nअत्र स्थापयितुं कञ्चन शो इत्येतत् पसन्दं कर्तुं प्रयतध्वम्।",
   "@noFavourites": {},
   "noHiddenMediaFound": "गुप्तमाध्यमं न लभते",
   "@noHiddenMediaFound": {},
-  "noOnHold": "निरोधितं किमपि न अस्ति",
+  "noOnHold": "इदं दृश्यते यत् भवता किमपि स्थगितम् नास्ति।",
   "@noOnHold": {},
   "synopsis": "सार",
-  "@synopsis": {}
+  "@synopsis": {},
+  "simkl": "Simkl",
+  "@simkl": {}
 }

@@ -11,7 +11,7 @@
   "@donationGoal": {},
   "enableDarkMode": "අඳුරු මාධ්‍ය සක්‍රිය කරන්න",
   "@enableDarkMode": {},
-  "extension": "විසය",
+  "extension": "{count, plural, =1 {අනුවාදය} other {අනුවාද}}",
   "@extension": {},
   "fontColor": "අකුරු වර්ණය",
   "@fontColor": {},
@@ -91,7 +91,7 @@
   "@fontWeightDescription": {},
   "hidePrivate": "පෞද්ගලිකව hidden කරන්න",
   "@hidePrivate": {},
-  "hidePrivateDescription": "මූලික පිටුවේ පෞද්ගලික මාධ්‍ය හඳුනා නොගන්න",
+  "hidePrivateDescription": "නිවස පිටුවෙන් පෞද්ගලික මාලාවන් සඟවාදැක්වන්න.",
   "@hidePrivateDescription": {},
   "incognitoMode": "අනන්‍යතා මාධ්‍ය",
   "@incognitoMode": {},
@@ -99,11 +99,11 @@
   "@incognitoModeDescription": {},
   "login": "ඉන්ටර්නෙට් පිවිසීම",
   "@login": {},
-  "logout": "ඉන්ටර්නෙට් පිටවීම",
+  "logout": "{type} පිටවීම",
   "@logout": {},
   "mangaDescription": "ඔබගේ මංගා අත්දැකීම් පෞද්ගලිකව කළමනාකරණය කරන්න",
   "@mangaDescription": {},
-  "materialYou": "අවශ්‍ය මාලිගාව",
+  "materialYou": "දෘශ්‍ය කෘතිය",
   "@materialYou": {},
   "materialYouDescription": "ඔබගේ වॉलපේපර් එකේ වර්ණයක් භාවිතා කරන්න",
   "@materialYouDescription": {},
@@ -127,7 +127,7 @@
   "@resizeMode": {},
   "resizeModeDescription": "දෘෂ්ටි ප්‍රතිසංස්කරණ ප්‍රමාණය",
   "@resizeModeDescription": {},
-  "showSubtitlesDescription": "පෙරළීම පෙන්වන්න",
+  "showSubtitlesDescription": "පෙරනිමියෙන් උපසිරැසි පෙන්වන්න",
   "@showSubtitlesDescription": {},
   "skipButton": "ඉක්මනින් බොත්තම",
   "@skipButton": {},
@@ -135,7 +135,7 @@
   "@restoreSettings": {},
   "settings": "සැකසුම්",
   "@settings": {},
-  "showSubtitles": "පෙරළීම පෙන්වන්න",
+  "showSubtitles": "උපසිරැසි පෙන්වන්න",
   "@showSubtitles": {},
   "skipButtonDescription": "ඉක්මනින් බොත්තම කාලය",
   "@skipButtonDescription": {},
@@ -147,13 +147,13 @@
   "@subtitles": {},
   "subtitlePreview": "පෙරළි පූර්ව දර්ශනය",
   "@subtitlePreview": {},
-  "nextSeason": "Next Season",
+  "nextSeason": "ඉදිරි සමය",
   "@nextSeason": {},
   "info": "Info",
   "@info": {},
-  "continueWatching": "Continue Watching",
+  "continueWatching": "පරික්ෂා කිරීම දිගටම කරන්න",
   "@continueWatching": {},
-  "topRated": "Top Rated {type}",
+  "topRated": "{type} ඉහළව අගය කරන",
   "@topRated": {
     "placeholders": {
       "type": {
@@ -167,7 +167,7 @@
       }
     }
   },
-  "popular": "Popular {type}",
+  "popular": "{type} ජනප්‍රිය",
   "@popular": {
     "placeholders": {
       "type": {
@@ -182,9 +182,9 @@
   },
   "name": "Name",
   "@name": {},
-  "nameRomaji": "Name (Romaji)",
+  "nameRomaji": "නම (රෝමජි)",
   "@nameRomaji": {},
-  "mostFavourite": "Most Favourite {type}",
+  "mostFavourite": "{type} ඉතාමත් කැමති",
   "@mostFavourite": {
     "placeholders": {
       "type": {
@@ -199,17 +199,17 @@
   },
   "meanScore": "Mean Score",
   "@meanScore": {},
-  "droppedAnime": "Dropped Anime",
+  "droppedAnime": "ඉවත් කරන ලද ඇනිමේ",
   "@droppedAnime": {},
-  "popularity": "Popularity",
+  "popularity": "ප්‍රසිද්ධිය",
   "@popularity": {},
-  "allCaughtUpNew": "All caught up, when New?",
+  "allCaughtUpNew": "සියල්ල අවසන්, නවතම කුමක්ද?",
   "@allCaughtUpNew": {},
   "prequel": "PREQUEL",
   "@prequel": {},
-  "language": "Language",
+  "language": "භාෂාව",
   "@language": {},
-  "chapter": "{count, plural, =1 {Chapter} other {Chapters}}",
+  "chapter": "{count, plural, =1 {අධිෂ්ඨානය} other {අධිෂ්ඨාන}}",
   "@chapter": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -218,17 +218,17 @@
       }
     }
   },
-  "characters": "Characters",
+  "characters": "පිළිබඳ පෙනුම",
   "@characters": {},
   "author": "Author",
   "@author": {},
-  "format": "Format",
+  "format": "රුපය",
   "@format": {},
   "sequel": "SEQUEL",
   "@sequel": {},
   "studio": "Studio",
   "@studio": {},
-  "staff": "Staff",
+  "staff": "සේවකයෝ",
   "@staff": {},
   "status": "Status",
   "@status": {},
@@ -236,39 +236,39 @@
   "@relations": {},
   "source": "Source",
   "@source": {},
-  "synonyms": "Synonyms",
+  "synonyms": "සමාන පද",
   "@synonyms": {},
   "startDate": "Start Date",
   "@startDate": {},
-  "averageDuration": "Average Duration",
+  "averageDuration": "මධ්‍යම කාලය",
   "@averageDuration": {},
-  "description": "Synopsis",
+  "description": "සංක්ෂේපය",
   "@description": {},
   "endDate": "End Date",
   "@endDate": {},
-  "comingSoon": "Coming SOON",
+  "comingSoon": "ඉක්මනින් පැමිණෙයි",
   "@comingSoon": {},
-  "favorites": "Favorites",
+  "favorites": "ප්‍රියතම",
   "@favorites": {},
-  "collapseText": "show less",
+  "collapseText": "තවත් නොපෙන්වන්න",
   "@collapseText": {},
-  "expandText": "show more",
+  "expandText": "තවත් පෙන්වන්න",
   "@expandText": {},
-  "totalEpisodes": "Episodes",
+  "totalEpisodes": "කතාන්තර",
   "@totalEpisodes": {},
   "total": "Total",
   "@total": {},
   "tags": "Tags",
   "@tags": {},
-  "synopsis": "Synopsis",
+  "synopsis": "සංක්ෂේපය",
   "@synopsis": {},
-  "totalChapters": "Chapters",
+  "totalChapters": "අධිෂ්ඨාන",
   "@totalChapters": {},
   "manhwa": "Manhwa",
   "@manhwa": {},
   "kitsu": "Kitsu",
   "@kitsu": {},
-  "loginTo": "Login to {service}",
+  "loginTo": "{service} වෙත පුරනය වන්න",
   "@loginTo": {
     "placeholders": {
       "service": {
@@ -282,19 +282,19 @@
       }
     }
   },
-  "novel": "Novel",
+  "novel": "කතාව",
   "@novel": {},
-  "ln": "Light Novel",
+  "ln": "සැරසිලි කතාව",
   "@ln": {},
   "home": "Home",
   "@home": {},
   "manhua": "Manhua",
   "@manhua": {},
-  "watch": "Watch",
+  "watch": "පරික්ෂා කරන්න",
   "@watch": {},
   "series": "Series",
   "@series": {},
-  "episode": "{count, plural, =1 {Episode} other {Episodes}}",
+  "episode": "{count, plural, =1 {කතාන්තරය} other {කතාන්තර}}",
   "@episode": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -305,9 +305,9 @@
   },
   "addToList": "Add To List",
   "@addToList": {},
-  "season": "Season",
+  "season": "ගෙදර",
   "@season": {},
-  "volume": "{count, plural, =1 {Volume} other {Volumes}}",
+  "volume": "{count, plural, =1 {ප්‍රමාණය} other {ප්‍රමාණ}}",
   "@volume": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -316,7 +316,7 @@
       }
     }
   },
-  "movie": "{count, plural, =1 {Movie} other {Movies}}",
+  "movie": "{count, plural, =1 {චිත්‍රපටය} other {චිත්‍රපට}}",
   "@movie": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -325,15 +325,15 @@
       }
     }
   },
-  "genres": "Genres",
+  "genres": "ප්‍රකාර",
   "@genres": {},
-  "compactView": "Compact View",
+  "compactView": "සම්පීඩිත නිරීක්ෂණය",
   "@compactView": {},
-  "scanlators": "Scanlators",
+  "scanlators": "ස්කෑන් කර්මකරු",
   "@scanlators": {},
   "listView": "List View",
   "@listView": {},
-  "manageLayout": "Manage {page} page Layout for {service}",
+  "manageLayout": "{service} සඳහා {page} පිටුවේ රූපය කළමනාකරණය කරන්න",
   "@manageLayout": {
     "placeholders": {
       "service": {
@@ -353,11 +353,11 @@
       }
     }
   },
-  "utd": "Up To Down",
+  "utd": "ඉහළින් පහළට",
   "@utd": {},
-  "confirmLogout": "ඔබට පිටවීම අවශ්‍යද?",
+  "confirmLogout": "ඔබට පිටවීමට නිසැකද?",
   "@confirmLogout": {},
-  "installed": "Installed {type}",
+  "installed": "{type} ස්ථාපිත කර ඇත",
   "@installed": {
     "placeholders": {
       "type": {
@@ -368,17 +368,17 @@
       }
     }
   },
-  "chapterRead": "Chapter Read",
+  "chapterRead": "පැහැදිලි කරන ලද අධිෂ්ඨානය",
   "@chapterRead": {},
-  "gridView": "Grid View",
+  "gridView": "අගුළු නිරීක්ෂණය",
   "@gridView": {},
-  "episodeWatched": "Episode Watched",
+  "episodeWatched": "පරික්ෂා කරන ලද කතාන්තර",
   "@episodeWatched": {},
-  "search": "Search",
+  "search": "සොයන්න",
   "@search": {},
-  "sort": "Sort",
+  "sort": "වර්ගීකෘත කරන්න",
   "@sort": {},
-  "manageLayoutDescription": "You can manage the layout for {page} page by dragging and dropping the items",
+  "manageLayoutDescription": "{page} පිටුවේ රූපය කළමනාකරණය කිරීමට ඔබට අයිතම ගස් ව්‍යුහකිරීම සහ හොඳට මාරු කිරීම කළ හැක",
   "@manageLayoutDescription": {
     "placeholders": {
       "page": {
@@ -391,7 +391,7 @@
       }
     }
   },
-  "available": "Available {type}",
+  "available": "{type} ලබා ගත හැක",
   "@available": {
     "placeholders": {
       "type": {
@@ -403,11 +403,11 @@
       }
     }
   },
-  "calendar": "Calendar",
+  "calendar": "නැරඹුම්",
   "@calendar": {},
-  "thisSeason": "This Season",
+  "thisSeason": "මෙම සමය",
   "@thisSeason": {},
-  "trending": "Trending {type}",
+  "trending": "{type} ජනප්‍රිය වේ",
   "@trending": {
     "placeholders": {
       "type": {
@@ -419,7 +419,7 @@
       }
     }
   },
-  "onHold": "On Hold {type}",
+  "onHold": "{type} තවත් රැඳී",
   "@onHold": {
     "placeholders": {
       "type": {
@@ -431,7 +431,7 @@
       }
     }
   },
-  "favorite": "Favorite {type}",
+  "favorite": "{type} ආදරණීය",
   "@favorite": {
     "placeholders": {
       "type": {
@@ -443,7 +443,7 @@
       }
     }
   },
-  "activity": "{count, plural, =1 {Activity} other {Activities}}",
+  "activity": "{count, plural, =1 {ක්‍රියාව} other {ක්‍රියා}}",
   "@activity": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -452,9 +452,9 @@
       }
     }
   },
-  "previousSeason": "Previous Season",
+  "previousSeason": "පෙර සමය",
   "@previousSeason": {},
-  "browse": "Browse {type}",
+  "browse": "{type} බ්‍රව්ස් කරන්න",
   "@browse": {
     "placeholders": {
       "type": {
@@ -466,7 +466,7 @@
       }
     }
   },
-  "planned": "Planned {type}",
+  "planned": "{type} සැලසුම් කර ඇත",
   "@planned": {
     "placeholders": {
       "type": {
@@ -478,9 +478,9 @@
       }
     }
   },
-  "continueReading": "Continue Reading",
+  "continueReading": "පැහැදිලි කිරීම දිගටම කරන්න",
   "@continueReading": {},
-  "noDropped": "You haven't dropped any {type} yet.",
+  "noDropped": "ඔබ කිසිඳු {type} ඉවත් කර නොමැත.",
   "@noDropped": {
     "placeholders": {
       "type": {
@@ -492,15 +492,15 @@
       }
     }
   },
-  "noHiddenMediaFound": "No hidden media found",
+  "noHiddenMediaFound": "සඟවා ඇති මාධ්‍ය එකක් හමු නොවීය",
   "@noHiddenMediaFound": {},
-  "comments": "Comments",
+  "comments": "අවබෝධ",
   "@comments": {},
   "dtu": "Down To Up",
   "@dtu": {},
   "layout": "Layout",
   "@layout": {},
-  "list": "{type} List",
+  "list": "{type} ලැයිස්තුව",
   "@list": {
     "placeholders": {
       "type": {
@@ -509,26 +509,28 @@
       }
     }
   },
-  "noFavourites": "Looks like you don't like anything,\nTry liking a show to keep it here.",
+  "noFavourites": "ඔබේ කැමති කිසිම දෙයක් නොමැත,\nඔබ කැමති කුමක් හෝ විකල්ප කිරීමෙන් එය මෙහි තබා ගන්න.",
   "@noFavourites": {},
-  "noOnHold": "Looks like you haven't put anything on hold.",
+  "noOnHold": "ඔබට කිසිඳු දෙයක් තවදුරටත් නවතා නොමැත.",
   "@noOnHold": {},
   "options": "Options",
   "@options": {},
-  "recentUpdates": "Recent Updates",
+  "recentUpdates": "අවසන් යාවත්කාලීන",
   "@recentUpdates": {},
-  "read": "Read",
+  "read": "පැහැදිලි කරන්න",
   "@read": {},
-  "topAiring": "Top Airing",
+  "topAiring": "ඉහළ අයර්",
   "@topAiring": {},
-  "pickColor": "Pick a color",
+  "pickColor": "රටාවක් තෝරන්න",
   "@pickColor": {},
-  "hiddenMedia": "Hidden Media",
+  "hiddenMedia": "සඟවා ඇති මාධ්‍ය",
   "@hiddenMedia": {},
-  "droppedManga": "Dropped Manga",
+  "droppedManga": "ඉවත් කරන ලද මංගා",
   "@droppedManga": {},
-  "recommended": "Recommended",
+  "recommended": "යෝජනා කරන ලදී",
   "@recommended": {},
-  "recommendationsEmptyMessage": "Watch/Read some Anime or Manga to get Recommendations",
-  "@recommendationsEmptyMessage": {}
+  "recommendationsEmptyMessage": "නවීන මංගා හෝ ඇනිමේ කියවන්න/නරඹන්න, යෝජනා ලබා ගන්න",
+  "@recommendationsEmptyMessage": {},
+  "simkl": "Simkl",
+  "@simkl": {}
 }

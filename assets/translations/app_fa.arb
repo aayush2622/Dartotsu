@@ -49,7 +49,7 @@
   "@donationGoal": {},
   "enableDarkMode": "فعال‌سازی حالت تاریک",
   "@enableDarkMode": {},
-  "extension": "{count, plural, =1 {افزونه} other {افزونه}}",
+  "extension": "{count, plural, =1 {افزونه} other {افزونه‌ها}}",
   "@extension": {},
   "extensionsDescription": "افزونه‌ها را نصب و مدیریت کنید برای عملکرد بیشتر",
   "@extensionsDescription": {},
@@ -77,13 +77,13 @@
   "@accountDescription": {},
   "hidePrivate": "مخفی کردن خصوصی",
   "@hidePrivate": {},
-  "hidePrivateDescription": "سریال های خصوصی را از صفحه اصلی پنهان کنید.",
+  "hidePrivateDescription": "پنهان کردن سری‌های خصوصی از صفحه اصلی.",
   "@hidePrivateDescription": {},
   "incognitoMode": "حالت ناشناس",
   "@incognitoMode": {},
   "login": "ورود",
   "@login": {},
-  "logout": "خروج {type}",
+  "logout": "خروج از {type}",
   "@logout": {},
   "mal": "MyAnimeList",
   "@mal": {},
@@ -91,7 +91,7 @@
   "@manga": {},
   "mangaDescription": "تجربه مانگا خود را سازماندهی و سفارشی کنید",
   "@mangaDescription": {},
-  "materialYou": "Material You",
+  "materialYou": "مواد شما",
   "@materialYou": {},
   "materialYouDescription": "از رنگ پس‌زمینه خود برای برنامه استفاده کنید",
   "@materialYouDescription": {},
@@ -149,7 +149,7 @@
   "@yes": {},
   "nextSeason": "فصل بعدی",
   "@nextSeason": {},
-  "noDropped": "شما هنوز هیچ کس را از دست نداده اید.",
+  "noDropped": "شما هنوز هیچ {type} را کنار نگذاشته‌اید.",
   "@noDropped": {
     "placeholders": {
       "type": {
@@ -163,15 +163,15 @@
   },
   "manhwa": "Manhwa",
   "@manhwa": {},
-  "previousSeason": "فصل گذشته",
+  "previousSeason": "فصل قبلی",
   "@previousSeason": {},
-  "nameRomaji": "نام (Romaji)",
+  "nameRomaji": "نام (رومجی)",
   "@nameRomaji": {},
-  "averageDuration": "متوسط مدت زمان",
+  "averageDuration": "مدت زمان متوسط",
   "@averageDuration": {},
-  "droppedAnime": "رها کردن Anime",
+  "droppedAnime": "انیمه کنار گذاشته شده",
   "@droppedAnime": {},
-  "browse": "{type}",
+  "browse": "مرور {type}",
   "@browse": {
     "placeholders": {
       "type": {
@@ -183,7 +183,7 @@
       }
     }
   },
-  "staff": "کارکنان",
+  "staff": "تیم تولید",
   "@staff": {},
   "status": "وضعیت",
   "@status": {},
@@ -191,7 +191,7 @@
   "@popularity": {},
   "prequel": "PREQUEL",
   "@prequel": {},
-  "planned": "برنامه ریزی شده {type}",
+  "planned": "برنامه‌ریزی شده {type}",
   "@planned": {
     "placeholders": {
       "type": {
@@ -205,9 +205,9 @@
   },
   "language": "زبان",
   "@language": {},
-  "collapseText": "نشان دادن کمتر",
+  "collapseText": "نمایش کمتر",
   "@collapseText": {},
-  "chapter": "{count, plural, =1 {Chapter} other {Chapters}}",
+  "chapter": "{count, plural, =1 {فصل} other {فصول}}",
   "@chapter": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -216,7 +216,7 @@
       }
     }
   },
-  "manageLayoutDescription": "شما می توانید طرح را برای صفحه (X30X) با کشیدن و رها کردن آیتم ها مدیریت کنید",
+  "manageLayoutDescription": "شما می‌توانید با کشیدن و رها کردن اقلام، چینش صفحه {page} را مدیریت کنید",
   "@manageLayoutDescription": {
     "placeholders": {
       "page": {
@@ -229,11 +229,11 @@
       }
     }
   },
-  "characters": "ویژگی ها",
+  "characters": "شخصیت‌ها",
   "@characters": {},
-  "pickColor": "انتخاب یک رنگ",
+  "pickColor": "انتخاب رنگ",
   "@pickColor": {},
-  "synonyms": "Synonyms",
+  "synonyms": "مترادف‌ها",
   "@synonyms": {},
   "startDate": "شروع تاریخ",
   "@startDate": {},
@@ -241,19 +241,19 @@
   "@manhua": {},
   "sequel": "SEQUEL",
   "@sequel": {},
-  "description": "خلاصه داستان :",
+  "description": "خلاصه",
   "@description": {},
   "endDate": "پایان تاریخ",
   "@endDate": {},
-  "comingSoon": "آینده SOON",
+  "comingSoon": "به زودی",
   "@comingSoon": {},
-  "favorites": "محبوب ترین",
+  "favorites": "علاقه‌مندی‌ها",
   "@favorites": {},
   "relations": "روابط",
   "@relations": {},
   "source": "منبع",
   "@source": {},
-  "format": "فرمت Format",
+  "format": "فرمت",
   "@format": {},
   "expandText": "نمایش بیشتر",
   "@expandText": {},
@@ -261,11 +261,11 @@
   "@tags": {},
   "studio": "استودیو Studio",
   "@studio": {},
-  "totalEpisodes": "قسمت ها",
+  "totalEpisodes": "قسمت‌ها",
   "@totalEpisodes": {},
   "total": "مجموع",
   "@total": {},
-  "totalChapters": "فصل ها",
+  "totalChapters": "فصول",
   "@totalChapters": {},
   "author": "نویسنده",
   "@author": {},
@@ -273,7 +273,7 @@
   "@name": {},
   "meanScore": "امتیاز",
   "@meanScore": {},
-  "synopsis": "خلاصه داستان :",
+  "synopsis": "خلاصه",
   "@synopsis": {},
   "kitsu": "Kitsu",
   "@kitsu": {},
@@ -291,17 +291,17 @@
       }
     }
   },
-  "home": "خانه Home Home",
+  "home": "خانه",
   "@home": {},
-  "ln": "نور",
+  "ln": "رمان سبک روشن",
   "@ln": {},
   "novel": "رمان",
   "@novel": {},
-  "series": "سری سریال Series Series",
+  "series": "سری سریال",
   "@series": {},
-  "season": "Season",
+  "season": "فصل",
   "@season": {},
-  "volume": "{count, plural, =1 {Volume} other {Volumes}}",
+  "volume": "{count, plural, =1 {جلد} other {جلدها}}",
   "@volume": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -310,7 +310,7 @@
       }
     }
   },
-  "episode": "{count, plural, =1 {Episode} other {Episodes}}",
+  "episode": "{count, plural, =1 {قسمت} other {قسمت‌ها}}",
   "@episode": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -319,7 +319,7 @@
       }
     }
   },
-  "movie": "{count, plural, =1 {Movie} other {Movies}}",
+  "movie": "{count, plural, =1 {فیلم} other {فیلم‌ها}}",
   "@movie": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -328,9 +328,9 @@
       }
     }
   },
-  "genres": "Genres",
+  "genres": "ژانرها",
   "@genres": {},
-  "scanlators": "اسکن کنندگان",
+  "scanlators": "اسکن‌کنندگان",
   "@scanlators": {},
   "dtu": "پایین تا بالا",
   "@dtu": {},
@@ -338,21 +338,21 @@
   "@search": {},
   "calendar": "تقویم",
   "@calendar": {},
-  "confirmLogout": "آیا مطمئن هستید که می‌خواهید از حساب خود خارج شوید؟",
+  "confirmLogout": "آیا مطمئن هستید که می‌خواهید خارج شوید؟",
   "@confirmLogout": {},
-  "compactView": "View",
+  "compactView": "نمای فشرده",
   "@compactView": {},
   "listView": "لیست View",
   "@listView": {},
-  "gridView": "Grid View",
+  "gridView": "نمای شبکه‌ای",
   "@gridView": {},
-  "episodeWatched": "قسمت Watched",
+  "episodeWatched": "قسمت تماشا شده",
   "@episodeWatched": {},
-  "sort": "دسته بندی",
+  "sort": "مرتب‌سازی",
   "@sort": {},
-  "chapterRead": "فصل خواندن",
+  "chapterRead": "فصل خوانده شده",
   "@chapterRead": {},
-  "available": "{type}",
+  "available": "موجود {type}",
   "@available": {
     "placeholders": {
       "type": {
@@ -364,7 +364,7 @@
       }
     }
   },
-  "trending": "{type}",
+  "trending": "داغ‌ترین {type}",
   "@trending": {
     "placeholders": {
       "type": {
@@ -376,7 +376,7 @@
       }
     }
   },
-  "installed": "نصب شده (X10X)",
+  "installed": "نصب شده {type}",
   "@installed": {
     "placeholders": {
       "type": {
@@ -387,9 +387,9 @@
       }
     }
   },
-  "topAiring": "Top Airing",
+  "topAiring": "پخش برتر",
   "@topAiring": {},
-  "topRated": "امتیاز بالا (X10X)",
+  "topRated": "برترین {type}",
   "@topRated": {
     "placeholders": {
       "type": {
@@ -403,7 +403,7 @@
       }
     }
   },
-  "popular": "محبوب (X8X)",
+  "popular": "محبوب {type}",
   "@popular": {
     "placeholders": {
       "type": {
@@ -416,7 +416,7 @@
       }
     }
   },
-  "mostFavourite": "بیشتر Favourite (X15X)",
+  "mostFavourite": "محبوب‌ترین {type}",
   "@mostFavourite": {
     "placeholders": {
       "type": {
@@ -431,7 +431,7 @@
   },
   "thisSeason": "این فصل",
   "@thisSeason": {},
-  "favorite": "محبوب (X9X)",
+  "favorite": "علاقه‌مند {type}",
   "@favorite": {
     "placeholders": {
       "type": {
@@ -443,7 +443,7 @@
       }
     }
   },
-  "activity": "{count, plural, =1 {Activity} other {Activities}}",
+  "activity": "{count, plural, =1 {فعالیت} other {فعالیت‌ها}}",
   "@activity": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -452,7 +452,7 @@
       }
     }
   },
-  "onHold": "{type}",
+  "onHold": "منتظر {type}",
   "@onHold": {
     "placeholders": {
       "type": {
@@ -464,27 +464,27 @@
       }
     }
   },
-  "continueReading": "ادامه خواندن",
+  "continueReading": "ادامه دادن خواندن",
   "@continueReading": {},
-  "continueWatching": "ادامه تماشای",
+  "continueWatching": "ادامه دادن تماشا",
   "@continueWatching": {},
   "addToList": "اضافه کردن به لیست",
   "@addToList": {},
   "options": "گزینه های Options",
   "@options": {},
-  "recommendationsEmptyMessage": "Watch/Read aime یا Manga برای دریافت توصیه",
+  "recommendationsEmptyMessage": "برای دریافت پیشنهادات، انیمه یا مانگایی تماشا/خوانده کنید",
   "@recommendationsEmptyMessage": {},
-  "watch": "Watch",
+  "watch": "تماشا",
   "@watch": {},
-  "allCaughtUpNew": "همه گیر کرده اند، چه چیز جدید است؟?",
+  "allCaughtUpNew": "همه را دیدی، چه چیز جدیدی داریم؟",
   "@allCaughtUpNew": {},
   "comments": "نظرات",
   "@comments": {},
-  "hiddenMedia": "رسانه های پنهان",
+  "hiddenMedia": "رسانه‌های پنهان",
   "@hiddenMedia": {},
   "info": "Info",
   "@info": {},
-  "list": "{type} List",
+  "list": "{type} فهرست",
   "@list": {
     "placeholders": {
       "type": {
@@ -495,19 +495,19 @@
   },
   "layout": "چیدمان",
   "@layout": {},
-  "noFavourites": "انگار چیزی را دوست نداری،\nسعی کنید یک نمایش را در اینجا نگه دارید.",
+  "noFavourites": "به نظر می‌رسد که شما چیزی دوست ندارید،\nسعی کنید یک نمایش را لایک کنید تا در اینجا نگه داشته شود.",
   "@noFavourites": {},
-  "noOnHold": "به نظر می رسد که هیچ چیزی را در نگه ندارید.",
+  "noOnHold": "به نظر می‌رسد که شما هیچ چیزی را در حالت انتظار قرار نداده‌اید.",
   "@noOnHold": {},
-  "noHiddenMediaFound": "هیچ رسانه ای مخفی پیدا نشد",
+  "noHiddenMediaFound": "رسانه پنهانی یافت نشد",
   "@noHiddenMediaFound": {},
-  "recentUpdates": "به روزرسانی های اخیر",
+  "recentUpdates": "بروزرسانی‌های اخیر",
   "@recentUpdates": {},
-  "read": "Read",
+  "read": "خواندن",
   "@read": {},
-  "utd": "تا پایین",
+  "utd": "از بالا به پایین",
   "@utd": {},
-  "manageLayout": "مدیریت (X7X) صفحه برای (X30X)",
+  "manageLayout": "مدیریت چینش صفحه {page} برای {service}",
   "@manageLayout": {
     "placeholders": {
       "service": {
@@ -527,8 +527,10 @@
       }
     }
   },
-  "droppedManga": "دانلود بازی Manga",
+  "droppedManga": "مانگای کنار گذاشته شده",
   "@droppedManga": {},
-  "recommended": "توصیه شده",
-  "@recommended": {}
+  "recommended": "پیشنهادی",
+  "@recommended": {},
+  "simkl": "سیمی",
+  "@simkl": {}
 }

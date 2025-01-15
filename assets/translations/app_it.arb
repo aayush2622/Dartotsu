@@ -7,7 +7,7 @@
   "@customThemeDescription": {},
   "fontFamilyDescription": "Famiglia del carattere del sottotitolo",
   "@fontFamilyDescription": {},
-  "logout": "Registrazione {type}",
+  "logout": "Esci {type}",
   "@logout": {},
   "ok": "OK",
   "@ok": {},
@@ -51,7 +51,7 @@
   "@cancel": {},
   "colorPicker": "Selettore colore",
   "@colorPicker": {},
-  "colorPickerDescription": "Scegli un colore",
+  "colorPickerDescription": "Seleziona un colore",
   "@colorPickerDescription": {},
   "common": "Comune",
   "@common": {},
@@ -67,7 +67,7 @@
   "@donationGoal": {},
   "enableDarkMode": "Abilita la modalità scura",
   "@enableDarkMode": {},
-  "extension": "{count, plural, =1 {Extension} other {Extensions}}",
+  "extension": "{count, plural, =1 {Estensione} other {Estensioni}}",
   "@extension": {},
   "extensionsDescription": "Installa e gestisci le estensioni per funzionalità aggiuntive",
   "@extensionsDescription": {},
@@ -87,7 +87,7 @@
   "@fontWeightDescription": {},
   "hidePrivate": "Nascondi privato",
   "@hidePrivate": {},
-  "hidePrivateDescription": "Nascondi serie private da Home page.",
+  "hidePrivateDescription": "Nascondi le serie private dalla home page.",
   "@hidePrivateDescription": {},
   "incognitoMode": "Modalità incognito",
   "@incognitoMode": {},
@@ -147,7 +147,7 @@
   "@themeDescription": {},
   "yes": "Sì",
   "@yes": {},
-  "totalEpisodes": "Episodio",
+  "totalEpisodes": "Episodi",
   "@totalEpisodes": {},
   "thisSeason": "Questa stagione",
   "@thisSeason": {},
@@ -163,9 +163,9 @@
       }
     }
   },
-  "nextSeason": "La prossima stagione",
+  "nextSeason": "Prossima stagione",
   "@nextSeason": {},
-  "noDropped": "Non hai ancora abbandonato nessuno.",
+  "noDropped": "Non hai ancora abbandonato nessun {type}.",
   "@noDropped": {
     "placeholders": {
       "type": {
@@ -177,7 +177,7 @@
       }
     }
   },
-  "volume": "Conto, plurale, =1 {Volume} altro {Volumes}}",
+  "volume": "{count, plural, =1 {Volume} other {Volumi}}",
   "@volume": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -204,7 +204,7 @@
       }
     }
   },
-  "topRated": "Più votati {type}",
+  "topRated": "Top valutati {type}",
   "@topRated": {
     "placeholders": {
       "type": {
@@ -220,7 +220,7 @@
   },
   "previousSeason": "Stagione precedente",
   "@previousSeason": {},
-  "popular": "Popolari {type}",
+  "popular": "Popolare {type}",
   "@popular": {
     "placeholders": {
       "type": {
@@ -237,7 +237,7 @@
   "@confirmLogout": {},
   "description": "Sinossi",
   "@description": {},
-  "mostFavourite": "Più preferito {type}",
+  "mostFavourite": "Più favorito {type}",
   "@mostFavourite": {
     "placeholders": {
       "type": {
@@ -258,7 +258,7 @@
   "@synopsis": {},
   "nameRomaji": "Nome (Romaji)",
   "@nameRomaji": {},
-  "gridView": "Vista Griglia",
+  "gridView": "Visualizzazione a griglia",
   "@gridView": {},
   "browse": "Sfoglia {type}",
   "@browse": {
@@ -272,7 +272,7 @@
       }
     }
   },
-  "episode": "{count, plural, =1 {Episode} other {Episodes}}",
+  "episode": "{count, plural, =1 {Episodio} other {Episodi}}",
   "@episode": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -281,17 +281,17 @@
       }
     }
   },
-  "episodeWatched": "Traduzione:",
+  "episodeWatched": "Episodio visto",
   "@episodeWatched": {},
   "status": "Stato",
   "@status": {},
   "popularity": "Popolarità",
   "@popularity": {},
-  "totalChapters": "Capitolo",
+  "totalChapters": "Capitoli",
   "@totalChapters": {},
   "favorites": "Preferiti",
   "@favorites": {},
-  "movie": "{count, plural, =1 {Movie} other {Movies}}",
+  "movie": "{count, plural, =1 {Film} other {Film}}",
   "@movie": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -306,7 +306,7 @@
   "@prequel": {},
   "relations": "Relazioni",
   "@relations": {},
-  "planned": "Piano {type}",
+  "planned": "Pianificato {type}",
   "@planned": {
     "placeholders": {
       "type": {
@@ -320,11 +320,11 @@
   },
   "language": "Lingua",
   "@language": {},
-  "search": "Ricerca",
+  "search": "Cerca",
   "@search": {},
   "collapseText": "mostra meno",
   "@collapseText": {},
-  "chapter": "{count, plural, =1 {Chapter} other {Chapters}}",
+  "chapter": "{count, plural, =1 {Capitolo} other {Capitoli}}",
   "@chapter": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -333,7 +333,7 @@
       }
     }
   },
-  "manageLayoutDescription": "È possibile gestire il layout per la pagina {page} trascinando e rilasciando gli elementi",
+  "manageLayoutDescription": "Puoi gestire il layout della pagina {page} trascinando e rilasciando gli elementi",
   "@manageLayoutDescription": {
     "placeholders": {
       "page": {
@@ -358,7 +358,7 @@
       }
     }
   },
-  "characters": "Caratteri",
+  "characters": "Personaggi",
   "@characters": {},
   "genres": "Generi",
   "@genres": {},
@@ -380,11 +380,11 @@
   "@sequel": {},
   "studio": "Studio",
   "@studio": {},
-  "staff": "Personale",
+  "staff": "Staff",
   "@staff": {},
   "averageDuration": "Durata media",
   "@averageDuration": {},
-  "comingSoon": "Arrivare SOON",
+  "comingSoon": "In arrivo",
   "@comingSoon": {},
   "name": "Nome",
   "@name": {},
@@ -394,15 +394,15 @@
   "@manhwa": {},
   "kitsu": "Kitsu",
   "@kitsu": {},
-  "ln": "Novità di luce",
+  "ln": "Romanzo Leggero",
   "@ln": {},
-  "novel": "Novità",
+  "novel": "Romanzo",
   "@novel": {},
   "series": "Serie",
   "@series": {},
   "season": "Stagione",
   "@season": {},
-  "manageLayout": "Gestire {page} pagina Layout per {service}",
+  "manageLayout": "Gestisci il layout della pagina {page} per {service}",
   "@manageLayout": {
     "placeholders": {
       "service": {
@@ -424,7 +424,7 @@
   },
   "calendar": "Calendario",
   "@calendar": {},
-  "compactView": "Vista compatta",
+  "compactView": "Visualizzazione compatta",
   "@compactView": {},
   "listView": "Visualizza elenco",
   "@listView": {},
@@ -439,9 +439,9 @@
       }
     }
   },
-  "chapterRead": "Capitolo Read",
+  "chapterRead": "Capitolo letto",
   "@chapterRead": {},
-  "trending": "Trending {type}",
+  "trending": "In tendenza {type}",
   "@trending": {
     "placeholders": {
       "type": {
@@ -453,7 +453,7 @@
       }
     }
   },
-  "activity": "{count, plural, =1 {Activity} other {Activities}}",
+  "activity": "{count, plural, =1 {Attività} other {Attività}}",
   "@activity": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -462,7 +462,7 @@
       }
     }
   },
-  "onHold": "On Hold {type}",
+  "onHold": "In sospeso {type}",
   "@onHold": {
     "placeholders": {
       "type": {
@@ -478,13 +478,13 @@
   "@continueReading": {},
   "continueWatching": "Continua a guardare",
   "@continueWatching": {},
-  "droppedManga": "Goccia Manga",
+  "droppedManga": "Manga abbandonati",
   "@droppedManga": {},
-  "recommendationsEmptyMessage": "Guarda/Leggi alcuni Anime o Manga per ottenere Raccomandazioni",
+  "recommendationsEmptyMessage": "Guarda/Leggi qualche Anime o Manga per ricevere consigli",
   "@recommendationsEmptyMessage": {},
-  "scanlators": "Analizzatori",
+  "scanlators": "Scanlators",
   "@scanlators": {},
-  "noFavourites": "Sembra che non ti piaccia niente,\nMi piace uno spettacolo per tenerlo qui.",
+  "noFavourites": "Sembra che non ti piaccia nulla, \nProva ad aggiungere un preferito per tenerlo qui.",
   "@noFavourites": {},
   "watch": "Guarda",
   "@watch": {},
@@ -492,13 +492,13 @@
   "@options": {},
   "addToList": "Aggiungi alla lista",
   "@addToList": {},
-  "comments": "Osservazioni",
+  "comments": "Commenti",
   "@comments": {},
   "dtu": "Condividi su Twitter",
   "@dtu": {},
-  "droppedAnime": "Goccia Anime",
+  "droppedAnime": "Anime abbandonati",
   "@droppedAnime": {},
-  "hiddenMedia": "Supporti nascosti",
+  "hiddenMedia": "Media nascosti",
   "@hiddenMedia": {},
   "info": "Info",
   "@info": {},
@@ -513,22 +513,24 @@
   },
   "layout": "Telaio",
   "@layout": {},
-  "noOnHold": "Sembra che tu non abbia messo niente in attesa.",
+  "noOnHold": "Sembra che tu non abbia messo nulla in sospeso.",
   "@noOnHold": {},
-  "noHiddenMediaFound": "Nessun supporto nascosto trovato",
+  "noHiddenMediaFound": "Nessun media nascosto trovato",
   "@noHiddenMediaFound": {},
   "recentUpdates": "Aggiornamenti recenti",
   "@recentUpdates": {},
   "read": "Leggi",
   "@read": {},
-  "sort": "Ordine",
+  "sort": "Ordina",
   "@sort": {},
-  "topAiring": "Top Airing",
+  "topAiring": "Top in onda",
   "@topAiring": {},
-  "utd": "Condividi su Twitter",
+  "utd": "Su e giù",
   "@utd": {},
   "pickColor": "Scegli un colore",
   "@pickColor": {},
-  "allCaughtUpNew": "Che c'è di nuovo?",
-  "@allCaughtUpNew": {}
+  "allCaughtUpNew": "Tutto aggiornato, cosa c'è di nuovo?",
+  "@allCaughtUpNew": {},
+  "simkl": "Simkl",
+  "@simkl": {}
 }

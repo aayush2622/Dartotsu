@@ -27,7 +27,7 @@
   "@donationGoal": {},
   "enableDarkMode": "డార్క్ మోడ్‌ను ఎనేబుల్ చేయండి",
   "@enableDarkMode": {},
-  "extension": "{count, plural, =1 {పొడిగింపు} other {పొడిగింపులు}}",
+  "extension": "{count, plural, =1 {ఎక్స్‌టెన్షన్} other {ఎక్స్‌టెన్షన్‌లు}}",
   "@extension": {},
   "extensionsDescription": "మరిన్ని ఫంక్షనాలిటీ కోసం ఎక్స్‌టెన్షన్లను ఇన్‌స్టాల్ చేయండి మరియు నిర్వహించండి",
   "@extensionsDescription": {},
@@ -45,7 +45,7 @@
   "@manga": {},
   "mangaDescription": "మీ మాంగా అనుభవాన్ని సరళంగా నిర్వహించండి",
   "@mangaDescription": {},
-  "materialYou": "మేటిరియల్ యూ",
+  "materialYou": "మెటీరియల్ యూ",
   "@materialYou": {},
   "materialYouDescription": "మీ వాల్పేపర్‌తో సమాన రంగును ఉపయోగించండి",
   "@materialYouDescription": {},
@@ -107,7 +107,7 @@
   "@incognitoModeDescription": {},
   "login": "లాగిన్",
   "@login": {},
-  "logout": "లాగ్ అవుట్ {type}",
+  "logout": "{type} లాగౌట్",
   "@logout": {},
   "outlineColor": "వైపు రంగు",
   "@outlineColor": {},
@@ -147,9 +147,9 @@
   "@speed": {},
   "speedDescription": "ప్లేయర్ కోసం డిఫాల్ట్ వేగం",
   "@speedDescription": {},
-  "thisSeason": "This Season",
+  "thisSeason": "ఈ సీజన్",
   "@thisSeason": {},
-  "favorite": "Favorite {type}",
+  "favorite": "{type} ప్రియం",
   "@favorite": {
     "placeholders": {
       "type": {
@@ -161,7 +161,7 @@
       }
     }
   },
-  "manageLayout": "Manage {page} page Layout for {service}",
+  "manageLayout": "{service} కోసం {page} పేజీ యొక్క లేఅవుట్‌ను నిర్వహించండి",
   "@manageLayout": {
     "placeholders": {
       "service": {
@@ -181,9 +181,9 @@
       }
     }
   },
-  "nextSeason": "Next Season",
+  "nextSeason": "తరువాతి సీజన్",
   "@nextSeason": {},
-  "noDropped": "You haven't dropped any {type} yet.",
+  "noDropped": "మీరు ఇంకా ఏ {type}ను డ్రాప్ చేయలేదు.",
   "@noDropped": {
     "placeholders": {
       "type": {
@@ -195,9 +195,9 @@
       }
     }
   },
-  "novel": "Novel",
+  "novel": "నవల్",
   "@novel": {},
-  "loginTo": "Login to {service}",
+  "loginTo": "{service} లో లాగిన్ చేయండి",
   "@loginTo": {
     "placeholders": {
       "service": {
@@ -211,7 +211,7 @@
       }
     }
   },
-  "activity": "{count, plural, =1 {Activity} other {Activities}}",
+  "activity": "{count, plural, =1 {చర్య} other {చర్యలు}}",
   "@activity": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -220,9 +220,9 @@
       }
     }
   },
-  "continueWatching": "Continue Watching",
+  "continueWatching": "చూడడం కొనసాగించండి",
   "@continueWatching": {},
-  "topRated": "Top Rated {type}",
+  "topRated": "టాప్ రేటెడ్ {type}",
   "@topRated": {
     "placeholders": {
       "type": {
@@ -236,7 +236,7 @@
       }
     }
   },
-  "popular": "Popular {type}",
+  "popular": "ప్రసిద్ధ {type}",
   "@popular": {
     "placeholders": {
       "type": {
@@ -249,9 +249,9 @@
       }
     }
   },
-  "confirmLogout": "మీరు లాగ్ అవుట్ అవ్వాలని నిజంగా కోరుకుంటున్నారా?",
+  "confirmLogout": "మీరు లాగౌట్ చేయాలని ఖచ్చితంగా అనుకుంటున్నారా?",
   "@confirmLogout": {},
-  "installed": "Installed {type}",
+  "installed": "{type} ఇన్స్టాల్ చేయబడింది",
   "@installed": {
     "placeholders": {
       "type": {
@@ -262,7 +262,7 @@
       }
     }
   },
-  "mostFavourite": "Most Favourite {type}",
+  "mostFavourite": "అతి ప్రియమైన {type}",
   "@mostFavourite": {
     "placeholders": {
       "type": {
@@ -281,39 +281,39 @@
   "@meanScore": {},
   "series": "Series",
   "@series": {},
-  "chapterRead": "Chapter Read",
+  "chapterRead": "అధ్యాయము చదవబడింది",
   "@chapterRead": {},
-  "synopsis": "Synopsis",
+  "synopsis": "సారాంశం",
   "@synopsis": {},
-  "nameRomaji": "Name (Romaji)",
+  "nameRomaji": "పేరు (రోమాజి)",
   "@nameRomaji": {},
-  "averageDuration": "Average Duration",
+  "averageDuration": "సగటు వ్యవధి",
   "@averageDuration": {},
-  "comingSoon": "Coming SOON",
+  "comingSoon": "త్వరలో రానున్నది",
   "@comingSoon": {},
-  "favorites": "Favorites",
+  "favorites": "ఇష్టాలు",
   "@favorites": {},
-  "collapseText": "show less",
+  "collapseText": "తక్కువ చూపించు",
   "@collapseText": {},
-  "characters": "Characters",
+  "characters": "పాత్రలు",
   "@characters": {},
   "source": "Source",
   "@source": {},
-  "synonyms": "Synonyms",
+  "synonyms": "స్పష్టమైన పదాలు",
   "@synonyms": {},
   "startDate": "Start Date",
   "@startDate": {},
-  "format": "Format",
+  "format": "ఫార్మాట్",
   "@format": {},
-  "expandText": "show more",
+  "expandText": "మరింత చూపించు",
   "@expandText": {},
-  "season": "Season",
+  "season": "సీజన్",
   "@season": {},
   "sequel": "SEQUEL",
   "@sequel": {},
   "studio": "Studio",
   "@studio": {},
-  "staff": "Staff",
+  "staff": "స్టాఫ్",
   "@staff": {},
   "status": "Status",
   "@status": {},
@@ -321,7 +321,7 @@
   "@relations": {},
   "author": "Author",
   "@author": {},
-  "description": "Synopsis",
+  "description": "సారాంశం",
   "@description": {},
   "name": "Name",
   "@name": {},
@@ -329,27 +329,27 @@
   "@total": {},
   "tags": "Tags",
   "@tags": {},
-  "recommended": "Recommended",
+  "recommended": "సిఫార్సు చేసినవి",
   "@recommended": {},
-  "popularity": "Popularity",
+  "popularity": "ప్రచారము",
   "@popularity": {},
   "prequel": "PREQUEL",
   "@prequel": {},
-  "totalEpisodes": "Episodes",
+  "totalEpisodes": "ఎపిసోడ్‌లు",
   "@totalEpisodes": {},
-  "totalChapters": "Chapters",
+  "totalChapters": "అధ్యాయాలు",
   "@totalChapters": {},
   "manhwa": "Manhwa",
   "@manhwa": {},
   "kitsu": "Kitsu",
   "@kitsu": {},
-  "ln": "Light Novel",
+  "ln": "లైట్ నవల్",
   "@ln": {},
   "home": "Home",
   "@home": {},
   "manhua": "Manhua",
   "@manhua": {},
-  "volume": "{count, plural, =1 {Volume} other {Volumes}}",
+  "volume": "{count, plural, =1 {ఘనత} other {ఘనతలు}}",
   "@volume": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -358,7 +358,7 @@
       }
     }
   },
-  "episode": "{count, plural, =1 {Episode} other {Episodes}}",
+  "episode": "{count, plural, =1 {ఎపిసోడ్} other {ఎపిసోడ్‌లు}}",
   "@episode": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -367,7 +367,7 @@
       }
     }
   },
-  "movie": "{count, plural, =1 {Movie} other {Movies}}",
+  "movie": "{count, plural, =1 {చిత్రం} other {చిత్రాలు}}",
   "@movie": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -376,7 +376,7 @@
       }
     }
   },
-  "chapter": "{count, plural, =1 {Chapter} other {Chapters}}",
+  "chapter": "{count, plural, =1 {అధ్యాయం} other {అధ్యాయాలు}}",
   "@chapter": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -385,23 +385,23 @@
       }
     }
   },
-  "genres": "Genres",
+  "genres": "వర్గాలు",
   "@genres": {},
-  "calendar": "Calendar",
+  "calendar": "క్యాలెండర్",
   "@calendar": {},
-  "compactView": "Compact View",
+  "compactView": "కంపాక్ట్ వీక్షణ",
   "@compactView": {},
-  "scanlators": "Scanlators",
+  "scanlators": "స్కాన్లేటర్స్",
   "@scanlators": {},
   "listView": "List View",
   "@listView": {},
   "dtu": "Down To Up",
   "@dtu": {},
-  "gridView": "Grid View",
+  "gridView": "గ్రిడ్ వీక్షణ",
   "@gridView": {},
-  "episodeWatched": "Episode Watched",
+  "episodeWatched": "ఎపిసోడ్ వీక్షించబడింది",
   "@episodeWatched": {},
-  "list": "{type} List",
+  "list": "{type} జాబితా",
   "@list": {
     "placeholders": {
       "type": {
@@ -412,7 +412,7 @@
   },
   "layout": "Layout",
   "@layout": {},
-  "trending": "Trending {type}",
+  "trending": "{type} ట్రెండింగ్",
   "@trending": {
     "placeholders": {
       "type": {
@@ -424,9 +424,9 @@
       }
     }
   },
-  "topAiring": "Top Airing",
+  "topAiring": "టాప్ ఎయిరింగ్",
   "@topAiring": {},
-  "available": "Available {type}",
+  "available": "{type} లభ్యమయ్యాయి",
   "@available": {
     "placeholders": {
       "type": {
@@ -438,9 +438,9 @@
       }
     }
   },
-  "previousSeason": "Previous Season",
+  "previousSeason": "గత సీజన్",
   "@previousSeason": {},
-  "browse": "Browse {type}",
+  "browse": "{type} బ్రౌజ్ చేయండి",
   "@browse": {
     "placeholders": {
       "type": {
@@ -452,7 +452,7 @@
       }
     }
   },
-  "planned": "Planned {type}",
+  "planned": "ఆలోచించిన {type}",
   "@planned": {
     "placeholders": {
       "type": {
@@ -464,9 +464,9 @@
       }
     }
   },
-  "language": "Language",
+  "language": "భాష",
   "@language": {},
-  "onHold": "On Hold {type}",
+  "onHold": "{type} హోల్డ్ పై",
   "@onHold": {
     "placeholders": {
       "type": {
@@ -478,33 +478,33 @@
       }
     }
   },
-  "continueReading": "Continue Reading",
+  "continueReading": "చదవడం కొనసాగించండి",
   "@continueReading": {},
-  "noHiddenMediaFound": "No hidden media found",
+  "noHiddenMediaFound": "దాచిన మీడియా కనుగొనబడలేదు",
   "@noHiddenMediaFound": {},
   "info": "Info",
   "@info": {},
   "addToList": "Add To List",
   "@addToList": {},
-  "comments": "Comments",
+  "comments": "అభిప్రాయాలు",
   "@comments": {},
-  "hiddenMedia": "Hidden Media",
+  "hiddenMedia": "దాచిన మీడియా",
   "@hiddenMedia": {},
-  "noFavourites": "Looks like you don't like anything,\nTry liking a show to keep it here.",
+  "noFavourites": "మీరు ఏమీ ఇష్టపడట్లేదు,\nఇక్కడ ఉంచడానికి ప్రదర్శించడానికి ఒక షోను ఇష్టపడండి.",
   "@noFavourites": {},
   "options": "Options",
   "@options": {},
-  "read": "Read",
+  "read": "చదవండి",
   "@read": {},
-  "search": "Search",
+  "search": "శోధించండి",
   "@search": {},
-  "sort": "Sort",
+  "sort": "వర్గీకరించు",
   "@sort": {},
-  "watch": "Watch",
+  "watch": "చూడండి",
   "@watch": {},
-  "utd": "Up To Down",
+  "utd": "అప్ టు డౌన్",
   "@utd": {},
-  "manageLayoutDescription": "You can manage the layout for {page} page by dragging and dropping the items",
+  "manageLayoutDescription": "{page} పేజీకి సంబంధించిన లేఅవుట్‌ను నిర్వహించేందుకు మీరు అంశాలను డ్రాగ్ చేసి డ్రాప్ చేయవచ్చు",
   "@manageLayoutDescription": {
     "placeholders": {
       "page": {
@@ -517,18 +517,20 @@
       }
     }
   },
-  "pickColor": "Pick a color",
+  "pickColor": "రంగు ఎంచుకోండి",
   "@pickColor": {},
-  "allCaughtUpNew": "All caught up, when New?",
+  "allCaughtUpNew": "అన్ని పూర్తిగా చూసారు, ఏమి కొత్త?",
   "@allCaughtUpNew": {},
-  "droppedManga": "Dropped Manga",
+  "droppedManga": "డ్రాప్ చేసిన మంగా",
   "@droppedManga": {},
-  "droppedAnime": "Dropped Anime",
+  "droppedAnime": "డ్రాప్ చేసిన అనిమే",
   "@droppedAnime": {},
-  "recentUpdates": "Recent Updates",
+  "recentUpdates": "ఇటీవలి నవీకరణలు",
   "@recentUpdates": {},
-  "noOnHold": "Looks like you haven't put anything on hold.",
+  "noOnHold": "మీరు ఏదైనా హోల్డ్ పై ఉంచలేదు.",
   "@noOnHold": {},
-  "recommendationsEmptyMessage": "Watch/Read some Anime or Manga to get Recommendations",
-  "@recommendationsEmptyMessage": {}
+  "recommendationsEmptyMessage": "ప్రత్యేక సిఫార్సులను పొందడానికి కొన్ని అనిమే లేదా మంగా చూడండి/చదవండి",
+  "@recommendationsEmptyMessage": {},
+  "simkl": "Simkl",
+  "@simkl": {}
 }

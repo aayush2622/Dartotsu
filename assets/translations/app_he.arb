@@ -1,5 +1,5 @@
 {
-  "colorPickerDescription": "בחר צבע",
+  "colorPickerDescription": "בחר גוון",
   "@colorPickerDescription": {},
   "common": "הגדרות כלליות",
   "@common": {},
@@ -89,7 +89,7 @@
   "@donationGoal": {},
   "enableDarkMode": "הפעל מצב כהה",
   "@enableDarkMode": {},
-  "extension": "המונחים: המונחים: [...]",
+  "extension": "{count, plural, =1 {תוסף} other {תוספים}}",
   "@extension": {},
   "extensionsDescription": "התקן ונהל הרחבות לפונקציות נוספות",
   "@extensionsDescription": {},
@@ -111,9 +111,9 @@
   "@fontWeightDescription": {},
   "hidePrivate": "הסתר פרטי",
   "@hidePrivate": {},
-  "hidePrivateDescription": "להסתיר סדרה פרטית מתוך דף הבית.",
+  "hidePrivateDescription": "הסתר סדרות פרטיות מעמוד הבית.",
   "@hidePrivateDescription": {},
-  "logout": "תגית: X7X",
+  "logout": "התנתק {type}",
   "@logout": {},
   "mal": "MyAnimeList",
   "@mal": {},
@@ -147,19 +147,19 @@
   "@themeDescription": {},
   "yes": "כן",
   "@yes": {},
-  "totalEpisodes": "פרקים",
+  "totalEpisodes": "סדרות",
   "@totalEpisodes": {},
   "total": "Total",
   "@total": {},
   "tags": "תגיות",
   "@tags": {},
-  "hiddenMedia": "תקשורת מוסתרת",
+  "hiddenMedia": "מדיה מוסתרת",
   "@hiddenMedia": {},
-  "description": "Synopsis",
+  "description": "תקציר",
   "@description": {},
   "name": "שם השם",
   "@name": {},
-  "mostFavourite": "הרוב המכריע (X15X)",
+  "mostFavourite": "{type} המועדף ביותר",
   "@mostFavourite": {
     "placeholders": {
       "type": {
@@ -176,33 +176,33 @@
   "@endDate": {},
   "meanScore": "ציון ממוצע",
   "@meanScore": {},
-  "chapterRead": "פרק קריאה",
+  "chapterRead": "פרק נקרא",
   "@chapterRead": {},
-  "noHiddenMediaFound": "שום תקשורת נסתרת לא נמצאה",
+  "noHiddenMediaFound": "לא נמצאה מדיה מוסתרת",
   "@noHiddenMediaFound": {},
-  "synopsis": "Synopsis",
+  "synopsis": "תקציר",
   "@synopsis": {},
-  "nameRomaji": "שם (Romaji)",
+  "nameRomaji": "שם (רומאג'י)",
   "@nameRomaji": {},
-  "gridView": "View",
+  "gridView": "תצוגת רשת",
   "@gridView": {},
   "averageDuration": "משך ממוצע",
   "@averageDuration": {},
-  "droppedManga": "להורדה Manga",
+  "droppedManga": "מנגה מבוטלת",
   "@droppedManga": {},
-  "comingSoon": "מגיע SOON",
+  "comingSoon": "בקרוב",
   "@comingSoon": {},
-  "episodeWatched": "פרק: Watched",
+  "episodeWatched": "פרק נצפה",
   "@episodeWatched": {},
   "popularity": "פופולריות",
   "@popularity": {},
-  "allCaughtUpNew": "הכל נתפס, מה חדש?",
+  "allCaughtUpNew": "סיימת הכול, מה חדש?",
   "@allCaughtUpNew": {},
   "totalChapters": "פרקים",
   "@totalChapters": {},
   "favorites": "מועדפים",
   "@favorites": {},
-  "movie": "המונחים: # 1 [סרטים] אחרים",
+  "movie": "{count, plural, =1 {סרט} other {סרטים}}",
   "@movie": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -211,9 +211,9 @@
       }
     }
   },
-  "prequel": "שאלה:",
+  "prequel": "שאלה",
   "@prequel": {},
-  "planned": "מתוכנן (X8X)",
+  "planned": "{type} מתוכנן",
   "@planned": {
     "placeholders": {
       "type": {
@@ -225,9 +225,9 @@
       }
     }
   },
-  "collapseText": "להראות פחות",
+  "collapseText": "הצג פחות",
   "@collapseText": {},
-  "chapter": "שם הסרטון: Flor,=1",
+  "chapter": "{count, plural, =1 {פרק} other {פרקים}}",
   "@chapter": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -236,7 +236,7 @@
       }
     }
   },
-  "available": "זמין (X10X)",
+  "available": "{type} זמין",
   "@available": {
     "placeholders": {
       "type": {
@@ -250,7 +250,7 @@
   },
   "characters": "דמויות",
   "@characters": {},
-  "genres": "Genres",
+  "genres": "ז'אנרים",
   "@genres": {},
   "author": "Author",
   "@author": {},
@@ -270,13 +270,13 @@
   "@relations": {},
   "source": "מקור Source",
   "@source": {},
-  "synonyms": "אנונימיות",
+  "synonyms": "מילים נרדפות",
   "@synonyms": {},
   "startDate": "התחל תאריך",
   "@startDate": {},
-  "recommendationsEmptyMessage": "צפה/ Read Some Anime or Manga כדי לקבל המלצות",
+  "recommendationsEmptyMessage": "צפה/קרא קצת אנימה או מנגה כדי לקבל המלצות",
   "@recommendationsEmptyMessage": {},
-  "ln": "Light Novel",
+  "ln": "רומן קל",
   "@ln": {},
   "manhwa": "Manhwa",
   "@manhwa": {},
@@ -284,7 +284,7 @@
   "@kitsu": {},
   "novel": "רומן",
   "@novel": {},
-  "loginTo": "כניסה ל-X9X",
+  "loginTo": "התחבר ל-{service}",
   "@loginTo": {
     "placeholders": {
       "service": {
@@ -304,9 +304,9 @@
   "@home": {},
   "manhua": "ישוע",
   "@manhua": {},
-  "season": "עונת העונה",
+  "season": "עונה",
   "@season": {},
-  "episode": "המונחים: שם הסרטון: AEpisodes",
+  "episode": "{count, plural, =1 {פרק} other {סדרות}}",
   "@episode": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -315,7 +315,7 @@
       }
     }
   },
-  "volume": "המונחים: המונחים: {Volumes}}",
+  "volume": "{count, plural, =1 {כרך} other {כרכים}}",
   "@volume": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -324,7 +324,7 @@
       }
     }
   },
-  "calendar": "לוח השנה",
+  "calendar": "לוח שנה",
   "@calendar": {},
   "compactView": "תצוגה קומפקטית",
   "@compactView": {},
@@ -332,7 +332,7 @@
   "@listView": {},
   "confirmLogout": "האם אתה בטוח שברצונך להתנתק?",
   "@confirmLogout": {},
-  "installed": "(X10X)",
+  "installed": "{type} מותקן",
   "@installed": {
     "placeholders": {
       "type": {
@@ -343,7 +343,7 @@
       }
     }
   },
-  "trending": "עקבו אחרי X9X",
+  "trending": "{type} במגמה",
   "@trending": {
     "placeholders": {
       "type": {
@@ -355,7 +355,7 @@
       }
     }
   },
-  "popular": "פופולרי (X8X)",
+  "popular": "{type} פופולרי",
   "@popular": {
     "placeholders": {
       "type": {
@@ -368,11 +368,11 @@
       }
     }
   },
-  "thisSeason": "העונה הזו",
+  "thisSeason": "העונה הנוכחית",
   "@thisSeason": {},
   "nextSeason": "העונה הבאה",
   "@nextSeason": {},
-  "topRated": "Top Rated[עריכת קוד מקור]",
+  "topRated": "{type} בעלי הדירוג הגבוה ביותר",
   "@topRated": {
     "placeholders": {
       "type": {
@@ -388,7 +388,7 @@
   },
   "previousSeason": "העונה הקודמת",
   "@previousSeason": {},
-  "favorite": "(X9X)",
+  "favorite": "{type} מועדף",
   "@favorite": {
     "placeholders": {
       "type": {
@@ -400,7 +400,7 @@
       }
     }
   },
-  "activity": "המונחים: (הופנה מהדף אחר)",
+  "activity": "{count, plural, =1 {פעילות} other {פעילויות}}",
   "@activity": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -409,7 +409,7 @@
       }
     }
   },
-  "browse": "(X7X)",
+  "browse": "עיין ב-{type}",
   "@browse": {
     "placeholders": {
       "type": {
@@ -421,7 +421,7 @@
       }
     }
   },
-  "onHold": "On Hold (X8X)",
+  "onHold": "{type} בהמתנה",
   "@onHold": {
     "placeholders": {
       "type": {
@@ -433,9 +433,9 @@
       }
     }
   },
-  "continueReading": "המשך קריאה",
+  "continueReading": "המשך לקרוא",
   "@continueReading": {},
-  "noDropped": "עדיין לא ירדתם X24X.",
+  "noDropped": "לא ביטלת אף {type} עדיין.",
   "@noDropped": {
     "placeholders": {
       "type": {
@@ -447,25 +447,25 @@
       }
     }
   },
-  "continueWatching": "המשך צפייה",
+  "continueWatching": "המשך לצפות",
   "@continueWatching": {},
-  "droppedAnime": "טיפות Anime",
+  "droppedAnime": "אנימה מבוטלת",
   "@droppedAnime": {},
   "recentUpdates": "עדכונים אחרונים",
   "@recentUpdates": {},
   "recommended": "מומלץ",
   "@recommended": {},
-  "scanlators": "סורקים",
+  "scanlators": "מתרגמים",
   "@scanlators": {},
   "search": "חיפוש",
   "@search": {},
-  "sort": "מין",
+  "sort": "מיין",
   "@sort": {},
-  "utd": "עד למטה",
+  "utd": "מלמעלה למטה",
   "@utd": {},
   "addToList": "הוסף לרשימה",
   "@addToList": {},
-  "comments": "הערות",
+  "comments": "תגובות",
   "@comments": {},
   "dtu": "למטה עד Up",
   "@dtu": {},
@@ -475,7 +475,7 @@
   "@info": {},
   "layout": "Layout",
   "@layout": {},
-  "list": "רשימת X0X",
+  "list": "רשימת {type}",
   "@list": {
     "placeholders": {
       "type": {
@@ -486,13 +486,13 @@
   },
   "options": "אפשרויות",
   "@options": {},
-  "read": "Read",
+  "read": "קרא",
   "@read": {},
-  "topAiring": "Top Airing",
+  "topAiring": "משודרים מובילים",
   "@topAiring": {},
-  "watch": "Watch",
+  "watch": "צפה",
   "@watch": {},
-  "manageLayout": "דף ה-X7X - LEout for [x30X]",
+  "manageLayout": "נהל את הפריסה של דף {page} עבור {service}",
   "@manageLayout": {
     "placeholders": {
       "service": {
@@ -512,7 +512,7 @@
       }
     }
   },
-  "manageLayoutDescription": "אתה יכול לנהל את הפריסה עבור דף X30X על ידי גרר ופיל את הפריטים",
+  "manageLayoutDescription": "באפשרותך לנהל את פריסת דף {page} על ידי גרירה ושחרור של הפריטים",
   "@manageLayoutDescription": {
     "placeholders": {
       "page": {
@@ -525,10 +525,12 @@
       }
     }
   },
-  "pickColor": "בחרו צבע",
+  "pickColor": "בחר צבע",
   "@pickColor": {},
-  "noFavourites": "נראה כאילו אתה לא אוהב שום דבר,\nנסו לאהוב הופעה כדי לשמור אותה כאן.",
+  "noFavourites": "נראה שאתה לא אוהב כלום,\nנסה לסמן סדרה למועדפים כדי לשמור אותה כאן.",
   "@noFavourites": {},
-  "noOnHold": "נראה כאילו לא עשיתם שום דבר בתחזוקה.",
-  "@noOnHold": {}
+  "noOnHold": "נראה שלא שמת שום דבר בהמתנה.",
+  "@noOnHold": {},
+  "simkl": "Simkl",
+  "@simkl": {}
 }

@@ -1,21 +1,16 @@
 part of '../SimklQueries.dart';
 
 Future<List<media.Media>> processMediaResponse(Media? data) async {
-  return await compute(
-      (data) => data?.map((m) => media.Media.fromSimklAnime(m)).toList() ?? [],
-      data?.anime);
+  return data?.anime?.map((m) => media.Media.fromSimklAnime(m)).toList() ?? [];
+
 }
 
 Future<List<media.Media>> processShowsResponse(Media? data) async {
-  return await compute(
-      (data) => data?.map((m) => media.Media.fromSimklSeries(m)).toList() ?? [],
-      data?.show);
+  return data?.show?.map((m) => media.Media.fromSimklSeries(m)).toList() ?? [];
 }
 
 Future<List<media.Media>> processMovieResponse(Media? data) async {
-  return await compute(
-      (data) => data?.map((m) => media.Media.fromSimklMovies(m)).toList() ?? [],
-      data?.movies);
+  return data?.movies?.map((m) => media.Media.fromSimklMovies(m)).toList() ?? [];
 }
 
 extension on SimklQueries {
