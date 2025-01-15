@@ -63,7 +63,7 @@
   "@donationGoal": {},
   "enableDarkMode": "Karanlık Modu Etkinleştir",
   "@enableDarkMode": {},
-  "extension": "{count, çoğul, =1 {Exchange} diğer {Exups}}",
+  "extension": "{count, plural, =1 {Extension} other {Extensions}}",
   "@extension": {},
   "extensionsDescription": "Ek işlevsellik için eklentileri yükleyin ve yönetin",
   "@extensionsDescription": {},

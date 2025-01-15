@@ -121,7 +121,7 @@
   "@bottomPaddingDescription": {},
   "cursedSpeedDescription": "Para personas demasiado ocupadas con la vida",
   "@cursedSpeedDescription": {},
-  "extension": "{contador, plural, =1 {Extension} other {Extensions}}",
+  "extension": "{count, plural, =1 {Extension} other {Extensions}}",
   "@extension": {},
   "fontColor": "Color de Fuente",
   "@fontColor": {},
@@ -219,7 +219,7 @@
   "@totalChapters": {},
   "favorites": "Favoritos",
   "@favorites": {},
-  "movie": "{contador, plural, =1 {Movie} other {Movies}}",
+  "movie": "{count, plural, =1 {Movie} other {Movies}}",
   "@movie": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -296,7 +296,7 @@
   "@home": {},
   "addToList": "Añadir a la lista",
   "@addToList": {},
-  "episode": "{contador, plural, =1 {Episode} other {Episodes}",
+  "episode": "{count, plural, =1 {Episode} other {Episodes}}",
   "@episode": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -305,7 +305,7 @@
       }
     }
   },
-  "chapter": "{contador, plural, =1 {Cambiador} otros {capítulos}",
+  "chapter": "{count, plural, =1 {Chapter} other {Chapters}}",
   "@chapter": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -316,7 +316,7 @@
   },
   "season": "Estación",
   "@season": {},
-  "volume": "{contador, plural, =1 {Volume} other {Volumes}}",
+  "volume": "{count, plural, =1 {Volume} other {Volumes}}",
   "@volume": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -374,7 +374,7 @@
   "@thisSeason": {},
   "nextSeason": "Next Season",
   "@nextSeason": {},
-  "activity": "{contador, plural, =1 {Actividad} otras {Actividades}",
+  "activity": "{count, plural, =1 {Activity} other {Activities}}",
   "@activity": {
     "description": "count > 1 will use plural form",
     "placeholders": {

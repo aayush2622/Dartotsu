@@ -1044,17 +1044,6 @@ class $MProvider extends MProvider with $Bridge<MProvider> {
         }))
             .toList());
       }))),
-      "evaluateJavascriptViaWebview" => $Function((_, __, List<$Value?> args) =>
-          $Future.wrap(MBridge.evaluateJavascriptViaWebview(
-              args[0]!.$value,
-              (args[1]!.$value as Map).map((key, value) => MapEntry(
-                  key.$reified.toString(), value.$reified.toString())),
-              (args[2]!.$value as List)
-                  .map((e) => e.$reified.toString())
-                  .toList())
-              .then((value) {
-            return $String(value);
-          }))),
       "toVideo" => $Function((_, __, List<$Value?> args) {
         final value = MBridge.toVideo(
             args[0]!.$value,

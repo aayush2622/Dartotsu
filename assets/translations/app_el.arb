@@ -55,7 +55,7 @@
   "@donationGoal": {},
   "enableDarkMode": "Ενεργοποιήστε τη Σκοτεινή Λειτουργία",
   "@enableDarkMode": {},
-  "extension": "{count, πλουραία, =1 {Extension} άλλα {Extensions}}",
+  "extension": "{count, plural, =1 {Extension} other {Extensions}}",
   "@extension": {},
   "extensionsDescription": "Εγκαταστήστε και διαχειριστείτε επεκτάσεις για επιπλέον λειτουργικότητα",
   "@extensionsDescription": {},

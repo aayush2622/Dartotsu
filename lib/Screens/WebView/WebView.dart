@@ -1,9 +1,9 @@
+/*
 import 'dart:async';
 import 'dart:io';
 import 'package:desktop_webview_window/desktop_webview_window.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:share_plus/share_plus.dart';
@@ -347,3 +347,4 @@ class MyInAppBrowser extends InAppBrowser {
     return NavigationActionPolicy.ALLOW;
   }
 }
+*/

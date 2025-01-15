@@ -67,7 +67,7 @@
   "@donationGoal": {},
   "enableDarkMode": "ダークモードを有効にする",
   "@enableDarkMode": {},
-  "extension": "{count, 複数, =1 {拡張子} 他の {拡張子}}",
+  "extension": "{count, plural, =1 {Extension} other {Extensions}}",
   "@extension": {},
   "extensionsDescription": "機能を追加するために拡張機能をインストールして管理",
   "@extensionsDescription": {},
@@ -183,7 +183,7 @@
   },
   "manhwa": "ログイン",
   "@manhwa": {},
-  "volume": "{count, 複数, =1 {ボリューム} 他の {ボリューム}}",
+  "volume": "{count, plural, =1 {Volume} other {Volumes}}",
   "@volume": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -210,7 +210,7 @@
       }
     }
   },
-  "activity": "{count, 複数, =1 {Activity} 他の{Activities}}",
+  "activity": "{count, plural, =1 {Activity} other {Activities}}",
   "@activity": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -286,7 +286,7 @@
   },
   "comingSoon": "SOON(ソノン)",
   "@comingSoon": {},
-  "episode": "{count, 複数, =1 {Episode} 他の {Episodes}}",
+  "episode": "{count, plural, =1 {Episode} other {Episodes}}",
   "@episode": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -301,7 +301,7 @@
   "@popularity": {},
   "favorites": "お気に入り",
   "@favorites": {},
-  "movie": "{count, 複数, =1 {Movie} 他の {Movies}}",
+  "movie": "{count, plural, =1 {Movie} other {Movies}}",
   "@movie": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -328,7 +328,7 @@
   },
   "language": "用語集",
   "@language": {},
-  "chapter": "{count, 複数, =1 {Chapter} 他の {Chapters}}",
+  "chapter": "{count, plural, =1 {Chapter} other {Chapters}}",
   "@chapter": {
     "description": "count > 1 will use plural form",
     "placeholders": {

@@ -309,7 +309,7 @@
   "@collapseText": {},
   "addToList": "Tambahkan ke Daftar",
   "@addToList": {},
-  "chapter": "{count, jamak, =1 {Chapter} lainnya {Chapters}}",
+  "chapter": "{count, plural, =1 {Chapter} other {Chapters}}",
   "@chapter": {
     "description": "count > 1 will use plural form",
     "placeholders": {

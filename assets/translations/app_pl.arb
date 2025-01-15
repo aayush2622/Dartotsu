@@ -231,7 +231,7 @@
   "@prequel": {},
   "language": "Językoznawstwo",
   "@language": {},
-  "chapter": "{P, plural, =1 {Chapter} inne {Chapters}}",
+  "chapter": "{count, plural, =1 {Chapter} other {Chapters}}",
   "@chapter": {
     "description": "count > 1 will use plural form",
     "placeholders": {

@@ -324,7 +324,7 @@
   "@search": {},
   "collapseText": "mostra meno",
   "@collapseText": {},
-  "chapter": "{count, plurale, =1 {Chapter} altro {Chapters}}",
+  "chapter": "{count, plural, =1 {Chapter} other {Chapters}}",
   "@chapter": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -453,7 +453,7 @@
       }
     }
   },
-  "activity": "Conto, plurale, =1 {Attività} altri {Attività}}",
+  "activity": "{count, plural, =1 {Activity} other {Activities}}",
   "@activity": {
     "description": "count > 1 will use plural form",
     "placeholders": {

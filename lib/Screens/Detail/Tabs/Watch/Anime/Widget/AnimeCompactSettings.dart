@@ -186,10 +186,7 @@ class AnimeCompactSettings {
       children: [
         _buildInfo("Web View", source?.baseUrl ?? ''),
         IconButton(
-          onPressed: () => navigateToPage(
-            context,
-            MangaWebView(url: source!.baseUrl!, title: ''),
-          ),
+          onPressed: () {},
           icon: Icon(
             Icons.open_in_new_rounded,
             size: 24,

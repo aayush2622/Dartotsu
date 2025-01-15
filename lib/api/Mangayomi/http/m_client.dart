@@ -6,8 +6,6 @@ import 'package:dantotsu/api/Mangayomi/Model/settings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/io_client.dart';
 import 'package:http_interceptor/http_interceptor.dart';
-import 'package:flutter_inappwebview/flutter_inappwebview.dart'
-as flutter_inappwebview;
 import '../../../logger.dart';
 import '../../../main.dart';
 import '../Eval/dart/model/m_source.dart';
@@ -64,7 +62,6 @@ class MClient {
   }
 
   static Future<void> setCookie(String url, String ua,
-      flutter_inappwebview.InAppWebViewController? webViewController,
       {String? cookie}) async {
     List<String> cookies = [];
     if (Platform.isLinux) {
@@ -74,13 +71,7 @@ class MClient {
           .toList() ??
           [];
     } else {
-      cookies = (await flutter_inappwebview.CookieManager.instance(
-          webViewEnvironment: webViewEnvironment)
-          .getCookies(
-          url: flutter_inappwebview.WebUri(url),
-          webViewController: webViewController))
-          .map((e) => "${e.name}=${e.value}")
-          .toList();
+      cookies = [];
     }
     if (cookies.isNotEmpty) {
       final host = Uri.parse(url).host;

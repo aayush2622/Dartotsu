@@ -57,7 +57,7 @@
   "@customThemeDescription": {},
   "darkMode": "다크 모드",
   "@darkMode": {},
-  "extension": "{count, 복수, =1 {Extension} 다른 {Extensions}}",
+  "extension": "{count, plural, =1 {Extension} other {Extensions}}",
   "@extension": {},
   "extensionsDescription": "기능을 추가하기 위해 확장을 설치하고 관리하세요",
   "@extensionsDescription": {},
@@ -195,7 +195,7 @@
   "@novel": {},
   "tags": "이름 *",
   "@tags": {},
-  "activity": "{count, 복수, =1 {액티비티} 기타 {액티비티}}",
+  "activity": "{count, plural, =1 {Activity} other {Activities}}",
   "@activity": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -281,7 +281,7 @@
   },
   "staff": "한국어",
   "@staff": {},
-  "episode": "{count, 복수, {Episode} 다른 {Episodes}}",
+  "episode": "{count, plural, =1 {Episode} other {Episodes}}",
   "@episode": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -396,7 +396,7 @@
   "@addToList": {},
   "season": "【특전】",
   "@season": {},
-  "volume": "{count, 복수, =1 {Volume} 다른 {Volumes}}",
+  "volume": "{count, plural, =1 {Volume} other {Volumes}}",
   "@volume": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -405,7 +405,7 @@
       }
     }
   },
-  "movie": "{count, 복수, =1 {Movie} 다른 {Movies}}",
+  "movie": "{count, plural, =1 {Movie} other {Movies}}",
   "@movie": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -414,7 +414,7 @@
       }
     }
   },
-  "chapter": "{count, 복수, =1 {Chapter} 기타 {Chapters}}",
+  "chapter": "{count, plural, =1 {Chapter} other {Chapters}}",
   "@chapter": {
     "description": "count > 1 will use plural form",
     "placeholders": {

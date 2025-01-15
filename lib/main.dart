@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' as provider;
 import 'package:get/get.dart';
@@ -35,7 +34,6 @@ import 'logger.dart';
 import 'package:path/path.dart' as p;
 
 late Isar isar;
-WebViewEnvironment? webViewEnvironment;
 
 void main(List<String> args) async {
   runZonedGuarded(
@@ -69,9 +67,7 @@ void main(List<String> args) async {
 
 Future init() async {
   await StorageProvider().requestPermission();
-  if (!Platform.isIOS) {
-    await dotenv.load(fileName: ".env");
-  }
+  await dotenv.load(fileName: ".env");
   await PrefManager.init();
   isar = await StorageProvider().initDB(null);
   await Logger.init();
@@ -88,17 +84,6 @@ Future init() async {
     initializeDateFormatting(locale);
   }
 
-  if (!kIsWeb && defaultTargetPlatform == TargetPlatform.windows) {
-    final availableVersion = await WebViewEnvironment.getAvailableVersion();
-    assert(availableVersion != null,
-        'Failed to find an installed WebView2 runtime or non-stable Microsoft Edge installation.');
-    final document = await StorageProvider().getDirectory();
-    webViewEnvironment = await WebViewEnvironment.create(
-      settings: WebViewEnvironmentSettings(
-        userDataFolder: p.join(document!.path, 'flutter_inappwebview'),
-      ),
-    );
-  }
   Get.config(
     enableLog: true,
     logWriterCallback: (text, {isError = false}) async {

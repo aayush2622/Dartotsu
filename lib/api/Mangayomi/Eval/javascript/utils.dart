@@ -34,12 +34,6 @@ class JsUtils {
     runtime.onMessage('unpackJs', (dynamic args) {
       return JSPacker(args[0]).unpack() ?? "";
     });
-    runtime.onMessage('evaluateJavascriptViaWebview', (dynamic args) async {
-      return await MBridge.evaluateJavascriptViaWebview(
-          args[0]!,
-          (args[1]! as Map).toMapStringString!,
-          (args[2]! as List).map((e) => e.toString()).toList());
-    });
     runtime.evaluate('''
 console.log = function (message) {
     if (typeof message === "object") {

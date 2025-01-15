@@ -12,7 +12,6 @@ import 'package:intl/intl.dart';
 import 'package:js_packer/js_packer.dart';
 import 'package:json_path/json_path.dart';
 import 'package:xpath_selector_html_parser/xpath_selector_html_parser.dart';
-import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import '../../../../../main.dart';
 import '../../../Model/Manga.dart';
 import '../../../anime_extractors/dood_extractor.dart';
@@ -623,48 +622,9 @@ class MBridge {
       return text;
     }
   }
-  static Future<String> evaluateJavascriptViaWebview(
-      String url, Map<String, String> headers, List<String> scripts,
-      {int time = 30}) async {
-    int t = 0;
-    bool timeOut = false;
-    bool isOk = false;
-    String response = "";
-    HeadlessInAppWebView? headlessWebView;
-    headlessWebView = HeadlessInAppWebView(
-      webViewEnvironment: webViewEnvironment,
-      onWebViewCreated: (controller) {
-        controller.addJavaScriptHandler(
-          handlerName: 'setResponse',
-          callback: (args) {
-            response = args[0] as String;
-            isOk = true;
-          },
-        );
-      },
-      initialUrlRequest: URLRequest(url: WebUri(url), headers: headers),
-      onLoadStop: (controller, url) async {
-        for (var script in scripts) {
-          await controller.platform.evaluateJavascript(source: script);
-        }
-      },
-    );
-    headlessWebView.run();
-    await Future.doWhile(() async {
-      timeOut = time == t;
-      if (timeOut || isOk) {
-        return false;
-      }
-      await Future.delayed(const Duration(seconds: 1));
-      t++;
-      return true;
-    });
-    try {
-      headlessWebView.dispose();
-    } catch (_) {}
-    return response;
-  }
+
 }
+
 
 final List<String> _dateFormats = [
   'dd/MM/yyyy',
