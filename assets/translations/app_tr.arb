@@ -63,7 +63,7 @@
   "@donationGoal": {},
   "enableDarkMode": "Karanlık Modu Etkinleştir",
   "@enableDarkMode": {},
-  "extension": "{count, plural, =1 {Extension} other {Extensions}}",
+  "extension": "{count, plural, =1 {Eklenti} other {Eklentiler}}",
   "@extension": {},
   "extensionsDescription": "Ek işlevsellik için eklentileri yükleyin ve yönetin",
   "@extensionsDescription": {},
@@ -81,7 +81,7 @@
   "@fontSizeDescription": {},
   "hidePrivate": "Gizlileri Gizle",
   "@hidePrivate": {},
-  "hidePrivateDescription": "Home page'ten özel seriler.",
+  "hidePrivateDescription": "Anasayfada özel serileri gizle.",
   "@hidePrivateDescription": {},
   "incognitoMode": "Gizli Mod",
   "@incognitoMode": {},
@@ -89,7 +89,7 @@
   "@incognitoModeDescription": {},
   "login": "Giriş Yap",
   "@login": {},
-  "logout": "Logout {type}",
+  "logout": "Çıkış Yap {type}",
   "@logout": {},
   "mal": "MyAnimeList",
   "@mal": {},
@@ -147,7 +147,7 @@
   "@themeDescription": {},
   "yes": "Evet",
   "@yes": {},
-  "episode": "Bölüm",
+  "episode": "{count, plural, =1 {Bölüm} other {Dizin}}",
   "@episode": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -156,7 +156,7 @@
       }
     }
   },
-  "chapter": "Bölüm",
+  "chapter": "{count, plural, =1 {Bölüm} other {Bölümler}}",
   "@chapter": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -165,7 +165,7 @@
       }
     }
   },
-  "volume": "Cilt",
+  "volume": "{count, plural, =1 {Cilt} other {Ciltler}}",
   "@volume": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -174,7 +174,7 @@
       }
     }
   },
-  "movie": "Film",
+  "movie": "{count, plural, =1 {Film} other {Filmler}}",
   "@movie": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -189,15 +189,15 @@
   "@calendar": {},
   "search": "Ara",
   "@search": {},
-  "scanlators": "Çeviri Grupları",
+  "scanlators": "Taramacılar",
   "@scanlators": {},
-  "confirmLogout": "Çıkış yapmak istediğinize emin misiniz?",
+  "confirmLogout": "Çıkış yapmak istediğinizden emin misiniz?",
   "@confirmLogout": {},
   "nextSeason": "Gelecek Sezon",
   "@nextSeason": {},
   "previousSeason": "Önceki Sezon",
   "@previousSeason": {},
-  "activity": "Etkinlik",
+  "activity": "{count, plural, =1 {Aktivite} other {Aktiviteler}}",
   "@activity": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -206,7 +206,7 @@
       }
     }
   },
-  "planned": "Planlanan",
+  "planned": "Planlanan {type}",
   "@planned": {
     "placeholders": {
       "type": {
@@ -218,7 +218,7 @@
       }
     }
   },
-  "browse": "Gözat",
+  "browse": "Gözat {type}",
   "@browse": {
     "placeholders": {
       "type": {
@@ -230,7 +230,7 @@
       }
     }
   },
-  "favorite": "Favori",
+  "favorite": "Favori {type}",
   "@favorite": {
     "placeholders": {
       "type": {
@@ -242,7 +242,7 @@
       }
     }
   },
-  "noDropped": "Bırakılan Yok",
+  "noDropped": "Henüz herhangi bir {type} bırakmadınız.",
   "@noDropped": {
     "placeholders": {
       "type": {
@@ -254,21 +254,21 @@
       }
     }
   },
-  "description": "Açıklama",
+  "description": "Özet",
   "@description": {},
   "endDate": "Bitiş Tarihi",
   "@endDate": {},
-  "expandText": "Genişlet",
+  "expandText": "daha fazla göster",
   "@expandText": {},
   "favorites": "Favoriler",
   "@favorites": {},
-  "format": "Biçim",
+  "format": "Format",
   "@format": {},
   "meanScore": "Ortalama Puan",
   "@meanScore": {},
   "name": "Ad",
   "@name": {},
-  "nameRomaji": "Romaji Ad",
+  "nameRomaji": "Ad (Romaji)",
   "@nameRomaji": {},
   "popularity": "Popülerlik",
   "@popularity": {},
@@ -282,15 +282,15 @@
   "@status": {},
   "studio": "Stüdyo",
   "@studio": {},
-  "synonyms": "Eş Anlamlılar",
+  "synonyms": "Eşanlamlılar",
   "@synonyms": {},
   "synopsis": "Özet",
   "@synopsis": {},
   "tags": "Etiketler",
   "@tags": {},
-  "totalChapters": "Toplam Bölüm",
+  "totalChapters": "Bölümler",
   "@totalChapters": {},
-  "collapseText": "Daralt",
+  "collapseText": "daha az göster",
   "@collapseText": {},
   "relations": "İlişkiler",
   "@relations": {},
@@ -304,13 +304,13 @@
   "@averageDuration": {},
   "characters": "Karakterler",
   "@characters": {},
-  "comingSoon": "Yakında",
+  "comingSoon": "Yakında Geliyor",
   "@comingSoon": {},
   "total": "Toplam",
   "@total": {},
-  "totalEpisodes": "Toplam Bölüm",
+  "totalEpisodes": "Dizin",
   "@totalEpisodes": {},
-  "loginTo": "Giriş Yap",
+  "loginTo": "{service}'ye Giriş Yap",
   "@loginTo": {
     "placeholders": {
       "service": {
@@ -332,7 +332,7 @@
   "@home": {},
   "novel": "Roman",
   "@novel": {},
-  "ln": "Hafif Roman",
+  "ln": "Işık Romanı",
   "@ln": {},
   "addToList": "Listeye Ekle",
   "@addToList": {},
@@ -346,11 +346,11 @@
   "@listView": {},
   "compactView": "Kompakt Görünüm",
   "@compactView": {},
-  "episodeWatched": "İzlenen Bölüm",
+  "episodeWatched": "Bölüm İzlendi",
   "@episodeWatched": {},
-  "chapterRead": "Okunan Bölüm",
+  "chapterRead": "Bölüm Okundu",
   "@chapterRead": {},
-  "available": "Mevcut",
+  "available": "Mevcut {type}",
   "@available": {
     "placeholders": {
       "type": {
@@ -362,7 +362,7 @@
       }
     }
   },
-  "installed": "Yüklü",
+  "installed": "Yüklenmiş {type}",
   "@installed": {
     "placeholders": {
       "type": {
@@ -373,7 +373,7 @@
       }
     }
   },
-  "trending": "Trendler",
+  "trending": "Trend {type}",
   "@trending": {
     "placeholders": {
       "type": {
@@ -385,7 +385,7 @@
       }
     }
   },
-  "mostFavourite": "En Sevilen",
+  "mostFavourite": "En Favori {type}",
   "@mostFavourite": {
     "placeholders": {
       "type": {
@@ -398,7 +398,7 @@
       }
     }
   },
-  "popular": "Popüler",
+  "popular": "Popüler {type}",
   "@popular": {
     "placeholders": {
       "type": {
@@ -411,9 +411,9 @@
       }
     }
   },
-  "topAiring": "En İyi Yayınlananlar",
+  "topAiring": "En İyi Yayınlanan",
   "@topAiring": {},
-  "topRated": "En Çok Oy Alanlar",
+  "topRated": "En Yüksek Puanlı {type}",
   "@topRated": {
     "placeholders": {
       "type": {
@@ -429,7 +429,7 @@
   },
   "thisSeason": "Bu Sezon",
   "@thisSeason": {},
-  "onHold": "Beklemede",
+  "onHold": "Beklemede {type}",
   "@onHold": {
     "placeholders": {
       "type": {
@@ -441,7 +441,7 @@
       }
     }
   },
-  "allCaughtUpNew": "Bütün yakalandı, Yeni nedir?",
+  "allCaughtUpNew": "Her şey tamamlandı, yeni ne var?",
   "@allCaughtUpNew": {},
   "droppedAnime": "Bırakılan Anime",
   "@droppedAnime": {},
@@ -457,7 +457,7 @@
   "@hiddenMedia": {},
   "info": "Bilgi",
   "@info": {},
-  "list": "Liste",
+  "list": "{type} Listesi",
   "@list": {
     "placeholders": {
       "type": {
@@ -480,9 +480,9 @@
   "@sort": {},
   "watch": "İzle",
   "@watch": {},
-  "utd": "Güncel",
+  "utd": "Yukarıdan Aşağıya",
   "@utd": {},
-  "manageLayout": "Düzeni Yönet",
+  "manageLayout": "{service} için {page} sayfasının düzenini yönet",
   "@manageLayout": {
     "placeholders": {
       "service": {
@@ -502,7 +502,7 @@
       }
     }
   },
-  "manageLayoutDescription": "Düzeni kişiselleştirin",
+  "manageLayoutDescription": "{page} sayfasının düzenini sürükleyip bırakarak yönetebilirsiniz",
   "@manageLayoutDescription": {
     "placeholders": {
       "page": {
@@ -515,20 +515,22 @@
       }
     }
   },
-  "pickColor": "Renk Seç",
+  "pickColor": "Bir renk seç",
   "@pickColor": {},
   "droppedManga": "Bırakılan Manga",
   "@droppedManga": {},
-  "noFavourites": "Favori Yok",
+  "noFavourites": "Görünüşe göre hiç bir şeyi beğenmediniz,\nBir şov beğenin ve burada tutun.",
   "@noFavourites": {},
-  "noHiddenMediaFound": "Gizli Medya Bulunamadı",
+  "noHiddenMediaFound": "Gizli medya bulunamadı",
   "@noHiddenMediaFound": {},
-  "noOnHold": "Beklemede Yok",
+  "noOnHold": "Görünüşe göre hiçbir şeyi beklemede tutmamışsınız.",
   "@noOnHold": {},
-  "recommendationsEmptyMessage": "Öneriler bulunamadı",
+  "recommendationsEmptyMessage": "Tavsiyeler almak için bazı Anime veya Manga izleyin/okuyun",
   "@recommendationsEmptyMessage": {},
-  "recommended": "Önerilen",
+  "recommended": "Tavsiye Edilen",
   "@recommended": {},
   "kitsu": "Kitsu",
-  "@kitsu": {}
+  "@kitsu": {},
+  "simkl": "Simkl",
+  "@simkl": {}
 }

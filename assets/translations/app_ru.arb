@@ -161,7 +161,7 @@
   },
   "dtu": "Вниз до вверх",
   "@dtu": {},
-  "volume": "Счет, множественность, =1 {Volume} other {Volumes}}",
+  "volume": "{count, plural, =1 {объем} other {объемы}}",
   "@volume": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -184,7 +184,7 @@
       }
     }
   },
-  "activity": "{count, plural, =1 {Activity} other {Activities}}",
+  "activity": "{count, plural, =1 {активность} other {деятельность}}",
   "@activity": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -193,7 +193,7 @@
       }
     }
   },
-  "topRated": "Top Rated {type}",
+  "topRated": "Самый рейтинговый {type}",
   "@topRated": {
     "placeholders": {
       "type": {
@@ -283,7 +283,7 @@
   "@popularity": {},
   "favorites": "Любимые",
   "@favorites": {},
-  "movie": "{count, plural, =1 {Movie} other {Movies}}",
+  "movie": "{count, plural, =1 {фильм} other {фильмы}}",
   "@movie": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -306,11 +306,11 @@
       }
     }
   },
-  "language": "Язык",
+  "language": "Настройка",
   "@language": {},
   "collapseText": "показать меньше",
   "@collapseText": {},
-  "chapter": "{count, plural, =1 {Chapter} other {Chapters}}",
+  "chapter": "{count, plural, =1 {глава} other {главы}}",
   "@chapter": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -365,7 +365,7 @@
   "@averageDuration": {},
   "author": "Автор",
   "@author": {},
-  "description": "Synopsis",
+  "description": "Краткое содержание",
   "@description": {},
   "name": "Имя",
   "@name": {},
@@ -373,7 +373,7 @@
   "@recommended": {},
   "meanScore": "Средний балл",
   "@meanScore": {},
-  "synopsis": "Synopsis",
+  "synopsis": "Краткое содержание",
   "@synopsis": {},
   "nameRomaji": "Имя (Ромаджи)",
   "@nameRomaji": {},
@@ -482,13 +482,13 @@
   "@search": {},
   "sort": "Сорт",
   "@sort": {},
-  "topAiring": "Top Airing",
+  "topAiring": "Топ-эфир",
   "@topAiring": {},
   "watch": "Смотреть",
   "@watch": {},
   "utd": "Вниз",
   "@utd": {},
-  "manageLayout": "Управление {page}",
+  "manageLayout": "Управление макетом страницы {page} для {service}",
   "@manageLayout": {
     "placeholders": {
       "service": {
@@ -508,7 +508,7 @@
       }
     }
   },
-  "allCaughtUpNew": "Что нового?",
+  "allCaughtUpNew": "Все догнали, когда Нью?",
   "@allCaughtUpNew": {},
   "manageLayoutDescription": "Вы можете управлять компоновкой для страницы {page}, перетаскивая и опуская элементы",
   "@manageLayoutDescription": {
@@ -530,5 +530,7 @@
   "droppedManga": "Падение Манги",
   "@droppedManga": {},
   "droppedAnime": "Сброшенное аниме",
-  "@droppedAnime": {}
+  "@droppedAnime": {},
+  "simkl": "Simkl",
+  "@simkl": {}
 }

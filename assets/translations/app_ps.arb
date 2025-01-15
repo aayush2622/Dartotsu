@@ -530,5 +530,7 @@
   "gridView": "نمای شبکه‌ای",
   "@gridView": {},
   "confirmLogout": "آیا مطمئن هستید که می‌خواهید از سیستم خارج شوید؟",
-  "@confirmLogout": {}
+  "@confirmLogout": {},
+  "simkl": "Simkl",
+  "@simkl": {}
 }

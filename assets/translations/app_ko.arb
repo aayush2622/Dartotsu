@@ -21,7 +21,7 @@
   "@anilist": {},
   "appName": "Dartotsu",
   "@appName": {},
-  "appTagline": "애니메이션 & 만화를 추적하는 새로운 최고의 앱",
+  "appTagline": "새로운 앱\n애니메이션 & 만화",
   "@appTagline": {},
   "backgroundColor": "배경 색상",
   "@backgroundColor": {},
@@ -57,7 +57,7 @@
   "@customThemeDescription": {},
   "darkMode": "다크 모드",
   "@darkMode": {},
-  "extension": "{count, plural, =1 {Extension} other {Extensions}}",
+  "extension": "{count, plural, =1 {확대} other {확장}}",
   "@extension": {},
   "extensionsDescription": "기능을 추가하기 위해 확장을 설치하고 관리하세요",
   "@extensionsDescription": {},
@@ -195,7 +195,7 @@
   "@novel": {},
   "tags": "이름 *",
   "@tags": {},
-  "activity": "{count, plural, =1 {Activity} other {Activities}}",
+  "activity": "{count, plural, =1 {활동} other {활동}}",
   "@activity": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -281,7 +281,7 @@
   },
   "staff": "한국어",
   "@staff": {},
-  "episode": "{count, plural, =1 {Episode} other {Episodes}}",
+  "episode": "{count, plural, =1 {삽화} other {에피소드}}",
   "@episode": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -336,7 +336,7 @@
   "@synopsis": {},
   "nameRomaji": "이름 (Romaji)",
   "@nameRomaji": {},
-  "total": "·",
+  "total": "총",
   "@total": {},
   "totalChapters": "한국어",
   "@totalChapters": {},
@@ -396,7 +396,7 @@
   "@addToList": {},
   "season": "【특전】",
   "@season": {},
-  "volume": "{count, plural, =1 {Volume} other {Volumes}}",
+  "volume": "{count, plural, =1 {용량} other {볼륨}}",
   "@volume": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -405,7 +405,7 @@
       }
     }
   },
-  "movie": "{count, plural, =1 {Movie} other {Movies}}",
+  "movie": "{count, plural, =1 {영화} other {영화 산업}}",
   "@movie": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -414,7 +414,7 @@
       }
     }
   },
-  "chapter": "{count, plural, =1 {Chapter} other {Chapters}}",
+  "chapter": "{count, plural, =1 {장} other {챕터}}",
   "@chapter": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -530,5 +530,7 @@
     }
   },
   "pickColor": "색상 선택",
-  "@pickColor": {}
+  "@pickColor": {},
+  "simkl": "메인메뉴",
+  "@simkl": {}
 }

@@ -530,5 +530,7 @@
   "noOnHold": "Det ser ud til, at du ikke har sat noget i bero.",
   "@noOnHold": {},
   "kitsu": "Kitsu",
-  "@kitsu": {}
+  "@kitsu": {},
+  "simkl": "Simkl",
+  "@simkl": {}
 }

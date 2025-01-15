@@ -41,7 +41,7 @@
   "@donationGoal": {},
   "enableDarkMode": "डार्क मोड सक्षम गर्नुहोस्",
   "@enableDarkMode": {},
-  "extension": "{count, plural, =1 {एक्सटेन्सन} other {एक्सटेन्सन}}",
+  "extension": "{count, plural, =1 {विस्तार} other {विस्तारहरू}}",
   "@extension": {},
   "extensionsDescription": "थप कार्यक्षमताका लागि एक्सटेन्सनहरू स्थापना र व्यवस्थापन गर्नुहोस्",
   "@extensionsDescription": {},
@@ -65,7 +65,7 @@
   "@fontWeightDescription": {},
   "hidePrivate": "निजी लुकाउनुहोस्",
   "@hidePrivate": {},
-  "hidePrivateDescription": "गृह पृष्ठबाट निजी श्रृंखला लुकाउनुहोस्।",
+  "hidePrivateDescription": "गोप्य श्रृंखलाहरूलाई गृहपृष्ठबाट लुकाउनुहोस्।",
   "@hidePrivateDescription": {},
   "incognitoModeDescription": "आफ्नो गतिविधि नसेभ गरी ब्राउज गर्नुहोस्",
   "@incognitoModeDescription": {},
@@ -147,7 +147,7 @@
   "@appName": {},
   "appTagline": "एनिमे र माङ्गा ट्र्याक गर्ने\nनयाँ उत्कृष्ट एप",
   "@appTagline": {},
-  "favorite": "Favorite {type}",
+  "favorite": "मनपर्ने {type}",
   "@favorite": {
     "placeholders": {
       "type": {
@@ -159,7 +159,7 @@
       }
     }
   },
-  "noDropped": "You haven't dropped any {type} yet.",
+  "noDropped": "तपाईंले कुनै {type} ड्रप गर्नुभएको छैन।",
   "@noDropped": {
     "placeholders": {
       "type": {
@@ -173,7 +173,7 @@
   },
   "manhwa": "Manhwa",
   "@manhwa": {},
-  "volume": "{count, plural, =1 {Volume} other {Volumes}}",
+  "volume": "{count, plural, =1 {खण्ड} other {खण्डहरू}}",
   "@volume": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -182,9 +182,9 @@
       }
     }
   },
-  "novel": "Novel",
+  "novel": "उपन्यास",
   "@novel": {},
-  "loginTo": "Login to {service}",
+  "loginTo": "{service} मा लगइन गर्नुहोस्",
   "@loginTo": {
     "placeholders": {
       "service": {
@@ -198,11 +198,11 @@
       }
     }
   },
-  "confirmLogout": "के तपाईं साँच्चै लगआउट गर्न चाहनुहुन्छ?",
+  "confirmLogout": "के तपाईं निश्चित हुनुहुन्छ कि तपाईं लगआउट गर्न चाहनुहुन्छ?",
   "@confirmLogout": {},
-  "gridView": "Grid View",
+  "gridView": "ग्रिड दृश्य",
   "@gridView": {},
-  "episode": "{count, plural, =1 {Episode} other {Episodes}}",
+  "episode": "{count, plural, =1 {एपिसोड} other {एपिसोडहरू}}",
   "@episode": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -211,7 +211,7 @@
       }
     }
   },
-  "movie": "{count, plural, =1 {Movie} other {Movies}}",
+  "movie": "{count, plural, =1 {चलचित्र} other {चलचित्रहरू}}",
   "@movie": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -226,7 +226,7 @@
   "@prequel": {},
   "relations": "Relations",
   "@relations": {},
-  "planned": "Planned {type}",
+  "planned": "योजना बनाइएको {type}",
   "@planned": {
     "placeholders": {
       "type": {
@@ -238,7 +238,7 @@
       }
     }
   },
-  "chapter": "{count, plural, =1 {Chapter} other {Chapters}}",
+  "chapter": "{count, plural, =1 {अध्याय} other {अध्या}}",
   "@chapter": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -247,7 +247,7 @@
       }
     }
   },
-  "available": "Available {type}",
+  "available": "उपलब्ध {type}",
   "@available": {
     "placeholders": {
       "type": {
@@ -259,25 +259,25 @@
       }
     }
   },
-  "genres": "Genres",
+  "genres": "शैलीहरू",
   "@genres": {},
   "author": "Author",
   "@author": {},
   "source": "Source",
   "@source": {},
-  "synonyms": "Synonyms",
+  "synonyms": "समानार्थी शब्दहरू",
   "@synonyms": {},
   "startDate": "Start Date",
   "@startDate": {},
-  "calendar": "Calendar",
+  "calendar": "क्यालेन्डर",
   "@calendar": {},
-  "format": "Format",
+  "format": "रूपरेखा",
   "@format": {},
-  "expandText": "show more",
+  "expandText": "अधिक देखाउनुहोस्",
   "@expandText": {},
   "manhua": "Manhua",
   "@manhua": {},
-  "season": "Season",
+  "season": "मौसम",
   "@season": {},
   "tags": "Tags",
   "@tags": {},
@@ -289,45 +289,45 @@
   "@meanScore": {},
   "studio": "Studio",
   "@studio": {},
-  "staff": "Staff",
+  "staff": "कर्मचारी",
   "@staff": {},
   "status": "Status",
   "@status": {},
-  "favorites": "Favorites",
+  "favorites": "मनपर्नेहरू",
   "@favorites": {},
-  "totalChapters": "Chapters",
+  "totalChapters": "कुल अध्याय",
   "@totalChapters": {},
-  "totalEpisodes": "Episodes",
+  "totalEpisodes": "कुल एपिसोड",
   "@totalEpisodes": {},
   "total": "Total",
   "@total": {},
-  "description": "Synopsis",
+  "description": "सारांश",
   "@description": {},
   "endDate": "End Date",
   "@endDate": {},
-  "averageDuration": "Average Duration",
+  "averageDuration": "औसत अवधि",
   "@averageDuration": {},
-  "comingSoon": "Coming SOON",
+  "comingSoon": "छिट्टै आउनेछ",
   "@comingSoon": {},
-  "collapseText": "show less",
+  "collapseText": "थोरै देखाउनुहोस्",
   "@collapseText": {},
-  "characters": "Characters",
+  "characters": "पात्रहरू",
   "@characters": {},
-  "synopsis": "Synopsis",
+  "synopsis": "सारांश",
   "@synopsis": {},
-  "nameRomaji": "Name (Romaji)",
+  "nameRomaji": "नाम (रोमाजी)",
   "@nameRomaji": {},
-  "popularity": "Popularity",
+  "popularity": "लोकप्रियता",
   "@popularity": {},
   "kitsu": "Kitsu",
   "@kitsu": {},
-  "ln": "Light Novel",
+  "ln": "लाइट उपन्यास",
   "@ln": {},
   "series": "Series",
   "@series": {},
-  "scanlators": "Scanlators",
+  "scanlators": "स्क्यानलेटरहरू",
   "@scanlators": {},
-  "manageLayout": "Manage {page} page Layout for {service}",
+  "manageLayout": "{service} का लागि {page} पृष्ठको लेआउट व्यवस्थापन गर्नुहोस्",
   "@manageLayout": {
     "placeholders": {
       "service": {
@@ -347,19 +347,19 @@
       }
     }
   },
-  "compactView": "Compact View",
+  "compactView": "संक्षिप्त दृश्य",
   "@compactView": {},
   "listView": "List View",
   "@listView": {},
-  "sort": "Sort",
+  "sort": "छान्नुहोस्",
   "@sort": {},
   "layout": "Layout",
   "@layout": {},
-  "chapterRead": "Chapter Read",
+  "chapterRead": "पढेको अध्याय",
   "@chapterRead": {},
-  "episodeWatched": "Episode Watched",
+  "episodeWatched": "हेरेको एपिसोड",
   "@episodeWatched": {},
-  "trending": "Trending {type}",
+  "trending": "चलनमा रहेको {type}",
   "@trending": {
     "placeholders": {
       "type": {
@@ -371,7 +371,7 @@
       }
     }
   },
-  "installed": "Installed {type}",
+  "installed": "इंस्टल गरिएको {type}",
   "@installed": {
     "placeholders": {
       "type": {
@@ -382,7 +382,7 @@
       }
     }
   },
-  "topRated": "Top Rated {type}",
+  "topRated": "शीर्ष मूल्याङ्कन {type}",
   "@topRated": {
     "placeholders": {
       "type": {
@@ -396,7 +396,7 @@
       }
     }
   },
-  "popular": "Popular {type}",
+  "popular": "लोकप्रिय {type}",
   "@popular": {
     "placeholders": {
       "type": {
@@ -409,7 +409,7 @@
       }
     }
   },
-  "mostFavourite": "Most Favourite {type}",
+  "mostFavourite": "सर्वाधिक मनपर्ने {type}",
   "@mostFavourite": {
     "placeholders": {
       "type": {
@@ -422,13 +422,13 @@
       }
     }
   },
-  "thisSeason": "This Season",
+  "thisSeason": "यस मौसम",
   "@thisSeason": {},
-  "nextSeason": "Next Season",
+  "nextSeason": "अर्को मौसम",
   "@nextSeason": {},
-  "previousSeason": "Previous Season",
+  "previousSeason": "अघिल्लो मौसम",
   "@previousSeason": {},
-  "activity": "{count, plural, =1 {Activity} other {Activities}}",
+  "activity": "{count, plural, =1 {गतिविधि} other {गतिविधिहरू}}",
   "@activity": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -437,7 +437,7 @@
       }
     }
   },
-  "browse": "Browse {type}",
+  "browse": "{type} ब्राउज गर्नुहोस्",
   "@browse": {
     "placeholders": {
       "type": {
@@ -449,7 +449,7 @@
       }
     }
   },
-  "onHold": "On Hold {type}",
+  "onHold": "रोकिनु भएको {type}",
   "@onHold": {
     "placeholders": {
       "type": {
@@ -461,23 +461,23 @@
       }
     }
   },
-  "continueReading": "Continue Reading",
+  "continueReading": "पढ्न जारी राख्नुहोस्",
   "@continueReading": {},
-  "continueWatching": "Continue Watching",
+  "continueWatching": "हेर्न जारी राख्नुहोस्",
   "@continueWatching": {},
-  "droppedManga": "Dropped Manga",
+  "droppedManga": "ड्रप गरिएको मंगा",
   "@droppedManga": {},
   "addToList": "Add To List",
   "@addToList": {},
-  "comments": "Comments",
+  "comments": "टिप्पणीहरू",
   "@comments": {},
   "dtu": "Down To Up",
   "@dtu": {},
   "info": "Info",
   "@info": {},
-  "language": "Language",
+  "language": "भाषा",
   "@language": {},
-  "list": "{type} List",
+  "list": "{type} सूची",
   "@list": {
     "placeholders": {
       "type": {
@@ -486,35 +486,35 @@
       }
     }
   },
-  "noFavourites": "Looks like you don't like anything,\nTry liking a show to keep it here.",
+  "noFavourites": "तपाईंलाई केहि मनपरेको छैन जस्तो लाग्छ, \nयहाँ राख्नको लागि कुनै शो मनपर्छ भने त्यसलाई मनपर्ने सूचीमा राख्नुहोस्।",
   "@noFavourites": {},
-  "noHiddenMediaFound": "No hidden media found",
+  "noHiddenMediaFound": "कुनै लुकेको मिडिया फेला परेको छैन",
   "@noHiddenMediaFound": {},
   "options": "Options",
   "@options": {},
-  "recentUpdates": "Recent Updates",
+  "recentUpdates": "हालका अपडेटहरू",
   "@recentUpdates": {},
-  "recommended": "Recommended",
+  "recommended": "सिफारिस गरिएको",
   "@recommended": {},
-  "search": "Search",
+  "search": "खोज्नुहोस्",
   "@search": {},
-  "topAiring": "Top Airing",
+  "topAiring": "शीर्ष प्रसारण",
   "@topAiring": {},
-  "watch": "Watch",
+  "watch": "हेर्नुहोस्",
   "@watch": {},
-  "utd": "Up To Down",
+  "utd": "अपर बाट तल",
   "@utd": {},
-  "hiddenMedia": "Hidden Media",
+  "hiddenMedia": "लुकेको मिडिया",
   "@hiddenMedia": {},
-  "read": "Read",
+  "read": "पढ्नुहोस्",
   "@read": {},
-  "noOnHold": "Looks like you haven't put anything on hold.",
+  "noOnHold": "तपाईंले कुनै कुरा रोकिनु भएको छैन जस्तो लाग्छ।",
   "@noOnHold": {},
-  "droppedAnime": "Dropped Anime",
+  "droppedAnime": "ड्रप गरिएको एनीमे",
   "@droppedAnime": {},
-  "allCaughtUpNew": "All caught up, when New?",
+  "allCaughtUpNew": "सबै अपडेट भइ सके, के नयाँ छ?",
   "@allCaughtUpNew": {},
-  "manageLayoutDescription": "You can manage the layout for {page} page by dragging and dropping the items",
+  "manageLayoutDescription": "तपाईं ड्र्याग र ड्रप गरेर {page} पृष्ठको लेआउट व्यवस्थापन गर्न सक्नुहुन्छ",
   "@manageLayoutDescription": {
     "placeholders": {
       "page": {
@@ -527,8 +527,10 @@
       }
     }
   },
-  "pickColor": "Pick a color",
+  "pickColor": "रंग छान्नुहोस्",
   "@pickColor": {},
-  "recommendationsEmptyMessage": "Watch/Read some Anime or Manga to get Recommendations",
-  "@recommendationsEmptyMessage": {}
+  "recommendationsEmptyMessage": "सुझावहरू प्राप्त गर्नका लागि केहि एनीमे वा मंगा हेर्नुहोस्/पढ्नुहोस्",
+  "@recommendationsEmptyMessage": {},
+  "simkl": "Simkl",
+  "@simkl": {}
 }

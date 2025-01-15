@@ -69,7 +69,7 @@
   "@enableDarkMode": {},
   "fontColor": "Warna Font",
   "@fontColor": {},
-  "extension": "{count, plural, =1 {Extension} other {Extensions}}",
+  "extension": "{count, plural, =1 {Ekstensi} other {Ekstensi}}",
   "@extension": {},
   "extensionsDescription": "Pasang dan kelola ekstensi untuk fungsionalitas tambahan",
   "@extensionsDescription": {},
@@ -89,7 +89,7 @@
   "@hidePrivate": {},
   "login": "Masuk",
   "@login": {},
-  "logout": "Login",
+  "logout": "Keluar {type}",
   "@logout": {},
   "mal": "MyAnimeList",
   "@mal": {},
@@ -181,7 +181,7 @@
   },
   "manhwa": "Login",
   "@manhwa": {},
-  "volume": "Sitemap =1 {Volume} lainnya {Volumes}}",
+  "volume": "{count, plural, =1 {Volume} other {Volumes}}",
   "@volume": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -192,7 +192,7 @@
   },
   "novel": "Login",
   "@novel": {},
-  "activity": "{count, plural, =1 {Activity} other {Activities}}",
+  "activity": "{count, plural, =1 {Aktivitas} other {Aktivities}}",
   "@activity": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -251,7 +251,7 @@
   "@nameRomaji": {},
   "gridView": "Login",
   "@gridView": {},
-  "browse": "Login",
+  "browse": "Jelajahi {type}",
   "@browse": {
     "placeholders": {
       "type": {
@@ -271,7 +271,7 @@
   "@totalChapters": {},
   "favorites": "Login",
   "@favorites": {},
-  "movie": "{count, plural, =1 {Movie} other {Movies}}",
+  "movie": "{count, plural, =1 {Film} other {Films}}",
   "@movie": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -309,7 +309,7 @@
   "@collapseText": {},
   "addToList": "Tambahkan ke Daftar",
   "@addToList": {},
-  "chapter": "{count, plural, =1 {Chapter} other {Chapters}}",
+  "chapter": "{count, plural, =1 {Bab} other {Bab}}",
   "@chapter": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -530,5 +530,7 @@
   "noOnHold": "Terlihat seperti yang belum Anda masukkan apa pun di pegang.",
   "@noOnHold": {},
   "droppedManga": "Manga Terjatuh",
-  "@droppedManga": {}
+  "@droppedManga": {},
+  "simkl": "Login",
+  "@simkl": {}
 }

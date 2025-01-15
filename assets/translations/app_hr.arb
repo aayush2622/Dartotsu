@@ -7,7 +7,7 @@
   "@account": {},
   "accountDescription": "Jednostavno upravljajte svojim računima",
   "@accountDescription": {},
-  "allCaughtUpNew": "Sve završeno, što je novo?",
+  "allCaughtUpNew": "Sve je uhvaćeno, što je novo?",
   "@allCaughtUpNew": {},
   "anilist": "AniList",
   "@anilist": {},
@@ -43,7 +43,7 @@
   "@colorPicker": {},
   "colorPickerDescription": "Odaberite boju",
   "@colorPickerDescription": {},
-  "comments": "KOMENTARI",
+  "comments": "Komentari",
   "@comments": {},
   "common": "Općenito",
   "@common": {},
@@ -69,7 +69,7 @@
   "@dtu": {},
   "enableDarkMode": "Omogući tamni način rada",
   "@enableDarkMode": {},
-  "extension": "{count, plural, =1 {Ekstenzija} other {Ekstenzijas}}",
+  "extension": "{count, plural, =1 {Ekstenzija} other {Ekstenzije}}",
   "@extension": {},
   "extensionsDescription": "Instalirajte i upravljajte ekstenzijama za dodatne funkcionalnosti",
   "@extensionsDescription": {},
@@ -89,7 +89,7 @@
   "@fontWeight": {},
   "fontWeightDescription": "Stil fonta za titlove",
   "@fontWeightDescription": {},
-  "hiddenMedia": "Skriveni sadržaji",
+  "hiddenMedia": "Skriveni sadržaj",
   "@hiddenMedia": {},
   "hidePrivate": "Sakrij privatno",
   "@hidePrivate": {},
@@ -105,23 +105,23 @@
   "@language": {},
   "layout": "Izgled",
   "@layout": {},
-  "list": "{type} Popis",
+  "list": "Popis {type}",
   "@list": {},
   "login": "Prijava",
   "@login": {},
-  "logout": "Odjava {type}",
+  "logout": "Odjavi se {type}",
   "@logout": {},
   "manga": "Manga",
   "@manga": {},
   "mangaDescription": "Organizirajte i prilagodite svoje iskustvo čitanja mange",
   "@mangaDescription": {},
-  "materialYou": "Material You",
+  "materialYou": "Materijal Ti",
   "@materialYou": {},
   "materialYouDescription": "Koristite boju svoje pozadine",
   "@materialYouDescription": {},
   "no": "Ne",
   "@no": {},
-  "noHiddenMediaFound": "Nisu pronađeni skriveni sadržaji",
+  "noHiddenMediaFound": "Nije pronađen skriveni sadržaj",
   "@noHiddenMediaFound": {},
   "notifications": "Obavijesti",
   "@notifications": {},
@@ -145,11 +145,11 @@
   "@outlineColorDescription": {},
   "playerSettingsTitle": "Postavke Playera",
   "@playerSettingsTitle": {},
-  "read": "ČITAJ",
+  "read": "Čitaj",
   "@read": {},
-  "recentUpdates": "Nedavna ažuriranja",
+  "recentUpdates": "Nedavne izmjene",
   "@recentUpdates": {},
-  "recommendationsEmptyMessage": "Gledajte/čitajte anime ili mangu da biste dobili preporuke",
+  "recommendationsEmptyMessage": "Gledajte/Čitajte Anime ili Mangu za preporuke",
   "@recommendationsEmptyMessage": {},
   "resizeMode": "Način prilagodbe",
   "@resizeMode": {},
@@ -157,9 +157,9 @@
   "@resizeModeDescription": {},
   "restoreSettings": "Vrati postavke",
   "@restoreSettings": {},
-  "scanlators": "Prevoditelji",
+  "scanlators": "Skanelatori",
   "@scanlators": {},
-  "search": "Pretraga",
+  "search": "Pretraži",
   "@search": {},
   "settings": "Postavke",
   "@settings": {},
@@ -185,23 +185,23 @@
   "@theme": {},
   "themeDescription": "Prilagodite izgled i dojam aplikacije",
   "@themeDescription": {},
-  "droppedManga": "Napuštena Manga",
+  "droppedManga": "Odbačena Manga",
   "@droppedManga": {},
-  "droppedAnime": "Napušten Anime",
+  "droppedAnime": "Odbačeni Anime",
   "@droppedAnime": {},
-  "topAiring": "Najbolje prikazivano",
+  "topAiring": "Najbolje trenutno emitirano",
   "@topAiring": {},
   "utd": "Odozgo prema dolje",
   "@utd": {},
-  "watch": "GLEDAJ",
+  "watch": "Gledaj",
   "@watch": {},
   "supportMaintainer": "Želite li podržati održavatelja Dartotsua?\nRazmislite o donaciji",
   "@supportMaintainer": {},
-  "noOnHold": "Čini se da ništa niste stavili na čekanje.",
+  "noOnHold": "Izgleda da ništa nije stavljeno na čekanje.",
   "@noOnHold": {},
-  "noFavourites": "Izgleda da ti se ništa ne sviđa,\nPokušajte označiti da vam se emisija sviđa da biste je zadržali ovdje.",
+  "noFavourites": "Izgleda da ti se ništa ne sviđa,\nPokušaj dodati emisiju u favorite da je držiš ovdje.",
   "@noFavourites": {},
-  "onHold": "On Hold {type}",
+  "onHold": "Na čekanju {type}",
   "@onHold": {
     "placeholders": {
       "type": {
@@ -213,11 +213,11 @@
       }
     }
   },
-  "compactView": "Compact View",
+  "compactView": "Kompaktni prikaz",
   "@compactView": {},
   "listView": "List View",
   "@listView": {},
-  "favorite": "Favorite {type}",
+  "favorite": "Omiljeno {type}",
   "@favorite": {
     "placeholders": {
       "type": {
@@ -229,7 +229,7 @@
       }
     }
   },
-  "noDropped": "Još nisi izbacio nijedan anime.",
+  "noDropped": "Niste još odustali od {type}.",
   "@noDropped": {
     "placeholders": {
       "type": {
@@ -241,7 +241,7 @@
       }
     }
   },
-  "volume": "{count, plural, =1 {Volume} other {Volumes}}",
+  "volume": "{count, plural, =1 {Svezak} other {Svesci}}",
   "@volume": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -250,7 +250,7 @@
       }
     }
   },
-  "activity": "{count, plural, =1 {Activity} other {Activities}}",
+  "activity": "{count, plural, =1 {Aktivnost} other {Aktivnosti}}",
   "@activity": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -259,9 +259,9 @@
       }
     }
   },
-  "previousSeason": "Previous Season",
+  "previousSeason": "Prethodne sezone",
   "@previousSeason": {},
-  "popular": "Popular {type}",
+  "popular": "Popularno {type}",
   "@popular": {
     "placeholders": {
       "type": {
@@ -274,7 +274,7 @@
       }
     }
   },
-  "installed": "Installed {type}",
+  "installed": "Instalirano {type}",
   "@installed": {
     "placeholders": {
       "type": {
@@ -285,7 +285,7 @@
       }
     }
   },
-  "mostFavourite": "Most Favourite {type}",
+  "mostFavourite": "Najdraže {type}",
   "@mostFavourite": {
     "placeholders": {
       "type": {
@@ -298,13 +298,13 @@
       }
     }
   },
-  "chapterRead": "Chapter Read",
+  "chapterRead": "Poglavlje pročitano",
   "@chapterRead": {},
-  "nameRomaji": "Name (Romaji)",
+  "nameRomaji": "Ime (Romaji)",
   "@nameRomaji": {},
-  "gridView": "Grid View",
+  "gridView": "Prikaz mreže",
   "@gridView": {},
-  "browse": "Browse {type}",
+  "browse": "Pregledaj {type}",
   "@browse": {
     "placeholders": {
       "type": {
@@ -316,11 +316,11 @@
       }
     }
   },
-  "episodeWatched": "Episode Watched",
+  "episodeWatched": "Epizoda pogledana",
   "@episodeWatched": {},
-  "popularity": "Popularity",
+  "popularity": "Popularnost",
   "@popularity": {},
-  "movie": "{count, plural, =1 {Movie} other {Movies}}",
+  "movie": "{count, plural, =1 {Film} other {Filmovi}}",
   "@movie": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -331,7 +331,7 @@
   },
   "prequel": "PREQUEL",
   "@prequel": {},
-  "planned": "Planned {type}",
+  "planned": "Planirano {type}",
   "@planned": {
     "placeholders": {
       "type": {
@@ -343,7 +343,7 @@
       }
     }
   },
-  "chapter": "{count, plural, =1 {Chapter} other {Chapters}}",
+  "chapter": "{count, plural, =1 {Poglavlje} other {Poglavlja}}",
   "@chapter": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -352,7 +352,7 @@
       }
     }
   },
-  "manageLayoutDescription": "You can manage the layout for {page} page by dragging and dropping the items",
+  "manageLayoutDescription": "Možete urediti izgled stranice {page} povlačenjem i ispuštanjem stavki",
   "@manageLayoutDescription": {
     "placeholders": {
       "page": {
@@ -365,7 +365,7 @@
       }
     }
   },
-  "available": "Available {type}",
+  "available": "Dostupno {type}",
   "@available": {
     "placeholders": {
       "type": {
@@ -377,19 +377,19 @@
       }
     }
   },
-  "genres": "Genres",
+  "genres": "Žanrovi",
   "@genres": {},
-  "calendar": "Calendar",
+  "calendar": "Kalendar",
   "@calendar": {},
   "manhua": "Manhua",
   "@manhua": {},
-  "season": "Season",
+  "season": "Sezona",
   "@season": {},
   "sequel": "SEQUEL",
   "@sequel": {},
   "studio": "Studio",
   "@studio": {},
-  "staff": "Staff",
+  "staff": "Osoblje",
   "@staff": {},
   "status": "Status",
   "@status": {},
@@ -397,33 +397,33 @@
   "@relations": {},
   "source": "Source",
   "@source": {},
-  "synonyms": "Synonyms",
+  "synonyms": "Sinonimi",
   "@synonyms": {},
   "startDate": "Start Date",
   "@startDate": {},
-  "averageDuration": "Average Duration",
+  "averageDuration": "Prosječno trajanje",
   "@averageDuration": {},
-  "comingSoon": "Coming SOON",
+  "comingSoon": "Uskoro dolazi",
   "@comingSoon": {},
-  "collapseText": "show less",
+  "collapseText": "prikaži manje",
   "@collapseText": {},
-  "characters": "Characters",
+  "characters": "Likovi",
   "@characters": {},
   "author": "Author",
   "@author": {},
   "name": "Name",
   "@name": {},
-  "description": "Synopsis",
+  "description": "Sinopsis",
   "@description": {},
   "endDate": "End Date",
   "@endDate": {},
   "meanScore": "Mean Score",
   "@meanScore": {},
-  "favorites": "Favorites",
+  "favorites": "Favoriti",
   "@favorites": {},
   "format": "Format",
   "@format": {},
-  "expandText": "show more",
+  "expandText": "prikaži više",
   "@expandText": {},
   "totalEpisodes": "Epizode",
   "@totalEpisodes": {},
@@ -431,13 +431,13 @@
   "@total": {},
   "tags": "Tags",
   "@tags": {},
-  "synopsis": "Synopsis",
+  "synopsis": "Sinopsis",
   "@synopsis": {},
   "totalChapters": "Poglavlja",
   "@totalChapters": {},
   "kitsu": "Kitsu",
   "@kitsu": {},
-  "loginTo": "Login to {service}",
+  "loginTo": "Prijavi se na {service}",
   "@loginTo": {
     "placeholders": {
       "service": {
@@ -451,17 +451,17 @@
       }
     }
   },
-  "ln": "Light Novel",
+  "ln": "Lagana novela",
   "@ln": {},
   "manhwa": "Manhwa",
   "@manhwa": {},
-  "novel": "Novel",
+  "novel": "Roman",
   "@novel": {},
   "home": "Home",
   "@home": {},
   "series": "Series",
   "@series": {},
-  "episode": "{count, plural, =1 {Episode} other {Episodes}}",
+  "episode": "{count, plural, =1 {Epizoda} other {Epizode}}",
   "@episode": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -470,7 +470,7 @@
       }
     }
   },
-  "manageLayout": "Manage {page} page Layout for {service}",
+  "manageLayout": "Uredi izgled stranice {page} za {service}",
   "@manageLayout": {
     "placeholders": {
       "service": {
@@ -492,7 +492,7 @@
   },
   "confirmLogout": "Jeste li sigurni da se želite odjaviti?",
   "@confirmLogout": {},
-  "trending": "Trending {type}",
+  "trending": "Trendujuće {type}",
   "@trending": {
     "placeholders": {
       "type": {
@@ -504,7 +504,7 @@
       }
     }
   },
-  "topRated": "Top Rated {type}",
+  "topRated": "Najbolje ocijenjeno {type}",
   "@topRated": {
     "placeholders": {
       "type": {
@@ -518,10 +518,12 @@
       }
     }
   },
-  "thisSeason": "This Season",
+  "thisSeason": "Ove sezone",
   "@thisSeason": {},
-  "nextSeason": "Next Season",
+  "nextSeason": "Sljedeće sezone",
   "@nextSeason": {},
-  "pickColor": "Pick a color",
-  "@pickColor": {}
+  "pickColor": "Odaberi boju",
+  "@pickColor": {},
+  "simkl": "Simkl",
+  "@simkl": {}
 }

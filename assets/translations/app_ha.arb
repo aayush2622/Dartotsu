@@ -59,7 +59,7 @@
   "@donationGoal": {},
   "enableDarkMode": "Kunna Yanayin Duhu",
   "@enableDarkMode": {},
-  "extension": "Ƙarin Aiki",
+  "extension": "{count, plural, =1 {Kari} other {Karin}}",
   "@extension": {},
   "extensionsDescription": "Shigar da sarrafa ƙarin aikin don ƙarin amfani",
   "@extensionsDescription": {},
@@ -81,7 +81,7 @@
   "@fontWeightDescription": {},
   "hidePrivate": "Rufe Sirri",
   "@hidePrivate": {},
-  "hidePrivateDescription": "Rufe media sirri daga shafin gida",
+  "hidePrivateDescription": "Boye jerin sirri daga shafin gida.",
   "@hidePrivateDescription": {},
   "incognitoMode": "Yanayin Sirri",
   "@incognitoMode": {},
@@ -89,7 +89,7 @@
   "@incognitoModeDescription": {},
   "login": "Shiga",
   "@login": {},
-  "logout": "Fita",
+  "logout": "Fita {type}",
   "@logout": {},
   "mal": "MyAnimeList",
   "@mal": {},
@@ -97,7 +97,7 @@
   "@manga": {},
   "mangaDescription": "Tsara da keɓance ƙwarewar manga naka",
   "@mangaDescription": {},
-  "materialYou": "Material You",
+  "materialYou": "Kayan ku",
   "@materialYou": {},
   "materialYouDescription": "Yi amfani da launin bango ɗinka",
   "@materialYouDescription": {},
@@ -151,9 +151,9 @@
   "@addToList": {},
   "series": "Jerinsu",
   "@series": {},
-  "season": "Sezon",
+  "season": "Zaman",
   "@season": {},
-  "volume": "Kashi",
+  "volume": "{count, plural, =1 {Juzu'i} other {Juzu'in}}",
   "@volume": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -162,7 +162,7 @@
       }
     }
   },
-  "movie": "Fim",
+  "movie": "{count, plural, =1 {Fim} other {Fimoci}}",
   "@movie": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -175,13 +175,13 @@
   "@scanlators": {},
   "listView": "Duba Jerin",
   "@listView": {},
-  "compactView": "Duba Mai Ƙananan Tsari",
+  "compactView": "Duba Compact",
   "@compactView": {},
   "layout": "Tsari",
   "@layout": {},
-  "episodeWatched": "Karon Kallon Kashi",
+  "episodeWatched": "Shahararriya da aka kalli",
   "@episodeWatched": {},
-  "installed": "An girka",
+  "installed": "An girka {type}",
   "@installed": {
     "placeholders": {
       "type": {
@@ -192,9 +192,9 @@
       }
     }
   },
-  "previousSeason": "Sezon na baya",
+  "previousSeason": "Zaman Kafin",
   "@previousSeason": {},
-  "activity": "Ayyuka",
+  "activity": "{count, plural, =1 {Ayyuka} other {Ayyuka}}",
   "@activity": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -203,7 +203,7 @@
       }
     }
   },
-  "planned": "An shirya",
+  "planned": "Shirya {type}",
   "@planned": {
     "placeholders": {
       "type": {
@@ -215,7 +215,7 @@
       }
     }
   },
-  "browse": "Duba",
+  "browse": "Bincika {type}",
   "@browse": {
     "placeholders": {
       "type": {
@@ -227,37 +227,37 @@
       }
     }
   },
-  "continueReading": "Ci gaba da karatu",
+  "continueReading": "Ci gaba da Karanta",
   "@continueReading": {},
-  "continueWatching": "Ci gaba da kallon",
+  "continueWatching": "Ci gaba da Kallo",
   "@continueWatching": {},
-  "averageDuration": "Matsakaicin Lokaci",
+  "averageDuration": "Tsawon lokaci na gaba ɗaya",
   "@averageDuration": {},
-  "characters": "Haruffa",
+  "characters": "Hanyoyin",
   "@characters": {},
-  "collapseText": "Ƙarƙashin Rubutu",
+  "collapseText": "nuni ƙasa",
   "@collapseText": {},
-  "description": "Bayanin",
+  "description": "Takaitaccen Bayani",
   "@description": {},
   "endDate": "Ranar ƙarshe",
   "@endDate": {},
-  "expandText": "Faɗaɗa Rubutu",
+  "expandText": "nuni fiye",
   "@expandText": {},
-  "favorites": "Masu So",
+  "favorites": "Abubuwan da aka fi so",
   "@favorites": {},
-  "format": "Tsari",
+  "format": "Tsarin",
   "@format": {},
   "meanScore": "Matsakaicin Ƙimar",
   "@meanScore": {},
   "name": "Suna",
   "@name": {},
-  "nameRomaji": "Suna a Romaji",
+  "nameRomaji": "Sunan (Romaji)",
   "@nameRomaji": {},
-  "popularity": "Shahararwa",
+  "popularity": "Shahararsa",
   "@popularity": {},
   "prequel": "Bari",
   "@prequel": {},
-  "recommended": "An ba da shawara",
+  "recommended": "An bada shawara",
   "@recommended": {},
   "synopsis": "Takaitaccen Bayani",
   "@synopsis": {},
@@ -265,7 +265,7 @@
   "@tags": {},
   "total": "Jimillar",
   "@total": {},
-  "comingSoon": "Zai zo nan gaba",
+  "comingSoon": "Zuwa SOON",
   "@comingSoon": {},
   "relations": "Dangantaka",
   "@relations": {},
@@ -281,17 +281,17 @@
   "@status": {},
   "studio": "Dakin Koyi",
   "@studio": {},
-  "synonyms": "Ma'anar Suna",
+  "synonyms": "Ma'anoni masu kama",
   "@synonyms": {},
-  "recommendationsEmptyMessage": "Babu shawarwari da aka samu",
+  "recommendationsEmptyMessage": "Kalli/karanta wasu Anime ko Manga don samun shawarwari",
   "@recommendationsEmptyMessage": {},
   "author": "Mawallafi",
   "@author": {},
-  "totalEpisodes": "Jimillar Kashi",
+  "totalEpisodes": "Shahararru",
   "@totalEpisodes": {},
-  "totalChapters": "Jimillar Babin",
+  "totalChapters": "Babobi",
   "@totalChapters": {},
-  "loginTo": "Shiga zuwa",
+  "loginTo": "Shiga {service}",
   "@loginTo": {
     "placeholders": {
       "service": {
@@ -311,11 +311,11 @@
   "@manhua": {},
   "home": "Gida",
   "@home": {},
-  "novel": "Littafi",
+  "novel": "Labarin kwaikwayo",
   "@novel": {},
-  "ln": "Littafin Litattafai na Kwana",
+  "ln": "Labarin haske",
   "@ln": {},
-  "episode": "Shahararrun Kashi",
+  "episode": "{count, plural, =1 {Shahararriya} other {Shaharrarru}}",
   "@episode": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -324,7 +324,7 @@
       }
     }
   },
-  "chapter": "Babi",
+  "chapter": "{count, plural, =1 {Babi} other {Babobi}}",
   "@chapter": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -333,15 +333,15 @@
       }
     }
   },
-  "genres": "Nau'in",
+  "genres": "Nau'o'i",
   "@genres": {},
-  "calendar": "Kalandar",
+  "calendar": "Kalanda",
   "@calendar": {},
   "search": "Bincike",
   "@search": {},
-  "utd": "Sabon Zazzagewa",
+  "utd": "Daga sama zuwa ƙasa",
   "@utd": {},
-  "list": "Jerin",
+  "list": "{type} Jerin",
   "@list": {
     "placeholders": {
       "type": {
@@ -350,7 +350,7 @@
       }
     }
   },
-  "manageLayout": "Sarrafawa",
+  "manageLayout": "Gudanar da Tsarin {page} shafi don {service}",
   "@manageLayout": {
     "placeholders": {
       "service": {
@@ -370,13 +370,13 @@
       }
     }
   },
-  "confirmLogout": "Tabbatar da fita",
+  "confirmLogout": "Shin ka tabbata kana son fita?",
   "@confirmLogout": {},
-  "gridView": "Duba grid",
+  "gridView": "Duba Grid",
   "@gridView": {},
-  "chapterRead": "Karon Karatun Babi",
+  "chapterRead": "Babi da aka karanta",
   "@chapterRead": {},
-  "available": "Mai Samuwa",
+  "available": "Akwai {type}",
   "@available": {
     "placeholders": {
       "type": {
@@ -388,7 +388,7 @@
       }
     }
   },
-  "trending": "Mafi shahararru",
+  "trending": "Abubuwan Da Suke Hawa {type}",
   "@trending": {
     "placeholders": {
       "type": {
@@ -400,7 +400,7 @@
       }
     }
   },
-  "mostFavourite": "Mafi so",
+  "mostFavourite": "Mafi Mafi So {type}",
   "@mostFavourite": {
     "placeholders": {
       "type": {
@@ -413,7 +413,7 @@
       }
     }
   },
-  "popular": "Shahararre",
+  "popular": "Shahararru {type}",
   "@popular": {
     "placeholders": {
       "type": {
@@ -426,7 +426,7 @@
       }
     }
   },
-  "topRated": "Mafi darajar",
+  "topRated": "Mafi Kyawu {type}",
   "@topRated": {
     "placeholders": {
       "type": {
@@ -440,11 +440,11 @@
       }
     }
   },
-  "thisSeason": "Wannan Sezon",
+  "thisSeason": "Wannan Zaman",
   "@thisSeason": {},
-  "nextSeason": "Sezon na gaba",
+  "nextSeason": "Zaman Gaba",
   "@nextSeason": {},
-  "favorite": "Mafi so",
+  "favorite": "Mafi so {type}",
   "@favorite": {
     "placeholders": {
       "type": {
@@ -456,7 +456,7 @@
       }
     }
   },
-  "onHold": "A tsaye",
+  "onHold": "A Tsaye {type}",
   "@onHold": {
     "placeholders": {
       "type": {
@@ -468,7 +468,7 @@
       }
     }
   },
-  "noDropped": "Babu wanda aka janye",
+  "noDropped": "Ba ka dakatar da kowanne {type} ba tukuna.",
   "@noDropped": {
     "placeholders": {
       "type": {
@@ -482,29 +482,29 @@
   },
   "options": "Zaɓuɓɓuka",
   "@options": {},
-  "noHiddenMediaFound": "Babu Media Mai ɓoye da aka samu",
+  "noHiddenMediaFound": "Babu media da aka boye da aka samu",
   "@noHiddenMediaFound": {},
-  "comments": "Sharhi",
+  "comments": "Ra'ayoyi",
   "@comments": {},
   "dtu": "Sabon Bincike",
   "@dtu": {},
-  "hiddenMedia": "Daidaitaccen Media",
+  "hiddenMedia": "Boye Media",
   "@hiddenMedia": {},
   "info": "Bayanan",
   "@info": {},
   "language": "Harshe",
   "@language": {},
-  "noFavourites": "Babu wanda aka fi so",
+  "noFavourites": "Alama babu abin da ka fi so,\nGwada son shahararriya don kiyaye shi a nan.",
   "@noFavourites": {},
   "read": "Karanta",
   "@read": {},
   "sort": "Tsara",
   "@sort": {},
-  "topAiring": "Shahararrun Tsare-Tsare",
+  "topAiring": "Mafi Girma na Kallon",
   "@topAiring": {},
-  "watch": "Kallon",
+  "watch": "Kalli",
   "@watch": {},
-  "manageLayoutDescription": "Duba da sarrafa yadda zaku shirya shafukan",
+  "manageLayoutDescription": "Za ka iya gudanar da tsarin {page} shafi ta hanyar ja da sauke abubuwa",
   "@manageLayoutDescription": {
     "placeholders": {
       "page": {
@@ -517,18 +517,20 @@
       }
     }
   },
-  "pickColor": "Zaɓi Launi",
+  "pickColor": "Zabi launi",
   "@pickColor": {},
-  "allCaughtUpNew": "Duka sabbin abubuwa an sabunta su",
+  "allCaughtUpNew": "An kammala, menene Sabon?",
   "@allCaughtUpNew": {},
-  "droppedAnime": "An janye Anime",
+  "droppedAnime": "An dakatar da Anime",
   "@droppedAnime": {},
-  "droppedManga": "An janye Manga",
+  "droppedManga": "An dakatar da Manga",
   "@droppedManga": {},
-  "noOnHold": "Babu a tsaye",
+  "noOnHold": "Alama babu abin da ka sanya a tsaye.",
   "@noOnHold": {},
   "recentUpdates": "Sabbin Sabuntawa",
   "@recentUpdates": {},
   "kitsu": "Kitsu",
-  "@kitsu": {}
+  "@kitsu": {},
+  "simkl": "Simkl",
+  "@simkl": {}
 }

@@ -35,7 +35,7 @@
   "@cursedSpeed": {},
   "appName": "Dartotsu",
   "@appName": {},
-  "appTagline": "アニメとマンガの追跡に最適な新しいアプリ",
+  "appTagline": "新しいベストアプリ\nアニメ・マンガの追跡",
   "@appTagline": {},
   "backgroundColor": "背景色",
   "@backgroundColor": {},
@@ -67,7 +67,7 @@
   "@donationGoal": {},
   "enableDarkMode": "ダークモードを有効にする",
   "@enableDarkMode": {},
-  "extension": "{count, plural, =1 {Extension} other {Extensions}}",
+  "extension": "{count, plural, =1 {拡大} other {拡張機能}}",
   "@extension": {},
   "extensionsDescription": "機能を追加するために拡張機能をインストールして管理",
   "@extensionsDescription": {},
@@ -183,7 +183,7 @@
   },
   "manhwa": "ログイン",
   "@manhwa": {},
-  "volume": "{count, plural, =1 {Volume} other {Volumes}}",
+  "volume": "{count, plural, =1 {音量} other {ボリューム}}",
   "@volume": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -210,7 +210,7 @@
       }
     }
   },
-  "activity": "{count, plural, =1 {Activity} other {Activities}}",
+  "activity": "{count, plural, =1 {活動} other {活動}}",
   "@activity": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -286,7 +286,7 @@
   },
   "comingSoon": "SOON(ソノン)",
   "@comingSoon": {},
-  "episode": "{count, plural, =1 {Episode} other {Episodes}}",
+  "episode": "{count, plural, =1 {エピソード} other {エピソード}}",
   "@episode": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -301,7 +301,7 @@
   "@popularity": {},
   "favorites": "お気に入り",
   "@favorites": {},
-  "movie": "{count, plural, =1 {Movie} other {Movies}}",
+  "movie": "{count, plural, =1 {映画} other {映画}}",
   "@movie": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -328,7 +328,7 @@
   },
   "language": "用語集",
   "@language": {},
-  "chapter": "{count, plural, =1 {Chapter} other {Chapters}}",
+  "chapter": "{count, plural, =1 {章} other {章}}",
   "@chapter": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -530,5 +530,7 @@
   "droppedAnime": "アニメをドロップ",
   "@droppedAnime": {},
   "allCaughtUpNew": "巻き込まれたもの、新しいものは何ですか?",
-  "@allCaughtUpNew": {}
+  "@allCaughtUpNew": {},
+  "simkl": "シムカル",
+  "@simkl": {}
 }

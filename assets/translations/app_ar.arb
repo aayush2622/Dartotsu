@@ -193,7 +193,7 @@
   "@language": {},
   "list": "قائمة {type}",
   "@list": {},
-  "layout": "الشكل",
+  "layout": "تَخطِيط",
   "@layout": {},
   "info": "المعلومات",
   "@info": {},
@@ -523,5 +523,7 @@
   "tags": "Tags",
   "@tags": {},
   "prequel": "السابق",
-  "@prequel": {}
+  "@prequel": {},
+  "simkl": "Simkl",
+  "@simkl": {}
 }

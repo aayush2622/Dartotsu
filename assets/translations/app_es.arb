@@ -121,7 +121,7 @@
   "@bottomPaddingDescription": {},
   "cursedSpeedDescription": "Para personas demasiado ocupadas con la vida",
   "@cursedSpeedDescription": {},
-  "extension": "{count, plural, =1 {Extension} other {Extensions}}",
+  "extension": "{count, plural, =1 {Extensión} other {Extensiones}}",
   "@extension": {},
   "fontColor": "Color de Fuente",
   "@fontColor": {},
@@ -141,7 +141,7 @@
   "@fontWeightDescription": {},
   "hidePrivate": "Ocultar Privado",
   "@hidePrivate": {},
-  "hidePrivateDescription": "Ocultar series privadas de la página principal.",
+  "hidePrivateDescription": "Ocultar series privadas en la página de inicio.",
   "@hidePrivateDescription": {},
   "incognitoModeDescription": "Navegar sin guardar tu actividad",
   "@incognitoModeDescription": {},
@@ -157,7 +157,7 @@
   "@total": {},
   "tags": "Etiquetas",
   "@tags": {},
-  "topRated": "Top Rated {type}",
+  "topRated": "Mejor valorado {type}",
   "@topRated": {
     "placeholders": {
       "type": {
@@ -186,7 +186,7 @@
   },
   "name": "Nombre",
   "@name": {},
-  "mostFavourite": "Más Favorito {type}",
+  "mostFavourite": "Más favorito {type}",
   "@mostFavourite": {
     "placeholders": {
       "type": {
@@ -209,9 +209,9 @@
   "@synopsis": {},
   "nameRomaji": "Nombre (Romaji)",
   "@nameRomaji": {},
-  "gridView": "Grid View",
+  "gridView": "Vista en cuadrícula",
   "@gridView": {},
-  "episodeWatched": "Episodio vigilado",
+  "episodeWatched": "Episodio visto",
   "@episodeWatched": {},
   "popularity": "Popularidad",
   "@popularity": {},
@@ -219,7 +219,7 @@
   "@totalChapters": {},
   "favorites": "Favoritos",
   "@favorites": {},
-  "movie": "{count, plural, =1 {Movie} other {Movies}}",
+  "movie": "{count, plural, =1 {Película} other {Películas}}",
   "@movie": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -248,29 +248,29 @@
   "@synonyms": {},
   "startDate": "Fecha de inicio",
   "@startDate": {},
-  "recommendationsEmptyMessage": "Ver/Leer algunos Anime o Manga para obtener recomendaciones",
+  "recommendationsEmptyMessage": "Mira/Lee algo de Anime o Manga para obtener recomendaciones",
   "@recommendationsEmptyMessage": {},
   "description": "Sinopsis",
   "@description": {},
-  "averageDuration": "Duración media",
+  "averageDuration": "Duración promedio",
   "@averageDuration": {},
-  "comingSoon": "Llegando a Soon",
+  "comingSoon": "Próximamente",
   "@comingSoon": {},
-  "collapseText": "mostrar menos",
+  "collapseText": "ver menos",
   "@collapseText": {},
-  "characters": "Carácteres",
+  "characters": "Personajes",
   "@characters": {},
   "author": "Autor",
   "@author": {},
   "format": "Formato",
   "@format": {},
-  "expandText": "mostrar más",
+  "expandText": "ver más",
   "@expandText": {},
   "kitsu": "Kitsu",
   "@kitsu": {},
   "manhwa": "Manhwa",
   "@manhwa": {},
-  "loginTo": "Login a {service}",
+  "loginTo": "Iniciar sesión en {service}",
   "@loginTo": {
     "placeholders": {
       "service": {
@@ -286,7 +286,7 @@
   },
   "manhua": "Manhua",
   "@manhua": {},
-  "ln": "Light Novel",
+  "ln": "Novela Ligera",
   "@ln": {},
   "novel": "Novela",
   "@novel": {},
@@ -296,7 +296,7 @@
   "@home": {},
   "addToList": "Añadir a la lista",
   "@addToList": {},
-  "episode": "{count, plural, =1 {Episode} other {Episodes}}",
+  "episode": "{count, plural, =1 {Episodio} other {Episodios}}",
   "@episode": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -305,7 +305,7 @@
       }
     }
   },
-  "chapter": "{count, plural, =1 {Chapter} other {Chapters}}",
+  "chapter": "{count, plural, =1 {Capítulo} other {Capítulos}}",
   "@chapter": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -314,9 +314,9 @@
       }
     }
   },
-  "season": "Estación",
+  "season": "Temporada",
   "@season": {},
-  "volume": "{count, plural, =1 {Volume} other {Volumes}}",
+  "volume": "{count, plural, =1 {Volumen} other {Volúmenes}}",
   "@volume": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -325,11 +325,11 @@
       }
     }
   },
-  "genres": "Genres",
+  "genres": "Géneros",
   "@genres": {},
   "confirmLogout": "¿Estás seguro de que quieres cerrar sesión?",
   "@confirmLogout": {},
-  "search": "Búsqueda",
+  "search": "Buscar",
   "@search": {},
   "calendar": "Calendario",
   "@calendar": {},
@@ -344,7 +344,7 @@
       }
     }
   },
-  "chapterRead": "Capítulo Leer",
+  "chapterRead": "Capítulo leído",
   "@chapterRead": {},
   "available": "Disponible {type}",
   "@available": {
@@ -358,7 +358,7 @@
       }
     }
   },
-  "trending": "Tendencia {type}",
+  "trending": "{type} en tendencia",
   "@trending": {
     "placeholders": {
       "type": {
@@ -372,9 +372,9 @@
   },
   "thisSeason": "Esta temporada",
   "@thisSeason": {},
-  "nextSeason": "Next Season",
+  "nextSeason": "Próxima temporada",
   "@nextSeason": {},
-  "activity": "{count, plural, =1 {Activity} other {Activities}}",
+  "activity": "{count, plural, =1 {Actividad} other {Actividades}}",
   "@activity": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -397,7 +397,7 @@
       }
     }
   },
-  "browse": "Navega {type}",
+  "browse": "Explorar {type}",
   "@browse": {
     "placeholders": {
       "type": {
@@ -409,7 +409,7 @@
       }
     }
   },
-  "planned": "Planificación {type}",
+  "planned": "Planeado {type}",
   "@planned": {
     "placeholders": {
       "type": {
@@ -421,7 +421,7 @@
       }
     }
   },
-  "onHold": "Espera {type}",
+  "onHold": "En espera {type}",
   "@onHold": {
     "placeholders": {
       "type": {
@@ -433,7 +433,7 @@
       }
     }
   },
-  "noDropped": "Aún no has dejado ninguna {type}.",
+  "noDropped": "No has dejado ningún {type} aún.",
   "@noDropped": {
     "placeholders": {
       "type": {
@@ -447,13 +447,13 @@
   },
   "hiddenMedia": "Medios ocultos",
   "@hiddenMedia": {},
-  "continueWatching": "Continuar observando",
+  "continueWatching": "Seguir viendo",
   "@continueWatching": {},
-  "sort": "#",
+  "sort": "Ordenar",
   "@sort": {},
-  "scanlators": "Escáneres",
+  "scanlators": "Scanlators",
   "@scanlators": {},
-  "droppedAnime": "Anime caído",
+  "droppedAnime": "Anime abandonado",
   "@droppedAnime": {},
   "layout": "A ti",
   "@layout": {},
@@ -465,7 +465,7 @@
   "@dtu": {},
   "info": "Info",
   "@info": {},
-  "list": "Lista",
+  "list": "Lista de {type}",
   "@list": {
     "placeholders": {
       "type": {
@@ -478,15 +478,15 @@
   "@options": {},
   "read": "Leer",
   "@read": {},
-  "topAiring": "Top Airing",
+  "topAiring": "Mejor emisión",
   "@topAiring": {},
-  "watch": "Watch",
+  "watch": "Ver",
   "@watch": {},
-  "utd": "Hasta abajo",
+  "utd": "De Arriba a Abajo",
   "@utd": {},
-  "noFavourites": "Parece que no te gusta nada,\nTrate de gustar un espectáculo para mantenerlo aquí.",
+  "noFavourites": "Parece que no te gusta nada,\nPrueba a marcar un show como favorito para mantenerlo aquí.",
   "@noFavourites": {},
-  "manageLayout": "Administrar {page} página Diseño para {service}",
+  "manageLayout": "Gestionar el diseño de la página {page} para {service}",
   "@manageLayout": {
     "placeholders": {
       "service": {
@@ -508,13 +508,13 @@
   },
   "noOnHold": "Parece que no has puesto nada en espera.",
   "@noOnHold": {},
-  "noHiddenMediaFound": "No hay medios ocultos encontrados",
+  "noHiddenMediaFound": "No se encontraron medios ocultos",
   "@noHiddenMediaFound": {},
-  "droppedManga": "Hombre caído",
+  "droppedManga": "Manga abandonado",
   "@droppedManga": {},
-  "allCaughtUpNew": "Todos atrapados, ¿qué es nuevo?",
+  "allCaughtUpNew": "Todo al día, ¿qué hay de nuevo?",
   "@allCaughtUpNew": {},
-  "manageLayoutDescription": "Puede gestionar el diseño de la página {page} arrastrando y bajando los elementos",
+  "manageLayoutDescription": "Puedes gestionar el diseño de la página {page} arrastrando y soltando los elementos",
   "@manageLayoutDescription": {
     "placeholders": {
       "page": {
@@ -527,8 +527,10 @@
       }
     }
   },
-  "pickColor": "Elija un color",
+  "pickColor": "Seleccionar un color",
   "@pickColor": {},
   "recentUpdates": "Actualizaciones recientes",
-  "@recentUpdates": {}
+  "@recentUpdates": {},
+  "simkl": "Simkl",
+  "@simkl": {}
 }

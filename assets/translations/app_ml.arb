@@ -9,7 +9,7 @@
   "@fontWeightDescription": {},
   "hidePrivate": "സ്വകാര്യമാക്കുക",
   "@hidePrivate": {},
-  "hidePrivateDescription": "ഹോം പേജിൽ നിന്ന് സ്വകാര്യ സീരീസ് മറയ്ക്കുക.",
+  "hidePrivateDescription": "സ്വകാര്യ സീരീസ് ഹോം പേജിൽ കാണിച്ചുകൂടായിരിക്കും.",
   "@hidePrivateDescription": {},
   "incognitoMode": "ഇൻകോജ്നിറ്റോ മോഡ്",
   "@incognitoMode": {},
@@ -63,7 +63,7 @@
   "@donationGoal": {},
   "enableDarkMode": "ഡാർക്ക് മോഡ് സജീവമാക്കുക",
   "@enableDarkMode": {},
-  "extension": "{count, plural, =1 {വിശേഷം} other {വിശേഷം}}",
+  "extension": "{count, plural, =1 {വിതരണം} other {വിതരണങ്ങൾ}}",
   "@extension": {},
   "extensionsDescription": "കൂടുതൽ പ്രവർത്തനക്ഷമതയ്‌ക്കായി വിശേഷങ്ങൾ ഇൻസ്റ്റാൾ ചെയ്ത് നിയന്ത്രിക്കുക",
   "@extensionsDescription": {},
@@ -85,13 +85,13 @@
   "@incognitoModeDescription": {},
   "login": "ലോഗിൻ",
   "@login": {},
-  "logout": "ലോഗ് ഔട്ട് {type}",
+  "logout": "{type} ലോഗ് ഔട്ട് ചെയ്യുക",
   "@logout": {},
   "manga": "മംഗ",
   "@manga": {},
   "mangaDescription": "നിങ്ങളുടെ മംഗ അനുഭവം ക്രമീകരിക്കുക, ഇഷ്ടാനുസൃതമാക്കുക",
   "@mangaDescription": {},
-  "materialYou": "മാറ്റീരിയൽ യൂ",
+  "materialYou": "മെറ്റീരിയൽ യൂ",
   "@materialYou": {},
   "materialYouDescription": "നിങ്ങളുടെ വാള്പപ്പറിന്റെ നിറം പോലെ തന്നെ ഒരു നിറം ഉപയോഗിക്കുക",
   "@materialYouDescription": {},
@@ -147,11 +147,11 @@
   "@themeDescription": {},
   "yes": "ഓව්",
   "@yes": {},
-  "topAiring": "Top Airing",
+  "topAiring": "ഉത്തരവാദം",
   "@topAiring": {},
-  "nextSeason": "Next Season",
+  "nextSeason": "അടുത്ത മാസം",
   "@nextSeason": {},
-  "activity": "{count, plural, =1 {Activity} other {Activities}}",
+  "activity": "{count, plural, =1 {പ്രവൃത്തി} other {പ്രവൃത്തികൾ}}",
   "@activity": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -160,7 +160,7 @@
       }
     }
   },
-  "topRated": "Top Rated {type}",
+  "topRated": "ഉത്തമമായ {type}",
   "@topRated": {
     "placeholders": {
       "type": {
@@ -174,9 +174,9 @@
       }
     }
   },
-  "previousSeason": "Previous Season",
+  "previousSeason": "മുൻകാലം",
   "@previousSeason": {},
-  "popular": "Popular {type}",
+  "popular": "പ്രചാരത്തിലുള്ള {type}",
   "@popular": {
     "placeholders": {
       "type": {
@@ -189,7 +189,7 @@
       }
     }
   },
-  "mostFavourite": "Most Favourite {type}",
+  "mostFavourite": "എഴുതിയ {type}",
   "@mostFavourite": {
     "placeholders": {
       "type": {
@@ -204,9 +204,9 @@
   },
   "endDate": "End Date",
   "@endDate": {},
-  "gridView": "Grid View",
+  "gridView": "ഗ്രിഡ് വ്യൂ",
   "@gridView": {},
-  "episode": "{count, plural, =1 {Episode} other {Episodes}}",
+  "episode": "{count, plural, =1 {എപ്പിസോഡ്} other {എപ്പിസോഡുകൾ}}",
   "@episode": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -215,11 +215,11 @@
       }
     }
   },
-  "episodeWatched": "Episode Watched",
+  "episodeWatched": "എപ്പിസോഡ് കണ്ടു",
   "@episodeWatched": {},
-  "totalChapters": "Chapters",
+  "totalChapters": "അധ്യായങ്ങൾ",
   "@totalChapters": {},
-  "movie": "{count, plural, =1 {Movie} other {Movies}}",
+  "movie": "{count, plural, =1 {ചലചിത്രം} other {ചലചിത്രങ്ങൾ}}",
   "@movie": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -232,7 +232,7 @@
   "@home": {},
   "prequel": "PREQUEL",
   "@prequel": {},
-  "planned": "Planned {type}",
+  "planned": "{type} പദ്ധതികൊണ്ടുള്ള",
   "@planned": {
     "placeholders": {
       "type": {
@@ -244,13 +244,13 @@
       }
     }
   },
-  "search": "Search",
+  "search": "തിരച്ചിൽ",
   "@search": {},
-  "collapseText": "show less",
+  "collapseText": "കുറച്ചു കാണിക്കുക",
   "@collapseText": {},
-  "sort": "Sort",
+  "sort": "ക്രമീകരിക്കുക",
   "@sort": {},
-  "chapter": "{count, plural, =1 {Chapter} other {Chapters}}",
+  "chapter": "{count, plural, =1 {അധ്യായം} other {അധ്യായങ്ങൾ}}",
   "@chapter": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -259,27 +259,27 @@
       }
     }
   },
-  "characters": "Characters",
+  "characters": "പാത്രങ്ങൾ",
   "@characters": {},
-  "genres": "Genres",
+  "genres": "ശാഖകൾ",
   "@genres": {},
   "author": "Author",
   "@author": {},
-  "calendar": "Calendar",
+  "calendar": "കാലണ്ടർ",
   "@calendar": {},
-  "format": "Format",
+  "format": "രൂപരേഖ",
   "@format": {},
-  "expandText": "show more",
+  "expandText": "കൂടുതൽ കാണിക്കുക",
   "@expandText": {},
   "manhua": "Manhua",
   "@manhua": {},
-  "season": "Season",
+  "season": "മാസകാലം",
   "@season": {},
   "sequel": "SEQUEL",
   "@sequel": {},
   "relations": "Relations",
   "@relations": {},
-  "totalEpisodes": "Episodes",
+  "totalEpisodes": "എപ്പിസോഡുകൾ",
   "@totalEpisodes": {},
   "total": "Total",
   "@total": {},
@@ -287,39 +287,39 @@
   "@tags": {},
   "studio": "Studio",
   "@studio": {},
-  "staff": "Staff",
+  "staff": "സ്റ്റാഫ്",
   "@staff": {},
   "status": "Status",
   "@status": {},
   "source": "Source",
   "@source": {},
-  "synonyms": "Synonyms",
+  "synonyms": "സമാനവാക്കുകൾ",
   "@synonyms": {},
   "startDate": "Start Date",
   "@startDate": {},
-  "averageDuration": "Average Duration",
+  "averageDuration": "ശരാശരി ദൈർഘ്യം",
   "@averageDuration": {},
-  "comingSoon": "Coming SOON",
+  "comingSoon": "ശീঘ്രം വരുന്നു",
   "@comingSoon": {},
-  "description": "Synopsis",
+  "description": "സംവരണം",
   "@description": {},
-  "favorites": "Favorites",
+  "favorites": "പ്രിയപ്പെട്ടവ",
   "@favorites": {},
   "name": "Name",
   "@name": {},
   "meanScore": "Mean Score",
   "@meanScore": {},
-  "synopsis": "Synopsis",
+  "synopsis": "സംഗ്രഹം",
   "@synopsis": {},
-  "nameRomaji": "Name (Romaji)",
+  "nameRomaji": "പേര് (റോമാജി)",
   "@nameRomaji": {},
-  "popularity": "Popularity",
+  "popularity": "പ്രചാരം",
   "@popularity": {},
   "manhwa": "Manhwa",
   "@manhwa": {},
   "kitsu": "Kitsu",
   "@kitsu": {},
-  "loginTo": "Login to {service}",
+  "loginTo": "{service} ലേക്ക് ലോഗിൻ ചെയ്യുക",
   "@loginTo": {
     "placeholders": {
       "service": {
@@ -333,13 +333,13 @@
       }
     }
   },
-  "ln": "Light Novel",
+  "ln": "ലൈറ്റ് നവൽ",
   "@ln": {},
-  "novel": "Novel",
+  "novel": "നവലുകൾ",
   "@novel": {},
   "series": "Series",
   "@series": {},
-  "volume": "{count, plural, =1 {Volume} other {Volumes}}",
+  "volume": "{count, plural, =1 {വോള്യം} other {വോള്യങ്ങൾ}}",
   "@volume": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -348,13 +348,13 @@
       }
     }
   },
-  "compactView": "Compact View",
+  "compactView": "കമ്പാക്റ്റ് വ്യൂ",
   "@compactView": {},
   "listView": "List View",
   "@listView": {},
-  "confirmLogout": "നിങ്ങൾ ലോഗ് ഔട്ട് ചെയ്യാൻ വിശ്വസിക്കുന്നുവോ?",
+  "confirmLogout": "നിങ്ങൾ ലോഗ് ഔട്ട് ചെയ്യാൻ ഉറപ്പായിരിക്കുന്നു എന്ന് ഉറപ്പാക്കാമോ?",
   "@confirmLogout": {},
-  "installed": "Installed {type}",
+  "installed": "സ്ഥാപിതമായ {type}",
   "@installed": {
     "placeholders": {
       "type": {
@@ -365,9 +365,9 @@
       }
     }
   },
-  "chapterRead": "Chapter Read",
+  "chapterRead": "അധ്യായം വായിച്ചു",
   "@chapterRead": {},
-  "available": "Available {type}",
+  "available": "ലഭ്യമായ {type}",
   "@available": {
     "placeholders": {
       "type": {
@@ -379,7 +379,7 @@
       }
     }
   },
-  "trending": "Trending {type}",
+  "trending": "ട്രെൻഡിങ് {type}",
   "@trending": {
     "placeholders": {
       "type": {
@@ -391,9 +391,9 @@
       }
     }
   },
-  "thisSeason": "This Season",
+  "thisSeason": "ഈ മാസം",
   "@thisSeason": {},
-  "onHold": "On Hold {type}",
+  "onHold": "നിര്‍ത്തിയ {type}",
   "@onHold": {
     "placeholders": {
       "type": {
@@ -405,7 +405,7 @@
       }
     }
   },
-  "favorite": "Favorite {type}",
+  "favorite": "{type} പ്രിയപ്പെട്ട",
   "@favorite": {
     "placeholders": {
       "type": {
@@ -417,7 +417,7 @@
       }
     }
   },
-  "browse": "Browse {type}",
+  "browse": "{type} പരിതിയാക്കുക",
   "@browse": {
     "placeholders": {
       "type": {
@@ -429,7 +429,7 @@
       }
     }
   },
-  "noDropped": "You haven't dropped any {type} yet.",
+  "noDropped": "നിങ്ങൾ ഇതുവരെ {type} ഒന്നും ഉപേക്ഷിച്ചിട്ടില്ല.",
   "@noDropped": {
     "placeholders": {
       "type": {
@@ -441,7 +441,7 @@
       }
     }
   },
-  "list": "{type} List",
+  "list": "{type} പട്ടിക",
   "@list": {
     "placeholders": {
       "type": {
@@ -452,41 +452,41 @@
   },
   "layout": "Layout",
   "@layout": {},
-  "allCaughtUpNew": "All caught up, when New?",
+  "allCaughtUpNew": "എല്ലാം പൂർണ്ണമായിരിക്കുക, പുതിയ എന്ത്?",
   "@allCaughtUpNew": {},
   "addToList": "Add To List",
   "@addToList": {},
-  "comments": "Comments",
+  "comments": "പ്രതികരണങ്ങൾ",
   "@comments": {},
-  "continueReading": "Continue Reading",
+  "continueReading": "വായന തുടരുക",
   "@continueReading": {},
-  "continueWatching": "Continue Watching",
+  "continueWatching": "കാണൽ തുടരുക",
   "@continueWatching": {},
   "dtu": "Down To Up",
   "@dtu": {},
-  "hiddenMedia": "Hidden Media",
+  "hiddenMedia": "ലൊക്കിച്ച മീഡിയ",
   "@hiddenMedia": {},
   "info": "Info",
   "@info": {},
-  "language": "Language",
+  "language": "ഭാഷ",
   "@language": {},
-  "noFavourites": "Looks like you don't like anything,\nTry liking a show to keep it here.",
+  "noFavourites": "നിങ്ങൾക്ക് ഒരു ഓർമ്മ എനിക്ക് ഇഷ്ടപ്പെടുന്നില്ല,\nഒരുപാട് പ്രദർശിപ്പിക്കപ്പെടുന്ന ഒരു ഷോ ഇഷ്ടപ്പെടാൻ ശ്രമിക്കുക.",
   "@noFavourites": {},
-  "noHiddenMediaFound": "No hidden media found",
+  "noHiddenMediaFound": "ലൊക്കിച്ച മീഡിയ കണ്ടെത്തിയില്ല",
   "@noHiddenMediaFound": {},
   "options": "Options",
   "@options": {},
-  "read": "Read",
+  "read": "ഒരുക്കുക",
   "@read": {},
-  "recommended": "Recommended",
+  "recommended": "ശുപാർശ ചെയ്തു",
   "@recommended": {},
-  "watch": "Watch",
+  "watch": "കാണുക",
   "@watch": {},
-  "utd": "Up To Down",
+  "utd": "പിന്നിലേക്കും താഴേക്കും",
   "@utd": {},
-  "scanlators": "Scanlators",
+  "scanlators": "സ്കാൻലേറ്റർമാർ",
   "@scanlators": {},
-  "manageLayout": "Manage {page} page Layout for {service}",
+  "manageLayout": "{service} ലെ {page} പേജിന്റെ രൂപകല്‌പനാ ക്രമീകരണം ചെയ്യുക",
   "@manageLayout": {
     "placeholders": {
       "service": {
@@ -506,7 +506,7 @@
       }
     }
   },
-  "manageLayoutDescription": "You can manage the layout for {page} page by dragging and dropping the items",
+  "manageLayoutDescription": "{page} പേജിന്റെ രൂപകല്‌പന ക്രമീകരണം കൊണ്ടുവരികയാ? ഇനങ്ങൾ എടുക്കുകയും വിട്ടിടുകയും ചെയ്തുകൊണ്ടു ക്രമീകരിക്കാം",
   "@manageLayoutDescription": {
     "placeholders": {
       "page": {
@@ -519,16 +519,18 @@
       }
     }
   },
-  "pickColor": "Pick a color",
+  "pickColor": "നിറം തിരഞ്ഞെടുക്കുക",
   "@pickColor": {},
-  "droppedManga": "Dropped Manga",
+  "droppedManga": "നിഷേധിച്ച മംഗ",
   "@droppedManga": {},
-  "droppedAnime": "Dropped Anime",
+  "droppedAnime": "നിഷേധിച്ച ആനിമേ",
   "@droppedAnime": {},
-  "noOnHold": "Looks like you haven't put anything on hold.",
+  "noOnHold": "നിങ്ങൾ ഒന്നും നിർത്തിയിട്ടില്ലെന്ന് തോന്നുന്നു.",
   "@noOnHold": {},
-  "recentUpdates": "Recent Updates",
+  "recentUpdates": "സമീപകാല പുതുക്കലുകൾ",
   "@recentUpdates": {},
-  "recommendationsEmptyMessage": "Watch/Read some Anime or Manga to get Recommendations",
-  "@recommendationsEmptyMessage": {}
+  "recommendationsEmptyMessage": "അനി/മംഗ വാചകം/കാണുക എടുക്കുക എങ്ങനെ",
+  "@recommendationsEmptyMessage": {},
+  "simkl": "Simkl",
+  "@simkl": {}
 }

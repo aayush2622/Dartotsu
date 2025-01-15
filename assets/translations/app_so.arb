@@ -109,7 +109,7 @@
   "@donationGoal": {},
   "enableDarkMode": "Fur Habka Madow",
   "@enableDarkMode": {},
-  "extension": "Kordhin",
+  "extension": "{count, plural, =1 {Kordhin} other {Kordhinta}}",
   "@extension": {},
   "extensionsDescription": "Ku rakib oo maaree kordhino si loogu daro shaqooyin dheeri ah",
   "@extensionsDescription": {},
@@ -131,7 +131,7 @@
   "@fontWeightDescription": {},
   "hidePrivate": "Qari Xogta Gaarka ah",
   "@hidePrivate": {},
-  "hidePrivateDescription": "Qari xogta gaarka ah ee bogga guriga",
+  "hidePrivateDescription": "Qari taxanaha gaarka ah bogga Guriga.",
   "@hidePrivateDescription": {},
   "incognitoMode": "Habga Sirta ah",
   "@incognitoMode": {},
@@ -139,21 +139,21 @@
   "@incognitoModeDescription": {},
   "login": "Gal",
   "@login": {},
-  "logout": "Ka Bax",
+  "logout": "Ka bax {type}",
   "@logout": {},
   "mal": "MyAnimeList",
   "@mal": {},
   "mangaDescription": "Hagaaji oo shakhsiye manga-daada",
   "@mangaDescription": {},
-  "materialYou": "Waxyaabaha Adiga",
+  "materialYou": "Agabka Adiga",
   "@materialYou": {},
-  "continueReading": "Continue Reading",
+  "continueReading": "Sii wad Akhrinta",
   "@continueReading": {},
-  "compactView": "Compact View",
+  "compactView": "Muuqaal Kooban",
   "@compactView": {},
   "listView": "List View",
   "@listView": {},
-  "trending": "Trending {type}",
+  "trending": "{type} Ku jira Xaaladda",
   "@trending": {
     "placeholders": {
       "type": {
@@ -165,7 +165,7 @@
       }
     }
   },
-  "favorite": "Favorite {type}",
+  "favorite": "Jecel {type}",
   "@favorite": {
     "placeholders": {
       "type": {
@@ -177,9 +177,9 @@
       }
     }
   },
-  "nextSeason": "Next Season",
+  "nextSeason": "Xilliga Xiga",
   "@nextSeason": {},
-  "noDropped": "You haven't dropped any {type} yet.",
+  "noDropped": "Ma joojinin {type} ilaa hadda.",
   "@noDropped": {
     "placeholders": {
       "type": {
@@ -191,7 +191,7 @@
       }
     }
   },
-  "activity": "{count, plural, =1 {Activity} other {Activities}}",
+  "activity": "{count, plural, =1 {Hawl} other {Hawlo}}",
   "@activity": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -200,7 +200,7 @@
       }
     }
   },
-  "topRated": "Top Rated {type}",
+  "topRated": "Qiimeynta Sare ee {type}",
   "@topRated": {
     "placeholders": {
       "type": {
@@ -214,9 +214,9 @@
       }
     }
   },
-  "previousSeason": "Previous Season",
+  "previousSeason": "Xilligii Hore",
   "@previousSeason": {},
-  "popular": "Popular {type}",
+  "popular": "{type} Caansan",
   "@popular": {
     "placeholders": {
       "type": {
@@ -229,9 +229,9 @@
       }
     }
   },
-  "description": "Synopsis",
+  "description": "Sharaxaad",
   "@description": {},
-  "installed": "Installed {type}",
+  "installed": "{type} La rakibay",
   "@installed": {
     "placeholders": {
       "type": {
@@ -242,7 +242,7 @@
       }
     }
   },
-  "mostFavourite": "Most Favourite {type}",
+  "mostFavourite": "{type} Ugu Jecel",
   "@mostFavourite": {
     "placeholders": {
       "type": {
@@ -261,13 +261,13 @@
   "@meanScore": {},
   "series": "Series",
   "@series": {},
-  "chapterRead": "Chapter Read",
+  "chapterRead": "Qaybta La Akhriday",
   "@chapterRead": {},
-  "gridView": "Grid View",
+  "gridView": "Muuqaal Shabakad",
   "@gridView": {},
-  "averageDuration": "Average Duration",
+  "averageDuration": "Muddada Celceliska",
   "@averageDuration": {},
-  "browse": "Browse {type}",
+  "browse": "Baadh {type}",
   "@browse": {
     "placeholders": {
       "type": {
@@ -279,9 +279,9 @@
       }
     }
   },
-  "comingSoon": "Coming SOON",
+  "comingSoon": "Waxaa Soo Socda",
   "@comingSoon": {},
-  "episode": "{count, plural, =1 {Episode} other {Episodes}}",
+  "episode": "{count, plural, =1 {Qaybta} other {Qaybaha}}",
   "@episode": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -290,15 +290,15 @@
       }
     }
   },
-  "episodeWatched": "Episode Watched",
+  "episodeWatched": "Qaybta La Daawaday",
   "@episodeWatched": {},
-  "popularity": "Popularity",
+  "popularity": "Caan noqoshada",
   "@popularity": {},
-  "totalChapters": "Chapters",
+  "totalChapters": "Cutubyo",
   "@totalChapters": {},
-  "favorites": "Favorites",
+  "favorites": "Waxyaabaha Jecel",
   "@favorites": {},
-  "movie": "{count, plural, =1 {Movie} other {Movies}}",
+  "movie": "{count, plural, =1 {Filim} other {Filimaan}}",
   "@movie": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -311,7 +311,7 @@
   "@home": {},
   "prequel": "PREQUEL",
   "@prequel": {},
-  "planned": "Planned {type}",
+  "planned": "{type} La qorsheeyay",
   "@planned": {
     "placeholders": {
       "type": {
@@ -323,11 +323,11 @@
       }
     }
   },
-  "collapseText": "show less",
+  "collapseText": "muujin wax yar",
   "@collapseText": {},
   "addToList": "Add To List",
   "@addToList": {},
-  "chapter": "{count, plural, =1 {Chapter} other {Chapters}}",
+  "chapter": "{count, plural, =1 {Qayb} other {Qaybo}}",
   "@chapter": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -336,7 +336,7 @@
       }
     }
   },
-  "available": "Available {type}",
+  "available": "{type} La heli karo",
   "@available": {
     "placeholders": {
       "type": {
@@ -348,11 +348,11 @@
       }
     }
   },
-  "characters": "Characters",
+  "characters": "Dabeecadaha",
   "@characters": {},
-  "pickColor": "Pick a color",
+  "pickColor": "Dooro midabka",
   "@pickColor": {},
-  "genres": "Genres",
+  "genres": "Noocyada",
   "@genres": {},
   "author": "Author",
   "@author": {},
@@ -360,19 +360,19 @@
   "@source": {},
   "startDate": "Start Date",
   "@startDate": {},
-  "calendar": "Calendar",
+  "calendar": "Jadwal",
   "@calendar": {},
-  "format": "Format",
+  "format": "Qaabka",
   "@format": {},
-  "expandText": "show more",
+  "expandText": "muujin wax badan",
   "@expandText": {},
   "manhua": "Manhua",
   "@manhua": {},
-  "season": "Season",
+  "season": "Xilli",
   "@season": {},
   "sequel": "SEQUEL",
   "@sequel": {},
-  "staff": "Staff",
+  "staff": "Shaqaalaha",
   "@staff": {},
   "status": "Status",
   "@status": {},
@@ -380,7 +380,7 @@
   "@relations": {},
   "studio": "Studio",
   "@studio": {},
-  "synonyms": "Synonyms",
+  "synonyms": "Erayo Isku Mid Ah",
   "@synonyms": {},
   "name": "Name",
   "@name": {},
@@ -388,15 +388,15 @@
   "@total": {},
   "tags": "Tags",
   "@tags": {},
-  "synopsis": "Synopsis",
+  "synopsis": "Kooban",
   "@synopsis": {},
-  "nameRomaji": "Name (Romaji)",
+  "nameRomaji": "Magaca (Romaji)",
   "@nameRomaji": {},
-  "totalEpisodes": "Episodes",
+  "totalEpisodes": "Qaybaha Guud",
   "@totalEpisodes": {},
   "kitsu": "Kitsu",
   "@kitsu": {},
-  "loginTo": "Login to {service}",
+  "loginTo": "Gal {service}",
   "@loginTo": {
     "placeholders": {
       "service": {
@@ -410,13 +410,13 @@
       }
     }
   },
-  "ln": "Light Novel",
+  "ln": "Sheeko Iftiimin",
   "@ln": {},
   "manhwa": "Manhwa",
   "@manhwa": {},
-  "novel": "Novel",
+  "novel": "Sheeko",
   "@novel": {},
-  "volume": "{count, plural, =1 {Volume} other {Volumes}}",
+  "volume": "{count, plural, =1 {Heer} other {Heerro}}",
   "@volume": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -425,11 +425,11 @@
       }
     }
   },
-  "confirmLogout": "Ma hubtaa inaad ka baxdo?",
+  "confirmLogout": "Ma hubtaa inaad rabto inaad ka baxdo?",
   "@confirmLogout": {},
-  "thisSeason": "This Season",
+  "thisSeason": "Xilligan",
   "@thisSeason": {},
-  "onHold": "On Hold {type}",
+  "onHold": "{type} La hakiyey",
   "@onHold": {
     "placeholders": {
       "type": {
@@ -441,15 +441,15 @@
       }
     }
   },
-  "continueWatching": "Continue Watching",
+  "continueWatching": "Sii wad Daawashada",
   "@continueWatching": {},
-  "recentUpdates": "Recent Updates",
+  "recentUpdates": "Cusboonaysiinta Ugu Dhaw",
   "@recentUpdates": {},
-  "recommendationsEmptyMessage": "Watch/Read some Anime or Manga to get Recommendations",
+  "recommendationsEmptyMessage": "Daawo/Akhri qaar ka mid ah Anime ama Manga si aad u hesho Talooyin",
   "@recommendationsEmptyMessage": {},
-  "recommended": "Recommended",
+  "recommended": "La Talo Bixiyay",
   "@recommended": {},
-  "list": "{type} List",
+  "list": "{type} Liiska",
   "@list": {
     "placeholders": {
       "type": {
@@ -458,39 +458,39 @@
       }
     }
   },
-  "allCaughtUpNew": "All caught up, when New?",
+  "allCaughtUpNew": "Dhammaan waa la soo gabagabeeyay, maxaa Cusub?",
   "@allCaughtUpNew": {},
-  "comments": "Comments",
+  "comments": "Faallooyin",
   "@comments": {},
   "dtu": "Down To Up",
   "@dtu": {},
-  "hiddenMedia": "Hidden Media",
+  "hiddenMedia": "Warbaahinta Qarsoon",
   "@hiddenMedia": {},
-  "language": "Language",
+  "language": "Luuqadda",
   "@language": {},
   "info": "Info",
   "@info": {},
   "layout": "Layout",
   "@layout": {},
-  "noFavourites": "Looks like you don't like anything,\nTry liking a show to keep it here.",
+  "noFavourites": "Waxay u egtahay inaadan jecleyn waxba,\nIsku day inaad jecel yahay barnaamij si aad ugu hayso halkan.",
   "@noFavourites": {},
   "options": "Options",
   "@options": {},
-  "scanlators": "Scanlators",
+  "scanlators": "Tarjumayaal",
   "@scanlators": {},
-  "read": "Read",
+  "read": "Akhri",
   "@read": {},
-  "search": "Search",
+  "search": "Raadi",
   "@search": {},
-  "sort": "Sort",
+  "sort": "Kala saar",
   "@sort": {},
-  "topAiring": "Top Airing",
+  "topAiring": "Soo saarista Sare",
   "@topAiring": {},
-  "utd": "Up To Down",
+  "utd": "Ka Sareeya Hoos",
   "@utd": {},
-  "watch": "Watch",
+  "watch": "Daawo",
   "@watch": {},
-  "manageLayout": "Manage {page} page Layout for {service}",
+  "manageLayout": "Maamul Qaabka {page} ee {service}",
   "@manageLayout": {
     "placeholders": {
       "service": {
@@ -510,11 +510,11 @@
       }
     }
   },
-  "droppedManga": "Dropped Manga",
+  "droppedManga": "Manga la Joojiyey",
   "@droppedManga": {},
-  "droppedAnime": "Dropped Anime",
+  "droppedAnime": "Anime la Joojiyey",
   "@droppedAnime": {},
-  "manageLayoutDescription": "You can manage the layout for {page} page by dragging and dropping the items",
+  "manageLayoutDescription": "Waxaad maamuli kartaa qaabka bogga {page} adigoo jiidaya oo dhigaya walxaha",
   "@manageLayoutDescription": {
     "placeholders": {
       "page": {
@@ -527,8 +527,10 @@
       }
     }
   },
-  "noOnHold": "Looks like you haven't put anything on hold.",
+  "noOnHold": "Waxay u egtahay inaadan waxba hakinin.",
   "@noOnHold": {},
-  "noHiddenMediaFound": "No hidden media found",
-  "@noHiddenMediaFound": {}
+  "noHiddenMediaFound": "Warbaahinta Qarsoon lama helin",
+  "@noHiddenMediaFound": {},
+  "simkl": "Simkl",
+  "@simkl": {}
 }

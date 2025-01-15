@@ -51,7 +51,7 @@
   "@bottomPadding": {},
   "colorPicker": "Chagua Rangi",
   "@colorPicker": {},
-  "colorPickerDescription": "Chagua rangi",
+  "colorPickerDescription": "Tekeleza rangi",
   "@colorPickerDescription": {},
   "common": "Kawaida",
   "@common": {},
@@ -73,7 +73,7 @@
   "@donationGoal": {},
   "enableDarkMode": "Washa Hali ya Giza",
   "@enableDarkMode": {},
-  "extension": "Kiendelezi",
+  "extension": "{count, plural, =1 {Kiendelezi} other {Viendelezi}}",
   "@extension": {},
   "extensionsDescription": "Sakinisha na usimamie viendelezi kwa kuongeza uwezo",
   "@extensionsDescription": {},
@@ -95,7 +95,7 @@
   "@fontWeightDescription": {},
   "hidePrivate": "Ficha Binafsi",
   "@hidePrivate": {},
-  "hidePrivateDescription": "Ficha vyombo vya habari vya kibinafsi kutoka kwa ukurasa kuu",
+  "hidePrivateDescription": "Ficha mfululizo wa kibinafsi kutoka kwenye ukurasa wa Nyumbani.",
   "@hidePrivateDescription": {},
   "incognitoMode": "Hali ya Incognito",
   "@incognitoMode": {},
@@ -103,7 +103,7 @@
   "@incognitoModeDescription": {},
   "login": "Ingia",
   "@login": {},
-  "logout": "Toka",
+  "logout": "Toka {type}",
   "@logout": {},
   "mal": "MyAnimeList",
   "@mal": {},
@@ -111,9 +111,9 @@
   "@manga": {},
   "mangaDescription": "Pangilia na weka uzoefu wako wa manga kwa usahihi",
   "@mangaDescription": {},
-  "materialYou": "Material You",
+  "materialYou": "Nyenzo Wewe",
   "@materialYou": {},
-  "materialYouDescription": "Tumia rangi ile ile kama wallpaper yako",
+  "materialYouDescription": "Tumia rangi ile kama wallpaper yako",
   "@materialYouDescription": {},
   "no": "Hapana",
   "@no": {},
@@ -147,9 +147,9 @@
   "@themeDescription": {},
   "yes": "Ndio",
   "@yes": {},
-  "totalEpisodes": "Episodes",
+  "totalEpisodes": "Sehemu",
   "@totalEpisodes": {},
-  "onHold": "On Hold {type}",
+  "onHold": "Iko kwenye Hifadhi {type}",
   "@onHold": {
     "placeholders": {
       "type": {
@@ -161,9 +161,9 @@
       }
     }
   },
-  "nextSeason": "Next Season",
+  "nextSeason": "Msimu Ujao",
   "@nextSeason": {},
-  "noDropped": "You haven't dropped any {type} yet.",
+  "noDropped": "Bado hujaacha {type} yeyote.",
   "@noDropped": {
     "placeholders": {
       "type": {
@@ -179,17 +179,17 @@
   "@total": {},
   "tags": "Tags",
   "@tags": {},
-  "previousSeason": "Previous Season",
+  "previousSeason": "Msimu Uliopita",
   "@previousSeason": {},
-  "gridView": "Grid View",
+  "gridView": "Muonekano wa Gridi",
   "@gridView": {},
-  "episodeWatched": "Episode Watched",
+  "episodeWatched": "Sehemu Iliyotazamwa",
   "@episodeWatched": {},
-  "totalChapters": "Chapters",
+  "totalChapters": "Sura",
   "@totalChapters": {},
-  "favorites": "Favorites",
+  "favorites": "Pendwa",
   "@favorites": {},
-  "sort": "Sort",
+  "sort": "Panga",
   "@sort": {},
   "addToList": "Add To List",
   "@addToList": {},
@@ -197,17 +197,17 @@
   "@layout": {},
   "startDate": "Start Date",
   "@startDate": {},
-  "format": "Format",
+  "format": "Umbizo",
   "@format": {},
   "manhua": "Manhua",
   "@manhua": {},
   "sequel": "SEQUEL",
   "@sequel": {},
-  "description": "Synopsis",
+  "description": "Muhtasari",
   "@description": {},
-  "staff": "Staff",
+  "staff": "Wafanyakazi",
   "@staff": {},
-  "comingSoon": "Coming SOON",
+  "comingSoon": "Inakuja KARIBUNI",
   "@comingSoon": {},
   "relations": "Relations",
   "@relations": {},
@@ -217,35 +217,35 @@
   "@studio": {},
   "status": "Status",
   "@status": {},
-  "synonyms": "Synonyms",
+  "synonyms": "Maneno yenye maana sawa",
   "@synonyms": {},
-  "averageDuration": "Average Duration",
+  "averageDuration": "Muda wa wastani",
   "@averageDuration": {},
-  "characters": "Characters",
+  "characters": "Vitu",
   "@characters": {},
   "author": "Author",
   "@author": {},
   "endDate": "End Date",
   "@endDate": {},
-  "collapseText": "show less",
+  "collapseText": "onyesho kidogo",
   "@collapseText": {},
-  "expandText": "show more",
+  "expandText": "onyesho zaidi",
   "@expandText": {},
   "name": "Name",
   "@name": {},
   "meanScore": "Mean Score",
   "@meanScore": {},
-  "nameRomaji": "Name (Romaji)",
+  "nameRomaji": "Jina (Romaji)",
   "@nameRomaji": {},
-  "synopsis": "Synopsis",
+  "synopsis": "Muhtasari",
   "@synopsis": {},
-  "popularity": "Popularity",
+  "popularity": "Umaarufu",
   "@popularity": {},
   "prequel": "PREQUEL",
   "@prequel": {},
   "kitsu": "Kitsu",
   "@kitsu": {},
-  "loginTo": "Login to {service}",
+  "loginTo": "Ingia kwenye {service}",
   "@loginTo": {
     "placeholders": {
       "service": {
@@ -261,17 +261,17 @@
   },
   "manhwa": "Manhwa",
   "@manhwa": {},
-  "ln": "Light Novel",
+  "ln": "Riwaya Nyepesi",
   "@ln": {},
-  "novel": "Novel",
+  "novel": "Riwaya",
   "@novel": {},
   "series": "Series",
   "@series": {},
   "home": "Home",
   "@home": {},
-  "season": "Season",
+  "season": "Msimu",
   "@season": {},
-  "volume": "{count, plural, =1 {Volume} other {Volumes}}",
+  "volume": "{count, plural, =1 {Juzo} other {Majuzi}}",
   "@volume": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -280,7 +280,7 @@
       }
     }
   },
-  "episode": "{count, plural, =1 {Episode} other {Episodes}}",
+  "episode": "{count, plural, =1 {Sehemu} other {Sehemu}}",
   "@episode": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -289,7 +289,7 @@
       }
     }
   },
-  "chapter": "{count, plural, =1 {Chapter} other {Chapters}}",
+  "chapter": "{count, plural, =1 {Sura} other {Sura}}",
   "@chapter": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -298,7 +298,7 @@
       }
     }
   },
-  "movie": "{count, plural, =1 {Movie} other {Movies}}",
+  "movie": "{count, plural, =1 {Filamu} other {Filamu}}",
   "@movie": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -307,11 +307,11 @@
       }
     }
   },
-  "genres": "Genres",
+  "genres": "Mifumo",
   "@genres": {},
   "dtu": "Down To Up",
   "@dtu": {},
-  "list": "{type} List",
+  "list": "{type} Orodha",
   "@list": {
     "placeholders": {
       "type": {
@@ -320,15 +320,15 @@
       }
     }
   },
-  "calendar": "Calendar",
+  "calendar": "Kalenda",
   "@calendar": {},
-  "compactView": "Compact View",
+  "compactView": "Muonekano wa Compact",
   "@compactView": {},
   "listView": "List View",
   "@listView": {},
-  "confirmLogout": "Je, unahakikisha unataka kutoka?",
+  "confirmLogout": "Je, una uhakika unataka kutoka?",
   "@confirmLogout": {},
-  "trending": "Trending {type}",
+  "trending": "Inayoendelea {type}",
   "@trending": {
     "placeholders": {
       "type": {
@@ -340,7 +340,7 @@
       }
     }
   },
-  "installed": "Installed {type}",
+  "installed": "Imewekwa {type}",
   "@installed": {
     "placeholders": {
       "type": {
@@ -351,9 +351,9 @@
       }
     }
   },
-  "chapterRead": "Chapter Read",
+  "chapterRead": "Sura Iliyosomwa",
   "@chapterRead": {},
-  "available": "Available {type}",
+  "available": "Inapatikana {type}",
   "@available": {
     "placeholders": {
       "type": {
@@ -365,9 +365,9 @@
       }
     }
   },
-  "thisSeason": "This Season",
+  "thisSeason": "Msimu Huu",
   "@thisSeason": {},
-  "topRated": "Top Rated {type}",
+  "topRated": "Imepigiwa Kura Bora {type}",
   "@topRated": {
     "placeholders": {
       "type": {
@@ -381,7 +381,7 @@
       }
     }
   },
-  "popular": "Popular {type}",
+  "popular": "Maarufu {type}",
   "@popular": {
     "placeholders": {
       "type": {
@@ -394,7 +394,7 @@
       }
     }
   },
-  "mostFavourite": "Most Favourite {type}",
+  "mostFavourite": "Inayopendwa Zaidi {type}",
   "@mostFavourite": {
     "placeholders": {
       "type": {
@@ -407,9 +407,9 @@
       }
     }
   },
-  "language": "Language",
+  "language": "Lugha",
   "@language": {},
-  "favorite": "Favorite {type}",
+  "favorite": "Pendwa {type}",
   "@favorite": {
     "placeholders": {
       "type": {
@@ -421,7 +421,7 @@
       }
     }
   },
-  "activity": "{count, plural, =1 {Activity} other {Activities}}",
+  "activity": "{count, plural, =1 {Shughuli} other {Shughuli}}",
   "@activity": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -430,7 +430,7 @@
       }
     }
   },
-  "browse": "Browse {type}",
+  "browse": "Pitisha {type}",
   "@browse": {
     "placeholders": {
       "type": {
@@ -442,7 +442,7 @@
       }
     }
   },
-  "planned": "Planned {type}",
+  "planned": "Imepangwa {type}",
   "@planned": {
     "placeholders": {
       "type": {
@@ -454,41 +454,41 @@
       }
     }
   },
-  "continueWatching": "Continue Watching",
+  "continueWatching": "Endelea Kutazama",
   "@continueWatching": {},
-  "noFavourites": "Looks like you don't like anything,\nTry liking a show to keep it here.",
+  "noFavourites": "Inaonekana haupendi kitu chochote,\nJaribu kupenda onyesho ili kiwe hapa.",
   "@noFavourites": {},
-  "noHiddenMediaFound": "No hidden media found",
+  "noHiddenMediaFound": "Hakuna vyombo vya habari vilivyofichwa vilivyopatikana",
   "@noHiddenMediaFound": {},
-  "comments": "Comments",
+  "comments": "Maoni",
   "@comments": {},
-  "continueReading": "Continue Reading",
+  "continueReading": "Endelea Kusoma",
   "@continueReading": {},
   "info": "Info",
   "@info": {},
-  "noOnHold": "Looks like you haven't put anything on hold.",
+  "noOnHold": "Inaonekana haujaweka kitu chochote kwenye hifadhi.",
   "@noOnHold": {},
   "options": "Options",
   "@options": {},
-  "recentUpdates": "Recent Updates",
+  "recentUpdates": "Mabadiliko ya Karibuni",
   "@recentUpdates": {},
-  "recommendationsEmptyMessage": "Watch/Read some Anime or Manga to get Recommendations",
+  "recommendationsEmptyMessage": "Tazama/Soma Anime au Manga ili kupata Mapendekezo",
   "@recommendationsEmptyMessage": {},
-  "recommended": "Recommended",
+  "recommended": "Ilipendekezwa",
   "@recommended": {},
-  "read": "Read",
+  "read": "Soma",
   "@read": {},
-  "search": "Search",
+  "search": "Tafuta",
   "@search": {},
-  "scanlators": "Scanlators",
+  "scanlators": "Wachambuzi",
   "@scanlators": {},
-  "topAiring": "Top Airing",
+  "topAiring": "Inayorushwa Bora",
   "@topAiring": {},
-  "watch": "Watch",
+  "watch": "Tazama",
   "@watch": {},
-  "utd": "Up To Down",
+  "utd": "Kutoka Juu Hadi Chini",
   "@utd": {},
-  "manageLayout": "Manage {page} page Layout for {service}",
+  "manageLayout": "Simamia Mpangilio wa {page} kwa {service}",
   "@manageLayout": {
     "placeholders": {
       "service": {
@@ -508,9 +508,9 @@
       }
     }
   },
-  "allCaughtUpNew": "All caught up, when New?",
+  "allCaughtUpNew": "Umejibu kila kitu, nini kipya?",
   "@allCaughtUpNew": {},
-  "manageLayoutDescription": "You can manage the layout for {page} page by dragging and dropping the items",
+  "manageLayoutDescription": "Unaweza kusimamia mpangilio wa {page} kwa kuburuta na kuacha vitu",
   "@manageLayoutDescription": {
     "placeholders": {
       "page": {
@@ -523,12 +523,14 @@
       }
     }
   },
-  "pickColor": "Pick a color",
+  "pickColor": "Chagua rangi",
   "@pickColor": {},
-  "hiddenMedia": "Hidden Media",
+  "hiddenMedia": "Vyombo vya Habari Vilivyofichwa",
   "@hiddenMedia": {},
-  "droppedManga": "Dropped Manga",
+  "droppedManga": "Manga Iliyotupwa",
   "@droppedManga": {},
-  "droppedAnime": "Dropped Anime",
-  "@droppedAnime": {}
+  "droppedAnime": "Anime Iliyotupwa",
+  "@droppedAnime": {},
+  "simkl": "Simkl",
+  "@simkl": {}
 }

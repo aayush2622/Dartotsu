@@ -15,7 +15,7 @@
   "@colorPickerDescription": {},
   "common": "Cài đặt chung",
   "@common": {},
-  "extension": "Tiện ích mở rộng",
+  "extension": "{count, plural, =1 {Tiện ích} other {Các Tiện ích}}",
   "@extension": {},
   "fontSize": "Kích thước chữ",
   "@fontSize": {},
@@ -77,7 +77,7 @@
   "@fontWeightDescription": {},
   "hidePrivate": "Ẩn nội dung riêng tư",
   "@hidePrivate": {},
-  "hidePrivateDescription": "Ẩn nội dung riêng tư trên trang chính",
+  "hidePrivateDescription": "Ẩn các series riêng tư khỏi trang chủ.",
   "@hidePrivateDescription": {},
   "incognitoMode": "Chế độ ẩn danh",
   "@incognitoMode": {},
@@ -85,7 +85,7 @@
   "@incognitoModeDescription": {},
   "login": "Đăng nhập",
   "@login": {},
-  "logout": "Đăng xuất",
+  "logout": "Đăng xuất {type}",
   "@logout": {},
   "mal": "MyAnimeList",
   "@mal": {},
@@ -93,7 +93,7 @@
   "@manga": {},
   "mangaDescription": "Sắp xếp và cá nhân hóa trải nghiệm Manga của bạn",
   "@mangaDescription": {},
-  "materialYou": "Material You",
+  "materialYou": "Vật liệu của bạn",
   "@materialYou": {},
   "materialYouDescription": "Sử dụng cùng màu với hình nền của bạn",
   "@materialYouDescription": {},
@@ -147,13 +147,13 @@
   "@theme": {},
   "themeDescription": "Tùy chỉnh giao diện và phong cách của ứng dụng",
   "@themeDescription": {},
-  "ln": "Light Novel",
+  "ln": "Tiểu thuyết ánh sáng",
   "@ln": {},
   "series": "Loạt phim",
   "@series": {},
   "season": "Mùa",
   "@season": {},
-  "episode": "Tập",
+  "episode": "{count, plural, =1 {Tập} other {Các Tập}}",
   "@episode": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -162,7 +162,7 @@
       }
     }
   },
-  "chapter": "Chương",
+  "chapter": "{count, plural, =1 {Chương} other {Các Chương}}",
   "@chapter": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -171,7 +171,7 @@
       }
     }
   },
-  "volume": "Tập sách",
+  "volume": "{count, plural, =1 {Tập} other {Các Tập}}",
   "@volume": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -180,7 +180,7 @@
       }
     }
   },
-  "movie": "Phim",
+  "movie": "{count, plural, =1 {Phim} other {Các Phim}}",
   "@movie": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -195,7 +195,7 @@
   "@calendar": {},
   "dtu": "Dịch đến hiện tại",
   "@dtu": {},
-  "manageLayout": "Quản lý bố cục",
+  "manageLayout": "Quản lý bố cục trang {page} cho {service}",
   "@manageLayout": {
     "placeholders": {
       "service": {
@@ -215,7 +215,7 @@
       }
     }
   },
-  "manageLayoutDescription": "Tùy chỉnh bố cục giao diện",
+  "manageLayoutDescription": "Bạn có thể quản lý bố cục trang {page} bằng cách kéo và thả các mục",
   "@manageLayoutDescription": {
     "placeholders": {
       "page": {
@@ -228,17 +228,17 @@
       }
     }
   },
-  "confirmLogout": "Xác nhận đăng xuất",
+  "confirmLogout": "Bạn có chắc chắn muốn đăng xuất không?",
   "@confirmLogout": {},
-  "gridView": "Dạng lưới",
+  "gridView": "Chế độ xem lưới",
   "@gridView": {},
   "listView": "Dạng danh sách",
   "@listView": {},
-  "compactView": "Dạng gọn",
+  "compactView": "Chế độ xem gọn",
   "@compactView": {},
   "episodeWatched": "Tập đã xem",
   "@episodeWatched": {},
-  "mostFavourite": "Được yêu thích nhất",
+  "mostFavourite": "{type} yêu thích nhất",
   "@mostFavourite": {
     "placeholders": {
       "type": {
@@ -251,7 +251,7 @@
       }
     }
   },
-  "popular": "Phổ biến",
+  "popular": "{type} phổ biến",
   "@popular": {
     "placeholders": {
       "type": {
@@ -264,7 +264,7 @@
       }
     }
   },
-  "topRated": "Được đánh giá cao nhất",
+  "topRated": "{type} đánh giá cao nhất",
   "@topRated": {
     "placeholders": {
       "type": {
@@ -280,11 +280,11 @@
   },
   "thisSeason": "Mùa này",
   "@thisSeason": {},
-  "nextSeason": "Mùa sau",
+  "nextSeason": "Mùa tới",
   "@nextSeason": {},
   "previousSeason": "Mùa trước",
   "@previousSeason": {},
-  "noDropped": "Không có bị bỏ dở",
+  "noDropped": "Bạn chưa bỏ qua {type} nào.",
   "@noDropped": {
     "placeholders": {
       "type": {
@@ -328,31 +328,31 @@
   "@tags": {},
   "total": "Tổng",
   "@total": {},
-  "totalEpisodes": "Tổng số tập",
+  "totalEpisodes": "Tập",
   "@totalEpisodes": {},
-  "totalChapters": "Tổng số chương",
+  "totalChapters": "Chương",
   "@totalChapters": {},
   "author": "Tác giả",
   "@author": {},
-  "averageDuration": "Thời lượng trung bình",
+  "averageDuration": "Thời gian trung bình",
   "@averageDuration": {},
-  "collapseText": "Thu gọn",
+  "collapseText": "xem ít hơn",
   "@collapseText": {},
   "comingSoon": "Sắp ra mắt",
   "@comingSoon": {},
-  "description": "Mô tả",
+  "description": "Tóm tắt",
   "@description": {},
   "endDate": "Ngày kết thúc",
   "@endDate": {},
-  "expandText": "Mở rộng",
+  "expandText": "xem thêm",
   "@expandText": {},
-  "nameRomaji": "Tên Romaji",
+  "nameRomaji": "Tên (Romaji)",
   "@nameRomaji": {},
   "popularity": "Độ phổ biến",
   "@popularity": {},
   "synopsis": "Tóm tắt",
   "@synopsis": {},
-  "loginTo": "Đăng nhập vào",
+  "loginTo": "Đăng nhập vào {service}",
   "@loginTo": {
     "placeholders": {
       "service": {
@@ -376,7 +376,7 @@
   "@novel": {},
   "chapterRead": "Chương đã đọc",
   "@chapterRead": {},
-  "available": "Có sẵn",
+  "available": "{type} có sẵn",
   "@available": {
     "placeholders": {
       "type": {
@@ -388,7 +388,7 @@
       }
     }
   },
-  "installed": "Đã cài đặt",
+  "installed": "{type} đã cài đặt",
   "@installed": {
     "placeholders": {
       "type": {
@@ -399,7 +399,7 @@
       }
     }
   },
-  "trending": "Xu hướng",
+  "trending": "Xu hướng {type}",
   "@trending": {
     "placeholders": {
       "type": {
@@ -411,7 +411,7 @@
       }
     }
   },
-  "activity": "Hoạt động",
+  "activity": "{count, plural, =1 {Hoạt động} other {Các Hoạt động}}",
   "@activity": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -420,7 +420,7 @@
       }
     }
   },
-  "planned": "Dự kiến",
+  "planned": "Dự định {type}",
   "@planned": {
     "placeholders": {
       "type": {
@@ -432,7 +432,7 @@
       }
     }
   },
-  "browse": "Duyệt",
+  "browse": "Duyệt {type}",
   "@browse": {
     "placeholders": {
       "type": {
@@ -444,7 +444,7 @@
       }
     }
   },
-  "favorite": "Yêu thích",
+  "favorite": "Yêu thích {type}",
   "@favorite": {
     "placeholders": {
       "type": {
@@ -456,7 +456,7 @@
       }
     }
   },
-  "onHold": "Tạm dừng",
+  "onHold": "Tạm dừng {type}",
   "@onHold": {
     "placeholders": {
       "type": {
@@ -470,9 +470,9 @@
   },
   "continueWatching": "Tiếp tục xem",
   "@continueWatching": {},
-  "recommended": "Được đề xuất",
+  "recommended": "Được khuyến nghị",
   "@recommended": {},
-  "noFavourites": "Không có mục yêu thích",
+  "noFavourites": "Có vẻ bạn chưa thích gì,\nHãy thử thích một chương trình để giữ nó ở đây.",
   "@noFavourites": {},
   "comments": "Bình luận",
   "@comments": {},
@@ -484,7 +484,7 @@
   "@info": {},
   "language": "Ngôn ngữ",
   "@language": {},
-  "list": "Danh sách",
+  "list": "Danh sách {type}",
   "@list": {
     "placeholders": {
       "type": {
@@ -495,40 +495,42 @@
   },
   "layout": "Bố cục",
   "@layout": {},
-  "noHiddenMediaFound": "Không tìm thấy phương tiện ẩn",
+  "noHiddenMediaFound": "Không tìm thấy media ẩn",
   "@noHiddenMediaFound": {},
   "read": "Đọc",
   "@read": {},
   "search": "Tìm kiếm",
   "@search": {},
-  "scanlators": "Nhóm dịch",
+  "scanlators": "Nhóm quét",
   "@scanlators": {},
   "options": "Tùy chọn",
   "@options": {},
   "sort": "Sắp xếp",
   "@sort": {},
-  "topAiring": "Đang phát sóng hàng đầu",
+  "topAiring": "Chương trình phát sóng hàng đầu",
   "@topAiring": {},
   "watch": "Xem",
   "@watch": {},
-  "utd": "Cập nhật đến hiện tại",
+  "utd": "Lên xuống",
   "@utd": {},
   "pickColor": "Chọn màu",
   "@pickColor": {},
-  "allCaughtUpNew": "Bạn đã xem hết nội dung mới",
+  "allCaughtUpNew": "Đã theo kịp, có gì mới?",
   "@allCaughtUpNew": {},
-  "droppedAnime": "Anime bị bỏ dở",
+  "droppedAnime": "Anime đã bỏ",
   "@droppedAnime": {},
-  "droppedManga": "Manga bị bỏ dở",
+  "droppedManga": "Manga đã bỏ",
   "@droppedManga": {},
-  "hiddenMedia": "Phương tiện ẩn",
+  "hiddenMedia": "Media ẩn",
   "@hiddenMedia": {},
-  "noOnHold": "Không có tạm dừng",
+  "noOnHold": "Có vẻ bạn chưa tạm dừng gì.",
   "@noOnHold": {},
   "recentUpdates": "Cập nhật gần đây",
   "@recentUpdates": {},
-  "recommendationsEmptyMessage": "Không có đề xuất nào",
+  "recommendationsEmptyMessage": "Xem/Đọc một số Anime hoặc Manga để nhận khuyến nghị",
   "@recommendationsEmptyMessage": {},
   "kitsu": "Kitsu",
-  "@kitsu": {}
+  "@kitsu": {},
+  "simkl": "Simkl",
+  "@simkl": {}
 }

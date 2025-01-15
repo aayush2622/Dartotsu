@@ -13,13 +13,13 @@
   "@bottomPaddingDescription": {},
   "enableDarkMode": "Aktifkan Mod Gelap",
   "@enableDarkMode": {},
-  "extension": "Pelebaran",
+  "extension": "{count, plural, =1 {Sambungan} other {Sambungan}}",
   "@extension": {},
   "extensionsDescription": "Pasang dan uruskan pelebaran untuk fungsi tambahan",
   "@extensionsDescription": {},
   "mal": "MyAnimeList",
   "@mal": {},
-  "materialYou": "Material You",
+  "materialYou": "Material Anda",
   "@materialYou": {},
   "materialYouDescription": "Gunakan warna yang sama seperti latar belakang anda",
   "@materialYouDescription": {},
@@ -97,7 +97,7 @@
   "@fontWeightDescription": {},
   "hidePrivate": "Sembunyikan Peribadi",
   "@hidePrivate": {},
-  "hidePrivateDescription": "Sembunyikan media peribadi dari halaman utama",
+  "hidePrivateDescription": "Sembunyikan siri peribadi dari halaman Utama.",
   "@hidePrivateDescription": {},
   "incognitoMode": "Mod Ingin Tahu",
   "@incognitoMode": {},
@@ -105,7 +105,7 @@
   "@incognitoModeDescription": {},
   "login": "Log Masuk",
   "@login": {},
-  "logout": "Log Keluar",
+  "logout": "Log keluar {type}",
   "@logout": {},
   "manga": "Manga",
   "@manga": {},
@@ -147,9 +147,9 @@
   "@themeDescription": {},
   "yes": "Ya",
   "@yes": {},
-  "nextSeason": "Next Season",
+  "nextSeason": "Musim Depan",
   "@nextSeason": {},
-  "noDropped": "You haven't dropped any {type} yet.",
+  "noDropped": "Anda belum menjatuhkan mana-mana {type} lagi.",
   "@noDropped": {
     "placeholders": {
       "type": {
@@ -161,7 +161,7 @@
       }
     }
   },
-  "loginTo": "Login to {service}",
+  "loginTo": "Log masuk ke {service}",
   "@loginTo": {
     "placeholders": {
       "service": {
@@ -175,7 +175,7 @@
       }
     }
   },
-  "activity": "{count, plural, =1 {Activity} other {Activities}}",
+  "activity": "{count, plural, =1 {Aktiviti} other {Aktiviti}}",
   "@activity": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -184,7 +184,7 @@
       }
     }
   },
-  "installed": "Installed {type}",
+  "installed": "{type} Terpasang",
   "@installed": {
     "placeholders": {
       "type": {
@@ -195,9 +195,9 @@
       }
     }
   },
-  "nameRomaji": "Name (Romaji)",
+  "nameRomaji": "Nama (Romaji)",
   "@nameRomaji": {},
-  "mostFavourite": "Most Favourite {type}",
+  "mostFavourite": "{type} Paling Kegemaran",
   "@mostFavourite": {
     "placeholders": {
       "type": {
@@ -212,7 +212,7 @@
   },
   "endDate": "End Date",
   "@endDate": {},
-  "browse": "Browse {type}",
+  "browse": "Telusuri {type}",
   "@browse": {
     "placeholders": {
       "type": {
@@ -226,17 +226,17 @@
   },
   "meanScore": "Mean Score",
   "@meanScore": {},
-  "comingSoon": "Coming SOON",
+  "comingSoon": "Akan Datang",
   "@comingSoon": {},
-  "popularity": "Popularity",
+  "popularity": "Populariti",
   "@popularity": {},
-  "favorites": "Favorites",
+  "favorites": "Kegemaran",
   "@favorites": {},
   "home": "Home",
   "@home": {},
   "prequel": "PREQUEL",
   "@prequel": {},
-  "planned": "Planned {type}",
+  "planned": "{type} Dirancang",
   "@planned": {
     "placeholders": {
       "type": {
@@ -248,9 +248,9 @@
       }
     }
   },
-  "language": "Language",
+  "language": "Bahasa",
   "@language": {},
-  "available": "Available {type}",
+  "available": "{type} Tersedia",
   "@available": {
     "placeholders": {
       "type": {
@@ -262,17 +262,17 @@
       }
     }
   },
-  "genres": "Genres",
+  "genres": "Genre",
   "@genres": {},
   "author": "Author",
   "@author": {},
   "layout": "Layout",
   "@layout": {},
-  "calendar": "Calendar",
+  "calendar": "Kalendar",
   "@calendar": {},
   "format": "Format",
   "@format": {},
-  "expandText": "show more",
+  "expandText": "tunjuk lebih",
   "@expandText": {},
   "manhua": "Manhua",
   "@manhua": {},
@@ -280,7 +280,7 @@
   "@sequel": {},
   "studio": "Studio",
   "@studio": {},
-  "staff": "Staff",
+  "staff": "Kakitangan",
   "@staff": {},
   "status": "Status",
   "@status": {},
@@ -288,29 +288,29 @@
   "@relations": {},
   "source": "Source",
   "@source": {},
-  "synonyms": "Synonyms",
+  "synonyms": "Sinonim",
   "@synonyms": {},
   "startDate": "Start Date",
   "@startDate": {},
-  "averageDuration": "Average Duration",
+  "averageDuration": "Tempoh Purata",
   "@averageDuration": {},
-  "collapseText": "show less",
+  "collapseText": "tunjuk kurang",
   "@collapseText": {},
-  "characters": "Characters",
+  "characters": "Watak",
   "@characters": {},
-  "description": "Synopsis",
+  "description": "Sinopsis",
   "@description": {},
   "name": "Name",
   "@name": {},
-  "totalEpisodes": "Episodes",
+  "totalEpisodes": "Episod",
   "@totalEpisodes": {},
   "total": "Total",
   "@total": {},
   "tags": "Tags",
   "@tags": {},
-  "synopsis": "Synopsis",
+  "synopsis": "Sinopsis",
   "@synopsis": {},
-  "totalChapters": "Chapters",
+  "totalChapters": "Bab",
   "@totalChapters": {},
   "manhwa": "Manhwa",
   "@manhwa": {},
@@ -318,11 +318,11 @@
   "@kitsu": {},
   "novel": "Novel",
   "@novel": {},
-  "ln": "Light Novel",
+  "ln": "Novel Ringan",
   "@ln": {},
   "series": "Series",
   "@series": {},
-  "episode": "{count, plural, =1 {Episode} other {Episodes}}",
+  "episode": "{count, plural, =1 {Episod} other {Episod}}",
   "@episode": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -331,9 +331,9 @@
       }
     }
   },
-  "season": "Season",
+  "season": "Musim",
   "@season": {},
-  "volume": "{count, plural, =1 {Volume} other {Volumes}}",
+  "volume": "{count, plural, =1 {Jilid} other {Jilid}}",
   "@volume": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -342,7 +342,7 @@
       }
     }
   },
-  "movie": "{count, plural, =1 {Movie} other {Movies}}",
+  "movie": "{count, plural, =1 {Filem} other {Filem}}",
   "@movie": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -351,7 +351,7 @@
       }
     }
   },
-  "chapter": "{count, plural, =1 {Chapter} other {Chapters}}",
+  "chapter": "{count, plural, =1 {Bab} other {Bab}}",
   "@chapter": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -360,11 +360,11 @@
       }
     }
   },
-  "scanlators": "Scanlators",
+  "scanlators": "Penterjemah",
   "@scanlators": {},
   "dtu": "Down To Up",
   "@dtu": {},
-  "list": "{type} List",
+  "list": "Senarai {type}",
   "@list": {
     "placeholders": {
       "type": {
@@ -373,19 +373,19 @@
       }
     }
   },
-  "compactView": "Compact View",
+  "compactView": "Paparan Padat",
   "@compactView": {},
   "listView": "List View",
   "@listView": {},
-  "confirmLogout": "Adakah anda pasti mahu log keluar?",
+  "confirmLogout": "Adakah anda pasti ingin log keluar?",
   "@confirmLogout": {},
-  "gridView": "Grid View",
+  "gridView": "Paparan Grid",
   "@gridView": {},
-  "chapterRead": "Chapter Read",
+  "chapterRead": "Bab Dibaca",
   "@chapterRead": {},
-  "episodeWatched": "Episode Watched",
+  "episodeWatched": "Episod Ditonton",
   "@episodeWatched": {},
-  "trending": "Trending {type}",
+  "trending": "{type} Terkini",
   "@trending": {
     "placeholders": {
       "type": {
@@ -397,7 +397,7 @@
       }
     }
   },
-  "topRated": "Top Rated {type}",
+  "topRated": "{type} Teratas",
   "@topRated": {
     "placeholders": {
       "type": {
@@ -411,7 +411,7 @@
       }
     }
   },
-  "popular": "Popular {type}",
+  "popular": "{type} Popular",
   "@popular": {
     "placeholders": {
       "type": {
@@ -424,11 +424,11 @@
       }
     }
   },
-  "thisSeason": "This Season",
+  "thisSeason": "Musim Ini",
   "@thisSeason": {},
-  "previousSeason": "Previous Season",
+  "previousSeason": "Musim Sebelumnya",
   "@previousSeason": {},
-  "onHold": "On Hold {type}",
+  "onHold": "{type} Dalam Pegangan",
   "@onHold": {
     "placeholders": {
       "type": {
@@ -440,9 +440,9 @@
       }
     }
   },
-  "continueReading": "Continue Reading",
+  "continueReading": "Teruskan Membaca",
   "@continueReading": {},
-  "favorite": "Favorite {type}",
+  "favorite": "{type} Kegemaran",
   "@favorite": {
     "placeholders": {
       "type": {
@@ -454,39 +454,39 @@
       }
     }
   },
-  "continueWatching": "Continue Watching",
+  "continueWatching": "Teruskan Menonton",
   "@continueWatching": {},
-  "hiddenMedia": "Hidden Media",
+  "hiddenMedia": "Media Tersembunyi",
   "@hiddenMedia": {},
-  "comments": "Comments",
+  "comments": "Komen",
   "@comments": {},
-  "allCaughtUpNew": "All caught up, when New?",
+  "allCaughtUpNew": "Semua sudah selesai, apa yang baru?",
   "@allCaughtUpNew": {},
   "addToList": "Add To List",
   "@addToList": {},
   "info": "Info",
   "@info": {},
-  "noFavourites": "Looks like you don't like anything,\nTry liking a show to keep it here.",
+  "noFavourites": "Nampaknya anda tidak suka apa-apa,\nCuba suka sesuatu untuk menyimpannya di sini.",
   "@noFavourites": {},
   "options": "Options",
   "@options": {},
-  "recommended": "Recommended",
+  "recommended": "Disyorkan",
   "@recommended": {},
-  "recentUpdates": "Recent Updates",
+  "recentUpdates": "Kemas Kini Terkini",
   "@recentUpdates": {},
-  "topAiring": "Top Airing",
+  "topAiring": "Penayangan Teratas",
   "@topAiring": {},
-  "utd": "Up To Down",
+  "utd": "Dari Atas Ke Bawah",
   "@utd": {},
-  "watch": "Watch",
+  "watch": "Tonton",
   "@watch": {},
-  "search": "Search",
+  "search": "Cari",
   "@search": {},
-  "read": "Read",
+  "read": "Baca",
   "@read": {},
-  "sort": "Sort",
+  "sort": "Susun",
   "@sort": {},
-  "manageLayout": "Manage {page} page Layout for {service}",
+  "manageLayout": "Urus Susun Atur halaman {page} untuk {service}",
   "@manageLayout": {
     "placeholders": {
       "service": {
@@ -506,7 +506,7 @@
       }
     }
   },
-  "manageLayoutDescription": "You can manage the layout for {page} page by dragging and dropping the items",
+  "manageLayoutDescription": "Anda boleh mengurus susun atur halaman {page} dengan menyeret dan menjatuhkan item",
   "@manageLayoutDescription": {
     "placeholders": {
       "page": {
@@ -519,16 +519,18 @@
       }
     }
   },
-  "pickColor": "Pick a color",
+  "pickColor": "Pilih warna",
   "@pickColor": {},
-  "droppedAnime": "Dropped Anime",
+  "droppedAnime": "Anime Dibuang",
   "@droppedAnime": {},
-  "droppedManga": "Dropped Manga",
+  "droppedManga": "Manga Dibuang",
   "@droppedManga": {},
-  "noHiddenMediaFound": "No hidden media found",
+  "noHiddenMediaFound": "Tiada media tersembunyi ditemukan",
   "@noHiddenMediaFound": {},
-  "noOnHold": "Looks like you haven't put anything on hold.",
+  "noOnHold": "Nampaknya anda belum menangguhkan apa-apa.",
   "@noOnHold": {},
-  "recommendationsEmptyMessage": "Watch/Read some Anime or Manga to get Recommendations",
-  "@recommendationsEmptyMessage": {}
+  "recommendationsEmptyMessage": "Tonton/Baca beberapa Anime atau Manga untuk mendapatkan Cadangan",
+  "@recommendationsEmptyMessage": {},
+  "simkl": "Simkl",
+  "@simkl": {}
 }

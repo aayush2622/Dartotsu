@@ -65,7 +65,7 @@
   "@donationGoal": {},
   "enableDarkMode": "ଡାର୍କ ମୋଡ୍ ସକ୍ରିୟ କରନ୍ତୁ",
   "@enableDarkMode": {},
-  "extension": "{count, plural, =1 {ବିସ୍ତାର} other {ବିସ୍ତାର}}",
+  "extension": "{count, plural, =1 {ଏକ୍ସଟେଂସନ୍} other {ଏକ୍ସଟେଂସନ୍ଗୁଡିକ}}",
   "@extension": {},
   "extensionsDescription": "ଅଧିକ କାର୍ଯ୍ୟକ୍ଷମତା ପାଇଁ ବିସ୍ତାରଗୁଡିକୁ ଇନ୍ସ୍ଟଲ୍ ଏବଂ ପରିଚାଳନା କରନ୍ତୁ",
   "@extensionsDescription": {},
@@ -87,7 +87,7 @@
   "@fontWeightDescription": {},
   "hidePrivate": "ଗୋପନ ଚିହ୍ନଟ କରନ୍ତୁ",
   "@hidePrivate": {},
-  "hidePrivateDescription": "ମୂଳ ପୃଷ୍ଠାରୁ ବ୍ୟକ୍ତିଗତ ସିରିଜ୍ ଲୁଚାନ୍ତୁ ।",
+  "hidePrivateDescription": "ମୁଖ୍ୟ ପୃଷ୍ଠାରୁ ବ୍ୟକ୍ତିଗତ ଶ୍ରେଣୀଗୁଡିକ ଲୁଚାନ୍ତୁ।",
   "@hidePrivateDescription": {},
   "incognitoMode": "ଇଂକଗ୍ନିଟୋ ମୋଡ୍",
   "@incognitoMode": {},
@@ -95,7 +95,7 @@
   "@incognitoModeDescription": {},
   "login": "ଲଗଇନ୍",
   "@login": {},
-  "logout": "ଲଗଆଉଟ୍ {type}",
+  "logout": "{type} ବାହାର କରନ୍ତୁ",
   "@logout": {},
   "mal": "MyAnimeList",
   "@mal": {},
@@ -103,7 +103,7 @@
   "@manga": {},
   "mangaDescription": "ଆପଣଙ୍କର ମଙ୍ଗା ଅନୁଭୂତିକୁ ଗଠନ କରନ୍ତୁ ଏବଂ କଷ୍ଟମାଇଜ୍ କରନ୍ତୁ",
   "@mangaDescription": {},
-  "materialYou": "ମ୍ୟାଟେରିଆଲ୍ ଯୁ",
+  "materialYou": "ମଟେରିଆଲ୍ ଆପଣ",
   "@materialYou": {},
   "materialYouDescription": "ଆପଣଙ୍କର ଓଲେଡ଼ ୱାଲପେପର୍ ସହିତ ସେହି ରଙ୍ଗ ବ୍ୟବହାର କରନ୍ତୁ",
   "@materialYouDescription": {},
@@ -147,9 +147,9 @@
   "@themeDescription": {},
   "yes": "ହଁ",
   "@yes": {},
-  "thisSeason": "This Season",
+  "thisSeason": "ଏହି ଋତୁ",
   "@thisSeason": {},
-  "trending": "Trending {type}",
+  "trending": "ଟ୍ରେଣ୍ଡିଂ {type}",
   "@trending": {
     "placeholders": {
       "type": {
@@ -161,7 +161,7 @@
       }
     }
   },
-  "favorite": "Favorite {type}",
+  "favorite": "ପ୍ରିୟ {type}",
   "@favorite": {
     "placeholders": {
       "type": {
@@ -173,9 +173,9 @@
       }
     }
   },
-  "nextSeason": "Next Season",
+  "nextSeason": "ପରବର୍ତ୍ତୀ ଋତୁ",
   "@nextSeason": {},
-  "noDropped": "You haven't dropped any {type} yet।",
+  "noDropped": "ଆପଣ ଯାହା ତ୍ୟାଗ କରିନାହାଁନ୍ତି {type}।",
   "@noDropped": {
     "placeholders": {
       "type": {
@@ -189,7 +189,7 @@
   },
   "tags": "Tags",
   "@tags": {},
-  "loginTo": "Login to {service}",
+  "loginTo": "{service} ରେ ପ୍ରବେଶ କରନ୍ତୁ",
   "@loginTo": {
     "placeholders": {
       "service": {
@@ -203,9 +203,9 @@
       }
     }
   },
-  "continueWatching": "Continue Watching",
+  "continueWatching": "ଦେଖିବା ଜାରି ରଖନ୍ତୁ",
   "@continueWatching": {},
-  "topRated": "Top Rated {type}",
+  "topRated": "ଶ୍ରେଷ୍ଠ ମୂଲ୍ୟାଂକନ {type}",
   "@topRated": {
     "placeholders": {
       "type": {
@@ -219,7 +219,7 @@
       }
     }
   },
-  "popular": "Popular {type}",
+  "popular": "ଜନପ୍ରିୟ {type}",
   "@popular": {
     "placeholders": {
       "type": {
@@ -234,7 +234,7 @@
   },
   "name": "Name",
   "@name": {},
-  "mostFavourite": "Most Favourite {type}",
+  "mostFavourite": "ସବୁଠାରୁ ପ୍ରିୟ {type}",
   "@mostFavourite": {
     "placeholders": {
       "type": {
@@ -247,15 +247,15 @@
       }
     }
   },
-  "recommended": "Recommended",
+  "recommended": "ସୁପାରିଶିତ",
   "@recommended": {},
-  "synopsis": "Synopsis",
+  "synopsis": "ସାରାଂଶ",
   "@synopsis": {},
-  "nameRomaji": "Name (Romaji)",
+  "nameRomaji": "ନାମ (ରୋମାଜି)",
   "@nameRomaji": {},
-  "averageDuration": "Average Duration",
+  "averageDuration": "ସାଧାରଣ ଅବଧି",
   "@averageDuration": {},
-  "browse": "Browse {type}",
+  "browse": "{type} ବ୍ରାଉଜ କରନ୍ତୁ",
   "@browse": {
     "placeholders": {
       "type": {
@@ -267,13 +267,13 @@
       }
     }
   },
-  "comingSoon": "Coming SOON",
+  "comingSoon": "ଶୀଘ୍ର ଆସୁଛି",
   "@comingSoon": {},
-  "popularity": "Popularity",
+  "popularity": "ଜନପ୍ରିୟତା",
   "@popularity": {},
-  "favorites": "Favorites",
+  "favorites": "ପ୍ରିୟଗୁଡିକ",
   "@favorites": {},
-  "movie": "{count, plural, =1 {Movie} other {Movies}}",
+  "movie": "{count, plural, =1 {ଚଳଚ୍ଚିତ୍ର} other {ଚଳଚ୍ଚିତ୍ରଗୁଡିକ}}",
   "@movie": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -284,7 +284,7 @@
   },
   "prequel": "PREQUEL",
   "@prequel": {},
-  "planned": "Planned {type}",
+  "planned": "ପ୍ରତିକ୍ଷାଶୀଳ {type}",
   "@planned": {
     "placeholders": {
       "type": {
@@ -296,9 +296,9 @@
       }
     }
   },
-  "collapseText": "show less",
+  "collapseText": "କମ୍ ଦେଖାନ୍ତୁ",
   "@collapseText": {},
-  "chapter": "{count, plural, =1 {Chapter} other {Chapters}}",
+  "chapter": "{count, plural, =1 {ଅଧ୍ୟାୟ} other {ଅଧ୍ୟାୟଗୁଡିକ}}",
   "@chapter": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -307,7 +307,7 @@
       }
     }
   },
-  "available": "Available {type}",
+  "available": "ଉପଲବ୍ଧ {type}",
   "@available": {
     "placeholders": {
       "type": {
@@ -319,19 +319,19 @@
       }
     }
   },
-  "characters": "Characters",
+  "characters": "ଚରିତ୍ରଗୁଡିକ",
   "@characters": {},
   "source": "Source",
   "@source": {},
-  "expandText": "show more",
+  "expandText": "ଅଧିକ ଦେଖାନ୍ତୁ",
   "@expandText": {},
   "manhua": "Manhua",
   "@manhua": {},
-  "season": "Season",
+  "season": "ଋତୁ",
   "@season": {},
   "sequel": "SEQUEL",
   "@sequel": {},
-  "staff": "Staff",
+  "staff": "କର୍ମଚାରୀ",
   "@staff": {},
   "relations": "Relations",
   "@relations": {},
@@ -339,13 +339,13 @@
   "@studio": {},
   "status": "Status",
   "@status": {},
-  "synonyms": "Synonyms",
+  "synonyms": "ପର୍ୟାୟବାଚୀ",
   "@synonyms": {},
   "startDate": "Start Date",
   "@startDate": {},
-  "recommendationsEmptyMessage": "Watch/Read some Anime or Manga to get Recommendations",
+  "recommendationsEmptyMessage": "ଆନିମେ କିମ୍ବା ମାଙ୍ଗା ପଢନ୍ତୁ କିମ୍ବା ଦେଖନ୍ତୁ ଯାହାଦ୍ୱାରା ସୁପାରିଶ ମିଳିବ",
   "@recommendationsEmptyMessage": {},
-  "description": "Synopsis",
+  "description": "ସାରାଂଶ",
   "@description": {},
   "author": "Author",
   "@author": {},
@@ -353,27 +353,27 @@
   "@endDate": {},
   "meanScore": "Mean Score",
   "@meanScore": {},
-  "format": "Format",
+  "format": "ରୂପରେଖା",
   "@format": {},
-  "totalEpisodes": "Episodes",
+  "totalEpisodes": "ମୋଟ ଅଂଶ",
   "@totalEpisodes": {},
   "total": "Total",
   "@total": {},
-  "totalChapters": "Chapters",
+  "totalChapters": "ମୋଟ ଅଧ୍ୟାୟ",
   "@totalChapters": {},
-  "ln": "Light Novel",
+  "ln": "ଲାଇଟ ଉପନ୍ୟାସ",
   "@ln": {},
   "manhwa": "Manhwa",
   "@manhwa": {},
   "kitsu": "Kitsu",
   "@kitsu": {},
-  "novel": "Novel",
+  "novel": "ଉପନ୍ୟାସ",
   "@novel": {},
   "series": "Series",
   "@series": {},
   "home": "Home",
   "@home": {},
-  "volume": "{count, plural, =1 {Volume} other {Volumes}}",
+  "volume": "{count, plural, =1 {ଖଣ୍ଡ} other {ଖଣ୍ଡଗୁଡିକ}}",
   "@volume": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -382,7 +382,7 @@
       }
     }
   },
-  "episode": "{count, plural, =1 {Episode} other {Episodes}}",
+  "episode": "{count, plural, =1 {ଅଂଶ} other {ଅଂଶଗୁଡିକ}}",
   "@episode": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -391,27 +391,27 @@
       }
     }
   },
-  "genres": "Genres",
+  "genres": "ପ୍ରକାର",
   "@genres": {},
-  "scanlators": "Scanlators",
+  "scanlators": "ସ୍କ୍ୟାନ୍ଲେଟରସ୍",
   "@scanlators": {},
-  "confirmLogout": "ଆପଣ କି ନିଶ୍ଚିତ ଭାବେ ଲଗଆଉଟ୍ କରିବାକୁ ଚାହାଁଛନ୍ତି?",
+  "confirmLogout": "ଆପଣ ନିଶ୍ଚିତ ଯେ ବାହାର ହେବାକୁ ଚାହୁଁଛନ୍ତି?",
   "@confirmLogout": {},
-  "calendar": "Calendar",
+  "calendar": "କ୍ୟାଲେଣ୍ଡର",
   "@calendar": {},
-  "compactView": "Compact View",
+  "compactView": "ସଂକ୍ଷିପ୍ତ ଭ୍ୟୁ",
   "@compactView": {},
   "listView": "List View",
   "@listView": {},
-  "chapterRead": "Chapter Read",
+  "chapterRead": "ପଢାଯାଇଥିବା ଅଧ୍ୟାୟ",
   "@chapterRead": {},
-  "gridView": "Grid View",
+  "gridView": "ଗ୍ରିଡ୍ ଭ୍ୟୁ",
   "@gridView": {},
-  "episodeWatched": "Episode Watched",
+  "episodeWatched": "ଦେଖା ଯାଇଥିବା ଅଂଶ",
   "@episodeWatched": {},
-  "sort": "Sort",
+  "sort": "ଶ୍ରେଣୀବଦ୍ଧ କରନ୍ତୁ",
   "@sort": {},
-  "installed": "Installed {type}",
+  "installed": "ସଂସ୍ଥାପିତ {type}",
   "@installed": {
     "placeholders": {
       "type": {
@@ -422,7 +422,7 @@
       }
     }
   },
-  "activity": "{count, plural, =1 {Activity} other {Activities}}",
+  "activity": "{count, plural, =1 {କାର୍ଯ୍ୟକଳାପ} other {କାର୍ଯ୍ୟକଳାପଗୁଡିକ}}",
   "@activity": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -431,9 +431,9 @@
       }
     }
   },
-  "previousSeason": "Previous Season",
+  "previousSeason": "ଗତ ଋତୁ",
   "@previousSeason": {},
-  "onHold": "On Hold {type}",
+  "onHold": "ବିରତିରେ {type}",
   "@onHold": {
     "placeholders": {
       "type": {
@@ -445,11 +445,11 @@
       }
     }
   },
-  "continueReading": "Continue Reading",
+  "continueReading": "ପଢା ଜାରି ରଖନ୍ତୁ",
   "@continueReading": {},
-  "topAiring": "Top Airing",
+  "topAiring": "ଶ୍ରେଷ୍ଠ ପ୍ରସାରଣ",
   "@topAiring": {},
-  "list": "{type} List",
+  "list": "{type} ତାଲିକା",
   "@list": {
     "placeholders": {
       "type": {
@@ -460,29 +460,29 @@
   },
   "addToList": "Add To List",
   "@addToList": {},
-  "comments": "Comments",
+  "comments": "ମନ୍ତବ୍ୟ",
   "@comments": {},
   "dtu": "Down To Up",
   "@dtu": {},
   "info": "Info",
   "@info": {},
-  "language": "Language",
+  "language": "ଭାଷା",
   "@language": {},
   "layout": "Layout",
   "@layout": {},
   "options": "Options",
   "@options": {},
-  "recentUpdates": "Recent Updates",
+  "recentUpdates": "ସମ୍ପ୍ରତି ଅଦ୍ୟତନ",
   "@recentUpdates": {},
-  "read": "Read",
+  "read": "ପଢନ୍ତୁ",
   "@read": {},
-  "search": "Search",
+  "search": "ଖୋଜନ୍ତୁ",
   "@search": {},
-  "watch": "Watch",
+  "watch": "ଦେଖନ୍ତୁ",
   "@watch": {},
-  "utd": "Up To Down",
+  "utd": "ଉପରୁ ତଳକୁ",
   "@utd": {},
-  "manageLayout": "Manage {page} page Layout for {service}",
+  "manageLayout": "{service} ପାଇଁ {page} ପୃଷ୍ଠାର ରୂପରେଖା ପରିଚାଳନା କରନ୍ତୁ",
   "@manageLayout": {
     "placeholders": {
       "service": {
@@ -502,9 +502,9 @@
       }
     }
   },
-  "allCaughtUpNew": "All caught up, when New?",
+  "allCaughtUpNew": "ସମସ୍ତ କାମ ସମାପ୍ତ, ନୂତନ କ’ଣ?",
   "@allCaughtUpNew": {},
-  "manageLayoutDescription": "You can manage the layout for {page} page by dragging and dropping the items",
+  "manageLayoutDescription": "ଆପଣ {page} ପୃଷ୍ଠାର ରୂପରେଖାକୁ ଖେଳାଯାଇବା ଏବଂ ଛାଡ଼ାଯାଇଥିବା ଆଧାରରେ ପରିବର୍ତ୍ତନ କରିପାରିବେ",
   "@manageLayoutDescription": {
     "placeholders": {
       "page": {
@@ -517,18 +517,20 @@
       }
     }
   },
-  "pickColor": "Pick a color",
+  "pickColor": "ରଙ୍ଗ ଚୟନ କରନ୍ତୁ",
   "@pickColor": {},
-  "droppedAnime": "Dropped Anime",
+  "droppedAnime": "ତ୍ୟାଗ କରାଯାଇଥିବା ଆନିମେ",
   "@droppedAnime": {},
-  "droppedManga": "Dropped Manga",
+  "droppedManga": "ତ୍ୟାଗ କରାଯାଇଥିବା ମାଙ୍ଗା",
   "@droppedManga": {},
-  "hiddenMedia": "Hidden Media",
+  "hiddenMedia": "ଲୁଚାଇଥିବା ମାଧ୍ୟମ",
   "@hiddenMedia": {},
-  "noFavourites": "Looks like you don't like anything,\nTry liking a show to keep it here।",
+  "noFavourites": "ଆପଣ କିଛି ଲାଇକ୍ କରିନାହାଁନ୍ତି,\n ଏଠାରେ ଏକ ଶୋକୁ ଲାଇକ୍ କରନ୍ତୁ।",
   "@noFavourites": {},
-  "noOnHold": "Looks like you haven't put anything on hold।",
+  "noOnHold": "କୌଣସିବିରତି ଦିଆଯାଇନାହିଁ।",
   "@noOnHold": {},
-  "noHiddenMediaFound": "No hidden media found",
-  "@noHiddenMediaFound": {}
+  "noHiddenMediaFound": "କୌଣସି ଲୁଚାଇଥିବା ମାଧ୍ୟମ ମିଳିଲା ନାହିଁ",
+  "@noHiddenMediaFound": {},
+  "simkl": "Simkl",
+  "@simkl": {}
 }

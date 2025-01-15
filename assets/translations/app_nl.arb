@@ -7,9 +7,9 @@
   "@cancel": {},
   "colorPicker": "Kleurkiezer",
   "@colorPicker": {},
-  "colorPickerDescription": "Kies een kleur",
+  "colorPickerDescription": "Selecteer een kleur",
   "@colorPickerDescription": {},
-  "extension": "Kont, plural, Quality over Quantity (QoQ) Releases Vertaling:",
+  "extension": "{count, plural, =1 {Uitbreiding} other {Uitbreidingen}}",
   "@extension": {},
   "theme": "Thema",
   "@theme": {},
@@ -77,7 +77,7 @@
   "@fontWeightDescription": {},
   "hidePrivate": "Verberg privé",
   "@hidePrivate": {},
-  "hidePrivateDescription": "Verberg privé series van Homepagina.",
+  "hidePrivateDescription": "Verberg privéseries van de startpagina.",
   "@hidePrivateDescription": {},
   "incognitoMode": "Incognito modus",
   "@incognitoMode": {},
@@ -85,7 +85,7 @@
   "@incognitoModeDescription": {},
   "login": "Inloggen",
   "@login": {},
-  "logout": "Logout _",
+  "logout": "Uitloggen {type}",
   "@logout": {},
   "mal": "MyAnimeList",
   "@mal": {},
@@ -147,7 +147,7 @@
   "@supportMaintainer": {},
   "yes": "Ja",
   "@yes": {},
-  "chapter": "Hoofdstuk",
+  "chapter": "{count, plural, =1 {Hoofdstuk} other {Hoofdstukken}}",
   "@chapter": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -158,7 +158,7 @@
   },
   "genres": "Genres",
   "@genres": {},
-  "calendar": "Agenda",
+  "calendar": "Kalender",
   "@calendar": {},
   "scanlators": "Scanlators",
   "@scanlators": {},
@@ -168,7 +168,7 @@
   "@compactView": {},
   "episodeWatched": "Aflevering bekeken",
   "@episodeWatched": {},
-  "installed": "Geïnstalleerd",
+  "installed": "Geïnstalleerd {type}",
   "@installed": {
     "placeholders": {
       "type": {
@@ -181,7 +181,7 @@
   },
   "previousSeason": "Vorige seizoen",
   "@previousSeason": {},
-  "activity": "Activiteit",
+  "activity": "{count, plural, =1 {Activiteit} other {Activiteiten}}",
   "@activity": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -190,7 +190,7 @@
       }
     }
   },
-  "onHold": "In de wacht",
+  "onHold": "In de wacht {type}",
   "@onHold": {
     "placeholders": {
       "type": {
@@ -210,15 +210,15 @@
   "@popularity": {},
   "prequel": "Prequel",
   "@prequel": {},
-  "synopsis": "Synopsis",
+  "synopsis": "Beschrijving",
   "@synopsis": {},
   "tags": "Tags",
   "@tags": {},
   "total": "Totaal",
   "@total": {},
-  "totalEpisodes": "Totaal afleveringen",
+  "totalEpisodes": "Afleveringen",
   "@totalEpisodes": {},
-  "totalChapters": "Totaal hoofdstukken",
+  "totalChapters": "Hoofdstukken",
   "@totalChapters": {},
   "season": "Seizoen",
   "@season": {},
@@ -230,7 +230,7 @@
   "@meanScore": {},
   "name": "Naam",
   "@name": {},
-  "nameRomaji": "Naam in Romaji",
+  "nameRomaji": "Naam (Romaji)",
   "@nameRomaji": {},
   "relations": "Relaties",
   "@relations": {},
@@ -248,7 +248,7 @@
   "@studio": {},
   "synonyms": "Synoniemen",
   "@synonyms": {},
-  "collapseText": "Samenvouwen",
+  "collapseText": "toon minder",
   "@collapseText": {},
   "comingSoon": "Komt binnenkort",
   "@comingSoon": {},
@@ -256,11 +256,11 @@
   "@description": {},
   "endDate": "Einddatum",
   "@endDate": {},
-  "expandText": "Uitvouwen",
+  "expandText": "toon meer",
   "@expandText": {},
   "favorites": "Favorieten",
   "@favorites": {},
-  "loginTo": "Inloggen op",
+  "loginTo": "Inloggen bij {service}",
   "@loginTo": {
     "placeholders": {
       "service": {
@@ -282,11 +282,11 @@
   "@home": {},
   "novel": "Roman",
   "@novel": {},
-  "ln": "Lichte Roman",
+  "ln": "Lichtroman",
   "@ln": {},
   "series": "Serie",
   "@series": {},
-  "episode": "Aflevering",
+  "episode": "{count, plural, =1 {Aflevering} other {Afleveringen}}",
   "@episode": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -295,7 +295,7 @@
       }
     }
   },
-  "volume": "Volume",
+  "volume": "{count, plural, =1 {Deel} other {Delen}}",
   "@volume": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -304,7 +304,7 @@
       }
     }
   },
-  "movie": "Film",
+  "movie": "{count, plural, =1 {Film} other {Films}}",
   "@movie": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -313,13 +313,13 @@
       }
     }
   },
-  "confirmLogout": "Bevestig uitloggen",
+  "confirmLogout": "Weet je zeker dat je wilt uitloggen?",
   "@confirmLogout": {},
   "gridView": "Rasterweergave",
   "@gridView": {},
   "chapterRead": "Hoofdstuk gelezen",
   "@chapterRead": {},
-  "available": "Beschikbaar",
+  "available": "Beschikbaar {type}",
   "@available": {
     "placeholders": {
       "type": {
@@ -331,7 +331,7 @@
       }
     }
   },
-  "trending": "Trending",
+  "trending": "Trending {type}",
   "@trending": {
     "placeholders": {
       "type": {
@@ -343,7 +343,7 @@
       }
     }
   },
-  "mostFavourite": "Meest favoriet",
+  "mostFavourite": "Meest favoriete {type}",
   "@mostFavourite": {
     "placeholders": {
       "type": {
@@ -356,7 +356,7 @@
       }
     }
   },
-  "popular": "Populair",
+  "popular": "Populair {type}",
   "@popular": {
     "placeholders": {
       "type": {
@@ -369,7 +369,7 @@
       }
     }
   },
-  "topRated": "Top beoordeeld",
+  "topRated": "Top beoordeelde {type}",
   "@topRated": {
     "placeholders": {
       "type": {
@@ -387,7 +387,7 @@
   "@thisSeason": {},
   "nextSeason": "Volgend seizoen",
   "@nextSeason": {},
-  "planned": "Gepland",
+  "planned": "Geplande {type}",
   "@planned": {
     "placeholders": {
       "type": {
@@ -399,7 +399,7 @@
       }
     }
   },
-  "browse": "Bladeren",
+  "browse": "Bladeren door {type}",
   "@browse": {
     "placeholders": {
       "type": {
@@ -411,7 +411,7 @@
       }
     }
   },
-  "favorite": "Favoriet",
+  "favorite": "Favoriet {type}",
   "@favorite": {
     "placeholders": {
       "type": {
@@ -423,7 +423,7 @@
       }
     }
   },
-  "noDropped": "Geen afgehaakte",
+  "noDropped": "Je hebt nog geen {type} gedropt.",
   "@noDropped": {
     "placeholders": {
       "type": {
@@ -447,7 +447,7 @@
   "@dtu": {},
   "info": "Informatie",
   "@info": {},
-  "list": "Lijst",
+  "list": "{type} Lijst",
   "@list": {
     "placeholders": {
       "type": {
@@ -458,7 +458,7 @@
   },
   "layout": "Indeling",
   "@layout": {},
-  "noFavourites": "Geen favorieten",
+  "noFavourites": "Het lijkt erop dat je niets leuk vindt,\nProbeer een show leuk te vinden om deze hier te houden.",
   "@noFavourites": {},
   "options": "Opties",
   "@options": {},
@@ -468,19 +468,19 @@
   "@recentUpdates": {},
   "search": "Zoeken",
   "@search": {},
-  "sort": "Sorteren",
+  "sort": "Sorteer",
   "@sort": {},
   "watch": "Kijken",
   "@watch": {},
-  "utd": "Bijgewerkt",
+  "utd": "Van boven naar beneden",
   "@utd": {},
-  "comments": "Opmerkingen",
+  "comments": "Reacties",
   "@comments": {},
   "language": "Taal",
   "@language": {},
   "topAiring": "Top uitzending",
   "@topAiring": {},
-  "manageLayout": "Beheer indeling",
+  "manageLayout": "Beheer de {page} pagina-indeling voor {service}",
   "@manageLayout": {
     "placeholders": {
       "service": {
@@ -500,7 +500,7 @@
       }
     }
   },
-  "manageLayoutDescription": "Beheer de indeling van de lijst",
+  "manageLayoutDescription": "Je kunt de indeling voor de {page} pagina beheren door de items te slepen en neer te zetten",
   "@manageLayoutDescription": {
     "placeholders": {
       "page": {
@@ -513,22 +513,24 @@
       }
     }
   },
-  "pickColor": "Kleur kiezen",
+  "pickColor": "Kies een kleur",
   "@pickColor": {},
-  "allCaughtUpNew": "Wat is New?",
+  "allCaughtUpNew": "Alles bijgelezen, wat is er nieuw?",
   "@allCaughtUpNew": {},
-  "droppedAnime": "Afgehaakte anime",
+  "droppedAnime": "Gedropte anime",
   "@droppedAnime": {},
-  "droppedManga": "Afgehaakte manga",
+  "droppedManga": "Gedropte manga",
   "@droppedManga": {},
   "hiddenMedia": "Verborgen media",
   "@hiddenMedia": {},
   "noHiddenMediaFound": "Geen verborgen media gevonden",
   "@noHiddenMediaFound": {},
-  "noOnHold": "Geen in de wacht",
+  "noOnHold": "Het lijkt erop dat je niets in de wacht hebt gezet.",
   "@noOnHold": {},
-  "recommendationsEmptyMessage": "Geen aanbevelingen gevonden",
+  "recommendationsEmptyMessage": "Bekijk/Lees wat Anime of Manga om aanbevelingen te krijgen",
   "@recommendationsEmptyMessage": {},
   "kitsu": "Kitsu",
-  "@kitsu": {}
+  "@kitsu": {},
+  "simkl": "Simkl",
+  "@simkl": {}
 }
