@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
-import '../../Adaptor/Media/Widgets/MediaSection.dart';
-import '../../DataClass/Media.dart';
-import '../../Services/Screens/BaseAnimeScreen.dart';
-import '../../logger.dart';
-import '../Mangayomi/Extensions/extensions_provider.dart';
-import '../Mangayomi/Model/Manga.dart';
-import '../Mangayomi/Model/Source.dart';
-import '../Mangayomi/Search/get_popular.dart';
+import '../../../Adaptor/Media/Widgets/MediaSection.dart';
+import '../../../DataClass/Media.dart';
+import '../../../Services/Screens/BaseMangaScreen.dart';
+import '../../../logger.dart';
+import '../../Mangayomi/Extensions/extensions_provider.dart';
+import '../../Mangayomi/Model/Manga.dart';
+import '../../Mangayomi/Model/Source.dart';
+import '../../Mangayomi/Search/get_popular.dart';
 
-class ExtensionsAnimeScreen extends BaseAnimeScreen {
+class ExtensionsMangaScreen extends BaseMangaScreen {
   var data = Rxn<Map<String, List<Media>>>({});
 
   @override
@@ -23,7 +23,7 @@ class ExtensionsAnimeScreen extends BaseAnimeScreen {
     resetPageData();
     final container = ProviderContainer();
     final sourcesAsyncValue = await container
-        .read(getExtensionsStreamProvider(ItemType.anime).future);
+        .read(getExtensionsStreamProvider(ItemType.manga).future);
     final installedSources = sourcesAsyncValue
         .where((source) => source.isAdded!)
         .toList()
@@ -36,7 +36,7 @@ class ExtensionsAnimeScreen extends BaseAnimeScreen {
           source: source,
           page: 1,
         ))
-            ?.toMedia(isAnime: true);
+            ?.toMedia(isAnime: false);
 
         if (result != null && result.isNotEmpty) {
           trending.value = result;
@@ -53,8 +53,6 @@ class ExtensionsAnimeScreen extends BaseAnimeScreen {
     List<Future<void>> tasks = [];
 
     for (var source in sources) {
-      if (source.name == sources.first.name) continue;
-
       tasks.add(
         () async {
           try {
@@ -62,7 +60,7 @@ class ExtensionsAnimeScreen extends BaseAnimeScreen {
               source: source,
               page: 1,
             ))
-                ?.toMedia(isAnime: true);
+                ?.toMedia(isAnime: false);
             if (result != null && result.isNotEmpty) {
               data.value = {
                 ...data.value!,
@@ -81,7 +79,7 @@ class ExtensionsAnimeScreen extends BaseAnimeScreen {
   }
 
   @override
-  void loadTrending(int page) {}
+  void loadTrending(String type) {}
 
   @override
   List<Widget> mediaContent(BuildContext context) {
@@ -106,7 +104,7 @@ class ExtensionsAnimeScreen extends BaseAnimeScreen {
   }
 
   @override
-  int get refreshID => 90;
+  int get refreshID => 91;
 
   @override
   void resetPageData() {
