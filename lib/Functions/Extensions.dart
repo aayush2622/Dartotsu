@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
+import '../Services/MediaService.dart';
+import '../Services/ServiceSwitcher.dart';
 import '../main.dart';
 
 extension IntExtension on int {
@@ -24,5 +27,11 @@ extension IntExtension on int {
   double screenHeight() {
     var context = navigatorKey.currentContext ?? Get.context;
     return MediaQuery.of(context!).size.height;
+  }
+}
+
+extension Stuff on BuildContext {
+  MediaService currentService({bool listen = true}) {
+    return Provider.of<MediaServiceProvider>(this,listen: listen).currentService;
   }
 }

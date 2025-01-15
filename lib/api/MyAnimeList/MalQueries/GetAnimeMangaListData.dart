@@ -6,11 +6,11 @@ extension on MalQueries {
 
   Future<List<Media>> processMediaResponse(MediaResponse? data) async {
     return await compute(
-        (data) =>
-            data
-                ?.where((m) => m.node != null)
-                .map((m) => Media.fromMal(m.node!))
-                .toList() ??
+            (data) =>
+        data
+            ?.where((m) => m.node != null)
+            .map((m) => Media.fromMal(m.node!))
+            .toList() ??
             [],
         data?.data);
   }

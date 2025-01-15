@@ -146,5 +146,389 @@
   "theme": "Giao diện",
   "@theme": {},
   "themeDescription": "Tùy chỉnh giao diện và phong cách của ứng dụng",
-  "@themeDescription": {}
+  "@themeDescription": {},
+  "ln": "Light Novel",
+  "@ln": {},
+  "series": "Loạt phim",
+  "@series": {},
+  "season": "Mùa",
+  "@season": {},
+  "episode": "Tập",
+  "@episode": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "chapter": "Chương",
+  "@chapter": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "volume": "Tập sách",
+  "@volume": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "movie": "Phim",
+  "@movie": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "genres": "Thể loại",
+  "@genres": {},
+  "calendar": "Lịch",
+  "@calendar": {},
+  "dtu": "Dịch đến hiện tại",
+  "@dtu": {},
+  "manageLayout": "Quản lý bố cục",
+  "@manageLayout": {
+    "placeholders": {
+      "service": {
+        "type": "String",
+        "examples": [
+          "Anilist",
+          "MAL"
+        ]
+      },
+      "page": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Home",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "manageLayoutDescription": "Tùy chỉnh bố cục giao diện",
+  "@manageLayoutDescription": {
+    "placeholders": {
+      "page": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Home",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "confirmLogout": "Xác nhận đăng xuất",
+  "@confirmLogout": {},
+  "gridView": "Dạng lưới",
+  "@gridView": {},
+  "listView": "Dạng danh sách",
+  "@listView": {},
+  "compactView": "Dạng gọn",
+  "@compactView": {},
+  "episodeWatched": "Tập đã xem",
+  "@episodeWatched": {},
+  "mostFavourite": "Được yêu thích nhất",
+  "@mostFavourite": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga",
+          "Manhwa"
+        ]
+      }
+    }
+  },
+  "popular": "Phổ biến",
+  "@popular": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga",
+          "Manhwa"
+        ]
+      }
+    }
+  },
+  "topRated": "Được đánh giá cao nhất",
+  "@topRated": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga",
+          "Manhwa",
+          "Series"
+        ]
+      }
+    }
+  },
+  "thisSeason": "Mùa này",
+  "@thisSeason": {},
+  "nextSeason": "Mùa sau",
+  "@nextSeason": {},
+  "previousSeason": "Mùa trước",
+  "@previousSeason": {},
+  "noDropped": "Không có bị bỏ dở",
+  "@noDropped": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "characters": "Nhân vật",
+  "@characters": {},
+  "favorites": "Yêu thích",
+  "@favorites": {},
+  "format": "Định dạng",
+  "@format": {},
+  "meanScore": "Điểm trung bình",
+  "@meanScore": {},
+  "name": "Tên",
+  "@name": {},
+  "prequel": "Tiền truyện",
+  "@prequel": {},
+  "relations": "Liên quan",
+  "@relations": {},
+  "sequel": "Hậu truyện",
+  "@sequel": {},
+  "source": "Nguồn",
+  "@source": {},
+  "staff": "Nhân viên",
+  "@staff": {},
+  "startDate": "Ngày bắt đầu",
+  "@startDate": {},
+  "status": "Trạng thái",
+  "@status": {},
+  "studio": "Xưởng phim",
+  "@studio": {},
+  "synonyms": "Từ đồng nghĩa",
+  "@synonyms": {},
+  "tags": "Thẻ",
+  "@tags": {},
+  "total": "Tổng",
+  "@total": {},
+  "totalEpisodes": "Tổng số tập",
+  "@totalEpisodes": {},
+  "totalChapters": "Tổng số chương",
+  "@totalChapters": {},
+  "author": "Tác giả",
+  "@author": {},
+  "averageDuration": "Thời lượng trung bình",
+  "@averageDuration": {},
+  "collapseText": "Thu gọn",
+  "@collapseText": {},
+  "comingSoon": "Sắp ra mắt",
+  "@comingSoon": {},
+  "description": "Mô tả",
+  "@description": {},
+  "endDate": "Ngày kết thúc",
+  "@endDate": {},
+  "expandText": "Mở rộng",
+  "@expandText": {},
+  "nameRomaji": "Tên Romaji",
+  "@nameRomaji": {},
+  "popularity": "Độ phổ biến",
+  "@popularity": {},
+  "synopsis": "Tóm tắt",
+  "@synopsis": {},
+  "loginTo": "Đăng nhập vào",
+  "@loginTo": {
+    "placeholders": {
+      "service": {
+        "type": "String",
+        "examples": [
+          "Anilist",
+          "MyAnimeList",
+          "Kitsu",
+          "Discord"
+        ]
+      }
+    }
+  },
+  "manhwa": "Manhwa",
+  "@manhwa": {},
+  "manhua": "Manhua",
+  "@manhua": {},
+  "home": "Trang chủ",
+  "@home": {},
+  "novel": "Tiểu thuyết",
+  "@novel": {},
+  "chapterRead": "Chương đã đọc",
+  "@chapterRead": {},
+  "available": "Có sẵn",
+  "@available": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "installed": "Đã cài đặt",
+  "@installed": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Extensions"
+        ]
+      }
+    }
+  },
+  "trending": "Xu hướng",
+  "@trending": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "activity": "Hoạt động",
+  "@activity": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "planned": "Dự kiến",
+  "@planned": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "browse": "Duyệt",
+  "@browse": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "favorite": "Yêu thích",
+  "@favorite": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "onHold": "Tạm dừng",
+  "@onHold": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "continueWatching": "Tiếp tục xem",
+  "@continueWatching": {},
+  "recommended": "Được đề xuất",
+  "@recommended": {},
+  "noFavourites": "Không có mục yêu thích",
+  "@noFavourites": {},
+  "comments": "Bình luận",
+  "@comments": {},
+  "addToList": "Thêm vào danh sách",
+  "@addToList": {},
+  "continueReading": "Tiếp tục đọc",
+  "@continueReading": {},
+  "info": "Thông tin",
+  "@info": {},
+  "language": "Ngôn ngữ",
+  "@language": {},
+  "list": "Danh sách",
+  "@list": {
+    "placeholders": {
+      "type": {
+        "examples": "Anime list",
+        "type": "String"
+      }
+    }
+  },
+  "layout": "Bố cục",
+  "@layout": {},
+  "noHiddenMediaFound": "Không tìm thấy phương tiện ẩn",
+  "@noHiddenMediaFound": {},
+  "read": "Đọc",
+  "@read": {},
+  "search": "Tìm kiếm",
+  "@search": {},
+  "scanlators": "Nhóm dịch",
+  "@scanlators": {},
+  "options": "Tùy chọn",
+  "@options": {},
+  "sort": "Sắp xếp",
+  "@sort": {},
+  "topAiring": "Đang phát sóng hàng đầu",
+  "@topAiring": {},
+  "watch": "Xem",
+  "@watch": {},
+  "utd": "Cập nhật đến hiện tại",
+  "@utd": {},
+  "pickColor": "Chọn màu",
+  "@pickColor": {},
+  "allCaughtUpNew": "Bạn đã xem hết nội dung mới",
+  "@allCaughtUpNew": {},
+  "droppedAnime": "Anime bị bỏ dở",
+  "@droppedAnime": {},
+  "droppedManga": "Manga bị bỏ dở",
+  "@droppedManga": {},
+  "hiddenMedia": "Phương tiện ẩn",
+  "@hiddenMedia": {},
+  "noOnHold": "Không có tạm dừng",
+  "@noOnHold": {},
+  "recentUpdates": "Cập nhật gần đây",
+  "@recentUpdates": {},
+  "recommendationsEmptyMessage": "Không có đề xuất nào",
+  "@recommendationsEmptyMessage": {},
+  "kitsu": "Kitsu",
+  "@kitsu": {}
 }

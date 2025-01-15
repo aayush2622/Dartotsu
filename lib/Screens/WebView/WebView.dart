@@ -43,13 +43,20 @@ class _MangaWebViewState extends ConsumerState<MangaWebView> {
 
       final timer = Timer.periodic(const Duration(seconds: 1), (timer) async {
         try {
-          final cookieList = [];//await _desktopWebview!.getAllCookies();
+          final cookies = await _desktopWebview!.evaluateJavaScript('document.cookie') ?? "";
+          final cookieList = cookies
+              .toString()
+              .split('; ')
+              .map((cookie) {
+            final parts = cookie.split('=');
+            return {'name': parts[0], 'value': parts.sublist(1).join('=')};
+          })
+              .toList();
           final ua = await _desktopWebview!
               .evaluateJavaScript("navigator.userAgent") ??
               "";
-          final cookie =
-          cookieList.map((e) => "${e.name}=${e.value}").join(";");
-          await MClient.setCookie(_url, ua, null, cookie: cookie);
+          final cookieString = cookieList.map((e) => "${e['name']}=${e['value']}").join(";");
+          await MClient.setCookie(_url, ua, null, cookie: cookieString);
         } catch (_) {}
       });
       _desktopWebview!

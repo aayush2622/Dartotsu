@@ -88,6 +88,12 @@ jobs:
           echo "keyPassword=$KEY_PASSWORD" >> android/key.properties
           echo "keyAlias=$KEY_ALIAS" >> android/key.properties
           echo "storeFile=dartotsu.jks" >> android/key.properties
+      # Create .env:
+      - name: Setup env File
+        env:
+          SIMKL_SECRET: ${{ secrets.SIMKL_SECRET }}
+        run: |
+          echo "SIMKL_SECRET= $SIMKL_SECRET" > .env
 
       # Configure Gradle for faster builds
       - name: Configure Gradle
@@ -171,6 +177,12 @@ jobs:
         run: |
           mkdir $env:USERPROFILE\certs
           [System.IO.File]::WriteAllBytes("$env:USERPROFILE\certs\Dartotsu.pfx", [Convert]::FromBase64String("${{secrets.PFX_FILE}}"))
+      # Create .env:
+      - name: Setup env File
+        env:
+          SIMKL_SECRET: ${{ secrets.SIMKL_SECRET }}
+        run: |
+          echo "SIMKL_SECRET= $env:SIMKL_SECRET" > .env
 
       # Setup Flutter with caching
       - name: Setup Flutter
@@ -247,6 +259,12 @@ jobs:
           key: ${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.yaml') }}
           restore-keys: |
             ${{ runner.os }}-flutter-
+      # Create .env:
+      - name: Setup env File
+        env:
+          SIMKL_SECRET: ${{ secrets.SIMKL_SECRET }}
+        run: |
+          echo "SIMKL_SECRET= $SIMKL_SECRET" > .env
 
       # Step 5: Fetch Flutter dependencies
       - name: Fetch Flutter dependencies
@@ -295,6 +313,14 @@ jobs:
         with:
           flutter-version: 3.27.1
           cache: true
+      
+      - name: Setup .env File for macOS
+        env:
+          SIMKL_SECRET: ${{ secrets.SIMKL_SECRET }}
+        run: |
+          echo "SIMKL_SECRET= $SIMKL_SECRET" > .env
+        shell: bash
+        
 
       # Step 3 Get Dependencies
       - name: Get Dependencies

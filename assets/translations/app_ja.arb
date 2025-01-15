@@ -9,7 +9,7 @@
   "@incognitoModeDescription": {},
   "hidePrivate": "プライベートを非表示",
   "@hidePrivate": {},
-  "hidePrivateDescription": "ホームページからプライベートメディアを隠す",
+  "hidePrivateDescription": "ホームページからプライベートシリーズを隠す.",
   "@hidePrivateDescription": {},
   "incognitoMode": "インコグニートモード",
   "@incognitoMode": {},
@@ -67,7 +67,7 @@
   "@donationGoal": {},
   "enableDarkMode": "ダークモードを有効にする",
   "@enableDarkMode": {},
-  "extension": "拡張機能",
+  "extension": "{count, plural, =1 {Extension} other {Extensions}}",
   "@extension": {},
   "extensionsDescription": "機能を追加するために拡張機能をインストールして管理",
   "@extensionsDescription": {},
@@ -83,7 +83,7 @@
   "@fontSizeDescription": {},
   "fontWeight": "フォントウェイト",
   "@fontWeight": {},
-  "logout": "ログアウト",
+  "logout": "ログアウト {type}",
   "@logout": {},
   "fontWeightDescription": "字幕のフォントウェイト",
   "@fontWeightDescription": {},
@@ -146,5 +146,389 @@
   "theme": "テーマ",
   "@theme": {},
   "themeDescription": "アプリの外観と雰囲気をカスタマイズする",
-  "@themeDescription": {}
+  "@themeDescription": {},
+  "ln": "ライトノベル",
+  "@ln": {},
+  "manageLayout": "{page}ページレイアウトを管理 {service}",
+  "@manageLayout": {
+    "placeholders": {
+      "service": {
+        "type": "String",
+        "examples": [
+          "Anilist",
+          "MAL"
+        ]
+      },
+      "page": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Home",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "noDropped": "まだ{type}を落としません.",
+  "@noDropped": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "manhwa": "ログイン",
+  "@manhwa": {},
+  "volume": "{count, plural, =1 {Volume} other {Volumes}}",
+  "@volume": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "kitsu": "トピックス",
+  "@kitsu": {},
+  "novel": "ノベル",
+  "@novel": {},
+  "loginTo": "{service}にログイン",
+  "@loginTo": {
+    "placeholders": {
+      "service": {
+        "type": "String",
+        "examples": [
+          "Anilist",
+          "MyAnimeList",
+          "Kitsu",
+          "Discord"
+        ]
+      }
+    }
+  },
+  "activity": "{count, plural, =1 {Activity} other {Activities}}",
+  "@activity": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "noOnHold": "ホールドに何も入れていないように見えます.",
+  "@noOnHold": {},
+  "continueWatching": "続きを見る",
+  "@continueWatching": {},
+  "previousSeason": "過去のシーズン",
+  "@previousSeason": {},
+  "recommendationsEmptyMessage": "いくつかのアニメやマンガを読んで、推薦を得る",
+  "@recommendationsEmptyMessage": {},
+  "popular": "人気 {type}",
+  "@popular": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga",
+          "Manhwa"
+        ]
+      }
+    }
+  },
+  "confirmLogout": "ログアウトしてもよろしいですか？",
+  "@confirmLogout": {},
+  "installed": "インストール {type}",
+  "@installed": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Extensions"
+        ]
+      }
+    }
+  },
+  "mostFavourite": "ほとんどのお気に入り {type}",
+  "@mostFavourite": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga",
+          "Manhwa"
+        ]
+      }
+    }
+  },
+  "series": "シリーズ",
+  "@series": {},
+  "chapterRead": "章の読み",
+  "@chapterRead": {},
+  "gridView": "グリッドビュー",
+  "@gridView": {},
+  "browse": "ブラウズ {type}",
+  "@browse": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "comingSoon": "SOON(ソノン)",
+  "@comingSoon": {},
+  "episode": "{count, plural, =1 {Episode} other {Episodes}}",
+  "@episode": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "episodeWatched": "エピソード 観戦",
+  "@episodeWatched": {},
+  "popularity": "人気カテゴリー",
+  "@popularity": {},
+  "favorites": "お気に入り",
+  "@favorites": {},
+  "movie": "{count, plural, =1 {Movie} other {Movies}}",
+  "@movie": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "home": "ホーム >",
+  "@home": {},
+  "prequel": "インフォメーション",
+  "@prequel": {},
+  "planned": "予定 {type}",
+  "@planned": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "language": "用語集",
+  "@language": {},
+  "chapter": "{count, plural, =1 {Chapter} other {Chapters}}",
+  "@chapter": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "available": "利用可能な {type}",
+  "@available": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "genres": "ジャンル",
+  "@genres": {},
+  "calendar": "カレンダー",
+  "@calendar": {},
+  "format": "フォーマット",
+  "@format": {},
+  "expandText": "もっと見る",
+  "@expandText": {},
+  "manhua": "ログイン",
+  "@manhua": {},
+  "season": "シーズン",
+  "@season": {},
+  "sequel": "インフォメーション",
+  "@sequel": {},
+  "studio": "スタジオ",
+  "@studio": {},
+  "staff": "スタッフ",
+  "@staff": {},
+  "status": "ステータス",
+  "@status": {},
+  "relations": "インフォメーション",
+  "@relations": {},
+  "source": "ソース",
+  "@source": {},
+  "synonyms": "同義語",
+  "@synonyms": {},
+  "startDate": "開始日",
+  "@startDate": {},
+  "averageDuration": "平均期間",
+  "@averageDuration": {},
+  "collapseText": "より少ないショー",
+  "@collapseText": {},
+  "characters": "キャラクター",
+  "@characters": {},
+  "author": "プロフィール",
+  "@author": {},
+  "description": "シンプシス",
+  "@description": {},
+  "endDate": "終了日",
+  "@endDate": {},
+  "total": "合計:",
+  "@total": {},
+  "tags": "ニュース",
+  "@tags": {},
+  "name": "お名前 (必須)",
+  "@name": {},
+  "meanScore": "平均スコア",
+  "@meanScore": {},
+  "synopsis": "シンプシス",
+  "@synopsis": {},
+  "nameRomaji": "お名前(ローマ字)",
+  "@nameRomaji": {},
+  "totalEpisodes": "エピソード",
+  "@totalEpisodes": {},
+  "totalChapters": "チャプター",
+  "@totalChapters": {},
+  "compactView": "コンパクトビュー",
+  "@compactView": {},
+  "scanlators": "スキャナレーター",
+  "@scanlators": {},
+  "listView": "リストビュー",
+  "@listView": {},
+  "sort": "ツイート",
+  "@sort": {},
+  "thisSeason": "今シーズン",
+  "@thisSeason": {},
+  "trending": "トレンド {type}",
+  "@trending": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "nextSeason": "次のシーズン",
+  "@nextSeason": {},
+  "topRated": "トップ定格{type}",
+  "@topRated": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga",
+          "Manhwa",
+          "Series"
+        ]
+      }
+    }
+  },
+  "onHold": "ホールドで {type}",
+  "@onHold": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "favorite": "お気に入り {type}",
+  "@favorite": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "recommended": "おすすめ商品",
+  "@recommended": {},
+  "list": "{type} 一覧",
+  "@list": {
+    "placeholders": {
+      "type": {
+        "examples": "Anime list",
+        "type": "String"
+      }
+    }
+  },
+  "options": "オプション",
+  "@options": {},
+  "continueReading": "続きを読む",
+  "@continueReading": {},
+  "topAiring": "トップエアリング",
+  "@topAiring": {},
+  "recentUpdates": "最近の更新",
+  "@recentUpdates": {},
+  "hiddenMedia": "隠された媒体",
+  "@hiddenMedia": {},
+  "search": "インフォメーション",
+  "@search": {},
+  "addToList": "リストに追加",
+  "@addToList": {},
+  "comments": "コメント",
+  "@comments": {},
+  "dtu": "アップダウン",
+  "@dtu": {},
+  "info": "インフォメーション",
+  "@info": {},
+  "layout": "レイアウト",
+  "@layout": {},
+  "noFavourites": "何も気にせず、\nここを保ち続けるためのショーを好みましょう.",
+  "@noFavourites": {},
+  "noHiddenMediaFound": "隠れたメディアが見つかりません",
+  "@noHiddenMediaFound": {},
+  "read": "採用情報",
+  "@read": {},
+  "watch": "ウォッチ",
+  "@watch": {},
+  "utd": "ダウンまで",
+  "@utd": {},
+  "manageLayoutDescription": "アイテムのドラッグ&ドロップで{page}ページ用のレイアウトを管理できます",
+  "@manageLayoutDescription": {
+    "placeholders": {
+      "page": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Home",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "pickColor": "色を選ぶ",
+  "@pickColor": {},
+  "droppedManga": "マンガをドロップ",
+  "@droppedManga": {},
+  "droppedAnime": "アニメをドロップ",
+  "@droppedAnime": {},
+  "allCaughtUpNew": "巻き込まれたもの、新しいものは何ですか?",
+  "@allCaughtUpNew": {}
 }

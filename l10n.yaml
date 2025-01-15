@@ -4,13 +4,4 @@ output-dir: lib/l10n
 output-localization-file: app_localizations.dart
 synthetic-package: true
 preferred-supported-locales:
-  - as
-  - de
   - en
-  - es
-  - hi
-  - id
-  - ja
-  - ru
-  - sa
-  - th

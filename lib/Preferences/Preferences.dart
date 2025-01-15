@@ -13,7 +13,7 @@ class PrefName {
   static const showYtButton = Pref(Location.General, 'showYtButton', true);
 
   //home page
-  static const anilistHomeLayout = Pref(Location.General, 'homeLayoutOrder', {
+  static const Pref<Map<dynamic,dynamic>> anilistHomeLayout = Pref(Location.General, 'homeLayoutOrder', {
     'Continue Watching': true,
     'Favourite Anime': false,
     'Planned Anime': false,
@@ -23,7 +23,7 @@ class PrefName {
     'Recommended': true,
   });
 
-  static const malHomeLayout = Pref(Location.General, 'malHomeLayoutOrder', {
+  static const  Pref<Map<dynamic,dynamic>> malHomeLayout = Pref(Location.General, 'malHomeLayoutOrder', {
     'Continue Watching': true,
     'OnHold Anime': false,
     'Planned Anime': true,
@@ -33,6 +33,19 @@ class PrefName {
     'Planned Manga': true,
     'Dropped Manga': false,
   });
+
+  static const  Pref<Map<dynamic,dynamic>> simklHomeLayout = Pref(Location.General, 'simklHomeLayoutOrder', {
+    'Continue Watching Anime': true,
+    'Planned Anime': false,
+    'Dropped Anime': false,
+    'On Hold Anime': false,
+    'Continue Watching Series': true,
+    'Planned Series': false,
+    'Dropped Series': false,
+    'On Hold Series': false,
+    'Planned Movies': true,
+    'Dropped Movies': false,
+  });
   static const anilistRemoveList =
       Pref(Location.General, 'anilistRemoveList', []);
   static const Pref<List<int>> malRemoveList = Pref(Location.General, 'malRemoveList', []);
@@ -40,14 +53,14 @@ class PrefName {
       Pref(Location.General, 'anilistHidePrivate', false);
 
   //anime page
-  static const anilistAnimeLayout = Pref(Location.General, 'animeLayoutOrder', {
+  static const Pref<Map<dynamic,dynamic>> anilistAnimeLayout = Pref(Location.General, 'animeLayoutOrder', {
     'Recent Updates': true,
     'Trending Movies': true,
     'Top Rated Series': true,
     'Most Favourite Series': true,
   });
 
-  static const malAnimeLayout = Pref(Location.General, 'malAnimeLayoutOrder', {
+  static const Pref<Map<dynamic,dynamic>> malAnimeLayout = Pref(Location.General, 'malAnimeLayoutOrder', {
     'Top Airing': true,
     'Trending Movies': true,
     'Top Rated Series': true,
@@ -63,14 +76,14 @@ class PrefName {
   static const MangaDefaultView = Pref(Location.General, 'MangaDefaultView', 0);
 
   //manga page
-  static const anilistMangaLayout = Pref(Location.General, 'mangaLayoutOrder', {
+  static const Pref<Map<dynamic,dynamic>> anilistMangaLayout = Pref(Location.General, 'mangaLayoutOrder', {
     'Trending Manhwa': true,
     'Trending Novels': true,
     'Top Rated Manga': true,
     'Most Favourite Manga': true,
   });
 
-  static const malMangaLayout = Pref(Location.General, 'malMangaLayoutOrder', {
+  static const Pref<Map<dynamic,dynamic>> malMangaLayout = Pref(Location.General, 'malMangaLayoutOrder', {
     'Trending Manhwa': true,
     'Trending Novels': true,
     'Top Rated Manga': true,
@@ -93,7 +106,8 @@ class PrefName {
 
   //Protection
   static const anilistToken = Pref(Location.Protected, 'AnilistToken', '');
-  static const malToken = Pref(Location.Protected, 'MalToken', null);
+  static const Pref<ResponseToken?>  malToken = Pref(Location.Protected, 'MalToken', null);
+  static const simklToken = Pref(Location.Protected, 'SimklToken', '');
   static const discordToken = Pref(Location.Protected, 'DiscordToken', '');
   static const discordUserName =
       Pref(Location.Protected, 'discordUserName', '');

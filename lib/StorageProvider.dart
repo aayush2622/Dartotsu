@@ -19,14 +19,16 @@ class StorageProvider {
     }
 
     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
-    final androidInfo = await deviceInfo.androidInfo;
+     final androidInfo = await deviceInfo.androidInfo;
     if (androidInfo.version.sdkInt <= 29) {
+
       final storagePermission = Permission.storage;
       if (await storagePermission.isGranted) {
         return true;
       }
       final storageStatus = await storagePermission.request();
       return storageStatus.isGranted;
+
     }
 
     final manageStoragePermission = Permission.manageExternalStorage;
@@ -59,7 +61,11 @@ class StorageProvider {
     String basePath;
     final appDir = await getApplicationDocumentsDirectory();
 
-    if (Platform.isIOS || Platform.isMacOS) return appDir;
+    if (Platform.isIOS || Platform.isMacOS) {
+      final dbDir = path.join(appDir.path, 'Dartotsu', subPath ?? '').fixSeparator;
+      await Directory(dbDir).create(recursive: true);
+      return Directory(dbDir);
+    }
 
     if (Platform.isAndroid) {
       basePath = useCustomPath == true

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../DataClass/Media.dart';
+import '../../../Widgets/CustomElevatedButton.dart';
 import '../MediaAdaptor.dart';
 
 Widget MediaSection({
@@ -103,4 +104,32 @@ Widget MediaSection({
       ),
     ],
   );
+}
+List<Widget> buildNullIndicator(BuildContext context, IconData? icon,
+    String? message, String? buttonLabel, void Function()? onPressed) {
+  var theme = Theme.of(context).colorScheme;
+
+  return [
+    Icon(
+      icon,
+      color: theme.onSurface.withValues(alpha: 0.58),
+      size: 32,
+    ),
+    Text(
+      message ?? '',
+      style: TextStyle(
+        fontFamily: 'Poppins',
+        fontSize: 14,
+        color: theme.onSurface.withValues(alpha: 0.58),
+      ),
+    ),
+    if (buttonLabel != null) ...[
+      const SizedBox(height: 24.0),
+      CustomElevatedButton(
+        context: context,
+        onPressed: onPressed,
+        label: buttonLabel,
+      ),
+    ]
+  ];
 }

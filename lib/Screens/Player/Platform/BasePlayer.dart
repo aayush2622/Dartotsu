@@ -11,7 +11,7 @@ abstract class BasePlayer extends GetxController {
   RxBool isBuffering = true.obs;
   RxBool isPlaying = false.obs;
   RxList<SubtitleTrack> subtitles = <SubtitleTrack>[].obs;
-
+  RxList<AudioTrack> audios = <AudioTrack>[].obs;
   Future<void> seek(Duration duration);
   Future<void> play();
   Future<void> pause();
@@ -20,7 +20,7 @@ abstract class BasePlayer extends GetxController {
   Future<void> setRate(double rate);
   Future<void> open(String url,Duration duration);
   Future<void> setSubtitle(String subtitleUri,String language, bool isUri);
-
+  Future<void> setAudio(String audioUri,String language, bool isUri);
   void listenToPlayerStream();
 
   Widget playerWidget();

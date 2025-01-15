@@ -1,5 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:dantotsu/DataClass/Media.dart';
+import 'package:dantotsu/Functions/Extensions.dart';
+import 'package:dantotsu/Preferences/PrefManager.dart';
 import 'package:dantotsu/Screens/Detail/Tabs/Watch/BaseParser.dart';
 import 'package:dantotsu/Screens/Detail/Tabs/Watch/BaseWatchScreen.dart';
 import 'package:flutter/material.dart';
@@ -170,5 +172,22 @@ class AnimeWatchScreenState extends BaseWatchScreen<AnimeWatchScreen> {
       episode.filler =
           _viewModel.fillerEpisodesList.value?[number]?.filler == true;
     });
+    var key = '${context.currentService().getName}_thumbList';
+    Map<dynamic, dynamic>? t = loadCustomData(key);
+
+    var thumbList = (t)?.map(
+          (key, value) => MapEntry(
+        key.toString(),
+        (value as Map<dynamic, dynamic>).map(
+              (k, v) => MapEntry(k.toString(), v as String?),
+        ),
+      ),
+    ) ?? {};
+    for (var i in episodeList.values) {
+      thumbList[mediaData.id.toString()] ??= {};
+
+      thumbList[mediaData.id.toString()]![i.number] = i.thumb;
+    }
+
   }
 }

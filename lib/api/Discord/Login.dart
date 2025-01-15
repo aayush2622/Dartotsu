@@ -1,8 +1,10 @@
 import 'package:dantotsu/api/Discord/Discord.dart';
+import 'package:desktop_webview_window/desktop_webview_window.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
 import '../../Functions/Function.dart';
+import '../../main.dart';
 import 'DiscordService.dart';
 
 
@@ -43,6 +45,7 @@ class MobileLoginState extends State<MobileLogin> {
     return Scaffold(
       appBar: AppBar(title: const Text('Discord Login'),backgroundColor: Colors.transparent,),
       body: InAppWebView(
+        webViewEnvironment: webViewEnvironment,
         initialUrlRequest: URLRequest(
           url: WebUri('https://discord.com/login'),
         ),
@@ -91,5 +94,95 @@ class MobileLoginState extends State<MobileLogin> {
     snackString("Getting Data");
     DiscordService.testRpc();
     Navigator.of(context).pop();
+  }
+}
+class LinuxLogin extends StatefulWidget {
+  const LinuxLogin({super.key});
+
+  @override
+  LinuxLoginState createState() => LinuxLoginState();
+}
+
+class LinuxLoginState extends State<LinuxLogin> {
+  Webview? _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _initializeWebview();
+  }
+
+  Future<void> _initializeWebview() async {
+    final controller = await WebviewWindow.create();
+
+    _controller = controller;
+
+    controller
+      ..setBrightness(Brightness.dark)
+      ..launch('https://discord.com/login');
+
+    controller.addOnUrlRequestCallback((url) async {
+      if (url.startsWith('https://discord.com/login')) {
+        return;
+      }
+
+      await _extractToken();
+    });
+
+    controller.onClose.whenComplete(() {
+      _controller = null;
+    });
+  }
+
+  Future<void> _extractToken() async {
+    try {
+      final result = await _controller?.evaluateJavaScript('''
+        (function() {
+          const wreq = (webpackChunkdiscord_app.push([[''], {}, e => { m = []; for (let c in e.c) m.push(e.c[c]) }]), m)
+            .find(m => m?.exports?.default?.getToken !== void 0).exports.default.getToken();
+          return wreq;
+        })();
+      ''');
+
+      if (result != null && result != 'null') {
+        _login(result.trim().replaceAll('"', ''));
+      } else {
+        _handleError('Failed to retrieve token');
+      }
+    } catch (e) {
+      _handleError('Error extracting token: $e');
+    }
+  }
+
+  void _handleError(String message) {
+    snackString(message);
+    Navigator.of(context).pop();
+  }
+
+  void _login(String token) async {
+    snackString("Logged in successfully");
+    Discord.saveToken(token);
+    snackString("Getting Data");
+    DiscordService.testRpc();
+    Navigator.of(context).pop();
+  }
+
+  @override
+  void dispose() {
+    _controller?.close();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Discord Login'),
+        backgroundColor: Colors.transparent,
+      ),
+      body: const Center(
+        child: Text('Launching webview for Discord Login...'),
+      ),
+    );
   }
 }

@@ -7,6 +7,7 @@ import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -16,6 +17,7 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:isar/isar.dart';
 import 'package:media_kit/media_kit.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -32,6 +34,7 @@ import 'api/Discord/Discord.dart';
 import 'api/TypeFactory.dart';
 import 'logger.dart';
 import 'package:path/path.dart' as p;
+
 late Isar isar;
 WebViewEnvironment? webViewEnvironment;
 
@@ -54,6 +57,7 @@ void main(List<String> args) async {
     },
     (error, stackTrace) {
       Logger.log('Uncaught error: $error\n$stackTrace');
+      throw('Uncaught error: $error\n$stackTrace');
     },
     zoneSpecification: ZoneSpecification(
       print: (Zone self, ZoneDelegate parent, Zone zone, String message) {
@@ -65,8 +69,11 @@ void main(List<String> args) async {
 }
 
 Future init() async {
-  await PrefManager.init();
   await StorageProvider().requestPermission();
+  if (!Platform.isIOS) {
+    await dotenv.load(fileName: ".env");
+  }
+  await PrefManager.init();
   isar = await StorageProvider().initDB(null);
   await Logger.init();
   initializeMediaServices();
@@ -84,12 +91,12 @@ Future init() async {
 
   if (!kIsWeb && defaultTargetPlatform == TargetPlatform.windows) {
     final availableVersion = await WebViewEnvironment.getAvailableVersion();
-    assert(availableVersion != null,
-    'Failed to find an installed WebView2 runtime or non-stable Microsoft Edge installation.');
-    final document = await StorageProvider().getDirectory();
-    webViewEnvironment = await WebViewEnvironment.create(
-        settings: WebViewEnvironmentSettings(
-            userDataFolder: p.join(document!.path, 'flutter_inappwebview'),),);
+    if (availableVersion != null) {
+      final document = await getApplicationDocumentsDirectory();
+      webViewEnvironment = await WebViewEnvironment.create(
+          settings: WebViewEnvironmentSettings(
+              userDataFolder: p.join(document.path, 'flutter_inappwebview')));
+    }
   }
   Get.config(
     enableLog: true,
@@ -126,7 +133,7 @@ class MyApp extends StatelessWidget {
             GlobalCupertinoLocalizations.delegate,
           ],
           supportedLocales: AppLocalizations.supportedLocales,
-          locale: Locale( loadCustomData("defaultLanguage") ?? 'en'),
+          locale: Locale(loadCustomData("defaultLanguage") ?? 'en'),
           navigatorKey: navigatorKey,
           title: 'Dartotsu',
           themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
@@ -149,8 +156,8 @@ class MainActivity extends StatefulWidget {
 
 FloatingBottomNavBar? navbar;
 
-class MainActivityState extends State<MainActivity> with WidgetsBindingObserver {
-
+class MainActivityState extends State<MainActivity>
+    with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
@@ -164,9 +171,7 @@ class MainActivityState extends State<MainActivity> with WidgetsBindingObserver 
   @override
   Widget build(BuildContext context) {
     Discord.getSavedToken();
-    var service = Provider
-        .of<MediaServiceProvider>(context)
-        .currentService;
+    var service = Provider.of<MediaServiceProvider>(context).currentService;
     navbar = FloatingBottomNavBar(
       selectedIndex: _selectedIndex,
       onTabSelected: _onTabSelected,
@@ -176,16 +181,16 @@ class MainActivityState extends State<MainActivity> with WidgetsBindingObserver 
       focusNode: FocusNode(),
       autofocus: true,
       onKey: (RawKeyEvent event) async {
-        if (event is RawKeyDownEvent ) {
+        if (event is RawKeyDownEvent) {
           if (event.logicalKey == LogicalKeyboardKey.escape) {
             if (Navigator.of(context).canPop()) {
               Navigator.of(context).pop();
             }
           }
           if (event.logicalKey == LogicalKeyboardKey.f11) {
-            WindowManager.instance.setFullScreen(!await WindowManager.instance.isFullScreen());
+            WindowManager.instance
+                .setFullScreen(!await WindowManager.instance.isFullScreen());
           }
-
         }
       },
       child: Scaffold(

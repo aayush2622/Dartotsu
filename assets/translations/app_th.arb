@@ -1,7 +1,7 @@
 {
   "cursedSpeedDescription": "สำหรับผู้ที่มีเวลาน้อย",
   "@cursedSpeedDescription": {},
-  "extension": "ส่วนเสริม",
+  "extension": "{count, plural, =1 {Extension} other {Extensions}}",
   "@extension": {},
   "enableDarkMode": "เปิดโหมดมืด",
   "@enableDarkMode": {},
@@ -75,7 +75,7 @@
   "@fontWeightDescription": {},
   "hidePrivate": "ซ่อนส่วนตัว",
   "@hidePrivate": {},
-  "hidePrivateDescription": "ซ่อนสื่อส่วนตัวจากหน้าแรก",
+  "hidePrivateDescription": "ฮาร์ดคอร์ ชุดส่วนตัวจากหน้าแรก.",
   "@hidePrivateDescription": {},
   "incognitoMode": "โหมดไม่ระบุตัวตน",
   "@incognitoMode": {},
@@ -83,7 +83,7 @@
   "@incognitoModeDescription": {},
   "login": "เข้าสู่ระบบ",
   "@login": {},
-  "logout": "ออกจากระบบ",
+  "logout": "โลโก้ {type}",
   "@logout": {},
   "mal": "MyAnimeList",
   "@mal": {},
@@ -146,5 +146,389 @@
   "theme": "ธีม",
   "@theme": {},
   "yes": "ใช่",
-  "@yes": {}
+  "@yes": {},
+  "loginTo": "เข้าสู่ระบบ",
+  "@loginTo": {
+    "placeholders": {
+      "service": {
+        "type": "String",
+        "examples": [
+          "Anilist",
+          "MyAnimeList",
+          "Kitsu",
+          "Discord"
+        ]
+      }
+    }
+  },
+  "manhwa": "มันวา",
+  "@manhwa": {},
+  "manhua": "มานฮัว",
+  "@manhua": {},
+  "home": "หน้าหลัก",
+  "@home": {},
+  "ln": "นิยายแสง",
+  "@ln": {},
+  "series": "ซีรีส์",
+  "@series": {},
+  "season": "ฤดูกาล",
+  "@season": {},
+  "episode": "ตอน",
+  "@episode": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "chapter": "บท",
+  "@chapter": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "volume": "เล่ม",
+  "@volume": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "movie": "ภาพยนตร์",
+  "@movie": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "genres": "ประเภท",
+  "@genres": {},
+  "calendar": "ปฏิทิน",
+  "@calendar": {},
+  "scanlators": "สแกนเลเตอร์",
+  "@scanlators": {},
+  "gridView": "มุมมองแบบตาราง",
+  "@gridView": {},
+  "listView": "มุมมองแบบรายการ",
+  "@listView": {},
+  "compactView": "มุมมองแบบย่อ",
+  "@compactView": {},
+  "sort": "จัดเรียง",
+  "@sort": {},
+  "episodeWatched": "ตอนที่ดูแล้ว",
+  "@episodeWatched": {},
+  "chapterRead": "บทที่อ่านแล้ว",
+  "@chapterRead": {},
+  "available": "มีอยู่",
+  "@available": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "installed": "ติดตั้งแล้ว",
+  "@installed": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Extensions"
+        ]
+      }
+    }
+  },
+  "trending": "กำลังเป็นที่นิยม",
+  "@trending": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "mostFavourite": "ที่ชื่นชอบที่สุด",
+  "@mostFavourite": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga",
+          "Manhwa"
+        ]
+      }
+    }
+  },
+  "popular": "ยอดนิยม",
+  "@popular": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga",
+          "Manhwa"
+        ]
+      }
+    }
+  },
+  "topRated": "ที่ได้รับคะแนนสูงสุด",
+  "@topRated": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga",
+          "Manhwa",
+          "Series"
+        ]
+      }
+    }
+  },
+  "thisSeason": "ฤดูกาลนี้",
+  "@thisSeason": {},
+  "nextSeason": "ฤดูกาลถัดไป",
+  "@nextSeason": {},
+  "previousSeason": "ฤดูกาลที่ผ่านมา",
+  "@previousSeason": {},
+  "planned": "ที่วางแผน",
+  "@planned": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "browse": "เรียกดู",
+  "@browse": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "favorite": "โปรด",
+  "@favorite": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "onHold": "ระงับ",
+  "@onHold": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "noDropped": "ไม่ถูกทิ้ง",
+  "@noDropped": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "favorites": "โปรด",
+  "@favorites": {},
+  "format": "รูปแบบ",
+  "@format": {},
+  "meanScore": "คะแนนเฉลี่ย",
+  "@meanScore": {},
+  "totalEpisodes": "จำนวนตอนทั้งหมด",
+  "@totalEpisodes": {},
+  "totalChapters": "จำนวนบททั้งหมด",
+  "@totalChapters": {},
+  "relations": "ความสัมพันธ์",
+  "@relations": {},
+  "sequel": "ภาคต่อ",
+  "@sequel": {},
+  "source": "แหล่งที่มา",
+  "@source": {},
+  "staff": "ทีมงาน",
+  "@staff": {},
+  "startDate": "วันเริ่มต้น",
+  "@startDate": {},
+  "status": "สถานะ",
+  "@status": {},
+  "studio": "สตูดิโอ",
+  "@studio": {},
+  "synonyms": "คำพ้องความหมาย",
+  "@synonyms": {},
+  "author": "ผู้เขียน",
+  "@author": {},
+  "averageDuration": "ระยะเวลาที่เฉลี่ย",
+  "@averageDuration": {},
+  "characters": "ตัวละคร",
+  "@characters": {},
+  "collapseText": "ยุบข้อความ",
+  "@collapseText": {},
+  "comingSoon": "กำลังจะมา",
+  "@comingSoon": {},
+  "description": "คำอธิบาย",
+  "@description": {},
+  "endDate": "วันสิ้นสุด",
+  "@endDate": {},
+  "expandText": "ขยายข้อความ",
+  "@expandText": {},
+  "name": "ชื่อ",
+  "@name": {},
+  "nameRomaji": "ชื่อ (โรมาji)",
+  "@nameRomaji": {},
+  "popularity": "ความนิยม",
+  "@popularity": {},
+  "prequel": "ภาคก่อน",
+  "@prequel": {},
+  "recommended": "แนะนำ",
+  "@recommended": {},
+  "synopsis": "เรื่องย่อ",
+  "@synopsis": {},
+  "tags": "แท็ก",
+  "@tags": {},
+  "total": "ทั้งหมด",
+  "@total": {},
+  "novel": "นวนิยาย",
+  "@novel": {},
+  "confirmLogout": "ยืนยันการออกจากระบบ",
+  "@confirmLogout": {},
+  "language": "ภาษา",
+  "@language": {},
+  "activity": "กิจกรรม",
+  "@activity": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "droppedAnime": "อนิเมะที่ถูกทิ้ง",
+  "@droppedAnime": {},
+  "hiddenMedia": "สื่อที่ซ่อน",
+  "@hiddenMedia": {},
+  "continueReading": "อ่านต่อ",
+  "@continueReading": {},
+  "read": "อ่าน",
+  "@read": {},
+  "addToList": "เพิ่มในรายการ",
+  "@addToList": {},
+  "comments": "ความคิดเห็น",
+  "@comments": {},
+  "continueWatching": "ดูต่อ",
+  "@continueWatching": {},
+  "dtu": "ดาวน์โหลด",
+  "@dtu": {},
+  "info": "ข้อมูล",
+  "@info": {},
+  "list": "รายการ",
+  "@list": {
+    "placeholders": {
+      "type": {
+        "examples": "Anime list",
+        "type": "String"
+      }
+    }
+  },
+  "layout": "รูปแบบ",
+  "@layout": {},
+  "noFavourites": "ไม่มีโปรด",
+  "@noFavourites": {},
+  "options": "ตัวเลือก",
+  "@options": {},
+  "search": "ค้นหา",
+  "@search": {},
+  "topAiring": "ที่กำลังออกอากาศ",
+  "@topAiring": {},
+  "watch": "ดู",
+  "@watch": {},
+  "utd": "อัพเดท",
+  "@utd": {},
+  "manageLayout": "จัดการรูปแบบ",
+  "@manageLayout": {
+    "placeholders": {
+      "service": {
+        "type": "String",
+        "examples": [
+          "Anilist",
+          "MAL"
+        ]
+      },
+      "page": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Home",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "manageLayoutDescription": "จัดการรูปแบบหน้าจอ",
+  "@manageLayoutDescription": {
+    "placeholders": {
+      "page": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Home",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "pickColor": "เลือกสี",
+  "@pickColor": {},
+  "allCaughtUpNew": "ทั้งหมดจับอะไร?",
+  "@allCaughtUpNew": {},
+  "droppedManga": "มังงะที่ถูกทิ้ง",
+  "@droppedManga": {},
+  "noHiddenMediaFound": "ไม่พบสื่อที่ซ่อน",
+  "@noHiddenMediaFound": {},
+  "noOnHold": "ไม่มีที่ระงับ",
+  "@noOnHold": {},
+  "recentUpdates": "อัพเดทล่าสุด",
+  "@recentUpdates": {},
+  "recommendationsEmptyMessage": "ไม่มีคำแนะนำ",
+  "@recommendationsEmptyMessage": {},
+  "kitsu": "ชุด",
+  "@kitsu": {}
 }

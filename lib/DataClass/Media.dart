@@ -1,9 +1,12 @@
-import '../Preferences/HiveDataClasses/Selected/Selected.dart';
+import 'package:dantotsu/Functions/string_extensions.dart';
+
+import '../Preferences/IsarDataClasses/Selected/Selected.dart';
 import '../api/Anilist/Data/fuzzyData.dart';
 import '../api/Anilist/Data/media.dart' as anilistApi;
 import '../api/Anilist/Data/others.dart';
 import '../api/EpisodeDetails/GetMediaIDs/GetMediaIDs.dart';
 import '../api/MyAnimeList/Data/media.dart' as malApi;
+import '../api/Simkl/Data/Media.dart' as simklApi;
 import 'Anime.dart';
 import 'Author.dart';
 import 'Character.dart';
@@ -151,8 +154,9 @@ class Media {
   static Media mediaData(anilistApi.Media apiMedia) {
     return Media(
       id: apiMedia.id,
-      idMAL: apiMedia.idMal ?? GetMediaIDs.fromID(type: AnimeIDType.anilistId, id: apiMedia.id)
-          ?.malId,
+      idMAL: apiMedia.idMal ??
+          GetMediaIDs.fromID(type: AnimeIDType.anilistId, id: apiMedia.id)
+              ?.malId,
       name: apiMedia.title?.english,
       nameRomaji: apiMedia.title?.romaji ?? '',
       userPreferredName: apiMedia.title?.userPreferred ?? '',
@@ -277,5 +281,81 @@ class Media {
             )
           : null,
     );
+  }
+
+  static Media fromSimklAnime(simklApi.Anime apiMedia) {
+    var cover = 'https://wsrv.nl/?url=https://simkl.in/posters/${apiMedia.show?.poster}_m.webp';
+    return Media(
+      id: apiMedia.show!.ids!.simkl!,
+      idMAL: apiMedia.show!.ids!.mal?.toNullInt(),
+      nameRomaji: apiMedia.show!.title ?? '',
+      userPreferredName: apiMedia.show!.title ?? '',
+      cover: cover,
+      banner: cover,
+      userStatus: apiMedia.status?.name,
+      userProgress: apiMedia.watchedEpisodesCount,
+      userScore: (apiMedia.userRating?.toInt() ?? 0) * 10,
+      meanScore:  ((apiMedia.rating ?? 0) * 10).toInt(),
+      format: 'anime',
+      status: mapSimklAiringStatus(apiMedia.releaseStatus?.toLowerCase() ?? 'UNKNOWN'),
+      anime: Anime(
+        totalEpisodes: apiMedia.totalEpisodesCount,
+      ),
+      isAdult: false,
+    );
+  }
+  static Media fromSimklSeries(simklApi.ShowElement apiMedia) {
+    var cover = 'https://wsrv.nl/?url=https://simkl.in/posters/${apiMedia.show?.poster}_m.webp';
+    return Media(
+      id: apiMedia.show!.ids!.simkl!,
+      idMAL: apiMedia.show?.ids!.mal?.toNullInt(),
+      nameRomaji: apiMedia.show?.title ?? '',
+      userPreferredName: apiMedia.show?.title ?? '',
+      cover: cover,
+      banner: cover,
+      userStatus: apiMedia.status?.name,
+      userProgress: apiMedia.watchedEpisodesCount,
+      userScore: (apiMedia.userRating?.toInt() ?? 0) * 10,
+      meanScore: ((apiMedia.rating ?? 0) * 10).toInt(),
+      status: mapSimklAiringStatus(apiMedia.releaseStatus?.toLowerCase() ?? 'UNKNOWN'),
+      format:'tvShow',
+      anime: Anime(
+        totalEpisodes: apiMedia.totalEpisodesCount,
+      ),
+      isAdult: false,
+    );
+  }
+  static Media fromSimklMovies(simklApi.MovieElement apiMedia) {
+    var cover = 'https://wsrv.nl/?url=https://simkl.in/posters/${apiMedia.movie?.poster}_m.webp';
+    return Media(
+      id: apiMedia.movie!.ids!.simkl!,
+      idMAL: apiMedia.movie!.ids!.mal?.toNullInt(),
+      nameRomaji: apiMedia.movie!.title ?? '',
+      userPreferredName: apiMedia.movie!.title ?? '',
+      cover: cover,
+      banner: cover,
+      userStatus: apiMedia.status?.name,
+      userProgress: apiMedia.watchedEpisodesCount,
+      userScore: (apiMedia.userRating?.toInt() ?? 0) * 10,
+      meanScore:  ((apiMedia.rating ?? 0) * 10).toInt(),
+      status: mapSimklAiringStatus(apiMedia.releaseStatus?.toLowerCase() ?? 'UNKNOWN'),
+      format:'movie',
+      anime: Anime(
+        totalEpisodes: 1,
+      ),
+      isAdult: false,
+    );
+  }
+  static String mapSimklAiringStatus(String status) {
+    switch (status) {
+      case 'ended':
+        return 'FINISHED';
+      case 'ongoing':
+        return 'RELEASING';
+      case 'upcoming':
+        return 'NOT_YET_RELEASED';
+      default:
+        return status.toUpperCase();
+    }
   }
 }

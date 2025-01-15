@@ -11,7 +11,6 @@ import '../../../Functions/Function.dart';
 import '../../../Preferences/PrefManager.dart';
 
 import '../../../Theme/LanguageSwitcher.dart';
-import '../../../Widgets/CustomElevatedButton.dart';
 import '../../../main.dart';
 import '../Anilist.dart';
 
@@ -179,7 +178,7 @@ class AnilistHomeScreen extends BaseHomeScreen {
         mediaList: section.list,
         isLarge: section.isLarge,
         onLongPressTitle: section.onLongPressTitle,
-        customNullListIndicator: _buildNullIndicator(
+        customNullListIndicator: buildNullIndicator(
           context,
           section.emptyIcon,
           section.emptyMessage,
@@ -196,7 +195,7 @@ class AnilistHomeScreen extends BaseHomeScreen {
       title: getString.hiddenMedia,
       mediaList: hidden.value,
       onLongPressTitle: () => showHidden.value = !showHidden.value,
-      customNullListIndicator: _buildNullIndicator(
+      customNullListIndicator: buildNullIndicator(
         context,
         Icons.visibility_off,
         getString.noHiddenMediaFound,
@@ -216,35 +215,6 @@ class AnilistHomeScreen extends BaseHomeScreen {
           children: result,
         );
       }),
-    ];
-  }
-
-  List<Widget> _buildNullIndicator(BuildContext context, IconData? icon,
-      String? message, String? buttonLabel, void Function()? onPressed) {
-    var theme = Theme.of(context).colorScheme;
-
-    return [
-      Icon(
-        icon,
-        color: theme.onSurface.withValues(alpha: 0.58),
-        size: 32,
-      ),
-      Text(
-        message ?? '',
-        style: TextStyle(
-          fontFamily: 'Poppins',
-          fontSize: 14,
-          color: theme.onSurface.withValues(alpha: 0.58),
-        ),
-      ),
-      if (buttonLabel != null) ...[
-        const SizedBox(height: 24.0),
-        CustomElevatedButton(
-          context: context,
-          onPressed: onPressed,
-          label: buttonLabel,
-        ),
-      ]
     ];
   }
 }

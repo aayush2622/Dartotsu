@@ -3,6 +3,7 @@ import 'package:dantotsu/Functions/Extensions.dart';
 import 'package:dantotsu/Screens/Detail/Tabs/Info/InfoPage.dart';
 import 'package:dantotsu/Screens/Detail/Tabs/Watch/Anime/AnimeWatchScreen.dart';
 import 'package:dantotsu/Screens/Detail/Tabs/Watch/Manga/MangaWatchScreen.dart';
+import 'package:expandable_page_view/expandable_page_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kenburns_nullsafety/kenburns_nullsafety.dart';
@@ -28,18 +29,20 @@ class MediaInfoPage extends StatefulWidget {
 }
 
 class MediaInfoPageState extends State<MediaInfoPage> {
-  int _selectedIndex = 0;
+  final _selectedIndex = 0.obs;
   late MediaPageViewModel _viewModel;
 
+  late PageController pageController;
   late Media mediaData;
 
   @override
   void initState() {
     super.initState();
+    pageController = PageController(initialPage: _selectedIndex.value);
     var service = Provider.of<MediaServiceProvider>(context, listen: false)
         .currentService;
-    _viewModel = Get.put(MediaPageViewModel(),
-        tag: "${widget.mediaData.id.toString()}-${service.getName}");
+
+    _viewModel = Get.put(MediaPageViewModel(), tag: "${widget.mediaData.id.toString()}-${service.getName}");
     mediaData = widget.mediaData;
     loadData();
   }
@@ -82,53 +85,62 @@ class MediaInfoPageState extends State<MediaInfoPage> {
   }
 
   Widget _buildSliverContent() {
-    return IndexedStack(
-      index: _selectedIndex,
+    return ExpandablePageView(
+      controller: pageController,
       children: [
-        InfoPage(mediaData: mediaData),
-        if (mediaData.anime != null)
-          AnimeWatchScreen(mediaData: mediaData)
-        else
-          MangaWatchScreen(mediaData: mediaData),
+        SingleChildScrollView(child: InfoPage(mediaData: mediaData)),
+        SingleChildScrollView(
+          child: mediaData.anime != null
+              ? AnimeWatchScreen(mediaData: mediaData)
+              : MangaWatchScreen(mediaData: mediaData),
+        ),
         const SizedBox(),
       ],
     );
   }
 
-  BottomNavigationBar _buildBottomNavigationBar() {
+  Widget _buildBottomNavigationBar() {
     var isAnime = mediaData.anime != null;
-    return BottomNavigationBar(
-      backgroundColor: Theme.of(context).colorScheme.surface,
-      items: [
-        BottomNavigationBarItem(
-          icon: const Icon(Icons.info),
-          label: getString.info,
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(
-            isAnime
-                ? Icons.movie_filter_rounded
-                : mediaData.format?.toLowerCase() != 'novel'
-                    ? Icons.import_contacts
-                    : Icons.book_rounded,
+    return Obx(() {
+      return BottomNavigationBar(
+        backgroundColor: Theme.of(context).colorScheme.surface,
+        items: [
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.info),
+            label: getString.info,
           ),
-          label: isAnime ? getString.watch : getString.read,
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.chat_bubble_rounded),
-          label: getString.comments,
-        ),
-      ],
-      selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
-      unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
-      iconSize: 26,
-      currentIndex: _selectedIndex,
-      onTap: (index) {
-        setState(() {
-          _selectedIndex = index;
-        });
-      },
-    );
+          BottomNavigationBarItem(
+            icon: Icon(
+              isAnime
+                  ? Icons.movie_filter_rounded
+                  : mediaData.format?.toLowerCase() != 'novel'
+                  ? Icons.import_contacts
+                  : Icons.book_rounded,
+            ),
+            label: isAnime ? getString.watch : getString.read,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.chat_bubble_rounded),
+            label: getString.comments,
+          ),
+        ],
+        selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
+        unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
+        iconSize: 26,
+        currentIndex: _selectedIndex.value,
+        onTap: (index) {
+          _selectedIndex.value = index;
+          final currentPage = pageController.page?.round() ?? 0;
+          final isRight = index > currentPage;
+
+          pageController.animateToPage(
+            index,
+            duration: const Duration(milliseconds: 300),
+            curve: isRight ? Curves.easeInOut : Curves.easeOutQuad,
+          );
+        },
+      );
+    });
   }
 
   Widget _buildMediaDetails() {

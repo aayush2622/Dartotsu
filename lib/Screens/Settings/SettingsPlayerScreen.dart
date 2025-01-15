@@ -10,7 +10,7 @@ import '../../Adaptor/Settings/SettingsAdaptor.dart';
 import '../../DataClass/Anime.dart';
 import '../../DataClass/Media.dart';
 import '../../DataClass/Setting.dart';
-import '../../Preferences/HiveDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
+import '../../Preferences/IsarDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
 import '../../Preferences/PrefManager.dart';
 
 import '../../StorageProvider.dart';
@@ -205,7 +205,6 @@ List<Widget> playerSettings(
           onSliderChange: (value) {
             playerSettings.subtitleBottomPadding = value;
             savePlayerSettings(playerSettings);
-
           },
         ),
         Setting(
@@ -220,7 +219,6 @@ List<Widget> playerSettings(
             if (newColor != null) {
               playerSettings.subtitleColor = newColor.value;
               savePlayerSettings(playerSettings);
-
             }
           },
         ),
@@ -236,7 +234,6 @@ List<Widget> playerSettings(
             if (newColor != null) {
               playerSettings.subtitleBackgroundColor = newColor.value;
               savePlayerSettings(playerSettings);
-
             }
           },
         ),
@@ -367,6 +364,32 @@ List<String> subMap = [
   'sbv',
   'lrc',
   'xml'
+];
+List<String> audioMap = [
+  '.mp3',
+  '.aac',
+  '.m4a',
+  '.ogg',
+  '.oga',
+  '.wma',
+  '.flac',
+  '.alac',
+  '.caf',
+  '.wav',
+  '.aiff',
+  '.aif',
+  '.ape',
+  '.tta',
+  '.mod',
+  '.xm',
+  '.it',
+  '.s3m',
+  '.mtm',
+  '.mid',
+  '.midi',
+  '.kar',
+  '.ra',
+  '.rm'
 ];
 
 List<String> speedMap(bool cursed) => cursed

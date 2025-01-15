@@ -59,7 +59,7 @@
   "@discord": {},
   "donationGoal": "Pas de but de donation pour le moment",
   "@donationGoal": {},
-  "extension": "Extension",
+  "extension": "{count, plural, =1 {Extension} other {Extensions}}",
   "@extension": {},
   "extensionsDescription": "Installez et gérez des extensions pour des fonctionnalités supplémentaires",
   "@extensionsDescription": {},
@@ -81,7 +81,7 @@
   "@fontWeightDescription": {},
   "hidePrivate": "Masquer privé",
   "@hidePrivate": {},
-  "hidePrivateDescription": "Masquer les médias privés de la page d'accueil",
+  "hidePrivateDescription": "Cacher les séries privées de Home page.",
   "@hidePrivateDescription": {},
   "incognitoMode": "Mode incognito",
   "@incognitoMode": {},
@@ -89,7 +89,7 @@
   "@incognitoModeDescription": {},
   "login": "Se connecter",
   "@login": {},
-  "logout": "Se déconnecter",
+  "logout": "Déconnexion {type}",
   "@logout": {},
   "mal": "MyAnimeList",
   "@mal": {},
@@ -146,5 +146,389 @@
   "subtitlePreview": "Aperçu des sous-titres",
   "@subtitlePreview": {},
   "supportMaintainer": "Vous voulez soutenir le mainteneur de Dartotsu ?\nEnvisagez de faire un don",
-  "@supportMaintainer": {}
+  "@supportMaintainer": {},
+  "read": "Lire",
+  "@read": {},
+  "comments": "Commentaires",
+  "@comments": {},
+  "series": "Série",
+  "@series": {},
+  "season": "Saison",
+  "@season": {},
+  "volume": "Volume",
+  "@volume": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "movie": "Film",
+  "@movie": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "calendar": "Calendrier",
+  "@calendar": {},
+  "manageLayout": "Gérer la mise en page",
+  "@manageLayout": {
+    "placeholders": {
+      "service": {
+        "type": "String",
+        "examples": [
+          "Anilist",
+          "MAL"
+        ]
+      },
+      "page": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Home",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "manageLayoutDescription": "Gérer la disposition de l'interface",
+  "@manageLayoutDescription": {
+    "placeholders": {
+      "page": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Home",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "available": "Disponible",
+  "@available": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "installed": "Installé",
+  "@installed": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Extensions"
+        ]
+      }
+    }
+  },
+  "trending": "Tendances",
+  "@trending": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "mostFavourite": "Les plus favoris",
+  "@mostFavourite": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga",
+          "Manhwa"
+        ]
+      }
+    }
+  },
+  "topRated": "Top noté",
+  "@topRated": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga",
+          "Manhwa",
+          "Series"
+        ]
+      }
+    }
+  },
+  "thisSeason": "Cette saison",
+  "@thisSeason": {},
+  "nextSeason": "Saison suivante",
+  "@nextSeason": {},
+  "previousSeason": "Saison précédente",
+  "@previousSeason": {},
+  "activity": "Activité",
+  "@activity": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "planned": "Prévu",
+  "@planned": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "browse": "Parcourir",
+  "@browse": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "favorite": "Favori",
+  "@favorite": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "noDropped": "Aucun abandonné",
+  "@noDropped": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "continueReading": "Continuer à lire",
+  "@continueReading": {},
+  "continueWatching": "Continuer à regarder",
+  "@continueWatching": {},
+  "pickColor": "Choisir la couleur",
+  "@pickColor": {},
+  "recommendationsEmptyMessage": "Aucune recommandation",
+  "@recommendationsEmptyMessage": {},
+  "collapseText": "Réduire le texte",
+  "@collapseText": {},
+  "comingSoon": "Bientôt disponible",
+  "@comingSoon": {},
+  "description": "Description",
+  "@description": {},
+  "endDate": "Date de fin",
+  "@endDate": {},
+  "expandText": "Développer le texte",
+  "@expandText": {},
+  "favorites": "Favoris",
+  "@favorites": {},
+  "format": "Format",
+  "@format": {},
+  "meanScore": "Note moyenne",
+  "@meanScore": {},
+  "relations": "Relations",
+  "@relations": {},
+  "sequel": "Suite",
+  "@sequel": {},
+  "source": "Source",
+  "@source": {},
+  "staff": "Équipe",
+  "@staff": {},
+  "startDate": "Date de début",
+  "@startDate": {},
+  "status": "Statut",
+  "@status": {},
+  "studio": "Studio",
+  "@studio": {},
+  "synonyms": "Synonymes",
+  "@synonyms": {},
+  "author": "Auteur",
+  "@author": {},
+  "averageDuration": "Durée moyenne",
+  "@averageDuration": {},
+  "characters": "Personnages",
+  "@characters": {},
+  "name": "Nom",
+  "@name": {},
+  "nameRomaji": "Nom en romaji",
+  "@nameRomaji": {},
+  "popularity": "Popularité",
+  "@popularity": {},
+  "prequel": "Préquelle",
+  "@prequel": {},
+  "synopsis": "Synopsis",
+  "@synopsis": {},
+  "tags": "Tags",
+  "@tags": {},
+  "total": "Total",
+  "@total": {},
+  "totalEpisodes": "Total des épisodes",
+  "@totalEpisodes": {},
+  "totalChapters": "Total des chapitres",
+  "@totalChapters": {},
+  "loginTo": "Se connecter à",
+  "@loginTo": {
+    "placeholders": {
+      "service": {
+        "type": "String",
+        "examples": [
+          "Anilist",
+          "MyAnimeList",
+          "Kitsu",
+          "Discord"
+        ]
+      }
+    }
+  },
+  "manhwa": "Manhwa",
+  "@manhwa": {},
+  "manhua": "Manhua",
+  "@manhua": {},
+  "home": "Accueil",
+  "@home": {},
+  "novel": "Roman",
+  "@novel": {},
+  "ln": "LN",
+  "@ln": {},
+  "episode": "Épisode",
+  "@episode": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "chapter": "Chapitre",
+  "@chapter": {
+    "description": "count > 1 will use plural form",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "genres": "Genres",
+  "@genres": {},
+  "list": "Liste",
+  "@list": {
+    "placeholders": {
+      "type": {
+        "examples": "Anime list",
+        "type": "String"
+      }
+    }
+  },
+  "confirmLogout": "Confirmer la déconnexion",
+  "@confirmLogout": {},
+  "gridView": "Vue en grille",
+  "@gridView": {},
+  "listView": "Vue en liste",
+  "@listView": {},
+  "compactView": "Vue compacte",
+  "@compactView": {},
+  "sort": "Trier",
+  "@sort": {},
+  "episodeWatched": "Épisode regardé",
+  "@episodeWatched": {},
+  "chapterRead": "Chapitre lu",
+  "@chapterRead": {},
+  "popular": "Populaire",
+  "@popular": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga",
+          "Manhwa"
+        ]
+      }
+    }
+  },
+  "onHold": "En pause",
+  "@onHold": {
+    "placeholders": {
+      "type": {
+        "type": "String",
+        "examples": [
+          "Anime",
+          "Manga"
+        ]
+      }
+    }
+  },
+  "hiddenMedia": "Média caché",
+  "@hiddenMedia": {},
+  "noFavourites": "Pas de favoris",
+  "@noFavourites": {},
+  "recommended": "Recommandé",
+  "@recommended": {},
+  "dtu": "À jour",
+  "@dtu": {},
+  "layout": "Mise en page",
+  "@layout": {},
+  "addToList": "Ajouter à la liste",
+  "@addToList": {},
+  "info": "Informations",
+  "@info": {},
+  "language": "Langue",
+  "@language": {},
+  "options": "Options",
+  "@options": {},
+  "recentUpdates": "Mises à jour récentes",
+  "@recentUpdates": {},
+  "search": "Recherche",
+  "@search": {},
+  "scanlators": "Scanlators",
+  "@scanlators": {},
+  "topAiring": "Top diffusion",
+  "@topAiring": {},
+  "watch": "Regarder",
+  "@watch": {},
+  "utd": "Mis à jour",
+  "@utd": {},
+  "allCaughtUpNew": "Qu'est-ce qu'il y a ?",
+  "@allCaughtUpNew": {},
+  "droppedAnime": "Anime abandonné",
+  "@droppedAnime": {},
+  "droppedManga": "Manga abandonné",
+  "@droppedManga": {},
+  "noHiddenMediaFound": "Aucun média caché trouvé",
+  "@noHiddenMediaFound": {},
+  "noOnHold": "Aucun en pause",
+  "@noOnHold": {},
+  "kitsu": "Kitsu",
+  "@kitsu": {}
 }
