@@ -65,6 +65,7 @@ dependencies:
   media_kit_libs_video: ^1.0.5
   window_manager: ^0.4.3
   permission_handler: ^11.3.1
+  flutter_inappwebview: ^6.2.0-beta.2
   desktop_webview_window:
     git:
       url: https://github.com/kodjodevf/desktop_webview_window.git

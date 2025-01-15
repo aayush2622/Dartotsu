@@ -68,7 +68,10 @@ class _DiscordController extends GetxController {
       positiveText: "Login",
       positiveCallback: () {
         Navigator.of(context).pop();
-
+        navigateToPage(
+          context,
+          Platform.isLinux ? const LinuxLogin() : const MobileLogin(),
+        );
       },
     );
 

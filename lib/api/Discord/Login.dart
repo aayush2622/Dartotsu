@@ -1,10 +1,10 @@
-/*
 import 'package:dantotsu/api/Discord/Discord.dart';
 import 'package:desktop_webview_window/desktop_webview_window.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
 import '../../Functions/Function.dart';
+import '../../main.dart';
 import 'DiscordService.dart';
 
 
@@ -45,6 +45,7 @@ class MobileLoginState extends State<MobileLogin> {
     return Scaffold(
       appBar: AppBar(title: const Text('Discord Login'),backgroundColor: Colors.transparent,),
       body: InAppWebView(
+        webViewEnvironment: webViewEnvironment,
         initialUrlRequest: URLRequest(
           url: WebUri('https://discord.com/login'),
         ),
@@ -184,4 +185,4 @@ class LinuxLoginState extends State<LinuxLogin> {
       ),
     );
   }
-}*/
+}

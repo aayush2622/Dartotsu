@@ -163,7 +163,10 @@ class MangaCompactSettings {
       children: [
         _buildInfo("Web View", source?.baseUrl ?? ''),
         IconButton(
-          onPressed: () {},
+          onPressed: () => navigateToPage(
+            context,
+            MangaWebView(url: source!.baseUrl!, title: ''),
+          ),
           icon: Icon(
             Icons.open_in_new_rounded,
             size: 24,
