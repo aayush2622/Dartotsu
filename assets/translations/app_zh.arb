@@ -530,5 +530,7 @@
   "hiddenMedia": "隐藏的媒体",
   "@hiddenMedia": {},
   "noHiddenMediaFound": "没有找到隐藏的媒体",
-  "@noHiddenMediaFound": {}
+  "@noHiddenMediaFound": {},
+  "simkl": "Simkl",
+  "@simkl": {}
 }

@@ -13,7 +13,7 @@
   "@donationGoal": {},
   "enableDarkMode": "ಡಾರ್ಕ್ ಮೋಡ್ ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ",
   "@enableDarkMode": {},
-  "extension": "{count, plural, =1 {ವಿಸ್ತರಣೆ} other {ವಿಸ್ತರಣೆ}}",
+  "extension": "{count, plural, =1 {ವಿಸ್ತರಣೆ} other {ವಿಸ್ತರಣೆಗಳು}}",
   "@extension": {},
   "fontColor": "ಫಾಂಟ್ ಬಣ್ಣ",
   "@fontColor": {},
@@ -21,7 +21,7 @@
   "@incognitoModeDescription": {},
   "login": "ಲಾಗಿನ್",
   "@login": {},
-  "logout": "ಲಾಗೌಟ್ {type}",
+  "logout": "{type} ಲಾಗೌಟ್ ಆಗಿ",
   "@logout": {},
   "mal": "MyAnimeList",
   "@mal": {},
@@ -89,13 +89,13 @@
   "@fontWeightDescription": {},
   "hidePrivate": "ಪ್ರೈವೇಟ್ ಹಚ್ಚು",
   "@hidePrivate": {},
-  "hidePrivateDescription": "ಮುಖಪುಟದಿಂದ ಖಾಸಗಿ ಸರಣಿಗಳನ್ನು ಮರೆಮಾಡಿ.",
+  "hidePrivateDescription": "ಹೋಮ್ ಪುಟದಿಂದ ಖಾಸಗಿ ಸರಣಿಗಳನ್ನು ಹಚ್ಚು.",
   "@hidePrivateDescription": {},
   "incognitoMode": "ಇಂಕೋಗ್ನಿಟೋ ಮೋಡ್",
   "@incognitoMode": {},
   "mangaDescription": "ನಿಮ್ಮ ಮಂಗಾ ಅನುಭವವನ್ನು ಸಂಘಟಿಸಿ ಮತ್ತು ಅನुकूलಿಸು",
   "@mangaDescription": {},
-  "materialYou": "ಮ್ಯಾಟೀರಿಯಲ್ ಯು",
+  "materialYou": "ಮಟ್ಟರಿ ನೀವು",
   "@materialYou": {},
   "notifications": "ಅधಿಸೂಚನೆಗಳು",
   "@notifications": {},
@@ -147,13 +147,13 @@
   "@themeDescription": {},
   "yes": "ಹೌದು",
   "@yes": {},
-  "totalEpisodes": "Episodes",
+  "totalEpisodes": "ಎಪಿಸೋಡ್‌ಗಳು",
   "@totalEpisodes": {},
-  "thisSeason": "This Season",
+  "thisSeason": "ಈ ಋತು",
   "@thisSeason": {},
-  "ln": "Light Novel",
+  "ln": "ಲೈಟ್ ನವಲ",
   "@ln": {},
-  "manageLayout": "Manage {page} page Layout for {service}",
+  "manageLayout": "{service} ಗೆ {page} ಪುಟದ ವಿನ್ಯಾಸವನ್ನು ನಿರ್ವಹಿಸಿ",
   "@manageLayout": {
     "placeholders": {
       "service": {
@@ -173,9 +173,9 @@
       }
     }
   },
-  "nextSeason": "Next Season",
+  "nextSeason": "ಆಗಿನ ಋತು",
   "@nextSeason": {},
-  "noDropped": "You haven't dropped any {type} yet.",
+  "noDropped": "ನೀವು ಯಾವುದೇ {type} ಅನ್ನು ಡ್ರಾಪ್ ಮಾಡಿಲ್ಲ.",
   "@noDropped": {
     "placeholders": {
       "type": {
@@ -189,7 +189,7 @@
   },
   "manhwa": "Manhwa",
   "@manhwa": {},
-  "volume": "{count, plural, =1 {Volume} other {Volumes}}",
+  "volume": "{count, plural, =1 {ಒಳಕೋಡು} other {ಒಳಕೋಡುಗಳು}}",
   "@volume": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -200,11 +200,11 @@
   },
   "total": "Total",
   "@total": {},
-  "novel": "Novel",
+  "novel": "ನವಲ",
   "@novel": {},
   "tags": "Tags",
   "@tags": {},
-  "activity": "{count, plural, =1 {Activity} other {Activities}}",
+  "activity": "{count, plural, =1 {ಚಟುವಟಿಕೆ} other {ಚಟುವಟಿಕೆಗಳು}}",
   "@activity": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -213,9 +213,9 @@
       }
     }
   },
-  "continueWatching": "Continue Watching",
+  "continueWatching": "ಕಾಣಲು ಮುಂದುವರಿಸು",
   "@continueWatching": {},
-  "topRated": "Top Rated {type}",
+  "topRated": "ಟಾಪ್ ರೇಟೆಡ್ {type}",
   "@topRated": {
     "placeholders": {
       "type": {
@@ -229,9 +229,9 @@
       }
     }
   },
-  "previousSeason": "Previous Season",
+  "previousSeason": "ಹಿಂದಿನ ಋತು",
   "@previousSeason": {},
-  "popular": "Popular {type}",
+  "popular": "ಪ್ರಸಿದ್ಧ {type}",
   "@popular": {
     "placeholders": {
       "type": {
@@ -244,9 +244,9 @@
       }
     }
   },
-  "confirmLogout": "ನೀವು ಖಚಿತವಾಗಿದ್ದೀರಿ ಎಂದು ಲಾಗೌಟ್ ಮಾಡಲು?",
+  "confirmLogout": "ನೀವು ಲಾಗೌಟ್ ಆಗಲು ಖಚಿತವೇ?",
   "@confirmLogout": {},
-  "mostFavourite": "Most Favourite {type}",
+  "mostFavourite": "ಅತ್ಯಂತ ಇಷ್ಟಪಡುವ {type}",
   "@mostFavourite": {
     "placeholders": {
       "type": {
@@ -261,11 +261,11 @@
   },
   "series": "Series",
   "@series": {},
-  "synopsis": "Synopsis",
+  "synopsis": "ಸಾರಾಂಶ",
   "@synopsis": {},
-  "gridView": "Grid View",
+  "gridView": "ಗ್ರಿಡ್ ವೀಕ್ಷಣೆ",
   "@gridView": {},
-  "episode": "{count, plural, =1 {Episode} other {Episodes}}",
+  "episode": "{count, plural, =1 {ಎಪಿಸೋಡ್} other {ಎಪಿಸೋಡ್‌ಗಳು}}",
   "@episode": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -274,13 +274,13 @@
       }
     }
   },
-  "popularity": "Popularity",
+  "popularity": "ಜನಪ್ರಿಯತೆ",
   "@popularity": {},
-  "totalChapters": "Chapters",
+  "totalChapters": "ಅಧ್ಯಾಯಗಳು",
   "@totalChapters": {},
-  "favorites": "Favorites",
+  "favorites": "ಇಷ್ಟಗಳು",
   "@favorites": {},
-  "movie": "{count, plural, =1 {Movie} other {Movies}}",
+  "movie": "{count, plural, =1 {ಚಿತ್ರ} other {ಚಿತ್ರಗಳು}}",
   "@movie": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -293,13 +293,13 @@
   "@home": {},
   "prequel": "PREQUEL",
   "@prequel": {},
-  "search": "Search",
+  "search": "ಹುಡುಕು",
   "@search": {},
-  "collapseText": "show less",
+  "collapseText": "ಕಡಿಮೆ ತೋರಿಸು",
   "@collapseText": {},
   "addToList": "Add To List",
   "@addToList": {},
-  "chapter": "{count, plural, =1 {Chapter} other {Chapters}}",
+  "chapter": "{count, plural, =1 {ಅಧ್ಯಾಯ} other {ಅಧ್ಯಾಯಗಳು}}",
   "@chapter": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -308,7 +308,7 @@
       }
     }
   },
-  "available": "Available {type}",
+  "available": "ಲಭ್ಯವಿದೆ {type}",
   "@available": {
     "placeholders": {
       "type": {
@@ -320,27 +320,27 @@
       }
     }
   },
-  "characters": "Characters",
+  "characters": "ಪಾತ್ರಗಳು",
   "@characters": {},
-  "genres": "Genres",
+  "genres": "ಪ್ರಕಾರಗಳು",
   "@genres": {},
   "author": "Author",
   "@author": {},
-  "calendar": "Calendar",
+  "calendar": "ದಿನಚರಿ",
   "@calendar": {},
-  "format": "Format",
+  "format": "ಆಕಾರ",
   "@format": {},
-  "expandText": "show more",
+  "expandText": "ಹೆಚ್ಚು ತೋರಿಸು",
   "@expandText": {},
   "manhua": "Manhua",
   "@manhua": {},
-  "season": "Season",
+  "season": "ಋತು",
   "@season": {},
   "sequel": "SEQUEL",
   "@sequel": {},
   "studio": "Studio",
   "@studio": {},
-  "staff": "Staff",
+  "staff": "ಸಿಬ್ಬಂದಿ",
   "@staff": {},
   "status": "Status",
   "@status": {},
@@ -348,15 +348,15 @@
   "@relations": {},
   "source": "Source",
   "@source": {},
-  "synonyms": "Synonyms",
+  "synonyms": "ಸಮಾನಾರ್ಥಕ ಪದಗಳು",
   "@synonyms": {},
   "startDate": "Start Date",
   "@startDate": {},
-  "description": "Synopsis",
+  "description": "ಸಾರಾಂಶ",
   "@description": {},
-  "averageDuration": "Average Duration",
+  "averageDuration": "ಮೂಲಕಿಕ ಕಾಲಾವಧಿ",
   "@averageDuration": {},
-  "comingSoon": "Coming SOON",
+  "comingSoon": "ಆಗುವುದೆಂದು ಬರುತ್ತಿದೆ",
   "@comingSoon": {},
   "name": "Name",
   "@name": {},
@@ -364,11 +364,11 @@
   "@endDate": {},
   "meanScore": "Mean Score",
   "@meanScore": {},
-  "nameRomaji": "Name (Romaji)",
+  "nameRomaji": "ಹೆಸರು (ರೋಮಾಜಿ)",
   "@nameRomaji": {},
   "kitsu": "Kitsu",
   "@kitsu": {},
-  "loginTo": "Login to {service}",
+  "loginTo": "{service} ಗೆ ಲಾಗಿನ್ ಆಗಿ",
   "@loginTo": {
     "placeholders": {
       "service": {
@@ -382,19 +382,19 @@
       }
     }
   },
-  "compactView": "Compact View",
+  "compactView": "ಸಂಕುಚಿತ ವೀಕ್ಷಣೆ",
   "@compactView": {},
-  "scanlators": "Scanlators",
+  "scanlators": "ಸ್ಕ್ಯಾನ್ಲೇಟರ್ಸ್",
   "@scanlators": {},
   "listView": "List View",
   "@listView": {},
-  "sort": "Sort",
+  "sort": "ವರ್ಗೀಕರಿಸು",
   "@sort": {},
-  "chapterRead": "Chapter Read",
+  "chapterRead": "ಅಧ್ಯಾಯ ಓದಲು",
   "@chapterRead": {},
-  "episodeWatched": "Episode Watched",
+  "episodeWatched": "ಎಪಿಸೋಡ್ ವೀಕ್ಷಿಸಲಾಯಿತು",
   "@episodeWatched": {},
-  "trending": "Trending {type}",
+  "trending": "ಚಲನೆಯಲ್ಲಿರುವ {type}",
   "@trending": {
     "placeholders": {
       "type": {
@@ -406,7 +406,7 @@
       }
     }
   },
-  "installed": "Installed {type}",
+  "installed": "ಇನ್ಸ್ಟಾಲ್ ಮಾಡಲಾಗಿದೆ {type}",
   "@installed": {
     "placeholders": {
       "type": {
@@ -417,7 +417,7 @@
       }
     }
   },
-  "browse": "Browse {type}",
+  "browse": "{type} ಬ್ರೌಸ್ ಮಾಡಿ",
   "@browse": {
     "placeholders": {
       "type": {
@@ -429,7 +429,7 @@
       }
     }
   },
-  "planned": "Planned {type}",
+  "planned": "ಯೋಜನೆಗೊಳಿಸಿದ {type}",
   "@planned": {
     "placeholders": {
       "type": {
@@ -441,7 +441,7 @@
       }
     }
   },
-  "onHold": "On Hold {type}",
+  "onHold": "ಹೋಲ್ಡ್ ಮೇಲೆ {type}",
   "@onHold": {
     "placeholders": {
       "type": {
@@ -453,7 +453,7 @@
       }
     }
   },
-  "favorite": "Favorite {type}",
+  "favorite": "ಇಷ್ಟಪಡುವ {type}",
   "@favorite": {
     "placeholders": {
       "type": {
@@ -465,33 +465,33 @@
       }
     }
   },
-  "allCaughtUpNew": "All caught up, when New?",
+  "allCaughtUpNew": "ಎಲ್ಲವೂ ಅಪ್ಡೇಟ್ ಆಗಿದೆ, ಹೊಸದು ಏನು?",
   "@allCaughtUpNew": {},
-  "hiddenMedia": "Hidden Media",
+  "hiddenMedia": "ಹಚ್ಚಿದ ಮೀಡಿಯಾ",
   "@hiddenMedia": {},
   "options": "Options",
   "@options": {},
-  "read": "Read",
+  "read": "ಊದಿನು",
   "@read": {},
-  "topAiring": "Top Airing",
+  "topAiring": "ಟಾಪ್ ಎಯರಿಂಗ್",
   "@topAiring": {},
-  "watch": "Watch",
+  "watch": "ಕಾಣು",
   "@watch": {},
-  "utd": "Up To Down",
+  "utd": "ಮೇಲೆ ಕೆಳಗೆ",
   "@utd": {},
   "dtu": "Down To Up",
   "@dtu": {},
-  "droppedManga": "Dropped Manga",
+  "droppedManga": "ಡ್ರಾಪ್ ಮಾಡಲಾದ ಮಾಂಗಾ",
   "@droppedManga": {},
   "info": "Info",
   "@info": {},
-  "continueReading": "Continue Reading",
+  "continueReading": "ಊದಲು ಮುಂದುವರಿಸು",
   "@continueReading": {},
-  "comments": "Comments",
+  "comments": "ಕಮೆಂಟ್‌ಗಳು",
   "@comments": {},
-  "droppedAnime": "Dropped Anime",
+  "droppedAnime": "ಡ್ರಾಪ್ ಮಾಡಲಾದ ಆನಿಮೆ",
   "@droppedAnime": {},
-  "list": "{type} List",
+  "list": "{type} ಪಟ್ಟಿ",
   "@list": {
     "placeholders": {
       "type": {
@@ -500,11 +500,11 @@
       }
     }
   },
-  "language": "Language",
+  "language": "ಭಾಷೆ",
   "@language": {},
   "layout": "Layout",
   "@layout": {},
-  "manageLayoutDescription": "You can manage the layout for {page} page by dragging and dropping the items",
+  "manageLayoutDescription": "ನೀವು ಐಟಂಗಳನ್ನು ಆಕರ್ಷಿಸಿ ಮತ್ತು ಬಿಡಿಸಿ {page} ಪುಟದ ವಿನ್ಯಾಸವನ್ನು ನಿರ್ವಹಿಸಬಹುದು",
   "@manageLayoutDescription": {
     "placeholders": {
       "page": {
@@ -517,18 +517,20 @@
       }
     }
   },
-  "pickColor": "Pick a color",
+  "pickColor": "ನನಸು ಮೆತ್ತಲು",
   "@pickColor": {},
-  "noFavourites": "Looks like you don't like anything,\nTry liking a show to keep it here.",
+  "noFavourites": "ನೀವು ಯಾವುದೇ ಆನಿಮೆ/ಮಾಂಗಾ ಇಷ್ಟಪಡುತ್ತಿಲ್ಲ,\nಇದನ್ನು ಇಲ್ಲಿ ಇಡುವುದಕ್ಕಾಗಿ ಶೋಗೆ ಇಷ್ಟಪಡು.",
   "@noFavourites": {},
-  "noOnHold": "Looks like you haven't put anything on hold.",
+  "noOnHold": "ನೀವು ಯಾವುದೇ ಸರಣಿಯನ್ನು ಹೋಲ್ಡ್‌ನಲ್ಲಿ ಇಟ್ಟಿಲ್ಲ.",
   "@noOnHold": {},
-  "noHiddenMediaFound": "No hidden media found",
+  "noHiddenMediaFound": "ಯಾವುದೇ ಹಚ್ಚಿದ ಮೀಡಿಯಾ ಕಂಡುಬಂದಿಲ್ಲ",
   "@noHiddenMediaFound": {},
-  "recentUpdates": "Recent Updates",
+  "recentUpdates": "ಇತ್ತೀಚಿನ ಅಪ್ಡೇಟುಗಳು",
   "@recentUpdates": {},
-  "recommendationsEmptyMessage": "Watch/Read some Anime or Manga to get Recommendations",
+  "recommendationsEmptyMessage": "ಆನಿಮೆ ಅಥವಾ ಮಾಂಗಾ ಓದಿ/ವೀಕ್ಷಿಸಿ ರೆಕೆಂಡೇಶನ್ಗಳನ್ನು ಪಡೆಯಿರಿ",
   "@recommendationsEmptyMessage": {},
-  "recommended": "Recommended",
-  "@recommended": {}
+  "recommended": "ಶಿಫಾರಸು ಮಾಡಲಾಗಿದೆ",
+  "@recommended": {},
+  "simkl": "Simkl",
+  "@simkl": {}
 }

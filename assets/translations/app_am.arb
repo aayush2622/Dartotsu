@@ -13,7 +13,7 @@
   "@fontFamilyDescription": {},
   "login": "ግባ",
   "@login": {},
-  "logout": "ውጣ",
+  "logout": "{type}ን ለቅቆ ውጣ",
   "@logout": {},
   "mal": "MyAnimeList",
   "@mal": {},
@@ -39,7 +39,7 @@
   "@fontSizeDescription": {},
   "fontWeight": "የፊደል ክብደት",
   "@fontWeight": {},
-  "hidePrivateDescription": "ከመነሻ ገጽ የግል ተከታታዮችን ደብቅ።",
+  "hidePrivateDescription": "የግል ተከታታይ ክፍሎችን ከመነሻ ገጽ ደብቅ።",
   "@hidePrivateDescription": {},
   "fontWeightDescription": "የንዑስ ርዕስ የፊደል ክብደት",
   "@fontWeightDescription": {},
@@ -53,7 +53,7 @@
   "@manga": {},
   "mangaDescription": "የማንጋ ተሞክሮዎን ያደራጁ እና ያስተካክሉ",
   "@mangaDescription": {},
-  "materialYou": "ቁሳዊ አንተ",
+  "materialYou": "የእርስዎ ቁሳቁስ",
   "@materialYou": {},
   "materialYouDescription": "እንደ ግድግዳ ወረቀትዎ ተመሳሳይ ቀለም ይጠቀሙ",
   "@materialYouDescription": {},
@@ -151,11 +151,11 @@
   "@manhwa": {},
   "home": "ቤት",
   "@home": {},
-  "novel": "እንባቢ",
+  "novel": "ልብወለድ",
   "@novel": {},
   "kitsu": "Kitsu",
   "@kitsu": {},
-  "loginTo": "ተጠቃሚ ሆን ወደ {service} ግባ",
+  "loginTo": "ወደ {service} ይግቡ",
   "@loginTo": {
     "placeholders": {
       "service": {
@@ -171,9 +171,9 @@
   },
   "manhua": "Manhua",
   "@manhua": {},
-  "ln": "ቀላል እንባቢ",
+  "ln": "ቀላል ልብወለድ",
   "@ln": {},
-  "onHold": "On Hold {type}",
+  "onHold": "በእንጥልጥል ላይ ያለ {type}",
   "@onHold": {
     "placeholders": {
       "type": {
@@ -185,7 +185,7 @@
       }
     }
   },
-  "favorite": "Favorite {type}",
+  "favorite": "የሚወዱት {type}",
   "@favorite": {
     "placeholders": {
       "type": {
@@ -199,7 +199,7 @@
   },
   "dtu": "Down To Up",
   "@dtu": {},
-  "volume": "{count, plural, =1 {Volume} other {Volumes}}",
+  "volume": "{count, plural, =1 {ቅጽ} other {ቅጾች}}",
   "@volume": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -212,9 +212,9 @@
   "@total": {},
   "tags": "Tags",
   "@tags": {},
-  "recommendationsEmptyMessage": "Watch/Read some Anime or Manga to get Recommendations",
+  "recommendationsEmptyMessage": "ለውሳኔ ሀሳቦች አንዳንድ አኒሜ ወይም ማንጋ ይመልከቱ/ያንብቡ",
   "@recommendationsEmptyMessage": {},
-  "popular": "Popular {type}",
+  "popular": "ታዋቂ {type}",
   "@popular": {
     "placeholders": {
       "type": {
@@ -227,9 +227,9 @@
       }
     }
   },
-  "description": "Synopsis",
+  "description": "አጭር መግለጫ",
   "@description": {},
-  "mostFavourite": "Most Favourite {type}",
+  "mostFavourite": "በጣም የተወደደ {type}",
   "@mostFavourite": {
     "placeholders": {
       "type": {
@@ -244,17 +244,17 @@
   },
   "endDate": "End Date",
   "@endDate": {},
-  "recommended": "Recommended",
+  "recommended": "የሚመከር",
   "@recommended": {},
   "meanScore": "Mean Score",
   "@meanScore": {},
   "series": "Series",
   "@series": {},
-  "synopsis": "Synopsis",
+  "synopsis": "줄거리",
   "@synopsis": {},
-  "gridView": "Grid View",
+  "gridView": "የፍርግርግ እይታ",
   "@gridView": {},
-  "browse": "Browse {type}",
+  "browse": "{type}ን ያስሱ",
   "@browse": {
     "placeholders": {
       "type": {
@@ -266,7 +266,7 @@
       }
     }
   },
-  "episode": "{count, plural, =1 {Episode} other {Episodes}}",
+  "episode": "{count, plural, =1 {ክፍል} other {ክፍሎች}}",
   "@episode": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -275,17 +275,17 @@
       }
     }
   },
-  "episodeWatched": "Episode Watched",
+  "episodeWatched": "የተመለከቱት ክፍል",
   "@episodeWatched": {},
-  "popularity": "Popularity",
+  "popularity": "ታዋቂነት",
   "@popularity": {},
-  "allCaughtUpNew": "All caught up, when New?",
+  "allCaughtUpNew": "ሁሉንም አግኝተዋል፣ አዲስ ምንድን ነው?",
   "@allCaughtUpNew": {},
-  "totalChapters": "Chapters",
+  "totalChapters": "ምዕራፎች",
   "@totalChapters": {},
-  "favorites": "Favorites",
+  "favorites": "ተወዳጆች",
   "@favorites": {},
-  "movie": "{count, plural, =1 {Movie} other {Movies}}",
+  "movie": "{count, plural, =1 {ፊልም} other {ፊልሞች}}",
   "@movie": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -298,7 +298,7 @@
   "@prequel": {},
   "relations": "Relations",
   "@relations": {},
-  "planned": "Planned {type}",
+  "planned": "የታቀደ {type}",
   "@planned": {
     "placeholders": {
       "type": {
@@ -310,7 +310,7 @@
       }
     }
   },
-  "list": "{type} List",
+  "list": "የ{type} ዝርዝር",
   "@list": {
     "placeholders": {
       "type": {
@@ -319,7 +319,7 @@
       }
     }
   },
-  "chapter": "{count, plural, =1 {Chapter} other {Chapters}}",
+  "chapter": "{count, plural, =1 {ምዕራፍ} other {ምዕራፎች}}",
   "@chapter": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -328,61 +328,61 @@
       }
     }
   },
-  "genres": "Genres",
+  "genres": "ዘውጎች",
   "@genres": {},
   "source": "Source",
   "@source": {},
-  "calendar": "Calendar",
+  "calendar": "የቀን መቁጠሪያ",
   "@calendar": {},
-  "format": "Format",
+  "format": "ቅርጸት",
   "@format": {},
-  "expandText": "show more",
+  "expandText": "ተጨማሪ አሳይ",
   "@expandText": {},
-  "comments": "Comments",
+  "comments": "አስተያየቶች",
   "@comments": {},
-  "season": "Season",
+  "season": "ወቅት",
   "@season": {},
   "author": "Author",
   "@author": {},
-  "averageDuration": "Average Duration",
+  "averageDuration": "አማካይ ርዝመት",
   "@averageDuration": {},
-  "collapseText": "show less",
+  "collapseText": "ትንሽ አሳይ",
   "@collapseText": {},
-  "characters": "Characters",
+  "characters": "ገጸ-ባህሪያት",
   "@characters": {},
   "sequel": "SEQUEL",
   "@sequel": {},
   "name": "Name",
   "@name": {},
-  "nameRomaji": "Name (Romaji)",
+  "nameRomaji": "ስም (ሮማጂ)",
   "@nameRomaji": {},
-  "staff": "Staff",
+  "staff": "ሰራተኞች",
   "@staff": {},
   "studio": "Studio",
   "@studio": {},
   "status": "Status",
   "@status": {},
-  "synonyms": "Synonyms",
+  "synonyms": "ተመሳሳይ ቃላት",
   "@synonyms": {},
   "startDate": "Start Date",
   "@startDate": {},
-  "comingSoon": "Coming SOON",
+  "comingSoon": "በቅርብ ይመጣል",
   "@comingSoon": {},
-  "totalEpisodes": "Episodes",
+  "totalEpisodes": "ክፍሎች",
   "@totalEpisodes": {},
-  "read": "Read",
+  "read": "አንብብ",
   "@read": {},
-  "confirmLogout": "እርግጠኛ ነዎት መውጣት ይፈልጋሉ?",
+  "confirmLogout": "እርግጠኛ ነዎት ለቅቆ መውጣት ይፈልጋሉ?",
   "@confirmLogout": {},
   "options": "Options",
   "@options": {},
-  "compactView": "Compact View",
+  "compactView": "የተጠቅልል እይታ",
   "@compactView": {},
   "listView": "List View",
   "@listView": {},
-  "chapterRead": "Chapter Read",
+  "chapterRead": "ያነበቡት ምዕራፍ",
   "@chapterRead": {},
-  "trending": "Trending {type}",
+  "trending": "አዝማሚያ ያለው {type}",
   "@trending": {
     "placeholders": {
       "type": {
@@ -394,7 +394,7 @@
       }
     }
   },
-  "installed": "Installed {type}",
+  "installed": "የተጫነ {type}",
   "@installed": {
     "placeholders": {
       "type": {
@@ -405,7 +405,7 @@
       }
     }
   },
-  "available": "Available {type}",
+  "available": "ያሉ {type}",
   "@available": {
     "placeholders": {
       "type": {
@@ -417,11 +417,11 @@
       }
     }
   },
-  "thisSeason": "This Season",
+  "thisSeason": "የአሁኑ ወቅት",
   "@thisSeason": {},
-  "topAiring": "Top Airing",
+  "topAiring": "ከፍተኛ ስርጭት",
   "@topAiring": {},
-  "topRated": "Top Rated {type}",
+  "topRated": "ከፍተኛ ደረጃ ያለው {type}",
   "@topRated": {
     "placeholders": {
       "type": {
@@ -435,9 +435,9 @@
       }
     }
   },
-  "nextSeason": "Next Season",
+  "nextSeason": "የሚቀጥለው ወቅት",
   "@nextSeason": {},
-  "activity": "{count, plural, =1 {Activity} other {Activities}}",
+  "activity": "{count, plural, =1 {እንቅስቃሴ} other {እንቅስቃሴዎች}}",
   "@activity": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -446,9 +446,9 @@
       }
     }
   },
-  "previousSeason": "Previous Season",
+  "previousSeason": "ያለፈው ወቅት",
   "@previousSeason": {},
-  "noDropped": "You haven't dropped any {type} yet.",
+  "noDropped": "እስካሁን ምንም {type} አልተውክም።",
   "@noDropped": {
     "placeholders": {
       "type": {
@@ -460,35 +460,35 @@
       }
     }
   },
-  "continueWatching": "Continue Watching",
+  "continueWatching": "መመልከት ይቀጥሉ",
   "@continueWatching": {},
-  "noFavourites": "Looks like you don't like anything,\nTry liking a show to keep it here.",
+  "noFavourites": "ምንም የሚወዱት ነገር የለም የሚመስለው፣\nእዚህ ለማስቀመጥ አንድ ትዕይንት ይውደዱ።",
   "@noFavourites": {},
-  "noHiddenMediaFound": "No hidden media found",
+  "noHiddenMediaFound": "ምንም የተደበቀ ሚዲያ አልተገኘም",
   "@noHiddenMediaFound": {},
   "info": "Info",
   "@info": {},
-  "language": "Language",
+  "language": "ቋንቋ",
   "@language": {},
-  "continueReading": "Continue Reading",
+  "continueReading": "ማንበብ ይቀጥሉ",
   "@continueReading": {},
-  "watch": "Watch",
+  "watch": "ተመልከት",
   "@watch": {},
-  "search": "Search",
+  "search": "ፈልግ",
   "@search": {},
-  "hiddenMedia": "Hidden Media",
+  "hiddenMedia": "የተደበቀ ሚዲያ",
   "@hiddenMedia": {},
   "addToList": "Add To List",
   "@addToList": {},
-  "scanlators": "Scanlators",
+  "scanlators": "ስካንሌተሮች",
   "@scanlators": {},
   "layout": "Layout",
   "@layout": {},
-  "sort": "Sort",
+  "sort": "አስተካክል",
   "@sort": {},
-  "utd": "Up To Down",
+  "utd": "ከላይ ወደ ታች",
   "@utd": {},
-  "manageLayout": "Manage {page} page Layout for {service}",
+  "manageLayout": "የ{service}ን የ{page} ገጽ አቀማመጥ አስተዳድር",
   "@manageLayout": {
     "placeholders": {
       "service": {
@@ -508,7 +508,7 @@
       }
     }
   },
-  "manageLayoutDescription": "You can manage the layout for {page} page by dragging and dropping the items",
+  "manageLayoutDescription": "አካላቶቹን በመጎተት እና በማስቀመጥ የ{page} ገጽ አቀማመጥን ማስተዳደር ይችላሉ",
   "@manageLayoutDescription": {
     "placeholders": {
       "page": {
@@ -521,14 +521,16 @@
       }
     }
   },
-  "pickColor": "Pick a color",
+  "pickColor": "ቀለም ምረጥ",
   "@pickColor": {},
-  "recentUpdates": "Recent Updates",
+  "recentUpdates": "የቅርብ ጊዜ ዝማኔዎች",
   "@recentUpdates": {},
-  "noOnHold": "Looks like you haven't put anything on hold.",
+  "noOnHold": "ምንም ነገር በእንጥልጥል ላይ ያላስቀመጡት ይመስላል።",
   "@noOnHold": {},
-  "droppedManga": "Dropped Manga",
+  "droppedManga": "የተተወ ማንጋ",
   "@droppedManga": {},
-  "droppedAnime": "Dropped Anime",
-  "@droppedAnime": {}
+  "droppedAnime": "የተተወ አኒሜ",
+  "@droppedAnime": {},
+  "simkl": "Simkl",
+  "@simkl": {}
 }

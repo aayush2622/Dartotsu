@@ -523,5 +523,7 @@
   "favorites": "Вибране",
   "@favorites": {},
   "averageDuration": "Середня тривалість",
-  "@averageDuration": {}
+  "@averageDuration": {},
+  "simkl": "Simkl",
+  "@simkl": {}
 }

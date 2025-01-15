@@ -392,9 +392,9 @@
       }
     }
   },
-  "manhwa": "মানহুয়া",
+  "manhwa": "Manhwa",
   "@manhwa": {},
-  "manhua": "মানহুয়া",
+  "manhua": "Manhua",
   "@manhua": {},
   "home": "হোম",
   "@home": {},
@@ -530,5 +530,7 @@
   "noOnHold": "মনে হচ্ছে আপনি কিছু আটকে রাখেননি।",
   "@noOnHold": {},
   "recentUpdates": "সাম্প্রতিক আপডেট",
-  "@recentUpdates": {}
+  "@recentUpdates": {},
+  "simkl": "Simkl",
+  "@simkl": {}
 }

@@ -19,21 +19,21 @@
   "@darkMode": {},
   "discord": "Discord",
   "@discord": {},
-  "extension": "Extension",
+  "extension": "{count, plural, =1 {Ekstensyon} other {Mga Ekstensyon}}",
   "@extension": {},
   "extensionsDescription": "Mag-install at pamahalaan ang mga extension para sa karagdagang functionality",
   "@extensionsDescription": {},
   "hidePrivate": "Itago ang Pribado",
   "@hidePrivate": {},
-  "hidePrivateDescription": "Itago ang pribadong media mula sa home page",
+  "hidePrivateDescription": "Itago ang pribadong serye mula sa Home page.",
   "@hidePrivateDescription": {},
-  "incognitoMode": "Incognito Mode",
+  "incognitoMode": "Mode ng Incognito",
   "@incognitoMode": {},
   "incognitoModeDescription": "Mag-browse nang hindi isinusuong ang iyong aktibidad",
   "@incognitoModeDescription": {},
   "login": "Mag-login",
   "@login": {},
-  "logout": "Mag-logout",
+  "logout": "Mag-logout {type}",
   "@logout": {},
   "mal": "MyAnimeList",
   "@mal": {},
@@ -51,7 +51,7 @@
   "@showSubtitles": {},
   "showSubtitlesDescription": "Ipakita ang mga subtitle bilang default",
   "@showSubtitlesDescription": {},
-  "skipButton": "Skip Button",
+  "skipButton": "Buton ng Pag-laktaw",
   "@skipButton": {},
   "speed": "Bilis",
   "@speed": {},
@@ -105,7 +105,7 @@
   "@fontWeightDescription": {},
   "mangaDescription": "I-organisa at i-tailor ang iyong karanasan sa manga",
   "@mangaDescription": {},
-  "materialYou": "Material You",
+  "materialYou": "Material Ikaw",
   "@materialYou": {},
   "notificationsDescription": "I-configure kung paano at kailan ka makakatanggap ng mga abiso",
   "@notificationsDescription": {},
@@ -153,13 +153,13 @@
   "@manhua": {},
   "home": "Tahanan",
   "@home": {},
-  "ln": "Liit na Nobela",
+  "ln": "Magaan na Nobela",
   "@ln": {},
   "series": "Serye",
   "@series": {},
   "season": "Panahon",
   "@season": {},
-  "episode": "Episodyo",
+  "episode": "{count, plural, =1 {Episode} other {Mga Episode}}",
   "@episode": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -168,11 +168,11 @@
       }
     }
   },
-  "confirmLogout": "Kumpirmahin ang Pag-logout",
+  "confirmLogout": "Sigurado ka bang nais mag-logout?",
   "@confirmLogout": {},
-  "gridView": "Grid View",
+  "gridView": "Grid na Tanawin",
   "@gridView": {},
-  "available": "Magagamit",
+  "available": "Magagamit na {type}",
   "@available": {
     "placeholders": {
       "type": {
@@ -184,7 +184,7 @@
       }
     }
   },
-  "popular": "Popular",
+  "popular": "Sikat na {type}",
   "@popular": {
     "placeholders": {
       "type": {
@@ -197,7 +197,7 @@
       }
     }
   },
-  "topRated": "Pinakamataas na Rating",
+  "topRated": "Pinakamataas na Rating {type}",
   "@topRated": {
     "placeholders": {
       "type": {
@@ -215,7 +215,7 @@
   "@previousSeason": {},
   "language": "Wika",
   "@language": {},
-  "activity": "Aktibidad",
+  "activity": "{count, plural, =1 {Aktibidad} other {Mga Aktibidad}}",
   "@activity": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -224,7 +224,7 @@
       }
     }
   },
-  "planned": "Nakaplanong",
+  "planned": "Nakaplanong {type}",
   "@planned": {
     "placeholders": {
       "type": {
@@ -236,7 +236,7 @@
       }
     }
   },
-  "favorite": "Paborito",
+  "favorite": "Paboritong {type}",
   "@favorite": {
     "placeholders": {
       "type": {
@@ -248,7 +248,7 @@
       }
     }
   },
-  "onHold": "Naka-hold",
+  "onHold": "{type} na Naka-hold",
   "@onHold": {
     "placeholders": {
       "type": {
@@ -260,7 +260,7 @@
       }
     }
   },
-  "noDropped": "Walang Na-drop",
+  "noDropped": "Wala ka pang ibinagsak na {type}.",
   "@noDropped": {
     "placeholders": {
       "type": {
@@ -272,19 +272,19 @@
       }
     }
   },
-  "continueReading": "Magpatuloy sa Pagbabasa",
+  "continueReading": "Ipagpatuloy ang Pagbasa",
   "@continueReading": {},
-  "hiddenMedia": "Naitagong Media",
+  "hiddenMedia": "Nakatagong Media",
   "@hiddenMedia": {},
-  "recommendationsEmptyMessage": "Walang Inirerekomendang Nilalaman",
+  "recommendationsEmptyMessage": "Manood/Magbasa ng Anime o Manga para makakuha ng Rekomendasyon",
   "@recommendationsEmptyMessage": {},
   "name": "Pangalan",
   "@name": {},
   "nameRomaji": "Pangalan (Romaji)",
   "@nameRomaji": {},
-  "totalEpisodes": "Kabuuang Epesodyo",
+  "totalEpisodes": "Mga Episode",
   "@totalEpisodes": {},
-  "totalChapters": "Kabuuang Kabanata",
+  "totalChapters": "Mga Kabanata",
   "@totalChapters": {},
   "author": "May-akda",
   "@author": {},
@@ -292,11 +292,11 @@
   "@averageDuration": {},
   "characters": "Mga Tauhan",
   "@characters": {},
-  "collapseText": "I-collapse ang Teksto",
+  "collapseText": "ipakita nang mas kaunti",
   "@collapseText": {},
-  "comingSoon": "Malapit Nang Dumating",
+  "comingSoon": "Paparating NA",
   "@comingSoon": {},
-  "description": "Paglalarawan",
+  "description": "Sinopsis",
   "@description": {},
   "endDate": "Petsa ng Pagtatapos",
   "@endDate": {},
@@ -306,7 +306,7 @@
   "@sequel": {},
   "source": "Pinagmulan",
   "@source": {},
-  "staff": "Mga Kawani",
+  "staff": "Tauhan",
   "@staff": {},
   "startDate": "Petsa ng Pagsisimula",
   "@startDate": {},
@@ -314,17 +314,17 @@
   "@status": {},
   "studio": "Studio",
   "@studio": {},
-  "synonyms": "Mga Sinonimo",
+  "synonyms": "Mga Kasingkahulugan",
   "@synonyms": {},
-  "expandText": "Palawakin ang Teksto",
+  "expandText": "ipakita nang higit pa",
   "@expandText": {},
   "favorites": "Mga Paborito",
   "@favorites": {},
-  "format": "Pormat",
+  "format": "Format",
   "@format": {},
   "meanScore": "Karaniwang Iskor",
   "@meanScore": {},
-  "popularity": "Kasikatan",
+  "popularity": "Katungkulan",
   "@popularity": {},
   "prequel": "Prequel",
   "@prequel": {},
@@ -334,7 +334,7 @@
   "@tags": {},
   "total": "Kabuuan",
   "@total": {},
-  "loginTo": "Mag-log in sa",
+  "loginTo": "Mag-login sa {service}",
   "@loginTo": {
     "placeholders": {
       "service": {
@@ -350,7 +350,7 @@
   },
   "novel": "Nobela",
   "@novel": {},
-  "chapter": "Kabanata",
+  "chapter": "{count, plural, =1 {Kabanata} other {Mga Kabanata}}",
   "@chapter": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -359,7 +359,7 @@
       }
     }
   },
-  "volume": "Dami",
+  "volume": "{count, plural, =1 {Bolumen} other {Mga Bolumen}}",
   "@volume": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -368,7 +368,7 @@
       }
     }
   },
-  "movie": "Pelikula",
+  "movie": "{count, plural, =1 {Pelikula} other {Mga Pelikula}}",
   "@movie": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -381,11 +381,11 @@
   "@genres": {},
   "calendar": "Kalendaryo",
   "@calendar": {},
-  "search": "Paghanap",
+  "search": "Maghanap",
   "@search": {},
   "scanlators": "Mga Tagasalin",
   "@scanlators": {},
-  "manageLayout": "Pamahalaan ang Ayos",
+  "manageLayout": "Pamahalaan ang Layout ng {page} para sa {service}",
   "@manageLayout": {
     "placeholders": {
       "service": {
@@ -407,13 +407,13 @@
   },
   "listView": "List View",
   "@listView": {},
-  "compactView": "Compact View",
+  "compactView": "Kompaktong Tanawin",
   "@compactView": {},
-  "episodeWatched": "Episodyo na Napanood",
+  "episodeWatched": "Napanuod na Episode",
   "@episodeWatched": {},
-  "chapterRead": "Kabanatang Nabasa",
+  "chapterRead": "Nabasa na Kabanata",
   "@chapterRead": {},
-  "installed": "Na-install",
+  "installed": "Na-install na {type}",
   "@installed": {
     "placeholders": {
       "type": {
@@ -424,7 +424,7 @@
       }
     }
   },
-  "trending": "Trending",
+  "trending": "Patok na {type}",
   "@trending": {
     "placeholders": {
       "type": {
@@ -436,7 +436,7 @@
       }
     }
   },
-  "mostFavourite": "Pinakamamahal",
+  "mostFavourite": "Pinakapaboritong {type}",
   "@mostFavourite": {
     "placeholders": {
       "type": {
@@ -453,7 +453,7 @@
   "@thisSeason": {},
   "nextSeason": "Susunod na Panahon",
   "@nextSeason": {},
-  "browse": "Mag-browse",
+  "browse": "Mag-browse ng {type}",
   "@browse": {
     "placeholders": {
       "type": {
@@ -467,15 +467,15 @@
   },
   "addToList": "Idagdag sa Listahan",
   "@addToList": {},
-  "continueWatching": "Magpatuloy sa Panonood",
+  "continueWatching": "Ipagpatuloy ang Panonood",
   "@continueWatching": {},
-  "noHiddenMediaFound": "Walang Naitagong Media na Natagpuan",
+  "noHiddenMediaFound": "Walang nakatagong media na nakita",
   "@noHiddenMediaFound": {},
-  "noOnHold": "Walang Naka-hold",
+  "noOnHold": "Mukhang wala kang nilagay sa hold.",
   "@noOnHold": {},
-  "allCaughtUpNew": "Lahat ng Update ay Nakuha",
+  "allCaughtUpNew": "Natapos na lahat, Ano'ng Bago?",
   "@allCaughtUpNew": {},
-  "noFavourites": "Walang Paborito",
+  "noFavourites": "Mukhang wala kang paborito,\nSubukang magustuhan ang palabas para manatili ito rito.",
   "@noFavourites": {},
   "comments": "Mga Komento",
   "@comments": {},
@@ -483,7 +483,7 @@
   "@dtu": {},
   "info": "Impormasyon",
   "@info": {},
-  "list": "Listahan",
+  "list": "Listahan ng {type}",
   "@list": {
     "placeholders": {
       "type": {
@@ -502,15 +502,15 @@
   "@recentUpdates": {},
   "recommended": "Inirerekomenda",
   "@recommended": {},
-  "sort": "Ayusin",
+  "sort": "Pag-uriin",
   "@sort": {},
-  "topAiring": "Pinakapopular na Kasalukuyang Airing",
+  "topAiring": "Pinakatanyag na Eere",
   "@topAiring": {},
   "watch": "Manood",
   "@watch": {},
-  "utd": "Nai-update",
+  "utd": "Pataas Pababa",
   "@utd": {},
-  "manageLayoutDescription": "I-adjust ang disenyo ng layout",
+  "manageLayoutDescription": "Maaaring pamahalaan ang layout ng {page} sa pamamagitan ng pag-drag at drop ng mga item",
   "@manageLayoutDescription": {
     "placeholders": {
       "page": {
@@ -525,10 +525,12 @@
   },
   "pickColor": "Pumili ng Kulay",
   "@pickColor": {},
-  "droppedAnime": "Na-drop na Anime",
+  "droppedAnime": "Ibinagsak na Anime",
   "@droppedAnime": {},
-  "droppedManga": "Na-drop na Manga",
+  "droppedManga": "Ibinagsak na Manga",
   "@droppedManga": {},
   "kitsu": "Kitsu",
-  "@kitsu": {}
+  "@kitsu": {},
+  "simkl": "Simkl",
+  "@simkl": {}
 }

@@ -1,7 +1,7 @@
 {
   "cursedSpeedDescription": "สำหรับผู้ที่มีเวลาน้อย",
   "@cursedSpeedDescription": {},
-  "extension": "{count, plural, =1 {Extension} other {Extensions}}",
+  "extension": "{count, plural, =1 {ส่วนขยาย} other {ส่วนขยาย}}",
   "@extension": {},
   "enableDarkMode": "เปิดโหมดมืด",
   "@enableDarkMode": {},
@@ -75,7 +75,7 @@
   "@fontWeightDescription": {},
   "hidePrivate": "ซ่อนส่วนตัว",
   "@hidePrivate": {},
-  "hidePrivateDescription": "ฮาร์ดคอร์ ชุดส่วนตัวจากหน้าแรก.",
+  "hidePrivateDescription": "ซ่อนซีรีส์ส่วนตัวจากหน้าหลัก",
   "@hidePrivateDescription": {},
   "incognitoMode": "โหมดไม่ระบุตัวตน",
   "@incognitoMode": {},
@@ -83,7 +83,7 @@
   "@incognitoModeDescription": {},
   "login": "เข้าสู่ระบบ",
   "@login": {},
-  "logout": "โลโก้ {type}",
+  "logout": "ออกจากระบบ {type}",
   "@logout": {},
   "mal": "MyAnimeList",
   "@mal": {},
@@ -147,7 +147,7 @@
   "@theme": {},
   "yes": "ใช่",
   "@yes": {},
-  "loginTo": "เข้าสู่ระบบ",
+  "loginTo": "เข้าสู่ระบบ {service}",
   "@loginTo": {
     "placeholders": {
       "service": {
@@ -167,13 +167,13 @@
   "@manhua": {},
   "home": "หน้าหลัก",
   "@home": {},
-  "ln": "นิยายแสง",
+  "ln": "ไลท์โนเวล",
   "@ln": {},
   "series": "ซีรีส์",
   "@series": {},
-  "season": "ฤดูกาล",
+  "season": "ซีซั่น",
   "@season": {},
-  "episode": "ตอน",
+  "episode": "{count, plural, =1 {ตอน} other {ตอน}}",
   "@episode": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -182,7 +182,7 @@
       }
     }
   },
-  "chapter": "บท",
+  "chapter": "{count, plural, =1 {บท} other {บท}}",
   "@chapter": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -191,7 +191,7 @@
       }
     }
   },
-  "volume": "เล่ม",
+  "volume": "{count, plural, =1 {เล่ม} other {เล่ม}}",
   "@volume": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -200,7 +200,7 @@
       }
     }
   },
-  "movie": "ภาพยนตร์",
+  "movie": "{count, plural, =1 {ภาพยนตร์} other {ภาพยนตร์}}",
   "@movie": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -215,19 +215,19 @@
   "@calendar": {},
   "scanlators": "สแกนเลเตอร์",
   "@scanlators": {},
-  "gridView": "มุมมองแบบตาราง",
+  "gridView": "มุมมองตาราง",
   "@gridView": {},
   "listView": "มุมมองแบบรายการ",
   "@listView": {},
-  "compactView": "มุมมองแบบย่อ",
+  "compactView": "มุมมองคอมแพ็ค",
   "@compactView": {},
-  "sort": "จัดเรียง",
+  "sort": "เรียงลำดับ",
   "@sort": {},
   "episodeWatched": "ตอนที่ดูแล้ว",
   "@episodeWatched": {},
   "chapterRead": "บทที่อ่านแล้ว",
   "@chapterRead": {},
-  "available": "มีอยู่",
+  "available": "มีอยู่ {type}",
   "@available": {
     "placeholders": {
       "type": {
@@ -239,7 +239,7 @@
       }
     }
   },
-  "installed": "ติดตั้งแล้ว",
+  "installed": "ติดตั้ง {type}",
   "@installed": {
     "placeholders": {
       "type": {
@@ -250,7 +250,7 @@
       }
     }
   },
-  "trending": "กำลังเป็นที่นิยม",
+  "trending": "เทรนด์ {type}",
   "@trending": {
     "placeholders": {
       "type": {
@@ -262,7 +262,7 @@
       }
     }
   },
-  "mostFavourite": "ที่ชื่นชอบที่สุด",
+  "mostFavourite": "ที่ชื่นชอบมากที่สุด {type}",
   "@mostFavourite": {
     "placeholders": {
       "type": {
@@ -275,7 +275,7 @@
       }
     }
   },
-  "popular": "ยอดนิยม",
+  "popular": "ยอดนิยม {type}",
   "@popular": {
     "placeholders": {
       "type": {
@@ -288,7 +288,7 @@
       }
     }
   },
-  "topRated": "ที่ได้รับคะแนนสูงสุด",
+  "topRated": "อันดับสูงสุด {type}",
   "@topRated": {
     "placeholders": {
       "type": {
@@ -302,13 +302,13 @@
       }
     }
   },
-  "thisSeason": "ฤดูกาลนี้",
+  "thisSeason": "ซีซั่นนี้",
   "@thisSeason": {},
-  "nextSeason": "ฤดูกาลถัดไป",
+  "nextSeason": "ซีซั่นหน้า",
   "@nextSeason": {},
-  "previousSeason": "ฤดูกาลที่ผ่านมา",
+  "previousSeason": "ซีซั่นก่อนหน้า",
   "@previousSeason": {},
-  "planned": "ที่วางแผน",
+  "planned": "วางแผน {type}",
   "@planned": {
     "placeholders": {
       "type": {
@@ -320,7 +320,7 @@
       }
     }
   },
-  "browse": "เรียกดู",
+  "browse": "เรียกดู {type}",
   "@browse": {
     "placeholders": {
       "type": {
@@ -332,7 +332,7 @@
       }
     }
   },
-  "favorite": "โปรด",
+  "favorite": "โปรด {type}",
   "@favorite": {
     "placeholders": {
       "type": {
@@ -344,7 +344,7 @@
       }
     }
   },
-  "onHold": "ระงับ",
+  "onHold": "พักไว้ {type}",
   "@onHold": {
     "placeholders": {
       "type": {
@@ -356,7 +356,7 @@
       }
     }
   },
-  "noDropped": "ไม่ถูกทิ้ง",
+  "noDropped": "คุณยังไม่ได้หยุดดู {type} ใด ๆ",
   "@noDropped": {
     "placeholders": {
       "type": {
@@ -368,15 +368,15 @@
       }
     }
   },
-  "favorites": "โปรด",
+  "favorites": "รายการโปรด",
   "@favorites": {},
   "format": "รูปแบบ",
   "@format": {},
   "meanScore": "คะแนนเฉลี่ย",
   "@meanScore": {},
-  "totalEpisodes": "จำนวนตอนทั้งหมด",
+  "totalEpisodes": "ตอนทั้งหมด",
   "@totalEpisodes": {},
-  "totalChapters": "จำนวนบททั้งหมด",
+  "totalChapters": "บททั้งหมด",
   "@totalChapters": {},
   "relations": "ความสัมพันธ์",
   "@relations": {},
@@ -396,23 +396,23 @@
   "@synonyms": {},
   "author": "ผู้เขียน",
   "@author": {},
-  "averageDuration": "ระยะเวลาที่เฉลี่ย",
+  "averageDuration": "ระยะเวลาเฉลี่ย",
   "@averageDuration": {},
   "characters": "ตัวละคร",
   "@characters": {},
-  "collapseText": "ยุบข้อความ",
+  "collapseText": "แสดงน้อยลง",
   "@collapseText": {},
-  "comingSoon": "กำลังจะมา",
+  "comingSoon": "มาเร็ว ๆ นี้",
   "@comingSoon": {},
-  "description": "คำอธิบาย",
+  "description": "คำบรรยาย",
   "@description": {},
   "endDate": "วันสิ้นสุด",
   "@endDate": {},
-  "expandText": "ขยายข้อความ",
+  "expandText": "แสดงเพิ่มเติม",
   "@expandText": {},
   "name": "ชื่อ",
   "@name": {},
-  "nameRomaji": "ชื่อ (โรมาji)",
+  "nameRomaji": "ชื่อ (โรมาจิ)",
   "@nameRomaji": {},
   "popularity": "ความนิยม",
   "@popularity": {},
@@ -420,7 +420,7 @@
   "@prequel": {},
   "recommended": "แนะนำ",
   "@recommended": {},
-  "synopsis": "เรื่องย่อ",
+  "synopsis": "สรุป",
   "@synopsis": {},
   "tags": "แท็ก",
   "@tags": {},
@@ -428,11 +428,11 @@
   "@total": {},
   "novel": "นวนิยาย",
   "@novel": {},
-  "confirmLogout": "ยืนยันการออกจากระบบ",
+  "confirmLogout": "คุณแน่ใจหรือไม่ว่าต้องการออกจากระบบ?",
   "@confirmLogout": {},
   "language": "ภาษา",
   "@language": {},
-  "activity": "กิจกรรม",
+  "activity": "{count, plural, =1 {กิจกรรม} other {กิจกรรม}}",
   "@activity": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -441,7 +441,7 @@
       }
     }
   },
-  "droppedAnime": "อนิเมะที่ถูกทิ้ง",
+  "droppedAnime": "อนิเมะที่หยุดดู",
   "@droppedAnime": {},
   "hiddenMedia": "สื่อที่ซ่อน",
   "@hiddenMedia": {},
@@ -459,7 +459,7 @@
   "@dtu": {},
   "info": "ข้อมูล",
   "@info": {},
-  "list": "รายการ",
+  "list": "{type} รายการ",
   "@list": {
     "placeholders": {
       "type": {
@@ -470,19 +470,19 @@
   },
   "layout": "รูปแบบ",
   "@layout": {},
-  "noFavourites": "ไม่มีโปรด",
+  "noFavourites": "ดูเหมือนว่าคุณยังไม่ชอบอะไร,\nลองกดถูกใจรายการเพื่อเก็บไว้ที่นี่",
   "@noFavourites": {},
   "options": "ตัวเลือก",
   "@options": {},
   "search": "ค้นหา",
   "@search": {},
-  "topAiring": "ที่กำลังออกอากาศ",
+  "topAiring": "ออกอากาศยอดนิยม",
   "@topAiring": {},
   "watch": "ดู",
   "@watch": {},
-  "utd": "อัพเดท",
+  "utd": "จากบนลงล่าง",
   "@utd": {},
-  "manageLayout": "จัดการรูปแบบ",
+  "manageLayout": "จัดการเลย์เอาต์หน้า {page} สำหรับ {service}",
   "@manageLayout": {
     "placeholders": {
       "service": {
@@ -502,7 +502,7 @@
       }
     }
   },
-  "manageLayoutDescription": "จัดการรูปแบบหน้าจอ",
+  "manageLayoutDescription": "คุณสามารถจัดการเลย์เอาต์หน้า {page} ได้โดยการลากและวางไอเท็ม",
   "@manageLayoutDescription": {
     "placeholders": {
       "page": {
@@ -517,18 +517,20 @@
   },
   "pickColor": "เลือกสี",
   "@pickColor": {},
-  "allCaughtUpNew": "ทั้งหมดจับอะไร?",
+  "allCaughtUpNew": "ทั้งหมดตามทันแล้ว, มีอะไรใหม่บ้าง?",
   "@allCaughtUpNew": {},
-  "droppedManga": "มังงะที่ถูกทิ้ง",
+  "droppedManga": "มังงะที่หยุดอ่าน",
   "@droppedManga": {},
   "noHiddenMediaFound": "ไม่พบสื่อที่ซ่อน",
   "@noHiddenMediaFound": {},
-  "noOnHold": "ไม่มีที่ระงับ",
+  "noOnHold": "ดูเหมือนว่าคุณยังไม่ได้พักรายการใด ๆ",
   "@noOnHold": {},
-  "recentUpdates": "อัพเดทล่าสุด",
+  "recentUpdates": "การอัปเดตล่าสุด",
   "@recentUpdates": {},
-  "recommendationsEmptyMessage": "ไม่มีคำแนะนำ",
+  "recommendationsEmptyMessage": "ดู/อ่านอนิเมะหรือมังงะเพื่อรับคำแนะนำ",
   "@recommendationsEmptyMessage": {},
   "kitsu": "ชุด",
-  "@kitsu": {}
+  "@kitsu": {},
+  "simkl": "ซิม",
+  "@simkl": {}
 }

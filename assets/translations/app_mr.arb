@@ -93,7 +93,7 @@
   "@fontWeightDescription": {},
   "hidePrivate": "खाजगी लपवा",
   "@hidePrivate": {},
-  "hidePrivateDescription": "मुख्यपृष्ठावरून खाजगी मालिका लपवा.",
+  "hidePrivateDescription": "होम पृष्ठावर खाजगी मालिका लपवा.",
   "@hidePrivateDescription": {},
   "incognitoMode": "गोपनीय मोड",
   "@incognitoMode": {},
@@ -101,7 +101,7 @@
   "@incognitoModeDescription": {},
   "login": "लॉगिन",
   "@login": {},
-  "logout": "लॉगआउट {type}",
+  "logout": "{type} लॉगआउट करा",
   "@logout": {},
   "manga": "मंगा",
   "@manga": {},
@@ -147,9 +147,9 @@
   "@themeDescription": {},
   "yes": "हो",
   "@yes": {},
-  "totalEpisodes": "Episodes",
+  "totalEpisodes": "एपिसोड्स",
   "@totalEpisodes": {},
-  "onHold": "On Hold {type}",
+  "onHold": "ठेवले {type}",
   "@onHold": {
     "placeholders": {
       "type": {
@@ -161,9 +161,9 @@
       }
     }
   },
-  "continueReading": "Continue Reading",
+  "continueReading": "वाचन सुरू ठेवा",
   "@continueReading": {},
-  "favorite": "Favorite {type}",
+  "favorite": "आवडता {type}",
   "@favorite": {
     "placeholders": {
       "type": {
@@ -175,7 +175,7 @@
       }
     }
   },
-  "noDropped": "You haven't dropped any {type} yet.",
+  "noDropped": "तुम्ही अजून काही {type} सोडले नाही.",
   "@noDropped": {
     "placeholders": {
       "type": {
@@ -191,7 +191,7 @@
   "@total": {},
   "tags": "Tags",
   "@tags": {},
-  "activity": "{count, plural, =1 {Activity} other {Activities}}",
+  "activity": "{count, plural, =1 {गतिवीदि} other {गतिवीधियां}}",
   "@activity": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -200,9 +200,9 @@
       }
     }
   },
-  "continueWatching": "Continue Watching",
+  "continueWatching": "पाहणे सुरू ठेवा",
   "@continueWatching": {},
-  "popular": "Popular {type}",
+  "popular": "लोकप्रिय {type}",
   "@popular": {
     "placeholders": {
       "type": {
@@ -215,7 +215,7 @@
       }
     }
   },
-  "installed": "Installed {type}",
+  "installed": "{type} स्थापित",
   "@installed": {
     "placeholders": {
       "type": {
@@ -226,7 +226,7 @@
       }
     }
   },
-  "mostFavourite": "Most Favourite {type}",
+  "mostFavourite": "सर्वात आवडता {type}",
   "@mostFavourite": {
     "placeholders": {
       "type": {
@@ -239,11 +239,11 @@
       }
     }
   },
-  "synopsis": "Synopsis",
+  "synopsis": "सारांश",
   "@synopsis": {},
-  "nameRomaji": "Name (Romaji)",
+  "nameRomaji": "नाव (रोमाजी)",
   "@nameRomaji": {},
-  "browse": "Browse {type}",
+  "browse": "ब्राउझ करा {type}",
   "@browse": {
     "placeholders": {
       "type": {
@@ -255,27 +255,27 @@
       }
     }
   },
-  "comingSoon": "Coming SOON",
+  "comingSoon": "लवकरच येत आहे",
   "@comingSoon": {},
-  "popularity": "Popularity",
+  "popularity": "लोकप्रियता",
   "@popularity": {},
-  "allCaughtUpNew": "All caught up, when New?",
+  "allCaughtUpNew": "सर्व काही अपडेट झाले, काय नवीन आहे?",
   "@allCaughtUpNew": {},
-  "totalChapters": "Chapters",
+  "totalChapters": "धडे",
   "@totalChapters": {},
-  "favorites": "Favorites",
+  "favorites": "आवडते",
   "@favorites": {},
   "prequel": "PREQUEL",
   "@prequel": {},
-  "format": "Format",
+  "format": "रूपरेखा",
   "@format": {},
-  "expandText": "show more",
+  "expandText": "अधिक दाखवा",
   "@expandText": {},
   "sequel": "SEQUEL",
   "@sequel": {},
   "studio": "Studio",
   "@studio": {},
-  "staff": "Staff",
+  "staff": "कर्मचारी",
   "@staff": {},
   "status": "Status",
   "@status": {},
@@ -285,25 +285,25 @@
   "@source": {},
   "startDate": "Start Date",
   "@startDate": {},
-  "synonyms": "Synonyms",
+  "synonyms": "समानार्थी शब्द",
   "@synonyms": {},
-  "recommendationsEmptyMessage": "Watch/Read some Anime or Manga to get Recommendations",
+  "recommendationsEmptyMessage": "सुझाव मिळवण्यासाठी काही अ‍ॅनिमे किंवा मंगा वाचा/पाहा",
   "@recommendationsEmptyMessage": {},
   "author": "Author",
   "@author": {},
-  "averageDuration": "Average Duration",
+  "averageDuration": "सरासरी कालावधी",
   "@averageDuration": {},
-  "characters": "Characters",
+  "characters": "लक्ष्य पात्रे",
   "@characters": {},
-  "description": "Synopsis",
+  "description": "सारांश",
   "@description": {},
   "endDate": "End Date",
   "@endDate": {},
-  "collapseText": "show less",
+  "collapseText": "कमी दाखवा",
   "@collapseText": {},
   "name": "Name",
   "@name": {},
-  "recommended": "Recommended",
+  "recommended": "सुझावित",
   "@recommended": {},
   "meanScore": "Mean Score",
   "@meanScore": {},
@@ -311,7 +311,7 @@
   "@kitsu": {},
   "manhwa": "Manhwa",
   "@manhwa": {},
-  "loginTo": "Login to {service}",
+  "loginTo": "{service} मध्ये लॉगिन करा",
   "@loginTo": {
     "placeholders": {
       "service": {
@@ -327,13 +327,13 @@
   },
   "manhua": "Manhua",
   "@manhua": {},
-  "ln": "Light Novel",
+  "ln": "लाइट कादंबरी",
   "@ln": {},
-  "novel": "Novel",
+  "novel": "कादंबरी",
   "@novel": {},
   "series": "Series",
   "@series": {},
-  "episode": "{count, plural, =1 {Episode} other {Episodes}}",
+  "episode": "{count, plural, =1 {एपिसोड} other {एपिसोड्स}}",
   "@episode": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -344,7 +344,7 @@
   },
   "home": "Home",
   "@home": {},
-  "chapter": "{count, plural, =1 {Chapter} other {Chapters}}",
+  "chapter": "{count, plural, =1 {धडा} other {धडे}}",
   "@chapter": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -353,13 +353,13 @@
       }
     }
   },
-  "season": "Season",
+  "season": "हंगाम",
   "@season": {},
-  "scanlators": "Scanlators",
+  "scanlators": "स्कॅनलेटर",
   "@scanlators": {},
   "dtu": "Down To Up",
   "@dtu": {},
-  "volume": "{count, plural, =1 {Volume} other {Volumes}}",
+  "volume": "{count, plural, =1 {खंड} other {खंड}}",
   "@volume": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -368,7 +368,7 @@
       }
     }
   },
-  "movie": "{count, plural, =1 {Movie} other {Movies}}",
+  "movie": "{count, plural, =1 {चित्रपट} other {चित्रपट}}",
   "@movie": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -377,25 +377,25 @@
       }
     }
   },
-  "search": "Search",
+  "search": "शोधा",
   "@search": {},
-  "genres": "Genres",
+  "genres": "प्रकार",
   "@genres": {},
-  "calendar": "Calendar",
+  "calendar": "कॅलेंडर",
   "@calendar": {},
-  "confirmLogout": "तुम्ही नक्कीच लॉगआउट करू इच्छिता का?",
+  "confirmLogout": "आपण नक्कीच लॉगआउट करायचे आहे का?",
   "@confirmLogout": {},
-  "compactView": "Compact View",
+  "compactView": "संक्षिप्त दृश्य",
   "@compactView": {},
   "listView": "List View",
   "@listView": {},
-  "chapterRead": "Chapter Read",
+  "chapterRead": "धडा वाचला",
   "@chapterRead": {},
-  "gridView": "Grid View",
+  "gridView": "ग्रिड दृश्य",
   "@gridView": {},
-  "episodeWatched": "Episode Watched",
+  "episodeWatched": "एपिसोड पाहिला",
   "@episodeWatched": {},
-  "trending": "Trending {type}",
+  "trending": "ट्रेंडिंग {type}",
   "@trending": {
     "placeholders": {
       "type": {
@@ -407,7 +407,7 @@
       }
     }
   },
-  "available": "Available {type}",
+  "available": "{type} उपलब्ध",
   "@available": {
     "placeholders": {
       "type": {
@@ -419,11 +419,11 @@
       }
     }
   },
-  "thisSeason": "This Season",
+  "thisSeason": "हा हंगाम",
   "@thisSeason": {},
-  "nextSeason": "Next Season",
+  "nextSeason": "पुढील हंगाम",
   "@nextSeason": {},
-  "topRated": "Top Rated {type}",
+  "topRated": "टॉप रेटेड {type}",
   "@topRated": {
     "placeholders": {
       "type": {
@@ -437,9 +437,9 @@
       }
     }
   },
-  "previousSeason": "Previous Season",
+  "previousSeason": "मागील हंगाम",
   "@previousSeason": {},
-  "planned": "Planned {type}",
+  "planned": "योजना {type}",
   "@planned": {
     "placeholders": {
       "type": {
@@ -453,11 +453,11 @@
   },
   "addToList": "Add To List",
   "@addToList": {},
-  "comments": "Comments",
+  "comments": "टिप्पण्या",
   "@comments": {},
   "info": "Info",
   "@info": {},
-  "list": "{type} List",
+  "list": "{type} यादी",
   "@list": {
     "placeholders": {
       "type": {
@@ -466,23 +466,23 @@
       }
     }
   },
-  "language": "Language",
+  "language": "भाषा",
   "@language": {},
   "layout": "Layout",
   "@layout": {},
   "options": "Options",
   "@options": {},
-  "read": "Read",
+  "read": "वाचा",
   "@read": {},
-  "sort": "Sort",
+  "sort": "सॉर्ट करा",
   "@sort": {},
-  "watch": "Watch",
+  "watch": "पाहा",
   "@watch": {},
-  "utd": "Up To Down",
+  "utd": "वरून खाली",
   "@utd": {},
-  "topAiring": "Top Airing",
+  "topAiring": "टॉप एअरिंग",
   "@topAiring": {},
-  "manageLayout": "Manage {page} page Layout for {service}",
+  "manageLayout": "{service} साठी {page} पृष्ठाची रचना व्यवस्थापित करा",
   "@manageLayout": {
     "placeholders": {
       "service": {
@@ -502,7 +502,7 @@
       }
     }
   },
-  "manageLayoutDescription": "You can manage the layout for {page} page by dragging and dropping the items",
+  "manageLayoutDescription": "आपण घटक ड्रॅग आणि ड्रॉप करून {page} पृष्ठाची रचना व्यवस्थापित करू शकता",
   "@manageLayoutDescription": {
     "placeholders": {
       "page": {
@@ -515,20 +515,22 @@
       }
     }
   },
-  "pickColor": "Pick a color",
+  "pickColor": "एक रंग निवडा",
   "@pickColor": {},
-  "droppedAnime": "Dropped Anime",
+  "droppedAnime": "सोडलेली अ‍ॅनिमे",
   "@droppedAnime": {},
-  "hiddenMedia": "Hidden Media",
+  "hiddenMedia": "लपवलेली मीडिया",
   "@hiddenMedia": {},
-  "droppedManga": "Dropped Manga",
+  "droppedManga": "सोडलेली मंगा",
   "@droppedManga": {},
-  "noFavourites": "Looks like you don't like anything,\nTry liking a show to keep it here.",
+  "noFavourites": "तुम्ही काहीच आवडत नाहीत,\nकृपया शो आवडून तो येथे ठेवा.",
   "@noFavourites": {},
-  "noOnHold": "Looks like you haven't put anything on hold.",
+  "noOnHold": "तुम्ही अजून काही ठेवलं नाही.",
   "@noOnHold": {},
-  "noHiddenMediaFound": "No hidden media found",
+  "noHiddenMediaFound": "कुठलीही लपवलेली मीडिया सापडली नाही",
   "@noHiddenMediaFound": {},
-  "recentUpdates": "Recent Updates",
-  "@recentUpdates": {}
+  "recentUpdates": "अलीकडील अद्यतने",
+  "@recentUpdates": {},
+  "simkl": "Simkl",
+  "@simkl": {}
 }

@@ -11,7 +11,7 @@
   "@common": {},
   "commonDescription": "பயன்பாட்டின் வழக்கமான அமைப்புகளை அணுகவும்",
   "@commonDescription": {},
-  "extension": "{count, plural, =1 {உதவி} other {உதவி}}",
+  "extension": "{count, plural, =1 {விரிவாக்கம்} other {விரிவாக்கங்கள்}}",
   "@extension": {},
   "fontSize": "எழுத்து அளவு",
   "@fontSize": {},
@@ -87,17 +87,17 @@
   "@fontWeightDescription": {},
   "hidePrivate": "தனியுரிமையை மறைக்கவும்",
   "@hidePrivate": {},
-  "hidePrivateDescription": "முகப்புப் பக்கத்திலிருந்து தனிப்பட்ட தொடர்களை மறை.",
+  "hidePrivateDescription": "மனைவிகளைக் கொடுத்து முகப்புப் பக்கத்தில் ஒத்திருக்கவும்.",
   "@hidePrivateDescription": {},
   "incognitoModeDescription": "உங்கள் செயல்பாடுகளை சேமிக்காமல் உலாவவும்",
   "@incognitoModeDescription": {},
-  "logout": "வெளியேறு {type}",
+  "logout": "{type} இல் வெளியேறு",
   "@logout": {},
   "mal": "MyAnimeList",
   "@mal": {},
   "mangaDescription": "உங்கள் மங்கா அனுபவத்தை ஒழுங்குபடுத்தவும் மற்றும் தனிப்பயனாக்கவும்",
   "@mangaDescription": {},
-  "materialYou": "பொருள் நீங்கள்",
+  "materialYou": "உங்கள் முறை",
   "@materialYou": {},
   "materialYouDescription": "உங்கள் கைவினைப் படத்தின் நிறத்தை பயன்படுத்தவும்",
   "@materialYouDescription": {},
@@ -147,9 +147,9 @@
   "@anilist": {},
   "appName": "Dartotsu",
   "@appName": {},
-  "ln": "Light Novel",
+  "ln": "லைட் நாவல்",
   "@ln": {},
-  "volume": "{count, plural, =1 {Volume} other {Volumes}}",
+  "volume": "{count, plural, =1 {பரிமாணம்} other {பரிமாணங்கள்}}",
   "@volume": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -160,11 +160,11 @@
   },
   "total": "Total",
   "@total": {},
-  "novel": "Novel",
+  "novel": "புத்தகம்",
   "@novel": {},
   "tags": "Tags",
   "@tags": {},
-  "popular": "Popular {type}",
+  "popular": "பிரபலமான {type}",
   "@popular": {
     "placeholders": {
       "type": {
@@ -179,7 +179,7 @@
   },
   "name": "Name",
   "@name": {},
-  "mostFavourite": "Most Favourite {type}",
+  "mostFavourite": "அதிக விருப்பமான {type}",
   "@mostFavourite": {
     "placeholders": {
       "type": {
@@ -196,15 +196,15 @@
   "@meanScore": {},
   "series": "Series",
   "@series": {},
-  "synopsis": "Synopsis",
+  "synopsis": "சுருக்கம்",
   "@synopsis": {},
-  "nameRomaji": "Name (Romaji)",
+  "nameRomaji": "பெயர் (ரோமாஜி)",
   "@nameRomaji": {},
-  "averageDuration": "Average Duration",
+  "averageDuration": "சராசரி கால அளவு",
   "@averageDuration": {},
-  "comingSoon": "Coming SOON",
+  "comingSoon": "வென்றது உடனே வருகிறது",
   "@comingSoon": {},
-  "episode": "{count, plural, =1 {Episode} other {Episodes}}",
+  "episode": "{count, plural, =1 {பட்டியல்} other {பட்டியல்கள்}}",
   "@episode": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -213,17 +213,17 @@
       }
     }
   },
-  "popularity": "Popularity",
+  "popularity": "பிரபலம்",
   "@popularity": {},
-  "totalChapters": "Chapters",
+  "totalChapters": "அத்தியாயங்கள்",
   "@totalChapters": {},
-  "favorites": "Favorites",
+  "favorites": "பிடித்தவை",
   "@favorites": {},
   "home": "Home",
   "@home": {},
   "prequel": "PREQUEL",
   "@prequel": {},
-  "planned": "Planned {type}",
+  "planned": "திட்டமிடப்பட்ட {type}",
   "@planned": {
     "placeholders": {
       "type": {
@@ -235,11 +235,11 @@
       }
     }
   },
-  "search": "Search",
+  "search": "தேடு",
   "@search": {},
-  "collapseText": "show less",
+  "collapseText": "சுருக்கவும்",
   "@collapseText": {},
-  "chapter": "{count, plural, =1 {Chapter} other {Chapters}}",
+  "chapter": "{count, plural, =1 {அத்தியாயம்} other {அத்தியாயங்கள்}}",
   "@chapter": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -248,19 +248,19 @@
       }
     }
   },
-  "characters": "Characters",
+  "characters": "பாத்திரங்கள்",
   "@characters": {},
-  "genres": "Genres",
+  "genres": "பரிமாணங்கள்",
   "@genres": {},
-  "calendar": "Calendar",
+  "calendar": "கலண்டர்",
   "@calendar": {},
-  "format": "Format",
+  "format": "வடிவமைப்பு",
   "@format": {},
-  "expandText": "show more",
+  "expandText": "மேலும் காண்க",
   "@expandText": {},
   "manhua": "Manhua",
   "@manhua": {},
-  "season": "Season",
+  "season": "பிரிவு",
   "@season": {},
   "author": "Author",
   "@author": {},
@@ -268,7 +268,7 @@
   "@sequel": {},
   "studio": "Studio",
   "@studio": {},
-  "staff": "Staff",
+  "staff": "சீனியர்",
   "@staff": {},
   "status": "Status",
   "@status": {},
@@ -276,21 +276,21 @@
   "@relations": {},
   "source": "Source",
   "@source": {},
-  "synonyms": "Synonyms",
+  "synonyms": "சமாதானம்",
   "@synonyms": {},
   "startDate": "Start Date",
   "@startDate": {},
-  "description": "Synopsis",
+  "description": "சுருக்கம்",
   "@description": {},
   "endDate": "End Date",
   "@endDate": {},
-  "totalEpisodes": "Episodes",
+  "totalEpisodes": "பகுதிகள்",
   "@totalEpisodes": {},
   "manhwa": "Manhwa",
   "@manhwa": {},
   "kitsu": "Kitsu",
   "@kitsu": {},
-  "loginTo": "Login to {service}",
+  "loginTo": "{service} இல் புகுத்தவும்",
   "@loginTo": {
     "placeholders": {
       "service": {
@@ -304,7 +304,7 @@
       }
     }
   },
-  "movie": "{count, plural, =1 {Movie} other {Movies}}",
+  "movie": "{count, plural, =1 {படம்} other {படங்கள்}}",
   "@movie": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -313,9 +313,9 @@
       }
     }
   },
-  "scanlators": "Scanlators",
+  "scanlators": "ஸ்கான்லேட்டர்கள்",
   "@scanlators": {},
-  "manageLayout": "Manage {page} page Layout for {service}",
+  "manageLayout": "{service} இல் {page} பக்கத்தின் வடிவமைப்பை நிர்வகிக்கவும்",
   "@manageLayout": {
     "placeholders": {
       "service": {
@@ -337,7 +337,7 @@
   },
   "dtu": "Down To Up",
   "@dtu": {},
-  "list": "{type} List",
+  "list": "{type} பட்டியல்",
   "@list": {
     "placeholders": {
       "type": {
@@ -348,13 +348,13 @@
   },
   "confirmLogout": "நீங்கள் வெளியேற விரும்புகிறீர்களா?",
   "@confirmLogout": {},
-  "gridView": "Grid View",
+  "gridView": "கிரிட் பார்வை",
   "@gridView": {},
-  "compactView": "Compact View",
+  "compactView": "சுருக்கமான பார்வை",
   "@compactView": {},
   "listView": "List View",
   "@listView": {},
-  "installed": "Installed {type}",
+  "installed": "நிறுத்தப்பட்ட {type}",
   "@installed": {
     "placeholders": {
       "type": {
@@ -365,11 +365,11 @@
       }
     }
   },
-  "chapterRead": "Chapter Read",
+  "chapterRead": "அத்தியாயம் படித்தது",
   "@chapterRead": {},
-  "episodeWatched": "Episode Watched",
+  "episodeWatched": "பட்டியல் பார்வை",
   "@episodeWatched": {},
-  "available": "Available {type}",
+  "available": "கிடைக்கும் {type}",
   "@available": {
     "placeholders": {
       "type": {
@@ -383,9 +383,9 @@
   },
   "layout": "Layout",
   "@layout": {},
-  "thisSeason": "This Season",
+  "thisSeason": "இந்த பருவம்",
   "@thisSeason": {},
-  "trending": "Trending {type}",
+  "trending": "பிரபலமாக உள்ள {type}",
   "@trending": {
     "placeholders": {
       "type": {
@@ -397,7 +397,7 @@
       }
     }
   },
-  "topRated": "Top Rated {type}",
+  "topRated": "முதன்மை மதிப்பீடு {type}",
   "@topRated": {
     "placeholders": {
       "type": {
@@ -411,11 +411,11 @@
       }
     }
   },
-  "nextSeason": "Next Season",
+  "nextSeason": "அடுத்த பருவம்",
   "@nextSeason": {},
-  "previousSeason": "Previous Season",
+  "previousSeason": "முந்தைய பருவம்",
   "@previousSeason": {},
-  "onHold": "On Hold {type}",
+  "onHold": "ஒப்புதலுக்கு நேரிடப்பட்ட {type}",
   "@onHold": {
     "placeholders": {
       "type": {
@@ -427,7 +427,7 @@
       }
     }
   },
-  "favorite": "Favorite {type}",
+  "favorite": "விருப்பமான {type}",
   "@favorite": {
     "placeholders": {
       "type": {
@@ -439,7 +439,7 @@
       }
     }
   },
-  "noDropped": "You haven't dropped any {type} yet.",
+  "noDropped": "நீங்கள் எந்த {type} ஐயும் நிறுத்தவில்லை.",
   "@noDropped": {
     "placeholders": {
       "type": {
@@ -451,7 +451,7 @@
       }
     }
   },
-  "activity": "{count, plural, =1 {Activity} other {Activities}}",
+  "activity": "{count, plural, =1 {செயல்} other {செயல்கள்}}",
   "@activity": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -460,7 +460,7 @@
       }
     }
   },
-  "browse": "Browse {type}",
+  "browse": "பரிசோதனை {type}",
   "@browse": {
     "placeholders": {
       "type": {
@@ -472,33 +472,33 @@
       }
     }
   },
-  "continueReading": "Continue Reading",
+  "continueReading": "படிக்க தொடரவும்",
   "@continueReading": {},
-  "recommendationsEmptyMessage": "Watch/Read some Anime or Manga to get Recommendations",
+  "recommendationsEmptyMessage": "எந்த அநிமே அல்லது மாஙாவைப் பார்க்க/படிக்கவும் பரிந்துரைகள் பெற",
   "@recommendationsEmptyMessage": {},
-  "sort": "Sort",
+  "sort": "திருத்து",
   "@sort": {},
   "options": "Options",
   "@options": {},
   "addToList": "Add To List",
   "@addToList": {},
-  "comments": "Comments",
+  "comments": "கருத்துகள்",
   "@comments": {},
-  "continueWatching": "Continue Watching",
+  "continueWatching": "பார்க்க தொடரவும்",
   "@continueWatching": {},
   "info": "Info",
   "@info": {},
-  "language": "Language",
+  "language": "மொழி",
   "@language": {},
-  "read": "Read",
+  "read": "படிக்கவும்",
   "@read": {},
-  "topAiring": "Top Airing",
+  "topAiring": "முதன்மை ஒளிபரப்பு",
   "@topAiring": {},
-  "watch": "Watch",
+  "watch": "பார்க்கவும்",
   "@watch": {},
-  "utd": "Up To Down",
+  "utd": "மேல் இருந்து கீழே",
   "@utd": {},
-  "manageLayoutDescription": "You can manage the layout for {page} page by dragging and dropping the items",
+  "manageLayoutDescription": "{page} பக்கத்தின் வடிவமைப்பை நிர்வகிக்கப் பயன்படுத்த நீங்கள் உருப்படிகளை இழுத்து விடலாம்",
   "@manageLayoutDescription": {
     "placeholders": {
       "page": {
@@ -511,24 +511,26 @@
       }
     }
   },
-  "pickColor": "Pick a color",
+  "pickColor": "ஒரு நிறத்தைத் தேர்ந்தெடுக்கவும்",
   "@pickColor": {},
-  "noFavourites": "Looks like you don't like anything,\nTry liking a show to keep it here.",
+  "noFavourites": "உங்களுக்கு இதுவரை எதுவும் பிடிக்கவில்லை,\nஒரு நிகழ்ச்சியை விரும்பி இதை இங்கே வைத்திருங்கள்.",
   "@noFavourites": {},
-  "noOnHold": "Looks like you haven't put anything on hold.",
+  "noOnHold": "நீங்கள் எந்த ஒன்றையும் நிறுத்தவில்லை போல் தெரிகிறது.",
   "@noOnHold": {},
-  "hiddenMedia": "Hidden Media",
+  "hiddenMedia": "மறைக்கப்பட்ட மீடியா",
   "@hiddenMedia": {},
-  "noHiddenMediaFound": "No hidden media found",
+  "noHiddenMediaFound": "மறைக்கப்பட்ட மீடியா எதுவும் கண்டறியவில்லை",
   "@noHiddenMediaFound": {},
-  "droppedManga": "Dropped Manga",
+  "droppedManga": "நிறுத்தப்பட்ட மாஙா",
   "@droppedManga": {},
-  "droppedAnime": "Dropped Anime",
+  "droppedAnime": "நிறுத்தப்பட்ட அநிமே",
   "@droppedAnime": {},
-  "allCaughtUpNew": "All caught up, when New?",
+  "allCaughtUpNew": "அனைத்து புதுப்பிக்கப்பட்டவை, புதியவை என்ன?",
   "@allCaughtUpNew": {},
-  "recentUpdates": "Recent Updates",
+  "recentUpdates": "இணையதள புதிய பதிவுகள்",
   "@recentUpdates": {},
-  "recommended": "Recommended",
-  "@recommended": {}
+  "recommended": "பரிந்துரைக்கப்பட்டது",
+  "@recommended": {},
+  "simkl": "Simkl",
+  "@simkl": {}
 }

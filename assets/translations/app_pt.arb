@@ -523,5 +523,7 @@
   "totalEpisodes": "Episódios",
   "@totalEpisodes": {},
   "totalChapters": "Capítulos",
-  "@totalChapters": {}
+  "@totalChapters": {},
+  "simkl": "Simkl",
+  "@simkl": {}
 }
