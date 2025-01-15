@@ -1,7 +1,7 @@
 {
   "cursedSpeedDescription": "สำหรับผู้ที่มีเวลาน้อย",
   "@cursedSpeedDescription": {},
-  "extension": "วันที่พิมพ์ = 1 {Exage}",
+  "extension": "{count, plural, =1 {Extension} other {Extensions}}",
   "@extension": {},
   "enableDarkMode": "เปิดโหมดมืด",
   "@enableDarkMode": {},

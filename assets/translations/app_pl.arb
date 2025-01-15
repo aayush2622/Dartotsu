@@ -63,7 +63,7 @@
   "@donationGoal": {},
   "enableDarkMode": "Włącz tryb ciemny",
   "@enableDarkMode": {},
-  "extension": "mnogość, mnogość =1 {Extension} innymi {Extensions}}",
+  "extension": "{count, plural, =1 {Extension} other {Extensions}}",
   "@extension": {},
   "extensionsDescription": "Instaluj i zarządzaj rozszerzeniami dla dodatkowej funkcjonalności",
   "@extensionsDescription": {},
@@ -341,7 +341,7 @@
       }
     }
   },
-  "episode": "mnogość, mnogość =1 {Episode} Inne {Episodes}}",
+  "episode": "{count, plural, =1 {Episode} other {Episodes}}",
   "@episode": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -352,7 +352,7 @@
   },
   "scanlators": "Skanator",
   "@scanlators": {},
-  "movie": "mnogość, mnogość 1 {Movies} (ang.)",
+  "movie": "{count, plural, =1 {Movie} other {Movies}}",
   "@movie": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -438,7 +438,7 @@
   },
   "previousSeason": "Przed sezonem",
   "@previousSeason": {},
-  "activity": "mnogość, mnogość = 1 {Activity} (ang.)",
+  "activity": "{count, plural, =1 {Activity} other {Activities}}",
   "@activity": {
     "description": "count > 1 will use plural form",
     "placeholders": {

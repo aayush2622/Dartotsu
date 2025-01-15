@@ -183,7 +183,7 @@
       }
     }
   },
-  "activity": "Δραστηριότητα",
+  "activity": "{count, plural, =1 {Activity} other {Activities}}",
   "@activity": {
     "description": "count > 1 will use plural form",
     "placeholders": {

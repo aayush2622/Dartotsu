@@ -67,7 +67,7 @@
   "@donationGoal": {},
   "enableDarkMode": "Abilita la modalità scura",
   "@enableDarkMode": {},
-  "extension": "Conto, plurale, =1 {Estensione} altri {Estensioni}}",
+  "extension": "{count, plural, =1 {Extension} other {Extensions}}",
   "@extension": {},
   "extensionsDescription": "Installa e gestisci le estensioni per funzionalità aggiuntive",
   "@extensionsDescription": {},
@@ -272,7 +272,7 @@
       }
     }
   },
-  "episode": "Conto, plurale, =1 {Episode} altri {Episodi}}",
+  "episode": "{count, plural, =1 {Episode} other {Episodes}}",
   "@episode": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -291,7 +291,7 @@
   "@totalChapters": {},
   "favorites": "Preferiti",
   "@favorites": {},
-  "movie": "Conto, plurale, =1 {Movie} altro {Movies}}",
+  "movie": "{count, plural, =1 {Movie} other {Movies}}",
   "@movie": {
     "description": "count > 1 will use plural form",
     "placeholders": {

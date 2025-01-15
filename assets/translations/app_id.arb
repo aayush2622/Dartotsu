@@ -69,7 +69,7 @@
   "@enableDarkMode": {},
   "fontColor": "Warna Font",
   "@fontColor": {},
-  "extension": "Sitemap =1 {Extension} lainnya {Konten}}",
+  "extension": "{count, plural, =1 {Extension} other {Extensions}}",
   "@extension": {},
   "extensionsDescription": "Pasang dan kelola ekstensi untuk fungsionalitas tambahan",
   "@extensionsDescription": {},
@@ -192,7 +192,7 @@
   },
   "novel": "Login",
   "@novel": {},
-  "activity": "Sitemap =1 {Aktivitas} lainnya {Aktivities}}",
+  "activity": "{count, plural, =1 {Activity} other {Activities}}",
   "@activity": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -271,7 +271,7 @@
   "@totalChapters": {},
   "favorites": "Login",
   "@favorites": {},
-  "movie": "Sitemap =1 {Movie} lainnya {Movies}}",
+  "movie": "{count, plural, =1 {Movie} other {Movies}}",
   "@movie": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -404,7 +404,7 @@
   "@watch": {},
   "series": "Login",
   "@series": {},
-  "episode": "Sitemap {Episode} lainnya {Episodes}}",
+  "episode": "{count, plural, =1 {Episode} other {Episodes}}",
   "@episode": {
     "description": "count > 1 will use plural form",
     "placeholders": {

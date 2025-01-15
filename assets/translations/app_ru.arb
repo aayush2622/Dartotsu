@@ -184,7 +184,7 @@
       }
     }
   },
-  "activity": "Счет, множественность, =1 {Activity} другие {Activities}}",
+  "activity": "{count, plural, =1 {Activity} other {Activities}}",
   "@activity": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -268,7 +268,7 @@
   },
   "comingSoon": "Иду",
   "@comingSoon": {},
-  "episode": "Счет, множественность, =1 {Episode} другие {Episodes}}",
+  "episode": "{count, plural, =1 {Episode} other {Episodes}}",
   "@episode": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -283,7 +283,7 @@
   "@popularity": {},
   "favorites": "Любимые",
   "@favorites": {},
-  "movie": "Счет, множественность, =1 {Movie} другие {Movies}}",
+  "movie": "{count, plural, =1 {Movie} other {Movies}}",
   "@movie": {
     "description": "count > 1 will use plural form",
     "placeholders": {

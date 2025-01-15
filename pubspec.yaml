@@ -95,6 +95,7 @@ dependencies:
   collection: ^1.19.1
   flutter_web_auth_2: ^4.1.0
   flutter_dotenv: ^5.2.1
+  intl: ^0.19.0
 # Development dependencies
 dev_dependencies:
   flutter_test:

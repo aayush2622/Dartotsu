@@ -59,7 +59,7 @@
   "@discord": {},
   "donationGoal": "Pas de but de donation pour le moment",
   "@donationGoal": {},
-  "extension": "Tout le monde, =1 {Extension} autres {Extensions}}",
+  "extension": "{count, plural, =1 {Extension} other {Extensions}}",
   "@extension": {},
   "extensionsDescription": "Installez et gérez des extensions pour des fonctionnalités supplémentaires",
   "@extensionsDescription": {},
