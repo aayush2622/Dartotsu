@@ -382,7 +382,7 @@
   "@meanScore": {},
   "synopsis": "Login",
   "@synopsis": {},
-  "kitsu": "Login",
+  "kitsu": "Kitsu",
   "@kitsu": {},
   "loginTo": "Login ke {service}",
   "@loginTo": {
@@ -531,6 +531,14 @@
   "@noOnHold": {},
   "droppedManga": "Manga Terjatuh",
   "@droppedManga": {},
-  "simkl": "Login",
-  "@simkl": {}
+  "simkl": "Simkl",
+  "@simkl": {},
+  "selectMediaService": "Pilih Layanan Media",
+  "@selectMediaService": {},
+  "selectDirectory": "Pilih direktori",
+  "@selectDirectory": {},
+  "customPath": "Jalur Khusus",
+  "@customPath": {},
+  "customPathDescription": "Mengatur path kustom untuk menyimpan file\nTekan panjang untuk menghapus",
+  "@customPathDescription": {}
 }

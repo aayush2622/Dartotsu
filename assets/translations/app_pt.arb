@@ -525,5 +525,13 @@
   "totalChapters": "Capítulos",
   "@totalChapters": {},
   "simkl": "Simkl",
-  "@simkl": {}
+  "@simkl": {},
+  "selectMediaService": "Selecione o serviço de mídia",
+  "@selectMediaService": {},
+  "selectDirectory": "Selecione um diretório",
+  "@selectDirectory": {},
+  "customPath": "Caminho personalizado",
+  "@customPath": {},
+  "customPathDescription": "Defina um caminho personalizado para salvar arquivos\nImprensa longa para remover",
+  "@customPathDescription": {}
 }

@@ -532,5 +532,13 @@
   "recommended": "பரிந்துரைக்கப்பட்டது",
   "@recommended": {},
   "simkl": "Simkl",
-  "@simkl": {}
+  "@simkl": {},
+  "selectMediaService": "மீடியா சேவையைத் தேர்ந்தெடுக்கவும்",
+  "@selectMediaService": {},
+  "selectDirectory": "ஒரு கோப்பகத்தைத் தேர்ந்தெடுக்கவும்",
+  "@selectDirectory": {},
+  "customPath": "தனிப்பயன் பாதை",
+  "@customPath": {},
+  "customPathDescription": "கோப்புகளைச் சேமிக்க தனிப்பயன் பாதையை அமைக்கவும்\nஅகற்ற நீண்ட நேரம் அழுத்தவும்",
+  "@customPathDescription": {}
 }

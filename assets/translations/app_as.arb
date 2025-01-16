@@ -1,5 +1,5 @@
 {
-  "appName": "Dantotsu",
+  "appName": "Dartotsu",
   "@appName": {},
   "notifications": "জাননীসমূহ",
   "@notifications": {},
@@ -532,5 +532,13 @@
   "synopsis": "ছিনপচিছ",
   "@synopsis": {},
   "simkl": "Simkl",
-  "@simkl": {}
+  "@simkl": {},
+  "selectMediaService": "মিডিয়া সেৱা নিৰ্ব্বাচন কৰক",
+  "@selectMediaService": {},
+  "selectDirectory": "এটা ডাইৰেকটৰি নিৰ্ব্বাচন কৰক",
+  "@selectDirectory": {},
+  "customPath": "কাষ্টম পথ",
+  "@customPath": {},
+  "customPathDescription": "ফাইলসমূহ সংৰক্ষণ কৰিবলে এটা স্বনিৰ্বাচিত পথ নিৰ্ধাৰণ কৰক\nআঁতৰাবলৈ দীঘলীয়াকৈ টিপিব",
+  "@customPathDescription": {}
 }

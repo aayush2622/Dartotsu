@@ -192,7 +192,7 @@
       }
     }
   },
-  "kitsu": "トピックス",
+  "kitsu": "Kitsu",
   "@kitsu": {},
   "novel": "ノベル",
   "@novel": {},
@@ -531,6 +531,14 @@
   "@droppedAnime": {},
   "allCaughtUpNew": "巻き込まれたもの、新しいものは何ですか?",
   "@allCaughtUpNew": {},
-  "simkl": "シムカル",
-  "@simkl": {}
+  "simkl": "Simkl",
+  "@simkl": {},
+  "selectMediaService": "メディアサービスの選択",
+  "@selectMediaService": {},
+  "selectDirectory": "ディレクトリを選択",
+  "@selectDirectory": {},
+  "customPath": "カスタムパス",
+  "@customPath": {},
+  "customPathDescription": "ファイルを保存するカスタムパスを設定する\n長い出版物は取除きます",
+  "@customPathDescription": {}
 }

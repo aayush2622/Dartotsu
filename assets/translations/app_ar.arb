@@ -525,5 +525,13 @@
   "prequel": "السابق",
   "@prequel": {},
   "simkl": "Simkl",
-  "@simkl": {}
+  "@simkl": {},
+  "selectMediaService": "دائرة وسائط الإعلام المختارة",
+  "@selectMediaService": {},
+  "selectDirectory": "اختيار دليل",
+  "@selectDirectory": {},
+  "customPath": "المسار العرفي",
+  "@customPath": {},
+  "customPathDescription": "وضع مسار تقليدي لإنقاذ الملفات\nضغط طويل لإزالته",
+  "@customPathDescription": {}
 }

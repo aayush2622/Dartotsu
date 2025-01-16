@@ -47,7 +47,7 @@
   "@cancel": {},
   "colorPicker": "Выбор цвета",
   "@colorPicker": {},
-  "colorPickerDescription": "Выберите цвет",
+  "colorPickerDescription": "Выберите любой цвет",
   "@colorPickerDescription": {},
   "commonDescription": "Доступ к общим настройкам для удобного использования приложения",
   "@commonDescription": {},
@@ -532,5 +532,13 @@
   "droppedAnime": "Сброшенное аниме",
   "@droppedAnime": {},
   "simkl": "Simkl",
-  "@simkl": {}
+  "@simkl": {},
+  "selectMediaService": "Выберите медиа-сервис",
+  "@selectMediaService": {},
+  "selectDirectory": "Выберите каталог",
+  "@selectDirectory": {},
+  "customPath": "Пользовательский путь",
+  "@customPath": {},
+  "customPathDescription": "Настройка пользовательского пути для сохранения файлов\nДлинная пресса для удаления",
+  "@customPathDescription": {}
 }

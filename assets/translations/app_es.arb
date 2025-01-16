@@ -532,5 +532,13 @@
   "recentUpdates": "Actualizaciones recientes",
   "@recentUpdates": {},
   "simkl": "Simkl",
-  "@simkl": {}
+  "@simkl": {},
+  "selectMediaService": "Seleccionar servicio de medios",
+  "@selectMediaService": {},
+  "selectDirectory": "Seleccione un directorio",
+  "@selectDirectory": {},
+  "customPath": "Sendero personalizado",
+  "@customPath": {},
+  "customPathDescription": "Establecer una ruta personalizada para guardar archivos\nLong press to remove",
+  "@customPathDescription": {}
 }

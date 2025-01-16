@@ -532,5 +532,13 @@
   "kitsu": "Kitsu",
   "@kitsu": {},
   "simkl": "Simkl",
-  "@simkl": {}
+  "@simkl": {},
+  "selectMediaService": "Sélectionnez Service Médias",
+  "@selectMediaService": {},
+  "selectDirectory": "Sélectionnez un répertoire",
+  "@selectDirectory": {},
+  "customPath": "Voie personnalisée",
+  "@customPath": {},
+  "customPathDescription": "Définir un chemin personnalisé pour enregistrer des fichiers\nLongue pression pour supprimer",
+  "@customPathDescription": {}
 }

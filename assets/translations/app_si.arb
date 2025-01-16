@@ -532,5 +532,13 @@
   "recommendationsEmptyMessage": "නවීන මංගා හෝ ඇනිමේ කියවන්න/නරඹන්න, යෝජනා ලබා ගන්න",
   "@recommendationsEmptyMessage": {},
   "simkl": "Simkl",
-  "@simkl": {}
+  "@simkl": {},
+  "selectMediaService": "මාධ්ය සේවාව තෝරන්න",
+  "@selectMediaService": {},
+  "selectDirectory": "නාමාවලියක් තෝරන්න",
+  "@selectDirectory": {},
+  "customPath": "අභිරුචි මාර්ගය",
+  "@customPath": {},
+  "customPathDescription": "ගොනු සුරැකීමට අභිරුචි මාර්ගයක් සකසන්න\nඉවත් කිරීමට දිගු ඔබන්න",
+  "@customPathDescription": {}
 }

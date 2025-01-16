@@ -532,5 +532,13 @@
   "kitsu": "Kitsu",
   "@kitsu": {},
   "simkl": "Simkl",
-  "@simkl": {}
+  "@simkl": {},
+  "selectMediaService": "Vælg medietjeneste",
+  "@selectMediaService": {},
+  "selectDirectory": "Vælg en mappe",
+  "@selectDirectory": {},
+  "customPath": "Tilpasset vej",
+  "@customPath": {},
+  "customPathDescription": "Indstil en brugerdefineret sti til at gemme filer\nLang tryk for at fjerne",
+  "@customPathDescription": {}
 }

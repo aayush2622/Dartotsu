@@ -532,5 +532,13 @@
   "droppedAnime": "የተተወ አኒሜ",
   "@droppedAnime": {},
   "simkl": "Simkl",
-  "@simkl": {}
+  "@simkl": {},
+  "selectMediaService": "የሚዲያ አገልግሎትን ይምረጡ",
+  "@selectMediaService": {},
+  "customPath": "ብጁ መንገድ",
+  "@customPath": {},
+  "customPathDescription": "ፋይሎችን ለማስቀመጥ ብጁ መንገድ ያዘጋጁ\nለማስወገድ በረጅሙ ተጫን",
+  "@customPathDescription": {},
+  "selectDirectory": "ማውጫ ይምረጡ",
+  "@selectDirectory": {}
 }

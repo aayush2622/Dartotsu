@@ -308,7 +308,7 @@
   "@totalEpisodes": {},
   "totalChapters": "Rozdziały",
   "@totalChapters": {},
-  "kitsu": "Kitsutsutsu",
+  "kitsu": "Kitsu",
   "@kitsu": {},
   "manhwa": "Mandżwa",
   "@manhwa": {},
@@ -531,6 +531,14 @@
   "@hiddenMedia": {},
   "droppedManga": "Porzucona manga",
   "@droppedManga": {},
-  "simkl": "Simk",
-  "@simkl": {}
+  "simkl": "Simkl",
+  "@simkl": {},
+  "selectMediaService": "Strona internetowa",
+  "@selectMediaService": {},
+  "selectDirectory": "Wybór reżysera",
+  "@selectDirectory": {},
+  "customPath": "Oficjalna strona",
+  "@customPath": {},
+  "customPathDescription": "Użytkowana droga do zapisywania plików.\nLong press usunąć",
+  "@customPathDescription": {}
 }

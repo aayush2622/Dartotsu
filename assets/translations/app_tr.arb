@@ -532,5 +532,13 @@
   "kitsu": "Kitsu",
   "@kitsu": {},
   "simkl": "Simkl",
-  "@simkl": {}
+  "@simkl": {},
+  "selectMediaService": "Media Service Seç",
+  "@selectMediaService": {},
+  "selectDirectory": "Bir dizi seçin",
+  "@selectDirectory": {},
+  "customPath": "Özel Yol",
+  "@customPath": {},
+  "customPathDescription": "Dosyaları kurtarmak için özel bir yol ayarlayın\nUzun basın ortadan kaldırmak için",
+  "@customPathDescription": {}
 }

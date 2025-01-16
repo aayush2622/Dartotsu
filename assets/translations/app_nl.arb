@@ -532,5 +532,13 @@
   "kitsu": "Kitsu",
   "@kitsu": {},
   "simkl": "Simkl",
-  "@simkl": {}
+  "@simkl": {},
+  "selectMediaService": "Selecteer mediaservice",
+  "@selectMediaService": {},
+  "selectDirectory": "Selecteer een directeur",
+  "@selectDirectory": {},
+  "customPath": "Aangepast pad",
+  "@customPath": {},
+  "customPathDescription": "Zet een gewoon pad om bestanden te redden\nLange pers verwijdert",
+  "@customPathDescription": {}
 }

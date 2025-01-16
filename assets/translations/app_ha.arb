@@ -145,7 +145,7 @@
   "@speedDescription": {},
   "subtitles": "Subtiṭa",
   "@subtitles": {},
-  "subtitlePreview": "Nuna Subtiṭa",
+  "subtitlePreview": "Duban Subtiṭa",
   "@subtitlePreview": {},
   "addToList": "Ƙara zuwa Jerin",
   "@addToList": {},
@@ -532,5 +532,13 @@
   "kitsu": "Kitsu",
   "@kitsu": {},
   "simkl": "Simkl",
-  "@simkl": {}
+  "@simkl": {},
+  "selectMediaService": "Zaɓi Sabis na Mai jarida",
+  "@selectMediaService": {},
+  "selectDirectory": "Zaɓi directory",
+  "@selectDirectory": {},
+  "customPath": "Hanyar Al'ada",
+  "@customPath": {},
+  "customPathDescription": "Saita hanya ta al'ada don adana fayiloli\nDogon danna don cirewa",
+  "@customPathDescription": {}
 }

@@ -532,5 +532,13 @@
   "kitsu": "Kitsu",
   "@kitsu": {},
   "simkl": "Simkl",
-  "@simkl": {}
+  "@simkl": {},
+  "selectMediaService": "Chọn dịch vụ truyền thông",
+  "@selectMediaService": {},
+  "selectDirectory": "Chọn một thư mục",
+  "@selectDirectory": {},
+  "customPath": "Đường dẫn tùy chỉnh",
+  "@customPath": {},
+  "customPathDescription": "Đặt đường dẫn tùy chỉnh để lưu tệp\nNhấn lâu để xóa",
+  "@customPathDescription": {}
 }

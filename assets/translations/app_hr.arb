@@ -525,5 +525,13 @@
   "pickColor": "Odaberi boju",
   "@pickColor": {},
   "simkl": "Simkl",
-  "@simkl": {}
+  "@simkl": {},
+  "selectMediaService": "Odaberite Medijska usluga",
+  "@selectMediaService": {},
+  "selectDirectory": "Odaberite imenik",
+  "@selectDirectory": {},
+  "customPath": "Prilagođeni put",
+  "@customPath": {},
+  "customPathDescription": "Postavite prilagođeni put za spremanje datoteka\nDugo pritisnite za uklanjanje",
+  "@customPathDescription": {}
 }

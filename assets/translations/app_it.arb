@@ -532,5 +532,13 @@
   "allCaughtUpNew": "Tutto aggiornato, cosa c'è di nuovo?",
   "@allCaughtUpNew": {},
   "simkl": "Simkl",
-  "@simkl": {}
+  "@simkl": {},
+  "selectMediaService": "Selezionare il servizio Media",
+  "@selectMediaService": {},
+  "selectDirectory": "Seleziona una directory",
+  "@selectDirectory": {},
+  "customPath": "Percorso personalizzato",
+  "@customPath": {},
+  "customPathDescription": "Impostare un percorso personalizzato per salvare i file\nPremere a lungo per rimuovere",
+  "@customPathDescription": {}
 }

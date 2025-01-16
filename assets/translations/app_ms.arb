@@ -532,5 +532,13 @@
   "recommendationsEmptyMessage": "Tonton/Baca beberapa Anime atau Manga untuk mendapatkan Cadangan",
   "@recommendationsEmptyMessage": {},
   "simkl": "Simkl",
-  "@simkl": {}
+  "@simkl": {},
+  "selectMediaService": "Pilih Perkhidmatan Media",
+  "@selectMediaService": {},
+  "selectDirectory": "Pilih direktori",
+  "@selectDirectory": {},
+  "customPath": "Laluan Tersuai",
+  "@customPath": {},
+  "customPathDescription": "Tetapkan laluan tersuai untuk menyimpan fail\nTekan lama untuk mengeluarkan",
+  "@customPathDescription": {}
 }
