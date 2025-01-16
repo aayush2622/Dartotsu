@@ -532,5 +532,13 @@
   "noHiddenMediaFound": "没有找到隐藏的媒体",
   "@noHiddenMediaFound": {},
   "simkl": "Simkl",
-  "@simkl": {}
+  "@simkl": {},
+  "selectMediaService": "选择媒体服务",
+  "@selectMediaService": {},
+  "selectDirectory": "选择名录",
+  "@selectDirectory": {},
+  "customPath": "习俗之路",
+  "@customPath": {},
+  "customPathDescription": "2. 确立一条习俗,以挽救档案\n长期停业",
+  "@customPathDescription": {}
 }

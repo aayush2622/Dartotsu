@@ -532,5 +532,13 @@
   "kitsu": "Kitsu",
   "@kitsu": {},
   "simkl": "Simkl",
-  "@simkl": {}
+  "@simkl": {},
+  "selectMediaService": "Επιλέξτε Media Service",
+  "@selectMediaService": {},
+  "selectDirectory": "Επιλέξτε έναν κατάλογο",
+  "@selectDirectory": {},
+  "customPath": "Προσαρμοσμένη διαδρομή",
+  "@customPath": {},
+  "customPathDescription": "Ορίστε ένα προσαρμοσμένο μονοπάτι για να αποθηκεύσετε αρχεία\nLong Press για να αφαιρέσετε",
+  "@customPathDescription": {}
 }

@@ -531,6 +531,14 @@
   "@droppedManga": {},
   "recommended": "پیشنهادی",
   "@recommended": {},
-  "simkl": "سیمی",
-  "@simkl": {}
+  "simkl": "Simkl",
+  "@simkl": {},
+  "selectMediaService": "انتخاب خدمات رسانه ای",
+  "@selectMediaService": {},
+  "selectDirectory": "انتخاب یک دایرکتوری",
+  "@selectDirectory": {},
+  "customPath": "مسیر سفارشی",
+  "@customPath": {},
+  "customPathDescription": "یک مسیر سفارشی برای ذخیره فایل ها تنظیم کنید\nمطبوعات طولانی برای حذف",
+  "@customPathDescription": {}
 }

@@ -532,5 +532,13 @@
   "confirmLogout": "آیا مطمئن هستید که می‌خواهید از سیستم خارج شوید؟",
   "@confirmLogout": {},
   "simkl": "Simkl",
-  "@simkl": {}
+  "@simkl": {},
+  "selectMediaService": "د رسنیو خدمت غوره کړئ",
+  "@selectMediaService": {},
+  "selectDirectory": "لارښود غوره کړئ",
+  "@selectDirectory": {},
+  "customPath": "دودیزه لاره",
+  "@customPath": {},
+  "customPathDescription": "د فایلونو خوندي کولو لپاره دودیز لاره تنظیم کړئ\nد لرې کولو لپاره اوږد فشار ورکړئ",
+  "@customPathDescription": {}
 }

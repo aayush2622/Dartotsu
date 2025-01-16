@@ -9,7 +9,7 @@
   "@accountDescription": {},
   "animeDescription": "మీ ఆనిమే ప్రాధాన్యతలను వ్యక్తిగతీకరించి నిర్వహించండి",
   "@animeDescription": {},
-  "appName": "Dantotsu",
+  "appName": "Dartotsu",
   "@appName": {},
   "appTagline": "నవీకృత ఉత్తమ అప్లికేషన్\nఆనిమే మరియు మాంగా ట్రాకింగ్ కోసం",
   "@appTagline": {},
@@ -532,5 +532,13 @@
   "recommendationsEmptyMessage": "ప్రత్యేక సిఫార్సులను పొందడానికి కొన్ని అనిమే లేదా మంగా చూడండి/చదవండి",
   "@recommendationsEmptyMessage": {},
   "simkl": "Simkl",
-  "@simkl": {}
+  "@simkl": {},
+  "selectMediaService": "మీడియా సర్వీస్‌ని ఎంచుకోండి",
+  "@selectMediaService": {},
+  "selectDirectory": "డైరెక్టరీని ఎంచుకోండి",
+  "@selectDirectory": {},
+  "customPath": "అనుకూల మార్గం",
+  "@customPath": {},
+  "customPathDescription": "ఫైల్‌లను సేవ్ చేయడానికి అనుకూల మార్గాన్ని సెట్ చేయండి\nతీసివేయడానికి ఎక్కువసేపు నొక్కండి",
+  "@customPathDescription": {}
 }

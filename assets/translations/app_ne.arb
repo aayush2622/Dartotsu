@@ -532,5 +532,13 @@
   "recommendationsEmptyMessage": "सुझावहरू प्राप्त गर्नका लागि केहि एनीमे वा मंगा हेर्नुहोस्/पढ्नुहोस्",
   "@recommendationsEmptyMessage": {},
   "simkl": "Simkl",
-  "@simkl": {}
+  "@simkl": {},
+  "selectMediaService": "मिडिया सेवा चयन गर्नुहोस्",
+  "@selectMediaService": {},
+  "selectDirectory": "निर्देशिका चयन गर्नुहोस्",
+  "@selectDirectory": {},
+  "customPath": "अनुकूलन मार्ग",
+  "@customPath": {},
+  "customPathDescription": "फाइलहरू बचत गर्न अनुकूलन मार्ग सेट गर्नुहोस्\nहटाउन लामो प्रेस गर्नुहोस्",
+  "@customPathDescription": {}
 }

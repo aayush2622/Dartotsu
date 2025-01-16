@@ -532,5 +532,13 @@
   "noHiddenMediaFound": "କୌଣସି ଲୁଚାଇଥିବା ମାଧ୍ୟମ ମିଳିଲା ନାହିଁ",
   "@noHiddenMediaFound": {},
   "simkl": "Simkl",
-  "@simkl": {}
+  "@simkl": {},
+  "selectMediaService": "ମିଡିଆ ସେବା ଚୟନ କରନ୍ତୁ",
+  "@selectMediaService": {},
+  "selectDirectory": "ଏକ ଡିରେକ୍ଟୋରୀ ଚୟନ କରନ୍ତୁ",
+  "@selectDirectory": {},
+  "customPath": "କଷ୍ଟମ୍ ପଥ",
+  "@customPath": {},
+  "customPathDescription": "ଫାଇଲ୍ ସେଭ୍ କରିବାକୁ ଏକ କଷ୍ଟମ୍ ପଥ ସେଟ୍ କରନ୍ତୁ\nଅପସାରଣ କରିବାକୁ ଲମ୍ବା ଦବାନ୍ତୁ",
+  "@customPathDescription": {}
 }

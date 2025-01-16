@@ -532,5 +532,13 @@
   "noOnHold": "נראה שלא שמת שום דבר בהמתנה.",
   "@noOnHold": {},
   "simkl": "Simkl",
-  "@simkl": {}
+  "@simkl": {},
+  "selectMediaService": "שירות מדיה נבחר",
+  "@selectMediaService": {},
+  "selectDirectory": "בחר מנהל",
+  "@selectDirectory": {},
+  "customPath": "נתיב מותאם אישית",
+  "@customPath": {},
+  "customPathDescription": "הגדרת נתיב מותאם אישית להצלת קבצים\nעיתונות ארוכה כדי להסיר",
+  "@customPathDescription": {}
 }

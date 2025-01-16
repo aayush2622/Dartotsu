@@ -532,5 +532,13 @@
   "kitsu": "Kitsu",
   "@kitsu": {},
   "simkl": "Simkl",
-  "@simkl": {}
+  "@simkl": {},
+  "selectMediaService": "Piliin ang Serbisyo ng Media",
+  "@selectMediaService": {},
+  "selectDirectory": "Pumili ng isang direktoryo",
+  "@selectDirectory": {},
+  "customPath": "Custom na Path",
+  "@customPath": {},
+  "customPathDescription": "Magtakda ng custom na path para mag-save ng mga file\nPindutin nang matagal upang alisin",
+  "@customPathDescription": {}
 }

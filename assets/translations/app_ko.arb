@@ -368,7 +368,7 @@
   "@droppedAnime": {},
   "recentUpdates": "최근 업데이트",
   "@recentUpdates": {},
-  "kitsu": "채용정보",
+  "kitsu": "Kitsu",
   "@kitsu": {},
   "loginTo": "로그인 {service}",
   "@loginTo": {
@@ -531,6 +531,14 @@
   },
   "pickColor": "색상 선택",
   "@pickColor": {},
-  "simkl": "메인메뉴",
-  "@simkl": {}
+  "simkl": "Simkl",
+  "@simkl": {},
+  "selectMediaService": "미디어 서비스",
+  "@selectMediaService": {},
+  "selectDirectory": "자주 묻는 질문",
+  "@selectDirectory": {},
+  "customPath": "주문 경로",
+  "@customPath": {},
+  "customPathDescription": "파일을 저장하는 사용자 정의 경로를 설정\n긴 압박 제거",
+  "@customPathDescription": {}
 }

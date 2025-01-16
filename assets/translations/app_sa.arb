@@ -31,7 +31,7 @@
   "@notifications": {},
   "notificationsDescription": "कथमपि कदा च सूचनाएँ प्राप्तुं ताः व्यवस्थितय",
   "@notificationsDescription": {},
-  "about": "विवरणम्",
+  "about": "विषये",
   "@about": {},
   "aboutDescription": "एप्लिकेशनस्य च निर्मातृणां विषये अधिकं जानहि",
   "@aboutDescription": {},
@@ -532,5 +532,13 @@
   "synopsis": "सार",
   "@synopsis": {},
   "simkl": "Simkl",
-  "@simkl": {}
+  "@simkl": {},
+  "selectMediaService": "मीडिया सेवां चिनोतु",
+  "@selectMediaService": {},
+  "selectDirectory": "एकं निर्देशिकां चिनोतु",
+  "@selectDirectory": {},
+  "customPath": "कस्टम पथ",
+  "@customPath": {},
+  "customPathDescription": "सञ्चिकाः रक्षितुं इष्टमार्गं सेट् कुर्वन्तु\nदूरीकर्तुं दीर्घकालं यावत् दबावन्तु",
+  "@customPathDescription": {}
 }

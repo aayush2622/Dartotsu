@@ -532,5 +532,13 @@
   "recommendationsEmptyMessage": "അനി/മംഗ വാചകം/കാണുക എടുക്കുക എങ്ങനെ",
   "@recommendationsEmptyMessage": {},
   "simkl": "Simkl",
-  "@simkl": {}
+  "@simkl": {},
+  "selectMediaService": "മീഡിയ സേവനം തിരഞ്ഞെടുക്കുക",
+  "@selectMediaService": {},
+  "selectDirectory": "ഒരു ഡയറക്ടറി തിരഞ്ഞെടുക്കുക",
+  "@selectDirectory": {},
+  "customPath": "ഇഷ്ടാനുസൃത പാത",
+  "@customPath": {},
+  "customPathDescription": "ഫയലുകൾ സംരക്ഷിക്കാൻ ഒരു ഇഷ്‌ടാനുസൃത പാത സജ്ജമാക്കുക\nനീക്കം ചെയ്യാൻ ദീർഘനേരം അമർത്തുക",
+  "@customPathDescription": {}
 }

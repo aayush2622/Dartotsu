@@ -532,5 +532,13 @@
   "droppedAnime": "Anime Iliyotupwa",
   "@droppedAnime": {},
   "simkl": "Simkl",
-  "@simkl": {}
+  "@simkl": {},
+  "selectMediaService": "Chagua Huduma ya Vyombo vya Habari",
+  "@selectMediaService": {},
+  "selectDirectory": "Chagua saraka",
+  "@selectDirectory": {},
+  "customPath": "Njia Maalum",
+  "@customPath": {},
+  "customPathDescription": "Weka njia maalum ya kuhifadhi faili\nBonyeza kwa muda mrefu ili kuondoa",
+  "@customPathDescription": {}
 }

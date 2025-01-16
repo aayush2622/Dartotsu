@@ -532,5 +532,13 @@
   "recentUpdates": "সাম্প্রতিক আপডেট",
   "@recentUpdates": {},
   "simkl": "Simkl",
-  "@simkl": {}
+  "@simkl": {},
+  "selectMediaService": "মিডিয়া পরিষেবা নির্বাচন করুন",
+  "@selectMediaService": {},
+  "selectDirectory": "একটি ডিরেক্টরি নির্বাচন করুন",
+  "@selectDirectory": {},
+  "customPath": "কাস্টম পথ",
+  "@customPath": {},
+  "customPathDescription": "ফাইল সংরক্ষণ করার জন্য একটি কাস্টম পথ সেট করুন\nঅপসারণ করতে দীর্ঘক্ষণ টিপুন",
+  "@customPathDescription": {}
 }

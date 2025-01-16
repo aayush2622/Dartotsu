@@ -329,7 +329,7 @@
       }
     }
   },
-  "kitsu": "Кіцу",
+  "kitsu": "Kitsu",
   "@kitsu": {},
   "manhwa": "Манхва",
   "@manhwa": {},
@@ -525,5 +525,13 @@
   "averageDuration": "Середня тривалість",
   "@averageDuration": {},
   "simkl": "Simkl",
-  "@simkl": {}
+  "@simkl": {},
+  "selectMediaService": "Виберіть Медіасервіс",
+  "@selectMediaService": {},
+  "selectDirectory": "Виберіть каталог",
+  "@selectDirectory": {},
+  "customPath": "Спеціальний шлях",
+  "@customPath": {},
+  "customPathDescription": "Встановіть спеціальний шлях для збереження файлів\nНатисніть і утримуйте, щоб видалити",
+  "@customPathDescription": {}
 }

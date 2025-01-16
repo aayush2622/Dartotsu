@@ -532,5 +532,13 @@
     }
   },
   "simkl": "Simkl",
-  "@simkl": {}
+  "@simkl": {},
+  "selectMediaService": "Mediendienst auswählen",
+  "@selectMediaService": {},
+  "selectDirectory": "Wählen Sie ein Verzeichnis",
+  "@selectDirectory": {},
+  "customPath": "In den Warenkorb",
+  "@customPath": {},
+  "customPathDescription": "Setzen Sie einen benutzerdefinierten Pfad, um Dateien zu speichern\nLange Presse zu entfernen",
+  "@customPathDescription": {}
 }

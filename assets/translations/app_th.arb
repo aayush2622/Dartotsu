@@ -529,8 +529,16 @@
   "@recentUpdates": {},
   "recommendationsEmptyMessage": "ดู/อ่านอนิเมะหรือมังงะเพื่อรับคำแนะนำ",
   "@recommendationsEmptyMessage": {},
-  "kitsu": "ชุด",
+  "kitsu": "Kitsu",
   "@kitsu": {},
-  "simkl": "ซิม",
-  "@simkl": {}
+  "simkl": "Simkl",
+  "@simkl": {},
+  "selectMediaService": "เลือกบริการ",
+  "@selectMediaService": {},
+  "selectDirectory": "เลือกไดเรกทอรี",
+  "@selectDirectory": {},
+  "customPath": "เส้นทางที่กําหนดเอง",
+  "@customPath": {},
+  "customPathDescription": "ตั้งค่าเส้นทางที่กําหนดเองเพื่อบันทึกไฟล์\nกดยาวเพื่อลบ",
+  "@customPathDescription": {}
 }

@@ -532,5 +532,13 @@
   "synopsis": "सार",
   "@synopsis": {},
   "simkl": "Simkl",
-  "@simkl": {}
+  "@simkl": {},
+  "selectMediaService": "मीडिया सर्विस",
+  "@selectMediaService": {},
+  "selectDirectory": "निर्देशिका चुनें",
+  "@selectDirectory": {},
+  "customPath": "कस्टम पथ",
+  "@customPath": {},
+  "customPathDescription": "फ़ाइलों को बचाने के लिए एक कस्टम पथ सेट करें\nहटाने के लिए लंबी प्रेस",
+  "@customPathDescription": {}
 }

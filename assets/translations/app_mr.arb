@@ -532,5 +532,13 @@
   "recentUpdates": "अलीकडील अद्यतने",
   "@recentUpdates": {},
   "simkl": "Simkl",
-  "@simkl": {}
+  "@simkl": {},
+  "selectMediaService": "मीडिया सेवा निवडा",
+  "@selectMediaService": {},
+  "customPath": "सानुकूल मार्ग",
+  "@customPath": {},
+  "customPathDescription": "फाइल सेव्ह करण्यासाठी सानुकूल मार्ग सेट करा\nकाढण्यासाठी दीर्घकाळ दाबा",
+  "@customPathDescription": {},
+  "selectDirectory": "निर्देशिका निवडा",
+  "@selectDirectory": {}
 }

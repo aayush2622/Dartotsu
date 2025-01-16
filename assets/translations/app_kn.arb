@@ -532,5 +532,13 @@
   "recommended": "ಶಿಫಾರಸು ಮಾಡಲಾಗಿದೆ",
   "@recommended": {},
   "simkl": "Simkl",
-  "@simkl": {}
+  "@simkl": {},
+  "selectMediaService": "ಮಾಧ್ಯಮ ಸೇವೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ",
+  "@selectMediaService": {},
+  "selectDirectory": "ಡೈರೆಕ್ಟರಿಯನ್ನು ಆಯ್ಕೆಮಾಡಿ",
+  "@selectDirectory": {},
+  "customPath": "ಕಸ್ಟಮ್ ಮಾರ್ಗ",
+  "@customPath": {},
+  "customPathDescription": "ಫೈಲ್‌ಗಳನ್ನು ಉಳಿಸಲು ಕಸ್ಟಮ್ ಮಾರ್ಗವನ್ನು ಹೊಂದಿಸಿ\nತೆಗೆದುಹಾಕಲು ದೀರ್ಘವಾಗಿ ಒತ್ತಿರಿ",
+  "@customPathDescription": {}
 }
