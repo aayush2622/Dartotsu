@@ -532,7 +532,7 @@ jobs:
           if [ $top_contributor_count -eq 1 ]; then
             thumbnail_url="$top_contributor_avatar"
           else
-            thumbnail_url="https://i.imgur.com/5o3Y9Jb.gif"
+            thumbnail_url="https://i.imgur.com/qt1ixRk.gif"
             embed_color=$(hex_to_decimal "$default_color")
           fi
 
