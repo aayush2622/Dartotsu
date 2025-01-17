@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import '../../Services/MediaService.dart';
 import '../../Services/Screens/BaseLoginScreen.dart';
+import '../../Theme/LanguageSwitcher.dart';
 import 'Screen/SimklHomeScreen.dart';
 import 'Simkl.dart';
 
@@ -11,6 +12,9 @@ class SimklService extends MediaService {
   SimklService() {
     Simkl.getSavedToken();
   }
+
+  @override
+  String get getName => getString.simkl;
 
   @override
   String get iconPath => "assets/svg/simkl.svg";

@@ -1,25 +1,33 @@
+import 'package:hive/hive.dart';
 
-import 'package:isar/isar.dart';
 part 'DefaultPlayerSettings.g.dart';
 
-@collection
+@HiveType(typeId: 3)
 class PlayerSettings {
-  Id id = Isar.autoIncrement;
-  @Index(unique: true, replace: true)
-  late String key;
-
+  @HiveField(0)
   String speed;
+  @HiveField(1)
   int resizeMode;
   // subtitlesSettings
+  @HiveField(2)
   bool showSubtitle;
+  @HiveField(3)
   String subtitleLanguage;
+  @HiveField(4)
   int  subtitleSize;
+  @HiveField(5)
   int subtitleColor;
+  @HiveField(6)
   String subtitleFont;
+  @HiveField(7)
   int subtitleBackgroundColor;
+  @HiveField(8)
   int subtitleOutlineColor;
+  @HiveField(9)
   int subtitleBottomPadding;
+  @HiveField(10)
   int skipDuration;
+  @HiveField(11)
   int subtitleWeight;
 
   PlayerSettings({

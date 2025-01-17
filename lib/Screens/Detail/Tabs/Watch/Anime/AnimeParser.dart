@@ -88,10 +88,9 @@ class AnimeParser extends BaseParser {
 
     MManga? m;
     try {
-      m = await getDetail(url: media.link!, source: source).timeout(Duration(seconds: 5));
+      m = await getDetail(url: media.link!, source: source).timeout(Duration(seconds: 10));
     } catch (e) {
       errorType.value = ErrorType.NoResult;
-      m = null;
       return;
     }
 

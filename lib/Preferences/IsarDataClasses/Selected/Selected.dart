@@ -1,23 +1,30 @@
+import 'package:hive/hive.dart';
 
-import 'package:isar/isar.dart';
 part 'Selected.g.dart';
 
-@collection
+@HiveType(typeId: 1)
 class Selected {
-  Id id = Isar.autoIncrement;
-  @Index(unique: true, replace: true)
-  late String key;
-
+  @HiveField(0)
   int window;
+  @HiveField(1)
   int recyclerStyle;
+  @HiveField(2)
   bool recyclerReversed;
+  @HiveField(3)
   int chip;
+  @HiveField(4)
   int sourceIndex;
+  @HiveField(5)
   int langIndex;
+  @HiveField(6)
   bool preferDub;
+  @HiveField(7)
   String? server;
+  @HiveField(8)
   int video;
+  @HiveField(9)
   double latest;
+  @HiveField(10)
   List<String>? scanlators;
 
   Selected({

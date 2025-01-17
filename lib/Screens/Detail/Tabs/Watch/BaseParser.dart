@@ -33,6 +33,7 @@ abstract class BaseParser extends GetxController {
 
   Future<void> searchMedia(Source source, Media mediaData,
       {Function(MManga? response)? onFinish}) async {
+    if (this.source.value != source) return;
     selectedMedia.value = null;
     var saved = _loadShowResponse(source, mediaData);
     if (saved != null) {
@@ -41,6 +42,7 @@ abstract class BaseParser extends GetxController {
         imageUrl: saved.coverUrl,
         link: saved.link,
       );
+      if (this.source.value != source) return;
       selectedMedia.value = response;
       _saveShowResponse(mediaData, response, source, selected: true);
       onFinish?.call(response);
@@ -139,6 +141,7 @@ abstract class BaseParser extends GetxController {
     }
     if (response != null) {
       _saveShowResponse(mediaData, response, source);
+      if (this.source.value != source) return;
       selectedMedia.value = response;
       onFinish?.call(response);
     } else {

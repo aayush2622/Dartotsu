@@ -80,6 +80,7 @@ class WindowsPlayer extends BasePlayer {
     videoController.player.stream.playing.listen(isPlaying.call);
     videoController.player.stream.tracks
         .listen((e) => subtitles.value = e.subtitle);
+    videoController.player.stream.subtitle.listen((e) => subtitle.value = e);
   }
 
   String _formatTime(int seconds) {
@@ -97,27 +98,9 @@ class WindowsPlayer extends BasePlayer {
   Widget playerWidget() {
     return Video(
       filterQuality: FilterQuality.medium,
-      subtitleViewConfiguration: SubtitleViewConfiguration(
-        visible: settings.showSubtitle,
-        style: TextStyle(
-          fontSize: settings.subtitleSize.toDouble(),
-          fontWeight: FontWeight.values[settings.subtitleWeight.toInt()],
-          fontFamily: settings.subtitleFont,
-          backgroundColor: Color(settings.subtitleBackgroundColor),
-          color: Color(settings.subtitleColor),
-          shadows: [
-            Shadow(
-              color: Color(settings.subtitleOutlineColor),
-              offset: const Offset(0.5, 0.5),
-            ),
-            Shadow(
-              color: Color(settings.subtitleOutlineColor),
-              offset: const Offset(-0.5, -0.5),
-            ),
-          ],
-        ),
-        padding:
-            EdgeInsets.only(bottom: settings.subtitleBottomPadding.toDouble()),
+      subtitleViewConfiguration:
+      const SubtitleViewConfiguration(
+        visible: false,
       ),
       controller: videoController,
       controls: null,

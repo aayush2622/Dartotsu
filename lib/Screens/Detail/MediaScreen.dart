@@ -32,13 +32,13 @@ class MediaInfoPageState extends State<MediaInfoPage> {
   final _selectedIndex = 0.obs;
   late MediaPageViewModel _viewModel;
 
-  late PageController pageController;
+  late PageController pageController = PageController();
   late Media mediaData;
 
   @override
   void initState() {
-    super.initState();
     pageController = PageController(initialPage: _selectedIndex.value);
+    super.initState();
     var service = Provider.of<MediaServiceProvider>(context, listen: false)
         .currentService;
 
@@ -128,7 +128,8 @@ class MediaInfoPageState extends State<MediaInfoPage> {
         unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
         iconSize: 26,
         currentIndex: _selectedIndex.value,
-        onTap: (index) {
+        onTap: (index) async {
+          if (pageController.positions.isEmpty) return;
           _selectedIndex.value = index;
           final currentPage = pageController.page?.round() ?? 0;
           final isRight = index > currentPage;

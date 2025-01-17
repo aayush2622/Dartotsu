@@ -4,7 +4,7 @@ import 'Preferences/PrefManager.dart';
 
 class Logger {
   static File? _logFile;
-  static List<String> logs = [];
+  static final List<String> _logs = [];
   static Future<void> init() async {
     var path = PrefManager.getVal(PrefName.customPath);
     final directory = await StorageProvider()
@@ -25,7 +25,7 @@ class Logger {
     final timestamp =
         '${now.day.toString().padLeft(2, '0')}/${now.month.toString().padLeft(2, '0')}/${now.year.toString().padLeft(4, '0')} ${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}:${now.second.toString().padLeft(2, '0')}';
     final logMessage = '[$timestamp] $message\n';
-    logs.add(logMessage);
-    await _logFile?.writeAsString(logs.join());
+    _logs.add(logMessage);
+    await _logFile?.writeAsString(_logs.join());
   }
 }

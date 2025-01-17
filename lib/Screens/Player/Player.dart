@@ -150,7 +150,7 @@ class MediaPlayerState extends State<MediaPlayer>
   @override
   Widget build(BuildContext context) {
     return Obx(
-          () {
+      () {
         return MouseRegion(
           onHover: (_) => _onMouseMoved(),
           cursor: showControls.value
@@ -216,6 +216,7 @@ class MediaPlayerState extends State<MediaPlayer>
           alignment: Alignment.center,
           children: [
             videoPlayerController.playerWidget(),
+            _buildSubtitle(),
             KeyboardListener(
               focusNode: focusNode,
               onKeyEvent: _handleKeyPress,
@@ -270,6 +271,65 @@ class MediaPlayerState extends State<MediaPlayer>
     });
   }
 
+  Widget _buildSubtitle() {
+    if (videoPlayerController.subtitle.isEmpty) {
+      return const SizedBox();
+    }
+    return Obx(
+          () => AnimatedPositioned(
+        right: 0,
+        left: 0,
+        top: 0,
+        duration: const Duration(milliseconds: 100),
+        bottom: showControls.value
+            ? 100
+            : (24 + settings.subtitleBottomPadding.toDouble()),
+        child: AnimatedContainer(
+          alignment: Alignment.bottomCenter,
+          duration: const Duration(milliseconds: 300),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                padding:
+                const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                decoration: BoxDecoration(
+                  color: videoPlayerController.subtitle[0].isEmpty
+                      ? Colors.transparent
+                      :Color(settings.subtitleBackgroundColor,
+                  ),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Text(
+                  [
+                    for (final line in videoPlayerController.subtitle)
+                      if (line.trim().isNotEmpty) line.trim(),
+                  ].join('\n'),
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: settings.subtitleSize.toDouble(),
+                    fontWeight:
+                    FontWeight.values[settings.subtitleWeight.toInt()],
+                    fontFamily: settings.subtitleFont,
+                    color: Color(settings.subtitleColor),
+                    shadows: [
+                      Shadow(
+                        offset: const Offset(1.0, 1.0),
+                        blurRadius: 10.0,
+                        color: Color(settings.subtitleOutlineColor),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
   Widget _buildVideoOverlay() {
     return Obx(() {
       return Positioned.fill(
@@ -543,8 +603,7 @@ class MediaPlayerState extends State<MediaPlayer>
     );
   }
 
-  void settingsDialog() =>
-      AnimeCompactSettings(
+  void settingsDialog() => AnimeCompactSettings(
         context,
         widget.media,
         widget.source,

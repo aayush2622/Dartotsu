@@ -2,6 +2,7 @@ import 'package:dantotsu/Services/Screens/BaseAnimeScreen.dart';
 import 'package:dantotsu/Services/Screens/BaseHomeScreen.dart';
 import 'package:dantotsu/Services/Screens/BaseLoginScreen.dart';
 import 'package:dantotsu/Services/Screens/BaseMangaScreen.dart';
+import 'package:dantotsu/Theme/LanguageSwitcher.dart';
 import 'package:dantotsu/api/Anilist/Screen/AnilistAnimeScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -16,6 +17,8 @@ class AnilistService extends MediaService {
   AnilistService() {
     Anilist.getSavedToken();
   }
+  @override
+  String get getName => getString.anilist;
 
   @override
   String get iconPath => "assets/svg/anilist.svg";

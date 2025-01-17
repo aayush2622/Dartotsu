@@ -1,25 +1,33 @@
+import 'package:hive/hive.dart';
 
-import 'package:isar/isar.dart';
 part 'ShowResponse.g.dart';
 
-@collection
+@HiveType(typeId: 0)
 class ShowResponse {
-  Id id = Isar.autoIncrement;
-
-  @Index(unique: true, replace: true)
-  late String key;
-
+  @HiveField(0)
   final String name;
+
+  @HiveField(1)
   final String link;
+
+  @HiveField(2)
   final String coverUrl;
+
+  @HiveField(3)
   final List<String> otherNames;
+
+  @HiveField(4)
   final int? total;
+
+  @HiveField(5)
+  final Map<String, String>? extra;
 
   ShowResponse({
     required this.name,
     required this.link,
     required this.coverUrl,
     this.otherNames = const [],
-    this.total
+    this.total,
+    this.extra,
   });
 }

@@ -12,6 +12,7 @@ abstract class BasePlayer extends GetxController {
   RxBool isPlaying = false.obs;
   RxList<SubtitleTrack> subtitles = <SubtitleTrack>[].obs;
   RxList<AudioTrack> audios = <AudioTrack>[].obs;
+  RxList<String> subtitle = <String>[].obs;
   Future<void> seek(Duration duration);
   Future<void> play();
   Future<void> pause();

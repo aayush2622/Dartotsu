@@ -16,7 +16,7 @@ abstract class MediaService {
   MediaService() {
     _instances.add(this);
   }
-  String get getName => runtimeType.toString().replaceAll('Service', '');
+  String get getName;
 
   static List<MediaService> get allServices => List.unmodifiable(_instances);
 

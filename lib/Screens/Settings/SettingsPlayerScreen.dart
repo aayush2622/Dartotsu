@@ -275,16 +275,9 @@ List<Widget> playerSettings(
             ),
             shadows: [
               Shadow(
-                color: Color(
-                  playerSettings.subtitleOutlineColor,
-                ),
-                offset: const Offset(0.5, 0.5),
-              ),
-              Shadow(
-                color: Color(
-                  playerSettings.subtitleOutlineColor,
-                ),
-                offset: const Offset(-0.5, -0.5),
+                offset: const Offset(1.0, 1.0),
+                blurRadius: 10.0,
+                color: Color(playerSettings.subtitleOutlineColor),
               ),
             ],
           ),

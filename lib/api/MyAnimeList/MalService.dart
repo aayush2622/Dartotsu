@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import '../../Services/BaseServiceData.dart';
 import '../../Services/MediaService.dart';
 import '../../Services/Screens/BaseLoginScreen.dart';
+import '../../Theme/LanguageSwitcher.dart';
 import 'Screen/MalAnimeScreen.dart';
 import 'Screen/MalHomeScreen.dart';
 import 'Screen/MalMangaScreen.dart';
@@ -16,6 +17,9 @@ class MalService extends MediaService {
   MalService() {
     Mal.getSavedToken();
   }
+
+  @override
+  String get getName => getString.mal;
 
   @override
   String get iconPath => "assets/svg/mal.svg";
