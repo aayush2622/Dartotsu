@@ -77,8 +77,6 @@ dependencies:
   screen_brightness: ^2.0.1 #dont change
 
   # Miscellaneous
-  hive: ^2.2.3
-  hive_flutter: ^1.1.0
   device_info_plus: ^11.2.1
   file_picker: ^8.1.7
   share_plus: ^10.1.4
