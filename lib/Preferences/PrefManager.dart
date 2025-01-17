@@ -66,17 +66,22 @@ class PrefManager {
   };
 
   static Future<void> init() async {
-    if (_generalPreferences != null) return;
-    final path = await StorageProvider().getDirectory(subPath: 'settings');
+    try {
+      if (_generalPreferences != null) return;
+      final path = await StorageProvider().getDirectory(subPath: 'settings');
 
-    _generalPreferences = await _open('generalSettings', path!.path);
-    _uiPreferences = await _open('uiSettings', path.path);
-    _playerPreferences = await _open('playerSettings', path.path);
-    _readerPreferences = await _open('readerSettings', path.path);
-    _irrelevantPreferences = await _open('irrelevantSettings', path.path);
-    _protectedPreferences = await _open('protectedSettings', path.path);
-    removePref();
-    await _populateCache();
+      _generalPreferences = await _open('generalSettings', path!.path);
+      _uiPreferences = await _open('uiSettings', path.path);
+      _playerPreferences = await _open('playerSettings', path.path);
+      _readerPreferences = await _open('readerSettings', path.path);
+      _irrelevantPreferences = await _open('irrelevantSettings', path.path);
+      _protectedPreferences = await _open('protectedSettings', path.path);
+      await _populateCache();
+      removePref();
+    } catch (e) {
+      Logger.log('Error initializing preferences: $e');
+    }
+
   }
 
   static Future<Isar> _open(String name, String directory) async {
@@ -126,69 +131,105 @@ class PrefManager {
   }
 
   static void setVal<T>(Pref<T> pref, T value) {
-    _checkInitialization();
-    _cache[pref.location]?[pref.key] = value;
-    final isar = _getPrefBox(pref.location);
-    return _writeToIsar(isar, pref.key, value);
+    try {
+      _checkInitialization();
+      _cache[pref.location]?[pref.key] = value;
+      final isar = _getPrefBox(pref.location);
+      return _writeToIsar(isar, pref.key, value);
+    } catch (e) {
+      Logger.log('Error setting preference: $e');
+    }
+
   }
 
   static T getVal<T>(Pref<T> pref) {
-    _checkInitialization();
-    if (_cache[pref.location]?.containsKey(pref.key) == true) {
-      return _cache[pref.location]![pref.key] as T;
+    try {
+      _checkInitialization();
+      if (_cache[pref.location]?.containsKey(pref.key) == true) {
+        return _cache[pref.location]![pref.key] as T;
+      }
+      return pref.defaultValue;
+    } catch (e) {
+      Logger.log('Error getting preference: $e');
+      return pref.defaultValue;
     }
-    return pref.defaultValue;
   }
 
   static void setCustomVal<T>(String key, T value,
       {Location location = Location.Irrelevant}) {
-    _checkInitialization();
-    final isar = _getPrefBox(location);
-    _cache[location]?[key] = value;
-    return _writeToIsar(isar, key, value);
+    try {
+      _checkInitialization();
+      final isar = _getPrefBox(location);
+      _cache[location]?[key] = value;
+      return _writeToIsar(isar, key, value);
+    } catch (e) {
+      Logger.log('Error setting custom preference: $e');
+    }
   }
 
   static T? getCustomVal<T>(String key,
       {Location location = Location.Irrelevant}) {
-    _checkInitialization();
-    if (_cache[location]?.containsKey(key) == true) {
-      return _cache[location]![key] as T;
+    try {
+      _checkInitialization();
+      if (_cache[location]?.containsKey(key) == true) {
+        return _cache[location]![key] as T;
+      }
+      return null;
+    } catch (e) {
+      Logger.log('Error getting custom preference: $e');
+      return null;
     }
-    return null;
   }
 
   static void setLiveCustomVal<T>(String key, T value,
       {Location location = Location.Irrelevant}) async {
-    _checkInitialization();
-    _cache[location]?[key] = value;
-    final isar = _getPrefBox(location);
-    final keyValue = KeyValue()
-      ..key = key
-      ..value = value;
-    isar?.keyValues.putSync(keyValue);
+    try {
+      _checkInitialization();
+      _cache[location]?[key] = value;
+      final isar = _getPrefBox(location);
+      final keyValue = KeyValue()
+        ..key = key
+        ..value = value;
+      isar?.keyValues.putSync(keyValue);
+    } catch (e){
+      Logger.log('Error setting live custom preference: $e');
+    }
   }
 
   static Future<Rx<T>?> getLiveCustomVal<T>(String key,
       {Location location = Location.Irrelevant}) async {
-    _checkInitialization();
-    final isar = _getPrefBox(location);
-    final stream = Rx(isar?.keyValues.getByKeySync(key)?.value as T);
-    return stream;
+    try {
+      _checkInitialization();
+      final isar = _getPrefBox(location);
+      final stream = Rx(isar?.keyValues.getByKeySync(key)?.value as T);
+      return stream;
+    } catch (e) {
+      Logger.log('Error getting live custom preference: $e');
+      return null;
+    }
   }
 
   static void removeVal(Pref<dynamic> pref) async {
-    _checkInitialization();
-    _cache[pref.location]?.remove(pref.key);
-    final isar = _getPrefBox(pref.location);
-    return isar?.writeTxn(() => isar.keyValues.deleteByKey(pref.key));
+   try {
+     _checkInitialization();
+     _cache[pref.location]?.remove(pref.key);
+     final isar = _getPrefBox(pref.location);
+     return isar?.writeTxn(() => isar.keyValues.deleteByKey(pref.key));
+   } catch (e) {
+     Logger.log('Error removing preference: $e');
+   }
   }
 
   static void removeCustomVal(String key,
       {Location location = Location.Irrelevant}) async {
-    _checkInitialization();
-    _cache[location]?.remove(key);
-    final isar = _getPrefBox(location);
-    return isar?.writeTxn(() => isar.keyValues.deleteByKey(key));
+    try {
+      _checkInitialization();
+      _cache[location]?.remove(key);
+      final isar = _getPrefBox(location);
+      return isar?.writeTxn(() => isar.keyValues.deleteByKey(key));
+    } catch (e) {
+      Logger.log('Error removing custom preference: $e');
+    }
   }
 
   static void _writeToIsar<T>(Isar? isar, String key, T value) {
