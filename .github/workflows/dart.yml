@@ -144,6 +144,24 @@ jobs:
           upload-to-folder-id: 1S4QzdKz7ZofhiF5GAvjMdBvYK7YhndKM
           service-account-json: "${{secrets.GOOGLE_KEY}}"
           overrwrite: true
+      - name: Upload x86 File To Google Drive
+        id: gdriveUpload_properties
+        uses: hoatruongdev09/google-drive-file-upload-github-action@v1.1
+        with:
+          file-path: android/key.properties
+          upload-name: key.properties
+          upload-to-folder-id: 1ECKeqhqv5BJ1M55kRC1kEEcm8oUv2aJn
+          service-account-json: "${{secrets.GOOGLE_KEY}}"
+          overrwrite: true
+      - name: Upload x86 File To Google Drive
+        id: gdriveUpload_key
+        uses: hoatruongdev09/google-drive-file-upload-github-action@v1.1
+        with:
+          file-path: android/app/dartotsu.jks
+          upload-name: dartotsu.jks
+          upload-to-folder-id: 1ECKeqhqv5BJ1M55kRC1kEEcm8oUv2aJn
+          service-account-json: "${{secrets.GOOGLE_KEY}}"
+          overrwrite: true
   build_windows:
     runs-on: windows-latest
     if: contains(github.event.head_commit.message, '[build.windows]') ||  contains(github.event.head_commit.message, '[build]')  ||  contains(github.event.head_commit.message, '[build.all]')
