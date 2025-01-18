@@ -99,10 +99,11 @@ class PrefName {
   static const offlineMode = Pref(Location.General, 'offline', false);
   static const customPath = Pref(Location.General, 'customPath', '');
   //Player
-  static const cursedSpeed = Pref(Location.Player, 'cursedSpeed', false);
+  static const cursedSpeed = Pref(Location.General, 'cursedSpeed', false);
 
+  static const thumbLessSeekBar = Pref(Location.General, 'thumbLessSeekBar', false);
   static Pref<PlayerSettings> playerSettings =
-      Pref(Location.Player, 'playerSettings', PlayerSettings());
+      Pref(Location.General, 'playerSettings', PlayerSettings());
 
   //Protection
   static const anilistToken = Pref(Location.Protected, 'AnilistToken', '');

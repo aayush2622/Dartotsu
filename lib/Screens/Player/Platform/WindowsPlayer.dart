@@ -12,7 +12,7 @@ class WindowsPlayer extends BasePlayer {
 
   late Player player;
   late VideoController videoController;
-
+  String? currentSubtitle;
   WindowsPlayer(this.resizeMode, this.settings) {
     player = Player(
       configuration: const PlayerConfiguration(bufferSize: 1024 * 1024 * 64),
@@ -48,11 +48,14 @@ class WindowsPlayer extends BasePlayer {
   }
 
   @override
-  Future<void> setSubtitle(String subtitleUri, String language, bool isUri) =>
-      videoController.player.setSubtitleTrack(isUri
-          ? SubtitleTrack.uri(subtitleUri, title: language)
-          : SubtitleTrack(subtitleUri, language, language,
-              uri: false, data: false));
+  Future<void> setSubtitle(String subtitleUri, String language, bool isUri) {
+    currentSubtitle = language;
+    return videoController.player.setSubtitleTrack(isUri
+        ? SubtitleTrack.uri(subtitleUri, title: language)
+        : SubtitleTrack(subtitleUri, language, language,
+            uri: false, data: false));
+
+  }
 
   @override
   Future<void> setAudio(String audioUri, String language, bool isUri) async =>

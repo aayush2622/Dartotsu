@@ -222,6 +222,7 @@ void onEpisodeClick(
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (snapshot.hasData) {
             var videos = snapshot.data!;
+
             return ListView.builder(
               shrinkWrap: true,
               itemCount: videos.length,
@@ -249,22 +250,49 @@ void onEpisodeClick(
                     video.subtitles = List.from(allSubtitles);
                   }
                 }
-                return ListTile(
-                  title: Text(item.quality),
-                  onTap: () {
-                    onEpisodeClick?.call();
-                    Get.back();
-                    navigateToPage(
-                      context,
-                      MediaPlayer(
-                        media: mediaData,
-                        index: index,
-                        videos: videos,
-                        currentEpisode: episode,
-                        source: source,
+                return Card(
+                  margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  elevation: 4,
+                  child: InkWell(
+                    onTap: () {
+                      onEpisodeClick?.call();
+                      Get.back();
+                      navigateToPage(
+                        context,
+                        MediaPlayer(
+                          media: mediaData,
+                          index: index,
+                          videos: videos,
+                          currentEpisode: episode,
+                          source: source,
+                        ),
+                      );
+                    },
+                    borderRadius: BorderRadius.circular(12),
+                    child: Padding(
+                      padding: EdgeInsets.all(16),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            item.quality,
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Icon(
+                            Icons.play_arrow,
+                            size: 24,
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
+                        ],
                       ),
-                    );
-                  },
+                    ),
+                  ),
                 );
               },
             );

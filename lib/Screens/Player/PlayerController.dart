@@ -7,6 +7,7 @@ import 'package:dantotsu/Functions/Function.dart';
 import 'package:dantotsu/Functions/string_extensions.dart';
 import 'package:dantotsu/Preferences/IsarDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
 import 'package:dantotsu/Preferences/PrefManager.dart';
+import 'package:dantotsu/Screens/Player/Platform/WindowsPlayer.dart';
 import 'package:dantotsu/Widgets/AlertDialogBuilder.dart';
 import 'package:dantotsu/Widgets/CustomBottomDialog.dart';
 import 'package:dantotsu/api/Mangayomi/Eval/dart/model/video.dart' as v;
@@ -124,16 +125,16 @@ class _PlayerControllerState extends State<PlayerController> {
     var defaultAudio = currentQuality.audios?.firstWhereOrNull(
       (element) => element.label == 'English',
     );
-    if (defaultAudio!= null) {
+    if (defaultAudio != null) {
       await _controller.setAudio(
-        defaultAudio.file ?? "",
+        defaultAudio.file ?? "Unknown",
         defaultAudio.label ?? "",
         defaultAudio.file?.toNullInt() == null,
       );
     }
-    if (defaultSub!= null) {
+    if (defaultSub != null) {
       _controller.setSubtitle(
-        defaultSub.file ?? "",
+        defaultSub.file ?? "Unknown",
         defaultSub.label ?? "",
         defaultSub.file?.toNullInt() == null,
       );
@@ -166,15 +167,19 @@ class _PlayerControllerState extends State<PlayerController> {
         ) ??
         [];
 
-    _controller.currentPosition.listen((v) {
-      if (v.inSeconds > 0) {
-        _saveProgress(v.inSeconds);
-        timeStampsText.value = timeStamps
-            .firstWhereOrNull((e) =>
-        e.interval.startTime <= v.inSeconds &&
-            e.interval.endTime >= v.inSeconds,
-        )?.getType() ?? '';
-      }
+    _controller.currentPosition.listen(
+      (v) {
+        if (v.inSeconds > 0) {
+          _saveProgress(v.inSeconds);
+          timeStampsText.value = timeStamps
+                  .firstWhereOrNull(
+                    (e) =>
+                        e.interval.startTime <= v.inSeconds &&
+                        e.interval.endTime >= v.inSeconds,
+                  )
+                  ?.getType() ??
+              '';
+        }
       },
     );
   }
@@ -268,14 +273,16 @@ class _PlayerControllerState extends State<PlayerController> {
                 ),
               ),
               Obx(
-                () => timeStampsText.value != '' ? Text(
-                  "  • $timeStampsText",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w300,
-                    fontFamily: 'Poppins-SemiBold',
-                  ),
-                ) : const SizedBox(),
+                () => timeStampsText.value != ''
+                    ? Text(
+                        "  • $timeStampsText",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w300,
+                          fontFamily: 'Poppins-SemiBold',
+                        ),
+                      )
+                    : const SizedBox(),
               ),
             ],
           ),
@@ -286,6 +293,7 @@ class _PlayerControllerState extends State<PlayerController> {
   }
 
   Widget _buildProgressBar() {
+    var thumbLess = PrefManager.getVal(PrefName.thumbLessSeekBar);
     return SizedBox(
       height: 18,
       child: Column(
@@ -294,14 +302,15 @@ class _PlayerControllerState extends State<PlayerController> {
             ignoring: isControlsLocked.value,
             child: SliderTheme(
               data: SliderThemeData(
-                trackHeight: 5.8,
-
+                trackHeight: thumbLess ? 5.8 : 2,
                 thumbColor: Theme.of(context).colorScheme.primary,
                 activeTrackColor: Theme.of(context).colorScheme.primary,
                 inactiveTrackColor: const Color.fromARGB(255, 121, 121, 121),
                 secondaryActiveTrackColor:
                     const Color.fromARGB(255, 167, 167, 167),
-                thumbShape: SliderComponentShape.noThumb,
+                thumbShape: thumbLess
+                    ? SliderComponentShape.noThumb
+                    : const RoundSliderThumbShape(enabledThumbRadius: 6),
                 overlayShape: SliderComponentShape.noOverlay,
                 trackShape: RoundedRectSliderTrackShape(),
               ),
@@ -443,13 +452,13 @@ class _PlayerControllerState extends State<PlayerController> {
           );
         })),
         _buildControlButton(
-          icon: Icons.video_collection,
+          icon: Icons.video_collection_rounded,
           color: Colors.white,
           onPressed: () => showEpisodes.value = !showEpisodes.value,
         ),
         const SizedBox(width: 24),
         _buildControlButton(
-          icon: Icons.slow_motion_video,
+          icon: Icons.slow_motion_video_rounded,
           onPressed: () => _playBackSpeedDialog(),
         ),
         const SizedBox(width: 24),
@@ -482,7 +491,7 @@ class _PlayerControllerState extends State<PlayerController> {
     return Row(
       children: [
         _buildControlButton(
-          icon: Icons.video_settings,
+          icon: Icons.video_settings_rounded,
           onPressed: () {
             _controller.pause();
             showCustomBottomDialog(
@@ -495,7 +504,8 @@ class _PlayerControllerState extends State<PlayerController> {
                       padding: const EdgeInsets.all(16),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
-                        children: playerSettings(context, setState),
+                        children: playerSettings(context, setState,
+                            playerState: widget.player.setState),
                       ),
                     ),
                   )
@@ -506,17 +516,17 @@ class _PlayerControllerState extends State<PlayerController> {
         ),
         const SizedBox(width: 24),
         _buildControlButton(
-          icon: Icons.source,
+          icon: Icons.source_rounded,
           onPressed: () => _sourceDialog(),
         ),
         const SizedBox(width: 24),
         _buildControlButton(
-          icon: Icons.subtitles,
+          icon: Icons.subtitles_rounded,
           onPressed: () => _subtitleDialog(),
         ),
         const SizedBox(width: 24),
         _buildControlButton(
-          icon: Icons.audiotrack,
+          icon: Icons.audiotrack_rounded,
           onPressed: () => _audioDialog(),
         ),
       ],
@@ -527,7 +537,7 @@ class _PlayerControllerState extends State<PlayerController> {
     return Row(
       children: [
         _buildControlButton(
-          icon: Icons.fit_screen,
+          icon: Icons.fit_screen_rounded,
           onPressed: () => switchAspectRatio(),
         ),
         if (!Platform.isAndroid && !Platform.isIOS) ...[
@@ -657,7 +667,9 @@ class _PlayerControllerState extends State<PlayerController> {
         var file = (await FilePicker.platform.pickFiles(
           type: FileType.custom,
           allowedExtensions: subMap,
-        ))?.files.single;
+        ))
+            ?.files
+            .single;
         if (file == null || file.path == null) return;
         currentQuality.subtitles ??= [];
         currentQuality.subtitles!.add(
@@ -667,10 +679,7 @@ class _PlayerControllerState extends State<PlayerController> {
           ),
         );
         _controller.setSubtitle(
-          file.path ?? "",
-          file.name,
-          file.path?.toNullInt() == null
-        );
+            file.path ?? "", file.name, file.path?.toNullInt() == null);
         Get.back();
         _controller.play();
       },
@@ -683,28 +692,30 @@ class _PlayerControllerState extends State<PlayerController> {
     var audioDialog = CustomBottomDialog(
       title: "Audio",
       viewList: [_buildAudioList(currentQuality.audios == null)],
-        negativeText: "Add Audio",
-        negativeCallback: () async {
-          var file = (await FilePicker.platform.pickFiles(
-            type: FileType.custom,
-            allowedExtensions: audioMap,
-          ))?.files.single;
-          if (file == null || file.path == null) return;
-          currentQuality.audios ??= [];
-          currentQuality.audios!.add(
-            v.Track(
-              file: file.path,
-              label: file.name,
-            ),
-          );
-          await _controller.setAudio(
-            file.path ?? "",
-            file.name,
-            file.path?.toNullInt() == null,
-          );
-          Get.back();
-          _controller.play();
-        },
+      negativeText: "Add Audio",
+      negativeCallback: () async {
+        var file = (await FilePicker.platform.pickFiles(
+          type: FileType.custom,
+          allowedExtensions: audioMap,
+        ))
+            ?.files
+            .single;
+        if (file == null || file.path == null) return;
+        currentQuality.audios ??= [];
+        currentQuality.audios!.add(
+          v.Track(
+            file: file.path,
+            label: file.name,
+          ),
+        );
+        await _controller.setAudio(
+          file.path ?? "",
+          file.name,
+          file.path?.toNullInt() == null,
+        );
+        Get.back();
+        _controller.play();
+      },
     );
     showCustomBottomDialog(context, audioDialog);
   }
@@ -720,17 +731,37 @@ class _PlayerControllerState extends State<PlayerController> {
         itemCount: currentQuality.subtitles!.length,
         itemBuilder: (context, index) {
           var sub = currentQuality.subtitles![index];
-          return ListTile(
-            title: Text(sub.label ?? ""),
-            onTap: () {
-              _controller.setSubtitle(
-                sub.file ?? "",
-                sub.label ?? "",
-                sub.file?.toNullInt() == null,
-              );
-              Get.back();
-              _controller.play();
-            },
+          return Card(
+            margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            elevation: 4,
+            child: InkWell(
+              onTap: () {
+                _controller.setSubtitle(
+                  sub.file ?? "",
+                  sub.label ?? "",
+                  sub.file?.toNullInt() == null,
+                );
+                Get.back();
+                _controller.play();
+              },
+              borderRadius: BorderRadius.circular(12),
+              child: Padding(
+                padding: EdgeInsets.all(16),
+                child: Text(
+                  sub.label ?? "",
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: (_controller as WindowsPlayer).currentSubtitle == sub.label
+                        ? Theme.of(context).colorScheme.primary
+                        : Theme.of(context).colorScheme.onSurface,
+                  ),
+                ),
+              ),
+            ),
           );
         },
       );
@@ -748,22 +779,40 @@ class _PlayerControllerState extends State<PlayerController> {
         itemCount: currentQuality.audios!.length,
         itemBuilder: (context, index) {
           var sub = currentQuality.audios![index];
-          return ListTile(
-            title: Text(sub.label ?? ""),
-            onTap: () {
-              _controller.setAudio(
-                sub.file ?? "",
-                sub.label ?? "",
-                sub.file?.toNullInt() == null,
-              );
-              Get.back();
-              _controller.play();
-            },
+          return Card(
+            margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            elevation: 4,
+            child: InkWell(
+              onTap: () {
+                _controller.setAudio(
+                  sub.file ?? "",
+                  sub.label ?? "",
+                  sub.file?.toNullInt() == null,
+                );
+                Get.back();
+                _controller.play();
+              },
+              borderRadius: BorderRadius.circular(12),
+              child: Padding(
+                padding: EdgeInsets.all(16),
+                child: Text(
+                  sub.label ?? "",
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
           );
         },
       );
     }
   }
+
   Widget _buildSkipButton() {
     return Column(
       children: [
@@ -854,18 +903,45 @@ class _PlayerControllerState extends State<PlayerController> {
           shrinkWrap: true,
           itemCount: videos.length,
           itemBuilder: (context, index) {
-            return ListTile(
-              title: Text(videos[index].quality),
-              onTap: () {
-                if (currentQuality == videos[index]) {
+            return Card(
+              margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              elevation: 4,
+              child: InkWell(
+                onTap: () {
+                  if (currentQuality == videos[index]) {
+                    Get.back();
+                    return;
+                  }
+                  currentQuality = videos[index];
+                  _controller.open(
+                      currentQuality.url, _controller.currentPosition.value,);
                   Get.back();
-                  return;
-                }
-                currentQuality = videos[index];
-                _controller.open(
-                    currentQuality.url, _controller.currentPosition.value);
-                Get.back();
-              },
+                },
+                borderRadius: BorderRadius.circular(12),
+                child: Padding(
+                  padding: EdgeInsets.all(16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        videos[index].quality,
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Icon(
+                        Icons.play_arrow,
+                        size: 24,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             );
           },
         ),

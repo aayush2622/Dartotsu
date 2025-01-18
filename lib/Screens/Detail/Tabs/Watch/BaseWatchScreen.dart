@@ -27,31 +27,50 @@ abstract class BaseWatchScreen<T extends StatefulWidget> extends State<T> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        ...releasingIn(mediaData, context),
-        _buildContent(),
-        if (viewModel.source.value != null)
-          ...widgetList
-        else
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 32.0),
-            child: Center(
-              child: Text(
-                'Install a source from extension page to start ${mediaData.anime != null ? 'watching' : 'reading'}',
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-                textAlign: TextAlign.center,
-                overflow: TextOverflow.ellipsis,
-                maxLines: 2,
-              ),
+    viewModel.initSourceList(mediaData);
+    return Obx(() {
+      if (viewModel.sourcesLoaded.value == false) {
+        return const Center(child: CircularProgressIndicator());
+      }
+
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ...releasingIn(mediaData, context),
+          _buildContent(),
+          Container(
+            constraints: BoxConstraints(
+              minHeight: 300,
+            ),
+            child: Column(
+              children: [
+                if (viewModel.source.value != null)
+                  ...widgetList
+                else
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 16.0,
+                      horizontal: 32.0,
+                    ),
+                    child: Center(
+                      child: Text(
+                        'Install a source from extension page to start ${mediaData.anime != null ? 'watching' : 'reading'}',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        textAlign: TextAlign.center,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                      ),
+                    ),
+                  ),
+              ],
             ),
           ),
-      ],
-    );
+        ],
+      );
+    });
   }
 
   Widget _buildContent() {
@@ -78,6 +97,7 @@ abstract class BaseWatchScreen<T extends StatefulWidget> extends State<T> {
             currentSource: viewModel.source.value,
             onSourceChange: onSourceChange,
             mediaData: mediaData,
+            sourceList: viewModel.sourceList,
           ),
           const SizedBox(height: 16),
           if (viewModel.source.value != null) _buildWrongTitle(),

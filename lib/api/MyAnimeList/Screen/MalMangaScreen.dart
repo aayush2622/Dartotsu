@@ -108,8 +108,9 @@ class MalMangaScreen extends BaseMangaScreen {
         pairTitle: 'Most Favourite Manga',
         list: mostFavManga.value,
       ),
+
     ];
-    final mangaLayoutMap = PrefManager.getVal(PrefName.anilistMangaLayout);
+    final mangaLayoutMap = PrefManager.getVal(PrefName.malMangaLayout);
     final sectionMap = {
       for (var section in mediaSections) section.pairTitle : section
     };

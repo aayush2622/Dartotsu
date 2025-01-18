@@ -124,9 +124,9 @@ class MediaPlayerState extends State<MediaPlayer>
     _hideCursorTimer?.cancel();
     _leftAnimationController.dispose();
     _rightAnimationController.dispose();
-    ScreenBrightness().setApplicationScreenBrightness(_defaultBrightness);
     focusNode.dispose();
     if (Platform.isAndroid || Platform.isIOS) {
+      ScreenBrightness().setApplicationScreenBrightness(_defaultBrightness);
       _setLandscapeMode(false);
     }
   }
@@ -186,6 +186,7 @@ class MediaPlayerState extends State<MediaPlayer>
                               },
                               child: SizedBox(
                                 width: episodePanelWidth,
+                                height: constraints.maxHeight,
                                 child: SingleChildScrollView(
                                   padding: const EdgeInsets.all(8.0),
                                   child: _buildEpisodeList(),

@@ -1,5 +1,5 @@
-
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart' as r;
 import 'package:fuzzywuzzy/fuzzywuzzy.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -11,6 +11,8 @@ import '../../../../Preferences/PrefManager.dart';
 import '../../../../Services/ServiceSwitcher.dart';
 import '../../../../Widgets/CustomBottomDialog.dart';
 import '../../../../api/Mangayomi/Eval/dart/model/m_manga.dart';
+import '../../../../api/Mangayomi/Extensions/extensions_provider.dart';
+import '../../../../api/Mangayomi/Model/Manga.dart';
 import '../../../../api/Mangayomi/Model/Source.dart';
 import '../../../../api/Mangayomi/Search/search.dart';
 import 'Widgets/WrongTitle.dart';
@@ -21,14 +23,39 @@ abstract class BaseParser extends GetxController {
   var source = Rxn<Source>(null);
   var errorType = Rxn<ErrorType>(ErrorType.None);
 
+  var sourceList = <Source>[];
+  var sourcesLoaded = false.obs;
+  void initSourceList(Media media) async {
+    final container = r.ProviderContainer();
+    var isAnime = media.anime != null;
+    final itemType = isAnime
+        ? ItemType.anime
+        : media.format?.toLowerCase() == 'novel'
+        ? ItemType.novel
+        : ItemType.manga;
+  var s = await container.read(getExtensionsStreamProvider(itemType).future);
+    sourceList = s.where((source) => source.isAdded!)
+        .toList()
+        .reversed
+        .toList();
+    sourcesLoaded.value = true;
+  }
+
   void saveSelected(int id, Selected data) {
-    var sourceName = Provider.of<MediaServiceProvider>(Get.context!,listen: false).currentService.getName;
+    var sourceName =
+        Provider.of<MediaServiceProvider>(Get.context!, listen: false)
+            .currentService
+            .getName;
     PrefManager.setCustomVal("Selected-$id-$sourceName", data);
   }
 
   Selected loadSelected(Media mediaData) {
-    var sourceName = Provider.of<MediaServiceProvider>(Get.context!,listen: false).currentService.getName;
-    return PrefManager.getCustomVal("Selected-${mediaData.id}-$sourceName") ?? Selected();
+    var sourceName =
+        Provider.of<MediaServiceProvider>(Get.context!, listen: false)
+            .currentService
+            .getName;
+    return PrefManager.getCustomVal("Selected-${mediaData.id}-$sourceName") ??
+        Selected();
   }
 
   Future<void> searchMedia(Source source, Media mediaData,
@@ -190,8 +217,4 @@ abstract class BaseParser extends GetxController {
   }
 }
 
-enum ErrorType{
-  None,
-  NotFound,
-  NoResult
-}
+enum ErrorType { None, NotFound, NoResult }

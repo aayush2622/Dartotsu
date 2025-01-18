@@ -49,10 +49,14 @@ class SettingsPlayerScreenState extends BaseSettingsScreen {
 }
 
 List<Widget> playerSettings(
-    BuildContext context, void Function(void Function()) setState) {
+  BuildContext context,
+  void Function(void Function()) setState, {
+  void Function(void Function())? playerState,
+}) {
   void savePlayerSettings(PlayerSettings playerSettings) {
     PrefManager.setVal(PrefName.playerSettings, playerSettings);
     setState(() {});
+    playerState?.call(() {});
   }
 
   var playerSettings = PrefManager.getVal(PrefName.playerSettings);
@@ -70,10 +74,21 @@ List<Widget> playerSettings(
           },
         ),
         Setting(
+          type: SettingType.switchType,
+          name: 'ThumbLess SeekBar',
+          description: 'Remove thumb from the seek bar',
+          icon: Icons.circle_rounded,
+          isChecked:PrefManager.getVal(PrefName.thumbLessSeekBar),
+          onSwitchChange: (value) {
+            PrefManager.setVal(PrefName.thumbLessSeekBar, value);
+            playerState?.call(() {});
+          },
+        ),
+        Setting(
           type: SettingType.normal,
           name: getString.speed,
           description: getString.speedDescription,
-          icon: Icons.speed,
+          icon: Icons.speed_rounded,
           onClick: () {
             var cursed = PrefManager.getVal(PrefName.cursedSpeed);
             AlertDialogBuilder(context)
@@ -95,7 +110,7 @@ List<Widget> playerSettings(
           type: SettingType.normal,
           name: getString.resizeMode,
           description: getString.resizeModeDescription,
-          icon: Icons.fit_screen,
+          icon: Icons.fit_screen_rounded,
           onClick: () {
             AlertDialogBuilder(context)
               ..setTitle(getString.resizeMode)
@@ -114,7 +129,7 @@ List<Widget> playerSettings(
           type: SettingType.inputBox,
           name: getString.skipButton,
           description: getString.skipButtonDescription,
-          icon: Icons.fit_screen,
+          icon: Icons.fast_forward_rounded,
           maxValue: 1000,
           minValue: 0,
           initialValue: playerSettings.skipDuration,
@@ -139,7 +154,7 @@ List<Widget> playerSettings(
           type: SettingType.switchType,
           name: getString.showSubtitles,
           description: getString.showSubtitlesDescription,
-          icon: Icons.subtitles,
+          icon: Icons.subtitles_rounded,
           isChecked: playerSettings.showSubtitle,
           onSwitchChange: (value) {
             playerSettings.showSubtitle = value;
@@ -151,7 +166,7 @@ List<Widget> playerSettings(
           type: SettingType.normal,
           name: getString.fontFamily,
           description: getString.fontFamilyDescription,
-          icon: Icons.font_download,
+          icon: Icons.font_download_rounded,
           onClick: () {
             AlertDialogBuilder(context)
               ..setTitle(getString.fontFamily)
@@ -172,7 +187,7 @@ List<Widget> playerSettings(
           type: SettingType.slider,
           name: getString.fontSize,
           description: getString.fontSizeDescription,
-          icon: Icons.format_size,
+          icon: Icons.format_size_rounded,
           maxValue: 100,
           minValue: 10,
           initialValue: playerSettings.subtitleSize,
@@ -188,7 +203,7 @@ List<Widget> playerSettings(
           maxValue: 8,
           minValue: 4,
           initialValue: playerSettings.subtitleWeight,
-          icon: Icons.format_bold,
+          icon: Icons.format_bold_rounded,
           onSliderChange: (value) {
             playerSettings.subtitleWeight = value;
             savePlayerSettings(playerSettings);
