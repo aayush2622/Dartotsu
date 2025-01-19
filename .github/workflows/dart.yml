@@ -347,11 +347,13 @@ jobs:
           overrwrite: true
   build_macos:
     runs-on: macos-latest
-    if: contains(github.event.head_commit.message, '[build.macos]')
+    if: contains(github.event.head_commit.message, '[build.macos]') ||  contains(github.event.head_commit.message, '[build.all]')
     permissions:
       contents: write
       pull-requests: write
       repository-projects: write
+    outputs:
+      deb_link: ${{steps.gdriveUpload.outputs.web-content-link}}
     steps:
       - name: Cloning repository
         uses: actions/checkout@v4
@@ -370,9 +372,23 @@ jobs:
         run: flutter pub get
       - name: Build macOS
         run: flutter build macos --release
+      - name: Create DMG file for macOS Build
+        run: |
+          mkdir -p build/macos/Release
+          hdiutil create -volname "Dartotsu" -srcfolder build/macos/Build/Products/Release/Dantotsu.app -ov -format UDZO build/macos/Release/Dartotsu-macos-${{github.ref_name}}.dmg
+        shell: bash
+      - name: Upload File To Google Drive
+        id: gdriveUpload
+        uses: hoatruongdev09/google-drive-file-upload-github-action@v1.1
+        with:
+          file-path: build/macos/Release/Dartotsu-macos-${{github.ref_name}}.dmg
+          upload-name: Dartotsu-macos-${{github.ref_name}}.dmg
+          upload-to-folder-id: 1pqurWwP9qiCqZj_0FmV1U7sm34BETOuu
+          service-account-json: "${{secrets.GOOGLE_KEY}}"
+          overrwrite: true
   sendMessage:
     runs-on: ubuntu-latest
-    needs: [build_android, build_windows, build_linux, build_ios]
+    needs: [build_android, build_windows, build_linux, build_ios, build_macos]
     if: always()
     permissions:
       contents: read
@@ -633,20 +649,20 @@ jobs:
           echo "$telegram_dev_info"
 
 
-          # Upload APK to Telegram
-          response=$(curl -sS -f -X POST \
-              "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKKEN}}/sendDocument" \
-              -F "chat_id=${{ secrets.TELEGRAM_CHANNEL_ID}}" \
-              -F "message_thread_id=${{secrets.TELEGRAM_THREAD_ID}}" \
-              -F "document=@last_sha.txt" \
-              -F "caption=New Alpha-Build dropped 🔥
+          # # Upload APK to Telegram
+          # response=$(curl -sS -f -X POST \
+          #     "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKKEN}}/sendDocument" \
+          #     -F "chat_id=${{ secrets.TELEGRAM_CHANNEL_ID}}" \
+          #     -F "message_thread_id=${{secrets.TELEGRAM_THREAD_ID}}" \
+          #     -F "document=@last_sha.txt" \
+          #     -F "caption=New Alpha-Build dropped 🔥
 
-          Commits:
-          ${telegram_commit_messages}
-          Devs:
-          ${telegram_dev_info}
-          version: ${VERSION}" \
-              -F "parse_mode=HTML")
+          # Commits:
+          # ${telegram_commit_messages}
+          # Devs:
+          # ${telegram_dev_info}
+          # version: ${VERSION}" \
+          #     -F "parse_mode=HTML")
 
       - name: Upload Current SHA as Artifact
         uses: actions/upload-artifact@v4
@@ -659,6 +675,7 @@ jobs:
           WINDOWS_DOWNLOAD_LINK: ${{ needs.build_windows.outputs.zip_link }}
           LINUX_DOWNLOAD_LINK: ${{needs.build_linux.outputs.zip_link}}
           IOS_DOWNLOAD_LINK: ${{needs.build_ios.outputs.ipa_link}}
+          MACOS_DOWNLOAD_LINK: ${{needs.build_macos.outputs.deb_link}}
         run: |
           # Check if APK_DOWNLOAD_LINK is not empty
           if [[ -n "$APK_DOWNLOAD_LINK" ]]; then
@@ -688,25 +705,34 @@ jobs:
             IOS_MESSAGE=""
           fi
 
+          # Check if MACOS_DOWNLOAD_LINK is not empty
+          if [[ -n "$MACOS_DOWNLOAD_LINK" ]]; then
+            MACOS_MESSAGE="[Download macos deb]($MACOS_DOWNLOAD_LINK)"
+          else
+            MACOS_MESSAGE=""
+          fi
+
             echo "apk_message=$APK_MESSAGE" >> $GITHUB_ENV
             echo "windows_message=$WINDOWS_MESSAGE" >> $GITHUB_ENV
             echo "linux_message=$LINUX_MESSAGE" >> $GITHUB_ENV
             echo "ios_message=$IOS_MESSAGE" >> $GITHUB_ENV
+            echo "macos_message=$MACOS_MESSAGE" >> $GITHUB_ENV
 
           # Prepare and send the Discord message
           curl -H "Content-Type: application/json" \
-               -d "{\"content\": \"${APK_MESSAGE}\n${WINDOWS_MESSAGE}\n${LINUX_MESSAGE}\n${IOS_MESSAGE}\"}" \
+               -d "{\"content\": \"${APK_MESSAGE}\n${WINDOWS_MESSAGE}\n${LINUX_MESSAGE}\n${IOS_MESSAGE}\n${MACOS_MESSAGE}\"}" \
                "${{ secrets.DISCORD_WEBHOOK_URL }}"
-      - name: Send Telegram Notification
-        run: |
-          response=$(curl -sS -f -X POST \
-              "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKKEN}}/sendMessage" \
-              -F "chat_id=${{ secrets.TELEGRAM_CHANNEL_ID}}" \
-              -F "message_thread_id=${{secrets.TELEGRAM_THREAD_ID}}" \
-              -F parse_mode="Markdown" \
-              -F disable_notification=true \
-              -F "text=🎉 *Build Notification* 🎉
-            ${{ env.apk_message }}
-            ${{ env.windows_message }}
-            ${{ env.linux_message }}
-            ${{ env.ios_message }}")
+      # - name: Send Telegram Notification
+      #   run: |
+      #     response=$(curl -sS -f -X POST \
+      #         "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKKEN}}/sendMessage" \
+      #         -F "chat_id=${{ secrets.TELEGRAM_CHANNEL_ID}}" \
+      #         -F "message_thread_id=${{secrets.TELEGRAM_THREAD_ID}}" \
+      #         -F parse_mode="Markdown" \
+      #         -F disable_notification=true \
+      #         -F "text=🎉 *Build Notification* 🎉
+      #       ${{ env.apk_message }}
+      #       ${{ env.windows_message }}
+      #       ${{ env.linux_message }}
+      #       ${{ env.ios_message }}
+      #       ${{ env.macos_message }}")
