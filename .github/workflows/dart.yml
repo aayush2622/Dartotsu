@@ -366,18 +366,8 @@ jobs:
         run: |
           echo "SIMKL_SECRET= $SIMKL_SECRET" > .env
         shell: bash
-      - name: Install CocoaPods
-        run: |
-          sudo gem install cocoapods
-          pod setup
       - name: Get Dependencies
         run: flutter pub get
-      - run: flutter config --enable-macos-desktop
-      - name: Install macos pod
-        run: |
-          cd macos
-          pod install
-          cd ..
       - name: Build macOS
         run: flutter build macos --release
   sendMessage:
