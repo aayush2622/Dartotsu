@@ -3,7 +3,7 @@ platform :osx, '12.0' # Ensure this matches your macOS deployment target
 workspace 'Runner.xcworkspace' # Define the workspace to use
 
 # Load the Flutter CocoaPods helper script
-flutter_root = File.expand_path('..', File.dirname(__FILE__)) + '/..'
+flutter_root = File.expand_path('~/.flutter') # Adjust this to match the Flutter SDK location in GitHub Actions
 load File.join(flutter_root, 'packages', 'flutter_tools', 'bin', 'podhelper.rb')
 
 target 'Runner' do
