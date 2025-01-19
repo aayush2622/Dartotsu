@@ -362,6 +362,7 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           flutter-version: 3.27.1
+          cache: true
       - name: Setup .env File for macOS
         env:
           SIMKL_SECRET: ${{ secrets.SIMKL_SECRET }}
@@ -383,7 +384,7 @@ jobs:
         with:
           file-path: build/macos/Release/Dartotsu-macos-${{github.ref_name}}.dmg
           upload-name: Dartotsu-macos-${{github.ref_name}}.dmg
-          upload-to-folder-id: 1pqurWwP9qiCqZj_0FmV1U7sm34BETOuu
+          upload-to-folder-id: 1nWYex54zd58SVitJUCva91_4k1PPTdP3
           service-account-json: "${{secrets.GOOGLE_KEY}}"
           overrwrite: true
   sendMessage:
@@ -649,20 +650,20 @@ jobs:
           echo "$telegram_dev_info"
 
 
-          # # Upload APK to Telegram
-          # response=$(curl -sS -f -X POST \
-          #     "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKKEN}}/sendDocument" \
-          #     -F "chat_id=${{ secrets.TELEGRAM_CHANNEL_ID}}" \
-          #     -F "message_thread_id=${{secrets.TELEGRAM_THREAD_ID}}" \
-          #     -F "document=@last_sha.txt" \
-          #     -F "caption=New Alpha-Build dropped 🔥
+          # Upload APK to Telegram
+          response=$(curl -sS -f -X POST \
+              "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKKEN}}/sendDocument" \
+              -F "chat_id=${{ secrets.TELEGRAM_CHANNEL_ID}}" \
+              -F "message_thread_id=${{secrets.TELEGRAM_THREAD_ID}}" \
+              -F "document=@last_sha.txt" \
+              -F "caption=New Alpha-Build dropped 🔥
 
-          # Commits:
-          # ${telegram_commit_messages}
-          # Devs:
-          # ${telegram_dev_info}
-          # version: ${VERSION}" \
-          #     -F "parse_mode=HTML")
+          Commits:
+          ${telegram_commit_messages}
+          Devs:
+          ${telegram_dev_info}
+          version: ${VERSION}" \
+              -F "parse_mode=HTML")
 
       - name: Upload Current SHA as Artifact
         uses: actions/upload-artifact@v4
@@ -722,17 +723,17 @@ jobs:
           curl -H "Content-Type: application/json" \
                -d "{\"content\": \"${APK_MESSAGE}\n${WINDOWS_MESSAGE}\n${LINUX_MESSAGE}\n${IOS_MESSAGE}\n${MACOS_MESSAGE}\"}" \
                "${{ secrets.DISCORD_WEBHOOK_URL }}"
-      # - name: Send Telegram Notification
-      #   run: |
-      #     response=$(curl -sS -f -X POST \
-      #         "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKKEN}}/sendMessage" \
-      #         -F "chat_id=${{ secrets.TELEGRAM_CHANNEL_ID}}" \
-      #         -F "message_thread_id=${{secrets.TELEGRAM_THREAD_ID}}" \
-      #         -F parse_mode="Markdown" \
-      #         -F disable_notification=true \
-      #         -F "text=🎉 *Build Notification* 🎉
-      #       ${{ env.apk_message }}
-      #       ${{ env.windows_message }}
-      #       ${{ env.linux_message }}
-      #       ${{ env.ios_message }}
-      #       ${{ env.macos_message }}")
+      - name: Send Telegram Notification
+        run: |
+          response=$(curl -sS -f -X POST \
+              "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKKEN}}/sendMessage" \
+              -F "chat_id=${{ secrets.TELEGRAM_CHANNEL_ID}}" \
+              -F "message_thread_id=${{secrets.TELEGRAM_THREAD_ID}}" \
+              -F parse_mode="Markdown" \
+              -F disable_notification=true \
+              -F "text=🎉 *Build Notification* 🎉
+            ${{ env.apk_message }}
+            ${{ env.windows_message }}
+            ${{ env.linux_message }}
+            ${{ env.ios_message }}
+            ${{ env.macos_message }}")
