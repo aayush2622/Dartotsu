@@ -372,6 +372,7 @@ jobs:
           pod setup
       - name: Get Dependencies
         run: flutter pub get
+      - run: flutter config --enable-macos-desktop
       - name: Install macos pod
         run: |
           cd macos
