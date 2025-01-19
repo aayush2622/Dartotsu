@@ -1,16 +1,23 @@
-platform :osx, '12.0' 
+platform :osx, '12.0' # Ensure this matches your macOS deployment target
 
-workspace 'Runner.xcworkspace' 
+workspace 'Runner.xcworkspace' # Define the workspace to use
+
+# Load the Flutter CocoaPods helper script
+flutter_root = File.expand_path('..', File.dirname(__FILE__)) + '/..'
+load File.join(flutter_root, 'packages', 'flutter_tools', 'bin', 'podhelper.rb')
 
 target 'Runner' do
-  flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
+  # Install Flutter pods
+  install_flutter_pods
 
-  # Post-install processing
+  # Post-install actions
   post_install do |installer|
     installer.pods_project.targets.each do |target|
-      flutter_additional_macos_build_settings(target) 
+      flutter_additional_macos_build_settings(target) # Apply Flutter-specific build settings
+
+      # Set the deployment target for all configurations
       target.build_configurations.each do |config|
-        config.build_settings['MACOSX_DEPLOYMENT_TARGET'] = '12.0' # Minimum macOS version
+        config.build_settings['MACOSX_DEPLOYMENT_TARGET'] = '12.0'
       end
     end
   end
