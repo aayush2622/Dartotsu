@@ -3,6 +3,6 @@ post_install do |installer|
     flutter_additional_macos_build_settings(target)
     target.build_configurations.each do |config|
       config.build_settings['MACOSX_DEPLOYMENT_TARGET'] = '12.0'
-    endz
+    end
   end
 end
