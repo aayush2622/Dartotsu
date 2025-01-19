@@ -345,7 +345,31 @@ jobs:
           upload-to-folder-id: 1nWYex54zd58SVitJUCva91_4k1PPTdP3
           service-account-json: "${{secrets.GOOGLE_KEY}}"
           overrwrite: true
+  build_macos:
+    runs-on: macos-latest
+    if: contains(github.event.head_commit.message, '[build.macos]')
+    permissions:
+      contents: write
+      pull-requests: write
+      repository-projects: write
+    steps:
+      - name: Cloning repository
+        uses: actions/checkout@v4
 
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 3.27.1
+      - name: Setup .env File for macOS
+        env:
+          SIMKL_SECRET: ${{ secrets.SIMKL_SECRET }}
+        run: |
+          echo "SIMKL_SECRET= $SIMKL_SECRET" > .env
+        shell: bash
+      - name: Get Dependencies
+        run: flutter pub get
+      - name: Build macOS
+        run: flutter build macos --release
   sendMessage:
     runs-on: ubuntu-latest
     needs: [build_android, build_windows, build_linux, build_ios]
