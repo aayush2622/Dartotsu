@@ -8,7 +8,7 @@
 PRODUCT_NAME = dantotsu
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = ani.aayush262.dartotsu
+PRODUCT_BUNDLE_IDENTIFIER = ani.aayush262.dantotsu
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2024 ani.aayush262. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2025 ani.aayush262. All rights reserved.
