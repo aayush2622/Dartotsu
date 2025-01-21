@@ -35,13 +35,14 @@ abstract class BaseParser extends GetxController {
         : media.format?.toLowerCase() == 'novel'
             ? ItemType.novel
             : ItemType.manga;
-    var sources = await container.read(getExtensionsStreamProvider(itemType).future);
-    var s = sources.where((source) => source.isAdded!).toList().reversed.toList();
-    final ids = loadCustomData<List<int>?>('sortedExtensions_${itemType.name}') ?? [];
+    var sources =
+        await container.read(getExtensionsStreamProvider(itemType).future);
+    var s =
+        sources.where((source) => source.isAdded!).toList().reversed.toList();
+    final ids =
+        loadCustomData<List<int>?>('sortedExtensions_${itemType.name}') ?? [];
     final sortedSources = [
-      ...s
-          .where((source) => ids.contains(source.id))
-          .toList()
+      ...s.where((source) => ids.contains(source.id)).toList()
         ..sort((a, b) => ids.indexOf(a.id!).compareTo(ids.indexOf(b.id!))),
       ...s.where((source) => !ids.contains(source.id)),
     ];
@@ -50,7 +51,7 @@ abstract class BaseParser extends GetxController {
 
     String nameAndLang(Source source) {
       bool isDuplicateName =
-          sources.where((s) => s.name == source.name).length > 1;
+          sortedSources.where((s) => s.name == source.name).length > 1;
 
       return isDuplicateName
           ? '${source.name!} - ${completeLanguageName(source.lang!.toLowerCase())}'
@@ -60,13 +61,13 @@ abstract class BaseParser extends GetxController {
     var lastUsedSource =
         PrefManager.getCustomVal<String>('${media.id}-lastUsedSource');
     if (lastUsedSource == null ||
-        !sources.any((e) => nameAndLang(e) == lastUsedSource)) {
-      lastUsedSource = nameAndLang(sources.first);
+        !sortedSources.any((e) => nameAndLang(e) == lastUsedSource)) {
+      lastUsedSource = nameAndLang(sortedSources.first);
     }
 
-    Source source =
-        sources.firstWhereOrNull((e) => nameAndLang(e) == lastUsedSource!) ??
-            sources.first;
+    Source source = sortedSources
+            .firstWhereOrNull((e) => nameAndLang(e) == lastUsedSource!) ??
+        sortedSources.first;
 
     this.source.value = source;
     searchMedia(source, media);
