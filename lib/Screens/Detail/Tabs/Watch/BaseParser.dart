@@ -35,10 +35,18 @@ abstract class BaseParser extends GetxController {
         : media.format?.toLowerCase() == 'novel'
             ? ItemType.novel
             : ItemType.manga;
-    var sources =
-        await container.read(getExtensionsStreamProvider(itemType).future);
-    sourceList =
-        sources.where((source) => source.isAdded!).toList().reversed.toList();
+    var sources = await container.read(getExtensionsStreamProvider(itemType).future);
+    var s = sources.where((source) => source.isAdded!).toList().reversed.toList();
+    final ids = loadCustomData<List<int>?>('sortedExtensions_${itemType.name}') ?? [];
+    final sortedSources = [
+      ...s
+          .where((source) => ids.contains(source.id))
+          .toList()
+        ..sort((a, b) => ids.indexOf(a.id!).compareTo(ids.indexOf(b.id!))),
+      ...s.where((source) => !ids.contains(source.id)),
+    ];
+
+    sourceList = sortedSources;
 
     String nameAndLang(Source source) {
       bool isDuplicateName =

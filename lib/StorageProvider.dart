@@ -70,13 +70,16 @@ class StorageProvider {
       DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
       final androidInfo = await deviceInfo.androidInfo;
       if (androidInfo.version.sdkInt <= 29) {
-        return Directory((useCustomPath == true
-            ? (customPath.isNotEmpty && !customPath.endsWith('Dartotsu'))
-            ? path.join(customPath, 'Dartotsu')
-            : customPath.isNotEmpty
-            ? customPath
-            : "/storage/emulated/0/Dartotsu"
-            : appDir.path).fixSeparator);
+        var dir = Directory((useCustomPath == true
+                ? (customPath.isNotEmpty && !customPath.endsWith('Dartotsu'))
+                    ? path.join(customPath, 'Dartotsu')
+                    : customPath.isNotEmpty
+                        ? customPath
+                        : "/storage/emulated/0/Dartotsu"
+                : appDir.path)
+            .fixSeparator);
+        dir.createSync(recursive: true);
+        return dir;
       }
       basePath = useCustomPath == true
           ? (customPath.isNotEmpty && !customPath.endsWith('Dartotsu'))

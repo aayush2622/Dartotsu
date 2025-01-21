@@ -5,6 +5,7 @@ import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
 import '../../../Adaptor/Media/Widgets/MediaSection.dart';
 import '../../../DataClass/Media.dart';
+import '../../../Preferences/PrefManager.dart';
 import '../../../Services/Screens/BaseAnimeScreen.dart';
 import '../../../logger.dart';
 import '../../Mangayomi/Extensions/extensions_provider.dart';
@@ -24,7 +25,7 @@ class ExtensionsAnimeScreen extends BaseAnimeScreen {
     final container = ProviderContainer();
     final sourcesAsyncValue = await container
         .read(getExtensionsStreamProvider(ItemType.anime).future);
-    final ids = [14, 46];
+    final ids = loadCustomData<List<int>?>('sortedExtensions_${ItemType.anime}') ?? [];
     final installedSources = sourcesAsyncValue
         .where((source) => source.isAdded!)
         .toList()
@@ -38,8 +39,8 @@ class ExtensionsAnimeScreen extends BaseAnimeScreen {
         ..sort((a, b) => ids.indexOf(a.id!).compareTo(ids.indexOf(b.id!))),
       ...installedSources.where((source) => !ids.contains(source.id)),
     ];
-    _buildSections(installedSources);
-    for (var source in installedSources) {
+    _buildSections(sortedInstalledSources);
+    for (var source in sortedInstalledSources) {
       try {
         var result = (await getPopular(
           source: source,

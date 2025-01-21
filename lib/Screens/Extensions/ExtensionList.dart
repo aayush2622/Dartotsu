@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:grouped_list/sliver_grouped_list.dart';
 
-
 import '../../api/Mangayomi/Extensions/GetSourceList.dart';
 import '../../api/Mangayomi/Extensions/extensions_provider.dart';
 import '../../api/Mangayomi/Extensions/fetch_anime_sources.dart';
@@ -34,7 +33,18 @@ class Extension extends ConsumerStatefulWidget {
 
 class _ExtensionScreenState extends ConsumerState<Extension> {
   final controller = ScrollController();
+  var sortedList = <int>[];
 
+  @override
+  void initState() {
+    super.initState();
+    sortedList = loadCustomData<List<int>?>("sortedExtensions_${widget.itemType.name}") ?? [];
+  }
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
   Future<void> _refreshData() async {
     if (widget.itemType == ItemType.manga) {
       return await ref.refresh(
@@ -62,7 +72,7 @@ class _ExtensionScreenState extends ConsumerState<Extension> {
   Widget build(BuildContext context) {
     _fetchData();
     final streamExtensions =
-        ref.watch(getExtensionsStreamProvider(widget.itemType));
+    ref.watch(getExtensionsStreamProvider(widget.itemType));
 
     return RefreshIndicator(
       onRefresh: _refreshData,
@@ -104,28 +114,57 @@ class _ExtensionScreenState extends ConsumerState<Extension> {
   List<Source> _filterData(List<Source> data) {
     return data
         .where((element) => widget.selectedLanguage != 'all'
-            ? element.lang!.toLowerCase() == completeLanguageCode(widget.selectedLanguage)
-            : true)
+        ? element.lang!.toLowerCase() ==
+        completeLanguageCode(widget.selectedLanguage)
+        : true)
         .where((element) =>
-            widget.query.isEmpty ||
-            element.name!.toLowerCase().contains(widget.query.toLowerCase()))
+    widget.query.isEmpty ||
+        element.name!.toLowerCase().contains(widget.query.toLowerCase()))
         .where((element) =>
-            PrefManager.getVal(PrefName.NSFWExtensions) ||
-            element.isNsfw == false)
+    PrefManager.getVal(PrefName.NSFWExtensions) ||
+        element.isNsfw == false)
         .toList();
   }
 
   List<Source> _getInstalledEntries(List<Source> data) {
-    return data
+    final installed = data
         .where((element) => element.version == element.versionLast!)
         .where((element) => element.isAdded!)
         .toList();
+
+
+    final installedIds = installed.map((source) => source.id!).toList();
+
+    final removedIds = sortedList.where((id) => !installedIds.contains(id)).toList();
+
+    if (removedIds.isNotEmpty) {
+      sortedList.removeWhere((id) => removedIds.contains(id));
+      saveCustomData("sortedExtensions_${widget.itemType.name}", sortedList);
+    }
+
+    final newEntries = installedIds.where((id) => !sortedList.contains(id)).toList();
+
+    if (newEntries.isNotEmpty) {
+      sortedList.addAll(newEntries);
+      saveCustomData("sortedExtensions_${widget.itemType.name}", sortedList);
+    }
+
+    final sorted = installed
+        .where((source) => sortedList.contains(source.id))
+        .toList()
+      ..sort((a, b) =>
+          sortedList.indexOf(a.id!).compareTo(sortedList.indexOf(b.id!)));
+    final unsorted = installed
+        .where((source) => !sortedList.contains(source.id))
+        .toList();
+
+    return [...sorted, ...unsorted];
   }
 
   List<Source> _getUpdateEntries(List<Source> data) {
     return data
         .where((element) =>
-            compareVersions(element.version!, element.versionLast!) < 0)
+    compareVersions(element.version!, element.versionLast!) < 0)
         .where((element) => element.isAdded!)
         .toList();
   }
@@ -137,8 +176,39 @@ class _ExtensionScreenState extends ConsumerState<Extension> {
         .toList();
   }
 
+  Widget _buildInstalledList(List<Source> installedEntries) {
+    return SliverToBoxAdapter(
+      child: ReorderableListView.builder(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        onReorder: (int oldIndex, int newIndex) {
+          if (newIndex > oldIndex) newIndex -= 1;
+          setState(() {
+            final Source movedItem = installedEntries.removeAt(oldIndex);
+            installedEntries.insert(newIndex, movedItem);
+
+            if (sortedList.contains(movedItem.id)) {
+              sortedList.remove(movedItem.id);
+            }
+            sortedList.insert(newIndex, movedItem.id!);
+            saveCustomData("sortedExtensions_${widget.itemType.name}", sortedList);
+          });
+        },
+        itemBuilder: (context, index) {
+          final source = installedEntries[index];
+          return ExtensionListTileWidget(
+            key: ValueKey(source.id ?? index),
+            source: source,
+          );
+        },
+        itemCount: installedEntries.length,
+      ),
+    );
+  }
+
   SliverGroupedListView<Source, String> _buildUpdatePendingList(
       List<Source> updateEntries) {
+    // (No changes made to this function)
     return SliverGroupedListView<Source, String>(
       elements: updateEntries,
       groupBy: (element) => "",
@@ -156,15 +226,15 @@ class _ExtensionScreenState extends ConsumerState<Extension> {
                 for (var source in updateEntries) {
                   source.itemType == ItemType.manga
                       ? await ref.watch(fetchMangaSourcesListProvider(
-                              id: source.id, reFresh: true)
-                          .future)
+                      id: source.id, reFresh: true)
+                      .future)
                       : source.itemType == ItemType.anime
-                          ? await ref.watch(fetchAnimeSourcesListProvider(
-                                  id: source.id, reFresh: true)
-                              .future)
-                          : await ref.watch(fetchNovelSourcesListProvider(
-                                  id: source.id, reFresh: true)
-                              .future);
+                      ? await ref.watch(fetchAnimeSourcesListProvider(
+                      id: source.id, reFresh: true)
+                      .future)
+                      : await ref.watch(fetchNovelSourcesListProvider(
+                      id: source.id, reFresh: true)
+                      .future);
                 }
               },
               child: const Text(
@@ -183,25 +253,9 @@ class _ExtensionScreenState extends ConsumerState<Extension> {
     );
   }
 
-  SliverGroupedListView<Source, String> _buildInstalledList(
-      List<Source> installedEntries) {
-    return SliverGroupedListView<Source, String>(
-      elements: installedEntries,
-      groupBy: (element) => "",
-      groupSeparatorBuilder: (_) => const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 12),
-        child: SizedBox(),
-      ),
-      itemBuilder: (context, Source element) =>
-          ExtensionListTileWidget(source: element),
-      groupComparator: (group1, group2) => group1.compareTo(group2),
-      itemComparator: (item1, item2) => item1.name!.compareTo(item2.name!),
-      order: GroupedListOrder.ASC,
-    );
-  }
-
   SliverGroupedListView<Source, String> _buildNotInstalledList(
       List<Source> notInstalledEntries) {
+    // (No changes made to this function)
     return SliverGroupedListView<Source, String>(
       elements: notInstalledEntries,
       groupBy: (element) => completeLanguageName(element.lang!.toLowerCase()),
