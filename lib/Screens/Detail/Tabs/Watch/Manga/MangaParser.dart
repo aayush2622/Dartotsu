@@ -116,16 +116,16 @@ class MangaParser extends BaseParser {
     scanlator.value = uniqueScanlators.toList();
     toggledScanlators.value = List<bool>.filled(uniqueScanlators.length, true);
   }
+}
 
-  Chapter MChapterToChapter(MChapter chapter, MManga? selectedMedia) {
-    var episodeNumber = ChapterRecognition.parseChapterNumber(
-        selectedMedia?.name ?? '', chapter.name ?? '');
-    return Chapter(
-      title: chapter.name,
-      link: chapter.url,
-      number: episodeNumber.toString(),
-      date: chapter.dateUpload,
-      mChapter: chapter,
-    );
-  }
+Chapter MChapterToChapter(MChapter chapter, MManga? selectedMedia) {
+  var episodeNumber = ChapterRecognition.parseChapterNumber(
+      selectedMedia?.name ?? '', chapter.name ?? '');
+  return Chapter(
+    title: chapter.name,
+    link: chapter.url,
+    number: episodeNumber.toString(),
+    date: chapter.dateUpload,
+    mChapter: chapter,
+  );
 }

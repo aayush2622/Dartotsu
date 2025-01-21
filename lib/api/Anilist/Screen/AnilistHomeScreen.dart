@@ -69,7 +69,6 @@ class AnilistHomeScreen extends BaseHomeScreen {
   @override
   int get refreshID => RefreshId.Anilist.homePage;
 
-  @override
   void resetPageData() {
     animeContinue.value = null;
     animeFav.value = null;

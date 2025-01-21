@@ -3,6 +3,7 @@ import 'package:dantotsu/Functions/Extensions.dart';
 import 'package:dantotsu/Screens/Detail/Tabs/Info/InfoPage.dart';
 import 'package:dantotsu/Screens/Detail/Tabs/Watch/Anime/AnimeWatchScreen.dart';
 import 'package:dantotsu/Screens/Detail/Tabs/Watch/Manga/MangaWatchScreen.dart';
+import 'package:dantotsu/Screens/Detail/Tabs/Watch/Source/Source.dart';
 import 'package:expandable_page_view/expandable_page_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -42,7 +43,8 @@ class MediaInfoPageState extends State<MediaInfoPage> {
     var service = Provider.of<MediaServiceProvider>(context, listen: false)
         .currentService;
 
-    _viewModel = Get.put(MediaPageViewModel(), tag: "${widget.mediaData.id.toString()}-${service.getName}");
+    _viewModel = Get.put(MediaPageViewModel(),
+        tag: "${widget.mediaData.id.toString()}-${service.getName}");
     mediaData = widget.mediaData;
     loadData();
   }
@@ -90,9 +92,11 @@ class MediaInfoPageState extends State<MediaInfoPage> {
       children: [
         SingleChildScrollView(child: InfoPage(mediaData: mediaData)),
         SingleChildScrollView(
-          child: mediaData.anime != null
-              ? AnimeWatchScreen(mediaData: mediaData)
-              : MangaWatchScreen(mediaData: mediaData),
+          child: mediaData.sourceData != null
+              ? Source(media: mediaData)
+              : mediaData.anime != null
+                  ? AnimeWatchScreen(mediaData: mediaData)
+                  : MangaWatchScreen(mediaData: mediaData),
         ),
         const SizedBox(),
       ],
@@ -114,8 +118,8 @@ class MediaInfoPageState extends State<MediaInfoPage> {
               isAnime
                   ? Icons.movie_filter_rounded
                   : mediaData.format?.toLowerCase() != 'novel'
-                  ? Icons.import_contacts
-                  : Icons.book_rounded,
+                      ? Icons.import_contacts
+                      : Icons.book_rounded,
             ),
             label: isAnime ? getString.watch : getString.read,
           ),

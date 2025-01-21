@@ -18,7 +18,7 @@ Widget languageSwitcher(BuildContext context) {
     onChanged: (String newValue) {
       final newLocale = Locale(completeLanguageCode(newValue).toLowerCase());
       Get.updateLocale(newLocale);
-      PrefManager.setCustomVal("defaultLanguage", newLocale.languageCode);
+      PrefManager.setVal(PrefName.defaultLanguage, newLocale.languageCode);
     },
     prefixIcon: Icons.translate,
   );

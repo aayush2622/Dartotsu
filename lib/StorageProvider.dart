@@ -19,16 +19,14 @@ class StorageProvider {
     }
 
     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
-     final androidInfo = await deviceInfo.androidInfo;
+    final androidInfo = await deviceInfo.androidInfo;
     if (androidInfo.version.sdkInt <= 29) {
-
       final storagePermission = Permission.storage;
       if (await storagePermission.isGranted) {
         return true;
       }
       final storageStatus = await storagePermission.request();
       return storageStatus.isGranted;
-
     }
 
     final manageStoragePermission = Permission.manageExternalStorage;
@@ -62,12 +60,24 @@ class StorageProvider {
     final appDir = await getApplicationDocumentsDirectory();
 
     if (Platform.isIOS || Platform.isMacOS) {
-      final dbDir = path.join(appDir.path, 'Dartotsu', subPath ?? '').fixSeparator;
+      final dbDir =
+          path.join(appDir.path, 'Dartotsu', subPath ?? '').fixSeparator;
       await Directory(dbDir).create(recursive: true);
       return Directory(dbDir);
     }
 
     if (Platform.isAndroid) {
+      DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+      final androidInfo = await deviceInfo.androidInfo;
+      if (androidInfo.version.sdkInt <= 29) {
+        return Directory((useCustomPath == true
+            ? (customPath.isNotEmpty && !customPath.endsWith('Dartotsu'))
+            ? path.join(customPath, 'Dartotsu')
+            : customPath.isNotEmpty
+            ? customPath
+            : "/storage/emulated/0/Dartotsu"
+            : appDir.path).fixSeparator);
+      }
       basePath = useCustomPath == true
           ? (customPath.isNotEmpty && !customPath.endsWith('Dartotsu'))
               ? path.join(customPath, 'Dartotsu')

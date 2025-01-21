@@ -1,4 +1,7 @@
+import 'package:dantotsu/api/Mangayomi/Model/Source.dart';
+
 import '../../../../../DataClass/Anime.dart';
+import '../../../../../DataClass/Manga.dart';
 import '../../../../../DataClass/Media.dart';
 import 'm_manga.dart';
 
@@ -23,7 +26,7 @@ class MPages {
 }
 
 extension M on MPages {
-  List<Media> toMedia({bool isAnime = false}) {
+  List<Media> toMedia({bool isAnime = false, Source? source}) {
     return list.map((e) {
       return Media(
         id: e.hashCode,
@@ -32,8 +35,11 @@ extension M on MPages {
         nameRomaji: e.name ?? '',
         userPreferredName: e.name ?? '',
         isAdult: false,
+        shareLink: e.link,
         minimal: true,
-        anime: isAnime ? Anime() : null
+        anime: isAnime ? Anime() : null,
+        manga: isAnime ? null : Manga(),
+        sourceData: source,
       );
     }).toList();
   }

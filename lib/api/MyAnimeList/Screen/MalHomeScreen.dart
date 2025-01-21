@@ -41,7 +41,6 @@ class MalHomeScreen extends BaseHomeScreen {
   @override
   int get refreshID => RefreshId.Mal.homePage;
 
-  @override
   void resetPageData() {
     animeContinue.value = null;
     animeOnHold.value = null;

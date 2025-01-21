@@ -43,7 +43,6 @@ class AnilistMangaScreen extends BaseMangaScreen {
   @override
   int get refreshID => RefreshId.Anilist.mangaPage;
 
-  @override
   void resetPageData() {
     trending.value = null;
     mangaPopular.value = null;

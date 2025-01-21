@@ -24,19 +24,27 @@ class ExtensionsAnimeScreen extends BaseAnimeScreen {
     final container = ProviderContainer();
     final sourcesAsyncValue = await container
         .read(getExtensionsStreamProvider(ItemType.anime).future);
+    final ids = [14, 46];
     final installedSources = sourcesAsyncValue
         .where((source) => source.isAdded!)
         .toList()
         .reversed
-        .toList();
+        .toList()
+      ;
+    final sortedInstalledSources = [
+      ...installedSources
+          .where((source) => ids.contains(source.id))
+          .toList()
+        ..sort((a, b) => ids.indexOf(a.id!).compareTo(ids.indexOf(b.id!))),
+      ...installedSources.where((source) => !ids.contains(source.id)),
+    ];
     _buildSections(installedSources);
     for (var source in installedSources) {
       try {
         var result = (await getPopular(
           source: source,
           page: 1,
-        ))
-            ?.toMedia(isAnime: true);
+        ))?.toMedia(isAnime: true, source: source);
 
         if (result != null && result.isNotEmpty) {
           trending.value = result;
@@ -46,15 +54,13 @@ class ExtensionsAnimeScreen extends BaseAnimeScreen {
         Logger.log('Source ${source.name} failed: ${e.toString()}');
       }
     }
-
   }
 
   Future<void> _buildSections(List<Source> sources) async {
     List<Future<void>> tasks = [];
-
+    var limit = 6;
     for (var source in sources) {
-      if (source.name == sources.first.name) continue;
-
+      if (limit-- <= 0) break;
       tasks.add(
         () async {
           try {
@@ -62,7 +68,7 @@ class ExtensionsAnimeScreen extends BaseAnimeScreen {
               source: source,
               page: 1,
             ))
-                ?.toMedia(isAnime: true);
+                ?.toMedia(isAnime: true, source: source);
             if (result != null && result.isNotEmpty) {
               data.value = {
                 ...data.value!,
@@ -108,7 +114,6 @@ class ExtensionsAnimeScreen extends BaseAnimeScreen {
   @override
   int get refreshID => 90;
 
-  @override
   void resetPageData() {
     data.value = {};
   }

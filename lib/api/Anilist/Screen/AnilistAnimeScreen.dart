@@ -44,7 +44,6 @@ class AnilistAnimeScreen extends BaseAnimeScreen {
   @override
   int get refreshID => RefreshId.Anilist.animePage;
 
-  @override
   void resetPageData() {
     trending.value = null;
     animePopular.value = null;

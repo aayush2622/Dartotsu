@@ -45,7 +45,6 @@ class MalMangaScreen extends BaseMangaScreen {
   @override
   int get refreshID => RefreshId.Mal.mangaPage;
 
-  @override
   void resetPageData() {
     trending.value = null;
     mangaPopular.value = null;

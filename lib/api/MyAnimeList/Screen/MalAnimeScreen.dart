@@ -45,7 +45,6 @@ class MalAnimeScreen extends BaseAnimeScreen {
   @override
   int get refreshID => RefreshId.Mal.animePage;
 
-  @override
   void resetPageData() {
     trending.value = null;
     animePopular.value = null;

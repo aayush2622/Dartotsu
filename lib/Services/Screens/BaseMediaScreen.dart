@@ -15,8 +15,6 @@ abstract class BaseMediaScreen extends GetxController {
 
   List<Widget> mediaContent(BuildContext context);
 
-  void resetPageData();
-
   int get refreshID;
 
   bool get paging => true;

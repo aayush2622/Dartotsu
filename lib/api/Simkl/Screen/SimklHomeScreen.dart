@@ -206,7 +206,6 @@ class SimklHomeScreen extends BaseHomeScreen {
   @override
   int get refreshID => RefreshId.Simkl.homePage;
 
-  @override
   void resetPageData() {
     animeContinue.value = null;
     animePlanned.value = null;

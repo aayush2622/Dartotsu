@@ -35,11 +35,13 @@ class AnimeParser extends BaseParser {
 
   var dataLoaded = false.obs;
   var reversed = false.obs;
+
   void initSettings(Media mediaData) {
     var selected = loadSelected(mediaData);
     viewType.value = selected.recyclerStyle;
     reversed.value = selected.recyclerReversed;
   }
+
   void settingsDialog(BuildContext context, Media media) =>
       AnimeCompactSettings(
         context,
@@ -88,7 +90,7 @@ class AnimeParser extends BaseParser {
 
     MManga? m;
     try {
-      m = await getDetail(url: media.link!, source: source).timeout(Duration(seconds: 10));
+      m = await getDetail(url: media.link!, source: source);
     } catch (e) {
       errorType.value = ErrorType.NoResult;
       return;
@@ -121,8 +123,10 @@ class AnimeParser extends BaseParser {
         if (shouldNormalize) {
           if (episode.number.toDouble() % 1 != 0) {
             additionalIndex--;
-            var remainder = (episode.number.toDouble() % 1).toStringAsFixed(2).toDouble();
-            episode.number = (index + 1 + remainder + additionalIndex).toString();
+            var remainder =
+                (episode.number.toDouble() % 1).toStringAsFixed(2).toDouble();
+            episode.number =
+                (index + 1 + remainder + additionalIndex).toString();
           } else {
             episode.number = (index + 1 + additionalIndex).toString();
           }
@@ -140,33 +144,37 @@ class AnimeParser extends BaseParser {
       }),
     );
   }
+
   var episodeDataLoaded = false.obs;
 
   Future<void> getEpisodeData(Media mediaData) async {
-    var a = await Anify.fetchAndParseMetadata(mediaData);
-    var k = await Kitsu.getKitsuEpisodesDetails(mediaData);
-    anifyEpisodeList.value ??= a;
-    kitsuEpisodeList.value ??= k;
-    episodeDataLoaded.value = true;
+    Future.delayed(Duration(seconds: 5), () {
+      episodeDataLoaded.value = true;
+    });
+    var data = await Future.wait([
+      Anify.fetchAndParseMetadata(mediaData),
+      Kitsu.getKitsuEpisodesDetails(mediaData)
+    ]);
+    anifyEpisodeList.value ??= data[0];
+    kitsuEpisodeList.value ??= data[1];
   }
 
   Future<void> getFillerEpisodes(Media mediaData) async {
     var res = await Jikan.getEpisodes(mediaData);
     fillerEpisodesList.value ??= res;
   }
+}
 
-  Episode MChapterToEpisode(MChapter chapter, MManga? selectedMedia) {
-    var episodeNumber = ChapterRecognition.parseChapterNumber(
-        selectedMedia?.name ?? '', chapter.name ?? '');
-    return Episode(
-      number:
-          episodeNumber != -1 ? episodeNumber.toString() : chapter.name ?? '',
-      link: chapter.url,
-      title: chapter.name,
-      thumb: null,
-      desc: null,
-      filler: false,
-      mChapter: chapter,
-    );
-  }
+Episode MChapterToEpisode(MChapter chapter, MManga? selectedMedia) {
+  var episodeNumber = ChapterRecognition.parseChapterNumber(
+      selectedMedia?.name ?? '', chapter.name ?? '');
+  return Episode(
+    number: episodeNumber != -1 ? episodeNumber.toString() : chapter.name ?? '',
+    link: chapter.url,
+    title: chapter.name,
+    thumb: null,
+    desc: null,
+    filler: false,
+    mChapter: chapter,
+  );
 }

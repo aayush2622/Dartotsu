@@ -46,7 +46,7 @@ class _PlayerControllerState extends State<PlayerController> {
   late Rx<BoxFit> resizeMode;
   late Source source;
   late RxBool showEpisodes;
-  late BasePlayer _controller;
+  late BasePlayer controller;
   late v.Video currentQuality;
   late PlayerSettings settings;
   late int fitType;
@@ -69,9 +69,9 @@ class _PlayerControllerState extends State<PlayerController> {
     fitType = settings.resizeMode;
     WakelockPlus.enable();
     if (!widget.player.isMobile) initFullScreen();
-    _controller = widget.player.videoPlayerController;
+    controller = widget.player.videoPlayerController;
     currentQuality = videos[widget.player.widget.index];
-    _controller.listenToPlayerStream();
+    controller.listenToPlayerStream();
     _onInit(context);
   }
 
@@ -82,15 +82,15 @@ class _PlayerControllerState extends State<PlayerController> {
     var currentProgress = PrefManager.getCustomVal<int>(
       "${media.id}-${currentEpisode.number}-$sourceName-current",
     );
-    while (_controller.maxTime.value == '00:00') {
+    while (controller.maxTime.value == '00:00') {
       await Future.delayed(const Duration(milliseconds: 100));
     }
-    _controller.pause();
-    _controller.isBuffering.value = true;
+    controller.pause();
+    controller.isBuffering.value = true;
     setDiscordRpc();
     setTimeStamps();
 
-    _controller.seek(Duration(seconds: currentProgress ?? 0));
+    controller.seek(Duration(seconds: currentProgress ?? 0));
     var list = List<int>.from(
       PrefManager.getCustomVal<List<int>>("continueAnimeList") ?? [],
     );
@@ -114,10 +114,10 @@ class _PlayerControllerState extends State<PlayerController> {
     }
 
     currentQuality.subtitles ??= [];
-    processTracks(currentQuality.subtitles, _controller.subtitles, "subtitle");
+    processTracks(currentQuality.subtitles, controller.subtitles, "subtitle");
 
     currentQuality.audios ??= [];
-    processTracks(currentQuality.audios, _controller.audios, "audio");
+    processTracks(currentQuality.audios, controller.audios, "audio");
 
     var defaultSub = currentQuality.subtitles?.firstWhereOrNull(
       (element) => element.label == 'English',
@@ -126,21 +126,21 @@ class _PlayerControllerState extends State<PlayerController> {
       (element) => element.label == 'English',
     );
     if (defaultAudio != null) {
-      await _controller.setAudio(
+      await controller.setAudio(
         defaultAudio.file ?? "Unknown",
         defaultAudio.label ?? "",
         defaultAudio.file?.toNullInt() == null,
       );
     }
     if (defaultSub != null) {
-      _controller.setSubtitle(
+      controller.setSubtitle(
         defaultSub.file ?? "Unknown",
         defaultSub.label ?? "",
         defaultSub.file?.toNullInt() == null,
       );
     }
-    _controller.isBuffering.value = false;
-    _controller.play();
+    controller.isBuffering.value = false;
+    controller.play();
   }
 
   Future<void> _saveProgress(int currentProgress) async {
@@ -148,7 +148,7 @@ class _PlayerControllerState extends State<PlayerController> {
     var sourceName = Provider.of<MediaServiceProvider>(context, listen: false)
         .currentService
         .getName;
-    var maxProgress = _controller.maxTime.value;
+    var maxProgress = controller.maxTime.value;
     PrefManager.setCustomVal<int>(
         "${media.id}-${currentEpisode.number}-$sourceName-current",
         currentProgress);
@@ -161,13 +161,12 @@ class _PlayerControllerState extends State<PlayerController> {
     timeStamps.value = await AniSkip.getResult(
           malId: media.idMAL,
           episodeNumber: currentEpisode.number.toInt(),
-          episodeLength:
-              _timeStringToSeconds(_controller.maxTime.value).toInt(),
+          episodeLength: _timeStringToSeconds(controller.maxTime.value).toInt(),
           useProxyForTimeStamps: false,
         ) ??
         [];
 
-    _controller.currentPosition.listen(
+    controller.currentPosition.listen(
       (v) {
         if (v.inSeconds > 0) {
           _saveProgress(v.inSeconds);
@@ -189,7 +188,7 @@ class _PlayerControllerState extends State<PlayerController> {
       media,
       episode: currentEpisode,
       eTime: _timeStringToSeconds(
-        _controller.maxTime.value,
+        controller.maxTime.value,
       ).toInt(),
     );
   }
@@ -257,7 +256,7 @@ class _PlayerControllerState extends State<PlayerController> {
           Row(
             children: [
               Text(
-                _controller.currentTime.value,
+                controller.currentTime.value,
                 style: const TextStyle(color: Colors.white),
               ),
               Text(
@@ -267,7 +266,7 @@ class _PlayerControllerState extends State<PlayerController> {
                 ),
               ),
               Text(
-                _controller.maxTime.value,
+                controller.maxTime.value,
                 style: TextStyle(
                   color: Colors.white.withValues(alpha: 0.5),
                 ),
@@ -317,11 +316,10 @@ class _PlayerControllerState extends State<PlayerController> {
               child: Obx(
                 () {
                   var bufferingValue =
-                      _timeStringToSeconds(_controller.bufferingTime.value);
+                      _timeStringToSeconds(controller.bufferingTime.value);
                   var currentValue =
-                      _timeStringToSeconds(_controller.currentTime.value);
-                  var maxValue =
-                      _timeStringToSeconds(_controller.maxTime.value);
+                      _timeStringToSeconds(controller.currentTime.value);
+                  var maxValue = _timeStringToSeconds(controller.maxTime.value);
 
                   return Stack(
                     children: [
@@ -333,9 +331,9 @@ class _PlayerControllerState extends State<PlayerController> {
                             bufferingValue.clamp(0.0, maxValue),
                         secondaryActiveColor: Colors.white,
                         onChangeEnd: (val) async {
-                          _controller.seek(Duration(seconds: val.toInt()));
+                          controller.seek(Duration(seconds: val.toInt()));
                         },
-                        onChanged: (double value) => _controller
+                        onChanged: (double value) => controller
                             .currentTime.value = _formatTime(value.toInt()),
                       ),
                       Positioned.fill(
@@ -493,7 +491,7 @@ class _PlayerControllerState extends State<PlayerController> {
         _buildControlButton(
           icon: Icons.video_settings_rounded,
           onPressed: () {
-            _controller.pause();
+            controller.pause();
             showCustomBottomDialog(
               context,
               CustomBottomDialog(
@@ -571,7 +569,7 @@ class _PlayerControllerState extends State<PlayerController> {
                   icon: Icons.skip_previous_rounded,
                   size: 42,
                   onPressed: () {
-                    _controller.pause();
+                    controller.pause();
                     onEpisodeClick(
                       context,
                       episodeList[index - 1],
@@ -584,10 +582,10 @@ class _PlayerControllerState extends State<PlayerController> {
               : const SizedBox(width: 42)),
           const SizedBox(width: 36),
           Obx(
-            () => _controller.isBuffering.value
+            () => controller.isBuffering.value
                 ? const CircularProgressIndicator(color: Colors.white)
                 : _buildControlButton(
-                    icon: _controller.isPlaying.value
+                    icon: controller.isPlaying.value
                         ? Icons.pause_rounded
                         : Icons.play_arrow_rounded,
                     size: 42,
@@ -600,7 +598,7 @@ class _PlayerControllerState extends State<PlayerController> {
                   icon: Icons.skip_next_rounded,
                   size: 42,
                   onPressed: () {
-                    _controller.pause();
+                    controller.pause();
                     onEpisodeClick(
                       context,
                       episodeList[index + 1],
@@ -649,58 +647,67 @@ class _PlayerControllerState extends State<PlayerController> {
       ..singleChoiceItems(speedMap(cursed), selectedItemIndex, (index) {
         settings.speed = speedMap(cursed)[index];
         PrefManager.setCustomVal('${media.id}-PlayerSettings', settings);
-        _controller.setRate(
+        controller.setRate(
             double.parse(speedMap(cursed)[index].replaceFirst("x", "")));
       })
       ..show();
   }
 
   void _subtitleDialog() {
-    _controller.pause();
-    var sub =
-        currentQuality.subtitles == null || currentQuality.subtitles!.isEmpty;
-    var subtitlesDialog = CustomBottomDialog(
+    controller.pause();
+
+    final noSubtitles = currentQuality.subtitles?.isEmpty ?? true;
+
+    final subtitlesDialog = CustomBottomDialog(
       title: "Subtitles",
-      viewList: [_buildSubtitleList(sub)],
+      viewList: [_buildSubtitleList(noSubtitles)],
       negativeText: "Add Subtitle",
       negativeCallback: () async {
-        var file = (await FilePicker.platform.pickFiles(
+        final pickedFile = await FilePicker.platform.pickFiles(
           type: FileType.custom,
           allowedExtensions: subMap,
-        ))
-            ?.files
-            .single;
-        if (file == null || file.path == null) return;
+        );
+
+        if (pickedFile?.files.single.path == null) return;
+
+        final file = pickedFile!.files.single;
         currentQuality.subtitles ??= [];
         currentQuality.subtitles!.add(
           v.Track(
-            file: file.path,
+            file: file.path!,
             label: file.name,
           ),
         );
-        _controller.setSubtitle(
-            file.path ?? "", file.name, file.path?.toNullInt() == null);
+
+        controller.setSubtitle(
+          file.path!,
+          file.name,
+          file.path?.toNullInt() == null,
+        );
+
         Get.back();
-        _controller.play();
+        controller.play();
       },
     );
+
     showCustomBottomDialog(context, subtitlesDialog);
   }
 
   void _audioDialog() {
-    _controller.pause();
+    controller.pause();
     var audioDialog = CustomBottomDialog(
       title: "Audio",
       viewList: [_buildAudioList(currentQuality.audios == null)],
       negativeText: "Add Audio",
       negativeCallback: () async {
-        var file = (await FilePicker.platform.pickFiles(
+        final pickedFile = await FilePicker.platform.pickFiles(
           type: FileType.custom,
           allowedExtensions: audioMap,
-        ))
-            ?.files
-            .single;
-        if (file == null || file.path == null) return;
+        );
+
+        if (pickedFile?.files.single.path == null) return;
+
+        final file = pickedFile!.files.single;
         currentQuality.audios ??= [];
         currentQuality.audios!.add(
           v.Track(
@@ -708,15 +715,17 @@ class _PlayerControllerState extends State<PlayerController> {
             label: file.name,
           ),
         );
-        await _controller.setAudio(
-          file.path ?? "",
+        await controller.setAudio(
+          file.path!,
           file.name,
           file.path?.toNullInt() == null,
         );
+
         Get.back();
-        _controller.play();
+        controller.play();
       },
     );
+
     showCustomBottomDialog(context, audioDialog);
   }
 
@@ -739,13 +748,13 @@ class _PlayerControllerState extends State<PlayerController> {
             elevation: 4,
             child: InkWell(
               onTap: () {
-                _controller.setSubtitle(
+                controller.setSubtitle(
                   sub.file ?? "",
                   sub.label ?? "",
                   sub.file?.toNullInt() == null,
                 );
                 Get.back();
-                _controller.play();
+                controller.play();
               },
               borderRadius: BorderRadius.circular(12),
               child: Padding(
@@ -755,7 +764,8 @@ class _PlayerControllerState extends State<PlayerController> {
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
-                    color: (_controller as WindowsPlayer).currentSubtitle == sub.label
+                    color: (controller as WindowsPlayer).currentSubtitle ==
+                            sub.label
                         ? Theme.of(context).colorScheme.primary
                         : Theme.of(context).colorScheme.onSurface,
                   ),
@@ -787,13 +797,13 @@ class _PlayerControllerState extends State<PlayerController> {
             elevation: 4,
             child: InkWell(
               onTap: () {
-                _controller.setAudio(
+                controller.setAudio(
                   sub.file ?? "",
                   sub.label ?? "",
                   sub.file?.toNullInt() == null,
                 );
                 Get.back();
-                _controller.play();
+                controller.play();
               },
               borderRadius: BorderRadius.circular(12),
               child: Padding(
@@ -870,21 +880,21 @@ class _PlayerControllerState extends State<PlayerController> {
     if (timeStampsText.value != '') {
       var current = timeStamps
           .firstWhere((element) => element.getType() == timeStampsText.value);
-      _controller.seek(Duration(seconds: current.interval.endTime.toInt()));
+      controller.seek(Duration(seconds: current.interval.endTime.toInt()));
       return;
     }
-    var currentTime = _timeStringToSeconds(_controller.currentTime.value);
-    var maxTime = _timeStringToSeconds(_controller.maxTime.value);
+    var currentTime = _timeStringToSeconds(controller.currentTime.value);
+    var maxTime = _timeStringToSeconds(controller.maxTime.value);
     var newTime = currentTime + seconds;
     if (newTime > maxTime) {
       newTime = maxTime;
     }
-    _controller.seek(Duration(seconds: newTime.toInt()));
+    controller.seek(Duration(seconds: newTime.toInt()));
   }
 
-  void _toggleFullScreen() {
+  Future<void> _toggleFullScreen() async {
     isFullScreen.value = !isFullScreen.value;
-    WindowManager.instance.setFullScreen(isFullScreen.value);
+    await WindowManager.instance.setFullScreen(isFullScreen.value);
   }
 
   void switchAspectRatio() {
@@ -916,8 +926,10 @@ class _PlayerControllerState extends State<PlayerController> {
                     return;
                   }
                   currentQuality = videos[index];
-                  _controller.open(
-                      currentQuality.url, _controller.currentPosition.value,);
+                  controller.open(
+                    currentQuality.url,
+                    controller.currentPosition.value,
+                  );
                   Get.back();
                 },
                 borderRadius: BorderRadius.circular(12),
@@ -951,5 +963,5 @@ class _PlayerControllerState extends State<PlayerController> {
   }
 
   void _togglePlayPause() =>
-      _controller.isPlaying.value ? _controller.pause() : _controller.play();
+      controller.isPlaying.value ? controller.pause() : controller.play();
 }

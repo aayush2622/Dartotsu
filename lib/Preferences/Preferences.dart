@@ -98,9 +98,10 @@ class PrefName {
   static const incognito = Pref(Location.General, 'incognito', false);
   static const offlineMode = Pref(Location.General, 'offline', false);
   static const customPath = Pref(Location.General, 'customPath', '');
+  static const defaultLanguage = Pref(Location.General, 'defaultLanguage', 'en');
+
   //Player
   static const cursedSpeed = Pref(Location.General, 'cursedSpeed', false);
-
   static const thumbLessSeekBar = Pref(Location.General, 'thumbLessSeekBar', false);
   static Pref<PlayerSettings> playerSettings =
       Pref(Location.General, 'playerSettings', PlayerSettings());

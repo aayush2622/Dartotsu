@@ -65,9 +65,6 @@ class _SourceSelectorState extends ConsumerState<SourceSelector> {
 
     Source source = sources.firstWhereOrNull((e) => nameAndLang(e) == lastUsedSource!) ?? sources.first;
 
-    if (widget.currentSource?.id != source.id) {
-      widget.onSourceChange(source);
-    }
     var theme = Theme.of(context).colorScheme;
     return Column(
       children: [

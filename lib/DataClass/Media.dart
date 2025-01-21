@@ -1,4 +1,5 @@
 import 'package:dantotsu/Functions/string_extensions.dart';
+import 'package:dantotsu/api/Mangayomi/Model/Source.dart';
 
 import '../Preferences/IsarDataClasses/Selected/Selected.dart';
 import '../api/Anilist/Data/fuzzyData.dart';
@@ -18,7 +19,6 @@ class Media {
   final Manga? manga;
   final int id;
 
-  int? idMAL;
   String? typeMAL;
   final String? name;
   final String nameRomaji;
@@ -77,17 +77,20 @@ class Media {
   String? shareLink;
   Selected? selected;
   List<anilistApi.MediaStreamingEpisode>? streamingEpisodes;
-  String? idKitsu;
 
   bool cameFromContinue = false;
   bool mal = false;
   bool kitsu = false;
+  int? idAnilist;
+  int? idMAL;
+  String? idKitsu;
+  int? idSimkl;
 
+  Source? sourceData;
   Media({
     this.anime,
     this.manga,
     required this.id,
-    this.idMAL,
     this.typeMAL,
     this.name,
     required this.nameRomaji,
@@ -97,7 +100,7 @@ class Media {
     this.relation,
     this.favourites,
     this.minimal = false,
-    required this.isAdult,
+    this.isAdult = false,
     this.isFav = false,
     this.notify = false,
     this.userListId,
@@ -141,9 +144,13 @@ class Media {
     this.selected,
     this.streamingEpisodes,
     this.idKitsu,
+    this.idAnilist,
+    this.idMAL,
+    this.idSimkl,
     this.cameFromContinue = false,
     this.mal = false,
     this.kitsu = false,
+    this.sourceData,
   });
 
   String mainName() => name ?? nameMAL ?? nameRomaji;
@@ -154,6 +161,7 @@ class Media {
   static Media mediaData(anilistApi.Media apiMedia) {
     return Media(
       id: apiMedia.id,
+      idAnilist: apiMedia.id,
       idMAL: apiMedia.idMal ??
           GetMediaIDs.fromID(type: AnimeIDType.anilistId, id: apiMedia.id)
               ?.malId,
@@ -250,9 +258,11 @@ class Media {
     }
 
     return Media(
-      id: GetMediaIDs.fromID(type: AnimeIDType.malId, id: apiMedia.id!)
-              ?.anilistId ??
-          apiMedia.id!,
+      id: apiMedia.id!,
+      idAnilist: GetMediaIDs.fromID(type: AnimeIDType.malId, id: apiMedia.id)
+          ?.anilistId,
+      idKitsu: GetMediaIDs.fromID(type: AnimeIDType.malId, id: apiMedia.id)
+          ?.kitsuId?.toString(),
       idMAL: apiMedia.id,
       name: apiMedia.title ?? '',
       nameRomaji: apiMedia.alternativeTitles?.ja ?? apiMedia.title ?? '',
@@ -287,6 +297,9 @@ class Media {
     var cover = 'https://wsrv.nl/?url=https://simkl.in/posters/${apiMedia.show?.poster}_m.webp';
     return Media(
       id: apiMedia.show!.ids!.simkl!,
+      idAnilist: apiMedia.show!.ids!.anilist?.toNullInt(),
+      idSimkl: apiMedia.show!.ids!.simkl!,
+      idKitsu: apiMedia.show!.ids!.kitsu?.toNullInt()?.toString(),
       idMAL: apiMedia.show!.ids!.mal?.toNullInt(),
       nameRomaji: apiMedia.show!.title ?? '',
       userPreferredName: apiMedia.show!.title ?? '',
@@ -308,7 +321,10 @@ class Media {
     var cover = 'https://wsrv.nl/?url=https://simkl.in/posters/${apiMedia.show?.poster}_m.webp';
     return Media(
       id: apiMedia.show!.ids!.simkl!,
-      idMAL: apiMedia.show?.ids!.mal?.toNullInt(),
+      idAnilist: apiMedia.show!.ids!.anilist?.toNullInt(),
+      idSimkl: apiMedia.show!.ids!.simkl!,
+      idKitsu: apiMedia.show!.ids!.kitsu?.toNullInt()?.toString(),
+      idMAL: apiMedia.show!.ids!.mal?.toNullInt(),
       nameRomaji: apiMedia.show?.title ?? '',
       userPreferredName: apiMedia.show?.title ?? '',
       cover: cover,
@@ -329,6 +345,9 @@ class Media {
     var cover = 'https://wsrv.nl/?url=https://simkl.in/posters/${apiMedia.movie?.poster}_m.webp';
     return Media(
       id: apiMedia.movie!.ids!.simkl!,
+      idAnilist: apiMedia.movie!.ids!.anilist?.toNullInt(),
+      idSimkl: apiMedia.movie!.ids!.simkl!,
+      idKitsu: apiMedia.movie!.ids!.kitsu?.toNullInt()?.toString(),
       idMAL: apiMedia.movie!.ids!.mal?.toNullInt(),
       nameRomaji: apiMedia.movie!.title ?? '',
       userPreferredName: apiMedia.movie!.title ?? '',

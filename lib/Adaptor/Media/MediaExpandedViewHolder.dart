@@ -27,7 +27,7 @@ class MediaExpandedViewHolder extends StatelessWidget {
     var key = '${context.currentService().getName}_thumbList';
     var data = loadCustomData<Map<dynamic, dynamic>>(key);
 
-    var list = data?.map(
+    var list = data.map(
       (key, value) => MapEntry(
         key.toString(),
         (value as Map<dynamic, dynamic>).map(
@@ -39,7 +39,7 @@ class MediaExpandedViewHolder extends StatelessWidget {
       ),
     );
 
-    thumb.value = list?[mediaInfo.id.toString()]
+    thumb.value = list[mediaInfo.id.toString()]
             ?[((mediaInfo.userProgress ?? 0) + 1).toString()] ??
         mediaInfo.cover ??
         '';

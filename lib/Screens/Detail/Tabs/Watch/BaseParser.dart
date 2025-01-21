@@ -15,6 +15,7 @@ import '../../../../api/Mangayomi/Extensions/extensions_provider.dart';
 import '../../../../api/Mangayomi/Model/Manga.dart';
 import '../../../../api/Mangayomi/Model/Source.dart';
 import '../../../../api/Mangayomi/Search/search.dart';
+import '../../../Settings/language.dart';
 import 'Widgets/WrongTitle.dart';
 
 abstract class BaseParser extends GetxController {
@@ -25,19 +26,42 @@ abstract class BaseParser extends GetxController {
 
   var sourceList = <Source>[];
   var sourcesLoaded = false.obs;
+
   void initSourceList(Media media) async {
     final container = r.ProviderContainer();
     var isAnime = media.anime != null;
     final itemType = isAnime
         ? ItemType.anime
         : media.format?.toLowerCase() == 'novel'
-        ? ItemType.novel
-        : ItemType.manga;
-  var s = await container.read(getExtensionsStreamProvider(itemType).future);
-    sourceList = s.where((source) => source.isAdded!)
-        .toList()
-        .reversed
-        .toList();
+            ? ItemType.novel
+            : ItemType.manga;
+    var sources =
+        await container.read(getExtensionsStreamProvider(itemType).future);
+    sourceList =
+        sources.where((source) => source.isAdded!).toList().reversed.toList();
+
+    String nameAndLang(Source source) {
+      bool isDuplicateName =
+          sources.where((s) => s.name == source.name).length > 1;
+
+      return isDuplicateName
+          ? '${source.name!} - ${completeLanguageName(source.lang!.toLowerCase())}'
+          : source.name!;
+    }
+
+    var lastUsedSource =
+        PrefManager.getCustomVal<String>('${media.id}-lastUsedSource');
+    if (lastUsedSource == null ||
+        !sources.any((e) => nameAndLang(e) == lastUsedSource)) {
+      lastUsedSource = nameAndLang(sources.first);
+    }
+
+    Source source =
+        sources.firstWhereOrNull((e) => nameAndLang(e) == lastUsedSource!) ??
+            sources.first;
+
+    this.source.value = source;
+    searchMedia(source, media);
     sourcesLoaded.value = true;
   }
 

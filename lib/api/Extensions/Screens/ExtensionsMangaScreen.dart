@@ -36,7 +36,7 @@ class ExtensionsMangaScreen extends BaseMangaScreen {
           source: source,
           page: 1,
         ))
-            ?.toMedia(isAnime: false);
+            ?.toMedia(isAnime: false, source: source);
 
         if (result != null && result.isNotEmpty) {
           trending.value = result;
@@ -51,8 +51,9 @@ class ExtensionsMangaScreen extends BaseMangaScreen {
 
   Future<void> _buildSections(List<Source> sources) async {
     List<Future<void>> tasks = [];
-
+    var limit = 6;
     for (var source in sources) {
+      if (limit-- <= 0) break;
       tasks.add(
         () async {
           try {
@@ -60,7 +61,7 @@ class ExtensionsMangaScreen extends BaseMangaScreen {
               source: source,
               page: 1,
             ))
-                ?.toMedia(isAnime: false);
+                ?.toMedia(isAnime: false, source: source);
             if (result != null && result.isNotEmpty) {
               data.value = {
                 ...data.value!,
@@ -106,7 +107,6 @@ class ExtensionsMangaScreen extends BaseMangaScreen {
   @override
   int get refreshID => 91;
 
-  @override
   void resetPageData() {
     data.value = {};
   }
