@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:dantotsu/Theme/LanguageSwitcher.dart';
 
 import '../Widgets/DropdownMenu.dart';
 import 'Colors.dart';
@@ -98,22 +99,22 @@ ThemeData getTheme(ColorScheme? material, ThemeNotifier themeManager) {
 Widget themeDropdown(BuildContext context) {
   final themeNotifier = Provider.of<ThemeNotifier>(context);
   final themeOptions = [
-    'blue',
-    'green',
-    'purple',
-    'pink',
-    'oriax',
-    'saikou',
-    'red',
-    'lavender',
-    'ocean'
+    getString.themeBlue,
+    getString.themeGreen,
+    getString.themePurple,
+    getString.themePink,
+    getString.themeOriax,
+    getString.themeSaikou,
+    getString.themeRed,
+    getString.themeLavender,
+    getString.themeOcean,
   ];
   return buildDropdownMenu(
     padding: const EdgeInsets.symmetric(vertical: 12.0),
-    currentValue: themeNotifier.theme.toUpperCase(),
-    options: themeOptions.map((e) => e.toUpperCase()).toList(),
+    currentValue: getString.getThemeName(themeNotifier.theme),
+    options: themeOptions,
     onChanged: (String newValue) {
-      themeNotifier.setTheme(newValue.toLowerCase());
+      themeNotifier.setTheme(getString.getThemeKey(newValue));
     },
     prefixIcon: Icons.color_lens,
   );
