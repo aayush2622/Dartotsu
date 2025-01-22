@@ -555,5 +555,7 @@
   "selectMediaService": "Select Media Service",
   "customPath": "Custom Path",
   "customPathDescription": "Set a custom path to save files\nLong press to remove",
-  "selectDirectory": "Select a directory"
+  "selectDirectory": "Select a directory",
+  "logFile": "Log File",
+  "logFileDescription": "Share the log file",
 }
