@@ -43,8 +43,8 @@ class SettingsAboutScreenState extends BaseSettingsScreen {
     return [
       Setting(
         type: SettingType.normal,
-        name: "Log File",
-        description: "Share the log file",
+        name: getString.logFile,
+        description: getString.logFileDescription,
         icon: Icons.share,
         onClick: () async {
           var path = (await StorageProvider().getDirectory(
