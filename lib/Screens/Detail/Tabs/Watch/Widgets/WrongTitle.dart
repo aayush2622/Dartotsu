@@ -30,28 +30,22 @@ class WrongTitleDialog extends StatefulWidget {
 class WrongTitleDialogState extends State<WrongTitleDialog> {
   final TextEditingController textEditingController = TextEditingController();
   late Future<MPages?> searchFuture;
-  late FocusNode focusNode;
+
   @override
   void initState() {
     super.initState();
-    focusNode = FocusNode();
     final initialSearchText =
         widget.selectedMedia?.value?.name ?? widget.mediaData.mainName();
     '';
     textEditingController.text = initialSearchText;
     searchFuture = _performSearch(initialSearchText);
 
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      focusNode.requestFocus();
-    });
   }
 
   @override
   void dispose() {
-    super.dispose;
+    super.dispose();
     textEditingController.dispose();
-    focusNode.dispose();
   }
 
   Future<MPages?> _performSearch(String query) {
@@ -84,13 +78,15 @@ class WrongTitleDialogState extends State<WrongTitleDialog> {
             return _buildResultList(snapshot, theme);
           },
         ),
+        SizedBox(
+          height: MediaQuery.of(context).viewInsets.bottom,
+        ),
       ],
     );
   }
 
   Widget _buildSearchInput(ColorScheme theme) {
     return TextField(
-      focusNode: focusNode,
       controller: textEditingController,
       onSubmitted: _onSubmitted,
       style: TextStyle(

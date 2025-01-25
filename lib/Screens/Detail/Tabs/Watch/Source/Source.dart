@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 import 'package:dantotsu/DataClass/Media.dart';
 import 'package:flutter/material.dart';
@@ -124,7 +123,7 @@ class SourceState extends State<Source> {
             reverse,
           ),
           Container(
-            margin: const EdgeInsets.symmetric(horizontal: 18, vertical: 4),
+            margin: const EdgeInsets.symmetric(horizontal: 18),
             child: Obx(
               () {
                 var reversed = reverse.value

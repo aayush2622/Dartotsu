@@ -158,7 +158,7 @@ class _ExtensionListTileWidgetState
         : SizedBox(
             width: 84,
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 IconButton(
                   onPressed: () async {
@@ -218,7 +218,7 @@ class _ExtensionListTileWidgetState
                   },
                   icon: Icon(
                     size: 18,
-                    updateAvailable ? Icons.update : FontAwesome.trash_solid,
+                    updateAvailable ? Icons.update_rounded : FontAwesome.trash_solid,
                   ),
                 ),
                 IconButton(

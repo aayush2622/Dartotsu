@@ -9,6 +9,7 @@ import 'BaseServiceData.dart';
 import 'Screens/BaseAnimeScreen.dart';
 import 'Screens/BaseHomeScreen.dart';
 import 'Screens/BaseMangaScreen.dart';
+import 'Screens/BaseSearchScreen.dart';
 
 abstract class MediaService {
   static final List<MediaService> _instances = [];
@@ -16,6 +17,7 @@ abstract class MediaService {
   MediaService() {
     _instances.add(this);
   }
+
   String get getName;
 
   static List<MediaService> get allServices => List.unmodifiable(_instances);
@@ -32,10 +34,13 @@ abstract class MediaService {
 
   BaseLoginScreen? loginScreen;
 
+  BaseSearchScreen? searchScreen;
+
   Widget notImplemented(String name) {
     return Center(
       child: Text(
-          "$name not implemented on $getName"),
+        "$name not implemented on $getName",
+      ),
     );
   }
 }

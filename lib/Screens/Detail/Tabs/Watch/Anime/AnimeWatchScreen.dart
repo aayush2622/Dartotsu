@@ -100,7 +100,7 @@ class AnimeWatchScreenState extends BaseWatchScreen<AnimeWatchScreen> {
             _viewModel.reversed,
           ),
           Container(
-            margin: const EdgeInsets.symmetric(horizontal: 18, vertical: 4),
+            margin: const EdgeInsets.symmetric(horizontal: 18),
             child: Obx(() {
               var reversed = _viewModel.reversed.value
                   ? chunks.map((element) => element.reversed.toList())

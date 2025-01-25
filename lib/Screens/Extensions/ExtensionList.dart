@@ -138,6 +138,7 @@ class _ExtensionScreenState extends ConsumerState<Extension> {
     final removedIds = sortedList.where((id) => !installedIds.contains(id)).toList();
 
     if (removedIds.isNotEmpty) {
+      sortedList = List.from(sortedList);
       sortedList.removeWhere((id) => removedIds.contains(id));
       saveCustomData("sortedExtensions_${widget.itemType.name}", sortedList);
     }
@@ -208,7 +209,6 @@ class _ExtensionScreenState extends ConsumerState<Extension> {
 
   SliverGroupedListView<Source, String> _buildUpdatePendingList(
       List<Source> updateEntries) {
-    // (No changes made to this function)
     return SliverGroupedListView<Source, String>(
       elements: updateEntries,
       groupBy: (element) => "",
@@ -255,7 +255,6 @@ class _ExtensionScreenState extends ConsumerState<Extension> {
 
   SliverGroupedListView<Source, String> _buildNotInstalledList(
       List<Source> notInstalledEntries) {
-    // (No changes made to this function)
     return SliverGroupedListView<Source, String>(
       elements: notInstalledEntries,
       groupBy: (element) => completeLanguageName(element.lang!.toLowerCase()),
