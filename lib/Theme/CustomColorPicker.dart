@@ -31,7 +31,7 @@ Future<Color?> showColorPickerDialog(
               ColorPickerType.accent: true,
               ColorPickerType.wheel: true,
             },
-            pickerTypeLabels: const <ColorPickerType, String>{
+            pickerTypeLabels: <ColorPickerType, String>{
               ColorPickerType.accent: getString.colorPickerDefault,
               ColorPickerType.wheel: getString.colorPickerCustom,
             },
