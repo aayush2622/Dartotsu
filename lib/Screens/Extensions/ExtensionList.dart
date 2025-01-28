@@ -191,8 +191,10 @@ class _ExtensionScreenState extends ConsumerState<Extension> {
             installedEntries.insert(newIndex, movedItem);
 
             if (sortedList.contains(movedItem.id)) {
+              sortedList = List.from(sortedList);
               sortedList.remove(movedItem.id);
             }
+            sortedList = List.from(sortedList);
             sortedList.insert(newIndex, movedItem.id!);
             saveCustomData("sortedExtensions_${widget.itemType.name}", sortedList);
           });

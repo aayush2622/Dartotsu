@@ -29,7 +29,7 @@ class PlayerSettings {
     this.subtitleSize = 32,
     this.subtitleColor = 0xFFFFFFFF,
     this.subtitleFont = 'Poppins',
-    this.subtitleBackgroundColor = 0x80000000,
+    this.subtitleBackgroundColor = 0x00000000,
     this.subtitleOutlineColor = 0x00000000,
     this.showSubtitle = true,
     this.subtitleBottomPadding = 0,

@@ -123,6 +123,7 @@ class FloatingBottomNavBar extends StatelessWidget {
     return GestureDetector(
       onTap: () => onTabSelected(item.index),
       onLongPress: () => showBottomDialog(context),
+      behavior: HitTestBehavior.translucent,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 300),
         alignment: Alignment.center,

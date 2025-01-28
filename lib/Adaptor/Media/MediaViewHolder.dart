@@ -103,7 +103,7 @@ class MediaViewHolder extends StatelessWidget {
       style: const TextStyle(
         fontFamily: 'Poppins',
         fontSize: 14,
-        fontWeight: FontWeight.normal,
+        fontWeight: FontWeight.w600,
       ),
       maxLines: 2,
       overflow: TextOverflow.ellipsis,

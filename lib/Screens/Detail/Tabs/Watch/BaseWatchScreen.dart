@@ -27,7 +27,9 @@ abstract class BaseWatchScreen<T extends StatefulWidget> extends State<T> {
 
   @override
   Widget build(BuildContext context) {
-    viewModel.initSourceList(mediaData);
+    if (!viewModel.sourcesLoaded.value) {
+      viewModel.initSourceList(mediaData);
+    }
     return Obx(() {
       if (viewModel.sourcesLoaded.value == false) {
         return const Center(child: CircularProgressIndicator());

@@ -46,7 +46,7 @@ class ChipsWidget extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                         borderRadius:
                             const BorderRadius.all(Radius.circular(10)),
-                        side: BorderSide(color: theme.primaryContainer),
+                        side: BorderSide(color: theme.primaryContainer,width: 1.5),
                       ),
                     ),
                   ),

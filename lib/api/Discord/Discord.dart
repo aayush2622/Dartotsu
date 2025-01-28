@@ -77,11 +77,11 @@ class _DiscordController extends GetxController {
 
     showCustomBottomDialog(context, dialog);
   }
-
   Future<void> setRpc(
     Media mediaData, {
     Episode? episode,
     int? eTime,
+    int? currentTime,
   }) async {
     if (token.isEmpty) return;
 
@@ -90,14 +90,20 @@ class _DiscordController extends GetxController {
         ? mediaData.anime?.episodes?.values.last.number
         : mediaData.manga?.chapters?.last.number;
 
-    var totalFromMedia  = isAnime
+    var totalFromMedia = isAnime
         ? mediaData.anime?.totalEpisodes
         : mediaData.manga?.totalChapters;
 
     var total = (totalFromMedia ?? totalFromSource ?? "??").toString();
     DateTime startTime = DateTime.now();
-    DateTime endTime = startTime.add(Duration(seconds: eTime?.toInt() ?? 24 * 60));
-    int startTimestamp = startTime.millisecondsSinceEpoch;
+    DateTime initPosition =
+    DateTime.now().subtract(Duration(seconds: currentTime ?? 0));
+    DateTime endTime = startTime.add(
+      Duration(
+        seconds: (eTime?.toInt() ?? 24 * 60 * 60) - (currentTime ?? 0),
+      ),
+    );
+    int startTimestamp = initPosition.millisecondsSinceEpoch;
     int endTimestamp = endTime.millisecondsSinceEpoch;
     var smallIcon = await smallImage.getDiscordUrl();
     try {
@@ -114,7 +120,9 @@ class _DiscordController extends GetxController {
               'type': 3,
               "timestamps": {"end": endTimestamp, "start": startTimestamp},
               'assets': {
-                'large_image': await (episode?.thumb ?? mediaData.cover)?.getDiscordUrl() ?? smallIcon,
+                'large_image': await (episode?.thumb ?? mediaData.cover)
+                        ?.getDiscordUrl() ??
+                    smallIcon,
                 'large_text': mediaData.userPreferredName,
                 'small_image': smallIcon,
                 'small_text': 'Dartotsu',
@@ -136,7 +144,6 @@ class _DiscordController extends GetxController {
           'status': 'idle',
         },
       };
-
       if (DiscordService.isInitialized) {
         DiscordService.stopRPC();
       }

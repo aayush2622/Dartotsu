@@ -88,7 +88,7 @@ class _PlayerControllerState extends State<PlayerController> {
     }
     controller.pause();
     controller.isBuffering.value = true;
-    setDiscordRpc();
+    setDiscordRpc(currentProgress ?? 0);
     setTimeStamps();
 
     controller.seek(Duration(seconds: currentProgress ?? 0));
@@ -184,13 +184,14 @@ class _PlayerControllerState extends State<PlayerController> {
     );
   }
 
-  Future<void> setDiscordRpc() async {
+  Future<void> setDiscordRpc(int skipped) async {
     Discord.setRpc(
       media,
       episode: currentEpisode,
       eTime: _timeStringToSeconds(
         controller.maxTime.value,
       ).toInt(),
+      currentTime: skipped,
     );
   }
 

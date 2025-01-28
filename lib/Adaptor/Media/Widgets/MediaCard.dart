@@ -18,7 +18,7 @@ Widget MediaCard(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(radius),
       ),
-      clipBehavior: Clip.antiAlias,
+      clipBehavior: Clip.antiAliasWithSaveLayer,
       child: Stack(
         alignment: Alignment.center,
         children: [
