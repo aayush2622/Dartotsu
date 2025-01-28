@@ -95,7 +95,7 @@ class MediaPlayerState extends State<MediaPlayer>
   void _onMouseMoved() {
     if (!showControls.value) showControls.value = true;
     _hideCursorTimer?.cancel();
-    _hideCursorTimer = Timer(const Duration(seconds: 3), () {
+    _hideCursorTimer = Timer(const Duration(seconds: 2), () {
       showControls.value = false;
     });
   }
@@ -431,7 +431,7 @@ class MediaPlayerState extends State<MediaPlayer>
 
     doubleTapTimeout?.cancel();
 
-    doubleTapTimeout = Timer(const Duration(milliseconds: 1000), () {
+    doubleTapTimeout = Timer(const Duration(milliseconds: 900), () {
       final currentPosition = videoPlayerController.currentPosition.value;
       if (currentPosition == const Duration(seconds: 0)) return;
       if (isLeft) {

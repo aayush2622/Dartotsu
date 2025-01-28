@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:dantotsu/Functions/Function.dart';
 import 'package:dantotsu/api/Mangayomi/Model/settings.dart';
+import 'package:dantotsu/api/Mangayomi/http/rhttp/src/model/settings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/io_client.dart';
 import 'package:http_interceptor/http_interceptor.dart';
@@ -27,9 +28,10 @@ class MClient {
             timeout: reqcopyWith?["timeout"] != null
                 ? Duration(seconds: reqcopyWith?["timeout"])
                 : null,
-            connectTimeout: reqcopyWith?["connectTimeout"] != null
-                ? Duration(seconds: reqcopyWith?["connectTimeout"])
-                : null,
+            timeoutSettings: TimeoutSettings(
+                connectTimeout: reqcopyWith?["connectTimeout"] != null
+                    ? Duration(seconds: reqcopyWith?["connectTimeout"])
+                    : null),
             tlsSettings: rhttp.TlsSettings(
                 verifyCertificates:
                     reqcopyWith?["verifyCertificates"] ?? false));

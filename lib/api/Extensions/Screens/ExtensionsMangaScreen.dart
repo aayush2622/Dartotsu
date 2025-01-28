@@ -5,6 +5,7 @@ import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
 import '../../../Adaptor/Media/Widgets/MediaSection.dart';
 import '../../../DataClass/Media.dart';
+import '../../../Preferences/PrefManager.dart';
 import '../../../Services/Screens/BaseMangaScreen.dart';
 import '../../../logger.dart';
 import '../../Mangayomi/Extensions/extensions_provider.dart';
@@ -24,15 +25,24 @@ class ExtensionsMangaScreen extends BaseMangaScreen {
     final container = ProviderContainer();
     final sourcesAsyncValue = await container
         .read(getExtensionsStreamProvider(ItemType.manga).future);
+
+    final ids = loadCustomData<List<int>?>('sortedExtensions_${ItemType.manga.name}') ?? [];
     final installedSources = sourcesAsyncValue
         .where((source) => source.isAdded!)
-        .toList()
-        .reversed
         .toList();
-    _buildSections(installedSources);
-    for (var source in installedSources) {
+
+    final sortedInstalledSources = [
+      ...installedSources
+          .where((source) => ids.contains(source.id))
+          .toList()
+        ..sort((a, b) => ids.indexOf(a.id!).compareTo(ids.indexOf(b.id!))),
+      ...installedSources.where((source) => !ids.contains(source.id)),
+    ];
+
+    _buildSections(sortedInstalledSources);
+    for (var source in sortedInstalledSources) {
       try {
-        var result = (await getPopular(
+        var result = (await getLatest(
           source: source,
           page: 1,
         ))
@@ -57,7 +67,7 @@ class ExtensionsMangaScreen extends BaseMangaScreen {
       tasks.add(
         () async {
           try {
-            var result = (await getPopular(
+            var result = (await getLatest(
               source: source,
               page: 1,
             ))

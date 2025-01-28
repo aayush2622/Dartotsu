@@ -44,7 +44,7 @@ class WindowsPlayer extends BasePlayer {
 
   @override
   Future<void> open(String url, Duration duration) async {
-    videoController.player.open(Media(url, start: duration));
+    videoController.player.open(Media(url, start: duration),play: false);
   }
 
   @override

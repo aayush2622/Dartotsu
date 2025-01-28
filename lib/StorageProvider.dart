@@ -54,41 +54,49 @@ class StorageProvider {
   Future<Directory?> getDirectory({
     String? subPath,
     String customPath = '',
-    bool useCustomPath = false,
+    bool? useCustomPath = false,
   }) async {
-    final appDir = await getApplicationDocumentsDirectory();
     String basePath;
-
-    String determineCustomPath(String customPath) {
-      if (customPath.isNotEmpty && !customPath.endsWith('Dartotsu')) {
-        return path.join(customPath, 'Dartotsu');
-      }
-      return customPath.isNotEmpty ? customPath : "/storage/emulated/0/Dartotsu";
-    }
+    final appDir = await getApplicationDocumentsDirectory();
 
     if (Platform.isIOS || Platform.isMacOS) {
-      final dbDir = path.join(appDir.path, 'Dartotsu', subPath ?? '').fixSeparator;
+      final dbDir =
+          path.join(appDir.path, 'Dartotsu', subPath ?? '').fixSeparator;
       await Directory(dbDir).create(recursive: true);
       return Directory(dbDir);
     }
 
     if (Platform.isAndroid) {
-      final androidInfo = await DeviceInfoPlugin().androidInfo;
-
+      DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+      final androidInfo = await deviceInfo.androidInfo;
       if (androidInfo.version.sdkInt <= 29) {
-        final dir = Directory(
-          (useCustomPath ? determineCustomPath(customPath) : appDir.path).fixSeparator,
-        );
+        var dir = Directory((useCustomPath == true
+            ? (customPath.isNotEmpty && !customPath.endsWith('Dartotsu'))
+            ? path.join(customPath, 'Dartotsu')
+            : customPath.isNotEmpty
+            ? customPath
+            : "/storage/emulated/0/Dartotsu"
+            : appDir.path)
+            .fixSeparator);
         dir.createSync(recursive: true);
         return dir;
       }
-
-      basePath = useCustomPath ? determineCustomPath(customPath) : appDir.path;
+      basePath = useCustomPath == true
+          ? (customPath.isNotEmpty && !customPath.endsWith('Dartotsu'))
+          ? path.join(customPath, 'Dartotsu')
+          : customPath.isNotEmpty
+          ? customPath
+          : "/storage/emulated/0/Dartotsu"
+          : appDir.path;
     } else {
-      var p = path.join(
-        useCustomPath ? customPath : appDir.path,
+      basePath = path.join(
+        useCustomPath == true
+            ? (customPath.isNotEmpty)
+            ? customPath
+            : appDir.path
+            : appDir.path,
+        !customPath.endsWith('Dartotsu') ? 'Dartotsu' : '',
       );
-      basePath = path.join(p, p.endsWith('Dartotsu') ? '' : 'Dartotsu');
     }
 
     final baseDirectory = Directory(basePath.fixSeparator);
@@ -99,7 +107,7 @@ class StorageProvider {
     final fullPath = path.join(basePath, subPath ?? '');
     final fullDirectory = Directory(fullPath.fixSeparator);
 
-    if (subPath?.isNotEmpty == true && !fullDirectory.existsSync()) {
+    if (subPath != null && subPath.isNotEmpty && !fullDirectory.existsSync()) {
       fullDirectory.createSync(recursive: true);
     }
 

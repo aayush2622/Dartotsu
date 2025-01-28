@@ -8,6 +8,7 @@ import 'package:dantotsu/Functions/string_extensions.dart';
 import 'package:dantotsu/Preferences/IsarDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
 import 'package:dantotsu/Preferences/PrefManager.dart';
 import 'package:dantotsu/Screens/Player/Platform/WindowsPlayer.dart';
+import 'package:dantotsu/Theme/LanguageSwitcher.dart';
 import 'package:dantotsu/Widgets/AlertDialogBuilder.dart';
 import 'package:dantotsu/Widgets/CustomBottomDialog.dart';
 import 'package:dantotsu/api/Mangayomi/Eval/dart/model/video.dart' as v;
@@ -495,15 +496,17 @@ class _PlayerControllerState extends State<PlayerController> {
             showCustomBottomDialog(
               context,
               CustomBottomDialog(
-                title: 'Player Settings',
+                title: getString.playerSettingsTitle,
                 viewList: [
-                  StatefulBuilder(
-                    builder: (context, setState) => Padding(
+                  Builder(
+                    builder: (context) => Padding(
                       padding: const EdgeInsets.all(16),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
-                        children: playerSettings(context, setState,
-                            playerState: widget.player.setState),
+                        children: playerSettings(
+                          context,
+                          widget.player.setState,
+                        ),
                       ),
                     ),
                   )
@@ -697,7 +700,7 @@ class _PlayerControllerState extends State<PlayerController> {
     controller.pause();
     var audioDialog = CustomBottomDialog(
       title: "Audio",
-      viewList: [_buildAudioList(currentQuality.audios == null)],
+      viewList: [_buildAudioList(currentQuality.audios?.isEmpty ?? true)],
       negativeText: "Add Audio",
       negativeCallback: () async {
         final pickedFile = await FilePicker.platform.pickFiles(

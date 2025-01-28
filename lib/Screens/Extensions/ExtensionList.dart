@@ -146,6 +146,7 @@ class _ExtensionScreenState extends ConsumerState<Extension> {
     final newEntries = installedIds.where((id) => !sortedList.contains(id)).toList();
 
     if (newEntries.isNotEmpty) {
+      sortedList = List.from(sortedList);
       sortedList.addAll(newEntries);
       saveCustomData("sortedExtensions_${widget.itemType.name}", sortedList);
     }
@@ -182,6 +183,7 @@ class _ExtensionScreenState extends ConsumerState<Extension> {
       child: ReorderableListView.builder(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
+
         onReorder: (int oldIndex, int newIndex) {
           if (newIndex > oldIndex) newIndex -= 1;
           setState(() {

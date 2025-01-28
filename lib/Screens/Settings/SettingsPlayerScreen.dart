@@ -50,13 +50,10 @@ class SettingsPlayerScreenState extends BaseSettingsScreen {
 
 List<Widget> playerSettings(
   BuildContext context,
-  void Function(void Function()) setState, {
-  void Function(void Function())? playerState,
-}) {
+  void Function(void Function()) setState) {
   void savePlayerSettings(PlayerSettings playerSettings) {
     PrefManager.setVal(PrefName.playerSettings, playerSettings);
     setState(() {});
-    playerState?.call(() {});
   }
 
   var playerSettings = PrefManager.getVal(PrefName.playerSettings);
@@ -81,7 +78,7 @@ List<Widget> playerSettings(
           isChecked:PrefManager.getVal(PrefName.thumbLessSeekBar),
           onSwitchChange: (value) {
             PrefManager.setVal(PrefName.thumbLessSeekBar, value);
-            playerState?.call(() {});
+            setState(() {});
           },
         ),
         Setting(

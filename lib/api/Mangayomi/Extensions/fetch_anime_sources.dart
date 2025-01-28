@@ -12,7 +12,7 @@ Future fetchAnimeSourcesList(FetchAnimeSourcesListRef ref,
   if ((PrefManager.getCustomVal('autoUpdate') ?? true) || reFresh) {
     await fetchSourcesList(
       sourcesIndexUrl:
-          "https://kodjodevf.github.io/mangayomi-extensions/anime_index.json",
+          "https://raw.githubusercontent.com/RyanYuuki/anymex-extensions/refs/heads/main/anime_index.json",
       refresh: reFresh,
       id: id,
       ref: ref,

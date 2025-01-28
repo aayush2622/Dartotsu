@@ -25,13 +25,12 @@ class ExtensionsAnimeScreen extends BaseAnimeScreen {
     final container = ProviderContainer();
     final sourcesAsyncValue = await container
         .read(getExtensionsStreamProvider(ItemType.anime).future);
-    final ids = loadCustomData<List<int>?>('sortedExtensions_${ItemType.anime}') ?? [];
+
+    final ids = loadCustomData<List<int>?>('sortedExtensions_${ItemType.anime.name}') ?? [];
     final installedSources = sourcesAsyncValue
         .where((source) => source.isAdded!)
-        .toList()
-        .reversed
-        .toList()
-      ;
+        .toList();
+
     final sortedInstalledSources = [
       ...installedSources
           .where((source) => ids.contains(source.id))
@@ -39,20 +38,22 @@ class ExtensionsAnimeScreen extends BaseAnimeScreen {
         ..sort((a, b) => ids.indexOf(a.id!).compareTo(ids.indexOf(b.id!))),
       ...installedSources.where((source) => !ids.contains(source.id)),
     ];
+
     _buildSections(sortedInstalledSources);
     for (var source in sortedInstalledSources) {
+      List<Media>? result;
       try {
-        var result = (await getPopular(
+        var res = await getPopular(
           source: source,
           page: 1,
-        ))?.toMedia(isAnime: true, source: source);
-
-        if (result != null && result.isNotEmpty) {
-          trending.value = result;
-          return;
-        }
+        );
+        result = res?.toMedia(isAnime: true, source: source) ?? [];
       } catch (e) {
         Logger.log('Source ${source.name} failed: ${e.toString()}');
+      }
+      if (result != null && result.isNotEmpty) {
+        trending.value = result;
+        return;
       }
     }
   }
@@ -65,7 +66,7 @@ class ExtensionsAnimeScreen extends BaseAnimeScreen {
       tasks.add(
         () async {
           try {
-            var result = (await getPopular(
+            var result = (await getLatest(
               source: source,
               page: 1,
             ))

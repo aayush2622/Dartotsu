@@ -17,6 +17,7 @@ dependencies:
 
   flutter_localizations:
     sdk: flutter
+  async: ^2.11.0
   # State Management
   flutter_riverpod: ^2.6.1
   riverpod_annotation: ^2.6.1
