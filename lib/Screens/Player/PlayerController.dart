@@ -73,25 +73,17 @@ class _PlayerControllerState extends State<PlayerController> {
     controller = widget.player.videoPlayerController;
     currentQuality = videos[widget.player.widget.index];
     controller.listenToPlayerStream();
-    _onInit(context);
+    _onInit();
   }
 
-  Future<void> _onInit(BuildContext context) async {
-    var sourceName = Provider.of<MediaServiceProvider>(context, listen: false)
-        .currentService
-        .getName;
-    var currentProgress = PrefManager.getCustomVal<int>(
-      "${media.id}-${currentEpisode.number}-$sourceName-current",
-    );
+  Future<void> _onInit() async {
     while (controller.maxTime.value == '00:00') {
       await Future.delayed(const Duration(milliseconds: 100));
     }
-    controller.pause();
-    controller.isBuffering.value = true;
-    setDiscordRpc(currentProgress ?? 0);
+
+    setDiscordRpc();
     setTimeStamps();
 
-    controller.seek(Duration(seconds: currentProgress ?? 0));
     var list = List<int>.from(
       PrefManager.getCustomVal<List<int>>("continueAnimeList") ?? [],
     );
@@ -123,16 +115,6 @@ class _PlayerControllerState extends State<PlayerController> {
     var defaultSub = currentQuality.subtitles?.firstWhereOrNull(
       (element) => element.label == 'English',
     );
-    var defaultAudio = currentQuality.audios?.firstWhereOrNull(
-      (element) => element.label == 'English',
-    );
-    if (defaultAudio != null) {
-      await controller.setAudio(
-        defaultAudio.file ?? "Unknown",
-        defaultAudio.label ?? "",
-        defaultAudio.file?.toNullInt() == null,
-      );
-    }
     if (defaultSub != null) {
       controller.setSubtitle(
         defaultSub.file ?? "Unknown",
@@ -140,8 +122,6 @@ class _PlayerControllerState extends State<PlayerController> {
         defaultSub.file?.toNullInt() == null,
       );
     }
-    controller.isBuffering.value = false;
-    controller.play();
   }
 
   Future<void> _saveProgress(int currentProgress) async {
@@ -184,14 +164,20 @@ class _PlayerControllerState extends State<PlayerController> {
     );
   }
 
-  Future<void> setDiscordRpc(int skipped) async {
+  Future<void> setDiscordRpc() async {
+    var sourceName = Provider.of<MediaServiceProvider>(context, listen: false)
+        .currentService
+        .getName;
+    var currentProgress = PrefManager.getCustomVal<int>(
+      "${media.id}-${currentEpisode.number}-$sourceName-current",
+    );
     Discord.setRpc(
       media,
       episode: currentEpisode,
       eTime: _timeStringToSeconds(
         controller.maxTime.value,
       ).toInt(),
-      currentTime: skipped,
+      currentTime: currentProgress ?? 0,
     );
   }
 

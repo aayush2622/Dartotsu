@@ -103,7 +103,13 @@ class MediaPlayerState extends State<MediaPlayer>
   void _initializePlayer() {
     currentQuality = widget.videos[widget.index];
     videoPlayerController = WindowsPlayer(resizeMode, settings);
-    videoPlayerController.open(currentQuality.url, Duration.zero);
+    var sourceName = Provider.of<MediaServiceProvider>(context, listen: false)
+        .currentService
+        .getName;
+    var currentProgress = PrefManager.getCustomVal<int>(
+      "${widget.media.id}-${widget.currentEpisode.number}-$sourceName-current",
+    );
+    videoPlayerController.open(currentQuality.url, Duration(seconds: currentProgress ?? 0));
     _onMouseMoved();
   }
 
