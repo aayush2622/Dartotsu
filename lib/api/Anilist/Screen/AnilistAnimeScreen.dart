@@ -6,7 +6,6 @@ import '../../../Adaptor/Media/Widgets/MediaSection.dart';
 import '../../../DataClass/MediaSection.dart';
 import '../../../Functions/Function.dart';
 import '../../../Preferences/PrefManager.dart';
-
 import '../../../Services/Screens/BaseAnimeScreen.dart';
 import '../../../Theme/LanguageSwitcher.dart';
 import '../Anilist.dart' hide Anilist;
@@ -114,7 +113,7 @@ class AnilistAnimeScreen extends BaseAnimeScreen {
       MediaSectionData(
         type: 0,
         title: getString.mostFavourite(getString.series),
-          pairTitle: 'Most Favourite Series',
+        pairTitle: 'Most Favourite Series',
         list: mostFavSeries.value,
       ),
     ];
@@ -126,16 +125,18 @@ class AnilistAnimeScreen extends BaseAnimeScreen {
         .where((entry) => entry.value)
         .map((entry) => sectionMap[entry.key])
         .whereType<MediaSectionData>()
-        .map((section) => MediaSection(
-              context: context,
-              type: section.type,
-              title: section.title,
-              mediaList: section.list,
-              scrollController: section.scrollController,
+        .map(
+          (section) => MediaSection(
+            context: context,
+            type: section.type,
+            title: section.title,
+            mediaList: section.list,
+            scrollController: section.scrollController,
           ),
         )
         .toList()
-      ..add(MediaSection(
+      ..add(
+        MediaSection(
           context: context,
           type: 2,
           title: getString.popular(getString.anime),

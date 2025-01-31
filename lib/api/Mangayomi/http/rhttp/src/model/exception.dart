@@ -1,7 +1,9 @@
 import 'dart:typed_data';
 
-import 'package:dantotsu/api/Mangayomi/http/src/rust/api/rhttp/error.dart' as rust;
-import 'package:dantotsu/api/Mangayomi/http/src/rust/api/rhttp/http.dart' as rust_http;
+import 'package:dantotsu/api/Mangayomi/http/src/rust/api/rhttp/error.dart'
+    as rust;
+import 'package:dantotsu/api/Mangayomi/http/src/rust/api/rhttp/http.dart'
+    as rust_http;
 
 import 'request.dart';
 
@@ -127,7 +129,6 @@ class RhttpUnknownException extends RhttpException {
   @override
   String toString() => '[$runtimeType] $message';
 }
-
 
 RhttpException parseError(HttpRequest request, rust.RhttpError error) {
   return error.when(

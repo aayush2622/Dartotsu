@@ -11,7 +11,7 @@ Widget cachedNetworkImage({
   Widget Function(BuildContext, String, Object)? errorWidget,
 }) {
   if ((imageUrl == null || imageUrl.isEmpty)) {
-    if (placeholder != null ){
+    if (placeholder != null) {
       return SizedBox(
         width: width,
         height: height,

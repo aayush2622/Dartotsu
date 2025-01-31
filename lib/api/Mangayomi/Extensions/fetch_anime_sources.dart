@@ -9,10 +9,10 @@ part 'fetch_anime_sources.g.dart';
 @riverpod
 Future fetchAnimeSourcesList(FetchAnimeSourcesListRef ref,
     {int? id, required bool reFresh}) async {
-  if ((PrefManager.getCustomVal('autoUpdate') ?? true) || reFresh) {
+  if (loadData(PrefName.autoUpdateExtensions) || reFresh) {
     await fetchSourcesList(
       sourcesIndexUrl:
-          "https://raw.githubusercontent.com/RyanYuuki/anymex-extensions/refs/heads/main/anime_index.json",
+          "https://kodjodevf.github.io/mangayomi-extensions/anime_index.json",
       refresh: reFresh,
       id: id,
       ref: ref,

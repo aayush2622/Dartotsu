@@ -44,9 +44,10 @@ enum RefreshId {
   Anilist,
   Mal,
   Kitsu,
-  Simkl,;
+  Simkl,
+  Extensions;
 
-  List<int> get ids => List.generate(4, (index) => baseId + index);
+  List<int> get ids => List.generate(5, (index) => baseId + index);
 
   int get baseId {
     switch (this) {
@@ -58,6 +59,8 @@ enum RefreshId {
         return 30;
       case RefreshId.Simkl:
         return 40;
+      case RefreshId.Extensions:
+        return 50;
     }
   }
 
@@ -68,13 +71,12 @@ enum RefreshId {
   int get homePage => baseId + 2;
 }
 
-
 var Refresh = Get.put(_RefreshController(), permanent: true);
 
 Future<void> snackString(
-    String? s, {
-      String? clipboard,
-    }) async {
+  String? s, {
+  String? clipboard,
+}) async {
   var context = navigatorKey.currentContext ?? Get.context;
 
   if (context != null && s != null && s.isNotEmpty) {
@@ -83,7 +85,7 @@ Future<void> snackString(
     try {
       final scaffoldMessenger = ScaffoldMessenger.of(context);
       scaffoldMessenger.hideCurrentSnackBar();
-      final themeNotifier = Provider.of<ThemeNotifier>(context,listen: false);
+      final themeNotifier = Provider.of<ThemeNotifier>(context, listen: false);
       final snackBar = SnackBar(
         backgroundColor: themeNotifier.isDarkMode ? greyNavDark : greyNavLight,
         behavior: SnackBarBehavior.floating,
@@ -117,6 +119,7 @@ Future<void> snackString(
     debugPrint('No valid context or string provided.');
   }
 }
+
 void copyToClipboard(String text) {
   var context = navigatorKey.currentContext ?? Get.context;
   var theme = Theme.of(context!).colorScheme;
@@ -149,7 +152,6 @@ Future<void> openLinkInBrowser(String url) async {
 }
 
 void navigateToPage(BuildContext context, Widget page, {bool header = true}) {
-
   Navigator.push(
     context,
     MaterialPageRoute(builder: (context) => page),
@@ -160,3 +162,13 @@ void shareLink(String link) => Share.share(link, subject: link);
 
 void shareFile(String path, String text) =>
     Share.shareXFiles([XFile(path)], text: text);
+
+List<T> mergeMapValues<T>(Map<String, List<T>> dataMap) {
+  final Set<T> uniqueItems = {};
+
+  for (var itemList in dataMap.values) {
+    uniqueItems.addAll(itemList);
+  }
+
+  return uniqueItems.toList();
+}

@@ -52,8 +52,8 @@ class FetchAnimeSourcesListFamily extends Family<AsyncValue> {
 
   @override
   FetchAnimeSourcesListProvider getProviderOverride(
-      covariant FetchAnimeSourcesListProvider provider,
-      ) {
+    covariant FetchAnimeSourcesListProvider provider,
+  ) {
     return call(
       id: provider.id,
       reFresh: provider.reFresh,
@@ -82,46 +82,46 @@ class FetchAnimeSourcesListProvider extends AutoDisposeFutureProvider<Object?> {
     int? id,
     required bool reFresh,
   }) : this._internal(
-        (ref) => fetchAnimeSourcesList(
-      ref as FetchAnimeSourcesListRef,
-      id: id,
-      reFresh: reFresh,
-    ),
-    from: fetchAnimeSourcesListProvider,
-    name: r'fetchAnimeSourcesListProvider',
-    debugGetCreateSourceHash:
-    const bool.fromEnvironment('dart.vm.product')
-        ? null
-        : _$fetchAnimeSourcesListHash,
-    dependencies: FetchAnimeSourcesListFamily._dependencies,
-    allTransitiveDependencies:
-    FetchAnimeSourcesListFamily._allTransitiveDependencies,
-    id: id,
-    reFresh: reFresh,
-  );
+          (ref) => fetchAnimeSourcesList(
+            ref as FetchAnimeSourcesListRef,
+            id: id,
+            reFresh: reFresh,
+          ),
+          from: fetchAnimeSourcesListProvider,
+          name: r'fetchAnimeSourcesListProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$fetchAnimeSourcesListHash,
+          dependencies: FetchAnimeSourcesListFamily._dependencies,
+          allTransitiveDependencies:
+              FetchAnimeSourcesListFamily._allTransitiveDependencies,
+          id: id,
+          reFresh: reFresh,
+        );
 
   FetchAnimeSourcesListProvider._internal(
-      super._createNotifier, {
-        required super.name,
-        required super.dependencies,
-        required super.allTransitiveDependencies,
-        required super.debugGetCreateSourceHash,
-        required super.from,
-        required this.id,
-        required this.reFresh,
-      }) : super.internal();
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.id,
+    required this.reFresh,
+  }) : super.internal();
 
   final int? id;
   final bool reFresh;
 
   @override
   Override overrideWith(
-      FutureOr<Object?> Function(FetchAnimeSourcesListRef provider) create,
-      ) {
+    FutureOr<Object?> Function(FetchAnimeSourcesListRef provider) create,
+  ) {
     return ProviderOverride(
       origin: this,
       override: FetchAnimeSourcesListProvider._internal(
-            (ref) => create(ref as FetchAnimeSourcesListRef),
+        (ref) => create(ref as FetchAnimeSourcesListRef),
         from: from,
         name: null,
         dependencies: null,
@@ -155,7 +155,6 @@ class FetchAnimeSourcesListProvider extends AutoDisposeFutureProvider<Object?> {
   }
 }
 
-
 // ignore: unused_element
 mixin FetchAnimeSourcesListRef on AutoDisposeFutureProviderRef<Object?> {
   /// The parameter `id` of this provider.
@@ -172,6 +171,7 @@ class _FetchAnimeSourcesListProviderElement
 
   @override
   int? get id => (origin as FetchAnimeSourcesListProvider).id;
+
   @override
   bool get reFresh => (origin as FetchAnimeSourcesListProvider).reFresh;
 }

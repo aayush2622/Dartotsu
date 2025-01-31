@@ -7,8 +7,6 @@ import '../../Functions/Function.dart';
 import '../../main.dart';
 import 'DiscordService.dart';
 
-
-
 class MobileLogin extends StatefulWidget {
   const MobileLogin({super.key});
 
@@ -43,37 +41,39 @@ class MobileLoginState extends State<MobileLogin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Discord Login'),backgroundColor: Colors.transparent,),
-      body: InAppWebView(
-        webViewEnvironment: webViewEnvironment,
-        initialUrlRequest: URLRequest(
-          url: WebUri('https://discord.com/login'),
+        appBar: AppBar(
+          title: const Text('Discord Login'),
+          backgroundColor: Colors.transparent,
         ),
-        initialOptions: InAppWebViewGroupOptions(
-          crossPlatform: InAppWebViewOptions(
-            javaScriptEnabled: true,
+        body: InAppWebView(
+          webViewEnvironment: webViewEnvironment,
+          initialUrlRequest: URLRequest(
+            url: WebUri('https://discord.com/login'),
           ),
-        ),
-        onWebViewCreated: (controller) {
-          _controller = controller;
-          _clearDiscordData();
-        },
-        onUpdateVisitedHistory: (controller, url,isReload) async {
-          if (url.toString() != 'https://discord.com/login') {
-            await _extractToken();
-          }
-        },
-        shouldOverrideUrlLoading: (controller, navigationAction) async {
-          final url = navigationAction.request.url.toString();
-          if (url.startsWith('https://discord.com/login')) {
-            return NavigationActionPolicy.CANCEL;
-          }
-          return NavigationActionPolicy.ALLOW;
-        },
-      )
-
-    );
+          initialOptions: InAppWebViewGroupOptions(
+            crossPlatform: InAppWebViewOptions(
+              javaScriptEnabled: true,
+            ),
+          ),
+          onWebViewCreated: (controller) {
+            _controller = controller;
+            _clearDiscordData();
+          },
+          onUpdateVisitedHistory: (controller, url, isReload) async {
+            if (url.toString() != 'https://discord.com/login') {
+              await _extractToken();
+            }
+          },
+          shouldOverrideUrlLoading: (controller, navigationAction) async {
+            final url = navigationAction.request.url.toString();
+            if (url.startsWith('https://discord.com/login')) {
+              return NavigationActionPolicy.CANCEL;
+            }
+            return NavigationActionPolicy.ALLOW;
+          },
+        ));
   }
+
   Future<void> _clearDiscordData() async {
     await _controller.evaluateJavascript(source: '''
       if (window.location.hostname === 'discord.com') {
@@ -96,6 +96,7 @@ class MobileLoginState extends State<MobileLogin> {
     Navigator.of(context).pop();
   }
 }
+
 class LinuxLogin extends StatefulWidget {
   const LinuxLogin({super.key});
 

@@ -12,6 +12,7 @@ import '../../Theme/LanguageSwitcher.dart';
 import 'SettingsAboutScreen.dart';
 import 'SettingsAnimeScreen.dart';
 import 'SettingsCommonScreen.dart';
+import 'SettingsExtensionsScreen.dart';
 import 'SettingsMangaScreen.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -92,7 +93,8 @@ class SettingsScreenState extends BaseSettingsScreen {
         name: getString.extension(2),
         description: getString.extensionsDescription,
         icon: Icons.extension,
-        onClick: () => snackString('Extensions'),
+        onClick: () =>
+            navigateToPage(context, const SettingsExtensionsScreen()),
         isActivity: true,
       ),
       Setting(

@@ -1,4 +1,3 @@
-
 import 'Eval/dart/model/filter.dart';
 import 'Eval/dart/model/m_manga.dart';
 import 'Eval/dart/model/m_pages.dart';
@@ -13,6 +12,7 @@ abstract interface class ExtensionService {
   ExtensionService(this.source);
 
   String get sourceBaseUrl;
+
   bool get supportsLatest;
 
   Map<String, String> getHeaders();

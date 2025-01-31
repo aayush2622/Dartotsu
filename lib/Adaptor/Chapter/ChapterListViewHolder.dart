@@ -1,5 +1,6 @@
 import 'package:dantotsu/Functions/string_extensions.dart';
 import 'package:flutter/material.dart';
+
 import '../../DataClass/Chapter.dart';
 import '../../DataClass/Media.dart';
 import '../../Screens/Detail/Tabs/Watch/Manga/Widget/DateFormat.dart';
@@ -119,5 +120,4 @@ class ChapterListView extends StatelessWidget {
       ),
     );
   }
-
 }

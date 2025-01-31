@@ -7,5 +7,4 @@ abstract class BaseMangaScreen extends BaseMediaScreen {
   var trending = Rxn<List<Media>>();
 
   void loadTrending(String type);
-
 }

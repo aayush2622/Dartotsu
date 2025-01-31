@@ -38,13 +38,17 @@ class _ExtensionScreenState extends ConsumerState<Extension> {
   @override
   void initState() {
     super.initState();
-    sortedList = loadCustomData<List<int>?>("sortedExtensions_${widget.itemType.name}") ?? [];
+    sortedList = loadCustomData<List<int>?>(
+            "sortedExtensions_${widget.itemType.name}") ??
+        [];
   }
+
   @override
   void dispose() {
     controller.dispose();
     super.dispose();
   }
+
   Future<void> _refreshData() async {
     if (widget.itemType == ItemType.manga) {
       return await ref.refresh(
@@ -58,21 +62,10 @@ class _ExtensionScreenState extends ConsumerState<Extension> {
     }
   }
 
-  Future<void> _fetchData() async {
-    if (widget.itemType == ItemType.manga) {
-      ref.watch(fetchMangaSourcesListProvider(id: null, reFresh: false));
-    } else if (widget.itemType == ItemType.anime) {
-      ref.watch(fetchAnimeSourcesListProvider(id: null, reFresh: false));
-    } else {
-      ref.watch(fetchNovelSourcesListProvider(id: null, reFresh: false));
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    _fetchData();
     final streamExtensions =
-    ref.watch(getExtensionsStreamProvider(widget.itemType));
+        ref.watch(getExtensionsStreamProvider(widget.itemType));
 
     return RefreshIndicator(
       onRefresh: _refreshData,
@@ -101,7 +94,7 @@ class _ExtensionScreenState extends ConsumerState<Extension> {
           },
           error: (error, _) => Center(
             child: ElevatedButton(
-              onPressed: () => _fetchData(),
+              onPressed: () => _refreshData(),
               child: const Text('Refresh'),
             ),
           ),
@@ -114,15 +107,15 @@ class _ExtensionScreenState extends ConsumerState<Extension> {
   List<Source> _filterData(List<Source> data) {
     return data
         .where((element) => widget.selectedLanguage != 'all'
-        ? element.lang!.toLowerCase() ==
-        completeLanguageCode(widget.selectedLanguage)
-        : true)
+            ? element.lang!.toLowerCase() ==
+                completeLanguageCode(widget.selectedLanguage)
+            : true)
         .where((element) =>
-    widget.query.isEmpty ||
-        element.name!.toLowerCase().contains(widget.query.toLowerCase()))
+            widget.query.isEmpty ||
+            element.name!.toLowerCase().contains(widget.query.toLowerCase()))
         .where((element) =>
-    PrefManager.getVal(PrefName.NSFWExtensions) ||
-        element.isNsfw == false)
+            PrefManager.getVal(PrefName.NSFWExtensions) ||
+            element.isNsfw == false)
         .toList();
   }
 
@@ -132,10 +125,10 @@ class _ExtensionScreenState extends ConsumerState<Extension> {
         .where((element) => element.isAdded!)
         .toList();
 
-
     final installedIds = installed.map((source) => source.id!).toList();
 
-    final removedIds = sortedList.where((id) => !installedIds.contains(id)).toList();
+    final removedIds =
+        sortedList.where((id) => !installedIds.contains(id)).toList();
 
     if (removedIds.isNotEmpty) {
       sortedList = List.from(sortedList);
@@ -143,7 +136,8 @@ class _ExtensionScreenState extends ConsumerState<Extension> {
       saveCustomData("sortedExtensions_${widget.itemType.name}", sortedList);
     }
 
-    final newEntries = installedIds.where((id) => !sortedList.contains(id)).toList();
+    final newEntries =
+        installedIds.where((id) => !sortedList.contains(id)).toList();
 
     if (newEntries.isNotEmpty) {
       sortedList = List.from(sortedList);
@@ -156,9 +150,8 @@ class _ExtensionScreenState extends ConsumerState<Extension> {
         .toList()
       ..sort((a, b) =>
           sortedList.indexOf(a.id!).compareTo(sortedList.indexOf(b.id!)));
-    final unsorted = installed
-        .where((source) => !sortedList.contains(source.id))
-        .toList();
+    final unsorted =
+        installed.where((source) => !sortedList.contains(source.id)).toList();
 
     return [...sorted, ...unsorted];
   }
@@ -166,7 +159,7 @@ class _ExtensionScreenState extends ConsumerState<Extension> {
   List<Source> _getUpdateEntries(List<Source> data) {
     return data
         .where((element) =>
-    compareVersions(element.version!, element.versionLast!) < 0)
+            compareVersions(element.version!, element.versionLast!) < 0)
         .where((element) => element.isAdded!)
         .toList();
   }
@@ -183,7 +176,6 @@ class _ExtensionScreenState extends ConsumerState<Extension> {
       child: ReorderableListView.builder(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
-
         onReorder: (int oldIndex, int newIndex) {
           if (newIndex > oldIndex) newIndex -= 1;
           setState(() {
@@ -196,7 +188,8 @@ class _ExtensionScreenState extends ConsumerState<Extension> {
             }
             sortedList = List.from(sortedList);
             sortedList.insert(newIndex, movedItem.id!);
-            saveCustomData("sortedExtensions_${widget.itemType.name}", sortedList);
+            saveCustomData(
+                "sortedExtensions_${widget.itemType.name}", sortedList);
           });
         },
         itemBuilder: (context, index) {
@@ -230,15 +223,15 @@ class _ExtensionScreenState extends ConsumerState<Extension> {
                 for (var source in updateEntries) {
                   source.itemType == ItemType.manga
                       ? await ref.watch(fetchMangaSourcesListProvider(
-                      id: source.id, reFresh: true)
-                      .future)
+                              id: source.id, reFresh: true)
+                          .future)
                       : source.itemType == ItemType.anime
-                      ? await ref.watch(fetchAnimeSourcesListProvider(
-                      id: source.id, reFresh: true)
-                      .future)
-                      : await ref.watch(fetchNovelSourcesListProvider(
-                      id: source.id, reFresh: true)
-                      .future);
+                          ? await ref.watch(fetchAnimeSourcesListProvider(
+                                  id: source.id, reFresh: true)
+                              .future)
+                          : await ref.watch(fetchNovelSourcesListProvider(
+                                  id: source.id, reFresh: true)
+                              .future);
                 }
               },
               child: const Text(

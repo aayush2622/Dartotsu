@@ -8,7 +8,6 @@ import 'package:get/get.dart';
 import '../../DataClass/Episode.dart';
 import '../../DataClass/Media.dart';
 import '../../Preferences/PrefManager.dart';
-
 import '../../Widgets/CustomBottomDialog.dart';
 import 'DiscordService.dart';
 import 'Login.dart';
@@ -77,6 +76,7 @@ class _DiscordController extends GetxController {
 
     showCustomBottomDialog(context, dialog);
   }
+
   Future<void> setRpc(
     Media mediaData, {
     Episode? episode,
@@ -97,7 +97,7 @@ class _DiscordController extends GetxController {
     var total = (totalFromMedia ?? totalFromSource ?? "??").toString();
     DateTime startTime = DateTime.now();
     DateTime initPosition =
-    DateTime.now().subtract(Duration(seconds: currentTime ?? 0));
+        DateTime.now().subtract(Duration(seconds: currentTime ?? 0));
     DateTime endTime = startTime.add(
       Duration(
         seconds: (eTime?.toInt() ?? 24 * 60 * 60) - (currentTime ?? 0),

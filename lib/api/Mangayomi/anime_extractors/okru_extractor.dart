@@ -3,19 +3,20 @@ import 'package:dantotsu/api/Mangayomi/dom_extensions.dart';
 import 'package:html/parser.dart' show parse;
 import 'package:http_interceptor/http_interceptor.dart';
 import 'package:path/path.dart' as path;
+
 import '../Eval/dart/model/video.dart';
 import '../http/m_client.dart';
 
 class OkruExtractor {
   final InterceptedClient client =
-  MClient.init(reqcopyWith: {'useDartHttpClient': true});
+      MClient.init(reqcopyWith: {'useDartHttpClient': true});
 
   Future<List<Video>> videosFromUrl(String url,
       {String prefix = "", bool fixQualities = true}) async {
     final response = await client.get(Uri.parse(url));
     final document = parse(response.body);
     final videoString =
-    document.selectFirst('div[data-options]')?.attr("data-options");
+        document.selectFirst('div[data-options]')?.attr("data-options");
 
     if (videoString == null) {
       return [];

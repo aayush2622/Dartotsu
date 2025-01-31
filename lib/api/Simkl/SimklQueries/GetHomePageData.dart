@@ -166,7 +166,10 @@ extension on SimklQueries {
   Future<Media?> fetchOrLoadLocalData(String key, String type,
       {bool useLocal = true}) async {
     final localData = loadCustomData<String?>(key);
-    if (localData != null && localData.isNotEmpty && useLocal == true && localData != 'null') {
+    if (localData != null &&
+        localData.isNotEmpty &&
+        useLocal == true &&
+        localData != 'null') {
       return Media.fromJson(jsonDecode(localData));
     } else {
       final data = await executeQuery<Media>(

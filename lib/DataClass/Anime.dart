@@ -1,9 +1,13 @@
 import 'package:dantotsu/Preferences/IsarDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 import '../api/Anilist/Data/media.dart';
 import 'Author.dart';
 import 'Episode.dart';
 
+part 'Data/Anime.g.dart';
+
+@JsonSerializable()
 class Anime {
   int? totalEpisodes;
   int? episodeDuration;
@@ -27,6 +31,7 @@ class Anime {
   Map<String, Episode>? fillerEpisodes;
   Map<String, Episode>? anifyEpisodes;
   PlayerSettings? playerSettings;
+
   Anime({
     this.totalEpisodes,
     this.episodeDuration,
@@ -48,4 +53,8 @@ class Anime {
     this.playerSettings,
   })  : op = op ?? [],
         ed = ed ?? [];
+
+  factory Anime.fromJson(Map<String, dynamic> json) => _$AnimeFromJson(json);
+
+  Map<String, dynamic> toJson() => _$AnimeToJson(this);
 }

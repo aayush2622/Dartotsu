@@ -3,8 +3,8 @@ import 'package:dantotsu/api/Simkl/SimklService.dart';
 import 'package:flutter/material.dart';
 
 import '../api/Anilist/AnilistService.dart';
-import '../api/MyAnimeList/MalService.dart';
 import '../api/Extensions/ExtensionsService.dart';
+import '../api/MyAnimeList/MalService.dart';
 import 'BaseServiceData.dart';
 import 'Screens/BaseAnimeScreen.dart';
 import 'Screens/BaseHomeScreen.dart';

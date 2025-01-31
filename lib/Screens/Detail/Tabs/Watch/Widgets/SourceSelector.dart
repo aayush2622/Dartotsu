@@ -55,7 +55,6 @@ class _SourceSelectorState extends ConsumerState<SourceSelector> {
           : source.name!;
     }
 
-
     var lastUsedSource = PrefManager.getCustomVal<String>(
         '${widget.mediaData.id}-lastUsedSource');
     if (lastUsedSource == null ||
@@ -63,7 +62,9 @@ class _SourceSelectorState extends ConsumerState<SourceSelector> {
       lastUsedSource = nameAndLang(sources.first);
     }
 
-    Source source = sources.firstWhereOrNull((e) => nameAndLang(e) == lastUsedSource!) ?? sources.first;
+    Source source =
+        sources.firstWhereOrNull((e) => nameAndLang(e) == lastUsedSource!) ??
+            sources.first;
 
     var theme = Theme.of(context).colorScheme;
     return Column(
@@ -81,7 +82,9 @@ class _SourceSelectorState extends ConsumerState<SourceSelector> {
                   PrefManager.setCustomVal(
                       '${widget.mediaData.id}-lastUsedSource', name);
                   lastUsedSource = name;
-                  source = sources.firstWhereOrNull((e) => nameAndLang(e) == lastUsedSource!) ?? sources.first;
+                  source = sources.firstWhereOrNull(
+                          (e) => nameAndLang(e) == lastUsedSource!) ??
+                      sources.first;
                   if (widget.currentSource?.id != source.id) {
                     widget.onSourceChange(source);
                   }
@@ -92,8 +95,7 @@ class _SourceSelectorState extends ConsumerState<SourceSelector> {
             GestureDetector(
               onTap: () {
                 var sourcePreference = getSourcePreference(source: source)
-                    .map((e) =>
-                    getSourcePreferenceEntry(e.key!, source.id!))
+                    .map((e) => getSourcePreferenceEntry(e.key!, source.id!))
                     .toList();
                 navigateToPage(
                   context,

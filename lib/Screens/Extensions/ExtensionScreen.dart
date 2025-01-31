@@ -7,12 +7,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:isar/isar.dart';
 
 import '../../Preferences/PrefManager.dart';
-
 import '../../StorageProvider.dart';
+import '../../Theme/LanguageSwitcher.dart';
 import '../../Widgets/ScrollConfig.dart';
 import '../../api/Mangayomi/Model/Manga.dart';
 import '../../main.dart';
-import '../../Theme/LanguageSwitcher.dart';
 import '../Settings/language.dart';
 
 class ExtensionScreen extends ConsumerStatefulWidget {
@@ -58,7 +57,8 @@ class _BrowseScreenState extends ConsumerState<ExtensionScreen>
           appBar: AppBar(
             elevation: 0,
             backgroundColor: Colors.transparent,
-            title: Text(getString.extension(2),
+            title: Text(
+              getString.extension(2),
               style: TextStyle(
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.bold,
@@ -97,18 +97,18 @@ class _BrowseScreenState extends ConsumerState<ExtensionScreen>
                 controller: _tabBarController,
                 dragStartBehavior: DragStartBehavior.start,
                 tabs: [
-                  _buildTab(
-                      context, ItemType.anime, getString.installed(getString.anime), false, true),
-                  _buildTab(
-                      context, ItemType.anime, getString.available(getString.anime), false, false),
-                  _buildTab(
-                      context, ItemType.manga, getString.installed(getString.manga), true, true),
-                  _buildTab(
-                      context, ItemType.manga, getString.available(getString.manga), true, false),
-                  _buildTab(
-                      context, ItemType.novel, getString.installed(getString.novel), false, true),
-                  _buildTab(
-                      context, ItemType.novel, getString.available(getString.novel), false, false),
+                  _buildTab(context, ItemType.anime,
+                      getString.installed(getString.anime), false, true),
+                  _buildTab(context, ItemType.anime,
+                      getString.available(getString.anime), false, false),
+                  _buildTab(context, ItemType.manga,
+                      getString.installed(getString.manga), true, true),
+                  _buildTab(context, ItemType.manga,
+                      getString.available(getString.manga), true, false),
+                  _buildTab(context, ItemType.novel,
+                      getString.installed(getString.novel), false, true),
+                  _buildTab(context, ItemType.novel,
+                      getString.available(getString.novel), false, false),
                 ],
               ),
               const SizedBox(height: 8.0),

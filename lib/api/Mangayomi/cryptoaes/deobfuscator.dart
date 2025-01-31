@@ -22,7 +22,7 @@ class Deobfuscator {
 
         if (inputString[closingIndex + 1] == '[') {
           final skippingIndex =
-          getMatchingBracketIndex(closingIndex + 1, inputString);
+              getMatchingBracketIndex(closingIndex + 1, inputString);
           idx = skippingIndex + 1;
           continue;
         }

@@ -105,8 +105,8 @@ class DartExtensionService implements ExtensionService {
   Future<List<PageUrl>> getPageList(String url) async {
     return (await _executeLib().getPageList(url))
         .map((e) => e is String
-        ? PageUrl(e.toString().trim())
-        : PageUrl.fromJson((e as Map).toMapStringDynamic!))
+            ? PageUrl(e.toString().trim())
+            : PageUrl.fromJson((e as Map).toMapStringDynamic!))
         .toList();
   }
 
@@ -153,4 +153,3 @@ class DartExtensionService implements ExtensionService {
     }
   }
 }
-

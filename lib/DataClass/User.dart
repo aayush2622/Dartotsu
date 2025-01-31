@@ -1,3 +1,8 @@
+import 'package:json_annotation/json_annotation.dart';
+
+part 'Data/User.g.dart';
+
+@JsonSerializable()
 class userData {
   final int id;
   final String name;
@@ -23,4 +28,9 @@ class userData {
     this.nextAiringEpisode,
     //List<Activity>? activity,
   });
+
+  factory userData.fromJson(Map<String, dynamic> json) =>
+      _$userDataFromJson(json);
+
+  Map<String, dynamic> toJson() => _$userDataToJson(this);
 }

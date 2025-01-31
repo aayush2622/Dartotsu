@@ -1,5 +1,10 @@
+import 'package:json_annotation/json_annotation.dart';
+
 import 'Media.dart';
 
+part 'Data/SearchResults.g.dart';
+
+@JsonSerializable()
 class SearchResults {
   final String type;
   bool isAdult;
@@ -126,6 +131,11 @@ class SearchResults {
         break;
     }
   }
+
+  factory SearchResults.fromJson(Map<String, dynamic> json) =>
+      _$SearchResultsFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SearchResultsToJson(this);
 }
 
 class SearchChip {

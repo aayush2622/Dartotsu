@@ -1,7 +1,12 @@
+import 'package:json_annotation/json_annotation.dart';
+
 import '../api/Anilist/Data/fuzzyData.dart';
 import 'Author.dart';
 import 'Media.dart';
 
+part 'Data/Character.g.dart';
+
+@JsonSerializable()
 class character {
   int? id;
   String? name;
@@ -30,4 +35,9 @@ class character {
     this.roles,
     this.voiceActor,
   });
+
+  factory character.fromJson(Map<String, dynamic> json) =>
+      _$characterFromJson(json);
+
+  Map<String, dynamic> toJson() => _$characterToJson(this);
 }

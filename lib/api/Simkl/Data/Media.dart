@@ -1,9 +1,5 @@
-
 import 'package:json_annotation/json_annotation.dart';
-
-
 part 'Generated/Media.g.dart';
-
 
 @JsonSerializable()
 class Media {
@@ -13,6 +9,7 @@ class Media {
   List<ShowElement>? show;
   @JsonKey(name: "movies")
   List<MovieElement>? movies;
+
   Media({
     this.anime,
     this.show,
@@ -23,6 +20,7 @@ class Media {
 
   Map<String, dynamic> toJson() => _$MediaToJson(this);
 }
+
 @JsonSerializable()
 class MovieElement {
   @JsonKey(name: "last_watched_at")
@@ -56,7 +54,8 @@ class MovieElement {
     this.movie,
   });
 
-  factory MovieElement.fromJson(Map<String, dynamic> json) => _$MovieElementFromJson(json);
+  factory MovieElement.fromJson(Map<String, dynamic> json) =>
+      _$MovieElementFromJson(json);
 
   Map<String, dynamic> toJson() => _$MovieElementToJson(this);
 }
@@ -79,7 +78,8 @@ class MovieMovie {
     this.ids,
   });
 
-  factory MovieMovie.fromJson(Map<String, dynamic> json) => _$MovieMovieFromJson(json);
+  factory MovieMovie.fromJson(Map<String, dynamic> json) =>
+      _$MovieMovieFromJson(json);
 
   Map<String, dynamic> toJson() => _$MovieMovieToJson(this);
 }
@@ -177,6 +177,7 @@ class Show {
 
   Map<String, dynamic> toJson() => _$ShowToJson(this);
 }
+
 @JsonSerializable()
 class ShowElement {
   @JsonKey(name: "last_watched_at")
@@ -216,7 +217,8 @@ class ShowElement {
     this.show,
   });
 
-  factory ShowElement.fromJson(Map<String, dynamic> json) => _$ShowElementFromJson(json);
+  factory ShowElement.fromJson(Map<String, dynamic> json) =>
+      _$ShowElementFromJson(json);
 
   Map<String, dynamic> toJson() => _$ShowElementToJson(this);
 }
@@ -350,24 +352,24 @@ class EnumValues<T> {
 }
 
 @JsonSerializable()
-class MediaRatings{
+class MediaRatings {
   @JsonKey(name: "anime")
   List<Ratings>? animeRatings;
   @JsonKey(name: "shows")
   List<Ratings>? showRatings;
   @JsonKey(name: "movies")
   List<Ratings>? movieRatings;
+
   MediaRatings({
     this.animeRatings,
     this.showRatings,
     this.movieRatings,
-
   });
 
-  factory MediaRatings.fromJson(Map<String, dynamic> json) => _$MediaRatingsFromJson(json);
+  factory MediaRatings.fromJson(Map<String, dynamic> json) =>
+      _$MediaRatingsFromJson(json);
 
   Map<String, dynamic> toJson() => _$MediaRatingsToJson(this);
-
 }
 
 class Ratings {
@@ -384,18 +386,19 @@ class Ratings {
   });
 
   factory Ratings.fromJson(Map<String, dynamic> json) => Ratings(
-    id: json["id"],
-    releaseStatus: releaseStatusValues.map[json["release_status"]],
-    rank: json["rank"],
-    simkl: json["simkl"] == null ? null : SimklRating.fromJson(json["simkl"]),
-  );
+        id: json["id"],
+        releaseStatus: releaseStatusValues.map[json["release_status"]],
+        rank: json["rank"],
+        simkl:
+            json["simkl"] == null ? null : SimklRating.fromJson(json["simkl"]),
+      );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "release_status": releaseStatusValues.reverse[releaseStatus],
-    "rank": rank,
-    "simkl": simkl?.toJson(),
-  };
+        "id": id,
+        "release_status": releaseStatusValues.reverse[releaseStatus],
+        "rank": rank,
+        "simkl": simkl?.toJson(),
+      };
 }
 
 enum ReleaseStatus {
@@ -407,7 +410,6 @@ enum ReleaseStatus {
   IN_PRODUCTION,
   POST_PRODUCTION,
   CANCELED
-
 }
 
 final releaseStatusValues = EnumValues({
@@ -433,15 +435,14 @@ class SimklRating {
   });
 
   factory SimklRating.fromJson(Map<String, dynamic> json) => SimklRating(
-    rating: json["rating"]?.toDouble(),
-    votes: json["votes"],
-    droprate: json["droprate"],
-  );
+        rating: json["rating"]?.toDouble(),
+        votes: json["votes"],
+        droprate: json["droprate"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "rating": rating,
-    "votes": votes,
-    "droprate": droprate,
-  };
+        "rating": rating,
+        "votes": votes,
+        "droprate": droprate,
+      };
 }
-

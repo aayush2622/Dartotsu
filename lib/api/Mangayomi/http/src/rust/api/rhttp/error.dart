@@ -18,19 +18,25 @@ sealed class RhttpError with _$RhttpError {
   const RhttpError._();
 
   const factory RhttpError.rhttpCancelError() = RhttpError_RhttpCancelError;
+
   const factory RhttpError.rhttpTimeoutError() = RhttpError_RhttpTimeoutError;
+
   const factory RhttpError.rhttpRedirectError() = RhttpError_RhttpRedirectError;
+
   const factory RhttpError.rhttpStatusCodeError(
     int field0,
     List<(String, String)> field1,
     HttpResponseBody field2,
   ) = RhttpError_RhttpStatusCodeError;
+
   const factory RhttpError.rhttpInvalidCertificateError(
     String field0,
   ) = RhttpError_RhttpInvalidCertificateError;
+
   const factory RhttpError.rhttpConnectionError(
     String field0,
   ) = RhttpError_RhttpConnectionError;
+
   const factory RhttpError.rhttpUnknownError(
     String field0,
   ) = RhttpError_RhttpUnknownError;

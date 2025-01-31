@@ -51,12 +51,13 @@ RxInt _findSelectedChunkIndex(
   }
   return 0.obs;
 }
+
 Widget ChunkSelector(
-    BuildContext context,
-    List<List<Episode>> chunks,
-    RxInt selectedChunkIndex,
-    RxBool isReversed,
-    ) {
+  BuildContext context,
+  List<List<Episode>> chunks,
+  RxInt selectedChunkIndex,
+  RxBool isReversed,
+) {
   if (chunks.length < 2) {
     return const SizedBox();
   }
@@ -67,7 +68,7 @@ Widget ChunkSelector(
       child: Row(
         children: List.generate(
           chunks.length,
-              (index) {
+          (index) {
             return Padding(
               padding: EdgeInsets.only(
                 left: Directionality.of(context) == TextDirection.rtl
@@ -78,15 +79,14 @@ Widget ChunkSelector(
                     : (index == chunks.length - 1 ? 32.0 : 6.0),
               ),
               child: Obx(
-                    () => ChoiceChip(
+                () => ChoiceChip(
                   showCheckmark: false,
                   label: Text(
                       !isReversed.value
                           ? '${chunks[index].first.number} - ${chunks[index].last.number}'
                           : '${chunks[index].last.number} - ${chunks[index].first.number}',
                       style: const TextStyle(
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.bold)),
+                          fontFamily: 'Poppins', fontWeight: FontWeight.bold)),
                   selected: selectedChunkIndex.value == index,
                   onSelected: (bool selected) {
                     if (selected) {

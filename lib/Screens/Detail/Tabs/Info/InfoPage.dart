@@ -4,12 +4,12 @@ import 'package:dantotsu/Adaptor/Charactes/Widgets/EntitySection.dart';
 import 'package:dantotsu/Functions/Function.dart';
 import 'package:dantotsu/Screens/Detail/Tabs/Info/Widgets/FollowerWidget.dart';
 import 'package:dantotsu/Screens/Detail/Tabs/Info/Widgets/GenreWidget.dart';
+import 'package:dantotsu/Theme/LanguageSwitcher.dart';
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
 import 'package:html/parser.dart' as html_parser;
 import 'package:provider/provider.dart';
 
-import 'package:dantotsu/Theme/LanguageSwitcher.dart';
 import '../../../../../Adaptor/Media/Widgets/MediaSection.dart';
 import '../../../../Adaptor/Media/Widgets/Chips.dart';
 import '../../../../Adaptor/Media/Widgets/MediaCard.dart';
@@ -43,25 +43,16 @@ class InfoPageState extends State<InfoPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ...releasingIn(widget.mediaData, context),
-
         _buildWithPadding([
           ..._buildInfoSections(),
           ..._buildNameSections(),
         ]),
-
-        if (widget.mediaData.synonyms.isNotEmpty)
-          ..._buildSynonyms(theme),
-
+        if (widget.mediaData.synonyms.isNotEmpty) ..._buildSynonyms(theme),
         FollowerWidget(follower: widget.mediaData.users, type: type),
-
         if (widget.mediaData.genres.isNotEmpty)
           _buildWithPadding([GenreWidget(context, widget.mediaData.genres)]),
-
-        if (widget.mediaData.tags.isNotEmpty)
-          ..._buildTags(theme),
-
+        if (widget.mediaData.tags.isNotEmpty) ..._buildTags(theme),
         ..._buildPrequelSection(),
-
         if (widget.mediaData.relations?.isNotEmpty ?? false)
           MediaSection(
             context: context,
@@ -70,7 +61,6 @@ class InfoPageState extends State<InfoPage> {
             mediaList: widget.mediaData.relations,
             isLarge: true,
           ),
-
         if (widget.mediaData.characters?.isNotEmpty ?? false)
           entitySection(
             context: context,
@@ -78,7 +68,6 @@ class InfoPageState extends State<InfoPage> {
             title: getString.characters,
             characterList: widget.mediaData.characters,
           ),
-
         if (widget.mediaData.staff?.isNotEmpty ?? false)
           entitySection(
             context: context,
@@ -86,7 +75,6 @@ class InfoPageState extends State<InfoPage> {
             title: getString.staff,
             staffList: widget.mediaData.staff,
           ),
-
         if (widget.mediaData.recommendations?.isNotEmpty ?? false)
           MediaSection(
             context: context,
@@ -94,7 +82,6 @@ class InfoPageState extends State<InfoPage> {
             title: getString.recommended,
             mediaList: widget.mediaData.recommendations,
           ),
-
         const SizedBox(height: 64.0),
       ],
     );
@@ -130,7 +117,8 @@ class InfoPageState extends State<InfoPage> {
         value: mediaData.status?.toString(),
       ),
       _buildInfoRow(
-        title: "${getString.total} ${isAnime ? getString.totalEpisodes : getString.totalChapters}",
+        title:
+            "${getString.total} ${isAnime ? getString.totalEpisodes : getString.totalChapters}",
         value: infoTotal,
       ),
       _buildInfoRow(

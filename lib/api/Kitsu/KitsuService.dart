@@ -8,7 +8,6 @@ import '../../Services/MediaService.dart';
 import '../../Theme/LanguageSwitcher.dart';
 
 class KitsuService extends MediaService {
-
   @override
   String get getName => getString.kitsu;
 

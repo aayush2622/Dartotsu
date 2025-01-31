@@ -1,8 +1,9 @@
 import 'package:dantotsu/Functions/string_extensions.dart';
+import 'package:dantotsu/Theme/ThemeProvider.dart';
+import 'package:dantotsu/Widgets/CachedNetworkImage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:dantotsu/Widgets/CachedNetworkImage.dart';
-import 'package:dantotsu/Theme/ThemeProvider.dart';
+
 import '../../DataClass/Episode.dart';
 import '../../DataClass/Media.dart';
 import '../../Theme/Colors.dart';
@@ -42,7 +43,6 @@ class EpisodeCardView extends StatelessWidget {
         alignment: Alignment.bottomCenter,
         children: [
           _buildBackgroundImage(context),
-
           _buildEpisodeInfo(context),
           if (isWatched) _buildWatchedOverlay(context),
           if (isWatched) _buildWatchedIcon(context),
@@ -58,15 +58,17 @@ class EpisodeCardView extends StatelessWidget {
       ),
     );
   }
+
   Widget _fillerColor(BuildContext context) {
     final themeManager = Provider.of<ThemeNotifier>(context);
     final isDark = themeManager.isDarkMode;
-    return  Positioned(
+    return Positioned(
       child: Container(
         color: isDark ? fillerDark : fillerLight,
       ),
     );
   }
+
   Widget _buildNumber(BuildContext context) {
     var theme = Theme.of(context).colorScheme;
     return Align(

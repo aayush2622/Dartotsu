@@ -7,5 +7,4 @@ abstract class BaseAnimeScreen extends BaseMediaScreen {
   var trending = Rxn<List<Media>>();
 
   void loadTrending(int page);
-
 }

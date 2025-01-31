@@ -7,39 +7,22 @@ import '../../Services/BaseServiceData.dart';
 var ExtensionsC = Get.put(ExtensionsController());
 
 class ExtensionsController extends BaseServiceData {
+  @override
+  get token => 'OnePiece is peak'.obs;
 
-  ExtensionsController(){
+  ExtensionsController() {
     query = ExtensionsQueries();
   }
-  @override
-  bool getSavedToken() {
-    // not needed
-    return true;
-  }
 
   @override
-  void login(BuildContext context) {
-    // not needed
-  }
+  getSavedToken() => true;
 
   @override
-  void removeSavedToken() {
-    // not needed
-  }
+  login(BuildContext context) {}
 
   @override
-  Future<void> saveToken(String token) async {
-    // not needed
-  }
+  removeSavedToken() {}
 
-  Future<T?> executeQuery<T>(
-      String url, {
-        Map<String, String>? headers,
-        bool withNoHeaders = false,
-        bool force = false,
-        bool useToken = true,
-        bool show = true,
-      }){
-    throw UnimplementedError();
-  }
+  @override
+  saveToken(String token) async {}
 }

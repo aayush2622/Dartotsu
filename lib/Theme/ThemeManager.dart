@@ -69,7 +69,6 @@ ThemeData getTheme(ColorScheme? material, ThemeNotifier themeManager) {
         : getCustomLightTheme(customColor);
   }
   return baseTheme.copyWith(
-
     scaffoldBackgroundColor:
         isOled ? Colors.black : baseTheme.scaffoldBackgroundColor,
     colorScheme: baseTheme.colorScheme.copyWith(

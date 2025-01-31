@@ -17,10 +17,12 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:isar/isar.dart';
 import 'package:media_kit/media_kit.dart';
+import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:window_manager/window_manager.dart';
 
+import 'Functions/GetExtensions.dart';
 import 'Preferences/PrefManager.dart';
 import 'Screens/Anime/AnimeScreen.dart';
 import 'Screens/Home/HomeScreen.dart';
@@ -33,7 +35,6 @@ import 'Theme/ThemeProvider.dart';
 import 'api/Discord/Discord.dart';
 import 'api/TypeFactory.dart';
 import 'logger.dart';
-import 'package:path/path.dart' as p;
 
 late Isar isar;
 WebViewEnvironment? webViewEnvironment;
@@ -57,7 +58,7 @@ void main(List<String> args) async {
     },
     (error, stackTrace) {
       Logger.log('Uncaught error: $error\n$stackTrace');
-      throw('Uncaught error: $error\n$stackTrace');
+      throw ('Uncaught error: $error\n$stackTrace');
     },
     zoneSpecification: ZoneSpecification(
       print: (Zone self, ZoneDelegate parent, Zone zone, String message) {
@@ -76,6 +77,7 @@ Future init() async {
   await PrefManager.init();
   isar = await StorageProvider().initDB(null);
   await Logger.init();
+  await Extensions.init();
   initializeMediaServices();
   MediaKit.ensureInitialized();
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {

@@ -1,5 +1,9 @@
 import 'package:dantotsu/api/Mangayomi/Eval/dart/model/m_chapter.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'Data/Episode.g.dart';
+
+@JsonSerializable()
 class Episode {
   String number;
   String? link;
@@ -24,4 +28,9 @@ class Episode {
     this.date,
     this.mChapter,
   });
+
+  factory Episode.fromJson(Map<String, dynamic> json) =>
+      _$EpisodeFromJson(json);
+
+  Map<String, dynamic> toJson() => _$EpisodeToJson(this);
 }

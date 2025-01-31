@@ -156,7 +156,7 @@ PlayerSettings _playerSettingsDeserialize(
     showSubtitle: reader.readBoolOrNull(offsets[2]) ?? true,
     skipDuration: reader.readLongOrNull(offsets[3]) ?? 85,
     speed: reader.readStringOrNull(offsets[4]) ?? '1x',
-    subtitleBackgroundColor: reader.readLongOrNull(offsets[5]) ?? 0x80000000,
+    subtitleBackgroundColor: reader.readLongOrNull(offsets[5]) ?? 0x00000000,
     subtitleBottomPadding: reader.readLongOrNull(offsets[6]) ?? 0,
     subtitleColor: reader.readLongOrNull(offsets[7]) ?? 0xFFFFFFFF,
     subtitleFont: reader.readStringOrNull(offsets[8]) ?? 'Poppins',
@@ -188,7 +188,7 @@ P _playerSettingsDeserializeProp<P>(
     case 4:
       return (reader.readStringOrNull(offset) ?? '1x') as P;
     case 5:
-      return (reader.readLongOrNull(offset) ?? 0x80000000) as P;
+      return (reader.readLongOrNull(offset) ?? 0x00000000) as P;
     case 6:
       return (reader.readLongOrNull(offset) ?? 0) as P;
     case 7:

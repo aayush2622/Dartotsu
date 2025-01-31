@@ -114,9 +114,11 @@ class AnimeScreenState extends State<AnimeScreen> {
                       child: ChipsWidget(
                         chips: [
                           ChipData(
-                              label: getString.thisSeason, action: () => chipCall(1)),
+                              label: getString.thisSeason,
+                              action: () => chipCall(1)),
                           ChipData(
-                              label: getString.nextSeason, action: () => chipCall(2)),
+                              label: getString.nextSeason,
+                              action: () => chipCall(2)),
                           ChipData(
                               label: getString.previousSeason,
                               action: () => chipCall(0)),

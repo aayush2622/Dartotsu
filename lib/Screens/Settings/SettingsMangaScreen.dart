@@ -4,7 +4,6 @@ import '../../Adaptor/Settings/SettingsAdaptor.dart';
 import '../../DataClass/Setting.dart';
 import '../../Functions/Function.dart';
 import '../../Preferences/PrefManager.dart';
-
 import '../../Theme/LanguageSwitcher.dart';
 import '../../Widgets/AlertDialogBuilder.dart';
 import 'BaseSettingsScreen.dart';
@@ -45,7 +44,7 @@ class SettingsMangaScreenState extends BaseSettingsScreen {
         settings: [
           Setting(
             type: SettingType.normal,
-            name: getString.manageLayout(getString.manga,getString.anilist),
+            name: getString.manageLayout(getString.manga, getString.anilist),
             description: getString.manageLayoutDescription(getString.manga),
             icon: Icons.tune,
             onClick: () async {
@@ -57,7 +56,8 @@ class SettingsMangaScreenState extends BaseSettingsScreen {
                   List<bool>.from(homeLayoutMap.values.toList());
 
               AlertDialogBuilder(context)
-                ..setTitle(getString.manageLayout(getString.manga,getString.anilist))
+                ..setTitle(
+                    getString.manageLayout(getString.manga, getString.anilist))
                 ..reorderableMultiSelectableItems(
                   titles,
                   checkedStates,
@@ -90,7 +90,7 @@ class SettingsMangaScreenState extends BaseSettingsScreen {
         settings: [
           Setting(
             type: SettingType.normal,
-            name: getString.manageLayout(getString.manga,getString.mal),
+            name: getString.manageLayout(getString.manga, getString.mal),
             description: getString.manageLayoutDescription(getString.manga),
             icon: Icons.tune,
             onClick: () async {
@@ -101,7 +101,9 @@ class SettingsMangaScreenState extends BaseSettingsScreen {
                   List<bool>.from(homeLayoutMap.values.toList());
 
               AlertDialogBuilder(context)
-                ..setTitle(getString.manageLayout(getString.manga,getString.mal),)
+                ..setTitle(
+                  getString.manageLayout(getString.manga, getString.mal),
+                )
                 ..reorderableMultiSelectableItems(
                   titles,
                   checkedStates,

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:math';
 
+import 'package:dantotsu/Functions/Extensions.dart';
 import 'package:dantotsu/Preferences/IsarDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
 import 'package:dantotsu/Preferences/PrefManager.dart';
 import 'package:dantotsu/Theme/LanguageSwitcher.dart';
@@ -103,13 +104,12 @@ class MediaPlayerState extends State<MediaPlayer>
   void _initializePlayer() {
     currentQuality = widget.videos[widget.index];
     videoPlayerController = WindowsPlayer(resizeMode, settings);
-    var sourceName = Provider.of<MediaServiceProvider>(context, listen: false)
-        .currentService
-        .getName;
+    var sourceName = context.currentService(listen: false).getName;
     var currentProgress = PrefManager.getCustomVal<int>(
       "${widget.media.id}-${widget.currentEpisode.number}-$sourceName-current",
     );
-    videoPlayerController.open(currentQuality.url, Duration(seconds: currentProgress ?? 0));
+    videoPlayerController.open(
+        currentQuality.url, Duration(seconds: currentProgress ?? 0));
     _onMouseMoved();
   }
 
@@ -283,7 +283,7 @@ class MediaPlayerState extends State<MediaPlayer>
       return const SizedBox();
     }
     return Obx(
-          () => AnimatedPositioned(
+      () => AnimatedPositioned(
         right: 0,
         left: 0,
         top: 0,
@@ -301,12 +301,13 @@ class MediaPlayerState extends State<MediaPlayer>
             children: [
               Container(
                 padding:
-                const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                 decoration: BoxDecoration(
                   color: videoPlayerController.subtitle[0].isEmpty
                       ? Colors.transparent
-                      :Color(settings.subtitleBackgroundColor,
-                  ),
+                      : Color(
+                          settings.subtitleBackgroundColor,
+                        ),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Text(
@@ -318,7 +319,7 @@ class MediaPlayerState extends State<MediaPlayer>
                   style: TextStyle(
                     fontSize: settings.subtitleSize.toDouble(),
                     fontWeight:
-                    FontWeight.values[settings.subtitleWeight.toInt()],
+                        FontWeight.values[settings.subtitleWeight.toInt()],
                     fontFamily: settings.subtitleFont,
                     color: Color(settings.subtitleColor),
                     shadows: [
@@ -337,6 +338,7 @@ class MediaPlayerState extends State<MediaPlayer>
       ),
     );
   }
+
   Widget _buildVideoOverlay() {
     return Obx(() {
       return Positioned.fill(

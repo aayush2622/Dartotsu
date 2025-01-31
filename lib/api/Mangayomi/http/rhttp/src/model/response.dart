@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
-import 'package:dantotsu/api/Mangayomi/http/src/rust/api/rhttp/http.dart' as rust;
+import 'package:dantotsu/api/Mangayomi/http/src/rust/api/rhttp/http.dart'
+    as rust;
 
 import 'request.dart';
 

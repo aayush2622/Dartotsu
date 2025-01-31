@@ -7,7 +7,6 @@ import '../../../DataClass/Media.dart';
 import '../../../DataClass/MediaSection.dart';
 import '../../../Functions/Function.dart';
 import '../../../Preferences/PrefManager.dart';
-
 import '../../../Services/Screens/BaseMangaScreen.dart';
 import '../Mal.dart';
 import '../MalQueries.dart';
@@ -107,11 +106,10 @@ class MalMangaScreen extends BaseMangaScreen {
         pairTitle: 'Most Favourite Manga',
         list: mostFavManga.value,
       ),
-
     ];
     final mangaLayoutMap = PrefManager.getVal(PrefName.malMangaLayout);
     final sectionMap = {
-      for (var section in mediaSections) section.pairTitle : section
+      for (var section in mediaSections) section.pairTitle: section
     };
     return mangaLayoutMap.entries
         .where((entry) => entry.value)

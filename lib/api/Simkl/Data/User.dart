@@ -37,7 +37,8 @@ class Account {
     this.type,
   });
 
-  factory Account.fromJson(Map<String, dynamic> json) => _$AccountFromJson(json);
+  factory Account.fromJson(Map<String, dynamic> json) =>
+      _$AccountFromJson(json);
 
   Map<String, dynamic> toJson() => _$AccountToJson(this);
 }
@@ -51,7 +52,8 @@ class Connections {
     this.facebook,
   });
 
-  factory Connections.fromJson(Map<String, dynamic> json) => _$ConnectionsFromJson(json);
+  factory Connections.fromJson(Map<String, dynamic> json) =>
+      _$ConnectionsFromJson(json);
 
   Map<String, dynamic> toJson() => _$ConnectionsToJson(this);
 }
@@ -83,10 +85,12 @@ class UserClass {
     this.age,
   });
 
-  factory UserClass.fromJson(Map<String, dynamic> json) => _$UserClassFromJson(json);
+  factory UserClass.fromJson(Map<String, dynamic> json) =>
+      _$UserClassFromJson(json);
 
   Map<String, dynamic> toJson() => _$UserClassToJson(this);
 }
+
 @JsonSerializable()
 class Stats {
   @JsonKey(name: "total_mins")
@@ -154,7 +158,8 @@ class AnimeCompleted {
     this.count,
   });
 
-  factory AnimeCompleted.fromJson(Map<String, dynamic> json) => _$AnimeCompletedFromJson(json);
+  factory AnimeCompleted.fromJson(Map<String, dynamic> json) =>
+      _$AnimeCompletedFromJson(json);
 
   Map<String, dynamic> toJson() => _$AnimeCompletedToJson(this);
 }
@@ -220,7 +225,8 @@ class PlantowatchClass {
     this.count,
   });
 
-  factory PlantowatchClass.fromJson(Map<String, dynamic> json) => _$PlantowatchClassFromJson(json);
+  factory PlantowatchClass.fromJson(Map<String, dynamic> json) =>
+      _$PlantowatchClassFromJson(json);
 
   Map<String, dynamic> toJson() => _$PlantowatchClassToJson(this);
 }
@@ -243,7 +249,8 @@ class WatchedLastWeek {
     this.animeMins,
   });
 
-  factory WatchedLastWeek.fromJson(Map<String, dynamic> json) => _$WatchedLastWeekFromJson(json);
+  factory WatchedLastWeek.fromJson(Map<String, dynamic> json) =>
+      _$WatchedLastWeekFromJson(json);
 
   Map<String, dynamic> toJson() => _$WatchedLastWeekToJson(this);
 }

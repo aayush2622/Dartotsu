@@ -1,5 +1,6 @@
 import 'package:dantotsu/api/Mangayomi/http/rhttp/src/client/rhttp_client.dart';
-import 'package:dantotsu/api/Mangayomi/http/src/rust/api/rhttp/http.dart' as rust;
+import 'package:dantotsu/api/Mangayomi/http/src/rust/api/rhttp/http.dart'
+    as rust;
 import 'package:http/http.dart';
 
 import '../model/exception.dart';

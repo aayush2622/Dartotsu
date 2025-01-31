@@ -15,6 +15,7 @@ class MangaParser extends BaseParser {
   var unModifiedChapterList = Rxn<List<Chapter>>(null);
   var chapterList = Rxn<List<Chapter>>(null);
   var dataLoaded = false.obs;
+
   void init(Media mediaData) async {
     if (dataLoaded.value) return;
     initSettings(mediaData);
@@ -22,8 +23,9 @@ class MangaParser extends BaseParser {
 
   var viewType = 0.obs;
   var reversed = false.obs;
-  var scanlator= Rxn<List<String>>(null);
+  var scanlator = Rxn<List<String>>(null);
   var toggledScanlators = Rxn<List<bool>>(null);
+
   void initSettings(Media mediaData) {
     var selected = loadSelected(mediaData);
     viewType.value = selected.recyclerStyle;
@@ -37,28 +39,28 @@ class MangaParser extends BaseParser {
         source.value,
         scanlator.value,
         toggledScanlators.value,
-        (s,t) {
+        (s, t) {
           viewType.value = s.recyclerStyle;
           reversed.value = s.recyclerReversed;
           toggledScanlators.value = t;
           chapterList.value = unModifiedChapterList.value?.where((element) {
             var scanlator = element.mChapter?.scanlator;
             return scanlator == null ||
-                toggledScanlators.value![this.scanlator.value?.indexOf(scanlator) ?? 0];
+                toggledScanlators
+                    .value![this.scanlator.value?.indexOf(scanlator) ?? 0];
           }).toList();
-
         },
       ).showDialog();
 
   @override
   Future<void> wrongTitle(
-      context,
-      mediaData,
-      onChange,
-      ) async {
+    context,
+    mediaData,
+    onChange,
+  ) async {
     super.wrongTitle(context, mediaData, (
-        m,
-        ) {
+      m,
+    ) {
       unModifiedChapterList.value = null;
       chapterList.value = null;
       scanlator.value = null;
@@ -69,10 +71,10 @@ class MangaParser extends BaseParser {
 
   @override
   Future<void> searchMedia(
-      source,
-      mediaData, {
-        onFinish,
-      }) async {
+    source,
+    mediaData, {
+    onFinish,
+  }) async {
     unModifiedChapterList.value = null;
     chapterList.value = null;
     scanlator.value = null;
@@ -93,7 +95,8 @@ class MangaParser extends BaseParser {
 
     MManga? m;
     try {
-      m = await getDetail(url: media.link!, source: source).timeout(Duration(seconds: 5));
+      m = await getDetail(url: media.link!, source: source)
+          .timeout(Duration(seconds: 5));
     } catch (e) {
       errorType.value = ErrorType.NoResult;
       m = null;
@@ -106,7 +109,8 @@ class MangaParser extends BaseParser {
       errorType.value = ErrorType.NoResult;
       return;
     }
-    chapterList.value = m.chapters?.reversed.map((e) => MChapterToChapter(e, media)).toList();
+    chapterList.value =
+        m.chapters?.reversed.map((e) => MChapterToChapter(e, media)).toList();
     unModifiedChapterList.value = chapterList.value;
     var uniqueScanlators = {
       for (var element in chapterList.value!)

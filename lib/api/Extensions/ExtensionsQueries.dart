@@ -1,17 +1,27 @@
+import 'dart:convert';
+
 import 'package:collection/collection.dart';
 import 'package:dantotsu/DataClass/Media.dart';
-
 import 'package:dantotsu/DataClass/SearchResults.dart';
+import 'package:dantotsu/Functions/Function.dart';
 import 'package:dantotsu/Functions/string_extensions.dart';
 import 'package:dantotsu/api/Mangayomi/Eval/dart/model/m_manga.dart';
+import 'package:dantotsu/api/Mangayomi/Model/Source.dart';
+import 'package:get/get.dart';
 
 import '../../DataClass/Author.dart';
+import '../../Preferences/PrefManager.dart';
 import '../../Screens/Detail/Tabs/Watch/Anime/AnimeParser.dart';
 import '../../Screens/Detail/Tabs/Watch/Manga/MangaParser.dart';
 import '../../Services/Api/Queries.dart';
+import '../../main.dart';
 import '../Mangayomi/Search/get_detail.dart';
+import 'ExtensionsData.dart';
 
+part 'ExtensionsQueries/GetHomePageData.dart';
 part 'ExtensionsQueries/GetMediaDetails.dart';
+part 'ExtensionsQueries/GetUserData.dart';
+
 class ExtensionsQueries extends Queries {
   @override
   Future<Map<String, List<Media>>> getAnimeList() {
@@ -51,16 +61,10 @@ class ExtensionsQueries extends Queries {
   }
 
   @override
-  Future<bool>? getUserData() {
-    // TODO: implement getUserData
-    throw UnimplementedError();
-  }
+  Future<bool>? getUserData() => _getUserData();
 
   @override
-  Future<Map<String, List<Media>>>? initHomePage() {
-    // TODO: implement initHomePage
-    throw UnimplementedError();
-  }
+  Future<Map<String, List<Media>>>? initHomePage() => _initHomePage();
 
   @override
   Future<Media?>? mediaDetails(Media media) => _mediaDetails(media);

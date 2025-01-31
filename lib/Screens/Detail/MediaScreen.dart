@@ -69,13 +69,11 @@ class MediaInfoPageState extends State<MediaInfoPage> {
               [
                 Padding(
                   padding: const EdgeInsets.symmetric(),
-                  child: loaded
-                      ? Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [_buildSliverContent()],
-                        )
-                      : const Center(child: CircularProgressIndicator()),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [_buildSliverContent()],
+                  ),
                 ),
               ],
             ),
@@ -90,16 +88,29 @@ class MediaInfoPageState extends State<MediaInfoPage> {
     return ExpandablePageView(
       controller: pageController,
       children: [
-        SingleChildScrollView(child: InfoPage(mediaData: mediaData)),
-        SingleChildScrollView(
-          child: mediaData.sourceData != null
-              ? Source(media: mediaData)
-              : mediaData.anime != null
-                  ? AnimeWatchScreen(mediaData: mediaData)
-                  : MangaWatchScreen(mediaData: mediaData),
-        ),
-        const SizedBox(),
+        loaded
+            ? SingleChildScrollView(child: InfoPage(mediaData: mediaData))
+            : _buildProgressIndicator(),
+        loaded
+            ? SingleChildScrollView(
+                child: mediaData.sourceData != null
+                    ? Source(media: mediaData)
+                    : mediaData.anime != null
+                        ? AnimeWatchScreen(mediaData: mediaData)
+                        : MangaWatchScreen(mediaData: mediaData),
+              )
+            : _buildProgressIndicator(),
+        loaded ? const SizedBox() : _buildProgressIndicator(),
       ],
+    );
+  }
+
+  Widget _buildProgressIndicator() {
+    return SizedBox(
+      height: 251,
+      child: Center(
+        child: CircularProgressIndicator(),
+      ),
     );
   }
 

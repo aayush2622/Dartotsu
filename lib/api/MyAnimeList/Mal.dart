@@ -7,11 +7,10 @@ import 'package:http/http.dart' as http;
 import '../../Functions/Function.dart';
 import '../../Preferences/IsarDataClasses/MalToken/MalToken.dart';
 import '../../Preferences/PrefManager.dart';
-
 import '../../Services/BaseServiceData.dart';
 import '../../Widgets/CustomBottomDialog.dart';
-import 'Login.dart' as MalLogin;
 import '../TypeFactory.dart';
+import 'Login.dart' as MalLogin;
 import 'MalQueries.dart';
 import 'MalQueries/MalStrings.dart';
 
@@ -88,7 +87,8 @@ class MalController extends BaseServiceData {
   }
 
   @override
-  void login(BuildContext context) => showCustomBottomDialog(context, MalLogin.login(context));
+  void login(BuildContext context) =>
+      showCustomBottomDialog(context, MalLogin.login(context));
 
   @override
   void removeSavedToken() {

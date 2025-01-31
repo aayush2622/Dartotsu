@@ -3,7 +3,6 @@ import 'dart:async';
 import '../../../src/rust/api/rhttp/http.dart' as rust;
 import '../../../src/rust/lib.dart' as rust_lib;
 
-
 /// A token that can be used to cancel an HTTP request.
 /// This token must be passed to the request method.
 class CancelToken {
@@ -18,7 +17,6 @@ class CancelToken {
 
   CancelToken();
 
-  
   void setRef(rust_lib.CancellationToken ref) {
     _ref.complete(ref);
   }

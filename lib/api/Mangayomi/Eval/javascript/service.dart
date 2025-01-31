@@ -125,8 +125,8 @@ var extention = new DefaultExtension();
   Future<List<PageUrl>> getPageList(String url) async {
     return (await _extensionCallAsync<List>('getPageList(`$url`)', []))
         .map((e) => e is String
-        ? PageUrl(e.trim())
-        : PageUrl.fromJson((e as Map).toMapStringDynamic!))
+            ? PageUrl(e.trim())
+            : PageUrl.fromJson((e as Map).toMapStringDynamic!))
         .toList();
   }
 
@@ -134,7 +134,7 @@ var extention = new DefaultExtension();
   Future<List<Video>> getVideoList(String url) async {
     return (await _extensionCallAsync<List>('getVideoList(`$url`)', []))
         .where((element) =>
-    element['url'] != null && element['originalUrl'] != null)
+            element['url'] != null && element['originalUrl'] != null)
         .map((e) => Video.fromJson(e))
         .toList()
         .toSet()
@@ -145,7 +145,7 @@ var extention = new DefaultExtension();
   Future<String> getHtmlContent(String url) async {
     _init();
     final res = (await runtime.handlePromise(await runtime.evaluateAsync(
-        'jsonStringify(() => extention.getHtmlContent(`$url`))')))
+            'jsonStringify(() => extention.getHtmlContent(`$url`))')))
         .stringResult;
     return res;
   }
@@ -154,7 +154,7 @@ var extention = new DefaultExtension();
   Future<String> cleanHtmlContent(String html) async {
     _init();
     final res = (await runtime.handlePromise(await runtime.evaluateAsync(
-        'jsonStringify(() => extention.cleanHtmlContent(`$html`))')))
+            'jsonStringify(() => extention.cleanHtmlContent(`$html`))')))
         .stringResult;
     return res;
   }

@@ -8,7 +8,6 @@ import '../../../DataClass/Media.dart';
 import '../../../DataClass/MediaSection.dart';
 import '../../../Functions/Function.dart';
 import '../../../Preferences/PrefManager.dart';
-
 import '../../../Services/Screens/BaseAnimeScreen.dart';
 import '../Mal.dart';
 
@@ -111,7 +110,7 @@ class MalAnimeScreen extends BaseAnimeScreen {
     ];
     final animeLayoutMap = PrefManager.getVal(PrefName.malAnimeLayout);
     final sectionMap = {
-      for (var section in mediaSections) section.pairTitle : section
+      for (var section in mediaSections) section.pairTitle: section
     };
     return animeLayoutMap.entries
         .where((entry) => entry.value)

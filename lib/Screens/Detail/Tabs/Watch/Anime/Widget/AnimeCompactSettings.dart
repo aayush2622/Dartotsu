@@ -181,6 +181,7 @@ class AnimeCompactSettings {
       ),
     );
   }
+
   Widget _buildWebViewSettings() {
     return Row(
       children: [
@@ -198,6 +199,7 @@ class AnimeCompactSettings {
       ],
     );
   }
+
   void saveSelected() {
     var sourceName =
         Provider.of<MediaServiceProvider>(Get.context!, listen: false)

@@ -3,18 +3,19 @@ import 'dart:async';
 import 'package:dantotsu/logger.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:isar/isar.dart';
+
 import '../StorageProvider.dart';
 import 'IsarDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
+import 'IsarDataClasses/KeyValue/KeyValues.dart';
 import 'IsarDataClasses/MalToken/MalToken.dart';
 import 'IsarDataClasses/Selected/Selected.dart';
 import 'IsarDataClasses/ShowResponse/ShowResponse.dart';
-import 'IsarDataClasses/KeyValue/KeyValues.dart';
 
 part 'Preferences.dart';
 
 T loadData<T>(Pref<T> pref) => PrefManager.getVal(pref);
 
-T loadCustomData<T>(String key) => PrefManager.getCustomVal(key);
+T? loadCustomData<T>(String key) => PrefManager.getCustomVal(key);
 
 Future<Rx<T>?> loadLiveCustomData<T>(String key) =>
     PrefManager.getLiveCustomVal(key);

@@ -13,6 +13,7 @@ class WindowsPlayer extends BasePlayer {
   late Player player;
   late VideoController videoController;
   String? currentSubtitle;
+
   WindowsPlayer(this.resizeMode, this.settings) {
     player = Player(
       configuration: const PlayerConfiguration(bufferSize: 1024 * 1024 * 64),
@@ -54,7 +55,6 @@ class WindowsPlayer extends BasePlayer {
         ? SubtitleTrack.uri(subtitleUri, title: language)
         : SubtitleTrack(subtitleUri, language, language,
             uri: false, data: false));
-
   }
 
   @override
@@ -101,8 +101,7 @@ class WindowsPlayer extends BasePlayer {
   Widget playerWidget() {
     return Video(
       filterQuality: FilterQuality.medium,
-      subtitleViewConfiguration:
-      const SubtitleViewConfiguration(
+      subtitleViewConfiguration: const SubtitleViewConfiguration(
         visible: false,
       ),
       controller: videoController,

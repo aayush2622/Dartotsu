@@ -9,7 +9,7 @@ part 'fetch_manga_sources.g.dart';
 @riverpod
 Future fetchMangaSourcesList(FetchMangaSourcesListRef ref,
     {int? id, required reFresh}) async {
-  if ((PrefManager.getCustomVal('something') ?? true) || reFresh) {
+  if (loadData(PrefName.autoUpdateExtensions) || reFresh) {
     await fetchSourcesList(
       sourcesIndexUrl:
           "https://kodjodevf.github.io/mangayomi-extensions/index.json",

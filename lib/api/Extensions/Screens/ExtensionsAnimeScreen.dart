@@ -1,14 +1,13 @@
 import 'package:dantotsu/api/Mangayomi/Eval/dart/model/m_pages.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
 import '../../../Adaptor/Media/Widgets/MediaSection.dart';
 import '../../../DataClass/Media.dart';
-import '../../../Preferences/PrefManager.dart';
+import '../../../Functions/Function.dart';
+import '../../../Functions/GetExtensions.dart';
 import '../../../Services/Screens/BaseAnimeScreen.dart';
 import '../../../logger.dart';
-import '../../Mangayomi/Extensions/extensions_provider.dart';
 import '../../Mangayomi/Model/Manga.dart';
 import '../../Mangayomi/Model/Source.dart';
 import '../../Mangayomi/Search/get_popular.dart';
@@ -22,25 +21,9 @@ class ExtensionsAnimeScreen extends BaseAnimeScreen {
   @override
   Future<void> loadAll() async {
     resetPageData();
-    final container = ProviderContainer();
-    final sourcesAsyncValue = await container
-        .read(getExtensionsStreamProvider(ItemType.anime).future);
-
-    final ids = loadCustomData<List<int>?>('sortedExtensions_${ItemType.anime.name}') ?? [];
-    final installedSources = sourcesAsyncValue
-        .where((source) => source.isAdded!)
-        .toList();
-
-    final sortedInstalledSources = [
-      ...installedSources
-          .where((source) => ids.contains(source.id))
-          .toList()
-        ..sort((a, b) => ids.indexOf(a.id!).compareTo(ids.indexOf(b.id!))),
-      ...installedSources.where((source) => !ids.contains(source.id)),
-    ];
-
-    _buildSections(sortedInstalledSources);
-    for (var source in sortedInstalledSources) {
+    var sources = await Extensions.getSortedExtension(ItemType.anime);
+    _buildSections(sources);
+    for (var source in sources) {
       List<Media>? result;
       try {
         var res = await getPopular(
@@ -60,13 +43,12 @@ class ExtensionsAnimeScreen extends BaseAnimeScreen {
 
   Future<void> _buildSections(List<Source> sources) async {
     List<Future<void>> tasks = [];
-    var limit = 6;
-    for (var source in sources) {
-      if (limit-- <= 0) break;
+
+    for (var source in sources.take(6)) {
       tasks.add(
         () async {
           try {
-            var result = (await getLatest(
+            var result = (await getPopular(
               source: source,
               page: 1,
             ))
@@ -114,7 +96,7 @@ class ExtensionsAnimeScreen extends BaseAnimeScreen {
   }
 
   @override
-  int get refreshID => 90;
+  int get refreshID => RefreshId.Extensions.animePage;
 
   void resetPageData() {
     data.value = {};

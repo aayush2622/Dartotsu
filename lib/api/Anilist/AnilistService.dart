@@ -17,6 +17,7 @@ class AnilistService extends MediaService {
   AnilistService() {
     Anilist.getSavedToken();
   }
+
   @override
   String get getName => getString.anilist;
 
@@ -27,22 +28,27 @@ class AnilistService extends MediaService {
   BaseServiceData get data => Anilist;
 
   @override
-  BaseAnimeScreen get animeScreen => Get.put(AnilistAnimeScreen(Anilist), tag: "AnilistAnimeScreen");
+  BaseAnimeScreen get animeScreen =>
+      Get.put(AnilistAnimeScreen(Anilist), tag: "AnilistAnimeScreen");
 
   @override
-  BaseHomeScreen get homeScreen => Get.put(AnilistHomeScreen(Anilist), tag: "AnilistHomeScreen");
+  BaseHomeScreen get homeScreen =>
+      Get.put(AnilistHomeScreen(Anilist), tag: "AnilistHomeScreen");
 
   @override
-  BaseMangaScreen get mangaScreen => Get.put(AnilistMangaScreen(Anilist), tag: "AnilistMangaScreen");
+  BaseMangaScreen get mangaScreen =>
+      Get.put(AnilistMangaScreen(Anilist), tag: "AnilistMangaScreen");
 
   @override
-  BaseLoginScreen get loginScreen => Get.put(AnilistLoginScreen(Anilist), tag: "AnilistLoginScreen");
+  BaseLoginScreen get loginScreen =>
+      Get.put(AnilistLoginScreen(Anilist), tag: "AnilistLoginScreen");
 }
 
 class AnilistLoginScreen extends BaseLoginScreen {
   final AnilistController Anilist;
 
   AnilistLoginScreen(this.Anilist);
+
   @override
   void login(BuildContext context) => Anilist.login(context);
 }

@@ -1,4 +1,5 @@
 import 'dart:math';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dantotsu/Functions/Extensions.dart';
 import 'package:flutter/material.dart';
@@ -7,13 +8,13 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import '../../Animation/ScaleAnimation.dart';
 import '../../DataClass/Media.dart';
 import '../../Functions/Function.dart';
-
 import '../../Screens/Detail/MediaScreen.dart';
 import '../../Widgets/ScrollConfig.dart';
+import 'MediaExpandedViewHolder.dart';
 import 'MediaLargeViewHolder.dart';
 import 'MediaPageSmallViewHolder.dart';
 import 'MediaViewHolder.dart';
-import 'MediaExpandedViewHolder.dart';
+
 class MediaAdaptor extends StatefulWidget {
   final int type;
   final List<Media> mediaList;
@@ -64,14 +65,15 @@ class MediaGridState extends State<MediaAdaptor> {
         return _buildVerticalList();
       case 3:
         return _buildStaggeredGrid();
-      case 4 :
+      case 4:
         return _buildExpandedHorizontalList();
       default:
         return const SizedBox();
     }
   }
 
-  String _generateTag(int index) => '${_mediaList[index].id}${Random().nextInt(100000)}';
+  String _generateTag(int index) =>
+      '${_mediaList[index].id}${Random().nextInt(100000)}';
 
   void _handleMediaTap(int index, Media media, String tag) {
     if (widget.onMediaTap != null) {
@@ -80,7 +82,6 @@ class MediaGridState extends State<MediaAdaptor> {
       navigateToPage(context, MediaInfoPage(media, tag));
     }
   }
-
 
   Widget _buildAnimatedMediaItem({
     required Widget child,
@@ -100,6 +101,7 @@ class MediaGridState extends State<MediaAdaptor> {
       ),
     );
   }
+
   Widget _buildExpandedHorizontalList() {
     var height = widget.isLarge ? 270.0 : 250.0;
     return SizedBox(
@@ -138,6 +140,7 @@ class MediaGridState extends State<MediaAdaptor> {
       ),
     );
   }
+
   Widget _buildHorizontalList() {
     var height = widget.isLarge ? 270.0 : 250.0;
     return SizedBox(
@@ -227,6 +230,7 @@ class MediaGridState extends State<MediaAdaptor> {
       ),
     );
   }
+
   Widget _buildStaggeredGrid() {
     var height = widget.isLarge ? 270.0 : 250.0;
     return LayoutBuilder(
@@ -239,14 +243,17 @@ class MediaGridState extends State<MediaAdaptor> {
           child: StaggeredGrid.count(
             crossAxisSpacing: 16,
             crossAxisCount: crossAxisCount,
-            children: List.generate(_mediaList.length, (index) {
+            children: List.generate(
+              _mediaList.length,
+              (index) {
                 final tag = _generateTag(index);
                 return GestureDetector(
                   onTap: () {
                     if (widget.onMediaTap != null) {
                       widget.onMediaTap!(index, _mediaList[index]);
                     } else {
-                      navigateToPage(context, MediaInfoPage(_mediaList[index], tag));
+                      navigateToPage(
+                          context, MediaInfoPage(_mediaList[index], tag));
                     }
                   },
                   onLongPress: () {},

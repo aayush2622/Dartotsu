@@ -63,7 +63,7 @@ class MangaCompactSettings {
       )
       ..setPositiveButton(
         getString.ok,
-        () => onFinished(settings,toggledScanlators),
+        () => onFinished(settings, toggledScanlators),
       )
       ..setNegativeButton(
         getString.cancel,
@@ -178,27 +178,26 @@ class MangaCompactSettings {
 
   Widget _buildScanlatorSettings() {
     return Row(
-          children: [
-            _buildInfo(getString.scanlators,scanlators?.length.toString() ?? '0'),
-            IconButton(
-              onPressed: toggleScanlators,
-              icon: Icon(
-                Icons.notes_rounded,
-                size: 24,
-              ),
-            ),
-          ],
-        );
+      children: [
+        _buildInfo(getString.scanlators, scanlators?.length.toString() ?? '0'),
+        IconButton(
+          onPressed: toggleScanlators,
+          icon: Icon(
+            Icons.notes_rounded,
+            size: 24,
+          ),
+        ),
+      ],
+    );
   }
+
   void toggleScanlators() {
     if (scanlators == null || scanlators?.length == 1) return;
     var t = <bool>[];
     AlertDialogBuilder(context)
       ..setTitle(getString.scanlators)
       ..multiChoiceItems(
-        scanlators!,
-        toggledScanlators,
-        (selected) => t = selected)
+          scanlators!, toggledScanlators, (selected) => t = selected)
       ..setPositiveButton(getString.ok, () => toggledScanlators = t)
       ..setNegativeButton(getString.cancel, () {})
       ..show();

@@ -40,6 +40,7 @@ extension M on MPages {
         anime: isAnime ? Anime() : null,
         manga: isAnime ? null : Manga(),
         sourceData: source,
+        relation: source?.name ?? '',
       );
     }).toList();
   }

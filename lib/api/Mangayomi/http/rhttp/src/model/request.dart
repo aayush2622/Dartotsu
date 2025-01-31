@@ -1,12 +1,11 @@
 import 'dart:typed_data';
 
-import 'package:dantotsu/api/Mangayomi/http/src/rust/api/rhttp/http.dart' as rust;
+import 'package:dantotsu/api/Mangayomi/http/src/rust/api/rhttp/http.dart'
+    as rust;
 
 import '../client/rhttp_client.dart';
 import 'cancel_token.dart';
 import 'settings.dart';
-
-
 
 /// An HTTP request that can be used
 /// on a client or statically.

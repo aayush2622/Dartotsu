@@ -52,8 +52,8 @@ class FetchMangaSourcesListFamily extends Family<AsyncValue> {
 
   @override
   FetchMangaSourcesListProvider getProviderOverride(
-      covariant FetchMangaSourcesListProvider provider,
-      ) {
+    covariant FetchMangaSourcesListProvider provider,
+  ) {
     return call(
       id: provider.id,
       reFresh: provider.reFresh,
@@ -82,46 +82,46 @@ class FetchMangaSourcesListProvider extends AutoDisposeFutureProvider<Object?> {
     int? id,
     required dynamic reFresh,
   }) : this._internal(
-        (ref) => fetchMangaSourcesList(
-      ref as FetchMangaSourcesListRef,
-      id: id,
-      reFresh: reFresh,
-    ),
-    from: fetchMangaSourcesListProvider,
-    name: r'fetchMangaSourcesListProvider',
-    debugGetCreateSourceHash:
-    const bool.fromEnvironment('dart.vm.product')
-        ? null
-        : _$fetchMangaSourcesListHash,
-    dependencies: FetchMangaSourcesListFamily._dependencies,
-    allTransitiveDependencies:
-    FetchMangaSourcesListFamily._allTransitiveDependencies,
-    id: id,
-    reFresh: reFresh,
-  );
+          (ref) => fetchMangaSourcesList(
+            ref as FetchMangaSourcesListRef,
+            id: id,
+            reFresh: reFresh,
+          ),
+          from: fetchMangaSourcesListProvider,
+          name: r'fetchMangaSourcesListProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$fetchMangaSourcesListHash,
+          dependencies: FetchMangaSourcesListFamily._dependencies,
+          allTransitiveDependencies:
+              FetchMangaSourcesListFamily._allTransitiveDependencies,
+          id: id,
+          reFresh: reFresh,
+        );
 
   FetchMangaSourcesListProvider._internal(
-      super._createNotifier, {
-        required super.name,
-        required super.dependencies,
-        required super.allTransitiveDependencies,
-        required super.debugGetCreateSourceHash,
-        required super.from,
-        required this.id,
-        required this.reFresh,
-      }) : super.internal();
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.id,
+    required this.reFresh,
+  }) : super.internal();
 
   final int? id;
   final dynamic reFresh;
 
   @override
   Override overrideWith(
-      FutureOr<Object?> Function(FetchMangaSourcesListRef provider) create,
-      ) {
+    FutureOr<Object?> Function(FetchMangaSourcesListRef provider) create,
+  ) {
     return ProviderOverride(
       origin: this,
       override: FetchMangaSourcesListProvider._internal(
-            (ref) => create(ref as FetchMangaSourcesListRef),
+        (ref) => create(ref as FetchMangaSourcesListRef),
         from: from,
         name: null,
         dependencies: null,
@@ -155,7 +155,6 @@ class FetchMangaSourcesListProvider extends AutoDisposeFutureProvider<Object?> {
   }
 }
 
-
 // ignore: unused_element
 mixin FetchMangaSourcesListRef on AutoDisposeFutureProviderRef<Object?> {
   /// The parameter `id` of this provider.
@@ -172,6 +171,7 @@ class _FetchMangaSourcesListProviderElement
 
   @override
   int? get id => (origin as FetchMangaSourcesListProvider).id;
+
   @override
   dynamic get reFresh => (origin as FetchMangaSourcesListProvider).reFresh;
 }

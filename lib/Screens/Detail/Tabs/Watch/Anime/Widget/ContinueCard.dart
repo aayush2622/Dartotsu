@@ -34,7 +34,8 @@ class ContinueCard extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 32),
       child: GestureDetector(
-        onTap: () => onEpisodeClick(context, episode!, source, mediaData, () {}),
+        onTap: () =>
+            onEpisodeClick(context, episode!, source, mediaData, () {}),
         child: SizedBox(
           height: 80,
           child: Stack(

@@ -8,6 +8,7 @@ import 'http.dart';
 
 class JsVideosExtractors {
   late JavascriptRuntime runtime;
+
   JsVideosExtractors(this.runtime);
 
   void init() {
@@ -44,26 +45,26 @@ class JsVideosExtractors {
     });
     runtime.onMessage('streamlareExtractor', (dynamic args) async {
       return (await MBridge.streamlareExtractor(
-          args[0], args[1] ?? "", args[2] ?? ""))
+              args[0], args[1] ?? "", args[2] ?? ""))
           .encodeToJson();
     });
     runtime.onMessage('sendVidExtractor', (dynamic args) async {
       return (await MBridge.sendVidExtractor(
-          args[0],
-          args[1] != null
-              ? jsonEncode((args[1] as Map?).toMapStringString)
-              : null,
-          args[2] ?? ""))
+              args[0],
+              args[1] != null
+                  ? jsonEncode((args[1] as Map?).toMapStringString)
+                  : null,
+              args[2] ?? ""))
           .encodeToJson();
     });
     runtime.onMessage('yourUploadExtractor', (dynamic args) async {
       return (await MBridge.yourUploadExtractor(
-          args[0],
-          args[1] != null
-              ? jsonEncode((args[1] as Map?).toMapStringString)
-              : null,
-          args[2],
-          args[3] ?? ""))
+              args[0],
+              args[1] != null
+                  ? jsonEncode((args[1] as Map?).toMapStringString)
+                  : null,
+              args[2],
+              args[3] ?? ""))
           .encodeToJson();
     });
     runtime.onMessage('gogoCdnExtractor', (dynamic args) async {
@@ -78,12 +79,12 @@ class JsVideosExtractors {
     });
     runtime.onMessage('mp4UploadExtractor', (dynamic args) async {
       return (await MBridge.mp4UploadExtractor(
-          args[0],
-          args[1] != null
-              ? jsonEncode((args[1] as Map?).toMapStringString)
-              : null,
-          args[2] ?? "",
-          args[3] ?? ""))
+              args[0],
+              args[1] != null
+                  ? jsonEncode((args[1] as Map?).toMapStringString)
+                  : null,
+              args[2] ?? "",
+              args[3] ?? ""))
           .encodeToJson();
     });
     runtime.onMessage('streamWishExtractor', (dynamic args) async {
@@ -92,7 +93,7 @@ class JsVideosExtractors {
     });
     runtime.onMessage('filemoonExtractor', (dynamic args) async {
       return (await MBridge.filemoonExtractor(
-          args[0], args[1] ?? "", args[2] ?? ""))
+              args[0], args[1] ?? "", args[2] ?? ""))
           .encodeToJson();
     });
 

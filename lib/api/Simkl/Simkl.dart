@@ -1,16 +1,14 @@
-
-
 import 'dart:convert';
 
 import 'package:dantotsu/Preferences/PrefManager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 
 import '../../Functions/Function.dart';
 import '../../Services/BaseServiceData.dart';
 import '../../Widgets/CustomBottomDialog.dart';
 import '../TypeFactory.dart';
-import 'package:http/http.dart' as http;
 import 'Login.dart' as SimklLogin;
 import 'SimklQueries.dart';
 
@@ -23,15 +21,16 @@ class SimklController extends BaseServiceData {
 
   @override
   bool getSavedToken() {
-    token.value  = PrefManager.getVal(PrefName.simklToken);
+    token.value = PrefManager.getVal(PrefName.simklToken);
 
-    if(token.isNotEmpty) query?.getUserData();
+    if (token.isNotEmpty) query?.getUserData();
 
     return token.isNotEmpty;
   }
 
   @override
-  void login(BuildContext context) => showCustomBottomDialog(context, SimklLogin.login(context));
+  void login(BuildContext context) =>
+      showCustomBottomDialog(context, SimklLogin.login(context));
 
   @override
   void removeSavedToken() {
@@ -65,14 +64,15 @@ class SimklController extends BaseServiceData {
   }
 
   final rateLimiter = RateLimiter();
+
   Future<T?> executeQuery<T>(
-      String url, {
-        Map<String, String>? headers,
-        bool withNoHeaders = false,
-        bool useToken = true,
-        bool show = true,
-        String mapKey = '',
-      }) async {
+    String url, {
+    Map<String, String>? headers,
+    bool withNoHeaders = false,
+    bool useToken = true,
+    bool show = true,
+    String mapKey = '',
+  }) async {
     if (!rateLimiter.canMakeRequest()) {
       final secondsLeft =
           rateLimiter.resetTime.difference(DateTime.now()).inSeconds;
@@ -103,12 +103,13 @@ class SimklController extends BaseServiceData {
     if (jsonResponse is Map<String, dynamic>) {
       return TypeFactory.get<T>(jsonResponse);
     } else if (jsonResponse is List) {
-       var map = {mapKey: jsonResponse};
-       return TypeFactory.get<T>(map);
+      var map = {mapKey: jsonResponse};
+      return TypeFactory.get<T>(map);
     }
     return null;
   }
 }
+
 class RateLimiter {
   static const int maxRequestsPerMinute = 30;
   int requestCount = 0;

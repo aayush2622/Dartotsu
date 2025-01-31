@@ -57,7 +57,7 @@ class AnimeWatchScreenState extends BaseWatchScreen<AnimeWatchScreen> {
       if (!_viewModel.episodeDataLoaded.value) {
         return const Center(child: CircularProgressIndicator());
       }
-      if (episodeList.isEmpty){
+      if (episodeList.isEmpty) {
         return Center(
           child: Text(
             _viewModel.errorType.value == ErrorType.NotFound
@@ -103,8 +103,7 @@ class AnimeWatchScreenState extends BaseWatchScreen<AnimeWatchScreen> {
             margin: const EdgeInsets.symmetric(horizontal: 18),
             child: Obx(() {
               var reversed = _viewModel.reversed.value
-                  ? chunks.map((element) => element.reversed.toList())
-                  .toList()
+                  ? chunks.map((element) => element.reversed.toList()).toList()
                   : chunks;
               return EpisodeAdaptor(
                 type: _viewModel.viewType.value,
@@ -177,17 +176,17 @@ class AnimeWatchScreenState extends BaseWatchScreen<AnimeWatchScreen> {
 
     var thumbList = (t)?.map(
           (key, value) => MapEntry(
-        key.toString(),
-        (value as Map<dynamic, dynamic>).map(
+            key.toString(),
+            (value as Map<dynamic, dynamic>).map(
               (k, v) => MapEntry(k.toString(), v as String?),
-        ),
-      ),
-    ) ?? {};
+            ),
+          ),
+        ) ??
+        {};
     for (var i in episodeList.values) {
       thumbList[mediaData.id.toString()] ??= {};
 
       thumbList[mediaData.id.toString()]![i.number] = i.thumb;
     }
-
   }
 }

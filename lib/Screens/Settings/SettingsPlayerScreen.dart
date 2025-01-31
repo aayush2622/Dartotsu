@@ -6,17 +6,17 @@ import 'package:dantotsu/api/Mangayomi/Eval/dart/model/video.dart';
 import 'package:dantotsu/api/Mangayomi/Model/Source.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+
 import '../../Adaptor/Settings/SettingsAdaptor.dart';
 import '../../DataClass/Anime.dart';
 import '../../DataClass/Media.dart';
 import '../../DataClass/Setting.dart';
 import '../../Preferences/IsarDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
 import '../../Preferences/PrefManager.dart';
-
 import '../../StorageProvider.dart';
 import '../../Theme/CustomColorPicker.dart';
-import '../../Widgets/AlertDialogBuilder.dart';
 import '../../Theme/LanguageSwitcher.dart';
+import '../../Widgets/AlertDialogBuilder.dart';
 import '../Player/Player.dart';
 import 'BaseSettingsScreen.dart';
 
@@ -49,8 +49,7 @@ class SettingsPlayerScreenState extends BaseSettingsScreen {
 }
 
 List<Widget> playerSettings(
-  BuildContext context,
-  void Function(void Function()) setState) {
+    BuildContext context, void Function(void Function()) setState) {
   void savePlayerSettings(PlayerSettings playerSettings) {
     PrefManager.setVal(PrefName.playerSettings, playerSettings);
     setState(() {});
@@ -75,7 +74,7 @@ List<Widget> playerSettings(
           name: 'ThumbLess SeekBar',
           description: 'Remove thumb from the seek bar',
           icon: Icons.circle_rounded,
-          isChecked:PrefManager.getVal(PrefName.thumbLessSeekBar),
+          isChecked: PrefManager.getVal(PrefName.thumbLessSeekBar),
           onSwitchChange: (value) {
             PrefManager.setVal(PrefName.thumbLessSeekBar, value);
             setState(() {});

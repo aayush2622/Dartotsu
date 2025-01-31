@@ -1,9 +1,9 @@
 import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
 class AniSkip {
-
   static Future<List<Stamp>?> getResult({
     required int? malId,
     required int episodeNumber,
@@ -78,7 +78,8 @@ class Stamp {
 
   factory Stamp.fromJson(Map<String, dynamic> json) {
     return Stamp(
-      interval: AniSkipInterval.fromJson(json['interval'] as Map<String, dynamic>),
+      interval:
+          AniSkipInterval.fromJson(json['interval'] as Map<String, dynamic>),
       skipType: json['skipType'] as String,
       skipId: json['skipId'] as String,
       episodeLength: (json['episodeLength'] as num).toDouble(),

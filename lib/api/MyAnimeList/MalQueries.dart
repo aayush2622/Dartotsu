@@ -6,7 +6,6 @@ import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 import '../../Preferences/PrefManager.dart';
-
 import '../../Services/Api/Queries.dart';
 import '../../logger.dart';
 import 'Data/data.dart';

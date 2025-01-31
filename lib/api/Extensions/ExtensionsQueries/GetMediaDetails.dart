@@ -2,6 +2,26 @@ part of '../ExtensionsQueries.dart';
 
 extension on ExtensionsQueries {
   Future<Media?> _mediaDetails(Media media) async {
+    final source = isar.sources.getSync(media.sourceData!.id!);
+
+    if (source == null) {
+      snackString('Source not found did you remove it?');
+      Get.back();
+      return null;
+    }
+    final localData = loadCustomData<String>('extensions_media_lists')?.trim();
+    final map = (localData?.isNotEmpty ?? false)
+        ? MediaMapWrapper.fromJson(jsonDecode(localData!))
+        : MediaMapWrapper(mediaMap: {'Continue Watching': []});
+
+    var list = mergeMapValues(map.mediaMap);
+
+    final existingMedia = list.firstWhereOrNull(
+      (m) => m.name == media.name && m.sourceData?.id == media.sourceData!.id,
+    );
+    if (existingMedia != null) media.id = existingMedia.id;
+
+    media.sourceData = source;
     var data =
         await getDetail(url: media.shareLink!, source: media.sourceData!);
 
@@ -15,13 +35,15 @@ extension on ExtensionsQueries {
         mangaData(media, data);
       }
     }
-
     return null;
   }
-  void mangaData(Media media, MManga data){
-    media.manga?.mediaAuthor= author(name: data.author, id: hashCode);
-    media.manga?.chapters = data.chapters?.reversed.map((e) => MChapterToChapter(e, data)).toList();
+
+  void mangaData(Media media, MManga data) {
+    media.manga?.mediaAuthor = author(name: data.author, id: hashCode);
+    media.manga?.chapters =
+        data.chapters?.reversed.map((e) => MChapterToChapter(e, data)).toList();
   }
+
   void animeData(Media media, MManga data) {
     var isFirst = true;
     var shouldNormalize = false;
@@ -45,7 +67,7 @@ extension on ExtensionsQueries {
             if (episode.number.toDouble() % 1 != 0) {
               additionalIndex--;
               var remainder =
-              (episode.number.toDouble() % 1).toStringAsFixed(2).toDouble();
+                  (episode.number.toDouble() % 1).toStringAsFixed(2).toDouble();
               episode.number =
                   (index + 1 + remainder + additionalIndex).toString();
             } else {

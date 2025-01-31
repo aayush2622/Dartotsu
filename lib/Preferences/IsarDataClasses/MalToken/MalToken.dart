@@ -1,7 +1,6 @@
-
 import 'package:isar/isar.dart';
-part 'MalToken.g.dart';
 
+part 'MalToken.g.dart';
 
 @collection
 class ResponseToken {

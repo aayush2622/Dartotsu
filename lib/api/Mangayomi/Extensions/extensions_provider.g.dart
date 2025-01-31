@@ -41,8 +41,8 @@ class GetExtensionsStreamFamily extends Family<AsyncValue<List<Source>>> {
 
   /// See also [getExtensionsStream].
   GetExtensionsStreamProvider call(
-      ItemType itemType,
-      ) {
+    ItemType itemType,
+  ) {
     return GetExtensionsStreamProvider(
       itemType,
     );
@@ -50,8 +50,8 @@ class GetExtensionsStreamFamily extends Family<AsyncValue<List<Source>>> {
 
   @override
   GetExtensionsStreamProvider getProviderOverride(
-      covariant GetExtensionsStreamProvider provider,
-      ) {
+    covariant GetExtensionsStreamProvider provider,
+  ) {
     return call(
       provider.itemType,
     );
@@ -77,44 +77,44 @@ class GetExtensionsStreamProvider
     extends AutoDisposeStreamProvider<List<Source>> {
   /// See also [getExtensionsStream].
   GetExtensionsStreamProvider(
-      ItemType itemType,
-      ) : this._internal(
-        (ref) => getExtensionsStream(
-      ref as GetExtensionsStreamRef,
-      itemType,
-    ),
-    from: getExtensionsStreamProvider,
-    name: r'getExtensionsStreamProvider',
-    debugGetCreateSourceHash:
-    const bool.fromEnvironment('dart.vm.product')
-        ? null
-        : _$getExtensionsStreamHash,
-    dependencies: GetExtensionsStreamFamily._dependencies,
-    allTransitiveDependencies:
-    GetExtensionsStreamFamily._allTransitiveDependencies,
-    itemType: itemType,
-  );
+    ItemType itemType,
+  ) : this._internal(
+          (ref) => getExtensionsStream(
+            ref as GetExtensionsStreamRef,
+            itemType,
+          ),
+          from: getExtensionsStreamProvider,
+          name: r'getExtensionsStreamProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$getExtensionsStreamHash,
+          dependencies: GetExtensionsStreamFamily._dependencies,
+          allTransitiveDependencies:
+              GetExtensionsStreamFamily._allTransitiveDependencies,
+          itemType: itemType,
+        );
 
   GetExtensionsStreamProvider._internal(
-      super._createNotifier, {
-        required super.name,
-        required super.dependencies,
-        required super.allTransitiveDependencies,
-        required super.debugGetCreateSourceHash,
-        required super.from,
-        required this.itemType,
-      }) : super.internal();
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.itemType,
+  }) : super.internal();
 
   final ItemType itemType;
 
   @override
   Override overrideWith(
-      Stream<List<Source>> Function(GetExtensionsStreamRef provider) create,
-      ) {
+    Stream<List<Source>> Function(GetExtensionsStreamRef provider) create,
+  ) {
     return ProviderOverride(
       origin: this,
       override: GetExtensionsStreamProvider._internal(
-            (ref) => create(ref as GetExtensionsStreamRef),
+        (ref) => create(ref as GetExtensionsStreamRef),
         from: from,
         name: null,
         dependencies: null,
@@ -143,7 +143,6 @@ class GetExtensionsStreamProvider
     return _SystemHash.finish(hash);
   }
 }
-
 
 // ignore: unused_element
 mixin GetExtensionsStreamRef on AutoDisposeStreamProviderRef<List<Source>> {

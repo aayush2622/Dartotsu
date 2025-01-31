@@ -2,9 +2,10 @@ import 'package:dantotsu/Widgets/LoadSvg.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:provider/provider.dart';
-import '../../Theme/LanguageSwitcher.dart';
+
 import '../../Functions/Function.dart';
 import '../../Services/ServiceSwitcher.dart';
+import '../../Theme/LanguageSwitcher.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -50,13 +51,13 @@ class LoginScreenState extends State<LoginScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                _buildSocialIcon(Icons.discord, 'https://discord.gg/eyQdCpdubF'),
-                const SizedBox(width: 16),
-                _buildSocialIcon(Bootstrap.github,
-                    'https://github.com/aayush2622/dartotsu'),
+                _buildSocialIcon(
+                    Icons.discord, 'https://discord.gg/eyQdCpdubF'),
                 const SizedBox(width: 16),
                 _buildSocialIcon(
-                    Icons.telegram_sharp, 'https://t.me/Dartotsu'),
+                    Bootstrap.github, 'https://github.com/aayush2622/dartotsu'),
+                const SizedBox(width: 16),
+                _buildSocialIcon(Icons.telegram_sharp, 'https://t.me/Dartotsu'),
               ],
             ),
             const SizedBox(height: 16),

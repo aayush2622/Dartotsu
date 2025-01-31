@@ -1,10 +1,10 @@
 import 'package:dantotsu/Screens/Settings/SettingsPlayerScreen.dart';
 import 'package:flutter/material.dart';
+
 import '../../Adaptor/Settings/SettingsAdaptor.dart';
 import '../../DataClass/Setting.dart';
 import '../../Functions/Function.dart';
 import '../../Preferences/PrefManager.dart';
-
 import '../../Theme/LanguageSwitcher.dart';
 import '../../Widgets/AlertDialogBuilder.dart';
 import 'BaseSettingsScreen.dart';
@@ -41,8 +41,8 @@ class SettingsAnimeScreenState extends BaseSettingsScreen {
             description: 'Change player settings',
             icon: Icons.video_settings,
             isActivity: true,
-            onClick: () => navigateToPage(
-                context, const SettingsPlayerScreen()),
+            onClick: () =>
+                navigateToPage(context, const SettingsPlayerScreen()),
           ),
         ],
       ),
@@ -69,7 +69,8 @@ class SettingsAnimeScreenState extends BaseSettingsScreen {
                   List<bool>.from(homeLayoutMap.values.toList());
 
               AlertDialogBuilder(context)
-                ..setTitle(getString.manageLayout(getString.anilist, getString.anime))
+                ..setTitle(
+                    getString.manageLayout(getString.anilist, getString.anime))
                 ..reorderableMultiSelectableItems(
                   titles,
                   checkedStates,
@@ -110,7 +111,8 @@ class SettingsAnimeScreenState extends BaseSettingsScreen {
               var checkedStates =
                   List<bool>.from(homeLayoutMap.values.toList());
               AlertDialogBuilder(context)
-                ..setTitle(getString.manageLayout(getString.home, getString.mal))
+                ..setTitle(
+                    getString.manageLayout(getString.home, getString.mal))
                 ..reorderableMultiSelectableItems(
                   titles,
                   checkedStates,

@@ -1,9 +1,9 @@
 import 'package:dantotsu/Screens/Settings/BaseSettingsScreen.dart';
+import 'package:dantotsu/Theme/LanguageSwitcher.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:dantotsu/Theme/LanguageSwitcher.dart';
-import '../../Adaptor/Settings/SettingsAdaptor.dart';
 
+import '../../Adaptor/Settings/SettingsAdaptor.dart';
 import '../../DataClass/Setting.dart';
 import '../../Theme/CustomColorPicker.dart';
 import '../../Theme/ThemeManager.dart';
@@ -89,7 +89,8 @@ class SettingsThemeScreenState extends BaseSettingsScreen {
         icon: Icons.color_lens_outlined,
         onClick: () async {
           var color = themeNotifier.customColor;
-          Color? newColor = await showColorPickerDialog(context, Color(color),showTransparent: false);
+          Color? newColor = await showColorPickerDialog(context, Color(color),
+              showTransparent: false);
           if (newColor != null) {
             themeNotifier.setCustomColor(newColor);
           }

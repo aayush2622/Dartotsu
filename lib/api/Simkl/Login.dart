@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -12,7 +11,9 @@ import '../../Theme/LanguageSwitcher.dart';
 import '../../Widgets/CustomBottomDialog.dart';
 import 'Simkl.dart';
 
-const String clientId = '8f2450710290285507d924b9c7772a223f49d235ac68f83586655171cdf4b3f6';
+const String clientId =
+    '8f2450710290285507d924b9c7772a223f49d235ac68f83586655171cdf4b3f6';
+
 CustomBottomDialog login(BuildContext context) {
   return CustomBottomDialog(
     title: getString.loginTo(getString.simkl),
@@ -74,8 +75,8 @@ Future<String> fetchToken({required String code}) async {
 
 Widget _buildLoginButton(BuildContext context,
     {required Function() onPressed,
-      required String icon,
-      required String label}) {
+    required String icon,
+    required String label}) {
   final theme = Theme.of(context).colorScheme;
   return ElevatedButton.icon(
     onPressed: () => onPressed(),

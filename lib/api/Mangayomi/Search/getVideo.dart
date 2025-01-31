@@ -6,8 +6,7 @@ Future<List<Video>> getVideo({
   required Source source,
   required String url,
 }) async {
-  List<Video> list =
-  await getExtensionService(source).getVideoList(url);
+  List<Video> list = await getExtensionService(source).getVideoList(url);
 
   List<Video> videos = [];
   for (var video in list) {

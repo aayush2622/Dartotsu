@@ -5,7 +5,6 @@ import '../../Adaptor/Settings/SettingsAdaptor.dart';
 import '../../DataClass/Setting.dart';
 import '../../Functions/Function.dart';
 import '../../Preferences/PrefManager.dart';
-
 import '../../StorageProvider.dart';
 import 'BaseSettingsScreen.dart';
 
@@ -22,13 +21,13 @@ class SettingsAboutScreenState extends BaseSettingsScreen {
 
   @override
   Widget icon() => Padding(
-    padding: const EdgeInsets.only(right: 16),
-    child: Icon(
-      size: 52,
-      Icons.info,
-      color: Theme.of(context).colorScheme.onSurface,
-    ),
-  );
+        padding: const EdgeInsets.only(right: 16),
+        child: Icon(
+          size: 52,
+          Icons.info,
+          color: Theme.of(context).colorScheme.onSurface,
+        ),
+      );
 
   @override
   List<Widget> get settingsList {

@@ -5,10 +5,10 @@ import 'package:dantotsu/Functions/Function.dart';
 import 'package:dantotsu/api/Mangayomi/Model/settings.dart';
 import 'package:dantotsu/api/Mangayomi/http/rhttp/src/model/settings.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:http/io_client.dart';
-import 'package:http_interceptor/http_interceptor.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart'
 as flutter_inappwebview;
+import 'package:http/io_client.dart';
+import 'package:http_interceptor/http_interceptor.dart';
 import '../../../logger.dart';
 import '../../../main.dart';
 import '../Eval/dart/model/m_source.dart';
@@ -16,6 +16,7 @@ import '../http/rhttp/rhttp.dart' as rhttp;
 
 class MClient {
   MClient();
+
   static Client httpClient(
       {Map<String, dynamic>? reqcopyWith, rhttp.ClientSettings? settings}) {
     if (!(reqcopyWith?["useDartHttpClient"] ?? false)) {
@@ -71,16 +72,16 @@ class MClient {
     List<String> cookies = [];
     if (Platform.isLinux) {
       cookies = cookie
-          ?.split(RegExp('(?<=)(,)(?=[^;]+?=)'))
-          .where((cookie) => cookie.isNotEmpty)
-          .toList() ??
+              ?.split(RegExp('(?<=)(,)(?=[^;]+?=)'))
+              .where((cookie) => cookie.isNotEmpty)
+              .toList() ??
           [];
     } else {
       cookies = (await flutter_inappwebview.CookieManager.instance(
-          webViewEnvironment: webViewEnvironment)
-          .getCookies(
-          url: flutter_inappwebview.WebUri(url),
-          webViewController: webViewController))
+                  webViewEnvironment: webViewEnvironment)
+              .getCookies(
+                  url: flutter_inappwebview.WebUri(url),
+                  webViewController: webViewController))
           .map((e) => "${e.name}=${e.value}")
           .toList();
     }
@@ -98,13 +99,14 @@ class MClient {
         ..host = host
         ..cookie = newCookie);
       isar.writeTxnSync(
-              () => isar.settings.putSync(settings..cookiesList = cookieList));
+          () => isar.settings.putSync(settings..cookiesList = cookieList));
     }
     if (ua.isNotEmpty) {
       final settings = isar.settings.getSync(227);
       isar.writeTxnSync(() => isar.settings.putSync(settings!..userAgent = ua));
     }
   }
+
   static void deleteAllCookies(String url) {
     final cookiesList = isar.settings.getSync(227)!.cookiesList ?? [];
     List<MCookie>? cookieList = [];
@@ -121,6 +123,7 @@ class MClient {
 
 class MCookieManager extends InterceptorContract {
   MCookieManager(this.reqcopyWith);
+
   Map<String, dynamic>? reqcopyWith;
 
   @override
@@ -169,7 +172,8 @@ class LoggerInterceptor extends InterceptorContract {
   Future<BaseRequest> interceptRequest({
     required BaseRequest request,
   }) async {
-    Logger.log('----- Request -----\n${request.toString()}\nheader: ${request.headers.toString()}');
+    Logger.log(
+        '----- Request -----\n${request.toString()}\nheader: ${request.headers.toString()}');
     return request;
   }
 
@@ -179,8 +183,10 @@ class LoggerInterceptor extends InterceptorContract {
   }) async {
     final cloudflare = [403, 503].contains(response.statusCode) &&
         ["cloudflare-nginx", "cloudflare"].contains(response.headers["server"]);
-    Logger.log("----- Response -----\n${response.request?.method}: ${response.request?.url}, statusCode: ${response.statusCode} ${cloudflare ? "Failed to bypass Cloudflare" : ""}");
-    debugPrint("----- Response -----\n${response.request?.method}: ${response.request?.url}, statusCode: ${response.statusCode} ${cloudflare ? "Failed to bypass Cloudflare" : ""}");
+    Logger.log(
+        "----- Response -----\n${response.request?.method}: ${response.request?.url}, statusCode: ${response.statusCode} ${cloudflare ? "Failed to bypass Cloudflare" : ""}");
+    debugPrint(
+        "----- Response -----\n${response.request?.method}: ${response.request?.url}, statusCode: ${response.statusCode} ${cloudflare ? "Failed to bypass Cloudflare" : ""}");
     if (cloudflare) {
       snackString("${response.statusCode} Failed to bypass Cloudflare");
     }

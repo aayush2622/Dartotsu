@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:dart_eval/dart_eval_bridge.dart';
 import 'package:dart_eval/stdlib/core.dart';
-import 'package:flutter/foundation.dart';
 import 'package:http_interceptor/http_interceptor.dart';
 
 import '../../../http/m_client.dart';
@@ -26,10 +25,10 @@ class $Client implements $Instance {
       constructors: {
         '': BridgeConstructorDef(
             BridgeFunctionDef(returns: BridgeTypeAnnotation($type), params: [
-              BridgeParameter('source', BridgeTypeAnnotation($MSource.$type), true),
-              BridgeParameter('reqcopyWith',
-                  BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.string)), true),
-            ], namedParams: []))
+          BridgeParameter('source', BridgeTypeAnnotation($MSource.$type), true),
+          BridgeParameter('reqcopyWith',
+              BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.string)), true),
+        ], namedParams: []))
       },
       methods: {
         'get': BridgeMethodDef(BridgeFunctionDef(
@@ -216,7 +215,7 @@ class $Client implements $Instance {
     final reqcopyWith = args[1]?.$value == null
         ? null
         : (jsonDecode(args[1]!.$value) as Map)
-        .map((key, value) => MapEntry(key.toString(), value));
+            .map((key, value) => MapEntry(key.toString(), value));
     return $Client.wrap(
       MClient.init(source: args[0]?.$value, reqcopyWith: reqcopyWith),
     );
@@ -253,7 +252,7 @@ class $Client implements $Instance {
     final headers = _toMapString(args[1]?.$value);
 
     final request =
-    (target!.$value as InterceptedClient).get(url, headers: headers);
+        (target!.$value as InterceptedClient).get(url, headers: headers);
     return $Future
         .wrap(request.then((value) => $Response.wrap(value)).onErrorMessage());
   }
@@ -321,7 +320,7 @@ class $Client implements $Instance {
     final headers = _toMapString(args[1]?.$value);
 
     final request =
-    (target!.$value as InterceptedClient).read(url, headers: headers);
+        (target!.$value as InterceptedClient).read(url, headers: headers);
     return $Future
         .wrap(request.then((value) => $String(value)).onErrorMessage());
   }
@@ -332,11 +331,11 @@ class $Client implements $Instance {
       Runtime runtime, $Value? target, List<$Value?> args) {
     final url = args[0]!.$value as Uri;
     final headers = (args[1]?.$value as Map<$Value, $Value>?)?.map(
-            (key, value) =>
+        (key, value) =>
             MapEntry((key.$reified).toString(), (value.$reified).toString()));
 
     final request =
-    (target!.$value as InterceptedClient).readBytes(url, headers: headers);
+        (target!.$value as InterceptedClient).readBytes(url, headers: headers);
     return $Future
         .wrap(request.then((value) => $List.wrap(value)).onErrorMessage());
   }
@@ -371,47 +370,47 @@ class $BaseRequest implements $Instance {
 
   /// Compile-time bridged class declaration for [$BaseRequest]
   static const $declaration =
-  BridgeClassDef(BridgeClassType($type, isAbstract: true),
-      constructors: {},
-      getters: {
-        'contentLength': BridgeMethodDef(BridgeFunctionDef(
-          returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.int),
-              nullable: true),
-        )),
-        'finalized': BridgeMethodDef(BridgeFunctionDef(
-          returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool)),
-        )),
-        'followRedirects': BridgeMethodDef(BridgeFunctionDef(
-          returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool)),
-        )),
-        'headers': BridgeMethodDef(BridgeFunctionDef(
-          returns: BridgeTypeAnnotation(
-            BridgeTypeRef(CoreTypes.map, [
-              BridgeTypeRef(CoreTypes.string),
-              BridgeTypeRef(CoreTypes.string)
-            ]),
-          ),
-        )),
-        'maxRedirects': BridgeMethodDef(BridgeFunctionDef(
-          returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.int)),
-        )),
-        'method': BridgeMethodDef(BridgeFunctionDef(
-          returns: BridgeTypeAnnotation(
-            BridgeTypeRef(CoreTypes.string),
-          ),
-        )),
-        'persistentConnection': BridgeMethodDef(BridgeFunctionDef(
-          returns: BridgeTypeAnnotation(
-            BridgeTypeRef(CoreTypes.string),
-          ),
-        )),
-        'url': BridgeMethodDef(BridgeFunctionDef(
-          returns: BridgeTypeAnnotation(
-            BridgeTypeRef(CoreTypes.uri),
-          ),
-        )),
-      },
-      wrap: true);
+      BridgeClassDef(BridgeClassType($type, isAbstract: true),
+          constructors: {},
+          getters: {
+            'contentLength': BridgeMethodDef(BridgeFunctionDef(
+              returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.int),
+                  nullable: true),
+            )),
+            'finalized': BridgeMethodDef(BridgeFunctionDef(
+              returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool)),
+            )),
+            'followRedirects': BridgeMethodDef(BridgeFunctionDef(
+              returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.bool)),
+            )),
+            'headers': BridgeMethodDef(BridgeFunctionDef(
+              returns: BridgeTypeAnnotation(
+                BridgeTypeRef(CoreTypes.map, [
+                  BridgeTypeRef(CoreTypes.string),
+                  BridgeTypeRef(CoreTypes.string)
+                ]),
+              ),
+            )),
+            'maxRedirects': BridgeMethodDef(BridgeFunctionDef(
+              returns: BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.int)),
+            )),
+            'method': BridgeMethodDef(BridgeFunctionDef(
+              returns: BridgeTypeAnnotation(
+                BridgeTypeRef(CoreTypes.string),
+              ),
+            )),
+            'persistentConnection': BridgeMethodDef(BridgeFunctionDef(
+              returns: BridgeTypeAnnotation(
+                BridgeTypeRef(CoreTypes.string),
+              ),
+            )),
+            'url': BridgeMethodDef(BridgeFunctionDef(
+              returns: BridgeTypeAnnotation(
+                BridgeTypeRef(CoreTypes.uri),
+              ),
+            )),
+          },
+          wrap: true);
 
   final $Instance _superclass;
 
@@ -480,7 +479,7 @@ class $Response implements $Instance {
       )),
       'contentLength': BridgeMethodDef(BridgeFunctionDef(
         returns:
-        BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.int), nullable: true),
+            BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.int), nullable: true),
       )),
       'headers': BridgeMethodDef(BridgeFunctionDef(
         returns: BridgeTypeAnnotation(
@@ -577,7 +576,7 @@ class $StreamedResponse implements $Instance {
       )),
       'contentLength': BridgeMethodDef(BridgeFunctionDef(
         returns:
-        BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.int), nullable: true),
+            BridgeTypeAnnotation(BridgeTypeRef(CoreTypes.int), nullable: true),
       )),
       'headers': BridgeMethodDef(BridgeFunctionDef(
         returns: BridgeTypeAnnotation(
@@ -712,12 +711,6 @@ Object? _toBodyObject(Object? value) {
 
 extension FutureResponseExtension<T> on Future<T> {
   Future<T> onErrorMessage() {
-    onError((error, stackTrace) {
-      if (kDebugMode) {
-        print("Http error: $error");
-      }
-      throw error.toString();
-    });
     return this;
   }
 }

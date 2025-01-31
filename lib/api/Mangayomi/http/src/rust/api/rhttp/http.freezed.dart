@@ -17,12 +17,14 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$HttpHeaders {
   Object get field0 => throw _privateConstructorUsedError;
+
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Map<String, String> field0) map,
     required TResult Function(List<(String, String)> field0) list,
   }) =>
       throw _privateConstructorUsedError;
+
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(Map<String, String> field0)? map,
@@ -36,12 +38,14 @@ mixin _$HttpHeaders {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(HttpHeaders_Map value) map,
     required TResult Function(HttpHeaders_List value) list,
   }) =>
       throw _privateConstructorUsedError;
+
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(HttpHeaders_Map value)? map,
@@ -69,9 +73,9 @@ class _$HttpHeadersCopyWithImpl<$Res, $Val extends HttpHeaders>
     implements $HttpHeadersCopyWith<$Res> {
   _$HttpHeadersCopyWithImpl(this._value, this._then);
 
-  // ignore: unused_field
+// ignore: unused_field
   final $Val _value;
-  // ignore: unused_field
+// ignore: unused_field
   final $Res Function($Val) _then;
 
   /// Create a copy of HttpHeaders
@@ -122,7 +126,7 @@ class _$HttpHeaders_MapImpl extends HttpHeaders_Map {
   @override
   Map<String, String> get field0 {
     if (_field0 is EqualUnmodifiableMapView) return _field0;
-    // ignore: implicit_dynamic_type
+// ignore: implicit_dynamic_type
     return EqualUnmodifiableMapView(_field0);
   }
 
@@ -274,7 +278,7 @@ class _$HttpHeaders_ListImpl extends HttpHeaders_List {
   @override
   List<(String, String)> get field0 {
     if (_field0 is EqualUnmodifiableListView) return _field0;
-    // ignore: implicit_dynamic_type
+// ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_field0);
   }
 
@@ -442,9 +446,9 @@ class _$HttpResponseBodyCopyWithImpl<$Res, $Val extends HttpResponseBody>
     implements $HttpResponseBodyCopyWith<$Res> {
   _$HttpResponseBodyCopyWithImpl(this._value, this._then);
 
-  // ignore: unused_field
+// ignore: unused_field
   final $Val _value;
-  // ignore: unused_field
+// ignore: unused_field
   final $Res Function($Val) _then;
 
   /// Create a copy of HttpResponseBody

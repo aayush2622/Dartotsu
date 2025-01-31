@@ -2,8 +2,8 @@ import 'package:dantotsu/Theme/LanguageSwitcher.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
 
-Future<Color?> showColorPickerDialog(
-    BuildContext context, Color initialColor, {bool showTransparent = true}) async {
+Future<Color?> showColorPickerDialog(BuildContext context, Color initialColor,
+    {bool showTransparent = true}) async {
   Color selectedColor = initialColor;
   var theme = Theme.of(context).colorScheme;
   final Color? result = await showDialog<Color>(

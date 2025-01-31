@@ -11,7 +11,8 @@ class MediaPageViewModel extends GetxController {
   Media? cacheMediaData;
 
   Future<Media> getMediaDetails(Media media, BuildContext context) async {
-    var service = Provider.of<MediaServiceProvider>(context, listen: false).currentService;
+    var service = Provider.of<MediaServiceProvider>(context, listen: false)
+        .currentService;
     if (cacheMediaData == null) {
       cacheMediaData = (await service.data.query!.mediaDetails(media)) ?? media;
       dataLoaded.value = true;

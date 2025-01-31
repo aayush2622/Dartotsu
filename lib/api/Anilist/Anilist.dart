@@ -7,7 +7,6 @@ import 'package:http/http.dart' as http;
 
 import '../../Functions/Function.dart';
 import '../../Preferences/PrefManager.dart';
-
 import '../../Widgets/CustomBottomDialog.dart';
 import '../TypeFactory.dart';
 import 'AnilistMutations.dart';
@@ -17,7 +16,6 @@ import 'Login.dart' as anilist_login;
 var Anilist = Get.put(AnilistController());
 
 class AnilistController extends BaseServiceData {
-
   late final AnilistMutations mutation;
   List<String>? genres;
   Map<bool, List<String>>? tags;
@@ -84,7 +82,7 @@ class AnilistController extends BaseServiceData {
   bool getSavedToken() {
     token.value = PrefManager.getVal(PrefName.anilistToken);
 
-    if(token.isNotEmpty) query?.getUserData();
+    if (token.isNotEmpty) query?.getUserData();
 
     return token.isNotEmpty;
   }
@@ -100,7 +98,8 @@ class AnilistController extends BaseServiceData {
   }
 
   @override
-  void login(BuildContext context) => showCustomBottomDialog(context, anilist_login.login(context));
+  void login(BuildContext context) =>
+      showCustomBottomDialog(context, anilist_login.login(context));
 
   @override
   void removeSavedToken() {

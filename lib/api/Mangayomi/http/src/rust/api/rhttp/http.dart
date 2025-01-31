@@ -62,6 +62,7 @@ sealed class HttpHeaders with _$HttpHeaders {
   const factory HttpHeaders.map(
     Map<String, String> field0,
   ) = HttpHeaders_Map;
+
   const factory HttpHeaders.list(
     List<(String, String)> field0,
   ) = HttpHeaders_List;
@@ -115,9 +116,11 @@ sealed class HttpResponseBody with _$HttpResponseBody {
   const factory HttpResponseBody.text(
     String field0,
   ) = HttpResponseBody_Text;
+
   const factory HttpResponseBody.bytes(
     Uint8List field0,
   ) = HttpResponseBody_Bytes;
+
   const factory HttpResponseBody.stream() = HttpResponseBody_Stream;
 }
 

@@ -1,8 +1,8 @@
-
 import 'package:dantotsu/Theme/LanguageSwitcher.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+
 import '../../Services/ServiceSwitcher.dart';
 import 'MediaListTabs.dart';
 import 'MediaListViewModel.dart';
@@ -23,7 +23,8 @@ class MediaListScreenState extends State<MediaListScreen> {
   @override
   void initState() {
     super.initState();
-    _viewModel = Get.put(MediaListViewModel(), tag: widget.anime ? 'anime' : 'manga');
+    _viewModel =
+        Get.put(MediaListViewModel(), tag: widget.anime ? 'anime' : 'manga');
     _viewModel.loadAll(anime: widget.anime, userId: widget.id);
   }
 

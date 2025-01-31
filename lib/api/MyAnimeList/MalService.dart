@@ -28,22 +28,27 @@ class MalService extends MediaService {
   BaseServiceData get data => Mal;
 
   @override
-  BaseAnimeScreen get animeScreen => Get.put(MalAnimeScreen(Mal), tag: "MalAnimeScreen");
+  BaseAnimeScreen get animeScreen =>
+      Get.put(MalAnimeScreen(Mal), tag: "MalAnimeScreen");
 
   @override
-  BaseHomeScreen get homeScreen => Get.put(MalHomeScreen(Mal), tag: "MalHomeScreen");
+  BaseHomeScreen get homeScreen =>
+      Get.put(MalHomeScreen(Mal), tag: "MalHomeScreen");
 
   @override
-  BaseMangaScreen get mangaScreen => Get.put(MalMangaScreen(Mal), tag: "MalMangaScreen");
+  BaseMangaScreen get mangaScreen =>
+      Get.put(MalMangaScreen(Mal), tag: "MalMangaScreen");
 
   @override
-  BaseLoginScreen get loginScreen => Get.put(MalLoginScreen(Mal), tag: "MalLoginScreen");
+  BaseLoginScreen get loginScreen =>
+      Get.put(MalLoginScreen(Mal), tag: "MalLoginScreen");
 }
 
 class MalLoginScreen extends BaseLoginScreen {
   final MalController Mal;
 
   MalLoginScreen(this.Mal);
+
   @override
   void login(BuildContext context) => Mal.login(context);
 }

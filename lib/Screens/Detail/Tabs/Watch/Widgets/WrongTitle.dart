@@ -39,7 +39,6 @@ class WrongTitleDialogState extends State<WrongTitleDialog> {
     '';
     textEditingController.text = initialSearchText;
     searchFuture = _performSearch(initialSearchText);
-
   }
 
   @override

@@ -11,9 +11,12 @@ class PrefName {
   static const customColor = Pref(Location.General, 'customColor', 4280391411);
   static const useCustomColor = Pref(Location.General, 'useCustomColor', false);
   static const showYtButton = Pref(Location.General, 'showYtButton', true);
+  static const autoUpdateExtensions =
+      Pref(Location.General, 'autoUpdateExtensions', true);
 
   //home page
-  static const Pref<Map<dynamic,dynamic>> anilistHomeLayout = Pref(Location.General, 'homeLayoutOrder', {
+  static const Pref<Map<dynamic, dynamic>> anilistHomeLayout =
+      Pref(Location.General, 'homeLayoutOrder', {
     'Continue Watching': true,
     'Favourite Anime': false,
     'Planned Anime': false,
@@ -23,7 +26,8 @@ class PrefName {
     'Recommended': true,
   });
 
-  static const  Pref<Map<dynamic,dynamic>> malHomeLayout = Pref(Location.General, 'malHomeLayoutOrder', {
+  static const Pref<Map<dynamic, dynamic>> malHomeLayout =
+      Pref(Location.General, 'malHomeLayoutOrder', {
     'Continue Watching': true,
     'OnHold Anime': false,
     'Planned Anime': true,
@@ -34,7 +38,8 @@ class PrefName {
     'Dropped Manga': false,
   });
 
-  static const  Pref<Map<dynamic,dynamic>> simklHomeLayout = Pref(Location.General, 'simklHomeLayoutOrder', {
+  static const Pref<Map<dynamic, dynamic>> simklHomeLayout =
+      Pref(Location.General, 'simklHomeLayoutOrder', {
     'Continue Watching Anime': true,
     'Planned Anime': false,
     'Dropped Anime': false,
@@ -46,21 +51,32 @@ class PrefName {
     'Planned Movies': true,
     'Dropped Movies': false,
   });
+
+  static const Pref<Map<dynamic, dynamic>> extensionsHomeLayout =
+      Pref(Location.General, 'extensionsHomeLayoutOrder', {
+    'Continue Watching': true,
+    'Planned Series': false,
+    'Continue Reading': true,
+    'Planned Manga': false,
+  });
   static const anilistRemoveList =
       Pref(Location.General, 'anilistRemoveList', []);
-  static const Pref<List<int>> malRemoveList = Pref(Location.General, 'malRemoveList', []);
+  static const Pref<List<int>> malRemoveList =
+      Pref(Location.General, 'malRemoveList', []);
   static const anilistHidePrivate =
       Pref(Location.General, 'anilistHidePrivate', false);
 
   //anime page
-  static const Pref<Map<dynamic,dynamic>> anilistAnimeLayout = Pref(Location.General, 'animeLayoutOrder', {
+  static const Pref<Map<dynamic, dynamic>> anilistAnimeLayout =
+      Pref(Location.General, 'animeLayoutOrder', {
     'Recent Updates': true,
     'Trending Movies': true,
     'Top Rated Series': true,
     'Most Favourite Series': true,
   });
 
-  static const Pref<Map<dynamic,dynamic>> malAnimeLayout = Pref(Location.General, 'malAnimeLayoutOrder', {
+  static const Pref<Map<dynamic, dynamic>> malAnimeLayout =
+      Pref(Location.General, 'malAnimeLayoutOrder', {
     'Top Airing': true,
     'Trending Movies': true,
     'Top Rated Series': true,
@@ -76,14 +92,16 @@ class PrefName {
   static const MangaDefaultView = Pref(Location.General, 'MangaDefaultView', 0);
 
   //manga page
-  static const Pref<Map<dynamic,dynamic>> anilistMangaLayout = Pref(Location.General, 'mangaLayoutOrder', {
+  static const Pref<Map<dynamic, dynamic>> anilistMangaLayout =
+      Pref(Location.General, 'mangaLayoutOrder', {
     'Trending Manhwa': true,
     'Trending Novels': true,
     'Top Rated Manga': true,
     'Most Favourite Manga': true,
   });
 
-  static const Pref<Map<dynamic,dynamic>> malMangaLayout = Pref(Location.General, 'malMangaLayoutOrder', {
+  static const Pref<Map<dynamic, dynamic>> malMangaLayout =
+      Pref(Location.General, 'malMangaLayoutOrder', {
     'Trending Manhwa': true,
     'Trending Novels': true,
     'Top Rated Manga': true,
@@ -98,17 +116,20 @@ class PrefName {
   static const incognito = Pref(Location.General, 'incognito', false);
   static const offlineMode = Pref(Location.General, 'offline', false);
   static const customPath = Pref(Location.General, 'customPath', '');
-  static const defaultLanguage = Pref(Location.General, 'defaultLanguage', 'en');
+  static const defaultLanguage =
+      Pref(Location.General, 'defaultLanguage', 'en');
 
   //Player
   static const cursedSpeed = Pref(Location.General, 'cursedSpeed', false);
-  static const thumbLessSeekBar = Pref(Location.General, 'thumbLessSeekBar', false);
+  static const thumbLessSeekBar =
+      Pref(Location.General, 'thumbLessSeekBar', false);
   static Pref<PlayerSettings> playerSettings =
       Pref(Location.General, 'playerSettings', PlayerSettings());
 
   //Protection
   static const anilistToken = Pref(Location.Protected, 'AnilistToken', '');
-  static const Pref<ResponseToken?>  malToken = Pref(Location.Protected, 'MalToken', null);
+  static const Pref<ResponseToken?> malToken =
+      Pref(Location.Protected, 'MalToken', null);
   static const simklToken = Pref(Location.Protected, 'SimklToken', '');
   static const discordToken = Pref(Location.Protected, 'DiscordToken', '');
   static const discordUserName =
@@ -116,10 +137,10 @@ class PrefName {
   static const discordAvatar = Pref(Location.Protected, 'discordAvatar', '');
 
   // irrelevant
-  static const Pref<List<String>> GenresList = Pref(Location.Irrelevant, 'GenresList', []);
+  static const Pref<List<String>> GenresList =
+      Pref(Location.Irrelevant, 'GenresList', []);
   static const Pref<List<String>> TagsListIsAdult =
       Pref(Location.Irrelevant, 'TagsListIsAdult', []);
   static const Pref<List<String>> TagsListNonAdult =
       Pref(Location.Irrelevant, 'TagsListNonAdult', []);
 }
-

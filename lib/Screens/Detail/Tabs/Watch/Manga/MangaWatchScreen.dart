@@ -50,10 +50,10 @@ class MangaWatchScreenState extends BaseWatchScreen<MangaWatchScreen> {
         _buildTitle(),
         Obx(() {
           var chapterList = _viewModel.chapterList.value;
-          if (chapterList == null ) {
+          if (chapterList == null) {
             return const Center(child: CircularProgressIndicator());
           }
-          if (chapterList.isEmpty){
+          if (chapterList.isEmpty) {
             return Center(
               child: Text(
                 _viewModel.errorType.value == ErrorType.NotFound
@@ -97,7 +97,6 @@ class MangaWatchScreenState extends BaseWatchScreen<MangaWatchScreen> {
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 18, vertical: 4),
                 child: Obx(() {
-
                   List<List<Chapter>> reversed = _viewModel.reversed.value
                       ? chunks
                           .map((element) => element.reversed.toList())
@@ -137,7 +136,6 @@ class MangaWatchScreenState extends BaseWatchScreen<MangaWatchScreen> {
               maxLines: 1,
             ),
           ),
-
           IconButton(
             onPressed: () => _viewModel.settingsDialog(context, mediaData),
             icon: Icon(

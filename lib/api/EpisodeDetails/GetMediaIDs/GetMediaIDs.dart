@@ -61,8 +61,10 @@ class GetMediaIDs {
       (entry) => entry.toJson()[fieldName] == id,
     );
   }
+
   static var loading = true.obs;
   static var loaded = false.obs;
+
   static Future<List<AnimeID>?> getData() async {
     if (loaded.value) {
       while (loading.value) {

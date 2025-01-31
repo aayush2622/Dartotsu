@@ -26,9 +26,9 @@ Widget ItemFollower(BuildContext context, userData follower, String type) {
               shape: const CircleBorder(),
               clipBehavior: Clip.antiAlias,
               child: Container(
-                width: 92,
-                height: 92,
-                color: Colors.transparent,
+                  width: 92,
+                  height: 92,
+                  color: Colors.transparent,
                   child: Stack(
                     children: [
                       cachedNetworkImage(

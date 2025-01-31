@@ -173,7 +173,7 @@ class SimklHomeScreen extends BaseHomeScreen {
 
     final homeLayoutMap = loadData(PrefName.simklHomeLayout);
     final sectionMap = {
-      for (var section in mediaSections) section.pairTitle : section
+      for (var section in mediaSections) section.pairTitle: section
     };
     final sectionWidgets = homeLayoutMap.entries
         .where((entry) => entry.value)

@@ -86,5 +86,4 @@ abstract class BaseSettingsScreen<T extends StatefulWidget> extends State<T> {
       ),
     );
   }
-
 }

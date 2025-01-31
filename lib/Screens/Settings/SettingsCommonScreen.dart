@@ -7,7 +7,6 @@ import '../../Adaptor/Settings/SettingsAdaptor.dart';
 import '../../DataClass/Setting.dart';
 import '../../Functions/Function.dart';
 import '../../Preferences/PrefManager.dart';
-
 import '../../Theme/LanguageSwitcher.dart';
 import '../../Widgets/AlertDialogBuilder.dart';
 import 'BaseSettingsScreen.dart';
@@ -51,7 +50,7 @@ class SettingsCommonScreenState extends BaseSettingsScreen {
               final result = await FilePicker.platform.getDirectoryPath(
                 dialogTitle: getString.selectDirectory,
                 lockParentWindow: true,
-                initialDirectory: path ,
+                initialDirectory: path,
               );
               if (result != null) {
                 PrefManager.setVal(PrefName.customPath, result);
@@ -83,7 +82,7 @@ class SettingsCommonScreenState extends BaseSettingsScreen {
           ),
           Setting(
             type: SettingType.normal,
-            name: getString.manageLayout(getString.home,getString.anilist),
+            name: getString.manageLayout(getString.home, getString.anilist),
             description: getString.manageLayoutDescription(getString.home),
             icon: Icons.tune,
             onClick: () async {
@@ -95,7 +94,8 @@ class SettingsCommonScreenState extends BaseSettingsScreen {
                   List<bool>.from(homeLayoutMap.values.toList());
 
               AlertDialogBuilder(context)
-                ..setTitle(getString.manageLayout(getString.home,getString.anilist))
+                ..setTitle(
+                    getString.manageLayout(getString.home, getString.anilist))
                 ..reorderableMultiSelectableItems(
                   titles,
                   checkedStates,
@@ -125,7 +125,7 @@ class SettingsCommonScreenState extends BaseSettingsScreen {
         settings: [
           Setting(
             type: SettingType.normal,
-            name: getString.manageLayout(getString.home,getString.mal),
+            name: getString.manageLayout(getString.home, getString.mal),
             description: getString.manageLayoutDescription(getString.home),
             icon: Icons.tune,
             onClick: () async {
@@ -136,7 +136,8 @@ class SettingsCommonScreenState extends BaseSettingsScreen {
                   List<bool>.from(homeLayoutMap.values.toList());
 
               AlertDialogBuilder(context)
-                ..setTitle(getString.manageLayout(getString.home,getString.mal))
+                ..setTitle(
+                    getString.manageLayout(getString.home, getString.mal))
                 ..reorderableMultiSelectableItems(
                   titles,
                   checkedStates,
@@ -171,27 +172,29 @@ class SettingsCommonScreenState extends BaseSettingsScreen {
         settings: [
           Setting(
             type: SettingType.normal,
-            name: getString.manageLayout(getString.home,getString.simkl),
+            name: getString.manageLayout(getString.home, getString.simkl),
             description: getString.manageLayoutDescription(getString.home),
             icon: Icons.tune,
             onClick: () async {
-              final homeLayoutMap = PrefManager.getVal(PrefName.simklHomeLayout);
+              final homeLayoutMap =
+                  PrefManager.getVal(PrefName.simklHomeLayout);
               List<String> titles =
-              List<String>.from(homeLayoutMap.keys.toList());
+                  List<String>.from(homeLayoutMap.keys.toList());
               List<bool> checkedStates =
-              List<bool>.from(homeLayoutMap.values.toList());
+                  List<bool>.from(homeLayoutMap.values.toList());
 
               AlertDialogBuilder(context)
-                ..setTitle(getString.manageLayout(getString.home,getString.simkl))
+                ..setTitle(
+                    getString.manageLayout(getString.home, getString.simkl))
                 ..reorderableMultiSelectableItems(
                   titles,
                   checkedStates,
-                      (reorderedItems) => titles = reorderedItems,
-                      (newCheckedStates) => checkedStates = newCheckedStates,
+                  (reorderedItems) => titles = reorderedItems,
+                  (newCheckedStates) => checkedStates = newCheckedStates,
                 )
                 ..setPositiveButton(
                   getString.ok,
-                      () {
+                  () {
                     PrefManager.setVal(
                       PrefName.simklHomeLayout,
                       Map.fromIterables(titles, checkedStates),

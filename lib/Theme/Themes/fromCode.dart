@@ -38,7 +38,7 @@ ThemeData getCustomLightTheme(int color) {
 ThemeData getCustomDarkTheme(int color) {
   final schemeColor = FlexSchemeColor.from(primary: Color(color));
   final flexThemeData = FlexThemeData.dark(
-    colors:schemeColor.copyWith(
+    colors: schemeColor.copyWith(
       primaryLightRef: schemeColor.primary,
     ),
     primary: schemeColor.primary,

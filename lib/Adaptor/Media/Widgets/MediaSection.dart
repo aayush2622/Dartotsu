@@ -105,6 +105,7 @@ Widget MediaSection({
     ],
   );
 }
+
 List<Widget> buildNullIndicator(BuildContext context, IconData? icon,
     String? message, String? buttonLabel, void Function()? onPressed) {
   var theme = Theme.of(context).colorScheme;

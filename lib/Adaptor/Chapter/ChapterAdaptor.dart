@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
@@ -90,7 +89,8 @@ class ChapterAdaptorState extends State<ChapterAdaptor> {
       ),
     );
   }
-  Widget _buildCompactView(){
+
+  Widget _buildCompactView() {
     return LayoutBuilder(
       builder: (context, constraints) {
         final parentWidth = constraints.maxWidth;
@@ -99,12 +99,13 @@ class ChapterAdaptorState extends State<ChapterAdaptor> {
         return AnimatedSwitcher(
           duration: const Duration(milliseconds: 500),
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
+            padding:
+                const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
             child: StaggeredGrid.count(
               crossAxisCount: crossAxisCount,
               children: List.generate(
                 chapterList.length,
-                    (index) {
+                (index) {
                   return SlideAndScaleAnimation(
                     initialScale: 0.0,
                     finalScale: 1.0,
@@ -133,5 +134,3 @@ class ChapterAdaptorState extends State<ChapterAdaptor> {
     );
   }
 }
-
-

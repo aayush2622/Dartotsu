@@ -1,5 +1,6 @@
 import 'package:dantotsu/Functions/string_extensions.dart';
 import 'package:dantotsu/api/Mangayomi/Model/Source.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 import '../Preferences/IsarDataClasses/Selected/Selected.dart';
 import '../api/Anilist/Data/fuzzyData.dart';
@@ -14,10 +15,34 @@ import 'Character.dart';
 import 'Manga.dart';
 import 'User.dart';
 
+part 'Data/Media.g.dart';
+part 'Media/AnilistMedia.dart';
+part 'Media/MalMedia.dart';
+part 'Media/SimklMedia.dart';
+
+class MediaMapWrapper {
+  final Map<String, List<Media>> mediaMap;
+
+  MediaMapWrapper({required this.mediaMap});
+
+  factory MediaMapWrapper.fromJson(Map<String, dynamic> json) {
+    return MediaMapWrapper(
+      mediaMap: json.map((key, value) => MapEntry(
+          key, (value as List).map((e) => Media.fromJson(e)).toList())),
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return mediaMap.map((key, value) =>
+        MapEntry(key, value.map((media) => media.toJson()).toList()));
+  }
+}
+
+@JsonSerializable()
 class Media {
   final Anime? anime;
   final Manga? manga;
-  final int id;
+  int id;
 
   String? typeMAL;
   final String? name;
@@ -85,8 +110,8 @@ class Media {
   int? idMAL;
   String? idKitsu;
   int? idSimkl;
-
   Source? sourceData;
+
   Media({
     this.anime,
     this.manga,
@@ -153,228 +178,33 @@ class Media {
     this.sourceData,
   });
 
+  factory Media.fromJson(Map<String, dynamic> json) => _$MediaFromJson(json);
+
+  Map<String, dynamic> toJson() => _$MediaToJson(this);
+
   String mainName() => name ?? nameMAL ?? nameRomaji;
 
   String mangaName() => countryOfOrigin == 'JP' ? mainName() : nameRomaji;
 
   //Anilist
-  static Media mediaData(anilistApi.Media apiMedia) {
-    return Media(
-      id: apiMedia.id,
-      idAnilist: apiMedia.id,
-      idMAL: apiMedia.idMal ??
-          GetMediaIDs.fromID(type: AnimeIDType.anilistId, id: apiMedia.id)
-              ?.malId,
-      name: apiMedia.title?.english,
-      nameRomaji: apiMedia.title?.romaji ?? '',
-      userPreferredName: apiMedia.title?.userPreferred ?? '',
-      cover: apiMedia.coverImage?.large ?? apiMedia.coverImage?.medium,
-      banner: apiMedia.bannerImage,
-      status: apiMedia.status?.name,
-      isFav: apiMedia.isFavourite ?? false,
-      isAdult: apiMedia.isAdult ?? false,
-      isListPrivate: apiMedia.mediaListEntry?.private ?? false,
-      userProgress: apiMedia.mediaListEntry?.progress,
-      userScore: apiMedia.mediaListEntry?.score?.toInt() ?? 0,
-      userStatus: apiMedia.mediaListEntry?.status?.name,
-      meanScore: apiMedia.meanScore,
-      startDate: apiMedia.startDate,
-      endDate: apiMedia.endDate,
-      favourites: apiMedia.favourites,
-      popularity: apiMedia.popularity,
-      format: apiMedia.format?.name,
-      genres: apiMedia.genres ?? [],
-      timeUntilAiring:
-          (apiMedia.nextAiringEpisode?.timeUntilAiring?.toInt() ?? 0) * 1000,
-      anime: apiMedia.type == anilistApi.MediaType.ANIME
-          ? Anime(
-              totalEpisodes: apiMedia.episodes,
-              nextAiringEpisode:
-                  (apiMedia.nextAiringEpisode?.episode?.toInt() ?? 0) - 1,
-            )
-          : null,
-      manga: apiMedia.type == anilistApi.MediaType.MANGA
-          ? Manga(totalChapters: apiMedia.chapters)
-          : null,
-    );
-  }
+  static Media mediaData(anilistApi.Media apiMedia) => _mediaData(apiMedia);
 
-  static Media mediaEdgeData(anilistApi.MediaEdge apiMediaEdge) {
-    var media = mediaData(apiMediaEdge.node!);
-    media.relation = apiMediaEdge.relationType?.name;
-    return media;
-  }
+  static Media mediaEdgeData(anilistApi.MediaEdge apiMediaEdge) =>
+      _mediaEdgeData(apiMediaEdge);
 
-  static Media mediaListData(anilistApi.MediaList mediaList) {
-    var media = mediaData(mediaList.media!);
-    media.userProgress = mediaList.progress;
-    media.isListPrivate = mediaList.private ?? false;
-    media.userScore = mediaList.score?.toInt() ?? 0;
-    media.userStatus = mediaList.status?.name;
-    media.userUpdatedAt = mediaList.updatedAt;
-    media.genres = mediaList.media?.genres ?? [];
-    return media;
-  }
+  static Media mediaListData(anilistApi.MediaList mediaList) =>
+      _mediaListData(mediaList);
 
   //MyAnimeList
-  static Media fromMal(malApi.Media apiMedia) {
-    String mapAiringStatus(String status) {
-      switch (status) {
-        case 'finished_airing':
-          return 'FINISHED';
-        case 'currently_airing':
-          return 'RELEASING';
-        case 'currently_publishing':
-          return 'RELEASING';
-        case 'not_yet_published':
-          return 'NOT_YET_RELEASED';
-        case 'not_yet_aired':
-          return 'NOT_YET_RELEASED';
-        default:
-          return 'UNKNOWN';
-      }
-    }
+  static Media fromMal(malApi.Media apiMedia) => _fromMal(apiMedia);
 
-    anilistApi.MediaType? getMediaType(String? mediaType) {
-      anilistApi.MediaType type;
-      if (['tv', 'ova', 'movie', 'special', 'ona', 'music']
-          .contains(mediaType)) {
-        type = anilistApi.MediaType.ANIME;
-      } else if ([
-        'unknown',
-        'manga',
-        'novel',
-        'one_shot',
-        'doujinshi',
-        'manhwa',
-        'manhua',
-        'oel'
-      ].contains(mediaType)) {
-        type = anilistApi.MediaType.MANGA;
-      } else {
-        type = anilistApi.MediaType.ANIME;
-      }
-      return type;
-    }
+  //Simkl
+  static Media fromSimklAnime(simklApi.Anime apiMedia) =>
+      _fromSimklAnime(apiMedia);
 
-    return Media(
-      id: apiMedia.id!,
-      idAnilist: GetMediaIDs.fromID(type: AnimeIDType.malId, id: apiMedia.id)
-          ?.anilistId,
-      idKitsu: GetMediaIDs.fromID(type: AnimeIDType.malId, id: apiMedia.id)
-          ?.kitsuId?.toString(),
-      idMAL: apiMedia.id,
-      name: apiMedia.title ?? '',
-      nameRomaji: apiMedia.alternativeTitles?.ja ?? apiMedia.title ?? '',
-      userPreferredName: apiMedia.title ?? '',
-      cover: apiMedia.mainPicture?.medium ?? '',
-      banner: apiMedia.mainPicture?.large ?? apiMedia.mainPicture?.medium ?? '',
-      status: mapAiringStatus(apiMedia.status ?? ''),
-      isAdult: apiMedia.nsfw == 'black',
-      userStatus: apiMedia.myListStatus?.status,
-      userProgress: apiMedia.myListStatus?.numEpisodesWatched ??
-          apiMedia.myListStatus?.numChaptersRead,
-      userScore: ((apiMedia.myListStatus?.score ?? 0) * 10).toInt(),
-      meanScore: ((apiMedia.mean ?? 0) * 10).toInt(),
-      genres: apiMedia.genres?.map((genre) => genre.name ?? '').toList() ?? [],
-      format: apiMedia.mediaType,
-      anime: getMediaType(apiMedia.mediaType) == anilistApi.MediaType.ANIME
-          ? Anime(
-              totalEpisodes:
-                  apiMedia.numEpisodes != 0 ? apiMedia.numEpisodes : null,
-            )
-          : null,
-      manga: getMediaType(apiMedia.mediaType) == anilistApi.MediaType.MANGA
-          ? Manga(
-              totalChapters:
-                  apiMedia.numChapters != 0 ? apiMedia.numChapters : null,
-            )
-          : null,
-    );
-  }
+  static Media fromSimklSeries(simklApi.ShowElement apiMedia) =>
+      _fromSimklSeries(apiMedia);
 
-  static Media fromSimklAnime(simklApi.Anime apiMedia) {
-    var cover = 'https://wsrv.nl/?url=https://simkl.in/posters/${apiMedia.show?.poster}_m.webp';
-    return Media(
-      id: apiMedia.show!.ids!.simkl!,
-      idAnilist: apiMedia.show!.ids!.anilist?.toNullInt(),
-      idSimkl: apiMedia.show!.ids!.simkl!,
-      idKitsu: apiMedia.show!.ids!.kitsu?.toNullInt()?.toString(),
-      idMAL: apiMedia.show!.ids!.mal?.toNullInt(),
-      nameRomaji: apiMedia.show!.title ?? '',
-      userPreferredName: apiMedia.show!.title ?? '',
-      cover: cover,
-      banner: cover,
-      userStatus: apiMedia.status?.name,
-      userProgress: apiMedia.watchedEpisodesCount,
-      userScore: (apiMedia.userRating?.toInt() ?? 0) * 10,
-      meanScore:  ((apiMedia.rating ?? 0) * 10).toInt(),
-      format: 'anime',
-      status: mapSimklAiringStatus(apiMedia.releaseStatus?.toLowerCase() ?? 'UNKNOWN'),
-      anime: Anime(
-        totalEpisodes: apiMedia.totalEpisodesCount,
-      ),
-      isAdult: false,
-    );
-  }
-  static Media fromSimklSeries(simklApi.ShowElement apiMedia) {
-    var cover = 'https://wsrv.nl/?url=https://simkl.in/posters/${apiMedia.show?.poster}_m.webp';
-    return Media(
-      id: apiMedia.show!.ids!.simkl!,
-      idAnilist: apiMedia.show!.ids!.anilist?.toNullInt(),
-      idSimkl: apiMedia.show!.ids!.simkl!,
-      idKitsu: apiMedia.show!.ids!.kitsu?.toNullInt()?.toString(),
-      idMAL: apiMedia.show!.ids!.mal?.toNullInt(),
-      nameRomaji: apiMedia.show?.title ?? '',
-      userPreferredName: apiMedia.show?.title ?? '',
-      cover: cover,
-      banner: cover,
-      userStatus: apiMedia.status?.name,
-      userProgress: apiMedia.watchedEpisodesCount,
-      userScore: (apiMedia.userRating?.toInt() ?? 0) * 10,
-      meanScore: ((apiMedia.rating ?? 0) * 10).toInt(),
-      status: mapSimklAiringStatus(apiMedia.releaseStatus?.toLowerCase() ?? 'UNKNOWN'),
-      format:'tvShow',
-      anime: Anime(
-        totalEpisodes: apiMedia.totalEpisodesCount,
-      ),
-      isAdult: false,
-    );
-  }
-  static Media fromSimklMovies(simklApi.MovieElement apiMedia) {
-    var cover = 'https://wsrv.nl/?url=https://simkl.in/posters/${apiMedia.movie?.poster}_m.webp';
-    return Media(
-      id: apiMedia.movie!.ids!.simkl!,
-      idAnilist: apiMedia.movie!.ids!.anilist?.toNullInt(),
-      idSimkl: apiMedia.movie!.ids!.simkl!,
-      idKitsu: apiMedia.movie!.ids!.kitsu?.toNullInt()?.toString(),
-      idMAL: apiMedia.movie!.ids!.mal?.toNullInt(),
-      nameRomaji: apiMedia.movie!.title ?? '',
-      userPreferredName: apiMedia.movie!.title ?? '',
-      cover: cover,
-      banner: cover,
-      userStatus: apiMedia.status?.name,
-      userProgress: apiMedia.watchedEpisodesCount,
-      userScore: (apiMedia.userRating?.toInt() ?? 0) * 10,
-      meanScore:  ((apiMedia.rating ?? 0) * 10).toInt(),
-      status: mapSimklAiringStatus(apiMedia.releaseStatus?.toLowerCase() ?? 'UNKNOWN'),
-      format:'movie',
-      anime: Anime(
-        totalEpisodes: 1,
-      ),
-      isAdult: false,
-    );
-  }
-  static String mapSimklAiringStatus(String status) {
-    switch (status) {
-      case 'ended':
-        return 'FINISHED';
-      case 'ongoing':
-        return 'RELEASING';
-      case 'upcoming':
-        return 'NOT_YET_RELEASED';
-      default:
-        return status.toUpperCase();
-    }
-  }
+  static Media fromSimklMovies(simklApi.MovieElement apiMedia) =>
+      _fromSimklMovies(apiMedia);
 }

@@ -172,6 +172,7 @@ class _FetchNovelSourcesListProviderElement
 
   @override
   int? get id => (origin as FetchNovelSourcesListProvider).id;
+
   @override
   dynamic get reFresh => (origin as FetchNovelSourcesListProvider).reFresh;
 }

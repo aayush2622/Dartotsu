@@ -1,9 +1,10 @@
+import 'package:async/async.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' as r;
 import 'package:fuzzywuzzy/fuzzywuzzy.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:async/async.dart';
+
 import '../../../../DataClass/Media.dart';
 import '../../../../Preferences/IsarDataClasses/Selected/Selected.dart';
 import '../../../../Preferences/IsarDataClasses/ShowResponse/ShowResponse.dart';
@@ -135,19 +136,19 @@ abstract class BaseParser extends GetxController {
 
     List<MManga> sortedResults = media!.list.isNotEmpty
         ? (media.list
-      ..sort((a, b) {
-        final aRatio = ratio(
-            a.name!.toLowerCase(), mediaData.mainName().toLowerCase());
-        final bRatio = ratio(
-            b.name!.toLowerCase(), mediaData.mainName().toLowerCase());
-        return bRatio.compareTo(aRatio);
-      }))
+          ..sort((a, b) {
+            final aRatio = ratio(
+                a.name!.toLowerCase(), mediaData.mainName().toLowerCase());
+            final bRatio = ratio(
+                b.name!.toLowerCase(), mediaData.mainName().toLowerCase());
+            return bRatio.compareTo(aRatio);
+          }))
         : [];
     response = sortedResults.firstOrNull;
 
     if (response == null ||
         ratio(response.name!.toLowerCase(),
-            mediaData.mainName().toLowerCase()) <
+                mediaData.mainName().toLowerCase()) <
             100) {
       status.value = "Searching : ${mediaData.nameRomaji}";
       final mediaFuture = search(
@@ -159,13 +160,13 @@ abstract class BaseParser extends GetxController {
       final media = await mediaFuture;
       List<MManga> sortedRomajiResults = media!.list.isNotEmpty
           ? (media.list
-        ..sort((a, b) {
-          final aRatio = ratio(
-              a.name!.toLowerCase(), mediaData.nameRomaji.toLowerCase());
-          final bRatio = ratio(
-              b.name!.toLowerCase(), mediaData.nameRomaji.toLowerCase());
-          return bRatio.compareTo(aRatio);
-        }))
+            ..sort((a, b) {
+              final aRatio = ratio(
+                  a.name!.toLowerCase(), mediaData.nameRomaji.toLowerCase());
+              final bRatio = ratio(
+                  b.name!.toLowerCase(), mediaData.nameRomaji.toLowerCase());
+              return bRatio.compareTo(aRatio);
+            }))
           : [];
       var closestRomaji = sortedRomajiResults.firstOrNull;
       if (response == null) {
@@ -193,13 +194,13 @@ abstract class BaseParser extends GetxController {
           final media = await mediaFuture;
           List<MManga> sortedResults = media!.list.isNotEmpty
               ? (media.list
-            ..sort((a, b) {
-              final aRatio =
-              ratio(a.name!.toLowerCase(), synonym.toLowerCase());
-              final bRatio =
-              ratio(b.name!.toLowerCase(), synonym.toLowerCase());
-              return bRatio.compareTo(aRatio);
-            }))
+                ..sort((a, b) {
+                  final aRatio =
+                      ratio(a.name!.toLowerCase(), synonym.toLowerCase());
+                  final bRatio =
+                      ratio(b.name!.toLowerCase(), synonym.toLowerCase());
+                  return bRatio.compareTo(aRatio);
+                }))
               : [];
           var closest = sortedResults.firstOrNull;
           if (closest != null) {

@@ -6,13 +6,14 @@ import 'package:dantotsu/api/Mangayomi/Eval/javascript/http.dart';
 import 'package:dart_eval/dart_eval_bridge.dart';
 import 'package:dart_eval/stdlib/core.dart';
 import 'package:encrypt/encrypt.dart' as encrypt;
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:html/dom.dart' hide Text;
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:js_packer/js_packer.dart';
 import 'package:json_path/json_path.dart';
 import 'package:xpath_selector_html_parser/xpath_selector_html_parser.dart';
-import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+
 import '../../../../../main.dart';
 import '../../../Model/Manga.dart';
 import '../../../anime_extractors/dood_extractor.dart';
@@ -81,7 +82,7 @@ class MBridge {
       //Return one attr
       else if (query.nodes.length == 1) {
         String attr =
-        query.attr != null ? query.attr!.trim().trimLeft().trimRight() : "";
+            query.attr != null ? query.attr!.trim().trimLeft().trimRight() : "";
         if (attr.isNotEmpty) {
           attrs = [attr];
         }
@@ -286,7 +287,7 @@ class MBridge {
             date,
             dateFormat,
             dateFormatLocale,
-                (val) {
+            (val) {
               dateFormat = val.$1;
               dateFormatLocale = val.$2;
               error = val.$3;
@@ -435,7 +436,7 @@ class MBridge {
       ]).anyWordIn(date)) {
         return cal.subtract(Duration(hours: number)).millisecondsSinceEpoch;
       } else if (WordSet(
-          ["menit", "dakika", "min", "minute", "minuto", "นาที", "دقائق"])
+              ["menit", "dakika", "min", "minute", "minuto", "นาที", "دقائق"])
           .anyWordIn(date)) {
         return cal.subtract(Duration(minutes: number)).millisecondsSinceEpoch;
       } else if (WordSet(["detik", "segundo", "second", "วินาที", "sec"])
@@ -475,8 +476,8 @@ class MBridge {
         final cleanedDate = date
             .split(" ")
             .map((it) => it.contains(RegExp(r"\d\D\D"))
-            ? it.replaceAll(RegExp(r"\D"), "")
-            : it)
+                ? it.replaceAll(RegExp(r"\D"), "")
+                : it)
             .join(" ");
         return DateFormat(dateFormat, dateFormatLocale)
             .parse(cleanedDate)
@@ -517,8 +518,8 @@ class MBridge {
               final cleanedDate = date
                   .split(" ")
                   .map((it) => it.contains(RegExp(r"\d\D\D"))
-                  ? it.replaceAll(RegExp(r"\D"), "")
-                  : it)
+                      ? it.replaceAll(RegExp(r"\D"), "")
+                      : it)
                   .join(" ");
               return DateFormat(dateFormat, locale)
                   .parse(cleanedDate)
@@ -623,6 +624,7 @@ class MBridge {
       return text;
     }
   }
+
   static Future<String> evaluateJavascriptViaWebview(
       String url, Map<String, String> headers, List<String> scripts,
       {int time = 30}) async {

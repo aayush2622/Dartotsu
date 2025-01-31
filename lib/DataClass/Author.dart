@@ -1,6 +1,10 @@
+import 'package:json_annotation/json_annotation.dart';
 import '../api/Anilist/Data/character.dart';
 import 'Media.dart';
 
+part 'Data/Author.g.dart';
+
+@JsonSerializable()
 class author {
   int id;
   String? name;
@@ -17,4 +21,8 @@ class author {
     this.yearMedia,
     this.character,
   });
+
+  factory author.fromJson(Map<String, dynamic> json) => _$authorFromJson(json);
+
+  Map<String, dynamic> toJson() => _$authorToJson(this);
 }

@@ -29,9 +29,18 @@ class FloatingBottomNavBar extends StatelessWidget {
     final themeNotifier = Provider.of<ThemeNotifier>(context);
     // Define the navigation items
     final navItems = [
-      _NavItem(index: 0, icon: Icons.movie_filter_rounded, label: getString.anime.toUpperCase()),
-      _NavItem(index: 1, icon: Icons.home_rounded, label: getString.home.toUpperCase()),
-      _NavItem(index: 2, icon: Icons.import_contacts, label: getString.manga.toUpperCase()),
+      _NavItem(
+          index: 0,
+          icon: Icons.movie_filter_rounded,
+          label: getString.anime.toUpperCase()),
+      _NavItem(
+          index: 1,
+          icon: Icons.home_rounded,
+          label: getString.home.toUpperCase()),
+      _NavItem(
+          index: 2,
+          icon: Icons.import_contacts,
+          label: getString.manga.toUpperCase()),
     ];
 
     return Positioned(
@@ -87,7 +96,8 @@ class FloatingBottomNavBar extends StatelessWidget {
           itemBuilder: (context, index) {
             MediaService service = mediaServices[index];
             return ListTile(
-              selected: provider.currentService.runtimeType == service.runtimeType,
+              selected:
+                  provider.currentService.runtimeType == service.runtimeType,
               leading: loadSvg(
                 service.iconPath,
                 width: 32.0,

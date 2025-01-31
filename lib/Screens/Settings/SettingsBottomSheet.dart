@@ -7,9 +7,10 @@ import 'package:dantotsu/Widgets/CustomBottomDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:provider/provider.dart';
-import '../../Theme/LanguageSwitcher.dart';
+
 import '../../Preferences/PrefManager.dart';
 import '../../Services/ServiceSwitcher.dart';
+import '../../Theme/LanguageSwitcher.dart';
 
 class SettingsBottomSheet extends StatefulWidget {
   const SettingsBottomSheet({super.key});
@@ -184,14 +185,14 @@ class SettingsBottomSheetState extends State<SettingsBottomSheet> {
               });
             }),
         const SizedBox(height: 10.0),
-        _buildListTile(
-            context, getString.activity(2), Icons.inbox, const SettingsScreen()),
+        _buildListTile(context, getString.activity(2), Icons.inbox,
+            const SettingsScreen()),
         const SizedBox(height: 10.0),
-        _buildListTile(
-            context, getString.extension(2), Icons.extension, const ExtensionScreen()),
+        _buildListTile(context, getString.extension(2), Icons.extension,
+            const ExtensionScreen()),
         const SizedBox(height: 10.0),
-        _buildListTile(
-            context, getString.settings, Icons.settings, const SettingsScreen()),
+        _buildListTile(context, getString.settings, Icons.settings,
+            const SettingsScreen()),
       ],
     );
   }

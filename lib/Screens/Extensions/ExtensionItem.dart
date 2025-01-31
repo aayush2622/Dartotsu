@@ -42,16 +42,16 @@ class _ExtensionListTileWidgetState
     setState(() => _isLoading = true);
 
     widget.source.itemType == ItemType.manga
-        ? await ref.watch(fetchMangaSourcesListProvider(
-        id: widget.source.id, reFresh: true)
-        .future)
+        ? await ref.watch(
+            fetchMangaSourcesListProvider(id: widget.source.id, reFresh: true)
+                .future)
         : widget.source.itemType == ItemType.anime
-        ? await ref.watch(fetchAnimeSourcesListProvider(
-        id: widget.source.id, reFresh: true)
-        .future)
-        : await ref.watch(fetchNovelSourcesListProvider(
-        id: widget.source.id, reFresh: true)
-        .future);
+            ? await ref.watch(fetchAnimeSourcesListProvider(
+                    id: widget.source.id, reFresh: true)
+                .future)
+            : await ref.watch(fetchNovelSourcesListProvider(
+                    id: widget.source.id, reFresh: true)
+                .future);
 
     if (mounted) setState(() => _isLoading = false);
   }
@@ -166,15 +166,15 @@ class _ExtensionListTileWidgetState
                       setState(() => _isLoading = true);
                       widget.source.itemType == ItemType.manga
                           ? await ref.watch(fetchMangaSourcesListProvider(
-                          id: widget.source.id, reFresh: true)
-                          .future)
+                                  id: widget.source.id, reFresh: true)
+                              .future)
                           : widget.source.itemType == ItemType.anime
-                          ? await ref.watch(fetchAnimeSourcesListProvider(
-                          id: widget.source.id, reFresh: true)
-                          .future)
-                          : await ref.watch(fetchNovelSourcesListProvider(
-                          id: widget.source.id, reFresh: true)
-                          .future);
+                              ? await ref.watch(fetchAnimeSourcesListProvider(
+                                      id: widget.source.id, reFresh: true)
+                                  .future)
+                              : await ref.watch(fetchNovelSourcesListProvider(
+                                      id: widget.source.id, reFresh: true)
+                                  .future);
                       if (mounted) {
                         setState(() => _isLoading = false);
                       }
@@ -218,7 +218,9 @@ class _ExtensionListTileWidgetState
                   },
                   icon: Icon(
                     size: 18,
-                    updateAvailable ? Icons.update_rounded : FontAwesome.trash_solid,
+                    updateAvailable
+                        ? Icons.update_rounded
+                        : FontAwesome.trash_solid,
                   ),
                 ),
                 IconButton(

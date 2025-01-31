@@ -8,12 +8,12 @@ import '../http/m_client.dart';
 
 class DoodExtractor {
   Future<List<Video>> videosFromUrl(
-      String url, {
-        String? quality,
-        bool redirect = true,
-      }) async {
+    String url, {
+    String? quality,
+    bool redirect = true,
+  }) async {
     final InterceptedClient client =
-    MClient.init(reqcopyWith: {'useDartHttpClient': true});
+        MClient.init(reqcopyWith: {'useDartHttpClient': true});
     final newQuality = quality ?? ('Doodstream ${redirect ? ' mirror' : ''}');
 
     try {
@@ -50,7 +50,7 @@ class DoodExtractor {
         'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     return List.generate(
         length,
-            (index) => allowedChars.runes
+        (index) => allowedChars.runes
             .elementAt(Random().nextInt(allowedChars.length))).join();
   }
 }

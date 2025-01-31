@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dantotsu/Adaptor/Episode/EpisodeAdaptor.dart';
 import 'package:dantotsu/DataClass/Episode.dart';
 import 'package:dantotsu/DataClass/Media.dart' as m;
+import 'package:dantotsu/Functions/Extensions.dart';
 import 'package:dantotsu/Functions/Function.dart';
 import 'package:dantotsu/Functions/string_extensions.dart';
 import 'package:dantotsu/Preferences/IsarDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
@@ -16,11 +17,9 @@ import 'package:dantotsu/api/Mangayomi/Model/Source.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
 import 'package:window_manager/window_manager.dart';
 
-import '../../../../../../Services/ServiceSwitcher.dart';
 import '../../../../../../api/Discord/Discord.dart';
 import '../../../../../../api/Discord/DiscordService.dart';
 import '../../../../../../api/EpisodeDetails/Aniskip/Aniskip.dart';
@@ -55,13 +54,18 @@ class _PlayerControllerState extends State<PlayerController> {
   final timeStampsText = ''.obs;
   final isFullScreen = false.obs;
   final isControlsLocked = false.obs;
+  int? currentProgress;
+  int? maxProgress;
 
   @override
   void initState() {
     super.initState();
     media = widget.player.widget.media;
-    videos = widget.player.widget.videos;
     currentEpisode = widget.player.widget.currentEpisode;
+    var sourceName = context.currentService(listen: false).getName;
+    var key = "${media.id}-${currentEpisode.number}-$sourceName";
+
+    videos = widget.player.widget.videos;
     source = widget.player.widget.source;
     showEpisodes = widget.player.showEpisodes;
     resizeMode = widget.player.resizeMode;
@@ -73,10 +77,12 @@ class _PlayerControllerState extends State<PlayerController> {
     controller = widget.player.videoPlayerController;
     currentQuality = videos[widget.player.widget.index];
     controller.listenToPlayerStream();
-    _onInit();
+    currentProgress = loadCustomData<int>("$key-current");
+    maxProgress = loadCustomData<int>("$key-max");
+    _init();
   }
 
-  Future<void> _onInit() async {
+  Future<void> _init() async {
     while (controller.maxTime.value == '00:00') {
       await Future.delayed(const Duration(milliseconds: 100));
     }
@@ -85,14 +91,16 @@ class _PlayerControllerState extends State<PlayerController> {
     setTimeStamps();
 
     var list = List<int>.from(
-      PrefManager.getCustomVal<List<int>>("continueAnimeList") ?? [],
+      loadCustomData<List<int>>("continueAnimeList") ?? [],
     );
+
     if (list.contains(media.id)) {
       list.remove(media.id);
     }
 
     list.add(media.id);
-    PrefManager.setCustomVal<List<int>>("continueAnimeList", list);
+
+    saveCustomData<List<int>>("continueAnimeList", list);
 
     void processTracks(List<v.Track>? tracks, controllerTracks, String type) {
       for (var track in controllerTracks) {
@@ -124,18 +132,15 @@ class _PlayerControllerState extends State<PlayerController> {
     }
   }
 
-  Future<void> _saveProgress(int currentProgress) async {
-    if (!mounted) return;
-    var sourceName = Provider.of<MediaServiceProvider>(context, listen: false)
-        .currentService
-        .getName;
-    var maxProgress = controller.maxTime.value;
-    PrefManager.setCustomVal<int>(
-        "${media.id}-${currentEpisode.number}-$sourceName-current",
-        currentProgress);
-    PrefManager.setCustomVal<int>(
-        "${media.id}-${currentEpisode.number}-$sourceName-max",
-        _timeStringToSeconds(maxProgress).toInt());
+  Future<void> setDiscordRpc() async {
+    Discord.setRpc(
+      media,
+      episode: currentEpisode,
+      eTime: _timeStringToSeconds(
+        controller.maxTime.value,
+      ).toInt(),
+      currentTime: currentProgress ?? 0,
+    );
   }
 
   Future<void> setTimeStamps() async {
@@ -154,8 +159,8 @@ class _PlayerControllerState extends State<PlayerController> {
           timeStampsText.value = timeStamps
                   .firstWhereOrNull(
                     (e) =>
-                        e.interval.startTime <= v.inSeconds &&
-                        e.interval.endTime >= v.inSeconds,
+                        (e.interval.startTime <= v.inSeconds) &&
+                        (e.interval.endTime >= v.inSeconds),
                   )
                   ?.getType() ??
               '';
@@ -164,21 +169,13 @@ class _PlayerControllerState extends State<PlayerController> {
     );
   }
 
-  Future<void> setDiscordRpc() async {
-    var sourceName = Provider.of<MediaServiceProvider>(context, listen: false)
-        .currentService
-        .getName;
-    var currentProgress = PrefManager.getCustomVal<int>(
-      "${media.id}-${currentEpisode.number}-$sourceName-current",
-    );
-    Discord.setRpc(
-      media,
-      episode: currentEpisode,
-      eTime: _timeStringToSeconds(
-        controller.maxTime.value,
-      ).toInt(),
-      currentTime: currentProgress ?? 0,
-    );
+  Future<void> _saveProgress(int currentProgress) async {
+    if (!mounted) return;
+    var sourceName = context.currentService(listen: false).getName;
+    var key = "${media.id}-${currentEpisode.number}-$sourceName";
+    var maxProgress = controller.maxTime.value;
+    saveCustomData<int>("$key-current", currentProgress);
+    saveCustomData<int>("$key-max", _timeStringToSeconds(maxProgress).toInt());
   }
 
   @override
@@ -186,29 +183,6 @@ class _PlayerControllerState extends State<PlayerController> {
     super.dispose();
     if (DiscordService.isInitialized) DiscordService.stopRPC();
     WakelockPlus.disable();
-  }
-
-  Future initFullScreen() async =>
-      isFullScreen.value = await WindowManager.instance.isFullScreen();
-
-  String _formatTime(int seconds) {
-    final hours = seconds ~/ 3600;
-    final minutes = (seconds % 3600) ~/ 60;
-    final secs = seconds % 60;
-    return [
-      if (hours > 0) hours.toString().padLeft(2, '0'),
-      minutes.toString().padLeft(2, '0'),
-      secs.toString().padLeft(2, '0'),
-    ].join(":");
-  }
-
-  double _timeStringToSeconds(String time) {
-    final parts = time.split(':').map(int.parse).toList();
-    if (parts.length == 2) return (parts[0] * 60 + parts[1]).toDouble();
-    if (parts.length == 3) {
-      return (parts[0] * 3600 + parts[1] * 60 + parts[2]).toDouble();
-    }
-    return 0.0;
   }
 
   @override
@@ -235,6 +209,29 @@ class _PlayerControllerState extends State<PlayerController> {
     );
   }
 
+  Future initFullScreen() async =>
+      isFullScreen.value = await WindowManager.instance.isFullScreen();
+
+  String _formatTime(int seconds) {
+    final hours = seconds ~/ 3600;
+    final minutes = (seconds % 3600) ~/ 60;
+    final secs = seconds % 60;
+    return [
+      if (hours > 0) hours.toString().padLeft(2, '0'),
+      minutes.toString().padLeft(2, '0'),
+      secs.toString().padLeft(2, '0'),
+    ].join(":");
+  }
+
+  double _timeStringToSeconds(String time) {
+    final parts = time.split(':').map(int.parse).toList();
+    if (parts.length == 2) return (parts[0] * 60 + parts[1]).toDouble();
+    if (parts.length == 3) {
+      return (parts[0] * 3600 + parts[1] * 60 + parts[2]).toDouble();
+    }
+    return 0.0;
+  }
+
   Widget _buildTimeInfo() {
     return Obx(
       () => Row(
@@ -244,7 +241,10 @@ class _PlayerControllerState extends State<PlayerController> {
           Row(
             children: [
               Text(
-                controller.currentTime.value,
+                controller.currentTime.value == '00:00' &&
+                        currentProgress != null
+                    ? _formatTime(currentProgress!)
+                    : controller.currentTime.value,
                 style: const TextStyle(color: Colors.white),
               ),
               Text(
@@ -254,7 +254,9 @@ class _PlayerControllerState extends State<PlayerController> {
                 ),
               ),
               Text(
-                controller.maxTime.value,
+                maxProgress != null
+                    ? _formatTime(maxProgress!)
+                    : controller.maxTime.value,
                 style: TextStyle(
                   color: Colors.white.withValues(alpha: 0.5),
                 ),
@@ -280,7 +282,7 @@ class _PlayerControllerState extends State<PlayerController> {
   }
 
   Widget _buildProgressBar() {
-    var thumbLess = PrefManager.getVal(PrefName.thumbLessSeekBar);
+    var thumbLess = loadData(PrefName.thumbLessSeekBar);
     return SizedBox(
       height: 18,
       child: Column(
@@ -305,9 +307,13 @@ class _PlayerControllerState extends State<PlayerController> {
                 () {
                   var bufferingValue =
                       _timeStringToSeconds(controller.bufferingTime.value);
-                  var currentValue =
-                      _timeStringToSeconds(controller.currentTime.value);
-                  var maxValue = _timeStringToSeconds(controller.maxTime.value);
+                  var currentValue = controller.currentTime.value == '00:00' &&
+                          currentProgress != null
+                      ? currentProgress!.toDouble()
+                      : _timeStringToSeconds(controller.currentTime.value);
+
+                  var maxValue = maxProgress?.toDouble() ??
+                      _timeStringToSeconds(controller.maxTime.value);
 
                   return Stack(
                     children: [
@@ -579,7 +585,7 @@ class _PlayerControllerState extends State<PlayerController> {
                         ? Icons.pause_rounded
                         : Icons.play_arrow_rounded,
                     size: 42,
-                    onPressed: _togglePlayPause,
+                    onPressed: controller.playOrPause,
                   ),
           ),
           const SizedBox(width: 36),
@@ -951,7 +957,4 @@ class _PlayerControllerState extends State<PlayerController> {
     );
     showCustomBottomDialog(context, episodeDialog);
   }
-
-  void _togglePlayPause() =>
-      controller.isPlaying.value ? controller.pause() : controller.play();
 }

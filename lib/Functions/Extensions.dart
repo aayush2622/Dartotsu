@@ -21,9 +21,11 @@ extension IntExtension on int {
     var context = navigatorKey.currentContext ?? Get.context;
     return MediaQuery.of(context!).size.width;
   }
+
   double screenWidthWithContext(BuildContext context) {
     return MediaQuery.of(context).size.width;
   }
+
   double screenHeight() {
     var context = navigatorKey.currentContext ?? Get.context;
     return MediaQuery.of(context!).size.height;
@@ -32,6 +34,7 @@ extension IntExtension on int {
 
 extension Stuff on BuildContext {
   MediaService currentService({bool listen = true}) {
-    return Provider.of<MediaServiceProvider>(this,listen: listen).currentService;
+    return Provider.of<MediaServiceProvider>(this, listen: listen)
+        .currentService;
   }
 }

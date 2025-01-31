@@ -9,7 +9,6 @@ import '../../../DataClass/MediaSection.dart';
 import '../../../DataClass/User.dart';
 import '../../../Functions/Function.dart';
 import '../../../Preferences/PrefManager.dart';
-
 import '../../../Theme/LanguageSwitcher.dart';
 import '../../../main.dart';
 import '../Anilist.dart';
@@ -101,8 +100,7 @@ class AnilistHomeScreen extends BaseHomeScreen {
         pairTitle: 'Favorite Anime',
         list: animeFav.value,
         emptyIcon: Icons.heart_broken,
-        emptyMessage:
-            getString.noFavourites,
+        emptyMessage: getString.noFavourites,
       ),
       MediaSectionData(
         type: 0,
@@ -130,8 +128,7 @@ class AnilistHomeScreen extends BaseHomeScreen {
         pairTitle: 'Favorite Manga',
         list: mangaFav.value,
         emptyIcon: Icons.heart_broken,
-        emptyMessage:
-            getString.noFavourites,
+        emptyMessage: getString.noFavourites,
       ),
       MediaSectionData(
         type: 0,
@@ -156,7 +153,7 @@ class AnilistHomeScreen extends BaseHomeScreen {
 
     final homeLayoutMap = PrefManager.getVal(PrefName.anilistHomeLayout);
     final sectionMap = {
-      for (var section in mediaSections) section.pairTitle : section
+      for (var section in mediaSections) section.pairTitle: section
     };
     final sectionWidgets = homeLayoutMap.entries
         .where((entry) => entry.value)

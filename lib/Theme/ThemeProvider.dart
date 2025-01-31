@@ -31,11 +31,12 @@ class ThemeNotifier extends ChangeNotifier {
     bool isDark;
 
     if (darkMode == 0) {
-      isDark = WidgetsBinding.instance.window.platformBrightness == Brightness.dark;
+      isDark =
+          WidgetsBinding.instance.window.platformBrightness == Brightness.dark;
       PrefManager.setVal(PrefName.isDarkMode, isDark ? 1 : 2);
     } else if (darkMode == 1) {
       isDark = true;
-    } else{
+    } else {
       isDark = false;
     }
 

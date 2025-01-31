@@ -1,5 +1,5 @@
-
 import 'package:isar/isar.dart';
+
 part 'ShowResponse.g.dart';
 
 @collection
@@ -15,11 +15,10 @@ class ShowResponse {
   final List<String> otherNames;
   final int? total;
 
-  ShowResponse({
-    required this.name,
-    required this.link,
-    required this.coverUrl,
-    this.otherNames = const [],
-    this.total
-  });
+  ShowResponse(
+      {required this.name,
+      required this.link,
+      required this.coverUrl,
+      this.otherNames = const [],
+      this.total});
 }

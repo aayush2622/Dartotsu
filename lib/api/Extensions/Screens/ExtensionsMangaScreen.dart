@@ -1,14 +1,13 @@
 import 'package:dantotsu/api/Mangayomi/Eval/dart/model/m_pages.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
 import '../../../Adaptor/Media/Widgets/MediaSection.dart';
 import '../../../DataClass/Media.dart';
-import '../../../Preferences/PrefManager.dart';
+import '../../../Functions/Function.dart';
+import '../../../Functions/GetExtensions.dart';
 import '../../../Services/Screens/BaseMangaScreen.dart';
 import '../../../logger.dart';
-import '../../Mangayomi/Extensions/extensions_provider.dart';
 import '../../Mangayomi/Model/Manga.dart';
 import '../../Mangayomi/Model/Source.dart';
 import '../../Mangayomi/Search/get_popular.dart';
@@ -22,70 +21,45 @@ class ExtensionsMangaScreen extends BaseMangaScreen {
   @override
   Future<void> loadAll() async {
     resetPageData();
-    final container = ProviderContainer();
-    final sourcesAsyncValue = await container
-        .read(getExtensionsStreamProvider(ItemType.manga).future);
-
-    final ids = loadCustomData<List<int>?>('sortedExtensions_${ItemType.manga.name}') ?? [];
-    final installedSources = sourcesAsyncValue
-        .where((source) => source.isAdded!)
-        .toList();
-
-    final sortedInstalledSources = [
-      ...installedSources
-          .where((source) => ids.contains(source.id))
-          .toList()
-        ..sort((a, b) => ids.indexOf(a.id!).compareTo(ids.indexOf(b.id!))),
-      ...installedSources.where((source) => !ids.contains(source.id)),
+    var sources = [
+      ...(await Extensions.getSortedExtension(ItemType.manga)).take(4),
+      ...(await Extensions.getSortedExtension(ItemType.novel)).take(4),
     ];
 
-    _buildSections(sortedInstalledSources);
-    for (var source in sortedInstalledSources) {
+    _buildSections(sources);
+    for (var source in sources) {
       try {
-        var result = (await getLatest(
-          source: source,
-          page: 1,
-        ))
+        var result = (await getLatest(source: source, page: 1))
             ?.toMedia(isAnime: false, source: source);
 
-        if (result != null && result.isNotEmpty) {
-          trending.value = result;
+        if (result?.isNotEmpty ?? false) {
+          trending.value = result!;
           return;
         }
       } catch (e) {
-        Logger.log('Source ${source.name} failed: ${e.toString()}');
+        Logger.log('Source ${source.name} failed: $e');
+        continue;
       }
     }
-
   }
 
   Future<void> _buildSections(List<Source> sources) async {
     List<Future<void>> tasks = [];
-    var limit = 6;
     for (var source in sources) {
-      if (limit-- <= 0) break;
       tasks.add(
         () async {
           try {
-            var result = (await getLatest(
-              source: source,
-              page: 1,
-            ))
+            var result = (await getLatest(source: source, page: 1))
                 ?.toMedia(isAnime: false, source: source);
             if (result != null && result.isNotEmpty) {
-              data.value = {
-                ...data.value!,
-                source.name!: result,
-              };
+              data.value = {...data.value!, source.name ?? 'Unknown': result};
             }
           } catch (e) {
-            Logger.log(
-                'Failed to load data for source: ${source.name}, error: $e');
+            Logger.log('Failed to load data ${source.name}, error: $e');
           }
         }(),
       );
     }
-
     await Future.wait(tasks);
   }
 
@@ -115,7 +89,7 @@ class ExtensionsMangaScreen extends BaseMangaScreen {
   }
 
   @override
-  int get refreshID => 91;
+  int get refreshID => RefreshId.Extensions.mangaPage;
 
   void resetPageData() {
     data.value = {};

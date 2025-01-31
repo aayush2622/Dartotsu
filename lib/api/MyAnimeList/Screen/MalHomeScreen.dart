@@ -9,7 +9,6 @@ import '../../../DataClass/Media.dart';
 import '../../../DataClass/MediaSection.dart';
 import '../../../Functions/Function.dart';
 import '../../../Preferences/PrefManager.dart';
-
 import '../../../Services/Screens/BaseHomeScreen.dart';
 import '../../../main.dart';
 import '../Mal.dart';
@@ -78,14 +77,14 @@ class MalHomeScreen extends BaseHomeScreen {
     hidden.value = res["hidden"] ?? [];
 
     if (res['Watching'] != null && res['Watching']!.isNotEmpty) {
-      listImage.add((List.from(res["Watching"] ?? [])..shuffle(Random()))
-          .first
-          .banner);
-      listImage.add((List.from(res["Watching"] ?? [])..shuffle(Random()))
-          .first
-          .banner);
-      listImages.value = listImage;
+      listImage.add(
+          (List.from(res["Watching"] ?? [])..shuffle(Random())).first.banner);
     }
+    if (res['Reading'] != null && res['Reading']!.isNotEmpty) {
+      listImage.add(
+          (List.from(res["Reading"] ?? [])..shuffle(Random())).first.banner);
+    }
+    listImages.value = listImage;
   }
 
   @override
@@ -109,8 +108,7 @@ class MalHomeScreen extends BaseHomeScreen {
         pairTitle: 'OnHold Anime',
         list: animeOnHold.value,
         emptyIcon: Icons.movie_filter_rounded,
-        emptyMessage:
-            getString.noOnHold,
+        emptyMessage: getString.noOnHold,
       ),
       MediaSectionData(
         type: 0,
@@ -146,8 +144,7 @@ class MalHomeScreen extends BaseHomeScreen {
         pairTitle: 'OnHold Manga',
         list: mangaOnHold.value,
         emptyIcon: Icons.import_contacts,
-        emptyMessage:
-            getString.noOnHold,
+        emptyMessage: getString.noOnHold,
       ),
       MediaSectionData(
         type: 0,
