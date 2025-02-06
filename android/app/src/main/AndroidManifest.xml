@@ -61,7 +61,7 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="dantotsu" android:host="simkl" />
+                <data android:scheme="dartotsu" android:host="simkl" />
 
             </intent-filter>
         </activity>

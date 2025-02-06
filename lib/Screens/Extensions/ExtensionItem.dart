@@ -239,7 +239,7 @@ class _ExtensionListTileWidgetState
                     );
                   },
                   icon: const Icon(FontAwesome.ellipsis_vertical_solid),
-                )
+                ),
               ],
             ),
           );

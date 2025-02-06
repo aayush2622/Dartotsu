@@ -47,7 +47,10 @@ abstract class BaseParser extends GetxController {
         ..sort((a, b) => ids.indexOf(a.id!).compareTo(ids.indexOf(b.id!))),
       ...s.where((source) => !ids.contains(source.id)),
     ];
-
+    if (sortedSources.isEmpty) {
+      sourcesLoaded.value = true;
+      return;
+    }
     sourceList = sortedSources;
 
     String nameAndLang(Source source) {
