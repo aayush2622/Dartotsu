@@ -131,26 +131,30 @@ class MediaInfoPageState extends State<MediaInfoPage> {
         backgroundColor: Theme.of(context).colorScheme.surface,
         items: [
           BottomNavigationBarItem(
-            icon: const Icon(Icons.info),
-            label: getString.info,
+            icon: _selectedIndex.value == 0 ? const SizedBox() : const Icon(Icons.info),
+            label: getString.info.toUpperCase(),
           ),
           BottomNavigationBarItem(
-            icon: Icon(
+            icon: _selectedIndex.value == 1
+                ? const SizedBox()
+                : Icon(
               isAnime
                   ? Icons.movie_filter_rounded
                   : mediaData.format?.toLowerCase() != 'novel'
-                      ? Icons.import_contacts
-                      : Icons.book_rounded,
+                  ? Icons.import_contacts
+                  : Icons.book_rounded,
             ),
-            label: isAnime ? getString.watch : getString.read,
+            label: isAnime ? getString.watch.toUpperCase() : getString.read.toUpperCase(),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.chat_bubble_rounded),
-            label: getString.comments,
+            icon: _selectedIndex.value == 2 ? const SizedBox() : const Icon(Icons.chat_bubble_rounded),
+            label: getString.comments.toUpperCase(),
           ),
         ],
         selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
         unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
+        showSelectedLabels: true,
+        showUnselectedLabels: false,
         iconSize: 26,
         currentIndex: _selectedIndex.value,
         onTap: (index) async {
