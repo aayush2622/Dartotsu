@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:blur/blur.dart';
 import 'package:dantotsu/Functions/Extensions.dart';
 import 'package:dantotsu/Screens/Detail/Tabs/Info/InfoPage.dart';
@@ -88,6 +90,13 @@ class MediaInfoPageState extends State<MediaInfoPage> {
     return ExpandablePageView(
       controller: pageController,
       onPageChanged: (index) => _selectedIndex.value = index,
+      scrollBehavior: ScrollConfiguration.of(context).copyWith(
+        dragDevices: {
+          PointerDeviceKind.touch,
+          PointerDeviceKind.mouse,
+          PointerDeviceKind.trackpad
+        },
+      ),
       children: [
         loaded
             ? SingleChildScrollView(child: InfoPage(mediaData: mediaData))
