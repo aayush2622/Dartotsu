@@ -1,6 +1,6 @@
 import 'package:dantotsu/Functions/Function.dart';
-import 'package:dantotsu/api/Mangayomi/Eval/dart/model/video.dart';
-import 'package:dantotsu/api/Mangayomi/Search/getVideo.dart';
+import 'package:dantotsu/api/Sources/Eval/dart/model/video.dart';
+import 'package:dantotsu/api/Sources/Search/getVideo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
@@ -10,7 +10,7 @@ import '../../DataClass/Episode.dart';
 import '../../DataClass/Media.dart';
 import '../../Screens/Player/Player.dart';
 import '../../Widgets/CustomBottomDialog.dart';
-import '../../api/Mangayomi/Model/Source.dart';
+import '../../api/Sources/Model/Source.dart';
 import 'EpisodeCompactViewHolder.dart';
 import 'EpisodeGridViewHolder.dart';
 import 'EpisodeListViewHolder.dart';
@@ -280,11 +280,15 @@ void onEpisodeClick(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            item.quality,
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
+                          Expanded(
+                            child: Text(
+                              item.quality,
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              maxLines: 1,
                             ),
                           ),
                           Icon(

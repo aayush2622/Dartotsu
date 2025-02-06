@@ -2,8 +2,8 @@ import 'dart:math';
 
 import 'package:dantotsu/DataClass/Episode.dart';
 import 'package:dantotsu/Functions/Function.dart';
-import 'package:dantotsu/api/Mangayomi/Eval/dart/model/video.dart';
-import 'package:dantotsu/api/Mangayomi/Model/Source.dart';
+import 'package:dantotsu/api/Sources/Eval/dart/model/video.dart';
+import 'package:dantotsu/api/Sources/Model/Source.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 

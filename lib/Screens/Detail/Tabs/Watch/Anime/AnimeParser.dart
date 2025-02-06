@@ -9,10 +9,10 @@ import '../../../../../DataClass/Media.dart';
 import '../../../../../api/EpisodeDetails/Anify/Anify.dart';
 import '../../../../../api/EpisodeDetails/Jikan/Jikan.dart';
 import '../../../../../api/EpisodeDetails/Kitsu/Kitsu.dart';
-import '../../../../../api/Mangayomi/Eval/dart/model/m_chapter.dart';
-import '../../../../../api/Mangayomi/Eval/dart/model/m_manga.dart';
-import '../../../../../api/Mangayomi/Model/Source.dart';
-import '../../../../../api/Mangayomi/Search/get_detail.dart';
+import '../../../../../api/Sources/Eval/dart/model/m_chapter.dart';
+import '../../../../../api/Sources/Eval/dart/model/m_manga.dart';
+import '../../../../../api/Sources/Model/Source.dart';
+import '../../../../../api/Sources/Search/get_detail.dart';
 import '../Functions/ParseChapterNumber.dart';
 import 'Widget/AnimeCompactSettings.dart';
 

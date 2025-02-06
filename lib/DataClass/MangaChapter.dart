@@ -1,4 +1,4 @@
-import '../api/Mangayomi/Eval/dart/model/m_chapter.dart';
+import '../api/Sources/Eval/dart/model/m_chapter.dart';
 
 class MangaChapter {
   final String number;

@@ -1,16 +1,20 @@
 import 'package:dantotsu/Screens/Extensions/ExtensionList.dart';
 import 'package:dantotsu/Widgets/AlertDialogBuilder.dart';
-import 'package:dantotsu/api/Mangayomi/Model/Source.dart';
+import 'package:dantotsu/api/Sources/Model/Source.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get/get.dart';
+import 'package:icons_plus/icons_plus.dart';
 import 'package:isar/isar.dart';
 
+import '../../Functions/Function.dart';
+import '../../Functions/GetExtensions.dart';
 import '../../Preferences/PrefManager.dart';
 import '../../StorageProvider.dart';
 import '../../Theme/LanguageSwitcher.dart';
 import '../../Widgets/ScrollConfig.dart';
-import '../../api/Mangayomi/Model/Manga.dart';
+import '../../api/Sources/Model/Manga.dart';
 import '../../main.dart';
 import '../Settings/language.dart';
 
@@ -68,24 +72,91 @@ class _BrowseScreenState extends ConsumerState<ExtensionScreen>
             ),
             iconTheme: IconThemeData(color: theme.primary),
             actions: [
-              IconButton(
-                icon: Icon(Icons.language_rounded, color: theme.primary),
-                onPressed: () {
-                  AlertDialogBuilder(context)
-                    ..setTitle(getString.language)
-                    ..singleChoiceItems(
-                      sortedLanguagesMap.keys.toList(),
-                      sortedLanguagesMap.keys
-                          .toList()
-                          .indexOf(_selectedLanguage),
-                      (index) {
-                        setState(() => _selectedLanguage =
-                            sortedLanguagesMap.keys.elementAt(index));
-                      },
-                    )
-                    ..show();
-                },
-              ),
+              if (_tabBarController.index == 1 ||
+                  _tabBarController.index == 3 ||
+                  _tabBarController.index == 5) ...[
+                IconButton(
+                  icon: Icon(Bootstrap.github),
+                  onPressed: () {
+                    var type = _tabBarController.index == 1
+                        ? ItemType.anime
+                        : _tabBarController.index == 3
+                            ? ItemType.manga
+                            : ItemType.novel;
+                    var text = '';
+
+
+                    AlertDialogBuilder(context)
+                      ..setTitle('${type.name.capitalize} ${getString.source}')
+                      ..setCustomView(
+                        Obx(
+                          () {
+                            var installedRepo = _tabBarController.index == 1
+                                ? Extensions.animeRepo.value
+                                : _tabBarController.index == 3
+                                ? Extensions.mangaRepo.value
+                                : Extensions.novelRepo.value;
+                            return Column(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                if (installedRepo.isNotEmpty) ...[
+                                  GestureDetector(
+                                    onTap: () => copyToClipboard(installedRepo),
+                                    onLongPress: () =>
+                                        Extensions.removeRepo(type),
+                                    child: Text(
+                                      installedRepo,
+                                      style: TextStyle(
+                                        fontFamily: 'Poppins',
+                                        fontSize: 12.0,
+                                        color: theme.onSurface,
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 8.0),
+                                ],
+                                TextField(
+                                  decoration: const InputDecoration(
+                                      hintText: 'Repo URL'),
+                                  onChanged: (value) => text = value,
+                                ),
+                              ],
+                            );
+                          },
+                        ),
+                      )
+                      ..setPositiveButton(
+                        getString.ok,
+                        () {
+                          if (text.isEmpty) return;
+                          Extensions.setRepo(type, text);
+                        },
+                      )
+                      ..setNegativeButton(getString.cancel, null)
+                      ..show();
+                  },
+                ),
+                IconButton(
+                  icon: Icon(Icons.language_rounded, color: theme.primary),
+                  onPressed: () {
+                    AlertDialogBuilder(context)
+                      ..setTitle(getString.language)
+                      ..singleChoiceItems(
+                        sortedLanguagesMap.keys.toList(),
+                        sortedLanguagesMap.keys
+                            .toList()
+                            .indexOf(_selectedLanguage),
+                        (index) {
+                          setState(() => _selectedLanguage =
+                              sortedLanguagesMap.keys.elementAt(index));
+                        },
+                      )
+                      ..show();
+                  },
+                ),
+              ],
               SizedBox(width: 8.0),
             ],
           ),

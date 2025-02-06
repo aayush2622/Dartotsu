@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../api/Mangayomi/Eval/dart/model/source_preference.dart';
-import '../../../api/Mangayomi/Model/Source.dart';
-import '../../../api/Mangayomi/extension_preferences_providers.dart';
+import '../../../api/Sources/Eval/dart/model/source_preference.dart';
+import '../../../api/Sources/Model/Source.dart';
+import '../../../api/Sources/extension_preferences_providers.dart';
 import 'ListTileChapterFilter.dart';
 
 class SourcePreferenceWidget extends StatefulWidget {

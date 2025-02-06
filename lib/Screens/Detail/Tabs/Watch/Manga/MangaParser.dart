@@ -3,10 +3,10 @@ import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
 import '../../../../../DataClass/Chapter.dart';
 import '../../../../../DataClass/Media.dart';
-import '../../../../../api/Mangayomi/Eval/dart/model/m_chapter.dart';
-import '../../../../../api/Mangayomi/Eval/dart/model/m_manga.dart';
-import '../../../../../api/Mangayomi/Model/Source.dart';
-import '../../../../../api/Mangayomi/Search/get_detail.dart';
+import '../../../../../api/Sources/Eval/dart/model/m_chapter.dart';
+import '../../../../../api/Sources/Eval/dart/model/m_manga.dart';
+import '../../../../../api/Sources/Model/Source.dart';
+import '../../../../../api/Sources/Search/get_detail.dart';
 import '../BaseParser.dart';
 import '../Functions/ParseChapterNumber.dart';
 import 'Widget/MangaCompactSettings.dart';

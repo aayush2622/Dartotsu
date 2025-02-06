@@ -1,16 +1,16 @@
 import 'dart:io';
 
-import 'package:dantotsu/api/Mangayomi/Model/settings.dart';
+import 'package:dantotsu/api/Sources/Model/settings.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:isar/isar.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-import 'api/Mangayomi/Eval/dart/model/source_preference.dart';
-import 'api/Mangayomi/Model/Manga.dart';
-import 'api/Mangayomi/Model/Source.dart';
-import 'api/Mangayomi/Model/chapter.dart';
+import 'api/Sources/Eval/dart/model/source_preference.dart';
+import 'api/Sources/Model/Manga.dart';
+import 'api/Sources/Model/Source.dart';
+import 'api/Sources/Model/chapter.dart';
 
 class StorageProvider {
   static Future<bool> requestPermission() async {
@@ -129,7 +129,7 @@ class StorageProvider {
       SettingsSchema,
       SourcePreferenceSchema,
       SourcePreferenceStringValueSchema,
-    ], directory: dir!.path, name: "dartotsuDb", inspector: inspector);
+    ], directory: dir!.path, name: "sources", inspector: inspector);
 
     if (isar.settings.filter().idEqualTo(227).isEmptySync()) {
       isar.writeTxnSync(

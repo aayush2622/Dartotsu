@@ -9,7 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../api/Mangayomi/http/m_client.dart';
+import '../../api/Sources/http/m_client.dart';
 import '../../main.dart';
 
 class MangaWebView extends ConsumerStatefulWidget {

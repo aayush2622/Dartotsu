@@ -126,49 +126,50 @@ class MyApp extends StatelessWidget {
       ),
     );
     return KeyboardListener(
-        focusNode: FocusNode(),
-        onKeyEvent: (KeyEvent event) async {
-          if (event is KeyDownEvent) {
-            if (event.logicalKey == LogicalKeyboardKey.escape) {
-              if (Get.previousRoute.isNotEmpty) {
-                Get.back();
-              }
-            } else if (event.logicalKey == LogicalKeyboardKey.f11) {
+      focusNode: FocusNode(),
+      onKeyEvent: (KeyEvent event) async {
+        if (event is KeyDownEvent) {
+          if (event.logicalKey == LogicalKeyboardKey.escape) {
+            if (Get.previousRoute.isNotEmpty) {
+              Get.back();
+            }
+          } else if (event.logicalKey == LogicalKeyboardKey.f11) {
+            bool isFullScreen = await windowManager.isFullScreen();
+            windowManager.setFullScreen(!isFullScreen);
+          } else if (event.logicalKey == LogicalKeyboardKey.enter) {
+            final isAltPressed = HardwareKeyboard.instance.logicalKeysPressed
+                    .contains(LogicalKeyboardKey.altLeft) ||
+                HardwareKeyboard.instance.logicalKeysPressed
+                    .contains(LogicalKeyboardKey.altRight);
+            if (isAltPressed) {
               bool isFullScreen = await windowManager.isFullScreen();
               windowManager.setFullScreen(!isFullScreen);
-            } else if (event.logicalKey == LogicalKeyboardKey.enter) {
-              final isAltPressed = HardwareKeyboard.instance.logicalKeysPressed
-                      .contains(LogicalKeyboardKey.altLeft) ||
-                  HardwareKeyboard.instance.logicalKeysPressed
-                      .contains(LogicalKeyboardKey.altRight);
-              if (isAltPressed) {
-                bool isFullScreen = await windowManager.isFullScreen();
-                windowManager.setFullScreen(!isFullScreen);
-              }
             }
           }
+        }
+      },
+      child: DynamicColorBuilder(
+        builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
+          return GetMaterialApp(
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: AppLocalizations.supportedLocales,
+            locale: Locale(loadData(PrefName.defaultLanguage)),
+            navigatorKey: navigatorKey,
+            title: 'Dartotsu',
+            themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
+            debugShowCheckedModeBanner: false,
+            theme: getTheme(lightDynamic, themeManager),
+            darkTheme: getTheme(darkDynamic, themeManager),
+            home: const MainActivity(),
+          );
         },
-        child: DynamicColorBuilder(
-          builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
-            return GetMaterialApp(
-              localizationsDelegates: const [
-                AppLocalizations.delegate,
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-                GlobalCupertinoLocalizations.delegate,
-              ],
-              supportedLocales: AppLocalizations.supportedLocales,
-              locale: Locale(loadData(PrefName.defaultLanguage)),
-              navigatorKey: navigatorKey,
-              title: 'Dartotsu',
-              themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
-              debugShowCheckedModeBanner: false,
-              theme: getTheme(lightDynamic, themeManager),
-              darkTheme: getTheme(darkDynamic, themeManager),
-              home: const MainActivity(),
-            );
-          },
-        ));
+      ),
+    );
   }
 }
 
@@ -188,7 +189,6 @@ class MainActivityState extends State<MainActivity> {
 
   @override
   Widget build(BuildContext context) {
-
     navbar = FloatingBottomNavBar(
       selectedIndex: _selectedIndex,
       onTabSelected: _onTabSelected,

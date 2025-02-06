@@ -11,11 +11,11 @@ import '../../../../Preferences/IsarDataClasses/ShowResponse/ShowResponse.dart';
 import '../../../../Preferences/PrefManager.dart';
 import '../../../../Services/ServiceSwitcher.dart';
 import '../../../../Widgets/CustomBottomDialog.dart';
-import '../../../../api/Mangayomi/Eval/dart/model/m_manga.dart';
-import '../../../../api/Mangayomi/Extensions/extensions_provider.dart';
-import '../../../../api/Mangayomi/Model/Manga.dart';
-import '../../../../api/Mangayomi/Model/Source.dart';
-import '../../../../api/Mangayomi/Search/search.dart';
+import '../../../../api/Sources/Eval/dart/model/m_manga.dart';
+import '../../../../api/Sources/Extensions/extensions_provider.dart';
+import '../../../../api/Sources/Model/Manga.dart';
+import '../../../../api/Sources/Model/Source.dart';
+import '../../../../api/Sources/Search/search.dart';
 import '../../../Settings/language.dart';
 import 'Widgets/WrongTitle.dart';
 

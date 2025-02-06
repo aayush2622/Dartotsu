@@ -1,4 +1,4 @@
-import 'package:dantotsu/api/Mangayomi/Eval/dart/model/m_chapter.dart';
+import 'package:dantotsu/api/Sources/Eval/dart/model/m_chapter.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'Data/Episode.g.dart';

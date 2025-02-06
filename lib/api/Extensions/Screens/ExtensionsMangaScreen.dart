@@ -1,4 +1,4 @@
-import 'package:dantotsu/api/Mangayomi/Eval/dart/model/m_pages.dart';
+import 'package:dantotsu/api/Sources/Eval/dart/model/m_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
@@ -8,9 +8,9 @@ import '../../../Functions/Function.dart';
 import '../../../Functions/GetExtensions.dart';
 import '../../../Services/Screens/BaseMangaScreen.dart';
 import '../../../logger.dart';
-import '../../Mangayomi/Model/Manga.dart';
-import '../../Mangayomi/Model/Source.dart';
-import '../../Mangayomi/Search/get_popular.dart';
+import '../../Sources/Model/Manga.dart';
+import '../../Sources/Model/Source.dart';
+import '../../Sources/Search/get_popular.dart';
 
 class ExtensionsMangaScreen extends BaseMangaScreen {
   var data = Rxn<Map<String, List<Media>>>({});

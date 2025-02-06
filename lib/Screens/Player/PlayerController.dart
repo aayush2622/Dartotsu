@@ -12,8 +12,8 @@ import 'package:dantotsu/Screens/Player/Platform/WindowsPlayer.dart';
 import 'package:dantotsu/Theme/LanguageSwitcher.dart';
 import 'package:dantotsu/Widgets/AlertDialogBuilder.dart';
 import 'package:dantotsu/Widgets/CustomBottomDialog.dart';
-import 'package:dantotsu/api/Mangayomi/Eval/dart/model/video.dart' as v;
-import 'package:dantotsu/api/Mangayomi/Model/Source.dart';
+import 'package:dantotsu/api/Sources/Eval/dart/model/video.dart' as v;
+import 'package:dantotsu/api/Sources/Model/Source.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -934,11 +934,15 @@ class _PlayerControllerState extends State<PlayerController> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        videos[index].quality,
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
+                      Expanded(
+                        child: Text(
+                          videos[index].quality,
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          maxLines: 1,
                         ),
                       ),
                       Icon(

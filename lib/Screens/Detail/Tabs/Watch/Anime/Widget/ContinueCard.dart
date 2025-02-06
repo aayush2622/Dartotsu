@@ -5,7 +5,7 @@ import '../../../../../../Adaptor/Episode/EpisodeAdaptor.dart';
 import '../../../../../../Adaptor/Episode/Widget/HandleProgress.dart';
 import '../../../../../../DataClass/Episode.dart';
 import '../../../../../../DataClass/Media.dart';
-import '../../../../../../api/Mangayomi/Model/Source.dart';
+import '../../../../../../api/Sources/Model/Source.dart';
 
 class ContinueCard extends StatelessWidget {
   final Media mediaData;
