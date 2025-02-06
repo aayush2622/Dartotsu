@@ -46,7 +46,7 @@ class SettingsAboutScreenState extends BaseSettingsScreen {
         description: getString.logFileDescription,
         icon: Icons.share,
         onClick: () async {
-          var path = (await StorageProvider().getDirectory(
+          var path = (await StorageProvider.getDirectory(
             useCustomPath: true,
             customPath: PrefManager.getVal(PrefName.customPath),
           ))

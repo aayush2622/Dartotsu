@@ -13,7 +13,7 @@ import 'api/Mangayomi/Model/Source.dart';
 import 'api/Mangayomi/Model/chapter.dart';
 
 class StorageProvider {
-  Future<bool> requestPermission() async {
+  static Future<bool> requestPermission() async {
     if (!Platform.isAndroid) {
       return true;
     }
@@ -37,7 +37,7 @@ class StorageProvider {
     return manageStorageStatus.isGranted;
   }
 
-  Future<bool> videoPermission() async {
+  static Future<bool> videoPermission() async {
     if (Platform.isAndroid) {
       if (await Permission.videos.isDenied ||
           await Permission.videos.isPermanentlyDenied) {
@@ -51,7 +51,7 @@ class StorageProvider {
     return true;
   }
 
-  Future<Directory?> getDirectory({
+  static Future<Directory?> getDirectory({
     String? subPath,
     String customPath = '',
     bool? useCustomPath = false,
@@ -114,7 +114,7 @@ class StorageProvider {
     return fullDirectory;
   }
 
-  Future<Isar> initDB(String? path, {bool inspector = false}) async {
+  static Future<Isar> initDB(String? path, {bool inspector = false}) async {
     Directory? dir;
     if (path == null) {
       dir = await getDirectory(subPath: 'databases');

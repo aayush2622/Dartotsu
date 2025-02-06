@@ -40,7 +40,7 @@ class _BrowseScreenState extends ConsumerState<ExtensionScreen>
   }
 
   _checkPermission() async {
-    await StorageProvider().requestPermission();
+    await StorageProvider.requestPermission();
   }
 
   final _textEditingController = TextEditingController();

@@ -47,9 +47,9 @@ enum Location {
 }
 
 class PrefManager {
-  static Isar? _generalPreferences;
-  static Isar? _irrelevantPreferences;
-  static Isar? _protectedPreferences;
+  static late Isar _generalPreferences;
+  static late Isar _irrelevantPreferences;
+  static late Isar _protectedPreferences;
 
   static final Map<Location, Map<String, dynamic>> _cache = {
     Location.General: {},
@@ -59,13 +59,11 @@ class PrefManager {
 
   static Future<void> init() async {
     try {
-      if (_generalPreferences != null) return;
-      final path = await StorageProvider().getDirectory(subPath: 'settings');
+      final path = await StorageProvider.getDirectory(subPath: 'settings');
       _generalPreferences = await _open('generalSettings', path!.path);
       _irrelevantPreferences = await _open('irrelevantSettings', path.path);
       _protectedPreferences = await _open('protectedSettings', path.path);
       await _populateCache();
-      removePref();
     } catch (e) {
       Logger.log('Error initializing preferences: $e');
     }
@@ -90,40 +88,36 @@ class PrefManager {
   static Future<void> _populateCache() async {
     for (var location in Location.values) {
       final isar = _getPrefBox(location);
-      if (isar != null) {
-        final keyValues = await isar.keyValues.where().findAll();
-        for (var item in keyValues) {
-          _cache[location]?[item.key] = item.value;
-        }
-        final showResponse = await isar.showResponses.where().findAll();
-        for (var item in showResponse) {
-          _cache[location]?[item.key] = item;
-        }
-        final selected = await isar.selecteds.where().findAll();
-        for (var item in selected) {
-          _cache[location]?[item.key] = item;
-        }
-        final responseToken = await isar.responseTokens.where().findAll();
-        for (var item in responseToken) {
-          _cache[location]?[item.key] = item;
-        }
-        final playerSettings = await isar.playerSettings.where().findAll();
-        for (var item in playerSettings) {
-          _cache[location]?[item.key] = item;
-        }
+      final keyValues = await isar.keyValues.where().findAll();
+      for (var item in keyValues) {
+        _cache[location]?[item.key] = item.value;
+      }
+      final showResponse = await isar.showResponses.where().findAll();
+      for (var item in showResponse) {
+        _cache[location]?[item.key] = item;
+      }
+      final selected = await isar.selecteds.where().findAll();
+      for (var item in selected) {
+        _cache[location]?[item.key] = item;
+      }
+      final responseToken = await isar.responseTokens.where().findAll();
+      for (var item in responseToken) {
+        _cache[location]?[item.key] = item;
+      }
+      final playerSettings = await isar.playerSettings.where().findAll();
+      for (var item in playerSettings) {
+        _cache[location]?[item.key] = item;
       }
     }
   }
 
   static void setVal<T>(Pref<T> pref, T value) {
-    _checkInitialization();
     _cache[pref.location]?[pref.key] = value;
     final isar = _getPrefBox(pref.location);
     return _writeToIsar(isar, pref.key, value);
   }
 
   static T getVal<T>(Pref<T> pref) {
-    _checkInitialization();
     if (_cache[pref.location]?.containsKey(pref.key) == true) {
       return _cache[pref.location]![pref.key] as T;
     }
@@ -135,7 +129,6 @@ class PrefManager {
     T value, {
     Location location = Location.Irrelevant,
   }) {
-    _checkInitialization();
     final isar = _getPrefBox(location);
     _cache[location]?[key] = value;
     return _writeToIsar(isar, key, value);
@@ -145,7 +138,6 @@ class PrefManager {
     String key, {
     Location location = Location.Irrelevant,
   }) {
-    _checkInitialization();
     if (_cache[location]?.containsKey(key) == true) {
       return _cache[location]![key] as T;
     }
@@ -157,40 +149,36 @@ class PrefManager {
     T value, {
     Location location = Location.Irrelevant,
   }) async {
-    _checkInitialization();
     _cache[location]?[key] = value;
     final isar = _getPrefBox(location);
     final keyValue = KeyValue()
       ..key = key
       ..value = value;
-    isar?.keyValues.putSync(keyValue);
+    isar.keyValues.putSync(keyValue);
   }
 
   static Future<Rx<T>?> getLiveCustomVal<T>(
     String key, {
     Location location = Location.Irrelevant,
   }) async {
-    _checkInitialization();
     final isar = _getPrefBox(location);
-    final stream = Rx(isar?.keyValues.getByKeySync(key)?.value as T);
+    final stream = Rx(isar.keyValues.getByKeySync(key)?.value as T);
     return stream;
   }
 
   static void removeVal(Pref<dynamic> pref) async {
-    _checkInitialization();
     _cache[pref.location]?.remove(pref.key);
     final isar = _getPrefBox(pref.location);
-    return isar?.writeTxn(() => isar.keyValues.deleteByKey(pref.key));
+    return isar.writeTxn(() => isar.keyValues.deleteByKey(pref.key));
   }
 
   static void removeCustomVal(
     String key, {
     Location location = Location.Irrelevant,
   }) async {
-    _checkInitialization();
     _cache[location]?.remove(key);
     final isar = _getPrefBox(location);
-    return isar?.writeTxn(() => isar.keyValues.deleteByKey(key));
+    return isar.writeTxn(() => isar.keyValues.deleteByKey(key));
   }
 
   static void _writeToIsar<T>(Isar? isar, String key, T value) {
@@ -218,31 +206,17 @@ class PrefManager {
     });
   }
 
-  static void _checkInitialization() {
-    if (_generalPreferences == null) {
-      throw Exception(
-        'Preferences not initialized. Call PrefManager.init() first.',
-      );
-    }
-  }
-
-  static Isar? _getPrefBox(Location location) {
+  static Isar _getPrefBox(Location location) {
     switch (location.name) {
       case 'General':
-        return _generalPreferences!;
+        return _generalPreferences;
       case 'Irrelevant':
-        return _irrelevantPreferences!;
+        return _irrelevantPreferences;
       case 'Protected':
-        return _protectedPreferences!;
+        return _protectedPreferences;
       default:
-        return _generalPreferences!;
+        return _generalPreferences;
     }
   }
 }
 
-void removePref() {
-  if (loadCustomData('once1') ?? true) {
-    removeData(PrefName.simklHomeLayout);
-    saveCustomData('once1', false);
-  }
-}

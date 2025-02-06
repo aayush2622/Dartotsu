@@ -10,7 +10,7 @@ class Logger {
 
   static Future<void> init() async {
     var path = PrefManager.getVal(PrefName.customPath);
-    final directory = await StorageProvider()
+    final directory = await StorageProvider
         .getDirectory(useCustomPath: true, customPath: path);
 
     _logFile = File('${directory?.path}/appLogs.txt'.fixSeparator);

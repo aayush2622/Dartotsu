@@ -299,7 +299,7 @@ List<Widget> playerSettings(
 }
 
 Future<void> openPlayer(BuildContext context) async {
-  if (!await StorageProvider().videoPermission()) return;
+  if (!await StorageProvider.videoPermission()) return;
   final result = await FilePicker.platform.pickFiles(
     type: FileType.custom,
     allowedExtensions: vidMap,

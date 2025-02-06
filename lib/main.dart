@@ -71,12 +71,10 @@ void main(List<String> args) async {
 }
 
 Future init() async {
-  await StorageProvider().requestPermission();
-  if (!Platform.isIOS) {
-    await dotenv.load(fileName: ".env");
-  }
+  await StorageProvider.requestPermission();
+  await dotenv.load(fileName: ".env");
   await PrefManager.init();
-  isar = await StorageProvider().initDB(null);
+  isar = await StorageProvider.initDB(null);
   await Logger.init();
   await Extensions.init();
   initializeMediaServices();
