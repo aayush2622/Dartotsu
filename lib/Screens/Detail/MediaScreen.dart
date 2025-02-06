@@ -87,6 +87,7 @@ class MediaInfoPageState extends State<MediaInfoPage> {
   Widget _buildSliverContent() {
     return ExpandablePageView(
       controller: pageController,
+      onPageChanged: (index) => _selectedIndex.value = index,
       children: [
         loaded
             ? SingleChildScrollView(child: InfoPage(mediaData: mediaData))
