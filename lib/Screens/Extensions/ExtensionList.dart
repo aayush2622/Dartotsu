@@ -166,7 +166,6 @@ class _ExtensionScreenState extends ConsumerState<Extension> {
 
   List<Source> _getNotInstalledEntries(List<Source> data) {
     return data
-        .where((element) => element.version == element.versionLast!)
         .where((element) => !element.isAdded!)
         .toList();
   }
@@ -260,7 +259,7 @@ class _ExtensionScreenState extends ConsumerState<Extension> {
         child: Row(
           children: [
             Text(
-              groupByValue,
+              groupByValue.toUpperCase(),
               style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
             ),
           ],
@@ -268,7 +267,11 @@ class _ExtensionScreenState extends ConsumerState<Extension> {
       ),
       itemBuilder: (context, Source element) =>
           ExtensionListTileWidget(source: element),
-      groupComparator: (group1, group2) => group1.compareTo(group2),
+      groupComparator: (group1, group2) {
+        if (group1 == "all") return -1;
+        if (group2 == "all") return 1;
+        return group1.compareTo(group2);
+      },
       itemComparator: (item1, item2) => item1.name!.compareTo(item2.name!),
       order: GroupedListOrder.ASC,
     );
