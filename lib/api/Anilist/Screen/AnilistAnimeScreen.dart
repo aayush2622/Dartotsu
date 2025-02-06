@@ -29,8 +29,8 @@ class AnilistAnimeScreen extends BaseAnimeScreen {
 
   @override
   Future<void> loadAll() async {
-    await getUserId();
     resetPageData();
+    await getUserId();
     final list = await Anilist.query!.getAnimeList();
     trending.value = list["trendingAnime"];
     animePopular.value = list["popularAnime"];

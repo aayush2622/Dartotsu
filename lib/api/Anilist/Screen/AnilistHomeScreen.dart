@@ -39,6 +39,7 @@ class AnilistHomeScreen extends BaseHomeScreen {
 
   @override
   Future<void> loadAll() async {
+    resetPageData();
     await getUserId();
     await setListImages();
     loadList();
@@ -49,7 +50,6 @@ class AnilistHomeScreen extends BaseHomeScreen {
   }
 
   Future<void> loadList() async {
-    resetPageData();
     final res = await Anilist.query!.initHomePage();
     _setMediaList(res!);
   }
@@ -92,7 +92,7 @@ class AnilistHomeScreen extends BaseHomeScreen {
         emptyIcon: Icons.movie_filter_rounded,
         emptyMessage: getString.allCaughtUpNew,
         emptyButtonText: getString.browse(getString.anime),
-        emptyButtonOnPressed: () => navbar?.onClick(0),
+        emptyButtonOnPressed: () => navbar.onClick(0),
       ),
       MediaSectionData(
         type: 0,
@@ -110,7 +110,7 @@ class AnilistHomeScreen extends BaseHomeScreen {
         emptyIcon: Icons.movie_filter_rounded,
         emptyMessage: getString.allCaughtUpNew,
         emptyButtonText: getString.browse(getString.anime),
-        emptyButtonOnPressed: () => navbar?.onClick(0),
+        emptyButtonOnPressed: () => navbar.onClick(0),
       ),
       MediaSectionData(
         type: 0,
@@ -120,7 +120,7 @@ class AnilistHomeScreen extends BaseHomeScreen {
         emptyIcon: Icons.import_contacts,
         emptyMessage: getString.allCaughtUpNew,
         emptyButtonText: getString.browse(getString.manga),
-        emptyButtonOnPressed: () => navbar?.onClick(2),
+        emptyButtonOnPressed: () => navbar.onClick(2),
       ),
       MediaSectionData(
         type: 0,
@@ -138,7 +138,7 @@ class AnilistHomeScreen extends BaseHomeScreen {
         emptyIcon: Icons.import_contacts,
         emptyMessage: getString.allCaughtUpNew,
         emptyButtonText: getString.browse(getString.manga),
-        emptyButtonOnPressed: () => navbar?.onClick(2),
+        emptyButtonOnPressed: () => navbar.onClick(2),
       ),
       MediaSectionData(
         type: 0,

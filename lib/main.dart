@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:dantotsu/Functions/Extensions.dart';
 import 'package:dantotsu/Screens/Login/LoginScreen.dart';
 import 'package:dantotsu/Screens/Manga/MangaScreen.dart';
 import 'package:dynamic_color/dynamic_color.dart';
@@ -100,6 +101,7 @@ Future init() async {
               userDataFolder: p.join(document.path, 'flutter_inappwebview')));
     }
   }
+  Discord.getSavedToken();
   Get.config(
     enableLog: true,
     logWriterCallback: (text, {isError = false}) async {
@@ -125,27 +127,50 @@ class MyApp extends StatelessWidget {
         systemNavigationBarDividerColor: Colors.transparent,
       ),
     );
-    return DynamicColorBuilder(
-      builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
-        return GetMaterialApp(
-          localizationsDelegates: const [
-            AppLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: AppLocalizations.supportedLocales,
-          locale: Locale(loadData(PrefName.defaultLanguage)),
-          navigatorKey: navigatorKey,
-          title: 'Dartotsu',
-          themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
-          debugShowCheckedModeBanner: false,
-          theme: getTheme(lightDynamic, themeManager),
-          darkTheme: getTheme(darkDynamic, themeManager),
-          home: const MainActivity(),
-        );
-      },
-    );
+    return KeyboardListener(
+        focusNode: FocusNode(),
+        onKeyEvent: (KeyEvent event) async {
+          if (event is KeyDownEvent) {
+            if (event.logicalKey == LogicalKeyboardKey.escape) {
+              if (Get.previousRoute.isNotEmpty) {
+                Get.back();
+              }
+            } else if (event.logicalKey == LogicalKeyboardKey.f11) {
+              bool isFullScreen = await windowManager.isFullScreen();
+              windowManager.setFullScreen(!isFullScreen);
+            } else if (event.logicalKey == LogicalKeyboardKey.enter) {
+              final isAltPressed = HardwareKeyboard.instance.logicalKeysPressed
+                      .contains(LogicalKeyboardKey.altLeft) ||
+                  HardwareKeyboard.instance.logicalKeysPressed
+                      .contains(LogicalKeyboardKey.altRight);
+              if (isAltPressed) {
+                bool isFullScreen = await windowManager.isFullScreen();
+                windowManager.setFullScreen(!isFullScreen);
+              }
+            }
+          }
+        },
+        child: DynamicColorBuilder(
+          builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
+            return GetMaterialApp(
+              localizationsDelegates: const [
+                AppLocalizations.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              supportedLocales: AppLocalizations.supportedLocales,
+              locale: Locale(loadData(PrefName.defaultLanguage)),
+              navigatorKey: navigatorKey,
+              title: 'Dartotsu',
+              themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
+              debugShowCheckedModeBanner: false,
+              theme: getTheme(lightDynamic, themeManager),
+              darkTheme: getTheme(darkDynamic, themeManager),
+              home: const MainActivity(),
+            );
+          },
+        ));
   }
 }
 
@@ -156,63 +181,38 @@ class MainActivity extends StatefulWidget {
   MainActivityState createState() => MainActivityState();
 }
 
-FloatingBottomNavBar? navbar;
+late FloatingBottomNavBar navbar;
 
-class MainActivityState extends State<MainActivity>
-    with WidgetsBindingObserver {
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addObserver(this);
-  }
-
+class MainActivityState extends State<MainActivity> {
   int _selectedIndex = 1;
 
   void _onTabSelected(int index) => setState(() => _selectedIndex = index);
 
   @override
   Widget build(BuildContext context) {
-    Discord.getSavedToken();
-    var service = Provider.of<MediaServiceProvider>(context).currentService;
+
     navbar = FloatingBottomNavBar(
       selectedIndex: _selectedIndex,
       onTabSelected: _onTabSelected,
     );
 
-    return RawKeyboardListener(
-      focusNode: FocusNode(),
-      autofocus: true,
-      onKey: (RawKeyEvent event) async {
-        if (event is RawKeyDownEvent) {
-          if (event.logicalKey == LogicalKeyboardKey.escape) {
-            if (Navigator.of(context).canPop()) {
-              Navigator.of(context).pop();
-            }
-          }
-          if (event.logicalKey == LogicalKeyboardKey.f11) {
-            WindowManager.instance
-                .setFullScreen(!await WindowManager.instance.isFullScreen());
-          }
-        }
-      },
-      child: Scaffold(
-        body: Stack(
-          children: [
-            Obx(() {
-              return IndexedStack(
-                index: _selectedIndex,
-                children: [
-                  const AnimeScreen(),
-                  service.data.token.value.isNotEmpty
-                      ? const HomeScreen()
-                      : const LoginScreen(),
-                  const MangaScreen(),
-                ],
-              );
-            }),
-            navbar!,
-          ],
-        ),
+    return Scaffold(
+      body: Stack(
+        children: [
+          Obx(() {
+            return IndexedStack(
+              index: _selectedIndex,
+              children: [
+                const AnimeScreen(),
+                context.currentService().data.token.value.isNotEmpty
+                    ? const HomeScreen()
+                    : const LoginScreen(),
+                const MangaScreen(),
+              ],
+            );
+          }),
+          navbar,
+        ],
       ),
     );
   }

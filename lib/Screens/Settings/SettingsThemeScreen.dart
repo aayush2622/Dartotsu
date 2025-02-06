@@ -66,7 +66,6 @@ class SettingsThemeScreenState extends BaseSettingsScreen {
         name: getString.materialYou,
         description: getString.materialYouDescription,
         icon: Icons.new_releases,
-        //isVisible: Platform.isAndroid,
         isChecked: themeNotifier.useMaterialYou,
         onSwitchChange: (bool value) async {
           themeNotifier.setMaterialYou(value);

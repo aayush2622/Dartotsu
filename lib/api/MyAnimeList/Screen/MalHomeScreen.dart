@@ -99,7 +99,7 @@ class MalHomeScreen extends BaseHomeScreen {
         emptyIcon: Icons.movie_filter_rounded,
         emptyMessage: getString.allCaughtUpNew,
         emptyButtonText: getString.browse(getString.anime),
-        emptyButtonOnPressed: () => navbar?.onClick(0),
+        emptyButtonOnPressed: () => navbar.onClick(0),
         onLongPressTitle: () => showHidden.value = !showHidden.value,
       ),
       MediaSectionData(
@@ -118,7 +118,7 @@ class MalHomeScreen extends BaseHomeScreen {
         emptyIcon: Icons.movie_filter_rounded,
         emptyMessage: getString.allCaughtUpNew,
         emptyButtonText: getString.browse(getString.anime),
-        emptyButtonOnPressed: () => navbar?.onClick(0),
+        emptyButtonOnPressed: () => navbar.onClick(0),
       ),
       MediaSectionData(
         type: 0,
@@ -136,7 +136,7 @@ class MalHomeScreen extends BaseHomeScreen {
         emptyIcon: Icons.import_contacts,
         emptyMessage: getString.allCaughtUpNew,
         emptyButtonText: getString.browse(getString.manga),
-        emptyButtonOnPressed: () => navbar?.onClick(2),
+        emptyButtonOnPressed: () => navbar.onClick(2),
       ),
       MediaSectionData(
         type: 0,
@@ -154,7 +154,7 @@ class MalHomeScreen extends BaseHomeScreen {
         emptyIcon: Icons.import_contacts,
         emptyMessage: getString.allCaughtUpNew,
         emptyButtonText: getString.browse(getString.manga),
-        emptyButtonOnPressed: () => navbar?.onClick(2),
+        emptyButtonOnPressed: () => navbar.onClick(2),
       ),
       MediaSectionData(
         type: 0,

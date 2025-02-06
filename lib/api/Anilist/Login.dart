@@ -17,10 +17,12 @@ CustomBottomDialog login(BuildContext context) {
         context,
         onPressed: () async {
           Navigator.pop(context);
-          const url = 'https://anilist.co/api/v2/oauth/authorize?client_id=14959&response_type=token';
+          const url =
+              'https://anilist.co/api/v2/oauth/authorize?client_id=14959&response_type=token';
           var response = await FlutterWebAuth2.authenticate(
             options: const FlutterWebAuth2Options(
-                windowName: 'Dartotsu', useWebview: true,
+              windowName: 'Dartotsu',
+              useWebview: true,
             ),
             url: url,
             callbackUrlScheme: 'dantotsu',

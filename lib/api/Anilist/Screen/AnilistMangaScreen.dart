@@ -30,6 +30,7 @@ class AnilistMangaScreen extends BaseMangaScreen {
   @override
   Future<void> loadAll() async {
     resetPageData();
+    await getUserId();
     final list = await Anilist.query!.getMangaList();
     trending.value = list["trending"];
     mangaPopular.value = list["popularManga"];
