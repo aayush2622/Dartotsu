@@ -4,11 +4,10 @@ import 'package:dantotsu/api/Sources/Model/Source.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:isar/isar.dart';
 
-import '../../Functions/Function.dart';
+
 import '../../Functions/GetExtensions.dart';
 import '../../Preferences/PrefManager.dart';
 import '../../StorageProvider.dart';

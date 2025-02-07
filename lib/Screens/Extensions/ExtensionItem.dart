@@ -1,4 +1,5 @@
 import 'package:dantotsu/Functions/Function.dart';
+import 'package:dantotsu/Preferences/PrefManager.dart';
 import 'package:dantotsu/Widgets/AlertDialogBuilder.dart';
 import 'package:dantotsu/api/Sources/Eval/dart/model/source_preference.dart';
 import 'package:dantotsu/api/Sources/Model/Source.dart';
@@ -75,7 +76,9 @@ class _ExtensionListTileWidgetState
             color: theme.surface,
             borderRadius: BorderRadius.circular(32),
           ),
-          child: widget.source.iconUrl!.isEmpty
+          child: widget.source.iconUrl == null ||
+                  widget.source.iconUrl!.isEmpty ||
+                  !(loadCustomData<bool?>('loadExtensionIcon') ?? true)
               ? const Icon(Icons.extension_rounded)
               : cachedNetworkImage(
                   imageUrl: widget.source.iconUrl!,
@@ -154,7 +157,7 @@ class _ExtensionListTileWidgetState
     return !sourceNotEmpty
         ? IconButton(
             onPressed: () => _handleSourceAction(),
-            icon: const Icon(Icons.download))
+            icon: const Icon(Icons.download_rounded))
         : SizedBox(
             width: 84,
             child: Row(

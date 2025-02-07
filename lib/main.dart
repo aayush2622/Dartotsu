@@ -2,8 +2,10 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:dantotsu/Functions/Extensions.dart';
+import 'package:dantotsu/Functions/Function.dart';
 import 'package:dantotsu/Screens/Login/LoginScreen.dart';
 import 'package:dantotsu/Screens/Manga/MangaScreen.dart';
+import 'package:dantotsu/api/Sources/Model/Manga.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +23,8 @@ import 'package:media_kit/media_kit.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:uni_links/uni_links.dart';
+import 'package:uni_links_desktop/uni_links_desktop.dart';
 import 'package:window_manager/window_manager.dart';
 
 import 'Functions/GetExtensions.dart';
@@ -71,6 +75,11 @@ void main(List<String> args) async {
 }
 
 Future init() async {
+  if (Platform.isWindows) {
+    registerProtocol('dartotsu');
+    registerProtocol('anymex');
+    registerProtocol('mangayomi');
+  }
   await StorageProvider.requestPermission();
   await dotenv.load(fileName: ".env");
   await PrefManager.init();
@@ -82,7 +91,7 @@ Future init() async {
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
     await WindowManager.instance.ensureInitialized();
   }
-
+  initDeepLinkListener();
   TypeFactory.registerAllTypes();
   initializeDateFormatting();
   final supportedLocales = DateFormat.allLocalesWithSymbols();
@@ -107,6 +116,48 @@ Future init() async {
       debugPrint(text);
     },
   );
+}
+
+void initDeepLinkListener() async {
+  try {
+    final initialUri = await getInitialUri();
+    if (initialUri != null) handleDeepLink(initialUri);
+  } catch (err) {
+    snackString('Error getting initial deep link: $err');
+  }
+
+  uriLinkStream.listen((Uri? uri) {
+    if (uri != null) {
+      handleDeepLink(uri);
+    }
+  }, onError: (err) {
+    snackString('Error Opening link: $err');
+  });
+}
+
+void handleDeepLink(Uri uri) {
+  if (uri.host == "add-repo") {
+    String? animeUrl =
+        uri.queryParameters["url"] ?? uri.queryParameters['anime_url'];
+    String? mangaUrl = uri.queryParameters["manga_url"];
+    String? novelUrl = uri.queryParameters["novel_url"];
+
+    if (animeUrl != null) {
+      Extensions.setRepo(ItemType.anime, animeUrl);
+    }
+    if (mangaUrl != null) {
+      Extensions.setRepo(ItemType.manga, mangaUrl);
+    }
+    if (novelUrl != null) {
+      Extensions.setRepo(ItemType.novel, novelUrl);
+    }
+
+    if (animeUrl != null || mangaUrl != null || novelUrl != null) {
+      snackString("Added Repo Links Successfully!");
+    } else {
+      snackString("Missing required parameters in the link.");
+    }
+  }
 }
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();

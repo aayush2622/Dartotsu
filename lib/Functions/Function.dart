@@ -76,8 +76,9 @@ var Refresh = Get.put(_RefreshController(), permanent: true);
 Future<void> snackString(
   String? s, {
   String? clipboard,
+  BuildContext? c,
 }) async {
-  var context = navigatorKey.currentContext ?? Get.context;
+  var context = c ?? navigatorKey.currentContext ?? Get.context;
 
   if (context != null && s != null && s.isNotEmpty) {
     var theme = Theme.of(context).colorScheme;

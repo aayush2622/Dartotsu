@@ -64,6 +64,15 @@ class SettingsExtensionsScreenState extends BaseSettingsScreen {
       ),
       Setting(
         type: SettingType.switchType,
+        name: 'Load Extensions icon',
+        description: 'Disable if extensions page lags',
+        icon: Icons.image_not_supported_rounded,
+        isChecked: loadCustomData('loadExtensionIcon') ?? true,
+        onSwitchChange: (value) =>
+            saveCustomData('loadExtensionIcon', value),
+      ),
+      Setting(
+        type: SettingType.switchType,
         name: 'Auto Update',
         description: 'Auto Update Extensions',
         icon: Icons.update,
