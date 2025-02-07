@@ -76,7 +76,7 @@ void main(List<String> args) async {
 
 Future init() async {
   if (Platform.isWindows) {
-    registerProtocol('dartotsu');
+    registerProtocol('dar');
     registerProtocol('anymex');
     registerProtocol('mangayomi');
   }

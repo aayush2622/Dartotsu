@@ -39,10 +39,10 @@
         </dict>
         <dict>
             <key>CFBundleURLName</key>
-            <string>dartotsu</string>
+            <string>dar</string>
             <key>CFBundleURLSchemes</key>
             <array>
-                <string>dartotsu</string>
+                <string>dar</string>
             </array>
         </dict>
         <dict>

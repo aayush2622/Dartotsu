@@ -44,7 +44,7 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="dartotsu" android:host="add-repo" />
+                <data android:scheme="dar" android:host="add-repo" />
             </intent-filter>
 
             <intent-filter android:label="Add Repo">
