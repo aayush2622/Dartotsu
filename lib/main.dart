@@ -91,7 +91,7 @@ Future init() async {
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
     await WindowManager.instance.ensureInitialized();
   }
-  initDeepLinkListener();
+
   TypeFactory.registerAllTypes();
   initializeDateFormatting();
   final supportedLocales = DateFormat.allLocalesWithSymbols();
@@ -109,6 +109,7 @@ Future init() async {
     }
   }
   Discord.getSavedToken();
+  initDeepLinkListener();
   Get.config(
     enableLog: true,
     logWriterCallback: (text, {isError = false}) async {
@@ -126,38 +127,31 @@ void initDeepLinkListener() async {
     snackString('Error getting initial deep link: $err');
   }
 
-  uriLinkStream.listen((Uri? uri) {
-    if (uri != null) {
-      handleDeepLink(uri);
-    }
-  }, onError: (err) {
-    snackString('Error Opening link: $err');
-  });
+  uriLinkStream.listen(
+    (uri) => uri != null ? handleDeepLink(uri) : null,
+    onError: (err) => snackString('Error Opening link: $err'),
+  );
 }
 
 void handleDeepLink(Uri uri) {
-  if (uri.host == "add-repo") {
-    String? animeUrl =
-        uri.queryParameters["url"] ?? uri.queryParameters['anime_url'];
-    String? mangaUrl = uri.queryParameters["manga_url"];
-    String? novelUrl = uri.queryParameters["novel_url"];
+  if (uri.host != "add-repo") return;
 
-    if (animeUrl != null) {
-      Extensions.setRepo(ItemType.anime, animeUrl);
-    }
-    if (mangaUrl != null) {
-      Extensions.setRepo(ItemType.manga, mangaUrl);
-    }
-    if (novelUrl != null) {
-      Extensions.setRepo(ItemType.novel, novelUrl);
-    }
+  final repoMap = {
+    ItemType.anime: uri.queryParameters["url"] ?? uri.queryParameters["anime_url"],
+    ItemType.manga: uri.queryParameters["manga_url"],
+    ItemType.novel: uri.queryParameters["novel_url"],
+  };
 
-    if (animeUrl != null || mangaUrl != null || novelUrl != null) {
-      snackString("Added Repo Links Successfully!");
-    } else {
-      snackString("Missing required parameters in the link.");
+  bool isRepoAdded = false;
+
+  repoMap.forEach((type, url) {
+    if (url != null && url.isNotEmpty) {
+      Extensions.setRepo(type, url);
+      isRepoAdded = true;
     }
-  }
+  });
+
+  snackString(isRepoAdded ? "Added Repo Links Successfully!" : "Missing required parameters in the link.");
 }
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
