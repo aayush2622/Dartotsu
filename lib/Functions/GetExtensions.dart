@@ -137,7 +137,8 @@ class Extensions {
                 ],
                 TextField(
                   decoration: const InputDecoration(
-                      hintText: 'Repo URL'),
+                      hintText: 'Repo URL',
+                  ),
                   onChanged: (value) => text = value,
                 ),
               ],
