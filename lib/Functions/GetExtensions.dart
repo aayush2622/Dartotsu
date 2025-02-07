@@ -1,13 +1,17 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 
 import '../Preferences/PrefManager.dart';
+import '../Theme/LanguageSwitcher.dart';
+import '../Widgets/AlertDialogBuilder.dart';
 import '../api/Sources/Extensions/extensions_provider.dart';
 import '../api/Sources/Extensions/fetch_anime_sources.dart';
 import '../api/Sources/Extensions/fetch_manga_sources.dart';
 import '../api/Sources/Extensions/fetch_novel_sources.dart';
 import '../api/Sources/Model/Manga.dart';
 import '../api/Sources/Model/Source.dart';
+import 'Function.dart';
 
 class Extensions {
   static final _provider = ProviderContainer();
@@ -92,5 +96,60 @@ class Extensions {
       novelRepo.value = '';
       removeCustomData('novelRepo');
     }
+  }
+
+  static Future<void> addRepo(BuildContext context, ItemType type) async {
+    var text = '';
+    var theme = Theme.of(context).colorScheme;
+    AlertDialogBuilder(context)
+      ..setTitle('${type.name.capitalize} ${getString.source}')
+      ..setCustomView(
+        Obx(
+              () {
+            var installedRepo = type == ItemType.anime
+                ? animeRepo.value
+                : type == ItemType.manga
+                ? mangaRepo.value
+                : novelRepo.value;
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (installedRepo.isNotEmpty) ...[
+                  GestureDetector(
+                    onTap: () => copyToClipboard(installedRepo),
+                    onLongPress: () =>
+                        Extensions.removeRepo(type),
+                    child: Text(
+                      installedRepo,
+                      style: TextStyle(
+                        fontFamily: 'Poppins',
+                        fontSize: 12.0,
+                        color: theme.onSurface,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 8.0),
+                ],
+                TextField(
+                  decoration: const InputDecoration(
+                      hintText: 'Repo URL'),
+                  onChanged: (value) => text = value,
+                ),
+              ],
+            );
+          },
+        ),
+      )
+      ..setPositiveButton(
+        getString.ok,
+            () {
+          if (text.isEmpty) return;
+          setRepo(type, text);
+        },
+      )
+      ..setNegativeButton(getString.cancel, null)
+      ..show();
   }
 }

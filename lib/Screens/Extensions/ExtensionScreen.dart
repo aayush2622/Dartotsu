@@ -38,7 +38,6 @@ class _BrowseScreenState extends ConsumerState<ExtensionScreen>
     _tabBarController.addListener(() {
       setState(() {
         _textEditingController.clear();
-        //_isSearch = false;
       });
     });
   }
@@ -83,59 +82,7 @@ class _BrowseScreenState extends ConsumerState<ExtensionScreen>
                         : _tabBarController.index == 3
                             ? ItemType.manga
                             : ItemType.novel;
-                    var text = '';
-
-
-                    AlertDialogBuilder(context)
-                      ..setTitle('${type.name.capitalize} ${getString.source}')
-                      ..setCustomView(
-                        Obx(
-                          () {
-                            var installedRepo = _tabBarController.index == 1
-                                ? Extensions.animeRepo.value
-                                : _tabBarController.index == 3
-                                ? Extensions.mangaRepo.value
-                                : Extensions.novelRepo.value;
-                            return Column(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                if (installedRepo.isNotEmpty) ...[
-                                  GestureDetector(
-                                    onTap: () => copyToClipboard(installedRepo),
-                                    onLongPress: () =>
-                                        Extensions.removeRepo(type),
-                                    child: Text(
-                                      installedRepo,
-                                      style: TextStyle(
-                                        fontFamily: 'Poppins',
-                                        fontSize: 12.0,
-                                        color: theme.onSurface,
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(height: 8.0),
-                                ],
-                                TextField(
-                                  decoration: const InputDecoration(
-                                      hintText: 'Repo URL'),
-                                  onChanged: (value) => text = value,
-                                ),
-                              ],
-                            );
-                          },
-                        ),
-                      )
-                      ..setPositiveButton(
-                        getString.ok,
-                        () {
-                          if (text.isEmpty) return;
-                          Extensions.setRepo(type, text);
-                        },
-                      )
-                      ..setNegativeButton(getString.cancel, null)
-                      ..show();
+                    Extensions.addRepo(context, type);
                   },
                 ),
                 IconButton(
