@@ -17,7 +17,7 @@ Future<void> fetchSourcesList(
     required Ref ref,
     required ItemType itemType}) async {
   final http = MClient.init(reqcopyWith: {'useDartHttpClient': true});
-  final req = await http.get(Uri.parse(sourcesIndexUrl));
+  final req = await http.get(Uri.parse(sourcesIndexUrl.trim()));
 
   final sourceList =
       (jsonDecode(req.body) as List).map((e) => Source.fromJson(e)).toList();

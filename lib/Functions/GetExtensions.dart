@@ -20,21 +20,23 @@ class Extensions {
   static final novelRepo = ''.obs;
 
   static Future<void> init() async {
-    animeRepo.value = loadCustomData('animeRepo') ?? '';
-    mangaRepo.value = loadCustomData('mangaRepo') ?? '';
-    novelRepo.value = loadCustomData('novelRepo') ?? '';
+    try {
+      animeRepo.value = loadCustomData('animeRepo') ?? '';
+      mangaRepo.value = loadCustomData('mangaRepo') ?? '';
+      novelRepo.value = loadCustomData('novelRepo') ?? '';
 
-    await Future.wait([
-      if (animeRepo.value.isNotEmpty)
-        _provider.read(
-            fetchAnimeSourcesListProvider(id: null, reFresh: false).future),
-      if (mangaRepo.value.isNotEmpty)
-        _provider.read(
-            fetchMangaSourcesListProvider(id: null, reFresh: false).future),
-      if (novelRepo.value.isNotEmpty)
-        _provider.read(
-            fetchNovelSourcesListProvider(id: null, reFresh: false).future),
-    ]);
+      await Future.wait([
+        if (animeRepo.value.isNotEmpty)
+          _provider.read(
+              fetchAnimeSourcesListProvider(id: null, reFresh: false).future),
+        if (mangaRepo.value.isNotEmpty)
+          _provider.read(
+              fetchMangaSourcesListProvider(id: null, reFresh: false).future),
+        if (novelRepo.value.isNotEmpty)
+          _provider.read(
+              fetchNovelSourcesListProvider(id: null, reFresh: false).future),
+      ]);
+    } catch (_) {}
   }
 
   static Future<void> refresh(ItemType itemType) async {
@@ -68,6 +70,7 @@ class Extensions {
   }
 
   static Future<void> setRepo(ItemType itemType, String repo) async {
+
     if (itemType == ItemType.manga) {
       mangaRepo.value = repo;
       saveCustomData('mangaRepo', repo);

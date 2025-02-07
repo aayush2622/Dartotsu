@@ -4,7 +4,7 @@ extension on ExtensionsQueries {
   Future<Media?> _mediaDetails(Media media) async {
     final source = isar.sources.getSync(media.sourceData!.id!);
 
-    if (source == null) {
+    if (source == null || source.sourceCode == null || source.isAdded == false) {
       snackString('Source not found did you remove it?');
       Get.back();
       return null;
