@@ -561,5 +561,16 @@
   "logFileDescription": "Share the log file",
 
   "colorPickerDefault": "Default",
-  "colorPickerCustom": "Custom"
+  "colorPickerCustom": "Custom",
+
+  "addAnimeRepo": "Add Anime Repo",
+  "addAnimeRepoDesc": "Add Anime Repo from various sources",
+  "addMangaRepo": "Add Manga Repo",
+  "addMangaRepoDesc": "Add Manga Repo from various sources",
+  "addNovelRepo": "Add Novel Repo",
+  "addNovelRepoDesc": "Add Novel Repo from various sources",
+  "loadExtensionsIcon": "Load Extensions icon",
+  "loadExtensionsIconDesc": "Disable if extensions page lags",
+  "autoUpdate": "Auto Update",
+  "autoUpdateDesc": "Auto Update Extensions"
 }

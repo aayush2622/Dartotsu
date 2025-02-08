@@ -43,29 +43,29 @@ class SettingsExtensionsScreenState extends BaseSettingsScreen {
     return [
       Setting(
         type: SettingType.normal,
-        name: 'Add Anime Repo',
-        description: 'Add Anime Repo from various sources',
+        name: getString.addAnimeRepo,
+        description: getString.addAnimeRepoDesc,
         icon: Bootstrap.github,
         onClick: () => Extensions.addRepo(context, ItemType.anime),
       ),
       Setting(
         type: SettingType.normal,
-        name: 'Add Manga Repo',
-        description: 'Add Manga Repo from various sources',
+        name: getString.addMangaRepo,
+        description: getString.addMangaRepoDesc,
         icon: Bootstrap.github,
         onClick: () => Extensions.addRepo(context, ItemType.manga),
       ),
       Setting(
         type: SettingType.normal,
-        name: 'Add Novel Repo',
-        description: 'Add Novel Repo from various sources',
+        name: getString.addNovelRepo,
+        description: getString.addNovelRepoDesc,
         icon: Bootstrap.github,
         onClick: () => Extensions.addRepo(context, ItemType.novel),
       ),
       Setting(
         type: SettingType.switchType,
-        name: 'Load Extensions icon',
-        description: 'Disable if extensions page lags',
+        name: getString.loadExtensionsIcon,
+        description: getString.loadExtensionsIconDesc,
         icon: Icons.image_not_supported_rounded,
         isChecked: loadCustomData('loadExtensionIcon') ?? true,
         onSwitchChange: (value) =>
@@ -73,8 +73,8 @@ class SettingsExtensionsScreenState extends BaseSettingsScreen {
       ),
       Setting(
         type: SettingType.switchType,
-        name: 'Auto Update',
-        description: 'Auto Update Extensions',
+        name: getString.autoUpdate,
+        description: getString.autoUpdateDesc,
         icon: Icons.update,
         isChecked: loadData(PrefName.autoUpdateExtensions),
         onSwitchChange: (value) =>
