@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:dantotsu/Functions/Function.dart';
 import 'package:dantotsu/api/Sources/Model/settings.dart';
-import 'package:dantotsu/api/Sources/http/rhttp/src/model/settings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart'
 as flutter_inappwebview;
@@ -12,42 +11,15 @@ import 'package:http_interceptor/http_interceptor.dart';
 import '../../../logger.dart';
 import '../../../main.dart';
 import '../Eval/dart/model/m_source.dart';
-import '../http/rhttp/rhttp.dart' as rhttp;
 
 class MClient {
   MClient();
-
-  static Client httpClient(
-      {Map<String, dynamic>? reqcopyWith, rhttp.ClientSettings? settings}) {
-    if (!(reqcopyWith?["useDartHttpClient"] ?? false)) {
-      try {
-        settings ??= rhttp.ClientSettings(
-            throwOnStatusCode: false,
-            proxySettings: reqcopyWith?["noProxy"] ?? false
-                ? const rhttp.ProxySettings.noProxy()
-                : null,
-            timeout: reqcopyWith?["timeout"] != null
-                ? Duration(seconds: reqcopyWith?["timeout"])
-                : null,
-            timeoutSettings: TimeoutSettings(
-                connectTimeout: reqcopyWith?["connectTimeout"] != null
-                    ? Duration(seconds: reqcopyWith?["connectTimeout"])
-                    : null),
-            tlsSettings: rhttp.TlsSettings(
-                verifyCertificates:
-                    reqcopyWith?["verifyCertificates"] ?? false));
-        return rhttp.RhttpCompatibleClient.createSync(settings: settings);
-      } catch (_) {}
-    }
-    return IOClient(HttpClient());
-  }
-
   static InterceptedClient init(
       {MSource? source,
       Map<String, dynamic>? reqcopyWith,
-      rhttp.ClientSettings? settings}) {
+      }) {
     return InterceptedClient.build(
-        client: httpClient(settings: settings, reqcopyWith: reqcopyWith),
+        client: IOClient(HttpClient()),
         interceptors: [MCookieManager(reqcopyWith), LoggerInterceptor()]);
   }
 

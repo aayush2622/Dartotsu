@@ -91,8 +91,6 @@ dependencies:
   xpath_selector_html_parser: ^3.0.1
   js_packer: ^0.0.5
   json_path: ^0.7.4
-  freezed_annotation: ^2.0.0
-  flutter_rust_bridge: ^2.3.0
   grouped_list: ^6.0.0
   fuzzywuzzy: ^1.2.0
   crypto: ^3.0.6
