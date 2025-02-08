@@ -58,16 +58,21 @@ class AnimeWatchScreenState extends BaseWatchScreen<AnimeWatchScreen> {
         return const Center(child: CircularProgressIndicator());
       }
       if (episodeList.isEmpty) {
-        return Center(
-          child: Text(
-            _viewModel.errorType.value == ErrorType.NotFound
-                ? 'Media not found'
-                : 'No episodes found',
-            style: TextStyle(
-              color: Theme.of(context).colorScheme.onSurface,
-              fontWeight: FontWeight.bold,
+        return Column(
+          children: [
+            _buildTitle(),
+            Center(
+              child: Text(
+                _viewModel.errorType.value == ErrorType.NotFound
+                    ? 'Media not found'
+                    : 'No episodes found',
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onSurface,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
-          ),
+          ],
         );
       }
       updateEpisodeDetails(episodeList);
@@ -171,22 +176,5 @@ class AnimeWatchScreenState extends BaseWatchScreen<AnimeWatchScreen> {
       episode.filler =
           _viewModel.fillerEpisodesList.value?[number]?.filler == true;
     });
-    var key = '${context.currentService().getName}_thumbList';
-    Map<dynamic, dynamic>? t = loadCustomData(key);
-
-    var thumbList = (t)?.map(
-          (key, value) => MapEntry(
-            key.toString(),
-            (value as Map<dynamic, dynamic>).map(
-              (k, v) => MapEntry(k.toString(), v as String?),
-            ),
-          ),
-        ) ??
-        {};
-    for (var i in episodeList.values) {
-      thumbList[mediaData.id.toString()] ??= {};
-
-      thumbList[mediaData.id.toString()]![i.number] = i.thumb;
-    }
   }
 }

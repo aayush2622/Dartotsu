@@ -65,8 +65,6 @@ PODS:
     - FlutterMacOS
   - permission_handler_apple (9.3.0):
     - Flutter
-  - rust_lib_mangayomi (0.0.1):
-    - Flutter
   - screen_brightness_ios (0.1.0):
     - Flutter
   - SDWebImage (5.17.0):
@@ -106,7 +104,6 @@ DEPENDENCIES:
   - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
   - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
-  - rust_lib_mangayomi (from `.symlinks/plugins/rust_lib_mangayomi/ios`)
   - screen_brightness_ios (from `.symlinks/plugins/screen_brightness_ios/ios`)
   - share_plus (from `.symlinks/plugins/share_plus/ios`)
   - sqflite_darwin (from `.symlinks/plugins/sqflite_darwin/darwin`)
@@ -153,8 +150,6 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/path_provider_foundation/darwin"
   permission_handler_apple:
     :path: ".symlinks/plugins/permission_handler_apple/ios"
-  rust_lib_mangayomi:
-    :path: ".symlinks/plugins/rust_lib_mangayomi/ios"
   screen_brightness_ios:
     :path: ".symlinks/plugins/screen_brightness_ios/ios"
   share_plus:
@@ -190,7 +185,6 @@ SPEC CHECKSUMS:
   package_info_plus: af8e2ca6888548050f16fa2f1938db7b5a5df499
   path_provider_foundation: 080d55be775b7414fd5a5ef3ac137b97b097e564
   permission_handler_apple: 4ed2196e43d0651e8ff7ca3483a069d469701f2d
-  rust_lib_mangayomi: 360a904274b47351a0f7c26d3ce5aa6392bb8db3
   screen_brightness_ios: 28c5fbdb40634de44f86025d84470158ad4df48c
   SDWebImage: 750adf017a315a280c60fde706ab1e552a3ae4e9
   share_plus: 50da8cb520a8f0f65671c6c6a99b3617ed10a58a

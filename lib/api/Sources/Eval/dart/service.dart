@@ -38,7 +38,7 @@ class DartExtensionService implements ExtensionService {
       final runtime = runtimeEval(bytecode);
       runtime.args = [$String(source.baseUrl!)];
       var res = runtime.executeLib(
-        'package:mangayomi/main.dart',
+        'package:dantotsu/main.dart',
         'getHeader',
       );
       if (res is $Map) {

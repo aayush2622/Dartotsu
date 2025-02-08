@@ -76,9 +76,7 @@ void main(List<String> args) async {
 
 Future init() async {
   if (Platform.isWindows) {
-    registerProtocol('dar');
-    registerProtocol('anymex');
-    registerProtocol('mangayomi');
+    ['dar', 'anymex', 'sugoireads'].forEach(registerProtocol);
   }
   await StorageProvider.requestPermission();
   await dotenv.load(fileName: ".env");

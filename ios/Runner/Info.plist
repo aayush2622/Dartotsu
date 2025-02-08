@@ -91,10 +91,10 @@
         </dict>
         <dict>
             <key>CFBundleURLName</key>
-            <string>mangayomi</string>
+            <string>sugoireads</string>
             <key>CFBundleURLSchemes</key>
             <array>
-                <string>mangayomi</string>
+                <string>sugoireads</string>
             </array>
         </dict>
     </array>

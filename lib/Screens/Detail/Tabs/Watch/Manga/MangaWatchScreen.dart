@@ -54,16 +54,21 @@ class MangaWatchScreenState extends BaseWatchScreen<MangaWatchScreen> {
             return const Center(child: CircularProgressIndicator());
           }
           if (chapterList.isEmpty) {
-            return Center(
-              child: Text(
-                _viewModel.errorType.value == ErrorType.NotFound
-                    ? 'Media not found'
-                    : 'No chapter found',
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.onSurface,
-                  fontWeight: FontWeight.bold,
+            return Column(
+              children: [
+                _buildTitle(),
+                Center(
+                  child: Text(
+                    _viewModel.errorType.value == ErrorType.NotFound
+                        ? 'Media not found'
+                        : 'No chapter found',
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.onSurface,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
-              ),
+              ],
             );
           }
           widget.mediaData.manga?.chapters = chapterList;
