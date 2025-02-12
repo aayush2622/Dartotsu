@@ -1,60 +1,52 @@
 part of '../AnilistQueries.dart';
 
 extension on AnilistQueries {
-  Future<SearchResults?> _search({
-    required String type,
-    int? page,
-    int? perPage,
-    String? search,
-    String? sort,
-    List<String>? genres,
-    List<String>? tags,
-    String? status,
-    String? source,
-    String? format,
-    String? countryOfOrigin,
-    bool isAdult = false,
-    bool? onList,
-    List<String>? excludedGenres,
-    List<String>? excludedTags,
-    int? startYear,
-    int? seasonYear,
-    String? season,
-    int? id,
-    bool hd = false,
-  }) async {
+  Future<SearchResults?> _search(SearchResults? searchResults) async {
+    if (searchResults == null) return null;
+    searchResults.type = searchResults.type.toUpperCase();
     var adultOnly = PrefManager.getVal(PrefName.adultOnly);
     final Map<String, dynamic> variables = {
-      "type": type,
-      "isAdult": isAdult,
+      "type": searchResults.type,
+      if (searchResults.isAdult == true) "isAdult": searchResults.isAdult,
       if (adultOnly) "isAdult": true,
-      if (onList != null) "onList": onList,
-      if (page != null) "page": page,
-      if (id != null) "id": id,
-      if (type == "ANIME" && seasonYear != null) "seasonYear": seasonYear,
-      if (type == "MANGA" && startYear != null)
-        "yearGreater": startYear * 10000,
-      if (type == "MANGA" && startYear != null)
-        "yearLesser": (startYear + 1) * 10000,
-      if (season != null) "season": season,
-      if (search != null) "search": search,
-      if (source != null) "source": source,
-      if (sort != null) "sort": sort,
-      if (status != null) "status": status,
-      if (format != null) "format": format.replaceAll(" ", "_"),
-      if (countryOfOrigin != null) "countryOfOrigin": countryOfOrigin,
-      if (genres != null && genres.isNotEmpty) "genres": genres,
-      if (excludedGenres != null && excludedGenres.isNotEmpty)
-        "excludedGenres":
-            excludedGenres.map((g) => g.replaceAll("Not ", "")).toList(),
-      if (tags != null && tags.isNotEmpty) "tags": tags,
-      if (excludedTags != null && excludedTags.isNotEmpty)
-        "excludedTags":
-            excludedTags.map((t) => t.replaceAll("Not ", "")).toList(),
+      if (searchResults.onList != null) "onList": searchResults.onList,
+      if (searchResults.page != null) "page": searchResults.page,
+      if (searchResults.id != null) "id": searchResults.id,
+      if (searchResults.type == "ANIME" && searchResults.seasonYear != null)
+        "seasonYear": searchResults.seasonYear,
+      if (searchResults.type == "MANGA" && searchResults.startYear != null)
+        "yearGreater": searchResults.startYear! * 10000,
+      if (searchResults.type == "MANGA" && searchResults.startYear != null)
+        "yearLesser": (searchResults.startYear! + 1) * 10000,
+      if (searchResults.season != null) "season": searchResults.season,
+      if (searchResults.search != null) "search": searchResults.search,
+      if (searchResults.source != null) "source": searchResults.source,
+      if (searchResults.sort != null) "sort": searchResults.sort,
+      if (searchResults.status != null) "status": searchResults.status,
+      if (searchResults.format != null)
+        "format": searchResults.format?.replaceAll(" ", "_"),
+      if (searchResults.countryOfOrigin != null)
+        "countryOfOrigin": searchResults.countryOfOrigin,
+      if (searchResults.genres != null && searchResults.genres!.isNotEmpty)
+        "genres": searchResults.genres,
+      if (searchResults.excludedGenres != null &&
+          searchResults.excludedGenres!.isNotEmpty)
+        "excludedGenres": searchResults.excludedGenres
+            ?.map((g) => g.replaceAll("Not ", ""))
+            .toList(),
+      if (searchResults.tags != null && searchResults.tags?.isNotEmpty == true)
+        "tags": searchResults.tags,
+      if (searchResults.excludedTags != null &&
+          searchResults.excludedTags?.isNotEmpty == true)
+        "excludedTags": searchResults.excludedTags
+            ?.map((t) => t.replaceAll("Not ", ""))
+            .toList(),
     };
 
-    final response = (await executeQuery<PageResponse>(_querySearch(perPage),
-            variables: jsonEncode(variables), force: true))
+    final response = (await executeQuery<PageResponse>(
+            _querySearch(searchResults.perPage),
+            variables: jsonEncode(variables),
+            force: true))
         ?.data
         ?.page;
     if (response?.media != null) {
@@ -69,8 +61,10 @@ extension on AnilistQueries {
         });
 
         Media mediaInfo = Media.mediaData(i);
-        if (!hd) mediaInfo.cover = i.coverImage?.large ?? '';
-        mediaInfo.relation = (onList == true) ? userStatus : null;
+        if (!(searchResults.hdCover ?? false)) {
+          mediaInfo.cover = i.coverImage?.large ?? '';
+        }
+        mediaInfo.relation = (searchResults.onList == true) ? userStatus : null;
         mediaInfo.genres = genresArr;
 
         responseArray.add(mediaInfo);
@@ -79,28 +73,10 @@ extension on AnilistQueries {
       var pageInfo = response?.pageInfo;
       if (pageInfo == null) return null;
 
-      return SearchResults(
-        type: type,
-        perPage: perPage,
-        search: search,
-        sort: sort,
-        isAdult: isAdult,
-        onList: onList,
-        genres: genres,
-        excludedGenres: excludedGenres,
-        tags: tags,
-        excludedTags: excludedTags,
-        status: status,
-        source: source,
-        format: format,
-        countryOfOrigin: countryOfOrigin,
-        startYear: startYear,
-        seasonYear: seasonYear,
-        season: season,
-        results: responseArray,
-        page: pageInfo.currentPage ?? 0,
-        hasNextPage: pageInfo.hasNextPage == true,
-      );
+      return searchResults
+        ..results = responseArray
+        ..page = pageInfo.currentPage ?? 0
+        ..hasNextPage = pageInfo.hasNextPage == true;
     }
     return null;
   }

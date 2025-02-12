@@ -81,48 +81,5 @@ class AnilistQueries extends Queries {
   Future<List<Media>> getCalendarData() => _getCalendarData();
 
   @override
-  Future<SearchResults?> search({
-    required String type,
-    int? page,
-    int? perPage,
-    String? search,
-    String? sort,
-    List<String>? genres,
-    List<String>? tags,
-    String? status,
-    String? source,
-    String? format,
-    String? countryOfOrigin,
-    bool isAdult = false,
-    bool? onList,
-    List<String>? excludedGenres,
-    List<String>? excludedTags,
-    int? startYear,
-    int? seasonYear,
-    String? season,
-    int? id,
-    bool hd = false,
-  }) =>
-      _search(
-        type: type,
-        page: page,
-        perPage: perPage,
-        search: search,
-        sort: sort,
-        genres: genres,
-        tags: tags,
-        status: status,
-        source: source,
-        format: format,
-        countryOfOrigin: countryOfOrigin,
-        isAdult: isAdult,
-        onList: onList,
-        excludedGenres: excludedGenres,
-        excludedTags: excludedTags,
-        startYear: startYear,
-        seasonYear: seasonYear,
-        season: season,
-        id: id,
-        hd: hd,
-      );
+  Future<SearchResults?> search(SearchResults? searchResults) => _search(searchResults);
 }

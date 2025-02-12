@@ -1,4 +1,5 @@
 import 'package:dantotsu/DataClass/Media.dart';
+import 'package:dantotsu/DataClass/SearchResults.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
@@ -57,17 +58,17 @@ class AnilistAnimeScreen extends BaseAnimeScreen {
 
   @override
   Future<void> loadNextPage() async {
-    final result = await Anilist.query!.search(
+    final result = await Anilist.query!.search(SearchResults(
       type: 'ANIME',
       page: page + 1,
       perPage: 50,
       sort: Anilist.sortBy[1],
       onList: PrefManager.getVal(PrefName.includeAnimeList),
-    );
+    ));
     page++;
     if (result != null) {
-      canLoadMore.value = result.hasNextPage;
-      animePopular.value = [...?animePopular.value, ...result.results];
+      canLoadMore.value = result.hasNextPage ?? false;
+      animePopular.value = [...?animePopular.value, ...?result.results];
     }
     loadMore.value = true;
   }
@@ -78,14 +79,14 @@ class AnilistAnimeScreen extends BaseAnimeScreen {
     var currentSeasonMap = Anilist.currentSeasons[page];
     var season = currentSeasonMap.keys.first;
     var year = currentSeasonMap.values.first;
-    var trending = await Anilist.query!.search(
+    var trending = await Anilist.query!.search(SearchResults(
       type: 'ANIME',
       perPage: 12,
       sort: Anilist.sortBy[2],
       season: season,
       seasonYear: year,
-      hd: true,
-    );
+      hdCover: true,
+    ));
     this.trending.value = trending?.results;
   }
 

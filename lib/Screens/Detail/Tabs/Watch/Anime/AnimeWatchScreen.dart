@@ -1,7 +1,5 @@
 import 'package:collection/collection.dart';
 import 'package:dantotsu/DataClass/Media.dart';
-import 'package:dantotsu/Functions/Extensions.dart';
-import 'package:dantotsu/Preferences/PrefManager.dart';
 import 'package:dantotsu/Screens/Detail/Tabs/Watch/BaseParser.dart';
 import 'package:dantotsu/Screens/Detail/Tabs/Watch/BaseWatchScreen.dart';
 import 'package:flutter/material.dart';

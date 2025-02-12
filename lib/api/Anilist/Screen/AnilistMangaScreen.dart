@@ -1,3 +1,4 @@
+import 'package:dantotsu/DataClass/SearchResults.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
@@ -57,17 +58,19 @@ class AnilistMangaScreen extends BaseMangaScreen {
 
   @override
   Future<void> loadNextPage() async {
-    final result = await Anilist.query!.search(
+    final result = await Anilist.query!.search(SearchResults(
       type: 'MANGA',
       page: page + 1,
       perPage: 50,
       sort: Anilist.sortBy[1],
-      onList: PrefManager.getVal(PrefName.includeMangaList),
-    );
+      onList: PrefManager.getVal(
+        PrefName.includeMangaList,
+      ),
+    ));
     page++;
     if (result != null) {
-      canLoadMore.value = result.hasNextPage;
-      mangaPopular.value = [...?mangaPopular.value, ...result.results];
+      canLoadMore.value = result.hasNextPage ?? false;
+      mangaPopular.value = [...?mangaPopular.value, ...?result.results];
     }
     loadMore.value = true;
   }
@@ -77,14 +80,14 @@ class AnilistMangaScreen extends BaseMangaScreen {
     this.trending.value = null;
     final country = type == 'MANHWA' ? 'KR' : 'JP';
     final format = type == 'NOVEL' ? 'NOVEL' : null;
-    final trending = await Anilist.query!.search(
+    final trending = await Anilist.query!.search(SearchResults(
       type: 'MANGA',
       countryOfOrigin: country,
       format: format,
       perPage: 50,
       sort: Anilist.sortBy[2],
-      hd: true,
-    );
+      hdCover: true,
+    ));
 
     this.trending.value = trending?.results;
   }

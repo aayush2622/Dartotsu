@@ -6,8 +6,8 @@ part 'Data/SearchResults.g.dart';
 
 @JsonSerializable()
 class SearchResults {
-  final String type;
-  bool isAdult;
+  String type;
+  bool? isAdult;
   bool? onList;
   int? perPage;
   String? search;
@@ -23,16 +23,17 @@ class SearchResults {
   int? seasonYear;
   int? startYear;
   String? season;
-  int page;
-  List<Media> results;
-  bool hasNextPage;
-
+  int? page;
+  List<Media>? results;
+  bool? hasNextPage;
+  int? id;
+  bool? hdCover;
   SearchResults({
     required this.type,
-    required this.isAdult,
+    this.isAdult,
     this.onList,
     this.perPage,
-    this.search,
+    this.search = "",
     this.countryOfOrigin,
     this.sort,
     this.genres,
@@ -46,8 +47,10 @@ class SearchResults {
     this.startYear,
     this.season,
     this.page = 1,
-    required this.results,
-    required this.hasNextPage,
+    this.results = const [],
+    this.hasNextPage = false,
+    this.hdCover,
+    this.id,
   });
 
   List<SearchChip> toChipList() {

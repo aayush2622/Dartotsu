@@ -2,8 +2,10 @@ import 'package:dantotsu/Services/Screens/BaseAnimeScreen.dart';
 import 'package:dantotsu/Services/Screens/BaseHomeScreen.dart';
 import 'package:dantotsu/Services/Screens/BaseLoginScreen.dart';
 import 'package:dantotsu/Services/Screens/BaseMangaScreen.dart';
+import 'package:dantotsu/Services/Screens/BaseSearchScreen.dart';
 import 'package:dantotsu/Theme/LanguageSwitcher.dart';
 import 'package:dantotsu/api/Anilist/Screen/AnilistAnimeScreen.dart';
+import 'package:dantotsu/api/Anilist/Screen/AnilistSearchScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
@@ -42,6 +44,10 @@ class AnilistService extends MediaService {
   @override
   BaseLoginScreen get loginScreen =>
       Get.put(AnilistLoginScreen(Anilist), tag: "AnilistLoginScreen");
+
+  @override
+  BaseSearchScreen get searchScreen =>
+      Get.put(AnilistSearchScreen(Anilist), tag: "AnilistSearchScreen");
 }
 
 class AnilistLoginScreen extends BaseLoginScreen {

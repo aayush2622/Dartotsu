@@ -75,27 +75,7 @@ class SimklQueries extends Queries {
   Future<media.Media?>? mediaDetails(media.Media media) => null;
 
   @override
-  Future<SearchResults?> search(
-      {required String type,
-      int? page,
-      int? perPage,
-      String? search,
-      String? sort,
-      List<String>? genres,
-      List<String>? tags,
-      String? status,
-      String? source,
-      String? format,
-      String? countryOfOrigin,
-      bool isAdult = false,
-      bool? onList,
-      List<String>? excludedGenres,
-      List<String>? excludedTags,
-      int? startYear,
-      int? seasonYear,
-      String? season,
-      int? id,
-      bool hd = false}) {
+  Future<SearchResults?> search(SearchResults? searchResults) {
     // TODO: implement search
     throw UnimplementedError();
   }

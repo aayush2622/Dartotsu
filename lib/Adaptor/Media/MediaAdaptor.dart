@@ -56,6 +56,9 @@ class MediaGridState extends State<MediaAdaptor> {
 
   @override
   Widget build(BuildContext context) {
+    if (_mediaList.isEmpty) {
+      return const SizedBox();
+    }
     switch (widget.type) {
       case 0:
         return _buildHorizontalList();
