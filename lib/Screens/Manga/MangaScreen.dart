@@ -15,7 +15,7 @@ import '../../Theme/LanguageSwitcher.dart';
 import '../../Theme/ThemeProvider.dart';
 import '../../Widgets/ScrollConfig.dart';
 import '../Home/Widgets/LoadingWidget.dart';
-import '../Home/Widgets/SearchBar.dart';
+import '../Home/Widgets/ServiceSwitcherBar.dart';
 
 class MangaScreen extends StatefulWidget {
   const MangaScreen({super.key});
@@ -104,7 +104,7 @@ class MangaScreenState extends State<MangaScreen> {
                         ? MediaAdaptor(type: 1, mediaList: mediaDataList)
                         : const Center(child: CircularProgressIndicator()),
                   ),
-                  MediaSearchBar(
+                  ServiceSwitcherBar(
                     title: getString.manga.toUpperCase(),
                   ),
                   Positioned(

@@ -1,14 +1,10 @@
 import 'package:dantotsu/Functions/Extensions.dart';
 import 'package:dantotsu/Theme/Colors.dart';
 import 'package:dantotsu/Theme/LanguageSwitcher.dart';
-import 'package:dantotsu/Widgets/LoadSvg.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../Services/MediaService.dart';
-import '../Services/ServiceSwitcher.dart';
 import '../Theme/ThemeProvider.dart';
-import '../Widgets/CustomBottomDialog.dart';
 
 class FloatingBottomNavBar extends StatelessWidget {
   final int selectedIndex;
@@ -27,7 +23,6 @@ class FloatingBottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeNotifier = Provider.of<ThemeNotifier>(context);
-    // Define the navigation items
     final navItems = [
       _NavItem(
           index: 0,
@@ -83,56 +78,11 @@ class FloatingBottomNavBar extends StatelessWidget {
     );
   }
 
-  void showBottomDialog(BuildContext context) {
-    // Get all registered services
-    List<MediaService> mediaServices = MediaService.allServices;
-    var provider = Provider.of<MediaServiceProvider>(context, listen: false);
-
-    var t = CustomBottomDialog(
-      viewList: [
-        ListView.builder(
-          shrinkWrap: true,
-          itemCount: mediaServices.length,
-          itemBuilder: (context, index) {
-            MediaService service = mediaServices[index];
-            return ListTile(
-              selected:
-                  provider.currentService.runtimeType == service.runtimeType,
-              leading: loadSvg(
-                service.iconPath,
-                width: 32.0,
-                height: 32.0,
-                color: Theme.of(context).colorScheme.primary,
-              ),
-              title: Text(
-                service.getName,
-                style: const TextStyle(
-                  fontFamily: 'Poppins',
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              onTap: () {
-                provider.switchService(service.runtimeType.toString());
-                Navigator.pop(context);
-              },
-            );
-          },
-        ),
-      ],
-      title: getString.selectMediaService,
-    );
-
-    showCustomBottomDialog(context, t);
-  }
-
   Widget _buildNavItem(_NavItem item, BuildContext context) {
     final theme = Theme.of(context).colorScheme;
     final isSelected = item.index == selectedIndex;
-
     return GestureDetector(
       onTap: () => onTabSelected(item.index),
-      onLongPress: () => showBottomDialog(context),
       behavior: HitTestBehavior.translucent,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 300),

@@ -16,7 +16,7 @@ import '../../Theme/Colors.dart';
 import '../../Theme/ThemeProvider.dart';
 import '../../Widgets/ScrollConfig.dart';
 import '../Home/Widgets/LoadingWidget.dart';
-import '../Home/Widgets/SearchBar.dart';
+import '../Home/Widgets/ServiceSwitcherBar.dart';
 
 class AnimeScreen extends StatefulWidget {
   const AnimeScreen({super.key});
@@ -105,7 +105,7 @@ class AnimeScreenState extends State<AnimeScreen> {
                         ? MediaAdaptor(type: 1, mediaList: mediaDataList)
                         : const Center(child: CircularProgressIndicator()),
                   ),
-                  MediaSearchBar(title: getString.anime.toUpperCase()),
+                  ServiceSwitcherBar(title: getString.anime.toUpperCase()),
                   Positioned(
                     bottom: 92,
                     left: 8.0,

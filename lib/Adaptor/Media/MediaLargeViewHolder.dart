@@ -56,8 +56,6 @@ class MediaPageLargeViewHolder extends StatelessWidget {
               fit: BoxFit.cover,
               width: double.infinity,
               height: 151,
-              placeholder: (context, url) => const SizedBox.shrink(),
-              errorWidget: (context, url, error) => const SizedBox.shrink(),
             ),
           ),
           _buildGradientOverlay(gradientColors),
@@ -143,22 +141,23 @@ class MediaPageLargeViewHolder extends StatelessWidget {
 
   Widget _buildMediaCover() {
     return Hero(
-        tag: tag,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(16.0),
-          child: cachedNetworkImage(
-            imageUrl: mediaInfo.cover ?? '',
-            fit: BoxFit.cover,
+      tag: tag,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(16.0),
+        child: cachedNetworkImage(
+          imageUrl: mediaInfo.cover ?? '',
+          fit: BoxFit.cover,
+          width: 108,
+          height: 160,
+          errorWidget: (context, url, error) => const SizedBox.shrink(),
+          placeholder: (context, url) => Container(
+            color: Colors.white12,
             width: 108,
             height: 160,
-            errorWidget: (context, url, error) => const SizedBox.shrink(),
-            placeholder: (context, url) => Container(
-              color: Colors.white12,
-              width: 108,
-              height: 160,
-            ),
           ),
-        ));
+        ),
+      ),
+    );
   }
 
   Widget _buildAdditionalInfo(ColorScheme theme) {

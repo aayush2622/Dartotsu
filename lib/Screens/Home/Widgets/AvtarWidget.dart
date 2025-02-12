@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class AvatarWidget extends StatelessWidget {
+class SettingIconWidget extends StatelessWidget {
   final IconData icon;
 
-  const AvatarWidget({
+  const SettingIconWidget({
     super.key,
     required this.icon,
   });

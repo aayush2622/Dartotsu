@@ -6,6 +6,7 @@ import 'package:dantotsu/Functions/Function.dart';
 import 'package:dantotsu/Screens/Login/LoginScreen.dart';
 import 'package:dantotsu/Screens/Manga/MangaScreen.dart';
 import 'package:dantotsu/api/Sources/Model/Manga.dart';
+import 'package:desktop_webview_window/desktop_webview_window.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -35,6 +36,7 @@ import 'Screens/HomeNavbar.dart';
 import 'Services/MediaService.dart';
 import 'Services/ServiceSwitcher.dart';
 import 'StorageProvider.dart';
+import 'Theme/Colors.dart';
 import 'Theme/ThemeManager.dart';
 import 'Theme/ThemeProvider.dart';
 import 'api/Discord/Discord.dart';
@@ -48,6 +50,10 @@ void main(List<String> args) async {
   runZonedGuarded(
     () async {
       WidgetsFlutterBinding.ensureInitialized();
+      if(Platform.isLinux) {
+        runWebViewTitleBarWidget(args);
+        return;
+      }
       await init();
       runApp(
         provider.ProviderScope(
@@ -75,9 +81,7 @@ void main(List<String> args) async {
 }
 
 Future init() async {
-  if (Platform.isWindows) {
-    ['dar', 'anymex', 'sugoireads'].forEach(registerProtocol);
-  }
+  if (Platform.isWindows) ['dar', 'anymex', 'sugoireads'].forEach(registerProtocol);
   await StorageProvider.requestPermission();
   await dotenv.load(fileName: ".env");
   await PrefManager.init();
@@ -236,7 +240,8 @@ class MainActivityState extends State<MainActivity> {
       selectedIndex: _selectedIndex,
       onTabSelected: _onTabSelected,
     );
-
+    final themeNotifier = Provider.of<ThemeNotifier>(context);
+    final service = context.currentService();
     return Scaffold(
       body: Stack(
         children: [
@@ -245,7 +250,7 @@ class MainActivityState extends State<MainActivity> {
               index: _selectedIndex,
               children: [
                 const AnimeScreen(),
-                context.currentService().data.token.value.isNotEmpty
+                service.data.token.value.isNotEmpty
                     ? const HomeScreen()
                     : const LoginScreen(),
                 const MangaScreen(),
@@ -253,6 +258,17 @@ class MainActivityState extends State<MainActivity> {
             );
           }),
           navbar,
+          Positioned(
+            bottom: 92.bottomBar(),
+            right: 12,
+            child: FloatingActionButton(
+              onPressed: () => service.searchScreen?.onSearchIconClick(context),
+              foregroundColor: Theme.of(context).colorScheme.outline,
+              backgroundColor: themeNotifier.isDarkMode ? greyNavDark : greyNavLight,
+              elevation: 12,
+              child: const Icon(Icons.search),
+            ),
+          ),
         ],
       ),
     );

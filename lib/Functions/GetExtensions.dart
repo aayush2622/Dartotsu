@@ -70,7 +70,7 @@ class Extensions {
   }
 
   static Future<void> setRepo(ItemType itemType, String repo) async {
-
+    repo.trim();
     if (itemType == ItemType.manga) {
       mangaRepo.value = repo;
       saveCustomData('mangaRepo', repo);
@@ -88,6 +88,7 @@ class Extensions {
           .read(fetchNovelSourcesListProvider(id: null, reFresh: true).future);
     }
   }
+
   static Future<void> removeRepo(ItemType itemType) async {
     if (itemType == ItemType.manga) {
       mangaRepo.value = '';
@@ -108,12 +109,12 @@ class Extensions {
       ..setTitle('${type.name.capitalize} ${getString.source}')
       ..setCustomView(
         Obx(
-              () {
+          () {
             var installedRepo = type == ItemType.anime
                 ? animeRepo.value
                 : type == ItemType.manga
-                ? mangaRepo.value
-                : novelRepo.value;
+                    ? mangaRepo.value
+                    : novelRepo.value;
             return Column(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.start,
@@ -122,8 +123,7 @@ class Extensions {
                 if (installedRepo.isNotEmpty) ...[
                   GestureDetector(
                     onTap: () => copyToClipboard(installedRepo),
-                    onLongPress: () =>
-                        Extensions.removeRepo(type),
+                    onLongPress: () => removeRepo(type),
                     child: Text(
                       installedRepo,
                       style: TextStyle(
@@ -137,7 +137,7 @@ class Extensions {
                 ],
                 TextField(
                   decoration: const InputDecoration(
-                      hintText: 'Repo URL',
+                    hintText: 'Repo URL',
                   ),
                   onChanged: (value) => text = value,
                 ),
@@ -148,10 +148,7 @@ class Extensions {
       )
       ..setPositiveButton(
         getString.ok,
-            () {
-          if (text.isEmpty) return;
-          setRepo(type, text);
-        },
+        () => text.isNotEmpty ? setRepo(type, text) : null,
       )
       ..setNegativeButton(getString.cancel, null)
       ..show();

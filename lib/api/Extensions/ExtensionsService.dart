@@ -31,5 +31,5 @@ class ExtensionsService extends MediaService {
       Get.put(ExtensionsHomeScreen(), tag: "ExtensionsHomeScreen");
 
   @override
-  String get iconPath => "assets/svg/discord.svg";
+  String get iconPath => "assets/svg/extensions.svg";
 }

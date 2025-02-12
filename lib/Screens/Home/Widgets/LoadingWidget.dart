@@ -25,7 +25,7 @@ class LoadingWidget extends StatelessWidget {
             right: 34,
             top: 36.statusBar(),
             child: GestureDetector(
-              child: const AvatarWidget(icon: Icons.settings),
+              child: const SettingIconWidget(icon: Icons.settings),
               onTap: () =>
                   showCustomBottomDialog(context, const SettingsBottomSheet()),
             )),

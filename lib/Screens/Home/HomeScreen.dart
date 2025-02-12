@@ -1,5 +1,4 @@
 import 'package:blur/blur.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dantotsu/Functions/Extensions.dart';
 import 'package:dantotsu/Theme/LanguageSwitcher.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +17,7 @@ import '../../Theme/Colors.dart';
 import '../../Theme/ThemeProvider.dart';
 import '../../Widgets/CachedNetworkImage.dart';
 import '../../Widgets/CustomBottomDialog.dart';
+import '../../Widgets/LoadSvg.dart';
 import '../../Widgets/ScrollConfig.dart';
 import '../Home/Widgets/LoadingWidget.dart';
 import '../MediaList/MediaListScreen.dart';
@@ -180,7 +180,7 @@ class HomeScreenState extends State<HomeScreen> {
             GestureDetector(
               onTap: () =>
                   showCustomBottomDialog(context, const SettingsBottomSheet()),
-              child: const AvatarWidget(icon: Icons.settings),
+              child: const SettingIconWidget(icon: Icons.settings),
             ),
             if (data.unreadNotificationCount > 0)
               Positioned(
@@ -199,21 +199,24 @@ class HomeScreenState extends State<HomeScreen> {
   Widget _buildUserInfo(BaseServiceData data) {
     final theme = Theme.of(context).colorScheme;
     final isDarkMode = Provider.of<ThemeNotifier>(context).isDarkMode;
-    var home = context.currentService().homeScreen!;
+
+    var service = context.currentService();
+    var home = service.homeScreen!;
+
     return Positioned(
-        top: 36.statusBar(),
-        left: 34.0,
-        right: 16.0,
-        child: SlideUpAnimation(
-          child: Row(children: [
+      top: 36.statusBar(),
+      left: 34.0,
+      right: 16.0,
+      child: SlideUpAnimation(
+        child: Row(
+          children: [
             GestureDetector(
-              onTap: () {},
-              child: CircleAvatar(
-                backgroundColor: Colors.transparent,
-                radius: 26.0,
-                backgroundImage: data.avatar.value.isNotEmpty
-                    ? CachedNetworkImageProvider(data.avatar.value)
-                    : null,
+              onTap: () => serviceSwitcher(context),
+              child: loadSvg(
+                service.iconPath,
+                width: 38.0,
+                height: 38.0,
+                color: theme.onSurface,
               ),
             ),
             const SizedBox(width: 12),
@@ -238,8 +241,10 @@ class HomeScreenState extends State<HomeScreen> {
                     data.chapterRead.toString(), theme.primary),
               ],
             ),
-          ]),
-        ));
+          ],
+        ),
+      ),
+    );
   }
 
   Widget _buildInfoRow(String label, String value, Color valueColor) {
