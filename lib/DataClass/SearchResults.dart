@@ -29,11 +29,11 @@ class SearchResults {
   int? id;
   bool? hdCover;
   SearchResults({
-    required this.type,
+    this.type = "ANIME",
     this.isAdult,
     this.onList,
     this.perPage,
-    this.search = "",
+    this.search,
     this.countryOfOrigin,
     this.sort,
     this.genres,

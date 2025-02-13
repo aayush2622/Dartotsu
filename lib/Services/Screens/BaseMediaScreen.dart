@@ -54,6 +54,8 @@ abstract class BaseMediaScreen extends GetxController {
       loadMore.value = false;
       if (canLoadMore.value) {
         await loadNextPage();
+      } else {
+        snackString('DAMN! YOU TRULY ARE JOBLESS\nYOU REACHED THE END');
       }
     }
     scrollToTop.value = _canScroll();

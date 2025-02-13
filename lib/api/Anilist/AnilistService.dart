@@ -46,8 +46,7 @@ class AnilistService extends MediaService {
       Get.put(AnilistLoginScreen(Anilist), tag: "AnilistLoginScreen");
 
   @override
-  BaseSearchScreen get searchScreen =>
-      Get.put(AnilistSearchScreen(Anilist), tag: "AnilistSearchScreen");
+  BaseSearchScreen get searchScreen => AnilistSearchScreen(Anilist);
 }
 
 class AnilistLoginScreen extends BaseLoginScreen {

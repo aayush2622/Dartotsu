@@ -50,24 +50,36 @@ extension on AnilistQueries {
         ?.data
         ?.page;
     if (response?.media != null) {
-      List<Media> responseArray = [];
+      List<Media> processMediaListInIsolate(Map<String, dynamic> params) {
+        final response = params['response'] as Page?;
+        final searchResults = params['searchResults'];
 
-      response?.media?.forEach((i) {
-        String userStatus = i.mediaListEntry?.status?.name ?? '';
+        List<Media> responseArray = [];
 
-        List<String> genresArr = [];
-        i.genres?.forEach((genre) {
-          genresArr.add(genre);
+        response?.media?.forEach((i) {
+          String userStatus = i.mediaListEntry?.status?.name ?? '';
+
+          List<String> genresArr = [];
+          i.genres?.forEach((genre) {
+            genresArr.add(genre);
+          });
+
+          Media mediaInfo = Media.mediaData(i);
+          if (!(searchResults.hdCover ?? false)) {
+            mediaInfo.cover = i.coverImage?.large ?? '';
+          }
+          mediaInfo.relation = (searchResults.onList == true) ? userStatus : null;
+          mediaInfo.genres = genresArr;
+
+          responseArray.add(mediaInfo);
         });
 
-        Media mediaInfo = Media.mediaData(i);
-        if (!(searchResults.hdCover ?? false)) {
-          mediaInfo.cover = i.coverImage?.large ?? '';
-        }
-        mediaInfo.relation = (searchResults.onList == true) ? userStatus : null;
-        mediaInfo.genres = genresArr;
+        return responseArray;
+      }
 
-        responseArray.add(mediaInfo);
+      List<Media> responseArray = await compute(processMediaListInIsolate, {
+        'response': response,
+        'searchResults': searchResults,
       });
 
       var pageInfo = response?.pageInfo;

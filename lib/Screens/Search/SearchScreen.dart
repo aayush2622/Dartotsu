@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:dantotsu/Functions/Extensions.dart';
+import 'package:dantotsu/Functions/Function.dart';
 import 'package:dantotsu/Preferences/PrefManager.dart';
 import 'package:dantotsu/Services/Screens/BaseSearchScreen.dart';
 import 'package:flutter/material.dart';
@@ -17,8 +18,10 @@ import '../../Widgets/ScrollConfig.dart';
 class SearchScreen extends StatefulWidget {
   final String title;
   final SearchResults? args;
+  final bool forceSearch;
 
-  const SearchScreen({super.key, required this.title, this.args});
+  const SearchScreen(
+      {super.key, required this.title, this.args, this.forceSearch = false});
 
   @override
   SearchScreenState createState() => SearchScreenState();
@@ -27,60 +30,43 @@ class SearchScreen extends StatefulWidget {
 class SearchScreenState extends State<SearchScreen> {
   Timer? _debounce;
   late MediaService service;
+  late BaseSearchScreen screen;
 
   @override
   void dispose() {
     super.dispose();
     _debounce?.cancel();
-    var screen = service.searchScreen;
-    if (screen != null) screen.remove();
-  }
-
-  void _onSearchChanged(String value) {
-    if (_debounce?.isActive ?? false) _debounce!.cancel();
-    _debounce = Timer(const Duration(milliseconds: 500), () {
-      var screen = service.searchScreen;
-      var key = "${service.getName}${widget.title}_searchHistory";
-      List<String> searchHistory = loadCustomData(key) ?? [];
-      if (!searchHistory.contains(value.trim().toLowerCase()) &&
-          value.isNotEmpty) {
-        var list = List<String>.from(searchHistory);
-        list.add(value.trim().toLowerCase());
-        saveCustomData(key, list);
-      }
-      screen?.searchQuery.value = value;
-      screen?.searchResults.value = screen.searchResults.value..search = value;
-      if (value.isNotEmpty) screen?.search();
-    });
+    screen.remove();
   }
 
   @override
   void initState() {
     super.initState();
     service = context.currentService(listen: false);
-    var screen = service.searchScreen;
-    if (screen != null) screen.init(s: widget.args);
+    if (service.searchScreen != null) {
+      screen = service.searchScreen!;
+      screen.title.value = widget.title;
+      screen.init(s: widget.args);
+    } else {
+      snackString("Service not implemented");
+      Get.back();
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    var screen = service.searchScreen;
-    if (screen == null) {
-      return service.notImplemented(widget.runtimeType.toString());
-    }
-    screen.init();
     return Scaffold(
       body: Stack(
         children: [
-          _buildContent(screen),
-          _buildScrollToTopButton(screen),
+          _buildContent(),
+          _buildScrollToTopButton(),
         ],
       ),
     );
   }
 
-  Widget _buildContent(BaseSearchScreen screen) {
-    var key = "${service.getName}${widget.title}_searchHistory";
+  Widget _buildContent() {
+    var key = "${service.getName}${widget.title.toUpperCase()}_searchHistory";
     var theme = context.theme.colorScheme;
     List<String> searchHistory = loadCustomData(key) ?? [];
 
@@ -94,7 +80,7 @@ class SearchScreenState extends State<SearchScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8),
               child: Obx(() {
-                if (screen.searchQuery.value.isEmpty) {
+                if (screen.showHistory.value) {
                   return ListView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
@@ -118,6 +104,10 @@ class SearchScreenState extends State<SearchScreen> {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
+                            contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 8,
+                              vertical: 4,
+                            ),
                             trailing: IconButton(
                               icon: Icon(
                                 FontAwesome.trash_solid,
@@ -125,8 +115,9 @@ class SearchScreenState extends State<SearchScreen> {
                               ),
                               onPressed: () {
                                 setState(() {
-                                  searchHistory.removeAt(index);
-                                  saveCustomData(key, searchHistory);
+                                  var list = List<String>.from(searchHistory);
+                                  list.removeAt(index);
+                                  saveCustomData(key, list);
                                 });
                               },
                             ),
@@ -146,10 +137,10 @@ class SearchScreenState extends State<SearchScreen> {
                       SizedBox(
                         height: 64,
                         child: Center(
-                          child: !service.searchScreen!.loadMore.value &&
-                                  service.searchScreen!.canLoadMore.value
-                              ? const CircularProgressIndicator()
-                              : const SizedBox(height: 64),
+                          child:
+                              !screen.loadMore.value && screen.canLoadMore.value
+                                  ? const CircularProgressIndicator()
+                                  : const SizedBox(height: 64),
                         ),
                       ),
                     ],
@@ -217,12 +208,12 @@ class SearchScreenState extends State<SearchScreen> {
     );
   }
 
-  Widget _buildScrollToTopButton(BaseSearchScreen service) {
+  Widget _buildScrollToTopButton() {
     var theme = Provider.of<ThemeNotifier>(context);
     return Positioned(
       bottom: 32.bottomBar(),
       left: (0.screenWidthWithContext(context) / 2) - 24.0,
-      child: Obx(() => service.scrollToTop.value
+      child: Obx(() => screen.scrollToTop.value
           ? Container(
               decoration: BoxDecoration(
                 color: theme.isDarkMode ? greyNavDark : greyNavLight,
@@ -231,7 +222,7 @@ class SearchScreenState extends State<SearchScreen> {
               padding: const EdgeInsets.all(4.0),
               child: IconButton(
                 icon: const Icon(Icons.arrow_upward),
-                onPressed: () => service.scrollController.animateTo(
+                onPressed: () => screen.scrollController.animateTo(
                   0,
                   duration: const Duration(milliseconds: 500),
                   curve: Curves.easeInOut,
@@ -240,5 +231,30 @@ class SearchScreenState extends State<SearchScreen> {
             )
           : const SizedBox()),
     );
+  }
+
+  void _onSearchChanged(String value) {
+    if (_debounce?.isActive ?? false) _debounce!.cancel();
+    _debounce = Timer(const Duration(milliseconds: 500), () {
+      var key = "${service.getName}${widget.title.toUpperCase()}_searchHistory";
+      List<String> searchHistory = loadCustomData(key) ?? [];
+      if (!searchHistory.contains(value.trim().toLowerCase()) &&
+          value.isNotEmpty) {
+        var list = List<String>.from(searchHistory);
+        list.add(value.trim().toLowerCase());
+        saveCustomData(key, list);
+      }
+
+      screen.searchResults.value = screen.searchResults.value
+        ..search = value.isEmpty ? null : value
+        ..page = 1;
+
+      if (value.isNotEmpty ||
+          screen.searchResults.value.toChipList().isNotEmpty) {
+        screen.search();
+      } else {
+        screen.showHistory.value = true;
+      }
+    });
   }
 }

@@ -12,6 +12,7 @@ Widget MediaSection({
   List<Media>? mediaList,
   List<Widget>? customNullListIndicator,
   ScrollController? scrollController,
+  Widget? trailingIcon,
   Function(int index, Media media)? onMediaTap,
   void Function()? onLongPressTitle,
 }) {
@@ -41,14 +42,15 @@ Widget MediaSection({
             ),
           ),
           // Arrow Icon
-          Transform(
-            alignment: Alignment.center,
-            transform: Matrix4.rotationZ(3.14),
-            child: IconButton(
-              icon: const Icon(Icons.arrow_back, size: 24),
-              onPressed: () {},
-            ),
-          ),
+          trailingIcon ??
+              Transform(
+                alignment: Alignment.center,
+                transform: Matrix4.rotationZ(3.14),
+                child: IconButton(
+                  icon: const Icon(Icons.arrow_back, size: 24),
+                  onPressed: () {},
+                ),
+              ),
         ],
       ),
     );

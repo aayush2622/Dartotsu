@@ -12,13 +12,14 @@ abstract class BaseSearchScreen extends GetxController {
   var loadMore = true.obs;
   var canLoadMore = true.obs;
   var scrollController = ScrollController();
-  String title = '';
+  var title = ''.obs;
   Rx<SearchResults> searchResults = SearchResults(type: 'Anime').obs;
 
-  List<SearchChip> activeChips() => [];
-  Rx<String> searchQuery = ''.obs;
+  RxBool showHistory = true.obs;
 
   Future<void> search();
+
+  List<SearchChip> activeChips() => [];
 
   List<String> get searchTypes => [];
 
@@ -28,12 +29,13 @@ abstract class BaseSearchScreen extends GetxController {
 
   void init({SearchResults? s}) {
     scrollController.addListener(scrollListener);
-    searchResults.value = s ?? SearchResults(type: title);
+    searchResults.value = s ?? SearchResults(type: title.value);
+    if (s != null) search();
   }
 
   void remove() {
     scrollController.removeListener(scrollListener);
-    searchQuery.value = '';
+    showHistory.value = true;
     loadMore.value = true;
     canLoadMore.value = true;
   }
@@ -68,7 +70,6 @@ abstract class BaseSearchScreen extends GetxController {
                 borderRadius: BorderRadius.circular(12.0),
                 onTap: () {
                   Navigator.pop(context);
-                  title = searchTypes[index];
                   navigateToPage(
                     context,
                     SearchScreen(
@@ -109,8 +110,6 @@ abstract class BaseSearchScreen extends GetxController {
       loadMore.value = false;
       if (canLoadMore.value) {
         await loadNextPage();
-      } else {
-        snackString('DAMN! YOU TRULY ARE JOBLESS\nYOU REACHED THE END');
       }
     }
     scrollToTop.value = _canScroll();

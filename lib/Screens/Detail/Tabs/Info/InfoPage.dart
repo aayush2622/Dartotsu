@@ -1,9 +1,11 @@
 import 'dart:math';
 
 import 'package:dantotsu/Adaptor/Charactes/Widgets/EntitySection.dart';
+import 'package:dantotsu/DataClass/SearchResults.dart';
 import 'package:dantotsu/Functions/Function.dart';
 import 'package:dantotsu/Screens/Detail/Tabs/Info/Widgets/FollowerWidget.dart';
 import 'package:dantotsu/Screens/Detail/Tabs/Info/Widgets/GenreWidget.dart';
+import 'package:dantotsu/Screens/Search/SearchScreen.dart';
 import 'package:dantotsu/Theme/LanguageSwitcher.dart';
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
@@ -364,17 +366,28 @@ class InfoPageState extends State<InfoPage> {
 
   List<ChipData> _generateSynonyms(List<String> labels) {
     return labels.map((label) {
-      return ChipData(
-          label: label, action: () {} // TODO: Implement AFTER SEARCH
-          );
+      return ChipData(label: label, action: () {});
     }).toList();
   }
 
   List<ChipData> _generateChips(List<String> labels) {
+    var title = widget.mediaData.anime != null ? "ANIME" : "MANGA";
     return labels.map((label) {
       return ChipData(
-          label: label, action: () {} // TODO: Implement AFTER SEARCH
-          );
+        label: label,
+        action: () => navigateToPage(
+          context,
+          SearchScreen(
+            title: title,
+            forceSearch: true,
+            args: SearchResults(
+              type: title,
+              sort: "POPULARITY_DESC",
+              tags: [label.split(" ")[0]],
+            ),
+          ),
+        ),
+      );
     }).toList();
   }
 
