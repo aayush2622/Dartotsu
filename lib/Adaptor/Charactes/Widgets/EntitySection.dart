@@ -1,3 +1,4 @@
+import 'package:dantotsu/DataClass/Studio.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../DataClass/Character.dart';
@@ -8,12 +9,14 @@ Widget entitySection({
   required BuildContext context,
   required EntityType type,
   required String title,
+  int adaptorType = 1,
   List<character>? characterList,
   List<author>? staffList,
+  List<studio>? studioList,
   List<Widget>? customNullListIndicator,
 }) {
   var theme = Theme.of(context);
-  var list = type == EntityType.Character ? characterList : staffList;
+  var list = type == EntityType.Character ? characterList : type == EntityType.Staff ? staffList : studioList;
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -83,7 +86,8 @@ Widget entitySection({
                       type: type,
                       characterList: characterList,
                       staffList: staffList,
-                      // Pass the callback here
+                      studioList: studioList,
+                      adaptorType: adaptorType,
                     ),
             ),
           ],
@@ -95,4 +99,5 @@ Widget entitySection({
 enum EntityType {
   Character,
   Staff,
+  Studio,
 }

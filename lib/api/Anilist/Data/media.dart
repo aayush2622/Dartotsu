@@ -589,13 +589,16 @@ class Studio {
   bool? isAnimationStudio;
   String? siteUrl;
   MediaConnection? media;
-
+  bool? isFavourite;
+  int? favourites;
   Studio({
     required this.id,
     this.name,
     this.isAnimationStudio,
     this.siteUrl,
     this.media,
+    this.isFavourite,
+    this.favourites,
   });
 
   factory Studio.fromJson(Map<String, dynamic> json) => _$StudioFromJson(json);

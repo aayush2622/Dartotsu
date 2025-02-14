@@ -16,7 +16,7 @@ import '../../Theme/ThemeProvider.dart';
 import '../../Widgets/ScrollConfig.dart';
 
 class SearchScreen extends StatefulWidget {
-  final String title;
+  final SearchType title;
   final SearchResults? args;
   final bool forceSearch;
 
@@ -66,7 +66,7 @@ class SearchScreenState extends State<SearchScreen> {
   }
 
   Widget _buildContent() {
-    var key = "${service.getName}${widget.title.toUpperCase()}_searchHistory";
+    var key = "${service.getName}${widget.title.name.toUpperCase()}_searchHistory";
     var theme = context.theme.colorScheme;
     List<String> searchHistory = loadCustomData(key) ?? [];
 
@@ -104,9 +104,11 @@ class SearchScreenState extends State<SearchScreen> {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 8,
-                              vertical: 4,
+                            contentPadding: const EdgeInsets.only(
+                              right: 8,
+                              bottom: 4,
+                              top: 4,
+                              left: 16,
                             ),
                             trailing: IconButton(
                               icon: Icon(
@@ -178,13 +180,19 @@ class SearchScreenState extends State<SearchScreen> {
                   ),
                   controller: _searchController,
                   decoration: InputDecoration(
-                    hintText: widget.title,
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 16.0,
+                    ),
+                    hintText: widget.title.name,
                     hintStyle: const TextStyle(
                       fontFamily: 'Poppins',
                       fontWeight: FontWeight.bold,
                       fontSize: 14.0,
                     ),
-                    suffixIcon: Icon(Icons.search, color: theme.onSurface),
+                    suffixIcon: Padding(
+                      padding: const EdgeInsets.only(right: 16),
+                      child: Icon(Icons.search, color: theme.onSurface),
+                    ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(28),
                     ),
@@ -236,7 +244,7 @@ class SearchScreenState extends State<SearchScreen> {
   void _onSearchChanged(String value) {
     if (_debounce?.isActive ?? false) _debounce!.cancel();
     _debounce = Timer(const Duration(milliseconds: 500), () {
-      var key = "${service.getName}${widget.title.toUpperCase()}_searchHistory";
+      var key = "${service.getName}${widget.title.name.toUpperCase()}_searchHistory";
       List<String> searchHistory = loadCustomData(key) ?? [];
       if (!searchHistory.contains(value.trim().toLowerCase()) &&
           value.isNotEmpty) {

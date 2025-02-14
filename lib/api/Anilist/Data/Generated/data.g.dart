@@ -285,15 +285,6 @@ Map<String, dynamic> _$PageResponseToJson(PageResponse instance) =>
       'data': instance.data,
     };
 
-PageData _$PageDataFromJson(Map<String, dynamic> json) => PageData(
-      page: json['Page'] == null
-          ? null
-          : Page.fromJson(json['Page'] as Map<String, dynamic>),
-    );
-
-Map<String, dynamic> _$PageDataToJson(PageData instance) => <String, dynamic>{
-      'Page': instance.page,
-    };
 
 GenreCollectionResponse _$GenreCollectionResponseFromJson(
         Map<String, dynamic> json) =>

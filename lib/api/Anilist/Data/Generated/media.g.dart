@@ -618,6 +618,8 @@ Studio _$StudioFromJson(Map<String, dynamic> json) => Studio(
       media: json['media'] == null
           ? null
           : MediaConnection.fromJson(json['media'] as Map<String, dynamic>),
+      favourites: (json['favourites'] as num?)?.toInt(),
+      isFavourite: json['isFavourite'] as bool?,
     );
 
 Map<String, dynamic> _$StudioToJson(Studio instance) => <String, dynamic>{
@@ -626,6 +628,8 @@ Map<String, dynamic> _$StudioToJson(Studio instance) => <String, dynamic>{
       'isAnimationStudio': instance.isAnimationStudio,
       'siteUrl': instance.siteUrl,
       'media': instance.media,
+      'favourites': instance.favourites,
+      'isFavourite': instance.isFavourite,
     };
 
 ReviewConnection _$ReviewConnectionFromJson(Map<String, dynamic> json) =>

@@ -59,7 +59,7 @@ class AnilistMangaScreen extends BaseMangaScreen {
   @override
   Future<void> loadNextPage() async {
     final result = await Anilist.query!.search(SearchResults(
-      type: 'MANGA',
+      type: SearchType.ANIME,
       page: page + 1,
       perPage: 50,
       sort: Anilist.sortBy[1],
@@ -81,7 +81,7 @@ class AnilistMangaScreen extends BaseMangaScreen {
     final country = type == 'MANHWA' ? 'KR' : 'JP';
     final format = type == 'NOVEL' ? 'NOVEL' : null;
     final trending = await Anilist.query!.search(SearchResults(
-      type: 'MANGA',
+      type: SearchType.MANGA,
       countryOfOrigin: country,
       format: format,
       perPage: 50,

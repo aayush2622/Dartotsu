@@ -145,7 +145,7 @@ class AnilistController extends BaseServiceData {
       final response = await http.post(
         Uri.parse("https://graphql.anilist.co/"),
         headers: headers,
-        body: jsonEncode({"query": query, "variables": variables}),
+        body: jsonEncode({"query": query.trim(), "variables": variables}),
       );
 
       final remaining =

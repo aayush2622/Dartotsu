@@ -3,21 +3,33 @@ import 'package:dantotsu/Functions/Function.dart';
 import 'package:dantotsu/Screens/Character/CharacterScreen.dart';
 import 'package:dantotsu/Screens/Staff/StaffScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import '../../Animation/ScaleAnimation.dart';
 import '../../DataClass/Author.dart';
 import '../../DataClass/Character.dart';
+import '../../DataClass/Studio.dart';
 import '../../Widgets/ScrollConfig.dart';
 import 'CharacterViewHolder.dart';
 import 'Widgets/EntitySection.dart';
 
 class EntityAdaptor extends StatefulWidget {
   final EntityType type;
+
+  final int? adaptorType;
   final List<character>? characterList;
   final List<author>? staffList;
 
-  const EntityAdaptor(
-      {super.key, required this.type, this.characterList, this.staffList});
+  final List<studio>? studioList;
+
+  const EntityAdaptor({
+    super.key,
+    required this.type,
+    this.characterList,
+    this.staffList,
+    this.adaptorType,
+    this.studioList,
+  });
 
   @override
   EntityAdaptorState createState() => EntityAdaptorState();
@@ -26,17 +38,71 @@ class EntityAdaptor extends StatefulWidget {
 class EntityAdaptorState extends State<EntityAdaptor> {
   @override
   Widget build(BuildContext context) {
-    return _buildCharacterLayout(widget.characterList, widget.staffList);
+    switch (widget.adaptorType) {
+      case 1:
+        return _buildCharacterLayout(
+            widget.characterList, widget.staffList, widget.studioList);
+      case 2:
+        return _buildStaggeredGrid(
+            widget.characterList, widget.staffList, widget.studioList);
+      default:
+        return _buildCharacterLayout(
+            widget.characterList, widget.staffList, widget.studioList);
+    }
+  }
+
+  Widget _buildStaggeredGrid(
+    final List<character>? characterList,
+    final List<author>? staffList,
+    final List<studio>? studioList,
+  ) {
+    var listType = widget.type;
+    var length = listType == EntityType.Character
+        ? characterList!.length : listType == EntityType.Staff ? staffList!.length
+        : studioList!.length;
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final parentWidth = constraints.maxWidth;
+        var crossAxisCount = (parentWidth / 124).floor();
+        if (crossAxisCount < 1) crossAxisCount = 1;
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
+          child: StaggeredGrid.count(
+            crossAxisSpacing: 16,
+            crossAxisCount: crossAxisCount,
+            children: List.generate(
+              length,
+              (index) {
+                return GestureDetector(
+                  onTap: () => onClick(listType, index),
+                  onLongPress: () {},
+                  child: SizedBox(
+                    width: 102,
+                    height: 212,
+                    child: listType == EntityType.Character
+                        ? CharacterViewHolder(charInfo: characterList![index])
+                        : listType == EntityType.Staff
+                            ? StaffViewHolder(staffInfo: staffList![index])
+                            : StudioViewHolder(studioInfo: studioList![index]),
+                  ),
+                );
+              },
+            ),
+          ),
+        );
+      },
+    );
   }
 
   Widget _buildCharacterLayout(
     final List<character>? characterList,
     final List<author>? staffList,
+    final List<studio>? studioList,
   ) {
     var listType = widget.type;
     var length = listType == EntityType.Character
-        ? characterList!.length
-        : staffList!.length;
+        ? characterList!.length : listType == EntityType.Staff ? staffList!.length
+        : studioList!.length;
     return SizedBox(
       height: 212,
       child: AnimatedSwitcher(
@@ -60,17 +126,15 @@ class EntityAdaptorState extends State<EntityAdaptor> {
                 finalOffset: Offset.zero,
                 duration: const Duration(milliseconds: 200),
                 child: GestureDetector(
-                  onTap: () => listType == EntityType.Character
-                      ? navigateToPage(context,
-                          CharacterScreen(characterInfo: characterList![index]))
-                      : navigateToPage(
-                          context, StaffScreen(staffInfo: staffList![index])),
+                  onTap: () => onClick(listType, index),
                   child: Container(
                     width: 102,
                     margin: margin,
                     child: listType == EntityType.Character
                         ? CharacterViewHolder(charInfo: characterList![index])
-                        : StaffViewHolder(staffInfo: staffList![index]),
+                        : listType == EntityType.Staff
+                        ? StaffViewHolder(staffInfo: staffList![index])
+                        : StudioViewHolder(studioInfo: studioList![index]),
                   ),
                 ),
               );
@@ -79,5 +143,16 @@ class EntityAdaptorState extends State<EntityAdaptor> {
         ),
       ),
     );
+  }
+
+  void onClick(EntityType type, int index) {
+    if (type == EntityType.Character) {
+      navigateToPage(context,
+          CharacterScreen(characterInfo: widget.characterList![index]));
+    } else if (type == EntityType.Staff) {
+      navigateToPage(context, StaffScreen(staffInfo: widget.staffList![index]));
+    } else {
+      navigateToPage(context, StudioScreen(studioInfo: widget.studioList![index]));
+    }
   }
 }

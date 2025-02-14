@@ -8,8 +8,9 @@ part of '../SearchResults.dart';
 
 SearchResults _$SearchResultsFromJson(Map<String, dynamic> json) =>
     SearchResults(
-      type: json['type'] as String,
-      isAdult: json['isAdult'] as bool,
+      type: $enumDecodeNullable(_$SearchTypeEnumMap, json['type']) ??
+          SearchType.ANIME,
+      isAdult: json['isAdult'] as bool?,
       onList: json['onList'] as bool?,
       perPage: (json['perPage'] as num?)?.toInt(),
       search: json['search'] as String?,
@@ -31,15 +32,30 @@ SearchResults _$SearchResultsFromJson(Map<String, dynamic> json) =>
       startYear: (json['startYear'] as num?)?.toInt(),
       season: json['season'] as String?,
       page: (json['page'] as num?)?.toInt() ?? 1,
-      results: (json['results'] as List<dynamic>)
-          .map((e) => Media.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      hasNextPage: json['hasNextPage'] as bool,
+      results: (json['results'] as List<dynamic>?)
+              ?.map((e) => Media.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
+      characters: (json['characters'] as List<dynamic>?)
+              ?.map((e) => character.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
+      staff: (json['staff'] as List<dynamic>?)
+              ?.map((e) => author.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
+      users: (json['users'] as List<dynamic>?)
+              ?.map((e) => userData.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
+      hasNextPage: json['hasNextPage'] as bool? ?? false,
+      hdCover: json['hdCover'] as bool?,
+      id: (json['id'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$SearchResultsToJson(SearchResults instance) =>
     <String, dynamic>{
-      'type': instance.type,
+      'type': _$SearchTypeEnumMap[instance.type]!,
       'isAdult': instance.isAdult,
       'onList': instance.onList,
       'perPage': instance.perPage,
@@ -58,5 +74,19 @@ Map<String, dynamic> _$SearchResultsToJson(SearchResults instance) =>
       'season': instance.season,
       'page': instance.page,
       'results': instance.results,
+      'characters': instance.characters,
+      'staff': instance.staff,
+      'users': instance.users,
       'hasNextPage': instance.hasNextPage,
+      'id': instance.id,
+      'hdCover': instance.hdCover,
     };
+
+const _$SearchTypeEnumMap = {
+  SearchType.ANIME: 'ANIME',
+  SearchType.MANGA: 'MANGA',
+  SearchType.CHARACTER: 'CHARACTER',
+  SearchType.STAFF: 'STAFF',
+  SearchType.STUDIO: 'STUDIO',
+  SearchType.USER: 'USER',
+};

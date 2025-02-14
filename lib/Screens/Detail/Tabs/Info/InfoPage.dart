@@ -371,7 +371,7 @@ class InfoPageState extends State<InfoPage> {
   }
 
   List<ChipData> _generateChips(List<String> labels) {
-    var title = widget.mediaData.anime != null ? "ANIME" : "MANGA";
+    var title = widget.mediaData.anime != null ? SearchType.ANIME : SearchType.MANGA;
     return labels.map((label) {
       return ChipData(
         label: label,

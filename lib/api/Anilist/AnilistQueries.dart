@@ -10,6 +10,7 @@ import '../../DataClass/Author.dart';
 import '../../DataClass/Character.dart';
 import '../../DataClass/Media.dart';
 import '../../DataClass/SearchResults.dart';
+import '../../DataClass/Studio.dart';
 import '../../DataClass/User.dart';
 import '../../Preferences/PrefManager.dart';
 import '../../Services/Api/Queries.dart';

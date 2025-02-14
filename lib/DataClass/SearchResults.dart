@@ -1,12 +1,16 @@
 import 'package:json_annotation/json_annotation.dart';
 
+import 'Author.dart';
+import 'Character.dart';
 import 'Media.dart';
+import 'Studio.dart';
+import 'User.dart';
 
 part 'Data/SearchResults.g.dart';
 
 @JsonSerializable()
 class SearchResults {
-  String type;
+  SearchType type;
   bool? isAdult;
   bool? onList;
   int? perPage;
@@ -25,11 +29,15 @@ class SearchResults {
   String? season;
   int? page;
   List<Media>? results;
+  List<character>? characters;
+  List<author>? staff;
+  List<userData>? users;
+  List<studio>? studios;
   bool? hasNextPage;
   int? id;
   bool? hdCover;
   SearchResults({
-    this.type = "ANIME",
+    this.type = SearchType.ANIME,
     this.isAdult,
     this.onList,
     this.perPage,
@@ -48,6 +56,9 @@ class SearchResults {
     this.season,
     this.page = 1,
     this.results = const [],
+    this.characters = const [],
+    this.staff = const [],
+    this.users = const [],
     this.hasNextPage = false,
     this.hdCover,
     this.id,
@@ -147,3 +158,5 @@ class SearchChip {
 
   SearchChip(this.type, this.text);
 }
+
+enum SearchType { ANIME, MANGA, CHARACTER, STAFF, STUDIO, USER }

@@ -12,8 +12,8 @@ abstract class BaseSearchScreen extends GetxController {
   var loadMore = true.obs;
   var canLoadMore = true.obs;
   var scrollController = ScrollController();
-  var title = ''.obs;
-  Rx<SearchResults> searchResults = SearchResults(type: 'Anime').obs;
+  var title = SearchType.ANIME.obs;
+  Rx<SearchResults> searchResults = SearchResults(type: SearchType.ANIME,).obs;
 
   RxBool showHistory = true.obs;
 
@@ -21,7 +21,7 @@ abstract class BaseSearchScreen extends GetxController {
 
   List<SearchChip> activeChips() => [];
 
-  List<String> get searchTypes => [];
+  List<SearchType> get searchTypes => [];
 
   List<Widget> searchWidget(BuildContext context);
 
@@ -81,7 +81,7 @@ abstract class BaseSearchScreen extends GetxController {
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Text(
-                    searchTypes[index],
+                    searchTypes[index].name,
                     style: const TextStyle(
                       fontFamily: 'Poppins',
                       fontSize: 16.0,

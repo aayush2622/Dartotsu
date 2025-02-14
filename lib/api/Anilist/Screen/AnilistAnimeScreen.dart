@@ -59,7 +59,7 @@ class AnilistAnimeScreen extends BaseAnimeScreen {
   @override
   Future<void> loadNextPage() async {
     final result = await Anilist.query!.search(SearchResults(
-      type: 'ANIME',
+      type: SearchType.ANIME,
       page: page + 1,
       perPage: 50,
       sort: Anilist.sortBy[1],
@@ -80,7 +80,7 @@ class AnilistAnimeScreen extends BaseAnimeScreen {
     var season = currentSeasonMap.keys.first;
     var year = currentSeasonMap.values.first;
     var trending = await Anilist.query!.search(SearchResults(
-      type: 'ANIME',
+      type: SearchType.ANIME,
       perPage: 12,
       sort: Anilist.sortBy[2],
       season: season,

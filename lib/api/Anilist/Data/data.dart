@@ -247,19 +247,6 @@ class PageResponse {
 }
 
 @JsonSerializable()
-class PageData {
-  @JsonKey(name: 'Page')
-  final Page? page;
-
-  PageData({this.page});
-
-  factory PageData.fromJson(Map<String, dynamic> json) =>
-      _$PageDataFromJson(json);
-
-  Map<String, dynamic> toJson() => _$PageDataToJson(this);
-}
-
-@JsonSerializable()
 class GenreCollectionResponse {
   @JsonKey(name: 'data')
   final GenreCollectionData? data;
