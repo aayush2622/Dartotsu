@@ -10,6 +10,7 @@ class buildDropdownMenu extends StatefulWidget {
   final double borderRadius;
   final EdgeInsetsGeometry? padding;
   final Color? borderColor;
+  final String? hintText;
 
   const buildDropdownMenu({
     super.key,
@@ -21,6 +22,7 @@ class buildDropdownMenu extends StatefulWidget {
     this.borderRadius = 8.0,
     this.padding,
     this.borderColor,
+    this.hintText,
   });
 
   @override
@@ -34,6 +36,20 @@ class buildDropdownMenuState extends State<buildDropdownMenu> {
   void initState() {
     super.initState();
     _selectedValue = widget.currentValue;
+  }
+  @override
+  void didUpdateWidget(covariant buildDropdownMenu oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.currentValue != widget.currentValue) {
+      setState(() {
+        _selectedValue = widget.currentValue;
+      });
+    } else if (_selectedValue != widget.currentValue) {
+      setState(() {
+        _selectedValue = widget.currentValue;
+      });
+    }
+
   }
 
   @override
@@ -59,7 +75,18 @@ class buildDropdownMenuState extends State<buildDropdownMenu> {
         child: DropdownButtonHideUnderline(
           child: DropdownButton(
             focusColor: Colors.transparent,
-            value: _selectedValue,
+            hint: Text(
+              widget.hintText ?? '',
+              style: TextStyle(
+                fontFamily: 'Poppins',
+                fontSize: 14,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            isExpanded: true,
+            value: widget.options?.contains(_selectedValue) == true
+                ? _selectedValue
+                : null,
             onChanged: (String? newValue) {
               if (newValue != null) {
                 setState(() {

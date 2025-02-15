@@ -40,6 +40,45 @@ class AnilistController extends BaseServiceData {
     "TITLE_ENGLISH_DESC",
     "SCORE"
   ];
+  var source = [
+    "ORIGINAL",
+    "MANGA",
+    "LIGHT NOVEL",
+    "VISUAL NOVEL",
+    "VIDEO GAME",
+    "OTHER",
+    "NOVEL",
+    "DOUJINSHI",
+    "ANIME",
+    "WEB NOVEL",
+    "LIVE ACTION",
+    "GAME",
+    "COMIC",
+    "MULTIMEDIA PROJECT",
+    "PICTURE BOOK"
+  ];
+
+  var animeStatus = ["FINISHED", "RELEASING", "NOT YET RELEASED", "CANCELLED"];
+
+  var mangaStatus = [
+    "FINISHED",
+    "RELEASING",
+    "NOT YET RELEASED",
+    "HIATUS",
+    "CANCELLED"
+  ];
+
+  var animeFormats = [
+    "TV",
+    "TV SHORT",
+    "MOVIE",
+    "SPECIAL",
+    "OVA",
+    "ONA",
+    "MUSIC"
+  ];
+
+  var mangaFormats = ["MANGA", "NOVEL", "ONE SHOT"];
 
   final List<String> authorRoles = ["Original Creator", "Story & Art", "Story"];
   final List<String> seasons = ["WINTER", "SPRING", "SUMMER", "FALL"];
@@ -81,7 +120,7 @@ class AnilistController extends BaseServiceData {
   @override
   bool getSavedToken() {
     token.value = PrefManager.getVal(PrefName.anilistToken);
-
+    query?.getGenresAndTags();
     if (token.isNotEmpty) query?.getUserData();
 
     return token.isNotEmpty;

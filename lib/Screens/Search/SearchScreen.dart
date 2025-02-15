@@ -254,8 +254,7 @@ class SearchScreenState extends State<SearchScreen> {
       }
 
       screen.searchResults.value = screen.searchResults.value
-        ..search = value.isEmpty ? null : value
-        ..page = 1;
+        ..search = value.isEmpty ? null : value;
 
       if (value.isNotEmpty ||
           screen.searchResults.value.toChipList().isNotEmpty) {

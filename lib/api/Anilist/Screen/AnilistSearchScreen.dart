@@ -1,8 +1,10 @@
 import 'package:dantotsu/DataClass/User.dart';
+import 'package:dantotsu/api/Anilist/Screen/Widgets/SearchFilter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
 import '../../../Adaptor/Charactes/Widgets/EntitySection.dart';
+import '../../../Adaptor/Media/Widgets/Chips.dart';
 import '../../../Adaptor/Media/Widgets/MediaSection.dart';
 import '../../../Adaptor/User/Widgets/UserSection.dart';
 import '../../../DataClass/Media.dart';
@@ -33,7 +35,7 @@ class AnilistSearchScreen extends BaseSearchScreen {
     searchResult.value = null;
     canLoadMore.value = true;
     loadMore.value = true;
-
+    searchResults.value = searchResults.value..page = 1;
     var res = await Anilist.query?.search(searchResults.value);
     if (res != null) {
       searchResults.value = res;
@@ -88,8 +90,9 @@ class AnilistSearchScreen extends BaseSearchScreen {
   List<Widget> searchWidget(BuildContext context) {
     switch (searchResults.value.type) {
       case SearchType.ANIME:
+        return animeAndMangaResults(context, SearchType.ANIME);
       case SearchType.MANGA:
-        return animeAndMangaResults(context);
+        return animeAndMangaResults(context, SearchType.MANGA);
       case SearchType.CHARACTER:
         return characterAndStaffResults(context, EntityType.Character);
       case SearchType.STAFF:
@@ -100,18 +103,8 @@ class AnilistSearchScreen extends BaseSearchScreen {
         return userResults(context);
     }
   }
+
   var type = 3.obs;
-  List<Widget> animeAndMangaResults(BuildContext context) {
-    return [
-      MediaSection(
-        context: context,
-        type: type.value,
-        title: 'Search Results',
-        mediaList: searchResult.value?.whereType<Media>().toList(),
-        trailingIcon: _buildTrailingIcon(context),
-      ),
-    ];
-  }
 
   List<Widget> characterAndStaffResults(BuildContext context, EntityType type) {
     return [
@@ -124,6 +117,7 @@ class AnilistSearchScreen extends BaseSearchScreen {
       ),
     ];
   }
+
   List<Widget> userResults(BuildContext context) {
     return [
       userSection(
@@ -135,6 +129,128 @@ class AnilistSearchScreen extends BaseSearchScreen {
       ),
     ];
   }
+
+  List<Widget> animeAndMangaResults(
+      BuildContext context, SearchType mediaType) {
+    return [
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 24.0),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Checkbox(
+                  value: searchResults.value.onList ?? false,
+                  onChanged: (n) {
+                    var value = n == true ? true : null;
+                    searchResults.value = searchResults.value..onList = value;
+                    search();
+                  },
+                  activeColor: Theme.of(context).colorScheme.primary,
+                ),
+                const SizedBox(width: 4),
+                const Text("List Only"),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 24.0),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Checkbox(
+                  value: searchResults.value.isAdult ?? false,
+                  onChanged: (n) {
+                    searchResults.value = searchResults.value..isAdult = n;
+                    search();
+                  },
+                  activeColor: Theme.of(context).colorScheme.primary,
+                ),
+                const SizedBox(width: 4),
+                const Text("Adult"),
+              ],
+            ),
+          ),
+        ],
+      ),
+      SizedBox(height: 8),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+            child: ChipsWidget(
+              chips: searchResults.value.toChipList().map(
+                (label) {
+                  return ChipData(
+                    label: label.text.replaceAll("_", " "),
+                    action: () {
+                      searchResults.value.removeChip(label);
+                      if (searchResults.value.toChipList().isEmpty &&
+                          searchResults.value.search == null &&
+                          searchResults.value.search!.isEmpty) {
+                        showHistory.value = true;
+                      } else {
+                        search();
+                      }
+                    },
+                  );
+                },
+              ).toList(),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 18.0),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SearchFilter(
+                  type: mediaType,
+                  searchResults: searchResults.value,
+                  onFilterChanged: (n) {
+                    searchResults.value = n;
+                    if (searchResults.value.toChipList().isEmpty &&
+                        (searchResults.value.search == null ||
+                            searchResults.value.search!.isEmpty)) {
+                      showHistory.value = true;
+                    } else {
+                      search();
+                    }
+                  },
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+      SizedBox(height: 8),
+      MediaSection(
+        context: context,
+        type: type.value,
+        title: 'Search Results',
+        mediaList: searchResult.value?.whereType<Media>().toList(),
+        trailingIcon: _buildTrailingIcon(context),
+      ),
+    ];
+  }
+
+  Widget animeAndMangaFilter(BuildContext context, SearchType mediaType) {
+    return ElevatedButton.icon(
+      onPressed: () {},
+      icon: const Icon(Icons.filter_alt_rounded, size: 24),
+      label: const Text(
+        'Filter',
+        textAlign: TextAlign.center,
+        style: TextStyle(fontFamily: 'Poppins-SemiBold'),
+      ),
+      style: ElevatedButton.styleFrom(
+        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 12),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      ),
+    );
+  }
+
   Widget _buildTrailingIcon(BuildContext context) {
     final icons = [
       Icons.view_list_sharp,
@@ -163,9 +279,7 @@ class AnilistSearchScreen extends BaseSearchScreen {
                   ? theme.onSurface
                   : theme.onSurface.withOpacity(0.33),
               onPressed: () {
-                if (!isSelected) {
-                  type.value = value;
-                }
+                if (!isSelected) type.value = value;
               },
             ),
           );

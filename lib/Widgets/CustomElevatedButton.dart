@@ -5,6 +5,7 @@ Widget CustomElevatedButton({
   required VoidCallback? onPressed,
   required String label,
   Widget? iconWidget,
+  EdgeInsetsGeometry? padding,
 }) {
   final theme = Theme.of(context);
 
@@ -26,7 +27,7 @@ Widget CustomElevatedButton({
     ),
     style: ElevatedButton.styleFrom(
       backgroundColor: Theme.of(context).primaryColor,
-      padding: const EdgeInsets.only(
+      padding: padding ?? const EdgeInsets.only(
         top: 16,
         bottom: 16,
         left: 28,

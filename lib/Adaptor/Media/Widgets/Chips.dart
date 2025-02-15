@@ -43,6 +43,9 @@ class ChipsWidget extends StatelessWidget {
                           color: theme.onSurface,
                         ),
                       ),
+                      backgroundColor: chipData.isSelected
+                          ? theme.primaryContainer
+                          : theme.surface,
                       onPressed: chipData.action,
                       shape: RoundedRectangleBorder(
                         borderRadius:
@@ -65,9 +68,11 @@ class ChipsWidget extends StatelessWidget {
 class ChipData {
   final String label;
   final VoidCallback action;
+  final bool isSelected;
 
   ChipData({
     required this.label,
     required this.action,
+    this.isSelected = false,
   });
 }

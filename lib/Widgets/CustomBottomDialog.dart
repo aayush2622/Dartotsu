@@ -124,7 +124,7 @@ class _CustomBottomDialogState extends State<CustomBottomDialog> {
                   ],
                   if (widget.positiveText != null) ...[
                     Expanded(
-                      child: ElevatedButton(
+                      child: OutlinedButton(
                         onPressed: widget.positiveCallback,
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(vertical: 28.0),

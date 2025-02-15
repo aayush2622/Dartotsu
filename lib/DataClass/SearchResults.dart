@@ -67,7 +67,7 @@ class SearchResults {
   List<SearchChip> toChipList() {
     final List<SearchChip> list = [];
     if (sort != null) {
-      list.add(SearchChip("SORT", "Sort by: $sort"));
+      list.add(SearchChip("SORT", "Sort: $sort"));
     }
     if (status != null) {
       list.add(SearchChip("STATUS", "Status: $status"));
