@@ -51,8 +51,9 @@ void main(List<String> args) async {
     () async {
       WidgetsFlutterBinding.ensureInitialized();
       if(Platform.isLinux) {
-        runWebViewTitleBarWidget(args);
-        return;
+        if (runWebViewTitleBarWidget(args)) {
+          return;
+        }
       }
       await init();
       runApp(
