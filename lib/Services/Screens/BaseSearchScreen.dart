@@ -25,6 +25,8 @@ abstract class BaseSearchScreen extends GetxController {
 
   List<Widget> searchWidget(BuildContext context);
 
+  List<Widget> topWidget(BuildContext context) => [];
+
   Future<void>? loadNextPage() => null;
 
   void init({SearchResults? s}) {

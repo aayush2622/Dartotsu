@@ -66,7 +66,8 @@ class SearchScreenState extends State<SearchScreen> {
   }
 
   Widget _buildContent() {
-    var key = "${service.getName}${widget.title.name.toUpperCase()}_searchHistory";
+    var key =
+        "${service.getName}${widget.title.name.toUpperCase()}_searchHistory";
     var theme = context.theme.colorScheme;
     List<String> searchHistory = loadCustomData(key) ?? [];
 
@@ -81,60 +82,67 @@ class SearchScreenState extends State<SearchScreen> {
               padding: const EdgeInsets.symmetric(vertical: 8),
               child: Obx(() {
                 if (screen.showHistory.value) {
-                  return ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: searchHistory.length,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 4.0,
-                          horizontal: 24.0,
-                        ),
-                        child: Card(
-                          elevation: 3,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: ListTile(
-                            title: Text(
-                              searchHistory[index],
-                              style: TextStyle(
-                                color: theme.onSurface,
-                                fontWeight: FontWeight.bold,
+                  return Column(
+                    children: [
+                      ...screen.topWidget(context),
+                      ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: searchHistory.length,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 4.0,
+                              horizontal: 24.0,
+                            ),
+                            child: Card(
+                              elevation: 3,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: ListTile(
+                                title: Text(
+                                  searchHistory[index],
+                                  style: TextStyle(
+                                    color: theme.onSurface,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                contentPadding: const EdgeInsets.only(
+                                  right: 8,
+                                  bottom: 4,
+                                  top: 4,
+                                  left: 16,
+                                ),
+                                trailing: IconButton(
+                                  icon: Icon(
+                                    FontAwesome.trash_solid,
+                                    size: 18,
+                                  ),
+                                  onPressed: () {
+                                    setState(() {
+                                      var list =
+                                          List<String>.from(searchHistory);
+                                      list.removeAt(index);
+                                      saveCustomData(key, list);
+                                    });
+                                  },
+                                ),
+                                onTap: () {
+                                  _searchController.text = searchHistory[index];
+                                  _onSearchChanged(searchHistory[index]);
+                                },
                               ),
                             ),
-                            contentPadding: const EdgeInsets.only(
-                              right: 8,
-                              bottom: 4,
-                              top: 4,
-                              left: 16,
-                            ),
-                            trailing: IconButton(
-                              icon: Icon(
-                                FontAwesome.trash_solid,
-                                size: 18,
-                              ),
-                              onPressed: () {
-                                setState(() {
-                                  var list = List<String>.from(searchHistory);
-                                  list.removeAt(index);
-                                  saveCustomData(key, list);
-                                });
-                              },
-                            ),
-                            onTap: () {
-                              _searchController.text = searchHistory[index];
-                              _onSearchChanged(searchHistory[index]);
-                            },
-                          ),
-                        ),
-                      );
-                    },
+                          );
+                        },
+                      )
+                    ],
                   );
                 } else {
                   return Column(
                     children: [
+                      ...screen.topWidget(context),
                       ...screen.searchWidget(context),
                       SizedBox(
                         height: 64,
@@ -244,7 +252,8 @@ class SearchScreenState extends State<SearchScreen> {
   void _onSearchChanged(String value) {
     if (_debounce?.isActive ?? false) _debounce!.cancel();
     _debounce = Timer(const Duration(milliseconds: 500), () {
-      var key = "${service.getName}${widget.title.name.toUpperCase()}_searchHistory";
+      var key =
+          "${service.getName}${widget.title.name.toUpperCase()}_searchHistory";
       List<String> searchHistory = loadCustomData(key) ?? [];
       if (!searchHistory.contains(value.trim().toLowerCase()) &&
           value.isNotEmpty) {
