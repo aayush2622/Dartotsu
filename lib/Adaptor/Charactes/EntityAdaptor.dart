@@ -15,20 +15,14 @@ import 'Widgets/EntitySection.dart';
 
 class EntityAdaptor extends StatefulWidget {
   final EntityType type;
-
   final int? adaptorType;
-  final List<character>? characterList;
-  final List<author>? staffList;
-
-  final List<studio>? studioList;
+  final List<Object> list;
 
   const EntityAdaptor({
     super.key,
+    this.adaptorType = 1,
     required this.type,
-    this.characterList,
-    this.staffList,
-    this.adaptorType,
-    this.studioList,
+    required this.list,
   });
 
   @override
@@ -40,26 +34,15 @@ class EntityAdaptorState extends State<EntityAdaptor> {
   Widget build(BuildContext context) {
     switch (widget.adaptorType) {
       case 1:
-        return _buildCharacterLayout(
-            widget.characterList, widget.staffList, widget.studioList);
+        return _buildCharacterLayout();
       case 2:
-        return _buildStaggeredGrid(
-            widget.characterList, widget.staffList, widget.studioList);
+        return _buildStaggeredGrid();
       default:
-        return _buildCharacterLayout(
-            widget.characterList, widget.staffList, widget.studioList);
+        return _buildCharacterLayout();
     }
   }
 
-  Widget _buildStaggeredGrid(
-    final List<character>? characterList,
-    final List<author>? staffList,
-    final List<studio>? studioList,
-  ) {
-    var listType = widget.type;
-    var length = listType == EntityType.Character
-        ? characterList!.length : listType == EntityType.Staff ? staffList!.length
-        : studioList!.length;
+  Widget _buildStaggeredGrid() {
     return LayoutBuilder(
       builder: (context, constraints) {
         final parentWidth = constraints.maxWidth;
@@ -71,19 +54,15 @@ class EntityAdaptorState extends State<EntityAdaptor> {
             crossAxisSpacing: 16,
             crossAxisCount: crossAxisCount,
             children: List.generate(
-              length,
+              widget.list.length,
               (index) {
                 return GestureDetector(
-                  onTap: () => onClick(listType, index),
+                  onTap: () => onClick(index),
                   onLongPress: () {},
                   child: SizedBox(
                     width: 102,
                     height: 212,
-                    child: listType == EntityType.Character
-                        ? CharacterViewHolder(charInfo: characterList![index])
-                        : listType == EntityType.Staff
-                            ? StaffViewHolder(staffInfo: staffList![index])
-                            : StudioViewHolder(studioInfo: studioList![index]),
+                    child: _buildHolder(index),
                   ),
                 );
               },
@@ -94,15 +73,7 @@ class EntityAdaptorState extends State<EntityAdaptor> {
     );
   }
 
-  Widget _buildCharacterLayout(
-    final List<character>? characterList,
-    final List<author>? staffList,
-    final List<studio>? studioList,
-  ) {
-    var listType = widget.type;
-    var length = listType == EntityType.Character
-        ? characterList!.length : listType == EntityType.Staff ? staffList!.length
-        : studioList!.length;
+  Widget _buildCharacterLayout() {
     return SizedBox(
       height: 212,
       child: AnimatedSwitcher(
@@ -111,10 +82,10 @@ class EntityAdaptorState extends State<EntityAdaptor> {
           context,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            itemCount: length,
+            itemCount: widget.list.length,
             itemBuilder: (context, index) {
               final isFirst = index == 0;
-              final isLast = index == length - 1;
+              final isLast = index == widget.list.length - 1;
               final margin = EdgeInsets.only(
                 left: isFirst ? 24.0 : 6.5,
                 right: isLast ? 24.0 : 6.5,
@@ -126,15 +97,11 @@ class EntityAdaptorState extends State<EntityAdaptor> {
                 finalOffset: Offset.zero,
                 duration: const Duration(milliseconds: 200),
                 child: GestureDetector(
-                  onTap: () => onClick(listType, index),
+                  onTap: () => onClick(index),
                   child: Container(
                     width: 102,
                     margin: margin,
-                    child: listType == EntityType.Character
-                        ? CharacterViewHolder(charInfo: characterList![index])
-                        : listType == EntityType.Staff
-                        ? StaffViewHolder(staffInfo: staffList![index])
-                        : StudioViewHolder(studioInfo: studioList![index]),
+                    child: _buildHolder(index),
                   ),
                 ),
               );
@@ -145,14 +112,34 @@ class EntityAdaptorState extends State<EntityAdaptor> {
     );
   }
 
-  void onClick(EntityType type, int index) {
-    if (type == EntityType.Character) {
-      navigateToPage(context,
-          CharacterScreen(characterInfo: widget.characterList![index]));
-    } else if (type == EntityType.Staff) {
-      navigateToPage(context, StaffScreen(staffInfo: widget.staffList![index]));
+  Widget _buildHolder(int index) {
+    return widget.type == EntityType.Character
+        ? CharacterViewHolder(
+            charInfo: widget.list.whereType<character>().toList()[index])
+        : widget.type == EntityType.Staff
+            ? StaffViewHolder(
+                staffInfo: widget.list.whereType<author>().toList()[index])
+            : StudioViewHolder(
+                studioInfo: widget.list.whereType<studio>().toList()[index]);
+  }
+
+  void onClick(int index) {
+    if (widget.type == EntityType.Character) {
+      navigateToPage(
+          context,
+          CharacterScreen(
+              characterInfo:
+                  widget.list.whereType<character>().toList()[index]));
+    } else if (widget.type == EntityType.Staff) {
+      navigateToPage(
+          context,
+          StaffScreen(
+              staffInfo: widget.list.whereType<author>().toList()[index]));
     } else {
-      navigateToPage(context, StudioScreen(studioInfo: widget.studioList![index]));
+      navigateToPage(
+          context,
+          StudioScreen(
+              studioInfo: widget.list.whereType<studio>().toList()[index]));
     }
   }
 }

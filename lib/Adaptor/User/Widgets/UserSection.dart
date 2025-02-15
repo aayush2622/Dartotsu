@@ -1,12 +1,14 @@
+import 'package:dantotsu/DataClass/User.dart';
 import 'package:flutter/material.dart';
-import '../EntityAdaptor.dart';
 
-Widget entitySection({
+import '../UserAdaptor.dart';
+
+Widget userSection({
   required BuildContext context,
-  required EntityType type,
   required String title,
-  int adaptorType = 1,
-  List<Object>? list,
+  required int type,
+  List<userData>? list,
+  Widget? trailingIcon,
   List<Widget>? customNullListIndicator,
 }) {
   var theme = Theme.of(context);
@@ -43,14 +45,15 @@ Widget entitySection({
                     ),
                   ),
                   // Use a rotated IconButton
-                  Transform(
-                    alignment: Alignment.center,
-                    transform: Matrix4.rotationZ(3.14),
-                    child: IconButton(
-                      icon: const Icon(Icons.arrow_back, size: 24),
-                      onPressed: () {},
-                    ),
-                  ),
+                  trailingIcon ??
+                      Transform(
+                        alignment: Alignment.center,
+                        transform: Matrix4.rotationZ(3.14),
+                        child: IconButton(
+                          icon: const Icon(Icons.arrow_back, size: 24),
+                          onPressed: () {},
+                        ),
+                      ),
                 ],
               ),
             ),
@@ -75,9 +78,8 @@ Widget entitySection({
                               ),
                       ),
                     )
-                  : EntityAdaptor(
+                  : UserAdaptor(
                       type: type,
-                      adaptorType: adaptorType,
                       list: list,
                     ),
             ),
@@ -85,10 +87,4 @@ Widget entitySection({
         )
     ],
   );
-}
-
-enum EntityType {
-  Character,
-  Staff,
-  Studio,
 }

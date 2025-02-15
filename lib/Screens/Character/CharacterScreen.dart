@@ -49,7 +49,7 @@ class CharacterScreenState extends State<CharacterScreen> {
                       context: context,
                       type: EntityType.Staff,
                       title: "Voice Actors",
-                      staffList: widget.characterInfo.voiceActor,
+                      list: widget.characterInfo.voiceActor,
                     ),
                   if (widget.characterInfo.roles?.isNotEmpty ?? false)
                     MediaSection(

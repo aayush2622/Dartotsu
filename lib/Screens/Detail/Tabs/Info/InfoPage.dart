@@ -68,14 +68,14 @@ class InfoPageState extends State<InfoPage> {
             context: context,
             type: EntityType.Character,
             title: getString.characters,
-            characterList: widget.mediaData.characters,
+            list: widget.mediaData.characters,
           ),
         if (widget.mediaData.staff?.isNotEmpty ?? false)
           entitySection(
             context: context,
             type: EntityType.Staff,
             title: getString.staff,
-            staffList: widget.mediaData.staff,
+            list: widget.mediaData.staff,
           ),
         if (widget.mediaData.recommendations?.isNotEmpty ?? false)
           MediaSection(

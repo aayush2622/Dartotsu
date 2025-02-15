@@ -1,14 +1,12 @@
+import 'package:dantotsu/DataClass/User.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
 import '../../../Adaptor/Charactes/Widgets/EntitySection.dart';
 import '../../../Adaptor/Media/Widgets/MediaSection.dart';
-import '../../../DataClass/Author.dart';
-import '../../../DataClass/Character.dart';
+import '../../../Adaptor/User/Widgets/UserSection.dart';
 import '../../../DataClass/Media.dart';
 import '../../../DataClass/SearchResults.dart';
-import '../../../DataClass/Studio.dart';
-import '../../../DataClass/User.dart';
 import '../../../Services/Screens/BaseSearchScreen.dart';
 import '../Anilist.dart';
 
@@ -27,7 +25,7 @@ class AnilistSearchScreen extends BaseSearchScreen {
         SearchType.USER
       ];
 
-  var searchResult = Rxn<List<Object?>>();
+  var searchResult = Rxn<List<Object>?>();
 
   @override
   Future<void> search() async {
@@ -45,20 +43,20 @@ class AnilistSearchScreen extends BaseSearchScreen {
     searchResult.value = results(res) ?? [];
   }
 
-  List<dynamic>? results(SearchResults? res) {
+  List<Object>? results(SearchResults? res) {
     switch (res?.type) {
       case SearchType.ANIME:
-        return res?.results as List<Media?>;
+        return res?.results;
       case SearchType.MANGA:
-        return res?.results as List<Media?>;
+        return res?.results;
       case SearchType.CHARACTER:
-        return res?.characters as List<character?>;
+        return res?.characters;
       case SearchType.STAFF:
-        return res?.staff as List<author?>;
+        return res?.staff;
       case SearchType.STUDIO:
-        return res?.studios as List<studio?>;
+        return res?.studios;
       case SearchType.USER:
-        return res?.users as List<userData?>;
+        return res?.users;
       default:
         return [];
     }
@@ -86,8 +84,6 @@ class AnilistSearchScreen extends BaseSearchScreen {
     loadMore.value = true;
   }
 
-  var type = 3.obs;
-
   @override
   List<Widget> searchWidget(BuildContext context) {
     switch (searchResults.value.type) {
@@ -100,11 +96,11 @@ class AnilistSearchScreen extends BaseSearchScreen {
         return characterAndStaffResults(context, EntityType.Staff);
       case SearchType.STUDIO:
         return characterAndStaffResults(context, EntityType.Studio);
-      default:
-        return animeAndMangaResults(context);
+      case SearchType.USER:
+        return userResults(context);
     }
   }
-
+  var type = 3.obs;
   List<Widget> animeAndMangaResults(BuildContext context) {
     return [
       MediaSection(
@@ -124,19 +120,21 @@ class AnilistSearchScreen extends BaseSearchScreen {
         context: context,
         type: type,
         title: 'Search Results',
-        characterList: type == EntityType.Character
-            ? searchResult.value?.whereType<character>().toList()
-            : null,
-        staffList: type == EntityType.Staff
-            ? searchResult.value?.whereType<author>().toList()
-            : null,
-        studioList: type == EntityType.Studio
-            ? searchResult.value?.whereType<studio>().toList()
-            : null,
+        list: searchResult.value,
       ),
     ];
   }
-
+  List<Widget> userResults(BuildContext context) {
+    return [
+      userSection(
+        context: context,
+        type: type.value == 2 ? 1 : 2,
+        title: 'Search Results',
+        list: searchResult.value?.whereType<userData>().toList(),
+        trailingIcon: _buildTrailingIcon(context),
+      ),
+    ];
+  }
   Widget _buildTrailingIcon(BuildContext context) {
     final icons = [
       Icons.view_list_sharp,
