@@ -145,7 +145,7 @@ class AnilistSearchScreen extends BaseSearchScreen {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(right: 24.0),
+                  padding: const EdgeInsets.only(right: 28.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -190,7 +190,7 @@ class AnilistSearchScreen extends BaseSearchScreen {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(right: 18.0),
+                  padding: const EdgeInsets.only(right: 24.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
