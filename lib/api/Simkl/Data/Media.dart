@@ -86,6 +86,44 @@ class MovieMovie {
 
 @JsonSerializable()
 class Anime {
+  @JsonKey(name: "title")
+  String? title;
+  @JsonKey(name: "year")
+  int? year;
+  @JsonKey(name: "type")
+  String? type;
+  @JsonKey(name: "ids")
+  Ids? ids;
+  @JsonKey(name: "en_title")
+  String? enTitle;
+  @JsonKey(name: "rank")
+  int? rank;
+  @JsonKey(name: "poster")
+  String? poster;
+  @JsonKey(name: "fanart")
+  String? fanart;
+  @JsonKey(name: "first_aired")
+  DateTime? firstAired;
+  @JsonKey(name: "airs")
+  Airs? airs;
+  @JsonKey(name: "certification")
+  dynamic certification;
+  @JsonKey(name: "overview")
+  String? overview;
+  @JsonKey(name: "genres")
+  List<String>? genres;
+  @JsonKey(name: "country")
+  String? country;
+  @JsonKey(name: "total_episodes")
+  int? totalEpisodes;
+  @JsonKey(name: "network")
+  String? network;
+  @JsonKey(name: "ratings")
+  Ratings? ratings;
+  @JsonKey(name: "trailers")
+  List<Trailer>? trailers;
+  @JsonKey(name: "users_recommendations")
+  List<Anime>? usersRecommendations;
   @JsonKey(name: "last_watched_at")
   DateTime? lastWatchedAt;
   @JsonKey(name: "status")
@@ -112,8 +150,28 @@ class Anime {
   AnimeType? animeType;
 
   Anime({
-    this.lastWatchedAt,
+    this.title,
+    this.year,
+    this.type,
+    this.ids,
+    this.enTitle,
+    this.rank,
+    this.poster,
+    this.fanart,
+    this.firstAired,
+    this.airs,
+    this.certification,
+    this.overview,
+    this.genres,
+    this.country,
+    this.totalEpisodes,
     this.status,
+    this.network,
+    this.animeType,
+    this.ratings,
+    this.trailers,
+    this.usersRecommendations,
+    this.lastWatchedAt,
     this.userRating,
     this.rating,
     this.releaseStatus,
@@ -123,14 +181,31 @@ class Anime {
     this.totalEpisodesCount,
     this.notAiredEpisodesCount,
     this.show,
-    this.animeType,
   });
 
   factory Anime.fromJson(Map<String, dynamic> json) => _$AnimeFromJson(json);
 
   Map<String, dynamic> toJson() => _$AnimeToJson(this);
 }
+@JsonSerializable()
+class Airs {
+  @JsonKey(name: "day")
+  String? day;
+  @JsonKey(name: "time")
+  String? time;
+  @JsonKey(name: "timezone")
+  String? timezone;
 
+  Airs({
+    this.day,
+    this.time,
+    this.timezone,
+  });
+
+  factory Airs.fromJson(Map<String, dynamic> json) => _$AirsFromJson(json);
+
+  Map<String, dynamic> toJson() => _$AirsToJson(this);
+}
 enum AnimeType {
   @JsonValue("movie")
   MOVIE,
@@ -226,6 +301,7 @@ class ShowElement {
 @JsonSerializable()
 class Ids {
   @JsonKey(name: "simkl")
+  @JsonKey(name: "simkl_id")
   int? simkl;
   @JsonKey(name: "slug")
   String? slug;
@@ -328,7 +404,11 @@ enum Status {
   @JsonValue("watching")
   CURRENT,
   @JsonValue("hold")
-  HOLD
+  HOLD,
+  @JsonValue("ongoing")
+  ONGOING,
+  @JsonValue("ended")
+  ENDED
 }
 
 final statusValues = EnumValues({
@@ -336,7 +416,9 @@ final statusValues = EnumValues({
   "dropped": Status.DROPPED,
   "plantowatch": Status.PLANNING,
   "watching": Status.CURRENT,
-  "hold": Status.HOLD
+  "hold": Status.HOLD,
+  "ongoing" :Status.ONGOING,
+  "ended": Status.ENDED
 });
 
 class EnumValues<T> {
@@ -372,6 +454,25 @@ class MediaRatings {
   Map<String, dynamic> toJson() => _$MediaRatingsToJson(this);
 }
 
+@JsonSerializable()
+class Trailer {
+  @JsonKey(name: "name")
+  dynamic name;
+  @JsonKey(name: "youtube")
+  String? youtube;
+  @JsonKey(name: "size")
+  int? size;
+
+  Trailer({
+    this.name,
+    this.youtube,
+    this.size,
+  });
+
+  factory Trailer.fromJson(Map<String, dynamic> json) => _$TrailerFromJson(json);
+
+  Map<String, dynamic> toJson() => _$TrailerToJson(this);
+}
 class Ratings {
   int? id;
   ReleaseStatus? releaseStatus;

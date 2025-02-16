@@ -157,7 +157,7 @@ extension on SimklQueries {
     list['watchingShows'] = groupedShowList['CURRENT'] ?? [];
     list['droppedShows'] = groupedShowList['DROPPED'] ?? [];
     list['plannedShows'] = groupedShowList['PLANNING'] ?? [];
-    list['onHoldShows'] = groupedShowList['HOLS'] ?? [];
+    list['onHoldShows'] = groupedShowList['HOLD'] ?? [];
     list['droppedMovies'] = groupedMovieList['DROPPED'] ?? [];
     list['plannedMovies'] = groupedMovieList['PLANNING'] ?? [];
     return list;

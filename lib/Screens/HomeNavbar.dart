@@ -1,6 +1,5 @@
 import 'package:dantotsu/Functions/Extensions.dart';
 import 'package:dantotsu/Theme/Colors.dart';
-import 'package:dantotsu/Theme/LanguageSwitcher.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -23,20 +22,7 @@ class FloatingBottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeNotifier = Provider.of<ThemeNotifier>(context);
-    final navItems = [
-      _NavItem(
-          index: 0,
-          icon: Icons.movie_filter_rounded,
-          label: getString.anime.toUpperCase()),
-      _NavItem(
-          index: 1,
-          icon: Icons.home_rounded,
-          label: getString.home.toUpperCase()),
-      _NavItem(
-          index: 2,
-          icon: Icons.import_contacts,
-          label: getString.manga.toUpperCase()),
-    ];
+    final navItems = context.currentService().navBarItem;
 
     return Positioned(
       bottom: 32.bottomBar(),
@@ -78,7 +64,7 @@ class FloatingBottomNavBar extends StatelessWidget {
     );
   }
 
-  Widget _buildNavItem(_NavItem item, BuildContext context) {
+  Widget _buildNavItem(NavItem item, BuildContext context) {
     final theme = Theme.of(context).colorScheme;
     final isSelected = item.index == selectedIndex;
     return GestureDetector(
@@ -131,12 +117,12 @@ class FloatingBottomNavBar extends StatelessWidget {
   }
 }
 
-class _NavItem {
+class NavItem {
   final int index;
   final IconData icon;
   final String label;
 
-  _NavItem({
+  NavItem({
     required this.index,
     required this.icon,
     required this.label,

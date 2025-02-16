@@ -93,7 +93,6 @@ class AnimeScreenState extends State<AnimeScreen> {
   Widget _buildAnimeScreenContent(BaseAnimeScreen service) {
     return Obx(() {
       var mediaDataList = service.trending.value;
-      var chipCall = service.loadTrending;
       return SizedBox(
         height: 486.statusBar(),
         child: service.running.value
@@ -112,17 +111,7 @@ class AnimeScreenState extends State<AnimeScreen> {
                     right: 8.0,
                     child: Center(
                       child: ChipsWidget(
-                        chips: [
-                          ChipData(
-                              label: getString.thisSeason,
-                              action: () => chipCall(1)),
-                          ChipData(
-                              label: getString.nextSeason,
-                              action: () => chipCall(2)),
-                          ChipData(
-                              label: getString.previousSeason,
-                              action: () => chipCall(0)),
-                        ],
+                        chips: service.trendingChips,
                       ),
                     ),
                   ),

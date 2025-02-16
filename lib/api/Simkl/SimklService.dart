@@ -1,9 +1,12 @@
 import 'package:dantotsu/Services/BaseServiceData.dart';
 import 'package:dantotsu/Services/Screens/BaseHomeScreen.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:dantotsu/api/Simkl/Screen/SimklAnimeScreen.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../Screens/HomeNavbar.dart';
 import '../../Services/MediaService.dart';
+import '../../Services/Screens/BaseAnimeScreen.dart';
 import '../../Services/Screens/BaseLoginScreen.dart';
 import '../../Theme/LanguageSwitcher.dart';
 import 'Screen/SimklHomeScreen.dart';
@@ -18,6 +21,21 @@ class SimklService extends MediaService {
   String get getName => getString.simkl;
 
   @override
+  List<NavItem> get navBarItem =>  [
+    NavItem(
+        index: 0,
+        icon: Icons.movie_filter_rounded,
+        label: getString.anime.toUpperCase()),
+    NavItem(
+        index: 1,
+        icon: Icons.home_rounded,
+        label: getString.home.toUpperCase()),
+    NavItem(
+        index: 2,
+        icon: Icons.movie_creation_rounded,
+        label: getString.movie(1).toUpperCase()),
+  ];
+  @override
   String get iconPath => "assets/svg/simkl.svg";
 
   @override
@@ -26,10 +44,12 @@ class SimklService extends MediaService {
   @override
   BaseHomeScreen get homeScreen =>
       Get.put(SimklHomeScreen(Simkl), tag: "SimklHomeScreen");
-
   @override
   BaseLoginScreen get loginScreen =>
       Get.put(SimklLoginScreen(Simkl), tag: "SimklLoginScreen");
+  @override
+  BaseAnimeScreen? get animeScreen =>
+      Get.put(SimklAnimeScreen(Simkl), tag: "SimklAnimeScreen");
 }
 
 class SimklLoginScreen extends BaseLoginScreen {

@@ -1,4 +1,5 @@
 import 'package:blur/blur.dart';
+import 'package:dantotsu/Theme/LanguageSwitcher.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -162,7 +163,7 @@ class MediaPageLargeViewHolder extends StatelessWidget {
 
   Widget _buildAdditionalInfo(ColorScheme theme) {
     final isAnime = mediaInfo.anime != null;
-    final mediaType = isAnime ? "Episodes" : "Chapters";
+    final mediaType = isAnime ? getString.episode(mediaInfo.anime?.totalEpisodes  ?? 0) : getString.chapter(mediaInfo.manga?.totalChapters ?? 0);
     final mediaCount = isAnime
         ? formatMediaInfo(mediaInfo)
         : mediaInfo.manga?.totalChapters != 0

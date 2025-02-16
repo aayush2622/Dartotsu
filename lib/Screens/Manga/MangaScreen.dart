@@ -92,7 +92,6 @@ class MangaScreenState extends State<MangaScreen> {
   Widget _buildMangaScreenContent(BaseMangaScreen service) {
     return Obx(() {
       var mediaDataList = service.trending.value;
-      var chipCall = service.loadTrending;
       return SizedBox(
         height: 486.statusBar(),
         child: service.running.value
@@ -113,20 +112,7 @@ class MangaScreenState extends State<MangaScreen> {
                     right: 8.0,
                     child: Center(
                       child: ChipsWidget(
-                        chips: [
-                          ChipData(
-                            label: getString.trending(getString.manga),
-                            action: () => chipCall('MANGA'),
-                          ),
-                          ChipData(
-                            label: getString.trending(getString.manhwa),
-                            action: () => chipCall('MANHWA'),
-                          ),
-                          ChipData(
-                            label: getString.trending(getString.novel),
-                            action: () => chipCall('NOVEL'),
-                          ),
-                        ],
+                        chips: service.trendingChips,
                       ),
                     ),
                   ),

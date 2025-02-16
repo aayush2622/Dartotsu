@@ -15,7 +15,7 @@ import 'Simkl.dart';
 
 part 'SimklQueries/GetHomePageData.dart';
 part 'SimklQueries/GetUserData.dart';
-
+part 'SimklQueries/GetAnimeMangaListData.dart';
 class SimklQueries extends Queries {
   SimklQueries(this.executeQuery);
 
@@ -29,10 +29,7 @@ class SimklQueries extends Queries {
   }) executeQuery;
 
   @override
-  Future<Map<String, List<media.Media>>> getAnimeList() {
-    // TODO: implement getAnimeList
-    throw UnimplementedError();
-  }
+  Future<Map<String, List<media.Media>>> getAnimeList() => _getAnimeList();
 
   @override
   Future<List<media.Media>> getCalendarData() {
@@ -47,11 +44,11 @@ class SimklQueries extends Queries {
   }
 
   @override
-  Future<Map<String, List<media.Media>>> getMangaList() {
-    // TODO: implement getMangaList
-    throw UnimplementedError();
-  }
+  Future<Map<String, List<media.Media>>> getMangaList() => _getMangaList();
 
+  Future<List<media.Media>> getTrending({String? type}) => _getTrending(type: type);
+
+  Future<List<media.Media>> loadNextPage(String type, int page) => _loadNextPage(type, page);
   @override
   Future<media.Media?>? getMedia(int id, {bool mal = true}) {
     // TODO: implement getMedia
