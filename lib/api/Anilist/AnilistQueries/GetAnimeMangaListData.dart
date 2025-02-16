@@ -4,44 +4,52 @@ extension on AnilistQueries {
   Future<Map<String, List<Media>>> _getAnimeList() async {
     final list = <String, List<Media>>{};
 
-    List<Media>? filterRecentUpdates(Page? page) {
-      final listOnly = PrefManager.getVal(PrefName.recentlyListOnly);
-      final adultOnly = PrefManager.getVal(PrefName.adultOnly);
-      final idArr = <int>{};
+    Future<List<Media>> filterRecentUpdates(Page? page) async {
+      List<Media>? process(Map<String, dynamic> params) {
+        var listOnly = params['listOnly'] as bool;
+        var adultOnly = params['adultOnly'] as bool;
+        final idArr = <int>{};
+        var airingSchedules = params['list'] as List<api.AiringSchedule>?;
+        return airingSchedules
+            ?.where((i) {
+              final media = i.media;
+              if (media == null || idArr.contains(media.id)) return false;
+
+              final shouldAdd = (!listOnly &&
+                      media.countryOfOrigin == "JP" &&
+                      adultOnly &&
+                      media.isAdult == true) ||
+                  (!listOnly &&
+                      !adultOnly &&
+                      media.countryOfOrigin == "JP" &&
+                      media.isAdult == false) ||
+                  (listOnly && media.mediaListEntry != null);
+
+              if (shouldAdd) {
+                idArr.add(media.id);
+                return true;
+              }
+              return false;
+            })
+            .map((i) => Media.mediaData(i.media!))
+            .toList();
+      }
 
       if (page == null || page.airingSchedules == null) return [];
-
-      return page.airingSchedules
-          ?.where((i) {
-            final media = i.media;
-            if (media == null || idArr.contains(media.id)) return false;
-
-            final shouldAdd = (!listOnly &&
-                    media.countryOfOrigin == "JP" &&
-                    adultOnly &&
-                    media.isAdult == true) ||
-                (!listOnly &&
-                    !adultOnly &&
-                    media.countryOfOrigin == "JP" &&
-                    media.isAdult == false) ||
-                (listOnly && media.mediaListEntry != null);
-
-            if (shouldAdd) {
-              idArr.add(media.id);
-              return true;
-            }
-            return false;
-          })
-          .map((i) => Media.mediaData(i.media!))
-          .toList();
+      var list = await compute(process, {
+        'listOnly': PrefManager.getVal(PrefName.recentlyListOnly),
+        'adultOnly': PrefManager.getVal(PrefName.adultOnly),
+        'list': page.airingSchedules
+      });
+      return list ?? [];
     }
 
     final animeLayoutMap = PrefManager.getVal(PrefName.anilistAnimeLayout);
     final animeList =
         await executeQuery<AnimeListResponse>(_queryAnimeList(), force: true);
-    Map<String, void Function()> returnMap = {
-      'Recent Updates': () => list["recentUpdates"] =
-          filterRecentUpdates(animeList?.data?.recentUpdates)!,
+    Map<String, Future<void> Function()> returnMap = {
+      'Recent Updates': () async => list["recentUpdates"] =
+          await filterRecentUpdates(animeList?.data?.recentUpdates),
       'Trending Movies': () async => list["trendingMovies"] =
           await _mediaList(animeList?.data?.trendingMovies),
       'Top Rated Series': () async => list["topRatedSeries"] =
@@ -49,12 +57,16 @@ extension on AnilistQueries {
       'Most Favourite Series': () async => list["mostFavSeries"] =
           await _mediaList(animeList?.data?.mostFavSeries),
     };
-    animeLayoutMap.entries
-        .where((entry) => entry.value && returnMap.containsKey(entry.key))
-        .forEach((entry) => returnMap[entry.key]!());
-
-    list["popularAnime"] = await _mediaList(animeList?.data?.popularAnime);
-    list["trendingAnime"] = await _mediaList(animeList?.data?.trendingAnime);
+    final List<Future<void> Function()> tasks = [
+      ...animeLayoutMap.entries
+          .where((entry) => entry.value && returnMap.containsKey(entry.key))
+          .map((entry) => returnMap[entry.key]!),
+      () async => list["popularAnime"] =
+          await _mediaList(animeList?.data?.popularAnime),
+      () async => list["trendingAnime"] =
+          await _mediaList(animeList?.data?.trendingAnime),
+    ];
+    await Future.wait(tasks.map((task) => task()));
     return list;
   }
 
@@ -64,7 +76,7 @@ extension on AnilistQueries {
     final mangaList =
         await executeQuery<MangaListResponse>(_queryMangaList(), force: true);
 
-    Map<String, void Function()> returnMap = {
+    Map<String, Future<void> Function()> returnMap = {
       'Trending Manhwa': () async => list["trendingManhwa"] =
           await _mediaList(mangaList?.data?.trendingManhwa),
       'Trending Novels': () async => list["trendingNovel"] =
@@ -74,12 +86,17 @@ extension on AnilistQueries {
       'Most Favourite Manga': () async =>
           list["mostFav"] = await _mediaList(mangaList?.data?.mostFav),
     };
-    mangaLayoutMap.entries
-        .where((entry) => entry.value && returnMap.containsKey(entry.key))
-        .forEach((entry) => returnMap[entry.key]!());
+    final List<Future<void> Function()> tasks = [
+      ...mangaLayoutMap.entries
+          .where((entry) => entry.value && returnMap.containsKey(entry.key))
+          .map((entry) => returnMap[entry.key]!),
+      () async => list["popularManga"] =
+          await _mediaList(mangaList?.data?.popularManga),
+      () async =>
+          list["trending"] = await _mediaList(mangaList?.data?.trending),
+    ];
+    await Future.wait(tasks.map((task) => task()));
 
-    list["popularManga"] = await _mediaList(mangaList?.data?.popularManga);
-    list["trending"] = await _mediaList(mangaList?.data?.trending);
     return list;
   }
 }
