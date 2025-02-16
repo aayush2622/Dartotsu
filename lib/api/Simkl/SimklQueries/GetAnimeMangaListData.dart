@@ -4,9 +4,9 @@ extension on SimklQueries {
   Future<Map<String, List<media.Media>>> _getAnimeList() async {
     final list = <String, List<media.Media>>{};
     final urls = {
-      'premiere':
+      'Incoming':
           'https://api.simkl.com/anime/premieres/param?type=all&client_id=${SimklLogin.clientId}',
-      'airingAnime':
+      'Airing':
           'https://api.simkl.com/anime/airing?date?sort=time&client_id=${SimklLogin.clientId}',
     };
     final mangaLayoutMap = loadData(PrefName.simklAnimeLayout);

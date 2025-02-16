@@ -132,6 +132,48 @@ class SettingsAnimeScreenState extends BaseSettingsScreen {
           ),
         ],
       ),
+      Text(
+        getString.simkl,
+        style: const TextStyle(
+          fontSize: 14,
+          fontWeight: FontWeight.bold,
+          fontFamily: 'Poppins',
+        ),
+      ),
+      SettingsAdaptor(
+        settings: [
+          Setting(
+            type: SettingType.normal,
+            name: getString.manageLayout(getString.home, getString.simkl),
+            description: getString.manageLayoutDescription(getString.home),
+            icon: Icons.tune,
+            onClick: () async {
+              final homeLayoutMap = PrefManager.getVal(PrefName.simklAnimeLayout);
+              var titles = List<String>.from(homeLayoutMap.keys.toList());
+              var checkedStates =
+              List<bool>.from(homeLayoutMap.values.toList());
+              AlertDialogBuilder(context)
+                ..setTitle(
+                    getString.manageLayout(getString.home, getString.simkl))
+                ..reorderableMultiSelectableItems(
+                  titles,
+                  checkedStates,
+                      (reorderedItems) => titles = reorderedItems,
+                      (newCheckedStates) => checkedStates = newCheckedStates,
+                )
+                ..setPositiveButton(getString.ok, () {
+                  PrefManager.setVal(
+                    PrefName.simklAnimeLayout,
+                    Map.fromIterables(titles, checkedStates),
+                  );
+                  Refresh.activity[RefreshId.Simkl.animePage]?.value = true;
+                })
+                ..setNegativeButton(getString.cancel, null)
+                ..show();
+            },
+          ),
+        ],
+      ),
     ];
   }
 }

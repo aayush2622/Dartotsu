@@ -84,8 +84,8 @@ class PrefName {
   });
   static const Pref<Map<dynamic, dynamic>> simklAnimeLayout =
   Pref(Location.General, 'simklAnimeLayoutOrder', {
-    'premiere': true,
-    'airingAnime': true,
+    'Incoming': true,
+    'Airing': true,
   });
   static const adultOnly = Pref(Location.General, 'adultOnly', false);
   static const includeAnimeList =

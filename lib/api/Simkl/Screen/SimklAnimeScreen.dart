@@ -7,7 +7,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 import '../../../Adaptor/Media/Widgets/Chips.dart';
+import '../../../DataClass/MediaSection.dart';
+import '../../../Preferences/PrefManager.dart';
 import '../../../Services/Screens/BaseAnimeScreen.dart';
+import '../../../Theme/LanguageSwitcher.dart';
 
 class SimklAnimeScreen extends BaseAnimeScreen {
   final SimklController Simkl;
@@ -23,6 +26,7 @@ class SimklAnimeScreen extends BaseAnimeScreen {
   var popularAnime = Rxn<List<Media>>();
   var premiereAnime = Rxn<List<Media>>();
   var airingAnime = Rxn<List<Media>>();
+
   @override
   Future<void> loadAll() async {
     resetPageData();
@@ -33,14 +37,16 @@ class SimklAnimeScreen extends BaseAnimeScreen {
 
   void _setMediaList(Map<String, List<Media>> res) {
     trending.value = res["trendingAnime"];
-    premiereAnime.value = res["premiere"];
-    airingAnime.value = res["airingAnime"];
+    premiereAnime.value = res['Incoming'];
+    airingAnime.value = res['Airing'];
     popularAnime.value = res["popularAnime"];
   }
+
   @override
   Future<void>? loadNextPage() async {
     page++;
-    var result = await (Simkl.query as SimklQueries?)?.loadNextPage('anime', page);
+    var result =
+        await (Simkl.query as SimklQueries?)?.loadNextPage('anime', page);
     if (result != null) {
       canLoadMore.value = true;
       popularAnime.value = [...?popularAnime.value, ...result];
@@ -50,38 +56,59 @@ class SimklAnimeScreen extends BaseAnimeScreen {
     loadMore.value = true;
     return;
   }
+
   @override
-  void loadTrending(int page) async{
+  void loadTrending(int page) async {
     this.trending.value = null;
-    var type = page == 1 ? "today" : page == 0 ? 'month' : 'week';
-    var trending = await (Simkl.query as SimklQueries?)!
-        .getTrending(type:type);
+    var type = page == 1
+        ? "today"
+        : page == 0
+            ? 'month'
+            : 'week';
+    var trending =
+        await (Simkl.query as SimklQueries?)!.getTrending(type: type);
     this.trending.value = trending;
   }
 
   @override
   List<Widget> mediaContent(BuildContext context) {
-    return [
-      MediaSection(
-        context: context,
-        type: 0,
-        title: 'Incoming',
-        mediaList: premiereAnime.value
-      ),
-      MediaSection(
-          context: context,
+    final mediaSections = [
+      MediaSectionData(
+          type: 0,
+          title: 'Incoming',
+          pairTitle: 'Incoming',
+          list: premiereAnime.value),
+      MediaSectionData(
           type: 0,
           title: 'Airing',
-          mediaList: airingAnime.value
-      ),
-      MediaSection(
-          context: context,
-          type: 2,
-          title: 'Popular',
-          mediaList: popularAnime.value
-      ),
-
+          pairTitle: 'Airing',
+          list: airingAnime.value),
     ];
+    final animeLayoutMap = PrefManager.getVal(PrefName.simklAnimeLayout);
+    final sectionMap = {
+      for (var section in mediaSections) section.pairTitle: section
+    };
+    return animeLayoutMap.entries
+        .where((entry) => entry.value)
+        .map((entry) => sectionMap[entry.key])
+        .whereType<MediaSectionData>()
+        .map(
+          (section) => MediaSection(
+            context: context,
+            type: section.type,
+            title: section.title,
+            mediaList: section.list,
+            scrollController: section.scrollController,
+          ),
+        )
+        .toList()
+      ..add(
+        MediaSection(
+            context: context,
+            type: 2,
+            title: getString.popular(getString.anime),
+            mediaList: popularAnime.value),
+      );
   }
 
   @override
