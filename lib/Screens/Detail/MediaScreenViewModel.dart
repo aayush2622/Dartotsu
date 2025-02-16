@@ -25,7 +25,7 @@ class MediaPageViewModel extends GetxController {
     var theme = Theme.of(context).colorScheme;
     if (mediaData.userStatus != null) {
       spans.add(TextSpan(
-        text: mediaData.anime != null ? "Watched " : "Read ",
+        text: mediaData.anime != null ? getString.watchStatus : getString.readStatus,
       ));
       spans.add(TextSpan(
         text: "${mediaData.userProgress}",
@@ -34,9 +34,9 @@ class MediaPageViewModel extends GetxController {
           color: theme.secondary,
         ),
       ));
-      spans.add(const TextSpan(text: " out of "));
+      spans.add(const TextSpan(text: getString.outOf));
     } else {
-      spans.add(const TextSpan(text: "Total of "));
+      spans.add(const TextSpan(text: getString.totalOf));
     }
 
     if (mediaData.anime != null) {
