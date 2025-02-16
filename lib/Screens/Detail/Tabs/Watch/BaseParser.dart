@@ -1,6 +1,5 @@
 import 'package:async/async.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart' as r;
 import 'package:fuzzywuzzy/fuzzywuzzy.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -30,24 +29,13 @@ abstract class BaseParser extends GetxController {
   var sourcesLoaded = false.obs;
 
   void initSourceList(Media media) async {
-    final container = r.ProviderContainer();
     var isAnime = media.anime != null;
     final itemType = isAnime
         ? ItemType.anime
         : media.format?.toLowerCase() == 'novel'
             ? ItemType.novel
             : ItemType.manga;
-    var sources =
-        await container.read(getExtensionsStreamProvider(itemType).future);
-    var s =
-        sources.where((source) => source.isAdded!).toList().reversed.toList();
-    final ids =
-        loadCustomData<List<int>?>('sortedExtensions_${itemType.name}') ?? [];
-    final sortedSources = [
-      ...s.where((source) => ids.contains(source.id)).toList()
-        ..sort((a, b) => ids.indexOf(a.id!).compareTo(ids.indexOf(b.id!))),
-      ...s.where((source) => !ids.contains(source.id)),
-    ];
+    final sortedSources = await Extensions.getSortedExtension(itemType);
     if (sortedSources.isEmpty) {
       sourcesLoaded.value = true;
       return;
