@@ -2,7 +2,6 @@ import 'package:dantotsu/DataClass/User.dart';
 import 'package:dantotsu/api/Anilist/Screen/Widgets/SearchFilter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
 import '../../../Adaptor/Charactes/Widgets/EntitySection.dart';
 import '../../../Adaptor/Media/Widgets/Chips.dart';

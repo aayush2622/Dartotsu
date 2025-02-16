@@ -59,7 +59,7 @@ class PrefName {
     'Continue Reading': true,
     'Planned Manga': false,
   });
-  static const anilistRemoveList =
+  static const Pref<List<int>> anilistRemoveList =
       Pref(Location.General, 'anilistRemoveList', []);
   static const Pref<List<int>> malRemoveList =
       Pref(Location.General, 'malRemoveList', []);

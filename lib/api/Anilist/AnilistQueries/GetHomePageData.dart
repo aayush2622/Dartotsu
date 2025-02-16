@@ -11,50 +11,78 @@ extension on AnilistQueries {
       var response = await executeQuery<UserListResponse>(_queryHomeList());
       Map<String, List<Media>> returnMap = {};
 
-      void processMedia(String type, List<api.MediaList>? currentMedia,
-          List<api.MediaList>? repeatingMedia) {
-        Map<int, Media> subMap = {};
-        List<Media> returnArray = [];
-
-        for (var entry in (currentMedia ?? []) + (repeatingMedia ?? [])) {
-          var media = Media.mediaListData(entry);
-          if (!removeList.contains(media.id) &&
-              (!hidePrivate || !media.isListPrivate)) {
-            media.cameFromContinue = true;
-            subMap[media.id] = media;
-          } else {
-            removedMedia.add(media);
+      Future<void> processMedia(String type, List<api.MediaList>? currentMedia,
+          List<api.MediaList>? repeatingMedia) async {
+        (List<Media>, List<Media>) process(Map<String, dynamic> params) {
+          Map<int, Media> subMap = {};
+          List<Media> returnArray = [];
+          List<Media> removedMedia = [];
+          var removeList = params["removeList"] as List<int>;
+          var hidePrivate = params["hidePrivate"] as bool;
+          for (var entry in (params["list"] ?? []) as List<api.MediaList>) {
+            var media = Media.mediaListData(entry);
+            if (!removeList.contains(media.id) &&
+                (!hidePrivate || !media.isListPrivate)) {
+              media.cameFromContinue = true;
+              subMap[media.id] = media;
+            } else {
+              removedMedia.add(media);
+            }
           }
+          var list = params["continueList"] as List<int>;
+          if (list.isNotEmpty) {
+            returnArray.addAll(list.reversed
+                .where((id) => subMap.containsKey(id))
+                .map((id) => subMap[id]!));
+            returnArray
+                .addAll(subMap.values.where((m) => !returnArray.contains(m)));
+          } else {
+            returnArray.addAll(subMap.values);
+          }
+
+          return (returnArray, removedMedia);
         }
 
         List<int> list =
             PrefManager.getCustomVal<List<int>>("continue${type}List") ?? [];
-        if (list.isNotEmpty) {
-          returnArray.addAll(list.reversed
-              .where((id) => subMap.containsKey(id))
-              .map((id) => subMap[id]!));
-          returnArray
-              .addAll(subMap.values.where((m) => !returnArray.contains(m)));
-        } else {
-          returnArray.addAll(subMap.values);
-        }
+        var mediaList = (currentMedia ?? []) + (repeatingMedia ?? []);
+        var returnArray = await compute(process, {
+          "list": mediaList,
+          "removeList": removeList,
+          "hidePrivate": hidePrivate,
+          "continueList": list
+        });
 
-        returnMap["current$type"] = returnArray;
+        removedMedia.addAll(returnArray.$2);
+        returnMap["current$type"] = returnArray.$1;
       }
 
-      void processFavorites(String type, List<api.MediaEdge>? favorites) {
-        List<Media> returnArray = [];
-        for (var entry in (favorites ?? [])) {
-          var media = Media.mediaEdgeData(entry);
-          media.isFav = true;
-          if (!removeList.contains(media.id) &&
-              (!hidePrivate || !media.isListPrivate)) {
-            returnArray.add(media);
-          } else {
-            removedMedia.add(media);
+      Future<void> processFavorites(
+          String type, List<api.MediaEdge>? favorites) async {
+        (List<Media>, List<Media>) process(Map<String, dynamic> params) {
+          List<Media> returnArray = [];
+          List<Media> removedMedia = [];
+          var removeList = params["removeList"] as List<int>;
+          var hidePrivate = params["hidePrivate"] as bool;
+          for (var entry in (params["list"] ?? []) as List<api.MediaEdge>) {
+            var media = Media.mediaEdgeData(entry);
+            if (!removeList.contains(media.id) &&
+                (!hidePrivate || !media.isListPrivate)) {
+              returnArray.add(media);
+            } else {
+              removedMedia.add(media);
+            }
           }
+          return (returnArray, removedMedia);
         }
-        returnMap["favorite$type"] = returnArray;
+
+        var returnArray = await compute(process, {
+          "list": favorites,
+          "removeList": removeList,
+          "hidePrivate": hidePrivate,
+        });
+        removedMedia.addAll(returnArray.$2);
+        returnMap["favorite$type"] = returnArray.$1;
       }
 
       List<api.MediaList> getMediaList(List<api.MediaListGroup>? lists) {
@@ -65,40 +93,15 @@ extension on AnilistQueries {
             .toList();
       }
 
-      Map<String, void Function()> processMappings = {
-        'Continue Watching': () {
-          processMedia(
-              "Anime",
-              getMediaList(response?.data?.currentAnime?.lists),
-              getMediaList(response?.data?.repeatingAnime?.lists));
-        },
-        'Favourite Anime': () {
-          processFavorites(
-              "Anime", response?.data?.favoriteAnime?.favourites?.anime?.edges);
-        },
-        'Planned Anime': () {
-          processMedia("AnimePlanned",
-              getMediaList(response?.data?.plannedAnime?.lists), null);
-        },
-        'Continue Reading': () {
-          processMedia(
-              "Manga",
-              getMediaList(response?.data?.currentManga?.lists),
-              getMediaList(response?.data?.repeatingManga?.lists));
-        },
-        'Favourite Manga': () {
-          processFavorites(
-              "Manga", response?.data?.favoriteManga?.favourites?.manga?.edges);
-        },
-        'Planned Manga': () {
-          processMedia("MangaPlanned",
-              getMediaList(response?.data?.plannedManga?.lists), null);
-        },
-        'Recommended': () {
-          Map<int, Media> subMap = {};
-
+      Future<void> processRecommended(
+        List<Recommendation>? r,
+        List<api.MediaList>? a,
+        List<api.MediaList>? b,
+      ) async {
+        Map<int, Media> subMap = {};
+        List<Media> process(Map<String, dynamic> params) {
           var recommendations =
-              response?.data?.recommendationQuery?.recommendations ?? [];
+              (params["recommended"] ?? []) as List<Recommendation>;
           for (var entry in recommendations) {
             var mediaRecommendation = entry.mediaRecommendation;
             if (mediaRecommendation != null) {
@@ -108,16 +111,8 @@ extension on AnilistQueries {
             }
           }
 
-          Iterable<api.MediaList> combineIterables(
-              Iterable<api.MediaList>? first, Iterable<api.MediaList>? second) {
-            return (first ?? []).followedBy(second ?? []);
-          }
-
-          for (var entry in combineIterables(
-              response?.data?.recommendationPlannedQueryAnime?.lists
-                  ?.expand((x) => x.entries ?? []),
-              response?.data?.recommendationPlannedQueryManga?.lists
-                  ?.expand((x) => x.entries ?? []))) {
+          var mediaList = (params["list"] ?? []) as List<api.MediaList>;
+          for (var entry in mediaList) {
             var media = Media.mediaListData(entry);
             if (['RELEASING', 'FINISHED'].contains(media.status)) {
               media.relation = entry.media?.type?.name ?? "";
@@ -127,15 +122,59 @@ extension on AnilistQueries {
 
           List<Media> list = subMap.values.toList()
             ..sort((a, b) => (b.meanScore ?? 0).compareTo(a.meanScore ?? 0));
-          returnMap["recommendations"] = list;
-        },
+          return list;
+        }
+
+        var list = await compute(
+            process, {"list": (a ?? []) + (b ?? []), "recommended": r});
+
+        returnMap["recommendations"] = list;
+      }
+
+      Map<String, Future<void> Function()> processMappings = {
+        'Continue Watching': () => processMedia(
+              "Anime",
+              getMediaList(response?.data?.currentAnime?.lists),
+              getMediaList(response?.data?.repeatingAnime?.lists),
+            ),
+        'Favourite Anime': () => processFavorites(
+              "Anime",
+              response?.data?.favoriteAnime?.favourites?.anime?.edges,
+            ),
+        'Planned Anime': () => processMedia(
+              "AnimePlanned",
+              getMediaList(response?.data?.plannedAnime?.lists),
+              null,
+            ),
+        'Continue Reading': () => processMedia(
+              "Manga",
+              getMediaList(response?.data?.currentManga?.lists),
+              getMediaList(response?.data?.repeatingManga?.lists),
+            ),
+        'Favourite Manga': () => processFavorites(
+              "Manga",
+              response?.data?.favoriteManga?.favourites?.manga?.edges,
+            ),
+        'Planned Manga': () => processMedia(
+              "MangaPlanned",
+              getMediaList(response?.data?.plannedManga?.lists),
+              null,
+            ),
+        'Recommended': () => processRecommended(
+              response?.data?.recommendationQuery?.recommendations,
+              getMediaList(
+                  response?.data?.recommendationPlannedQueryAnime?.lists),
+              getMediaList(
+                  response?.data?.recommendationPlannedQueryManga?.lists),
+            ),
       };
 
-      homeLayoutMap.entries
-          .where(
-              (entry) => entry.value && processMappings.containsKey(entry.key))
-          .forEach((entry) => processMappings[entry.key]!());
-
+      await Future.wait(
+        homeLayoutMap.entries
+            .where((entry) =>
+                entry.value && processMappings.containsKey(entry.key))
+            .map((entry) => processMappings[entry.key]!()),
+      );
       returnMap["hidden"] = removedMedia.toSet().toList();
       return returnMap;
     } catch (e) {

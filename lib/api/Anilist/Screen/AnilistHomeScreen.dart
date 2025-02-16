@@ -97,7 +97,7 @@ class AnilistHomeScreen extends BaseHomeScreen {
       MediaSectionData(
         type: 0,
         title: getString.favorite(getString.anime),
-        pairTitle: 'Favorite Anime',
+        pairTitle: 'Favourite Anime',
         list: animeFav.value,
         emptyIcon: Icons.heart_broken,
         emptyMessage: getString.noFavourites,
@@ -125,7 +125,7 @@ class AnilistHomeScreen extends BaseHomeScreen {
       MediaSectionData(
         type: 0,
         title: getString.favorite(getString.manga),
-        pairTitle: 'Favorite Manga',
+        pairTitle: 'Favourite Manga',
         list: mangaFav.value,
         emptyIcon: Icons.heart_broken,
         emptyMessage: getString.noFavourites,

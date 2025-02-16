@@ -17,6 +17,7 @@ import '../../Services/Api/Queries.dart';
 import 'Data/data.dart';
 import 'Data/media.dart' as api;
 import 'Data/page.dart';
+import 'Data/recommendations.dart';
 import 'Data/staff.dart';
 
 part 'AnilistQueries/GetAnimeMangaListData.dart';
