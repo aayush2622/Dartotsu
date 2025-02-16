@@ -17,7 +17,7 @@ Widget GenreWidget(BuildContext context, List<String> genre) {
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(
-          'Genres',
+          getString.genres,
           style: TextStyle(
             fontSize: 15,
             fontFamily: 'Poppins',
