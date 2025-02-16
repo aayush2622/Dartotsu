@@ -56,7 +56,7 @@ abstract class BaseWatchScreen<T extends StatefulWidget> extends State<T> {
                     ),
                     child: Center(
                       child: Text(
-                        'Install a source from extension page to start ${mediaData.anime != null ? 'watching' : 'reading'}',
+                        '${getString.installSourceToStart} ${mediaData.anime != null ? getString.watching : getString.reading}',
                         style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -116,7 +116,7 @@ abstract class BaseWatchScreen<T extends StatefulWidget> extends State<T> {
         GestureDetector(
           onTap: () => viewModel.wrongTitle(context, mediaData, null),
           child: Text(
-            'Wrong Title?',
+            getString.wrongTitle,
             style: TextStyle(
               color: theme.secondary,
               fontWeight: FontWeight.bold,
@@ -155,7 +155,7 @@ abstract class BaseWatchScreen<T extends StatefulWidget> extends State<T> {
               Icon(Icons.play_circle_fill, color: Colors.white),
               SizedBox(width: 8),
               Text(
-                'Play on YouTube',
+                getString.youTube,
                 style: TextStyle(
                   fontFamily: 'Poppins',
                   fontWeight: FontWeight.bold,
