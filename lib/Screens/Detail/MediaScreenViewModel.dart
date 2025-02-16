@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 
 import '../../DataClass/Media.dart';
 import '../../Services/ServiceSwitcher.dart';
+import 'package:dantotsu/Theme/LanguageSwitcher.dart';
+
 
 class MediaPageViewModel extends GetxController {
   var dataLoaded = false.obs;
@@ -34,9 +36,9 @@ class MediaPageViewModel extends GetxController {
           color: theme.secondary,
         ),
       ));
-      spans.add(const TextSpan(text: getString.outOf));
+      spans.add(TextSpan(text: getString.outOf));
     } else {
-      spans.add(const TextSpan(text: getString.totalOf));
+      spans.add(TextSpan(text: getString.totalOf));
     }
 
     if (mediaData.anime != null) {

@@ -1,4 +1,5 @@
 import 'package:dantotsu/DataClass/Media.dart';
+import 'package:dantotsu/Theme/LanguageSwitcher.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
@@ -8,7 +9,6 @@ import '../../../../api/Sources/Model/Source.dart';
 import '../../Widgets/Releasing.dart';
 import 'BaseParser.dart';
 import 'Widgets/SourceSelector.dart';
-
 abstract class BaseWatchScreen<T extends StatefulWidget> extends State<T> {
   BaseParser get viewModel;
 
@@ -149,7 +149,7 @@ abstract class BaseWatchScreen<T extends StatefulWidget> extends State<T> {
               borderRadius: BorderRadius.circular(12.0),
             ),
           ),
-          child: const Row(
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(Icons.play_circle_fill, color: Colors.white),

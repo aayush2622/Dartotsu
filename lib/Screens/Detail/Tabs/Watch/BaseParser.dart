@@ -18,6 +18,7 @@ import '../../../../api/Sources/Model/Source.dart';
 import '../../../../api/Sources/Search/search.dart';
 import '../../../Settings/language.dart';
 import 'Widgets/WrongTitle.dart';
+import 'package:dantotsu/Theme/LanguageSwitcher.dart';
 
 abstract class BaseParser extends GetxController {
   var selectedMedia = Rxn<MManga?>(null);
@@ -239,7 +240,7 @@ abstract class BaseParser extends GetxController {
   _saveShowResponse(Media mediaData, MManga response, Source source,
       {bool selected = false}) {
     status.value =
-        selected ? getString.selected : ${response.name} : getString.found : ${response.name};
+        selected ? "${getString.selected} : ${response.name}" : "${getString.found} : ${response.name}";
     var show = ShowResponse(
         name: response.name!,
         link: response.link!,

@@ -578,14 +578,14 @@
   "watchStatus": "Watched",
   "outOf": "out of",
   "totalOf": "Total of",
-  "wrongTitle": "Wrong Title?,
+  "wrongTitle": "Wrong Title?",
   "youTube": "Play on YouTube?",
   "installSourceToStart": "Install a source from extension page to start",
   "watching": "Watching",
   "reading": "Reading",
-  "getString.mediaNotFound": "Media not found",
-  "getString.noChapterFound": "No chapter found",
-  "getString.selected": "Selected",
-  "getString.found": "Found",
-  "getString.webView": "Web View"
-}
+  "mediaNotFound": "Media not found",
+  "noChapterFound": "No chapter found",
+  "selected": "Selected",
+  "found": "Found",
+  "webView": "Web View"
+  }
