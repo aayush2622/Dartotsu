@@ -46,7 +46,7 @@ class SimklQueries extends Queries {
   @override
   Future<Map<String, List<media.Media>>> getMangaList() => _getMangaList();
 
-  Future<List<media.Media>> getTrending({String? type}) => _getTrending(type: type);
+  Future<List<media.Media>> getTrending(String type, {String? time}) => _getTrending(type,time: time);
 
   Future<List<media.Media>> loadNextPage(String type, int page) => _loadNextPage(type, page);
   @override

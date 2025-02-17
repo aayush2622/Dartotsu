@@ -23,6 +23,44 @@ class Media {
 
 @JsonSerializable()
 class MovieElement {
+  @JsonKey(name: "title")
+  String? title;
+  @JsonKey(name: "year")
+  int? year;
+  @JsonKey(name: "type")
+  String? type;
+  @JsonKey(name: "ids")
+  Ids? ids;
+  @JsonKey(name: "en_title")
+  String? enTitle;
+  @JsonKey(name: "rank")
+  int? rank;
+  @JsonKey(name: "poster")
+  String? poster;
+  @JsonKey(name: "fanart")
+  String? fanart;
+  @JsonKey(name: "first_aired")
+  DateTime? firstAired;
+  @JsonKey(name: "airs")
+  Airs? airs;
+  @JsonKey(name: "certification")
+  String? certification;
+  @JsonKey(name: "overview")
+  String? overview;
+  @JsonKey(name: "genres")
+  List<String>? genres;
+  @JsonKey(name: "country")
+  String? country;
+  @JsonKey(name: "total_episodes")
+  int? totalEpisodes;
+  @JsonKey(name: "network")
+  String? network;
+  @JsonKey(name: "ratings")
+  Ratings? ratings;
+  @JsonKey(name: "trailers")
+  List<Trailer>? trailers;
+  @JsonKey(name: "users_recommendations")
+  List<Anime>? usersRecommendations;
   @JsonKey(name: "last_watched_at")
   DateTime? lastWatchedAt;
   @JsonKey(name: "status")
@@ -43,8 +81,27 @@ class MovieElement {
   MovieMovie? movie;
 
   MovieElement({
-    this.lastWatchedAt,
+    this.title,
+    this.year,
+    this.type,
+    this.ids,
+    this.enTitle,
+    this.rank,
+    this.poster,
+    this.fanart,
+    this.firstAired,
+    this.airs,
+    this.certification,
+    this.overview,
+    this.genres,
+    this.country,
+    this.totalEpisodes,
     this.status,
+    this.network,
+    this.ratings,
+    this.trailers,
+    this.usersRecommendations,
+    this.lastWatchedAt,
     this.userRating,
     this.rating,
     this.releaseStatus,
@@ -107,7 +164,7 @@ class Anime {
   @JsonKey(name: "airs")
   Airs? airs;
   @JsonKey(name: "certification")
-  dynamic certification;
+  String? certification;
   @JsonKey(name: "overview")
   String? overview;
   @JsonKey(name: "genres")
@@ -255,6 +312,44 @@ class Show {
 
 @JsonSerializable()
 class ShowElement {
+  @JsonKey(name: "title")
+  String? title;
+  @JsonKey(name: "year")
+  int? year;
+  @JsonKey(name: "type")
+  String? type;
+  @JsonKey(name: "ids")
+  Ids? ids;
+  @JsonKey(name: "en_title")
+  String? enTitle;
+  @JsonKey(name: "rank")
+  int? rank;
+  @JsonKey(name: "poster")
+  String? poster;
+  @JsonKey(name: "fanart")
+  String? fanart;
+  @JsonKey(name: "first_aired")
+  DateTime? firstAired;
+  @JsonKey(name: "airs")
+  Airs? airs;
+  @JsonKey(name: "certification")
+  String? certification;
+  @JsonKey(name: "overview")
+  String? overview;
+  @JsonKey(name: "genres")
+  List<String>? genres;
+  @JsonKey(name: "country")
+  String? country;
+  @JsonKey(name: "total_episodes")
+  int? totalEpisodes;
+  @JsonKey(name: "network")
+  String? network;
+  @JsonKey(name: "ratings")
+  Ratings? ratings;
+  @JsonKey(name: "trailers")
+  List<Trailer>? trailers;
+  @JsonKey(name: "users_recommendations")
+  List<Anime>? usersRecommendations;
   @JsonKey(name: "last_watched_at")
   DateTime? lastWatchedAt;
   @JsonKey(name: "status")
@@ -279,8 +374,27 @@ class ShowElement {
   Show? show;
 
   ShowElement({
-    this.lastWatchedAt,
+    this.title,
+    this.year,
+    this.type,
+    this.ids,
+    this.enTitle,
+    this.rank,
+    this.poster,
+    this.fanart,
+    this.firstAired,
+    this.airs,
+    this.certification,
+    this.overview,
+    this.genres,
+    this.country,
+    this.totalEpisodes,
     this.status,
+    this.network,
+    this.ratings,
+    this.trailers,
+    this.usersRecommendations,
+    this.lastWatchedAt,
     this.userRating,
     this.rating,
     this.releaseStatus,
@@ -408,7 +522,9 @@ enum Status {
   @JsonValue("ongoing")
   ONGOING,
   @JsonValue("ended")
-  ENDED
+  ENDED,
+  @JsonValue("soon")
+  SOON
 }
 
 final statusValues = EnumValues({
@@ -418,7 +534,8 @@ final statusValues = EnumValues({
   "watching": Status.CURRENT,
   "hold": Status.HOLD,
   "ongoing" :Status.ONGOING,
-  "ended": Status.ENDED
+  "ended": Status.ENDED,
+  'soon': Status.SOON
 });
 
 class EnumValues<T> {

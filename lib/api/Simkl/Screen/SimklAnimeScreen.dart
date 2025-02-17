@@ -60,13 +60,13 @@ class SimklAnimeScreen extends BaseAnimeScreen {
   @override
   void loadTrending(int page) async {
     this.trending.value = null;
-    var type = page == 1
+    var time = page == 1
         ? "today"
         : page == 0
             ? 'month'
             : 'week';
     var trending =
-        await (Simkl.query as SimklQueries?)!.getTrending(type: type);
+        await (Simkl.query as SimklQueries?)!.getTrending('anime', time: time);
     this.trending.value = trending;
   }
 
@@ -77,12 +77,12 @@ class SimklAnimeScreen extends BaseAnimeScreen {
           type: 0,
           title: 'Incoming',
           pairTitle: 'Incoming',
-          list: premiereAnime.value),
+          list: premiereAnime.value,),
       MediaSectionData(
           type: 0,
           title: 'Airing',
           pairTitle: 'Airing',
-          list: airingAnime.value),
+          list: airingAnime.value,),
     ];
     final animeLayoutMap = PrefManager.getVal(PrefName.simklAnimeLayout);
     final sectionMap = {
@@ -107,7 +107,7 @@ class SimklAnimeScreen extends BaseAnimeScreen {
             context: context,
             type: 2,
             title: getString.popular(getString.anime),
-            mediaList: popularAnime.value),
+            mediaList: popularAnime.value,),
       );
   }
 

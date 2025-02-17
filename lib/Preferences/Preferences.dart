@@ -112,6 +112,11 @@ class PrefName {
     'Top Rated Manga': true,
     'Most Favourite Manga': true,
   });
+  static const Pref<Map<dynamic, dynamic>> simklMangaLayout =
+  Pref(Location.General, 'simklMangaLayoutOrder', {
+    'Incoming Shows': true,
+    'Airing Shows': true,
+  });
   static const includeMangaList =
       Pref(Location.General, 'includeMangaList', false);
 
