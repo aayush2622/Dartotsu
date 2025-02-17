@@ -1,6 +1,7 @@
 import 'package:dantotsu/Functions/Function.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:dantotsu/Theme/LanguageSwitcher.dart';
 
 import '../../../../../DataClass/Media.dart';
 import '../../../../../DataClass/SearchResults.dart';
@@ -22,7 +23,7 @@ Widget GenreWidget(BuildContext context, Media media) {
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(
-          'Genres',
+          getString.genres,
           style: TextStyle(
             fontSize: 15,
             fontFamily: 'Poppins',

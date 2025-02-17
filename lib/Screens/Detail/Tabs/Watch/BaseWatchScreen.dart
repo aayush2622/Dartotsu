@@ -1,4 +1,5 @@
 import 'package:dantotsu/DataClass/Media.dart';
+import 'package:dantotsu/Theme/LanguageSwitcher.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
@@ -8,7 +9,6 @@ import '../../../../api/Sources/Model/Source.dart';
 import '../../Widgets/Releasing.dart';
 import 'BaseParser.dart';
 import 'Widgets/SourceSelector.dart';
-
 abstract class BaseWatchScreen<T extends StatefulWidget> extends State<T> {
   BaseParser get viewModel;
 
@@ -56,7 +56,7 @@ abstract class BaseWatchScreen<T extends StatefulWidget> extends State<T> {
                     ),
                     child: Center(
                       child: Text(
-                        'Install a source from extension page to start ${mediaData.anime != null ? 'watching' : 'reading'}',
+                        '${getString.installSourceToStart} ${mediaData.anime != null ? getString.watching : getString.reading}',
                         style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -116,7 +116,7 @@ abstract class BaseWatchScreen<T extends StatefulWidget> extends State<T> {
         GestureDetector(
           onTap: () => viewModel.wrongTitle(context, mediaData, null),
           child: Text(
-            'Wrong Title?',
+            getString.wrongTitle,
             style: TextStyle(
               color: theme.secondary,
               fontWeight: FontWeight.bold,
@@ -149,13 +149,13 @@ abstract class BaseWatchScreen<T extends StatefulWidget> extends State<T> {
               borderRadius: BorderRadius.circular(12.0),
             ),
           ),
-          child: const Row(
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(Icons.play_circle_fill, color: Colors.white),
               SizedBox(width: 8),
               Text(
-                'Play on YouTube',
+                getString.youTube,
                 style: TextStyle(
                   fontFamily: 'Poppins',
                   fontWeight: FontWeight.bold,

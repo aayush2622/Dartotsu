@@ -1,5 +1,4 @@
 import 'package:async/async.dart';
-import 'package:dantotsu/Functions/GetExtensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fuzzywuzzy/fuzzywuzzy.dart';
 import 'package:get/get.dart';
@@ -12,11 +11,13 @@ import '../../../../Preferences/PrefManager.dart';
 import '../../../../Services/ServiceSwitcher.dart';
 import '../../../../Widgets/CustomBottomDialog.dart';
 import '../../../../api/Sources/Eval/dart/model/m_manga.dart';
+import '../../../../api/Sources/Extensions/extensions_provider.dart';
 import '../../../../api/Sources/Model/Manga.dart';
 import '../../../../api/Sources/Model/Source.dart';
 import '../../../../api/Sources/Search/search.dart';
 import '../../../Settings/language.dart';
 import 'Widgets/WrongTitle.dart';
+import 'package:dantotsu/Theme/LanguageSwitcher.dart';
 
 abstract class BaseParser extends GetxController {
   var selectedMedia = Rxn<MManga?>(null);
@@ -227,7 +228,7 @@ abstract class BaseParser extends GetxController {
   _saveShowResponse(Media mediaData, MManga response, Source source,
       {bool selected = false}) {
     status.value =
-        selected ? "Selected : ${response.name}" : "Found : ${response.name}";
+        selected ? "${getString.selected} : ${response.name}" : "${getString.found} : ${response.name}";
     var show = ShowResponse(
         name: response.name!,
         link: response.link!,

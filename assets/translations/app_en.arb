@@ -572,5 +572,20 @@
   "loadExtensionsIcon": "Load Extensions icon",
   "loadExtensionsIconDesc": "Disable if extensions page lags",
   "autoUpdate": "Auto Update",
-  "autoUpdateDesc": "Auto Update Extensions"
-}
+  "autoUpdateDesc": "Auto Update Extensions",
+
+  "readStatus": "Read",
+  "watchStatus": "Watched",
+  "outOf": "out of",
+  "totalOf": "Total of",
+  "wrongTitle": "Wrong Title?",
+  "youTube": "Play on YouTube?",
+  "installSourceToStart": "Install a source from extension page to start",
+  "watching": "Watching",
+  "reading": "Reading",
+  "mediaNotFound": "Media not found",
+  "noChapterFound": "No chapter found",
+  "selected": "Selected",
+  "found": "Found",
+  "webView": "Web View"
+  }

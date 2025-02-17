@@ -123,8 +123,8 @@ class AnimeCompactSettings {
       Icons.keyboard_arrow_down_rounded,
     ];
     final descriptions = [
-      'Up to Down',
-      'Down to Up',
+      getString.utd,
+      getString.dtu,
     ];
 
     return Obx(
@@ -185,7 +185,7 @@ class AnimeCompactSettings {
   Widget _buildWebViewSettings() {
     return Row(
       children: [
-        _buildInfo("Web View", source?.baseUrl ?? ''),
+        _buildInfo(getString.webView, source?.baseUrl ?? ''),
         IconButton(
           onPressed: () => navigateToPage(
             context,

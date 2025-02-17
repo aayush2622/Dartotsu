@@ -60,8 +60,8 @@ class MangaWatchScreenState extends BaseWatchScreen<MangaWatchScreen> {
                 Center(
                   child: Text(
                     _viewModel.errorType.value == ErrorType.NotFound
-                        ? 'Media not found'
-                        : 'No chapter found',
+                        ? getString.mediaNotFound
+                        : getString.noChapterFound,
                     style: TextStyle(
                       color: Theme.of(context).colorScheme.onSurface,
                       fontWeight: FontWeight.bold,
