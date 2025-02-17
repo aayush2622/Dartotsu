@@ -85,6 +85,23 @@ class MalHomeScreen extends BaseHomeScreen {
           (List.from(res["Reading"] ?? [])..shuffle(Random())).first.banner);
     }
     listImages.value = listImage;
+
+    if (animeContinue.value != null && animeContinue.value!.isNotEmpty) {
+      listImage.add((List.from(animeContinue.value ?? [])..shuffle(Random()))
+          .first
+          .cover);
+    }
+    if (mangaContinue.value != null && mangaContinue.value!.isNotEmpty) {
+      listImage.add((List.from(mangaContinue.value ?? [])..shuffle(Random()))
+          .first
+          .cover);
+    }
+    if (listImage.isNotEmpty) {
+      if (listImage.length < 2) {
+        listImage.add(listImage.first);
+      }
+      listImages.value = listImage;
+    }
   }
 
   @override

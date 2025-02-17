@@ -65,13 +65,20 @@ class SimklHomeScreen extends BaseHomeScreen {
     moviePlanned.value = res['plannedMovies'] ?? [];
     movieDropped.value = res['droppedMovies'] ?? [];
 
-    if (res['watchingAnime'] != null && res['watchingAnime']!.isNotEmpty) {
-      listImage.add((List.from(res["watchingAnime"] ?? [])..shuffle(Random()))
+    if (animeContinue.value != null && animeContinue.value!.isNotEmpty) {
+      listImage.add((List.from(animeContinue.value ?? [])..shuffle(Random()))
           .first
-          .banner);
-      listImage.add((List.from(res["watchingAnime"] ?? [])..shuffle(Random()))
+          .cover);
+    }
+    if (showContinue.value != null && showContinue.value!.isNotEmpty) {
+      listImage.add((List.from(showContinue.value ?? [])..shuffle(Random()))
           .first
-          .banner);
+          .cover);
+    }
+    if (listImage.isNotEmpty) {
+      if (listImage.length < 2) {
+        listImage.add(listImage.first);
+      }
       listImages.value = listImage;
     }
   }
