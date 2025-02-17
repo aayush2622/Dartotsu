@@ -198,6 +198,8 @@ jobs:
       - name: Enable Windows desktop support
         run: flutter config --enable-windows-desktop
 
+      - run: flutter clean
+
       # Get dependencies with cached packages
       - run: flutter pub get
 
