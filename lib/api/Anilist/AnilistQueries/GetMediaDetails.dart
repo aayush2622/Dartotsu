@@ -53,7 +53,6 @@ extension on AnilistQueries {
                 description: node.description ?? "",
                 gender: node.gender,
 
-                //Add roles here
                 voiceActor: (i.voiceActors?.map((voiceActor) {
                       return author(
                           id: voiceActor.id,

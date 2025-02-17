@@ -124,6 +124,52 @@ class SettingsMangaScreenState extends BaseSettingsScreen {
           ),
         ],
       ),
+      Text(
+        getString.simkl,
+        style: const TextStyle(
+          fontSize: 14,
+          fontWeight: FontWeight.bold,
+          fontFamily: 'Poppins',
+        ),
+      ),
+      SettingsAdaptor(
+        settings: [
+          Setting(
+            type: SettingType.normal,
+            name: getString.manageLayout(getString.movie(1), getString.simkl),
+            description: getString.manageLayoutDescription(getString.movie(1)),
+            icon: Icons.tune,
+            onClick: () async {
+              final homeLayoutMap = PrefManager.getVal(PrefName.simklMangaLayout);
+              List<String> titles =
+              List<String>.from(homeLayoutMap.keys.toList());
+              List<bool> checkedStates =
+              List<bool>.from(homeLayoutMap.values.toList());
+
+              AlertDialogBuilder(context)
+                ..setTitle(
+                  getString.manageLayout(getString.movie(1), getString.simkl),
+                )
+                ..reorderableMultiSelectableItems(
+                  titles,
+                  checkedStates,
+                      (reorderedItems) => titles = reorderedItems,
+                      (newCheckedStates) => checkedStates = newCheckedStates,
+                )
+                ..setPositiveButton(
+                  getString.ok,
+                      () {
+                    PrefManager.setVal(PrefName.simklMangaLayout,
+                        Map.fromIterables(titles, checkedStates));
+                    Refresh.activity[RefreshId.Simkl.mangaPage]?.value = true;
+                  },
+                )
+                ..setNegativeButton(getString.cancel, null)
+                ..show();
+            },
+          ),
+        ],
+      ),
     ];
   }
 }

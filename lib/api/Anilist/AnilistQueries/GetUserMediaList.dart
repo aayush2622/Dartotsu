@@ -10,27 +10,35 @@ extension on AnilistQueries {
         _queryUser(userId, anime));
 
     final Map<String, List<Media>> sorted = {};
-    final Map<String, List<Media>> unsorted = {};
-    final List<Media> all = [];
-    final List<int> allIds = [];
+
+
+    (List<Media>, Map<String, List<Media>>) process(Map<String, dynamic> params){
+      final Map<String, List<Media>> unsorted = {};
+      final List<Media> all = [];
+      final List<int> allIds = [];
+      final lists = params['lists'] as List<api.MediaListGroup>?;
+      lists?.forEach((list) {
+        var n = list.name;
+        if (n == null) return;
+        final name = n.trim();
+        unsorted[name] = [];
+        list.entries?.forEach((entry) {
+          if (entry.media == null) return;
+          final media = Media.mediaListData(entry);
+          unsorted[name]!.add(media);
+          if (!allIds.contains(media.id)) {
+            allIds.add(media.id);
+            all.add(media);
+          }
+        });
+      });
+      return (all, unsorted);
+    }
 
     final lists = response?.data?.mediaListCollection?.lists;
-    lists?.forEach((list) {
-      var n = list.name;
-      if (n == null) return;
-      final name = n.trim();
-      unsorted[name] = [];
-      list.entries?.forEach((entry) {
-        if (entry.media == null) return;
-        final media = Media.mediaListData(entry);
-        unsorted[name]!.add(media);
-        if (!allIds.contains(media.id)) {
-          allIds.add(media.id);
-          all.add(media);
-        }
-      });
+    var (all , unsorted) = await compute(process, {
+      'lists' : lists
     });
-
     final options = response?.data?.mediaListCollection?.user?.mediaListOptions;
     final mediaList = anime ? options?.animeList : options?.mangaList;
     mediaList?.sectionOrder?.forEach((section) {
@@ -98,19 +106,23 @@ extension on AnilistQueries {
       final favourites = response?.data?.user?.favourites;
       final apiMediaList = anime ? favourites?.anime : favourites?.manga;
       hasNextPage = apiMediaList?.pageInfo?.hasNextPage ?? false;
+      List<Media> process(Map<String, dynamic> params) {
+        var apiMediaList = params['list'] as api.MediaConnection?;
+        return apiMediaList?.edges
+                ?.map((e) {
+                  if (e.node != null) {
+                    var media = Media.mediaData(e.node!);
+                    media.isFav = true;
+                    return media;
+                  }
+                  return null;
+                })
+                .whereType<Media>()
+                .toList() ??
+            [];
+      }
 
-      return apiMediaList?.edges
-              ?.map((e) {
-                if (e.node != null) {
-                  var media = Media.mediaData(e.node!);
-                  media.isFav = true;
-                  return media;
-                }
-                return null;
-              })
-              .whereType<Media>()
-              .toList() ??
-          [];
+      return compute(process, {'list': apiMediaList});
     }
 
     List<Media> responseArray = [];

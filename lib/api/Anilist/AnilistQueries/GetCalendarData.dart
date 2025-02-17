@@ -14,16 +14,21 @@ extension on AnilistQueries {
     do {
       result = await execute(page);
       if (result != null && result.airingSchedules != null) {
-        mediaList.addAll(result.airingSchedules!
-            .where((m) =>
-                m.media != null &&
-                m.media!.countryOfOrigin == "JP" &&
-                (!Anilist.adult || m.media!.isAdult == false))
-            .map((j) {
-          final mediaItem = Media.mediaData(j.media!);
-          mediaItem.relation = "${j.episode},${j.airingAt}";
-          return mediaItem;
-        }).toList());
+        List<Media> process(Map<String, dynamic> params){
+          var result = params['page'] as Page;
+          var adult = params['adult'] as bool;
+          return result.airingSchedules!
+              .where((m) =>
+          m.media != null &&
+              m.media!.countryOfOrigin == "JP" &&
+              (!adult || m.media!.isAdult == false))
+              .map((j) {
+            final mediaItem = Media.mediaData(j.media!);
+            mediaItem.relation = "${j.episode},${j.airingAt}";
+            return mediaItem;
+          }).toList();
+        }
+        mediaList.addAll(await compute(process, {'page': result,'adult': Anilist.adult}));
         page++;
       }
     } while (result?.pageInfo?.hasNextPage == true);
