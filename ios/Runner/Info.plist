@@ -91,6 +91,14 @@
         </dict>
         <dict>
             <key>CFBundleURLName</key>
+            <string>mangayomi</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>mangayomi</string>
+            </array>
+        </dict>
+        <dict>
+            <key>CFBundleURLName</key>
             <string>sugoireads</string>
             <key>CFBundleURLSchemes</key>
             <array>

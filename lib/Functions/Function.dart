@@ -137,7 +137,7 @@ void copyToClipboard(String text) {
         ),
       ),
       backgroundColor: theme.surface,
-      duration: const Duration(milliseconds: 45),
+      duration: const Duration(milliseconds: 100),
     ),
   );
 }

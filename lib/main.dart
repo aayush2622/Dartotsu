@@ -50,7 +50,7 @@ void main(List<String> args) async {
   runZonedGuarded(
     () async {
       WidgetsFlutterBinding.ensureInitialized();
-      if(Platform.isLinux) {
+      if (Platform.isLinux) {
         if (runWebViewTitleBarWidget(args)) {
           return;
         }
@@ -82,7 +82,9 @@ void main(List<String> args) async {
 }
 
 Future init() async {
-  if (Platform.isWindows) ['dar', 'anymex', 'sugoireads'].forEach(registerProtocol);
+  if (Platform.isWindows) {
+    ['dar', 'anymex', 'sugoireads', 'mangayomi'].forEach(registerProtocol);
+  }
   await StorageProvider.requestPermission();
   await dotenv.load(fileName: ".env");
   await PrefManager.init();
@@ -107,8 +109,10 @@ Future init() async {
     if (availableVersion != null) {
       final document = await getApplicationDocumentsDirectory();
       webViewEnvironment = await WebViewEnvironment.create(
-          settings: WebViewEnvironmentSettings(
-              userDataFolder: p.join(document.path, 'flutter_inappwebview')));
+        settings: WebViewEnvironmentSettings(
+          userDataFolder: p.join(document.path, 'flutter_inappwebview'),
+        ),
+      );
     }
   }
   Discord.getSavedToken();
@@ -140,7 +144,8 @@ void handleDeepLink(Uri uri) {
   if (uri.host != "add-repo") return;
 
   final repoMap = {
-    ItemType.anime: uri.queryParameters["url"] ?? uri.queryParameters["anime_url"],
+    ItemType.anime:
+        uri.queryParameters["url"] ?? uri.queryParameters["anime_url"],
     ItemType.manga: uri.queryParameters["manga_url"],
     ItemType.novel: uri.queryParameters["novel_url"],
   };
@@ -154,7 +159,9 @@ void handleDeepLink(Uri uri) {
     }
   });
 
-  snackString(isRepoAdded ? "Added Repo Links Successfully!" : "Missing required parameters in the link.");
+  snackString(isRepoAdded
+      ? "Added Repo Links Successfully!"
+      : "Missing required parameters in the link.");
 }
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -264,8 +271,10 @@ class MainActivityState extends State<MainActivity> {
             right: 12,
             child: FloatingActionButton(
               onPressed: () => service.searchScreen?.onSearchIconClick(context),
+
               foregroundColor: Theme.of(context).colorScheme.outline,
-              backgroundColor: themeNotifier.isDarkMode ? greyNavDark : greyNavLight,
+              backgroundColor:
+                  themeNotifier.isDarkMode ? greyNavDark : greyNavLight,
               elevation: 12,
               child: const Icon(Icons.search),
             ),

@@ -122,8 +122,13 @@ class Extensions {
               children: [
                 if (installedRepo.isNotEmpty) ...[
                   GestureDetector(
-                    onTap: () => copyToClipboard(installedRepo),
-                    onLongPress: () => removeRepo(type),
+                    onTap: () => AlertDialogBuilder(context)
+                      ..setTitle('Remove Repo')
+                      ..setMessage('You sure you want to remove the repo')
+                      ..setPositiveButton(getString.yes, ()=> removeRepo(type),)
+                      ..setNegativeButton(getString.no, null)
+                      ..show(),
+                    onLongPress: () => copyToClipboard(installedRepo),
                     child: Text(
                       installedRepo,
                       style: TextStyle(

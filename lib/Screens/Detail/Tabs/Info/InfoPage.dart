@@ -52,7 +52,7 @@ class InfoPageState extends State<InfoPage> {
         if (widget.mediaData.synonyms.isNotEmpty) ..._buildSynonyms(theme),
         FollowerWidget(follower: widget.mediaData.users, type: type),
         if (widget.mediaData.genres.isNotEmpty)
-          _buildWithPadding([GenreWidget(context, widget.mediaData.genres)]),
+          _buildWithPadding([GenreWidget(context, widget.mediaData)]),
         if (widget.mediaData.tags.isNotEmpty) ..._buildTags(theme),
         ..._buildPrequelSection(),
         if (widget.mediaData.relations?.isNotEmpty ?? false)

@@ -7,7 +7,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:isar/isar.dart';
 
-
 import '../../Functions/GetExtensions.dart';
 import '../../Preferences/PrefManager.dart';
 import '../../StorageProvider.dart';
@@ -95,8 +94,10 @@ class _BrowseScreenState extends ConsumerState<ExtensionScreen>
                             .toList()
                             .indexOf(_selectedLanguage),
                         (index) {
-                          setState(() => _selectedLanguage =
-                              sortedLanguagesMap.keys.elementAt(index));
+                          setState(
+                            () => _selectedLanguage =
+                                sortedLanguagesMap.keys.elementAt(index),
+                          );
                         },
                       )
                       ..show();
