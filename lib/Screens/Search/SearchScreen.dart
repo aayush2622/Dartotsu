@@ -84,7 +84,7 @@ class SearchScreenState extends State<SearchScreen> {
                 if (screen.showHistory.value) {
                   return Column(
                     children: [
-                      ...screen.topWidget(context),
+                      ...screen.headerWidget(context),
                       ListView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
@@ -142,17 +142,18 @@ class SearchScreenState extends State<SearchScreen> {
                 } else {
                   return Column(
                     children: [
-                      ...screen.topWidget(context),
+                      ...screen.headerWidget(context),
                       ...screen.searchWidget(context),
-                      SizedBox(
-                        height: 64,
-                        child: Center(
-                          child:
-                              !screen.loadMore.value && screen.canLoadMore.value
-                                  ? const CircularProgressIndicator()
-                                  : const SizedBox(height: 64),
+                      if (screen.paging)
+                        SizedBox(
+                          height: 64,
+                          child: Center(
+                            child: !screen.loadMore.value &&
+                                    screen.canLoadMore.value
+                                ? const CircularProgressIndicator()
+                                : const SizedBox(height: 64),
+                          ),
                         ),
-                      ),
                     ],
                   );
                 }

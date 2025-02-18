@@ -6,10 +6,12 @@ import 'package:get/get.dart';
 import '../../Services/MediaService.dart';
 import '../../Services/Screens/BaseAnimeScreen.dart';
 import '../../Services/Screens/BaseMangaScreen.dart';
+import '../../Services/Screens/BaseSearchScreen.dart';
 import '../../Theme/LanguageSwitcher.dart';
 import 'ExtensionsData.dart';
 import 'Screens/ExtensionsHomeScreen.dart';
 import 'Screens/ExtensionsMangaScreen.dart';
+import 'Screens/ExtensionsSearchScreen.dart';
 
 class ExtensionsService extends MediaService {
   @override
@@ -29,6 +31,9 @@ class ExtensionsService extends MediaService {
   @override
   BaseHomeScreen? get homeScreen =>
       Get.put(ExtensionsHomeScreen(), tag: "ExtensionsHomeScreen");
+
+  @override
+  BaseSearchScreen? get searchScreen => ExtensionsSearchScreen();
 
   @override
   String get iconPath => "assets/svg/extensions.svg";

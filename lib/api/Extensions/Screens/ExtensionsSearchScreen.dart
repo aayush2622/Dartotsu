@@ -4,53 +4,57 @@ import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
 import '../../../Adaptor/Media/Widgets/MediaSection.dart';
 import '../../../DataClass/Media.dart';
-import '../../../Functions/Function.dart';
+import '../../../DataClass/SearchResults.dart';
 import '../../../Functions/GetExtensions.dart';
-import '../../../Services/Screens/BaseAnimeScreen.dart';
+import '../../../Services/Screens/BaseSearchScreen.dart';
 import '../../../logger.dart';
 import '../../Sources/Model/Manga.dart';
-import '../../Sources/Model/Source.dart';
-import '../../Sources/Search/get_popular.dart';
+import '../../Sources/Search/search.dart' as s;
 
-class ExtensionsAnimeScreen extends BaseAnimeScreen {
+class ExtensionsSearchScreen extends BaseSearchScreen {
   var data = Rxn<Map<String, List<Media>>>({});
 
   @override
-  get paging => false;
+  List<SearchType> get searchTypes =>
+      [SearchType.ANIME, SearchType.MANGA, SearchType.NOVEL];
 
   @override
-  Future<void> loadAll() async {
-    resetPageData();
-    var sources = await Extensions.getSortedExtension(ItemType.anime);
-    _buildSections(sources);
-    for (var source in sources) {
-      List<Media>? result;
-      try {
-        var res = await getPopular(
-          source: source,
-          page: 1,
-        );
-        result = res?.toMedia(isAnime: true, source: source) ?? [];
-      } catch (e) {
-        Logger.log('Source ${source.name} failed: ${e.toString()}');
-      }
-      if (result != null && result.isNotEmpty) {
-        trending.value = result;
-        return;
-      }
-    }
+  void init({SearchResults? s}) {
+    resetData();
+    super.init(s: s);
   }
 
-  Future<void> _buildSections(List<Source> sources) async {
-    List<Future<void>> tasks = [];
+  @override
+  bool get paging => false;
 
-    for (var source in sources.take(6)) {
+  @override
+  Future<void> search() async {
+    showHistory.value = false;
+    data.value = null;
+    canLoadMore.value = true;
+    loadMore.value = true;
+    searchResults.value = searchResults.value..page = 1;
+    await _buildSections();
+  }
+
+  Future<void> _buildSections() async {
+    List<Future<void>> tasks = [];
+    var sources = await Extensions.getSortedExtension(
+      searchResults.value.type == SearchType.ANIME
+          ? ItemType.anime
+          : searchResults.value.type == SearchType.MANGA
+              ? ItemType.manga
+              : ItemType.novel,
+    );
+    for (var source in sources) {
       tasks.add(
         () async {
           try {
-            var result = (await getPopular(
+            var result = (await s.search(
+              query: searchResults.value.search ?? '',
+              page: searchResults.value.page ?? 1,
               source: source,
-              page: 1,
+              filterList: [],
             ))
                 ?.toMedia(isAnime: true, source: source);
             if (result != null && result.isNotEmpty) {
@@ -63,19 +67,17 @@ class ExtensionsAnimeScreen extends BaseAnimeScreen {
         }(),
       );
     }
-
     await Future.wait(tasks);
   }
 
   @override
-  void loadTrending(int page) {}
-
-  @override
-  List<Widget> mediaContent(BuildContext context) {
+  List<Widget> searchWidget(BuildContext context) {
     return [
       if (data.value == null || data.value!.isEmpty || data.value == {})
         const Center(
-          child: CircularProgressIndicator(),
+          child: CircularProgressIndicator(
+            year2023: false,
+          ),
         )
       else
         Column(
@@ -92,10 +94,7 @@ class ExtensionsAnimeScreen extends BaseAnimeScreen {
     ];
   }
 
-  @override
-  int get refreshID => RefreshId.Extensions.animePage;
-
-  void resetPageData() {
+  void resetData() {
     data.value = {};
   }
 }

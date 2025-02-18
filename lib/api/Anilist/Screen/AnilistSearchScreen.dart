@@ -101,11 +101,12 @@ class AnilistSearchScreen extends BaseSearchScreen {
         return characterAndStaffResults(context, EntityType.Studio);
       case SearchType.USER:
         return userResults(context);
+      default: return [];
     }
   }
 
   @override
-  List<Widget> topWidget(BuildContext context) {
+  List<Widget> headerWidget(BuildContext context) {
     switch (searchResults.value.type) {
       case SearchType.ANIME:
         return animeAndMangaFilter(context, SearchType.ANIME);

@@ -6,6 +6,7 @@ Widget ScrollConfig(BuildContext context, {required Widget child}) {
   return ScrollConfiguration(
     behavior: ScrollConfiguration.of(context).copyWith(
       physics: const BouncingScrollPhysics(),
+      scrollbars: false,
       dragDevices: {
         PointerDeviceKind.touch,
         PointerDeviceKind.mouse,
@@ -24,6 +25,7 @@ Widget CustomScrollConfig(BuildContext context,
   return CustomScrollView(
     controller: controller,
     scrollBehavior: ScrollConfiguration.of(context).copyWith(
+      scrollbars: false,
       dragDevices: {
         PointerDeviceKind.touch,
         PointerDeviceKind.mouse,

@@ -159,4 +159,4 @@ class SearchChip {
   SearchChip(this.type, this.text);
 }
 
-enum SearchType { ANIME, MANGA, CHARACTER, STAFF, STUDIO, USER }
+enum SearchType { ANIME, MANGA, NOVEL, MOVIES, SERIES, CHARACTER, STAFF, STUDIO, USER }

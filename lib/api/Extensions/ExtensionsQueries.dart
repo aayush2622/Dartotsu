@@ -25,7 +25,7 @@ part 'ExtensionsQueries/GetUserData.dart';
 class ExtensionsQueries extends Queries {
   @override
   Future<Map<String, List<Media>>> getAnimeList() {
-    // TODO: implement getAnimeList
+    // not needed
     throw UnimplementedError();
   }
 
@@ -43,13 +43,13 @@ class ExtensionsQueries extends Queries {
 
   @override
   Future<Map<String, List<Media>>> getMangaList() {
-    // TODO: implement getMangaList
+    // not needed
     throw UnimplementedError();
   }
 
   @override
   Future<Media?>? getMedia(int id, {bool mal = true}) {
-    // TODO: implement getMedia
+    // not needed
     throw UnimplementedError();
   }
 
@@ -72,7 +72,7 @@ class ExtensionsQueries extends Queries {
   @override
   Future<SearchResults?> search(
       SearchResults? searchResults) async {
-    // TODO: implement search
+    // not needed
     throw UnimplementedError();
   }
 }

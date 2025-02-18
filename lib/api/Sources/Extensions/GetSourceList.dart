@@ -146,21 +146,7 @@ void checkIfSourceIsObsolete(List<Source> sourceList, ItemType itemType) {
       }
     }
   }
-  removeNsfwObsoleteSources();
-}
 
-void removeNsfwObsoleteSources() {
-  final ids = isar.sources
-      .filter()
-      .idIsNotNull()
-      .isNsfwEqualTo(true)
-      .isObsoleteEqualTo(true)
-      .findAllSync()
-      .map((e) => e.id!)
-      .toList();
-  isar.writeTxnSync(() {
-    isar.sources.deleteAllSync(ids);
-  });
 }
 
 int compareVersions(String version1, String version2) {

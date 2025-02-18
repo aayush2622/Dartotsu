@@ -15,6 +15,8 @@ extension on AnilistQueries {
         return await _searchStudioResults(searchResults);
       case SearchType.USER:
         return await _searchUserResults(searchResults);
+      default :
+        return null;
     }
   }
 

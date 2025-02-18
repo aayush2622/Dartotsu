@@ -13,6 +13,8 @@ abstract class BaseSearchScreen extends GetxController {
   var canLoadMore = true.obs;
   var scrollController = ScrollController();
   var title = SearchType.ANIME.obs;
+
+  bool get paging => true;
   Rx<SearchResults> searchResults = SearchResults(type: SearchType.ANIME,).obs;
 
   RxBool showHistory = true.obs;
@@ -25,7 +27,7 @@ abstract class BaseSearchScreen extends GetxController {
 
   List<Widget> searchWidget(BuildContext context);
 
-  List<Widget> topWidget(BuildContext context) => [];
+  List<Widget> headerWidget(BuildContext context) => [];
 
   Future<void>? loadNextPage() => null;
 
