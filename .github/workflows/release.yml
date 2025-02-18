@@ -151,7 +151,7 @@ jobs:
       - name: Release Windows Zip
         uses: softprops/action-gh-release@master
         with:
-            files: build\windows\x64\installer\Release\Dartotsu-x86_64-${{env.version}}-Installer.exe
+            files: build/windows/x64/installer/Release/Dartotsu-x86_64-${{env.version}}-Installer.exe
         
     
   build_linux:
@@ -322,15 +322,19 @@ jobs:
           
           # Loop through each link and format them
           while IFS= read -r LINK; do
-            if [[ $LINK == *"Android"* ]]; then
-              MESSAGE+="• [Android]($LINK)\n"
-            elif [[ $LINK == *"IOS"* ]]; then
+            if [[ $LINK == *"arm64"* ]]; then
+              MESSAGE+="• [Android_arm64]($LINK)\n"
+            elif [[ $LINK == *"armeabi"* ]]; then
+              MESSAGE+="• [Android_armeabi-v7a]($LINK)\n"
+            elif [[ $LINK == *"Android_x86"* ]]; then
+              MESSAGE+="• [Android_x86_64]($LINK)\n"
+            elif [[ $LINK == *"iOS"* ]]; then
               MESSAGE+="• [iOS]($LINK)\n"
             elif [[ $LINK == *"Linux"* ]]; then
               MESSAGE+="• [Linux]($LINK)\n"
-            elif [[ $LINK == *"MacOS"* ]]; then
+            elif [[ $LINK == *"macos"* ]]; then
               MESSAGE+="• [macOS]($LINK)\n"
-            elif [[ $LINK == *"Windows"* ]]; then
+            elif [[ $LINK == *"Installer"* ]]; then
               MESSAGE+="• [Windows]($LINK)\n"
             fi
           done <<< "$LINKS"
