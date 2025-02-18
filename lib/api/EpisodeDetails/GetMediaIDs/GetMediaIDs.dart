@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:dantotsu/Preferences/PrefManager.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -76,18 +77,40 @@ class GetMediaIDs {
     if (_animeListFuture != null) {
       return _animeListFuture;
     }
-    final url = Uri.parse(
-        'https://raw.githubusercontent.com/Fribb/anime-lists/refs/heads/master/anime-list-full.json');
-    final response = await http.get(url);
 
-    if (response.statusCode == 200) {
-      List<dynamic> jsonData = jsonDecode(response.body);
-      _animeListFuture = jsonData.map((e) => AnimeID.fromJson(e)).toList();
+    return await loadFromCache();
+  }
+  static Future<List<AnimeID>?> loadFromCache() async {
+    var data = loadCustomData<String?>('animeIDSList');
+    var time = loadCustomData<int>('animeIDSListTime');
+    bool checkTime() {
+      if (time == null) return true;
+      return DateTime.now()
+          .difference(DateTime.fromMillisecondsSinceEpoch(time))
+          .inDays >
+          7;
+    }
+
+    if (data != null && !checkTime()) {
+      var jsonData = jsonDecode(data);
+      _animeListFuture = jsonData.map((e) => AnimeID.fromJson(e)).whereType<AnimeID>().toList();
       loading.value = false;
       return _animeListFuture;
     } else {
-      debugPrint('Failed to load data: ${response.statusCode}');
-      return null;
+      final url = Uri.parse(
+          'https://raw.githubusercontent.com/Fribb/anime-lists/refs/heads/master/anime-list-full.json');
+      final response = await http.get(url);
+      if (response.statusCode == 200) {
+        List<dynamic> jsonData = jsonDecode(response.body);
+        _animeListFuture = jsonData.map((e) => AnimeID.fromJson(e)).toList();
+        saveCustomData('animeIDSList', response.body);
+        saveCustomData('animeIDSListTime', DateTime.now().millisecondsSinceEpoch);
+        loading.value = false;
+        return _animeListFuture;
+      } else {
+        debugPrint('Failed to load data: ${response.statusCode}');
+        return null;
+      }
     }
   }
 }

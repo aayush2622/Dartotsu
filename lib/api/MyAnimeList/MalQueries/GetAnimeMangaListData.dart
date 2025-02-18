@@ -51,16 +51,26 @@ extension on MalQueries {
     final results =
         await Future.wait(endpoints.map(executeQuery<MediaResponse>));
     int resultIndex = 1;
-    queryMappings.forEach((key, _) async {
+    List<Future> futures = [];
+
+    queryMappings.forEach((key, _) {
       if (animeLayoutMap[key] == true) {
-        resultIndex++;
-        list[key.camelCase!] = await processMediaResponse(results[resultIndex]);
+        futures.add(() async {
+          resultIndex++;
+          list[key.camelCase!] = await processMediaResponse(results[resultIndex]);
+        }());
       }
     });
 
-    list["popularAnime"] = await processMediaResponse(results[0]);
-    list["trendingAnime"] = await processMediaResponse(results[1]);
+    futures.add(() async {
+      list["popularAnime"] = await processMediaResponse(results[0]);
+    }());
 
+    futures.add(() async {
+      list["trendingAnime"] = await processMediaResponse(results[1]);
+    }());
+
+    await Future.wait(futures);
     return list;
   }
 
@@ -96,19 +106,30 @@ extension on MalQueries {
         await Future.wait(endpoints.map(executeQuery<MediaResponse>));
 
     int resultIndex = 1;
-    queryMappings.forEach((key, _) async {
+    List<Future> futures = [];
+
+    queryMappings.forEach((key, _) {
       if (mangaLayoutMap[key] == true) {
-        resultIndex++;
-        list[key.camelCase!] = await processMediaResponse(results[resultIndex]);
+        futures.add(() async {
+          resultIndex++;
+          list[key.camelCase!] = await processMediaResponse(results[resultIndex]);
+        }());
       }
     });
-    list["popularManga"] = await processMediaResponse(results[0]);
-    list["trendingManga"] = await processMediaResponse(results[1]);
+
+    futures.add(() async {
+      list["popularManga"] = await processMediaResponse(results[0]);
+    }());
+    futures.add(() async {
+      list["trendingManga"] = await processMediaResponse(results[1]);
+    }());
+
+    await Future.wait(futures);
     return list;
   }
 
   Future<List<Media>> _getTrending({String? year, String? season}) async {
-    // season also gets manga type
+    // season is also used to gets manga type
     var anime =
         '${MalStrings.endPoint}anime/season/$year/$season?limit=15&offset=1&sort=anime_num_list_users&$field';
     var manga =

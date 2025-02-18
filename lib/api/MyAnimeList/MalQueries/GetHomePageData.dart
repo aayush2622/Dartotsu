@@ -11,22 +11,22 @@ extension on MalQueries {
         'https://api.myanimelist.net/v2/users/@me/mangalist?$field&limit=1000&sort=list_updated_at&nsfw=1'
       };
       final results = await Future.wait(list.map(executeQuery<MediaResponse>));
+      final responses = await Future.wait([
+            () async {
+          results[0]?.data?.forEach((m) => m.node?.mediaType = 'anime');
+          return await processMediaResponse(results[0]);
+        }(),
+            () async {
+          results[1]?.data?.forEach((m) => m.node?.mediaType = 'manga');
+          return await processMediaResponse(results[1]);
+        }(),
+      ]);
 
-      results[0]?.data?.forEach((m) {
-        m.node?.mediaType = 'anime';
-      });
-
-      results[1]?.data?.forEach((m) {
-        m.node?.mediaType = 'manga';
-      });
+      var animeList = groupBy(responses[0], (m) => m.userStatus ?? 'other');
+      var mangaList = groupBy(responses[1], (m) => m.userStatus ?? 'other');
 
       final removeList = PrefManager.getVal(PrefName.malRemoveList);
       List<Media> removedMedia = [];
-
-      var animeList = groupBy(await processMediaResponse(results[0]),
-          (m) => m.userStatus ?? 'other');
-      var mangaList = groupBy(await processMediaResponse(results[1]),
-          (m) => m.userStatus ?? 'other');
 
       Map<String, List<Media>> returnMap = {};
 

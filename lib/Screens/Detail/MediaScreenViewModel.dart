@@ -1,11 +1,10 @@
+import 'package:dantotsu/Theme/LanguageSwitcher.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 import '../../DataClass/Media.dart';
 import '../../Services/ServiceSwitcher.dart';
-import 'package:dantotsu/Theme/LanguageSwitcher.dart';
-
 
 class MediaPageViewModel extends GetxController {
   var dataLoaded = false.obs;
@@ -27,7 +26,9 @@ class MediaPageViewModel extends GetxController {
     var theme = Theme.of(context).colorScheme;
     if (mediaData.userStatus != null) {
       spans.add(TextSpan(
-        text: mediaData.anime != null ? getString.watchStatus : getString.readStatus,
+        text: mediaData.anime != null
+            ? "${getString.watchStatus} "
+            : "${getString.readStatus} ",
       ));
       spans.add(TextSpan(
         text: "${mediaData.userProgress}",
@@ -36,18 +37,23 @@ class MediaPageViewModel extends GetxController {
           color: theme.secondary,
         ),
       ));
-      spans.add(TextSpan(text: getString.outOf));
+      spans.add(TextSpan(text: " ${getString.outOf} "));
     } else {
-      spans.add(TextSpan(text: getString.totalOf));
+      spans.add(TextSpan(text: "${getString.totalOf} "));
     }
 
     if (mediaData.anime != null) {
       if (mediaData.anime!.nextAiringEpisode != -1 &&
           mediaData.anime!.nextAiringEpisode != null) {
-        spans.add(TextSpan(
+        spans.add(
+          TextSpan(
             text: "${mediaData.anime!.nextAiringEpisode}",
             style: TextStyle(
-                color: theme.onSurface, fontWeight: FontWeight.bold)));
+              color: theme.onSurface,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        );
         spans.add(const TextSpan(
           text: " / ",
         ));
