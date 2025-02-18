@@ -12,23 +12,44 @@ jobs:
       repository-projects: write
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      # Setup Cmake
+      - name: Setup cmake
+        uses: jwlawson/actions-setup-cmake@v2
+        with:
+          cmake-version: '3.18.1'
+      # Install Ninaja
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y ninja-build
+      # Create symlink for ninja
+      - name: Create symlink for ninja
+        run: |
+          mkdir -p /usr/local/lib/android/sdk/cmake/3.18.1/bin
+          sudo ln -s /usr/bin/ninja /usr/local/lib/android/sdk/cmake/3.18.1/bin/ninja
+        
+
       - uses: actions/setup-java@v4
         with:
           distribution: "oracle"
           java-version: "17"
-      - name: Cloing repository
-        uses: actions/checkout@v4
+
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
           flutter-version: 3.27.1
           cache: true
 
-                    # Download the keystore file (from GitHub Secrets or other storage)
+          # Download the keystore file (from GitHub Secrets or other storage)
       - name: Download keystore
         env:
           KEYSTORE_BASE64: ${{ secrets.APK_SIGN }}
         run: echo "$KEYSTORE_BASE64" | base64 --decode > android/app/dartotsu.jks
+
       # Set up environment variables for signing
       - name: Set up signing variables
         env:
@@ -40,16 +61,18 @@ jobs:
           echo "keyPassword=$KEY_PASSWORD" >> android/key.properties
           echo "keyAlias=$KEY_ALIAS" >> android/key.properties
           echo "storeFile=dartotsu.jks" >> android/key.properties
-
       # Create .env:
       - name: Setup env File
         env:
           SIMKL_SECRET: ${{ secrets.SIMKL_SECRET }}
         run: |
           echo "SIMKL_SECRET= $SIMKL_SECRET" > .env
+
       # Optimize Flutter build
+      - run: flutter clean
       - run: flutter pub get
       - run: flutter build apk --release --split-per-abi
+
       - name: Rename APKs
         run: |
           for file in build/app/outputs/flutter-apk/app-*-release.apk; do
