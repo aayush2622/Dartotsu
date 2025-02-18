@@ -5,13 +5,13 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../DataClass/Media.dart';
+import '../../../../Functions/GetExtensions.dart';
 import '../../../../Preferences/IsarDataClasses/Selected/Selected.dart';
 import '../../../../Preferences/IsarDataClasses/ShowResponse/ShowResponse.dart';
 import '../../../../Preferences/PrefManager.dart';
 import '../../../../Services/ServiceSwitcher.dart';
 import '../../../../Widgets/CustomBottomDialog.dart';
 import '../../../../api/Sources/Eval/dart/model/m_manga.dart';
-import '../../../../api/Sources/Extensions/extensions_provider.dart';
 import '../../../../api/Sources/Model/Manga.dart';
 import '../../../../api/Sources/Model/Source.dart';
 import '../../../../api/Sources/Search/search.dart';
