@@ -40,6 +40,13 @@ jobs:
           echo "keyPassword=$KEY_PASSWORD" >> android/key.properties
           echo "keyAlias=$KEY_ALIAS" >> android/key.properties
           echo "storeFile=dartotsu.jks" >> android/key.properties
+
+      # Create .env:
+      - name: Setup env File
+        env:
+          SIMKL_SECRET: ${{ secrets.SIMKL_SECRET }}
+        run: |
+          echo "SIMKL_SECRET= $SIMKL_SECRET" > .env
       # Optimize Flutter build
       - run: flutter pub get
       - run: flutter build apk --release --split-per-abi
@@ -50,10 +57,11 @@ jobs:
             mv $file build/app/outputs/flutter-apk/Dartotsu_Android_${abi}_${{github.ref_name}}.apk
           done
           ls build/app/outputs/flutter-apk
-      # - name: Android Apk Release
-      #   uses: softprops/action-gh-release@master
-      #   with:
-      #       files: build/app/outputs/flutter-apk/Dantotsu_Android_${{github.ref_name}}.apk
+      - name: Android Apk Release
+        uses: softprops/action-gh-release@master
+        with:
+          files: build/app/outputs/flutter-apk/Dartotsu_Android_*_${{ github.ref_name }}.apk
+        
   build_windows:
     runs-on: windows-latest
     permissions: 
@@ -61,25 +69,53 @@ jobs:
         pull-requests: write
         repository-projects: write
     steps:
-      - name: Cloing repository
+      - name: Checkout repository
         uses: actions/checkout@v4
-      # This is a self made cert file that is used to sign the windows app
+        with:
+          fetch-depth: 0
+
+      # Cache Flutter and Dart dependencies
+      - uses: actions/cache@v4
+        with:
+          path: |
+            C:\hostedtoolcache\windows\flutter
+            ~\AppData\Local\Pub\Cache
+            build\
+            .dart_tool\
+          key: ${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-flutter-
+
       - name: Set up Signing Tool
         run: |
           mkdir $env:USERPROFILE\certs
           [System.IO.File]::WriteAllBytes("$env:USERPROFILE\certs\Dartotsu.pfx", [Convert]::FromBase64String("${{secrets.PFX_FILE}}"))
+      # Create .env:
+      - name: Setup env File
+        env:
+          SIMKL_SECRET: ${{ secrets.SIMKL_SECRET }}
+        run: |
+          echo "SIMKL_SECRET= $env:SIMKL_SECRET" > .env
+
       # Setup Flutter with caching
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
           flutter-version: 3.27.1
           cache: true
+      - name: Setup NuGet.exe for use with actions
+        uses: NuGet/setup-nuget@v2.0.1
+        with:
+          nuget-version: 'latest'
       # Enable Windows desktop support
       - name: Enable Windows desktop support
         run: flutter config --enable-windows-desktop
+
+      - run: flutter clean
+
       # Get dependencies with cached packages
       - run: flutter pub get
-      # Extract version from pubspec.yaml
+
       - name: Extract Version
         id: get_version
         run: |
@@ -89,11 +125,10 @@ jobs:
       - name: Build and Sign Setup
         run: |
           dart run inno_bundle:build --sign-tool-params '"C:\Program Files (x86)\Windows Kits\10\bin\10.0.19041.0\x64\signtool.exe" sign /fd sha256 /f "C:\Users\runneradmin\certs\Dartotsu.pfx" /p "${{secrets.PFX_PASSWORD}}" /t http://timestamp.digicert.com /v $f' --release
-      - run: build\windows\x64\installer\Release
-      # - name: Release Windows Zip
-      #   uses: softprops/action-gh-release@master
-      #   with:
-      #       files: build/windows/x64/runner/Release/Dantotsu_Windows_${{github.ref_name}}.zip
+      - name: Release Windows Zip
+        uses: softprops/action-gh-release@master
+        with:
+            files: build\windows\x64\installer\Release\Dartotsu-x86_64-${{env.version}}-Installer.exe
         
     
   build_linux:
@@ -118,24 +153,34 @@ jobs:
       - name: Install system dependencies
         run: |
           sudo apt-get update -y
-          sudo apt-get install -y ninja-build libgtk-3-dev webkit2gtk-4.1
+          sudo apt-get install -y ninja-build libgtk-3-dev webkit2gtk-4.1 libmpv-dev pkg-config
+
+      # Create .env:
+      - name: Setup env File
+        env:
+          SIMKL_SECRET: ${{ secrets.SIMKL_SECRET }}
+        run: |
+          echo "SIMKL_SECRET= $SIMKL_SECRET" > .env
+
       # Step 5: Fetch Flutter dependencies
       - name: Fetch Flutter dependencies
         run: flutter pub get
+
       # Step 6: Build the Linux application
       - name: Build Flutter Linux app
         run: flutter build linux
-      # Step 7: Archive the Linux app
+
+      # Step 7: Archive the app
       - name: Archive app
         uses: thedoctor0/zip-release@master
         with:
-            type: 'zip'
-            filename: Dantotsu_Linux_${{github.ref_name}}.zip
-            directory: build/linux/x64/release/bundle
-      # - name: Release Linux Zip
-      #   uses: softprops/action-gh-release@master
-      #   with:
-      #       files: build/linux/x64/release/bundle/Dantotsu_Linux_${{github.ref_name}}.zip
+          type: "zip"
+          filename: Dantotsu_Linux_${{github.ref_name}}.zip
+          directory: build/linux/x64/release/bundle
+      - name: Release Linux Zip
+        uses: softprops/action-gh-release@master
+        with:
+            files: build/linux/x64/release/bundle/Dantotsu_Linux_${{github.ref_name}}.zip
   build_ios:
     runs-on: macos-latest
     permissions: 
@@ -153,6 +198,14 @@ jobs:
         with:
           flutter-version: 3.27.1
           cache: true
+      
+      - name: Setup .env File for macOS
+        env:
+          SIMKL_SECRET: ${{ secrets.SIMKL_SECRET }}
+        run: |
+          echo "SIMKL_SECRET= $SIMKL_SECRET" > .env
+        shell: bash
+        
 
       # Step 3 Get Dependencies
       - name: Get Dependencies
@@ -167,6 +220,11 @@ jobs:
           ln -s ../Runner.app
           cd ..
           zip -r Dartotsu-iOS-${{ github.ref_name }}.ipa Payload
+
+      - name: Release Linux Zip
+        uses: softprops/action-gh-release@master
+        with:
+            files: build/ios/iphoneos/Dartotsu-iOS-${{github.ref_name}}.ipa
   build_macos:
     runs-on: macos-latest
     permissions: 
@@ -174,27 +232,33 @@ jobs:
         pull-requests: write
         repository-projects: write
     steps:
-      # Step 1: Clone repository
       - name: Cloning repository
         uses: actions/checkout@v4
 
-      # Step 2: Setup Flutter
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
           flutter-version: 3.27.1
           cache: true
-
-      # Step 3 Get Dependencies
+      - name: Setup .env File for macOS
+        env:
+          SIMKL_SECRET: ${{ secrets.SIMKL_SECRET }}
+        run: |
+          echo "SIMKL_SECRET= $SIMKL_SECRET" > .env
+        shell: bash
       - name: Get Dependencies
         run: flutter pub get
-      #Step 4 Build app for iOS
       - name: Build macOS
         run: flutter build macos --release
-        # - name: Release macOS Zip
-        #   uses: softprops/action-gh-release@master
-        #   with:
-        #       files: build/macos/Build/Products/Release/Dantotsu_MacOS_${{github.ref_name}}.zip
+      - name: Create DMG file for macOS Build
+        run: |
+          mkdir -p build/macos/Release
+          hdiutil create -volname "Dartotsu" -srcfolder build/macos/Build/Products/Release/Dantotsu.app -ov -format UDZO build/macos/Release/Dartotsu-macos-${{github.ref_name}}.dmg
+        shell: bash
+      - name: Release macOS Zip
+        uses: softprops/action-gh-release@master
+        with:
+            files: build/macos/Release/Dartotsu-macos-${{github.ref_name}}.dmg
 
 
 
@@ -261,117 +325,117 @@ jobs:
             -d "{\"content\": \"$MESSAGE\"}" \
             $DISCORD_WEBHOOK_URL
           
-  generate-changelog:
-    runs-on: ubuntu-latest
-    needs: [build_android,build_windows,build_linux,build_ios,build_macos]
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+  # generate-changelog:
+  #   runs-on: ubuntu-latest
+  #   needs: [build_android,build_windows,build_linux,build_ios,build_macos]
+  #   steps:
+  #     - name: Checkout Code
+  #       uses: actions/checkout@v4
+  #       with:
+  #         fetch-depth: 0
 
-      # Clear existing CHANGELOG.md
-      - name: Clear CHANGELOG.md
-        run: |
-          echo ""> CHANGELOG.md
-          echo "" >> CHANGELOG.md
+  #     # Clear existing CHANGELOG.md
+  #     - name: Clear CHANGELOG.md
+  #       run: |
+  #         echo ""> CHANGELOG.md
+  #         echo "" >> CHANGELOG.md
           
-      - name: Get previous tag
-        id: get_prev_tag
-        run: |
-          echo "Getting the previous tag..."
-          PREV_TAG=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || echo "")
-          if [ -z "$PREV_TAG" ]; then
-            PREV_TAG=$(git rev-list --max-parents=0 HEAD)
-          fi
-          echo "prev_tag=$PREV_TAG" >> $GITHUB_ENV
+  #     - name: Get previous tag
+  #       id: get_prev_tag
+  #       run: |
+  #         echo "Getting the previous tag..."
+  #         PREV_TAG=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || echo "")
+  #         if [ -z "$PREV_TAG" ]; then
+  #           PREV_TAG=$(git rev-list --max-parents=0 HEAD)
+  #         fi
+  #         echo "prev_tag=$PREV_TAG" >> $GITHUB_ENV
 
-      - name: Get commit messages between tags
-        id: get_commits
-        run: |
-          COMMITS=$(git log ${{ env.prev_tag }}..HEAD --pretty=format:'%h %s' | tr '\n' '|')
-          echo "commits=$COMMITS" >> $GITHUB_ENV
+  #     - name: Get commit messages between tags
+  #       id: get_commits
+  #       run: |
+  #         COMMITS=$(git log ${{ env.prev_tag }}..HEAD --pretty=format:'%h %s' | tr '\n' '|')
+  #         echo "commits=$COMMITS" >> $GITHUB_ENV
 
-      - name: Categorize commits
-        id: categorize
-        run: |
-          echo "Categorizing commits..."
-          FEATURES=""
-          BUG_FIXES=""
-          REFACTORS=""
-          STYLE_CHANGES=""
-          PERFORMANCE=""
-          CHORES=""
-          REPO_URL="https://github.com/${{ github.repository }}"
+  #     - name: Categorize commits
+  #       id: categorize
+  #       run: |
+  #         echo "Categorizing commits..."
+  #         FEATURES=""
+  #         BUG_FIXES=""
+  #         REFACTORS=""
+  #         STYLE_CHANGES=""
+  #         PERFORMANCE=""
+  #         CHORES=""
+  #         REPO_URL="https://github.com/${{ github.repository }}"
     
-          IFS='|' read -ra COMMIT_LIST <<< "${{ env.commits }}"
-          echo "Commit list: ${COMMIT_LIST[@]}"
-          for LINE in "${COMMIT_LIST[@]}"; do
-          HASH=$(echo "$LINE" | awk '{print $1}')
-          MESSAGE=$(echo "$LINE" | cut -d' ' -f2-)
-          LINK="[$HASH]($REPO_URL/commit/$HASH)"
+  #         IFS='|' read -ra COMMIT_LIST <<< "${{ env.commits }}"
+  #         echo "Commit list: ${COMMIT_LIST[@]}"
+  #         for LINE in "${COMMIT_LIST[@]}"; do
+  #         HASH=$(echo "$LINE" | awk '{print $1}')
+  #         MESSAGE=$(echo "$LINE" | cut -d' ' -f2-)
+  #         LINK="[$HASH]($REPO_URL/commit/$HASH)"
 
-          FORMATTED_COMMIT="* $LINK: $MESSAGE"
-          echo "Processing commit: $FORMATTED_COMMIT"
-          if [[ $MESSAGE == feat* ]]; then
-           FEATURES+="$FORMATTED_COMMIT\n"
-          elif [[ $MESSAGE == fix* || $MESSAGE == bug* || $MESSAGE == improvement* || $MESSAGE == patch* ]]; then
-          BUG_FIXES+="$FORMATTED_COMMIT\n"
-          elif [[ $MESSAGE == refactor* ]]; then
-          REFACTORS+="$FORMATTED_COMMIT\n"
-          elif [[ $MESSAGE == style* ]]; then
-          STYLE_CHANGES+="$FORMATTED_COMMIT\n"
-          elif [[ $MESSAGE == perf* ]]; then
-          PERFORMANCE+="$FORMATTED_COMMIT\n"
-          elif [[ $MESSAGE == chore* || $MESSAGE == docs* || $MESSAGE == build* || $MESSAGE == ci* ]]; then
-          CHORES+="$FORMATTED_COMMIT\n"
-          fi
-          done
+  #         FORMATTED_COMMIT="* $LINK: $MESSAGE"
+  #         echo "Processing commit: $FORMATTED_COMMIT"
+  #         if [[ $MESSAGE == feat* ]]; then
+  #          FEATURES+="$FORMATTED_COMMIT\n"
+  #         elif [[ $MESSAGE == fix* || $MESSAGE == bug* || $MESSAGE == improvement* || $MESSAGE == patch* ]]; then
+  #         BUG_FIXES+="$FORMATTED_COMMIT\n"
+  #         elif [[ $MESSAGE == refactor* ]]; then
+  #         REFACTORS+="$FORMATTED_COMMIT\n"
+  #         elif [[ $MESSAGE == style* ]]; then
+  #         STYLE_CHANGES+="$FORMATTED_COMMIT\n"
+  #         elif [[ $MESSAGE == perf* ]]; then
+  #         PERFORMANCE+="$FORMATTED_COMMIT\n"
+  #         elif [[ $MESSAGE == chore* || $MESSAGE == docs* || $MESSAGE == build* || $MESSAGE == ci* ]]; then
+  #         CHORES+="$FORMATTED_COMMIT\n"
+  #         fi
+  #         done
 
-          # Removed the version tag section
-          # echo "### ${GITHUB_REF#refs/tags/}" >> CHANGELOG.md  # No version tag added
+  #         # Removed the version tag section
+  #         # echo "### ${GITHUB_REF#refs/tags/}" >> CHANGELOG.md  # No version tag added
 
-          if [ -n "$FEATURES" ]; then
-          echo "### 🎉 New Features" >> CHANGELOG.md
-          echo -e "$FEATURES" >> CHANGELOG.md
-          fi
-          if [ -n "$BUG_FIXES" ]; then
-          echo "### 🛠️ Bug Fixes & Improvements" >> CHANGELOG.md
-          echo -e "$BUG_FIXES" >> CHANGELOG.md
-          fi
-          if [ -n "$REFACTORS" ]; then
-          echo "### 🔧 Refactors" >> CHANGELOG.md
-          echo -e "$REFACTORS" >> CHANGELOG.md
-          fi
-          if [ -n "$STYLE_CHANGES" ]; then
-          echo "### 🎨 Style Changes" >> CHANGELOG.md
-          echo -e "$STYLE_CHANGES" >> CHANGELOG.md
-          fi
-          if [ -n "$PERFORMANCE" ]; then
-          echo "### 🚀 Performance Improvements" >> CHANGELOG.md
-            echo -e "$PERFORMANCE" >> CHANGELOG.md
-          fi
-          if [ -n "$CHORES" ]; then
-            echo "### 🧹 Chores & Documentation" >> CHANGELOG.md
-            echo -e "$CHORES" >> CHANGELOG.md
-          fi
+  #         if [ -n "$FEATURES" ]; then
+  #         echo "### 🎉 New Features" >> CHANGELOG.md
+  #         echo -e "$FEATURES" >> CHANGELOG.md
+  #         fi
+  #         if [ -n "$BUG_FIXES" ]; then
+  #         echo "### 🛠️ Bug Fixes & Improvements" >> CHANGELOG.md
+  #         echo -e "$BUG_FIXES" >> CHANGELOG.md
+  #         fi
+  #         if [ -n "$REFACTORS" ]; then
+  #         echo "### 🔧 Refactors" >> CHANGELOG.md
+  #         echo -e "$REFACTORS" >> CHANGELOG.md
+  #         fi
+  #         if [ -n "$STYLE_CHANGES" ]; then
+  #         echo "### 🎨 Style Changes" >> CHANGELOG.md
+  #         echo -e "$STYLE_CHANGES" >> CHANGELOG.md
+  #         fi
+  #         if [ -n "$PERFORMANCE" ]; then
+  #         echo "### 🚀 Performance Improvements" >> CHANGELOG.md
+  #           echo -e "$PERFORMANCE" >> CHANGELOG.md
+  #         fi
+  #         if [ -n "$CHORES" ]; then
+  #           echo "### 🧹 Chores & Documentation" >> CHANGELOG.md
+  #           echo -e "$CHORES" >> CHANGELOG.md
+  #         fi
           
-      - name: Commit and push changelog
-        run: |
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "actions@github.com"
-          git add CHANGELOG.md
-          git commit -m "Update changelog for version ${{ github.ref_name }}"
-          git push origin HEAD:main
+  #     - name: Commit and push changelog
+  #       run: |
+  #         git config --global user.name "GitHub Actions"
+  #         git config --global user.email "actions@github.com"
+  #         git add CHANGELOG.md
+  #         git commit -m "Update changelog for version ${{ github.ref_name }}"
+  #         git push origin HEAD:main
 
-      - name: Set Tag Variable
-        id: tag
-        run: echo "TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+  #     - name: Set Tag Variable
+  #       id: tag
+  #       run: echo "TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
 
-      - name: Create or Update Release
-        uses: ncipollo/release-action@v1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          bodyFile: CHANGELOG.md
-          tag: ${{ env.TAG }}
-          allowUpdates: true
+  #     - name: Create or Update Release
+  #       uses: ncipollo/release-action@v1
+  #       with:
+  #         token: ${{ secrets.GITHUB_TOKEN }}
+  #         bodyFile: CHANGELOG.md
+  #         tag: ${{ env.TAG }}
+  #         allowUpdates: true
