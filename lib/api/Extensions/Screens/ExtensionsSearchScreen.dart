@@ -75,9 +75,7 @@ class ExtensionsSearchScreen extends BaseSearchScreen {
     return [
       if (data.value == null || data.value!.isEmpty || data.value == {})
         const Center(
-          child: CircularProgressIndicator(
-            year2023: false,
-          ),
+          child: CircularProgressIndicator(),
         )
       else
         Column(
