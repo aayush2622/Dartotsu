@@ -38,6 +38,7 @@ jobs:
               LATEST_TAG="$TAG_NAME"
             fi
           done
+          echo "$LATEST_TAG"
           echo "$LATEST_TAG" >> $GITHUB_ENV
       - name: Get Latest Release Notes
         id: get_release_notes
@@ -124,7 +125,7 @@ jobs:
                 echo "**🚀 Features**" > TFeatures.txt
                 echo "$(echo "$FORMATTED_NOTES" | grep -iE '^\*\s\[[a-f0-9]+\]\(.*\):\sfeat' | sed -E 's/\): [^:]+:/) :/g' | head -n 5)" > feat.txt
                 echo "**🐛 Fixes**" > TFixes.txt
-                echo "$(echo "" | grep -iE '^\*\s\[[a-f0-9]+\]\(.*\):\sfix' | sed -E 's/\): [^:]+:/) :/g' | head -n 5)" > fixes.txt
+                echo "$(echo "$FORMATTED_NOTES" | grep -iE '^\*\s\[[a-f0-9]+\]\(.*\):\sfix' | sed -E 's/\): [^:]+:/) :/g' | head -n 5)" > fixes.txt
                 echo "**🛠 Chores**" > TChores.txt
                 echo "$(echo "$FORMATTED_NOTES" | grep -iE '^\*\s\[[a-f0-9]+\]\(.*\):\schore' | sed -E 's/\): [^:]+:/) :/g' | head -n 5)" > chores.txt
                 chmod +x scripts/tel_commit_parser.sed
