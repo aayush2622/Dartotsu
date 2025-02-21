@@ -1,7 +1,7 @@
 name: RELEASE
 on:
   push:
-    tags: 
+    tags:
       - "v*.*.*"
 jobs:
   build_android:
@@ -20,7 +20,7 @@ jobs:
       - name: Setup cmake
         uses: jwlawson/actions-setup-cmake@v2
         with:
-          cmake-version: '3.18.1'
+          cmake-version: "3.18.1"
       # Install Ninaja
       - name: Install system dependencies
         run: |
@@ -31,7 +31,6 @@ jobs:
         run: |
           mkdir -p /usr/local/lib/android/sdk/cmake/3.18.1/bin
           sudo ln -s /usr/bin/ninja /usr/local/lib/android/sdk/cmake/3.18.1/bin/ninja
-        
 
       - uses: actions/setup-java@v4
         with:
@@ -84,13 +83,13 @@ jobs:
         uses: softprops/action-gh-release@master
         with:
           files: build/app/outputs/flutter-apk/Dartotsu_Android_*_${{ github.ref_name }}.apk
-        
+
   build_windows:
     runs-on: windows-latest
-    permissions: 
-        contents: write
-        pull-requests: write
-        repository-projects: write
+    permissions:
+      contents: write
+      pull-requests: write
+      repository-projects: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -129,7 +128,7 @@ jobs:
       - name: Setup NuGet.exe for use with actions
         uses: NuGet/setup-nuget@v2.0.1
         with:
-          nuget-version: 'latest'
+          nuget-version: "latest"
       # Enable Windows desktop support
       - name: Enable Windows desktop support
         run: flutter config --enable-windows-desktop
@@ -151,15 +150,14 @@ jobs:
       - name: Release Windows Zip
         uses: softprops/action-gh-release@master
         with:
-            files: build/windows/x64/installer/Release/Dartotsu-x86_64-${{env.version}}-Installer.exe
-        
-    
+          files: build/windows/x64/installer/Release/Dartotsu-x86_64-${{env.version}}-Installer.exe
+
   build_linux:
     runs-on: ubuntu-latest
-    permissions: 
-        contents: write
-        pull-requests: write
-        repository-projects: write
+    permissions:
+      contents: write
+      pull-requests: write
+      repository-projects: write
     steps:
       # Step 1: Clone repository
       - name: Cloning repository
@@ -203,13 +201,13 @@ jobs:
       - name: Release Linux Zip
         uses: softprops/action-gh-release@master
         with:
-            files: build/linux/x64/release/bundle/Dantotsu_Linux_${{github.ref_name}}.zip
+          files: build/linux/x64/release/bundle/Dantotsu_Linux_${{github.ref_name}}.zip
   build_ios:
     runs-on: macos-latest
-    permissions: 
-        contents: write
-        pull-requests: write
-        repository-projects: write
+    permissions:
+      contents: write
+      pull-requests: write
+      repository-projects: write
     steps:
       # Step 1: Clone repository
       - name: Cloning repository
@@ -221,14 +219,13 @@ jobs:
         with:
           flutter-version: 3.27.1
           cache: true
-      
+
       - name: Setup .env File for macOS
         env:
           SIMKL_SECRET: ${{ secrets.SIMKL_SECRET }}
         run: |
           echo "SIMKL_SECRET= $SIMKL_SECRET" > .env
         shell: bash
-        
 
       # Step 3 Get Dependencies
       - name: Get Dependencies
@@ -247,13 +244,13 @@ jobs:
       - name: Release Linux Zip
         uses: softprops/action-gh-release@master
         with:
-            files: build/ios/iphoneos/Dartotsu-iOS-${{github.ref_name}}.ipa
+          files: build/ios/iphoneos/Dartotsu-iOS-${{github.ref_name}}.ipa
   build_macos:
     runs-on: macos-latest
-    permissions: 
-        contents: write
-        pull-requests: write
-        repository-projects: write
+    permissions:
+      contents: write
+      pull-requests: write
+      repository-projects: write
     steps:
       - name: Cloning repository
         uses: actions/checkout@v4
@@ -281,174 +278,170 @@ jobs:
       - name: Release macOS Zip
         uses: softprops/action-gh-release@master
         with:
-            files: build/macos/Release/Dartotsu-macos-${{github.ref_name}}.dmg
-
-
+          files: build/macos/Release/Dartotsu-macos-${{github.ref_name}}.dmg
 
   post-release-notes:
-      runs-on: ubuntu-latest
-      needs: [generate-changelog]
-      steps:
-        - name: Cloing repository
-          uses: actions/checkout@v4
-          with:
-            fetch-depth: 0
-        - name: Fetch Repository Tags by Date and Time
-          id: fetch_tags
-          run: |
-            curl -s "https://api.github.com/repos/${{github.repository}}/tags" -o tags.json
-            TAGS=$(jq -r '.[].name' tags.json)
-            declare -a TAGS_WITH_DATES=()
-            for TAG in $TAGS; do
-              TAG_DETAILS=$(curl -s "https://api.github.com/repos/${{github.repository}}/git/refs/tags/$TAG")
-              OBJECT_URL=$(echo "$TAG_DETAILS" | jq -r '.object.url // empty')
-              if [ -n "$OBJECT_URL" ]; then
-                OBJECT_DETAILS=$(curl -s "$OBJECT_URL")
-                DATE=$(echo "$OBJECT_DETAILS" | jq -r '.tagger.date // .committer.date // empty')
-                if [ -n "$DATE" ]; then
-                  TAGS_WITH_DATES+=("$DATE $TAG")
-                fi
+    runs-on: ubuntu-latest
+    needs: [generate-changelog]
+    steps:
+      - name: Cloing repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Fetch Repository Tags by Date and Time
+        id: fetch_tags
+        run: |
+          curl -s "https://api.github.com/repos/${{github.repository}}/tags" -o tags.json
+          TAGS=$(jq -r '.[].name' tags.json)
+          declare -a TAGS_WITH_DATES=()
+          for TAG in $TAGS; do
+            TAG_DETAILS=$(curl -s "https://api.github.com/repos/${{github.repository}}/git/refs/tags/$TAG")
+            OBJECT_URL=$(echo "$TAG_DETAILS" | jq -r '.object.url // empty')
+            if [ -n "$OBJECT_URL" ]; then
+              OBJECT_DETAILS=$(curl -s "$OBJECT_URL")
+              DATE=$(echo "$OBJECT_DETAILS" | jq -r '.tagger.date // .committer.date // empty')
+              if [ -n "$DATE" ]; then
+                TAGS_WITH_DATES+=("$DATE $TAG")
               fi
-            done
-            LATEST_TAG=""
-            LATEST_DATE=""
-            for TAG_DATE in "${TAGS_WITH_DATES[@]}"; do
-              TAG_DATE_TIME=$(echo "$TAG_DATE" | awk '{print $1}')
-              TAG_NAME=$(echo "$TAG_DATE" | awk '{print $2}')
-              if [[ -z "$LATEST_DATE" || "$TAG_DATE_TIME" > "$LATEST_DATE" ]]; then
-                LATEST_DATE="$TAG_DATE_TIME"
-                LATEST_TAG="$TAG_NAME"
-              fi
-            done
-            echo "$LATEST_TAG"
-            echo "LATEST_TAG=$LATEST_TAG" >> $GITHUB_ENV
-        - name: Get Latest Release Notes
-          id: get_release_notes
-          run: |
-            RELEASE_DATA=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-            "https://api.github.com/repos/${{ github.repository }}/releases/latest")
-  
-            RELEASE_NOTES=$(echo "$RELEASE_DATA" | jq -r '.body')
-            echo "Release Notes: $RELEASE_NOTES"
-  
-            echo "RELEASE_NOTES<<EOF" >> $GITHUB_ENV
-            echo "$RELEASE_NOTES" >> $GITHUB_ENV
-            echo "EOF" >> $GITHUB_ENV
-  
-        - name: Format Release Notes
-          id: format_notes
-          run: |
-            echo "**🚀 Features**" > formatted_notes.txt
-            echo "$(echo "$RELEASE_NOTES" | grep -iE '^\*\s\[[a-f0-9]+\]\(.*\):\sfeat' | head -n 5 || echo 'None')" >> formatted_notes.txt
-            echo "" >> formatted_notes.txt
-  
-            echo "**🐛 Fixes**" >> formatted_notes.txt
-            echo "$(echo "$RELEASE_NOTES" | grep -iE '^\*\s\[[a-f0-9]+\]\(.*\):\sfix' | head -n 5 || echo 'None')" >> formatted_notes.txt
-            echo "" >> formatted_notes.txt
-  
-            echo "**🛠 Chores**" >> formatted_notes.txt
-            echo "$(echo "$RELEASE_NOTES" | grep -iE '^\*\s\[[a-f0-9]+\]\(.*\):\schore' | head -n 5 || echo 'None')" >> formatted_notes.txt
-            echo "" >> formatted_notes.txt
-  
-            cat formatted_notes.txt
-            FORMATTED_NOTES=$(cat formatted_notes.txt) 
-            echo "FORMATTED_NOTES<<EOF" >> $GITHUB_ENV
-            echo "$FORMATTED_NOTES" >> $GITHUB_ENV
-            echo "EOF" >> $GITHUB_ENV
-  
-        - name: Send message to Discord
-          env:
-            DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          run: |
-            default_color="#1ac4c5"
-            hex_to_decimal() { printf '%d' "0x${1#"#"}"; }
-            embed_color=$(hex_to_decimal "$default_color")
-            
-            # Ensure VERSION is not empty
-            VERSION=${VERSION:-"${{env.LATEST_TAG}}"}
-  
-            
-            discord_data=$(jq -nc \
-                          --arg field_value "$FORMATTED_NOTES
-                          [📌 Full changelog](https://github.com/${{github.repository}}/releases/tag/${{ env.LATEST_TAG }})" \
-                          --arg footer_text "Version $VERSION" \
-                          --arg timestamp "$(date -u +%Y-%m-%dT%H:%M:%S.000Z)" \
-                          --argjson embed_color "$embed_color" \
-                          '{
-                            "content": "New release available! 🚀",
-                            "embeds": [
-                              {
-                                "title": "New App Version Dropped 🔥",
-                                "color": $embed_color,
-                                "description": $field_value,
-                                "footer": {
-                                  "text": $footer_text
-                                },
-                                "timestamp": $timestamp
-                              }
-                            ]
-                          }')
-  
-            echo "Debug: Final Discord payload is: $discord_data"
-  
-            # Send the message to Discord using the webhook
-            curl -H "Content-Type: application/json" \
-                -X POST \
-                -d "$discord_data" \
-                "$DISCORD_WEBHOOK_URL"
-    
-  
-        - name: Send message to Telegram
-          env:
-            TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-            TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-            TELEGRAM_TOPIC: ${{ secrets.TELEGRAM_TOPIC }}
-          run: |
-                  # Extract Features, Fixes, and Chores into separate files (with cleaning)
-                  echo "**🚀 Features**" > TFeatures.txt
-                  echo "$(echo "$FORMATTED_NOTES" | grep -iE '^\*\s\[[a-f0-9]+\]\(.*\):\sfeat' | sed -E 's/\): [^:]+:/) :/g' | head -n 5)" > feat.txt
-                  echo "**🐛 Fixes**" > TFixes.txt
-                  echo "$(echo "$FORMATTED_NOTES" | grep -iE '^\*\s\[[a-f0-9]+\]\(.*\):\sfix' | sed -E 's/\): [^:]+:/) :/g' | head -n 5)" > fixes.txt
-                  echo "**🛠 Chores**" > TChores.txt
-                  echo "$(echo "$FORMATTED_NOTES" | grep -iE '^\*\s\[[a-f0-9]+\]\(.*\):\schore' | sed -E 's/\): [^:]+:/) :/g' | head -n 5)" > chores.txt
-                  chmod +x scripts/tel_commit_parser.sed
-                  ./scripts/tel_commit_parser.sed feat.txt > feat_clean.txt
-                  ./scripts/tel_commit_parser.sed fixes.txt > fixes_clean.txt
-                  ./scripts/tel_commit_parser.sed chores.txt > chores_clean.txt
-                  ./scripts/tel_commit_parser.sed TFeatures.txt > TFeaturesT.txt
-                  ./scripts/tel_commit_parser.sed TFixes.txt > TFixesT.txt
-                  ./scripts/tel_commit_parser.sed TChores.txt > TChoresT.txt
-                  if [ ! -s feat_clean.txt ] || [ "$(tr -d '[:space:]' < feat_clean.txt)" = "" ]; then
-                      rm -f feat_clean.txt TFeaturesT.txt
-                  fi
-                  if [ ! -s fixes_clean.txt ] || [ "$(tr -d '[:space:]' < fixes_clean.txt)" = "" ]; then
-                      rm -f fixes_clean.txt TFixesT.txt
-                  fi
-                  if [ ! -s chores_clean.txt ] || [ "$(tr -d '[:space:]' < chores_clean.txt)" = "" ]; then
-                      rm -f chores_clean.txt TChoresT.txt
-                  fi
-                  {
-                      [ -f TFeaturesT.txt ] && [ -f feat_clean.txt ] && echo -n "$(cat TFeaturesT.txt) <blockquote>$(cat feat_clean.txt)</blockquote> "
-                      [ -f TFixesT.txt ] && [ -f fixes_clean.txt ] && echo -n "$(cat TFixesT.txt) <blockquote>$(cat fixes_clean.txt)</blockquote> "
-                      [ -f TChoresT.txt ] && [ -f chores_clean.txt ] && echo -n "$(cat TChoresT.txt) <blockquote>$(cat chores_clean.txt)</blockquote> "
-                  } > output.txt
-                  if [ ! -s output.txt ]; then
-                      echo "No commits found. Skipping Telegram message."
-                      exit 0
-                  fi
-                  markdown_info_tel=$(< output.txt)
-                  echo "Final Telegram Message:"
-                  echo "$markdown_info_tel"
-                  curl -s -X POST "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage" \
-                      -d "chat_id=$TELEGRAM_CHAT_ID" \
-                      -d "message_thread_id=$TELEGRAM_TOPIC" \
-                      -d "text=$markdown_info_tel" \
-                      -d "parse_mode=HTML" \
-                      -d "disable_web_page_preview=true"
-    
+            fi
+          done
+          LATEST_TAG=""
+          LATEST_DATE=""
+          for TAG_DATE in "${TAGS_WITH_DATES[@]}"; do
+            TAG_DATE_TIME=$(echo "$TAG_DATE" | awk '{print $1}')
+            TAG_NAME=$(echo "$TAG_DATE" | awk '{print $2}')
+            if [[ -z "$LATEST_DATE" || "$TAG_DATE_TIME" > "$LATEST_DATE" ]]; then
+              LATEST_DATE="$TAG_DATE_TIME"
+              LATEST_TAG="$TAG_NAME"
+            fi
+          done
+          echo "$LATEST_TAG"
+          echo "LATEST_TAG=$LATEST_TAG" >> $GITHUB_ENV
+      - name: Get Latest Release Notes
+        id: get_release_notes
+        run: |
+          RELEASE_DATA=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+          "https://api.github.com/repos/${{ github.repository }}/releases/latest")
+
+          RELEASE_NOTES=$(echo "$RELEASE_DATA" | jq -r '.body')
+          echo "Release Notes: $RELEASE_NOTES"
+
+          echo "RELEASE_NOTES<<EOF" >> $GITHUB_ENV
+          echo "$RELEASE_NOTES" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
+      - name: Format Release Notes
+        id: format_notes
+        run: |
+          echo "**🚀 Features**" > formatted_notes.txt
+          echo "$(echo "$RELEASE_NOTES" | grep -iE '^\*\s\[[a-f0-9]+\]\(.*\):\sfeat' | head -n 5 || echo 'None')" >> formatted_notes.txt
+          echo "" >> formatted_notes.txt
+
+          echo "**🐛 Fixes**" >> formatted_notes.txt
+          echo "$(echo "$RELEASE_NOTES" | grep -iE '^\*\s\[[a-f0-9]+\]\(.*\):\sfix' | head -n 5 || echo 'None')" >> formatted_notes.txt
+          echo "" >> formatted_notes.txt
+
+          echo "**🛠 Chores**" >> formatted_notes.txt
+          echo "$(echo "$RELEASE_NOTES" | grep -iE '^\*\s\[[a-f0-9]+\]\(.*\):\schore' | head -n 5 || echo 'None')" >> formatted_notes.txt
+          echo "" >> formatted_notes.txt
+
+          cat formatted_notes.txt
+          FORMATTED_NOTES=$(cat formatted_notes.txt) 
+          echo "FORMATTED_NOTES<<EOF" >> $GITHUB_ENV
+          echo "$FORMATTED_NOTES" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
+      - name: Send message to Discord
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: |
+          default_color="#1ac4c5"
+          hex_to_decimal() { printf '%d' "0x${1#"#"}"; }
+          embed_color=$(hex_to_decimal "$default_color")
+
+          # Ensure VERSION is not empty
+          VERSION=${VERSION:-"${{env.LATEST_TAG}}"}
 
 
+          discord_data=$(jq -nc \
+                        --arg field_value "$FORMATTED_NOTES
 
+                        
+                        [📌 Full changelog](https://github.com/${{github.repository}}/releases/tag/${{ env.LATEST_TAG }})" \
+                        --arg footer_text "Version $VERSION" \
+                        --arg timestamp "$(date -u +%Y-%m-%dT%H:%M:%S.000Z)" \
+                        --argjson embed_color "$embed_color" \
+                        '{
+                          "content": "New release available! 🚀",
+                          "embeds": [
+                            {
+                              "title": "New App Version Dropped 🔥",
+                              "color": $embed_color,
+                              "description": $field_value,
+                              "footer": {
+                                "text": $footer_text
+                              },
+                              "timestamp": $timestamp
+                            }
+                          ]
+                        }')
+
+          echo "Debug: Final Discord payload is: $discord_data"
+
+          # Send the message to Discord using the webhook
+          curl -H "Content-Type: application/json" \
+              -X POST \
+              -d "$discord_data" \
+              "$DISCORD_WEBHOOK_URL"
+
+      - name: Send message to Telegram
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          TELEGRAM_TOPIC: ${{ secrets.TELEGRAM_TOPIC }}
+        run: |
+          # Extract Features, Fixes, and Chores into separate files (with cleaning)
+          echo "**🚀 Features**" > TFeatures.txt
+          echo "$(echo "$FORMATTED_NOTES" | grep -iE '^\*\s\[[a-f0-9]+\]\(.*\):\sfeat' | sed -E 's/\): [^:]+:/) :/g' | head -n 5)" > feat.txt
+          echo "**🐛 Fixes**" > TFixes.txt
+          echo "$(echo "$FORMATTED_NOTES" | grep -iE '^\*\s\[[a-f0-9]+\]\(.*\):\sfix' | sed -E 's/\): [^:]+:/) :/g' | head -n 5)" > fixes.txt
+          echo "**🛠 Chores**" > TChores.txt
+          echo "$(echo "$FORMATTED_NOTES" | grep -iE '^\*\s\[[a-f0-9]+\]\(.*\):\schore' | sed -E 's/\): [^:]+:/) :/g' | head -n 5)" > chores.txt
+          chmod +x scripts/tel_commit_parser.sed
+          ./scripts/tel_commit_parser.sed feat.txt > feat_clean.txt
+          ./scripts/tel_commit_parser.sed fixes.txt > fixes_clean.txt
+          ./scripts/tel_commit_parser.sed chores.txt > chores_clean.txt
+          ./scripts/tel_commit_parser.sed TFeatures.txt > TFeaturesT.txt
+          ./scripts/tel_commit_parser.sed TFixes.txt > TFixesT.txt
+          ./scripts/tel_commit_parser.sed TChores.txt > TChoresT.txt
+          if [ ! -s feat_clean.txt ] || [ "$(tr -d '[:space:]' < feat_clean.txt)" = "" ]; then
+              rm -f feat_clean.txt TFeaturesT.txt
+          fi
+          if [ ! -s fixes_clean.txt ] || [ "$(tr -d '[:space:]' < fixes_clean.txt)" = "" ]; then
+              rm -f fixes_clean.txt TFixesT.txt
+          fi
+          if [ ! -s chores_clean.txt ] || [ "$(tr -d '[:space:]' < chores_clean.txt)" = "" ]; then
+              rm -f chores_clean.txt TChoresT.txt
+          fi
+          {
+              [ -f TFeaturesT.txt ] && [ -f feat_clean.txt ] && echo -n "$(cat TFeaturesT.txt) <blockquote>$(cat feat_clean.txt)</blockquote> "
+              [ -f TFixesT.txt ] && [ -f fixes_clean.txt ] && echo -n "$(cat TFixesT.txt) <blockquote>$(cat fixes_clean.txt)</blockquote> "
+              [ -f TChoresT.txt ] && [ -f chores_clean.txt ] && echo -n "$(cat TChoresT.txt) <blockquote>$(cat chores_clean.txt)</blockquote> "
+          } > output.txt
+          if [ ! -s output.txt ]; then
+              echo "No commits found. Skipping Telegram message."
+              exit 0
+          fi
+          echo -n "<a href='https://github.com/${{github.repository}}/releases/tag/${{ env.LATEST_TAG }}'>📌 Full changelog</a>" > output.txt
+          markdown_info_tel=$(< output.txt)
+          echo "Final Telegram Message:"
+          echo "$markdown_info_tel"
+          curl -s -X POST "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage" \
+              -d "chat_id=$TELEGRAM_CHAT_ID" \
+              -d "message_thread_id=$TELEGRAM_TOPIC" \
+              -d "text=$markdown_info_tel" \
+              -d "parse_mode=HTML" \
+              -d "disable_web_page_preview=true"
 
   upload_download_url:
     runs-on: ubuntu-latest
@@ -481,10 +474,10 @@ jobs:
         run: |
           # Read links from the file
           LINKS=$(cat asset_links.txt | sort)
-          
+
           # Initialize the message
           MESSAGE="**Dantotsu ${{github.ref_name}} Downloads:**\n\n"
-          
+
           # Loop through each link and format them
           while IFS= read -r LINK; do
             if [[ $LINK == *"arm64"* ]]; then
@@ -516,10 +509,24 @@ jobs:
             -X POST \
             -d "{\"content\": \"$MESSAGE\"}" \
             $DISCORD_WEBHOOK_URL
-          
+      - name: Send message to Telegram
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          TELEGRAM_TOPIC: ${{ secrets.TELEGRAM_TOPIC }}
+
+          MESSAGE: ${{ env.MESSAGE }}
+        run: |
+          # Send the message to Telegram using the Bot API
+          curl -s -X POST "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage" \
+            -d "chat_id=$TELEGRAM_CHAT_ID" \
+            -d "message_thread_id=$TELEGRAM_TOPIC" \
+            -d text="$MESSAGE" \
+            -d parse_mode="Markdown"
+
   generate-changelog:
     runs-on: ubuntu-latest
-    needs: [build_android,build_windows,build_linux,build_ios,build_macos]
+    needs: [build_android, build_windows, build_linux, build_ios, build_macos]
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -531,7 +538,7 @@ jobs:
         run: |
           echo ""> CHANGELOG.md
           echo "" >> CHANGELOG.md
-          
+
       - name: Get previous tag
         id: get_prev_tag
         run: |
@@ -559,7 +566,7 @@ jobs:
           PERFORMANCE=""
           CHORES=""
           REPO_URL="https://github.com/${{ github.repository }}"
-    
+
           IFS='|' read -ra COMMIT_LIST <<< "${{ env.commits }}"
           echo "Commit list: ${COMMIT_LIST[@]}"
           for LINE in "${COMMIT_LIST[@]}"; do
@@ -611,7 +618,7 @@ jobs:
             echo "### 🧹 Chores & Documentation" >> CHANGELOG.md
             echo -e "$CHORES" >> CHANGELOG.md
           fi
-          
+
       - name: Commit and push changelog
         run: |
           git config --global user.name "GitHub Actions"
