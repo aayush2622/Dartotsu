@@ -87,7 +87,7 @@ jobs:
 
           
           discord_data=$(jq -nc \
-                        --arg field_value "$FORMATTED_NOTES" 
+                        --arg field_value "$FORMATTED_NOTES
                         [📌 Full changelog](https://github.com/${{github.repository}}/releases/tag/${{ env.LATEST_TAG }})" \
                         --arg footer_text "Version $VERSION" \
                         --arg timestamp "$(date -u +%Y-%m-%dT%H:%M:%S.000Z)" \
