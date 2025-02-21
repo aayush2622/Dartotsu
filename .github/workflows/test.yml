@@ -122,52 +122,43 @@ jobs:
         run: |
                 # Extract Features, Fixes, and Chores into separate files (with cleaning)
                 echo "**🚀 Features**" > TFeatures.txt
-                echo "$(echo "$FORMATTED_NOTES" | grep -iE '^\*\s\[[a-f0-9]+\]\(.*\):\sfeat' | sed -E 's/\): [^:]+:/) :/g' | head -n 5 || echo 'None')" > feat.txt
-                
+                echo "$(echo "$FORMATTED_NOTES" | grep -iE '^\*\s\[[a-f0-9]+\]\(.*\):\sfeat' | sed -E 's/\): [^:]+:/) :/g' | head -n 5)" > feat.txt
                 echo "**🐛 Fixes**" > TFixes.txt
-                echo "$(echo "" | grep -iE '^\*\s\[[a-f0-9]+\]\(.*\):\sfix' | sed -E 's/\): [^:]+:/) :/g' | head -n 5 || echo 'None')" > fixes.txt
-                
+                echo "$(echo "" | grep -iE '^\*\s\[[a-f0-9]+\]\(.*\):\sfix' | sed -E 's/\): [^:]+:/) :/g' | head -n 5)" > fixes.txt
                 echo "**🛠 Chores**" > TChores.txt
-                echo "$(echo "$FORMATTED_NOTES" | grep -iE '^\*\s\[[a-f0-9]+\]\(.*\):\schore' | sed -E 's/\): [^:]+:/) :/g' | head -n 5 || echo 'None')" > chores.txt
-          
-                # Ensure the script is executable
+                echo "$(echo "$FORMATTED_NOTES" | grep -iE '^\*\s\[[a-f0-9]+\]\(.*\):\schore' | sed -E 's/\): [^:]+:/) :/g' | head -n 5)" > chores.txt
                 chmod +x scripts/tel_parser.sed
-          
-                # Run tel_parser.sed on each commit file
                 ./scripts/tel_parser.sed feat.txt > feat_clean.txt
                 ./scripts/tel_parser.sed fixes.txt > fixes_clean.txt
                 ./scripts/tel_parser.sed chores.txt > chores_clean.txt
                 ./scripts/tel_parser.sed TFeatures.txt > TFeaturesT.txt
                 ./scripts/tel_parser.sed TFixes.txt > TFixesT.txt
                 ./scripts/tel_parser.sed TChores.txt > TChoresT.txt
-          
-                # Remove "None" from empty sections
-                [ "$(cat feat_clean.txt)" = "None" ] && rm -f feat_clean.txt TFeaturesT.txt
-                [ "$(cat fixes_clean.txt)" = "None" ] && rm -f fixes_clean.txt TFixesT.txt
-                [ "$(cat chores_clean.txt)" = "None" ] && rm -f chores_clean.txt TChoresT.txt
-          
-                # Preserve newlines properly inside <blockquote> without breaking Telegram formatting
+                if [ ! -s feat_clean.txt ] || [ "$(tr -d '[:space:]' < feat_clean.txt)" = "" ]; then
+                    rm -f feat_clean.txt TFeaturesT.txt
+                fi
+                if [ ! -s fixes_clean.txt ] || [ "$(tr -d '[:space:]' < fixes_clean.txt)" = "" ]; then
+                    rm -f fixes_clean.txt TFixesT.txt
+                fi
+                if [ ! -s chores_clean.txt ] || [ "$(tr -d '[:space:]' < chores_clean.txt)" = "" ]; then
+                    rm -f chores_clean.txt TChoresT.txt
+                fi
                 {
-                  [ -f TFeaturesT.txt ] && echo -n "$(cat TFeaturesT.txt) <blockquote>$(cat feat_clean.txt)</blockquote> "
-                  [ -f TFixesT.txt ] && echo -n "$(cat TFixesT.txt) <blockquote>$(cat fixes_clean.txt)</blockquote> "
-                  [ -f TChoresT.txt ] && echo -n "$(cat TChoresT.txt) <blockquote>$(cat chores_clean.txt)</blockquote> "
+                    [ -f TFeaturesT.txt ] && [ -f feat_clean.txt ] && echo -n "$(cat TFeaturesT.txt) <blockquote>$(cat feat_clean.txt)</blockquote> "
+                    [ -f TFixesT.txt ] && [ -f fixes_clean.txt ] && echo -n "$(cat TFixesT.txt) <blockquote>$(cat fixes_clean.txt)</blockquote> "
+                    [ -f TChoresT.txt ] && [ -f chores_clean.txt ] && echo -n "$(cat TChoresT.txt) <blockquote>$(cat chores_clean.txt)</blockquote> "
                 } > output.txt
-
-                # Ensure output is not empty before sending
                 if [ ! -s output.txt ]; then
                     echo "No commits found. Skipping Telegram message."
                     exit 0
                 fi
-          
                 markdown_info_tel=$(< output.txt)
-          
                 echo "Final Telegram Message:"
                 echo "$markdown_info_tel"
-          
-                # Send message to Telegram
                 curl -s -X POST "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage" \
                     -d "chat_id=$TELEGRAM_CHAT_ID" \
                     -d "message_thread_id=$TELEGRAM_TOPIC" \
                     -d "text=$markdown_info_tel" \
                     -d "parse_mode=HTML" \
                     -d "disable_web_page_preview=true"
+                    
