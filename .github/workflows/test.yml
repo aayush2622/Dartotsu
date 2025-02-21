@@ -14,7 +14,7 @@ jobs:
       - name: Fetch Repository Tags by Date and Time
         id: fetch_tags
         run: |
-          curl -s "https://api.github.com/repos/RyanYuuki/AnymeX/tags" -o tags.json
+          curl -s "https://api.github.com/repos/${{github.repository}}/tags" -o tags.json
           TAGS=$(jq -r '.[].name' tags.json)
           declare -a TAGS_WITH_DATES=()
           for TAG in $TAGS; do
