@@ -87,7 +87,8 @@ jobs:
 
           
           discord_data=$(jq -nc \
-                        --arg field_value "$FORMATTED_NOTES" \
+                        --arg field_value "$FORMATTED_NOTES" 
+                        [📌 Full changelog](https://github.com/${{github.repository}}/releases/tag/${{ env.LATEST_TAG }})" \
                         --arg footer_text "Version $VERSION" \
                         --arg timestamp "$(date -u +%Y-%m-%dT%H:%M:%S.000Z)" \
                         --argjson embed_color "$embed_color" \
@@ -159,7 +160,7 @@ jobs:
                 curl -s -X POST "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage" \
                     -d "chat_id=$TELEGRAM_CHAT_ID" \
                     -d "message_thread_id=$TELEGRAM_TOPIC" \
-                    -d "text=$markdown_info_tel version: ${VERSION}" \" \
+                    -d "text=$markdown_info_tel" \
                     -d "parse_mode=HTML" \
                     -d "disable_web_page_preview=true"
                     
