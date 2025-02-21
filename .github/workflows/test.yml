@@ -127,13 +127,13 @@ jobs:
                 echo "$(echo "" | grep -iE '^\*\s\[[a-f0-9]+\]\(.*\):\sfix' | sed -E 's/\): [^:]+:/) :/g' | head -n 5)" > fixes.txt
                 echo "**🛠 Chores**" > TChores.txt
                 echo "$(echo "$FORMATTED_NOTES" | grep -iE '^\*\s\[[a-f0-9]+\]\(.*\):\schore' | sed -E 's/\): [^:]+:/) :/g' | head -n 5)" > chores.txt
-                chmod +x scripts/tel_parser.sed
-                ./scripts/tel_parser.sed feat.txt > feat_clean.txt
-                ./scripts/tel_parser.sed fixes.txt > fixes_clean.txt
-                ./scripts/tel_parser.sed chores.txt > chores_clean.txt
-                ./scripts/tel_parser.sed TFeatures.txt > TFeaturesT.txt
-                ./scripts/tel_parser.sed TFixes.txt > TFixesT.txt
-                ./scripts/tel_parser.sed TChores.txt > TChoresT.txt
+                chmod +x scripts/tel_commit_parser.sed
+                ./scripts/tel_commit_parser.sed feat.txt > feat_clean.txt
+                ./scripts/tel_commit_parser.sed fixes.txt > fixes_clean.txt
+                ./scripts/tel_commit_parser.sed chores.txt > chores_clean.txt
+                ./scripts/tel_commit_parser.sed TFeatures.txt > TFeaturesT.txt
+                ./scripts/tel_commit_parser.sed TFixes.txt > TFixesT.txt
+                ./scripts/tel_commit_parser.sed TChores.txt > TChoresT.txt
                 if [ ! -s feat_clean.txt ] || [ "$(tr -d '[:space:]' < feat_clean.txt)" = "" ]; then
                     rm -f feat_clean.txt TFeaturesT.txt
                 fi
