@@ -82,7 +82,7 @@ jobs:
           embed_color=$(hex_to_decimal "$default_color")
           
           # Ensure VERSION is not empty
-          VERSION=${VERSION:-"$LATEST_TAG"}
+          VERSION=${VERSION:-$LATEST_TAG}
 
           
           discord_data=$(jq -nc \
