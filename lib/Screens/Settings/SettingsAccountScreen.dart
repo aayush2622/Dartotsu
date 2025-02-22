@@ -6,10 +6,10 @@ import 'package:get/get.dart';
 import '../../Theme/LanguageSwitcher.dart';
 import '../../Widgets/AlertDialogBuilder.dart';
 import '../../Widgets/LoadSvg.dart';
-import '../../api/Anilist/Anilist.dart';
-import '../../api/Discord/Discord.dart';
-import '../../api/MyAnimeList/Mal.dart';
-import '../../api/Simkl/Simkl.dart';
+import '../../Api/Anilist/Anilist.dart';
+import '../../Api/Discord/Discord.dart';
+import '../../Api/MyAnimeList/Mal.dart';
+import '../../Api/Simkl/Simkl.dart';
 
 class SettingsAccountScreen extends StatefulWidget {
   const SettingsAccountScreen({super.key});

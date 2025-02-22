@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../../../../../../Adaptor/Episode/Widget/HandleProgress.dart';
 import '../../../../../../DataClass/Chapter.dart';
 import '../../../../../../DataClass/Media.dart';
-import '../../../../../../api/Sources/Model/Source.dart';
+import '../../../../../../Api/Sources/Model/Source.dart';
 
 class ContinueCard extends StatelessWidget {
   final Media mediaData;

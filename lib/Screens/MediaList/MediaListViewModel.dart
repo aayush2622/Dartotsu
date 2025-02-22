@@ -2,7 +2,7 @@ import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
 import '../../DataClass/Media.dart';
-import '../../api/Anilist/Anilist.dart';
+import '../../Api/Anilist/Anilist.dart';
 
 class MediaListViewModel extends GetxController {
   var mediaList = Rxn<Map<String, List<Media>>>();

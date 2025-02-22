@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:grouped_list/sliver_grouped_list.dart';
 
-import '../../api/Sources/Extensions/GetSourceList.dart';
-import '../../api/Sources/Extensions/extensions_provider.dart';
-import '../../api/Sources/Extensions/fetch_anime_sources.dart';
-import '../../api/Sources/Extensions/fetch_manga_sources.dart';
-import '../../api/Sources/Extensions/fetch_novel_sources.dart';
-import '../../api/Sources/Model/Manga.dart';
-import '../../api/Sources/Model/Source.dart';
+import '../../Api/Sources/Extensions/GetSourceList.dart';
+import '../../Api/Sources/Extensions/extensions_provider.dart';
+import '../../Api/Sources/Extensions/fetch_anime_sources.dart';
+import '../../Api/Sources/Extensions/fetch_manga_sources.dart';
+import '../../Api/Sources/Extensions/fetch_novel_sources.dart';
+import '../../Api/Sources/Model/Manga.dart';
+import '../../Api/Sources/Model/Source.dart';
 import '../Settings/language.dart';
 import 'ExtensionItem.dart';
 

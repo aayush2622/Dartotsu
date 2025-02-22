@@ -1,6 +1,6 @@
 import 'package:dantotsu/Screens/Extensions/ExtensionList.dart';
 import 'package:dantotsu/Widgets/AlertDialogBuilder.dart';
-import 'package:dantotsu/api/Sources/Model/Source.dart';
+import 'package:dantotsu/Api/Sources/Model/Source.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -12,7 +12,7 @@ import '../../Preferences/PrefManager.dart';
 import '../../StorageProvider.dart';
 import '../../Theme/LanguageSwitcher.dart';
 import '../../Widgets/ScrollConfig.dart';
-import '../../api/Sources/Model/Manga.dart';
+import '../../Api/Sources/Model/Manga.dart';
 import '../../main.dart';
 import '../Settings/language.dart';
 

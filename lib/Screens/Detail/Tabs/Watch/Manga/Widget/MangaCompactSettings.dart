@@ -10,7 +10,7 @@ import '../../../../../../DataClass/Media.dart';
 import '../../../../../../Preferences/IsarDataClasses/Selected/Selected.dart';
 import '../../../../../../Preferences/PrefManager.dart';
 import '../../../../../../Services/ServiceSwitcher.dart';
-import '../../../../../../api/Sources/Model/Source.dart';
+import '../../../../../../Api/Sources/Model/Source.dart';
 
 class MangaCompactSettings {
   final BuildContext context;

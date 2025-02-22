@@ -5,12 +5,12 @@ import 'package:get/get.dart';
 import '../Preferences/PrefManager.dart';
 import '../Theme/LanguageSwitcher.dart';
 import '../Widgets/AlertDialogBuilder.dart';
-import '../api/Sources/Extensions/extensions_provider.dart';
-import '../api/Sources/Extensions/fetch_anime_sources.dart';
-import '../api/Sources/Extensions/fetch_manga_sources.dart';
-import '../api/Sources/Extensions/fetch_novel_sources.dart';
-import '../api/Sources/Model/Manga.dart';
-import '../api/Sources/Model/Source.dart';
+import '../Api/Sources/Extensions/extensions_provider.dart';
+import '../Api/Sources/Extensions/fetch_anime_sources.dart';
+import '../Api/Sources/Extensions/fetch_manga_sources.dart';
+import '../Api/Sources/Extensions/fetch_novel_sources.dart';
+import '../Api/Sources/Model/Manga.dart';
+import '../Api/Sources/Model/Source.dart';
 import 'Function.dart';
 
 class Extensions {

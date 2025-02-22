@@ -6,13 +6,13 @@ import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
 import '../../../../../DataClass/Episode.dart';
 import '../../../../../DataClass/Media.dart';
-import '../../../../../api/EpisodeDetails/Anify/Anify.dart';
-import '../../../../../api/EpisodeDetails/Jikan/Jikan.dart';
-import '../../../../../api/EpisodeDetails/Kitsu/Kitsu.dart';
-import '../../../../../api/Sources/Eval/dart/model/m_chapter.dart';
-import '../../../../../api/Sources/Eval/dart/model/m_manga.dart';
-import '../../../../../api/Sources/Model/Source.dart';
-import '../../../../../api/Sources/Search/get_detail.dart';
+import '../../../../../Api/EpisodeDetails/Anify/Anify.dart';
+import '../../../../../Api/EpisodeDetails/Jikan/Jikan.dart';
+import '../../../../../Api/EpisodeDetails/Kitsu/Kitsu.dart';
+import '../../../../../Api/Sources/Eval/dart/model/m_chapter.dart';
+import '../../../../../Api/Sources/Eval/dart/model/m_manga.dart';
+import '../../../../../Api/Sources/Model/Source.dart';
+import '../../../../../Api/Sources/Search/get_detail.dart';
 import '../Functions/ParseChapterNumber.dart';
 import 'Widget/AnimeCompactSettings.dart';
 

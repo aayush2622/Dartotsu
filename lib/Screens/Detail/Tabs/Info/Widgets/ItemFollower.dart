@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../../../../Widgets/CachedNetworkImage.dart';
 import '../../../../../DataClass/User.dart';
-import '../../../../../api/Anilist/Anilist.dart';
+import '../../../../../Api/Anilist/Anilist.dart';
 
 Widget ItemFollower(BuildContext context, userData follower, String type) {
   final theme = Theme.of(context).colorScheme;

@@ -4,7 +4,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import '../../Animation/ScaleAnimation.dart';
 import '../../DataClass/Chapter.dart';
 import '../../DataClass/Media.dart';
-import '../../api/Sources/Model/Source.dart';
+import '../../Api/Sources/Model/Source.dart';
 import 'ChapterCompactViewHolder.dart';
 import 'ChapterListViewHolder.dart';
 

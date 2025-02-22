@@ -5,7 +5,7 @@ import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
 import '../../../../Functions/Function.dart';
 import '../../../../Preferences/PrefManager.dart';
-import '../../../../api/Sources/Model/Source.dart';
+import '../../../../Api/Sources/Model/Source.dart';
 import '../../Widgets/Releasing.dart';
 import 'BaseParser.dart';
 import 'Widgets/SourceSelector.dart';

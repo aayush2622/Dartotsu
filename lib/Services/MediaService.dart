@@ -1,12 +1,12 @@
 import 'package:dantotsu/Services/Screens/BaseLoginScreen.dart';
-import 'package:dantotsu/api/Simkl/SimklService.dart';
+import 'package:dantotsu/Api/Simkl/SimklService.dart';
 import 'package:flutter/material.dart';
 
 import '../Screens/HomeNavbar.dart';
 import '../Theme/LanguageSwitcher.dart';
-import '../api/Anilist/AnilistService.dart';
-import '../api/Extensions/ExtensionsService.dart';
-import '../api/MyAnimeList/MalService.dart';
+import '../Api/Anilist/AnilistService.dart';
+import '../Api/Extensions/ExtensionsService.dart';
+import '../Api/MyAnimeList/MalService.dart';
 import 'BaseServiceData.dart';
 import 'Screens/BaseAnimeScreen.dart';
 import 'Screens/BaseHomeScreen.dart';
