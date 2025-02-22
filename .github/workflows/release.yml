@@ -196,12 +196,12 @@ jobs:
         uses: thedoctor0/zip-release@master
         with:
           type: "zip"
-          filename: Dantotsu_Linux_${{github.ref_name}}.zip
+          filename: Dartotsu_Linux_${{github.ref_name}}.zip
           directory: build/linux/x64/release/bundle
       - name: Release Linux Zip
         uses: softprops/action-gh-release@master
         with:
-          files: build/linux/x64/release/bundle/Dantotsu_Linux_${{github.ref_name}}.zip
+          files: build/linux/x64/release/bundle/Dartotsu_Linux_${{github.ref_name}}.zip
   build_ios:
     runs-on: macos-latest
     permissions:
@@ -353,7 +353,7 @@ jobs:
 
       - name: Send message to Discord
         env:
-          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_RELEASE_URL }}
         run: |
           default_color="#1ac4c5"
           hex_to_decimal() { printf '%d' "0x${1#"#"}"; }
@@ -372,7 +372,7 @@ jobs:
                         --arg timestamp "$(date -u +%Y-%m-%dT%H:%M:%S.000Z)" \
                         --argjson embed_color "$embed_color" \
                         '{
-                          "content": "<@>",
+                          "content": "<@&1298977336124903457>",
                           "embeds": [
                             {
                               "title": "New App Version Dropped 🔥",
@@ -396,9 +396,9 @@ jobs:
 
       - name: Send message to Telegram
         env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-          TELEGRAM_TOPIC: ${{ secrets.TELEGRAM_TOPIC }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHANNEL_ID }}
+          TELEGRAM_TOPIC: ${{ secrets.TELEGRAM_TOPIC_ANNOUNCEMENT }}
         run: |
           # Extract Features, Fixes, and Chores into separate files (with cleaning)
           echo "**🚀 Features**" > TFeatures.txt
@@ -476,7 +476,7 @@ jobs:
           LINKS=$(cat asset_links.txt | sort)
 
           # Initialize the message
-          MESSAGE="**Dantotsu ${{github.ref_name}} Downloads:**\n\n"
+          MESSAGE="**Dartotsu ${{github.ref_name}} Downloads:**\n\n"
 
           # Loop through each link and format them
           while IFS= read -r LINK; do
@@ -501,7 +501,7 @@ jobs:
           echo "MESSAGE=$MESSAGE" >> $GITHUB_ENV
       - name: Send message to Discord
         env:
-          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_RELEASE_URL }}
           MESSAGE: ${{ env.MESSAGE }}
         run: |
           # Send the message to Discord using the webhook
@@ -511,9 +511,9 @@ jobs:
             $DISCORD_WEBHOOK_URL
       - name: Send message to Telegram
         env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-          TELEGRAM_TOPIC: ${{ secrets.TELEGRAM_TOPIC }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHANNEL_ID }}
+          TELEGRAM_TOPIC: ${{ secrets.TELEGRAM_TOPIC_ANNOUNCEMENT }}
 
           MESSAGE: ${{ env.MESSAGE }}
         run: |
