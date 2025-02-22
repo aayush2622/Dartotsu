@@ -89,6 +89,7 @@ class ExtensionsAnimeScreen extends BaseAnimeScreen {
               ),
           ],
         ),
+      SizedBox(height: 128),
     ];
   }
 

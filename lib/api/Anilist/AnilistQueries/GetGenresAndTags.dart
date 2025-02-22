@@ -2,9 +2,9 @@ part of '../AnilistQueries.dart';
 
 extension on AnilistQueries {
   Future<bool> _getGenresAndTags() async {
-    List<String> genres = PrefManager.getVal(PrefName.GenresList);
-    List<String> adultTags = PrefManager.getVal(PrefName.TagsListIsAdult);
-    List<String> nonAdultTags = PrefManager.getVal(PrefName.TagsListNonAdult);
+    List<String> genres = loadData(PrefName.GenresList);
+    List<String> adultTags = loadData(PrefName.TagsListIsAdult);
+    List<String> nonAdultTags = loadData(PrefName.TagsListNonAdult);
 
     Map<bool, List<String>>? tags;
     if (adultTags.isEmpty || nonAdultTags.isEmpty) {
@@ -24,7 +24,7 @@ extension on AnilistQueries {
       var genreCollection = genreResponse?.genreCollection;
       if (genreCollection != null) {
         genres = genreCollection;
-        PrefManager.setVal(PrefName.GenresList, genreCollection);
+        saveData(PrefName.GenresList, genreCollection);
       }
     }
 
@@ -50,8 +50,8 @@ extension on AnilistQueries {
 
         tags = {true: adult, false: nonAdult};
 
-        PrefManager.setVal(PrefName.TagsListIsAdult, adult);
-        PrefManager.setVal(PrefName.TagsListNonAdult, nonAdult);
+        saveData(PrefName.TagsListIsAdult, adult);
+        saveData(PrefName.TagsListNonAdult, nonAdult);
       }
     }
     if (genres.isNotEmpty && tags != null) {

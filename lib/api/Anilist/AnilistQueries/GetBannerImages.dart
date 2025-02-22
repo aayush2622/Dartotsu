@@ -9,8 +9,8 @@ extension on AnilistQueries {
   }
 
   Future<String?> _bannerImage(String type) async {
-    var url = PrefManager.getCustomVal<String>("banner_${type}_url");
-    var time = PrefManager.getCustomVal<int>("banner_${type}_time");
+    var url = loadCustomData<String>("banner_${type}_url");
+    var time = loadCustomData<int>("banner_${type}_time");
     bool checkTime() {
       if (time == null) return true;
       return DateTime.now()
@@ -31,8 +31,8 @@ extension on AnilistQueries {
       bannerImages.shuffle(Random());
       var random = bannerImages.isNotEmpty ? bannerImages.first : null;
 
-      PrefManager.setCustomVal("banner_${type}_url", random);
-      PrefManager.setCustomVal(
+      saveCustomData("banner_${type}_url", random);
+      saveCustomData(
           "banner_${type}_time", DateTime.now().millisecondsSinceEpoch);
 
       return random;

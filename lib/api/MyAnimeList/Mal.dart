@@ -55,7 +55,7 @@ class MalController extends BaseServiceData {
 
   @override
   bool getSavedToken() {
-    var malToken = PrefManager.getVal(PrefName.malToken);
+    var malToken = loadData(PrefName.malToken);
     if (malToken == null) return false;
     token.value = malToken.accessToken;
 
@@ -70,7 +70,7 @@ class MalController extends BaseServiceData {
   final _loadingToken = false.obs;
 
   Future<void> getToken() async {
-    var malToken = PrefManager.getVal(PrefName.malToken);
+    var malToken = loadData(PrefName.malToken);
     if (malToken == null) return;
     if (DateTime.now().millisecondsSinceEpoch > malToken.expiresIn) {
       if (_loadingToken.value) {
@@ -92,7 +92,7 @@ class MalController extends BaseServiceData {
 
   @override
   void removeSavedToken() {
-    PrefManager.removeVal(PrefName.malToken);
+    removeData(PrefName.malToken);
     token.value = '';
     username.value = '';
     adult = false;
@@ -111,7 +111,7 @@ class MalController extends BaseServiceData {
   Future<void> saveToken(String token) async {
     var res = ResponseToken.fromJson(json.decode(token));
     res.expiresIn += DateTime.now().millisecondsSinceEpoch;
-    PrefManager.setVal<ResponseToken?>(PrefName.malToken, res);
+    saveData<ResponseToken?>(PrefName.malToken, res);
     run.value = true;
     isInitialized.value = false;
     this.token.value = res.accessToken;
@@ -120,7 +120,7 @@ class MalController extends BaseServiceData {
   }
 
   Future<ResponseToken?> refreshToken() async {
-    final malToken = PrefManager.getVal(PrefName.malToken);
+    final malToken = loadData(PrefName.malToken);
     if (malToken == null) {
       throw Exception('Failed to load refresh token');
     }
@@ -136,7 +136,7 @@ class MalController extends BaseServiceData {
     if (response.statusCode == 200) {
       final res = ResponseToken.fromJson(json.decode(response.body));
       res.expiresIn += DateTime.now().millisecondsSinceEpoch;
-      PrefManager.setVal(PrefName.malToken, res);
+      saveData(PrefName.malToken, res);
       token.value = res.accessToken;
       _loadingToken.value = false;
       return res;

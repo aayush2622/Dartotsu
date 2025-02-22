@@ -183,7 +183,7 @@ class MalHomeScreen extends BaseHomeScreen {
       ),
     ];
 
-    final homeLayoutMap = PrefManager.getVal(PrefName.malHomeLayout);
+    final homeLayoutMap = loadData(PrefName.malHomeLayout);
     final sectionMap = {
       for (var section in mediaSections) section.pairTitle: section
     };

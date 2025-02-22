@@ -133,7 +133,7 @@ abstract class BaseWatchScreen<T extends StatefulWidget> extends State<T> {
 
   List<Widget> _buildYouTubeButton() {
     if (mediaData.anime?.youtube == null ||
-        !PrefManager.getVal(PrefName.showYtButton)) {
+        !loadData(PrefName.showYtButton)) {
       return [];
     }
 

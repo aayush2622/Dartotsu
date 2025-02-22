@@ -66,8 +66,8 @@ extension on AnilistQueries {
     sorted['All'] = all;
 
     /*final listSort = anime
-        ? PrefManager.getVal(PrefName.AnimeListSortOrder)
-        : PrefManager.getVal(PrefName.MangaListSortOrder);
+        ? loadData(PrefName.AnimeListSortOrder)
+        : loadData(PrefName.MangaListSortOrder);
     final sort = listSort ?? sortOrder ?? options?.rowOrder;
 
     sorted.forEach((key, list) {

@@ -55,7 +55,7 @@ class _SourceSelectorState extends ConsumerState<SourceSelector> {
           : source.name!;
     }
 
-    var lastUsedSource = PrefManager.getCustomVal<String>(
+    var lastUsedSource = loadCustomData<String>(
         '${widget.mediaData.id}-lastUsedSource');
     if (lastUsedSource == null ||
         !sources.any((e) => nameAndLang(e) == lastUsedSource)) {
@@ -79,7 +79,7 @@ class _SourceSelectorState extends ConsumerState<SourceSelector> {
                 borderColor: theme.primary,
                 prefixIcon: Icons.source,
                 onChanged: (name) async {
-                  PrefManager.setCustomVal(
+                  saveCustomData(
                       '${widget.mediaData.id}-lastUsedSource', name);
                   lastUsedSource = name;
                   source = sources.firstWhereOrNull(

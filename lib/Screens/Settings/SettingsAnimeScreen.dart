@@ -63,7 +63,7 @@ class SettingsAnimeScreenState extends BaseSettingsScreen {
             icon: Icons.tune,
             onClick: () async {
               final homeLayoutMap =
-                  PrefManager.getVal(PrefName.anilistAnimeLayout);
+                  loadData(PrefName.anilistAnimeLayout);
               var titles = List<String>.from(homeLayoutMap.keys.toList());
               var checkedStates =
                   List<bool>.from(homeLayoutMap.values.toList());
@@ -78,7 +78,7 @@ class SettingsAnimeScreenState extends BaseSettingsScreen {
                   (newCheckedStates) => checkedStates = newCheckedStates,
                 )
                 ..setPositiveButton(getString.ok, () {
-                  PrefManager.setVal(
+                  saveData(
                     PrefName.anilistAnimeLayout,
                     Map.fromIterables(titles, checkedStates),
                   );
@@ -106,7 +106,7 @@ class SettingsAnimeScreenState extends BaseSettingsScreen {
             description: getString.manageLayoutDescription(getString.home),
             icon: Icons.tune,
             onClick: () async {
-              final homeLayoutMap = PrefManager.getVal(PrefName.malAnimeLayout);
+              final homeLayoutMap = loadData(PrefName.malAnimeLayout);
               var titles = List<String>.from(homeLayoutMap.keys.toList());
               var checkedStates =
                   List<bool>.from(homeLayoutMap.values.toList());
@@ -120,7 +120,7 @@ class SettingsAnimeScreenState extends BaseSettingsScreen {
                   (newCheckedStates) => checkedStates = newCheckedStates,
                 )
                 ..setPositiveButton(getString.ok, () {
-                  PrefManager.setVal(
+                  saveData(
                     PrefName.malAnimeLayout,
                     Map.fromIterables(titles, checkedStates),
                   );
@@ -148,7 +148,7 @@ class SettingsAnimeScreenState extends BaseSettingsScreen {
             description: getString.manageLayoutDescription(getString.home),
             icon: Icons.tune,
             onClick: () async {
-              final homeLayoutMap = PrefManager.getVal(PrefName.simklAnimeLayout);
+              final homeLayoutMap = loadData(PrefName.simklAnimeLayout);
               var titles = List<String>.from(homeLayoutMap.keys.toList());
               var checkedStates =
               List<bool>.from(homeLayoutMap.values.toList());
@@ -162,7 +162,7 @@ class SettingsAnimeScreenState extends BaseSettingsScreen {
                       (newCheckedStates) => checkedStates = newCheckedStates,
                 )
                 ..setPositiveButton(getString.ok, () {
-                  PrefManager.setVal(
+                  saveData(
                     PrefName.simklAnimeLayout,
                     Map.fromIterables(titles, checkedStates),
                   );

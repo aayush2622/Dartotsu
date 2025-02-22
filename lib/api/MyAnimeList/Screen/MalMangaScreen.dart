@@ -107,7 +107,7 @@ class MalMangaScreen extends BaseMangaScreen {
         list: mostFavManga.value,
       ),
     ];
-    final mangaLayoutMap = PrefManager.getVal(PrefName.malMangaLayout);
+    final mangaLayoutMap = loadData(PrefName.malMangaLayout);
     final sectionMap = {
       for (var section in mediaSections) section.pairTitle: section
     };

@@ -27,14 +27,14 @@ class _DiscordController extends GetxController {
   var avatar = "".obs;
 
   bool getSavedToken() {
-    token.value = PrefManager.getVal(PrefName.discordToken);
-    userName.value = PrefManager.getVal(PrefName.discordUserName);
-    avatar.value = PrefManager.getVal(PrefName.discordAvatar);
+    token.value = loadData(PrefName.discordToken);
+    userName.value = loadData(PrefName.discordUserName);
+    avatar.value = loadData(PrefName.discordAvatar);
     return token.isNotEmpty;
   }
 
   Future<void> saveToken(String newToken) async {
-    PrefManager.setVal(PrefName.discordToken, newToken);
+    saveData(PrefName.discordToken, newToken);
     token.value = newToken;
   }
 
@@ -42,9 +42,9 @@ class _DiscordController extends GetxController {
     token.value = '';
     userName.value = '';
     avatar.value = '';
-    PrefManager.setVal(PrefName.discordToken, '');
-    PrefManager.setVal(PrefName.discordUserName, '');
-    PrefManager.setVal(PrefName.discordAvatar, '');
+    saveData(PrefName.discordToken, '');
+    saveData(PrefName.discordUserName, '');
+    saveData(PrefName.discordAvatar, '');
   }
 
   void warning(BuildContext context) {

@@ -119,7 +119,7 @@ class AnilistController extends BaseServiceData {
 
   @override
   bool getSavedToken() {
-    token.value = PrefManager.getVal(PrefName.anilistToken);
+    token.value = loadData(PrefName.anilistToken);
     query?.getGenresAndTags();
     if (token.isNotEmpty) query?.getUserData();
 
@@ -128,7 +128,7 @@ class AnilistController extends BaseServiceData {
 
   @override
   Future<void> saveToken(String token) async {
-    PrefManager.setVal(PrefName.anilistToken, token);
+    saveData(PrefName.anilistToken, token);
     this.token.value = token;
     run.value = true;
     isInitialized.value = false;
@@ -151,9 +151,9 @@ class AnilistController extends BaseServiceData {
     episodesWatched = null;
     chapterRead = null;
     unreadNotificationCount = 0;
-    PrefManager.removeVal(PrefName.anilistToken);
-    PrefManager.setCustomVal<String>("banner_ANIME_url", '');
-    PrefManager.setCustomVal<String>("banner_MANGA_url", '');
+    removeData(PrefName.anilistToken);
+    saveCustomData<String>("banner_ANIME_url", '');
+    saveCustomData<String>("banner_MANGA_url", '');
     run.value = true;
     isInitialized.value = false;
     Refresh.refreshService(RefreshId.Anilist);

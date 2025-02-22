@@ -3,10 +3,10 @@ part of '../AnilistQueries.dart';
 extension on AnilistQueries {
   Future<Map<String, List<Media>>> _initHomePage() async {
     try {
-      final removeList = PrefManager.getVal(PrefName.anilistRemoveList);
-      final hidePrivate = PrefManager.getVal(PrefName.anilistHidePrivate);
+      final removeList = loadData(PrefName.anilistRemoveList);
+      final hidePrivate = loadData(PrefName.anilistHidePrivate);
       List<Media> removedMedia = [];
-      final homeLayoutMap = PrefManager.getVal(PrefName.anilistHomeLayout);
+      final homeLayoutMap = loadData(PrefName.anilistHomeLayout);
 
       var response = await executeQuery<UserListResponse>(_queryHomeList());
       Map<String, List<Media>> returnMap = {};
@@ -44,7 +44,7 @@ extension on AnilistQueries {
         }
 
         List<int> list =
-            PrefManager.getCustomVal<List<int>>("continue${type}List") ?? [];
+            loadCustomData<List<int>>("continue${type}List") ?? [];
         var mediaList = (currentMedia ?? []) + (repeatingMedia ?? []);
         var returnArray = await compute(process, {
           "list": mediaList,
@@ -184,7 +184,7 @@ extension on AnilistQueries {
 }
 
 String _queryHomeList() {
-  final homeLayoutMap = PrefManager.getVal(PrefName.anilistHomeLayout);
+  final homeLayoutMap = loadData(PrefName.anilistHomeLayout);
   final Map<String, List<String>> queryMappings = {
     'Continue Watching': [
       "currentAnime: ${_continueMediaQuery("ANIME", "CURRENT")}",

@@ -21,7 +21,7 @@ class SimklController extends BaseServiceData {
 
   @override
   bool getSavedToken() {
-    token.value = PrefManager.getVal(PrefName.simklToken);
+    token.value = loadData(PrefName.simklToken);
 
     if (token.isNotEmpty) query?.getUserData();
 
@@ -34,7 +34,7 @@ class SimklController extends BaseServiceData {
 
   @override
   void removeSavedToken() {
-    PrefManager.removeVal(PrefName.simklToken);
+    removeData(PrefName.simklToken);
     token.value = '';
     username.value = '';
     adult = false;
@@ -55,7 +55,7 @@ class SimklController extends BaseServiceData {
 
   @override
   Future<void> saveToken(String token) async {
-    PrefManager.setVal(PrefName.simklToken, token);
+    saveData(PrefName.simklToken, token);
     this.token.value = token;
     run.value = true;
     isInitialized.value = false;

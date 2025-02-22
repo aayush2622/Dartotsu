@@ -108,7 +108,7 @@ class MalAnimeScreen extends BaseAnimeScreen {
         list: mostFavSeries.value,
       ),
     ];
-    final animeLayoutMap = PrefManager.getVal(PrefName.malAnimeLayout);
+    final animeLayoutMap = loadData(PrefName.malAnimeLayout);
     final sectionMap = {
       for (var section in mediaSections) section.pairTitle: section
     };

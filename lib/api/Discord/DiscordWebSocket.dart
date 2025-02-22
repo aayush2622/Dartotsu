@@ -79,11 +79,11 @@ class _DiscordService extends GetxController {
   }
   void _saveProfile(Map<String, dynamic> user) async {
     Discord.userName.value = user['username'];
-    PrefManager.setVal(PrefName.discordUserName, user['username']);
+    saveData(PrefName.discordUserName, user['username']);
     var avatar =
         'https://cdn.discordapp.com/avatars/${user['id']}/${user['avatar']}.png';
     Discord.avatar.value = avatar;
-    PrefManager.setVal(PrefName.discordAvatar, avatar);
+    saveData(PrefName.discordAvatar, avatar);
   }
 }
 */

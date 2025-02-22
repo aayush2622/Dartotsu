@@ -151,7 +151,7 @@ class AnilistHomeScreen extends BaseHomeScreen {
       ),
     ];
 
-    final homeLayoutMap = PrefManager.getVal(PrefName.anilistHomeLayout);
+    final homeLayoutMap = loadData(PrefName.anilistHomeLayout);
     final sectionMap = {
       for (var section in mediaSections) section.pairTitle: section
     };

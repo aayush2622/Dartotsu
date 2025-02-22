@@ -254,7 +254,7 @@ Widget _extensionUpdateNumbers(BuildContext context, ItemType itemType,
       if (snapshot.hasData && snapshot.data!.isNotEmpty) {
         final entries = snapshot.data!
             .where(
-              (element) => PrefManager.getVal(PrefName.NSFWExtensions)
+              (element) => loadData(PrefName.NSFWExtensions)
                   ? true
                   : element.isNsfw == false,
             )

@@ -85,6 +85,7 @@ class ExtensionsMangaScreen extends BaseMangaScreen {
               ),
           ],
         ),
+      SizedBox(height: 128),
     ];
   }
 

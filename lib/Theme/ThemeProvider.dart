@@ -27,13 +27,13 @@ class ThemeNotifier extends ChangeNotifier {
   }
 
   void _initialize() {
-    var darkMode = PrefManager.getVal(PrefName.isDarkMode);
+    var darkMode = loadData(PrefName.isDarkMode);
     bool isDark;
 
     if (darkMode == 0) {
       isDark =
           WidgetsBinding.instance.window.platformBrightness == Brightness.dark;
-      PrefManager.setVal(PrefName.isDarkMode, isDark ? 1 : 2);
+      saveData(PrefName.isDarkMode, isDark ? 1 : 2);
     } else if (darkMode == 1) {
       isDark = true;
     } else {
@@ -41,30 +41,30 @@ class ThemeNotifier extends ChangeNotifier {
     }
 
     _isDarkMode = isDark;
-    _isOled = PrefManager.getVal(PrefName.isOled);
-    _theme = PrefManager.getVal(PrefName.theme);
-    _useMaterialYou = PrefManager.getVal(PrefName.useMaterialYou);
-    _useCustomColor = PrefManager.getVal(PrefName.useCustomColor);
-    _customColor = PrefManager.getVal(PrefName.customColor);
+    _isOled = loadData(PrefName.isOled);
+    _theme = loadData(PrefName.theme);
+    _useMaterialYou = loadData(PrefName.useMaterialYou);
+    _useCustomColor = loadData(PrefName.useCustomColor);
+    _customColor = loadData(PrefName.customColor);
     notifyListeners();
   }
 
   Future<void> setDarkMode(bool isDarkMode) async {
     _isDarkMode = isDarkMode;
-    PrefManager.setVal(PrefName.isDarkMode, _isDarkMode ? 1 : 2);
+    saveData(PrefName.isDarkMode, _isDarkMode ? 1 : 2);
     if (!isDarkMode) {
       _isOled = false;
-      PrefManager.setVal(PrefName.isOled, false);
+      saveData(PrefName.isOled, false);
     }
     notifyListeners();
   }
 
   Future<void> setOled(bool isOled) async {
     _isOled = isOled;
-    PrefManager.setVal(PrefName.isOled, isOled);
+    saveData(PrefName.isOled, isOled);
     if (isOled) {
       _isDarkMode = true;
-      PrefManager.setVal(PrefName.isDarkMode, _isDarkMode ? 1 : 2);
+      saveData(PrefName.isDarkMode, _isDarkMode ? 1 : 2);
     }
     notifyListeners();
   }
@@ -73,33 +73,33 @@ class ThemeNotifier extends ChangeNotifier {
     _theme = theme;
     useCustomTheme(false);
     setMaterialYou(false);
-    PrefManager.setVal(PrefName.theme, theme);
+    saveData(PrefName.theme, theme);
     notifyListeners();
   }
 
   Future<void> setMaterialYou(bool useMaterialYou) async {
     _useMaterialYou = useMaterialYou;
-    PrefManager.setVal(PrefName.useMaterialYou, useMaterialYou);
+    saveData(PrefName.useMaterialYou, useMaterialYou);
     if (useMaterialYou) {
       _useCustomColor = false;
-      PrefManager.setVal(PrefName.useCustomColor, false);
+      saveData(PrefName.useCustomColor, false);
     }
     notifyListeners();
   }
 
   Future<void> useCustomTheme(bool useCustomTheme) async {
     _useCustomColor = useCustomTheme;
-    PrefManager.setVal(PrefName.useCustomColor, useCustomTheme);
+    saveData(PrefName.useCustomColor, useCustomTheme);
     if (useCustomTheme) {
       _useMaterialYou = false;
-      PrefManager.setVal(PrefName.useMaterialYou, false);
+      saveData(PrefName.useMaterialYou, false);
     }
     notifyListeners();
   }
 
   Future<void> setCustomColor(Color color) async {
     _customColor = color.value;
-    PrefManager.setVal(PrefName.customColor, color.value);
+    saveData(PrefName.customColor, color.value);
     notifyListeners();
   }
 }

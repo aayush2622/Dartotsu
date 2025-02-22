@@ -22,7 +22,7 @@ extension on AnilistQueries {
 
   Future<SearchResults?> _searchMediaResults(
       SearchResults searchResults) async {
-    var adultOnly = PrefManager.getVal(PrefName.adultOnly);
+    var adultOnly = loadData(PrefName.adultOnly);
     final Map<String, dynamic> variables = {
       "type": searchResults.type.name.toUpperCase(),
       if (searchResults.isAdult == true) "isAdult": searchResults.isAdult,

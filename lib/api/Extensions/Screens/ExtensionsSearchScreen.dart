@@ -89,6 +89,7 @@ class ExtensionsSearchScreen extends BaseSearchScreen {
               ),
           ],
         ),
+      SizedBox(height: 128),
     ];
   }
 

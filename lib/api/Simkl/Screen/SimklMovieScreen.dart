@@ -81,7 +81,7 @@ class SimklMovieScreen extends BaseMangaScreen {
         list: airingShows.value,
       ),
     ];
-    final animeLayoutMap = PrefManager.getVal(PrefName.simklMangaLayout);
+    final animeLayoutMap = loadData(PrefName.simklMangaLayout);
     final sectionMap = {
       for (var section in mediaSections) section.pairTitle: section
     };

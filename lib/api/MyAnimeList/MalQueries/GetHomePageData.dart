@@ -25,7 +25,7 @@ extension on MalQueries {
       var animeList = groupBy(responses[0], (m) => m.userStatus ?? 'other');
       var mangaList = groupBy(responses[1], (m) => m.userStatus ?? 'other');
 
-      final removeList = PrefManager.getVal(PrefName.malRemoveList);
+      final removeList = loadData(PrefName.malRemoveList);
       List<Media> removedMedia = [];
 
       Map<String, List<Media>> returnMap = {};

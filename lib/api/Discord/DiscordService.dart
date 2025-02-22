@@ -102,7 +102,7 @@ class _DiscordService extends GetxController {
   }
 
   void _sendIdentify() async {
-    final token = PrefManager.getVal(PrefName.discordToken);
+    final token = loadData(PrefName.discordToken);
 
     final properties = {
       'os': 'linux',
@@ -123,7 +123,7 @@ class _DiscordService extends GetxController {
   }
 
   void _sendResume() async {
-    final token = PrefManager.getVal(PrefName.discordToken);
+    final token = loadData(PrefName.discordToken);
 
     final payload = jsonEncode({
       'op': 6,
@@ -213,11 +213,11 @@ class _DiscordService extends GetxController {
 
   void _saveProfile(Map<String, dynamic> user) async {
     Discord.userName.value = user['username'];
-    PrefManager.setVal(PrefName.discordUserName, user['username']);
+    saveData(PrefName.discordUserName, user['username']);
     var avatar =
         'https://cdn.discordapp.com/avatars/${user['id']}/${user['avatar']}.png';
     Discord.avatar.value = avatar;
-    PrefManager.setVal(PrefName.discordAvatar, avatar);
+    saveData(PrefName.discordAvatar, avatar);
     if (isTemp) {
       stopRPC();
     }

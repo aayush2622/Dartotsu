@@ -636,13 +636,13 @@ class _PlayerControllerState extends State<PlayerController> {
   }
 
   void _playBackSpeedDialog() {
-    var cursed = PrefManager.getVal(PrefName.cursedSpeed);
+    var cursed = loadData(PrefName.cursedSpeed);
     var selectedItemIndex = speedMap(cursed).indexOf(settings.speed);
     AlertDialogBuilder(context)
       ..setTitle("Speed")
       ..singleChoiceItems(speedMap(cursed), selectedItemIndex, (index) {
         settings.speed = speedMap(cursed)[index];
-        PrefManager.setCustomVal('${media.id}-PlayerSettings', settings);
+        saveCustomData('${media.id}-PlayerSettings', settings);
         controller.setRate(
             double.parse(speedMap(cursed)[index].replaceFirst("x", "")));
       })
@@ -897,7 +897,7 @@ class _PlayerControllerState extends State<PlayerController> {
     fitType = (fitType < 2) ? fitType + 1 : 0;
     resizeMode.value = resizeMap[fitType] ?? BoxFit.contain;
     settings.resizeMode = fitType;
-    PrefManager.setCustomVal('${media.id}-PlayerSettings', settings);
+    saveCustomData('${media.id}-PlayerSettings', settings);
     snackString(resizeStringMap[fitType]);
   }
 

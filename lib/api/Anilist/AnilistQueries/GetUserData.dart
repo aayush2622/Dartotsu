@@ -24,7 +24,7 @@ extension on AnilistQueries {
     Anilist.chapterRead = user.statistics?.manga?.chaptersRead;
     Anilist.adult = user.options?.displayAdultContent ?? false;
     Anilist.unreadNotificationCount = user.unreadNotificationCount ?? 0;
-    final unread = PrefManager.getVal(PrefName.unReadCommentNotifications);
+    final unread = loadData(PrefName.unReadCommentNotifications);
     Anilist.unreadNotificationCount += unread;
     Anilist.isInitialized.value = true;
 

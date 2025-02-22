@@ -37,14 +37,14 @@ extension on AnilistQueries {
 
       if (page == null || page.airingSchedules == null) return [];
       var list = await compute(process, {
-        'listOnly': PrefManager.getVal(PrefName.recentlyListOnly),
-        'adultOnly': PrefManager.getVal(PrefName.adultOnly),
+        'listOnly': loadData(PrefName.recentlyListOnly),
+        'adultOnly': loadData(PrefName.adultOnly),
         'list': page.airingSchedules
       });
       return list ?? [];
     }
 
-    final animeLayoutMap = PrefManager.getVal(PrefName.anilistAnimeLayout);
+    final animeLayoutMap = loadData(PrefName.anilistAnimeLayout);
     final animeList =
         await executeQuery<AnimeListResponse>(_queryAnimeList(), force: true);
     Map<String, Future<void> Function()> returnMap = {
@@ -72,7 +72,7 @@ extension on AnilistQueries {
 
   Future<Map<String, List<Media>>> _getMangaList() async {
     final list = <String, List<Media>>{};
-    final mangaLayoutMap = PrefManager.getVal(PrefName.anilistMangaLayout);
+    final mangaLayoutMap = loadData(PrefName.anilistMangaLayout);
     final mangaList =
         await executeQuery<MangaListResponse>(_queryMangaList(), force: true);
 
@@ -102,7 +102,7 @@ extension on AnilistQueries {
 }
 
 String _queryAnimeList() {
-  final animeLayoutMap = PrefManager.getVal(PrefName.anilistAnimeLayout);
+  final animeLayoutMap = loadData(PrefName.anilistAnimeLayout);
   var currentSeasonMap = Anilist.currentSeasons[1];
   var season = currentSeasonMap.keys.first;
   var year = currentSeasonMap.values.first;
@@ -134,7 +134,7 @@ String _queryAnimeList() {
 }
 
 String _queryMangaList() {
-  final mangaLayoutMap = PrefManager.getVal(PrefName.anilistMangaLayout);
+  final mangaLayoutMap = loadData(PrefName.anilistMangaLayout);
   final extra = [
     'trending: ${_buildQueryString("TRENDING_DESC", "MANGA", perPage: 12, country: "JP")}',
     'popularManga: ${_buildQueryString("POPULARITY_DESC", "MANGA", perPage: 50, country: "JP")}',
@@ -180,13 +180,13 @@ String _buildQueryString(String sort, String type,
     int? seasonYear,
     int perPage = 50}) {
   final includeList =
-      (type == "ANIME" && !PrefManager.getVal(PrefName.includeAnimeList))
+      (type == "ANIME" && !loadData(PrefName.includeAnimeList))
           ? "onList:false"
-          : (type == "MANGA" && !PrefManager.getVal(PrefName.includeMangaList))
+          : (type == "MANGA" && !loadData(PrefName.includeMangaList))
               ? "onList:false"
               : "";
 
-  final isAdult = PrefManager.getVal(PrefName.adultOnly) ? "isAdult:true" : "";
+  final isAdult = loadData(PrefName.adultOnly) ? "isAdult:true" : "";
 
   final formatFilter = format != null ? "format:$format, " : "";
 

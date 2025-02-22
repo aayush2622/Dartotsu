@@ -17,7 +17,7 @@ extension on MalQueries {
 
   Future<Map<String, List<Media>>> _getAnimeList() async {
     final list = <String, List<Media>>{};
-    final animeLayoutMap = PrefManager.getVal(PrefName.malAnimeLayout);
+    final animeLayoutMap = loadData(PrefName.malAnimeLayout);
 
     var currentSeasonMap = Mal.currentSeasons[1];
     var season = currentSeasonMap.keys.first;
@@ -76,7 +76,7 @@ extension on MalQueries {
 
   Future<Map<String, List<Media>>> _getMangaList() async {
     final list = <String, List<Media>>{};
-    final mangaLayoutMap = PrefManager.getVal(PrefName.malMangaLayout);
+    final mangaLayoutMap = loadData(PrefName.malMangaLayout);
     final extra = [
       '${MalStrings.endPoint}manga/ranking?offset=0&ranking_type=bypopularity&limit=50&$field',
       '${MalStrings.endPoint}manga/ranking?offset=0&ranking_type=manga&limit=12&$field',

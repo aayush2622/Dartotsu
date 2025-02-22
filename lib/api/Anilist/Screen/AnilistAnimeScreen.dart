@@ -63,7 +63,7 @@ class AnilistAnimeScreen extends BaseAnimeScreen {
       page: page + 1,
       perPage: 50,
       sort: Anilist.sortBy[1],
-      onList: PrefManager.getVal(PrefName.includeAnimeList),
+      onList: loadData(PrefName.includeAnimeList),
     ));
     page++;
     if (result != null) {
@@ -118,7 +118,7 @@ class AnilistAnimeScreen extends BaseAnimeScreen {
         list: mostFavSeries.value,
       ),
     ];
-    final animeLayoutMap = PrefManager.getVal(PrefName.anilistAnimeLayout);
+    final animeLayoutMap = loadData(PrefName.anilistAnimeLayout);
     final sectionMap = {
       for (var section in mediaSections) section.pairTitle: section
     };

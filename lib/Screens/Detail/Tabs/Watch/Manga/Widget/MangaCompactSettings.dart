@@ -240,7 +240,7 @@ class MangaCompactSettings {
         Provider.of<MediaServiceProvider>(Get.context!, listen: false)
             .currentService
             .getName;
-    PrefManager.setCustomVal("Selected-${media.id}-$sourceName", settings);
+    saveCustomData("Selected-${media.id}-$sourceName", settings);
   }
 
   Selected loadSelected() {
@@ -248,7 +248,7 @@ class MangaCompactSettings {
         Provider.of<MediaServiceProvider>(Get.context!, listen: false)
             .currentService
             .getName;
-    return PrefManager.getCustomVal("Selected-${media.id}-$sourceName") ??
+    return loadCustomData("Selected-${media.id}-$sourceName") ??
         Selected();
   }
 }

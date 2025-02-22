@@ -51,11 +51,11 @@ class SettingsPlayerScreenState extends BaseSettingsScreen {
 List<Widget> playerSettings(
     BuildContext context, void Function(void Function()) setState) {
   void savePlayerSettings(PlayerSettings playerSettings) {
-    PrefManager.setVal(PrefName.playerSettings, playerSettings);
+    saveData(PrefName.playerSettings, playerSettings);
     setState(() {});
   }
 
-  var playerSettings = PrefManager.getVal(PrefName.playerSettings);
+  var playerSettings = loadData(PrefName.playerSettings);
   return [
     SettingsAdaptor(
       settings: [
@@ -64,9 +64,9 @@ List<Widget> playerSettings(
           name: getString.cursedSpeed,
           description: getString.cursedSpeedDescription,
           icon: Icons.accessible_forward,
-          isChecked: PrefManager.getVal(PrefName.cursedSpeed),
+          isChecked: loadData(PrefName.cursedSpeed),
           onSwitchChange: (value) {
-            PrefManager.setVal(PrefName.cursedSpeed, value);
+            saveData(PrefName.cursedSpeed, value);
           },
         ),
         Setting(
@@ -74,9 +74,9 @@ List<Widget> playerSettings(
           name: 'ThumbLess SeekBar',
           description: 'Remove thumb from the seek bar',
           icon: Icons.circle_rounded,
-          isChecked: PrefManager.getVal(PrefName.thumbLessSeekBar),
+          isChecked: loadData(PrefName.thumbLessSeekBar),
           onSwitchChange: (value) {
-            PrefManager.setVal(PrefName.thumbLessSeekBar, value);
+            saveData(PrefName.thumbLessSeekBar, value);
             setState(() {});
           },
         ),
@@ -86,7 +86,7 @@ List<Widget> playerSettings(
           description: getString.speedDescription,
           icon: Icons.speed_rounded,
           onClick: () {
-            var cursed = PrefManager.getVal(PrefName.cursedSpeed);
+            var cursed = loadData(PrefName.cursedSpeed);
             AlertDialogBuilder(context)
               ..setTitle(getString.speed)
               ..singleChoiceItems(
@@ -318,7 +318,7 @@ Future<void> openPlayer(BuildContext context) async {
     userPreferredName: 'Local file',
     isAdult: false,
     anime: Anime(
-      playerSettings: PrefManager.getVal(PrefName.playerSettings),
+      playerSettings: loadData(PrefName.playerSettings),
       episodes: {'1': episode},
     ),
   );

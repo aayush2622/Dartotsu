@@ -114,7 +114,7 @@ class _ExtensionScreenState extends ConsumerState<Extension> {
             widget.query.isEmpty ||
             element.name!.toLowerCase().contains(widget.query.toLowerCase()))
         .where((element) =>
-            PrefManager.getVal(PrefName.NSFWExtensions) ||
+            loadData(PrefName.NSFWExtensions) ||
             element.isNsfw == false)
         .toList();
   }
