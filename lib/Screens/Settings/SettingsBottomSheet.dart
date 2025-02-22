@@ -26,8 +26,8 @@ class SettingsBottomSheetState extends State<SettingsBottomSheet> {
   @override
   void initState() {
     super.initState();
-    incognito = PrefManager.getVal(PrefName.incognito);
-    offline = PrefManager.getVal(PrefName.offlineMode);
+    incognito = loadData(PrefName.incognito);
+    offline = loadData(PrefName.offlineMode);
   }
 
   @override
@@ -168,7 +168,7 @@ class SettingsBottomSheetState extends State<SettingsBottomSheet> {
             isChecked: incognito,
             onChanged: (bool value) {
               setState(() {
-                PrefManager.setVal(PrefName.incognito, value);
+                saveData(PrefName.incognito, value);
                 incognito = value;
               });
             }),
@@ -180,7 +180,7 @@ class SettingsBottomSheetState extends State<SettingsBottomSheet> {
             isChecked: offline,
             onChanged: (bool value) {
               setState(() {
-                PrefManager.setVal(PrefName.offlineMode, value);
+                saveData(PrefName.offlineMode, value);
                 offline = value;
               });
             }),

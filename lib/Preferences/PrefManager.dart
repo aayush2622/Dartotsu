@@ -51,7 +51,7 @@ class PrefManager {
   static late Isar _irrelevantPreferences;
   static late Isar _protectedPreferences;
 
-  static final Map<Location, Map<String, dynamic>> _cache = {
+  static final Map<Location, Map<String, dynamic>> cache = {
     Location.General: {},
     Location.Irrelevant: {},
     Location.Protected: {}, // add more and ios will crash
@@ -90,36 +90,36 @@ class PrefManager {
       final isar = _getPrefBox(location);
       final keyValues = await isar.keyValues.where().findAll();
       for (var item in keyValues) {
-        _cache[location]?[item.key] = item.value;
+        cache[location]?[item.key] = item.value;
       }
       final showResponse = await isar.showResponses.where().findAll();
       for (var item in showResponse) {
-        _cache[location]?[item.key] = item;
+        cache[location]?[item.key] = item;
       }
       final selected = await isar.selecteds.where().findAll();
       for (var item in selected) {
-        _cache[location]?[item.key] = item;
+        cache[location]?[item.key] = item;
       }
       final responseToken = await isar.responseTokens.where().findAll();
       for (var item in responseToken) {
-        _cache[location]?[item.key] = item;
+        cache[location]?[item.key] = item;
       }
       final playerSettings = await isar.playerSettings.where().findAll();
       for (var item in playerSettings) {
-        _cache[location]?[item.key] = item;
+        cache[location]?[item.key] = item;
       }
     }
   }
 
   static void setVal<T>(Pref<T> pref, T value) {
-    _cache[pref.location]?[pref.key] = value;
+    cache[pref.location]?[pref.key] = value;
     final isar = _getPrefBox(pref.location);
     return _writeToIsar(isar, pref.key, value);
   }
 
   static T getVal<T>(Pref<T> pref) {
-    if (_cache[pref.location]?.containsKey(pref.key) == true) {
-      return _cache[pref.location]![pref.key] as T;
+    if (cache[pref.location]?.containsKey(pref.key) == true) {
+      return cache[pref.location]![pref.key] as T;
     }
     return pref.defaultValue;
   }
@@ -130,7 +130,7 @@ class PrefManager {
     Location location = Location.Irrelevant,
   }) {
     final isar = _getPrefBox(location);
-    _cache[location]?[key] = value;
+    cache[location]?[key] = value;
     return _writeToIsar(isar, key, value);
   }
 
@@ -138,8 +138,8 @@ class PrefManager {
     String key, {
     Location location = Location.Irrelevant,
   }) {
-    if (_cache[location]?.containsKey(key) == true) {
-      return _cache[location]![key] as T;
+    if (cache[location]?.containsKey(key) == true) {
+      return cache[location]![key] as T;
     }
     return null;
   }
@@ -149,7 +149,7 @@ class PrefManager {
     T value, {
     Location location = Location.Irrelevant,
   }) async {
-    _cache[location]?[key] = value;
+    cache[location]?[key] = value;
     final isar = _getPrefBox(location);
     final keyValue = KeyValue()
       ..key = key
@@ -167,7 +167,7 @@ class PrefManager {
   }
 
   static void removeVal(Pref<dynamic> pref) async {
-    _cache[pref.location]?.remove(pref.key);
+    cache[pref.location]?.remove(pref.key);
     final isar = _getPrefBox(pref.location);
     return isar.writeTxn(() => isar.keyValues.deleteByKey(pref.key));
   }
@@ -176,9 +176,22 @@ class PrefManager {
     String key, {
     Location location = Location.Irrelevant,
   }) async {
-    _cache[location]?.remove(key);
+    cache[location]?.remove(key);
     final isar = _getPrefBox(location);
     return isar.writeTxn(() => isar.keyValues.deleteByKey(key));
+  }
+  static void removeEverything() async {
+
+  }
+  static void addEverything(Map<Location, Map<String, dynamic>> cache) async {
+    for (var location in Location.values) {
+      final isar = _getPrefBox(location);
+      for (var key in cache[location]!.keys) {
+        final value = cache[location]![key];
+        cache[location]?[key] = value;
+        _writeToIsar(isar, key, value);
+      }
+    }
   }
 
   static void _writeToIsar<T>(Isar? isar, String key, T value) {

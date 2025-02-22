@@ -9,7 +9,7 @@ class Logger {
   static final List<String> _logs = [];
 
   static Future<void> init() async {
-    var path = PrefManager.getVal(PrefName.customPath);
+    var path = loadData(PrefName.customPath);
     final directory = await StorageProvider.getDirectory(
         useCustomPath: true, customPath: path);
 

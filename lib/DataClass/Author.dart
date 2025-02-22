@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import '../api/Anilist/Data/character.dart';
+import '../Api/Anilist/Data/character.dart';
 import 'Media.dart';
 
 part 'Data/Author.g.dart';

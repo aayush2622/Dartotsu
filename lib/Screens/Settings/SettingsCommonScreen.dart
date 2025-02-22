@@ -44,17 +44,27 @@ class SettingsCommonScreenState extends BaseSettingsScreen {
             description: getString.customPathDescription,
             icon: Icons.folder,
             isVisible: !(Platform.isIOS || Platform.isMacOS),
-            onLongClick: () => PrefManager.removeVal(PrefName.customPath),
+            onLongClick: () => removeData(PrefName.customPath),
             onClick: () async {
-              var path = PrefManager.getVal(PrefName.customPath);
+              var path = loadData(PrefName.customPath);
               final result = await FilePicker.platform.getDirectoryPath(
                 dialogTitle: getString.selectDirectory,
                 lockParentWindow: true,
                 initialDirectory: path,
               );
               if (result != null) {
-                PrefManager.setVal(PrefName.customPath, result);
+                saveData(PrefName.customPath, result);
               }
+            },
+          ),
+          Setting(
+            type: SettingType.switchType,
+            name: 'Use different Image cache manager',
+            description: 'Just because',
+            icon: Icons.image,
+            isChecked: loadCustomData('useDifferentCacheManager') ?? false,
+            onSwitchChange: (value) {
+              saveCustomData('useDifferentCacheManager', value);
             },
           ),
         ],
@@ -74,9 +84,9 @@ class SettingsCommonScreenState extends BaseSettingsScreen {
             name: getString.hidePrivate,
             description: getString.hidePrivateDescription,
             icon: Icons.visibility_off,
-            isChecked: PrefManager.getVal(PrefName.anilistHidePrivate),
+            isChecked: loadData(PrefName.anilistHidePrivate),
             onSwitchChange: (value) {
-              PrefManager.setVal(PrefName.anilistHidePrivate, value);
+              saveData(PrefName.anilistHidePrivate, value);
               Refresh.activity[RefreshId.Anilist.homePage]?.value = true;
             },
           ),
@@ -87,7 +97,7 @@ class SettingsCommonScreenState extends BaseSettingsScreen {
             icon: Icons.tune,
             onClick: () async {
               final homeLayoutMap =
-                  PrefManager.getVal(PrefName.anilistHomeLayout);
+                  loadData(PrefName.anilistHomeLayout);
               List<String> titles =
                   List<String>.from(homeLayoutMap.keys.toList());
               List<bool> checkedStates =
@@ -103,7 +113,7 @@ class SettingsCommonScreenState extends BaseSettingsScreen {
                   (newCheckedStates) => checkedStates = newCheckedStates,
                 )
                 ..setPositiveButton(getString.ok, () {
-                  PrefManager.setVal(PrefName.anilistHomeLayout,
+                  saveData(PrefName.anilistHomeLayout,
                       Map.fromIterables(titles, checkedStates));
                   Refresh.activity[RefreshId.Anilist.homePage]?.value = true;
                 })
@@ -129,7 +139,7 @@ class SettingsCommonScreenState extends BaseSettingsScreen {
             description: getString.manageLayoutDescription(getString.home),
             icon: Icons.tune,
             onClick: () async {
-              final homeLayoutMap = PrefManager.getVal(PrefName.malHomeLayout);
+              final homeLayoutMap = loadData(PrefName.malHomeLayout);
               List<String> titles =
                   List<String>.from(homeLayoutMap.keys.toList());
               List<bool> checkedStates =
@@ -147,7 +157,7 @@ class SettingsCommonScreenState extends BaseSettingsScreen {
                 ..setPositiveButton(
                   getString.ok,
                   () {
-                    PrefManager.setVal(
+                    saveData(
                       PrefName.malHomeLayout,
                       Map.fromIterables(titles, checkedStates),
                     );
@@ -177,7 +187,7 @@ class SettingsCommonScreenState extends BaseSettingsScreen {
             icon: Icons.tune,
             onClick: () async {
               final homeLayoutMap =
-                  PrefManager.getVal(PrefName.simklHomeLayout);
+                  loadData(PrefName.simklHomeLayout);
               List<String> titles =
                   List<String>.from(homeLayoutMap.keys.toList());
               List<bool> checkedStates =
@@ -195,7 +205,7 @@ class SettingsCommonScreenState extends BaseSettingsScreen {
                 ..setPositiveButton(
                   getString.ok,
                   () {
-                    PrefManager.setVal(
+                    saveData(
                       PrefName.simklHomeLayout,
                       Map.fromIterables(titles, checkedStates),
                     );

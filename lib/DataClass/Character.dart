@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import '../api/Anilist/Data/fuzzyData.dart';
+import '../Api/Anilist/Data/fuzzyData.dart';
 import 'Author.dart';
 import 'Media.dart';
 

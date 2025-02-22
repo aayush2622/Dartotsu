@@ -19,8 +19,8 @@ import '../../../../../../DataClass/Media.dart' as m;
 import '../../../../../../Preferences/IsarDataClasses/Selected/Selected.dart';
 import '../../../../../../Services/ServiceSwitcher.dart';
 import '../../../../../../Widgets/ScrollConfig.dart';
-import '../../../../../../api/Sources/Eval/dart/model/video.dart' as v;
-import '../../../../../../api/Sources/Model/Source.dart';
+import '../../../../../../Api/Sources/Eval/dart/model/video.dart' as v;
+import '../../../../../../Api/Sources/Model/Source.dart';
 import '../Detail/Tabs/Watch/Anime/Widget/AnimeCompactSettings.dart';
 import '../Detail/Tabs/Watch/Anime/Widget/BuildChunkSelector.dart';
 import '../Settings/SettingsPlayerScreen.dart';
@@ -105,7 +105,7 @@ class MediaPlayerState extends State<MediaPlayer>
     currentQuality = widget.videos[widget.index];
     videoPlayerController = WindowsPlayer(resizeMode, settings);
     var sourceName = context.currentService(listen: false).getName;
-    var currentProgress = PrefManager.getCustomVal<int>(
+    var currentProgress = loadCustomData<int>(
       "${widget.media.id}-${widget.currentEpisode.number}-$sourceName-current",
     );
     videoPlayerController.open(
@@ -114,7 +114,7 @@ class MediaPlayerState extends State<MediaPlayer>
   }
 
   void _loadPlayerSettings() {
-    settings = PrefManager.getVal(PrefName.playerSettings);
+    settings = loadData(PrefName.playerSettings);
 
     widget.media.anime?.playerSettings = settings;
 
@@ -673,7 +673,7 @@ class MediaPlayerState extends State<MediaPlayer>
         Provider.of<MediaServiceProvider>(Get.context!, listen: false)
             .currentService
             .getName;
-    PrefManager.setCustomVal("Selected-$id-$sourceName", data);
+    saveCustomData("Selected-$id-$sourceName", data);
   }
 
   Selected loadSelected(m.Media mediaData) {
@@ -681,7 +681,7 @@ class MediaPlayerState extends State<MediaPlayer>
         Provider.of<MediaServiceProvider>(Get.context!, listen: false)
             .currentService
             .getName;
-    return PrefManager.getCustomVal("Selected-${mediaData.id}-$sourceName") ??
+    return loadCustomData("Selected-${mediaData.id}-$sourceName") ??
         Selected();
   }
 }

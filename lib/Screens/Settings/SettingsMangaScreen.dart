@@ -49,7 +49,7 @@ class SettingsMangaScreenState extends BaseSettingsScreen {
             icon: Icons.tune,
             onClick: () async {
               final homeLayoutMap =
-                  PrefManager.getVal(PrefName.anilistMangaLayout);
+                  loadData(PrefName.anilistMangaLayout);
               List<String> titles =
                   List<String>.from(homeLayoutMap.keys.toList());
               List<bool> checkedStates =
@@ -67,7 +67,7 @@ class SettingsMangaScreenState extends BaseSettingsScreen {
                 ..setPositiveButton(
                   getString.ok,
                   () {
-                    PrefManager.setVal(PrefName.anilistMangaLayout,
+                    saveData(PrefName.anilistMangaLayout,
                         Map.fromIterables(titles, checkedStates));
                     Refresh.activity[RefreshId.Anilist.mangaPage]?.value = true;
                   },
@@ -94,7 +94,7 @@ class SettingsMangaScreenState extends BaseSettingsScreen {
             description: getString.manageLayoutDescription(getString.manga),
             icon: Icons.tune,
             onClick: () async {
-              final homeLayoutMap = PrefManager.getVal(PrefName.malMangaLayout);
+              final homeLayoutMap = loadData(PrefName.malMangaLayout);
               List<String> titles =
                   List<String>.from(homeLayoutMap.keys.toList());
               List<bool> checkedStates =
@@ -113,7 +113,7 @@ class SettingsMangaScreenState extends BaseSettingsScreen {
                 ..setPositiveButton(
                   getString.ok,
                   () {
-                    PrefManager.setVal(PrefName.malMangaLayout,
+                    saveData(PrefName.malMangaLayout,
                         Map.fromIterables(titles, checkedStates));
                     Refresh.activity[RefreshId.Mal.mangaPage]?.value = true;
                   },
@@ -140,7 +140,7 @@ class SettingsMangaScreenState extends BaseSettingsScreen {
             description: getString.manageLayoutDescription(getString.movie(1)),
             icon: Icons.tune,
             onClick: () async {
-              final homeLayoutMap = PrefManager.getVal(PrefName.simklMangaLayout);
+              final homeLayoutMap = loadData(PrefName.simklMangaLayout);
               List<String> titles =
               List<String>.from(homeLayoutMap.keys.toList());
               List<bool> checkedStates =
@@ -159,7 +159,7 @@ class SettingsMangaScreenState extends BaseSettingsScreen {
                 ..setPositiveButton(
                   getString.ok,
                       () {
-                    PrefManager.setVal(PrefName.simklMangaLayout,
+                    saveData(PrefName.simklMangaLayout,
                         Map.fromIterables(titles, checkedStates));
                     Refresh.activity[RefreshId.Simkl.mangaPage]?.value = true;
                   },

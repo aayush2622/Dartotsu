@@ -11,10 +11,10 @@ import '../../../../Preferences/IsarDataClasses/ShowResponse/ShowResponse.dart';
 import '../../../../Preferences/PrefManager.dart';
 import '../../../../Services/ServiceSwitcher.dart';
 import '../../../../Widgets/CustomBottomDialog.dart';
-import '../../../../api/Sources/Eval/dart/model/m_manga.dart';
-import '../../../../api/Sources/Model/Manga.dart';
-import '../../../../api/Sources/Model/Source.dart';
-import '../../../../api/Sources/Search/search.dart';
+import '../../../../Api/Sources/Eval/dart/model/m_manga.dart';
+import '../../../../Api/Sources/Model/Manga.dart';
+import '../../../../Api/Sources/Model/Source.dart';
+import '../../../../Api/Sources/Search/search.dart';
 import '../../../Settings/language.dart';
 import 'Widgets/WrongTitle.dart';
 import 'package:dantotsu/Theme/LanguageSwitcher.dart';
@@ -52,7 +52,7 @@ abstract class BaseParser extends GetxController {
     }
 
     var lastUsedSource =
-        PrefManager.getCustomVal<String>('${media.id}-lastUsedSource');
+        loadCustomData<String>('${media.id}-lastUsedSource');
     if (lastUsedSource == null ||
         !sortedSources.any((e) => nameAndLang(e) == lastUsedSource)) {
       lastUsedSource = nameAndLang(sortedSources.first);
@@ -72,7 +72,7 @@ abstract class BaseParser extends GetxController {
         Provider.of<MediaServiceProvider>(Get.context!, listen: false)
             .currentService
             .getName;
-    PrefManager.setCustomVal("Selected-$id-$sourceName", data);
+    saveCustomData("Selected-$id-$sourceName", data);
   }
 
   Selected loadSelected(Media mediaData) {
@@ -80,7 +80,7 @@ abstract class BaseParser extends GetxController {
         Provider.of<MediaServiceProvider>(Get.context!, listen: false)
             .currentService
             .getName;
-    return PrefManager.getCustomVal("Selected-${mediaData.id}-$sourceName") ??
+    return loadCustomData("Selected-${mediaData.id}-$sourceName") ??
         Selected();
   }
 
@@ -221,7 +221,7 @@ abstract class BaseParser extends GetxController {
   }
 
   ShowResponse? _loadShowResponse(Source source, Media mediaData) {
-    return PrefManager.getCustomVal<ShowResponse?>(
+    return loadCustomData<ShowResponse?>(
         "${source.name}_${mediaData.id}_source");
   }
 
@@ -233,7 +233,7 @@ abstract class BaseParser extends GetxController {
         name: response.name!,
         link: response.link!,
         coverUrl: response.imageUrl!);
-    PrefManager.setCustomVal<ShowResponse>(
+    saveCustomData<ShowResponse>(
         "${source.name}_${mediaData.id}_source", show);
   }
 

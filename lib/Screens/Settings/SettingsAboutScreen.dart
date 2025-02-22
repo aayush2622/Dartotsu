@@ -48,7 +48,7 @@ class SettingsAboutScreenState extends BaseSettingsScreen {
         onClick: () async {
           var path = (await StorageProvider.getDirectory(
             useCustomPath: true,
-            customPath: PrefManager.getVal(PrefName.customPath),
+            customPath: loadData(PrefName.customPath),
           ))
               ?.path;
           shareFile("$path\\appLogs.txt".fixSeparator, "LogFile");

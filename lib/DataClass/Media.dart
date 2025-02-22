@@ -1,14 +1,14 @@
 import 'package:dantotsu/Functions/string_extensions.dart';
-import 'package:dantotsu/api/Sources/Model/Source.dart';
+import 'package:dantotsu/Api/Sources/Model/Source.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../Preferences/IsarDataClasses/Selected/Selected.dart';
-import '../api/Anilist/Data/fuzzyData.dart';
-import '../api/Anilist/Data/media.dart' as anilistApi;
-import '../api/Anilist/Data/others.dart';
-import '../api/EpisodeDetails/GetMediaIDs/GetMediaIDs.dart';
-import '../api/MyAnimeList/Data/media.dart' as malApi;
-import '../api/Simkl/Data/Media.dart' as simklApi;
+import '../Api/Anilist/Data/fuzzyData.dart';
+import '../Api/Anilist/Data/media.dart' as anilistApi;
+import '../Api/Anilist/Data/others.dart';
+import '../Api/EpisodeDetails/GetMediaIDs/GetMediaIDs.dart';
+import '../Api/MyAnimeList/Data/media.dart' as malApi;
+import '../Api/Simkl/Data/Media.dart' as simklApi;
 import 'Anime.dart';
 import 'Author.dart';
 import 'Character.dart';

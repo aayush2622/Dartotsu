@@ -13,9 +13,9 @@ Widget handleProgress({
   var sourceName =
       Provider.of<MediaServiceProvider>(context).currentService.getName;
   var currentProgress =
-      PrefManager.getCustomVal<int>("$mediaId-$ep-$sourceName-current");
+      loadCustomData<int>("$mediaId-$ep-$sourceName-current");
   var maxProgress =
-      PrefManager.getCustomVal<int>("$mediaId-$ep-$sourceName-max");
+      loadCustomData<int>("$mediaId-$ep-$sourceName-max");
   if (currentProgress == null || maxProgress == null || maxProgress == 0) {
     return const SizedBox.shrink();
   }

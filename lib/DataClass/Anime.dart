@@ -1,7 +1,7 @@
 import 'package:dantotsu/Preferences/IsarDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import '../api/Anilist/Data/media.dart';
+import '../Api/Anilist/Data/media.dart';
 import 'Author.dart';
 import 'Episode.dart';
 

@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 import '../../Functions/Function.dart';
-import '../../api/EpisodeDetails/GetMediaIDs/GetMediaIDs.dart';
+import '../../Api/EpisodeDetails/GetMediaIDs/GetMediaIDs.dart';
 
 abstract class BaseMediaScreen extends GetxController {
   var page = 1;

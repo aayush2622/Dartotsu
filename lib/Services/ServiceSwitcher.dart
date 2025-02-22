@@ -14,7 +14,7 @@ class MediaServiceProvider with ChangeNotifier {
   MediaService get currentService => _currentService;
 
   MediaServiceProvider() {
-    var preferredService = PrefManager.getVal(PrefName.source);
+    var preferredService = loadData(PrefName.source);
     _currentService =
         _findService(preferredService) ?? MediaService.allServices.first;
   }
@@ -23,7 +23,7 @@ class MediaServiceProvider with ChangeNotifier {
     var newService = _findService(serviceName);
     if (newService != null) {
       _currentService = newService;
-      PrefManager.setVal(PrefName.source, serviceName);
+      saveData(PrefName.source, serviceName);
       notifyListeners();
     } else {
       throw Exception("Service with name $serviceName not found");

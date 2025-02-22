@@ -1,16 +1,16 @@
 import 'dart:io';
 
-import 'package:dantotsu/api/Sources/Model/settings.dart';
+import 'package:dantotsu/Api/Sources/Model/settings.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:isar/isar.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-import 'api/Sources/Eval/dart/model/source_preference.dart';
-import 'api/Sources/Model/Manga.dart';
-import 'api/Sources/Model/Source.dart';
-import 'api/Sources/Model/chapter.dart';
+import 'Api/Sources/Eval/dart/model/source_preference.dart';
+import 'Api/Sources/Model/Manga.dart';
+import 'Api/Sources/Model/Source.dart';
+import 'Api/Sources/Model/chapter.dart';
 
 class StorageProvider {
   static Future<bool> requestPermission() async {

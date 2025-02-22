@@ -6,9 +6,9 @@ import '../../../../../DataClass/Media.dart';
 import '../../../../../Functions/Function.dart';
 import '../../../../../Preferences/PrefManager.dart';
 import '../../../../../Widgets/DropdownMenu.dart';
-import '../../../../../api/Sources/Model/Source.dart';
-import '../../../../../api/Sources/extension_preferences_providers.dart';
-import '../../../../../api/Sources/get_source_preference.dart';
+import '../../../../../Api/Sources/Model/Source.dart';
+import '../../../../../Api/Sources/extension_preferences_providers.dart';
+import '../../../../../Api/Sources/get_source_preference.dart';
 import '../../../../Extensions/ExtensionSettings/ExtensionSettings.dart';
 import '../../../../Settings/language.dart';
 
@@ -55,7 +55,7 @@ class _SourceSelectorState extends ConsumerState<SourceSelector> {
           : source.name!;
     }
 
-    var lastUsedSource = PrefManager.getCustomVal<String>(
+    var lastUsedSource = loadCustomData<String>(
         '${widget.mediaData.id}-lastUsedSource');
     if (lastUsedSource == null ||
         !sources.any((e) => nameAndLang(e) == lastUsedSource)) {
@@ -79,7 +79,7 @@ class _SourceSelectorState extends ConsumerState<SourceSelector> {
                 borderColor: theme.primary,
                 prefixIcon: Icons.source,
                 onChanged: (name) async {
-                  PrefManager.setCustomVal(
+                  saveCustomData(
                       '${widget.mediaData.id}-lastUsedSource', name);
                   lastUsedSource = name;
                   source = sources.firstWhereOrNull(

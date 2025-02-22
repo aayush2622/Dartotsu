@@ -6,7 +6,7 @@ import 'package:icons_plus/icons_plus.dart';
 import '../../Adaptor/Settings/SettingsAdaptor.dart';
 import '../../DataClass/Setting.dart';
 import '../../Theme/LanguageSwitcher.dart';
-import '../../api/Sources/Model/Manga.dart';
+import '../../Api/Sources/Model/Manga.dart';
 import 'BaseSettingsScreen.dart';
 
 class SettingsExtensionsScreen extends StatefulWidget {

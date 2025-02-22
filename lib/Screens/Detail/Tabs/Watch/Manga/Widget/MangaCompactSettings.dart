@@ -10,7 +10,7 @@ import '../../../../../../DataClass/Media.dart';
 import '../../../../../../Preferences/IsarDataClasses/Selected/Selected.dart';
 import '../../../../../../Preferences/PrefManager.dart';
 import '../../../../../../Services/ServiceSwitcher.dart';
-import '../../../../../../api/Sources/Model/Source.dart';
+import '../../../../../../Api/Sources/Model/Source.dart';
 
 class MangaCompactSettings {
   final BuildContext context;
@@ -240,7 +240,7 @@ class MangaCompactSettings {
         Provider.of<MediaServiceProvider>(Get.context!, listen: false)
             .currentService
             .getName;
-    PrefManager.setCustomVal("Selected-${media.id}-$sourceName", settings);
+    saveCustomData("Selected-${media.id}-$sourceName", settings);
   }
 
   Selected loadSelected() {
@@ -248,7 +248,7 @@ class MangaCompactSettings {
         Provider.of<MediaServiceProvider>(Get.context!, listen: false)
             .currentService
             .getName;
-    return PrefManager.getCustomVal("Selected-${media.id}-$sourceName") ??
+    return loadCustomData("Selected-${media.id}-$sourceName") ??
         Selected();
   }
 }

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import '../../../../../Animation/ScaleAnimation.dart';
 import '../../../../../DataClass/User.dart';
 import '../../../../../Widgets/ScrollConfig.dart';
-import '../../../../../api/Anilist/Anilist.dart';
+import '../../../../../Api/Anilist/Anilist.dart';
 import 'ItemFollower.dart';
 
 class FollowerWidget extends StatelessWidget {

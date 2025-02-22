@@ -12,17 +12,17 @@ import 'package:dantotsu/Screens/Player/Platform/WindowsPlayer.dart';
 import 'package:dantotsu/Theme/LanguageSwitcher.dart';
 import 'package:dantotsu/Widgets/AlertDialogBuilder.dart';
 import 'package:dantotsu/Widgets/CustomBottomDialog.dart';
-import 'package:dantotsu/api/Sources/Eval/dart/model/video.dart' as v;
-import 'package:dantotsu/api/Sources/Model/Source.dart';
+import 'package:dantotsu/Api/Sources/Eval/dart/model/video.dart' as v;
+import 'package:dantotsu/Api/Sources/Model/Source.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
 import 'package:window_manager/window_manager.dart';
 
-import '../../../../../../api/Discord/Discord.dart';
-import '../../../../../../api/Discord/DiscordService.dart';
-import '../../../../../../api/EpisodeDetails/Aniskip/Aniskip.dart';
+import '../../../../../../Api/Discord/Discord.dart';
+import '../../../../../../Api/Discord/DiscordService.dart';
+import '../../../../../../Api/EpisodeDetails/Aniskip/Aniskip.dart';
 import '../Settings/SettingsPlayerScreen.dart';
 import 'Platform/BasePlayer.dart';
 import 'Player.dart';
@@ -636,13 +636,13 @@ class _PlayerControllerState extends State<PlayerController> {
   }
 
   void _playBackSpeedDialog() {
-    var cursed = PrefManager.getVal(PrefName.cursedSpeed);
+    var cursed = loadData(PrefName.cursedSpeed);
     var selectedItemIndex = speedMap(cursed).indexOf(settings.speed);
     AlertDialogBuilder(context)
       ..setTitle("Speed")
       ..singleChoiceItems(speedMap(cursed), selectedItemIndex, (index) {
         settings.speed = speedMap(cursed)[index];
-        PrefManager.setCustomVal('${media.id}-PlayerSettings', settings);
+        saveCustomData('${media.id}-PlayerSettings', settings);
         controller.setRate(
             double.parse(speedMap(cursed)[index].replaceFirst("x", "")));
       })
@@ -897,7 +897,7 @@ class _PlayerControllerState extends State<PlayerController> {
     fitType = (fitType < 2) ? fitType + 1 : 0;
     resizeMode.value = resizeMap[fitType] ?? BoxFit.contain;
     settings.resizeMode = fitType;
-    PrefManager.setCustomVal('${media.id}-PlayerSettings', settings);
+    saveCustomData('${media.id}-PlayerSettings', settings);
     snackString(resizeStringMap[fitType]);
   }
 
