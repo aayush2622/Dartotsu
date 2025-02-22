@@ -19,14 +19,12 @@
 > **Note:** This project is currently under development and is not ready for public use.
 
 ## 📥 Downloads
-<p align="center">
-    <img src="https://img.shields.io/badge/Platform-054e57?&style=for-the-badge" alt="Platform Badge"><a href="https://github.com/aayush2622/Dartotsu/releases/latest" target="_blank"><img src="https://img.shields.io/badge/Android-009bb1?labelColor=054e57&style=for-the-badge" alt="Android Badge"></a><a href="https://github.com/aayush2622/Dartotsu/releases/latest" target="_blank"><img src="https://img.shields.io/badge/iOS-009bb1?&style=for-the-badge" alt="iOS Badge"></a><a href="https://github.com/aayush2622/Dartotsu/releases/latest" target="_blank"><img src="https://img.shields.io/badge/macOS-009bb1?&style=for-the-badge" alt="macOS Badge"></a><a href="https://github.com/aayush2622/Dartotsu/releases/latest" target="_blank"><img src="https://img.shields.io/badge/Windows-009bb1?&style=for-the-badge" alt="Windows Badge"></a><a href="https://github.com/aayush2622/Dartotsu/releases/latest" target="_blank"><img src="https://img.shields.io/badge/Linux-009bb1?&style=for-the-badge" alt="Linux Badge"></a>
-   
 > The app is currently in the testing phase. Download it, test the features, and share your feedback or report issues on <a href="https://t.me/Dartotsu" target="_blank">Telegram</a> or <a href="https://discord.gg/eyQdCpdubF" target="_blank">Discord</a>
-   <!--<a href="https://github.com/aayush2622/Dartotsu/releases/latest"><img src="https://img.shields.io/github/v/release/aayush2622/Dartotsu?style=for-the-badge&logoColor=168b94&label=Stable&labelColor=06599d&color=043b69" alt="Latest Stable Release"/></a>
-   <a href="https://github.com/aayush2622/Dartotsu/releases/latest"><img src="https://img.shields.io/github/v/release/aayush2622/Dartotsu?style=for-the-badge&include_prereleases&logoColor=087a87&label=Beta&labelColor=168b94&color=1fa8b3" alt="Latest Pre-release"/></a>
-   <a  href="https://github.com/aayush2622/Dartotsu/releases/latest"><img src="https://img.shields.io/github/v/release/aayush2622/Dartotsu?style=for-the-badge&display_name=tag&label=Alpha&labelColor=087a87&color=168b94" alt="Latest Alpha Release"/></a>-->
-</p>
+
+<a href="https://github.com/aayush2622/Dartotsu/releases/latest"><img src="https://img.shields.io/github/v/release/aayush2622/Dartotsu?style=for-the-badge&logoColor=168b94&label=Stable&labelColor=06599d&color=043b69" alt="Latest Stable Release"/></a><!--
+<a href="https://github.com/aayush2622/Dartotsu/releases/latest"><img src="https://img.shields.io/github/v/release/aayush2622/Dartotsu?style=for-the-badge&include_prereleases&logoColor=087a87&label=Beta&labelColor=168b94&color=1fa8b3" alt="Latest Pre-release"/></a>
+<a  href="https://github.com/aayush2622/Dartotsu/releases/latest"><img src="https://img.shields.io/github/v/release/aayush2622/Dartotsu?style=for-the-badge&display_name=tag&label=Alpha&labelColor=087a87&color=168b94" alt="Latest Alpha Release"/></a>-->
+
 
 ## 📝 Terms of Service
 By using this repository, you agree to our [Terms of Service](TOS.md).
