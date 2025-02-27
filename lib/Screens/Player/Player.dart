@@ -14,13 +14,13 @@ import 'package:screen_brightness/screen_brightness.dart';
 import 'package:volume_controller/volume_controller.dart';
 
 import '../../../../../../Adaptor/Episode/EpisodeAdaptor.dart';
+import '../../../../../../Api/Sources/Eval/dart/model/video.dart' as v;
+import '../../../../../../Api/Sources/Model/Source.dart';
 import '../../../../../../DataClass/Episode.dart';
 import '../../../../../../DataClass/Media.dart' as m;
 import '../../../../../../Preferences/IsarDataClasses/Selected/Selected.dart';
 import '../../../../../../Services/ServiceSwitcher.dart';
 import '../../../../../../Widgets/ScrollConfig.dart';
-import '../../../../../../Api/Sources/Eval/dart/model/video.dart' as v;
-import '../../../../../../Api/Sources/Model/Source.dart';
 import '../Detail/Tabs/Watch/Anime/Widget/AnimeCompactSettings.dart';
 import '../Detail/Tabs/Watch/Anime/Widget/BuildChunkSelector.dart';
 import '../Settings/SettingsPlayerScreen.dart';
@@ -109,7 +109,7 @@ class MediaPlayerState extends State<MediaPlayer>
       "${widget.media.id}-${widget.currentEpisode.number}-$sourceName-current",
     );
     videoPlayerController.open(
-        currentQuality.url, Duration(seconds: currentProgress ?? 0));
+        currentQuality, Duration(seconds: currentProgress ?? 0));
     _onMouseMoved();
   }
 
@@ -153,63 +153,66 @@ class MediaPlayerState extends State<MediaPlayer>
     }
   }
 
+  double? episodePanelWidth;
+
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () {
-        return MouseRegion(
-          onHover: (_) => _onMouseMoved(),
-          cursor: showControls.value
-              ? SystemMouseCursors.basic
-              : SystemMouseCursors.none,
-          child: Scaffold(
-            body: LayoutBuilder(
-              builder: (context, constraints) {
-                const double minWidth = 250;
-                final double availableWidth = constraints.maxWidth;
+    return Scaffold(
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          const double minWidth = 250;
+          final double availableWidth = constraints.maxWidth;
 
-                double episodePanelWidth =
-                    (availableWidth / 3).clamp(minWidth, availableWidth);
+          episodePanelWidth ??=
+              (availableWidth / 3).clamp(minWidth, availableWidth);
 
-                return StatefulBuilder(
-                  builder: (context, setState) {
-                    return Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        _buildVideoPlayer(availableWidth, episodePanelWidth),
-                        Obx(
-                          () {
-                            if (!showEpisodes.value) {
-                              return const SizedBox();
-                            }
-                            return GestureDetector(
-                              onHorizontalDragUpdate: (details) {
-                                setState(
-                                  () => episodePanelWidth =
-                                      (episodePanelWidth - details.delta.dx)
-                                          .clamp(minWidth, availableWidth),
-                                );
-                              },
-                              child: SizedBox(
-                                width: episodePanelWidth,
-                                height: constraints.maxHeight,
-                                child: SingleChildScrollView(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: _buildEpisodeList(),
-                                ),
-                              ),
-                            );
-                          },
+          return StatefulBuilder(
+            builder: (context, setState) {
+              return Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Obx(
+                    () {
+                      return MouseRegion(
+                        onHover: (_) => _onMouseMoved(),
+                        cursor: showControls.value
+                            ? SystemMouseCursors.basic
+                            : SystemMouseCursors.none,
+                        child: _buildVideoPlayer(
+                            availableWidth, episodePanelWidth!),
+                      );
+                    },
+                  ),
+                  Obx(
+                    () {
+                      if (!showEpisodes.value) {
+                        return const SizedBox();
+                      }
+                      return GestureDetector(
+                        onHorizontalDragUpdate: (details) {
+                          setState(
+                            () => episodePanelWidth =
+                                (episodePanelWidth! - details.delta.dx)
+                                    .clamp(minWidth, availableWidth),
+                          );
+                        },
+                        child: SizedBox(
+                          width: episodePanelWidth,
+                          height: constraints.maxHeight,
+                          child: SingleChildScrollView(
+                            padding: const EdgeInsets.all(8.0),
+                            child: _buildEpisodeList(),
+                          ),
                         ),
-                      ],
-                    );
-                  },
-                );
-              },
-            ),
-          ),
-        );
-      },
+                      );
+                    },
+                  ),
+                ],
+              );
+            },
+          );
+        },
+      ),
     );
   }
 
@@ -224,6 +227,34 @@ class MediaPlayerState extends State<MediaPlayer>
           children: [
             videoPlayerController.playerWidget(),
             _buildSubtitle(),
+            AnimatedAlign(
+              alignment: Alignment.topCenter,
+              duration: const Duration(milliseconds: 300),
+              child: Card(
+                color: Colors.black.withOpacity(0.5),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8.0,
+                    vertical: 4.0,
+                  ),
+                  child: Obx(
+                    () {
+                      return isLongPress.value ? Text(
+                        '${videoPlayerController.currentSpeed.value}x ',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ) : SizedBox();
+                    },
+                  ),
+                ),
+              ),
+            ),
             KeyboardListener(
               focusNode: focusNode,
               onKeyEvent: _handleKeyPress,
@@ -232,6 +263,9 @@ class MediaPlayerState extends State<MediaPlayer>
                 onTapDown: (_) => showControls.value = !showControls.value,
                 onPanUpdate: (_) => _onMouseMoved(),
                 onDoubleTapDown: (t) => _handleDoubleTap(t),
+                onLongPressStart: _handleLongPressStart,
+                onLongPressMoveUpdate: _handleLongPressMove,
+                onLongPressEnd: _handleLongPressEnd,
                 onVerticalDragUpdate: (e) async {
                   final delta = e.delta.dy;
                   final Offset position = e.localPosition;
@@ -357,7 +391,6 @@ class MediaPlayerState extends State<MediaPlayer>
   var _volumeInterceptEventStream = false;
   final _volumeValue = 0.0.obs;
   final _brightnessValue = 0.0.obs;
-
   var _defaultBrightness = 0.0;
 
   Future<void> _handleVolumeAndBrightness() async {
@@ -423,6 +456,33 @@ class MediaPlayerState extends State<MediaPlayer>
     final tapPosition = details.globalPosition;
     final isLeft = tapPosition.dx < screenWidth / 2;
     _skipSegments(isLeft);
+  }
+
+  double initialSpeed = 1.0;
+  double currentSpeed = 2.0;
+  Offset? longPressStartPosition;
+  RxBool isLongPress = false.obs;
+  void _handleLongPressStart(LongPressStartDetails details) {
+    isLongPress.value = true;
+    initialSpeed = videoPlayerController.currentSpeed.value;
+    currentSpeed = initialSpeed * 2.0;
+    longPressStartPosition = details.localPosition;
+    videoPlayerController.setRate(currentSpeed);
+  }
+
+  void _handleLongPressMove(LongPressMoveUpdateDetails details) {
+    if (longPressStartPosition == null) return;
+    final double deltaX = details.localPosition.dx - longPressStartPosition!.dx;
+    const double sensitivity = 0.01;
+    currentSpeed = (2.0 + deltaX * sensitivity).clamp(0.25, 16.0);
+    currentSpeed = double.parse(currentSpeed.toStringAsFixed(2));
+    videoPlayerController.setRate(currentSpeed);
+  }
+
+  void _handleLongPressEnd(LongPressEndDetails details) {
+    videoPlayerController.setRate(initialSpeed);
+    longPressStartPosition = null;
+    isLongPress.value = false;
   }
 
   void _skipSegments(bool isLeft) {
@@ -681,7 +741,6 @@ class MediaPlayerState extends State<MediaPlayer>
         Provider.of<MediaServiceProvider>(Get.context!, listen: false)
             .currentService
             .getName;
-    return loadCustomData("Selected-${mediaData.id}-$sourceName") ??
-        Selected();
+    return loadCustomData("Selected-${mediaData.id}-$sourceName") ?? Selected();
   }
 }

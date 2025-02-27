@@ -923,7 +923,7 @@ class _PlayerControllerState extends State<PlayerController> {
                   }
                   currentQuality = videos[index];
                   controller.open(
-                    currentQuality.url,
+                    currentQuality,
                     controller.currentPosition.value,
                   );
                   Get.back();

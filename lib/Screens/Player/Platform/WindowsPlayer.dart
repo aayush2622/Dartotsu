@@ -4,6 +4,7 @@ import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:media_kit_video/media_kit_video.dart';
 
+import '../../../../../../Api/Sources/Eval/dart/model/video.dart' as v;
 import 'BasePlayer.dart';
 
 class WindowsPlayer extends BasePlayer {
@@ -44,8 +45,14 @@ class WindowsPlayer extends BasePlayer {
       videoController.player.setVolume(volume);
 
   @override
-  Future<void> open(String url, Duration duration) async {
-    videoController.player.open(Media(url, start: duration));
+  Future<void> open(v.Video video, Duration duration) async {
+    videoController.player.open(
+      Media(
+        video.url,
+        start: duration,
+        httpHeaders: video.headers,
+      ),
+    );
   }
 
   @override
@@ -84,6 +91,8 @@ class WindowsPlayer extends BasePlayer {
     videoController.player.stream.tracks
         .listen((e) => subtitles.value = e.subtitle);
     videoController.player.stream.subtitle.listen((e) => subtitle.value = e);
+    videoController.player.stream.tracks.listen((e) => audios.value = e.audio);
+    videoController.player.stream.rate.listen((e) => currentSpeed.value = e);
   }
 
   String _formatTime(int seconds) {
