@@ -44,6 +44,8 @@ abstract class BaseSearchScreen extends GetxController {
     canLoadMore.value = true;
   }
 
+  void onSearchIconLongClick(BuildContext context) { }
+
   void onSearchIconClick(
     BuildContext context,
   ) {

@@ -1,5 +1,6 @@
 import 'package:dantotsu/DataClass/User.dart';
 import 'package:dantotsu/Api/Anilist/Screen/Widgets/SearchFilter.dart';
+import 'package:dantotsu/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -9,6 +10,8 @@ import '../../../Adaptor/Media/Widgets/MediaSection.dart';
 import '../../../Adaptor/User/Widgets/UserSection.dart';
 import '../../../DataClass/Media.dart';
 import '../../../DataClass/SearchResults.dart';
+import '../../../Functions/Function.dart';
+import '../../../Screens/Search/SearchScreen.dart';
 import '../../../Services/Screens/BaseSearchScreen.dart';
 import '../Anilist.dart';
 
@@ -72,6 +75,26 @@ class AnilistSearchScreen extends BaseSearchScreen {
 
   void resetData() {
     searchResult.value = null;
+  }
+  @override
+  void onSearchIconLongClick(BuildContext context) {
+    if (navbar.selectedIndex == 0) {
+      navigateToPage(
+        context,
+        SearchScreen(
+          title: searchTypes[0],
+          args: null,
+        ),
+      );
+    } else if (navbar.selectedIndex == 2) {
+      navigateToPage(
+        context,
+        SearchScreen(
+          title: searchTypes[1],
+          args: null,
+        ),
+      );
+    }
   }
 
   @override

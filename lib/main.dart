@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:dantotsu/Api/Sources/Model/Manga.dart';
 import 'package:dantotsu/Functions/Extensions.dart';
 import 'package:dantotsu/Functions/Function.dart';
 import 'package:dantotsu/Screens/Login/LoginScreen.dart';
 import 'package:dantotsu/Screens/Manga/MangaScreen.dart';
-import 'package:dantotsu/Api/Sources/Model/Manga.dart';
 import 'package:desktop_webview_window/desktop_webview_window.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/foundation.dart';
@@ -28,6 +28,8 @@ import 'package:uni_links/uni_links.dart';
 import 'package:uni_links_desktop/uni_links_desktop.dart';
 import 'package:window_manager/window_manager.dart';
 
+import 'Api/Discord/Discord.dart';
+import 'Api/TypeFactory.dart';
 import 'Functions/GetExtensions.dart';
 import 'Preferences/PrefManager.dart';
 import 'Screens/Anime/AnimeScreen.dart';
@@ -39,8 +41,6 @@ import 'StorageProvider.dart';
 import 'Theme/Colors.dart';
 import 'Theme/ThemeManager.dart';
 import 'Theme/ThemeProvider.dart';
-import 'Api/Discord/Discord.dart';
-import 'Api/TypeFactory.dart';
 import 'logger.dart';
 
 late Isar isar;
@@ -91,13 +91,12 @@ Future init() async {
   isar = await StorageProvider.initDB(null);
   await Logger.init();
   await Extensions.init();
-  initializeMediaServices();
+  MediaService.init();
+  TypeFactory.init();
   MediaKit.ensureInitialized();
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
     await WindowManager.instance.ensureInitialized();
   }
-
-  TypeFactory.registerAllTypes();
   initializeDateFormatting();
   final supportedLocales = DateFormat.allLocalesWithSymbols();
   for (var locale in supportedLocales) {
@@ -117,13 +116,6 @@ Future init() async {
   }
   Discord.getSavedToken();
   initDeepLinkListener();
-  Get.config(
-    enableLog: true,
-    logWriterCallback: (text, {isError = false}) async {
-      Logger.log(text);
-      debugPrint(text);
-    },
-  );
 }
 
 void initDeepLinkListener() async {
@@ -159,9 +151,11 @@ void handleDeepLink(Uri uri) {
     }
   });
 
-  snackString(isRepoAdded
-      ? "Added Repo Links Successfully!"
-      : "Missing required parameters in the link.");
+  snackString(
+    isRepoAdded
+        ? "Added Repo Links Successfully!"
+        : "Missing required parameters in the link.",
+  );
 }
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -218,6 +212,13 @@ class MyApp extends StatelessWidget {
             title: 'Dartotsu',
             themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
             debugShowCheckedModeBanner: false,
+            enableLog: true,
+            logWriterCallback: (text, {isError = false}) async {
+              if (isError) {
+                Logger.log(text);
+                debugPrint(text);
+              }
+            },
             theme: getTheme(lightDynamic, themeManager),
             darkTheme: getTheme(darkDynamic, themeManager),
             home: const MainActivity(),
@@ -269,14 +270,17 @@ class MainActivityState extends State<MainActivity> {
           Positioned(
             bottom: 92.bottomBar(),
             right: 12,
-            child: FloatingActionButton(
-              onPressed: () => service.searchScreen?.onSearchIconClick(context),
-
-              foregroundColor: Theme.of(context).colorScheme.outline,
-              backgroundColor:
-                  themeNotifier.isDarkMode ? greyNavDark : greyNavLight,
-              elevation: 12,
-              child: const Icon(Icons.search),
+            child: GestureDetector(
+              onLongPress: () => service.searchScreen?.onSearchIconLongClick(context),
+              child: FloatingActionButton(
+                onPressed: () =>
+                    service.searchScreen?.onSearchIconClick(context),
+                foregroundColor: Theme.of(context).colorScheme.outline,
+                backgroundColor:
+                    themeNotifier.isDarkMode ? greyNavDark : greyNavLight,
+                elevation: 12,
+                child: const Icon(Icons.search),
+              ),
             ),
           ),
         ],
