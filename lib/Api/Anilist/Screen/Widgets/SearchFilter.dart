@@ -318,7 +318,7 @@ class _SearchFilterState extends State<SearchFilter> {
                       isSelected: genres.value?.contains(label) ?? false,
                       action: () {
                         if (genres.value?.contains(label) ?? false) {
-                          genres.value = genres.value?..remove(label);
+                          genres.value = List.from(genres.value ?? [])..remove(label);
                         } else {
                           genres.value = [...(genres.value ?? []), label];
                         }
