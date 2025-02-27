@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 
-import '../Preferences/PrefManager.dart';
-import '../Theme/LanguageSwitcher.dart';
-import '../Widgets/AlertDialogBuilder.dart';
 import '../Api/Sources/Extensions/extensions_provider.dart';
 import '../Api/Sources/Extensions/fetch_anime_sources.dart';
 import '../Api/Sources/Extensions/fetch_manga_sources.dart';
 import '../Api/Sources/Extensions/fetch_novel_sources.dart';
 import '../Api/Sources/Model/Manga.dart';
 import '../Api/Sources/Model/Source.dart';
+import '../Preferences/PrefManager.dart';
+import '../Theme/LanguageSwitcher.dart';
+import '../Widgets/AlertDialogBuilder.dart';
 import 'Function.dart';
 
 class Extensions {
@@ -71,6 +71,10 @@ class Extensions {
 
   static Future<void> setRepo(ItemType itemType, String repo) async {
     repo.trim();
+    if (repo.endsWith('index.min.json')) {
+      snackString('Dartotsu does not support Aniyomi repo');
+      return;
+    }
     if (itemType == ItemType.manga) {
       mangaRepo.value = repo;
       saveCustomData('mangaRepo', repo);
@@ -125,7 +129,10 @@ class Extensions {
                     onTap: () => AlertDialogBuilder(context)
                       ..setTitle('Remove Repo')
                       ..setMessage('You sure you want to remove the repo')
-                      ..setPositiveButton(getString.yes, ()=> removeRepo(type),)
+                      ..setPositiveButton(
+                        getString.yes,
+                        () => removeRepo(type),
+                      )
                       ..setNegativeButton(getString.no, null)
                       ..show(),
                     onLongPress: () => copyToClipboard(installedRepo),
@@ -153,9 +160,22 @@ class Extensions {
       )
       ..setPositiveButton(
         getString.ok,
-        () => text.isNotEmpty ? setRepo(type, text) : null,
+            () {
+          if (text.isEmpty) return;
+          if (text.endsWith('index.min.json')) {
+            AlertDialogBuilder(context)
+              ..setTitle('Invalid Repo')
+              ..setMessage('Dartotsu does not support Aniyomi repo')
+              ..setPositiveButton(getString.ok, null)
+              ..show();
+          } else {
+            setRepo(type, text);
+            Navigator.of(context).pop();
+          }
+        },
       )
-      ..setNegativeButton(getString.cancel, null)
+      ..setNegativeButton(getString.cancel, () => Navigator.of(context).pop())
+      ..popOnFinish(false)
       ..show();
   }
 }

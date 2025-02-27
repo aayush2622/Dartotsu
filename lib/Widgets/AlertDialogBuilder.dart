@@ -24,8 +24,12 @@ class AlertDialogBuilder {
   VoidCallback? _onAttach;
   VoidCallback? _onDismiss;
   bool _cancelable = true;
+  bool _popOnFinish = true;
 
   AlertDialogBuilder(this.context);
+
+  AlertDialogBuilder popOnFinish(bool popOnFinish) =>
+      _with(() => _popOnFinish = popOnFinish);
 
   AlertDialogBuilder setCancelable(bool cancelable) =>
       _with(() => _cancelable = cancelable);
@@ -183,9 +187,13 @@ class AlertDialogBuilder {
                   String item = entry.value;
                   return CheckboxListTile(
                     key: ValueKey(item),
-                    title: Text(item,
-                        style: const TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.bold)),
+                    title: Text(
+                      item,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                     value: _checkedItems![index],
                     onChanged: (bool? value) {
                       setState(() {
@@ -215,9 +223,13 @@ class AlertDialogBuilder {
                 children: _reorderableItems!.map((item) {
                   return ListTile(
                     key: ValueKey(item),
-                    title: Text(item,
-                        style: const TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.bold)),
+                    title: Text(
+                      item,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   );
                 }).toList(),
               ),
@@ -228,9 +240,13 @@ class AlertDialogBuilder {
 
   Widget _buildRadioListContent(StateSetter setState) => _buildListContent(
         (item) => RadioListTile<int>(
-          title: Text(item,
-              style:
-                  const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+          title: Text(
+            item,
+            style: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           value: _items!.indexOf(item),
           groupValue: _selectedItemIndex,
           onChanged: (int? value) {
@@ -245,9 +261,13 @@ class AlertDialogBuilder {
         (item) {
           final index = _items!.indexOf(item);
           return CheckboxListTile(
-            title: Text(item,
-                style:
-                    const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+            title: Text(
+              item,
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             value: _checkedItems![index],
             onChanged: (bool? value) {
               setState(() => _checkedItems![index] = value!);
@@ -260,18 +280,21 @@ class AlertDialogBuilder {
 
   Widget _buildListContent(Widget Function(String) itemBuilder) =>
       ConstrainedBox(
-        constraints:
-            BoxConstraints(minWidth: MediaQuery.of(context).size.width * 0.7),
+        constraints: BoxConstraints(
+          minWidth: MediaQuery.of(context).size.width * 0.7,
+        ),
         child: SingleChildScrollView(
           child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: _items!.map(itemBuilder).toList()),
+            mainAxisSize: MainAxisSize.min,
+            children: _items!.map(itemBuilder).toList(),
+          ),
         ),
       );
 
   Widget _buildDefaultContent() => ConstrainedBox(
-        constraints:
-            BoxConstraints(minWidth: MediaQuery.of(context).size.width * 0.7),
+        constraints: BoxConstraints(
+          minWidth: MediaQuery.of(context).size.width * 0.7,
+        ),
         child: _customView ?? Text(_message ?? ''),
       );
 
@@ -280,15 +303,30 @@ class AlertDialogBuilder {
     final actions = <Widget>[];
     if (_neutralButtonTitle != null) {
       actions.add(
-          _buildButton(_neutralButtonTitle!, _onNeutralButtonClick, theme));
+        _buildButton(
+          _neutralButtonTitle!,
+          _onNeutralButtonClick,
+          theme,
+        ),
+      );
     }
     if (_negativeButtonTitle != null) {
       actions.add(
-          _buildButton(_negativeButtonTitle!, _onNegativeButtonClick, theme));
+        _buildButton(
+          _negativeButtonTitle!,
+          _onNegativeButtonClick,
+          theme,
+        ),
+      );
     }
     if (_positiveButtonTitle != null) {
       actions.add(
-          _buildButton(_positiveButtonTitle!, _onPositiveButtonClick, theme));
+        _buildButton(
+          _positiveButtonTitle!,
+          _onPositiveButtonClick,
+          theme,
+        ),
+      );
     }
     return actions;
   }
@@ -297,13 +335,18 @@ class AlertDialogBuilder {
       TextButton(
         onPressed: () {
           onClick?.call();
-          Navigator.of(context).pop();
+          if (_popOnFinish) {
+            Navigator.of(context).pop();
+          }
         },
-        child: Text(title,
-            style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: theme.primary)),
+        child: Text(
+          title,
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+            color: theme.primary,
+          ),
+        ),
       );
 
   AlertDialogBuilder _with(VoidCallback action) {
