@@ -114,10 +114,8 @@ class MediaPlayerState extends State<MediaPlayer>
   }
 
   void _loadPlayerSettings() {
-    settings = loadData(PrefName.playerSettings);
-
+    settings = loadCustomData('${widget.media.id}-${context.currentService(listen: false).getName}-PlayerSettings') ?? loadData(PrefName.playerSettings);
     widget.media.anime?.playerSettings = settings;
-
     resizeMode = (resizeMap[settings.resizeMode] ?? BoxFit.contain).obs;
     viewType = loadSelected(widget.media).recyclerStyle.obs;
     reverse = loadSelected(widget.media).recyclerReversed.obs;

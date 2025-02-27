@@ -642,7 +642,7 @@ class _PlayerControllerState extends State<PlayerController> {
       ..setTitle("Speed")
       ..singleChoiceItems(speedMap(cursed), selectedItemIndex, (index) {
         settings.speed = speedMap(cursed)[index];
-        saveCustomData('${media.id}-PlayerSettings', settings);
+        saveCustomData('${media.id}-${context.currentService(listen: false).getName}-PlayerSettings', settings);
         controller.setRate(
             double.parse(speedMap(cursed)[index].replaceFirst("x", "")));
       })
@@ -897,7 +897,7 @@ class _PlayerControllerState extends State<PlayerController> {
     fitType = (fitType < 2) ? fitType + 1 : 0;
     resizeMode.value = resizeMap[fitType] ?? BoxFit.contain;
     settings.resizeMode = fitType;
-    saveCustomData('${media.id}-PlayerSettings', settings);
+    saveCustomData('${media.id}-${context.currentService(listen: false).getName}-PlayerSettings', settings);
     snackString(resizeStringMap[fitType]);
   }
 

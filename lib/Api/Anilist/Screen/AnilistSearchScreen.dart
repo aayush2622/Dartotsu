@@ -187,7 +187,7 @@ class AnilistSearchScreen extends BaseSearchScreen {
                 ),
               ],
             ),
-            SizedBox(height: 8),
+            SizedBox(height: 4),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -236,7 +236,7 @@ class AnilistSearchScreen extends BaseSearchScreen {
                 ),
               ],
             ),
-            SizedBox(height: 8),
+            SizedBox(height: 4),
           ],
         );
       })
