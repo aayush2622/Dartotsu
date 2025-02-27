@@ -60,11 +60,12 @@ abstract class MediaService {
       ),
     );
   }
-}
 
-void initializeMediaServices() {
-  AnilistService();
-  MalService();
-  SimklService();
-  ExtensionsService();
+  static void init() {
+    AnilistService();
+    MalService();
+    SimklService();
+    ExtensionsService();
+  }
+
 }

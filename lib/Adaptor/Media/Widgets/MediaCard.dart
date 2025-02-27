@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
-import '../../../Functions/Function.dart';
 import '../../../Widgets/CachedNetworkImage.dart';
 
 Widget MediaCard(
-    BuildContext context, String title, Widget route, String imageUrl) {
+  BuildContext context,
+  String title,
+  String imageUrl, {
+  void Function()? onTap,
+}) {
   double height = 72;
   final theme = Theme.of(context).colorScheme;
   var screenWidth = MediaQuery.of(context).size.width;
@@ -13,7 +16,7 @@ Widget MediaCard(
   double radius = 10;
 
   return GestureDetector(
-    onTap: () => navigateToPage(context, route),
+    onTap: onTap,
     child: Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(radius),

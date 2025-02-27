@@ -52,7 +52,17 @@ class InfoPageState extends State<InfoPage> {
         if (widget.mediaData.synonyms.isNotEmpty) ..._buildSynonyms(theme),
         FollowerWidget(follower: widget.mediaData.users, type: type),
         if (widget.mediaData.genres.isNotEmpty)
-          _buildWithPadding([GenreWidget(context, widget.mediaData)]),
+          _buildWithPadding(
+            [
+              GenreWidget(
+                context,
+                widget.mediaData.genres,
+                widget.mediaData.anime != null
+                    ? SearchType.ANIME
+                    : SearchType.MANGA,
+              ),
+            ],
+          ),
         if (widget.mediaData.tags.isNotEmpty) ..._buildTags(theme),
         ..._buildPrequelSection(),
         if (widget.mediaData.relations?.isNotEmpty ?? false)
@@ -231,15 +241,21 @@ class InfoPageState extends State<InfoPage> {
             MediaCard(
               context,
               getString.prequel,
-              MediaInfoPage(prequel, prequelTag),
               prequel.banner ?? prequel.cover ?? 'https://bit.ly/31bsIHq',
+              onTap: () => navigateToPage(
+                context,
+                MediaInfoPage(prequel, prequelTag),
+              ),
             ),
           if (sequel != null)
             MediaCard(
               context,
               getString.sequel,
-              MediaInfoPage(sequel, sequelTag),
               sequel.banner ?? sequel.cover ?? 'https://bit.ly/2ZGfcuG',
+              onTap: () => navigateToPage(
+                context,
+                MediaInfoPage(sequel, sequelTag),
+              ),
             ),
         ],
       )
@@ -371,7 +387,8 @@ class InfoPageState extends State<InfoPage> {
   }
 
   List<ChipData> _generateChips(List<String> labels) {
-    var title = widget.mediaData.anime != null ? SearchType.ANIME : SearchType.MANGA;
+    var title =
+        widget.mediaData.anime != null ? SearchType.ANIME : SearchType.MANGA;
     return labels.map((label) {
       return ChipData(
         label: label,

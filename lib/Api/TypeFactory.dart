@@ -23,7 +23,7 @@ class TypeFactory {
     return factory(json) as T;
   }
 
-  static void registerAllTypes() {
+  static void init() {
     _registerAnilistTypes();
     _registerMalTypes();
     _registerSimklTypes();

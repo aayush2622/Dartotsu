@@ -122,20 +122,7 @@ class AnimeScreenState extends State<AnimeScreen> {
                     child: SlideInAnimation(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          MediaCard(
-                            context,
-                            getString.genres.toUpperCase(),
-                            const Text(""),
-                            "https://s4.anilist.co/file/anilistcdn/media/anime/banner/16498-8jpFCOcDmneX.jpg",
-                          ),
-                          MediaCard(
-                            context,
-                            getString.calendar.toUpperCase(),
-                            const CalendarScreen(),
-                            "https://s4.anilist.co/file/anilistcdn/media/anime/banner/125367-hGPJLSNfprO3.jpg",
-                          ),
-                        ],
+                        children: service.trendingCards(context),
                       ),
                     ),
                   ),
