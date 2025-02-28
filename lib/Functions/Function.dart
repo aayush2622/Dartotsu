@@ -79,7 +79,7 @@ Future<void> snackString(
   BuildContext? c,
 }) async {
   var context = c ?? navigatorKey.currentContext ?? Get.context;
-
+  Logger.log(s ?? '');
   if (context != null && s != null && s.isNotEmpty) {
     var theme = Theme.of(context).colorScheme;
     Logger.log(s);

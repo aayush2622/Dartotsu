@@ -27,6 +27,7 @@ import 'package:provider/provider.dart';
 import 'package:uni_links/uni_links.dart';
 import 'package:uni_links_desktop/uni_links_desktop.dart';
 import 'package:window_manager/window_manager.dart';
+import 'package:shorebird_code_push/shorebird_code_push.dart';
 
 import 'Api/Discord/Discord.dart';
 import 'Api/TypeFactory.dart';
@@ -80,6 +81,8 @@ void main(List<String> args) async {
     ),
   );
 }
+
+
 
 Future init() async {
   if (Platform.isWindows) {
@@ -242,6 +245,11 @@ class MainActivityState extends State<MainActivity> {
   int _selectedIndex = 1;
 
   void _onTabSelected(int index) => setState(() => _selectedIndex = index);
+@override
+  void initState() {
+    super.initState();
+    checkForUpdate();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -286,5 +294,20 @@ class MainActivityState extends State<MainActivity> {
         ],
       ),
     );
+  }
+}
+Future<void> checkForUpdate() async {
+  final updater = ShorebirdUpdater();
+  final status = await updater.checkForUpdate();
+  debugPrint('Update Status: $status');
+  if (status == UpdateStatus.outdated) {
+    try {
+      snackString('New Update found');
+      await updater.update();
+      snackString('Updated to the latest version! Restart the app');
+    } on UpdateException catch (error) {
+      Logger.log('Error updating: $error');
+      throw ('Error updating: $error');
+    }
   }
 }

@@ -22,9 +22,10 @@ dependencies:
   flutter_riverpod: ^2.6.1
   riverpod_annotation: ^2.6.1
   provider: ^6.1.2
-  get: ^4.6.6
+  get: ^4.7.2
 
   # Networking
+  shorebird_code_push: ^2.0.3
   http: ^1.3.0
   web_socket_channel: ^3.0.2
   http_interceptor: ^2.0.0
@@ -47,9 +48,9 @@ dependencies:
   cached_network_image: ^3.4.1
   precached_network_image: ^1.2.4
   flutter_svg: ^2.0.17
-  flex_color_scheme: ^8.1.0
+  flex_color_scheme: ^8.1.1
   flex_color_picker: ^3.7.0
-  flutter_markdown: ^0.7.5
+  flutter_markdown: ^0.7.6+2
   icons_plus: ^5.0.0
 
   # UI Enhancements
@@ -160,6 +161,7 @@ flutter:
     - assets/svg/mal.svg
     - assets/svg/simkl.svg
     - assets/svg/extensions.svg
+    - shorebird.yaml
 # Flutter Launcher Icons Configuration
 # dart run flutter_launcher_icons
 flutter_icons:
