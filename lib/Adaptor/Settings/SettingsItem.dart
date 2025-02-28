@@ -76,6 +76,14 @@ class SettingSwitchItemState extends State<SettingSwitchItem> {
   }
 
   @override
+  void didUpdateWidget(covariant SettingSwitchItem oldWidget) {
+    if (oldWidget.setting.isChecked != widget.setting.isChecked) {
+      setState(() => _isChecked = widget.setting.isChecked);
+    }
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
   Widget build(BuildContext context) {
     if (!widget.setting.isVisible) return const SizedBox.shrink();
 

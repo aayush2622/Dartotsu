@@ -1,5 +1,4 @@
 import 'package:dantotsu/Functions/Extensions.dart';
-import 'package:dantotsu/Screens/Calendar/CalendarScreen.dart';
 import 'package:dantotsu/Theme/LanguageSwitcher.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
@@ -7,7 +6,6 @@ import 'package:provider/provider.dart';
 
 import '../../Adaptor/Media/MediaAdaptor.dart';
 import '../../Adaptor/Media/Widgets/Chips.dart';
-import '../../Adaptor/Media/Widgets/MediaCard.dart';
 import '../../Animation/SlideInAnimation.dart';
 import '../../Functions/Function.dart';
 import '../../Services/Screens/BaseAnimeScreen.dart';
@@ -122,20 +120,7 @@ class AnimeScreenState extends State<AnimeScreen> {
                     child: SlideInAnimation(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          MediaCard(
-                            context,
-                            getString.genres.toUpperCase(),
-                            const Text(""),
-                            "https://s4.anilist.co/file/anilistcdn/media/anime/banner/16498-8jpFCOcDmneX.jpg",
-                          ),
-                          MediaCard(
-                            context,
-                            getString.calendar.toUpperCase(),
-                            const CalendarScreen(),
-                            "https://s4.anilist.co/file/anilistcdn/media/anime/banner/125367-hGPJLSNfprO3.jpg",
-                          ),
-                        ],
+                        children: service.trendingCards(context),
                       ),
                     ),
                   ),

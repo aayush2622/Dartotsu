@@ -289,14 +289,26 @@ class HomeScreenState extends State<HomeScreen> {
               MediaCard(
                 context,
                 getString.list(getString.anime).toUpperCase(),
-                MediaListScreen(anime: true, id: data.userid ?? 0),
                 service.listImages.value[0] ?? 'https://bit.ly/31bsIHq',
+                onTap: () => navigateToPage(
+                  context,
+                  MediaListScreen(
+                    anime: true,
+                    id: data.userid ?? 0,
+                  ),
+                ),
               ),
               MediaCard(
                 context,
                 getString.list(getString.manga).toUpperCase(),
-                MediaListScreen(anime: false, id: data.userid ?? 0),
                 service.listImages.value[1] ?? 'https://bit.ly/2ZGfcuG',
+                onTap: () => navigateToPage(
+                  context,
+                  MediaListScreen(
+                    anime: false,
+                    id: data.userid ?? 0,
+                  ),
+                ),
               ),
             ],
           );

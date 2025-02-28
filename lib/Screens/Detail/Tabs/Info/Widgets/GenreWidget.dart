@@ -3,18 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:dantotsu/Theme/LanguageSwitcher.dart';
 
-import '../../../../../DataClass/Media.dart';
 import '../../../../../DataClass/SearchResults.dart';
 import '../../../../../Widgets/GenreItem.dart';
 import '../../../../Search/SearchScreen.dart';
 
-Widget GenreWidget(BuildContext context, Media media) {
+Widget GenreWidget(BuildContext context, List<String> genres, SearchType type) {
   final theme = Theme.of(context).colorScheme;
   final screenWidth = MediaQuery.of(context).size.width;
   var crossAxisCount = ((screenWidth) / 164).floor();
   if (crossAxisCount < 1) crossAxisCount = 1;
-  var title = media.anime != null ? SearchType.ANIME : SearchType.MANGA;
-  var genre = media.genres;
   return Padding(
     padding: const EdgeInsets.symmetric(vertical: 16.0),
     child: Column(
@@ -36,28 +33,28 @@ Widget GenreWidget(BuildContext context, Media media) {
           crossAxisSpacing: 16,
           crossAxisCount: crossAxisCount,
           children: List.generate(
-            genre.length,
+            genres.length,
             (index) {
               return GestureDetector(
                 onTap: () => navigateToPage(
                   context,
                   SearchScreen(
-                    title: title,
+                    title: type,
                     forceSearch: true,
                     args: SearchResults(
-                      type: title,
+                      type: type,
                       sort: "POPULARITY_DESC",
-                      genres: [genre[index]],
+                      genres: [genres[index]],
                     ),
                   ),
                 ),
-                onLongPress: () => copyToClipboard(genre[index]),
+                onLongPress: () => copyToClipboard(genres[index]),
                 child: SizedBox(
                   width: 154,
                   height: 54,
                   child: GenreItem(
                     context,
-                    genre[index].toUpperCase(),
+                    genres[index].toUpperCase(),
                   ),
                 ),
               );

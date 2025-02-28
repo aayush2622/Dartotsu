@@ -127,14 +127,14 @@ class MangaScreenState extends State<MangaScreen> {
                           MediaCard(
                             context,
                             getString.genres,
-                            const Text(''),
                             "https://s4.anilist.co/file/anilistcdn/media/manga/banner/105778-wk5qQ7zAaTGl.jpg",
+                            onTap: () {},
                           ),
                           MediaCard(
                             context,
                             'TOP SCORE',
-                            const Text(''),
                             "https://s4.anilist.co/file/anilistcdn/media/manga/banner/30002-3TuoSMl20fUX.jpg",
+                            onTap: () {},
                           ),
                         ],
                       ),
