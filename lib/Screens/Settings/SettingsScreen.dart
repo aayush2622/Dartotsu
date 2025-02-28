@@ -4,6 +4,7 @@ import 'package:dantotsu/Screens/Settings/SettingsThemeScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:icons_plus/icons_plus.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 import '../../Adaptor/Settings/SettingsAdaptor.dart';
 import '../../DataClass/Setting.dart';
@@ -25,6 +26,7 @@ class SettingsScreen extends StatefulWidget {
 class SettingsScreenState extends BaseSettingsScreen {
   @override
   String title() => getString.settings;
+
 
   @override
   Widget icon() => ClipOval(
@@ -116,6 +118,20 @@ class SettingsScreenState extends BaseSettingsScreen {
     ];
   }
 
+  @override
+  void initState() {
+    super.initState();
+    loadVersion();
+  }
+
+  String appVersion = '';
+  Future<void> loadVersion() async {
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    setState(() {
+      appVersion = '${packageInfo.version}+${packageInfo.buildNumber}';
+    });
+  }
+
   Widget _buildInfoSection(BuildContext context) {
     var theme = Theme.of(context).colorScheme;
     return Column(
@@ -183,8 +199,8 @@ class SettingsScreenState extends BaseSettingsScreen {
           ],
         ),
         const SizedBox(height: 12),
-        const Text(
-          'Version Current',
+        Text(
+          'Version $appVersion',
           textAlign: TextAlign.center,
           style: TextStyle(
             fontFamily: 'Poppins',

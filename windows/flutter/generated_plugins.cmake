@@ -3,6 +3,7 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
+  app_links
   desktop_webview_window
   dynamic_color
   flutter_inappwebview_windows
@@ -14,7 +15,6 @@ list(APPEND FLUTTER_PLUGIN_LIST
   screen_brightness_windows
   screen_retriever_windows
   share_plus
-  uni_links_desktop
   url_launcher_windows
   window_manager
   window_to_front

@@ -76,13 +76,12 @@ dependencies:
   wakelock_plus: ^1.2.10
   volume_controller: ^2.0.8 #dont change
   screen_brightness: ^2.0.1 #dont change
-  uni_links: ^0.5.1
-  uni_links_desktop:
-    git:
-      url: https://github.com/leanflutter/uni_links_desktop.git
-      ref: main
+  app_links: ^6.3.3
+  win32: ^5.10.1
+  ffi: ^2.1.4
   # Miscellaneous
   device_info_plus: ^11.2.1
+  package_info_plus: ^8.3.0
   file_picker: ^8.3.1
   share_plus: ^10.1.4
   url_launcher: ^6.3.1

@@ -24,14 +24,14 @@ import 'package:media_kit/media_kit.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:uni_links/uni_links.dart';
-import 'package:uni_links_desktop/uni_links_desktop.dart';
+import 'package:app_links/app_links.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:shorebird_code_push/shorebird_code_push.dart';
 
 import 'Api/Discord/Discord.dart';
 import 'Api/TypeFactory.dart';
 import 'Functions/GetExtensions.dart';
+import 'Functions/RegisterProtocol/Api.dart';
 import 'Preferences/PrefManager.dart';
 import 'Screens/Anime/AnimeScreen.dart';
 import 'Screens/Home/HomeScreen.dart';
@@ -86,7 +86,7 @@ void main(List<String> args) async {
 
 Future init() async {
   if (Platform.isWindows) {
-    ['dar', 'anymex', 'sugoireads', 'mangayomi'].forEach(registerProtocol);
+    ['dar', 'anymex', 'sugoireads', 'mangayomi'].forEach(registerProtocolHandler);
   }
   await StorageProvider.requestPermission();
   await dotenv.load(fileName: ".env");
@@ -122,15 +122,17 @@ Future init() async {
 }
 
 void initDeepLinkListener() async {
+  final appLink = AppLinks();
   try {
-    final initialUri = await getInitialUri();
+
+    final initialUri = await appLink.getInitialLink();
     if (initialUri != null) handleDeepLink(initialUri);
   } catch (err) {
     snackString('Error getting initial deep link: $err');
   }
 
-  uriLinkStream.listen(
-    (uri) => uri != null ? handleDeepLink(uri) : null,
+  appLink.uriLinkStream.listen(
+    (uri) => handleDeepLink(uri),
     onError: (err) => snackString('Error Opening link: $err'),
   );
 }
