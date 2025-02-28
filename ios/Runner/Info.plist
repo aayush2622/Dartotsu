@@ -71,6 +71,8 @@
 	<true/>
 	<key>UISupportsDocumentBrowser</key>
 	<true/>
+	<key>FlutterDeepLinkingEnabled</key>
+    <false/>
     <key>CFBundleURLTypes</key>
     <array>
         <dict>
