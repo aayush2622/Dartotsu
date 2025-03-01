@@ -44,7 +44,7 @@ class SettingsMangaScreenState extends BaseSettingsScreen {
         settings: [
           Setting(
             type: SettingType.normal,
-            name: getString.manageLayout(getString.manga, getString.anilist),
+            name: getString.manageLayout(getString.anilist, getString.manga),
             description: getString.manageLayoutDescription(getString.manga),
             icon: Icons.tune,
             onClick: () async {
@@ -57,7 +57,7 @@ class SettingsMangaScreenState extends BaseSettingsScreen {
 
               AlertDialogBuilder(context)
                 ..setTitle(
-                    getString.manageLayout(getString.manga, getString.anilist))
+                    getString.manageLayout(getString.anilist, getString.manga))
                 ..reorderableMultiSelectableItems(
                   titles,
                   checkedStates,
@@ -90,7 +90,7 @@ class SettingsMangaScreenState extends BaseSettingsScreen {
         settings: [
           Setting(
             type: SettingType.normal,
-            name: getString.manageLayout(getString.manga, getString.mal),
+            name: getString.manageLayout(getString.mal, getString.manga),
             description: getString.manageLayoutDescription(getString.manga),
             icon: Icons.tune,
             onClick: () async {
@@ -102,7 +102,7 @@ class SettingsMangaScreenState extends BaseSettingsScreen {
 
               AlertDialogBuilder(context)
                 ..setTitle(
-                  getString.manageLayout(getString.manga, getString.mal),
+                  getString.manageLayout(getString.mal, getString.manga),
                 )
                 ..reorderableMultiSelectableItems(
                   titles,
@@ -136,7 +136,7 @@ class SettingsMangaScreenState extends BaseSettingsScreen {
         settings: [
           Setting(
             type: SettingType.normal,
-            name: getString.manageLayout(getString.movie(1), getString.simkl),
+            name: getString.manageLayout(getString.simkl, getString.movie(1)),
             description: getString.manageLayoutDescription(getString.movie(1)),
             icon: Icons.tune,
             onClick: () async {
@@ -148,7 +148,7 @@ class SettingsMangaScreenState extends BaseSettingsScreen {
 
               AlertDialogBuilder(context)
                 ..setTitle(
-                  getString.manageLayout(getString.movie(1), getString.simkl),
+                  getString.manageLayout(getString.simkl, getString.movie(1)),
                 )
                 ..reorderableMultiSelectableItems(
                   titles,
