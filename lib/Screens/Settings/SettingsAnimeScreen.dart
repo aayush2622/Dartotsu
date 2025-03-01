@@ -102,7 +102,7 @@ class SettingsAnimeScreenState extends BaseSettingsScreen {
         settings: [
           Setting(
             type: SettingType.normal,
-            name: getString.manageLayout(getString.home, getString.mal),
+            name: getString.manageLayout(getString.mal, getString.home),
             description: getString.manageLayoutDescription(getString.home),
             icon: Icons.tune,
             onClick: () async {
@@ -154,7 +154,7 @@ class SettingsAnimeScreenState extends BaseSettingsScreen {
               List<bool>.from(homeLayoutMap.values.toList());
               AlertDialogBuilder(context)
                 ..setTitle(
-                    getString.manageLayout(getString.home, getString.simkl))
+                    getString.manageLayout(getString.simkl, getString.home))
                 ..reorderableMultiSelectableItems(
                   titles,
                   checkedStates,
