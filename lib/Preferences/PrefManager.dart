@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:dantotsu/logger.dart';
+import 'package:dartotsu/logger.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:isar/isar.dart';
 

@@ -1,4 +1,4 @@
-import 'package:dantotsu/Functions/string_extensions.dart';
+import 'package:dartotsu/Functions/string_extensions.dart';
 import 'package:http_interceptor/http_interceptor.dart';
 
 import '../Eval/dart/model/video.dart';

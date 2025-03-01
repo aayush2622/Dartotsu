@@ -1,7 +1,7 @@
 import 'package:collection/collection.dart';
-import 'package:dantotsu/DataClass/Media.dart';
-import 'package:dantotsu/DataClass/SearchResults.dart';
-import 'package:dantotsu/Api/MyAnimeList/Data/userData.dart';
+import 'package:dartotsu/DataClass/Media.dart';
+import 'package:dartotsu/DataClass/SearchResults.dart';
+import 'package:dartotsu/Api/MyAnimeList/Data/userData.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 

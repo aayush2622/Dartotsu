@@ -1,8 +1,8 @@
-import 'package:dantotsu/Adaptor/Media/Widgets/MediaSection.dart';
-import 'package:dantotsu/DataClass/Media.dart';
-import 'package:dantotsu/Functions/Function.dart';
-import 'package:dantotsu/Api/Simkl/Simkl.dart';
-import 'package:dantotsu/Api/Simkl/SimklQueries.dart';
+import 'package:dartotsu/Adaptor/Media/Widgets/MediaSection.dart';
+import 'package:dartotsu/DataClass/Media.dart';
+import 'package:dartotsu/Functions/Function.dart';
+import 'package:dartotsu/Api/Simkl/Simkl.dart';
+import 'package:dartotsu/Api/Simkl/SimklQueries.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 

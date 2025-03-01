@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:dantotsu/Api/Sources/Eval/javascript/preferences.dart';
-import 'package:dantotsu/Api/Sources/Eval/javascript/utils.dart';
+import 'package:dartotsu/Api/Sources/Eval/javascript/preferences.dart';
+import 'package:dartotsu/Api/Sources/Eval/javascript/utils.dart';
 import 'package:flutter_qjs/flutter_qjs.dart';
 
 import '../../Model/Source.dart';

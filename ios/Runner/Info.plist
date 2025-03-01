@@ -13,7 +13,7 @@
     <key>CFBundleInfoDictionaryVersion</key>
     <string>6.0</string>
     <key>CFBundleName</key>
-    <string>dantotsu</string>
+    <string>dartotsu</string>
     <key>CFBundlePackageType</key>
     <string>APPL</string>
     <key>CFBundleShortVersionString</key>
@@ -37,7 +37,7 @@
         <string></string>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>dantotsu</string>
+          <string>dartotsu</string>
         </array>
       </dict>
     </array>

@@ -1,6 +1,6 @@
-import 'package:dantotsu/Screens/Settings/BaseSettingsScreen.dart';
-import 'package:dantotsu/Screens/Settings/SettingsAccountScreen.dart';
-import 'package:dantotsu/Screens/Settings/SettingsThemeScreen.dart';
+import 'package:dartotsu/Screens/Settings/BaseSettingsScreen.dart';
+import 'package:dartotsu/Screens/Settings/SettingsAccountScreen.dart';
+import 'package:dartotsu/Screens/Settings/SettingsThemeScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:icons_plus/icons_plus.dart';
