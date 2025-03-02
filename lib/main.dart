@@ -124,7 +124,6 @@ Future init() async {
 void initDeepLinkListener() async {
   final appLink = AppLinks();
   try {
-
     final initialUri = await appLink.getInitialLink();
     if (initialUri != null) handleDeepLink(initialUri);
   } catch (err) {
@@ -298,6 +297,7 @@ class MainActivityState extends State<MainActivity> {
     );
   }
 }
+
 Future<void> checkForUpdate() async {
   final updater = ShorebirdUpdater();
   final status = await updater.checkForUpdate();

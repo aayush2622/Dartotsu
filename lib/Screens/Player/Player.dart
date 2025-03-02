@@ -260,7 +260,7 @@ class MediaPlayerState extends State<MediaPlayer>
               onKeyEvent: _handleKeyPress,
               child: GestureDetector(
                 behavior: HitTestBehavior.opaque,
-                onTapDown: (_) => showControls.value = !showControls.value,
+                onTap: () => showControls.value = !showControls.value,
                 onPanUpdate: (_) => _onMouseMoved(),
                 onDoubleTapDown: (t) => _handleDoubleTap(t),
                 onLongPressStart: _handleLongPressStart,
@@ -483,7 +483,7 @@ class MediaPlayerState extends State<MediaPlayer>
   void _handleLongPressMove(LongPressMoveUpdateDetails details) {
     if (longPressStartPosition == null) return;
     final double deltaX = details.localPosition.dx - longPressStartPosition!.dx;
-    const double sensitivity = 0.01;
+    const double sensitivity = 0.04;
     currentSpeed = (2.0 + deltaX * sensitivity).clamp(0.25, 16.0);
     currentSpeed = double.parse(currentSpeed.toStringAsFixed(2));
     videoPlayerController.setRate(currentSpeed);

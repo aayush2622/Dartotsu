@@ -251,14 +251,7 @@ class MediaGridState extends State<MediaAdaptor> {
               (index) {
                 final tag = _generateTag(index);
                 return GestureDetector(
-                  onTap: () {
-                    if (widget.onMediaTap != null) {
-                      widget.onMediaTap!(index, _mediaList[index]);
-                    } else {
-                      navigateToPage(
-                          context, MediaInfoPage(_mediaList[index], tag));
-                    }
-                  },
+                  onTap: () => _handleMediaTap(index, _mediaList[index], tag),
                   onLongPress: () {},
                   child: SizedBox(
                     width: 108,

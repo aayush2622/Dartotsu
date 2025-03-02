@@ -318,7 +318,8 @@ class _SearchFilterState extends State<SearchFilter> {
                       isSelected: genres.value?.contains(label) ?? false,
                       action: () {
                         if (genres.value?.contains(label) ?? false) {
-                          genres.value = List.from(genres.value ?? [])..remove(label);
+                          genres.value = List.from(genres.value ?? [])
+                            ..remove(label);
                         } else {
                           genres.value = [...(genres.value ?? []), label];
                         }
@@ -339,7 +340,8 @@ class _SearchFilterState extends State<SearchFilter> {
                       isSelected: tags.value?.contains(label) ?? false,
                       action: () {
                         if (tags.value?.contains(label) ?? false) {
-                          tags.value = tags.value?..remove(label);
+                          tags.value = List.from(tags.value ?? [])
+                            ..remove(label);
                         } else {
                           tags.value = [...(tags.value ?? []), label];
                         }

@@ -41,8 +41,10 @@ class SettingsAnimeScreenState extends BaseSettingsScreen {
             description: 'Change player settings',
             icon: Icons.video_settings,
             isActivity: true,
-            onClick: () =>
-                navigateToPage(context, const SettingsPlayerScreen()),
+            onClick: () => navigateToPage(
+              context,
+              const SettingsPlayerScreen(),
+            ),
           ),
         ],
       ),
@@ -62,8 +64,7 @@ class SettingsAnimeScreenState extends BaseSettingsScreen {
             description: getString.manageLayoutDescription(getString.home),
             icon: Icons.tune,
             onClick: () async {
-              final homeLayoutMap =
-                  loadData(PrefName.anilistAnimeLayout);
+              final homeLayoutMap = loadData(PrefName.anilistAnimeLayout);
               var titles = List<String>.from(homeLayoutMap.keys.toList());
               var checkedStates =
                   List<bool>.from(homeLayoutMap.values.toList());
@@ -151,15 +152,15 @@ class SettingsAnimeScreenState extends BaseSettingsScreen {
               final homeLayoutMap = loadData(PrefName.simklAnimeLayout);
               var titles = List<String>.from(homeLayoutMap.keys.toList());
               var checkedStates =
-              List<bool>.from(homeLayoutMap.values.toList());
+                  List<bool>.from(homeLayoutMap.values.toList());
               AlertDialogBuilder(context)
                 ..setTitle(
                     getString.manageLayout(getString.home, getString.simkl))
                 ..reorderableMultiSelectableItems(
                   titles,
                   checkedStates,
-                      (reorderedItems) => titles = reorderedItems,
-                      (newCheckedStates) => checkedStates = newCheckedStates,
+                  (reorderedItems) => titles = reorderedItems,
+                  (newCheckedStates) => checkedStates = newCheckedStates,
                 )
                 ..setPositiveButton(getString.ok, () {
                   saveData(

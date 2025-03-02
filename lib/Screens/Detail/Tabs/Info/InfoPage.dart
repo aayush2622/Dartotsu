@@ -400,7 +400,7 @@ class InfoPageState extends State<InfoPage> {
             args: SearchResults(
               type: title,
               sort: "POPULARITY_DESC",
-              tags: [label.split(" ")[0]],
+              tags: [label.split(" ").sublist(0, label.split(" ").length - 2).join(" ")],
             ),
           ),
         ),
