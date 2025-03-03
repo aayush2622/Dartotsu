@@ -1,6 +1,6 @@
 import 'package:blur/blur.dart';
-import 'package:dantotsu/Functions/Extensions.dart';
-import 'package:dantotsu/Theme/LanguageSwitcher.dart';
+import 'package:dartotsu/Functions/Extensions.dart';
+import 'package:dartotsu/Theme/LanguageSwitcher.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:kenburns_nullsafety/kenburns_nullsafety.dart';

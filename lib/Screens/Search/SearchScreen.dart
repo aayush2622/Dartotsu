@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:dantotsu/Functions/Extensions.dart';
-import 'package:dantotsu/Functions/Function.dart';
-import 'package:dantotsu/Preferences/PrefManager.dart';
-import 'package:dantotsu/Services/Screens/BaseSearchScreen.dart';
+import 'package:dartotsu/Functions/Extensions.dart';
+import 'package:dartotsu/Functions/Function.dart';
+import 'package:dartotsu/Preferences/PrefManager.dart';
+import 'package:dartotsu/Services/Screens/BaseSearchScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';

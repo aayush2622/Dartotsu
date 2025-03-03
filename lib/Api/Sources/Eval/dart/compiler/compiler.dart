@@ -9,7 +9,7 @@ Uint8List compilerEval(String code) {
   final plugin = MEvalPlugin();
   compiler.addPlugin(plugin);
   final program = compiler.compile({
-    'dantotsu': {'main.dart': code}
+    'dartotsu': {'main.dart': code}
   });
 
   final bytecode = program.write();

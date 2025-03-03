@@ -1,5 +1,5 @@
-import 'package:dantotsu/Functions/GetExtensions.dart';
-import 'package:dantotsu/Preferences/PrefManager.dart';
+import 'package:dartotsu/Functions/GetExtensions.dart';
+import 'package:dartotsu/Preferences/PrefManager.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 

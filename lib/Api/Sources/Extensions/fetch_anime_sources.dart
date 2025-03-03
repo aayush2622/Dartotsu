@@ -1,4 +1,4 @@
-import 'package:dantotsu/Functions/GetExtensions.dart';
+import 'package:dartotsu/Functions/GetExtensions.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../Preferences/PrefManager.dart';

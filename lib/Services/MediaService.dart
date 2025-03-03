@@ -1,5 +1,5 @@
-import 'package:dantotsu/Services/Screens/BaseLoginScreen.dart';
-import 'package:dantotsu/Api/Simkl/SimklService.dart';
+import 'package:dartotsu/Services/Screens/BaseLoginScreen.dart';
+import 'package:dartotsu/Api/Simkl/SimklService.dart';
 import 'package:flutter/material.dart';
 
 import '../Screens/HomeNavbar.dart';

@@ -1,6 +1,6 @@
-import 'package:dantotsu/Screens/Extensions/ExtensionList.dart';
-import 'package:dantotsu/Widgets/AlertDialogBuilder.dart';
-import 'package:dantotsu/Api/Sources/Model/Source.dart';
+import 'package:dartotsu/Screens/Extensions/ExtensionList.dart';
+import 'package:dartotsu/Widgets/AlertDialogBuilder.dart';
+import 'package:dartotsu/Api/Sources/Model/Source.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

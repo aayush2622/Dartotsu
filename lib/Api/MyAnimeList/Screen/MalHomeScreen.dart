@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:dantotsu/Theme/LanguageSwitcher.dart';
+import 'package:dartotsu/Theme/LanguageSwitcher.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

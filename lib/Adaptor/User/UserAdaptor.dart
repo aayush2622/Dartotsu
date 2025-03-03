@@ -1,7 +1,7 @@
 import 'dart:math';
 
-import 'package:dantotsu/DataClass/User.dart';
-import 'package:dantotsu/Functions/Function.dart';
+import 'package:dartotsu/DataClass/User.dart';
+import 'package:dartotsu/Functions/Function.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 

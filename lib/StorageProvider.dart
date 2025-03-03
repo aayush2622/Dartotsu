@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:dantotsu/Api/Sources/Model/settings.dart';
+import 'package:dartotsu/Api/Sources/Model/settings.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:isar/isar.dart';
 import 'package:path/path.dart' as path;

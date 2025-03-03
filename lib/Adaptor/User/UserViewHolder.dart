@@ -1,4 +1,4 @@
-import 'package:dantotsu/DataClass/User.dart';
+import 'package:dartotsu/DataClass/User.dart';
 import 'package:flutter/material.dart';
 
 import '../../Widgets/CachedNetworkImage.dart';

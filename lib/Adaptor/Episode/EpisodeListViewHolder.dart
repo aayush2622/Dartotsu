@@ -1,7 +1,7 @@
-import 'package:dantotsu/Functions/string_extensions.dart';
-import 'package:dantotsu/Theme/Colors.dart';
-import 'package:dantotsu/Theme/ThemeProvider.dart';
-import 'package:dantotsu/Widgets/CachedNetworkImage.dart';
+import 'package:dartotsu/Functions/string_extensions.dart';
+import 'package:dartotsu/Theme/Colors.dart';
+import 'package:dartotsu/Theme/ThemeProvider.dart';
+import 'package:dartotsu/Widgets/CachedNetworkImage.dart';
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

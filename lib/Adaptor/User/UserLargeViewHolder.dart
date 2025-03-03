@@ -1,5 +1,5 @@
 import 'package:blur/blur.dart';
-import 'package:dantotsu/DataClass/User.dart';
+import 'package:dartotsu/DataClass/User.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

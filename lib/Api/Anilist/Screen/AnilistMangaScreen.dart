@@ -1,4 +1,4 @@
-import 'package:dantotsu/DataClass/SearchResults.dart';
+import 'package:dartotsu/DataClass/SearchResults.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 

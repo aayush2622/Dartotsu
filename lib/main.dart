@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:dantotsu/Api/Sources/Model/Manga.dart';
-import 'package:dantotsu/Functions/Extensions.dart';
-import 'package:dantotsu/Functions/Function.dart';
-import 'package:dantotsu/Screens/Login/LoginScreen.dart';
-import 'package:dantotsu/Screens/Manga/MangaScreen.dart';
+import 'package:dartotsu/Api/Sources/Model/Manga.dart';
+import 'package:dartotsu/Functions/Extensions.dart';
+import 'package:dartotsu/Functions/Function.dart';
+import 'package:dartotsu/Screens/Login/LoginScreen.dart';
+import 'package:dartotsu/Screens/Manga/MangaScreen.dart';
 import 'package:desktop_webview_window/desktop_webview_window.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/foundation.dart';

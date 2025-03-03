@@ -1,12 +1,12 @@
 import 'dart:math';
 
-import 'package:dantotsu/Adaptor/Charactes/Widgets/EntitySection.dart';
-import 'package:dantotsu/DataClass/SearchResults.dart';
-import 'package:dantotsu/Functions/Function.dart';
-import 'package:dantotsu/Screens/Detail/Tabs/Info/Widgets/FollowerWidget.dart';
-import 'package:dantotsu/Screens/Detail/Tabs/Info/Widgets/GenreWidget.dart';
-import 'package:dantotsu/Screens/Search/SearchScreen.dart';
-import 'package:dantotsu/Theme/LanguageSwitcher.dart';
+import 'package:dartotsu/Adaptor/Charactes/Widgets/EntitySection.dart';
+import 'package:dartotsu/DataClass/SearchResults.dart';
+import 'package:dartotsu/Functions/Function.dart';
+import 'package:dartotsu/Screens/Detail/Tabs/Info/Widgets/FollowerWidget.dart';
+import 'package:dartotsu/Screens/Detail/Tabs/Info/Widgets/GenreWidget.dart';
+import 'package:dartotsu/Screens/Search/SearchScreen.dart';
+import 'package:dartotsu/Theme/LanguageSwitcher.dart';
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
 import 'package:html/parser.dart' as html_parser;

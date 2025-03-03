@@ -1,4 +1,4 @@
-import 'package:dantotsu/Api/Sources/Eval/javascript/http.dart';
+import 'package:dartotsu/Api/Sources/Eval/javascript/http.dart';
 import 'package:flutter_qjs/flutter_qjs.dart';
 import 'package:js_packer/js_packer.dart';
 

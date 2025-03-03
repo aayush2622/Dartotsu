@@ -1,7 +1,7 @@
 import 'dart:math';
 
-import 'package:dantotsu/Functions/Function.dart';
-import 'package:dantotsu/Preferences/PrefManager.dart';
+import 'package:dartotsu/Functions/Function.dart';
+import 'package:dartotsu/Preferences/PrefManager.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

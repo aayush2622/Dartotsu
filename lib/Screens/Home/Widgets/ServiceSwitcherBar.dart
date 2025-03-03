@@ -1,6 +1,6 @@
-import 'package:dantotsu/Functions/Extensions.dart';
-import 'package:dantotsu/Services/ServiceSwitcher.dart';
-import 'package:dantotsu/Widgets/LoadSvg.dart';
+import 'package:dartotsu/Functions/Extensions.dart';
+import 'package:dartotsu/Services/ServiceSwitcher.dart';
+import 'package:dartotsu/Widgets/LoadSvg.dart';
 import 'package:flutter/material.dart';
 
 import '../../../Widgets/CustomBottomDialog.dart';

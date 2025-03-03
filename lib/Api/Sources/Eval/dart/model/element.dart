@@ -1,4 +1,4 @@
-import 'package:dantotsu/Api/Sources/dom_extensions.dart';
+import 'package:dartotsu/Api/Sources/dom_extensions.dart';
 import 'package:html/dom.dart';
 
 class MElement {

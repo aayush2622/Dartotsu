@@ -17,7 +17,7 @@ import '../../../../Api/Sources/Model/Source.dart';
 import '../../../../Api/Sources/Search/search.dart';
 import '../../../Settings/language.dart';
 import 'Widgets/WrongTitle.dart';
-import 'package:dantotsu/Theme/LanguageSwitcher.dart';
+import 'package:dartotsu/Theme/LanguageSwitcher.dart';
 
 abstract class BaseParser extends GetxController {
   var selectedMedia = Rxn<MManga?>(null);

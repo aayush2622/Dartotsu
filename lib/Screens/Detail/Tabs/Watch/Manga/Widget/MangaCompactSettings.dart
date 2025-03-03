@@ -1,7 +1,7 @@
-import 'package:dantotsu/Functions/Function.dart';
-import 'package:dantotsu/Screens/WebView/WebView.dart';
-import 'package:dantotsu/Theme/LanguageSwitcher.dart';
-import 'package:dantotsu/Widgets/AlertDialogBuilder.dart';
+import 'package:dartotsu/Functions/Function.dart';
+import 'package:dartotsu/Screens/WebView/WebView.dart';
+import 'package:dartotsu/Theme/LanguageSwitcher.dart';
+import 'package:dartotsu/Widgets/AlertDialogBuilder.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';

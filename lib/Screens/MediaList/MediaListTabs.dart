@@ -1,4 +1,4 @@
-import 'package:dantotsu/Adaptor/Media/MediaAdaptor.dart';
+import 'package:dartotsu/Adaptor/Media/MediaAdaptor.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 

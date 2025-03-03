@@ -75,7 +75,7 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="dantotsu" android:host="anilist" />
+                <data android:scheme="dartotsu" android:host="anilist" />
             </intent-filter>
 
             <intent-filter android:label="Login for Dartotsu">
@@ -89,7 +89,7 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="dartotsu" android:host="simkl" />
+                <data android:scheme="dantotsu" android:host="simkl" />
 
             </intent-filter>
         </activity>

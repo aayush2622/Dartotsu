@@ -1,4 +1,4 @@
-import 'package:dantotsu/Api/Sources/Eval/dart/model/m_chapter.dart';
+import 'package:dartotsu/Api/Sources/Eval/dart/model/m_chapter.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'Data/Episode.g.dart';

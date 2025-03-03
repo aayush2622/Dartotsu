@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:math';
 
-import 'package:dantotsu/Api/MyAnimeList/MalQueries/MalStrings.dart';
+import 'package:dartotsu/Api/MyAnimeList/MalQueries/MalStrings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_web_auth_2/flutter_web_auth_2.dart';
@@ -39,7 +39,7 @@ CustomBottomDialog login(BuildContext context) {
               useWebview: true,
             ),
             url: url,
-            callbackUrlScheme: 'dantotsu',
+            callbackUrlScheme: 'dartotsu',
           );
           final code = Uri.parse(response).queryParameters['code'] ?? '';
           snackString('Getting Token');
