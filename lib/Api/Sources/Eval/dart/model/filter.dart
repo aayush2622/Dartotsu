@@ -1,4 +1,4 @@
-import 'package:dantotsu/Api/Sources/Eval/javascript/http.dart';
+import 'package:dartotsu/Api/Sources/Eval/javascript/http.dart';
 
 class FilterList {
   List<dynamic> filters;

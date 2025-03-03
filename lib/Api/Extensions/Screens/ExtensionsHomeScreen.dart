@@ -1,7 +1,7 @@
 import 'dart:math';
 
-import 'package:dantotsu/Preferences/PrefManager.dart';
-import 'package:dantotsu/Theme/LanguageSwitcher.dart';
+import 'package:dartotsu/Preferences/PrefManager.dart';
+import 'package:dartotsu/Theme/LanguageSwitcher.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

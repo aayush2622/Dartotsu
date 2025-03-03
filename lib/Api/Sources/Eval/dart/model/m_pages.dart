@@ -1,4 +1,4 @@
-import 'package:dantotsu/Api/Sources/Model/Source.dart';
+import 'package:dartotsu/Api/Sources/Model/Source.dart';
 
 import '../../../../../DataClass/Anime.dart';
 import '../../../../../DataClass/Manga.dart';

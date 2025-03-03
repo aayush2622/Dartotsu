@@ -1,4 +1,4 @@
-import 'package:dantotsu/Preferences/IsarDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
+import 'package:dartotsu/Preferences/IsarDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../Api/Anilist/Data/media.dart';

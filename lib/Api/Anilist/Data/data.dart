@@ -1,5 +1,5 @@
-import 'package:dantotsu/Api/Anilist/Data/page.dart';
-import 'package:dantotsu/Api/Anilist/Data/user.dart';
+import 'package:dartotsu/Api/Anilist/Data/page.dart';
+import 'package:dartotsu/Api/Anilist/Data/user.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'media.dart';

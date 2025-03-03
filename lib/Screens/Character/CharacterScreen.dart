@@ -1,8 +1,8 @@
-import 'package:dantotsu/Adaptor/Charactes/Widgets/EntitySection.dart';
-import 'package:dantotsu/Adaptor/Media/Widgets/MediaSection.dart';
-import 'package:dantotsu/DataClass/Character.dart';
-import 'package:dantotsu/Theme/ThemeProvider.dart';
-import 'package:dantotsu/Widgets/CachedNetworkImage.dart';
+import 'package:dartotsu/Adaptor/Charactes/Widgets/EntitySection.dart';
+import 'package:dartotsu/Adaptor/Media/Widgets/MediaSection.dart';
+import 'package:dartotsu/DataClass/Character.dart';
+import 'package:dartotsu/Theme/ThemeProvider.dart';
+import 'package:dartotsu/Widgets/CachedNetworkImage.dart';
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
 import 'package:html/parser.dart' as html_parser;

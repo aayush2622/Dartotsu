@@ -1,4 +1,4 @@
-import 'package:dantotsu/Theme/LanguageSwitcher.dart';
+import 'package:dartotsu/Theme/LanguageSwitcher.dart';
 import 'package:flutter/material.dart';
 
 import '../../Adaptor/Settings/SettingsAdaptor.dart';

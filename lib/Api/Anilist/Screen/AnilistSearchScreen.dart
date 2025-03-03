@@ -1,6 +1,6 @@
-import 'package:dantotsu/DataClass/User.dart';
-import 'package:dantotsu/Api/Anilist/Screen/Widgets/SearchFilter.dart';
-import 'package:dantotsu/main.dart';
+import 'package:dartotsu/DataClass/User.dart';
+import 'package:dartotsu/Api/Anilist/Screen/Widgets/SearchFilter.dart';
+import 'package:dartotsu/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

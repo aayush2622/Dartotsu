@@ -1,11 +1,11 @@
-import 'package:dantotsu/Services/Screens/BaseAnimeScreen.dart';
-import 'package:dantotsu/Services/Screens/BaseHomeScreen.dart';
-import 'package:dantotsu/Services/Screens/BaseLoginScreen.dart';
-import 'package:dantotsu/Services/Screens/BaseMangaScreen.dart';
-import 'package:dantotsu/Services/Screens/BaseSearchScreen.dart';
-import 'package:dantotsu/Theme/LanguageSwitcher.dart';
-import 'package:dantotsu/Api/Anilist/Screen/AnilistAnimeScreen.dart';
-import 'package:dantotsu/Api/Anilist/Screen/AnilistSearchScreen.dart';
+import 'package:dartotsu/Services/Screens/BaseAnimeScreen.dart';
+import 'package:dartotsu/Services/Screens/BaseHomeScreen.dart';
+import 'package:dartotsu/Services/Screens/BaseLoginScreen.dart';
+import 'package:dartotsu/Services/Screens/BaseMangaScreen.dart';
+import 'package:dartotsu/Services/Screens/BaseSearchScreen.dart';
+import 'package:dartotsu/Theme/LanguageSwitcher.dart';
+import 'package:dartotsu/Api/Anilist/Screen/AnilistAnimeScreen.dart';
+import 'package:dartotsu/Api/Anilist/Screen/AnilistSearchScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 

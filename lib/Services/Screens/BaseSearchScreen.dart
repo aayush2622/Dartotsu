@@ -1,6 +1,6 @@
-import 'package:dantotsu/DataClass/SearchResults.dart';
-import 'package:dantotsu/Functions/Function.dart';
-import 'package:dantotsu/Screens/Search/SearchScreen.dart';
+import 'package:dartotsu/DataClass/SearchResults.dart';
+import 'package:dartotsu/Functions/Function.dart';
+import 'package:dartotsu/Screens/Search/SearchScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

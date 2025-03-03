@@ -1,4 +1,4 @@
-import 'package:dantotsu/DataClass/Media.dart';
+import 'package:dartotsu/DataClass/Media.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 

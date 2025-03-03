@@ -1,4 +1,4 @@
-import 'package:dantotsu/Theme/LanguageSwitcher.dart';
+import 'package:dartotsu/Theme/LanguageSwitcher.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
 

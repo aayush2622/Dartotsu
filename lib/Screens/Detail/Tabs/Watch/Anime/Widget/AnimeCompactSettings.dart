@@ -1,5 +1,5 @@
-import 'package:dantotsu/Theme/LanguageSwitcher.dart';
-import 'package:dantotsu/Widgets/AlertDialogBuilder.dart';
+import 'package:dartotsu/Theme/LanguageSwitcher.dart';
+import 'package:dartotsu/Widgets/AlertDialogBuilder.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';

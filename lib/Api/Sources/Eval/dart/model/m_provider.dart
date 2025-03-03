@@ -1,4 +1,4 @@
-import 'package:dantotsu/Api/Sources/Eval/dart/model/video.dart';
+import 'package:dartotsu/Api/Sources/Eval/dart/model/video.dart';
 
 import 'filter.dart';
 import 'm_manga.dart';

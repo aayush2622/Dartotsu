@@ -1,5 +1,5 @@
-import 'package:dantotsu/Screens/Settings/BaseSettingsScreen.dart';
-import 'package:dantotsu/Theme/LanguageSwitcher.dart';
+import 'package:dartotsu/Screens/Settings/BaseSettingsScreen.dart';
+import 'package:dartotsu/Theme/LanguageSwitcher.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

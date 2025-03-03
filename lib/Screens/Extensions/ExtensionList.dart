@@ -1,4 +1,4 @@
-import 'package:dantotsu/Preferences/PrefManager.dart';
+import 'package:dartotsu/Preferences/PrefManager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:grouped_list/sliver_grouped_list.dart';

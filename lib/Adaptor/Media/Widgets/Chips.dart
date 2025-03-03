@@ -1,4 +1,4 @@
-import 'package:dantotsu/Functions/Function.dart';
+import 'package:dartotsu/Functions/Function.dart';
 import 'package:flutter/material.dart';
 
 import '../../../Widgets/ScrollConfig.dart';

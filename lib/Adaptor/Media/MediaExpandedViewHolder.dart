@@ -1,5 +1,5 @@
-import 'package:dantotsu/DataClass/Media.dart';
-import 'package:dantotsu/Functions/Extensions.dart';
+import 'package:dartotsu/DataClass/Media.dart';
+import 'package:dartotsu/Functions/Extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

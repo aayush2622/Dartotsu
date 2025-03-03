@@ -1,11 +1,11 @@
 import 'dart:ui';
 
 import 'package:blur/blur.dart';
-import 'package:dantotsu/Functions/Extensions.dart';
-import 'package:dantotsu/Screens/Detail/Tabs/Info/InfoPage.dart';
-import 'package:dantotsu/Screens/Detail/Tabs/Watch/Anime/AnimeWatchScreen.dart';
-import 'package:dantotsu/Screens/Detail/Tabs/Watch/Manga/MangaWatchScreen.dart';
-import 'package:dantotsu/Screens/Detail/Tabs/Watch/Source/Source.dart';
+import 'package:dartotsu/Functions/Extensions.dart';
+import 'package:dartotsu/Screens/Detail/Tabs/Info/InfoPage.dart';
+import 'package:dartotsu/Screens/Detail/Tabs/Watch/Anime/AnimeWatchScreen.dart';
+import 'package:dartotsu/Screens/Detail/Tabs/Watch/Manga/MangaWatchScreen.dart';
+import 'package:dartotsu/Screens/Detail/Tabs/Watch/Source/Source.dart';
 import 'package:expandable_page_view/expandable_page_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

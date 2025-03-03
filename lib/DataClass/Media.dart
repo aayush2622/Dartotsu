@@ -1,5 +1,5 @@
-import 'package:dantotsu/Functions/string_extensions.dart';
-import 'package:dantotsu/Api/Sources/Model/Source.dart';
+import 'package:dartotsu/Functions/string_extensions.dart';
+import 'package:dartotsu/Api/Sources/Model/Source.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../Preferences/IsarDataClasses/Selected/Selected.dart';

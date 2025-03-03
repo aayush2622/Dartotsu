@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:dantotsu/Functions/Function.dart';
+import 'package:dartotsu/Functions/Function.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -56,7 +56,7 @@ class _DiscordController extends GetxController {
           child: Text(
             "By logging in, your discord will now show what you are watching & reading on Dartotsu\n\n\n"
             "If you are on invisible mode, logging in will make you online, when you open Dartotsu.\n\n"
-            "This does break the Discord TOS. \nAlthough Discord has never banned anyone for using Custom Rich Presence(what Dartotsu uses), You have still been warned.\n\nDantotsu is not responsible for anything that happens to your account.",
+            "This does break the Discord TOS. \nAlthough Discord has never banned anyone for using Custom Rich Presence(what Dartotsu uses), You have still been warned.\n\ndartotsu is not responsible for anything that happens to your account.",
           ),
         )
       ],

@@ -1,4 +1,4 @@
-import 'package:dantotsu/Widgets/CachedNetworkImage.dart';
+import 'package:dartotsu/Widgets/CachedNetworkImage.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../Adaptor/Episode/Widget/HandleProgress.dart';

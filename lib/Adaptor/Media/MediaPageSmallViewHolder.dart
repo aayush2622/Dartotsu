@@ -1,5 +1,5 @@
 import 'package:blur/blur.dart';
-import 'package:dantotsu/Functions/Extensions.dart';
+import 'package:dartotsu/Functions/Extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:kenburns_nullsafety/kenburns_nullsafety.dart';
 import 'package:provider/provider.dart';
