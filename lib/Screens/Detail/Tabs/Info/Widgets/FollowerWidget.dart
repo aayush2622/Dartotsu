@@ -1,5 +1,5 @@
-import 'package:dantotsu/Functions/Function.dart';
-import 'package:dantotsu/Functions/string_extensions.dart';
+import 'package:dartotsu/Functions/Function.dart';
+import 'package:dartotsu/Functions/string_extensions.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../Animation/ScaleAnimation.dart';

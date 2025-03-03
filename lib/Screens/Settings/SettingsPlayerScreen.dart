@@ -1,9 +1,9 @@
 import 'dart:math';
 
-import 'package:dantotsu/DataClass/Episode.dart';
-import 'package:dantotsu/Functions/Function.dart';
-import 'package:dantotsu/Api/Sources/Eval/dart/model/video.dart';
-import 'package:dantotsu/Api/Sources/Model/Source.dart';
+import 'package:dartotsu/DataClass/Episode.dart';
+import 'package:dartotsu/Functions/Function.dart';
+import 'package:dartotsu/Api/Sources/Eval/dart/model/video.dart';
+import 'package:dartotsu/Api/Sources/Model/Source.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 

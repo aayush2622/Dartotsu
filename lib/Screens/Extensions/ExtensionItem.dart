@@ -1,8 +1,8 @@
-import 'package:dantotsu/Functions/Function.dart';
-import 'package:dantotsu/Preferences/PrefManager.dart';
-import 'package:dantotsu/Widgets/AlertDialogBuilder.dart';
-import 'package:dantotsu/Api/Sources/Eval/dart/model/source_preference.dart';
-import 'package:dantotsu/Api/Sources/Model/Source.dart';
+import 'package:dartotsu/Functions/Function.dart';
+import 'package:dartotsu/Preferences/PrefManager.dart';
+import 'package:dartotsu/Widgets/AlertDialogBuilder.dart';
+import 'package:dartotsu/Api/Sources/Eval/dart/model/source_preference.dart';
+import 'package:dartotsu/Api/Sources/Model/Source.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:icons_plus/icons_plus.dart';

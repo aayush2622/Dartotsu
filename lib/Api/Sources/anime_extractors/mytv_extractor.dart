@@ -1,4 +1,4 @@
-import 'package:dantotsu/Functions/string_extensions.dart';
+import 'package:dartotsu/Functions/string_extensions.dart';
 import 'package:html/parser.dart' show parse;
 import 'package:http_interceptor/http_interceptor.dart';
 

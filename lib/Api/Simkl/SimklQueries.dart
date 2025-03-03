@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:collection/collection.dart';
-import 'package:dantotsu/DataClass/Media.dart' as media;
-import 'package:dantotsu/DataClass/SearchResults.dart';
-import 'package:dantotsu/Preferences/PrefManager.dart';
+import 'package:dartotsu/DataClass/Media.dart' as media;
+import 'package:dartotsu/DataClass/SearchResults.dart';
+import 'package:dartotsu/Preferences/PrefManager.dart';
 import 'package:flutter/foundation.dart';
 
 import '../../Services/Api/Queries.dart';

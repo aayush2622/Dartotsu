@@ -1,4 +1,4 @@
-import 'package:dantotsu/Screens/Calendar/CalendarViewModel.dart';
+import 'package:dartotsu/Screens/Calendar/CalendarViewModel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

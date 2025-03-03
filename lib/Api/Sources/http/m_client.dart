@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:dantotsu/Functions/Function.dart';
-import 'package:dantotsu/Api/Sources/Model/settings.dart';
+import 'package:dartotsu/Functions/Function.dart';
+import 'package:dartotsu/Api/Sources/Model/settings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart'
 as flutter_inappwebview;

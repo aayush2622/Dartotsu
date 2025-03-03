@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:dantotsu/StorageProvider.dart';
+import 'package:dartotsu/StorageProvider.dart';
 
 import 'Preferences/PrefManager.dart';
 

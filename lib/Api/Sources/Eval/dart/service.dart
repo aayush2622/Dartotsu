@@ -1,5 +1,5 @@
-import 'package:dantotsu/Api/Sources/Eval/dart/runtime/runtime.dart';
-import 'package:dantotsu/Api/Sources/Eval/javascript/http.dart';
+import 'package:dartotsu/Api/Sources/Eval/dart/runtime/runtime.dart';
+import 'package:dartotsu/Api/Sources/Eval/javascript/http.dart';
 import 'package:dart_eval/dart_eval_bridge.dart';
 import 'package:dart_eval/stdlib/core.dart';
 
@@ -26,7 +26,7 @@ class DartExtensionService implements ExtensionService {
 
     final runtime = runtimeEval(bytecode);
 
-    return runtime.executeLib('package:dantotsu/main.dart', 'main',
+    return runtime.executeLib('package:dartotsu/main.dart', 'main',
         [$MSource.wrap(source.toMSource())]) as MProvider;
   }
 
@@ -38,7 +38,7 @@ class DartExtensionService implements ExtensionService {
       final runtime = runtimeEval(bytecode);
       runtime.args = [$String(source.baseUrl!)];
       var res = runtime.executeLib(
-        'package:dantotsu/main.dart',
+        'package:dartotsu/main.dart',
         'getHeader',
       );
       if (res is $Map) {
