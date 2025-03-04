@@ -333,17 +333,27 @@ jobs:
       - name: Format Release Notes
         id: format_notes
         run: |
-          echo "**🚀 Features**" > formatted_notes.txt
-          echo "$(echo "$RELEASE_NOTES" | grep -iE '^\*\s\[[a-f0-9]+\]\(.*\):\sfeat' | head -n 5 || echo 'None')" >> formatted_notes.txt
-          echo "" >> formatted_notes.txt
+        
+          features=$(echo "$RELEASE_NOTES" | grep -iE '^\*\s\[[a-f0-9]+\]\(.*\):\sfeat' | head -n 5)
+          if [[ -n "$features" ]]; then
+            echo "**🚀 Features**" > formatted_notes.txt
+            echo "$features" >> formatted_notes.txt
+            echo "" >> formatted_notes.txt
+          fi
+      
+          fixes=$(echo "$RELEASE_NOTES" | grep -iE '^\*\s\[[a-f0-9]+\]\(.*\):\s(fix|bug|improvement|patch)' | head -n 5)
+          if [[ -n "$fixes" ]]; then
+            echo "**🐛 Fixes**" >> formatted_notes.txt
+            echo "$fixes" >> formatted_notes.txt
+            echo "" >> formatted_notes.txt
+          fi
 
-          echo "**🐛 Fixes**" >> formatted_notes.txt
-          echo "$(echo "$RELEASE_NOTES" | grep -iE '^\*\s\[[a-f0-9]+\]\(.*\):\sfix' | head -n 5 || echo 'None')" >> formatted_notes.txt
-          echo "" >> formatted_notes.txt
-
-          echo "**🛠 Chores**" >> formatted_notes.txt
-          echo "$(echo "$RELEASE_NOTES" | grep -iE '^\*\s\[[a-f0-9]+\]\(.*\):\schore' | head -n 5 || echo 'None')" >> formatted_notes.txt
-          echo "" >> formatted_notes.txt
+          chores=$(echo "$RELEASE_NOTES" | grep -iE '^\*\s\[[a-f0-9]+\]\(.*\):\s(chore|docs|build|ci)' | head -n 5)
+          if [[ -n "$chores" ]]; then
+            echo "**🛠 Chores**" >> formatted_notes.txt
+            echo "$chores" >> formatted_notes.txt
+            echo "" >> formatted_notes.txt
+          fi
 
           cat formatted_notes.txt
           FORMATTED_NOTES=$(cat formatted_notes.txt) 
@@ -355,6 +365,9 @@ jobs:
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_RELEASE_URL }}
         run: |
+
+          FORMATTED_NOTES=$(echo "$FORMATTED_NOTES" | sed -E 's/\): [^:]+:/) :/g')
+        
           default_color="#1ac4c5"
           hex_to_decimal() { printf '%d' "0x${1#"#"}"; }
           embed_color=$(hex_to_decimal "$default_color")
