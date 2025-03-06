@@ -35,11 +35,25 @@ class _ReaderControllerState extends State<ReaderController> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16),
-      child: Stack(
-        children: [_buildTopControls()],
-      ),
+    return Stack(
+      children: [
+        Container(
+          height: 124,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Colors.black.withOpacity(0.9),
+                Colors.black.withOpacity(0.5),
+                Colors.black.withOpacity(0.0),
+              ],
+            ),
+          ),
+          padding: EdgeInsets.all(16),
+          child: _buildTopControls(),
+        ),
+      ],
     );
   }
 

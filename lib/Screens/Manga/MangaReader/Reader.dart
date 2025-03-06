@@ -1,3 +1,5 @@
+import 'package:dartotsu/Widgets/CachedNetworkImage.dart';
+import 'package:dartotsu/Widgets/ScrollConfig.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../DataClass/Chapter.dart';
@@ -44,28 +46,44 @@ class MediaReaderState extends State<MediaReader> {
   }
 
   Widget _buildReader() {
-    return Obx(() {
-      return Stack(alignment: Alignment.center, children: [
-        Center(
-          child: Text('Media Reader'),
+    return KeyboardListener(
+      focusNode: focusNode,
+      child: GestureDetector(
+        onTap: () => showControls.value = !showControls.value,
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            _buildWebtoonMode(),
+            _buildOverlay(),
+          ],
         ),
-        KeyboardListener(
-          focusNode: focusNode,
-          child: GestureDetector(
-            onTap: () => showControls.value = !showControls.value,
-            child: AnimatedOpacity(
-              opacity: showControls.value ? 0.3 : 0.0,
-              duration: const Duration(milliseconds: 300),
-              child: Container(color: Colors.black),
-            ),
-          ),
-        ),
-        _buildVideoOverlay(),
-      ]);
-    });
+      ),
+    );
   }
 
-  Widget _buildVideoOverlay() {
+  Widget _buildWebtoonMode() {
+    return ScrollConfig(
+      context,
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            ...widget.pages.map(
+              (p) {
+                return Center(
+                  child: cachedNetworkImage(
+                    imageUrl: p.url,
+                    fit: BoxFit.cover,
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildOverlay() {
     return Obx(() {
       return Positioned.fill(
         child: AnimatedOpacity(
