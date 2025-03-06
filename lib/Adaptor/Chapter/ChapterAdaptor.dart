@@ -1,10 +1,14 @@
+import 'package:dartotsu/Functions/Function.dart';
+import 'package:dartotsu/Screens/Manga/MangaReader/Reader.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import '../../Animation/ScaleAnimation.dart';
+import '../../Api/Sources/Search/get_pages.dart';
 import '../../DataClass/Chapter.dart';
 import '../../DataClass/Media.dart';
 import '../../Api/Sources/Model/Source.dart';
+import '../../Widgets/CustomBottomDialog.dart';
 import 'ChapterCompactViewHolder.dart';
 import 'ChapterListViewHolder.dart';
 
@@ -74,7 +78,13 @@ class ChapterAdaptorState extends State<ChapterAdaptor> {
               finalOffset: Offset.zero,
               duration: const Duration(milliseconds: 200),
               child: GestureDetector(
-                onTap: () {},
+                onTap: () => onChapterClick(
+                  context,
+                  chapterList[index],
+                  widget.source,
+                  widget.mediaData,
+                  widget.onEpisodeClick,
+                ),
                 child: SizedBox(
                   width: double.infinity,
                   child: ChapterListView(
@@ -113,7 +123,13 @@ class ChapterAdaptorState extends State<ChapterAdaptor> {
                     finalOffset: Offset.zero,
                     duration: const Duration(milliseconds: 200),
                     child: GestureDetector(
-                      onTap: () {},
+                      onTap: () => onChapterClick(
+                        context,
+                        chapterList[index],
+                        widget.source,
+                        widget.mediaData,
+                        widget.onEpisodeClick,
+                      ),
                       onLongPress: () {},
                       child: SizedBox(
                         width: 82,
@@ -131,6 +147,39 @@ class ChapterAdaptorState extends State<ChapterAdaptor> {
           ),
         );
       },
+    );
+  }
+}
+
+Future<void> onChapterClick(
+  BuildContext context,
+  Chapter chapter,
+  Source source,
+  Media mediaData,
+  VoidCallback? onChapterClick,
+) async {
+  showCustomBottomDialog(
+    context,
+    CustomBottomDialog(
+      viewList: [
+        Center(
+          child: CircularProgressIndicator(),
+        ),
+      ],
+    ),
+  );
+
+  final pages = await getPagesList(source: source, mangaId: chapter.link!);
+  if (context.mounted) {
+    Navigator.pop(context);
+    navigateToPage(
+      context,
+      MediaReader(
+        media: mediaData,
+        currentChapter: chapter,
+        pages: pages!,
+        source: source,
+      ),
     );
   }
 }
