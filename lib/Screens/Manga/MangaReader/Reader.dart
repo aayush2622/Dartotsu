@@ -1,4 +1,4 @@
-import 'package:dartotsu/Widgets/CachedNetworkImage.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dartotsu/Widgets/ScrollConfig.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -70,9 +70,19 @@ class MediaReaderState extends State<MediaReader> {
             ...widget.pages.map(
               (p) {
                 return Center(
-                  child: cachedNetworkImage(
+                  child: CachedNetworkImage(
                     imageUrl: p.url,
                     fit: BoxFit.cover,
+                    httpHeaders: {
+                      'Referer': widget.source.baseUrl!,
+                    },
+                    progressIndicatorBuilder: (b, c, p) => SizedBox(
+                      height: MediaQuery.of(context).size.height,
+                      width: double.infinity,
+                      child: Center(
+                        child: CircularProgressIndicator(value: p.progress),
+                      ),
+                    ),
                   ),
                 );
               },
