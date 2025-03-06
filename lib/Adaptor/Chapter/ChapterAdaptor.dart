@@ -171,6 +171,7 @@ Future<void> onChapterClick(
 
   final pages = await getPagesList(source: source, mangaId: chapter.link!);
   if (context.mounted) {
+    onChapterClick?.call();
     Navigator.pop(context);
     navigateToPage(
       context,

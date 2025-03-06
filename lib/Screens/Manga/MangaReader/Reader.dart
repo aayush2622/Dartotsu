@@ -61,10 +61,12 @@ class MediaReaderState extends State<MediaReader> {
     );
   }
 
+  ScrollController scrollController = ScrollController();
   Widget _buildWebtoonMode() {
     return ScrollConfig(
       context,
       child: SingleChildScrollView(
+        controller: scrollController,
         child: Column(
           children: [
             ...widget.pages.map(
@@ -73,9 +75,6 @@ class MediaReaderState extends State<MediaReader> {
                   child: CachedNetworkImage(
                     imageUrl: p.url,
                     fit: BoxFit.cover,
-                    httpHeaders: {
-                      'Referer': widget.source.baseUrl!,
-                    },
                     progressIndicatorBuilder: (b, c, p) => SizedBox(
                       height: MediaQuery.of(context).size.height,
                       width: double.infinity,
@@ -87,6 +86,8 @@ class MediaReaderState extends State<MediaReader> {
                 );
               },
             ),
+            const SizedBox(height: 10),
+
           ],
         ),
       ),

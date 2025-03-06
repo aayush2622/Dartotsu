@@ -1,6 +1,8 @@
+import 'package:dartotsu/Adaptor/Chapter/ChapterAdaptor.dart';
 import 'package:flutter/material.dart';
 
 import 'package:dartotsu/DataClass/Media.dart';
+import 'package:get/get.dart';
 import '../../../Api/Sources/Eval/dart/model/page.dart';
 import '../../../Api/Sources/Model/Source.dart';
 import '../../../DataClass/Chapter.dart';
@@ -52,6 +54,27 @@ class _ReaderControllerState extends State<ReaderController> {
           ),
           padding: EdgeInsets.all(16),
           child: _buildTopControls(),
+        ),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Container(
+              height: 124,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Colors.black.withOpacity(0.0),
+                    Colors.black.withOpacity(0.5),
+                    Colors.black.withOpacity(0.9),
+                  ],
+                ),
+              ),
+              padding: EdgeInsets.all(16),
+              child: _buildBottomControls(),
+            ),
+          ],
         ),
       ],
     );
@@ -115,6 +138,87 @@ class _ReaderControllerState extends State<ReaderController> {
           icon: Icons.settings,
           color: Colors.white,
           onPressed: () {},
+        ),
+      ],
+    );
+  }
+
+  Widget _buildBottomControls() {
+    var chapterList = media.manga!.chapters!.toList();
+    var index = chapterList.indexOf(currentChapter);
+    var previousChapter = index > 0 ? chapterList[index - 1] : null;
+    var nextChapter =
+        index < chapterList.length - 1 ? chapterList[index + 1] : null;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        Expanded(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              previousChapter != null
+                  ? Row(
+                      children: [
+                        _buildControlButton(
+                          icon: Icons.skip_previous_rounded,
+                          color: Colors.white,
+                          onPressed: () {
+                            onChapterClick(
+                              context,
+                              previousChapter,
+                              source,
+                              media,
+                              () => Get.back(),
+                            );
+                          },
+                        ),
+                        SizedBox(width: 12),
+                        Text(
+                          previousChapter.title.toString(),
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
+                    )
+                  : SizedBox(),
+              nextChapter != null
+                  ? Row(
+                      children: [
+                        Text(
+                          nextChapter.title.toString(),
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        SizedBox(width: 12),
+                        _buildControlButton(
+                          icon: Icons.skip_next_rounded,
+                          color: Colors.white,
+                          onPressed: () {
+                            onChapterClick(
+                              context,
+                              nextChapter,
+                              source,
+                              media,
+                              () => Get.back(),
+                            );
+                          },
+                        ),
+                      ],
+                    )
+                  : SizedBox(),
+            ],
+          ),
         ),
       ],
     );
