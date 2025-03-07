@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 import '../../Animation/ScaleAnimation.dart';
 import '../../DataClass/Episode.dart';
 import '../../DataClass/Media.dart';
-import '../../Screens/Player/Player.dart';
+import '../../Screens/Anime/Player/Player.dart';
 import '../../Widgets/CustomBottomDialog.dart';
 import '../../Api/Sources/Model/Source.dart';
 import 'EpisodeCompactViewHolder.dart';

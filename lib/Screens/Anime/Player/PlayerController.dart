@@ -8,7 +8,7 @@ import 'package:dartotsu/Functions/Function.dart';
 import 'package:dartotsu/Functions/string_extensions.dart';
 import 'package:dartotsu/Preferences/IsarDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
 import 'package:dartotsu/Preferences/PrefManager.dart';
-import 'package:dartotsu/Screens/Player/Platform/WindowsPlayer.dart';
+import 'package:dartotsu/Screens/Anime/Player/Platform/WindowsPlayer.dart';
 import 'package:dartotsu/Theme/LanguageSwitcher.dart';
 import 'package:dartotsu/Widgets/AlertDialogBuilder.dart';
 import 'package:dartotsu/Widgets/CustomBottomDialog.dart';
@@ -23,7 +23,7 @@ import 'package:window_manager/window_manager.dart';
 import '../../../../../../Api/Discord/Discord.dart';
 import '../../../../../../Api/Discord/DiscordService.dart';
 import '../../../../../../Api/EpisodeDetails/Aniskip/Aniskip.dart';
-import '../Settings/SettingsPlayerScreen.dart';
+import '../../Settings/SettingsPlayerScreen.dart';
 import 'Platform/BasePlayer.dart';
 import 'Player.dart';
 
@@ -407,45 +407,48 @@ class _PlayerControllerState extends State<PlayerController> {
           ),
         ),
         const SizedBox(width: 10),
-        Expanded(child: Obx(() {
-          if (isControlsLocked.value) {
-            return const SizedBox(height: 24);
-          }
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                alignment: Alignment.topLeft,
-                child: Text(
-                  "Episode ${currentEpisode.number}: ${currentEpisode.title}",
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
+        Expanded(
+          child: Obx(
+            () {
+              if (isControlsLocked.value) {
+                return const SizedBox(height: 24);
+              }
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      "Episode ${currentEpisode.number}: ${currentEpisode.title}",
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-              Container(
-                alignment: Alignment.topLeft,
-                child: Text(
-                  media.mainName(),
-                  style: const TextStyle(
-                    color: Color.fromARGB(255, 190, 190, 190),
-                    fontSize: 13,
-                    overflow: TextOverflow.ellipsis,
+                  Container(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      media.mainName(),
+                      style: const TextStyle(
+                        color: Color.fromARGB(255, 190, 190, 190),
+                        fontSize: 13,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-            ],
-          );
-        })),
+                ],
+              );
+            },
+          ),
+        ),
         _buildControlButton(
           icon: Icons.video_collection_rounded,
-          color: Colors.white,
           onPressed: () => showEpisodes.value = !showEpisodes.value,
         ),
         const SizedBox(width: 24),
@@ -642,7 +645,9 @@ class _PlayerControllerState extends State<PlayerController> {
       ..setTitle("Speed")
       ..singleChoiceItems(speedMap(cursed), selectedItemIndex, (index) {
         settings.speed = speedMap(cursed)[index];
-        saveCustomData('${media.id}-${context.currentService(listen: false).getName}-PlayerSettings', settings);
+        saveCustomData(
+            '${media.id}-${context.currentService(listen: false).getName}-PlayerSettings',
+            settings);
         controller.setRate(
             double.parse(speedMap(cursed)[index].replaceFirst("x", "")));
       })
@@ -897,7 +902,9 @@ class _PlayerControllerState extends State<PlayerController> {
     fitType = (fitType < 2) ? fitType + 1 : 0;
     resizeMode.value = resizeMap[fitType] ?? BoxFit.contain;
     settings.resizeMode = fitType;
-    saveCustomData('${media.id}-${context.currentService(listen: false).getName}-PlayerSettings', settings);
+    saveCustomData(
+        '${media.id}-${context.currentService(listen: false).getName}-PlayerSettings',
+        settings);
     snackString(resizeStringMap[fitType]);
   }
 

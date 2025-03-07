@@ -11,6 +11,7 @@ Widget ScrollConfig(BuildContext context, {required Widget child}) {
         PointerDeviceKind.touch,
         PointerDeviceKind.mouse,
         PointerDeviceKind.trackpad,
+
       },
     ),
     child: child,

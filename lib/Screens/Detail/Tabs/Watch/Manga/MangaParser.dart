@@ -1,3 +1,4 @@
+import 'package:dartotsu/logger.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
@@ -95,9 +96,9 @@ class MangaParser extends BaseParser {
 
     MManga? m;
     try {
-      m = await getDetail(url: media.link!, source: source)
-          .timeout(Duration(seconds: 5));
+      m = await getDetail(url: media.link!, source: source);
     } catch (e) {
+      Logger.log(e.toString());
       errorType.value = ErrorType.NoResult;
       m = null;
       return;

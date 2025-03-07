@@ -3,7 +3,7 @@ import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:media_kit/media_kit.dart';
 
-import '../../../Api/Sources/Eval/dart/model/video.dart';
+import '../../../../Api/Sources/Eval/dart/model/video.dart';
 
 abstract class BasePlayer extends GetxController {
   // well kind of useless for now because there is only one player but it's good to have it for future
