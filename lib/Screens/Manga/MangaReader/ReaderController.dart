@@ -1,4 +1,5 @@
 import 'package:dartotsu/Adaptor/Chapter/ChapterAdaptor.dart';
+import 'package:dartotsu/Functions/Extensions.dart';
 import 'package:flutter/material.dart';
 
 import 'package:dartotsu/DataClass/Media.dart';
@@ -6,6 +7,7 @@ import 'package:get/get.dart';
 import '../../../Api/Sources/Eval/dart/model/page.dart';
 import '../../../Api/Sources/Model/Source.dart';
 import '../../../DataClass/Chapter.dart';
+import '../../../Preferences/PrefManager.dart';
 import 'Reader.dart';
 
 class ReaderController extends StatefulWidget {
@@ -30,9 +32,17 @@ class _ReaderControllerState extends State<ReaderController> {
   void initState() {
     super.initState();
     media = widget.reader.widget.media;
-    source = widget.reader.widget.source;
-    pages = widget.reader.widget.pages;
     currentChapter = widget.reader.widget.currentChapter;
+    var sourceName = context.currentService(listen: false).getName;
+    var key = "${media.id}-${currentChapter.number}-$sourceName";
+    pages = widget.reader.widget.pages;
+    source = widget.reader.widget.source;
+    var page = loadCustomData<int>("$key-current") ?? 5;
+    //widget.reader.pageController.animateToPage(page, duration: Duration(), curve: Curves.bounceIn);
+    Future.delayed(Duration(seconds:1), () {
+      widget.reader.itemScrollController
+          .scrollTo(index: page, duration: Duration(milliseconds: 1));
+    });
   }
 
   @override

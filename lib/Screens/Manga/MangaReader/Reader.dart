@@ -36,7 +36,8 @@ class MediaReader extends StatefulWidget {
 class MediaReaderState extends State<MediaReader> {
   late final FocusNode focusNode = FocusNode();
   late final ItemScrollController itemScrollController = ItemScrollController();
-  late final ItemPositionsListener itemPositionsListener = ItemPositionsListener.create();
+  late final ItemPositionsListener itemPositionsListener =
+      ItemPositionsListener.create();
   late final PageController pageController = PageController();
 
   final showControls = true.obs;
@@ -82,7 +83,8 @@ class MediaReaderState extends State<MediaReader> {
         onDoubleTap: _toggleZoom,
         child: Listener(
           onPointerSignal: (event) {
-            if (event is PointerScrollEvent && HardwareKeyboard.instance.isControlPressed) {
+            if (event is PointerScrollEvent &&
+                HardwareKeyboard.instance.isControlPressed) {
               _zoomOnScroll(event.scrollDelta.dy);
             }
           },
@@ -137,12 +139,19 @@ class MediaReaderState extends State<MediaReader> {
   Widget _buildPageImage(PageUrl page) {
     return Center(
       child: ConstrainedBox(
-        constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width),
+        constraints: BoxConstraints(
+          maxWidth: MediaQuery.of(context).size.width,
+        ),
         child: CachedNetworkImage(
           imageUrl: page.url,
           fit: BoxFit.fitWidth,
           errorWidget: (context, url, error) => Center(
-            child: Text('Failed to load image', style: TextStyle(color: Colors.red)),
+            child: Text(
+              'Failed to load image',
+              style: TextStyle(
+                color: Colors.red,
+              ),
+            ),
           ),
           progressIndicatorBuilder: (context, url, downloadProgress) {
             return SizedBox(
