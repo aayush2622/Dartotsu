@@ -56,7 +56,6 @@ class MangaWatchScreenState extends BaseWatchScreen<MangaWatchScreen> {
           if (chapterList.isEmpty) {
             return Column(
               children: [
-                _buildTitle(),
                 Center(
                   child: Text(
                     _viewModel.errorType.value == ErrorType.NotFound

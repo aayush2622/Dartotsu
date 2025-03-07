@@ -46,79 +46,90 @@ class AnimeWatchScreenState extends BaseWatchScreen<AnimeWatchScreen> {
   get widgetList => [_buildEpisodeList()];
 
   Widget _buildEpisodeList() {
-    return Obx(() {
-      var episodeList = _viewModel.episodeList.value;
-      if (episodeList == null) {
-        return const Center(child: CircularProgressIndicator());
-      }
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _buildTitle(),
+        Obx(
+          () {
+            var episodeList = _viewModel.episodeList.value;
+            if (episodeList == null) {
+              return const Center(child: CircularProgressIndicator());
+            }
 
-      if (!_viewModel.episodeDataLoaded.value) {
-        return const Center(child: CircularProgressIndicator());
-      }
-      if (episodeList.isEmpty) {
-        return Column(
-          children: [
-            _buildTitle(),
-            Center(
-              child: Text(
-                _viewModel.errorType.value == ErrorType.NotFound
-                    ? 'Media not found'
-                    : 'No episodes found',
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.onSurface,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ],
-        );
-      }
-      updateEpisodeDetails(episodeList);
-
-      var (chunks, initChunkIndex) = buildChunks(
-          context, episodeList, widget.mediaData.userProgress.toString());
-
-      var selectedEpisode = episodeList.values.firstWhereOrNull((element) =>
-          element.number ==
-          ((widget.mediaData.userProgress ?? 0) + 1).toString());
-
-      RxInt selectedChunkIndex = (-1).obs;
-
-      selectedChunkIndex =
-          selectedChunkIndex.value == -1 ? initChunkIndex : selectedChunkIndex;
-      return Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _buildTitle(),
-          ContinueCard(
-            mediaData: widget.mediaData,
-            episode: selectedEpisode,
-            source: _viewModel.source.value!,
-          ),
-          ChunkSelector(
-            context,
-            chunks,
-            selectedChunkIndex,
-            _viewModel.reversed,
-          ),
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 18),
-            child: Obx(() {
-              var reversed = _viewModel.reversed.value
-                  ? chunks.map((element) => element.reversed.toList()).toList()
-                  : chunks;
-              return EpisodeAdaptor(
-                type: _viewModel.viewType.value,
-                source: _viewModel.source.value!,
-                episodeList: reversed[selectedChunkIndex.value],
-                mediaData: widget.mediaData,
+            if (!_viewModel.episodeDataLoaded.value) {
+              return const Center(child: CircularProgressIndicator());
+            }
+            if (episodeList.isEmpty) {
+              return Column(
+                children: [
+                  Center(
+                    child: Text(
+                      _viewModel.errorType.value == ErrorType.NotFound
+                          ? 'Media not found'
+                          : 'No episodes found',
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.onSurface,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
               );
-            }),
-          )
-        ],
-      );
-    });
+            }
+            updateEpisodeDetails(episodeList);
+
+            var (chunks, initChunkIndex) = buildChunks(
+                context, episodeList, widget.mediaData.userProgress.toString());
+
+            var selectedEpisode = episodeList.values.firstWhereOrNull(
+                (element) =>
+                    element.number ==
+                    ((widget.mediaData.userProgress ?? 0) + 1).toString());
+
+            RxInt selectedChunkIndex = (-1).obs;
+
+            selectedChunkIndex = selectedChunkIndex.value == -1
+                ? initChunkIndex
+                : selectedChunkIndex;
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ContinueCard(
+                  mediaData: widget.mediaData,
+                  episode: selectedEpisode,
+                  source: _viewModel.source.value!,
+                ),
+                ChunkSelector(
+                  context,
+                  chunks,
+                  selectedChunkIndex,
+                  _viewModel.reversed,
+                ),
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 18),
+                  child: Obx(() {
+                    var reversed = _viewModel.reversed.value
+                        ? chunks
+                            .map((element) => element.reversed.toList())
+                            .toList()
+                        : chunks;
+                    return EpisodeAdaptor(
+                      type: _viewModel.viewType.value,
+                      source: _viewModel.source.value!,
+                      episodeList: reversed[selectedChunkIndex.value],
+                      mediaData: widget.mediaData,
+                    );
+                  }),
+                )
+              ],
+            );
+          },
+        ),
+      ],
+    );
   }
 
   Widget _buildTitle() {
