@@ -222,15 +222,19 @@ class _ReaderControllerState extends State<ReaderController> {
             ],
           ),
         ),
-        Center(
-          child: Text(
-            "${widget.reader.currentPage}/${pages.length}",
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+        Obx(
+          () {
+            return Center(
+              child: Text(
+                "${widget.reader.currentPage}/${pages.length}",
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            );
+          },
         ),
       ],
     );
