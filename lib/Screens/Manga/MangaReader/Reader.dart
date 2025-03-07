@@ -36,6 +36,7 @@ class MediaReaderState extends State<MediaReader> {
   void initState() {
     super.initState();
     focusNode.requestFocus();
+    pageController.addListener(_onPageChanged);
   }
 
   @override
@@ -53,7 +54,11 @@ class MediaReaderState extends State<MediaReader> {
         child: Stack(
           alignment: Alignment.center,
           children: [
-            _buildWebtoonMode(),
+            InteractiveViewer(
+              minScale: 0.5,
+              maxScale: 4,
+              child: _buildLTRMode(),
+            ),
             _buildOverlay(),
           ],
         ),
@@ -61,18 +66,30 @@ class MediaReaderState extends State<MediaReader> {
     );
   }
 
+  var currentPage = 1;
+
+  void _onPageChanged() {
+    final page = (pageController.page?.round() ?? 0) + 1;
+    if (page != currentPage) {
+      setState(() => currentPage = page);
+    }
+  }
+
   ScrollController scrollController = ScrollController();
-  Widget _buildWebtoonMode() {
+
+  Widget _buildUPDMode() {
     return ScrollConfig(
       context,
       child: ListView.builder(
+        reverse: true,
         controller: scrollController,
         itemCount: widget.pages.length,
         itemBuilder: (context, index) {
           final page = widget.pages[index];
           return Center(
             child: ConstrainedBox(
-              constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width),
+              constraints:
+                  BoxConstraints(maxWidth: MediaQuery.of(context).size.width),
               child: CachedNetworkImage(
                 imageUrl: page.url,
                 fit: BoxFit.fitWidth,
@@ -81,11 +98,10 @@ class MediaReaderState extends State<MediaReader> {
                   child: Center(child: CircularProgressIndicator()),
                 ),
                 errorWidget: (context, url, error) => Center(
-                  child: Text(
-                    'Failed to load image: $error',
-                    style: TextStyle(color: Colors.red),
-                  )
-                ),
+                    child: Text(
+                  'Failed to load image: $error',
+                  style: TextStyle(color: Colors.red),
+                )),
               ),
             ),
           );
@@ -94,6 +110,40 @@ class MediaReaderState extends State<MediaReader> {
     );
   }
 
+  final PageController pageController = PageController();
+
+  Widget _buildLTRMode() {
+    return ScrollConfig(
+      context,
+      child: PageView.builder(
+        controller: pageController,
+        scrollDirection: Axis.horizontal,
+        reverse: true,
+        itemCount: widget.pages.length,
+        itemBuilder: (context, index) {
+          final page = widget.pages[index];
+          return Center(
+            child: ConstrainedBox(
+              constraints:
+                  BoxConstraints(maxWidth: MediaQuery.of(context).size.width),
+              child: CachedNetworkImage(
+                imageUrl: page.url,
+                fit: BoxFit.fitWidth,
+                placeholder: (context, url) => SizedBox(
+                  height: MediaQuery.of(context).size.height / 2,
+                  child: Center(child: CircularProgressIndicator()),
+                ),
+                errorWidget: (context, url, error) => Center(
+                  child: Text('Failed to load image: $error',
+                      style: TextStyle(color: Colors.red)),
+                ),
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
 
   Widget _buildOverlay() {
     return Obx(() {

@@ -157,67 +157,79 @@ class _ReaderControllerState extends State<ReaderController> {
             crossAxisAlignment: CrossAxisAlignment.end,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              previousChapter != null
-                  ? Row(
-                      children: [
-                        _buildControlButton(
-                          icon: Icons.skip_previous_rounded,
-                          color: Colors.white,
-                          onPressed: () {
-                            onChapterClick(
-                              context,
-                              previousChapter,
-                              source,
-                              media,
-                              () => Get.back(),
-                            );
-                          },
-                        ),
-                        SizedBox(width: 12),
-                        Text(
-                          previousChapter.title.toString(),
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ],
-                    )
-                  : SizedBox(),
-              nextChapter != null
-                  ? Row(
-                      children: [
-                        Text(
-                          nextChapter.title.toString(),
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        SizedBox(width: 12),
-                        _buildControlButton(
-                          icon: Icons.skip_next_rounded,
-                          color: Colors.white,
-                          onPressed: () {
-                            onChapterClick(
-                              context,
-                              nextChapter,
-                              source,
-                              media,
-                              () => Get.back(),
-                            );
-                          },
-                        ),
-                      ],
-                    )
-                  : SizedBox(),
+              Visibility(
+                visible: previousChapter != null,
+                child: Row(
+                  children: [
+                    _buildControlButton(
+                      icon: Icons.skip_previous_rounded,
+                      color: Colors.white,
+                      onPressed: () {
+                        onChapterClick(
+                          context,
+                          previousChapter!,
+                          source,
+                          media,
+                          () => Get.back(),
+                        );
+                      },
+                    ),
+                    SizedBox(width: 12),
+                    Text(
+                      previousChapter?.title.toString() ?? '',
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
+                ),
+              ),
+              Visibility(
+                visible: nextChapter != null,
+                child: Row(
+                  children: [
+                    Text(
+                      nextChapter?.title.toString() ?? '',
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(width: 12),
+                    _buildControlButton(
+                      icon: Icons.skip_next_rounded,
+                      color: Colors.white,
+                      onPressed: () {
+                        onChapterClick(
+                          context,
+                          nextChapter!,
+                          source,
+                          media,
+                          () => Get.back(),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              )
             ],
+          ),
+        ),
+        Center(
+          child: Text(
+            "${widget.reader.currentPage}/${pages.length}",
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
       ],
