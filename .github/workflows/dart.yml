@@ -107,6 +107,7 @@ jobs:
       - run: flutter clean
       - run: flutter pub get
       - run: flutter build apk --release --split-per-abi
+      - run: flutter build apk --release
 
       - name: Rename APKs
         run: |
@@ -116,6 +117,8 @@ jobs:
           done
           ls build/app/outputs/flutter-apk
 
+      - name: Rename universal APK
+        run: mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/Dantotsu_Android_universal_${{github.ref_name}}.apk
 
       - name: Upload arm64 File To Google Drive
         id: gdriveUpload_arm64
@@ -141,6 +144,15 @@ jobs:
         with:
           file-path: build/app/outputs/flutter-apk/Dartotsu_Android_x86_64_main.apk
           upload-name: Dartotsu_Android_x86_64_${{github.ref_name}}.apk
+          upload-to-folder-id: 1S4QzdKz7ZofhiF5GAvjMdBvYK7YhndKM
+          service-account-json: "${{secrets.GOOGLE_KEY}}"
+          overrwrite: true
+      - name: Upload File To Google Drive
+        id: gdriveUpload_universal
+        uses: hoatruongdev09/google-drive-file-upload-github-action@v1.1
+        with:
+          file-path: build/app/outputs/flutter-apk/Dantotsu_Android_universal_${{github.ref_name}}.apk
+          upload-name: Dartotsu.apk
           upload-to-folder-id: 1S4QzdKz7ZofhiF5GAvjMdBvYK7YhndKM
           service-account-json: "${{secrets.GOOGLE_KEY}}"
           overrwrite: true
