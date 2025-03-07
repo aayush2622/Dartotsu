@@ -65,34 +65,35 @@ class MediaReaderState extends State<MediaReader> {
   Widget _buildWebtoonMode() {
     return ScrollConfig(
       context,
-      child: SingleChildScrollView(
+      child: ListView.builder(
         controller: scrollController,
-        child: Column(
-          children: [
-            ...widget.pages.map(
-              (p) {
-                return Center(
-                  child: CachedNetworkImage(
-                    imageUrl: p.url,
-                    fit: BoxFit.cover,
-                    progressIndicatorBuilder: (b, c, p) => SizedBox(
-                      height: MediaQuery.of(context).size.height,
-                      width: double.infinity,
-                      child: Center(
-                        child: CircularProgressIndicator(value: p.progress),
-                      ),
-                    ),
-                  ),
-                );
-              },
+        itemCount: widget.pages.length,
+        itemBuilder: (context, index) {
+          final page = widget.pages[index];
+          return Center(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width),
+              child: CachedNetworkImage(
+                imageUrl: page.url,
+                fit: BoxFit.fitWidth,
+                placeholder: (context, url) => SizedBox(
+                  height: MediaQuery.of(context).size.height / 2,
+                  child: Center(child: CircularProgressIndicator()),
+                ),
+                errorWidget: (context, url, error) => Center(
+                  child: Text(
+                    'Failed to load image: $error',
+                    style: TextStyle(color: Colors.red),
+                  )
+                ),
+              ),
             ),
-            const SizedBox(height: 10),
-
-          ],
-        ),
+          );
+        },
       ),
     );
   }
+
 
   Widget _buildOverlay() {
     return Obx(() {
