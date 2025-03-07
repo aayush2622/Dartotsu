@@ -78,7 +78,6 @@ class StorageProvider {
                         : "/storage/emulated/0/Dartotsu"
                 : appDir.path)
             .fixSeparator);
-        dir.createSync(recursive: true);
         return dir;
       }
       basePath = useCustomPath == true
