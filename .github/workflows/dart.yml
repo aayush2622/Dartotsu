@@ -449,7 +449,7 @@ jobs:
         with:
           file-path: build/macos/Release/Dartotsu-macos-${{github.ref_name}}.dmg
           upload-name: Dartotsu-macos-${{github.ref_name}}.dmg
-          upload-to-folder-id: 1${{secrets.GOOGLE_FOLDER_MAIN}}
+          upload-to-folder-id: ${{secrets.GOOGLE_FOLDER_MAIN}}
           service-account-json: "${{secrets.GOOGLE_KEY}}"
           overrwrite: true
   sendMessage:
