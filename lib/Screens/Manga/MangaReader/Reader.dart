@@ -146,10 +146,16 @@ class MediaReaderState extends State<MediaReader> {
           imageUrl: page.url,
           fit: BoxFit.fitWidth,
           errorWidget: (context, url, error) => Center(
-            child: Text(
-              'Failed to load image',
-              style: TextStyle(
-                color: Colors.red,
+            child: SizedBox(
+              height: MediaQuery.of(context).size.height / 2,
+              width: double.infinity,
+              child: Center(
+                child: Text(
+                  'Failed to load image',
+                  style: TextStyle(
+                    color: Colors.red,
+                  ),
+                ),
               ),
             ),
           ),
@@ -178,32 +184,15 @@ class MediaReaderState extends State<MediaReader> {
 
   void _updateCurrentPage() {
     final positions = itemPositionsListener.itemPositions.value;
+    if (positions.isEmpty) return;
 
-    int mostVisiblePage = currentPage.value;
-    double maxVisibleFraction = 0;
-
-    for (final position in positions) {
-      final visibleFraction = _calculateVisibleFraction(position);
-
-      if (visibleFraction > maxVisibleFraction) {
-        maxVisibleFraction = visibleFraction;
-        mostVisiblePage = position.index + 1;
-      }
-    }
-
-    if (mostVisiblePage != currentPage.value && maxVisibleFraction >= 0.6) {
-      currentPage.value = mostVisiblePage;
-    }
-  }
-
-  double _calculateVisibleFraction(ItemPosition position) {
-    final viewportHeight = MediaQuery.of(context).size.height;
-    final itemTop = position.itemLeadingEdge * viewportHeight;
-    final itemBottom = position.itemTrailingEdge * viewportHeight;
-    final visibleTop = itemTop.clamp(0, viewportHeight);
-    final visibleBottom = itemBottom.clamp(0, viewportHeight);
-
-    return (visibleBottom - visibleTop) / (itemBottom - itemTop);
+    currentPage.value = positions
+            .reduce((a, b) => (a.itemLeadingEdge < b.itemLeadingEdge &&
+                    a.itemTrailingEdge < b.itemTrailingEdge)
+                ? a
+                : b)
+            .index +
+        1;
   }
 
   void _toggleZoom() {

@@ -179,8 +179,8 @@ class SourceState extends State<Source> {
         widget.media,
         widget.media.sourceData,
         (i) {
-          viewType.value = i.recyclerStyle;
-          reverse.value = i.recyclerReversed;
+          viewType.value = i.viewType;
+          reverse.value = i.isReverse;
         },
       ).showDialog();
 
@@ -191,8 +191,8 @@ class SourceState extends State<Source> {
         scanlator.value,
         toggledScanlators.value,
         (i, t) {
-          viewType.value = i.recyclerStyle;
-          reverse.value = i.recyclerReversed;
+          viewType.value = i.viewType;
+          reverse.value = i.isReverse;
           toggledScanlators.value = t;
           chapterList.value = unModifiedChapterList.value?.where((element) {
             var scanlator = element.mChapter?.scanlator;

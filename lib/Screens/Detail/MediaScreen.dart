@@ -1,7 +1,9 @@
+import 'dart:convert';
 import 'dart:ui';
 
 import 'package:blur/blur.dart';
 import 'package:dartotsu/Functions/Extensions.dart';
+import 'package:dartotsu/Preferences/IsarDataClasses/MediaSettings/MediaSettings.dart';
 import 'package:dartotsu/Screens/Detail/Tabs/Info/InfoPage.dart';
 import 'package:dartotsu/Screens/Detail/Tabs/Watch/Anime/AnimeWatchScreen.dart';
 import 'package:dartotsu/Screens/Detail/Tabs/Watch/Manga/MangaWatchScreen.dart';
@@ -14,7 +16,8 @@ import 'package:provider/provider.dart';
 
 import '../../DataClass/Media.dart';
 import '../../Functions/Function.dart';
-import '../../Services/ServiceSwitcher.dart';
+import '../../Preferences/IsarDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
+import '../../Preferences/PrefManager.dart';
 import '../../Theme/LanguageSwitcher.dart';
 import '../../Theme/ThemeProvider.dart';
 import '../../Widgets/CachedNetworkImage.dart';
@@ -40,20 +43,24 @@ class MediaInfoPageState extends State<MediaInfoPage> {
 
   @override
   void initState() {
-    pageController = PageController(initialPage: _selectedIndex.value);
-    super.initState();
-    var service = Provider.of<MediaServiceProvider>(context, listen: false)
-        .currentService;
+    var service = context.currentService(listen: false);
 
     _viewModel = Get.put(MediaPageViewModel(),
         tag: "${widget.mediaData.id.toString()}-${service.getName}");
+
+    var key = "${service.getName}-${widget.mediaData.id}-Settings";
+    widget.mediaData.settings = loadCustomData(key) ?? MediaSettings();
+    _selectedIndex.value = widget.mediaData.settings.navBarIndex;
+    pageController = PageController(initialPage: _selectedIndex.value);
     mediaData = widget.mediaData;
-    loadData();
+    MediaSettings.saveMediaSettings(mediaData..settings.navBarIndex = 1);
+    super.initState();
+    loadMediaData();
   }
 
   var loaded = false;
 
-  Future<void> loadData() async {
+  Future<void> loadMediaData() async {
     mediaData = await _viewModel.getMediaDetails(widget.mediaData, context);
     if (mounted) setState(() => loaded = true);
   }

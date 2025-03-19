@@ -33,7 +33,6 @@ class MangaWatchScreenState extends BaseWatchScreen<MangaWatchScreen> {
   void initState() {
     super.initState();
     _viewModel = Get.put(MangaParser(), tag: widget.mediaData.id.toString());
-    widget.mediaData.selected = _viewModel.loadSelected(widget.mediaData);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _viewModel.init(widget.mediaData);
     });

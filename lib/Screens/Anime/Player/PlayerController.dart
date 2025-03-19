@@ -23,6 +23,7 @@ import 'package:window_manager/window_manager.dart';
 import '../../../../../../Api/Discord/Discord.dart';
 import '../../../../../../Api/Discord/DiscordService.dart';
 import '../../../../../../Api/EpisodeDetails/Aniskip/Aniskip.dart';
+import '../../../Preferences/IsarDataClasses/MediaSettings/MediaSettings.dart';
 import '../../Settings/SettingsPlayerScreen.dart';
 import 'Platform/BasePlayer.dart';
 import 'Player.dart';
@@ -70,7 +71,7 @@ class _PlayerControllerState extends State<PlayerController> {
     showEpisodes = widget.player.showEpisodes;
     resizeMode = widget.player.resizeMode;
 
-    settings = media.anime!.playerSettings!;
+    settings = media.settings.playerSettings;
     fitType = settings.resizeMode;
     WakelockPlus.enable();
     if (!widget.player.isMobile) initFullScreen();
@@ -254,7 +255,7 @@ class _PlayerControllerState extends State<PlayerController> {
                 ),
               ),
               Text(
-                maxProgress != null
+                controller.maxTime.value == '00:00' && maxProgress != null
                     ? _formatTime(maxProgress!)
                     : controller.maxTime.value,
                 style: TextStyle(
@@ -312,8 +313,10 @@ class _PlayerControllerState extends State<PlayerController> {
                       ? currentProgress!.toDouble()
                       : _timeStringToSeconds(controller.currentTime.value);
 
-                  var maxValue = maxProgress?.toDouble() ??
-                      _timeStringToSeconds(controller.maxTime.value);
+                  var maxValue =
+                      controller.maxTime.value == '00:00' && maxProgress != null
+                          ? maxProgress!.toDouble()
+                          : _timeStringToSeconds(controller.maxTime.value);
 
                   return Stack(
                     children: [
@@ -502,6 +505,7 @@ class _PlayerControllerState extends State<PlayerController> {
                         children: playerSettings(
                           context,
                           widget.player.setState,
+                          media: media
                         ),
                       ),
                     ),
@@ -645,9 +649,7 @@ class _PlayerControllerState extends State<PlayerController> {
       ..setTitle("Speed")
       ..singleChoiceItems(speedMap(cursed), selectedItemIndex, (index) {
         settings.speed = speedMap(cursed)[index];
-        saveCustomData(
-            '${media.id}-${context.currentService(listen: false).getName}-PlayerSettings',
-            settings);
+        MediaSettings.saveMediaSettings(media..settings.playerSettings.speed = settings.speed);
         controller.setRate(
             double.parse(speedMap(cursed)[index].replaceFirst("x", "")));
       })
@@ -902,9 +904,7 @@ class _PlayerControllerState extends State<PlayerController> {
     fitType = (fitType < 2) ? fitType + 1 : 0;
     resizeMode.value = resizeMap[fitType] ?? BoxFit.contain;
     settings.resizeMode = fitType;
-    saveCustomData(
-        '${media.id}-${context.currentService(listen: false).getName}-PlayerSettings',
-        settings);
+    MediaSettings.saveMediaSettings(media..settings.playerSettings.resizeMode = fitType);
     snackString(resizeStringMap[fitType]);
   }
 

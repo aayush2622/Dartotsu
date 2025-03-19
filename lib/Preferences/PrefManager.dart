@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'dart:convert';
 
+import 'package:dartotsu/Preferences/IsarDataClasses/MediaSettings/MediaSettings.dart';
 import 'package:dartotsu/logger.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:isar/isar.dart';
@@ -8,8 +10,6 @@ import '../StorageProvider.dart';
 import 'IsarDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
 import 'IsarDataClasses/KeyValue/KeyValues.dart';
 import 'IsarDataClasses/MalToken/MalToken.dart';
-import 'IsarDataClasses/Selected/Selected.dart';
-import 'IsarDataClasses/ShowResponse/ShowResponse.dart';
 
 part 'Preferences.dart';
 
@@ -73,10 +73,8 @@ class PrefManager {
     final isar = await Isar.open(
       [
         KeyValueSchema,
-        PlayerSettingsSchema,
         ResponseTokenSchema,
-        SelectedSchema,
-        ShowResponseSchema,
+        MediaSettingsSchema
       ],
       directory: directory,
       name: name,
@@ -92,20 +90,12 @@ class PrefManager {
       for (var item in keyValues) {
         cache[location]?[item.key] = item.value;
       }
-      final showResponse = await isar.showResponses.where().findAll();
-      for (var item in showResponse) {
-        cache[location]?[item.key] = item;
-      }
-      final selected = await isar.selecteds.where().findAll();
+      final selected = await isar.mediaSettings.where().findAll();
       for (var item in selected) {
         cache[location]?[item.key] = item;
       }
       final responseToken = await isar.responseTokens.where().findAll();
       for (var item in responseToken) {
-        cache[location]?[item.key] = item;
-      }
-      final playerSettings = await isar.playerSettings.where().findAll();
-      for (var item in playerSettings) {
         cache[location]?[item.key] = item;
       }
     }
@@ -198,18 +188,12 @@ class PrefManager {
     if (isar == null) return;
 
     isar.writeTxn(() async {
-      if (value is ShowResponse) {
+      if (value is MediaSettings) {
         value.key = key;
-        isar.showResponses.put(value);
-      } else if (value is Selected) {
-        value.key = key;
-        isar.selecteds.put(value);
+        isar.mediaSettings.put(value);
       } else if (value is ResponseToken) {
         value.key = key;
         isar.responseTokens.put(value);
-      } else if (value is PlayerSettings) {
-        value.key = key;
-        isar.playerSettings.put(value);
       } else {
         final keyValue = KeyValue()
           ..key = key

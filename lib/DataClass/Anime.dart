@@ -1,4 +1,3 @@
-import 'package:dartotsu/Preferences/IsarDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../Api/Anilist/Data/media.dart';
@@ -30,7 +29,6 @@ class Anime {
   Map<String, Episode>? kitsuEpisodes;
   Map<String, Episode>? fillerEpisodes;
   Map<String, Episode>? anifyEpisodes;
-  PlayerSettings? playerSettings;
 
   Anime({
     this.totalEpisodes,
@@ -50,7 +48,6 @@ class Anime {
     this.kitsuEpisodes,
     this.fillerEpisodes,
     this.anifyEpisodes,
-    this.playerSettings,
   })  : op = op ?? [],
         ed = ed ?? [];
 

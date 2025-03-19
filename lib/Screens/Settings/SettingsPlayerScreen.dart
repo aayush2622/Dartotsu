@@ -1,9 +1,11 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:dartotsu/DataClass/Episode.dart';
 import 'package:dartotsu/Functions/Function.dart';
 import 'package:dartotsu/Api/Sources/Eval/dart/model/video.dart';
 import 'package:dartotsu/Api/Sources/Model/Source.dart';
+import 'package:dartotsu/Preferences/IsarDataClasses/MediaSettings/MediaSettings.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
@@ -49,13 +51,23 @@ class SettingsPlayerScreenState extends BaseSettingsScreen {
 }
 
 List<Widget> playerSettings(
-    BuildContext context, void Function(void Function()) setState) {
+  BuildContext context,
+  void Function(void Function()) setState, {
+  Media? media,
+}) {
   void savePlayerSettings(PlayerSettings playerSettings) {
-    saveData(PrefName.playerSettings, playerSettings);
+    if (media != null) {
+      MediaSettings.saveMediaSettings(media..settings.playerSettings = playerSettings);
+    }else {
+      saveData(PrefName.playerSettings, jsonEncode(playerSettings.toJson()));
+    }
     setState(() {});
   }
 
-  var playerSettings = loadData(PrefName.playerSettings);
+  var playerSettings = media?.settings.playerSettings ?? PlayerSettings.fromJson(
+    jsonDecode(loadData(PrefName.playerSettings)),
+  );
+
   return [
     SettingsAdaptor(
       settings: [
@@ -317,8 +329,11 @@ Future<void> openPlayer(BuildContext context) async {
     nameRomaji: 'Local file',
     userPreferredName: 'Local file',
     isAdult: false,
+    settings: MediaSettings(
+        playerSettings: PlayerSettings.fromJson(
+      jsonDecode(loadData(PrefName.playerSettings)),
+    )),
     anime: Anime(
-      playerSettings: loadData(PrefName.playerSettings),
       episodes: {'1': episode},
     ),
   );

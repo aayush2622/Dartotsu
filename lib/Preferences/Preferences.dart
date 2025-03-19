@@ -133,9 +133,8 @@ class PrefName {
   static const cursedSpeed = Pref(Location.General, 'cursedSpeed', false);
   static const thumbLessSeekBar =
       Pref(Location.General, 'thumbLessSeekBar', false);
-  static Pref<PlayerSettings> playerSettings =
-      Pref(Location.General, 'playerSettings', PlayerSettings());
-
+  static Pref<String> playerSettings =
+  Pref(Location.General, 'playerSetting', jsonEncode(PlayerSettings().toJson()));
   //Protection
   static const anilistToken = Pref(Location.Protected, 'AnilistToken', '');
   static const Pref<ResponseToken?> malToken =

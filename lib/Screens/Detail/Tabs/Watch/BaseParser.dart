@@ -1,15 +1,13 @@
 import 'package:async/async.dart';
+import 'package:dartotsu/Preferences/IsarDataClasses/MediaSettings/MediaSettings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fuzzywuzzy/fuzzywuzzy.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 
 import '../../../../DataClass/Media.dart';
 import '../../../../Functions/GetExtensions.dart';
-import '../../../../Preferences/IsarDataClasses/Selected/Selected.dart';
 import '../../../../Preferences/IsarDataClasses/ShowResponse/ShowResponse.dart';
 import '../../../../Preferences/PrefManager.dart';
-import '../../../../Services/ServiceSwitcher.dart';
 import '../../../../Widgets/CustomBottomDialog.dart';
 import '../../../../Api/Sources/Eval/dart/model/m_manga.dart';
 import '../../../../Api/Sources/Model/Manga.dart';
@@ -51,8 +49,7 @@ abstract class BaseParser extends GetxController {
           : source.name!;
     }
 
-    var lastUsedSource =
-        loadCustomData<String>('${media.id}-lastUsedSource');
+    var lastUsedSource = media.settings.server;
     if (lastUsedSource == null ||
         !sortedSources.any((e) => nameAndLang(e) == lastUsedSource)) {
       lastUsedSource = nameAndLang(sortedSources.first);
@@ -67,22 +64,6 @@ abstract class BaseParser extends GetxController {
     sourcesLoaded.value = true;
   }
 
-  void saveSelected(int id, Selected data) {
-    var sourceName =
-        Provider.of<MediaServiceProvider>(Get.context!, listen: false)
-            .currentService
-            .getName;
-    saveCustomData("Selected-$id-$sourceName", data);
-  }
-
-  Selected loadSelected(Media mediaData) {
-    var sourceName =
-        Provider.of<MediaServiceProvider>(Get.context!, listen: false)
-            .currentService
-            .getName;
-    return loadCustomData("Selected-${mediaData.id}-$sourceName") ??
-        Selected();
-  }
 
   CancelableOperation? _currentOperation;
 
@@ -103,7 +84,7 @@ abstract class BaseParser extends GetxController {
   Future<void> _performSearch(Source source, Media mediaData,
       Function(MManga? response)? onFinish) async {
     selectedMedia.value = null;
-    var saved = _loadShowResponse(source, mediaData);
+    var saved = mediaData.settings.showResponse;
     if (saved != null) {
       var response = MManga(
         name: saved.name,
@@ -220,10 +201,6 @@ abstract class BaseParser extends GetxController {
     return englishRegex.hasMatch(name);
   }
 
-  ShowResponse? _loadShowResponse(Source source, Media mediaData) {
-    return loadCustomData<ShowResponse?>(
-        "${source.name}_${mediaData.id}_source");
-  }
 
   _saveShowResponse(Media mediaData, MManga response, Source source,
       {bool selected = false}) {
@@ -233,8 +210,7 @@ abstract class BaseParser extends GetxController {
         name: response.name!,
         link: response.link!,
         coverUrl: response.imageUrl!);
-    saveCustomData<ShowResponse>(
-        "${source.name}_${mediaData.id}_source", show);
+    MediaSettings.saveMediaSettings(mediaData..settings.showResponse = show);
   }
 
   Future<void> wrongTitle(
