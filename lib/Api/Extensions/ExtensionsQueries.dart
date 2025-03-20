@@ -7,7 +7,6 @@ import 'package:dartotsu/Functions/Function.dart';
 import 'package:dartotsu/Functions/string_extensions.dart';
 import 'package:dartotsu/Api/Sources/Eval/dart/model/m_manga.dart';
 import 'package:dartotsu/Api/Sources/Model/Source.dart';
-import 'package:get/get.dart';
 
 import '../../DataClass/Author.dart';
 import '../../Preferences/PrefManager.dart';

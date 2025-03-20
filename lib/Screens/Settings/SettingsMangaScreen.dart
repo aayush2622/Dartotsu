@@ -7,6 +7,7 @@ import '../../Preferences/PrefManager.dart';
 import '../../Theme/LanguageSwitcher.dart';
 import '../../Widgets/AlertDialogBuilder.dart';
 import 'BaseSettingsScreen.dart';
+import 'SettingsReaderScreen.dart';
 
 class SettingsMangaScreen extends StatefulWidget {
   const SettingsMangaScreen({super.key});
@@ -32,6 +33,21 @@ class SettingsMangaScreenState extends BaseSettingsScreen {
   @override
   List<Widget> get settingsList {
     return [
+      SettingsAdaptor(
+        settings: [
+          Setting(
+            type: SettingType.normal,
+            name: 'Reader Settings',
+            description: 'Change reader settings',
+            icon: Icons.video_settings,
+            isActivity: true,
+            onClick: () => navigateToPage(
+              context,
+              const SettingsReaderScreen(),
+            ),
+          ),
+        ],
+      ),
       Text(
         getString.anilist,
         style: const TextStyle(

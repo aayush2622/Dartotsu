@@ -1,3 +1,4 @@
+import 'package:dartotsu/Adaptor/Chapter/ChapterAdaptor.dart';
 import 'package:dartotsu/Widgets/CachedNetworkImage.dart';
 import 'package:flutter/material.dart';
 
@@ -33,7 +34,7 @@ class ContinueCard extends StatelessWidget {
       clipBehavior: Clip.hardEdge,
       margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 32),
       child: GestureDetector(
-        onTap: () {},
+        onTap: () => onChapterClick(context, chapter!, source, mediaData, () {}),
         child: SizedBox(
           height: 80,
           child: Stack(

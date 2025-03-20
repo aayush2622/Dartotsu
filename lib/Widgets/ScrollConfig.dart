@@ -2,10 +2,10 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 
-Widget ScrollConfig(BuildContext context, {required Widget child}) {
+Widget ScrollConfig(BuildContext context, {required Widget child, ScrollPhysics? physics}) {
   return ScrollConfiguration(
     behavior: ScrollConfiguration.of(context).copyWith(
-      physics: const BouncingScrollPhysics(),
+      physics: physics ?? const BouncingScrollPhysics(),
       scrollbars: false,
       dragDevices: {
         PointerDeviceKind.touch,

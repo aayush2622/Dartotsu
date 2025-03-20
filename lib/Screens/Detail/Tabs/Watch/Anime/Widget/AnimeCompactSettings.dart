@@ -1,14 +1,11 @@
+import 'package:dartotsu/Preferences/IsarDataClasses/MediaSettings/MediaSettings.dart';
 import 'package:dartotsu/Theme/LanguageSwitcher.dart';
 import 'package:dartotsu/Widgets/AlertDialogBuilder.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 
 import '../../../../../../DataClass/Media.dart';
 import '../../../../../../Functions/Function.dart';
-import '../../../../../../Preferences/IsarDataClasses/Selected/Selected.dart';
-import '../../../../../../Preferences/PrefManager.dart';
-import '../../../../../../Services/ServiceSwitcher.dart';
 import '../../../../../../Api/Sources/Model/Source.dart';
 import '../../../../../WebView/WebView.dart';
 
@@ -16,22 +13,22 @@ class AnimeCompactSettings {
   final BuildContext context;
   final Media media;
   final Source? source;
-  final Function(Selected settings) onFinished;
+  final Function(MediaSettings settings) onFinished;
 
   final ColorScheme theme;
 
   AnimeCompactSettings(this.context, this.media, this.source, this.onFinished)
       : theme = Theme.of(context).colorScheme;
 
-  late Selected settings;
+  late MediaSettings settings;
 
   var viewType = 0.obs;
   var reverse = false.obs;
 
   void get _initialiseSettings {
-    settings = loadSelected();
-    viewType.value = settings.recyclerStyle;
-    reverse.value = settings.recyclerReversed;
+    settings = media.settings;
+    viewType.value = settings.viewType;
+    reverse.value = settings.isReverse;
   }
 
   Future showDialog() async {
@@ -101,9 +98,8 @@ class AnimeCompactSettings {
                           : theme.onSurface.withOpacity(0.33),
                       onPressed: () {
                         if (!isSelected) {
-                          settings.recyclerStyle = index;
+                          settings.viewType = index;
                           viewType.value = index;
-                          saveSelected();
                         }
                       },
                     ),
@@ -136,8 +132,7 @@ class AnimeCompactSettings {
             IconButton(
               onPressed: () {
                 reverse.value = !reverse.value;
-                settings.recyclerReversed = reverse.value;
-                saveSelected();
+                settings.isReverse = reverse.value;
               },
               icon: Icon(
                 icons[currentSortType ? 1 : 0],
@@ -198,22 +193,5 @@ class AnimeCompactSettings {
         ),
       ],
     );
-  }
-
-  void saveSelected() {
-    var sourceName =
-        Provider.of<MediaServiceProvider>(Get.context!, listen: false)
-            .currentService
-            .getName;
-    saveCustomData("Selected-${media.id}-$sourceName", settings);
-  }
-
-  Selected loadSelected() {
-    var sourceName =
-        Provider.of<MediaServiceProvider>(Get.context!, listen: false)
-            .currentService
-            .getName;
-    return loadCustomData("Selected-${media.id}-$sourceName") ??
-        Selected();
   }
 }

@@ -9,7 +9,6 @@ import 'package:dartotsu/Theme/LanguageSwitcher.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 import 'package:screen_brightness/screen_brightness.dart';
 import 'package:volume_controller/volume_controller.dart';
 
@@ -18,8 +17,6 @@ import '../../../../../../Api/Sources/Eval/dart/model/video.dart' as v;
 import '../../../../../../Api/Sources/Model/Source.dart';
 import '../../../../../../DataClass/Episode.dart';
 import '../../../../../../DataClass/Media.dart' as m;
-import '../../../../../../Preferences/IsarDataClasses/Selected/Selected.dart';
-import '../../../../../../Services/ServiceSwitcher.dart';
 import '../../../../../../Widgets/ScrollConfig.dart';
 import '../../Detail/Tabs/Watch/Anime/Widget/AnimeCompactSettings.dart';
 import '../../Detail/Tabs/Watch/Anime/Widget/BuildChunkSelector.dart';
@@ -74,7 +71,7 @@ class MediaPlayerState extends State<MediaPlayer>
       _loadPlayerSettings();
     } else {
       resizeMode = BoxFit.contain.obs;
-      settings = widget.media.anime!.playerSettings!;
+      settings = widget.media.settings.playerSettings;
     }
     _initializePlayer();
     _leftAnimationController = AnimationController(
@@ -116,13 +113,10 @@ class MediaPlayerState extends State<MediaPlayer>
   }
 
   void _loadPlayerSettings() {
-    settings = loadCustomData('${widget.media.id}-${context
-        .currentService(listen: false)
-        .getName}-PlayerSettings') ?? loadData(PrefName.playerSettings);
-    widget.media.anime?.playerSettings = settings;
+    settings = widget.media.settings.playerSettings;
     resizeMode = (resizeMap[settings.resizeMode] ?? BoxFit.contain).obs;
-    viewType = loadSelected(widget.media).recyclerStyle.obs;
-    reverse = loadSelected(widget.media).recyclerReversed.obs;
+    viewType = widget.media.settings.viewType.obs;
+    reverse = widget.media.settings.isReverse.obs;
   }
 
   @override
@@ -697,8 +691,8 @@ class MediaPlayerState extends State<MediaPlayer>
         widget.media,
         widget.source,
             (i) {
-          viewType.value = i.recyclerStyle;
-          reverse.value = i.recyclerReversed;
+          viewType.value = i.viewType;
+          reverse.value = i.isReverse;
         },
       ).showDialog();
 
@@ -739,30 +733,5 @@ class MediaPlayerState extends State<MediaPlayer>
       return parts[0] * 3600 + parts[1] * 60 + parts[2];
     }
     return 0;
-  }
-
-  void changeViewType(RxInt viewType, int index) {
-    var type = loadSelected(widget.media);
-    viewType.value = index;
-    type.recyclerStyle = index;
-    saveSelected(widget.media.id, type);
-  }
-
-  void saveSelected(int id, Selected data) {
-    var sourceName =
-        Provider
-            .of<MediaServiceProvider>(Get.context!, listen: false)
-            .currentService
-            .getName;
-    saveCustomData("Selected-$id-$sourceName", data);
-  }
-
-  Selected loadSelected(m.Media mediaData) {
-    var sourceName =
-        Provider
-            .of<MediaServiceProvider>(Get.context!, listen: false)
-            .currentService
-            .getName;
-    return loadCustomData("Selected-${mediaData.id}-$sourceName") ?? Selected();
   }
 }

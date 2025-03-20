@@ -36,10 +36,6 @@ Anime _$AnimeFromJson(Map<String, dynamic> json) => Anime(
       anifyEpisodes: (json['anifyEpisodes'] as Map<String, dynamic>?)?.map(
         (k, e) => MapEntry(k, Episode.fromJson(e as Map<String, dynamic>)),
       ),
-      playerSettings: json['playerSettings'] == null
-          ? null
-          : PlayerSettings.fromJson(
-              json['playerSettings'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$AnimeToJson(Anime instance) => <String, dynamic>{
@@ -60,5 +56,4 @@ Map<String, dynamic> _$AnimeToJson(Anime instance) => <String, dynamic>{
       'kitsuEpisodes': instance.kitsuEpisodes,
       'fillerEpisodes': instance.fillerEpisodes,
       'anifyEpisodes': instance.anifyEpisodes,
-      'playerSettings': instance.playerSettings,
     };

@@ -2,12 +2,8 @@ import 'package:isar/isar.dart';
 
 part 'DefaultPlayerSettings.g.dart';
 
-@collection
+@embedded
 class PlayerSettings {
-  Id id = Isar.autoIncrement;
-  @Index(unique: true, replace: true)
-  late String key;
-
   String speed;
   int resizeMode;
 

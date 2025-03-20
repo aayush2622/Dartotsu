@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../../DataClass/Media.dart';
 import '../../../../../Functions/Function.dart';
-import '../../../../../Preferences/PrefManager.dart';
 import '../../../../../Widgets/DropdownMenu.dart';
 import '../../../../../Api/Sources/Model/Source.dart';
 import '../../../../../Api/Sources/extension_preferences_providers.dart';
@@ -55,8 +54,7 @@ class _SourceSelectorState extends ConsumerState<SourceSelector> {
           : source.name!;
     }
 
-    var lastUsedSource = loadCustomData<String>(
-        '${widget.mediaData.id}-lastUsedSource');
+    var lastUsedSource = widget.mediaData.settings.server;
     if (lastUsedSource == null ||
         !sources.any((e) => nameAndLang(e) == lastUsedSource)) {
       lastUsedSource = nameAndLang(sources.first);
@@ -79,8 +77,8 @@ class _SourceSelectorState extends ConsumerState<SourceSelector> {
                 borderColor: theme.primary,
                 prefixIcon: Icons.source,
                 onChanged: (name) async {
-                  saveCustomData(
-                      '${widget.mediaData.id}-lastUsedSource', name);
+                  //saveCustomData('${widget.mediaData.id}-lastUsedSource', widget.mediaData.settings..server = name);
+                  widget.mediaData.settings.server = name;
                   lastUsedSource = name;
                   source = sources.firstWhereOrNull(
                           (e) => nameAndLang(e) == lastUsedSource!) ??

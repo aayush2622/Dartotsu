@@ -94,9 +94,7 @@ Media _$MediaFromJson(Map<String, dynamic> json) => Media(
       crunchySlug: json['crunchySlug'] as String?,
       nameMAL: json['nameMAL'] as String?,
       shareLink: json['shareLink'] as String?,
-      selected: json['selected'] == null
-          ? null
-          : Selected.fromJson(json['selected'] as Map<String, dynamic>),
+      settings: MediaSettings.fromJson(json['settings'] as Map<String, dynamic>),
       streamingEpisodes: (json['streamingEpisodes'] as List<dynamic>?)
           ?.map((e) => anilistApi.MediaStreamingEpisode.fromJson(
               e as Map<String, dynamic>))
@@ -167,7 +165,7 @@ Map<String, dynamic> _$MediaToJson(Media instance) => <String, dynamic>{
       'crunchySlug': instance.crunchySlug,
       'nameMAL': instance.nameMAL,
       'shareLink': instance.shareLink,
-      'selected': instance.selected,
+      'settings': instance.settings,
       'streamingEpisodes': instance.streamingEpisodes,
       'cameFromContinue': instance.cameFromContinue,
       'mal': instance.mal,

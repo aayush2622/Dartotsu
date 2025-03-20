@@ -1,5 +1,8 @@
+import 'package:collection/collection.dart';
 import 'package:dartotsu/Adaptor/Chapter/ChapterAdaptor.dart';
 import 'package:dartotsu/Functions/Extensions.dart';
+import 'package:dartotsu/Functions/string_extensions.dart';
+import 'package:dartotsu/Preferences/IsarDataClasses/DefaultReaderSettings/DafaultReaderSettings.dart';
 import 'package:flutter/material.dart';
 
 import 'package:dartotsu/DataClass/Media.dart';
@@ -8,6 +11,8 @@ import '../../../Api/Sources/Eval/dart/model/page.dart';
 import '../../../Api/Sources/Model/Source.dart';
 import '../../../DataClass/Chapter.dart';
 import '../../../Preferences/PrefManager.dart';
+import '../../../Widgets/CustomBottomDialog.dart';
+import '../../Settings/SettingsReaderScreen.dart';
 import 'Reader.dart';
 
 class ReaderController extends StatefulWidget {
@@ -37,11 +42,16 @@ class _ReaderControllerState extends State<ReaderController> {
     var key = "${media.id}-${currentChapter.number}-$sourceName";
     pages = widget.reader.widget.pages;
     source = widget.reader.widget.source;
-    var page = loadCustomData<int>("$key-current") ?? 5;
-    //widget.reader.pageController.animateToPage(page, duration: Duration(), curve: Curves.bounceIn);
-    Future.delayed(Duration(seconds:1), () {
-      widget.reader.itemScrollController
-          .scrollTo(index: page, duration: Duration(milliseconds: 1));
+    var page = loadCustomData<int>("$key-current") ?? 1;
+
+    Future.delayed(Duration(milliseconds: 100), () {
+      media.settings.readerSettings.layoutType == LayoutType.Paged
+          ? widget.reader.pageController.jumpToPage(page - 1)
+          : widget.reader.itemScrollController.jumpTo(index: page - 1);
+    });
+
+    ever(widget.reader.currentPage, (int page) {
+      saveCustomData("$key-current", page);
     });
   }
 
@@ -147,7 +157,30 @@ class _ReaderControllerState extends State<ReaderController> {
         _buildControlButton(
           icon: Icons.settings,
           color: Colors.white,
-          onPressed: () {},
+          onPressed: () {
+            showCustomBottomDialog(
+              context,
+              CustomBottomDialog(
+                title: 'Reader Settings',
+                viewList: [
+                  StatefulBuilder(
+                    builder: (context,state) => Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: readerSettings(
+                          context,
+                          widget.reader.setState,
+                          media: media,
+                          dialogSetState: state,
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            );
+          },
         ),
       ],
     );
@@ -156,9 +189,17 @@ class _ReaderControllerState extends State<ReaderController> {
   Widget _buildBottomControls() {
     var chapterList = media.manga!.chapters!.toList();
     var index = chapterList.indexOf(currentChapter);
-    var previousChapter = index > 0 ? chapterList[index - 1] : null;
-    var nextChapter =
-        index < chapterList.length - 1 ? chapterList[index + 1] : null;
+
+    var sortedList = chapterList.toList()
+      ..sort((a, b) => a.number.toDouble().compareTo(b.number.toDouble()));
+
+    var previous = sortedList.lastWhereOrNull(
+            (c) => c.number.toDouble() < currentChapter.number.toDouble()) ??
+        (index > 0 ? chapterList[index - 1] : null);
+
+    var next = sortedList.firstWhereOrNull(
+            (c) => c.number.toDouble() > currentChapter.number.toDouble()) ??
+        (index < chapterList.length - 1 ? chapterList[index + 1] : null);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
@@ -168,7 +209,7 @@ class _ReaderControllerState extends State<ReaderController> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Visibility(
-                visible: previousChapter != null,
+                visible: previous != null,
                 child: Row(
                   children: [
                     _buildControlButton(
@@ -177,7 +218,7 @@ class _ReaderControllerState extends State<ReaderController> {
                       onPressed: () {
                         onChapterClick(
                           context,
-                          previousChapter!,
+                          previous!,
                           source,
                           media,
                           () => Get.back(),
@@ -186,7 +227,7 @@ class _ReaderControllerState extends State<ReaderController> {
                     ),
                     SizedBox(width: 12),
                     Text(
-                      previousChapter?.title.toString() ?? '',
+                      previous?.title.toString() ?? '',
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 14,
@@ -199,11 +240,11 @@ class _ReaderControllerState extends State<ReaderController> {
                 ),
               ),
               Visibility(
-                visible: nextChapter != null,
+                visible: next != null,
                 child: Row(
                   children: [
                     Text(
-                      nextChapter?.title.toString() ?? '',
+                      next?.title.toString() ?? '',
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 14,
@@ -219,7 +260,7 @@ class _ReaderControllerState extends State<ReaderController> {
                       onPressed: () {
                         onChapterClick(
                           context,
-                          nextChapter!,
+                          next!,
                           source,
                           media,
                           () => Get.back(),

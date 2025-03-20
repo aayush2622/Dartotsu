@@ -13,6 +13,7 @@ import '../../../../../Api/Sources/Eval/dart/model/m_chapter.dart';
 import '../../../../../Api/Sources/Eval/dart/model/m_manga.dart';
 import '../../../../../Api/Sources/Model/Source.dart';
 import '../../../../../Api/Sources/Search/get_detail.dart';
+import '../../../../../Preferences/IsarDataClasses/MediaSettings/MediaSettings.dart';
 import '../Functions/ParseChapterNumber.dart';
 import 'Widget/AnimeCompactSettings.dart';
 
@@ -37,9 +38,8 @@ class AnimeParser extends BaseParser {
   var reversed = false.obs;
 
   void initSettings(Media mediaData) {
-    var selected = loadSelected(mediaData);
-    viewType.value = selected.recyclerStyle;
-    reversed.value = selected.recyclerReversed;
+    viewType.value = mediaData.settings.viewType;
+    reversed.value = mediaData.settings.isReverse;
   }
 
   void settingsDialog(BuildContext context, Media media) =>
@@ -48,8 +48,13 @@ class AnimeParser extends BaseParser {
         media,
         source.value,
         (s) {
-          viewType.value = s.recyclerStyle;
-          reversed.value = s.recyclerReversed;
+          viewType.value = s.viewType;
+          reversed.value = s.isReverse;
+          MediaSettings.saveMediaSettings(
+            media
+              ..settings.viewType = s.viewType
+              ..settings.isReverse = s.isReverse,
+          );
         },
       ).showDialog();
 

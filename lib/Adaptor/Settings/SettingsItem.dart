@@ -2,31 +2,43 @@ import 'package:flutter/material.dart';
 
 import '../../DataClass/Setting.dart';
 
-class SettingItem extends StatelessWidget {
+class SettingItem extends StatefulWidget {
   final Setting setting;
 
   const SettingItem({super.key, required this.setting});
 
   @override
+  State<SettingItem> createState() => _SettingItemState();
+}
+
+class _SettingItemState extends State<SettingItem> {
+  @override
   Widget build(BuildContext context) {
-    // setting item type: normal
-    if (!setting.isVisible) return const SizedBox.shrink();
+    if (!widget.setting.isVisible) return const SizedBox.shrink();
 
     return ListTile(
-      onTap: setting.onClick,
-      onLongPress: setting.onLongClick,
+      onTap: () {
+        widget.setting.onClick?.call();
+        setState(() {});
+      },
+      onLongPress: () {
+        widget.setting.onLongClick?.call();
+        setState(() {});
+      },
       hoverColor: Colors.transparent,
       splashColor: Colors.transparent,
       title: Row(
         children: [
-          Icon(setting.icon, color: Theme.of(context).primaryColor),
-          const SizedBox(width: 24.0),
+          if (widget.setting.icon != null) ...[
+            Icon(widget.setting.icon, color: Theme.of(context).primaryColor),
+            const SizedBox(width: 24.0),
+          ],
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  setting.name,
+                  widget.setting.name,
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 16.0,
@@ -35,7 +47,7 @@ class SettingItem extends StatelessWidget {
                 ),
                 const SizedBox(height: 6),
                 Text(
-                  setting.description,
+                  widget.setting.description,
                   style: const TextStyle(
                     fontWeight: FontWeight.w600,
                     color: Colors.grey,
@@ -43,15 +55,24 @@ class SettingItem extends StatelessWidget {
                     fontSize: 14,
                   ),
                 ),
-                if (setting.attach != null) setting.attach!(context),
+                if (widget.setting.attach != null)
+                  widget.setting.attach!(context),
               ],
             ),
           ),
         ],
       ),
-      trailing: setting.isActivity
-          ? Icon(Icons.arrow_forward_ios, color: Theme.of(context).primaryColor)
-          : null,
+      trailing: widget.setting.trailingIcon != null
+          ? Icon(
+              widget.setting.trailingIcon,
+              color: Theme.of(context).primaryColor,
+            )
+          : widget.setting.isActivity
+              ? Icon(
+                  Icons.arrow_forward_ios,
+                  color: Theme.of(context).primaryColor,
+                )
+              : null,
       contentPadding: const EdgeInsets.symmetric(vertical: 8.0),
     );
   }
@@ -101,8 +122,10 @@ class SettingSwitchItemState extends State<SettingSwitchItem> {
           padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: Row(
             children: [
-              Icon(widget.setting.icon, color: Theme.of(context).primaryColor),
-              const SizedBox(width: 24.0),
+              if (widget.setting.icon != null) ...[
+                Icon(widget.setting.icon, color: Theme.of(context).primaryColor),
+                const SizedBox(width: 24.0),
+              ],
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -184,8 +207,10 @@ class SettingSliderItemState extends State<SettingSliderItem> {
           contentPadding: const EdgeInsets.only(right: 8),
           title: Row(
             children: [
-              Icon(widget.setting.icon, color: Theme.of(context).primaryColor),
-              const SizedBox(width: 24.0),
+              if (widget.setting.icon != null) ...[
+                Icon(widget.setting.icon, color: Theme.of(context).primaryColor),
+                const SizedBox(width: 24.0),
+              ],
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -324,8 +349,10 @@ class SettingInputBoxItemState extends State<SettingInputBoxItem> {
     return ListTile(
       title: Row(
         children: [
-          Icon(widget.setting.icon, color: Theme.of(context).primaryColor),
-          const SizedBox(width: 24.0),
+          if (widget.setting.icon != null) ...[
+            Icon(widget.setting.icon, color: Theme.of(context).primaryColor),
+            const SizedBox(width: 24.0),
+          ],
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

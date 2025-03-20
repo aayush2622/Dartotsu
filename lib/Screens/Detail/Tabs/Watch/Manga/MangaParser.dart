@@ -8,6 +8,7 @@ import '../../../../../Api/Sources/Eval/dart/model/m_chapter.dart';
 import '../../../../../Api/Sources/Eval/dart/model/m_manga.dart';
 import '../../../../../Api/Sources/Model/Source.dart';
 import '../../../../../Api/Sources/Search/get_detail.dart';
+import '../../../../../Preferences/IsarDataClasses/MediaSettings/MediaSettings.dart';
 import '../BaseParser.dart';
 import '../Functions/ParseChapterNumber.dart';
 import 'Widget/MangaCompactSettings.dart';
@@ -18,8 +19,8 @@ class MangaParser extends BaseParser {
   var dataLoaded = false.obs;
 
   void init(Media mediaData) async {
-    if (dataLoaded.value) return;
-    initSettings(mediaData);
+    viewType.value = mediaData.settings.viewType;
+    reversed.value = mediaData.settings.isReverse;
   }
 
   var viewType = 0.obs;
@@ -27,11 +28,6 @@ class MangaParser extends BaseParser {
   var scanlator = Rxn<List<String>>(null);
   var toggledScanlators = Rxn<List<bool>>(null);
 
-  void initSettings(Media mediaData) {
-    var selected = loadSelected(mediaData);
-    viewType.value = selected.recyclerStyle;
-    reversed.value = selected.recyclerReversed;
-  }
 
   void settingsDialog(BuildContext context, Media media) =>
       MangaCompactSettings(
@@ -41,8 +37,9 @@ class MangaParser extends BaseParser {
         scanlator.value,
         toggledScanlators.value,
         (s, t) {
-          viewType.value = s.recyclerStyle;
-          reversed.value = s.recyclerReversed;
+
+          viewType.value = s.viewType;
+          reversed.value = s.isReverse;
           toggledScanlators.value = t;
           chapterList.value = unModifiedChapterList.value?.where((element) {
             var scanlator = element.mChapter?.scanlator;
@@ -50,6 +47,11 @@ class MangaParser extends BaseParser {
                 toggledScanlators
                     .value![this.scanlator.value?.indexOf(scanlator) ?? 0];
           }).toList();
+          MediaSettings.saveMediaSettings(
+            media
+              ..settings.viewType = s.viewType
+              ..settings.isReverse = s.isReverse
+          );
         },
       ).showDialog();
 
