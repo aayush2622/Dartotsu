@@ -8,6 +8,7 @@ import 'package:isar/isar.dart';
 
 import '../StorageProvider.dart';
 import 'IsarDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
+import 'IsarDataClasses/DefaultReaderSettings/DafaultReaderSettings.dart';
 import 'IsarDataClasses/KeyValue/KeyValues.dart';
 import 'IsarDataClasses/MalToken/MalToken.dart';
 

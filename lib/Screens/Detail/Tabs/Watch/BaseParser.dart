@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 import '../../../../DataClass/Media.dart';
 import '../../../../Functions/GetExtensions.dart';
 import '../../../../Preferences/IsarDataClasses/ShowResponse/ShowResponse.dart';
-import '../../../../Preferences/PrefManager.dart';
 import '../../../../Widgets/CustomBottomDialog.dart';
 import '../../../../Api/Sources/Eval/dart/model/m_manga.dart';
 import '../../../../Api/Sources/Model/Manga.dart';

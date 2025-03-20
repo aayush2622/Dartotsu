@@ -116,18 +116,12 @@ int _mediaSettingsEstimateSize(
       bytesCount += 3 + value.length * 3;
     }
   }
-  {
-    final value = object.playerSettings;
-    bytesCount += 3 +
-        PlayerSettingsSchema.estimateSize(
-            value, allOffsets[PlayerSettings]!, allOffsets);
-    }
-  {
-    final value = object.readerSettings;
-    bytesCount += 3 +
-        ReaderSettingsSchema.estimateSize(
-            value, allOffsets[ReaderSettings]!, allOffsets);
-    }
+  bytesCount += 3 +
+      PlayerSettingsSchema.estimateSize(
+          object.playerSettings, allOffsets[PlayerSettings]!, allOffsets);
+  bytesCount += 3 +
+      ReaderSettingsSchema.estimateSize(
+          object.readerSettings, allOffsets[ReaderSettings]!, allOffsets);
   {
     final list = object.selectedScanlators;
     if (list != null) {
@@ -200,16 +194,6 @@ MediaSettings _mediaSettingsDeserialize(
     isReverse: reader.readBoolOrNull(offsets[0]) ?? false,
     lastUsedSource: reader.readStringOrNull(offsets[2]),
     navBarIndex: reader.readLongOrNull(offsets[3]) ?? 0,
-    playerSettings: reader.readObjectOrNull<PlayerSettings>(
-      offsets[4],
-      PlayerSettingsSchema.deserialize,
-      allOffsets,
-    ),
-    readerSettings: reader.readObjectOrNull<ReaderSettings>(
-      offsets[5],
-      ReaderSettingsSchema.deserialize,
-      allOffsets,
-    ),
     selectedScanlators: reader.readStringList(offsets[6]),
     server: reader.readStringOrNull(offsets[7]),
     showResponse: reader.readObjectOrNull<ShowResponse>(
@@ -221,6 +205,18 @@ MediaSettings _mediaSettingsDeserialize(
   );
   object.id = id;
   object.key = reader.readString(offsets[1]);
+  object.playerSettings = reader.readObjectOrNull<PlayerSettings>(
+        offsets[4],
+        PlayerSettingsSchema.deserialize,
+        allOffsets,
+      ) ??
+      PlayerSettings();
+  object.readerSettings = reader.readObjectOrNull<ReaderSettings>(
+        offsets[5],
+        ReaderSettingsSchema.deserialize,
+        allOffsets,
+      ) ??
+      ReaderSettings();
   return object;
 }
 
@@ -241,16 +237,18 @@ P _mediaSettingsDeserializeProp<P>(
       return (reader.readLongOrNull(offset) ?? 0) as P;
     case 4:
       return (reader.readObjectOrNull<PlayerSettings>(
-        offset,
-        PlayerSettingsSchema.deserialize,
-        allOffsets,
-      )) as P;
+            offset,
+            PlayerSettingsSchema.deserialize,
+            allOffsets,
+          ) ??
+          PlayerSettings()) as P;
     case 5:
       return (reader.readObjectOrNull<ReaderSettings>(
-        offset,
-        ReaderSettingsSchema.deserialize,
-        allOffsets,
-      )) as P;
+            offset,
+            ReaderSettingsSchema.deserialize,
+            allOffsets,
+          ) ??
+          ReaderSettings()) as P;
     case 6:
       return (reader.readStringList(offset)) as P;
     case 7:
@@ -868,42 +866,6 @@ extension MediaSettingsQueryFilter
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
-      ));
-    });
-  }
-
-  QueryBuilder<MediaSettings, MediaSettings, QAfterFilterCondition>
-      playerSettingsIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'playerSettings',
-      ));
-    });
-  }
-
-  QueryBuilder<MediaSettings, MediaSettings, QAfterFilterCondition>
-      playerSettingsIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'playerSettings',
-      ));
-    });
-  }
-
-  QueryBuilder<MediaSettings, MediaSettings, QAfterFilterCondition>
-      readerSettingsIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'readerSettings',
-      ));
-    });
-  }
-
-  QueryBuilder<MediaSettings, MediaSettings, QAfterFilterCondition>
-      readerSettingsIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'readerSettings',
       ));
     });
   }
@@ -1665,14 +1627,14 @@ extension MediaSettingsQueryProperty
     });
   }
 
-  QueryBuilder<MediaSettings, PlayerSettings?, QQueryOperations>
+  QueryBuilder<MediaSettings, PlayerSettings, QQueryOperations>
       playerSettingsProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'playerSettings');
     });
   }
 
-  QueryBuilder<MediaSettings, ReaderSettings?, QQueryOperations>
+  QueryBuilder<MediaSettings, ReaderSettings, QQueryOperations>
       readerSettingsProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'readerSettings');

@@ -3,6 +3,7 @@ import 'package:dartotsu/Api/Sources/Model/Source.dart';
 import '../../../../../DataClass/Anime.dart';
 import '../../../../../DataClass/Manga.dart';
 import '../../../../../DataClass/Media.dart';
+import '../../../../../Preferences/PrefManager.dart';
 import 'm_manga.dart';
 
 class MPages {
@@ -27,9 +28,16 @@ class MPages {
 
 extension M on MPages {
   List<Media> toMedia({bool isAnime = false, Source? source}) {
+
     return list.map((e) {
+      var id = loadCustomData<int>('${source?.name}-${e.name}');
+      if (id == null) {
+        var hash = e.hashCode;
+        saveCustomData('${source?.name}-${e.name}', hash);
+        id = hash;
+      }
       return Media(
-        id: e.hashCode,
+        id: id,
         name: e.name,
         cover: e.imageUrl,
         nameRomaji: e.name ?? '',

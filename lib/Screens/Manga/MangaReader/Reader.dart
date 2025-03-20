@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dartotsu/Preferences/IsarDataClasses/DefaultReaderSettings/DafaultReaderSettings.dart';
 import 'package:dartotsu/Widgets/ScrollConfig.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +40,7 @@ class MediaReaderState extends State<MediaReader> {
   late final ItemPositionsListener itemPositionsListener =
       ItemPositionsListener.create();
   late final PageController pageController = PageController();
-
+  late ReaderSettings readerSettings;
   final showControls = true.obs;
   final currentPage = 1.obs;
   final transformationController = TransformationController();
@@ -48,6 +49,7 @@ class MediaReaderState extends State<MediaReader> {
   @override
   void initState() {
     super.initState();
+    readerSettings = widget.media.settings.readerSettings;
     focusNode.requestFocus();
     itemPositionsListener.itemPositions.addListener(_updateCurrentPage);
     pageController.addListener(_onPageChanged);
@@ -80,24 +82,28 @@ class MediaReaderState extends State<MediaReader> {
       focusNode: focusNode,
       child: GestureDetector(
         onTap: () => showControls.value = !showControls.value,
-        onDoubleTap: _toggleZoom,
         child: Listener(
           onPointerSignal: (event) {
             if (event is PointerScrollEvent &&
                 HardwareKeyboard.instance.isControlPressed) {
-              _zoomOnScroll(event.scrollDelta.dy);
+              _zoomOnScroll(event.scrollDelta.dy, event.localPosition);
             }
           },
           child: Stack(
             alignment: Alignment.center,
             children: [
-              InteractiveViewer(
-                transformationController: transformationController,
-                minScale: 0.5,
-                maxScale: 4,
-                panEnabled: true,
-                scaleEnabled: Platform.isAndroid || Platform.isIOS,
-                child: _buildUPDMode(),
+              GestureDetector(
+                onDoubleTapDown: _toggleZoom,
+                child: InteractiveViewer(
+                  transformationController: transformationController,
+                  minScale: 0.5,
+                  maxScale: 4,
+                  panEnabled: true,
+                  scaleEnabled: Platform.isAndroid || Platform.isIOS,
+                  child: readerSettings.layoutType == LayoutType.Continuous
+                      ? _buildContinuousMode()
+                      : _buildPagedMode(),
+                ),
               ),
               _buildOverlay(),
             ],
@@ -107,11 +113,20 @@ class MediaReaderState extends State<MediaReader> {
     );
   }
 
-  Widget _buildUPDMode() {
+  Widget _buildContinuousMode() {
+    var direction = readerSettings.direction == Direction.UTD ||
+            readerSettings.direction == Direction.DTU
+        ? Axis.vertical
+        : Axis.horizontal;
+    var reverse = readerSettings.direction == Direction.DTU ||
+        readerSettings.direction == Direction.RTL;
+
     return ScrollConfig(
       context,
       child: ScrollablePositionedList.builder(
+        scrollDirection: direction,
         itemCount: widget.pages.length,
+        reverse: reverse,
         itemScrollController: itemScrollController,
         itemPositionsListener: itemPositionsListener,
         itemBuilder: (context, index) {
@@ -121,13 +136,20 @@ class MediaReaderState extends State<MediaReader> {
     );
   }
 
-  Widget _buildLTRMode() {
+  Widget _buildPagedMode() {
+    var direction = readerSettings.direction == Direction.UTD ||
+            readerSettings.direction == Direction.DTU
+        ? Axis.vertical
+        : Axis.horizontal;
+    var reverse = readerSettings.direction == Direction.DTU ||
+        readerSettings.direction == Direction.RTL;
+
     return ScrollConfig(
       context,
       child: PageView.builder(
         controller: pageController,
-        scrollDirection: Axis.horizontal,
-        reverse: true,
+        scrollDirection: direction,
+        reverse: reverse,
         itemCount: widget.pages.length,
         itemBuilder: (context, index) {
           return _buildPageImage(widget.pages[index]);
@@ -137,39 +159,48 @@ class MediaReaderState extends State<MediaReader> {
   }
 
   Widget _buildPageImage(PageUrl page) {
-    return Center(
-      child: ConstrainedBox(
-        constraints: BoxConstraints(
-          maxWidth: MediaQuery.of(context).size.width,
-        ),
-        child: CachedNetworkImage(
-          imageUrl: page.url,
-          fit: BoxFit.fitWidth,
-          errorWidget: (context, url, error) => Center(
-            child: SizedBox(
-              height: MediaQuery.of(context).size.height / 2,
-              width: double.infinity,
-              child: Center(
-                child: Text(
-                  'Failed to load image',
-                  style: TextStyle(
-                    color: Colors.red,
+    var isHorizontal = readerSettings.direction == Direction.LTR ||
+        readerSettings.direction == Direction.RTL;
+    return Padding(
+      padding: readerSettings.spacedPages
+          ? isHorizontal
+              ? EdgeInsets.symmetric(horizontal: 16)
+              : EdgeInsets.symmetric(vertical: 16)
+          : EdgeInsets.zero,
+      child: Center(
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            maxWidth: MediaQuery.of(context).size.width,
+          ),
+          child: CachedNetworkImage(
+            imageUrl: page.url,
+            fit: BoxFit.fitWidth,
+            errorWidget: (context, url, error) => Center(
+              child: SizedBox(
+                height: MediaQuery.of(context).size.height / 2,
+                width: double.infinity,
+                child: Center(
+                  child: Text(
+                    'Failed to load image',
+                    style: TextStyle(
+                      color: Colors.red,
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-          progressIndicatorBuilder: (context, url, downloadProgress) {
-            return SizedBox(
-              height: MediaQuery.of(context).size.height / 2,
-              width: double.infinity,
-              child: Center(
-                child: CircularProgressIndicator(
-                  value: downloadProgress.progress,
+            progressIndicatorBuilder: (context, url, downloadProgress) {
+              return SizedBox(
+                height: MediaQuery.of(context).size.height / 2,
+                width: double.infinity,
+                child: Center(
+                  child: CircularProgressIndicator(
+                    value: downloadProgress.progress,
+                  ),
                 ),
-              ),
-            );
-          },
+              );
+            },
+          ),
         ),
       ),
     );
@@ -195,15 +226,33 @@ class MediaReaderState extends State<MediaReader> {
         1;
   }
 
-  void _toggleZoom() {
-    currentScale = (currentScale < 2.0) ? 2.0 : 1.0;
-    transformationController.value = Matrix4.identity()..scale(currentScale);
+  void _toggleZoom(TapDownDetails details) {
+    final tapPosition = details.localPosition;
+    final targetScale = (currentScale < 2.0) ? 2.0 : 1.0;
+    _zoomAtPoint(tapPosition, targetScale);
   }
 
-  void _zoomOnScroll(double scrollDelta) {
+  void _zoomOnScroll(double scrollDelta, Offset pointerPosition) {
     final zoomFactor = (scrollDelta < 0) ? 1.1 : 0.9;
-    currentScale = (currentScale * zoomFactor).clamp(1, 4.0);
-    transformationController.value = Matrix4.identity()..scale(currentScale);
+    final newScale = (currentScale * zoomFactor).clamp(1.0, 4.0);
+    _zoomAtPoint(pointerPosition, newScale);
+  }
+
+  void _zoomAtPoint(Offset focalPoint, double targetScale) {
+    final matrix = transformationController.value;
+    currentScale = targetScale;
+    final focalPointInScene = _transformPoint(matrix, focalPoint);
+    transformationController.value = Matrix4.identity()
+      ..translate(focalPointInScene.dx, focalPointInScene.dy)
+      ..scale(currentScale)
+      ..translate(-focalPointInScene.dx, -focalPointInScene.dy);
+  }
+
+  Offset _transformPoint(Matrix4 matrix, Offset point) {
+    final invertedMatrix = Matrix4.inverted(matrix);
+    final x = (invertedMatrix[0] * point.dx) + (invertedMatrix[12]);
+    final y = (invertedMatrix[5] * point.dy) + (invertedMatrix[13]);
+    return Offset(x, y);
   }
 
   Widget _buildOverlay() {

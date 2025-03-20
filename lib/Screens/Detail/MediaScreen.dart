@@ -1,4 +1,4 @@
-import 'dart:convert';
+
 import 'dart:ui';
 
 import 'package:blur/blur.dart';
@@ -16,7 +16,6 @@ import 'package:provider/provider.dart';
 
 import '../../DataClass/Media.dart';
 import '../../Functions/Function.dart';
-import '../../Preferences/IsarDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
 import '../../Preferences/PrefManager.dart';
 import '../../Theme/LanguageSwitcher.dart';
 import '../../Theme/ThemeProvider.dart';
@@ -43,8 +42,8 @@ class MediaInfoPageState extends State<MediaInfoPage> {
 
   @override
   void initState() {
-    var service = context.currentService(listen: false);
 
+    var service = context.currentService(listen: false);
     _viewModel = Get.put(MediaPageViewModel(),
         tag: "${widget.mediaData.id.toString()}-${service.getName}");
 

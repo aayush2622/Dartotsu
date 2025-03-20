@@ -15,7 +15,10 @@ class Setting {
   final String description;
 
   /// Icon of the setting
-  final IconData icon;
+  final IconData? icon;
+
+  /// [trailingIcon]: Icon at the end of the setting only for [SettingType.normal]
+  final IconData? trailingIcon;
 
   /// [isVisible]: to determine whether the setting is visible or not
   final bool isVisible;
@@ -57,10 +60,11 @@ class Setting {
     required this.type,
     required this.name,
     required this.description,
-    required this.icon,
+    this.icon,
     this.isVisible = true,
     this.isActivity = false,
     this.isChecked = false,
+    this.trailingIcon,
     this.onClick,
     this.onLongClick,
     this.onSwitchChange,

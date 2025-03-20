@@ -6,21 +6,8 @@ extension on ExtensionsQueries {
 
     if (source == null || source.sourceCode == null || source.isAdded == false) {
       snackString('Source not found did you remove it?');
-      Get.back();
       return null;
     }
-    final localData = loadCustomData<String>('extensions_media_lists')?.trim();
-    final map = (localData?.isNotEmpty ?? false)
-        ? MediaMapWrapper.fromJson(jsonDecode(localData!))
-        : MediaMapWrapper(mediaMap: {'Continue Watching': []});
-
-    var list = mergeMapValues(map.mediaMap);
-
-    final existingMedia = list.firstWhereOrNull(
-      (m) => m.name == media.name && m.sourceData?.id == media.sourceData!.id,
-    );
-    if (existingMedia != null) media.id = existingMedia.id;
-
     media.sourceData = source;
     var data =
         await getDetail(url: media.shareLink!, source: media.sourceData!);

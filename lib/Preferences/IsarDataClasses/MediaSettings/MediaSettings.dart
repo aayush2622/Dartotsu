@@ -34,14 +34,17 @@ class MediaSettings {
     this.isReverse = false,
     this.server,
     this.selectedScanlators,
-    PlayerSettings? playerSettings,
-    ReaderSettings? readerSettings,
+    PlayerSettings? playerSetting,
+    ReaderSettings? readerSetting,
     this.showResponse,
-  })  : playerSettings = playerSettings ??
+  })  : playerSettings = playerSetting ??
             PlayerSettings.fromJson(
               jsonDecode(loadData(PrefName.playerSettings)),
             ),
-        readerSettings = readerSettings ?? ReaderSettings();
+        readerSettings = readerSetting ??
+            ReaderSettings.fromJson(
+              jsonDecode(loadData(PrefName.readerSettings)),
+            );
 
   factory MediaSettings.fromJson(Map<String, dynamic> json) {
     return MediaSettings(
@@ -51,9 +54,9 @@ class MediaSettings {
         isReverse: json['isReverse'],
         server: json['server'],
         selectedScanlators: json['selectedScanlators'],
-        playerSettings: PlayerSettings.fromJson(
+        playerSetting: PlayerSettings.fromJson(
             json['playerSettings'] as Map<String, dynamic>),
-        readerSettings: json['readerSettings'],
+        readerSetting: json['readerSettings'],
         showResponse: ShowResponse.fromJson(
             json['showResponse'] as Map<String, dynamic>));
   }

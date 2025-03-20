@@ -330,7 +330,7 @@ Future<void> openPlayer(BuildContext context) async {
     userPreferredName: 'Local file',
     isAdult: false,
     settings: MediaSettings(
-        playerSettings: PlayerSettings.fromJson(
+        playerSetting: PlayerSettings.fromJson(
       jsonDecode(loadData(PrefName.playerSettings)),
     )),
     anime: Anime(
