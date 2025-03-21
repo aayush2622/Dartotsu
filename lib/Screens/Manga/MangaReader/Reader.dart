@@ -167,6 +167,7 @@ class MediaReaderState extends State<MediaReader> {
               ? EdgeInsets.symmetric(horizontal: 16)
               : EdgeInsets.symmetric(vertical: 16)
           : EdgeInsets.zero,
+
       child: Center(
         child: ConstrainedBox(
           constraints: BoxConstraints(
