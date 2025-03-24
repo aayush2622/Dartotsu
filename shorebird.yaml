@@ -13,3 +13,8 @@ app_id: ff39f62e-b243-4e9e-bd39-d2cedfe3a5ff
 # https://pub.dev/packages/shorebird_code_push
 # Uncomment the following line to disable automatic updates.
 auto_update: false
+
+
+
+
+# The minimum version of the app that is allowed to run.
