@@ -44,18 +44,15 @@ class Pref<T> {
 enum Location {
   General,
   Irrelevant,
-  Protected,
 }
 
 class PrefManager {
   static late Isar _generalPreferences;
   static late Isar _irrelevantPreferences;
-  static late Isar _protectedPreferences;
 
   static final Map<Location, Map<String, dynamic>> cache = {
     Location.General: {},
-    Location.Irrelevant: {},
-    Location.Protected: {}, // add more and ios will crash
+    Location.Irrelevant: {}, // add more and ios will crash
   };
 
   static Future<void> init() async {
@@ -63,7 +60,6 @@ class PrefManager {
       final path = await StorageProvider.getDirectory(subPath: 'settings');
       _generalPreferences = await _open('generalSettings', path!.path);
       _irrelevantPreferences = await _open('irrelevantSettings', path.path);
-      _protectedPreferences = await _open('protectedSettings', path.path);
       await _populateCache();
     } catch (e) {
       Logger.log('Error initializing preferences: $e');
@@ -210,8 +206,6 @@ class PrefManager {
         return _generalPreferences;
       case 'Irrelevant':
         return _irrelevantPreferences;
-      case 'Protected':
-        return _protectedPreferences;
       default:
         return _generalPreferences;
     }

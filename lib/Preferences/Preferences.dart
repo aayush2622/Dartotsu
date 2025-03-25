@@ -138,14 +138,14 @@ class PrefName {
   static Pref<String> readerSettings =
   Pref(Location.General, 'readerSetting', jsonEncode(ReaderSettings().toJson()));
   //Protection
-  static const anilistToken = Pref(Location.Protected, 'AnilistToken', '');
+  static const anilistToken = Pref(Location.General, 'AnilistToken', '');
   static const Pref<ResponseToken?> malToken =
-      Pref(Location.Protected, 'MalToken', null);
-  static const simklToken = Pref(Location.Protected, 'SimklToken', '');
-  static const discordToken = Pref(Location.Protected, 'DiscordToken', '');
+      Pref(Location.General, 'MalToken', null);
+  static const simklToken = Pref(Location.General, 'SimklToken', '');
+  static const discordToken = Pref(Location.General, 'DiscordToken', '');
   static const discordUserName =
-      Pref(Location.Protected, 'discordUserName', '');
-  static const discordAvatar = Pref(Location.Protected, 'discordAvatar', '');
+      Pref(Location.General, 'discordUserName', '');
+  static const discordAvatar = Pref(Location.General, 'discordAvatar', '');
 
   // irrelevant
   static const Pref<List<String>> GenresList =
