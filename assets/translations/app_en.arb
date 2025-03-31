@@ -402,6 +402,8 @@
   
   "playerSettingsTitle": "Player Settings",
   "@playerSettingsTitle": {},
+  "playerSettingsDescription": "Change player settings",
+  "@playerSettingsDescription": {},
   "speed": "Speed",
   "@speed": {},
   "speedDescription": "Default speed for player",
@@ -422,6 +424,8 @@
   "@skipButton": {},
   "skipButtonDescription": "Skip button duration",
   "@skipButtonDescription": {},
+  "settingsCommonScreen.readerSettings": "Change reader settings",
+  "settingsCommonScreen.readerSettingsDescription": "Customize your reading experience with various settings",
 
   
   "fontColor": "Font Color",
@@ -580,6 +584,10 @@
   "@logFileDescription": {},
   "restoreSettings": "Restore Settings",
   "@restoreSettings": {},
+  "imageCache": "Use different Image cache manager",
+  "@imageCache": {},
+  "imageCacheDescription": "Alternative image caching method for devices with problematic default cache managers",
+  "@imageCacheDescription": {},
 
   
   "readStatus": "Read",
