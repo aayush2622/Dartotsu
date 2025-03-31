@@ -161,7 +161,7 @@ class _ReaderControllerState extends State<ReaderController> {
             showCustomBottomDialog(
               context,
               CustomBottomDialog(
-                title: 'Reader Settings',
+                title: getString.readerSettings,
                 viewList: [
                   StatefulBuilder(
                     builder: (context,state) => Padding(
