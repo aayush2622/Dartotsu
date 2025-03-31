@@ -147,7 +147,7 @@
   "@themeDescription": {},
   "yes": "Evet",
   "@yes": {},
-  "episode": "{count, plural, =1 {Bölüm} other {Bölümler (Dizi)}}",
+  "episode": "{count, plural, =1 {Bölüm} other {Kısımlar}}",
   "@episode": {
     "description": "count > 1 will use plural form",
     "placeholders": {
@@ -308,7 +308,7 @@
   "@comingSoon": {},
   "total": "Toplam",
   "@total": {},
-  "totalEpisodes": "Bölümler",
+  "totalEpisodes": "Kısımlar",
   "@totalEpisodes": {},
   "loginTo": "{service}'ye Giriş Yap",
   "@loginTo": {
