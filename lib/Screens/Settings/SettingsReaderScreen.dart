@@ -42,9 +42,8 @@ List<Widget> readerSettings(
 }) {
   void saveReaderSettings(ReaderSettings readerSettings) {
     if (media != null) {
-      MediaSettings.saveMediaSettings(
-        media..settings.readerSettings = readerSettings,
-      );
+      media.settings.readerSettings = readerSettings;
+      MediaSettings.saveMediaSettings(media);
     } else {
       saveData(PrefName.readerSettings, jsonEncode(readerSettings.toJson()));
     }
@@ -54,19 +53,83 @@ List<Widget> readerSettings(
 
   var readerSettings = media?.settings.readerSettings ??
       ReaderSettings.fromJson(
-        jsonDecode(loadData(PrefName.readerSettings)),
+        jsonDecode(loadData(PrefName.readerSettings) ?? '{}'),
       );
 
+  Widget buildTrailingIcon(BuildContext context) {
+    final theme = Theme.of(context).colorScheme;
+
+    return Row(
+      children: [
+        for (var type in LayoutType.values)
+          Padding(
+            padding: const EdgeInsets.only(left: 10),
+            child: IconButton(
+              icon: Transform(
+                alignment: Alignment.center,
+                transform: type == LayoutType.values.first
+                    ? Matrix4.rotationY(3.14159)
+                    : Matrix4.identity(),
+                child: Icon(type.icon),
+              ),
+              iconSize: 24,
+              color: type == readerSettings.layoutType
+                  ? theme.onSurface
+                  : theme.onSurface.withOpacity(0.33),
+              onPressed: () {
+                if (readerSettings.layoutType != type) {
+                  readerSettings.layoutType = type;
+                  saveReaderSettings(readerSettings);
+                }
+              },
+            ),
+          ),
+      ],
+    );
+  }
+
   return [
+    Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Layout',
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16.0,
+                  fontFamily: 'Poppins',
+                ),
+              ),
+              const SizedBox(height: 6),
+              Text(
+                readerSettings.layoutType.name,
+                style: const TextStyle(
+                  fontWeight: FontWeight.w600,
+                  color: Colors.grey,
+                  fontFamily: 'Poppins',
+                  fontSize: 14,
+                ),
+              ),
+            ],
+          ),
+        ),
+        buildTrailingIcon(context),
+      ],
+    ),
+    SizedBox(height: 12),
     SettingsAdaptor(
       settings: [
         Setting(
           type: SettingType.normal,
           name: 'Direction',
           description: readerSettings.direction.toString(),
-          trailingIcon: readerSettings.direction.icon(),
+          trailingIcon: readerSettings.direction.icon,
           onClick: () {
-            readerSettings.direction = readerSettings.direction.next();
+            readerSettings.direction = readerSettings.direction.next;
             saveReaderSettings(readerSettings);
           },
         ),
@@ -76,8 +139,10 @@ List<Widget> readerSettings(
           description: 'Add space between pages',
           isChecked: readerSettings.spacedPages,
           onSwitchChange: (value) {
-            readerSettings.spacedPages = value;
-            saveReaderSettings(readerSettings);
+            if (readerSettings.spacedPages != value) {
+              readerSettings.spacedPages = value;
+              saveReaderSettings(readerSettings);
+            }
           },
         ),
       ],

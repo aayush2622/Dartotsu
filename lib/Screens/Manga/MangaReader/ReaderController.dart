@@ -164,7 +164,7 @@ class _ReaderControllerState extends State<ReaderController> {
                 title: 'Reader Settings',
                 viewList: [
                   StatefulBuilder(
-                    builder: (context,state) => Padding(
+                    builder: (context, state) => Padding(
                       padding: const EdgeInsets.all(16),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -203,73 +203,131 @@ class _ReaderControllerState extends State<ReaderController> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
+        Obx(
+          () {
+            return SizedBox(
+              height: 42,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.6),
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                child: SliderTheme(
+                  data: SliderTheme.of(context).copyWith(
+                    thumbColor: Theme.of(context).colorScheme.primary,
+                    activeTrackColor: Theme.of(context).colorScheme.primary,
+                    inactiveTrackColor:
+                        const Color.fromARGB(255, 121, 121, 121),
+                    thumbShape:
+                        const RoundSliderThumbShape(enabledThumbRadius: 6),
+                    overlayShape: SliderComponentShape.noOverlay,
+                    trackShape: RoundedRectSliderTrackShape(),
+                  ),
+                  child: Slider(
+                    value: widget.reader.currentPage.value.toDouble(),
+                    min: 1,
+                    max: pages.length.toDouble(),
+                    divisions: pages.length - 1,
+                    onChanged: (value) {
+                      widget.reader.currentPage.value = value.toInt();
+                      if (media.settings.readerSettings.layoutType ==
+                          LayoutType.Paged) {
+                        widget.reader.pageController
+                            .jumpToPage(value.toInt() - 1);
+                      } else {
+                        widget.reader.itemScrollController.jumpTo(
+                          index: value.toInt() - 1,
+                        );
+                      }
+                    },
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
+        SizedBox(height: 24),
         Expanded(
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Visibility(
-                visible: previous != null,
-                child: Row(
-                  children: [
-                    _buildControlButton(
-                      icon: Icons.skip_previous_rounded,
-                      color: Colors.white,
-                      onPressed: () {
-                        onChapterClick(
-                          context,
-                          previous!,
-                          source,
-                          media,
-                          () => Get.back(),
-                        );
-                      },
-                    ),
-                    SizedBox(width: 12),
-                    Text(
-                      previous?.title.toString() ?? '',
-                      style: const TextStyle(
+              SizedBox(
+                width: (MediaQuery.of(context).size.width - 48) * 0.5,
+                child: Visibility(
+                  visible: previous != null,
+                  child: Row(
+                    children: [
+                      _buildControlButton(
+                        icon: Icons.skip_previous_rounded,
                         color: Colors.white,
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
+                        onPressed: () {
+                          onChapterClick(
+                            context,
+                            previous!,
+                            source,
+                            media,
+                            () => Get.back(),
+                          );
+                        },
                       ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ],
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Text(
+                          previous?.title.toString() ?? '',
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-              Visibility(
-                visible: next != null,
-                child: Row(
-                  children: [
-                    Text(
-                      next?.title.toString() ?? '',
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
+              SizedBox(
+                width: (MediaQuery.of(context).size.width - 48) * 0.5,
+                child: Visibility(
+                  visible: next != null,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          next?.title.toString() ?? '',
+                          textAlign: TextAlign.right,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    const SizedBox(width: 12),
-                    _buildControlButton(
-                      icon: Icons.skip_next_rounded,
-                      color: Colors.white,
-                      onPressed: () {
-                        onChapterClick(
-                          context,
-                          next!,
-                          source,
-                          media,
-                          () => Get.back(),
-                        );
-                      },
-                    ),
-                  ],
+                      const SizedBox(width: 12),
+                      _buildControlButton(
+                        icon: Icons.skip_next_rounded,
+                        color: Colors.white,
+                        onPressed: () {
+                          onChapterClick(
+                            context,
+                            next!,
+                            source,
+                            media,
+                            () => Get.back(),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
                 ),
-              )
+              ),
             ],
           ),
         ),
