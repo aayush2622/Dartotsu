@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dartotsu/Api/Sources/Model/settings.dart';
+import 'package:dartotsu/main.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:isar/isar.dart';
 import 'package:path/path.dart' as path;
@@ -114,22 +115,16 @@ class StorageProvider {
     return fullDirectory;
   }
 
-  static Future<Isar> initDB(String? path, {bool inspector = false}) async {
-    Directory? dir;
-    if (path == null) {
-      dir = await getDirectory(subPath: 'databases');
-    } else {
-      dir = Directory(path);
-    }
-
-    final isar = Isar.openSync([
+  static Future<void> initDB() async {
+    Directory? dir = await getDirectory(subPath: 'databases');
+    isar = Isar.openSync([
       MangaSchema,
       SourceSchema,
       ChapterSchema,
       SettingsSchema,
       SourcePreferenceSchema,
       SourcePreferenceStringValueSchema,
-    ], directory: dir!.path, name: "sources", inspector: inspector);
+    ], directory: dir!.path, name: "sources", inspector: false);
 
     if (isar.settings.filter().idEqualTo(227).isEmptySync()) {
       isar.writeTxnSync(
@@ -138,8 +133,6 @@ class StorageProvider {
         },
       );
     }
-
-    return isar;
   }
 }
 

@@ -82,16 +82,15 @@ void main(List<String> args) async {
   );
 }
 
-
-
 Future init() async {
   if (Platform.isWindows) {
-    ['dar', 'anymex', 'sugoireads', 'mangayomi'].forEach(registerProtocolHandler);
+    ['dar', 'anymex', 'sugoireads', 'mangayomi']
+        .forEach(registerProtocolHandler);
   }
   await StorageProvider.requestPermission();
   await dotenv.load(fileName: ".env");
   await PrefManager.init();
-  isar = await StorageProvider.initDB(null);
+  await StorageProvider.initDB();
   await Logger.init();
   await Extensions.init();
   MediaService.init();
@@ -246,7 +245,8 @@ class MainActivityState extends State<MainActivity> {
   int _selectedIndex = 1;
 
   void _onTabSelected(int index) => setState(() => _selectedIndex = index);
-@override
+
+  @override
   void initState() {
     super.initState();
     checkForUpdate();
@@ -280,7 +280,8 @@ class MainActivityState extends State<MainActivity> {
             bottom: 92.bottomBar(),
             right: 12,
             child: GestureDetector(
-              onLongPress: () => service.searchScreen?.onSearchIconLongClick(context),
+              onLongPress: () =>
+                  service.searchScreen?.onSearchIconLongClick(context),
               child: FloatingActionButton(
                 onPressed: () =>
                     service.searchScreen?.onSearchIconClick(context),

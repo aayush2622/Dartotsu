@@ -23,7 +23,8 @@ extension on AnilistQueries {
       final response =
           await executeQuery<MediaListCollectionResponse>(_queryBanner(type));
       final bannerImages = response?.data?.mediaListCollection?.lists
-              ?.expand((list) => list.entries ?? [])
+              ?.expand((list) => list.entries ?? [] as List<api.MediaList>)
+              .where((e ) => !(e.media?.isAdult == true))
               .map((entry) => entry.media?.bannerImage)
               .where((imageUrl) => imageUrl != null && imageUrl != 'null')
               .toList() ??

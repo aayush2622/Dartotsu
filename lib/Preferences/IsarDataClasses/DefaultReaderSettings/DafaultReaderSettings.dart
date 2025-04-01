@@ -64,8 +64,17 @@ class ReaderSettings {
 }
 
 enum LayoutType {
-  Paged,
   Continuous,
+  Paged;
+
+  IconData get icon {
+    switch (this) {
+      case LayoutType.Paged:
+        return Icons.amp_stories_rounded;
+      case LayoutType.Continuous:
+        return Icons.view_column_rounded;
+    }
+  }
 }
 
 enum Direction {
@@ -88,7 +97,7 @@ enum Direction {
     }
   }
 
-  IconData icon(){
+  IconData get icon {
     switch (this) {
       case Direction.UTD:
         return Icons.swipe_down_alt_rounded;
@@ -101,7 +110,7 @@ enum Direction {
     }
   }
 
-  Direction next() {
+  Direction get next {
     switch (this) {
       case Direction.UTD:
         return Direction.RTL;

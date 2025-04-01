@@ -44,7 +44,6 @@ class MediaReaderState extends State<MediaReader> {
   final showControls = true.obs;
   final currentPage = 1.obs;
   final transformationController = TransformationController();
-  double currentScale = 1.0;
 
   @override
   void initState() {
@@ -113,6 +112,21 @@ class MediaReaderState extends State<MediaReader> {
     );
   }
 
+  Widget _buildOverlay() {
+    return Obx(() {
+      return Positioned.fill(
+        child: AnimatedOpacity(
+          opacity: showControls.value ? 1 : 0,
+          duration: const Duration(milliseconds: 300),
+          child: IgnorePointer(
+            ignoring: !showControls.value,
+            child: ReaderController(reader: this),
+          ),
+        ),
+      );
+    });
+  }
+
   Widget _buildContinuousMode() {
     var direction = readerSettings.direction == Direction.UTD ||
             readerSettings.direction == Direction.DTU
@@ -167,7 +181,6 @@ class MediaReaderState extends State<MediaReader> {
               ? EdgeInsets.symmetric(horizontal: 16)
               : EdgeInsets.symmetric(vertical: 16)
           : EdgeInsets.zero,
-
       child: Center(
         child: ConstrainedBox(
           constraints: BoxConstraints(
@@ -227,6 +240,8 @@ class MediaReaderState extends State<MediaReader> {
         1;
   }
 
+  double currentScale = 1.0;
+
   void _toggleZoom(TapDownDetails details) {
     final tapPosition = details.localPosition;
     final targetScale = (currentScale < 2.0) ? 2.0 : 1.0;
@@ -254,20 +269,5 @@ class MediaReaderState extends State<MediaReader> {
     final x = (invertedMatrix[0] * point.dx) + (invertedMatrix[12]);
     final y = (invertedMatrix[5] * point.dy) + (invertedMatrix[13]);
     return Offset(x, y);
-  }
-
-  Widget _buildOverlay() {
-    return Obx(() {
-      return Positioned.fill(
-        child: AnimatedOpacity(
-          opacity: showControls.value ? 1 : 0,
-          duration: const Duration(milliseconds: 300),
-          child: IgnorePointer(
-            ignoring: !showControls.value,
-            child: ReaderController(reader: this),
-          ),
-        ),
-      );
-    });
   }
 }

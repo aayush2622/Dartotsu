@@ -76,6 +76,7 @@ class AnilistSearchScreen extends BaseSearchScreen {
   void resetData() {
     searchResult.value = null;
   }
+
   @override
   void onSearchIconLongClick(BuildContext context) {
     if (navbar.selectedIndex == 0) {
