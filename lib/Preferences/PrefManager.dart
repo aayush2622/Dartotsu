@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:dartotsu/Preferences/IsarDataClasses/MediaSettings/MediaSettings.dart';
 import 'package:dartotsu/logger.dart';
+import 'package:dartotsu/main.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:isar/isar.dart';
 
@@ -47,8 +48,6 @@ enum Location {
 }
 
 class PrefManager {
-  static late Isar _generalPreferences;
-  static late Isar _irrelevantPreferences;
 
   static final Map<Location, Map<String, dynamic>> cache = {
     Location.General: {},
@@ -57,9 +56,6 @@ class PrefManager {
 
   static Future<void> init() async {
     try {
-      final path = await StorageProvider.getDirectory(subPath: 'settings');
-      _generalPreferences = await _open('generalSettings', path!.path);
-      _irrelevantPreferences = await _open('irrelevantSettings', path.path);
       await _populateCache();
     } catch (e) {
       Logger.log('Error initializing preferences: $e');
@@ -201,14 +197,7 @@ class PrefManager {
   }
 
   static Isar _getPrefBox(Location location) {
-    switch (location.name) {
-      case 'General':
-        return _generalPreferences;
-      case 'Irrelevant':
-        return _irrelevantPreferences;
-      default:
-        return _generalPreferences;
-    }
+        return isar;
   }
 }
 
