@@ -89,8 +89,9 @@ Future init() async {
   }
   await StorageProvider.requestPermission();
   await dotenv.load(fileName: ".env");
-  await PrefManager.init();
   await StorageProvider.initDB();
+  await PrefManager.init();
+
   await Logger.init();
   await Extensions.init();
   MediaService.init();
