@@ -18,7 +18,7 @@ class SettingsReaderScreen extends StatefulWidget {
 
 class SettingsReaderScreenState extends BaseSettingsScreen {
   @override
-  String title() => 'Reader Settings';
+  String title() => getString.readerSettings;
 
   @override
   Widget icon() => Padding(
