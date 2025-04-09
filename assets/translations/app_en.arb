@@ -424,8 +424,8 @@
   "@skipButton": {},
   "skipButtonDescription": "Skip button duration",
   "@skipButtonDescription": {},
-  "settingsCommonScreen.readerSettings": "Change reader settings",
-  "settingsCommonScreen.readerSettingsDescription": "Customize your reading experience with various settings",
+  "settingsCommonScreenreaderSettings": "Change reader settings",
+  "settingsCommonScreenreaderSettingsDescription": "Customize your reading experience with various settings",
 
   
   "fontColor": "Font Color",
