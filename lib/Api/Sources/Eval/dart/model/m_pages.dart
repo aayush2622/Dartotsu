@@ -30,10 +30,10 @@ extension M on MPages {
   List<Media> toMedia({bool isAnime = false, Source? source}) {
 
     return list.map((e) {
-      var id = loadCustomData<int>('${source?.name}-${e.name}');
+      var id = loadCustomData<int>('${source?.name}-${e.link}');
       if (id == null) {
         var hash = e.hashCode;
-        saveCustomData('${source?.name}-${e.name}', hash);
+        saveCustomData('${source?.name}-${e.link}', hash);
         id = hash;
       }
       return Media(

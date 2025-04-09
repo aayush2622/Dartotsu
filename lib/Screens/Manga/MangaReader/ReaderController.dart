@@ -203,52 +203,52 @@ class _ReaderControllerState extends State<ReaderController> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        Obx(
-          () {
-            return SizedBox(
-              height: 42,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.6),
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                child: SliderTheme(
-                  data: SliderTheme.of(context).copyWith(
-                    thumbColor: Theme.of(context).colorScheme.primary,
-                    activeTrackColor: Theme.of(context).colorScheme.primary,
-                    inactiveTrackColor:
-                        const Color.fromARGB(255, 121, 121, 121),
-                    thumbShape:
-                        const RoundSliderThumbShape(enabledThumbRadius: 6),
-                    overlayShape: SliderComponentShape.noOverlay,
-                    trackShape: RoundedRectSliderTrackShape(),
+        if (!media.settings.readerSettings.hideScrollbar == true)
+          Obx(
+            () {
+              return SizedBox(
+                height: 42,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(0.6),
+                    borderRadius: BorderRadius.circular(16),
                   ),
-                  child: Slider(
-                    value: widget.reader.currentPage.value.toDouble(),
-                    min: 1,
-                    max: pages.length.toDouble(),
-                    divisions: pages.length - 1,
-                    onChanged: (value) {
-                      widget.reader.currentPage.value = value.toInt();
-                      if (media.settings.readerSettings.layoutType ==
-                          LayoutType.Paged) {
-                        widget.reader.pageController
-                            .jumpToPage(value.toInt() - 1);
-                      } else {
-                        widget.reader.itemScrollController.jumpTo(
-                          index: value.toInt() - 1,
-                        );
-                      }
-                    },
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  child: SliderTheme(
+                    data: SliderTheme.of(context).copyWith(
+                      thumbColor: Theme.of(context).colorScheme.primary,
+                      activeTrackColor: Theme.of(context).colorScheme.primary,
+                      inactiveTrackColor:
+                          const Color.fromARGB(255, 121, 121, 121),
+                      thumbShape:
+                          const RoundSliderThumbShape(enabledThumbRadius: 6),
+                      overlayShape: SliderComponentShape.noOverlay,
+                      trackShape: RoundedRectSliderTrackShape(),
+                    ),
+                    child: Slider(
+                      value: widget.reader.currentPage.value.toDouble(),
+                      min: 1,
+                      max: pages.length.toDouble(),
+                      divisions: pages.length - 1,
+                      onChanged: (value) {
+                        widget.reader.currentPage.value = value.toInt();
+                        if (media.settings.readerSettings.layoutType ==
+                            LayoutType.Paged) {
+                          widget.reader.pageController
+                              .jumpToPage(value.toInt() - 1);
+                        } else {
+                          widget.reader.itemScrollController.jumpTo(
+                            index: value.toInt() - 1,
+                          );
+                        }
+                      },
+                    ),
                   ),
                 ),
-              ),
-            );
-          },
-        ),
-        SizedBox(height: 24),
+              );
+            },
+          ),
         Expanded(
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.end,
@@ -331,20 +331,21 @@ class _ReaderControllerState extends State<ReaderController> {
             ],
           ),
         ),
-        Obx(
-          () {
-            return Center(
-              child: Text(
-                "${widget.reader.currentPage}/${pages.length}",
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 12,
-                  fontWeight: FontWeight.bold,
+        if (!media.settings.readerSettings.hidePageNumber == true)
+          Obx(
+            () {
+              return Center(
+                child: Text(
+                  "${widget.reader.currentPage}/${pages.length}",
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-            );
-          },
-        ),
+              );
+            },
+          ),
       ],
     );
   }

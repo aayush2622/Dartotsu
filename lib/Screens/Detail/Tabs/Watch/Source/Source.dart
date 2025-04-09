@@ -133,7 +133,6 @@ class SourceState extends State<Source> {
                   source: widget.media.sourceData!,
                   episodeList: reversed[selectedChunkIndex.value],
                   mediaData: widget.media,
-                  onEpisodeClick: () => Get.back(),
                 );
               },
             ),

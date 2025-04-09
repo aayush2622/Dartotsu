@@ -12,9 +12,6 @@ import 'Api/Sources/Eval/dart/model/source_preference.dart';
 import 'Api/Sources/Model/Manga.dart';
 import 'Api/Sources/Model/Source.dart';
 import 'Api/Sources/Model/chapter.dart';
-import 'Preferences/IsarDataClasses/KeyValue/KeyValues.dart';
-import 'Preferences/IsarDataClasses/MalToken/MalToken.dart';
-import 'Preferences/IsarDataClasses/MediaSettings/MediaSettings.dart';
 
 class StorageProvider {
   static Future<bool> requestPermission() async {
@@ -127,9 +124,6 @@ class StorageProvider {
       SettingsSchema,
       SourcePreferenceSchema,
       SourcePreferenceStringValueSchema,
-      KeyValueSchema,
-      ResponseTokenSchema,
-      MediaSettingsSchema
     ], directory: dir!.path, name: "sources", inspector: false);
 
     if (isar.settings.filter().idEqualTo(227).isEmptySync()) {
