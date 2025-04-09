@@ -97,7 +97,6 @@ class MediaReaderState extends State<MediaReader> {
                   transformationController: transformationController,
                   minScale: 0.5,
                   maxScale: 4,
-                  panEnabled: true,
                   scaleEnabled: Platform.isAndroid || Platform.isIOS,
                   child: readerSettings.layoutType == LayoutType.Continuous
                       ? _buildContinuousMode()
@@ -229,7 +228,11 @@ class MediaReaderState extends State<MediaReader> {
 
   void _updateCurrentPage() {
     final positions = itemPositionsListener.itemPositions.value;
-    if (positions.isEmpty) return;
+
+    if (positions.isEmpty) {
+      currentPage.value = 1;
+      return;
+    }
 
     currentPage.value = positions
             .reduce((a, b) => (a.itemLeadingEdge < b.itemLeadingEdge &&

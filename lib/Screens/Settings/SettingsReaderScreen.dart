@@ -145,6 +145,30 @@ List<Widget> readerSettings(
             }
           },
         ),
+        Setting(
+          type: SettingType.switchType,
+          name: 'Hide Scrollbar',
+          description: 'Hide scrollbar while reading',
+          isChecked: readerSettings.hideScrollbar,
+          onSwitchChange: (value) {
+            if (readerSettings.hideScrollbar != value) {
+              readerSettings.hideScrollbar = value;
+              saveReaderSettings(readerSettings);
+            }
+          },
+        ),
+        Setting(
+          type: SettingType.switchType,
+          name: 'Hide Page Number',
+          description: 'Hide page number while reading',
+          isChecked: readerSettings.hidePageNumber,
+          onSwitchChange: (value) {
+            if (readerSettings.hidePageNumber != value) {
+              readerSettings.hidePageNumber = value;
+              saveReaderSettings(readerSettings);
+            }
+          },
+        )
       ],
     ),
   ];

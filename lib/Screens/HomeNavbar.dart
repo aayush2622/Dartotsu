@@ -15,9 +15,7 @@ class FloatingBottomNavBar extends StatelessWidget {
     required this.onTabSelected,
   });
 
-  void onClick(int index) {
-    onTabSelected(index);
-  }
+  void onClick(int index) => onTabSelected(index);
 
   @override
   Widget build(BuildContext context) {
