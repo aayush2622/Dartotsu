@@ -56,7 +56,7 @@ class ExtensionsSearchScreen extends BaseSearchScreen {
               source: source,
               filterList: [],
             ))
-                ?.toMedia(isAnime: true, source: source);
+                ?.toMedia(isAnime: searchResults.value.type == SearchType.ANIME ? true : false, source: source);
             if (result != null && result.isNotEmpty) {
               data.value = {...?data.value, source.name ?? 'Unknown': result};
             }

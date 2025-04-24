@@ -187,6 +187,7 @@ class MediaReaderState extends State<MediaReader> {
           ),
           child: CachedNetworkImage(
             imageUrl: page.url,
+            httpHeaders: page.headers,
             fit: BoxFit.fitWidth,
             errorWidget: (context, url, error) => Center(
               child: SizedBox(
@@ -194,10 +195,11 @@ class MediaReaderState extends State<MediaReader> {
                 width: double.infinity,
                 child: Center(
                   child: Text(
-                    'Failed to load image',
+                    'Failed to load image \n $error',
                     style: TextStyle(
                       color: Colors.red,
                     ),
+                    maxLines: 3,
                   ),
                 ),
               ),
