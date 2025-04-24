@@ -69,8 +69,7 @@ class SearchScreenState extends State<SearchScreen> {
     var key =
         "${service.getName}${widget.title.name.toUpperCase()}_searchHistory";
     var theme = context.theme.colorScheme;
-    List<String> searchHistory = loadCustomData(key) ?? [];
-
+    List<String> searchHistory = (loadCustomData(key) ?? []);
     return CustomScrollConfig(
       context,
       controller: screen.scrollController,
@@ -86,6 +85,7 @@ class SearchScreenState extends State<SearchScreen> {
                     children: [
                       ...screen.headerWidget(context),
                       ListView.builder(
+                        reverse: true,
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         itemCount: searchHistory.length,
