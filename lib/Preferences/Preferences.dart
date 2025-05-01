@@ -83,7 +83,7 @@ class PrefName {
     'Most Favourite Series': true,
   });
   static const Pref<Map<dynamic, dynamic>> simklAnimeLayout =
-  Pref(Location.General, 'simklAnimeLayoutOrder', {
+      Pref(Location.General, 'simklAnimeLayoutOrder', {
     'Incoming': true,
     'Airing': true,
   });
@@ -113,7 +113,7 @@ class PrefName {
     'Most Favourite Manga': true,
   });
   static const Pref<Map<dynamic, dynamic>> simklMangaLayout =
-  Pref(Location.General, 'simklMangaLayoutOrder', {
+      Pref(Location.General, 'simklMangaLayoutOrder', {
     'Incoming Shows': true,
     'Airing Shows': true,
   });
@@ -133,18 +133,18 @@ class PrefName {
   static const cursedSpeed = Pref(Location.General, 'cursedSpeed', false);
   static const thumbLessSeekBar =
       Pref(Location.General, 'thumbLessSeekBar', false);
-  static Pref<String> playerSettings =
-  Pref(Location.General, 'playerSetting', jsonEncode(PlayerSettings().toJson()));
-  static Pref<String> readerSettings =
-  Pref(Location.General, 'readerSetting', jsonEncode(ReaderSettings().toJson()));
+  static Pref<String> playerSettings = Pref(
+      Location.General, 'playerSetting', jsonEncode(PlayerSettings().toJson()));
+  static Pref<String> readerSettings = Pref(
+      Location.General, 'readerSetting', jsonEncode(ReaderSettings().toJson()));
+
   //Protection
   static const anilistToken = Pref(Location.General, 'AnilistToken', '');
   static const Pref<ResponseToken?> malToken =
       Pref(Location.General, 'MalToken', null);
   static const simklToken = Pref(Location.General, 'SimklToken', '');
   static const discordToken = Pref(Location.General, 'DiscordToken', '');
-  static const discordUserName =
-      Pref(Location.General, 'discordUserName', '');
+  static const discordUserName = Pref(Location.General, 'discordUserName', '');
   static const discordAvatar = Pref(Location.General, 'discordAvatar', '');
 
   // irrelevant

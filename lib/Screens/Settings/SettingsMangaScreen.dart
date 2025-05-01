@@ -64,8 +64,7 @@ class SettingsMangaScreenState extends BaseSettingsScreen {
             description: getString.manageLayoutDescription(getString.manga),
             icon: Icons.tune,
             onClick: () async {
-              final homeLayoutMap =
-                  loadData(PrefName.anilistMangaLayout);
+              final homeLayoutMap = loadData(PrefName.anilistMangaLayout);
               List<String> titles =
                   List<String>.from(homeLayoutMap.keys.toList());
               List<bool> checkedStates =
@@ -158,9 +157,9 @@ class SettingsMangaScreenState extends BaseSettingsScreen {
             onClick: () async {
               final homeLayoutMap = loadData(PrefName.simklMangaLayout);
               List<String> titles =
-              List<String>.from(homeLayoutMap.keys.toList());
+                  List<String>.from(homeLayoutMap.keys.toList());
               List<bool> checkedStates =
-              List<bool>.from(homeLayoutMap.values.toList());
+                  List<bool>.from(homeLayoutMap.values.toList());
 
               AlertDialogBuilder(context)
                 ..setTitle(
@@ -169,12 +168,12 @@ class SettingsMangaScreenState extends BaseSettingsScreen {
                 ..reorderableMultiSelectableItems(
                   titles,
                   checkedStates,
-                      (reorderedItems) => titles = reorderedItems,
-                      (newCheckedStates) => checkedStates = newCheckedStates,
+                  (reorderedItems) => titles = reorderedItems,
+                  (newCheckedStates) => checkedStates = newCheckedStates,
                 )
                 ..setPositiveButton(
                   getString.ok,
-                      () {
+                  () {
                     saveData(PrefName.simklMangaLayout,
                         Map.fromIterables(titles, checkedStates));
                     Refresh.activity[RefreshId.Simkl.mangaPage]?.value = true;

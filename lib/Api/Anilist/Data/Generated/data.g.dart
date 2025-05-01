@@ -285,7 +285,6 @@ Map<String, dynamic> _$PageResponseToJson(PageResponse instance) =>
       'data': instance.data,
     };
 
-
 GenreCollectionResponse _$GenreCollectionResponseFromJson(
         Map<String, dynamic> json) =>
     GenreCollectionResponse(

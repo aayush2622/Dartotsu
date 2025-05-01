@@ -152,7 +152,7 @@ class SourceState extends State<Source> {
             widget.isManga
                 ? getString.chapter(widget.media.manga?.chapters?.length ?? 1)
                 : getString.episode(widget.media.anime?.episodes?.length ?? 1),
-            style: TextStyle(
+            style: const TextStyle(
               fontFamily: 'Poppins',
               fontWeight: FontWeight.bold,
               fontSize: 16,

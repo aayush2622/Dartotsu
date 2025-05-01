@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-import 'package:dartotsu/Functions/string_extensions.dart';
-import 'package:dartotsu/Api/Sources/Eval/dart/model/video.dart';
-import 'package:dartotsu/Api/Sources/Eval/javascript/http.dart';
 import 'package:dart_eval/dart_eval_bridge.dart';
 import 'package:dart_eval/stdlib/core.dart';
+import 'package:dartotsu/Api/Sources/Eval/dart/model/video.dart';
+import 'package:dartotsu/Api/Sources/Eval/javascript/http.dart';
+import 'package:dartotsu/Functions/string_extensions.dart';
 import 'package:encrypt/encrypt.dart' as encrypt;
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:html/dom.dart' hide Text;

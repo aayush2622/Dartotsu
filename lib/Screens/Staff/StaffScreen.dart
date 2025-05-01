@@ -53,6 +53,7 @@ class StaffScreenState extends State<StaffScreen> {
     );
   }
 }
+
 class StudioScreen extends StatefulWidget {
   final studio studioInfo;
 
@@ -85,7 +86,7 @@ class StudioScreenState extends State<StudioScreen> {
             child: Center(
               child: Padding(
                 padding:
-                const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                 child: Text(
                   widget.studioInfo.name ?? 'No Name',
                   style: TextStyle(

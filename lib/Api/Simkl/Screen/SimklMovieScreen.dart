@@ -58,10 +58,10 @@ class SimklMovieScreen extends BaseMangaScreen {
   }
 
   @override
-  void loadTrending(String type) async{
+  void loadTrending(String type) async {
     this.trending.value = null;
     var trending =
-    await (Simkl.query as SimklQueries?)!.getTrending(type, time:'');
+        await (Simkl.query as SimklQueries?)!.getTrending(type, time: '');
     this.trending.value = trending;
   }
 
@@ -108,11 +108,14 @@ class SimklMovieScreen extends BaseMangaScreen {
         ),
       );
   }
+
   @override
   List<ChipData> get trendingChips => [
-    ChipData(label: 'Trending Movies', action: () => loadTrending('movies')),
-    ChipData(label: 'Trending Shows', action: () => loadTrending('tv')),
-  ];
+        ChipData(
+            label: 'Trending Movies', action: () => loadTrending('movies')),
+        ChipData(label: 'Trending Shows', action: () => loadTrending('tv')),
+      ];
+
   @override
   int get refreshID => RefreshId.Simkl.mangaPage;
 

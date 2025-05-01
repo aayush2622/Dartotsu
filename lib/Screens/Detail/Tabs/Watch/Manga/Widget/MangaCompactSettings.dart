@@ -5,9 +5,9 @@ import 'package:dartotsu/Widgets/AlertDialogBuilder.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../../../Api/Sources/Model/Source.dart';
 import '../../../../../../DataClass/Media.dart';
 import '../../../../../../Preferences/IsarDataClasses/MediaSettings/MediaSettings.dart';
-import '../../../../../../Api/Sources/Model/Source.dart';
 
 class MangaCompactSettings {
   final BuildContext context;
@@ -16,7 +16,8 @@ class MangaCompactSettings {
   final List<String>? scanlators;
 
   List<bool>? toggledScanlators;
-  final Function(MediaSettings settings, List<bool>? toggledScanlators) onFinished;
+  final Function(MediaSettings settings, List<bool>? toggledScanlators)
+      onFinished;
   final ColorScheme theme;
 
   MangaCompactSettings(
@@ -49,11 +50,11 @@ class MangaCompactSettings {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildLayoutSettings(),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             _buildSortSettings(),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             _buildWebViewSettings(),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             _buildScanlatorSettings(),
           ],
         ),
@@ -162,7 +163,7 @@ class MangaCompactSettings {
             context,
             MangaWebView(url: source!.baseUrl!, title: ''),
           ),
-          icon: Icon(
+          icon: const Icon(
             Icons.open_in_new_rounded,
             size: 24,
           ),
@@ -177,7 +178,7 @@ class MangaCompactSettings {
         _buildInfo(getString.scanlators, scanlators?.length.toString() ?? '0'),
         IconButton(
           onPressed: toggleScanlators,
-          icon: Icon(
+          icon: const Icon(
             Icons.notes_rounded,
             size: 24,
           ),

@@ -8,7 +8,7 @@ extension on AnilistQueries {
           ?.media)!);
 }
 
-String _queryMediaData(int id, {bool mal = true}) => '''{
+String _queryMediaData(int id, {bool mal = false}) => '''{
   Media(${mal ? 'idMal' : 'id'}: $id) {
     id 
     idMal 

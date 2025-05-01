@@ -43,8 +43,7 @@ extension on AnilistQueries {
           return (returnArray, removedMedia);
         }
 
-        List<int> list =
-            loadCustomData<List<int>>("continue${type}List") ?? [];
+        List<int> list = loadCustomData<List<int>>("continue${type}List") ?? [];
         var mediaList = (currentMedia ?? []) + (repeatingMedia ?? []);
         var returnArray = await compute(process, {
           "list": mediaList,

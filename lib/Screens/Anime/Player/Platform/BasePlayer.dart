@@ -17,6 +17,7 @@ abstract class BasePlayer extends GetxController {
   RxList<AudioTrack> audios = <AudioTrack>[].obs;
   RxList<String> subtitle = <String>[].obs;
   Rx<double> currentSpeed = 1.0.obs;
+
   Future<void> seek(Duration duration);
 
   Future<void> play();

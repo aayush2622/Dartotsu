@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import '../../Animation/ScaleAnimation.dart';
+import '../../Api/Sources/Model/Source.dart';
 import '../../Api/Sources/Search/get_pages.dart';
 import '../../DataClass/Chapter.dart';
 import '../../DataClass/Media.dart';
-import '../../Api/Sources/Model/Source.dart';
 import '../../Widgets/CustomBottomDialog.dart';
 import 'ChapterCompactViewHolder.dart';
 import 'ChapterListViewHolder.dart';
@@ -160,7 +160,7 @@ Future<void> onChapterClick(
 ) async {
   showCustomBottomDialog(
     context,
-    CustomBottomDialog(
+    const CustomBottomDialog(
       viewList: [
         Center(
           child: CircularProgressIndicator(),

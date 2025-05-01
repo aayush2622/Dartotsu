@@ -69,7 +69,7 @@ class GetMediaIDs {
   static Future<List<AnimeID>?> getData() async {
     if (loaded.value) {
       while (loading.value) {
-        await Future.delayed(Duration(milliseconds: 100));
+        await Future.delayed(const Duration(milliseconds: 100));
       }
       return _animeListFuture;
     }
@@ -80,20 +80,24 @@ class GetMediaIDs {
 
     return await loadFromCache();
   }
+
   static Future<List<AnimeID>?> loadFromCache() async {
     var data = loadCustomData<String?>('animeIDSList');
     var time = loadCustomData<int>('animeIDSListTime');
     bool checkTime() {
       if (time == null) return true;
       return DateTime.now()
-          .difference(DateTime.fromMillisecondsSinceEpoch(time))
-          .inDays >
+              .difference(DateTime.fromMillisecondsSinceEpoch(time))
+              .inDays >
           7;
     }
 
     if (data != null && !checkTime()) {
       var jsonData = jsonDecode(data);
-      _animeListFuture = jsonData.map((e) => AnimeID.fromJson(e)).whereType<AnimeID>().toList();
+      _animeListFuture = jsonData
+          .map((e) => AnimeID.fromJson(e))
+          .whereType<AnimeID>()
+          .toList();
       loading.value = false;
       return _animeListFuture;
     } else {
@@ -104,7 +108,8 @@ class GetMediaIDs {
         List<dynamic> jsonData = jsonDecode(response.body);
         _animeListFuture = jsonData.map((e) => AnimeID.fromJson(e)).toList();
         saveCustomData('animeIDSList', response.body);
-        saveCustomData('animeIDSListTime', DateTime.now().millisecondsSinceEpoch);
+        saveCustomData(
+            'animeIDSListTime', DateTime.now().millisecondsSinceEpoch);
         loading.value = false;
         return _animeListFuture;
       } else {

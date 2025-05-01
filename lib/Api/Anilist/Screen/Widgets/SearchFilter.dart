@@ -171,7 +171,7 @@ class _SearchFilterState extends State<SearchFilter> {
                             child: Text(
                               e.value,
                               textAlign: TextAlign.center,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontFamily: 'Poppins-SemiBold',
                                 fontSize: 14,
                               ),
@@ -201,7 +201,7 @@ class _SearchFilterState extends State<SearchFilter> {
                             child: Text(
                               e.value,
                               textAlign: TextAlign.center,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontFamily: 'Poppins-SemiBold',
                                 fontSize: 14,
                               ),

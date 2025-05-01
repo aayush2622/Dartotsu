@@ -37,6 +37,7 @@ class buildDropdownMenuState extends State<buildDropdownMenu> {
     super.initState();
     _selectedValue = widget.currentValue;
   }
+
   @override
   void didUpdateWidget(covariant buildDropdownMenu oldWidget) {
     super.didUpdateWidget(oldWidget);
@@ -49,7 +50,6 @@ class buildDropdownMenuState extends State<buildDropdownMenu> {
         _selectedValue = widget.currentValue;
       });
     }
-
   }
 
   @override
@@ -60,6 +60,11 @@ class buildDropdownMenuState extends State<buildDropdownMenu> {
       child: InputDecorator(
         decoration: InputDecoration(
           labelText: widget.labelText,
+          labelStyle: const TextStyle(
+            fontFamily: 'Poppins',
+            fontSize: 18,
+            fontWeight: FontWeight.w800,
+          ),
           prefixIcon:
               widget.prefixIcon != null ? Icon(widget.prefixIcon) : null,
           contentPadding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -77,7 +82,7 @@ class buildDropdownMenuState extends State<buildDropdownMenu> {
             focusColor: Colors.transparent,
             hint: Text(
               widget.hintText ?? '',
-              style: TextStyle(
+              style: const TextStyle(
                 fontFamily: 'Poppins',
                 fontSize: 14,
                 fontWeight: FontWeight.w700,

@@ -3,13 +3,13 @@ import 'package:dartotsu/Screens/Settings/BaseSettingsScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../Theme/LanguageSwitcher.dart';
-import '../../Widgets/AlertDialogBuilder.dart';
-import '../../Widgets/LoadSvg.dart';
 import '../../Api/Anilist/Anilist.dart';
 import '../../Api/Discord/Discord.dart';
 import '../../Api/MyAnimeList/Mal.dart';
 import '../../Api/Simkl/Simkl.dart';
+import '../../Theme/LanguageSwitcher.dart';
+import '../../Widgets/AlertDialogBuilder.dart';
+import '../../Widgets/LoadSvg.dart';
 
 class SettingsAccountScreen extends StatefulWidget {
   const SettingsAccountScreen({super.key});
@@ -212,7 +212,7 @@ class SettingsAccountScreenState extends BaseSettingsScreen {
         children: [
           Text(
             getString.login,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 14,
               fontFamily: 'Poppins',
               fontWeight: FontWeight.bold,

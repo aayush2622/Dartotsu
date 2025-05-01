@@ -2,8 +2,8 @@ import 'package:dartotsu/Functions/string_extensions.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../../Widgets/CachedNetworkImage.dart';
-import '../../../../../DataClass/User.dart';
 import '../../../../../Api/Anilist/Anilist.dart';
+import '../../../../../DataClass/User.dart';
 
 Widget ItemFollower(BuildContext context, userData follower, String type) {
   final theme = Theme.of(context).colorScheme;
@@ -46,7 +46,7 @@ Widget ItemFollower(BuildContext context, userData follower, String type) {
                                 ? theme.primary
                                 : theme.tertiary,
                             shape: BoxShape.rectangle,
-                            borderRadius: BorderRadius.only(
+                            borderRadius: const BorderRadius.only(
                                 topLeft: Radius.circular(256),
                                 topRight: Radius.circular(256)),
                           ),

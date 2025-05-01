@@ -10,13 +10,11 @@ class UserLargeViewHolder extends StatelessWidget {
   final userData user;
   final String tag;
 
-  const UserLargeViewHolder({super.key ,required this.user, required this.tag });
+  const UserLargeViewHolder({super.key, required this.user, required this.tag});
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme
-        .of(context)
-        .colorScheme;
+    final theme = Theme.of(context).colorScheme;
     return Card(
       color: theme.surfaceContainerLow,
       elevation: 10,
@@ -39,9 +37,7 @@ class UserLargeViewHolder extends StatelessWidget {
   }
 
   Widget _buildBackgroundImage(BuildContext context, ColorScheme theme) {
-    final isDarkMode = Provider
-        .of<ThemeNotifier>(context)
-        .isDarkMode;
+    final isDarkMode = Provider.of<ThemeNotifier>(context).isDarkMode;
     final gradientColors = isDarkMode
         ? [Colors.transparent, theme.surfaceContainerLow]
         : [Colors.white.withValues(alpha: 0.2), theme.surfaceContainerLow];

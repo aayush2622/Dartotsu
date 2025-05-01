@@ -1,7 +1,7 @@
+import 'package:dartotsu/Api/Kitsu/KitsuData.dart';
 import 'package:dartotsu/Services/Screens/BaseAnimeScreen.dart';
 import 'package:dartotsu/Services/Screens/BaseHomeScreen.dart';
 import 'package:dartotsu/Services/Screens/BaseMangaScreen.dart';
-import 'package:dartotsu/Api/Kitsu/KitsuData.dart';
 
 import '../../Services/BaseServiceData.dart';
 import '../../Services/MediaService.dart';

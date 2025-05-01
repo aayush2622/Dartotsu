@@ -2,12 +2,12 @@ import 'package:dartotsu/Adaptor/Media/MediaAdaptor.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
-import '../../../../../DataClass/Media.dart';
-import '../../../../../Widgets/CustomBottomDialog.dart';
 import '../../../../../Api/Sources/Eval/dart/model/m_manga.dart';
 import '../../../../../Api/Sources/Eval/dart/model/m_pages.dart';
 import '../../../../../Api/Sources/Model/Source.dart';
 import '../../../../../Api/Sources/Search/search.dart';
+import '../../../../../DataClass/Media.dart';
+import '../../../../../Widgets/CustomBottomDialog.dart';
 
 class WrongTitleDialog extends StatefulWidget {
   final Source source;

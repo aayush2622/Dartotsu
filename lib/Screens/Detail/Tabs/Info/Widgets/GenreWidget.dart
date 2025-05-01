@@ -1,7 +1,7 @@
 import 'package:dartotsu/Functions/Function.dart';
+import 'package:dartotsu/Theme/LanguageSwitcher.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:dartotsu/Theme/LanguageSwitcher.dart';
 
 import '../../../../../DataClass/SearchResults.dart';
 import '../../../../../Widgets/GenreItem.dart';

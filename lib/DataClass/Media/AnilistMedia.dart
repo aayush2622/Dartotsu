@@ -4,8 +4,11 @@ Media _mediaData(anilistApi.Media apiMedia) {
   return Media(
     id: apiMedia.id,
     idAnilist: apiMedia.id,
-    idMAL: apiMedia.idMal ?? GetMediaIDs.fromID(type: AnimeIDType.anilistId, id: apiMedia.id)?.malId,
-    idKitsu: GetMediaIDs.fromID(type: AnimeIDType.anilistId, id: apiMedia.id)?.kitsuId?.toString(),
+    idMAL: apiMedia.idMal ??
+        GetMediaIDs.fromID(type: AnimeIDType.anilistId, id: apiMedia.id)?.malId,
+    idKitsu: GetMediaIDs.fromID(type: AnimeIDType.anilistId, id: apiMedia.id)
+        ?.kitsuId
+        ?.toString(),
     name: apiMedia.title?.english,
     nameRomaji: apiMedia.title?.romaji ?? '',
     userPreferredName: apiMedia.title?.userPreferred ?? '',

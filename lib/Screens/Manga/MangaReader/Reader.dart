@@ -8,10 +8,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
-import '../../../DataClass/Chapter.dart';
-import '../../../DataClass/Media.dart';
+
 import '../../../Api/Sources/Eval/dart/model/page.dart';
 import '../../../Api/Sources/Model/Source.dart';
+import '../../../DataClass/Chapter.dart';
+import '../../../DataClass/Media.dart';
 import 'ReaderController.dart';
 
 class MediaReader extends StatefulWidget {
@@ -177,8 +178,8 @@ class MediaReaderState extends State<MediaReader> {
     return Padding(
       padding: readerSettings.spacedPages
           ? isHorizontal
-              ? EdgeInsets.symmetric(horizontal: 16)
-              : EdgeInsets.symmetric(vertical: 16)
+              ? const EdgeInsets.symmetric(horizontal: 16)
+              : const EdgeInsets.symmetric(vertical: 16)
           : EdgeInsets.zero,
       child: Center(
         child: ConstrainedBox(
@@ -196,7 +197,7 @@ class MediaReaderState extends State<MediaReader> {
                 child: Center(
                   child: Text(
                     'Failed to load image \n $error',
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.red,
                     ),
                     maxLines: 3,

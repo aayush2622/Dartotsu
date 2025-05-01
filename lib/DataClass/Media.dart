@@ -1,5 +1,5 @@
-import 'package:dartotsu/Functions/string_extensions.dart';
 import 'package:dartotsu/Api/Sources/Model/Source.dart';
+import 'package:dartotsu/Functions/string_extensions.dart';
 import 'package:dartotsu/Preferences/IsarDataClasses/MediaSettings/MediaSettings.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -176,7 +176,7 @@ class Media {
     this.mal = false,
     this.kitsu = false,
     this.sourceData,
-  }): settings = settings ?? MediaSettings();
+  }) : settings = settings ?? MediaSettings();
 
   factory Media.fromJson(Map<String, dynamic> json) => _$MediaFromJson(json);
 
@@ -189,22 +189,22 @@ class Media {
   //Anilist
   factory Media.mediaData(anilistApi.Media apiMedia) => _mediaData(apiMedia);
 
-  factory  Media.mediaEdgeData(anilistApi.MediaEdge apiMediaEdge) =>
+  factory Media.mediaEdgeData(anilistApi.MediaEdge apiMediaEdge) =>
       _mediaEdgeData(apiMediaEdge);
 
-  factory  Media.mediaListData(anilistApi.MediaList mediaList) =>
+  factory Media.mediaListData(anilistApi.MediaList mediaList) =>
       _mediaListData(mediaList);
 
   //MyAnimeList
-  factory  Media.fromMal(malApi.Media apiMedia) => _fromMal(apiMedia);
+  factory Media.fromMal(malApi.Media apiMedia) => _fromMal(apiMedia);
 
   //Simkl
-  factory  Media.fromSimklAnime(simklApi.Anime apiMedia) =>
+  factory Media.fromSimklAnime(simklApi.Anime apiMedia) =>
       _fromSimklAnime(apiMedia);
 
-  factory  Media.fromSimklSeries(simklApi.ShowElement apiMedia) =>
+  factory Media.fromSimklSeries(simklApi.ShowElement apiMedia) =>
       _fromSimklSeries(apiMedia);
 
-  factory  Media.fromSimklMovies(simklApi.MovieElement apiMedia) =>
+  factory Media.fromSimklMovies(simklApi.MovieElement apiMedia) =>
       _fromSimklMovies(apiMedia);
 }

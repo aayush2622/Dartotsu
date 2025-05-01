@@ -28,7 +28,6 @@ class MPages {
 
 extension M on MPages {
   List<Media> toMedia({bool isAnime = false, Source? source}) {
-
     return list.map((e) {
       var id = loadCustomData<int>('${source?.name}-${e.link}');
       if (id == null) {

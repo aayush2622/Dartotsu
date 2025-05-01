@@ -46,8 +46,10 @@ void serviceSwitcher(BuildContext context) {
         itemBuilder: (context, index) {
           MediaService service = mediaServices[index];
           return ListTile(
-            selected: provider.currentService.runtimeType == service.runtimeType,
-            contentPadding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 4.0),
+            selected:
+                provider.currentService.runtimeType == service.runtimeType,
+            contentPadding:
+                const EdgeInsets.symmetric(horizontal: 24.0, vertical: 4.0),
             leading: loadSvg(
               service.iconPath,
               width: 32.0,

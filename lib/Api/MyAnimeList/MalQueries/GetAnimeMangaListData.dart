@@ -57,7 +57,8 @@ extension on MalQueries {
       if (animeLayoutMap[key] == true) {
         futures.add(() async {
           resultIndex++;
-          list[key.camelCase!] = await processMediaResponse(results[resultIndex]);
+          list[key.camelCase!] =
+              await processMediaResponse(results[resultIndex]);
         }());
       }
     });
@@ -112,7 +113,8 @@ extension on MalQueries {
       if (mangaLayoutMap[key] == true) {
         futures.add(() async {
           resultIndex++;
-          list[key.camelCase!] = await processMediaResponse(results[resultIndex]);
+          list[key.camelCase!] =
+              await processMediaResponse(results[resultIndex]);
         }());
       }
     });

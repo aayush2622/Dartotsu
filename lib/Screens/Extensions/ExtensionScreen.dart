@@ -1,18 +1,18 @@
+import 'package:dartotsu/Api/Sources/Model/Source.dart';
 import 'package:dartotsu/Screens/Extensions/ExtensionList.dart';
 import 'package:dartotsu/Widgets/AlertDialogBuilder.dart';
-import 'package:dartotsu/Api/Sources/Model/Source.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:isar/isar.dart';
 
+import '../../Api/Sources/Model/Manga.dart';
 import '../../Functions/GetExtensions.dart';
 import '../../Preferences/PrefManager.dart';
 import '../../StorageProvider.dart';
 import '../../Theme/LanguageSwitcher.dart';
 import '../../Widgets/ScrollConfig.dart';
-import '../../Api/Sources/Model/Manga.dart';
 import '../../main.dart';
 import '../Settings/language.dart';
 
@@ -73,7 +73,7 @@ class _BrowseScreenState extends ConsumerState<ExtensionScreen>
                   _tabBarController.index == 3 ||
                   _tabBarController.index == 5) ...[
                 IconButton(
-                  icon: Icon(Bootstrap.github),
+                  icon: const Icon(Bootstrap.github),
                   onPressed: () {
                     var type = _tabBarController.index == 1
                         ? ItemType.anime
@@ -104,7 +104,7 @@ class _BrowseScreenState extends ConsumerState<ExtensionScreen>
                   },
                 ),
               ],
-              SizedBox(width: 8.0),
+              const SizedBox(width: 8.0),
             ],
           ),
           body: Column(

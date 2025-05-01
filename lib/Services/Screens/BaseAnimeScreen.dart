@@ -15,24 +15,24 @@ abstract class BaseAnimeScreen extends BaseMediaScreen {
   void loadTrending(int page);
 
   List<ChipData> get trendingChips => [
-    ChipData(label: getString.thisSeason, action: () => loadTrending(1)),
-    ChipData(label: getString.nextSeason, action: () => loadTrending(2)),
-    ChipData(label: getString.previousSeason, action: () => loadTrending(0)),
-  ];
+        ChipData(label: getString.thisSeason, action: () => loadTrending(1)),
+        ChipData(label: getString.nextSeason, action: () => loadTrending(2)),
+        ChipData(
+            label: getString.previousSeason, action: () => loadTrending(0)),
+      ];
 
-  List<Widget> trendingCards(BuildContext context)=> [
-    MediaCard(
-      context,
-      getString.genres.toUpperCase(),
-      "https://s4.anilist.co/file/anilistcdn/media/anime/banner/16498-8jpFCOcDmneX.jpg",
-      onTap: () {},
-    ),
-    MediaCard(
-      context,
-      getString.calendar.toUpperCase(),
-      "https://s4.anilist.co/file/anilistcdn/media/anime/banner/125367-hGPJLSNfprO3.jpg",
-      onTap: () => navigateToPage(context, CalendarScreen()),
-    ),
-  ];
-
+  List<Widget> trendingCards(BuildContext context) => [
+        MediaCard(
+          context,
+          getString.genres.toUpperCase(),
+          "https://s4.anilist.co/file/anilistcdn/media/anime/banner/16498-8jpFCOcDmneX.jpg",
+          onTap: () {},
+        ),
+        MediaCard(
+          context,
+          getString.calendar.toUpperCase(),
+          "https://s4.anilist.co/file/anilistcdn/media/anime/banner/125367-hGPJLSNfprO3.jpg",
+          onTap: () => navigateToPage(context, const CalendarScreen()),
+        ),
+      ];
 }

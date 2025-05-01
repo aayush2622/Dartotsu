@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+
 part 'Generated/Media.g.dart';
 
 @JsonSerializable()
@@ -244,6 +245,7 @@ class Anime {
 
   Map<String, dynamic> toJson() => _$AnimeToJson(this);
 }
+
 @JsonSerializable()
 class Airs {
   @JsonKey(name: "day")
@@ -263,6 +265,7 @@ class Airs {
 
   Map<String, dynamic> toJson() => _$AirsToJson(this);
 }
+
 enum AnimeType {
   @JsonValue("movie")
   MOVIE,
@@ -535,7 +538,7 @@ final statusValues = EnumValues({
   "plantowatch": Status.PLANNING,
   "watching": Status.CURRENT,
   "hold": Status.HOLD,
-  "ongoing" :Status.ONGOING,
+  "ongoing": Status.ONGOING,
   "ended": Status.ENDED,
   'soon': Status.SOON,
   'premiere': Status.PREMIERE
@@ -589,10 +592,12 @@ class Trailer {
     this.size,
   });
 
-  factory Trailer.fromJson(Map<String, dynamic> json) => _$TrailerFromJson(json);
+  factory Trailer.fromJson(Map<String, dynamic> json) =>
+      _$TrailerFromJson(json);
 
   Map<String, dynamic> toJson() => _$TrailerToJson(this);
 }
+
 class Ratings {
   int? id;
   ReleaseStatus? releaseStatus;

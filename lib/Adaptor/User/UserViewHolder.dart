@@ -31,12 +31,11 @@ class UserViewHolder extends StatelessWidget {
                 height: 92,
                 width: 92,
                 errorWidget: (context, url, error) => const SizedBox.shrink(),
-                placeholder: (context, url) =>
-                    Container(
-                      color: Colors.white12,
-                      width: 92,
-                      height: 92,
-                    ),
+                placeholder: (context, url) => Container(
+                  color: Colors.white12,
+                  width: 92,
+                  height: 92,
+                ),
               ),
             ),
           ),

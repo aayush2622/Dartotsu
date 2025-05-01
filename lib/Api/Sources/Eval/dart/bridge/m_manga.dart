@@ -1,6 +1,6 @@
-import 'package:dartotsu/Functions/string_extensions.dart';
 import 'package:dart_eval/dart_eval_bridge.dart';
 import 'package:dart_eval/stdlib/core.dart';
+import 'package:dartotsu/Functions/string_extensions.dart';
 
 import '../../../Model/Manga.dart';
 import '../model/m_chapter.dart';

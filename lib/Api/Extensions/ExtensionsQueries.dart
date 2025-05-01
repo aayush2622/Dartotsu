@@ -1,12 +1,12 @@
 import 'dart:convert';
 
 import 'package:collection/collection.dart';
+import 'package:dartotsu/Api/Sources/Eval/dart/model/m_manga.dart';
+import 'package:dartotsu/Api/Sources/Model/Source.dart';
 import 'package:dartotsu/DataClass/Media.dart';
 import 'package:dartotsu/DataClass/SearchResults.dart';
 import 'package:dartotsu/Functions/Function.dart';
 import 'package:dartotsu/Functions/string_extensions.dart';
-import 'package:dartotsu/Api/Sources/Eval/dart/model/m_manga.dart';
-import 'package:dartotsu/Api/Sources/Model/Source.dart';
 
 import '../../DataClass/Author.dart';
 import '../../Preferences/PrefManager.dart';
@@ -69,8 +69,7 @@ class ExtensionsQueries extends Queries {
   Future<Media?>? mediaDetails(Media media) => _mediaDetails(media);
 
   @override
-  Future<SearchResults?> search(
-      SearchResults? searchResults) async {
+  Future<SearchResults?> search(SearchResults? searchResults) async {
     // not needed
     throw UnimplementedError();
   }

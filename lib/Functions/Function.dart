@@ -11,7 +11,6 @@ import 'package:url_launcher/url_launcher.dart';
 import '../Animation/SlideUpAnimation.dart';
 import '../Theme/Colors.dart';
 import '../Theme/ThemeProvider.dart';
-import '../main.dart';
 
 class _RefreshController extends GetxController {
   var activity = <int, RxBool>{};
@@ -78,11 +77,10 @@ Future<void> snackString(
   String? clipboard,
   BuildContext? c,
 }) async {
-  var context = c ?? navigatorKey.currentContext ?? Get.context;
+  var context = c ?? Get.overlayContext;
   Logger.log(s ?? '');
   if (context != null && s != null && s.isNotEmpty) {
     var theme = Theme.of(context).colorScheme;
-    Logger.log(s);
     try {
       final scaffoldMessenger = ScaffoldMessenger.of(context);
       scaffoldMessenger.hideCurrentSnackBar();
@@ -122,7 +120,7 @@ Future<void> snackString(
 }
 
 void copyToClipboard(String text) {
-  var context = navigatorKey.currentContext ?? Get.context;
+  var context = Get.overlayContext;
   var theme = Theme.of(context!).colorScheme;
   Clipboard.setData(ClipboardData(text: text));
   ScaffoldMessenger.of(context).showSnackBar(

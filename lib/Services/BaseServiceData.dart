@@ -1,3 +1,4 @@
+import 'package:dartotsu/Services/Api/Mutations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
@@ -5,7 +6,7 @@ import 'Api/Queries.dart';
 
 abstract class BaseServiceData extends GetxController {
   Queries? query;
-
+  Mutations? mutations;
   RxBool isInitialized = false.obs;
   RxString token = "".obs;
   RxString username = "".obs;

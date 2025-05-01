@@ -3,9 +3,9 @@ import 'package:dartotsu/Functions/string_extensions.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../Animation/ScaleAnimation.dart';
+import '../../../../../Api/Anilist/Anilist.dart';
 import '../../../../../DataClass/User.dart';
 import '../../../../../Widgets/ScrollConfig.dart';
-import '../../../../../Api/Anilist/Anilist.dart';
 import 'ItemFollower.dart';
 
 class FollowerWidget extends StatelessWidget {

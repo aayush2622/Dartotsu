@@ -12,11 +12,11 @@ extension on MalQueries {
       };
       final results = await Future.wait(list.map(executeQuery<MediaResponse>));
       final responses = await Future.wait([
-            () async {
+        () async {
           results[0]?.data?.forEach((m) => m.node?.mediaType = 'anime');
           return await processMediaResponse(results[0]);
         }(),
-            () async {
+        () async {
           results[1]?.data?.forEach((m) => m.node?.mediaType = 'manga');
           return await processMediaResponse(results[1]);
         }(),

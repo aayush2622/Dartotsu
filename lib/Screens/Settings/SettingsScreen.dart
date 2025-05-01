@@ -27,7 +27,6 @@ class SettingsScreenState extends BaseSettingsScreen {
   @override
   String title() => getString.settings;
 
-
   @override
   Widget icon() => ClipOval(
         child: Image.asset(
@@ -125,6 +124,7 @@ class SettingsScreenState extends BaseSettingsScreen {
   }
 
   String appVersion = '';
+
   Future<void> loadVersion() async {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
     setState(() {
@@ -202,7 +202,7 @@ class SettingsScreenState extends BaseSettingsScreen {
         Text(
           'Version $appVersion',
           textAlign: TextAlign.center,
-          style: TextStyle(
+          style: const TextStyle(
             fontFamily: 'Poppins',
             fontSize: 14,
             color: Colors.grey,

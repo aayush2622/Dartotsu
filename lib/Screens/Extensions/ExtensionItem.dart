@@ -1,14 +1,13 @@
+import 'package:dartotsu/Api/Sources/Eval/dart/model/source_preference.dart';
+import 'package:dartotsu/Api/Sources/Model/Source.dart';
 import 'package:dartotsu/Functions/Function.dart';
 import 'package:dartotsu/Preferences/PrefManager.dart';
 import 'package:dartotsu/Widgets/AlertDialogBuilder.dart';
-import 'package:dartotsu/Api/Sources/Eval/dart/model/source_preference.dart';
-import 'package:dartotsu/Api/Sources/Model/Source.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:isar/isar.dart';
 
-import '../../Widgets/CachedNetworkImage.dart';
 import '../../Api/Sources/Extensions/GetSourceList.dart';
 import '../../Api/Sources/Extensions/fetch_anime_sources.dart';
 import '../../Api/Sources/Extensions/fetch_manga_sources.dart';
@@ -16,6 +15,7 @@ import '../../Api/Sources/Extensions/fetch_novel_sources.dart';
 import '../../Api/Sources/Model/Manga.dart';
 import '../../Api/Sources/extension_preferences_providers.dart';
 import '../../Api/Sources/get_source_preference.dart';
+import '../../Widgets/CachedNetworkImage.dart';
 import '../../main.dart';
 import '../Settings/language.dart';
 import 'ExtensionSettings/ExtensionSettings.dart';

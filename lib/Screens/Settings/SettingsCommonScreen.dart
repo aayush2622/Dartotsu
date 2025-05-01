@@ -96,8 +96,7 @@ class SettingsCommonScreenState extends BaseSettingsScreen {
             description: getString.manageLayoutDescription(getString.home),
             icon: Icons.tune,
             onClick: () async {
-              final homeLayoutMap =
-                  loadData(PrefName.anilistHomeLayout);
+              final homeLayoutMap = loadData(PrefName.anilistHomeLayout);
               List<String> titles =
                   List<String>.from(homeLayoutMap.keys.toList());
               List<bool> checkedStates =
@@ -186,8 +185,7 @@ class SettingsCommonScreenState extends BaseSettingsScreen {
             description: getString.manageLayoutDescription(getString.home),
             icon: Icons.tune,
             onClick: () async {
-              final homeLayoutMap =
-                  loadData(PrefName.simklHomeLayout);
+              final homeLayoutMap = loadData(PrefName.simklHomeLayout);
               List<String> titles =
                   List<String>.from(homeLayoutMap.keys.toList());
               List<bool> checkedStates =

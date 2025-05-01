@@ -68,11 +68,7 @@ class PrefManager {
 
   static Future<Isar> _open(String name, String directory) async {
     final isar = await Isar.open(
-      [
-        KeyValueSchema,
-        ResponseTokenSchema,
-        MediaSettingsSchema
-      ],
+      [KeyValueSchema, ResponseTokenSchema, MediaSettingsSchema],
       directory: directory,
       name: name,
       inspector: false,
@@ -167,9 +163,9 @@ class PrefManager {
     final isar = _getPrefBox(location);
     return isar.writeTxn(() => isar.keyValues.deleteByKey(key));
   }
-  static void removeEverything() async {
 
-  }
+  static void removeEverything() async {}
+
   static void addEverything(Map<Location, Map<String, dynamic>> cache) async {
     for (var location in Location.values) {
       final isar = _getPrefBox(location);
@@ -211,4 +207,3 @@ class PrefManager {
     }
   }
 }
-

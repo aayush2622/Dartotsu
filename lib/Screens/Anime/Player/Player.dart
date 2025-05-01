@@ -101,9 +101,7 @@ class MediaPlayerState extends State<MediaPlayer>
   void _initializePlayer() {
     currentQuality = widget.videos[widget.index];
     videoPlayerController = WindowsPlayer(resizeMode, settings);
-    var sourceName = context
-        .currentService(listen: false)
-        .getName;
+    var sourceName = context.currentService(listen: false).getName;
     var currentProgress = loadCustomData<int>(
       "${widget.media.id}-${widget.currentEpisode.number}-$sourceName-current",
     );
@@ -168,7 +166,7 @@ class MediaPlayerState extends State<MediaPlayer>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Obx(
-                        () {
+                    () {
                       return MouseRegion(
                         onHover: (_) => _onMouseMoved(),
                         cursor: showControls.value
@@ -180,15 +178,14 @@ class MediaPlayerState extends State<MediaPlayer>
                     },
                   ),
                   Obx(
-                        () {
+                    () {
                       if (!showEpisodes.value) {
                         return const SizedBox();
                       }
                       return GestureDetector(
                         onHorizontalDragUpdate: (details) {
                           setState(
-                                () =>
-                            episodePanelWidth =
+                            () => episodePanelWidth =
                                 (episodePanelWidth! - details.delta.dx)
                                     .clamp(minWidth, availableWidth),
                           );
@@ -263,10 +260,7 @@ class MediaPlayerState extends State<MediaPlayer>
                 onVerticalDragUpdate: (e) async {
                   final delta = e.delta.dy;
                   final Offset position = e.localPosition;
-                  if (position.dx <= MediaQuery
-                      .of(context)
-                      .size
-                      .width / 2) {
+                  if (position.dx <= MediaQuery.of(context).size.width / 2) {
                     final brightness = _brightnessValue.value - delta / 500;
                     final result = brightness.clamp(0.0, 1.0);
                     setBrightness(result);
@@ -314,62 +308,59 @@ class MediaPlayerState extends State<MediaPlayer>
       return const SizedBox();
     }
     return Obx(
-          () =>
-          AnimatedPositioned(
-            right: 0,
-            left: 0,
-            top: 0,
-            duration: const Duration(milliseconds: 100),
-            bottom: showControls.value
-                ? 100
-                : (24 + settings.subtitleBottomPadding.toDouble()),
-            child: AnimatedContainer(
-              alignment: Alignment.bottomCenter,
-              duration: const Duration(milliseconds: 300),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    padding:
+      () => AnimatedPositioned(
+        right: 0,
+        left: 0,
+        top: 0,
+        duration: const Duration(milliseconds: 100),
+        bottom: showControls.value
+            ? 100
+            : (24 + settings.subtitleBottomPadding.toDouble()),
+        child: AnimatedContainer(
+          alignment: Alignment.bottomCenter,
+          duration: const Duration(milliseconds: 300),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                padding:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                    decoration: BoxDecoration(
-                      color: videoPlayerController.subtitle[0].isEmpty
-                          ? Colors.transparent
-                          : Color(
-                        settings.subtitleBackgroundColor,
-                      ),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Text(
-                      [
-                        for (final line in videoPlayerController.subtitle)
-                          if (line
-                              .trim()
-                              .isNotEmpty) line.trim(),
-                      ].join('\n'),
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: settings.subtitleSize.toDouble(),
-                        fontWeight:
+                decoration: BoxDecoration(
+                  color: videoPlayerController.subtitle[0].isEmpty
+                      ? Colors.transparent
+                      : Color(
+                          settings.subtitleBackgroundColor,
+                        ),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Text(
+                  [
+                    for (final line in videoPlayerController.subtitle)
+                      if (line.trim().isNotEmpty) line.trim(),
+                  ].join('\n'),
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: settings.subtitleSize.toDouble(),
+                    fontWeight:
                         FontWeight.values[settings.subtitleWeight.toInt()],
-                        fontFamily: settings.subtitleFont,
-                        color: Color(settings.subtitleColor),
-                        shadows: [
-                          Shadow(
-                            offset: const Offset(1.0, 1.0),
-                            blurRadius: 10.0,
-                            color: Color(settings.subtitleOutlineColor),
-                          ),
-                        ],
+                    fontFamily: settings.subtitleFont,
+                    color: Color(settings.subtitleColor),
+                    shadows: [
+                      Shadow(
+                        offset: const Offset(1.0, 1.0),
+                        blurRadius: 10.0,
+                        color: Color(settings.subtitleOutlineColor),
                       ),
-                    ),
+                    ],
                   ),
-                ],
+                ),
               ),
-            ),
+            ],
           ),
+        ),
+      ),
     );
   }
 
@@ -452,10 +443,7 @@ class MediaPlayerState extends State<MediaPlayer>
   final skipDuration = 0.obs;
 
   void _handleDoubleTap(TapDownDetails details) {
-    final screenWidth = MediaQuery
-        .of(context)
-        .size
-        .width;
+    final screenWidth = MediaQuery.of(context).size.width;
     final tapPosition = details.globalPosition;
     final isLeft = tapPosition.dx < screenWidth / 2;
     _skipSegments(isLeft);
@@ -531,14 +519,8 @@ class MediaPlayerState extends State<MediaPlayer>
       return const SizedBox();
     }
     return AnimatedPositioned(
-      left: isLeftSide.value ? 0 : MediaQuery
-          .of(context)
-          .size
-          .width / 1.5,
-      width: MediaQuery
-          .of(context)
-          .size
-          .width / 2.5,
+      left: isLeftSide.value ? 0 : MediaQuery.of(context).size.width / 1.5,
+      width: MediaQuery.of(context).size.width / 2.5,
       top: 0,
       bottom: 0,
       duration: const Duration(milliseconds: 1000),
@@ -615,11 +597,11 @@ class MediaPlayerState extends State<MediaPlayer>
   Widget _buildEpisodeList() {
     var episodeList = widget.media.anime?.episodes ?? {};
     var (chunk, initChunkIndex) =
-    buildChunks(context, episodeList, widget.media.userProgress.toString());
+        buildChunks(context, episodeList, widget.media.userProgress.toString());
 
     RxInt selectedChunkIndex = (-1).obs;
     selectedChunkIndex =
-    selectedChunkIndex.value == -1 ? initChunkIndex : selectedChunkIndex;
+        selectedChunkIndex.value == -1 ? initChunkIndex : selectedChunkIndex;
 
     return ScrollConfig(
       context,
@@ -636,7 +618,7 @@ class MediaPlayerState extends State<MediaPlayer>
             reverse,
           ),
           Obx(
-                () {
+            () {
               var reversed = reverse.value
                   ? chunk.map((element) => element.reversed.toList()).toList()
                   : chunk;
@@ -662,7 +644,7 @@ class MediaPlayerState extends State<MediaPlayer>
         children: [
           Text(
             getString.episode(widget.media.anime?.episodes?.length ?? 1),
-            style: TextStyle(
+            style: const TextStyle(
               fontFamily: 'Poppins',
               fontWeight: FontWeight.bold,
               fontSize: 16,
@@ -674,10 +656,7 @@ class MediaPlayerState extends State<MediaPlayer>
             onPressed: () => settingsDialog(),
             icon: Icon(
               Icons.menu_rounded,
-              color: Theme
-                  .of(context)
-                  .colorScheme
-                  .onSurface,
+              color: Theme.of(context).colorScheme.onSurface,
             ),
           ),
         ],
@@ -685,12 +664,11 @@ class MediaPlayerState extends State<MediaPlayer>
     );
   }
 
-  void settingsDialog() =>
-      AnimeCompactSettings(
+  void settingsDialog() => AnimeCompactSettings(
         context,
         widget.media,
         widget.source,
-            (i) {
+        (i) {
           viewType.value = i.viewType;
           reverse.value = i.isReverse;
         },
@@ -710,7 +688,7 @@ class MediaPlayerState extends State<MediaPlayer>
         var keyNumber = int.parse(event.logicalKey.keyLabel);
 
         var videoDurationSeconds =
-        _timeStringToSeconds(videoPlayerController.maxTime.value);
+            _timeStringToSeconds(videoPlayerController.maxTime.value);
         var targetSeconds = (keyNumber / 10) * videoDurationSeconds;
 
         if (keyNumber == 1) {

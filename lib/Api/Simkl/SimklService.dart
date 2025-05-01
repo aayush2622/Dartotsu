@@ -1,7 +1,7 @@
-import 'package:dartotsu/Services/BaseServiceData.dart';
-import 'package:dartotsu/Services/Screens/BaseHomeScreen.dart';
 import 'package:dartotsu/Api/Simkl/Screen/SimklAnimeScreen.dart';
 import 'package:dartotsu/Api/Simkl/Screen/SimklMovieScreen.dart';
+import 'package:dartotsu/Services/BaseServiceData.dart';
+import 'package:dartotsu/Services/Screens/BaseHomeScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

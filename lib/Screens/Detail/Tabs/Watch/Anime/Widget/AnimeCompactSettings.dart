@@ -4,9 +4,9 @@ import 'package:dartotsu/Widgets/AlertDialogBuilder.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../../../Api/Sources/Model/Source.dart';
 import '../../../../../../DataClass/Media.dart';
 import '../../../../../../Functions/Function.dart';
-import '../../../../../../Api/Sources/Model/Source.dart';
 import '../../../../../WebView/WebView.dart';
 
 class AnimeCompactSettings {
@@ -41,9 +41,9 @@ class AnimeCompactSettings {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildLayoutSettings(),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             _buildSortSettings(),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             _buildWebViewSettings(),
           ],
         ),
@@ -186,7 +186,7 @@ class AnimeCompactSettings {
             context,
             MangaWebView(url: source!.baseUrl!, title: ''),
           ),
-          icon: Icon(
+          icon: const Icon(
             Icons.open_in_new_rounded,
             size: 24,
           ),

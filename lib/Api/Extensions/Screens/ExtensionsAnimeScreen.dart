@@ -90,9 +90,10 @@ class ExtensionsAnimeScreen extends BaseAnimeScreen {
               ),
           ],
         ),
-      SizedBox(height: 128),
+      const SizedBox(height: 128),
     ];
   }
+
   @override
   List<ChipData> get trendingChips => [];
 

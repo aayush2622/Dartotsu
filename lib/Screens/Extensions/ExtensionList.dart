@@ -114,8 +114,7 @@ class _ExtensionScreenState extends ConsumerState<Extension> {
             widget.query.isEmpty ||
             element.name!.toLowerCase().contains(widget.query.toLowerCase()))
         .where((element) =>
-            loadData(PrefName.NSFWExtensions) ||
-            element.isNsfw == false)
+            loadData(PrefName.NSFWExtensions) || element.isNsfw == false)
         .toList();
   }
 
@@ -165,9 +164,7 @@ class _ExtensionScreenState extends ConsumerState<Extension> {
   }
 
   List<Source> _getNotInstalledEntries(List<Source> data) {
-    return data
-        .where((element) => !element.isAdded!)
-        .toList();
+    return data.where((element) => !element.isAdded!).toList();
   }
 
   Widget _buildInstalledList(List<Source> installedEntries) {

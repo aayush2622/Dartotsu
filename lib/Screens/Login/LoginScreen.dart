@@ -43,7 +43,7 @@ class LoginScreenState extends State<LoginScreen> {
             Text(
               getString.appTagline,
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 14),
+              style: const TextStyle(fontSize: 14),
             ),
             const SizedBox(height: 38),
             _buildLoginButton(context),

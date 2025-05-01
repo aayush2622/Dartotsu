@@ -115,7 +115,7 @@ class SearchScreenState extends State<SearchScreen> {
                                   left: 16,
                                 ),
                                 trailing: IconButton(
-                                  icon: Icon(
+                                  icon: const Icon(
                                     FontAwesome.trash_solid,
                                     size: 18,
                                   ),
@@ -178,7 +178,7 @@ class SearchScreenState extends State<SearchScreen> {
             children: [
               IconButton(
                 onPressed: () => Get.back(),
-                icon: Icon(Icons.arrow_back_ios),
+                icon: const Icon(Icons.arrow_back_ios),
               ),
               Expanded(
                 child: TextField(
