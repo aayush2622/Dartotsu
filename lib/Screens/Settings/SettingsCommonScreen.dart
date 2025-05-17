@@ -59,8 +59,8 @@ class SettingsCommonScreenState extends BaseSettingsScreen {
           ),
           Setting(
             type: SettingType.switchType,
-            name: 'Use different Image cache manager',
-            description: 'Just because',
+            name: getString.imageCache,
+            description: getString.imageCacheDescription,
             icon: Icons.image,
             isChecked: loadCustomData('useDifferentCacheManager') ?? false,
             onSwitchChange: (value) {
