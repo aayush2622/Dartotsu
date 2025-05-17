@@ -27,12 +27,13 @@ Widget CustomElevatedButton({
     ),
     style: ElevatedButton.styleFrom(
       backgroundColor: Theme.of(context).primaryColor,
-      padding: padding ?? const EdgeInsets.only(
-        top: 16,
-        bottom: 16,
-        left: 28,
-        right: 36,
-      ),
+      padding: padding ??
+          const EdgeInsets.only(
+            top: 16,
+            bottom: 16,
+            left: 28,
+            right: 36,
+          ),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
       ),

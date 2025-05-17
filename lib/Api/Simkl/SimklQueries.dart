@@ -13,9 +13,10 @@ import 'Data/User.dart';
 import 'Login.dart' as SimklLogin;
 import 'Simkl.dart';
 
+part 'SimklQueries/GetAnimeMangaListData.dart';
 part 'SimklQueries/GetHomePageData.dart';
 part 'SimklQueries/GetUserData.dart';
-part 'SimklQueries/GetAnimeMangaListData.dart';
+
 class SimklQueries extends Queries {
   SimklQueries(this.executeQuery);
 
@@ -46,9 +47,12 @@ class SimklQueries extends Queries {
   @override
   Future<Map<String, List<media.Media>>> getMangaList() => _getMangaList();
 
-  Future<List<media.Media>> getTrending(String type, {String? time}) => _getTrending(type,time: time);
+  Future<List<media.Media>> getTrending(String type, {String? time}) =>
+      _getTrending(type, time: time);
 
-  Future<List<media.Media>> loadNextPage(String type, int page) => _loadNextPage(type, page);
+  Future<List<media.Media>> loadNextPage(String type, int page) =>
+      _loadNextPage(type, page);
+
   @override
   Future<media.Media?>? getMedia(int id, {bool mal = true}) {
     // TODO: implement getMedia

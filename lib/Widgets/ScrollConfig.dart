@@ -2,7 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 
-Widget ScrollConfig(BuildContext context, {required Widget child, ScrollPhysics? physics}) {
+Widget ScrollConfig(BuildContext context,
+    {required Widget child, ScrollPhysics? physics}) {
   return ScrollConfiguration(
     behavior: ScrollConfiguration.of(context).copyWith(
       physics: physics ?? const BouncingScrollPhysics(),
@@ -11,7 +12,6 @@ Widget ScrollConfig(BuildContext context, {required Widget child, ScrollPhysics?
         PointerDeviceKind.touch,
         PointerDeviceKind.mouse,
         PointerDeviceKind.trackpad,
-
       },
     ),
     child: child,

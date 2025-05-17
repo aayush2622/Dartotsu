@@ -160,7 +160,7 @@ class Extensions {
       )
       ..setPositiveButton(
         getString.ok,
-            () {
+        () {
           if (text.isEmpty) return;
           if (text.endsWith('index.min.json')) {
             AlertDialogBuilder(context)

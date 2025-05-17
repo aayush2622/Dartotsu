@@ -8,6 +8,7 @@ class userData {
   final String name;
   final String? pfp;
   final String? banner;
+
   // for media info page
   final String? status;
   final double? score;

@@ -1,5 +1,5 @@
-import 'package:dartotsu/Functions/string_extensions.dart';
 import 'package:dartotsu/Api/Sources/dom_extensions.dart';
+import 'package:dartotsu/Functions/string_extensions.dart';
 import 'package:html/parser.dart' show parse;
 import 'package:http_interceptor/http_interceptor.dart';
 import 'package:path/path.dart' as path;

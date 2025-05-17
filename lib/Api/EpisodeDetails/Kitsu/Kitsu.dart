@@ -13,7 +13,8 @@ class Kitsu {
   static Future<Map<String, Episode>?> getKitsuEpisodesDetails(
       Media mediaData) async {
     if (mediaData.idAnilist == null && mediaData.idMAL == null) return {};
-    final query = mediaData.idAnilist == null ? '''
+    final query = mediaData.idAnilist == null
+        ? '''
     query {
       lookupMapping(externalId: ${mediaData.idAnilist}, externalSite: ANILIST_ANIME) {
         __typename
@@ -36,7 +37,8 @@ class Kitsu {
         }
       }
     }
-    ''' : '''
+    '''
+        : '''
     query {
       lookupMapping(externalId: ${mediaData.idMAL}, externalSite: MYANIMELIST_ANIME) {
         __typename
@@ -69,16 +71,16 @@ class Kitsu {
     mediaData.idKitsu = result.id;
 
     final episodesMap = result.episodes?.nodes?.asMap().map((_, ep) {
-      return MapEntry(
-        ep?.number?.toString() ?? '',
-        Episode(
-          number: ep?.number.toString() ?? '',
-          title: ep?.titles?.canonical,
-          desc: ep?.description?.en,
-          thumb: ep?.thumbnail?.original?.url,
-        ),
-      );
-    }) ??
+          return MapEntry(
+            ep?.number?.toString() ?? '',
+            Episode(
+              number: ep?.number.toString() ?? '',
+              title: ep?.titles?.canonical,
+              desc: ep?.description?.en,
+              thumb: ep?.thumbnail?.original?.url,
+            ),
+          );
+        }) ??
         {};
 
     return episodesMap;

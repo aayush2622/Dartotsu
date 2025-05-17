@@ -11,17 +11,17 @@ abstract class BaseMangaScreen extends BaseMediaScreen {
   void loadTrending(String type);
 
   List<ChipData> get trendingChips => [
-    ChipData(
-      label: getString.trending(getString.manga),
-      action: () => loadTrending('MANGA'),
-    ),
-    ChipData(
-      label: getString.trending(getString.manhwa),
-      action: () => loadTrending('MANHWA'),
-    ),
-    ChipData(
-      label: getString.trending(getString.novel),
-      action: () => loadTrending('NOVEL'),
-    ),
-  ];
+        ChipData(
+          label: getString.trending(getString.manga),
+          action: () => loadTrending('MANGA'),
+        ),
+        ChipData(
+          label: getString.trending(getString.manhwa),
+          action: () => loadTrending('MANHWA'),
+        ),
+        ChipData(
+          label: getString.trending(getString.novel),
+          action: () => loadTrending('NOVEL'),
+        ),
+      ];
 }

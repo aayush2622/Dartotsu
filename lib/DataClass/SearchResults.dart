@@ -36,6 +36,7 @@ class SearchResults {
   bool? hasNextPage;
   int? id;
   bool? hdCover;
+
   SearchResults({
     this.type = SearchType.ANIME,
     this.isAdult,
@@ -159,4 +160,14 @@ class SearchChip {
   SearchChip(this.type, this.text);
 }
 
-enum SearchType { ANIME, MANGA, NOVEL, MOVIES, SERIES, CHARACTER, STAFF, STUDIO, USER }
+enum SearchType {
+  ANIME,
+  MANGA,
+  NOVEL,
+  MOVIES,
+  SERIES,
+  CHARACTER,
+  STAFF,
+  STUDIO,
+  USER
+}

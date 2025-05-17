@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:math';
 
-import 'package:dartotsu/Functions/Function.dart';
 import 'package:dartotsu/Api/Anilist/Anilist.dart';
+import 'package:dartotsu/Functions/Function.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_qjs/quickjs/ffi.dart';
 
@@ -83,5 +83,6 @@ class AnilistQueries extends Queries {
   Future<List<Media>> getCalendarData() => _getCalendarData();
 
   @override
-  Future<SearchResults?> search(SearchResults? searchResults) => _search(searchResults);
+  Future<SearchResults?> search(SearchResults? searchResults) =>
+      _search(searchResults);
 }

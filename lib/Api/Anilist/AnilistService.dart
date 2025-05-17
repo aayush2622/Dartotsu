@@ -1,17 +1,18 @@
+import 'package:dartotsu/Api/Anilist/Screen/AnilistAnimeScreen.dart';
+import 'package:dartotsu/Api/Anilist/Screen/AnilistSearchScreen.dart';
 import 'package:dartotsu/Services/Screens/BaseAnimeScreen.dart';
 import 'package:dartotsu/Services/Screens/BaseHomeScreen.dart';
 import 'package:dartotsu/Services/Screens/BaseLoginScreen.dart';
 import 'package:dartotsu/Services/Screens/BaseMangaScreen.dart';
 import 'package:dartotsu/Services/Screens/BaseSearchScreen.dart';
 import 'package:dartotsu/Theme/LanguageSwitcher.dart';
-import 'package:dartotsu/Api/Anilist/Screen/AnilistAnimeScreen.dart';
-import 'package:dartotsu/Api/Anilist/Screen/AnilistSearchScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 import '../../Services/BaseServiceData.dart';
 import '../../Services/MediaService.dart';
 import 'Anilist.dart';
+import 'ListEditor.dart' as l;
 import 'Screen/AnilistHomeScreen.dart';
 import 'Screen/AnilistMangaScreen.dart';
 
@@ -47,6 +48,14 @@ class AnilistService extends MediaService {
 
   @override
   BaseSearchScreen get searchScreen => AnilistSearchScreen(Anilist);
+
+  @override
+  void compactListEditor(context, media) =>
+      l.listEditor(context, media, isCompact: true);
+
+  @override
+  void listEditor(context, media) =>
+      l.listEditor(context, media, isCompact: false);
 }
 
 class AnilistLoginScreen extends BaseLoginScreen {

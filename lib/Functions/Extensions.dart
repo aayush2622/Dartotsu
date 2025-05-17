@@ -4,21 +4,20 @@ import 'package:provider/provider.dart';
 
 import '../Services/MediaService.dart';
 import '../Services/ServiceSwitcher.dart';
-import '../main.dart';
 
 extension IntExtension on int {
   double statusBar() {
-    var context = navigatorKey.currentContext ?? Get.context;
+    var context = Get.context;
     return this + MediaQuery.paddingOf(context!).top;
   }
 
   double bottomBar() {
-    var context = navigatorKey.currentContext ?? Get.context;
+    var context = Get.context;
     return this + MediaQuery.of(context!).padding.bottom;
   }
 
   double screenWidth() {
-    var context = navigatorKey.currentContext ?? Get.context;
+    var context = Get.context;
     return MediaQuery.of(context!).size.width;
   }
 
@@ -27,7 +26,7 @@ extension IntExtension on int {
   }
 
   double screenHeight() {
-    var context = navigatorKey.currentContext ?? Get.context;
+    var context = Get.context;
     return MediaQuery.of(context!).size.height;
   }
 }

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:app_links/app_links.dart';
 import 'package:dartotsu/Api/Sources/Model/Manga.dart';
 import 'package:dartotsu/Functions/Extensions.dart';
 import 'package:dartotsu/Functions/Function.dart';
@@ -24,9 +25,8 @@ import 'package:media_kit/media_kit.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:app_links/app_links.dart';
-import 'package:window_manager/window_manager.dart';
 import 'package:shorebird_code_push/shorebird_code_push.dart';
+import 'package:window_manager/window_manager.dart';
 
 import 'Api/Discord/Discord.dart';
 import 'Api/TypeFactory.dart';
@@ -161,8 +161,6 @@ void handleDeepLink(Uri uri) {
   );
 }
 
-final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -211,7 +209,6 @@ class MyApp extends StatelessWidget {
             ],
             supportedLocales: AppLocalizations.supportedLocales,
             locale: Locale(loadData(PrefName.defaultLanguage)),
-            navigatorKey: navigatorKey,
             title: 'Dartotsu',
             themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
             debugShowCheckedModeBanner: false,

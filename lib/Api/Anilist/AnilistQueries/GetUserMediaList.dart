@@ -11,8 +11,8 @@ extension on AnilistQueries {
 
     final Map<String, List<Media>> sorted = {};
 
-
-    (List<Media>, Map<String, List<Media>>) process(Map<String, dynamic> params){
+    (List<Media>, Map<String, List<Media>>) process(
+        Map<String, dynamic> params) {
       final Map<String, List<Media>> unsorted = {};
       final List<Media> all = [];
       final List<int> allIds = [];
@@ -36,9 +36,7 @@ extension on AnilistQueries {
     }
 
     final lists = response?.data?.mediaListCollection?.lists;
-    var (all , unsorted) = await compute(process, {
-      'lists' : lists
-    });
+    var (all, unsorted) = await compute(process, {'lists': lists});
     final options = response?.data?.mediaListCollection?.user?.mediaListOptions;
     final mediaList = anime ? options?.animeList : options?.mangaList;
     mediaList?.sectionOrder?.forEach((section) {

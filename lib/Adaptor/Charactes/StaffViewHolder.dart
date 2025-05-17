@@ -60,6 +60,7 @@ class StaffViewHolder extends StatelessWidget {
     );
   }
 }
+
 class StudioViewHolder extends StatelessWidget {
   final studio studioInfo;
 

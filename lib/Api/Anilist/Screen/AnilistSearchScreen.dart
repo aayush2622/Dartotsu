@@ -1,5 +1,5 @@
-import 'package:dartotsu/DataClass/User.dart';
 import 'package:dartotsu/Api/Anilist/Screen/Widgets/SearchFilter.dart';
+import 'package:dartotsu/DataClass/User.dart';
 import 'package:dartotsu/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -125,7 +125,8 @@ class AnilistSearchScreen extends BaseSearchScreen {
         return characterAndStaffResults(context, EntityType.Studio);
       case SearchType.USER:
         return userResults(context);
-      default: return [];
+      default:
+        return [];
     }
   }
 
@@ -143,7 +144,7 @@ class AnilistSearchScreen extends BaseSearchScreen {
 
   List<Widget> animeAndMangaFilter(BuildContext context, SearchType mediaType) {
     return [
-      Obx((){
+      Obx(() {
         return Column(
           children: [
             Row(
@@ -158,7 +159,8 @@ class AnilistSearchScreen extends BaseSearchScreen {
                         value: searchResults.value.onList ?? false,
                         onChanged: (n) {
                           var value = n == true ? true : null;
-                          searchResults.value = searchResults.value..onList = value;
+                          searchResults.value = searchResults.value
+                            ..onList = value;
                           search();
                         },
                         activeColor: Theme.of(context).colorScheme.primary,
@@ -176,7 +178,8 @@ class AnilistSearchScreen extends BaseSearchScreen {
                       Checkbox(
                         value: searchResults.value.isAdult ?? false,
                         onChanged: (n) {
-                          searchResults.value = searchResults.value..isAdult = n;
+                          searchResults.value = searchResults.value
+                            ..isAdult = n;
                           search();
                         },
                         activeColor: Theme.of(context).colorScheme.primary,
@@ -188,21 +191,21 @@ class AnilistSearchScreen extends BaseSearchScreen {
                 ),
               ],
             ),
-            SizedBox(height: 4),
+            const SizedBox(height: 4),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Expanded(
                   child: ChipsWidget(
                     chips: searchResults.value.toChipList().map(
-                          (label) {
+                      (label) {
                         return ChipData(
                           label: label.text.replaceAll("_", " "),
                           action: () {
                             searchResults.value.removeChip(label);
                             if (searchResults.value.toChipList().isEmpty &&
                                 (searchResults.value.search == null ||
-                                searchResults.value.search!.isEmpty)) {
+                                    searchResults.value.search!.isEmpty)) {
                               showHistory.value = true;
                             } else {
                               search();
@@ -237,7 +240,7 @@ class AnilistSearchScreen extends BaseSearchScreen {
                 ),
               ],
             ),
-            SizedBox(height: 4),
+            const SizedBox(height: 4),
           ],
         );
       })
@@ -255,7 +258,9 @@ class AnilistSearchScreen extends BaseSearchScreen {
       ),
     ];
   }
+
   var type = 3.obs;
+
   List<Widget> userResults(BuildContext context) {
     return [
       userSection(

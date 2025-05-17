@@ -65,7 +65,7 @@ class ChapterListView extends StatelessWidget {
                 ),
                 if (chapter.mChapter?.scanlator != null &&
                     chapter.mChapter?.scanlator != '')
-                  SizedBox(height: 4),
+                  const SizedBox(height: 4),
                 _buildDescription(theme, context),
               ],
             ),
@@ -77,7 +77,7 @@ class ChapterListView extends StatelessWidget {
             color: theme.onSurface,
             size: 26,
           ),
-        SizedBox(width: 8),
+        const SizedBox(width: 8),
       ],
     );
   }
@@ -93,7 +93,7 @@ class ChapterListView extends StatelessWidget {
     }
     if (chapter.date != null && chapter.mChapter?.scanlator != null) {
       spans.add(
-        TextSpan(
+        const TextSpan(
           text: ' • ',
         ),
       );

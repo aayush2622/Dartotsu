@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 
 import '../../Adaptor/Settings/SettingsAdaptor.dart';
+import '../../Api/Sources/Model/Manga.dart';
 import '../../DataClass/Setting.dart';
 import '../../Theme/LanguageSwitcher.dart';
-import '../../Api/Sources/Model/Manga.dart';
 import 'BaseSettingsScreen.dart';
 
 class SettingsExtensionsScreen extends StatefulWidget {
@@ -68,8 +68,7 @@ class SettingsExtensionsScreenState extends BaseSettingsScreen {
         description: getString.loadExtensionsIconDesc,
         icon: Icons.image_not_supported_rounded,
         isChecked: loadCustomData('loadExtensionIcon') ?? true,
-        onSwitchChange: (value) =>
-            saveCustomData('loadExtensionIcon', value),
+        onSwitchChange: (value) => saveCustomData('loadExtensionIcon', value),
       ),
       Setting(
         type: SettingType.switchType,

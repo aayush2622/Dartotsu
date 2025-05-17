@@ -67,7 +67,9 @@ extension on SimklQueries {
             entry.key,
             await _loadCache(
               entry.value,
-              entry.key == 'trendingMovies' || entry.key == 'popularMovies' ? 'movies' : 'shows' ,
+              entry.key == 'trendingMovies' || entry.key == 'popularMovies'
+                  ? 'movies'
+                  : 'shows',
               entry.key,
             ),
           );
@@ -117,7 +119,6 @@ extension on SimklQueries {
     String mapKey,
     String key,
   ) async {
-
     final localData = loadCustomData<String?>('simkl${key}List');
     var time = loadCustomData<int>('simkl${key}time');
     bool checkTime() {
@@ -144,12 +145,12 @@ extension on SimklQueries {
     String? time,
   }) async {
     Media? updaterShowList;
-    if (type != 'anime'){
+    if (type != 'anime') {
       updaterShowList = await executeQuery<Media>(
         'https://api.simkl.com/$type/trending/?extended=overview,metadata,tmdb,genres,trailer&client_id=${SimklLogin.clientId}',
         mapKey: type == 'tv' ? 'shows' : type,
       );
-    }else{
+    } else {
       updaterShowList = await executeQuery<Media>(
         'https://api.simkl.com/anime/trending/$time?extended=overview,metadata,tmdb,genres,trailer&client_id=${SimklLogin.clientId}',
         mapKey: 'anime',

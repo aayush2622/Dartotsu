@@ -591,6 +591,7 @@ class Studio {
   MediaConnection? media;
   bool? isFavourite;
   int? favourites;
+
   Studio({
     required this.id,
     this.name,

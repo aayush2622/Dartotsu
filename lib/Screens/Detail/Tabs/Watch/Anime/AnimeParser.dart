@@ -4,8 +4,6 @@ import 'package:dartotsu/Screens/Detail/Tabs/Watch/BaseParser.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
-import '../../../../../DataClass/Episode.dart';
-import '../../../../../DataClass/Media.dart';
 import '../../../../../Api/EpisodeDetails/Anify/Anify.dart';
 import '../../../../../Api/EpisodeDetails/Jikan/Jikan.dart';
 import '../../../../../Api/EpisodeDetails/Kitsu/Kitsu.dart';
@@ -13,6 +11,8 @@ import '../../../../../Api/Sources/Eval/dart/model/m_chapter.dart';
 import '../../../../../Api/Sources/Eval/dart/model/m_manga.dart';
 import '../../../../../Api/Sources/Model/Source.dart';
 import '../../../../../Api/Sources/Search/get_detail.dart';
+import '../../../../../DataClass/Episode.dart';
+import '../../../../../DataClass/Media.dart';
 import '../../../../../Preferences/IsarDataClasses/MediaSettings/MediaSettings.dart';
 import '../Functions/ParseChapterNumber.dart';
 import 'Widget/AnimeCompactSettings.dart';
@@ -153,7 +153,7 @@ class AnimeParser extends BaseParser {
   var episodeDataLoaded = false.obs;
 
   Future<void> getEpisodeData(Media mediaData) async {
-    Future.delayed(Duration(seconds: 5), () {
+    Future.delayed(const Duration(seconds: 5), () {
       episodeDataLoaded.value = true;
     });
     var data = await Future.wait([

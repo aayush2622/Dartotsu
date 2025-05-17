@@ -163,7 +163,9 @@ class MediaPageLargeViewHolder extends StatelessWidget {
 
   Widget _buildAdditionalInfo(ColorScheme theme) {
     final isAnime = mediaInfo.anime != null;
-    final mediaType = isAnime ? getString.episode(mediaInfo.anime?.totalEpisodes  ?? 0) : getString.chapter(mediaInfo.manga?.totalChapters ?? 0);
+    final mediaType = isAnime
+        ? getString.episode(mediaInfo.anime?.totalEpisodes ?? 0)
+        : getString.chapter(mediaInfo.manga?.totalChapters ?? 0);
     final mediaCount = isAnime
         ? formatMediaInfo(mediaInfo)
         : mediaInfo.manga?.totalChapters != 0

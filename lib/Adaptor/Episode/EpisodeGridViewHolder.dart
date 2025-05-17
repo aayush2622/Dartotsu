@@ -74,7 +74,7 @@ class EpisodeCardView extends StatelessWidget {
     return Align(
       alignment: Alignment.bottomRight,
       child: Transform.translate(
-        offset: Offset(0, 6),
+        offset: const Offset(0, 6),
         child: Padding(
           padding: const EdgeInsets.only(right: 8, bottom: 0),
           child: Text(

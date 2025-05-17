@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../EntityAdaptor.dart';
 
 Widget entitySection({

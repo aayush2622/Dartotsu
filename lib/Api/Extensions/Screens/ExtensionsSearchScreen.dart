@@ -56,7 +56,11 @@ class ExtensionsSearchScreen extends BaseSearchScreen {
               source: source,
               filterList: [],
             ))
-                ?.toMedia(isAnime: true, source: source);
+                ?.toMedia(
+                    isAnime: searchResults.value.type == SearchType.ANIME
+                        ? true
+                        : false,
+                    source: source);
             if (result != null && result.isNotEmpty) {
               data.value = {...?data.value, source.name ?? 'Unknown': result};
             }
@@ -89,7 +93,7 @@ class ExtensionsSearchScreen extends BaseSearchScreen {
               ),
           ],
         ),
-      SizedBox(height: 128),
+      const SizedBox(height: 128),
     ];
   }
 

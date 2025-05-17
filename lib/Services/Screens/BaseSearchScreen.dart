@@ -15,7 +15,10 @@ abstract class BaseSearchScreen extends GetxController {
   var title = SearchType.ANIME.obs;
 
   bool get paging => true;
-  Rx<SearchResults> searchResults = SearchResults(type: SearchType.ANIME,).obs;
+
+  Rx<SearchResults> searchResults = SearchResults(
+    type: SearchType.ANIME,
+  ).obs;
 
   RxBool showHistory = true.obs;
 
@@ -44,7 +47,7 @@ abstract class BaseSearchScreen extends GetxController {
     canLoadMore.value = true;
   }
 
-  void onSearchIconLongClick(BuildContext context) { }
+  void onSearchIconLongClick(BuildContext context) {}
 
   void onSearchIconClick(
     BuildContext context,

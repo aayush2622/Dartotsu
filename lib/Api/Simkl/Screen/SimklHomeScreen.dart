@@ -71,9 +71,8 @@ class SimklHomeScreen extends BaseHomeScreen {
           .cover);
     }
     if (showContinue.value != null && showContinue.value!.isNotEmpty) {
-      listImage.add((List.from(showContinue.value ?? [])..shuffle(Random()))
-          .first
-          .cover);
+      listImage.add(
+          (List.from(showContinue.value ?? [])..shuffle(Random())).first.cover);
     }
     if (listImage.isNotEmpty) {
       if (listImage.length < 2) {

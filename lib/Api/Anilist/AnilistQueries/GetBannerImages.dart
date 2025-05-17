@@ -24,7 +24,7 @@ extension on AnilistQueries {
           await executeQuery<MediaListCollectionResponse>(_queryBanner(type));
       final bannerImages = response?.data?.mediaListCollection?.lists
               ?.expand((list) => list.entries ?? [] as List<api.MediaList>)
-              .where((e ) => !(e.media?.isAdult == true))
+              .where((e) => !(e.media?.isAdult == true))
               .map((entry) => entry.media?.bannerImage)
               .where((imageUrl) => imageUrl != null && imageUrl != 'null')
               .toList() ??
@@ -56,6 +56,7 @@ String _queryBanner(String type) => '''{
         media { 
           id 
           bannerImage 
+          isAdult
         } 
       } 
     } 

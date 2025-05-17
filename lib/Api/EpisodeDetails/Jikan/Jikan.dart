@@ -12,7 +12,7 @@ class Jikan {
   static const String apiUrl = "https://api.jikan.moe/v4";
 
   static Future<Map<String, Episode>> getEpisodes(Media mediaData) async {
-    if(mediaData.idMAL == null) return {};
+    if (mediaData.idMAL == null) return {};
     final Map<String, Episode> eps = {};
     int page = 0;
 

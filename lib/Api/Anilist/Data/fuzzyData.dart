@@ -15,6 +15,15 @@ class FuzzyDate {
 
   Map<String, dynamic> toJson() => _$FuzzyDateToJson(this);
 
+  String toVariableString() {
+    final parts = [
+      if (year != null) 'year:$year',
+      if (month != null) 'month:$month',
+      if (day != null) 'day:$day',
+    ];
+    return '{${parts.join(',')}}';
+  }
+
   String? getFormattedDate() {
     var monthName = <int, String>{
       1: "January",

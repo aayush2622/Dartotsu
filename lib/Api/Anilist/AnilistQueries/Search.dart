@@ -15,7 +15,7 @@ extension on AnilistQueries {
         return await _searchStudioResults(searchResults);
       case SearchType.USER:
         return await _searchUserResults(searchResults);
-      default :
+      default:
         return null;
     }
   }
@@ -39,9 +39,11 @@ extension on AnilistQueries {
         "yearLesser": (searchResults.startYear! + 1) * 10000,
       if (searchResults.season != null) "season": searchResults.season,
       if (searchResults.search != null) "search": searchResults.search,
-      if (searchResults.source != null) "source": searchResults.source?.replaceAll(" ", "_"),
+      if (searchResults.source != null)
+        "source": searchResults.source?.replaceAll(" ", "_"),
       if (searchResults.sort != null) "sort": searchResults.sort,
-      if (searchResults.status != null) "status": searchResults.status?.replaceAll(" ", "_"),
+      if (searchResults.status != null)
+        "status": searchResults.status?.replaceAll(" ", "_"),
       if (searchResults.format != null)
         "format": searchResults.format?.replaceAll(" ", "_"),
       if (searchResults.countryOfOrigin != null)

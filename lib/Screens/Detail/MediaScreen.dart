@@ -1,4 +1,3 @@
-
 import 'dart:ui';
 
 import 'package:blur/blur.dart';
@@ -42,7 +41,6 @@ class MediaInfoPageState extends State<MediaInfoPage> {
 
   @override
   void initState() {
-
     var service = context.currentService(listen: false);
     _viewModel = Get.put(MediaPageViewModel(),
         tag: "${widget.mediaData.id.toString()}-${service.getName}");
@@ -122,7 +120,7 @@ class MediaInfoPageState extends State<MediaInfoPage> {
   }
 
   Widget _buildProgressIndicator() {
-    return SizedBox(
+    return const SizedBox(
       height: 251,
       child: Center(
         child: CircularProgressIndicator(),
@@ -137,23 +135,29 @@ class MediaInfoPageState extends State<MediaInfoPage> {
         backgroundColor: Theme.of(context).colorScheme.surface,
         items: [
           BottomNavigationBarItem(
-            icon: _selectedIndex.value == 0 ? const SizedBox() : const Icon(Icons.info),
+            icon: _selectedIndex.value == 0
+                ? const SizedBox()
+                : const Icon(Icons.info),
             label: getString.info.toUpperCase(),
           ),
           BottomNavigationBarItem(
             icon: _selectedIndex.value == 1
                 ? const SizedBox()
                 : Icon(
-              isAnime
-                  ? Icons.movie_filter_rounded
-                  : mediaData.format?.toLowerCase() != 'novel'
-                  ? Icons.import_contacts
-                  : Icons.book_rounded,
-            ),
-            label: isAnime ? getString.watch.toUpperCase() : getString.read.toUpperCase(),
+                    isAnime
+                        ? Icons.movie_filter_rounded
+                        : mediaData.format?.toLowerCase() != 'novel'
+                            ? Icons.import_contacts
+                            : Icons.book_rounded,
+                  ),
+            label: isAnime
+                ? getString.watch.toUpperCase()
+                : getString.read.toUpperCase(),
           ),
           BottomNavigationBarItem(
-            icon: _selectedIndex.value == 2 ? const SizedBox() : const Icon(Icons.chat_bubble_rounded),
+            icon: _selectedIndex.value == 2
+                ? const SizedBox()
+                : const Icon(Icons.chat_bubble_rounded),
             label: getString.comments.toUpperCase(),
           ),
         ],
@@ -387,7 +391,11 @@ class MediaInfoPageState extends State<MediaInfoPage> {
       right: 32,
       height: 48,
       child: OutlinedButton(
-        onPressed: () {},
+        onPressed: () => loaded
+            ? context
+                .currentService(listen: false)
+                .listEditor(context, mediaData)
+            : null,
         style: OutlinedButton.styleFrom(
           padding: const EdgeInsets.all(8.0),
           shape: RoundedRectangleBorder(

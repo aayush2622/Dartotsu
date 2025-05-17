@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:dartotsu/Functions/Function.dart';
 import 'package:dartotsu/Api/Sources/Model/settings.dart';
+import 'package:dartotsu/Functions/Function.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart'
 as flutter_inappwebview;
@@ -14,10 +14,11 @@ import '../Eval/dart/model/m_source.dart';
 
 class MClient {
   MClient();
-  static InterceptedClient init(
-      {MSource? source,
-      Map<String, dynamic>? reqcopyWith,
-      }) {
+
+  static InterceptedClient init({
+    MSource? source,
+    Map<String, dynamic>? reqcopyWith,
+  }) {
     return InterceptedClient.build(
         client: IOClient(HttpClient()),
         interceptors: [MCookieManager(reqcopyWith), LoggerInterceptor()]);

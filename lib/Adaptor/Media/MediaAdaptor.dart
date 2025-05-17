@@ -86,6 +86,10 @@ class MediaGridState extends State<MediaAdaptor> {
     }
   }
 
+  void _handleLongTap(BuildContext context, Media media) {
+    context.currentService(listen: false).compactListEditor(context,media);
+  }
+
   Widget _buildAnimatedMediaItem({
     required Widget child,
     required String tag,
@@ -100,6 +104,7 @@ class MediaGridState extends State<MediaAdaptor> {
       duration: const Duration(milliseconds: 200),
       child: GestureDetector(
         onTap: () => _handleMediaTap(index, _mediaList[index], tag),
+        onLongPress: () => _handleLongTap(context,_mediaList[index]),
         child: child,
       ),
     );
@@ -119,7 +124,7 @@ class MediaGridState extends State<MediaAdaptor> {
             final tag = _generateTag(index);
             return Container(
               width: 250,
-              margin: EdgeInsets.symmetric(horizontal: 6.5).copyWith(
+              margin: const EdgeInsets.symmetric(horizontal: 6.5).copyWith(
                 left: Directionality.of(context) == TextDirection.rtl
                     ? (index == _mediaList.length - 1 ? 24.0 : 6.5)
                     : (index == 0 ? 24.0 : 6.5),
@@ -158,7 +163,7 @@ class MediaGridState extends State<MediaAdaptor> {
             final tag = _generateTag(index);
             return Container(
               width: 102,
-              margin: EdgeInsets.symmetric(horizontal: 6.5).copyWith(
+              margin: const EdgeInsets.symmetric(horizontal: 6.5).copyWith(
                 left: Directionality.of(context) == TextDirection.rtl
                     ? (index == _mediaList.length - 1 ? 24.0 : 6.5)
                     : (index == 0 ? 24.0 : 6.5),
@@ -194,6 +199,7 @@ class MediaGridState extends State<MediaAdaptor> {
             final tag = _generateTag(index);
             return GestureDetector(
               onTap: () => _handleMediaTap(index, _mediaList[index], tag),
+              onLongPress: () => _handleLongTap(context,_mediaList[index]),
               child: MediaPageSmallViewHolder(_mediaList[index], tag),
             );
           },
@@ -252,7 +258,7 @@ class MediaGridState extends State<MediaAdaptor> {
                 final tag = _generateTag(index);
                 return GestureDetector(
                   onTap: () => _handleMediaTap(index, _mediaList[index], tag),
-                  onLongPress: () {},
+                  onLongPress: () => _handleLongTap(context,_mediaList[index]),
                   child: SizedBox(
                     width: 108,
                     height: height,

@@ -1,7 +1,7 @@
+import 'package:dartotsu/Api/MyAnimeList/Mal.dart';
 import 'package:dartotsu/Services/Screens/BaseAnimeScreen.dart';
 import 'package:dartotsu/Services/Screens/BaseHomeScreen.dart';
 import 'package:dartotsu/Services/Screens/BaseMangaScreen.dart';
-import 'package:dartotsu/Api/MyAnimeList/Mal.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 

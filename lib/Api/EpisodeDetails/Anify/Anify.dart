@@ -12,11 +12,11 @@ class Anify {
   static Future<Map<String, Episode>> fetchAndParseMetadata(
       Media mediaData) async {
     var ids = [105310]; // hardcode incorrect ids
-    if(mediaData.idAnilist == null) return {};
+    if (mediaData.idAnilist == null) return {};
     if (ids.contains(mediaData.id)) return {};
 
-    final response = await http.get(
-        Uri.parse('https://anify.eltik.cc/content-metadata/${mediaData.idAnilist}'));
+    final response = await http.get(Uri.parse(
+        'https://anify.eltik.cc/content-metadata/${mediaData.idAnilist}'));
     if (response.statusCode == 200) {
       final List<dynamic> jsonResponse =
           jsonDecode(response.body) as List<dynamic>;

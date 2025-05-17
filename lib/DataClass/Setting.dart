@@ -12,7 +12,7 @@ class Setting {
   final String name;
 
   /// Description of the setting
-  final String description;
+  final String? description;
 
   /// Icon of the setting
   final IconData? icon;
@@ -59,7 +59,7 @@ class Setting {
   Setting({
     required this.type,
     required this.name,
-    required this.description,
+    this.description,
     this.icon,
     this.isVisible = true,
     this.isActivity = false,

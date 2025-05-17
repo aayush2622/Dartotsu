@@ -5,11 +5,14 @@ extension on AnilistQueries {
     var response =
         (await executeQuery<MediaResponse>(_queryMedia(media), force: true));
     if (response == null) return null;
-    void parse() {
-      var fetchedMedia = response?.data?.media;
-      var user = response?.data?.page;
-      if (fetchedMedia == null) return;
-      media.source = fetchedMedia.source?.name;
+
+    Media parse(Map<String, dynamic> params) {
+      var media = params["media"] as Media;
+      var response = params["response"] as MediaResponse;
+      var fetchedMedia = response.data?.media;
+      var user = response.data?.page;
+      if (fetchedMedia == null) media;
+      media.source = fetchedMedia!.source?.name;
       media.countryOfOrigin = fetchedMedia.countryOfOrigin;
       media.format = fetchedMedia.format?.name;
       media.favourites = fetchedMedia.favourites;
@@ -52,7 +55,6 @@ extension on AnilistQueries {
                 role: i.role?.toString() ?? "",
                 description: node.description ?? "",
                 gender: node.gender,
-
                 voiceActor: (i.voiceActors?.map((voiceActor) {
                       return author(
                           id: voiceActor.id,
@@ -239,16 +241,23 @@ extension on AnilistQueries {
           );
         }
       }
+      return media;
     }
 
     if (response.data?.media != null) {
-      parse();
+      media = await compute(parse,{
+        "media": media,
+        "response": response
+      });
     } else {
       response =
           await executeQuery(_queryMedia(media), force: true, useToken: false);
       if (response?.data?.media != null) {
         snackString('Adult Stuff? Adult Stuff? ( ͡° ͜ʖ ͡° )');
-        parse();
+        media = await compute(parse,{
+          "media": media,
+          "response": response
+        });
       } else {
         snackString('Error getting data from Anilist.');
       }

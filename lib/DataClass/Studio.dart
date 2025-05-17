@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+
 import 'Media.dart';
 
 @JsonSerializable()
@@ -22,5 +23,4 @@ class studio {
     this.favourites,
     this.imageUrl,
   });
-
 }

@@ -12,10 +12,8 @@ Widget handleProgress({
 }) {
   var sourceName =
       Provider.of<MediaServiceProvider>(context).currentService.getName;
-  var currentProgress =
-      loadCustomData<int>("$mediaId-$ep-$sourceName-current");
-  var maxProgress =
-      loadCustomData<int>("$mediaId-$ep-$sourceName-max");
+  var currentProgress = loadCustomData<int>("$mediaId-$ep-$sourceName-current");
+  var maxProgress = loadCustomData<int>("$mediaId-$ep-$sourceName-max");
   if (currentProgress == null || maxProgress == null || maxProgress == 0) {
     return const SizedBox.shrink();
   }

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:dartotsu/DataClass/Media.dart';
 import 'package:dartotsu/Functions/Extensions.dart';
 import 'package:dartotsu/Preferences/IsarDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
 import 'package:dartotsu/Preferences/IsarDataClasses/DefaultReaderSettings/DafaultReaderSettings.dart';
@@ -7,7 +8,6 @@ import 'package:dartotsu/Preferences/IsarDataClasses/ShowResponse/ShowResponse.d
 import 'package:dartotsu/Preferences/PrefManager.dart';
 import 'package:get/get.dart';
 import 'package:isar/isar.dart';
-import 'package:dartotsu/DataClass/Media.dart';
 
 part 'MediaSettings.g.dart';
 

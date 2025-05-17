@@ -3,12 +3,13 @@ import 'package:dartotsu/Theme/LanguageSwitcher.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
+import '../../../../Api/Sources/Model/Source.dart';
 import '../../../../Functions/Function.dart';
 import '../../../../Preferences/PrefManager.dart';
-import '../../../../Api/Sources/Model/Source.dart';
 import '../../Widgets/Releasing.dart';
 import 'BaseParser.dart';
 import 'Widgets/SourceSelector.dart';
+
 abstract class BaseWatchScreen<T extends StatefulWidget> extends State<T> {
   BaseParser get viewModel;
 
@@ -41,7 +42,7 @@ abstract class BaseWatchScreen<T extends StatefulWidget> extends State<T> {
           ...releasingIn(mediaData, context),
           _buildContent(),
           Container(
-            constraints: BoxConstraints(
+            constraints: const BoxConstraints(
               minHeight: 300,
             ),
             child: Column(
@@ -132,8 +133,7 @@ abstract class BaseWatchScreen<T extends StatefulWidget> extends State<T> {
   }
 
   List<Widget> _buildYouTubeButton() {
-    if (mediaData.anime?.youtube == null ||
-        !loadData(PrefName.showYtButton)) {
+    if (mediaData.anime?.youtube == null || !loadData(PrefName.showYtButton)) {
       return [];
     }
 
@@ -152,11 +152,11 @@ abstract class BaseWatchScreen<T extends StatefulWidget> extends State<T> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Icons.play_circle_fill, color: Colors.white),
-              SizedBox(width: 8),
+              const Icon(Icons.play_circle_fill, color: Colors.white),
+              const SizedBox(width: 8),
               Text(
                 getString.youTube,
-                style: TextStyle(
+                style: const TextStyle(
                   fontFamily: 'Poppins',
                   fontWeight: FontWeight.bold,
                   color: Colors.white,

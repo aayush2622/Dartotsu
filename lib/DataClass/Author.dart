@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+
 import '../Api/Anilist/Data/character.dart';
 import 'Media.dart';
 

@@ -2,12 +2,12 @@ import 'package:dartotsu/logger.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
-import '../../../../../DataClass/Chapter.dart';
-import '../../../../../DataClass/Media.dart';
 import '../../../../../Api/Sources/Eval/dart/model/m_chapter.dart';
 import '../../../../../Api/Sources/Eval/dart/model/m_manga.dart';
 import '../../../../../Api/Sources/Model/Source.dart';
 import '../../../../../Api/Sources/Search/get_detail.dart';
+import '../../../../../DataClass/Chapter.dart';
+import '../../../../../DataClass/Media.dart';
 import '../../../../../Preferences/IsarDataClasses/MediaSettings/MediaSettings.dart';
 import '../BaseParser.dart';
 import '../Functions/ParseChapterNumber.dart';
@@ -28,7 +28,6 @@ class MangaParser extends BaseParser {
   var scanlator = Rxn<List<String>>(null);
   var toggledScanlators = Rxn<List<bool>>(null);
 
-
   void settingsDialog(BuildContext context, Media media) =>
       MangaCompactSettings(
         context,
@@ -37,7 +36,6 @@ class MangaParser extends BaseParser {
         scanlator.value,
         toggledScanlators.value,
         (s, t) {
-
           viewType.value = s.viewType;
           reversed.value = s.isReverse;
           toggledScanlators.value = t;
@@ -47,11 +45,9 @@ class MangaParser extends BaseParser {
                 toggledScanlators
                     .value![this.scanlator.value?.indexOf(scanlator) ?? 0];
           }).toList();
-          MediaSettings.saveMediaSettings(
-            media
-              ..settings.viewType = s.viewType
-              ..settings.isReverse = s.isReverse
-          );
+          MediaSettings.saveMediaSettings(media
+            ..settings.viewType = s.viewType
+            ..settings.isReverse = s.isReverse);
         },
       ).showDialog();
 

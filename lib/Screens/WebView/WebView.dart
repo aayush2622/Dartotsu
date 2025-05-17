@@ -194,13 +194,13 @@ class _MangaWebViewState extends ConsumerState<MangaWebView> {
                           ),
                           PopupMenuButton(itemBuilder: (context) {
                             return [
-                              PopupMenuItem<int>(
+                              const PopupMenuItem<int>(
                                   value: 0, child: Text("Refresh")),
-                              PopupMenuItem<int>(
+                              const PopupMenuItem<int>(
                                   value: 1, child: Text("Share")),
-                              PopupMenuItem<int>(
+                              const PopupMenuItem<int>(
                                   value: 2, child: Text("Open in browser")),
-                              PopupMenuItem<int>(
+                              const PopupMenuItem<int>(
                                   value: 3, child: Text("Clear Cookie")),
                             ];
                           }, onSelected: (value) async {

@@ -146,7 +146,6 @@ void checkIfSourceIsObsolete(List<Source> sourceList, ItemType itemType) {
       }
     }
   }
-
 }
 
 int compareVersions(String version1, String version2) {

@@ -16,7 +16,6 @@ import 'Login.dart' as anilist_login;
 var Anilist = Get.put(AnilistController());
 
 class AnilistController extends BaseServiceData {
-  late final AnilistMutations mutation;
   List<String>? genres;
   Map<bool, List<String>>? tags;
   int rateLimitReset = 0;
@@ -60,6 +59,14 @@ class AnilistController extends BaseServiceData {
 
   var animeStatus = ["FINISHED", "RELEASING", "NOT YET RELEASED", "CANCELLED"];
 
+  var status = [
+    "PLANNING",
+    "CURRENT",
+    "COMPLETED",
+    "REPEATING",
+    "PAUSED",
+    "DROPPED",
+  ];
   var mangaStatus = [
     "FINISHED",
     "RELEASING",
@@ -87,7 +94,7 @@ class AnilistController extends BaseServiceData {
 
   AnilistController() {
     query = AnilistQueries(executeQuery);
-    mutation = AnilistMutations(executeQuery);
+    mutations = AnilistMutations(executeQuery);
   }
 
   int get currentSeason {
@@ -210,6 +217,7 @@ class AnilistController extends BaseServiceData {
       return TypeFactory.get<T>(jsonResponse);
     } catch (e) {
       if (show) snackString("Error fetching Anilist data: ${e.toString()}");
+      debugPrint("Error fetching Anilist data: ${e.toString()}");
       return null;
     }
   }

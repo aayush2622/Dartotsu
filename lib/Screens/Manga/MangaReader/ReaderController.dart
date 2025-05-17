@@ -1,12 +1,12 @@
 import 'package:collection/collection.dart';
 import 'package:dartotsu/Adaptor/Chapter/ChapterAdaptor.dart';
+import 'package:dartotsu/DataClass/Media.dart';
 import 'package:dartotsu/Functions/Extensions.dart';
 import 'package:dartotsu/Functions/string_extensions.dart';
 import 'package:dartotsu/Preferences/IsarDataClasses/DefaultReaderSettings/DafaultReaderSettings.dart';
 import 'package:flutter/material.dart';
-
-import 'package:dartotsu/DataClass/Media.dart';
 import 'package:get/get.dart';
+
 import '../../../Api/Sources/Eval/dart/model/page.dart';
 import '../../../Api/Sources/Model/Source.dart';
 import '../../../DataClass/Chapter.dart';
@@ -44,7 +44,7 @@ class _ReaderControllerState extends State<ReaderController> {
     source = widget.reader.widget.source;
     var page = loadCustomData<int>("$key-current") ?? 1;
 
-    Future.delayed(Duration(milliseconds: 100), () {
+    Future.delayed(const Duration(milliseconds: 100), () {
       media.settings.readerSettings.layoutType == LayoutType.Paged
           ? widget.reader.pageController.jumpToPage(page - 1)
           : widget.reader.itemScrollController.jumpTo(index: page - 1);
@@ -72,7 +72,7 @@ class _ReaderControllerState extends State<ReaderController> {
               ],
             ),
           ),
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           child: _buildTopControls(),
         ),
         Column(
@@ -91,7 +91,7 @@ class _ReaderControllerState extends State<ReaderController> {
                   ],
                 ),
               ),
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               child: _buildBottomControls(),
             ),
           ],
@@ -224,7 +224,7 @@ class _ReaderControllerState extends State<ReaderController> {
                       thumbShape:
                           const RoundSliderThumbShape(enabledThumbRadius: 6),
                       overlayShape: SliderComponentShape.noOverlay,
-                      trackShape: RoundedRectSliderTrackShape(),
+                      trackShape: const RoundedRectSliderTrackShape(),
                     ),
                     child: Slider(
                       value: widget.reader.currentPage.value.toDouble(),

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dartotsu/Screens/Settings/BaseSettingsScreen.dart';
 import 'package:flutter/material.dart';
+
 import '../../Adaptor/Settings/SettingsAdaptor.dart';
 import '../../DataClass/Media.dart';
 import '../../DataClass/Setting.dart';
@@ -96,9 +97,9 @@ List<Widget> readerSettings(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 'Layout',
-                style: const TextStyle(
+                style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16.0,
                   fontFamily: 'Poppins',
@@ -120,7 +121,7 @@ List<Widget> readerSettings(
         buildTrailingIcon(context),
       ],
     ),
-    SizedBox(height: 12),
+    const SizedBox(height: 12),
     SettingsAdaptor(
       settings: [
         Setting(

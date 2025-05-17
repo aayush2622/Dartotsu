@@ -1,16 +1,16 @@
-import 'package:dartotsu/Functions/Function.dart';
 import 'package:dartotsu/Api/Sources/Eval/dart/model/video.dart';
 import 'package:dartotsu/Api/Sources/Search/getVideo.dart';
+import 'package:dartotsu/Functions/Function.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 
 import '../../Animation/ScaleAnimation.dart';
+import '../../Api/Sources/Model/Source.dart';
 import '../../DataClass/Episode.dart';
 import '../../DataClass/Media.dart';
 import '../../Screens/Anime/Player/Player.dart';
 import '../../Widgets/CustomBottomDialog.dart';
-import '../../Api/Sources/Model/Source.dart';
 import 'EpisodeCompactViewHolder.dart';
 import 'EpisodeGridViewHolder.dart';
 import 'EpisodeListViewHolder.dart';
@@ -254,7 +254,7 @@ void onEpisodeClick(
                   }
                 }
                 return Card(
-                  margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                  margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
@@ -276,14 +276,14 @@ void onEpisodeClick(
                     },
                     borderRadius: BorderRadius.circular(12),
                     child: Padding(
-                      padding: EdgeInsets.all(16),
+                      padding: const EdgeInsets.all(16),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Expanded(
                             child: Text(
                               item.quality,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                                 overflow: TextOverflow.ellipsis,

@@ -1,8 +1,8 @@
 import 'package:dartotsu/Adaptor/Media/Widgets/MediaSection.dart';
-import 'package:dartotsu/DataClass/Media.dart';
-import 'package:dartotsu/Functions/Function.dart';
 import 'package:dartotsu/Api/Simkl/Simkl.dart';
 import 'package:dartotsu/Api/Simkl/SimklQueries.dart';
+import 'package:dartotsu/DataClass/Media.dart';
+import 'package:dartotsu/Functions/Function.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
@@ -74,15 +74,17 @@ class SimklAnimeScreen extends BaseAnimeScreen {
   List<Widget> mediaContent(BuildContext context) {
     final mediaSections = [
       MediaSectionData(
-          type: 0,
-          title: 'Incoming',
-          pairTitle: 'Incoming',
-          list: premiereAnime.value,),
+        type: 0,
+        title: 'Incoming',
+        pairTitle: 'Incoming',
+        list: premiereAnime.value,
+      ),
       MediaSectionData(
-          type: 0,
-          title: 'Airing',
-          pairTitle: 'Airing',
-          list: airingAnime.value,),
+        type: 0,
+        title: 'Airing',
+        pairTitle: 'Airing',
+        list: airingAnime.value,
+      ),
     ];
     final animeLayoutMap = loadData(PrefName.simklAnimeLayout);
     final sectionMap = {
@@ -104,10 +106,11 @@ class SimklAnimeScreen extends BaseAnimeScreen {
         .toList()
       ..add(
         MediaSection(
-            context: context,
-            type: 2,
-            title: getString.popular(getString.anime),
-            mediaList: popularAnime.value,),
+          context: context,
+          type: 2,
+          title: getString.popular(getString.anime),
+          mediaList: popularAnime.value,
+        ),
       );
   }
 

@@ -46,15 +46,16 @@ class _SettingItemState extends State<SettingItem> {
                   ),
                 ),
                 const SizedBox(height: 6),
-                Text(
-                  widget.setting.description,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w600,
-                    color: Colors.grey,
-                    fontFamily: 'Poppins',
-                    fontSize: 14,
+                if (widget.setting.description != null)
+                  Text(
+                    widget.setting.description!,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w600,
+                      color: Colors.grey,
+                      fontFamily: 'Poppins',
+                      fontSize: 14,
+                    ),
                   ),
-                ),
                 if (widget.setting.attach != null)
                   widget.setting.attach!(context),
               ],
@@ -123,7 +124,8 @@ class SettingSwitchItemState extends State<SettingSwitchItem> {
           child: Row(
             children: [
               if (widget.setting.icon != null) ...[
-                Icon(widget.setting.icon, color: Theme.of(context).primaryColor),
+                Icon(widget.setting.icon,
+                    color: Theme.of(context).primaryColor),
                 const SizedBox(width: 24.0),
               ],
               Expanded(
@@ -156,15 +158,16 @@ class SettingSwitchItemState extends State<SettingSwitchItem> {
                         ),
                       ],
                     ),
-                    Text(
-                      widget.setting.description,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 14.0,
-                        color: Colors.grey,
-                        fontFamily: 'Poppins',
+                    if (widget.setting.description != null)
+                      Text(
+                        widget.setting.description!,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 14.0,
+                          color: Colors.grey,
+                          fontFamily: 'Poppins',
+                        ),
                       ),
-                    ),
                     if (widget.setting.attach != null)
                       widget.setting.attach!(context),
                   ],
@@ -208,7 +211,8 @@ class SettingSliderItemState extends State<SettingSliderItem> {
           title: Row(
             children: [
               if (widget.setting.icon != null) ...[
-                Icon(widget.setting.icon, color: Theme.of(context).primaryColor),
+                Icon(widget.setting.icon,
+                    color: Theme.of(context).primaryColor),
                 const SizedBox(width: 24.0),
               ],
               Expanded(
@@ -224,15 +228,16 @@ class SettingSliderItemState extends State<SettingSliderItem> {
                       ),
                     ),
                     const SizedBox(height: 6),
-                    Text(
-                      widget.setting.description,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w600,
-                        color: Colors.grey,
-                        fontFamily: 'Poppins',
-                        fontSize: 14,
+                    if (widget.setting.description != null)
+                      Text(
+                        widget.setting.description!,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w600,
+                          color: Colors.grey,
+                          fontFamily: 'Poppins',
+                          fontSize: 14,
+                        ),
                       ),
-                    ),
                   ],
                 ),
               ),
@@ -366,15 +371,16 @@ class SettingInputBoxItemState extends State<SettingInputBoxItem> {
                   ),
                 ),
                 const SizedBox(height: 6),
-                Text(
-                  widget.setting.description,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w600,
-                    color: Colors.grey,
-                    fontFamily: 'Poppins',
-                    fontSize: 14,
+                if (widget.setting.description != null)
+                  Text(
+                    widget.setting.description!,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w600,
+                      color: Colors.grey,
+                      fontFamily: 'Poppins',
+                      fontSize: 14,
+                    ),
                   ),
-                ),
               ],
             ),
           ),

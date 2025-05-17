@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:dartotsu/Adaptor/Episode/EpisodeAdaptor.dart';
+import 'package:dartotsu/Api/Sources/Eval/dart/model/video.dart' as v;
+import 'package:dartotsu/Api/Sources/Model/Source.dart';
 import 'package:dartotsu/DataClass/Episode.dart';
 import 'package:dartotsu/DataClass/Media.dart' as m;
 import 'package:dartotsu/Functions/Extensions.dart';
@@ -12,8 +14,6 @@ import 'package:dartotsu/Screens/Anime/Player/Platform/WindowsPlayer.dart';
 import 'package:dartotsu/Theme/LanguageSwitcher.dart';
 import 'package:dartotsu/Widgets/AlertDialogBuilder.dart';
 import 'package:dartotsu/Widgets/CustomBottomDialog.dart';
-import 'package:dartotsu/Api/Sources/Eval/dart/model/video.dart' as v;
-import 'package:dartotsu/Api/Sources/Model/Source.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -266,7 +266,7 @@ class _PlayerControllerState extends State<PlayerController> {
                 () => timeStampsText.value != ''
                     ? Text(
                         "  • $timeStampsText",
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w300,
                           fontFamily: 'Poppins-SemiBold',
@@ -302,7 +302,7 @@ class _PlayerControllerState extends State<PlayerController> {
                     ? SliderComponentShape.noThumb
                     : const RoundSliderThumbShape(enabledThumbRadius: 6),
                 overlayShape: SliderComponentShape.noOverlay,
-                trackShape: RoundedRectSliderTrackShape(),
+                trackShape: const RoundedRectSliderTrackShape(),
               ),
               child: Obx(
                 () {
@@ -388,7 +388,7 @@ class _PlayerControllerState extends State<PlayerController> {
   Widget _buildLine() {
     return Container(
       height: 3.4,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Color.fromARGB(255, 56, 192, 41),
         shape: BoxShape.rectangle,
       ),
@@ -503,10 +503,8 @@ class _PlayerControllerState extends State<PlayerController> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: playerSettings(
-                          context,
-                          widget.player.setState,
-                          media: media
-                        ),
+                            context, widget.player.setState,
+                            media: media),
                       ),
                     ),
                   )
@@ -649,7 +647,8 @@ class _PlayerControllerState extends State<PlayerController> {
       ..setTitle("Speed")
       ..singleChoiceItems(speedMap(cursed), selectedItemIndex, (index) {
         settings.speed = speedMap(cursed)[index];
-        MediaSettings.saveMediaSettings(media..settings.playerSettings.speed = settings.speed);
+        MediaSettings.saveMediaSettings(
+            media..settings.playerSettings.speed = settings.speed);
         controller.setRate(
             double.parse(speedMap(cursed)[index].replaceFirst("x", "")));
       })
@@ -744,7 +743,7 @@ class _PlayerControllerState extends State<PlayerController> {
         itemBuilder: (context, index) {
           var sub = currentQuality.subtitles![index];
           return Card(
-            margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+            margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
             ),
@@ -761,7 +760,7 @@ class _PlayerControllerState extends State<PlayerController> {
               },
               borderRadius: BorderRadius.circular(12),
               child: Padding(
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
                 child: Text(
                   sub.label ?? "",
                   style: TextStyle(
@@ -793,7 +792,7 @@ class _PlayerControllerState extends State<PlayerController> {
         itemBuilder: (context, index) {
           var sub = currentQuality.audios![index];
           return Card(
-            margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+            margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
             ),
@@ -810,10 +809,10 @@ class _PlayerControllerState extends State<PlayerController> {
               },
               borderRadius: BorderRadius.circular(12),
               child: Padding(
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
                 child: Text(
                   sub.label ?? "",
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),
@@ -904,7 +903,8 @@ class _PlayerControllerState extends State<PlayerController> {
     fitType = (fitType < 2) ? fitType + 1 : 0;
     resizeMode.value = resizeMap[fitType] ?? BoxFit.contain;
     settings.resizeMode = fitType;
-    MediaSettings.saveMediaSettings(media..settings.playerSettings.resizeMode = fitType);
+    MediaSettings.saveMediaSettings(
+        media..settings.playerSettings.resizeMode = fitType);
     snackString(resizeStringMap[fitType]);
   }
 
@@ -917,7 +917,7 @@ class _PlayerControllerState extends State<PlayerController> {
           itemCount: videos.length,
           itemBuilder: (context, index) {
             return Card(
-              margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+              margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
@@ -937,14 +937,14 @@ class _PlayerControllerState extends State<PlayerController> {
                 },
                 borderRadius: BorderRadius.circular(12),
                 child: Padding(
-                  padding: EdgeInsets.all(16),
+                  padding: const EdgeInsets.all(16),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Expanded(
                         child: Text(
                           videos[index].quality,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                             overflow: TextOverflow.ellipsis,

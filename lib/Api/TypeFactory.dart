@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'Anilist/Data/data.dart' as anilist;
 import 'MyAnimeList/Data/data.dart' as mal;
 import 'MyAnimeList/Data/user.dart' as mal;
@@ -30,7 +28,7 @@ class TypeFactory {
   }
 
   static void _registerAnilistTypes() {
-    TypeFactory.create<JsonDecoder>((json) => jsonDecode(json as String));
+    TypeFactory.create<Map<String, dynamic>>((json) => json);
     TypeFactory.create<anilist.PageResponse>(
         (json) => anilist.PageResponse.fromJson(json));
     TypeFactory.create<anilist.MediaResponse>(

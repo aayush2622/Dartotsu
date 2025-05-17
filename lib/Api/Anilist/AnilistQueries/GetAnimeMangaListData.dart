@@ -179,12 +179,11 @@ String _buildQueryString(String sort, String type,
     String? season,
     int? seasonYear,
     int perPage = 50}) {
-  final includeList =
-      (type == "ANIME" && !loadData(PrefName.includeAnimeList))
+  final includeList = (type == "ANIME" && !loadData(PrefName.includeAnimeList))
+      ? "onList:false"
+      : (type == "MANGA" && !loadData(PrefName.includeMangaList))
           ? "onList:false"
-          : (type == "MANGA" && !loadData(PrefName.includeMangaList))
-              ? "onList:false"
-              : "";
+          : "";
 
   final isAdult = loadData(PrefName.adultOnly) ? "isAdult:true" : "";
 
