@@ -15,6 +15,7 @@ abstract class BaseSearchScreen extends GetxController {
   var title = SearchType.ANIME.obs;
 
   bool get paging => true;
+
   Rx<SearchResults> searchResults = SearchResults(
     type: SearchType.ANIME,
   ).obs;

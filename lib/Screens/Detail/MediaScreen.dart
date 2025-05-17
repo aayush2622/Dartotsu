@@ -391,7 +391,11 @@ class MediaInfoPageState extends State<MediaInfoPage> {
       right: 32,
       height: 48,
       child: OutlinedButton(
-        onPressed: () {},
+        onPressed: () => loaded
+            ? context
+                .currentService(listen: false)
+                .listEditor(context, mediaData)
+            : null,
         style: OutlinedButton.styleFrom(
           padding: const EdgeInsets.all(8.0),
           shape: RoundedRectangleBorder(

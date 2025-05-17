@@ -82,13 +82,12 @@ class MediaGridState extends State<MediaAdaptor> {
     if (widget.onMediaTap != null) {
       widget.onMediaTap!(index, media);
     } else {
-      //context.currentService(listen: false).data.mutations?.editList(media);
       navigateToPage(context, MediaInfoPage(media, tag));
     }
   }
 
-  void _handleLongTap(BuildContext c, Media media) {
-    c.currentService(listen: false).compactListEditor(c,media);
+  void _handleLongTap(BuildContext context, Media media) {
+    context.currentService(listen: false).compactListEditor(context,media);
   }
 
   Widget _buildAnimatedMediaItem({

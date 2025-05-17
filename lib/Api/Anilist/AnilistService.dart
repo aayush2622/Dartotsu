@@ -12,9 +12,9 @@ import 'package:get/get.dart';
 import '../../Services/BaseServiceData.dart';
 import '../../Services/MediaService.dart';
 import 'Anilist.dart';
+import 'ListEditor.dart' as l;
 import 'Screen/AnilistHomeScreen.dart';
 import 'Screen/AnilistMangaScreen.dart';
-import 'ListEditor.dart' as l;
 
 class AnilistService extends MediaService {
   AnilistService() {
@@ -50,7 +50,12 @@ class AnilistService extends MediaService {
   BaseSearchScreen get searchScreen => AnilistSearchScreen(Anilist);
 
   @override
-  void compactListEditor(context,media) => l.compactListEditor(context,media);
+  void compactListEditor(context, media) =>
+      l.listEditor(context, media, isCompact: true);
+
+  @override
+  void listEditor(context, media) =>
+      l.listEditor(context, media, isCompact: false);
 }
 
 class AnilistLoginScreen extends BaseLoginScreen {
