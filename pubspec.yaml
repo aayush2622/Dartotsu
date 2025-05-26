@@ -44,6 +44,7 @@ dependencies:
   path: ^1.9.0
 
   # UI Components
+  expandable_widgets: ^1.0.3+1
   expandable_text: 2.3.0
   cached_network_image: ^3.4.1
   precached_network_image: ^1.2.4
@@ -87,7 +88,7 @@ dependencies:
   share_plus: ^10.1.4
   url_launcher: ^6.3.1
   dynamic_color: ^1.7.0
-  dart_eval: ^0.7.10
+  d4rt: ^0.0.6
   pseudom: ^1.0.1
   encrypt: ^5.0.3
   xpath_selector_html_parser: ^3.0.1
@@ -100,7 +101,8 @@ dependencies:
   flutter_web_auth_2: ^4.1.0
   flutter_dotenv: ^5.2.1
   intl: ^0.19.0
-
+  epubx:
+    path: ./epubx
 # Development dependencies
 dev_dependencies:
   flutter_test:

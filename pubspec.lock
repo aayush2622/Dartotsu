@@ -66,10 +66,10 @@ packages:
     dependency: transitive
     description:
       name: archive
-      sha256: "6199c74e3db4fbfbd04f66d739e72fe11c8a8957d5f219f1f4482dbde6420b5a"
+      sha256: "2fde1607386ab523f7a36bb3e7edb43bd58e6edaf2ffb29d8a6d578b297fdbbd"
       url: "https://pub.dev"
     source: hosted
-    version: "4.0.2"
+    version: "4.0.7"
   args:
     dependency: transitive
     description:
@@ -206,14 +206,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.0.0"
-  change_case:
-    dependency: transitive
-    description:
-      name: change_case
-      sha256: "99cfdf2018c627c8a3af5a23ea4c414eb69c75c31322d23b9660ebc3cf30b514"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.1.0"
   characters:
     dependency: transitive
     description:
@@ -294,14 +286,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.2"
-  dart_eval:
+  d4rt:
     dependency: "direct main"
     description:
-      name: dart_eval
-      sha256: bbad8246a99a3c61925e19b3d2c2bd6311f8186fb4642a16bf3d22153b3ade55
+      name: d4rt
+      sha256: "65f9d859ee2a770e1524fd7afd790340a8385ba6e7c886c98c581c1d4ad46a0c"
       url: "https://pub.dev"
     source: hosted
-    version: "0.7.10"
+    version: "0.0.6"
   dart_style:
     dependency: transitive
     description:
@@ -358,14 +350,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "7.0.2"
-  directed_graph:
-    dependency: transitive
-    description:
-      name: directed_graph
-      sha256: "3718b9f697a8e73890dea3d93edb6d58b63778996306b4b19c575710e3e2523d"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.4.4"
   dynamic_color:
     dependency: "direct main"
     description:
@@ -382,14 +366,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.0.3"
-  exception_templates:
-    dependency: transitive
+  epubx:
+    dependency: "direct main"
     description:
-      name: exception_templates
-      sha256: "517f7c770da690073663f867ee2057ae2f4ffb28edae9da9faa624aa29ac76eb"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.3.1"
+      path: epubx
+      relative: true
+    source: path
+    version: "4.0.3"
   expandable_page_view:
     dependency: "direct main"
     description:
@@ -406,6 +389,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.0"
+  expandable_widgets:
+    dependency: "direct main"
+    description:
+      name: expandable_widgets
+      sha256: "4c533af4056a529b341977566700a7fab34f76f33510c95e4416ab38451cfa12"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.3+1"
   expressions:
     dependency: transitive
     description:
@@ -767,10 +758,10 @@ packages:
     dependency: transitive
     description:
       name: image
-      sha256: "8346ad4b5173924b5ddddab782fc7d8a6300178c8b1dc427775405a01701c4a6"
+      sha256: "4e973fcf4caae1a4be2fa0a13157aa38a8f9cb049db6529aa00b4d71abc4d928"
       url: "https://pub.dev"
     source: hosted
-    version: "4.5.2"
+    version: "4.5.4"
   inno_bundle:
     dependency: "direct dev"
     description:
@@ -875,14 +866,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.1"
-  lazy_memo:
-    dependency: transitive
-    description:
-      name: lazy_memo
-      sha256: dcb30b4184a6d767e1d779d74ce784d752d38313b8fb4bad6b659ae7af4bb34d
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.2.3"
   leak_tracker:
     dependency: transitive
     description:
@@ -1242,10 +1225,10 @@ packages:
     dependency: transitive
     description:
       name: posix
-      sha256: a0117dc2167805aa9125b82eee515cc891819bac2f538c83646d355b16f58b9a
+      sha256: f0d7856b6ca1887cfa6d1d394056a296ae33489db914e365e2044fdada449e62
       url: "https://pub.dev"
     source: hosted
-    version: "6.0.1"
+    version: "6.0.2"
   precached_network_image:
     dependency: "direct main"
     description:
@@ -1274,10 +1257,10 @@ packages:
     dependency: transitive
     description:
       name: pub_semver
-      sha256: "7b3cfbf654f3edd0c6298ecd5be782ce997ddf0e00531b9464b55245185bbbbd"
+      sha256: "5bfcf68ca79ef689f8990d1160781b4bad40a3bd5e5218ad4076ddb7f4081585"
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.5"
+    version: "2.2.0"
   pubspec_parse:
     dependency: transitive
     description:
@@ -1294,14 +1277,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.2.2"
-  quote_buffer:
-    dependency: transitive
-    description:
-      name: quote_buffer
-      sha256: c4cd07e55ed1b1645a1cc74278a03b2a642c9f6ea3c0528d51827fdd320acf87
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.2.6"
   rfc_6901:
     dependency: transitive
     description:

@@ -19,28 +19,33 @@ class MSource {
 
   String? additionalParams;
 
-  MSource(
-      {this.id,
-      this.name,
-      this.baseUrl,
-      this.lang,
-      this.isFullData,
-      this.hasCloudflare,
-      this.dateFormat,
-      this.dateFormatLocale,
-      this.apiUrl,
-      this.additionalParams});
+  String? notes;
+
+  MSource({
+    this.id,
+    this.name,
+    this.baseUrl,
+    this.lang,
+    this.isFullData,
+    this.hasCloudflare,
+    this.dateFormat,
+    this.dateFormatLocale,
+    this.apiUrl,
+    this.additionalParams,
+    this.notes,
+  });
 
   Map<String, dynamic> toJson() => {
-        'apiUrl': apiUrl,
-        'baseUrl': baseUrl,
-        'dateFormat': dateFormat,
-        'dateFormatLocale': dateFormatLocale,
-        'hasCloudflare': hasCloudflare,
-        'id': id,
-        'isFullData': isFullData,
-        'lang': lang,
-        'name': name,
-        'additionalParams': additionalParams
-      };
+    'apiUrl': apiUrl,
+    'baseUrl': baseUrl,
+    'dateFormat': dateFormat,
+    'dateFormatLocale': dateFormatLocale,
+    'hasCloudflare': hasCloudflare,
+    'id': id,
+    'isFullData': isFullData,
+    'lang': lang,
+    'name': name,
+    'additionalParams': additionalParams,
+    'notes': notes,
+  };
 }
