@@ -32,7 +32,9 @@ class _ListEditorDialogState extends State<ListEditorDialog> {
   late TextEditingController scoreController;
   late bool isPrivate;
   late String suffixText;
+  Map<String, bool>? customListName;
   TextEditingController? noteController;
+  TextEditingController? repeatController;
   FuzzyDate? startedAt;
   FuzzyDate? completedAt;
 
@@ -49,8 +51,11 @@ class _ListEditorDialogState extends State<ListEditorDialog> {
             : "??");
     if (!widget.isCompact) {
       noteController = TextEditingController(text: widget.media.notes ?? "");
+      repeatController =
+          TextEditingController(text: widget.media.userRepeat.toString());
       startedAt = media.userStartedAt;
       completedAt = media.userCompletedAt;
+      customListName = Map<String, bool>.from(media.inCustomListsOf ?? {});
     }
     isPrivate = media.isListPrivate;
     suffixText =
@@ -62,6 +67,8 @@ class _ListEditorDialogState extends State<ListEditorDialog> {
     super.dispose();
     progressController.dispose();
     scoreController.dispose();
+    noteController?.dispose();
+    repeatController?.dispose();
   }
 
   @override
@@ -81,40 +88,38 @@ class _ListEditorDialogState extends State<ListEditorDialog> {
     return CustomBottomDialog(
       title: "List Editor",
       viewList: [
-        Column(
-          children: [
-            _buildStatusDropdown(fieldPadding),
-            Padding(
-              padding: fieldPadding,
-              child: _buildProgressField(labelStyle, suffixStyle),
-            ),
-            Padding(
-              padding: fieldPadding,
-              child: _buildScoreField(labelStyle, suffixStyle),
-            ),
-            if (!widget.isCompact)
-              Padding(
-                padding: fieldPadding,
-                child: _buildDatePickerRow(suffixStyle),
-              ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: _buildPrivateSwitch(),
-            ),
-            if (!widget.isCompact)
-              Expandable(
-                backgroundColor: theme.surface,
-                boxShadow: [],
-                arrowWidget:
-                    const Icon(Icons.keyboard_arrow_up_rounded, size: 25.0),
-                firstChild: const Text('Other', style: suffixStyle),
-                secondChild: _buildOtherWidget(
-                  labelStyle,
-                  suffixStyle,
-                  fieldPadding,
+        Padding(
+          padding: fieldPadding,
+          child: Column(
+            children: [
+              _buildStatusDropdown(),
+              const SizedBox(height: 16),
+              _buildProgressField(labelStyle, suffixStyle),
+              const SizedBox(height: 8),
+              _buildScoreField(labelStyle, suffixStyle),
+              const SizedBox(height: 8),
+              if (!widget.isCompact) ...[
+                _buildDatePickerRow(suffixStyle),
+                const SizedBox(height: 8),
+              ],
+              _buildPrivateSwitch(),
+              const SizedBox(height: 8),
+              if (!widget.isCompact) ...[
+                Expandable(
+                  backgroundColor: theme.surface,
+                  boxShadow: [],
+                  arrowWidget:
+                      const Icon(Icons.keyboard_arrow_up_rounded, size: 25.0),
+                  firstChild: const Text('Other', style: suffixStyle),
+                  secondChild: _buildOtherWidget(
+                    labelStyle,
+                    suffixStyle,
+                  ),
                 ),
-              ),
-          ],
+                const SizedBox(height: 8),
+              ]
+            ],
+          ),
         ),
       ],
       positiveText: 'Save',
@@ -123,9 +128,9 @@ class _ListEditorDialogState extends State<ListEditorDialog> {
     );
   }
 
-  Widget _buildStatusDropdown(EdgeInsetsGeometry padding) {
+  Widget _buildStatusDropdown() {
     return buildDropdownMenu(
-      padding: padding,
+      padding: const EdgeInsets.all(0),
       borderRadius: 16,
       prefixIcon: Icons.playlist_play_rounded,
       options: Anilist.status,
@@ -143,31 +148,74 @@ class _ListEditorDialogState extends State<ListEditorDialog> {
   Widget _buildOtherWidget(
     TextStyle labelStyle,
     TextStyle suffixStyle,
-    EdgeInsetsGeometry padding,
   ) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: padding,
-          child: TextField(
-            controller: noteController,
-            maxLines: null,
-            keyboardType: TextInputType.multiline,
-            style: labelStyle,
-            decoration: InputDecoration(
-              labelText: "Note",
-              labelStyle: labelStyle,
-              prefixIcon: const Icon(Icons.edit_note_rounded),
-              contentPadding: const EdgeInsets.symmetric(horizontal: 8.0),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
-                borderSide: const BorderSide(color: Colors.transparent),
-              ),
+        const SizedBox(height: 8),
+        TextField(
+          controller: repeatController,
+          keyboardType: const TextInputType.numberWithOptions(decimal: false),
+          style: labelStyle,
+          inputFormatters: [
+            FilteringTextInputFormatter.allow(RegExp(r'^[0-9]*$')),
+          ],
+          decoration: InputDecoration(
+            labelText: "Total Repeats",
+            labelStyle: labelStyle,
+            suffixStyle: suffixStyle,
+            prefixIcon: const Icon(Icons.redo_rounded),
+            contentPadding: const EdgeInsets.symmetric(horizontal: 8.0),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(16),
+              borderSide: const BorderSide(color: Colors.transparent),
             ),
           ),
         ),
+        const SizedBox(height: 8),
+        TextField(
+          controller: noteController,
+          maxLines: null,
+          keyboardType: TextInputType.multiline,
+          style: labelStyle,
+          decoration: InputDecoration(
+            labelText: "Note",
+            labelStyle: labelStyle,
+            prefixIcon: const Icon(Icons.edit_note_rounded),
+            contentPadding: const EdgeInsets.symmetric(horizontal: 8.0),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(16),
+              borderSide: const BorderSide(color: Colors.transparent),
+            ),
+          ),
+        ),
+        const SizedBox(height: 16),
+        ..._buildCustomListWidgets(suffixStyle),
       ],
     );
+  }
+
+  List<Widget> _buildCustomListWidgets(TextStyle suffixStyle) {
+
+    if (customListName == null || customListName!.isEmpty) {
+      return [Text("No custom lists available", style: suffixStyle)];
+    }
+
+    return [
+      Text("Custom Lists", style: suffixStyle),
+      const SizedBox(height: 16),
+      ...customListName!.entries.map(
+            (entry) => SwitchListTile(
+          title: Text(entry.key),
+          value: entry.value,
+          onChanged: (value) {
+            setState(() {
+              customListName![entry.key] = value;
+            });
+          },
+        ),
+      )
+    ];
   }
 
   Widget _buildProgressField(TextStyle labelStyle, TextStyle suffixStyle) {
@@ -276,7 +324,7 @@ class _ListEditorDialogState extends State<ListEditorDialog> {
           context: context,
           initialDate: initialDate,
           firstDate: DateTime(1900),
-          lastDate: DateTime.now().add(const Duration(days: 365 * 5)),
+          lastDate: DateTime.now(),
         );
         if (picked != null) onDatePicked(picked);
       },
@@ -350,14 +398,21 @@ class _ListEditorDialogState extends State<ListEditorDialog> {
           .clamp(0, 100)
       ..isListPrivate = isPrivate;
 
+    List<String>?  list;
     if (!widget.isCompact) {
       widget.media
         ..notes = noteController?.text
         ..userStartedAt = startedAt
-        ..userCompletedAt = completedAt;
+        ..userCompletedAt = completedAt
+        ..userRepeat = int.tryParse(repeatController?.text ?? "1") ?? 1;
+      widget.media.inCustomListsOf = customListName;
+      list = customListName?.entries
+          .where((entry) => entry.value)
+          .map((entry) => entry.key)
+          .toList();
     }
 
-    Anilist.mutations?.editList(widget.media);
+    Anilist.mutations?.editList(widget.media,customList: list);
     Get.back();
     Refresh.activity[RefreshId.Anilist.homePage]?.value = true;
   }

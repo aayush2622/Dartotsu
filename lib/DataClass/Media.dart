@@ -66,8 +66,8 @@ class Media {
   int? userScore = 0;
   int userRepeat = 0;
   int? userUpdatedAt;
-  dynamic userStartedAt = FuzzyDate();
-  dynamic userCompletedAt = FuzzyDate();
+  FuzzyDate? userStartedAt = FuzzyDate();
+  FuzzyDate?  userCompletedAt = FuzzyDate();
   Map<String, bool>? inCustomListsOf;
   int? userFavOrder;
 
@@ -136,8 +136,8 @@ class Media {
     this.userScore = 0,
     this.userRepeat = 0,
     this.userUpdatedAt,
-    this.userStartedAt = 0,
-    this.userCompletedAt = 0,
+    this.userStartedAt,
+    this.userCompletedAt,
     this.inCustomListsOf,
     this.userFavOrder,
     this.status,
