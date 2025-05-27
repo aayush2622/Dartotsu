@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:dartotsu/Preferences/IsarDataClasses/MediaSettings/MediaSettings.dart';
+import 'package:dartotsu/Preferences/IsarDataClasses/ShowResponse/ShowResponse.dart';
 import 'package:dartotsu/logger.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:isar/isar.dart';
@@ -68,7 +69,7 @@ class PrefManager {
 
   static Future<Isar> _open(String name, String directory) async {
     final isar = await Isar.open(
-      [KeyValueSchema, ResponseTokenSchema, MediaSettingsSchema],
+      [KeyValueSchema, ResponseTokenSchema, MediaSettingsSchema,ShowResponseSchema],
       directory: directory,
       name: name,
       inspector: false,
@@ -89,6 +90,10 @@ class PrefManager {
       }
       final responseToken = await isar.responseTokens.where().findAll();
       for (var item in responseToken) {
+        cache[location]?[item.key] = item;
+      }
+      final showResponse = await isar.showResponses.where().findAll();
+      for (var item in showResponse) {
         cache[location]?[item.key] = item;
       }
     }
@@ -187,6 +192,9 @@ class PrefManager {
       } else if (value is ResponseToken) {
         value.key = key;
         isar.responseTokens.put(value);
+      } else if (value is ShowResponse) {
+        value.key = key;
+        isar.showResponses.put(value);
       } else {
         final keyValue = KeyValue()
           ..key = key

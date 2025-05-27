@@ -25,7 +25,6 @@ class MediaSettings {
   List<String>? selectedScanlators; // for only manga
   PlayerSettings playerSettings;
   ReaderSettings readerSettings;
-  ShowResponse? showResponse;
 
   MediaSettings({
     this.navBarIndex = 0,
@@ -36,7 +35,6 @@ class MediaSettings {
     this.selectedScanlators,
     PlayerSettings? playerSetting,
     ReaderSettings? readerSetting,
-    this.showResponse,
   })  : playerSettings = playerSetting ??
             PlayerSettings.fromJson(
               jsonDecode(loadData(PrefName.playerSettings)),
@@ -57,8 +55,7 @@ class MediaSettings {
         playerSetting: PlayerSettings.fromJson(
             json['playerSettings'] as Map<String, dynamic>),
         readerSetting: json['readerSettings'],
-        showResponse: ShowResponse.fromJson(
-            json['showResponse'] as Map<String, dynamic>));
+        );
   }
 
   Map<String, dynamic> toJson() {
