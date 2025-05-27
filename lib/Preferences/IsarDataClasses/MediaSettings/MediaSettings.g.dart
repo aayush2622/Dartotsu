@@ -59,14 +59,8 @@ const MediaSettingsSchema = CollectionSchema(
       name: r'server',
       type: IsarType.string,
     ),
-    r'showResponse': PropertySchema(
-      id: 8,
-      name: r'showResponse',
-      type: IsarType.object,
-      target: r'ShowResponse',
-    ),
     r'viewType': PropertySchema(
-      id: 9,
+      id: 8,
       name: r'viewType',
       type: IsarType.long,
     )
@@ -94,8 +88,7 @@ const MediaSettingsSchema = CollectionSchema(
   links: {},
   embeddedSchemas: {
     r'PlayerSettings': PlayerSettingsSchema,
-    r'ReaderSettings': ReaderSettingsSchema,
-    r'ShowResponse': ShowResponseSchema
+    r'ReaderSettings': ReaderSettingsSchema
   },
   getId: _mediaSettingsGetId,
   getLinks: _mediaSettingsGetLinks,
@@ -140,14 +133,6 @@ int _mediaSettingsEstimateSize(
       bytesCount += 3 + value.length * 3;
     }
   }
-  {
-    final value = object.showResponse;
-    if (value != null) {
-      bytesCount += 3 +
-          ShowResponseSchema.estimateSize(
-              value, allOffsets[ShowResponse]!, allOffsets);
-    }
-  }
   return bytesCount;
 }
 
@@ -175,13 +160,7 @@ void _mediaSettingsSerialize(
   );
   writer.writeStringList(offsets[6], object.selectedScanlators);
   writer.writeString(offsets[7], object.server);
-  writer.writeObject<ShowResponse>(
-    offsets[8],
-    allOffsets,
-    ShowResponseSchema.serialize,
-    object.showResponse,
-  );
-  writer.writeLong(offsets[9], object.viewType);
+  writer.writeLong(offsets[8], object.viewType);
 }
 
 MediaSettings _mediaSettingsDeserialize(
@@ -196,12 +175,7 @@ MediaSettings _mediaSettingsDeserialize(
     navBarIndex: reader.readLongOrNull(offsets[3]) ?? 0,
     selectedScanlators: reader.readStringList(offsets[6]),
     server: reader.readStringOrNull(offsets[7]),
-    showResponse: reader.readObjectOrNull<ShowResponse>(
-      offsets[8],
-      ShowResponseSchema.deserialize,
-      allOffsets,
-    ),
-    viewType: reader.readLongOrNull(offsets[9]) ?? 0,
+    viewType: reader.readLongOrNull(offsets[8]) ?? 0,
   );
   object.id = id;
   object.key = reader.readString(offsets[1]);
@@ -254,12 +228,6 @@ P _mediaSettingsDeserializeProp<P>(
     case 7:
       return (reader.readStringOrNull(offset)) as P;
     case 8:
-      return (reader.readObjectOrNull<ShowResponse>(
-        offset,
-        ShowResponseSchema.deserialize,
-        allOffsets,
-      )) as P;
-    case 9:
       return (reader.readLongOrNull(offset) ?? 0) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -1270,24 +1238,6 @@ extension MediaSettingsQueryFilter
   }
 
   QueryBuilder<MediaSettings, MediaSettings, QAfterFilterCondition>
-      showResponseIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'showResponse',
-      ));
-    });
-  }
-
-  QueryBuilder<MediaSettings, MediaSettings, QAfterFilterCondition>
-      showResponseIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'showResponse',
-      ));
-    });
-  }
-
-  QueryBuilder<MediaSettings, MediaSettings, QAfterFilterCondition>
       viewTypeEqualTo(int value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -1357,13 +1307,6 @@ extension MediaSettingsQueryObject
       readerSettings(FilterQuery<ReaderSettings> q) {
     return QueryBuilder.apply(this, (query) {
       return query.object(q, r'readerSettings');
-    });
-  }
-
-  QueryBuilder<MediaSettings, MediaSettings, QAfterFilterCondition>
-      showResponse(FilterQuery<ShowResponse> q) {
-    return QueryBuilder.apply(this, (query) {
-      return query.object(q, r'showResponse');
     });
   }
 }
@@ -1651,13 +1594,6 @@ extension MediaSettingsQueryProperty
   QueryBuilder<MediaSettings, String?, QQueryOperations> serverProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'server');
-    });
-  }
-
-  QueryBuilder<MediaSettings, ShowResponse?, QQueryOperations>
-      showResponseProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'showResponse');
     });
   }
 

@@ -119,7 +119,7 @@ ReaderSettings _readerSettingsDeserialize(
     keepScreenOn: reader.readBoolOrNull(offsets[5]) ?? false,
     layoutType: _ReaderSettingslayoutTypeValueEnumMap[
             reader.readByteOrNull(offsets[6])] ??
-        LayoutType.Paged,
+        LayoutType.Continuous,
     openImageWithLongTap: reader.readBoolOrNull(offsets[7]) ?? true,
     scrollToNext: reader.readBoolOrNull(offsets[8]) ?? true,
     spacedPages: reader.readBoolOrNull(offsets[9]) ?? false,
@@ -153,7 +153,7 @@ P _readerSettingsDeserializeProp<P>(
     case 6:
       return (_ReaderSettingslayoutTypeValueEnumMap[
               reader.readByteOrNull(offset)] ??
-          LayoutType.Paged) as P;
+          LayoutType.Continuous) as P;
     case 7:
       return (reader.readBoolOrNull(offset) ?? true) as P;
     case 8:
@@ -188,12 +188,12 @@ const _ReaderSettingsdualPageModeValueEnumMap = {
   2: DualPageMode.ForcedDouble,
 };
 const _ReaderSettingslayoutTypeEnumValueMap = {
-  'Paged': 0,
-  'Continuous': 1,
+  'Continuous': 0,
+  'Paged': 1,
 };
 const _ReaderSettingslayoutTypeValueEnumMap = {
-  0: LayoutType.Paged,
-  1: LayoutType.Continuous,
+  0: LayoutType.Continuous,
+  1: LayoutType.Paged,
 };
 
 extension ReaderSettingsQueryFilter
