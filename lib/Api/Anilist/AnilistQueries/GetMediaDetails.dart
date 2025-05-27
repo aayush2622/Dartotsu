@@ -177,8 +177,8 @@ extension on AnilistQueries {
         media.userScore = 0;
         media.userRepeat = 0;
         media.userUpdatedAt = null;
-        media.userCompletedAt = 0;
-        media.userStartedAt = 0;
+        media.userCompletedAt = FuzzyDate();
+        media.userStartedAt = FuzzyDate();
       }
       StaffEdge? findAuthorEdge(List<StaffEdge>? edges) {
         if (edges == null) return null;

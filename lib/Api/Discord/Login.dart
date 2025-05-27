@@ -22,11 +22,9 @@ class MobileLoginState extends State<MobileLogin> {
     try {
       final result = await _controller.evaluateJavascript(source: '''
         (function() {
-          const wreq = (webpackChunkdiscord_app.push([[''], {}, e => { m = []; for (let c in e.c) m.push(e.c[c]) }]), m)
-            .find(m => m?.exports?.default?.getToken !== void 0).exports.default.getToken();
-          return wreq;
-        })();
-      ''');
+    const m = []; webpackChunkdiscord_app.push([[""], {}, e => {for (let c in e.c)m.push(e.c[c])}]);
+    return m.find(n => n?.exports?.default?.getToken !== void 0)?.exports?.default?.getToken();
+    })()''');
 
       if (result != null && result != 'null') {
         _login(result.trim().replaceAll('"', ''));
@@ -105,7 +103,7 @@ class LinuxLogin extends StatefulWidget {
 }
 
 class LinuxLoginState extends State<LinuxLogin> {
-  Webview? _controller;
+  late Webview _controller;
 
   @override
   void initState() {
@@ -114,36 +112,29 @@ class LinuxLoginState extends State<LinuxLogin> {
   }
 
   Future<void> _initializeWebview() async {
-    final controller = await WebviewWindow.create();
+    _controller = await WebviewWindow.create();
 
-    _controller = controller;
-
-    controller
+    _controller
       ..setBrightness(Brightness.dark)
       ..launch('https://discord.com/login');
 
-    controller.addOnUrlRequestCallback((url) async {
-      if (url.startsWith('https://discord.com/login')) {
-        return;
-      }
-
-      await _extractToken();
-    });
-
-    controller.onClose.whenComplete(() {
-      _controller = null;
-    });
+    _controller.addOnUrlRequestCallback(
+        (String url) async {
+          if (url != 'https://discord.com/login' && url != 'about:blank') {
+            await _extractToken();
+          }
+        },
+      );
   }
+
 
   Future<void> _extractToken() async {
     try {
-      final result = await _controller?.evaluateJavaScript('''
+      final result = await _controller.evaluateJavaScript('''
         (function() {
-          const wreq = (webpackChunkdiscord_app.push([[''], {}, e => { m = []; for (let c in e.c) m.push(e.c[c]) }]), m)
-            .find(m => m?.exports?.default?.getToken !== void 0).exports.default.getToken();
-          return wreq;
-        })();
-      ''');
+    const m = []; webpackChunkdiscord_app.push([[""], {}, e => {for (let c in e.c)m.push(e.c[c])}]);
+    return m.find(n => n?.exports?.default?.getToken !== void 0)?.exports?.default?.getToken();
+    })()''');
 
       if (result != null && result != 'null') {
         _login(result.trim().replaceAll('"', ''));
@@ -170,7 +161,7 @@ class LinuxLoginState extends State<LinuxLogin> {
 
   @override
   void dispose() {
-    _controller?.close();
+    _controller.close();
     super.dispose();
   }
 

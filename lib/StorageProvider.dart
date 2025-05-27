@@ -52,6 +52,13 @@ class StorageProvider {
     return true;
   }
 
+  Future<Directory?> getTmpDirectory() async {
+    final gefaultDirectory = await getDirectory();
+    String dbDir = path.join(gefaultDirectory!.path, 'tmp');
+    await Directory(dbDir).create(recursive: true);
+    return Directory(dbDir);
+  }
+
   static Future<Directory?> getDirectory({
     String? subPath,
     String customPath = '',

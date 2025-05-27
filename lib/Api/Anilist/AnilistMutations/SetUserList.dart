@@ -5,8 +5,8 @@ extension on AnilistMutations {
     Media media, {
     List<String>? customList,
   }) async {
-    final startVar = '';
-    final completedVar = '';
+    final start = media.userStartedAt;
+    final completed = media.userCompletedAt;
 
     var query = '''
       mutation (
@@ -18,8 +18,8 @@ extension on AnilistMutations {
         \$customLists: [String],
         \$scoreRaw: Int,
         \$status: MediaListStatus,
-        \$start: FuzzyDateInput$startVar,
-        \$completed: FuzzyDateInput$completedVar
+        \$start: FuzzyDateInput${start != null && start.year != null ? "= ${start.toVariableString()}" : ""},
+        \$completed: FuzzyDateInput${completed != null && completed.year != null ? "= ${completed.toVariableString()}" : ""}
       ) {
         SaveMediaListEntry(
           mediaId: \$mediaID,

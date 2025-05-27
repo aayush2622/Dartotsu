@@ -1,5 +1,4 @@
 import 'package:async/async.dart';
-import 'package:dartotsu/Preferences/IsarDataClasses/MediaSettings/MediaSettings.dart';
 import 'package:dartotsu/Theme/LanguageSwitcher.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fuzzywuzzy/fuzzywuzzy.dart';
@@ -12,6 +11,7 @@ import '../../../../Api/Sources/Search/search.dart';
 import '../../../../DataClass/Media.dart';
 import '../../../../Functions/GetExtensions.dart';
 import '../../../../Preferences/IsarDataClasses/ShowResponse/ShowResponse.dart';
+import '../../../../Preferences/PrefManager.dart';
 import '../../../../Widgets/CustomBottomDialog.dart';
 import '../../../Settings/language.dart';
 import 'Widgets/WrongTitle.dart';
@@ -82,7 +82,8 @@ abstract class BaseParser extends GetxController {
   Future<void> _performSearch(Source source, Media mediaData,
       Function(MManga? response)? onFinish) async {
     selectedMedia.value = null;
-    var saved = mediaData.settings.showResponse;
+    status.value = "Searching...";
+    var saved = _loadShowResponse(source, mediaData);
     if (saved != null) {
       var response = MManga(
         name: saved.name,
@@ -199,16 +200,21 @@ abstract class BaseParser extends GetxController {
     return englishRegex.hasMatch(name);
   }
 
+  ShowResponse? _loadShowResponse(Source source, Media mediaData) {
+    return loadCustomData<ShowResponse?>(
+        "${source.name}_${mediaData.id}_source");
+  }
+
   _saveShowResponse(Media mediaData, MManga response, Source source,
       {bool selected = false}) {
-    status.value = selected
-        ? "${getString.selected} : ${response.name}"
-        : "${getString.found} : ${response.name}";
+    status.value =
+    selected ? "${getString.selected} : ${response.name}" : "${getString.found} : ${response.name}";
     var show = ShowResponse(
         name: response.name!,
         link: response.link!,
         coverUrl: response.imageUrl!);
-    MediaSettings.saveMediaSettings(mediaData..settings.showResponse = show);
+    saveCustomData<ShowResponse>(
+        "${source.name}_${mediaData.id}_source", show);
   }
 
   Future<void> wrongTitle(

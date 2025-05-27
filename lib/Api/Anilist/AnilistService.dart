@@ -11,6 +11,7 @@ import 'package:get/get.dart';
 
 import '../../Services/BaseServiceData.dart';
 import '../../Services/MediaService.dart';
+import '../../Widgets/CustomBottomDialog.dart';
 import 'Anilist.dart';
 import 'ListEditor.dart' as l;
 import 'Screen/AnilistHomeScreen.dart';
@@ -51,11 +52,11 @@ class AnilistService extends MediaService {
 
   @override
   void compactListEditor(context, media) =>
-      l.listEditor(context, media, isCompact: true);
+      showCustomBottomDialog(context, l.ListEditorDialog(media: media));
 
   @override
-  void listEditor(context, media) =>
-      l.listEditor(context, media, isCompact: false);
+  void listEditor(context, media) => showCustomBottomDialog(
+      context, l.ListEditorDialog(media: media, isCompact: false));
 }
 
 class AnilistLoginScreen extends BaseLoginScreen {
