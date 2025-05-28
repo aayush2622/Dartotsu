@@ -76,8 +76,8 @@ dependencies:
       ref: main
   webview_flutter: ^4.10.0
   wakelock_plus: ^1.2.10
-  volume_controller: ^2.0.8 #dont change
-  screen_brightness: ^2.0.1 #dont change
+  volume_controller: ^3.4.0 #dont change
+  screen_brightness: 2.0.1 #dont change
   app_links: ^6.3.3
   win32: ^5.10.1
   ffi: ^2.1.4

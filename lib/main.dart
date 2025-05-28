@@ -43,6 +43,7 @@ import 'Theme/Colors.dart';
 import 'Theme/ThemeManager.dart';
 import 'Theme/ThemeProvider.dart';
 import 'logger.dart';
+import 'package:volume_controller/volume_controller.dart';
 
 late Isar isar;
 WebViewEnvironment? webViewEnvironment;
@@ -240,6 +241,11 @@ late FloatingBottomNavBar navbar;
 
 class MainActivityState extends State<MainActivity> {
   int _selectedIndex = 1;
+  late final VolumeController _volumeController;
+  late final StreamSubscription<double> _subscription;
+  double _currentVolume = 0;
+  double _volumeValue = 0;
+  bool _isMuted = false;
 
   void _onTabSelected(int index) => setState(() => _selectedIndex = index);
 
@@ -247,6 +253,25 @@ class MainActivityState extends State<MainActivity> {
   void initState() {
     super.initState();
     checkForUpdate();
+    _volumeController = VolumeController.instance;
+
+
+    // Listen to system volume change
+    _subscription = _volumeController.addListener((volume) {
+      setState(() => _volumeValue = volume);
+    }, fetchInitialVolume: true);
+
+    _volumeController
+        .isMuted()
+        .then((isMuted) => setState(() => _isMuted = isMuted));
+
+  }
+  @override
+  void dispose(){
+    _subscription.cancel();
+    super.dispose();
+
+
   }
 
   @override

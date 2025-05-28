@@ -385,9 +385,9 @@ class MediaPlayerState extends State<MediaPlayer>
   var _defaultBrightness = 0.0;
 
   Future<void> _handleVolumeAndBrightness() async {
-    VolumeController().showSystemUI = false;
-    _volumeValue.value = await VolumeController().getVolume();
-    VolumeController().listener((value) {
+    VolumeController.instance.showSystemUI = false;
+    _volumeValue.value = await VolumeController.instance.getVolume();
+    VolumeController.instance.addListener((value) {
       if (mounted && !_volumeInterceptEventStream) {
         _volumeValue.value = value;
       }
@@ -409,7 +409,7 @@ class MediaPlayerState extends State<MediaPlayer>
   Future<void> setVolume(double value) async {
     if (!isMobile) return;
     try {
-      VolumeController().setVolume(value);
+      VolumeController.instance.setVolume(value);
     } catch (_) {}
     _volumeValue.value = value;
     _volumeIndicator.value = true;
