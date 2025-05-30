@@ -13,7 +13,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' as provider;
@@ -42,8 +41,8 @@ import 'StorageProvider.dart';
 import 'Theme/Colors.dart';
 import 'Theme/ThemeManager.dart';
 import 'Theme/ThemeProvider.dart';
+import 'l10n/app_localizations.dart';
 import 'logger.dart';
-import 'package:volume_controller/volume_controller.dart';
 
 late Isar isar;
 WebViewEnvironment? webViewEnvironment;
@@ -241,11 +240,6 @@ late FloatingBottomNavBar navbar;
 
 class MainActivityState extends State<MainActivity> {
   int _selectedIndex = 1;
-  late final VolumeController _volumeController;
-  late final StreamSubscription<double> _subscription;
-  double _currentVolume = 0;
-  double _volumeValue = 0;
-  bool _isMuted = false;
 
   void _onTabSelected(int index) => setState(() => _selectedIndex = index);
 
@@ -253,25 +247,6 @@ class MainActivityState extends State<MainActivity> {
   void initState() {
     super.initState();
     checkForUpdate();
-    _volumeController = VolumeController.instance;
-
-
-    // Listen to system volume change
-    _subscription = _volumeController.addListener((volume) {
-      setState(() => _volumeValue = volume);
-    }, fetchInitialVolume: true);
-
-    _volumeController
-        .isMuted()
-        .then((isMuted) => setState(() => _isMuted = isMuted));
-
-  }
-  @override
-  void dispose(){
-    _subscription.cancel();
-    super.dispose();
-
-
   }
 
   @override

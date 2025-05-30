@@ -78,6 +78,9 @@ dependencies:
   volume_controller: ^3.4.0 #dont change
   screen_brightness: ^2.1.3 #dont change
   app_links: ^6.4.0
+  win32: ^5.10.1
+  ffi: ^2.1.4
+
   # Miscellaneous
   device_info_plus: ^11.4.0
   package_info_plus: ^8.3.0
