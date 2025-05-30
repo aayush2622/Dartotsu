@@ -69,7 +69,12 @@ class PrefManager {
 
   static Future<Isar> _open(String name, String directory) async {
     final isar = await Isar.open(
-      [KeyValueSchema, ResponseTokenSchema, MediaSettingsSchema,ShowResponseSchema],
+      [
+        KeyValueSchema,
+        ResponseTokenSchema,
+        MediaSettingsSchema,
+        ShowResponseSchema
+      ],
       directory: directory,
       name: name,
       inspector: false,

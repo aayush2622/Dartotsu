@@ -7,6 +7,7 @@ class MStatusBridge {
     name: 'MStatus',
     values: Status.values,
   );
+
   void registerBridgedEnum(D4rt interpreter) {
     interpreter.registerBridgedEnum(
       statusDefinition,

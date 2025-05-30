@@ -119,14 +119,13 @@ class LinuxLoginState extends State<LinuxLogin> {
       ..launch('https://discord.com/login');
 
     _controller.addOnUrlRequestCallback(
-        (String url) async {
-          if (url != 'https://discord.com/login' && url != 'about:blank') {
-            await _extractToken();
-          }
-        },
-      );
+      (String url) async {
+        if (url != 'https://discord.com/login' && url != 'about:blank') {
+          await _extractToken();
+        }
+      },
+    );
   }
-
 
   Future<void> _extractToken() async {
     try {

@@ -67,7 +67,7 @@ class Media {
   int userRepeat = 0;
   int? userUpdatedAt;
   FuzzyDate? userStartedAt = FuzzyDate();
-  FuzzyDate?  userCompletedAt = FuzzyDate();
+  FuzzyDate? userCompletedAt = FuzzyDate();
   Map<String, bool>? inCustomListsOf;
   int? userFavOrder;
 

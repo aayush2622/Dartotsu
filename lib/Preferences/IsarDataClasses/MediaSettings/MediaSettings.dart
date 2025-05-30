@@ -45,16 +45,16 @@ class MediaSettings {
 
   factory MediaSettings.fromJson(Map<String, dynamic> json) {
     return MediaSettings(
-        navBarIndex: json['navBarIndex'],
-        lastUsedSource: json['lastUsedSource'],
-        viewType: json['viewType'],
-        isReverse: json['isReverse'],
-        server: json['server'],
-        selectedScanlators: json['selectedScanlators'],
-        playerSetting: PlayerSettings.fromJson(
-            json['playerSettings'] as Map<String, dynamic>),
-        readerSetting: json['readerSettings'],
-        );
+      navBarIndex: json['navBarIndex'],
+      lastUsedSource: json['lastUsedSource'],
+      viewType: json['viewType'],
+      isReverse: json['isReverse'],
+      server: json['server'],
+      selectedScanlators: json['selectedScanlators'],
+      playerSetting: PlayerSettings.fromJson(
+          json['playerSettings'] as Map<String, dynamic>),
+      readerSetting: json['readerSettings'],
+    );
   }
 
   Map<String, dynamic> toJson() {

@@ -41,19 +41,19 @@ class WordSet {
 
   bool anyWordIn(String dateString) {
     return words.any(
-          (word) => dateString.toLowerCase().contains(word.toLowerCase()),
+      (word) => dateString.toLowerCase().contains(word.toLowerCase()),
     );
   }
 
   bool startsWith(String dateString) {
     return words.any(
-          (word) => dateString.toLowerCase().startsWith(word.toLowerCase()),
+      (word) => dateString.toLowerCase().startsWith(word.toLowerCase()),
     );
   }
 
   bool endsWith(String dateString) {
     return words.any(
-          (word) => dateString.toLowerCase().endsWith(word.toLowerCase()),
+      (word) => dateString.toLowerCase().endsWith(word.toLowerCase()),
     );
   }
 }
@@ -78,7 +78,7 @@ class MBridge {
       //Return one attr
       else if (query.nodes.length == 1) {
         String attr =
-        query.attr != null ? query.attr!.trim().trimLeft().trimRight() : "";
+            query.attr != null ? query.attr!.trim().trimLeft().trimRight() : "";
         if (attr.isNotEmpty) {
           attrs = [attr];
         }
@@ -98,8 +98,8 @@ class MBridge {
       statusMap = element;
       for (var element in statusMap.entries) {
         if (element.key.toString().toLowerCase().contains(
-          status.toLowerCase().trim().trimLeft().trimRight(),
-        )) {
+              status.toLowerCase().trim().trimLeft().trimRight(),
+            )) {
           return switch (element.value as int) {
             0 => Status.ongoing,
             1 => Status.completed,
@@ -149,10 +149,10 @@ class MBridge {
 
   //Parse a list of dates to millisecondsSinceEpoch
   static List parseDates(
-      List value,
-      String dateFormat,
-      String dateFormatLocale,
-      ) {
+    List value,
+    String dateFormat,
+    String dateFormatLocale,
+  ) {
     List<dynamic> val = [];
     for (var element in value) {
       element = element.toString().trim();
@@ -190,12 +190,12 @@ class MBridge {
 
   //Utility to use RegExp
   static String regExp(
-      String expression,
-      String source,
+    String expression,
+    String source,
       String replace,
       int type,
-      int group,
-      ) {
+    int group,
+  ) {
     if (type == 0) {
       return expression.replaceAll(RegExp(source), replace);
     }
@@ -211,17 +211,17 @@ class MBridge {
   }
 
   static Future<List<Video>> streamWishExtractor(
-      String url,
-      String prefix,
-      ) async {
+    String url,
+    String prefix,
+  ) async {
     return await StreamWishExtractor().videosFromUrl(url, prefix);
   }
 
   static Future<List<Video>> filemoonExtractor(
-      String url,
-      String prefix,
-      String suffix,
-      ) async {
+    String url,
+    String prefix,
+    String suffix,
+  ) async {
     return await FilemoonExtractor().videosFromUrl(url, prefix, suffix);
   }
 
@@ -229,11 +229,11 @@ class MBridge {
       headers == null ? {} : (jsonDecode(headers) as Map).toMapStringString!;
 
   static Future<List<Video>> mp4UploadExtractor(
-      String url,
-      String? headers,
+    String url,
+    String? headers,
       String prefix,
-      String suffix,
-      ) async {
+    String suffix,
+  ) async {
     return await Mp4uploadExtractor().videosFromUrl(
       url,
       decodeHeaders(headers),
@@ -254,41 +254,41 @@ class MBridge {
   }
 
   static Future<List<Map<String, String>>> quarkFilesExtractor(
-      List<String> url,
-      String cookie,
-      ) async {
+    List<String> url,
+    String cookie,
+  ) async {
     var quark = _getExtractor(cookie, CloudDriveType.quark);
     return await quark.videoFilesFromUrl(url);
   }
 
   static Future<List<Video>> quarkVideosExtractor(
-      String url,
-      String cookie,
-      ) async {
+    String url,
+    String cookie,
+  ) async {
     var quark = _getExtractor(cookie, CloudDriveType.quark);
     return await quark.videosFromUrl(url);
   }
 
   static Future<List<Map<String, String>>> ucFilesExtractor(
-      List<String> url,
-      String cookie,
-      ) async {
+    List<String> url,
+    String cookie,
+  ) async {
     var uc = _getExtractor(cookie, CloudDriveType.uc);
     return await uc.videoFilesFromUrl(url);
   }
 
   static Future<List<Video>> ucVideosExtractor(
-      String url,
-      String cookie,
-      ) async {
+    String url,
+    String cookie,
+  ) async {
     var uc = _getExtractor(cookie, CloudDriveType.uc);
     return await uc.videosFromUrl(url);
   }
 
   static Future<List<Video>> streamTapeExtractor(
-      String url,
-      String? quality,
-      ) async {
+    String url,
+    String? quality,
+  ) async {
     return await StreamTapeExtractor().videosFromUrl(
       url,
       quality: quality ?? "StreamTape",
@@ -316,11 +316,11 @@ class MBridge {
 
   //Parse a chapter date to millisecondsSinceEpoch
   static String parseChapterDate(
-      String date,
-      String dateFormat,
+    String date,
+    String dateFormat,
       String dateFormatLocale,
-      Function((String, String, bool)) newLocale,
-      ) {
+    Function((String, String, bool)) newLocale,
+  ) {
     int parseRelativeDate(String date) {
       final number = int.tryParse(RegExp(r"(\d+)").firstMatch(date)!.group(0)!);
       if (number == null) return 0;
@@ -405,11 +405,10 @@ class MBridge {
         final cleanedDate = date
             .split(" ")
             .map(
-              (it) =>
-          it.contains(RegExp(r"\d\D\D"))
-              ? it.replaceAll(RegExp(r"\D"), "")
-              : it,
-        )
+              (it) => it.contains(RegExp(r"\d\D\D"))
+                  ? it.replaceAll(RegExp(r"\D"), "")
+                  : it,
+            )
             .join(" ");
         return DateFormat(
           dateFormat,
@@ -454,11 +453,10 @@ class MBridge {
               final cleanedDate = date
                   .split(" ")
                   .map(
-                    (it) =>
-                it.contains(RegExp(r"\d\D\D"))
-                    ? it.replaceAll(RegExp(r"\D"), "")
-                    : it,
-              )
+                    (it) => it.contains(RegExp(r"\d\D\D"))
+                        ? it.replaceAll(RegExp(r"\D"), "")
+                        : it,
+                  )
                   .join(" ");
               return DateFormat(
                 dateFormat,
@@ -487,10 +485,10 @@ class MBridge {
   }
 
   static Future<List<Video>> sendVidExtractor(
-      String url,
-      String? headers,
-      String prefix,
-      ) async {
+    String url,
+    String? headers,
+    String prefix,
+  ) async {
     return await SendvidExtractor(
       decodeHeaders(headers),
     ).videosFromUrl(url, prefix: prefix);
@@ -505,11 +503,11 @@ class MBridge {
   }
 
   static Future<List<Video>> yourUploadExtractor(
-      String url,
-      String? headers,
+    String url,
+    String? headers,
       String? name,
-      String prefix,
-      ) async {
+    String prefix,
+  ) async {
     return await YourUploadExtractor().videosFromUrl(
       url,
       decodeHeaders(headers),
@@ -527,10 +525,10 @@ class MBridge {
   }
 
   static Future<List<Video>> streamlareExtractor(
-      String url,
-      String prefix,
-      String suffix,
-      ) async {
+    String url,
+    String prefix,
+    String suffix,
+  ) async {
     return await StreamlareExtractor().videosFromUrl(
       url,
       prefix: prefix,
@@ -547,13 +545,13 @@ class MBridge {
   }
 
   static Video toVideo(
-      String url,
-      String quality,
+    String url,
+    String quality,
       String originalUrl,
       String? headers,
       List<Track>? subtitles,
-      List<Track>? audios,
-      ) {
+    List<Track>? audios,
+  ) {
     return Video(
       url,
       quality,
@@ -565,11 +563,11 @@ class MBridge {
   }
 
   static String cryptoHandler(
-      String text,
-      String iv,
+    String text,
+    String iv,
       String secretKeyString,
-      bool encrypt,
-      ) {
+    bool encrypt,
+  ) {
     try {
       if (encrypt) {
         final encryptt = _encrypt(secretKeyString, iv);
@@ -586,8 +584,8 @@ class MBridge {
   }
 
   static Future<String> evaluateJavascriptViaWebview(
-      String url,
-      Map<String, String> headers,
+    String url,
+    Map<String, String> headers,
       List<String> scripts, {
         int time = 30,
       }) async {

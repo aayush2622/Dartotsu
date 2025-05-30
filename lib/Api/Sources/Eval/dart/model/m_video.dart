@@ -6,8 +6,7 @@ class MVideo {
   List<MTrack>? subtitles;
   List<MTrack>? audios;
 
-  MVideo(
-      this.url,
+  MVideo(this.url,
       this.quality,
       this.originalUrl, {
         this.headers,

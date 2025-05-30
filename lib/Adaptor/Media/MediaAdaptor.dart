@@ -87,7 +87,7 @@ class MediaGridState extends State<MediaAdaptor> {
   }
 
   void _handleLongTap(BuildContext context, Media media) {
-    context.currentService(listen: false).compactListEditor(context,media);
+    context.currentService(listen: false).compactListEditor(context, media);
   }
 
   Widget _buildAnimatedMediaItem({
@@ -104,7 +104,7 @@ class MediaGridState extends State<MediaAdaptor> {
       duration: const Duration(milliseconds: 200),
       child: GestureDetector(
         onTap: () => _handleMediaTap(index, _mediaList[index], tag),
-        onLongPress: () => _handleLongTap(context,_mediaList[index]),
+        onLongPress: () => _handleLongTap(context, _mediaList[index]),
         child: child,
       ),
     );
@@ -199,7 +199,7 @@ class MediaGridState extends State<MediaAdaptor> {
             final tag = _generateTag(index);
             return GestureDetector(
               onTap: () => _handleMediaTap(index, _mediaList[index], tag),
-              onLongPress: () => _handleLongTap(context,_mediaList[index]),
+              onLongPress: () => _handleLongTap(context, _mediaList[index]),
               child: MediaPageSmallViewHolder(_mediaList[index], tag),
             );
           },
@@ -258,7 +258,7 @@ class MediaGridState extends State<MediaAdaptor> {
                 final tag = _generateTag(index);
                 return GestureDetector(
                   onTap: () => _handleMediaTap(index, _mediaList[index], tag),
-                  onLongPress: () => _handleLongTap(context,_mediaList[index]),
+                  onLongPress: () => _handleLongTap(context, _mediaList[index]),
                   child: SizedBox(
                     width: 108,
                     height: height,

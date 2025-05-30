@@ -6,7 +6,9 @@ class MChapter {
   String? dateUpload;
 
   String? scanlator;
+
   MChapter({this.name, this.url, this.dateUpload, this.scanlator});
+
   factory MChapter.fromJson(Map<String, dynamic> json) {
     return MChapter(
       name: json['name'],
@@ -15,10 +17,11 @@ class MChapter {
       scanlator: json['scanlator'],
     );
   }
+
   Map<String, dynamic> toJson() => {
-    'name': name,
-    'url': url,
-    'dateUpload': dateUpload,
-    'scanlator': scanlator,
-  };
+        'name': name,
+        'url': url,
+        'dateUpload': dateUpload,
+        'scanlator': scanlator,
+      };
 }

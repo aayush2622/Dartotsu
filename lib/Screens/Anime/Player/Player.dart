@@ -126,7 +126,8 @@ class MediaPlayerState extends State<MediaPlayer>
     _rightAnimationController.dispose();
     focusNode.dispose();
     if (Platform.isAndroid || Platform.isIOS) {
-      ScreenBrightness.instance.setApplicationScreenBrightness(_defaultBrightness);
+      ScreenBrightness.instance
+          .setApplicationScreenBrightness(_defaultBrightness);
       _setLandscapeMode(false);
     }
   }

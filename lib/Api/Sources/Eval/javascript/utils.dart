@@ -18,6 +18,7 @@ import '../dart/model/m_bridge.dart';
 
 class JsUtils {
   late JavascriptRuntime runtime;
+
   JsUtils(this.runtime);
 
   void init() {
@@ -71,10 +72,9 @@ class JsUtils {
     runtime.onMessage('parseEpubChapter', (dynamic args) async {
       final bytes = await _toBytesResponse(client(), "GET", args);
       final book = await EpubReader.readBook(bytes);
-      final chapter =
-          book.Chapters?.where(
-                (element) => element.Title == args[3],
-          ).firstOrNull;
+      final chapter = book.Chapters?.where(
+        (element) => element.Title == args[3],
+      ).firstOrNull;
       return chapter?.HtmlContent;
     });
 
@@ -197,20 +197,19 @@ async function parseEpubChapter(bookName, url, headers, chapterTitle) {
   }
 
   Future<Uint8List> _toBytesResponse(
-      http.Client client,
-      String method,
-      List args,
-      ) async {
+    http.Client client,
+    String method,
+    List args,
+  ) async {
     final bookName = args[0] as String;
     final url = args[1] as String;
     final headers = (args[2] as Map?)?.toMapStringString;
-    final body =
-    args.length >= 4
+    final body = args.length >= 4
         ? args[3] is List
-        ? args[3] as List
-        : args[3] is String
-        ? args[3] as String
-        : (args[3] as Map?)?.toMapStringDynamic
+            ? args[3] as List
+            : args[3] is String
+                ? args[3] as String
+                : (args[3] as Map?)?.toMapStringDynamic
         : null;
 
     final tmpDirectory = (await StorageProvider().getTmpDirectory())!;

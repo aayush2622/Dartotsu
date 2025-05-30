@@ -25,38 +25,31 @@ class MElementBridge {
       'getDataSrc': (visitor, target) => (target as MElement).getDataSrc,
       'children': (visitor, target) => (target as MElement).children,
       'parent': (visitor, target) => (target as MElement).parent,
-      'nextElementSibling':
-          (visitor, target) => (target as MElement).nextElementSibling,
-      'previousElementSibling':
-          (visitor, target) => (target as MElement).previousElementSibling,
+      'nextElementSibling': (visitor, target) =>
+          (target as MElement).nextElementSibling,
+      'previousElementSibling': (visitor, target) =>
+          (target as MElement).previousElementSibling,
     },
     methods: {
-      'attr':
-          (visitor, target, positionalArgs, namedArgs) =>
+      'attr': (visitor, target, positionalArgs, namedArgs) =>
           (target as MElement).attr(positionalArgs[0] as String),
-      'text':
-          (visitor, target, positionalArgs, namedArgs) =>
-      (target as MElement).text,
-      'select':
-          (visitor, target, positionalArgs, namedArgs) =>
+      'text': (visitor, target, positionalArgs, namedArgs) =>
+          (target as MElement).text,
+      'select': (visitor, target, positionalArgs, namedArgs) =>
           (target as MElement).select(positionalArgs[0] as String),
-      'selectFirst':
-          (visitor, target, positionalArgs, namedArgs) =>
+      'selectFirst': (visitor, target, positionalArgs, namedArgs) =>
           (target as MElement).selectFirst(positionalArgs[0] as String),
-      'getElementsByClassName':
-          (visitor, target, positionalArgs, namedArgs) => (target as MElement)
-          .getElementsByClassName(positionalArgs[0] as String),
-      'getElementsByTagName':
-          (visitor, target, positionalArgs, namedArgs) => (target as MElement)
-          .getElementsByTagName(positionalArgs[0] as String),
-      'xpath':
-          (visitor, target, positionalArgs, namedArgs) =>
+      'getElementsByClassName': (visitor, target, positionalArgs, namedArgs) =>
+          (target as MElement)
+              .getElementsByClassName(positionalArgs[0] as String),
+      'getElementsByTagName': (visitor, target, positionalArgs, namedArgs) =>
+          (target as MElement)
+              .getElementsByTagName(positionalArgs[0] as String),
+      'xpath': (visitor, target, positionalArgs, namedArgs) =>
           (target as MElement).xpath(positionalArgs[0] as String),
-      'xpathFirst':
-          (visitor, target, positionalArgs, namedArgs) =>
+      'xpathFirst': (visitor, target, positionalArgs, namedArgs) =>
           (target as MElement).xpathFirst(positionalArgs[0] as String),
-      'hasAttr':
-          (visitor, target, positionalArgs, namedArgs) =>
+      'hasAttr': (visitor, target, positionalArgs, namedArgs) =>
           (target as MElement).hasAttr(positionalArgs[0] as String),
     },
   );
