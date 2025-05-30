@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dartotsu/Theme/LanguageSwitcher.dart';
 import 'package:flutter/material.dart';
 
@@ -45,6 +47,7 @@ class SettingsAboutScreenState extends BaseSettingsScreen {
         name: getString.logFile,
         description: getString.logFileDescription,
         icon: Icons.share,
+        isVisible: !Platform.isLinux,
         onClick: () async {
           var path = (await StorageProvider.getDirectory(
             useCustomPath: true,

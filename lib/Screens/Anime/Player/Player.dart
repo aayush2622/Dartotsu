@@ -126,7 +126,7 @@ class MediaPlayerState extends State<MediaPlayer>
     _rightAnimationController.dispose();
     focusNode.dispose();
     if (Platform.isAndroid || Platform.isIOS) {
-      ScreenBrightness().setApplicationScreenBrightness(_defaultBrightness);
+      ScreenBrightness.instance.setApplicationScreenBrightness(_defaultBrightness);
       _setLandscapeMode(false);
     }
   }
@@ -392,9 +392,9 @@ class MediaPlayerState extends State<MediaPlayer>
         _volumeValue.value = value;
       }
     });
-    _defaultBrightness = await ScreenBrightness().system;
-    _brightnessValue.value = await ScreenBrightness().application;
-    ScreenBrightness().onCurrentBrightnessChanged.listen((value) {
+    _defaultBrightness = await ScreenBrightness.instance.system;
+    _brightnessValue.value = await ScreenBrightness.instance.application;
+    ScreenBrightness.instance.onCurrentBrightnessChanged.listen((value) {
       if (mounted) {
         _brightnessValue.value = value;
       }
@@ -426,7 +426,7 @@ class MediaPlayerState extends State<MediaPlayer>
   Future<void> setBrightness(double value) async {
     if (!isMobile) return;
     try {
-      await ScreenBrightness().setApplicationScreenBrightness(value);
+      await ScreenBrightness.instance.setApplicationScreenBrightness(value);
     } catch (_) {}
     _brightnessIndicator.value = true;
     _brightnessTimer?.cancel();

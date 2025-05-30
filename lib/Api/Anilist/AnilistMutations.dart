@@ -1,4 +1,3 @@
-import 'package:dartotsu/Api/Anilist/Data/fuzzyData.dart';
 import 'package:dartotsu/DataClass/Media.dart';
 import 'package:dartotsu/Services/Api/Mutations.dart';
 import 'package:flutter/cupertino.dart';

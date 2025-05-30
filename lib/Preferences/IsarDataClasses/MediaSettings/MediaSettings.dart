@@ -4,7 +4,6 @@ import 'package:dartotsu/DataClass/Media.dart';
 import 'package:dartotsu/Functions/Extensions.dart';
 import 'package:dartotsu/Preferences/IsarDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
 import 'package:dartotsu/Preferences/IsarDataClasses/DefaultReaderSettings/DafaultReaderSettings.dart';
-import 'package:dartotsu/Preferences/IsarDataClasses/ShowResponse/ShowResponse.dart';
 import 'package:dartotsu/Preferences/PrefManager.dart';
 import 'package:get/get.dart';
 import 'package:isar/isar.dart';

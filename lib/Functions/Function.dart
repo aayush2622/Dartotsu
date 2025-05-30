@@ -157,10 +157,20 @@ void navigateToPage(BuildContext context, Widget page, {bool header = true}) {
   );
 }
 
-void shareLink(String link) => Share.share(link, subject: link);
+void shareLink(String link) => SharePlus.instance.share(
+      ShareParams(
+        uri: Uri.parse(link),
+        downloadFallbackEnabled: true,
+      ),
+    );
 
-void shareFile(String path, String text) =>
-    Share.shareXFiles([XFile(path)], text: text);
+void shareFile(String path, String text) => SharePlus.instance.share(
+      ShareParams(
+        text: text,
+        files: [XFile(path)],
+        downloadFallbackEnabled: true,
+      ),
+    );
 
 List<T> mergeMapValues<T>(Map<String, List<T>> dataMap) {
   final Set<T> uniqueItems = {};
