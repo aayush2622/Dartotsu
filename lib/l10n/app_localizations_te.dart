@@ -12,7 +12,8 @@ class AppLocalizationsTe extends AppLocalizations {
   String get appName => 'Dartotsu';
 
   @override
-  String get appTagline => 'నవీకృత ఉత్తమ అప్లికేషన్\nఆనిమే మరియు మాంగా ట్రాకింగ్ కోసం';
+  String get appTagline =>
+      'నవీకృత ఉత్తమ అప్లికేషన్\nఆనిమే మరియు మాంగా ట్రాకింగ్ కోసం';
 
   @override
   String get anilist => 'AniList';
@@ -317,7 +318,8 @@ class AppLocalizationsTe extends AppLocalizations {
   String get hidePrivate => 'ప్రైవేట్ లను దాచండి';
 
   @override
-  String get hidePrivateDescription => 'హోమ్ పేజీ నుండి ప్రైవేట్ సిరీస్‌ను దాచండి.';
+  String get hidePrivateDescription =>
+      'హోమ్ పేజీ నుండి ప్రైవేట్ సిరీస్‌ను దాచండి.';
 
   @override
   String get fontColor => 'ఫాంట్ రంగు';
@@ -362,7 +364,8 @@ class AppLocalizationsTe extends AppLocalizations {
   String get cursedSpeed => 'శాపిత వేగం';
 
   @override
-  String get cursedSpeedDescription => 'జీవితంలో చాలా బిజీగా ఉన్న వ్యక్తుల కోసం';
+  String get cursedSpeedDescription =>
+      'జీవితంలో చాలా బిజీగా ఉన్న వ్యక్తుల కోసం';
 
   @override
   String get speedDescription => 'ప్లేయర్ కోసం డిఫాల్ట్ వేగం';
@@ -398,19 +401,22 @@ class AppLocalizationsTe extends AppLocalizations {
   String get about => 'గురించి';
 
   @override
-  String get aboutDescription => 'అప్లికేషన్ మరియు దాని సృష్టికర్తల గురించి మరింత తెలుసుకోండి';
+  String get aboutDescription =>
+      'అప్లికేషన్ మరియు దాని సృష్టికర్తల గురించి మరింత తెలుసుకోండి';
 
   @override
   String get common => 'సాధారణ';
 
   @override
-  String get commonDescription => 'సాధారణ సెట్టింగులకు యాక్సెస్ చేయండి, అప్లికేషన్ ఉపయోగం మరింత సజావుగా ఉండాలి';
+  String get commonDescription =>
+      'సాధారణ సెట్టింగులకు యాక్సెస్ చేయండి, అప్లికేషన్ ఉపయోగం మరింత సజావుగా ఉండాలి';
 
   @override
   String get materialYou => 'Material You';
 
   @override
-  String get materialYouDescription => 'మీ వాల్పేపర్‌తో సమాన రంగును ఉపయోగించండి';
+  String get materialYouDescription =>
+      'మీ వాల్పేపర్‌తో సమాన రంగును ఉపయోగించండి';
 
   @override
   String get customTheme => 'కస్టమ్ థీమ్';
@@ -422,16 +428,19 @@ class AppLocalizationsTe extends AppLocalizations {
   String get notifications => 'ప్రచారాలు';
 
   @override
-  String get notificationsDescription => 'మీకు ఎప్పుడు మరియు ఎలా ప్రకటనలు రాలేదో కంఫిగర్ చేయండి';
+  String get notificationsDescription =>
+      'మీకు ఎప్పుడు మరియు ఎలా ప్రకటనలు రాలేదో కంఫిగర్ చేయండి';
 
   @override
-  String get accountDescription => 'మీ AniList, MAL మరియు Discord ఖాతాలను సులభంగా నిర్వహించండి';
+  String get accountDescription =>
+      'మీ AniList, MAL మరియు Discord ఖాతాలను సులభంగా నిర్వహించండి';
 
   @override
   String get allCaughtUpNew => 'అన్ని పూర్తిగా చూసారు, ఏమి కొత్త?';
 
   @override
-  String get animeDescription => 'మీ ఆనిమే ప్రాధాన్యతలను వ్యక్తిగతీకరించి నిర్వహించండి';
+  String get animeDescription =>
+      'మీ ఆనిమే ప్రాధాన్యతలను వ్యక్తిగతీకరించి నిర్వహించండి';
 
   @override
   String get darkMode => 'డార్క్ మోడ్';
@@ -449,19 +458,22 @@ class AppLocalizationsTe extends AppLocalizations {
   String get enableDarkMode => 'డార్క్ మోడ్‌ను ఎనేబుల్ చేయండి';
 
   @override
-  String get extensionsDescription => 'మరిన్ని ఫంక్షనాలిటీ కోసం ఎక్స్‌టెన్షన్లను ఇన్‌స్టాల్ చేయండి మరియు నిర్వహించండి';
+  String get extensionsDescription =>
+      'మరిన్ని ఫంక్షనాలిటీ కోసం ఎక్స్‌టెన్షన్లను ఇన్‌స్టాల్ చేయండి మరియు నిర్వహించండి';
 
   @override
   String get hiddenMedia => 'దాచిన మీడియా';
 
   @override
-  String get incognitoModeDescription => 'మీ కార్యకలాపాలను సేవ్ చేయకుండా బ్రౌజ్ చేయండి';
+  String get incognitoModeDescription =>
+      'మీ కార్యకలాపాలను సేవ్ చేయకుండా బ్రౌజ్ చేయండి';
 
   @override
   String get mangaDescription => 'మీ మాంగా అనుభవాన్ని సరళంగా నిర్వహించండి';
 
   @override
-  String get noFavourites => 'మీరు ఏమీ ఇష్టపడట్లేదు,\nఇక్కడ ఉంచడానికి ప్రదర్శించడానికి ఒక షోను ఇష్టపడండి.';
+  String get noFavourites =>
+      'మీరు ఏమీ ఇష్టపడట్లేదు,\nఇక్కడ ఉంచడానికి ప్రదర్శించడానికి ఒక షోను ఇష్టపడండి.';
 
   @override
   String get noHiddenMediaFound => 'దాచిన మీడియా కనుగొనబడలేదు';
@@ -470,7 +482,8 @@ class AppLocalizationsTe extends AppLocalizations {
   String get noOnHold => 'మీరు ఏదైనా హోల్డ్ పై ఉంచలేదు.';
 
   @override
-  String get offlineModeDescription => 'ఇంటర్నెట్ కనెక్షన్ లేకుండా అప్లికేషన్ ఉపయోగించండి';
+  String get offlineModeDescription =>
+      'ఇంటర్నెట్ కనెక్షన్ లేకుండా అప్లికేషన్ ఉపయోగించండి';
 
   @override
   String get oledThemeVariant => 'OLED థీమ్ వేరియంట్';
@@ -491,7 +504,8 @@ class AppLocalizationsTe extends AppLocalizations {
   String get recentUpdates => 'ఇటీవలి నవీకరణలు';
 
   @override
-  String get recommendationsEmptyMessage => 'ప్రత్యేక సిఫార్సులను పొందడానికి కొన్ని అనిమే లేదా మంగా చూడండి/చదవండి';
+  String get recommendationsEmptyMessage =>
+      'ప్రత్యేక సిఫార్సులను పొందడానికి కొన్ని అనిమే లేదా మంగా చూడండి/చదవండి';
 
   @override
   String get resizeMode => 'పునర్విన్యాస మోడ్';
@@ -500,13 +514,15 @@ class AppLocalizationsTe extends AppLocalizations {
   String get resizeModeDescription => 'ప్లేయర్ కోసం డిఫాల్ట్ పునర్విన్యాస మోడ్';
 
   @override
-  String get supportMaintainer => 'Dartotsu యొక్క నిర్వహకుడిని మద్దతు ఇవ్వాలా?\nదానం చేయాలని అనుకోండి';
+  String get supportMaintainer =>
+      'Dartotsu యొక్క నిర్వహకుడిని మద్దతు ఇవ్వాలా?\nదానం చేయాలని అనుకోండి';
 
   @override
   String get theme => 'థీమ్';
 
   @override
-  String get themeDescription => 'మీ అప్లికేషన్ యొక్క రూపాన్ని మరియు భావాన్ని అనుకూలీకరించండి';
+  String get themeDescription =>
+      'మీ అప్లికేషన్ యొక్క రూపాన్ని మరియు భావాన్ని అనుకూలీకరించండి';
 
   @override
   String get author => 'Author';
@@ -602,7 +618,8 @@ class AppLocalizationsTe extends AppLocalizations {
   String get customPath => 'అనుకూల మార్గం';
 
   @override
-  String get customPathDescription => 'ఫైల్‌లను సేవ్ చేయడానికి అనుకూల మార్గాన్ని సెట్ చేయండి\nతీసివేయడానికి ఎక్కువసేపు నొక్కండి';
+  String get customPathDescription =>
+      'ఫైల్‌లను సేవ్ చేయడానికి అనుకూల మార్గాన్ని సెట్ చేయండి\nతీసివేయడానికి ఎక్కువసేపు నొక్కండి';
 
   @override
   String get selectDirectory => 'డైరెక్టరీని ఎంచుకోండి';
@@ -641,7 +658,8 @@ class AppLocalizationsTe extends AppLocalizations {
   String get loadExtensionsIcon => 'ఎక్స్‌టెన్షన్ల చిహ్నాన్ని లోడ్ చేయండి';
 
   @override
-  String get loadExtensionsIconDesc => 'ఎక్స్‌టెన్షన్ పేజీ నెమ్మదిగా ఉంటే అచేతనం చేయండి';
+  String get loadExtensionsIconDesc =>
+      'ఎక్స్‌టెన్షన్ పేజీ నెమ్మదిగా ఉంటే అచేతనం చేయండి';
 
   @override
   String get autoUpdate => 'ఆటో నవీకరణ';
@@ -668,7 +686,8 @@ class AppLocalizationsTe extends AppLocalizations {
   String get youTube => 'YouTube లో ప్లే చేయాలా?';
 
   @override
-  String get installSourceToStart => 'ప్రారంభించడానికి పొడిగింపు పేజీ నుండి మూలాన్ని ఇన్‌స్టాల్ చేయండి';
+  String get installSourceToStart =>
+      'ప్రారంభించడానికి పొడిగింపు పేజీ నుండి మూలాన్ని ఇన్‌స్టాల్ చేయండి';
 
   @override
   String get watching => 'చూస్తున్నారు';

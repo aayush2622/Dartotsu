@@ -12,7 +12,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get appName => 'Dartotsu';
 
   @override
-  String get appTagline => 'La NOUVELLE meilleure application pour\nsuivre les anime et manga';
+  String get appTagline =>
+      'La NOUVELLE meilleure application pour\nsuivre les anime et manga';
 
   @override
   String get anilist => 'AniList';
@@ -317,7 +318,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get hidePrivate => 'Masquer privé';
 
   @override
-  String get hidePrivateDescription => 'Masquer les séries privées de la page d\'accueil.';
+  String get hidePrivateDescription =>
+      'Masquer les séries privées de la page d\'accueil.';
 
   @override
   String get fontColor => 'Couleur de la police';
@@ -362,7 +364,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get cursedSpeed => 'Vitesse maudite';
 
   @override
-  String get cursedSpeedDescription => 'Pour ceux qui sont trop occupés par la vie';
+  String get cursedSpeedDescription =>
+      'Pour ceux qui sont trop occupés par la vie';
 
   @override
   String get speedDescription => 'Vitesse par défaut pour le lecteur';
@@ -398,40 +401,48 @@ class AppLocalizationsFr extends AppLocalizations {
   String get about => 'À propos';
 
   @override
-  String get aboutDescription => 'En savoir plus sur l\'application et ses créateurs';
+  String get aboutDescription =>
+      'En savoir plus sur l\'application et ses créateurs';
 
   @override
   String get common => 'Commun';
 
   @override
-  String get commonDescription => 'Accédez aux paramètres généraux pour une utilisation fluide de l\'application';
+  String get commonDescription =>
+      'Accédez aux paramètres généraux pour une utilisation fluide de l\'application';
 
   @override
   String get materialYou => 'Material You';
 
   @override
-  String get materialYouDescription => 'Utilisez la même couleur que votre fond d\'écran';
+  String get materialYouDescription =>
+      'Utilisez la même couleur que votre fond d\'écran';
 
   @override
   String get customTheme => 'Thème personnalisé';
 
   @override
-  String get customThemeDescription => 'Utilisez votre propre couleur pour le thème';
+  String get customThemeDescription =>
+      'Utilisez votre propre couleur pour le thème';
 
   @override
   String get notifications => 'Notifications';
 
   @override
-  String get notificationsDescription => 'Configurez comment et quand vous recevez des notifications';
+  String get notificationsDescription =>
+      'Configurez comment et quand vous recevez des notifications';
 
   @override
-  String get accountDescription => 'Gérez facilement vos comptes AniList, MAL et Discord';
+  String get accountDescription =>
+      'Gérez facilement vos comptes AniList, MAL et Discord';
 
   @override
-  String get allCaughtUpNew => 'Tout est à jour, qu\'est-ce qu\'il y a de nouveau ?';
+  String get allCaughtUpNew =>
+      'Tout est à jour, qu\'est-ce qu\'il y a de nouveau ?';
 
   @override
-  String get animeDescription => 'Personnalisez et gérez vos préférences d\'anime';
+  String get animeDescription =>
+      'Personnalisez et gérez vos préférences d\'anime';
 
   @override
   String get darkMode => 'Mode sombre';
@@ -449,19 +460,23 @@ class AppLocalizationsFr extends AppLocalizations {
   String get enableDarkMode => 'Activer le mode sombre';
 
   @override
-  String get extensionsDescription => 'Installez et gérez des extensions pour des fonctionnalités supplémentaires';
+  String get extensionsDescription =>
+      'Installez et gérez des extensions pour des fonctionnalités supplémentaires';
 
   @override
   String get hiddenMedia => 'Média Caché';
 
   @override
-  String get incognitoModeDescription => 'Naviguez sans enregistrer votre activité';
+  String get incognitoModeDescription =>
+      'Naviguez sans enregistrer votre activité';
 
   @override
-  String get mangaDescription => 'Organisez et personnalisez votre expérience manga';
+  String get mangaDescription =>
+      'Organisez et personnalisez votre expérience manga';
 
   @override
-  String get noFavourites => 'Il semble que vous n\'aimiez rien, \nEssayez d\'aimer une série pour la garder ici.';
+  String get noFavourites =>
+      'Il semble que vous n\'aimiez rien, \nEssayez d\'aimer une série pour la garder ici.';
 
   @override
   String get noHiddenMediaFound => 'Aucun média caché trouvé';
@@ -470,7 +485,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get noOnHold => 'Il semble que vous n\'ayez rien mis en pause.';
 
   @override
-  String get offlineModeDescription => 'Utilisez l\'application sans connexion internet';
+  String get offlineModeDescription =>
+      'Utilisez l\'application sans connexion internet';
 
   @override
   String get oledThemeVariant => 'Variante de thème OLED';
@@ -491,22 +507,26 @@ class AppLocalizationsFr extends AppLocalizations {
   String get recentUpdates => 'Mises à jour récentes';
 
   @override
-  String get recommendationsEmptyMessage => 'Regardez/Lisez un Anime ou Manga pour obtenir des recommandations';
+  String get recommendationsEmptyMessage =>
+      'Regardez/Lisez un Anime ou Manga pour obtenir des recommandations';
 
   @override
   String get resizeMode => 'Mode de redimensionnement';
 
   @override
-  String get resizeModeDescription => 'Mode de redimensionnement par défaut pour le lecteur';
+  String get resizeModeDescription =>
+      'Mode de redimensionnement par défaut pour le lecteur';
 
   @override
-  String get supportMaintainer => 'Vous voulez soutenir le mainteneur de Dartotsu ?\nEnvisagez de faire un don';
+  String get supportMaintainer =>
+      'Vous voulez soutenir le mainteneur de Dartotsu ?\nEnvisagez de faire un don';
 
   @override
   String get theme => 'Thème';
 
   @override
-  String get themeDescription => 'Personnalisez l\'apparence et l\'ambiance de votre application';
+  String get themeDescription =>
+      'Personnalisez l\'apparence et l\'ambiance de votre application';
 
   @override
   String get author => 'Auteur';
@@ -602,7 +622,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get customPath => 'Voie personnalisée';
 
   @override
-  String get customPathDescription => 'Définir un chemin personnalisé pour enregistrer des fichiers\nLongue pression pour supprimer';
+  String get customPathDescription =>
+      'Définir un chemin personnalisé pour enregistrer des fichiers\nLongue pression pour supprimer';
 
   @override
   String get selectDirectory => 'Sélectionnez un répertoire';
@@ -641,7 +662,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get loadExtensionsIcon => 'Icône Charger les extensions';
 
   @override
-  String get loadExtensionsIconDesc => 'Désactiver si la page des extensions lags';
+  String get loadExtensionsIconDesc =>
+      'Désactiver si la page des extensions lags';
 
   @override
   String get autoUpdate => 'Mise à jour automatique';
@@ -668,7 +690,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get youTube => 'Jouez sur YouTube ?';
 
   @override
-  String get installSourceToStart => 'Installer une source de la page d\'extension pour commencer';
+  String get installSourceToStart =>
+      'Installer une source de la page d\'extension pour commencer';
 
   @override
   String get watching => 'Regarder';

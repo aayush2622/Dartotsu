@@ -12,7 +12,8 @@ class AppLocalizationsKn extends AppLocalizations {
   String get appName => 'Dartotsu';
 
   @override
-  String get appTagline => 'ಹೆಚ್ಚು ಒಳ್ಳೆಯ ಆಪ್\nಆನಿಮೆ ಮತ್ತು ಮಾಂಗಾ ಟ್ರ್ಯಾಕ್ ಮಾಡಲು';
+  String get appTagline =>
+      'ಹೆಚ್ಚು ಒಳ್ಳೆಯ ಆಪ್\nಆನಿಮೆ ಮತ್ತು ಮಾಂಗಾ ಟ್ರ್ಯಾಕ್ ಮಾಡಲು';
 
   @override
   String get anilist => 'AniList';
@@ -347,7 +348,8 @@ class AppLocalizationsKn extends AppLocalizations {
   String get showSubtitles => 'ಉಪಶೀರ್ಷಿಕೆಗಳನ್ನು ತೋರಿಸಿ';
 
   @override
-  String get showSubtitlesDescription => 'ಡಿಫಾಲ್ಟ್‌ನಾಗಿ ಉಪಶೀರ್ಷಿಕೆಗಳನ್ನು ತೋರಿಸಿ';
+  String get showSubtitlesDescription =>
+      'ಡಿಫಾಲ್ಟ್‌ನಾಗಿ ಉಪಶೀರ್ಷಿಕೆಗಳನ್ನು ತೋರಿಸಿ';
 
   @override
   String get skipButton => 'ಸ್ಕಿಪ್ ಬಟನ್';
@@ -398,13 +400,15 @@ class AppLocalizationsKn extends AppLocalizations {
   String get about => 'ಬಗ್ಗೆ';
 
   @override
-  String get aboutDescription => 'ಆಪ್ ಮತ್ತು ಅದರ ನಿರ್ಮಾಪಕರುಗಳ ಬಗ್ಗೆ ಹೆಚ್ಚಿನ ಮಾಹಿತಿ ತಿಳಿದುಕೊಳ್ಳಿ';
+  String get aboutDescription =>
+      'ಆಪ್ ಮತ್ತು ಅದರ ನಿರ್ಮಾಪಕರುಗಳ ಬಗ್ಗೆ ಹೆಚ್ಚಿನ ಮಾಹಿತಿ ತಿಳಿದುಕೊಳ್ಳಿ';
 
   @override
   String get common => 'ಸಾಮಾನ್ಯ';
 
   @override
-  String get commonDescription => 'ಆಪ್ ಬಳಕೆಗೆ ಸುಲಭವಾದ ಸಾಮಾನ್ಯ ಸೆಟ್ಟಿಂಗ್ಗಳನ್ನು ಪ್ರವೇಶಿಸಿ';
+  String get commonDescription =>
+      'ಆಪ್ ಬಳಕೆಗೆ ಸುಲಭವಾದ ಸಾಮಾನ್ಯ ಸೆಟ್ಟಿಂಗ್ಗಳನ್ನು ಪ್ರವೇಶಿಸಿ';
 
   @override
   String get materialYou => 'Material You';
@@ -422,16 +426,19 @@ class AppLocalizationsKn extends AppLocalizations {
   String get notifications => 'ಅधಿಸೂಚನೆಗಳು';
 
   @override
-  String get notificationsDescription => 'ನೀವು ಹೇಗೆ ಮತ್ತು ಯಾವಾಗ ಅಧಿಸೂಚನೆಗಳನ್ನು ಸ್ವೀಕರಿಸಬೇಕೆಂದು ಸಂರಚಿಸಿ';
+  String get notificationsDescription =>
+      'ನೀವು ಹೇಗೆ ಮತ್ತು ಯಾವಾಗ ಅಧಿಸೂಚನೆಗಳನ್ನು ಸ್ವೀಕರಿಸಬೇಕೆಂದು ಸಂರಚಿಸಿ';
 
   @override
-  String get accountDescription => 'ನಿಮ್ಮ AniList, MAL, ಮತ್ತು Discord ಖಾತೆಗಳನ್ನು ಸುಲಭವಾಗಿ ನಿರ್ವಹಿಸಿ';
+  String get accountDescription =>
+      'ನಿಮ್ಮ AniList, MAL, ಮತ್ತು Discord ಖಾತೆಗಳನ್ನು ಸುಲಭವಾಗಿ ನಿರ್ವಹಿಸಿ';
 
   @override
   String get allCaughtUpNew => 'ಎಲ್ಲವೂ ಅಪ್ಡೇಟ್ ಆಗಿದೆ, ಹೊಸದು ಏನು?';
 
   @override
-  String get animeDescription => 'ನಿಮ್ಮ ಆನಿಮೆ ಪ್ರಾಮುಖ್ಯತೆಯನ್ನು ವೈಯಕ್ತಿಕಗೊಳಿಸಿ ಮತ್ತು ನಿರ್ವಹಿಸಿ';
+  String get animeDescription =>
+      'ನಿಮ್ಮ ಆನಿಮೆ ಪ್ರಾಮುಖ್ಯತೆಯನ್ನು ವೈಯಕ್ತಿಕಗೊಳಿಸಿ ಮತ್ತು ನಿರ್ವಹಿಸಿ';
 
   @override
   String get darkMode => 'ಡಾರ್ಕ್ ಮೋಡ್';
@@ -449,19 +456,23 @@ class AppLocalizationsKn extends AppLocalizations {
   String get enableDarkMode => 'ಡಾರ್ಕ್ ಮೋಡ್ ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ';
 
   @override
-  String get extensionsDescription => 'ಹೆಚ್ಚು ಕಾರ್ಯಕ್ಷಮತೆಗಾಗಿ ವಿಸ್ತರಣೆಗಳನ್ನು ಇನ್ಸ್ಟಾಲ್ ಮಾಡಿ ಮತ್ತು ನಿರ್ವಹಿಸಿ';
+  String get extensionsDescription =>
+      'ಹೆಚ್ಚು ಕಾರ್ಯಕ್ಷಮತೆಗಾಗಿ ವಿಸ್ತರಣೆಗಳನ್ನು ಇನ್ಸ್ಟಾಲ್ ಮಾಡಿ ಮತ್ತು ನಿರ್ವಹಿಸಿ';
 
   @override
   String get hiddenMedia => 'ಹಚ್ಚಿದ ಮೀಡಿಯಾ';
 
   @override
-  String get incognitoModeDescription => 'ನಿಮ್ಮ ಚಟುವಟಿಕೆಯನ್ನು ಉಳಿಸದೆ ಬ್ರೌಸ್ ಮಾಡಿ';
+  String get incognitoModeDescription =>
+      'ನಿಮ್ಮ ಚಟುವಟಿಕೆಯನ್ನು ಉಳಿಸದೆ ಬ್ರೌಸ್ ಮಾಡಿ';
 
   @override
-  String get mangaDescription => 'ನಿಮ್ಮ ಮಂಗಾ ಅನುಭವವನ್ನು ಸಂಘಟಿಸಿ ಮತ್ತು ಅನुकूलಿಸು';
+  String get mangaDescription =>
+      'ನಿಮ್ಮ ಮಂಗಾ ಅನುಭವವನ್ನು ಸಂಘಟಿಸಿ ಮತ್ತು ಅನुकूलಿಸು';
 
   @override
-  String get noFavourites => 'ನೀವು ಯಾವುದೇ ಆನಿಮೆ/ಮಾಂಗಾ ಇಷ್ಟಪಡುತ್ತಿಲ್ಲ,\nಇದನ್ನು ಇಲ್ಲಿ ಇಡುವುದಕ್ಕಾಗಿ ಶೋಗೆ ಇಷ್ಟಪಡು.';
+  String get noFavourites =>
+      'ನೀವು ಯಾವುದೇ ಆನಿಮೆ/ಮಾಂಗಾ ಇಷ್ಟಪಡುತ್ತಿಲ್ಲ,\nಇದನ್ನು ಇಲ್ಲಿ ಇಡುವುದಕ್ಕಾಗಿ ಶೋಗೆ ಇಷ್ಟಪಡು.';
 
   @override
   String get noHiddenMediaFound => 'ಯಾವುದೇ ಹಚ್ಚಿದ ಮೀಡಿಯಾ ಕಂಡುಬಂದಿಲ್ಲ';
@@ -491,7 +502,8 @@ class AppLocalizationsKn extends AppLocalizations {
   String get recentUpdates => 'ಇತ್ತೀಚಿನ ಅಪ್ಡೇಟುಗಳು';
 
   @override
-  String get recommendationsEmptyMessage => 'ಆನಿಮೆ ಅಥವಾ ಮಾಂಗಾ ಓದಿ/ವೀಕ್ಷಿಸಿ ರೆಕೆಂಡೇಶನ್ಗಳನ್ನು ಪಡೆಯಿರಿ';
+  String get recommendationsEmptyMessage =>
+      'ಆನಿಮೆ ಅಥವಾ ಮಾಂಗಾ ಓದಿ/ವೀಕ್ಷಿಸಿ ರೆಕೆಂಡೇಶನ್ಗಳನ್ನು ಪಡೆಯಿರಿ';
 
   @override
   String get resizeMode => 'ವಿಸ್ತರಣೆ ಮೋಡ್';
@@ -500,13 +512,15 @@ class AppLocalizationsKn extends AppLocalizations {
   String get resizeModeDescription => 'ಪ್ಲೇಯರ್‌ಗಾಗಿ ಡಿಫಾಲ್ಟ್ ವಿಸ್ತರಣೆ ಮೋಡ್';
 
   @override
-  String get supportMaintainer => 'Dartotsu ನ ಸಂರಕ್ಷಣಕನನ್ನು ಬೆಂಬಲಿಸಲು ಇಚ್ಛಿಸುತ್ತಿದ್ದೀರಾ?\nದಾನ ಮಾಡಲು ಪರಿಗಣಿಸಿ';
+  String get supportMaintainer =>
+      'Dartotsu ನ ಸಂರಕ್ಷಣಕನನ್ನು ಬೆಂಬಲಿಸಲು ಇಚ್ಛಿಸುತ್ತಿದ್ದೀರಾ?\nದಾನ ಮಾಡಲು ಪರಿಗಣಿಸಿ';
 
   @override
   String get theme => 'ಥೀಮ್';
 
   @override
-  String get themeDescription => 'ನಿಮ್ಮ ಆಪ್‍ನ ಅಪರೂಪವನ್ನು ಮತ್ತು ಆನಂದವನ್ನು ಕಸ್ಟಮೈಸ್ ಮಾಡಿ';
+  String get themeDescription =>
+      'ನಿಮ್ಮ ಆಪ್‍ನ ಅಪರೂಪವನ್ನು ಮತ್ತು ಆನಂದವನ್ನು ಕಸ್ಟಮೈಸ್ ಮಾಡಿ';
 
   @override
   String get author => 'Author';
@@ -602,7 +616,8 @@ class AppLocalizationsKn extends AppLocalizations {
   String get customPath => 'ಕಸ್ಟಮ್ ಮಾರ್ಗ';
 
   @override
-  String get customPathDescription => 'ಫೈಲ್‌ಗಳನ್ನು ಉಳಿಸಲು ಕಸ್ಟಮ್ ಮಾರ್ಗವನ್ನು ಹೊಂದಿಸಿ\nತೆಗೆದುಹಾಕಲು ದೀರ್ಘವಾಗಿ ಒತ್ತಿರಿ';
+  String get customPathDescription =>
+      'ಫೈಲ್‌ಗಳನ್ನು ಉಳಿಸಲು ಕಸ್ಟಮ್ ಮಾರ್ಗವನ್ನು ಹೊಂದಿಸಿ\nತೆಗೆದುಹಾಕಲು ದೀರ್ಘವಾಗಿ ಒತ್ತಿರಿ';
 
   @override
   String get selectDirectory => 'ಡೈರೆಕ್ಟರಿಯನ್ನು ಆಯ್ಕೆಮಾಡಿ';
@@ -641,7 +656,8 @@ class AppLocalizationsKn extends AppLocalizations {
   String get loadExtensionsIcon => 'ವಿಸ್ತರಣೆಗಳ ಐಕಾನ್ ಲೋಡ್ ಮಾಡಿ';
 
   @override
-  String get loadExtensionsIconDesc => 'ವಿಸ್ತರಣೆಗಳ ಪುಟ ಲ್ಯಾಗ್ ಆದರೆ ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ';
+  String get loadExtensionsIconDesc =>
+      'ವಿಸ್ತರಣೆಗಳ ಪುಟ ಲ್ಯಾಗ್ ಆದರೆ ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ';
 
   @override
   String get autoUpdate => 'ಸ್ವಯಂ ನವೀಕರಣ';
@@ -668,7 +684,8 @@ class AppLocalizationsKn extends AppLocalizations {
   String get youTube => 'YouTube ನಲ್ಲಿ ಪ್ಲೇ ಮಾಡಲಾ?';
 
   @override
-  String get installSourceToStart => 'ಪ್ರಾರಂಭಿಸಲು ವಿಸ್ತರಣಾ ಪುಟದಿಂದ ಮೂಲವನ್ನು ಸ್ಥಾಪಿಸಿ';
+  String get installSourceToStart =>
+      'ಪ್ರಾರಂಭಿಸಲು ವಿಸ್ತರಣಾ ಪುಟದಿಂದ ಮೂಲವನ್ನು ಸ್ಥಾಪಿಸಿ';
 
   @override
   String get watching => 'ವೀಕ್ಷಿಸಲಾಗುತ್ತಿದೆ';

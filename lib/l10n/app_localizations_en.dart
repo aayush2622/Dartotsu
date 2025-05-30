@@ -404,7 +404,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get common => 'Common';
 
   @override
-  String get commonDescription => 'Access general settings for seamless app usage';
+  String get commonDescription =>
+      'Access general settings for seamless app usage';
 
   @override
   String get materialYou => 'Material You';
@@ -422,16 +423,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get notifications => 'Notifications';
 
   @override
-  String get notificationsDescription => 'Configure how and when you receive notifications';
+  String get notificationsDescription =>
+      'Configure how and when you receive notifications';
 
   @override
-  String get accountDescription => 'Manage your AniList, MAL, and Discord accounts effortlessly';
+  String get accountDescription =>
+      'Manage your AniList, MAL, and Discord accounts effortlessly';
 
   @override
   String get allCaughtUpNew => 'All caught up, what\'s New?';
 
   @override
-  String get animeDescription => 'Personalize and manage your anime preferences';
+  String get animeDescription =>
+      'Personalize and manage your anime preferences';
 
   @override
   String get darkMode => 'Dark Mode';
@@ -449,7 +453,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get enableDarkMode => 'Enable Dark Mode';
 
   @override
-  String get extensionsDescription => 'Install and manage extensions for added functionality';
+  String get extensionsDescription =>
+      'Install and manage extensions for added functionality';
 
   @override
   String get hiddenMedia => 'Hidden Media';
@@ -461,7 +466,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mangaDescription => 'Organize and tailor your manga experience';
 
   @override
-  String get noFavourites => 'Looks like you don\'t like anything,\nTry liking a show to keep it here.';
+  String get noFavourites =>
+      'Looks like you don\'t like anything,\nTry liking a show to keep it here.';
 
   @override
   String get noHiddenMediaFound => 'No hidden media found';
@@ -470,7 +476,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get noOnHold => 'Looks like you haven\'t put anything on hold.';
 
   @override
-  String get offlineModeDescription => 'Use the app without an internet connection';
+  String get offlineModeDescription =>
+      'Use the app without an internet connection';
 
   @override
   String get oledThemeVariant => 'OLED theme Variant';
@@ -491,7 +498,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get recentUpdates => 'Recent Updates';
 
   @override
-  String get recommendationsEmptyMessage => 'Watch/Read some Anime or Manga to get Recommendations';
+  String get recommendationsEmptyMessage =>
+      'Watch/Read some Anime or Manga to get Recommendations';
 
   @override
   String get resizeMode => 'Resize mode';
@@ -500,13 +508,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get resizeModeDescription => 'Default resize mode for player';
 
   @override
-  String get supportMaintainer => 'Want to support Dartotsu\'s Maintainer?\nConsider Donating';
+  String get supportMaintainer =>
+      'Want to support Dartotsu\'s Maintainer?\nConsider Donating';
 
   @override
   String get theme => 'Theme';
 
   @override
-  String get themeDescription => 'Customize the appearance and vibe of your app';
+  String get themeDescription =>
+      'Customize the appearance and vibe of your app';
 
   @override
   String get author => 'Author';
@@ -602,7 +612,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get customPath => 'Custom Path';
 
   @override
-  String get customPathDescription => 'Set a custom path to save files\nLong press to remove';
+  String get customPathDescription =>
+      'Set a custom path to save files\nLong press to remove';
 
   @override
   String get selectDirectory => 'Select a directory';
@@ -668,7 +679,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get youTube => 'Play on YouTube?';
 
   @override
-  String get installSourceToStart => 'Install a source from extension page to start';
+  String get installSourceToStart =>
+      'Install a source from extension page to start';
 
   @override
   String get watching => 'Watching';

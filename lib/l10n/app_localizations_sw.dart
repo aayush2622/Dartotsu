@@ -12,7 +12,8 @@ class AppLocalizationsSw extends AppLocalizations {
   String get appName => 'Dartotsu';
 
   @override
-  String get appTagline => 'Programu Bora Mpya Kwa\nUfuatiliaji wa Anime & Manga';
+  String get appTagline =>
+      'Programu Bora Mpya Kwa\nUfuatiliaji wa Anime & Manga';
 
   @override
   String get anilist => 'AniList';
@@ -317,7 +318,8 @@ class AppLocalizationsSw extends AppLocalizations {
   String get hidePrivate => 'Ficha Binafsi';
 
   @override
-  String get hidePrivateDescription => 'Ficha mfululizo wa kibinafsi kutoka kwenye ukurasa wa Nyumbani.';
+  String get hidePrivateDescription =>
+      'Ficha mfululizo wa kibinafsi kutoka kwenye ukurasa wa Nyumbani.';
 
   @override
   String get fontColor => 'Rangi ya Fonti';
@@ -347,7 +349,8 @@ class AppLocalizationsSw extends AppLocalizations {
   String get showSubtitles => 'Onyesha Maneno ya Kichwa';
 
   @override
-  String get showSubtitlesDescription => 'Onyesha maneno ya kichwa kwa chaguo-msingi';
+  String get showSubtitlesDescription =>
+      'Onyesha maneno ya kichwa kwa chaguo-msingi';
 
   @override
   String get skipButton => 'Kitufe cha Kupita';
@@ -362,7 +365,8 @@ class AppLocalizationsSw extends AppLocalizations {
   String get cursedSpeed => 'Speedi ya Laana';
 
   @override
-  String get cursedSpeedDescription => 'Kwa watu walio na shughuli nyingi maishani';
+  String get cursedSpeedDescription =>
+      'Kwa watu walio na shughuli nyingi maishani';
 
   @override
   String get speedDescription => 'Speedi ya chaguo-msingi kwa mchezaji';
@@ -377,7 +381,8 @@ class AppLocalizationsSw extends AppLocalizations {
   String get backgroundColor => 'Rangi ya Mandharinyuma';
 
   @override
-  String get backgroundColorDescription => 'Rangi ya mandharinyuma ya maneno ya kichwa';
+  String get backgroundColorDescription =>
+      'Rangi ya mandharinyuma ya maneno ya kichwa';
 
   @override
   String get bottomPadding => 'Padding Chini';
@@ -398,13 +403,15 @@ class AppLocalizationsSw extends AppLocalizations {
   String get about => 'Kuhusu';
 
   @override
-  String get aboutDescription => 'Jifunze zaidi kuhusu programu na waumbaji wake';
+  String get aboutDescription =>
+      'Jifunze zaidi kuhusu programu na waumbaji wake';
 
   @override
   String get common => 'Kawaida';
 
   @override
-  String get commonDescription => 'Fikia mipangilio ya jumla kwa matumizi rahisi ya programu';
+  String get commonDescription =>
+      'Fikia mipangilio ya jumla kwa matumizi rahisi ya programu';
 
   @override
   String get materialYou => 'Material You';
@@ -425,13 +432,15 @@ class AppLocalizationsSw extends AppLocalizations {
   String get notificationsDescription => 'Panga jinsi na lini unapokea arifa';
 
   @override
-  String get accountDescription => 'Tumia na usimamie akaunti zako za AniList, MAL, na Discord kwa urahisi';
+  String get accountDescription =>
+      'Tumia na usimamie akaunti zako za AniList, MAL, na Discord kwa urahisi';
 
   @override
   String get allCaughtUpNew => 'Umejibu kila kitu, nini kipya?';
 
   @override
-  String get animeDescription => 'Binafsisha na simamia mapendeleo yako ya anime';
+  String get animeDescription =>
+      'Binafsisha na simamia mapendeleo yako ya anime';
 
   @override
   String get darkMode => 'Hali ya Giza';
@@ -449,7 +458,8 @@ class AppLocalizationsSw extends AppLocalizations {
   String get enableDarkMode => 'Washa Hali ya Giza';
 
   @override
-  String get extensionsDescription => 'Sakinisha na usimamie viendelezi kwa kuongeza uwezo';
+  String get extensionsDescription =>
+      'Sakinisha na usimamie viendelezi kwa kuongeza uwezo';
 
   @override
   String get hiddenMedia => 'Vyombo vya Habari Vilivyofichwa';
@@ -458,19 +468,23 @@ class AppLocalizationsSw extends AppLocalizations {
   String get incognitoModeDescription => 'Tembea bila kuhifadhi shughuli zako';
 
   @override
-  String get mangaDescription => 'Pangilia na weka uzoefu wako wa manga kwa usahihi';
+  String get mangaDescription =>
+      'Pangilia na weka uzoefu wako wa manga kwa usahihi';
 
   @override
-  String get noFavourites => 'Inaonekana haupendi kitu chochote,\nJaribu kupenda onyesho ili kiwe hapa.';
+  String get noFavourites =>
+      'Inaonekana haupendi kitu chochote,\nJaribu kupenda onyesho ili kiwe hapa.';
 
   @override
-  String get noHiddenMediaFound => 'Hakuna vyombo vya habari vilivyofichwa vilivyopatikana';
+  String get noHiddenMediaFound =>
+      'Hakuna vyombo vya habari vilivyofichwa vilivyopatikana';
 
   @override
   String get noOnHold => 'Inaonekana haujaweka kitu chochote kwenye hifadhi.';
 
   @override
-  String get offlineModeDescription => 'Tumia programu bila muunganisho wa intaneti';
+  String get offlineModeDescription =>
+      'Tumia programu bila muunganisho wa intaneti';
 
   @override
   String get oledThemeVariant => 'Variant ya Mandhari ya OLED';
@@ -482,7 +496,8 @@ class AppLocalizationsSw extends AppLocalizations {
   String get outlineColor => 'Rangi ya Mstari wa Nje';
 
   @override
-  String get outlineColorDescription => 'Rangi ya mstari wa nje wa maneno ya kichwa';
+  String get outlineColorDescription =>
+      'Rangi ya mstari wa nje wa maneno ya kichwa';
 
   @override
   String get playerSettingsTitle => 'Mipangilio ya Mchezaji';
@@ -491,7 +506,8 @@ class AppLocalizationsSw extends AppLocalizations {
   String get recentUpdates => 'Mabadiliko ya Karibuni';
 
   @override
-  String get recommendationsEmptyMessage => 'Tazama/Soma Anime au Manga ili kupata Mapendekezo';
+  String get recommendationsEmptyMessage =>
+      'Tazama/Soma Anime au Manga ili kupata Mapendekezo';
 
   @override
   String get resizeMode => 'Hali ya Kubadilisha Ukubwa';
@@ -500,13 +516,15 @@ class AppLocalizationsSw extends AppLocalizations {
   String get resizeModeDescription => 'Hali ya kubadilisha ukubwa kwa mchezaji';
 
   @override
-  String get supportMaintainer => 'Unataka kusaidia Mtunzaji wa Dartotsu?\nFikiria Kuchangia';
+  String get supportMaintainer =>
+      'Unataka kusaidia Mtunzaji wa Dartotsu?\nFikiria Kuchangia';
 
   @override
   String get theme => 'Mandhari';
 
   @override
-  String get themeDescription => 'Binafsisha mwonekano na hali ya programu yako';
+  String get themeDescription =>
+      'Binafsisha mwonekano na hali ya programu yako';
 
   @override
   String get author => 'Author';
@@ -602,7 +620,8 @@ class AppLocalizationsSw extends AppLocalizations {
   String get customPath => 'Njia Maalum';
 
   @override
-  String get customPathDescription => 'Weka njia maalum ya kuhifadhi faili\nBonyeza kwa muda mrefu ili kuondoa';
+  String get customPathDescription =>
+      'Weka njia maalum ya kuhifadhi faili\nBonyeza kwa muda mrefu ili kuondoa';
 
   @override
   String get selectDirectory => 'Chagua saraka';
@@ -623,25 +642,29 @@ class AppLocalizationsSw extends AppLocalizations {
   String get addAnimeRepo => 'Ongeza Hazina ya Anime';
 
   @override
-  String get addAnimeRepoDesc => 'Ongeza Hazina ya Anime kutoka vyanzo mbalimbali';
+  String get addAnimeRepoDesc =>
+      'Ongeza Hazina ya Anime kutoka vyanzo mbalimbali';
 
   @override
   String get addMangaRepo => 'Ongeza Hazina ya Manga';
 
   @override
-  String get addMangaRepoDesc => 'Ongeza Hazina ya Manga kutoka vyanzo mbalimbali';
+  String get addMangaRepoDesc =>
+      'Ongeza Hazina ya Manga kutoka vyanzo mbalimbali';
 
   @override
   String get addNovelRepo => 'Ongeza Hazina ya Riwaya';
 
   @override
-  String get addNovelRepoDesc => 'Ongeza Hazina ya Riwaya kutoka vyanzo mbalimbali';
+  String get addNovelRepoDesc =>
+      'Ongeza Hazina ya Riwaya kutoka vyanzo mbalimbali';
 
   @override
   String get loadExtensionsIcon => 'Pakia Aikoni za Viongezi';
 
   @override
-  String get loadExtensionsIconDesc => 'Zima ikiwa ukurasa wa viongezi unachelewa';
+  String get loadExtensionsIconDesc =>
+      'Zima ikiwa ukurasa wa viongezi unachelewa';
 
   @override
   String get autoUpdate => 'Sasisho la Kiotomatiki';
@@ -668,7 +691,8 @@ class AppLocalizationsSw extends AppLocalizations {
   String get youTube => 'Cheza kwenye YouTube?';
 
   @override
-  String get installSourceToStart => 'Sakinisha chanzo kutoka ukurasa wa nyongeza kuanza';
+  String get installSourceToStart =>
+      'Sakinisha chanzo kutoka ukurasa wa nyongeza kuanza';
 
   @override
   String get watching => 'Inatazama';

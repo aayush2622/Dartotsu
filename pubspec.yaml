@@ -100,7 +100,7 @@ dependencies:
   collection: ^1.19.1
   flutter_web_auth_2: ^4.1.0
   flutter_dotenv: ^5.2.1
-  intl: ^0.19.0
+  intl: ^0.20.2
   epubx:
     path: ./epubx
 # Development dependencies

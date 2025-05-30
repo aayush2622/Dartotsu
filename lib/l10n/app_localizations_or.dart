@@ -317,7 +317,8 @@ class AppLocalizationsOr extends AppLocalizations {
   String get hidePrivate => 'ଗୋପନ ଚିହ୍ନଟ କରନ୍ତୁ';
 
   @override
-  String get hidePrivateDescription => 'ମୁଖ୍ୟ ପୃଷ୍ଠାରୁ ବ୍ୟକ୍ତିଗତ ଶ୍ରେଣୀଗୁଡିକ ଲୁଚାନ୍ତୁ।';
+  String get hidePrivateDescription =>
+      'ମୁଖ୍ୟ ପୃଷ୍ଠାରୁ ବ୍ୟକ୍ତିଗତ ଶ୍ରେଣୀଗୁଡିକ ଲୁଚାନ୍ତୁ।';
 
   @override
   String get fontColor => 'ଫନ୍ଟ ରଙ୍ଗ';
@@ -362,7 +363,8 @@ class AppLocalizationsOr extends AppLocalizations {
   String get cursedSpeed => 'ଶପିତ ଗତି';
 
   @override
-  String get cursedSpeedDescription => 'ସେମାନେ ପାଇଁ ଯେଉଁମାନେ ଜୀବନରେ ବହୁତ ବ୍ୟସ୍ତ ଅଟେ';
+  String get cursedSpeedDescription =>
+      'ସେମାନେ ପାଇଁ ଯେଉଁମାନେ ଜୀବନରେ ବହୁତ ବ୍ୟସ୍ତ ଅଟେ';
 
   @override
   String get speedDescription => 'ପ୍ଲେୟର ପାଇଁ ଡିଫଲ୍ଟ ଗତି';
@@ -398,40 +400,47 @@ class AppLocalizationsOr extends AppLocalizations {
   String get about => 'ସମ୍ପର୍କରେ';
 
   @override
-  String get aboutDescription => 'ଆପ୍ଲିକେସନ୍ ଏବଂ ତାହାର ସୃଷ୍ଟାଗଣ ବିଷୟରେ ଅଧିକ ଜାଣନ୍ତୁ';
+  String get aboutDescription =>
+      'ଆପ୍ଲିକେସନ୍ ଏବଂ ତାହାର ସୃଷ୍ଟାଗଣ ବିଷୟରେ ଅଧିକ ଜାଣନ୍ତୁ';
 
   @override
   String get common => 'ସାଧାରଣ';
 
   @override
-  String get commonDescription => 'ଆପ୍ ସହଜ ବ୍ୟବହାର ପାଇଁ ସାଧାରଣ ସେଟିଂସ୍ ଆକ୍ସେସ୍ କରନ୍ତୁ';
+  String get commonDescription =>
+      'ଆପ୍ ସହଜ ବ୍ୟବହାର ପାଇଁ ସାଧାରଣ ସେଟିଂସ୍ ଆକ୍ସେସ୍ କରନ୍ତୁ';
 
   @override
   String get materialYou => 'Material You';
 
   @override
-  String get materialYouDescription => 'ଆପଣଙ୍କର ଓଲେଡ଼ ୱାଲପେପର୍ ସହିତ ସେହି ରଙ୍ଗ ବ୍ୟବହାର କରନ୍ତୁ';
+  String get materialYouDescription =>
+      'ଆପଣଙ୍କର ଓଲେଡ଼ ୱାଲପେପର୍ ସହିତ ସେହି ରଙ୍ଗ ବ୍ୟବହାର କରନ୍ତୁ';
 
   @override
   String get customTheme => 'କଷ୍ଟମ୍ ଥିମ୍';
 
   @override
-  String get customThemeDescription => 'ଥିମ୍ ପାଇଁ ଆପଣଙ୍କର ସ୍ୱୟଂର ରଙ୍ଗ ବ୍ୟବହାର କରନ୍ତୁ';
+  String get customThemeDescription =>
+      'ଥିମ୍ ପାଇଁ ଆପଣଙ୍କର ସ୍ୱୟଂର ରଙ୍ଗ ବ୍ୟବହାର କରନ୍ତୁ';
 
   @override
   String get notifications => 'ସୂଚନା';
 
   @override
-  String get notificationsDescription => 'ଆପଣ କେବେ ଏବଂ କିପରି ସୂଚନା ଗ୍ରହଣ କରିବେ ତାହା ସେଟ୍ କରନ୍ତୁ';
+  String get notificationsDescription =>
+      'ଆପଣ କେବେ ଏବଂ କିପରି ସୂଚନା ଗ୍ରହଣ କରିବେ ତାହା ସେଟ୍ କରନ୍ତୁ';
 
   @override
-  String get accountDescription => 'ଆପଣଙ୍କର AniList, MAL, ଏବଂ Discord ଖାତା ସହଜରେ ପରିଚାଳନା କରନ୍ତୁ';
+  String get accountDescription =>
+      'ଆପଣଙ୍କର AniList, MAL, ଏବଂ Discord ଖାତା ସହଜରେ ପରିଚାଳନା କରନ୍ତୁ';
 
   @override
   String get allCaughtUpNew => 'ସମସ୍ତ କାମ ସମାପ୍ତ, ନୂତନ କ’ଣ?';
 
   @override
-  String get animeDescription => 'ଆପଣଙ୍କର ଅନିମେ ପସନ୍ଦଗୁଡିକୁ ବ୍ୟକ୍ତିଗତ କରନ୍ତୁ ଏବଂ ପରିଚାଳନା କରନ୍ତୁ';
+  String get animeDescription =>
+      'ଆପଣଙ୍କର ଅନିମେ ପସନ୍ଦଗୁଡିକୁ ବ୍ୟକ୍ତିଗତ କରନ୍ତୁ ଏବଂ ପରିଚାଳନା କରନ୍ତୁ';
 
   @override
   String get darkMode => 'ଡାର୍କ ମୋଡ୍';
@@ -449,19 +458,23 @@ class AppLocalizationsOr extends AppLocalizations {
   String get enableDarkMode => 'ଡାର୍କ ମୋଡ୍ ସକ୍ରିୟ କରନ୍ତୁ';
 
   @override
-  String get extensionsDescription => 'ଅଧିକ କାର୍ଯ୍ୟକ୍ଷମତା ପାଇଁ ବିସ୍ତାରଗୁଡିକୁ ଇନ୍ସ୍ଟଲ୍ ଏବଂ ପରିଚାଳନା କରନ୍ତୁ';
+  String get extensionsDescription =>
+      'ଅଧିକ କାର୍ଯ୍ୟକ୍ଷମତା ପାଇଁ ବିସ୍ତାରଗୁଡିକୁ ଇନ୍ସ୍ଟଲ୍ ଏବଂ ପରିଚାଳନା କରନ୍ତୁ';
 
   @override
   String get hiddenMedia => 'ଲୁଚାଇଥିବା ମାଧ୍ୟମ';
 
   @override
-  String get incognitoModeDescription => 'ଆପଣଙ୍କର କ୍ରିୟାକଳାପ ସଂରକ୍ଷଣ ବିନା ବ୍ରାଉଜ୍ କରନ୍ତୁ';
+  String get incognitoModeDescription =>
+      'ଆପଣଙ୍କର କ୍ରିୟାକଳାପ ସଂରକ୍ଷଣ ବିନା ବ୍ରାଉଜ୍ କରନ୍ତୁ';
 
   @override
-  String get mangaDescription => 'ଆପଣଙ୍କର ମଙ୍ଗା ଅନୁଭୂତିକୁ ଗଠନ କରନ୍ତୁ ଏବଂ କଷ୍ଟମାଇଜ୍ କରନ୍ତୁ';
+  String get mangaDescription =>
+      'ଆପଣଙ୍କର ମଙ୍ଗା ଅନୁଭୂତିକୁ ଗଠନ କରନ୍ତୁ ଏବଂ କଷ୍ଟମାଇଜ୍ କରନ୍ତୁ';
 
   @override
-  String get noFavourites => 'ଆପଣ କିଛି ଲାଇକ୍ କରିନାହାଁନ୍ତି,\n ଏଠାରେ ଏକ ଶୋକୁ ଲାଇକ୍ କରନ୍ତୁ।';
+  String get noFavourites =>
+      'ଆପଣ କିଛି ଲାଇକ୍ କରିନାହାଁନ୍ତି,\n ଏଠାରେ ଏକ ଶୋକୁ ଲାଇକ୍ କରନ୍ତୁ।';
 
   @override
   String get noHiddenMediaFound => 'କୌଣସି ଲୁଚାଇଥିବା ମାଧ୍ୟମ ମିଳିଲା ନାହିଁ';
@@ -470,7 +483,8 @@ class AppLocalizationsOr extends AppLocalizations {
   String get noOnHold => 'କୌଣସିବିରତି ଦିଆଯାଇନାହିଁ।';
 
   @override
-  String get offlineModeDescription => 'ଇଣ୍ଟରନେଟ୍ ସଂଯୋଗ ଛଡ଼ା ଆପ୍ଲିକେସନ୍ ବ୍ୟବହାର କରନ୍ତୁ';
+  String get offlineModeDescription =>
+      'ଇଣ୍ଟରନେଟ୍ ସଂଯୋଗ ଛଡ଼ା ଆପ୍ଲିକେସନ୍ ବ୍ୟବହାର କରନ୍ତୁ';
 
   @override
   String get oledThemeVariant => 'OLED ଥିମ୍ ଭାରିଏଣ୍ଟ';
@@ -491,7 +505,8 @@ class AppLocalizationsOr extends AppLocalizations {
   String get recentUpdates => 'ସମ୍ପ୍ରତି ଅଦ୍ୟତନ';
 
   @override
-  String get recommendationsEmptyMessage => 'ଆନିମେ କିମ୍ବା ମାଙ୍ଗା ପଢନ୍ତୁ କିମ୍ବା ଦେଖନ୍ତୁ ଯାହାଦ୍ୱାରା ସୁପାରିଶ ମିଳିବ';
+  String get recommendationsEmptyMessage =>
+      'ଆନିମେ କିମ୍ବା ମାଙ୍ଗା ପଢନ୍ତୁ କିମ୍ବା ଦେଖନ୍ତୁ ଯାହାଦ୍ୱାରା ସୁପାରିଶ ମିଳିବ';
 
   @override
   String get resizeMode => 'ପୁନଃ ଆକାର ମୋଡ୍';
@@ -500,13 +515,15 @@ class AppLocalizationsOr extends AppLocalizations {
   String get resizeModeDescription => 'ପ୍ଲେୟର ପାଇଁ ଡିଫଲ୍ଟ ଆକାର ମୋଡ୍';
 
   @override
-  String get supportMaintainer => 'Dartotsu ର ମେଣ୍ଟେନର୍କୁ ସମର୍ଥନ କରିବାକୁ ଚାହାଁଛନ୍ତି?\nଦାନ କରିବା ବିଚାର କରନ୍ତୁ';
+  String get supportMaintainer =>
+      'Dartotsu ର ମେଣ୍ଟେନର୍କୁ ସମର୍ଥନ କରିବାକୁ ଚାହାଁଛନ୍ତି?\nଦାନ କରିବା ବିଚାର କରନ୍ତୁ';
 
   @override
   String get theme => 'ଥିମ୍';
 
   @override
-  String get themeDescription => 'ଆପ୍ଲିକେସନ୍ ର ଦେଖା ଏବଂ ଅନୁଭୂତିକୁ ବ୍ୟକ୍ତିଗତ କରନ୍ତୁ';
+  String get themeDescription =>
+      'ଆପ୍ଲିକେସନ୍ ର ଦେଖା ଏବଂ ଅନୁଭୂତିକୁ ବ୍ୟକ୍ତିଗତ କରନ୍ତୁ';
 
   @override
   String get author => 'Author';
@@ -602,7 +619,8 @@ class AppLocalizationsOr extends AppLocalizations {
   String get customPath => 'କଷ୍ଟମ୍ ପଥ';
 
   @override
-  String get customPathDescription => 'ଫାଇଲ୍ ସେଭ୍ କରିବାକୁ ଏକ କଷ୍ଟମ୍ ପଥ ସେଟ୍ କରନ୍ତୁ\nଅପସାରଣ କରିବାକୁ ଲମ୍ବା ଦବାନ୍ତୁ';
+  String get customPathDescription =>
+      'ଫାଇଲ୍ ସେଭ୍ କରିବାକୁ ଏକ କଷ୍ଟମ୍ ପଥ ସେଟ୍ କରନ୍ତୁ\nଅପସାରଣ କରିବାକୁ ଲମ୍ବା ଦବାନ୍ତୁ';
 
   @override
   String get selectDirectory => 'ଏକ ଡିରେକ୍ଟୋରୀ ଚୟନ କରନ୍ତୁ';
@@ -641,13 +659,15 @@ class AppLocalizationsOr extends AppLocalizations {
   String get loadExtensionsIcon => 'ଏକ୍ସଟେନସନ୍ ଆଇକନ୍ ଲୋଡ୍ କରନ୍ତୁ';
 
   @override
-  String get loadExtensionsIconDesc => 'ଯଦି ଏକ୍ସଟେନସନ୍ ପୃଷ୍ଠା ଧୀର ହୋଇଥାଏ, ଏହା ଅସକ୍ରିୟ କରନ୍ତୁ';
+  String get loadExtensionsIconDesc =>
+      'ଯଦି ଏକ୍ସଟେନସନ୍ ପୃଷ୍ଠା ଧୀର ହୋଇଥାଏ, ଏହା ଅସକ୍ରିୟ କରନ୍ତୁ';
 
   @override
   String get autoUpdate => 'ସ୍ୱୟଂଚାଳିତ ଅଦ୍ୟତନ';
 
   @override
-  String get autoUpdateDesc => 'ଏକ୍ସଟେନସନ୍ ଗୁଡ଼ିକୁ ସ୍ୱୟଂଚାଳିତ ଭାବରେ ଅଦ୍ୟତନ କରନ୍ତୁ';
+  String get autoUpdateDesc =>
+      'ଏକ୍ସଟେନସନ୍ ଗୁଡ଼ିକୁ ସ୍ୱୟଂଚାଳିତ ଭାବରେ ଅଦ୍ୟତନ କରନ୍ତୁ';
 
   @override
   String get readStatus => 'ପଢନ୍ତୁ';
@@ -668,7 +688,8 @@ class AppLocalizationsOr extends AppLocalizations {
   String get youTube => 'YouTube ରେ ଚଲାଇବେ?';
 
   @override
-  String get installSourceToStart => 'ଆରମ୍ଭ କରିବାକୁ ବିସ୍ତାର ପୃଷ୍ଠାରୁ ଉତ୍ସ ସ୍ଥାପନ କରନ୍ତୁ';
+  String get installSourceToStart =>
+      'ଆରମ୍ଭ କରିବାକୁ ବିସ୍ତାର ପୃଷ୍ଠାରୁ ଉତ୍ସ ସ୍ଥାପନ କରନ୍ତୁ';
 
   @override
   String get watching => 'ଦେଖୁଛି';

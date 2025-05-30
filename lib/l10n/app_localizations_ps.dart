@@ -162,7 +162,8 @@ class AppLocalizationsPs extends AppLocalizations {
   }
 
   @override
-  String get confirmLogout => 'آیا مطمئن هستید که می‌خواهید از سیستم خارج شوید؟';
+  String get confirmLogout =>
+      'آیا مطمئن هستید که می‌خواهید از سیستم خارج شوید؟';
 
   @override
   String get options => 'گزینه‌ها';
@@ -317,7 +318,8 @@ class AppLocalizationsPs extends AppLocalizations {
   String get hidePrivate => 'پټ معلومات پټ کړئ';
 
   @override
-  String get hidePrivateDescription => 'سریال‌های خصوصی را از صفحه اصلی پنهان کن.';
+  String get hidePrivateDescription =>
+      'سریال‌های خصوصی را از صفحه اصلی پنهان کن.';
 
   @override
   String get fontColor => 'د فونټ رنګ';
@@ -362,7 +364,8 @@ class AppLocalizationsPs extends AppLocalizations {
   String get cursedSpeed => 'بد قسمت سرعت';
 
   @override
-  String get cursedSpeedDescription => 'د هغو کسانو لپاره چې په ژوند کې ډېر بوخت دي';
+  String get cursedSpeedDescription =>
+      'د هغو کسانو لپاره چې په ژوند کې ډېر بوخت دي';
 
   @override
   String get speedDescription => 'د پلیر لپاره ډیفالټ سرعت';
@@ -398,13 +401,15 @@ class AppLocalizationsPs extends AppLocalizations {
   String get about => 'په اړه';
 
   @override
-  String get aboutDescription => 'د اپلیکیشن او د دې جوړونکو په اړه نور معلومات ترلاسه کړئ';
+  String get aboutDescription =>
+      'د اپلیکیشن او د دې جوړونکو په اړه نور معلومات ترلاسه کړئ';
 
   @override
   String get common => 'عام';
 
   @override
-  String get commonDescription => 'د اپلیکیشن د اسانه کارولو لپاره عمومي تنظیمات ته لاسرسی';
+  String get commonDescription =>
+      'د اپلیکیشن د اسانه کارولو لپاره عمومي تنظیمات ته لاسرسی';
 
   @override
   String get materialYou => 'Material You';
@@ -422,10 +427,12 @@ class AppLocalizationsPs extends AppLocalizations {
   String get notifications => 'خبرتیاوې';
 
   @override
-  String get notificationsDescription => 'تاسو څنګه او کله خبرتیاوې ترلاسه کوئ تنظیم کړئ';
+  String get notificationsDescription =>
+      'تاسو څنګه او کله خبرتیاوې ترلاسه کوئ تنظیم کړئ';
 
   @override
-  String get accountDescription => 'خپل AniList، MAL، او Discord حسابونه په اسانۍ سره مدیریت کړئ';
+  String get accountDescription =>
+      'خپل AniList، MAL، او Discord حسابونه په اسانۍ سره مدیریت کړئ';
 
   @override
   String get allCaughtUpNew => 'همه را تماشا کرده‌اید، کی قسمت جدید می‌آید؟';
@@ -449,25 +456,29 @@ class AppLocalizationsPs extends AppLocalizations {
   String get enableDarkMode => 'تیاره حالت فعال کړئ';
 
   @override
-  String get extensionsDescription => 'اضافي فعالیت لپاره غځونې نصب او مدیریت کړئ';
+  String get extensionsDescription =>
+      'اضافي فعالیت لپاره غځونې نصب او مدیریت کړئ';
 
   @override
   String get hiddenMedia => 'رسانه‌های پنهان شده';
 
   @override
-  String get incognitoModeDescription => 'بې له دې چې ستاسو فعالیت خوندي شي، لټون وکړئ';
+  String get incognitoModeDescription =>
+      'بې له دې چې ستاسو فعالیت خوندي شي، لټون وکړئ';
 
   @override
   String get mangaDescription => 'خپل د مانګا تجربه تنظیم کړئ او اداره یې کړئ';
 
   @override
-  String get noFavourites => 'به نظر می‌رسد شما هیچ چیزی را دوست ندارید،\nسعی کنید یک برنامه را پسند کنید تا در اینجا نگه داشته شود.';
+  String get noFavourites =>
+      'به نظر می‌رسد شما هیچ چیزی را دوست ندارید،\nسعی کنید یک برنامه را پسند کنید تا در اینجا نگه داشته شود.';
 
   @override
   String get noHiddenMediaFound => 'رسانه‌ی پنهانی پیدا نشد';
 
   @override
-  String get noOnHold => 'به نظر می‌رسد شما هیچ چیزی را در حال تعلیق قرار نداده‌اید.';
+  String get noOnHold =>
+      'به نظر می‌رسد شما هیچ چیزی را در حال تعلیق قرار نداده‌اید.';
 
   @override
   String get offlineModeDescription => 'اپلیکیشن د انټرنیټ پرته وکاروئ';
@@ -491,16 +502,19 @@ class AppLocalizationsPs extends AppLocalizations {
   String get recentUpdates => 'بروزرسانی‌های اخیر';
 
   @override
-  String get recommendationsEmptyMessage => 'برای دریافت پیشنهادات، چند انیمه یا مانگا تماشا/خوانده کنید';
+  String get recommendationsEmptyMessage =>
+      'برای دریافت پیشنهادات، چند انیمه یا مانگا تماشا/خوانده کنید';
 
   @override
   String get resizeMode => 'د اندازې بدلولو حالت';
 
   @override
-  String get resizeModeDescription => 'د پلیر لپاره د اندازې بدلولو ډیفالټ حالت';
+  String get resizeModeDescription =>
+      'د پلیر لپاره د اندازې بدلولو ډیفالټ حالت';
 
   @override
-  String get supportMaintainer => 'غواړئ د Dartotsu ساتونکي ملاتړ وکړئ؟\nمرسته وکړئ';
+  String get supportMaintainer =>
+      'غواړئ د Dartotsu ساتونکي ملاتړ وکړئ؟\nمرسته وکړئ';
 
   @override
   String get theme => 'موضوع';
@@ -602,7 +616,8 @@ class AppLocalizationsPs extends AppLocalizations {
   String get customPath => 'دودیزه لاره';
 
   @override
-  String get customPathDescription => 'د فایلونو خوندي کولو لپاره دودیز لاره تنظیم کړئ\nد لرې کولو لپاره اوږد فشار ورکړئ';
+  String get customPathDescription =>
+      'د فایلونو خوندي کولو لپاره دودیز لاره تنظیم کړئ\nد لرې کولو لپاره اوږد فشار ورکړئ';
 
   @override
   String get selectDirectory => 'لارښود غوره کړئ';
@@ -623,13 +638,15 @@ class AppLocalizationsPs extends AppLocalizations {
   String get addAnimeRepo => 'د انیمې ذخیره اضافه کړئ';
 
   @override
-  String get addAnimeRepoDesc => 'د بیلابیلو سرچینو څخه د انیمې ذخیره اضافه کړئ';
+  String get addAnimeRepoDesc =>
+      'د بیلابیلو سرچینو څخه د انیمې ذخیره اضافه کړئ';
 
   @override
   String get addMangaRepo => 'د مانګا ذخیره اضافه کړئ';
 
   @override
-  String get addMangaRepoDesc => 'د بیلابیلو سرچینو څخه د مانګا ذخیره اضافه کړئ';
+  String get addMangaRepoDesc =>
+      'د بیلابیلو سرچینو څخه د مانګا ذخیره اضافه کړئ';
 
   @override
   String get addNovelRepo => 'د ناول ذخیره اضافه کړئ';
@@ -641,7 +658,8 @@ class AppLocalizationsPs extends AppLocalizations {
   String get loadExtensionsIcon => 'د غزونو نښه پورته کړئ';
 
   @override
-  String get loadExtensionsIconDesc => 'که د غزونو پاڼه ځنډېږي، دا غیر فعال کړئ';
+  String get loadExtensionsIconDesc =>
+      'که د غزونو پاڼه ځنډېږي، دا غیر فعال کړئ';
 
   @override
   String get autoUpdate => 'خودکار تازه کول';
@@ -668,7 +686,8 @@ class AppLocalizationsPs extends AppLocalizations {
   String get youTube => 'په یوټیوب کې لوبول؟';
 
   @override
-  String get installSourceToStart => 'د پیل لپاره د غزونې پاڼې څخه سرچینه نصب کړئ';
+  String get installSourceToStart =>
+      'د پیل لپاره د غزونې پاڼې څخه سرچینه نصب کړئ';
 
   @override
   String get watching => 'کتل';

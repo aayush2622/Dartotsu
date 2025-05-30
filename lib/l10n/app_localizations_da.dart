@@ -404,7 +404,8 @@ class AppLocalizationsDa extends AppLocalizations {
   String get common => 'Almindelig';
 
   @override
-  String get commonDescription => 'Få adgang til generelle indstillinger for nem appbrug';
+  String get commonDescription =>
+      'Få adgang til generelle indstillinger for nem appbrug';
 
   @override
   String get materialYou => 'Material You';
@@ -422,10 +423,12 @@ class AppLocalizationsDa extends AppLocalizations {
   String get notifications => 'Notifikationer';
 
   @override
-  String get notificationsDescription => 'Konfigurer hvordan og hvornår du modtager notifikationer';
+  String get notificationsDescription =>
+      'Konfigurer hvordan og hvornår du modtager notifikationer';
 
   @override
-  String get accountDescription => 'Administrer dine AniList-, MAL- og Discord-konti nemt';
+  String get accountDescription =>
+      'Administrer dine AniList-, MAL- og Discord-konti nemt';
 
   @override
   String get allCaughtUpNew => 'Alt fanget, hvad er nyt?';
@@ -449,7 +452,8 @@ class AppLocalizationsDa extends AppLocalizations {
   String get enableDarkMode => 'Aktivér mørk tilstand';
 
   @override
-  String get extensionsDescription => 'Installer og administrer udvidelser for ekstra funktionalitet';
+  String get extensionsDescription =>
+      'Installer og administrer udvidelser for ekstra funktionalitet';
 
   @override
   String get hiddenMedia => 'Skjulte medier';
@@ -461,7 +465,8 @@ class AppLocalizationsDa extends AppLocalizations {
   String get mangaDescription => 'Organiser og tilpas din manga-oplevelse';
 
   @override
-  String get noFavourites => 'Det ser ud til, at du ikke kan lide noget,\nPrøv at like et show for at beholde det her.';
+  String get noFavourites =>
+      'Det ser ud til, at du ikke kan lide noget,\nPrøv at like et show for at beholde det her.';
 
   @override
   String get noHiddenMediaFound => 'Ingen skjulte medier fundet';
@@ -497,10 +502,12 @@ class AppLocalizationsDa extends AppLocalizations {
   String get resizeMode => 'Tilpasningstilstand';
 
   @override
-  String get resizeModeDescription => 'Standardtilpasningstilstand for afspilleren';
+  String get resizeModeDescription =>
+      'Standardtilpasningstilstand for afspilleren';
 
   @override
-  String get supportMaintainer => 'Vil du støtte Dartotsus vedligeholder?\nOvervej at donere';
+  String get supportMaintainer =>
+      'Vil du støtte Dartotsus vedligeholder?\nOvervej at donere';
 
   @override
   String get theme => 'Tema';
@@ -602,7 +609,8 @@ class AppLocalizationsDa extends AppLocalizations {
   String get customPath => 'Tilpasset vej';
 
   @override
-  String get customPathDescription => 'Indstil en brugerdefineret sti til at gemme filer\nLang tryk for at fjerne';
+  String get customPathDescription =>
+      'Indstil en brugerdefineret sti til at gemme filer\nLang tryk for at fjerne';
 
   @override
   String get selectDirectory => 'Vælg en mappe';
@@ -668,7 +676,8 @@ class AppLocalizationsDa extends AppLocalizations {
   String get youTube => 'Afspil på YouTube?';
 
   @override
-  String get installSourceToStart => 'Installer en kilde fra udvidelsessiden for at starte';
+  String get installSourceToStart =>
+      'Installer en kilde fra udvidelsessiden for at starte';
 
   @override
   String get watching => 'Ser på';

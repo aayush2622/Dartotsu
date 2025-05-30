@@ -12,7 +12,8 @@ class AppLocalizationsHr extends AppLocalizations {
   String get appName => 'Dartotsu';
 
   @override
-  String get appTagline => 'Nova najbolja aplikacija za\npraćenje animea i mange';
+  String get appTagline =>
+      'Nova najbolja aplikacija za\npraćenje animea i mange';
 
   @override
   String get anilist => 'AniList';
@@ -317,7 +318,8 @@ class AppLocalizationsHr extends AppLocalizations {
   String get hidePrivate => 'Sakrij privatno';
 
   @override
-  String get hidePrivateDescription => 'Sakrij privatne serije s početne stranice.';
+  String get hidePrivateDescription =>
+      'Sakrij privatne serije s početne stranice.';
 
   @override
   String get fontColor => 'Boja fonta';
@@ -347,7 +349,8 @@ class AppLocalizationsHr extends AppLocalizations {
   String get showSubtitles => 'Prikaži titlove';
 
   @override
-  String get showSubtitlesDescription => 'Prikaži titlove prema zadanim postavkama';
+  String get showSubtitlesDescription =>
+      'Prikaži titlove prema zadanim postavkama';
 
   @override
   String get skipButton => 'Preskakanje';
@@ -398,13 +401,15 @@ class AppLocalizationsHr extends AppLocalizations {
   String get about => 'O aplikaciji';
 
   @override
-  String get aboutDescription => 'Saznajte više o aplikaciji i njezinim tvorcima';
+  String get aboutDescription =>
+      'Saznajte više o aplikaciji i njezinim tvorcima';
 
   @override
   String get common => 'Općenito';
 
   @override
-  String get commonDescription => 'Pristupite općim postavkama za lakše korištenje aplikacije';
+  String get commonDescription =>
+      'Pristupite općim postavkama za lakše korištenje aplikacije';
 
   @override
   String get materialYou => 'Material You';
@@ -422,7 +427,8 @@ class AppLocalizationsHr extends AppLocalizations {
   String get notifications => 'Obavijesti';
 
   @override
-  String get notificationsDescription => 'Postavite kako i kada želite primati obavijesti';
+  String get notificationsDescription =>
+      'Postavite kako i kada želite primati obavijesti';
 
   @override
   String get accountDescription => 'Jednostavno upravljajte svojim računima';
@@ -431,7 +437,8 @@ class AppLocalizationsHr extends AppLocalizations {
   String get allCaughtUpNew => 'Sve je uhvaćeno, što je novo?';
 
   @override
-  String get animeDescription => 'Personalizirajte i upravljajte svojim anime preferencijama';
+  String get animeDescription =>
+      'Personalizirajte i upravljajte svojim anime preferencijama';
 
   @override
   String get darkMode => 'Tamni način rada';
@@ -449,19 +456,23 @@ class AppLocalizationsHr extends AppLocalizations {
   String get enableDarkMode => 'Omogući tamni način rada';
 
   @override
-  String get extensionsDescription => 'Instalirajte i upravljajte ekstenzijama za dodatne funkcionalnosti';
+  String get extensionsDescription =>
+      'Instalirajte i upravljajte ekstenzijama za dodatne funkcionalnosti';
 
   @override
   String get hiddenMedia => 'Skriveni sadržaj';
 
   @override
-  String get incognitoModeDescription => 'Pregledavajte bez spremanja aktivnosti';
+  String get incognitoModeDescription =>
+      'Pregledavajte bez spremanja aktivnosti';
 
   @override
-  String get mangaDescription => 'Organizirajte i prilagodite svoje iskustvo čitanja mange';
+  String get mangaDescription =>
+      'Organizirajte i prilagodite svoje iskustvo čitanja mange';
 
   @override
-  String get noFavourites => 'Izgleda da ti se ništa ne sviđa,\nPokušaj dodati emisiju u favorite da je držiš ovdje.';
+  String get noFavourites =>
+      'Izgleda da ti se ništa ne sviđa,\nPokušaj dodati emisiju u favorite da je držiš ovdje.';
 
   @override
   String get noHiddenMediaFound => 'Nije pronađen skriveni sadržaj';
@@ -470,7 +481,8 @@ class AppLocalizationsHr extends AppLocalizations {
   String get noOnHold => 'Izgleda da ništa nije stavljeno na čekanje.';
 
   @override
-  String get offlineModeDescription => 'Koristite aplikaciju bez internetske veze';
+  String get offlineModeDescription =>
+      'Koristite aplikaciju bez internetske veze';
 
   @override
   String get oledThemeVariant => 'OLED tema';
@@ -491,7 +503,8 @@ class AppLocalizationsHr extends AppLocalizations {
   String get recentUpdates => 'Nedavne izmjene';
 
   @override
-  String get recommendationsEmptyMessage => 'Gledajte/Čitajte Anime ili Mangu za preporuke';
+  String get recommendationsEmptyMessage =>
+      'Gledajte/Čitajte Anime ili Mangu za preporuke';
 
   @override
   String get resizeMode => 'Način prilagodbe';
@@ -500,7 +513,8 @@ class AppLocalizationsHr extends AppLocalizations {
   String get resizeModeDescription => 'Zadani način prilagodbe za player';
 
   @override
-  String get supportMaintainer => 'Želite li podržati održavatelja Dartotsua?\nRazmislite o donaciji';
+  String get supportMaintainer =>
+      'Želite li podržati održavatelja Dartotsua?\nRazmislite o donaciji';
 
   @override
   String get theme => 'Tema';
@@ -602,7 +616,8 @@ class AppLocalizationsHr extends AppLocalizations {
   String get customPath => 'Prilagođeni put';
 
   @override
-  String get customPathDescription => 'Postavite prilagođeni put za spremanje datoteka\nDugo pritisnite za uklanjanje';
+  String get customPathDescription =>
+      'Postavite prilagođeni put za spremanje datoteka\nDugo pritisnite za uklanjanje';
 
   @override
   String get selectDirectory => 'Odaberite imenik';
@@ -641,7 +656,8 @@ class AppLocalizationsHr extends AppLocalizations {
   String get loadExtensionsIcon => 'Učitaj ikonu proširenja';
 
   @override
-  String get loadExtensionsIconDesc => 'Onemogući ako stranica proširenja usporava';
+  String get loadExtensionsIconDesc =>
+      'Onemogući ako stranica proširenja usporava';
 
   @override
   String get autoUpdate => 'Automatsko ažuriranje';
@@ -668,7 +684,8 @@ class AppLocalizationsHr extends AppLocalizations {
   String get youTube => 'Reproduciraj na YouTubeu?';
 
   @override
-  String get installSourceToStart => 'Instalirajte izvor sa stranice proširenja za početak';
+  String get installSourceToStart =>
+      'Instalirajte izvor sa stranice proširenja za početak';
 
   @override
   String get watching => 'Gledanje';

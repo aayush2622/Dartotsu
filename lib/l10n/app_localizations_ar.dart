@@ -317,7 +317,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get hidePrivate => 'إخفاء المحتوى الخاص';
 
   @override
-  String get hidePrivateDescription => 'إخفاء المحتوى الخاص من الصفحة الرئيسية.';
+  String get hidePrivateDescription =>
+      'إخفاء المحتوى الخاص من الصفحة الرئيسية.';
 
   @override
   String get fontColor => 'لون الخط';
@@ -404,7 +405,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get common => 'عام';
 
   @override
-  String get commonDescription => 'الوصول إلى الإعدادات العامة لاستخدام التطبيق بسلاسة';
+  String get commonDescription =>
+      'الوصول إلى الإعدادات العامة لاستخدام التطبيق بسلاسة';
 
   @override
   String get materialYou => 'Material You';
@@ -425,7 +427,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get notificationsDescription => 'تخصيص كيفية و وقت تلقي الإشعارات';
 
   @override
-  String get accountDescription => 'إدارة حسابات AniList و MAL و Discord بكل سهولة';
+  String get accountDescription =>
+      'إدارة حسابات AniList و MAL و Discord بكل سهولة';
 
   @override
   String get allCaughtUpNew => 'كل شيء عالق، ما هو جديد؟?';
@@ -449,7 +452,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get enableDarkMode => 'تفعيل الوضع المظلم';
 
   @override
-  String get extensionsDescription => 'تثبيت وإدارة الإضافات لإضافة وظائف إضافية';
+  String get extensionsDescription =>
+      'تثبيت وإدارة الإضافات لإضافة وظائف إضافية';
 
   @override
   String get hiddenMedia => 'المحتوي المخفي';
@@ -461,7 +465,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get mangaDescription => 'تنظيم وتخصيص تجربتك مع المانجا';
 
   @override
-  String get noFavourites => 'يبدو أنك لا تحب شيئا،\nحاول الإعجاب بالعرض للاحتفاظ به هنا.';
+  String get noFavourites =>
+      'يبدو أنك لا تحب شيئا،\nحاول الإعجاب بالعرض للاحتفاظ به هنا.';
 
   @override
   String get noHiddenMediaFound => 'لا يوجد محتوي مخفي';
@@ -491,7 +496,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get recentUpdates => 'التحديثات الأخيرة';
 
   @override
-  String get recommendationsEmptyMessage => 'شاهد/اقرأ بعض الأنمي أو المانجا للحصول على توصيات';
+  String get recommendationsEmptyMessage =>
+      'شاهد/اقرأ بعض الأنمي أو المانجا للحصول على توصيات';
 
   @override
   String get resizeMode => 'وضع تغيير الحجم';
@@ -500,7 +506,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get resizeModeDescription => 'وضع الحجم الافتراضي لمشغل الفيديو';
 
   @override
-  String get supportMaintainer => 'هل تريد دعم القائم على مطور Dartotsu؟\nفكر في التبرع';
+  String get supportMaintainer =>
+      'هل تريد دعم القائم على مطور Dartotsu؟\nفكر في التبرع';
 
   @override
   String get theme => 'الثيم';
@@ -602,7 +609,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get customPath => 'مسار التنزيل';
 
   @override
-  String get customPathDescription => 'وضع مسار لتنزيل الملفات\nاضغط ضغطة طويلة لإزالته';
+  String get customPathDescription =>
+      'وضع مسار لتنزيل الملفات\nاضغط ضغطة طويلة لإزالته';
 
   @override
   String get selectDirectory => 'اختر مسار';

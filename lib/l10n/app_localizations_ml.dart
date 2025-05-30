@@ -12,7 +12,8 @@ class AppLocalizationsMl extends AppLocalizations {
   String get appName => 'Dartotsu';
 
   @override
-  String get appTagline => 'പുതിയ മികച്ച ആപ്പ്\nആനിമെ & മംഗ ട്രാക്ക് ചെയ്യുന്നതിനായി';
+  String get appTagline =>
+      'പുതിയ മികച്ച ആപ്പ്\nആനിമെ & മംഗ ട്രാക്ക് ചെയ്യുന്നതിനായി';
 
   @override
   String get anilist => 'AniList';
@@ -162,7 +163,8 @@ class AppLocalizationsMl extends AppLocalizations {
   }
 
   @override
-  String get confirmLogout => 'നിങ്ങൾ ലോഗ് ഔട്ട് ചെയ്യാൻ ഉറപ്പായിരിക്കുന്നു എന്ന് ഉറപ്പാക്കാമോ?';
+  String get confirmLogout =>
+      'നിങ്ങൾ ലോഗ് ഔട്ട് ചെയ്യാൻ ഉറപ്പായിരിക്കുന്നു എന്ന് ഉറപ്പാക്കാമോ?';
 
   @override
   String get options => 'Options';
@@ -317,7 +319,8 @@ class AppLocalizationsMl extends AppLocalizations {
   String get hidePrivate => 'സ്വകാര്യമാക്കുക';
 
   @override
-  String get hidePrivateDescription => 'സ്വകാര്യ സീരീസ് ഹോം പേജിൽ കാണിച്ചുകൂടായിരിക്കും.';
+  String get hidePrivateDescription =>
+      'സ്വകാര്യ സീരീസ് ഹോം പേജിൽ കാണിച്ചുകൂടായിരിക്കും.';
 
   @override
   String get fontColor => 'ഫോണ്ട് നിറം';
@@ -347,7 +350,8 @@ class AppLocalizationsMl extends AppLocalizations {
   String get showSubtitles => 'സബ്റ്റൈറ്റലുകൾ കാണിക്കുക';
 
   @override
-  String get showSubtitlesDescription => 'ഡിഫോൾട്ടായും സബ്റ്റൈറ്റലുകൾ കാണിക്കുക';
+  String get showSubtitlesDescription =>
+      'ഡിഫോൾട്ടായും സബ്റ്റൈറ്റലുകൾ കാണിക്കുക';
 
   @override
   String get skipButton => 'സ്കിപ്പ് ബട്ടൺ';
@@ -398,7 +402,8 @@ class AppLocalizationsMl extends AppLocalizations {
   String get about => 'പറ്റി';
 
   @override
-  String get aboutDescription => 'ആപ്പും അതിന്റെ സ്രഷ്ടാക്കളും കുറിച്ച് കൂടുതൽ അറിയുക';
+  String get aboutDescription =>
+      'ആപ്പും അതിന്റെ സ്രഷ്ടാക്കളും കുറിച്ച് കൂടുതൽ അറിയുക';
 
   @override
   String get common => 'സാധാരണ';
@@ -410,28 +415,33 @@ class AppLocalizationsMl extends AppLocalizations {
   String get materialYou => 'Material You';
 
   @override
-  String get materialYouDescription => 'നിങ്ങളുടെ വാള്പപ്പറിന്റെ നിറം പോലെ തന്നെ ഒരു നിറം ഉപയോഗിക്കുക';
+  String get materialYouDescription =>
+      'നിങ്ങളുടെ വാള്പപ്പറിന്റെ നിറം പോലെ തന്നെ ഒരു നിറം ഉപയോഗിക്കുക';
 
   @override
   String get customTheme => 'സ്വയം നിർമിതിയുള്ള തീം';
 
   @override
-  String get customThemeDescription => 'നിങ്ങളുടെ സ്വന്തം നിറം തീമിൽ ഉപയോഗിക്കുക';
+  String get customThemeDescription =>
+      'നിങ്ങളുടെ സ്വന്തം നിറം തീമിൽ ഉപയോഗിക്കുക';
 
   @override
   String get notifications => 'നോട്ടിഫിക്കേഷനുകൾ';
 
   @override
-  String get notificationsDescription => 'നിങ്ങളുടെ നോട്ടിഫിക്കേഷനുകൾ എങ്ങനെ, എപ്പോൾ ലഭിക്കണമെന്ന് ക്രമീകരിക്കുക';
+  String get notificationsDescription =>
+      'നിങ്ങളുടെ നോട്ടിഫിക്കേഷനുകൾ എങ്ങനെ, എപ്പോൾ ലഭിക്കണമെന്ന് ക്രമീകരിക്കുക';
 
   @override
-  String get accountDescription => 'നിങ്ങളുടെ AniList, MAL, Discord അക്കൗണ്ടുകൾ എളുപ്പത്തിൽ നിയന്ത്രിക്കുക';
+  String get accountDescription =>
+      'നിങ്ങളുടെ AniList, MAL, Discord അക്കൗണ്ടുകൾ എളുപ്പത്തിൽ നിയന്ത്രിക്കുക';
 
   @override
   String get allCaughtUpNew => 'എല്ലാം പൂർണ്ണമായിരിക്കുക, പുതിയ എന്ത്?';
 
   @override
-  String get animeDescription => 'നിങ്ങളുടെ ആനിമെ പ്രിയപ്പെട്ടവ personalize ചെയ്യുകയും നിയന്ത്രിക്കുകയും ചെയ്യുക';
+  String get animeDescription =>
+      'നിങ്ങളുടെ ആനിമെ പ്രിയപ്പെട്ടവ personalize ചെയ്യുകയും നിയന്ത്രിക്കുകയും ചെയ്യുക';
 
   @override
   String get darkMode => 'ഡാർക്ക് മോഡ്';
@@ -449,19 +459,23 @@ class AppLocalizationsMl extends AppLocalizations {
   String get enableDarkMode => 'ഡാർക്ക് മോഡ് സജീവമാക്കുക';
 
   @override
-  String get extensionsDescription => 'കൂടുതൽ പ്രവർത്തനക്ഷമതയ്‌ക്കായി വിശേഷങ്ങൾ ഇൻസ്റ്റാൾ ചെയ്ത് നിയന്ത്രിക്കുക';
+  String get extensionsDescription =>
+      'കൂടുതൽ പ്രവർത്തനക്ഷമതയ്‌ക്കായി വിശേഷങ്ങൾ ഇൻസ്റ്റാൾ ചെയ്ത് നിയന്ത്രിക്കുക';
 
   @override
   String get hiddenMedia => 'ലൊക്കിച്ച മീഡിയ';
 
   @override
-  String get incognitoModeDescription => 'നിങ്ങളുടെ പ്രവർത്തനങ്ങൾ സംരക്ഷിക്കുന്നില്ലാതെ ബ്രൗസ് ചെയ്യുക';
+  String get incognitoModeDescription =>
+      'നിങ്ങളുടെ പ്രവർത്തനങ്ങൾ സംരക്ഷിക്കുന്നില്ലാതെ ബ്രൗസ് ചെയ്യുക';
 
   @override
-  String get mangaDescription => 'നിങ്ങളുടെ മംഗ അനുഭവം ക്രമീകരിക്കുക, ഇഷ്ടാനുസൃതമാക്കുക';
+  String get mangaDescription =>
+      'നിങ്ങളുടെ മംഗ അനുഭവം ക്രമീകരിക്കുക, ഇഷ്ടാനുസൃതമാക്കുക';
 
   @override
-  String get noFavourites => 'നിങ്ങൾക്ക് ഒരു ഓർമ്മ എനിക്ക് ഇഷ്ടപ്പെടുന്നില്ല,\nഒരുപാട് പ്രദർശിപ്പിക്കപ്പെടുന്ന ഒരു ഷോ ഇഷ്ടപ്പെടാൻ ശ്രമിക്കുക.';
+  String get noFavourites =>
+      'നിങ്ങൾക്ക് ഒരു ഓർമ്മ എനിക്ക് ഇഷ്ടപ്പെടുന്നില്ല,\nഒരുപാട് പ്രദർശിപ്പിക്കപ്പെടുന്ന ഒരു ഷോ ഇഷ്ടപ്പെടാൻ ശ്രമിക്കുക.';
 
   @override
   String get noHiddenMediaFound => 'ലൊക്കിച്ച മീഡിയ കണ്ടെത്തിയില്ല';
@@ -470,7 +484,8 @@ class AppLocalizationsMl extends AppLocalizations {
   String get noOnHold => 'നിങ്ങൾ ഒന്നും നിർത്തിയിട്ടില്ലെന്ന് തോന്നുന്നു.';
 
   @override
-  String get offlineModeDescription => 'ഇന്റർനെറ്റ് കണക്ഷൻ ഇല്ലാതെ ആപ്പ് ഉപയോഗിക്കുക';
+  String get offlineModeDescription =>
+      'ഇന്റർനെറ്റ് കണക്ഷൻ ഇല്ലാതെ ആപ്പ് ഉപയോഗിക്കുക';
 
   @override
   String get oledThemeVariant => 'OLED തീം വേരിയന്റ്';
@@ -491,16 +506,19 @@ class AppLocalizationsMl extends AppLocalizations {
   String get recentUpdates => 'സമീപകാല പുതുക്കലുകൾ';
 
   @override
-  String get recommendationsEmptyMessage => 'അനി/മംഗ വാചകം/കാണുക എടുക്കുക എങ്ങനെ';
+  String get recommendationsEmptyMessage =>
+      'അനി/മംഗ വാചകം/കാണുക എടുക്കുക എങ്ങനെ';
 
   @override
   String get resizeMode => 'പുനർവലിപ്പിക്കുക മോഡ്';
 
   @override
-  String get resizeModeDescription => 'പ്ലേयर പുനർവലിപ്പിക്കുന്നതിന് ഡിഫോൾട്ട് മോഡ്';
+  String get resizeModeDescription =>
+      'പ്ലേयर പുനർവലിപ്പിക്കുന്നതിന് ഡിഫോൾട്ട് മോഡ്';
 
   @override
-  String get supportMaintainer => 'Dartotsu സ്രഷ്ടാവിനെ പിന്തുണയ്ക്കണോ?\nദാനം ചെയ്യാൻ പരിഗണിക്കുക';
+  String get supportMaintainer =>
+      'Dartotsu സ്രഷ്ടാവിനെ പിന്തുണയ്ക്കണോ?\nദാനം ചെയ്യാൻ പരിഗണിക്കുക';
 
   @override
   String get theme => 'തീം';
@@ -602,7 +620,8 @@ class AppLocalizationsMl extends AppLocalizations {
   String get customPath => 'ഇഷ്ടാനുസൃത പാത';
 
   @override
-  String get customPathDescription => 'ഫയലുകൾ സംരക്ഷിക്കാൻ ഒരു ഇഷ്‌ടാനുസൃത പാത സജ്ജമാക്കുക\nനീക്കം ചെയ്യാൻ ദീർഘനേരം അമർത്തുക';
+  String get customPathDescription =>
+      'ഫയലുകൾ സംരക്ഷിക്കാൻ ഒരു ഇഷ്‌ടാനുസൃത പാത സജ്ജമാക്കുക\nനീക്കം ചെയ്യാൻ ദീർഘനേരം അമർത്തുക';
 
   @override
   String get selectDirectory => 'ഒരു ഡയറക്ടറി തിരഞ്ഞെടുക്കുക';
@@ -668,7 +687,8 @@ class AppLocalizationsMl extends AppLocalizations {
   String get youTube => 'YouTube-ൽ പ്ലേ ചെയ്യണോ?';
 
   @override
-  String get installSourceToStart => 'തുടങ്ങാൻ വിപുലീകരണ പേജിൽ നിന്ന് ഉറവിടം ഇൻസ്റ്റാൾ ചെയ്യുക';
+  String get installSourceToStart =>
+      'തുടങ്ങാൻ വിപുലീകരണ പേജിൽ നിന്ന് ഉറവിടം ഇൻസ്റ്റാൾ ചെയ്യുക';
 
   @override
   String get watching => 'കാണുന്നു';

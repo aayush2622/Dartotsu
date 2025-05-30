@@ -317,7 +317,8 @@ class AppLocalizationsPt extends AppLocalizations {
   String get hidePrivate => 'Ocultar Privado';
 
   @override
-  String get hidePrivateDescription => 'Ocultar séries privadas da Página Inicial.';
+  String get hidePrivateDescription =>
+      'Ocultar séries privadas da Página Inicial.';
 
   @override
   String get fontColor => 'Cor da Fonte';
@@ -362,7 +363,8 @@ class AppLocalizationsPt extends AppLocalizations {
   String get cursedSpeed => 'Velocidade Amaldiçoada';
 
   @override
-  String get cursedSpeedDescription => 'Para quem está ocupado demais com a vida';
+  String get cursedSpeedDescription =>
+      'Para quem está ocupado demais com a vida';
 
   @override
   String get speedDescription => 'Velocidade padrão para o reprodutor';
@@ -398,13 +400,15 @@ class AppLocalizationsPt extends AppLocalizations {
   String get about => 'Sobre';
 
   @override
-  String get aboutDescription => 'Saiba mais sobre o aplicativo e seus criadores';
+  String get aboutDescription =>
+      'Saiba mais sobre o aplicativo e seus criadores';
 
   @override
   String get common => 'Comum';
 
   @override
-  String get commonDescription => 'Ajuste as configurações gerais para usar o app sem problemas';
+  String get commonDescription =>
+      'Ajuste as configurações gerais para usar o app sem problemas';
 
   @override
   String get materialYou => 'Material You';
@@ -422,16 +426,19 @@ class AppLocalizationsPt extends AppLocalizations {
   String get notifications => 'Notificações';
 
   @override
-  String get notificationsDescription => 'Configure como e quando você receberá notificações';
+  String get notificationsDescription =>
+      'Configure como e quando você receberá notificações';
 
   @override
-  String get accountDescription => 'Gerencie suas contas do AniList, MAL e Discord com facilidade';
+  String get accountDescription =>
+      'Gerencie suas contas do AniList, MAL e Discord com facilidade';
 
   @override
   String get allCaughtUpNew => 'Tudo apanhado, o que há de novo?';
 
   @override
-  String get animeDescription => 'Personalize e gerencie suas preferências de anime';
+  String get animeDescription =>
+      'Personalize e gerencie suas preferências de anime';
 
   @override
   String get darkMode => 'Modo Escuro';
@@ -449,7 +456,8 @@ class AppLocalizationsPt extends AppLocalizations {
   String get enableDarkMode => 'Ativar o Modo Escuro';
 
   @override
-  String get extensionsDescription => 'Instale e gerencie extensões para funcionalidades extras';
+  String get extensionsDescription =>
+      'Instale e gerencie extensões para funcionalidades extras';
 
   @override
   String get hiddenMedia => 'Mídia Oculta';
@@ -461,7 +469,8 @@ class AppLocalizationsPt extends AppLocalizations {
   String get mangaDescription => 'Organize e adapte sua experiência de mangá';
 
   @override
-  String get noFavourites => 'Parece que você não curtiu nada ainda,\nTente curtir um show para mantê-lo aqui.';
+  String get noFavourites =>
+      'Parece que você não curtiu nada ainda,\nTente curtir um show para mantê-lo aqui.';
 
   @override
   String get noHiddenMediaFound => 'Nenhuma mídia oculta encontrada';
@@ -470,7 +479,8 @@ class AppLocalizationsPt extends AppLocalizations {
   String get noOnHold => 'Parece que você ainda não colocou nada em pausa.';
 
   @override
-  String get offlineModeDescription => 'Use o app sem uma conexão com a internet';
+  String get offlineModeDescription =>
+      'Use o app sem uma conexão com a internet';
 
   @override
   String get oledThemeVariant => 'Variante de tema OLED';
@@ -491,16 +501,19 @@ class AppLocalizationsPt extends AppLocalizations {
   String get recentUpdates => 'Atualizações Recentes';
 
   @override
-  String get recommendationsEmptyMessage => 'Assista/Leia alguns Animes ou Mangás para receber Recomendações';
+  String get recommendationsEmptyMessage =>
+      'Assista/Leia alguns Animes ou Mangás para receber Recomendações';
 
   @override
   String get resizeMode => 'Modo De Redimensionamento';
 
   @override
-  String get resizeModeDescription => 'Modo de redimensionamento padrão para o reprodutor';
+  String get resizeModeDescription =>
+      'Modo de redimensionamento padrão para o reprodutor';
 
   @override
-  String get supportMaintainer => 'Quer apoiar o mantenedor do Dartotsu?\nConsidere fazer uma doação';
+  String get supportMaintainer =>
+      'Quer apoiar o mantenedor do Dartotsu?\nConsidere fazer uma doação';
 
   @override
   String get theme => 'Tema';
@@ -602,7 +615,8 @@ class AppLocalizationsPt extends AppLocalizations {
   String get customPath => 'Caminho personalizado';
 
   @override
-  String get customPathDescription => 'Defina um caminho personalizado para salvar arquivos\nImprensa longa para remover';
+  String get customPathDescription =>
+      'Defina um caminho personalizado para salvar arquivos\nImprensa longa para remover';
 
   @override
   String get selectDirectory => 'Selecione um diretório';
@@ -668,7 +682,8 @@ class AppLocalizationsPt extends AppLocalizations {
   String get youTube => 'Jogar no YouTube?';
 
   @override
-  String get installSourceToStart => 'Instale uma fonte da página de extensão para começar';
+  String get installSourceToStart =>
+      'Instale uma fonte da página de extensão para começar';
 
   @override
   String get watching => 'Observando';

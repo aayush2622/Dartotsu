@@ -12,7 +12,8 @@ class AppLocalizationsSa extends AppLocalizations {
   String get appName => 'Dartotsu';
 
   @override
-  String get appTagline => 'नवीनतमं श्रेष्ठं अनुप्रयोग\nचित्रकथानां च अनुवर्तनाय';
+  String get appTagline =>
+      'नवीनतमं श्रेष्ठं अनुप्रयोग\nचित्रकथानां च अनुवर्तनाय';
 
   @override
   String get anilist => 'AniList';
@@ -162,7 +163,8 @@ class AppLocalizationsSa extends AppLocalizations {
   }
 
   @override
-  String get confirmLogout => 'क्या त्वं निश्चितमस्ति यः त्वं निर्गमयितुम् इच्छसि?';
+  String get confirmLogout =>
+      'क्या त्वं निश्चितमस्ति यः त्वं निर्गमयितुम् इच्छसि?';
 
   @override
   String get options => 'विकल्पाः';
@@ -362,7 +364,8 @@ class AppLocalizationsSa extends AppLocalizations {
   String get cursedSpeed => 'शापितं वेग';
 
   @override
-  String get cursedSpeedDescription => 'ये जना जीवनस्य कार्येण अतीव व्यस्ता तेषां कृते';
+  String get cursedSpeedDescription =>
+      'ये जना जीवनस्य कार्येण अतीव व्यस्ता तेषां कृते';
 
   @override
   String get speedDescription => 'क्रीडकस्य स्वाभाविक वेग';
@@ -422,10 +425,12 @@ class AppLocalizationsSa extends AppLocalizations {
   String get notifications => 'सूचनाएँ';
 
   @override
-  String get notificationsDescription => 'कथमपि कदा च सूचनाएँ प्राप्तुं ताः व्यवस्थितय';
+  String get notificationsDescription =>
+      'कथमपि कदा च सूचनाएँ प्राप्तुं ताः व्यवस्थितय';
 
   @override
-  String get accountDescription => 'तव आनिलिस्ट, मायआनिमेलिस्ट च डिस्कोर्ड खातानि सहजतया प्रबन्धय';
+  String get accountDescription =>
+      'तव आनिलिस्ट, मायआनिमेलिस्ट च डिस्कोर्ड खातानि सहजतया प्रबन्धय';
 
   @override
   String get allCaughtUpNew => 'सर्वे गृहीताः, किं नवीनम्?';
@@ -449,7 +454,8 @@ class AppLocalizationsSa extends AppLocalizations {
   String get enableDarkMode => 'अंधकारविधानं सक्रियय';
 
   @override
-  String get extensionsDescription => 'अधिकं कार्यक्षमतां दातुं विस्ताराः स्थापय';
+  String get extensionsDescription =>
+      'अधिकं कार्यक्षमतां दातुं विस्ताराः स्थापय';
 
   @override
   String get hiddenMedia => 'गुप्तमाध्यमम्';
@@ -461,7 +467,8 @@ class AppLocalizationsSa extends AppLocalizations {
   String get mangaDescription => 'तव मंगा अनुभवः व्यवस्थितं अनुकूलय';
 
   @override
-  String get noFavourites => 'भवतः किमपि न रोचते इव दृश्यते,\nअत्र स्थापयितुं कञ्चन शो इत्येतत् पसन्दं कर्तुं प्रयतध्वम्।';
+  String get noFavourites =>
+      'भवतः किमपि न रोचते इव दृश्यते,\nअत्र स्थापयितुं कञ्चन शो इत्येतत् पसन्दं कर्तुं प्रयतध्वम्।';
 
   @override
   String get noHiddenMediaFound => 'गुप्तमाध्यमं न लभते';
@@ -500,13 +507,15 @@ class AppLocalizationsSa extends AppLocalizations {
   String get resizeModeDescription => 'क्रीडकस्य स्वाभाविक आकारपरिवर्तनवृत्ति';
 
   @override
-  String get supportMaintainer => 'डारटोत्सु व्यवस्थापकं सहायतुं इच्छसि?\nदानं समर्पय';
+  String get supportMaintainer =>
+      'डारटोत्सु व्यवस्थापकं सहायतुं इच्छसि?\nदानं समर्पय';
 
   @override
   String get theme => 'विषय';
 
   @override
-  String get themeDescription => 'तस्य अनुप्रयोगस्य रूपरचनां च वातावरणं अनुकूलय';
+  String get themeDescription =>
+      'तस्य अनुप्रयोगस्य रूपरचनां च वातावरणं अनुकूलय';
 
   @override
   String get author => 'लेखकः';
@@ -602,7 +611,8 @@ class AppLocalizationsSa extends AppLocalizations {
   String get customPath => 'कस्टम पथ';
 
   @override
-  String get customPathDescription => 'सञ्चिकाः रक्षितुं इष्टमार्गं सेट् कुर्वन्तु\nदूरीकर्तुं दीर्घकालं यावत् दबावन्तु';
+  String get customPathDescription =>
+      'सञ्चिकाः रक्षितुं इष्टमार्गं सेट् कुर्वन्तु\nदूरीकर्तुं दीर्घकालं यावत् दबावन्तु';
 
   @override
   String get selectDirectory => 'एकं निर्देशिकां चिनोतु';
@@ -641,7 +651,8 @@ class AppLocalizationsSa extends AppLocalizations {
   String get loadExtensionsIcon => 'विस्तारणचिह्नं संस्थापय';
 
   @override
-  String get loadExtensionsIconDesc => 'यदि विस्तारणपृष्ठं विलम्बते तर्हि निष्क्रियं कुरु';
+  String get loadExtensionsIconDesc =>
+      'यदि विस्तारणपृष्ठं विलम्बते तर्हि निष्क्रियं कुरु';
 
   @override
   String get autoUpdate => 'स्वयमेव अद्यतनं';
@@ -668,7 +679,8 @@ class AppLocalizationsSa extends AppLocalizations {
   String get youTube => 'YouTube मध्ये चालय?';
 
   @override
-  String get installSourceToStart => 'प्रारम्भाय विस्तारणपृष्ठात् स्रोतं स्थापय';
+  String get installSourceToStart =>
+      'प्रारम्भाय विस्तारणपृष्ठात् स्रोतं स्थापय';
 
   @override
   String get watching => 'पश्यन्';

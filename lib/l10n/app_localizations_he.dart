@@ -12,7 +12,8 @@ class AppLocalizationsHe extends AppLocalizations {
   String get appName => 'Dartotsu';
 
   @override
-  String get appTagline => 'האפליקציה החדשה והטובה ביותר\nלעקוב אחרי אנימה ומנגה';
+  String get appTagline =>
+      'האפליקציה החדשה והטובה ביותר\nלעקוב אחרי אנימה ומנגה';
 
   @override
   String get anilist => 'AniList';
@@ -416,7 +417,8 @@ class AppLocalizationsHe extends AppLocalizations {
   String get customTheme => 'ערכת נושא מותאמת';
 
   @override
-  String get customThemeDescription => 'השתמש בצבעים האישיים שלך עבור ערכת הנושא';
+  String get customThemeDescription =>
+      'השתמש בצבעים האישיים שלך עבור ערכת הנושא';
 
   @override
   String get notifications => 'התראות';
@@ -425,7 +427,8 @@ class AppLocalizationsHe extends AppLocalizations {
   String get notificationsDescription => 'הגדר איך ומתי תקבל התראות';
 
   @override
-  String get accountDescription => 'נהל את החשבונות שלך ב-AniList, MAL ו-Discord בקלות';
+  String get accountDescription =>
+      'נהל את החשבונות שלך ב-AniList, MAL ו-Discord בקלות';
 
   @override
   String get allCaughtUpNew => 'סיימת הכול, מה חדש?';
@@ -461,7 +464,8 @@ class AppLocalizationsHe extends AppLocalizations {
   String get mangaDescription => 'ארגן והתאם אישית את חווית המנגה שלך';
 
   @override
-  String get noFavourites => 'נראה שאתה לא אוהב כלום,\nנסה לסמן סדרה למועדפים כדי לשמור אותה כאן.';
+  String get noFavourites =>
+      'נראה שאתה לא אוהב כלום,\nנסה לסמן סדרה למועדפים כדי לשמור אותה כאן.';
 
   @override
   String get noHiddenMediaFound => 'לא נמצאה מדיה מוסתרת';
@@ -491,7 +495,8 @@ class AppLocalizationsHe extends AppLocalizations {
   String get recentUpdates => 'עדכונים אחרונים';
 
   @override
-  String get recommendationsEmptyMessage => 'צפה/קרא קצת אנימה או מנגה כדי לקבל המלצות';
+  String get recommendationsEmptyMessage =>
+      'צפה/קרא קצת אנימה או מנגה כדי לקבל המלצות';
 
   @override
   String get resizeMode => 'מצב שינוי גודל';
@@ -506,7 +511,8 @@ class AppLocalizationsHe extends AppLocalizations {
   String get theme => 'ערכת נושא';
 
   @override
-  String get themeDescription => 'התאם אישית את המראה והאווירה של האפליקציה שלך';
+  String get themeDescription =>
+      'התאם אישית את המראה והאווירה של האפליקציה שלך';
 
   @override
   String get author => 'Author';
@@ -602,7 +608,8 @@ class AppLocalizationsHe extends AppLocalizations {
   String get customPath => 'נתיב מותאם אישית';
 
   @override
-  String get customPathDescription => 'הגדרת נתיב מותאם אישית להצלת קבצים\nעיתונות ארוכה כדי להסיר';
+  String get customPathDescription =>
+      'הגדרת נתיב מותאם אישית להצלת קבצים\nעיתונות ארוכה כדי להסיר';
 
   @override
   String get selectDirectory => 'בחר מנהל';

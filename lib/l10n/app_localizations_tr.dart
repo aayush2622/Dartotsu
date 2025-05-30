@@ -398,13 +398,15 @@ class AppLocalizationsTr extends AppLocalizations {
   String get about => 'Hakkında';
 
   @override
-  String get aboutDescription => 'Uygulama ve geliştiricileri hakkında daha fazla bilgi edinin';
+  String get aboutDescription =>
+      'Uygulama ve geliştiricileri hakkında daha fazla bilgi edinin';
 
   @override
   String get common => 'Genel';
 
   @override
-  String get commonDescription => 'Kesintisiz uygulama kullanımı için genel ayarlara erişin';
+  String get commonDescription =>
+      'Kesintisiz uygulama kullanımı için genel ayarlara erişin';
 
   @override
   String get materialYou => 'Material You';
@@ -422,16 +424,19 @@ class AppLocalizationsTr extends AppLocalizations {
   String get notifications => 'Bildirimler';
 
   @override
-  String get notificationsDescription => 'Bildirimleri nasıl ve ne zaman alacağınızı yapılandırın';
+  String get notificationsDescription =>
+      'Bildirimleri nasıl ve ne zaman alacağınızı yapılandırın';
 
   @override
-  String get accountDescription => 'AniList, MAL ve Discord hesaplarınızı kolayca yönetin';
+  String get accountDescription =>
+      'AniList, MAL ve Discord hesaplarınızı kolayca yönetin';
 
   @override
   String get allCaughtUpNew => 'Her şey tamamlandı, yeni ne var?';
 
   @override
-  String get animeDescription => 'Anime tercihlerinizi kişiselleştirin ve yönetin';
+  String get animeDescription =>
+      'Anime tercihlerinizi kişiselleştirin ve yönetin';
 
   @override
   String get darkMode => 'Karanlık Mod';
@@ -449,7 +454,8 @@ class AppLocalizationsTr extends AppLocalizations {
   String get enableDarkMode => 'Karanlık Modu Etkinleştir';
 
   @override
-  String get extensionsDescription => 'Ek işlevsellik için eklentileri yükleyin ve yönetin';
+  String get extensionsDescription =>
+      'Ek işlevsellik için eklentileri yükleyin ve yönetin';
 
   @override
   String get hiddenMedia => 'Gizli Medya';
@@ -458,10 +464,12 @@ class AppLocalizationsTr extends AppLocalizations {
   String get incognitoModeDescription => 'Etkinliğinizi kaydetmeden göz atın';
 
   @override
-  String get mangaDescription => 'Manga deneyiminizi organize edin ve özelleştirin';
+  String get mangaDescription =>
+      'Manga deneyiminizi organize edin ve özelleştirin';
 
   @override
-  String get noFavourites => 'Görünüşe göre hiç bir şeyi beğenmediniz,\nBurada tutmak için bir seri beğenmeyi deneyin.';
+  String get noFavourites =>
+      'Görünüşe göre hiç bir şeyi beğenmediniz,\nBurada tutmak için bir seri beğenmeyi deneyin.';
 
   @override
   String get noHiddenMediaFound => 'Gizli medya bulunamadı';
@@ -470,7 +478,8 @@ class AppLocalizationsTr extends AppLocalizations {
   String get noOnHold => 'Görünüşe göre hiçbir şeyi beklemede tutmamışsınız.';
 
   @override
-  String get offlineModeDescription => 'Uygulamayı internet bağlantısı olmadan kullanın';
+  String get offlineModeDescription =>
+      'Uygulamayı internet bağlantısı olmadan kullanın';
 
   @override
   String get oledThemeVariant => 'OLED Tema Seçeneği';
@@ -491,22 +500,26 @@ class AppLocalizationsTr extends AppLocalizations {
   String get recentUpdates => 'Son Güncellemeler';
 
   @override
-  String get recommendationsEmptyMessage => 'Tavsiyeler almak için biraz Anime veya Manga izleyin/okuyun';
+  String get recommendationsEmptyMessage =>
+      'Tavsiyeler almak için biraz Anime veya Manga izleyin/okuyun';
 
   @override
   String get resizeMode => 'Boyutlandırma Modu';
 
   @override
-  String get resizeModeDescription => 'Oynatıcı için varsayılan boyutlandırma modu';
+  String get resizeModeDescription =>
+      'Oynatıcı için varsayılan boyutlandırma modu';
 
   @override
-  String get supportMaintainer => 'Dartotsu\'nun Geliştiricisini Desteklemek mi İstiyorsunuz?\nBağış Yapmayı Düşünün';
+  String get supportMaintainer =>
+      'Dartotsu\'nun Geliştiricisini Desteklemek mi İstiyorsunuz?\nBağış Yapmayı Düşünün';
 
   @override
   String get theme => 'Tema';
 
   @override
-  String get themeDescription => 'Uygulamanızın görünümünü ve havasını özelleştirin';
+  String get themeDescription =>
+      'Uygulamanızın görünümünü ve havasını özelleştirin';
 
   @override
   String get author => 'Yazar';
@@ -602,7 +615,8 @@ class AppLocalizationsTr extends AppLocalizations {
   String get customPath => 'Özel Yol';
 
   @override
-  String get customPathDescription => 'Dosyaları kaydetmek için özel bir yol ayarlayın\nYolu kaldırmak için uzun basın';
+  String get customPathDescription =>
+      'Dosyaları kaydetmek için özel bir yol ayarlayın\nYolu kaldırmak için uzun basın';
 
   @override
   String get selectDirectory => 'Bir dizi seçin';
@@ -668,7 +682,8 @@ class AppLocalizationsTr extends AppLocalizations {
   String get youTube => 'YouTube\'da oynayın?';
 
   @override
-  String get installSourceToStart => 'Başlamak için Eklentiler sayfasından bir eklenti yükleyin';
+  String get installSourceToStart =>
+      'Başlamak için Eklentiler sayfasından bir eklenti yükleyin';
 
   @override
   String get watching => 'İzleniyor';

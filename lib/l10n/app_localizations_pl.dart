@@ -12,7 +12,8 @@ class AppLocalizationsPl extends AppLocalizations {
   String get appName => 'Dartotsu';
 
   @override
-  String get appTagline => 'Nowa najlepsza aplikacja do\nśledzenia anime i mangi';
+  String get appTagline =>
+      'Nowa najlepsza aplikacja do\nśledzenia anime i mangi';
 
   @override
   String get anilist => 'AniList';
@@ -317,7 +318,8 @@ class AppLocalizationsPl extends AppLocalizations {
   String get hidePrivate => 'Ukryj prywatne';
 
   @override
-  String get hidePrivateDescription => 'Ukryj prywatne serie na stronie głównej.';
+  String get hidePrivateDescription =>
+      'Ukryj prywatne serie na stronie głównej.';
 
   @override
   String get fontColor => 'Kolor czcionki';
@@ -398,13 +400,15 @@ class AppLocalizationsPl extends AppLocalizations {
   String get about => 'O aplikacji';
 
   @override
-  String get aboutDescription => 'Dowiedz się więcej o aplikacji i jej twórcach';
+  String get aboutDescription =>
+      'Dowiedz się więcej o aplikacji i jej twórcach';
 
   @override
   String get common => 'Ogólne';
 
   @override
-  String get commonDescription => 'Uzyskaj dostęp do ogólnych ustawień aplikacji';
+  String get commonDescription =>
+      'Uzyskaj dostęp do ogólnych ustawień aplikacji';
 
   @override
   String get materialYou => 'Material You';
@@ -422,16 +426,19 @@ class AppLocalizationsPl extends AppLocalizations {
   String get notifications => 'Powiadomienia';
 
   @override
-  String get notificationsDescription => 'Skonfiguruj, jak i kiedy chcesz otrzymywać powiadomienia';
+  String get notificationsDescription =>
+      'Skonfiguruj, jak i kiedy chcesz otrzymywać powiadomienia';
 
   @override
-  String get accountDescription => 'Zarządzaj swoimi kontami AniList, MAL i Discord bez wysiłku';
+  String get accountDescription =>
+      'Zarządzaj swoimi kontami AniList, MAL i Discord bez wysiłku';
 
   @override
   String get allCaughtUpNew => 'Wszystko nadrobione, co nowego?';
 
   @override
-  String get animeDescription => 'Personalizuj i zarządzaj swoimi preferencjami dotyczącymi anime';
+  String get animeDescription =>
+      'Personalizuj i zarządzaj swoimi preferencjami dotyczącymi anime';
 
   @override
   String get darkMode => 'Tryb ciemny';
@@ -449,19 +456,23 @@ class AppLocalizationsPl extends AppLocalizations {
   String get enableDarkMode => 'Włącz tryb ciemny';
 
   @override
-  String get extensionsDescription => 'Instaluj i zarządzaj rozszerzeniami dla dodatkowej funkcjonalności';
+  String get extensionsDescription =>
+      'Instaluj i zarządzaj rozszerzeniami dla dodatkowej funkcjonalności';
 
   @override
   String get hiddenMedia => 'Ukryte media';
 
   @override
-  String get incognitoModeDescription => 'Przeglądaj bez zapisywania swojej aktywności';
+  String get incognitoModeDescription =>
+      'Przeglądaj bez zapisywania swojej aktywności';
 
   @override
-  String get mangaDescription => 'Organizuj i dostosuj swoje doświadczenie z mangą';
+  String get mangaDescription =>
+      'Organizuj i dostosuj swoje doświadczenie z mangą';
 
   @override
-  String get noFavourites => 'Wygląda na to, że nic ci się nie podoba.\nPolub coś, aby trzymać to tutaj.';
+  String get noFavourites =>
+      'Wygląda na to, że nic ci się nie podoba.\nPolub coś, aby trzymać to tutaj.';
 
   @override
   String get noHiddenMediaFound => 'Nie znaleziono ukrytych mediów';
@@ -470,7 +481,8 @@ class AppLocalizationsPl extends AppLocalizations {
   String get noOnHold => 'Wygląda na to, że nic nie wstrzymałeś.';
 
   @override
-  String get offlineModeDescription => 'Używaj aplikacji bez połączenia z internetem';
+  String get offlineModeDescription =>
+      'Używaj aplikacji bez połączenia z internetem';
 
   @override
   String get oledThemeVariant => 'Wariant motywu OLED';
@@ -491,16 +503,19 @@ class AppLocalizationsPl extends AppLocalizations {
   String get recentUpdates => 'Ostatnie aktualizacje';
 
   @override
-  String get recommendationsEmptyMessage => 'Oglądaj/czytaj anime lub mangę, aby otrzymać rekomendacje';
+  String get recommendationsEmptyMessage =>
+      'Oglądaj/czytaj anime lub mangę, aby otrzymać rekomendacje';
 
   @override
   String get resizeMode => 'Tryb zmiany rozmiaru';
 
   @override
-  String get resizeModeDescription => 'Domyślny tryb zmiany rozmiaru dla odtwarzacza';
+  String get resizeModeDescription =>
+      'Domyślny tryb zmiany rozmiaru dla odtwarzacza';
 
   @override
-  String get supportMaintainer => 'Chcesz wspierać twórcę Dartotsu?\nRozważ darowiznę';
+  String get supportMaintainer =>
+      'Chcesz wspierać twórcę Dartotsu?\nRozważ darowiznę';
 
   @override
   String get theme => 'Motyw';
@@ -602,7 +617,8 @@ class AppLocalizationsPl extends AppLocalizations {
   String get customPath => 'Oficjalna strona';
 
   @override
-  String get customPathDescription => 'Użytkowana droga do zapisywania plików.\nLong press usunąć';
+  String get customPathDescription =>
+      'Użytkowana droga do zapisywania plików.\nLong press usunąć';
 
   @override
   String get selectDirectory => 'Wybór reżysera';
@@ -668,7 +684,8 @@ class AppLocalizationsPl extends AppLocalizations {
   String get youTube => 'Gra na YouTube?';
 
   @override
-  String get installSourceToStart => 'Instalacja źródła z witryny przedłużonej do rozpoczęcia produkcji';
+  String get installSourceToStart =>
+      'Instalacja źródła z witryny przedłużonej do rozpoczęcia produkcji';
 
   @override
   String get watching => 'Dozorujący';

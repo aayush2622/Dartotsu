@@ -425,7 +425,8 @@ class AppLocalizationsAm extends AppLocalizations {
   String get notificationsDescription => 'እንዴት እና መቼ ማሳወቂያዎችን እንደሚቀበሉ ያዋቅሩ';
 
   @override
-  String get accountDescription => 'የእርስዎን AniList፣ MAL እና Discord መለያዎች በቀላሉ ያስተዳድሩ';
+  String get accountDescription =>
+      'የእርስዎን AniList፣ MAL እና Discord መለያዎች በቀላሉ ያስተዳድሩ';
 
   @override
   String get allCaughtUpNew => 'ሁሉንም አግኝተዋል፣ አዲስ ምንድን ነው?';
@@ -461,7 +462,8 @@ class AppLocalizationsAm extends AppLocalizations {
   String get mangaDescription => 'የማንጋ ተሞክሮዎን ያደራጁ እና ያስተካክሉ';
 
   @override
-  String get noFavourites => 'ምንም የሚወዱት ነገር የለም የሚመስለው፣\nእዚህ ለማስቀመጥ አንድ ትዕይንት ይውደዱ።';
+  String get noFavourites =>
+      'ምንም የሚወዱት ነገር የለም የሚመስለው፣\nእዚህ ለማስቀመጥ አንድ ትዕይንት ይውደዱ።';
 
   @override
   String get noHiddenMediaFound => 'ምንም የተደበቀ ሚዲያ አልተገኘም';
@@ -491,7 +493,8 @@ class AppLocalizationsAm extends AppLocalizations {
   String get recentUpdates => 'የቅርብ ጊዜ ዝማኔዎች';
 
   @override
-  String get recommendationsEmptyMessage => 'ለውሳኔ ሀሳቦች አንዳንድ አኒሜ ወይም ማንጋ ይመልከቱ/ያንብቡ';
+  String get recommendationsEmptyMessage =>
+      'ለውሳኔ ሀሳቦች አንዳንድ አኒሜ ወይም ማንጋ ይመልከቱ/ያንብቡ';
 
   @override
   String get resizeMode => 'መጠን መቀየሪያ ሁነታ';
@@ -602,7 +605,8 @@ class AppLocalizationsAm extends AppLocalizations {
   String get customPath => 'ብጁ መንገድ';
 
   @override
-  String get customPathDescription => 'ፋይሎችን ለማስቀመጥ ብጁ መንገድ ያዘጋጁ\nለማስወገድ በረጅሙ ተጫን';
+  String get customPathDescription =>
+      'ፋይሎችን ለማስቀመጥ ብጁ መንገድ ያዘጋጁ\nለማስወገድ በረጅሙ ተጫን';
 
   @override
   String get selectDirectory => 'ማውጫ ይምረጡ';
