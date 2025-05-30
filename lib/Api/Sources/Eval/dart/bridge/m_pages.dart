@@ -1,4 +1,5 @@
 import 'package:d4rt/d4rt.dart';
+
 import '../model/m_manga.dart';
 import '../model/m_pages.dart';
 
@@ -19,14 +20,13 @@ class MPagesBridge {
       'hasNextPage': (visitor, target) => (target as MPages).hasNextPage,
     },
     setters: {
-      'list':
-          (visitor, target, value) =>
-              (target as MPages).list = (value as List).cast<MManga>(),
-      'hasNextPage':
-          (visitor, target, value) =>
-              (target as MPages).hasNextPage = value as bool,
+      'list': (visitor, target, value) =>
+          (target as MPages).list = (value as List).cast<MManga>(),
+      'hasNextPage': (visitor, target, value) =>
+          (target as MPages).hasNextPage = value as bool,
     },
   );
+
   void registerBridgedClasses(D4rt interpreter) {
     interpreter.registerBridgedClass(
       mPageBridgedClass,

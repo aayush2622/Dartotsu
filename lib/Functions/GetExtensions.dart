@@ -19,6 +19,8 @@ class Extensions {
   static final mangaRepo = ''.obs;
   static final novelRepo = ''.obs;
 
+  static RxBool isInitialized = false.obs;
+
   static Future<void> init() async {
     try {
       animeRepo.value = loadCustomData('animeRepo') ?? '';
@@ -36,6 +38,7 @@ class Extensions {
           _provider.read(
               fetchNovelSourcesListProvider(id: null, reFresh: false).future),
       ]);
+      isInitialized.value = true;
     } catch (_) {}
   }
 
@@ -53,6 +56,10 @@ class Extensions {
   }
 
   static Future<List<Source>> getSortedExtension(ItemType itemType) async {
+    while (!isInitialized.value) {
+      await Future.delayed(const Duration(milliseconds: 100));
+    }
+
     final sourcesAsyncValue =
         await _provider.read(getExtensionsStreamProvider(itemType).future);
 

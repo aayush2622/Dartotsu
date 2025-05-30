@@ -7,9 +7,12 @@ import 'package:html/parser.dart';
 
 class JsDomSelector {
   late JavascriptRuntime runtime;
+
   JsDomSelector(this.runtime);
+
   final Map<int, Element?> _elements = {};
   int _elementKey = 0;
+
   void init() {
     runtime.onMessage('get_doc_element', (dynamic args) {
       final input = args[0];

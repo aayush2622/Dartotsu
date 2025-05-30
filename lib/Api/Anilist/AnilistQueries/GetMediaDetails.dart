@@ -245,19 +245,13 @@ extension on AnilistQueries {
     }
 
     if (response.data?.media != null) {
-      media = await compute(parse,{
-        "media": media,
-        "response": response
-      });
+      media = await compute(parse, {"media": media, "response": response});
     } else {
       response =
           await executeQuery(_queryMedia(media), force: true, useToken: false);
       if (response?.data?.media != null) {
         snackString('Adult Stuff? Adult Stuff? ( ͡° ͜ʖ ͡° )');
-        media = await compute(parse,{
-          "media": media,
-          "response": response
-        });
+        media = await compute(parse, {"media": media, "response": response});
       } else {
         snackString('Error getting data from Anilist.');
       }

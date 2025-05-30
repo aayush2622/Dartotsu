@@ -36,16 +36,16 @@ class MSource {
   });
 
   Map<String, dynamic> toJson() => {
-    'apiUrl': apiUrl,
-    'baseUrl': baseUrl,
-    'dateFormat': dateFormat,
-    'dateFormatLocale': dateFormatLocale,
-    'hasCloudflare': hasCloudflare,
-    'id': id,
-    'isFullData': isFullData,
-    'lang': lang,
-    'name': name,
-    'additionalParams': additionalParams,
-    'notes': notes,
-  };
+        'apiUrl': apiUrl,
+        'baseUrl': baseUrl,
+        'dateFormat': dateFormat,
+        'dateFormatLocale': dateFormatLocale,
+        'hasCloudflare': hasCloudflare,
+        'id': id,
+        'isFullData': isFullData,
+        'lang': lang,
+        'name': name,
+        'additionalParams': additionalParams,
+        'notes': notes,
+      };
 }

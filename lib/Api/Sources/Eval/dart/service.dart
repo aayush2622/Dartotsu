@@ -32,9 +32,8 @@ class DartExtensionService implements ExtensionService {
       headers = _executeLib().invoke('headers', []) as Map<String, String>;
     } catch (_) {
       try {
-        headers =
-        _executeLib().invoke('getHeader', [source.baseUrl!])
-        as Map<String, String>;
+        headers = _executeLib().invoke('getHeader', [source.baseUrl!])
+            as Map<String, String>;
       } catch (_) {}
     }
     return headers;
@@ -105,11 +104,10 @@ class DartExtensionService implements ExtensionService {
     final result = await interpreter.invoke('getPageList', [url]);
     return (result as List)
         .map(
-          (e) =>
-      e is String
-          ? PageUrl(e.toString().trim())
-          : PageUrl.fromJson((e as Map).toMapStringDynamic!),
-    )
+          (e) => e is String
+              ? PageUrl(e.toString().trim())
+              : PageUrl.fromJson((e as Map).toMapStringDynamic!),
+        )
         .toList();
   }
 

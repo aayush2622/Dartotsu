@@ -33,4 +33,3 @@ abstract class MProvider {
 
   List<dynamic> getSourcePreferences();
 }
-

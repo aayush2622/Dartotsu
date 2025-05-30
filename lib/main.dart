@@ -92,7 +92,7 @@ Future init() async {
   await PrefManager.init();
   await StorageProvider.initDB();
   await Logger.init();
-  await Extensions.init();
+  Extensions.init();
   MediaService.init();
   TypeFactory.init();
   MediaKit.ensureInitialized();
@@ -121,6 +121,8 @@ Future init() async {
 }
 
 void initDeepLinkListener() async {
+  if (Platform.isLinux) return;
+
   final appLink = AppLinks();
   try {
     final initialUri = await appLink.getInitialLink();
@@ -180,9 +182,7 @@ class MyApp extends StatelessWidget {
       onKeyEvent: (KeyEvent event) async {
         if (event is KeyDownEvent) {
           if (event.logicalKey == LogicalKeyboardKey.escape) {
-            if (Get.previousRoute.isNotEmpty) {
-              Get.back();
-            }
+            if (Get.previousRoute.isNotEmpty) Get.back();
           } else if (event.logicalKey == LogicalKeyboardKey.f11) {
             bool isFullScreen = await windowManager.isFullScreen();
             windowManager.setFullScreen(!isFullScreen);

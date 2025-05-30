@@ -196,7 +196,6 @@ class _ListEditorDialogState extends State<ListEditorDialog> {
   }
 
   List<Widget> _buildCustomListWidgets(TextStyle suffixStyle) {
-
     if (customListName == null || customListName!.isEmpty) {
       return [Text("No custom lists available", style: suffixStyle)];
     }
@@ -205,7 +204,7 @@ class _ListEditorDialogState extends State<ListEditorDialog> {
       Text("Custom Lists", style: suffixStyle),
       const SizedBox(height: 16),
       ...customListName!.entries.map(
-            (entry) => SwitchListTile(
+        (entry) => SwitchListTile(
           title: Text(entry.key),
           value: entry.value,
           onChanged: (value) {
@@ -398,7 +397,7 @@ class _ListEditorDialogState extends State<ListEditorDialog> {
           .clamp(0, 100)
       ..isListPrivate = isPrivate;
 
-    List<String>?  list;
+    List<String>? list;
     if (!widget.isCompact) {
       widget.media
         ..notes = noteController?.text
@@ -412,7 +411,7 @@ class _ListEditorDialogState extends State<ListEditorDialog> {
           .toList();
     }
 
-    Anilist.mutations?.editList(widget.media,customList: list);
+    Anilist.mutations?.editList(widget.media, customList: list);
     Get.back();
     Refresh.activity[RefreshId.Anilist.homePage]?.value = true;
   }

@@ -207,14 +207,14 @@ abstract class BaseParser extends GetxController {
 
   _saveShowResponse(Media mediaData, MManga response, Source source,
       {bool selected = false}) {
-    status.value =
-    selected ? "${getString.selected} : ${response.name}" : "${getString.found} : ${response.name}";
+    status.value = selected
+        ? "${getString.selected} : ${response.name}"
+        : "${getString.found} : ${response.name}";
     var show = ShowResponse(
         name: response.name!,
         link: response.link!,
         coverUrl: response.imageUrl!);
-    saveCustomData<ShowResponse>(
-        "${source.name}_${mediaData.id}_source", show);
+    saveCustomData<ShowResponse>("${source.name}_${mediaData.id}_source", show);
   }
 
   Future<void> wrongTitle(

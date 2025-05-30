@@ -1,4 +1,5 @@
 import 'package:d4rt/d4rt.dart';
+
 import '../model/video.dart';
 
 class MTrackBridge {
@@ -18,13 +19,13 @@ class MTrackBridge {
       'label': (visitor, target) => (target as Track).label,
     },
     setters: {
-      'file':
-          (visitor, target, value) => (target as Track).file = value as String?,
-      'label':
-          (visitor, target, value) =>
-              (target as Track).label = value as String?,
+      'file': (visitor, target, value) =>
+          (target as Track).file = value as String?,
+      'label': (visitor, target, value) =>
+          (target as Track).label = value as String?,
     },
   );
+
   void registerBridgedClasses(D4rt interpreter) {
     interpreter.registerBridgedClass(
       mTrackBridgedClass,

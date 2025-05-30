@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import '../Api/Anilist/AnilistService.dart';
 import '../Api/Extensions/ExtensionsService.dart';
 import '../Api/MyAnimeList/MalService.dart';
+import '../DataClass/Media.dart';
 import '../Screens/HomeNavbar.dart';
 import '../Theme/LanguageSwitcher.dart';
 import 'BaseServiceData.dart';
@@ -12,7 +13,7 @@ import 'Screens/BaseAnimeScreen.dart';
 import 'Screens/BaseHomeScreen.dart';
 import 'Screens/BaseMangaScreen.dart';
 import 'Screens/BaseSearchScreen.dart';
-import '../DataClass/Media.dart';
+
 abstract class MediaService {
   static final List<MediaService> _instances = [];
 
@@ -53,9 +54,9 @@ abstract class MediaService {
 
   BaseSearchScreen? searchScreen;
 
-  void listEditor(BuildContext context,Media media) => {};
+  void listEditor(BuildContext context, Media media) => {};
 
-  void compactListEditor(BuildContext context,Media media) => {};
+  void compactListEditor(BuildContext context, Media media) => {};
 
   Widget notImplemented(String name) {
     return Center(

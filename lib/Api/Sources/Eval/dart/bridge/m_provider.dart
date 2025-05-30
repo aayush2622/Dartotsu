@@ -1,6 +1,7 @@
 import 'package:d4rt/d4rt.dart';
 import 'package:dartotsu/Functions/string_extensions.dart';
 import 'package:flutter_qjs/flutter_qjs.dart';
+
 import '../../../extension_preferences_providers.dart';
 import '../model/filter.dart';
 import '../model/m_bridge.dart';
@@ -16,49 +17,39 @@ class MProviderBridged {
       },
     },
     getters: {
-      'supportsLatest':
-          (visitor, target) => (target as MProvider).supportsLatest,
+      'supportsLatest': (visitor, target) =>
+          (target as MProvider).supportsLatest,
       'baseUrl': (visitor, target) => (target as MProvider).baseUrl,
       'headers': (visitor, target) => (target as MProvider).headers,
     },
     methods: {
-      'getLatestUpdates':
-          (visitor, target, positionalArgs, namedArgs) =>
-              (target as MProvider).getLatestUpdates(positionalArgs[0] as int),
-      'getPopular':
-          (visitor, target, positionalArgs, namedArgs) =>
-              (target as MProvider).getPopular(positionalArgs[0] as int),
-      'getVideoList':
-          (visitor, target, positionalArgs, namedArgs) =>
-              (target as MProvider).getVideoList(positionalArgs[0] as String),
-      'search':
-          (visitor, target, positionalArgs, namedArgs) =>
-              (target as MProvider).search(
-                positionalArgs[0] as String,
-                positionalArgs[1] as int,
-                positionalArgs[2] as FilterList,
-              ),
-      'getDetail':
-          (visitor, target, positionalArgs, namedArgs) =>
-              (target as MProvider).getDetail(positionalArgs[0] as String),
-      'getPageList':
-          (visitor, target, positionalArgs, namedArgs) =>
-              (target as MProvider).getPageList(positionalArgs[0] as String),
-      'cleanHtmlContent':
-          (visitor, target, positionalArgs, namedArgs) => (target as MProvider)
-              .cleanHtmlContent(positionalArgs[0] as String),
-      'getHtmlContent':
-          (visitor, target, positionalArgs, namedArgs) =>
-              (target as MProvider).getHtmlContent(
-                positionalArgs[0] as String,
-                positionalArgs[1] as String,
-              ),
-      'getFilterList':
-          (visitor, target, positionalArgs, namedArgs) =>
-              (target as MProvider).getFilterList(),
-      'getSourcePreferences':
-          (visitor, target, positionalArgs, namedArgs) =>
-              (target as MProvider).getSourcePreferences(),
+      'getLatestUpdates': (visitor, target, positionalArgs, namedArgs) =>
+          (target as MProvider).getLatestUpdates(positionalArgs[0] as int),
+      'getPopular': (visitor, target, positionalArgs, namedArgs) =>
+          (target as MProvider).getPopular(positionalArgs[0] as int),
+      'getVideoList': (visitor, target, positionalArgs, namedArgs) =>
+          (target as MProvider).getVideoList(positionalArgs[0] as String),
+      'search': (visitor, target, positionalArgs, namedArgs) =>
+          (target as MProvider).search(
+            positionalArgs[0] as String,
+            positionalArgs[1] as int,
+            positionalArgs[2] as FilterList,
+          ),
+      'getDetail': (visitor, target, positionalArgs, namedArgs) =>
+          (target as MProvider).getDetail(positionalArgs[0] as String),
+      'getPageList': (visitor, target, positionalArgs, namedArgs) =>
+          (target as MProvider).getPageList(positionalArgs[0] as String),
+      'cleanHtmlContent': (visitor, target, positionalArgs, namedArgs) =>
+          (target as MProvider).cleanHtmlContent(positionalArgs[0] as String),
+      'getHtmlContent': (visitor, target, positionalArgs, namedArgs) =>
+          (target as MProvider).getHtmlContent(
+            positionalArgs[0] as String,
+            positionalArgs[1] as String,
+          ),
+      'getFilterList': (visitor, target, positionalArgs, namedArgs) =>
+          (target as MProvider).getFilterList(),
+      'getSourcePreferences': (visitor, target, positionalArgs, namedArgs) =>
+          (target as MProvider).getSourcePreferences(),
     },
   );
 
@@ -345,11 +336,11 @@ class MProviderBridged {
       'evaluateJavascriptViaWebview',
       (visitor, positionalArgs, namedArgs, _) =>
           MBridge.evaluateJavascriptViaWebview(
-            positionalArgs[0] as String,
-            (positionalArgs[1] as Map).cast(),
-            (positionalArgs[2] as List).cast(),
-            time: namedArgs.get<int?>('time') ?? 30,
-          ),
+        positionalArgs[0] as String,
+        (positionalArgs[1] as Map).cast(),
+        (positionalArgs[2] as List).cast(),
+        time: namedArgs.get<int?>('time') ?? 30,
+      ),
     );
   }
 }
