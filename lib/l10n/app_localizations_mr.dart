@@ -12,7 +12,8 @@ class AppLocalizationsMr extends AppLocalizations {
   String get appName => 'Dartotsu';
 
   @override
-  String get appTagline => 'नवीन सर्वोत्तम अ‍ॅप\nअ‍ॅनिमी आणि मंगा ट्रॅक करण्यासाठी';
+  String get appTagline =>
+      'नवीन सर्वोत्तम अ‍ॅप\nअ‍ॅनिमी आणि मंगा ट्रॅक करण्यासाठी';
 
   @override
   String get anilist => 'AniList';
@@ -362,7 +363,8 @@ class AppLocalizationsMr extends AppLocalizations {
   String get cursedSpeed => 'शापित गती';
 
   @override
-  String get cursedSpeedDescription => 'जी लोकं जीवनात फार व्यस्त असतात त्यांच्यासाठी';
+  String get cursedSpeedDescription =>
+      'जी लोकं जीवनात फार व्यस्त असतात त्यांच्यासाठी';
 
   @override
   String get speedDescription => 'प्लेयरसाठी डिफॉल्ट गती';
@@ -398,7 +400,8 @@ class AppLocalizationsMr extends AppLocalizations {
   String get about => 'विषयी';
 
   @override
-  String get aboutDescription => 'ऍप आणि त्याच्या निर्मात्यांबद्दल अधिक जाणून घ्या';
+  String get aboutDescription =>
+      'ऍप आणि त्याच्या निर्मात्यांबद्दल अधिक जाणून घ्या';
 
   @override
   String get common => 'साधारण';
@@ -422,16 +425,19 @@ class AppLocalizationsMr extends AppLocalizations {
   String get notifications => 'सूचना';
 
   @override
-  String get notificationsDescription => 'तुम्ही कशा प्रकारे आणि केव्हा सूचना प्राप्त करायच्या ते कॉन्फिगर करा';
+  String get notificationsDescription =>
+      'तुम्ही कशा प्रकारे आणि केव्हा सूचना प्राप्त करायच्या ते कॉन्फिगर करा';
 
   @override
-  String get accountDescription => 'तुमचे AniList, MAL आणि Discord खाती सहजपणे व्यवस्थापित करा';
+  String get accountDescription =>
+      'तुमचे AniList, MAL आणि Discord खाती सहजपणे व्यवस्थापित करा';
 
   @override
   String get allCaughtUpNew => 'सर्व काही अपडेट झाले, काय नवीन आहे?';
 
   @override
-  String get animeDescription => 'तुमच्या अ‍ॅनिमी आवडी सानुकूलित करा आणि व्यवस्थापित करा';
+  String get animeDescription =>
+      'तुमच्या अ‍ॅनिमी आवडी सानुकूलित करा आणि व्यवस्थापित करा';
 
   @override
   String get darkMode => 'अंधार मोड';
@@ -449,19 +455,23 @@ class AppLocalizationsMr extends AppLocalizations {
   String get enableDarkMode => 'अंधार मोड सक्षम करा';
 
   @override
-  String get extensionsDescription => 'अधिक कार्यक्षमता मिळविण्यासाठी विस्तार स्थापित करा आणि व्यवस्थापित करा';
+  String get extensionsDescription =>
+      'अधिक कार्यक्षमता मिळविण्यासाठी विस्तार स्थापित करा आणि व्यवस्थापित करा';
 
   @override
   String get hiddenMedia => 'लपवलेली मीडिया';
 
   @override
-  String get incognitoModeDescription => 'तुमची क्रियाकलाप न जतन करता ब्राउझ करा';
+  String get incognitoModeDescription =>
+      'तुमची क्रियाकलाप न जतन करता ब्राउझ करा';
 
   @override
-  String get mangaDescription => 'तुमच्या मंगा अनुभवाची व्यवस्था करा आणि सानुकूलित करा';
+  String get mangaDescription =>
+      'तुमच्या मंगा अनुभवाची व्यवस्था करा आणि सानुकूलित करा';
 
   @override
-  String get noFavourites => 'तुम्ही काहीच आवडत नाहीत,\nकृपया शो आवडून तो येथे ठेवा.';
+  String get noFavourites =>
+      'तुम्ही काहीच आवडत नाहीत,\nकृपया शो आवडून तो येथे ठेवा.';
 
   @override
   String get noHiddenMediaFound => 'कुठलीही लपवलेली मीडिया सापडली नाही';
@@ -491,7 +501,8 @@ class AppLocalizationsMr extends AppLocalizations {
   String get recentUpdates => 'अलीकडील अद्यतने';
 
   @override
-  String get recommendationsEmptyMessage => 'सुझाव मिळवण्यासाठी काही अ‍ॅनिमे किंवा मंगा वाचा/पाहा';
+  String get recommendationsEmptyMessage =>
+      'सुझाव मिळवण्यासाठी काही अ‍ॅनिमे किंवा मंगा वाचा/पाहा';
 
   @override
   String get resizeMode => 'पुनः आकार मोड';
@@ -500,7 +511,8 @@ class AppLocalizationsMr extends AppLocalizations {
   String get resizeModeDescription => 'प्लेयरसाठी डिफॉल्ट पुनः आकार मोड';
 
   @override
-  String get supportMaintainer => 'Dartotsu च्या देखभाल करणाऱ्याला समर्थन देऊ इच्छिता?\nदान करण्याचा विचार करा';
+  String get supportMaintainer =>
+      'Dartotsu च्या देखभाल करणाऱ्याला समर्थन देऊ इच्छिता?\nदान करण्याचा विचार करा';
 
   @override
   String get theme => 'थीम';
@@ -602,7 +614,8 @@ class AppLocalizationsMr extends AppLocalizations {
   String get customPath => 'सानुकूल मार्ग';
 
   @override
-  String get customPathDescription => 'फाइल सेव्ह करण्यासाठी सानुकूल मार्ग सेट करा\nकाढण्यासाठी दीर्घकाळ दाबा';
+  String get customPathDescription =>
+      'फाइल सेव्ह करण्यासाठी सानुकूल मार्ग सेट करा\nकाढण्यासाठी दीर्घकाळ दाबा';
 
   @override
   String get selectDirectory => 'निर्देशिका निवडा';
@@ -641,7 +654,8 @@ class AppLocalizationsMr extends AppLocalizations {
   String get loadExtensionsIcon => 'एक्स्टेंशन आयकॉन लोड करा';
 
   @override
-  String get loadExtensionsIconDesc => 'जर एक्स्टेंशन पृष्ठ अडकत असेल तर अक्षम करा';
+  String get loadExtensionsIconDesc =>
+      'जर एक्स्टेंशन पृष्ठ अडकत असेल तर अक्षम करा';
 
   @override
   String get autoUpdate => 'स्वयंचलित अद्यतन';
@@ -668,7 +682,8 @@ class AppLocalizationsMr extends AppLocalizations {
   String get youTube => 'YouTube वर प्ले करायचे का?';
 
   @override
-  String get installSourceToStart => 'सुरू करण्यासाठी विस्तार पानावरून स्रोत स्थापित करा';
+  String get installSourceToStart =>
+      'सुरू करण्यासाठी विस्तार पानावरून स्रोत स्थापित करा';
 
   @override
   String get watching => 'पाहत आहे';

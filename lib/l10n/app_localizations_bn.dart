@@ -12,7 +12,8 @@ class AppLocalizationsBn extends AppLocalizations {
   String get appName => 'Dartotsu';
 
   @override
-  String get appTagline => 'নতুন সেরা অ্যাপ\nঅ্যানিমে ও মাঙ্গা ট্র্যাকিংয়ের জন্য';
+  String get appTagline =>
+      'নতুন সেরা অ্যাপ\nঅ্যানিমে ও মাঙ্গা ট্র্যাকিংয়ের জন্য';
 
   @override
   String get anilist => 'AniList';
@@ -404,34 +405,40 @@ class AppLocalizationsBn extends AppLocalizations {
   String get common => 'সাধারণ';
 
   @override
-  String get commonDescription => 'অ্যাপ ব্যবহারের জন্য সাধারণ সেটিংস অ্যাক্সেস করুন';
+  String get commonDescription =>
+      'অ্যাপ ব্যবহারের জন্য সাধারণ সেটিংস অ্যাক্সেস করুন';
 
   @override
   String get materialYou => 'Material You';
 
   @override
-  String get materialYouDescription => 'আপনার ওয়ালপেপারের মতো একই রঙ ব্যবহার করুন';
+  String get materialYouDescription =>
+      'আপনার ওয়ালপেপারের মতো একই রঙ ব্যবহার করুন';
 
   @override
   String get customTheme => 'কাস্টম থিম';
 
   @override
-  String get customThemeDescription => 'থিমের জন্য আপনার নিজস্ব রঙ ব্যবহার করুন';
+  String get customThemeDescription =>
+      'থিমের জন্য আপনার নিজস্ব রঙ ব্যবহার করুন';
 
   @override
   String get notifications => 'বিজ্ঞপ্তি';
 
   @override
-  String get notificationsDescription => 'আপনি কীভাবে এবং কখন বিজ্ঞপ্তি পাবেন তা কনফিগার করুন';
+  String get notificationsDescription =>
+      'আপনি কীভাবে এবং কখন বিজ্ঞপ্তি পাবেন তা কনফিগার করুন';
 
   @override
-  String get accountDescription => 'আপনার AniList, MAL এবং Discord অ্যাকাউন্ট সহজেই পরিচালনা করুন';
+  String get accountDescription =>
+      'আপনার AniList, MAL এবং Discord অ্যাকাউন্ট সহজেই পরিচালনা করুন';
 
   @override
   String get allCaughtUpNew => 'সবকিছু আপডেট হয়ে গেছে?';
 
   @override
-  String get animeDescription => 'আপনার অ্যানিমে পছন্দের ওপর কাস্টমাইজ করুন এবং পরিচালনা করুন';
+  String get animeDescription =>
+      'আপনার অ্যানিমে পছন্দের ওপর কাস্টমাইজ করুন এবং পরিচালনা করুন';
 
   @override
   String get darkMode => 'ডার্ক মোড';
@@ -449,19 +456,23 @@ class AppLocalizationsBn extends AppLocalizations {
   String get enableDarkMode => 'ডার্ক মোড সক্রিয় করুন';
 
   @override
-  String get extensionsDescription => 'অতিরিক্ত কার্যকারিতা জন্য এক্সটেনশনগুলি ইনস্টল এবং পরিচালনা করুন';
+  String get extensionsDescription =>
+      'অতিরিক্ত কার্যকারিতা জন্য এক্সটেনশনগুলি ইনস্টল এবং পরিচালনা করুন';
 
   @override
   String get hiddenMedia => 'গোপন মিডিয়া';
 
   @override
-  String get incognitoModeDescription => 'আপনার কার্যকলাপ সংরক্ষণ না করেই ব্রাউজ করুন';
+  String get incognitoModeDescription =>
+      'আপনার কার্যকলাপ সংরক্ষণ না করেই ব্রাউজ করুন';
 
   @override
-  String get mangaDescription => 'আপনার মাঙ্গা অভিজ্ঞতা সংগঠিত এবং কাস্টমাইজ করুন';
+  String get mangaDescription =>
+      'আপনার মাঙ্গা অভিজ্ঞতা সংগঠিত এবং কাস্টমাইজ করুন';
 
   @override
-  String get noFavourites => 'মনে হচ্ছে তোমার কিছুই ভালো লাগে না,\nএটি এখানে রাখার জন্য একটি শো পছন্দ করার চেষ্টা করুন।';
+  String get noFavourites =>
+      'মনে হচ্ছে তোমার কিছুই ভালো লাগে না,\nএটি এখানে রাখার জন্য একটি শো পছন্দ করার চেষ্টা করুন।';
 
   @override
   String get noHiddenMediaFound => 'কোনও গোপন মিডিয়া পাওয়া যায়নি';
@@ -470,7 +481,8 @@ class AppLocalizationsBn extends AppLocalizations {
   String get noOnHold => 'মনে হচ্ছে আপনি কিছু আটকে রাখেননি।';
 
   @override
-  String get offlineModeDescription => 'ইন্টারনেট সংযোগ ছাড়াই অ্যাপটি ব্যবহার করুন';
+  String get offlineModeDescription =>
+      'ইন্টারনেট সংযোগ ছাড়াই অ্যাপটি ব্যবহার করুন';
 
   @override
   String get oledThemeVariant => 'OLED থিম ভেরিয়েন্ট';
@@ -500,13 +512,15 @@ class AppLocalizationsBn extends AppLocalizations {
   String get resizeModeDescription => 'প্লেয়ারের জন্য ডিফল্ট রিসাইজ মোড';
 
   @override
-  String get supportMaintainer => 'Dartotsu-এর রক্ষণাবেক্ষককে সমর্থন করতে চান?\nদান করার কথা ভাবুন';
+  String get supportMaintainer =>
+      'Dartotsu-এর রক্ষণাবেক্ষককে সমর্থন করতে চান?\nদান করার কথা ভাবুন';
 
   @override
   String get theme => 'থিম';
 
   @override
-  String get themeDescription => 'আপনার অ্যাপের চেহারা এবং অনুভূতি কাস্টমাইজ করুন';
+  String get themeDescription =>
+      'আপনার অ্যাপের চেহারা এবং অনুভূতি কাস্টমাইজ করুন';
 
   @override
   String get author => 'লেখক';
@@ -602,7 +616,8 @@ class AppLocalizationsBn extends AppLocalizations {
   String get customPath => 'কাস্টম পথ';
 
   @override
-  String get customPathDescription => 'ফাইল সংরক্ষণ করার জন্য একটি কাস্টম পথ সেট করুন\nঅপসারণ করতে দীর্ঘক্ষণ টিপুন';
+  String get customPathDescription =>
+      'ফাইল সংরক্ষণ করার জন্য একটি কাস্টম পথ সেট করুন\nঅপসারণ করতে দীর্ঘক্ষণ টিপুন';
 
   @override
   String get selectDirectory => 'একটি ডিরেক্টরি নির্বাচন করুন';
@@ -641,7 +656,8 @@ class AppLocalizationsBn extends AppLocalizations {
   String get loadExtensionsIcon => 'এক্সটেনশনের আইকন লোড করুন';
 
   @override
-  String get loadExtensionsIconDesc => 'যদি এক্সটেনশন পেজ ধীর হয়ে যায়, এটি অক্ষম করুন';
+  String get loadExtensionsIconDesc =>
+      'যদি এক্সটেনশন পেজ ধীর হয়ে যায়, এটি অক্ষম করুন';
 
   @override
   String get autoUpdate => 'স্বয়ংক্রিয় আপডেট';
@@ -668,7 +684,8 @@ class AppLocalizationsBn extends AppLocalizations {
   String get youTube => 'ইউটিউবে চালান?';
 
   @override
-  String get installSourceToStart => 'শুরু করতে এক্সটেনশন পৃষ্ঠা থেকে একটি উৎস ইনস্টল করুন';
+  String get installSourceToStart =>
+      'শুরু করতে এক্সটেনশন পৃষ্ঠা থেকে একটি উৎস ইনস্টল করুন';
 
   @override
   String get watching => 'দেখছি';

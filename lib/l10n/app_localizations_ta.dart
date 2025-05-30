@@ -12,7 +12,8 @@ class AppLocalizationsTa extends AppLocalizations {
   String get appName => 'Dartotsu';
 
   @override
-  String get appTagline => 'புதிய சிறந்த பயன்பாடு\nஅனிமே மற்றும் மங்கா கண்காணிக்க';
+  String get appTagline =>
+      'புதிய சிறந்த பயன்பாடு\nஅனிமே மற்றும் மங்கா கண்காணிக்க';
 
   @override
   String get anilist => 'AniList';
@@ -317,7 +318,8 @@ class AppLocalizationsTa extends AppLocalizations {
   String get hidePrivate => 'தனியுரிமையை மறைக்கவும்';
 
   @override
-  String get hidePrivateDescription => 'மனைவிகளைக் கொடுத்து முகப்புப் பக்கத்தில் ஒத்திருக்கவும்.';
+  String get hidePrivateDescription =>
+      'மனைவிகளைக் கொடுத்து முகப்புப் பக்கத்தில் ஒத்திருக்கவும்.';
 
   @override
   String get fontColor => 'எழுத்து நிறம்';
@@ -362,7 +364,8 @@ class AppLocalizationsTa extends AppLocalizations {
   String get cursedSpeed => 'பதியSpeed';
 
   @override
-  String get cursedSpeedDescription => 'வாழ்க்கையில் மிகவும் பிஸியானவர்களுக்கானது';
+  String get cursedSpeedDescription =>
+      'வாழ்க்கையில் மிகவும் பிஸியானவர்களுக்கானது';
 
   @override
   String get speedDescription => 'ப்ளேயருக்கான இயல்புநிலை வேகம்';
@@ -398,7 +401,8 @@ class AppLocalizationsTa extends AppLocalizations {
   String get about => 'பற்றி';
 
   @override
-  String get aboutDescription => 'பயன்பாட்டையும் அதன் படைப்பாளர்களையும் பற்றி மேலும் அறியவும்';
+  String get aboutDescription =>
+      'பயன்பாட்டையும் அதன் படைப்பாளர்களையும் பற்றி மேலும் அறியவும்';
 
   @override
   String get common => 'பொதுவான';
@@ -410,7 +414,8 @@ class AppLocalizationsTa extends AppLocalizations {
   String get materialYou => 'Material You';
 
   @override
-  String get materialYouDescription => 'உங்கள் கைவினைப் படத்தின் நிறத்தை பயன்படுத்தவும்';
+  String get materialYouDescription =>
+      'உங்கள் கைவினைப் படத்தின் நிறத்தை பயன்படுத்தவும்';
 
   @override
   String get customTheme => 'தனிப்பயனாக்கிய தீமா';
@@ -422,16 +427,19 @@ class AppLocalizationsTa extends AppLocalizations {
   String get notifications => 'அறிவிப்புகள்';
 
   @override
-  String get notificationsDescription => 'எப்போது மற்றும் எப்படி அறிவிப்புகள் பெறுவது என்பதை அமைக்கவும்';
+  String get notificationsDescription =>
+      'எப்போது மற்றும் எப்படி அறிவிப்புகள் பெறுவது என்பதை அமைக்கவும்';
 
   @override
-  String get accountDescription => 'உங்கள் AniList, MAL மற்றும் Discord கணக்குகளை எளிதாக நிர்வகிக்கவும்';
+  String get accountDescription =>
+      'உங்கள் AniList, MAL மற்றும் Discord கணக்குகளை எளிதாக நிர்வகிக்கவும்';
 
   @override
   String get allCaughtUpNew => 'அனைத்து புதுப்பிக்கப்பட்டவை, புதியவை என்ன?';
 
   @override
-  String get animeDescription => 'உங்கள் அனிமே விருப்பங்களை தனிப்பயனாக்கி நிர்வகிக்கவும்';
+  String get animeDescription =>
+      'உங்கள் அனிமே விருப்பங்களை தனிப்பயனாக்கி நிர்வகிக்கவும்';
 
   @override
   String get darkMode => 'கருப்பு முறை';
@@ -449,19 +457,23 @@ class AppLocalizationsTa extends AppLocalizations {
   String get enableDarkMode => 'கருப்பு முறையை இயக்கவும்';
 
   @override
-  String get extensionsDescription => 'சேர்க்கைகள் மற்றும் செயல்பாடுகளை மேலதிகமாக நிறுவவும்';
+  String get extensionsDescription =>
+      'சேர்க்கைகள் மற்றும் செயல்பாடுகளை மேலதிகமாக நிறுவவும்';
 
   @override
   String get hiddenMedia => 'மறைக்கப்பட்ட மீடியா';
 
   @override
-  String get incognitoModeDescription => 'உங்கள் செயல்பாடுகளை சேமிக்காமல் உலாவவும்';
+  String get incognitoModeDescription =>
+      'உங்கள் செயல்பாடுகளை சேமிக்காமல் உலாவவும்';
 
   @override
-  String get mangaDescription => 'உங்கள் மங்கா அனுபவத்தை ஒழுங்குபடுத்தவும் மற்றும் தனிப்பயனாக்கவும்';
+  String get mangaDescription =>
+      'உங்கள் மங்கா அனுபவத்தை ஒழுங்குபடுத்தவும் மற்றும் தனிப்பயனாக்கவும்';
 
   @override
-  String get noFavourites => 'உங்களுக்கு இதுவரை எதுவும் பிடிக்கவில்லை,\nஒரு நிகழ்ச்சியை விரும்பி இதை இங்கே வைத்திருங்கள்.';
+  String get noFavourites =>
+      'உங்களுக்கு இதுவரை எதுவும் பிடிக்கவில்லை,\nஒரு நிகழ்ச்சியை விரும்பி இதை இங்கே வைத்திருங்கள்.';
 
   @override
   String get noHiddenMediaFound => 'மறைக்கப்பட்ட மீடியா எதுவும் கண்டறியவில்லை';
@@ -470,7 +482,8 @@ class AppLocalizationsTa extends AppLocalizations {
   String get noOnHold => 'நீங்கள் எந்த ஒன்றையும் நிறுத்தவில்லை போல் தெரிகிறது.';
 
   @override
-  String get offlineModeDescription => 'இணைய இணைப்பு இல்லாமல் பயன்பாட்டை பயன்படுத்தவும்';
+  String get offlineModeDescription =>
+      'இணைய இணைப்பு இல்லாமல் பயன்பாட்டை பயன்படுத்தவும்';
 
   @override
   String get oledThemeVariant => 'OLED தீமா மாறுபாடு';
@@ -491,7 +504,8 @@ class AppLocalizationsTa extends AppLocalizations {
   String get recentUpdates => 'இணையதள புதிய பதிவுகள்';
 
   @override
-  String get recommendationsEmptyMessage => 'எந்த அநிமே அல்லது மாஙாவைப் பார்க்க/படிக்கவும் பரிந்துரைகள் பெற';
+  String get recommendationsEmptyMessage =>
+      'எந்த அநிமே அல்லது மாஙாவைப் பார்க்க/படிக்கவும் பரிந்துரைகள் பெற';
 
   @override
   String get resizeMode => 'பரிமாண முறை';
@@ -500,13 +514,15 @@ class AppLocalizationsTa extends AppLocalizations {
   String get resizeModeDescription => 'ப்ளேயருக்கான இயல்புநிலை பரிமாண முறை';
 
   @override
-  String get supportMaintainer => 'Dartotsu பராமரிப்பாளரை ஆதரிக்க விரும்புகிறீர்களா?\nதனியுரிமையாக வழங்கலை பரிசீலிக்கவும்';
+  String get supportMaintainer =>
+      'Dartotsu பராமரிப்பாளரை ஆதரிக்க விரும்புகிறீர்களா?\nதனியுரிமையாக வழங்கலை பரிசீலிக்கவும்';
 
   @override
   String get theme => 'தீமா';
 
   @override
-  String get themeDescription => 'உங்கள் பயன்பாட்டின் தோற்றத்தை மற்றும் வாட்டையை தனிப்பயனாக்கவும்';
+  String get themeDescription =>
+      'உங்கள் பயன்பாட்டின் தோற்றத்தை மற்றும் வாட்டையை தனிப்பயனாக்கவும்';
 
   @override
   String get author => 'Author';
@@ -602,7 +618,8 @@ class AppLocalizationsTa extends AppLocalizations {
   String get customPath => 'தனிப்பயன் பாதை';
 
   @override
-  String get customPathDescription => 'கோப்புகளைச் சேமிக்க தனிப்பயன் பாதையை அமைக்கவும்\nஅகற்ற நீண்ட நேரம் அழுத்தவும்';
+  String get customPathDescription =>
+      'கோப்புகளைச் சேமிக்க தனிப்பயன் பாதையை அமைக்கவும்\nஅகற்ற நீண்ட நேரம் அழுத்தவும்';
 
   @override
   String get selectDirectory => 'ஒரு கோப்பகத்தைத் தேர்ந்தெடுக்கவும்';
@@ -623,25 +640,29 @@ class AppLocalizationsTa extends AppLocalizations {
   String get addAnimeRepo => 'ஆனிமே பகிர்வகம் சேர்க்கவும்';
 
   @override
-  String get addAnimeRepoDesc => 'வேறு விதமான மூலங்களில் இருந்து ஆனிமே பகிர்வகம் சேர்க்கவும்';
+  String get addAnimeRepoDesc =>
+      'வேறு விதமான மூலங்களில் இருந்து ஆனிமே பகிர்வகம் சேர்க்கவும்';
 
   @override
   String get addMangaRepo => 'மான்கா பகிர்வகம் சேர்க்கவும்';
 
   @override
-  String get addMangaRepoDesc => 'வேறு விதமான மூலங்களில் இருந்து மான்கா பகிர்வகம் சேர்க்கவும்';
+  String get addMangaRepoDesc =>
+      'வேறு விதமான மூலங்களில் இருந்து மான்கா பகிர்வகம் சேர்க்கவும்';
 
   @override
   String get addNovelRepo => 'நாவல் பகிர்வகம் சேர்க்கவும்';
 
   @override
-  String get addNovelRepoDesc => 'வேறு விதமான மூலங்களில் இருந்து நாவல் பகிர்வகம் சேர்க்கவும்';
+  String get addNovelRepoDesc =>
+      'வேறு விதமான மூலங்களில் இருந்து நாவல் பகிர்வகம் சேர்க்கவும்';
 
   @override
   String get loadExtensionsIcon => 'நீட்டிப்புகளின் குறும்படங்களை ஏற்றுக';
 
   @override
-  String get loadExtensionsIconDesc => 'நீட்டிப்பு பக்கம் மந்தமாக இருந்தால் முடக்கு';
+  String get loadExtensionsIconDesc =>
+      'நீட்டிப்பு பக்கம் மந்தமாக இருந்தால் முடக்கு';
 
   @override
   String get autoUpdate => 'தானியங்கும் புதுப்பிப்பு';
@@ -668,7 +689,8 @@ class AppLocalizationsTa extends AppLocalizations {
   String get youTube => 'YouTube-இல் இயக்கவா?';
 
   @override
-  String get installSourceToStart => 'தொடங்குவதற்கு நீட்டிப்பு பக்கத்திலிருந்து மூலத்தை நிறுவவும்';
+  String get installSourceToStart =>
+      'தொடங்குவதற்கு நீட்டிப்பு பக்கத்திலிருந்து மூலத்தை நிறுவவும்';
 
   @override
   String get watching => 'பார்க்கிறது';

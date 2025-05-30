@@ -362,7 +362,8 @@ class AppLocalizationsVi extends AppLocalizations {
   String get cursedSpeed => 'Tốc độ nhanh';
 
   @override
-  String get cursedSpeedDescription => 'Dành cho những người quá bận rộn với cuộc sống';
+  String get cursedSpeedDescription =>
+      'Dành cho những người quá bận rộn với cuộc sống';
 
   @override
   String get speedDescription => 'Tốc độ mặc định của trình phát';
@@ -404,7 +405,8 @@ class AppLocalizationsVi extends AppLocalizations {
   String get common => 'Cài đặt chung';
 
   @override
-  String get commonDescription => 'Truy cập cài đặt chung để sử dụng ứng dụng dễ dàng hơn';
+  String get commonDescription =>
+      'Truy cập cài đặt chung để sử dụng ứng dụng dễ dàng hơn';
 
   @override
   String get materialYou => 'Material You';
@@ -416,22 +418,26 @@ class AppLocalizationsVi extends AppLocalizations {
   String get customTheme => 'Giao diện tùy chỉnh';
 
   @override
-  String get customThemeDescription => 'Sử dụng màu sắc của riêng bạn cho giao diện';
+  String get customThemeDescription =>
+      'Sử dụng màu sắc của riêng bạn cho giao diện';
 
   @override
   String get notifications => 'Thông báo';
 
   @override
-  String get notificationsDescription => 'Cấu hình cách và thời điểm bạn nhận thông báo';
+  String get notificationsDescription =>
+      'Cấu hình cách và thời điểm bạn nhận thông báo';
 
   @override
-  String get accountDescription => 'Quản lý tài khoản AniList, MAL và Discord của bạn một cách dễ dàng';
+  String get accountDescription =>
+      'Quản lý tài khoản AniList, MAL và Discord của bạn một cách dễ dàng';
 
   @override
   String get allCaughtUpNew => 'Đã theo kịp, có gì mới?';
 
   @override
-  String get animeDescription => 'Cá nhân hóa và quản lý sở thích anime của bạn';
+  String get animeDescription =>
+      'Cá nhân hóa và quản lý sở thích anime của bạn';
 
   @override
   String get darkMode => 'Chế độ tối';
@@ -449,7 +455,8 @@ class AppLocalizationsVi extends AppLocalizations {
   String get enableDarkMode => 'Bật chế độ tối';
 
   @override
-  String get extensionsDescription => 'Cài đặt và quản lý tiện ích mở rộng để tăng cường tính năng';
+  String get extensionsDescription =>
+      'Cài đặt và quản lý tiện ích mở rộng để tăng cường tính năng';
 
   @override
   String get hiddenMedia => 'Media ẩn';
@@ -458,10 +465,12 @@ class AppLocalizationsVi extends AppLocalizations {
   String get incognitoModeDescription => 'Duyệt mà không lưu hoạt động của bạn';
 
   @override
-  String get mangaDescription => 'Sắp xếp và cá nhân hóa trải nghiệm Manga của bạn';
+  String get mangaDescription =>
+      'Sắp xếp và cá nhân hóa trải nghiệm Manga của bạn';
 
   @override
-  String get noFavourites => 'Có vẻ bạn chưa thích gì,\nHãy thử thích một chương trình để giữ nó ở đây.';
+  String get noFavourites =>
+      'Có vẻ bạn chưa thích gì,\nHãy thử thích một chương trình để giữ nó ở đây.';
 
   @override
   String get noHiddenMediaFound => 'Không tìm thấy media ẩn';
@@ -470,7 +479,8 @@ class AppLocalizationsVi extends AppLocalizations {
   String get noOnHold => 'Có vẻ bạn chưa tạm dừng gì.';
 
   @override
-  String get offlineModeDescription => 'Sử dụng ứng dụng mà không cần kết nối internet';
+  String get offlineModeDescription =>
+      'Sử dụng ứng dụng mà không cần kết nối internet';
 
   @override
   String get oledThemeVariant => 'Biến thể giao diện OLED';
@@ -491,22 +501,26 @@ class AppLocalizationsVi extends AppLocalizations {
   String get recentUpdates => 'Cập nhật gần đây';
 
   @override
-  String get recommendationsEmptyMessage => 'Xem/Đọc một số Anime hoặc Manga để nhận khuyến nghị';
+  String get recommendationsEmptyMessage =>
+      'Xem/Đọc một số Anime hoặc Manga để nhận khuyến nghị';
 
   @override
   String get resizeMode => 'Chế độ thay đổi kích thước';
 
   @override
-  String get resizeModeDescription => 'Chế độ thay đổi kích thước mặc định cho trình phát';
+  String get resizeModeDescription =>
+      'Chế độ thay đổi kích thước mặc định cho trình phát';
 
   @override
-  String get supportMaintainer => 'Muốn hỗ trợ nhà phát triển Dartotsu?\nHãy xem xét việc quyên góp';
+  String get supportMaintainer =>
+      'Muốn hỗ trợ nhà phát triển Dartotsu?\nHãy xem xét việc quyên góp';
 
   @override
   String get theme => 'Giao diện';
 
   @override
-  String get themeDescription => 'Tùy chỉnh giao diện và phong cách của ứng dụng';
+  String get themeDescription =>
+      'Tùy chỉnh giao diện và phong cách của ứng dụng';
 
   @override
   String get author => 'Tác giả';
@@ -602,7 +616,8 @@ class AppLocalizationsVi extends AppLocalizations {
   String get customPath => 'Đường dẫn tùy chỉnh';
 
   @override
-  String get customPathDescription => 'Đặt đường dẫn tùy chỉnh để lưu tệp\nNhấn lâu để xóa';
+  String get customPathDescription =>
+      'Đặt đường dẫn tùy chỉnh để lưu tệp\nNhấn lâu để xóa';
 
   @override
   String get selectDirectory => 'Chọn một thư mục';
@@ -635,7 +650,8 @@ class AppLocalizationsVi extends AppLocalizations {
   String get addNovelRepo => 'Thêm kho tiểu thuyết';
 
   @override
-  String get addNovelRepoDesc => 'Thêm kho tiểu thuyết từ nhiều nguồn khác nhau';
+  String get addNovelRepoDesc =>
+      'Thêm kho tiểu thuyết từ nhiều nguồn khác nhau';
 
   @override
   String get loadExtensionsIcon => 'Tải biểu tượng tiện ích mở rộng';
@@ -668,7 +684,8 @@ class AppLocalizationsVi extends AppLocalizations {
   String get youTube => 'Phát trên YouTube?';
 
   @override
-  String get installSourceToStart => 'Cài đặt nguồn từ trang tiện ích mở rộng để bắt đầu';
+  String get installSourceToStart =>
+      'Cài đặt nguồn từ trang tiện ích mở rộng để bắt đầu';
 
   @override
   String get watching => 'Đang xem';

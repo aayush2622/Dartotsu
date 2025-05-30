@@ -12,7 +12,8 @@ class AppLocalizationsFil extends AppLocalizations {
   String get appName => 'Dartotsu';
 
   @override
-  String get appTagline => 'Ang BAGONG Pinakamahusay na App Para\nSa Pagtutok ng Anime at Manga';
+  String get appTagline =>
+      'Ang BAGONG Pinakamahusay na App Para\nSa Pagtutok ng Anime at Manga';
 
   @override
   String get anilist => 'AniList';
@@ -317,7 +318,8 @@ class AppLocalizationsFil extends AppLocalizations {
   String get hidePrivate => 'Itago ang Pribado';
 
   @override
-  String get hidePrivateDescription => 'Itago ang pribadong serye mula sa Home page.';
+  String get hidePrivateDescription =>
+      'Itago ang pribadong serye mula sa Home page.';
 
   @override
   String get fontColor => 'Kulay ng Font';
@@ -347,7 +349,8 @@ class AppLocalizationsFil extends AppLocalizations {
   String get showSubtitles => 'Ipakita ang mga Subtitle';
 
   @override
-  String get showSubtitlesDescription => 'Ipakita ang mga subtitle bilang default';
+  String get showSubtitlesDescription =>
+      'Ipakita ang mga subtitle bilang default';
 
   @override
   String get skipButton => 'Buton ng Pag-laktaw';
@@ -362,7 +365,8 @@ class AppLocalizationsFil extends AppLocalizations {
   String get cursedSpeed => 'Pinagpalang Bilis';
 
   @override
-  String get cursedSpeedDescription => 'Para sa mga taong masyadong abala sa buhay';
+  String get cursedSpeedDescription =>
+      'Para sa mga taong masyadong abala sa buhay';
 
   @override
   String get speedDescription => 'Default na bilis para sa player';
@@ -398,40 +402,47 @@ class AppLocalizationsFil extends AppLocalizations {
   String get about => 'Tungkol';
 
   @override
-  String get aboutDescription => 'Alamin ang higit pa tungkol sa app at sa mga lumikha nito';
+  String get aboutDescription =>
+      'Alamin ang higit pa tungkol sa app at sa mga lumikha nito';
 
   @override
   String get common => 'Karaniwan';
 
   @override
-  String get commonDescription => 'Mag-access ng mga pangkalahatang setting para sa maayos na paggamit ng app';
+  String get commonDescription =>
+      'Mag-access ng mga pangkalahatang setting para sa maayos na paggamit ng app';
 
   @override
   String get materialYou => 'Material You';
 
   @override
-  String get materialYouDescription => 'Gamitin ang parehong kulay ng iyong wallpaper';
+  String get materialYouDescription =>
+      'Gamitin ang parehong kulay ng iyong wallpaper';
 
   @override
   String get customTheme => 'Custom na Tema';
 
   @override
-  String get customThemeDescription => 'Gamitin ang iyong sariling kulay para sa tema';
+  String get customThemeDescription =>
+      'Gamitin ang iyong sariling kulay para sa tema';
 
   @override
   String get notifications => 'Mga Abiso';
 
   @override
-  String get notificationsDescription => 'I-configure kung paano at kailan ka makakatanggap ng mga abiso';
+  String get notificationsDescription =>
+      'I-configure kung paano at kailan ka makakatanggap ng mga abiso';
 
   @override
-  String get accountDescription => 'Pamahalaan ang iyong mga account sa AniList, MAL, at Discord nang walang kahirap-hirap';
+  String get accountDescription =>
+      'Pamahalaan ang iyong mga account sa AniList, MAL, at Discord nang walang kahirap-hirap';
 
   @override
   String get allCaughtUpNew => 'Natapos na lahat, Ano\'ng Bago?';
 
   @override
-  String get animeDescription => 'I-personalize at pamahalaan ang iyong mga kagustuhan sa anime';
+  String get animeDescription =>
+      'I-personalize at pamahalaan ang iyong mga kagustuhan sa anime';
 
   @override
   String get darkMode => 'Madilim na Mode';
@@ -449,19 +460,23 @@ class AppLocalizationsFil extends AppLocalizations {
   String get enableDarkMode => 'I-enable ang Madilim na Mode';
 
   @override
-  String get extensionsDescription => 'Mag-install at pamahalaan ang mga extension para sa karagdagang functionality';
+  String get extensionsDescription =>
+      'Mag-install at pamahalaan ang mga extension para sa karagdagang functionality';
 
   @override
   String get hiddenMedia => 'Nakatagong Media';
 
   @override
-  String get incognitoModeDescription => 'Mag-browse nang hindi isinusuong ang iyong aktibidad';
+  String get incognitoModeDescription =>
+      'Mag-browse nang hindi isinusuong ang iyong aktibidad';
 
   @override
-  String get mangaDescription => 'I-organisa at i-tailor ang iyong karanasan sa manga';
+  String get mangaDescription =>
+      'I-organisa at i-tailor ang iyong karanasan sa manga';
 
   @override
-  String get noFavourites => 'Mukhang wala kang paborito,\nSubukang magustuhan ang palabas para manatili ito rito.';
+  String get noFavourites =>
+      'Mukhang wala kang paborito,\nSubukang magustuhan ang palabas para manatili ito rito.';
 
   @override
   String get noHiddenMediaFound => 'Walang nakatagong media na nakita';
@@ -470,7 +485,8 @@ class AppLocalizationsFil extends AppLocalizations {
   String get noOnHold => 'Mukhang wala kang nilagay sa hold.';
 
   @override
-  String get offlineModeDescription => 'Gamitin ang app nang walang koneksyon sa internet';
+  String get offlineModeDescription =>
+      'Gamitin ang app nang walang koneksyon sa internet';
 
   @override
   String get oledThemeVariant => 'OLED na Variant ng Tema';
@@ -491,16 +507,19 @@ class AppLocalizationsFil extends AppLocalizations {
   String get recentUpdates => 'Mga Kamakailang Update';
 
   @override
-  String get recommendationsEmptyMessage => 'Manood/Magbasa ng Anime o Manga para makakuha ng Rekomendasyon';
+  String get recommendationsEmptyMessage =>
+      'Manood/Magbasa ng Anime o Manga para makakuha ng Rekomendasyon';
 
   @override
   String get resizeMode => 'Mode ng Resize';
 
   @override
-  String get resizeModeDescription => 'Default na mode ng resize para sa player';
+  String get resizeModeDescription =>
+      'Default na mode ng resize para sa player';
 
   @override
-  String get supportMaintainer => 'Gusto mo bang suportahan ang Tagapangalaga ng Dartotsu?\nIsaalang-alang ang Pag-donate';
+  String get supportMaintainer =>
+      'Gusto mo bang suportahan ang Tagapangalaga ng Dartotsu?\nIsaalang-alang ang Pag-donate';
 
   @override
   String get theme => 'Tema';
@@ -602,7 +621,8 @@ class AppLocalizationsFil extends AppLocalizations {
   String get customPath => 'Custom na Path';
 
   @override
-  String get customPathDescription => 'Magtakda ng custom na path para mag-save ng mga file\nPindutin nang matagal upang alisin';
+  String get customPathDescription =>
+      'Magtakda ng custom na path para mag-save ng mga file\nPindutin nang matagal upang alisin';
 
   @override
   String get selectDirectory => 'Pumili ng isang direktoryo';
@@ -623,25 +643,29 @@ class AppLocalizationsFil extends AppLocalizations {
   String get addAnimeRepo => 'Magdagdag ng Anime Repo';
 
   @override
-  String get addAnimeRepoDesc => 'Magdagdag ng Anime Repo mula sa iba\'t ibang mapagkukunan';
+  String get addAnimeRepoDesc =>
+      'Magdagdag ng Anime Repo mula sa iba\'t ibang mapagkukunan';
 
   @override
   String get addMangaRepo => 'Magdagdag ng Manga Repo';
 
   @override
-  String get addMangaRepoDesc => 'Magdagdag ng Manga Repo mula sa iba\'t ibang mapagkukunan';
+  String get addMangaRepoDesc =>
+      'Magdagdag ng Manga Repo mula sa iba\'t ibang mapagkukunan';
 
   @override
   String get addNovelRepo => 'Magdagdag ng Nobela Repo';
 
   @override
-  String get addNovelRepoDesc => 'Magdagdag ng Nobela Repo mula sa iba\'t ibang mapagkukunan';
+  String get addNovelRepoDesc =>
+      'Magdagdag ng Nobela Repo mula sa iba\'t ibang mapagkukunan';
 
   @override
   String get loadExtensionsIcon => 'I-load ang Icon ng Mga Extension';
 
   @override
-  String get loadExtensionsIconDesc => 'Huwag paganahin kung mabagal ang pahina ng mga extension';
+  String get loadExtensionsIconDesc =>
+      'Huwag paganahin kung mabagal ang pahina ng mga extension';
 
   @override
   String get autoUpdate => 'Awtomatikong Pag-update';
@@ -668,7 +692,8 @@ class AppLocalizationsFil extends AppLocalizations {
   String get youTube => 'i-play sa YouTube?';
 
   @override
-  String get installSourceToStart => 'Mag-install ng pinagmulan mula sa pahina ng extension upang magsimula';
+  String get installSourceToStart =>
+      'Mag-install ng pinagmulan mula sa pahina ng extension upang magsimula';
 
   @override
   String get watching => 'nanonood';

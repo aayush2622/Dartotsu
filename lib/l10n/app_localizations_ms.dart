@@ -12,7 +12,8 @@ class AppLocalizationsMs extends AppLocalizations {
   String get appName => 'Dartotsu';
 
   @override
-  String get appTagline => 'Aplikasi Terbaik Baru Untuk\nMenjejak Anime & Manga';
+  String get appTagline =>
+      'Aplikasi Terbaik Baru Untuk\nMenjejak Anime & Manga';
 
   @override
   String get anilist => 'AniList';
@@ -317,7 +318,8 @@ class AppLocalizationsMs extends AppLocalizations {
   String get hidePrivate => 'Sembunyikan Peribadi';
 
   @override
-  String get hidePrivateDescription => 'Sembunyikan siri peribadi dari halaman Utama.';
+  String get hidePrivateDescription =>
+      'Sembunyikan siri peribadi dari halaman Utama.';
 
   @override
   String get fontColor => 'Warna Fon';
@@ -362,7 +364,8 @@ class AppLocalizationsMs extends AppLocalizations {
   String get cursedSpeed => 'Kelajuan Terkutuk';
 
   @override
-  String get cursedSpeedDescription => 'Untuk mereka yang terlalu sibuk dengan kehidupan';
+  String get cursedSpeedDescription =>
+      'Untuk mereka yang terlalu sibuk dengan kehidupan';
 
   @override
   String get speedDescription => 'Kelajuan lalai untuk pemain';
@@ -398,19 +401,22 @@ class AppLocalizationsMs extends AppLocalizations {
   String get about => 'Tentang';
 
   @override
-  String get aboutDescription => 'Ketahui lebih lanjut tentang aplikasi dan penciptanya';
+  String get aboutDescription =>
+      'Ketahui lebih lanjut tentang aplikasi dan penciptanya';
 
   @override
   String get common => 'Umum';
 
   @override
-  String get commonDescription => 'Akses tetapan umum untuk penggunaan aplikasi yang lancar';
+  String get commonDescription =>
+      'Akses tetapan umum untuk penggunaan aplikasi yang lancar';
 
   @override
   String get materialYou => 'Material You';
 
   @override
-  String get materialYouDescription => 'Gunakan warna yang sama seperti latar belakang anda';
+  String get materialYouDescription =>
+      'Gunakan warna yang sama seperti latar belakang anda';
 
   @override
   String get customTheme => 'Tema Kustom';
@@ -422,10 +428,12 @@ class AppLocalizationsMs extends AppLocalizations {
   String get notifications => 'Pemberitahuan';
 
   @override
-  String get notificationsDescription => 'Konfigurasikan bagaimana dan bila anda menerima pemberitahuan';
+  String get notificationsDescription =>
+      'Konfigurasikan bagaimana dan bila anda menerima pemberitahuan';
 
   @override
-  String get accountDescription => 'Urusi akaun AniList, MAL, dan Discord anda dengan mudah';
+  String get accountDescription =>
+      'Urusi akaun AniList, MAL, dan Discord anda dengan mudah';
 
   @override
   String get allCaughtUpNew => 'Semua sudah selesai, apa yang baru?';
@@ -449,19 +457,22 @@ class AppLocalizationsMs extends AppLocalizations {
   String get enableDarkMode => 'Aktifkan Mod Gelap';
 
   @override
-  String get extensionsDescription => 'Pasang dan uruskan pelebaran untuk fungsi tambahan';
+  String get extensionsDescription =>
+      'Pasang dan uruskan pelebaran untuk fungsi tambahan';
 
   @override
   String get hiddenMedia => 'Media Tersembunyi';
 
   @override
-  String get incognitoModeDescription => 'Melayari tanpa menyimpan aktiviti anda';
+  String get incognitoModeDescription =>
+      'Melayari tanpa menyimpan aktiviti anda';
 
   @override
   String get mangaDescription => 'Susun dan sesuaikan pengalaman manga anda';
 
   @override
-  String get noFavourites => 'Nampaknya anda tidak suka apa-apa,\nCuba suka sesuatu untuk menyimpannya di sini.';
+  String get noFavourites =>
+      'Nampaknya anda tidak suka apa-apa,\nCuba suka sesuatu untuk menyimpannya di sini.';
 
   @override
   String get noHiddenMediaFound => 'Tiada media tersembunyi ditemukan';
@@ -470,7 +481,8 @@ class AppLocalizationsMs extends AppLocalizations {
   String get noOnHold => 'Nampaknya anda belum menangguhkan apa-apa.';
 
   @override
-  String get offlineModeDescription => 'Gunakan aplikasi tanpa sambungan internet';
+  String get offlineModeDescription =>
+      'Gunakan aplikasi tanpa sambungan internet';
 
   @override
   String get oledThemeVariant => 'Varian Tema OLED';
@@ -491,7 +503,8 @@ class AppLocalizationsMs extends AppLocalizations {
   String get recentUpdates => 'Kemas Kini Terkini';
 
   @override
-  String get recommendationsEmptyMessage => 'Tonton/Baca beberapa Anime atau Manga untuk mendapatkan Cadangan';
+  String get recommendationsEmptyMessage =>
+      'Tonton/Baca beberapa Anime atau Manga untuk mendapatkan Cadangan';
 
   @override
   String get resizeMode => 'Mod Ubah Saiz';
@@ -500,13 +513,15 @@ class AppLocalizationsMs extends AppLocalizations {
   String get resizeModeDescription => 'Mod ubah saiz lalai untuk pemain';
 
   @override
-  String get supportMaintainer => 'Ingin menyokong Penyenggara Dartotsu?\nPertimbangkan untuk Menyumbang';
+  String get supportMaintainer =>
+      'Ingin menyokong Penyenggara Dartotsu?\nPertimbangkan untuk Menyumbang';
 
   @override
   String get theme => 'Tema';
 
   @override
-  String get themeDescription => 'Sesuaikan penampilan dan suasana aplikasi anda';
+  String get themeDescription =>
+      'Sesuaikan penampilan dan suasana aplikasi anda';
 
   @override
   String get author => 'Author';
@@ -602,7 +617,8 @@ class AppLocalizationsMs extends AppLocalizations {
   String get customPath => 'Laluan Tersuai';
 
   @override
-  String get customPathDescription => 'Tetapkan laluan tersuai untuk menyimpan fail\nTekan lama untuk mengeluarkan';
+  String get customPathDescription =>
+      'Tetapkan laluan tersuai untuk menyimpan fail\nTekan lama untuk mengeluarkan';
 
   @override
   String get selectDirectory => 'Pilih direktori';
@@ -641,7 +657,8 @@ class AppLocalizationsMs extends AppLocalizations {
   String get loadExtensionsIcon => 'Muat Ikon Sambungan';
 
   @override
-  String get loadExtensionsIconDesc => 'Lumpuhkan jika halaman sambungan menjadi lambat';
+  String get loadExtensionsIconDesc =>
+      'Lumpuhkan jika halaman sambungan menjadi lambat';
 
   @override
   String get autoUpdate => 'Kemas Kini Automatik';
@@ -668,7 +685,8 @@ class AppLocalizationsMs extends AppLocalizations {
   String get youTube => 'Main di YouTube?';
 
   @override
-  String get installSourceToStart => 'Pasang sumber dari halaman sambungan untuk mula';
+  String get installSourceToStart =>
+      'Pasang sumber dari halaman sambungan untuk mula';
 
   @override
   String get watching => 'Menonton';

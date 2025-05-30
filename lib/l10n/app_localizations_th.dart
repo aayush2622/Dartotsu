@@ -12,7 +12,8 @@ class AppLocalizationsTh extends AppLocalizations {
   String get appName => 'Dartotsu';
 
   @override
-  String get appTagline => 'แอปที่ดีที่สุดใหม่ล่าสุดสำหรับ\nการติดตามอนิเมะและมังงะ';
+  String get appTagline =>
+      'แอปที่ดีที่สุดใหม่ล่าสุดสำหรับ\nการติดตามอนิเมะและมังงะ';
 
   @override
   String get anilist => 'AniList';
@@ -404,7 +405,8 @@ class AppLocalizationsTh extends AppLocalizations {
   String get common => 'ทั่วไป';
 
   @override
-  String get commonDescription => 'เข้าถึงการตั้งค่าทั่วไปเพื่อการใช้งานแอปที่ราบรื่น';
+  String get commonDescription =>
+      'เข้าถึงการตั้งค่าทั่วไปเพื่อการใช้งานแอปที่ราบรื่น';
 
   @override
   String get materialYou => 'Material You';
@@ -425,13 +427,15 @@ class AppLocalizationsTh extends AppLocalizations {
   String get notificationsDescription => 'ตั้งค่าการแจ้งเตือนของคุณ';
 
   @override
-  String get accountDescription => 'จัดการบัญชี AniList, MAL และ Discord ของคุณได้อย่างง่ายดาย';
+  String get accountDescription =>
+      'จัดการบัญชี AniList, MAL และ Discord ของคุณได้อย่างง่ายดาย';
 
   @override
   String get allCaughtUpNew => 'ทั้งหมดตามทันแล้ว, มีอะไรใหม่บ้าง?';
 
   @override
-  String get animeDescription => 'ปรับแต่งและจัดการความชอบของคุณเกี่ยวกับอนิเมะ';
+  String get animeDescription =>
+      'ปรับแต่งและจัดการความชอบของคุณเกี่ยวกับอนิเมะ';
 
   @override
   String get darkMode => 'โหมดมืด';
@@ -449,7 +453,8 @@ class AppLocalizationsTh extends AppLocalizations {
   String get enableDarkMode => 'เปิดโหมดมืด';
 
   @override
-  String get extensionsDescription => 'ติดตั้งและจัดการส่วนเสริมเพื่อเพิ่มฟังก์ชันการทำงาน';
+  String get extensionsDescription =>
+      'ติดตั้งและจัดการส่วนเสริมเพื่อเพิ่มฟังก์ชันการทำงาน';
 
   @override
   String get hiddenMedia => 'สื่อที่ซ่อน';
@@ -458,10 +463,12 @@ class AppLocalizationsTh extends AppLocalizations {
   String get incognitoModeDescription => 'เรียกดูโดยไม่บันทึกกิจกรรมของคุณ';
 
   @override
-  String get mangaDescription => 'จัดระเบียบและปรับแต่งประสบการณ์การอ่านมังงะของคุณ';
+  String get mangaDescription =>
+      'จัดระเบียบและปรับแต่งประสบการณ์การอ่านมังงะของคุณ';
 
   @override
-  String get noFavourites => 'ดูเหมือนว่าคุณยังไม่ชอบอะไร,\nลองกดถูกใจรายการเพื่อเก็บไว้ที่นี่';
+  String get noFavourites =>
+      'ดูเหมือนว่าคุณยังไม่ชอบอะไร,\nลองกดถูกใจรายการเพื่อเก็บไว้ที่นี่';
 
   @override
   String get noHiddenMediaFound => 'ไม่พบสื่อที่ซ่อน';
@@ -470,7 +477,8 @@ class AppLocalizationsTh extends AppLocalizations {
   String get noOnHold => 'ดูเหมือนว่าคุณยังไม่ได้พักรายการใด ๆ';
 
   @override
-  String get offlineModeDescription => 'ใช้งานแอปโดยไม่ต้องเชื่อมต่ออินเทอร์เน็ต';
+  String get offlineModeDescription =>
+      'ใช้งานแอปโดยไม่ต้องเชื่อมต่ออินเทอร์เน็ต';
 
   @override
   String get oledThemeVariant => 'ธีม OLED';
@@ -491,7 +499,8 @@ class AppLocalizationsTh extends AppLocalizations {
   String get recentUpdates => 'การอัปเดตล่าสุด';
 
   @override
-  String get recommendationsEmptyMessage => 'ดู/อ่านอนิเมะหรือมังงะเพื่อรับคำแนะนำ';
+  String get recommendationsEmptyMessage =>
+      'ดู/อ่านอนิเมะหรือมังงะเพื่อรับคำแนะนำ';
 
   @override
   String get resizeMode => 'โหมดปรับขนาด';
@@ -500,7 +509,8 @@ class AppLocalizationsTh extends AppLocalizations {
   String get resizeModeDescription => 'โหมดปรับขนาดเริ่มต้นสำหรับผู้เล่น';
 
   @override
-  String get supportMaintainer => 'ต้องการสนับสนุนผู้ดูแล Dartotsu?\nลองพิจารณาบริจาค';
+  String get supportMaintainer =>
+      'ต้องการสนับสนุนผู้ดูแล Dartotsu?\nลองพิจารณาบริจาค';
 
   @override
   String get theme => 'ธีม';
@@ -602,7 +612,8 @@ class AppLocalizationsTh extends AppLocalizations {
   String get customPath => 'เส้นทางที่กําหนดเอง';
 
   @override
-  String get customPathDescription => 'ตั้งค่าเส้นทางที่กําหนดเองเพื่อบันทึกไฟล์\nกดยาวเพื่อลบ';
+  String get customPathDescription =>
+      'ตั้งค่าเส้นทางที่กําหนดเองเพื่อบันทึกไฟล์\nกดยาวเพื่อลบ';
 
   @override
   String get selectDirectory => 'เลือกไดเรกทอรี';

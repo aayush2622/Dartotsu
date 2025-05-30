@@ -12,7 +12,8 @@ class AppLocalizationsRu extends AppLocalizations {
   String get appName => 'Dartotsu';
 
   @override
-  String get appTagline => 'Новое лучшее приложение для\nотслеживания аниме и манги';
+  String get appTagline =>
+      'Новое лучшее приложение для\nотслеживания аниме и манги';
 
   @override
   String get anilist => 'AniList';
@@ -317,7 +318,8 @@ class AppLocalizationsRu extends AppLocalizations {
   String get hidePrivate => 'Скрыть личное';
 
   @override
-  String get hidePrivateDescription => 'Скрыть частные сериалы с главной страницы.';
+  String get hidePrivateDescription =>
+      'Скрыть частные сериалы с главной страницы.';
 
   @override
   String get fontColor => 'Цвет шрифта';
@@ -362,7 +364,8 @@ class AppLocalizationsRu extends AppLocalizations {
   String get cursedSpeed => 'Проклятая скорость';
 
   @override
-  String get cursedSpeedDescription => 'Для людей, которые слишком заняты жизнью';
+  String get cursedSpeedDescription =>
+      'Для людей, которые слишком заняты жизнью';
 
   @override
   String get speedDescription => 'Скорость плеера по умолчанию';
@@ -404,34 +407,40 @@ class AppLocalizationsRu extends AppLocalizations {
   String get common => 'Общие';
 
   @override
-  String get commonDescription => 'Доступ к общим настройкам для удобного использования приложения';
+  String get commonDescription =>
+      'Доступ к общим настройкам для удобного использования приложения';
 
   @override
   String get materialYou => 'Material You';
 
   @override
-  String get materialYouDescription => 'Используйте тот же цвет, что и на вашем обоев';
+  String get materialYouDescription =>
+      'Используйте тот же цвет, что и на вашем обоев';
 
   @override
   String get customTheme => 'Пользовательская тема';
 
   @override
-  String get customThemeDescription => 'Используйте свой собственный цвет для темы';
+  String get customThemeDescription =>
+      'Используйте свой собственный цвет для темы';
 
   @override
   String get notifications => 'Уведомления';
 
   @override
-  String get notificationsDescription => 'Настройте, как и когда вы будете получать уведомления';
+  String get notificationsDescription =>
+      'Настройте, как и когда вы будете получать уведомления';
 
   @override
-  String get accountDescription => 'Управляйте своими аккаунтами в AniList, MAL и Discord без усилий';
+  String get accountDescription =>
+      'Управляйте своими аккаунтами в AniList, MAL и Discord без усилий';
 
   @override
   String get allCaughtUpNew => 'Все догнали, когда Нью?';
 
   @override
-  String get animeDescription => 'Персонализируйте и управляйте своими предпочтениями в аниме';
+  String get animeDescription =>
+      'Персонализируйте и управляйте своими предпочтениями в аниме';
 
   @override
   String get darkMode => 'Тёмный режим';
@@ -449,19 +458,22 @@ class AppLocalizationsRu extends AppLocalizations {
   String get enableDarkMode => 'Включить тёмный режим';
 
   @override
-  String get extensionsDescription => 'Устанавливайте и управляйте расширениями для дополнительных возможностей';
+  String get extensionsDescription =>
+      'Устанавливайте и управляйте расширениями для дополнительных возможностей';
 
   @override
   String get hiddenMedia => 'Скрытые СМИ';
 
   @override
-  String get incognitoModeDescription => 'Просматривайте без сохранения активности';
+  String get incognitoModeDescription =>
+      'Просматривайте без сохранения активности';
 
   @override
   String get mangaDescription => 'Организуйте и адаптируйте ваш опыт с мангой';
 
   @override
-  String get noFavourites => 'Похоже, тебе ничего не нравится.\nПопытайся насладиться шоу, чтобы сохранить его здесь.';
+  String get noFavourites =>
+      'Похоже, тебе ничего не нравится.\nПопытайся насладиться шоу, чтобы сохранить его здесь.';
 
   @override
   String get noHiddenMediaFound => 'Нет скрытых СМИ';
@@ -470,7 +482,8 @@ class AppLocalizationsRu extends AppLocalizations {
   String get noOnHold => 'Похоже, вы ничего не задержали.';
 
   @override
-  String get offlineModeDescription => 'Используйте приложение без подключения к интернету';
+  String get offlineModeDescription =>
+      'Используйте приложение без подключения к интернету';
 
   @override
   String get oledThemeVariant => 'Вариант OLED темы';
@@ -491,22 +504,26 @@ class AppLocalizationsRu extends AppLocalizations {
   String get recentUpdates => 'Последние обновления';
 
   @override
-  String get recommendationsEmptyMessage => 'Наблюдайте за аниме или мангой, чтобы получить рекомендации';
+  String get recommendationsEmptyMessage =>
+      'Наблюдайте за аниме или мангой, чтобы получить рекомендации';
 
   @override
   String get resizeMode => 'Режим изменения размера';
 
   @override
-  String get resizeModeDescription => 'Режим изменения размера по умолчанию для плеера';
+  String get resizeModeDescription =>
+      'Режим изменения размера по умолчанию для плеера';
 
   @override
-  String get supportMaintainer => 'Хотите поддержать разработчика Dartotsu?\nПодумайте о донате';
+  String get supportMaintainer =>
+      'Хотите поддержать разработчика Dartotsu?\nПодумайте о донате';
 
   @override
   String get theme => 'Тема';
 
   @override
-  String get themeDescription => 'Настройте внешний вид и атмосферу вашего приложения';
+  String get themeDescription =>
+      'Настройте внешний вид и атмосферу вашего приложения';
 
   @override
   String get author => 'Автор';
@@ -602,7 +619,8 @@ class AppLocalizationsRu extends AppLocalizations {
   String get customPath => 'Пользовательский путь';
 
   @override
-  String get customPathDescription => 'Настройка пользовательского пути для сохранения файлов\nДлинная пресса для удаления';
+  String get customPathDescription =>
+      'Настройка пользовательского пути для сохранения файлов\nДлинная пресса для удаления';
 
   @override
   String get selectDirectory => 'Выберите каталог';
@@ -641,7 +659,8 @@ class AppLocalizationsRu extends AppLocalizations {
   String get loadExtensionsIcon => 'Иконка расширения загрузки';
 
   @override
-  String get loadExtensionsIconDesc => 'Отключить, если задержка страницы расширений';
+  String get loadExtensionsIconDesc =>
+      'Отключить, если задержка страницы расширений';
 
   @override
   String get autoUpdate => 'Автоматическое обновление';
@@ -668,7 +687,8 @@ class AppLocalizationsRu extends AppLocalizations {
   String get youTube => 'Играть на YouTube?';
 
   @override
-  String get installSourceToStart => 'Установить источник с страницы расширения, чтобы начать';
+  String get installSourceToStart =>
+      'Установить источник с страницы расширения, чтобы начать';
 
   @override
   String get watching => 'Смотреть';

@@ -12,7 +12,8 @@ class AppLocalizationsIt extends AppLocalizations {
   String get appName => 'Dartotsu';
 
   @override
-  String get appTagline => 'La NUOVA migliore app per\nmonitorare Anime e Manga';
+  String get appTagline =>
+      'La NUOVA migliore app per\nmonitorare Anime e Manga';
 
   @override
   String get anilist => 'AniList';
@@ -317,7 +318,8 @@ class AppLocalizationsIt extends AppLocalizations {
   String get hidePrivate => 'Nascondi privato';
 
   @override
-  String get hidePrivateDescription => 'Nascondi le serie private dalla home page.';
+  String get hidePrivateDescription =>
+      'Nascondi le serie private dalla home page.';
 
   @override
   String get fontColor => 'Colore del testo';
@@ -347,7 +349,8 @@ class AppLocalizationsIt extends AppLocalizations {
   String get showSubtitles => 'Mostra sottotitoli';
 
   @override
-  String get showSubtitlesDescription => 'Mostra i sottotitoli per impostazione predefinita';
+  String get showSubtitlesDescription =>
+      'Mostra i sottotitoli per impostazione predefinita';
 
   @override
   String get skipButton => 'Pulsante Salta';
@@ -404,7 +407,8 @@ class AppLocalizationsIt extends AppLocalizations {
   String get common => 'Comune';
 
   @override
-  String get commonDescription => 'Accedi alle impostazioni generali per un uso fluido dell\'app';
+  String get commonDescription =>
+      'Accedi alle impostazioni generali per un uso fluido dell\'app';
 
   @override
   String get materialYou => 'Material You';
@@ -422,16 +426,19 @@ class AppLocalizationsIt extends AppLocalizations {
   String get notifications => 'Notifiche';
 
   @override
-  String get notificationsDescription => 'Configura come e quando ricevere notifiche';
+  String get notificationsDescription =>
+      'Configura come e quando ricevere notifiche';
 
   @override
-  String get accountDescription => 'Gestisci facilmente i tuoi account di AniList, MAL e Discord';
+  String get accountDescription =>
+      'Gestisci facilmente i tuoi account di AniList, MAL e Discord';
 
   @override
   String get allCaughtUpNew => 'Tutto aggiornato, cosa c\'è di nuovo?';
 
   @override
-  String get animeDescription => 'Personalizza e gestisci le tue preferenze anime';
+  String get animeDescription =>
+      'Personalizza e gestisci le tue preferenze anime';
 
   @override
   String get darkMode => 'Modalità scura';
@@ -449,7 +456,8 @@ class AppLocalizationsIt extends AppLocalizations {
   String get enableDarkMode => 'Abilita la modalità scura';
 
   @override
-  String get extensionsDescription => 'Installa e gestisci le estensioni per funzionalità aggiuntive';
+  String get extensionsDescription =>
+      'Installa e gestisci le estensioni per funzionalità aggiuntive';
 
   @override
   String get hiddenMedia => 'Media nascosti';
@@ -458,10 +466,12 @@ class AppLocalizationsIt extends AppLocalizations {
   String get incognitoModeDescription => 'Naviga senza salvare la tua attività';
 
   @override
-  String get mangaDescription => 'Organizza e personalizza la tua esperienza manga';
+  String get mangaDescription =>
+      'Organizza e personalizza la tua esperienza manga';
 
   @override
-  String get noFavourites => 'Sembra che non ti piaccia nulla, \nProva ad aggiungere un preferito per tenerlo qui.';
+  String get noFavourites =>
+      'Sembra che non ti piaccia nulla, \nProva ad aggiungere un preferito per tenerlo qui.';
 
   @override
   String get noHiddenMediaFound => 'Nessun media nascosto trovato';
@@ -470,7 +480,8 @@ class AppLocalizationsIt extends AppLocalizations {
   String get noOnHold => 'Sembra che tu non abbia messo nulla in sospeso.';
 
   @override
-  String get offlineModeDescription => 'Usa l\'app senza una connessione a Internet';
+  String get offlineModeDescription =>
+      'Usa l\'app senza una connessione a Internet';
 
   @override
   String get oledThemeVariant => 'Variante tema OLED';
@@ -491,22 +502,26 @@ class AppLocalizationsIt extends AppLocalizations {
   String get recentUpdates => 'Aggiornamenti recenti';
 
   @override
-  String get recommendationsEmptyMessage => 'Guarda/Leggi qualche Anime o Manga per ricevere consigli';
+  String get recommendationsEmptyMessage =>
+      'Guarda/Leggi qualche Anime o Manga per ricevere consigli';
 
   @override
   String get resizeMode => 'Modalità ridimensionamento';
 
   @override
-  String get resizeModeDescription => 'Modalità di ridimensionamento predefinita per il lettore';
+  String get resizeModeDescription =>
+      'Modalità di ridimensionamento predefinita per il lettore';
 
   @override
-  String get supportMaintainer => 'Vuoi supportare il manutentore di Dartotsu?\nConsidera una donazione';
+  String get supportMaintainer =>
+      'Vuoi supportare il manutentore di Dartotsu?\nConsidera una donazione';
 
   @override
   String get theme => 'Tema';
 
   @override
-  String get themeDescription => 'Personalizza l\'aspetto e l\'atmosfera della tua app';
+  String get themeDescription =>
+      'Personalizza l\'aspetto e l\'atmosfera della tua app';
 
   @override
   String get author => 'Autore';
@@ -602,7 +617,8 @@ class AppLocalizationsIt extends AppLocalizations {
   String get customPath => 'Percorso personalizzato';
 
   @override
-  String get customPathDescription => 'Impostare un percorso personalizzato per salvare i file\nPremere a lungo per rimuovere';
+  String get customPathDescription =>
+      'Impostare un percorso personalizzato per salvare i file\nPremere a lungo per rimuovere';
 
   @override
   String get selectDirectory => 'Seleziona una directory';
@@ -641,7 +657,8 @@ class AppLocalizationsIt extends AppLocalizations {
   String get loadExtensionsIcon => 'Icona delle estensioni di carico';
 
   @override
-  String get loadExtensionsIconDesc => 'Disattivare se le estensioni pagina ritardi';
+  String get loadExtensionsIconDesc =>
+      'Disattivare se le estensioni pagina ritardi';
 
   @override
   String get autoUpdate => 'Aggiornamento automatico';
@@ -668,7 +685,8 @@ class AppLocalizationsIt extends AppLocalizations {
   String get youTube => 'Gioca su YouTube?';
 
   @override
-  String get installSourceToStart => 'Installare un sorgente dalla pagina di estensione per iniziare';
+  String get installSourceToStart =>
+      'Installare un sorgente dalla pagina di estensione per iniziare';
 
   @override
   String get watching => 'Guardare';

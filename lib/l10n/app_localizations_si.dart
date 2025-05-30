@@ -12,7 +12,8 @@ class AppLocalizationsSi extends AppLocalizations {
   String get appName => 'Dartotsu';
 
   @override
-  String get appTagline => 'අලුත්ම හොඳම ඇප් එක\nඅනිමේ සහ මංගා අනුගමනය කිරීම සඳහා';
+  String get appTagline =>
+      'අලුත්ම හොඳම ඇප් එක\nඅනිමේ සහ මංගා අනුගමනය කිරීම සඳහා';
 
   @override
   String get anilist => 'AniList';
@@ -317,7 +318,8 @@ class AppLocalizationsSi extends AppLocalizations {
   String get hidePrivate => 'පෞද්ගලිකව hidden කරන්න';
 
   @override
-  String get hidePrivateDescription => 'නිවස පිටුවෙන් පෞද්ගලික මාලාවන් සඟවාදැක්වන්න.';
+  String get hidePrivateDescription =>
+      'නිවස පිටුවෙන් පෞද්ගලික මාලාවන් සඟවාදැක්වන්න.';
 
   @override
   String get fontColor => 'අකුරු වර්ණය';
@@ -398,13 +400,15 @@ class AppLocalizationsSi extends AppLocalizations {
   String get about => 'ගැටලුව';
 
   @override
-  String get aboutDescription => 'ඇප් එක සහ එහි නිර්මාණකරුවන් ගැන වැඩි විස්තර ඉගෙන ගන්න';
+  String get aboutDescription =>
+      'ඇප් එක සහ එහි නිර්මාණකරුවන් ගැන වැඩි විස්තර ඉගෙන ගන්න';
 
   @override
   String get common => 'සාමාන්‍ය';
 
   @override
-  String get commonDescription => 'ආරම්භක ඇප් පරිශීලනය සඳහා සාමාන්‍ය සැකසුම් ප්‍රවේශය';
+  String get commonDescription =>
+      'ආරම්භක ඇප් පරිශීලනය සඳහා සාමාන්‍ය සැකසුම් ප්‍රවේශය';
 
   @override
   String get materialYou => 'Material You';
@@ -422,16 +426,19 @@ class AppLocalizationsSi extends AppLocalizations {
   String get notifications => 'ඇගයීම්';
 
   @override
-  String get notificationsDescription => 'ඔබට දැනුම් දීම් ලබා ගැනීමේ ක්‍රමය හා කාලය සැකසීම';
+  String get notificationsDescription =>
+      'ඔබට දැනුම් දීම් ලබා ගැනීමේ ක්‍රමය හා කාලය සැකසීම';
 
   @override
-  String get accountDescription => 'ඔබගේ AniList, MAL සහ Discord ගිණුම් පහසුවෙන් කළමනාකරණය කරන්න';
+  String get accountDescription =>
+      'ඔබගේ AniList, MAL සහ Discord ගිණුම් පහසුවෙන් කළමනාකරණය කරන්න';
 
   @override
   String get allCaughtUpNew => 'සියල්ල අවසන්, නවතම කුමක්ද?';
 
   @override
-  String get animeDescription => 'ඔබගේ අනිමේ ප්‍රතිලාභයන් පෞද්ගලීකරණය සහ කළමනාකරණය කරන්න';
+  String get animeDescription =>
+      'ඔබගේ අනිමේ ප්‍රතිලාභයන් පෞද්ගලීකරණය සහ කළමනාකරණය කරන්න';
 
   @override
   String get darkMode => 'අඳුරු මාධ්‍ය';
@@ -449,7 +456,8 @@ class AppLocalizationsSi extends AppLocalizations {
   String get enableDarkMode => 'අඳුරු මාධ්‍ය සක්‍රිය කරන්න';
 
   @override
-  String get extensionsDescription => 'අමතර කාර්යයන් සඳහා විශේෂාංග ඉස්ථාපනය සහ කළමනාකරණය කරන්න';
+  String get extensionsDescription =>
+      'අමතර කාර්යයන් සඳහා විශේෂාංග ඉස්ථාපනය සහ කළමනාකරණය කරන්න';
 
   @override
   String get hiddenMedia => 'සඟවා ඇති මාධ්‍ය';
@@ -458,10 +466,12 @@ class AppLocalizationsSi extends AppLocalizations {
   String get incognitoModeDescription => 'ඔබගේ ක්‍රියාකාරකම් ගබඩා නොකරන්න';
 
   @override
-  String get mangaDescription => 'ඔබගේ මංගා අත්දැකීම් පෞද්ගලිකව කළමනාකරණය කරන්න';
+  String get mangaDescription =>
+      'ඔබගේ මංගා අත්දැකීම් පෞද්ගලිකව කළමනාකරණය කරන්න';
 
   @override
-  String get noFavourites => 'ඔබේ කැමති කිසිම දෙයක් නොමැත,\nඔබ කැමති කුමක් හෝ විකල්ප කිරීමෙන් එය මෙහි තබා ගන්න.';
+  String get noFavourites =>
+      'ඔබේ කැමති කිසිම දෙයක් නොමැත,\nඔබ කැමති කුමක් හෝ විකල්ප කිරීමෙන් එය මෙහි තබා ගන්න.';
 
   @override
   String get noHiddenMediaFound => 'සඟවා ඇති මාධ්‍ය එකක් හමු නොවීය';
@@ -470,7 +480,8 @@ class AppLocalizationsSi extends AppLocalizations {
   String get noOnHold => 'ඔබට කිසිඳු දෙයක් තවදුරටත් නවතා නොමැත.';
 
   @override
-  String get offlineModeDescription => 'අන්තර්ජාලයේ සම්බන්ධතාවයකින් තොරව ඇප් භාවිතා කරන්න';
+  String get offlineModeDescription =>
+      'අන්තර්ජාලයේ සම්බන්ධතාවයකින් තොරව ඇප් භාවිතා කරන්න';
 
   @override
   String get oledThemeVariant => 'OLED මාධ්‍ය වර්ණ විකල්පය';
@@ -491,7 +502,8 @@ class AppLocalizationsSi extends AppLocalizations {
   String get recentUpdates => 'අවසන් යාවත්කාලීන';
 
   @override
-  String get recommendationsEmptyMessage => 'නවීන මංගා හෝ ඇනිමේ කියවන්න/නරඹන්න, යෝජනා ලබා ගන්න';
+  String get recommendationsEmptyMessage =>
+      'නවීන මංගා හෝ ඇනිමේ කියවන්න/නරඹන්න, යෝජනා ලබා ගන්න';
 
   @override
   String get resizeMode => 'ආකාර ප්‍රතිසංස්කරණ මාධ්‍ය';
@@ -500,7 +512,8 @@ class AppLocalizationsSi extends AppLocalizations {
   String get resizeModeDescription => 'දෘෂ්ටි ප්‍රතිසංස්කරණ ප්‍රමාණය';
 
   @override
-  String get supportMaintainer => 'Dartotsu හි සත්කාරකයාට සහාය දෙන්න?\nඅරමුදල් ලබා ගැනීම පConsider කරන්න';
+  String get supportMaintainer =>
+      'Dartotsu හි සත්කාරකයාට සහාය දෙන්න?\nඅරමුදල් ලබා ගැනීම පConsider කරන්න';
 
   @override
   String get theme => 'තේමාව';
@@ -602,7 +615,8 @@ class AppLocalizationsSi extends AppLocalizations {
   String get customPath => 'අභිරුචි මාර්ගය';
 
   @override
-  String get customPathDescription => 'ගොනු සුරැකීමට අභිරුචි මාර්ගයක් සකසන්න\nඉවත් කිරීමට දිගු ඔබන්න';
+  String get customPathDescription =>
+      'ගොනු සුරැකීමට අභිරුචි මාර්ගයක් සකසන්න\nඉවත් කිරීමට දිගු ඔබන්න';
 
   @override
   String get selectDirectory => 'නාමාවලියක් තෝරන්න';
@@ -668,7 +682,8 @@ class AppLocalizationsSi extends AppLocalizations {
   String get youTube => 'YouTube මත වාදනය කරන්නද?';
 
   @override
-  String get installSourceToStart => 'ආරම්භ කිරීමට දිගුකිරීමේ පිටුවෙන් මූලාශ්‍රයක් ස්ථාපනය කරන්න';
+  String get installSourceToStart =>
+      'ආරම්භ කිරීමට දිගුකිරීමේ පිටුවෙන් මූලාශ්‍රයක් ස්ථාපනය කරන්න';
 
   @override
   String get watching => 'නැරඹීම';

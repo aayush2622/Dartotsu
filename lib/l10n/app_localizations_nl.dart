@@ -12,7 +12,8 @@ class AppLocalizationsNl extends AppLocalizations {
   String get appName => 'Dartotsu';
 
   @override
-  String get appTagline => 'De NIEUWE Beste App Voor\nHet Volgen van Anime & Manga';
+  String get appTagline =>
+      'De NIEUWE Beste App Voor\nHet Volgen van Anime & Manga';
 
   @override
   String get anilist => 'AniList';
@@ -317,7 +318,8 @@ class AppLocalizationsNl extends AppLocalizations {
   String get hidePrivate => 'Verberg privé';
 
   @override
-  String get hidePrivateDescription => 'Verberg privéseries van de startpagina.';
+  String get hidePrivateDescription =>
+      'Verberg privéseries van de startpagina.';
 
   @override
   String get fontColor => 'Letterkleur';
@@ -362,7 +364,8 @@ class AppLocalizationsNl extends AppLocalizations {
   String get cursedSpeed => 'Vervloekte Snelheid';
 
   @override
-  String get cursedSpeedDescription => 'Voor mensen die te druk zijn met het leven';
+  String get cursedSpeedDescription =>
+      'Voor mensen die te druk zijn met het leven';
 
   @override
   String get speedDescription => 'Standaard snelheid voor speler';
@@ -404,13 +407,15 @@ class AppLocalizationsNl extends AppLocalizations {
   String get common => 'Algemeen';
 
   @override
-  String get commonDescription => 'Toegang tot algemene instellingen voor naadloos gebruik van de app';
+  String get commonDescription =>
+      'Toegang tot algemene instellingen voor naadloos gebruik van de app';
 
   @override
   String get materialYou => 'Material You';
 
   @override
-  String get materialYouDescription => 'Gebruik dezelfde kleur als je wallpaper';
+  String get materialYouDescription =>
+      'Gebruik dezelfde kleur als je wallpaper';
 
   @override
   String get customTheme => 'Aangepast thema';
@@ -422,10 +427,12 @@ class AppLocalizationsNl extends AppLocalizations {
   String get notifications => 'Meldingen';
 
   @override
-  String get notificationsDescription => 'Configureer hoe en wanneer je meldingen ontvangt';
+  String get notificationsDescription =>
+      'Configureer hoe en wanneer je meldingen ontvangt';
 
   @override
-  String get accountDescription => 'Beheer je AniList, MAL en Discord accounts moeiteloos';
+  String get accountDescription =>
+      'Beheer je AniList, MAL en Discord accounts moeiteloos';
 
   @override
   String get allCaughtUpNew => 'Alles bijgelezen, wat is er nieuw?';
@@ -449,19 +456,22 @@ class AppLocalizationsNl extends AppLocalizations {
   String get enableDarkMode => 'Donkere modus inschakelen';
 
   @override
-  String get extensionsDescription => 'Installeer en beheer extensies voor extra functionaliteit';
+  String get extensionsDescription =>
+      'Installeer en beheer extensies voor extra functionaliteit';
 
   @override
   String get hiddenMedia => 'Verborgen media';
 
   @override
-  String get incognitoModeDescription => 'Blader zonder je activiteit op te slaan';
+  String get incognitoModeDescription =>
+      'Blader zonder je activiteit op te slaan';
 
   @override
   String get mangaDescription => 'Organiseer en pas je manga-ervaring aan';
 
   @override
-  String get noFavourites => 'Het lijkt erop dat je niets leuk vindt,\nProbeer een show leuk te vinden om deze hier te houden.';
+  String get noFavourites =>
+      'Het lijkt erop dat je niets leuk vindt,\nProbeer een show leuk te vinden om deze hier te houden.';
 
   @override
   String get noHiddenMediaFound => 'Geen verborgen media gevonden';
@@ -470,7 +480,8 @@ class AppLocalizationsNl extends AppLocalizations {
   String get noOnHold => 'Het lijkt erop dat je niets in de wacht hebt gezet.';
 
   @override
-  String get offlineModeDescription => 'Gebruik de app zonder internetverbinding';
+  String get offlineModeDescription =>
+      'Gebruik de app zonder internetverbinding';
 
   @override
   String get oledThemeVariant => 'OLED-themavariant';
@@ -491,7 +502,8 @@ class AppLocalizationsNl extends AppLocalizations {
   String get recentUpdates => 'Recente updates';
 
   @override
-  String get recommendationsEmptyMessage => 'Bekijk/Lees wat Anime of Manga om aanbevelingen te krijgen';
+  String get recommendationsEmptyMessage =>
+      'Bekijk/Lees wat Anime of Manga om aanbevelingen te krijgen';
 
   @override
   String get resizeMode => 'Wijzigmodus';
@@ -500,7 +512,8 @@ class AppLocalizationsNl extends AppLocalizations {
   String get resizeModeDescription => 'Standaard wijzigmodus voor speler';
 
   @override
-  String get supportMaintainer => 'Wil je de beheerder van Dartotsu steunen?\nOverweeg te doneren';
+  String get supportMaintainer =>
+      'Wil je de beheerder van Dartotsu steunen?\nOverweeg te doneren';
 
   @override
   String get theme => 'Thema';
@@ -602,7 +615,8 @@ class AppLocalizationsNl extends AppLocalizations {
   String get customPath => 'Aangepast pad';
 
   @override
-  String get customPathDescription => 'Zet een gewoon pad om bestanden te redden\nLange pers verwijdert';
+  String get customPathDescription =>
+      'Zet een gewoon pad om bestanden te redden\nLange pers verwijdert';
 
   @override
   String get selectDirectory => 'Selecteer een directeur';
@@ -623,7 +637,8 @@ class AppLocalizationsNl extends AppLocalizations {
   String get addAnimeRepo => 'Geef Anime Repo';
 
   @override
-  String get addAnimeRepoDesc => 'Voeg Anime Repo toe van verschillende bronnen';
+  String get addAnimeRepoDesc =>
+      'Voeg Anime Repo toe van verschillende bronnen';
 
   @override
   String get addMangaRepo => 'Advert Manga Repo';
@@ -668,7 +683,8 @@ class AppLocalizationsNl extends AppLocalizations {
   String get youTube => 'Op YouTube spelen?';
 
   @override
-  String get installSourceToStart => 'Een bron van uitgebreide pagina om te beginnen';
+  String get installSourceToStart =>
+      'Een bron van uitgebreide pagina om te beginnen';
 
   @override
   String get watching => 'Kijken';

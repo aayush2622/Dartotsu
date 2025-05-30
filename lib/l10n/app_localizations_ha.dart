@@ -12,7 +12,8 @@ class AppLocalizationsHa extends AppLocalizations {
   String get appName => 'Dartotsu';
 
   @override
-  String get appTagline => 'Sabon Mafi Kyawun Aikace-aikacen Don\nBibiya Anime & Manga';
+  String get appTagline =>
+      'Sabon Mafi Kyawun Aikace-aikacen Don\nBibiya Anime & Manga';
 
   @override
   String get anilist => 'AniList';
@@ -398,13 +399,15 @@ class AppLocalizationsHa extends AppLocalizations {
   String get about => 'Game da';
 
   @override
-  String get aboutDescription => 'Koyi ƙarin game da aikace-aikacen da masu ƙirƙirarsa';
+  String get aboutDescription =>
+      'Koyi ƙarin game da aikace-aikacen da masu ƙirƙirarsa';
 
   @override
   String get common => 'Na gama gari';
 
   @override
-  String get commonDescription => 'Samun dama ga saitunan gaba ɗaya don amfani mai sauƙi';
+  String get commonDescription =>
+      'Samun dama ga saitunan gaba ɗaya don amfani mai sauƙi';
 
   @override
   String get materialYou => 'Material You';
@@ -422,10 +425,12 @@ class AppLocalizationsHa extends AppLocalizations {
   String get notifications => 'Sanarwa';
 
   @override
-  String get notificationsDescription => 'Saita yadda da lokacin da za ka karɓi sanarwa';
+  String get notificationsDescription =>
+      'Saita yadda da lokacin da za ka karɓi sanarwa';
 
   @override
-  String get accountDescription => 'Yi sarrafa asusun AniList, MAL, da Discord cikin sauƙi';
+  String get accountDescription =>
+      'Yi sarrafa asusun AniList, MAL, da Discord cikin sauƙi';
 
   @override
   String get allCaughtUpNew => 'An kammala, menene Sabon?';
@@ -449,19 +454,22 @@ class AppLocalizationsHa extends AppLocalizations {
   String get enableDarkMode => 'Kunna Yanayin Duhu';
 
   @override
-  String get extensionsDescription => 'Shigar da sarrafa ƙarin aikin don ƙarin amfani';
+  String get extensionsDescription =>
+      'Shigar da sarrafa ƙarin aikin don ƙarin amfani';
 
   @override
   String get hiddenMedia => 'Boye Media';
 
   @override
-  String get incognitoModeDescription => 'Yi bincike ba tare da ajiye ayyukan ka ba';
+  String get incognitoModeDescription =>
+      'Yi bincike ba tare da ajiye ayyukan ka ba';
 
   @override
   String get mangaDescription => 'Tsara da keɓance ƙwarewar manga naka';
 
   @override
-  String get noFavourites => 'Alama babu abin da ka fi so,\nGwada son shahararriya don kiyaye shi a nan.';
+  String get noFavourites =>
+      'Alama babu abin da ka fi so,\nGwada son shahararriya don kiyaye shi a nan.';
 
   @override
   String get noHiddenMediaFound => 'Babu media da aka boye da aka samu';
@@ -470,7 +478,8 @@ class AppLocalizationsHa extends AppLocalizations {
   String get noOnHold => 'Alama babu abin da ka sanya a tsaye.';
 
   @override
-  String get offlineModeDescription => 'Yi amfani da aikace-aikacen ba tare da haɗin intanet ba';
+  String get offlineModeDescription =>
+      'Yi amfani da aikace-aikacen ba tare da haɗin intanet ba';
 
   @override
   String get oledThemeVariant => 'Jigon OLED';
@@ -491,16 +500,19 @@ class AppLocalizationsHa extends AppLocalizations {
   String get recentUpdates => 'Sabbin Sabuntawa';
 
   @override
-  String get recommendationsEmptyMessage => 'Kalli/karanta wasu Anime ko Manga don samun shawarwari';
+  String get recommendationsEmptyMessage =>
+      'Kalli/karanta wasu Anime ko Manga don samun shawarwari';
 
   @override
   String get resizeMode => 'Yanayin Girma';
 
   @override
-  String get resizeModeDescription => 'Yanayin girma na tsoho don mai nuna bidiyo';
+  String get resizeModeDescription =>
+      'Yanayin girma na tsoho don mai nuna bidiyo';
 
   @override
-  String get supportMaintainer => 'Kuna son tallafawa Mai Gudanar da Dartotsu?\nYi la\'akari da Ba da Gudummawa';
+  String get supportMaintainer =>
+      'Kuna son tallafawa Mai Gudanar da Dartotsu?\nYi la\'akari da Ba da Gudummawa';
 
   @override
   String get theme => 'Jigo';
@@ -602,7 +614,8 @@ class AppLocalizationsHa extends AppLocalizations {
   String get customPath => 'Hanyar Al\'ada';
 
   @override
-  String get customPathDescription => 'Saita hanya ta al\'ada don adana fayiloli\nDogon danna don cirewa';
+  String get customPathDescription =>
+      'Saita hanya ta al\'ada don adana fayiloli\nDogon danna don cirewa';
 
   @override
   String get selectDirectory => 'Zaɓi directory';
@@ -635,13 +648,15 @@ class AppLocalizationsHa extends AppLocalizations {
   String get addNovelRepo => 'Ƙara Ma\'ajiyar Littafi';
 
   @override
-  String get addNovelRepoDesc => 'Ƙara Ma\'ajiyar Littafi daga tushe daban-daban';
+  String get addNovelRepoDesc =>
+      'Ƙara Ma\'ajiyar Littafi daga tushe daban-daban';
 
   @override
   String get loadExtensionsIcon => 'Loda Alamar Ƙarin Fasali';
 
   @override
-  String get loadExtensionsIconDesc => 'Kashe idan shafin ƙarin fasali yana jinkiri';
+  String get loadExtensionsIconDesc =>
+      'Kashe idan shafin ƙarin fasali yana jinkiri';
 
   @override
   String get autoUpdate => 'Sabunta Ta atomatik';

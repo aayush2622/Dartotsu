@@ -12,7 +12,8 @@ class AppLocalizationsUk extends AppLocalizations {
   String get appName => 'Dartotsu';
 
   @override
-  String get appTagline => 'НОВИЙ найкращий застосунок для\nвідстеження аніме та манґи';
+  String get appTagline =>
+      'НОВИЙ найкращий застосунок для\nвідстеження аніме та манґи';
 
   @override
   String get anilist => 'AniList';
@@ -317,7 +318,8 @@ class AppLocalizationsUk extends AppLocalizations {
   String get hidePrivate => 'Приховати приватне';
 
   @override
-  String get hidePrivateDescription => 'Приховати приватні серії з головної сторінки.';
+  String get hidePrivateDescription =>
+      'Приховати приватні серії з головної сторінки.';
 
   @override
   String get fontColor => 'Колір шрифту';
@@ -398,40 +400,47 @@ class AppLocalizationsUk extends AppLocalizations {
   String get about => 'Про застосунок';
 
   @override
-  String get aboutDescription => 'Дізнайтеся більше про застосунок та його творців';
+  String get aboutDescription =>
+      'Дізнайтеся більше про застосунок та його творців';
 
   @override
   String get common => 'Спільні';
 
   @override
-  String get commonDescription => 'Доступ до загальних налаштувань для безперебійного використання застосунку';
+  String get commonDescription =>
+      'Доступ до загальних налаштувань для безперебійного використання застосунку';
 
   @override
   String get materialYou => 'Material You';
 
   @override
-  String get materialYouDescription => 'Використовувати той самий колір, що і шпалери';
+  String get materialYouDescription =>
+      'Використовувати той самий колір, що і шпалери';
 
   @override
   String get customTheme => 'Власна тема';
 
   @override
-  String get customThemeDescription => 'Використовуйте свій власний колір для теми';
+  String get customThemeDescription =>
+      'Використовуйте свій власний колір для теми';
 
   @override
   String get notifications => 'Сповіщення';
 
   @override
-  String get notificationsDescription => 'Налаштуйте, як і коли ви будете отримувати сповіщення';
+  String get notificationsDescription =>
+      'Налаштуйте, як і коли ви будете отримувати сповіщення';
 
   @override
-  String get accountDescription => 'Керуйте обліковими записами AniList, MAL та Discord без зайвих зусиль';
+  String get accountDescription =>
+      'Керуйте обліковими записами AniList, MAL та Discord без зайвих зусиль';
 
   @override
   String get allCaughtUpNew => 'Що нового?';
 
   @override
-  String get animeDescription => 'Персоналізуйте та керуйте своїми вподобаннями щодо аніме';
+  String get animeDescription =>
+      'Персоналізуйте та керуйте своїми вподобаннями щодо аніме';
 
   @override
   String get darkMode => 'Темний режим';
@@ -449,19 +458,23 @@ class AppLocalizationsUk extends AppLocalizations {
   String get enableDarkMode => 'Увімкнути темний режим';
 
   @override
-  String get extensionsDescription => 'Встановлюйте та керуйте розширеннями для додаткової функціональності';
+  String get extensionsDescription =>
+      'Встановлюйте та керуйте розширеннями для додаткової функціональності';
 
   @override
   String get hiddenMedia => 'Приховані медіа';
 
   @override
-  String get incognitoModeDescription => 'Переглядайте без збереження активності';
+  String get incognitoModeDescription =>
+      'Переглядайте без збереження активності';
 
   @override
-  String get mangaDescription => 'Організуйте та адаптуйте свій досвід читання манґи';
+  String get mangaDescription =>
+      'Організуйте та адаптуйте свій досвід читання манґи';
 
   @override
-  String get noFavourites => 'Схоже, вам нічого не подобається,\nспробуйте вподобати серіал, щоб залишити його тут.';
+  String get noFavourites =>
+      'Схоже, вам нічого не подобається,\nспробуйте вподобати серіал, щоб залишити його тут.';
 
   @override
   String get noHiddenMediaFound => 'Не знайдено прихованих медіа';
@@ -470,7 +483,8 @@ class AppLocalizationsUk extends AppLocalizations {
   String get noOnHold => 'Схоже, ви нічого не відклали на потім.';
 
   @override
-  String get offlineModeDescription => 'Використовувати застосунок без з\'єднання з мережею';
+  String get offlineModeDescription =>
+      'Використовувати застосунок без з\'єднання з мережею';
 
   @override
   String get oledThemeVariant => 'OLED тема';
@@ -491,7 +505,8 @@ class AppLocalizationsUk extends AppLocalizations {
   String get recentUpdates => 'Останні оновлення';
 
   @override
-  String get recommendationsEmptyMessage => 'Подивіться / прочитайте аніме або манґу, щоб отримати рекомендації';
+  String get recommendationsEmptyMessage =>
+      'Подивіться / прочитайте аніме або манґу, щоб отримати рекомендації';
 
   @override
   String get resizeMode => 'Режим зміни розміру';
@@ -500,13 +515,15 @@ class AppLocalizationsUk extends AppLocalizations {
   String get resizeModeDescription => 'Типовий режим зміни розміру програвача';
 
   @override
-  String get supportMaintainer => 'Хочете підтримати розробника Dartotsu?\nПодумайте про пожертву';
+  String get supportMaintainer =>
+      'Хочете підтримати розробника Dartotsu?\nПодумайте про пожертву';
 
   @override
   String get theme => 'Тема';
 
   @override
-  String get themeDescription => 'Налаштуйте вигляд та атмосферу вашого застосунку';
+  String get themeDescription =>
+      'Налаштуйте вигляд та атмосферу вашого застосунку';
 
   @override
   String get author => 'Автор';
@@ -602,7 +619,8 @@ class AppLocalizationsUk extends AppLocalizations {
   String get customPath => 'Спеціальний шлях';
 
   @override
-  String get customPathDescription => 'Встановіть спеціальний шлях для збереження файлів\nНатисніть і утримуйте, щоб видалити';
+  String get customPathDescription =>
+      'Встановіть спеціальний шлях для збереження файлів\nНатисніть і утримуйте, щоб видалити';
 
   @override
   String get selectDirectory => 'Виберіть каталог';
@@ -668,7 +686,8 @@ class AppLocalizationsUk extends AppLocalizations {
   String get youTube => 'Грати на YouTube?';
 
   @override
-  String get installSourceToStart => 'Встановіть джерело з сторінки розширення для запуску';
+  String get installSourceToStart =>
+      'Встановіть джерело з сторінки розширення для запуску';
 
   @override
   String get watching => 'Проживання';

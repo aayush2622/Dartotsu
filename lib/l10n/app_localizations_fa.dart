@@ -404,13 +404,15 @@ class AppLocalizationsFa extends AppLocalizations {
   String get common => 'عمومی';
 
   @override
-  String get commonDescription => 'دسترسی به تنظیمات عمومی برای استفاده آسان از برنامه';
+  String get commonDescription =>
+      'دسترسی به تنظیمات عمومی برای استفاده آسان از برنامه';
 
   @override
   String get materialYou => 'Material You';
 
   @override
-  String get materialYouDescription => 'از رنگ پس‌زمینه خود برای برنامه استفاده کنید';
+  String get materialYouDescription =>
+      'از رنگ پس‌زمینه خود برای برنامه استفاده کنید';
 
   @override
   String get customTheme => 'تم سفارشی';
@@ -422,10 +424,12 @@ class AppLocalizationsFa extends AppLocalizations {
   String get notifications => 'اطلاع‌رسانی‌ها';
 
   @override
-  String get notificationsDescription => 'تنظیم کنید که چگونه و چه زمانی اطلاع‌رسانی دریافت کنید';
+  String get notificationsDescription =>
+      'تنظیم کنید که چگونه و چه زمانی اطلاع‌رسانی دریافت کنید';
 
   @override
-  String get accountDescription => 'مدیریت حساب‌های AniList، MAL و Discord خود را به راحتی انجام دهید';
+  String get accountDescription =>
+      'مدیریت حساب‌های AniList، MAL و Discord خود را به راحتی انجام دهید';
 
   @override
   String get allCaughtUpNew => 'همه را دیدی، چه چیز جدیدی داریم؟';
@@ -449,7 +453,8 @@ class AppLocalizationsFa extends AppLocalizations {
   String get enableDarkMode => 'فعال‌سازی حالت تاریک';
 
   @override
-  String get extensionsDescription => 'افزونه‌ها را نصب و مدیریت کنید برای عملکرد بیشتر';
+  String get extensionsDescription =>
+      'افزونه‌ها را نصب و مدیریت کنید برای عملکرد بیشتر';
 
   @override
   String get hiddenMedia => 'رسانه‌های پنهان';
@@ -461,16 +466,19 @@ class AppLocalizationsFa extends AppLocalizations {
   String get mangaDescription => 'تجربه مانگا خود را سازماندهی و سفارشی کنید';
 
   @override
-  String get noFavourites => 'به نظر می‌رسد که شما چیزی دوست ندارید،\nسعی کنید یک نمایش را لایک کنید تا در اینجا نگه داشته شود.';
+  String get noFavourites =>
+      'به نظر می‌رسد که شما چیزی دوست ندارید،\nسعی کنید یک نمایش را لایک کنید تا در اینجا نگه داشته شود.';
 
   @override
   String get noHiddenMediaFound => 'رسانه پنهانی یافت نشد';
 
   @override
-  String get noOnHold => 'به نظر می‌رسد که شما هیچ چیزی را در حالت انتظار قرار نداده‌اید.';
+  String get noOnHold =>
+      'به نظر می‌رسد که شما هیچ چیزی را در حالت انتظار قرار نداده‌اید.';
 
   @override
-  String get offlineModeDescription => 'بدون اتصال به اینترنت از برنامه استفاده کنید';
+  String get offlineModeDescription =>
+      'بدون اتصال به اینترنت از برنامه استفاده کنید';
 
   @override
   String get oledThemeVariant => 'نوع تم OLED';
@@ -491,16 +499,19 @@ class AppLocalizationsFa extends AppLocalizations {
   String get recentUpdates => 'بروزرسانی‌های اخیر';
 
   @override
-  String get recommendationsEmptyMessage => 'برای دریافت پیشنهادات، انیمه یا مانگایی تماشا/خوانده کنید';
+  String get recommendationsEmptyMessage =>
+      'برای دریافت پیشنهادات، انیمه یا مانگایی تماشا/خوانده کنید';
 
   @override
   String get resizeMode => 'حالت تغییر اندازه';
 
   @override
-  String get resizeModeDescription => 'حالت پیش‌فرض تغییر اندازه برای پخش‌کننده';
+  String get resizeModeDescription =>
+      'حالت پیش‌فرض تغییر اندازه برای پخش‌کننده';
 
   @override
-  String get supportMaintainer => 'آیا می‌خواهید از نگهدارنده Dartotsu پشتیبانی کنید؟\nدر نظر داشته باشید که کمک مالی کنید';
+  String get supportMaintainer =>
+      'آیا می‌خواهید از نگهدارنده Dartotsu پشتیبانی کنید؟\nدر نظر داشته باشید که کمک مالی کنید';
 
   @override
   String get theme => 'تم';
@@ -602,7 +613,8 @@ class AppLocalizationsFa extends AppLocalizations {
   String get customPath => 'مسیر سفارشی';
 
   @override
-  String get customPathDescription => 'یک مسیر سفارشی برای ذخیره فایل ها تنظیم کنید\nمطبوعات طولانی برای حذف';
+  String get customPathDescription =>
+      'یک مسیر سفارشی برای ذخیره فایل ها تنظیم کنید\nمطبوعات طولانی برای حذف';
 
   @override
   String get selectDirectory => 'انتخاب یک دایرکتوری';

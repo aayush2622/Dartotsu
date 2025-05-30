@@ -12,7 +12,8 @@ class AppLocalizationsSo extends AppLocalizations {
   String get appName => 'Dartotsu';
 
   @override
-  String get appTagline => 'App-ka Cusub ee Ugu Wanaagsan\nRaadinta Anime & Manga';
+  String get appTagline =>
+      'App-ka Cusub ee Ugu Wanaagsan\nRaadinta Anime & Manga';
 
   @override
   String get anilist => 'AniList';
@@ -404,7 +405,8 @@ class AppLocalizationsSo extends AppLocalizations {
   String get common => 'Guud';
 
   @override
-  String get commonDescription => 'Hel dejinta guud ee isticmaalka fudud ee app-ka';
+  String get commonDescription =>
+      'Hel dejinta guud ee isticmaalka fudud ee app-ka';
 
   @override
   String get materialYou => 'Material You';
@@ -416,16 +418,19 @@ class AppLocalizationsSo extends AppLocalizations {
   String get customTheme => 'Mowduuc La Habeeyay';
 
   @override
-  String get customThemeDescription => 'Isticmaal midabkaaga gaarka ah ee mowduuca';
+  String get customThemeDescription =>
+      'Isticmaal midabkaaga gaarka ah ee mowduuca';
 
   @override
   String get notifications => 'Ogeysiisyada';
 
   @override
-  String get notificationsDescription => 'Deji sida iyo goorta aad ogeysiisyada helayso';
+  String get notificationsDescription =>
+      'Deji sida iyo goorta aad ogeysiisyada helayso';
 
   @override
-  String get accountDescription => 'Maaree akoonnadaada AniList, MAL, iyo Discord si sahlan';
+  String get accountDescription =>
+      'Maaree akoonnadaada AniList, MAL, iyo Discord si sahlan';
 
   @override
   String get allCaughtUpNew => 'Dhammaan waa la soo gabagabeeyay, maxaa Cusub?';
@@ -449,19 +454,22 @@ class AppLocalizationsSo extends AppLocalizations {
   String get enableDarkMode => 'Fur Habka Madow';
 
   @override
-  String get extensionsDescription => 'Ku rakib oo maaree kordhino si loogu daro shaqooyin dheeri ah';
+  String get extensionsDescription =>
+      'Ku rakib oo maaree kordhino si loogu daro shaqooyin dheeri ah';
 
   @override
   String get hiddenMedia => 'Warbaahinta Qarsoon';
 
   @override
-  String get incognitoModeDescription => 'Ku dhex soco internetka adigoon kaydin hawshaada';
+  String get incognitoModeDescription =>
+      'Ku dhex soco internetka adigoon kaydin hawshaada';
 
   @override
   String get mangaDescription => 'Hagaaji oo shakhsiye manga-daada';
 
   @override
-  String get noFavourites => 'Waxay u egtahay inaadan jecleyn waxba,\nIsku day inaad jecel yahay barnaamij si aad ugu hayso halkan.';
+  String get noFavourites =>
+      'Waxay u egtahay inaadan jecleyn waxba,\nIsku day inaad jecel yahay barnaamij si aad ugu hayso halkan.';
 
   @override
   String get noHiddenMediaFound => 'Warbaahinta Qarsoon lama helin';
@@ -470,7 +478,8 @@ class AppLocalizationsSo extends AppLocalizations {
   String get noOnHold => 'Waxay u egtahay inaadan waxba hakinin.';
 
   @override
-  String get offlineModeDescription => 'Isticmaal app-ka adigoon xirin internetka';
+  String get offlineModeDescription =>
+      'Isticmaal app-ka adigoon xirin internetka';
 
   @override
   String get oledThemeVariant => 'Nooca OLED ee Mowduuca';
@@ -491,16 +500,19 @@ class AppLocalizationsSo extends AppLocalizations {
   String get recentUpdates => 'Cusboonaysiinta Ugu Dhaw';
 
   @override
-  String get recommendationsEmptyMessage => 'Daawo/Akhri qaar ka mid ah Anime ama Manga si aad u hesho Talooyin';
+  String get recommendationsEmptyMessage =>
+      'Daawo/Akhri qaar ka mid ah Anime ama Manga si aad u hesho Talooyin';
 
   @override
   String get resizeMode => 'Habka Dib-u-cabbirka';
 
   @override
-  String get resizeModeDescription => 'Habka dib-u-cabbirka ee caadiga ah ee ciyaaryahanka';
+  String get resizeModeDescription =>
+      'Habka dib-u-cabbirka ee caadiga ah ee ciyaaryahanka';
 
   @override
-  String get supportMaintainer => 'Ma dooneysaa inaad taageerto Maamulaha Dartotsu?\nTixgeli Inaad Deeq Bixiso';
+  String get supportMaintainer =>
+      'Ma dooneysaa inaad taageerto Maamulaha Dartotsu?\nTixgeli Inaad Deeq Bixiso';
 
   @override
   String get theme => 'Mowduuca';
@@ -602,7 +614,8 @@ class AppLocalizationsSo extends AppLocalizations {
   String get customPath => 'Dariiqa Caadiga ah';
 
   @override
-  String get customPathDescription => 'Deji waddo gaar ah si aad u kaydiso faylasha\nRiix dheer si aad meesha uga saarto';
+  String get customPathDescription =>
+      'Deji waddo gaar ah si aad u kaydiso faylasha\nRiix dheer si aad meesha uga saarto';
 
   @override
   String get selectDirectory => 'Dooro hage';
@@ -641,7 +654,8 @@ class AppLocalizationsSo extends AppLocalizations {
   String get loadExtensionsIcon => 'Soo rar Astaan Dheerad ah';
 
   @override
-  String get loadExtensionsIconDesc => 'Dami haddii bogga dheeraynta uu gaabis noqdo';
+  String get loadExtensionsIconDesc =>
+      'Dami haddii bogga dheeraynta uu gaabis noqdo';
 
   @override
   String get autoUpdate => 'Cusboonaysiin Toos ah';
@@ -668,7 +682,8 @@ class AppLocalizationsSo extends AppLocalizations {
   String get youTube => 'Ka ciyaar YouTube?';
 
   @override
-  String get installSourceToStart => 'Ku rakib ilaha bogga dheeraadka si aad u bilowdo';
+  String get installSourceToStart =>
+      'Ku rakib ilaha bogga dheeraadka si aad u bilowdo';
 
   @override
   String get watching => 'Daawanaya';
