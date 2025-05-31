@@ -6,4 +6,6 @@ abstract class Mutations {
     Media media, {
     List<String>? customList,
   });
+
+  Future<void> deleteFromList(Media media);
 }
