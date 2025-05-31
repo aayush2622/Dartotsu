@@ -60,6 +60,6 @@ extension on AnilistMutations {
         '${customList != null ? ',"customLists": [${customList.map((e) => '"$e"').join(', ')}]' : ''}'
         '}';
     debugPrint(variables);
-    executeQuery<Map<String, dynamic>>(query, variables: variables, show: true);
+    await executeQuery<Map<String, dynamic>>(query, variables: variables, show: true);
   }
 }

@@ -6,8 +6,9 @@ import '../Eval/dart/model/video.dart';
 import '../http/m_client.dart';
 
 class MytvExtractor {
-  final InterceptedClient client =
-      MClient.init(reqcopyWith: {'useDartHttpClient': true});
+  final InterceptedClient client = MClient.init(
+    reqcopyWith: {'useDartHttpClient': true},
+  );
 
   Future<List<Video>> videosFromUrl(String url) async {
     try {

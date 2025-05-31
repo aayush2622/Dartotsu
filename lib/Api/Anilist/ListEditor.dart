@@ -83,7 +83,7 @@ class _ListEditorDialogState extends State<ListEditorDialog> {
       fontSize: 16,
       fontWeight: FontWeight.w700,
     );
-    const fieldPadding = EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0);
+    const fieldPadding = EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0);
     var theme = Theme.of(context).colorScheme;
     return CustomBottomDialog(
       title: "List Editor",
@@ -125,6 +125,7 @@ class _ListEditorDialogState extends State<ListEditorDialog> {
       positiveText: 'Save',
       positiveCallback: _onSave,
       negativeText: 'Delete',
+      negativeCallback: _onDelete,
     );
   }
 
@@ -157,9 +158,7 @@ class _ListEditorDialogState extends State<ListEditorDialog> {
           controller: repeatController,
           keyboardType: const TextInputType.numberWithOptions(decimal: false),
           style: labelStyle,
-          inputFormatters: [
-            FilteringTextInputFormatter.allow(RegExp(r'^[0-9]*$')),
-          ],
+          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           decoration: InputDecoration(
             labelText: "Total Repeats",
             labelStyle: labelStyle,
@@ -388,13 +387,13 @@ class _ListEditorDialogState extends State<ListEditorDialog> {
     );
   }
 
-  void _onSave() {
+  Future<void> _onSave() async {
+    var score = (double.tryParse(scoreController.text));
+
     widget.media
       ..userStatus = status
       ..userProgress = int.tryParse(progressController.text)
-      ..userScore = ((double.tryParse(scoreController.text) ?? 0) * 10)
-          .toInt()
-          .clamp(0, 100)
+      ..userScore = score != null ? (score * 10).toInt().clamp(0, 100) : null
       ..isListPrivate = isPrivate;
 
     List<String>? list;
@@ -410,9 +409,14 @@ class _ListEditorDialogState extends State<ListEditorDialog> {
           .map((entry) => entry.key)
           .toList();
     }
-
-    Anilist.mutations?.editList(widget.media, customList: list);
     Get.back();
+    await Anilist.mutations?.editList(widget.media, customList: list);
+    Refresh.activity[RefreshId.Anilist.homePage]?.value = true;
+  }
+
+  Future<void> _onDelete() async {
+    Get.back();
+    await Anilist.mutations?.deleteFromList(widget.media);
     Refresh.activity[RefreshId.Anilist.homePage]?.value = true;
   }
 }

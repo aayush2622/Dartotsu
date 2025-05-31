@@ -8,12 +8,13 @@ import '../http/m_client.dart';
 
 class DoodExtractor {
   Future<List<Video>> videosFromUrl(
-    String url, {
-    String? quality,
-    bool redirect = true,
-  }) async {
-    final InterceptedClient client =
-        MClient.init(reqcopyWith: {'useDartHttpClient': true});
+      String url, {
+        String? quality,
+        bool redirect = true,
+      }) async {
+    final InterceptedClient client = MClient.init(
+      reqcopyWith: {'useDartHttpClient': true},
+    );
     final newQuality = quality ?? ('Doodstream ${redirect ? ' mirror' : ''}');
 
     try {
@@ -35,10 +36,12 @@ class DoodExtractor {
       final videoUrl =
           '${videoUrlStart.body}$randomString?token=$token&expiry=$expiry';
       return [
-        Video(newUrl, newQuality, videoUrl, headers: {
-          'User-Agent': 'Mangayomi',
-          'Referer': 'https://$doodHost/',
-        })
+        Video(
+          newUrl,
+          newQuality,
+          videoUrl,
+          headers: {'User-Agent': 'Mangayomi', 'Referer': 'https://$doodHost/'},
+        ),
       ];
     } catch (_) {
       return [];
@@ -49,8 +52,9 @@ class DoodExtractor {
     const allowedChars =
         'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     return List.generate(
-        length,
-        (index) => allowedChars.runes
-            .elementAt(Random().nextInt(allowedChars.length))).join();
+      length,
+          (index) =>
+          allowedChars.runes.elementAt(Random().nextInt(allowedChars.length)),
+    ).join();
   }
 }
