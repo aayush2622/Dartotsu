@@ -69,7 +69,7 @@ class _CustomBottomDialogState extends State<CustomBottomDialog> {
             ...widget.viewList,
             if (widget.checkText != null) ...[
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                padding: const EdgeInsets.symmetric(horizontal: 24.0),
                 child: Row(
                   children: [
                     Checkbox(
@@ -97,7 +97,7 @@ class _CustomBottomDialogState extends State<CustomBottomDialog> {
               const SizedBox(height: 16.0),
             ],
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              padding: const EdgeInsets.symmetric(horizontal: 24.0),
               child: Row(
                 children: [
                   if (widget.negativeText != null) ...[
@@ -146,7 +146,7 @@ class _CustomBottomDialogState extends State<CustomBottomDialog> {
                 ],
               ),
             ),
-            SizedBox(height: 0.bottomBar()), // TODO: test navbar padding
+            SizedBox(height: 0.bottomBar()),
           ],
         ),
       ),

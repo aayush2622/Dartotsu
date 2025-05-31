@@ -83,7 +83,7 @@ class _ListEditorDialogState extends State<ListEditorDialog> {
       fontSize: 16,
       fontWeight: FontWeight.w700,
     );
-    const fieldPadding = EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0);
+    const fieldPadding = EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0);
     var theme = Theme.of(context).colorScheme;
     return CustomBottomDialog(
       title: "List Editor",
@@ -158,9 +158,7 @@ class _ListEditorDialogState extends State<ListEditorDialog> {
           controller: repeatController,
           keyboardType: const TextInputType.numberWithOptions(decimal: false),
           style: labelStyle,
-          inputFormatters: [
-            FilteringTextInputFormatter.allow(RegExp(r'^[0-9]*$')),
-          ],
+          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           decoration: InputDecoration(
             labelText: "Total Repeats",
             labelStyle: labelStyle,

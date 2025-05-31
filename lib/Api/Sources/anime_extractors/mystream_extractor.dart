@@ -8,11 +8,14 @@ import '../http/m_client.dart';
 
 class MyStreamExtractor {
   Future<List<Video>> videosFromUrl(
-      String url, Map<String, String> headers) async {
+      String url,
+      Map<String, String> headers,
+      ) async {
     final host = url.substringBefore("/watch");
 
-    final InterceptedClient client =
-        MClient.init(reqcopyWith: {'useDartHttpClient': true});
+    final InterceptedClient client = MClient.init(
+      reqcopyWith: {'useDartHttpClient': true},
+    );
 
     try {
       final response = await client.get(Uri.parse(url), headers: headers);
@@ -23,28 +26,30 @@ class MyStreamExtractor {
           .substringBefore("\",null,null");
       final streamUrl = "$host/m3u8/$streamCode/master.txt?s=1&cache=1";
 
-      final cookie = response.headers.entries
-          .firstWhere(
-            (entry) =>
-                entry.key.toLowerCase() == "set-cookie" &&
+      final cookie =
+          response.headers.entries
+              .firstWhere(
+                (entry) =>
+            entry.key.toLowerCase() == "set-cookie" &&
                 entry.value.startsWith("PHPSESSID", 0),
             orElse: () => const MapEntry("set-cookie", ""),
           )
-          .value
-          .split(";")
-          .first;
+              .value
+              .split(";")
+              .first;
 
       final newHeaders = {...headers, "cookie": cookie, "accept": "*/*"};
 
-      final masterPlaylistResponse =
-          await client.get(Uri.parse(streamUrl), headers: newHeaders);
+      final masterPlaylistResponse = await client.get(
+        Uri.parse(streamUrl),
+        headers: newHeaders,
+      );
       final masterPlaylist = masterPlaylistResponse.body;
 
       const separator = "#EXT-X-STREAM-INF";
-      return masterPlaylist
-          .substringAfter(separator)
-          .split(separator)
-          .map((it) {
+      return masterPlaylist.substringAfter(separator).split(separator).map((
+          it,
+          ) {
         final resolution =
             "${it.substringAfter("RESOLUTION=").substringBefore("\n").substringAfter("x").substringBefore(",")}p";
         final quality = "MyStream - $resolution";
