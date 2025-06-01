@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dartotsu/Functions/Extensions.dart';
 import 'package:dartotsu/Preferences/IsarDataClasses/DefaultReaderSettings/DafaultReaderSettings.dart';
 import 'package:dartotsu/Widgets/ScrollConfig.dart';
 import 'package:flutter/gestures.dart';
@@ -13,6 +14,7 @@ import '../../../Api/Sources/Eval/dart/model/page.dart';
 import '../../../Api/Sources/Model/Source.dart';
 import '../../../DataClass/Chapter.dart';
 import '../../../DataClass/Media.dart';
+import '../../../Preferences/PrefManager.dart';
 import 'ReaderController.dart';
 
 class MediaReader extends StatefulWidget {
@@ -66,8 +68,24 @@ class MediaReaderState extends State<MediaReader> {
     if (Platform.isAndroid || Platform.isIOS) {
       SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     }
-
+    updateProgress();
     super.dispose();
+  }
+
+  void updateProgress() {
+    if (widget.isOffline) return;
+    var currentPage = this.currentPage.value;
+    var totalPages = widget.pages.length;
+    var chapterEnd = totalPages - currentPage <= 1;
+    var incognito = loadData(PrefName.incognito);
+    if (incognito || !chapterEnd) return;
+
+    var service = Get.context!.currentService(listen: false);
+    var saveProgress =
+        loadCustomData<bool>("${widget.media.id}-${service.getName}-saveProgress") ?? true;
+    if (saveProgress) {
+      service.data.mutations?.setProgress(widget.media,widget.currentChapter.number);
+    }
   }
 
   @override

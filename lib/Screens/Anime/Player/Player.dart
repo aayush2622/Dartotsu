@@ -130,6 +130,7 @@ class MediaPlayerState extends State<MediaPlayer>
           .setApplicationScreenBrightness(_defaultBrightness);
       _setLandscapeMode(false);
     }
+    updateProgress();
   }
 
   void _setLandscapeMode(bool state) {
@@ -145,6 +146,22 @@ class MediaPlayerState extends State<MediaPlayer>
         DeviceOrientation.landscapeRight
       ]);
       SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+    }
+  }
+
+  void updateProgress() {
+    var current = _timeStringToSeconds(videoPlayerController.currentTime.value);
+    var total = _timeStringToSeconds(videoPlayerController.maxTime.value);
+    var episodeEnd = (current / total) > 0.8;
+    var incognito = loadData(PrefName.incognito);
+    if (incognito || !episodeEnd) return;
+    if (widget.isOffline) return;
+
+    var service = Get.context!.currentService(listen: false);
+    var saveProgress =
+        loadCustomData<bool>("${widget.media.id}-${service.getName}-saveProgress") ?? true;
+    if (saveProgress) {
+      service.data.mutations?.setProgress(widget.media,widget.currentEpisode.number);
     }
   }
 

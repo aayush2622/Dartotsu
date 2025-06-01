@@ -7,5 +7,9 @@ abstract class Mutations {
     List<String>? customList,
   });
 
+  /// Delete media from user list.
   Future<void> deleteFromList(Media media);
+
+  /// Set progress for a media episode or chapter.
+  Future<void> setProgress(Media media, String episodeNumber);
 }

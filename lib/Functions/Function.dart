@@ -77,7 +77,7 @@ Future<void> snackString(
   String? clipboard,
   BuildContext? c,
 }) async {
-  var context = c ?? Get.overlayContext;
+  var context = c ?? Get.context;
   Logger.log(s ?? '');
   if (context != null && s != null && s.isNotEmpty) {
     var theme = Theme.of(context).colorScheme;
