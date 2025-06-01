@@ -119,7 +119,18 @@ dependency_overrides:
   analyzer: ">=5.2.0 <7.0.0"
   js: ">=0.6.3 <0.7.1"
   collection: ^1.19.0
-
+  media_kit:
+    git:
+      url: https://github.com/media-kit/media-kit
+      path: media_kit
+  media_kit_video:
+    git:
+      url: https://github.com/media-kit/media-kit
+      path: media_kit_video
+  media_kit_libs_video:
+    git:
+      url: https://github.com/media-kit/media-kit
+      path: libs/universal/media_kit_libs_video
   desktop_webview_window: ^0.2.3
 
 # Flutter-specific configurations
@@ -169,7 +180,7 @@ flutter_icons:
     image_path: "assets/images/logo.png"
 
 inno_bundle:
-  sign_tool: 
+  sign_tool:
     command: $p
   id: 609d9fb9-ac99-533b-a5b5-f277afa99b68 # <-- Put your app id here
   publisher: Ankit Grai # Optional, but recommended.

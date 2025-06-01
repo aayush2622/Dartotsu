@@ -1,12 +1,15 @@
 import 'package:dartotsu/DataClass/Media.dart';
+import 'package:dartotsu/Functions/Function.dart';
+import 'package:dartotsu/Functions/string_extensions.dart';
 import 'package:dartotsu/Services/Api/Mutations.dart';
 import 'package:flutter/cupertino.dart';
 
+import 'Anilist.dart';
 import 'Data/data.dart';
 
-
-part 'AnilistMutations/SetUserList.dart';
 part 'AnilistMutations/DeleteFromList.dart';
+part 'AnilistMutations/SetProgress.dart';
+part 'AnilistMutations/SetUserList.dart';
 
 class AnilistMutations extends Mutations {
   final Future<T?> Function<T>(
@@ -26,4 +29,6 @@ class AnilistMutations extends Mutations {
   @override
   Future<void> deleteFromList(Media media) => _deleteFromList(media);
 
+  @override
+  Future<void> setProgress(Media media, String episode) => _setProgress(media, episode);
 }

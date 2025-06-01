@@ -1,3 +1,4 @@
+import 'package:dartotsu/Preferences/IsarDataClasses/MediaSettings/MediaSettings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_qjs/quickjs/ffi.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -79,6 +80,7 @@ class _SourceSelectorState extends ConsumerState<SourceSelector> {
                 onChanged: (name) async {
                   //saveCustomData('${widget.mediaData.id}-lastUsedSource', widget.mediaData.settings..server = name);
                   widget.mediaData.settings.server = name;
+                  MediaSettings.saveMediaSettings(widget.mediaData);
                   lastUsedSource = name;
                   source = sources.firstWhereOrNull(
                           (e) => nameAndLang(e) == lastUsedSource!) ??
