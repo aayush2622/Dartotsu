@@ -216,7 +216,7 @@
       }
     }
   },
-  "home": "додому",
+  "home": "Додому",
   "@home": {},
   "loginTo": "Увійдіть до {service}",
   "@loginTo": {
@@ -572,7 +572,7 @@
   "@youTube": {},
   "mediaNotFound": "Не знайдено",
   "@mediaNotFound": {},
-  "found": "знайдено",
+  "found": "Знайдено",
   "@found": {},
   "wrongTitle": "Назва wrong?",
   "@wrongTitle": {},
@@ -580,7 +580,7 @@
   "@outOf": {},
   "readStatus": "Читати",
   "@readStatus": {},
-  "watchStatus": "подивився",
+  "watchStatus": "Подивився",
   "@watchStatus": {},
   "totalOf": "Всього",
   "@totalOf": {},
