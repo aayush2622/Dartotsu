@@ -740,7 +740,7 @@ jobs:
           APK_DOWNLOAD_LINK: ${{ needs.build_android.outputs.apk_link }}
           WINDOWS_DOWNLOAD_LINK: ${{ needs.build_windows.outputs.zip_link }}
           LINUX_DOWNLOAD_LINK: ${{needs.build_linux.outputs.zip_link}}
-          LINUX_APPIMAGE_DOWLOAD_LINK: ${{needs.build_linux.outputs.appImage_link}}
+          LINUX_APPIMAGE_DOWNLOAD_LINK: ${{needs.build_linux.outputs.appImage_link}}
           IOS_DOWNLOAD_LINK: ${{needs.build_ios.outputs.ipa_link}}
           MACOS_DOWNLOAD_LINK: ${{needs.build_macos.outputs.deb_link}}
         run: |
