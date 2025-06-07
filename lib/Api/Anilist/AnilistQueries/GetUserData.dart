@@ -23,7 +23,7 @@ extension on AnilistQueries {
     Anilist.episodesWatched = user.statistics?.anime?.episodesWatched;
     Anilist.chapterRead = user.statistics?.manga?.chaptersRead;
     Anilist.adult = user.options?.displayAdultContent ?? false;
-    Anilist.unreadNotificationCount = user.unreadNotificationCount ?? 0;
+    //Anilist.unreadNotificationCount = user.unreadNotificationCount ?? 0;
     final unread = loadData(PrefName.unReadCommentNotifications);
     Anilist.unreadNotificationCount += unread;
     Anilist.isInitialized.value = true;
