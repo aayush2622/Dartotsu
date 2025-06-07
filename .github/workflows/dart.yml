@@ -309,7 +309,7 @@ jobs:
           [Desktop Entry]
           Name=Dartotsu
           Exec=usr/bin/dartotsu
-          Icon=dartotsu
+          Icon=assests/images/logo.png
           Type=Application
           Categories=Utility;
           EOF
