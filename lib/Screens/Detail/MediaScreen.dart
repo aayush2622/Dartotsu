@@ -39,6 +39,8 @@ class MediaInfoPageState extends State<MediaInfoPage> {
   late PageController pageController = PageController();
   late Media mediaData;
 
+  late Worker reload;
+
   @override
   void initState() {
     var service = context.currentService(listen: false);
@@ -51,6 +53,17 @@ class MediaInfoPageState extends State<MediaInfoPage> {
     pageController = PageController(initialPage: _selectedIndex.value);
     mediaData = widget.mediaData;
     MediaSettings.saveMediaSettings(mediaData..settings.navBarIndex = 1);
+
+    var refreshID = widget.mediaData.id;
+
+    final live = Refresh.getOrPut(refreshID, false);
+    reload = ever(live, (bool shouldRefresh) async {
+      if (shouldRefresh) {
+        setState(() {});
+        live.value = false;
+      }
+    });
+    reload;
     super.initState();
     loadMediaData();
   }
@@ -60,6 +73,13 @@ class MediaInfoPageState extends State<MediaInfoPage> {
   Future<void> loadMediaData() async {
     mediaData = await _viewModel.getMediaDetails(widget.mediaData, context);
     if (mounted) setState(() => loaded = true);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    reload.dispose();
+    Refresh.activity.remove(widget.mediaData.id);
   }
 
   @override

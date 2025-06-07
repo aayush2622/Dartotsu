@@ -47,13 +47,18 @@ class SettingsAboutScreenState extends BaseSettingsScreen {
         name: getString.logFile,
         description: getString.logFileDescription,
         icon: Icons.share,
-        isVisible: !Platform.isLinux,
         onClick: () async {
-          var path = (await StorageProvider.getDirectory(
+          var p = (await StorageProvider.getDirectory(
             useCustomPath: true,
             customPath: loadData(PrefName.customPath),
-          ))
-              ?.path;
+          ));
+
+          var path = p?.path ?? "";
+          if (Platform.isLinux) {
+            copyToClipboard("$path\\appLogs.txt".fixSeparator);
+            return;
+          }
+
           shareFile("$path\\appLogs.txt".fixSeparator, "LogFile");
         },
       ),

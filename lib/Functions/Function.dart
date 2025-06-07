@@ -78,7 +78,7 @@ Future<void> snackString(
   BuildContext? c,
 }) async {
   var context = c ?? Get.context;
-  Logger.log(s ?? '');
+  Logger.log('Showing SnackBar with message: $s');
   if (context != null && s != null && s.isNotEmpty) {
     var theme = Theme.of(context).colorScheme;
     try {
@@ -123,6 +123,7 @@ void copyToClipboard(String text) {
   var context = Get.overlayContext;
   var theme = Theme.of(context!).colorScheme;
   Clipboard.setData(ClipboardData(text: text));
+  Logger.log("Copied to clipboard: $text");
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
       content: Text(
@@ -135,7 +136,7 @@ void copyToClipboard(String text) {
         ),
       ),
       backgroundColor: theme.surface,
-      duration: const Duration(milliseconds: 100),
+      duration: const Duration(milliseconds: 300),
     ),
   );
 }
