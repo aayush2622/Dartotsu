@@ -173,18 +173,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      # Cache Flutter and Dart dependencies
-      - uses: actions/cache@v4
-        with:
-          path: |
-            C:\hostedtoolcache\windows\flutter
-            ~\AppData\Local\Pub\Cache
-            build\
-            .dart_tool\
-          key: ${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-flutter-
-
       - name: Set up Signing Tool
         run: |
           mkdir $env:USERPROFILE\certs
