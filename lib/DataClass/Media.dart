@@ -71,7 +71,7 @@ class Media {
   Map<String, bool>? inCustomListsOf;
   int? userFavOrder;
 
-  final String? status;
+  String? status;
   String? format;
   String? source;
   String? countryOfOrigin;

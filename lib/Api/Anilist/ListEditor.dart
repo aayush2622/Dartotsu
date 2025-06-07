@@ -412,11 +412,13 @@ class _ListEditorDialogState extends State<ListEditorDialog> {
     Get.back();
     await Anilist.mutations?.editList(widget.media, customList: list);
     Refresh.activity[RefreshId.Anilist.homePage]?.value = true;
+    Refresh.activity[widget.media.id]?.value = true;
   }
 
   Future<void> _onDelete() async {
     Get.back();
     await Anilist.mutations?.deleteFromList(widget.media);
     Refresh.activity[RefreshId.Anilist.homePage]?.value = true;
+
   }
 }

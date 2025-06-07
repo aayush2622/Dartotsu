@@ -3,9 +3,13 @@ import 'package:dartotsu/Functions/Function.dart';
 import 'package:dartotsu/Functions/string_extensions.dart';
 import 'package:dartotsu/Services/Api/Mutations.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
+import '../../Screens/Detail/Tabs/Watch/Anime/AnimeParser.dart';
 import 'Anilist.dart';
 import 'Data/data.dart';
+import 'Data/fuzzyData.dart';
 
 part 'AnilistMutations/DeleteFromList.dart';
 part 'AnilistMutations/SetProgress.dart';
