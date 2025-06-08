@@ -546,6 +546,8 @@ jobs:
               MESSAGE+="• [Android_armeabi-v7a]($LINK)\n"
             elif [[ $LINK == *"Android_x86"* ]]; then
               MESSAGE+="• [Android_x86_64]($LINK)\n"
+            elif [[ $LINK == *"Android_Universal"* ]]; then
+              MESSAGE+="• [Android_Universal]($LINK)\n"
             elif [[ $LINK == *"iOS"* ]]; then
               MESSAGE+="• [iOS]($LINK)\n"
             elif [[ $LINK == *"LinuxZip"* ]]; then
