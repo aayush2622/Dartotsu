@@ -4,7 +4,7 @@ description: "An Anilist client"
 publish_to: 'none'
 
 # Application version and build number
-version: 0.0.1+1
+version: 0.0.2+1
 
 # Dart SDK constraints
 environment:
