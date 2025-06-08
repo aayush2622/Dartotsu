@@ -239,13 +239,13 @@ jobs:
         uses: thedoctor0/zip-release@master
         with:
           type: "zip"
-          filename: Dartotsu_Linux_${{github.ref_name}}.zip
+          filename: Dartotsu_LinuxZip_${{github.ref_name}}.zip
           directory: build/linux/x64/release/bundle
       - name: Release Linux Zip
         uses: softprops/action-gh-release@master
         with:
           files: build/linux/x64/release/bundle/Dartotsu_LinuxZip_${{github.ref_name}}.zip
-      - name: Release Linux Zip
+      - name: Release Linux app image
         uses: softprops/action-gh-release@master
         with:
           files: build/linux/x64/release/Dartotsu-Linux-${{github.ref_name}}.AppImage
