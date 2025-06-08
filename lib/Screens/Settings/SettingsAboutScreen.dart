@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dartotsu/Theme/LanguageSwitcher.dart';
+import 'package:dartotsu/Widgets/CustomBottomDialog.dart';
 import 'package:flutter/material.dart';
 
 import '../../Adaptor/Settings/SettingsAdaptor.dart';
@@ -9,6 +10,7 @@ import '../../Functions/Function.dart';
 import '../../Preferences/PrefManager.dart';
 import '../../StorageProvider.dart';
 import 'BaseSettingsScreen.dart';
+import 'Developer.dart';
 
 class SettingsAboutScreen extends StatefulWidget {
   const SettingsAboutScreen({super.key});
@@ -33,32 +35,53 @@ class SettingsAboutScreenState extends BaseSettingsScreen {
 
   @override
   List<Widget> get settingsList {
-    return [
-      SettingsAdaptor(
-        settings: _buildSettings(context),
-      ),
-    ];
+    return [SettingsAdaptor(settings: _buildSettings(context))];
   }
 
   List<Setting> _buildSettings(BuildContext context) {
     return [
       Setting(
         type: SettingType.normal,
+        name: 'Developers/Helpers',
+        description: 'Dartotsu\'s unpaid labours',
+        icon: Icons.info_outline,
+        onClick: () {
+          showCustomBottomDialog(
+            context,
+            CustomBottomDialog(
+              title: "Developers/Helpers",
+              viewList: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24.0,
+                    vertical: 8.0,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: Developers.getDevelopersWidget(context),
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      ),
+      Setting(
+        type: SettingType.normal,
         name: getString.logFile,
         description: getString.logFileDescription,
         icon: Icons.share,
         onClick: () async {
-          var p = (await StorageProvider.getDirectory(
+          var p = await StorageProvider.getDirectory(
             useCustomPath: true,
             customPath: loadData(PrefName.customPath),
-          ));
+          );
 
           var path = p?.path ?? "";
           if (Platform.isLinux) {
             copyToClipboard("$path\\appLogs.txt".fixSeparator);
             return;
           }
-
           shareFile("$path\\appLogs.txt".fixSeparator, "LogFile");
         },
       ),

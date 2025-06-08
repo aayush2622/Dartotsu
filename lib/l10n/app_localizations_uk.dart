@@ -51,7 +51,7 @@ class AppLocalizationsUk extends AppLocalizations {
   String get manhua => 'Манхуа';
 
   @override
-  String get home => 'додому';
+  String get home => 'Додому';
 
   @override
   String get novel => 'Роман';
@@ -671,7 +671,7 @@ class AppLocalizationsUk extends AppLocalizations {
   String get readStatus => 'Читати';
 
   @override
-  String get watchStatus => 'подивився';
+  String get watchStatus => 'Подивився';
 
   @override
   String get outOf => 'з';
@@ -705,7 +705,7 @@ class AppLocalizationsUk extends AppLocalizations {
   String get selected => 'Вибрані';
 
   @override
-  String get found => 'знайдено';
+  String get found => 'Знайдено';
 
   @override
   String get webView => 'Веб-камера';
