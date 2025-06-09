@@ -37,8 +37,8 @@ class SettingsMangaScreenState extends BaseSettingsScreen {
         settings: [
           Setting(
             type: SettingType.normal,
-            name: 'Reader Settings',
-            description: 'Change reader settings',
+            name: getString.readerSettings,
+            description: getString.readerSettingsDesc,
             icon: Icons.video_settings,
             isActivity: true,
             onClick: () => navigateToPage(
