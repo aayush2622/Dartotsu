@@ -35,7 +35,7 @@ git commit -m "feat: improve linux support [build.linux]"
 
  ## Multiple Triggers
 
- You can combine build triggers ina single comment
+ You can combine build triggers in a single comment
 
  ```bash
  git commit -m "feat: cross-platform improvements [build.linux][build.windows]"
