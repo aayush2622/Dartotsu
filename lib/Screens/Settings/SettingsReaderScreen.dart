@@ -19,7 +19,7 @@ class SettingsReaderScreen extends StatefulWidget {
 
 class SettingsReaderScreenState extends BaseSettingsScreen {
   @override
-  String title() => 'Reader Settings';
+  String title() => getString.readerSettings;
 
   @override
   Widget icon() => Padding(
@@ -98,7 +98,7 @@ List<Widget> readerSettings(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
-                'Layout',
+                getString.layout,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16.0,
@@ -126,7 +126,7 @@ List<Widget> readerSettings(
       settings: [
         Setting(
           type: SettingType.normal,
-          name: 'Direction',
+          name: getString.direction,
           description: readerSettings.direction.toString(),
           trailingIcon: readerSettings.direction.icon,
           onClick: () {
@@ -136,8 +136,8 @@ List<Widget> readerSettings(
         ),
         Setting(
           type: SettingType.switchType,
-          name: 'Spaced Pages',
-          description: 'Add space between pages',
+          name: getString.spacedPages,
+          description: getString.spacedPagesDesc,
           isChecked: readerSettings.spacedPages,
           onSwitchChange: (value) {
             if (readerSettings.spacedPages != value) {
@@ -148,8 +148,8 @@ List<Widget> readerSettings(
         ),
         Setting(
           type: SettingType.switchType,
-          name: 'Hide Scrollbar',
-          description: 'Hide scrollbar while reading',
+          name: getString.hideScrollbar,
+          description: getString.hideScrollbarDesc,
           isChecked: readerSettings.hideScrollbar,
           onSwitchChange: (value) {
             if (readerSettings.hideScrollbar != value) {
@@ -160,8 +160,8 @@ List<Widget> readerSettings(
         ),
         Setting(
           type: SettingType.switchType,
-          name: 'Hide Page Number',
-          description: 'Hide page number while reading',
+          name: getString.hidePageNumber,
+          description: getString.hidePageNumberDesc,
           isChecked: readerSettings.hidePageNumber,
           onSwitchChange: (value) {
             if (readerSettings.hidePageNumber != value) {
