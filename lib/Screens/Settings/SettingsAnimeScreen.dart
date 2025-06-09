@@ -37,8 +37,8 @@ class SettingsAnimeScreenState extends BaseSettingsScreen {
         settings: [
           Setting(
             type: SettingType.normal,
-            name: 'Player Settings',
-            description: 'Change player settings',
+            name: getString.playerSettingsTitle,
+            description: getString.playerSettingsDesc,
             icon: Icons.video_settings,
             isActivity: true,
             onClick: () => navigateToPage(
