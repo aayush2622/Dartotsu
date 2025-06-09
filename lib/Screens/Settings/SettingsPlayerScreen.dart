@@ -85,8 +85,8 @@ List<Widget> playerSettings(
         ),
         Setting(
           type: SettingType.switchType,
-          name: 'ThumbLess SeekBar',
-          description: 'Remove thumb from the seek bar',
+          name: getString.thumbLessSeekBar,
+          description: getString.thumbLessSeekBarDesc,
           icon: Icons.circle_rounded,
           isChecked: loadData(PrefName.thumbLessSeekBar),
           onSwitchChange: (value) {
