@@ -50,7 +50,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get manhua => 'Manhua';
 
   @override
-  String get home => 'Tela Inicial';
+  String get home => 'Início';
 
   @override
   String get novel => 'Novel';

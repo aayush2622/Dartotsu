@@ -322,7 +322,7 @@ class MediaPlayerState extends State<MediaPlayer>
   }
 
   Widget _buildSubtitle() {
-    if (videoPlayerController.subtitle.isEmpty) {
+    if (videoPlayerController.subtitle.isEmpty || !settings.showSubtitle) {
       return const SizedBox();
     }
     return Obx(

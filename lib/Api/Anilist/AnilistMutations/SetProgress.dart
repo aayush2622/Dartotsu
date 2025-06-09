@@ -4,6 +4,9 @@ part of '../AnilistMutations.dart';
 extension on AnilistMutations {
   Future<void> _setProgress(Media media, String episode) async {
     if (Anilist.userid == null) return;
+
+    if (media.userProgress == episode.toDouble().toInt()) return;
+
     media.userProgress = episode.toDouble().toInt();
     media.status = media.status == "REPEATING" ? "REPEATING" : "CURRENT";
     if (media.startDate == null) {

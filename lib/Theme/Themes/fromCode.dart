@@ -42,6 +42,7 @@ ThemeData getCustomDarkTheme(int color) {
       primaryLightRef: schemeColor.primary,
     ),
     primary: schemeColor.primary,
+    primaryLightRef: schemeColor.primary,
     blendLevel: 18,
   );
 
