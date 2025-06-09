@@ -1,5 +1,29 @@
 # Triggering Release Workflow
 
+## Prepare for Release
+
+1. Update versions in `pubspec.yaml`:
+
+   a. Main application version:
+   ```yaml
+   version: 1.2.3+123  # Increment version number and build number
+   ```
+   - First part (`1.2.3`) is the semantic version
+   - Second part (`123`) is the build number
+
+   b. Inno Bundle version (at the bottom of pubspec.yaml):
+   ```yaml
+   inno_bundle:
+     # ...other settings...
+     version: 1.2.3    # Must match the semantic version above (without build number)
+   ```
+
+2. Commit the version changes:
+   ```bash
+   git add pubspec.yaml
+   git commit -m "chore: bump version to 1.2.3"
+   ```
+
 ## Via Git Tags
 
 To create and push a new version tag using git:
