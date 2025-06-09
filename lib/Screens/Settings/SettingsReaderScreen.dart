@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import '../../Adaptor/Settings/SettingsAdaptor.dart';
 import '../../DataClass/Media.dart';
 import '../../DataClass/Setting.dart';
+import '../../Theme/LanguageSwitcher.dart';
 import '../../Preferences/IsarDataClasses/DefaultReaderSettings/DafaultReaderSettings.dart';
 import '../../Preferences/IsarDataClasses/MediaSettings/MediaSettings.dart';
 import '../../Preferences/PrefManager.dart';
