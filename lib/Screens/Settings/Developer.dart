@@ -24,7 +24,7 @@ class Developers {
       ),
       Developer(
         name: "itsmechinmoy",
-        pfp: "https://avatars.githubusercontent.com/u/167056923?v=4",
+        pfp: "https://files.catbox.moe/o45l03.gif",
         banner: "https://files.catbox.moe/gp3m17.gif",
         uri: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
         role: "Marketer & Discord Moderator",
@@ -40,7 +40,7 @@ class Developers {
       Developer(
         name: "SunglassJerry",
         pfp: "https://i.ibb.co/5hKgrZnx/9b2983d1dd5c4a6d8988c0ba24ddd6da.png",
-        banner: "https://i.ibb.co/Z64w3Pdy/image.png",
+        banner: "https://files.catbox.moe/2uibuz.jpg",
         uri: "https://youtu.be/SfT4FMkh1-w",
         role: "Discord Moderator",
       ),
