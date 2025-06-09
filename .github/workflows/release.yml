@@ -508,6 +508,8 @@ jobs:
   upload_download_url:
     runs-on: ubuntu-latest
     needs: [post-release-notes]
+    permissions:
+      contents: read
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
