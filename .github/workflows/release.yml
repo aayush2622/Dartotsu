@@ -329,6 +329,8 @@ jobs:
 
   post-release-notes:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     needs: [generate-changelog]
     steps:
       - name: Cloing repository
