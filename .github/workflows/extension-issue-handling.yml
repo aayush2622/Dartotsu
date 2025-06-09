@@ -1,4 +1,7 @@
 name: Extension Issue Handling
+permissions:
+  contents: read
+  issues: write
 on:
   issues:
     types: [opened]
