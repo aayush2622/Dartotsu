@@ -42,14 +42,14 @@ class SettingsAboutScreenState extends BaseSettingsScreen {
     return [
       Setting(
         type: SettingType.normal,
-        name: 'Developers/Helpers',
-        description: 'Dartotsu\'s unpaid labours',
+        name: getString.developersHelpers,
+        description: getString.developersHelpersDesc,
         icon: Icons.info_outline,
         onClick: () {
           showCustomBottomDialog(
             context,
             CustomBottomDialog(
-              title: "Developers/Helpers",
+              title: getString.developersHelpers,
               viewList: [
                 Padding(
                   padding: const EdgeInsets.symmetric(
