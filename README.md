@@ -16,10 +16,12 @@
 # Dartotsu
 
 **Dartotsu** is a complete rewrite of [Dantotsu](https://github.com/rebelonion/Dantotsu/) in Flutter. It's a hybrid [**AniList**](https://anilist.co/) and [**MyAnimeList**](https://myanimelist.net/) tracking client, along with [**Simkl**](https://simkl.com/) support!  
-> [!NOTE]
-> This project is currently under development and is not ready for public use.
+> [!WARNING]
+> Dartotsu is for tracking and management only.
 >
-> Download, test, and share feedback or issues on <a href="https://t.me/Dartotsu" target="_blank">Telegram</a> or <a href="https://discord.gg/eyQdCpdubF" target="_blank">Discord</a>.
+> It does **not** host, provide, or maintain streaming content or extensions.
+>
+> Users are fully responsible for their actions. The developer disclaims all liability for misuse or legal issues. Legal concerns should be addressed to third-party sources, not Dartotsu.
 
 ## Downloads
 <p align="center">
@@ -27,14 +29,10 @@
    <a href="https://github.com/aayush2622/Dartotsu/releases/latest"><img src="https://img.shields.io/github/v/release/aayush2622/Dartotsu?style=for-the-badge&logoColor=168b94&label=Stable&labelColor=06599d&color=043b69" alt="Latest Stable Release"/></a>
    <a href="https://github.com/aayush2622/Dartotsu/releases/"><img src="https://img.shields.io/github/v/release/aayush2622/Dartotsu?style=for-the-badge&include_prereleases&logoColor=087a87&label=Beta&color=818cf8" alt="Latest Pre-release"/></a>
    <!--<a  href="https://github.com/aayush2622/Dartotsu/releases/latest"><img src="https://img.shields.io/github/v/release/aayush2622/Dartotsu?style=for-the-badge&display_name=tag&label=Alpha&labelColor=087a87&color=168b94" alt="Latest Alpha Release"/></a>-->
+   
+> [!NOTE]
+> Download, test, and share feedback or issues on <a href="https://t.me/Dartotsu" target="_blank">Telegram</a> or <a href="https://discord.gg/eyQdCpdubF" target="_blank">Discord</a>.
 </p>
-
-> [!WARNING]
-> Dartotsu is for tracking and management only.
->
-> It does **not** host, provide, or maintain streaming content or extensions.
->
-> Users are fully responsible for their actions. The developer disclaims all liability for misuse or legal issues. Legal concerns should be addressed to third-party sources, not Dartotsu.
 
 ## Support Us
 <a href='https://buymeacoffee.com/aayush262' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://storage.ko-fi.com/cdn/kofi1.png?v=3' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
