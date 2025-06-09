@@ -1,16 +1,16 @@
 <p align="center">
-   <img src="https://files.catbox.moe/zng63r.png" alt="Dartotsu Banner" width="100%">
+   <img src="https://files.catbox.moe/mdn05t.png" alt="Dartotsu Banner" width="100%">
 </p>
 
 <p align="center">
-   <img src="https://img.shields.io/badge/platforms-android_ios_windows_linux_macos-06599d?style=for-the-badge&labelColor=0099cc&color=555555"/>
-   <a href="https://github.com/aayush2622/Dartotsu/releases"><img src="https://img.shields.io/github/downloads/aayush2622/Dartotsu/total?label=Downloads&logo=android&logoColor=1a8fa6&style=for-the-badge&labelColor=0099cc&color=555555"></a>
+   <img src="https://img.shields.io/badge/platforms-android_ios_windows_linux_macos-06599d?style=for-the-badge&labelColor=00ffff&color=0d1117"/>
+   <a href="https://github.com/aayush2622/Dartotsu/releases"><img src="https://img.shields.io/github/downloads/aayush2622/Dartotsu/total?label=Downloads&logo=android&logoColor=1a8fa6&style=for-the-badge&labelColor=00ffff&color=0d1117"></a>
 </p>
 
 <p align="center">
-   <a href="https://www.codefactor.io/repository/github/aayush2622/Dartotsu"><img src="https://img.shields.io/codefactor/grade/github/aayush2622/Dartotsu?style=for-the-badge&label=Codefactor&labelColor=0099cc&color=555555" alt="CodeFactor"/></a>
-   <a href="https://hosted.weblate.org/engage/dartotsu/"><img alt="Weblate project translated" src="https://img.shields.io/weblate/progress/dartotsu?label=Translated&labelColor=0099cc&color=555555&style=for-the-badge"></a>
-   <a href="https://github.com/aayush2622/Dartotsu/stargazers"><img src="https://img.shields.io/github/stars/aayush2622/Dartotsu?style=for-the-badge&label=Stars&labelColor=0099cc&color=555555" alt="Stars" /></a>
+   <a href="https://www.codefactor.io/repository/github/aayush2622/Dartotsu"><img src="https://img.shields.io/codefactor/grade/github/aayush2622/Dartotsu?style=for-the-badge&label=Codefactor&labelColor=00ffff&color=0d1117" alt="CodeFactor"/></a>
+   <a href="https://hosted.weblate.org/engage/dartotsu/"><img alt="Weblate project translated" src="https://img.shields.io/weblate/progress/dartotsu?label=Translated&labelColor=00ffff&color=0d1117&style=for-the-badge"></a>
+   <a href="https://github.com/aayush2622/Dartotsu/stargazers"><img src="https://img.shields.io/github/stars/aayush2622/Dartotsu?style=for-the-badge&label=Stars&labelColor=00ffff&color=0d1117" alt="Stars" /></a>
 </p>
 
 # Dartotsu
