@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import '../../Adaptor/Settings/SettingsAdaptor.dart';
 import '../../DataClass/Media.dart';
 import '../../DataClass/Setting.dart';
-import '../../Theme/LanguageSwitcher.dart';
+import 'package:dartotsu/Theme/LanguageSwitcher.dart';
 import '../../Preferences/IsarDataClasses/DefaultReaderSettings/DafaultReaderSettings.dart';
 import '../../Preferences/IsarDataClasses/MediaSettings/MediaSettings.dart';
 import '../../Preferences/PrefManager.dart';
@@ -98,9 +98,9 @@ List<Widget> readerSettings(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              Text(
                 getString.layout,
-                style: TextStyle(
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16.0,
                   fontFamily: 'Poppins',

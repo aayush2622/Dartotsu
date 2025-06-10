@@ -517,7 +517,7 @@
   "@skipButton": {},
   "skipButtonDescription": "Skip button duration",
   "@skipButtonDescription": {},
-  "thumbLess SeekBar": "ThumbLess SeekBar",
+  "thumbLessSeekBar": "ThumbLess SeekBar",
   "thumbLessSeekBarDesc": "Remove thumb from the seek bar",
 
   "subtitles": "Subtitles",
