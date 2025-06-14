@@ -198,12 +198,85 @@ error_exit() {
 check_dependencies() {
     local missing_deps=()
     
+    # Check for required dependencies
     command -v curl >/dev/null 2>&1 || missing_deps+=("curl")
     command -v unzip >/dev/null 2>&1 || missing_deps+=("unzip")
     command -v wget >/dev/null 2>&1 || missing_deps+=("wget")
+    command -v wget >/dev/null 2>&1 || missing_deps+=("webkit2gtk-4.1")
     
     if [ ${#missing_deps[@]} -ne 0 ]; then
-        error_exit "Missing dependencies: ${missing_deps[*]}. Please install them first."
+        warn_msg "Missing dependencies: ${missing_deps[*]}"
+        echo
+        echo -e "${YELLOW}${BOLD}Would you like to install them automatically?${RESET} ${GRAY}(y/N)${RESET}: "
+        read -n 1 INSTALL_DEPS
+        echo
+        
+        if [[ "${INSTALL_DEPS,,}" == "y" ]]; then
+            info_msg "Detecting package manager and installing dependencies..."
+            
+            # Detect Linux distribution's package manager
+            if command -v apt > /dev/null; then
+                PKG_MANAGER='apt'
+            elif command -v dnf > /dev/null; then
+                PKG_MANAGER='dnf'
+            elif command -v pacman > /dev/null; then
+                PKG_MANAGER='pacman'
+            elif command -v zypper > /dev/null; then
+                PKG_MANAGER='zypper'
+            else
+                error_exit "No supported package manager found! Please install: ${missing_deps[*]} manually."
+            fi
+            
+            # Convert missing_deps array to space-separated string
+            PKGS="${missing_deps[*]}"
+            
+            echo -ne "${CYAN}${ICON_INSTALL}${RESET} Installing dependencies with ${BOLD}${PKG_MANAGER}${RESET}..."
+            
+            # Install packages based on detected package manager
+            if [ "$PKG_MANAGER" == "apt" ]; then
+                if sudo apt update -y > /dev/null 2>&1 && sudo apt install -y $PKGS > /dev/null 2>&1; then
+                    echo -e " ${GREEN}${ICON_SUCCESS} Done!${RESET}"
+                else
+                    echo -e " ${RED}${ICON_ERROR} Failed!${RESET}"
+                    error_exit "Failed to install dependencies with apt. Please install manually: ${missing_deps[*]}"
+                fi
+            elif [ "$PKG_MANAGER" == "dnf" ]; then
+                if sudo dnf install -y $PKGS > /dev/null 2>&1; then
+                    echo -e " ${GREEN}${ICON_SUCCESS} Done!${RESET}"
+                else
+                    echo -e " ${RED}${ICON_ERROR} Failed!${RESET}"
+                    error_exit "Failed to install dependencies with dnf. Please install manually: ${missing_deps[*]}"
+                fi
+            elif [ "$PKG_MANAGER" == "pacman" ]; then
+                if sudo pacman -Sy --noconfirm $PKGS > /dev/null 2>&1; then
+                    echo -e " ${GREEN}${ICON_SUCCESS} Done!${RESET}"
+                else
+                    echo -e " ${RED}${ICON_ERROR} Failed!${RESET}"
+                    error_exit "Failed to install dependencies with pacman. Please install manually: ${missing_deps[*]}"
+                fi
+            elif [ "$PKG_MANAGER" == "zypper" ]; then
+                if sudo zypper install -y $PKGS > /dev/null 2>&1; then
+                    echo -e " ${GREEN}${ICON_SUCCESS} Done!${RESET}"
+                else
+                    echo -e " ${RED}${ICON_ERROR} Failed!${RESET}"
+                    error_exit "Failed to install dependencies with zypper. Please install manually: ${missing_deps[*]}"
+                fi
+            fi
+            
+            # Verify installation
+            local still_missing=()
+            for dep in "${missing_deps[@]}"; do
+                command -v "$dep" >/dev/null 2>&1 || still_missing+=("$dep")
+            done
+            
+            if [ ${#still_missing[@]} -ne 0 ]; then
+                error_exit "Some dependencies failed to install: ${still_missing[*]}. Please install them manually."
+            fi
+            
+            echo -e "  ${GREEN}${ICON_SUCCESS} All dependencies installed successfully!${RESET}"
+        else
+            error_exit "Dependencies are required to continue. Please install: ${missing_deps[*]}"
+        fi
     fi
 }
 
@@ -305,7 +378,7 @@ install_app() {
     # Install icon
     echo -ne "${CYAN}${ICON_DOWNLOAD}${RESET} Installing icon..."
     mkdir -p "$(dirname "$ICON_FILE")"
-    fallback_icon_url='https://raw.githubusercontent.com/aayush2622/Dartotsu/main/assets/logo.png'
+    fallback_icon_url='https://raw.githubusercontent.com/aayush2622/Dartotsu/main/assets/images/logo.png'
     if wget -q "$fallback_icon_url" -O "$ICON_FILE" 2>/dev/null; then
         echo -e " ${GREEN}${ICON_SUCCESS} Done!${RESET}"
     else
