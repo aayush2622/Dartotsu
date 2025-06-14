@@ -291,7 +291,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get dtu => 'アップダウン';
 
   @override
-  String get direction => 'Direction';
+  String get direction => 'アクセス';
 
   @override
   String get episodeWatched => 'エピソード 観戦';
@@ -527,7 +527,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get playerSettingsTitle => 'プレイヤー設定';
 
   @override
-  String get playerSettingsDesc => 'Change player settings';
+  String get playerSettingsDesc => 'プレーヤーの設定を変更する';
 
   @override
   String get speed => 'スピード';
@@ -554,10 +554,10 @@ class AppLocalizationsJa extends AppLocalizations {
   String get skipButtonDescription => 'スキップボタンの表示時間';
 
   @override
-  String get thumbLessSeekBar => 'ThumbLess SeekBar';
+  String get thumbLessSeekBar => 'ThumbLessシークバー';
 
   @override
-  String get thumbLessSeekBarDesc => 'Remove thumb from the seek bar';
+  String get thumbLessSeekBarDesc => '求めるバーから親指を取り除く';
 
   @override
   String get subtitles => '字幕';
@@ -614,28 +614,28 @@ class AppLocalizationsJa extends AppLocalizations {
   String get bottomPaddingDescription => '字幕の下部パディング';
 
   @override
-  String get readerSettings => 'Reader Settings';
+  String get readerSettings => 'リーダー設定';
 
   @override
-  String get readerSettingsDesc => 'Change reader settings';
+  String get readerSettingsDesc => '読者の設定を変更する';
 
   @override
-  String get spacedPages => 'Spaced Pages';
+  String get spacedPages => 'スペースページ';
 
   @override
-  String get spacedPagesDesc => 'Add space between pages';
+  String get spacedPagesDesc => 'ページ間のスペースの追加';
 
   @override
-  String get hideScrollbar => 'Hide Scrollbar';
+  String get hideScrollbar => 'スクロールバーを隠す';
 
   @override
-  String get hideScrollbarDesc => 'Hide scrollbar while reading';
+  String get hideScrollbarDesc => '読書中にスクロールバーを隠す';
 
   @override
-  String get hidePageNumber => 'Hide Page Number';
+  String get hidePageNumber => 'ページ番号を隠す';
 
   @override
-  String get hidePageNumberDesc => 'Hide page number while reading';
+  String get hidePageNumberDesc => '読書中にページ番号を隠す';
 
   @override
   String get theme => 'テーマ';
@@ -704,19 +704,19 @@ class AppLocalizationsJa extends AppLocalizations {
   String get restoreSettings => '設定を復元';
 
   @override
-  String get differentCacheManager => 'Different Cache Manager';
+  String get differentCacheManager => '別のキャッシュマネージャ';
 
   @override
-  String get differentCacheManagerDesc => 'Use different Image cache manager';
+  String get differentCacheManagerDesc => '異なるイメージキャッシュマネージャを使用する';
 
   @override
   String get webView => 'ウェブビュー';
 
   @override
-  String get developersHelpers => 'Developers/Helpers';
+  String get developersHelpers => '開発者/ヘルパー';
 
   @override
-  String get developersHelpersDesc => 'Dartotsu\'s unpaid labours';
+  String get developersHelpersDesc => 'Dartotsuの未払い労働';
 
   @override
   String get supportMaintainer => 'Dartotsuのメンテナーを支援したいですか？\n寄付を検討してください';

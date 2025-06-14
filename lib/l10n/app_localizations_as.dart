@@ -294,7 +294,7 @@ class AppLocalizationsAs extends AppLocalizations {
   String get dtu => 'তলৰ পৰা ওপৰলৈ';
 
   @override
-  String get direction => 'Direction';
+  String get direction => 'দিশ';
 
   @override
   String get episodeWatched => 'চোৱা খণ্ড';
@@ -541,7 +541,7 @@ class AppLocalizationsAs extends AppLocalizations {
   String get playerSettingsTitle => 'প্লেয়াৰ ছেটিংছ';
 
   @override
-  String get playerSettingsDesc => 'Change player settings';
+  String get playerSettingsDesc => 'প্লেয়াৰ ছেটিংছ সলনি কৰক';
 
   @override
   String get speed => 'গতি';
@@ -568,10 +568,10 @@ class AppLocalizationsAs extends AppLocalizations {
   String get skipButtonDescription => 'স্কিপ বুটামৰ সময়সীমা';
 
   @override
-  String get thumbLessSeekBar => 'ThumbLess SeekBar';
+  String get thumbLessSeekBar => 'থাম্ব নথকা চEEK বাৰ';
 
   @override
-  String get thumbLessSeekBarDesc => 'Remove thumb from the seek bar';
+  String get thumbLessSeekBarDesc => 'চEEK বাৰৰ পৰা থাম্ব আঁতৰাও';
 
   @override
   String get subtitles => 'সাবটাইটল';
@@ -628,28 +628,28 @@ class AppLocalizationsAs extends AppLocalizations {
   String get bottomPaddingDescription => 'সাবটাইটেলৰ তলৰ পেডিং';
 
   @override
-  String get readerSettings => 'Reader Settings';
+  String get readerSettings => 'ৰিডাৰ ছেটিংছ';
 
   @override
-  String get readerSettingsDesc => 'Change reader settings';
+  String get readerSettingsDesc => 'ৰিডাৰ ছেটিংছ সলনি কৰক';
 
   @override
-  String get spacedPages => 'Spaced Pages';
+  String get spacedPages => 'পৃষ্ঠাৰ মাজত ফাঁক';
 
   @override
-  String get spacedPagesDesc => 'Add space between pages';
+  String get spacedPagesDesc => 'পৃষ্ঠাবোৰৰ মাজত ফাঁক যোগ কৰক';
 
   @override
-  String get hideScrollbar => 'Hide Scrollbar';
+  String get hideScrollbar => 'স্ক্ৰ\'ল বাৰ লুকাওক';
 
   @override
-  String get hideScrollbarDesc => 'Hide scrollbar while reading';
+  String get hideScrollbarDesc => 'পঢ়োঁতে স্ক্ৰ\'ল বাৰ লুকুৱাওক';
 
   @override
-  String get hidePageNumber => 'Hide Page Number';
+  String get hidePageNumber => 'পৃষ্ঠাৰ সংখ্যা লুকাওক';
 
   @override
-  String get hidePageNumberDesc => 'Hide page number while reading';
+  String get hidePageNumberDesc => 'পঢ়োঁতে পৃষ্ঠাৰ সংখ্যা লুকুৱাওক';
 
   @override
   String get theme => 'থীম';
@@ -721,19 +721,19 @@ class AppLocalizationsAs extends AppLocalizations {
   String get restoreSettings => 'ছেটিংছ পুনৰুদ্ধাৰ কৰক';
 
   @override
-  String get differentCacheManager => 'Different Cache Manager';
+  String get differentCacheManager => 'বেলেগ কেছ মেনেজাৰ';
 
   @override
-  String get differentCacheManagerDesc => 'Use different Image cache manager';
+  String get differentCacheManagerDesc => 'বেলেগ ছবি কেছ মেনেজাৰ ব্যৱহাৰ কৰক';
 
   @override
   String get webView => 'ৱেব দৃশ্য';
 
   @override
-  String get developersHelpers => 'Developers/Helpers';
+  String get developersHelpers => 'বিকাশকাৰী/সহায়কৰ';
 
   @override
-  String get developersHelpersDesc => 'Dartotsu\'s unpaid labours';
+  String get developersHelpersDesc => 'ডাৰ্টটছুৰ বিনা দৰমহাৰ সহায়কৰ দল';
 
   @override
   String get supportMaintainer =>

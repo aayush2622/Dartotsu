@@ -12,7 +12,6 @@ import '../../Services/Screens/BaseAnimeScreen.dart';
 import '../../Services/ServiceSwitcher.dart';
 import '../../Theme/Colors.dart';
 import '../../Theme/ThemeProvider.dart';
-import '../../Theme/LanguageSwitcher.dart';
 import '../../Widgets/ScrollConfig.dart';
 import '../Home/Widgets/LoadingWidget.dart';
 import '../Home/Widgets/ServiceSwitcherBar.dart';

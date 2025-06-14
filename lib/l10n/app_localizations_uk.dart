@@ -294,7 +294,7 @@ class AppLocalizationsUk extends AppLocalizations {
   String get dtu => 'Знизу вгору';
 
   @override
-  String get direction => 'Direction';
+  String get direction => 'Напрямок';
 
   @override
   String get episodeWatched => 'Епізод переглянуто';
@@ -306,7 +306,7 @@ class AppLocalizationsUk extends AppLocalizations {
   String get outOf => 'з';
 
   @override
-  String get totalOf => 'Всього';
+  String get totalOf => 'загальна кількість';
 
   @override
   String get selected => 'Вибрані';
@@ -541,7 +541,7 @@ class AppLocalizationsUk extends AppLocalizations {
   String get playerSettingsTitle => 'Налаштування програвача';
 
   @override
-  String get playerSettingsDesc => 'Change player settings';
+  String get playerSettingsDesc => 'Зміна параметрів гравця';
 
   @override
   String get speed => 'Швидкість';
@@ -568,10 +568,11 @@ class AppLocalizationsUk extends AppLocalizations {
   String get skipButtonDescription => 'Час пропускання кнопкою «Пропустити»';
 
   @override
-  String get thumbLessSeekBar => 'ThumbLess SeekBar';
+  String get thumbLessSeekBar => 'ThumbLess SeekБар';
 
   @override
-  String get thumbLessSeekBarDesc => 'Remove thumb from the seek bar';
+  String get thumbLessSeekBarDesc =>
+      'Видалити великий палець з адресного бруса';
 
   @override
   String get subtitles => 'Субтитри';
@@ -628,28 +629,28 @@ class AppLocalizationsUk extends AppLocalizations {
   String get bottomPaddingDescription => 'Нижній відступ субтитрів';
 
   @override
-  String get readerSettings => 'Reader Settings';
+  String get readerSettings => 'Налаштування зчитувача';
 
   @override
-  String get readerSettingsDesc => 'Change reader settings';
+  String get readerSettingsDesc => 'Зміна параметрів зчитувача';
 
   @override
-  String get spacedPages => 'Spaced Pages';
+  String get spacedPages => 'Веб-сайт';
 
   @override
-  String get spacedPagesDesc => 'Add space between pages';
+  String get spacedPagesDesc => 'Додати простір між сторінками';
 
   @override
-  String get hideScrollbar => 'Hide Scrollbar';
+  String get hideScrollbar => 'Приховати Scrollbar';
 
   @override
-  String get hideScrollbarDesc => 'Hide scrollbar while reading';
+  String get hideScrollbarDesc => 'Приховати прокрутку під час читання';
 
   @override
-  String get hidePageNumber => 'Hide Page Number';
+  String get hidePageNumber => 'Приховати номер сторінки';
 
   @override
-  String get hidePageNumberDesc => 'Hide page number while reading';
+  String get hidePageNumberDesc => 'Приховати номер сторінки під час читання';
 
   @override
   String get theme => 'Тема';
@@ -722,19 +723,20 @@ class AppLocalizationsUk extends AppLocalizations {
   String get restoreSettings => 'Відновлення налаштувань';
 
   @override
-  String get differentCacheManager => 'Different Cache Manager';
+  String get differentCacheManager => 'Менеджер по кешу';
 
   @override
-  String get differentCacheManagerDesc => 'Use different Image cache manager';
+  String get differentCacheManagerDesc =>
+      'Використовуйте інший менеджер кешу зображень';
 
   @override
   String get webView => 'Веб-камера';
 
   @override
-  String get developersHelpers => 'Developers/Helpers';
+  String get developersHelpers => 'Розробники/Helpers';
 
   @override
-  String get developersHelpersDesc => 'Dartotsu\'s unpaid labours';
+  String get developersHelpersDesc => 'Дартоцу неоплачувані праці';
 
   @override
   String get supportMaintainer =>

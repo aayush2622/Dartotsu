@@ -294,7 +294,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get dtu => 'ड्रॉप किया गया';
 
   @override
-  String get direction => 'Direction';
+  String get direction => 'दिशा';
 
   @override
   String get episodeWatched => 'देखे गए एपिसोड';
@@ -306,7 +306,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get outOf => 'बाहर';
 
   @override
-  String get totalOf => 'कुल';
+  String get totalOf => 'का कुल';
 
   @override
   String get selected => 'चयनित';
@@ -537,7 +537,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get playerSettingsTitle => 'प्लेयर सेटिंग्स';
 
   @override
-  String get playerSettingsDesc => 'Change player settings';
+  String get playerSettingsDesc => 'खिलाड़ी सेटिंग्स बदलें';
 
   @override
   String get speed => 'गति';
@@ -565,10 +565,10 @@ class AppLocalizationsHi extends AppLocalizations {
   String get skipButtonDescription => 'स्किप बटन की अवधि';
 
   @override
-  String get thumbLessSeekBar => 'ThumbLess SeekBar';
+  String get thumbLessSeekBar => 'थंबलेस सीकबार';
 
   @override
-  String get thumbLessSeekBarDesc => 'Remove thumb from the seek bar';
+  String get thumbLessSeekBarDesc => 'तलाशी बार से अंगूठे निकालें';
 
   @override
   String get subtitles => 'उपशीर्षक';
@@ -625,28 +625,28 @@ class AppLocalizationsHi extends AppLocalizations {
   String get bottomPaddingDescription => 'उपशीर्षक के नीचे की गद्दी';
 
   @override
-  String get readerSettings => 'Reader Settings';
+  String get readerSettings => 'रीडर सेटिंग';
 
   @override
-  String get readerSettingsDesc => 'Change reader settings';
+  String get readerSettingsDesc => 'रीडर सेटिंग्स बदलें';
 
   @override
-  String get spacedPages => 'Spaced Pages';
+  String get spacedPages => 'स्पेस पेज';
 
   @override
-  String get spacedPagesDesc => 'Add space between pages';
+  String get spacedPagesDesc => 'पृष्ठों के बीच अंतरिक्ष जोड़ें';
 
   @override
-  String get hideScrollbar => 'Hide Scrollbar';
+  String get hideScrollbar => 'साइड स्क्रॉलबार';
 
   @override
-  String get hideScrollbarDesc => 'Hide scrollbar while reading';
+  String get hideScrollbarDesc => 'पढ़ने के दौरान स्क्रॉलबार छुपाएं';
 
   @override
-  String get hidePageNumber => 'Hide Page Number';
+  String get hidePageNumber => 'पृष्ठ संख्या';
 
   @override
-  String get hidePageNumberDesc => 'Hide page number while reading';
+  String get hidePageNumberDesc => 'पढ़ने के दौरान पृष्ठ संख्या छुपाएं';
 
   @override
   String get theme => 'थीम';
@@ -717,19 +717,20 @@ class AppLocalizationsHi extends AppLocalizations {
   String get restoreSettings => 'सेटिंग्स पुनर्स्थापित करें';
 
   @override
-  String get differentCacheManager => 'Different Cache Manager';
+  String get differentCacheManager => 'विभिन्न कैश मैनेजर';
 
   @override
-  String get differentCacheManagerDesc => 'Use different Image cache manager';
+  String get differentCacheManagerDesc =>
+      'विभिन्न छवि कैश मैनेजर का उपयोग करें';
 
   @override
   String get webView => 'वेब देखें';
 
   @override
-  String get developersHelpers => 'Developers/Helpers';
+  String get developersHelpers => 'डेवलपर्स/हेल्पर्स';
 
   @override
-  String get developersHelpersDesc => 'Dartotsu\'s unpaid labours';
+  String get developersHelpersDesc => 'डार्टोत्सू के अवैतनिक मजदूर';
 
   @override
   String get supportMaintainer =>

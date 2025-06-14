@@ -291,7 +291,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get dtu => '맨 위로';
 
   @override
-  String get direction => 'Direction';
+  String get direction => '제품정보';
 
   @override
   String get episodeWatched => '드 워치';
@@ -527,7 +527,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get playerSettingsTitle => '플레이어 설정';
 
   @override
-  String get playerSettingsDesc => 'Change player settings';
+  String get playerSettingsDesc => 'Player 설정';
 
   @override
   String get speed => '속도';
@@ -554,10 +554,10 @@ class AppLocalizationsKo extends AppLocalizations {
   String get skipButtonDescription => '건너뛰기 버튼 지속 시간';
 
   @override
-  String get thumbLessSeekBar => 'ThumbLess SeekBar';
+  String get thumbLessSeekBar => '카테고리';
 
   @override
-  String get thumbLessSeekBarDesc => 'Remove thumb from the seek bar';
+  String get thumbLessSeekBarDesc => '찾기 바에서 엄지 제거';
 
   @override
   String get subtitles => '자막';
@@ -614,28 +614,28 @@ class AppLocalizationsKo extends AppLocalizations {
   String get bottomPaddingDescription => '자막 하단 여백';
 
   @override
-  String get readerSettings => 'Reader Settings';
+  String get readerSettings => 'Reader 설정';
 
   @override
-  String get readerSettingsDesc => 'Change reader settings';
+  String get readerSettingsDesc => 'Change 리더 설정';
 
   @override
-  String get spacedPages => 'Spaced Pages';
+  String get spacedPages => '공간 페이지';
 
   @override
-  String get spacedPagesDesc => 'Add space between pages';
+  String get spacedPagesDesc => '페이지의 공간 추가';
 
   @override
-  String get hideScrollbar => 'Hide Scrollbar';
+  String get hideScrollbar => '다운로드';
 
   @override
-  String get hideScrollbarDesc => 'Hide scrollbar while reading';
+  String get hideScrollbarDesc => '읽는 동안 Hide scrollbar';
 
   @override
-  String get hidePageNumber => 'Hide Page Number';
+  String get hidePageNumber => '페이지 번호';
 
   @override
-  String get hidePageNumberDesc => 'Hide page number while reading';
+  String get hidePageNumberDesc => '자주 묻는 질문';
 
   @override
   String get theme => '테마';
@@ -704,19 +704,19 @@ class AppLocalizationsKo extends AppLocalizations {
   String get restoreSettings => '설정 복원';
 
   @override
-  String get differentCacheManager => 'Different Cache Manager';
+  String get differentCacheManager => '다른 캐시 관리자';
 
   @override
-  String get differentCacheManagerDesc => 'Use different Image cache manager';
+  String get differentCacheManagerDesc => '다른 이미지 캐시 매니저 사용';
 
   @override
   String get webView => '웹뷰';
 
   @override
-  String get developersHelpers => 'Developers/Helpers';
+  String get developersHelpers => '개발자 / 도우미';
 
   @override
-  String get developersHelpersDesc => 'Dartotsu\'s unpaid labours';
+  String get developersHelpersDesc => 'Dartotsu의 선불 노동';
 
   @override
   String get supportMaintainer => 'Dartotsu의 유지보수를 지원하고 싶으신가요?\n기부를 고려해 주세요';

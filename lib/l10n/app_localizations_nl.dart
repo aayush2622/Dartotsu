@@ -539,7 +539,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get playerSettingsTitle => 'Spelerinstellingen';
 
   @override
-  String get playerSettingsDesc => 'Change player settings';
+  String get playerSettingsDesc => 'Veranderingsspeler';
 
   @override
   String get speed => 'Snelheid';
@@ -567,10 +567,10 @@ class AppLocalizationsNl extends AppLocalizations {
   String get skipButtonDescription => 'Duur van de overslaan-knop';
 
   @override
-  String get thumbLessSeekBar => 'ThumbLess SeekBar';
+  String get thumbLessSeekBar => 'ThumbLes SeekBar';
 
   @override
-  String get thumbLessSeekBarDesc => 'Remove thumb from the seek bar';
+  String get thumbLessSeekBarDesc => 'Verwijder de duim van de bar';
 
   @override
   String get subtitles => 'Ondertitels';
@@ -627,28 +627,28 @@ class AppLocalizationsNl extends AppLocalizations {
   String get bottomPaddingDescription => 'Onderste marge van ondertitels';
 
   @override
-  String get readerSettings => 'Reader Settings';
+  String get readerSettings => 'Reader Setting';
 
   @override
-  String get readerSettingsDesc => 'Change reader settings';
+  String get readerSettingsDesc => 'Verandering van de lezers';
 
   @override
-  String get spacedPages => 'Spaced Pages';
+  String get spacedPages => 'Space Pages';
 
   @override
-  String get spacedPagesDesc => 'Add space between pages';
+  String get spacedPagesDesc => 'Voeg ruimte tussen pagina\'s';
 
   @override
-  String get hideScrollbar => 'Hide Scrollbar';
+  String get hideScrollbar => 'Verberg Scrollbar';
 
   @override
-  String get hideScrollbarDesc => 'Hide scrollbar while reading';
+  String get hideScrollbarDesc => 'Verberg scrollbar terwijl je leest';
 
   @override
-  String get hidePageNumber => 'Hide Page Number';
+  String get hidePageNumber => 'Verberg Page Number';
 
   @override
-  String get hidePageNumberDesc => 'Hide page number while reading';
+  String get hidePageNumberDesc => 'Verberg paginanummer terwijl ik';
 
   @override
   String get theme => 'Thema';
@@ -719,19 +719,20 @@ class AppLocalizationsNl extends AppLocalizations {
   String get restoreSettings => 'Herstel instellingen';
 
   @override
-  String get differentCacheManager => 'Different Cache Manager';
+  String get differentCacheManager => 'Anders Cache Manager';
 
   @override
-  String get differentCacheManagerDesc => 'Use different Image cache manager';
+  String get differentCacheManagerDesc =>
+      'Gebruik verschillende Image cache manager';
 
   @override
   String get webView => 'Web View';
 
   @override
-  String get developersHelpers => 'Developers/Helpers';
+  String get developersHelpers => 'Ontwikkelaars/Helpers';
 
   @override
-  String get developersHelpersDesc => 'Dartotsu\'s unpaid labours';
+  String get developersHelpersDesc => 'Dartotsu\'s onbetaalde arbeid';
 
   @override
   String get supportMaintainer =>

@@ -291,7 +291,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get dtu => '下载更新';
 
   @override
-  String get direction => 'Direction';
+  String get direction => '方向';
 
   @override
   String get episodeWatched => '已观看集数';
@@ -527,7 +527,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get playerSettingsTitle => '播放器设置';
 
   @override
-  String get playerSettingsDesc => 'Change player settings';
+  String get playerSettingsDesc => 'B. 变化中的参与者';
 
   @override
   String get speed => '速度';
@@ -554,10 +554,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get skipButtonDescription => '跳过按钮持续时间';
 
   @override
-  String get thumbLessSeekBar => 'ThumbLess SeekBar';
+  String get thumbLessSeekBar => '争取获得粮食';
 
   @override
-  String get thumbLessSeekBarDesc => 'Remove thumb from the seek bar';
+  String get thumbLessSeekBarDesc => 'seek从寻求的酒吧搬走';
 
   @override
   String get subtitles => '字幕';
@@ -614,28 +614,28 @@ class AppLocalizationsZh extends AppLocalizations {
   String get bottomPaddingDescription => '字幕底部间距';
 
   @override
-  String get readerSettings => 'Reader Settings';
+  String get readerSettings => '读者背景';
 
   @override
-  String get readerSettingsDesc => 'Change reader settings';
+  String get readerSettingsDesc => 'A. 改观环境';
 
   @override
-  String get spacedPages => 'Spaced Pages';
+  String get spacedPages => '散页';
 
   @override
-  String get spacedPagesDesc => 'Add space between pages';
+  String get spacedPagesDesc => '段 次 页 次';
 
   @override
-  String get hideScrollbar => 'Hide Scrollbar';
+  String get hideScrollbar => '隐藏滚动条';
 
   @override
-  String get hideScrollbarDesc => 'Hide scrollbar while reading';
+  String get hideScrollbarDesc => '阅读';
 
   @override
-  String get hidePageNumber => 'Hide Page Number';
+  String get hidePageNumber => '页 次';
 
   @override
-  String get hidePageNumberDesc => 'Hide page number while reading';
+  String get hidePageNumberDesc => '阅读时使用页数';
 
   @override
   String get theme => '主题';
@@ -704,19 +704,19 @@ class AppLocalizationsZh extends AppLocalizations {
   String get restoreSettings => '恢复设置';
 
   @override
-  String get differentCacheManager => 'Different Cache Manager';
+  String get differentCacheManager => '不同Cache管理员';
 
   @override
-  String get differentCacheManagerDesc => 'Use different Image cache manager';
+  String get differentCacheManagerDesc => '使用不同的图像管理员';
 
   @override
   String get webView => '网站';
 
   @override
-  String get developersHelpers => 'Developers/Helpers';
+  String get developersHelpers => '开发商/经理';
 
   @override
-  String get developersHelpersDesc => 'Dartotsu\'s unpaid labours';
+  String get developersHelpersDesc => 'Dartotsu的无报酬劳动';
 
   @override
   String get supportMaintainer => '想要支持Dartotsu的维护者吗？\n考虑捐赠';

@@ -294,7 +294,7 @@ class AppLocalizationsHe extends AppLocalizations {
   String get dtu => 'למטה עד Up';
 
   @override
-  String get direction => 'Direction';
+  String get direction => 'כיוון';
 
   @override
   String get episodeWatched => 'פרק נצפה';
@@ -531,7 +531,7 @@ class AppLocalizationsHe extends AppLocalizations {
   String get playerSettingsTitle => 'הגדרות נגן';
 
   @override
-  String get playerSettingsDesc => 'Change player settings';
+  String get playerSettingsDesc => 'שינוי הגדרות השחקן';
 
   @override
   String get speed => 'מהירות';
@@ -558,10 +558,10 @@ class AppLocalizationsHe extends AppLocalizations {
   String get skipButtonDescription => 'משך הזמן של כפתור הדילוג';
 
   @override
-  String get thumbLessSeekBar => 'ThumbLess SeekBar';
+  String get thumbLessSeekBar => 'שם הסרטון: ThumbLess Seek Bar';
 
   @override
-  String get thumbLessSeekBarDesc => 'Remove thumb from the seek bar';
+  String get thumbLessSeekBarDesc => 'להסיר את האגודל מהבר המבוקש';
 
   @override
   String get subtitles => 'כתוביות';
@@ -618,28 +618,28 @@ class AppLocalizationsHe extends AppLocalizations {
   String get bottomPaddingDescription => 'מרווח תחתון לכותרת';
 
   @override
-  String get readerSettings => 'Reader Settings';
+  String get readerSettings => 'הגדרות קורא';
 
   @override
-  String get readerSettingsDesc => 'Change reader settings';
+  String get readerSettingsDesc => 'שינוי הגדרות הקורא';
 
   @override
-  String get spacedPages => 'Spaced Pages';
+  String get spacedPages => 'דפי חלל';
 
   @override
-  String get spacedPagesDesc => 'Add space between pages';
+  String get spacedPagesDesc => 'הוסף שטח בין דפים';
 
   @override
-  String get hideScrollbar => 'Hide Scrollbar';
+  String get hideScrollbar => 'תגית: Scrollbar';
 
   @override
-  String get hideScrollbarDesc => 'Hide scrollbar while reading';
+  String get hideScrollbarDesc => 'Hide Galbar בזמן קריאה';
 
   @override
-  String get hidePageNumber => 'Hide Page Number';
+  String get hidePageNumber => 'תגית: Page Number';
 
   @override
-  String get hidePageNumberDesc => 'Hide page number while reading';
+  String get hidePageNumberDesc => 'מספר העמודים תוך כדי קריאה';
 
   @override
   String get theme => 'ערכת נושא';
@@ -711,19 +711,19 @@ class AppLocalizationsHe extends AppLocalizations {
   String get restoreSettings => 'שחזר הגדרות';
 
   @override
-  String get differentCacheManager => 'Different Cache Manager';
+  String get differentCacheManager => 'מנהל Cache';
 
   @override
-  String get differentCacheManagerDesc => 'Use different Image cache manager';
+  String get differentCacheManagerDesc => 'השתמש במנהל תמונות שונה';
 
   @override
   String get webView => 'Web View';
 
   @override
-  String get developersHelpers => 'Developers/Helpers';
+  String get developersHelpers => 'מפתחים / Helpers';
 
   @override
-  String get developersHelpersDesc => 'Dartotsu\'s unpaid labours';
+  String get developersHelpersDesc => 'העבודה ללא תשלום של דארטוטסו';
 
   @override
   String get supportMaintainer => 'רוצה לתמוך במתחזק של Dartotsu?\nשקול לתרום';

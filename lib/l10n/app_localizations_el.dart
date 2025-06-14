@@ -294,7 +294,7 @@ class AppLocalizationsEl extends AppLocalizations {
   String get dtu => 'Υπό Ενημέρωση';
 
   @override
-  String get direction => 'Direction';
+  String get direction => 'Σκηνοθεσία';
 
   @override
   String get episodeWatched => 'Επεισόδιο Παρακολουθημένο';
@@ -541,7 +541,7 @@ class AppLocalizationsEl extends AppLocalizations {
   String get playerSettingsTitle => 'Ρυθμίσεις Αναπαραγωγέα';
 
   @override
-  String get playerSettingsDesc => 'Change player settings';
+  String get playerSettingsDesc => 'Αλλάξτε ρυθμίσεις παίκτη';
 
   @override
   String get speed => 'Ταχύτητα';
@@ -570,10 +570,11 @@ class AppLocalizationsEl extends AppLocalizations {
   String get skipButtonDescription => 'Διάρκεια κουμπιού παράλειψης';
 
   @override
-  String get thumbLessSeekBar => 'ThumbLess SeekBar';
+  String get thumbLessSeekBar => 'ThumbLess Seek Bar';
 
   @override
-  String get thumbLessSeekBarDesc => 'Remove thumb from the seek bar';
+  String get thumbLessSeekBarDesc =>
+      'Αφαιρέστε τον αντίχειρα από το κέντρο αναζήτησης';
 
   @override
   String get subtitles => 'Υπότιτλοι';
@@ -630,28 +631,28 @@ class AppLocalizationsEl extends AppLocalizations {
   String get bottomPaddingDescription => 'Κάτω περιθώριο υποτίτλων';
 
   @override
-  String get readerSettings => 'Reader Settings';
+  String get readerSettings => 'Επιλογές Reader';
 
   @override
-  String get readerSettingsDesc => 'Change reader settings';
+  String get readerSettingsDesc => 'Αλλαγή ρυθμίσεις αναγνώστη';
 
   @override
-  String get spacedPages => 'Spaced Pages';
+  String get spacedPages => 'Spaced Σελίδες';
 
   @override
-  String get spacedPagesDesc => 'Add space between pages';
+  String get spacedPagesDesc => 'Προσθέστε χώρο μεταξύ σελίδων';
 
   @override
-  String get hideScrollbar => 'Hide Scrollbar';
+  String get hideScrollbar => 'Απόκρυψη γραμμής κύλισης';
 
   @override
-  String get hideScrollbarDesc => 'Hide scrollbar while reading';
+  String get hideScrollbarDesc => 'Hide Scrollbar κατά την ανάγνωση';
 
   @override
-  String get hidePageNumber => 'Hide Page Number';
+  String get hidePageNumber => 'Απόκρυψη αριθμού σελίδας';
 
   @override
-  String get hidePageNumberDesc => 'Hide page number while reading';
+  String get hidePageNumberDesc => 'Αριθμός σελίδας Hide κατά την ανάγνωση';
 
   @override
   String get theme => 'Θέμα';
@@ -724,19 +725,20 @@ class AppLocalizationsEl extends AppLocalizations {
   String get restoreSettings => 'Επαναφορά Ρυθμίσεων';
 
   @override
-  String get differentCacheManager => 'Different Cache Manager';
+  String get differentCacheManager => 'Διαφορετική Cache Manager';
 
   @override
-  String get differentCacheManagerDesc => 'Use different Image cache manager';
+  String get differentCacheManagerDesc =>
+      'Χρησιμοποιήστε διαφορετικό διαχειριστή μνήμης εικόνας';
 
   @override
   String get webView => 'Web View';
 
   @override
-  String get developersHelpers => 'Developers/Helpers';
+  String get developersHelpers => 'Προγραμματιστές/Βοηθοί';
 
   @override
-  String get developersHelpersDesc => 'Dartotsu\'s unpaid labours';
+  String get developersHelpersDesc => 'Η μη αμειβόμενη εργασία του Dartotsu';
 
   @override
   String get supportMaintainer =>

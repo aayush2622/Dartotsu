@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:isolate';
 
 import 'package:dartotsu/logger.dart';
 import 'package:flutter/material.dart';
@@ -181,4 +182,57 @@ List<T> mergeMapValues<T>(Map<String, List<T>> dataMap) {
   }
 
   return uniqueItems.toList();
+}
+
+Future<T> isolate<T>(T Function() fn) async {
+  final receivePort = ReceivePort();
+  final errorPort = ReceivePort();
+
+  await Isolate.spawn<_IsolatePayload<T>>(
+    _isolateEntry,
+    _IsolatePayload<T>(
+      sendPort: receivePort.sendPort,
+      fn: fn,
+    ),
+    onError: errorPort.sendPort,
+  );
+
+  final completer = Completer<T>();
+
+  receivePort.listen((data) {
+    if (!completer.isCompleted) {
+      completer.complete(data as T);
+    }
+    receivePort.close();
+    errorPort.close();
+  });
+
+  errorPort.listen((e) {
+    if (!completer.isCompleted) {
+      completer.completeError(e);
+    }
+    receivePort.close();
+    errorPort.close();
+  });
+
+  return completer.future;
+}
+
+class _IsolatePayload<T> {
+  final SendPort sendPort;
+  final T Function() fn;
+
+  _IsolatePayload({
+    required this.sendPort,
+    required this.fn,
+  });
+}
+
+void _isolateEntry<T>(_IsolatePayload<T> payload) {
+  try {
+    final result = payload.fn();
+    payload.sendPort.send(result);
+  } catch (e) {
+    Isolate.exit(payload.sendPort, e);
+  }
 }
