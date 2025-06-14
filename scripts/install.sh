@@ -185,6 +185,213 @@ version_menu() {
 }
 
 # =============================================================================
+# 🛠️ ENHANCED DEPENDENCY MANAGEMENT
+# =============================================================================
+
+# Check if running in container/CI
+is_containerized() {
+    [ -f /.dockerenv ] || [ -n "${CI:-}" ] || [ -n "${GITHUB_ACTIONS:-}" ]
+}
+
+# Enhanced dependency checking with better error handling
+check_dependencies() {
+    local missing_deps=()
+    local optional_deps=()
+    
+    # Check command-line tools
+    command -v curl >/dev/null 2>&1 || missing_deps+=("curl")
+    command -v unzip >/dev/null 2>&1 || missing_deps+=("unzip")
+    command -v wget >/dev/null 2>&1 || missing_deps+=("wget")
+    
+    # Check optional tools
+    command -v git >/dev/null 2>&1 || optional_deps+=("git")
+    
+    # Check libraries using pkg-config
+    if command -v pkg-config >/dev/null 2>&1; then
+        # Check for WebKit2GTK with fallback to older version
+        if ! pkg-config --exists webkit2gtk-4.1 2>/dev/null; then
+            if ! pkg-config --exists webkit2gtk-3.0 2>/dev/null; then
+                missing_deps+=("webkit2gtk")
+            fi
+        fi
+        
+        # Additional library checks for GUI applications
+        pkg-config --exists gtk+-3.0 2>/dev/null || missing_deps+=("gtk3")
+    else
+        missing_deps+=("pkg-config" "webkit2gtk" "gtk3")
+    fi
+    
+    # Report missing dependencies
+    if [ ${#missing_deps[@]} -ne 0 ]; then
+        warn_msg "Missing required dependencies: ${missing_deps[*]}"
+        
+        if [ ${#optional_deps[@]} -ne 0 ]; then
+            info_msg "Optional dependencies not found: ${optional_deps[*]}"
+        fi
+        
+        echo
+        if is_containerized; then
+            info_msg "Container environment detected - attempting automatic installation..."
+            export DEBIAN_FRONTEND=noninteractive
+            install_packages "${missing_deps[@]}"
+        else
+            echo -e "${YELLOW}${BOLD}Would you like to install required dependencies automatically?${RESET} ${GRAY}(y/N)${RESET}: "
+            read -n 1 INSTALL_DEPS
+            echo
+            
+            if [[ "${INSTALL_DEPS,,}" == "y" ]]; then
+                install_packages "${missing_deps[@]}"
+            else
+                error_exit "Required dependencies must be installed to continue: ${missing_deps[*]}"
+            fi
+        fi
+    elif [ ${#optional_deps[@]} -ne 0 ]; then
+        info_msg "Optional dependencies not found: ${optional_deps[*]}"
+        echo -e "${GRAY}These are not required but may provide additional functionality.${RESET}"
+    else
+        info_msg "All dependencies are satisfied!"
+    fi
+}
+
+# Enhanced package installation with better error recovery
+install_packages() {
+    local deps=("$@")
+    local install_cmd=""
+    local update_cmd=""
+    local distro=""
+    
+    # Detect distribution and package manager
+    if command -v apt >/dev/null 2>&1; then
+        distro="debian"
+        update_cmd="sudo apt update -y"
+        install_cmd="sudo apt install -y"
+        
+        # Map library names to Ubuntu/Debian package names
+        deps=("${deps[@]/webkit2gtk/libwebkit2gtk-4.1-dev}")
+        deps=("${deps[@]/gtk3/libgtk-3-dev}")
+        deps=("${deps[@]/pkg-config/pkg-config}")
+        
+    elif command -v dnf >/dev/null 2>&1; then
+        distro="fedora"
+        install_cmd="sudo dnf install -y"
+        
+        # Map library names to Fedora package names
+        deps=("${deps[@]/webkit2gtk/webkit2gtk4.1-devel}")
+        deps=("${deps[@]/gtk3/gtk3-devel}")
+        deps=("${deps[@]/pkg-config/pkgconf-devel}")
+        
+    elif command -v pacman >/dev/null 2>&1; then
+        distro="arch"
+        update_cmd="sudo pacman -Sy"
+        install_cmd="sudo pacman -S --noconfirm"
+        
+        # Map library names to Arch package names
+        deps=("${deps[@]/webkit2gtk/webkit2gtk-4.1}")
+        deps=("${deps[@]/gtk3/gtk3}")
+        deps=("${deps[@]/pkg-config/pkgconf}")
+        
+    elif command -v zypper >/dev/null 2>&1; then
+        distro="opensuse"
+        install_cmd="sudo zypper install -y"
+        
+        # Map library names to openSUSE package names
+        deps=("${deps[@]/webkit2gtk/webkit2gtk3-devel}")
+        deps=("${deps[@]/gtk3/gtk3-devel}")
+        deps=("${deps[@]/pkg-config/pkg-config}")
+        
+    elif command -v brew >/dev/null 2>&1; then
+        distro="macos"
+        install_cmd="brew install"
+        
+        # Map library names to Homebrew package names
+        deps=("${deps[@]/webkit2gtk/}")  # Remove webkit2gtk for macOS
+        deps=("${deps[@]/gtk3/gtk+3}")
+        deps=("${deps[@]/pkg-config/pkg-config}")
+        
+    else
+        error_exit "No supported package manager found! Please install manually: ${deps[*]}"
+    fi
+    
+    # Filter out empty elements
+    local filtered_deps=()
+    for dep in "${deps[@]}"; do
+        [[ -n "$dep" ]] && filtered_deps+=("$dep")
+    done
+    deps=("${filtered_deps[@]}")
+    
+    if [ ${#deps[@]} -eq 0 ]; then
+        info_msg "No packages to install for this system."
+        return 0
+    fi
+    
+    info_msg "Detected system: $distro"
+    info_msg "Installing packages: ${deps[*]}"
+    
+    # Update package lists if needed
+    if [ -n "$update_cmd" ]; then
+        echo -ne "${CYAN}${ICON_INSTALL}${RESET} Updating package lists..."
+        if eval "$update_cmd" >/dev/null 2>&1; then
+            echo -e " ${GREEN}${ICON_SUCCESS}${RESET}"
+        else
+            echo -e " ${YELLOW}${ICON_WARNING} Update failed, continuing...${RESET}"
+        fi
+    fi
+    
+    # Install packages
+    echo -ne "${CYAN}${ICON_INSTALL}${RESET} Installing dependencies..."
+    
+    if eval "$install_cmd ${deps[*]}" >/dev/null 2>&1; then
+        echo -e " ${GREEN}${ICON_SUCCESS} Done!${RESET}"
+        info_msg "Dependencies installed successfully!"
+    else
+        echo -e " ${RED}${ICON_ERROR} Failed!${RESET}"
+        
+        # Try installing packages individually to identify problematic ones
+        warn_msg "Attempting to install packages individually..."
+        local failed_packages=()
+        
+        for pkg in "${deps[@]}"; do
+            echo -ne "  Installing $pkg..."
+            if eval "$install_cmd $pkg" >/dev/null 2>&1; then
+                echo -e " ${GREEN}${ICON_SUCCESS}${RESET}"
+            else
+                echo -e " ${RED}${ICON_ERROR}${RESET}"
+                failed_packages+=("$pkg")
+            fi
+        done
+        
+        if [ ${#failed_packages[@]} -ne 0 ]; then
+            error_exit "Failed to install: ${failed_packages[*]}. Please install manually."
+        fi
+    fi
+}
+
+# Verify installation of critical dependencies
+verify_installation() {
+    local critical_deps=("curl" "unzip" "wget")
+    local failed_deps=()
+    
+    for dep in "${critical_deps[@]}"; do
+        if ! command -v "$dep" >/dev/null 2>&1; then
+            failed_deps+=("$dep")
+        fi
+    done
+    
+    if [ ${#failed_deps[@]} -ne 0 ]; then
+        error_exit "Critical dependencies still missing after installation: ${failed_deps[*]}"
+    fi
+    
+    # Verify library installations
+    if command -v pkg-config >/dev/null 2>&1; then
+        if ! pkg-config --exists webkit2gtk-4.1 2>/dev/null && ! pkg-config --exists webkit2gtk-3.0 2>/dev/null; then
+            warn_msg "WebKit2GTK may not be properly installed - some features may not work"
+        fi
+    fi
+    
+    info_msg "Installation verification completed!"
+}
+
+# =============================================================================
 # 🛠️  CORE FUNCTIONS
 # =============================================================================
 
@@ -193,18 +400,6 @@ error_exit() {
     echo -e "${GRAY}${DIM}Press any key to exit...${RESET}"
     read -n 1
     exit 1
-}
-
-check_dependencies() {
-    local missing_deps=()
-    
-    command -v curl >/dev/null 2>&1 || missing_deps+=("curl")
-    command -v unzip >/dev/null 2>&1 || missing_deps+=("unzip")
-    command -v wget >/dev/null 2>&1 || missing_deps+=("wget")
-    
-    if [ ${#missing_deps[@]} -ne 0 ]; then
-        error_exit "Missing dependencies: ${missing_deps[*]}. Please install them first."
-    fi
 }
 
 download_with_progress() {
@@ -232,10 +427,11 @@ download_with_progress() {
 install_app() {
     section_header "INSTALLATION PROCESS" "${ICON_INSTALL}"
     
-    # Check dependencies
+    # Check dependencies with enhanced system
     info_msg "Checking system dependencies..."
     check_dependencies
-    echo -e "  ${GREEN}${ICON_SUCCESS} All dependencies found!${RESET}"
+    verify_installation
+    echo -e "  ${GREEN}${ICON_SUCCESS} All dependencies verified!${RESET}"
     echo
     
     # Version selection
@@ -305,7 +501,7 @@ install_app() {
     # Install icon
     echo -ne "${CYAN}${ICON_DOWNLOAD}${RESET} Installing icon..."
     mkdir -p "$(dirname "$ICON_FILE")"
-    fallback_icon_url='https://raw.githubusercontent.com/aayush2622/Dartotsu/main/assets/logo.png'
+    fallback_icon_url='https://raw.githubusercontent.com/aayush2622/Dartotsu/main/assets/images/logo.png'
     if wget -q "$fallback_icon_url" -O "$ICON_FILE" 2>/dev/null; then
         echo -e " ${GREEN}${ICON_SUCCESS} Done!${RESET}"
     else
