@@ -305,7 +305,7 @@ install_app() {
     # Install icon
     echo -ne "${CYAN}${ICON_DOWNLOAD}${RESET} Installing icon..."
     mkdir -p "$(dirname "$ICON_FILE")"
-    fallback_icon_url='https://raw.githubusercontent.com/grayankit/dartotsuInstall/main/Dartotsu.png'
+    fallback_icon_url='https://raw.githubusercontent.com/aayush2622/Dartotsu/main/assets/logo.png'
     if wget -q "$fallback_icon_url" -O "$ICON_FILE" 2>/dev/null; then
         echo -e " ${GREEN}${ICON_SUCCESS} Done!${RESET}"
     else
