@@ -56,10 +56,7 @@ class SettingsAboutScreenState extends BaseSettingsScreen {
                     horizontal: 24.0,
                     vertical: 8.0,
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: Developers.getDevelopersWidget(context),
-                  ),
+                  child: Developers.getDevelopersWidget(context),
                 ),
               ],
             ),

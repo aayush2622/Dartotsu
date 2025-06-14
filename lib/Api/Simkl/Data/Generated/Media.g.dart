@@ -115,6 +115,7 @@ const _$StatusEnumMap = {
   Status.ENDED: 'ended',
   Status.SOON: 'soon',
   Status.PREMIERE: 'premiere',
+  Status.PRODUCTION: 'production'
 };
 
 MovieMovie _$MovieMovieFromJson(Map<String, dynamic> json) => MovieMovie(

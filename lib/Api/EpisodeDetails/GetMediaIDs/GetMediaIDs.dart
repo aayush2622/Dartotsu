@@ -93,10 +93,9 @@ class GetMediaIDs {
     }
 
     if (data != null && !checkTime()) {
-      var jsonData = jsonDecode(data);
+      var jsonData = jsonDecode(data) as List<dynamic>;
       _animeListFuture = jsonData
           .map((e) => AnimeID.fromJson(e))
-          .whereType<AnimeID>()
           .toList();
       loading.value = false;
       return _animeListFuture;

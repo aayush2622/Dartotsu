@@ -294,7 +294,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get dtu => 'Вниз до вверх';
 
   @override
-  String get direction => 'Direction';
+  String get direction => 'Направление';
 
   @override
   String get episodeWatched => 'Эпизод Смотреть';
@@ -306,7 +306,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get outOf => 'из';
 
   @override
-  String get totalOf => 'Итого';
+  String get totalOf => 'всего';
 
   @override
   String get selected => 'Выбрано';
@@ -540,7 +540,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get playerSettingsTitle => 'Настройки плеера';
 
   @override
-  String get playerSettingsDesc => 'Change player settings';
+  String get playerSettingsDesc => 'Изменение параметров игрока';
 
   @override
   String get speed => 'Скорость';
@@ -569,10 +569,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String get skipButtonDescription => 'Продолжительность кнопки пропуска';
 
   @override
-  String get thumbLessSeekBar => 'ThumbLess SeekBar';
+  String get thumbLessSeekBar => 'Полоса прокрутки без большого пальца';
 
   @override
-  String get thumbLessSeekBarDesc => 'Remove thumb from the seek bar';
+  String get thumbLessSeekBarDesc => 'Удалить большой палец из панели поиска';
 
   @override
   String get subtitles => 'Субтитры';
@@ -629,28 +629,28 @@ class AppLocalizationsRu extends AppLocalizations {
   String get bottomPaddingDescription => 'Отступ снизу для субтитров';
 
   @override
-  String get readerSettings => 'Reader Settings';
+  String get readerSettings => 'Параметры чтения';
 
   @override
-  String get readerSettingsDesc => 'Change reader settings';
+  String get readerSettingsDesc => 'Изменение параметров чтения';
 
   @override
-  String get spacedPages => 'Spaced Pages';
+  String get spacedPages => 'Пространенные страницы';
 
   @override
-  String get spacedPagesDesc => 'Add space between pages';
+  String get spacedPagesDesc => 'Добавить пространство между страницами';
 
   @override
-  String get hideScrollbar => 'Hide Scrollbar';
+  String get hideScrollbar => 'Свиток';
 
   @override
-  String get hideScrollbarDesc => 'Hide scrollbar while reading';
+  String get hideScrollbarDesc => 'Скрыть свиток во время чтения';
 
   @override
-  String get hidePageNumber => 'Hide Page Number';
+  String get hidePageNumber => 'Имя страницы';
 
   @override
-  String get hidePageNumberDesc => 'Hide page number while reading';
+  String get hidePageNumberDesc => 'Скрыть номер страницы во время чтения';
 
   @override
   String get theme => 'Тема';
@@ -723,19 +723,20 @@ class AppLocalizationsRu extends AppLocalizations {
   String get restoreSettings => 'Восстановить настройки';
 
   @override
-  String get differentCacheManager => 'Different Cache Manager';
+  String get differentCacheManager => 'Разный менеджер кэша';
 
   @override
-  String get differentCacheManagerDesc => 'Use different Image cache manager';
+  String get differentCacheManagerDesc =>
+      'Использовать разные кэш-менеджеры изображений';
 
   @override
   String get webView => 'Веб-сайт';
 
   @override
-  String get developersHelpers => 'Developers/Helpers';
+  String get developersHelpers => 'Разработчики / Helpers';
 
   @override
-  String get developersHelpersDesc => 'Dartotsu\'s unpaid labours';
+  String get developersHelpersDesc => 'Неоплачиваемый труд Дартоцу';
 
   @override
   String get supportMaintainer =>

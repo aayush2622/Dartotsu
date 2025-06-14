@@ -529,7 +529,10 @@ enum Status {
   @JsonValue("soon")
   SOON,
   @JsonValue("premiere")
-  PREMIERE
+  PREMIERE,
+
+  @JsonValue("production")
+  PRODUCTION
 }
 
 final statusValues = EnumValues({
@@ -541,7 +544,8 @@ final statusValues = EnumValues({
   "ongoing": Status.ONGOING,
   "ended": Status.ENDED,
   'soon': Status.SOON,
-  'premiere': Status.PREMIERE
+  'premiere': Status.PREMIERE,
+  'production': Status.PRODUCTION
 });
 
 class EnumValues<T> {

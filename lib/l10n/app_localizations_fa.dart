@@ -294,7 +294,7 @@ class AppLocalizationsFa extends AppLocalizations {
   String get dtu => 'پایین تا بالا';
 
   @override
-  String get direction => 'Direction';
+  String get direction => 'جهت هدایت';
 
   @override
   String get episodeWatched => 'قسمت تماشا شده';
@@ -535,7 +535,7 @@ class AppLocalizationsFa extends AppLocalizations {
   String get playerSettingsTitle => 'تنظیمات پخش‌کننده';
 
   @override
-  String get playerSettingsDesc => 'Change player settings';
+  String get playerSettingsDesc => 'تغییر تنظیمات بازیکن';
 
   @override
   String get speed => 'سرعت';
@@ -563,10 +563,10 @@ class AppLocalizationsFa extends AppLocalizations {
   String get skipButtonDescription => 'مدت زمان دکمه رد کردن';
 
   @override
-  String get thumbLessSeekBar => 'ThumbLess SeekBar';
+  String get thumbLessSeekBar => 'جستجو برای بار';
 
   @override
-  String get thumbLessSeekBarDesc => 'Remove thumb from the seek bar';
+  String get thumbLessSeekBarDesc => 'حذف انگشت از نوار جستجو';
 
   @override
   String get subtitles => 'زیرنویس‌ها';
@@ -623,28 +623,28 @@ class AppLocalizationsFa extends AppLocalizations {
   String get bottomPaddingDescription => 'فاصله پایین زیرنویس';
 
   @override
-  String get readerSettings => 'Reader Settings';
+  String get readerSettings => 'تنظیمات Reader';
 
   @override
-  String get readerSettingsDesc => 'Change reader settings';
+  String get readerSettingsDesc => 'تغییر تنظیمات خواننده';
 
   @override
-  String get spacedPages => 'Spaced Pages';
+  String get spacedPages => 'صفحه های فضایی';
 
   @override
-  String get spacedPagesDesc => 'Add space between pages';
+  String get spacedPagesDesc => 'اضافه کردن فضا بین صفحات';
 
   @override
-  String get hideScrollbar => 'Hide Scrollbar';
+  String get hideScrollbar => 'پنهان کردن نوار پیمایش';
 
   @override
-  String get hideScrollbarDesc => 'Hide scrollbar while reading';
+  String get hideScrollbarDesc => 'Hide Scrollbar در هنگام خواندن';
 
   @override
-  String get hidePageNumber => 'Hide Page Number';
+  String get hidePageNumber => 'دانلود بازی Hide Page Number';
 
   @override
-  String get hidePageNumberDesc => 'Hide page number while reading';
+  String get hidePageNumberDesc => 'شماره صفحه پنهان در هنگام خواندن';
 
   @override
   String get theme => 'تم';
@@ -715,19 +715,19 @@ class AppLocalizationsFa extends AppLocalizations {
   String get restoreSettings => 'بازنشانی تنظیمات';
 
   @override
-  String get differentCacheManager => 'Different Cache Manager';
+  String get differentCacheManager => 'مدیر مخفی مختلف';
 
   @override
-  String get differentCacheManagerDesc => 'Use different Image cache manager';
+  String get differentCacheManagerDesc => 'از مدیر حافظه مختلف استفاده کنید';
 
   @override
   String get webView => 'Web View';
 
   @override
-  String get developersHelpers => 'Developers/Helpers';
+  String get developersHelpers => 'توسعه دهندگان';
 
   @override
-  String get developersHelpersDesc => 'Dartotsu\'s unpaid labours';
+  String get developersHelpersDesc => 'کارگران بدون حقوق دارتوتسو';
 
   @override
   String get supportMaintainer =>

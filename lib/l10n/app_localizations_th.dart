@@ -294,7 +294,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get dtu => 'ดาวน์โหลด';
 
   @override
-  String get direction => 'Direction';
+  String get direction => 'เส้นทาง';
 
   @override
   String get episodeWatched => 'ตอนที่ดูแล้ว';
@@ -536,7 +536,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get playerSettingsTitle => 'การตั้งค่าผู้เล่น';
 
   @override
-  String get playerSettingsDesc => 'Change player settings';
+  String get playerSettingsDesc => 'เปลี่ยนการตั้งค่า';
 
   @override
   String get speed => 'ความเร็ว';
@@ -563,10 +563,10 @@ class AppLocalizationsTh extends AppLocalizations {
   String get skipButtonDescription => 'ระยะเวลาปุ่มข้าม';
 
   @override
-  String get thumbLessSeekBar => 'ThumbLess SeekBar';
+  String get thumbLessSeekBar => 'เท้า';
 
   @override
-  String get thumbLessSeekBarDesc => 'Remove thumb from the seek bar';
+  String get thumbLessSeekBarDesc => 'ลบนิ้วออกจากบาร์';
 
   @override
   String get subtitles => 'คำบรรยาย';
@@ -623,28 +623,28 @@ class AppLocalizationsTh extends AppLocalizations {
   String get bottomPaddingDescription => 'ระยะห่างด้านล่างของคำบรรยาย';
 
   @override
-  String get readerSettings => 'Reader Settings';
+  String get readerSettings => 'การตั้งค่า';
 
   @override
-  String get readerSettingsDesc => 'Change reader settings';
+  String get readerSettingsDesc => 'เปลี่ยนการตั้งค่า';
 
   @override
-  String get spacedPages => 'Spaced Pages';
+  String get spacedPages => 'หน้า';
 
   @override
-  String get spacedPagesDesc => 'Add space between pages';
+  String get spacedPagesDesc => 'เพิ่มพื้นที่ระหว่างหน้า';
 
   @override
-  String get hideScrollbar => 'Hide Scrollbar';
+  String get hideScrollbar => 'เลื่อน';
 
   @override
-  String get hideScrollbarDesc => 'Hide scrollbar while reading';
+  String get hideScrollbarDesc => 'เลื่อนหมุนในขณะที่อ่าน';
 
   @override
-  String get hidePageNumber => 'Hide Page Number';
+  String get hidePageNumber => 'หน้า';
 
   @override
-  String get hidePageNumberDesc => 'Hide page number while reading';
+  String get hidePageNumberDesc => 'หน้าซ่อน';
 
   @override
   String get theme => 'ธีม';
@@ -714,19 +714,19 @@ class AppLocalizationsTh extends AppLocalizations {
   String get restoreSettings => 'คืนค่าการตั้งค่า';
 
   @override
-  String get differentCacheManager => 'Different Cache Manager';
+  String get differentCacheManager => 'การจัดการ Cache';
 
   @override
-  String get differentCacheManagerDesc => 'Use different Image cache manager';
+  String get differentCacheManagerDesc => 'ใช้โปรแกรมภาพที่แตกต่างกัน';
 
   @override
   String get webView => 'ค้นหาเว็บ';
 
   @override
-  String get developersHelpers => 'Developers/Helpers';
+  String get developersHelpers => 'นักพัฒนา / การจัดการ';
 
   @override
-  String get developersHelpersDesc => 'Dartotsu\'s unpaid labours';
+  String get developersHelpersDesc => 'Dartotsu\'s ไม่จ่ายแรงงาน';
 
   @override
   String get supportMaintainer =>

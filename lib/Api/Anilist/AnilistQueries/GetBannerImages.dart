@@ -22,15 +22,16 @@ extension on AnilistQueries {
     if (url == null || url.isEmpty || checkTime()) {
       final response =
           await executeQuery<MediaListCollectionResponse>(_queryBanner(type));
-      final bannerImages = response?.data?.mediaListCollection?.lists
-              ?.expand((list) => list.entries ?? [] as List<api.MediaList>)
-              .where((e) => !(e.media?.isAdult == true))
-              .map((entry) => entry.media?.bannerImage)
-              .where((imageUrl) => imageUrl != null && imageUrl != 'null')
-              .toList() ??
-          [];
-      bannerImages.shuffle(Random());
-      var random = bannerImages.isNotEmpty ? bannerImages.first : null;
+      final entries = response?.data?.mediaListCollection?.lists
+          ?.expand((list) => list.entries ?? [] as List<api.MediaList>)
+          .where((e) => !(e.media?.isAdult ?? false))
+          .map((e) => e.media?.bannerImage)
+          .where((url) => url != null && url != 'null')
+          .cast<String>()
+          .toList() ?? [];
+
+      entries.shuffle(Random());
+      var random = entries.isNotEmpty ? entries.first : null;
 
       saveCustomData("banner_${type}_url", random);
       saveCustomData(

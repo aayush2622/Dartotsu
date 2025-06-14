@@ -292,7 +292,7 @@ class AppLocalizationsDa extends AppLocalizations {
   String get dtu => 'Datoudgivelse';
 
   @override
-  String get direction => 'Direction';
+  String get direction => 'Retsretning';
 
   @override
   String get episodeWatched => 'Episode set';
@@ -533,7 +533,7 @@ class AppLocalizationsDa extends AppLocalizations {
   String get playerSettingsTitle => 'Afspillerindstillinger';
 
   @override
-  String get playerSettingsDesc => 'Change player settings';
+  String get playerSettingsDesc => 'Skift afspillerindstillinger';
 
   @override
   String get speed => 'Hastighed';
@@ -561,10 +561,10 @@ class AppLocalizationsDa extends AppLocalizations {
   String get skipButtonDescription => 'Spring-knappens varighed';
 
   @override
-  String get thumbLessSeekBar => 'ThumbLess SeekBar';
+  String get thumbLessSeekBar => 'Hoteller i nærheden af ThumbLess SeekBar';
 
   @override
-  String get thumbLessSeekBarDesc => 'Remove thumb from the seek bar';
+  String get thumbLessSeekBarDesc => 'Fjern tommelfingeren fra søgelinjen';
 
   @override
   String get subtitles => 'Undertekster';
@@ -621,28 +621,28 @@ class AppLocalizationsDa extends AppLocalizations {
   String get bottomPaddingDescription => 'Undertekstens bundmargin';
 
   @override
-  String get readerSettings => 'Reader Settings';
+  String get readerSettings => 'Indstillinger for læserindstillinger';
 
   @override
-  String get readerSettingsDesc => 'Change reader settings';
+  String get readerSettingsDesc => 'Ændring af læserindstillinger';
 
   @override
-  String get spacedPages => 'Spaced Pages';
+  String get spacedPages => 'Sider i kategorien Sider';
 
   @override
-  String get spacedPagesDesc => 'Add space between pages';
+  String get spacedPagesDesc => 'Tilføj plads mellem sider';
 
   @override
-  String get hideScrollbar => 'Hide Scrollbar';
+  String get hideScrollbar => 'Skjul Scrollbar';
 
   @override
-  String get hideScrollbarDesc => 'Hide scrollbar while reading';
+  String get hideScrollbarDesc => 'Skjul scrollbar, mens du læser';
 
   @override
-  String get hidePageNumber => 'Hide Page Number';
+  String get hidePageNumber => 'Skjul sidenummer';
 
   @override
-  String get hidePageNumberDesc => 'Hide page number while reading';
+  String get hidePageNumberDesc => 'Skjul sidenummer, mens du læser';
 
   @override
   String get theme => 'Tema';
@@ -712,19 +712,20 @@ class AppLocalizationsDa extends AppLocalizations {
   String get restoreSettings => 'Gendan indstillinger';
 
   @override
-  String get differentCacheManager => 'Different Cache Manager';
+  String get differentCacheManager => 'Forskellig cache Manager';
 
   @override
-  String get differentCacheManagerDesc => 'Use different Image cache manager';
+  String get differentCacheManagerDesc =>
+      'Brug forskellige billed cache managere';
 
   @override
   String get webView => 'Webvisning';
 
   @override
-  String get developersHelpers => 'Developers/Helpers';
+  String get developersHelpers => 'Udviklere/Hjælpere';
 
   @override
-  String get developersHelpersDesc => 'Dartotsu\'s unpaid labours';
+  String get developersHelpersDesc => 'Dartotsus ulønnede arbejdere';
 
   @override
   String get supportMaintainer =>

@@ -294,7 +294,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get dtu => 'Von unten nach oben';
 
   @override
-  String get direction => 'Direction';
+  String get direction => 'Richtung';
 
   @override
   String get episodeWatched => 'Gesehene Episode';
@@ -545,7 +545,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get playerSettingsTitle => 'Player-Einstellungen';
 
   @override
-  String get playerSettingsDesc => 'Change player settings';
+  String get playerSettingsDesc => 'Playereinstellungen ändern';
 
   @override
   String get speed => 'Geschwindigkeit';
@@ -574,10 +574,11 @@ class AppLocalizationsDe extends AppLocalizations {
   String get skipButtonDescription => 'Dauer des Überspringen-Buttons';
 
   @override
-  String get thumbLessSeekBar => 'ThumbLess SeekBar';
+  String get thumbLessSeekBar => 'Daumenlose Suchleiste';
 
   @override
-  String get thumbLessSeekBarDesc => 'Remove thumb from the seek bar';
+  String get thumbLessSeekBarDesc =>
+      'Entfernen Sie den Daumen aus der Suchleiste';
 
   @override
   String get subtitles => 'Untertitel';
@@ -634,28 +635,28 @@ class AppLocalizationsDe extends AppLocalizations {
   String get bottomPaddingDescription => 'Unterer Rand der Untertitel';
 
   @override
-  String get readerSettings => 'Reader Settings';
+  String get readerSettings => 'Leseeinstellungen';
 
   @override
-  String get readerSettingsDesc => 'Change reader settings';
+  String get readerSettingsDesc => 'Leseeinstellungen ändern';
 
   @override
-  String get spacedPages => 'Spaced Pages';
+  String get spacedPages => 'Geräumige Seiten';
 
   @override
-  String get spacedPagesDesc => 'Add space between pages';
+  String get spacedPagesDesc => 'Platz zwischen den Seiten';
 
   @override
-  String get hideScrollbar => 'Hide Scrollbar';
+  String get hideScrollbar => 'Scrollbar verbergen';
 
   @override
-  String get hideScrollbarDesc => 'Hide scrollbar while reading';
+  String get hideScrollbarDesc => 'Scrollbar beim Lesen verbergen';
 
   @override
-  String get hidePageNumber => 'Hide Page Number';
+  String get hidePageNumber => 'Seitennummer verbergen';
 
   @override
-  String get hidePageNumberDesc => 'Hide page number while reading';
+  String get hidePageNumberDesc => 'Seite Nummer verbergen während des Lesens';
 
   @override
   String get theme => 'Thema';
@@ -728,19 +729,20 @@ class AppLocalizationsDe extends AppLocalizations {
   String get restoreSettings => 'Einstellungen wiederherstellen';
 
   @override
-  String get differentCacheManager => 'Different Cache Manager';
+  String get differentCacheManager => 'Unterschiedlicher Cache Manager';
 
   @override
-  String get differentCacheManagerDesc => 'Use different Image cache manager';
+  String get differentCacheManagerDesc =>
+      'Verwenden Sie verschiedene Bild Cache Manager';
 
   @override
   String get webView => 'Web-Ansicht';
 
   @override
-  String get developersHelpers => 'Developers/Helpers';
+  String get developersHelpers => 'Entwickler/Helpers';
 
   @override
-  String get developersHelpersDesc => 'Dartotsu\'s unpaid labours';
+  String get developersHelpersDesc => 'Dartotsus unbezahlte Arbeit';
 
   @override
   String get supportMaintainer =>
