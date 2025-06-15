@@ -303,7 +303,7 @@ jobs:
           FILE_ID: ${{steps.gdriveUpload.outputs.fileId}}
 
         run: |
-          echo "$FILE_ID" > latest.txt
+          echo "$FILE_ID" > scripts/latest.txt
 
       # Push updated latest.txt back to repository
       - name: Push updated latest.txt
