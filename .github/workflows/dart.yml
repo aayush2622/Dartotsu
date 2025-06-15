@@ -300,10 +300,11 @@ jobs:
       # Store File ID in latest.txt
       - name: Store File ID
         env:
-          FILE_ID: ${{steps.gdriveUpload.outputs.fileId}}
+          FILE_ID: ${{steps.gdriveUpload.outputs.file-id}}
 
         run: |
           echo "$FILE_ID" > scripts/latest.txt
+          echo "$FILE_ID"
 
       # Push updated latest.txt back to repository
       - name: Push updated latest.txt
