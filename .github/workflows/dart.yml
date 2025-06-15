@@ -297,6 +297,20 @@ jobs:
           upload-to-folder-id: ${{secrets.GOOGLE_FOLDER_MAIN}}
           service-account-json: "${{secrets.GOOGLE_KEY}}"
           overrwrite: true
+      # Store File ID in latest.txt
+      - name: Store File ID
+        env:
+          FILE_ID: ${{steps.gdriveUpload.outputs.fileId}}
+
+        run: |
+          echo "$FILE_ID" > latest.txt
+
+      # Push updated latest.txt back to repository
+      - name: Push updated latest.txt
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: "scripts/latest.txt"
+          message: "[skip ci] Update latest.txt with new File ID"
 
   build_ios:
     runs-on: macos-latest
