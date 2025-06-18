@@ -73,7 +73,6 @@ class _DiscordController extends GetxController {
         );
       },
     );
-
     showCustomBottomDialog(context, dialog);
   }
 
