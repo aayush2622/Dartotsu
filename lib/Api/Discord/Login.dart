@@ -18,13 +18,14 @@ class MobileLoginState extends State<MobileLogin> {
   late InAppWebViewController _controller;
 
   Future<void> _extractToken() async {
+    if (!mounted) return;
     await Future.delayed(const Duration(seconds: 2));
     try {
       final result = await _controller.evaluateJavascript(source: '''
-        (function() {
-    const m = []; webpackChunkdiscord_app.push([[""], {}, e => {for (let c in e.c)m.push(e.c[c])}]);
-    return m.find(n => n?.exports?.default?.getToken !== void 0)?.exports?.default?.getToken();
-    })()''');
+  (function() {
+    return window.LOCAL_STORAGE.getItem('token');
+  })()
+''');
 
       if (result != null && result != 'null') {
         _login(result.trim().replaceAll('"', ''));
@@ -53,12 +54,20 @@ class MobileLoginState extends State<MobileLogin> {
               javaScriptEnabled: true,
             ),
           ),
+          onLoadStart: (controller, url) async {
+            await controller.evaluateJavascript(source: '''
+            try {
+              window.LOCAL_STORAGE = localStorage;
+            } catch (e) {}
+          ''');
+          },
           onWebViewCreated: (controller) {
             _controller = controller;
             _clearDiscordData();
           },
           onUpdateVisitedHistory: (controller, url, isReload) async {
-            if (url.toString() != 'https://discord.com/login') {
+            if (url.toString() != 'https://discord.com/login' &&
+                url.toString() != 'about:blank') {
               await _extractToken();
             }
           },
@@ -75,7 +84,7 @@ class MobileLoginState extends State<MobileLogin> {
   Future<void> _clearDiscordData() async {
     await _controller.evaluateJavascript(source: '''
       if (window.location.hostname === 'discord.com') {
-        window.localStorage.clear();
+        window.LOCAL_STORAGE.clear();
         window.sessionStorage.clear();
       }
     ''');
@@ -118,6 +127,10 @@ class LinuxLoginState extends State<LinuxLogin> {
       ..setBrightness(Brightness.dark)
       ..launch('https://discord.com/login');
 
+    await Future.delayed(const Duration(milliseconds: 1000));
+
+    await _controller.evaluateJavaScript('''window.LOCAL_STORAGE = window.localStorage;
+    Object.keys(window.localStorage);''');
     _controller.addOnUrlRequestCallback(
       (String url) async {
         if (url != 'https://discord.com/login' && url != 'about:blank') {
@@ -129,11 +142,12 @@ class LinuxLoginState extends State<LinuxLogin> {
 
   Future<void> _extractToken() async {
     try {
+
       final result = await _controller.evaluateJavaScript('''
-        (function() {
-    const m = []; webpackChunkdiscord_app.push([[""], {}, e => {for (let c in e.c)m.push(e.c[c])}]);
-    return m.find(n => n?.exports?.default?.getToken !== void 0)?.exports?.default?.getToken();
-    })()''');
+  (function() {
+    return window.LOCAL_STORAGE.getItem('token');
+  })()
+''');
 
       if (result != null && result != 'null') {
         _login(result.trim().replaceAll('"', ''));

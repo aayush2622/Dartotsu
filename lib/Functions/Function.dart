@@ -80,6 +80,7 @@ Future<void> snackString(
 }) async {
   var context = c ?? Get.context;
   Logger.log('Showing SnackBar with message: $s');
+  debugPrint('Showing SnackBar with message: $s');
   if (context != null && s != null && s.isNotEmpty) {
     var theme = Theme.of(context).colorScheme;
     try {
