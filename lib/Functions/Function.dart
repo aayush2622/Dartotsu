@@ -184,17 +184,13 @@ List<T> mergeMapValues<T>(Map<String, List<T>> dataMap) {
 
   return uniqueItems.toList();
 }
-
-Future<T> isolate<T>(T Function() fn) async {
+Future<T> isolate<T>(Future<T> Function() fn) async {
   final receivePort = ReceivePort();
   final errorPort = ReceivePort();
 
   await Isolate.spawn<_IsolatePayload<T>>(
     _isolateEntry,
-    _IsolatePayload<T>(
-      sendPort: receivePort.sendPort,
-      fn: fn,
-    ),
+    _IsolatePayload(sendPort: receivePort.sendPort, fn: fn),
     onError: errorPort.sendPort,
   );
 
@@ -202,7 +198,11 @@ Future<T> isolate<T>(T Function() fn) async {
 
   receivePort.listen((data) {
     if (!completer.isCompleted) {
-      completer.complete(data as T);
+      if (data is RemoteError) {
+        completer.completeError(Exception(data), data.stackTrace);
+      } else {
+        completer.complete(data as T);
+      }
     }
     receivePort.close();
     errorPort.close();
@@ -221,19 +221,16 @@ Future<T> isolate<T>(T Function() fn) async {
 
 class _IsolatePayload<T> {
   final SendPort sendPort;
-  final T Function() fn;
+  final Future<T> Function() fn;
 
-  _IsolatePayload({
-    required this.sendPort,
-    required this.fn,
-  });
+  _IsolatePayload({required this.sendPort, required this.fn});
 }
 
-void _isolateEntry<T>(_IsolatePayload<T> payload) {
+void _isolateEntry<T>(_IsolatePayload<T> payload) async {
   try {
-    final result = payload.fn();
+    final result = await payload.fn();
     payload.sendPort.send(result);
-  } catch (e) {
-    Isolate.exit(payload.sendPort, e);
+  } catch (e, st) {
+    payload.sendPort.send(RemoteError(e.toString(), st.toString()));
   }
 }

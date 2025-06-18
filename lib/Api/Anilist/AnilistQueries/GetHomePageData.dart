@@ -44,7 +44,7 @@ extension on AnilistQueries {
         List<int> list = loadCustomData<List<int>>("continue${type}List") ?? [];
         var mediaList = (currentMedia ?? []) + (repeatingMedia ?? []);
         var returnArray = await isolate(
-          () => process(mediaList, list, removeList, hidePrivate),
+          () async => process(mediaList, list, removeList, hidePrivate),
         );
 
         removedMedia.addAll(returnArray.$2);
@@ -69,7 +69,7 @@ extension on AnilistQueries {
         }
 
         var returnArray = await isolate(
-          () => process(favorites ?? [], removeList, hidePrivate),
+          () async => process(favorites ?? [], removeList, hidePrivate),
         );
 
         removedMedia.addAll(returnArray.$2);
@@ -114,7 +114,7 @@ extension on AnilistQueries {
         }
 
         var list = await isolate(
-          () => process(
+          () async => process(
             r ?? [],
             (a ?? []) + (b ?? []),
           ),
