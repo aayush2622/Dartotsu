@@ -82,7 +82,6 @@ class SettingsAccountScreenState extends BaseSettingsScreen {
           ..show(),
         onLogIn: () => Simkl.login(context),
       ),
-      const SizedBox(height: 16),
       _buildAccountSection(
         context,
         iconPath: 'assets/svg/discord.svg',

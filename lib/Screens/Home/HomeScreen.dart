@@ -104,8 +104,23 @@ class HomeScreenState extends State<HomeScreen> {
       children: [
         SizedBox(
           height: backgroundHeight,
-          child: Obx(
-            () {
+          child: AnimatedSwitcher(
+            duration: const Duration(milliseconds: 500),
+            switchInCurve: Curves.easeInOut,
+            switchOutCurve: Curves.easeInOut,
+            transitionBuilder: (Widget child, Animation<double> animation) {
+              return FadeTransition(
+                opacity: animation,
+                child: SlideTransition(
+                  position: Tween<Offset>(
+                    begin: const Offset(0.0, 0.05),
+                    end: Offset.zero,
+                  ).animate(animation),
+                  child: child,
+                ),
+              );
+            },
+            child: Obx(() {
               if (!service.running.value) {
                 return const LoadingWidget();
               }
@@ -118,8 +133,9 @@ class HomeScreenState extends State<HomeScreen> {
                   _buildCards(service, data),
                 ],
               );
-            },
+            }),
           ),
+
         ),
       ],
     );

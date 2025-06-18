@@ -22,13 +22,14 @@ class LoadingWidget extends StatelessWidget {
           child: const LinearProgressIndicator(),
         ),
         Positioned(
-            right: 34,
-            top: 36.statusBar(),
-            child: GestureDetector(
-              child: const SettingIconWidget(icon: Icons.settings),
-              onTap: () =>
-                  showCustomBottomDialog(context, const SettingsBottomSheet()),
-            )),
+          right: 34,
+          top: 36.statusBar(),
+          child: GestureDetector(
+            child: const SettingIconWidget(icon: Icons.settings),
+            onTap: () =>
+                showCustomBottomDialog(context, const SettingsBottomSheet()),
+          ),
+        ),
       ],
     );
   }
