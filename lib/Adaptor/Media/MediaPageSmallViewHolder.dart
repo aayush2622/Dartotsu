@@ -1,7 +1,6 @@
 import 'package:blur/blur.dart';
 import 'package:dartotsu/Functions/Extensions.dart';
 import 'package:flutter/material.dart';
-import 'package:kenburns_nullsafety/kenburns_nullsafety.dart';
 import 'package:provider/provider.dart';
 
 import '../../DataClass/Media.dart';
@@ -46,14 +45,11 @@ class MediaPageSmallViewHolder extends StatelessWidget {
   }
 
   Widget _buildBackground(String? bannerUrl) {
-    return KenBurns(
-      maxScale: 1.5,
-      child: cachedNetworkImage(
-        imageUrl: bannerUrl ?? '',
-        fit: BoxFit.cover,
-        width: double.infinity,
-        height: double.infinity,
-      ),
+    return cachedNetworkImage(
+      imageUrl: bannerUrl ?? '',
+      fit: BoxFit.cover,
+      width: double.infinity,
+      height: double.infinity,
     );
   }
 

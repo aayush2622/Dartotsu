@@ -261,16 +261,17 @@ class MainActivityState extends State<MainActivity> {
       body: Stack(
         children: [
           Obx(() {
-            return IndexedStack(
-              index: _selectedIndex,
-              children: [
-                const AnimeScreen(),
-                service.data.token.value.isNotEmpty
-                    ? const HomeScreen()
-                    : const LoginScreen(),
-                const MangaScreen(),
-              ],
-            );
+            if (_selectedIndex == 0) {
+              return const AnimeScreen();
+            } else if (_selectedIndex == 1) {
+              return service.data.token.value.isNotEmpty
+                  ? const HomeScreen()
+                  : const LoginScreen();
+            } else if (_selectedIndex == 2) {
+              return const MangaScreen();
+            } else {
+              return const SizedBox(); // fallback
+            }
           }),
           navbar,
           Positioned(

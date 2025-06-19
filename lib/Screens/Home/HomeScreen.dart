@@ -3,7 +3,6 @@ import 'package:dartotsu/Functions/Extensions.dart';
 import 'package:dartotsu/Theme/LanguageSwitcher.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
-import 'package:kenburns_nullsafety/kenburns_nullsafety.dart';
 import 'package:provider/provider.dart';
 
 import '../../Adaptor/Media/Widgets/MediaCard.dart';
@@ -135,7 +134,6 @@ class HomeScreenState extends State<HomeScreen> {
               );
             }),
           ),
-
         ),
       ],
     );
@@ -152,16 +150,11 @@ class HomeScreenState extends State<HomeScreen> {
       height: 212.statusBar(),
       child: Stack(
         children: [
-          KenBurns(
-            minAnimationDuration: const Duration(milliseconds: 9000),
-            maxAnimationDuration: const Duration(milliseconds: 30000),
-            maxScale: 2.5,
-            child: cachedNetworkImage(
-              imageUrl: data.bg ?? '',
-              fit: BoxFit.cover,
-              width: double.infinity,
-              height: 212.statusBar(),
-            ),
+          cachedNetworkImage(
+            imageUrl: data.bg ?? '',
+            fit: BoxFit.cover,
+            width: double.infinity,
+            height: 212.statusBar(),
           ),
           Container(
             width: double.infinity,
