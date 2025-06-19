@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:isolate';
 
 import 'package:dartotsu/logger.dart';
 import 'package:flutter/material.dart';
@@ -183,54 +182,4 @@ List<T> mergeMapValues<T>(Map<String, List<T>> dataMap) {
   }
 
   return uniqueItems.toList();
-}
-Future<T> isolate<T>(Future<T> Function() fn) async {
-  final receivePort = ReceivePort();
-  final errorPort = ReceivePort();
-
-  await Isolate.spawn<_IsolatePayload<T>>(
-    _isolateEntry,
-    _IsolatePayload(sendPort: receivePort.sendPort, fn: fn),
-    onError: errorPort.sendPort,
-  );
-
-  final completer = Completer<T>();
-
-  receivePort.listen((data) {
-    if (!completer.isCompleted) {
-      if (data is RemoteError) {
-        completer.completeError(Exception(data), data.stackTrace);
-      } else {
-        completer.complete(data as T);
-      }
-    }
-    receivePort.close();
-    errorPort.close();
-  });
-
-  errorPort.listen((e) {
-    if (!completer.isCompleted) {
-      completer.completeError(e);
-    }
-    receivePort.close();
-    errorPort.close();
-  });
-
-  return completer.future;
-}
-
-class _IsolatePayload<T> {
-  final SendPort sendPort;
-  final Future<T> Function() fn;
-
-  _IsolatePayload({required this.sendPort, required this.fn});
-}
-
-void _isolateEntry<T>(_IsolatePayload<T> payload) async {
-  try {
-    final result = await payload.fn();
-    payload.sendPort.send(result);
-  } catch (e, st) {
-    payload.sendPort.send(RemoteError(e.toString(), st.toString()));
-  }
 }

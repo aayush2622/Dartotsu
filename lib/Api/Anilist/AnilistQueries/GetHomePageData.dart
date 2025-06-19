@@ -13,23 +13,25 @@ extension on AnilistQueries {
 
       Future<void> processMedia(String type, List<api.MediaList>? currentMedia,
           List<api.MediaList>? repeatingMedia) async {
-        (List<Media>, List<Media>) process(
-            List<api.MediaList> l, List<int> c, List<int> r, bool h) {
+        (List<Media>, List<Media>) process(Map<String, dynamic> params) {
           Map<int, Media> subMap = {};
           List<Media> returnArray = [];
           List<Media> removedMedia = [];
-          for (var entry in l) {
+          var removeList = params["removeList"] as List<int>;
+          var hidePrivate = params["hidePrivate"] as bool;
+          for (var entry in (params["list"] ?? []) as List<api.MediaList>) {
             var media = Media.mediaListData(entry);
-            if (!r.contains(media.id) && (!h || !media.isListPrivate)) {
+            if (!removeList.contains(media.id) &&
+                (!hidePrivate || !media.isListPrivate)) {
               media.cameFromContinue = true;
               subMap[media.id] = media;
             } else {
               removedMedia.add(media);
             }
           }
-
-          if (c.isNotEmpty) {
-            returnArray.addAll(c.reversed
+          var list = params["continueList"] as List<int>;
+          if (list.isNotEmpty) {
+            returnArray.addAll(list.reversed
                 .where((id) => subMap.containsKey(id))
                 .map((id) => subMap[id]!));
             returnArray
@@ -43,9 +45,12 @@ extension on AnilistQueries {
 
         List<int> list = loadCustomData<List<int>>("continue${type}List") ?? [];
         var mediaList = (currentMedia ?? []) + (repeatingMedia ?? []);
-        var returnArray = await isolate(
-          () async => process(mediaList, list, removeList, hidePrivate),
-        );
+        var returnArray = await compute(process, {
+          "list": mediaList,
+          "removeList": removeList,
+          "hidePrivate": hidePrivate,
+          "continueList": list
+        });
 
         removedMedia.addAll(returnArray.$2);
         returnMap["current$type"] = returnArray.$1;
@@ -53,13 +58,15 @@ extension on AnilistQueries {
 
       Future<void> processFavorites(
           String type, List<api.MediaEdge>? favorites) async {
-        (List<Media>, List<Media>) process(
-            List<api.MediaEdge> l, List<int> r, bool h) {
+        (List<Media>, List<Media>) process(Map<String, dynamic> params) {
           List<Media> returnArray = [];
           List<Media> removedMedia = [];
-          for (var entry in l) {
+          var removeList = params["removeList"] as List<int>;
+          var hidePrivate = params["hidePrivate"] as bool;
+          for (var entry in (params["list"] ?? []) as List<api.MediaEdge>) {
             var media = Media.mediaEdgeData(entry);
-            if (!r.contains(media.id) && (!h || !media.isListPrivate)) {
+            if (!removeList.contains(media.id) &&
+                (!hidePrivate || !media.isListPrivate)) {
               returnArray.add(media);
             } else {
               removedMedia.add(media);
@@ -68,10 +75,11 @@ extension on AnilistQueries {
           return (returnArray, removedMedia);
         }
 
-        var returnArray = await isolate(
-          () async => process(favorites ?? [], removeList, hidePrivate),
-        );
-
+        var returnArray = await compute(process, {
+          "list": favorites,
+          "removeList": removeList,
+          "hidePrivate": hidePrivate,
+        });
         removedMedia.addAll(returnArray.$2);
         returnMap["favorite$type"] = returnArray.$1;
       }
@@ -90,8 +98,10 @@ extension on AnilistQueries {
         List<api.MediaList>? b,
       ) async {
         Map<int, Media> subMap = {};
-        List<Media> process(List<Recommendation> r, List<api.MediaList> l) {
-          for (var entry in r) {
+        List<Media> process(Map<String, dynamic> params) {
+          var recommendations =
+              (params["recommended"] ?? []) as List<Recommendation>;
+          for (var entry in recommendations) {
             var mediaRecommendation = entry.mediaRecommendation;
             if (mediaRecommendation != null) {
               var media = Media.mediaData(mediaRecommendation);
@@ -100,7 +110,8 @@ extension on AnilistQueries {
             }
           }
 
-          for (var entry in l) {
+          var mediaList = (params["list"] ?? []) as List<api.MediaList>;
+          for (var entry in mediaList) {
             var media = Media.mediaListData(entry);
             if (['RELEASING', 'FINISHED'].contains(media.status)) {
               media.relation = entry.media?.type?.name ?? "";
@@ -113,12 +124,8 @@ extension on AnilistQueries {
           return list;
         }
 
-        var list = await isolate(
-          () async => process(
-            r ?? [],
-            (a ?? []) + (b ?? []),
-          ),
-        );
+        var list = await compute(
+            process, {"list": (a ?? []) + (b ?? []), "recommended": r});
 
         returnMap["recommendations"] = list;
       }

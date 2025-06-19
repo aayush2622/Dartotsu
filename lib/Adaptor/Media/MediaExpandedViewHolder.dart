@@ -1,9 +1,7 @@
 import 'package:dartotsu/DataClass/Media.dart';
-import 'package:dartotsu/Functions/Extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../Preferences/PrefManager.dart';
 import '../../Widgets/CachedNetworkImage.dart';
 import 'Widgets/MediaReleaseingIndicator.dart';
 import 'Widgets/MediaScoreBadge.dart';
@@ -23,31 +21,11 @@ class MediaExpandedViewHolder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context).colorScheme;
-    var thumb = ''.obs;
-    var key = '${context.currentService().getName}_thumbList';
-    var data = loadCustomData<Map<dynamic, dynamic>>(key);
-
-    var list = data?.map(
-      (key, value) => MapEntry(
-        key.toString(),
-        (value as Map<dynamic, dynamic>).map(
-          (k, v) => MapEntry(
-            k.toString(),
-            v as String?,
-          ),
-        ),
-      ),
-    );
-
-    thumb.value = list?[mediaInfo.id.toString()]
-            ?[((mediaInfo.userProgress ?? 0) + 1).toString()] ??
-        mediaInfo.cover ??
-        '';
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Obx(() => _buildCoverImage(context, thumb.value)),
+        Obx(() => _buildCoverImage(context)),
         if (isLarge && mediaInfo.relation != null) _buildRelationRow(theme),
         const SizedBox(height: 8),
         _buildMediaTitle(),
@@ -59,7 +37,7 @@ class MediaExpandedViewHolder extends StatelessWidget {
     );
   }
 
-  Widget _buildCoverImage(BuildContext context, String? thumb) {
+  Widget _buildCoverImage(BuildContext context) {
     return Stack(
       children: [
         Hero(
@@ -67,7 +45,7 @@ class MediaExpandedViewHolder extends StatelessWidget {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(16.0),
             child: cachedNetworkImage(
-              imageUrl: thumb,
+              imageUrl: mediaInfo.cover,
               fit: BoxFit.cover,
               width: 250,
               height: 160,

@@ -10,7 +10,6 @@ import 'package:dartotsu/Screens/Detail/Tabs/Watch/Source/Source.dart';
 import 'package:expandable_page_view/expandable_page_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kenburns_nullsafety/kenburns_nullsafety.dart';
 import 'package:provider/provider.dart';
 
 import '../../DataClass/Media.dart';
@@ -270,16 +269,11 @@ class MediaInfoPageState extends State<MediaInfoPage> {
       height: 384 + (0.statusBar() * 2),
       child: Stack(
         children: [
-          KenBurns(
-            maxScale: 2.5,
-            minAnimationDuration: const Duration(milliseconds: 6000),
-            maxAnimationDuration: const Duration(milliseconds: 20000),
-            child: cachedNetworkImage(
-              imageUrl: mediaData.banner ?? mediaData.cover ?? '',
-              fit: BoxFit.cover,
-              width: double.infinity,
-              height: 384 + (0.statusBar() * 2),
-            ),
+          cachedNetworkImage(
+            imageUrl: mediaData.banner ?? mediaData.cover ?? '',
+            fit: BoxFit.cover,
+            width: double.infinity,
+            height: 384 + (0.statusBar() * 2),
           ),
           Container(
             width: double.infinity,
