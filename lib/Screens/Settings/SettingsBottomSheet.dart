@@ -4,6 +4,7 @@ import 'package:dartotsu/Screens/Extensions/ExtensionScreen.dart';
 import 'package:dartotsu/Screens/Settings/SettingsScreen.dart';
 import 'package:dartotsu/Widgets/AlertDialogBuilder.dart';
 import 'package:dartotsu/Widgets/CustomBottomDialog.dart';
+import 'package:dartotsu/Widgets/LoadSvg.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:provider/provider.dart';
@@ -164,7 +165,12 @@ class SettingsBottomSheetState extends State<SettingsBottomSheet> {
         _buildSwitchListTile(
             context: context,
             title: getString.incognitoMode,
-            icon: Icons.person,
+            customIcon: loadSvg(
+              'assets/svg/incognito.svg',
+              width: 20,
+              height: 20,
+              color: Theme.of(context).primaryColor,
+            ),
             isChecked: incognito,
             onChanged: (bool value) {
               setState(() {
@@ -200,7 +206,8 @@ class SettingsBottomSheetState extends State<SettingsBottomSheet> {
   Widget _buildSwitchListTile(
       {required BuildContext context,
       required String title,
-      required IconData icon,
+      IconData? icon,
+      Widget? customIcon,
       required bool isChecked,
       Function(bool)? onChanged}) {
     return SwitchListTile(
@@ -215,7 +222,8 @@ class SettingsBottomSheetState extends State<SettingsBottomSheet> {
       ),
       value: isChecked,
       onChanged: onChanged,
-      secondary: Icon(icon, color: Theme.of(context).primaryColor),
+      secondary:
+          customIcon ?? Icon(icon, color: Theme.of(context).primaryColor),
     );
   }
 

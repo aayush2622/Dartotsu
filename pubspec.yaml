@@ -163,6 +163,7 @@ flutter:
     - assets/svg/mal.svg
     - assets/svg/simkl.svg
     - assets/svg/extensions.svg
+    - assets/svg/incognito.svg
     - shorebird.yaml
 # Flutter Launcher Icons Configuration
 # dart run flutter_launcher_icons
