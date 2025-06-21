@@ -9,7 +9,7 @@ import '../../../Functions/Function.dart';
 import '../../../Functions/GetExtensions.dart';
 import '../../../Services/Screens/BaseAnimeScreen.dart';
 import '../../../logger.dart';
-import '../../Sources/Model/Manga.dart';
+import '../../Sources/Eval/dart/model/m_source.dart';
 import '../../Sources/Model/Source.dart';
 import '../../Sources/Search/get_popular.dart';
 

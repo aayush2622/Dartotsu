@@ -2,7 +2,7 @@ import 'package:dartotsu/Functions/GetExtensions.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../Preferences/PrefManager.dart';
-import '../Model/Manga.dart';
+import '../Eval/dart/model/m_source.dart';
 import 'GetSourceList.dart';
 
 part 'fetch_anime_sources.g.dart';

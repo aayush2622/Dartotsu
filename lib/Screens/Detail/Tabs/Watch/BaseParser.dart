@@ -5,7 +5,7 @@ import 'package:fuzzywuzzy/fuzzywuzzy.dart';
 import 'package:get/get.dart';
 
 import '../../../../Api/Sources/Eval/dart/model/m_manga.dart';
-import '../../../../Api/Sources/Model/Manga.dart';
+import '../../../../Api/Sources/Eval/dart/model/m_source.dart';
 import '../../../../Api/Sources/Model/Source.dart';
 import '../../../../Api/Sources/Search/search.dart';
 import '../../../../DataClass/Media.dart';

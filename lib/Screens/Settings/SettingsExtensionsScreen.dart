@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 
 import '../../Adaptor/Settings/SettingsAdaptor.dart';
-import '../../Api/Sources/Model/Manga.dart';
+import '../../Api/Sources/Eval/dart/model/m_source.dart';
 import '../../DataClass/Setting.dart';
 import '../../Theme/LanguageSwitcher.dart';
 import 'BaseSettingsScreen.dart';

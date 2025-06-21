@@ -1,6 +1,5 @@
 import 'package:d4rt/d4rt.dart';
 
-import '../../../Model/Manga.dart';
 import '../model/m_manga.dart';
 
 class MMangaBridge {

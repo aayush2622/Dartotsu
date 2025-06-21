@@ -8,11 +8,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:isar/isar.dart';
 
+import '../../Api/Sources/Eval/dart/model/m_source.dart';
 import '../../Api/Sources/Extensions/GetSourceList.dart';
 import '../../Api/Sources/Extensions/fetch_anime_sources.dart';
 import '../../Api/Sources/Extensions/fetch_manga_sources.dart';
 import '../../Api/Sources/Extensions/fetch_novel_sources.dart';
-import '../../Api/Sources/Model/Manga.dart';
 import '../../Api/Sources/extension_preferences_providers.dart';
 import '../../Api/Sources/get_source_preference.dart';
 import '../../Widgets/CachedNetworkImage.dart';

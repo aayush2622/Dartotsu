@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:dartotsu/Api/Sources/Model/settings.dart';
 import 'package:dartotsu/Functions/Function.dart';
+import 'package:dartotsu/Preferences/PrefManager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart'
 as flutter_inappwebview;
@@ -25,17 +25,19 @@ class MClient {
   }
 
   static Map<String, String> getCookiesPref(String url) {
-    final cookiesList = isar.settings.getSync(227)!.cookiesList ?? [];
-    if (cookiesList.isEmpty) return {};
-    final cookies = cookiesList
-        .firstWhere(
-          (element) =>
-              element.host == Uri.parse(url).host ||
-              Uri.parse(url).host.contains(element.host!),
-          orElse: () => MCookie(cookie: ""),
-        )
-        .cookie!;
+    final cookiesMap = loadData(PrefName.cookies);
+    if (cookiesMap.isEmpty) return {};
+
+    final urlHost = Uri.parse(url).host;
+
+    final matchingEntry = cookiesMap.entries.firstWhere(
+          (entry) => urlHost == entry.key || urlHost.contains(entry.key),
+      orElse: () => const MapEntry('', ''),
+    );
+
+    final cookies = matchingEntry.value;
     if (cookies.isEmpty) return {};
+
     return {HttpHeaders.cookieHeader: cookies};
   }
 
@@ -61,36 +63,22 @@ class MClient {
     if (cookies.isNotEmpty) {
       final host = Uri.parse(url).host;
       final newCookie = cookies.join("; ");
-      final settings = isar.settings.getSync(227);
-      List<MCookie>? cookieList = [];
-      for (var cookie in settings!.cookiesList ?? []) {
-        if (cookie.host != host || (!host.contains(cookie.host))) {
-          cookieList.add(cookie);
-        }
-      }
-      cookieList.add(MCookie()
-        ..host = host
-        ..cookie = newCookie);
-      isar.writeTxnSync(
-          () => isar.settings.putSync(settings..cookiesList = cookieList));
+      final cookiesMap = loadData(PrefName.cookies);
+      cookiesMap.removeWhere((key, value) => key == host || host.contains(key));
+      cookiesMap[host] = newCookie;
+      saveData(PrefName.cookies, cookiesMap);
     }
     if (ua.isNotEmpty) {
-      final settings = isar.settings.getSync(227);
-      isar.writeTxnSync(() => isar.settings.putSync(settings!..userAgent = ua));
+     saveData(PrefName.userAgent, ua);
     }
   }
 
   static void deleteAllCookies(String url) {
-    final cookiesList = isar.settings.getSync(227)!.cookiesList ?? [];
-    List<MCookie>? cookieList = [];
-    for (var cookie in cookiesList) {
-      if (!(cookie.host == Uri.parse(url).host ||
-          Uri.parse(url).host.contains(cookie.host!))) {
-        cookieList.add(cookie);
-      }
-    }
-    isar.writeTxnSync(() => isar.settings
-        .putSync(isar.settings.getSync(227)!..cookiesList = cookieList));
+    final cookiesMap = loadData(PrefName.cookies);
+    final urlHost = Uri.parse(url).host;
+    cookiesMap.removeWhere((host, cookie) =>
+    host == urlHost || urlHost.contains(host));
+    saveData(PrefName.cookies, cookiesMap);
   }
 }
 
@@ -105,7 +93,7 @@ class MCookieManager extends InterceptorContract {
   }) async {
     final cookie = MClient.getCookiesPref(request.url.toString());
     if (cookie.isNotEmpty) {
-      final userAgent = isar.settings.getSync(227)!.userAgent!;
+      final userAgent = loadData(PrefName.userAgent);
       if (request.headers[HttpHeaders.cookieHeader] == null) {
         request.headers.addAll(cookie);
       }

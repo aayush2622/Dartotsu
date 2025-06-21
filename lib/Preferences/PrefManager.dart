@@ -1,13 +1,19 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:dartotsu/Preferences/IsarDataClasses/MediaSettings/MediaSettings.dart';
 import 'package:dartotsu/Preferences/IsarDataClasses/ShowResponse/ShowResponse.dart';
 import 'package:dartotsu/logger.dart';
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:isar/isar.dart';
+import 'package:path/path.dart' as path;
+import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 
-import '../StorageProvider.dart';
+import '../Api/Sources/Eval/dart/model/source_preference.dart';
+import '../Api/Sources/Model/Source.dart';
+import '../main.dart';
 import 'IsarDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
 import 'IsarDataClasses/DefaultReaderSettings/DafaultReaderSettings.dart';
 import 'IsarDataClasses/KeyValue/KeyValues.dart';
@@ -15,52 +21,35 @@ import 'IsarDataClasses/MalToken/MalToken.dart';
 
 part 'Preferences.dart';
 
-T loadData<T>(Pref<T> pref) => PrefManager.getVal(pref);
+T loadData<T>(Pref<T> pref) => PrefManager.getVal<T>(pref);
 
-T? loadCustomData<T>(String key) => PrefManager.getCustomVal(key);
+T? loadCustomData<T>(String key) => PrefManager.getCustomVal<T>(key);
 
-Future<Rx<T>?> loadLiveCustomData<T>(String key) =>
-    PrefManager.getLiveCustomVal(key);
-
-void saveData<T>(Pref<T> pref, T value) => PrefManager.setVal(pref, value);
+void saveData<T>(Pref<T> pref, T value) => PrefManager.setVal<T>(pref, value);
 
 void saveCustomData<T>(String key, T value) =>
-    PrefManager.setCustomVal(key, value);
+    PrefManager.setCustomVal<T>(key, value);
 
-void saveLiveCustomData<T>(String key, T value) =>
-    PrefManager.setLiveCustomVal(key, value);
+void removeData<T>(Pref<dynamic> pref) => PrefManager.removeVal<T>(pref);
 
-void removeData(Pref<dynamic> pref) => PrefManager.removeVal(pref);
-
-void removeCustomData(String key) => PrefManager.removeCustomVal(key);
+void removeCustomData<T>(String key) => PrefManager.removeCustomVal<T>(key);
 
 class Pref<T> {
-  final Location location;
   final String key;
   final T defaultValue;
 
-  const Pref(this.location, this.key, this.defaultValue);
-}
-
-enum Location {
-  General,
-  Irrelevant,
+  const Pref(this.key, this.defaultValue);
 }
 
 class PrefManager {
-  static late Isar _generalPreferences;
-  static late Isar _irrelevantPreferences;
+  static late Isar _dartotsuPreferences;
 
-  static final Map<Location, Map<String, dynamic>> cache = {
-    Location.General: {},
-    Location.Irrelevant: {}, // add more and ios will crash
-  };
+  static final Map<String, dynamic> cache = {};
 
   static Future<void> init() async {
     try {
-      final path = await StorageProvider.getDirectory(subPath: 'settings');
-      _generalPreferences = await _open('generalSettings', path!.path);
-      _irrelevantPreferences = await _open('irrelevantSettings', path.path);
+      final path = await getDirectory(subPath: 'settings');
+      _dartotsuPreferences = await _open('DartotsuSettings', path!.path);
       await _populateCache();
     } catch (e) {
       Logger.log('Error initializing preferences: $e');
@@ -68,155 +57,237 @@ class PrefManager {
   }
 
   static Future<Isar> _open(String name, String directory) async {
-    final isar = await Isar.open(
+    await requestPermission();
+    isar = Isar.openSync(
       [
         KeyValueSchema,
         ResponseTokenSchema,
         MediaSettingsSchema,
-        ShowResponseSchema
+        ShowResponseSchema,
+        SourceSchema,
+        SourcePreferenceSchema,
+        SourcePreferenceStringValueSchema,
       ],
       directory: directory,
       name: name,
       inspector: false,
     );
+
     return isar;
   }
 
-  static Future<void> _populateCache() async {
-    for (var location in Location.values) {
-      final isar = _getPrefBox(location);
-      final keyValues = await isar.keyValues.where().findAll();
-      for (var item in keyValues) {
-        cache[location]?[item.key] = item.value;
-      }
-      final selected = await isar.mediaSettings.where().findAll();
-      for (var item in selected) {
-        cache[location]?[item.key] = item;
-      }
-      final responseToken = await isar.responseTokens.where().findAll();
-      for (var item in responseToken) {
-        cache[location]?[item.key] = item;
-      }
-      final showResponse = await isar.showResponses.where().findAll();
-      for (var item in showResponse) {
-        cache[location]?[item.key] = item;
-      }
-    }
-  }
-
   static void setVal<T>(Pref<T> pref, T value) {
-    cache[pref.location]?[pref.key] = value;
-    final isar = _getPrefBox(pref.location);
-    return _writeToIsar(isar, pref.key, value);
+    cache[pref.key] = value;
+    return _writeToIsar(pref.key, value);
   }
 
   static T getVal<T>(Pref<T> pref) {
-    if (cache[pref.location]?.containsKey(pref.key) == true) {
-      return cache[pref.location]![pref.key] as T;
+    if (cache.containsKey(pref.key) == true) {
+      if (T == Map<String, String>) {
+        return (cache[pref.key] as Map<dynamic, dynamic>).cast<String, String>()
+            as T;
+      }
+      return cache[pref.key] as T;
     }
     return pref.defaultValue;
   }
 
-  static void setCustomVal<T>(
-    String key,
-    T value, {
-    Location location = Location.Irrelevant,
-  }) {
-    final isar = _getPrefBox(location);
-    cache[location]?[key] = value;
-    return _writeToIsar(isar, key, value);
+  static void setCustomVal<T>(String key, T value) {
+    cache[key] = value;
+    return _writeToIsar(key, value);
   }
 
   static T? getCustomVal<T>(
     String key, {
-    Location location = Location.Irrelevant,
+    T? defaultValue,
   }) {
-    if (cache[location]?.containsKey(key) == true) {
-      return cache[location]![key] as T;
+    if (cache.containsKey(key) == true) {
+      return cache[key] as T;
     }
     return null;
   }
 
-  static void setLiveCustomVal<T>(
+  static void removeVal<T>(Pref<dynamic> pref) async {
+    cache.remove(pref.key);
+    _removeFromIsar<T>(pref.key);
+  }
+
+  static void removeCustomVal<T>(
     String key,
-    T value, {
-    Location location = Location.Irrelevant,
-  }) async {
-    cache[location]?[key] = value;
-    final isar = _getPrefBox(location);
-    final keyValue = KeyValue()
-      ..key = key
-      ..value = value;
-    isar.keyValues.putSync(keyValue);
-  }
-
-  static Future<Rx<T>?> getLiveCustomVal<T>(
-    String key, {
-    Location location = Location.Irrelevant,
-  }) async {
-    final isar = _getPrefBox(location);
-    final stream = Rx(isar.keyValues.getByKeySync(key)?.value as T);
-    return stream;
-  }
-
-  static void removeVal(Pref<dynamic> pref) async {
-    cache[pref.location]?.remove(pref.key);
-    final isar = _getPrefBox(pref.location);
-    return isar.writeTxn(() => isar.keyValues.deleteByKey(pref.key));
-  }
-
-  static void removeCustomVal(
-    String key, {
-    Location location = Location.Irrelevant,
-  }) async {
-    cache[location]?.remove(key);
-    final isar = _getPrefBox(location);
-    return isar.writeTxn(() => isar.keyValues.deleteByKey(key));
-  }
-
-  static void removeEverything() async {}
-
-  static void addEverything(Map<Location, Map<String, dynamic>> cache) async {
-    for (var location in Location.values) {
-      final isar = _getPrefBox(location);
-      for (var key in cache[location]!.keys) {
-        final value = cache[location]![key];
-        cache[location]?[key] = value;
-        _writeToIsar(isar, key, value);
-      }
+  ) async {
+    if (cache.containsKey(key)) {
+      cache.remove(key);
     }
+    _removeFromIsar<T>(key);
   }
 
-  static void _writeToIsar<T>(Isar? isar, String key, T value) {
-    if (isar == null) return;
-
-    isar.writeTxn(() async {
+  static void _writeToIsar<T>(String key, T value) {
+    _dartotsuPreferences.writeTxnSync(() async {
       if (value is MediaSettings) {
         value.key = key;
-        isar.mediaSettings.put(value);
+        _dartotsuPreferences.mediaSettings.putSync(value);
       } else if (value is ResponseToken) {
         value.key = key;
-        isar.responseTokens.put(value);
+        _dartotsuPreferences.responseTokens.putSync(value);
       } else if (value is ShowResponse) {
         value.key = key;
-        isar.showResponses.put(value);
+        _dartotsuPreferences.showResponses.putSync(value);
       } else {
         final keyValue = KeyValue()
           ..key = key
           ..value = value;
-        isar.keyValues.put(keyValue);
+        _dartotsuPreferences.keyValues.putSync(keyValue);
       }
     });
   }
 
-  static Isar _getPrefBox(Location location) {
-    switch (location.name) {
-      case 'General':
-        return _generalPreferences;
-      case 'Irrelevant':
-        return _irrelevantPreferences;
-      default:
-        return _generalPreferences;
+  static Future<void> _removeFromIsar<T>(String key) async {
+    await _dartotsuPreferences.writeTxn(() async {
+      if (T == MediaSettings) {
+        await _dartotsuPreferences.mediaSettings.deleteByKey(key);
+      } else if (T == ResponseToken) {
+        await _dartotsuPreferences.responseTokens.deleteByKey(key);
+      } else if (T == ShowResponse) {
+        await _dartotsuPreferences.showResponses.deleteByKey(key);
+      } else {
+        await _dartotsuPreferences.keyValues.deleteByKey(key);
+      }
+    });
+  }
+
+  static Future<void> _populateCache() async {
+    final isar = _dartotsuPreferences;
+    final keyValues = await isar.keyValues.where().findAll();
+    for (var item in keyValues) {
+      cache[item.key] = item.value;
+    }
+    final selected = await isar.mediaSettings.where().findAll();
+    for (var item in selected) {
+      cache[item.key] = item;
+    }
+    final responseToken = await isar.responseTokens.where().findAll();
+    for (var item in responseToken) {
+      cache[item.key] = item;
+    }
+    final showResponse = await isar.showResponses.where().findAll();
+    for (var item in showResponse) {
+      cache[item.key] = item;
+    }
+  }
+
+  static Future<bool> requestPermission() async {
+    if (!Platform.isAndroid) {
+      return true;
+    }
+
+    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+    final androidInfo = await deviceInfo.androidInfo;
+    if (androidInfo.version.sdkInt <= 29) {
+      final storagePermission = Permission.storage;
+      if (await storagePermission.isGranted) {
+        return true;
+      }
+      final storageStatus = await storagePermission.request();
+      return storageStatus.isGranted;
+    }
+
+    final manageStoragePermission = Permission.manageExternalStorage;
+    if (await manageStoragePermission.isGranted) {
+      return true;
+    }
+    final manageStorageStatus = await manageStoragePermission.request();
+    return manageStorageStatus.isGranted;
+  }
+
+  static Future<Directory?> getTmpDirectory() async {
+    final gefaultDirectory = await getDirectory();
+    String dbDir = path.join(gefaultDirectory!.path, 'tmp');
+    await Directory(dbDir).create(recursive: true);
+    return Directory(dbDir);
+  }
+
+  static Future<Directory?> getDirectory({
+    String? subPath,
+    bool? useCustomPath = false,
+    bool? useSystemPath = true,
+  }) async {
+    String basePath;
+    final appDir = await getApplicationDocumentsDirectory();
+    final customPath = loadData(PrefName.customPath);
+
+    if (Platform.isIOS || Platform.isMacOS) {
+      final dbDir =
+          path.join(appDir.path, 'Dartotsu', subPath ?? '').fixSeparator;
+      await Directory(dbDir).create(recursive: true);
+      return Directory(dbDir);
+    }
+
+    if (Platform.isAndroid) {
+      DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+      final androidInfo = await deviceInfo.androidInfo;
+      if (androidInfo.version.sdkInt <= 29) {
+        var cDir = customPath.isNotEmpty
+            ? (customPath.endsWith('Dartotsu')
+                ? customPath
+                : path.join(customPath, 'Dartotsu'))
+            : '/storage/emulated/0/Dartotsu';
+        var dir = Directory(
+            (useSystemPath == true ? appDir.path : cDir).fixSeparator);
+        dir.createSync(recursive: true);
+        return dir;
+      } else {
+        var cDir = customPath.isNotEmpty
+            ? (customPath.endsWith('Dartotsu')
+                ? customPath
+                : path.join(customPath, 'Dartotsu'))
+            : '/storage/emulated/0/Dartotsu';
+        basePath = useSystemPath == true ? appDir.path : cDir;
+      }
+    } else {
+      var cDir = customPath.isNotEmpty
+          ? (customPath.endsWith('Dartotsu')
+              ? customPath
+              : path.join(customPath, 'Dartotsu'))
+          : appDir.path;
+      basePath = useSystemPath == true ? appDir.path : cDir;
+    }
+
+    final baseDirectory = Directory(basePath.fixSeparator);
+    if (!baseDirectory.existsSync()) {
+      baseDirectory.createSync(recursive: true);
+    }
+
+    final fullPath = path.join(basePath, subPath ?? '');
+    final fullDirectory = Directory(fullPath.fixSeparator);
+
+    if (subPath != null && subPath.isNotEmpty && !fullDirectory.existsSync()) {
+      fullDirectory.createSync(recursive: true);
+    }
+
+    return fullDirectory;
+  }
+
+  static Future<bool> videoPermission() async {
+    if (Platform.isAndroid) {
+      if (await Permission.videos.isDenied ||
+          await Permission.videos.isPermanentlyDenied) {
+        final state = await Permission.videos.request();
+        if (!state.isGranted) {
+          return false;
+        }
+      }
+      return true;
+    }
+    return true;
+  }
+}
+
+extension StringPathExtension on String {
+  String get fixSeparator {
+    if (Platform.isWindows) {
+      return replaceAll("/", path.separator);
+    } else {
+      return replaceAll("\\", "/");
     }
   }
 }

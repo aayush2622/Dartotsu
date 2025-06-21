@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:app_links/app_links.dart';
-import 'package:dartotsu/Api/Sources/Model/Manga.dart';
 import 'package:dartotsu/Functions/Extensions.dart';
 import 'package:dartotsu/Functions/Function.dart';
 import 'package:dartotsu/Screens/Login/LoginScreen.dart';
@@ -12,7 +11,6 @@ import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' as provider;
@@ -28,6 +26,7 @@ import 'package:shorebird_code_push/shorebird_code_push.dart';
 import 'package:window_manager/window_manager.dart';
 
 import 'Api/Discord/Discord.dart';
+import 'Api/Sources/Eval/dart/model/m_source.dart';
 import 'Api/TypeFactory.dart';
 import 'Functions/GetExtensions.dart';
 import 'Functions/RegisterProtocol/Api.dart';
@@ -37,7 +36,6 @@ import 'Screens/Home/HomeScreen.dart';
 import 'Screens/HomeNavbar.dart';
 import 'Services/MediaService.dart';
 import 'Services/ServiceSwitcher.dart';
-import 'StorageProvider.dart';
 import 'Theme/Colors.dart';
 import 'Theme/ThemeManager.dart';
 import 'Theme/ThemeProvider.dart';
@@ -51,12 +49,11 @@ void main(List<String> args) async {
   runZonedGuarded(
     () async {
       WidgetsFlutterBinding.ensureInitialized();
-      if (Platform.isLinux) {
-        if (runWebViewTitleBarWidget(args)) {
-          return;
-        }
+      if (Platform.isLinux && runWebViewTitleBarWidget(args)) {
+        return;
       }
       await init();
+
       runApp(
         provider.ProviderScope(
           child: MultiProvider(
@@ -71,15 +68,23 @@ void main(List<String> args) async {
     },
     (error, stackTrace) {
       Logger.log('Uncaught error: $error\n$stackTrace');
-      throw ('Uncaught error: $error\n$stackTrace');
     },
     zoneSpecification: ZoneSpecification(
-      print: (Zone self, ZoneDelegate parent, Zone zone, String message) {
-        Logger.log(message);
-        parent.print(zone, message);
+      print: (Zone self, ZoneDelegate parent, Zone zone, String line) {
+        Logger.log(line);
+        parent.print(zone, line);
       },
     ),
   );
+  FlutterError.onError = (FlutterErrorDetails details) {
+    FlutterError.presentError(details);
+    Logger.log('FlutterError: ${details.exception}\n${details.stack}');
+  };
+
+  PlatformDispatcher.instance.onError = (error, stack) {
+    Logger.log('PlatformDispatcher error: $error\n$stack');
+    return true;
+  };
 }
 
 Future init() async {
@@ -87,10 +92,7 @@ Future init() async {
     ['dar', 'anymex', 'sugoireads', 'mangayomi']
         .forEach(registerProtocolHandler);
   }
-  await StorageProvider.requestPermission();
-  await dotenv.load(fileName: ".env");
   await PrefManager.init();
-  await StorageProvider.initDB();
   await Logger.init();
   Extensions.init();
   MediaService.init();

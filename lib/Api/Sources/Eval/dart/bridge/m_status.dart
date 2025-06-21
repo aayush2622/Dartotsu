@@ -1,7 +1,6 @@
 import 'package:d4rt/d4rt.dart';
 
-import '../../../Model/Manga.dart';
-
+import '../../../../Simkl/Data/Media.dart';
 class MStatusBridge {
   final statusDefinition = BridgedEnumDefinition<Status>(
     name: 'MStatus',

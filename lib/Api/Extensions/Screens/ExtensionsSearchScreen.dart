@@ -8,7 +8,7 @@ import '../../../DataClass/SearchResults.dart';
 import '../../../Functions/GetExtensions.dart';
 import '../../../Services/Screens/BaseSearchScreen.dart';
 import '../../../logger.dart';
-import '../../Sources/Model/Manga.dart';
+import '../../Sources/Eval/dart/model/m_source.dart';
 import '../../Sources/Search/search.dart' as s;
 
 class ExtensionsSearchScreen extends BaseSearchScreen {

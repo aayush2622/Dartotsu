@@ -7,10 +7,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:isar/isar.dart';
 
-import '../../Api/Sources/Model/Manga.dart';
+import '../../Api/Sources/Eval/dart/model/m_source.dart';
 import '../../Functions/GetExtensions.dart';
 import '../../Preferences/PrefManager.dart';
-import '../../StorageProvider.dart';
 import '../../Theme/LanguageSwitcher.dart';
 import '../../Widgets/ScrollConfig.dart';
 import '../../main.dart';
@@ -40,8 +39,8 @@ class _BrowseScreenState extends ConsumerState<ExtensionScreen>
     });
   }
 
-  _checkPermission() async {
-    await StorageProvider.requestPermission();
+  Future<void> _checkPermission() async {
+    await PrefManager.requestPermission();
   }
 
   final _textEditingController = TextEditingController();

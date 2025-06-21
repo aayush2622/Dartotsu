@@ -5,7 +5,7 @@ import 'package:isar/isar.dart';
 
 import '../../../Preferences/PrefManager.dart';
 import '../../../main.dart';
-import '../Model/Manga.dart';
+import '../Eval/dart/model/m_source.dart';
 import '../Model/Source.dart';
 import '../http/m_client.dart';
 import '../lib.dart';

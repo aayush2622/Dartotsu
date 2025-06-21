@@ -12,7 +12,6 @@ import 'package:js_packer/js_packer.dart';
 import 'package:xpath_selector_html_parser/xpath_selector_html_parser.dart';
 
 import '../../../../../main.dart';
-import '../../../Model/Manga.dart';
 import '../../../anime_extractors/dood_extractor.dart';
 import '../../../anime_extractors/filemoon.dart';
 import '../../../anime_extractors/gogocdn_extractor.dart';
@@ -33,6 +32,7 @@ import '../../../cryptoaes/deobfuscator.dart';
 import '../../../cryptoaes/js_unpacker.dart';
 import '../../../reg_exp_matcher.dart';
 import 'document.dart';
+import 'm_manga.dart';
 
 class WordSet {
   final List<String> words;

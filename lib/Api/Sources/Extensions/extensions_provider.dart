@@ -2,7 +2,7 @@ import 'package:isar/isar.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../main.dart';
-import '../Model/Manga.dart';
+import '../Eval/dart/model/m_source.dart';
 import '../Model/Source.dart';
 
 part 'extensions_provider.g.dart';

@@ -15,7 +15,6 @@ import '../../DataClass/Media.dart';
 import '../../DataClass/Setting.dart';
 import '../../Preferences/IsarDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
 import '../../Preferences/PrefManager.dart';
-import '../../StorageProvider.dart';
 import '../../Theme/CustomColorPicker.dart';
 import '../../Theme/LanguageSwitcher.dart';
 import '../../Widgets/AlertDialogBuilder.dart';
@@ -313,7 +312,7 @@ List<Widget> playerSettings(
 }
 
 Future<void> openPlayer(BuildContext context) async {
-  if (!await StorageProvider.videoPermission()) return;
+  if (!await PrefManager.videoPermission()) return;
   final result = await FilePicker.platform.pickFiles(
     type: FileType.custom,
     allowedExtensions: vidMap,

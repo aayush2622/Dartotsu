@@ -49,3 +49,5 @@ class MSource {
         'notes': notes,
       };
 }
+
+enum ItemType { manga, anime, novel }

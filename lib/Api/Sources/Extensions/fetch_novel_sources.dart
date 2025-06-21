@@ -3,7 +3,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../Functions/GetExtensions.dart';
 import '../../../Preferences/PrefManager.dart';
-import '../Model/Manga.dart';
+import '../Eval/dart/model/m_source.dart';
 import 'GetSourceList.dart';
 
 part 'fetch_novel_sources.g.dart';

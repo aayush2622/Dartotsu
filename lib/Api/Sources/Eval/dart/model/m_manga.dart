@@ -1,6 +1,6 @@
 import 'package:dartotsu/Functions/string_extensions.dart';
 
-import '../../../Model/Manga.dart';
+
 import 'm_chapter.dart';
 
 class MManga {
@@ -74,4 +74,12 @@ class MManga {
       'chapters': chapters!.map((e) => e.toJson()).toList(),
     };
   }
+}
+enum Status {
+  ongoing,
+  completed,
+  canceled,
+  unknown,
+  onHiatus,
+  publishingFinished
 }

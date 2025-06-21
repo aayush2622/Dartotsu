@@ -1,7 +1,6 @@
 import 'package:isar/isar.dart';
 
 import '../Eval/dart/model/m_source.dart';
-import 'Manga.dart';
 
 part 'Source.g.dart';
 

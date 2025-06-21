@@ -11,7 +11,7 @@ import 'package:http_interceptor/http/intercepted_client.dart';
 import 'package:js_packer/js_packer.dart';
 import 'package:path/path.dart' as p;
 
-import '../../../../StorageProvider.dart';
+import '../../../../Preferences/PrefManager.dart';
 import '../../cryptoaes/js_unpacker.dart';
 import '../../http/m_client.dart';
 import '../dart/model/m_bridge.dart';
@@ -212,7 +212,7 @@ async function parseEpubChapter(bookName, url, headers, chapterTitle) {
                 : (args[3] as Map?)?.toMapStringDynamic
         : null;
 
-    final tmpDirectory = (await StorageProvider().getTmpDirectory())!;
+    final tmpDirectory = (await PrefManager.getTmpDirectory())!;
     if (Platform.isAndroid) {
       if (!(await File(p.join(tmpDirectory.path, ".nomedia")).exists())) {
         await File(p.join(tmpDirectory.path, ".nomedia")).create();
