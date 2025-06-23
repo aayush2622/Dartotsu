@@ -743,17 +743,40 @@ jobs:
           curl -H "Content-Type: application/json" \
                -d "{\"content\": \"${APK_MESSAGE}\n${WINDOWS_MESSAGE}\n${LINUX_MESSAGE}\n${IOS_MESSAGE}\n${MACOS_MESSAGE}\"}" \
                "${{ secrets.DISCORD_WEBHOOK_URL }}"
+               
       - name: Send Telegram Notification
         run: |
-          response=$(curl -sS -f -X POST \
-              "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKKEN}}/sendMessage" \
-              -F "chat_id=${{ secrets.TELEGRAM_CHANNEL_ID}}" \
-              -F "message_thread_id=${{secrets.TELEGRAM_THREAD_ID}}" \
+          MESSAGE="🎉 *Build Notification* 🎉"
+      
+          if [[ -n "${{ env.apk_message }}" ]]; then
+            MESSAGE="$MESSAGE
+            ${{ env.apk_message }}"
+          fi
+          if [[ -n "${{ env.windows_message }}" ]]; then
+            MESSAGE="$MESSAGE
+            ${{ env.windows_message }}"
+          fi
+          if [[ -n "${{ env.linux_message }}" ]]; then
+            MESSAGE="$MESSAGE
+            ${{ env.linux_message }}"
+          fi
+          if [[ -n "${{ env.ios_message }}" ]]; then
+            MESSAGE="$MESSAGE
+            ${{ env.ios_message }}"
+          fi
+          if [[ -n "${{ env.macos_message }}" ]]; then
+            MESSAGE="$MESSAGE
+            ${{ env.macos_message }}"
+          fi
+      
+          if [[ "$MESSAGE" != "🎉 *Build Notification* 🎉" ]]; then
+            curl -sS -f -X POST \
+              "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKKEN }}/sendMessage" \
+              -F "chat_id=${{ secrets.TELEGRAM_CHANNEL_ID }}" \
+              -F "message_thread_id=${{ secrets.TELEGRAM_THREAD_ID }}" \
               -F parse_mode="Markdown" \
               -F disable_notification=true \
-              -F "text=🎉 *Build Notification* 🎉
-            ${{ env.apk_message }}
-            ${{ env.windows_message }}
-            ${{ env.linux_message }}
-            ${{ env.ios_message }}
-            ${{ env.macos_message }}")
+              -F "text=$MESSAGE"
+          else
+            echo "No download links found. Skipping Telegram notification."
+          fi
