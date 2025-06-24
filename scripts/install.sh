@@ -87,6 +87,44 @@ progress_bar() {
     printf "] ${BOLD}%d%%${RESET}" $percentage
 }
 
+# Compare commit SHAs between repos
+compare_commits() {
+    local main_repo="aayush2622/Dartotsu"
+    local alpha_repo="grayankit/Dartotsu-Downloader"
+    
+    echo -ne "${CYAN}${ICON_INFO}${RESET} Checking commit synchronization..."
+    
+    # Get latest commits from both repos
+    local main_commit=$(curl -s "https://api.github.com/repos/${main_repo}/commits" | grep '"sha"' | head -1 | cut -d '"' -f 4 | cut -c1-7)
+    local main_date=$(curl -s "https://api.github.com/repos/${main_repo}/commits" | grep '"date"' | head -1 | cut -d '"' -f 4)
+    
+    local alpha_release=$(curl -s "https://api.github.com/repos/${alpha_repo}/releases/latest")
+    local alpha_tag=$(echo "$alpha_release" | grep '"tag_name"' | cut -d '"' -f 4)
+    local alpha_date=$(echo "$alpha_release" | grep '"published_at"' | cut -d '"' -f 4)
+    
+    echo -e " ${GREEN}${ICON_SUCCESS}${RESET}"
+    echo
+    echo -e "${BOLD}${BLUE}╭─ COMMIT COMPARISON ────────────────────────────────╮${RESET}"
+    echo -e "${BOLD}${BLUE}│${RESET} Main Repo (${main_repo}):           ${BLUE}${BOLD}│${RESET}"
+    echo -e "${BOLD}${BLUE}│${RESET}   Latest Commit: ${YELLOW}${main_commit}${RESET}                    ${BLUE}${BOLD}│${RESET}"
+    echo -e "${BOLD}${BLUE}│${RESET}   Date: ${GRAY}$(date -d "$main_date" '+%Y-%m-%d %H:%M:%S')${RESET}      ${BLUE}${BOLD}│${RESET}"
+    echo -e "${BOLD}${BLUE}│${RESET}                                                   ${BLUE}${BOLD}│${RESET}"
+    echo -e "${BOLD}${BLUE}│${RESET} Alpha Repo (${alpha_repo}): ${BLUE}${BOLD}│${RESET}"
+    echo -e "${BOLD}${BLUE}│${RESET}   Latest Tag: ${PURPLE}${alpha_tag}${RESET}                        ${BLUE}${BOLD}│${RESET}"
+    echo -e "${BOLD}${BLUE}│${RESET}   Date: ${GRAY}$(date -d "$alpha_date" '+%Y-%m-%d %H:%M:%S')${RESET}      ${BLUE}${BOLD}│${RESET}"
+    echo -e "${BOLD}${BLUE}│${RESET}                                                   ${BLUE}${BOLD}│${RESET}"
+    
+    # Check if commits match (simplified comparison)
+    if [[ "$alpha_tag" == *"$main_commit"* ]]; then
+        echo -e "${BOLD}${BLUE}│${RESET}   Status: ${GREEN}${ICON_SUCCESS} Synchronized${RESET}                ${BLUE}${BOLD}│${RESET}"
+    else
+        echo -e "${BOLD}${BLUE}│${RESET}   Status: ${YELLOW}${ICON_WARNING} Out of sync${RESET}                ${BLUE}${BOLD}│${RESET}"
+    fi
+    
+    echo -e "${BOLD}${BLUE}╰────────────────────────────────────────────────────╯${RESET}"
+    echo
+}
+
 # Animated text typing effect
 type_text() {
     local text="$1"
@@ -172,16 +210,18 @@ show_menu() {
 }
 
 # Version selection menu
+# Replace the existing version_menu function with:
 version_menu() {
     echo
     echo -e "${BOLD}${CYAN}┌─ VERSION SELECTION ────────────────────────────────┐${RESET}"
     echo -e "${BOLD}${CYAN}│${RESET}                                                   ${CYAN}${BOLD}│${RESET}"
     echo -e "${BOLD}${CYAN}│${RESET}  ${ICON_ROCKET} ${GREEN}${BOLD}[S]${RESET} Stable Release ${GRAY}(Recommended)${RESET}          ${CYAN}${BOLD}│${RESET}"
     echo -e "${BOLD}${CYAN}│${RESET}  ${ICON_SPARKLES} ${YELLOW}${BOLD}[P]${RESET} Pre-release ${GRAY}(Latest Features)${RESET}        ${CYAN}${BOLD}│${RESET}"
+    echo -e "${BOLD}${CYAN}│${RESET}  ${ICON_SPARKLES} ${PURPLE}${BOLD}[A]${RESET} Alpha Build ${GRAY}(Experimental)${RESET}           ${CYAN}${BOLD}│${RESET}"
     echo -e "${BOLD}${CYAN}│${RESET}                                                   ${CYAN}${BOLD}│${RESET}"
     echo -e "${BOLD}${CYAN}└────────────────────────────────────────────────────┘${RESET}"
     echo
-    echo -ne "${BOLD}${WHITE}Your choice${RESET} ${GRAY}(S/P)${RESET}: "
+    echo -ne "${BOLD}${WHITE}Your choice${RESET} ${GRAY}(S/P/A)${RESET}: "
 }
 
 # =============================================================================
@@ -439,20 +479,29 @@ install_app() {
     read -n 1 ANSWER
     echo
     
-    case "${ANSWER,,}" in
-        p)
-            API_URL="https://api.github.com/repos/$OWNER/$REPO/releases"
-            info_msg "Fetching pre-release versions..."
-            ;;
-        s|"")
-            API_URL="https://api.github.com/repos/$OWNER/$REPO/releases/latest"
-            info_msg "Fetching stable release..."
-            ;;
-        *)
-            warn_msg "Invalid selection, defaulting to stable release..."
-            API_URL="https://api.github.com/repos/$OWNER/$REPO/releases/latest"
-            ;;
-    esac
+# Replace the case statement with:
+case "${ANSWER,,}" in
+    p)
+        API_URL="https://api.github.com/repos/$OWNER/$REPO/releases"
+        info_msg "Fetching pre-release versions..."
+        ;;
+    a)
+        OWNER="grayankit"
+        REPO="Dartotsu-Downloader"
+        API_URL="https://api.github.com/repos/$OWNER/$REPO/releases/latest"
+        info_msg "Fetching alpha build..."
+        echo
+        compare_commits
+        ;;
+    s|"")
+        API_URL="https://api.github.com/repos/$OWNER/$REPO/releases/latest"
+        info_msg "Fetching stable release..."
+        ;;
+    *)
+        warn_msg "Invalid selection, defaulting to stable release..."
+        API_URL="https://api.github.com/repos/$OWNER/$REPO/releases/latest"
+        ;;
+esac
     
     # Fetch release info
     ASSET_URL=$(curl -s "$API_URL" | grep browser_download_url | cut -d '"' -f 4 | grep .zip | head -n 1)
