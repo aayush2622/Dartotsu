@@ -330,7 +330,7 @@ check_dependencies() {
     if command -v pkg-config >/dev/null 2>&1; then
         # Check for WebKit2GTK with fallback to older version
         if ! pkg-config --exists webkit2gtk-4.1 2>/dev/null; then
-            if ! pkg-config --exists webkit2gtk-3.0 2>/dev/null; then
+            if ! pkg-config --exists webkit2gtk-4.1-0 2>/dev/null; then
                 missing_deps+=("webkit2gtk")
             fi
         fi
@@ -387,7 +387,7 @@ install_packages() {
         install_cmd="sudo apt install -y"
         
         # Map library names to Ubuntu/Debian package names
-        deps=("${deps[@]/webkit2gtk/libwebkit2gtk-4.1}")
+        deps=("${deps[@]/webkit2gtk/libwebkit2gtk-4.1-0}")
         deps=("${deps[@]/gtk3/libgtk-3-dev}")
         deps=("${deps[@]/pkg-config/pkg-config}")
         
@@ -396,7 +396,7 @@ install_packages() {
         install_cmd="sudo dnf install -y"
         
         # Map library names to Fedora package names
-        deps=("${deps[@]/webkit2gtk/webkit2gtk4.1}")
+        deps=("${deps[@]/webkit2gtk/webkit2gtk4.1-0}")
         deps=("${deps[@]/gtk3/gtk3-devel}")
         deps=("${deps[@]/pkg-config/pkgconf-devel}")
         
