@@ -304,6 +304,58 @@ version_menu() {
 }
 
 # =============================================================================
+# 🐚 SHELL ALIAS MANAGEMENT
+# =============================================================================
+
+detect_shell_rc() {
+  local shell_name
+  shell_name=$(basename "$SHELL")
+  case "$shell_name" in
+    bash) echo "$HOME/.bashrc" ;;
+    zsh) echo "$HOME/.zshrc" ;;
+    fish) echo "$HOME/.config/fish/config.fish" ;; 
+    *) echo "$HOME/.profile" ;; 
+  esac
+}
+
+add_updater_alias() {
+  local shell_rc
+  shell_rc=$(detect_shell_rc)
+  local alias_line="alias dartotsu-updater='bash <(curl -s https://raw.githubusercontent.com/aayush2622/Dartotsu/main/scripts/install.sh)'"
+
+  if grep -Fxq "$alias_line" "$shell_rc" 2>/dev/null; then
+    echo -ne "${YELLOW}${ICON_WARNING}${RESET} Alias already exists in $(basename "$shell_rc"). Do you want to remove it? [y/N]: "
+    read -r remove_response
+    case "$remove_response" in
+      [yY][eE][sS]|[yY])
+        sed -i "\|$alias_line|d" "$shell_rc"
+        echo -e " ${GREEN}${ICON_SUCCESS} Alias removed from $(basename "$shell_rc")${RESET}"
+        ;;
+      *)
+        echo -e " ${CYAN}${ICON_INFO} Keeping existing alias.${RESET}"
+        ;;
+    esac
+  else
+    echo -ne "${CYAN}${ICON_MAGIC}${RESET} Do you want to add the 'dartotsu-updater' alias to $(basename "$shell_rc")? [y/N]: "
+    read -r add_response
+    case "$add_response" in
+      [yY][eE][sS]|[yY])
+        echo "$alias_line" >> "$shell_rc"
+        echo -e " ${GREEN}${ICON_SUCCESS} Alias added to $(basename "$shell_rc")${RESET}"
+        info_msg "You can now run '${BOLD}dartotsu-updater${RESET}' to update anytime!"
+        info_msg "Run '${BOLD}source $shell_rc${RESET}' or restart your terminal to activate the alias"
+        ;;
+      *)
+        echo -e " ${YELLOW}${ICON_WARNING} Skipped adding alias${RESET}"
+        ;;
+    esac
+  fi
+}
+
+
+
+
+# =============================================================================
 # 🛠️ ENHANCED DEPENDENCY MANAGEMENT
 # =============================================================================
 
@@ -655,6 +707,9 @@ EOL
         update-desktop-database "$HOME/.local/share/applications" 2>/dev/null
     fi
     echo -e " ${GREEN}${ICON_SUCCESS} Done!${RESET}"
+
+    # Create shell alias for easy updates
+    add_updater_alias
     
     # Cleanup
     rm -f "/tmp/$APP_NAME.zip"
@@ -733,6 +788,9 @@ update_app() {
     info_msg "Updating $APP_NAME to the latest version..."
     echo
     install_app
+    
+    # Ensure alias is still present after update
+    add_updater_alias
 }
 
 # =============================================================================
