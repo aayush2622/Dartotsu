@@ -33,25 +33,31 @@ BOLD='\033[1m'
 DIM='\033[2m'
 RESET='\033[0m'
 
-# Gradient colors
-GRAD1='\033[38;5;198m'  # Hot pink
-GRAD2='\033[38;5;199m'  # Pink
-GRAD3='\033[38;5;200m'  # Light pink
-GRAD4='\033[38;5;135m'  # Purple
-GRAD5='\033[38;5;99m'   # Dark purple
-GRAD6='\033[38;5;63m'   # Blue purple
+# Dartotsu gradient colors (teal to cyan)
+GRAD1='\033[38;5;30m'   # Dark teal
+GRAD2='\033[38;5;36m'   # Medium teal
+GRAD3='\033[38;5;42m'   # Teal
+GRAD4='\033[38;5;48m'   # Light teal
+GRAD5='\033[38;5;51m'   # Cyan
+GRAD6='\033[38;5;87m'   # Bright cyan
 
 # Icons
-ICON_SUCCESS="✅"
-ICON_ERROR="❌"
-ICON_WARNING="⚠️ "
-ICON_INFO="ℹ️ "
-ICON_ROCKET="🚀"
-ICON_DOWNLOAD="⬇️ "
-ICON_INSTALL="📦"
-ICON_UNINSTALL="🗑️ "
-ICON_UPDATE="🔄"
-ICON_SPARKLES="✨"
+ICON_FIRE="🔥"
+ICON_LIGHTNING="⚡"
+ICON_STAR="⭐"
+ICON_DIAMOND="💎"
+ICON_BOMB="💣"
+ICON_SKULL="💀"
+ICON_ROBOT="🤖"
+ICON_ALIEN="👽"
+ICON_GHOST="👻"
+ICON_MAGIC="🪄"
+ICON_CRYSTAL="🔮"
+ICON_SWORD="⚔️"
+ICON_SHIELD="🛡️"
+ICON_CROWN="👑"
+ICON_COMET="☄️"
+ICON_GALAXY="🌌"
 
 # =============================================================================
 # 🎭 ANIMATION & UI FUNCTIONS
@@ -81,10 +87,22 @@ progress_bar() {
     local filled=$((current * width / total))
     local empty=$((width - filled))
     
-    printf "\r${BOLD}Progress: ${RESET}["
-    printf "${GREEN}%*s${RESET}" $filled | tr ' ' '█'
-    printf "%*s" $empty | tr ' ' '░'
-    printf "] ${BOLD}%d%%${RESET}" $percentage
+    # Color gradient based on progress
+    local color=""
+    if [ $percentage -lt 25 ]; then
+        color="${RED}"
+    elif [ $percentage -lt 50 ]; then
+        color="${YELLOW}"
+    elif [ $percentage -lt 75 ]; then
+        color="${CYAN}"
+    else
+        color="${GREEN}"
+    fi
+    
+    printf "\r${BOLD}${ICON_LIGHTNING} Progress: ${RESET}["
+    printf "${color}%*s${RESET}" $filled | tr ' ' '█'
+    printf "${GRAY}%*s${RESET}" $empty | tr ' ' '░'
+    printf "] ${BOLD}${color}%d%%${RESET} ${ICON_FIRE}" $percentage
 }
 
 # Compare commit SHAs between repos
@@ -92,36 +110,67 @@ compare_commits() {
     local main_repo="aayush2622/Dartotsu"
     local alpha_repo="grayankit/Dartotsu-Downloader"
     
-    echo -ne "${CYAN}${ICON_INFO}${RESET} Checking commit synchronization..."
+    echo
+    echo -ne "${CYAN}${ICON_ROBOT}${RESET} ${BOLD}Initiating quantum commit analysis${RESET}"
+    for i in {1..5}; do
+        sleep 0.3
+        echo -ne "${CYAN}.${RESET}"
+    done
+    echo -e " ${GREEN}${ICON_LIGHTNING}${RESET}"
     
-    # Get latest commits from both repos
+    # Matrix-style loading
+    echo -e "${GREEN}${DIM}> Accessing GitHub API...${RESET}"
+    sleep 0.5
+    echo -e "${GREEN}${DIM}> Scanning commit trees...${RESET}"
+    sleep 0.5
+    echo -e "${GREEN}${DIM}> Cross-referencing SHA hashes...${RESET}"
+    sleep 0.5
+    
+    # Get data
     local main_commit=$(curl -s "https://api.github.com/repos/${main_repo}/commits" | grep '"sha"' | head -1 | cut -d '"' -f 4 | cut -c1-7)
     local main_date=$(curl -s "https://api.github.com/repos/${main_repo}/commits" | grep '"date"' | head -1 | cut -d '"' -f 4)
+    local main_author=$(curl -s "https://api.github.com/repos/${main_repo}/commits" | grep '"name"' | head -1 | cut -d '"' -f 4)
     
     local alpha_release=$(curl -s "https://api.github.com/repos/${alpha_repo}/releases/latest")
     local alpha_tag=$(echo "$alpha_release" | grep '"tag_name"' | cut -d '"' -f 4)
     local alpha_date=$(echo "$alpha_release" | grep '"published_at"' | cut -d '"' -f 4)
     
-    echo -e " ${GREEN}${ICON_SUCCESS}${RESET}"
     echo
-    echo -e "${BOLD}${BLUE}╭─ COMMIT COMPARISON ────────────────────────────────╮${RESET}"
-    echo -e "${BOLD}${BLUE}│${RESET} Main Repo (${main_repo}):           ${BLUE}${BOLD}│${RESET}"
-    echo -e "${BOLD}${BLUE}│${RESET}   Latest Commit: ${YELLOW}${main_commit}${RESET}                    ${BLUE}${BOLD}│${RESET}"
-    echo -e "${BOLD}${BLUE}│${RESET}   Date: ${GRAY}$(date -d "$main_date" '+%Y-%m-%d %H:%M:%S')${RESET}      ${BLUE}${BOLD}│${RESET}"
-    echo -e "${BOLD}${BLUE}│${RESET}                                                   ${BLUE}${BOLD}│${RESET}"
-    echo -e "${BOLD}${BLUE}│${RESET} Alpha Repo (${alpha_repo}): ${BLUE}${BOLD}│${RESET}"
-    echo -e "${BOLD}${BLUE}│${RESET}   Latest Tag: ${PURPLE}${alpha_tag}${RESET}                        ${BLUE}${BOLD}│${RESET}"
-    echo -e "${BOLD}${BLUE}│${RESET}   Date: ${GRAY}$(date -d "$alpha_date" '+%Y-%m-%d %H:%M:%S')${RESET}      ${BLUE}${BOLD}│${RESET}"
-    echo -e "${BOLD}${BLUE}│${RESET}                                                   ${BLUE}${BOLD}│${RESET}"
+    echo -e "${BOLD}${PURPLE}╔═══════════════════════════════════════════════════════════════╗${RESET}"
+    echo -e "${BOLD}${PURPLE}║${RESET}                    ${ICON_CRYSTAL} COMMIT MATRIX ${ICON_CRYSTAL}                    ${PURPLE}${BOLD}║${RESET}"
+    echo -e "${BOLD}${PURPLE}╠═══════════════════════════════════════════════════════════════╣${RESET}"
+    echo -e "${BOLD}${PURPLE}║${RESET}                                                         ${PURPLE}${BOLD}║${RESET}"
+    echo -e "${BOLD}${PURPLE}║${RESET} ${ICON_GALAXY} ${BOLD}MAIN REPOSITORY${RESET} ${GRAY}(${main_repo})${RESET}          ${PURPLE}${BOLD}║${RESET}"
+    echo -e "${BOLD}${PURPLE}║${RESET}   ${ICON_DIAMOND} Commit SHA: ${YELLOW}${BOLD}${main_commit}${RESET}                           ${PURPLE}${BOLD}║${RESET}"
+    echo -e "${BOLD}${PURPLE}║${RESET}   ${ICON_STAR} Author: ${CYAN}${main_author}${RESET}                              ${PURPLE}${BOLD}║${RESET}"
+    echo -e "${BOLD}${PURPLE}║${RESET}   ${ICON_COMET} Timestamp: ${GRAY}$(date -d "$main_date" '+%Y-%m-%d %H:%M:%S UTC')${RESET}  ${PURPLE}${BOLD}║${RESET}"
+    echo -e "${BOLD}${PURPLE}║${RESET}                                                         ${PURPLE}${BOLD}║${RESET}"
+    echo -e "${BOLD}${PURPLE}║${RESET} ${ICON_ALIEN} ${BOLD}ALPHA REPOSITORY${RESET} ${GRAY}(${alpha_repo})${RESET} ${PURPLE}${BOLD}║${RESET}"
+    echo -e "${BOLD}${PURPLE}║${RESET}   ${ICON_BOMB} Release Tag: ${PURPLE}${BOLD}${alpha_tag}${RESET}                            ${PURPLE}${BOLD}║${RESET}"
+    echo -e "${BOLD}${PURPLE}║${RESET}   ${ICON_GHOST} Published: ${GRAY}$(date -d "$alpha_date" '+%Y-%m-%d %H:%M:%S UTC')${RESET}    ${PURPLE}${BOLD}║${RESET}"
+    echo -e "${BOLD}${PURPLE}║${RESET}                                                         ${PURPLE}${BOLD}║${RESET}"
     
-    # Check if commits match (simplified comparison)
+    # Sync status with epic effects
     if [[ "$alpha_tag" == *"$main_commit"* ]]; then
-        echo -e "${BOLD}${BLUE}│${RESET}   Status: ${GREEN}${ICON_SUCCESS} Synchronized${RESET}                ${BLUE}${BOLD}│${RESET}"
+        echo -e "${BOLD}${PURPLE}║${RESET}   ${ICON_MAGIC} SYNC STATUS: ${GREEN}${BOLD}${ICON_FIRE} PERFECTLY SYNCHRONIZED ${ICON_FIRE}${RESET}   ${PURPLE}${BOLD}║${RESET}"
+        echo -e "${BOLD}${PURPLE}║${RESET}   ${GREEN}${ICON_LIGHTNING} Repositories are in perfect harmony! ${ICON_LIGHTNING}${RESET}           ${PURPLE}${BOLD}║${RESET}"
     else
-        echo -e "${BOLD}${BLUE}│${RESET}   Status: ${YELLOW}${ICON_WARNING} Out of sync${RESET}                ${BLUE}${BOLD}│${RESET}"
+        echo -e "${BOLD}${PURPLE}║${RESET}   ${ICON_CRYSTAL} SYNC STATUS: ${YELLOW}${BOLD}${ICON_SWORD} DIVERGED TIMELINES ${ICON_SWORD}${RESET}     ${PURPLE}${BOLD}║${RESET}"
+        echo -e "${BOLD}${PURPLE}║${RESET}   ${YELLOW}${ICON_SKULL} Alpha may contain different features ${ICON_SKULL}${RESET}            ${PURPLE}${BOLD}║${RESET}"
     fi
     
-    echo -e "${BOLD}${BLUE}╰────────────────────────────────────────────────────╯${RESET}"
+    echo -e "${BOLD}${PURPLE}║${RESET}                                                         ${PURPLE}${BOLD}║${RESET}"
+    echo -e "${BOLD}${PURPLE}╚═══════════════════════════════════════════════════════════════╝${RESET}"
+    echo
+    
+    # Cool countdown
+    echo -ne "${BOLD}${CYAN}Preparing alpha download in: ${RESET}"
+    for i in 3 2 1; do
+        echo -ne "${RED}${BOLD}$i${RESET}"
+        sleep 0.8
+        echo -ne "\b \b"
+    done
+    echo -e "${GREEN}${BOLD}GO! ${ICON_ROCKET}${RESET}"
     echo
 }
 
@@ -140,6 +189,13 @@ type_text() {
 show_banner() {
     clear
     echo
+    # Animated border effect
+    for i in {1..3}; do
+        echo -e "${GRAD1}════════════════════════════════════════════════════════════════════════${RESET}"
+        sleep 0.05
+        printf "\033[1A\033[K"
+    done
+    
     echo -e "${GRAD1}  ██████╗  █████╗ ██████╗ ████████╗ ██████╗ ████████╗███████╗██╗   ██╗${RESET}"
     echo -e "${GRAD2}  ██╔══██╗██╔══██╗██╔══██╗╚══██╔══╝██╔═══██╗╚══██╔══╝██╔════╝██║   ██║${RESET}"
     echo -e "${GRAD3}  ██║  ██║███████║██████╔╝   ██║   ██║   ██║   ██║   ███████╗██║   ██║${RESET}"
@@ -147,8 +203,9 @@ show_banner() {
     echo -e "${GRAD5}  ██████╔╝██║  ██║██║  ██║   ██║   ╚██████╔╝   ██║   ███████║╚██████╔╝${RESET}"
     echo -e "${GRAD6}  ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝    ╚═════╝    ╚═╝   ╚══════╝ ╚═════╝ ${RESET}"
     echo
-    echo -e "${CYAN}${BOLD}                    The Ultimate Anime & Manga Experience${RESET}"
+    echo -e "${CYAN}${BOLD}                 ${ICON_FIRE}${ICON_LIGHTNING} The Ultimate Anime & Manga Experience ${ICON_LIGHTNING}${ICON_FIRE}${RESET}"
     echo -e "${GRAY}                    ═══════════════════════════════════════${RESET}"
+    echo -e "${PURPLE}${DIM}                           ${ICON_GALAXY} Powered by Dreams ${ICON_GALAXY}${RESET}"
     echo
 }
 
@@ -197,31 +254,53 @@ warn_msg() {
 
 # Stylized menu
 show_menu() {
-    echo -e "${BOLD}${PURPLE}┌─ SELECT ACTION ────────────────────────────────────┐${RESET}"
-    echo -e "${BOLD}${PURPLE}│${RESET}                                                   ${PURPLE}${BOLD}│${RESET}"
-    echo -e "${BOLD}${PURPLE}│${RESET}  ${ICON_INSTALL} ${GREEN}${BOLD}[I]${RESET} Install Dartotsu                      ${PURPLE}${BOLD}│${RESET}"
-    echo -e "${BOLD}${PURPLE}│${RESET}  ${ICON_UPDATE} ${YELLOW}${BOLD}[U]${RESET} Update Dartotsu                       ${PURPLE}${BOLD}│${RESET}"
-    echo -e "${BOLD}${PURPLE}│${RESET}  ${ICON_UNINSTALL} ${RED}${BOLD}[R]${RESET} Remove Dartotsu                       ${PURPLE}${BOLD}│${RESET}"
-    echo -e "${BOLD}${PURPLE}│${RESET}  ${ICON_SPARKLES} ${CYAN}${BOLD}[Q]${RESET} Quit                                  ${PURPLE}${BOLD}│${RESET}"
-    echo -e "${BOLD}${PURPLE}│${RESET}                                                   ${PURPLE}${BOLD}│${RESET}"
-    echo -e "${BOLD}${PURPLE}└────────────────────────────────────────────────────┘${RESET}"
+    # Glitch effect
+    echo -e "${GRAD1}█${GRAD2}█${GRAD3}█${GRAD4}█${GRAD5}█${GRAD6}█${RESET} ${BOLD}DARTOTSU CONTROL PANEL${RESET} ${GRAD6}█${GRAD5}█${GRAD4}█${GRAD3}█${GRAD2}█${GRAD1}█${RESET}"
     echo
-    echo -ne "${BOLD}${WHITE}Your choice${RESET} ${GRAY}(I/U/R/Q)${RESET}: "
+    echo -e "${BOLD}${CYAN}╔═══════════════════════════════════════════════════════╗${RESET}"
+    echo -e "${BOLD}${CYAN}║${RESET}                                                     ${CYAN}${BOLD}║${RESET}"
+    echo -e "${BOLD}${CYAN}║${RESET}  ${ICON_ROBOT} ${GREEN}${BOLD}[I]${RESET} ${ICON_DOWNLOAD} Install Dartotsu ${GRAY}(Get Started)${RESET}      ${CYAN}${BOLD}║${RESET}"
+    echo -e "${BOLD}${CYAN}║${RESET}      ${GREEN}Deploy the ultimate anime experience${RESET}        ${CYAN}${BOLD}║${RESET}"
+    echo -e "${BOLD}${CYAN}║${RESET}                                                     ${CYAN}${BOLD}║${RESET}"
+    echo -e "${BOLD}${CYAN}║${RESET}  ${ICON_LIGHTNING} ${YELLOW}${BOLD}[U]${RESET} ${ICON_UPDATE} Update Dartotsu ${GRAY}(Stay Current)${RESET}     ${CYAN}${BOLD}║${RESET}"
+    echo -e "${BOLD}${CYAN}║${RESET}      ${YELLOW}Upgrade to the latest and greatest${RESET}         ${CYAN}${BOLD}║${RESET}"
+    echo -e "${BOLD}${CYAN}║${RESET}                                                     ${CYAN}${BOLD}║${RESET}"
+    echo -e "${BOLD}${CYAN}║${RESET}  ${ICON_BOMB} ${RED}${BOLD}[R]${RESET} ${ICON_UNINSTALL} Remove Dartotsu ${GRAY}(Nuclear Option)${RESET}   ${CYAN}${BOLD}║${RESET}"
+    echo -e "${BOLD}${CYAN}║${RESET}      ${RED}Complete annihilation of installation${RESET}       ${CYAN}${BOLD}║${RESET}"
+    echo -e "${BOLD}${CYAN}║${RESET}                                                     ${CYAN}${BOLD}║${RESET}"
+    echo -e "${BOLD}${CYAN}║${RESET}  ${ICON_GHOST} ${CYAN}${BOLD}[Q]${RESET} ${ICON_SPARKLES} Quit ${GRAY}(Escape the Matrix)${RESET}            ${CYAN}${BOLD}║${RESET}"
+    echo -e "${BOLD}${CYAN}║${RESET}      ${CYAN}Return to the real world${RESET}                   ${CYAN}${BOLD}║${RESET}"
+    echo -e "${BOLD}${CYAN}║${RESET}                                                     ${CYAN}${BOLD}║${RESET}"
+    echo -e "${BOLD}${CYAN}╚═══════════════════════════════════════════════════════╝${RESET}"
+    echo
+    echo -ne "${BOLD}${WHITE}Enter the matrix${RESET} ${GRAY}(I/U/R/Q)${RESET} ${ICON_MAGIC}: "
 }
 
 # Version selection menu
-# Replace the existing version_menu function with:
 version_menu() {
     echo
-    echo -e "${BOLD}${CYAN}┌─ VERSION SELECTION ────────────────────────────────┐${RESET}"
-    echo -e "${BOLD}${CYAN}│${RESET}                                                   ${CYAN}${BOLD}│${RESET}"
-    echo -e "${BOLD}${CYAN}│${RESET}  ${ICON_ROCKET} ${GREEN}${BOLD}[S]${RESET} Stable Release ${GRAY}(Recommended)${RESET}          ${CYAN}${BOLD}│${RESET}"
-    echo -e "${BOLD}${CYAN}│${RESET}  ${ICON_SPARKLES} ${YELLOW}${BOLD}[P]${RESET} Pre-release ${GRAY}(Latest Features)${RESET}        ${CYAN}${BOLD}│${RESET}"
-    echo -e "${BOLD}${CYAN}│${RESET}  ${ICON_SPARKLES} ${PURPLE}${BOLD}[A]${RESET} Alpha Build ${GRAY}(Experimental)${RESET}           ${CYAN}${BOLD}│${RESET}"
-    echo -e "${BOLD}${CYAN}│${RESET}                                                   ${CYAN}${BOLD}│${RESET}"
-    echo -e "${BOLD}${CYAN}└────────────────────────────────────────────────────┘${RESET}"
+    # Animated title
+    for char in "V" "E" "R" "S" "I" "O" "N" " " "S" "E" "L" "E" "C" "T" "I" "O" "N"; do
+        echo -ne "${BOLD}${PURPLE}$char${RESET}"
+        sleep 0.05
+    done
     echo
-    echo -ne "${BOLD}${WHITE}Your choice${RESET} ${GRAY}(S/P/A)${RESET}: "
+    echo
+    
+    echo -e "${BOLD}${GRAD2}╔═══════════════════════════════════════════════════════╗${RESET}"
+    echo -e "${BOLD}${GRAD2}║${RESET}                                                     ${GRAD2}${BOLD}║${RESET}"
+    echo -e "${BOLD}${GRAD2}║${RESET}  ${ICON_CROWN} ${GREEN}${BOLD}[S]${RESET} Stable Release ${GRAY}(Battle-Tested)${RESET}         ${GRAD2}${BOLD}║${RESET}"
+    echo -e "${BOLD}${GRAD2}║${RESET}      ${ICON_SHIELD} Rock solid, enterprise ready            ${GRAD2}${BOLD}║${RESET}"
+    echo -e "${BOLD}${GRAD2}║${RESET}                                                     ${GRAD2}${BOLD}║${RESET}"
+    echo -e "${BOLD}${GRAD2}║${RESET}  ${ICON_LIGHTNING} ${YELLOW}${BOLD}[P]${RESET} Pre-release ${GRAY}(Bleeding Edge)${RESET}          ${GRAD2}${BOLD}║${RESET}"
+    echo -e "${BOLD}${GRAD2}║${RESET}      ${ICON_FIRE} Latest features, some bugs possible     ${GRAD2}${BOLD}║${RESET}"
+    echo -e "${BOLD}${GRAD2}║${RESET}                                                     ${GRAD2}${BOLD}║${RESET}"
+    echo -e "${BOLD}${GRAD2}║${RESET}  ${ICON_BOMB} ${PURPLE}${BOLD}[A]${RESET} Alpha Build ${GRAY}(Danger Zone!)${RESET}            ${GRAD2}${BOLD}║${RESET}"
+    echo -e "${BOLD}${GRAD2}║${RESET}      ${ICON_SKULL} Experimental, use at your own risk     ${GRAD2}${BOLD}║${RESET}"
+    echo -e "${BOLD}${GRAD2}║${RESET}                                                     ${GRAD2}${BOLD}║${RESET}"
+    echo -e "${BOLD}${GRAD2}╚═══════════════════════════════════════════════════════╝${RESET}"
+    echo
+    echo -ne "${BOLD}${WHITE}Choose your destiny${RESET} ${GRAY}(S/P/A)${RESET} ${ICON_MAGIC}: "
 }
 
 # =============================================================================
