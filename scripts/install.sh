@@ -242,6 +242,7 @@ check_dependencies() {
     command -v curl >/dev/null 2>&1 || missing_deps+=("curl")
     command -v unzip >/dev/null 2>&1 || missing_deps+=("unzip")
     command -v wget >/dev/null 2>&1 || missing_deps+=("wget")
+    command -v mpv >/dev/null 2>&1 || missing_deps+=("mpv")
     
     # Check optional tools
     command -v git >/dev/null 2>&1 || optional_deps+=("git")
@@ -307,7 +308,7 @@ install_packages() {
         install_cmd="sudo apt install -y"
         
         # Map library names to Ubuntu/Debian package names
-        deps=("${deps[@]/webkit2gtk/libwebkit2gtk-4.1-dev}")
+        deps=("${deps[@]/webkit2gtk/libwebkit2gtk-4.1}")
         deps=("${deps[@]/gtk3/libgtk-3-dev}")
         deps=("${deps[@]/pkg-config/pkg-config}")
         
@@ -316,7 +317,7 @@ install_packages() {
         install_cmd="sudo dnf install -y"
         
         # Map library names to Fedora package names
-        deps=("${deps[@]/webkit2gtk/webkit2gtk4.1-devel}")
+        deps=("${deps[@]/webkit2gtk/webkit2gtk4.1}")
         deps=("${deps[@]/gtk3/gtk3-devel}")
         deps=("${deps[@]/pkg-config/pkgconf-devel}")
         
