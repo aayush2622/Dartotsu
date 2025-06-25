@@ -382,7 +382,7 @@ check_dependencies() {
     if command -v pkg-config >/dev/null 2>&1; then
         # Check for WebKit2GTK with fallback to older version
         if ! pkg-config --exists webkit2gtk-4.1 2>/dev/null; then
-            if ! pkg-config --exists webkit2gtk-4.1-0 2>/dev/null; then
+            if ! pkg-config --exists libwebkit2gtk-4.1-0 2>/dev/null; then
                 missing_deps+=("webkit2gtk")
             fi
         fi

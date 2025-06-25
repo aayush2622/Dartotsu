@@ -276,9 +276,6 @@ jobs:
       # Step 6: Build the Linux application
       - name: Build Flutter Linux app
         run: flutter build linux
-      
-
-
       # Step 7: Archive the app
       - name: Archive app
         uses: thedoctor0/zip-release@master
@@ -297,22 +294,6 @@ jobs:
           upload-to-folder-id: ${{secrets.GOOGLE_FOLDER_MAIN}}
           service-account-json: "${{secrets.GOOGLE_KEY}}"
           overrwrite: true
-      # Store File ID in latest.txt
-      - name: Store File ID
-        env:
-          FILE_ID: ${{steps.gdriveUpload.outputs.file-id}}
-
-        run: |
-          echo "$FILE_ID" > scripts/latest.txt
-          echo "$FILE_ID"
-
-      # Push updated latest.txt back to repository
-      - name: Push updated latest.txt
-        uses: EndBug/add-and-commit@v9
-        with:
-          add: "scripts/latest.txt"
-          message: "[skip ci] Update latest.txt with new File ID"
-
   build_ios:
     runs-on: macos-latest
     if: contains(github.event.head_commit.message, '[build.ios]')  ||  contains(github.event.head_commit.message, '[build.all]')
