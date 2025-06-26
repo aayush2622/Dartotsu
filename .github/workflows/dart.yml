@@ -68,7 +68,7 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: 3.32.1
+          flutter-version: 3.32.5
           cache: true
 
           # Download the keystore file (from GitHub Secrets or other storage)
@@ -188,7 +188,7 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: 3.32.1
+          flutter-version: 3.32.5
           cache: true
       - name: Setup NuGet.exe for use with actions
         uses: NuGet/setup-nuget@v2.0.1
@@ -243,7 +243,7 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: 3.32.1
+          flutter-version: 3.32.5
           cache: true
 
       # Step 3: Setup system dependencies
@@ -312,7 +312,7 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: 3.32.1
+          flutter-version: 3.32.5
           cache: true
       
       - name: Setup .env File for macOS
@@ -362,7 +362,7 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: 3.32.1
+          flutter-version: 3.32.5
           cache: true
       - name: Setup .env File for macOS
         env:
