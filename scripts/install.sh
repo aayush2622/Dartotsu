@@ -321,10 +321,10 @@ detect_shell_rc() {
 add_updater_alias() {
   local shell_rc
   shell_rc=$(detect_shell_rc)
-  local alias_line="alias dartotsu-updater='bash <(curl -s https://raw.githubusercontent.com/aayush2622/Dartotsu/main/scripts/install.sh)'"
+  local alias_line="alias dartotsu-updater='bash <(curl -s https://raw.githubusercontent.com/aayush2622/Dartotsu/main/scripts/install.sh) update'"
 
   if grep -Fxq "$alias_line" "$shell_rc" 2>/dev/null; then
-    echo -ne "${YELLOW}${ICON_WARNING}${RESET} Alias already exists in $(basename "$shell_rc"). Do you want to remove it? [y/N]: "
+    echo -ne "${YELLOW}${ICON_WARNING}${RESET} The 'dartotsu-updater' alias already exists in your shell config file ($(basename "$shell_rc")). Would you like to remove it? [y/N]: "
     read -r remove_response
     case "$remove_response" in
       [yY][eE][sS]|[yY])
@@ -336,7 +336,7 @@ add_updater_alias() {
         ;;
     esac
   else
-    echo -ne "${CYAN}${ICON_MAGIC}${RESET} Do you want to add the 'dartotsu-updater' alias to $(basename "$shell_rc")? [y/N]: "
+    echo -ne "${CYAN}${ICON_MAGIC}${RESET} Would you like to add the 'dartotsu-updater' alias to your shell config file ($(basename "$shell_rc"))? [y/N]: "
     read -r add_response
     case "$add_response" in
       [yY][eE][sS]|[yY])
@@ -831,9 +831,7 @@ main_loop() {
 }
 
 # Check if running in interactive mode
-if [ -t 0 ]; then
-    main_loop
-else
+if [ $# -gt 0 ]; then
     # Non-interactive mode - handle command line arguments
     ACTION="$1"
     case "${ACTION,,}" in
@@ -856,4 +854,10 @@ else
             exit 1
             ;;
     esac
+elif [ -t 0 ]; then
+    # Interactive mode - show menu
+    main_loop
+else
+    # Fallback to interactive mode
+    main_loop
 fi
