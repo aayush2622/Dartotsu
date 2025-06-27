@@ -189,5 +189,5 @@ inno_bundle:
   version: 0.0.2 # Optional, but recommended.
   admin: auto
   installer_icon: assets/images/lol.ico
-  languages:
+  languages: # Arabic was causing issues so switched to only English for installer
     - english
