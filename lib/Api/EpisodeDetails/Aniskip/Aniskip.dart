@@ -10,22 +10,23 @@ class AniSkip {
     required int episodeLength,
     required bool useProxyForTimeStamps,
   }) async {
-    if (malId == null) {
-      return null;
-    }
+    if (malId == null) return null;
     final url =
         "https://api.aniskip.com/v2/skip-times/$malId/$episodeNumber?types[]=ed&types[]=mixed-ed&types[]=mixed-op&types[]=op&types[]=recap&episodeLength=$episodeLength";
 
     try {
       final response = await http.get(
-        Uri.parse(useProxyForTimeStamps
-            ? "https://corsproxy.io/?${Uri.encodeComponent(url)}"
-            : url),
+        Uri.parse(
+          useProxyForTimeStamps
+              ? "https://corsproxy.io/?${Uri.encodeComponent(url)}"
+              : url,
+        ),
       );
 
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = json.decode(response.body);
         final aniSkipResponse = AniSkipResponse.fromJson(data);
+        debugPrint('AniSkip response: ${aniSkipResponse.results}');
         return aniSkipResponse.found ? aniSkipResponse.results : null;
       } else {
         debugPrint('Failed to fetch data with status: ${response.statusCode}');

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:ui';
 
 import 'package:app_links/app_links.dart';
 import 'package:dartotsu/Functions/Extensions.dart';
@@ -33,12 +34,15 @@ import 'Functions/RegisterProtocol/Api.dart';
 import 'Preferences/PrefManager.dart';
 import 'Screens/Anime/AnimeScreen.dart';
 import 'Screens/Home/HomeScreen.dart';
-import 'Screens/HomeNavbar.dart';
+import 'Screens/HomeNavBar.dart';
+import 'Screens/HomeNavbarDesktop.dart';
+import 'Screens/HomeNavbarMobile.dart';
 import 'Services/MediaService.dart';
 import 'Services/ServiceSwitcher.dart';
 import 'Theme/Colors.dart';
 import 'Theme/ThemeManager.dart';
 import 'Theme/ThemeProvider.dart';
+import 'Widgets/CachedNetworkImage.dart';
 import 'l10n/app_localizations.dart';
 import 'logger.dart';
 
@@ -67,7 +71,7 @@ void main(List<String> args) async {
       );
     },
     (error, stackTrace) {
-      Logger.log('Uncaught error: $error\n$stackTrace');
+      debugPrint('Uncaught error: $error\n$stackTrace');
     },
     zoneSpecification: ZoneSpecification(
       print: (Zone self, ZoneDelegate parent, Zone zone, String line) {
@@ -197,6 +201,33 @@ class MyApp extends StatelessWidget {
               bool isFullScreen = await windowManager.isFullScreen();
               windowManager.setFullScreen(!isFullScreen);
             }
+          } else if (event.logicalKey == LogicalKeyboardKey.keyG) {
+            var theme = Provider.of<ThemeNotifier>(context, listen: false);
+            if (theme.useGlassMode) {
+              await theme.setGlassEffect(false);
+              snackString('Glass effect disabled');
+            } else {
+              await theme.setGlassEffect(true);
+              snackString('Glass effect enabled');
+            }
+          } else if (event.logicalKey == LogicalKeyboardKey.keyM) {
+            var theme = Provider.of<ThemeNotifier>(context, listen: false);
+            if (theme.useMaterialYou) {
+              await theme.setMaterialYou(false);
+              snackString('Material You disabled');
+            } else {
+              await theme.setMaterialYou(true);
+              snackString('Material You enabled');
+            }
+          } else if (event.logicalKey == LogicalKeyboardKey.keyD) {
+            var theme = Provider.of<ThemeNotifier>(context, listen: false);
+            if (theme.isDarkMode) {
+              await theme.setDarkMode(false);
+              snackString('Dark mode disabled');
+            } else {
+              await theme.setDarkMode(true);
+              snackString('Dark mode enabled');
+            }
           }
         }
       },
@@ -216,8 +247,8 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             enableLog: true,
             logWriterCallback: (text, {isError = false}) async {
+              Logger.log(text);
               if (isError) {
-                Logger.log(text);
                 debugPrint(text);
               }
             },
@@ -251,31 +282,72 @@ class MainActivityState extends State<MainActivity> {
     checkForUpdate();
   }
 
+  Widget get _navbar {
+    navbar = context.isPhone
+        ? FloatingBottomNavBarMobile(
+            selectedIndex: _selectedIndex,
+            onTabSelected: _onTabSelected,
+          )
+        : FloatingBottomNavBarDesktop(
+            selectedIndex: _selectedIndex,
+            onTabSelected: _onTabSelected,
+          );
+    return navbar;
+  }
+
+  Widget _buildBackground(ThemeNotifier themeNotifier, MediaService service) {
+    if (!themeNotifier.useGlassMode) return const SizedBox.shrink();
+    return Positioned.fill(
+      child: ImageFiltered(
+        imageFilter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+        child: Opacity(
+          opacity: 0.8,
+          child: Obx(
+            () => cachedNetworkImage(
+              imageUrl: service.data.bg.value.isNotEmpty
+                  ? service.data.bg.value
+                  : 'https://wallpapercat.com/download/1198914',
+              fit: BoxFit.fill,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildBody(MediaService service) {
+    return Obx(() {
+      switch (_selectedIndex) {
+        case 0:
+          return const AnimeScreen();
+        case 1:
+          return service.data.token.value.isNotEmpty
+              ? const HomeScreen()
+              : const LoginScreen();
+        case 2:
+          return const MangaScreen();
+        default:
+          return const SizedBox();
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    navbar = FloatingBottomNavBar(
-      selectedIndex: _selectedIndex,
-      onTabSelected: _onTabSelected,
-    );
     final themeNotifier = Provider.of<ThemeNotifier>(context);
     final service = context.currentService();
+
     return Scaffold(
       body: Stack(
         children: [
-          Obx(() {
-            if (_selectedIndex == 0) {
-              return const AnimeScreen();
-            } else if (_selectedIndex == 1) {
-              return service.data.token.value.isNotEmpty
-                  ? const HomeScreen()
-                  : const LoginScreen();
-            } else if (_selectedIndex == 2) {
-              return const MangaScreen();
-            } else {
-              return const SizedBox(); // fallback
-            }
-          }),
-          navbar,
+          _buildBackground(themeNotifier, service),
+          Row(
+            children: [
+              if (!context.isPhone) SizedBox(width: 100, child: _navbar),
+              Expanded(child: _buildBody(service)),
+            ],
+          ),
+          if (context.isPhone) _navbar,
           Positioned(
             bottom: 92.bottomBar(),
             right: 12,

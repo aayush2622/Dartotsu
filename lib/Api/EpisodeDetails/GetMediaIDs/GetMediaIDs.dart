@@ -8,46 +8,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'GetMediaIDs.g.dart';
 
-enum AnimeIDType {
-  anilistId,
-  kitsuId,
-  malId,
-  animePlanetId,
-  anisearchId,
-  anidbId,
-  notifyMoeId,
-  imdbId,
-  livechartId,
-  thetvdbId,
-  themoviedbId;
 
-  String get fieldName {
-    switch (this) {
-      case AnimeIDType.anilistId:
-        return 'anilist_id';
-      case AnimeIDType.kitsuId:
-        return 'kitsu_id';
-      case AnimeIDType.malId:
-        return 'mal_id';
-      case AnimeIDType.animePlanetId:
-        return 'anime-planet_id';
-      case AnimeIDType.anisearchId:
-        return 'anisearch_id';
-      case AnimeIDType.anidbId:
-        return 'anidb_id';
-      case AnimeIDType.notifyMoeId:
-        return 'notify.moe_id';
-      case AnimeIDType.imdbId:
-        return 'imdb_id';
-      case AnimeIDType.livechartId:
-        return 'livechart_id';
-      case AnimeIDType.thetvdbId:
-        return 'thetvdb_id';
-      case AnimeIDType.themoviedbId:
-        return 'themoviedb_id';
-    }
-  }
-}
 
 class GetMediaIDs {
   static List<AnimeID>? _animeListFuture;
@@ -118,7 +79,46 @@ class GetMediaIDs {
     }
   }
 }
+enum AnimeIDType {
+  anilistId,
+  kitsuId,
+  malId,
+  animePlanetId,
+  anisearchId,
+  anidbId,
+  notifyMoeId,
+  imdbId,
+  livechartId,
+  thetvdbId,
+  themoviedbId;
 
+  String get fieldName {
+    switch (this) {
+      case AnimeIDType.anilistId:
+        return 'anilist_id';
+      case AnimeIDType.kitsuId:
+        return 'kitsu_id';
+      case AnimeIDType.malId:
+        return 'mal_id';
+      case AnimeIDType.animePlanetId:
+        return 'anime-planet_id';
+      case AnimeIDType.anisearchId:
+        return 'anisearch_id';
+      case AnimeIDType.anidbId:
+        return 'anidb_id';
+      case AnimeIDType.notifyMoeId:
+        return 'notify.moe_id';
+      case AnimeIDType.imdbId:
+        return 'imdb_id';
+      case AnimeIDType.livechartId:
+        return 'livechart_id';
+      case AnimeIDType.thetvdbId:
+        return 'thetvdb_id';
+      case AnimeIDType.themoviedbId:
+        return 'themoviedb_id';
+    }
+  }
+}
 class AnimeID {
   @JsonKey(name: 'anime-planet_id')
   final String? animePlanetId;

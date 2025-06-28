@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:dartotsu/Functions/Extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
@@ -13,6 +15,7 @@ import '../../Services/ServiceSwitcher.dart';
 import '../../Theme/Colors.dart';
 import '../../Theme/LanguageSwitcher.dart';
 import '../../Theme/ThemeProvider.dart';
+import '../../Widgets/CachedNetworkImage.dart';
 import '../../Widgets/ScrollConfig.dart';
 import '../Home/Widgets/LoadingWidget.dart';
 import '../Home/Widgets/ServiceSwitcherBar.dart';

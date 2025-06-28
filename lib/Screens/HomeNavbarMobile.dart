@@ -1,21 +1,20 @@
+import 'dart:ui';
+
 import 'package:dartotsu/Functions/Extensions.dart';
 import 'package:dartotsu/Theme/Colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../Theme/ThemeManager.dart';
 import '../Theme/ThemeProvider.dart';
+import 'HomeNavBar.dart';
 
-class FloatingBottomNavBar extends StatelessWidget {
-  final int selectedIndex;
-  final Function(int) onTabSelected;
-
-  const FloatingBottomNavBar({
+class FloatingBottomNavBarMobile extends FloatingBottomNavBar {
+  const FloatingBottomNavBarMobile({
     super.key,
-    required this.selectedIndex,
-    required this.onTabSelected,
+    required super.selectedIndex,
+    required super.onTabSelected,
   });
-
-  void onClick(int index) => onTabSelected(index);
 
   @override
   Widget build(BuildContext context) {
@@ -35,13 +34,33 @@ class FloatingBottomNavBar extends StatelessWidget {
             children: [
               Align(
                 alignment: Alignment.center,
-                child: Container(
-                  width: 246.0,
-                  height: 54.0,
-                  decoration: BoxDecoration(
-                    color:
-                        themeNotifier.isDarkMode ? greyNavDark : greyNavLight,
+                child: ThemedWidget(
+                  context: context,
+                  materialWidget: Container(
+                    width: 246.0,
+                    height: 54.0,
+                    decoration: BoxDecoration(
+                      color:
+                      themeNotifier.isDarkMode ? greyNavDark : greyNavLight,
+                      borderRadius: BorderRadius.circular(30.0),
+                    ),
+                  ),
+                  glassWidget: ClipRRect(
                     borderRadius: BorderRadius.circular(30.0),
+                    child: BackdropFilter(
+                      filter: ImageFilter.blur(sigmaX: 12.0, sigmaY: 12.0),
+                      child: Container(
+                        width: 246.0,
+                        height: 54.0,
+                        decoration: BoxDecoration(
+                          color: Colors.white.withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(30.0),
+                          border: Border.all(
+                            color: Colors.white.withOpacity(0.2),
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -113,16 +132,4 @@ class FloatingBottomNavBar extends StatelessWidget {
       ),
     );
   }
-}
-
-class NavItem {
-  final int index;
-  final IconData icon;
-  final String label;
-
-  NavItem({
-    required this.index,
-    required this.icon,
-    required this.label,
-  });
 }

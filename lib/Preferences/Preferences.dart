@@ -4,6 +4,7 @@ class PrefName {
   static const source = Pref('source', 'ANILIST');
 
   //theme
+  static const useGlassMode = Pref('useGlassMode', false);
   static const isDarkMode = Pref('isDarkMode', 0);
   static const isOled = Pref('isOled', false);
   static const useMaterialYou = Pref('useMaterialYou', false);

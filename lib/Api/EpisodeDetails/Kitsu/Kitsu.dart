@@ -13,77 +13,58 @@ class Kitsu {
   static Future<Map<String, Episode>?> getKitsuEpisodesDetails(
       Media mediaData) async {
     if (mediaData.idAnilist == null && mediaData.idMAL == null) return {};
-    final query = mediaData.idAnilist == null
-        ? '''
-    query {
-      lookupMapping(externalId: ${mediaData.idAnilist}, externalSite: ANILIST_ANIME) {
-        __typename
-        ... on Anime {
-          id
-          episodes(first: 2000) {
-            nodes {
-              number
-              titles {
-                canonicalLocale
-              }
-              description
-              thumbnail {
-                original {
-                  url
+
+    final externalId = mediaData.idAnilist ?? mediaData.idMAL;
+    final externalSite =
+        mediaData.idAnilist != null ? 'ANILIST_ANIME' : 'MYANIMELIST_ANIME';
+
+    final query = '''
+      query {
+        lookupMapping(externalId: $externalId, externalSite: $externalSite) {
+          __typename
+          ... on Anime {
+            id
+            episodes(first: 2000) {
+              nodes {
+                number
+                titles {
+                  canonicalLocale
+                }
+                description
+                thumbnail {
+                  original {
+                    url
+                  }
                 }
               }
             }
           }
         }
       }
-    }
-    '''
-        : '''
-    query {
-      lookupMapping(externalId: ${mediaData.idMAL}, externalSite: MYANIMELIST_ANIME) {
-        __typename
-        ... on Anime {
-          id
-          episodes(first: 2000) {
-            nodes {
-              number
-              titles {
-                canonicalLocale
-              }
-              description
-              thumbnail {
-                original {
-                  url
-                }
-              }
-            }
-          }
-        }
-      }
-    }
     ''';
 
     final result = (await getKitsuData(query))?.data?.lookupMapping;
-    if (result == null) {
-      return null;
-    }
+    if (result == null) return null;
 
     mediaData.idKitsu = result.id;
 
-    final episodesMap = result.episodes?.nodes?.asMap().map((_, ep) {
-          return MapEntry(
-            ep?.number?.toString() ?? '',
-            Episode(
-              number: ep?.number.toString() ?? '',
-              title: ep?.titles?.canonical,
-              desc: ep?.description?.en,
-              thumb: ep?.thumbnail?.original?.url,
-            ),
-          );
-        }) ??
-        {};
+    final nodes = result.episodes?.nodes;
+    if (nodes == null) return {};
 
-    return episodesMap;
+    return Map.fromEntries(
+      nodes.map((ep) {
+        final number = ep?.number?.toString() ?? '';
+        return MapEntry(
+          number,
+          Episode(
+            number: number,
+            title: ep?.titles?.canonical,
+            desc: ep?.description?.en,
+            thumb: ep?.thumbnail?.original?.url,
+          ),
+        );
+      }),
+    );
   }
 
   static Future<String?> decodeToString(http.Response? res) async {

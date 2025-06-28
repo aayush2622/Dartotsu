@@ -18,7 +18,7 @@ class Logger {
     if (!await _logFile.exists()) {
       await _logFile.create();
     }
-    log('Logger initialized');
+    log('\n\n\n\n\nLogger initialized\n\n\n\n\n');
   }
 
   static void log(String message){

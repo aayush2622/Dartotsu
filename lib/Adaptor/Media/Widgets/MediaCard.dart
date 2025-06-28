@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../Widgets/CachedNetworkImage.dart';
 
@@ -10,7 +11,8 @@ Widget MediaCard(
 }) {
   double height = 72;
   final theme = Theme.of(context).colorScheme;
-  var screenWidth = MediaQuery.of(context).size.width;
+  var leftWidth = MediaQuery.of(context).size.width;
+  var screenWidth = context.isPhone ? leftWidth : leftWidth - 100;
   double width = screenWidth * 0.4;
   if (width > 256) width = 256;
   double radius = 10;

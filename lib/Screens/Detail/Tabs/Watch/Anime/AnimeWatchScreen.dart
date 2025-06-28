@@ -168,6 +168,7 @@ class AnimeWatchScreenState extends BaseWatchScreen<AnimeWatchScreen> {
     episodeList.forEach((number, episode) {
       episode.title = _viewModel.anifyEpisodeList.value?[number]?.title ??
           _viewModel.kitsuEpisodeList.value?[number]?.title ??
+          _viewModel.fillerEpisodesList.value?[number]?.title ??
           episode.title ??
           '';
       episode.desc = _viewModel.anifyEpisodeList.value?[number]?.desc ??

@@ -21,7 +21,7 @@ extension on MalQueries {
         ?.data;
     Mal.userid = user.id;
     Mal.username.value = user.name ?? '';
-    Mal.bg = user.picture ?? '';
+    Mal.bg.value = user.picture ?? '';
     Mal.avatar.value = user.picture ?? '';
     Mal.episodesWatched = res?.statistics?.anime?.episodesWatched;
     Mal.chapterRead = res?.statistics?.manga?.chaptersRead;

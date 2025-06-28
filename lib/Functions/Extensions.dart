@@ -1,3 +1,4 @@
+import 'package:dartotsu/Theme/ThemeProvider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -36,4 +37,19 @@ extension Stuff on BuildContext {
     return Provider.of<MediaServiceProvider>(this, listen: listen)
         .currentService;
   }
+
+  ThemeNotifier get themeNotifier {
+    return Provider.of<ThemeNotifier>(this, listen: false);
+  }
+  ThemeNotifier get themeNotifierListen =>
+      Provider.of<ThemeNotifier>(this, listen: true);
+
+  bool get useGlassMode {
+    return themeNotifier.useGlassMode;
+  }
+
+  bool get useGlassModeListen {
+    return themeNotifierListen.useGlassMode;
+  }
+
 }
