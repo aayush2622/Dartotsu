@@ -302,6 +302,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.8"
+  dartotsu_extension_bridge:
+    dependency: "direct main"
+    description:
+      path: "../dartotsu_extension_bridge"
+      relative: true
+    source: path
+    version: "0.0.2"
   dartx:
     dependency: transitive
     description:

@@ -16,12 +16,10 @@ extension on AnilistQueries {
               if (media == null || idArr.contains(media.id)) return false;
 
               final shouldAdd = (!listOnly &&
-                      media.countryOfOrigin == "JP" &&
                       adultOnly &&
                       media.isAdult == true) ||
                   (!listOnly &&
                       !adultOnly &&
-                      media.countryOfOrigin == "JP" &&
                       media.isAdult == false) ||
                   (listOnly && media.mediaListEntry != null);
 

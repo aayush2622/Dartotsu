@@ -103,6 +103,8 @@ dependencies:
   intl: ^0.20.2
   epubx:
     path: ./epubx
+  dartotsu_extension_bridge:
+    path: ../dartotsu_extension_bridge
 # Development dependencies
 dev_dependencies:
   flutter_test:

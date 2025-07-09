@@ -57,7 +57,7 @@ class HomeScreenGlassDesktopState extends State<HomeScreenGlassDesktop> {
 
   Widget get _buildScrollToTopButton {
     return Positioned(
-      bottom: 72.0 + 32.bottomBar(),
+      bottom: 64.0,
       left: (0.screenWidthWithContext(context) / 2) - 24.0,
       child: Obx(() => screen.scrollToTop.value
           ? Container(
