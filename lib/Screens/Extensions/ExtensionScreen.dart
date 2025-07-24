@@ -67,14 +67,18 @@ class _BrowseScreenState extends ExtensionManagerScreen<ExtensionScreen> {
       IconButton(
         icon: Icon(Icons.language_rounded, color: theme.primary),
         onPressed: () {
+          var language = completeLanguageName(currentLanguage);
+
           AlertDialogBuilder(context)
             ..setTitle(getString.language)
             ..singleChoiceItems(
               sortedLanguagesMap.keys.toList(),
-              sortedLanguagesMap.keys.toList().indexOf(currentLanguage),
+              sortedLanguagesMap.keys.toList().indexOf(language),
               (index) {
                 onLanguageChanged(
-                  sortedLanguagesMap.keys.elementAt(index),
+                  completeLanguageCode(
+                    sortedLanguagesMap.keys.elementAt(index),
+                  ),
                 );
               },
             )

@@ -278,18 +278,17 @@ class AlertDialogBuilder {
         },
       );
 
-  Widget _buildListContent(Widget Function(String) itemBuilder) =>
-      ConstrainedBox(
-        constraints: BoxConstraints(
-          minWidth: MediaQuery.of(context).size.width * 0.7,
-        ),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: _items!.map(itemBuilder).toList(),
-          ),
-        ),
-      );
+  Widget _buildListContent(Widget Function(String) itemBuilder) {
+    final media = MediaQuery.of(context).size;
+    return SizedBox(
+      width: media.width * 0.7,
+      height: media.height * 0.8,
+      child: ListView.builder(
+        itemCount: _items!.length,
+        itemBuilder: (_, index) => itemBuilder(_items![index]),
+      ),
+    );
+  }
 
   Widget _buildDefaultContent() => ConstrainedBox(
         constraints: BoxConstraints(
