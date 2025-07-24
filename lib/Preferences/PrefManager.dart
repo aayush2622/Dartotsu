@@ -5,14 +5,14 @@ import 'dart:io';
 import 'package:dartotsu/Preferences/IsarDataClasses/MediaSettings/MediaSettings.dart';
 import 'package:dartotsu/Preferences/IsarDataClasses/ShowResponse/ShowResponse.dart';
 import 'package:dartotsu/logger.dart';
+import 'package:dartotsu_extension_bridge/Settings/Settings.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:isar/isar.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
-
-import '../Api/Sources/Eval/dart/model/source_preference.dart';
-import '../Api/Sources/Model/Source.dart';
+import 'package:dartotsu_extension_bridge/Mangayomi/Eval/dart/model/source_preference.dart';
+import 'package:dartotsu_extension_bridge/Mangayomi/Models/Source.dart';
 import '../main.dart';
 import 'IsarDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
 import 'IsarDataClasses/DefaultReaderSettings/DafaultReaderSettings.dart';
@@ -64,9 +64,10 @@ class PrefManager {
         ResponseTokenSchema,
         MediaSettingsSchema,
         ShowResponseSchema,
-        SourceSchema,
+        MSourceSchema,
         SourcePreferenceSchema,
         SourcePreferenceStringValueSchema,
+        BridgeSettingsSchema
       ],
       directory: directory,
       name: name,
@@ -244,12 +245,11 @@ class PrefManager {
         basePath = useSystemPath == true ? appDir.path : cDir;
       }
     } else {
-      var cDir = customPath.isNotEmpty
-          ? (customPath.endsWith('Dartotsu')
-              ? customPath
-              : path.join(customPath, 'Dartotsu'))
-          : appDir.path;
+      var cDir = customPath.isNotEmpty ? customPath : appDir.path;
       basePath = useSystemPath == true ? appDir.path : cDir;
+      basePath = basePath.endsWith('Dartotsu')
+          ? basePath
+          : path.join(basePath, 'Dartotsu');
     }
 
     final baseDirectory = Directory(basePath.fixSeparator);

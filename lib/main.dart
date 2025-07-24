@@ -84,7 +84,7 @@ void main(List<String> args) async {
   FlutterError.onError = (FlutterErrorDetails details) {
     FlutterError.presentError(details);
     Logger.log('FlutterError: ${details.exception}\n${details.stack}');
-  };
+  }; //TODO: setup error screen
 
   PlatformDispatcher.instance.onError = (error, stack) {
     Logger.log('PlatformDispatcher error: $error\n$stack');
@@ -98,6 +98,7 @@ Future init() async {
         .forEach(registerProtocolHandler);
   }
   await PrefManager.init();
+  await DartotsuExtensionBridge().init(isar);
   await Logger.init();
   Extensions.init();
   MediaService.init();
@@ -353,7 +354,8 @@ class MainActivityState extends State<MainActivity> {
             bottom: 92.bottomBar(),
             right: 12,
             child: GestureDetector(
-              onLongPress: () => DartotsuExtensionBridge().fetchAnimeTitles(),
+              onLongPress: () =>
+                  service.searchScreen?.onSearchIconLongClick(context),
               child: FloatingActionButton(
                 onPressed: () =>
                     service.searchScreen?.onSearchIconClick(context),

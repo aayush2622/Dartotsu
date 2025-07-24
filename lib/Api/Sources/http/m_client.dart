@@ -5,7 +5,7 @@ import 'package:dartotsu/Functions/Function.dart';
 import 'package:dartotsu/Preferences/PrefManager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart'
-as flutter_inappwebview;
+    as flutter_inappwebview;
 import 'package:http/io_client.dart';
 import 'package:http_interceptor/http_interceptor.dart';
 import '../../../logger.dart';
@@ -31,7 +31,7 @@ class MClient {
     final urlHost = Uri.parse(url).host;
 
     final matchingEntry = cookiesMap.entries.firstWhere(
-          (entry) => urlHost == entry.key || urlHost.contains(entry.key),
+      (entry) => urlHost == entry.key || urlHost.contains(entry.key),
       orElse: () => const MapEntry('', ''),
     );
 
@@ -69,15 +69,15 @@ class MClient {
       saveData(PrefName.cookies, cookiesMap);
     }
     if (ua.isNotEmpty) {
-     saveData(PrefName.userAgent, ua);
+      saveData(PrefName.userAgent, ua);
     }
   }
 
   static void deleteAllCookies(String url) {
     final cookiesMap = loadData(PrefName.cookies);
     final urlHost = Uri.parse(url).host;
-    cookiesMap.removeWhere((host, cookie) =>
-    host == urlHost || urlHost.contains(host));
+    cookiesMap.removeWhere(
+        (host, cookie) => host == urlHost || urlHost.contains(host));
     saveData(PrefName.cookies, cookiesMap);
   }
 }
@@ -144,8 +144,6 @@ class LoggerInterceptor extends InterceptorContract {
   }) async {
     final cloudflare = [403, 503].contains(response.statusCode) &&
         ["cloudflare-nginx", "cloudflare"].contains(response.headers["server"]);
-    Logger.log(
-        "----- Response -----\n${response.request?.method}: ${response.request?.url}, statusCode: ${response.statusCode} ${cloudflare ? "Failed to bypass Cloudflare" : ""}");
     debugPrint(
         "----- Response -----\n${response.request?.method}: ${response.request?.url}, statusCode: ${response.statusCode} ${cloudflare ? "Failed to bypass Cloudflare" : ""}");
     if (cloudflare) {

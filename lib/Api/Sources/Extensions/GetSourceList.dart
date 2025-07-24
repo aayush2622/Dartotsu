@@ -52,7 +52,6 @@ Future<void> fetchSourcesList(
                 ..versionLast = source.version
                 ..itemType = itemType
                 ..isManga = source.isManga
-                ..isFullData = source.isFullData ?? false
                 ..appMinVerReq = source.appMinVerReq
                 ..sourceCodeLanguage = source.sourceCodeLanguage
                 ..additionalParams = source.additionalParams ?? ""
@@ -89,7 +88,6 @@ Future<void> fetchSourcesList(
                     ..versionLast = source.version
                     ..itemType = itemType
                     ..isManga = source.isManga
-                    ..isFullData = source.isFullData ?? false
                     ..appMinVerReq = source.appMinVerReq
                     ..sourceCodeLanguage = source.sourceCodeLanguage
                     ..additionalParams = source.additionalParams ?? ""
@@ -120,7 +118,6 @@ Future<void> fetchSourcesList(
             ..itemType = itemType
             ..isManga = source.isManga
             ..sourceCodeLanguage = source.sourceCodeLanguage
-            ..isFullData = source.isFullData ?? false
             ..appMinVerReq = source.appMinVerReq
             ..isObsolete = false);
           // log("new source");

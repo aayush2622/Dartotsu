@@ -305,7 +305,7 @@ packages:
   dartotsu_extension_bridge:
     dependency: "direct main"
     description:
-      path: "../dartotsu_extension_bridge"
+      path: "../DartotsuExtensionBridge"
       relative: true
     source: path
     version: "0.0.2"
@@ -374,11 +374,13 @@ packages:
     source: hosted
     version: "5.0.3"
   epubx:
-    dependency: "direct main"
+    dependency: transitive
     description:
-      path: epubx
-      relative: true
-    source: path
+      path: "."
+      ref: dev
+      resolved-ref: c8203a489fae5683001556b1d323e35f356294fb
+      url: "https://github.com/kodjodevf/epubx.dart.git"
+    source: git
     version: "4.0.3"
   expandable_page_view:
     dependency: "direct main"
