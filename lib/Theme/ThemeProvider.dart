@@ -9,6 +9,7 @@ class ThemeNotifier extends ChangeNotifier {
   bool _useMaterialYou = false;
   bool _useCustomColor = false;
   int _customColor = 4280391411;
+  bool _useGlassMode = false;
 
   bool get isDarkMode => _isDarkMode;
 
@@ -22,6 +23,7 @@ class ThemeNotifier extends ChangeNotifier {
 
   int get customColor => _customColor;
 
+  bool get useGlassMode => _useGlassMode;
   ThemeNotifier() {
     _initialize();
   }
@@ -46,6 +48,17 @@ class ThemeNotifier extends ChangeNotifier {
     _useMaterialYou = loadData(PrefName.useMaterialYou);
     _useCustomColor = loadData(PrefName.useCustomColor);
     _customColor = loadData(PrefName.customColor);
+    _useGlassMode = loadData(PrefName.useGlassMode);
+    notifyListeners();
+  }
+  Future<void> setGlassEffect(bool useGlassEffect) async {
+    _useGlassMode = useGlassEffect;
+    saveData(PrefName.useGlassMode, useGlassEffect);
+    if (useGlassEffect) {
+      //setOled(false);
+      setMaterialYou(false);
+      useCustomTheme(false);
+    }
     notifyListeners();
   }
 
@@ -53,8 +66,7 @@ class ThemeNotifier extends ChangeNotifier {
     _isDarkMode = isDarkMode;
     saveData(PrefName.isDarkMode, _isDarkMode ? 1 : 2);
     if (!isDarkMode) {
-      _isOled = false;
-      saveData(PrefName.isOled, false);
+      setOled(false);
     }
     notifyListeners();
   }
@@ -63,8 +75,7 @@ class ThemeNotifier extends ChangeNotifier {
     _isOled = isOled;
     saveData(PrefName.isOled, isOled);
     if (isOled) {
-      _isDarkMode = true;
-      saveData(PrefName.isDarkMode, _isDarkMode ? 1 : 2);
+      setDarkMode(true);
     }
     notifyListeners();
   }
@@ -81,8 +92,8 @@ class ThemeNotifier extends ChangeNotifier {
     _useMaterialYou = useMaterialYou;
     saveData(PrefName.useMaterialYou, useMaterialYou);
     if (useMaterialYou) {
-      _useCustomColor = false;
-      saveData(PrefName.useCustomColor, false);
+      useCustomTheme(false);
+      setGlassEffect(false);
     }
     notifyListeners();
   }
@@ -91,8 +102,8 @@ class ThemeNotifier extends ChangeNotifier {
     _useCustomColor = useCustomTheme;
     saveData(PrefName.useCustomColor, useCustomTheme);
     if (useCustomTheme) {
-      _useMaterialYou = false;
-      saveData(PrefName.useMaterialYou, false);
+      setMaterialYou(false);
+      setGlassEffect(false);
     }
     notifyListeners();
   }

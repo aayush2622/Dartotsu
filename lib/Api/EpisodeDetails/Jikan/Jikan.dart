@@ -1,9 +1,9 @@
 import 'dart:convert';
 
+import 'package:dartotsu_extension_bridge/Models/DEpisode.dart';
 import 'package:http/http.dart' as http;
 import 'package:json_annotation/json_annotation.dart';
 
-import '../../../DataClass/Episode.dart';
 import '../../../DataClass/Media.dart';
 
 part 'Jikan.g.dart';
@@ -11,9 +11,9 @@ part 'Jikan.g.dart';
 class Jikan {
   static const String apiUrl = "https://api.jikan.moe/v4";
 
-  static Future<Map<String, Episode>> getEpisodes(Media mediaData) async {
+  static Future<Map<String, DEpisode>> getEpisodes(Media mediaData) async {
     if (mediaData.idMAL == null) return {};
-    final Map<String, Episode> eps = {};
+    final Map<String, DEpisode> eps = {};
     int page = 0;
 
     while (true) {
@@ -31,9 +31,9 @@ class Jikan {
 
         for (var it in res.data!) {
           String ep = it.malID.toString();
-          eps[ep] = Episode(
-            number: ep,
-            title: it.title,
+          eps[ep] = DEpisode(
+            episodeNumber: ep,
+            name: it.title,
             filler:
                 mediaData.idMAL != 34566 ? it.filler : true, //legacy continues
           );

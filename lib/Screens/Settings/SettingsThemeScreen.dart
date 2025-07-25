@@ -53,6 +53,16 @@ class SettingsThemeScreenState extends BaseSettingsScreen {
       ),
       Setting(
         type: SettingType.switchType,
+        name: 'Glass Effect',
+        description: 'Gives a frosted glass effect to the app',
+        icon: Icons.blur_on_outlined,
+        isChecked: themeNotifier.useGlassMode,
+        onSwitchChange: (bool value) async {
+          themeNotifier.setGlassEffect(value);
+        },
+      ),
+      Setting(
+        type: SettingType.switchType,
         name: getString.oledThemeVariant,
         description: getString.oledThemeVariantDescription,
         icon: Icons.brightness_4,

@@ -13,7 +13,7 @@ abstract class BaseServiceData extends GetxController {
   RxString avatar = "".obs;
   RxBool run = true.obs;
   bool adult = false;
-  String? bg;
+  RxString bg = "".obs;
   int? userid;
   int unreadNotificationCount = 0;
   int? episodesWatched;

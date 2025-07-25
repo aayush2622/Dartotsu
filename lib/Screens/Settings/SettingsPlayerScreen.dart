@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'dart:math';
 
-import 'package:dartotsu/Api/Sources/Eval/dart/model/video.dart';
-import 'package:dartotsu/Api/Sources/Model/Source.dart';
-import 'package:dartotsu/DataClass/Episode.dart';
 import 'package:dartotsu/Functions/Function.dart';
 import 'package:dartotsu/Preferences/IsarDataClasses/MediaSettings/MediaSettings.dart';
+import 'package:dartotsu_extension_bridge/Models/DEpisode.dart';
+import 'package:dartotsu_extension_bridge/Models/Source.dart';
+import 'package:dartotsu_extension_bridge/Models/Video.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +15,6 @@ import '../../DataClass/Media.dart';
 import '../../DataClass/Setting.dart';
 import '../../Preferences/IsarDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
 import '../../Preferences/PrefManager.dart';
-import '../../StorageProvider.dart';
 import '../../Theme/CustomColorPicker.dart';
 import '../../Theme/LanguageSwitcher.dart';
 import '../../Widgets/AlertDialogBuilder.dart';
@@ -313,7 +312,7 @@ List<Widget> playerSettings(
 }
 
 Future<void> openPlayer(BuildContext context) async {
-  if (!await StorageProvider.videoPermission()) return;
+  if (!await PrefManager.videoPermission()) return;
   final result = await FilePicker.platform.pickFiles(
     type: FileType.custom,
     allowedExtensions: vidMap,
@@ -325,7 +324,7 @@ Future<void> openPlayer(BuildContext context) async {
 
   if (!context.mounted) return;
 
-  final episode = Episode(number: '1', title: pickedFile.name);
+  final episode = DEpisode(episodeNumber: '1', name: pickedFile.name);
   final media = Media(
     id: Random().nextInt(900000000),
     nameRomaji: 'Local file',

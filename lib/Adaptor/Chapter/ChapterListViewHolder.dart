@@ -1,12 +1,11 @@
 import 'package:dartotsu/Functions/string_extensions.dart';
 import 'package:flutter/material.dart';
-
-import '../../DataClass/Chapter.dart';
+import 'package:dartotsu_extension_bridge/Models/DEpisode.dart';
 import '../../DataClass/Media.dart';
 import '../../Screens/Detail/Tabs/Watch/Manga/Widget/DateFormat.dart';
 
 class ChapterListView extends StatelessWidget {
-  final Chapter chapter;
+  final DEpisode chapter;
   final Media mediaData;
   final bool isWatched;
 
@@ -17,7 +16,7 @@ class ChapterListView extends StatelessWidget {
   }) : isWatched =
             (mediaData.userProgress != null && mediaData.userProgress! > 0)
                 ? mediaData.userProgress!.toString().toDouble() >=
-                    chapter.number.toDouble()
+                    chapter.episodeNumber.toDouble()
                 : false;
 
   @override
@@ -55,7 +54,7 @@ class ChapterListView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  chapter.title ?? '',
+                  chapter.name ?? '',
                   maxLines: 1,
                   style: const TextStyle(
                     fontFamily: 'Poppins',
@@ -63,8 +62,7 @@ class ChapterListView extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
-                if (chapter.mChapter?.scanlator != null &&
-                    chapter.mChapter?.scanlator != '')
+                if (chapter.scanlator != null && chapter.scanlator != '')
                   const SizedBox(height: 4),
                 _buildDescription(theme, context),
               ],
@@ -84,24 +82,24 @@ class ChapterListView extends StatelessWidget {
 
   Widget _buildDescription(ColorScheme theme, BuildContext context) {
     final List<TextSpan> spans = [];
-    if (chapter.date != null) {
+    if (chapter.dateUpload != null) {
       spans.add(
         TextSpan(
-          text: dateFormat(chapter.date, context: context),
+          text: dateFormat(chapter.dateUpload, context: context),
         ),
       );
     }
-    if (chapter.date != null && chapter.mChapter?.scanlator != null) {
+    if (chapter.dateUpload != null && chapter.scanlator != null) {
       spans.add(
         const TextSpan(
           text: ' • ',
         ),
       );
     }
-    if (chapter.mChapter?.scanlator != null) {
+    if (chapter.scanlator != null) {
       spans.add(
         TextSpan(
-          text: chapter.mChapter?.scanlator?.replaceAll('_', ' ') ?? '',
+          text: chapter.scanlator?.replaceAll('_', ' ') ?? '',
         ),
       );
     }

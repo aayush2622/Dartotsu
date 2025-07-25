@@ -1,12 +1,12 @@
 import 'package:dartotsu/Functions/string_extensions.dart';
+import 'package:dartotsu_extension_bridge/Models/DEpisode.dart';
 import 'package:flutter/material.dart';
 
-import '../../DataClass/Chapter.dart';
 import '../../DataClass/Media.dart';
 import '../Episode/Widget/HandleProgress.dart';
 
 class ChapterCompactView extends StatelessWidget {
-  final Chapter chapter;
+  final DEpisode chapter;
   final Media mediaData;
   final bool isWatched;
 
@@ -14,10 +14,11 @@ class ChapterCompactView extends StatelessWidget {
     super.key,
     required this.chapter,
     required this.mediaData,
-  }) : isWatched = (mediaData.userProgress != null &&
-                mediaData.userProgress! > 0)
-            ? mediaData.userProgress!.toDouble() >= chapter.number.toDouble()
-            : false;
+  }) : isWatched =
+            (mediaData.userProgress != null && mediaData.userProgress! > 0)
+                ? mediaData.userProgress!.toDouble() >=
+                    chapter.episodeNumber.toDouble()
+                : false;
 
   @override
   Widget build(BuildContext context) {
@@ -42,13 +43,13 @@ class ChapterCompactView extends StatelessWidget {
             child: handleProgress(
               context: context,
               mediaId: mediaData.id,
-              ep: chapter.number,
+              ep: chapter.episodeNumber,
               width: 162,
             ),
           ),
           Center(
             child: Text(
-              chapter.number,
+              chapter.episodeNumber,
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                     fontWeight: FontWeight.bold,
                     fontSize: 16,

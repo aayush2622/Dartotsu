@@ -1,9 +1,9 @@
 import 'package:dartotsu/Screens/Detail/Tabs/Watch/BaseParser.dart';
+import 'package:dartotsu_extension_bridge/Models/DEpisode.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../../Adaptor/Chapter/ChapterAdaptor.dart';
-import '../../../../../DataClass/Chapter.dart';
 import '../../../../../DataClass/Media.dart';
 import '../../../../../Theme/LanguageSwitcher.dart';
 import '../BaseWatchScreen.dart';
@@ -74,7 +74,7 @@ class MangaWatchScreenState extends BaseWatchScreen<MangaWatchScreen> {
               context, chapterList, widget.mediaData.userProgress.toString());
 
           var selectedChapter = chapterList.firstWhereOrNull((element) =>
-              element.number ==
+              element.episodeNumber ==
               ((widget.mediaData.userProgress ?? 0) + 1).toString());
 
           RxInt selectedChunkIndex = (-1).obs;
@@ -100,7 +100,7 @@ class MangaWatchScreenState extends BaseWatchScreen<MangaWatchScreen> {
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 18, vertical: 4),
                 child: Obx(() {
-                  List<List<Chapter>> reversed = _viewModel.reversed.value
+                  List<List<DEpisode>> reversed = _viewModel.reversed.value
                       ? chunks
                           .map((element) => element.reversed.toList())
                           .toList()

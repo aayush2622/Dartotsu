@@ -18,7 +18,7 @@ extension on AnilistQueries {
 
     Anilist.userid = user.id;
     Anilist.username.value = user.name ?? '';
-    Anilist.bg = user.bannerImage;
+    Anilist.bg.value = user.bannerImage ?? '';
     Anilist.avatar.value = user.avatar?.medium ?? '';
     Anilist.episodesWatched = user.statistics?.anime?.episodesWatched;
     Anilist.chapterRead = user.statistics?.manga?.chaptersRead;

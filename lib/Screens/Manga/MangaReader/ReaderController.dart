@@ -4,12 +4,12 @@ import 'package:dartotsu/DataClass/Media.dart';
 import 'package:dartotsu/Functions/Extensions.dart';
 import 'package:dartotsu/Functions/string_extensions.dart';
 import 'package:dartotsu/Preferences/IsarDataClasses/DefaultReaderSettings/DafaultReaderSettings.dart';
+import 'package:dartotsu_extension_bridge/Models/DEpisode.dart';
+import 'package:dartotsu_extension_bridge/Models/Page.dart';
+import 'package:dartotsu_extension_bridge/Models/Source.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../Api/Sources/Eval/dart/model/page.dart';
-import '../../../Api/Sources/Model/Source.dart';
-import '../../../DataClass/Chapter.dart';
 import '../../../Preferences/PrefManager.dart';
 import '../../../Widgets/CustomBottomDialog.dart';
 import '../../Settings/SettingsReaderScreen.dart';
@@ -31,7 +31,7 @@ class _ReaderControllerState extends State<ReaderController> {
   late Media media;
   late Source source;
   late List<PageUrl> pages;
-  late Chapter currentChapter;
+  late DEpisode currentChapter;
 
   @override
   void initState() {
@@ -39,7 +39,7 @@ class _ReaderControllerState extends State<ReaderController> {
     media = widget.reader.widget.media;
     currentChapter = widget.reader.widget.currentChapter;
     var sourceName = context.currentService(listen: false).getName;
-    var key = "${media.id}-${currentChapter.number}-$sourceName";
+    var key = "${media.id}-${currentChapter.episodeNumber}-$sourceName";
     pages = widget.reader.widget.pages;
     source = widget.reader.widget.source;
     var page = loadCustomData<int>("$key-current") ?? 1;
@@ -122,7 +122,7 @@ class _ReaderControllerState extends State<ReaderController> {
               Container(
                 alignment: Alignment.topLeft,
                 child: Text(
-                  "Chapter ${currentChapter.number}: ${currentChapter.title}",
+                  "Chapter ${currentChapter.episodeNumber}: ${currentChapter.episodeNumber}",
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 14,
@@ -191,14 +191,17 @@ class _ReaderControllerState extends State<ReaderController> {
     var index = chapterList.indexOf(currentChapter);
 
     var sortedList = chapterList.toList()
-      ..sort((a, b) => a.number.toDouble().compareTo(b.number.toDouble()));
+      ..sort((a, b) =>
+          a.episodeNumber.toDouble().compareTo(b.episodeNumber.toDouble()));
 
-    var previous = sortedList.lastWhereOrNull(
-            (c) => c.number.toDouble() < currentChapter.number.toDouble()) ??
+    var previous = sortedList.lastWhereOrNull((c) =>
+            c.episodeNumber.toDouble() <
+            currentChapter.episodeNumber.toDouble()) ??
         (index > 0 ? chapterList[index - 1] : null);
 
-    var next = sortedList.firstWhereOrNull(
-            (c) => c.number.toDouble() > currentChapter.number.toDouble()) ??
+    var next = sortedList.firstWhereOrNull((c) =>
+            c.episodeNumber.toDouble() >
+            currentChapter.episodeNumber.toDouble()) ??
         (index < chapterList.length - 1 ? chapterList[index + 1] : null);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
@@ -276,7 +279,7 @@ class _ReaderControllerState extends State<ReaderController> {
                       const SizedBox(width: 12),
                       Expanded(
                         child: Text(
-                          previous?.title.toString() ?? '',
+                          previous?.name.toString() ?? '',
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 14,
@@ -299,7 +302,7 @@ class _ReaderControllerState extends State<ReaderController> {
                     children: [
                       Expanded(
                         child: Text(
-                          next?.title.toString() ?? '',
+                          next?.name.toString() ?? '',
                           textAlign: TextAlign.right,
                           style: const TextStyle(
                             color: Colors.white,

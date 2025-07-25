@@ -2,10 +2,10 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dartotsu/Functions/Function.dart';
+import 'package:dartotsu_extension_bridge/Models/DEpisode.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../DataClass/Episode.dart';
 import '../../DataClass/Media.dart';
 import '../../Preferences/PrefManager.dart';
 import '../../Widgets/CustomBottomDialog.dart';
@@ -78,7 +78,7 @@ class _DiscordController extends GetxController {
 
   Future<void> setRpc(
     Media mediaData, {
-    Episode? episode,
+    DEpisode? episode,
     int? eTime,
     int? currentTime,
   }) async {
@@ -86,8 +86,8 @@ class _DiscordController extends GetxController {
 
     var isAnime = mediaData.anime != null;
     var totalFromSource = isAnime
-        ? mediaData.anime?.episodes?.values.last.number
-        : mediaData.manga?.chapters?.last.number;
+        ? mediaData.anime?.episodes?.values.last.episodeNumber
+        : mediaData.manga?.chapters?.last.episodeNumber;
 
     var totalFromMedia = isAnime
         ? mediaData.anime?.totalEpisodes
@@ -113,13 +113,13 @@ class _DiscordController extends GetxController {
             {
               'application_id': applicationId,
               'name': mediaData.userPreferredName,
-              'details': episode?.title,
+              'details': episode?.name,
               'state':
-                  '${isAnime ? "Episode" : "Chapter"}: ${episode?.number}/$total',
+                  '${isAnime ? "Episode" : "Chapter"}: ${episode?.episodeNumber}/$total',
               'type': 3,
               "timestamps": {"end": endTimestamp, "start": startTimestamp},
               'assets': {
-                'large_image': await (episode?.thumb ?? mediaData.cover)
+                'large_image': await (episode?.thumbnail ?? mediaData.cover)
                         ?.getDiscordUrl() ??
                     smallIcon,
                 'large_text': mediaData.userPreferredName,
