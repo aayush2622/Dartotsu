@@ -1,7 +1,9 @@
 import 'dart:io';
 
+import 'package:dartotsu_extension_bridge/ExtensionManager.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../Adaptor/Settings/SettingsAdaptor.dart';
 import '../../DataClass/Setting.dart';
@@ -9,6 +11,7 @@ import '../../Functions/Function.dart';
 import '../../Preferences/PrefManager.dart';
 import '../../Theme/LanguageSwitcher.dart';
 import '../../Widgets/AlertDialogBuilder.dart';
+import '../../Widgets/DropdownMenu.dart';
 import 'BaseSettingsScreen.dart';
 
 class SettingsCommonScreen extends StatefulWidget {
@@ -34,8 +37,21 @@ class SettingsCommonScreenState extends BaseSettingsScreen {
 
   @override
   List<Widget> get settingsList {
+    var manager = Get.find<ExtensionManager>();
     return [
       languageSwitcher(context),
+      buildDropdownMenu(
+        padding: const EdgeInsets.symmetric(vertical: 12.0),
+        currentValue:
+            ExtensionType.fromManager(manager.currentManager).toString(),
+        options: getSupportedExtensions.map((e) => e.toString()).toList(),
+        onChanged: (String newValue) {
+          manager.setCurrentManager(
+            ExtensionType.fromString(newValue),
+          );
+        },
+        prefixIcon: Icons.source,
+      ),
       SettingsAdaptor(
         settings: [
           Setting(

@@ -1,9 +1,9 @@
 import 'dart:io';
 
 import 'package:dartotsu/Adaptor/Episode/EpisodeAdaptor.dart';
-import 'package:dartotsu/Api/Sources/Eval/dart/model/video.dart' as v;
-import 'package:dartotsu/Api/Sources/Model/Source.dart';
-import 'package:dartotsu/DataClass/Episode.dart';
+import 'package:dartotsu_extension_bridge/Models/DEpisode.dart';
+import 'package:dartotsu_extension_bridge/Models/Source.dart';
+import 'package:dartotsu_extension_bridge/Models/Video.dart' as v;
 import 'package:dartotsu/DataClass/Media.dart' as m;
 import 'package:dartotsu/Functions/Extensions.dart';
 import 'package:dartotsu/Functions/Function.dart';
@@ -43,7 +43,7 @@ class PlayerController extends StatefulWidget {
 class _PlayerControllerState extends State<PlayerController> {
   late m.Media media;
   late List<v.Video> videos;
-  late Episode currentEpisode;
+  late DEpisode currentEpisode;
   late Rx<BoxFit> resizeMode;
   late Source source;
   late RxBool showEpisodes;
@@ -64,7 +64,7 @@ class _PlayerControllerState extends State<PlayerController> {
     media = widget.player.widget.media;
     currentEpisode = widget.player.widget.currentEpisode;
     var sourceName = context.currentService(listen: false).getName;
-    var key = "${media.id}-${currentEpisode.number}-$sourceName";
+    var key = "${media.id}-${currentEpisode.episodeNumber}-$sourceName";
 
     videos = widget.player.widget.videos;
     source = widget.player.widget.source;
@@ -147,7 +147,7 @@ class _PlayerControllerState extends State<PlayerController> {
   Future<void> setTimeStamps() async {
     timeStamps.value = await AniSkip.getResult(
           malId: media.idMAL,
-          episodeNumber: currentEpisode.number.toInt(),
+          episodeNumber: currentEpisode.episodeNumber.toInt(),
           episodeLength: _timeStringToSeconds(controller.maxTime.value).toInt(),
           useProxyForTimeStamps: false,
         ) ??
@@ -173,7 +173,7 @@ class _PlayerControllerState extends State<PlayerController> {
   Future<void> _saveProgress(int currentProgress) async {
     if (!mounted) return;
     var sourceName = context.currentService(listen: false).getName;
-    var key = "${media.id}-${currentEpisode.number}-$sourceName";
+    var key = "${media.id}-${currentEpisode.episodeNumber}-$sourceName";
     var maxProgress = controller.maxTime.value;
     saveCustomData<int>("$key-current", currentProgress);
     saveCustomData<int>("$key-max", _timeStringToSeconds(maxProgress).toInt());
@@ -422,7 +422,7 @@ class _PlayerControllerState extends State<PlayerController> {
                   Container(
                     alignment: Alignment.topLeft,
                     child: Text(
-                      "Episode ${currentEpisode.number}: ${currentEpisode.title}",
+                      "Episode ${currentEpisode.episodeNumber}: ${currentEpisode.episodeNumber}",
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 14,

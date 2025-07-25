@@ -8,7 +8,6 @@ import '../../Adaptor/Settings/SettingsAdaptor.dart';
 import '../../DataClass/Setting.dart';
 import '../../Functions/Function.dart';
 import '../../Preferences/PrefManager.dart';
-import '../../StorageProvider.dart';
 import 'BaseSettingsScreen.dart';
 import 'Developer.dart';
 
@@ -69,9 +68,9 @@ class SettingsAboutScreenState extends BaseSettingsScreen {
         description: getString.logFileDescription,
         icon: Icons.share,
         onClick: () async {
-          var p = await StorageProvider.getDirectory(
+          var p = await PrefManager.getDirectory(
+            useSystemPath: false,
             useCustomPath: true,
-            customPath: loadData(PrefName.customPath),
           );
 
           var path = p?.path ?? "";

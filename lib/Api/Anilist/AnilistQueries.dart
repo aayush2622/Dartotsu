@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'dart:math';
 
+import 'package:collection/collection.dart';
 import 'package:dartotsu/Api/Anilist/Anilist.dart';
 import 'package:dartotsu/Api/Anilist/Data/fuzzyData.dart';
 import 'package:dartotsu/Functions/Function.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_qjs/quickjs/ffi.dart';
 
 import '../../DataClass/Author.dart';
 import '../../DataClass/Character.dart';

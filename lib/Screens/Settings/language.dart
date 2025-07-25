@@ -19,7 +19,7 @@ String completeLanguageCode(String lang) {
 }
 
 final sortedLanguagesMap = {
-  "all": "All",
+  "All": "all",
   "Afrikaans": "af",
   "አማርኛ": "am",
   "العربية": "ar",

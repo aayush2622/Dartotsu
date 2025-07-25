@@ -24,17 +24,17 @@ Anime _$AnimeFromJson(Map<String, dynamic> json) => Anime(
       nextAiringEpisodeTime: (json['nextAiringEpisodeTime'] as num?)?.toInt(),
       selectedEpisode: json['selectedEpisode'] as String?,
       episodes: (json['episodes'] as Map<String, dynamic>?)?.map(
-        (k, e) => MapEntry(k, Episode.fromJson(e as Map<String, dynamic>)),
+        (k, e) => MapEntry(k, DEpisode.fromJson(e as Map<String, dynamic>)),
       ),
       slug: json['slug'] as String?,
       kitsuEpisodes: (json['kitsuEpisodes'] as Map<String, dynamic>?)?.map(
-        (k, e) => MapEntry(k, Episode.fromJson(e as Map<String, dynamic>)),
+        (k, e) => MapEntry(k, DEpisode.fromJson(e as Map<String, dynamic>)),
       ),
       fillerEpisodes: (json['fillerEpisodes'] as Map<String, dynamic>?)?.map(
-        (k, e) => MapEntry(k, Episode.fromJson(e as Map<String, dynamic>)),
+        (k, e) => MapEntry(k, DEpisode.fromJson(e as Map<String, dynamic>)),
       ),
       anifyEpisodes: (json['anifyEpisodes'] as Map<String, dynamic>?)?.map(
-        (k, e) => MapEntry(k, Episode.fromJson(e as Map<String, dynamic>)),
+        (k, e) => MapEntry(k, DEpisode.fromJson(e as Map<String, dynamic>)),
       ),
     );
 

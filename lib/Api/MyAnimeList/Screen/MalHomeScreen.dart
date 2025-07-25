@@ -55,7 +55,6 @@ class MalHomeScreen extends BaseHomeScreen {
   @override
   Future<void> loadAll() async {
     resetPageData();
-    await getUserId();
     await Future.wait([loadList()]);
   }
 

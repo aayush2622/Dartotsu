@@ -1,8 +1,8 @@
+import 'package:dartotsu_extension_bridge/Models/DEpisode.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../Api/Anilist/Data/media.dart';
 import 'Author.dart';
-import 'Episode.dart';
 
 part 'Data/Anime.g.dart';
 
@@ -24,11 +24,11 @@ class Anime {
   int? nextAiringEpisodeTime;
 
   String? selectedEpisode;
-  Map<String, Episode>? episodes;
+  Map<String, DEpisode>? episodes;
   String? slug;
-  Map<String, Episode>? kitsuEpisodes;
-  Map<String, Episode>? fillerEpisodes;
-  Map<String, Episode>? anifyEpisodes;
+  Map<String, DEpisode>? kitsuEpisodes;
+  Map<String, DEpisode>? fillerEpisodes;
+  Map<String, DEpisode>? anifyEpisodes;
 
   Anime({
     this.totalEpisodes,

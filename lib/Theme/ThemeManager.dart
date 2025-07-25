@@ -24,6 +24,7 @@ ThemeData getTheme(ColorScheme? material, ThemeNotifier themeManager) {
   final customColor = themeManager.customColor;
   final isDarkMode = themeManager.isDarkMode;
   ThemeData baseTheme;
+
   switch (theme) {
     case 'blue':
       baseTheme = isDarkMode ? cyanDarkTheme : cyanLightTheme;
@@ -59,6 +60,7 @@ ThemeData getTheme(ColorScheme? material, ThemeNotifier themeManager) {
       baseTheme = isDarkMode ? purpleDarkTheme : purpleLightTheme;
       break;
   }
+
   if (useMaterial && material != null) {
     baseTheme =
         isDarkMode ? materialThemeDark(material) : materialThemeLight(material);
@@ -116,4 +118,15 @@ Widget themeDropdown(BuildContext context) {
     },
     prefixIcon: Icons.color_lens,
   );
+}
+
+Widget ThemedWidget({
+  required BuildContext context,
+  required Widget materialWidget,
+  Widget? glassWidget,
+}) {
+  var themeManager = Provider.of<ThemeNotifier>(context);
+  final isGlassMode = themeManager.useGlassMode;
+
+  return isGlassMode ? glassWidget ?? materialWidget : materialWidget;
 }

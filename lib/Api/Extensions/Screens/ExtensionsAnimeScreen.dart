@@ -1,17 +1,14 @@
-import 'package:dartotsu/Api/Sources/Eval/dart/model/m_pages.dart';
+import 'package:dartotsu_extension_bridge/ExtensionManager.dart';
+import 'package:dartotsu_extension_bridge/Models/Source.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
+import 'package:get/get.dart';
 
 import '../../../Adaptor/Media/Widgets/Chips.dart';
 import '../../../Adaptor/Media/Widgets/MediaSection.dart';
 import '../../../DataClass/Media.dart';
 import '../../../Functions/Function.dart';
-import '../../../Functions/GetExtensions.dart';
 import '../../../Services/Screens/BaseAnimeScreen.dart';
 import '../../../logger.dart';
-import '../../Sources/Model/Manga.dart';
-import '../../Sources/Model/Source.dart';
-import '../../Sources/Search/get_popular.dart';
 
 class ExtensionsAnimeScreen extends BaseAnimeScreen {
   var data = Rxn<Map<String, List<Media>>>({});
@@ -22,16 +19,15 @@ class ExtensionsAnimeScreen extends BaseAnimeScreen {
   @override
   Future<void> loadAll() async {
     resetPageData();
-    var sources = await Extensions.getSortedExtension(ItemType.anime);
+    final manager = Get.find<ExtensionManager>().currentManager;
+
+    var sources = manager.getSortedInstalledExtension(ItemType.anime).value;
     _buildSections(sources);
     for (var source in sources) {
       List<Media>? result;
       try {
-        var res = await getPopular(
-          source: source,
-          page: 1,
-        );
-        result = res?.toMedia(isAnime: true, source: source) ?? [];
+        var res = await currentSourceMethods(source).getPopular(1);
+        result = res.toMedia(isAnime: true, source: source);
       } catch (e) {
         Logger.log('Source ${source.name} failed: ${e.toString()}');
       }
@@ -49,12 +45,9 @@ class ExtensionsAnimeScreen extends BaseAnimeScreen {
       tasks.add(
         () async {
           try {
-            var result = (await getPopular(
-              source: source,
-              page: 1,
-            ))
-                ?.toMedia(isAnime: true, source: source);
-            if (result != null && result.isNotEmpty) {
+            var result = (await currentSourceMethods(source).getPopular(1))
+                .toMedia(isAnime: true, source: source);
+            if (result.isNotEmpty) {
               data.value = {...?data.value, source.name ?? 'Unknown': result};
             }
           } catch (e) {

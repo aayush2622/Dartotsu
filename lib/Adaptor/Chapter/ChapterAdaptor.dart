@@ -1,12 +1,12 @@
 import 'package:dartotsu/Functions/Function.dart';
 import 'package:dartotsu/Screens/Manga/MangaReader/Reader.dart';
+import 'package:dartotsu_extension_bridge/ExtensionManager.dart';
+import 'package:dartotsu_extension_bridge/Models/DEpisode.dart';
+import 'package:dartotsu_extension_bridge/Models/Source.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import '../../Animation/ScaleAnimation.dart';
-import '../../Api/Sources/Model/Source.dart';
-import '../../Api/Sources/Search/get_pages.dart';
-import '../../DataClass/Chapter.dart';
 import '../../DataClass/Media.dart';
 import '../../Widgets/CustomBottomDialog.dart';
 import 'ChapterCompactViewHolder.dart';
@@ -15,7 +15,7 @@ import 'ChapterListViewHolder.dart';
 class ChapterAdaptor extends StatefulWidget {
   final int type;
   final Source source;
-  final List<Chapter> chapterList;
+  final List<DEpisode> chapterList;
   final Media mediaData;
   final VoidCallback? onEpisodeClick;
 
@@ -33,7 +33,7 @@ class ChapterAdaptor extends StatefulWidget {
 }
 
 class ChapterAdaptorState extends State<ChapterAdaptor> {
-  late List<Chapter> chapterList;
+  late List<DEpisode> chapterList;
 
   @override
   void initState() {
@@ -153,7 +153,7 @@ class ChapterAdaptorState extends State<ChapterAdaptor> {
 
 Future<void> onChapterClick(
   BuildContext context,
-  Chapter chapter,
+  DEpisode chapter,
   Source source,
   Media mediaData,
   VoidCallback? onChapterClick,
@@ -169,7 +169,7 @@ Future<void> onChapterClick(
     ),
   );
 
-  final pages = await getPagesList(source: source, mangaId: chapter.link!);
+  final pages = await currentSourceMethods(source).getPageList(chapter);
   if (context.mounted) {
     onChapterClick?.call();
     Navigator.pop(context);
@@ -178,7 +178,7 @@ Future<void> onChapterClick(
       MediaReader(
         media: mediaData,
         currentChapter: chapter,
-        pages: pages!,
+        pages: pages,
         source: source,
       ),
     );

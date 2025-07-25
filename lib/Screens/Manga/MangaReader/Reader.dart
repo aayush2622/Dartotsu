@@ -4,22 +4,22 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dartotsu/Functions/Extensions.dart';
 import 'package:dartotsu/Preferences/IsarDataClasses/DefaultReaderSettings/DafaultReaderSettings.dart';
 import 'package:dartotsu/Widgets/ScrollConfig.dart';
+import 'package:dartotsu_extension_bridge/Models/DEpisode.dart';
+import 'package:dartotsu_extension_bridge/Models/Page.dart';
+import 'package:dartotsu_extension_bridge/Models/Source.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
-import '../../../Api/Sources/Eval/dart/model/page.dart';
-import '../../../Api/Sources/Model/Source.dart';
-import '../../../DataClass/Chapter.dart';
 import '../../../DataClass/Media.dart';
 import '../../../Preferences/PrefManager.dart';
 import 'ReaderController.dart';
 
 class MediaReader extends StatefulWidget {
   final Media media;
-  final Chapter currentChapter;
+  final DEpisode currentChapter;
   final List<PageUrl> pages;
   final Source source;
   final bool isOffline;
@@ -81,10 +81,12 @@ class MediaReaderState extends State<MediaReader> {
     if (incognito || !chapterEnd) return;
 
     var service = Get.context!.currentService(listen: false);
-    var saveProgress =
-        loadCustomData<bool>("${widget.media.id}-${service.getName}-saveProgress") ?? true;
+    var saveProgress = loadCustomData<bool>(
+            "${widget.media.id}-${service.getName}-saveProgress") ??
+        true;
     if (saveProgress) {
-      service.data.mutations?.setProgress(widget.media,widget.currentChapter.number);
+      service.data.mutations
+          ?.setProgress(widget.media, widget.currentChapter.episodeNumber);
     }
   }
 

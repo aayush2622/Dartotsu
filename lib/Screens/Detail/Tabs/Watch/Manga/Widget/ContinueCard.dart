@@ -1,15 +1,15 @@
 import 'package:dartotsu/Adaptor/Chapter/ChapterAdaptor.dart';
 import 'package:dartotsu/Widgets/CachedNetworkImage.dart';
+import 'package:dartotsu_extension_bridge/Models/DEpisode.dart';
+import 'package:dartotsu_extension_bridge/Models/Source.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../Adaptor/Episode/Widget/HandleProgress.dart';
-import '../../../../../../Api/Sources/Model/Source.dart';
-import '../../../../../../DataClass/Chapter.dart';
 import '../../../../../../DataClass/Media.dart';
 
 class ContinueCard extends StatelessWidget {
   final Media mediaData;
-  final Chapter? chapter;
+  final DEpisode? chapter;
   final Source source;
 
   const ContinueCard({
@@ -56,7 +56,7 @@ class ContinueCard extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Text(
-                    'Continue : Chapter ${chapter!.number} \n ${chapter!.title}',
+                    'Continue : Chapter ${chapter!.episodeNumber} \n ${chapter!.name}',
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     textAlign: TextAlign.center,
@@ -73,7 +73,7 @@ class ContinueCard extends StatelessWidget {
                 child: handleProgress(
                   context: context,
                   mediaId: mediaData.id,
-                  ep: chapter!.number,
+                  ep: chapter!.episodeNumber,
                   width: double.infinity,
                 ),
               ),

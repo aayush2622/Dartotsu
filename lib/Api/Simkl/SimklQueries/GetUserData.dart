@@ -12,15 +12,14 @@ extension on SimklQueries {
       return true;
     }
     Simkl.run.value = false;
-    var user =
-        (await executeQuery<User>('https://api.simkl.com/users/settings'));
+    var user = await executeQuery<User>('https://api.simkl.com/users/settings');
     if (user == null) return false;
 
-    var res = (await executeQuery<Stats>(
-        'https://api.simkl.com/users/${user.account?.id}/stats'));
+    var res = await executeQuery<Stats>(
+        'https://api.simkl.com/users/${user.account?.id}/stats');
     Simkl.userid = user.account?.id;
     Simkl.username.value = user.user?.name ?? '';
-    Simkl.bg = user.user?.avatar ?? '';
+    Simkl.bg.value = user.user?.avatar ?? '';
     Simkl.avatar.value = user.user?.avatar ?? '';
     Simkl.episodesWatched = res?.anime?.completed?.watchedEpisodesCount;
     Simkl.chapterRead = res?.tv?.completed?.watchedEpisodesCount;

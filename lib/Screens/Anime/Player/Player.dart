@@ -6,6 +6,8 @@ import 'package:dartotsu/Functions/Extensions.dart';
 import 'package:dartotsu/Preferences/IsarDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
 import 'package:dartotsu/Preferences/PrefManager.dart';
 import 'package:dartotsu/Theme/LanguageSwitcher.dart';
+import 'package:dartotsu_extension_bridge/Models/DEpisode.dart';
+import 'package:dartotsu_extension_bridge/Models/Source.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -13,9 +15,7 @@ import 'package:screen_brightness/screen_brightness.dart';
 import 'package:volume_controller/volume_controller.dart';
 
 import '../../../../../../Adaptor/Episode/EpisodeAdaptor.dart';
-import '../../../../../../Api/Sources/Eval/dart/model/video.dart' as v;
-import '../../../../../../Api/Sources/Model/Source.dart';
-import '../../../../../../DataClass/Episode.dart';
+import 'package:dartotsu_extension_bridge/Models/Video.dart' as v;
 import '../../../../../../DataClass/Media.dart' as m;
 import '../../../../../../Widgets/ScrollConfig.dart';
 import '../../Detail/Tabs/Watch/Anime/Widget/AnimeCompactSettings.dart';
@@ -30,7 +30,7 @@ class MediaPlayer extends StatefulWidget {
   final m.Media media;
   final int index;
   final List<v.Video> videos;
-  final Episode currentEpisode;
+  final DEpisode currentEpisode;
   final Source source;
   final bool isOffline;
 
@@ -103,7 +103,7 @@ class MediaPlayerState extends State<MediaPlayer>
     videoPlayerController = WindowsPlayer(resizeMode, settings);
     var sourceName = context.currentService(listen: false).getName;
     var currentProgress = loadCustomData<int>(
-      "${widget.media.id}-${widget.currentEpisode.number}-$sourceName-current",
+      "${widget.media.id}-${widget.currentEpisode.episodeNumber}-$sourceName-current",
     );
     videoPlayerController.open(
         currentQuality, Duration(seconds: currentProgress ?? 0));
@@ -158,10 +158,12 @@ class MediaPlayerState extends State<MediaPlayer>
     if (widget.isOffline) return;
 
     var service = Get.context!.currentService(listen: false);
-    var saveProgress =
-        loadCustomData<bool>("${widget.media.id}-${service.getName}-saveProgress") ?? true;
+    var saveProgress = loadCustomData<bool>(
+            "${widget.media.id}-${service.getName}-saveProgress") ??
+        true;
     if (saveProgress) {
-      service.data.mutations?.setProgress(widget.media,widget.currentEpisode.number);
+      service.data.mutations
+          ?.setProgress(widget.media, widget.currentEpisode.episodeNumber);
     }
   }
 

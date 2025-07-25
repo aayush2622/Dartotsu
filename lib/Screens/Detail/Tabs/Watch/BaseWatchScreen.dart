@@ -1,9 +1,9 @@
 import 'package:dartotsu/DataClass/Media.dart';
 import 'package:dartotsu/Theme/LanguageSwitcher.dart';
+import 'package:dartotsu_extension_bridge/Models/Source.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
-import '../../../../Api/Sources/Model/Source.dart';
 import '../../../../Functions/Function.dart';
 import '../../../../Preferences/PrefManager.dart';
 import '../../Widgets/Releasing.dart';
@@ -96,12 +96,14 @@ abstract class BaseWatchScreen<T extends StatefulWidget> extends State<T> {
             );
           }),
           const SizedBox(height: 12),
-          SourceSelector(
-            currentSource: viewModel.source.value,
-            onSourceChange: onSourceChange,
-            mediaData: mediaData,
-            sourceList: viewModel.sourceList,
-          ),
+          Obx(() {
+            return SourceSelector(
+              currentSource: viewModel.source.value,
+              onSourceChange: onSourceChange,
+              mediaData: mediaData,
+              sourceList: viewModel.sourceList.value,
+            );
+          }),
           const SizedBox(height: 16),
           if (viewModel.source.value != null) _buildWrongTitle(),
         ],

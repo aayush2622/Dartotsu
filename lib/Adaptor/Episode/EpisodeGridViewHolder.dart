@@ -1,16 +1,16 @@
 import 'package:dartotsu/Functions/string_extensions.dart';
 import 'package:dartotsu/Theme/ThemeProvider.dart';
 import 'package:dartotsu/Widgets/CachedNetworkImage.dart';
+import 'package:dartotsu_extension_bridge/Models/DEpisode.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../DataClass/Episode.dart';
 import '../../DataClass/Media.dart';
 import '../../Theme/Colors.dart';
 import 'Widget/HandleProgress.dart';
 
 class EpisodeCardView extends StatelessWidget {
-  final Episode episode;
+  final DEpisode episode;
   final Media mediaData;
   final bool isWatched;
 
@@ -18,10 +18,11 @@ class EpisodeCardView extends StatelessWidget {
     super.key,
     required this.episode,
     required this.mediaData,
-  }) : isWatched = (mediaData.userProgress != null &&
-                mediaData.userProgress! > 0)
-            ? mediaData.userProgress!.toDouble() >= episode.number.toDouble()
-            : false;
+  }) : isWatched =
+            (mediaData.userProgress != null && mediaData.userProgress! > 0)
+                ? mediaData.userProgress!.toDouble() >=
+                    episode.episodeNumber.toDouble()
+                : false;
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +52,7 @@ class EpisodeCardView extends StatelessWidget {
           handleProgress(
             context: context,
             mediaId: mediaData.id,
-            ep: episode.number,
+            ep: episode.episodeNumber,
             width: double.infinity,
           )
         ],
@@ -78,7 +79,7 @@ class EpisodeCardView extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.only(right: 8, bottom: 0),
           child: Text(
-            episode.number.toString(),
+            episode.episodeNumber.toString(),
             style: TextStyle(
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.bold,
@@ -96,7 +97,7 @@ class EpisodeCardView extends StatelessWidget {
       child: cachedNetworkImage(
         width: double.infinity,
         height: 120,
-        imageUrl: episode.thumb ?? '',
+        imageUrl: episode.thumbnail ?? '',
         fit: BoxFit.cover,
         placeholder: (context, url) => Container(
           color: Colors.white12,
@@ -119,9 +120,9 @@ class EpisodeCardView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            if (episode.title != null)
+            if (episode.name != null)
               Text(
-                episode.title!,
+                episode.name!,
                 maxLines: 3,
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(

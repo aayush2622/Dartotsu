@@ -1,21 +1,19 @@
 import 'package:dartotsu/logger.dart';
+import 'package:dartotsu_extension_bridge/ExtensionManager.dart';
+import 'package:dartotsu_extension_bridge/Models/DEpisode.dart';
+import 'package:dartotsu_extension_bridge/Models/DMedia.dart';
+import 'package:dartotsu_extension_bridge/Models/Source.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
-import '../../../../../Api/Sources/Eval/dart/model/m_chapter.dart';
-import '../../../../../Api/Sources/Eval/dart/model/m_manga.dart';
-import '../../../../../Api/Sources/Model/Source.dart';
-import '../../../../../Api/Sources/Search/get_detail.dart';
-import '../../../../../DataClass/Chapter.dart';
 import '../../../../../DataClass/Media.dart';
 import '../../../../../Preferences/IsarDataClasses/MediaSettings/MediaSettings.dart';
 import '../BaseParser.dart';
-import '../Functions/ParseChapterNumber.dart';
 import 'Widget/MangaCompactSettings.dart';
 
 class MangaParser extends BaseParser {
-  var unModifiedChapterList = Rxn<List<Chapter>>(null);
-  var chapterList = Rxn<List<Chapter>>(null);
+  var unModifiedChapterList = Rxn<List<DEpisode>>(null);
+  var chapterList = Rxn<List<DEpisode>>(null);
   var dataLoaded = false.obs;
 
   void init(Media mediaData) async {
@@ -40,7 +38,7 @@ class MangaParser extends BaseParser {
           reversed.value = s.isReverse;
           toggledScanlators.value = t;
           chapterList.value = unModifiedChapterList.value?.where((element) {
-            var scanlator = element.mChapter?.scanlator;
+            var scanlator = element.scanlator;
             return scanlator == null ||
                 toggledScanlators
                     .value![this.scanlator.value?.indexOf(scanlator) ?? 0];
@@ -85,16 +83,16 @@ class MangaParser extends BaseParser {
     );
   }
 
-  void getChapter(MManga? media, Source source) async {
-    if (media == null || media.link == null) {
-      chapterList.value = <Chapter>[];
+  void getChapter(DMedia? media, Source source) async {
+    if (media == null || media.url == null) {
+      chapterList.value = <DEpisode>[];
       errorType.value = ErrorType.NotFound;
       return;
     }
 
-    MManga? m;
+    DMedia? m;
     try {
-      m = await getDetail(url: media.link!, source: source);
+      m = await currentSourceMethods(source).getDetail(media);
     } catch (e) {
       Logger.log(e.toString());
       errorType.value = ErrorType.NoResult;
@@ -103,32 +101,19 @@ class MangaParser extends BaseParser {
     }
 
     dataLoaded.value = true;
-    if (m.chapters == null) {
-      chapterList.value = <Chapter>[];
+    if (m.episodes == null) {
+      chapterList.value = <DEpisode>[];
       errorType.value = ErrorType.NoResult;
       return;
     }
-    chapterList.value =
-        m.chapters?.reversed.map((e) => MChapterToChapter(e, media)).toList();
+    chapterList.value = m.episodes?.reversed.toList();
     unModifiedChapterList.value = chapterList.value;
     var uniqueScanlators = {
       for (var element in chapterList.value!)
-        if (element.mChapter?.scanlator != null) element.mChapter!.scanlator!
+        if (element.scanlator != null) element.scanlator!
     };
 
     scanlator.value = uniqueScanlators.toList();
     toggledScanlators.value = List<bool>.filled(uniqueScanlators.length, true);
   }
-}
-
-Chapter MChapterToChapter(MChapter chapter, MManga? selectedMedia) {
-  var episodeNumber = ChapterRecognition.parseChapterNumber(
-      selectedMedia?.name ?? '', chapter.name ?? '');
-  return Chapter(
-    title: chapter.name,
-    link: chapter.url,
-    number: episodeNumber.toString(),
-    date: chapter.dateUpload,
-    mChapter: chapter,
-  );
 }

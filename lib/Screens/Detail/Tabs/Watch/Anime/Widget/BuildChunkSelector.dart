@@ -1,13 +1,13 @@
+import 'package:dartotsu_extension_bridge/Models/DEpisode.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
-import '../../../../../../DataClass/Episode.dart';
 import '../../../../../../Widgets/ScrollConfig.dart';
 
-(List<List<Episode>> chunks, RxInt selectedChunkIndex) buildChunks(
+(List<List<DEpisode>> chunks, RxInt selectedChunkIndex) buildChunks(
   BuildContext context,
-  Map<String, Episode> episodeList,
+  Map<String, DEpisode> episodeList,
   String selectedEpisode,
 ) {
   final chunks = _chunkEpisodes(episodeList, _calculateChunkSize(episodeList));
@@ -18,7 +18,7 @@ import '../../../../../../Widgets/ScrollConfig.dart';
   return (chunks, selectedChunkIndex);
 }
 
-int _calculateChunkSize(Map<String, Episode> episodeList) {
+int _calculateChunkSize(Map<String, DEpisode> episodeList) {
   final total = episodeList.values.length;
   final divisions = total / 10;
   return (divisions < 25)
@@ -28,8 +28,8 @@ int _calculateChunkSize(Map<String, Episode> episodeList) {
           : 100;
 }
 
-List<List<Episode>> _chunkEpisodes(
-    Map<String, Episode> episodeList, int chunkSize) {
+List<List<DEpisode>> _chunkEpisodes(
+    Map<String, DEpisode> episodeList, int chunkSize) {
   final episodeValues = episodeList.values.toList();
   return List.generate(
       (episodeValues.length / chunkSize).ceil(),
@@ -42,10 +42,10 @@ List<List<Episode>> _chunkEpisodes(
 }
 
 RxInt _findSelectedChunkIndex(
-    List<List<Episode>> chunks, String targetEpisodeNumber) {
+    List<List<DEpisode>> chunks, String targetEpisodeNumber) {
   for (var chunkIndex = 0; chunkIndex < chunks.length; chunkIndex++) {
     if (chunks[chunkIndex]
-        .any((episode) => episode.number == targetEpisodeNumber)) {
+        .any((episode) => episode.episodeNumber == targetEpisodeNumber)) {
       return chunkIndex.obs;
     }
   }
@@ -54,7 +54,7 @@ RxInt _findSelectedChunkIndex(
 
 Widget ChunkSelector(
   BuildContext context,
-  List<List<Episode>> chunks,
+  List<List<DEpisode>> chunks,
   RxInt selectedChunkIndex,
   RxBool isReversed,
 ) {
@@ -83,8 +83,8 @@ Widget ChunkSelector(
                   showCheckmark: false,
                   label: Text(
                       !isReversed.value
-                          ? '${chunks[index].first.number} - ${chunks[index].last.number}'
-                          : '${chunks[index].last.number} - ${chunks[index].first.number}',
+                          ? '${chunks[index].first.episodeNumber} - ${chunks[index].last.episodeNumber}'
+                          : '${chunks[index].last.episodeNumber} - ${chunks[index].first.episodeNumber}',
                       style: const TextStyle(
                           fontFamily: 'Poppins', fontWeight: FontWeight.bold)),
                   selected: selectedChunkIndex.value == index,

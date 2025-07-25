@@ -22,25 +22,23 @@ class MediaPageSmallViewHolder extends StatelessWidget {
     final gradientColors = isDarkMode
         ? [Colors.transparent, theme.surface]
         : [Colors.white.withValues(alpha: 0.2), theme.surface];
-    return Scaffold(
-      body: Stack(
-        children: [
-          Positioned.fill(
-            child: _buildBackground(mediaInfo.banner ?? mediaInfo.cover),
-          ),
-          _buildGradientOverlay(gradientColors),
-          const Blur(
-            colorOpacity: 0.0,
-            blur: 10,
-            blurColor: Colors.transparent,
-            child: SizedBox.expand(),
-          ),
-          Padding(
-            padding: EdgeInsets.only(bottom: 24, top: 0.statusBar()),
-            child: _buildContent(context, theme),
-          ),
-        ],
-      ),
+    return Stack(
+      children: [
+        Positioned.fill(
+          child: _buildBackground(mediaInfo.banner ?? mediaInfo.cover),
+        ),
+        _buildGradientOverlay(gradientColors),
+        const Blur(
+          colorOpacity: 0.0,
+          blur: 10,
+          blurColor: Colors.transparent,
+          child: SizedBox.expand(),
+        ),
+        Padding(
+          padding: EdgeInsets.only(bottom: 24, top: 0.statusBar()),
+          child: _buildContent(context, theme),
+        ),
+      ],
     );
   }
 

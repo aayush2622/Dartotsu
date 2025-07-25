@@ -9,8 +9,8 @@
 -keep class androidx.lifecycle.** { *; }
 
 # Keep your custom package classes (optimize to specific ones if possible)
--keep class ani.aayush262.** { *; }
-
+-keep class com.aayush262.** { *; }
+-keepclassmembers class com.aayush262.** { *; }
 # Keep Gson models (optimize to specific models if possible)
 -keep class com.google.gson.** { *; }
 
@@ -23,8 +23,6 @@
 -keep class com.fasterxml.jackson.core.** { *; }
 -keep class com.fasterxml.jackson.databind.** { *; }
 
-# Keep Hive classes
--keep class hive.** { *; }
 
 # Keep Isar classes
 -keep class isar.** { *; }
@@ -38,7 +36,6 @@
 -keep class **_Freezed {
     <init>(...);
 }
-
 # Keep annotations
 -keepattributes *Annotation*
 

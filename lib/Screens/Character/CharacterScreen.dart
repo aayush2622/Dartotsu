@@ -6,7 +6,6 @@ import 'package:dartotsu/Widgets/CachedNetworkImage.dart';
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
 import 'package:html/parser.dart' as html_parser;
-import 'package:kenburns_nullsafety/kenburns_nullsafety.dart';
 import 'package:provider/provider.dart';
 
 import '../../Functions/Function.dart';
@@ -121,19 +120,13 @@ class CharacterScreenState extends State<CharacterScreen> {
   }
 
   Widget _buildKenBurnsBackground() {
-    return KenBurns(
-      maxScale: 2.5,
-      minAnimationDuration: const Duration(milliseconds: 6000),
-      maxAnimationDuration: const Duration(milliseconds: 20000),
-      child: cachedNetworkImage(
-        imageUrl:
-            widget.characterInfo.banner ?? widget.characterInfo.image ?? '',
-        fit: BoxFit.cover,
-        width: double.infinity,
-        height: 384 + (statusBarHeight * 2),
-        placeholder: (context, url) =>
-            const Center(child: CircularProgressIndicator()),
-      ),
+    return cachedNetworkImage(
+      imageUrl: widget.characterInfo.banner ?? widget.characterInfo.image ?? '',
+      fit: BoxFit.cover,
+      width: double.infinity,
+      height: 384 + (statusBarHeight * 2),
+      placeholder: (context, url) =>
+          const Center(child: CircularProgressIndicator()),
     );
   }
 

@@ -1,4 +1,4 @@
-import 'package:dartotsu/DataClass/Chapter.dart';
+import 'package:dartotsu_extension_bridge/Models/DEpisode.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'Author.dart';
@@ -9,7 +9,7 @@ part 'Data/Manga.g.dart';
 class Manga {
   int? totalChapters;
   String? selectedChapter;
-  List<Chapter>? chapters;
+  List<DEpisode>? chapters;
   String? slug;
   author? mediaAuthor;
 

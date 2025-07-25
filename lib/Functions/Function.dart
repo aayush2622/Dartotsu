@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:dartotsu/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -78,7 +77,6 @@ Future<void> snackString(
   BuildContext? c,
 }) async {
   var context = c ?? Get.context;
-  Logger.log('Showing SnackBar with message: $s');
   debugPrint('Showing SnackBar with message: $s');
   if (context != null && s != null && s.isNotEmpty) {
     var theme = Theme.of(context).colorScheme;
@@ -124,7 +122,7 @@ void copyToClipboard(String text) {
   var context = Get.overlayContext;
   var theme = Theme.of(context!).colorScheme;
   Clipboard.setData(ClipboardData(text: text));
-  Logger.log("Copied to clipboard: $text");
+  debugPrint("Copied to clipboard: $text");
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
       content: Text(

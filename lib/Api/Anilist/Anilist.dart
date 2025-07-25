@@ -154,7 +154,7 @@ class AnilistController extends BaseServiceData {
     adult = false;
     userid = null;
     avatar.value = '';
-    bg = null;
+    bg.value = '';
     episodesWatched = null;
     chapterRead = null;
     unreadNotificationCount = 0;

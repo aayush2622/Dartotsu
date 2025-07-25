@@ -5,7 +5,7 @@ import 'package:dartotsu/Services/Screens/BaseHomeScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../Screens/HomeNavbar.dart';
+import '../../Screens/HomeNavBar.dart';
 import '../../Services/MediaService.dart';
 import '../../Services/Screens/BaseAnimeScreen.dart';
 import '../../Services/Screens/BaseLoginScreen.dart';

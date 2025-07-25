@@ -4,6 +4,7 @@
 
 list(APPEND FLUTTER_PLUGIN_LIST
   app_links
+  dartotsu_extension_bridge
   desktop_webview_window
   dynamic_color
   flutter_inappwebview_windows

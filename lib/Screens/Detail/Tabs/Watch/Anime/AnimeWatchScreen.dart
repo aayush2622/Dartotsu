@@ -2,11 +2,11 @@ import 'package:collection/collection.dart';
 import 'package:dartotsu/DataClass/Media.dart';
 import 'package:dartotsu/Screens/Detail/Tabs/Watch/BaseParser.dart';
 import 'package:dartotsu/Screens/Detail/Tabs/Watch/BaseWatchScreen.dart';
+import 'package:dartotsu_extension_bridge/Models/DEpisode.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../../Adaptor/Episode/EpisodeAdaptor.dart';
-import '../../../../../DataClass/Episode.dart';
 import '../../../../../Theme/LanguageSwitcher.dart';
 import 'AnimeParser.dart';
 import 'Widget/BuildChunkSelector.dart';
@@ -82,7 +82,7 @@ class AnimeWatchScreenState extends BaseWatchScreen<AnimeWatchScreen> {
 
             var selectedEpisode = episodeList.values.firstWhereOrNull(
                 (element) =>
-                    element.number ==
+                    element.episodeNumber ==
                     ((widget.mediaData.userProgress ?? 0) + 1).toString());
 
             RxInt selectedChunkIndex = (-1).obs;
@@ -159,26 +159,29 @@ class AnimeWatchScreenState extends BaseWatchScreen<AnimeWatchScreen> {
     );
   }
 
-  void updateEpisodeDetails(Map<String, Episode> episodeList) {
+  void updateEpisodeDetails(Map<String, DEpisode> episodeList) {
     widget.mediaData.anime?.episodes = episodeList;
     widget.mediaData.anime?.fillerEpisodes =
         _viewModel.fillerEpisodesList.value;
     widget.mediaData.anime?.kitsuEpisodes = _viewModel.kitsuEpisodeList.value;
     widget.mediaData.anime?.anifyEpisodes = _viewModel.anifyEpisodeList.value;
     episodeList.forEach((number, episode) {
-      episode.title = _viewModel.anifyEpisodeList.value?[number]?.title ??
-          _viewModel.kitsuEpisodeList.value?[number]?.title ??
-          episode.title ??
+      episode.name = _viewModel.anifyEpisodeList.value?[number]?.name ??
+          _viewModel.kitsuEpisodeList.value?[number]?.name ??
+          _viewModel.fillerEpisodesList.value?[number]?.name ??
+          episode.name ??
           '';
-      episode.desc = _viewModel.anifyEpisodeList.value?[number]?.desc ??
-          _viewModel.kitsuEpisodeList.value?[number]?.desc ??
-          episode.desc ??
-          '';
-      episode.thumb = _viewModel.anifyEpisodeList.value?[number]?.thumb ??
-          _viewModel.kitsuEpisodeList.value?[number]?.thumb ??
-          episode.thumb ??
-          widget.mediaData.banner ??
-          widget.mediaData.cover;
+      episode.description =
+          _viewModel.anifyEpisodeList.value?[number]?.description ??
+              _viewModel.kitsuEpisodeList.value?[number]?.description ??
+              episode.description ??
+              '';
+      episode.thumbnail =
+          _viewModel.anifyEpisodeList.value?[number]?.thumbnail ??
+              _viewModel.kitsuEpisodeList.value?[number]?.thumbnail ??
+              episode.thumbnail ??
+              widget.mediaData.banner ??
+              widget.mediaData.cover;
       episode.filler =
           _viewModel.fillerEpisodesList.value?[number]?.filler == true;
     });

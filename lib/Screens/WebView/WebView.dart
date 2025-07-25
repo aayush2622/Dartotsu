@@ -1,28 +1,26 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:dartotsu_extension_bridge/Mangayomi/http/m_client.dart';
 import 'package:desktop_webview_window/desktop_webview_window.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-import '../../Api/Sources/http/m_client.dart';
 import '../../main.dart';
 
-class MangaWebView extends ConsumerStatefulWidget {
+class MangaWebView extends StatefulWidget {
   final String url;
   final String title;
 
   const MangaWebView({super.key, required this.url, required this.title});
 
   @override
-  ConsumerState<MangaWebView> createState() => _MangaWebViewState();
+  State<MangaWebView> createState() => _MangaWebViewState();
 }
 
-class _MangaWebViewState extends ConsumerState<MangaWebView> {
+class _MangaWebViewState extends State<MangaWebView> {
   late final MyInAppBrowser browser;
   double _progress = 0;
   bool isNotWebviewWindow = false;
@@ -41,7 +39,7 @@ class _MangaWebViewState extends ConsumerState<MangaWebView> {
 
   Webview? _desktopWebview;
 
-  _runWebViewDesktop() async {
+  void _runWebViewDesktop() async {
     if (Platform.isLinux) {
       _desktopWebview = await WebviewWindow.create();
 

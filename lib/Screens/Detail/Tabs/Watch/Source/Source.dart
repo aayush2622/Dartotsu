@@ -1,10 +1,10 @@
 import 'package:dartotsu/DataClass/Media.dart';
+import 'package:dartotsu_extension_bridge/Models/DEpisode.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../../Adaptor/Chapter/ChapterAdaptor.dart';
 import '../../../../../Adaptor/Episode/EpisodeAdaptor.dart';
-import '../../../../../DataClass/Chapter.dart';
 import '../../../../../Theme/LanguageSwitcher.dart';
 import '../../../../../Widgets/ScrollConfig.dart';
 import '../Anime/Widget/AnimeCompactSettings.dart' as a;
@@ -27,8 +27,8 @@ class SourceState extends State<Source> {
   var reverse = false.obs;
   var scanlator = Rxn<List<String>>(null);
   var toggledScanlators = Rxn<List<bool>>(null);
-  var unModifiedChapterList = Rxn<List<Chapter>>(null);
-  var chapterList = Rxn<List<Chapter>>(null);
+  var unModifiedChapterList = Rxn<List<DEpisode>>(null);
+  var chapterList = Rxn<List<DEpisode>>(null);
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +46,7 @@ class SourceState extends State<Source> {
       unModifiedChapterList.value = chapterList.value;
       var uniqueScanlators = {
         for (var element in chapterList.value!)
-          if (element.mChapter?.scanlator != null) element.mChapter!.scanlator!
+          if (element.scanlator != null) element.scanlator!
       };
 
       scanlator.value = uniqueScanlators.toList();
@@ -80,7 +80,7 @@ class SourceState extends State<Source> {
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 18, vertical: 4),
             child: Obx(() {
-              List<List<Chapter>> reversed = reverse.value
+              List<List<DEpisode>> reversed = reverse.value
                   ? chunks.map((element) => element.reversed.toList()).toList()
                   : chunks;
 
@@ -194,7 +194,7 @@ class SourceState extends State<Source> {
           reverse.value = i.isReverse;
           toggledScanlators.value = t;
           chapterList.value = unModifiedChapterList.value?.where((element) {
-            var scanlator = element.mChapter?.scanlator;
+            var scanlator = element.scanlator;
             return scanlator == null ||
                 toggledScanlators
                     .value![this.scanlator.value?.indexOf(scanlator) ?? 0];

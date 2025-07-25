@@ -2,16 +2,16 @@ import 'package:dartotsu/Functions/string_extensions.dart';
 import 'package:dartotsu/Theme/Colors.dart';
 import 'package:dartotsu/Theme/ThemeProvider.dart';
 import 'package:dartotsu/Widgets/CachedNetworkImage.dart';
+import 'package:dartotsu_extension_bridge/Models/DEpisode.dart';
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../DataClass/Episode.dart';
 import '../../DataClass/Media.dart';
 import 'Widget/HandleProgress.dart';
 
 class EpisodeListView extends StatelessWidget {
-  final Episode episode;
+  final DEpisode episode;
   final Media mediaData;
   final bool isWatched;
 
@@ -22,7 +22,7 @@ class EpisodeListView extends StatelessWidget {
   }) : isWatched =
             (mediaData.userProgress != null && mediaData.userProgress! > 0)
                 ? mediaData.userProgress!.toString().toDouble() >=
-                    episode.number.toDouble()
+                    episode.episodeNumber.toDouble()
                 : false;
 
   @override
@@ -48,7 +48,7 @@ class EpisodeListView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildEpisodeHeader(context, theme),
-            if (episode.desc != null && episode.desc!.isNotEmpty)
+            if (episode.description != null && episode.description!.isNotEmpty)
               _buildEpisodeDescription(theme),
           ],
         ),
@@ -76,7 +76,7 @@ class EpisodeListView extends StatelessWidget {
                     ),
                   ),
                 Text(
-                  episode.title ?? '',
+                  episode.name ?? '',
                   maxLines: 5,
                   style: const TextStyle(
                     fontFamily: 'Poppins',
@@ -106,7 +106,7 @@ class EpisodeListView extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(16.0),
             child: cachedNetworkImage(
-              imageUrl: episode.thumb ?? '',
+              imageUrl: episode.thumbnail ?? '',
               fit: BoxFit.cover,
               width: 164,
               height: 109,
@@ -138,7 +138,7 @@ class EpisodeListView extends StatelessWidget {
                   vertical: 4.0,
                 ),
                 child: Text(
-                  episode.number,
+                  episode.episodeNumber,
                   style: TextStyle(
                     fontSize: 20,
                     color: theme.surface,
@@ -162,7 +162,7 @@ class EpisodeListView extends StatelessWidget {
           handleProgress(
             context: context,
             mediaId: mediaData.id,
-            ep: episode.number,
+            ep: episode.episodeNumber,
             width: 162,
           )
         ],
@@ -174,7 +174,7 @@ class EpisodeListView extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(16),
       child: ExpandableText(
-        episode.desc!,
+        episode.description!,
         style: TextStyle(
           color: theme.onSurface,
           fontFamily: 'Poppins',

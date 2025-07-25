@@ -1,13 +1,13 @@
+import 'package:dartotsu_extension_bridge/Models/DEpisode.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
-import '../../../../../../DataClass/Chapter.dart';
 import '../../../../../../Widgets/ScrollConfig.dart';
 
-(List<List<Chapter>> chunks, RxInt selectedChunkIndex) buildChunks(
+(List<List<DEpisode>> chunks, RxInt selectedChunkIndex) buildChunks(
   BuildContext context,
-  List<Chapter> chapterList,
+  List<DEpisode> chapterList,
   String selectedEpisode,
 ) {
   final chunks = _chunkEpisodes(chapterList, _calculateChunkSize(chapterList));
@@ -18,7 +18,7 @@ import '../../../../../../Widgets/ScrollConfig.dart';
   return (chunks, selectedChunkIndex);
 }
 
-int _calculateChunkSize(List<Chapter> chapterList) {
+int _calculateChunkSize(List<DEpisode> chapterList) {
   final total = chapterList.length;
   final divisions = total / 10;
   return (divisions < 25)
@@ -28,7 +28,7 @@ int _calculateChunkSize(List<Chapter> chapterList) {
           : 100;
 }
 
-List<List<Chapter>> _chunkEpisodes(List<Chapter> chapterList, int chunkSize) {
+List<List<DEpisode>> _chunkEpisodes(List<DEpisode> chapterList, int chunkSize) {
   return List.generate(
       (chapterList.length / chunkSize).ceil(),
       (index) => chapterList.sublist(
@@ -40,10 +40,10 @@ List<List<Chapter>> _chunkEpisodes(List<Chapter> chapterList, int chunkSize) {
 }
 
 RxInt _findSelectedChunkIndex(
-    List<List<Chapter>> chunks, String targetEpisodeNumber) {
+    List<List<DEpisode>> chunks, String targetEpisodeNumber) {
   for (var chunkIndex = 0; chunkIndex < chunks.length; chunkIndex++) {
     if (chunks[chunkIndex]
-        .any((episode) => episode.number == targetEpisodeNumber)) {
+        .any((episode) => episode.episodeNumber == targetEpisodeNumber)) {
       return chunkIndex.obs;
     }
   }
@@ -52,7 +52,7 @@ RxInt _findSelectedChunkIndex(
 
 Widget buildChunkSelector(
   BuildContext context,
-  List<List<Chapter>> chunks,
+  List<List<DEpisode>> chunks,
   RxInt selectedChunkIndex,
   RxBool isReversed,
 ) {
@@ -81,8 +81,8 @@ Widget buildChunkSelector(
                   showCheckmark: false,
                   label: Text(
                     !isReversed.value
-                        ? '${chunks[index].first.number} - ${chunks[index].last.number}'
-                        : '${chunks[index].last.number} - ${chunks[index].first.number}',
+                        ? '${chunks[index].first.episodeNumber} - ${chunks[index].last.episodeNumber}'
+                        : '${chunks[index].last.episodeNumber} - ${chunks[index].first.episodeNumber}',
                     style: const TextStyle(
                       fontFamily: 'Poppins',
                       fontWeight: FontWeight.bold,

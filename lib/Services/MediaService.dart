@@ -6,7 +6,7 @@ import '../Api/Anilist/AnilistService.dart';
 import '../Api/Extensions/ExtensionsService.dart';
 import '../Api/MyAnimeList/MalService.dart';
 import '../DataClass/Media.dart';
-import '../Screens/HomeNavbar.dart';
+import '../Screens/HomeNavBar.dart';
 import '../Theme/LanguageSwitcher.dart';
 import 'BaseServiceData.dart';
 import 'Screens/BaseAnimeScreen.dart';
