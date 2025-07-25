@@ -89,8 +89,9 @@ dependencies:
   flutter_web_auth_2: ^4.1.0
   flutter_dotenv: ^5.2.1
   dartotsu_extension_bridge:
-    #path: ../DartotsuExtensionBridge
     git: https://github.com/aayush2622/DartotsuExtensionBridge.git
+    #path: ../DartotsuExtensionBridge
+
 # Development dependencies
 dev_dependencies:
   flutter_test:
