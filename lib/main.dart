@@ -7,6 +7,7 @@ import 'package:dartotsu/Functions/Extensions.dart';
 import 'package:dartotsu/Functions/Function.dart';
 import 'package:dartotsu/Screens/Login/LoginScreen.dart';
 import 'package:dartotsu/Screens/Manga/MangaScreen.dart';
+import 'package:dartotsu_extension_bridge/Models/Source.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:desktop_webview_window/desktop_webview_window.dart';
 import 'package:dynamic_color/dynamic_color.dart';
@@ -15,7 +16,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart' as provider;
 import 'package:get/get.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
@@ -28,9 +28,7 @@ import 'package:shorebird_code_push/shorebird_code_push.dart';
 import 'package:window_manager/window_manager.dart';
 
 import 'Api/Discord/Discord.dart';
-import 'Api/Sources/Eval/dart/model/m_source.dart';
 import 'Api/TypeFactory.dart';
-import 'Functions/GetExtensions.dart';
 import 'Functions/RegisterProtocol/Api.dart';
 import 'Preferences/PrefManager.dart';
 import 'Screens/Anime/AnimeScreen.dart';
@@ -60,14 +58,12 @@ void main(List<String> args) async {
       await init();
 
       runApp(
-        provider.ProviderScope(
-          child: MultiProvider(
-            providers: [
-              ChangeNotifierProvider(create: (_) => ThemeNotifier()),
-              ChangeNotifierProvider(create: (_) => MediaServiceProvider()),
-            ],
-            child: const MyApp(),
-          ),
+        MultiProvider(
+          providers: [
+            ChangeNotifierProvider(create: (_) => ThemeNotifier()),
+            ChangeNotifierProvider(create: (_) => MediaServiceProvider()),
+          ],
+          child: const MyApp(),
         ),
       );
     },
@@ -100,7 +96,6 @@ Future init() async {
   await PrefManager.init();
   await DartotsuExtensionBridge().init(isar);
   await Logger.init();
-  Extensions.init();
   MediaService.init();
   TypeFactory.init();
   MediaKit.ensureInitialized();
@@ -159,7 +154,7 @@ void handleDeepLink(Uri uri) {
 
   repoMap.forEach((type, url) {
     if (url != null && url.isNotEmpty) {
-      Extensions.setRepo(type, url);
+      //TODO: set according to manager
       isRepoAdded = true;
     }
   });

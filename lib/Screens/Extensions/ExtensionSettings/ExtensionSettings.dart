@@ -1,8 +1,9 @@
+/*
+import 'package:dartotsu_extension_bridge/Mangayomi/Eval/dart/model/source_preference.dart';
+import 'package:dartotsu_extension_bridge/Mangayomi/extension_preferences_providers.dart';
+import 'package:dartotsu_extension_bridge/Models/Source.dart';
 import 'package:flutter/material.dart';
 
-import '../../../Api/Sources/Eval/dart/model/source_preference.dart';
-import '../../../Api/Sources/Model/Source.dart';
-import '../../../Api/Sources/extension_preferences_providers.dart';
 import 'ListTileChapterFilter.dart';
 
 class SourcePreferenceWidget extends StatefulWidget {
@@ -389,3 +390,4 @@ class _EditTextDialogWidgetState extends State<EditTextDialogWidget> {
     ];
   }
 }
+*/

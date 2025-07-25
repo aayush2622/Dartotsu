@@ -1,19 +1,18 @@
 import 'package:dartotsu/Adaptor/Media/MediaAdaptor.dart';
+import 'package:dartotsu_extension_bridge/ExtensionManager.dart';
+import 'package:dartotsu_extension_bridge/Models/DMedia.dart';
+import 'package:dartotsu_extension_bridge/Models/Pages.dart';
+import 'package:dartotsu_extension_bridge/Models/Source.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
-
-import '../../../../../Api/Sources/Eval/dart/model/m_manga.dart';
-import '../../../../../Api/Sources/Eval/dart/model/m_pages.dart';
-import '../../../../../Api/Sources/Model/Source.dart';
-import '../../../../../Api/Sources/Search/search.dart';
 import '../../../../../DataClass/Media.dart';
 import '../../../../../Widgets/CustomBottomDialog.dart';
 
 class WrongTitleDialog extends StatefulWidget {
   final Source source;
-  final Rxn<MManga?>? selectedMedia;
+  final Rxn<DMedia?>? selectedMedia;
   final Media mediaData;
-  final Function(MManga)? onChanged;
+  final Function(DMedia)? onChanged;
 
   const WrongTitleDialog({
     super.key,
@@ -29,13 +28,13 @@ class WrongTitleDialog extends StatefulWidget {
 
 class WrongTitleDialogState extends State<WrongTitleDialog> {
   final TextEditingController textEditingController = TextEditingController();
-  late Future<MPages?> searchFuture;
+  late Future<Pages?> searchFuture;
 
   @override
   void initState() {
     super.initState();
     final initialSearchText =
-        widget.selectedMedia?.value?.name ?? widget.mediaData.mainName();
+        widget.selectedMedia?.value?.title ?? widget.mediaData.mainName();
     '';
     textEditingController.text = initialSearchText;
     searchFuture = _performSearch(initialSearchText);
@@ -47,12 +46,11 @@ class WrongTitleDialogState extends State<WrongTitleDialog> {
     textEditingController.dispose();
   }
 
-  Future<MPages?> _performSearch(String query) {
-    return search(
-      source: widget.source,
-      page: 1,
-      query: query,
-      filterList: [],
+  Future<Pages?> _performSearch(String query) {
+    return currentSourceMethods(widget.source).search(
+      query,
+      1,
+      [],
     );
   }
 
@@ -112,7 +110,7 @@ class WrongTitleDialogState extends State<WrongTitleDialog> {
     );
   }
 
-  Widget _buildResultList(AsyncSnapshot<MPages?> snapshot, ColorScheme theme) {
+  Widget _buildResultList(AsyncSnapshot<Pages?> snapshot, ColorScheme theme) {
     if (snapshot.connectionState == ConnectionState.waiting) {
       return const Center(child: CircularProgressIndicator());
     } else if (snapshot.hasError ||

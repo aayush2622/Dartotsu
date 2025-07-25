@@ -38,7 +38,7 @@ extension on AnilistQueries {
     return mediaList.reversed.toList();
   }
 
-  _queryCalendar(int page) {
+  String _queryCalendar(int page) {
     final int curr = DateTime.now().millisecondsSinceEpoch ~/ 1000;
     return '''{
       Page(page: $page, perPage: 50) {

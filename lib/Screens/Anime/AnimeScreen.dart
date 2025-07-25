@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:dartotsu/Functions/Extensions.dart';
 import 'package:dartotsu/Theme/LanguageSwitcher.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +12,6 @@ import '../../Services/Screens/BaseAnimeScreen.dart';
 import '../../Services/ServiceSwitcher.dart';
 import '../../Theme/Colors.dart';
 import '../../Theme/ThemeProvider.dart';
-import '../../Widgets/CachedNetworkImage.dart';
 import '../../Widgets/ScrollConfig.dart';
 import '../Home/Widgets/LoadingWidget.dart';
 import '../Home/Widgets/ServiceSwitcherBar.dart';

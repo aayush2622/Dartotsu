@@ -10,7 +10,7 @@ Manga _$MangaFromJson(Map<String, dynamic> json) => Manga(
       totalChapters: (json['totalChapters'] as num?)?.toInt(),
       selectedChapter: json['selectedChapter'] as String?,
       chapters: (json['chapters'] as List<dynamic>?)
-          ?.map((e) => Chapter.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => DEpisode.fromJson(e as Map<String, dynamic>))
           .toList(),
       slug: json['slug'] as String?,
       mediaAuthor: json['mediaAuthor'] == null

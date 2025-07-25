@@ -1,16 +1,16 @@
 import 'dart:convert';
 
+import 'package:dartotsu_extension_bridge/Models/DEpisode.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:json_annotation/json_annotation.dart';
 
-import '../../../DataClass/Episode.dart';
 import '../../../DataClass/Media.dart';
 
 part 'Kitsu.g.dart';
 
 class Kitsu {
-  static Future<Map<String, Episode>?> getKitsuEpisodesDetails(
+  static Future<Map<String, DEpisode>?> getKitsuEpisodesDetails(
       Media mediaData) async {
     if (mediaData.idAnilist == null && mediaData.idMAL == null) return {};
 
@@ -56,11 +56,11 @@ class Kitsu {
         final number = ep?.number?.toString() ?? '';
         return MapEntry(
           number,
-          Episode(
-            number: number,
-            title: ep?.titles?.canonical,
-            desc: ep?.description?.en,
-            thumb: ep?.thumbnail?.original?.url,
+          DEpisode(
+            episodeNumber: number,
+            name: ep?.titles?.canonical,
+            description: ep?.description?.en,
+            thumbnail: ep?.thumbnail?.original?.url,
           ),
         );
       }),

@@ -1,13 +1,13 @@
-import 'package:dartotsu/Api/Sources/Eval/dart/model/video.dart';
-import 'package:dartotsu/Api/Sources/Search/getVideo.dart';
 import 'package:dartotsu/Functions/Function.dart';
+import 'package:dartotsu_extension_bridge/ExtensionManager.dart';
+import 'package:dartotsu_extension_bridge/Models/DEpisode.dart';
+import 'package:dartotsu_extension_bridge/Models/Source.dart';
+import 'package:dartotsu_extension_bridge/Models/Video.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 
 import '../../Animation/ScaleAnimation.dart';
-import '../../Api/Sources/Model/Source.dart';
-import '../../DataClass/Episode.dart';
 import '../../DataClass/Media.dart';
 import '../../Screens/Anime/Player/Player.dart';
 import '../../Widgets/CustomBottomDialog.dart';
@@ -18,7 +18,7 @@ import 'EpisodeListViewHolder.dart';
 class EpisodeAdaptor extends StatefulWidget {
   final int type;
   final Source source;
-  final List<Episode> episodeList;
+  final List<DEpisode> episodeList;
   final Media mediaData;
   final VoidCallback? onEpisodeClick;
 
@@ -36,7 +36,7 @@ class EpisodeAdaptor extends StatefulWidget {
 }
 
 class EpisodeAdaptorState extends State<EpisodeAdaptor> {
-  late List<Episode> episodeList;
+  late List<DEpisode> episodeList;
 
   @override
   void initState() {
@@ -208,7 +208,7 @@ class EpisodeAdaptorState extends State<EpisodeAdaptor> {
 
 void onEpisodeClick(
   BuildContext context,
-  Episode episode,
+  DEpisode episode,
   Source source,
   Media mediaData,
   VoidCallback? onEpisodeClick,
@@ -217,7 +217,7 @@ void onEpisodeClick(
     title: 'Select Source',
     viewList: [
       FutureBuilder<List<Video>>(
-        future: getVideo(source: source, url: episode.link!),
+        future: currentSourceMethods(source).getVideoList(episode),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
@@ -283,7 +283,7 @@ void onEpisodeClick(
                         children: [
                           Expanded(
                             child: Text(
-                              item.quality,
+                              item.title ?? item.quality,
                               style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,

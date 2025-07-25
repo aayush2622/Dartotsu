@@ -1,10 +1,8 @@
-import 'package:dartotsu/Functions/GetExtensions.dart';
 import 'package:dartotsu/Preferences/PrefManager.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 
 import '../../Adaptor/Settings/SettingsAdaptor.dart';
-import '../../Api/Sources/Eval/dart/model/m_source.dart';
 import '../../DataClass/Setting.dart';
 import '../../Theme/LanguageSwitcher.dart';
 import 'BaseSettingsScreen.dart';
@@ -46,21 +44,21 @@ class SettingsExtensionsScreenState extends BaseSettingsScreen {
         name: getString.addAnimeRepo,
         description: getString.addAnimeRepoDesc,
         icon: Bootstrap.github,
-        onClick: () => Extensions.addRepo(context, ItemType.anime),
+        //onClick: () => Extensions.addRepo(context, ItemType.anime),
       ),
       Setting(
         type: SettingType.normal,
         name: getString.addMangaRepo,
         description: getString.addMangaRepoDesc,
         icon: Bootstrap.github,
-        onClick: () => Extensions.addRepo(context, ItemType.manga),
+        //onClick: () => Extensions.addRepo(context, ItemType.manga),
       ),
       Setting(
         type: SettingType.normal,
         name: getString.addNovelRepo,
         description: getString.addNovelRepoDesc,
         icon: Bootstrap.github,
-        onClick: () => Extensions.addRepo(context, ItemType.novel),
+        //onClick: () => Extensions.addRepo(context, ItemType.novel),
       ),
       Setting(
         type: SettingType.switchType,

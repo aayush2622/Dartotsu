@@ -271,7 +271,7 @@ packages:
     source: hosted
     version: "0.3.4+2"
   crypto:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: crypto
       sha256: "1e445881f28f22d6140f181e07737b22f1e099a5e1ff94b0af2f9e4a463f4855"
@@ -287,7 +287,7 @@ packages:
     source: hosted
     version: "1.0.2"
   d4rt:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: d4rt
       sha256: a66e0c77eb6d3edb91cee97f55f0d9ac534c5a521717de0b8df61e8493664476
@@ -305,9 +305,11 @@ packages:
   dartotsu_extension_bridge:
     dependency: "direct main"
     description:
-      path: "../DartotsuExtensionBridge"
-      relative: true
-    source: path
+      path: "."
+      ref: HEAD
+      resolved-ref: "4e8fe6a8ee001ee77ba3e1ff1c4d73f1fffc0325"
+      url: "https://github.com/aayush2622/DartotsuExtensionBridge.git"
+    source: git
     version: "0.0.2"
   dartx:
     dependency: transitive
@@ -366,7 +368,7 @@ packages:
     source: hosted
     version: "1.7.0"
   encrypt:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: encrypt
       sha256: "62d9aa4670cc2a8798bab89b39fc71b6dfbacf615de6cf5001fb39f7e4a996a2"
@@ -601,7 +603,7 @@ packages:
     source: hosted
     version: "2.0.28"
   flutter_qjs:
-    dependency: "direct main"
+    dependency: transitive
     description:
       path: "."
       ref: main
@@ -609,14 +611,6 @@ packages:
       url: "https://github.com/kodjodevf/flutter_qjs.git"
     source: git
     version: "0.0.1"
-  flutter_riverpod:
-    dependency: "direct main"
-    description:
-      name: flutter_riverpod
-      sha256: "9532ee6db4a943a1ed8383072a2e3eeda041db5657cdf6d2acecf3c21ecbe7e1"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.6.1"
   flutter_staggered_grid_view:
     dependency: "direct main"
     description:
@@ -836,7 +830,7 @@ packages:
     source: hosted
     version: "0.7.0"
   js_packer:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: js_packer
       sha256: "1d31c768594787acbab3573573e751fa6cf1e085ddacfd9cafd3d74eddb27060"
@@ -867,14 +861,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.9.0"
-  kenburns_nullsafety:
-    dependency: "direct main"
-    description:
-      name: kenburns_nullsafety
-      sha256: "6aa948fbbf4cbd21ad3a5b34d76a8a3e32e93e64622e168686e3263fe25194ff"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.1"
   leak_tracker:
     dependency: transitive
     description:
@@ -1255,7 +1241,7 @@ packages:
     source: hosted
     version: "6.1.5"
   pseudom:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: pseudom
       sha256: "3df7b5aa28adc8e035820db8954e34466aa94353a02e28fd72e54d0ed68b0ecf"
@@ -1294,22 +1280,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.2.0"
-  riverpod:
-    dependency: transitive
-    description:
-      name: riverpod
-      sha256: "59062512288d3056b2321804332a13ffdd1bf16df70dcc8e506e411280a72959"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.6.1"
-  riverpod_annotation:
-    dependency: "direct main"
-    description:
-      name: riverpod_annotation
-      sha256: e14b0bf45b71326654e2705d462f21b958f987087be850afd60578fcd502d1b8
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.6.1"
   rxdart:
     dependency: transitive
     description:
@@ -1611,14 +1581,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.12.1"
-  state_notifier:
-    dependency: transitive
-    description:
-      name: state_notifier
-      sha256: b8677376aa54f2d7c58280d5a007f9e8774f1968d1fb1c096adcb4792fba29bb
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.0"
   stream_channel:
     dependency: transitive
     description:
@@ -1932,7 +1894,7 @@ packages:
     source: hosted
     version: "3.0.2"
   xpath_selector_html_parser:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: xpath_selector_html_parser
       sha256: ebc562a07832a4062a2bc1c238fd59a81d31d841f15460caeed412ce078af9e0

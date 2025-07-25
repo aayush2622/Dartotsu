@@ -1,6 +1,8 @@
-import 'package:dartotsu/Api/Sources/Model/Source.dart';
 import 'package:dartotsu/Functions/string_extensions.dart';
 import 'package:dartotsu/Preferences/IsarDataClasses/MediaSettings/MediaSettings.dart';
+import 'package:dartotsu_extension_bridge/Models/DMedia.dart';
+import 'package:dartotsu_extension_bridge/Models/Pages.dart';
+import 'package:dartotsu_extension_bridge/Models/Source.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../Api/Anilist/Data/fuzzyData.dart';
@@ -9,6 +11,7 @@ import '../Api/Anilist/Data/others.dart';
 import '../Api/EpisodeDetails/GetMediaIDs/GetMediaIDs.dart';
 import '../Api/MyAnimeList/Data/media.dart' as malApi;
 import '../Api/Simkl/Data/Media.dart' as simklApi;
+import '../Preferences/PrefManager.dart';
 import 'Anime.dart';
 import 'Author.dart';
 import 'Character.dart';
@@ -207,4 +210,40 @@ class Media {
 
   factory Media.fromSimklMovies(simklApi.MovieElement apiMedia) =>
       _fromSimklMovies(apiMedia);
+
+  DMedia toDMedia() {
+    return DMedia(
+      title: name,
+      url: shareLink,
+      cover: cover,
+      description: description,
+    );
+  }
+}
+
+extension M on Pages {
+  List<Media> toMedia({bool isAnime = false, Source? source}) {
+    return list.map((e) {
+      var id = loadCustomData<int>('${source?.name}-${e.url}');
+      if (id == null) {
+        var hash = e.hashCode;
+        saveCustomData('${source?.name}-${e.url}', hash);
+        id = hash;
+      }
+      return Media(
+        id: id,
+        name: e.title,
+        cover: e.cover,
+        nameRomaji: e.title ?? '',
+        userPreferredName: e.title ?? '',
+        isAdult: false,
+        shareLink: e.url,
+        minimal: true,
+        anime: isAnime ? Anime() : null,
+        manga: isAnime ? null : Manga(),
+        sourceData: source,
+        relation: source?.name ?? '',
+      );
+    }).toList();
+  }
 }

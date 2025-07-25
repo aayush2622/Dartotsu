@@ -47,6 +47,7 @@ class _BrowseScreenState extends ExtensionManagerScreen<ExtensionScreen> {
                   ? ItemType.manga
                   : ItemType.novel;
           var text = '';
+
           AlertDialogBuilder(context)
             ..setTitle('${type.toString()} ${getString.source}s')
             ..setCustomView(Column(
@@ -92,7 +93,7 @@ class _BrowseScreenState extends ExtensionManagerScreen<ExtensionScreen> {
   Widget searchBar(
     BuildContext context,
     TextEditingController textEditingController,
-    void Function(String value) onChanged,
+    void Function() onChanged,
   ) {
     var theme = Theme.of(context).colorScheme;
     return Padding(
@@ -127,7 +128,7 @@ class _BrowseScreenState extends ExtensionManagerScreen<ExtensionScreen> {
           filled: true,
           fillColor: Colors.grey.withOpacity(0.2),
         ),
-        onChanged: (value) => onChanged(value),
+        onChanged: (value) => onChanged(),
       ),
     );
   }

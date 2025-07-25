@@ -1,18 +1,13 @@
+import 'package:collection/collection.dart';
 import 'package:dartotsu/Preferences/IsarDataClasses/MediaSettings/MediaSettings.dart';
+import 'package:dartotsu_extension_bridge/Models/Source.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_qjs/quickjs/ffi.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../../Api/Sources/Model/Source.dart';
-import '../../../../../Api/Sources/extension_preferences_providers.dart';
-import '../../../../../Api/Sources/get_source_preference.dart';
 import '../../../../../DataClass/Media.dart';
-import '../../../../../Functions/Function.dart';
 import '../../../../../Widgets/DropdownMenu.dart';
-import '../../../../Extensions/ExtensionSettings/ExtensionSettings.dart';
 import '../../../../Settings/language.dart';
 
-class SourceSelector extends ConsumerStatefulWidget {
+class SourceSelector extends StatefulWidget {
   final Source? currentSource;
   final Function(Source source) onSourceChange;
   final Media mediaData;
@@ -27,10 +22,10 @@ class SourceSelector extends ConsumerStatefulWidget {
   });
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _SourceSelectorState();
+  State<StatefulWidget> createState() => _SourceSelectorState();
 }
 
-class _SourceSelectorState extends ConsumerState<SourceSelector> {
+class _SourceSelectorState extends State<SourceSelector> {
   @override
   Widget build(BuildContext context) {
     var sources = widget.sourceList;
@@ -94,7 +89,7 @@ class _SourceSelectorState extends ConsumerState<SourceSelector> {
             const SizedBox(width: 8),
             GestureDetector(
               onTap: () {
-                var sourcePreference = getSourcePreference(source: source)
+                /*var sourcePreference = getSourcePreference(source: source)
                     .map((e) => getSourcePreferenceEntry(e.key!, source.id!))
                     .toList();
                 navigateToPage(
@@ -103,7 +98,7 @@ class _SourceSelectorState extends ConsumerState<SourceSelector> {
                     source: source,
                     sourcePreference: sourcePreference,
                   ),
-                );
+                );*/
               },
               child: Icon(
                 Icons.settings,

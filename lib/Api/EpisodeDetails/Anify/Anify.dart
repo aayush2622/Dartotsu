@@ -1,15 +1,14 @@
 import 'dart:convert';
 
 import 'package:dartotsu/DataClass/Media.dart';
+import 'package:dartotsu_extension_bridge/Models/DEpisode.dart';
 import 'package:http/http.dart' as http;
 import 'package:json_annotation/json_annotation.dart';
-
-import '../../../DataClass/Episode.dart';
 
 part 'Anify.g.dart';
 
 class Anify {
-  static Future<Map<String, Episode>> fetchAndParseMetadata(
+  static Future<Map<String, DEpisode>> fetchAndParseMetadata(
       Media mediaData) async {
     var ids = [105310]; // hardcode incorrect ids
     if (mediaData.idAnilist == null) return {};
@@ -28,11 +27,11 @@ class Anify {
         return anifyElements.first.data?.asMap().map((_, datum) {
               return MapEntry(
                 datum.number.toString(),
-                Episode(
-                  number: datum.number.toString(),
-                  title: datum.title,
-                  desc: datum.description,
-                  thumb: datum.img,
+                DEpisode(
+                  episodeNumber: datum.number.toString(),
+                  name: datum.title,
+                  description: datum.description,
+                  thumbnail: datum.img,
                 ),
               );
             }) ??

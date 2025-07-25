@@ -4,7 +4,7 @@ import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:media_kit_video/media_kit_video.dart';
 
-import '../../../../../../Api/Sources/Eval/dart/model/video.dart' as v;
+import 'package:dartotsu_extension_bridge/Models/Video.dart' as v;
 import 'BasePlayer.dart';
 
 class WindowsPlayer extends BasePlayer {

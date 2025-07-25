@@ -1,15 +1,15 @@
 import 'package:dartotsu/Functions/string_extensions.dart';
+import 'package:dartotsu_extension_bridge/Models/DEpisode.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../DataClass/Episode.dart';
 import '../../DataClass/Media.dart';
 import '../../Theme/Colors.dart';
 import '../../Theme/ThemeProvider.dart';
 import 'Widget/HandleProgress.dart';
 
 class EpisodeCompactView extends StatelessWidget {
-  final Episode episode;
+  final DEpisode episode;
   final Media mediaData;
   final bool isWatched;
 
@@ -17,10 +17,11 @@ class EpisodeCompactView extends StatelessWidget {
     super.key,
     required this.episode,
     required this.mediaData,
-  }) : isWatched = (mediaData.userProgress != null &&
-                mediaData.userProgress! > 0)
-            ? mediaData.userProgress!.toDouble() >= episode.number.toDouble()
-            : false;
+  }) : isWatched =
+            (mediaData.userProgress != null && mediaData.userProgress! > 0)
+                ? mediaData.userProgress!.toDouble() >=
+                    episode.episodeNumber.toDouble()
+                : false;
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +48,7 @@ class EpisodeCompactView extends StatelessWidget {
             child: handleProgress(
               context: context,
               mediaId: mediaData.id,
-              ep: episode.number,
+              ep: episode.episodeNumber,
               width: double.infinity,
             ),
           ),
@@ -60,7 +61,7 @@ class EpisodeCompactView extends StatelessWidget {
             ),
           Center(
             child: Text(
-              episode.number,
+              episode.episodeNumber,
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
