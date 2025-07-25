@@ -2,7 +2,7 @@ name: Dartotsu Build Workflow (revamp)
 on:
   push:
     branches:
-      - dartotsu-revamp
+      - main
 
 jobs:
   build_android:
