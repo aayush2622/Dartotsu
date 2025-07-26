@@ -306,11 +306,11 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: HEAD
-      resolved-ref: "87138d17e0d876e69da78a2bdb601c34cba1f120"
+      ref: master
+      resolved-ref: c6007c5a19183bc2ce1daf5f99f6ff66b561ed05
       url: "https://github.com/aayush2622/DartotsuExtensionBridge.git"
     source: git
-    version: "0.0.3"
+    version: "0.0.4"
   dartx:
     dependency: transitive
     description:
