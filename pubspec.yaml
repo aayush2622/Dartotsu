@@ -91,7 +91,7 @@ dependencies:
   dartotsu_extension_bridge:
     git: https://github.com/aayush2622/DartotsuExtensionBridge.git
     ref: master
-    #path: ../DartotsuExtensionBridge
+    #path:  ../DartotsuExtensionBridge
 
 # Development dependencies
 dev_dependencies:
