@@ -90,6 +90,7 @@ dependencies:
   flutter_dotenv: ^5.2.1
   dartotsu_extension_bridge:
     git: https://github.com/aayush2622/DartotsuExtensionBridge.git
+    ref: master
     #path: ../DartotsuExtensionBridge
 
 # Development dependencies
