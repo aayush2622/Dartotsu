@@ -1,4 +1,4 @@
-name: Dartotsu Build Workflow (revamp)
+name: Dartotsu Build Workflow 
 on:
   push:
     branches:
@@ -23,25 +23,25 @@ jobs:
         with:
           fetch-depth: 0
       # Cache Flutter dependencies
-      - uses: actions/cache@v4
-        with:
-          path: |
-            ~/.pub-cache
-            build/
-            .dart_tool/
-          key: ${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-flutter-
+      # - uses: actions/cache@v4
+      #   with:
+      #     path: |
+      #       ~/.pub-cache
+      #       build/
+      #       .dart_tool/
+      #     key: ${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.lock') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-flutter-
 
       # Cache Gradle dependencies
-      - uses: actions/cache@v4
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-
+      # - uses: actions/cache@v4
+      #   with:
+      #     path: |
+      #       ~/.gradle/caches
+      #       ~/.gradle/wrapper
+      #     key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-gradle-
       # Setup Cmake
       - name: Setup cmake
         uses: jwlawson/actions-setup-cmake@v2
@@ -68,7 +68,6 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           flutter-version: 3.32.5
-          cache: true
 
           # Download the keystore file (from GitHub Secrets or other storage)
       - name: Download keystore
