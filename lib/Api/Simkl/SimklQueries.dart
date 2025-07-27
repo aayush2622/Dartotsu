@@ -14,7 +14,9 @@ import 'Login.dart' as SimklLogin;
 import 'Simkl.dart';
 
 part 'SimklQueries/GetAnimeMangaListData.dart';
+
 part 'SimklQueries/GetHomePageData.dart';
+
 part 'SimklQueries/GetUserData.dart';
 
 class SimklQueries extends Queries {

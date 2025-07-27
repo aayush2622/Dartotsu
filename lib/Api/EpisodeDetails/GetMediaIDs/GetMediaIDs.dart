@@ -8,8 +8,6 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'GetMediaIDs.g.dart';
 
-
-
 class GetMediaIDs {
   static List<AnimeID>? _animeListFuture;
 
@@ -55,9 +53,7 @@ class GetMediaIDs {
 
     if (data != null && !checkTime()) {
       var jsonData = jsonDecode(data) as List<dynamic>;
-      _animeListFuture = jsonData
-          .map((e) => AnimeID.fromJson(e))
-          .toList();
+      _animeListFuture = jsonData.map((e) => AnimeID.fromJson(e)).toList();
       loading.value = false;
       return _animeListFuture;
     } else {
@@ -79,6 +75,7 @@ class GetMediaIDs {
     }
   }
 }
+
 enum AnimeIDType {
   anilistId,
   kitsuId,
@@ -119,6 +116,7 @@ enum AnimeIDType {
     }
   }
 }
+
 class AnimeID {
   @JsonKey(name: 'anime-planet_id')
   final String? animePlanetId;

@@ -1,4 +1,3 @@
-
 import 'package:blur/blur.dart';
 import 'package:dartotsu/Functions/Extensions.dart';
 import 'package:dartotsu/Theme/LanguageSwitcher.dart';
@@ -27,9 +26,13 @@ import 'Widgets/AvtarWidget.dart';
 import 'Widgets/NotificationBadge.dart';
 
 part 'HomeScreenGlassDesktop.dart';
+
 part 'HomeScreenMaterialDesktop.dart';
+
 part 'HomeScreenGlassMobile.dart';
+
 part 'HomeScreenMaterialMobile.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -38,7 +41,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class HomeScreenState extends State<HomeScreen> {
-
   @override
   Widget build(BuildContext context) {
     var service = context.currentService();

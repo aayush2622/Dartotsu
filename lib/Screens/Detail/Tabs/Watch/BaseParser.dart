@@ -2,7 +2,8 @@ import 'dart:async';
 
 import 'package:async/async.dart';
 import 'package:dartotsu/Theme/LanguageSwitcher.dart';
-import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';import 'package:flutter/cupertino.dart';
+import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:fuzzywuzzy/fuzzywuzzy.dart';
 import 'package:get/get.dart';
 

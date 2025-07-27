@@ -3,7 +3,8 @@ import 'dart:math';
 
 import 'package:dartotsu/Functions/Function.dart';
 import 'package:dartotsu/Preferences/IsarDataClasses/MediaSettings/MediaSettings.dart';
-import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';import 'package:file_picker/file_picker.dart';
+import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
 import '../../Adaptor/Settings/SettingsAdaptor.dart';

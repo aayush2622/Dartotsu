@@ -129,7 +129,8 @@ class LinuxLoginState extends State<LinuxLogin> {
 
     await Future.delayed(const Duration(milliseconds: 1000));
 
-    await _controller.evaluateJavaScript('''window.LOCAL_STORAGE = window.localStorage;
+    await _controller
+        .evaluateJavaScript('''window.LOCAL_STORAGE = window.localStorage;
     Object.keys(window.localStorage);''');
     _controller.addOnUrlRequestCallback(
       (String url) async {
@@ -142,7 +143,6 @@ class LinuxLoginState extends State<LinuxLogin> {
 
   Future<void> _extractToken() async {
     try {
-
       final result = await _controller.evaluateJavaScript('''
   (function() {
     return window.LOCAL_STORAGE.getItem('token');

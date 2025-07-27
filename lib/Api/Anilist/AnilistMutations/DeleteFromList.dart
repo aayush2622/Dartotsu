@@ -16,15 +16,16 @@ extension on AnilistMutations {
                 deleted
             }
         }
-    '''.trim();
-    var variables = '{''"id": ${media.userListId}''}';
+    '''
+        .trim();
+    var variables = '{' '"id": ${media.userListId}' '}';
     await executeQuery<Map<String, dynamic>>(query, variables: variables);
     snackString('Removed ${media.mainName()} from your list');
   }
+
   Future<int?> getMediaListId(Media media) async {
     var query = '''{Media(id:${media.id}){id,mediaListEntry{id}}}''';
     var res = await executeQuery<MediaResponse>(query, useToken: true);
     return res?.data?.media?.mediaListEntry?.id;
   }
 }
-

@@ -47,14 +47,17 @@ class FloatingBottomNavBarDesktop extends FloatingBottomNavBar {
                 iconBuilder: () => Obx(() {
                   final avatar = service.data.avatar.value;
                   return avatar.isNotEmpty
-                      ? cachedNetworkImage(imageUrl: avatar,width: 42.0,
-                    height: 42.0,)
+                      ? cachedNetworkImage(
+                          imageUrl: avatar,
+                          width: 42.0,
+                          height: 42.0,
+                        )
                       : loadSvg(
-                    service.iconPath,
-                    width: 28.0,
-                    height: 26.0,
-                    color: theme.onSurface,
-                  );
+                          service.iconPath,
+                          width: 28.0,
+                          height: 26.0,
+                          color: theme.onSurface,
+                        );
                 }),
               ),
               ...navItems.map((item) => _buildNavItem(item, context)),
@@ -64,7 +67,8 @@ class FloatingBottomNavBarDesktop extends FloatingBottomNavBar {
                   context,
                   const SettingsBottomSheet(),
                 ),
-                iconBuilder: () => Icon(Icons.settings, size: 28.0, color: theme.onSurface),
+                iconBuilder: () =>
+                    Icon(Icons.settings, size: 28.0, color: theme.onSurface),
               ),
             ],
           ),
@@ -110,7 +114,9 @@ class FloatingBottomNavBarDesktop extends FloatingBottomNavBar {
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: isSelected ? theme.primary.withOpacity(0.7) : Colors.transparent,
+            color: isSelected
+                ? theme.primary.withOpacity(0.7)
+                : Colors.transparent,
           ),
           child: Icon(
             item.icon,

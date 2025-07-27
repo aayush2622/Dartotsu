@@ -419,6 +419,5 @@ class _ListEditorDialogState extends State<ListEditorDialog> {
     Get.back();
     await Anilist.mutations?.deleteFromList(widget.media);
     Refresh.activity[RefreshId.Anilist.homePage]?.value = true;
-
   }
 }

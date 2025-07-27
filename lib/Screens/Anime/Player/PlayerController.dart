@@ -1,7 +1,8 @@
 import 'dart:io';
 
 import 'package:dartotsu/Adaptor/Episode/EpisodeAdaptor.dart';
-import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';import 'package:dartotsu_extension_bridge/Models/Video.dart' as v;
+import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
+import 'package:dartotsu_extension_bridge/Models/Video.dart' as v;
 import 'package:dartotsu/DataClass/Media.dart' as m;
 import 'package:dartotsu/Functions/Extensions.dart';
 import 'package:dartotsu/Functions/Function.dart';

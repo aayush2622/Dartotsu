@@ -24,6 +24,7 @@ class ThemeNotifier extends ChangeNotifier {
   int get customColor => _customColor;
 
   bool get useGlassMode => _useGlassMode;
+
   ThemeNotifier() {
     _initialize();
   }
@@ -51,6 +52,7 @@ class ThemeNotifier extends ChangeNotifier {
     _useGlassMode = loadData(PrefName.useGlassMode);
     notifyListeners();
   }
+
   Future<void> setGlassEffect(bool useGlassEffect) async {
     _useGlassMode = useGlassEffect;
     saveData(PrefName.useGlassMode, useGlassEffect);

@@ -5,14 +5,17 @@ import 'package:dartotsu/DataClass/Media.dart';
 import 'package:dartotsu/DataClass/SearchResults.dart';
 import 'package:dartotsu/Functions/Function.dart';
 import 'package:dartotsu/Functions/string_extensions.dart';
-import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';import 'package:get/get.dart';
+import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
+import 'package:get/get.dart';
 import '../../DataClass/Author.dart';
 import '../../Preferences/PrefManager.dart';
 import '../../Services/Api/Queries.dart';
 import 'ExtensionsData.dart';
 
 part 'ExtensionsQueries/GetHomePageData.dart';
+
 part 'ExtensionsQueries/GetMediaDetails.dart';
+
 part 'ExtensionsQueries/GetUserData.dart';
 
 class ExtensionsQueries extends Queries {

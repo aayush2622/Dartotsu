@@ -11,7 +11,8 @@ extension on ExtensionsQueries {
       }
       return true;
     }
-    await Future.delayed(const Duration(milliseconds: 800)); // let homepage build
+    await Future.delayed(
+        const Duration(milliseconds: 800)); // let homepage build
     ExtensionsC.run.value = false;
     ExtensionsC.userid = 26;
     ExtensionsC.username.value = 'Dartotsu';

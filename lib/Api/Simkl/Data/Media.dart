@@ -530,7 +530,6 @@ enum Status {
   SOON,
   @JsonValue("premiere")
   PREMIERE,
-
   @JsonValue("production")
   PRODUCTION
 }

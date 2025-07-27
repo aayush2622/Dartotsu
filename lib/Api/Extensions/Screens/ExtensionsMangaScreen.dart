@@ -1,4 +1,5 @@
-import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';import 'package:flutter/material.dart';
+import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../Adaptor/Media/Widgets/Chips.dart';
@@ -46,9 +47,8 @@ class ExtensionsMangaScreen extends BaseMangaScreen {
       tasks.add(
         () async {
           try {
-            var result =
-                (await source.methods.getLatestUpdates(1))
-                    .toMedia(isAnime: false, source: source);
+            var result = (await source.methods.getLatestUpdates(1))
+                .toMedia(isAnime: false, source: source);
             if (result.isNotEmpty) {
               data.value = {...data.value!, source.name ?? 'Unknown': result};
             }

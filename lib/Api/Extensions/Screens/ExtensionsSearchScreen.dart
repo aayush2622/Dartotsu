@@ -1,4 +1,5 @@
-import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';import 'package:flutter/material.dart';
+import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../Adaptor/Media/Widgets/MediaSection.dart';

@@ -1,7 +1,8 @@
 import 'package:collection/collection.dart';
 import 'package:dartotsu/Functions/string_extensions.dart';
 import 'package:dartotsu/Screens/Detail/Tabs/Watch/BaseParser.dart';
-import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';import 'package:flutter/cupertino.dart';
+import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
 import '../../../../../Api/EpisodeDetails/Anify/Anify.dart';

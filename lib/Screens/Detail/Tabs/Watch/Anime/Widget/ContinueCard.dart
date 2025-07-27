@@ -1,5 +1,6 @@
 import 'package:dartotsu/Widgets/CachedNetworkImage.dart';
-import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';import 'package:flutter/material.dart';
+import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
+import 'package:flutter/material.dart';
 
 import '../../../../../../Adaptor/Episode/EpisodeAdaptor.dart';
 import '../../../../../../Adaptor/Episode/Widget/HandleProgress.dart';

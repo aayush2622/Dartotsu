@@ -9,7 +9,9 @@ import 'Data/data.dart';
 import 'Data/fuzzyData.dart';
 
 part 'AnilistMutations/DeleteFromList.dart';
+
 part 'AnilistMutations/SetProgress.dart';
+
 part 'AnilistMutations/SetUserList.dart';
 
 class AnilistMutations extends Mutations {
@@ -31,5 +33,6 @@ class AnilistMutations extends Mutations {
   Future<void> deleteFromList(Media media) => _deleteFromList(media);
 
   @override
-  Future<void> setProgress(Media media, String episode) => _setProgress(media, episode);
+  Future<void> setProgress(Media media, String episode) =>
+      _setProgress(media, episode);
 }

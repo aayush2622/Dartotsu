@@ -113,12 +113,13 @@ class Developers {
         .where((id) => id.isNotEmpty)
         .toSet();
 
-    fetchedContributors.sort((a, b) => b.contributions.compareTo(a.contributions));
-
+    fetchedContributors
+        .sort((a, b) => b.contributions.compareTo(a.contributions));
 
     final List<Developer> combinedList = [
       ...updatedHardcodedDevelopers,
-      ...fetchedContributors.where((dev) => !hardcodedIds.contains(dev.githubId)),
+      ...fetchedContributors
+          .where((dev) => !hardcodedIds.contains(dev.githubId)),
     ];
 
     return combinedList;

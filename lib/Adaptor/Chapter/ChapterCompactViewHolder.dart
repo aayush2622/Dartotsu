@@ -1,5 +1,6 @@
 import 'package:dartotsu/Functions/string_extensions.dart';
-import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';import 'package:flutter/material.dart';
+import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
+import 'package:flutter/material.dart';
 
 import '../../DataClass/Media.dart';
 import '../Episode/Widget/HandleProgress.dart';

@@ -1,4 +1,5 @@
-import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';import 'package:json_annotation/json_annotation.dart';
+import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 import 'Author.dart';
 

@@ -27,10 +27,10 @@ class HomeScreenGlassDesktopState extends State<HomeScreenGlassDesktop> {
   @override
   Widget build(BuildContext context) {
     return Stack(
-        children: [
-          _buildRefreshContent,
-          _buildScrollToTopButton,
-        ],
+      children: [
+        _buildRefreshContent,
+        _buildScrollToTopButton,
+      ],
     );
   }
 
@@ -108,7 +108,7 @@ class HomeScreenGlassDesktopState extends State<HomeScreenGlassDesktop> {
               return Stack(
                 fit: StackFit.expand,
                 children: [
-                  if (!themeNotifier.useGlassMode)_buildBackgroundImage,
+                  if (!themeNotifier.useGlassMode) _buildBackgroundImage,
                   _buildUserInfo,
                   _buildCards,
                 ],
@@ -158,7 +158,6 @@ class HomeScreenGlassDesktopState extends State<HomeScreenGlassDesktop> {
       ),
     );
   }
-
 
   Widget get _buildUserInfo {
     return Positioned(

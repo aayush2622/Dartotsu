@@ -92,10 +92,11 @@ class PrefName {
   static const AnimeDefaultView = Pref('AnimeDefaultView', 0);
   static const MangaDefaultView = Pref('MangaDefaultView', 0);
 
-  static const Pref<String> userAgent =
-      Pref('userAgent', "Mozilla/5.0 (Linux; Android 13; 22081212UG Build/TKQ1.220829.002; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/114.0.5735.131 Mobile Safari/537.36");
+  static const Pref<String> userAgent = Pref('userAgent',
+      "Mozilla/5.0 (Linux; Android 13; 22081212UG Build/TKQ1.220829.002; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/114.0.5735.131 Mobile Safari/537.36");
 
-  static const Pref<Map<String,String>> cookies = Pref('cookies', {});
+  static const Pref<Map<String, String>> cookies = Pref('cookies', {});
+
   //manga page
   static const Pref<Map<dynamic, dynamic>> anilistMangaLayout =
       Pref('mangaLayoutOrder', {

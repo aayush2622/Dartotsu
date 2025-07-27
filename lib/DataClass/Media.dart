@@ -17,8 +17,11 @@ import 'Manga.dart';
 import 'User.dart';
 
 part 'Data/Media.g.dart';
+
 part 'Media/AnilistMedia.dart';
+
 part 'Media/MalMedia.dart';
+
 part 'Media/SimklMedia.dart';
 
 class MediaMapWrapper {
