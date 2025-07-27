@@ -1,8 +1,5 @@
 import 'package:dartotsu/logger.dart';
-import 'package:dartotsu_extension_bridge/ExtensionManager.dart';
-import 'package:dartotsu_extension_bridge/Models/DEpisode.dart';
-import 'package:dartotsu_extension_bridge/Models/DMedia.dart';
-import 'package:dartotsu_extension_bridge/Models/Source.dart';
+import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
@@ -92,7 +89,7 @@ class MangaParser extends BaseParser {
 
     DMedia? m;
     try {
-      m = await currentSourceMethods(source).getDetail(media);
+      m = await source.methods.getDetail(media);
     } catch (e) {
       Logger.log(e.toString());
       errorType.value = ErrorType.NoResult;

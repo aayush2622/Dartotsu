@@ -1,5 +1,4 @@
-import 'package:dartotsu_extension_bridge/ExtensionManager.dart';
-import 'package:dartotsu_extension_bridge/Models/Source.dart';
+import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -51,7 +50,7 @@ class ExtensionsSearchScreen extends BaseSearchScreen {
       tasks.add(
         () async {
           try {
-            var result = (await currentSourceMethods(source).search(
+            var result = (await source.methods.search(
               searchResults.value.search ?? '',
               searchResults.value.page ?? 1,
               [],

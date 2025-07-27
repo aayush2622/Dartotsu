@@ -15,13 +15,10 @@ extension on AnilistQueries {
               final media = i.media;
               if (media == null || idArr.contains(media.id)) return false;
 
-              final shouldAdd = (!listOnly &&
-                      adultOnly &&
-                      media.isAdult == true) ||
-                  (!listOnly &&
-                      !adultOnly &&
-                      media.isAdult == false) ||
-                  (listOnly && media.mediaListEntry != null);
+              final shouldAdd =
+                  (!listOnly && adultOnly && media.isAdult == true) ||
+                      (!listOnly && !adultOnly && media.isAdult == false) ||
+                      (listOnly && media.mediaListEntry != null);
 
               if (shouldAdd) {
                 idArr.add(media.id);

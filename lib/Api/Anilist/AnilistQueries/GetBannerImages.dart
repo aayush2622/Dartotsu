@@ -23,12 +23,13 @@ extension on AnilistQueries {
       final response =
           await executeQuery<MediaListCollectionResponse>(_queryBanner(type));
       final entries = response?.data?.mediaListCollection?.lists
-          ?.expand((list) => list.entries ?? [] as List<api.MediaList>)
-          .where((e) => !(e.media?.isAdult ?? false))
-          .map((e) => e.media?.bannerImage)
-          .where((url) => url != null && url != 'null')
-          .cast<String>()
-          .toList() ?? [];
+              ?.expand((list) => list.entries ?? [] as List<api.MediaList>)
+              .where((e) => !(e.media?.isAdult ?? false))
+              .map((e) => e.media?.bannerImage)
+              .where((url) => url != null && url != 'null')
+              .cast<String>()
+              .toList() ??
+          [];
 
       entries.shuffle(Random());
       var random = entries.isNotEmpty ? entries.first : null;

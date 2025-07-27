@@ -41,7 +41,7 @@ class FloatingBottomNavBarMobile extends FloatingBottomNavBar {
                     height: 54.0,
                     decoration: BoxDecoration(
                       color:
-                      themeNotifier.isDarkMode ? greyNavDark : greyNavLight,
+                          themeNotifier.isDarkMode ? greyNavDark : greyNavLight,
                       borderRadius: BorderRadius.circular(30.0),
                     ),
                   ),

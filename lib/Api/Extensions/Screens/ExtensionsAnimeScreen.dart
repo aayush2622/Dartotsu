@@ -1,5 +1,4 @@
-import 'package:dartotsu_extension_bridge/ExtensionManager.dart';
-import 'package:dartotsu_extension_bridge/Models/Source.dart';
+import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -26,7 +25,7 @@ class ExtensionsAnimeScreen extends BaseAnimeScreen {
     for (var source in sources) {
       List<Media>? result;
       try {
-        var res = await currentSourceMethods(source).getPopular(1);
+        var res = await source.methods.getPopular(1);
         result = res.toMedia(isAnime: true, source: source);
       } catch (e) {
         Logger.log('Source ${source.name} failed: ${e.toString()}');
@@ -45,7 +44,7 @@ class ExtensionsAnimeScreen extends BaseAnimeScreen {
       tasks.add(
         () async {
           try {
-            var result = (await currentSourceMethods(source).getPopular(1))
+            var result = (await source.methods.getPopular(1))
                 .toMedia(isAnime: true, source: source);
             if (result.isNotEmpty) {
               data.value = {...?data.value, source.name ?? 'Unknown': result};

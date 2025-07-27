@@ -1,8 +1,5 @@
 import 'package:dartotsu/Adaptor/Media/MediaAdaptor.dart';
-import 'package:dartotsu_extension_bridge/ExtensionManager.dart';
-import 'package:dartotsu_extension_bridge/Models/DMedia.dart';
-import 'package:dartotsu_extension_bridge/Models/Pages.dart';
-import 'package:dartotsu_extension_bridge/Models/Source.dart';
+import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import '../../../../../DataClass/Media.dart';
@@ -47,7 +44,7 @@ class WrongTitleDialogState extends State<WrongTitleDialog> {
   }
 
   Future<Pages?> _performSearch(String query) {
-    return currentSourceMethods(widget.source).search(
+    return widget.source.methods.search(
       query,
       1,
       [],

@@ -22,14 +22,23 @@ import 'Data/recommendations.dart';
 import 'Data/staff.dart';
 
 part 'AnilistQueries/GetAnimeMangaListData.dart';
+
 part 'AnilistQueries/GetBannerImages.dart';
+
 part 'AnilistQueries/GetCalendarData.dart';
+
 part 'AnilistQueries/GetGenresAndTags.dart';
+
 part 'AnilistQueries/GetHomePageData.dart';
+
 part 'AnilistQueries/GetMediaData.dart';
+
 part 'AnilistQueries/GetMediaDetails.dart';
+
 part 'AnilistQueries/GetUserData.dart';
+
 part 'AnilistQueries/GetUserMediaList.dart';
+
 part 'AnilistQueries/Search.dart';
 
 class AnilistQueries extends Queries {

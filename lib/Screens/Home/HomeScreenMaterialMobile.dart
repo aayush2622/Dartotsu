@@ -43,7 +43,6 @@ class HomeScreenMaterialMobileState extends State<HomeScreenMaterialMobile> {
         context,
         controller: screen.scrollController,
         children: [
-
           SliverToBoxAdapter(child: _buildHomeScreenContent),
           SliverList(
             delegate: SliverChildListDelegate([
@@ -64,20 +63,20 @@ class HomeScreenMaterialMobileState extends State<HomeScreenMaterialMobile> {
       left: (0.screenWidthWithContext(context) / 2) - 24.0,
       child: Obx(() => screen.scrollToTop.value
           ? Container(
-        decoration: BoxDecoration(
-          color: themeNotifier.isDarkMode ? greyNavDark : greyNavLight,
-          borderRadius: BorderRadius.circular(64.0),
-        ),
-        padding: const EdgeInsets.all(4.0),
-        child: IconButton(
-          icon: const Icon(Icons.arrow_upward),
-          onPressed: () => screen.scrollController.animateTo(
-            0,
-            duration: const Duration(milliseconds: 500),
-            curve: Curves.easeInOut,
-          ),
-        ),
-      )
+              decoration: BoxDecoration(
+                color: themeNotifier.isDarkMode ? greyNavDark : greyNavLight,
+                borderRadius: BorderRadius.circular(64.0),
+              ),
+              padding: const EdgeInsets.all(4.0),
+              child: IconButton(
+                icon: const Icon(Icons.arrow_upward),
+                onPressed: () => screen.scrollController.animateTo(
+                  0,
+                  duration: const Duration(milliseconds: 500),
+                  curve: Curves.easeInOut,
+                ),
+              ),
+            )
           : const SizedBox()),
     );
   }

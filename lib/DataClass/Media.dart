@@ -1,8 +1,6 @@
 import 'package:dartotsu/Functions/string_extensions.dart';
 import 'package:dartotsu/Preferences/IsarDataClasses/MediaSettings/MediaSettings.dart';
-import 'package:dartotsu_extension_bridge/Models/DMedia.dart';
-import 'package:dartotsu_extension_bridge/Models/Pages.dart';
-import 'package:dartotsu_extension_bridge/Models/Source.dart';
+import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../Api/Anilist/Data/fuzzyData.dart';
@@ -19,8 +17,11 @@ import 'Manga.dart';
 import 'User.dart';
 
 part 'Data/Media.g.dart';
+
 part 'Media/AnilistMedia.dart';
+
 part 'Media/MalMedia.dart';
+
 part 'Media/SimklMedia.dart';
 
 class MediaMapWrapper {

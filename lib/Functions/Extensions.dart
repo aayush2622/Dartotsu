@@ -41,6 +41,7 @@ extension Stuff on BuildContext {
   ThemeNotifier get themeNotifier {
     return Provider.of<ThemeNotifier>(this, listen: false);
   }
+
   ThemeNotifier get themeNotifierListen =>
       Provider.of<ThemeNotifier>(this, listen: true);
 
@@ -51,5 +52,4 @@ extension Stuff on BuildContext {
   bool get useGlassModeListen {
     return themeNotifierListen.useGlassMode;
   }
-
 }

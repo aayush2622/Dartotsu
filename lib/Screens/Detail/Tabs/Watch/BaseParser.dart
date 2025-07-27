@@ -2,9 +2,7 @@ import 'dart:async';
 
 import 'package:async/async.dart';
 import 'package:dartotsu/Theme/LanguageSwitcher.dart';
-import 'package:dartotsu_extension_bridge/ExtensionManager.dart';
-import 'package:dartotsu_extension_bridge/Models/DMedia.dart';
-import 'package:dartotsu_extension_bridge/Models/Source.dart';
+import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fuzzywuzzy/fuzzywuzzy.dart';
 import 'package:get/get.dart';
@@ -118,7 +116,7 @@ abstract class BaseParser extends GetxController {
     }
     DMedia? response;
     status.value = "Searching : ${mediaData.mainName()}";
-    final mediaFuture = currentSourceMethods(source).search(
+    final mediaFuture = source.methods.search(
       mediaData.mainName(),
       1,
       [],
@@ -143,7 +141,7 @@ abstract class BaseParser extends GetxController {
                 mediaData.mainName().toLowerCase()) <
             100) {
       status.value = "Searching : ${mediaData.nameRomaji}";
-      final mediaFuture = currentSourceMethods(source).search(
+      final mediaFuture = source.methods.search(
         mediaData.nameRomaji,
         1,
         [],
@@ -176,7 +174,7 @@ abstract class BaseParser extends GetxController {
       for (var synonym in mediaData.synonyms) {
         if (_isEnglish(synonym)) {
           status.value = "Searching : $synonym";
-          final mediaFuture = currentSourceMethods(source).search(
+          final mediaFuture = source.methods.search(
             synonym,
             1,
             [],

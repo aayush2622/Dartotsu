@@ -1,6 +1,5 @@
 part of '../AnilistMutations.dart';
 
-
 extension on AnilistMutations {
   Future<void> _setProgress(Media media, String episode) async {
     if (Anilist.userid == null) return;
@@ -32,6 +31,5 @@ extension on AnilistMutations {
     Refresh.activity[RefreshId.Anilist.homePage]?.value = true;
     Refresh.activity[media.id]?.value = true;
     snackString("Setting progress to ${media.userProgress}");
-
   }
 }

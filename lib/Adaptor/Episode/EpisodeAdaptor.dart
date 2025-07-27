@@ -1,8 +1,5 @@
 import 'package:dartotsu/Functions/Function.dart';
-import 'package:dartotsu_extension_bridge/ExtensionManager.dart';
-import 'package:dartotsu_extension_bridge/Models/DEpisode.dart';
-import 'package:dartotsu_extension_bridge/Models/Source.dart';
-import 'package:dartotsu_extension_bridge/Models/Video.dart';
+import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
@@ -217,7 +214,7 @@ void onEpisodeClick(
     title: 'Select Source',
     viewList: [
       FutureBuilder<List<Video>>(
-        future: currentSourceMethods(source).getVideoList(episode),
+        future: source.methods.getVideoList(episode),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());

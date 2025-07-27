@@ -21,11 +21,11 @@ class Logger {
     log('\n\n\n\n\nLogger initialized\n\n\n\n\n');
   }
 
-  static void log(String message){
+  static void log(String message) {
     final now = DateTime.now().toLocal();
     final timestamp =
         '${now.day.toString().padLeft(2, '0')}/${now.month.toString().padLeft(2, '0')}/${now.year.toString().padLeft(4, '0')} ${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}:${now.second.toString().padLeft(2, '0')}';
     final logMessage = '[$timestamp] $message\n';
-    _logFile.writeAsStringSync(logMessage,mode: FileMode.append);
+    _logFile.writeAsStringSync(logMessage, mode: FileMode.append);
   }
 }

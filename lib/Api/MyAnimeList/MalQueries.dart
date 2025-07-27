@@ -14,7 +14,9 @@ import 'Mal.dart';
 import 'MalQueries/MalStrings.dart';
 
 part 'MalQueries/GetAnimeMangaListData.dart';
+
 part 'MalQueries/GetHomePageData.dart';
+
 part 'MalQueries/GetUserData.dart';
 
 class MalQueries extends Queries {
