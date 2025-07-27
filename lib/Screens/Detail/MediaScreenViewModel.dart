@@ -72,7 +72,7 @@ class MediaPageViewModel extends GetxController {
       }
     } else {
       if (mediaData.manga?.totalChapters != null &&
-          mediaData.manga?.totalChapters == 0) {
+          mediaData.manga?.totalChapters != 0) {
         spans.add(TextSpan(
           text: "${mediaData.manga!.totalChapters}",
           style: TextStyle(color: theme.onSurface, fontWeight: FontWeight.bold),
