@@ -89,7 +89,6 @@ Future init() async {
   }
   await PrefManager.init();
   await DartotsuExtensionBridge().init(isar);
-
   await Logger.init();
   MediaService.init();
   TypeFactory.init();
