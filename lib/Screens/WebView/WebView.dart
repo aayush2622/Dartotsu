@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:dartotsu_extension_bridge/Mangayomi/http/m_client.dart';
+import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:desktop_webview_window/desktop_webview_window.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';

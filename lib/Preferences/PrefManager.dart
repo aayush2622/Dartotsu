@@ -5,14 +5,13 @@ import 'dart:io';
 import 'package:dartotsu/Preferences/IsarDataClasses/MediaSettings/MediaSettings.dart';
 import 'package:dartotsu/Preferences/IsarDataClasses/ShowResponse/ShowResponse.dart';
 import 'package:dartotsu/logger.dart';
-import 'package:dartotsu_extension_bridge/Settings/Settings.dart';
+import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart'
+    hide isar;
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:isar/isar.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:dartotsu_extension_bridge/Mangayomi/Eval/dart/model/source_preference.dart';
-import 'package:dartotsu_extension_bridge/Mangayomi/Models/Source.dart';
 import '../main.dart';
 import 'IsarDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
 import 'IsarDataClasses/DefaultReaderSettings/DafaultReaderSettings.dart';

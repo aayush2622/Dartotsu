@@ -1,8 +1,6 @@
 import 'package:dartotsu/Functions/Function.dart';
 import 'package:dartotsu/Screens/Manga/MangaReader/Reader.dart';
-import 'package:dartotsu_extension_bridge/ExtensionManager.dart';
-import 'package:dartotsu_extension_bridge/Models/DEpisode.dart';
-import 'package:dartotsu_extension_bridge/Models/Source.dart';
+import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
@@ -169,7 +167,7 @@ Future<void> onChapterClick(
     ),
   );
 
-  final pages = await currentSourceMethods(source).getPageList(chapter);
+  final pages = await source.methods.getPageList(chapter);
   if (context.mounted) {
     onChapterClick?.call();
     Navigator.pop(context);

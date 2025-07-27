@@ -1,6 +1,6 @@
 import 'package:dartotsu/Widgets/AlertDialogBuilder.dart';
-import 'package:dartotsu_extension_bridge/Models/Source.dart';
-import 'package:dartotsu_extension_bridge/Screen/ExtensionManagerScreen.dart';
+import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart'
+    hide ExtensionList;
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 

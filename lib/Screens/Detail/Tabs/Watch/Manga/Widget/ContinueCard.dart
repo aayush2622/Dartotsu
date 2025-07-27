@@ -1,8 +1,6 @@
 import 'package:dartotsu/Adaptor/Chapter/ChapterAdaptor.dart';
 import 'package:dartotsu/Widgets/CachedNetworkImage.dart';
-import 'package:dartotsu_extension_bridge/Models/DEpisode.dart';
-import 'package:dartotsu_extension_bridge/Models/Source.dart';
-import 'package:flutter/material.dart';
+import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';import 'package:flutter/material.dart';
 
 import '../../../../../../Adaptor/Episode/Widget/HandleProgress.dart';
 import '../../../../../../DataClass/Media.dart';

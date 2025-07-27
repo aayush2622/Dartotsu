@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:dartotsu_extension_bridge/ExtensionManager.dart';
+import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

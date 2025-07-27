@@ -1,4 +1,4 @@
-import 'package:dartotsu_extension_bridge/Models/DEpisode.dart';
+import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../Api/Anilist/Data/media.dart';

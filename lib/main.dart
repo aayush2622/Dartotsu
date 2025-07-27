@@ -7,14 +7,12 @@ import 'package:dartotsu/Functions/Extensions.dart';
 import 'package:dartotsu/Functions/Function.dart';
 import 'package:dartotsu/Screens/Login/LoginScreen.dart';
 import 'package:dartotsu/Screens/Manga/MangaScreen.dart';
-import 'package:dartotsu_extension_bridge/Models/Source.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:desktop_webview_window/desktop_webview_window.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -44,7 +42,6 @@ import 'l10n/app_localizations.dart';
 import 'logger.dart';
 
 late Isar isar;
-WebViewEnvironment? webViewEnvironment;
 
 void main(List<String> args) async {
   runZonedGuarded(
@@ -54,7 +51,6 @@ void main(List<String> args) async {
         return;
       }
       await init();
-
       runApp(
         MultiProvider(
           providers: [

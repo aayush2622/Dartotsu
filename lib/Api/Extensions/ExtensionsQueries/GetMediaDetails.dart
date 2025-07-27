@@ -20,7 +20,7 @@ extension on ExtensionsQueries {
 
     media.sourceData = source;
 
-    var data = await currentSourceMethods(source).getDetail(media.toDMedia());
+    var data = await source.methods.getDetail(media.toDMedia());
 
     media.genres = data.genre ?? [];
     media.description = data.description;

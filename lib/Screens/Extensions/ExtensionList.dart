@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:dartotsu/Preferences/PrefManager.dart';
-import 'package:dartotsu_extension_bridge/Models/Source.dart';
+import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:dartotsu_extension_bridge/Screen/ExtensionList.dart' as e;
 import 'package:flutter/material.dart';
 

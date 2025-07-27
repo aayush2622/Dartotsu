@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dartotsu/Functions/Function.dart';
-import 'package:dartotsu_extension_bridge/Models/DEpisode.dart';
+import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

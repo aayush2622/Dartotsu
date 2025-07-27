@@ -2,8 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:dartotsu/DataClass/Media.dart';
 import 'package:dartotsu/Screens/Detail/Tabs/Watch/BaseParser.dart';
 import 'package:dartotsu/Screens/Detail/Tabs/Watch/BaseWatchScreen.dart';
-import 'package:dartotsu_extension_bridge/Models/DEpisode.dart';
-import 'package:flutter/material.dart';
+import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../../Adaptor/Episode/EpisodeAdaptor.dart';
