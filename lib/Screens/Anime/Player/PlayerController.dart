@@ -942,7 +942,7 @@ class _PlayerControllerState extends State<PlayerController> {
                     children: [
                       Expanded(
                         child: Text(
-                          videos[index].quality,
+                          videos[index].title ?? videos[index].quality,
                           style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
