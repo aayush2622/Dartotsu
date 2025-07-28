@@ -12,7 +12,7 @@ class Logger {
     );
     _logFile = File('${directory?.path}/appLogs.txt'.fixSeparator);
 
-    if (await _logFile.exists() && await _logFile.length() > 1024 * 1024) {
+    if (await _logFile.exists() && await _logFile.length() > 100 * 1024) {
       await _logFile.delete();
     }
     if (!await _logFile.exists()) {
