@@ -307,7 +307,7 @@ packages:
     description:
       path: "."
       ref: master
-      resolved-ref: a0a216458cbb810f1c4a34aa79404ca92a695c35
+      resolved-ref: bb03ca339fd4a04b1bc85f2bdad53e11db6fc759
       url: "https://github.com/aayush2622/DartotsuExtensionBridge.git"
     source: git
     version: "0.0.4"
@@ -1569,10 +1569,10 @@ packages:
     dependency: transitive
     description:
       name: sqflite_common
-      sha256: "84731e8bfd8303a3389903e01fb2141b6e59b5973cacbb0929021df08dddbe8b"
+      sha256: "6ef422a4525ecc601db6c0a2233ff448c731307906e92cabc9ba292afaae16a6"
       url: "https://pub.dev"
     source: hosted
-    version: "2.5.5"
+    version: "2.5.6"
   sqflite_darwin:
     dependency: transitive
     description:
