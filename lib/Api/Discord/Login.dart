@@ -1,5 +1,5 @@
 import 'package:dartotsu/Api/Discord/Discord.dart';
-import 'package:dartotsu_extension_bridge/DartotsuExtensionBridge.dart';
+import 'package:dartotsu_extension_bridge/extension_bridge.dart';
 import 'package:desktop_webview_window/desktop_webview_window.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
