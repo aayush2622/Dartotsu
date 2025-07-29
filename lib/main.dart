@@ -88,7 +88,7 @@ Future init() async {
         .forEach(registerProtocolHandler);
   }
   await PrefManager.init();
-  await DartotsuExtensionBridge().init(isar);
+  await DartotsuExtensionBridge().init(isar, "darotsu");
   await Logger.init();
   MediaService.init();
   TypeFactory.init();

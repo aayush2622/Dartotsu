@@ -305,11 +305,9 @@ packages:
   dartotsu_extension_bridge:
     dependency: "direct main"
     description:
-      path: "."
-      ref: master
-      resolved-ref: "95ecc66c0018044ff75f287f674f37eb84f1af8d"
-      url: "https://github.com/aayush2622/DartotsuExtensionBridge.git"
-    source: git
+      path: "../DartotsuExtensionBridge"
+      relative: true
+    source: path
     version: "0.0.4"
   dartx:
     dependency: transitive
@@ -343,6 +341,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.8"
+  device_apps:
+    dependency: transitive
+    description:
+      name: device_apps
+      sha256: e84dc74d55749993fd671148cc0bd53096e1be0c268fc364285511b1d8a4c19b
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.0"
   device_info_plus:
     dependency: "direct main"
     description:
@@ -773,6 +779,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.9.0"
+  install_plugin:
+    dependency: transitive
+    description:
+      name: install_plugin
+      sha256: "6fb67ba0781e75de4f2f2266ed25e835bfd277c5bfc2ed034af52774355857c6"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.0"
   intl:
     dependency: "direct main"
     description:
