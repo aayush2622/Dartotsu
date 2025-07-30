@@ -32,6 +32,7 @@ git commit -m "feat: improve linux support [build.linux]"
 ## Special Tags
 
  - `[Ping]` - Adding this tag will ping the development team on Discord when the build completes
+ - `[clean]` - Forces a clean build by ignoring cached dependencies.
 
  ## Multiple Triggers
 
