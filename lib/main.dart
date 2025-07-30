@@ -7,6 +7,8 @@ import 'package:dartotsu/Functions/Extensions.dart';
 import 'package:dartotsu/Functions/Function.dart';
 import 'package:dartotsu/Screens/Login/LoginScreen.dart';
 import 'package:dartotsu/Screens/Manga/MangaScreen.dart';
+import 'package:dartotsu_extension_bridge/Aniyomi/AniyomiExtensions.dart';
+import 'package:dartotsu_extension_bridge/Mangayomi/MangayomiExtensions.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:desktop_webview_window/desktop_webview_window.dart';
 import 'package:dynamic_color/dynamic_color.dart';
@@ -124,26 +126,41 @@ void initDeepLinkListener() async {
 void handleDeepLink(Uri uri) {
   if (uri.host != "add-repo") return;
 
-  final repoMap = {
-    ItemType.anime:
-        uri.queryParameters["url"] ?? uri.queryParameters["anime_url"],
-    ItemType.manga: uri.queryParameters["manga_url"],
-    ItemType.novel: uri.queryParameters["novel_url"],
-  };
-
+  final scheme = uri.scheme.toLowerCase();
   bool isRepoAdded = false;
 
-  repoMap.forEach((type, url) {
+  const mangayomiSchemes = {"dar", "anymex", "sugoireads", "mangayomi"};
+  const aniyomiSchemes = {"aniyomi", "tachiyomi"};
+  if (mangayomiSchemes.contains(scheme)) {
+    var manager = Get.find<MangayomiExtensions>(tag: 'MangayomiExtensions');
+    final repoMap = {
+      ItemType.anime:
+          uri.queryParameters["anime_url"] ?? uri.queryParameters["url"],
+      ItemType.manga: uri.queryParameters["manga_url"],
+      ItemType.novel: uri.queryParameters["novel_url"],
+    };
+    repoMap.forEach((type, url) {
+      if (url != null && url.isNotEmpty) {
+        manager.onRepoSaved([url], type);
+        isRepoAdded = true;
+      }
+    });
+  } else if (aniyomiSchemes.contains(scheme)) {
+    var manager = Get.find<AniyomiExtensions>(tag: 'AniyomiExtensions');
+    final url = uri.queryParameters["url"];
     if (url != null && url.isNotEmpty) {
-      //TODO: set according to manager
+      manager.onRepoSaved(
+        [url],
+        scheme == "aniyomi" ? ItemType.anime : ItemType.manga,
+      );
       isRepoAdded = true;
     }
-  });
+  }
 
   snackString(
     isRepoAdded
         ? "Added Repo Links Successfully!"
-        : "Missing required parameters in the link.",
+        : "Missing or invalid parameters in the link.",
   );
 }
 

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dartotsu/Functions/Extensions.dart';
 import 'package:dartotsu/Widgets/CachedNetworkImage.dart';
 import 'package:flutter/material.dart';
@@ -46,21 +47,21 @@ class FloatingBottomNavBarDesktop extends FloatingBottomNavBar {
                 onTap: () => serviceSwitcher(context),
                 iconBuilder: () => Obx(() {
                   final avatar = service.data.avatar.value;
-                  return avatar.isNotEmpty
-                      ? CircleAvatar(
-                          radius: 26.0,
-                          child: cachedNetworkImage(
-                            imageUrl: avatar,
-                            width: 42.0,
-                            height: 42.0,
-                          ),
-                        )
-                      : loadSvg(
-                          service.iconPath,
-                          width: 28.0,
-                          height: 26.0,
-                          color: theme.onSurface,
-                        );
+                  return CircleAvatar(
+                    radius: 26.0,
+                    backgroundImage: avatar.isNotEmpty
+                        ? CachedNetworkImageProvider(avatar)
+                        : null,
+                    backgroundColor: Colors.transparent,
+                    child: avatar.isEmpty
+                        ? loadSvg(
+                            service.iconPath,
+                            width: 28.0,
+                            height: 26.0,
+                            color: theme.onSurface,
+                          )
+                        : null,
+                  );
                 }),
               ),
               ...navItems.map((item) => _buildNavItem(item, context)),
