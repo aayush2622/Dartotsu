@@ -1,4 +1,4 @@
-name: Dartotsu Build Workflow 
+name: Dartotsu Build Workflow
 on:
   push:
     branches:
@@ -57,7 +57,7 @@ jobs:
         run: |
           mkdir -p /usr/local/lib/android/sdk/cmake/3.18.1/bin
           sudo ln -s /usr/bin/ninja /usr/local/lib/android/sdk/cmake/3.18.1/bin/ninja
-        
+
 
       - uses: actions/setup-java@v4
         with:
@@ -222,7 +222,7 @@ jobs:
           upload-to-folder-id: ${{secrets.GOOGLE_FOLDER_MAIN}}
           service-account-json: "${{secrets.GOOGLE_KEY}}"
           overrwrite: true
-          
+
   build_linux:
     runs-on: ubuntu-latest
     if: contains(github.event.head_commit.message, '[build.linux]')  ||  contains(github.event.head_commit.message, '[build.all]')
@@ -242,7 +242,7 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           flutter-version: 3.32.5
-          cache: true
+          # cache: true
 
       # Step 3: Setup system dependencies
       - name: Install system dependencies
@@ -251,15 +251,15 @@ jobs:
           sudo apt-get install -y ninja-build libgtk-3-dev webkit2gtk-4.1 libmpv-dev pkg-config fuse
 
       # Step 4: Cache Flutter dependencies
-      - name: Cache Flutter dependencies
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.pub-cache
-            build/
-          key: ${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-flutter-
+      # - name: Cache Flutter dependencies
+      #   uses: actions/cache@v3
+      #   with:
+      #     path: |
+      #       ~/.pub-cache
+      #       build/
+      #     key: ${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.yaml') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-flutter-
       # Create .env:
       - name: Setup env File
         env:
@@ -312,14 +312,14 @@ jobs:
         with:
           flutter-version: 3.32.5
           cache: true
-      
+
       - name: Setup .env File for macOS
         env:
           SIMKL_SECRET: ${{ secrets.SIMKL_SECRET }}
         run: |
           echo "SIMKL_SECRET= $SIMKL_SECRET" > .env
         shell: bash
-        
+
 
       # Step 3 Get Dependencies
       - name: Get Dependencies
@@ -442,10 +442,10 @@ jobs:
       - name: Check for Ping
         id: check_noping
         run: |
-          if [[ "${{ github.event.head_commit.message }}" == *"[Ping]"* ]]; then 
-            echo "ping_variable=<@&1324799528255225997>" >> $GITHUB_ENV 
-          else 
-            echo "ping_variable=noPing" >> $GITHUB_ENV 
+          if [[ "${{ github.event.head_commit.message }}" == *"[Ping]"* ]]; then
+            echo "ping_variable=<@&1324799528255225997>" >> $GITHUB_ENV
+          else
+            echo "ping_variable=noPing" >> $GITHUB_ENV
           fi
       - name: Upload APK to Discord and Telegram
         shell: bash
@@ -722,11 +722,11 @@ jobs:
           curl -H "Content-Type: application/json" \
                -d "{\"content\": \"${APK_MESSAGE}\n${WINDOWS_MESSAGE}\n${LINUX_MESSAGE}\n${IOS_MESSAGE}\n${MACOS_MESSAGE}\"}" \
                "${{ secrets.DISCORD_WEBHOOK_URL }}"
-               
+
       - name: Send Telegram Notification
         run: |
           MESSAGE="🎉 *Build Notification* 🎉"
-      
+
           if [[ -n "${{ env.apk_message }}" ]]; then
             MESSAGE="$MESSAGE
             ${{ env.apk_message }}"
@@ -747,7 +747,7 @@ jobs:
             MESSAGE="$MESSAGE
             ${{ env.macos_message }}"
           fi
-      
+
           if [[ "$MESSAGE" != "🎉 *Build Notification* 🎉" ]]; then
             curl -sS -f -X POST \
               "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKKEN }}/sendMessage" \
