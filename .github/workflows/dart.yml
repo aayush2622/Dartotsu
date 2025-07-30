@@ -406,7 +406,7 @@ jobs:
           cd build/ios/iphoneos
           mkdir -p Payload
           cd Payload
-          ln -s ../Runner.app
+          cp -R ../Runner.app .
           cd ..
           zip -r Dartotsu-iOS-${{ github.ref_name }}.ipa Payload
       #Step 5 Upload ipa file to google drive
@@ -414,8 +414,8 @@ jobs:
         id: gdriveUpload
         uses: hoatruongdev09/google-drive-file-upload-github-action@v1.1
         with:
-          file-path: build/ios/iphoneos/Dartotsu-iOS-main.ipa
-          upload-name: Dartotsu-iOS-main.ipa
+          file-path: build/ios/iphoneos/Dartotsu-iOS-${{github.ref_name}}.ipa
+          upload-name: Dartotsu-iOS-${{github.ref_name}}.ipa
           upload-to-folder-id: ${{secrets.GOOGLE_FOLDER_MAIN}}
           service-account-json: "${{secrets.GOOGLE_KEY}}"
           overrwrite: true
