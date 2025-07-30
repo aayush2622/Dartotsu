@@ -699,7 +699,8 @@ Comment=The Ultimate Anime & Manga Experience
 Exec=$LINK
 Icon=$ICON_FILE
 Type=Application
-Categories=AudioVideo;Player;
+Categories=AudioVideo;Player
+MimeType=x-scheme-handler/dar;x-scheme-handler/anymex;x-scheme-handler/sugoireads;x-scheme-handler/mangayomi;
 EOL
     chmod +x "$DESKTOP_FILE"
 
