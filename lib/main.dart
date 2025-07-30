@@ -107,8 +107,6 @@ Future init() async {
 }
 
 void initDeepLinkListener() async {
-  if (Platform.isLinux) return;
-
   final appLink = AppLinks();
   try {
     final initialUri = await appLink.getInitialLink();

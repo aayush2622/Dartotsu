@@ -47,10 +47,13 @@ class FloatingBottomNavBarDesktop extends FloatingBottomNavBar {
                 iconBuilder: () => Obx(() {
                   final avatar = service.data.avatar.value;
                   return avatar.isNotEmpty
-                      ? cachedNetworkImage(
-                          imageUrl: avatar,
-                          width: 42.0,
-                          height: 42.0,
+                      ? CircleAvatar(
+                          radius: 26.0,
+                          child: cachedNetworkImage(
+                            imageUrl: avatar,
+                            width: 42.0,
+                            height: 42.0,
+                          ),
                         )
                       : loadSvg(
                           service.iconPath,
