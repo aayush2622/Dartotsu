@@ -23,25 +23,48 @@ jobs:
         with:
           fetch-depth: 0
       # Cache Flutter dependencies
-      # - uses: actions/cache@v4
-      #   with:
-      #     path: |
-      #       ~/.pub-cache
-      #       build/
-      #       .dart_tool/
-      #     key: ${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.lock') }}
-      #     restore-keys: |
-      #       ${{ runner.os }}-flutter-
+      - name: Cache Flutter dependencies (normal)
+        if: ${{ !contains(github.event.head_commit.message, '[clean]') }}
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.pub-cache
+            build/
+            .dart_tool/
+          key: v1-${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.lock') }}
+          restore-keys: |
+            v1-${{ runner.os }}-flutter-
+            clean-v1-${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.lock') }}
+      - name: Cache Flutter dependencies (clean)
+        if: contains(github.event.head_commit.message, '[clean]')
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.pub-cache
+            build/
+            .dart_tool/
+          key: clean-v1-${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.lock') }}
 
       # Cache Gradle dependencies
-      # - uses: actions/cache@v4
-      #   with:
-      #     path: |
-      #       ~/.gradle/caches
-      #       ~/.gradle/wrapper
-      #     key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-      #     restore-keys: |
-      #       ${{ runner.os }}-gradle-
+      - name: Cache Gradle dependencies (normal)
+        if: ${{!contains(github.event.head_commit.message, '[clean]')}}
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: v1-${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            v1-${{ runner.os }}-gradle-
+            clean-v1-${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+      - name: Cache Gradle dependencies (clean)
+        if: contains(github.event.head_commit.message, '[clean]')
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: clean-v1-${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
       # Setup Cmake
       - name: Setup cmake
         uses: jwlawson/actions-setup-cmake@v2
@@ -184,10 +207,31 @@ jobs:
 
       # Setup Flutter with caching
       - name: Setup Flutter
+        id: setup-flutter
         uses: subosito/flutter-action@v2
         with:
           flutter-version: 3.32.5
-          cache: true
+      - name: Cache Flutter dependencies (normal)
+        if: ${{!contains(github.event.head_commit.message, '[clean]')}}
+        uses: actions/cache@v4
+        with:
+          path: |
+            ${{ steps.setup-flutter.outputs.pub-cache-path }}
+            build
+            .dart_tool
+          key: v1-${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.lock') }}
+          restore-keys: |
+            v1-${{ runner.os }}-flutter-
+            clean-v1-${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.lock') }}
+      - name: Cache Flutter dependencies (clean)
+        if: contains(github.event.head_commit.message, '[clean]')
+        uses: actions/cache@v4
+        with:
+          path: |
+            ${{ steps.setup-flutter.outputs.pub-cache-path }}
+            build
+            .dart_tool
+          key: clean-v1-${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.lock') }}
       - name: Setup NuGet.exe for use with actions
         uses: NuGet/setup-nuget@v2.0.1
         with:
@@ -251,15 +295,25 @@ jobs:
           sudo apt-get install -y ninja-build libgtk-3-dev webkit2gtk-4.1 libmpv-dev pkg-config fuse
 
       # Step 4: Cache Flutter dependencies
-      # - name: Cache Flutter dependencies
-      #   uses: actions/cache@v3
-      #   with:
-      #     path: |
-      #       ~/.pub-cache
-      #       build/
-      #     key: ${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.yaml') }}
-      #     restore-keys: |
-      #       ${{ runner.os }}-flutter-
+      - name: Cache Flutter dependencies (normal)
+        if: ${{!contains(github.event.head_commit.message, '[clean]')}}
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.pub-cache
+            build/
+          key: v1-${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.yaml') }}
+          restore-keys: |
+            v1-${{ runner.os }}-flutter-
+            clean-v1-${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.yaml') }}
+      - name: Cache Flutter dependencies (clean)
+        if: contains(github.event.head_commit.message, '[clean]')
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.pub-cache
+            build/
+          key: clean-v1-${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.yaml') }}
       # Create .env:
       - name: Setup env File
         env:
@@ -308,10 +362,31 @@ jobs:
 
       # Step 2: Setup Flutter
       - name: Setup Flutter
+        id: setup-flutter
         uses: subosito/flutter-action@v2
         with:
           flutter-version: 3.32.5
-          cache: true
+      - name: Cache Flutter dependencies (normal)
+        if: ${{!contains(github.event.head_commit.message, '[clean]')}}
+        uses: actions/cache@v4
+        with:
+          path: |
+            ${{ steps.setup-flutter.outputs.pub-cache-path }}
+            build
+            .dart_tool
+          key: v1-${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.lock') }}
+          restore-keys: |
+            v1-${{ runner.os }}-flutter-
+            clean-v1-${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.lock') }}
+      - name: Cache Flutter dependencies (clean)
+        if: contains(github.event.head_commit.message, '[clean]')
+        uses: actions/cache@v4
+        with:
+          path: |
+            ${{ steps.setup-flutter.outputs.pub-cache-path }}
+            build
+            .dart_tool
+          key: clean-v1-${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.lock') }}
 
       - name: Setup .env File for macOS
         env:
@@ -358,10 +433,31 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Flutter
+        id: setup-flutter
         uses: subosito/flutter-action@v2
         with:
           flutter-version: 3.32.5
-          cache: true
+      - name: Cache Flutter dependencies (normal)
+        if: ${{!contains(github.event.head_commit.message, '[clean]')}}
+        uses: actions/cache@v4
+        with:
+          path: |
+            ${{ steps.setup-flutter.outputs.pub-cache-path }}
+            build
+            .dart_tool
+          key: v1-${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.lock') }}
+          restore-keys: |
+            v1-${{ runner.os }}-flutter-
+            clean-v1-${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.lock') }}
+      - name: Cache Flutter dependencies (clean)
+        if: contains(github.event.head_commit.message, '[clean]')
+        uses: actions/cache@v4
+        with:
+          path: |
+            ${{ steps.setup-flutter.outputs.pub-cache-path }}
+            build
+            .dart_tool
+          key: clean-v1-${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.lock') }}
       - name: Setup .env File for macOS
         env:
           SIMKL_SECRET: ${{ secrets.SIMKL_SECRET }}
@@ -420,8 +516,8 @@ jobs:
           COMMIT_LOGS=$(git log $LAST_SHA..HEAD --pretty=format:"● %s ~%an [֍](https://github.com/${{ github.repository }}/commit/%H)" --max-count=10)
           # URL-encode the newline characters for GitHub Actions
           COMMIT_LOGS="${COMMIT_LOGS//'%'/'%25'}"
-          COMMIT_LOGS="${COMMIT_LOGS//$'\n'/'%0A'}"
-          COMMIT_LOGS="${COMMIT_LOGS//$'\r'/'%0D'}"
+          COMMIT_LOGS="${COMMIT_LOGS//'/'%0A'}"
+          COMMIT_LOGS="${COMMIT_LOGS//'/'%0D'}"
           # Append the encoded commit logs to the COMMIT_LOG environment variable
           echo "COMMIT_LOG=${COMMIT_LOGS}" >> $GITHUB_ENV
           # Debugging: Print the variable to check its content
@@ -655,13 +751,7 @@ jobs:
               -F "chat_id=${{ secrets.TELEGRAM_CHANNEL_ID}}" \
               -F "message_thread_id=${{secrets.TELEGRAM_THREAD_ID}}" \
               -F "document=@last_sha.txt" \
-              -F "caption=New Alpha-Build dropped 🔥
-
-          Commits:
-          ${telegram_commit_messages}
-          Devs:
-          ${telegram_dev_info}
-          version: ${VERSION}" \
+              -F "caption=New Alpha-Build dropped 🔥\n\n          Commits:\n          ${telegram_commit_messages}\n          Devs:\n          ${telegram_dev_info}\n          version: ${VERSION}" \
               -F "parse_mode=HTML")
 
       - name: Upload Current SHA as Artifact
@@ -728,31 +818,26 @@ jobs:
           MESSAGE="🎉 *Build Notification* 🎉"
 
           if [[ -n "${{ env.apk_message }}" ]]; then
-            MESSAGE="$MESSAGE
-            ${{ env.apk_message }}"
+            MESSAGE="$MESSAGE\n            ${{ env.apk_message }}"
           fi
           if [[ -n "${{ env.windows_message }}" ]]; then
-            MESSAGE="$MESSAGE
-            ${{ env.windows_message }}"
+            MESSAGE="$MESSAGE\n            ${{ env.windows_message }}"
           fi
           if [[ -n "${{ env.linux_message }}" ]]; then
-            MESSAGE="$MESSAGE
-            ${{ env.linux_message }}"
+            MESSAGE="$MESSAGE\n            ${{ env.linux_message }}"
           fi
           if [[ -n "${{ env.ios_message }}" ]]; then
-            MESSAGE="$MESSAGE
-            ${{ env.ios_message }}"
+            MESSAGE="$MESSAGE\n            ${{ env.ios_message }}"
           fi
           if [[ -n "${{ env.macos_message }}" ]]; then
-            MESSAGE="$MESSAGE
-            ${{ env.macos_message }}"
+            MESSAGE="$MESSAGE\n            ${{ env.macos_message }}"
           fi
 
           if [[ "$MESSAGE" != "🎉 *Build Notification* 🎉" ]]; then
             curl -sS -f -X POST \
-              "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKKEN }}/sendMessage" \
-              -F "chat_id=${{ secrets.TELEGRAM_CHANNEL_ID }}" \
-              -F "message_thread_id=${{ secrets.TELEGRAM_THREAD_ID }}" \
+              "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKKEN}}/sendMessage" \
+              -F "chat_id=${{ secrets.TELEGRAM_CHANNEL_ID}}" \
+              -F "message_thread_id=${{ secrets.TELEGRAM_THREAD_ID}}" \
               -F parse_mode="Markdown" \
               -F disable_notification=true \
               -F "text=$MESSAGE"
