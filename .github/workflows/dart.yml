@@ -753,7 +753,13 @@ jobs:
               -F "chat_id=${{ secrets.TELEGRAM_CHANNEL_ID}}" \
               -F "message_thread_id=${{secrets.TELEGRAM_THREAD_ID}}" \
               -F "document=@last_sha.txt" \
-              -F "caption=New Alpha-Build dropped 🔥\n\n          Commits:\n          ${telegram_commit_messages}\n          Devs:\n          ${telegram_dev_info}\n          version: ${VERSION}" \
+              -F "caption=New Alpha-Build dropped 🔥
+
+          Commits:
+          ${telegram_commit_messages}
+          Devs:
+          ${telegram_dev_info}
+          version: ${VERSION}" \
               -F "parse_mode=HTML")
 
       - name: Upload Current SHA as Artifact
