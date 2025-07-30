@@ -404,6 +404,8 @@ jobs:
         run: |
           flutter build ios --release --no-codesign
           cd build/ios/iphoneos
+          # Remove old Payload directory to avoid cp error on cached runs
+          rm -rf Payload
           mkdir -p Payload
           cd Payload
           cp -R ../Runner.app .
