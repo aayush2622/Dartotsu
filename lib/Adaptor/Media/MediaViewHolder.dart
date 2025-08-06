@@ -1,5 +1,6 @@
 import 'package:dartotsu/DataClass/Media.dart';
 import 'package:flutter/material.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../Widgets/CachedNetworkImage.dart';
 import 'Widgets/MediaReleaseingIndicator.dart';
@@ -20,14 +21,16 @@ class MediaViewHolder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context).colorScheme;
+    final isSkeleton = Skeletonizer.of(context).enabled;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildCoverImage(context),
-        if (isLarge && mediaInfo.relation != null) _buildRelationRow(theme),
+        _buildCoverImage(context, isSkeleton),
+        if (isLarge && mediaInfo.relation != null && !isSkeleton)
+          _buildRelationRow(theme),
         const SizedBox(height: 8),
-        _buildMediaTitle(),
+        _buildMediaTitle(isSkeleton),
         if (mediaInfo.minimal != true && mediaInfo.mal != true) ...[
           const SizedBox(height: 2),
           _buildProgressInfo(theme),
@@ -36,25 +39,31 @@ class MediaViewHolder extends StatelessWidget {
     );
   }
 
-  Widget _buildCoverImage(BuildContext context) {
+  Widget _buildCoverImage(BuildContext context, bool isSkeleton) {
     return Stack(
       children: [
-        Hero(
-          tag: tag,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(16.0),
-            child: cachedNetworkImage(
-              imageUrl: mediaInfo.cover ?? '',
-              fit: BoxFit.cover,
-              width: 108,
-              height: 160,
-              placeholder: (context, url) => Container(
-                color: Colors.white12,
-                width: 108,
-                height: 160,
-              ),
-            ),
-          ),
+        ClipRRect(
+          borderRadius: BorderRadius.circular(16.0),
+          child: isSkeleton
+              ? Container(
+                  color: Colors.white12,
+                  width: 108,
+                  height: 160,
+                )
+              : Hero(
+                  tag: tag,
+                  child: cachedNetworkImage(
+                    imageUrl: mediaInfo.cover ?? '',
+                    fit: BoxFit.cover,
+                    width: 108,
+                    height: 160,
+                    placeholder: (context, url) => Container(
+                      color: Colors.white12,
+                      width: 108,
+                      height: 160,
+                    ),
+                  ),
+                ),
         ),
         if (mediaInfo.minimal != true) ...[
           if (mediaInfo.status == 'RELEASING') ReleasingIndicator(),
@@ -97,16 +106,19 @@ class MediaViewHolder extends StatelessWidget {
     );
   }
 
-  Widget _buildMediaTitle() {
-    return Text(
-      mediaInfo.userPreferredName,
-      style: const TextStyle(
-        fontFamily: 'Poppins',
-        fontSize: 14,
-        fontWeight: FontWeight.w400,
+  Widget _buildMediaTitle(bool isSkeleton) {
+    return SizedBox(
+      width: 108,
+      child: Text(
+        isSkeleton ? 'Loading title' : mediaInfo.userPreferredName,
+        style: const TextStyle(
+          fontFamily: 'Poppins',
+          fontSize: 14,
+          fontWeight: FontWeight.w400,
+        ),
+        maxLines: 2,
+        overflow: TextOverflow.ellipsis,
       ),
-      maxLines: 2,
-      overflow: TextOverflow.ellipsis,
     );
   }
 

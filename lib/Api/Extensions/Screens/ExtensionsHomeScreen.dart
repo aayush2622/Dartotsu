@@ -159,7 +159,7 @@ class ExtensionsHomeScreen extends BaseHomeScreen {
           section.emptyButtonOnPressed,
         ),
       );
-    }).toList();
+    }).toList() as List<Widget>;
 
     var hiddenMedia = MediaSection(
       context: context,

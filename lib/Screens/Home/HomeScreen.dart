@@ -26,11 +26,8 @@ import 'Widgets/AvtarWidget.dart';
 import 'Widgets/NotificationBadge.dart';
 
 part 'HomeScreenGlassDesktop.dart';
-
 part 'HomeScreenMaterialDesktop.dart';
-
 part 'HomeScreenGlassMobile.dart';
-
 part 'HomeScreenMaterialMobile.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -41,23 +38,37 @@ class HomeScreen extends StatefulWidget {
 }
 
 class HomeScreenState extends State<HomeScreen> {
+  bool _initialized = false;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (_initialized) return;
+
+    final screen = context.currentService().homeScreen;
+    screen?.init();
+    _initialized = true;
+  }
+
   @override
   Widget build(BuildContext context) {
-    var service = context.currentService();
-    var screen = service.homeScreen;
+    final service = context.currentService();
+    final screen = service.homeScreen;
     if (screen == null) {
       return service.notImplemented(widget.runtimeType.toString());
     }
-    screen.init();
+    return _buildHomeContent;
+  }
 
+  Widget get _buildHomeContent {
     final useGlass = context.themeNotifierListen.useGlassMode;
-
+    final isPhone = context.isPhone;
     if (useGlass) {
-      return context.isPhone
+      return isPhone
           ? const HomeScreenGlassMobile()
           : const HomeScreenGlassDesktop();
     } else {
-      return context.isPhone
+      return isPhone
           ? const HomeScreenMaterialMobile()
           : const HomeScreenGlassDesktop();
     }

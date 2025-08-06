@@ -1,5 +1,6 @@
 import 'package:dartotsu/Services/Screens/BaseHomeScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
@@ -166,7 +167,7 @@ class AnilistHomeScreen extends BaseHomeScreen {
           () => showHidden.value = !showHidden.value;
     }
 
-    final result = sectionWidgets.map((section) {
+    final List<Widget> result = sectionWidgets.map((section) {
       return MediaSection(
         context: context,
         type: section.type,
@@ -182,8 +183,7 @@ class AnilistHomeScreen extends BaseHomeScreen {
           section.emptyButtonOnPressed,
         ),
       );
-    }).toList()
-      ..add(const SizedBox(height: 128));
+    }).toList();
 
     var hiddenMedia = MediaSection(
       context: context,
@@ -202,13 +202,49 @@ class AnilistHomeScreen extends BaseHomeScreen {
 
     return [
       Obx(() {
-        if (showHidden.value) {
-          result.insert(0, hiddenMedia);
-        } else {
-          result.remove(hiddenMedia);
-        }
-        return Column(
-          children: result,
+        final allSections = List<Widget>.from(result);
+        if (showHidden.value) allSections.insert(0, hiddenMedia);
+
+        return LayoutBuilder(
+          builder: (context, constraints) {
+            final spacing = 16.0;
+            final horizontalPadding = context.isPhone ? 0.0 : 16.0;
+            final maxWidth = constraints.maxWidth - horizontalPadding;
+
+            final columns = context.isPhone ? 1 : 2;
+            final width = (maxWidth - ((columns - 1) * spacing)) / columns;
+            final useColumnLayout = width < 480;
+
+            final children = allSections.map((section) {
+              return SizedBox(
+                width: useColumnLayout ? null : width,
+                child: section,
+              );
+            }).toList();
+
+            return Padding(
+              padding: EdgeInsets.only(right: horizontalPadding),
+              child: Column(
+                children: [
+                  useColumnLayout
+                      ? Column(
+                          children: children
+                              .map((child) => Padding(
+                                    padding: EdgeInsets.only(bottom: spacing),
+                                    child: child,
+                                  ))
+                              .toList(),
+                        )
+                      : Wrap(
+                          spacing: spacing,
+                          runSpacing: spacing,
+                          children: children,
+                        ),
+                  const SizedBox(height: 128),
+                ],
+              ),
+            );
+          },
         );
       }),
     ];

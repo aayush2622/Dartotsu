@@ -213,8 +213,7 @@ class MalHomeScreen extends BaseHomeScreen {
           section.emptyButtonOnPressed,
         ),
       );
-    }).toList()
-      ..add(const SizedBox(height: 128));
+    }).toList();
 
     var hiddenMedia = MediaSection(
       context: context,
@@ -239,7 +238,7 @@ class MalHomeScreen extends BaseHomeScreen {
           result.remove(hiddenMedia);
         }
         return Column(
-          children: result,
+          children: [...result, const SizedBox(height: 128)],
         );
       }),
     ];

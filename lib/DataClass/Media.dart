@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:dartotsu/Functions/string_extensions.dart';
 import 'package:dartotsu/Preferences/IsarDataClasses/MediaSettings/MediaSettings.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
@@ -211,6 +213,34 @@ class Media {
 
   factory Media.fromSimklMovies(simklApi.MovieElement apiMedia) =>
       _fromSimklMovies(apiMedia);
+
+  factory Media.skeleton() {
+    final random = Random();
+    final values = {
+      'userScore': 26,
+      'meanScore': 32,
+      'userProgress': 100,
+    };
+
+    final keys = values.keys.toList()..shuffle(random);
+    final keepCount = random.nextInt(values.length + 1);
+
+    final keptKeys = keys.take(keepCount).toSet();
+
+    return Media(
+      id: 0,
+      nameRomaji: '',
+      userPreferredName: '',
+      isAdult: false,
+      userScore:
+          keptKeys.contains('userScore') ? values['userScore'] as int : 0,
+      meanScore:
+          keptKeys.contains('meanScore') ? values['meanScore'] as int : null,
+      userProgress: keptKeys.contains('userProgress')
+          ? values['userProgress'] as int
+          : null,
+    );
+  }
 
   DMedia toDMedia() {
     return DMedia(
