@@ -203,10 +203,9 @@ class SimklHomeScreen extends BaseHomeScreen {
           section.emptyButtonOnPressed,
         ),
       );
-    }).toList()
-      ..add(const SizedBox(height: 128));
+    }).toList();
 
-    return result;
+    return [...result, const SizedBox(height: 128)];
   }
 
   @override

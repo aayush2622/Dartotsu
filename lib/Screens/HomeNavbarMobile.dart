@@ -1,5 +1,4 @@
-import 'dart:ui';
-
+import 'package:blurbox/blurbox.dart';
 import 'package:dartotsu/Functions/Extensions.dart';
 import 'package:dartotsu/Theme/Colors.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +18,7 @@ class FloatingBottomNavBarMobile extends FloatingBottomNavBar {
   @override
   Widget build(BuildContext context) {
     final themeNotifier = Provider.of<ThemeNotifier>(context);
+    final theme = Theme.of(context).colorScheme;
     final navItems = context.currentService().navBarItem;
 
     return Positioned(
@@ -45,20 +45,16 @@ class FloatingBottomNavBarMobile extends FloatingBottomNavBar {
                       borderRadius: BorderRadius.circular(30.0),
                     ),
                   ),
-                  glassWidget: ClipRRect(
+                  glassWidget: PresetBlurBox(
+                    preset: BlurPreset.vibrant,
+                    padding: const EdgeInsets.all(0),
+                    color: theme.surface.withOpacity(0.2),
                     borderRadius: BorderRadius.circular(30.0),
-                    child: BackdropFilter(
-                      filter: ImageFilter.blur(sigmaX: 12.0, sigmaY: 12.0),
-                      child: Container(
-                        width: 246.0,
-                        height: 54.0,
-                        decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.1),
-                          borderRadius: BorderRadius.circular(30.0),
-                          border: Border.all(
-                            color: Colors.white.withOpacity(0.2),
-                          ),
-                        ),
+                    child: Container(
+                      width: 246.0,
+                      height: 54.0,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30.0),
                       ),
                     ),
                   ),

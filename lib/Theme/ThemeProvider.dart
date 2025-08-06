@@ -59,7 +59,6 @@ class ThemeNotifier extends ChangeNotifier {
     if (useGlassEffect) {
       //setOled(false);
       setMaterialYou(false);
-      useCustomTheme(false);
     }
     notifyListeners();
   }
@@ -105,7 +104,6 @@ class ThemeNotifier extends ChangeNotifier {
     saveData(PrefName.useCustomColor, useCustomTheme);
     if (useCustomTheme) {
       setMaterialYou(false);
-      setGlassEffect(false);
     }
     notifyListeners();
   }

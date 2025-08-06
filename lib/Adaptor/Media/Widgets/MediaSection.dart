@@ -1,24 +1,95 @@
+import 'package:blurbox/blurbox.dart';
+import 'package:dartotsu/Functions/Extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../DataClass/Media.dart';
 import '../../../Widgets/CustomElevatedButton.dart';
 import '../MediaAdaptor.dart';
 
-Widget MediaSection({
-  required BuildContext context,
-  required int type,
-  required String title,
-  bool isLarge = false,
-  List<Media>? mediaList,
-  List<Widget>? customNullListIndicator,
-  ScrollController? scrollController,
-  Widget? trailingIcon,
-  Function(int index, Media media)? onMediaTap,
-  void Function()? onLongPressTitle,
-}) {
-  var theme = Theme.of(context);
+class MediaSection extends StatefulWidget {
+  final BuildContext context;
+  final int type;
+  final String title;
+  final bool isLarge;
+  final List<Media>? mediaList;
+  final List<Widget>? customNullListIndicator;
+  final ScrollController? scrollController;
+  final Widget? trailingIcon;
+  final void Function()? onTrailingIconTap;
+  final Function(int index, Media media)? onMediaTap;
+  final void Function()? onLongPressTitle;
+
+  const MediaSection({
+    super.key,
+    required this.context,
+    required this.type,
+    required this.title,
+    this.isLarge = false,
+    this.mediaList,
+    this.customNullListIndicator,
+    this.scrollController,
+    this.trailingIcon,
+    this.onTrailingIconTap,
+    this.onMediaTap,
+    this.onLongPressTitle,
+  });
+
+  @override
+  State<MediaSection> createState() => _MediaSectionState();
+}
+
+class _MediaSectionState extends State<MediaSection> {
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context).colorScheme;
+    final isPhone = context.isPhone;
+
+    final mediaContent = AnimatedSwitcher(
+      duration: const Duration(milliseconds: 300),
+      child: MediaAdaptor(
+        type: widget.type,
+        mediaList: widget.mediaList,
+        isLarge: widget.isLarge,
+        scrollController: widget.scrollController,
+        onMediaTap: widget.onMediaTap,
+      ),
+    );
+
+    final content = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        buildTitleRow(),
+        const SizedBox(height: 8),
+        mediaContent,
+      ],
+    );
+
+    if (isPhone) return content;
+    final card = Container(
+      decoration: BoxDecoration(
+        color: theme.surface.withOpacity(0.2),
+        borderRadius: BorderRadius.circular(30.0),
+        border: Border.all(
+          color: theme.outline.withOpacity(0.3),
+          width: 1.2,
+        ),
+      ),
+      child: content,
+    );
+    return context.useGlassMode
+        ? PresetBlurBox(
+            preset: BlurPreset.iosStyle,
+            padding: EdgeInsets.zero,
+            color: theme.surface.withOpacity(0.2),
+            borderRadius: BorderRadius.circular(30.0),
+            child: content,
+          )
+        : card;
+  }
 
   Widget buildTitleRow() {
+    var theme = Theme.of(context);
     return Padding(
       padding: const EdgeInsets.only(left: 28.0, right: 16),
       child: Row(
@@ -27,9 +98,9 @@ Widget MediaSection({
           // Title Text
           Expanded(
             child: GestureDetector(
-              onLongPress: onLongPressTitle,
+              onLongPress: widget.onLongPressTitle,
               child: Text(
-                title,
+                widget.title,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
@@ -42,76 +113,24 @@ Widget MediaSection({
             ),
           ),
           // Arrow Icon
-          trailingIcon ??
+          widget.trailingIcon ??
               Transform(
                 alignment: Alignment.center,
                 transform: Matrix4.rotationZ(3.14),
                 child: IconButton(
                   icon: const Icon(Icons.arrow_back, size: 24),
-                  onPressed: () {},
+                  onPressed: () => widget.onTrailingIconTap?.call(),
                 ),
               ),
         ],
       ),
     );
   }
-
-  Widget buildEmptyState() {
-    return SizedBox(
-      height: 250,
-      child: Center(
-        child: customNullListIndicator?.isNotEmpty ?? false
-            ? Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: customNullListIndicator!,
-              )
-            : const Text(
-                'Nothing here',
-                style: TextStyle(
-                  fontFamily: 'Poppins',
-                  fontSize: 16,
-                ),
-              ),
-      ),
-    );
-  }
-
-  Widget buildMediaContent() {
-    return mediaList == null
-        ? const SizedBox(
-            height: 250,
-            child: Center(
-              child: CircularProgressIndicator(),
-            ),
-          )
-        : mediaList.isEmpty
-            ? buildEmptyState()
-            : MediaAdaptor(
-                type: type,
-                mediaList: mediaList,
-                isLarge: isLarge,
-                scrollController: scrollController,
-                onMediaTap: onMediaTap,
-              );
-  }
-
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      buildTitleRow(),
-      const SizedBox(height: 8),
-      AnimatedSwitcher(
-        duration: const Duration(milliseconds: 300),
-        child: buildMediaContent(),
-      ),
-    ],
-  );
 }
 
 List<Widget> buildNullIndicator(BuildContext context, IconData? icon,
     String? message, String? buttonLabel, void Function()? onPressed) {
   var theme = Theme.of(context).colorScheme;
-
   return [
     Icon(
       icon,

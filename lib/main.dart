@@ -75,11 +75,15 @@ void main(List<String> args) async {
   );
   FlutterError.onError = (FlutterErrorDetails details) {
     FlutterError.presentError(details);
-    Logger.log('FlutterError: ${details.exception}\n${details.stack}');
+    Logger.log(
+      'FlutterError: ${details.exception}\n${details.stack}',
+      logLevel: LogLevel.error,
+    );
   }; //TODO: setup error screen
 
   PlatformDispatcher.instance.onError = (error, stack) {
-    Logger.log('PlatformDispatcher error: $error\n$stack');
+    Logger.log('PlatformDispatcher error: $error\n$stack',
+        logLevel: LogLevel.error);
     return true;
   };
 }
@@ -90,7 +94,7 @@ Future init() async {
         .forEach(registerProtocolHandler);
   }
   await PrefManager.init();
-  await DartotsuExtensionBridge().init(isar, "darotsu");
+  await DartotsuExtensionBridge().init(isar, "Darotsu");
   await Logger.init();
   MediaService.init();
   TypeFactory.init();
@@ -278,34 +282,64 @@ class MainActivityState extends State<MainActivity> {
   }
 
   Widget get _navbar {
-    navbar = context.isPhone
-        ? FloatingBottomNavBarMobile(
-            selectedIndex: _selectedIndex,
-            onTabSelected: _onTabSelected,
-          )
-        : FloatingBottomNavBarDesktop(
-            selectedIndex: _selectedIndex,
-            onTabSelected: _onTabSelected,
-          );
-    return navbar;
+    if (context.isPhone) {
+      return FloatingBottomNavBarMobile(
+        selectedIndex: _selectedIndex,
+        onTabSelected: _onTabSelected,
+      );
+    } else {
+      return FloatingBottomNavBarDesktop(
+        selectedIndex: _selectedIndex,
+        onTabSelected: _onTabSelected,
+      );
+    }
   }
 
   Widget _buildBackground(ThemeNotifier themeNotifier, MediaService service) {
     if (!themeNotifier.useGlassMode) return const SizedBox.shrink();
+
     return Positioned.fill(
-      child: ImageFiltered(
-        imageFilter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-        child: Opacity(
-          opacity: 0.8,
-          child: Obx(
-            () => cachedNetworkImage(
-              imageUrl: service.data.bg.value.isNotEmpty
-                  ? service.data.bg.value
-                  : 'https://wallpapercat.com/download/1198914',
-              fit: BoxFit.fill,
+      child: Stack(
+        children: [
+          Positioned.fill(
+            child: ImageFiltered(
+              imageFilter: ImageFilter.blur(sigmaX: 4.0, sigmaY: 4.0),
+              child: Opacity(
+                opacity: 0.8,
+                child: Obx(
+                  () => cachedNetworkImage(
+                    imageUrl: service.data.bg.value.isNotEmpty
+                        ? service.data.bg.value
+                        : 'https://wallpapercat.com/download/1198914',
+                    fit: BoxFit.fill,
+                  ),
+                ),
+              ),
             ),
           ),
-        ),
+          // Gradient overlay at the bottom 75%
+          Positioned.fill(
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: FractionallySizedBox(
+                heightFactor: 0.75,
+                widthFactor: 1,
+                child: Container(
+                  decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        Colors.transparent,
+                        Colors.black54,
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

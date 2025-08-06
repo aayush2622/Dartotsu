@@ -4,6 +4,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dartotsu/Functions/Extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../Animation/ScaleAnimation.dart';
 import '../../DataClass/Media.dart';
@@ -17,9 +18,10 @@ import 'MediaViewHolder.dart';
 
 class MediaAdaptor extends StatefulWidget {
   final int type;
-  final List<Media> mediaList;
+  final List<Media>? mediaList;
   final bool isLarge;
   final ScrollController? scrollController;
+  final List<Widget>? customNullListIndicator;
   final Function(int index, Media media)? onMediaTap;
 
   const MediaAdaptor({
@@ -28,11 +30,12 @@ class MediaAdaptor extends StatefulWidget {
     required this.mediaList,
     this.isLarge = false,
     this.scrollController,
+    this.customNullListIndicator,
     this.onMediaTap,
   });
 
   @override
-  MediaGridState createState() => MediaGridState();
+  State<MediaAdaptor> createState() => MediaGridState();
 }
 
 class MediaGridState extends State<MediaAdaptor> {
@@ -41,145 +44,144 @@ class MediaGridState extends State<MediaAdaptor> {
   @override
   void initState() {
     super.initState();
-    _mediaList = widget.mediaList;
+    _updateMediaList();
   }
 
   @override
   void didUpdateWidget(covariant MediaAdaptor oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.mediaList != widget.mediaList) {
-      setState(() {
-        _mediaList = widget.mediaList;
-      });
+      _updateMediaList();
     }
+  }
+
+  void _updateMediaList() {
+    final random = Random();
+    final count = random.nextInt(11) + 7;
+    final mediaList = List.generate(count, (_) => Media.skeleton());
+    _mediaList = widget.mediaList ?? mediaList;
   }
 
   @override
   Widget build(BuildContext context) {
-    if (_mediaList.isEmpty) {
-      return const SizedBox();
-    }
+    final isLoading = widget.mediaList == null;
+
+    Widget child;
     switch (widget.type) {
       case 0:
-        return _buildHorizontalList();
+        child = _buildHorizontalList();
+        break;
       case 1:
-        return _buildCarouselView();
+        child = _buildCarouselView();
+        break;
       case 2:
-        return _buildVerticalList();
+        child = _buildVerticalList();
+        break;
       case 3:
-        return _buildStaggeredGrid();
+        child = _buildStaggeredGrid();
+        break;
       case 4:
-        return _buildExpandedHorizontalList();
+        child = _buildExpandedHorizontalList();
+        break;
       default:
-        return const SizedBox();
+        child = const SizedBox();
     }
+
+    return Skeletonizer(
+      enabled: isLoading,
+      effect: ShimmerEffect(
+        baseColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.2),
+      ),
+      child: _mediaList.isEmpty && !isLoading ? _buildEmptyState() : child,
+    );
   }
 
-  String _generateTag(int index) =>
-      '${_mediaList[index].id}${Random().nextInt(100000)}';
-
-  void _handleMediaTap(int index, Media media, String tag) {
-    if (widget.onMediaTap != null) {
-      widget.onMediaTap!(index, media);
-    } else {
-      navigateToPage(context, MediaInfoPage(media, tag));
-    }
+  Widget _buildEmptyState() {
+    return SizedBox(
+      height: 250,
+      child: Center(
+        child: (widget.customNullListIndicator?.isNotEmpty ?? false)
+            ? Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: widget.customNullListIndicator!,
+              )
+            : const Text(
+                'Nothing here',
+                style: TextStyle(fontFamily: 'Poppins', fontSize: 16),
+              ),
+      ),
+    );
   }
 
-  void _handleLongTap(BuildContext context, Media media) {
+  String _generateTag(Media media) => '${media.id}-${Random().nextInt(100000)}';
+
+  void _handleTap(int index, Media media, String tag) {
+    if (widget.mediaList == null) return;
+    widget.onMediaTap?.call(index, media) ??
+        navigateToPage(context, MediaInfoPage(media, tag));
+  }
+
+  void _handleLongPress(Media media) {
+    if (widget.mediaList == null) return;
     context.currentService(listen: false).compactListEditor(context, media);
   }
 
-  Widget _buildAnimatedMediaItem({
-    required Widget child,
-    required String tag,
+  EdgeInsetsDirectional _horizontalPadding(int index, int length) {
+    return EdgeInsetsDirectional.only(
+      start: index == 0 ? 24 : 6.5,
+      end: index == length - 1 ? 24 : 6.5,
+    );
+  }
+
+  Widget _buildAnimatedItem({
     required int index,
-    Offset initialOffset = Offset.zero,
+    required Media media,
+    required String tag,
+    required Offset initialOffset,
+    required Widget child,
   }) {
     return SlideAndScaleAnimation(
-      initialScale: 0.0,
-      finalScale: 1.0,
       initialOffset: initialOffset,
       finalOffset: Offset.zero,
+      initialScale: 0.0,
+      finalScale: 1.0,
       duration: const Duration(milliseconds: 200),
       child: GestureDetector(
-        onTap: () => _handleMediaTap(index, _mediaList[index], tag),
-        onLongPress: () => _handleLongTap(context, _mediaList[index]),
+        onTap: () => _handleTap(index, media, tag),
+        onLongPress: () => _handleLongPress(media),
         child: child,
       ),
     );
   }
 
-  Widget _buildExpandedHorizontalList() {
-    var height = widget.isLarge ? 270.0 : 250.0;
-    return SizedBox(
-      height: height,
-      child: ScrollConfig(
-        context,
-        child: ListView.builder(
-          controller: widget.scrollController,
-          scrollDirection: Axis.horizontal,
-          itemCount: _mediaList.length,
-          itemBuilder: (context, index) {
-            final tag = _generateTag(index);
-            return Container(
-              width: 250,
-              margin: const EdgeInsets.symmetric(horizontal: 6.5).copyWith(
-                left: Directionality.of(context) == TextDirection.rtl
-                    ? (index == _mediaList.length - 1 ? 24.0 : 6.5)
-                    : (index == 0 ? 24.0 : 6.5),
-                right: Directionality.of(context) == TextDirection.rtl
-                    ? (index == 0 ? 24.0 : 6.5)
-                    : (index == _mediaList.length - 1 ? 24.0 : 6.5),
-              ),
-              child: _buildAnimatedMediaItem(
-                child: MediaExpandedViewHolder(
-                  mediaInfo: _mediaList[index],
-                  isLarge: widget.isLarge,
-                  tag: tag,
-                ),
-                tag: tag,
-                index: index,
-                initialOffset: const Offset(1.0, 0.0),
-              ),
-            );
-          },
-        ),
-      ),
-    );
-  }
-
   Widget _buildHorizontalList() {
-    var height = widget.isLarge ? 270.0 : 250.0;
+    final height = widget.isLarge ? 270.0 : 250.0;
     return SizedBox(
       height: height,
       child: ScrollConfig(
         context,
         child: ListView.builder(
-          controller: widget.scrollController,
           scrollDirection: Axis.horizontal,
+          controller: widget.scrollController,
           itemCount: _mediaList.length,
           itemBuilder: (context, index) {
-            final tag = _generateTag(index);
-            return Container(
-              width: 102,
-              margin: const EdgeInsets.symmetric(horizontal: 6.5).copyWith(
-                left: Directionality.of(context) == TextDirection.rtl
-                    ? (index == _mediaList.length - 1 ? 24.0 : 6.5)
-                    : (index == 0 ? 24.0 : 6.5),
-                right: Directionality.of(context) == TextDirection.rtl
-                    ? (index == 0 ? 24.0 : 6.5)
-                    : (index == _mediaList.length - 1 ? 24.0 : 6.5),
-              ),
-              child: _buildAnimatedMediaItem(
-                child: MediaViewHolder(
-                  mediaInfo: _mediaList[index],
-                  isLarge: widget.isLarge,
+            final media = _mediaList[index];
+            final tag = _generateTag(media);
+            return Padding(
+              padding: _horizontalPadding(index, _mediaList.length),
+              child: SizedBox(
+                width: 102,
+                child: _buildAnimatedItem(
+                  index: index,
+                  media: media,
                   tag: tag,
+                  initialOffset: const Offset(1, 0),
+                  child: MediaViewHolder(
+                    mediaInfo: media,
+                    isLarge: widget.isLarge,
+                    tag: tag,
+                  ),
                 ),
-                tag: tag,
-                index: index,
-                initialOffset: const Offset(1.0, 0.0),
               ),
             );
           },
@@ -188,29 +190,37 @@ class MediaGridState extends State<MediaAdaptor> {
     );
   }
 
-  Widget _buildCarouselView() {
+  Widget _buildExpandedHorizontalList() {
+    final height = widget.isLarge ? 270.0 : 250.0;
     return SizedBox(
-      height: 464 + (0.statusBar() * 2),
+      height: height,
       child: ScrollConfig(
         context,
-        child: CarouselSlider.builder(
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          controller: widget.scrollController,
           itemCount: _mediaList.length,
-          itemBuilder: (context, index, realIndex) {
-            final tag = _generateTag(index);
-            return GestureDetector(
-              onTap: () => _handleMediaTap(index, _mediaList[index], tag),
-              onLongPress: () => _handleLongTap(context, _mediaList[index]),
-              child: MediaPageSmallViewHolder(_mediaList[index], tag),
+          itemBuilder: (context, index) {
+            final media = _mediaList[index];
+            final tag = _generateTag(media);
+            return Padding(
+              padding: _horizontalPadding(index, _mediaList.length),
+              child: SizedBox(
+                width: 250,
+                child: _buildAnimatedItem(
+                  index: index,
+                  media: media,
+                  tag: tag,
+                  initialOffset: const Offset(1, 0),
+                  child: MediaExpandedViewHolder(
+                    mediaInfo: media,
+                    isLarge: widget.isLarge,
+                    tag: tag,
+                  ),
+                ),
+              ),
             );
           },
-          options: CarouselOptions(
-            height: 464 + (0.statusBar() * 2),
-            viewportFraction: 1,
-            autoPlay: true,
-            autoPlayInterval: const Duration(seconds: 5),
-            autoPlayAnimationDuration: const Duration(milliseconds: 800),
-            autoPlayCurve: Curves.fastOutSlowIn,
-          ),
         ),
       ),
     );
@@ -225,14 +235,16 @@ class MediaGridState extends State<MediaAdaptor> {
         physics: const NeverScrollableScrollPhysics(),
         itemCount: _mediaList.length,
         itemBuilder: (context, index) {
-          final tag = _generateTag(index);
-          return Container(
-            margin: const EdgeInsets.symmetric(horizontal: 18, vertical: 4),
-            child: _buildAnimatedMediaItem(
-              child: MediaPageLargeViewHolder(_mediaList[index], tag),
-              tag: tag,
+          final media = _mediaList[index];
+          final tag = _generateTag(media);
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 4),
+            child: _buildAnimatedItem(
               index: index,
-              initialOffset: const Offset(0.0, -1.0),
+              media: media,
+              tag: tag,
+              initialOffset: const Offset(0, -1),
+              child: MediaPageLargeViewHolder(media, tag),
             ),
           );
         },
@@ -241,39 +253,66 @@ class MediaGridState extends State<MediaAdaptor> {
   }
 
   Widget _buildStaggeredGrid() {
-    var height = widget.isLarge ? 270.0 : 250.0;
+    final height = widget.isLarge ? 270.0 : 250.0;
     return LayoutBuilder(
       builder: (context, constraints) {
-        final parentWidth = constraints.maxWidth;
-        var crossAxisCount = (parentWidth / 124).floor();
-        if (crossAxisCount < 1) crossAxisCount = 1;
+        final crossAxisCount = max(1, (constraints.maxWidth / 124).floor());
         return Padding(
-          padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
           child: StaggeredGrid.count(
-            crossAxisSpacing: 16,
             crossAxisCount: crossAxisCount,
-            children: List.generate(
-              _mediaList.length,
-              (index) {
-                final tag = _generateTag(index);
-                return GestureDetector(
-                  onTap: () => _handleMediaTap(index, _mediaList[index], tag),
-                  onLongPress: () => _handleLongTap(context, _mediaList[index]),
-                  child: SizedBox(
-                    width: 108,
-                    height: height,
-                    child: MediaViewHolder(
-                      mediaInfo: _mediaList[index],
-                      isLarge: widget.isLarge,
-                      tag: tag,
-                    ),
+            crossAxisSpacing: 16,
+            mainAxisSpacing: 16,
+            children: List.generate(_mediaList.length, (index) {
+              final media = _mediaList[index];
+              final tag = _generateTag(media);
+              return GestureDetector(
+                onTap: () => _handleTap(index, media, tag),
+                onLongPress: () => _handleLongPress(media),
+                child: SizedBox(
+                  width: 108,
+                  height: height,
+                  child: MediaViewHolder(
+                    mediaInfo: media,
+                    isLarge: widget.isLarge,
+                    tag: tag,
                   ),
-                );
-              },
-            ),
+                ),
+              );
+            }),
           ),
         );
       },
+    );
+  }
+
+  Widget _buildCarouselView() {
+    final height = 464 + (0.statusBar() * 2);
+    return SizedBox(
+      height: height,
+      child: ScrollConfig(
+        context,
+        child: CarouselSlider.builder(
+          itemCount: _mediaList.length,
+          itemBuilder: (context, index, realIndex) {
+            final media = _mediaList[index];
+            final tag = _generateTag(media);
+            return GestureDetector(
+              onTap: () => _handleTap(index, media, tag),
+              onLongPress: () => _handleLongPress(media),
+              child: MediaPageSmallViewHolder(media, tag),
+            );
+          },
+          options: CarouselOptions(
+            height: height,
+            viewportFraction: 1.0,
+            autoPlay: true,
+            autoPlayInterval: const Duration(seconds: 5),
+            autoPlayAnimationDuration: const Duration(milliseconds: 800),
+            autoPlayCurve: Curves.fastOutSlowIn,
+          ),
+        ),
+      ),
     );
   }
 }

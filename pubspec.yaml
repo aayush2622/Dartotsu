@@ -47,7 +47,8 @@ dependencies:
   flex_color_picker: ^3.7.1
   flutter_markdown: ^0.7.7+1
   icons_plus: ^5.0.0
-
+  skeletonizer: ^2.1.0+1
+  blurbox: ^0.0.6
   # UI Enhancements
   blur: ^4.0.2
   expandable_page_view: ^1.0.17
