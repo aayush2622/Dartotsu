@@ -271,9 +271,9 @@ class MainActivity extends StatefulWidget {
 late FloatingBottomNavBar navbar;
 
 class MainActivityState extends State<MainActivity> {
-  int _selectedIndex = 1;
+  final _selectedIndex = 1.obs;
 
-  void _onTabSelected(int index) => setState(() => _selectedIndex = index);
+  void _onTabSelected(int index) => _selectedIndex.value = index;
 
   @override
   void initState() {
@@ -282,22 +282,22 @@ class MainActivityState extends State<MainActivity> {
   }
 
   Widget get _navbar {
-    if (context.isPhone) {
-      return FloatingBottomNavBarMobile(
-        selectedIndex: _selectedIndex,
-        onTabSelected: _onTabSelected,
-      );
-    } else {
-      return FloatingBottomNavBarDesktop(
-        selectedIndex: _selectedIndex,
-        onTabSelected: _onTabSelected,
-      );
-    }
+    return Obx(() {
+      return context.isPhone
+          ? FloatingBottomNavBarMobile(
+              selectedIndex: _selectedIndex.value,
+              onTabSelected: _onTabSelected,
+            )
+          : FloatingBottomNavBarDesktop(
+              selectedIndex: _selectedIndex.value,
+              onTabSelected: _onTabSelected,
+            );
+    });
   }
 
   Widget _buildBackground(ThemeNotifier themeNotifier, MediaService service) {
     if (!themeNotifier.useGlassMode) return const SizedBox.shrink();
-
+    var theme = Theme.of(context).colorScheme;
     return Positioned.fill(
       child: Stack(
         children: [
@@ -325,13 +325,13 @@ class MainActivityState extends State<MainActivity> {
                 heightFactor: 0.75,
                 widthFactor: 1,
                 child: Container(
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     gradient: LinearGradient(
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
                       colors: [
                         Colors.transparent,
-                        Colors.black54,
+                        theme.surface,
                       ],
                     ),
                   ),
@@ -346,7 +346,7 @@ class MainActivityState extends State<MainActivity> {
 
   Widget _buildBody(MediaService service) {
     return Obx(() {
-      switch (_selectedIndex) {
+      switch (_selectedIndex.value) {
         case 0:
           return const AnimeScreen();
         case 1:

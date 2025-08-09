@@ -45,8 +45,19 @@ class FloatingBottomNavBarMobile extends FloatingBottomNavBar {
                       borderRadius: BorderRadius.circular(30.0),
                     ),
                   ),
-                  glassWidget: PresetBlurBox(
-                    preset: BlurPreset.vibrant,
+                  glassWidget: BlurBox(
+                    blur: 12.0,
+                    boxShadow: [
+                      BoxShadow(
+                        color: theme.surface.withOpacity(0.2),
+                        blurRadius: 6.0,
+                        spreadRadius: 0.5,
+                      ),
+                    ],
+                    border: Border.all(
+                      color: theme.onSurface.withOpacity(0.2),
+                      width: 1.5,
+                    ),
                     padding: const EdgeInsets.all(0),
                     color: theme.surface.withOpacity(0.2),
                     borderRadius: BorderRadius.circular(30.0),
@@ -95,13 +106,12 @@ class FloatingBottomNavBarMobile extends FloatingBottomNavBar {
             if (!isSelected) const SizedBox(height: 16.0),
             if (!isSelected)
               AnimatedOpacity(
-                duration: const Duration(milliseconds: 300),
-                opacity: isSelected ? 0.0 : 1.0,
-                child: Icon(
-                  item.icon,
-                  color: theme.outline,
-                ),
-              ),
+                  duration: const Duration(milliseconds: 300),
+                  opacity: isSelected ? 0.0 : 1.0,
+                  child: Icon(
+                    item.icon,
+                    color: theme.onSurface.withOpacity(0.7),
+                  )),
             if (isSelected) const SizedBox(height: 12.0),
             AnimatedOpacity(
               duration: const Duration(milliseconds: 300),

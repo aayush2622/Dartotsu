@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CountdownWidget extends StatefulWidget {
   final int nextAiringEpisodeTime;
@@ -12,7 +13,7 @@ class CountdownWidget extends StatefulWidget {
 }
 
 class CountdownWidgetState extends State<CountdownWidget> {
-  String countdownText = '';
+  var countdownText = ''.obs;
   Timer? _timer;
 
   @override
@@ -27,26 +28,32 @@ class CountdownWidgetState extends State<CountdownWidget> {
         (widget.nextAiringEpisodeTime + 10000) * 1000 - currentTimeMillis;
     Duration duration = Duration(milliseconds: remainingTimeMillis);
 
+    _updateCountdownText(duration);
+
     _timer = Timer.periodic(const Duration(seconds: 1), (Timer timer) {
       if (duration.inSeconds > 0) {
-        setState(() {
-          duration -= const Duration(seconds: 1);
-
-          int days = duration.inDays;
-          int hours = duration.inHours % 24;
-          int minutes = duration.inMinutes % 60;
-          int seconds = duration.inSeconds % 60;
-
-          countdownText =
-              '$days days $hours hours $minutes minutes $seconds seconds';
-        });
+        duration -= const Duration(seconds: 1);
+        _updateCountdownText(duration);
       } else {
         timer.cancel();
-        setState(() {
-          countdownText = "Episode is now airing!";
-        });
+        countdownText.value = "Episode is now airing!";
       }
     });
+  }
+
+  void _updateCountdownText(Duration duration) {
+    int days = duration.inDays;
+    int hours = duration.inHours % 24;
+    int minutes = duration.inMinutes % 60;
+    int seconds = duration.inSeconds % 60;
+
+    List<String> parts = [];
+    if (days > 0) parts.add('$days days');
+    if (hours > 0) parts.add('$hours hours');
+    if (minutes > 0) parts.add('$minutes minutes');
+    parts.add('$seconds seconds');
+
+    countdownText.value = parts.join(' ');
   }
 
   @override
@@ -58,11 +65,11 @@ class CountdownWidgetState extends State<CountdownWidget> {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          countdownText.isNotEmpty ? countdownText : "",
+    return Obx(() {
+      return SizedBox(
+        width: MediaQuery.of(context).size.width * 0.9,
+        child: Text(
+          countdownText.isNotEmpty ? countdownText.value : '',
           style: TextStyle(
             color: theme.colorScheme.onSurface,
             fontWeight: FontWeight.w600,
@@ -70,8 +77,9 @@ class CountdownWidgetState extends State<CountdownWidget> {
           ),
           overflow: TextOverflow.ellipsis,
           maxLines: 1,
+          textAlign: TextAlign.center,
         ),
-      ],
-    );
+      );
+    });
   }
 }

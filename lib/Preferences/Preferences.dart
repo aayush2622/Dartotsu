@@ -13,7 +13,7 @@ class PrefName {
   static const useCustomColor = Pref('useCustomColor', false);
   static const showYtButton = Pref('showYtButton', true);
   static const autoUpdateExtensions = Pref('autoUpdateExtensions', true);
-
+  static const useCoverTheme = Pref('useCoverTheme', true);
   //home page
   static const Pref<Map<dynamic, dynamic>> anilistHomeLayout =
       Pref('homeLayoutOrder', {

@@ -25,10 +25,8 @@ import '../Settings/SettingsBottomSheet.dart';
 import 'Widgets/AvtarWidget.dart';
 import 'Widgets/NotificationBadge.dart';
 
-part 'HomeScreenGlassDesktop.dart';
-part 'HomeScreenMaterialDesktop.dart';
-part 'HomeScreenGlassMobile.dart';
-part 'HomeScreenMaterialMobile.dart';
+part 'HomeScreenDesktop.dart';
+part 'HomeScreenMobile.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -57,20 +55,7 @@ class HomeScreenState extends State<HomeScreen> {
     if (screen == null) {
       return service.notImplemented(widget.runtimeType.toString());
     }
-    return _buildHomeContent;
-  }
-
-  Widget get _buildHomeContent {
-    final useGlass = context.themeNotifierListen.useGlassMode;
     final isPhone = context.isPhone;
-    if (useGlass) {
-      return isPhone
-          ? const HomeScreenGlassMobile()
-          : const HomeScreenGlassDesktop();
-    } else {
-      return isPhone
-          ? const HomeScreenMaterialMobile()
-          : const HomeScreenGlassDesktop();
-    }
+    return isPhone ? const HomeScreenMobile() : const HomeScreenDesktop();
   }
 }

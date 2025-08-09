@@ -1,34 +1,29 @@
-import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 ThemeData getCustomLightTheme(int color) {
-  final schemeColor = FlexSchemeColor.from(primary: Color(color));
-
-  final flexThemeData = FlexThemeData.light(
-    colors: schemeColor.copyWith(
-      primaryLightRef: schemeColor.primary,
-    ),
-    primary: schemeColor.primary,
-    blendLevel: 18,
+  var theme = ColorScheme.fromSeed(
+    seedColor: Color(color),
+    brightness: Brightness.light,
+    dynamicSchemeVariant: DynamicSchemeVariant.vibrant,
   );
-
   return ThemeData(
     brightness: Brightness.light,
-    primaryColor: flexThemeData.colorScheme.primary,
-    colorScheme: flexThemeData.colorScheme,
+    primaryColor: theme.primary,
+    colorScheme: theme,
     appBarTheme: AppBarTheme(
-      color: flexThemeData.colorScheme.primary,
-      iconTheme: IconThemeData(color: flexThemeData.colorScheme.onPrimary),
+      color: theme.primary,
+      iconTheme: IconThemeData(color: theme.onPrimary),
     ),
-    scaffoldBackgroundColor: flexThemeData.colorScheme.surface,
+    scaffoldBackgroundColor: theme.surface,
     textTheme: TextTheme(
       headlineLarge: TextStyle(
-        color: flexThemeData.colorScheme.onPrimary,
+        color: theme.onPrimary,
         fontSize: 20,
         fontWeight: FontWeight.bold,
       ),
       bodyLarge: TextStyle(
-        color: flexThemeData.colorScheme.onSurface,
+        color: theme.onSurface,
       ),
     ),
     fontFamily: 'Poppins',
@@ -36,35 +31,93 @@ ThemeData getCustomLightTheme(int color) {
 }
 
 ThemeData getCustomDarkTheme(int color) {
-  final schemeColor = FlexSchemeColor.from(primary: Color(color));
-  final flexThemeData = FlexThemeData.dark(
-    colors: schemeColor.copyWith(
-      primaryLightRef: schemeColor.primary,
-    ),
-    primary: schemeColor.primary,
-    primaryLightRef: schemeColor.primary,
-    blendLevel: 18,
+  var theme = ColorScheme.fromSeed(
+    seedColor: Color(color),
+    brightness: Brightness.dark,
+    dynamicSchemeVariant: DynamicSchemeVariant.vibrant,
   );
-
   return ThemeData(
     brightness: Brightness.dark,
-    primaryColor: flexThemeData.colorScheme.primary,
-    colorScheme: flexThemeData.colorScheme,
+    primaryColor: theme.primary,
+    colorScheme: theme,
     appBarTheme: AppBarTheme(
-      color: flexThemeData.colorScheme.primary,
-      iconTheme: IconThemeData(color: flexThemeData.colorScheme.onPrimary),
+      color: theme.primary,
+      iconTheme: IconThemeData(color: theme.onPrimary),
     ),
-    scaffoldBackgroundColor: flexThemeData.colorScheme.surface,
+    scaffoldBackgroundColor: theme.surface,
     textTheme: TextTheme(
       headlineLarge: TextStyle(
-        color: flexThemeData.colorScheme.onPrimary,
+        color: theme.onPrimary,
         fontSize: 20,
         fontWeight: FontWeight.bold,
       ),
       bodyLarge: TextStyle(
-        color: flexThemeData.colorScheme.onSurface,
+        color: theme.onSurface,
       ),
     ),
     fontFamily: 'Poppins',
+  );
+}
+
+Future<ThemeData> getImageDarkTheme(String imageUrl) async {
+  var colorScheme = await getImageMainColor(imageUrl, Brightness.dark);
+  colorScheme = colorScheme.copyWith(brightness: Brightness.dark);
+
+  return ThemeData(
+    brightness: Brightness.dark,
+    primaryColor: colorScheme.primary,
+    colorScheme: colorScheme,
+    appBarTheme: AppBarTheme(
+      color: colorScheme.primary,
+      iconTheme: IconThemeData(color: colorScheme.onPrimary),
+    ),
+    scaffoldBackgroundColor: colorScheme.surface,
+    textTheme: TextTheme(
+      headlineLarge: TextStyle(
+        color: colorScheme.onPrimary,
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
+      ),
+      bodyLarge: TextStyle(
+        color: colorScheme.onSurface,
+      ),
+    ),
+    fontFamily: 'Poppins',
+  );
+}
+
+Future<ThemeData> getImageLightTheme(String imageUrl) async {
+  var colorScheme = await getImageMainColor(imageUrl, Brightness.light);
+  colorScheme = colorScheme.copyWith(brightness: Brightness.light);
+
+  return ThemeData(
+    brightness: Brightness.light,
+    primaryColor: colorScheme.primary,
+    colorScheme: colorScheme,
+    appBarTheme: AppBarTheme(
+      color: colorScheme.primary,
+      iconTheme: IconThemeData(color: colorScheme.onPrimary),
+    ),
+    scaffoldBackgroundColor: colorScheme.surface,
+    textTheme: TextTheme(
+      headlineLarge: TextStyle(
+        color: colorScheme.onPrimary,
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
+      ),
+      bodyLarge: TextStyle(
+        color: colorScheme.onSurface,
+      ),
+    ),
+    fontFamily: 'Poppins',
+  );
+}
+
+Future<ColorScheme> getImageMainColor(
+    String imageUrl, Brightness brightness) async {
+  return await ColorScheme.fromImageProvider(
+    provider: CachedNetworkImageProvider(imageUrl),
+    brightness: brightness,
+    dynamicSchemeVariant: DynamicSchemeVariant.vibrant,
   );
 }

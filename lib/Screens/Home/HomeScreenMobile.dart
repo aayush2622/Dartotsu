@@ -1,13 +1,13 @@
 part of 'HomeScreen.dart';
 
-class HomeScreenGlassDesktop extends StatefulWidget {
-  const HomeScreenGlassDesktop({super.key});
+class HomeScreenMobile extends StatefulWidget {
+  const HomeScreenMobile({super.key});
 
   @override
-  createState() => HomeScreenGlassDesktopState();
+  createState() => HomeScreenMobileState();
 }
 
-class HomeScreenGlassDesktopState extends State<HomeScreenGlassDesktop> {
+class HomeScreenMobileState extends State<HomeScreenMobile> {
   late MediaService service;
   late BaseServiceData data;
   late BaseHomeScreen screen;
@@ -57,7 +57,7 @@ class HomeScreenGlassDesktopState extends State<HomeScreenGlassDesktop> {
 
   Widget get _buildScrollToTopButton {
     return Positioned(
-      bottom: 64.0,
+      bottom: 72.0 + 32.bottomBar(),
       left: (0.screenWidthWithContext(context) / 2) - 24.0,
       child: Obx(() => screen.scrollToTop.value
           ? Container(
@@ -108,7 +108,7 @@ class HomeScreenGlassDesktopState extends State<HomeScreenGlassDesktop> {
               return Stack(
                 fit: StackFit.expand,
                 children: [
-                  if (!themeNotifier.useGlassMode) _buildBackgroundImage,
+                  _buildAvatar,
                   _buildUserInfo,
                   _buildCards,
                 ],
@@ -159,6 +159,33 @@ class HomeScreenGlassDesktopState extends State<HomeScreenGlassDesktop> {
     );
   }
 
+  Widget get _buildAvatar {
+    return Positioned(
+      left: Directionality.of(context) == TextDirection.rtl ? 32 : null,
+      right: Directionality.of(context) == TextDirection.ltr ? 32 : null,
+      top: 36.statusBar(),
+      child: SlideUpAnimation(
+        child: Stack(
+          children: [
+            GestureDetector(
+              onTap: () =>
+                  showCustomBottomDialog(context, const SettingsBottomSheet()),
+              child: const SettingIconWidget(icon: Icons.settings),
+            ),
+            if (data.unreadNotificationCount > 0)
+              Positioned(
+                right: 0,
+                bottom: -2,
+                child: NotificationBadge(
+                  count: data.unreadNotificationCount,
+                ),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+
   Widget get _buildUserInfo {
     return Positioned(
       top: 36.statusBar(),
@@ -167,6 +194,16 @@ class HomeScreenGlassDesktopState extends State<HomeScreenGlassDesktop> {
       child: SlideUpAnimation(
         child: Row(
           children: [
+            GestureDetector(
+              onTap: () => serviceSwitcher(context),
+              child: loadSvg(
+                service.iconPath,
+                width: 38.0,
+                height: 38.0,
+                color: theme.onSurface,
+              ),
+            ),
+            const SizedBox(width: 12),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
