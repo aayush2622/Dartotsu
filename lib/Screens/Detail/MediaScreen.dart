@@ -7,6 +7,7 @@ import 'package:dartotsu/Screens/Detail/Tabs/Info/InfoPage.dart';
 import 'package:dartotsu/Screens/Detail/Tabs/Watch/Anime/AnimeWatchScreen.dart';
 import 'package:dartotsu/Screens/Detail/Tabs/Watch/Manga/MangaWatchScreen.dart';
 import 'package:dartotsu/Screens/Detail/Tabs/Watch/Source/Source.dart';
+import 'package:dartotsu/Theme/Themes/fromCode.dart';
 import 'package:expandable_page_view/expandable_page_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -40,6 +41,8 @@ class MediaInfoPageState extends State<MediaInfoPage> {
 
   late Worker reload;
 
+  ThemeData? customTheme;
+
   @override
   void initState() {
     var service = context.currentService(listen: false);
@@ -65,6 +68,17 @@ class MediaInfoPageState extends State<MediaInfoPage> {
     reload;
     super.initState();
     loadMediaData();
+    if (loadData(PrefName.useCoverTheme)) {
+      loadCustomTheme(widget.mediaData.cover);
+    }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    reload.dispose();
+    pageController.dispose();
+    Refresh.activity.remove(widget.mediaData.id);
   }
 
   var loaded = false;
@@ -74,42 +88,49 @@ class MediaInfoPageState extends State<MediaInfoPage> {
     if (mounted) setState(() => loaded = true);
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-    reload.dispose();
-    Refresh.activity.remove(widget.mediaData.id);
+  Future<void> loadCustomTheme(String? cover) async {
+    if (cover == null || cover.isEmpty) return;
+    var theme = context.themeNotifier.isDarkMode
+        ? getImageDarkTheme(cover)
+        : getImageLightTheme(cover);
+    customTheme = await theme;
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: CustomScrollConfig(
-        context,
-        children: [
-          SliverToBoxAdapter(child: _buildMediaSection()),
-          SliverToBoxAdapter(child: _buildMediaDetails()),
-          SliverList(
-            delegate: SliverChildListDelegate(
-              [
-                Padding(
-                  padding: const EdgeInsets.symmetric(),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [_buildSliverContent()],
-                  ),
+    return Theme(
+      data: customTheme ?? Theme.of(context),
+      child: Builder(
+        builder: (context) => Scaffold(
+          body: CustomScrollConfig(
+            context,
+            children: [
+              SliverToBoxAdapter(child: _buildMediaSection(context)),
+              SliverToBoxAdapter(child: _buildMediaDetails(context)),
+              SliverList(
+                delegate: SliverChildListDelegate(
+                  [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [_buildSliverContent(context)],
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          )
-        ],
+              )
+            ],
+          ),
+          bottomNavigationBar: _buildBottomNavigationBar(context),
+        ),
       ),
-      bottomNavigationBar: _buildBottomNavigationBar(),
     );
   }
 
-  Widget _buildSliverContent() {
+  Widget _buildSliverContent(BuildContext context) {
     return ExpandablePageView(
       controller: pageController,
       onPageChanged: (index) => _selectedIndex.value = index,
@@ -147,7 +168,7 @@ class MediaInfoPageState extends State<MediaInfoPage> {
     );
   }
 
-  Widget _buildBottomNavigationBar() {
+  Widget _buildBottomNavigationBar(BuildContext context) {
     var isAnime = mediaData.anime != null;
     return Obx(() {
       return BottomNavigationBar(
@@ -202,7 +223,7 @@ class MediaInfoPageState extends State<MediaInfoPage> {
     });
   }
 
-  Widget _buildMediaDetails() {
+  Widget _buildMediaDetails(BuildContext context) {
     return Column(
       children: [
         Padding(
@@ -258,7 +279,7 @@ class MediaInfoPageState extends State<MediaInfoPage> {
     );
   }
 
-  Widget _buildMediaSection() {
+  Widget _buildMediaSection(BuildContext context) {
     final isDarkMode = Provider.of<ThemeNotifier>(context).isDarkMode;
     final theme = Theme.of(context).colorScheme;
     final gradientColors = isDarkMode

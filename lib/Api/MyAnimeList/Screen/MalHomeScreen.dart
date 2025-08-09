@@ -55,7 +55,7 @@ class MalHomeScreen extends BaseHomeScreen {
   @override
   Future<void> loadAll() async {
     resetPageData();
-    await Future.wait([loadList()]);
+    await loadList();
   }
 
   Future<void> loadList() async {
@@ -64,7 +64,6 @@ class MalHomeScreen extends BaseHomeScreen {
   }
 
   void _setMediaList(Map<String, List<Media>> res) {
-    var listImage = <String?>[];
     animeContinue.value = res["Watching"] ?? [];
     animeOnHold.value = res["OnHold"] ?? [];
     animeDropped.value = res["Dropped"] ?? [];
@@ -75,30 +74,21 @@ class MalHomeScreen extends BaseHomeScreen {
     mangaPlanned.value = res["PlanToRead"] ?? [];
     hidden.value = res["hidden"] ?? [];
 
-    if (res['Watching'] != null && res['Watching']!.isNotEmpty) {
-      listImage.add(
-          (List.from(res["Watching"] ?? [])..shuffle(Random())).first.banner);
-    }
-    if (res['Reading'] != null && res['Reading']!.isNotEmpty) {
-      listImage.add(
-          (List.from(res["Reading"] ?? [])..shuffle(Random())).first.banner);
-    }
-    listImages.value = listImage;
+    List<String?> listImage = [];
 
-    if (animeContinue.value != null && animeContinue.value!.isNotEmpty) {
-      listImage.add((List.from(animeContinue.value ?? [])..shuffle(Random()))
-          .first
-          .cover);
+    String? pickRandomCover(List<Media>? list) {
+      if (list == null || list.isEmpty) return null;
+      return (List.of(list)..shuffle(Random())).first.cover;
     }
-    if (mangaContinue.value != null && mangaContinue.value!.isNotEmpty) {
-      listImage.add((List.from(mangaContinue.value ?? [])..shuffle(Random()))
-          .first
-          .cover);
-    }
+
+    final animeCover = pickRandomCover(animeContinue.value);
+    if (animeCover != null) listImage.add(animeCover);
+
+    final mangaCover = pickRandomCover(mangaContinue.value);
+    if (mangaCover != null) listImage.add(mangaCover);
+
     if (listImage.isNotEmpty) {
-      if (listImage.length < 2) {
-        listImage.add(listImage.first);
-      }
+      if (listImage.length == 1) listImage.add(listImage.first);
       listImages.value = listImage;
     }
   }
@@ -231,16 +221,56 @@ class MalHomeScreen extends BaseHomeScreen {
     );
 
     return [
-      Obx(() {
-        if (showHidden.value) {
-          result.insert(0, hiddenMedia);
-        } else {
-          result.remove(hiddenMedia);
-        }
-        return Column(
-          children: [...result, const SizedBox(height: 128)],
-        );
-      }),
+      Obx(
+        () {
+          final allSections = List<Widget>.from(result);
+          if (showHidden.value) allSections.insert(0, hiddenMedia);
+
+          return LayoutBuilder(
+            builder: (context, constraints) {
+              final spacing = 16.0;
+              final horizontalPadding = context.isPhone ? 0.0 : 16.0;
+              final maxWidth = constraints.maxWidth - horizontalPadding;
+
+              final columns = context.isPhone ? 1 : 2;
+              final width = (maxWidth - ((columns - 1) * spacing)) / columns;
+              final useColumnLayout = width < 480;
+
+              final children = allSections.map((section) {
+                return SizedBox(
+                  width: useColumnLayout ? null : width,
+                  child: section,
+                );
+              }).toList();
+
+              return Padding(
+                padding: EdgeInsets.only(right: horizontalPadding),
+                child: Column(
+                  children: [
+                    useColumnLayout
+                        ? Column(
+                            children: children
+                                .map(
+                                  (child) => Padding(
+                                    padding: EdgeInsets.only(bottom: spacing),
+                                    child: child,
+                                  ),
+                                )
+                                .toList(),
+                          )
+                        : Wrap(
+                            spacing: spacing,
+                            runSpacing: spacing,
+                            children: children,
+                          ),
+                    const SizedBox(height: 128),
+                  ],
+                ),
+              );
+            },
+          );
+        },
+      ),
     ];
   }
 }

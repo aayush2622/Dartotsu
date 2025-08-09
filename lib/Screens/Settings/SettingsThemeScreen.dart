@@ -1,3 +1,4 @@
+import 'package:dartotsu/Preferences/PrefManager.dart';
 import 'package:dartotsu/Screens/Settings/BaseSettingsScreen.dart';
 import 'package:dartotsu/Theme/LanguageSwitcher.dart';
 import 'package:flutter/material.dart';
@@ -79,6 +80,16 @@ class SettingsThemeScreenState extends BaseSettingsScreen {
         isChecked: themeNotifier.useMaterialYou,
         onSwitchChange: (bool value) async {
           themeNotifier.setMaterialYou(value);
+        },
+      ),
+      Setting(
+        type: SettingType.switchType,
+        name: "Use Cover Theme",
+        description: "Use media cover image as theme color",
+        icon: Icons.image_outlined,
+        isChecked: loadData(PrefName.useCoverTheme),
+        onSwitchChange: (bool value) {
+          saveData(PrefName.useCoverTheme, value);
         },
       ),
       Setting(

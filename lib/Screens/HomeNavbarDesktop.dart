@@ -1,5 +1,7 @@
+import 'package:blurbox/blurbox.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dartotsu/Functions/Extensions.dart';
+import 'package:dartotsu/Theme/ThemeManager.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -19,64 +21,89 @@ class FloatingBottomNavBarDesktop extends FloatingBottomNavBar {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context).colorScheme;
-    final service = context.currentService();
-    final navItems = service.navBarItem;
+
+    final borderColor = theme.onSurface.withOpacity(0.2);
+    final surfaceColor = theme.surface.withOpacity(0.2);
+    final primaryShadowColor = theme.primary.withOpacity(0.09);
+    const verticalPadding = EdgeInsets.symmetric(vertical: 10);
 
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Align(
         alignment: Alignment.topCenter,
-        child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 10),
-          decoration: BoxDecoration(
-            color: theme.surface.withOpacity(0.2),
-            borderRadius: BorderRadius.circular(48),
-            border: Border.all(color: theme.outline, width: 1.2),
+        child: ThemedWidget(
+          context: context,
+          materialWidget: Container(
+            padding: verticalPadding,
+            decoration: BoxDecoration(
+              color: surfaceColor,
+              borderRadius: BorderRadius.circular(48),
+              border: Border.all(color: borderColor, width: 1.5),
+              boxShadow: [BoxShadow(color: primaryShadowColor)],
+            ),
+            child: _buildNavBar(context),
+          ),
+          glassWidget: BlurBox(
+            blur: 12.0,
             boxShadow: [
               BoxShadow(
-                color: theme.primary.withOpacity(0.09),
+                color: surfaceColor,
+                blurRadius: 6.0,
+                spreadRadius: 0.5,
               ),
             ],
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              _navButton(
-                context: context,
-                onTap: () => serviceSwitcher(context),
-                iconBuilder: () => Obx(() {
-                  final avatar = service.data.avatar.value;
-                  return CircleAvatar(
-                    radius: 26.0,
-                    backgroundImage: avatar.isNotEmpty
-                        ? CachedNetworkImageProvider(avatar)
-                        : null,
-                    backgroundColor: Colors.transparent,
-                    child: avatar.isEmpty
-                        ? loadSvg(
-                            service.iconPath,
-                            width: 28.0,
-                            height: 26.0,
-                            color: theme.onSurface,
-                          )
-                        : null,
-                  );
-                }),
-              ),
-              ...navItems.map((item) => _buildNavItem(item, context)),
-              _navButton(
-                context: context,
-                onTap: () => showCustomBottomDialog(
-                  context,
-                  const SettingsBottomSheet(),
-                ),
-                iconBuilder: () =>
-                    Icon(Icons.settings, size: 28.0, color: theme.onSurface),
-              ),
-            ],
+            border: Border.all(color: borderColor, width: 1.5),
+            padding: verticalPadding,
+            color: surfaceColor,
+            borderRadius: BorderRadius.circular(48),
+            child: _buildNavBar(context),
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildNavBar(BuildContext context) {
+    final theme = Theme.of(context).colorScheme;
+    final service = context.currentService();
+    final navItems = service.navBarItem;
+
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        _navButton(
+          context: context,
+          onTap: () => serviceSwitcher(context),
+          iconBuilder: () => Obx(() {
+            final avatar = service.data.avatar.value;
+            return CircleAvatar(
+              radius: 26.0,
+              backgroundImage:
+                  avatar.isNotEmpty ? CachedNetworkImageProvider(avatar) : null,
+              backgroundColor: Colors.transparent,
+              child: avatar.isEmpty
+                  ? loadSvg(
+                      service.iconPath,
+                      width: 28.0,
+                      height: 26.0,
+                      color: theme.onSurface,
+                    )
+                  : null,
+            );
+          }),
+        ),
+        ...navItems.map((item) => _buildNavItem(item, context)),
+        _navButton(
+          context: context,
+          onTap: () =>
+              showCustomBottomDialog(context, const SettingsBottomSheet()),
+          iconBuilder: () => Icon(
+            Icons.settings,
+            size: 28.0,
+            color: theme.onSurface.withOpacity(0.7),
+          ),
+        ),
+      ],
     );
   }
 
@@ -123,7 +150,8 @@ class FloatingBottomNavBarDesktop extends FloatingBottomNavBar {
           ),
           child: Icon(
             item.icon,
-            color: isSelected ? theme.surface : theme.onSurface,
+            color:
+                isSelected ? theme.surface : theme.onSurface.withOpacity(0.7),
           ),
         ),
       ),

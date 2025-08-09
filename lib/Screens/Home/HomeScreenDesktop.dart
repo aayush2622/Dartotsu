@@ -1,13 +1,13 @@
 part of 'HomeScreen.dart';
 
-class HomeScreenMaterialMobile extends StatefulWidget {
-  const HomeScreenMaterialMobile({super.key});
+class HomeScreenDesktop extends StatefulWidget {
+  const HomeScreenDesktop({super.key});
 
   @override
-  createState() => HomeScreenMaterialMobileState();
+  createState() => HomeScreenDesktopState();
 }
 
-class HomeScreenMaterialMobileState extends State<HomeScreenMaterialMobile> {
+class HomeScreenDesktopState extends State<HomeScreenDesktop> {
   late MediaService service;
   late BaseServiceData data;
   late BaseHomeScreen screen;
@@ -26,13 +26,11 @@ class HomeScreenMaterialMobileState extends State<HomeScreenMaterialMobile> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          _buildRefreshContent,
-          _buildScrollToTopButton,
-        ],
-      ),
+    return Stack(
+      children: [
+        _buildRefreshContent,
+        _buildScrollToTopButton,
+      ],
     );
   }
 
@@ -59,7 +57,7 @@ class HomeScreenMaterialMobileState extends State<HomeScreenMaterialMobile> {
 
   Widget get _buildScrollToTopButton {
     return Positioned(
-      bottom: 72.0 + 32.bottomBar(),
+      bottom: 64.0,
       left: (0.screenWidthWithContext(context) / 2) - 24.0,
       child: Obx(() => screen.scrollToTop.value
           ? Container(
@@ -110,8 +108,7 @@ class HomeScreenMaterialMobileState extends State<HomeScreenMaterialMobile> {
               return Stack(
                 fit: StackFit.expand,
                 children: [
-                  _buildBackgroundImage,
-                  _buildAvatar,
+                  if (!themeNotifier.useGlassMode) _buildBackgroundImage,
                   _buildUserInfo,
                   _buildCards,
                 ],
@@ -162,33 +159,6 @@ class HomeScreenMaterialMobileState extends State<HomeScreenMaterialMobile> {
     );
   }
 
-  Widget get _buildAvatar {
-    return Positioned(
-      left: Directionality.of(context) == TextDirection.rtl ? 32 : null,
-      right: Directionality.of(context) == TextDirection.ltr ? 32 : null,
-      top: 36.statusBar(),
-      child: SlideUpAnimation(
-        child: Stack(
-          children: [
-            GestureDetector(
-              onTap: () =>
-                  showCustomBottomDialog(context, const SettingsBottomSheet()),
-              child: const SettingIconWidget(icon: Icons.settings),
-            ),
-            if (data.unreadNotificationCount > 0)
-              Positioned(
-                right: 0,
-                bottom: -2,
-                child: NotificationBadge(
-                  count: data.unreadNotificationCount,
-                ),
-              ),
-          ],
-        ),
-      ),
-    );
-  }
-
   Widget get _buildUserInfo {
     return Positioned(
       top: 36.statusBar(),
@@ -197,16 +167,6 @@ class HomeScreenMaterialMobileState extends State<HomeScreenMaterialMobile> {
       child: SlideUpAnimation(
         child: Row(
           children: [
-            GestureDetector(
-              onTap: () => serviceSwitcher(context),
-              child: loadSvg(
-                service.iconPath,
-                width: 38.0,
-                height: 38.0,
-                color: theme.onSurface,
-              ),
-            ),
-            const SizedBox(width: 12),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

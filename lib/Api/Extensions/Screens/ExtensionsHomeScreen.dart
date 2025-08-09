@@ -159,7 +159,7 @@ class ExtensionsHomeScreen extends BaseHomeScreen {
           section.emptyButtonOnPressed,
         ),
       );
-    }).toList() as List<Widget>;
+    }).toList();
 
     var hiddenMedia = MediaSection(
       context: context,
@@ -189,16 +189,14 @@ class ExtensionsHomeScreen extends BaseHomeScreen {
         },
       );
     }
-    result.add(const SizedBox(height: 128));
     return [
       Obx(() {
-        if (showHidden.value) {
-          result.insert(0, hiddenMedia);
-        } else {
-          result.remove(hiddenMedia);
-        }
         return Column(
-          children: result,
+          children: [
+            if (showHidden.value) hiddenMedia,
+            ...result,
+            const SizedBox(height: 128),
+          ],
         );
       }),
     ];
