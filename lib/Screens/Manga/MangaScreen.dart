@@ -14,7 +14,6 @@ import '../../Theme/Colors.dart';
 import '../../Theme/LanguageSwitcher.dart';
 import '../../Theme/ThemeProvider.dart';
 import '../../Widgets/ScrollConfig.dart';
-import '../Home/Widgets/LoadingWidget.dart';
 import '../Home/Widgets/ServiceSwitcherBar.dart';
 
 class MangaScreen extends StatefulWidget {
@@ -93,58 +92,52 @@ class MangaScreenState extends State<MangaScreen> {
     return Obx(() {
       var mediaDataList = service.trending.value;
       return SizedBox(
-        height: 486.statusBar(),
-        child: service.running.value
-            ? Stack(
-                children: [
-                  SizedBox(
-                    height: 464.statusBar(),
-                    child: mediaDataList != null
-                        ? MediaAdaptor(type: 1, mediaList: mediaDataList)
-                        : const Center(child: CircularProgressIndicator()),
+          height: 486.statusBar(),
+          child: Stack(
+            children: [
+              SizedBox(
+                  height: 464.statusBar(),
+                  child: MediaAdaptor(type: 1, mediaList: mediaDataList)),
+              ServiceSwitcherBar(
+                title: getString.manga.toUpperCase(),
+              ),
+              Positioned(
+                bottom: 92,
+                left: 8.0,
+                right: 8.0,
+                child: Center(
+                  child: ChipsWidget(
+                    chips: service.trendingChips,
                   ),
-                  ServiceSwitcherBar(
-                    title: getString.manga.toUpperCase(),
-                  ),
-                  Positioned(
-                    bottom: 92,
-                    left: 8.0,
-                    right: 8.0,
-                    child: Center(
-                      child: ChipsWidget(
-                        chips: service.trendingChips,
+                ),
+              ),
+              Positioned(
+                bottom: 0,
+                left: 8.0,
+                right: 8.0,
+                child: SlideInAnimation(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      MediaCard(
+                        context,
+                        getString.genres,
+                        "https://s4.anilist.co/file/anilistcdn/media/manga/banner/105778-wk5qQ7zAaTGl.jpg",
+                        onTap: () {},
                       ),
-                    ),
-                  ),
-                  Positioned(
-                    bottom: 0,
-                    left: 8.0,
-                    right: 8.0,
-                    child: SlideInAnimation(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          MediaCard(
-                            context,
-                            getString.genres,
-                            "https://s4.anilist.co/file/anilistcdn/media/manga/banner/105778-wk5qQ7zAaTGl.jpg",
-                            onTap: () {},
-                          ),
-                          MediaCard(
-                            context,
-                            'TOP SCORE',
-                            "https://s4.anilist.co/file/anilistcdn/media/manga/banner/30002-3TuoSMl20fUX.jpg",
-                            onTap: () {},
-                          ),
-                        ],
+                      MediaCard(
+                        context,
+                        'TOP SCORE',
+                        "https://s4.anilist.co/file/anilistcdn/media/manga/banner/30002-3TuoSMl20fUX.jpg",
+                        onTap: () {},
                       ),
-                    ),
+                    ],
                   ),
-                  const SizedBox(height: 16),
-                ],
-              )
-            : const LoadingWidget(),
-      );
+                ),
+              ),
+              const SizedBox(height: 16),
+            ],
+          ));
     });
   }
 
@@ -153,14 +146,13 @@ class MangaScreenState extends State<MangaScreen> {
       children: [
         ...service.mediaContent(context),
         if (service.paging)
-          SizedBox(
-            height: 216,
-            child: Center(
-              child: !service.loadMore.value && service.canLoadMore.value
-                  ? const CircularProgressIndicator()
-                  : const SizedBox(height: 216),
-            ),
-          ),
+          !service.loadMore.value && service.canLoadMore.value
+              ? const MediaAdaptor(
+                  type: 2,
+                  mediaList: null,
+                  skeletonObjects: 2,
+                )
+              : const SizedBox(height: 216),
       ],
     );
   }

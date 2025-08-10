@@ -13,7 +13,6 @@ import '../../Services/ServiceSwitcher.dart';
 import '../../Theme/Colors.dart';
 import '../../Theme/ThemeProvider.dart';
 import '../../Widgets/ScrollConfig.dart';
-import '../Home/Widgets/LoadingWidget.dart';
 import '../Home/Widgets/ServiceSwitcherBar.dart';
 
 class AnimeScreen extends StatefulWidget {
@@ -93,14 +92,12 @@ class AnimeScreenState extends State<AnimeScreen> {
       var mediaDataList = service.trending.value;
       return SizedBox(
         height: 486.statusBar(),
-        child: service.running.value
-            ? Stack(
+        child: Stack(
                 children: [
                   SizedBox(
                     height: 464.statusBar(),
-                    child: mediaDataList != null
-                        ? MediaAdaptor(type: 1, mediaList: mediaDataList)
-                        : const Center(child: CircularProgressIndicator()),
+                    child: MediaAdaptor(type: 1, mediaList: mediaDataList)
+
                   ),
                   ServiceSwitcherBar(title: getString.anime.toUpperCase()),
                   Positioned(
@@ -126,7 +123,7 @@ class AnimeScreenState extends State<AnimeScreen> {
                   ),
                 ],
               )
-            : const LoadingWidget(),
+
       );
     });
   }
@@ -136,14 +133,13 @@ class AnimeScreenState extends State<AnimeScreen> {
       children: [
         ...service.mediaContent(context),
         if (service.paging)
-          SizedBox(
-            height: 216,
-            child: Center(
-              child: !service.loadMore.value && service.canLoadMore.value
-                  ? const CircularProgressIndicator()
-                  : const SizedBox(height: 216),
-            ),
-          ),
+          !service.loadMore.value && service.canLoadMore.value
+              ? const MediaAdaptor(
+                  type: 2,
+                  mediaList: null,
+                  skeletonObjects: 2,
+                )
+              : const SizedBox(height: 216),
       ],
     );
   }

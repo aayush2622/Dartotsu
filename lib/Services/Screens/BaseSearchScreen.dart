@@ -34,6 +34,8 @@ abstract class BaseSearchScreen extends GetxController {
 
   Future<void>? loadNextPage() => null;
 
+  var type = 3.obs;
+
   void init({SearchResults? s}) {
     scrollController.addListener(scrollListener);
     searchResults.value = s ?? SearchResults(type: title.value);

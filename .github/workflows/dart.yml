@@ -179,7 +179,7 @@ jobs:
           overrwrite: true
   build_windows:
     runs-on: windows-latest
-    if: contains(github.event.head_commit.message, '[build.windows]') ||  contains(github.event.head_commit.message, '[build]')  ||  contains(github.event.head_commit.message, '[build.all]')
+    if: contains(github.event.head_commit.message, '[build.windows]') ||  contains(github.event.head_commit.message, '[build.all]')
     outputs:
       zip_link: ${{steps.gdriveUpload.outputs.web-content-link}}
 
@@ -269,7 +269,7 @@ jobs:
 
   build_linux:
     runs-on: ubuntu-latest
-    if: contains(github.event.head_commit.message, '[build.linux]')  ||  contains(github.event.head_commit.message, '[build.all]')
+    if: contains(github.event.head_commit.message, '[build.linux]')  ||  contains(github.event.head_commit.message, '[build.all]' ||  contains(github.event.head_commit.message, '[build]')
     permissions:
       contents: write
       pull-requests: write

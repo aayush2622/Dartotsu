@@ -2,6 +2,7 @@ import 'package:blur/blur.dart';
 import 'package:dartotsu/Functions/Extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../DataClass/Media.dart';
 import '../../Theme/ThemeProvider.dart';
@@ -22,11 +23,12 @@ class MediaPageSmallViewHolder extends StatelessWidget {
     final gradientColors = isDarkMode
         ? [Colors.transparent, theme.surface]
         : [Colors.white.withValues(alpha: 0.2), theme.surface];
+    final isSkeleton = Skeletonizer.of(context).enabled;
     return Stack(
       children: [
-        Positioned.fill(
+        !isSkeleton ? Positioned.fill(
           child: _buildBackground(mediaInfo.banner ?? mediaInfo.cover),
-        ),
+        ): const SizedBox(),
         _buildGradientOverlay(gradientColors),
         const Blur(
           colorOpacity: 0.0,

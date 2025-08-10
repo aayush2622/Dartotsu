@@ -259,7 +259,7 @@ class AnilistSearchScreen extends BaseSearchScreen {
     ];
   }
 
-  var type = 3.obs;
+
 
   List<Widget> userResults(BuildContext context) {
     return [

@@ -27,11 +27,13 @@ Widget MediaCard(
       child: Stack(
         alignment: Alignment.center,
         children: [
-          cachedNetworkImage(
-            imageUrl: imageUrl,
-            fit: BoxFit.cover,
+          SizedBox(
             width: width,
             height: height,
+            child: cachedNetworkImage(
+              imageUrl: imageUrl,
+              fit: BoxFit.cover,
+            ),
           ),
           Container(
             width: width,
