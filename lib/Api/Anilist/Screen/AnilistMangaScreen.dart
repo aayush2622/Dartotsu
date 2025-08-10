@@ -139,7 +139,7 @@ class AnilistMangaScreen extends BaseMangaScreen {
         MediaSection(
           context: context,
           type: 2,
-          title: getString.popular(getString.anime),
+          title: getString.popular(getString.manga),
           mediaList: mangaPopular.value,
         ),
       );
