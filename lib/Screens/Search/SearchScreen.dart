@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:provider/provider.dart';
 
+import '../../Adaptor/Media/MediaAdaptor.dart';
 import '../../DataClass/SearchResults.dart';
 import '../../Services/MediaService.dart';
 import '../../Theme/Colors.dart';
@@ -145,15 +146,13 @@ class SearchScreenState extends State<SearchScreen> {
                       ...screen.headerWidget(context),
                       ...screen.searchWidget(context),
                       if (screen.paging)
-                        SizedBox(
-                          height: 64,
-                          child: Center(
-                            child: !screen.loadMore.value &&
-                                    screen.canLoadMore.value
-                                ? const CircularProgressIndicator()
-                                : const SizedBox(height: 64),
-                          ),
-                        ),
+                        !screen.loadMore.value && screen.canLoadMore.value
+                            ? MediaAdaptor(
+                                type: screen.type.value,
+                                mediaList: null,
+                                skeletonObjects: 4 ,
+                              )
+                            : const SizedBox(height: 64),
                     ],
                   );
                 }

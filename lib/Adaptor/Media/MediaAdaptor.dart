@@ -22,6 +22,7 @@ class MediaAdaptor extends StatefulWidget {
   final bool isLarge;
   final ScrollController? scrollController;
   final List<Widget>? customNullListIndicator;
+  final int? skeletonObjects;
   final Function(int index, Media media)? onMediaTap;
 
   const MediaAdaptor({
@@ -30,6 +31,7 @@ class MediaAdaptor extends StatefulWidget {
     required this.mediaList,
     this.isLarge = false,
     this.scrollController,
+    this.skeletonObjects,
     this.customNullListIndicator,
     this.onMediaTap,
   });
@@ -57,7 +59,7 @@ class MediaGridState extends State<MediaAdaptor> {
 
   void _updateMediaList() {
     final random = Random();
-    final count = random.nextInt(11) + 7;
+    final count = widget.skeletonObjects ?? random.nextInt(11) + 7;
     final mediaList = List.generate(count, (_) => Media.skeleton());
     _mediaList = widget.mediaList ?? mediaList;
   }

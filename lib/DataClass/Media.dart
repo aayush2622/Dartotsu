@@ -230,7 +230,9 @@ class Media {
     return Media(
       id: 0,
       nameRomaji: '',
-      userPreferredName: '',
+      userPreferredName: 'dsfgdgf',
+      genres: ["ergsdf","fsdf","ergsdf","fsdf"],
+      status: "who knows",
       isAdult: false,
       userScore:
           keptKeys.contains('userScore') ? values['userScore'] as int : 0,
