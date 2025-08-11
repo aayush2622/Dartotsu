@@ -113,9 +113,8 @@ Widget themeDropdown(BuildContext context) {
     padding: const EdgeInsets.symmetric(vertical: 12.0),
     currentValue: themeNotifier.theme.toUpperCase(),
     options: themeOptions.map((e) => e.toUpperCase()).toList(),
-    onChanged: (String newValue) {
-      themeNotifier.setTheme(newValue.toLowerCase());
-    },
+    onChanged: (String newValue) =>
+        themeNotifier.setTheme(newValue.toLowerCase()),
     prefixIcon: Icons.color_lens,
   );
 }

@@ -5,7 +5,6 @@ import '../../../Widgets/CachedNetworkImage.dart';
 
 Widget GenreItem(BuildContext context, String title,
     {Widget? route, String? imageUrl}) {
-  double height = 54;
   double radius = 16;
 
   return Card(
@@ -22,12 +21,8 @@ Widget GenreItem(BuildContext context, String title,
           cachedNetworkImage(
             imageUrl: imageUrl,
             fit: BoxFit.cover,
-            width: double.infinity,
-            height: height,
           ),
         Container(
-          width: double.infinity,
-          height: height,
           color: Colors.black.withValues(alpha: 0.6),
           child: Center(
             child: Column(

@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dartotsu/Functions/Extensions.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../Animation/ScaleAnimation.dart';
@@ -80,7 +79,7 @@ class MediaGridState extends State<MediaAdaptor> {
         child = _buildVerticalList();
         break;
       case 3:
-        child = _buildStaggeredGrid();
+        child = _buildGrid();
         break;
       case 4:
         child = _buildExpandedHorizontalList();
@@ -88,11 +87,16 @@ class MediaGridState extends State<MediaAdaptor> {
       default:
         child = const SizedBox();
     }
-
     return Skeletonizer(
       enabled: isLoading,
       effect: ShimmerEffect(
         baseColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.2),
+        begin: widget.type == 2 || widget.type == 3
+            ? Alignment.centerLeft
+            : const AlignmentDirectional(-1.0, -0.3),
+        end: widget.type == 2 || widget.type == 3
+            ? Alignment.centerRight
+            : const AlignmentDirectional(1.0, 0.3),
       ),
       child: _mediaList.isEmpty && !isLoading ? _buildEmptyState() : child,
     );
@@ -254,34 +258,50 @@ class MediaGridState extends State<MediaAdaptor> {
     );
   }
 
-  Widget _buildStaggeredGrid() {
+  Widget _buildGrid() {
     final height = widget.isLarge ? 270.0 : 250.0;
+    final itemWidth = 108.0;
+    const sidePadding = 16.0;
+    const minGap = 16.0;
+
     return LayoutBuilder(
       builder: (context, constraints) {
-        final crossAxisCount = max(1, (constraints.maxWidth / 124).floor());
+        final maxWidth = constraints.maxWidth - (sidePadding * 2);
+        final crossAxisCount =
+            max(1, (maxWidth / (itemWidth + minGap)).floor());
+
+        final totalItemWidth = crossAxisCount * itemWidth;
+        final totalGapSpace = maxWidth - totalItemWidth;
+        final gap =
+            crossAxisCount > 1 ? totalGapSpace / (crossAxisCount - 1) : 0.0;
+
         return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-          child: StaggeredGrid.count(
-            crossAxisCount: crossAxisCount,
-            crossAxisSpacing: 16,
-            mainAxisSpacing: 16,
-            children: List.generate(_mediaList.length, (index) {
+          padding:
+              const EdgeInsets.symmetric(horizontal: sidePadding, vertical: 16),
+          child: GridView.builder(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: _mediaList.length,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: crossAxisCount,
+              mainAxisSpacing: 16,
+              crossAxisSpacing: gap,
+              childAspectRatio: itemWidth / height,
+            ),
+            itemBuilder: (context, index) {
               final media = _mediaList[index];
               final tag = _generateTag(media);
+
               return GestureDetector(
                 onTap: () => _handleTap(index, media, tag),
                 onLongPress: () => _handleLongPress(media),
-                child: SizedBox(
-                  width: 108,
-                  height: height,
-                  child: MediaViewHolder(
-                    mediaInfo: media,
-                    isLarge: widget.isLarge,
-                    tag: tag,
-                  ),
+                child: MediaViewHolder(
+                  mediaInfo: media,
+                  isLarge: widget.isLarge,
+                  tag: tag,
                 ),
               );
-            }),
+            },
           ),
         );
       },

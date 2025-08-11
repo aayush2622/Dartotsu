@@ -10,9 +10,7 @@ import '../../Animation/SlideInAnimation.dart';
 import '../../Functions/Function.dart';
 import '../../Services/Screens/BaseMangaScreen.dart';
 import '../../Services/ServiceSwitcher.dart';
-import '../../Theme/Colors.dart';
 import '../../Theme/LanguageSwitcher.dart';
-import '../../Theme/ThemeProvider.dart';
 import '../../Widgets/ScrollConfig.dart';
 import '../Home/Widgets/ServiceSwitcherBar.dart';
 
@@ -36,7 +34,7 @@ class MangaScreenState extends State<MangaScreen> {
       body: Stack(
         children: [
           _buildRefreshContent(screen),
-          _buildScrollToTopButton(screen),
+          screen.buildScrollToTopButton(context),
         ],
       ),
     );
@@ -60,31 +58,6 @@ class MangaScreenState extends State<MangaScreen> {
           ),
         ],
       ),
-    );
-  }
-
-  Widget _buildScrollToTopButton(BaseMangaScreen service) {
-    var theme = Provider.of<ThemeNotifier>(context);
-    return Positioned(
-      bottom: 72.0 + 32.bottomBar(),
-      left: (0.screenWidthWithContext(context) / 2) - 24.0,
-      child: Obx(() => service.scrollToTop.value
-          ? Container(
-              decoration: BoxDecoration(
-                color: theme.isDarkMode ? greyNavDark : greyNavLight,
-                borderRadius: BorderRadius.circular(64.0),
-              ),
-              padding: const EdgeInsets.all(4.0),
-              child: IconButton(
-                icon: const Icon(Icons.arrow_upward),
-                onPressed: () => service.scrollController.animateTo(
-                  0,
-                  duration: const Duration(milliseconds: 500),
-                  curve: Curves.easeInOut,
-                ),
-              ),
-            )
-          : const SizedBox()),
     );
   }
 
