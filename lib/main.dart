@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:ui';
 
 import 'package:app_links/app_links.dart';
+import 'package:blurbox/blurbox.dart';
 import 'package:dartotsu/Functions/Extensions.dart';
 import 'package:dartotsu/Functions/Function.dart';
 import 'package:dartotsu/Screens/Login/LoginScreen.dart';
@@ -311,7 +312,7 @@ class MainActivityState extends State<MainActivity> {
                     imageUrl: service.data.bg.value.isNotEmpty
                         ? service.data.bg.value
                         : 'https://wallpapercat.com/download/1198914',
-                    fit: BoxFit.fill,
+                    fit: BoxFit.cover,
                   ),
                 ),
               ),
@@ -365,7 +366,7 @@ class MainActivityState extends State<MainActivity> {
   Widget build(BuildContext context) {
     final themeNotifier = Provider.of<ThemeNotifier>(context);
     final service = context.currentService();
-
+    final theme = Theme.of(context).colorScheme;
     return Scaffold(
       body: Stack(
         children: [
@@ -383,14 +384,37 @@ class MainActivityState extends State<MainActivity> {
             child: GestureDetector(
               onLongPress: () =>
                   service.searchScreen?.onSearchIconLongClick(context),
-              child: FloatingActionButton(
-                onPressed: () =>
-                    service.searchScreen?.onSearchIconClick(context),
-                foregroundColor: Theme.of(context).colorScheme.outline,
-                backgroundColor:
-                    themeNotifier.isDarkMode ? greyNavDark : greyNavLight,
-                elevation: 12,
-                child: const Icon(Icons.search),
+              onTap: () => service.searchScreen?.onSearchIconClick(context),
+              child: ThemedWidget(
+                context: context,
+                materialWidget: Container(
+                  decoration: BoxDecoration(
+                    color:
+                        themeNotifier.isDarkMode ? greyNavDark : greyNavLight,
+                    borderRadius: BorderRadius.circular(16.0),
+                  ),
+                  padding: const EdgeInsets.all(4.0),
+                  width: 54,
+                  height: 54,
+                  child: const Icon(Icons.search),
+                ),
+                glassWidget: BlurBox(
+                  blur: 12.0,
+                  padding: const EdgeInsets.all(0),
+                  borderRadius: BorderRadius.circular(16.0),
+                  border: Border.all(
+                    color: theme.onSurface.withOpacity(0.2),
+                    width: 1,
+                  ),
+                  child: Container(
+                    width: 54,
+                    height: 54,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16.0),
+                    ),
+                    child: const Icon(Icons.search),
+                  ),
+                ),
               ),
             ),
           ),

@@ -52,7 +52,7 @@ class MediaListScreenState extends State<MediaListScreen> {
       ),
       body: Obx(() {
         if (_viewModel.isLoading.value) {
-          return const Center(child: CircularProgressIndicator());
+          return const MediaListTabs(data: {"Loading": null});
         }
 
         if (_viewModel.mediaList.value == null ||

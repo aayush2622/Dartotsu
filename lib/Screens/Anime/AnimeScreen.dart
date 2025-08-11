@@ -10,8 +10,6 @@ import '../../Animation/SlideInAnimation.dart';
 import '../../Functions/Function.dart';
 import '../../Services/Screens/BaseAnimeScreen.dart';
 import '../../Services/ServiceSwitcher.dart';
-import '../../Theme/Colors.dart';
-import '../../Theme/ThemeProvider.dart';
 import '../../Widgets/ScrollConfig.dart';
 import '../Home/Widgets/ServiceSwitcherBar.dart';
 
@@ -35,7 +33,7 @@ class AnimeScreenState extends State<AnimeScreen> {
       body: Stack(
         children: [
           _buildRefreshContent(screen),
-          _buildScrollToTopButton(screen),
+          screen.buildScrollToTopButton(context),
         ],
       ),
     );
@@ -62,69 +60,40 @@ class AnimeScreenState extends State<AnimeScreen> {
     );
   }
 
-  Widget _buildScrollToTopButton(BaseAnimeScreen service) {
-    var theme = Provider.of<ThemeNotifier>(context);
-    return Positioned(
-      bottom: 72.0 + 32.bottomBar(),
-      left: (0.screenWidthWithContext(context) / 2) - 24.0,
-      child: Obx(() => service.scrollToTop.value
-          ? Container(
-              decoration: BoxDecoration(
-                color: theme.isDarkMode ? greyNavDark : greyNavLight,
-                borderRadius: BorderRadius.circular(64.0),
-              ),
-              padding: const EdgeInsets.all(4.0),
-              child: IconButton(
-                icon: const Icon(Icons.arrow_upward),
-                onPressed: () => service.scrollController.animateTo(
-                  0,
-                  duration: const Duration(milliseconds: 500),
-                  curve: Curves.easeInOut,
-                ),
-              ),
-            )
-          : const SizedBox()),
-    );
-  }
-
   Widget _buildAnimeScreenContent(BaseAnimeScreen service) {
     return Obx(() {
       var mediaDataList = service.trending.value;
       return SizedBox(
-        height: 486.statusBar(),
-        child: Stack(
-                children: [
-                  SizedBox(
-                    height: 464.statusBar(),
-                    child: MediaAdaptor(type: 1, mediaList: mediaDataList)
-
+          height: 486.statusBar(),
+          child: Stack(
+            children: [
+              SizedBox(
+                  height: 464.statusBar(),
+                  child: MediaAdaptor(type: 1, mediaList: mediaDataList)),
+              ServiceSwitcherBar(title: getString.anime.toUpperCase()),
+              Positioned(
+                bottom: 92,
+                left: 8.0,
+                right: 8.0,
+                child: Center(
+                  child: ChipsWidget(
+                    chips: service.trendingChips,
                   ),
-                  ServiceSwitcherBar(title: getString.anime.toUpperCase()),
-                  Positioned(
-                    bottom: 92,
-                    left: 8.0,
-                    right: 8.0,
-                    child: Center(
-                      child: ChipsWidget(
-                        chips: service.trendingChips,
-                      ),
-                    ),
+                ),
+              ),
+              Positioned(
+                bottom: 0,
+                left: 8.0,
+                right: 8.0,
+                child: SlideInAnimation(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: service.trendingCards(context),
                   ),
-                  Positioned(
-                    bottom: 0,
-                    left: 8.0,
-                    right: 8.0,
-                    child: SlideInAnimation(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: service.trendingCards(context),
-                      ),
-                    ),
-                  ),
-                ],
-              )
-
-      );
+                ),
+              ),
+            ],
+          ));
     });
   }
 

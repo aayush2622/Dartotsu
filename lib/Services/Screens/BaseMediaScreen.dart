@@ -1,8 +1,13 @@
+import 'package:blurbox/blurbox.dart';
+import 'package:dartotsu/Functions/Extensions.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../Api/EpisodeDetails/GetMediaIDs/GetMediaIDs.dart';
 import '../../Functions/Function.dart';
+import '../../Theme/Colors.dart';
+import '../../Theme/ThemeManager.dart';
 
 abstract class BaseMediaScreen extends GetxController {
   var page = 1;
@@ -59,5 +64,45 @@ abstract class BaseMediaScreen extends GetxController {
       }
     }
     scrollToTop.value = _canScroll();
+  }
+
+  Widget buildScrollToTopButton(BuildContext context) {
+    var themeNotifier = context.themeNotifier;
+    final theme = Theme.of(context).colorScheme;
+    var icon = IconButton(
+      icon: const Icon(Icons.arrow_upward),
+      onPressed: () => scrollController.animateTo(
+        0,
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeInOut,
+      ),
+    );
+    return Positioned(
+      bottom: 72.0 + 32.bottomBar(),
+      left: (0.screenWidthWithContext(context) / 2) - 24.0,
+      child: Obx(() => scrollToTop.value
+          ? ThemedWidget(
+              context: context,
+              materialWidget: Container(
+                decoration: BoxDecoration(
+                  color: themeNotifier.isDarkMode ? greyNavDark : greyNavLight,
+                  borderRadius: BorderRadius.circular(64.0),
+                ),
+                padding: const EdgeInsets.all(4.0),
+                child: icon,
+              ),
+              glassWidget: BlurBox(
+                blur: 12.0,
+                padding: const EdgeInsets.all(4.0),
+                borderRadius: BorderRadius.circular(64.0),
+                border: Border.all(
+                  color: theme.onSurface.withOpacity(0.2),
+                  width: 1,
+                ),
+                child: icon,
+              ),
+            )
+          : const SizedBox()),
+    );
   }
 }

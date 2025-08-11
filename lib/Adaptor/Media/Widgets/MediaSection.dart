@@ -91,11 +91,10 @@ class _MediaSectionState extends State<MediaSection> {
   Widget buildTitleRow() {
     var theme = Theme.of(context);
     return Padding(
-      padding: const EdgeInsets.only(left: 28.0, right: 16),
+      padding: const EdgeInsets.only(left: 28.0, right: 16, top: 8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          // Title Text
           Expanded(
             child: GestureDetector(
               onLongPress: widget.onLongPressTitle,
@@ -112,7 +111,6 @@ class _MediaSectionState extends State<MediaSection> {
               ),
             ),
           ),
-          // Arrow Icon
           widget.trailingIcon ??
               Transform(
                 alignment: Alignment.center,

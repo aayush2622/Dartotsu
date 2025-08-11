@@ -56,7 +56,7 @@ class FloatingBottomNavBarMobile extends FloatingBottomNavBar {
                     ],
                     border: Border.all(
                       color: theme.onSurface.withOpacity(0.2),
-                      width: 1.5,
+                      width: 1,
                     ),
                     padding: const EdgeInsets.all(0),
                     color: theme.surface.withOpacity(0.2),

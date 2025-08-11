@@ -29,7 +29,7 @@ class HomeScreenMobileState extends State<HomeScreenMobile> {
     return Stack(
       children: [
         _buildRefreshContent,
-        _buildScrollToTopButton,
+        screen.buildScrollToTopButton(context),
       ],
     );
   }
@@ -52,30 +52,6 @@ class HomeScreenMobileState extends State<HomeScreenMobile> {
           ),
         ],
       ),
-    );
-  }
-
-  Widget get _buildScrollToTopButton {
-    return Positioned(
-      bottom: 72.0 + 32.bottomBar(),
-      left: (0.screenWidthWithContext(context) / 2) - 24.0,
-      child: Obx(() => screen.scrollToTop.value
-          ? Container(
-              decoration: BoxDecoration(
-                color: themeNotifier.isDarkMode ? greyNavDark : greyNavLight,
-                borderRadius: BorderRadius.circular(64.0),
-              ),
-              padding: const EdgeInsets.all(4.0),
-              child: IconButton(
-                icon: const Icon(Icons.arrow_upward),
-                onPressed: () => screen.scrollController.animateTo(
-                  0,
-                  duration: const Duration(milliseconds: 500),
-                  curve: Curves.easeInOut,
-                ),
-              ),
-            )
-          : const SizedBox()),
     );
   }
 
@@ -108,6 +84,7 @@ class HomeScreenMobileState extends State<HomeScreenMobile> {
               return Stack(
                 fit: StackFit.expand,
                 children: [
+                  if (!context.useGlassMode) _buildBackgroundImage,
                   _buildAvatar,
                   _buildUserInfo,
                   _buildCards,
