@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../DataClass/Media.dart';
+import '../../../Theme/ThemeManager.dart';
 import '../../../Widgets/CustomElevatedButton.dart';
 import '../MediaAdaptor.dart';
 
@@ -66,26 +67,34 @@ class _MediaSectionState extends State<MediaSection> {
     );
 
     if (isPhone) return content;
-    final card = Container(
-      decoration: BoxDecoration(
+    return ThemedWidget(
+      context: context,
+      materialWidget: Container(
+        decoration: BoxDecoration(
+          color: theme.surfaceContainerLow,
+          borderRadius: BorderRadius.circular(24.0),
+          border: Border.all(
+            color: theme.outlineVariant,
+            width: 1,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: theme.shadow.withOpacity(0.1),
+              blurRadius: 20,
+              offset: const Offset(0, 6),
+            ),
+          ],
+        ),
+        child: content,
+      ),
+      glassWidget: PresetBlurBox(
+        preset: BlurPreset.iosStyle,
+        padding: EdgeInsets.zero,
         color: theme.surface.withOpacity(0.2),
         borderRadius: BorderRadius.circular(30.0),
-        border: Border.all(
-          color: theme.outline.withOpacity(0.3),
-          width: 1.2,
-        ),
+        child: content,
       ),
-      child: content,
     );
-    return context.useGlassMode
-        ? PresetBlurBox(
-            preset: BlurPreset.iosStyle,
-            padding: EdgeInsets.zero,
-            color: theme.surface.withOpacity(0.2),
-            borderRadius: BorderRadius.circular(30.0),
-            child: content,
-          )
-        : card;
   }
 
   Widget buildTitleRow() {

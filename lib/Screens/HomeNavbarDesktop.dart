@@ -36,10 +36,19 @@ class FloatingBottomNavBarDesktop extends FloatingBottomNavBar {
           materialWidget: Container(
             padding: verticalPadding,
             decoration: BoxDecoration(
-              color: surfaceColor,
+              color: theme.surfaceContainerLow,
+              border: Border.all(
+                color: theme.outlineVariant,
+                width: 1,
+              ),
               borderRadius: BorderRadius.circular(48),
-              border: Border.all(color: borderColor, width: 1.5),
-              boxShadow: [BoxShadow(color: primaryShadowColor)],
+              boxShadow: [
+                BoxShadow(
+                  color: theme.shadow.withOpacity(0.1),
+                  blurRadius: 20,
+                  offset: const Offset(0, 6),
+                ),
+              ],
             ),
             child: _buildNavBar(context),
           ),

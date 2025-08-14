@@ -123,8 +123,11 @@ class MediaGridState extends State<MediaAdaptor> {
 
   void _handleTap(int index, Media media, String tag) {
     if (widget.mediaList == null) return;
-    widget.onMediaTap?.call(index, media) ??
-        navigateToPage(context, MediaInfoPage(media, tag));
+    if (widget.onMediaTap != null) {
+      widget.onMediaTap!(index, media);
+    } else {
+      navigateToPage(context, MediaInfoPage(media, tag));
+    }
   }
 
   void _handleLongPress(Media media) {
