@@ -1,6 +1,5 @@
 import 'package:blurbox/blurbox.dart';
 import 'package:dartotsu/Functions/Extensions.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

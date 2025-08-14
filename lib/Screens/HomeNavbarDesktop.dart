@@ -24,7 +24,6 @@ class FloatingBottomNavBarDesktop extends FloatingBottomNavBar {
 
     final borderColor = theme.onSurface.withOpacity(0.2);
     final surfaceColor = theme.surface.withOpacity(0.2);
-    final primaryShadowColor = theme.primary.withOpacity(0.09);
     const verticalPadding = EdgeInsets.symmetric(vertical: 10);
 
     return Padding(
