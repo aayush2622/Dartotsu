@@ -227,7 +227,7 @@ abstract class BaseParser extends GetxController {
         ? "${getString.selected} : ${response.title}"
         : "${getString.found} : ${response.title}";
     var show = ShowResponse(
-        name: response.title!, link: response.url!, coverUrl: response.cover!);
+        name: response.title, link: response.url, coverUrl: response.cover);
     saveCustomData<ShowResponse>("${source.name}_${mediaData.id}_source", show);
   }
 
