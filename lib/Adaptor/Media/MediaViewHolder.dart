@@ -61,6 +61,19 @@ class MediaViewHolder extends StatelessWidget {
                       color: Colors.white12,
                       width: 108,
                       height: 160,
+                      child: const Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    ),
+                    errorWidget: (context, url, error) => Container(
+                      color: Colors.white12,
+                      width: 108,
+                      height: 160,
+                      child: const Icon(
+                        Icons.error,
+                        color: Colors.red,
+                        size: 32,
+                      ),
                     ),
                   ),
                 ),
