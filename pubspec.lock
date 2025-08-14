@@ -34,10 +34,10 @@ packages:
     dependency: "direct main"
     description:
       name: app_links
-      sha256: "85ed8fc1d25a76475914fff28cc994653bd900bc2c26e4b57a49e097febb54ba"
+      sha256: "5f88447519add627fe1cbcab4fd1da3d4fed15b9baf29f28b22535c95ecee3e8"
       url: "https://pub.dev"
     source: hosted
-    version: "6.4.0"
+    version: "6.4.1"
   app_links_linux:
     dependency: transitive
     description:
@@ -178,10 +178,10 @@ packages:
     dependency: transitive
     description:
       name: built_value
-      sha256: "0b1b12a0a549605e5f04476031cd0bc91ead1d7c8e830773a18ee54179b3cb62"
+      sha256: ba95c961bafcd8686d1cf63be864eb59447e795e124d98d6a27d91fcd13602fb
       url: "https://pub.dev"
     source: hosted
-    version: "8.11.0"
+    version: "8.11.1"
   cached_network_image:
     dependency: "direct main"
     description:
@@ -315,7 +315,7 @@ packages:
     description:
       path: "."
       ref: master
-      resolved-ref: "65927ec55685bd057fb28f50de6536e02f876725"
+      resolved-ref: "034881b730aaf0838f2cb5fce44d5a8873e88fa0"
       url: "https://github.com/aayush2622/DartotsuExtensionBridge.git"
     source: git
     version: "0.0.4"
@@ -379,10 +379,10 @@ packages:
     dependency: "direct main"
     description:
       name: dynamic_color
-      sha256: eae98052fa6e2826bdac3dd2e921c6ce2903be15c6b7f8b6d8a5d49b5086298d
+      sha256: "43a5a6679649a7731ab860334a5812f2067c2d9ce6452cf069c5e0c25336c17c"
       url: "https://pub.dev"
     source: hosted
-    version: "1.7.0"
+    version: "1.8.1"
   encrypt:
     dependency: transitive
     description:
@@ -460,10 +460,10 @@ packages:
     dependency: "direct main"
     description:
       name: file_picker
-      sha256: ef9908739bdd9c476353d6adff72e88fd00c625f5b959ae23f7567bd5137db0a
+      sha256: ef7d2a085c1b1d69d17b6842d0734aad90156de08df6bd3c12496d0bd6ddf8e2
       url: "https://pub.dev"
     source: hosted
-    version: "10.2.0"
+    version: "10.3.1"
   fixnum:
     dependency: transitive
     description:
@@ -606,10 +606,10 @@ packages:
     dependency: transitive
     description:
       name: flutter_plugin_android_lifecycle
-      sha256: f948e346c12f8d5480d2825e03de228d0eb8c3a737e4cdaa122267b89c022b5e
+      sha256: "6382ce712ff69b0f719640ce957559dde459e55ecd433c767e06d139ddf16cab"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.28"
+    version: "2.0.29"
   flutter_qjs:
     dependency: transitive
     description:
@@ -729,10 +729,10 @@ packages:
     dependency: "direct main"
     description:
       name: http
-      sha256: "2c11f3f94c687ee9bad77c171151672986360b2b001d109814ee7140b2cf261b"
+      sha256: bb2ce4590bc2667c96f318d68cac1b5a7987ec819351d32b1c987239a815e007
       url: "https://pub.dev"
     source: hosted
-    version: "1.4.0"
+    version: "1.5.0"
   http_interceptor:
     dependency: "direct main"
     description:
@@ -1068,18 +1068,18 @@ packages:
     dependency: "direct main"
     description:
       name: package_info_plus
-      sha256: "7976bfe4c583170d6cdc7077e3237560b364149fcd268b5f53d95a991963b191"
+      sha256: "16eee997588c60225bda0488b6dcfac69280a6b7a3cf02c741895dd370a02968"
       url: "https://pub.dev"
     source: hosted
-    version: "8.3.0"
+    version: "8.3.1"
   package_info_plus_platform_interface:
     dependency: transitive
     description:
       name: package_info_plus_platform_interface
-      sha256: "6c935fb612dff8e3cc9632c2b301720c77450a126114126ffaafe28d2e87956c"
+      sha256: "202a487f08836a592a6bd4f901ac69b3a8f146af552bbd14407b6b41e1c3f086"
       url: "https://pub.dev"
     source: hosted
-    version: "3.2.0"
+    version: "3.2.1"
   path:
     dependency: "direct main"
     description:
@@ -1316,10 +1316,10 @@ packages:
     dependency: "direct main"
     description:
       name: screen_brightness
-      sha256: f9bcfd7029d81aa2ba960f8c67a51427c721796f7f4eea02bc2bb84c41205ad7
+      sha256: b6cb9381b83fef7be74187ea043d54598b9a265b4ef6e40b69345ae28699b13e
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.5"
+    version: "2.1.6"
   screen_brightness_android:
     dependency: transitive
     description:
@@ -1348,10 +1348,10 @@ packages:
     dependency: transitive
     description:
       name: screen_brightness_ohos
-      sha256: "61e313e46eaee3f83dd4e85a2a91f8a81be02c154bc9e60830a7c0fd76dac286"
+      sha256: af2680660f7df785bcd2b1bef9b9f3c172191166dd27098f2dfe020c50c3dea4
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.0"
+    version: "2.1.1"
   screen_brightness_platform_interface:
     dependency: transitive
     description:
@@ -1420,18 +1420,18 @@ packages:
     dependency: "direct main"
     description:
       name: share_plus
-      sha256: b2961506569e28948d75ec346c28775bb111986bb69dc6a20754a457e3d97fa0
+      sha256: d7dc0630a923883c6328ca31b89aa682bacbf2f8304162d29f7c6aaff03a27a1
       url: "https://pub.dev"
     source: hosted
-    version: "11.0.0"
+    version: "11.1.0"
   share_plus_platform_interface:
     dependency: transitive
     description:
       name: share_plus_platform_interface
-      sha256: "1032d392bc5d2095a77447a805aa3f804d2ae6a4d5eef5e6ebb3bd94c1bc19ef"
+      sha256: "88023e53a13429bd65d8e85e11a9b484f49d4c190abbd96c7932b74d6927cc9a"
       url: "https://pub.dev"
     source: hosted
-    version: "6.0.0"
+    version: "6.1.0"
   shared_preferences:
     dependency: transitive
     description:
@@ -1444,10 +1444,10 @@ packages:
     dependency: transitive
     description:
       name: shared_preferences_android
-      sha256: "20cbd561f743a342c76c151d6ddb93a9ce6005751e7aa458baad3858bfbfb6ac"
+      sha256: "5bcf0772a761b04f8c6bf814721713de6f3e5d9d89caf8d3fe031b02a342379e"
       url: "https://pub.dev"
     source: hosted
-    version: "2.4.10"
+    version: "2.4.11"
   shared_preferences_foundation:
     dependency: transitive
     description:
@@ -1705,10 +1705,10 @@ packages:
     dependency: transitive
     description:
       name: url_launcher_android
-      sha256: "8582d7f6fe14d2652b4c45c9b6c14c0b678c2af2d083a11b604caeba51930d79"
+      sha256: "0aedad096a85b49df2e4725fa32118f9fa580f3b14af7a2d2221896a02cd5656"
       url: "https://pub.dev"
     source: hosted
-    version: "6.3.16"
+    version: "6.3.17"
   url_launcher_ios:
     dependency: transitive
     description:
