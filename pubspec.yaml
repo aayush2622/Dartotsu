@@ -4,7 +4,7 @@ description: "An Anilist client"
 publish_to: 'none'
 
 # Application version and build number
-version: 0.0.2+1
+version: 0.0.3+1
 
 # Dart SDK constraints
 environment:
@@ -177,7 +177,7 @@ inno_bundle:
   id: 609d9fb9-ac99-533b-a5b5-f277afa99b68 # <-- Put your app id here
   publisher: Ankit Grai # Optional, but recommended.
   name: Dartotsu # Also optional, but recommended.
-  version: 0.0.2 # Optional, but recommended.
+  version: 0.0.3 # Optional, but recommended.
   admin: auto
   installer_icon: assets/images/lol.ico
   languages: # Arabic was causing issues so switched to only English for installer
