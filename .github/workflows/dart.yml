@@ -7,7 +7,7 @@ on:
 jobs:
   build_android:
     runs-on: ubuntu-latest
-    # Only run if commit message contains [build.apk]
+    # Only run if commit message contain [build.apk]
     if: contains(github.event.head_commit.message, '[build.apk]') || contains(github.event.head_commit.message, '[build]') || contains(github.event.head_commit.message, '[build.all]')
     outputs:
       apk_link: ${{steps.gdriveUpload_arm64.outputs.web-content-link}}
