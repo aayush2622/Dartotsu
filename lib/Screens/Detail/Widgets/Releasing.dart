@@ -20,7 +20,7 @@ List<Widget> releasingIn(Media mediaData, BuildContext context) {
         children: [
           Flexible(
             child: Text(
-              'EPISODE ${mediaData.anime!.nextAiringEpisode! + 1} WILL BE RELEASED IN',
+              getString.nextEpisodeRelease,
               style: TextStyle(
                 color: theme.isDarkMode ? fgDark : fgLight,
                 fontWeight: FontWeight.bold,
