@@ -125,7 +125,15 @@
   "@totalEpisodes": {},
   "totalChapters": "Chapters",
   "@totalChapters": {},
-  "nextEpisodeRelease": "Episode ${mediaData.anime!.nextAiringEpisode! + 1} will be released in",
+  "nextEpisodeRelease": "Episode {episode} will be released in",
+  "@nextEpisodeRelease":{
+    "description": "Message showing the next episode info",
+    "placeholders": {
+      "episode": {
+        "type": "int"
+      }
+    }
+  } ,
 
   "genres": "Genres",
   "@genres": {},
