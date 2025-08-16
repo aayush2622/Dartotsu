@@ -54,8 +54,8 @@ class SettingsThemeScreenState extends BaseSettingsScreen {
       ),
       Setting(
         type: SettingType.switchType,
-        name: 'Glass Effect',
-        description: 'Gives a frosted glass effect to the app',
+        name: getString.glassEffect,
+        description: getString.glassEffectDescription,
         icon: Icons.blur_on_outlined,
         isChecked: themeNotifier.useGlassMode,
         onSwitchChange: (bool value) async {
@@ -84,8 +84,8 @@ class SettingsThemeScreenState extends BaseSettingsScreen {
       ),
       Setting(
         type: SettingType.switchType,
-        name: "Use Cover Theme",
-        description: "Use media cover image as theme color",
+        name: getString.coverTheme,
+        description: getString.coverThemeDescription,
         icon: Icons.image_outlined,
         isChecked: loadData(PrefName.useCoverTheme),
         onSwitchChange: (bool value) {

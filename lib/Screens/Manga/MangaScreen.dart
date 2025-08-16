@@ -100,7 +100,7 @@ class MangaScreenState extends State<MangaScreen> {
                       ),
                       MediaCard(
                         context,
-                        'TOP SCORE',
+                        getString.topScore,
                         "https://s4.anilist.co/file/anilistcdn/media/manga/banner/30002-3TuoSMl20fUX.jpg",
                         onTap: () {},
                       ),
