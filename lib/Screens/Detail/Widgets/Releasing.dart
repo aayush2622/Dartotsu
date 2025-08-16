@@ -1,7 +1,7 @@
 import 'package:dartotsu/DataClass/Media.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
-
+import '../../../Theme/LanguageSwitcher.dart';
 import '../../../Theme/Colors.dart';
 import '../../../Theme/ThemeProvider.dart';
 import 'Countdown.dart';
@@ -20,7 +20,7 @@ List<Widget> releasingIn(Media mediaData, BuildContext context) {
         children: [
           Flexible(
             child: Text(
-              getString.nextEpisodeRelease,
+              getString.nextEpisodeRelease(mediaData.anime!.nextAiringEpisode! + 1),
               style: TextStyle(
                 color: theme.isDarkMode ? fgDark : fgLight,
                 fontWeight: FontWeight.bold,
