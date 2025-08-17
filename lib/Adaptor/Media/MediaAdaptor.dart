@@ -282,7 +282,6 @@ class MediaGridState extends State<MediaAdaptor> {
     Widget itemBuilder(BuildContext context, int index) {
       final media = _mediaList[index];
       final tag = _generateTag(media);
-
       return GestureDetector(
         onTap: () => _handleTap(index, media, tag),
         onLongPress: () => _handleLongPress(media),
