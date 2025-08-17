@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:io';
-
 import 'Preferences/PrefManager.dart';
 
 /*class Logger {

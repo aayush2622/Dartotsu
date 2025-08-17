@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:dartotsu/Preferences/IsarDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
+import 'package:dartotsu/Preferences/PrefManager.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:media_kit/media_kit.dart';
@@ -15,11 +18,27 @@ class WindowsPlayer extends BasePlayer {
   late VideoController videoController;
   String? currentSubtitle;
 
+  VideoControllerConfiguration getPlatformConfig() {
+    if (Platform.isAndroid) {
+      return const VideoControllerConfiguration(
+          androidAttachSurfaceAfterVideoParameters: true);
+    }
+    return const VideoControllerConfiguration();
+  }
+
   WindowsPlayer(this.resizeMode, this.settings) {
+    // TODO => see if i used the prefManager ryt
+    final useCustomConfig = loadData(PrefName.useCustomMpvConfig);
+    final mpvConfPath = loadData(PrefName.mpvConfigDir);
+
     player = Player(
-      configuration: const PlayerConfiguration(bufferSize: 1024 * 1024 * 64),
+      configuration: PlayerConfiguration(
+          bufferSize: 1024 * 1024 * 64,
+          config: useCustomConfig,
+          configDir: mpvConfPath),
     );
-    videoController = VideoController(player);
+    videoController =
+        VideoController(player, configuration: getPlatformConfig());
   }
 
   @override

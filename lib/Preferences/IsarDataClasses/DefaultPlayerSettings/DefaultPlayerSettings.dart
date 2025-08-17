@@ -2,10 +2,13 @@ import 'package:isar/isar.dart';
 
 part 'DefaultPlayerSettings.g.dart';
 
+//TODO => see if i broke anything
+
 @embedded
 class PlayerSettings {
   String speed;
   int resizeMode;
+//  bool useCustomMpvConfig;
 
   // subtitlesSettings
   bool showSubtitle;
@@ -32,6 +35,7 @@ class PlayerSettings {
     this.subtitleBottomPadding = 0,
     this.skipDuration = 85,
     this.subtitleWeight = 5,
+    //  this.useCustomMpvConfig = false,
   });
 
   factory PlayerSettings.fromJson(Map<String, dynamic> json) {
@@ -48,6 +52,7 @@ class PlayerSettings {
       subtitleBottomPadding: json['subtitleBottomPadding'],
       skipDuration: json['skipDuration'],
       subtitleWeight: json['subtitleWeight'],
+      //  useCustomMpvConfig: json['useCustomMpvConfig'] ?? false,
     );
   }
 
@@ -65,6 +70,7 @@ class PlayerSettings {
       'subtitleBottomPadding': subtitleBottomPadding,
       'skipDuration': skipDuration,
       'subtitleWeight': subtitleWeight,
+      //'useCustomMpvConfig': useCustomMpvConfig,
     };
   }
 }
