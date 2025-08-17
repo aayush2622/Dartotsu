@@ -34,6 +34,7 @@ class WindowsPlayer extends BasePlayer {
     player = Player(
       configuration: PlayerConfiguration(
           bufferSize: 1024 * 1024 * 64,
+          // Config Options thanks to snitchel
           config: useCustomConfig,
           configDir: mpvConfPath),
     );
