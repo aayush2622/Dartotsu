@@ -6,6 +6,7 @@ import 'package:app_links/app_links.dart';
 import 'package:blurbox/blurbox.dart';
 import 'package:dartotsu/Functions/Extensions.dart';
 import 'package:dartotsu/Functions/Function.dart';
+import 'package:dartotsu/Functions/mpv_conf.dart';
 import 'package:dartotsu/Screens/Login/LoginScreen.dart';
 import 'package:dartotsu/Screens/Manga/MangaScreen.dart';
 import 'package:dartotsu_extension_bridge/Aniyomi/AniyomiExtensions.dart';
@@ -97,8 +98,10 @@ Future init() async {
   await PrefManager.init();
   await DartotsuExtensionBridge().init(isar, "Darotsu");
   await Logger.init();
+  await MpvConf.init();
   MediaService.init();
   TypeFactory.init();
+
   MediaKit.ensureInitialized();
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
     await WindowManager.instance.ensureInitialized();

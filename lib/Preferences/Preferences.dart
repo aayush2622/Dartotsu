@@ -14,6 +14,7 @@ class PrefName {
   static const showYtButton = Pref('showYtButton', true);
   static const autoUpdateExtensions = Pref('autoUpdateExtensions', true);
   static const useCoverTheme = Pref('useCoverTheme', true);
+
   //home page
   static const Pref<Map<dynamic, dynamic>> anilistHomeLayout =
       Pref('homeLayoutOrder', {
@@ -135,6 +136,11 @@ class PrefName {
       Pref('playerSetting', jsonEncode(PlayerSettings().toJson()));
   static Pref<String> readerSettings =
       Pref('readerSetting', jsonEncode(ReaderSettings().toJson()));
+
+  // TODO => Remoove this when you add player settings (needless to say but still)
+  static Pref<String> mpvConfigDir = const Pref<String>('mpvConfigDir', '');
+  static Pref<bool> useCustomMpvConfig =
+      const Pref<bool>('useCustomMpvConfig', false);
 
   //Protection
   static const anilistToken = Pref('AnilistToken', '');

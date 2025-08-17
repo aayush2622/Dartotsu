@@ -145,6 +145,18 @@ List<Widget> playerSettings(
             savePlayerSettings(playerSettings);
           },
         ),
+        // TODO => Add your getString here
+        Setting(
+          type: SettingType.switchType,
+          name: 'Custom MPV Configuration',
+          description:
+              'Enable this option to use your own MPV configuration file. Place your custom config at: ${loadData(PrefName.mpvConfigDir).fixSeparator.replaceAll(' ', '')}',
+          icon: Icons.extension_rounded,
+          isChecked: loadData(PrefName.useCustomMpvConfig),
+          onSwitchChange: (value) {
+            saveData(PrefName.useCustomMpvConfig, value);
+          },
+        ),
       ],
     ),
     Text(
