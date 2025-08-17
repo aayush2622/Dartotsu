@@ -148,6 +148,11 @@ class AppLocalizationsHa extends AppLocalizations {
   String get totalChapters => 'Babobi';
 
   @override
+  String nextEpisodeRelease(int episode) {
+    return 'Episode $episode will be released in';
+  }
+
+  @override
   String get genres => 'Nau\'o\'i';
 
   @override
@@ -221,6 +226,9 @@ class AppLocalizationsHa extends AppLocalizations {
   }
 
   @override
+  String get topScore => 'Top Score';
+
+  @override
   String mostFavourite(String type) {
     return 'Mafi So $type';
   }
@@ -292,6 +300,12 @@ class AppLocalizationsHa extends AppLocalizations {
 
   @override
   String get dtu => 'Sabon Bincike';
+
+  @override
+  String get rtl => 'Right To Left';
+
+  @override
+  String get ltr => 'Left To Right';
 
   @override
   String get direction => 'Direction';
@@ -382,9 +396,6 @@ class AppLocalizationsHa extends AppLocalizations {
 
   @override
   String get characters => 'Hanyoyin';
-
-  @override
-  String get description => 'Takaitaccen Bayani';
 
   @override
   String get synopsis => 'Takaitaccen Bayani';
@@ -661,6 +672,19 @@ class AppLocalizationsHa extends AppLocalizations {
 
   @override
   String get enableDarkMode => 'Kunna Yanayin Duhu';
+
+  @override
+  String get glassEffect => 'Glass Effect';
+
+  @override
+  String get glassEffectDescription =>
+      'Gives a frosted glass effect to the app';
+
+  @override
+  String get coverTheme => 'Use Cover Theme';
+
+  @override
+  String get coverThemeDescription => 'Use media cover image as theme color';
 
   @override
   String get materialYou => 'Material You';

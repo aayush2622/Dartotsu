@@ -148,6 +148,11 @@ class AppLocalizationsEl extends AppLocalizations {
   String get totalChapters => 'Κεφάλαια';
 
   @override
+  String nextEpisodeRelease(int episode) {
+    return 'Episode $episode will be released in';
+  }
+
+  @override
   String get genres => 'Είδη';
 
   @override
@@ -221,6 +226,9 @@ class AppLocalizationsEl extends AppLocalizations {
   }
 
   @override
+  String get topScore => 'Top Score';
+
+  @override
   String mostFavourite(String type) {
     return 'Πιο Δημοφιλές $type';
   }
@@ -292,6 +300,12 @@ class AppLocalizationsEl extends AppLocalizations {
 
   @override
   String get dtu => 'Υπό Ενημέρωση';
+
+  @override
+  String get rtl => 'Right To Left';
+
+  @override
+  String get ltr => 'Left To Right';
 
   @override
   String get direction => 'Σκηνοθεσία';
@@ -381,9 +395,6 @@ class AppLocalizationsEl extends AppLocalizations {
 
   @override
   String get characters => 'Χαρακτήρες';
-
-  @override
-  String get description => 'Περίληψη';
 
   @override
   String get synopsis => 'Περίληψη';
@@ -666,6 +677,19 @@ class AppLocalizationsEl extends AppLocalizations {
 
   @override
   String get enableDarkMode => 'Ενεργοποιήστε τη Σκοτεινή Λειτουργία';
+
+  @override
+  String get glassEffect => 'Glass Effect';
+
+  @override
+  String get glassEffectDescription =>
+      'Gives a frosted glass effect to the app';
+
+  @override
+  String get coverTheme => 'Use Cover Theme';
+
+  @override
+  String get coverThemeDescription => 'Use media cover image as theme color';
 
   @override
   String get materialYou => 'Material You';

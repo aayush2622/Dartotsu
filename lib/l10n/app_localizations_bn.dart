@@ -148,6 +148,11 @@ class AppLocalizationsBn extends AppLocalizations {
   String get totalChapters => 'মোট অধ্যায়';
 
   @override
+  String nextEpisodeRelease(int episode) {
+    return 'Episode $episode will be released in';
+  }
+
+  @override
   String get genres => 'ধরণ';
 
   @override
@@ -219,6 +224,9 @@ class AppLocalizationsBn extends AppLocalizations {
   String topRated(String type) {
     return 'শীর্ষ রেটেড $type';
   }
+
+  @override
+  String get topScore => 'Top Score';
 
   @override
   String mostFavourite(String type) {
@@ -293,7 +301,13 @@ class AppLocalizationsBn extends AppLocalizations {
   String get dtu => 'ডাউনলোড করা হয়েছে';
 
   @override
-  String get direction => 'Direction';
+  String get rtl => 'Right To Left';
+
+  @override
+  String get ltr => 'Left To Right';
+
+  @override
+  String get direction => 'দিক';
 
   @override
   String get episodeWatched => 'দেখা হয়েছে';
@@ -381,9 +395,6 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get characters => 'চরিত্র';
-
-  @override
-  String get description => 'সারাংশ';
 
   @override
   String get synopsis => 'সারাংশ';
@@ -626,13 +637,13 @@ class AppLocalizationsBn extends AppLocalizations {
   String get bottomPaddingDescription => 'উপশিরোনামের নিচের প্যাডিং';
 
   @override
-  String get readerSettings => 'Reader Settings';
+  String get readerSettings => 'পাঠক সেটিংস';
 
   @override
   String get readerSettingsDesc => 'Change reader settings';
 
   @override
-  String get spacedPages => 'Spaced Pages';
+  String get spacedPages => 'স্পেসড পেজেস';
 
   @override
   String get spacedPagesDesc => 'Add space between pages';
@@ -644,7 +655,7 @@ class AppLocalizationsBn extends AppLocalizations {
   String get hideScrollbarDesc => 'Hide scrollbar while reading';
 
   @override
-  String get hidePageNumber => 'Hide Page Number';
+  String get hidePageNumber => 'পৃষ্ঠা নম্বর লুকান';
 
   @override
   String get hidePageNumberDesc => 'Hide page number while reading';
@@ -661,6 +672,19 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get enableDarkMode => 'ডার্ক মোড সক্রিয় করুন';
+
+  @override
+  String get glassEffect => 'Glass Effect';
+
+  @override
+  String get glassEffectDescription =>
+      'Gives a frosted glass effect to the app';
+
+  @override
+  String get coverTheme => 'Use Cover Theme';
+
+  @override
+  String get coverThemeDescription => 'Use media cover image as theme color';
 
   @override
   String get materialYou => 'Material You';

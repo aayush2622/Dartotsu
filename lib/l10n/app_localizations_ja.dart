@@ -147,6 +147,11 @@ class AppLocalizationsJa extends AppLocalizations {
   String get totalChapters => 'チャプター';
 
   @override
+  String nextEpisodeRelease(int episode) {
+    return 'Episode $episode will be released in';
+  }
+
+  @override
   String get genres => 'ジャンル';
 
   @override
@@ -164,7 +169,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get reading => '読書';
 
   @override
-  String get readStatus => '採用情報';
+  String get readStatus => '読んだ';
 
   @override
   String get watchStatus => 'ウォッチ';
@@ -218,6 +223,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String topRated(String type) {
     return 'トップ定格$type';
   }
+
+  @override
+  String get topScore => 'Top Score';
 
   @override
   String mostFavourite(String type) {
@@ -291,6 +299,12 @@ class AppLocalizationsJa extends AppLocalizations {
   String get dtu => 'アップダウン';
 
   @override
+  String get rtl => 'Right To Left';
+
+  @override
+  String get ltr => 'Left To Right';
+
+  @override
   String get direction => 'アクセス';
 
   @override
@@ -300,7 +314,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get chapterRead => '章の読み';
 
   @override
-  String get outOf => 'お問い合わせ';
+  String get outOf => 'あと';
 
   @override
   String get totalOf => '総計数';
@@ -376,9 +390,6 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get characters => 'キャラクター';
-
-  @override
-  String get description => 'シンプシス';
 
   @override
   String get synopsis => 'シンプシス';
@@ -648,6 +659,19 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get enableDarkMode => 'ダークモードを有効にする';
+
+  @override
+  String get glassEffect => 'Glass Effect';
+
+  @override
+  String get glassEffectDescription =>
+      'Gives a frosted glass effect to the app';
+
+  @override
+  String get coverTheme => 'Use Cover Theme';
+
+  @override
+  String get coverThemeDescription => 'Use media cover image as theme color';
 
   @override
   String get materialYou => 'Material You';

@@ -148,6 +148,11 @@ class AppLocalizationsPl extends AppLocalizations {
   String get totalChapters => 'Rozdziały';
 
   @override
+  String nextEpisodeRelease(int episode) {
+    return 'Episode $episode will be released in';
+  }
+
+  @override
   String get genres => 'Gatunki';
 
   @override
@@ -221,6 +226,9 @@ class AppLocalizationsPl extends AppLocalizations {
   }
 
   @override
+  String get topScore => 'Top Score';
+
+  @override
   String mostFavourite(String type) {
     return 'Najbardziej ulubione $type';
   }
@@ -292,6 +300,12 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get dtu => 'Down To Up';
+
+  @override
+  String get rtl => 'Right To Left';
+
+  @override
+  String get ltr => 'Left To Right';
 
   @override
   String get direction => 'Kierunek';
@@ -381,9 +395,6 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get characters => 'Postacie';
-
-  @override
-  String get description => 'Streszczenie';
 
   @override
   String get synopsis => 'Opis';
@@ -663,6 +674,19 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get enableDarkMode => 'Włącz tryb ciemny';
+
+  @override
+  String get glassEffect => 'Glass Effect';
+
+  @override
+  String get glassEffectDescription =>
+      'Gives a frosted glass effect to the app';
+
+  @override
+  String get coverTheme => 'Use Cover Theme';
+
+  @override
+  String get coverThemeDescription => 'Use media cover image as theme color';
 
   @override
   String get materialYou => 'Material You';

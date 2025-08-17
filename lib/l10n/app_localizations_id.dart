@@ -147,6 +147,11 @@ class AppLocalizationsId extends AppLocalizations {
   String get totalChapters => 'Login';
 
   @override
+  String nextEpisodeRelease(int episode) {
+    return 'Episode $episode will be released in';
+  }
+
+  @override
   String get genres => 'Login';
 
   @override
@@ -218,6 +223,9 @@ class AppLocalizationsId extends AppLocalizations {
   String topRated(String type) {
     return 'Nilai teratas $type';
   }
+
+  @override
+  String get topScore => 'Top Score';
 
   @override
   String mostFavourite(String type) {
@@ -292,6 +300,12 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get dtu => 'Sitemap';
+
+  @override
+  String get rtl => 'Right To Left';
+
+  @override
+  String get ltr => 'Left To Right';
 
   @override
   String get direction => 'Login';
@@ -381,9 +395,6 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get characters => 'Login';
-
-  @override
-  String get description => 'Login';
 
   @override
   String get synopsis => 'Login';
@@ -662,6 +673,19 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get enableDarkMode => 'Aktifkan Mode Gelap';
+
+  @override
+  String get glassEffect => 'Glass Effect';
+
+  @override
+  String get glassEffectDescription =>
+      'Gives a frosted glass effect to the app';
+
+  @override
+  String get coverTheme => 'Use Cover Theme';
+
+  @override
+  String get coverThemeDescription => 'Use media cover image as theme color';
 
   @override
   String get materialYou => 'Material You';

@@ -147,6 +147,11 @@ class AppLocalizationsKo extends AppLocalizations {
   String get totalChapters => '한국어';
 
   @override
+  String nextEpisodeRelease(int episode) {
+    return 'Episode $episode will be released in';
+  }
+
+  @override
   String get genres => '이름 *';
 
   @override
@@ -220,6 +225,9 @@ class AppLocalizationsKo extends AppLocalizations {
   }
 
   @override
+  String get topScore => 'Top Score';
+
+  @override
   String mostFavourite(String type) {
     return '대부분의 Favourite $type';
   }
@@ -289,6 +297,12 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get dtu => '맨 위로';
+
+  @override
+  String get rtl => 'Right To Left';
+
+  @override
+  String get ltr => 'Left To Right';
 
   @override
   String get direction => '제품정보';
@@ -376,9 +390,6 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get characters => '이름 *';
-
-  @override
-  String get description => '관련 기사';
 
   @override
   String get synopsis => '관련 기사';
@@ -648,6 +659,19 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get enableDarkMode => '다크 모드 활성화';
+
+  @override
+  String get glassEffect => 'Glass Effect';
+
+  @override
+  String get glassEffectDescription =>
+      'Gives a frosted glass effect to the app';
+
+  @override
+  String get coverTheme => 'Use Cover Theme';
+
+  @override
+  String get coverThemeDescription => 'Use media cover image as theme color';
 
   @override
   String get materialYou => 'Material You';

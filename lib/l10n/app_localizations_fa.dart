@@ -147,6 +147,11 @@ class AppLocalizationsFa extends AppLocalizations {
   String get totalChapters => 'فصول';
 
   @override
+  String nextEpisodeRelease(int episode) {
+    return 'Episode $episode will be released in';
+  }
+
+  @override
   String get genres => 'ژانرها';
 
   @override
@@ -218,6 +223,9 @@ class AppLocalizationsFa extends AppLocalizations {
   String topRated(String type) {
     return 'برترین $type';
   }
+
+  @override
+  String get topScore => 'Top Score';
 
   @override
   String mostFavourite(String type) {
@@ -292,6 +300,12 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get dtu => 'پایین تا بالا';
+
+  @override
+  String get rtl => 'Right To Left';
+
+  @override
+  String get ltr => 'Left To Right';
 
   @override
   String get direction => 'جهت هدایت';
@@ -380,9 +394,6 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get characters => 'شخصیت‌ها';
-
-  @override
-  String get description => 'خلاصه';
 
   @override
   String get synopsis => 'خلاصه';
@@ -657,6 +668,19 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get enableDarkMode => 'فعال‌سازی حالت تاریک';
+
+  @override
+  String get glassEffect => 'Glass Effect';
+
+  @override
+  String get glassEffectDescription =>
+      'Gives a frosted glass effect to the app';
+
+  @override
+  String get coverTheme => 'Use Cover Theme';
+
+  @override
+  String get coverThemeDescription => 'Use media cover image as theme color';
 
   @override
   String get materialYou => 'Material You';

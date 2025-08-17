@@ -148,6 +148,11 @@ class AppLocalizationsKn extends AppLocalizations {
   String get totalChapters => 'ಅಧ್ಯಾಯಗಳು';
 
   @override
+  String nextEpisodeRelease(int episode) {
+    return 'Episode $episode will be released in';
+  }
+
+  @override
   String get genres => 'ಪ್ರಕಾರಗಳು';
 
   @override
@@ -221,6 +226,9 @@ class AppLocalizationsKn extends AppLocalizations {
   }
 
   @override
+  String get topScore => 'Top Score';
+
+  @override
   String mostFavourite(String type) {
     return 'ಅತ್ಯಂತ ಇಷ್ಟಪಡುವ $type';
   }
@@ -292,6 +300,12 @@ class AppLocalizationsKn extends AppLocalizations {
 
   @override
   String get dtu => 'Down To Up';
+
+  @override
+  String get rtl => 'Right To Left';
+
+  @override
+  String get ltr => 'Left To Right';
 
   @override
   String get direction => 'Direction';
@@ -382,9 +396,6 @@ class AppLocalizationsKn extends AppLocalizations {
 
   @override
   String get characters => 'ಪಾತ್ರಗಳು';
-
-  @override
-  String get description => 'ಸಾರಾಂಶ';
 
   @override
   String get synopsis => 'ಸಾರಾಂಶ';
@@ -663,6 +674,19 @@ class AppLocalizationsKn extends AppLocalizations {
 
   @override
   String get enableDarkMode => 'ಡಾರ್ಕ್ ಮೋಡ್ ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ';
+
+  @override
+  String get glassEffect => 'Glass Effect';
+
+  @override
+  String get glassEffectDescription =>
+      'Gives a frosted glass effect to the app';
+
+  @override
+  String get coverTheme => 'Use Cover Theme';
+
+  @override
+  String get coverThemeDescription => 'Use media cover image as theme color';
 
   @override
   String get materialYou => 'Material You';

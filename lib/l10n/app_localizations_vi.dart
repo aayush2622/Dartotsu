@@ -147,6 +147,11 @@ class AppLocalizationsVi extends AppLocalizations {
   String get totalChapters => 'Chương';
 
   @override
+  String nextEpisodeRelease(int episode) {
+    return 'Episode $episode will be released in';
+  }
+
+  @override
   String get genres => 'Thể loại';
 
   @override
@@ -220,6 +225,9 @@ class AppLocalizationsVi extends AppLocalizations {
   }
 
   @override
+  String get topScore => 'Top Score';
+
+  @override
   String mostFavourite(String type) {
     return '$type yêu thích nhất';
   }
@@ -291,6 +299,12 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get dtu => 'Dịch đến hiện tại';
+
+  @override
+  String get rtl => 'Right To Left';
+
+  @override
+  String get ltr => 'Left To Right';
 
   @override
   String get direction => 'Direction';
@@ -381,9 +395,6 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get characters => 'Nhân vật';
-
-  @override
-  String get description => 'Tóm tắt';
 
   @override
   String get synopsis => 'Tóm tắt';
@@ -662,6 +673,19 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get enableDarkMode => 'Bật chế độ tối';
+
+  @override
+  String get glassEffect => 'Glass Effect';
+
+  @override
+  String get glassEffectDescription =>
+      'Gives a frosted glass effect to the app';
+
+  @override
+  String get coverTheme => 'Use Cover Theme';
+
+  @override
+  String get coverThemeDescription => 'Use media cover image as theme color';
 
   @override
   String get materialYou => 'Material You';

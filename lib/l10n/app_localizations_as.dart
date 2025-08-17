@@ -12,8 +12,7 @@ class AppLocalizationsAs extends AppLocalizations {
   String get appName => 'Dartotsu';
 
   @override
-  String get appTagline =>
-      'এনিমে আৰু মাংগা ট্রেক \nকৰাৰ বাবে নতুন সৰ্বশ্ৰেষ্ঠ এপ';
+  String get appTagline => 'এনিমে আৰু মাংগা ট্ৰেকিংৰ\nবাবে শ্ৰেষ্ঠ নতুন এপ';
 
   @override
   String get anilist => 'AniList';
@@ -35,7 +34,7 @@ class AppLocalizationsAs extends AppLocalizations {
 
   @override
   String loginTo(String service) {
-    return '$service ত প্ৰৱেশ কৰক';
+    return '$service ত লগইন কৰক';
   }
 
   @override
@@ -44,7 +43,7 @@ class AppLocalizationsAs extends AppLocalizations {
   }
 
   @override
-  String get confirmLogout => 'আপুনি নিশ্চিতভাৱে লগআউট কৰিব বিচাৰেনে?';
+  String get confirmLogout => 'আপুনি নিশ্চিতভাৱে লগআউট কৰিব বিচাৰে?';
 
   @override
   String get anime => 'এনিমে';
@@ -53,34 +52,34 @@ class AppLocalizationsAs extends AppLocalizations {
   String get manga => 'মাংগা';
 
   @override
-  String get manhwa => 'মানৱা';
+  String get manhwa => 'মানহৱা';
 
   @override
-  String get manhua => 'মান্হুৱা';
+  String get manhua => 'মানহুৱা';
 
   @override
-  String get novel => 'উপন্যাস';
+  String get novel => 'নভেল';
 
   @override
-  String get ln => 'লাইট উপন্যাস';
+  String get ln => 'লাইট নভেল';
 
   @override
-  String get home => 'ঘৰ';
+  String get home => 'হোম';
 
   @override
   String get search => 'সন্ধান';
 
   @override
-  String get calendar => 'ক্যালেণ্ডাৰ';
+  String get calendar => 'কেলেণ্ডাৰ';
 
   @override
   String get settings => 'ছেটিংছ';
 
   @override
-  String get watch => 'চোৱা';
+  String get watch => 'চাওক';
 
   @override
-  String get read => 'পঢ়া';
+  String get read => 'পঢ়ক';
 
   @override
   String get info => 'তথ্য';
@@ -95,15 +94,15 @@ class AppLocalizationsAs extends AppLocalizations {
   String get series => 'ধাৰাবাহিক';
 
   @override
-  String get season => 'চিজন';
+  String get season => 'ছিজন';
 
   @override
   String episode(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'খণ্ডসমূহ',
-      one: 'খণ্ড',
+      other: 'এপিচ’ডসমূহ',
+      one: 'এপিচ’ড',
     );
     return '$_temp0';
   }
@@ -124,8 +123,8 @@ class AppLocalizationsAs extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'সৰ্গসমূহ',
-      one: 'সৰ্গ',
+      other: 'খণ্ডসমূহ',
+      one: 'খণ্ড',
     );
     return '$_temp0';
   }
@@ -135,27 +134,32 @@ class AppLocalizationsAs extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'চলচিত্ৰসমূহ',
-      one: 'চলচিত্ৰ',
+      other: 'চলচ্চিত্ৰসমূহ',
+      one: 'চলচ্চিত্ৰ',
     );
     return '$_temp0';
   }
 
   @override
-  String get totalEpisodes => 'খণ্ডবোৰ';
+  String get totalEpisodes => 'মুঠ এপিচ’ড';
 
   @override
-  String get totalChapters => 'অধ্যায়সমূহ';
+  String get totalChapters => 'মুঠ অধ্যায়';
 
   @override
-  String get genres => 'প্ৰকাৰসমূহ';
+  String nextEpisodeRelease(int episode) {
+    return 'Episode $episode will be released in';
+  }
+
+  @override
+  String get genres => 'ধৰণ';
 
   @override
   String get scanlators => 'স্কেনলেটৰ';
 
   @override
   String list(String type) {
-    return '$type সূচী';
+    return '$type তালিকা';
   }
 
   @override
@@ -165,10 +169,10 @@ class AppLocalizationsAs extends AppLocalizations {
   String get reading => 'পঢ়ি আছে';
 
   @override
-  String get readStatus => 'পঢ়া';
+  String get readStatus => 'পঢ়াৰ স্থিতি';
 
   @override
-  String get watchStatus => 'চোৱা হল';
+  String get watchStatus => 'চোৱাৰ স্থিতি';
 
   @override
   String planned(String type) {
@@ -181,10 +185,10 @@ class AppLocalizationsAs extends AppLocalizations {
   }
 
   @override
-  String get droppedAnime => 'আতৰোৱা এনিমে';
+  String get droppedAnime => 'বাদ দিয়া এনিমে';
 
   @override
-  String get droppedManga => 'আতৰোৱা মাংগা';
+  String get droppedManga => 'বাদ দিয়া মাংগা';
 
   @override
   String noDropped(String type) {
@@ -192,10 +196,10 @@ class AppLocalizationsAs extends AppLocalizations {
   }
 
   @override
-  String get continueReading => 'পঢ়া অব্যাহত ৰাখক';
+  String get continueReading => 'পঢ়ি যাওক';
 
   @override
-  String get continueWatching => 'চোৱা অব্যাহত ৰাখক';
+  String get continueWatching => 'চাই যাওক';
 
   @override
   String browse(String type) {
@@ -213,12 +217,15 @@ class AppLocalizationsAs extends AppLocalizations {
   }
 
   @override
-  String get topAiring => 'শ্ৰেষ্ঠ প্ৰসাৰিত';
+  String get topAiring => 'শীৰ্ষ প্ৰচাৰিত';
 
   @override
   String topRated(String type) {
-    return 'সৰ্বোচ্চ ৰেটেড $type';
+    return 'শীৰ্ষ ৰেটেড $type';
   }
+
+  @override
+  String get topScore => 'Top Score';
 
   @override
   String mostFavourite(String type) {
@@ -226,26 +233,26 @@ class AppLocalizationsAs extends AppLocalizations {
   }
 
   @override
-  String get thisSeason => 'এই সিজন';
+  String get thisSeason => 'এই ছিজন';
 
   @override
-  String get nextSeason => 'পৰৱৰ্তী সিজন';
+  String get nextSeason => 'পৰৱৰ্তী ছিজন';
 
   @override
-  String get previousSeason => 'পূৰ্বৱৰ্তী সিজন';
+  String get previousSeason => 'পূৰ্বৰ ছিজন';
 
   @override
   String get recommended => 'পৰামৰ্শিত';
 
   @override
   String get recommendationsEmptyMessage =>
-      'পৰামৰ্শ পাবলৈ কিছুমান এনিমে বা মাংগা চাওক/পঢ়ক';
+      'পৰামৰ্শ পাবলৈ কিছু এনিমে বা মাংগা চাওক/পঢ়ক';
 
   @override
-  String get recentUpdates => 'শেহতীয়া আপডেটসমূহ';
+  String get recentUpdates => 'শেহতীয়া আপডেট';
 
   @override
-  String get allCaughtUpNew => 'সকলো হ\'ল, নতুন কি?';
+  String get allCaughtUpNew => 'সকলো শেষ, নতুন কি?';
 
   @override
   String favorite(String type) {
@@ -253,14 +260,14 @@ class AppLocalizationsAs extends AppLocalizations {
   }
 
   @override
-  String get favorites => 'প্ৰিয়বোৰ';
+  String get favorites => 'প্ৰিয়সমূহ';
 
   @override
   String get noFavourites =>
-      'দেখাত একো ভাল নালাগে,\nইয়াত ৰাখিবলৈ এটা শ্ব’ লাইক কৰি চাওক।';
+      'কিবা ভাল লগা নাই,\nইয়াত ৰাখিবলৈ এটা শ্ব’ পছন্দ কৰক।';
 
   @override
-  String get noOnHold => 'দেখাত একো স্থগিত ৰখা নাই।';
+  String get noOnHold => 'কিবা স্থগিত কৰা নাই।';
 
   @override
   String manageLayout(String service, String page) {
@@ -269,44 +276,50 @@ class AppLocalizationsAs extends AppLocalizations {
 
   @override
   String manageLayoutDescription(String page) {
-    return 'আপুনি $page পৃষ্ঠাৰ অৱস্থান ড্ৰেগ আৰু ড্ৰপ কৰি সামগ্ৰীসমূহ পৰিচালনা কৰিব পাৰে';
+    return '$page পৃষ্ঠাৰ অৱস্থান ড্ৰেগ আৰু ড্ৰপ কৰি বিষয়বস্তু পৰিচালনা কৰক';
   }
 
   @override
-  String get gridView => 'গ্ৰিড দৃশ্য';
+  String get gridView => 'গ্ৰিড দৰ্শন';
 
   @override
-  String get listView => 'তালিকা দৃশ্য';
+  String get listView => 'তালিকা দৰ্শন';
 
   @override
-  String get compactView => 'সংকুচিত দৃশ্য';
+  String get compactView => 'সংক্ষিপ্ত দৰ্শন';
 
   @override
-  String get layout => 'গাঁথনি';
+  String get layout => 'বিন্যাস';
 
   @override
-  String get sort => 'সজোৱা';
+  String get sort => 'সজাওক';
 
   @override
-  String get utd => 'ওপৰৰ পৰা তলৰলৈ';
+  String get utd => 'ওপৰৰ পৰা তললৈ';
 
   @override
   String get dtu => 'তলৰ পৰা ওপৰলৈ';
 
   @override
+  String get rtl => 'Right To Left';
+
+  @override
+  String get ltr => 'Left To Right';
+
+  @override
   String get direction => 'দিশ';
 
   @override
-  String get episodeWatched => 'চোৱা খণ্ড';
+  String get episodeWatched => 'চোৱা এপিচ’ড';
 
   @override
   String get chapterRead => 'পঢ়া অধ্যায়';
 
   @override
-  String get outOf => 'ৰ পৰা';
+  String get outOf => 'ৰ মাজৰ';
 
   @override
-  String get totalOf => 'মুঠৰ পৰা';
+  String get totalOf => 'মুঠৰ মাজৰ';
 
   @override
   String get selected => 'নিৰ্বাচিত';
@@ -319,8 +332,8 @@ class AppLocalizationsAs extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'এক্সটেনচনসমূহ',
-      one: 'এক্সটেনচন',
+      other: 'এক্সটেনশ্যনসমূহ',
+      one: 'এক্সটেনশ্যন',
     );
     return '$_temp0';
   }
@@ -332,68 +345,64 @@ class AppLocalizationsAs extends AppLocalizations {
 
   @override
   String installed(String type) {
-    return 'স্থাপিত $type';
+    return 'ইনষ্টল কৰা $type';
   }
 
   @override
   String get extensionsDescription =>
-      'অধিক কাৰ্যক্ষমতাৰ বাবে এক্সটেনচনসমূহ ইনষ্টল আৰু ব্যৱস্থাপন কৰক';
+      'অধিক কাৰ্যক্ষমতাৰ বাবে এক্সটেনশ্যনসমূহ ইনষ্টল আৰু পৰিচালনা কৰক';
 
   @override
-  String get addAnimeRepo => 'এনিমে ৰেপো যোগ কৰক';
+  String get addAnimeRepo => 'এনিমে ৰেপ’ যোগ কৰক';
 
   @override
-  String get addAnimeRepoDesc => 'বিভিন্ন উৎসৰ পৰা এনিমে ৰেপো যোগ কৰক';
+  String get addAnimeRepoDesc => 'বিভিন্ন উৎসৰ পৰা এনিমে ৰেপ’ যোগ কৰক';
 
   @override
-  String get addMangaRepo => 'মাংগা ৰেপো যোগ কৰক';
+  String get addMangaRepo => 'মাংগা ৰেপ’ যোগ কৰক';
 
   @override
-  String get addMangaRepoDesc => 'বিভিন্ন উৎসৰ পৰা মাংগা ৰেপো যোগ কৰক';
+  String get addMangaRepoDesc => 'বিভিন্ন উৎসৰ পৰা মাংগা ৰেপ’ যোগ কৰক';
 
   @override
-  String get addNovelRepo => 'নভেল ৰেপো যোগ কৰক';
+  String get addNovelRepo => 'নভেল ৰেপ’ যোগ কৰক';
 
   @override
-  String get addNovelRepoDesc => 'বিভিন্ন উৎসৰ পৰা নভেল ৰেপো যোগ কৰক';
+  String get addNovelRepoDesc => 'বিভিন্ন উৎসৰ পৰা নভেল ৰেপ’ যোগ কৰক';
 
   @override
-  String get loadExtensionsIcon => 'এক্সটেনচনসমূহৰ আইকন লোড কৰক';
+  String get loadExtensionsIcon => 'এক্সটেনশ্যনৰ আইকন লোড কৰক';
 
   @override
-  String get loadExtensionsIconDesc =>
-      'যদি এক্সটেনচনসমূহৰ পৃষ্ঠা লেগ কৰে তেন্তে অক্ষম কৰক';
+  String get loadExtensionsIconDesc => 'এক্সটেনশ্যন পৃষ্ঠা লেগ কৰিলে অক্ষম কৰক';
 
   @override
-  String get autoUpdate => 'অটো আপডেট';
+  String get autoUpdate => 'স্বয়ংক্ৰিয় আপডেট';
 
   @override
-  String get autoUpdateDesc => 'এক্সটেনচনসমূহ স্বয়ং-আপডেট কৰক';
+  String get autoUpdateDesc => 'এক্সটেনশ্যনসমূহ স্বয়ংক্ৰিয়ভাৱে আপডেট কৰক';
 
   @override
   String get installSourceToStart =>
-      'আৰম্ভ কৰিবলৈ সম্প্ৰসাৰণ পৃষ্ঠাৰ পৰা এটা উৎস সংস্থাপন কৰক';
+      'আৰম্ভ কৰিবলৈ এক্সটেনশ্যন পৃষ্ঠাৰ পৰা এটা উৎস ইনষ্টল কৰক';
 
   @override
   String get author => 'লেখক';
 
   @override
-  String get averageDuration => 'গড় সময়সীমা';
+  String get averageDuration => 'গড় সময়';
 
   @override
-  String get characters => 'পাত্ৰসমূহ';
+  String get characters => 'চৰিত্ৰসমূহ';
 
   @override
-  String get description => 'সাৰাংশ';
-
-  @override
-  String get synopsis => 'ছিনপচিছ';
+  String get synopsis => 'সাৰাংশ';
 
   @override
   String get endDate => 'শেষৰ তাৰিখ';
 
   @override
-  String get format => 'আকাৰ';
+  String get format => 'ফৰ্মেট';
 
   @override
   String get meanScore => 'গড় স্ক’ৰ';
@@ -402,7 +411,7 @@ class AppLocalizationsAs extends AppLocalizations {
   String get name => 'নাম';
 
   @override
-  String get nameRomaji => 'নাম (ৰোমাজী)';
+  String get nameRomaji => 'নাম (ৰোমাজি)';
 
   @override
   String get popularity => 'জনপ্ৰিয়তা';
@@ -411,31 +420,31 @@ class AppLocalizationsAs extends AppLocalizations {
   String get relations => 'সম্পৰ্ক';
 
   @override
-  String get prequel => 'পূৰ্ববর্তী';
+  String get prequel => 'পূৰ্বকথা';
 
   @override
-  String get sequel => 'পৰৱৰ্তী';
+  String get sequel => 'পৰৱৰ্তী কথা';
 
   @override
-  String get source => 'উত্‍স';
+  String get source => 'উৎস';
 
   @override
-  String get staff => 'কৰ্মচাৰী';
+  String get staff => 'কৰ্মী';
 
   @override
-  String get startDate => 'আৰম্ভণিৰ তাৰিখ';
+  String get startDate => 'আৰম্ভৰ তাৰিখ';
 
   @override
   String get status => 'স্থিতি';
 
   @override
-  String get studio => 'ষ্টুডিঅ';
+  String get studio => 'ষ্টুডিঅ’';
 
   @override
   String get synonyms => 'প্ৰতিশব্দ';
 
   @override
-  String get tags => 'টেগ';
+  String get tags => 'টেগসমূহ';
 
   @override
   String get total => 'মুঠ';
@@ -447,13 +456,13 @@ class AppLocalizationsAs extends AppLocalizations {
   String get expandText => 'অধিক দেখুৱাওক';
 
   @override
-  String get comingSoon => 'আহি আছে';
+  String get comingSoon => 'শীঘ্ৰে আহিব';
 
   @override
-  String get wrongTitle => 'ভুল শিৰোনাম?';
+  String get wrongTitle => 'শিৰোনাম ভুল?';
 
   @override
-  String get youTube => 'YouTube ত প্লে কৰক?';
+  String get youTube => 'ইউটিউবত প্লে কৰক?';
 
   @override
   String get mediaNotFound => 'কোনো মিডিয়া পোৱা নগ’ল';
@@ -466,8 +475,8 @@ class AppLocalizationsAs extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'কাৰ্য্যসমূহ',
-      one: 'কাৰ্য্য',
+      other: 'কাৰ্যসমূহ',
+      one: 'কাৰ্য',
     );
     return '$_temp0';
   }
@@ -480,152 +489,151 @@ class AppLocalizationsAs extends AppLocalizations {
 
   @override
   String get accountDescription =>
-      'আপোনাৰ এনিলিস্ট, এমএএল আৰু ডিছক\'ৰ্ড একাউণ্ট সহজে ব্যৱস্থাপন কৰক';
+      'আপোনাৰ এনিলিষ্ট, মাইএনিমেলিষ্ট আৰু ডিস্ক’ৰ্ড একাউণ্ট সহজে পৰিচালনা কৰক';
 
   @override
   String get common => 'সাধাৰণ';
 
   @override
   String get commonDescription =>
-      'এপৰ সন্ত্ৰাসবিহীন ব্যৱহাৰৰ বাবে সাধাৰণ ছেটিংসমূহ এক্সেছ কৰক';
+      'এপৰ মসৃণ ব্যৱহাৰৰ বাবে সাধাৰণ ছেটিংছলৈ প্ৰৱেশ কৰক';
 
   @override
   String get animeDescription =>
-      'আপোনাৰ এনিমে পছন্দসমূহ ব্যক্তিগতকৰণ আৰু ব্যৱস্থাপন কৰক';
+      'আপোনাৰ এনিমে পছন্দসমূহ ব্যক্তিগতকৰণ আৰু পৰিচালনা কৰক';
 
   @override
   String get mangaDescription =>
-      'আপোনাৰ মাংগা অভিজ্ঞতা সংগঠিত আৰু অনুকূলিত কৰক';
+      'আপোনাৰ মাংগা অভিজ্ঞতা সংগঠিত আৰু কাষ্টমাইজ কৰক';
 
   @override
-  String get about => 'সম্পৰ্কে';
+  String get about => 'সম্পৰ্কীয়';
 
   @override
-  String get aboutDescription => 'এপ আৰু ইয়াৰ নিৰ্মাতাসকলৰ বিষয়ে অধিক জানক';
+  String get aboutDescription => 'এপ আৰু ইয়াৰ নিৰ্মাতাসকলৰ বিষয়ে অধিক জানক';
 
   @override
   String get notifications => 'জাননীসমূহ';
 
   @override
   String get notificationsDescription =>
-      'কিদৰে আৰু কেতিয়া আপুনি জাননী পাব সেয়া সংহত কৰক';
+      'জাননী কেনেকৈ আৰু কেতিয়া পাব তাক ছেট কৰক';
 
   @override
-  String get offlineMode => 'অফলাইন ম’ড';
+  String get offlineMode => 'অফলাইন মোড';
 
   @override
-  String get offlineModeDescription =>
-      'ইণ্টাৰনেট সংযোগ নোহোৱাকৈ এপটো ব্যৱহাৰ কৰক';
+  String get offlineModeDescription => 'ইণ্টাৰনেট সংযোগ অবিহনে এপ ব্যৱহাৰ কৰক';
 
   @override
-  String get incognitoMode => 'ইনক’গনিট’ ম’ড';
+  String get incognitoMode => 'ইনকগনিটো মোড';
 
   @override
   String get incognitoModeDescription =>
-      'আপোনাৰ কাৰ্য্যকলাপ সংৰক্ষণ নকৰাকৈ ব্ৰাউজ কৰক';
+      'আপোনাৰ কাৰ্যকলাপ সাঁচি নোলোৱাকৈ ব্ৰাউজ কৰক';
 
   @override
-  String get hidePrivate => 'গোপনীয়তা লুকুৱাওক';
+  String get hidePrivate => 'গোপনীয় লুকুৱাওক';
 
   @override
   String get hidePrivateDescription =>
-      'হোম পৃষ্ঠাৰ পৰা গোপনীয় ধাৰাবাহিক লুকুৱাওক।';
+      'হোম পৃষ্ঠাৰ পৰা গোপন ধাৰাবাহিক লুকুৱাওক।';
 
   @override
-  String get hiddenMedia => 'গুপ্ত মিডিয়া';
+  String get hiddenMedia => 'গোপন মিডিয়া';
 
   @override
-  String get noHiddenMediaFound => 'কোনো গুপ্ত মিডিয়া পোৱা নগ’ল';
+  String get noHiddenMediaFound => 'কোনো গোপন মিডিয়া পোৱা নগ’ল';
 
   @override
   String get playerSettingsTitle => 'প্লেয়াৰ ছেটিংছ';
 
   @override
-  String get playerSettingsDesc => 'প্লেয়াৰ ছেটিংছ সলনি কৰক';
+  String get playerSettingsDesc => 'প্লেয়াৰ ছেটিংছ সলনি কৰক';
 
   @override
   String get speed => 'গতি';
 
   @override
-  String get speedDescription => 'প্লেয়াৰৰ বাবে ডিফল্ট গতি';
+  String get speedDescription => 'প্লেয়াৰৰ বাবে ডিফল্ট গতি';
 
   @override
   String get cursedSpeed => 'অভিশপ্ত গতি';
 
   @override
-  String get cursedSpeedDescription => 'জীৱনত অত্যধিক ব্যস্ত থকা মানুহৰ বাবে';
+  String get cursedSpeedDescription => 'বৰ ব্যস্ত জীৱন যাপন কৰাসকলৰ বাবে';
 
   @override
-  String get resizeMode => 'ৰীছাইজ ম’ড';
+  String get resizeMode => 'ৰিছাইজ মোড';
 
   @override
-  String get resizeModeDescription => 'প্লেয়াৰৰ বাবে ডিফল্ট ৰীছাইজ ম’ড';
+  String get resizeModeDescription => 'প্লেয়াৰৰ বাবে ডিফল্ট ৰিছাইজ মোড';
 
   @override
-  String get skipButton => 'স্কিপ বুটাম';
+  String get skipButton => 'এৰি দিয়ক বাটন';
 
   @override
-  String get skipButtonDescription => 'স্কিপ বুটামৰ সময়সীমা';
+  String get skipButtonDescription => 'এৰি দিয়ক বাটনৰ সময়সীমা';
 
   @override
-  String get thumbLessSeekBar => 'থাম্ব নথকা চEEK বাৰ';
+  String get thumbLessSeekBar => 'থাম্ববিহীন ছিক বাৰ';
 
   @override
-  String get thumbLessSeekBarDesc => 'চEEK বাৰৰ পৰা থাম্ব আঁতৰাও';
+  String get thumbLessSeekBarDesc => 'ছিক বাৰৰ পৰা থাম্ব আঁতৰাওক';
 
   @override
-  String get subtitles => 'সাবটাইটল';
+  String get subtitles => 'ছাবটাইটেল';
 
   @override
-  String get showSubtitles => 'সাবটাইটলসমূহ দেখুৱাওক';
+  String get showSubtitles => 'ছাবটাইটেল দেখুৱাওক';
 
   @override
-  String get showSubtitlesDescription => 'অবিকল্পিতভাৱে সাবটাইটলসমূহ দেখুৱাওক';
+  String get showSubtitlesDescription => 'ডিফল্ট হিচাপে ছাবটাইটেল দেখুৱাওক';
 
   @override
-  String get subtitlePreview => 'সাবটাইটল প্ৰিভিউ';
+  String get subtitlePreview => 'ছাবটাইটেল প্ৰিভিউ';
 
   @override
   String get fontColor => 'ফণ্টৰ ৰঙ';
 
   @override
-  String get fontColorDescription => 'সাবটাইটেলৰ ফণ্ট ৰঙ';
+  String get fontColorDescription => 'ছাবটাইটেলৰ ফণ্টৰ ৰঙ';
 
   @override
-  String get fontFamily => 'ফণ্ট পৰিয়াল';
+  String get fontFamily => 'ফণ্ট পৰিয়াল';
 
   @override
-  String get fontFamilyDescription => 'সাবটাইটেলৰ ফণ্ট পৰিয়াল';
+  String get fontFamilyDescription => 'ছাবটাইটেলৰ ফণ্ট পৰিয়াল';
 
   @override
   String get fontSize => 'ফণ্টৰ আকাৰ';
 
   @override
-  String get fontSizeDescription => 'সাবটাইটেলৰ ফণ্ট আকাৰ';
+  String get fontSizeDescription => 'ছাবটাইটেলৰ ফণ্টৰ আকাৰ';
 
   @override
-  String get fontWeight => 'ফন্টৰ ওজন';
+  String get fontWeight => 'ফণ্টৰ ওজন';
 
   @override
-  String get fontWeightDescription => 'সাবটাইটেলৰ ফন্টৰ ওজন';
+  String get fontWeightDescription => 'ছাবটাইটেলৰ ফণ্টৰ ওজন';
 
   @override
-  String get backgroundColor => 'পটভূমি ৰঙ';
+  String get backgroundColor => 'পটভূমিৰ ৰঙ';
 
   @override
-  String get backgroundColorDescription => 'সাবটাইটেলৰ পটভূমি ৰঙ';
+  String get backgroundColorDescription => 'ছাবটাইটেলৰ পটভূমিৰ ৰঙ';
 
   @override
-  String get outlineColor => 'ৰূপৰেখা ৰং';
+  String get outlineColor => 'ৰূপৰেখাৰ ৰঙ';
 
   @override
-  String get outlineColorDescription => 'সাবটাইটেলৰ ৰূপৰেখা ৰং';
+  String get outlineColorDescription => 'ছাবটাইটেলৰ ৰূপৰেখাৰ ৰঙ';
 
   @override
   String get bottomPadding => 'তলৰ পেডিং';
 
   @override
-  String get bottomPaddingDescription => 'সাবটাইটেলৰ তলৰ পেডিং';
+  String get bottomPaddingDescription => 'ছাবটাইটেলৰ তলৰ পেডিং';
 
   @override
   String get readerSettings => 'ৰিডাৰ ছেটিংছ';
@@ -634,63 +642,75 @@ class AppLocalizationsAs extends AppLocalizations {
   String get readerSettingsDesc => 'ৰিডাৰ ছেটিংছ সলনি কৰক';
 
   @override
-  String get spacedPages => 'পৃষ্ঠাৰ মাজত ফাঁক';
+  String get spacedPages => 'পৃষ্ঠাৰ ফাঁক';
 
   @override
-  String get spacedPagesDesc => 'পৃষ্ঠাবোৰৰ মাজত ফাঁক যোগ কৰক';
+  String get spacedPagesDesc => 'পৃষ্ঠাৰ মাজত ফাঁক যোগ কৰক';
 
   @override
-  String get hideScrollbar => 'স্ক্ৰ\'ল বাৰ লুকাওক';
+  String get hideScrollbar => 'স্ক্ৰলবাৰ লুকুৱাওক';
 
   @override
-  String get hideScrollbarDesc => 'পঢ়োঁতে স্ক্ৰ\'ল বাৰ লুকুৱাওক';
+  String get hideScrollbarDesc => 'পঢ়োঁতে স্ক্ৰলবাৰ লুকুৱাওক';
 
   @override
-  String get hidePageNumber => 'পৃষ্ঠাৰ সংখ্যা লুকাওক';
+  String get hidePageNumber => 'পৃষ্ঠাৰ নম্বৰ লুকুৱাওক';
 
   @override
-  String get hidePageNumberDesc => 'পঢ়োঁতে পৃষ্ঠাৰ সংখ্যা লুকুৱাওক';
+  String get hidePageNumberDesc => 'পঢ়োঁতে পৃষ্ঠাৰ নম্বৰ লুকুৱাওক';
 
   @override
-  String get theme => 'থীম';
+  String get theme => 'থিম';
 
   @override
-  String get themeDescription => 'আপোনাৰ এপৰ আকাৰ-প্ৰকাৰ আৰু আভাস অনুকূলিত কৰক';
+  String get themeDescription => 'এপৰ চেহেৰা আৰু অনুভূতি কাষ্টমাইজ কৰক';
 
   @override
-  String get darkMode => 'ডাৰ্ক ম’ড';
+  String get darkMode => 'ডাৰ্ক মোড';
 
   @override
-  String get enableDarkMode => 'ডাৰ্ক ম’ড সক্ৰিয় কৰক';
+  String get enableDarkMode => 'ডাৰ্ক মোড সক্ৰিয় কৰক';
+
+  @override
+  String get glassEffect => 'Glass Effect';
+
+  @override
+  String get glassEffectDescription =>
+      'Gives a frosted glass effect to the app';
+
+  @override
+  String get coverTheme => 'Use Cover Theme';
+
+  @override
+  String get coverThemeDescription => 'Use media cover image as theme color';
 
   @override
   String get materialYou => 'Material You';
 
   @override
   String get materialYouDescription =>
-      'আপোনাৰ ৱ’লপেপাৰৰ দৰে একে ৰং মিল থকা থীম ব্যৱহাৰ কৰক';
+      'আপোনাৰ ৱালপেপাৰৰ সৈতে মিল থকা ৰঙৰ থিম ব্যৱহাৰ কৰক';
 
   @override
-  String get customTheme => 'নিজস্ব থীম';
+  String get customTheme => 'নিজৰ থিম';
 
   @override
-  String get customThemeDescription =>
-      'আপোনাৰ নিজস্ব ৰঙ থীম হিচাপে ব্যৱহাৰ কৰক';
+  String get customThemeDescription => 'নিজৰ ৰঙৰ থিম ব্যৱহাৰ কৰক';
 
   @override
-  String get oledThemeVariant => 'ওএলইডি থীম ভেৰিয়েণ্ট';
+  String get oledThemeVariant => 'ওএলইডি থিম ভেৰিয়েণ্ট';
 
   @override
-  String get oledThemeVariantDescription => 'ওএলইডি ম’ড সক্ৰিয় কৰক';
+  String get oledThemeVariantDescription => 'ওএলইডি মোড সক্ৰিয় কৰক';
 
   @override
-  String get colorPicker => 'ৰঙ চয়ন কৰক';
+  String get colorPicker => 'ৰঙ নিৰ্বাচক';
 
   @override
-  String get pickColor => 'এটা ৰঙ বাচক';
+  String get pickColor => 'ৰঙ বাছক';
 
   @override
-  String get colorPickerDescription => 'এটা ৰঙ নিৰ্বাচন কৰক';
+  String get colorPickerDescription => 'এটা ৰঙ বাছক';
 
   @override
   String get colorPickerDefault => 'ডিফল্ট';
@@ -703,57 +723,57 @@ class AppLocalizationsAs extends AppLocalizations {
 
   @override
   String get customPathDescription =>
-      'ফাইলসমূহ সংৰক্ষণ কৰিবলে এটা স্বনিৰ্বাচিত পথ নিৰ্ধাৰণ কৰক\nআঁতৰাবলৈ দীঘলীয়াকৈ টিপিব';
+      'ফাইল সাঁচিবলৈ কাষ্টম পথ নিৰ্ধাৰণ কৰক\nআঁতৰাবলৈ দীঘলীয়াকৈ টিপক';
 
   @override
-  String get selectDirectory => 'এটা ডাইৰেকটৰি নিৰ্ব্বাচন কৰক';
+  String get selectDirectory => 'ডাইৰেক্টৰি বাছক';
 
   @override
-  String get selectMediaService => 'মিডিয়া সেৱা নিৰ্ব্বাচন কৰক';
+  String get selectMediaService => 'মিডিয়া সেৱা বাছক';
 
   @override
   String get logFile => 'লগ ফাইল';
 
   @override
-  String get logFileDescription => 'লগ ফাইলটো অংশীদাৰী কৰক';
+  String get logFileDescription => 'লগ ফাইল শ্বেয়াৰ কৰক';
 
   @override
   String get restoreSettings => 'ছেটিংছ পুনৰুদ্ধাৰ কৰক';
 
   @override
-  String get differentCacheManager => 'বেলেগ কেছ মেনেজাৰ';
+  String get differentCacheManager => 'বেলেগ কেশ্ব মেনেজাৰ';
 
   @override
-  String get differentCacheManagerDesc => 'বেলেগ ছবি কেছ মেনেজাৰ ব্যৱহাৰ কৰক';
+  String get differentCacheManagerDesc => 'বেলেগ ছবি কেশ্ব মেনেজাৰ ব্যৱহাৰ কৰক';
 
   @override
-  String get webView => 'ৱেব দৃশ্য';
+  String get webView => 'ৱেব দৰ্শন';
 
   @override
-  String get developersHelpers => 'বিকাশকাৰী/সহায়কৰ';
+  String get developersHelpers => 'বিকাশক/সহায়ক';
 
   @override
-  String get developersHelpersDesc => 'ডাৰ্টটছুৰ বিনা দৰমহাৰ সহায়কৰ দল';
+  String get developersHelpersDesc => 'ডাৰ্ট’ৎচুৰ বিনামূলীয়া সহায়ক দল';
 
   @override
   String get supportMaintainer =>
-      'ডাৰটোত্সুৰ মেইণ্টেইনাৰক সহায় কৰিব বিচাৰে নেকি?\nঅনুদানৰ বিষয়ে বিবেচনা কৰক';
+      'ডাৰ্ট’ৎচুৰ মেইণ্টেইনাৰক সহায় কৰিব বিচাৰেনে?\nঅনুদানৰ কথা বিবেচনা কৰক';
 
   @override
   String get donationGoal => 'বৰ্তমান কোনো অনুদানৰ লক্ষ্য নাই';
 
   @override
-  String get options => 'বিকল্পসমূহ';
+  String get options => 'বিকল্প';
 
   @override
   String get ok => 'ঠিক আছে';
 
   @override
-  String get cancel => 'বাতিল';
+  String get cancel => 'বাতিল কৰক';
 
   @override
-  String get yes => 'হয়';
+  String get yes => 'হয়';
 
   @override
-  String get no => 'নহয়';
+  String get no => 'নহয়';
 }

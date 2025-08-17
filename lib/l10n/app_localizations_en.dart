@@ -147,6 +147,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get totalChapters => 'Chapters';
 
   @override
+  String nextEpisodeRelease(int episode) {
+    return 'Episode $episode will be released in';
+  }
+
+  @override
   String get genres => 'Genres';
 
   @override
@@ -220,6 +225,9 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get topScore => 'Top Score';
+
+  @override
   String mostFavourite(String type) {
     return 'Most Favourite $type';
   }
@@ -291,6 +299,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get dtu => 'Down To Up';
+
+  @override
+  String get rtl => 'Right To Left';
+
+  @override
+  String get ltr => 'Left To Right';
 
   @override
   String get direction => 'Direction';
@@ -380,9 +394,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get characters => 'Characters';
-
-  @override
-  String get description => 'Synopsis';
 
   @override
   String get synopsis => 'Synopsis';
@@ -660,19 +671,32 @@ class AppLocalizationsEn extends AppLocalizations {
   String get enableDarkMode => 'Enable Dark Mode';
 
   @override
+  String get glassEffect => 'Glass Effect';
+
+  @override
+  String get glassEffectDescription =>
+      'Gives a frosted glass effect to the app';
+
+  @override
+  String get coverTheme => 'Use Cover Theme';
+
+  @override
+  String get coverThemeDescription => 'Use media cover image as theme color';
+
+  @override
   String get materialYou => 'Material You';
 
   @override
   String get materialYouDescription => 'Use the same color as your wallpaper';
 
   @override
-  String get customTheme => 'Custom theme';
+  String get customTheme => 'Custom Theme';
 
   @override
   String get customThemeDescription => 'Use your own color for the theme';
 
   @override
-  String get oledThemeVariant => 'OLED theme Variant';
+  String get oledThemeVariant => 'OLED Theme Variant';
 
   @override
   String get oledThemeVariantDescription => 'Enable OLED Mode';

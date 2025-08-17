@@ -148,6 +148,11 @@ class AppLocalizationsHe extends AppLocalizations {
   String get totalChapters => 'פרקים';
 
   @override
+  String nextEpisodeRelease(int episode) {
+    return 'Episode $episode will be released in';
+  }
+
+  @override
   String get genres => 'ז\'אנרים';
 
   @override
@@ -221,6 +226,9 @@ class AppLocalizationsHe extends AppLocalizations {
   }
 
   @override
+  String get topScore => 'Top Score';
+
+  @override
   String mostFavourite(String type) {
     return '$type המועדף ביותר';
   }
@@ -292,6 +300,12 @@ class AppLocalizationsHe extends AppLocalizations {
 
   @override
   String get dtu => 'למטה עד Up';
+
+  @override
+  String get rtl => 'Right To Left';
+
+  @override
+  String get ltr => 'Left To Right';
 
   @override
   String get direction => 'כיוון';
@@ -379,9 +393,6 @@ class AppLocalizationsHe extends AppLocalizations {
 
   @override
   String get characters => 'דמויות';
-
-  @override
-  String get description => 'תקציר';
 
   @override
   String get synopsis => 'תקציר';
@@ -653,6 +664,19 @@ class AppLocalizationsHe extends AppLocalizations {
 
   @override
   String get enableDarkMode => 'הפעל מצב כהה';
+
+  @override
+  String get glassEffect => 'Glass Effect';
+
+  @override
+  String get glassEffectDescription =>
+      'Gives a frosted glass effect to the app';
+
+  @override
+  String get coverTheme => 'Use Cover Theme';
+
+  @override
+  String get coverThemeDescription => 'Use media cover image as theme color';
 
   @override
   String get materialYou => 'Material You';

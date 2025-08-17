@@ -148,6 +148,11 @@ class AppLocalizationsSw extends AppLocalizations {
   String get totalChapters => 'Sura';
 
   @override
+  String nextEpisodeRelease(int episode) {
+    return 'Episode $episode will be released in';
+  }
+
+  @override
   String get genres => 'Mifumo';
 
   @override
@@ -221,6 +226,9 @@ class AppLocalizationsSw extends AppLocalizations {
   }
 
   @override
+  String get topScore => 'Top Score';
+
+  @override
   String mostFavourite(String type) {
     return 'Inayopendwa Zaidi $type';
   }
@@ -292,6 +300,12 @@ class AppLocalizationsSw extends AppLocalizations {
 
   @override
   String get dtu => 'Down To Up';
+
+  @override
+  String get rtl => 'Right To Left';
+
+  @override
+  String get ltr => 'Left To Right';
 
   @override
   String get direction => 'Direction';
@@ -385,9 +399,6 @@ class AppLocalizationsSw extends AppLocalizations {
 
   @override
   String get characters => 'Vitu';
-
-  @override
-  String get description => 'Muhtasari';
 
   @override
   String get synopsis => 'Muhtasari';
@@ -670,6 +681,19 @@ class AppLocalizationsSw extends AppLocalizations {
 
   @override
   String get enableDarkMode => 'Washa Hali ya Giza';
+
+  @override
+  String get glassEffect => 'Glass Effect';
+
+  @override
+  String get glassEffectDescription =>
+      'Gives a frosted glass effect to the app';
+
+  @override
+  String get coverTheme => 'Use Cover Theme';
+
+  @override
+  String get coverThemeDescription => 'Use media cover image as theme color';
 
   @override
   String get materialYou => 'Material You';

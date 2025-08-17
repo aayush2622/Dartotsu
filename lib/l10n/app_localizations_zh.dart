@@ -147,6 +147,11 @@ class AppLocalizationsZh extends AppLocalizations {
   String get totalChapters => '总章节数';
 
   @override
+  String nextEpisodeRelease(int episode) {
+    return 'Episode $episode will be released in';
+  }
+
+  @override
   String get genres => '类型';
 
   @override
@@ -220,6 +225,9 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
+  String get topScore => 'Top Score';
+
+  @override
   String mostFavourite(String type) {
     return '最受欢迎 $type';
   }
@@ -289,6 +297,12 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get dtu => '下载更新';
+
+  @override
+  String get rtl => 'Right To Left';
+
+  @override
+  String get ltr => 'Left To Right';
 
   @override
   String get direction => '方向';
@@ -376,9 +390,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get characters => '角色';
-
-  @override
-  String get description => '描述';
 
   @override
   String get synopsis => '简介';
@@ -648,6 +659,19 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get enableDarkMode => '启用深色模式';
+
+  @override
+  String get glassEffect => 'Glass Effect';
+
+  @override
+  String get glassEffectDescription =>
+      'Gives a frosted glass effect to the app';
+
+  @override
+  String get coverTheme => 'Use Cover Theme';
+
+  @override
+  String get coverThemeDescription => 'Use media cover image as theme color';
 
   @override
   String get materialYou => 'Material You';

@@ -164,6 +164,7 @@ abstract class AppLocalizations {
     Locale('pl'),
     Locale('ps'),
     Locale('pt'),
+    Locale('pt', 'BR'),
     Locale('ru'),
     Locale('sa'),
     Locale('si'),
@@ -382,6 +383,12 @@ abstract class AppLocalizations {
   /// **'Chapters'**
   String get totalChapters;
 
+  /// Message showing the next episode info
+  ///
+  /// In en, this message translates to:
+  /// **'Episode {episode} will be released in'**
+  String nextEpisodeRelease(int episode);
+
   /// No description provided for @genres.
   ///
   /// In en, this message translates to:
@@ -495,6 +502,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Top Rated {type}'**
   String topRated(String type);
+
+  /// No description provided for @topScore.
+  ///
+  /// In en, this message translates to:
+  /// **'Top Score'**
+  String get topScore;
 
   /// No description provided for @mostFavourite.
   ///
@@ -621,6 +634,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Down To Up'**
   String get dtu;
+
+  /// No description provided for @rtl.
+  ///
+  /// In en, this message translates to:
+  /// **'Right To Left'**
+  String get rtl;
+
+  /// No description provided for @ltr.
+  ///
+  /// In en, this message translates to:
+  /// **'Left To Right'**
+  String get ltr;
 
   /// No description provided for @direction.
   ///
@@ -771,12 +796,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Characters'**
   String get characters;
-
-  /// No description provided for @description.
-  ///
-  /// In en, this message translates to:
-  /// **'Synopsis'**
-  String get description;
 
   /// No description provided for @synopsis.
   ///
@@ -1300,6 +1319,30 @@ abstract class AppLocalizations {
   /// **'Enable Dark Mode'**
   String get enableDarkMode;
 
+  /// No description provided for @glassEffect.
+  ///
+  /// In en, this message translates to:
+  /// **'Glass Effect'**
+  String get glassEffect;
+
+  /// No description provided for @glassEffectDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Gives a frosted glass effect to the app'**
+  String get glassEffectDescription;
+
+  /// No description provided for @coverTheme.
+  ///
+  /// In en, this message translates to:
+  /// **'Use Cover Theme'**
+  String get coverTheme;
+
+  /// No description provided for @coverThemeDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Use media cover image as theme color'**
+  String get coverThemeDescription;
+
   /// No description provided for @materialYou.
   ///
   /// In en, this message translates to:
@@ -1315,7 +1358,7 @@ abstract class AppLocalizations {
   /// No description provided for @customTheme.
   ///
   /// In en, this message translates to:
-  /// **'Custom theme'**
+  /// **'Custom Theme'**
   String get customTheme;
 
   /// No description provided for @customThemeDescription.
@@ -1327,7 +1370,7 @@ abstract class AppLocalizations {
   /// No description provided for @oledThemeVariant.
   ///
   /// In en, this message translates to:
-  /// **'OLED theme Variant'**
+  /// **'OLED Theme Variant'**
   String get oledThemeVariant;
 
   /// No description provided for @oledThemeVariantDescription.
@@ -1541,6 +1584,18 @@ class _AppLocalizationsDelegate
 }
 
 AppLocalizations lookupAppLocalizations(Locale locale) {
+  // Lookup logic when language+country codes are specified.
+  switch (locale.languageCode) {
+    case 'pt':
+      {
+        switch (locale.countryCode) {
+          case 'BR':
+            return AppLocalizationsPtBr();
+        }
+        break;
+      }
+  }
+
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
     case 'am':

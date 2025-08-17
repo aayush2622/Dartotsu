@@ -148,6 +148,11 @@ class AppLocalizationsHr extends AppLocalizations {
   String get totalChapters => 'Poglavlja';
 
   @override
+  String nextEpisodeRelease(int episode) {
+    return 'Episode $episode will be released in';
+  }
+
+  @override
   String get genres => 'Žanrovi';
 
   @override
@@ -219,6 +224,9 @@ class AppLocalizationsHr extends AppLocalizations {
   String topRated(String type) {
     return 'Najbolje ocijenjeno $type';
   }
+
+  @override
+  String get topScore => 'Top Score';
 
   @override
   String mostFavourite(String type) {
@@ -294,7 +302,13 @@ class AppLocalizationsHr extends AppLocalizations {
   String get dtu => 'Odozdo prema gore';
 
   @override
-  String get direction => 'Direction';
+  String get rtl => 'Right To Left';
+
+  @override
+  String get ltr => 'Left To Right';
+
+  @override
+  String get direction => 'Smjer';
 
   @override
   String get episodeWatched => 'Epizoda pogledana';
@@ -382,9 +396,6 @@ class AppLocalizationsHr extends AppLocalizations {
 
   @override
   String get characters => 'Likovi';
-
-  @override
-  String get description => 'Sinopsis';
 
   @override
   String get synopsis => 'Sinopsis';
@@ -541,7 +552,7 @@ class AppLocalizationsHr extends AppLocalizations {
   String get playerSettingsTitle => 'Postavke Playera';
 
   @override
-  String get playerSettingsDesc => 'Change player settings';
+  String get playerSettingsDesc => 'Promjena postavki playera';
 
   @override
   String get speed => 'Brzina';
@@ -571,7 +582,7 @@ class AppLocalizationsHr extends AppLocalizations {
   String get thumbLessSeekBar => 'ThumbLess SeekBar';
 
   @override
-  String get thumbLessSeekBarDesc => 'Remove thumb from the seek bar';
+  String get thumbLessSeekBarDesc => 'Uklonite palac s trake za traženje';
 
   @override
   String get subtitles => 'Titlovi';
@@ -629,28 +640,28 @@ class AppLocalizationsHr extends AppLocalizations {
   String get bottomPaddingDescription => 'Donji razmak za titlove';
 
   @override
-  String get readerSettings => 'Reader Settings';
+  String get readerSettings => 'Postavke čitača';
 
   @override
-  String get readerSettingsDesc => 'Change reader settings';
+  String get readerSettingsDesc => 'Promjena postavki čitača';
 
   @override
-  String get spacedPages => 'Spaced Pages';
+  String get spacedPages => 'Razmaknute stranice';
 
   @override
-  String get spacedPagesDesc => 'Add space between pages';
+  String get spacedPagesDesc => 'Dodavanje razmaka između stranica';
 
   @override
-  String get hideScrollbar => 'Hide Scrollbar';
+  String get hideScrollbar => 'Sakrij traku za pomicanje';
 
   @override
-  String get hideScrollbarDesc => 'Hide scrollbar while reading';
+  String get hideScrollbarDesc => 'Sakrij traku za pomicanje tijekom čitanja';
 
   @override
-  String get hidePageNumber => 'Hide Page Number';
+  String get hidePageNumber => 'Sakrij broj stranice';
 
   @override
-  String get hidePageNumberDesc => 'Hide page number while reading';
+  String get hidePageNumberDesc => 'Sakrij broj stranice tijekom čitanja';
 
   @override
   String get theme => 'Tema';
@@ -663,6 +674,19 @@ class AppLocalizationsHr extends AppLocalizations {
 
   @override
   String get enableDarkMode => 'Omogući tamni način rada';
+
+  @override
+  String get glassEffect => 'Glass Effect';
+
+  @override
+  String get glassEffectDescription =>
+      'Gives a frosted glass effect to the app';
+
+  @override
+  String get coverTheme => 'Use Cover Theme';
+
+  @override
+  String get coverThemeDescription => 'Use media cover image as theme color';
 
   @override
   String get materialYou => 'Material You';
@@ -720,19 +744,20 @@ class AppLocalizationsHr extends AppLocalizations {
   String get restoreSettings => 'Vrati postavke';
 
   @override
-  String get differentCacheManager => 'Different Cache Manager';
+  String get differentCacheManager => 'Drugačiji upravitelj predmemorije';
 
   @override
-  String get differentCacheManagerDesc => 'Use different Image cache manager';
+  String get differentCacheManagerDesc =>
+      'Koristite drugi upravitelj predmemorije slika';
 
   @override
   String get webView => 'Web prikaz';
 
   @override
-  String get developersHelpers => 'Developers/Helpers';
+  String get developersHelpers => 'Programeri/pomagači';
 
   @override
-  String get developersHelpersDesc => 'Dartotsu\'s unpaid labours';
+  String get developersHelpersDesc => 'Dartotsuov neplaćeni rad';
 
   @override
   String get supportMaintainer =>
