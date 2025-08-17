@@ -92,13 +92,17 @@ class MediaListTabsState extends State<MediaListTabs>
               child: TabBarView(
                 controller: _tabController,
                 children: mediaList.keys.map((String tabTitle) {
-                  return SingleChildScrollView(
-                    child: MediaAdaptor(
-                      mediaList: mediaList[tabTitle],
-                      type: 3,
-                      isLarge: widget.isLarge,
-                      skeletonObjects: 32,
-                    ),
+                  return CustomScrollConfig(
+                    context,
+                    children: [
+                      MediaAdaptor(
+                        mediaList: mediaList[tabTitle],
+                        type: 3,
+                        isLarge: widget.isLarge,
+                        skeletonObjects: 32,
+                        sliver: true,
+                      ),
+                    ],
                   );
                 }).toList(),
               ),

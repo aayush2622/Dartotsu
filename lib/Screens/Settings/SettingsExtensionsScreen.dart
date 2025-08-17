@@ -1,10 +1,13 @@
 import 'package:dartotsu/Preferences/PrefManager.dart';
+import 'package:dartotsu_extension_bridge/ExtensionManager.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
 
 import '../../Adaptor/Settings/SettingsAdaptor.dart';
 import '../../DataClass/Setting.dart';
 import '../../Theme/LanguageSwitcher.dart';
+import '../../Widgets/DropdownMenu.dart';
 import 'BaseSettingsScreen.dart';
 
 class SettingsExtensionsScreen extends StatefulWidget {
@@ -30,7 +33,22 @@ class SettingsExtensionsScreenState extends BaseSettingsScreen {
 
   @override
   List<Widget> get settingsList {
+    var manager = Get.find<ExtensionManager>();
+    var showExtensionList = getSupportedExtensions.length != 1;
     return [
+      if (showExtensionList)
+        buildDropdownMenu(
+          padding: const EdgeInsets.symmetric(vertical: 12.0),
+          currentValue:
+              ExtensionType.fromManager(manager.currentManager).toString(),
+          options: getSupportedExtensions.map((e) => e.toString()).toList(),
+          onChanged: (String newValue) {
+            manager.setCurrentManager(
+              ExtensionType.fromString(newValue),
+            );
+          },
+          prefixIcon: Icons.source,
+        ),
       SettingsAdaptor(
         settings: _buildSettings(context),
       ),

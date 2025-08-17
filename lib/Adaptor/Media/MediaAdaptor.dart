@@ -22,6 +22,7 @@ class MediaAdaptor extends StatefulWidget {
   final ScrollController? scrollController;
   final List<Widget>? customNullListIndicator;
   final int? skeletonObjects;
+  final bool sliver;
   final Function(int index, Media media)? onMediaTap;
 
   const MediaAdaptor({
@@ -32,6 +33,7 @@ class MediaAdaptor extends StatefulWidget {
     this.scrollController,
     this.skeletonObjects,
     this.customNullListIndicator,
+    this.sliver = false,
     this.onMediaTap,
   });
 
@@ -67,39 +69,49 @@ class MediaGridState extends State<MediaAdaptor> {
   Widget build(BuildContext context) {
     final isLoading = widget.mediaList == null;
 
-    Widget child;
-    switch (widget.type) {
-      case 0:
-        child = _buildHorizontalList();
-        break;
-      case 1:
-        child = _buildCarouselView();
-        break;
-      case 2:
-        child = _buildVerticalList();
-        break;
-      case 3:
-        child = _buildGrid();
-        break;
-      case 4:
-        child = _buildExpandedHorizontalList();
-        break;
-      default:
-        child = const SizedBox();
+    final child =
+        _mediaList.isEmpty && !isLoading ? _buildEmptyState() : _buildChild();
+
+    final shimmerEffect = ShimmerEffect(
+      baseColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.2),
+      begin: (widget.type == 2 || widget.type == 3)
+          ? Alignment.centerLeft
+          : const AlignmentDirectional(-1.0, -0.3),
+      end: (widget.type == 2 || widget.type == 3)
+          ? Alignment.centerRight
+          : const AlignmentDirectional(1.0, 0.3),
+    );
+
+    if (widget.sliver) {
+      return SliverSkeletonizer(
+        enabled: isLoading,
+        effect: shimmerEffect,
+        child: child,
+      );
     }
+
     return Skeletonizer(
       enabled: isLoading,
-      effect: ShimmerEffect(
-        baseColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.2),
-        begin: widget.type == 2 || widget.type == 3
-            ? Alignment.centerLeft
-            : const AlignmentDirectional(-1.0, -0.3),
-        end: widget.type == 2 || widget.type == 3
-            ? Alignment.centerRight
-            : const AlignmentDirectional(1.0, 0.3),
-      ),
-      child: _mediaList.isEmpty && !isLoading ? _buildEmptyState() : child,
+      effect: shimmerEffect,
+      child: child,
     );
+  }
+
+  Widget _buildChild() {
+    switch (widget.type) {
+      case 0:
+        return _buildHorizontalList();
+      case 1:
+        return _buildCarouselView();
+      case 2:
+        return _buildVerticalList();
+      case 3:
+        return _buildGrid();
+      case 4:
+        return _buildExpandedHorizontalList();
+      default:
+        return const SizedBox();
+    }
   }
 
   Widget _buildEmptyState() {
@@ -265,50 +277,76 @@ class MediaGridState extends State<MediaAdaptor> {
     final height = widget.isLarge ? 270.0 : 250.0;
     final itemWidth = 108.0;
     const sidePadding = 16.0;
-    const minGap = 16.0;
+    const minGap = 2.0;
 
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final maxWidth = constraints.maxWidth - (sidePadding * 2);
-        final crossAxisCount =
-            max(1, (maxWidth / (itemWidth + minGap)).floor());
+    Widget itemBuilder(BuildContext context, int index) {
+      final media = _mediaList[index];
+      final tag = _generateTag(media);
 
-        final totalItemWidth = crossAxisCount * itemWidth;
-        final totalGapSpace = maxWidth - totalItemWidth;
-        final gap =
-            crossAxisCount > 1 ? totalGapSpace / (crossAxisCount - 1) : 0.0;
+      return GestureDetector(
+        onTap: () => _handleTap(index, media, tag),
+        onLongPress: () => _handleLongPress(media),
+        child: MediaViewHolder(
+          mediaInfo: media,
+          isLarge: widget.isLarge,
+          tag: tag,
+        ),
+      );
+    }
 
-        return Padding(
-          padding:
-              const EdgeInsets.symmetric(horizontal: sidePadding, vertical: 16),
-          child: GridView.builder(
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemCount: _mediaList.length,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: crossAxisCount,
-              mainAxisSpacing: 16,
-              crossAxisSpacing: gap,
-              childAspectRatio: itemWidth / height,
-            ),
-            itemBuilder: (context, index) {
-              final media = _mediaList[index];
-              final tag = _generateTag(media);
+    SliverGridDelegate makeDelegate(double maxWidth) {
+      final crossAxisCount = max(1, (maxWidth / (itemWidth + minGap)).floor());
 
-              return GestureDetector(
-                onTap: () => _handleTap(index, media, tag),
-                onLongPress: () => _handleLongPress(media),
-                child: MediaViewHolder(
-                  mediaInfo: media,
-                  isLarge: widget.isLarge,
-                  tag: tag,
-                ),
-              );
-            },
-          ),
-        );
-      },
-    );
+      final totalItemWidth = crossAxisCount * itemWidth;
+      final totalGapSpace = maxWidth - totalItemWidth;
+      final gap =
+          crossAxisCount > 1 ? totalGapSpace / (crossAxisCount - 1) : 0.0;
+
+      return SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: crossAxisCount,
+        mainAxisSpacing: 16,
+        crossAxisSpacing: gap,
+        childAspectRatio: itemWidth / height,
+      );
+    }
+
+    if (!widget.sliver) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(
+            horizontal: sidePadding, vertical: sidePadding),
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            final delegate = makeDelegate(constraints.maxWidth);
+
+            return GridView.builder(
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: _mediaList.length,
+              gridDelegate: delegate,
+              itemBuilder: itemBuilder,
+            );
+          },
+        ),
+      );
+    } else {
+      return SliverPadding(
+        padding: const EdgeInsets.symmetric(
+            horizontal: sidePadding, vertical: sidePadding),
+        sliver: SliverLayoutBuilder(
+          builder: (context, constraints) {
+            final delegate = makeDelegate(constraints.crossAxisExtent);
+
+            return SliverGrid(
+              delegate: SliverChildBuilderDelegate(
+                itemBuilder,
+                childCount: _mediaList.length,
+              ),
+              gridDelegate: delegate,
+            );
+          },
+        ),
+      );
+    }
   }
 
   Widget _buildCarouselView() {
