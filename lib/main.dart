@@ -3,10 +3,9 @@ import 'dart:io';
 import 'dart:ui';
 
 import 'package:app_links/app_links.dart';
-import 'package:blurbox/blurbox.dart';
 import 'package:dartotsu/Functions/Extensions.dart';
 import 'package:dartotsu/Functions/Function.dart';
-import 'package:dartotsu/Functions/mpv_conf.dart';
+import 'package:dartotsu/Screens/Anime/Player/MpvConfig.dart';
 import 'package:dartotsu/Screens/Login/LoginScreen.dart';
 import 'package:dartotsu/Screens/Manga/MangaScreen.dart';
 import 'package:dartotsu_extension_bridge/Aniyomi/AniyomiExtensions.dart';
@@ -38,7 +37,6 @@ import 'Screens/HomeNavbarDesktop.dart';
 import 'Screens/HomeNavbarMobile.dart';
 import 'Services/MediaService.dart';
 import 'Services/ServiceSwitcher.dart';
-import 'Theme/Colors.dart';
 import 'Theme/ThemeManager.dart';
 import 'Theme/ThemeProvider.dart';
 import 'Widgets/CachedNetworkImage.dart';
@@ -369,7 +367,12 @@ class MainActivityState extends State<MainActivity> {
   Widget build(BuildContext context) {
     final themeNotifier = Provider.of<ThemeNotifier>(context);
     final service = context.currentService();
-    final theme = Theme.of(context).colorScheme;
+    ThemedContainer(
+      context: context,
+      child: const Icon(Icons.search),
+      borderRadius: BorderRadius.circular(16.0),
+      padding: const EdgeInsets.all(4.0),
+    );
     return Scaffold(
       body: Stack(
         children: [
@@ -388,36 +391,18 @@ class MainActivityState extends State<MainActivity> {
               onLongPress: () =>
                   service.searchScreen?.onSearchIconLongClick(context),
               onTap: () => service.searchScreen?.onSearchIconClick(context),
-              child: ThemedWidget(
+              child: ThemedContainer(
                 context: context,
-                materialWidget: Container(
+                child: Container(
+                  width: 48,
+                  height: 48,
                   decoration: BoxDecoration(
-                    color:
-                        themeNotifier.isDarkMode ? greyNavDark : greyNavLight,
                     borderRadius: BorderRadius.circular(16.0),
                   ),
-                  padding: const EdgeInsets.all(4.0),
-                  width: 54,
-                  height: 54,
                   child: const Icon(Icons.search),
                 ),
-                glassWidget: BlurBox(
-                  blur: 12.0,
-                  padding: const EdgeInsets.all(0),
-                  borderRadius: BorderRadius.circular(16.0),
-                  border: Border.all(
-                    color: theme.onSurface.withOpacity(0.2),
-                    width: 1,
-                  ),
-                  child: Container(
-                    width: 54,
-                    height: 54,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16.0),
-                    ),
-                    child: const Icon(Icons.search),
-                  ),
-                ),
+                borderRadius: BorderRadius.circular(16.0),
+                padding: const EdgeInsets.all(4.0),
               ),
             ),
           ),

@@ -149,7 +149,7 @@ class AppLocalizationsHe extends AppLocalizations {
 
   @override
   String nextEpisodeRelease(int episode) {
-    return 'Episode $episode will be released in';
+    return 'שם הסרטון: X8X ישוחרר';
   }
 
   @override
@@ -302,10 +302,10 @@ class AppLocalizationsHe extends AppLocalizations {
   String get dtu => 'למטה עד Up';
 
   @override
-  String get rtl => 'Right To Left';
+  String get rtl => 'ימין לשמאל';
 
   @override
-  String get ltr => 'Left To Right';
+  String get ltr => 'לשמאל to right';
 
   @override
   String get direction => 'כיוון';
@@ -575,6 +575,14 @@ class AppLocalizationsHe extends AppLocalizations {
   String get thumbLessSeekBarDesc => 'להסיר את האגודל מהבר המבוקש';
 
   @override
+  String get customMPV => 'Custom MPV Configuration';
+
+  @override
+  String customMPVDescription(String path) {
+    return 'Enable this option to use your own MPV configuration file. Place your custom config at: $path';
+  }
+
+  @override
   String get subtitles => 'כתוביות';
 
   @override
@@ -666,17 +674,16 @@ class AppLocalizationsHe extends AppLocalizations {
   String get enableDarkMode => 'הפעל מצב כהה';
 
   @override
-  String get glassEffect => 'Glass Effect';
+  String get glassEffect => 'אפקט זכוכית';
 
   @override
-  String get glassEffectDescription =>
-      'Gives a frosted glass effect to the app';
+  String get glassEffectDescription => 'נותן אפקט זכוכית קפוא לאפליקציית';
 
   @override
-  String get coverTheme => 'Use Cover Theme';
+  String get coverTheme => 'ערכת נושא';
 
   @override
-  String get coverThemeDescription => 'Use media cover image as theme color';
+  String get coverThemeDescription => 'השתמש תמונת כיסוי מדיה כצבע נושא';
 
   @override
   String get materialYou => 'Material You';
@@ -685,7 +692,7 @@ class AppLocalizationsHe extends AppLocalizations {
   String get materialYouDescription => 'השתמש באותו צבע כמו ברקע שלך';
 
   @override
-  String get customTheme => 'ערכת נושא מותאמת';
+  String get customTheme => 'מותאם אישית נושא';
 
   @override
   String get customThemeDescription =>

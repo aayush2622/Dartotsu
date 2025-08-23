@@ -149,7 +149,7 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String nextEpisodeRelease(int episode) {
-    return 'Episode $episode will be released in';
+    return 'Episode X8X zostanie wydany w wersji CD';
   }
 
   @override
@@ -302,10 +302,10 @@ class AppLocalizationsPl extends AppLocalizations {
   String get dtu => 'Down To Up';
 
   @override
-  String get rtl => 'Right To Left';
+  String get rtl => 'Prawda';
 
   @override
-  String get ltr => 'Left To Right';
+  String get ltr => 'Prawda';
 
   @override
   String get direction => 'Kierunek';
@@ -586,6 +586,14 @@ class AppLocalizationsPl extends AppLocalizations {
   String get thumbLessSeekBarDesc => 'Remove thumb from thezuka bar';
 
   @override
+  String get customMPV => 'Custom MPV Configuration';
+
+  @override
+  String customMPVDescription(String path) {
+    return 'Enable this option to use your own MPV configuration file. Place your custom config at: $path';
+  }
+
+  @override
   String get subtitles => 'Napisy';
 
   @override
@@ -676,17 +684,17 @@ class AppLocalizationsPl extends AppLocalizations {
   String get enableDarkMode => 'Włącz tryb ciemny';
 
   @override
-  String get glassEffect => 'Glass Effect';
+  String get glassEffect => 'Efekt Glassa';
 
   @override
   String get glassEffectDescription =>
-      'Gives a frosted glass effect to the app';
+      'W związku z tym efektem szkła mrozowego do aplikacji';
 
   @override
-  String get coverTheme => 'Use Cover Theme';
+  String get coverTheme => 'Strona internetowa';
 
   @override
-  String get coverThemeDescription => 'Use media cover image as theme color';
+  String get coverThemeDescription => 'Okładka media';
 
   @override
   String get materialYou => 'Material You';
@@ -695,7 +703,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get materialYouDescription => 'Użyj tego samego koloru co tło pulpitu';
 
   @override
-  String get customTheme => 'Własny motyw';
+  String get customTheme => 'Klient Theme';
 
   @override
   String get customThemeDescription => 'Użyj swojego koloru dla motywu';

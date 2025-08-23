@@ -38,6 +38,7 @@ dependencies:
   path: ^1.9.1
 
   # UI Components
+  flutter_animate: ^4.5.2
   expandable_widgets: ^1.0.3+1
   expandable_text: 2.3.0
   cached_network_image: ^3.4.1
@@ -57,11 +58,18 @@ dependencies:
   html: ^0.15.6
   intl: ^0.20.2
   # Platform Specific
-  media_kit_libs_video: ^1.0.6
+  media_kit:
+    git:
+      url: https://github.com/Schnitzel5/media-kit.git
+      path: media_kit
   media_kit_video:
     git:
       url: https://github.com/Schnitzel5/media-kit.git
       path: media_kit_video
+  media_kit_libs_video:
+    git:
+      url: https://github.com/Schnitzel5/media-kit.git
+      path: libs/universal/media_kit_libs_video
   window_manager: ^0.5.0
   permission_handler: ^12.0.0+1
   flutter_inappwebview: ^6.2.0-beta.2

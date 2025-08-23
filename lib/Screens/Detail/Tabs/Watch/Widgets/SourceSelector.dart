@@ -4,7 +4,9 @@ import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../DataClass/Media.dart';
+import '../../../../../Functions/Function.dart';
 import '../../../../../Widgets/DropdownMenu.dart';
+import '../../../../Extensions/ExtensionSettings/SourcePreferenceScreen.dart';
 import '../../../../Settings/language.dart';
 
 class SourceSelector extends StatefulWidget {
@@ -73,7 +75,6 @@ class _SourceSelectorState extends State<SourceSelector> {
                 borderColor: theme.primary,
                 prefixIcon: Icons.source,
                 onChanged: (name) async {
-                  //saveCustomData('${widget.mediaData.id}-lastUsedSource', widget.mediaData.settings..server = name);
                   widget.mediaData.settings.server = name;
                   MediaSettings.saveMediaSettings(widget.mediaData);
                   lastUsedSource = name;
@@ -88,18 +89,7 @@ class _SourceSelectorState extends State<SourceSelector> {
             ),
             const SizedBox(width: 8),
             GestureDetector(
-              onTap: () {
-                /*var sourcePreference = getSourcePreference(source: source)
-                    .map((e) => getSourcePreferenceEntry(e.key!, source.id!))
-                    .toList();
-                navigateToPage(
-                  context,
-                  SourcePreferenceWidget(
-                    source: source,
-                    sourcePreference: sourcePreference,
-                  ),
-                );*/
-              },
+              onTap: () async => await loadPreferences(source),
               child: Icon(
                 Icons.settings,
                 size: 32,
@@ -110,5 +100,19 @@ class _SourceSelectorState extends State<SourceSelector> {
         ),
       ],
     );
+  }
+
+  Future<void> loadPreferences(Source source) async {
+    var preference = await source.methods.getPreference();
+    if (preference.isEmpty) {
+      snackString("Source doesn't have any settings");
+      return;
+    }
+    if (mounted) {
+      navigateToPage(
+        context,
+        SourcePreferenceScreen(source: source, preference: preference),
+      );
+    }
   }
 }

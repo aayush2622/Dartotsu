@@ -65,18 +65,6 @@ class HomeScreenMobileState extends State<HomeScreenMobile> {
             duration: const Duration(milliseconds: 500),
             switchInCurve: Curves.easeInOut,
             switchOutCurve: Curves.easeInOut,
-            transitionBuilder: (Widget child, Animation<double> animation) {
-              return FadeTransition(
-                opacity: animation,
-                child: SlideTransition(
-                  position: Tween<Offset>(
-                    begin: const Offset(0.0, 0.05),
-                    end: Offset.zero,
-                  ).animate(animation),
-                  child: child,
-                ),
-              );
-            },
             child: Obx(() {
               if (!screen.running.value) {
                 return const LoadingWidget();
@@ -141,25 +129,29 @@ class HomeScreenMobileState extends State<HomeScreenMobile> {
       left: Directionality.of(context) == TextDirection.rtl ? 32 : null,
       right: Directionality.of(context) == TextDirection.ltr ? 32 : null,
       top: 36.statusBar(),
-      child: SlideUpAnimation(
-        child: Stack(
-          children: [
-            GestureDetector(
-              onTap: () =>
-                  showCustomBottomDialog(context, const SettingsBottomSheet()),
-              child: const SettingIconWidget(icon: Icons.settings),
-            ),
-            if (data.unreadNotificationCount > 0)
-              Positioned(
-                right: 0,
-                bottom: -2,
-                child: NotificationBadge(
-                  count: data.unreadNotificationCount,
-                ),
+      child: Stack(
+        children: [
+          GestureDetector(
+            onTap: () =>
+                showCustomBottomDialog(context, const SettingsBottomSheet()),
+            child: const SettingIconWidget(icon: Icons.settings),
+          ),
+          if (data.unreadNotificationCount > 0)
+            Positioned(
+              right: 0,
+              bottom: -2,
+              child: NotificationBadge(
+                count: data.unreadNotificationCount,
               ),
-          ],
-        ),
-      ),
+            ),
+        ],
+      ).animate(effects: [
+        const SlideEffect(
+          begin: Offset(0, 1),
+          end: Offset.zero,
+          duration: Duration(milliseconds: 200),
+        )
+      ]),
     );
   }
 
@@ -168,43 +160,47 @@ class HomeScreenMobileState extends State<HomeScreenMobile> {
       top: 36.statusBar(),
       left: 34.0,
       right: 16.0,
-      child: SlideUpAnimation(
-        child: Row(
-          children: [
-            GestureDetector(
-              onTap: () => serviceSwitcher(context),
-              child: loadSvg(
-                service.iconPath,
-                width: 38.0,
-                height: 38.0,
-                color: theme.onSurface,
-              ),
+      child: Row(
+        children: [
+          GestureDetector(
+            onTap: () => serviceSwitcher(context),
+            child: loadSvg(
+              service.iconPath,
+              width: 38.0,
+              height: 38.0,
+              color: theme.onSurface,
             ),
-            const SizedBox(width: 12),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  data.username.value,
-                  style: TextStyle(
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16.0,
-                    color: themeNotifier.isDarkMode
-                        ? Colors.white
-                        : Colors.black.withValues(alpha: 0.6),
-                  ),
+          ),
+          const SizedBox(width: 12),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                data.username.value,
+                style: TextStyle(
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16.0,
+                  color: themeNotifier.isDarkMode
+                      ? Colors.white
+                      : Colors.black.withValues(alpha: 0.6),
                 ),
-                const SizedBox(height: 2.0),
-                _buildInfoRow(screen.firstInfoString,
-                    data.episodesWatched.toString(), theme.primary),
-                _buildInfoRow(screen.secondInfoString,
-                    data.chapterRead.toString(), theme.primary),
-              ],
-            ),
-          ],
-        ),
-      ),
+              ),
+              const SizedBox(height: 2.0),
+              _buildInfoRow(screen.firstInfoString,
+                  data.episodesWatched.toString(), theme.primary),
+              _buildInfoRow(screen.secondInfoString,
+                  data.chapterRead.toString(), theme.primary),
+            ],
+          ),
+        ],
+      ).animate(effects: [
+        const SlideEffect(
+          begin: Offset(0, 1),
+          end: Offset.zero,
+          duration: Duration(milliseconds: 200),
+        )
+      ]),
     );
   }
 

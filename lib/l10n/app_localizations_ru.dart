@@ -149,7 +149,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String nextEpisodeRelease(int episode) {
-    return 'Episode $episode will be released in';
+    return 'Эпизод $episode выйдет';
   }
 
   @override
@@ -302,10 +302,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String get dtu => 'Вниз до вверх';
 
   @override
-  String get rtl => 'Right To Left';
+  String get rtl => 'Налево';
 
   @override
-  String get ltr => 'Left To Right';
+  String get ltr => 'Направо';
 
   @override
   String get direction => 'Направление';
@@ -586,6 +586,14 @@ class AppLocalizationsRu extends AppLocalizations {
   String get thumbLessSeekBarDesc => 'Удалить большой палец из панели поиска';
 
   @override
+  String get customMPV => 'Custom MPV Configuration';
+
+  @override
+  String customMPVDescription(String path) {
+    return 'Enable this option to use your own MPV configuration file. Place your custom config at: $path';
+  }
+
+  @override
   String get subtitles => 'Субтитры';
 
   @override
@@ -677,17 +685,18 @@ class AppLocalizationsRu extends AppLocalizations {
   String get enableDarkMode => 'Включить тёмный режим';
 
   @override
-  String get glassEffect => 'Glass Effect';
+  String get glassEffect => 'Стеклянный эффект';
 
   @override
   String get glassEffectDescription =>
-      'Gives a frosted glass effect to the app';
+      'Дает эффект морозного стекла для приложения';
 
   @override
-  String get coverTheme => 'Use Cover Theme';
+  String get coverTheme => 'Использовать Обложка';
 
   @override
-  String get coverThemeDescription => 'Use media cover image as theme color';
+  String get coverThemeDescription =>
+      'Используйте медиа-обложка изображения как цвет темы';
 
   @override
   String get materialYou => 'Material You';
@@ -697,7 +706,7 @@ class AppLocalizationsRu extends AppLocalizations {
       'Используйте тот же цвет, что и на вашем обоев';
 
   @override
-  String get customTheme => 'Пользовательская тема';
+  String get customTheme => 'Пользователь Тема';
 
   @override
   String get customThemeDescription =>

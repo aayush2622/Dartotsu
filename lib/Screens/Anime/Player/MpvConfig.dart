@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:dartotsu/Preferences/PrefManager.dart';
 import 'package:dartotsu/logger.dart';
-import 'package:path_provider/path_provider.dart';
 
 class MpvConf {
   static final shaderProfiles = {
@@ -159,7 +158,8 @@ class MpvConf {
     await createMpvConfigFolder();
     Logger.log('MPV config initialized!');
     Logger.log(
-        'Status => useCustomMpvConfig: ${loadData(PrefName.useCustomMpvConfig)}, mpvConfigPath: ${loadData(PrefName.mpvConfigDir)}');
+      'Status => useCustomMpvConfig: ${loadData(PrefName.useCustomMpvConfig)}, mpvConfigPath: ${loadData(PrefName.mpvConfigDir)}',
+    );
   }
 
   static Future<bool> createMpvConfigFolder() async {
@@ -188,18 +188,14 @@ class MpvConf {
     }
   }
 
-  static Future<Directory> _getAppDirectory() async {
-    if (Platform.isAndroid) {
-      return Directory('/storage/emulated/0/Dartotsu');
-    } else {
-      final documentsDir = await getApplicationDocumentsDirectory();
-      return Directory('${documentsDir.path}/Dartotsu');
-    }
-  }
-
   static Future<String> getMpvPath() async {
-    final dir = await _getAppDirectory();
-    return '${dir.path}/mpv/';
+    var path = await PrefManager.getDirectory(
+      subPath: "mpv",
+      useSystemPath: false,
+      useCustomPath: true,
+    );
+
+    return path?.path ?? '';
   }
 
   static Future<String> getMpvConfigPath() async {

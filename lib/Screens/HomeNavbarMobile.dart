@@ -1,11 +1,7 @@
-import 'package:blurbox/blurbox.dart';
 import 'package:dartotsu/Functions/Extensions.dart';
-import 'package:dartotsu/Theme/Colors.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import '../Theme/ThemeManager.dart';
-import '../Theme/ThemeProvider.dart';
 import 'HomeNavBar.dart';
 
 class FloatingBottomNavBarMobile extends FloatingBottomNavBar {
@@ -17,10 +13,16 @@ class FloatingBottomNavBarMobile extends FloatingBottomNavBar {
 
   @override
   Widget build(BuildContext context) {
-    final themeNotifier = Provider.of<ThemeNotifier>(context);
-    final theme = Theme.of(context).colorScheme;
     final navItems = context.currentService().navBarItem;
-
+    ThemedContainer(
+      context: context,
+      borderRadius: BorderRadius.circular(30.0),
+      padding: const EdgeInsets.all(0),
+      child: const SizedBox(
+        width: 246.0,
+        height: 54.0,
+      ),
+    );
     return Positioned(
       bottom: 32.bottomBar(),
       left: 0,
@@ -34,40 +36,13 @@ class FloatingBottomNavBarMobile extends FloatingBottomNavBar {
             children: [
               Align(
                 alignment: Alignment.center,
-                child: ThemedWidget(
+                child: ThemedContainer(
                   context: context,
-                  materialWidget: Container(
+                  borderRadius: BorderRadius.circular(30.0),
+                  padding: const EdgeInsets.all(0),
+                  child: const SizedBox(
                     width: 246.0,
                     height: 54.0,
-                    decoration: BoxDecoration(
-                      color:
-                          themeNotifier.isDarkMode ? greyNavDark : greyNavLight,
-                      borderRadius: BorderRadius.circular(30.0),
-                    ),
-                  ),
-                  glassWidget: BlurBox(
-                    blur: 12.0,
-                    boxShadow: [
-                      BoxShadow(
-                        color: theme.surface.withOpacity(0.2),
-                        blurRadius: 6.0,
-                        spreadRadius: 0.5,
-                      ),
-                    ],
-                    border: Border.all(
-                      color: theme.onSurface.withOpacity(0.2),
-                      width: 1,
-                    ),
-                    padding: const EdgeInsets.all(0),
-                    color: theme.surface.withOpacity(0.2),
-                    borderRadius: BorderRadius.circular(30.0),
-                    child: Container(
-                      width: 246.0,
-                      height: 54.0,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30.0),
-                      ),
-                    ),
                   ),
                 ),
               ),

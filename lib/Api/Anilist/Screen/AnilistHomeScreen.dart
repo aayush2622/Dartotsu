@@ -208,7 +208,7 @@ class AnilistHomeScreen extends BaseHomeScreen {
             builder: (context, constraints) {
               final spacing = 16.0;
               final horizontalPadding = context.isPhone ? 0.0 : 16.0;
-              final maxWidth = constraints.maxWidth - horizontalPadding;
+              final maxWidth = constraints.maxWidth - (horizontalPadding * 2);
 
               final columns = context.isPhone ? 1 : 2;
               final width = (maxWidth - ((columns - 1) * spacing)) / columns;
@@ -222,7 +222,7 @@ class AnilistHomeScreen extends BaseHomeScreen {
               }).toList();
 
               return Padding(
-                padding: EdgeInsets.only(right: horizontalPadding),
+                padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
                 child: Column(
                   children: [
                     useColumnLayout

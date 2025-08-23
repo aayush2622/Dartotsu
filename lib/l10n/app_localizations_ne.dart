@@ -585,6 +585,14 @@ class AppLocalizationsNe extends AppLocalizations {
   String get thumbLessSeekBarDesc => 'Remove thumb from the seek bar';
 
   @override
+  String get customMPV => 'Custom MPV Configuration';
+
+  @override
+  String customMPVDescription(String path) {
+    return 'Enable this option to use your own MPV configuration file. Place your custom config at: $path';
+  }
+
+  @override
   String get subtitles => 'उपशीर्षकहरू';
 
   @override
@@ -695,13 +703,13 @@ class AppLocalizationsNe extends AppLocalizations {
       'आफ्नो वालपेपरको समान रंग प्रयोग गर्नुहोस्';
 
   @override
-  String get customTheme => 'अनुकूलित विषयवस्तु';
+  String get customTheme => 'अनुकूलन विषयवस्तु';
 
   @override
   String get customThemeDescription => 'थीमको लागि आफ्नै रंग प्रयोग गर्नुहोस्';
 
   @override
-  String get oledThemeVariant => 'OLED थीम भेरियन्ट';
+  String get oledThemeVariant => 'ओलेद थीम भेरियन्ट';
 
   @override
   String get oledThemeVariantDescription => 'OLED मोड सक्षम गर्नुहोस्';

@@ -225,7 +225,7 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
-  String get topScore => 'Top Score';
+  String get topScore => 'القمة';
 
   @override
   String mostFavourite(String type) {
@@ -301,10 +301,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get dtu => 'من الاسفل للأعلي';
 
   @override
-  String get rtl => 'Right To Left';
+  String get rtl => 'يمين إلى اليسار';
 
   @override
-  String get ltr => 'Left To Right';
+  String get ltr => 'يسار إلى اليمين';
 
   @override
   String get direction => 'التوجيه';
@@ -577,6 +577,14 @@ class AppLocalizationsAr extends AppLocalizations {
   String get thumbLessSeekBarDesc => 'إزالة إبهام من الحانه';
 
   @override
+  String get customMPV => 'Custom MPV Configuration';
+
+  @override
+  String customMPVDescription(String path) {
+    return 'Enable this option to use your own MPV configuration file. Place your custom config at: $path';
+  }
+
+  @override
   String get subtitles => 'الترجمة';
 
   @override
@@ -667,17 +675,18 @@ class AppLocalizationsAr extends AppLocalizations {
   String get enableDarkMode => 'تفعيل الوضع المظلم';
 
   @override
-  String get glassEffect => 'Glass Effect';
+  String get glassEffect => 'Glas Effect';
 
   @override
   String get glassEffectDescription =>
-      'Gives a frosted glass effect to the app';
+      'يعطي مفعولاً زجاجياً مقلياً على التطبيق';
 
   @override
-  String get coverTheme => 'Use Cover Theme';
+  String get coverTheme => 'استخدام موضوع التغطية';
 
   @override
-  String get coverThemeDescription => 'Use media cover image as theme color';
+  String get coverThemeDescription =>
+      'استخدام صورة التغطية الإعلامية كلون موضوعي';
 
   @override
   String get materialYou => 'Material You';
@@ -686,7 +695,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get materialYouDescription => 'استخدم نفس اللون خلفية الشاشة';
 
   @override
-  String get customTheme => 'ثيم مخصص';
+  String get customTheme => 'العرف الموضوع';
 
   @override
   String get customThemeDescription => 'استخدم لونك الخاص للثيم';

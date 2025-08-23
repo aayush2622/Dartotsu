@@ -5,8 +5,10 @@ import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:dartotsu_extension_bridge/Screen/ExtensionList.dart' as e;
 import 'package:flutter/material.dart';
 
+import '../../Functions/Function.dart';
 import '../../Widgets/CachedNetworkImage.dart';
 import '../Settings/language.dart';
+import 'ExtensionSettings/SourcePreferenceScreen.dart';
 
 class ExtensionList extends StatefulWidget implements e.ExtensionConfig {
   @override
@@ -145,9 +147,29 @@ class _ExtensionListScreenState extends e.ExtensionList<ExtensionList> {
               onPressed: () => manager.updateSource(source),
             ),
           IconButton(
-            icon: const Icon(Icons.delete),
+            icon: const Icon(Icons.delete_rounded),
             tooltip: 'Uninstall',
             onPressed: () => manager.uninstallSource(source),
+          ),
+          IconButton(
+            icon: const Icon(Icons.settings_rounded),
+            tooltip: 'Settings',
+            onPressed: () async {
+              var preference = await source.methods.getPreference();
+              if (preference.isEmpty) {
+                snackString("Source doesn't have any settings");
+                return;
+              }
+              if (mounted) {
+                navigateToPage(
+                  context,
+                  SourcePreferenceScreen(
+                    source: source,
+                    preference: preference,
+                  ),
+                );
+              }
+            },
           ),
         ],
       );

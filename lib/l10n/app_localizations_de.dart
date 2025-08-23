@@ -149,7 +149,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String nextEpisodeRelease(int episode) {
-    return 'Episode $episode will be released in';
+    return 'Episode $episode wird veröffentlicht in';
   }
 
   @override
@@ -302,10 +302,10 @@ class AppLocalizationsDe extends AppLocalizations {
   String get dtu => 'Von unten nach oben';
 
   @override
-  String get rtl => 'Right To Left';
+  String get rtl => 'Rechts nach links';
 
   @override
-  String get ltr => 'Left To Right';
+  String get ltr => 'Links nach rechts';
 
   @override
   String get direction => 'Richtung';
@@ -592,6 +592,14 @@ class AppLocalizationsDe extends AppLocalizations {
       'Entfernen Sie den Daumen aus der Suchleiste';
 
   @override
+  String get customMPV => 'Custom MPV Configuration';
+
+  @override
+  String customMPVDescription(String path) {
+    return 'Enable this option to use your own MPV configuration file. Place your custom config at: $path';
+  }
+
+  @override
   String get subtitles => 'Untertitel';
 
   @override
@@ -683,17 +691,18 @@ class AppLocalizationsDe extends AppLocalizations {
   String get enableDarkMode => 'Dunkelmodus aktivieren';
 
   @override
-  String get glassEffect => 'Glass Effect';
+  String get glassEffect => 'Glaseffekt';
 
   @override
   String get glassEffectDescription =>
-      'Gives a frosted glass effect to the app';
+      'Gibt einen Frost-Glas-Effekt für die App';
 
   @override
-  String get coverTheme => 'Use Cover Theme';
+  String get coverTheme => 'Wählen Sie das Thema';
 
   @override
-  String get coverThemeDescription => 'Use media cover image as theme color';
+  String get coverThemeDescription =>
+      'Verwenden Sie Medien Abdeckung Bild als Thema Farbe';
 
   @override
   String get materialYou => 'Material You';
@@ -703,7 +712,7 @@ class AppLocalizationsDe extends AppLocalizations {
       'Verwenden Sie die gleiche Farbe wie Ihr Hintergrundbild';
 
   @override
-  String get customTheme => 'Benutzerdefiniertes Thema';
+  String get customTheme => 'Zoll Thema';
 
   @override
   String get customThemeDescription =>

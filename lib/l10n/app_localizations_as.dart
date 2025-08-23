@@ -148,7 +148,7 @@ class AppLocalizationsAs extends AppLocalizations {
 
   @override
   String nextEpisodeRelease(int episode) {
-    return 'Episode $episode will be released in';
+    return 'পৰৱৰ্তী পৰ্ব $episode মুক্তি পাব';
   }
 
   @override
@@ -225,7 +225,7 @@ class AppLocalizationsAs extends AppLocalizations {
   }
 
   @override
-  String get topScore => 'Top Score';
+  String get topScore => 'শীৰ্ষ স্ক’ৰ';
 
   @override
   String mostFavourite(String type) {
@@ -301,10 +301,10 @@ class AppLocalizationsAs extends AppLocalizations {
   String get dtu => 'তলৰ পৰা ওপৰলৈ';
 
   @override
-  String get rtl => 'Right To Left';
+  String get rtl => 'সোঁফালৰ পৰা বাওঁফাললৈ';
 
   @override
-  String get ltr => 'Left To Right';
+  String get ltr => 'বাওঁফালৰ পৰা সোঁফাললৈ';
 
   @override
   String get direction => 'দিশ';
@@ -316,10 +316,10 @@ class AppLocalizationsAs extends AppLocalizations {
   String get chapterRead => 'পঢ়া অধ্যায়';
 
   @override
-  String get outOf => 'ৰ মাজৰ';
+  String get outOf => 'পৰা';
 
   @override
-  String get totalOf => 'মুঠৰ মাজৰ';
+  String get totalOf => 'মুঠৰ পৰা';
 
   @override
   String get selected => 'নিৰ্বাচিত';
@@ -582,6 +582,14 @@ class AppLocalizationsAs extends AppLocalizations {
   String get thumbLessSeekBarDesc => 'ছিক বাৰৰ পৰা থাম্ব আঁতৰাওক';
 
   @override
+  String get customMPV => 'Custom MPV Configuration';
+
+  @override
+  String customMPVDescription(String path) {
+    return 'Enable this option to use your own MPV configuration file. Place your custom config at: $path';
+  }
+
+  @override
   String get subtitles => 'ছাবটাইটেল';
 
   @override
@@ -672,17 +680,17 @@ class AppLocalizationsAs extends AppLocalizations {
   String get enableDarkMode => 'ডাৰ্ক মোড সক্ৰিয় কৰক';
 
   @override
-  String get glassEffect => 'Glass Effect';
+  String get glassEffect => 'গ্লাছ প্ৰভাৱ';
 
   @override
-  String get glassEffectDescription =>
-      'Gives a frosted glass effect to the app';
+  String get glassEffectDescription => 'এপত কুঁৱলীৰ দৰে গ্লাছৰ প্ৰভাৱ দিয়ে';
 
   @override
-  String get coverTheme => 'Use Cover Theme';
+  String get coverTheme => 'কভাৰ থীম ব্যৱহাৰ কৰক';
 
   @override
-  String get coverThemeDescription => 'Use media cover image as theme color';
+  String get coverThemeDescription =>
+      'মিডিয়াৰ কভাৰ ছবি থীমৰ ৰং হিচাপে ব্যৱহাৰ কৰক';
 
   @override
   String get materialYou => 'Material You';

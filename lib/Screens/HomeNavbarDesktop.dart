@@ -1,4 +1,3 @@
-import 'package:blurbox/blurbox.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dartotsu/Functions/Extensions.dart';
 import 'package:dartotsu/Theme/ThemeManager.dart';
@@ -20,52 +19,15 @@ class FloatingBottomNavBarDesktop extends FloatingBottomNavBar {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context).colorScheme;
-
-    final borderColor = theme.onSurface.withOpacity(0.2);
-    final surfaceColor = theme.surface.withOpacity(0.2);
-    const verticalPadding = EdgeInsets.symmetric(vertical: 10);
-
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Align(
         alignment: Alignment.topCenter,
-        child: ThemedWidget(
+        child: ThemedContainer(
           context: context,
-          materialWidget: Container(
-            padding: verticalPadding,
-            decoration: BoxDecoration(
-              color: theme.surfaceContainerLow,
-              border: Border.all(
-                color: theme.outlineVariant,
-                width: 1,
-              ),
-              borderRadius: BorderRadius.circular(48),
-              boxShadow: [
-                BoxShadow(
-                  color: theme.shadow.withOpacity(0.1),
-                  blurRadius: 20,
-                  offset: const Offset(0, 6),
-                ),
-              ],
-            ),
-            child: _buildNavBar(context),
-          ),
-          glassWidget: BlurBox(
-            blur: 12.0,
-            boxShadow: [
-              BoxShadow(
-                color: surfaceColor,
-                blurRadius: 6.0,
-                spreadRadius: 0.5,
-              ),
-            ],
-            border: Border.all(color: borderColor, width: 1.5),
-            padding: verticalPadding,
-            color: surfaceColor,
-            borderRadius: BorderRadius.circular(48),
-            child: _buildNavBar(context),
-          ),
+          borderRadius: BorderRadius.circular(48),
+          padding: const EdgeInsets.symmetric(vertical: 10),
+          child: _buildNavBar(context),
         ),
       ),
     );

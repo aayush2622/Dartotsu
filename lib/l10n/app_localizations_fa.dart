@@ -148,7 +148,7 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String nextEpisodeRelease(int episode) {
-    return 'Episode $episode will be released in';
+    return 'قسمت (X8X) در';
   }
 
   @override
@@ -225,7 +225,7 @@ class AppLocalizationsFa extends AppLocalizations {
   }
 
   @override
-  String get topScore => 'Top Score';
+  String get topScore => 'امتیاز بالا';
 
   @override
   String mostFavourite(String type) {
@@ -302,10 +302,10 @@ class AppLocalizationsFa extends AppLocalizations {
   String get dtu => 'پایین تا بالا';
 
   @override
-  String get rtl => 'Right To Left';
+  String get rtl => 'راست برای چپ';
 
   @override
-  String get ltr => 'Left To Right';
+  String get ltr => 'چپ به راست';
 
   @override
   String get direction => 'جهت هدایت';
@@ -580,6 +580,14 @@ class AppLocalizationsFa extends AppLocalizations {
   String get thumbLessSeekBarDesc => 'حذف انگشت از نوار جستجو';
 
   @override
+  String get customMPV => 'Custom MPV Configuration';
+
+  @override
+  String customMPVDescription(String path) {
+    return 'Enable this option to use your own MPV configuration file. Place your custom config at: $path';
+  }
+
+  @override
   String get subtitles => 'زیرنویس‌ها';
 
   @override
@@ -670,17 +678,17 @@ class AppLocalizationsFa extends AppLocalizations {
   String get enableDarkMode => 'فعال‌سازی حالت تاریک';
 
   @override
-  String get glassEffect => 'Glass Effect';
+  String get glassEffect => 'اثر شیشه ای';
 
   @override
-  String get glassEffectDescription =>
-      'Gives a frosted glass effect to the app';
+  String get glassEffectDescription => 'یک اثر شیشه ای سرد به برنامه';
 
   @override
-  String get coverTheme => 'Use Cover Theme';
+  String get coverTheme => 'استفاده از Cover Theme';
 
   @override
-  String get coverThemeDescription => 'Use media cover image as theme color';
+  String get coverThemeDescription =>
+      'استفاده از تصویر پوشش رسانه به عنوان رنگ تم';
 
   @override
   String get materialYou => 'Material You';
@@ -690,7 +698,7 @@ class AppLocalizationsFa extends AppLocalizations {
       'از رنگ پس‌زمینه خود برای برنامه استفاده کنید';
 
   @override
-  String get customTheme => 'تم سفارشی';
+  String get customTheme => 'سفارشی سفارشی Theme Theme';
 
   @override
   String get customThemeDescription => 'از رنگ خود برای تم استفاده کنید';

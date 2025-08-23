@@ -5,6 +5,7 @@ class buildDropdownMenu extends StatefulWidget {
   final String? currentValue;
   final List<String>? options;
   final void Function(String)? onChanged;
+  final void Function()? onLongPress;
   final String? labelText;
   final IconData? prefixIcon;
   final double borderRadius;
@@ -17,6 +18,7 @@ class buildDropdownMenu extends StatefulWidget {
     this.currentValue,
     this.options,
     this.onChanged,
+    this.onLongPress,
     this.labelText,
     this.prefixIcon,
     this.borderRadius = 8.0,
@@ -58,69 +60,72 @@ class buildDropdownMenuState extends State<buildDropdownMenu> {
       padding: widget.padding ??
           const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       child: InputDecorator(
-        decoration: InputDecoration(
-          labelText: widget.labelText,
-          labelStyle: const TextStyle(
-            fontFamily: 'Poppins',
-            fontSize: 18,
-            fontWeight: FontWeight.w800,
-          ),
-          prefixIcon:
-              widget.prefixIcon != null ? Icon(widget.prefixIcon) : null,
-          contentPadding: const EdgeInsets.symmetric(horizontal: 8.0),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(widget.borderRadius),
-            borderSide:
-                BorderSide(color: widget.borderColor ?? Colors.transparent),
-          ),
-          hoverColor: Colors.transparent,
-          focusColor: Colors.transparent,
-          fillColor: Colors.transparent,
-        ),
-        child: DropdownButtonHideUnderline(
-          child: DropdownButton(
-            focusColor: Colors.transparent,
-            hint: Text(
-              widget.hintText ?? '',
-              style: const TextStyle(
-                fontFamily: 'Poppins',
-                fontSize: 14,
-                fontWeight: FontWeight.w700,
-              ),
+          decoration: InputDecoration(
+            labelText: widget.labelText,
+            labelStyle: const TextStyle(
+              fontFamily: 'Poppins',
+              fontSize: 18,
+              fontWeight: FontWeight.w800,
             ),
-            isExpanded: true,
-            value: widget.options?.contains(_selectedValue) == true
-                ? _selectedValue
-                : null,
-            onChanged: (String? newValue) {
-              if (newValue != null) {
-                setState(() {
-                  _selectedValue = newValue;
-                });
-                if (widget.onChanged != null) {
-                  widget.onChanged!(newValue);
-                }
-              }
-            },
-            items: widget.options?.map((String option) {
-              final displayName = option[0].toUpperCase() + option.substring(1);
-              return DropdownMenuItem(
-                value: option,
-                child: Text(
-                  displayName,
+            prefixIcon:
+                widget.prefixIcon != null ? Icon(widget.prefixIcon) : null,
+            contentPadding: const EdgeInsets.symmetric(horizontal: 8.0),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(widget.borderRadius),
+              borderSide:
+                  BorderSide(color: widget.borderColor ?? Colors.transparent),
+            ),
+            hoverColor: Colors.transparent,
+            focusColor: Colors.transparent,
+            fillColor: Colors.transparent,
+          ),
+          child: GestureDetector(
+            onLongPress: widget.onLongPress,
+            child: DropdownButtonHideUnderline(
+              child: DropdownButton(
+                focusColor: Colors.transparent,
+                hint: Text(
+                  widget.hintText ?? '',
                   style: const TextStyle(
                     fontFamily: 'Poppins',
                     fontSize: 14,
                     fontWeight: FontWeight.w700,
                   ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
                 ),
-              );
-            }).toList(),
-          ),
-        ),
-      ),
+                isExpanded: true,
+                value: widget.options?.contains(_selectedValue) == true
+                    ? _selectedValue
+                    : null,
+                onChanged: (String? newValue) {
+                  if (newValue != null) {
+                    setState(() {
+                      _selectedValue = newValue;
+                    });
+                    if (widget.onChanged != null) {
+                      widget.onChanged!(newValue);
+                    }
+                  }
+                },
+                items: widget.options?.map((String option) {
+                  final displayName =
+                      option[0].toUpperCase() + option.substring(1);
+                  return DropdownMenuItem(
+                    value: option,
+                    child: Text(
+                      displayName,
+                      style: const TextStyle(
+                        fontFamily: 'Poppins',
+                        fontSize: 14,
+                        fontWeight: FontWeight.w700,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  );
+                }).toList(),
+              ),
+            ),
+          )),
     );
   }
 }

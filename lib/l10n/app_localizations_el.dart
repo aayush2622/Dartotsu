@@ -149,7 +149,7 @@ class AppLocalizationsEl extends AppLocalizations {
 
   @override
   String nextEpisodeRelease(int episode) {
-    return 'Episode $episode will be released in';
+    return 'Το επεισόδιο $episode θα κυκλοφορήσει στο';
   }
 
   @override
@@ -302,10 +302,10 @@ class AppLocalizationsEl extends AppLocalizations {
   String get dtu => 'Υπό Ενημέρωση';
 
   @override
-  String get rtl => 'Right To Left';
+  String get rtl => 'Δικαίωμα στην Αριστερά';
 
   @override
-  String get ltr => 'Left To Right';
+  String get ltr => 'Αριστερά δεξιά';
 
   @override
   String get direction => 'Σκηνοθεσία';
@@ -588,6 +588,14 @@ class AppLocalizationsEl extends AppLocalizations {
       'Αφαιρέστε τον αντίχειρα από το κέντρο αναζήτησης';
 
   @override
+  String get customMPV => 'Custom MPV Configuration';
+
+  @override
+  String customMPVDescription(String path) {
+    return 'Enable this option to use your own MPV configuration file. Place your custom config at: $path';
+  }
+
+  @override
   String get subtitles => 'Υπότιτλοι';
 
   @override
@@ -679,17 +687,18 @@ class AppLocalizationsEl extends AppLocalizations {
   String get enableDarkMode => 'Ενεργοποιήστε τη Σκοτεινή Λειτουργία';
 
   @override
-  String get glassEffect => 'Glass Effect';
+  String get glassEffect => 'Γυάλινη επίδραση';
 
   @override
   String get glassEffectDescription =>
-      'Gives a frosted glass effect to the app';
+      'Δίνει μια παγετοποιημένη γυάλινη επίδραση στην εφαρμογή';
 
   @override
-  String get coverTheme => 'Use Cover Theme';
+  String get coverTheme => 'Χρησιμοποιήστε την κάλυψη';
 
   @override
-  String get coverThemeDescription => 'Use media cover image as theme color';
+  String get coverThemeDescription =>
+      'Χρησιμοποιήστε την εικόνα των μέσων ενημέρωσης ως θέμα χρώμα';
 
   @override
   String get materialYou => 'Material You';
@@ -699,7 +708,7 @@ class AppLocalizationsEl extends AppLocalizations {
       'Χρησιμοποιήστε το ίδιο χρώμα με το φόντο σας';
 
   @override
-  String get customTheme => 'Προσαρμοσμένο Θέμα';
+  String get customTheme => 'Custom Custom Custom Custom Custom Theme';
 
   @override
   String get customThemeDescription =>

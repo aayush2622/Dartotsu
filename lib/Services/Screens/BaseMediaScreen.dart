@@ -26,8 +26,9 @@ abstract class BaseMediaScreen extends GetxController {
   Future<void> loadAll();
 
   Future<void>? loadNextPage() => null;
-
-  void init() {
+  @override
+  void onInit() {
+    super.onInit();
     if (initialLoad) return;
     scrollController.addListener(scrollListener);
     final live = Refresh.getOrPut(refreshID, false);

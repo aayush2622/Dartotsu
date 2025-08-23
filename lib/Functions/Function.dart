@@ -2,12 +2,12 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../Animation/SlideUpAnimation.dart';
 import '../Theme/Colors.dart';
 import '../Theme/ThemeProvider.dart';
 
@@ -89,23 +89,26 @@ Future<void> snackString(
         behavior: SnackBarBehavior.floating,
         margin: EdgeInsets.zero,
         elevation: 0,
-        content: SlideUpAnimation(
-          child: GestureDetector(
-            onTap: () => scaffoldMessenger.hideCurrentSnackBar(),
-            onLongPress: () => copyToClipboard(clipboard ?? s),
-            child: Text(
-              s,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontFamily: 'Poppins',
-                fontSize: 16.0,
-                fontWeight: FontWeight.w600,
-                color: theme.onSurface,
-              ),
+        content: GestureDetector(
+          onTap: () => scaffoldMessenger.hideCurrentSnackBar(),
+          onLongPress: () => copyToClipboard(clipboard ?? s),
+          child: Text(
+            s,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontFamily: 'Poppins',
+              fontSize: 16.0,
+              fontWeight: FontWeight.w600,
+              color: theme.onSurface,
             ),
           ),
-        ),
-        duration: const Duration(seconds: 2),
+        ).animate(effects: [
+          const SlideEffect(
+            begin: Offset(0, 1),
+            end: Offset.zero,
+            duration: Duration(milliseconds: 200),
+          )
+        ]),
       );
 
       scaffoldMessenger.showSnackBar(snackBar);

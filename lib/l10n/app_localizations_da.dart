@@ -148,7 +148,7 @@ class AppLocalizationsDa extends AppLocalizations {
 
   @override
   String nextEpisodeRelease(int episode) {
-    return 'Episode $episode will be released in';
+    return 'Episode $episode vil blive frigivet i';
   }
 
   @override
@@ -225,7 +225,7 @@ class AppLocalizationsDa extends AppLocalizations {
   }
 
   @override
-  String get topScore => 'Top Score';
+  String get topScore => 'Topscore';
 
   @override
   String mostFavourite(String type) {
@@ -300,10 +300,10 @@ class AppLocalizationsDa extends AppLocalizations {
   String get dtu => 'Datoudgivelse';
 
   @override
-  String get rtl => 'Right To Left';
+  String get rtl => 'Til venstre';
 
   @override
-  String get ltr => 'Left To Right';
+  String get ltr => 'Venstre til højre';
 
   @override
   String get direction => 'Retsretning';
@@ -578,6 +578,14 @@ class AppLocalizationsDa extends AppLocalizations {
   String get thumbLessSeekBarDesc => 'Fjern tommelfingeren fra søgelinjen';
 
   @override
+  String get customMPV => 'Custom MPV Configuration';
+
+  @override
+  String customMPVDescription(String path) {
+    return 'Enable this option to use your own MPV configuration file. Place your custom config at: $path';
+  }
+
+  @override
   String get subtitles => 'Undertekster';
 
   @override
@@ -668,17 +676,16 @@ class AppLocalizationsDa extends AppLocalizations {
   String get enableDarkMode => 'Aktivér mørk tilstand';
 
   @override
-  String get glassEffect => 'Glass Effect';
+  String get glassEffect => 'Glaseffekt';
 
   @override
-  String get glassEffectDescription =>
-      'Gives a frosted glass effect to the app';
+  String get glassEffectDescription => 'Giver en frostet glaseffekt til appen';
 
   @override
-  String get coverTheme => 'Use Cover Theme';
+  String get coverTheme => 'Brug Cover Theme';
 
   @override
-  String get coverThemeDescription => 'Use media cover image as theme color';
+  String get coverThemeDescription => 'Brug medie coverbillede som temafarve';
 
   @override
   String get materialYou => 'Material You';
@@ -687,7 +694,7 @@ class AppLocalizationsDa extends AppLocalizations {
   String get materialYouDescription => 'Brug samme farve som din baggrund';
 
   @override
-  String get customTheme => 'Tilpasset tema';
+  String get customTheme => 'Tilpasset tilpasset Tematema';
 
   @override
   String get customThemeDescription => 'Brug din egen farve til temaet';

@@ -1,4 +1,3 @@
-import 'package:blurbox/blurbox.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -42,7 +41,6 @@ class MediaSection extends StatefulWidget {
 class _MediaSectionState extends State<MediaSection> {
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context).colorScheme;
     final isPhone = context.isPhone;
 
     final mediaContent = AnimatedSwitcher(
@@ -66,33 +64,11 @@ class _MediaSectionState extends State<MediaSection> {
     );
 
     if (isPhone) return content;
-    return ThemedWidget(
+    return ThemedContainer(
       context: context,
-      materialWidget: Container(
-        decoration: BoxDecoration(
-          color: theme.surfaceContainerLow,
-          borderRadius: BorderRadius.circular(24.0),
-          border: Border.all(
-            color: theme.outlineVariant,
-            width: 1,
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: theme.shadow.withOpacity(0.1),
-              blurRadius: 20,
-              offset: const Offset(0, 6),
-            ),
-          ],
-        ),
-        child: content,
-      ),
-      glassWidget: PresetBlurBox(
-        preset: BlurPreset.iosStyle,
-        padding: EdgeInsets.zero,
-        color: theme.surface.withOpacity(0.2),
-        borderRadius: BorderRadius.circular(30.0),
-        child: content,
-      ),
+      child: content,
+      padding: const EdgeInsets.only(),
+      borderRadius: BorderRadius.circular(30.0),
     );
   }
 

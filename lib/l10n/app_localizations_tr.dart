@@ -148,7 +148,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String nextEpisodeRelease(int episode) {
-    return 'Episode $episode will be released in';
+    return 'Bölüm $episode serbest bırakılacaktır';
   }
 
   @override
@@ -301,10 +301,10 @@ class AppLocalizationsTr extends AppLocalizations {
   String get dtu => 'Aşağıdan Yukarıya';
 
   @override
-  String get rtl => 'Right To Left';
+  String get rtl => 'Sağdan sola';
 
   @override
-  String get ltr => 'Left To Right';
+  String get ltr => 'Sağdan sağa';
 
   @override
   String get direction => 'Yönellem';
@@ -583,6 +583,14 @@ class AppLocalizationsTr extends AppLocalizations {
   String get thumbLessSeekBarDesc => 'Arama çubuğundan başparmak';
 
   @override
+  String get customMPV => 'Custom MPV Configuration';
+
+  @override
+  String customMPVDescription(String path) {
+    return 'Enable this option to use your own MPV configuration file. Place your custom config at: $path';
+  }
+
+  @override
   String get subtitles => 'Altyazılar';
 
   @override
@@ -674,17 +682,17 @@ class AppLocalizationsTr extends AppLocalizations {
   String get enableDarkMode => 'Karanlık Modu Etkinleştir';
 
   @override
-  String get glassEffect => 'Glass Effect';
+  String get glassEffect => 'Cam Etkisi';
 
   @override
-  String get glassEffectDescription =>
-      'Gives a frosted glass effect to the app';
+  String get glassEffectDescription => 'Uygulamaya soğuk bir cam etkisi verir';
 
   @override
   String get coverTheme => 'Use Cover Theme';
 
   @override
-  String get coverThemeDescription => 'Use media cover image as theme color';
+  String get coverThemeDescription =>
+      'Medya kapak görüntüsünü tema rengi olarak kullanın';
 
   @override
   String get materialYou => 'Material You';
@@ -693,7 +701,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get materialYouDescription => 'Duvar kağıdınızla aynı rengi kullanın';
 
   @override
-  String get customTheme => 'Özel Tema';
+  String get customTheme => 'Özel Özel Özel Tema';
 
   @override
   String get customThemeDescription => 'Tema için kendi renginizi kullanın';

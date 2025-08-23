@@ -29,7 +29,7 @@ class HomeScreenDesktopState extends State<HomeScreenDesktop> {
     return Stack(
       children: [
         _buildRefreshContent,
-        _buildScrollToTopButton,
+        screen.buildScrollToTopButton(context),
       ],
     );
   }
@@ -52,30 +52,6 @@ class HomeScreenDesktopState extends State<HomeScreenDesktop> {
           ),
         ],
       ),
-    );
-  }
-
-  Widget get _buildScrollToTopButton {
-    return Positioned(
-      bottom: 64.0,
-      left: (0.screenWidthWithContext(context) / 2) - 24.0,
-      child: Obx(() => screen.scrollToTop.value
-          ? Container(
-              decoration: BoxDecoration(
-                color: themeNotifier.isDarkMode ? greyNavDark : greyNavLight,
-                borderRadius: BorderRadius.circular(64.0),
-              ),
-              padding: const EdgeInsets.all(4.0),
-              child: IconButton(
-                icon: const Icon(Icons.arrow_upward),
-                onPressed: () => screen.scrollController.animateTo(
-                  0,
-                  duration: const Duration(milliseconds: 500),
-                  curve: Curves.easeInOut,
-                ),
-              ),
-            )
-          : const SizedBox()),
     );
   }
 
@@ -164,33 +140,37 @@ class HomeScreenDesktopState extends State<HomeScreenDesktop> {
       top: 36.statusBar(),
       left: 34.0,
       right: 16.0,
-      child: SlideUpAnimation(
-        child: Row(
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  data.username.value,
-                  style: TextStyle(
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16.0,
-                    color: themeNotifier.isDarkMode
-                        ? Colors.white
-                        : Colors.black.withValues(alpha: 0.6),
-                  ),
+      child: Row(
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                data.username.value,
+                style: TextStyle(
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16.0,
+                  color: themeNotifier.isDarkMode
+                      ? Colors.white
+                      : Colors.black.withValues(alpha: 0.6),
                 ),
-                const SizedBox(height: 2.0),
-                _buildInfoRow(screen.firstInfoString,
-                    data.episodesWatched.toString(), theme.primary),
-                _buildInfoRow(screen.secondInfoString,
-                    data.chapterRead.toString(), theme.primary),
-              ],
-            ),
-          ],
-        ),
-      ),
+              ),
+              const SizedBox(height: 2.0),
+              _buildInfoRow(screen.firstInfoString,
+                  data.episodesWatched.toString(), theme.primary),
+              _buildInfoRow(screen.secondInfoString,
+                  data.chapterRead.toString(), theme.primary),
+            ],
+          ),
+        ],
+      ).animate(effects: [
+        const SlideEffect(
+          begin: Offset(0, 1),
+          end: Offset.zero,
+          duration: Duration(milliseconds: 200),
+        )
+      ]),
     );
   }
 

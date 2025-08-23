@@ -11,6 +11,7 @@ class LoadingWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
+      clipBehavior: Clip.none,
       children: [
         Container(
           padding: EdgeInsets.only(
@@ -26,8 +27,10 @@ class LoadingWidget extends StatelessWidget {
           top: 36.statusBar(),
           child: GestureDetector(
             child: const SettingIconWidget(icon: Icons.settings),
-            onTap: () =>
-                showCustomBottomDialog(context, const SettingsBottomSheet()),
+            onTap: () => showCustomBottomDialog(
+              context,
+              const SettingsBottomSheet(),
+            ),
           ),
         ),
       ],

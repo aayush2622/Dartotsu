@@ -1,3 +1,4 @@
+import 'package:blurbox/blurbox.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -128,4 +129,60 @@ Widget ThemedWidget({
   final isGlassMode = themeManager.useGlassMode;
 
   return isGlassMode ? glassWidget ?? materialWidget : materialWidget;
+}
+
+Widget ThemedContainer({
+  required BuildContext context,
+  required Widget child,
+  Widget? glassWidget,
+  BorderRadiusGeometry? borderRadius,
+  EdgeInsetsGeometry? padding,
+}) {
+  final themeManager = Provider.of<ThemeNotifier>(context, listen: false);
+  final isGlassMode = themeManager.useGlassMode;
+  final theme = Theme.of(context).colorScheme;
+
+  final effectiveBorderRadius = borderRadius ?? BorderRadius.circular(64);
+  final effectivePadding = padding ?? const EdgeInsets.all(8);
+
+  if (isGlassMode) {
+    return BlurBox(
+      blur: 12.0,
+      padding: effectivePadding,
+      color: theme.surfaceContainerLow.withOpacity(0.2),
+      border: Border.all(
+        color: theme.onSurface.withOpacity(0.2),
+        width: 1,
+      ),
+      borderRadius: effectiveBorderRadius,
+      boxShadow: [
+        BoxShadow(
+          color: theme.surface.withOpacity(0.2),
+          blurRadius: 6.0,
+          spreadRadius: 0.5,
+        ),
+      ],
+      child: glassWidget ?? child,
+    );
+  }
+
+  return Container(
+    padding: effectivePadding,
+    decoration: BoxDecoration(
+      color: theme.surfaceContainerLow,
+      border: Border.all(
+        color: theme.outlineVariant,
+        width: 1,
+      ),
+      borderRadius: effectiveBorderRadius,
+      boxShadow: [
+        BoxShadow(
+          color: theme.shadow.withOpacity(0.1),
+          blurRadius: 20,
+          offset: const Offset(0, 6),
+        ),
+      ],
+    ),
+    child: child,
+  );
 }

@@ -21,22 +21,23 @@ class WindowsPlayer extends BasePlayer {
   VideoControllerConfiguration getPlatformConfig() {
     if (Platform.isAndroid) {
       return const VideoControllerConfiguration(
-          androidAttachSurfaceAfterVideoParameters: true);
+        androidAttachSurfaceAfterVideoParameters: true,
+      );
     }
     return const VideoControllerConfiguration();
   }
 
   WindowsPlayer(this.resizeMode, this.settings) {
-    // TODO => see if i used the prefManager ryt
     final useCustomConfig = loadData(PrefName.useCustomMpvConfig);
     final mpvConfPath = loadData(PrefName.mpvConfigDir);
 
     player = Player(
       configuration: PlayerConfiguration(
-          bufferSize: 1024 * 1024 * 64,
-          // Config Options thanks to snitchel
-          config: useCustomConfig,
-          configDir: mpvConfPath),
+        bufferSize: 1024 * 1024 * 64,
+        // Config Options thanks to snitchel
+        config: useCustomConfig,
+        configDir: mpvConfPath,
+      ),
     );
     videoController =
         VideoController(player, configuration: getPlatformConfig());
@@ -80,15 +81,25 @@ class WindowsPlayer extends BasePlayer {
     currentSubtitle = language;
     return videoController.player.setSubtitleTrack(isUri
         ? SubtitleTrack.uri(subtitleUri, title: language)
-        : SubtitleTrack(subtitleUri, language, language,
-            uri: false, data: false));
+        : SubtitleTrack(
+            subtitleUri,
+            language,
+            language,
+            uri: false,
+            data: false,
+          ));
   }
 
   @override
   Future<void> setAudio(String audioUri, String language, bool isUri) async =>
       await videoController.player.setAudioTrack(isUri
           ? AudioTrack.uri(audioUri, title: language)
-          : AudioTrack(audioUri, language, language, uri: false));
+          : AudioTrack(
+              audioUri,
+              language,
+              language,
+              uri: false,
+            ));
 
   @override
   void dispose() {

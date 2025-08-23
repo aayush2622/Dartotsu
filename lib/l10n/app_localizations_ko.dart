@@ -148,7 +148,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String nextEpisodeRelease(int episode) {
-    return 'Episode $episode will be released in';
+    return '에피소드 $episode가 발매됩니다';
   }
 
   @override
@@ -225,7 +225,7 @@ class AppLocalizationsKo extends AppLocalizations {
   }
 
   @override
-  String get topScore => 'Top Score';
+  String get topScore => '상단 점수';
 
   @override
   String mostFavourite(String type) {
@@ -299,10 +299,10 @@ class AppLocalizationsKo extends AppLocalizations {
   String get dtu => '맨 위로';
 
   @override
-  String get rtl => 'Right To Left';
+  String get rtl => '왼쪽으로';
 
   @override
-  String get ltr => 'Left To Right';
+  String get ltr => '오른쪽으로';
 
   @override
   String get direction => '제품정보';
@@ -571,6 +571,14 @@ class AppLocalizationsKo extends AppLocalizations {
   String get thumbLessSeekBarDesc => '찾기 바에서 엄지 제거';
 
   @override
+  String get customMPV => 'Custom MPV Configuration';
+
+  @override
+  String customMPVDescription(String path) {
+    return 'Enable this option to use your own MPV configuration file. Place your custom config at: $path';
+  }
+
+  @override
   String get subtitles => '자막';
 
   @override
@@ -661,17 +669,16 @@ class AppLocalizationsKo extends AppLocalizations {
   String get enableDarkMode => '다크 모드 활성화';
 
   @override
-  String get glassEffect => 'Glass Effect';
+  String get glassEffect => '유리 효과';
 
   @override
-  String get glassEffectDescription =>
-      'Gives a frosted glass effect to the app';
+  String get glassEffectDescription => '앱에 서리 유리 효과를 부여';
 
   @override
-  String get coverTheme => 'Use Cover Theme';
+  String get coverTheme => 'Cover 테마 사용';
 
   @override
-  String get coverThemeDescription => 'Use media cover image as theme color';
+  String get coverThemeDescription => '테마 색상으로 미디어 커버 이미지를 사용';
 
   @override
   String get materialYou => 'Material You';
@@ -680,7 +687,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get materialYouDescription => '배경화면과 동일한 색상을 사용하세요';
 
   @override
-  String get customTheme => '커스텀 테마';
+  String get customTheme => '제품 정보 이름 *';
 
   @override
   String get customThemeDescription => '자신만의 색상으로 테마를 설정하세요';

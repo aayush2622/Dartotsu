@@ -148,7 +148,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String nextEpisodeRelease(int episode) {
-    return 'Episode $episode will be released in';
+    return 'エピソード$episodeが公開されます';
   }
 
   @override
@@ -225,7 +225,7 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
-  String get topScore => 'Top Score';
+  String get topScore => 'トップスコア';
 
   @override
   String mostFavourite(String type) {
@@ -299,10 +299,10 @@ class AppLocalizationsJa extends AppLocalizations {
   String get dtu => 'アップダウン';
 
   @override
-  String get rtl => 'Right To Left';
+  String get rtl => '左へ';
 
   @override
-  String get ltr => 'Left To Right';
+  String get ltr => '左から右へ';
 
   @override
   String get direction => 'アクセス';
@@ -571,6 +571,14 @@ class AppLocalizationsJa extends AppLocalizations {
   String get thumbLessSeekBarDesc => '求めるバーから親指を取り除く';
 
   @override
+  String get customMPV => 'Custom MPV Configuration';
+
+  @override
+  String customMPVDescription(String path) {
+    return 'Enable this option to use your own MPV configuration file. Place your custom config at: $path';
+  }
+
+  @override
   String get subtitles => '字幕';
 
   @override
@@ -661,17 +669,16 @@ class AppLocalizationsJa extends AppLocalizations {
   String get enableDarkMode => 'ダークモードを有効にする';
 
   @override
-  String get glassEffect => 'Glass Effect';
+  String get glassEffect => 'ガラス効果';
 
   @override
-  String get glassEffectDescription =>
-      'Gives a frosted glass effect to the app';
+  String get glassEffectDescription => 'フロストガラス効果をアプリに与える';
 
   @override
-  String get coverTheme => 'Use Cover Theme';
+  String get coverTheme => 'カバーテーマを使用する';
 
   @override
-  String get coverThemeDescription => 'Use media cover image as theme color';
+  String get coverThemeDescription => 'テーマカラーとしてメディアカバーイメージを使う';
 
   @override
   String get materialYou => 'Material You';
@@ -680,7 +687,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get materialYouDescription => '壁紙と同じ色を使用する';
 
   @override
-  String get customTheme => 'カスタムテーマ';
+  String get customTheme => 'カスタム テーマ:';
 
   @override
   String get customThemeDescription => 'テーマに自分の色を使用する';
