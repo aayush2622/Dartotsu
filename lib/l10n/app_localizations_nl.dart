@@ -149,7 +149,7 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String nextEpisodeRelease(int episode) {
-    return 'Episode $episode will be released in';
+    return 'Episode 8X zal worden vrijgelaten';
   }
 
   @override
@@ -302,10 +302,10 @@ class AppLocalizationsNl extends AppLocalizations {
   String get dtu => 'Te updaten';
 
   @override
-  String get rtl => 'Right To Left';
+  String get rtl => 'Rechts naar links';
 
   @override
-  String get ltr => 'Left To Right';
+  String get ltr => 'Links naar rechts';
 
   @override
   String get direction => 'Direction';
@@ -584,6 +584,14 @@ class AppLocalizationsNl extends AppLocalizations {
   String get thumbLessSeekBarDesc => 'Verwijder de duim van de bar';
 
   @override
+  String get customMPV => 'Custom MPV Configuration';
+
+  @override
+  String customMPVDescription(String path) {
+    return 'Enable this option to use your own MPV configuration file. Place your custom config at: $path';
+  }
+
+  @override
   String get subtitles => 'Ondertitels';
 
   @override
@@ -674,17 +682,16 @@ class AppLocalizationsNl extends AppLocalizations {
   String get enableDarkMode => 'Donkere modus inschakelen';
 
   @override
-  String get glassEffect => 'Glass Effect';
+  String get glassEffect => 'Glas Effect';
 
   @override
-  String get glassEffectDescription =>
-      'Gives a frosted glass effect to the app';
+  String get glassEffectDescription => 'Geeft een glas effect op de app';
 
   @override
-  String get coverTheme => 'Use Cover Theme';
+  String get coverTheme => 'Gebruik decover Theme';
 
   @override
-  String get coverThemeDescription => 'Use media cover image as theme color';
+  String get coverThemeDescription => 'Gebruik media beeld als thema kleur';
 
   @override
   String get materialYou => 'Material You';
@@ -694,7 +701,7 @@ class AppLocalizationsNl extends AppLocalizations {
       'Gebruik dezelfde kleur als je wallpaper';
 
   @override
-  String get customTheme => 'Aangepast thema';
+  String get customTheme => 'Custom Theem';
 
   @override
   String get customThemeDescription => 'Gebruik je eigen kleur voor het thema';

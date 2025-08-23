@@ -282,8 +282,8 @@ class AlertDialogBuilder {
     final media = MediaQuery.of(context).size;
     return SizedBox(
       width: media.width * 0.7,
-      height: media.height * 0.8,
       child: ListView.builder(
+        shrinkWrap: true,
         itemCount: _items!.length,
         itemBuilder: (_, index) => itemBuilder(_items![index]),
       ),

@@ -29,7 +29,6 @@ class MangaScreenState extends State<MangaScreen> {
     if (screen == null) {
       return service.notImplemented(widget.runtimeType.toString());
     }
-    screen.init();
     return Scaffold(
       body: Stack(
         children: [

@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:dartotsu/Preferences/IsarDataClasses/MediaSettings/MediaSettings.dart';
 import 'package:dartotsu/Preferences/IsarDataClasses/ShowResponse/ShowResponse.dart';
 import 'package:dartotsu/logger.dart';
+import 'package:dartotsu_extension_bridge/Mangayomi/Eval/dart/model/source_preference.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart'
     hide isar;
 import 'package:device_info_plus/device_info_plus.dart';

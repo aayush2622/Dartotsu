@@ -149,7 +149,7 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String nextEpisodeRelease(int episode) {
-    return 'Episode $episode will be released in';
+    return 'Episode $episode буде випущений в';
   }
 
   @override
@@ -226,7 +226,7 @@ class AppLocalizationsUk extends AppLocalizations {
   }
 
   @override
-  String get topScore => 'Top Score';
+  String get topScore => 'Рейтинг';
 
   @override
   String mostFavourite(String type) {
@@ -302,10 +302,10 @@ class AppLocalizationsUk extends AppLocalizations {
   String get dtu => 'Знизу вгору';
 
   @override
-  String get rtl => 'Right To Left';
+  String get rtl => 'Право на ліву';
 
   @override
-  String get ltr => 'Left To Right';
+  String get ltr => 'Ліворуч';
 
   @override
   String get direction => 'Напрямок';
@@ -586,6 +586,14 @@ class AppLocalizationsUk extends AppLocalizations {
       'Видалити великий палець з адресного бруса';
 
   @override
+  String get customMPV => 'Custom MPV Configuration';
+
+  @override
+  String customMPVDescription(String path) {
+    return 'Enable this option to use your own MPV configuration file. Place your custom config at: $path';
+  }
+
+  @override
   String get subtitles => 'Субтитри';
 
   @override
@@ -677,17 +685,18 @@ class AppLocalizationsUk extends AppLocalizations {
   String get enableDarkMode => 'Увімкнути темний режим';
 
   @override
-  String get glassEffect => 'Glass Effect';
+  String get glassEffect => 'Ефект скла';
 
   @override
   String get glassEffectDescription =>
-      'Gives a frosted glass effect to the app';
+      'Подарує заморожений ефект скла до програми';
 
   @override
-  String get coverTheme => 'Use Cover Theme';
+  String get coverTheme => 'Використання теми Cover';
 
   @override
-  String get coverThemeDescription => 'Use media cover image as theme color';
+  String get coverThemeDescription =>
+      'Використовуйте зображення медіа кришки як колір теми';
 
   @override
   String get materialYou => 'Material You';
@@ -697,7 +706,7 @@ class AppLocalizationsUk extends AppLocalizations {
       'Використовувати той самий колір, що і шпалери';
 
   @override
-  String get customTheme => 'Власна тема';
+  String get customTheme => 'Користування Головна';
 
   @override
   String get customThemeDescription =>

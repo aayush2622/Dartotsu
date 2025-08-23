@@ -150,7 +150,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String nextEpisodeRelease(int episode) {
-    return 'Episode $episode will be released in';
+    return 'प्रकरण $episode में जारी किया जाएगा';
   }
 
   @override
@@ -227,7 +227,7 @@ class AppLocalizationsHi extends AppLocalizations {
   }
 
   @override
-  String get topScore => 'Top Score';
+  String get topScore => 'शीर्ष स्कोर';
 
   @override
   String mostFavourite(String type) {
@@ -302,10 +302,10 @@ class AppLocalizationsHi extends AppLocalizations {
   String get dtu => 'ड्रॉप किया गया';
 
   @override
-  String get rtl => 'Right To Left';
+  String get rtl => 'दाएं से बाएं';
 
   @override
-  String get ltr => 'Left To Right';
+  String get ltr => 'बाएं से दाएं';
 
   @override
   String get direction => 'दिशा';
@@ -582,6 +582,14 @@ class AppLocalizationsHi extends AppLocalizations {
   String get thumbLessSeekBarDesc => 'तलाशी बार से अंगूठे निकालें';
 
   @override
+  String get customMPV => 'Custom MPV Configuration';
+
+  @override
+  String customMPVDescription(String path) {
+    return 'Enable this option to use your own MPV configuration file. Place your custom config at: $path';
+  }
+
+  @override
   String get subtitles => 'उपशीर्षक';
 
   @override
@@ -673,17 +681,17 @@ class AppLocalizationsHi extends AppLocalizations {
   String get enableDarkMode => 'डार्क मोड सक्षम करें';
 
   @override
-  String get glassEffect => 'Glass Effect';
+  String get glassEffect => 'ग्लास प्रभाव';
 
   @override
-  String get glassEffectDescription =>
-      'Gives a frosted glass effect to the app';
+  String get glassEffectDescription => 'एप्लिकेशन को ठंढा गिलास प्रभाव देता है';
 
   @override
-  String get coverTheme => 'Use Cover Theme';
+  String get coverTheme => 'आवरण थीम का उपयोग करें';
 
   @override
-  String get coverThemeDescription => 'Use media cover image as theme color';
+  String get coverThemeDescription =>
+      'थीम रंग के रूप में मीडिया कवर छवि का उपयोग करें';
 
   @override
   String get materialYou => 'Material You';
@@ -692,7 +700,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get materialYouDescription => 'अपनी वॉलपेपर के समान रंग का उपयोग करें';
 
   @override
-  String get customTheme => 'कस्टम थीम';
+  String get customTheme => 'कस्टम विषय';
 
   @override
   String get customThemeDescription => 'थीम के लिए अपना खुद का रंग उपयोग करें';

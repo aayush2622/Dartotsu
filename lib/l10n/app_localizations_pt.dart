@@ -148,7 +148,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String nextEpisodeRelease(int episode) {
-    return 'Episode $episode will be released in';
+    return 'Episódio $episode será lançado em';
   }
 
   @override
@@ -225,7 +225,7 @@ class AppLocalizationsPt extends AppLocalizations {
   }
 
   @override
-  String get topScore => 'Top Score';
+  String get topScore => 'Pontuação superior';
 
   @override
   String mostFavourite(String type) {
@@ -301,10 +301,10 @@ class AppLocalizationsPt extends AppLocalizations {
   String get dtu => 'De Baixo Para Cima';
 
   @override
-  String get rtl => 'Right To Left';
+  String get rtl => 'Direita à esquerda';
 
   @override
-  String get ltr => 'Left To Right';
+  String get ltr => 'Esquerda para a direita';
 
   @override
   String get direction => 'Direcção';
@@ -584,6 +584,14 @@ class AppLocalizationsPt extends AppLocalizations {
   String get thumbLessSeekBarDesc => 'Remova o polegar da barra de busca';
 
   @override
+  String get customMPV => 'Custom MPV Configuration';
+
+  @override
+  String customMPVDescription(String path) {
+    return 'Enable this option to use your own MPV configuration file. Place your custom config at: $path';
+  }
+
+  @override
   String get subtitles => 'Legendas';
 
   @override
@@ -675,17 +683,18 @@ class AppLocalizationsPt extends AppLocalizations {
   String get enableDarkMode => 'Ativar o Modo Escuro';
 
   @override
-  String get glassEffect => 'Glass Effect';
+  String get glassEffect => 'Efeito de vidro';
 
   @override
   String get glassEffectDescription =>
-      'Gives a frosted glass effect to the app';
+      'Dá um efeito de vidro fosco para o aplicativo';
 
   @override
-  String get coverTheme => 'Use Cover Theme';
+  String get coverTheme => 'Usar tema de capa';
 
   @override
-  String get coverThemeDescription => 'Use media cover image as theme color';
+  String get coverThemeDescription =>
+      'Use a imagem da capa da mídia como cor do tema';
 
   @override
   String get materialYou => 'Material You';
@@ -694,7 +703,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get materialYouDescription => 'Use a mesma cor do seu papel de parede';
 
   @override
-  String get customTheme => 'Tema Personalizado';
+  String get customTheme => 'Personalizado Tema';
 
   @override
   String get customThemeDescription => 'Use sua própria cor para o tema';
@@ -924,6 +933,11 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get totalChapters => 'Capítulos';
 
   @override
+  String nextEpisodeRelease(int episode) {
+    return 'Episódio $episode será lançado em';
+  }
+
+  @override
   String get genres => 'Gêneros';
 
   @override
@@ -997,6 +1011,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   }
 
   @override
+  String get topScore => 'Pontuação superior';
+
+  @override
   String mostFavourite(String type) {
     return '$type Mais Favoritados';
   }
@@ -1068,6 +1085,12 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get dtu => 'Para Cima';
+
+  @override
+  String get rtl => 'Direita à esquerda';
+
+  @override
+  String get ltr => 'Esquerda para a direita';
 
   @override
   String get direction => 'Direção';
@@ -1350,6 +1373,14 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get thumbLessSeekBarDesc => 'Tirar o indicador da barra de progresso';
 
   @override
+  String get customMPV => 'Custom MPV Configuration';
+
+  @override
+  String customMPVDescription(String path) {
+    return 'Enable this option to use your own MPV configuration file. Place your custom config at: $path';
+  }
+
+  @override
   String get subtitles => 'Legendas';
 
   @override
@@ -1441,6 +1472,20 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get enableDarkMode => 'Ativar Modo Escuro';
 
   @override
+  String get glassEffect => 'Efeito de vidro';
+
+  @override
+  String get glassEffectDescription =>
+      'Dá um efeito de vidro fosco para o aplicativo';
+
+  @override
+  String get coverTheme => 'Usar tema de capa';
+
+  @override
+  String get coverThemeDescription =>
+      'Use a imagem da capa da mídia como cor do tema';
+
+  @override
   String get materialYou => 'Material You';
 
   @override
@@ -1448,13 +1493,13 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
       'Combine com a cor do seu papel de parede e use ela';
 
   @override
-  String get customTheme => 'Tema Personalizado';
+  String get customTheme => 'Personalizado Tema';
 
   @override
   String get customThemeDescription => 'Use sua cor favorita no tema';
 
   @override
-  String get oledThemeVariant => 'Variante do tema OLED';
+  String get oledThemeVariant => 'OLED Variante do tema';
 
   @override
   String get oledThemeVariantDescription => 'Ativar modo OLED';

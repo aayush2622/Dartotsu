@@ -585,6 +585,14 @@ class AppLocalizationsHr extends AppLocalizations {
   String get thumbLessSeekBarDesc => 'Uklonite palac s trake za traženje';
 
   @override
+  String get customMPV => 'Custom MPV Configuration';
+
+  @override
+  String customMPVDescription(String path) {
+    return 'Enable this option to use your own MPV configuration file. Place your custom config at: $path';
+  }
+
+  @override
   String get subtitles => 'Titlovi';
 
   @override

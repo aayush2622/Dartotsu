@@ -749,13 +749,16 @@ class _PlayerControllerState extends State<PlayerController> {
             elevation: 4,
             child: InkWell(
               onTap: () {
-                controller.setSubtitle(
-                  sub.file ?? "",
-                  sub.label ?? "",
-                  sub.file?.toNullInt() == null,
-                );
+                controller
+                    .setSubtitle(
+                      sub.file ?? "",
+                      sub.label ?? "",
+                      sub.file?.toNullInt() == null,
+                    )
+                    .then(
+                      (_) => controller.play(),
+                    );
                 Get.back();
-                controller.play();
               },
               borderRadius: BorderRadius.circular(12),
               child: Padding(
@@ -798,13 +801,16 @@ class _PlayerControllerState extends State<PlayerController> {
             elevation: 4,
             child: InkWell(
               onTap: () {
-                controller.setAudio(
-                  sub.file ?? "",
-                  sub.label ?? "",
-                  sub.file?.toNullInt() == null,
-                );
+                controller
+                    .setAudio(
+                      sub.file ?? "",
+                      sub.label ?? "",
+                      sub.file?.toNullInt() == null,
+                    )
+                    .then(
+                      (_) => controller.play(),
+                    );
                 Get.back();
-                controller.play();
               },
               borderRadius: BorderRadius.circular(12),
               child: Padding(

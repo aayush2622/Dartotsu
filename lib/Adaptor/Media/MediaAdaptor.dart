@@ -3,9 +3,9 @@ import 'dart:math';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dartotsu/Functions/Extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart' hide ShimmerEffect;
 import 'package:skeletonizer/skeletonizer.dart';
 
-import '../../Animation/ScaleAnimation.dart';
 import '../../DataClass/Media.dart';
 import '../../Functions/Function.dart';
 import '../../Screens/Detail/MediaScreen.dart';
@@ -161,18 +161,24 @@ class MediaGridState extends State<MediaAdaptor> {
     required Offset initialOffset,
     required Widget child,
   }) {
-    return SlideAndScaleAnimation(
-      initialOffset: initialOffset,
-      finalOffset: Offset.zero,
-      initialScale: 0.0,
-      finalScale: 1.0,
-      duration: const Duration(milliseconds: 200),
-      child: GestureDetector(
-        onTap: () => _handleTap(index, media, tag),
-        onLongPress: () => _handleLongPress(media),
-        child: child,
-      ),
-    );
+    return GestureDetector(
+      onTap: () => _handleTap(index, media, tag),
+      onLongPress: () => _handleLongPress(media),
+      child: child,
+    )
+        .animate()
+        .slide(
+          begin: initialOffset,
+          end: Offset.zero,
+          curve: Curves.easeInOut,
+          duration: const Duration(milliseconds: 200),
+        )
+        .scale(
+          begin: const Offset(0.1, 0.1),
+          end: const Offset(1.0, 1.0),
+          curve: Curves.easeInOut,
+          duration: const Duration(milliseconds: 400),
+        );
   }
 
   Widget _buildHorizontalList() {
@@ -274,38 +280,20 @@ class MediaGridState extends State<MediaAdaptor> {
   }
 
   Widget _buildGrid() {
-    final height = widget.isLarge ? 270.0 : 250.0;
-    final itemWidth = 108.0;
     const sidePadding = 16.0;
-    const minGap = 2.0;
-
     Widget itemBuilder(BuildContext context, int index) {
       final media = _mediaList[index];
       final tag = _generateTag(media);
       return GestureDetector(
         onTap: () => _handleTap(index, media, tag),
         onLongPress: () => _handleLongPress(media),
-        child: MediaViewHolder(
-          mediaInfo: media,
-          isLarge: widget.isLarge,
-          tag: tag,
+        child: RepaintBoundary(
+          child: MediaViewHolder(
+            mediaInfo: media,
+            isLarge: widget.isLarge,
+            tag: tag,
+          ),
         ),
-      );
-    }
-
-    SliverGridDelegate makeDelegate(double maxWidth) {
-      final crossAxisCount = max(1, (maxWidth / (itemWidth + minGap)).floor());
-
-      final totalItemWidth = crossAxisCount * itemWidth;
-      final totalGapSpace = maxWidth - totalItemWidth;
-      final gap =
-          crossAxisCount > 1 ? totalGapSpace / (crossAxisCount - 1) : 0.0;
-
-      return SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: crossAxisCount,
-        mainAxisSpacing: 16,
-        crossAxisSpacing: gap,
-        childAspectRatio: itemWidth / height,
       );
     }
 
@@ -316,7 +304,6 @@ class MediaGridState extends State<MediaAdaptor> {
         child: LayoutBuilder(
           builder: (context, constraints) {
             final delegate = makeDelegate(constraints.maxWidth);
-
             return GridView.builder(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
@@ -334,11 +321,12 @@ class MediaGridState extends State<MediaAdaptor> {
         sliver: SliverLayoutBuilder(
           builder: (context, constraints) {
             final delegate = makeDelegate(constraints.crossAxisExtent);
-
             return SliverGrid(
               delegate: SliverChildBuilderDelegate(
                 itemBuilder,
                 childCount: _mediaList.length,
+                addAutomaticKeepAlives: false,
+                addRepaintBoundaries: true,
               ),
               gridDelegate: delegate,
             );
@@ -346,6 +334,24 @@ class MediaGridState extends State<MediaAdaptor> {
         ),
       );
     }
+  }
+
+  SliverGridDelegateWithFixedCrossAxisCount makeDelegate(double maxWidth) {
+    final height = widget.isLarge ? 270.0 : 250.0;
+    final itemWidth = 108.0;
+    const minGap = 2.0;
+    final crossAxisCount = max(1, (maxWidth / (itemWidth + minGap)).floor());
+
+    final totalItemWidth = crossAxisCount * itemWidth;
+    final totalGapSpace = maxWidth - totalItemWidth;
+    final gap = crossAxisCount > 1 ? totalGapSpace / (crossAxisCount - 1) : 0.0;
+
+    return SliverGridDelegateWithFixedCrossAxisCount(
+      crossAxisCount: crossAxisCount,
+      mainAxisSpacing: 16,
+      crossAxisSpacing: gap,
+      childAspectRatio: itemWidth / height,
+    );
   }
 
   Widget _buildCarouselView() {

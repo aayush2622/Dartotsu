@@ -571,6 +571,14 @@ class AppLocalizationsZh extends AppLocalizations {
   String get thumbLessSeekBarDesc => 'seek从寻求的酒吧搬走';
 
   @override
+  String get customMPV => 'Custom MPV Configuration';
+
+  @override
+  String customMPVDescription(String path) {
+    return 'Enable this option to use your own MPV configuration file. Place your custom config at: $path';
+  }
+
+  @override
   String get subtitles => '字幕';
 
   @override

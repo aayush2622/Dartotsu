@@ -1139,6 +1139,18 @@ abstract class AppLocalizations {
   /// **'Remove thumb from the seek bar'**
   String get thumbLessSeekBarDesc;
 
+  /// No description provided for @customMPV.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom MPV Configuration'**
+  String get customMPV;
+
+  /// No description provided for @customMPVDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable this option to use your own MPV configuration file. Place your custom config at: {path}'**
+  String customMPVDescription(String path);
+
   /// No description provided for @subtitles.
   ///
   /// In en, this message translates to:

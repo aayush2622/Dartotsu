@@ -2,18 +2,17 @@ import 'package:blur/blur.dart';
 import 'package:dartotsu/Functions/Extensions.dart';
 import 'package:dartotsu/Theme/LanguageSwitcher.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 import '../../Adaptor/Media/Widgets/MediaCard.dart';
 import '../../Animation/SlideInAnimation.dart';
-import '../../Animation/SlideUpAnimation.dart';
 import '../../Functions/Function.dart';
 import '../../Services/BaseServiceData.dart';
 import '../../Services/MediaService.dart';
 import '../../Services/Screens/BaseHomeScreen.dart';
 import '../../Services/ServiceSwitcher.dart';
-import '../../Theme/Colors.dart';
 import '../../Theme/ThemeProvider.dart';
 import '../../Widgets/CachedNetworkImage.dart';
 import '../../Widgets/CustomBottomDialog.dart';
@@ -36,18 +35,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class HomeScreenState extends State<HomeScreen> {
-  bool _initialized = false;
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    if (_initialized) return;
-
-    final screen = context.currentService().homeScreen;
-    screen?.init();
-    _initialized = true;
-  }
-
   @override
   Widget build(BuildContext context) {
     final service = context.currentService();
