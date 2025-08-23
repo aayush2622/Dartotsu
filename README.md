@@ -1,29 +1,29 @@
-
 <div align="right">
   <details>
-    <summary >🌐 Language</summary>
+    <summary>🌐</summary>
     <div>
       <div align="center">
-        <a href="https://openaitx.github.io/view.html?user=aayush2622&project=Dartotsu&lang=en">English</a>
-        | <a href="https://openaitx.github.io/view.html?user=aayush2622&project=Dartotsu&lang=zh-CN">简体中文</a>
-        | <a href="https://openaitx.github.io/view.html?user=aayush2622&project=Dartotsu&lang=zh-TW">繁體中文</a>
+        <a href="https://openaitx.github.io/view.html?user=aayush2622&project=Dartotsu&lang=ar">العربية</a>
+        | <a href="https://openaitx.github.io/#/view?user=aayush2622&project=Dartotsu&lang=as">অসমীয়া</a>
+        | <a href="https://openaitx.github.io/view.html?user=aayush2622&project=Dartotsu&lang=de">Deutsch</a>
+        | <a href="https://openaitx.github.io/view.html?user=aayush2622&project=Dartotsu&lang=en">English</a>
+        | <a href="https://openaitx.github.io/view.html?user=aayush2622&project=Dartotsu&lang=es">Español</a>
+        | <a href="https://openaitx.github.io/view.html?user=aayush2622&project=Dartotsu&lang=fa">فارسی</a>
+        | <a href="https://openaitx.github.io/view.html?user=aayush2622&project=Dartotsu&lang=fr">Français</a>
+        | <a href="https://openaitx.github.io/view.html?user=aayush2622&project=Dartotsu&lang=hi">हिन्दी</a>
+        | <a href="https://openaitx.github.io/view.html?user=aayush2622&project=Dartotsu&lang=id">Bahasa Indonesia</a>
+        | <a href="https://openaitx.github.io/view.html?user=aayush2622&project=Dartotsu&lang=it">Italiano</a>
         | <a href="https://openaitx.github.io/view.html?user=aayush2622&project=Dartotsu&lang=ja">日本語</a>
         | <a href="https://openaitx.github.io/view.html?user=aayush2622&project=Dartotsu&lang=ko">한국어</a>
-        | <a href="https://openaitx.github.io/view.html?user=aayush2622&project=Dartotsu&lang=hi">हिन्दी</a>
-        | <a href="https://openaitx.github.io/view.html?user=aayush2622&project=Dartotsu&lang=th">ไทย</a>
-        | <a href="https://openaitx.github.io/view.html?user=aayush2622&project=Dartotsu&lang=fr">Français</a>
-        | <a href="https://openaitx.github.io/view.html?user=aayush2622&project=Dartotsu&lang=de">Deutsch</a>
-        | <a href="https://openaitx.github.io/view.html?user=aayush2622&project=Dartotsu&lang=es">Español</a>
-        | <a href="https://openaitx.github.io/view.html?user=aayush2622&project=Dartotsu&lang=it">Italiano</a>
-        | <a href="https://openaitx.github.io/view.html?user=aayush2622&project=Dartotsu&lang=ru">Русский</a>
-        | <a href="https://openaitx.github.io/view.html?user=aayush2622&project=Dartotsu&lang=pt">Português</a>
         | <a href="https://openaitx.github.io/view.html?user=aayush2622&project=Dartotsu&lang=nl">Nederlands</a>
         | <a href="https://openaitx.github.io/view.html?user=aayush2622&project=Dartotsu&lang=pl">Polski</a>
-        | <a href="https://openaitx.github.io/view.html?user=aayush2622&project=Dartotsu&lang=ar">العربية</a>
-        | <a href="https://openaitx.github.io/view.html?user=aayush2622&project=Dartotsu&lang=fa">فارسی</a>
+        | <a href="https://openaitx.github.io/view.html?user=aayush2622&project=Dartotsu&lang=pt">Português</a>
+        | <a href="https://openaitx.github.io/view.html?user=aayush2622&project=Dartotsu&lang=ru">Русский</a>
+        | <a href="https://openaitx.github.io/view.html?user=aayush2622&project=Dartotsu&lang=th">ไทย</a>
         | <a href="https://openaitx.github.io/view.html?user=aayush2622&project=Dartotsu&lang=tr">Türkçe</a>
         | <a href="https://openaitx.github.io/view.html?user=aayush2622&project=Dartotsu&lang=vi">Tiếng Việt</a>
-        | <a href="https://openaitx.github.io/view.html?user=aayush2622&project=Dartotsu&lang=id">Bahasa Indonesia</a>
+        | <a href="https://openaitx.github.io/view.html?user=aayush2622&project=Dartotsu&lang=zh-CN">简体中文</a>
+        | <a href="https://openaitx.github.io/view.html?user=aayush2622&project=Dartotsu&lang=zh-TW">繁體中文</a>
       </div>
     </div>
   </details>
@@ -120,3 +120,4 @@ Your efforts are invaluable.
 
 ## License
 Dartotsu is licensed under the Unabandon Public License (UPL). More info can be found [here](LICENSE.md).
+

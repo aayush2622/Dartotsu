@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:isar/isar.dart';
-import '../../../Theme/LanguageSwitcher.dart';
 part 'DafaultReaderSettings.g.dart';
 
 @embedded

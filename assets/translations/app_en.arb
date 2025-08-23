@@ -562,6 +562,15 @@
   "@thumbLessSeekBar": {},
   "thumbLessSeekBarDesc": "Remove thumb from the seek bar",
   "@thumbLessSeekBarDesc": {},
+  "customMPV": "Custom MPV Configuration",
+  "customMPVDescription": "Enable this option to use your own MPV configuration file. Place your custom config at: {path}",
+  "@customMPVDescription" : {
+    "placeholders": {
+      "path": {
+        "type": "String"
+      }
+    }
+  },
 
   "subtitles": "Subtitles",
   "@subtitles": {},
