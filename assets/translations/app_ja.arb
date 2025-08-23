@@ -650,7 +650,7 @@
     "@topScore": {},
     "coverTheme": "カバーテーマを使用する",
     "@coverTheme": {},
-    "customMPVDescription": "Enable this option to use your own MPV configuration file. Place your custom config at: {path}",
+    "customMPVDescription": "このオプションを有効にすると、独自のMPV設定ファイルを使用します。 カスタムコンフィグを{path}に配置します",
     "@customMPVDescription": {
         "placeholders": {
             "path": {
@@ -658,6 +658,6 @@
             }
         }
     },
-    "customMPV": "Custom MPV Configuration",
+    "customMPV": "カスタムMPV 仕様",
     "@customMPV": {}
 }

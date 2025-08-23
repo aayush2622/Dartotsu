@@ -650,7 +650,7 @@
     "@topScore": {},
     "coverTheme": "ערכת נושא",
     "@coverTheme": {},
-    "customMPVDescription": "Enable this option to use your own MPV configuration file. Place your custom config at: {path}",
+    "customMPVDescription": "אפשרות זו להשתמש קובץ התצורה MPV שלך. הניחו את התצורה המותאמות אישית שלכם ב-X88X",
     "@customMPVDescription": {
         "placeholders": {
             "path": {
@@ -658,6 +658,6 @@
             }
         }
     },
-    "customMPV": "Custom MPV Configuration",
+    "customMPV": "MPV המונחים:",
     "@customMPV": {}
 }

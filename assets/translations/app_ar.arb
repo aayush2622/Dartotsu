@@ -643,7 +643,7 @@
     "@topScore": {},
     "coverTheme": "استخدام موضوع التغطية",
     "@coverTheme": {},
-    "customMPVDescription": "Enable this option to use your own MPV configuration file. Place your custom config at: {path}",
+    "customMPVDescription": "يُمكّن هذا الخيارِ أَنْ يَستعملَ ملفَ تركيبِكَ الخاصِ MPV. ضعي ثقتك في:",
     "@customMPVDescription": {
         "placeholders": {
             "path": {
@@ -651,6 +651,6 @@
             }
         }
     },
-    "customMPV": "Custom MPV Configuration",
+    "customMPV": "طراز Custom MPV الاتحاد",
     "@customMPV": {}
 }

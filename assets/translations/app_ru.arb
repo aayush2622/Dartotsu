@@ -650,7 +650,7 @@
     "@topScore": {},
     "coverTheme": "Использовать Обложка",
     "@coverTheme": {},
-    "customMPVDescription": "Enable this option to use your own MPV configuration file. Place your custom config at: {path}",
+    "customMPVDescription": "Включить эту опцию для использования собственного файла конфигурации MPV. Размещайте свою пользовательскую конфигурацию на: {path}",
     "@customMPVDescription": {
         "placeholders": {
             "path": {
@@ -658,6 +658,6 @@
             }
         }
     },
-    "customMPV": "Custom MPV Configuration",
+    "customMPV": "Пользовательские MPV Конфигурация",
     "@customMPV": {}
 }
