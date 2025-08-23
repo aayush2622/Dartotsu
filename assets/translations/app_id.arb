@@ -650,7 +650,7 @@
     "@topScore": {},
     "coverTheme": "Menggunakan Tema Cover",
     "@coverTheme": {},
-    "customMPVDescription": "Enable this option to use your own MPV configuration file. Place your custom config at: {path}",
+    "customMPVDescription": "Aktifkan opsi ini untuk menggunakan file konfigurasi MPV Anda sendiri. Tempatkan konfigurasi kustom Anda di: {path}",
     "@customMPVDescription": {
         "placeholders": {
             "path": {
@@ -658,6 +658,6 @@
             }
         }
     },
-    "customMPV": "Custom MPV Configuration",
+    "customMPV": "MPV kustom Login",
     "@customMPV": {}
 }

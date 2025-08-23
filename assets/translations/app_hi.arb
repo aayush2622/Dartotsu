@@ -650,7 +650,7 @@
     "@topScore": {},
     "coverTheme": "आवरण थीम का उपयोग करें",
     "@coverTheme": {},
-    "customMPVDescription": "Enable this option to use your own MPV configuration file. Place your custom config at: {path}",
+    "customMPVDescription": "अपनी खुद की एमपीवी कॉन्फ़िगरेशन फ़ाइल का उपयोग करने के लिए इस विकल्प को सक्षम करें। अपने कस्टम विन्यास पर रखें: {path}",
     "@customMPVDescription": {
         "placeholders": {
             "path": {
@@ -658,6 +658,6 @@
             }
         }
     },
-    "customMPV": "Custom MPV Configuration",
+    "customMPV": "कस्टम MPV विन्यास",
     "@customMPV": {}
 }

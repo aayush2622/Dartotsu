@@ -643,7 +643,7 @@
     "@topScore": {},
     "coverTheme": "Використання теми Cover",
     "@coverTheme": {},
-    "customMPVDescription": "Enable this option to use your own MPV configuration file. Place your custom config at: {path}",
+    "customMPVDescription": "Увімкніть цей параметр, щоб використовувати власний файл конфігурації MPV. Встановіть налаштування користувацького інтерфейсу: {path}",
     "@customMPVDescription": {
         "placeholders": {
             "path": {
@@ -651,6 +651,6 @@
             }
         }
     },
-    "customMPV": "Custom MPV Configuration",
+    "customMPV": "МПВ Налаштування",
     "@customMPV": {}
 }

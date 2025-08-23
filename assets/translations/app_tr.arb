@@ -650,7 +650,7 @@
     "@topScore": {},
     "coverTheme": "Use Cover Theme",
     "@coverTheme": {},
-    "customMPVDescription": "Enable this option to use your own MPV configuration file. Place your custom config at: {path}",
+    "customMPVDescription": "Bu seçeneği kendi MPV yapılandırma dosyasını kullanmak için kullanılabilir. Özel yapılandırın: {path}",
     "@customMPVDescription": {
         "placeholders": {
             "path": {
@@ -658,6 +658,6 @@
             }
         }
     },
-    "customMPV": "Custom MPV Configuration",
+    "customMPV": "Özel MPVVV Yapılandırma",
     "@customMPV": {}
 }
