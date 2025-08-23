@@ -1,632 +1,663 @@
 {
-  "anime": "ಆನಿಮೆ",
-  "@anime": {},
-  "animeDescription": "ನಿಮ್ಮ ಆನಿಮೆ ಪ್ರಾಮುಖ್ಯತೆಯನ್ನು ವೈಯಕ್ತಿಕಗೊಳಿಸಿ ಮತ್ತು ನಿರ್ವಹಿಸಿ",
-  "@animeDescription": {},
-  "colorPickerDescription": "ಒಂದು ಬಣ್ಣ ಆಯ್ಕೆಮಾಡಿ",
-  "@colorPickerDescription": {},
-  "common": "ಸಾಮಾನ್ಯ",
-  "@common": {},
-  "discord": "Discord",
-  "@discord": {},
-  "donationGoal": "ಈ ಕ್ಷಣಕ್ಕೆ ದಾನ ಗುರಿ ಇಲ್ಲ",
-  "@donationGoal": {},
-  "enableDarkMode": "ಡಾರ್ಕ್ ಮೋಡ್ ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ",
-  "@enableDarkMode": {},
-  "extension": "{count, plural, =1 {ವಿಸ್ತರಣೆ} other {ವಿಸ್ತರಣೆಗಳು}}",
-  "@extension": {},
-  "fontColor": "ಫಾಂಟ್ ಬಣ್ಣ",
-  "@fontColor": {},
-  "incognitoModeDescription": "ನಿಮ್ಮ ಚಟುವಟಿಕೆಯನ್ನು ಉಳಿಸದೆ ಬ್ರೌಸ್ ಮಾಡಿ",
-  "@incognitoModeDescription": {},
-  "login": "ಲಾಗಿನ್",
-  "@login": {},
-  "logout": "{type} ಲಾಗೌಟ್ ಆಗಿ",
-  "@logout": {},
-  "mal": "MyAnimeList",
-  "@mal": {},
-  "materialYouDescription": "ನಿಮ್ಮ ವಾಲ್‌ಪೇಪರ್‌ನಂತಹ ಬಣ್ಣವನ್ನು ಬಳಸಿ",
-  "@materialYouDescription": {},
-  "no": "ಇಲ್ಲ",
-  "@no": {},
-  "speed": "ವೇಗ",
-  "@speed": {},
-  "account": "ಖಾತೆ",
-  "@account": {},
-  "accountDescription": "ನಿಮ್ಮ AniList, MAL, ಮತ್ತು Discord ಖಾತೆಗಳನ್ನು ಸುಲಭವಾಗಿ ನಿರ್ವಹಿಸಿ",
-  "@accountDescription": {},
-  "anilist": "AniList",
-  "@anilist": {},
-  "appName": "Dartotsu",
-  "@appName": {},
-  "appTagline": "ಹೆಚ್ಚು ಒಳ್ಳೆಯ ಆಪ್\nಆನಿಮೆ ಮತ್ತು ಮಾಂಗಾ ಟ್ರ್ಯಾಕ್ ಮಾಡಲು",
-  "@appTagline": {},
-  "about": "ಬಗ್ಗೆ",
-  "@about": {},
-  "aboutDescription": "ಆಪ್ ಮತ್ತು ಅದರ ನಿರ್ಮಾಪಕರುಗಳ ಬಗ್ಗೆ ಹೆಚ್ಚಿನ ಮಾಹಿತಿ ತಿಳಿದುಕೊಳ್ಳಿ",
-  "@aboutDescription": {},
-  "backgroundColor": "ಹಿನ್ನೆಲೆಯ ಬಣ್ಣ",
-  "@backgroundColor": {},
-  "backgroundColorDescription": "ಉಪಶೀರ್ಷಿಕೆಯ ಹಿನ್ನೆಲೆಯ ಬಣ್ಣ",
-  "@backgroundColorDescription": {},
-  "bottomPadding": "ಕೆಳಗಿನ ಪ್ಯಾಡಿಂಗ್",
-  "@bottomPadding": {},
-  "bottomPaddingDescription": "ಉಪಶೀರ್ಷಿಕೆಯ ಕೆಳಗಿನ ಪ್ಯಾಡಿಂಗ್",
-  "@bottomPaddingDescription": {},
-  "cancel": "ನಿರಾಕರಿಸು",
-  "@cancel": {},
-  "colorPicker": "ಬಣ್ಣ ಆರಿಸುವಿ",
-  "@colorPicker": {},
-  "commonDescription": "ಆಪ್ ಬಳಕೆಗೆ ಸುಲಭವಾದ ಸಾಮಾನ್ಯ ಸೆಟ್ಟಿಂಗ್ಗಳನ್ನು ಪ್ರವೇಶಿಸಿ",
-  "@commonDescription": {},
-  "cursedSpeed": "ಶಾಪಿತ ವೇಗ",
-  "@cursedSpeed": {},
-  "cursedSpeedDescription": "ಜೀವನದಲ್ಲಿ ತುಂಬಾ ಬ್ಯುಸಿ ಆಗಿರುವವರಿಗಾಗಿ",
-  "@cursedSpeedDescription": {},
-  "customTheme": "ಕಸ್ಟಮ್ ಥೀಮ್",
-  "@customTheme": {},
-  "customThemeDescription": "ನೀವು ನಿಮ್ಮ ಬಣ್ಣವನ್ನು ಥೀಮಿಗಾಗಿ ಬಳಸಬಹುದು",
-  "@customThemeDescription": {},
-  "darkMode": "ಡಾರ್ಕ್ ಮೋಡ್",
-  "@darkMode": {},
-  "extensionsDescription": "ಹೆಚ್ಚು ಕಾರ್ಯಕ್ಷಮತೆಗಾಗಿ ವಿಸ್ತರಣೆಗಳನ್ನು ಇನ್ಸ್ಟಾಲ್ ಮಾಡಿ ಮತ್ತು ನಿರ್ವಹಿಸಿ",
-  "@extensionsDescription": {},
-  "manga": "ಮಂಗಾ",
-  "@manga": {},
-  "fontColorDescription": "ಉಪಶೀರ್ಷಿಕೆಯ ಫಾಂಟ್ ಬಣ್ಣ",
-  "@fontColorDescription": {},
-  "fontFamily": "ಫಾಂಟ್ ಕುಟುಂಬ",
-  "@fontFamily": {},
-  "fontFamilyDescription": "ಉಪಶೀರ್ಷಿಕೆಯ ಫಾಂಟ್ ಕುಟುಂಬ",
-  "@fontFamilyDescription": {},
-  "fontSize": "ಫಾಂಟ್ ಗಾತ್ರ",
-  "@fontSize": {},
-  "fontSizeDescription": "ಉಪಶೀರ್ಷಿಕೆಯ ಫಾಂಟ್ ಗಾತ್ರ",
-  "@fontSizeDescription": {},
-  "fontWeight": "ಫಾಂಟ್ ತೂಕ",
-  "@fontWeight": {},
-  "fontWeightDescription": "ಉಪಶೀರ್ಷಿಕೆಯ ಫಾಂಟ್ ತೂಕ",
-  "@fontWeightDescription": {},
-  "hidePrivate": "ಪ್ರೈವೇಟ್ ಹಚ್ಚು",
-  "@hidePrivate": {},
-  "hidePrivateDescription": "ಹೋಮ್ ಪುಟದಿಂದ ಖಾಸಗಿ ಸರಣಿಗಳನ್ನು ಹಚ್ಚು.",
-  "@hidePrivateDescription": {},
-  "incognitoMode": "ಇಂಕೋಗ್ನಿಟೋ ಮೋಡ್",
-  "@incognitoMode": {},
-  "mangaDescription": "ನಿಮ್ಮ ಮಂಗಾ ಅನುಭವವನ್ನು ಸಂಘಟಿಸಿ ಮತ್ತು ಅನुकूलಿಸು",
-  "@mangaDescription": {},
-  "materialYou": "Material You",
-  "@materialYou": {},
-  "notifications": "ಅधಿಸೂಚನೆಗಳು",
-  "@notifications": {},
-  "notificationsDescription": "ನೀವು ಹೇಗೆ ಮತ್ತು ಯಾವಾಗ ಅಧಿಸೂಚನೆಗಳನ್ನು ಸ್ವೀಕರಿಸಬೇಕೆಂದು ಸಂರಚಿಸಿ",
-  "@notificationsDescription": {},
-  "offlineMode": "ಆಫ್‌ಲೈನ್ ಮೋಡ್",
-  "@offlineMode": {},
-  "offlineModeDescription": "ಇಂಟರ್ನೆಟ್ ಸಂಪರ್ಕ ಇಲ್ಲದೆ ಆಪ್ ಅನ್ನು ಬಳಸಿ",
-  "@offlineModeDescription": {},
-  "ok": "ಓಕೆ",
-  "@ok": {},
-  "oledThemeVariant": "OLED ಥೀಮ್ ವ್ಯಾರಿಯಂಟ್",
-  "@oledThemeVariant": {},
-  "oledThemeVariantDescription": "OLED ಮೋಡ್ ಸಕ್ರಿಯಗೊಳಿಸಿ",
-  "@oledThemeVariantDescription": {},
-  "outlineColor": "ಊಟ್ಲೈನ್ ಬಣ್ಣ",
-  "@outlineColor": {},
-  "outlineColorDescription": "ಉಪಶೀರ್ಷಿಕೆಯ ಊಟ್ಲೈನ್ ಬಣ್ಣ",
-  "@outlineColorDescription": {},
-  "playerSettingsTitle": "ಪ್ಲೇಯರ್ ಸೆಟ್ಟಿಂಗ್ಗಳು",
-  "@playerSettingsTitle": {},
-  "resizeMode": "ವಿಸ್ತರಣೆ ಮೋಡ್",
-  "@resizeMode": {},
-  "resizeModeDescription": "ಪ್ಲೇಯರ್‌ಗಾಗಿ ಡಿಫಾಲ್ಟ್ ವಿಸ್ತರಣೆ ಮೋಡ್",
-  "@resizeModeDescription": {},
-  "restoreSettings": "ಸೆಟ್ಟಿಂಗ್ಗಳನ್ನು ಪುನಃಸ್ಥಾಪಿಸಿ",
-  "@restoreSettings": {},
-  "settings": "ಸೆಟ್ಟಿಂಗ್ಗಳು",
-  "@settings": {},
-  "showSubtitles": "ಉಪಶೀರ್ಷಿಕೆಗಳನ್ನು ತೋರಿಸಿ",
-  "@showSubtitles": {},
-  "showSubtitlesDescription": "ಡಿಫಾಲ್ಟ್‌ನಾಗಿ ಉಪಶೀರ್ಷಿಕೆಗಳನ್ನು ತೋರಿಸಿ",
-  "@showSubtitlesDescription": {},
-  "skipButton": "ಸ್ಕಿಪ್ ಬಟನ್",
-  "@skipButton": {},
-  "skipButtonDescription": "ಸ್ಕಿಪ್ ಬಟನ್ ಕಾಲಾವಧಿ",
-  "@skipButtonDescription": {},
-  "speedDescription": "ಪ್ಲೇಯರ್‌ಗಾಗಿ ಡಿಫಾಲ್ಟ್ ವೇಗ",
-  "@speedDescription": {},
-  "subtitles": "ಉಪಶೀರ್ಷಿಕೆಗಳು",
-  "@subtitles": {},
-  "subtitlePreview": "ಉಪಶೀರ್ಷಿಕೆ ಪೂರ್ವದರ್ಶನ",
-  "@subtitlePreview": {},
-  "supportMaintainer": "Dartotsu ನ ಸಂರಕ್ಷಣಕನನ್ನು ಬೆಂಬಲಿಸಲು ಇಚ್ಛಿಸುತ್ತಿದ್ದೀರಾ?\nದಾನ ಮಾಡಲು ಪರಿಗಣಿಸಿ",
-  "@supportMaintainer": {},
-  "theme": "ಥೀಮ್",
-  "@theme": {},
-  "themeDescription": "ನಿಮ್ಮ ಆಪ್‍ನ ಅಪರೂಪವನ್ನು ಮತ್ತು ಆನಂದವನ್ನು ಕಸ್ಟಮೈಸ್ ಮಾಡಿ",
-  "@themeDescription": {},
-  "yes": "ಹೌದು",
-  "@yes": {},
-  "totalEpisodes": "ಎಪಿಸೋಡ್‌ಗಳು",
-  "@totalEpisodes": {},
-  "thisSeason": "ಈ ಋತು",
-  "@thisSeason": {},
-  "ln": "ಲೈಟ್ ನವಲ",
-  "@ln": {},
-  "manageLayout": "{service} ಗೆ {page} ಪುಟದ ವಿನ್ಯಾಸವನ್ನು ನಿರ್ವಹಿಸಿ",
-  "@manageLayout": {
-    "placeholders": {
-      "service": {
-        "type": "String",
-        "examples": [
-          "Anilist",
-          "MAL"
-        ]
-      },
-      "page": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Home",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "nextSeason": "ಆಗಿನ ಋತು",
-  "@nextSeason": {},
-  "noDropped": "ನೀವು ಯಾವುದೇ {type} ಅನ್ನು ಡ್ರಾಪ್ ಮಾಡಿಲ್ಲ.",
-  "@noDropped": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "manhwa": "Manhwa",
-  "@manhwa": {},
-  "volume": "{count, plural, =1 {ಒಳಕೋಡು} other {ಒಳಕೋಡುಗಳು}}",
-  "@volume": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "total": "Total",
-  "@total": {},
-  "novel": "ನವಲ",
-  "@novel": {},
-  "tags": "Tags",
-  "@tags": {},
-  "activity": "{count, plural, =1 {ಚಟುವಟಿಕೆ} other {ಚಟುವಟಿಕೆಗಳು}}",
-  "@activity": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "continueWatching": "ಕಾಣಲು ಮುಂದುವರಿಸು",
-  "@continueWatching": {},
-  "topRated": "ಟಾಪ್ ರೇಟೆಡ್ {type}",
-  "@topRated": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa",
-          "Series"
-        ]
-      }
-    }
-  },
-  "previousSeason": "ಹಿಂದಿನ ಋತು",
-  "@previousSeason": {},
-  "popular": "ಪ್ರಸಿದ್ಧ {type}",
-  "@popular": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa"
-        ]
-      }
-    }
-  },
-  "confirmLogout": "ನೀವು ಲಾಗೌಟ್ ಆಗಲು ಖಚಿತವೇ?",
-  "@confirmLogout": {},
-  "mostFavourite": "ಅತ್ಯಂತ ಇಷ್ಟಪಡುವ {type}",
-  "@mostFavourite": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa"
-        ]
-      }
-    }
-  },
-  "series": "Series",
-  "@series": {},
-  "synopsis": "ಸಾರಾಂಶ",
-  "@synopsis": {},
-  "gridView": "ಗ್ರಿಡ್ ವೀಕ್ಷಣೆ",
-  "@gridView": {},
-  "episode": "{count, plural, =1 {ಎಪಿಸೋಡ್} other {ಎಪಿಸೋಡ್‌ಗಳು}}",
-  "@episode": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "popularity": "ಜನಪ್ರಿಯತೆ",
-  "@popularity": {},
-  "totalChapters": "ಅಧ್ಯಾಯಗಳು",
-  "@totalChapters": {},
-  "favorites": "ಇಷ್ಟಗಳು",
-  "@favorites": {},
-  "movie": "{count, plural, =1 {ಚಿತ್ರ} other {ಚಿತ್ರಗಳು}}",
-  "@movie": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "home": "Home",
-  "@home": {},
-  "prequel": "PREQUEL",
-  "@prequel": {},
-  "search": "ಹುಡುಕು",
-  "@search": {},
-  "collapseText": "ಕಡಿಮೆ ತೋರಿಸು",
-  "@collapseText": {},
-  "addToList": "Add To List",
-  "@addToList": {},
-  "chapter": "{count, plural, =1 {ಅಧ್ಯಾಯ} other {ಅಧ್ಯಾಯಗಳು}}",
-  "@chapter": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "available": "ಲಭ್ಯವಿದೆ {type}",
-  "@available": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "characters": "ಪಾತ್ರಗಳು",
-  "@characters": {},
-  "genres": "ಪ್ರಕಾರಗಳು",
-  "@genres": {},
-  "author": "Author",
-  "@author": {},
-  "calendar": "ದಿನಚರಿ",
-  "@calendar": {},
-  "format": "ಆಕಾರ",
-  "@format": {},
-  "expandText": "ಹೆಚ್ಚು ತೋರಿಸು",
-  "@expandText": {},
-  "manhua": "Manhua",
-  "@manhua": {},
-  "season": "ಋತು",
-  "@season": {},
-  "sequel": "SEQUEL",
-  "@sequel": {},
-  "studio": "Studio",
-  "@studio": {},
-  "staff": "ಸಿಬ್ಬಂದಿ",
-  "@staff": {},
-  "status": "Status",
-  "@status": {},
-  "relations": "Relations",
-  "@relations": {},
-  "source": "Source",
-  "@source": {},
-  "synonyms": "ಸಮಾನಾರ್ಥಕ ಪದಗಳು",
-  "@synonyms": {},
-  "startDate": "Start Date",
-  "@startDate": {},
-  "description": "ಸಾರಾಂಶ",
-  "@description": {},
-  "averageDuration": "ಮೂಲಕಿಕ ಕಾಲಾವಧಿ",
-  "@averageDuration": {},
-  "comingSoon": "ಆಗುವುದೆಂದು ಬರುತ್ತಿದೆ",
-  "@comingSoon": {},
-  "name": "Name",
-  "@name": {},
-  "endDate": "End Date",
-  "@endDate": {},
-  "meanScore": "Mean Score",
-  "@meanScore": {},
-  "nameRomaji": "ಹೆಸರು (ರೋಮಾಜಿ)",
-  "@nameRomaji": {},
-  "kitsu": "Kitsu",
-  "@kitsu": {},
-  "loginTo": "{service} ಗೆ ಲಾಗಿನ್ ಆಗಿ",
-  "@loginTo": {
-    "placeholders": {
-      "service": {
-        "type": "String",
-        "examples": [
-          "Anilist",
-          "MyAnimeList",
-          "Kitsu",
-          "Discord"
-        ]
-      }
-    }
-  },
-  "compactView": "ಸಂಕುಚಿತ ವೀಕ್ಷಣೆ",
-  "@compactView": {},
-  "scanlators": "ಸ್ಕ್ಯಾನ್ಲೇಟರ್ಸ್",
-  "@scanlators": {},
-  "listView": "List View",
-  "@listView": {},
-  "sort": "ವರ್ಗೀಕರಿಸು",
-  "@sort": {},
-  "chapterRead": "ಅಧ್ಯಾಯ ಓದಲು",
-  "@chapterRead": {},
-  "episodeWatched": "ಎಪಿಸೋಡ್ ವೀಕ್ಷಿಸಲಾಯಿತು",
-  "@episodeWatched": {},
-  "trending": "ಚಲನೆಯಲ್ಲಿರುವ {type}",
-  "@trending": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "installed": "ಇನ್ಸ್ಟಾಲ್ ಮಾಡಲಾಗಿದೆ {type}",
-  "@installed": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Extensions"
-        ]
-      }
-    }
-  },
-  "browse": "{type} ಬ್ರೌಸ್ ಮಾಡಿ",
-  "@browse": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "planned": "ಯೋಜನೆಗೊಳಿಸಿದ {type}",
-  "@planned": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "onHold": "ಹೋಲ್ಡ್ ಮೇಲೆ {type}",
-  "@onHold": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "favorite": "ಇಷ್ಟಪಡುವ {type}",
-  "@favorite": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "allCaughtUpNew": "ಎಲ್ಲವೂ ಅಪ್ಡೇಟ್ ಆಗಿದೆ, ಹೊಸದು ಏನು?",
-  "@allCaughtUpNew": {},
-  "hiddenMedia": "ಹಚ್ಚಿದ ಮೀಡಿಯಾ",
-  "@hiddenMedia": {},
-  "options": "Options",
-  "@options": {},
-  "read": "ಊದಿನು",
-  "@read": {},
-  "topAiring": "ಟಾಪ್ ಎಯರಿಂಗ್",
-  "@topAiring": {},
-  "watch": "ಕಾಣು",
-  "@watch": {},
-  "utd": "ಮೇಲೆ ಕೆಳಗೆ",
-  "@utd": {},
-  "dtu": "Down To Up",
-  "@dtu": {},
-  "droppedManga": "ಡ್ರಾಪ್ ಮಾಡಲಾದ ಮಾಂಗಾ",
-  "@droppedManga": {},
-  "info": "Info",
-  "@info": {},
-  "continueReading": "ಊದಲು ಮುಂದುವರಿಸು",
-  "@continueReading": {},
-  "comments": "ಕಮೆಂಟ್‌ಗಳು",
-  "@comments": {},
-  "droppedAnime": "ಡ್ರಾಪ್ ಮಾಡಲಾದ ಆನಿಮೆ",
-  "@droppedAnime": {},
-  "list": "{type} ಪಟ್ಟಿ",
-  "@list": {
-    "placeholders": {
-      "type": {
-        "examples": "Anime list",
-        "type": "String"
-      }
-    }
-  },
-  "language": "ಭಾಷೆ",
-  "@language": {},
-  "layout": "Layout",
-  "@layout": {},
-  "manageLayoutDescription": "ನೀವು ಐಟಂಗಳನ್ನು ಆಕರ್ಷಿಸಿ ಮತ್ತು ಬಿಡಿಸಿ {page} ಪುಟದ ವಿನ್ಯಾಸವನ್ನು ನಿರ್ವಹಿಸಬಹುದು",
-  "@manageLayoutDescription": {
-    "placeholders": {
-      "page": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Home",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "pickColor": "ನನಸು ಮೆತ್ತಲು",
-  "@pickColor": {},
-  "noFavourites": "ನೀವು ಯಾವುದೇ ಆನಿಮೆ/ಮಾಂಗಾ ಇಷ್ಟಪಡುತ್ತಿಲ್ಲ,\nಇದನ್ನು ಇಲ್ಲಿ ಇಡುವುದಕ್ಕಾಗಿ ಶೋಗೆ ಇಷ್ಟಪಡು.",
-  "@noFavourites": {},
-  "noOnHold": "ನೀವು ಯಾವುದೇ ಸರಣಿಯನ್ನು ಹೋಲ್ಡ್‌ನಲ್ಲಿ ಇಟ್ಟಿಲ್ಲ.",
-  "@noOnHold": {},
-  "noHiddenMediaFound": "ಯಾವುದೇ ಹಚ್ಚಿದ ಮೀಡಿಯಾ ಕಂಡುಬಂದಿಲ್ಲ",
-  "@noHiddenMediaFound": {},
-  "recentUpdates": "ಇತ್ತೀಚಿನ ಅಪ್ಡೇಟುಗಳು",
-  "@recentUpdates": {},
-  "recommendationsEmptyMessage": "ಆನಿಮೆ ಅಥವಾ ಮಾಂಗಾ ಓದಿ/ವೀಕ್ಷಿಸಿ ರೆಕೆಂಡೇಶನ್ಗಳನ್ನು ಪಡೆಯಿರಿ",
-  "@recommendationsEmptyMessage": {},
-  "recommended": "ಶಿಫಾರಸು ಮಾಡಲಾಗಿದೆ",
-  "@recommended": {},
-  "simkl": "Simkl",
-  "@simkl": {},
-  "colorPickerDefault": "ಪೂರ್ವನಿಯೋಜಿತ",
-  "@colorPickerDefault": {},
-  "logFileDescription": "ಲಾಗ್ ಫೈಲ್ ಅನ್ನು ಹಂಚಿಕೊಳ್ಳಿ",
-  "@logFileDescription": {},
-  "addAnimeRepo": "ಅನಿಮೆ ರೆಪೊ ಸೇರಿಸಿ",
-  "@addAnimeRepo": {},
-  "loadExtensionsIconDesc": "ವಿಸ್ತರಣೆಗಳ ಪುಟ ಲ್ಯಾಗ್ ಆದರೆ ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ",
-  "@loadExtensionsIconDesc": {},
-  "autoUpdateDesc": "ವಿಸ್ತರಣೆಗಳ ಸ್ವಯಂ ನವೀಕರಣ",
-  "@autoUpdateDesc": {},
-  "addNovelRepoDesc": "ವಿವಿಧ ಮೂಲಗಳಿಂದ ನಾವೆಲ್ ರೆಪೊ ಸೇರಿಸಿ",
-  "@addNovelRepoDesc": {},
-  "addMangaRepoDesc": "ವಿವಿಧ ಮೂಲಗಳಿಂದ ಮಂಗಾ ರೆಪೊ ಸೇರಿಸಿ",
-  "@addMangaRepoDesc": {},
-  "addAnimeRepoDesc": "ವಿವಿಧ ಮೂಲಗಳಿಂದ ಅನಿಮೆ ರೆಪೊ ಸೇರಿಸಿ",
-  "@addAnimeRepoDesc": {},
-  "addMangaRepo": "ಮಂಗಾ ರೆಪೊ ಸೇರಿಸಿ",
-  "@addMangaRepo": {},
-  "logFile": "ಲಾಗ್ ಕಡತ",
-  "@logFile": {},
-  "addNovelRepo": "ನಾವೆಲ್ ರೆಪೊ ಸೇರಿಸಿ",
-  "@addNovelRepo": {},
-  "autoUpdate": "ಸ್ವಯಂ ನವೀಕರಣ",
-  "@autoUpdate": {},
-  "loadExtensionsIcon": "ವಿಸ್ತರಣೆಗಳ ಐಕಾನ್ ಲೋಡ್ ಮಾಡಿ",
-  "@loadExtensionsIcon": {},
-  "colorPickerCustom": "ಕಸ್ಟಮ್",
-  "@colorPickerCustom": {},
-  "customPath": "ಕಸ್ಟಮ್ ಮಾರ್ಗ",
-  "@customPath": {},
-  "selectMediaService": "ಮಾಧ್ಯಮ ಸೇವೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ",
-  "@selectMediaService": {},
-  "selectDirectory": "ಡೈರೆಕ್ಟರಿಯನ್ನು ಆಯ್ಕೆಮಾಡಿ",
-  "@selectDirectory": {},
-  "customPathDescription": "ಫೈಲ್‌ಗಳನ್ನು ಉಳಿಸಲು ಕಸ್ಟಮ್ ಮಾರ್ಗವನ್ನು ಹೊಂದಿಸಿ\nತೆಗೆದುಹಾಕಲು ದೀರ್ಘವಾಗಿ ಒತ್ತಿರಿ",
-  "@customPathDescription": {},
-  "mediaNotFound": "ಮಾಧ್ಯಮ ಕಂಡುಬಂದಿಲ್ಲ",
-  "@mediaNotFound": {},
-  "found": "ಕಂಡುಬಂದಿದೆ",
-  "@found": {},
-  "noChapterFound": "ಅಧ್ಯಾಯ ಕಂಡುಬಂದಿಲ್ಲ",
-  "@noChapterFound": {},
-  "watching": "ವೀಕ್ಷಿಸಲಾಗುತ್ತಿದೆ",
-  "@watching": {},
-  "outOf": "ಯಿಂದ",
-  "@outOf": {},
-  "selected": "ಆಯ್ಕೆ ಮಾಡಲಾಗಿದೆ",
-  "@selected": {},
-  "readStatus": "ಊದಿನು",
-  "@readStatus": {},
-  "youTube": "YouTube ನಲ್ಲಿ ಪ್ಲೇ ಮಾಡಲಾ?",
-  "@youTube": {},
-  "watchStatus": "ವೀಕ್ಷಿಸಲಾಗಿದೆ",
-  "@watchStatus": {},
-  "totalOf": "ಒಟ್ಟು",
-  "@totalOf": {},
-  "wrongTitle": "ತಪ್ಪಾದ ಶೀರ್ಷಿಕೆ?",
-  "@wrongTitle": {},
-  "installSourceToStart": "ಪ್ರಾರಂಭಿಸಲು ವಿಸ್ತರಣಾ ಪುಟದಿಂದ ಮೂಲವನ್ನು ಸ್ಥಾಪಿಸಿ",
-  "@installSourceToStart": {},
-  "webView": "ವೆಬ್ ವೀಕ್ಷಣೆ",
-  "@webView": {},
-  "reading": "ಓದಲು",
-  "@reading": {},
-  "direction": "Direction",
-  "@direction": {},
-  "readerSettings": "Reader Settings",
-  "@readerSettings": {},
-  "hideScrollbar": "Hide Scrollbar",
-  "@hideScrollbar": {},
-  "hidePageNumberDesc": "Hide page number while reading",
-  "@hidePageNumberDesc": {},
-  "developersHelpersDesc": "Dartotsu's unpaid labours",
-  "@developersHelpersDesc": {},
-  "developersHelpers": "Developers/Helpers",
-  "@developersHelpers": {},
-  "hidePageNumber": "Hide Page Number",
-  "@hidePageNumber": {},
-  "differentCacheManagerDesc": "Use different Image cache manager",
-  "@differentCacheManagerDesc": {},
-  "differentCacheManager": "Different Cache Manager",
-  "@differentCacheManager": {},
-  "spacedPagesDesc": "Add space between pages",
-  "@spacedPagesDesc": {},
-  "spacedPages": "Spaced Pages",
-  "@spacedPages": {},
-  "readerSettingsDesc": "Change reader settings",
-  "@readerSettingsDesc": {},
-  "hideScrollbarDesc": "Hide scrollbar while reading",
-  "@hideScrollbarDesc": {},
-  "playerSettingsDesc": "Change player settings",
-  "@playerSettingsDesc": {},
-  "thumbLessSeekBar": "ThumbLess SeekBar",
-  "@thumbLessSeekBar": {},
-  "thumbLessSeekBarDesc": "Remove thumb from the seek bar",
-  "@thumbLessSeekBarDesc": {}
+    "anime": "ಆನಿಮೆ",
+    "@anime": {},
+    "animeDescription": "ನಿಮ್ಮ ಆನಿಮೆ ಪ್ರಾಮುಖ್ಯತೆಯನ್ನು ವೈಯಕ್ತಿಕಗೊಳಿಸಿ ಮತ್ತು ನಿರ್ವಹಿಸಿ",
+    "@animeDescription": {},
+    "colorPickerDescription": "ಒಂದು ಬಣ್ಣ ಆಯ್ಕೆಮಾಡಿ",
+    "@colorPickerDescription": {},
+    "common": "ಸಾಮಾನ್ಯ",
+    "@common": {},
+    "discord": "Discord",
+    "@discord": {},
+    "donationGoal": "ಈ ಕ್ಷಣಕ್ಕೆ ದಾನ ಗುರಿ ಇಲ್ಲ",
+    "@donationGoal": {},
+    "enableDarkMode": "ಡಾರ್ಕ್ ಮೋಡ್ ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ",
+    "@enableDarkMode": {},
+    "extension": "{count, plural, =1 {ವಿಸ್ತರಣೆ} other {ವಿಸ್ತರಣೆಗಳು}}",
+    "@extension": {},
+    "fontColor": "ಫಾಂಟ್ ಬಣ್ಣ",
+    "@fontColor": {},
+    "incognitoModeDescription": "ನಿಮ್ಮ ಚಟುವಟಿಕೆಯನ್ನು ಉಳಿಸದೆ ಬ್ರೌಸ್ ಮಾಡಿ",
+    "@incognitoModeDescription": {},
+    "login": "ಲಾಗಿನ್",
+    "@login": {},
+    "logout": "{type} ಲಾಗೌಟ್ ಆಗಿ",
+    "@logout": {},
+    "mal": "MyAnimeList",
+    "@mal": {},
+    "materialYouDescription": "ನಿಮ್ಮ ವಾಲ್‌ಪೇಪರ್‌ನಂತಹ ಬಣ್ಣವನ್ನು ಬಳಸಿ",
+    "@materialYouDescription": {},
+    "no": "ಇಲ್ಲ",
+    "@no": {},
+    "speed": "ವೇಗ",
+    "@speed": {},
+    "account": "ಖಾತೆ",
+    "@account": {},
+    "accountDescription": "ನಿಮ್ಮ AniList, MAL, ಮತ್ತು Discord ಖಾತೆಗಳನ್ನು ಸುಲಭವಾಗಿ ನಿರ್ವಹಿಸಿ",
+    "@accountDescription": {},
+    "anilist": "AniList",
+    "@anilist": {},
+    "appName": "Dartotsu",
+    "@appName": {},
+    "appTagline": "ಹೆಚ್ಚು ಒಳ್ಳೆಯ ಆಪ್\nಆನಿಮೆ ಮತ್ತು ಮಾಂಗಾ ಟ್ರ್ಯಾಕ್ ಮಾಡಲು",
+    "@appTagline": {},
+    "about": "ಬಗ್ಗೆ",
+    "@about": {},
+    "aboutDescription": "ಆಪ್ ಮತ್ತು ಅದರ ನಿರ್ಮಾಪಕರುಗಳ ಬಗ್ಗೆ ಹೆಚ್ಚಿನ ಮಾಹಿತಿ ತಿಳಿದುಕೊಳ್ಳಿ",
+    "@aboutDescription": {},
+    "backgroundColor": "ಹಿನ್ನೆಲೆಯ ಬಣ್ಣ",
+    "@backgroundColor": {},
+    "backgroundColorDescription": "ಉಪಶೀರ್ಷಿಕೆಯ ಹಿನ್ನೆಲೆಯ ಬಣ್ಣ",
+    "@backgroundColorDescription": {},
+    "bottomPadding": "ಕೆಳಗಿನ ಪ್ಯಾಡಿಂಗ್",
+    "@bottomPadding": {},
+    "bottomPaddingDescription": "ಉಪಶೀರ್ಷಿಕೆಯ ಕೆಳಗಿನ ಪ್ಯಾಡಿಂಗ್",
+    "@bottomPaddingDescription": {},
+    "cancel": "ನಿರಾಕರಿಸು",
+    "@cancel": {},
+    "colorPicker": "ಬಣ್ಣ ಆರಿಸುವಿ",
+    "@colorPicker": {},
+    "commonDescription": "ಆಪ್ ಬಳಕೆಗೆ ಸುಲಭವಾದ ಸಾಮಾನ್ಯ ಸೆಟ್ಟಿಂಗ್ಗಳನ್ನು ಪ್ರವೇಶಿಸಿ",
+    "@commonDescription": {},
+    "cursedSpeed": "ಶಾಪಿತ ವೇಗ",
+    "@cursedSpeed": {},
+    "cursedSpeedDescription": "ಜೀವನದಲ್ಲಿ ತುಂಬಾ ಬ್ಯುಸಿ ಆಗಿರುವವರಿಗಾಗಿ",
+    "@cursedSpeedDescription": {},
+    "customTheme": "ಕಸ್ಟಮ್ ಥೀಮ್",
+    "@customTheme": {},
+    "customThemeDescription": "ನೀವು ನಿಮ್ಮ ಬಣ್ಣವನ್ನು ಥೀಮಿಗಾಗಿ ಬಳಸಬಹುದು",
+    "@customThemeDescription": {},
+    "darkMode": "ಡಾರ್ಕ್ ಮೋಡ್",
+    "@darkMode": {},
+    "extensionsDescription": "ಹೆಚ್ಚು ಕಾರ್ಯಕ್ಷಮತೆಗಾಗಿ ವಿಸ್ತರಣೆಗಳನ್ನು ಇನ್ಸ್ಟಾಲ್ ಮಾಡಿ ಮತ್ತು ನಿರ್ವಹಿಸಿ",
+    "@extensionsDescription": {},
+    "manga": "ಮಂಗಾ",
+    "@manga": {},
+    "fontColorDescription": "ಉಪಶೀರ್ಷಿಕೆಯ ಫಾಂಟ್ ಬಣ್ಣ",
+    "@fontColorDescription": {},
+    "fontFamily": "ಫಾಂಟ್ ಕುಟುಂಬ",
+    "@fontFamily": {},
+    "fontFamilyDescription": "ಉಪಶೀರ್ಷಿಕೆಯ ಫಾಂಟ್ ಕುಟುಂಬ",
+    "@fontFamilyDescription": {},
+    "fontSize": "ಫಾಂಟ್ ಗಾತ್ರ",
+    "@fontSize": {},
+    "fontSizeDescription": "ಉಪಶೀರ್ಷಿಕೆಯ ಫಾಂಟ್ ಗಾತ್ರ",
+    "@fontSizeDescription": {},
+    "fontWeight": "ಫಾಂಟ್ ತೂಕ",
+    "@fontWeight": {},
+    "fontWeightDescription": "ಉಪಶೀರ್ಷಿಕೆಯ ಫಾಂಟ್ ತೂಕ",
+    "@fontWeightDescription": {},
+    "hidePrivate": "ಪ್ರೈವೇಟ್ ಹಚ್ಚು",
+    "@hidePrivate": {},
+    "hidePrivateDescription": "ಹೋಮ್ ಪುಟದಿಂದ ಖಾಸಗಿ ಸರಣಿಗಳನ್ನು ಹಚ್ಚು.",
+    "@hidePrivateDescription": {},
+    "incognitoMode": "ಇಂಕೋಗ್ನಿಟೋ ಮೋಡ್",
+    "@incognitoMode": {},
+    "mangaDescription": "ನಿಮ್ಮ ಮಂಗಾ ಅನುಭವವನ್ನು ಸಂಘಟಿಸಿ ಮತ್ತು ಅನुकूलಿಸು",
+    "@mangaDescription": {},
+    "materialYou": "Material You",
+    "@materialYou": {},
+    "notifications": "ಅधಿಸೂಚನೆಗಳು",
+    "@notifications": {},
+    "notificationsDescription": "ನೀವು ಹೇಗೆ ಮತ್ತು ಯಾವಾಗ ಅಧಿಸೂಚನೆಗಳನ್ನು ಸ್ವೀಕರಿಸಬೇಕೆಂದು ಸಂರಚಿಸಿ",
+    "@notificationsDescription": {},
+    "offlineMode": "ಆಫ್‌ಲೈನ್ ಮೋಡ್",
+    "@offlineMode": {},
+    "offlineModeDescription": "ಇಂಟರ್ನೆಟ್ ಸಂಪರ್ಕ ಇಲ್ಲದೆ ಆಪ್ ಅನ್ನು ಬಳಸಿ",
+    "@offlineModeDescription": {},
+    "ok": "ಓಕೆ",
+    "@ok": {},
+    "oledThemeVariant": "OLED ಥೀಮ್ ವ್ಯಾರಿಯಂಟ್",
+    "@oledThemeVariant": {},
+    "oledThemeVariantDescription": "OLED ಮೋಡ್ ಸಕ್ರಿಯಗೊಳಿಸಿ",
+    "@oledThemeVariantDescription": {},
+    "outlineColor": "ಊಟ್ಲೈನ್ ಬಣ್ಣ",
+    "@outlineColor": {},
+    "outlineColorDescription": "ಉಪಶೀರ್ಷಿಕೆಯ ಊಟ್ಲೈನ್ ಬಣ್ಣ",
+    "@outlineColorDescription": {},
+    "playerSettingsTitle": "ಪ್ಲೇಯರ್ ಸೆಟ್ಟಿಂಗ್ಗಳು",
+    "@playerSettingsTitle": {},
+    "resizeMode": "ವಿಸ್ತರಣೆ ಮೋಡ್",
+    "@resizeMode": {},
+    "resizeModeDescription": "ಪ್ಲೇಯರ್‌ಗಾಗಿ ಡಿಫಾಲ್ಟ್ ವಿಸ್ತರಣೆ ಮೋಡ್",
+    "@resizeModeDescription": {},
+    "restoreSettings": "ಸೆಟ್ಟಿಂಗ್ಗಳನ್ನು ಪುನಃಸ್ಥಾಪಿಸಿ",
+    "@restoreSettings": {},
+    "settings": "ಸೆಟ್ಟಿಂಗ್ಗಳು",
+    "@settings": {},
+    "showSubtitles": "ಉಪಶೀರ್ಷಿಕೆಗಳನ್ನು ತೋರಿಸಿ",
+    "@showSubtitles": {},
+    "showSubtitlesDescription": "ಡಿಫಾಲ್ಟ್‌ನಾಗಿ ಉಪಶೀರ್ಷಿಕೆಗಳನ್ನು ತೋರಿಸಿ",
+    "@showSubtitlesDescription": {},
+    "skipButton": "ಸ್ಕಿಪ್ ಬಟನ್",
+    "@skipButton": {},
+    "skipButtonDescription": "ಸ್ಕಿಪ್ ಬಟನ್ ಕಾಲಾವಧಿ",
+    "@skipButtonDescription": {},
+    "speedDescription": "ಪ್ಲೇಯರ್‌ಗಾಗಿ ಡಿಫಾಲ್ಟ್ ವೇಗ",
+    "@speedDescription": {},
+    "subtitles": "ಉಪಶೀರ್ಷಿಕೆಗಳು",
+    "@subtitles": {},
+    "subtitlePreview": "ಉಪಶೀರ್ಷಿಕೆ ಪೂರ್ವದರ್ಶನ",
+    "@subtitlePreview": {},
+    "supportMaintainer": "Dartotsu ನ ಸಂರಕ್ಷಣಕನನ್ನು ಬೆಂಬಲಿಸಲು ಇಚ್ಛಿಸುತ್ತಿದ್ದೀರಾ?\nದಾನ ಮಾಡಲು ಪರಿಗಣಿಸಿ",
+    "@supportMaintainer": {},
+    "theme": "ಥೀಮ್",
+    "@theme": {},
+    "themeDescription": "ನಿಮ್ಮ ಆಪ್‍ನ ಅಪರೂಪವನ್ನು ಮತ್ತು ಆನಂದವನ್ನು ಕಸ್ಟಮೈಸ್ ಮಾಡಿ",
+    "@themeDescription": {},
+    "yes": "ಹೌದು",
+    "@yes": {},
+    "totalEpisodes": "ಎಪಿಸೋಡ್‌ಗಳು",
+    "@totalEpisodes": {},
+    "thisSeason": "ಈ ಋತು",
+    "@thisSeason": {},
+    "ln": "ಲೈಟ್ ನವಲ",
+    "@ln": {},
+    "manageLayout": "{service} ಗೆ {page} ಪುಟದ ವಿನ್ಯಾಸವನ್ನು ನಿರ್ವಹಿಸಿ",
+    "@manageLayout": {
+        "placeholders": {
+            "service": {
+                "type": "String",
+                "examples": [
+                    "Anilist",
+                    "MAL"
+                ]
+            },
+            "page": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Home",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "nextSeason": "ಆಗಿನ ಋತು",
+    "@nextSeason": {},
+    "noDropped": "ನೀವು ಯಾವುದೇ {type} ಅನ್ನು ಡ್ರಾಪ್ ಮಾಡಿಲ್ಲ.",
+    "@noDropped": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "manhwa": "Manhwa",
+    "@manhwa": {},
+    "volume": "{count, plural, =1 {ಒಳಕೋಡು} other {ಒಳಕೋಡುಗಳು}}",
+    "@volume": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "total": "Total",
+    "@total": {},
+    "novel": "ನವಲ",
+    "@novel": {},
+    "tags": "Tags",
+    "@tags": {},
+    "activity": "{count, plural, =1 {ಚಟುವಟಿಕೆ} other {ಚಟುವಟಿಕೆಗಳು}}",
+    "@activity": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "continueWatching": "ಕಾಣಲು ಮುಂದುವರಿಸು",
+    "@continueWatching": {},
+    "topRated": "ಟಾಪ್ ರೇಟೆಡ್ {type}",
+    "@topRated": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa",
+                    "Series"
+                ]
+            }
+        }
+    },
+    "previousSeason": "ಹಿಂದಿನ ಋತು",
+    "@previousSeason": {},
+    "popular": "ಪ್ರಸಿದ್ಧ {type}",
+    "@popular": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa"
+                ]
+            }
+        }
+    },
+    "confirmLogout": "ನೀವು ಲಾಗೌಟ್ ಆಗಲು ಖಚಿತವೇ?",
+    "@confirmLogout": {},
+    "mostFavourite": "ಅತ್ಯಂತ ಇಷ್ಟಪಡುವ {type}",
+    "@mostFavourite": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa"
+                ]
+            }
+        }
+    },
+    "series": "Series",
+    "@series": {},
+    "synopsis": "ಸಾರಾಂಶ",
+    "@synopsis": {},
+    "gridView": "ಗ್ರಿಡ್ ವೀಕ್ಷಣೆ",
+    "@gridView": {},
+    "episode": "{count, plural, =1 {ಎಪಿಸೋಡ್} other {ಎಪಿಸೋಡ್‌ಗಳು}}",
+    "@episode": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "popularity": "ಜನಪ್ರಿಯತೆ",
+    "@popularity": {},
+    "totalChapters": "ಅಧ್ಯಾಯಗಳು",
+    "@totalChapters": {},
+    "favorites": "ಇಷ್ಟಗಳು",
+    "@favorites": {},
+    "movie": "{count, plural, =1 {ಚಿತ್ರ} other {ಚಿತ್ರಗಳು}}",
+    "@movie": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "home": "Home",
+    "@home": {},
+    "prequel": "PREQUEL",
+    "@prequel": {},
+    "search": "ಹುಡುಕು",
+    "@search": {},
+    "collapseText": "ಕಡಿಮೆ ತೋರಿಸು",
+    "@collapseText": {},
+    "addToList": "Add To List",
+    "@addToList": {},
+    "chapter": "{count, plural, =1 {ಅಧ್ಯಾಯ} other {ಅಧ್ಯಾಯಗಳು}}",
+    "@chapter": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "available": "ಲಭ್ಯವಿದೆ {type}",
+    "@available": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "characters": "ಪಾತ್ರಗಳು",
+    "@characters": {},
+    "genres": "ಪ್ರಕಾರಗಳು",
+    "@genres": {},
+    "author": "Author",
+    "@author": {},
+    "calendar": "ದಿನಚರಿ",
+    "@calendar": {},
+    "format": "ಆಕಾರ",
+    "@format": {},
+    "expandText": "ಹೆಚ್ಚು ತೋರಿಸು",
+    "@expandText": {},
+    "manhua": "Manhua",
+    "@manhua": {},
+    "season": "ಋತು",
+    "@season": {},
+    "sequel": "SEQUEL",
+    "@sequel": {},
+    "studio": "Studio",
+    "@studio": {},
+    "staff": "ಸಿಬ್ಬಂದಿ",
+    "@staff": {},
+    "status": "Status",
+    "@status": {},
+    "relations": "Relations",
+    "@relations": {},
+    "source": "Source",
+    "@source": {},
+    "synonyms": "ಸಮಾನಾರ್ಥಕ ಪದಗಳು",
+    "@synonyms": {},
+    "startDate": "Start Date",
+    "@startDate": {},
+    "averageDuration": "ಮೂಲಕಿಕ ಕಾಲಾವಧಿ",
+    "@averageDuration": {},
+    "comingSoon": "ಆಗುವುದೆಂದು ಬರುತ್ತಿದೆ",
+    "@comingSoon": {},
+    "name": "Name",
+    "@name": {},
+    "endDate": "End Date",
+    "@endDate": {},
+    "meanScore": "Mean Score",
+    "@meanScore": {},
+    "nameRomaji": "ಹೆಸರು (ರೋಮಾಜಿ)",
+    "@nameRomaji": {},
+    "kitsu": "Kitsu",
+    "@kitsu": {},
+    "loginTo": "{service} ಗೆ ಲಾಗಿನ್ ಆಗಿ",
+    "@loginTo": {
+        "placeholders": {
+            "service": {
+                "type": "String",
+                "examples": [
+                    "Anilist",
+                    "MyAnimeList",
+                    "Kitsu",
+                    "Discord"
+                ]
+            }
+        }
+    },
+    "compactView": "ಸಂಕುಚಿತ ವೀಕ್ಷಣೆ",
+    "@compactView": {},
+    "scanlators": "ಸ್ಕ್ಯಾನ್ಲೇಟರ್ಸ್",
+    "@scanlators": {},
+    "listView": "List View",
+    "@listView": {},
+    "sort": "ವರ್ಗೀಕರಿಸು",
+    "@sort": {},
+    "chapterRead": "ಅಧ್ಯಾಯ ಓದಲು",
+    "@chapterRead": {},
+    "episodeWatched": "ಎಪಿಸೋಡ್ ವೀಕ್ಷಿಸಲಾಯಿತು",
+    "@episodeWatched": {},
+    "trending": "ಚಲನೆಯಲ್ಲಿರುವ {type}",
+    "@trending": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "installed": "ಇನ್ಸ್ಟಾಲ್ ಮಾಡಲಾಗಿದೆ {type}",
+    "@installed": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Extensions"
+                ]
+            }
+        }
+    },
+    "browse": "{type} ಬ್ರೌಸ್ ಮಾಡಿ",
+    "@browse": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "planned": "ಯೋಜನೆಗೊಳಿಸಿದ {type}",
+    "@planned": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "onHold": "ಹೋಲ್ಡ್ ಮೇಲೆ {type}",
+    "@onHold": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "favorite": "ಇಷ್ಟಪಡುವ {type}",
+    "@favorite": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "allCaughtUpNew": "ಎಲ್ಲವೂ ಅಪ್ಡೇಟ್ ಆಗಿದೆ, ಹೊಸದು ಏನು?",
+    "@allCaughtUpNew": {},
+    "hiddenMedia": "ಹಚ್ಚಿದ ಮೀಡಿಯಾ",
+    "@hiddenMedia": {},
+    "options": "Options",
+    "@options": {},
+    "read": "ಊದಿನು",
+    "@read": {},
+    "topAiring": "ಟಾಪ್ ಎಯರಿಂಗ್",
+    "@topAiring": {},
+    "watch": "ಕಾಣು",
+    "@watch": {},
+    "utd": "ಮೇಲೆ ಕೆಳಗೆ",
+    "@utd": {},
+    "dtu": "Down To Up",
+    "@dtu": {},
+    "droppedManga": "ಡ್ರಾಪ್ ಮಾಡಲಾದ ಮಾಂಗಾ",
+    "@droppedManga": {},
+    "info": "Info",
+    "@info": {},
+    "continueReading": "ಊದಲು ಮುಂದುವರಿಸು",
+    "@continueReading": {},
+    "comments": "ಕಮೆಂಟ್‌ಗಳು",
+    "@comments": {},
+    "droppedAnime": "ಡ್ರಾಪ್ ಮಾಡಲಾದ ಆನಿಮೆ",
+    "@droppedAnime": {},
+    "list": "{type} ಪಟ್ಟಿ",
+    "@list": {
+        "placeholders": {
+            "type": {
+                "examples": "Anime list",
+                "type": "String"
+            }
+        }
+    },
+    "language": "ಭಾಷೆ",
+    "@language": {},
+    "layout": "Layout",
+    "@layout": {},
+    "manageLayoutDescription": "ನೀವು ಐಟಂಗಳನ್ನು ಆಕರ್ಷಿಸಿ ಮತ್ತು ಬಿಡಿಸಿ {page} ಪುಟದ ವಿನ್ಯಾಸವನ್ನು ನಿರ್ವಹಿಸಬಹುದು",
+    "@manageLayoutDescription": {
+        "placeholders": {
+            "page": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Home",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "pickColor": "ನನಸು ಮೆತ್ತಲು",
+    "@pickColor": {},
+    "noFavourites": "ನೀವು ಯಾವುದೇ ಆನಿಮೆ/ಮಾಂಗಾ ಇಷ್ಟಪಡುತ್ತಿಲ್ಲ,\nಇದನ್ನು ಇಲ್ಲಿ ಇಡುವುದಕ್ಕಾಗಿ ಶೋಗೆ ಇಷ್ಟಪಡು.",
+    "@noFavourites": {},
+    "noOnHold": "ನೀವು ಯಾವುದೇ ಸರಣಿಯನ್ನು ಹೋಲ್ಡ್‌ನಲ್ಲಿ ಇಟ್ಟಿಲ್ಲ.",
+    "@noOnHold": {},
+    "noHiddenMediaFound": "ಯಾವುದೇ ಹಚ್ಚಿದ ಮೀಡಿಯಾ ಕಂಡುಬಂದಿಲ್ಲ",
+    "@noHiddenMediaFound": {},
+    "recentUpdates": "ಇತ್ತೀಚಿನ ಅಪ್ಡೇಟುಗಳು",
+    "@recentUpdates": {},
+    "recommendationsEmptyMessage": "ಆನಿಮೆ ಅಥವಾ ಮಾಂಗಾ ಓದಿ/ವೀಕ್ಷಿಸಿ ರೆಕೆಂಡೇಶನ್ಗಳನ್ನು ಪಡೆಯಿರಿ",
+    "@recommendationsEmptyMessage": {},
+    "recommended": "ಶಿಫಾರಸು ಮಾಡಲಾಗಿದೆ",
+    "@recommended": {},
+    "simkl": "Simkl",
+    "@simkl": {},
+    "colorPickerDefault": "ಪೂರ್ವನಿಯೋಜಿತ",
+    "@colorPickerDefault": {},
+    "logFileDescription": "ಲಾಗ್ ಫೈಲ್ ಅನ್ನು ಹಂಚಿಕೊಳ್ಳಿ",
+    "@logFileDescription": {},
+    "addAnimeRepo": "ಅನಿಮೆ ರೆಪೊ ಸೇರಿಸಿ",
+    "@addAnimeRepo": {},
+    "loadExtensionsIconDesc": "ವಿಸ್ತರಣೆಗಳ ಪುಟ ಲ್ಯಾಗ್ ಆದರೆ ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ",
+    "@loadExtensionsIconDesc": {},
+    "autoUpdateDesc": "ವಿಸ್ತರಣೆಗಳ ಸ್ವಯಂ ನವೀಕರಣ",
+    "@autoUpdateDesc": {},
+    "addNovelRepoDesc": "ವಿವಿಧ ಮೂಲಗಳಿಂದ ನಾವೆಲ್ ರೆಪೊ ಸೇರಿಸಿ",
+    "@addNovelRepoDesc": {},
+    "addMangaRepoDesc": "ವಿವಿಧ ಮೂಲಗಳಿಂದ ಮಂಗಾ ರೆಪೊ ಸೇರಿಸಿ",
+    "@addMangaRepoDesc": {},
+    "addAnimeRepoDesc": "ವಿವಿಧ ಮೂಲಗಳಿಂದ ಅನಿಮೆ ರೆಪೊ ಸೇರಿಸಿ",
+    "@addAnimeRepoDesc": {},
+    "addMangaRepo": "ಮಂಗಾ ರೆಪೊ ಸೇರಿಸಿ",
+    "@addMangaRepo": {},
+    "logFile": "ಲಾಗ್ ಕಡತ",
+    "@logFile": {},
+    "addNovelRepo": "ನಾವೆಲ್ ರೆಪೊ ಸೇರಿಸಿ",
+    "@addNovelRepo": {},
+    "autoUpdate": "ಸ್ವಯಂ ನವೀಕರಣ",
+    "@autoUpdate": {},
+    "loadExtensionsIcon": "ವಿಸ್ತರಣೆಗಳ ಐಕಾನ್ ಲೋಡ್ ಮಾಡಿ",
+    "@loadExtensionsIcon": {},
+    "colorPickerCustom": "ಕಸ್ಟಮ್",
+    "@colorPickerCustom": {},
+    "customPath": "ಕಸ್ಟಮ್ ಮಾರ್ಗ",
+    "@customPath": {},
+    "selectMediaService": "ಮಾಧ್ಯಮ ಸೇವೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ",
+    "@selectMediaService": {},
+    "selectDirectory": "ಡೈರೆಕ್ಟರಿಯನ್ನು ಆಯ್ಕೆಮಾಡಿ",
+    "@selectDirectory": {},
+    "customPathDescription": "ಫೈಲ್‌ಗಳನ್ನು ಉಳಿಸಲು ಕಸ್ಟಮ್ ಮಾರ್ಗವನ್ನು ಹೊಂದಿಸಿ\nತೆಗೆದುಹಾಕಲು ದೀರ್ಘವಾಗಿ ಒತ್ತಿರಿ",
+    "@customPathDescription": {},
+    "mediaNotFound": "ಮಾಧ್ಯಮ ಕಂಡುಬಂದಿಲ್ಲ",
+    "@mediaNotFound": {},
+    "found": "ಕಂಡುಬಂದಿದೆ",
+    "@found": {},
+    "noChapterFound": "ಅಧ್ಯಾಯ ಕಂಡುಬಂದಿಲ್ಲ",
+    "@noChapterFound": {},
+    "watching": "ವೀಕ್ಷಿಸಲಾಗುತ್ತಿದೆ",
+    "@watching": {},
+    "outOf": "ಯಿಂದ",
+    "@outOf": {},
+    "selected": "ಆಯ್ಕೆ ಮಾಡಲಾಗಿದೆ",
+    "@selected": {},
+    "readStatus": "ಊದಿನು",
+    "@readStatus": {},
+    "youTube": "YouTube ನಲ್ಲಿ ಪ್ಲೇ ಮಾಡಲಾ?",
+    "@youTube": {},
+    "watchStatus": "ವೀಕ್ಷಿಸಲಾಗಿದೆ",
+    "@watchStatus": {},
+    "totalOf": "ಒಟ್ಟು",
+    "@totalOf": {},
+    "wrongTitle": "ತಪ್ಪಾದ ಶೀರ್ಷಿಕೆ?",
+    "@wrongTitle": {},
+    "installSourceToStart": "ಪ್ರಾರಂಭಿಸಲು ವಿಸ್ತರಣಾ ಪುಟದಿಂದ ಮೂಲವನ್ನು ಸ್ಥಾಪಿಸಿ",
+    "@installSourceToStart": {},
+    "webView": "ವೆಬ್ ವೀಕ್ಷಣೆ",
+    "@webView": {},
+    "reading": "ಓದಲು",
+    "@reading": {},
+    "direction": "Direction",
+    "@direction": {},
+    "readerSettings": "Reader Settings",
+    "@readerSettings": {},
+    "hideScrollbar": "Hide Scrollbar",
+    "@hideScrollbar": {},
+    "hidePageNumberDesc": "Hide page number while reading",
+    "@hidePageNumberDesc": {},
+    "developersHelpersDesc": "Dartotsu's unpaid labours",
+    "@developersHelpersDesc": {},
+    "developersHelpers": "Developers/Helpers",
+    "@developersHelpers": {},
+    "hidePageNumber": "Hide Page Number",
+    "@hidePageNumber": {},
+    "differentCacheManagerDesc": "Use different Image cache manager",
+    "@differentCacheManagerDesc": {},
+    "differentCacheManager": "Different Cache Manager",
+    "@differentCacheManager": {},
+    "spacedPagesDesc": "Add space between pages",
+    "@spacedPagesDesc": {},
+    "spacedPages": "Spaced Pages",
+    "@spacedPages": {},
+    "readerSettingsDesc": "Change reader settings",
+    "@readerSettingsDesc": {},
+    "hideScrollbarDesc": "Hide scrollbar while reading",
+    "@hideScrollbarDesc": {},
+    "playerSettingsDesc": "Change player settings",
+    "@playerSettingsDesc": {},
+    "thumbLessSeekBar": "ThumbLess SeekBar",
+    "@thumbLessSeekBar": {},
+    "thumbLessSeekBarDesc": "Remove thumb from the seek bar",
+    "@thumbLessSeekBarDesc": {},
+    "glassEffect": "Glass Effect",
+    "@glassEffect": {},
+    "ltr": "Left To Right",
+    "@ltr": {},
+    "coverThemeDescription": "Use media cover image as theme color",
+    "@coverThemeDescription": {},
+    "rtl": "Right To Left",
+    "@rtl": {},
+    "glassEffectDescription": "Gives a frosted glass effect to the app",
+    "@glassEffectDescription": {},
+    "nextEpisodeRelease": "Episode {episode} will be released in",
+    "@nextEpisodeRelease": {
+        "description": "Message showing the next episode info",
+        "placeholders": {
+            "episode": {
+                "type": "int"
+            }
+        }
+    },
+    "topScore": "Top Score",
+    "@topScore": {},
+    "coverTheme": "Use Cover Theme",
+    "@coverTheme": {},
+    "customMPVDescription": "Enable this option to use your own MPV configuration file. Place your custom config at: {path}",
+    "@customMPVDescription": {
+        "placeholders": {
+            "path": {
+                "type": "String"
+            }
+        }
+    },
+    "customMPV": "Custom MPV Configuration",
+    "@customMPV": {}
 }

@@ -1,625 +1,656 @@
 {
-  "about": "O aplikaciji",
-  "@about": {},
-  "aboutDescription": "Saznajte više o aplikaciji i njezinim tvorcima",
-  "@aboutDescription": {},
-  "account": "Račun",
-  "@account": {},
-  "accountDescription": "Jednostavno upravljajte svojim računima",
-  "@accountDescription": {},
-  "allCaughtUpNew": "Sve je uhvaćeno, što je novo?",
-  "@allCaughtUpNew": {},
-  "anilist": "AniList",
-  "@anilist": {},
-  "appName": "Dartotsu",
-  "@appName": {},
-  "discord": "Discord",
-  "@discord": {},
-  "mal": "MyAnimeList",
-  "@mal": {},
-  "recommended": "Preporučeno",
-  "@recommended": {},
-  "yes": "Da",
-  "@yes": {},
-  "backgroundColorDescription": "Boja pozadine za titlove",
-  "@backgroundColorDescription": {},
-  "addToList": "DODAJ NA POPIS",
-  "@addToList": {},
-  "anime": "Anime",
-  "@anime": {},
-  "animeDescription": "Personalizirajte i upravljajte svojim anime preferencijama",
-  "@animeDescription": {},
-  "appTagline": "Nova najbolja aplikacija za\npraćenje animea i mange",
-  "@appTagline": {},
-  "backgroundColor": "Boja pozadine",
-  "@backgroundColor": {},
-  "bottomPadding": "Donji razmak",
-  "@bottomPadding": {},
-  "bottomPaddingDescription": "Donji razmak za titlove",
-  "@bottomPaddingDescription": {},
-  "cancel": "Odustani",
-  "@cancel": {},
-  "colorPicker": "Odabir boje",
-  "@colorPicker": {},
-  "colorPickerDescription": "Odaberite boju",
-  "@colorPickerDescription": {},
-  "comments": "Komentari",
-  "@comments": {},
-  "common": "Općenito",
-  "@common": {},
-  "commonDescription": "Pristupite općim postavkama za lakše korištenje aplikacije",
-  "@commonDescription": {},
-  "continueReading": "Nastavi čitati",
-  "@continueReading": {},
-  "continueWatching": "Nastavi gledati",
-  "@continueWatching": {},
-  "cursedSpeed": "Luda brzina",
-  "@cursedSpeed": {},
-  "cursedSpeedDescription": "Za one koji su prezaposleni",
-  "@cursedSpeedDescription": {},
-  "customTheme": "Vlastita tema",
-  "@customTheme": {},
-  "customThemeDescription": "Koristite vlastitu boju za temu",
-  "@customThemeDescription": {},
-  "darkMode": "Tamni način rada",
-  "@darkMode": {},
-  "donationGoal": "Trenutno nema cilja za donacije",
-  "@donationGoal": {},
-  "dtu": "Odozdo prema gore",
-  "@dtu": {},
-  "enableDarkMode": "Omogući tamni način rada",
-  "@enableDarkMode": {},
-  "extension": "{count, plural, =1 {Ekstenzija} other {Ekstenzije}}",
-  "@extension": {},
-  "extensionsDescription": "Instalirajte i upravljajte ekstenzijama za dodatne funkcionalnosti",
-  "@extensionsDescription": {},
-  "fontColor": "Boja fonta",
-  "@fontColor": {},
-  "fontColorDescription": "Boja fonta za titlove",
-  "@fontColorDescription": {},
-  "fontFamily": "Obitelj fonta",
-  "@fontFamily": {},
-  "fontFamilyDescription": "Obitelj fonta za titlove",
-  "@fontFamilyDescription": {},
-  "fontSize": "Veličina fonta",
-  "@fontSize": {},
-  "fontSizeDescription": "Veličina fonta za titlove",
-  "@fontSizeDescription": {},
-  "fontWeight": "Stil fonta",
-  "@fontWeight": {},
-  "fontWeightDescription": "Stil fonta za titlove",
-  "@fontWeightDescription": {},
-  "hiddenMedia": "Skriveni sadržaj",
-  "@hiddenMedia": {},
-  "hidePrivate": "Sakrij privatno",
-  "@hidePrivate": {},
-  "incognitoModeDescription": "Pregledavajte bez spremanja aktivnosti",
-  "@incognitoModeDescription": {},
-  "info": "INFORMACIJE",
-  "@info": {},
-  "hidePrivateDescription": "Sakrij privatne serije s početne stranice.",
-  "@hidePrivateDescription": {},
-  "incognitoMode": "Anonimni način rada",
-  "@incognitoMode": {},
-  "language": "Jezik",
-  "@language": {},
-  "layout": "Izgled",
-  "@layout": {},
-  "list": "Popis {type}",
-  "@list": {},
-  "login": "Prijava",
-  "@login": {},
-  "logout": "Odjavi se {type}",
-  "@logout": {},
-  "manga": "Manga",
-  "@manga": {},
-  "mangaDescription": "Organizirajte i prilagodite svoje iskustvo čitanja mange",
-  "@mangaDescription": {},
-  "materialYou": "Material You",
-  "@materialYou": {},
-  "materialYouDescription": "Koristite boju svoje pozadine",
-  "@materialYouDescription": {},
-  "no": "Ne",
-  "@no": {},
-  "noHiddenMediaFound": "Nije pronađen skriveni sadržaj",
-  "@noHiddenMediaFound": {},
-  "notifications": "Obavijesti",
-  "@notifications": {},
-  "notificationsDescription": "Postavite kako i kada želite primati obavijesti",
-  "@notificationsDescription": {},
-  "offlineMode": "Izvanmrežni način rada",
-  "@offlineMode": {},
-  "offlineModeDescription": "Koristite aplikaciju bez internetske veze",
-  "@offlineModeDescription": {},
-  "ok": "U redu",
-  "@ok": {},
-  "oledThemeVariant": "OLED tema",
-  "@oledThemeVariant": {},
-  "oledThemeVariantDescription": "Omogući OLED način",
-  "@oledThemeVariantDescription": {},
-  "options": "Opcije",
-  "@options": {},
-  "outlineColor": "Boja konture",
-  "@outlineColor": {},
-  "outlineColorDescription": "Boja konture za titlove",
-  "@outlineColorDescription": {},
-  "playerSettingsTitle": "Postavke Playera",
-  "@playerSettingsTitle": {},
-  "read": "Čitaj",
-  "@read": {},
-  "recentUpdates": "Nedavne izmjene",
-  "@recentUpdates": {},
-  "recommendationsEmptyMessage": "Gledajte/Čitajte Anime ili Mangu za preporuke",
-  "@recommendationsEmptyMessage": {},
-  "resizeMode": "Način prilagodbe",
-  "@resizeMode": {},
-  "resizeModeDescription": "Zadani način prilagodbe za player",
-  "@resizeModeDescription": {},
-  "restoreSettings": "Vrati postavke",
-  "@restoreSettings": {},
-  "scanlators": "Skanelatori",
-  "@scanlators": {},
-  "search": "Pretraži",
-  "@search": {},
-  "settings": "Postavke",
-  "@settings": {},
-  "showSubtitles": "Prikaži titlove",
-  "@showSubtitles": {},
-  "showSubtitlesDescription": "Prikaži titlove prema zadanim postavkama",
-  "@showSubtitlesDescription": {},
-  "skipButton": "Preskakanje",
-  "@skipButton": {},
-  "skipButtonDescription": "Trajanje tipke za preskakanje",
-  "@skipButtonDescription": {},
-  "sort": "Sortiraj",
-  "@sort": {},
-  "speed": "Brzina",
-  "@speed": {},
-  "speedDescription": "Zadana brzina za player",
-  "@speedDescription": {},
-  "subtitles": "Titlovi",
-  "@subtitles": {},
-  "subtitlePreview": "Pregled titlova",
-  "@subtitlePreview": {},
-  "theme": "Tema",
-  "@theme": {},
-  "themeDescription": "Prilagodite izgled i dojam aplikacije",
-  "@themeDescription": {},
-  "droppedManga": "Odbačena Manga",
-  "@droppedManga": {},
-  "droppedAnime": "Odbačeni Anime",
-  "@droppedAnime": {},
-  "topAiring": "Najbolje trenutno emitirano",
-  "@topAiring": {},
-  "utd": "Odozgo prema dolje",
-  "@utd": {},
-  "watch": "Gledaj",
-  "@watch": {},
-  "supportMaintainer": "Želite li podržati održavatelja Dartotsua?\nRazmislite o donaciji",
-  "@supportMaintainer": {},
-  "noOnHold": "Izgleda da ništa nije stavljeno na čekanje.",
-  "@noOnHold": {},
-  "noFavourites": "Izgleda da ti se ništa ne sviđa,\nPokušaj dodati emisiju u favorite da je držiš ovdje.",
-  "@noFavourites": {},
-  "onHold": "Na čekanju {type}",
-  "@onHold": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "compactView": "Kompaktni prikaz",
-  "@compactView": {},
-  "listView": "List View",
-  "@listView": {},
-  "favorite": "Omiljeno {type}",
-  "@favorite": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "noDropped": "Niste još odustali od {type}.",
-  "@noDropped": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "volume": "{count, plural, =1 {Svezak} other {Svesci}}",
-  "@volume": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "activity": "{count, plural, =1 {Aktivnost} other {Aktivnosti}}",
-  "@activity": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "previousSeason": "Prethodne sezone",
-  "@previousSeason": {},
-  "popular": "Popularno {type}",
-  "@popular": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa"
-        ]
-      }
-    }
-  },
-  "installed": "Instalirano {type}",
-  "@installed": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Extensions"
-        ]
-      }
-    }
-  },
-  "mostFavourite": "Najdraže {type}",
-  "@mostFavourite": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa"
-        ]
-      }
-    }
-  },
-  "chapterRead": "Poglavlje pročitano",
-  "@chapterRead": {},
-  "nameRomaji": "Ime (Romaji)",
-  "@nameRomaji": {},
-  "gridView": "Prikaz mreže",
-  "@gridView": {},
-  "browse": "Pregledaj {type}",
-  "@browse": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "episodeWatched": "Epizoda pogledana",
-  "@episodeWatched": {},
-  "popularity": "Popularnost",
-  "@popularity": {},
-  "movie": "{count, plural, =1 {Film} other {Filmovi}}",
-  "@movie": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "prequel": "PREQUEL",
-  "@prequel": {},
-  "planned": "Planirano {type}",
-  "@planned": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "chapter": "{count, plural, =1 {Poglavlje} other {Poglavlja}}",
-  "@chapter": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "manageLayoutDescription": "Možete urediti izgled stranice {page} povlačenjem i ispuštanjem stavki",
-  "@manageLayoutDescription": {
-    "placeholders": {
-      "page": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Home",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "available": "Dostupno {type}",
-  "@available": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "genres": "Žanrovi",
-  "@genres": {},
-  "calendar": "Kalendar",
-  "@calendar": {},
-  "manhua": "Manhua",
-  "@manhua": {},
-  "season": "Sezona",
-  "@season": {},
-  "sequel": "SEQUEL",
-  "@sequel": {},
-  "studio": "Studio",
-  "@studio": {},
-  "staff": "Osoblje",
-  "@staff": {},
-  "status": "Status",
-  "@status": {},
-  "relations": "Relations",
-  "@relations": {},
-  "source": "Source",
-  "@source": {},
-  "synonyms": "Sinonimi",
-  "@synonyms": {},
-  "startDate": "Start Date",
-  "@startDate": {},
-  "averageDuration": "Prosječno trajanje",
-  "@averageDuration": {},
-  "comingSoon": "Uskoro dolazi",
-  "@comingSoon": {},
-  "collapseText": "prikaži manje",
-  "@collapseText": {},
-  "characters": "Likovi",
-  "@characters": {},
-  "author": "Author",
-  "@author": {},
-  "name": "Name",
-  "@name": {},
-  "description": "Sinopsis",
-  "@description": {},
-  "endDate": "End Date",
-  "@endDate": {},
-  "meanScore": "Mean Score",
-  "@meanScore": {},
-  "favorites": "Favoriti",
-  "@favorites": {},
-  "format": "Format",
-  "@format": {},
-  "expandText": "prikaži više",
-  "@expandText": {},
-  "totalEpisodes": "Epizode",
-  "@totalEpisodes": {},
-  "total": "Total",
-  "@total": {},
-  "tags": "Tags",
-  "@tags": {},
-  "synopsis": "Sinopsis",
-  "@synopsis": {},
-  "totalChapters": "Poglavlja",
-  "@totalChapters": {},
-  "kitsu": "Kitsu",
-  "@kitsu": {},
-  "loginTo": "Prijavi se na {service}",
-  "@loginTo": {
-    "placeholders": {
-      "service": {
-        "type": "String",
-        "examples": [
-          "Anilist",
-          "MyAnimeList",
-          "Kitsu",
-          "Discord"
-        ]
-      }
-    }
-  },
-  "ln": "Lagana novela",
-  "@ln": {},
-  "manhwa": "Manhwa",
-  "@manhwa": {},
-  "novel": "Roman",
-  "@novel": {},
-  "home": "Home",
-  "@home": {},
-  "series": "Series",
-  "@series": {},
-  "episode": "{count, plural, =1 {Epizoda} other {Epizode}}",
-  "@episode": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "manageLayout": "Uredi izgled stranice {page} za {service}",
-  "@manageLayout": {
-    "placeholders": {
-      "service": {
-        "type": "String",
-        "examples": [
-          "Anilist",
-          "MAL"
-        ]
-      },
-      "page": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Home",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "confirmLogout": "Jeste li sigurni da se želite odjaviti?",
-  "@confirmLogout": {},
-  "trending": "Trendujuće {type}",
-  "@trending": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "topRated": "Najbolje ocijenjeno {type}",
-  "@topRated": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa",
-          "Series"
-        ]
-      }
-    }
-  },
-  "thisSeason": "Ove sezone",
-  "@thisSeason": {},
-  "nextSeason": "Sljedeće sezone",
-  "@nextSeason": {},
-  "pickColor": "Odaberi boju",
-  "@pickColor": {},
-  "simkl": "Simkl",
-  "@simkl": {},
-  "colorPickerDefault": "Zadano",
-  "@colorPickerDefault": {},
-  "logFileDescription": "Podijelite log datoteku",
-  "@logFileDescription": {},
-  "autoUpdateDesc": "Automatski ažuriraj proširenja",
-  "@autoUpdateDesc": {},
-  "addNovelRepoDesc": "Dodaj Roman Repo iz raznih izvora",
-  "@addNovelRepoDesc": {},
-  "addAnimeRepo": "Dodaj Anime Repo",
-  "@addAnimeRepo": {},
-  "loadExtensionsIconDesc": "Onemogući ako stranica proširenja usporava",
-  "@loadExtensionsIconDesc": {},
-  "addMangaRepoDesc": "Dodaj Manga Repo iz raznih izvora",
-  "@addMangaRepoDesc": {},
-  "addAnimeRepoDesc": "Dodaj Anime Repo iz raznih izvora",
-  "@addAnimeRepoDesc": {},
-  "addMangaRepo": "Dodaj Manga Repo",
-  "@addMangaRepo": {},
-  "logFile": "Dnevnička datoteka",
-  "@logFile": {},
-  "addNovelRepo": "Dodaj Roman Repo",
-  "@addNovelRepo": {},
-  "selectDirectory": "Odaberite imenik",
-  "@selectDirectory": {},
-  "autoUpdate": "Automatsko ažuriranje",
-  "@autoUpdate": {},
-  "loadExtensionsIcon": "Učitaj ikonu proširenja",
-  "@loadExtensionsIcon": {},
-  "colorPickerCustom": "Prilagođeno",
-  "@colorPickerCustom": {},
-  "selectMediaService": "Odaberite Medijska usluga",
-  "@selectMediaService": {},
-  "customPath": "Prilagođeni put",
-  "@customPath": {},
-  "customPathDescription": "Postavite prilagođeni put za spremanje datoteka\nDugo pritisnite za uklanjanje",
-  "@customPathDescription": {},
-  "found": "Pronađeno",
-  "@found": {},
-  "webView": "Web prikaz",
-  "@webView": {},
-  "noChapterFound": "Nije pronađeno poglavlje",
-  "@noChapterFound": {},
-  "watching": "Gledanje",
-  "@watching": {},
-  "outOf": "od",
-  "@outOf": {},
-  "selected": "Odabrano",
-  "@selected": {},
-  "readStatus": "Čitaj",
-  "@readStatus": {},
-  "youTube": "Reproduciraj na YouTubeu?",
-  "@youTube": {},
-  "mediaNotFound": "Medij nije pronađen",
-  "@mediaNotFound": {},
-  "watchStatus": "gledao",
-  "@watchStatus": {},
-  "totalOf": "Ukupno",
-  "@totalOf": {},
-  "wrongTitle": "Pogrešan naslov?",
-  "@wrongTitle": {},
-  "installSourceToStart": "Instalirajte izvor sa stranice proširenja za početak",
-  "@installSourceToStart": {},
-  "reading": "Čitanje",
-  "@reading": {},
-  "developersHelpersDesc": "Dartotsuov neplaćeni rad",
-  "@developersHelpersDesc": {},
-  "developersHelpers": "Programeri/pomagači",
-  "@developersHelpers": {},
-  "thumbLessSeekBarDesc": "Uklonite palac s trake za traženje",
-  "@thumbLessSeekBarDesc": {},
-  "differentCacheManagerDesc": "Koristite drugi upravitelj predmemorije slika",
-  "@differentCacheManagerDesc": {},
-  "differentCacheManager": "Drugačiji upravitelj predmemorije",
-  "@differentCacheManager": {},
-  "readerSettings": "Postavke čitača",
-  "@readerSettings": {},
-  "playerSettingsDesc": "Promjena postavki playera",
-  "@playerSettingsDesc": {},
-  "direction": "Smjer",
-  "@direction": {},
-  "thumbLessSeekBar": "ThumbLess SeekBar",
-  "@thumbLessSeekBar": {},
-  "spacedPagesDesc": "Dodavanje razmaka između stranica",
-  "@spacedPagesDesc": {},
-  "spacedPages": "Razmaknute stranice",
-  "@spacedPages": {},
-  "readerSettingsDesc": "Promjena postavki čitača",
-  "@readerSettingsDesc": {},
-  "hideScrollbarDesc": "Sakrij traku za pomicanje tijekom čitanja",
-  "@hideScrollbarDesc": {},
-  "hideScrollbar": "Sakrij traku za pomicanje",
-  "@hideScrollbar": {},
-  "hidePageNumberDesc": "Sakrij broj stranice tijekom čitanja",
-  "@hidePageNumberDesc": {},
-  "hidePageNumber": "Sakrij broj stranice",
-  "@hidePageNumber": {}
+    "about": "O aplikaciji",
+    "@about": {},
+    "aboutDescription": "Saznajte više o aplikaciji i njezinim tvorcima",
+    "@aboutDescription": {},
+    "account": "Račun",
+    "@account": {},
+    "accountDescription": "Jednostavno upravljajte svojim računima",
+    "@accountDescription": {},
+    "allCaughtUpNew": "Sve je uhvaćeno, što je novo?",
+    "@allCaughtUpNew": {},
+    "anilist": "AniList",
+    "@anilist": {},
+    "appName": "Dartotsu",
+    "@appName": {},
+    "discord": "Discord",
+    "@discord": {},
+    "mal": "MyAnimeList",
+    "@mal": {},
+    "recommended": "Preporučeno",
+    "@recommended": {},
+    "yes": "Da",
+    "@yes": {},
+    "backgroundColorDescription": "Boja pozadine za titlove",
+    "@backgroundColorDescription": {},
+    "addToList": "DODAJ NA POPIS",
+    "@addToList": {},
+    "anime": "Anime",
+    "@anime": {},
+    "animeDescription": "Personalizirajte i upravljajte svojim anime preferencijama",
+    "@animeDescription": {},
+    "appTagline": "Nova najbolja aplikacija za\npraćenje animea i mange",
+    "@appTagline": {},
+    "backgroundColor": "Boja pozadine",
+    "@backgroundColor": {},
+    "bottomPadding": "Donji razmak",
+    "@bottomPadding": {},
+    "bottomPaddingDescription": "Donji razmak za titlove",
+    "@bottomPaddingDescription": {},
+    "cancel": "Odustani",
+    "@cancel": {},
+    "colorPicker": "Odabir boje",
+    "@colorPicker": {},
+    "colorPickerDescription": "Odaberite boju",
+    "@colorPickerDescription": {},
+    "comments": "Komentari",
+    "@comments": {},
+    "common": "Općenito",
+    "@common": {},
+    "commonDescription": "Pristupite općim postavkama za lakše korištenje aplikacije",
+    "@commonDescription": {},
+    "continueReading": "Nastavi čitati",
+    "@continueReading": {},
+    "continueWatching": "Nastavi gledati",
+    "@continueWatching": {},
+    "cursedSpeed": "Luda brzina",
+    "@cursedSpeed": {},
+    "cursedSpeedDescription": "Za one koji su prezaposleni",
+    "@cursedSpeedDescription": {},
+    "customTheme": "Vlastita tema",
+    "@customTheme": {},
+    "customThemeDescription": "Koristite vlastitu boju za temu",
+    "@customThemeDescription": {},
+    "darkMode": "Tamni način rada",
+    "@darkMode": {},
+    "donationGoal": "Trenutno nema cilja za donacije",
+    "@donationGoal": {},
+    "dtu": "Odozdo prema gore",
+    "@dtu": {},
+    "enableDarkMode": "Omogući tamni način rada",
+    "@enableDarkMode": {},
+    "extension": "{count, plural, =1 {Ekstenzija} other {Ekstenzije}}",
+    "@extension": {},
+    "extensionsDescription": "Instalirajte i upravljajte ekstenzijama za dodatne funkcionalnosti",
+    "@extensionsDescription": {},
+    "fontColor": "Boja fonta",
+    "@fontColor": {},
+    "fontColorDescription": "Boja fonta za titlove",
+    "@fontColorDescription": {},
+    "fontFamily": "Obitelj fonta",
+    "@fontFamily": {},
+    "fontFamilyDescription": "Obitelj fonta za titlove",
+    "@fontFamilyDescription": {},
+    "fontSize": "Veličina fonta",
+    "@fontSize": {},
+    "fontSizeDescription": "Veličina fonta za titlove",
+    "@fontSizeDescription": {},
+    "fontWeight": "Stil fonta",
+    "@fontWeight": {},
+    "fontWeightDescription": "Stil fonta za titlove",
+    "@fontWeightDescription": {},
+    "hiddenMedia": "Skriveni sadržaj",
+    "@hiddenMedia": {},
+    "hidePrivate": "Sakrij privatno",
+    "@hidePrivate": {},
+    "incognitoModeDescription": "Pregledavajte bez spremanja aktivnosti",
+    "@incognitoModeDescription": {},
+    "info": "INFORMACIJE",
+    "@info": {},
+    "hidePrivateDescription": "Sakrij privatne serije s početne stranice.",
+    "@hidePrivateDescription": {},
+    "incognitoMode": "Anonimni način rada",
+    "@incognitoMode": {},
+    "language": "Jezik",
+    "@language": {},
+    "layout": "Izgled",
+    "@layout": {},
+    "list": "Popis {type}",
+    "@list": {},
+    "login": "Prijava",
+    "@login": {},
+    "logout": "Odjavi se {type}",
+    "@logout": {},
+    "manga": "Manga",
+    "@manga": {},
+    "mangaDescription": "Organizirajte i prilagodite svoje iskustvo čitanja mange",
+    "@mangaDescription": {},
+    "materialYou": "Material You",
+    "@materialYou": {},
+    "materialYouDescription": "Koristite boju svoje pozadine",
+    "@materialYouDescription": {},
+    "no": "Ne",
+    "@no": {},
+    "noHiddenMediaFound": "Nije pronađen skriveni sadržaj",
+    "@noHiddenMediaFound": {},
+    "notifications": "Obavijesti",
+    "@notifications": {},
+    "notificationsDescription": "Postavite kako i kada želite primati obavijesti",
+    "@notificationsDescription": {},
+    "offlineMode": "Izvanmrežni način rada",
+    "@offlineMode": {},
+    "offlineModeDescription": "Koristite aplikaciju bez internetske veze",
+    "@offlineModeDescription": {},
+    "ok": "U redu",
+    "@ok": {},
+    "oledThemeVariant": "OLED tema",
+    "@oledThemeVariant": {},
+    "oledThemeVariantDescription": "Omogući OLED način",
+    "@oledThemeVariantDescription": {},
+    "options": "Opcije",
+    "@options": {},
+    "outlineColor": "Boja konture",
+    "@outlineColor": {},
+    "outlineColorDescription": "Boja konture za titlove",
+    "@outlineColorDescription": {},
+    "playerSettingsTitle": "Postavke Playera",
+    "@playerSettingsTitle": {},
+    "read": "Čitaj",
+    "@read": {},
+    "recentUpdates": "Nedavne izmjene",
+    "@recentUpdates": {},
+    "recommendationsEmptyMessage": "Gledajte/Čitajte Anime ili Mangu za preporuke",
+    "@recommendationsEmptyMessage": {},
+    "resizeMode": "Način prilagodbe",
+    "@resizeMode": {},
+    "resizeModeDescription": "Zadani način prilagodbe za player",
+    "@resizeModeDescription": {},
+    "restoreSettings": "Vrati postavke",
+    "@restoreSettings": {},
+    "scanlators": "Skanelatori",
+    "@scanlators": {},
+    "search": "Pretraži",
+    "@search": {},
+    "settings": "Postavke",
+    "@settings": {},
+    "showSubtitles": "Prikaži titlove",
+    "@showSubtitles": {},
+    "showSubtitlesDescription": "Prikaži titlove prema zadanim postavkama",
+    "@showSubtitlesDescription": {},
+    "skipButton": "Preskakanje",
+    "@skipButton": {},
+    "skipButtonDescription": "Trajanje tipke za preskakanje",
+    "@skipButtonDescription": {},
+    "sort": "Sortiraj",
+    "@sort": {},
+    "speed": "Brzina",
+    "@speed": {},
+    "speedDescription": "Zadana brzina za player",
+    "@speedDescription": {},
+    "subtitles": "Titlovi",
+    "@subtitles": {},
+    "subtitlePreview": "Pregled titlova",
+    "@subtitlePreview": {},
+    "theme": "Tema",
+    "@theme": {},
+    "themeDescription": "Prilagodite izgled i dojam aplikacije",
+    "@themeDescription": {},
+    "droppedManga": "Odbačena Manga",
+    "@droppedManga": {},
+    "droppedAnime": "Odbačeni Anime",
+    "@droppedAnime": {},
+    "topAiring": "Najbolje trenutno emitirano",
+    "@topAiring": {},
+    "utd": "Odozgo prema dolje",
+    "@utd": {},
+    "watch": "Gledaj",
+    "@watch": {},
+    "supportMaintainer": "Želite li podržati održavatelja Dartotsua?\nRazmislite o donaciji",
+    "@supportMaintainer": {},
+    "noOnHold": "Izgleda da ništa nije stavljeno na čekanje.",
+    "@noOnHold": {},
+    "noFavourites": "Izgleda da ti se ništa ne sviđa,\nPokušaj dodati emisiju u favorite da je držiš ovdje.",
+    "@noFavourites": {},
+    "onHold": "Na čekanju {type}",
+    "@onHold": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "compactView": "Kompaktni prikaz",
+    "@compactView": {},
+    "listView": "List View",
+    "@listView": {},
+    "favorite": "Omiljeno {type}",
+    "@favorite": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "noDropped": "Niste još odustali od {type}.",
+    "@noDropped": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "volume": "{count, plural, =1 {Svezak} other {Svesci}}",
+    "@volume": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "activity": "{count, plural, =1 {Aktivnost} other {Aktivnosti}}",
+    "@activity": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "previousSeason": "Prethodne sezone",
+    "@previousSeason": {},
+    "popular": "Popularno {type}",
+    "@popular": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa"
+                ]
+            }
+        }
+    },
+    "installed": "Instalirano {type}",
+    "@installed": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Extensions"
+                ]
+            }
+        }
+    },
+    "mostFavourite": "Najdraže {type}",
+    "@mostFavourite": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa"
+                ]
+            }
+        }
+    },
+    "chapterRead": "Poglavlje pročitano",
+    "@chapterRead": {},
+    "nameRomaji": "Ime (Romaji)",
+    "@nameRomaji": {},
+    "gridView": "Prikaz mreže",
+    "@gridView": {},
+    "browse": "Pregledaj {type}",
+    "@browse": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "episodeWatched": "Epizoda pogledana",
+    "@episodeWatched": {},
+    "popularity": "Popularnost",
+    "@popularity": {},
+    "movie": "{count, plural, =1 {Film} other {Filmovi}}",
+    "@movie": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "prequel": "PREQUEL",
+    "@prequel": {},
+    "planned": "Planirano {type}",
+    "@planned": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "chapter": "{count, plural, =1 {Poglavlje} other {Poglavlja}}",
+    "@chapter": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "manageLayoutDescription": "Možete urediti izgled stranice {page} povlačenjem i ispuštanjem stavki",
+    "@manageLayoutDescription": {
+        "placeholders": {
+            "page": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Home",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "available": "Dostupno {type}",
+    "@available": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "genres": "Žanrovi",
+    "@genres": {},
+    "calendar": "Kalendar",
+    "@calendar": {},
+    "manhua": "Manhua",
+    "@manhua": {},
+    "season": "Sezona",
+    "@season": {},
+    "sequel": "SEQUEL",
+    "@sequel": {},
+    "studio": "Studio",
+    "@studio": {},
+    "staff": "Osoblje",
+    "@staff": {},
+    "status": "Status",
+    "@status": {},
+    "relations": "Relations",
+    "@relations": {},
+    "source": "Source",
+    "@source": {},
+    "synonyms": "Sinonimi",
+    "@synonyms": {},
+    "startDate": "Start Date",
+    "@startDate": {},
+    "averageDuration": "Prosječno trajanje",
+    "@averageDuration": {},
+    "comingSoon": "Uskoro dolazi",
+    "@comingSoon": {},
+    "collapseText": "prikaži manje",
+    "@collapseText": {},
+    "characters": "Likovi",
+    "@characters": {},
+    "author": "Author",
+    "@author": {},
+    "name": "Name",
+    "@name": {},
+    "endDate": "End Date",
+    "@endDate": {},
+    "meanScore": "Mean Score",
+    "@meanScore": {},
+    "favorites": "Favoriti",
+    "@favorites": {},
+    "format": "Format",
+    "@format": {},
+    "expandText": "prikaži više",
+    "@expandText": {},
+    "totalEpisodes": "Epizode",
+    "@totalEpisodes": {},
+    "total": "Total",
+    "@total": {},
+    "tags": "Tags",
+    "@tags": {},
+    "synopsis": "Sinopsis",
+    "@synopsis": {},
+    "totalChapters": "Poglavlja",
+    "@totalChapters": {},
+    "kitsu": "Kitsu",
+    "@kitsu": {},
+    "loginTo": "Prijavi se na {service}",
+    "@loginTo": {
+        "placeholders": {
+            "service": {
+                "type": "String",
+                "examples": [
+                    "Anilist",
+                    "MyAnimeList",
+                    "Kitsu",
+                    "Discord"
+                ]
+            }
+        }
+    },
+    "ln": "Lagana novela",
+    "@ln": {},
+    "manhwa": "Manhwa",
+    "@manhwa": {},
+    "novel": "Roman",
+    "@novel": {},
+    "home": "Home",
+    "@home": {},
+    "series": "Series",
+    "@series": {},
+    "episode": "{count, plural, =1 {Epizoda} other {Epizode}}",
+    "@episode": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "manageLayout": "Uredi izgled stranice {page} za {service}",
+    "@manageLayout": {
+        "placeholders": {
+            "service": {
+                "type": "String",
+                "examples": [
+                    "Anilist",
+                    "MAL"
+                ]
+            },
+            "page": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Home",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "confirmLogout": "Jeste li sigurni da se želite odjaviti?",
+    "@confirmLogout": {},
+    "trending": "Trendujuće {type}",
+    "@trending": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "topRated": "Najbolje ocijenjeno {type}",
+    "@topRated": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa",
+                    "Series"
+                ]
+            }
+        }
+    },
+    "thisSeason": "Ove sezone",
+    "@thisSeason": {},
+    "nextSeason": "Sljedeće sezone",
+    "@nextSeason": {},
+    "pickColor": "Odaberi boju",
+    "@pickColor": {},
+    "simkl": "Simkl",
+    "@simkl": {},
+    "colorPickerDefault": "Zadano",
+    "@colorPickerDefault": {},
+    "logFileDescription": "Podijelite log datoteku",
+    "@logFileDescription": {},
+    "autoUpdateDesc": "Automatski ažuriraj proširenja",
+    "@autoUpdateDesc": {},
+    "addNovelRepoDesc": "Dodaj Roman Repo iz raznih izvora",
+    "@addNovelRepoDesc": {},
+    "addAnimeRepo": "Dodaj Anime Repo",
+    "@addAnimeRepo": {},
+    "loadExtensionsIconDesc": "Onemogući ako stranica proširenja usporava",
+    "@loadExtensionsIconDesc": {},
+    "addMangaRepoDesc": "Dodaj Manga Repo iz raznih izvora",
+    "@addMangaRepoDesc": {},
+    "addAnimeRepoDesc": "Dodaj Anime Repo iz raznih izvora",
+    "@addAnimeRepoDesc": {},
+    "addMangaRepo": "Dodaj Manga Repo",
+    "@addMangaRepo": {},
+    "logFile": "Dnevnička datoteka",
+    "@logFile": {},
+    "addNovelRepo": "Dodaj Roman Repo",
+    "@addNovelRepo": {},
+    "selectDirectory": "Odaberite imenik",
+    "@selectDirectory": {},
+    "autoUpdate": "Automatsko ažuriranje",
+    "@autoUpdate": {},
+    "loadExtensionsIcon": "Učitaj ikonu proširenja",
+    "@loadExtensionsIcon": {},
+    "colorPickerCustom": "Prilagođeno",
+    "@colorPickerCustom": {},
+    "selectMediaService": "Odaberite Medijska usluga",
+    "@selectMediaService": {},
+    "customPath": "Prilagođeni put",
+    "@customPath": {},
+    "customPathDescription": "Postavite prilagođeni put za spremanje datoteka\nDugo pritisnite za uklanjanje",
+    "@customPathDescription": {},
+    "found": "Pronađeno",
+    "@found": {},
+    "webView": "Web prikaz",
+    "@webView": {},
+    "noChapterFound": "Nije pronađeno poglavlje",
+    "@noChapterFound": {},
+    "watching": "Gledanje",
+    "@watching": {},
+    "outOf": "od",
+    "@outOf": {},
+    "selected": "Odabrano",
+    "@selected": {},
+    "readStatus": "Čitaj",
+    "@readStatus": {},
+    "youTube": "Reproduciraj na YouTubeu?",
+    "@youTube": {},
+    "mediaNotFound": "Medij nije pronađen",
+    "@mediaNotFound": {},
+    "watchStatus": "gledao",
+    "@watchStatus": {},
+    "totalOf": "Ukupno",
+    "@totalOf": {},
+    "wrongTitle": "Pogrešan naslov?",
+    "@wrongTitle": {},
+    "installSourceToStart": "Instalirajte izvor sa stranice proširenja za početak",
+    "@installSourceToStart": {},
+    "reading": "Čitanje",
+    "@reading": {},
+    "developersHelpersDesc": "Dartotsuov neplaćeni rad",
+    "@developersHelpersDesc": {},
+    "developersHelpers": "Programeri/pomagači",
+    "@developersHelpers": {},
+    "thumbLessSeekBarDesc": "Uklonite palac s trake za traženje",
+    "@thumbLessSeekBarDesc": {},
+    "differentCacheManagerDesc": "Koristite drugi upravitelj predmemorije slika",
+    "@differentCacheManagerDesc": {},
+    "differentCacheManager": "Drugačiji upravitelj predmemorije",
+    "@differentCacheManager": {},
+    "readerSettings": "Postavke čitača",
+    "@readerSettings": {},
+    "playerSettingsDesc": "Promjena postavki playera",
+    "@playerSettingsDesc": {},
+    "direction": "Smjer",
+    "@direction": {},
+    "thumbLessSeekBar": "ThumbLess SeekBar",
+    "@thumbLessSeekBar": {},
+    "spacedPagesDesc": "Dodavanje razmaka između stranica",
+    "@spacedPagesDesc": {},
+    "spacedPages": "Razmaknute stranice",
+    "@spacedPages": {},
+    "readerSettingsDesc": "Promjena postavki čitača",
+    "@readerSettingsDesc": {},
+    "hideScrollbarDesc": "Sakrij traku za pomicanje tijekom čitanja",
+    "@hideScrollbarDesc": {},
+    "hideScrollbar": "Sakrij traku za pomicanje",
+    "@hideScrollbar": {},
+    "hidePageNumberDesc": "Sakrij broj stranice tijekom čitanja",
+    "@hidePageNumberDesc": {},
+    "hidePageNumber": "Sakrij broj stranice",
+    "@hidePageNumber": {},
+    "glassEffect": "Glass Effect",
+    "@glassEffect": {},
+    "ltr": "Left To Right",
+    "@ltr": {},
+    "coverThemeDescription": "Use media cover image as theme color",
+    "@coverThemeDescription": {},
+    "rtl": "Right To Left",
+    "@rtl": {},
+    "glassEffectDescription": "Gives a frosted glass effect to the app",
+    "@glassEffectDescription": {},
+    "nextEpisodeRelease": "Episode {episode} will be released in",
+    "@nextEpisodeRelease": {
+        "description": "Message showing the next episode info",
+        "placeholders": {
+            "episode": {
+                "type": "int"
+            }
+        }
+    },
+    "topScore": "Top Score",
+    "@topScore": {},
+    "coverTheme": "Use Cover Theme",
+    "@coverTheme": {},
+    "customMPVDescription": "Enable this option to use your own MPV configuration file. Place your custom config at: {path}",
+    "@customMPVDescription": {
+        "placeholders": {
+            "path": {
+                "type": "String"
+            }
+        }
+    },
+    "customMPV": "Custom MPV Configuration",
+    "@customMPV": {}
 }

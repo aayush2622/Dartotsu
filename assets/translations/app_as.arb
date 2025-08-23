@@ -1,632 +1,663 @@
 {
-  "appName": "Dartotsu",
-  "@appName": {},
-  "notifications": "জাননীসমূহ",
-  "@notifications": {},
-  "customTheme": "নিজৰ থিম",
-  "@customTheme": {},
-  "ok": "ঠিক আছে",
-  "@ok": {},
-  "cancel": "বাতিল কৰক",
-  "@cancel": {},
-  "anilist": "AniList",
-  "@anilist": {},
-  "mal": "MyAnimeList",
-  "@mal": {},
-  "discord": "Discord",
-  "@discord": {},
-  "account": "একাউণ্ট",
-  "@account": {},
-  "accountDescription": "আপোনাৰ এনিলিষ্ট, মাইএনিমেলিষ্ট আৰু ডিস্ক’ৰ্ড একাউণ্ট সহজে পৰিচালনা কৰক",
-  "@accountDescription": {},
-  "theme": "থিম",
-  "@theme": {},
-  "themeDescription": "এপৰ চেহেৰা আৰু অনুভূতি কাষ্টমাইজ কৰক",
-  "@themeDescription": {},
-  "common": "সাধাৰণ",
-  "@common": {},
-  "commonDescription": "এপৰ মসৃণ ব্যৱহাৰৰ বাবে সাধাৰণ ছেটিংছলৈ প্ৰৱেশ কৰক",
-  "@commonDescription": {},
-  "anime": "এনিমে",
-  "@anime": {},
-  "animeDescription": "আপোনাৰ এনিমে পছন্দসমূহ ব্যক্তিগতকৰণ আৰু পৰিচালনা কৰক",
-  "@animeDescription": {},
-  "manga": "মাংগা",
-  "@manga": {},
-  "mangaDescription": "আপোনাৰ মাংগা অভিজ্ঞতা সংগঠিত আৰু কাষ্টমাইজ কৰক",
-  "@mangaDescription": {},
-  "extensionsDescription": "অধিক কাৰ্যক্ষমতাৰ বাবে এক্সটেনশ্যনসমূহ ইনষ্টল আৰু পৰিচালনা কৰক",
-  "@extensionsDescription": {},
-  "notificationsDescription": "জাননী কেনেকৈ আৰু কেতিয়া পাব তাক ছেট কৰক",
-  "@notificationsDescription": {},
-  "about": "সম্পৰ্কীয়",
-  "@about": {},
-  "aboutDescription": "এপ আৰু ইয়াৰ নিৰ্মাতাসকলৰ বিষয়ে অধিক জানক",
-  "@aboutDescription": {},
-  "supportMaintainer": "ডাৰ্ট’ৎচুৰ মেইণ্টেইনাৰক সহায় কৰিব বিচাৰেনে?\nঅনুদানৰ কথা বিবেচনা কৰক",
-  "@supportMaintainer": {},
-  "donationGoal": "বৰ্তমান কোনো অনুদানৰ লক্ষ্য নাই",
-  "@donationGoal": {},
-  "settings": "ছেটিংছ",
-  "@settings": {},
-  "darkMode": "ডাৰ্ক মোড",
-  "@darkMode": {},
-  "enableDarkMode": "ডাৰ্ক মোড সক্ৰিয় কৰক",
-  "@enableDarkMode": {},
-  "oledThemeVariant": "ওএলইডি থিম ভেৰিয়েণ্ট",
-  "@oledThemeVariant": {},
-  "oledThemeVariantDescription": "ওএলইডি মোড সক্ৰিয় কৰক",
-  "@oledThemeVariantDescription": {},
-  "materialYou": "Material You",
-  "@materialYou": {},
-  "materialYouDescription": "আপোনাৰ ৱালপেপাৰৰ সৈতে মিল থকা ৰঙৰ থিম ব্যৱহাৰ কৰক",
-  "@materialYouDescription": {},
-  "customThemeDescription": "নিজৰ ৰঙৰ থিম ব্যৱহাৰ কৰক",
-  "@customThemeDescription": {},
-  "colorPicker": "ৰঙ নিৰ্বাচক",
-  "@colorPicker": {},
-  "colorPickerDescription": "এটা ৰঙ বাছক",
-  "@colorPickerDescription": {},
-  "cursedSpeedDescription": "বৰ ব্যস্ত জীৱন যাপন কৰাসকলৰ বাবে",
-  "@cursedSpeedDescription": {},
-  "fontFamilyDescription": "ছাবটাইটেলৰ ফণ্ট পৰিয়াল",
-  "@fontFamilyDescription": {},
-  "resizeModeDescription": "প্লেয়াৰৰ বাবে ডিফল্ট ৰিছাইজ মোড",
-  "@resizeModeDescription": {},
-  "fontColor": "ফণ্টৰ ৰঙ",
-  "@fontColor": {},
-  "fontFamily": "ফণ্ট পৰিয়াল",
-  "@fontFamily": {},
-  "fontSize": "ফণ্টৰ আকাৰ",
-  "@fontSize": {},
-  "fontSizeDescription": "ছাবটাইটেলৰ ফণ্টৰ আকাৰ",
-  "@fontSizeDescription": {},
-  "fontWeight": "ফণ্টৰ ওজন",
-  "@fontWeight": {},
-  "fontWeightDescription": "ছাবটাইটেলৰ ফণ্টৰ ওজন",
-  "@fontWeightDescription": {},
-  "incognitoMode": "ইনকগনিটো মোড",
-  "@incognitoMode": {},
-  "incognitoModeDescription": "আপোনাৰ কাৰ্যকলাপ সাঁচি নোলোৱাকৈ ব্ৰাউজ কৰক",
-  "@incognitoModeDescription": {},
-  "login": "লগইন",
-  "@login": {},
-  "logout": "লগআউট {type}",
-  "@logout": {},
-  "no": "নহয়",
-  "@no": {},
-  "outlineColor": "ৰূপৰেখাৰ ৰঙ",
-  "@outlineColor": {},
-  "outlineColorDescription": "ছাবটাইটেলৰ ৰূপৰেখাৰ ৰঙ",
-  "@outlineColorDescription": {},
-  "restoreSettings": "ছেটিংছ পুনৰুদ্ধাৰ কৰক",
-  "@restoreSettings": {},
-  "showSubtitles": "ছাবটাইটেল দেখুৱাওক",
-  "@showSubtitles": {},
-  "speed": "গতি",
-  "@speed": {},
-  "speedDescription": "প্লেয়াৰৰ বাবে ডিফল্ট গতি",
-  "@speedDescription": {},
-  "subtitles": "ছাবটাইটেল",
-  "@subtitles": {},
-  "subtitlePreview": "ছাবটাইটেল প্ৰিভিউ",
-  "@subtitlePreview": {},
-  "appTagline": "এনিমে আৰু মাংগা ট্ৰেকিংৰ\nবাবে শ্ৰেষ্ঠ নতুন এপ",
-  "@appTagline": {},
-  "backgroundColorDescription": "ছাবটাইটেলৰ পটভূমিৰ ৰঙ",
-  "@backgroundColorDescription": {},
-  "bottomPadding": "তলৰ পেডিং",
-  "@bottomPadding": {},
-  "bottomPaddingDescription": "ছাবটাইটেলৰ তলৰ পেডিং",
-  "@bottomPaddingDescription": {},
-  "fontColorDescription": "ছাবটাইটেলৰ ফণ্টৰ ৰঙ",
-  "@fontColorDescription": {},
-  "hidePrivateDescription": "হোম পৃষ্ঠাৰ পৰা গোপন ধাৰাবাহিক লুকুৱাওক।",
-  "@hidePrivateDescription": {},
-  "offlineMode": "অফলাইন মোড",
-  "@offlineMode": {},
-  "offlineModeDescription": "ইণ্টাৰনেট সংযোগ অবিহনে এপ ব্যৱহাৰ কৰক",
-  "@offlineModeDescription": {},
-  "playerSettingsTitle": "প্লেয়াৰ ছেটিংছ",
-  "@playerSettingsTitle": {},
-  "resizeMode": "ৰিছাইজ মোড",
-  "@resizeMode": {},
-  "extension": "{count, plural, =1 {এক্সটেনশ্যন} other {এক্সটেনশ্যনসমূহ}}",
-  "@extension": {},
-  "hidePrivate": "গোপনীয় লুকুৱাওক",
-  "@hidePrivate": {},
-  "backgroundColor": "পটভূমিৰ ৰঙ",
-  "@backgroundColor": {},
-  "cursedSpeed": "অভিশপ্ত গতি",
-  "@cursedSpeed": {},
-  "yes": "হয়",
-  "@yes": {},
-  "showSubtitlesDescription": "ডিফল্ট হিচাপে ছাবটাইটেল দেখুৱাওক",
-  "@showSubtitlesDescription": {},
-  "skipButton": "এৰি দিয়ক বাটন",
-  "@skipButton": {},
-  "skipButtonDescription": "এৰি দিয়ক বাটনৰ সময়সীমা",
-  "@skipButtonDescription": {},
-  "addToList": "তালিকাত যোগ কৰক",
-  "@addToList": {},
-  "comments": "মন্তব্য",
-  "@comments": {},
-  "continueReading": "পঢ়ি যাওক",
-  "@continueReading": {},
-  "continueWatching": "চাই যাওক",
-  "@continueWatching": {},
-  "dtu": "তলৰ পৰা ওপৰলৈ",
-  "@dtu": {},
-  "hiddenMedia": "গোপন মিডিয়া",
-  "@hiddenMedia": {},
-  "info": "তথ্য",
-  "@info": {},
-  "language": "ভাষা",
-  "@language": {},
-  "layout": "বিন্যাস",
-  "@layout": {},
-  "list": "{type} তালিকা",
-  "@list": {},
-  "recommended": "পৰামৰ্শিত",
-  "@recommended": {},
-  "read": "পঢ়ক",
-  "@read": {},
-  "sort": "সজাওক",
-  "@sort": {},
-  "recommendationsEmptyMessage": "পৰামৰ্শ পাবলৈ কিছু এনিমে বা মাংগা চাওক/পঢ়ক",
-  "@recommendationsEmptyMessage": {},
-  "noHiddenMediaFound": "কোনো গোপন মিডিয়া পোৱা নগ’ল",
-  "@noHiddenMediaFound": {},
-  "scanlators": "স্কেনলেটৰ",
-  "@scanlators": {},
-  "search": "সন্ধান",
-  "@search": {},
-  "droppedManga": "বাদ দিয়া মাংগা",
-  "@droppedManga": {},
-  "options": "বিকল্প",
-  "@options": {},
-  "topAiring": "শীৰ্ষ প্ৰচাৰিত",
-  "@topAiring": {},
-  "watch": "চাওক",
-  "@watch": {},
-  "droppedAnime": "বাদ দিয়া এনিমে",
-  "@droppedAnime": {},
-  "utd": "ওপৰৰ পৰা তললৈ",
-  "@utd": {},
-  "recentUpdates": "শেহতীয়া আপডেট",
-  "@recentUpdates": {},
-  "allCaughtUpNew": "সকলো শেষ, নতুন কি?",
-  "@allCaughtUpNew": {},
-  "noFavourites": "কিবা ভাল লগা নাই,\nইয়াত ৰাখিবলৈ এটা শ্ব’ পছন্দ কৰক।",
-  "@noFavourites": {},
-  "noOnHold": "কিবা স্থগিত কৰা নাই।",
-  "@noOnHold": {},
-  "loginTo": "{service} ত লগইন কৰক",
-  "@loginTo": {
-    "placeholders": {
-      "service": {
-        "type": "String",
-        "examples": [
-          "Anilist",
-          "MyAnimeList",
-          "Kitsu",
-          "Discord"
-        ]
-      }
-    }
-  },
-  "volume": "{count, plural, =1 {খণ্ড} other {খণ্ডসমূহ}}",
-  "@volume": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "confirmLogout": "আপুনি নিশ্চিতভাৱে লগআউট কৰিব বিচাৰে?",
-  "@confirmLogout": {},
-  "listView": "তালিকা দৰ্শন",
-  "@listView": {},
-  "noDropped": "আপুনি এতিয়াও কোনো {type} বাদ দিয়া নাই।",
-  "@noDropped": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "genres": "ধৰণ",
-  "@genres": {},
-  "kitsu": "Kitsu",
-  "@kitsu": {},
-  "manhwa": "মানহৱা",
-  "@manhwa": {},
-  "calendar": "কেলেণ্ডাৰ",
-  "@calendar": {},
-  "manageLayoutDescription": "{page} পৃষ্ঠাৰ অৱস্থান ড্ৰেগ আৰু ড্ৰপ কৰি বিষয়বস্তু পৰিচালনা কৰক",
-  "@manageLayoutDescription": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anilist",
-          "MAL"
-        ]
-      },
-      "name": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Home",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "gridView": "গ্ৰিড দৰ্শন",
-  "@gridView": {},
-  "compactView": "সংক্ষিপ্ত দৰ্শন",
-  "@compactView": {},
-  "chapterRead": "পঢ়া অধ্যায়",
-  "@chapterRead": {},
-  "available": "উপলব্ধ {type}",
-  "@available": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "installed": "ইনষ্টল কৰা {type}",
-  "@installed": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Extensions"
-        ]
-      }
-    }
-  },
-  "trending": "ট্ৰেণ্ডিং {type}",
-  "@trending": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "mostFavourite": "সৰ্বাধিক প্ৰিয় {type}",
-  "@mostFavourite": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa"
-        ]
-      }
-    }
-  },
-  "thisSeason": "এই ছিজন",
-  "@thisSeason": {},
-  "nextSeason": "পৰৱৰ্তী ছিজন",
-  "@nextSeason": {},
-  "previousSeason": "পূৰ্বৰ ছিজন",
-  "@previousSeason": {},
-  "planned": "পৰিকল্পিত {type}",
-  "@planned": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "browse": "ব্ৰাউজ {type}",
-  "@browse": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "favorite": "প্ৰিয় {type}",
-  "@favorite": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "onHold": "স্থগিত {type}",
-  "@onHold": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "season": "ছিজন",
-  "@season": {},
-  "manhua": "মানহুৱা",
-  "@manhua": {},
-  "home": "হোম",
-  "@home": {},
-  "ln": "লাইট নভেল",
-  "@ln": {},
-  "activity": "{count, plural, =1 {কাৰ্য} other {কাৰ্যসমূহ}}",
-  "@activity": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "popular": "জনপ্ৰিয় {type}",
-  "@popular": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa"
-        ]
-      }
-    }
-  },
-  "series": "ধাৰাবাহিক",
-  "@series": {},
-  "episode": "{count, plural, =1 {এপিচ’ড} other {এপিচ’ডসমূহ}}",
-  "@episode": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "episodeWatched": "চোৱা এপিচ’ড",
-  "@episodeWatched": {},
-  "chapter": "{count, plural, =1 {অধ্যায়} other {অধ্যায়সমূহ}}",
-  "@chapter": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "movie": "{count, plural, =1 {চলচ্চিত্ৰ} other {চলচ্চিত্ৰসমূহ}}",
-  "@movie": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "manageLayout": "{service} ৰ বাবে {page} পৃষ্ঠাৰ অৱস্থান পৰিচালনা কৰক",
-  "@manageLayout": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anilist",
-          "MAL"
-        ]
-      },
-      "name": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Home",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "topRated": "শীৰ্ষ ৰেটেড {type}",
-  "@topRated": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa",
-          "Series"
-        ]
-      }
-    }
-  },
-  "novel": "নভেল",
-  "@novel": {},
-  "pickColor": "ৰঙ বাছক",
-  "@pickColor": {},
-  "collapseText": "কম দেখুৱাওক",
-  "@collapseText": {},
-  "averageDuration": "গড় সময়",
-  "@averageDuration": {},
-  "favorites": "প্ৰিয়সমূহ",
-  "@favorites": {},
-  "format": "ফৰ্মেট",
-  "@format": {},
-  "meanScore": "গড় স্ক’ৰ",
-  "@meanScore": {},
-  "prequel": "পূৰ্বকথা",
-  "@prequel": {},
-  "relations": "সম্পৰ্ক",
-  "@relations": {},
-  "sequel": "পৰৱৰ্তী কথা",
-  "@sequel": {},
-  "source": "উৎস",
-  "@source": {},
-  "staff": "কৰ্মী",
-  "@staff": {},
-  "startDate": "আৰম্ভৰ তাৰিখ",
-  "@startDate": {},
-  "studio": "ষ্টুডিঅ’",
-  "@studio": {},
-  "tags": "টেগসমূহ",
-  "@tags": {},
-  "total": "মুঠ",
-  "@total": {},
-  "totalEpisodes": "মুঠ এপিচ’ড",
-  "@totalEpisodes": {},
-  "totalChapters": "মুঠ অধ্যায়",
-  "@totalChapters": {},
-  "synonyms": "প্ৰতিশব্দ",
-  "@synonyms": {},
-  "characters": "চৰিত্ৰসমূহ",
-  "@characters": {},
-  "comingSoon": "শীঘ্ৰে আহিব",
-  "@comingSoon": {},
-  "popularity": "জনপ্ৰিয়তা",
-  "@popularity": {},
-  "endDate": "শেষৰ তাৰিখ",
-  "@endDate": {},
-  "expandText": "অধিক দেখুৱাওক",
-  "@expandText": {},
-  "name": "নাম",
-  "@name": {},
-  "nameRomaji": "নাম (ৰোমাজি)",
-  "@nameRomaji": {},
-  "status": "স্থিতি",
-  "@status": {},
-  "description": "বিৱৰণ",
-  "@description": {},
-  "author": "লেখক",
-  "@author": {},
-  "synopsis": "সাৰাংশ",
-  "@synopsis": {},
-  "simkl": "Simkl",
-  "@simkl": {},
-  "colorPickerCustom": "কাষ্টম",
-  "@colorPickerCustom": {},
-  "colorPickerDefault": "ডিফল্ট",
-  "@colorPickerDefault": {},
-  "logFileDescription": "লগ ফাইল শ্বেয়াৰ কৰক",
-  "@logFileDescription": {},
-  "addAnimeRepo": "এনিমে ৰেপ’ যোগ কৰক",
-  "@addAnimeRepo": {},
-  "loadExtensionsIconDesc": "এক্সটেনশ্যন পৃষ্ঠা লেগ কৰিলে অক্ষম কৰক",
-  "@loadExtensionsIconDesc": {},
-  "autoUpdateDesc": "এক্সটেনশ্যনসমূহ স্বয়ংক্ৰিয়ভাৱে আপডেট কৰক",
-  "@autoUpdateDesc": {},
-  "addNovelRepoDesc": "বিভিন্ন উৎসৰ পৰা নভেল ৰেপ’ যোগ কৰক",
-  "@addNovelRepoDesc": {},
-  "addMangaRepoDesc": "বিভিন্ন উৎসৰ পৰা মাংগা ৰেপ’ যোগ কৰক",
-  "@addMangaRepoDesc": {},
-  "addAnimeRepoDesc": "বিভিন্ন উৎসৰ পৰা এনিমে ৰেপ’ যোগ কৰক",
-  "@addAnimeRepoDesc": {},
-  "addMangaRepo": "মাংগা ৰেপ’ যোগ কৰক",
-  "@addMangaRepo": {},
-  "logFile": "লগ ফাইল",
-  "@logFile": {},
-  "addNovelRepo": "নভেল ৰেপ’ যোগ কৰক",
-  "@addNovelRepo": {},
-  "autoUpdate": "স্বয়ংক্ৰিয় আপডেট",
-  "@autoUpdate": {},
-  "loadExtensionsIcon": "এক্সটেনশ্যনৰ আইকন লোড কৰক",
-  "@loadExtensionsIcon": {},
-  "selectDirectory": "ডাইৰেক্টৰি বাছক",
-  "@selectDirectory": {},
-  "selectMediaService": "মিডিয়া সেৱা বাছক",
-  "@selectMediaService": {},
-  "customPath": "কাষ্টম পথ",
-  "@customPath": {},
-  "customPathDescription": "ফাইল সাঁচিবলৈ কাষ্টম পথ নিৰ্ধাৰণ কৰক\nআঁতৰাবলৈ দীঘলীয়াকৈ টিপক",
-  "@customPathDescription": {},
-  "noChapterFound": "কোনো অধ্যায় পোৱা নগ’ল",
-  "@noChapterFound": {},
-  "watching": "চাই আছে",
-  "@watching": {},
-  "outOf": "ৰ মাজৰ",
-  "@outOf": {},
-  "selected": "নিৰ্বাচিত",
-  "@selected": {},
-  "youTube": "ইউটিউবত প্লে কৰক?",
-  "@youTube": {},
-  "mediaNotFound": "কোনো মিডিয়া পোৱা নগ’ল",
-  "@mediaNotFound": {},
-  "found": "পোৱা গ’ল",
-  "@found": {},
-  "watchStatus": "চোৱাৰ স্থিতি",
-  "@watchStatus": {},
-  "totalOf": "মুঠৰ মাজৰ",
-  "@totalOf": {},
-  "readStatus": "পঢ়াৰ স্থিতি",
-  "@readStatus": {},
-  "wrongTitle": "শিৰোনাম ভুল?",
-  "@wrongTitle": {},
-  "installSourceToStart": "আৰম্ভ কৰিবলৈ এক্সটেনশ্যন পৃষ্ঠাৰ পৰা এটা উৎস ইনষ্টল কৰক",
-  "@installSourceToStart": {},
-  "webView": "ৱেব দৰ্শন",
-  "@webView": {},
-  "reading": "পঢ়ি আছে",
-  "@reading": {},
-  "direction": "দিশ",
-  "@direction": {},
-  "playerSettingsDesc": "প্লেয়াৰ ছেটিংছ সলনি কৰক",
-  "@playerSettingsDesc": {},
-  "hidePageNumberDesc": "পঢ়োঁতে পৃষ্ঠাৰ নম্বৰ লুকুৱাওক",
-  "@hidePageNumberDesc": {},
-  "hidePageNumber": "পৃষ্ঠাৰ নম্বৰ লুকুৱাওক",
-  "@hidePageNumber": {},
-  "hideScrollbarDesc": "পঢ়োঁতে স্ক্ৰলবাৰ লুকুৱাওক",
-  "@hideScrollbarDesc": {},
-  "thumbLessSeekBar": "থাম্ববিহীন ছিক বাৰ",
-  "@thumbLessSeekBar": {},
-  "developersHelpersDesc": "ডাৰ্ট’ৎচুৰ বিনামূলীয়া সহায়ক দল",
-  "@developersHelpersDesc": {},
-  "developersHelpers": "বিকাশক/সহায়ক",
-  "@developersHelpers": {},
-  "differentCacheManagerDesc": "বেলেগ ছবি কেশ্ব মেনেজাৰ ব্যৱহাৰ কৰক",
-  "@differentCacheManagerDesc": {},
-  "differentCacheManager": "বেলেগ কেশ্ব মেনেজাৰ",
-  "@differentCacheManager": {},
-  "spacedPagesDesc": "পৃষ্ঠাৰ মাজত ফাঁক যোগ কৰক",
-  "@spacedPagesDesc": {},
-  "spacedPages": "পৃষ্ঠাৰ ফাঁক",
-  "@spacedPages": {},
-  "thumbLessSeekBarDesc": "ছিক বাৰৰ পৰা থাম্ব আঁতৰাওক",
-  "@thumbLessSeekBarDesc": {},
-  "readerSettingsDesc": "ৰিডাৰ ছেটিংছ সলনি কৰক",
-  "@readerSettingsDesc": {},
-  "readerSettings": "ৰিডাৰ ছেটিংছ",
-  "@readerSettings": {},
-  "hideScrollbar": "স্ক্ৰলবাৰ লুকুৱাওক",
-  "@hideScrollbar": {}
+    "appName": "Dartotsu",
+    "@appName": {},
+    "notifications": "জাননীসমূহ",
+    "@notifications": {},
+    "customTheme": "নিজৰ থিম",
+    "@customTheme": {},
+    "ok": "ঠিক আছে",
+    "@ok": {},
+    "cancel": "বাতিল কৰক",
+    "@cancel": {},
+    "anilist": "AniList",
+    "@anilist": {},
+    "mal": "MyAnimeList",
+    "@mal": {},
+    "discord": "Discord",
+    "@discord": {},
+    "account": "একাউণ্ট",
+    "@account": {},
+    "accountDescription": "আপোনাৰ এনিলিষ্ট, মাইএনিমেলিষ্ট আৰু ডিস্ক’ৰ্ড একাউণ্ট সহজে পৰিচালনা কৰক",
+    "@accountDescription": {},
+    "theme": "থিম",
+    "@theme": {},
+    "themeDescription": "এপৰ চেহেৰা আৰু অনুভূতি কাষ্টমাইজ কৰক",
+    "@themeDescription": {},
+    "common": "সাধাৰণ",
+    "@common": {},
+    "commonDescription": "এপৰ মসৃণ ব্যৱহাৰৰ বাবে সাধাৰণ ছেটিংছলৈ প্ৰৱেশ কৰক",
+    "@commonDescription": {},
+    "anime": "এনিমে",
+    "@anime": {},
+    "animeDescription": "আপোনাৰ এনিমে পছন্দসমূহ ব্যক্তিগতকৰণ আৰু পৰিচালনা কৰক",
+    "@animeDescription": {},
+    "manga": "মাংগা",
+    "@manga": {},
+    "mangaDescription": "আপোনাৰ মাংগা অভিজ্ঞতা সংগঠিত আৰু কাষ্টমাইজ কৰক",
+    "@mangaDescription": {},
+    "extensionsDescription": "অধিক কাৰ্যক্ষমতাৰ বাবে এক্সটেনশ্যনসমূহ ইনষ্টল আৰু পৰিচালনা কৰক",
+    "@extensionsDescription": {},
+    "notificationsDescription": "জাননী কেনেকৈ আৰু কেতিয়া পাব তাক ছেট কৰক",
+    "@notificationsDescription": {},
+    "about": "সম্পৰ্কীয়",
+    "@about": {},
+    "aboutDescription": "এপ আৰু ইয়াৰ নিৰ্মাতাসকলৰ বিষয়ে অধিক জানক",
+    "@aboutDescription": {},
+    "supportMaintainer": "ডাৰ্ট’ৎচুৰ মেইণ্টেইনাৰক সহায় কৰিব বিচাৰেনে?\nঅনুদানৰ কথা বিবেচনা কৰক",
+    "@supportMaintainer": {},
+    "donationGoal": "বৰ্তমান কোনো অনুদানৰ লক্ষ্য নাই",
+    "@donationGoal": {},
+    "settings": "ছেটিংছ",
+    "@settings": {},
+    "darkMode": "ডাৰ্ক মোড",
+    "@darkMode": {},
+    "enableDarkMode": "ডাৰ্ক মোড সক্ৰিয় কৰক",
+    "@enableDarkMode": {},
+    "oledThemeVariant": "ওএলইডি থিম ভেৰিয়েণ্ট",
+    "@oledThemeVariant": {},
+    "oledThemeVariantDescription": "ওএলইডি মোড সক্ৰিয় কৰক",
+    "@oledThemeVariantDescription": {},
+    "materialYou": "Material You",
+    "@materialYou": {},
+    "materialYouDescription": "আপোনাৰ ৱালপেপাৰৰ সৈতে মিল থকা ৰঙৰ থিম ব্যৱহাৰ কৰক",
+    "@materialYouDescription": {},
+    "customThemeDescription": "নিজৰ ৰঙৰ থিম ব্যৱহাৰ কৰক",
+    "@customThemeDescription": {},
+    "colorPicker": "ৰঙ নিৰ্বাচক",
+    "@colorPicker": {},
+    "colorPickerDescription": "এটা ৰঙ বাছক",
+    "@colorPickerDescription": {},
+    "cursedSpeedDescription": "বৰ ব্যস্ত জীৱন যাপন কৰাসকলৰ বাবে",
+    "@cursedSpeedDescription": {},
+    "fontFamilyDescription": "ছাবটাইটেলৰ ফণ্ট পৰিয়াল",
+    "@fontFamilyDescription": {},
+    "resizeModeDescription": "প্লেয়াৰৰ বাবে ডিফল্ট ৰিছাইজ মোড",
+    "@resizeModeDescription": {},
+    "fontColor": "ফণ্টৰ ৰঙ",
+    "@fontColor": {},
+    "fontFamily": "ফণ্ট পৰিয়াল",
+    "@fontFamily": {},
+    "fontSize": "ফণ্টৰ আকাৰ",
+    "@fontSize": {},
+    "fontSizeDescription": "ছাবটাইটেলৰ ফণ্টৰ আকাৰ",
+    "@fontSizeDescription": {},
+    "fontWeight": "ফণ্টৰ ওজন",
+    "@fontWeight": {},
+    "fontWeightDescription": "ছাবটাইটেলৰ ফণ্টৰ ওজন",
+    "@fontWeightDescription": {},
+    "incognitoMode": "ইনকগনিটো মোড",
+    "@incognitoMode": {},
+    "incognitoModeDescription": "আপোনাৰ কাৰ্যকলাপ সাঁচি নোলোৱাকৈ ব্ৰাউজ কৰক",
+    "@incognitoModeDescription": {},
+    "login": "লগইন",
+    "@login": {},
+    "logout": "লগআউট {type}",
+    "@logout": {},
+    "no": "নহয়",
+    "@no": {},
+    "outlineColor": "ৰূপৰেখাৰ ৰঙ",
+    "@outlineColor": {},
+    "outlineColorDescription": "ছাবটাইটেলৰ ৰূপৰেখাৰ ৰঙ",
+    "@outlineColorDescription": {},
+    "restoreSettings": "ছেটিংছ পুনৰুদ্ধাৰ কৰক",
+    "@restoreSettings": {},
+    "showSubtitles": "ছাবটাইটেল দেখুৱাওক",
+    "@showSubtitles": {},
+    "speed": "গতি",
+    "@speed": {},
+    "speedDescription": "প্লেয়াৰৰ বাবে ডিফল্ট গতি",
+    "@speedDescription": {},
+    "subtitles": "ছাবটাইটেল",
+    "@subtitles": {},
+    "subtitlePreview": "ছাবটাইটেল প্ৰিভিউ",
+    "@subtitlePreview": {},
+    "appTagline": "এনিমে আৰু মাংগা ট্ৰেকিংৰ\nবাবে শ্ৰেষ্ঠ নতুন এপ",
+    "@appTagline": {},
+    "backgroundColorDescription": "ছাবটাইটেলৰ পটভূমিৰ ৰঙ",
+    "@backgroundColorDescription": {},
+    "bottomPadding": "তলৰ পেডিং",
+    "@bottomPadding": {},
+    "bottomPaddingDescription": "ছাবটাইটেলৰ তলৰ পেডিং",
+    "@bottomPaddingDescription": {},
+    "fontColorDescription": "ছাবটাইটেলৰ ফণ্টৰ ৰঙ",
+    "@fontColorDescription": {},
+    "hidePrivateDescription": "হোম পৃষ্ঠাৰ পৰা গোপন ধাৰাবাহিক লুকুৱাওক।",
+    "@hidePrivateDescription": {},
+    "offlineMode": "অফলাইন মোড",
+    "@offlineMode": {},
+    "offlineModeDescription": "ইণ্টাৰনেট সংযোগ অবিহনে এপ ব্যৱহাৰ কৰক",
+    "@offlineModeDescription": {},
+    "playerSettingsTitle": "প্লেয়াৰ ছেটিংছ",
+    "@playerSettingsTitle": {},
+    "resizeMode": "ৰিছাইজ মোড",
+    "@resizeMode": {},
+    "extension": "{count, plural, =1 {এক্সটেনশ্যন} other {এক্সটেনশ্যনসমূহ}}",
+    "@extension": {},
+    "hidePrivate": "গোপনীয় লুকুৱাওক",
+    "@hidePrivate": {},
+    "backgroundColor": "পটভূমিৰ ৰঙ",
+    "@backgroundColor": {},
+    "cursedSpeed": "অভিশপ্ত গতি",
+    "@cursedSpeed": {},
+    "yes": "হয়",
+    "@yes": {},
+    "showSubtitlesDescription": "ডিফল্ট হিচাপে ছাবটাইটেল দেখুৱাওক",
+    "@showSubtitlesDescription": {},
+    "skipButton": "এৰি দিয়ক বাটন",
+    "@skipButton": {},
+    "skipButtonDescription": "এৰি দিয়ক বাটনৰ সময়সীমা",
+    "@skipButtonDescription": {},
+    "addToList": "তালিকাত যোগ কৰক",
+    "@addToList": {},
+    "comments": "মন্তব্য",
+    "@comments": {},
+    "continueReading": "পঢ়ি যাওক",
+    "@continueReading": {},
+    "continueWatching": "চাই যাওক",
+    "@continueWatching": {},
+    "dtu": "তলৰ পৰা ওপৰলৈ",
+    "@dtu": {},
+    "hiddenMedia": "গোপন মিডিয়া",
+    "@hiddenMedia": {},
+    "info": "তথ্য",
+    "@info": {},
+    "language": "ভাষা",
+    "@language": {},
+    "layout": "বিন্যাস",
+    "@layout": {},
+    "list": "{type} তালিকা",
+    "@list": {},
+    "recommended": "পৰামৰ্শিত",
+    "@recommended": {},
+    "read": "পঢ়ক",
+    "@read": {},
+    "sort": "সজাওক",
+    "@sort": {},
+    "recommendationsEmptyMessage": "পৰামৰ্শ পাবলৈ কিছু এনিমে বা মাংগা চাওক/পঢ়ক",
+    "@recommendationsEmptyMessage": {},
+    "noHiddenMediaFound": "কোনো গোপন মিডিয়া পোৱা নগ’ল",
+    "@noHiddenMediaFound": {},
+    "scanlators": "স্কেনলেটৰ",
+    "@scanlators": {},
+    "search": "সন্ধান",
+    "@search": {},
+    "droppedManga": "বাদ দিয়া মাংগা",
+    "@droppedManga": {},
+    "options": "বিকল্প",
+    "@options": {},
+    "topAiring": "শীৰ্ষ প্ৰচাৰিত",
+    "@topAiring": {},
+    "watch": "চাওক",
+    "@watch": {},
+    "droppedAnime": "বাদ দিয়া এনিমে",
+    "@droppedAnime": {},
+    "utd": "ওপৰৰ পৰা তললৈ",
+    "@utd": {},
+    "recentUpdates": "শেহতীয়া আপডেট",
+    "@recentUpdates": {},
+    "allCaughtUpNew": "সকলো শেষ, নতুন কি?",
+    "@allCaughtUpNew": {},
+    "noFavourites": "কিবা ভাল লগা নাই,\nইয়াত ৰাখিবলৈ এটা শ্ব’ পছন্দ কৰক।",
+    "@noFavourites": {},
+    "noOnHold": "কিবা স্থগিত কৰা নাই।",
+    "@noOnHold": {},
+    "loginTo": "{service} ত লগইন কৰক",
+    "@loginTo": {
+        "placeholders": {
+            "service": {
+                "type": "String",
+                "examples": [
+                    "Anilist",
+                    "MyAnimeList",
+                    "Kitsu",
+                    "Discord"
+                ]
+            }
+        }
+    },
+    "volume": "{count, plural, =1 {খণ্ড} other {খণ্ডসমূহ}}",
+    "@volume": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "confirmLogout": "আপুনি নিশ্চিতভাৱে লগআউট কৰিব বিচাৰে?",
+    "@confirmLogout": {},
+    "listView": "তালিকা দৰ্শন",
+    "@listView": {},
+    "noDropped": "আপুনি এতিয়াও কোনো {type} বাদ দিয়া নাই।",
+    "@noDropped": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "genres": "ধৰণ",
+    "@genres": {},
+    "kitsu": "Kitsu",
+    "@kitsu": {},
+    "manhwa": "মানহৱা",
+    "@manhwa": {},
+    "calendar": "কেলেণ্ডাৰ",
+    "@calendar": {},
+    "manageLayoutDescription": "{page} পৃষ্ঠাৰ অৱস্থান ড্ৰেগ আৰু ড্ৰপ কৰি বিষয়বস্তু পৰিচালনা কৰক",
+    "@manageLayoutDescription": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anilist",
+                    "MAL"
+                ]
+            },
+            "name": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Home",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "gridView": "গ্ৰিড দৰ্শন",
+    "@gridView": {},
+    "compactView": "সংক্ষিপ্ত দৰ্শন",
+    "@compactView": {},
+    "chapterRead": "পঢ়া অধ্যায়",
+    "@chapterRead": {},
+    "available": "উপলব্ধ {type}",
+    "@available": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "installed": "ইনষ্টল কৰা {type}",
+    "@installed": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Extensions"
+                ]
+            }
+        }
+    },
+    "trending": "ট্ৰেণ্ডিং {type}",
+    "@trending": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "mostFavourite": "সৰ্বাধিক প্ৰিয় {type}",
+    "@mostFavourite": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa"
+                ]
+            }
+        }
+    },
+    "thisSeason": "এই ছিজন",
+    "@thisSeason": {},
+    "nextSeason": "পৰৱৰ্তী ছিজন",
+    "@nextSeason": {},
+    "previousSeason": "পূৰ্বৰ ছিজন",
+    "@previousSeason": {},
+    "planned": "পৰিকল্পিত {type}",
+    "@planned": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "browse": "ব্ৰাউজ {type}",
+    "@browse": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "favorite": "প্ৰিয় {type}",
+    "@favorite": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "onHold": "স্থগিত {type}",
+    "@onHold": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "season": "ছিজন",
+    "@season": {},
+    "manhua": "মানহুৱা",
+    "@manhua": {},
+    "home": "হোম",
+    "@home": {},
+    "ln": "লাইট নভেল",
+    "@ln": {},
+    "activity": "{count, plural, =1 {কাৰ্য} other {কাৰ্যসমূহ}}",
+    "@activity": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "popular": "জনপ্ৰিয় {type}",
+    "@popular": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa"
+                ]
+            }
+        }
+    },
+    "series": "ধাৰাবাহিক",
+    "@series": {},
+    "episode": "{count, plural, =1 {এপিচ’ড} other {এপিচ’ডসমূহ}}",
+    "@episode": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "episodeWatched": "চোৱা এপিচ’ড",
+    "@episodeWatched": {},
+    "chapter": "{count, plural, =1 {অধ্যায়} other {অধ্যায়সমূহ}}",
+    "@chapter": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "movie": "{count, plural, =1 {চলচ্চিত্ৰ} other {চলচ্চিত্ৰসমূহ}}",
+    "@movie": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "manageLayout": "{service} ৰ বাবে {page} পৃষ্ঠাৰ অৱস্থান পৰিচালনা কৰক",
+    "@manageLayout": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anilist",
+                    "MAL"
+                ]
+            },
+            "name": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Home",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "topRated": "শীৰ্ষ ৰেটেড {type}",
+    "@topRated": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa",
+                    "Series"
+                ]
+            }
+        }
+    },
+    "novel": "নভেল",
+    "@novel": {},
+    "pickColor": "ৰঙ বাছক",
+    "@pickColor": {},
+    "collapseText": "কম দেখুৱাওক",
+    "@collapseText": {},
+    "averageDuration": "গড় সময়",
+    "@averageDuration": {},
+    "favorites": "প্ৰিয়সমূহ",
+    "@favorites": {},
+    "format": "ফৰ্মেট",
+    "@format": {},
+    "meanScore": "গড় স্ক’ৰ",
+    "@meanScore": {},
+    "prequel": "পূৰ্বকথা",
+    "@prequel": {},
+    "relations": "সম্পৰ্ক",
+    "@relations": {},
+    "sequel": "পৰৱৰ্তী কথা",
+    "@sequel": {},
+    "source": "উৎস",
+    "@source": {},
+    "staff": "কৰ্মী",
+    "@staff": {},
+    "startDate": "আৰম্ভৰ তাৰিখ",
+    "@startDate": {},
+    "studio": "ষ্টুডিঅ’",
+    "@studio": {},
+    "tags": "টেগসমূহ",
+    "@tags": {},
+    "total": "মুঠ",
+    "@total": {},
+    "totalEpisodes": "মুঠ এপিচ’ড",
+    "@totalEpisodes": {},
+    "totalChapters": "মুঠ অধ্যায়",
+    "@totalChapters": {},
+    "synonyms": "প্ৰতিশব্দ",
+    "@synonyms": {},
+    "characters": "চৰিত্ৰসমূহ",
+    "@characters": {},
+    "comingSoon": "শীঘ্ৰে আহিব",
+    "@comingSoon": {},
+    "popularity": "জনপ্ৰিয়তা",
+    "@popularity": {},
+    "endDate": "শেষৰ তাৰিখ",
+    "@endDate": {},
+    "expandText": "অধিক দেখুৱাওক",
+    "@expandText": {},
+    "name": "নাম",
+    "@name": {},
+    "nameRomaji": "নাম (ৰোমাজি)",
+    "@nameRomaji": {},
+    "status": "স্থিতি",
+    "@status": {},
+    "author": "লেখক",
+    "@author": {},
+    "synopsis": "সাৰাংশ",
+    "@synopsis": {},
+    "simkl": "Simkl",
+    "@simkl": {},
+    "colorPickerCustom": "কাষ্টম",
+    "@colorPickerCustom": {},
+    "colorPickerDefault": "ডিফল্ট",
+    "@colorPickerDefault": {},
+    "logFileDescription": "লগ ফাইল শ্বেয়াৰ কৰক",
+    "@logFileDescription": {},
+    "addAnimeRepo": "এনিমে ৰেপ’ যোগ কৰক",
+    "@addAnimeRepo": {},
+    "loadExtensionsIconDesc": "এক্সটেনশ্যন পৃষ্ঠা লেগ কৰিলে অক্ষম কৰক",
+    "@loadExtensionsIconDesc": {},
+    "autoUpdateDesc": "এক্সটেনশ্যনসমূহ স্বয়ংক্ৰিয়ভাৱে আপডেট কৰক",
+    "@autoUpdateDesc": {},
+    "addNovelRepoDesc": "বিভিন্ন উৎসৰ পৰা নভেল ৰেপ’ যোগ কৰক",
+    "@addNovelRepoDesc": {},
+    "addMangaRepoDesc": "বিভিন্ন উৎসৰ পৰা মাংগা ৰেপ’ যোগ কৰক",
+    "@addMangaRepoDesc": {},
+    "addAnimeRepoDesc": "বিভিন্ন উৎসৰ পৰা এনিমে ৰেপ’ যোগ কৰক",
+    "@addAnimeRepoDesc": {},
+    "addMangaRepo": "মাংগা ৰেপ’ যোগ কৰক",
+    "@addMangaRepo": {},
+    "logFile": "লগ ফাইল",
+    "@logFile": {},
+    "addNovelRepo": "নভেল ৰেপ’ যোগ কৰক",
+    "@addNovelRepo": {},
+    "autoUpdate": "স্বয়ংক্ৰিয় আপডেট",
+    "@autoUpdate": {},
+    "loadExtensionsIcon": "এক্সটেনশ্যনৰ আইকন লোড কৰক",
+    "@loadExtensionsIcon": {},
+    "selectDirectory": "ডাইৰেক্টৰি বাছক",
+    "@selectDirectory": {},
+    "selectMediaService": "মিডিয়া সেৱা বাছক",
+    "@selectMediaService": {},
+    "customPath": "কাষ্টম পথ",
+    "@customPath": {},
+    "customPathDescription": "ফাইল সাঁচিবলৈ কাষ্টম পথ নিৰ্ধাৰণ কৰক\nআঁতৰাবলৈ দীঘলীয়াকৈ টিপক",
+    "@customPathDescription": {},
+    "noChapterFound": "কোনো অধ্যায় পোৱা নগ’ল",
+    "@noChapterFound": {},
+    "watching": "চাই আছে",
+    "@watching": {},
+    "outOf": "পৰা",
+    "@outOf": {},
+    "selected": "নিৰ্বাচিত",
+    "@selected": {},
+    "youTube": "ইউটিউবত প্লে কৰক?",
+    "@youTube": {},
+    "mediaNotFound": "কোনো মিডিয়া পোৱা নগ’ল",
+    "@mediaNotFound": {},
+    "found": "পোৱা গ’ল",
+    "@found": {},
+    "watchStatus": "চোৱাৰ স্থিতি",
+    "@watchStatus": {},
+    "totalOf": "মুঠৰ পৰা",
+    "@totalOf": {},
+    "readStatus": "পঢ়াৰ স্থিতি",
+    "@readStatus": {},
+    "wrongTitle": "শিৰোনাম ভুল?",
+    "@wrongTitle": {},
+    "installSourceToStart": "আৰম্ভ কৰিবলৈ এক্সটেনশ্যন পৃষ্ঠাৰ পৰা এটা উৎস ইনষ্টল কৰক",
+    "@installSourceToStart": {},
+    "webView": "ৱেব দৰ্শন",
+    "@webView": {},
+    "reading": "পঢ়ি আছে",
+    "@reading": {},
+    "direction": "দিশ",
+    "@direction": {},
+    "playerSettingsDesc": "প্লেয়াৰ ছেটিংছ সলনি কৰক",
+    "@playerSettingsDesc": {},
+    "hidePageNumberDesc": "পঢ়োঁতে পৃষ্ঠাৰ নম্বৰ লুকুৱাওক",
+    "@hidePageNumberDesc": {},
+    "hidePageNumber": "পৃষ্ঠাৰ নম্বৰ লুকুৱাওক",
+    "@hidePageNumber": {},
+    "hideScrollbarDesc": "পঢ়োঁতে স্ক্ৰলবাৰ লুকুৱাওক",
+    "@hideScrollbarDesc": {},
+    "thumbLessSeekBar": "থাম্ববিহীন ছিক বাৰ",
+    "@thumbLessSeekBar": {},
+    "developersHelpersDesc": "ডাৰ্ট’ৎচুৰ বিনামূলীয়া সহায়ক দল",
+    "@developersHelpersDesc": {},
+    "developersHelpers": "বিকাশক/সহায়ক",
+    "@developersHelpers": {},
+    "differentCacheManagerDesc": "বেলেগ ছবি কেশ্ব মেনেজাৰ ব্যৱহাৰ কৰক",
+    "@differentCacheManagerDesc": {},
+    "differentCacheManager": "বেলেগ কেশ্ব মেনেজাৰ",
+    "@differentCacheManager": {},
+    "spacedPagesDesc": "পৃষ্ঠাৰ মাজত ফাঁক যোগ কৰক",
+    "@spacedPagesDesc": {},
+    "spacedPages": "পৃষ্ঠাৰ ফাঁক",
+    "@spacedPages": {},
+    "thumbLessSeekBarDesc": "ছিক বাৰৰ পৰা থাম্ব আঁতৰাওক",
+    "@thumbLessSeekBarDesc": {},
+    "readerSettingsDesc": "ৰিডাৰ ছেটিংছ সলনি কৰক",
+    "@readerSettingsDesc": {},
+    "readerSettings": "ৰিডাৰ ছেটিংছ",
+    "@readerSettings": {},
+    "hideScrollbar": "স্ক্ৰলবাৰ লুকুৱাওক",
+    "@hideScrollbar": {},
+    "glassEffect": "গ্লাছ প্ৰভাৱ",
+    "@glassEffect": {},
+    "ltr": "বাওঁফালৰ পৰা সোঁফাললৈ",
+    "@ltr": {},
+    "coverThemeDescription": "মিডিয়াৰ কভাৰ ছবি থীমৰ ৰং হিচাপে ব্যৱহাৰ কৰক",
+    "@coverThemeDescription": {},
+    "rtl": "সোঁফালৰ পৰা বাওঁফাললৈ",
+    "@rtl": {},
+    "glassEffectDescription": "এপত কুঁৱলীৰ দৰে গ্লাছৰ প্ৰভাৱ দিয়ে",
+    "@glassEffectDescription": {},
+    "nextEpisodeRelease": "পৰৱৰ্তী পৰ্ব {episode} মুক্তি পাব",
+    "@nextEpisodeRelease": {
+        "description": "Message showing the next episode info",
+        "placeholders": {
+            "episode": {
+                "type": "int"
+            }
+        }
+    },
+    "topScore": "শীৰ্ষ স্ক’ৰ",
+    "@topScore": {},
+    "coverTheme": "কভাৰ থীম ব্যৱহাৰ কৰক",
+    "@coverTheme": {},
+    "customMPVDescription": "Enable this option to use your own MPV configuration file. Place your custom config at: {path}",
+    "@customMPVDescription": {
+        "placeholders": {
+            "path": {
+                "type": "String"
+            }
+        }
+    },
+    "customMPV": "Custom MPV Configuration",
+    "@customMPV": {}
 }

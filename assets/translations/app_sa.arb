@@ -1,632 +1,663 @@
 {
-  "appName": "Dartotsu",
-  "@appName": {},
-  "anilist": "AniList",
-  "@anilist": {},
-  "mal": "MyAnimeList",
-  "@mal": {},
-  "discord": "Discord",
-  "@discord": {},
-  "theme": "विषय",
-  "@theme": {},
-  "themeDescription": "तस्य अनुप्रयोगस्य रूपरचनां च वातावरणं अनुकूलय",
-  "@themeDescription": {},
-  "accountDescription": "तव आनिलिस्ट, मायआनिमेलिस्ट च डिस्कोर्ड खातानि सहजतया प्रबन्धय",
-  "@accountDescription": {},
-  "common": "साधारण",
-  "@common": {},
-  "commonDescription": "समान्यं सेटिङ्ग् परिगच्छ",
-  "@commonDescription": {},
-  "animeDescription": "तव एनीमे प्रियतानि व्यक्तिगतं प्रबन्धय",
-  "@animeDescription": {},
-  "anime": "एनीमे",
-  "@anime": {},
-  "manga": "मंगा",
-  "@manga": {},
-  "mangaDescription": "तव मंगा अनुभवः व्यवस्थितं अनुकूलय",
-  "@mangaDescription": {},
-  "extensionsDescription": "अधिकं कार्यक्षमतां दातुं विस्ताराः स्थापय",
-  "@extensionsDescription": {},
-  "notifications": "सूचनाएँ",
-  "@notifications": {},
-  "notificationsDescription": "कथमपि कदा च सूचनाएँ प्राप्तुं ताः व्यवस्थितय",
-  "@notificationsDescription": {},
-  "about": "विषये",
-  "@about": {},
-  "aboutDescription": "एप्लिकेशनस्य च निर्मातृणां विषये अधिकं जानहि",
-  "@aboutDescription": {},
-  "supportMaintainer": "डारटोत्सु व्यवस्थापकं सहायतुं इच्छसि?\nदानं समर्पय",
-  "@supportMaintainer": {},
-  "donationGoal": "वर्तमानं दानलक्ष्यं नास्ति",
-  "@donationGoal": {},
-  "settings": "सेटिंग्स",
-  "@settings": {},
-  "darkMode": "अंधकारविधानम्",
-  "@darkMode": {},
-  "enableDarkMode": "अंधकारविधानं सक्रियय",
-  "@enableDarkMode": {},
-  "oledThemeVariant": "ओएलईडीविषय रूप",
-  "@oledThemeVariant": {},
-  "oledThemeVariantDescription": "ओएलईडी मोडं सक्षमय",
-  "@oledThemeVariantDescription": {},
-  "materialYou": "Material You",
-  "@materialYou": {},
-  "materialYouDescription": "तव दीवारचित्रे यथा रङ्गं प्रयोजय",
-  "@materialYouDescription": {},
-  "customTheme": "स्वविषय",
-  "@customTheme": {},
-  "customThemeDescription": "तव रङ्गं विषयाय प्रयोजय",
-  "@customThemeDescription": {},
-  "colorPicker": "रङ्गनिर्वाचकः",
-  "@colorPicker": {},
-  "colorPickerDescription": "रङ्गं चयनय",
-  "@colorPickerDescription": {},
-  "ok": "सर्वं",
-  "@ok": {},
-  "cancel": "निष्कासय",
-  "@cancel": {},
-  "account": "खाता",
-  "@account": {},
-  "backgroundColor": "पृष्ठभूमि वर्ण",
-  "@backgroundColor": {},
-  "fontFamily": "अक्षरकुल",
-  "@fontFamily": {},
-  "fontWeight": "अक्षरभार",
-  "@fontWeight": {},
-  "resizeMode": "आकारपरिवर्तनवृत्ति",
-  "@resizeMode": {},
-  "restoreSettings": "संयोजनानां पुनःस्थापनम्",
-  "@restoreSettings": {},
-  "subtitlePreview": "उपशीर्षकदर्शनम्",
-  "@subtitlePreview": {},
-  "backgroundColorDescription": "उपशीर्षकस्य पृष्ठभूमि वर्ण",
-  "@backgroundColorDescription": {},
-  "bottomPadding": "अध प्रावरणम्",
-  "@bottomPadding": {},
-  "cursedSpeed": "शापितं वेग",
-  "@cursedSpeed": {},
-  "offlineModeDescription": "जालबन्धनं विना अनुप्रयोगं उपयोगयतु",
-  "@offlineModeDescription": {},
-  "subtitles": "उपशीर्षकानि",
-  "@subtitles": {},
-  "fontWeightDescription": "उपशीर्षकस्य अक्षरभार",
-  "@fontWeightDescription": {},
-  "bottomPaddingDescription": "उपशीर्षकस्य अध प्रावरणम्",
-  "@bottomPaddingDescription": {},
-  "fontColor": "अक्षरवर्ण",
-  "@fontColor": {},
-  "hidePrivateDescription": "गृहपृष्ठे गोप्यश्रृंखलाः लुप्यन्ताम्।",
-  "@hidePrivateDescription": {},
-  "incognitoMode": "अज्ञातवृत्ति",
-  "@incognitoMode": {},
-  "showSubtitles": "उपशीर्षकं प्रदर्शयतु",
-  "@showSubtitles": {},
-  "playerSettingsTitle": "क्रीडक संयोजनानि",
-  "@playerSettingsTitle": {},
-  "offlineMode": "निर्बन्धजालवृत्ति",
-  "@offlineMode": {},
-  "hidePrivate": "गोपनीयं गुह्यं छादयतु",
-  "@hidePrivate": {},
-  "speed": "वेग",
-  "@speed": {},
-  "speedDescription": "क्रीडकस्य स्वाभाविक वेग",
-  "@speedDescription": {},
-  "yes": "आम्",
-  "@yes": {},
-  "fontColorDescription": "उपशीर्षकस्य अक्षरवर्ण",
-  "@fontColorDescription": {},
-  "extension": "{count, plural, =1 {विस्तारणम्} other {विस्तारणानि}}",
-  "@extension": {},
-  "fontSizeDescription": "उपशीर्षकस्य अक्षरमाप",
-  "@fontSizeDescription": {},
-  "appTagline": "नवीनतमं श्रेष्ठं अनुप्रयोग\nचित्रकथानां च अनुवर्तनाय",
-  "@appTagline": {},
-  "cursedSpeedDescription": "ये जना जीवनस्य कार्येण अतीव व्यस्ता तेषां कृते",
-  "@cursedSpeedDescription": {},
-  "logout": "निर्गमनम् {type}",
-  "@logout": {},
-  "outlineColor": "रेखावर्ण",
-  "@outlineColor": {},
-  "fontFamilyDescription": "उपशीर्षकस्य अक्षरकुल",
-  "@fontFamilyDescription": {},
-  "fontSize": "अक्षरमाप",
-  "@fontSize": {},
-  "incognitoModeDescription": "क्रियाया संचिकां विना विचिनुत",
-  "@incognitoModeDescription": {},
-  "showSubtitlesDescription": "स्वाभाविकत उपशीर्षकं प्रदर्शयतु",
-  "@showSubtitlesDescription": {},
-  "login": "प्रवेशनम्",
-  "@login": {},
-  "outlineColorDescription": "उपशीर्षकस्य रेखावर्ण",
-  "@outlineColorDescription": {},
-  "no": "न",
-  "@no": {},
-  "resizeModeDescription": "क्रीडकस्य स्वाभाविक आकारपरिवर्तनवृत्ति",
-  "@resizeModeDescription": {},
-  "skipButton": "उपेक्षा बटनम्",
-  "@skipButton": {},
-  "skipButtonDescription": "उपेक्षा बटनस्य कालावधि",
-  "@skipButtonDescription": {},
-  "ln": "लघुनोवेल",
-  "@ln": {},
-  "home": "गृह",
-  "@home": {},
-  "novel": "उपन्यास",
-  "@novel": {},
-  "series": "श्रृंखला",
-  "@series": {},
-  "season": "ऋतुः",
-  "@season": {},
-  "episode": "{count, plural, =1 {एपिसोड} other {एपिसोड}}",
-  "@episode": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "chapter": "{count, plural, =1 {अध्याय} other {अध्याय}}",
-  "@chapter": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "volume": "{count, plural, =1 {पुट} other {पुट}}",
-  "@volume": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "calendar": "पटलिका",
-  "@calendar": {},
-  "dtu": "अवतारितम्",
-  "@dtu": {},
-  "manageLayout": "{page} पृष्ठस्य विन्यासः {service} कृते प्रबन्धयन्तु",
-  "@manageLayout": {
-    "placeholders": {
-      "service": {
-        "type": "String",
-        "examples": [
-          "Anilist",
-          "MAL"
-        ]
-      },
-      "page": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Home",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "manageLayoutDescription": "भवान् {page} पृष्ठस्य विन्यासं द्रव्यं कर्षयित्वा पातयित्वा च प्रबन्धयितुं शक्नोति",
-  "@manageLayoutDescription": {
-    "placeholders": {
-      "page": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Home",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "confirmLogout": "क्या त्वं निश्चितमस्ति यः त्वं निर्गमयितुम् इच्छसि?",
-  "@confirmLogout": {},
-  "gridView": "विस्तृतदृष्टिः",
-  "@gridView": {},
-  "listView": "सूचीदृष्टिः",
-  "@listView": {},
-  "chapterRead": "अध्यायपठनम्",
-  "@chapterRead": {},
-  "available": "उपलब्धम् {type}",
-  "@available": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "installed": "स्थापितम् {type}",
-  "@installed": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Extensions"
-        ]
-      }
-    }
-  },
-  "trending": "प्रवृत्तिम् {type}",
-  "@trending": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "mostFavourite": "अत्यन्तप्रियतम् {type}",
-  "@mostFavourite": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa"
-        ]
-      }
-    }
-  },
-  "nextSeason": "अनन्तरऋतु",
-  "@nextSeason": {},
-  "activity": "{count, plural, =1 {क्रिया} other {क्रिया}}",
-  "@activity": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "popular": "लोकप्रिय {type}",
-  "@popular": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa"
-        ]
-      }
-    }
-  },
-  "topRated": "श्रेष्ठमूल्याङ्कनम् {type}",
-  "@topRated": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa",
-          "Series"
-        ]
-      }
-    }
-  },
-  "thisSeason": "अद्यतकालीनऋतु",
-  "@thisSeason": {},
-  "planned": "योजनाया {type}",
-  "@planned": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "browse": "अन्वेष {type}",
-  "@browse": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "favorite": "प्रिय {type}",
-  "@favorite": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "onHold": "निरोधितम् {type}",
-  "@onHold": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "noDropped": "भवता अद्यापि कोऽपि {type} न पातितः।",
-  "@noDropped": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "continueReading": "पठनं यथावत् जारीकुरु",
-  "@continueReading": {},
-  "continueWatching": "दर्शनं यथावत् जारीकुरु",
-  "@continueWatching": {},
-  "pickColor": "रंगं चयनय",
-  "@pickColor": {},
-  "allCaughtUpNew": "सर्वे गृहीताः, किं नवीनम्?",
-  "@allCaughtUpNew": {},
-  "recommended": "सिफ़ारिशितम्",
-  "@recommended": {},
-  "author": "लेखकः",
-  "@author": {},
-  "averageDuration": "औसतकालः",
-  "@averageDuration": {},
-  "characters": "पात्राणि",
-  "@characters": {},
-  "collapseText": "पाठं संकुचय",
-  "@collapseText": {},
-  "comingSoon": "शिघ्रं आगच्छति",
-  "@comingSoon": {},
-  "description": "विवरणम्",
-  "@description": {},
-  "endDate": "समाप्तेः दिनाङ्कः",
-  "@endDate": {},
-  "expandText": "पाठं विस्तारित करें",
-  "@expandText": {},
-  "name": "नाम",
-  "@name": {},
-  "nameRomaji": "नाम रोमाजी",
-  "@nameRomaji": {},
-  "popularity": "लोकप्रियता",
-  "@popularity": {},
-  "prequel": "पूर्वकथा",
-  "@prequel": {},
-  "favorites": "प्रियाणि",
-  "@favorites": {},
-  "format": "स्वरूप",
-  "@format": {},
-  "meanScore": "औसतांकः",
-  "@meanScore": {},
-  "relations": "संबन्धाः",
-  "@relations": {},
-  "sequel": "उत्तरकथा",
-  "@sequel": {},
-  "source": "स्रोतः",
-  "@source": {},
-  "staff": "कर्मचारीः",
-  "@staff": {},
-  "startDate": "आरंभतिथि",
-  "@startDate": {},
-  "status": "स्थिति",
-  "@status": {},
-  "studio": "स्टूडियो",
-  "@studio": {},
-  "synonyms": "समानार्थकशब्दाः",
-  "@synonyms": {},
-  "tags": "टैग्स",
-  "@tags": {},
-  "total": "कूल",
-  "@total": {},
-  "totalEpisodes": "कुलएपिसोडः",
-  "@totalEpisodes": {},
-  "totalChapters": "कुलअध्यक्षाः",
-  "@totalChapters": {},
-  "kitsu": "Kitsu",
-  "@kitsu": {},
-  "loginTo": "प्रवेशयतु {service}",
-  "@loginTo": {
-    "placeholders": {
-      "service": {
-        "type": "String",
-        "examples": [
-          "Anilist",
-          "MyAnimeList",
-          "Kitsu",
-          "Discord"
-        ]
-      }
-    }
-  },
-  "manhwa": "मन्ह्वा",
-  "@manhwa": {},
-  "manhua": "मन्हुआ",
-  "@manhua": {},
-  "movie": "{count, plural, =1 {चित्रपट} other {चित्रपट}}",
-  "@movie": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "genres": "वर्गाः",
-  "@genres": {},
-  "compactView": "संक्षिप्तदृष्टिः",
-  "@compactView": {},
-  "layout": "रूपरेखा",
-  "@layout": {},
-  "episodeWatched": "एपिसोडदर्शनम्",
-  "@episodeWatched": {},
-  "previousSeason": "पूर्वऋतु",
-  "@previousSeason": {},
-  "language": "भाषा",
-  "@language": {},
-  "droppedAnime": "निष्कासितं एनीमे",
-  "@droppedAnime": {},
-  "hiddenMedia": "गुप्तमाध्यमम्",
-  "@hiddenMedia": {},
-  "recommendationsEmptyMessage": "कोणपि सिफ़ारिशा न अस्ति",
-  "@recommendationsEmptyMessage": {},
-  "addToList": "सूच्यां सम्मिलय",
-  "@addToList": {},
-  "droppedManga": "निष्कासितं मंगा",
-  "@droppedManga": {},
-  "comments": "टिप्पण्यः",
-  "@comments": {},
-  "info": "सूचना",
-  "@info": {},
-  "list": "{type} सूची",
-  "@list": {
-    "placeholders": {
-      "type": {
-        "examples": "Anime list",
-        "type": "String"
-      }
-    }
-  },
-  "options": "विकल्पाः",
-  "@options": {},
-  "read": "पठ",
-  "@read": {},
-  "recentUpdates": "नवीनतम् अद्यतनीकरणम्",
-  "@recentUpdates": {},
-  "search": "अन्वेषण",
-  "@search": {},
-  "scanlators": "पठ्यकाः",
-  "@scanlators": {},
-  "sort": "क्रमबद्धय",
-  "@sort": {},
-  "topAiring": "श्रेष्ठवायुक्रमेण",
-  "@topAiring": {},
-  "watch": "पश्य",
-  "@watch": {},
-  "utd": "नवनीकृतम्",
-  "@utd": {},
-  "noFavourites": "भवतः किमपि न रोचते इव दृश्यते,\nअत्र स्थापयितुं कञ्चन शो इत्येतत् पसन्दं कर्तुं प्रयतध्वम्।",
-  "@noFavourites": {},
-  "noHiddenMediaFound": "गुप्तमाध्यमं न लभते",
-  "@noHiddenMediaFound": {},
-  "noOnHold": "इदं दृश्यते यत् भवता किमपि स्थगितम् नास्ति।",
-  "@noOnHold": {},
-  "synopsis": "सार",
-  "@synopsis": {},
-  "simkl": "Simkl",
-  "@simkl": {},
-  "logFile": "अभिलेखसञ्चिका",
-  "@logFile": {},
-  "logFileDescription": "लॉग् सञ्चिकां साझां कुर्वन्तु",
-  "@logFileDescription": {},
-  "colorPickerDefault": "पूर्वनिर्धारितम्",
-  "@colorPickerDefault": {},
-  "addAnimeRepo": "एनिमे रेपो योजयतु",
-  "@addAnimeRepo": {},
-  "loadExtensionsIconDesc": "यदि विस्तारणपृष्ठं विलम्बते तर्हि निष्क्रियं कुरु",
-  "@loadExtensionsIconDesc": {},
-  "autoUpdateDesc": "स्वयमेव विस्तारणानां अद्यतनं",
-  "@autoUpdateDesc": {},
-  "addNovelRepoDesc": "विभिन्नस्रोताभ्यां उपन्यास रेपो योजयन्तु",
-  "@addNovelRepoDesc": {},
-  "addMangaRepoDesc": "विभिन्नस्रोताभ्यां मंगा रेपो योजयन्तु",
-  "@addMangaRepoDesc": {},
-  "addAnimeRepoDesc": "विभिन्नस्रोताभ्यां एनिमे रेपो योजयन्तु",
-  "@addAnimeRepoDesc": {},
-  "addMangaRepo": "मंगा रेपो योजयतु",
-  "@addMangaRepo": {},
-  "addNovelRepo": "उपन्यास रेपो योजयतु",
-  "@addNovelRepo": {},
-  "customPathDescription": "सञ्चिकाः रक्षितुं इष्टमार्गं सेट् कुर्वन्तु\nदूरीकर्तुं दीर्घकालं यावत् दबावन्तु",
-  "@customPathDescription": {},
-  "autoUpdate": "स्वयमेव अद्यतनं",
-  "@autoUpdate": {},
-  "loadExtensionsIcon": "विस्तारणचिह्नं संस्थापय",
-  "@loadExtensionsIcon": {},
-  "colorPickerCustom": "स्वनिर्मितम्",
-  "@colorPickerCustom": {},
-  "selectMediaService": "मीडिया सेवां चिनोतु",
-  "@selectMediaService": {},
-  "selectDirectory": "एकं निर्देशिकां चिनोतु",
-  "@selectDirectory": {},
-  "customPath": "कस्टम पथ",
-  "@customPath": {},
-  "noChapterFound": "अध्यायः न प्राप्तः",
-  "@noChapterFound": {},
-  "watching": "पश्यन्",
-  "@watching": {},
-  "outOf": "मध्ये",
-  "@outOf": {},
-  "selected": "चयनितम्",
-  "@selected": {},
-  "readStatus": "पठ",
-  "@readStatus": {},
-  "youTube": "YouTube मध्ये चालय?",
-  "@youTube": {},
-  "mediaNotFound": "माध्यमं न प्राप्तम्",
-  "@mediaNotFound": {},
-  "found": "लब्धम्",
-  "@found": {},
-  "watchStatus": "दृष्टम्",
-  "@watchStatus": {},
-  "totalOf": "सर्वे मिलित्वा",
-  "@totalOf": {},
-  "wrongTitle": "असत्यम् शीर्षकम्?",
-  "@wrongTitle": {},
-  "installSourceToStart": "प्रारम्भाय विस्तारणपृष्ठात् स्रोतं स्थापय",
-  "@installSourceToStart": {},
-  "webView": "जालदर्शनम्",
-  "@webView": {},
-  "reading": "पठन्",
-  "@reading": {},
-  "hidePageNumberDesc": "Hide page number while reading",
-  "@hidePageNumberDesc": {},
-  "thumbLessSeekBarDesc": "Remove thumb from the seek bar",
-  "@thumbLessSeekBarDesc": {},
-  "thumbLessSeekBar": "ThumbLess SeekBar",
-  "@thumbLessSeekBar": {},
-  "developersHelpersDesc": "Dartotsu's unpaid labours",
-  "@developersHelpersDesc": {},
-  "developersHelpers": "Developers/Helpers",
-  "@developersHelpers": {},
-  "hidePageNumber": "Hide Page Number",
-  "@hidePageNumber": {},
-  "differentCacheManagerDesc": "Use different Image cache manager",
-  "@differentCacheManagerDesc": {},
-  "differentCacheManager": "Different Cache Manager",
-  "@differentCacheManager": {},
-  "spacedPagesDesc": "Add space between pages",
-  "@spacedPagesDesc": {},
-  "spacedPages": "Spaced Pages",
-  "@spacedPages": {},
-  "readerSettingsDesc": "Change reader settings",
-  "@readerSettingsDesc": {},
-  "hideScrollbarDesc": "Hide scrollbar while reading",
-  "@hideScrollbarDesc": {},
-  "direction": "Direction",
-  "@direction": {},
-  "readerSettings": "Reader Settings",
-  "@readerSettings": {},
-  "hideScrollbar": "Hide Scrollbar",
-  "@hideScrollbar": {},
-  "playerSettingsDesc": "Change player settings",
-  "@playerSettingsDesc": {}
+    "appName": "Dartotsu",
+    "@appName": {},
+    "anilist": "AniList",
+    "@anilist": {},
+    "mal": "MyAnimeList",
+    "@mal": {},
+    "discord": "Discord",
+    "@discord": {},
+    "theme": "विषय",
+    "@theme": {},
+    "themeDescription": "तस्य अनुप्रयोगस्य रूपरचनां च वातावरणं अनुकूलय",
+    "@themeDescription": {},
+    "accountDescription": "तव आनिलिस्ट, मायआनिमेलिस्ट च डिस्कोर्ड खातानि सहजतया प्रबन्धय",
+    "@accountDescription": {},
+    "common": "साधारण",
+    "@common": {},
+    "commonDescription": "समान्यं सेटिङ्ग् परिगच्छ",
+    "@commonDescription": {},
+    "animeDescription": "तव एनीमे प्रियतानि व्यक्तिगतं प्रबन्धय",
+    "@animeDescription": {},
+    "anime": "एनीमे",
+    "@anime": {},
+    "manga": "मंगा",
+    "@manga": {},
+    "mangaDescription": "तव मंगा अनुभवः व्यवस्थितं अनुकूलय",
+    "@mangaDescription": {},
+    "extensionsDescription": "अधिकं कार्यक्षमतां दातुं विस्ताराः स्थापय",
+    "@extensionsDescription": {},
+    "notifications": "सूचनाएँ",
+    "@notifications": {},
+    "notificationsDescription": "कथमपि कदा च सूचनाएँ प्राप्तुं ताः व्यवस्थितय",
+    "@notificationsDescription": {},
+    "about": "विषये",
+    "@about": {},
+    "aboutDescription": "एप्लिकेशनस्य च निर्मातृणां विषये अधिकं जानहि",
+    "@aboutDescription": {},
+    "supportMaintainer": "डारटोत्सु व्यवस्थापकं सहायतुं इच्छसि?\nदानं समर्पय",
+    "@supportMaintainer": {},
+    "donationGoal": "वर्तमानं दानलक्ष्यं नास्ति",
+    "@donationGoal": {},
+    "settings": "सेटिंग्स",
+    "@settings": {},
+    "darkMode": "अंधकारविधानम्",
+    "@darkMode": {},
+    "enableDarkMode": "अंधकारविधानं सक्रियय",
+    "@enableDarkMode": {},
+    "oledThemeVariant": "ओएलईडीविषय रूप",
+    "@oledThemeVariant": {},
+    "oledThemeVariantDescription": "ओएलईडी मोडं सक्षमय",
+    "@oledThemeVariantDescription": {},
+    "materialYou": "Material You",
+    "@materialYou": {},
+    "materialYouDescription": "तव दीवारचित्रे यथा रङ्गं प्रयोजय",
+    "@materialYouDescription": {},
+    "customTheme": "स्वविषय",
+    "@customTheme": {},
+    "customThemeDescription": "तव रङ्गं विषयाय प्रयोजय",
+    "@customThemeDescription": {},
+    "colorPicker": "रङ्गनिर्वाचकः",
+    "@colorPicker": {},
+    "colorPickerDescription": "रङ्गं चयनय",
+    "@colorPickerDescription": {},
+    "ok": "सर्वं",
+    "@ok": {},
+    "cancel": "निष्कासय",
+    "@cancel": {},
+    "account": "खाता",
+    "@account": {},
+    "backgroundColor": "पृष्ठभूमि वर्ण",
+    "@backgroundColor": {},
+    "fontFamily": "अक्षरकुल",
+    "@fontFamily": {},
+    "fontWeight": "अक्षरभार",
+    "@fontWeight": {},
+    "resizeMode": "आकारपरिवर्तनवृत्ति",
+    "@resizeMode": {},
+    "restoreSettings": "संयोजनानां पुनःस्थापनम्",
+    "@restoreSettings": {},
+    "subtitlePreview": "उपशीर्षकदर्शनम्",
+    "@subtitlePreview": {},
+    "backgroundColorDescription": "उपशीर्षकस्य पृष्ठभूमि वर्ण",
+    "@backgroundColorDescription": {},
+    "bottomPadding": "अध प्रावरणम्",
+    "@bottomPadding": {},
+    "cursedSpeed": "शापितं वेग",
+    "@cursedSpeed": {},
+    "offlineModeDescription": "जालबन्धनं विना अनुप्रयोगं उपयोगयतु",
+    "@offlineModeDescription": {},
+    "subtitles": "उपशीर्षकानि",
+    "@subtitles": {},
+    "fontWeightDescription": "उपशीर्षकस्य अक्षरभार",
+    "@fontWeightDescription": {},
+    "bottomPaddingDescription": "उपशीर्षकस्य अध प्रावरणम्",
+    "@bottomPaddingDescription": {},
+    "fontColor": "अक्षरवर्ण",
+    "@fontColor": {},
+    "hidePrivateDescription": "गृहपृष्ठे गोप्यश्रृंखलाः लुप्यन्ताम्।",
+    "@hidePrivateDescription": {},
+    "incognitoMode": "अज्ञातवृत्ति",
+    "@incognitoMode": {},
+    "showSubtitles": "उपशीर्षकं प्रदर्शयतु",
+    "@showSubtitles": {},
+    "playerSettingsTitle": "क्रीडक संयोजनानि",
+    "@playerSettingsTitle": {},
+    "offlineMode": "निर्बन्धजालवृत्ति",
+    "@offlineMode": {},
+    "hidePrivate": "गोपनीयं गुह्यं छादयतु",
+    "@hidePrivate": {},
+    "speed": "वेग",
+    "@speed": {},
+    "speedDescription": "क्रीडकस्य स्वाभाविक वेग",
+    "@speedDescription": {},
+    "yes": "आम्",
+    "@yes": {},
+    "fontColorDescription": "उपशीर्षकस्य अक्षरवर्ण",
+    "@fontColorDescription": {},
+    "extension": "{count, plural, =1 {विस्तारणम्} other {विस्तारणानि}}",
+    "@extension": {},
+    "fontSizeDescription": "उपशीर्षकस्य अक्षरमाप",
+    "@fontSizeDescription": {},
+    "appTagline": "नवीनतमं श्रेष्ठं अनुप्रयोग\nचित्रकथानां च अनुवर्तनाय",
+    "@appTagline": {},
+    "cursedSpeedDescription": "ये जना जीवनस्य कार्येण अतीव व्यस्ता तेषां कृते",
+    "@cursedSpeedDescription": {},
+    "logout": "निर्गमनम् {type}",
+    "@logout": {},
+    "outlineColor": "रेखावर्ण",
+    "@outlineColor": {},
+    "fontFamilyDescription": "उपशीर्षकस्य अक्षरकुल",
+    "@fontFamilyDescription": {},
+    "fontSize": "अक्षरमाप",
+    "@fontSize": {},
+    "incognitoModeDescription": "क्रियाया संचिकां विना विचिनुत",
+    "@incognitoModeDescription": {},
+    "showSubtitlesDescription": "स्वाभाविकत उपशीर्षकं प्रदर्शयतु",
+    "@showSubtitlesDescription": {},
+    "login": "प्रवेशनम्",
+    "@login": {},
+    "outlineColorDescription": "उपशीर्षकस्य रेखावर्ण",
+    "@outlineColorDescription": {},
+    "no": "न",
+    "@no": {},
+    "resizeModeDescription": "क्रीडकस्य स्वाभाविक आकारपरिवर्तनवृत्ति",
+    "@resizeModeDescription": {},
+    "skipButton": "उपेक्षा बटनम्",
+    "@skipButton": {},
+    "skipButtonDescription": "उपेक्षा बटनस्य कालावधि",
+    "@skipButtonDescription": {},
+    "ln": "लघुनोवेल",
+    "@ln": {},
+    "home": "गृह",
+    "@home": {},
+    "novel": "उपन्यास",
+    "@novel": {},
+    "series": "श्रृंखला",
+    "@series": {},
+    "season": "ऋतुः",
+    "@season": {},
+    "episode": "{count, plural, =1 {एपिसोड} other {एपिसोड}}",
+    "@episode": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "chapter": "{count, plural, =1 {अध्याय} other {अध्याय}}",
+    "@chapter": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "volume": "{count, plural, =1 {पुट} other {पुट}}",
+    "@volume": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "calendar": "पटलिका",
+    "@calendar": {},
+    "dtu": "अवतारितम्",
+    "@dtu": {},
+    "manageLayout": "{page} पृष्ठस्य विन्यासः {service} कृते प्रबन्धयन्तु",
+    "@manageLayout": {
+        "placeholders": {
+            "service": {
+                "type": "String",
+                "examples": [
+                    "Anilist",
+                    "MAL"
+                ]
+            },
+            "page": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Home",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "manageLayoutDescription": "भवान् {page} पृष्ठस्य विन्यासं द्रव्यं कर्षयित्वा पातयित्वा च प्रबन्धयितुं शक्नोति",
+    "@manageLayoutDescription": {
+        "placeholders": {
+            "page": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Home",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "confirmLogout": "क्या त्वं निश्चितमस्ति यः त्वं निर्गमयितुम् इच्छसि?",
+    "@confirmLogout": {},
+    "gridView": "विस्तृतदृष्टिः",
+    "@gridView": {},
+    "listView": "सूचीदृष्टिः",
+    "@listView": {},
+    "chapterRead": "अध्यायपठनम्",
+    "@chapterRead": {},
+    "available": "उपलब्धम् {type}",
+    "@available": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "installed": "स्थापितम् {type}",
+    "@installed": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Extensions"
+                ]
+            }
+        }
+    },
+    "trending": "प्रवृत्तिम् {type}",
+    "@trending": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "mostFavourite": "अत्यन्तप्रियतम् {type}",
+    "@mostFavourite": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa"
+                ]
+            }
+        }
+    },
+    "nextSeason": "अनन्तरऋतु",
+    "@nextSeason": {},
+    "activity": "{count, plural, =1 {क्रिया} other {क्रिया}}",
+    "@activity": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "popular": "लोकप्रिय {type}",
+    "@popular": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa"
+                ]
+            }
+        }
+    },
+    "topRated": "श्रेष्ठमूल्याङ्कनम् {type}",
+    "@topRated": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa",
+                    "Series"
+                ]
+            }
+        }
+    },
+    "thisSeason": "अद्यतकालीनऋतु",
+    "@thisSeason": {},
+    "planned": "योजनाया {type}",
+    "@planned": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "browse": "अन्वेष {type}",
+    "@browse": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "favorite": "प्रिय {type}",
+    "@favorite": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "onHold": "निरोधितम् {type}",
+    "@onHold": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "noDropped": "भवता अद्यापि कोऽपि {type} न पातितः।",
+    "@noDropped": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "continueReading": "पठनं यथावत् जारीकुरु",
+    "@continueReading": {},
+    "continueWatching": "दर्शनं यथावत् जारीकुरु",
+    "@continueWatching": {},
+    "pickColor": "रंगं चयनय",
+    "@pickColor": {},
+    "allCaughtUpNew": "सर्वे गृहीताः, किं नवीनम्?",
+    "@allCaughtUpNew": {},
+    "recommended": "सिफ़ारिशितम्",
+    "@recommended": {},
+    "author": "लेखकः",
+    "@author": {},
+    "averageDuration": "औसतकालः",
+    "@averageDuration": {},
+    "characters": "पात्राणि",
+    "@characters": {},
+    "collapseText": "पाठं संकुचय",
+    "@collapseText": {},
+    "comingSoon": "शिघ्रं आगच्छति",
+    "@comingSoon": {},
+    "endDate": "समाप्तेः दिनाङ्कः",
+    "@endDate": {},
+    "expandText": "पाठं विस्तारित करें",
+    "@expandText": {},
+    "name": "नाम",
+    "@name": {},
+    "nameRomaji": "नाम रोमाजी",
+    "@nameRomaji": {},
+    "popularity": "लोकप्रियता",
+    "@popularity": {},
+    "prequel": "पूर्वकथा",
+    "@prequel": {},
+    "favorites": "प्रियाणि",
+    "@favorites": {},
+    "format": "स्वरूप",
+    "@format": {},
+    "meanScore": "औसतांकः",
+    "@meanScore": {},
+    "relations": "संबन्धाः",
+    "@relations": {},
+    "sequel": "उत्तरकथा",
+    "@sequel": {},
+    "source": "स्रोतः",
+    "@source": {},
+    "staff": "कर्मचारीः",
+    "@staff": {},
+    "startDate": "आरंभतिथि",
+    "@startDate": {},
+    "status": "स्थिति",
+    "@status": {},
+    "studio": "स्टूडियो",
+    "@studio": {},
+    "synonyms": "समानार्थकशब्दाः",
+    "@synonyms": {},
+    "tags": "टैग्स",
+    "@tags": {},
+    "total": "कूल",
+    "@total": {},
+    "totalEpisodes": "कुलएपिसोडः",
+    "@totalEpisodes": {},
+    "totalChapters": "कुलअध्यक्षाः",
+    "@totalChapters": {},
+    "kitsu": "Kitsu",
+    "@kitsu": {},
+    "loginTo": "प्रवेशयतु {service}",
+    "@loginTo": {
+        "placeholders": {
+            "service": {
+                "type": "String",
+                "examples": [
+                    "Anilist",
+                    "MyAnimeList",
+                    "Kitsu",
+                    "Discord"
+                ]
+            }
+        }
+    },
+    "manhwa": "मन्ह्वा",
+    "@manhwa": {},
+    "manhua": "मन्हुआ",
+    "@manhua": {},
+    "movie": "{count, plural, =1 {चित्रपट} other {चित्रपट}}",
+    "@movie": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "genres": "वर्गाः",
+    "@genres": {},
+    "compactView": "संक्षिप्तदृष्टिः",
+    "@compactView": {},
+    "layout": "रूपरेखा",
+    "@layout": {},
+    "episodeWatched": "एपिसोडदर्शनम्",
+    "@episodeWatched": {},
+    "previousSeason": "पूर्वऋतु",
+    "@previousSeason": {},
+    "language": "भाषा",
+    "@language": {},
+    "droppedAnime": "निष्कासितं एनीमे",
+    "@droppedAnime": {},
+    "hiddenMedia": "गुप्तमाध्यमम्",
+    "@hiddenMedia": {},
+    "recommendationsEmptyMessage": "कोणपि सिफ़ारिशा न अस्ति",
+    "@recommendationsEmptyMessage": {},
+    "addToList": "सूच्यां सम्मिलय",
+    "@addToList": {},
+    "droppedManga": "निष्कासितं मंगा",
+    "@droppedManga": {},
+    "comments": "टिप्पण्यः",
+    "@comments": {},
+    "info": "सूचना",
+    "@info": {},
+    "list": "{type} सूची",
+    "@list": {
+        "placeholders": {
+            "type": {
+                "examples": "Anime list",
+                "type": "String"
+            }
+        }
+    },
+    "options": "विकल्पाः",
+    "@options": {},
+    "read": "पठ",
+    "@read": {},
+    "recentUpdates": "नवीनतम् अद्यतनीकरणम्",
+    "@recentUpdates": {},
+    "search": "अन्वेषण",
+    "@search": {},
+    "scanlators": "पठ्यकाः",
+    "@scanlators": {},
+    "sort": "क्रमबद्धय",
+    "@sort": {},
+    "topAiring": "श्रेष्ठवायुक्रमेण",
+    "@topAiring": {},
+    "watch": "पश्य",
+    "@watch": {},
+    "utd": "नवनीकृतम्",
+    "@utd": {},
+    "noFavourites": "भवतः किमपि न रोचते इव दृश्यते,\nअत्र स्थापयितुं कञ्चन शो इत्येतत् पसन्दं कर्तुं प्रयतध्वम्।",
+    "@noFavourites": {},
+    "noHiddenMediaFound": "गुप्तमाध्यमं न लभते",
+    "@noHiddenMediaFound": {},
+    "noOnHold": "इदं दृश्यते यत् भवता किमपि स्थगितम् नास्ति।",
+    "@noOnHold": {},
+    "synopsis": "सार",
+    "@synopsis": {},
+    "simkl": "Simkl",
+    "@simkl": {},
+    "logFile": "अभिलेखसञ्चिका",
+    "@logFile": {},
+    "logFileDescription": "लॉग् सञ्चिकां साझां कुर्वन्तु",
+    "@logFileDescription": {},
+    "colorPickerDefault": "पूर्वनिर्धारितम्",
+    "@colorPickerDefault": {},
+    "addAnimeRepo": "एनिमे रेपो योजयतु",
+    "@addAnimeRepo": {},
+    "loadExtensionsIconDesc": "यदि विस्तारणपृष्ठं विलम्बते तर्हि निष्क्रियं कुरु",
+    "@loadExtensionsIconDesc": {},
+    "autoUpdateDesc": "स्वयमेव विस्तारणानां अद्यतनं",
+    "@autoUpdateDesc": {},
+    "addNovelRepoDesc": "विभिन्नस्रोताभ्यां उपन्यास रेपो योजयन्तु",
+    "@addNovelRepoDesc": {},
+    "addMangaRepoDesc": "विभिन्नस्रोताभ्यां मंगा रेपो योजयन्तु",
+    "@addMangaRepoDesc": {},
+    "addAnimeRepoDesc": "विभिन्नस्रोताभ्यां एनिमे रेपो योजयन्तु",
+    "@addAnimeRepoDesc": {},
+    "addMangaRepo": "मंगा रेपो योजयतु",
+    "@addMangaRepo": {},
+    "addNovelRepo": "उपन्यास रेपो योजयतु",
+    "@addNovelRepo": {},
+    "customPathDescription": "सञ्चिकाः रक्षितुं इष्टमार्गं सेट् कुर्वन्तु\nदूरीकर्तुं दीर्घकालं यावत् दबावन्तु",
+    "@customPathDescription": {},
+    "autoUpdate": "स्वयमेव अद्यतनं",
+    "@autoUpdate": {},
+    "loadExtensionsIcon": "विस्तारणचिह्नं संस्थापय",
+    "@loadExtensionsIcon": {},
+    "colorPickerCustom": "स्वनिर्मितम्",
+    "@colorPickerCustom": {},
+    "selectMediaService": "मीडिया सेवां चिनोतु",
+    "@selectMediaService": {},
+    "selectDirectory": "एकं निर्देशिकां चिनोतु",
+    "@selectDirectory": {},
+    "customPath": "कस्टम पथ",
+    "@customPath": {},
+    "noChapterFound": "अध्यायः न प्राप्तः",
+    "@noChapterFound": {},
+    "watching": "पश्यन्",
+    "@watching": {},
+    "outOf": "मध्ये",
+    "@outOf": {},
+    "selected": "चयनितम्",
+    "@selected": {},
+    "readStatus": "पठ",
+    "@readStatus": {},
+    "youTube": "YouTube मध्ये चालय?",
+    "@youTube": {},
+    "mediaNotFound": "माध्यमं न प्राप्तम्",
+    "@mediaNotFound": {},
+    "found": "लब्धम्",
+    "@found": {},
+    "watchStatus": "दृष्टम्",
+    "@watchStatus": {},
+    "totalOf": "सर्वे मिलित्वा",
+    "@totalOf": {},
+    "wrongTitle": "असत्यम् शीर्षकम्?",
+    "@wrongTitle": {},
+    "installSourceToStart": "प्रारम्भाय विस्तारणपृष्ठात् स्रोतं स्थापय",
+    "@installSourceToStart": {},
+    "webView": "जालदर्शनम्",
+    "@webView": {},
+    "reading": "पठन्",
+    "@reading": {},
+    "hidePageNumberDesc": "Hide page number while reading",
+    "@hidePageNumberDesc": {},
+    "thumbLessSeekBarDesc": "Remove thumb from the seek bar",
+    "@thumbLessSeekBarDesc": {},
+    "thumbLessSeekBar": "ThumbLess SeekBar",
+    "@thumbLessSeekBar": {},
+    "developersHelpersDesc": "Dartotsu's unpaid labours",
+    "@developersHelpersDesc": {},
+    "developersHelpers": "Developers/Helpers",
+    "@developersHelpers": {},
+    "hidePageNumber": "Hide Page Number",
+    "@hidePageNumber": {},
+    "differentCacheManagerDesc": "Use different Image cache manager",
+    "@differentCacheManagerDesc": {},
+    "differentCacheManager": "Different Cache Manager",
+    "@differentCacheManager": {},
+    "spacedPagesDesc": "Add space between pages",
+    "@spacedPagesDesc": {},
+    "spacedPages": "Spaced Pages",
+    "@spacedPages": {},
+    "readerSettingsDesc": "Change reader settings",
+    "@readerSettingsDesc": {},
+    "hideScrollbarDesc": "Hide scrollbar while reading",
+    "@hideScrollbarDesc": {},
+    "direction": "Direction",
+    "@direction": {},
+    "readerSettings": "Reader Settings",
+    "@readerSettings": {},
+    "hideScrollbar": "Hide Scrollbar",
+    "@hideScrollbar": {},
+    "playerSettingsDesc": "Change player settings",
+    "@playerSettingsDesc": {},
+    "glassEffect": "Glass Effect",
+    "@glassEffect": {},
+    "ltr": "Left To Right",
+    "@ltr": {},
+    "coverThemeDescription": "Use media cover image as theme color",
+    "@coverThemeDescription": {},
+    "rtl": "Right To Left",
+    "@rtl": {},
+    "glassEffectDescription": "Gives a frosted glass effect to the app",
+    "@glassEffectDescription": {},
+    "nextEpisodeRelease": "Episode {episode} will be released in",
+    "@nextEpisodeRelease": {
+        "description": "Message showing the next episode info",
+        "placeholders": {
+            "episode": {
+                "type": "int"
+            }
+        }
+    },
+    "topScore": "Top Score",
+    "@topScore": {},
+    "coverTheme": "Use Cover Theme",
+    "@coverTheme": {},
+    "customMPVDescription": "Enable this option to use your own MPV configuration file. Place your custom config at: {path}",
+    "@customMPVDescription": {
+        "placeholders": {
+            "path": {
+                "type": "String"
+            }
+        }
+    },
+    "customMPV": "Custom MPV Configuration",
+    "@customMPV": {}
 }

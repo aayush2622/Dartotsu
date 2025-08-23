@@ -1,632 +1,663 @@
 {
-  "about": "ስለ",
-  "@about": {},
-  "accountDescription": "የእርስዎን AniList፣ MAL እና Discord መለያዎች በቀላሉ ያስተዳድሩ",
-  "@accountDescription": {},
-  "anime": "አኒሜ",
-  "@anime": {},
-  "animeDescription": "የአኒሜ ምርጫዎችዎን ያስተካክሉ እና ያስተዳድሩ",
-  "@animeDescription": {},
-  "fontFamily": "የፊደል ቤተሰብ",
-  "@fontFamily": {},
-  "fontFamilyDescription": "የንዑስ ርዕስ የፊደል ቤተሰብ",
-  "@fontFamilyDescription": {},
-  "login": "ግባ",
-  "@login": {},
-  "logout": "{type}ን ለቅቆ ውጣ",
-  "@logout": {},
-  "mal": "MyAnimeList",
-  "@mal": {},
-  "oledThemeVariantDescription": "የOLED ሁነታን አንቃ",
-  "@oledThemeVariantDescription": {},
-  "discord": "Discord",
-  "@discord": {},
-  "donationGoal": "በአሁኑ ጊዜ የልገሳ ግብ የለም",
-  "@donationGoal": {},
-  "enableDarkMode": "ጨለማ ሁነታን አንቃ",
-  "@enableDarkMode": {},
-  "extension": "{count, plural, =1 {ቅጥያ} other {ቅጥያዎች}}",
-  "@extension": {},
-  "extensionsDescription": "ተጨማሪ ተግባራትን ለማግኘት ቅጥያዎችን ይጫኑ እና ያስተዳድሩ",
-  "@extensionsDescription": {},
-  "fontColor": "የፊደል ቀለም",
-  "@fontColor": {},
-  "fontColorDescription": "የንዑስ ርዕስ የፊደል ቀለም",
-  "@fontColorDescription": {},
-  "fontSize": "የፊደል መጠን",
-  "@fontSize": {},
-  "fontSizeDescription": "የንዑስ ርዕስ የፊደል መጠን",
-  "@fontSizeDescription": {},
-  "fontWeight": "የፊደል ክብደት",
-  "@fontWeight": {},
-  "hidePrivateDescription": "የግል ተከታታይ ክፍሎችን ከመነሻ ገጽ ደብቅ።",
-  "@hidePrivateDescription": {},
-  "fontWeightDescription": "የንዑስ ርዕስ የፊደል ክብደት",
-  "@fontWeightDescription": {},
-  "hidePrivate": "የግል ይደብቁ",
-  "@hidePrivate": {},
-  "incognitoMode": "ሥውር ሁነታ",
-  "@incognitoMode": {},
-  "incognitoModeDescription": "እንቅስቃሴዎን ሳያስቀምጡ ያስሱ",
-  "@incognitoModeDescription": {},
-  "manga": "ማንጋ",
-  "@manga": {},
-  "mangaDescription": "የማንጋ ተሞክሮዎን ያደራጁ እና ያስተካክሉ",
-  "@mangaDescription": {},
-  "materialYou": "Material You",
-  "@materialYou": {},
-  "materialYouDescription": "እንደ ግድግዳ ወረቀትዎ ተመሳሳይ ቀለም ይጠቀሙ",
-  "@materialYouDescription": {},
-  "no": "አይ",
-  "@no": {},
-  "notifications": "ማሳወቂያዎች",
-  "@notifications": {},
-  "notificationsDescription": "እንዴት እና መቼ ማሳወቂያዎችን እንደሚቀበሉ ያዋቅሩ",
-  "@notificationsDescription": {},
-  "offlineMode": "ከመስመር ውጭ ሁነታ",
-  "@offlineMode": {},
-  "offlineModeDescription": "መተግበሪያውን ያለ ኢንተርኔት ግንኙነት ይጠቀሙ",
-  "@offlineModeDescription": {},
-  "ok": "እሺ",
-  "@ok": {},
-  "oledThemeVariant": "OLED ገጽታ ልዩነት",
-  "@oledThemeVariant": {},
-  "outlineColor": "የቢጋር ቀለም",
-  "@outlineColor": {},
-  "outlineColorDescription": "የንዑስ ርዕስ የቢጋር ቀለም",
-  "@outlineColorDescription": {},
-  "playerSettingsTitle": "የማጫወቻ ቅንብሮች",
-  "@playerSettingsTitle": {},
-  "resizeMode": "መጠን መቀየሪያ ሁነታ",
-  "@resizeMode": {},
-  "skipButton": "መዝለያ ቁልፍ",
-  "@skipButton": {},
-  "skipButtonDescription": "የመዝለያ ቁልፍ የጊዜ ርዝመት",
-  "@skipButtonDescription": {},
-  "speed": "ፍጥነት",
-  "@speed": {},
-  "resizeModeDescription": "ነባሪ የማጫወቻ መጠን መቀየሪያ ሁነታ",
-  "@resizeModeDescription": {},
-  "restoreSettings": "ቅንብሮችን እንደገና አስጀምር",
-  "@restoreSettings": {},
-  "settings": "ቅንብሮች",
-  "@settings": {},
-  "showSubtitles": "ንዑስ ርዕሶችን አሳይ",
-  "@showSubtitles": {},
-  "showSubtitlesDescription": "በነባሪነት ንዑስ ርዕሶችን አሳይ",
-  "@showSubtitlesDescription": {},
-  "speedDescription": "ነባሪ የማጫወቻ ፍጥነት",
-  "@speedDescription": {},
-  "subtitles": "ንዑስ ርዕሶች",
-  "@subtitles": {},
-  "subtitlePreview": "የንዑስ ርዕስ ቅድመ ዕይታ",
-  "@subtitlePreview": {},
-  "supportMaintainer": "የDartotsu አስተዳዳሪን መደገፍ ይፈልጋሉ?\nልገሳን ያስቡበት",
-  "@supportMaintainer": {},
-  "theme": "ገጽታ",
-  "@theme": {},
-  "themeDescription": "የመተግበሪያዎን ገጽታ እና ስሜት ያስተካክሉ",
-  "@themeDescription": {},
-  "yes": "አዎ",
-  "@yes": {},
-  "bottomPaddingDescription": "የንዑስ ርዕስ የታችኛው ድብዳብ",
-  "@bottomPaddingDescription": {},
-  "cancel": "ሰርዝ",
-  "@cancel": {},
-  "colorPicker": "ቀለም መራጭ",
-  "@colorPicker": {},
-  "colorPickerDescription": "ቀለም ይምረጡ",
-  "@colorPickerDescription": {},
-  "common": "የጋራ",
-  "@common": {},
-  "commonDescription": "ቀልጣፋ የመተግበሪያ አጠቃቀም ለማግኘት አጠቃላይ ቅንብሮችን ይጠቀሙ",
-  "@commonDescription": {},
-  "aboutDescription": "ስለ መተግበሪያው እና ስለ ፈጣሪዎቹ ተጨማሪ ይወቁ",
-  "@aboutDescription": {},
-  "account": "መለያ",
-  "@account": {},
-  "anilist": "AniList",
-  "@anilist": {},
-  "appName": "Dartotsu",
-  "@appName": {},
-  "appTagline": "አዲሱ የተሻለው መተግበሪያ\nለአኒሜ እና ማንጋ መከታተያ",
-  "@appTagline": {},
-  "backgroundColor": "የበስተጀርባ ቀለም",
-  "@backgroundColor": {},
-  "backgroundColorDescription": "የንዑስ ርዕስ የበስተጀርባ ቀለም",
-  "@backgroundColorDescription": {},
-  "bottomPadding": "የታችኛው ድብዳብ",
-  "@bottomPadding": {},
-  "cursedSpeed": "የተረገመ ፍጥነት",
-  "@cursedSpeed": {},
-  "cursedSpeedDescription": "በህይወት ለተጠመዱ ሰዎች",
-  "@cursedSpeedDescription": {},
-  "customTheme": "ብጁ ገጽታ",
-  "@customTheme": {},
-  "customThemeDescription": "ለገጽታው የራስዎን ቀለም ይጠቀሙ",
-  "@customThemeDescription": {},
-  "darkMode": "ጨለማ ሁነታ",
-  "@darkMode": {},
-  "manhwa": "Manhwa",
-  "@manhwa": {},
-  "home": "ቤት",
-  "@home": {},
-  "novel": "ልብወለድ",
-  "@novel": {},
-  "kitsu": "Kitsu",
-  "@kitsu": {},
-  "loginTo": "ወደ {service} ይግቡ",
-  "@loginTo": {
-    "placeholders": {
-      "service": {
-        "type": "String",
-        "examples": [
-          "Anilist",
-          "MyAnimeList",
-          "Kitsu",
-          "Discord"
-        ]
-      }
-    }
-  },
-  "manhua": "Manhua",
-  "@manhua": {},
-  "ln": "ቀላል ልብወለድ",
-  "@ln": {},
-  "onHold": "በእንጥልጥል ላይ ያለ {type}",
-  "@onHold": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "favorite": "የሚወዱት {type}",
-  "@favorite": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "dtu": "Down To Up",
-  "@dtu": {},
-  "volume": "{count, plural, =1 {ቅጽ} other {ቅጾች}}",
-  "@volume": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "total": "Total",
-  "@total": {},
-  "tags": "Tags",
-  "@tags": {},
-  "recommendationsEmptyMessage": "ለውሳኔ ሀሳቦች አንዳንድ አኒሜ ወይም ማንጋ ይመልከቱ/ያንብቡ",
-  "@recommendationsEmptyMessage": {},
-  "popular": "ታዋቂ {type}",
-  "@popular": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa"
-        ]
-      }
-    }
-  },
-  "description": "አጭር መግለጫ",
-  "@description": {},
-  "mostFavourite": "በጣም የተወደደ {type}",
-  "@mostFavourite": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa"
-        ]
-      }
-    }
-  },
-  "endDate": "End Date",
-  "@endDate": {},
-  "recommended": "የሚመከር",
-  "@recommended": {},
-  "meanScore": "Mean Score",
-  "@meanScore": {},
-  "series": "Series",
-  "@series": {},
-  "synopsis": "줄거리",
-  "@synopsis": {},
-  "gridView": "የፍርግርግ እይታ",
-  "@gridView": {},
-  "browse": "{type}ን ያስሱ",
-  "@browse": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "episode": "{count, plural, =1 {ክፍል} other {ክፍሎች}}",
-  "@episode": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "episodeWatched": "የተመለከቱት ክፍል",
-  "@episodeWatched": {},
-  "popularity": "ታዋቂነት",
-  "@popularity": {},
-  "allCaughtUpNew": "ሁሉንም አግኝተዋል፣ አዲስ ምንድን ነው?",
-  "@allCaughtUpNew": {},
-  "totalChapters": "ምዕራፎች",
-  "@totalChapters": {},
-  "favorites": "ተወዳጆች",
-  "@favorites": {},
-  "movie": "{count, plural, =1 {ፊልም} other {ፊልሞች}}",
-  "@movie": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "prequel": "PREQUEL",
-  "@prequel": {},
-  "relations": "Relations",
-  "@relations": {},
-  "planned": "የታቀደ {type}",
-  "@planned": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "list": "የ{type} ዝርዝር",
-  "@list": {
-    "placeholders": {
-      "type": {
-        "examples": "Anime list",
-        "type": "String"
-      }
-    }
-  },
-  "chapter": "{count, plural, =1 {ምዕራፍ} other {ምዕራፎች}}",
-  "@chapter": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "genres": "ዘውጎች",
-  "@genres": {},
-  "source": "Source",
-  "@source": {},
-  "calendar": "የቀን መቁጠሪያ",
-  "@calendar": {},
-  "format": "ቅርጸት",
-  "@format": {},
-  "expandText": "ተጨማሪ አሳይ",
-  "@expandText": {},
-  "comments": "አስተያየቶች",
-  "@comments": {},
-  "season": "ወቅት",
-  "@season": {},
-  "author": "Author",
-  "@author": {},
-  "averageDuration": "አማካይ ርዝመት",
-  "@averageDuration": {},
-  "collapseText": "ትንሽ አሳይ",
-  "@collapseText": {},
-  "characters": "ገጸ-ባህሪያት",
-  "@characters": {},
-  "sequel": "SEQUEL",
-  "@sequel": {},
-  "name": "Name",
-  "@name": {},
-  "nameRomaji": "ስም (ሮማጂ)",
-  "@nameRomaji": {},
-  "staff": "ሰራተኞች",
-  "@staff": {},
-  "studio": "Studio",
-  "@studio": {},
-  "status": "Status",
-  "@status": {},
-  "synonyms": "ተመሳሳይ ቃላት",
-  "@synonyms": {},
-  "startDate": "Start Date",
-  "@startDate": {},
-  "comingSoon": "በቅርብ ይመጣል",
-  "@comingSoon": {},
-  "totalEpisodes": "ክፍሎች",
-  "@totalEpisodes": {},
-  "read": "አንብብ",
-  "@read": {},
-  "confirmLogout": "እርግጠኛ ነዎት ለቅቆ መውጣት ይፈልጋሉ?",
-  "@confirmLogout": {},
-  "options": "Options",
-  "@options": {},
-  "compactView": "የተጠቅልል እይታ",
-  "@compactView": {},
-  "listView": "List View",
-  "@listView": {},
-  "chapterRead": "ያነበቡት ምዕራፍ",
-  "@chapterRead": {},
-  "trending": "አዝማሚያ ያለው {type}",
-  "@trending": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "installed": "የተጫነ {type}",
-  "@installed": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Extensions"
-        ]
-      }
-    }
-  },
-  "available": "ያሉ {type}",
-  "@available": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "thisSeason": "የአሁኑ ወቅት",
-  "@thisSeason": {},
-  "topAiring": "ከፍተኛ ስርጭት",
-  "@topAiring": {},
-  "topRated": "ከፍተኛ ደረጃ ያለው {type}",
-  "@topRated": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa",
-          "Series"
-        ]
-      }
-    }
-  },
-  "nextSeason": "የሚቀጥለው ወቅት",
-  "@nextSeason": {},
-  "activity": "{count, plural, =1 {እንቅስቃሴ} other {እንቅስቃሴዎች}}",
-  "@activity": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "previousSeason": "ያለፈው ወቅት",
-  "@previousSeason": {},
-  "noDropped": "እስካሁን ምንም {type} አልተውክም።",
-  "@noDropped": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "continueWatching": "መመልከት ይቀጥሉ",
-  "@continueWatching": {},
-  "noFavourites": "ምንም የሚወዱት ነገር የለም የሚመስለው፣\nእዚህ ለማስቀመጥ አንድ ትዕይንት ይውደዱ።",
-  "@noFavourites": {},
-  "noHiddenMediaFound": "ምንም የተደበቀ ሚዲያ አልተገኘም",
-  "@noHiddenMediaFound": {},
-  "info": "Info",
-  "@info": {},
-  "language": "ቋንቋ",
-  "@language": {},
-  "continueReading": "ማንበብ ይቀጥሉ",
-  "@continueReading": {},
-  "watch": "ተመልከት",
-  "@watch": {},
-  "search": "ፈልግ",
-  "@search": {},
-  "hiddenMedia": "የተደበቀ ሚዲያ",
-  "@hiddenMedia": {},
-  "addToList": "Add To List",
-  "@addToList": {},
-  "scanlators": "ስካንሌተሮች",
-  "@scanlators": {},
-  "layout": "Layout",
-  "@layout": {},
-  "sort": "አስተካክል",
-  "@sort": {},
-  "utd": "ከላይ ወደ ታች",
-  "@utd": {},
-  "manageLayout": "የ{service}ን የ{page} ገጽ አቀማመጥ አስተዳድር",
-  "@manageLayout": {
-    "placeholders": {
-      "service": {
-        "type": "String",
-        "examples": [
-          "Anilist",
-          "MAL"
-        ]
-      },
-      "page": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Home",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "manageLayoutDescription": "አካላቶቹን በመጎተት እና በማስቀመጥ የ{page} ገጽ አቀማመጥን ማስተዳደር ይችላሉ",
-  "@manageLayoutDescription": {
-    "placeholders": {
-      "page": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Home",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "pickColor": "ቀለም ምረጥ",
-  "@pickColor": {},
-  "recentUpdates": "የቅርብ ጊዜ ዝማኔዎች",
-  "@recentUpdates": {},
-  "noOnHold": "ምንም ነገር በእንጥልጥል ላይ ያላስቀመጡት ይመስላል።",
-  "@noOnHold": {},
-  "droppedManga": "የተተወ ማንጋ",
-  "@droppedManga": {},
-  "droppedAnime": "የተተወ አኒሜ",
-  "@droppedAnime": {},
-  "simkl": "Simkl",
-  "@simkl": {},
-  "logFile": "የምዝግብ ማስታወሻ ፋይል",
-  "@logFile": {},
-  "logFileDescription": "የምዝግብ ማስታወሻውን ያጋሩ",
-  "@logFileDescription": {},
-  "colorPickerDefault": "ነባሪ",
-  "@colorPickerDefault": {},
-  "addAnimeRepo": "የአኒሜ ማከማቻ አክል",
-  "@addAnimeRepo": {},
-  "loadExtensionsIconDesc": "የቅጥያዎች ገጽ ዘገይቶ ከሆነ አሰናክል",
-  "@loadExtensionsIconDesc": {},
-  "addNovelRepoDesc": "ከተለያዩ ምንጮች የልቦለድ ማከማቻ አክል",
-  "@addNovelRepoDesc": {},
-  "autoUpdateDesc": "ቅጥያዎችን በራስ-ሰር አዘምን",
-  "@autoUpdateDesc": {},
-  "addMangaRepoDesc": "ከተለያዩ ምንጮች የማንጋ ማከማቻ አክል",
-  "@addMangaRepoDesc": {},
-  "addAnimeRepoDesc": "ከተለያዩ ምንጮች የአኒሜ ማከማቻ አክል",
-  "@addAnimeRepoDesc": {},
-  "addMangaRepo": "የማንጋ ማከማቻ አክል",
-  "@addMangaRepo": {},
-  "addNovelRepo": "የልቦለድ ማከማቻ አክል",
-  "@addNovelRepo": {},
-  "autoUpdate": "ራስ-ሰር ዝመና",
-  "@autoUpdate": {},
-  "loadExtensionsIcon": "የቅጥያዎች አዶ ጫን",
-  "@loadExtensionsIcon": {},
-  "colorPickerCustom": "ግላዊ",
-  "@colorPickerCustom": {},
-  "selectMediaService": "የሚዲያ አገልግሎትን ይምረጡ",
-  "@selectMediaService": {},
-  "customPath": "ብጁ መንገድ",
-  "@customPath": {},
-  "customPathDescription": "ፋይሎችን ለማስቀመጥ ብጁ መንገድ ያዘጋጁ\nለማስወገድ በረጅሙ ተጫን",
-  "@customPathDescription": {},
-  "selectDirectory": "ማውጫ ይምረጡ",
-  "@selectDirectory": {},
-  "watching": "መመልከት",
-  "@watching": {},
-  "noChapterFound": "ምንም ምዕራፍ አልተገኘም",
-  "@noChapterFound": {},
-  "outOf": "ውጪ",
-  "@outOf": {},
-  "selected": "ተመርጧል",
-  "@selected": {},
-  "readStatus": "አንብብ",
-  "@readStatus": {},
-  "youTube": "በዩቲዩብ ላይ ይጫወቱ?",
-  "@youTube": {},
-  "mediaNotFound": "ሚዲያ አልተገኘም",
-  "@mediaNotFound": {},
-  "found": "ተገኝቷል",
-  "@found": {},
-  "totalOf": "ጠቅላላ",
-  "@totalOf": {},
-  "watchStatus": "ተመልክቷል",
-  "@watchStatus": {},
-  "wrongTitle": "የተሳሳተ ርዕስ?",
-  "@wrongTitle": {},
-  "installSourceToStart": "ለመጀመር ከቅጥያ ገጽ ምንጭ ይጫኑ",
-  "@installSourceToStart": {},
-  "webView": "የድር እይታ",
-  "@webView": {},
-  "reading": "ማንበብ",
-  "@reading": {},
-  "direction": "Direction",
-  "@direction": {},
-  "spacedPagesDesc": "Add space between pages",
-  "@spacedPagesDesc": {},
-  "spacedPages": "Spaced Pages",
-  "@spacedPages": {},
-  "hidePageNumberDesc": "Hide page number while reading",
-  "@hidePageNumberDesc": {},
-  "thumbLessSeekBar": "ThumbLess SeekBar",
-  "@thumbLessSeekBar": {},
-  "developersHelpersDesc": "Dartotsu's unpaid labours",
-  "@developersHelpersDesc": {},
-  "developersHelpers": "Developers/Helpers",
-  "@developersHelpers": {},
-  "thumbLessSeekBarDesc": "Remove thumb from the seek bar",
-  "@thumbLessSeekBarDesc": {},
-  "hidePageNumber": "Hide Page Number",
-  "@hidePageNumber": {},
-  "differentCacheManagerDesc": "Use different Image cache manager",
-  "@differentCacheManagerDesc": {},
-  "differentCacheManager": "Different Cache Manager",
-  "@differentCacheManager": {},
-  "readerSettingsDesc": "Change reader settings",
-  "@readerSettingsDesc": {},
-  "hideScrollbarDesc": "Hide scrollbar while reading",
-  "@hideScrollbarDesc": {},
-  "readerSettings": "Reader Settings",
-  "@readerSettings": {},
-  "hideScrollbar": "Hide Scrollbar",
-  "@hideScrollbar": {},
-  "playerSettingsDesc": "Change player settings",
-  "@playerSettingsDesc": {}
+    "about": "ስለ",
+    "@about": {},
+    "accountDescription": "የእርስዎን AniList፣ MAL እና Discord መለያዎች በቀላሉ ያስተዳድሩ",
+    "@accountDescription": {},
+    "anime": "አኒሜ",
+    "@anime": {},
+    "animeDescription": "የአኒሜ ምርጫዎችዎን ያስተካክሉ እና ያስተዳድሩ",
+    "@animeDescription": {},
+    "fontFamily": "የፊደል ቤተሰብ",
+    "@fontFamily": {},
+    "fontFamilyDescription": "የንዑስ ርዕስ የፊደል ቤተሰብ",
+    "@fontFamilyDescription": {},
+    "login": "ግባ",
+    "@login": {},
+    "logout": "{type}ን ለቅቆ ውጣ",
+    "@logout": {},
+    "mal": "MyAnimeList",
+    "@mal": {},
+    "oledThemeVariantDescription": "የOLED ሁነታን አንቃ",
+    "@oledThemeVariantDescription": {},
+    "discord": "Discord",
+    "@discord": {},
+    "donationGoal": "በአሁኑ ጊዜ የልገሳ ግብ የለም",
+    "@donationGoal": {},
+    "enableDarkMode": "ጨለማ ሁነታን አንቃ",
+    "@enableDarkMode": {},
+    "extension": "{count, plural, =1 {ቅጥያ} other {ቅጥያዎች}}",
+    "@extension": {},
+    "extensionsDescription": "ተጨማሪ ተግባራትን ለማግኘት ቅጥያዎችን ይጫኑ እና ያስተዳድሩ",
+    "@extensionsDescription": {},
+    "fontColor": "የፊደል ቀለም",
+    "@fontColor": {},
+    "fontColorDescription": "የንዑስ ርዕስ የፊደል ቀለም",
+    "@fontColorDescription": {},
+    "fontSize": "የፊደል መጠን",
+    "@fontSize": {},
+    "fontSizeDescription": "የንዑስ ርዕስ የፊደል መጠን",
+    "@fontSizeDescription": {},
+    "fontWeight": "የፊደል ክብደት",
+    "@fontWeight": {},
+    "hidePrivateDescription": "የግል ተከታታይ ክፍሎችን ከመነሻ ገጽ ደብቅ።",
+    "@hidePrivateDescription": {},
+    "fontWeightDescription": "የንዑስ ርዕስ የፊደል ክብደት",
+    "@fontWeightDescription": {},
+    "hidePrivate": "የግል ይደብቁ",
+    "@hidePrivate": {},
+    "incognitoMode": "ሥውር ሁነታ",
+    "@incognitoMode": {},
+    "incognitoModeDescription": "እንቅስቃሴዎን ሳያስቀምጡ ያስሱ",
+    "@incognitoModeDescription": {},
+    "manga": "ማንጋ",
+    "@manga": {},
+    "mangaDescription": "የማንጋ ተሞክሮዎን ያደራጁ እና ያስተካክሉ",
+    "@mangaDescription": {},
+    "materialYou": "Material You",
+    "@materialYou": {},
+    "materialYouDescription": "እንደ ግድግዳ ወረቀትዎ ተመሳሳይ ቀለም ይጠቀሙ",
+    "@materialYouDescription": {},
+    "no": "አይ",
+    "@no": {},
+    "notifications": "ማሳወቂያዎች",
+    "@notifications": {},
+    "notificationsDescription": "እንዴት እና መቼ ማሳወቂያዎችን እንደሚቀበሉ ያዋቅሩ",
+    "@notificationsDescription": {},
+    "offlineMode": "ከመስመር ውጭ ሁነታ",
+    "@offlineMode": {},
+    "offlineModeDescription": "መተግበሪያውን ያለ ኢንተርኔት ግንኙነት ይጠቀሙ",
+    "@offlineModeDescription": {},
+    "ok": "እሺ",
+    "@ok": {},
+    "oledThemeVariant": "OLED ገጽታ ልዩነት",
+    "@oledThemeVariant": {},
+    "outlineColor": "የቢጋር ቀለም",
+    "@outlineColor": {},
+    "outlineColorDescription": "የንዑስ ርዕስ የቢጋር ቀለም",
+    "@outlineColorDescription": {},
+    "playerSettingsTitle": "የማጫወቻ ቅንብሮች",
+    "@playerSettingsTitle": {},
+    "resizeMode": "መጠን መቀየሪያ ሁነታ",
+    "@resizeMode": {},
+    "skipButton": "መዝለያ ቁልፍ",
+    "@skipButton": {},
+    "skipButtonDescription": "የመዝለያ ቁልፍ የጊዜ ርዝመት",
+    "@skipButtonDescription": {},
+    "speed": "ፍጥነት",
+    "@speed": {},
+    "resizeModeDescription": "ነባሪ የማጫወቻ መጠን መቀየሪያ ሁነታ",
+    "@resizeModeDescription": {},
+    "restoreSettings": "ቅንብሮችን እንደገና አስጀምር",
+    "@restoreSettings": {},
+    "settings": "ቅንብሮች",
+    "@settings": {},
+    "showSubtitles": "ንዑስ ርዕሶችን አሳይ",
+    "@showSubtitles": {},
+    "showSubtitlesDescription": "በነባሪነት ንዑስ ርዕሶችን አሳይ",
+    "@showSubtitlesDescription": {},
+    "speedDescription": "ነባሪ የማጫወቻ ፍጥነት",
+    "@speedDescription": {},
+    "subtitles": "ንዑስ ርዕሶች",
+    "@subtitles": {},
+    "subtitlePreview": "የንዑስ ርዕስ ቅድመ ዕይታ",
+    "@subtitlePreview": {},
+    "supportMaintainer": "የDartotsu አስተዳዳሪን መደገፍ ይፈልጋሉ?\nልገሳን ያስቡበት",
+    "@supportMaintainer": {},
+    "theme": "ገጽታ",
+    "@theme": {},
+    "themeDescription": "የመተግበሪያዎን ገጽታ እና ስሜት ያስተካክሉ",
+    "@themeDescription": {},
+    "yes": "አዎ",
+    "@yes": {},
+    "bottomPaddingDescription": "የንዑስ ርዕስ የታችኛው ድብዳብ",
+    "@bottomPaddingDescription": {},
+    "cancel": "ሰርዝ",
+    "@cancel": {},
+    "colorPicker": "ቀለም መራጭ",
+    "@colorPicker": {},
+    "colorPickerDescription": "ቀለም ይምረጡ",
+    "@colorPickerDescription": {},
+    "common": "የጋራ",
+    "@common": {},
+    "commonDescription": "ቀልጣፋ የመተግበሪያ አጠቃቀም ለማግኘት አጠቃላይ ቅንብሮችን ይጠቀሙ",
+    "@commonDescription": {},
+    "aboutDescription": "ስለ መተግበሪያው እና ስለ ፈጣሪዎቹ ተጨማሪ ይወቁ",
+    "@aboutDescription": {},
+    "account": "መለያ",
+    "@account": {},
+    "anilist": "AniList",
+    "@anilist": {},
+    "appName": "Dartotsu",
+    "@appName": {},
+    "appTagline": "አዲሱ የተሻለው መተግበሪያ\nለአኒሜ እና ማንጋ መከታተያ",
+    "@appTagline": {},
+    "backgroundColor": "የበስተጀርባ ቀለም",
+    "@backgroundColor": {},
+    "backgroundColorDescription": "የንዑስ ርዕስ የበስተጀርባ ቀለም",
+    "@backgroundColorDescription": {},
+    "bottomPadding": "የታችኛው ድብዳብ",
+    "@bottomPadding": {},
+    "cursedSpeed": "የተረገመ ፍጥነት",
+    "@cursedSpeed": {},
+    "cursedSpeedDescription": "በህይወት ለተጠመዱ ሰዎች",
+    "@cursedSpeedDescription": {},
+    "customTheme": "ብጁ ገጽታ",
+    "@customTheme": {},
+    "customThemeDescription": "ለገጽታው የራስዎን ቀለም ይጠቀሙ",
+    "@customThemeDescription": {},
+    "darkMode": "ጨለማ ሁነታ",
+    "@darkMode": {},
+    "manhwa": "Manhwa",
+    "@manhwa": {},
+    "home": "ቤት",
+    "@home": {},
+    "novel": "ልብወለድ",
+    "@novel": {},
+    "kitsu": "Kitsu",
+    "@kitsu": {},
+    "loginTo": "ወደ {service} ይግቡ",
+    "@loginTo": {
+        "placeholders": {
+            "service": {
+                "type": "String",
+                "examples": [
+                    "Anilist",
+                    "MyAnimeList",
+                    "Kitsu",
+                    "Discord"
+                ]
+            }
+        }
+    },
+    "manhua": "Manhua",
+    "@manhua": {},
+    "ln": "ቀላል ልብወለድ",
+    "@ln": {},
+    "onHold": "በእንጥልጥል ላይ ያለ {type}",
+    "@onHold": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "favorite": "የሚወዱት {type}",
+    "@favorite": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "dtu": "Down To Up",
+    "@dtu": {},
+    "volume": "{count, plural, =1 {ቅጽ} other {ቅጾች}}",
+    "@volume": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "total": "Total",
+    "@total": {},
+    "tags": "Tags",
+    "@tags": {},
+    "recommendationsEmptyMessage": "ለውሳኔ ሀሳቦች አንዳንድ አኒሜ ወይም ማንጋ ይመልከቱ/ያንብቡ",
+    "@recommendationsEmptyMessage": {},
+    "popular": "ታዋቂ {type}",
+    "@popular": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa"
+                ]
+            }
+        }
+    },
+    "mostFavourite": "በጣም የተወደደ {type}",
+    "@mostFavourite": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa"
+                ]
+            }
+        }
+    },
+    "endDate": "End Date",
+    "@endDate": {},
+    "recommended": "የሚመከር",
+    "@recommended": {},
+    "meanScore": "Mean Score",
+    "@meanScore": {},
+    "series": "Series",
+    "@series": {},
+    "synopsis": "줄거리",
+    "@synopsis": {},
+    "gridView": "የፍርግርግ እይታ",
+    "@gridView": {},
+    "browse": "{type}ን ያስሱ",
+    "@browse": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "episode": "{count, plural, =1 {ክፍል} other {ክፍሎች}}",
+    "@episode": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "episodeWatched": "የተመለከቱት ክፍል",
+    "@episodeWatched": {},
+    "popularity": "ታዋቂነት",
+    "@popularity": {},
+    "allCaughtUpNew": "ሁሉንም አግኝተዋል፣ አዲስ ምንድን ነው?",
+    "@allCaughtUpNew": {},
+    "totalChapters": "ምዕራፎች",
+    "@totalChapters": {},
+    "favorites": "ተወዳጆች",
+    "@favorites": {},
+    "movie": "{count, plural, =1 {ፊልም} other {ፊልሞች}}",
+    "@movie": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "prequel": "PREQUEL",
+    "@prequel": {},
+    "relations": "Relations",
+    "@relations": {},
+    "planned": "የታቀደ {type}",
+    "@planned": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "list": "የ{type} ዝርዝር",
+    "@list": {
+        "placeholders": {
+            "type": {
+                "examples": "Anime list",
+                "type": "String"
+            }
+        }
+    },
+    "chapter": "{count, plural, =1 {ምዕራፍ} other {ምዕራፎች}}",
+    "@chapter": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "genres": "ዘውጎች",
+    "@genres": {},
+    "source": "Source",
+    "@source": {},
+    "calendar": "የቀን መቁጠሪያ",
+    "@calendar": {},
+    "format": "ቅርጸት",
+    "@format": {},
+    "expandText": "ተጨማሪ አሳይ",
+    "@expandText": {},
+    "comments": "አስተያየቶች",
+    "@comments": {},
+    "season": "ወቅት",
+    "@season": {},
+    "author": "Author",
+    "@author": {},
+    "averageDuration": "አማካይ ርዝመት",
+    "@averageDuration": {},
+    "collapseText": "ትንሽ አሳይ",
+    "@collapseText": {},
+    "characters": "ገጸ-ባህሪያት",
+    "@characters": {},
+    "sequel": "SEQUEL",
+    "@sequel": {},
+    "name": "Name",
+    "@name": {},
+    "nameRomaji": "ስም (ሮማጂ)",
+    "@nameRomaji": {},
+    "staff": "ሰራተኞች",
+    "@staff": {},
+    "studio": "Studio",
+    "@studio": {},
+    "status": "Status",
+    "@status": {},
+    "synonyms": "ተመሳሳይ ቃላት",
+    "@synonyms": {},
+    "startDate": "Start Date",
+    "@startDate": {},
+    "comingSoon": "በቅርብ ይመጣል",
+    "@comingSoon": {},
+    "totalEpisodes": "ክፍሎች",
+    "@totalEpisodes": {},
+    "read": "አንብብ",
+    "@read": {},
+    "confirmLogout": "እርግጠኛ ነዎት ለቅቆ መውጣት ይፈልጋሉ?",
+    "@confirmLogout": {},
+    "options": "Options",
+    "@options": {},
+    "compactView": "የተጠቅልል እይታ",
+    "@compactView": {},
+    "listView": "List View",
+    "@listView": {},
+    "chapterRead": "ያነበቡት ምዕራፍ",
+    "@chapterRead": {},
+    "trending": "አዝማሚያ ያለው {type}",
+    "@trending": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "installed": "የተጫነ {type}",
+    "@installed": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Extensions"
+                ]
+            }
+        }
+    },
+    "available": "ያሉ {type}",
+    "@available": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "thisSeason": "የአሁኑ ወቅት",
+    "@thisSeason": {},
+    "topAiring": "ከፍተኛ ስርጭት",
+    "@topAiring": {},
+    "topRated": "ከፍተኛ ደረጃ ያለው {type}",
+    "@topRated": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa",
+                    "Series"
+                ]
+            }
+        }
+    },
+    "nextSeason": "የሚቀጥለው ወቅት",
+    "@nextSeason": {},
+    "activity": "{count, plural, =1 {እንቅስቃሴ} other {እንቅስቃሴዎች}}",
+    "@activity": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "previousSeason": "ያለፈው ወቅት",
+    "@previousSeason": {},
+    "noDropped": "እስካሁን ምንም {type} አልተውክም።",
+    "@noDropped": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "continueWatching": "መመልከት ይቀጥሉ",
+    "@continueWatching": {},
+    "noFavourites": "ምንም የሚወዱት ነገር የለም የሚመስለው፣\nእዚህ ለማስቀመጥ አንድ ትዕይንት ይውደዱ።",
+    "@noFavourites": {},
+    "noHiddenMediaFound": "ምንም የተደበቀ ሚዲያ አልተገኘም",
+    "@noHiddenMediaFound": {},
+    "info": "Info",
+    "@info": {},
+    "language": "ቋንቋ",
+    "@language": {},
+    "continueReading": "ማንበብ ይቀጥሉ",
+    "@continueReading": {},
+    "watch": "ተመልከት",
+    "@watch": {},
+    "search": "ፈልግ",
+    "@search": {},
+    "hiddenMedia": "የተደበቀ ሚዲያ",
+    "@hiddenMedia": {},
+    "addToList": "Add To List",
+    "@addToList": {},
+    "scanlators": "ስካንሌተሮች",
+    "@scanlators": {},
+    "layout": "Layout",
+    "@layout": {},
+    "sort": "አስተካክል",
+    "@sort": {},
+    "utd": "ከላይ ወደ ታች",
+    "@utd": {},
+    "manageLayout": "የ{service}ን የ{page} ገጽ አቀማመጥ አስተዳድር",
+    "@manageLayout": {
+        "placeholders": {
+            "service": {
+                "type": "String",
+                "examples": [
+                    "Anilist",
+                    "MAL"
+                ]
+            },
+            "page": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Home",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "manageLayoutDescription": "አካላቶቹን በመጎተት እና በማስቀመጥ የ{page} ገጽ አቀማመጥን ማስተዳደር ይችላሉ",
+    "@manageLayoutDescription": {
+        "placeholders": {
+            "page": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Home",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "pickColor": "ቀለም ምረጥ",
+    "@pickColor": {},
+    "recentUpdates": "የቅርብ ጊዜ ዝማኔዎች",
+    "@recentUpdates": {},
+    "noOnHold": "ምንም ነገር በእንጥልጥል ላይ ያላስቀመጡት ይመስላል።",
+    "@noOnHold": {},
+    "droppedManga": "የተተወ ማንጋ",
+    "@droppedManga": {},
+    "droppedAnime": "የተተወ አኒሜ",
+    "@droppedAnime": {},
+    "simkl": "Simkl",
+    "@simkl": {},
+    "logFile": "የምዝግብ ማስታወሻ ፋይል",
+    "@logFile": {},
+    "logFileDescription": "የምዝግብ ማስታወሻውን ያጋሩ",
+    "@logFileDescription": {},
+    "colorPickerDefault": "ነባሪ",
+    "@colorPickerDefault": {},
+    "addAnimeRepo": "የአኒሜ ማከማቻ አክል",
+    "@addAnimeRepo": {},
+    "loadExtensionsIconDesc": "የቅጥያዎች ገጽ ዘገይቶ ከሆነ አሰናክል",
+    "@loadExtensionsIconDesc": {},
+    "addNovelRepoDesc": "ከተለያዩ ምንጮች የልቦለድ ማከማቻ አክል",
+    "@addNovelRepoDesc": {},
+    "autoUpdateDesc": "ቅጥያዎችን በራስ-ሰር አዘምን",
+    "@autoUpdateDesc": {},
+    "addMangaRepoDesc": "ከተለያዩ ምንጮች የማንጋ ማከማቻ አክል",
+    "@addMangaRepoDesc": {},
+    "addAnimeRepoDesc": "ከተለያዩ ምንጮች የአኒሜ ማከማቻ አክል",
+    "@addAnimeRepoDesc": {},
+    "addMangaRepo": "የማንጋ ማከማቻ አክል",
+    "@addMangaRepo": {},
+    "addNovelRepo": "የልቦለድ ማከማቻ አክል",
+    "@addNovelRepo": {},
+    "autoUpdate": "ራስ-ሰር ዝመና",
+    "@autoUpdate": {},
+    "loadExtensionsIcon": "የቅጥያዎች አዶ ጫን",
+    "@loadExtensionsIcon": {},
+    "colorPickerCustom": "ግላዊ",
+    "@colorPickerCustom": {},
+    "selectMediaService": "የሚዲያ አገልግሎትን ይምረጡ",
+    "@selectMediaService": {},
+    "customPath": "ብጁ መንገድ",
+    "@customPath": {},
+    "customPathDescription": "ፋይሎችን ለማስቀመጥ ብጁ መንገድ ያዘጋጁ\nለማስወገድ በረጅሙ ተጫን",
+    "@customPathDescription": {},
+    "selectDirectory": "ማውጫ ይምረጡ",
+    "@selectDirectory": {},
+    "watching": "መመልከት",
+    "@watching": {},
+    "noChapterFound": "ምንም ምዕራፍ አልተገኘም",
+    "@noChapterFound": {},
+    "outOf": "ውጪ",
+    "@outOf": {},
+    "selected": "ተመርጧል",
+    "@selected": {},
+    "readStatus": "አንብብ",
+    "@readStatus": {},
+    "youTube": "በዩቲዩብ ላይ ይጫወቱ?",
+    "@youTube": {},
+    "mediaNotFound": "ሚዲያ አልተገኘም",
+    "@mediaNotFound": {},
+    "found": "ተገኝቷል",
+    "@found": {},
+    "totalOf": "ጠቅላላ",
+    "@totalOf": {},
+    "watchStatus": "ተመልክቷል",
+    "@watchStatus": {},
+    "wrongTitle": "የተሳሳተ ርዕስ?",
+    "@wrongTitle": {},
+    "installSourceToStart": "ለመጀመር ከቅጥያ ገጽ ምንጭ ይጫኑ",
+    "@installSourceToStart": {},
+    "webView": "የድር እይታ",
+    "@webView": {},
+    "reading": "ማንበብ",
+    "@reading": {},
+    "direction": "Direction",
+    "@direction": {},
+    "spacedPagesDesc": "Add space between pages",
+    "@spacedPagesDesc": {},
+    "spacedPages": "Spaced Pages",
+    "@spacedPages": {},
+    "hidePageNumberDesc": "Hide page number while reading",
+    "@hidePageNumberDesc": {},
+    "thumbLessSeekBar": "ThumbLess SeekBar",
+    "@thumbLessSeekBar": {},
+    "developersHelpersDesc": "Dartotsu's unpaid labours",
+    "@developersHelpersDesc": {},
+    "developersHelpers": "Developers/Helpers",
+    "@developersHelpers": {},
+    "thumbLessSeekBarDesc": "Remove thumb from the seek bar",
+    "@thumbLessSeekBarDesc": {},
+    "hidePageNumber": "Hide Page Number",
+    "@hidePageNumber": {},
+    "differentCacheManagerDesc": "Use different Image cache manager",
+    "@differentCacheManagerDesc": {},
+    "differentCacheManager": "Different Cache Manager",
+    "@differentCacheManager": {},
+    "readerSettingsDesc": "Change reader settings",
+    "@readerSettingsDesc": {},
+    "hideScrollbarDesc": "Hide scrollbar while reading",
+    "@hideScrollbarDesc": {},
+    "readerSettings": "Reader Settings",
+    "@readerSettings": {},
+    "hideScrollbar": "Hide Scrollbar",
+    "@hideScrollbar": {},
+    "playerSettingsDesc": "Change player settings",
+    "@playerSettingsDesc": {},
+    "glassEffect": "Glass Effect",
+    "@glassEffect": {},
+    "ltr": "Left To Right",
+    "@ltr": {},
+    "coverThemeDescription": "Use media cover image as theme color",
+    "@coverThemeDescription": {},
+    "rtl": "Right To Left",
+    "@rtl": {},
+    "glassEffectDescription": "Gives a frosted glass effect to the app",
+    "@glassEffectDescription": {},
+    "nextEpisodeRelease": "Episode {episode} will be released in",
+    "@nextEpisodeRelease": {
+        "description": "Message showing the next episode info",
+        "placeholders": {
+            "episode": {
+                "type": "int"
+            }
+        }
+    },
+    "topScore": "Top Score",
+    "@topScore": {},
+    "coverTheme": "Use Cover Theme",
+    "@coverTheme": {},
+    "customMPVDescription": "Enable this option to use your own MPV configuration file. Place your custom config at: {path}",
+    "@customMPVDescription": {
+        "placeholders": {
+            "path": {
+                "type": "String"
+            }
+        }
+    },
+    "customMPV": "Custom MPV Configuration",
+    "@customMPV": {}
 }

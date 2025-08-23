@@ -1,632 +1,663 @@
 {
-  "appName": "Dartotsu",
-  "@appName": {},
-  "appTagline": "Ứng dụng TỐT NHẤT MỚI Để\nTheo Dõi Anime & Manga",
-  "@appTagline": {},
-  "backgroundColor": "Màu nền",
-  "@backgroundColor": {},
-  "backgroundColorDescription": "Màu nền phụ đề",
-  "@backgroundColorDescription": {},
-  "bottomPadding": "Khoảng cách dưới",
-  "@bottomPadding": {},
-  "colorPicker": "Chọn màu",
-  "@colorPicker": {},
-  "colorPickerDescription": "Chọn một màu",
-  "@colorPickerDescription": {},
-  "common": "Cài đặt chung",
-  "@common": {},
-  "extension": "{count, plural, =1 {Tiện ích} other {Các Tiện ích}}",
-  "@extension": {},
-  "fontSize": "Kích thước chữ",
-  "@fontSize": {},
-  "fontSizeDescription": "Kích thước chữ của phụ đề",
-  "@fontSizeDescription": {},
-  "fontWeight": "Độ dày chữ",
-  "@fontWeight": {},
-  "no": "Không",
-  "@no": {},
-  "yes": "Có",
-  "@yes": {},
-  "about": "Giới thiệu",
-  "@about": {},
-  "aboutDescription": "Tìm hiểu thêm về ứng dụng và người sáng tạo",
-  "@aboutDescription": {},
-  "account": "Tài khoản",
-  "@account": {},
-  "accountDescription": "Quản lý tài khoản AniList, MAL và Discord của bạn một cách dễ dàng",
-  "@accountDescription": {},
-  "anime": "Anime",
-  "@anime": {},
-  "animeDescription": "Cá nhân hóa và quản lý sở thích anime của bạn",
-  "@animeDescription": {},
-  "anilist": "AniList",
-  "@anilist": {},
-  "bottomPaddingDescription": "Khoảng cách dưới của phụ đề",
-  "@bottomPaddingDescription": {},
-  "cancel": "Hủy",
-  "@cancel": {},
-  "commonDescription": "Truy cập cài đặt chung để sử dụng ứng dụng dễ dàng hơn",
-  "@commonDescription": {},
-  "cursedSpeed": "Tốc độ nhanh",
-  "@cursedSpeed": {},
-  "cursedSpeedDescription": "Dành cho những người quá bận rộn với cuộc sống",
-  "@cursedSpeedDescription": {},
-  "customTheme": "Giao diện tùy chỉnh",
-  "@customTheme": {},
-  "customThemeDescription": "Sử dụng màu sắc của riêng bạn cho giao diện",
-  "@customThemeDescription": {},
-  "darkMode": "Chế độ tối",
-  "@darkMode": {},
-  "discord": "Discord",
-  "@discord": {},
-  "donationGoal": "Hiện không có mục tiêu quyên góp",
-  "@donationGoal": {},
-  "enableDarkMode": "Bật chế độ tối",
-  "@enableDarkMode": {},
-  "extensionsDescription": "Cài đặt và quản lý tiện ích mở rộng để tăng cường tính năng",
-  "@extensionsDescription": {},
-  "fontColor": "Màu chữ",
-  "@fontColor": {},
-  "fontColorDescription": "Màu chữ của phụ đề",
-  "@fontColorDescription": {},
-  "fontFamily": "Phông chữ",
-  "@fontFamily": {},
-  "fontFamilyDescription": "Phông chữ của phụ đề",
-  "@fontFamilyDescription": {},
-  "fontWeightDescription": "Độ dày chữ của phụ đề",
-  "@fontWeightDescription": {},
-  "hidePrivate": "Ẩn nội dung riêng tư",
-  "@hidePrivate": {},
-  "hidePrivateDescription": "Ẩn các series riêng tư khỏi trang chủ.",
-  "@hidePrivateDescription": {},
-  "incognitoMode": "Chế độ ẩn danh",
-  "@incognitoMode": {},
-  "incognitoModeDescription": "Duyệt mà không lưu hoạt động của bạn",
-  "@incognitoModeDescription": {},
-  "login": "Đăng nhập",
-  "@login": {},
-  "logout": "Đăng xuất {type}",
-  "@logout": {},
-  "mal": "MyAnimeList",
-  "@mal": {},
-  "manga": "Manga",
-  "@manga": {},
-  "mangaDescription": "Sắp xếp và cá nhân hóa trải nghiệm Manga của bạn",
-  "@mangaDescription": {},
-  "materialYou": "Material You",
-  "@materialYou": {},
-  "materialYouDescription": "Sử dụng cùng màu với hình nền của bạn",
-  "@materialYouDescription": {},
-  "notifications": "Thông báo",
-  "@notifications": {},
-  "notificationsDescription": "Cấu hình cách và thời điểm bạn nhận thông báo",
-  "@notificationsDescription": {},
-  "offlineMode": "Chế độ ngoại tuyến",
-  "@offlineMode": {},
-  "offlineModeDescription": "Sử dụng ứng dụng mà không cần kết nối internet",
-  "@offlineModeDescription": {},
-  "ok": "Đồng ý",
-  "@ok": {},
-  "oledThemeVariant": "Biến thể giao diện OLED",
-  "@oledThemeVariant": {},
-  "oledThemeVariantDescription": "Bật chế độ OLED",
-  "@oledThemeVariantDescription": {},
-  "outlineColor": "Màu viền",
-  "@outlineColor": {},
-  "outlineColorDescription": "Màu viền của phụ đề",
-  "@outlineColorDescription": {},
-  "playerSettingsTitle": "Cài đặt trình phát",
-  "@playerSettingsTitle": {},
-  "settings": "Cài đặt",
-  "@settings": {},
-  "resizeMode": "Chế độ thay đổi kích thước",
-  "@resizeMode": {},
-  "resizeModeDescription": "Chế độ thay đổi kích thước mặc định cho trình phát",
-  "@resizeModeDescription": {},
-  "restoreSettings": "Khôi phục cài đặt",
-  "@restoreSettings": {},
-  "showSubtitles": "Hiển thị phụ đề",
-  "@showSubtitles": {},
-  "showSubtitlesDescription": "Hiển thị phụ đề theo mặc định",
-  "@showSubtitlesDescription": {},
-  "skipButton": "Nút bỏ qua",
-  "@skipButton": {},
-  "skipButtonDescription": "Thời lượng của nút bỏ qua",
-  "@skipButtonDescription": {},
-  "speed": "Tốc độ",
-  "@speed": {},
-  "speedDescription": "Tốc độ mặc định của trình phát",
-  "@speedDescription": {},
-  "subtitles": "Phụ đề",
-  "@subtitles": {},
-  "subtitlePreview": "Xem trước phụ đề",
-  "@subtitlePreview": {},
-  "supportMaintainer": "Muốn hỗ trợ nhà phát triển Dartotsu?\nHãy xem xét việc quyên góp",
-  "@supportMaintainer": {},
-  "theme": "Giao diện",
-  "@theme": {},
-  "themeDescription": "Tùy chỉnh giao diện và phong cách của ứng dụng",
-  "@themeDescription": {},
-  "ln": "Tiểu thuyết ánh sáng",
-  "@ln": {},
-  "series": "Loạt phim",
-  "@series": {},
-  "season": "Mùa",
-  "@season": {},
-  "episode": "{count, plural, =1 {Tập} other {Các Tập}}",
-  "@episode": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "chapter": "{count, plural, =1 {Chương} other {Các Chương}}",
-  "@chapter": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "volume": "{count, plural, =1 {Tập} other {Các Tập}}",
-  "@volume": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "movie": "{count, plural, =1 {Phim} other {Các Phim}}",
-  "@movie": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "genres": "Thể loại",
-  "@genres": {},
-  "calendar": "Lịch",
-  "@calendar": {},
-  "dtu": "Dịch đến hiện tại",
-  "@dtu": {},
-  "manageLayout": "Quản lý bố cục trang {page} cho {service}",
-  "@manageLayout": {
-    "placeholders": {
-      "service": {
-        "type": "String",
-        "examples": [
-          "Anilist",
-          "MAL"
-        ]
-      },
-      "page": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Home",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "manageLayoutDescription": "Bạn có thể quản lý bố cục trang {page} bằng cách kéo và thả các mục",
-  "@manageLayoutDescription": {
-    "placeholders": {
-      "page": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Home",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "confirmLogout": "Bạn có chắc chắn muốn đăng xuất không?",
-  "@confirmLogout": {},
-  "gridView": "Chế độ xem lưới",
-  "@gridView": {},
-  "listView": "Dạng danh sách",
-  "@listView": {},
-  "compactView": "Chế độ xem gọn",
-  "@compactView": {},
-  "episodeWatched": "Tập đã xem",
-  "@episodeWatched": {},
-  "mostFavourite": "{type} yêu thích nhất",
-  "@mostFavourite": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa"
-        ]
-      }
-    }
-  },
-  "popular": "{type} phổ biến",
-  "@popular": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa"
-        ]
-      }
-    }
-  },
-  "topRated": "{type} đánh giá cao nhất",
-  "@topRated": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa",
-          "Series"
-        ]
-      }
-    }
-  },
-  "thisSeason": "Mùa này",
-  "@thisSeason": {},
-  "nextSeason": "Mùa tới",
-  "@nextSeason": {},
-  "previousSeason": "Mùa trước",
-  "@previousSeason": {},
-  "noDropped": "Bạn chưa bỏ qua {type} nào.",
-  "@noDropped": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "characters": "Nhân vật",
-  "@characters": {},
-  "favorites": "Yêu thích",
-  "@favorites": {},
-  "format": "Định dạng",
-  "@format": {},
-  "meanScore": "Điểm trung bình",
-  "@meanScore": {},
-  "name": "Tên",
-  "@name": {},
-  "prequel": "Tiền truyện",
-  "@prequel": {},
-  "relations": "Liên quan",
-  "@relations": {},
-  "sequel": "Hậu truyện",
-  "@sequel": {},
-  "source": "Nguồn",
-  "@source": {},
-  "staff": "Nhân viên",
-  "@staff": {},
-  "startDate": "Ngày bắt đầu",
-  "@startDate": {},
-  "status": "Trạng thái",
-  "@status": {},
-  "studio": "Xưởng phim",
-  "@studio": {},
-  "synonyms": "Từ đồng nghĩa",
-  "@synonyms": {},
-  "tags": "Thẻ",
-  "@tags": {},
-  "total": "Tổng",
-  "@total": {},
-  "totalEpisodes": "Tập",
-  "@totalEpisodes": {},
-  "totalChapters": "Chương",
-  "@totalChapters": {},
-  "author": "Tác giả",
-  "@author": {},
-  "averageDuration": "Thời gian trung bình",
-  "@averageDuration": {},
-  "collapseText": "xem ít hơn",
-  "@collapseText": {},
-  "comingSoon": "Sắp ra mắt",
-  "@comingSoon": {},
-  "description": "Tóm tắt",
-  "@description": {},
-  "endDate": "Ngày kết thúc",
-  "@endDate": {},
-  "expandText": "xem thêm",
-  "@expandText": {},
-  "nameRomaji": "Tên (Romaji)",
-  "@nameRomaji": {},
-  "popularity": "Độ phổ biến",
-  "@popularity": {},
-  "synopsis": "Tóm tắt",
-  "@synopsis": {},
-  "loginTo": "Đăng nhập vào {service}",
-  "@loginTo": {
-    "placeholders": {
-      "service": {
-        "type": "String",
-        "examples": [
-          "Anilist",
-          "MyAnimeList",
-          "Kitsu",
-          "Discord"
-        ]
-      }
-    }
-  },
-  "manhwa": "Manhwa",
-  "@manhwa": {},
-  "manhua": "Manhua",
-  "@manhua": {},
-  "home": "Trang chủ",
-  "@home": {},
-  "novel": "Tiểu thuyết",
-  "@novel": {},
-  "chapterRead": "Chương đã đọc",
-  "@chapterRead": {},
-  "available": "{type} có sẵn",
-  "@available": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "installed": "{type} đã cài đặt",
-  "@installed": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Extensions"
-        ]
-      }
-    }
-  },
-  "trending": "Xu hướng {type}",
-  "@trending": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "activity": "{count, plural, =1 {Hoạt động} other {Các Hoạt động}}",
-  "@activity": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "planned": "Dự định {type}",
-  "@planned": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "browse": "Duyệt {type}",
-  "@browse": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "favorite": "Yêu thích {type}",
-  "@favorite": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "onHold": "Tạm dừng {type}",
-  "@onHold": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "continueWatching": "Tiếp tục xem",
-  "@continueWatching": {},
-  "recommended": "Được khuyến nghị",
-  "@recommended": {},
-  "noFavourites": "Có vẻ bạn chưa thích gì,\nHãy thử thích một chương trình để giữ nó ở đây.",
-  "@noFavourites": {},
-  "comments": "Bình luận",
-  "@comments": {},
-  "addToList": "Thêm vào danh sách",
-  "@addToList": {},
-  "continueReading": "Tiếp tục đọc",
-  "@continueReading": {},
-  "info": "Thông tin",
-  "@info": {},
-  "language": "Ngôn ngữ",
-  "@language": {},
-  "list": "Danh sách {type}",
-  "@list": {
-    "placeholders": {
-      "type": {
-        "examples": "Anime list",
-        "type": "String"
-      }
-    }
-  },
-  "layout": "Bố cục",
-  "@layout": {},
-  "noHiddenMediaFound": "Không tìm thấy media ẩn",
-  "@noHiddenMediaFound": {},
-  "read": "Đọc",
-  "@read": {},
-  "search": "Tìm kiếm",
-  "@search": {},
-  "scanlators": "Nhóm quét",
-  "@scanlators": {},
-  "options": "Tùy chọn",
-  "@options": {},
-  "sort": "Sắp xếp",
-  "@sort": {},
-  "topAiring": "Chương trình phát sóng hàng đầu",
-  "@topAiring": {},
-  "watch": "Xem",
-  "@watch": {},
-  "utd": "Lên xuống",
-  "@utd": {},
-  "pickColor": "Chọn màu",
-  "@pickColor": {},
-  "allCaughtUpNew": "Đã theo kịp, có gì mới?",
-  "@allCaughtUpNew": {},
-  "droppedAnime": "Anime đã bỏ",
-  "@droppedAnime": {},
-  "droppedManga": "Manga đã bỏ",
-  "@droppedManga": {},
-  "hiddenMedia": "Media ẩn",
-  "@hiddenMedia": {},
-  "noOnHold": "Có vẻ bạn chưa tạm dừng gì.",
-  "@noOnHold": {},
-  "recentUpdates": "Cập nhật gần đây",
-  "@recentUpdates": {},
-  "recommendationsEmptyMessage": "Xem/Đọc một số Anime hoặc Manga để nhận khuyến nghị",
-  "@recommendationsEmptyMessage": {},
-  "kitsu": "Kitsu",
-  "@kitsu": {},
-  "simkl": "Simkl",
-  "@simkl": {},
-  "logFile": "Tệp Nhật Ký",
-  "@logFile": {},
-  "colorPickerCustom": "Tùy chỉnh",
-  "@colorPickerCustom": {},
-  "addNovelRepo": "Thêm kho tiểu thuyết",
-  "@addNovelRepo": {},
-  "colorPickerDefault": "Mặc Định",
-  "@colorPickerDefault": {},
-  "logFileDescription": "Chia sẻ tệp nhật ký",
-  "@logFileDescription": {},
-  "addAnimeRepo": "Thêm kho anime",
-  "@addAnimeRepo": {},
-  "loadExtensionsIconDesc": "Tắt nếu trang tiện ích mở rộng bị lag",
-  "@loadExtensionsIconDesc": {},
-  "autoUpdateDesc": "Tự động cập nhật tiện ích mở rộng",
-  "@autoUpdateDesc": {},
-  "addNovelRepoDesc": "Thêm kho tiểu thuyết từ nhiều nguồn khác nhau",
-  "@addNovelRepoDesc": {},
-  "addMangaRepoDesc": "Thêm kho manga từ nhiều nguồn khác nhau",
-  "@addMangaRepoDesc": {},
-  "addAnimeRepoDesc": "Thêm kho anime từ nhiều nguồn khác nhau",
-  "@addAnimeRepoDesc": {},
-  "addMangaRepo": "Thêm kho manga",
-  "@addMangaRepo": {},
-  "selectDirectory": "Chọn một thư mục",
-  "@selectDirectory": {},
-  "customPathDescription": "Đặt đường dẫn tùy chỉnh để lưu tệp\nNhấn lâu để xóa",
-  "@customPathDescription": {},
-  "autoUpdate": "Tự động cập nhật",
-  "@autoUpdate": {},
-  "loadExtensionsIcon": "Tải biểu tượng tiện ích mở rộng",
-  "@loadExtensionsIcon": {},
-  "selectMediaService": "Chọn dịch vụ truyền thông",
-  "@selectMediaService": {},
-  "customPath": "Đường dẫn tùy chỉnh",
-  "@customPath": {},
-  "noChapterFound": "Không tìm thấy chương",
-  "@noChapterFound": {},
-  "watching": "Đang xem",
-  "@watching": {},
-  "outOf": "trong số",
-  "@outOf": {},
-  "selected": "Đã chọn",
-  "@selected": {},
-  "readStatus": "Đọc",
-  "@readStatus": {},
-  "youTube": "Phát trên YouTube?",
-  "@youTube": {},
-  "mediaNotFound": "Không tìm thấy phương tiện",
-  "@mediaNotFound": {},
-  "found": "Đã tìm thấy",
-  "@found": {},
-  "watchStatus": "Đã xem",
-  "@watchStatus": {},
-  "totalOf": "Tổng số",
-  "@totalOf": {},
-  "wrongTitle": "Tiêu đề sai?",
-  "@wrongTitle": {},
-  "installSourceToStart": "Cài đặt nguồn từ trang tiện ích mở rộng để bắt đầu",
-  "@installSourceToStart": {},
-  "webView": "Chế độ xem Web",
-  "@webView": {},
-  "reading": "Đang đọc",
-  "@reading": {},
-  "hidePageNumberDesc": "Hide page number while reading",
-  "@hidePageNumberDesc": {},
-  "hidePageNumber": "Hide Page Number",
-  "@hidePageNumber": {},
-  "thumbLessSeekBar": "ThumbLess SeekBar",
-  "@thumbLessSeekBar": {},
-  "developersHelpersDesc": "Dartotsu's unpaid labours",
-  "@developersHelpersDesc": {},
-  "developersHelpers": "Developers/Helpers",
-  "@developersHelpers": {},
-  "thumbLessSeekBarDesc": "Remove thumb from the seek bar",
-  "@thumbLessSeekBarDesc": {},
-  "differentCacheManagerDesc": "Use different Image cache manager",
-  "@differentCacheManagerDesc": {},
-  "differentCacheManager": "Different Cache Manager",
-  "@differentCacheManager": {},
-  "spacedPagesDesc": "Add space between pages",
-  "@spacedPagesDesc": {},
-  "spacedPages": "Spaced Pages",
-  "@spacedPages": {},
-  "readerSettingsDesc": "Change reader settings",
-  "@readerSettingsDesc": {},
-  "playerSettingsDesc": "Change player settings",
-  "@playerSettingsDesc": {},
-  "hideScrollbarDesc": "Hide scrollbar while reading",
-  "@hideScrollbarDesc": {},
-  "direction": "Direction",
-  "@direction": {},
-  "readerSettings": "Reader Settings",
-  "@readerSettings": {},
-  "hideScrollbar": "Hide Scrollbar",
-  "@hideScrollbar": {}
+    "appName": "Dartotsu",
+    "@appName": {},
+    "appTagline": "Ứng dụng TỐT NHẤT MỚI Để\nTheo Dõi Anime & Manga",
+    "@appTagline": {},
+    "backgroundColor": "Màu nền",
+    "@backgroundColor": {},
+    "backgroundColorDescription": "Màu nền phụ đề",
+    "@backgroundColorDescription": {},
+    "bottomPadding": "Khoảng cách dưới",
+    "@bottomPadding": {},
+    "colorPicker": "Chọn màu",
+    "@colorPicker": {},
+    "colorPickerDescription": "Chọn một màu",
+    "@colorPickerDescription": {},
+    "common": "Cài đặt chung",
+    "@common": {},
+    "extension": "{count, plural, =1 {Tiện ích} other {Các Tiện ích}}",
+    "@extension": {},
+    "fontSize": "Kích thước chữ",
+    "@fontSize": {},
+    "fontSizeDescription": "Kích thước chữ của phụ đề",
+    "@fontSizeDescription": {},
+    "fontWeight": "Độ dày chữ",
+    "@fontWeight": {},
+    "no": "Không",
+    "@no": {},
+    "yes": "Có",
+    "@yes": {},
+    "about": "Giới thiệu",
+    "@about": {},
+    "aboutDescription": "Tìm hiểu thêm về ứng dụng và người sáng tạo",
+    "@aboutDescription": {},
+    "account": "Tài khoản",
+    "@account": {},
+    "accountDescription": "Quản lý tài khoản AniList, MAL và Discord của bạn một cách dễ dàng",
+    "@accountDescription": {},
+    "anime": "Anime",
+    "@anime": {},
+    "animeDescription": "Cá nhân hóa và quản lý sở thích anime của bạn",
+    "@animeDescription": {},
+    "anilist": "AniList",
+    "@anilist": {},
+    "bottomPaddingDescription": "Khoảng cách dưới của phụ đề",
+    "@bottomPaddingDescription": {},
+    "cancel": "Hủy",
+    "@cancel": {},
+    "commonDescription": "Truy cập cài đặt chung để sử dụng ứng dụng dễ dàng hơn",
+    "@commonDescription": {},
+    "cursedSpeed": "Tốc độ nhanh",
+    "@cursedSpeed": {},
+    "cursedSpeedDescription": "Dành cho những người quá bận rộn với cuộc sống",
+    "@cursedSpeedDescription": {},
+    "customTheme": "Giao diện tùy chỉnh",
+    "@customTheme": {},
+    "customThemeDescription": "Sử dụng màu sắc của riêng bạn cho giao diện",
+    "@customThemeDescription": {},
+    "darkMode": "Chế độ tối",
+    "@darkMode": {},
+    "discord": "Discord",
+    "@discord": {},
+    "donationGoal": "Hiện không có mục tiêu quyên góp",
+    "@donationGoal": {},
+    "enableDarkMode": "Bật chế độ tối",
+    "@enableDarkMode": {},
+    "extensionsDescription": "Cài đặt và quản lý tiện ích mở rộng để tăng cường tính năng",
+    "@extensionsDescription": {},
+    "fontColor": "Màu chữ",
+    "@fontColor": {},
+    "fontColorDescription": "Màu chữ của phụ đề",
+    "@fontColorDescription": {},
+    "fontFamily": "Phông chữ",
+    "@fontFamily": {},
+    "fontFamilyDescription": "Phông chữ của phụ đề",
+    "@fontFamilyDescription": {},
+    "fontWeightDescription": "Độ dày chữ của phụ đề",
+    "@fontWeightDescription": {},
+    "hidePrivate": "Ẩn nội dung riêng tư",
+    "@hidePrivate": {},
+    "hidePrivateDescription": "Ẩn các series riêng tư khỏi trang chủ.",
+    "@hidePrivateDescription": {},
+    "incognitoMode": "Chế độ ẩn danh",
+    "@incognitoMode": {},
+    "incognitoModeDescription": "Duyệt mà không lưu hoạt động của bạn",
+    "@incognitoModeDescription": {},
+    "login": "Đăng nhập",
+    "@login": {},
+    "logout": "Đăng xuất {type}",
+    "@logout": {},
+    "mal": "MyAnimeList",
+    "@mal": {},
+    "manga": "Manga",
+    "@manga": {},
+    "mangaDescription": "Sắp xếp và cá nhân hóa trải nghiệm Manga của bạn",
+    "@mangaDescription": {},
+    "materialYou": "Material You",
+    "@materialYou": {},
+    "materialYouDescription": "Sử dụng cùng màu với hình nền của bạn",
+    "@materialYouDescription": {},
+    "notifications": "Thông báo",
+    "@notifications": {},
+    "notificationsDescription": "Cấu hình cách và thời điểm bạn nhận thông báo",
+    "@notificationsDescription": {},
+    "offlineMode": "Chế độ ngoại tuyến",
+    "@offlineMode": {},
+    "offlineModeDescription": "Sử dụng ứng dụng mà không cần kết nối internet",
+    "@offlineModeDescription": {},
+    "ok": "Đồng ý",
+    "@ok": {},
+    "oledThemeVariant": "Biến thể giao diện OLED",
+    "@oledThemeVariant": {},
+    "oledThemeVariantDescription": "Bật chế độ OLED",
+    "@oledThemeVariantDescription": {},
+    "outlineColor": "Màu viền",
+    "@outlineColor": {},
+    "outlineColorDescription": "Màu viền của phụ đề",
+    "@outlineColorDescription": {},
+    "playerSettingsTitle": "Cài đặt trình phát",
+    "@playerSettingsTitle": {},
+    "settings": "Cài đặt",
+    "@settings": {},
+    "resizeMode": "Chế độ thay đổi kích thước",
+    "@resizeMode": {},
+    "resizeModeDescription": "Chế độ thay đổi kích thước mặc định cho trình phát",
+    "@resizeModeDescription": {},
+    "restoreSettings": "Khôi phục cài đặt",
+    "@restoreSettings": {},
+    "showSubtitles": "Hiển thị phụ đề",
+    "@showSubtitles": {},
+    "showSubtitlesDescription": "Hiển thị phụ đề theo mặc định",
+    "@showSubtitlesDescription": {},
+    "skipButton": "Nút bỏ qua",
+    "@skipButton": {},
+    "skipButtonDescription": "Thời lượng của nút bỏ qua",
+    "@skipButtonDescription": {},
+    "speed": "Tốc độ",
+    "@speed": {},
+    "speedDescription": "Tốc độ mặc định của trình phát",
+    "@speedDescription": {},
+    "subtitles": "Phụ đề",
+    "@subtitles": {},
+    "subtitlePreview": "Xem trước phụ đề",
+    "@subtitlePreview": {},
+    "supportMaintainer": "Muốn hỗ trợ nhà phát triển Dartotsu?\nHãy xem xét việc quyên góp",
+    "@supportMaintainer": {},
+    "theme": "Giao diện",
+    "@theme": {},
+    "themeDescription": "Tùy chỉnh giao diện và phong cách của ứng dụng",
+    "@themeDescription": {},
+    "ln": "Tiểu thuyết ánh sáng",
+    "@ln": {},
+    "series": "Loạt phim",
+    "@series": {},
+    "season": "Mùa",
+    "@season": {},
+    "episode": "{count, plural, =1 {Tập} other {Các Tập}}",
+    "@episode": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "chapter": "{count, plural, =1 {Chương} other {Các Chương}}",
+    "@chapter": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "volume": "{count, plural, =1 {Tập} other {Các Tập}}",
+    "@volume": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "movie": "{count, plural, =1 {Phim} other {Các Phim}}",
+    "@movie": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "genres": "Thể loại",
+    "@genres": {},
+    "calendar": "Lịch",
+    "@calendar": {},
+    "dtu": "Dịch đến hiện tại",
+    "@dtu": {},
+    "manageLayout": "Quản lý bố cục trang {page} cho {service}",
+    "@manageLayout": {
+        "placeholders": {
+            "service": {
+                "type": "String",
+                "examples": [
+                    "Anilist",
+                    "MAL"
+                ]
+            },
+            "page": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Home",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "manageLayoutDescription": "Bạn có thể quản lý bố cục trang {page} bằng cách kéo và thả các mục",
+    "@manageLayoutDescription": {
+        "placeholders": {
+            "page": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Home",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "confirmLogout": "Bạn có chắc chắn muốn đăng xuất không?",
+    "@confirmLogout": {},
+    "gridView": "Chế độ xem lưới",
+    "@gridView": {},
+    "listView": "Dạng danh sách",
+    "@listView": {},
+    "compactView": "Chế độ xem gọn",
+    "@compactView": {},
+    "episodeWatched": "Tập đã xem",
+    "@episodeWatched": {},
+    "mostFavourite": "{type} yêu thích nhất",
+    "@mostFavourite": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa"
+                ]
+            }
+        }
+    },
+    "popular": "{type} phổ biến",
+    "@popular": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa"
+                ]
+            }
+        }
+    },
+    "topRated": "{type} đánh giá cao nhất",
+    "@topRated": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa",
+                    "Series"
+                ]
+            }
+        }
+    },
+    "thisSeason": "Mùa này",
+    "@thisSeason": {},
+    "nextSeason": "Mùa tới",
+    "@nextSeason": {},
+    "previousSeason": "Mùa trước",
+    "@previousSeason": {},
+    "noDropped": "Bạn chưa bỏ qua {type} nào.",
+    "@noDropped": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "characters": "Nhân vật",
+    "@characters": {},
+    "favorites": "Yêu thích",
+    "@favorites": {},
+    "format": "Định dạng",
+    "@format": {},
+    "meanScore": "Điểm trung bình",
+    "@meanScore": {},
+    "name": "Tên",
+    "@name": {},
+    "prequel": "Tiền truyện",
+    "@prequel": {},
+    "relations": "Liên quan",
+    "@relations": {},
+    "sequel": "Hậu truyện",
+    "@sequel": {},
+    "source": "Nguồn",
+    "@source": {},
+    "staff": "Nhân viên",
+    "@staff": {},
+    "startDate": "Ngày bắt đầu",
+    "@startDate": {},
+    "status": "Trạng thái",
+    "@status": {},
+    "studio": "Xưởng phim",
+    "@studio": {},
+    "synonyms": "Từ đồng nghĩa",
+    "@synonyms": {},
+    "tags": "Thẻ",
+    "@tags": {},
+    "total": "Tổng",
+    "@total": {},
+    "totalEpisodes": "Tập",
+    "@totalEpisodes": {},
+    "totalChapters": "Chương",
+    "@totalChapters": {},
+    "author": "Tác giả",
+    "@author": {},
+    "averageDuration": "Thời gian trung bình",
+    "@averageDuration": {},
+    "collapseText": "xem ít hơn",
+    "@collapseText": {},
+    "comingSoon": "Sắp ra mắt",
+    "@comingSoon": {},
+    "endDate": "Ngày kết thúc",
+    "@endDate": {},
+    "expandText": "xem thêm",
+    "@expandText": {},
+    "nameRomaji": "Tên (Romaji)",
+    "@nameRomaji": {},
+    "popularity": "Độ phổ biến",
+    "@popularity": {},
+    "synopsis": "Tóm tắt",
+    "@synopsis": {},
+    "loginTo": "Đăng nhập vào {service}",
+    "@loginTo": {
+        "placeholders": {
+            "service": {
+                "type": "String",
+                "examples": [
+                    "Anilist",
+                    "MyAnimeList",
+                    "Kitsu",
+                    "Discord"
+                ]
+            }
+        }
+    },
+    "manhwa": "Manhwa",
+    "@manhwa": {},
+    "manhua": "Manhua",
+    "@manhua": {},
+    "home": "Trang chủ",
+    "@home": {},
+    "novel": "Tiểu thuyết",
+    "@novel": {},
+    "chapterRead": "Chương đã đọc",
+    "@chapterRead": {},
+    "available": "{type} có sẵn",
+    "@available": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "installed": "{type} đã cài đặt",
+    "@installed": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Extensions"
+                ]
+            }
+        }
+    },
+    "trending": "Xu hướng {type}",
+    "@trending": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "activity": "{count, plural, =1 {Hoạt động} other {Các Hoạt động}}",
+    "@activity": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "planned": "Dự định {type}",
+    "@planned": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "browse": "Duyệt {type}",
+    "@browse": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "favorite": "Yêu thích {type}",
+    "@favorite": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "onHold": "Tạm dừng {type}",
+    "@onHold": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "continueWatching": "Tiếp tục xem",
+    "@continueWatching": {},
+    "recommended": "Được khuyến nghị",
+    "@recommended": {},
+    "noFavourites": "Có vẻ bạn chưa thích gì,\nHãy thử thích một chương trình để giữ nó ở đây.",
+    "@noFavourites": {},
+    "comments": "Bình luận",
+    "@comments": {},
+    "addToList": "Thêm vào danh sách",
+    "@addToList": {},
+    "continueReading": "Tiếp tục đọc",
+    "@continueReading": {},
+    "info": "Thông tin",
+    "@info": {},
+    "language": "Ngôn ngữ",
+    "@language": {},
+    "list": "Danh sách {type}",
+    "@list": {
+        "placeholders": {
+            "type": {
+                "examples": "Anime list",
+                "type": "String"
+            }
+        }
+    },
+    "layout": "Bố cục",
+    "@layout": {},
+    "noHiddenMediaFound": "Không tìm thấy media ẩn",
+    "@noHiddenMediaFound": {},
+    "read": "Đọc",
+    "@read": {},
+    "search": "Tìm kiếm",
+    "@search": {},
+    "scanlators": "Nhóm quét",
+    "@scanlators": {},
+    "options": "Tùy chọn",
+    "@options": {},
+    "sort": "Sắp xếp",
+    "@sort": {},
+    "topAiring": "Chương trình phát sóng hàng đầu",
+    "@topAiring": {},
+    "watch": "Xem",
+    "@watch": {},
+    "utd": "Lên xuống",
+    "@utd": {},
+    "pickColor": "Chọn màu",
+    "@pickColor": {},
+    "allCaughtUpNew": "Đã theo kịp, có gì mới?",
+    "@allCaughtUpNew": {},
+    "droppedAnime": "Anime đã bỏ",
+    "@droppedAnime": {},
+    "droppedManga": "Manga đã bỏ",
+    "@droppedManga": {},
+    "hiddenMedia": "Media ẩn",
+    "@hiddenMedia": {},
+    "noOnHold": "Có vẻ bạn chưa tạm dừng gì.",
+    "@noOnHold": {},
+    "recentUpdates": "Cập nhật gần đây",
+    "@recentUpdates": {},
+    "recommendationsEmptyMessage": "Xem/Đọc một số Anime hoặc Manga để nhận khuyến nghị",
+    "@recommendationsEmptyMessage": {},
+    "kitsu": "Kitsu",
+    "@kitsu": {},
+    "simkl": "Simkl",
+    "@simkl": {},
+    "logFile": "Tệp Nhật Ký",
+    "@logFile": {},
+    "colorPickerCustom": "Tùy chỉnh",
+    "@colorPickerCustom": {},
+    "addNovelRepo": "Thêm kho tiểu thuyết",
+    "@addNovelRepo": {},
+    "colorPickerDefault": "Mặc Định",
+    "@colorPickerDefault": {},
+    "logFileDescription": "Chia sẻ tệp nhật ký",
+    "@logFileDescription": {},
+    "addAnimeRepo": "Thêm kho anime",
+    "@addAnimeRepo": {},
+    "loadExtensionsIconDesc": "Tắt nếu trang tiện ích mở rộng bị lag",
+    "@loadExtensionsIconDesc": {},
+    "autoUpdateDesc": "Tự động cập nhật tiện ích mở rộng",
+    "@autoUpdateDesc": {},
+    "addNovelRepoDesc": "Thêm kho tiểu thuyết từ nhiều nguồn khác nhau",
+    "@addNovelRepoDesc": {},
+    "addMangaRepoDesc": "Thêm kho manga từ nhiều nguồn khác nhau",
+    "@addMangaRepoDesc": {},
+    "addAnimeRepoDesc": "Thêm kho anime từ nhiều nguồn khác nhau",
+    "@addAnimeRepoDesc": {},
+    "addMangaRepo": "Thêm kho manga",
+    "@addMangaRepo": {},
+    "selectDirectory": "Chọn một thư mục",
+    "@selectDirectory": {},
+    "customPathDescription": "Đặt đường dẫn tùy chỉnh để lưu tệp\nNhấn lâu để xóa",
+    "@customPathDescription": {},
+    "autoUpdate": "Tự động cập nhật",
+    "@autoUpdate": {},
+    "loadExtensionsIcon": "Tải biểu tượng tiện ích mở rộng",
+    "@loadExtensionsIcon": {},
+    "selectMediaService": "Chọn dịch vụ truyền thông",
+    "@selectMediaService": {},
+    "customPath": "Đường dẫn tùy chỉnh",
+    "@customPath": {},
+    "noChapterFound": "Không tìm thấy chương",
+    "@noChapterFound": {},
+    "watching": "Đang xem",
+    "@watching": {},
+    "outOf": "trong số",
+    "@outOf": {},
+    "selected": "Đã chọn",
+    "@selected": {},
+    "readStatus": "Đọc",
+    "@readStatus": {},
+    "youTube": "Phát trên YouTube?",
+    "@youTube": {},
+    "mediaNotFound": "Không tìm thấy phương tiện",
+    "@mediaNotFound": {},
+    "found": "Đã tìm thấy",
+    "@found": {},
+    "watchStatus": "Đã xem",
+    "@watchStatus": {},
+    "totalOf": "Tổng số",
+    "@totalOf": {},
+    "wrongTitle": "Tiêu đề sai?",
+    "@wrongTitle": {},
+    "installSourceToStart": "Cài đặt nguồn từ trang tiện ích mở rộng để bắt đầu",
+    "@installSourceToStart": {},
+    "webView": "Chế độ xem Web",
+    "@webView": {},
+    "reading": "Đang đọc",
+    "@reading": {},
+    "hidePageNumberDesc": "Hide page number while reading",
+    "@hidePageNumberDesc": {},
+    "hidePageNumber": "Hide Page Number",
+    "@hidePageNumber": {},
+    "thumbLessSeekBar": "ThumbLess SeekBar",
+    "@thumbLessSeekBar": {},
+    "developersHelpersDesc": "Dartotsu's unpaid labours",
+    "@developersHelpersDesc": {},
+    "developersHelpers": "Developers/Helpers",
+    "@developersHelpers": {},
+    "thumbLessSeekBarDesc": "Remove thumb from the seek bar",
+    "@thumbLessSeekBarDesc": {},
+    "differentCacheManagerDesc": "Use different Image cache manager",
+    "@differentCacheManagerDesc": {},
+    "differentCacheManager": "Different Cache Manager",
+    "@differentCacheManager": {},
+    "spacedPagesDesc": "Add space between pages",
+    "@spacedPagesDesc": {},
+    "spacedPages": "Spaced Pages",
+    "@spacedPages": {},
+    "readerSettingsDesc": "Change reader settings",
+    "@readerSettingsDesc": {},
+    "playerSettingsDesc": "Change player settings",
+    "@playerSettingsDesc": {},
+    "hideScrollbarDesc": "Hide scrollbar while reading",
+    "@hideScrollbarDesc": {},
+    "direction": "Direction",
+    "@direction": {},
+    "readerSettings": "Reader Settings",
+    "@readerSettings": {},
+    "hideScrollbar": "Hide Scrollbar",
+    "@hideScrollbar": {},
+    "glassEffect": "Glass Effect",
+    "@glassEffect": {},
+    "ltr": "Left To Right",
+    "@ltr": {},
+    "coverThemeDescription": "Use media cover image as theme color",
+    "@coverThemeDescription": {},
+    "rtl": "Right To Left",
+    "@rtl": {},
+    "glassEffectDescription": "Gives a frosted glass effect to the app",
+    "@glassEffectDescription": {},
+    "nextEpisodeRelease": "Episode {episode} will be released in",
+    "@nextEpisodeRelease": {
+        "description": "Message showing the next episode info",
+        "placeholders": {
+            "episode": {
+                "type": "int"
+            }
+        }
+    },
+    "topScore": "Top Score",
+    "@topScore": {},
+    "coverTheme": "Use Cover Theme",
+    "@coverTheme": {},
+    "customMPVDescription": "Enable this option to use your own MPV configuration file. Place your custom config at: {path}",
+    "@customMPVDescription": {
+        "placeholders": {
+            "path": {
+                "type": "String"
+            }
+        }
+    },
+    "customMPV": "Custom MPV Configuration",
+    "@customMPV": {}
 }

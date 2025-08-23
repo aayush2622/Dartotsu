@@ -1,632 +1,663 @@
 {
-  "about": "Hakkında",
-  "@about": {},
-  "aboutDescription": "Uygulama ve geliştiricileri hakkında daha fazla bilgi edinin",
-  "@aboutDescription": {},
-  "fontWeight": "Yazı Kalınlığı",
-  "@fontWeight": {},
-  "fontWeightDescription": "Altyazı yazı kalınlığı",
-  "@fontWeightDescription": {},
-  "offlineModeDescription": "Uygulamayı internet bağlantısı olmadan kullanın",
-  "@offlineModeDescription": {},
-  "ok": "Tamam",
-  "@ok": {},
-  "skipButtonDescription": "Atla düğmesi süresi",
-  "@skipButtonDescription": {},
-  "speed": "Hız",
-  "@speed": {},
-  "account": "Hesap",
-  "@account": {},
-  "accountDescription": "AniList, MAL ve Discord hesaplarınızı kolayca yönetin",
-  "@accountDescription": {},
-  "anime": "Anime",
-  "@anime": {},
-  "animeDescription": "Anime tercihlerinizi kişiselleştirin ve yönetin",
-  "@animeDescription": {},
-  "anilist": "AniList",
-  "@anilist": {},
-  "appName": "Dartotsu",
-  "@appName": {},
-  "bottomPadding": "Alt Boşluk",
-  "@bottomPadding": {},
-  "appTagline": "Anime ve Manga Takibi İçin\nYENİ En İyi Uygulama",
-  "@appTagline": {},
-  "backgroundColor": "Arka Plan Rengi",
-  "@backgroundColor": {},
-  "backgroundColorDescription": "Altyazı arka plan rengi",
-  "@backgroundColorDescription": {},
-  "bottomPaddingDescription": "Altyazı alt boşluğu",
-  "@bottomPaddingDescription": {},
-  "cancel": "İptal",
-  "@cancel": {},
-  "colorPicker": "Renk Seçici",
-  "@colorPicker": {},
-  "colorPickerDescription": "Bir renk seçin",
-  "@colorPickerDescription": {},
-  "common": "Genel",
-  "@common": {},
-  "commonDescription": "Kesintisiz uygulama kullanımı için genel ayarlara erişin",
-  "@commonDescription": {},
-  "cursedSpeed": "Hızlı Mod",
-  "@cursedSpeed": {},
-  "cursedSpeedDescription": "Hayatı fazla yoğun olanlar için",
-  "@cursedSpeedDescription": {},
-  "customTheme": "Özel Tema",
-  "@customTheme": {},
-  "customThemeDescription": "Tema için kendi renginizi kullanın",
-  "@customThemeDescription": {},
-  "darkMode": "Karanlık Mod",
-  "@darkMode": {},
-  "discord": "Discord",
-  "@discord": {},
-  "donationGoal": "Şu anda bağış hedefi yok",
-  "@donationGoal": {},
-  "enableDarkMode": "Karanlık Modu Etkinleştir",
-  "@enableDarkMode": {},
-  "extension": "{count, plural, =1 {Eklenti} other {Eklentiler}}",
-  "@extension": {},
-  "extensionsDescription": "Ek işlevsellik için eklentileri yükleyin ve yönetin",
-  "@extensionsDescription": {},
-  "fontColor": "Yazı Rengi",
-  "@fontColor": {},
-  "fontColorDescription": "Altyazı yazı rengi",
-  "@fontColorDescription": {},
-  "fontFamily": "Yazı Tipi",
-  "@fontFamily": {},
-  "fontFamilyDescription": "Altyazı yazı tipi",
-  "@fontFamilyDescription": {},
-  "fontSize": "Yazı Boyutu",
-  "@fontSize": {},
-  "fontSizeDescription": "Altyazı yazı boyutu",
-  "@fontSizeDescription": {},
-  "hidePrivate": "Özelleri Gizle",
-  "@hidePrivate": {},
-  "hidePrivateDescription": "Anasayfada özel serileri gizle.",
-  "@hidePrivateDescription": {},
-  "incognitoMode": "Gizli Mod",
-  "@incognitoMode": {},
-  "incognitoModeDescription": "Etkinliğinizi kaydetmeden göz atın",
-  "@incognitoModeDescription": {},
-  "login": "Giriş Yap",
-  "@login": {},
-  "logout": "Çıkış Yap {type}",
-  "@logout": {},
-  "mal": "MyAnimeList",
-  "@mal": {},
-  "manga": "Manga",
-  "@manga": {},
-  "mangaDescription": "Manga deneyiminizi organize edin ve özelleştirin",
-  "@mangaDescription": {},
-  "materialYou": "Material You",
-  "@materialYou": {},
-  "materialYouDescription": "Duvar kağıdınızla aynı rengi kullanın",
-  "@materialYouDescription": {},
-  "no": "Hayır",
-  "@no": {},
-  "notifications": "Bildirimler",
-  "@notifications": {},
-  "notificationsDescription": "Bildirimleri nasıl ve ne zaman alacağınızı yapılandırın",
-  "@notificationsDescription": {},
-  "offlineMode": "Çevrimdışı Mod",
-  "@offlineMode": {},
-  "oledThemeVariant": "OLED Tema Seçeneği",
-  "@oledThemeVariant": {},
-  "oledThemeVariantDescription": "OLED Modunu Etkinleştir",
-  "@oledThemeVariantDescription": {},
-  "outlineColor": "Çerçeve Rengi",
-  "@outlineColor": {},
-  "outlineColorDescription": "Altyazı çerçeve rengi",
-  "@outlineColorDescription": {},
-  "playerSettingsTitle": "Oynatıcı Ayarları",
-  "@playerSettingsTitle": {},
-  "resizeMode": "Boyutlandırma Modu",
-  "@resizeMode": {},
-  "resizeModeDescription": "Oynatıcı için varsayılan boyutlandırma modu",
-  "@resizeModeDescription": {},
-  "restoreSettings": "Ayarları Geri Yükle",
-  "@restoreSettings": {},
-  "settings": "Ayarlar",
-  "@settings": {},
-  "showSubtitles": "Altyazıları Göster",
-  "@showSubtitles": {},
-  "showSubtitlesDescription": "Varsayılan olarak altyazıları göster",
-  "@showSubtitlesDescription": {},
-  "skipButton": "Atla Düğmesi",
-  "@skipButton": {},
-  "speedDescription": "Oynatıcı için varsayılan hız",
-  "@speedDescription": {},
-  "subtitles": "Altyazılar",
-  "@subtitles": {},
-  "subtitlePreview": "Altyazı Önizlemesi",
-  "@subtitlePreview": {},
-  "supportMaintainer": "Dartotsu'nun Geliştiricisini Desteklemek mi İstiyorsunuz?\nBağış Yapmayı Düşünün",
-  "@supportMaintainer": {},
-  "theme": "Tema",
-  "@theme": {},
-  "themeDescription": "Uygulamanızın görünümünü ve havasını özelleştirin",
-  "@themeDescription": {},
-  "yes": "Evet",
-  "@yes": {},
-  "episode": "{count, plural, =1 {Bölüm} other {Kısımlar}}",
-  "@episode": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "chapter": "{count, plural, =1 {Bölüm} other {Bölümler}}",
-  "@chapter": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "volume": "{count, plural, =1 {Cilt} other {Ciltler}}",
-  "@volume": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "movie": "{count, plural, =1 {Film} other {Filmler}}",
-  "@movie": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "genres": "Türler",
-  "@genres": {},
-  "calendar": "Takvim",
-  "@calendar": {},
-  "search": "Ara",
-  "@search": {},
-  "scanlators": "Çevirmenler",
-  "@scanlators": {},
-  "confirmLogout": "Çıkış yapmak istediğinizden emin misiniz?",
-  "@confirmLogout": {},
-  "nextSeason": "Gelecek Sezon",
-  "@nextSeason": {},
-  "previousSeason": "Önceki Sezon",
-  "@previousSeason": {},
-  "activity": "{count, plural, =1 {Aktivite} other {Aktiviteler}}",
-  "@activity": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "planned": "Planlanan {type}",
-  "@planned": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "browse": "{type}'e Gözat",
-  "@browse": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "favorite": "Favori {type}",
-  "@favorite": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "noDropped": "Henüz herhangi bir {type} bırakmadınız.",
-  "@noDropped": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "description": "Özet",
-  "@description": {},
-  "endDate": "Bitiş Tarihi",
-  "@endDate": {},
-  "expandText": "daha fazla göster",
-  "@expandText": {},
-  "favorites": "Favoriler",
-  "@favorites": {},
-  "format": "Format",
-  "@format": {},
-  "meanScore": "Ortalama Puan",
-  "@meanScore": {},
-  "name": "Ad",
-  "@name": {},
-  "nameRomaji": "Ad (Romaji)",
-  "@nameRomaji": {},
-  "popularity": "Popülerlik",
-  "@popularity": {},
-  "prequel": "Önceki",
-  "@prequel": {},
-  "staff": "Ekip",
-  "@staff": {},
-  "startDate": "Başlangıç Tarihi",
-  "@startDate": {},
-  "status": "Durum",
-  "@status": {},
-  "studio": "Stüdyo",
-  "@studio": {},
-  "synonyms": "Eşanlamlılar",
-  "@synonyms": {},
-  "synopsis": "Özet",
-  "@synopsis": {},
-  "tags": "Etiketler",
-  "@tags": {},
-  "totalChapters": "Bölümler",
-  "@totalChapters": {},
-  "collapseText": "daha az göster",
-  "@collapseText": {},
-  "relations": "İlişkiler",
-  "@relations": {},
-  "sequel": "Sonraki",
-  "@sequel": {},
-  "source": "Kaynak",
-  "@source": {},
-  "author": "Yazar",
-  "@author": {},
-  "averageDuration": "Ortalama Süre",
-  "@averageDuration": {},
-  "characters": "Karakterler",
-  "@characters": {},
-  "comingSoon": "Yakında Geliyor",
-  "@comingSoon": {},
-  "total": "Toplam",
-  "@total": {},
-  "totalEpisodes": "Kısımlar",
-  "@totalEpisodes": {},
-  "loginTo": "{service}'ye Giriş Yap",
-  "@loginTo": {
-    "placeholders": {
-      "service": {
-        "type": "String",
-        "examples": [
-          "Anilist",
-          "MyAnimeList",
-          "Kitsu",
-          "Discord"
-        ]
-      }
-    }
-  },
-  "manhwa": "Manhwa",
-  "@manhwa": {},
-  "manhua": "Manhua",
-  "@manhua": {},
-  "home": "Ana Sayfa",
-  "@home": {},
-  "novel": "Novel",
-  "@novel": {},
-  "ln": "Light Novel",
-  "@ln": {},
-  "addToList": "Listeye Ekle",
-  "@addToList": {},
-  "series": "Seri",
-  "@series": {},
-  "season": "Sezon",
-  "@season": {},
-  "gridView": "Izgara Görünümü",
-  "@gridView": {},
-  "listView": "Liste Görünümü",
-  "@listView": {},
-  "compactView": "Kompakt Görünüm",
-  "@compactView": {},
-  "episodeWatched": "İzlenen Bölüm",
-  "@episodeWatched": {},
-  "chapterRead": "Okunan Bölüm",
-  "@chapterRead": {},
-  "available": "Mevcut {type}",
-  "@available": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "installed": "Yüklenmiş {type}",
-  "@installed": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Extensions"
-        ]
-      }
-    }
-  },
-  "trending": "Trend {type}",
-  "@trending": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "mostFavourite": "En Favori {type}",
-  "@mostFavourite": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa"
-        ]
-      }
-    }
-  },
-  "popular": "Popüler {type}",
-  "@popular": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa"
-        ]
-      }
-    }
-  },
-  "topAiring": "En İyi Yayınlanan",
-  "@topAiring": {},
-  "topRated": "En Yüksek Puanlı {type}",
-  "@topRated": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa",
-          "Series"
-        ]
-      }
-    }
-  },
-  "thisSeason": "Bu Sezon",
-  "@thisSeason": {},
-  "onHold": "Beklemede {type}",
-  "@onHold": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "allCaughtUpNew": "Her şey tamamlandı, yeni ne var?",
-  "@allCaughtUpNew": {},
-  "droppedAnime": "Bırakılan Anime",
-  "@droppedAnime": {},
-  "comments": "Yorumlar",
-  "@comments": {},
-  "continueReading": "Okumaya Devam Et",
-  "@continueReading": {},
-  "continueWatching": "İzlemeye Devam Et",
-  "@continueWatching": {},
-  "dtu": "Aşağıdan Yukarıya",
-  "@dtu": {},
-  "hiddenMedia": "Gizli Medya",
-  "@hiddenMedia": {},
-  "info": "Bilgi",
-  "@info": {},
-  "list": "{type} Listesi",
-  "@list": {
-    "placeholders": {
-      "type": {
-        "examples": "Anime list",
-        "type": "String"
-      }
-    }
-  },
-  "layout": "Düzen",
-  "@layout": {},
-  "language": "Dil",
-  "@language": {},
-  "options": "Seçenekler",
-  "@options": {},
-  "read": "Oku",
-  "@read": {},
-  "recentUpdates": "Son Güncellemeler",
-  "@recentUpdates": {},
-  "sort": "Sırala",
-  "@sort": {},
-  "watch": "İzle",
-  "@watch": {},
-  "utd": "Yukarıdan Aşağıya",
-  "@utd": {},
-  "manageLayout": "{service} için {page} sayfasının düzenini yönet",
-  "@manageLayout": {
-    "placeholders": {
-      "service": {
-        "type": "String",
-        "examples": [
-          "Anilist",
-          "MAL"
-        ]
-      },
-      "page": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Home",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "manageLayoutDescription": "{page} sayfasının düzenini sürükleyip bırakarak yönetebilirsiniz",
-  "@manageLayoutDescription": {
-    "placeholders": {
-      "page": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Home",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "pickColor": "Bir renk seç",
-  "@pickColor": {},
-  "droppedManga": "Bırakılan Manga",
-  "@droppedManga": {},
-  "noFavourites": "Görünüşe göre hiç bir şeyi beğenmediniz,\nBurada tutmak için bir seri beğenmeyi deneyin.",
-  "@noFavourites": {},
-  "noHiddenMediaFound": "Gizli medya bulunamadı",
-  "@noHiddenMediaFound": {},
-  "noOnHold": "Görünüşe göre hiçbir şeyi beklemede tutmamışsınız.",
-  "@noOnHold": {},
-  "recommendationsEmptyMessage": "Tavsiyeler almak için biraz Anime veya Manga izleyin/okuyun",
-  "@recommendationsEmptyMessage": {},
-  "recommended": "Tavsiye Edilen",
-  "@recommended": {},
-  "kitsu": "Kitsu",
-  "@kitsu": {},
-  "simkl": "Simkl",
-  "@simkl": {},
-  "logFile": "Log Dosyası",
-  "@logFile": {},
-  "logFileDescription": "Log dosyasını paylaşın",
-  "@logFileDescription": {},
-  "colorPickerDefault": "Varsayılan olarak",
-  "@colorPickerDefault": {},
-  "colorPickerCustom": "Özel",
-  "@colorPickerCustom": {},
-  "addAnimeRepo": "Anime Repo'su Ekle",
-  "@addAnimeRepo": {},
-  "loadExtensionsIconDesc": "Eklentiler sayfası kasıyorsa kapatın",
-  "@loadExtensionsIconDesc": {},
-  "autoUpdateDesc": "Eklentileri Otomatik Güncelle",
-  "@autoUpdateDesc": {},
-  "addNovelRepoDesc": "Çeşitli kaynaklardan Novel Repo'su ekleyin",
-  "@addNovelRepoDesc": {},
-  "addMangaRepoDesc": "Çeşitli kaynaklardan Manga Repo'su ekleyin",
-  "@addMangaRepoDesc": {},
-  "addAnimeRepoDesc": "Çeşitli kaynaklardan Anime Repo'su ekleyin",
-  "@addAnimeRepoDesc": {},
-  "addMangaRepo": "Manga Repo'su Ekle",
-  "@addMangaRepo": {},
-  "addNovelRepo": "Novel Depo'su Ekle",
-  "@addNovelRepo": {},
-  "selectDirectory": "Bir dizi seçin",
-  "@selectDirectory": {},
-  "autoUpdate": "Otomatik Güncelleme",
-  "@autoUpdate": {},
-  "loadExtensionsIcon": "Eklenti Simgelerini Yükle",
-  "@loadExtensionsIcon": {},
-  "selectMediaService": "Medya Servisi Seç",
-  "@selectMediaService": {},
-  "customPath": "Özel Yol",
-  "@customPath": {},
-  "customPathDescription": "Dosyaları kaydetmek için özel bir yol ayarlayın\nYolu kaldırmak için uzun basın",
-  "@customPathDescription": {},
-  "noChapterFound": "Hiçbir bölüm bulunamadı",
-  "@noChapterFound": {},
-  "watching": "İzleniyor",
-  "@watching": {},
-  "outOf": "şu kadardan",
-  "@outOf": {},
-  "selected": "Seçili",
-  "@selected": {},
-  "readStatus": "Oku",
-  "@readStatus": {},
-  "youTube": "YouTube'da oynayın?",
-  "@youTube": {},
-  "mediaNotFound": "Medya bulunamadı",
-  "@mediaNotFound": {},
-  "found": "Bulundu",
-  "@found": {},
-  "watchStatus": "İzledim",
-  "@watchStatus": {},
-  "installSourceToStart": "Başlamak için Eklentiler sayfasından bir eklenti yükleyin",
-  "@installSourceToStart": {},
-  "webView": "Web View",
-  "@webView": {},
-  "reading": "Okuyor",
-  "@reading": {},
-  "totalOf": "Toplamı",
-  "@totalOf": {},
-  "wrongTitle": "Yanlış Başlık?",
-  "@wrongTitle": {},
-  "thumbLessSeekBarDesc": "Arama çubuğundan başparmak",
-  "@thumbLessSeekBarDesc": {},
-  "spacedPagesDesc": "Sayfalar arasında yer ekleyin",
-  "@spacedPagesDesc": {},
-  "spacedPages": "Aralıklı Sayfalar",
-  "@spacedPages": {},
-  "readerSettingsDesc": "Change okuyucu ayarları",
-  "@readerSettingsDesc": {},
-  "readerSettings": "Okuyucu Ayarları",
-  "@readerSettings": {},
-  "hidePageNumberDesc": "Gizle sayfa numarası okurken",
-  "@hidePageNumberDesc": {},
-  "thumbLessSeekBar": "DuaLes SeekBar",
-  "@thumbLessSeekBar": {},
-  "developersHelpersDesc": "Dartotsu'nun ödenmemiş işgücü",
-  "@developersHelpersDesc": {},
-  "developersHelpers": "Geliştiriciler / Yardımcılar",
-  "@developersHelpers": {},
-  "hidePageNumber": "Sayfa Numarasını Gizle",
-  "@hidePageNumber": {},
-  "differentCacheManagerDesc": "Farklı Image önbellek yöneticisi kullanın",
-  "@differentCacheManagerDesc": {},
-  "differentCacheManager": "Farklı Rehber Yöneticisi",
-  "@differentCacheManager": {},
-  "hideScrollbarDesc": "Hide kaydırmabar okurken",
-  "@hideScrollbarDesc": {},
-  "direction": "Yönellem",
-  "@direction": {},
-  "hideScrollbar": "Kaydırma Çubuğunu Gizle",
-  "@hideScrollbar": {},
-  "playerSettingsDesc": "Change player ayarları",
-  "@playerSettingsDesc": {}
+    "about": "Hakkında",
+    "@about": {},
+    "aboutDescription": "Uygulama ve geliştiricileri hakkında daha fazla bilgi edinin",
+    "@aboutDescription": {},
+    "fontWeight": "Yazı Kalınlığı",
+    "@fontWeight": {},
+    "fontWeightDescription": "Altyazı yazı kalınlığı",
+    "@fontWeightDescription": {},
+    "offlineModeDescription": "Uygulamayı internet bağlantısı olmadan kullanın",
+    "@offlineModeDescription": {},
+    "ok": "Tamam",
+    "@ok": {},
+    "skipButtonDescription": "Atla düğmesi süresi",
+    "@skipButtonDescription": {},
+    "speed": "Hız",
+    "@speed": {},
+    "account": "Hesap",
+    "@account": {},
+    "accountDescription": "AniList, MAL ve Discord hesaplarınızı kolayca yönetin",
+    "@accountDescription": {},
+    "anime": "Anime",
+    "@anime": {},
+    "animeDescription": "Anime tercihlerinizi kişiselleştirin ve yönetin",
+    "@animeDescription": {},
+    "anilist": "AniList",
+    "@anilist": {},
+    "appName": "Dartotsu",
+    "@appName": {},
+    "bottomPadding": "Alt Boşluk",
+    "@bottomPadding": {},
+    "appTagline": "Anime ve Manga Takibi İçin\nYENİ En İyi Uygulama",
+    "@appTagline": {},
+    "backgroundColor": "Arka Plan Rengi",
+    "@backgroundColor": {},
+    "backgroundColorDescription": "Altyazı arka plan rengi",
+    "@backgroundColorDescription": {},
+    "bottomPaddingDescription": "Altyazı alt boşluğu",
+    "@bottomPaddingDescription": {},
+    "cancel": "İptal",
+    "@cancel": {},
+    "colorPicker": "Renk Seçici",
+    "@colorPicker": {},
+    "colorPickerDescription": "Bir renk seçin",
+    "@colorPickerDescription": {},
+    "common": "Genel",
+    "@common": {},
+    "commonDescription": "Kesintisiz uygulama kullanımı için genel ayarlara erişin",
+    "@commonDescription": {},
+    "cursedSpeed": "Hızlı Mod",
+    "@cursedSpeed": {},
+    "cursedSpeedDescription": "Hayatı fazla yoğun olanlar için",
+    "@cursedSpeedDescription": {},
+    "customTheme": "Özel Özel Özel Tema",
+    "@customTheme": {},
+    "customThemeDescription": "Tema için kendi renginizi kullanın",
+    "@customThemeDescription": {},
+    "darkMode": "Karanlık Mod",
+    "@darkMode": {},
+    "discord": "Discord",
+    "@discord": {},
+    "donationGoal": "Şu anda bağış hedefi yok",
+    "@donationGoal": {},
+    "enableDarkMode": "Karanlık Modu Etkinleştir",
+    "@enableDarkMode": {},
+    "extension": "{count, plural, =1 {Eklenti} other {Eklentiler}}",
+    "@extension": {},
+    "extensionsDescription": "Ek işlevsellik için eklentileri yükleyin ve yönetin",
+    "@extensionsDescription": {},
+    "fontColor": "Yazı Rengi",
+    "@fontColor": {},
+    "fontColorDescription": "Altyazı yazı rengi",
+    "@fontColorDescription": {},
+    "fontFamily": "Yazı Tipi",
+    "@fontFamily": {},
+    "fontFamilyDescription": "Altyazı yazı tipi",
+    "@fontFamilyDescription": {},
+    "fontSize": "Yazı Boyutu",
+    "@fontSize": {},
+    "fontSizeDescription": "Altyazı yazı boyutu",
+    "@fontSizeDescription": {},
+    "hidePrivate": "Özelleri Gizle",
+    "@hidePrivate": {},
+    "hidePrivateDescription": "Anasayfada özel serileri gizle.",
+    "@hidePrivateDescription": {},
+    "incognitoMode": "Gizli Mod",
+    "@incognitoMode": {},
+    "incognitoModeDescription": "Etkinliğinizi kaydetmeden göz atın",
+    "@incognitoModeDescription": {},
+    "login": "Giriş Yap",
+    "@login": {},
+    "logout": "Çıkış Yap {type}",
+    "@logout": {},
+    "mal": "MyAnimeList",
+    "@mal": {},
+    "manga": "Manga",
+    "@manga": {},
+    "mangaDescription": "Manga deneyiminizi organize edin ve özelleştirin",
+    "@mangaDescription": {},
+    "materialYou": "Material You",
+    "@materialYou": {},
+    "materialYouDescription": "Duvar kağıdınızla aynı rengi kullanın",
+    "@materialYouDescription": {},
+    "no": "Hayır",
+    "@no": {},
+    "notifications": "Bildirimler",
+    "@notifications": {},
+    "notificationsDescription": "Bildirimleri nasıl ve ne zaman alacağınızı yapılandırın",
+    "@notificationsDescription": {},
+    "offlineMode": "Çevrimdışı Mod",
+    "@offlineMode": {},
+    "oledThemeVariant": "OLED Tema Seçeneği",
+    "@oledThemeVariant": {},
+    "oledThemeVariantDescription": "OLED Modunu Etkinleştir",
+    "@oledThemeVariantDescription": {},
+    "outlineColor": "Çerçeve Rengi",
+    "@outlineColor": {},
+    "outlineColorDescription": "Altyazı çerçeve rengi",
+    "@outlineColorDescription": {},
+    "playerSettingsTitle": "Oynatıcı Ayarları",
+    "@playerSettingsTitle": {},
+    "resizeMode": "Boyutlandırma Modu",
+    "@resizeMode": {},
+    "resizeModeDescription": "Oynatıcı için varsayılan boyutlandırma modu",
+    "@resizeModeDescription": {},
+    "restoreSettings": "Ayarları Geri Yükle",
+    "@restoreSettings": {},
+    "settings": "Ayarlar",
+    "@settings": {},
+    "showSubtitles": "Altyazıları Göster",
+    "@showSubtitles": {},
+    "showSubtitlesDescription": "Varsayılan olarak altyazıları göster",
+    "@showSubtitlesDescription": {},
+    "skipButton": "Atla Düğmesi",
+    "@skipButton": {},
+    "speedDescription": "Oynatıcı için varsayılan hız",
+    "@speedDescription": {},
+    "subtitles": "Altyazılar",
+    "@subtitles": {},
+    "subtitlePreview": "Altyazı Önizlemesi",
+    "@subtitlePreview": {},
+    "supportMaintainer": "Dartotsu'nun Geliştiricisini Desteklemek mi İstiyorsunuz?\nBağış Yapmayı Düşünün",
+    "@supportMaintainer": {},
+    "theme": "Tema",
+    "@theme": {},
+    "themeDescription": "Uygulamanızın görünümünü ve havasını özelleştirin",
+    "@themeDescription": {},
+    "yes": "Evet",
+    "@yes": {},
+    "episode": "{count, plural, =1 {Bölüm} other {Kısımlar}}",
+    "@episode": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "chapter": "{count, plural, =1 {Bölüm} other {Bölümler}}",
+    "@chapter": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "volume": "{count, plural, =1 {Cilt} other {Ciltler}}",
+    "@volume": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "movie": "{count, plural, =1 {Film} other {Filmler}}",
+    "@movie": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "genres": "Türler",
+    "@genres": {},
+    "calendar": "Takvim",
+    "@calendar": {},
+    "search": "Ara",
+    "@search": {},
+    "scanlators": "Çevirmenler",
+    "@scanlators": {},
+    "confirmLogout": "Çıkış yapmak istediğinizden emin misiniz?",
+    "@confirmLogout": {},
+    "nextSeason": "Gelecek Sezon",
+    "@nextSeason": {},
+    "previousSeason": "Önceki Sezon",
+    "@previousSeason": {},
+    "activity": "{count, plural, =1 {Aktivite} other {Aktiviteler}}",
+    "@activity": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "planned": "Planlanan {type}",
+    "@planned": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "browse": "{type}'e Gözat",
+    "@browse": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "favorite": "Favori {type}",
+    "@favorite": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "noDropped": "Henüz herhangi bir {type} bırakmadınız.",
+    "@noDropped": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "endDate": "Bitiş Tarihi",
+    "@endDate": {},
+    "expandText": "daha fazla göster",
+    "@expandText": {},
+    "favorites": "Favoriler",
+    "@favorites": {},
+    "format": "Format",
+    "@format": {},
+    "meanScore": "Ortalama Puan",
+    "@meanScore": {},
+    "name": "Ad",
+    "@name": {},
+    "nameRomaji": "Ad (Romaji)",
+    "@nameRomaji": {},
+    "popularity": "Popülerlik",
+    "@popularity": {},
+    "prequel": "Önceki",
+    "@prequel": {},
+    "staff": "Ekip",
+    "@staff": {},
+    "startDate": "Başlangıç Tarihi",
+    "@startDate": {},
+    "status": "Durum",
+    "@status": {},
+    "studio": "Stüdyo",
+    "@studio": {},
+    "synonyms": "Eşanlamlılar",
+    "@synonyms": {},
+    "synopsis": "Özet",
+    "@synopsis": {},
+    "tags": "Etiketler",
+    "@tags": {},
+    "totalChapters": "Bölümler",
+    "@totalChapters": {},
+    "collapseText": "daha az göster",
+    "@collapseText": {},
+    "relations": "İlişkiler",
+    "@relations": {},
+    "sequel": "Sonraki",
+    "@sequel": {},
+    "source": "Kaynak",
+    "@source": {},
+    "author": "Yazar",
+    "@author": {},
+    "averageDuration": "Ortalama Süre",
+    "@averageDuration": {},
+    "characters": "Karakterler",
+    "@characters": {},
+    "comingSoon": "Yakında Geliyor",
+    "@comingSoon": {},
+    "total": "Toplam",
+    "@total": {},
+    "totalEpisodes": "Kısımlar",
+    "@totalEpisodes": {},
+    "loginTo": "{service}'ye Giriş Yap",
+    "@loginTo": {
+        "placeholders": {
+            "service": {
+                "type": "String",
+                "examples": [
+                    "Anilist",
+                    "MyAnimeList",
+                    "Kitsu",
+                    "Discord"
+                ]
+            }
+        }
+    },
+    "manhwa": "Manhwa",
+    "@manhwa": {},
+    "manhua": "Manhua",
+    "@manhua": {},
+    "home": "Ana Sayfa",
+    "@home": {},
+    "novel": "Novel",
+    "@novel": {},
+    "ln": "Light Novel",
+    "@ln": {},
+    "addToList": "Listeye Ekle",
+    "@addToList": {},
+    "series": "Seri",
+    "@series": {},
+    "season": "Sezon",
+    "@season": {},
+    "gridView": "Izgara Görünümü",
+    "@gridView": {},
+    "listView": "Liste Görünümü",
+    "@listView": {},
+    "compactView": "Kompakt Görünüm",
+    "@compactView": {},
+    "episodeWatched": "İzlenen Bölüm",
+    "@episodeWatched": {},
+    "chapterRead": "Okunan Bölüm",
+    "@chapterRead": {},
+    "available": "Mevcut {type}",
+    "@available": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "installed": "Yüklenmiş {type}",
+    "@installed": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Extensions"
+                ]
+            }
+        }
+    },
+    "trending": "Trend {type}",
+    "@trending": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "mostFavourite": "En Favori {type}",
+    "@mostFavourite": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa"
+                ]
+            }
+        }
+    },
+    "popular": "Popüler {type}",
+    "@popular": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa"
+                ]
+            }
+        }
+    },
+    "topAiring": "En İyi Yayınlanan",
+    "@topAiring": {},
+    "topRated": "En Yüksek Puanlı {type}",
+    "@topRated": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa",
+                    "Series"
+                ]
+            }
+        }
+    },
+    "thisSeason": "Bu Sezon",
+    "@thisSeason": {},
+    "onHold": "Beklemede {type}",
+    "@onHold": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "allCaughtUpNew": "Her şey tamamlandı, yeni ne var?",
+    "@allCaughtUpNew": {},
+    "droppedAnime": "Bırakılan Anime",
+    "@droppedAnime": {},
+    "comments": "Yorumlar",
+    "@comments": {},
+    "continueReading": "Okumaya Devam Et",
+    "@continueReading": {},
+    "continueWatching": "İzlemeye Devam Et",
+    "@continueWatching": {},
+    "dtu": "Aşağıdan Yukarıya",
+    "@dtu": {},
+    "hiddenMedia": "Gizli Medya",
+    "@hiddenMedia": {},
+    "info": "Bilgi",
+    "@info": {},
+    "list": "{type} Listesi",
+    "@list": {
+        "placeholders": {
+            "type": {
+                "examples": "Anime list",
+                "type": "String"
+            }
+        }
+    },
+    "layout": "Düzen",
+    "@layout": {},
+    "language": "Dil",
+    "@language": {},
+    "options": "Seçenekler",
+    "@options": {},
+    "read": "Oku",
+    "@read": {},
+    "recentUpdates": "Son Güncellemeler",
+    "@recentUpdates": {},
+    "sort": "Sırala",
+    "@sort": {},
+    "watch": "İzle",
+    "@watch": {},
+    "utd": "Yukarıdan Aşağıya",
+    "@utd": {},
+    "manageLayout": "{service} için {page} sayfasının düzenini yönet",
+    "@manageLayout": {
+        "placeholders": {
+            "service": {
+                "type": "String",
+                "examples": [
+                    "Anilist",
+                    "MAL"
+                ]
+            },
+            "page": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Home",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "manageLayoutDescription": "{page} sayfasının düzenini sürükleyip bırakarak yönetebilirsiniz",
+    "@manageLayoutDescription": {
+        "placeholders": {
+            "page": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Home",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "pickColor": "Bir renk seç",
+    "@pickColor": {},
+    "droppedManga": "Bırakılan Manga",
+    "@droppedManga": {},
+    "noFavourites": "Görünüşe göre hiç bir şeyi beğenmediniz,\nBurada tutmak için bir seri beğenmeyi deneyin.",
+    "@noFavourites": {},
+    "noHiddenMediaFound": "Gizli medya bulunamadı",
+    "@noHiddenMediaFound": {},
+    "noOnHold": "Görünüşe göre hiçbir şeyi beklemede tutmamışsınız.",
+    "@noOnHold": {},
+    "recommendationsEmptyMessage": "Tavsiyeler almak için biraz Anime veya Manga izleyin/okuyun",
+    "@recommendationsEmptyMessage": {},
+    "recommended": "Tavsiye Edilen",
+    "@recommended": {},
+    "kitsu": "Kitsu",
+    "@kitsu": {},
+    "simkl": "Simkl",
+    "@simkl": {},
+    "logFile": "Log Dosyası",
+    "@logFile": {},
+    "logFileDescription": "Log dosyasını paylaşın",
+    "@logFileDescription": {},
+    "colorPickerDefault": "Varsayılan olarak",
+    "@colorPickerDefault": {},
+    "colorPickerCustom": "Özel",
+    "@colorPickerCustom": {},
+    "addAnimeRepo": "Anime Repo'su Ekle",
+    "@addAnimeRepo": {},
+    "loadExtensionsIconDesc": "Eklentiler sayfası kasıyorsa kapatın",
+    "@loadExtensionsIconDesc": {},
+    "autoUpdateDesc": "Eklentileri Otomatik Güncelle",
+    "@autoUpdateDesc": {},
+    "addNovelRepoDesc": "Çeşitli kaynaklardan Novel Repo'su ekleyin",
+    "@addNovelRepoDesc": {},
+    "addMangaRepoDesc": "Çeşitli kaynaklardan Manga Repo'su ekleyin",
+    "@addMangaRepoDesc": {},
+    "addAnimeRepoDesc": "Çeşitli kaynaklardan Anime Repo'su ekleyin",
+    "@addAnimeRepoDesc": {},
+    "addMangaRepo": "Manga Repo'su Ekle",
+    "@addMangaRepo": {},
+    "addNovelRepo": "Novel Depo'su Ekle",
+    "@addNovelRepo": {},
+    "selectDirectory": "Bir dizi seçin",
+    "@selectDirectory": {},
+    "autoUpdate": "Otomatik Güncelleme",
+    "@autoUpdate": {},
+    "loadExtensionsIcon": "Eklenti Simgelerini Yükle",
+    "@loadExtensionsIcon": {},
+    "selectMediaService": "Medya Servisi Seç",
+    "@selectMediaService": {},
+    "customPath": "Özel Yol",
+    "@customPath": {},
+    "customPathDescription": "Dosyaları kaydetmek için özel bir yol ayarlayın\nYolu kaldırmak için uzun basın",
+    "@customPathDescription": {},
+    "noChapterFound": "Hiçbir bölüm bulunamadı",
+    "@noChapterFound": {},
+    "watching": "İzleniyor",
+    "@watching": {},
+    "outOf": "şu kadardan",
+    "@outOf": {},
+    "selected": "Seçili",
+    "@selected": {},
+    "readStatus": "Oku",
+    "@readStatus": {},
+    "youTube": "YouTube'da oynayın?",
+    "@youTube": {},
+    "mediaNotFound": "Medya bulunamadı",
+    "@mediaNotFound": {},
+    "found": "Bulundu",
+    "@found": {},
+    "watchStatus": "İzledim",
+    "@watchStatus": {},
+    "installSourceToStart": "Başlamak için Eklentiler sayfasından bir eklenti yükleyin",
+    "@installSourceToStart": {},
+    "webView": "Web View",
+    "@webView": {},
+    "reading": "Okuyor",
+    "@reading": {},
+    "totalOf": "Toplamı",
+    "@totalOf": {},
+    "wrongTitle": "Yanlış Başlık?",
+    "@wrongTitle": {},
+    "thumbLessSeekBarDesc": "Arama çubuğundan başparmak",
+    "@thumbLessSeekBarDesc": {},
+    "spacedPagesDesc": "Sayfalar arasında yer ekleyin",
+    "@spacedPagesDesc": {},
+    "spacedPages": "Aralıklı Sayfalar",
+    "@spacedPages": {},
+    "readerSettingsDesc": "Change okuyucu ayarları",
+    "@readerSettingsDesc": {},
+    "readerSettings": "Okuyucu Ayarları",
+    "@readerSettings": {},
+    "hidePageNumberDesc": "Gizle sayfa numarası okurken",
+    "@hidePageNumberDesc": {},
+    "thumbLessSeekBar": "DuaLes SeekBar",
+    "@thumbLessSeekBar": {},
+    "developersHelpersDesc": "Dartotsu'nun ödenmemiş işgücü",
+    "@developersHelpersDesc": {},
+    "developersHelpers": "Geliştiriciler / Yardımcılar",
+    "@developersHelpers": {},
+    "hidePageNumber": "Sayfa Numarasını Gizle",
+    "@hidePageNumber": {},
+    "differentCacheManagerDesc": "Farklı Image önbellek yöneticisi kullanın",
+    "@differentCacheManagerDesc": {},
+    "differentCacheManager": "Farklı Rehber Yöneticisi",
+    "@differentCacheManager": {},
+    "hideScrollbarDesc": "Hide kaydırmabar okurken",
+    "@hideScrollbarDesc": {},
+    "direction": "Yönellem",
+    "@direction": {},
+    "hideScrollbar": "Kaydırma Çubuğunu Gizle",
+    "@hideScrollbar": {},
+    "playerSettingsDesc": "Change player ayarları",
+    "@playerSettingsDesc": {},
+    "glassEffect": "Cam Etkisi",
+    "@glassEffect": {},
+    "ltr": "Sağdan sağa",
+    "@ltr": {},
+    "coverThemeDescription": "Medya kapak görüntüsünü tema rengi olarak kullanın",
+    "@coverThemeDescription": {},
+    "rtl": "Sağdan sola",
+    "@rtl": {},
+    "glassEffectDescription": "Uygulamaya soğuk bir cam etkisi verir",
+    "@glassEffectDescription": {},
+    "nextEpisodeRelease": "Bölüm {episode} serbest bırakılacaktır",
+    "@nextEpisodeRelease": {
+        "description": "Message showing the next episode info",
+        "placeholders": {
+            "episode": {
+                "type": "int"
+            }
+        }
+    },
+    "topScore": "Top Score",
+    "@topScore": {},
+    "coverTheme": "Use Cover Theme",
+    "@coverTheme": {},
+    "customMPVDescription": "Enable this option to use your own MPV configuration file. Place your custom config at: {path}",
+    "@customMPVDescription": {
+        "placeholders": {
+            "path": {
+                "type": "String"
+            }
+        }
+    },
+    "customMPV": "Custom MPV Configuration",
+    "@customMPV": {}
 }

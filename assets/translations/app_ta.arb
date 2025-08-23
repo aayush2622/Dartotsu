@@ -1,632 +1,663 @@
 {
-  "appTagline": "புதிய சிறந்த பயன்பாடு\nஅனிமே மற்றும் மங்கா கண்காணிக்க",
-  "@appTagline": {},
-  "about": "பற்றி",
-  "@about": {},
-  "aboutDescription": "பயன்பாட்டையும் அதன் படைப்பாளர்களையும் பற்றி மேலும் அறியவும்",
-  "@aboutDescription": {},
-  "account": "கணக்கு",
-  "@account": {},
-  "common": "பொதுவான",
-  "@common": {},
-  "commonDescription": "பயன்பாட்டின் வழக்கமான அமைப்புகளை அணுகவும்",
-  "@commonDescription": {},
-  "extension": "{count, plural, =1 {விரிவாக்கம்} other {விரிவாக்கங்கள்}}",
-  "@extension": {},
-  "fontSize": "எழுத்து அளவு",
-  "@fontSize": {},
-  "incognitoMode": "இன்கோக்னிட்டோ முறை",
-  "@incognitoMode": {},
-  "login": "உள்நுழைக",
-  "@login": {},
-  "manga": "மங்கா",
-  "@manga": {},
-  "settings": "அமைப்புகள்",
-  "@settings": {},
-  "showSubtitles": "பட்டியல்கள் காட்சி",
-  "@showSubtitles": {},
-  "showSubtitlesDescription": "இயல்புநிலையில் பட்டியல்கள் காட்டவும்",
-  "@showSubtitlesDescription": {},
-  "skipButton": "தவிர்க்கும் பொத்தான்",
-  "@skipButton": {},
-  "speed": "வேகம்",
-  "@speed": {},
-  "speedDescription": "ப்ளேயருக்கான இயல்புநிலை வேகம்",
-  "@speedDescription": {},
-  "subtitles": "பட்டியல்கள்",
-  "@subtitles": {},
-  "theme": "தீமா",
-  "@theme": {},
-  "backgroundColor": "பின்புல நிறம்",
-  "@backgroundColor": {},
-  "backgroundColorDescription": "பொருத்தமான பின்புல நிறம்",
-  "@backgroundColorDescription": {},
-  "bottomPadding": "கீழ்-padding",
-  "@bottomPadding": {},
-  "bottomPaddingDescription": "பொருத்தமான கீழ்-padding",
-  "@bottomPaddingDescription": {},
-  "cancel": "ரத்து செய்",
-  "@cancel": {},
-  "colorPicker": "நிறத் தேர்வாளர்",
-  "@colorPicker": {},
-  "colorPickerDescription": "ஒரு நிறத்தை தேர்வு செய்",
-  "@colorPickerDescription": {},
-  "cursedSpeed": "பதியSpeed",
-  "@cursedSpeed": {},
-  "cursedSpeedDescription": "வாழ்க்கையில் மிகவும் பிஸியானவர்களுக்கானது",
-  "@cursedSpeedDescription": {},
-  "customTheme": "தனிப்பயனாக்கிய தீமா",
-  "@customTheme": {},
-  "customThemeDescription": "உங்கள் நிறத்தை தீமாவாக பயன்படுத்தவும்",
-  "@customThemeDescription": {},
-  "darkMode": "கருப்பு முறை",
-  "@darkMode": {},
-  "discord": "Discord",
-  "@discord": {},
-  "donationGoal": "தன்னார்வ நோக்கம் இல்லை",
-  "@donationGoal": {},
-  "no": "இல்லை",
-  "@no": {},
-  "enableDarkMode": "கருப்பு முறையை இயக்கவும்",
-  "@enableDarkMode": {},
-  "extensionsDescription": "சேர்க்கைகள் மற்றும் செயல்பாடுகளை மேலதிகமாக நிறுவவும்",
-  "@extensionsDescription": {},
-  "fontColor": "எழுத்து நிறம்",
-  "@fontColor": {},
-  "fontColorDescription": "பொருத்தமான எழுத்து நிறம்",
-  "@fontColorDescription": {},
-  "fontFamily": "எழுத்துப் குடும்பம்",
-  "@fontFamily": {},
-  "fontFamilyDescription": "பொருத்தமான எழுத்துப் குடும்பம்",
-  "@fontFamilyDescription": {},
-  "fontSizeDescription": "பொருத்தமான எழுத்து அளவு",
-  "@fontSizeDescription": {},
-  "fontWeight": "எழுத்தின் எடை",
-  "@fontWeight": {},
-  "fontWeightDescription": "பொருத்தமான எழுத்தின் எடை",
-  "@fontWeightDescription": {},
-  "hidePrivate": "தனியுரிமையை மறைக்கவும்",
-  "@hidePrivate": {},
-  "hidePrivateDescription": "மனைவிகளைக் கொடுத்து முகப்புப் பக்கத்தில் ஒத்திருக்கவும்.",
-  "@hidePrivateDescription": {},
-  "incognitoModeDescription": "உங்கள் செயல்பாடுகளை சேமிக்காமல் உலாவவும்",
-  "@incognitoModeDescription": {},
-  "logout": "{type} இல் வெளியேறு",
-  "@logout": {},
-  "mal": "MyAnimeList",
-  "@mal": {},
-  "mangaDescription": "உங்கள் மங்கா அனுபவத்தை ஒழுங்குபடுத்தவும் மற்றும் தனிப்பயனாக்கவும்",
-  "@mangaDescription": {},
-  "materialYou": "Material You",
-  "@materialYou": {},
-  "materialYouDescription": "உங்கள் கைவினைப் படத்தின் நிறத்தை பயன்படுத்தவும்",
-  "@materialYouDescription": {},
-  "notifications": "அறிவிப்புகள்",
-  "@notifications": {},
-  "notificationsDescription": "எப்போது மற்றும் எப்படி அறிவிப்புகள் பெறுவது என்பதை அமைக்கவும்",
-  "@notificationsDescription": {},
-  "offlineMode": "ஆஃப்லைன் முறை",
-  "@offlineMode": {},
-  "oledThemeVariant": "OLED தீமா மாறுபாடு",
-  "@oledThemeVariant": {},
-  "offlineModeDescription": "இணைய இணைப்பு இல்லாமல் பயன்பாட்டை பயன்படுத்தவும்",
-  "@offlineModeDescription": {},
-  "ok": "சரி",
-  "@ok": {},
-  "oledThemeVariantDescription": "OLED முறை செயல்படுத்தவும்",
-  "@oledThemeVariantDescription": {},
-  "outlineColor": "அசைவு நிறம்",
-  "@outlineColor": {},
-  "outlineColorDescription": "பொருத்தமான அசைவு நிறம்",
-  "@outlineColorDescription": {},
-  "playerSettingsTitle": "ப்ளேயர் அமைப்புகள்",
-  "@playerSettingsTitle": {},
-  "resizeMode": "பரிமாண முறை",
-  "@resizeMode": {},
-  "resizeModeDescription": "ப்ளேயருக்கான இயல்புநிலை பரிமாண முறை",
-  "@resizeModeDescription": {},
-  "restoreSettings": "அமைப்புகளை மீட்டமைக்கவும்",
-  "@restoreSettings": {},
-  "skipButtonDescription": "தவிர்க்கும் பொத்தானின் கால அளவு",
-  "@skipButtonDescription": {},
-  "subtitlePreview": "பட்டியலின் முன்னோட்டம்",
-  "@subtitlePreview": {},
-  "supportMaintainer": "Dartotsu பராமரிப்பாளரை ஆதரிக்க விரும்புகிறீர்களா?\nதனியுரிமையாக வழங்கலை பரிசீலிக்கவும்",
-  "@supportMaintainer": {},
-  "themeDescription": "உங்கள் பயன்பாட்டின் தோற்றத்தை மற்றும் வாட்டையை தனிப்பயனாக்கவும்",
-  "@themeDescription": {},
-  "yes": "ஆமாம்",
-  "@yes": {},
-  "accountDescription": "உங்கள் AniList, MAL மற்றும் Discord கணக்குகளை எளிதாக நிர்வகிக்கவும்",
-  "@accountDescription": {},
-  "anime": "அனிமே",
-  "@anime": {},
-  "animeDescription": "உங்கள் அனிமே விருப்பங்களை தனிப்பயனாக்கி நிர்வகிக்கவும்",
-  "@animeDescription": {},
-  "anilist": "AniList",
-  "@anilist": {},
-  "appName": "Dartotsu",
-  "@appName": {},
-  "ln": "லைட் நாவல்",
-  "@ln": {},
-  "volume": "{count, plural, =1 {பரிமாணம்} other {பரிமாணங்கள்}}",
-  "@volume": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "total": "Total",
-  "@total": {},
-  "novel": "புத்தகம்",
-  "@novel": {},
-  "tags": "Tags",
-  "@tags": {},
-  "popular": "பிரபலமான {type}",
-  "@popular": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa"
-        ]
-      }
-    }
-  },
-  "name": "Name",
-  "@name": {},
-  "mostFavourite": "அதிக விருப்பமான {type}",
-  "@mostFavourite": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa"
-        ]
-      }
-    }
-  },
-  "meanScore": "Mean Score",
-  "@meanScore": {},
-  "series": "Series",
-  "@series": {},
-  "synopsis": "சுருக்கம்",
-  "@synopsis": {},
-  "nameRomaji": "பெயர் (ரோமாஜி)",
-  "@nameRomaji": {},
-  "averageDuration": "சராசரி கால அளவு",
-  "@averageDuration": {},
-  "comingSoon": "வென்றது உடனே வருகிறது",
-  "@comingSoon": {},
-  "episode": "{count, plural, =1 {பட்டியல்} other {பட்டியல்கள்}}",
-  "@episode": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "popularity": "பிரபலம்",
-  "@popularity": {},
-  "totalChapters": "அத்தியாயங்கள்",
-  "@totalChapters": {},
-  "favorites": "பிடித்தவை",
-  "@favorites": {},
-  "home": "Home",
-  "@home": {},
-  "prequel": "PREQUEL",
-  "@prequel": {},
-  "planned": "திட்டமிடப்பட்ட {type}",
-  "@planned": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "search": "தேடு",
-  "@search": {},
-  "collapseText": "சுருக்கவும்",
-  "@collapseText": {},
-  "chapter": "{count, plural, =1 {அத்தியாயம்} other {அத்தியாயங்கள்}}",
-  "@chapter": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "characters": "பாத்திரங்கள்",
-  "@characters": {},
-  "genres": "பரிமாணங்கள்",
-  "@genres": {},
-  "calendar": "கலண்டர்",
-  "@calendar": {},
-  "format": "வடிவமைப்பு",
-  "@format": {},
-  "expandText": "மேலும் காண்க",
-  "@expandText": {},
-  "manhua": "Manhua",
-  "@manhua": {},
-  "season": "பிரிவு",
-  "@season": {},
-  "author": "Author",
-  "@author": {},
-  "sequel": "SEQUEL",
-  "@sequel": {},
-  "studio": "Studio",
-  "@studio": {},
-  "staff": "சீனியர்",
-  "@staff": {},
-  "status": "Status",
-  "@status": {},
-  "relations": "Relations",
-  "@relations": {},
-  "source": "Source",
-  "@source": {},
-  "synonyms": "சமாதானம்",
-  "@synonyms": {},
-  "startDate": "Start Date",
-  "@startDate": {},
-  "description": "சுருக்கம்",
-  "@description": {},
-  "endDate": "End Date",
-  "@endDate": {},
-  "totalEpisodes": "பகுதிகள்",
-  "@totalEpisodes": {},
-  "manhwa": "Manhwa",
-  "@manhwa": {},
-  "kitsu": "Kitsu",
-  "@kitsu": {},
-  "loginTo": "{service} இல் புகுத்தவும்",
-  "@loginTo": {
-    "placeholders": {
-      "service": {
-        "type": "String",
-        "examples": [
-          "Anilist",
-          "MyAnimeList",
-          "Kitsu",
-          "Discord"
-        ]
-      }
-    }
-  },
-  "movie": "{count, plural, =1 {படம்} other {படங்கள்}}",
-  "@movie": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "scanlators": "ஸ்கான்லேட்டர்கள்",
-  "@scanlators": {},
-  "manageLayout": "{service} இல் {page} பக்கத்தின் வடிவமைப்பை நிர்வகிக்கவும்",
-  "@manageLayout": {
-    "placeholders": {
-      "service": {
-        "type": "String",
-        "examples": [
-          "Anilist",
-          "MAL"
-        ]
-      },
-      "page": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Home",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "dtu": "Down To Up",
-  "@dtu": {},
-  "list": "{type} பட்டியல்",
-  "@list": {
-    "placeholders": {
-      "type": {
-        "examples": "Anime list",
-        "type": "String"
-      }
-    }
-  },
-  "confirmLogout": "நீங்கள் வெளியேற விரும்புகிறீர்களா?",
-  "@confirmLogout": {},
-  "gridView": "கிரிட் பார்வை",
-  "@gridView": {},
-  "compactView": "சுருக்கமான பார்வை",
-  "@compactView": {},
-  "listView": "List View",
-  "@listView": {},
-  "installed": "நிறுத்தப்பட்ட {type}",
-  "@installed": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Extensions"
-        ]
-      }
-    }
-  },
-  "chapterRead": "அத்தியாயம் படித்தது",
-  "@chapterRead": {},
-  "episodeWatched": "பட்டியல் பார்வை",
-  "@episodeWatched": {},
-  "available": "கிடைக்கும் {type}",
-  "@available": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "layout": "Layout",
-  "@layout": {},
-  "thisSeason": "இந்த பருவம்",
-  "@thisSeason": {},
-  "trending": "பிரபலமாக உள்ள {type}",
-  "@trending": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "topRated": "முதன்மை மதிப்பீடு {type}",
-  "@topRated": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa",
-          "Series"
-        ]
-      }
-    }
-  },
-  "nextSeason": "அடுத்த பருவம்",
-  "@nextSeason": {},
-  "previousSeason": "முந்தைய பருவம்",
-  "@previousSeason": {},
-  "onHold": "ஒப்புதலுக்கு நேரிடப்பட்ட {type}",
-  "@onHold": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "favorite": "விருப்பமான {type}",
-  "@favorite": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "noDropped": "நீங்கள் எந்த {type} ஐயும் நிறுத்தவில்லை.",
-  "@noDropped": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "activity": "{count, plural, =1 {செயல்} other {செயல்கள்}}",
-  "@activity": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "browse": "பரிசோதனை {type}",
-  "@browse": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "continueReading": "படிக்க தொடரவும்",
-  "@continueReading": {},
-  "recommendationsEmptyMessage": "எந்த அநிமே அல்லது மாஙாவைப் பார்க்க/படிக்கவும் பரிந்துரைகள் பெற",
-  "@recommendationsEmptyMessage": {},
-  "sort": "திருத்து",
-  "@sort": {},
-  "options": "Options",
-  "@options": {},
-  "addToList": "Add To List",
-  "@addToList": {},
-  "comments": "கருத்துகள்",
-  "@comments": {},
-  "continueWatching": "பார்க்க தொடரவும்",
-  "@continueWatching": {},
-  "info": "Info",
-  "@info": {},
-  "language": "மொழி",
-  "@language": {},
-  "read": "படிக்கவும்",
-  "@read": {},
-  "topAiring": "முதன்மை ஒளிபரப்பு",
-  "@topAiring": {},
-  "watch": "பார்க்கவும்",
-  "@watch": {},
-  "utd": "மேல் இருந்து கீழே",
-  "@utd": {},
-  "manageLayoutDescription": "{page} பக்கத்தின் வடிவமைப்பை நிர்வகிக்கப் பயன்படுத்த நீங்கள் உருப்படிகளை இழுத்து விடலாம்",
-  "@manageLayoutDescription": {
-    "placeholders": {
-      "page": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Home",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "pickColor": "ஒரு நிறத்தைத் தேர்ந்தெடுக்கவும்",
-  "@pickColor": {},
-  "noFavourites": "உங்களுக்கு இதுவரை எதுவும் பிடிக்கவில்லை,\nஒரு நிகழ்ச்சியை விரும்பி இதை இங்கே வைத்திருங்கள்.",
-  "@noFavourites": {},
-  "noOnHold": "நீங்கள் எந்த ஒன்றையும் நிறுத்தவில்லை போல் தெரிகிறது.",
-  "@noOnHold": {},
-  "hiddenMedia": "மறைக்கப்பட்ட மீடியா",
-  "@hiddenMedia": {},
-  "noHiddenMediaFound": "மறைக்கப்பட்ட மீடியா எதுவும் கண்டறியவில்லை",
-  "@noHiddenMediaFound": {},
-  "droppedManga": "நிறுத்தப்பட்ட மாஙா",
-  "@droppedManga": {},
-  "droppedAnime": "நிறுத்தப்பட்ட அநிமே",
-  "@droppedAnime": {},
-  "allCaughtUpNew": "அனைத்து புதுப்பிக்கப்பட்டவை, புதியவை என்ன?",
-  "@allCaughtUpNew": {},
-  "recentUpdates": "இணையதள புதிய பதிவுகள்",
-  "@recentUpdates": {},
-  "recommended": "பரிந்துரைக்கப்பட்டது",
-  "@recommended": {},
-  "simkl": "Simkl",
-  "@simkl": {},
-  "logFile": "பதிவு கோப்பு",
-  "@logFile": {},
-  "colorPickerDefault": "இயல்புநிலை",
-  "@colorPickerDefault": {},
-  "logFileDescription": "பதிவு கோப்பைப் பகிரவும்",
-  "@logFileDescription": {},
-  "colorPickerCustom": "தனிப்பயன்",
-  "@colorPickerCustom": {},
-  "loadExtensionsIconDesc": "நீட்டிப்பு பக்கம் மந்தமாக இருந்தால் முடக்கு",
-  "@loadExtensionsIconDesc": {},
-  "autoUpdateDesc": "நீட்டிப்புகளை தானாக புதுப்பிக்கவும்",
-  "@autoUpdateDesc": {},
-  "addNovelRepoDesc": "வேறு விதமான மூலங்களில் இருந்து நாவல் பகிர்வகம் சேர்க்கவும்",
-  "@addNovelRepoDesc": {},
-  "addAnimeRepo": "ஆனிமே பகிர்வகம் சேர்க்கவும்",
-  "@addAnimeRepo": {},
-  "addMangaRepoDesc": "வேறு விதமான மூலங்களில் இருந்து மான்கா பகிர்வகம் சேர்க்கவும்",
-  "@addMangaRepoDesc": {},
-  "addAnimeRepoDesc": "வேறு விதமான மூலங்களில் இருந்து ஆனிமே பகிர்வகம் சேர்க்கவும்",
-  "@addAnimeRepoDesc": {},
-  "addMangaRepo": "மான்கா பகிர்வகம் சேர்க்கவும்",
-  "@addMangaRepo": {},
-  "addNovelRepo": "நாவல் பகிர்வகம் சேர்க்கவும்",
-  "@addNovelRepo": {},
-  "selectDirectory": "ஒரு கோப்பகத்தைத் தேர்ந்தெடுக்கவும்",
-  "@selectDirectory": {},
-  "customPathDescription": "கோப்புகளைச் சேமிக்க தனிப்பயன் பாதையை அமைக்கவும்\nஅகற்ற நீண்ட நேரம் அழுத்தவும்",
-  "@customPathDescription": {},
-  "autoUpdate": "தானியங்கும் புதுப்பிப்பு",
-  "@autoUpdate": {},
-  "loadExtensionsIcon": "நீட்டிப்புகளின் குறும்படங்களை ஏற்றுக",
-  "@loadExtensionsIcon": {},
-  "selectMediaService": "மீடியா சேவையைத் தேர்ந்தெடுக்கவும்",
-  "@selectMediaService": {},
-  "customPath": "தனிப்பயன் பாதை",
-  "@customPath": {},
-  "noChapterFound": "அதிகாரம் கிடைக்கவில்லை",
-  "@noChapterFound": {},
-  "watching": "பார்க்கிறது",
-  "@watching": {},
-  "outOf": "இதிலிருந்து",
-  "@outOf": {},
-  "selected": "தேர்ந்தெடுக்கப்பட்டது",
-  "@selected": {},
-  "readStatus": "படிக்கவும்",
-  "@readStatus": {},
-  "youTube": "YouTube-இல் இயக்கவா?",
-  "@youTube": {},
-  "mediaNotFound": "மீடியா கிடைக்கவில்லை",
-  "@mediaNotFound": {},
-  "found": "கிடைத்தது",
-  "@found": {},
-  "watchStatus": "பார்த்துவிட்டேன்",
-  "@watchStatus": {},
-  "totalOf": "மொத்தம்",
-  "@totalOf": {},
-  "wrongTitle": "தவறான தலைப்பு?",
-  "@wrongTitle": {},
-  "installSourceToStart": "தொடங்குவதற்கு நீட்டிப்பு பக்கத்திலிருந்து மூலத்தை நிறுவவும்",
-  "@installSourceToStart": {},
-  "webView": "வலைப் பார்வை",
-  "@webView": {},
-  "reading": "படிக்கிறது",
-  "@reading": {},
-  "direction": "Direction",
-  "@direction": {},
-  "thumbLessSeekBar": "ThumbLess SeekBar",
-  "@thumbLessSeekBar": {},
-  "readerSettings": "Reader Settings",
-  "@readerSettings": {},
-  "hidePageNumberDesc": "Hide page number while reading",
-  "@hidePageNumberDesc": {},
-  "developersHelpersDesc": "Dartotsu's unpaid labours",
-  "@developersHelpersDesc": {},
-  "developersHelpers": "Developers/Helpers",
-  "@developersHelpers": {},
-  "thumbLessSeekBarDesc": "Remove thumb from the seek bar",
-  "@thumbLessSeekBarDesc": {},
-  "hidePageNumber": "Hide Page Number",
-  "@hidePageNumber": {},
-  "differentCacheManagerDesc": "Use different Image cache manager",
-  "@differentCacheManagerDesc": {},
-  "differentCacheManager": "Different Cache Manager",
-  "@differentCacheManager": {},
-  "spacedPagesDesc": "Add space between pages",
-  "@spacedPagesDesc": {},
-  "spacedPages": "Spaced Pages",
-  "@spacedPages": {},
-  "readerSettingsDesc": "Change reader settings",
-  "@readerSettingsDesc": {},
-  "hideScrollbarDesc": "Hide scrollbar while reading",
-  "@hideScrollbarDesc": {},
-  "hideScrollbar": "Hide Scrollbar",
-  "@hideScrollbar": {},
-  "playerSettingsDesc": "Change player settings",
-  "@playerSettingsDesc": {}
+    "appTagline": "புதிய சிறந்த பயன்பாடு\nஅனிமே மற்றும் மங்கா கண்காணிக்க",
+    "@appTagline": {},
+    "about": "பற்றி",
+    "@about": {},
+    "aboutDescription": "பயன்பாட்டையும் அதன் படைப்பாளர்களையும் பற்றி மேலும் அறியவும்",
+    "@aboutDescription": {},
+    "account": "கணக்கு",
+    "@account": {},
+    "common": "பொதுவான",
+    "@common": {},
+    "commonDescription": "பயன்பாட்டின் வழக்கமான அமைப்புகளை அணுகவும்",
+    "@commonDescription": {},
+    "extension": "{count, plural, =1 {விரிவாக்கம்} other {விரிவாக்கங்கள்}}",
+    "@extension": {},
+    "fontSize": "எழுத்து அளவு",
+    "@fontSize": {},
+    "incognitoMode": "இன்கோக்னிட்டோ முறை",
+    "@incognitoMode": {},
+    "login": "உள்நுழைக",
+    "@login": {},
+    "manga": "மங்கா",
+    "@manga": {},
+    "settings": "அமைப்புகள்",
+    "@settings": {},
+    "showSubtitles": "பட்டியல்கள் காட்சி",
+    "@showSubtitles": {},
+    "showSubtitlesDescription": "இயல்புநிலையில் பட்டியல்கள் காட்டவும்",
+    "@showSubtitlesDescription": {},
+    "skipButton": "தவிர்க்கும் பொத்தான்",
+    "@skipButton": {},
+    "speed": "வேகம்",
+    "@speed": {},
+    "speedDescription": "ப்ளேயருக்கான இயல்புநிலை வேகம்",
+    "@speedDescription": {},
+    "subtitles": "பட்டியல்கள்",
+    "@subtitles": {},
+    "theme": "தீமா",
+    "@theme": {},
+    "backgroundColor": "பின்புல நிறம்",
+    "@backgroundColor": {},
+    "backgroundColorDescription": "பொருத்தமான பின்புல நிறம்",
+    "@backgroundColorDescription": {},
+    "bottomPadding": "கீழ்-padding",
+    "@bottomPadding": {},
+    "bottomPaddingDescription": "பொருத்தமான கீழ்-padding",
+    "@bottomPaddingDescription": {},
+    "cancel": "ரத்து செய்",
+    "@cancel": {},
+    "colorPicker": "நிறத் தேர்வாளர்",
+    "@colorPicker": {},
+    "colorPickerDescription": "ஒரு நிறத்தை தேர்வு செய்",
+    "@colorPickerDescription": {},
+    "cursedSpeed": "பதியSpeed",
+    "@cursedSpeed": {},
+    "cursedSpeedDescription": "வாழ்க்கையில் மிகவும் பிஸியானவர்களுக்கானது",
+    "@cursedSpeedDescription": {},
+    "customTheme": "தனிப்பயனாக்கிய தீமா",
+    "@customTheme": {},
+    "customThemeDescription": "உங்கள் நிறத்தை தீமாவாக பயன்படுத்தவும்",
+    "@customThemeDescription": {},
+    "darkMode": "கருப்பு முறை",
+    "@darkMode": {},
+    "discord": "Discord",
+    "@discord": {},
+    "donationGoal": "தன்னார்வ நோக்கம் இல்லை",
+    "@donationGoal": {},
+    "no": "இல்லை",
+    "@no": {},
+    "enableDarkMode": "கருப்பு முறையை இயக்கவும்",
+    "@enableDarkMode": {},
+    "extensionsDescription": "சேர்க்கைகள் மற்றும் செயல்பாடுகளை மேலதிகமாக நிறுவவும்",
+    "@extensionsDescription": {},
+    "fontColor": "எழுத்து நிறம்",
+    "@fontColor": {},
+    "fontColorDescription": "பொருத்தமான எழுத்து நிறம்",
+    "@fontColorDescription": {},
+    "fontFamily": "எழுத்துப் குடும்பம்",
+    "@fontFamily": {},
+    "fontFamilyDescription": "பொருத்தமான எழுத்துப் குடும்பம்",
+    "@fontFamilyDescription": {},
+    "fontSizeDescription": "பொருத்தமான எழுத்து அளவு",
+    "@fontSizeDescription": {},
+    "fontWeight": "எழுத்தின் எடை",
+    "@fontWeight": {},
+    "fontWeightDescription": "பொருத்தமான எழுத்தின் எடை",
+    "@fontWeightDescription": {},
+    "hidePrivate": "தனியுரிமையை மறைக்கவும்",
+    "@hidePrivate": {},
+    "hidePrivateDescription": "மனைவிகளைக் கொடுத்து முகப்புப் பக்கத்தில் ஒத்திருக்கவும்.",
+    "@hidePrivateDescription": {},
+    "incognitoModeDescription": "உங்கள் செயல்பாடுகளை சேமிக்காமல் உலாவவும்",
+    "@incognitoModeDescription": {},
+    "logout": "{type} இல் வெளியேறு",
+    "@logout": {},
+    "mal": "MyAnimeList",
+    "@mal": {},
+    "mangaDescription": "உங்கள் மங்கா அனுபவத்தை ஒழுங்குபடுத்தவும் மற்றும் தனிப்பயனாக்கவும்",
+    "@mangaDescription": {},
+    "materialYou": "Material You",
+    "@materialYou": {},
+    "materialYouDescription": "உங்கள் கைவினைப் படத்தின் நிறத்தை பயன்படுத்தவும்",
+    "@materialYouDescription": {},
+    "notifications": "அறிவிப்புகள்",
+    "@notifications": {},
+    "notificationsDescription": "எப்போது மற்றும் எப்படி அறிவிப்புகள் பெறுவது என்பதை அமைக்கவும்",
+    "@notificationsDescription": {},
+    "offlineMode": "ஆஃப்லைன் முறை",
+    "@offlineMode": {},
+    "oledThemeVariant": "OLED தீமா மாறுபாடு",
+    "@oledThemeVariant": {},
+    "offlineModeDescription": "இணைய இணைப்பு இல்லாமல் பயன்பாட்டை பயன்படுத்தவும்",
+    "@offlineModeDescription": {},
+    "ok": "சரி",
+    "@ok": {},
+    "oledThemeVariantDescription": "OLED முறை செயல்படுத்தவும்",
+    "@oledThemeVariantDescription": {},
+    "outlineColor": "அசைவு நிறம்",
+    "@outlineColor": {},
+    "outlineColorDescription": "பொருத்தமான அசைவு நிறம்",
+    "@outlineColorDescription": {},
+    "playerSettingsTitle": "ப்ளேயர் அமைப்புகள்",
+    "@playerSettingsTitle": {},
+    "resizeMode": "பரிமாண முறை",
+    "@resizeMode": {},
+    "resizeModeDescription": "ப்ளேயருக்கான இயல்புநிலை பரிமாண முறை",
+    "@resizeModeDescription": {},
+    "restoreSettings": "அமைப்புகளை மீட்டமைக்கவும்",
+    "@restoreSettings": {},
+    "skipButtonDescription": "தவிர்க்கும் பொத்தானின் கால அளவு",
+    "@skipButtonDescription": {},
+    "subtitlePreview": "பட்டியலின் முன்னோட்டம்",
+    "@subtitlePreview": {},
+    "supportMaintainer": "Dartotsu பராமரிப்பாளரை ஆதரிக்க விரும்புகிறீர்களா?\nதனியுரிமையாக வழங்கலை பரிசீலிக்கவும்",
+    "@supportMaintainer": {},
+    "themeDescription": "உங்கள் பயன்பாட்டின் தோற்றத்தை மற்றும் வாட்டையை தனிப்பயனாக்கவும்",
+    "@themeDescription": {},
+    "yes": "ஆமாம்",
+    "@yes": {},
+    "accountDescription": "உங்கள் AniList, MAL மற்றும் Discord கணக்குகளை எளிதாக நிர்வகிக்கவும்",
+    "@accountDescription": {},
+    "anime": "அனிமே",
+    "@anime": {},
+    "animeDescription": "உங்கள் அனிமே விருப்பங்களை தனிப்பயனாக்கி நிர்வகிக்கவும்",
+    "@animeDescription": {},
+    "anilist": "AniList",
+    "@anilist": {},
+    "appName": "Dartotsu",
+    "@appName": {},
+    "ln": "லைட் நாவல்",
+    "@ln": {},
+    "volume": "{count, plural, =1 {பரிமாணம்} other {பரிமாணங்கள்}}",
+    "@volume": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "total": "Total",
+    "@total": {},
+    "novel": "புத்தகம்",
+    "@novel": {},
+    "tags": "Tags",
+    "@tags": {},
+    "popular": "பிரபலமான {type}",
+    "@popular": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa"
+                ]
+            }
+        }
+    },
+    "name": "Name",
+    "@name": {},
+    "mostFavourite": "அதிக விருப்பமான {type}",
+    "@mostFavourite": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa"
+                ]
+            }
+        }
+    },
+    "meanScore": "Mean Score",
+    "@meanScore": {},
+    "series": "Series",
+    "@series": {},
+    "synopsis": "சுருக்கம்",
+    "@synopsis": {},
+    "nameRomaji": "பெயர் (ரோமாஜி)",
+    "@nameRomaji": {},
+    "averageDuration": "சராசரி கால அளவு",
+    "@averageDuration": {},
+    "comingSoon": "வென்றது உடனே வருகிறது",
+    "@comingSoon": {},
+    "episode": "{count, plural, =1 {பட்டியல்} other {பட்டியல்கள்}}",
+    "@episode": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "popularity": "பிரபலம்",
+    "@popularity": {},
+    "totalChapters": "அத்தியாயங்கள்",
+    "@totalChapters": {},
+    "favorites": "பிடித்தவை",
+    "@favorites": {},
+    "home": "Home",
+    "@home": {},
+    "prequel": "PREQUEL",
+    "@prequel": {},
+    "planned": "திட்டமிடப்பட்ட {type}",
+    "@planned": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "search": "தேடு",
+    "@search": {},
+    "collapseText": "சுருக்கவும்",
+    "@collapseText": {},
+    "chapter": "{count, plural, =1 {அத்தியாயம்} other {அத்தியாயங்கள்}}",
+    "@chapter": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "characters": "பாத்திரங்கள்",
+    "@characters": {},
+    "genres": "பரிமாணங்கள்",
+    "@genres": {},
+    "calendar": "கலண்டர்",
+    "@calendar": {},
+    "format": "வடிவமைப்பு",
+    "@format": {},
+    "expandText": "மேலும் காண்க",
+    "@expandText": {},
+    "manhua": "Manhua",
+    "@manhua": {},
+    "season": "பிரிவு",
+    "@season": {},
+    "author": "Author",
+    "@author": {},
+    "sequel": "SEQUEL",
+    "@sequel": {},
+    "studio": "Studio",
+    "@studio": {},
+    "staff": "சீனியர்",
+    "@staff": {},
+    "status": "Status",
+    "@status": {},
+    "relations": "Relations",
+    "@relations": {},
+    "source": "Source",
+    "@source": {},
+    "synonyms": "சமாதானம்",
+    "@synonyms": {},
+    "startDate": "Start Date",
+    "@startDate": {},
+    "endDate": "End Date",
+    "@endDate": {},
+    "totalEpisodes": "பகுதிகள்",
+    "@totalEpisodes": {},
+    "manhwa": "Manhwa",
+    "@manhwa": {},
+    "kitsu": "Kitsu",
+    "@kitsu": {},
+    "loginTo": "{service} இல் புகுத்தவும்",
+    "@loginTo": {
+        "placeholders": {
+            "service": {
+                "type": "String",
+                "examples": [
+                    "Anilist",
+                    "MyAnimeList",
+                    "Kitsu",
+                    "Discord"
+                ]
+            }
+        }
+    },
+    "movie": "{count, plural, =1 {படம்} other {படங்கள்}}",
+    "@movie": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "scanlators": "ஸ்கான்லேட்டர்கள்",
+    "@scanlators": {},
+    "manageLayout": "{service} இல் {page} பக்கத்தின் வடிவமைப்பை நிர்வகிக்கவும்",
+    "@manageLayout": {
+        "placeholders": {
+            "service": {
+                "type": "String",
+                "examples": [
+                    "Anilist",
+                    "MAL"
+                ]
+            },
+            "page": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Home",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "dtu": "Down To Up",
+    "@dtu": {},
+    "list": "{type} பட்டியல்",
+    "@list": {
+        "placeholders": {
+            "type": {
+                "examples": "Anime list",
+                "type": "String"
+            }
+        }
+    },
+    "confirmLogout": "நீங்கள் வெளியேற விரும்புகிறீர்களா?",
+    "@confirmLogout": {},
+    "gridView": "கிரிட் பார்வை",
+    "@gridView": {},
+    "compactView": "சுருக்கமான பார்வை",
+    "@compactView": {},
+    "listView": "List View",
+    "@listView": {},
+    "installed": "நிறுத்தப்பட்ட {type}",
+    "@installed": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Extensions"
+                ]
+            }
+        }
+    },
+    "chapterRead": "அத்தியாயம் படித்தது",
+    "@chapterRead": {},
+    "episodeWatched": "பட்டியல் பார்வை",
+    "@episodeWatched": {},
+    "available": "கிடைக்கும் {type}",
+    "@available": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "layout": "Layout",
+    "@layout": {},
+    "thisSeason": "இந்த பருவம்",
+    "@thisSeason": {},
+    "trending": "பிரபலமாக உள்ள {type}",
+    "@trending": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "topRated": "முதன்மை மதிப்பீடு {type}",
+    "@topRated": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa",
+                    "Series"
+                ]
+            }
+        }
+    },
+    "nextSeason": "அடுத்த பருவம்",
+    "@nextSeason": {},
+    "previousSeason": "முந்தைய பருவம்",
+    "@previousSeason": {},
+    "onHold": "ஒப்புதலுக்கு நேரிடப்பட்ட {type}",
+    "@onHold": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "favorite": "விருப்பமான {type}",
+    "@favorite": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "noDropped": "நீங்கள் எந்த {type} ஐயும் நிறுத்தவில்லை.",
+    "@noDropped": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "activity": "{count, plural, =1 {செயல்} other {செயல்கள்}}",
+    "@activity": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "browse": "பரிசோதனை {type}",
+    "@browse": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "continueReading": "படிக்க தொடரவும்",
+    "@continueReading": {},
+    "recommendationsEmptyMessage": "எந்த அநிமே அல்லது மாஙாவைப் பார்க்க/படிக்கவும் பரிந்துரைகள் பெற",
+    "@recommendationsEmptyMessage": {},
+    "sort": "திருத்து",
+    "@sort": {},
+    "options": "Options",
+    "@options": {},
+    "addToList": "Add To List",
+    "@addToList": {},
+    "comments": "கருத்துகள்",
+    "@comments": {},
+    "continueWatching": "பார்க்க தொடரவும்",
+    "@continueWatching": {},
+    "info": "Info",
+    "@info": {},
+    "language": "மொழி",
+    "@language": {},
+    "read": "படிக்கவும்",
+    "@read": {},
+    "topAiring": "முதன்மை ஒளிபரப்பு",
+    "@topAiring": {},
+    "watch": "பார்க்கவும்",
+    "@watch": {},
+    "utd": "மேல் இருந்து கீழே",
+    "@utd": {},
+    "manageLayoutDescription": "{page} பக்கத்தின் வடிவமைப்பை நிர்வகிக்கப் பயன்படுத்த நீங்கள் உருப்படிகளை இழுத்து விடலாம்",
+    "@manageLayoutDescription": {
+        "placeholders": {
+            "page": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Home",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "pickColor": "ஒரு நிறத்தைத் தேர்ந்தெடுக்கவும்",
+    "@pickColor": {},
+    "noFavourites": "உங்களுக்கு இதுவரை எதுவும் பிடிக்கவில்லை,\nஒரு நிகழ்ச்சியை விரும்பி இதை இங்கே வைத்திருங்கள்.",
+    "@noFavourites": {},
+    "noOnHold": "நீங்கள் எந்த ஒன்றையும் நிறுத்தவில்லை போல் தெரிகிறது.",
+    "@noOnHold": {},
+    "hiddenMedia": "மறைக்கப்பட்ட மீடியா",
+    "@hiddenMedia": {},
+    "noHiddenMediaFound": "மறைக்கப்பட்ட மீடியா எதுவும் கண்டறியவில்லை",
+    "@noHiddenMediaFound": {},
+    "droppedManga": "நிறுத்தப்பட்ட மாஙா",
+    "@droppedManga": {},
+    "droppedAnime": "நிறுத்தப்பட்ட அநிமே",
+    "@droppedAnime": {},
+    "allCaughtUpNew": "அனைத்து புதுப்பிக்கப்பட்டவை, புதியவை என்ன?",
+    "@allCaughtUpNew": {},
+    "recentUpdates": "இணையதள புதிய பதிவுகள்",
+    "@recentUpdates": {},
+    "recommended": "பரிந்துரைக்கப்பட்டது",
+    "@recommended": {},
+    "simkl": "Simkl",
+    "@simkl": {},
+    "logFile": "பதிவு கோப்பு",
+    "@logFile": {},
+    "colorPickerDefault": "இயல்புநிலை",
+    "@colorPickerDefault": {},
+    "logFileDescription": "பதிவு கோப்பைப் பகிரவும்",
+    "@logFileDescription": {},
+    "colorPickerCustom": "தனிப்பயன்",
+    "@colorPickerCustom": {},
+    "loadExtensionsIconDesc": "நீட்டிப்பு பக்கம் மந்தமாக இருந்தால் முடக்கு",
+    "@loadExtensionsIconDesc": {},
+    "autoUpdateDesc": "நீட்டிப்புகளை தானாக புதுப்பிக்கவும்",
+    "@autoUpdateDesc": {},
+    "addNovelRepoDesc": "வேறு விதமான மூலங்களில் இருந்து நாவல் பகிர்வகம் சேர்க்கவும்",
+    "@addNovelRepoDesc": {},
+    "addAnimeRepo": "ஆனிமே பகிர்வகம் சேர்க்கவும்",
+    "@addAnimeRepo": {},
+    "addMangaRepoDesc": "வேறு விதமான மூலங்களில் இருந்து மான்கா பகிர்வகம் சேர்க்கவும்",
+    "@addMangaRepoDesc": {},
+    "addAnimeRepoDesc": "வேறு விதமான மூலங்களில் இருந்து ஆனிமே பகிர்வகம் சேர்க்கவும்",
+    "@addAnimeRepoDesc": {},
+    "addMangaRepo": "மான்கா பகிர்வகம் சேர்க்கவும்",
+    "@addMangaRepo": {},
+    "addNovelRepo": "நாவல் பகிர்வகம் சேர்க்கவும்",
+    "@addNovelRepo": {},
+    "selectDirectory": "ஒரு கோப்பகத்தைத் தேர்ந்தெடுக்கவும்",
+    "@selectDirectory": {},
+    "customPathDescription": "கோப்புகளைச் சேமிக்க தனிப்பயன் பாதையை அமைக்கவும்\nஅகற்ற நீண்ட நேரம் அழுத்தவும்",
+    "@customPathDescription": {},
+    "autoUpdate": "தானியங்கும் புதுப்பிப்பு",
+    "@autoUpdate": {},
+    "loadExtensionsIcon": "நீட்டிப்புகளின் குறும்படங்களை ஏற்றுக",
+    "@loadExtensionsIcon": {},
+    "selectMediaService": "மீடியா சேவையைத் தேர்ந்தெடுக்கவும்",
+    "@selectMediaService": {},
+    "customPath": "தனிப்பயன் பாதை",
+    "@customPath": {},
+    "noChapterFound": "அதிகாரம் கிடைக்கவில்லை",
+    "@noChapterFound": {},
+    "watching": "பார்க்கிறது",
+    "@watching": {},
+    "outOf": "இதிலிருந்து",
+    "@outOf": {},
+    "selected": "தேர்ந்தெடுக்கப்பட்டது",
+    "@selected": {},
+    "readStatus": "படிக்கவும்",
+    "@readStatus": {},
+    "youTube": "YouTube-இல் இயக்கவா?",
+    "@youTube": {},
+    "mediaNotFound": "மீடியா கிடைக்கவில்லை",
+    "@mediaNotFound": {},
+    "found": "கிடைத்தது",
+    "@found": {},
+    "watchStatus": "பார்த்துவிட்டேன்",
+    "@watchStatus": {},
+    "totalOf": "மொத்தம்",
+    "@totalOf": {},
+    "wrongTitle": "தவறான தலைப்பு?",
+    "@wrongTitle": {},
+    "installSourceToStart": "தொடங்குவதற்கு நீட்டிப்பு பக்கத்திலிருந்து மூலத்தை நிறுவவும்",
+    "@installSourceToStart": {},
+    "webView": "வலைப் பார்வை",
+    "@webView": {},
+    "reading": "படிக்கிறது",
+    "@reading": {},
+    "direction": "Direction",
+    "@direction": {},
+    "thumbLessSeekBar": "ThumbLess SeekBar",
+    "@thumbLessSeekBar": {},
+    "readerSettings": "Reader Settings",
+    "@readerSettings": {},
+    "hidePageNumberDesc": "Hide page number while reading",
+    "@hidePageNumberDesc": {},
+    "developersHelpersDesc": "Dartotsu's unpaid labours",
+    "@developersHelpersDesc": {},
+    "developersHelpers": "Developers/Helpers",
+    "@developersHelpers": {},
+    "thumbLessSeekBarDesc": "Remove thumb from the seek bar",
+    "@thumbLessSeekBarDesc": {},
+    "hidePageNumber": "Hide Page Number",
+    "@hidePageNumber": {},
+    "differentCacheManagerDesc": "Use different Image cache manager",
+    "@differentCacheManagerDesc": {},
+    "differentCacheManager": "Different Cache Manager",
+    "@differentCacheManager": {},
+    "spacedPagesDesc": "Add space between pages",
+    "@spacedPagesDesc": {},
+    "spacedPages": "Spaced Pages",
+    "@spacedPages": {},
+    "readerSettingsDesc": "Change reader settings",
+    "@readerSettingsDesc": {},
+    "hideScrollbarDesc": "Hide scrollbar while reading",
+    "@hideScrollbarDesc": {},
+    "hideScrollbar": "Hide Scrollbar",
+    "@hideScrollbar": {},
+    "playerSettingsDesc": "Change player settings",
+    "@playerSettingsDesc": {},
+    "glassEffect": "Glass Effect",
+    "@glassEffect": {},
+    "ltr": "Left To Right",
+    "@ltr": {},
+    "coverThemeDescription": "Use media cover image as theme color",
+    "@coverThemeDescription": {},
+    "rtl": "Right To Left",
+    "@rtl": {},
+    "glassEffectDescription": "Gives a frosted glass effect to the app",
+    "@glassEffectDescription": {},
+    "nextEpisodeRelease": "Episode {episode} will be released in",
+    "@nextEpisodeRelease": {
+        "description": "Message showing the next episode info",
+        "placeholders": {
+            "episode": {
+                "type": "int"
+            }
+        }
+    },
+    "topScore": "Top Score",
+    "@topScore": {},
+    "coverTheme": "Use Cover Theme",
+    "@coverTheme": {},
+    "customMPVDescription": "Enable this option to use your own MPV configuration file. Place your custom config at: {path}",
+    "@customMPVDescription": {
+        "placeholders": {
+            "path": {
+                "type": "String"
+            }
+        }
+    },
+    "customMPV": "Custom MPV Configuration",
+    "@customMPV": {}
 }

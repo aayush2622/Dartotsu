@@ -1,632 +1,663 @@
 {
-  "about": "درباره",
-  "@about": {},
-  "cancel": "لغو",
-  "@cancel": {},
-  "incognitoModeDescription": "بدون ذخیره فعالیت خود جستجو کنید",
-  "@incognitoModeDescription": {},
-  "notificationsDescription": "تنظیم کنید که چگونه و چه زمانی اطلاع‌رسانی دریافت کنید",
-  "@notificationsDescription": {},
-  "anime": "انیمه",
-  "@anime": {},
-  "animeDescription": "ترجیحات انیمه خود را شخصی‌سازی و مدیریت کنید",
-  "@animeDescription": {},
-  "anilist": "AniList",
-  "@anilist": {},
-  "appName": "Dartotsu",
-  "@appName": {},
-  "appTagline": "بهترین برنامه جدید برای\nردیابی انیمه و مانگا",
-  "@appTagline": {},
-  "backgroundColor": "رنگ پس‌زمینه",
-  "@backgroundColor": {},
-  "backgroundColorDescription": "رنگ پس‌زمینه زیرنویس",
-  "@backgroundColorDescription": {},
-  "bottomPadding": "فاصله پایین",
-  "@bottomPadding": {},
-  "bottomPaddingDescription": "فاصله پایین زیرنویس",
-  "@bottomPaddingDescription": {},
-  "colorPicker": "انتخابگر رنگ",
-  "@colorPicker": {},
-  "colorPickerDescription": "یک رنگ انتخاب کنید",
-  "@colorPickerDescription": {},
-  "common": "عمومی",
-  "@common": {},
-  "commonDescription": "دسترسی به تنظیمات عمومی برای استفاده آسان از برنامه",
-  "@commonDescription": {},
-  "cursedSpeed": "سرعت نفرین‌شده",
-  "@cursedSpeed": {},
-  "cursedSpeedDescription": "برای کسانی که درگیر زندگی هستند",
-  "@cursedSpeedDescription": {},
-  "customTheme": "تم سفارشی",
-  "@customTheme": {},
-  "customThemeDescription": "از رنگ خود برای تم استفاده کنید",
-  "@customThemeDescription": {},
-  "darkMode": "حالت تاریک",
-  "@darkMode": {},
-  "discord": "Discord",
-  "@discord": {},
-  "donationGoal": "فعلاً هدفی برای اهدا وجود ندارد",
-  "@donationGoal": {},
-  "enableDarkMode": "فعال‌سازی حالت تاریک",
-  "@enableDarkMode": {},
-  "extension": "{count, plural, =1 {افزونه} other {افزونه‌ها}}",
-  "@extension": {},
-  "extensionsDescription": "افزونه‌ها را نصب و مدیریت کنید برای عملکرد بیشتر",
-  "@extensionsDescription": {},
-  "fontColor": "رنگ قلم",
-  "@fontColor": {},
-  "fontColorDescription": "رنگ قلم زیرنویس",
-  "@fontColorDescription": {},
-  "fontFamily": "نوع قلم",
-  "@fontFamily": {},
-  "fontFamilyDescription": "نوع قلم زیرنویس",
-  "@fontFamilyDescription": {},
-  "fontSize": "اندازه قلم",
-  "@fontSize": {},
-  "fontSizeDescription": "اندازه قلم زیرنویس",
-  "@fontSizeDescription": {},
-  "fontWeight": "ضخامت قلم",
-  "@fontWeight": {},
-  "fontWeightDescription": "ضخامت قلم زیرنویس",
-  "@fontWeightDescription": {},
-  "aboutDescription": "بیشتر در مورد برنامه و سازندگان آن بیاموزید",
-  "@aboutDescription": {},
-  "account": "حساب کاربری",
-  "@account": {},
-  "accountDescription": "مدیریت حساب‌های AniList، MAL و Discord خود را به راحتی انجام دهید",
-  "@accountDescription": {},
-  "hidePrivate": "مخفی کردن خصوصی",
-  "@hidePrivate": {},
-  "hidePrivateDescription": "پنهان کردن سری‌های خصوصی از صفحه اصلی.",
-  "@hidePrivateDescription": {},
-  "incognitoMode": "حالت ناشناس",
-  "@incognitoMode": {},
-  "login": "ورود",
-  "@login": {},
-  "logout": "خروج از {type}",
-  "@logout": {},
-  "mal": "MyAnimeList",
-  "@mal": {},
-  "manga": "مانگا",
-  "@manga": {},
-  "mangaDescription": "تجربه مانگا خود را سازماندهی و سفارشی کنید",
-  "@mangaDescription": {},
-  "materialYou": "Material You",
-  "@materialYou": {},
-  "materialYouDescription": "از رنگ پس‌زمینه خود برای برنامه استفاده کنید",
-  "@materialYouDescription": {},
-  "no": "نه",
-  "@no": {},
-  "notifications": "اطلاع‌رسانی‌ها",
-  "@notifications": {},
-  "offlineMode": "حالت آفلاین",
-  "@offlineMode": {},
-  "offlineModeDescription": "بدون اتصال به اینترنت از برنامه استفاده کنید",
-  "@offlineModeDescription": {},
-  "ok": "باشه",
-  "@ok": {},
-  "oledThemeVariant": "نوع تم OLED",
-  "@oledThemeVariant": {},
-  "oledThemeVariantDescription": "فعال‌سازی حالت OLED",
-  "@oledThemeVariantDescription": {},
-  "outlineColor": "رنگ حاشیه",
-  "@outlineColor": {},
-  "outlineColorDescription": "رنگ حاشیه زیرنویس",
-  "@outlineColorDescription": {},
-  "playerSettingsTitle": "تنظیمات پخش‌کننده",
-  "@playerSettingsTitle": {},
-  "resizeMode": "حالت تغییر اندازه",
-  "@resizeMode": {},
-  "resizeModeDescription": "حالت پیش‌فرض تغییر اندازه برای پخش‌کننده",
-  "@resizeModeDescription": {},
-  "restoreSettings": "بازنشانی تنظیمات",
-  "@restoreSettings": {},
-  "settings": "تنظیمات",
-  "@settings": {},
-  "showSubtitles": "نمایش زیرنویس‌ها",
-  "@showSubtitles": {},
-  "skipButton": "دکمه رد کردن",
-  "@skipButton": {},
-  "skipButtonDescription": "مدت زمان دکمه رد کردن",
-  "@skipButtonDescription": {},
-  "speed": "سرعت",
-  "@speed": {},
-  "speedDescription": "سرعت پیش‌فرض برای پخش‌کننده",
-  "@speedDescription": {},
-  "subtitles": "زیرنویس‌ها",
-  "@subtitles": {},
-  "subtitlePreview": "پیش‌نمایش زیرنویس",
-  "@subtitlePreview": {},
-  "showSubtitlesDescription": "نمایش زیرنویس‌ها به طور پیش‌فرض",
-  "@showSubtitlesDescription": {},
-  "supportMaintainer": "آیا می‌خواهید از نگهدارنده Dartotsu پشتیبانی کنید؟\nدر نظر داشته باشید که کمک مالی کنید",
-  "@supportMaintainer": {},
-  "theme": "تم",
-  "@theme": {},
-  "themeDescription": "ظاهر و حس برنامه خود را سفارشی کنید",
-  "@themeDescription": {},
-  "yes": "بله",
-  "@yes": {},
-  "nextSeason": "فصل بعدی",
-  "@nextSeason": {},
-  "noDropped": "شما هنوز هیچ {type} را کنار نگذاشته‌اید.",
-  "@noDropped": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "manhwa": "Manhwa",
-  "@manhwa": {},
-  "previousSeason": "فصل قبلی",
-  "@previousSeason": {},
-  "nameRomaji": "نام (رومجی)",
-  "@nameRomaji": {},
-  "averageDuration": "مدت زمان متوسط",
-  "@averageDuration": {},
-  "droppedAnime": "انیمه کنار گذاشته شده",
-  "@droppedAnime": {},
-  "browse": "مرور {type}",
-  "@browse": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "staff": "تیم تولید",
-  "@staff": {},
-  "status": "وضعیت",
-  "@status": {},
-  "popularity": "محبوبیت",
-  "@popularity": {},
-  "prequel": "PREQUEL",
-  "@prequel": {},
-  "planned": "برنامه‌ریزی شده {type}",
-  "@planned": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "language": "زبان",
-  "@language": {},
-  "collapseText": "نمایش کمتر",
-  "@collapseText": {},
-  "chapter": "{count, plural, =1 {فصل} other {فصول}}",
-  "@chapter": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "manageLayoutDescription": "شما می‌توانید با کشیدن و رها کردن اقلام، چینش صفحه {page} را مدیریت کنید",
-  "@manageLayoutDescription": {
-    "placeholders": {
-      "page": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Home",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "characters": "شخصیت‌ها",
-  "@characters": {},
-  "pickColor": "انتخاب رنگ",
-  "@pickColor": {},
-  "synonyms": "مترادف‌ها",
-  "@synonyms": {},
-  "startDate": "شروع تاریخ",
-  "@startDate": {},
-  "manhua": "Manhua",
-  "@manhua": {},
-  "sequel": "SEQUEL",
-  "@sequel": {},
-  "description": "خلاصه",
-  "@description": {},
-  "endDate": "پایان تاریخ",
-  "@endDate": {},
-  "comingSoon": "به زودی",
-  "@comingSoon": {},
-  "favorites": "علاقه‌مندی‌ها",
-  "@favorites": {},
-  "relations": "روابط",
-  "@relations": {},
-  "source": "منبع",
-  "@source": {},
-  "format": "فرمت",
-  "@format": {},
-  "expandText": "نمایش بیشتر",
-  "@expandText": {},
-  "tags": "Tags",
-  "@tags": {},
-  "studio": "استودیو Studio",
-  "@studio": {},
-  "totalEpisodes": "قسمت‌ها",
-  "@totalEpisodes": {},
-  "total": "مجموع",
-  "@total": {},
-  "totalChapters": "فصول",
-  "@totalChapters": {},
-  "author": "نویسنده",
-  "@author": {},
-  "name": "نام",
-  "@name": {},
-  "meanScore": "امتیاز",
-  "@meanScore": {},
-  "synopsis": "خلاصه",
-  "@synopsis": {},
-  "kitsu": "Kitsu",
-  "@kitsu": {},
-  "loginTo": "ورود به {service}",
-  "@loginTo": {
-    "placeholders": {
-      "service": {
-        "type": "String",
-        "examples": [
-          "Anilist",
-          "MyAnimeList",
-          "Kitsu",
-          "Discord"
-        ]
-      }
-    }
-  },
-  "home": "خانه",
-  "@home": {},
-  "ln": "رمان سبک روشن",
-  "@ln": {},
-  "novel": "رمان",
-  "@novel": {},
-  "series": "سری سریال",
-  "@series": {},
-  "season": "فصل",
-  "@season": {},
-  "volume": "{count, plural, =1 {جلد} other {جلدها}}",
-  "@volume": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "episode": "{count, plural, =1 {قسمت} other {قسمت‌ها}}",
-  "@episode": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "movie": "{count, plural, =1 {فیلم} other {فیلم‌ها}}",
-  "@movie": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "genres": "ژانرها",
-  "@genres": {},
-  "scanlators": "اسکن‌کنندگان",
-  "@scanlators": {},
-  "dtu": "پایین تا بالا",
-  "@dtu": {},
-  "search": "جستجو",
-  "@search": {},
-  "calendar": "تقویم",
-  "@calendar": {},
-  "confirmLogout": "آیا مطمئن هستید که می‌خواهید خارج شوید؟",
-  "@confirmLogout": {},
-  "compactView": "نمای فشرده",
-  "@compactView": {},
-  "listView": "لیست View",
-  "@listView": {},
-  "gridView": "نمای شبکه‌ای",
-  "@gridView": {},
-  "episodeWatched": "قسمت تماشا شده",
-  "@episodeWatched": {},
-  "sort": "مرتب‌سازی",
-  "@sort": {},
-  "chapterRead": "فصل خوانده شده",
-  "@chapterRead": {},
-  "available": "موجود {type}",
-  "@available": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "trending": "داغ‌ترین {type}",
-  "@trending": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "installed": "نصب شده {type}",
-  "@installed": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Extensions"
-        ]
-      }
-    }
-  },
-  "topAiring": "پخش برتر",
-  "@topAiring": {},
-  "topRated": "برترین {type}",
-  "@topRated": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa",
-          "Series"
-        ]
-      }
-    }
-  },
-  "popular": "محبوب {type}",
-  "@popular": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa"
-        ]
-      }
-    }
-  },
-  "mostFavourite": "محبوب‌ترین {type}",
-  "@mostFavourite": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa"
-        ]
-      }
-    }
-  },
-  "thisSeason": "این فصل",
-  "@thisSeason": {},
-  "favorite": "علاقه‌مند {type}",
-  "@favorite": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "activity": "{count, plural, =1 {فعالیت} other {فعالیت‌ها}}",
-  "@activity": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "onHold": "منتظر {type}",
-  "@onHold": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "continueReading": "ادامه دادن خواندن",
-  "@continueReading": {},
-  "continueWatching": "ادامه دادن تماشا",
-  "@continueWatching": {},
-  "addToList": "اضافه کردن به لیست",
-  "@addToList": {},
-  "options": "گزینه های Options",
-  "@options": {},
-  "recommendationsEmptyMessage": "برای دریافت پیشنهادات، انیمه یا مانگایی تماشا/خوانده کنید",
-  "@recommendationsEmptyMessage": {},
-  "watch": "تماشا",
-  "@watch": {},
-  "allCaughtUpNew": "همه را دیدی، چه چیز جدیدی داریم؟",
-  "@allCaughtUpNew": {},
-  "comments": "نظرات",
-  "@comments": {},
-  "hiddenMedia": "رسانه‌های پنهان",
-  "@hiddenMedia": {},
-  "info": "Info",
-  "@info": {},
-  "list": "{type} فهرست",
-  "@list": {
-    "placeholders": {
-      "type": {
-        "examples": "Anime list",
-        "type": "String"
-      }
-    }
-  },
-  "layout": "چیدمان",
-  "@layout": {},
-  "noFavourites": "به نظر می‌رسد که شما چیزی دوست ندارید،\nسعی کنید یک نمایش را لایک کنید تا در اینجا نگه داشته شود.",
-  "@noFavourites": {},
-  "noOnHold": "به نظر می‌رسد که شما هیچ چیزی را در حالت انتظار قرار نداده‌اید.",
-  "@noOnHold": {},
-  "noHiddenMediaFound": "رسانه پنهانی یافت نشد",
-  "@noHiddenMediaFound": {},
-  "recentUpdates": "بروزرسانی‌های اخیر",
-  "@recentUpdates": {},
-  "read": "خواندن",
-  "@read": {},
-  "utd": "از بالا به پایین",
-  "@utd": {},
-  "manageLayout": "مدیریت چینش صفحه {page} برای {service}",
-  "@manageLayout": {
-    "placeholders": {
-      "service": {
-        "type": "String",
-        "examples": [
-          "Anilist",
-          "MAL"
-        ]
-      },
-      "page": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Home",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "droppedManga": "مانگای کنار گذاشته شده",
-  "@droppedManga": {},
-  "recommended": "پیشنهادی",
-  "@recommended": {},
-  "simkl": "Simkl",
-  "@simkl": {},
-  "logFile": "فایل Log File",
-  "@logFile": {},
-  "logFileDescription": "اشتراک گذاری فایل log",
-  "@logFileDescription": {},
-  "colorPickerDefault": "شکست",
-  "@colorPickerDefault": {},
-  "colorPickerCustom": "سفارشی",
-  "@colorPickerCustom": {},
-  "addAnimeRepo": "مخزن انیمه را اضافه کنید",
-  "@addAnimeRepo": {},
-  "loadExtensionsIconDesc": "Disable If Extensions page",
-  "@loadExtensionsIconDesc": {},
-  "autoUpdateDesc": "به روز رسانی خودکار برنامه های افزودنی",
-  "@autoUpdateDesc": {},
-  "addNovelRepoDesc": "اضافه کردن Repo از منابع مختلف",
-  "@addNovelRepoDesc": {},
-  "addMangaRepoDesc": "Add Manga Repo از منابع مختلف",
-  "@addMangaRepoDesc": {},
-  "addAnimeRepoDesc": "Add Anime Repo از منابع مختلف",
-  "@addAnimeRepoDesc": {},
-  "addMangaRepo": "Manga Repo",
-  "@addMangaRepo": {},
-  "addNovelRepo": "اضافه کردن رمان Repo",
-  "@addNovelRepo": {},
-  "selectDirectory": "انتخاب یک دایرکتوری",
-  "@selectDirectory": {},
-  "customPathDescription": "یک مسیر سفارشی برای ذخیره فایل ها تنظیم کنید\nمطبوعات طولانی برای حذف",
-  "@customPathDescription": {},
-  "autoUpdate": "به روز رسانی خودکار",
-  "@autoUpdate": {},
-  "loadExtensionsIcon": "Load Extensions",
-  "@loadExtensionsIcon": {},
-  "selectMediaService": "انتخاب خدمات رسانه ای",
-  "@selectMediaService": {},
-  "customPath": "مسیر سفارشی",
-  "@customPath": {},
-  "watching": "تماشای",
-  "@watching": {},
-  "youTube": "در YouTube بازی کنید؟?",
-  "@youTube": {},
-  "noChapterFound": "هیچ فصلی پیدا نشد",
-  "@noChapterFound": {},
-  "outOf": "خارج از",
-  "@outOf": {},
-  "selected": "انتخاب شده",
-  "@selected": {},
-  "readStatus": "خواندن",
-  "@readStatus": {},
-  "mediaNotFound": "رسانه ها پیدا نمی شوند",
-  "@mediaNotFound": {},
-  "found": "پیدا شده",
-  "@found": {},
-  "watchStatus": "تماشا شده",
-  "@watchStatus": {},
-  "totalOf": "مجموعِ",
-  "@totalOf": {},
-  "wrongTitle": "عنوان اشتباه؟?",
-  "@wrongTitle": {},
-  "installSourceToStart": "نصب یک منبع از صفحه افزونه برای شروع",
-  "@installSourceToStart": {},
-  "webView": "Web View",
-  "@webView": {},
-  "reading": "در حال خواندن",
-  "@reading": {},
-  "hidePageNumberDesc": "شماره صفحه پنهان در هنگام خواندن",
-  "@hidePageNumberDesc": {},
-  "thumbLessSeekBar": "جستجو برای بار",
-  "@thumbLessSeekBar": {},
-  "developersHelpersDesc": "کارگران بدون حقوق دارتوتسو",
-  "@developersHelpersDesc": {},
-  "developersHelpers": "توسعه دهندگان",
-  "@developersHelpers": {},
-  "thumbLessSeekBarDesc": "حذف انگشت از نوار جستجو",
-  "@thumbLessSeekBarDesc": {},
-  "hidePageNumber": "دانلود بازی Hide Page Number",
-  "@hidePageNumber": {},
-  "direction": "جهت هدایت",
-  "@direction": {},
-  "differentCacheManagerDesc": "از مدیر حافظه مختلف استفاده کنید",
-  "@differentCacheManagerDesc": {},
-  "differentCacheManager": "مدیر مخفی مختلف",
-  "@differentCacheManager": {},
-  "spacedPagesDesc": "اضافه کردن فضا بین صفحات",
-  "@spacedPagesDesc": {},
-  "spacedPages": "صفحه های فضایی",
-  "@spacedPages": {},
-  "readerSettingsDesc": "تغییر تنظیمات خواننده",
-  "@readerSettingsDesc": {},
-  "hideScrollbarDesc": "Hide Scrollbar در هنگام خواندن",
-  "@hideScrollbarDesc": {},
-  "readerSettings": "تنظیمات Reader",
-  "@readerSettings": {},
-  "hideScrollbar": "پنهان کردن نوار پیمایش",
-  "@hideScrollbar": {},
-  "playerSettingsDesc": "تغییر تنظیمات بازیکن",
-  "@playerSettingsDesc": {}
+    "about": "درباره",
+    "@about": {},
+    "cancel": "لغو",
+    "@cancel": {},
+    "incognitoModeDescription": "بدون ذخیره فعالیت خود جستجو کنید",
+    "@incognitoModeDescription": {},
+    "notificationsDescription": "تنظیم کنید که چگونه و چه زمانی اطلاع‌رسانی دریافت کنید",
+    "@notificationsDescription": {},
+    "anime": "انیمه",
+    "@anime": {},
+    "animeDescription": "ترجیحات انیمه خود را شخصی‌سازی و مدیریت کنید",
+    "@animeDescription": {},
+    "anilist": "AniList",
+    "@anilist": {},
+    "appName": "Dartotsu",
+    "@appName": {},
+    "appTagline": "بهترین برنامه جدید برای\nردیابی انیمه و مانگا",
+    "@appTagline": {},
+    "backgroundColor": "رنگ پس‌زمینه",
+    "@backgroundColor": {},
+    "backgroundColorDescription": "رنگ پس‌زمینه زیرنویس",
+    "@backgroundColorDescription": {},
+    "bottomPadding": "فاصله پایین",
+    "@bottomPadding": {},
+    "bottomPaddingDescription": "فاصله پایین زیرنویس",
+    "@bottomPaddingDescription": {},
+    "colorPicker": "انتخابگر رنگ",
+    "@colorPicker": {},
+    "colorPickerDescription": "یک رنگ انتخاب کنید",
+    "@colorPickerDescription": {},
+    "common": "عمومی",
+    "@common": {},
+    "commonDescription": "دسترسی به تنظیمات عمومی برای استفاده آسان از برنامه",
+    "@commonDescription": {},
+    "cursedSpeed": "سرعت نفرین‌شده",
+    "@cursedSpeed": {},
+    "cursedSpeedDescription": "برای کسانی که درگیر زندگی هستند",
+    "@cursedSpeedDescription": {},
+    "customTheme": "سفارشی سفارشی Theme Theme",
+    "@customTheme": {},
+    "customThemeDescription": "از رنگ خود برای تم استفاده کنید",
+    "@customThemeDescription": {},
+    "darkMode": "حالت تاریک",
+    "@darkMode": {},
+    "discord": "Discord",
+    "@discord": {},
+    "donationGoal": "فعلاً هدفی برای اهدا وجود ندارد",
+    "@donationGoal": {},
+    "enableDarkMode": "فعال‌سازی حالت تاریک",
+    "@enableDarkMode": {},
+    "extension": "{count, plural, =1 {افزونه} other {افزونه‌ها}}",
+    "@extension": {},
+    "extensionsDescription": "افزونه‌ها را نصب و مدیریت کنید برای عملکرد بیشتر",
+    "@extensionsDescription": {},
+    "fontColor": "رنگ قلم",
+    "@fontColor": {},
+    "fontColorDescription": "رنگ قلم زیرنویس",
+    "@fontColorDescription": {},
+    "fontFamily": "نوع قلم",
+    "@fontFamily": {},
+    "fontFamilyDescription": "نوع قلم زیرنویس",
+    "@fontFamilyDescription": {},
+    "fontSize": "اندازه قلم",
+    "@fontSize": {},
+    "fontSizeDescription": "اندازه قلم زیرنویس",
+    "@fontSizeDescription": {},
+    "fontWeight": "ضخامت قلم",
+    "@fontWeight": {},
+    "fontWeightDescription": "ضخامت قلم زیرنویس",
+    "@fontWeightDescription": {},
+    "aboutDescription": "بیشتر در مورد برنامه و سازندگان آن بیاموزید",
+    "@aboutDescription": {},
+    "account": "حساب کاربری",
+    "@account": {},
+    "accountDescription": "مدیریت حساب‌های AniList، MAL و Discord خود را به راحتی انجام دهید",
+    "@accountDescription": {},
+    "hidePrivate": "مخفی کردن خصوصی",
+    "@hidePrivate": {},
+    "hidePrivateDescription": "پنهان کردن سری‌های خصوصی از صفحه اصلی.",
+    "@hidePrivateDescription": {},
+    "incognitoMode": "حالت ناشناس",
+    "@incognitoMode": {},
+    "login": "ورود",
+    "@login": {},
+    "logout": "خروج از {type}",
+    "@logout": {},
+    "mal": "MyAnimeList",
+    "@mal": {},
+    "manga": "مانگا",
+    "@manga": {},
+    "mangaDescription": "تجربه مانگا خود را سازماندهی و سفارشی کنید",
+    "@mangaDescription": {},
+    "materialYou": "Material You",
+    "@materialYou": {},
+    "materialYouDescription": "از رنگ پس‌زمینه خود برای برنامه استفاده کنید",
+    "@materialYouDescription": {},
+    "no": "نه",
+    "@no": {},
+    "notifications": "اطلاع‌رسانی‌ها",
+    "@notifications": {},
+    "offlineMode": "حالت آفلاین",
+    "@offlineMode": {},
+    "offlineModeDescription": "بدون اتصال به اینترنت از برنامه استفاده کنید",
+    "@offlineModeDescription": {},
+    "ok": "باشه",
+    "@ok": {},
+    "oledThemeVariant": "نوع تم OLED",
+    "@oledThemeVariant": {},
+    "oledThemeVariantDescription": "فعال‌سازی حالت OLED",
+    "@oledThemeVariantDescription": {},
+    "outlineColor": "رنگ حاشیه",
+    "@outlineColor": {},
+    "outlineColorDescription": "رنگ حاشیه زیرنویس",
+    "@outlineColorDescription": {},
+    "playerSettingsTitle": "تنظیمات پخش‌کننده",
+    "@playerSettingsTitle": {},
+    "resizeMode": "حالت تغییر اندازه",
+    "@resizeMode": {},
+    "resizeModeDescription": "حالت پیش‌فرض تغییر اندازه برای پخش‌کننده",
+    "@resizeModeDescription": {},
+    "restoreSettings": "بازنشانی تنظیمات",
+    "@restoreSettings": {},
+    "settings": "تنظیمات",
+    "@settings": {},
+    "showSubtitles": "نمایش زیرنویس‌ها",
+    "@showSubtitles": {},
+    "skipButton": "دکمه رد کردن",
+    "@skipButton": {},
+    "skipButtonDescription": "مدت زمان دکمه رد کردن",
+    "@skipButtonDescription": {},
+    "speed": "سرعت",
+    "@speed": {},
+    "speedDescription": "سرعت پیش‌فرض برای پخش‌کننده",
+    "@speedDescription": {},
+    "subtitles": "زیرنویس‌ها",
+    "@subtitles": {},
+    "subtitlePreview": "پیش‌نمایش زیرنویس",
+    "@subtitlePreview": {},
+    "showSubtitlesDescription": "نمایش زیرنویس‌ها به طور پیش‌فرض",
+    "@showSubtitlesDescription": {},
+    "supportMaintainer": "آیا می‌خواهید از نگهدارنده Dartotsu پشتیبانی کنید؟\nدر نظر داشته باشید که کمک مالی کنید",
+    "@supportMaintainer": {},
+    "theme": "تم",
+    "@theme": {},
+    "themeDescription": "ظاهر و حس برنامه خود را سفارشی کنید",
+    "@themeDescription": {},
+    "yes": "بله",
+    "@yes": {},
+    "nextSeason": "فصل بعدی",
+    "@nextSeason": {},
+    "noDropped": "شما هنوز هیچ {type} را کنار نگذاشته‌اید.",
+    "@noDropped": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "manhwa": "Manhwa",
+    "@manhwa": {},
+    "previousSeason": "فصل قبلی",
+    "@previousSeason": {},
+    "nameRomaji": "نام (رومجی)",
+    "@nameRomaji": {},
+    "averageDuration": "مدت زمان متوسط",
+    "@averageDuration": {},
+    "droppedAnime": "انیمه کنار گذاشته شده",
+    "@droppedAnime": {},
+    "browse": "مرور {type}",
+    "@browse": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "staff": "تیم تولید",
+    "@staff": {},
+    "status": "وضعیت",
+    "@status": {},
+    "popularity": "محبوبیت",
+    "@popularity": {},
+    "prequel": "PREQUEL",
+    "@prequel": {},
+    "planned": "برنامه‌ریزی شده {type}",
+    "@planned": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "language": "زبان",
+    "@language": {},
+    "collapseText": "نمایش کمتر",
+    "@collapseText": {},
+    "chapter": "{count, plural, =1 {فصل} other {فصول}}",
+    "@chapter": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "manageLayoutDescription": "شما می‌توانید با کشیدن و رها کردن اقلام، چینش صفحه {page} را مدیریت کنید",
+    "@manageLayoutDescription": {
+        "placeholders": {
+            "page": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Home",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "characters": "شخصیت‌ها",
+    "@characters": {},
+    "pickColor": "انتخاب رنگ",
+    "@pickColor": {},
+    "synonyms": "مترادف‌ها",
+    "@synonyms": {},
+    "startDate": "شروع تاریخ",
+    "@startDate": {},
+    "manhua": "Manhua",
+    "@manhua": {},
+    "sequel": "SEQUEL",
+    "@sequel": {},
+    "endDate": "پایان تاریخ",
+    "@endDate": {},
+    "comingSoon": "به زودی",
+    "@comingSoon": {},
+    "favorites": "علاقه‌مندی‌ها",
+    "@favorites": {},
+    "relations": "روابط",
+    "@relations": {},
+    "source": "منبع",
+    "@source": {},
+    "format": "فرمت",
+    "@format": {},
+    "expandText": "نمایش بیشتر",
+    "@expandText": {},
+    "tags": "Tags",
+    "@tags": {},
+    "studio": "استودیو Studio",
+    "@studio": {},
+    "totalEpisodes": "قسمت‌ها",
+    "@totalEpisodes": {},
+    "total": "مجموع",
+    "@total": {},
+    "totalChapters": "فصول",
+    "@totalChapters": {},
+    "author": "نویسنده",
+    "@author": {},
+    "name": "نام",
+    "@name": {},
+    "meanScore": "امتیاز",
+    "@meanScore": {},
+    "synopsis": "خلاصه",
+    "@synopsis": {},
+    "kitsu": "Kitsu",
+    "@kitsu": {},
+    "loginTo": "ورود به {service}",
+    "@loginTo": {
+        "placeholders": {
+            "service": {
+                "type": "String",
+                "examples": [
+                    "Anilist",
+                    "MyAnimeList",
+                    "Kitsu",
+                    "Discord"
+                ]
+            }
+        }
+    },
+    "home": "خانه",
+    "@home": {},
+    "ln": "رمان سبک روشن",
+    "@ln": {},
+    "novel": "رمان",
+    "@novel": {},
+    "series": "سری سریال",
+    "@series": {},
+    "season": "فصل",
+    "@season": {},
+    "volume": "{count, plural, =1 {جلد} other {جلدها}}",
+    "@volume": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "episode": "{count, plural, =1 {قسمت} other {قسمت‌ها}}",
+    "@episode": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "movie": "{count, plural, =1 {فیلم} other {فیلم‌ها}}",
+    "@movie": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "genres": "ژانرها",
+    "@genres": {},
+    "scanlators": "اسکن‌کنندگان",
+    "@scanlators": {},
+    "dtu": "پایین تا بالا",
+    "@dtu": {},
+    "search": "جستجو",
+    "@search": {},
+    "calendar": "تقویم",
+    "@calendar": {},
+    "confirmLogout": "آیا مطمئن هستید که می‌خواهید خارج شوید؟",
+    "@confirmLogout": {},
+    "compactView": "نمای فشرده",
+    "@compactView": {},
+    "listView": "لیست View",
+    "@listView": {},
+    "gridView": "نمای شبکه‌ای",
+    "@gridView": {},
+    "episodeWatched": "قسمت تماشا شده",
+    "@episodeWatched": {},
+    "sort": "مرتب‌سازی",
+    "@sort": {},
+    "chapterRead": "فصل خوانده شده",
+    "@chapterRead": {},
+    "available": "موجود {type}",
+    "@available": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "trending": "داغ‌ترین {type}",
+    "@trending": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "installed": "نصب شده {type}",
+    "@installed": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Extensions"
+                ]
+            }
+        }
+    },
+    "topAiring": "پخش برتر",
+    "@topAiring": {},
+    "topRated": "برترین {type}",
+    "@topRated": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa",
+                    "Series"
+                ]
+            }
+        }
+    },
+    "popular": "محبوب {type}",
+    "@popular": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa"
+                ]
+            }
+        }
+    },
+    "mostFavourite": "محبوب‌ترین {type}",
+    "@mostFavourite": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa"
+                ]
+            }
+        }
+    },
+    "thisSeason": "این فصل",
+    "@thisSeason": {},
+    "favorite": "علاقه‌مند {type}",
+    "@favorite": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "activity": "{count, plural, =1 {فعالیت} other {فعالیت‌ها}}",
+    "@activity": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "onHold": "منتظر {type}",
+    "@onHold": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "continueReading": "ادامه دادن خواندن",
+    "@continueReading": {},
+    "continueWatching": "ادامه دادن تماشا",
+    "@continueWatching": {},
+    "addToList": "اضافه کردن به لیست",
+    "@addToList": {},
+    "options": "گزینه های Options",
+    "@options": {},
+    "recommendationsEmptyMessage": "برای دریافت پیشنهادات، انیمه یا مانگایی تماشا/خوانده کنید",
+    "@recommendationsEmptyMessage": {},
+    "watch": "تماشا",
+    "@watch": {},
+    "allCaughtUpNew": "همه را دیدی، چه چیز جدیدی داریم؟",
+    "@allCaughtUpNew": {},
+    "comments": "نظرات",
+    "@comments": {},
+    "hiddenMedia": "رسانه‌های پنهان",
+    "@hiddenMedia": {},
+    "info": "Info",
+    "@info": {},
+    "list": "{type} فهرست",
+    "@list": {
+        "placeholders": {
+            "type": {
+                "examples": "Anime list",
+                "type": "String"
+            }
+        }
+    },
+    "layout": "چیدمان",
+    "@layout": {},
+    "noFavourites": "به نظر می‌رسد که شما چیزی دوست ندارید،\nسعی کنید یک نمایش را لایک کنید تا در اینجا نگه داشته شود.",
+    "@noFavourites": {},
+    "noOnHold": "به نظر می‌رسد که شما هیچ چیزی را در حالت انتظار قرار نداده‌اید.",
+    "@noOnHold": {},
+    "noHiddenMediaFound": "رسانه پنهانی یافت نشد",
+    "@noHiddenMediaFound": {},
+    "recentUpdates": "بروزرسانی‌های اخیر",
+    "@recentUpdates": {},
+    "read": "خواندن",
+    "@read": {},
+    "utd": "از بالا به پایین",
+    "@utd": {},
+    "manageLayout": "مدیریت چینش صفحه {page} برای {service}",
+    "@manageLayout": {
+        "placeholders": {
+            "service": {
+                "type": "String",
+                "examples": [
+                    "Anilist",
+                    "MAL"
+                ]
+            },
+            "page": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Home",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "droppedManga": "مانگای کنار گذاشته شده",
+    "@droppedManga": {},
+    "recommended": "پیشنهادی",
+    "@recommended": {},
+    "simkl": "Simkl",
+    "@simkl": {},
+    "logFile": "فایل Log File",
+    "@logFile": {},
+    "logFileDescription": "اشتراک گذاری فایل log",
+    "@logFileDescription": {},
+    "colorPickerDefault": "شکست",
+    "@colorPickerDefault": {},
+    "colorPickerCustom": "سفارشی",
+    "@colorPickerCustom": {},
+    "addAnimeRepo": "مخزن انیمه را اضافه کنید",
+    "@addAnimeRepo": {},
+    "loadExtensionsIconDesc": "Disable If Extensions page",
+    "@loadExtensionsIconDesc": {},
+    "autoUpdateDesc": "به روز رسانی خودکار برنامه های افزودنی",
+    "@autoUpdateDesc": {},
+    "addNovelRepoDesc": "اضافه کردن Repo از منابع مختلف",
+    "@addNovelRepoDesc": {},
+    "addMangaRepoDesc": "Add Manga Repo از منابع مختلف",
+    "@addMangaRepoDesc": {},
+    "addAnimeRepoDesc": "Add Anime Repo از منابع مختلف",
+    "@addAnimeRepoDesc": {},
+    "addMangaRepo": "Manga Repo",
+    "@addMangaRepo": {},
+    "addNovelRepo": "اضافه کردن رمان Repo",
+    "@addNovelRepo": {},
+    "selectDirectory": "انتخاب یک دایرکتوری",
+    "@selectDirectory": {},
+    "customPathDescription": "یک مسیر سفارشی برای ذخیره فایل ها تنظیم کنید\nمطبوعات طولانی برای حذف",
+    "@customPathDescription": {},
+    "autoUpdate": "به روز رسانی خودکار",
+    "@autoUpdate": {},
+    "loadExtensionsIcon": "Load Extensions",
+    "@loadExtensionsIcon": {},
+    "selectMediaService": "انتخاب خدمات رسانه ای",
+    "@selectMediaService": {},
+    "customPath": "مسیر سفارشی",
+    "@customPath": {},
+    "watching": "تماشای",
+    "@watching": {},
+    "youTube": "در YouTube بازی کنید؟?",
+    "@youTube": {},
+    "noChapterFound": "هیچ فصلی پیدا نشد",
+    "@noChapterFound": {},
+    "outOf": "خارج از",
+    "@outOf": {},
+    "selected": "انتخاب شده",
+    "@selected": {},
+    "readStatus": "خواندن",
+    "@readStatus": {},
+    "mediaNotFound": "رسانه ها پیدا نمی شوند",
+    "@mediaNotFound": {},
+    "found": "پیدا شده",
+    "@found": {},
+    "watchStatus": "تماشا شده",
+    "@watchStatus": {},
+    "totalOf": "مجموعِ",
+    "@totalOf": {},
+    "wrongTitle": "عنوان اشتباه؟?",
+    "@wrongTitle": {},
+    "installSourceToStart": "نصب یک منبع از صفحه افزونه برای شروع",
+    "@installSourceToStart": {},
+    "webView": "Web View",
+    "@webView": {},
+    "reading": "در حال خواندن",
+    "@reading": {},
+    "hidePageNumberDesc": "شماره صفحه پنهان در هنگام خواندن",
+    "@hidePageNumberDesc": {},
+    "thumbLessSeekBar": "جستجو برای بار",
+    "@thumbLessSeekBar": {},
+    "developersHelpersDesc": "کارگران بدون حقوق دارتوتسو",
+    "@developersHelpersDesc": {},
+    "developersHelpers": "توسعه دهندگان",
+    "@developersHelpers": {},
+    "thumbLessSeekBarDesc": "حذف انگشت از نوار جستجو",
+    "@thumbLessSeekBarDesc": {},
+    "hidePageNumber": "دانلود بازی Hide Page Number",
+    "@hidePageNumber": {},
+    "direction": "جهت هدایت",
+    "@direction": {},
+    "differentCacheManagerDesc": "از مدیر حافظه مختلف استفاده کنید",
+    "@differentCacheManagerDesc": {},
+    "differentCacheManager": "مدیر مخفی مختلف",
+    "@differentCacheManager": {},
+    "spacedPagesDesc": "اضافه کردن فضا بین صفحات",
+    "@spacedPagesDesc": {},
+    "spacedPages": "صفحه های فضایی",
+    "@spacedPages": {},
+    "readerSettingsDesc": "تغییر تنظیمات خواننده",
+    "@readerSettingsDesc": {},
+    "hideScrollbarDesc": "Hide Scrollbar در هنگام خواندن",
+    "@hideScrollbarDesc": {},
+    "readerSettings": "تنظیمات Reader",
+    "@readerSettings": {},
+    "hideScrollbar": "پنهان کردن نوار پیمایش",
+    "@hideScrollbar": {},
+    "playerSettingsDesc": "تغییر تنظیمات بازیکن",
+    "@playerSettingsDesc": {},
+    "glassEffect": "اثر شیشه ای",
+    "@glassEffect": {},
+    "ltr": "چپ به راست",
+    "@ltr": {},
+    "coverThemeDescription": "استفاده از تصویر پوشش رسانه به عنوان رنگ تم",
+    "@coverThemeDescription": {},
+    "rtl": "راست برای چپ",
+    "@rtl": {},
+    "glassEffectDescription": "یک اثر شیشه ای سرد به برنامه",
+    "@glassEffectDescription": {},
+    "nextEpisodeRelease": "قسمت (X8X) در",
+    "@nextEpisodeRelease": {
+        "description": "Message showing the next episode info",
+        "placeholders": {
+            "episode": {
+                "type": "int"
+            }
+        }
+    },
+    "topScore": "امتیاز بالا",
+    "@topScore": {},
+    "coverTheme": "استفاده از Cover Theme",
+    "@coverTheme": {},
+    "customMPVDescription": "Enable this option to use your own MPV configuration file. Place your custom config at: {path}",
+    "@customMPVDescription": {
+        "placeholders": {
+            "path": {
+                "type": "String"
+            }
+        }
+    },
+    "customMPV": "Custom MPV Configuration",
+    "@customMPV": {}
 }

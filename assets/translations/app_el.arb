@@ -1,632 +1,663 @@
 {
-  "about": "Σχετικά",
-  "@about": {},
-  "aboutDescription": "Μάθετε περισσότερα για την εφαρμογή και τους δημιουργούς της",
-  "@aboutDescription": {},
-  "account": "Λογαριασμός",
-  "@account": {},
-  "backgroundColor": "Χρώμα Φόντου",
-  "@backgroundColor": {},
-  "speed": "Ταχύτητα",
-  "@speed": {},
-  "speedDescription": "Προεπιλεγμένη ταχύτητα για τον αναπαραγωγέα",
-  "@speedDescription": {},
-  "accountDescription": "Διαχειριστείτε εύκολα τους λογαριασμούς σας στο AniList, MAL και Discord",
-  "@accountDescription": {},
-  "anime": "Άνιμε",
-  "@anime": {},
-  "animeDescription": "Προσαρμόστε και διαχειριστείτε τις προτιμήσεις σας για το άνιμε",
-  "@animeDescription": {},
-  "anilist": "AniList",
-  "@anilist": {},
-  "appName": "Dartotsu",
-  "@appName": {},
-  "appTagline": "Η ΝΕΑ Καλύτερη Εφαρμογή Για\nΠαρακολούθηση Άνιμε & Μάνγκα",
-  "@appTagline": {},
-  "backgroundColorDescription": "Χρώμα φόντου υποτίτλων",
-  "@backgroundColorDescription": {},
-  "bottomPadding": "Κάτω Περιθώριο",
-  "@bottomPadding": {},
-  "cancel": "Ακύρωση",
-  "@cancel": {},
-  "colorPicker": "Επιλογέας Χρώματος",
-  "@colorPicker": {},
-  "colorPickerDescription": "Επιλέξτε ένα χρώμα",
-  "@colorPickerDescription": {},
-  "bottomPaddingDescription": "Κάτω περιθώριο υποτίτλων",
-  "@bottomPaddingDescription": {},
-  "common": "Κοινό",
-  "@common": {},
-  "commonDescription": "Πρόσβαση στις γενικές ρυθμίσεις για αδιάλειπτη χρήση της εφαρμογής",
-  "@commonDescription": {},
-  "cursedSpeed": "Καταραμένη Ταχύτητα",
-  "@cursedSpeed": {},
-  "cursedSpeedDescription": "Για άτομα που είναι πολύ απασχολημένα με τη ζωή",
-  "@cursedSpeedDescription": {},
-  "customTheme": "Προσαρμοσμένο Θέμα",
-  "@customTheme": {},
-  "customThemeDescription": "Χρησιμοποιήστε το δικό σας χρώμα για το θέμα",
-  "@customThemeDescription": {},
-  "darkMode": "Σκοτεινή Λειτουργία",
-  "@darkMode": {},
-  "discord": "Discord",
-  "@discord": {},
-  "donationGoal": "Δεν υπάρχει στόχος δωρεάς αυτή τη στιγμή",
-  "@donationGoal": {},
-  "enableDarkMode": "Ενεργοποιήστε τη Σκοτεινή Λειτουργία",
-  "@enableDarkMode": {},
-  "extension": "{count, plural, =1 {Επέκταση} other {Επεκτάσεις}}",
-  "@extension": {},
-  "extensionsDescription": "Εγκαταστήστε και διαχειριστείτε επεκτάσεις για επιπλέον λειτουργικότητα",
-  "@extensionsDescription": {},
-  "fontColor": "Χρώμα Γραμματοσειράς",
-  "@fontColor": {},
-  "fontColorDescription": "Χρώμα γραμματοσειράς υποτίτλων",
-  "@fontColorDescription": {},
-  "fontFamily": "Οικογένεια Γραμματοσειράς",
-  "@fontFamily": {},
-  "fontFamilyDescription": "Οικογένεια γραμματοσειράς υποτίτλων",
-  "@fontFamilyDescription": {},
-  "fontSize": "Μέγεθος Γραμματοσειράς",
-  "@fontSize": {},
-  "fontSizeDescription": "Μέγεθος γραμματοσειράς υποτίτλων",
-  "@fontSizeDescription": {},
-  "fontWeight": "Βάρος Γραμματοσειράς",
-  "@fontWeight": {},
-  "fontWeightDescription": "Βάρος γραμματοσειράς υποτίτλων",
-  "@fontWeightDescription": {},
-  "hidePrivate": "Απόκρυψη Ιδιωτικού",
-  "@hidePrivate": {},
-  "hidePrivateDescription": "Απόκρυψη ιδιωτικών σειρών από την αρχική σελίδα.",
-  "@hidePrivateDescription": {},
-  "incognitoMode": "Λειτουργία Ανώνυμης Περιήγησης",
-  "@incognitoMode": {},
-  "incognitoModeDescription": "Περιήγηση χωρίς αποθήκευση της δραστηριότητάς σας",
-  "@incognitoModeDescription": {},
-  "login": "Σύνδεση",
-  "@login": {},
-  "logout": "Αποσύνδεση {type}",
-  "@logout": {},
-  "mal": "MyAnimeList",
-  "@mal": {},
-  "manga": "Manga",
-  "@manga": {},
-  "mangaDescription": "Οργανώστε και προσαρμόστε την εμπειρία σας με το μάνγκα",
-  "@mangaDescription": {},
-  "materialYou": "Material You",
-  "@materialYou": {},
-  "materialYouDescription": "Χρησιμοποιήστε το ίδιο χρώμα με το φόντο σας",
-  "@materialYouDescription": {},
-  "no": "Όχι",
-  "@no": {},
-  "notifications": "Ειδοποιήσεις",
-  "@notifications": {},
-  "notificationsDescription": "Ρυθμίστε πώς και πότε θα λαμβάνετε ειδοποιήσεις",
-  "@notificationsDescription": {},
-  "offlineMode": "Λειτουργία Εκτός Σύνδεσης",
-  "@offlineMode": {},
-  "offlineModeDescription": "Χρησιμοποιήστε την εφαρμογή χωρίς σύνδεση στο διαδίκτυο",
-  "@offlineModeDescription": {},
-  "ok": "Εντάξει",
-  "@ok": {},
-  "oledThemeVariant": "Παραλλαγή Θέματος OLED",
-  "@oledThemeVariant": {},
-  "oledThemeVariantDescription": "Ενεργοποιήστε τη Λειτουργία OLED",
-  "@oledThemeVariantDescription": {},
-  "outlineColor": "Χρώμα Περιγράμματος",
-  "@outlineColor": {},
-  "outlineColorDescription": "Χρώμα περιγράμματος υποτίτλων",
-  "@outlineColorDescription": {},
-  "playerSettingsTitle": "Ρυθμίσεις Αναπαραγωγέα",
-  "@playerSettingsTitle": {},
-  "resizeMode": "Λειτουργία Μεγέθυνσης",
-  "@resizeMode": {},
-  "resizeModeDescription": "Προεπιλεγμένη λειτουργία μεγέθυνσης για τον αναπαραγωγέα",
-  "@resizeModeDescription": {},
-  "restoreSettings": "Επαναφορά Ρυθμίσεων",
-  "@restoreSettings": {},
-  "settings": "Ρυθμίσεις",
-  "@settings": {},
-  "showSubtitles": "Εμφάνιση Υποτίτλων",
-  "@showSubtitles": {},
-  "showSubtitlesDescription": "Εμφάνιση υποτίτλων από προεπιλογή",
-  "@showSubtitlesDescription": {},
-  "skipButton": "Κουμπί Παράλειψης",
-  "@skipButton": {},
-  "skipButtonDescription": "Διάρκεια κουμπιού παράλειψης",
-  "@skipButtonDescription": {},
-  "subtitles": "Υπότιτλοι",
-  "@subtitles": {},
-  "subtitlePreview": "Προεπισκόπηση Υποτίτλων",
-  "@subtitlePreview": {},
-  "theme": "Θέμα",
-  "@theme": {},
-  "themeDescription": "Προσαρμόστε την εμφάνιση και την ατμόσφαιρα της εφαρμογής σας",
-  "@themeDescription": {},
-  "supportMaintainer": "Θέλετε να υποστηρίξετε τον συντηρητή του Dartotsu;\nΣκεφτείτε να δωρίσετε",
-  "@supportMaintainer": {},
-  "yes": "Ναι",
-  "@yes": {},
-  "calendar": "Ημερολόγιο",
-  "@calendar": {},
-  "search": "Αναζήτηση",
-  "@search": {},
-  "scanlators": "Μεταφραστές",
-  "@scanlators": {},
-  "dtu": "Υπό Ενημέρωση",
-  "@dtu": {},
-  "list": "{type} Λίστα",
-  "@list": {
-    "placeholders": {
-      "type": {
-        "examples": "Anime list",
-        "type": "String"
-      }
-    }
-  },
-  "listView": "Προβολή Λίστας",
-  "@listView": {},
-  "compactView": "Συμπαγής Προβολή",
-  "@compactView": {},
-  "layout": "Διάταξη",
-  "@layout": {},
-  "popular": "Δημοφιλές {type}",
-  "@popular": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa"
-        ]
-      }
-    }
-  },
-  "activity": "{count, plural, =1 {Δραστηριότητα} other {Δραστηριότητες}}",
-  "@activity": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "browse": "Περιήγηση {type}",
-  "@browse": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "noFavourites": "Φαίνεται ότι δεν σας αρέσει τίποτα,\nΔοκιμάστε να προσθέσετε ένα σόου στα αγαπημένα σας για να το κρατήσετε εδώ.",
-  "@noFavourites": {},
-  "noHiddenMediaFound": "Δεν βρέθηκε κρυφό υλικό",
-  "@noHiddenMediaFound": {},
-  "noOnHold": "Φαίνεται ότι δεν έχετε βάλει κάτι σε αναμονή.",
-  "@noOnHold": {},
-  "averageDuration": "Μέση Διάρκεια",
-  "@averageDuration": {},
-  "characters": "Χαρακτήρες",
-  "@characters": {},
-  "collapseText": "εμφάνιση λιγότερων",
-  "@collapseText": {},
-  "comingSoon": "Έρχεται Σύντομα",
-  "@comingSoon": {},
-  "description": "Περίληψη",
-  "@description": {},
-  "relations": "Σχέσεις",
-  "@relations": {},
-  "sequel": "Συνέχεια",
-  "@sequel": {},
-  "source": "Πηγή",
-  "@source": {},
-  "staff": "Προσωπικό",
-  "@staff": {},
-  "synopsis": "Περίληψη",
-  "@synopsis": {},
-  "tags": "Ετικέτες",
-  "@tags": {},
-  "total": "Σύνολο",
-  "@total": {},
-  "totalEpisodes": "Επεισόδια",
-  "@totalEpisodes": {},
-  "totalChapters": "Κεφάλαια",
-  "@totalChapters": {},
-  "series": "Σειρές",
-  "@series": {},
-  "season": "Σεζόν",
-  "@season": {},
-  "volume": "{count, plural, =1 {Τόμος} other {Τόμοι}}",
-  "@volume": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "endDate": "Ημερομηνία Λήξης",
-  "@endDate": {},
-  "expandText": "εμφάνιση περισσότερων",
-  "@expandText": {},
-  "favorites": "Αγαπημένα",
-  "@favorites": {},
-  "format": "Μορφή",
-  "@format": {},
-  "meanScore": "Μέση Βαθμολογία",
-  "@meanScore": {},
-  "name": "Όνομα",
-  "@name": {},
-  "nameRomaji": "Όνομα (Ρομάτζι)",
-  "@nameRomaji": {},
-  "popularity": "Δημοτικότητα",
-  "@popularity": {},
-  "prequel": "Προιστορία",
-  "@prequel": {},
-  "startDate": "Ημερομηνία Έναρξης",
-  "@startDate": {},
-  "status": "Κατάσταση",
-  "@status": {},
-  "studio": "Στούντιο",
-  "@studio": {},
-  "synonyms": "Συνώνυμα",
-  "@synonyms": {},
-  "author": "Συγγραφέας",
-  "@author": {},
-  "loginTo": "Σύνδεση στο {service}",
-  "@loginTo": {
-    "placeholders": {
-      "service": {
-        "type": "String",
-        "examples": [
-          "Anilist",
-          "MyAnimeList",
-          "Kitsu",
-          "Discord"
-        ]
-      }
-    }
-  },
-  "manhwa": "Μανχούα",
-  "@manhwa": {},
-  "manhua": "Manhua",
-  "@manhua": {},
-  "home": "Αρχική",
-  "@home": {},
-  "novel": "Μυθιστόρημα",
-  "@novel": {},
-  "ln": "Ελαφρύ Μυθιστόρημα",
-  "@ln": {},
-  "info": "Πληροφορίες",
-  "@info": {},
-  "comments": "Σχόλια",
-  "@comments": {},
-  "episode": "{count, plural, =1 {Επεισόδιο} other {Επεισόδια}}",
-  "@episode": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "chapter": "{count, plural, =1 {Κεφάλαιο} other {Κεφάλαια}}",
-  "@chapter": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "movie": "{count, plural, =1 {Ταινία} other {Ταινίες}}",
-  "@movie": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "genres": "Είδη",
-  "@genres": {},
-  "manageLayout": "Διαχείριση διάταξης σελίδας {page} για {service}",
-  "@manageLayout": {
-    "placeholders": {
-      "service": {
-        "type": "String",
-        "examples": [
-          "Anilist",
-          "MAL"
-        ]
-      },
-      "page": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Home",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "confirmLogout": "Είστε σίγουροι ότι θέλετε να αποσυνδεθείτε;",
-  "@confirmLogout": {},
-  "gridView": "Προβολή Πλέγματος",
-  "@gridView": {},
-  "sort": "Ταξινόμηση",
-  "@sort": {},
-  "episodeWatched": "Επεισόδιο Παρακολουθημένο",
-  "@episodeWatched": {},
-  "chapterRead": "Κεφάλαιο Διαβασμένο",
-  "@chapterRead": {},
-  "available": "Διαθέσιμο {type}",
-  "@available": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "installed": "Εγκατεστημένο {type}",
-  "@installed": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Extensions"
-        ]
-      }
-    }
-  },
-  "trending": "Επικρατεί {type}",
-  "@trending": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "mostFavourite": "Πιο Δημοφιλές {type}",
-  "@mostFavourite": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa"
-        ]
-      }
-    }
-  },
-  "topRated": "Κορυφαία Βαθμολογία {type}",
-  "@topRated": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa",
-          "Series"
-        ]
-      }
-    }
-  },
-  "thisSeason": "Αυτή η Σεζόν",
-  "@thisSeason": {},
-  "nextSeason": "Επόμενη Σεζόν",
-  "@nextSeason": {},
-  "previousSeason": "Προηγούμενη Σεζόν",
-  "@previousSeason": {},
-  "planned": "Σχεδιασμένο {type}",
-  "@planned": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "favorite": "Αγαπημένο {type}",
-  "@favorite": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "onHold": "Σε Αναμονή {type}",
-  "@onHold": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "noDropped": "Δεν έχετε εγκαταλείψει κανένα {type} ακόμα.",
-  "@noDropped": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "droppedManga": "Εγκαταλελειμμένο Manga",
-  "@droppedManga": {},
-  "topAiring": "Κορυφαία Προβολή",
-  "@topAiring": {},
-  "watch": "Παρακολούθηση",
-  "@watch": {},
-  "language": "Γλώσσα",
-  "@language": {},
-  "recommended": "Συνιστώμενο",
-  "@recommended": {},
-  "addToList": "Προσθήκη στη Λίστα",
-  "@addToList": {},
-  "read": "Ανάγνωση",
-  "@read": {},
-  "continueReading": "Συνέχεια Ανάγνωσης",
-  "@continueReading": {},
-  "continueWatching": "Συνέχεια Παρακολούθησης",
-  "@continueWatching": {},
-  "options": "Ρυθμίσεις",
-  "@options": {},
-  "recentUpdates": "Πρόσφατες Ενημερώσεις",
-  "@recentUpdates": {},
-  "recommendationsEmptyMessage": "Παρακολουθήστε/Διαβάστε κάποιο Anime ή Manga για να πάρετε Προτάσεις",
-  "@recommendationsEmptyMessage": {},
-  "utd": "Από Κάτω προς Πάνω",
-  "@utd": {},
-  "manageLayoutDescription": "Μπορείτε να διαχειριστείτε τη διάταξη της σελίδας {page} σύροντας και αποθέτοντας τα αντικείμενα",
-  "@manageLayoutDescription": {
-    "placeholders": {
-      "page": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Home",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "pickColor": "Επιλέξτε χρώμα",
-  "@pickColor": {},
-  "allCaughtUpNew": "Όλα εντάξει, τι νέο υπάρχει;",
-  "@allCaughtUpNew": {},
-  "droppedAnime": "Εγκαταλελειμμένο Anime",
-  "@droppedAnime": {},
-  "hiddenMedia": "Κρυφό Υλικό",
-  "@hiddenMedia": {},
-  "kitsu": "Kitsu",
-  "@kitsu": {},
-  "simkl": "Simkl",
-  "@simkl": {},
-  "logFile": "Log File",
-  "@logFile": {},
-  "colorPickerDefault": "Default",
-  "@colorPickerDefault": {},
-  "logFileDescription": "Μοιραστείτε το αρχείο καταγραφής",
-  "@logFileDescription": {},
-  "colorPickerCustom": "Εθιμο",
-  "@colorPickerCustom": {},
-  "loadExtensionsIconDesc": "Αποδεικνύεται αν η σελίδα lags",
-  "@loadExtensionsIconDesc": {},
-  "addAnimeRepo": "Προσθέστε DU Repo",
-  "@addAnimeRepo": {},
-  "autoUpdateDesc": "Αυτόματη ενημέρωση επεκτάσεων",
-  "@autoUpdateDesc": {},
-  "addNovelRepoDesc": "Add Novel Repo από διάφορες πηγές",
-  "@addNovelRepoDesc": {},
-  "addMangaRepoDesc": "Προσθέστε Manga Αποκάλυψη από διάφορες πηγές",
-  "@addMangaRepoDesc": {},
-  "addAnimeRepoDesc": "Προσθέστε το DU Repo από διάφορες πηγές",
-  "@addAnimeRepoDesc": {},
-  "addMangaRepo": "Προσθέστε Manga Repo",
-  "@addMangaRepo": {},
-  "addNovelRepo": "Προσθήκη Novel Repo",
-  "@addNovelRepo": {},
-  "selectDirectory": "Επιλέξτε έναν κατάλογο",
-  "@selectDirectory": {},
-  "autoUpdate": "Auto Update Auto Update",
-  "@autoUpdate": {},
-  "loadExtensionsIcon": "Φόρες επεκτάσεις εικόνων",
-  "@loadExtensionsIcon": {},
-  "customPath": "Προσαρμοσμένη διαδρομή",
-  "@customPath": {},
-  "selectMediaService": "Επιλέξτε Media Service",
-  "@selectMediaService": {},
-  "customPathDescription": "Ορίστε ένα προσαρμοσμένο μονοπάτι για να αποθηκεύσετε αρχεία\nLong Press για να αφαιρέσετε",
-  "@customPathDescription": {},
-  "noChapterFound": "Κανένα κεφάλαιο δεν βρέθηκε",
-  "@noChapterFound": {},
-  "watching": "Παρακολουθώντας",
-  "@watching": {},
-  "outOf": "έξω",
-  "@outOf": {},
-  "selected": "Επιλέξτε",
-  "@selected": {},
-  "readStatus": "Ανάγνωση",
-  "@readStatus": {},
-  "youTube": "Παίξτε στο YouTube?",
-  "@youTube": {},
-  "mediaNotFound": "Media που δεν βρέθηκαν",
-  "@mediaNotFound": {},
-  "found": "Θεμελιώ",
-  "@found": {},
-  "watchStatus": "Παρακολούθησαν",
-  "@watchStatus": {},
-  "totalOf": "Total of Total",
-  "@totalOf": {},
-  "wrongTitle": "Λάθος τίτλος?",
-  "@wrongTitle": {},
-  "installSourceToStart": "Εγκαταστήστε μια πηγή από σελίδα επέκτασης για να ξεκινήσετε",
-  "@installSourceToStart": {},
-  "webView": "Web View",
-  "@webView": {},
-  "reading": "Διαβάζοντας ανάγνωση",
-  "@reading": {},
-  "playerSettingsDesc": "Αλλάξτε ρυθμίσεις παίκτη",
-  "@playerSettingsDesc": {},
-  "thumbLessSeekBar": "ThumbLess Seek Bar",
-  "@thumbLessSeekBar": {},
-  "hidePageNumberDesc": "Αριθμός σελίδας Hide κατά την ανάγνωση",
-  "@hidePageNumberDesc": {},
-  "hidePageNumber": "Απόκρυψη αριθμού σελίδας",
-  "@hidePageNumber": {},
-  "developersHelpersDesc": "Η μη αμειβόμενη εργασία του Dartotsu",
-  "@developersHelpersDesc": {},
-  "developersHelpers": "Προγραμματιστές/Βοηθοί",
-  "@developersHelpers": {},
-  "thumbLessSeekBarDesc": "Αφαιρέστε τον αντίχειρα από το κέντρο αναζήτησης",
-  "@thumbLessSeekBarDesc": {},
-  "differentCacheManagerDesc": "Χρησιμοποιήστε διαφορετικό διαχειριστή μνήμης εικόνας",
-  "@differentCacheManagerDesc": {},
-  "differentCacheManager": "Διαφορετική Cache Manager",
-  "@differentCacheManager": {},
-  "spacedPagesDesc": "Προσθέστε χώρο μεταξύ σελίδων",
-  "@spacedPagesDesc": {},
-  "spacedPages": "Spaced Σελίδες",
-  "@spacedPages": {},
-  "readerSettingsDesc": "Αλλαγή ρυθμίσεις αναγνώστη",
-  "@readerSettingsDesc": {},
-  "hideScrollbarDesc": "Hide Scrollbar κατά την ανάγνωση",
-  "@hideScrollbarDesc": {},
-  "direction": "Σκηνοθεσία",
-  "@direction": {},
-  "readerSettings": "Επιλογές Reader",
-  "@readerSettings": {},
-  "hideScrollbar": "Απόκρυψη γραμμής κύλισης",
-  "@hideScrollbar": {}
+    "about": "Σχετικά",
+    "@about": {},
+    "aboutDescription": "Μάθετε περισσότερα για την εφαρμογή και τους δημιουργούς της",
+    "@aboutDescription": {},
+    "account": "Λογαριασμός",
+    "@account": {},
+    "backgroundColor": "Χρώμα Φόντου",
+    "@backgroundColor": {},
+    "speed": "Ταχύτητα",
+    "@speed": {},
+    "speedDescription": "Προεπιλεγμένη ταχύτητα για τον αναπαραγωγέα",
+    "@speedDescription": {},
+    "accountDescription": "Διαχειριστείτε εύκολα τους λογαριασμούς σας στο AniList, MAL και Discord",
+    "@accountDescription": {},
+    "anime": "Άνιμε",
+    "@anime": {},
+    "animeDescription": "Προσαρμόστε και διαχειριστείτε τις προτιμήσεις σας για το άνιμε",
+    "@animeDescription": {},
+    "anilist": "AniList",
+    "@anilist": {},
+    "appName": "Dartotsu",
+    "@appName": {},
+    "appTagline": "Η ΝΕΑ Καλύτερη Εφαρμογή Για\nΠαρακολούθηση Άνιμε & Μάνγκα",
+    "@appTagline": {},
+    "backgroundColorDescription": "Χρώμα φόντου υποτίτλων",
+    "@backgroundColorDescription": {},
+    "bottomPadding": "Κάτω Περιθώριο",
+    "@bottomPadding": {},
+    "cancel": "Ακύρωση",
+    "@cancel": {},
+    "colorPicker": "Επιλογέας Χρώματος",
+    "@colorPicker": {},
+    "colorPickerDescription": "Επιλέξτε ένα χρώμα",
+    "@colorPickerDescription": {},
+    "bottomPaddingDescription": "Κάτω περιθώριο υποτίτλων",
+    "@bottomPaddingDescription": {},
+    "common": "Κοινό",
+    "@common": {},
+    "commonDescription": "Πρόσβαση στις γενικές ρυθμίσεις για αδιάλειπτη χρήση της εφαρμογής",
+    "@commonDescription": {},
+    "cursedSpeed": "Καταραμένη Ταχύτητα",
+    "@cursedSpeed": {},
+    "cursedSpeedDescription": "Για άτομα που είναι πολύ απασχολημένα με τη ζωή",
+    "@cursedSpeedDescription": {},
+    "customTheme": "Custom Custom Custom Custom Custom Theme",
+    "@customTheme": {},
+    "customThemeDescription": "Χρησιμοποιήστε το δικό σας χρώμα για το θέμα",
+    "@customThemeDescription": {},
+    "darkMode": "Σκοτεινή Λειτουργία",
+    "@darkMode": {},
+    "discord": "Discord",
+    "@discord": {},
+    "donationGoal": "Δεν υπάρχει στόχος δωρεάς αυτή τη στιγμή",
+    "@donationGoal": {},
+    "enableDarkMode": "Ενεργοποιήστε τη Σκοτεινή Λειτουργία",
+    "@enableDarkMode": {},
+    "extension": "{count, plural, =1 {Επέκταση} other {Επεκτάσεις}}",
+    "@extension": {},
+    "extensionsDescription": "Εγκαταστήστε και διαχειριστείτε επεκτάσεις για επιπλέον λειτουργικότητα",
+    "@extensionsDescription": {},
+    "fontColor": "Χρώμα Γραμματοσειράς",
+    "@fontColor": {},
+    "fontColorDescription": "Χρώμα γραμματοσειράς υποτίτλων",
+    "@fontColorDescription": {},
+    "fontFamily": "Οικογένεια Γραμματοσειράς",
+    "@fontFamily": {},
+    "fontFamilyDescription": "Οικογένεια γραμματοσειράς υποτίτλων",
+    "@fontFamilyDescription": {},
+    "fontSize": "Μέγεθος Γραμματοσειράς",
+    "@fontSize": {},
+    "fontSizeDescription": "Μέγεθος γραμματοσειράς υποτίτλων",
+    "@fontSizeDescription": {},
+    "fontWeight": "Βάρος Γραμματοσειράς",
+    "@fontWeight": {},
+    "fontWeightDescription": "Βάρος γραμματοσειράς υποτίτλων",
+    "@fontWeightDescription": {},
+    "hidePrivate": "Απόκρυψη Ιδιωτικού",
+    "@hidePrivate": {},
+    "hidePrivateDescription": "Απόκρυψη ιδιωτικών σειρών από την αρχική σελίδα.",
+    "@hidePrivateDescription": {},
+    "incognitoMode": "Λειτουργία Ανώνυμης Περιήγησης",
+    "@incognitoMode": {},
+    "incognitoModeDescription": "Περιήγηση χωρίς αποθήκευση της δραστηριότητάς σας",
+    "@incognitoModeDescription": {},
+    "login": "Σύνδεση",
+    "@login": {},
+    "logout": "Αποσύνδεση {type}",
+    "@logout": {},
+    "mal": "MyAnimeList",
+    "@mal": {},
+    "manga": "Manga",
+    "@manga": {},
+    "mangaDescription": "Οργανώστε και προσαρμόστε την εμπειρία σας με το μάνγκα",
+    "@mangaDescription": {},
+    "materialYou": "Material You",
+    "@materialYou": {},
+    "materialYouDescription": "Χρησιμοποιήστε το ίδιο χρώμα με το φόντο σας",
+    "@materialYouDescription": {},
+    "no": "Όχι",
+    "@no": {},
+    "notifications": "Ειδοποιήσεις",
+    "@notifications": {},
+    "notificationsDescription": "Ρυθμίστε πώς και πότε θα λαμβάνετε ειδοποιήσεις",
+    "@notificationsDescription": {},
+    "offlineMode": "Λειτουργία Εκτός Σύνδεσης",
+    "@offlineMode": {},
+    "offlineModeDescription": "Χρησιμοποιήστε την εφαρμογή χωρίς σύνδεση στο διαδίκτυο",
+    "@offlineModeDescription": {},
+    "ok": "Εντάξει",
+    "@ok": {},
+    "oledThemeVariant": "Παραλλαγή Θέματος OLED",
+    "@oledThemeVariant": {},
+    "oledThemeVariantDescription": "Ενεργοποιήστε τη Λειτουργία OLED",
+    "@oledThemeVariantDescription": {},
+    "outlineColor": "Χρώμα Περιγράμματος",
+    "@outlineColor": {},
+    "outlineColorDescription": "Χρώμα περιγράμματος υποτίτλων",
+    "@outlineColorDescription": {},
+    "playerSettingsTitle": "Ρυθμίσεις Αναπαραγωγέα",
+    "@playerSettingsTitle": {},
+    "resizeMode": "Λειτουργία Μεγέθυνσης",
+    "@resizeMode": {},
+    "resizeModeDescription": "Προεπιλεγμένη λειτουργία μεγέθυνσης για τον αναπαραγωγέα",
+    "@resizeModeDescription": {},
+    "restoreSettings": "Επαναφορά Ρυθμίσεων",
+    "@restoreSettings": {},
+    "settings": "Ρυθμίσεις",
+    "@settings": {},
+    "showSubtitles": "Εμφάνιση Υποτίτλων",
+    "@showSubtitles": {},
+    "showSubtitlesDescription": "Εμφάνιση υποτίτλων από προεπιλογή",
+    "@showSubtitlesDescription": {},
+    "skipButton": "Κουμπί Παράλειψης",
+    "@skipButton": {},
+    "skipButtonDescription": "Διάρκεια κουμπιού παράλειψης",
+    "@skipButtonDescription": {},
+    "subtitles": "Υπότιτλοι",
+    "@subtitles": {},
+    "subtitlePreview": "Προεπισκόπηση Υποτίτλων",
+    "@subtitlePreview": {},
+    "theme": "Θέμα",
+    "@theme": {},
+    "themeDescription": "Προσαρμόστε την εμφάνιση και την ατμόσφαιρα της εφαρμογής σας",
+    "@themeDescription": {},
+    "supportMaintainer": "Θέλετε να υποστηρίξετε τον συντηρητή του Dartotsu;\nΣκεφτείτε να δωρίσετε",
+    "@supportMaintainer": {},
+    "yes": "Ναι",
+    "@yes": {},
+    "calendar": "Ημερολόγιο",
+    "@calendar": {},
+    "search": "Αναζήτηση",
+    "@search": {},
+    "scanlators": "Μεταφραστές",
+    "@scanlators": {},
+    "dtu": "Υπό Ενημέρωση",
+    "@dtu": {},
+    "list": "{type} Λίστα",
+    "@list": {
+        "placeholders": {
+            "type": {
+                "examples": "Anime list",
+                "type": "String"
+            }
+        }
+    },
+    "listView": "Προβολή Λίστας",
+    "@listView": {},
+    "compactView": "Συμπαγής Προβολή",
+    "@compactView": {},
+    "layout": "Διάταξη",
+    "@layout": {},
+    "popular": "Δημοφιλές {type}",
+    "@popular": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa"
+                ]
+            }
+        }
+    },
+    "activity": "{count, plural, =1 {Δραστηριότητα} other {Δραστηριότητες}}",
+    "@activity": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "browse": "Περιήγηση {type}",
+    "@browse": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "noFavourites": "Φαίνεται ότι δεν σας αρέσει τίποτα,\nΔοκιμάστε να προσθέσετε ένα σόου στα αγαπημένα σας για να το κρατήσετε εδώ.",
+    "@noFavourites": {},
+    "noHiddenMediaFound": "Δεν βρέθηκε κρυφό υλικό",
+    "@noHiddenMediaFound": {},
+    "noOnHold": "Φαίνεται ότι δεν έχετε βάλει κάτι σε αναμονή.",
+    "@noOnHold": {},
+    "averageDuration": "Μέση Διάρκεια",
+    "@averageDuration": {},
+    "characters": "Χαρακτήρες",
+    "@characters": {},
+    "collapseText": "εμφάνιση λιγότερων",
+    "@collapseText": {},
+    "comingSoon": "Έρχεται Σύντομα",
+    "@comingSoon": {},
+    "relations": "Σχέσεις",
+    "@relations": {},
+    "sequel": "Συνέχεια",
+    "@sequel": {},
+    "source": "Πηγή",
+    "@source": {},
+    "staff": "Προσωπικό",
+    "@staff": {},
+    "synopsis": "Περίληψη",
+    "@synopsis": {},
+    "tags": "Ετικέτες",
+    "@tags": {},
+    "total": "Σύνολο",
+    "@total": {},
+    "totalEpisodes": "Επεισόδια",
+    "@totalEpisodes": {},
+    "totalChapters": "Κεφάλαια",
+    "@totalChapters": {},
+    "series": "Σειρές",
+    "@series": {},
+    "season": "Σεζόν",
+    "@season": {},
+    "volume": "{count, plural, =1 {Τόμος} other {Τόμοι}}",
+    "@volume": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "endDate": "Ημερομηνία Λήξης",
+    "@endDate": {},
+    "expandText": "εμφάνιση περισσότερων",
+    "@expandText": {},
+    "favorites": "Αγαπημένα",
+    "@favorites": {},
+    "format": "Μορφή",
+    "@format": {},
+    "meanScore": "Μέση Βαθμολογία",
+    "@meanScore": {},
+    "name": "Όνομα",
+    "@name": {},
+    "nameRomaji": "Όνομα (Ρομάτζι)",
+    "@nameRomaji": {},
+    "popularity": "Δημοτικότητα",
+    "@popularity": {},
+    "prequel": "Προιστορία",
+    "@prequel": {},
+    "startDate": "Ημερομηνία Έναρξης",
+    "@startDate": {},
+    "status": "Κατάσταση",
+    "@status": {},
+    "studio": "Στούντιο",
+    "@studio": {},
+    "synonyms": "Συνώνυμα",
+    "@synonyms": {},
+    "author": "Συγγραφέας",
+    "@author": {},
+    "loginTo": "Σύνδεση στο {service}",
+    "@loginTo": {
+        "placeholders": {
+            "service": {
+                "type": "String",
+                "examples": [
+                    "Anilist",
+                    "MyAnimeList",
+                    "Kitsu",
+                    "Discord"
+                ]
+            }
+        }
+    },
+    "manhwa": "Μανχούα",
+    "@manhwa": {},
+    "manhua": "Manhua",
+    "@manhua": {},
+    "home": "Αρχική",
+    "@home": {},
+    "novel": "Μυθιστόρημα",
+    "@novel": {},
+    "ln": "Ελαφρύ Μυθιστόρημα",
+    "@ln": {},
+    "info": "Πληροφορίες",
+    "@info": {},
+    "comments": "Σχόλια",
+    "@comments": {},
+    "episode": "{count, plural, =1 {Επεισόδιο} other {Επεισόδια}}",
+    "@episode": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "chapter": "{count, plural, =1 {Κεφάλαιο} other {Κεφάλαια}}",
+    "@chapter": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "movie": "{count, plural, =1 {Ταινία} other {Ταινίες}}",
+    "@movie": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "genres": "Είδη",
+    "@genres": {},
+    "manageLayout": "Διαχείριση διάταξης σελίδας {page} για {service}",
+    "@manageLayout": {
+        "placeholders": {
+            "service": {
+                "type": "String",
+                "examples": [
+                    "Anilist",
+                    "MAL"
+                ]
+            },
+            "page": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Home",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "confirmLogout": "Είστε σίγουροι ότι θέλετε να αποσυνδεθείτε;",
+    "@confirmLogout": {},
+    "gridView": "Προβολή Πλέγματος",
+    "@gridView": {},
+    "sort": "Ταξινόμηση",
+    "@sort": {},
+    "episodeWatched": "Επεισόδιο Παρακολουθημένο",
+    "@episodeWatched": {},
+    "chapterRead": "Κεφάλαιο Διαβασμένο",
+    "@chapterRead": {},
+    "available": "Διαθέσιμο {type}",
+    "@available": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "installed": "Εγκατεστημένο {type}",
+    "@installed": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Extensions"
+                ]
+            }
+        }
+    },
+    "trending": "Επικρατεί {type}",
+    "@trending": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "mostFavourite": "Πιο Δημοφιλές {type}",
+    "@mostFavourite": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa"
+                ]
+            }
+        }
+    },
+    "topRated": "Κορυφαία Βαθμολογία {type}",
+    "@topRated": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa",
+                    "Series"
+                ]
+            }
+        }
+    },
+    "thisSeason": "Αυτή η Σεζόν",
+    "@thisSeason": {},
+    "nextSeason": "Επόμενη Σεζόν",
+    "@nextSeason": {},
+    "previousSeason": "Προηγούμενη Σεζόν",
+    "@previousSeason": {},
+    "planned": "Σχεδιασμένο {type}",
+    "@planned": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "favorite": "Αγαπημένο {type}",
+    "@favorite": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "onHold": "Σε Αναμονή {type}",
+    "@onHold": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "noDropped": "Δεν έχετε εγκαταλείψει κανένα {type} ακόμα.",
+    "@noDropped": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "droppedManga": "Εγκαταλελειμμένο Manga",
+    "@droppedManga": {},
+    "topAiring": "Κορυφαία Προβολή",
+    "@topAiring": {},
+    "watch": "Παρακολούθηση",
+    "@watch": {},
+    "language": "Γλώσσα",
+    "@language": {},
+    "recommended": "Συνιστώμενο",
+    "@recommended": {},
+    "addToList": "Προσθήκη στη Λίστα",
+    "@addToList": {},
+    "read": "Ανάγνωση",
+    "@read": {},
+    "continueReading": "Συνέχεια Ανάγνωσης",
+    "@continueReading": {},
+    "continueWatching": "Συνέχεια Παρακολούθησης",
+    "@continueWatching": {},
+    "options": "Ρυθμίσεις",
+    "@options": {},
+    "recentUpdates": "Πρόσφατες Ενημερώσεις",
+    "@recentUpdates": {},
+    "recommendationsEmptyMessage": "Παρακολουθήστε/Διαβάστε κάποιο Anime ή Manga για να πάρετε Προτάσεις",
+    "@recommendationsEmptyMessage": {},
+    "utd": "Από Κάτω προς Πάνω",
+    "@utd": {},
+    "manageLayoutDescription": "Μπορείτε να διαχειριστείτε τη διάταξη της σελίδας {page} σύροντας και αποθέτοντας τα αντικείμενα",
+    "@manageLayoutDescription": {
+        "placeholders": {
+            "page": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Home",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "pickColor": "Επιλέξτε χρώμα",
+    "@pickColor": {},
+    "allCaughtUpNew": "Όλα εντάξει, τι νέο υπάρχει;",
+    "@allCaughtUpNew": {},
+    "droppedAnime": "Εγκαταλελειμμένο Anime",
+    "@droppedAnime": {},
+    "hiddenMedia": "Κρυφό Υλικό",
+    "@hiddenMedia": {},
+    "kitsu": "Kitsu",
+    "@kitsu": {},
+    "simkl": "Simkl",
+    "@simkl": {},
+    "logFile": "Log File",
+    "@logFile": {},
+    "colorPickerDefault": "Default",
+    "@colorPickerDefault": {},
+    "logFileDescription": "Μοιραστείτε το αρχείο καταγραφής",
+    "@logFileDescription": {},
+    "colorPickerCustom": "Εθιμο",
+    "@colorPickerCustom": {},
+    "loadExtensionsIconDesc": "Αποδεικνύεται αν η σελίδα lags",
+    "@loadExtensionsIconDesc": {},
+    "addAnimeRepo": "Προσθέστε DU Repo",
+    "@addAnimeRepo": {},
+    "autoUpdateDesc": "Αυτόματη ενημέρωση επεκτάσεων",
+    "@autoUpdateDesc": {},
+    "addNovelRepoDesc": "Add Novel Repo από διάφορες πηγές",
+    "@addNovelRepoDesc": {},
+    "addMangaRepoDesc": "Προσθέστε Manga Αποκάλυψη από διάφορες πηγές",
+    "@addMangaRepoDesc": {},
+    "addAnimeRepoDesc": "Προσθέστε το DU Repo από διάφορες πηγές",
+    "@addAnimeRepoDesc": {},
+    "addMangaRepo": "Προσθέστε Manga Repo",
+    "@addMangaRepo": {},
+    "addNovelRepo": "Προσθήκη Novel Repo",
+    "@addNovelRepo": {},
+    "selectDirectory": "Επιλέξτε έναν κατάλογο",
+    "@selectDirectory": {},
+    "autoUpdate": "Auto Update Auto Update",
+    "@autoUpdate": {},
+    "loadExtensionsIcon": "Φόρες επεκτάσεις εικόνων",
+    "@loadExtensionsIcon": {},
+    "customPath": "Προσαρμοσμένη διαδρομή",
+    "@customPath": {},
+    "selectMediaService": "Επιλέξτε Media Service",
+    "@selectMediaService": {},
+    "customPathDescription": "Ορίστε ένα προσαρμοσμένο μονοπάτι για να αποθηκεύσετε αρχεία\nLong Press για να αφαιρέσετε",
+    "@customPathDescription": {},
+    "noChapterFound": "Κανένα κεφάλαιο δεν βρέθηκε",
+    "@noChapterFound": {},
+    "watching": "Παρακολουθώντας",
+    "@watching": {},
+    "outOf": "έξω",
+    "@outOf": {},
+    "selected": "Επιλέξτε",
+    "@selected": {},
+    "readStatus": "Ανάγνωση",
+    "@readStatus": {},
+    "youTube": "Παίξτε στο YouTube?",
+    "@youTube": {},
+    "mediaNotFound": "Media που δεν βρέθηκαν",
+    "@mediaNotFound": {},
+    "found": "Θεμελιώ",
+    "@found": {},
+    "watchStatus": "Παρακολούθησαν",
+    "@watchStatus": {},
+    "totalOf": "Total of Total",
+    "@totalOf": {},
+    "wrongTitle": "Λάθος τίτλος?",
+    "@wrongTitle": {},
+    "installSourceToStart": "Εγκαταστήστε μια πηγή από σελίδα επέκτασης για να ξεκινήσετε",
+    "@installSourceToStart": {},
+    "webView": "Web View",
+    "@webView": {},
+    "reading": "Διαβάζοντας ανάγνωση",
+    "@reading": {},
+    "playerSettingsDesc": "Αλλάξτε ρυθμίσεις παίκτη",
+    "@playerSettingsDesc": {},
+    "thumbLessSeekBar": "ThumbLess Seek Bar",
+    "@thumbLessSeekBar": {},
+    "hidePageNumberDesc": "Αριθμός σελίδας Hide κατά την ανάγνωση",
+    "@hidePageNumberDesc": {},
+    "hidePageNumber": "Απόκρυψη αριθμού σελίδας",
+    "@hidePageNumber": {},
+    "developersHelpersDesc": "Η μη αμειβόμενη εργασία του Dartotsu",
+    "@developersHelpersDesc": {},
+    "developersHelpers": "Προγραμματιστές/Βοηθοί",
+    "@developersHelpers": {},
+    "thumbLessSeekBarDesc": "Αφαιρέστε τον αντίχειρα από το κέντρο αναζήτησης",
+    "@thumbLessSeekBarDesc": {},
+    "differentCacheManagerDesc": "Χρησιμοποιήστε διαφορετικό διαχειριστή μνήμης εικόνας",
+    "@differentCacheManagerDesc": {},
+    "differentCacheManager": "Διαφορετική Cache Manager",
+    "@differentCacheManager": {},
+    "spacedPagesDesc": "Προσθέστε χώρο μεταξύ σελίδων",
+    "@spacedPagesDesc": {},
+    "spacedPages": "Spaced Σελίδες",
+    "@spacedPages": {},
+    "readerSettingsDesc": "Αλλαγή ρυθμίσεις αναγνώστη",
+    "@readerSettingsDesc": {},
+    "hideScrollbarDesc": "Hide Scrollbar κατά την ανάγνωση",
+    "@hideScrollbarDesc": {},
+    "direction": "Σκηνοθεσία",
+    "@direction": {},
+    "readerSettings": "Επιλογές Reader",
+    "@readerSettings": {},
+    "hideScrollbar": "Απόκρυψη γραμμής κύλισης",
+    "@hideScrollbar": {},
+    "glassEffect": "Γυάλινη επίδραση",
+    "@glassEffect": {},
+    "ltr": "Αριστερά δεξιά",
+    "@ltr": {},
+    "coverThemeDescription": "Χρησιμοποιήστε την εικόνα των μέσων ενημέρωσης ως θέμα χρώμα",
+    "@coverThemeDescription": {},
+    "rtl": "Δικαίωμα στην Αριστερά",
+    "@rtl": {},
+    "glassEffectDescription": "Δίνει μια παγετοποιημένη γυάλινη επίδραση στην εφαρμογή",
+    "@glassEffectDescription": {},
+    "nextEpisodeRelease": "Το επεισόδιο {episode} θα κυκλοφορήσει στο",
+    "@nextEpisodeRelease": {
+        "description": "Message showing the next episode info",
+        "placeholders": {
+            "episode": {
+                "type": "int"
+            }
+        }
+    },
+    "topScore": "Top Score",
+    "@topScore": {},
+    "coverTheme": "Χρησιμοποιήστε την κάλυψη",
+    "@coverTheme": {},
+    "customMPVDescription": "Enable this option to use your own MPV configuration file. Place your custom config at: {path}",
+    "@customMPVDescription": {
+        "placeholders": {
+            "path": {
+                "type": "String"
+            }
+        }
+    },
+    "customMPV": "Custom MPV Configuration",
+    "@customMPV": {}
 }

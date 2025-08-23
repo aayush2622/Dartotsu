@@ -1,625 +1,656 @@
 {
-  "anime": "Аніме",
-  "@anime": {},
-  "backgroundColor": "Колір тла",
-  "@backgroundColor": {},
-  "backgroundColorDescription": "Колір тла субтитрів",
-  "@backgroundColorDescription": {},
-  "bottomPadding": "Нижній відступ",
-  "@bottomPadding": {},
-  "bottomPaddingDescription": "Нижній відступ субтитрів",
-  "@bottomPaddingDescription": {},
-  "cancel": "Скасувати",
-  "@cancel": {},
-  "colorPicker": "Підбір кольору",
-  "@colorPicker": {},
-  "colorPickerDescription": "Оберіть колір",
-  "@colorPickerDescription": {},
-  "commonDescription": "Доступ до загальних налаштувань для безперебійного використання застосунку",
-  "@commonDescription": {},
-  "common": "Спільні",
-  "@common": {},
-  "cursedSpeed": "Проклята швидкість",
-  "@cursedSpeed": {},
-  "cursedSpeedDescription": "Для людей, які занадто зайняті життям",
-  "@cursedSpeedDescription": {},
-  "customThemeDescription": "Використовуйте свій власний колір для теми",
-  "@customThemeDescription": {},
-  "darkMode": "Темний режим",
-  "@darkMode": {},
-  "discord": "Discord",
-  "@discord": {},
-  "donationGoal": "Немає цільових пожертв",
-  "@donationGoal": {},
-  "enableDarkMode": "Увімкнути темний режим",
-  "@enableDarkMode": {},
-  "fontWeight": "Товщина шрифту",
-  "@fontWeight": {},
-  "fontWeightDescription": "Товщина шрифту субтитрів",
-  "@fontWeightDescription": {},
-  "hidePrivate": "Приховати приватне",
-  "@hidePrivate": {},
-  "incognitoMode": "Приватний перегляд",
-  "@incognitoMode": {},
-  "logout": "Вийти {type}",
-  "@logout": {},
-  "manga": "Манґа",
-  "@manga": {},
-  "materialYou": "Material You",
-  "@materialYou": {},
-  "materialYouDescription": "Використовувати той самий колір, що і шпалери",
-  "@materialYouDescription": {},
-  "no": "Ні",
-  "@no": {},
-  "offlineMode": "Автономний режим",
-  "@offlineMode": {},
-  "offlineModeDescription": "Використовувати застосунок без з'єднання з мережею",
-  "@offlineModeDescription": {},
-  "oledThemeVariant": "OLED тема",
-  "@oledThemeVariant": {},
-  "oledThemeVariantDescription": "Увімкнути режим OLED",
-  "@oledThemeVariantDescription": {},
-  "outlineColor": "Колір контура",
-  "@outlineColor": {},
-  "outlineColorDescription": "Колір контура субтитрів",
-  "@outlineColorDescription": {},
-  "playerSettingsTitle": "Налаштування програвача",
-  "@playerSettingsTitle": {},
-  "resizeMode": "Режим зміни розміру",
-  "@resizeMode": {},
-  "resizeModeDescription": "Типовий режим зміни розміру програвача",
-  "@resizeModeDescription": {},
-  "restoreSettings": "Відновлення налаштувань",
-  "@restoreSettings": {},
-  "settings": "Налаштування",
-  "@settings": {},
-  "showSubtitles": "Показувати субтитри",
-  "@showSubtitles": {},
-  "showSubtitlesDescription": "Типово показувати субтитри",
-  "@showSubtitlesDescription": {},
-  "skipButton": "Кнопка «Пропустити»",
-  "@skipButton": {},
-  "skipButtonDescription": "Час пропускання кнопкою «Пропустити»",
-  "@skipButtonDescription": {},
-  "speed": "Швидкість",
-  "@speed": {},
-  "speedDescription": "Типова швидкість програвача",
-  "@speedDescription": {},
-  "subtitles": "Субтитри",
-  "@subtitles": {},
-  "subtitlePreview": "Передперегляд субтитрів",
-  "@subtitlePreview": {},
-  "supportMaintainer": "Хочете підтримати розробника Dartotsu?\nПодумайте про пожертву",
-  "@supportMaintainer": {},
-  "yes": "Так",
-  "@yes": {},
-  "extension": "{count, plural, =1 {Розширення} other {Розширення}}",
-  "@extension": {},
-  "hidePrivateDescription": "Приховати приватні серії з головної сторінки.",
-  "@hidePrivateDescription": {},
-  "login": "Увійти",
-  "@login": {},
-  "notificationsDescription": "Налаштуйте, як і коли ви будете отримувати сповіщення",
-  "@notificationsDescription": {},
-  "fontSize": "Розмір шрифту",
-  "@fontSize": {},
-  "fontFamily": "Сімейство шрифтів",
-  "@fontFamily": {},
-  "fontSizeDescription": "Розмір шрифту субтитрів",
-  "@fontSizeDescription": {},
-  "extensionsDescription": "Встановлюйте та керуйте розширеннями для додаткової функціональності",
-  "@extensionsDescription": {},
-  "fontColorDescription": "Колір шрифту субтитрів",
-  "@fontColorDescription": {},
-  "incognitoModeDescription": "Переглядайте без збереження активності",
-  "@incognitoModeDescription": {},
-  "notifications": "Сповіщення",
-  "@notifications": {},
-  "appTagline": "НОВИЙ найкращий застосунок для\nвідстеження аніме та манґи",
-  "@appTagline": {},
-  "customTheme": "Власна тема",
-  "@customTheme": {},
-  "anilist": "AniList",
-  "@anilist": {},
-  "about": "Про застосунок",
-  "@about": {},
-  "aboutDescription": "Дізнайтеся більше про застосунок та його творців",
-  "@aboutDescription": {},
-  "account": "Облікові записи",
-  "@account": {},
-  "ok": "Гаразд",
-  "@ok": {},
-  "accountDescription": "Керуйте обліковими записами AniList, MAL та Discord без зайвих зусиль",
-  "@accountDescription": {},
-  "animeDescription": "Персоналізуйте та керуйте своїми вподобаннями щодо аніме",
-  "@animeDescription": {},
-  "appName": "Dartotsu",
-  "@appName": {},
-  "fontColor": "Колір шрифту",
-  "@fontColor": {},
-  "mangaDescription": "Організуйте та адаптуйте свій досвід читання манґи",
-  "@mangaDescription": {},
-  "fontFamilyDescription": "Сімейство шрифтів субтитрів",
-  "@fontFamilyDescription": {},
-  "themeDescription": "Налаштуйте вигляд та атмосферу вашого застосунку",
-  "@themeDescription": {},
-  "mal": "MyAnimeList",
-  "@mal": {},
-  "theme": "Тема",
-  "@theme": {},
-  "dtu": "Знизу вгору",
-  "@dtu": {},
-  "addToList": "Додати до списку",
-  "@addToList": {},
-  "allCaughtUpNew": "Що нового?",
-  "@allCaughtUpNew": {},
-  "comments": "Коментарі",
-  "@comments": {},
-  "continueReading": "Продовжити читати",
-  "@continueReading": {},
-  "continueWatching": "Продовжити перегляд",
-  "@continueWatching": {},
-  "droppedAnime": "Покинуте аніме",
-  "@droppedAnime": {},
-  "droppedManga": "Покинута манґа",
-  "@droppedManga": {},
-  "hiddenMedia": "Приховані медіа",
-  "@hiddenMedia": {},
-  "info": "Інформація",
-  "@info": {},
-  "language": "Мова",
-  "@language": {},
-  "layout": "Макет",
-  "@layout": {},
-  "list": "{type} Список",
-  "@list": {},
-  "noFavourites": "Схоже, вам нічого не подобається,\nспробуйте вподобати серіал, щоб залишити його тут.",
-  "@noFavourites": {},
-  "noHiddenMediaFound": "Не знайдено прихованих медіа",
-  "@noHiddenMediaFound": {},
-  "recentUpdates": "Останні оновлення",
-  "@recentUpdates": {},
-  "recommended": "Рекомендовано",
-  "@recommended": {},
-  "recommendationsEmptyMessage": "Подивіться / прочитайте аніме або манґу, щоб отримати рекомендації",
-  "@recommendationsEmptyMessage": {},
-  "scanlators": "Перекладачі",
-  "@scanlators": {},
-  "search": "Пошук",
-  "@search": {},
-  "sort": "Сортувати",
-  "@sort": {},
-  "topAiring": "Найкраще стримінгове",
-  "@topAiring": {},
-  "utd": "Згори вниз",
-  "@utd": {},
-  "watch": "Дивитися",
-  "@watch": {},
-  "read": "Читати",
-  "@read": {},
-  "options": "Параметри",
-  "@options": {},
-  "noOnHold": "Схоже, ви нічого не відклали на потім.",
-  "@noOnHold": {},
-  "listView": "Перегляд списку",
-  "@listView": {},
-  "manageLayoutDescription": "Ви можете керувати макетом сторінки {page}, перетягуючи елементи",
-  "@manageLayoutDescription": {
-    "placeholders": {
-      "page": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Home",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "home": "Додому",
-  "@home": {},
-  "loginTo": "Увійдіть до {service}",
-  "@loginTo": {
-    "placeholders": {
-      "service": {
-        "type": "String",
-        "examples": [
-          "Anilist",
-          "MyAnimeList",
-          "Kitsu",
-          "Discord"
-        ]
-      }
-    }
-  },
-  "volume": "{count, plural, =1 {Том} other {Томи}}",
-  "@volume": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "gridView": "Перегляд сітки",
-  "@gridView": {},
-  "chapterRead": "Розділ прочитано",
-  "@chapterRead": {},
-  "ln": "Легкий роман",
-  "@ln": {},
-  "compactView": "Компактний вид",
-  "@compactView": {},
-  "episode": "{count, plural, =1 {Епізод} other {Епізоди}}",
-  "@episode": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "chapter": "{count, plural, =1 {Розділ} other {Розділи}}",
-  "@chapter": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "manhua": "Манхуа",
-  "@manhua": {},
-  "activity": "{count, plural, =1 {Активність} other {Активності}}",
-  "@activity": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "episodeWatched": "Епізод переглянуто",
-  "@episodeWatched": {},
-  "available": "У наявності: {type}",
-  "@available": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "installed": "Встановлено: {type}",
-  "@installed": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Extensions"
-        ]
-      }
-    }
-  },
-  "thisSeason": "Цей сезон",
-  "@thisSeason": {},
-  "favorite": "Улюблене: {type}",
-  "@favorite": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "browse": "Переглядаю: {type}",
-  "@browse": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "kitsu": "Kitsu",
-  "@kitsu": {},
-  "manhwa": "Манхва",
-  "@manhwa": {},
-  "series": "Серія",
-  "@series": {},
-  "season": "Сезон",
-  "@season": {},
-  "calendar": "Календар",
-  "@calendar": {},
-  "confirmLogout": "Ви впевнені, що бажаєте вийти?",
-  "@confirmLogout": {},
-  "trending": "У тренді: {type}",
-  "@trending": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "topRated": "Найвищий рейтинг: {type}",
-  "@topRated": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa",
-          "Series"
-        ]
-      }
-    }
-  },
-  "movie": "{count, plural, =1 {Фільм} other {Фільми}}",
-  "@movie": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "popular": "Популярне: {type}",
-  "@popular": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa"
-        ]
-      }
-    }
-  },
-  "planned": "Заплановано: {type}",
-  "@planned": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "noDropped": "Ви ще нічого не кинули з {type}.",
-  "@noDropped": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "nextSeason": "Наступний сезон",
-  "@nextSeason": {},
-  "onHold": "Відкладено: {type}",
-  "@onHold": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "novel": "Роман",
-  "@novel": {},
-  "mostFavourite": "Найулюбленіше: {type}",
-  "@mostFavourite": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa"
-        ]
-      }
-    }
-  },
-  "genres": "Жанри",
-  "@genres": {},
-  "pickColor": "Виберіть колір",
-  "@pickColor": {},
-  "manageLayout": "Керувати макетом сторінки {page} для {service}",
-  "@manageLayout": {
-    "placeholders": {
-      "service": {
-        "type": "String",
-        "examples": [
-          "Anilist",
-          "MAL"
-        ]
-      },
-      "page": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Home",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "previousSeason": "Попередній сезон",
-  "@previousSeason": {},
-  "relations": "Відносини",
-  "@relations": {},
-  "sequel": "ПРОДОВЖЕННЯ",
-  "@sequel": {},
-  "source": "Джерело",
-  "@source": {},
-  "staff": "Персонал",
-  "@staff": {},
-  "startDate": "Дата початку",
-  "@startDate": {},
-  "status": "Статус",
-  "@status": {},
-  "studio": "Студія",
-  "@studio": {},
-  "synonyms": "Синоніми",
-  "@synonyms": {},
-  "format": "Формат",
-  "@format": {},
-  "meanScore": "Середня оцінка",
-  "@meanScore": {},
-  "name": "Назва",
-  "@name": {},
-  "synopsis": "Синопсис",
-  "@synopsis": {},
-  "tags": "Теги",
-  "@tags": {},
-  "total": "Всього",
-  "@total": {},
-  "totalEpisodes": "Епізоди",
-  "@totalEpisodes": {},
-  "totalChapters": "Розділи",
-  "@totalChapters": {},
-  "nameRomaji": "Назва (Ромаджі)",
-  "@nameRomaji": {},
-  "description": "Синопсис",
-  "@description": {},
-  "endDate": "Дата закінчення",
-  "@endDate": {},
-  "popularity": "Популярність",
-  "@popularity": {},
-  "author": "Автор",
-  "@author": {},
-  "characters": "Персонажі",
-  "@characters": {},
-  "comingSoon": "НЕЗАБАРОМ",
-  "@comingSoon": {},
-  "prequel": "ПРИКВЕЛ",
-  "@prequel": {},
-  "collapseText": "показувати менше",
-  "@collapseText": {},
-  "expandText": "показати більше",
-  "@expandText": {},
-  "favorites": "Вибране",
-  "@favorites": {},
-  "averageDuration": "Середня тривалість",
-  "@averageDuration": {},
-  "simkl": "Simkl",
-  "@simkl": {},
-  "colorPickerDefault": "Зареєструватися",
-  "@colorPickerDefault": {},
-  "logFileDescription": "Надіслати файл",
-  "@logFileDescription": {},
-  "colorPickerCustom": "Користування",
-  "@colorPickerCustom": {},
-  "addAnimeRepo": "Додати Аніме Репо",
-  "@addAnimeRepo": {},
-  "loadExtensionsIconDesc": "Вимкнено, якщо розширення сторінок лаг",
-  "@loadExtensionsIconDesc": {},
-  "autoUpdateDesc": "Розширення автоматичного оновлення",
-  "@autoUpdateDesc": {},
-  "addNovelRepoDesc": "Додати Новев Репо з різних джерел",
-  "@addNovelRepoDesc": {},
-  "addMangaRepoDesc": "Додати Манга Репо з різних джерел",
-  "@addMangaRepoDesc": {},
-  "addAnimeRepoDesc": "Додати Аніме Репо з різних джерел",
-  "@addAnimeRepoDesc": {},
-  "addMangaRepo": "Додати Манга Репо",
-  "@addMangaRepo": {},
-  "logFile": "Лог файл",
-  "@logFile": {},
-  "addNovelRepo": "Додати Новел Репо",
-  "@addNovelRepo": {},
-  "autoUpdate": "Автоновини",
-  "@autoUpdate": {},
-  "loadExtensionsIcon": "Значок розширення навантаження",
-  "@loadExtensionsIcon": {},
-  "selectDirectory": "Виберіть каталог",
-  "@selectDirectory": {},
-  "selectMediaService": "Виберіть медіасервіс",
-  "@selectMediaService": {},
-  "customPath": "Спеціальний шлях",
-  "@customPath": {},
-  "customPathDescription": "Встановіть спеціальний шлях для збереження файлів\nНатисніть і утримуйте, щоб видалити",
-  "@customPathDescription": {},
-  "noChapterFound": "Український",
-  "@noChapterFound": {},
-  "watching": "Проживання",
-  "@watching": {},
-  "selected": "Вибрані",
-  "@selected": {},
-  "youTube": "Грати на YouTube?",
-  "@youTube": {},
-  "mediaNotFound": "Не знайдено",
-  "@mediaNotFound": {},
-  "found": "Знайдено",
-  "@found": {},
-  "wrongTitle": "Назва wrong?",
-  "@wrongTitle": {},
-  "outOf": "з",
-  "@outOf": {},
-  "readStatus": "Читати",
-  "@readStatus": {},
-  "watchStatus": "Подивився",
-  "@watchStatus": {},
-  "totalOf": "загальна кількість",
-  "@totalOf": {},
-  "installSourceToStart": "Встановіть джерело з сторінки розширення для запуску",
-  "@installSourceToStart": {},
-  "webView": "Веб-камера",
-  "@webView": {},
-  "reading": "Читання",
-  "@reading": {},
-  "playerSettingsDesc": "Зміна параметрів гравця",
-  "@playerSettingsDesc": {},
-  "developersHelpersDesc": "Дартоцу неоплачувані праці",
-  "@developersHelpersDesc": {},
-  "hidePageNumberDesc": "Приховати номер сторінки під час читання",
-  "@hidePageNumberDesc": {},
-  "thumbLessSeekBar": "ThumbLess SeekБар",
-  "@thumbLessSeekBar": {},
-  "developersHelpers": "Розробники/Helpers",
-  "@developersHelpers": {},
-  "thumbLessSeekBarDesc": "Видалити великий палець з адресного бруса",
-  "@thumbLessSeekBarDesc": {},
-  "hidePageNumber": "Приховати номер сторінки",
-  "@hidePageNumber": {},
-  "differentCacheManagerDesc": "Використовуйте інший менеджер кешу зображень",
-  "@differentCacheManagerDesc": {},
-  "differentCacheManager": "Менеджер по кешу",
-  "@differentCacheManager": {},
-  "readerSettingsDesc": "Зміна параметрів зчитувача",
-  "@readerSettingsDesc": {},
-  "spacedPagesDesc": "Додати простір між сторінками",
-  "@spacedPagesDesc": {},
-  "spacedPages": "Веб-сайт",
-  "@spacedPages": {},
-  "hideScrollbarDesc": "Приховати прокрутку під час читання",
-  "@hideScrollbarDesc": {},
-  "direction": "Напрямок",
-  "@direction": {},
-  "readerSettings": "Налаштування зчитувача",
-  "@readerSettings": {},
-  "hideScrollbar": "Приховати Scrollbar",
-  "@hideScrollbar": {}
+    "anime": "Аніме",
+    "@anime": {},
+    "backgroundColor": "Колір тла",
+    "@backgroundColor": {},
+    "backgroundColorDescription": "Колір тла субтитрів",
+    "@backgroundColorDescription": {},
+    "bottomPadding": "Нижній відступ",
+    "@bottomPadding": {},
+    "bottomPaddingDescription": "Нижній відступ субтитрів",
+    "@bottomPaddingDescription": {},
+    "cancel": "Скасувати",
+    "@cancel": {},
+    "colorPicker": "Підбір кольору",
+    "@colorPicker": {},
+    "colorPickerDescription": "Оберіть колір",
+    "@colorPickerDescription": {},
+    "commonDescription": "Доступ до загальних налаштувань для безперебійного використання застосунку",
+    "@commonDescription": {},
+    "common": "Спільні",
+    "@common": {},
+    "cursedSpeed": "Проклята швидкість",
+    "@cursedSpeed": {},
+    "cursedSpeedDescription": "Для людей, які занадто зайняті життям",
+    "@cursedSpeedDescription": {},
+    "customThemeDescription": "Використовуйте свій власний колір для теми",
+    "@customThemeDescription": {},
+    "darkMode": "Темний режим",
+    "@darkMode": {},
+    "discord": "Discord",
+    "@discord": {},
+    "donationGoal": "Немає цільових пожертв",
+    "@donationGoal": {},
+    "enableDarkMode": "Увімкнути темний режим",
+    "@enableDarkMode": {},
+    "fontWeight": "Товщина шрифту",
+    "@fontWeight": {},
+    "fontWeightDescription": "Товщина шрифту субтитрів",
+    "@fontWeightDescription": {},
+    "hidePrivate": "Приховати приватне",
+    "@hidePrivate": {},
+    "incognitoMode": "Приватний перегляд",
+    "@incognitoMode": {},
+    "logout": "Вийти {type}",
+    "@logout": {},
+    "manga": "Манґа",
+    "@manga": {},
+    "materialYou": "Material You",
+    "@materialYou": {},
+    "materialYouDescription": "Використовувати той самий колір, що і шпалери",
+    "@materialYouDescription": {},
+    "no": "Ні",
+    "@no": {},
+    "offlineMode": "Автономний режим",
+    "@offlineMode": {},
+    "offlineModeDescription": "Використовувати застосунок без з'єднання з мережею",
+    "@offlineModeDescription": {},
+    "oledThemeVariant": "OLED тема",
+    "@oledThemeVariant": {},
+    "oledThemeVariantDescription": "Увімкнути режим OLED",
+    "@oledThemeVariantDescription": {},
+    "outlineColor": "Колір контура",
+    "@outlineColor": {},
+    "outlineColorDescription": "Колір контура субтитрів",
+    "@outlineColorDescription": {},
+    "playerSettingsTitle": "Налаштування програвача",
+    "@playerSettingsTitle": {},
+    "resizeMode": "Режим зміни розміру",
+    "@resizeMode": {},
+    "resizeModeDescription": "Типовий режим зміни розміру програвача",
+    "@resizeModeDescription": {},
+    "restoreSettings": "Відновлення налаштувань",
+    "@restoreSettings": {},
+    "settings": "Налаштування",
+    "@settings": {},
+    "showSubtitles": "Показувати субтитри",
+    "@showSubtitles": {},
+    "showSubtitlesDescription": "Типово показувати субтитри",
+    "@showSubtitlesDescription": {},
+    "skipButton": "Кнопка «Пропустити»",
+    "@skipButton": {},
+    "skipButtonDescription": "Час пропускання кнопкою «Пропустити»",
+    "@skipButtonDescription": {},
+    "speed": "Швидкість",
+    "@speed": {},
+    "speedDescription": "Типова швидкість програвача",
+    "@speedDescription": {},
+    "subtitles": "Субтитри",
+    "@subtitles": {},
+    "subtitlePreview": "Передперегляд субтитрів",
+    "@subtitlePreview": {},
+    "supportMaintainer": "Хочете підтримати розробника Dartotsu?\nПодумайте про пожертву",
+    "@supportMaintainer": {},
+    "yes": "Так",
+    "@yes": {},
+    "extension": "{count, plural, =1 {Розширення} other {Розширення}}",
+    "@extension": {},
+    "hidePrivateDescription": "Приховати приватні серії з головної сторінки.",
+    "@hidePrivateDescription": {},
+    "login": "Увійти",
+    "@login": {},
+    "notificationsDescription": "Налаштуйте, як і коли ви будете отримувати сповіщення",
+    "@notificationsDescription": {},
+    "fontSize": "Розмір шрифту",
+    "@fontSize": {},
+    "fontFamily": "Сімейство шрифтів",
+    "@fontFamily": {},
+    "fontSizeDescription": "Розмір шрифту субтитрів",
+    "@fontSizeDescription": {},
+    "extensionsDescription": "Встановлюйте та керуйте розширеннями для додаткової функціональності",
+    "@extensionsDescription": {},
+    "fontColorDescription": "Колір шрифту субтитрів",
+    "@fontColorDescription": {},
+    "incognitoModeDescription": "Переглядайте без збереження активності",
+    "@incognitoModeDescription": {},
+    "notifications": "Сповіщення",
+    "@notifications": {},
+    "appTagline": "НОВИЙ найкращий застосунок для\nвідстеження аніме та манґи",
+    "@appTagline": {},
+    "customTheme": "Користування Головна",
+    "@customTheme": {},
+    "anilist": "AniList",
+    "@anilist": {},
+    "about": "Про застосунок",
+    "@about": {},
+    "aboutDescription": "Дізнайтеся більше про застосунок та його творців",
+    "@aboutDescription": {},
+    "account": "Облікові записи",
+    "@account": {},
+    "ok": "Гаразд",
+    "@ok": {},
+    "accountDescription": "Керуйте обліковими записами AniList, MAL та Discord без зайвих зусиль",
+    "@accountDescription": {},
+    "animeDescription": "Персоналізуйте та керуйте своїми вподобаннями щодо аніме",
+    "@animeDescription": {},
+    "appName": "Dartotsu",
+    "@appName": {},
+    "fontColor": "Колір шрифту",
+    "@fontColor": {},
+    "mangaDescription": "Організуйте та адаптуйте свій досвід читання манґи",
+    "@mangaDescription": {},
+    "fontFamilyDescription": "Сімейство шрифтів субтитрів",
+    "@fontFamilyDescription": {},
+    "themeDescription": "Налаштуйте вигляд та атмосферу вашого застосунку",
+    "@themeDescription": {},
+    "mal": "MyAnimeList",
+    "@mal": {},
+    "theme": "Тема",
+    "@theme": {},
+    "dtu": "Знизу вгору",
+    "@dtu": {},
+    "addToList": "Додати до списку",
+    "@addToList": {},
+    "allCaughtUpNew": "Що нового?",
+    "@allCaughtUpNew": {},
+    "comments": "Коментарі",
+    "@comments": {},
+    "continueReading": "Продовжити читати",
+    "@continueReading": {},
+    "continueWatching": "Продовжити перегляд",
+    "@continueWatching": {},
+    "droppedAnime": "Покинуте аніме",
+    "@droppedAnime": {},
+    "droppedManga": "Покинута манґа",
+    "@droppedManga": {},
+    "hiddenMedia": "Приховані медіа",
+    "@hiddenMedia": {},
+    "info": "Інформація",
+    "@info": {},
+    "language": "Мова",
+    "@language": {},
+    "layout": "Макет",
+    "@layout": {},
+    "list": "{type} Список",
+    "@list": {},
+    "noFavourites": "Схоже, вам нічого не подобається,\nспробуйте вподобати серіал, щоб залишити його тут.",
+    "@noFavourites": {},
+    "noHiddenMediaFound": "Не знайдено прихованих медіа",
+    "@noHiddenMediaFound": {},
+    "recentUpdates": "Останні оновлення",
+    "@recentUpdates": {},
+    "recommended": "Рекомендовано",
+    "@recommended": {},
+    "recommendationsEmptyMessage": "Подивіться / прочитайте аніме або манґу, щоб отримати рекомендації",
+    "@recommendationsEmptyMessage": {},
+    "scanlators": "Перекладачі",
+    "@scanlators": {},
+    "search": "Пошук",
+    "@search": {},
+    "sort": "Сортувати",
+    "@sort": {},
+    "topAiring": "Найкраще стримінгове",
+    "@topAiring": {},
+    "utd": "Згори вниз",
+    "@utd": {},
+    "watch": "Дивитися",
+    "@watch": {},
+    "read": "Читати",
+    "@read": {},
+    "options": "Параметри",
+    "@options": {},
+    "noOnHold": "Схоже, ви нічого не відклали на потім.",
+    "@noOnHold": {},
+    "listView": "Перегляд списку",
+    "@listView": {},
+    "manageLayoutDescription": "Ви можете керувати макетом сторінки {page}, перетягуючи елементи",
+    "@manageLayoutDescription": {
+        "placeholders": {
+            "page": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Home",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "home": "Додому",
+    "@home": {},
+    "loginTo": "Увійдіть до {service}",
+    "@loginTo": {
+        "placeholders": {
+            "service": {
+                "type": "String",
+                "examples": [
+                    "Anilist",
+                    "MyAnimeList",
+                    "Kitsu",
+                    "Discord"
+                ]
+            }
+        }
+    },
+    "volume": "{count, plural, =1 {Том} other {Томи}}",
+    "@volume": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "gridView": "Перегляд сітки",
+    "@gridView": {},
+    "chapterRead": "Розділ прочитано",
+    "@chapterRead": {},
+    "ln": "Легкий роман",
+    "@ln": {},
+    "compactView": "Компактний вид",
+    "@compactView": {},
+    "episode": "{count, plural, =1 {Епізод} other {Епізоди}}",
+    "@episode": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "chapter": "{count, plural, =1 {Розділ} other {Розділи}}",
+    "@chapter": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "manhua": "Манхуа",
+    "@manhua": {},
+    "activity": "{count, plural, =1 {Активність} other {Активності}}",
+    "@activity": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "episodeWatched": "Епізод переглянуто",
+    "@episodeWatched": {},
+    "available": "У наявності: {type}",
+    "@available": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "installed": "Встановлено: {type}",
+    "@installed": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Extensions"
+                ]
+            }
+        }
+    },
+    "thisSeason": "Цей сезон",
+    "@thisSeason": {},
+    "favorite": "Улюблене: {type}",
+    "@favorite": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "browse": "Переглядаю: {type}",
+    "@browse": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "kitsu": "Kitsu",
+    "@kitsu": {},
+    "manhwa": "Манхва",
+    "@manhwa": {},
+    "series": "Серія",
+    "@series": {},
+    "season": "Сезон",
+    "@season": {},
+    "calendar": "Календар",
+    "@calendar": {},
+    "confirmLogout": "Ви впевнені, що бажаєте вийти?",
+    "@confirmLogout": {},
+    "trending": "У тренді: {type}",
+    "@trending": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "topRated": "Найвищий рейтинг: {type}",
+    "@topRated": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa",
+                    "Series"
+                ]
+            }
+        }
+    },
+    "movie": "{count, plural, =1 {Фільм} other {Фільми}}",
+    "@movie": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "popular": "Популярне: {type}",
+    "@popular": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa"
+                ]
+            }
+        }
+    },
+    "planned": "Заплановано: {type}",
+    "@planned": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "noDropped": "Ви ще нічого не кинули з {type}.",
+    "@noDropped": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "nextSeason": "Наступний сезон",
+    "@nextSeason": {},
+    "onHold": "Відкладено: {type}",
+    "@onHold": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "novel": "Роман",
+    "@novel": {},
+    "mostFavourite": "Найулюбленіше: {type}",
+    "@mostFavourite": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa"
+                ]
+            }
+        }
+    },
+    "genres": "Жанри",
+    "@genres": {},
+    "pickColor": "Виберіть колір",
+    "@pickColor": {},
+    "manageLayout": "Керувати макетом сторінки {page} для {service}",
+    "@manageLayout": {
+        "placeholders": {
+            "service": {
+                "type": "String",
+                "examples": [
+                    "Anilist",
+                    "MAL"
+                ]
+            },
+            "page": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Home",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "previousSeason": "Попередній сезон",
+    "@previousSeason": {},
+    "relations": "Відносини",
+    "@relations": {},
+    "sequel": "ПРОДОВЖЕННЯ",
+    "@sequel": {},
+    "source": "Джерело",
+    "@source": {},
+    "staff": "Персонал",
+    "@staff": {},
+    "startDate": "Дата початку",
+    "@startDate": {},
+    "status": "Статус",
+    "@status": {},
+    "studio": "Студія",
+    "@studio": {},
+    "synonyms": "Синоніми",
+    "@synonyms": {},
+    "format": "Формат",
+    "@format": {},
+    "meanScore": "Середня оцінка",
+    "@meanScore": {},
+    "name": "Назва",
+    "@name": {},
+    "synopsis": "Синопсис",
+    "@synopsis": {},
+    "tags": "Теги",
+    "@tags": {},
+    "total": "Всього",
+    "@total": {},
+    "totalEpisodes": "Епізоди",
+    "@totalEpisodes": {},
+    "totalChapters": "Розділи",
+    "@totalChapters": {},
+    "nameRomaji": "Назва (Ромаджі)",
+    "@nameRomaji": {},
+    "endDate": "Дата закінчення",
+    "@endDate": {},
+    "popularity": "Популярність",
+    "@popularity": {},
+    "author": "Автор",
+    "@author": {},
+    "characters": "Персонажі",
+    "@characters": {},
+    "comingSoon": "НЕЗАБАРОМ",
+    "@comingSoon": {},
+    "prequel": "ПРИКВЕЛ",
+    "@prequel": {},
+    "collapseText": "показувати менше",
+    "@collapseText": {},
+    "expandText": "показати більше",
+    "@expandText": {},
+    "favorites": "Вибране",
+    "@favorites": {},
+    "averageDuration": "Середня тривалість",
+    "@averageDuration": {},
+    "simkl": "Simkl",
+    "@simkl": {},
+    "colorPickerDefault": "Зареєструватися",
+    "@colorPickerDefault": {},
+    "logFileDescription": "Надіслати файл",
+    "@logFileDescription": {},
+    "colorPickerCustom": "Користування",
+    "@colorPickerCustom": {},
+    "addAnimeRepo": "Додати Аніме Репо",
+    "@addAnimeRepo": {},
+    "loadExtensionsIconDesc": "Вимкнено, якщо розширення сторінок лаг",
+    "@loadExtensionsIconDesc": {},
+    "autoUpdateDesc": "Розширення автоматичного оновлення",
+    "@autoUpdateDesc": {},
+    "addNovelRepoDesc": "Додати Новев Репо з різних джерел",
+    "@addNovelRepoDesc": {},
+    "addMangaRepoDesc": "Додати Манга Репо з різних джерел",
+    "@addMangaRepoDesc": {},
+    "addAnimeRepoDesc": "Додати Аніме Репо з різних джерел",
+    "@addAnimeRepoDesc": {},
+    "addMangaRepo": "Додати Манга Репо",
+    "@addMangaRepo": {},
+    "logFile": "Лог файл",
+    "@logFile": {},
+    "addNovelRepo": "Додати Новел Репо",
+    "@addNovelRepo": {},
+    "autoUpdate": "Автоновини",
+    "@autoUpdate": {},
+    "loadExtensionsIcon": "Значок розширення навантаження",
+    "@loadExtensionsIcon": {},
+    "selectDirectory": "Виберіть каталог",
+    "@selectDirectory": {},
+    "selectMediaService": "Виберіть медіасервіс",
+    "@selectMediaService": {},
+    "customPath": "Спеціальний шлях",
+    "@customPath": {},
+    "customPathDescription": "Встановіть спеціальний шлях для збереження файлів\nНатисніть і утримуйте, щоб видалити",
+    "@customPathDescription": {},
+    "noChapterFound": "Український",
+    "@noChapterFound": {},
+    "watching": "Проживання",
+    "@watching": {},
+    "selected": "Вибрані",
+    "@selected": {},
+    "youTube": "Грати на YouTube?",
+    "@youTube": {},
+    "mediaNotFound": "Не знайдено",
+    "@mediaNotFound": {},
+    "found": "Знайдено",
+    "@found": {},
+    "wrongTitle": "Назва wrong?",
+    "@wrongTitle": {},
+    "outOf": "з",
+    "@outOf": {},
+    "readStatus": "Читати",
+    "@readStatus": {},
+    "watchStatus": "Подивився",
+    "@watchStatus": {},
+    "totalOf": "загальна кількість",
+    "@totalOf": {},
+    "installSourceToStart": "Встановіть джерело з сторінки розширення для запуску",
+    "@installSourceToStart": {},
+    "webView": "Веб-камера",
+    "@webView": {},
+    "reading": "Читання",
+    "@reading": {},
+    "playerSettingsDesc": "Зміна параметрів гравця",
+    "@playerSettingsDesc": {},
+    "developersHelpersDesc": "Дартоцу неоплачувані праці",
+    "@developersHelpersDesc": {},
+    "hidePageNumberDesc": "Приховати номер сторінки під час читання",
+    "@hidePageNumberDesc": {},
+    "thumbLessSeekBar": "ThumbLess SeekБар",
+    "@thumbLessSeekBar": {},
+    "developersHelpers": "Розробники/Helpers",
+    "@developersHelpers": {},
+    "thumbLessSeekBarDesc": "Видалити великий палець з адресного бруса",
+    "@thumbLessSeekBarDesc": {},
+    "hidePageNumber": "Приховати номер сторінки",
+    "@hidePageNumber": {},
+    "differentCacheManagerDesc": "Використовуйте інший менеджер кешу зображень",
+    "@differentCacheManagerDesc": {},
+    "differentCacheManager": "Менеджер по кешу",
+    "@differentCacheManager": {},
+    "readerSettingsDesc": "Зміна параметрів зчитувача",
+    "@readerSettingsDesc": {},
+    "spacedPagesDesc": "Додати простір між сторінками",
+    "@spacedPagesDesc": {},
+    "spacedPages": "Веб-сайт",
+    "@spacedPages": {},
+    "hideScrollbarDesc": "Приховати прокрутку під час читання",
+    "@hideScrollbarDesc": {},
+    "direction": "Напрямок",
+    "@direction": {},
+    "readerSettings": "Налаштування зчитувача",
+    "@readerSettings": {},
+    "hideScrollbar": "Приховати Scrollbar",
+    "@hideScrollbar": {},
+    "glassEffect": "Ефект скла",
+    "@glassEffect": {},
+    "ltr": "Ліворуч",
+    "@ltr": {},
+    "coverThemeDescription": "Використовуйте зображення медіа кришки як колір теми",
+    "@coverThemeDescription": {},
+    "rtl": "Право на ліву",
+    "@rtl": {},
+    "glassEffectDescription": "Подарує заморожений ефект скла до програми",
+    "@glassEffectDescription": {},
+    "nextEpisodeRelease": "Episode {episode} буде випущений в",
+    "@nextEpisodeRelease": {
+        "description": "Message showing the next episode info",
+        "placeholders": {
+            "episode": {
+                "type": "int"
+            }
+        }
+    },
+    "topScore": "Рейтинг",
+    "@topScore": {},
+    "coverTheme": "Використання теми Cover",
+    "@coverTheme": {},
+    "customMPVDescription": "Enable this option to use your own MPV configuration file. Place your custom config at: {path}",
+    "@customMPVDescription": {
+        "placeholders": {
+            "path": {
+                "type": "String"
+            }
+        }
+    },
+    "customMPV": "Custom MPV Configuration",
+    "@customMPV": {}
 }

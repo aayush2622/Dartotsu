@@ -1,632 +1,663 @@
 {
-  "about": "Kuhusu",
-  "@about": {},
-  "aboutDescription": "Jifunze zaidi kuhusu programu na waumbaji wake",
-  "@aboutDescription": {},
-  "account": "Akaunti",
-  "@account": {},
-  "accountDescription": "Tumia na usimamie akaunti zako za AniList, MAL, na Discord kwa urahisi",
-  "@accountDescription": {},
-  "anilist": "AniList",
-  "@anilist": {},
-  "appName": "Dartotsu",
-  "@appName": {},
-  "bottomPaddingDescription": "Padding ya chini ya maneno ya kichwa",
-  "@bottomPaddingDescription": {},
-  "cancel": "Ghairi",
-  "@cancel": {},
-  "oledThemeVariantDescription": "Washa Hali ya OLED",
-  "@oledThemeVariantDescription": {},
-  "outlineColor": "Rangi ya Mstari wa Nje",
-  "@outlineColor": {},
-  "outlineColorDescription": "Rangi ya mstari wa nje wa maneno ya kichwa",
-  "@outlineColorDescription": {},
-  "playerSettingsTitle": "Mipangilio ya Mchezaji",
-  "@playerSettingsTitle": {},
-  "resizeMode": "Hali ya Kubadilisha Ukubwa",
-  "@resizeMode": {},
-  "resizeModeDescription": "Hali ya kubadilisha ukubwa kwa mchezaji",
-  "@resizeModeDescription": {},
-  "restoreSettings": "Rejesha Mipangilio",
-  "@restoreSettings": {},
-  "settings": "Mipangilio",
-  "@settings": {},
-  "showSubtitles": "Onyesha Maneno ya Kichwa",
-  "@showSubtitles": {},
-  "showSubtitlesDescription": "Onyesha maneno ya kichwa kwa chaguo-msingi",
-  "@showSubtitlesDescription": {},
-  "skipButton": "Kitufe cha Kupita",
-  "@skipButton": {},
-  "anime": "Anime",
-  "@anime": {},
-  "animeDescription": "Binafsisha na simamia mapendeleo yako ya anime",
-  "@animeDescription": {},
-  "appTagline": "Programu Bora Mpya Kwa\nUfuatiliaji wa Anime & Manga",
-  "@appTagline": {},
-  "backgroundColor": "Rangi ya Mandharinyuma",
-  "@backgroundColor": {},
-  "backgroundColorDescription": "Rangi ya mandharinyuma ya maneno ya kichwa",
-  "@backgroundColorDescription": {},
-  "bottomPadding": "Padding Chini",
-  "@bottomPadding": {},
-  "colorPicker": "Chagua Rangi",
-  "@colorPicker": {},
-  "colorPickerDescription": "Tekeleza rangi",
-  "@colorPickerDescription": {},
-  "common": "Kawaida",
-  "@common": {},
-  "commonDescription": "Fikia mipangilio ya jumla kwa matumizi rahisi ya programu",
-  "@commonDescription": {},
-  "cursedSpeed": "Speedi ya Laana",
-  "@cursedSpeed": {},
-  "cursedSpeedDescription": "Kwa watu walio na shughuli nyingi maishani",
-  "@cursedSpeedDescription": {},
-  "customTheme": "Mandhari ya Kibinafsi",
-  "@customTheme": {},
-  "customThemeDescription": "Tumia rangi yako mwenyewe kwa mandhari",
-  "@customThemeDescription": {},
-  "darkMode": "Hali ya Giza",
-  "@darkMode": {},
-  "discord": "Discord",
-  "@discord": {},
-  "donationGoal": "Hakuna malengo ya michango kwa sasa",
-  "@donationGoal": {},
-  "enableDarkMode": "Washa Hali ya Giza",
-  "@enableDarkMode": {},
-  "extension": "{count, plural, =1 {Kiendelezi} other {Viendelezi}}",
-  "@extension": {},
-  "extensionsDescription": "Sakinisha na usimamie viendelezi kwa kuongeza uwezo",
-  "@extensionsDescription": {},
-  "fontColor": "Rangi ya Fonti",
-  "@fontColor": {},
-  "fontColorDescription": "Rangi ya fonti ya maneno ya kichwa",
-  "@fontColorDescription": {},
-  "fontFamily": "Familia ya Fonti",
-  "@fontFamily": {},
-  "fontFamilyDescription": "Familia ya fonti ya maneno ya kichwa",
-  "@fontFamilyDescription": {},
-  "fontSize": "Saizi ya Fonti",
-  "@fontSize": {},
-  "fontSizeDescription": "Saizi ya fonti ya maneno ya kichwa",
-  "@fontSizeDescription": {},
-  "fontWeight": "Uzito wa Fonti",
-  "@fontWeight": {},
-  "fontWeightDescription": "Uzito wa fonti ya maneno ya kichwa",
-  "@fontWeightDescription": {},
-  "hidePrivate": "Ficha Binafsi",
-  "@hidePrivate": {},
-  "hidePrivateDescription": "Ficha mfululizo wa kibinafsi kutoka kwenye ukurasa wa Nyumbani.",
-  "@hidePrivateDescription": {},
-  "incognitoMode": "Hali ya Incognito",
-  "@incognitoMode": {},
-  "incognitoModeDescription": "Tembea bila kuhifadhi shughuli zako",
-  "@incognitoModeDescription": {},
-  "login": "Ingia",
-  "@login": {},
-  "logout": "Toka {type}",
-  "@logout": {},
-  "mal": "MyAnimeList",
-  "@mal": {},
-  "manga": "Manga",
-  "@manga": {},
-  "mangaDescription": "Pangilia na weka uzoefu wako wa manga kwa usahihi",
-  "@mangaDescription": {},
-  "materialYou": "Material You",
-  "@materialYou": {},
-  "materialYouDescription": "Tumia rangi ile kama wallpaper yako",
-  "@materialYouDescription": {},
-  "no": "Hapana",
-  "@no": {},
-  "notifications": "Arifa",
-  "@notifications": {},
-  "notificationsDescription": "Panga jinsi na lini unapokea arifa",
-  "@notificationsDescription": {},
-  "offlineMode": "Hali ya Nje ya Mtandao",
-  "@offlineMode": {},
-  "offlineModeDescription": "Tumia programu bila muunganisho wa intaneti",
-  "@offlineModeDescription": {},
-  "ok": "Sawa",
-  "@ok": {},
-  "oledThemeVariant": "Variant ya Mandhari ya OLED",
-  "@oledThemeVariant": {},
-  "skipButtonDescription": "Muda wa kitufe cha kupita",
-  "@skipButtonDescription": {},
-  "speed": "Speedi",
-  "@speed": {},
-  "speedDescription": "Speedi ya chaguo-msingi kwa mchezaji",
-  "@speedDescription": {},
-  "subtitles": "Maneno ya Kichwa",
-  "@subtitles": {},
-  "subtitlePreview": "Mapitio ya Maneno ya Kichwa",
-  "@subtitlePreview": {},
-  "supportMaintainer": "Unataka kusaidia Mtunzaji wa Dartotsu?\nFikiria Kuchangia",
-  "@supportMaintainer": {},
-  "theme": "Mandhari",
-  "@theme": {},
-  "themeDescription": "Binafsisha mwonekano na hali ya programu yako",
-  "@themeDescription": {},
-  "yes": "Ndio",
-  "@yes": {},
-  "totalEpisodes": "Sehemu",
-  "@totalEpisodes": {},
-  "onHold": "Iko kwenye Hifadhi {type}",
-  "@onHold": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "nextSeason": "Msimu Ujao",
-  "@nextSeason": {},
-  "noDropped": "Bado hujaacha {type} yeyote.",
-  "@noDropped": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "total": "Total",
-  "@total": {},
-  "tags": "Tags",
-  "@tags": {},
-  "previousSeason": "Msimu Uliopita",
-  "@previousSeason": {},
-  "gridView": "Muonekano wa Gridi",
-  "@gridView": {},
-  "episodeWatched": "Sehemu Iliyotazamwa",
-  "@episodeWatched": {},
-  "totalChapters": "Sura",
-  "@totalChapters": {},
-  "favorites": "Pendwa",
-  "@favorites": {},
-  "sort": "Panga",
-  "@sort": {},
-  "addToList": "Add To List",
-  "@addToList": {},
-  "layout": "Layout",
-  "@layout": {},
-  "startDate": "Start Date",
-  "@startDate": {},
-  "format": "Umbizo",
-  "@format": {},
-  "manhua": "Manhua",
-  "@manhua": {},
-  "sequel": "SEQUEL",
-  "@sequel": {},
-  "description": "Muhtasari",
-  "@description": {},
-  "staff": "Wafanyakazi",
-  "@staff": {},
-  "comingSoon": "Inakuja KARIBUNI",
-  "@comingSoon": {},
-  "relations": "Relations",
-  "@relations": {},
-  "source": "Source",
-  "@source": {},
-  "studio": "Studio",
-  "@studio": {},
-  "status": "Status",
-  "@status": {},
-  "synonyms": "Maneno yenye maana sawa",
-  "@synonyms": {},
-  "averageDuration": "Muda wa wastani",
-  "@averageDuration": {},
-  "characters": "Vitu",
-  "@characters": {},
-  "author": "Author",
-  "@author": {},
-  "endDate": "End Date",
-  "@endDate": {},
-  "collapseText": "onyesho kidogo",
-  "@collapseText": {},
-  "expandText": "onyesho zaidi",
-  "@expandText": {},
-  "name": "Name",
-  "@name": {},
-  "meanScore": "Mean Score",
-  "@meanScore": {},
-  "nameRomaji": "Jina (Romaji)",
-  "@nameRomaji": {},
-  "synopsis": "Muhtasari",
-  "@synopsis": {},
-  "popularity": "Umaarufu",
-  "@popularity": {},
-  "prequel": "PREQUEL",
-  "@prequel": {},
-  "kitsu": "Kitsu",
-  "@kitsu": {},
-  "loginTo": "Ingia kwenye {service}",
-  "@loginTo": {
-    "placeholders": {
-      "service": {
-        "type": "String",
-        "examples": [
-          "Anilist",
-          "MyAnimeList",
-          "Kitsu",
-          "Discord"
-        ]
-      }
-    }
-  },
-  "manhwa": "Manhwa",
-  "@manhwa": {},
-  "ln": "Riwaya Nyepesi",
-  "@ln": {},
-  "novel": "Riwaya",
-  "@novel": {},
-  "series": "Series",
-  "@series": {},
-  "home": "Home",
-  "@home": {},
-  "season": "Msimu",
-  "@season": {},
-  "volume": "{count, plural, =1 {Juzo} other {Majuzi}}",
-  "@volume": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "episode": "{count, plural, =1 {Sehemu} other {Sehemu}}",
-  "@episode": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "chapter": "{count, plural, =1 {Sura} other {Sura}}",
-  "@chapter": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "movie": "{count, plural, =1 {Filamu} other {Filamu}}",
-  "@movie": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "genres": "Mifumo",
-  "@genres": {},
-  "dtu": "Down To Up",
-  "@dtu": {},
-  "list": "{type} Orodha",
-  "@list": {
-    "placeholders": {
-      "type": {
-        "examples": "Anime list",
-        "type": "String"
-      }
-    }
-  },
-  "calendar": "Kalenda",
-  "@calendar": {},
-  "compactView": "Muonekano wa Compact",
-  "@compactView": {},
-  "listView": "List View",
-  "@listView": {},
-  "confirmLogout": "Je, una uhakika unataka kutoka?",
-  "@confirmLogout": {},
-  "trending": "Inayoendelea {type}",
-  "@trending": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "installed": "Imewekwa {type}",
-  "@installed": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Extensions"
-        ]
-      }
-    }
-  },
-  "chapterRead": "Sura Iliyosomwa",
-  "@chapterRead": {},
-  "available": "Inapatikana {type}",
-  "@available": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "thisSeason": "Msimu Huu",
-  "@thisSeason": {},
-  "topRated": "Imepigiwa Kura Bora {type}",
-  "@topRated": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa",
-          "Series"
-        ]
-      }
-    }
-  },
-  "popular": "Maarufu {type}",
-  "@popular": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa"
-        ]
-      }
-    }
-  },
-  "mostFavourite": "Inayopendwa Zaidi {type}",
-  "@mostFavourite": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa"
-        ]
-      }
-    }
-  },
-  "language": "Lugha",
-  "@language": {},
-  "favorite": "Pendwa {type}",
-  "@favorite": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "activity": "{count, plural, =1 {Shughuli} other {Shughuli}}",
-  "@activity": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "browse": "Pitisha {type}",
-  "@browse": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "planned": "Imepangwa {type}",
-  "@planned": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "continueWatching": "Endelea Kutazama",
-  "@continueWatching": {},
-  "noFavourites": "Inaonekana haupendi kitu chochote,\nJaribu kupenda onyesho ili kiwe hapa.",
-  "@noFavourites": {},
-  "noHiddenMediaFound": "Hakuna vyombo vya habari vilivyofichwa vilivyopatikana",
-  "@noHiddenMediaFound": {},
-  "comments": "Maoni",
-  "@comments": {},
-  "continueReading": "Endelea Kusoma",
-  "@continueReading": {},
-  "info": "Info",
-  "@info": {},
-  "noOnHold": "Inaonekana haujaweka kitu chochote kwenye hifadhi.",
-  "@noOnHold": {},
-  "options": "Options",
-  "@options": {},
-  "recentUpdates": "Mabadiliko ya Karibuni",
-  "@recentUpdates": {},
-  "recommendationsEmptyMessage": "Tazama/Soma Anime au Manga ili kupata Mapendekezo",
-  "@recommendationsEmptyMessage": {},
-  "recommended": "Ilipendekezwa",
-  "@recommended": {},
-  "read": "Soma",
-  "@read": {},
-  "search": "Tafuta",
-  "@search": {},
-  "scanlators": "Wachambuzi",
-  "@scanlators": {},
-  "topAiring": "Inayorushwa Bora",
-  "@topAiring": {},
-  "watch": "Tazama",
-  "@watch": {},
-  "utd": "Kutoka Juu Hadi Chini",
-  "@utd": {},
-  "manageLayout": "Simamia Mpangilio wa {page} kwa {service}",
-  "@manageLayout": {
-    "placeholders": {
-      "service": {
-        "type": "String",
-        "examples": [
-          "Anilist",
-          "MAL"
-        ]
-      },
-      "page": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Home",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "allCaughtUpNew": "Umejibu kila kitu, nini kipya?",
-  "@allCaughtUpNew": {},
-  "manageLayoutDescription": "Unaweza kusimamia mpangilio wa {page} kwa kuburuta na kuacha vitu",
-  "@manageLayoutDescription": {
-    "placeholders": {
-      "page": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Home",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "pickColor": "Chagua rangi",
-  "@pickColor": {},
-  "hiddenMedia": "Vyombo vya Habari Vilivyofichwa",
-  "@hiddenMedia": {},
-  "droppedManga": "Manga Iliyotupwa",
-  "@droppedManga": {},
-  "droppedAnime": "Anime Iliyotupwa",
-  "@droppedAnime": {},
-  "simkl": "Simkl",
-  "@simkl": {},
-  "colorPickerCustom": "Maalum",
-  "@colorPickerCustom": {},
-  "colorPickerDefault": "Chaguo-msingi",
-  "@colorPickerDefault": {},
-  "logFileDescription": "Shiriki faili ya kumbukumbu",
-  "@logFileDescription": {},
-  "addAnimeRepo": "Ongeza Hazina ya Anime",
-  "@addAnimeRepo": {},
-  "selectMediaService": "Chagua Huduma ya Vyombo vya Habari",
-  "@selectMediaService": {},
-  "addAnimeRepoDesc": "Ongeza Hazina ya Anime kutoka vyanzo mbalimbali",
-  "@addAnimeRepoDesc": {},
-  "addMangaRepo": "Ongeza Hazina ya Manga",
-  "@addMangaRepo": {},
-  "logFile": "Faili la Magogo",
-  "@logFile": {},
-  "loadExtensionsIconDesc": "Zima ikiwa ukurasa wa viongezi unachelewa",
-  "@loadExtensionsIconDesc": {},
-  "autoUpdateDesc": "Sasisha Viongezi Kiotomatiki",
-  "@autoUpdateDesc": {},
-  "addNovelRepoDesc": "Ongeza Hazina ya Riwaya kutoka vyanzo mbalimbali",
-  "@addNovelRepoDesc": {},
-  "addMangaRepoDesc": "Ongeza Hazina ya Manga kutoka vyanzo mbalimbali",
-  "@addMangaRepoDesc": {},
-  "addNovelRepo": "Ongeza Hazina ya Riwaya",
-  "@addNovelRepo": {},
-  "autoUpdate": "Sasisho la Kiotomatiki",
-  "@autoUpdate": {},
-  "loadExtensionsIcon": "Pakia Aikoni za Viongezi",
-  "@loadExtensionsIcon": {},
-  "selectDirectory": "Chagua saraka",
-  "@selectDirectory": {},
-  "customPath": "Njia Maalum",
-  "@customPath": {},
-  "customPathDescription": "Weka njia maalum ya kuhifadhi faili\nBonyeza kwa muda mrefu ili kuondoa",
-  "@customPathDescription": {},
-  "noChapterFound": "Hakuna sura iliyopatikana",
-  "@noChapterFound": {},
-  "watching": "Inatazama",
-  "@watching": {},
-  "outOf": "kati ya",
-  "@outOf": {},
-  "selected": "Imechaguliwa",
-  "@selected": {},
-  "readStatus": "Soma",
-  "@readStatus": {},
-  "youTube": "Cheza kwenye YouTube?",
-  "@youTube": {},
-  "mediaNotFound": "Media haijapatikana",
-  "@mediaNotFound": {},
-  "found": "Imepatikana",
-  "@found": {},
-  "watchStatus": "Imetazamwa",
-  "@watchStatus": {},
-  "totalOf": "Jumla ya",
-  "@totalOf": {},
-  "wrongTitle": "Kichwa Kibaya?",
-  "@wrongTitle": {},
-  "installSourceToStart": "Sakinisha chanzo kutoka ukurasa wa nyongeza kuanza",
-  "@installSourceToStart": {},
-  "webView": "Mwonekano wa Wavuti",
-  "@webView": {},
-  "reading": "Inasoma",
-  "@reading": {},
-  "hidePageNumber": "Hide Page Number",
-  "@hidePageNumber": {},
-  "hidePageNumberDesc": "Hide page number while reading",
-  "@hidePageNumberDesc": {},
-  "thumbLessSeekBar": "ThumbLess SeekBar",
-  "@thumbLessSeekBar": {},
-  "developersHelpersDesc": "Dartotsu's unpaid labours",
-  "@developersHelpersDesc": {},
-  "developersHelpers": "Developers/Helpers",
-  "@developersHelpers": {},
-  "thumbLessSeekBarDesc": "Remove thumb from the seek bar",
-  "@thumbLessSeekBarDesc": {},
-  "differentCacheManagerDesc": "Use different Image cache manager",
-  "@differentCacheManagerDesc": {},
-  "differentCacheManager": "Different Cache Manager",
-  "@differentCacheManager": {},
-  "spacedPagesDesc": "Add space between pages",
-  "@spacedPagesDesc": {},
-  "spacedPages": "Spaced Pages",
-  "@spacedPages": {},
-  "readerSettingsDesc": "Change reader settings",
-  "@readerSettingsDesc": {},
-  "hideScrollbarDesc": "Hide scrollbar while reading",
-  "@hideScrollbarDesc": {},
-  "direction": "Direction",
-  "@direction": {},
-  "readerSettings": "Reader Settings",
-  "@readerSettings": {},
-  "hideScrollbar": "Hide Scrollbar",
-  "@hideScrollbar": {},
-  "playerSettingsDesc": "Change player settings",
-  "@playerSettingsDesc": {}
+    "about": "Kuhusu",
+    "@about": {},
+    "aboutDescription": "Jifunze zaidi kuhusu programu na waumbaji wake",
+    "@aboutDescription": {},
+    "account": "Akaunti",
+    "@account": {},
+    "accountDescription": "Tumia na usimamie akaunti zako za AniList, MAL, na Discord kwa urahisi",
+    "@accountDescription": {},
+    "anilist": "AniList",
+    "@anilist": {},
+    "appName": "Dartotsu",
+    "@appName": {},
+    "bottomPaddingDescription": "Padding ya chini ya maneno ya kichwa",
+    "@bottomPaddingDescription": {},
+    "cancel": "Ghairi",
+    "@cancel": {},
+    "oledThemeVariantDescription": "Washa Hali ya OLED",
+    "@oledThemeVariantDescription": {},
+    "outlineColor": "Rangi ya Mstari wa Nje",
+    "@outlineColor": {},
+    "outlineColorDescription": "Rangi ya mstari wa nje wa maneno ya kichwa",
+    "@outlineColorDescription": {},
+    "playerSettingsTitle": "Mipangilio ya Mchezaji",
+    "@playerSettingsTitle": {},
+    "resizeMode": "Hali ya Kubadilisha Ukubwa",
+    "@resizeMode": {},
+    "resizeModeDescription": "Hali ya kubadilisha ukubwa kwa mchezaji",
+    "@resizeModeDescription": {},
+    "restoreSettings": "Rejesha Mipangilio",
+    "@restoreSettings": {},
+    "settings": "Mipangilio",
+    "@settings": {},
+    "showSubtitles": "Onyesha Maneno ya Kichwa",
+    "@showSubtitles": {},
+    "showSubtitlesDescription": "Onyesha maneno ya kichwa kwa chaguo-msingi",
+    "@showSubtitlesDescription": {},
+    "skipButton": "Kitufe cha Kupita",
+    "@skipButton": {},
+    "anime": "Anime",
+    "@anime": {},
+    "animeDescription": "Binafsisha na simamia mapendeleo yako ya anime",
+    "@animeDescription": {},
+    "appTagline": "Programu Bora Mpya Kwa\nUfuatiliaji wa Anime & Manga",
+    "@appTagline": {},
+    "backgroundColor": "Rangi ya Mandharinyuma",
+    "@backgroundColor": {},
+    "backgroundColorDescription": "Rangi ya mandharinyuma ya maneno ya kichwa",
+    "@backgroundColorDescription": {},
+    "bottomPadding": "Padding Chini",
+    "@bottomPadding": {},
+    "colorPicker": "Chagua Rangi",
+    "@colorPicker": {},
+    "colorPickerDescription": "Tekeleza rangi",
+    "@colorPickerDescription": {},
+    "common": "Kawaida",
+    "@common": {},
+    "commonDescription": "Fikia mipangilio ya jumla kwa matumizi rahisi ya programu",
+    "@commonDescription": {},
+    "cursedSpeed": "Speedi ya Laana",
+    "@cursedSpeed": {},
+    "cursedSpeedDescription": "Kwa watu walio na shughuli nyingi maishani",
+    "@cursedSpeedDescription": {},
+    "customTheme": "Mandhari ya Kibinafsi",
+    "@customTheme": {},
+    "customThemeDescription": "Tumia rangi yako mwenyewe kwa mandhari",
+    "@customThemeDescription": {},
+    "darkMode": "Hali ya Giza",
+    "@darkMode": {},
+    "discord": "Discord",
+    "@discord": {},
+    "donationGoal": "Hakuna malengo ya michango kwa sasa",
+    "@donationGoal": {},
+    "enableDarkMode": "Washa Hali ya Giza",
+    "@enableDarkMode": {},
+    "extension": "{count, plural, =1 {Kiendelezi} other {Viendelezi}}",
+    "@extension": {},
+    "extensionsDescription": "Sakinisha na usimamie viendelezi kwa kuongeza uwezo",
+    "@extensionsDescription": {},
+    "fontColor": "Rangi ya Fonti",
+    "@fontColor": {},
+    "fontColorDescription": "Rangi ya fonti ya maneno ya kichwa",
+    "@fontColorDescription": {},
+    "fontFamily": "Familia ya Fonti",
+    "@fontFamily": {},
+    "fontFamilyDescription": "Familia ya fonti ya maneno ya kichwa",
+    "@fontFamilyDescription": {},
+    "fontSize": "Saizi ya Fonti",
+    "@fontSize": {},
+    "fontSizeDescription": "Saizi ya fonti ya maneno ya kichwa",
+    "@fontSizeDescription": {},
+    "fontWeight": "Uzito wa Fonti",
+    "@fontWeight": {},
+    "fontWeightDescription": "Uzito wa fonti ya maneno ya kichwa",
+    "@fontWeightDescription": {},
+    "hidePrivate": "Ficha Binafsi",
+    "@hidePrivate": {},
+    "hidePrivateDescription": "Ficha mfululizo wa kibinafsi kutoka kwenye ukurasa wa Nyumbani.",
+    "@hidePrivateDescription": {},
+    "incognitoMode": "Hali ya Incognito",
+    "@incognitoMode": {},
+    "incognitoModeDescription": "Tembea bila kuhifadhi shughuli zako",
+    "@incognitoModeDescription": {},
+    "login": "Ingia",
+    "@login": {},
+    "logout": "Toka {type}",
+    "@logout": {},
+    "mal": "MyAnimeList",
+    "@mal": {},
+    "manga": "Manga",
+    "@manga": {},
+    "mangaDescription": "Pangilia na weka uzoefu wako wa manga kwa usahihi",
+    "@mangaDescription": {},
+    "materialYou": "Material You",
+    "@materialYou": {},
+    "materialYouDescription": "Tumia rangi ile kama wallpaper yako",
+    "@materialYouDescription": {},
+    "no": "Hapana",
+    "@no": {},
+    "notifications": "Arifa",
+    "@notifications": {},
+    "notificationsDescription": "Panga jinsi na lini unapokea arifa",
+    "@notificationsDescription": {},
+    "offlineMode": "Hali ya Nje ya Mtandao",
+    "@offlineMode": {},
+    "offlineModeDescription": "Tumia programu bila muunganisho wa intaneti",
+    "@offlineModeDescription": {},
+    "ok": "Sawa",
+    "@ok": {},
+    "oledThemeVariant": "Variant ya Mandhari ya OLED",
+    "@oledThemeVariant": {},
+    "skipButtonDescription": "Muda wa kitufe cha kupita",
+    "@skipButtonDescription": {},
+    "speed": "Speedi",
+    "@speed": {},
+    "speedDescription": "Speedi ya chaguo-msingi kwa mchezaji",
+    "@speedDescription": {},
+    "subtitles": "Maneno ya Kichwa",
+    "@subtitles": {},
+    "subtitlePreview": "Mapitio ya Maneno ya Kichwa",
+    "@subtitlePreview": {},
+    "supportMaintainer": "Unataka kusaidia Mtunzaji wa Dartotsu?\nFikiria Kuchangia",
+    "@supportMaintainer": {},
+    "theme": "Mandhari",
+    "@theme": {},
+    "themeDescription": "Binafsisha mwonekano na hali ya programu yako",
+    "@themeDescription": {},
+    "yes": "Ndio",
+    "@yes": {},
+    "totalEpisodes": "Sehemu",
+    "@totalEpisodes": {},
+    "onHold": "Iko kwenye Hifadhi {type}",
+    "@onHold": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "nextSeason": "Msimu Ujao",
+    "@nextSeason": {},
+    "noDropped": "Bado hujaacha {type} yeyote.",
+    "@noDropped": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "total": "Total",
+    "@total": {},
+    "tags": "Tags",
+    "@tags": {},
+    "previousSeason": "Msimu Uliopita",
+    "@previousSeason": {},
+    "gridView": "Muonekano wa Gridi",
+    "@gridView": {},
+    "episodeWatched": "Sehemu Iliyotazamwa",
+    "@episodeWatched": {},
+    "totalChapters": "Sura",
+    "@totalChapters": {},
+    "favorites": "Pendwa",
+    "@favorites": {},
+    "sort": "Panga",
+    "@sort": {},
+    "addToList": "Add To List",
+    "@addToList": {},
+    "layout": "Layout",
+    "@layout": {},
+    "startDate": "Start Date",
+    "@startDate": {},
+    "format": "Umbizo",
+    "@format": {},
+    "manhua": "Manhua",
+    "@manhua": {},
+    "sequel": "SEQUEL",
+    "@sequel": {},
+    "staff": "Wafanyakazi",
+    "@staff": {},
+    "comingSoon": "Inakuja KARIBUNI",
+    "@comingSoon": {},
+    "relations": "Relations",
+    "@relations": {},
+    "source": "Source",
+    "@source": {},
+    "studio": "Studio",
+    "@studio": {},
+    "status": "Status",
+    "@status": {},
+    "synonyms": "Maneno yenye maana sawa",
+    "@synonyms": {},
+    "averageDuration": "Muda wa wastani",
+    "@averageDuration": {},
+    "characters": "Vitu",
+    "@characters": {},
+    "author": "Author",
+    "@author": {},
+    "endDate": "End Date",
+    "@endDate": {},
+    "collapseText": "onyesho kidogo",
+    "@collapseText": {},
+    "expandText": "onyesho zaidi",
+    "@expandText": {},
+    "name": "Name",
+    "@name": {},
+    "meanScore": "Mean Score",
+    "@meanScore": {},
+    "nameRomaji": "Jina (Romaji)",
+    "@nameRomaji": {},
+    "synopsis": "Muhtasari",
+    "@synopsis": {},
+    "popularity": "Umaarufu",
+    "@popularity": {},
+    "prequel": "PREQUEL",
+    "@prequel": {},
+    "kitsu": "Kitsu",
+    "@kitsu": {},
+    "loginTo": "Ingia kwenye {service}",
+    "@loginTo": {
+        "placeholders": {
+            "service": {
+                "type": "String",
+                "examples": [
+                    "Anilist",
+                    "MyAnimeList",
+                    "Kitsu",
+                    "Discord"
+                ]
+            }
+        }
+    },
+    "manhwa": "Manhwa",
+    "@manhwa": {},
+    "ln": "Riwaya Nyepesi",
+    "@ln": {},
+    "novel": "Riwaya",
+    "@novel": {},
+    "series": "Series",
+    "@series": {},
+    "home": "Home",
+    "@home": {},
+    "season": "Msimu",
+    "@season": {},
+    "volume": "{count, plural, =1 {Juzo} other {Majuzi}}",
+    "@volume": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "episode": "{count, plural, =1 {Sehemu} other {Sehemu}}",
+    "@episode": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "chapter": "{count, plural, =1 {Sura} other {Sura}}",
+    "@chapter": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "movie": "{count, plural, =1 {Filamu} other {Filamu}}",
+    "@movie": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "genres": "Mifumo",
+    "@genres": {},
+    "dtu": "Down To Up",
+    "@dtu": {},
+    "list": "{type} Orodha",
+    "@list": {
+        "placeholders": {
+            "type": {
+                "examples": "Anime list",
+                "type": "String"
+            }
+        }
+    },
+    "calendar": "Kalenda",
+    "@calendar": {},
+    "compactView": "Muonekano wa Compact",
+    "@compactView": {},
+    "listView": "List View",
+    "@listView": {},
+    "confirmLogout": "Je, una uhakika unataka kutoka?",
+    "@confirmLogout": {},
+    "trending": "Inayoendelea {type}",
+    "@trending": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "installed": "Imewekwa {type}",
+    "@installed": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Extensions"
+                ]
+            }
+        }
+    },
+    "chapterRead": "Sura Iliyosomwa",
+    "@chapterRead": {},
+    "available": "Inapatikana {type}",
+    "@available": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "thisSeason": "Msimu Huu",
+    "@thisSeason": {},
+    "topRated": "Imepigiwa Kura Bora {type}",
+    "@topRated": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa",
+                    "Series"
+                ]
+            }
+        }
+    },
+    "popular": "Maarufu {type}",
+    "@popular": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa"
+                ]
+            }
+        }
+    },
+    "mostFavourite": "Inayopendwa Zaidi {type}",
+    "@mostFavourite": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa"
+                ]
+            }
+        }
+    },
+    "language": "Lugha",
+    "@language": {},
+    "favorite": "Pendwa {type}",
+    "@favorite": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "activity": "{count, plural, =1 {Shughuli} other {Shughuli}}",
+    "@activity": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "browse": "Pitisha {type}",
+    "@browse": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "planned": "Imepangwa {type}",
+    "@planned": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "continueWatching": "Endelea Kutazama",
+    "@continueWatching": {},
+    "noFavourites": "Inaonekana haupendi kitu chochote,\nJaribu kupenda onyesho ili kiwe hapa.",
+    "@noFavourites": {},
+    "noHiddenMediaFound": "Hakuna vyombo vya habari vilivyofichwa vilivyopatikana",
+    "@noHiddenMediaFound": {},
+    "comments": "Maoni",
+    "@comments": {},
+    "continueReading": "Endelea Kusoma",
+    "@continueReading": {},
+    "info": "Info",
+    "@info": {},
+    "noOnHold": "Inaonekana haujaweka kitu chochote kwenye hifadhi.",
+    "@noOnHold": {},
+    "options": "Options",
+    "@options": {},
+    "recentUpdates": "Mabadiliko ya Karibuni",
+    "@recentUpdates": {},
+    "recommendationsEmptyMessage": "Tazama/Soma Anime au Manga ili kupata Mapendekezo",
+    "@recommendationsEmptyMessage": {},
+    "recommended": "Ilipendekezwa",
+    "@recommended": {},
+    "read": "Soma",
+    "@read": {},
+    "search": "Tafuta",
+    "@search": {},
+    "scanlators": "Wachambuzi",
+    "@scanlators": {},
+    "topAiring": "Inayorushwa Bora",
+    "@topAiring": {},
+    "watch": "Tazama",
+    "@watch": {},
+    "utd": "Kutoka Juu Hadi Chini",
+    "@utd": {},
+    "manageLayout": "Simamia Mpangilio wa {page} kwa {service}",
+    "@manageLayout": {
+        "placeholders": {
+            "service": {
+                "type": "String",
+                "examples": [
+                    "Anilist",
+                    "MAL"
+                ]
+            },
+            "page": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Home",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "allCaughtUpNew": "Umejibu kila kitu, nini kipya?",
+    "@allCaughtUpNew": {},
+    "manageLayoutDescription": "Unaweza kusimamia mpangilio wa {page} kwa kuburuta na kuacha vitu",
+    "@manageLayoutDescription": {
+        "placeholders": {
+            "page": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Home",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "pickColor": "Chagua rangi",
+    "@pickColor": {},
+    "hiddenMedia": "Vyombo vya Habari Vilivyofichwa",
+    "@hiddenMedia": {},
+    "droppedManga": "Manga Iliyotupwa",
+    "@droppedManga": {},
+    "droppedAnime": "Anime Iliyotupwa",
+    "@droppedAnime": {},
+    "simkl": "Simkl",
+    "@simkl": {},
+    "colorPickerCustom": "Maalum",
+    "@colorPickerCustom": {},
+    "colorPickerDefault": "Chaguo-msingi",
+    "@colorPickerDefault": {},
+    "logFileDescription": "Shiriki faili ya kumbukumbu",
+    "@logFileDescription": {},
+    "addAnimeRepo": "Ongeza Hazina ya Anime",
+    "@addAnimeRepo": {},
+    "selectMediaService": "Chagua Huduma ya Vyombo vya Habari",
+    "@selectMediaService": {},
+    "addAnimeRepoDesc": "Ongeza Hazina ya Anime kutoka vyanzo mbalimbali",
+    "@addAnimeRepoDesc": {},
+    "addMangaRepo": "Ongeza Hazina ya Manga",
+    "@addMangaRepo": {},
+    "logFile": "Faili la Magogo",
+    "@logFile": {},
+    "loadExtensionsIconDesc": "Zima ikiwa ukurasa wa viongezi unachelewa",
+    "@loadExtensionsIconDesc": {},
+    "autoUpdateDesc": "Sasisha Viongezi Kiotomatiki",
+    "@autoUpdateDesc": {},
+    "addNovelRepoDesc": "Ongeza Hazina ya Riwaya kutoka vyanzo mbalimbali",
+    "@addNovelRepoDesc": {},
+    "addMangaRepoDesc": "Ongeza Hazina ya Manga kutoka vyanzo mbalimbali",
+    "@addMangaRepoDesc": {},
+    "addNovelRepo": "Ongeza Hazina ya Riwaya",
+    "@addNovelRepo": {},
+    "autoUpdate": "Sasisho la Kiotomatiki",
+    "@autoUpdate": {},
+    "loadExtensionsIcon": "Pakia Aikoni za Viongezi",
+    "@loadExtensionsIcon": {},
+    "selectDirectory": "Chagua saraka",
+    "@selectDirectory": {},
+    "customPath": "Njia Maalum",
+    "@customPath": {},
+    "customPathDescription": "Weka njia maalum ya kuhifadhi faili\nBonyeza kwa muda mrefu ili kuondoa",
+    "@customPathDescription": {},
+    "noChapterFound": "Hakuna sura iliyopatikana",
+    "@noChapterFound": {},
+    "watching": "Inatazama",
+    "@watching": {},
+    "outOf": "kati ya",
+    "@outOf": {},
+    "selected": "Imechaguliwa",
+    "@selected": {},
+    "readStatus": "Soma",
+    "@readStatus": {},
+    "youTube": "Cheza kwenye YouTube?",
+    "@youTube": {},
+    "mediaNotFound": "Media haijapatikana",
+    "@mediaNotFound": {},
+    "found": "Imepatikana",
+    "@found": {},
+    "watchStatus": "Imetazamwa",
+    "@watchStatus": {},
+    "totalOf": "Jumla ya",
+    "@totalOf": {},
+    "wrongTitle": "Kichwa Kibaya?",
+    "@wrongTitle": {},
+    "installSourceToStart": "Sakinisha chanzo kutoka ukurasa wa nyongeza kuanza",
+    "@installSourceToStart": {},
+    "webView": "Mwonekano wa Wavuti",
+    "@webView": {},
+    "reading": "Inasoma",
+    "@reading": {},
+    "hidePageNumber": "Hide Page Number",
+    "@hidePageNumber": {},
+    "hidePageNumberDesc": "Hide page number while reading",
+    "@hidePageNumberDesc": {},
+    "thumbLessSeekBar": "ThumbLess SeekBar",
+    "@thumbLessSeekBar": {},
+    "developersHelpersDesc": "Dartotsu's unpaid labours",
+    "@developersHelpersDesc": {},
+    "developersHelpers": "Developers/Helpers",
+    "@developersHelpers": {},
+    "thumbLessSeekBarDesc": "Remove thumb from the seek bar",
+    "@thumbLessSeekBarDesc": {},
+    "differentCacheManagerDesc": "Use different Image cache manager",
+    "@differentCacheManagerDesc": {},
+    "differentCacheManager": "Different Cache Manager",
+    "@differentCacheManager": {},
+    "spacedPagesDesc": "Add space between pages",
+    "@spacedPagesDesc": {},
+    "spacedPages": "Spaced Pages",
+    "@spacedPages": {},
+    "readerSettingsDesc": "Change reader settings",
+    "@readerSettingsDesc": {},
+    "hideScrollbarDesc": "Hide scrollbar while reading",
+    "@hideScrollbarDesc": {},
+    "direction": "Direction",
+    "@direction": {},
+    "readerSettings": "Reader Settings",
+    "@readerSettings": {},
+    "hideScrollbar": "Hide Scrollbar",
+    "@hideScrollbar": {},
+    "playerSettingsDesc": "Change player settings",
+    "@playerSettingsDesc": {},
+    "glassEffect": "Glass Effect",
+    "@glassEffect": {},
+    "ltr": "Left To Right",
+    "@ltr": {},
+    "coverThemeDescription": "Use media cover image as theme color",
+    "@coverThemeDescription": {},
+    "rtl": "Right To Left",
+    "@rtl": {},
+    "glassEffectDescription": "Gives a frosted glass effect to the app",
+    "@glassEffectDescription": {},
+    "nextEpisodeRelease": "Episode {episode} will be released in",
+    "@nextEpisodeRelease": {
+        "description": "Message showing the next episode info",
+        "placeholders": {
+            "episode": {
+                "type": "int"
+            }
+        }
+    },
+    "topScore": "Top Score",
+    "@topScore": {},
+    "coverTheme": "Use Cover Theme",
+    "@coverTheme": {},
+    "customMPVDescription": "Enable this option to use your own MPV configuration file. Place your custom config at: {path}",
+    "@customMPVDescription": {
+        "placeholders": {
+            "path": {
+                "type": "String"
+            }
+        }
+    },
+    "customMPV": "Custom MPV Configuration",
+    "@customMPV": {}
 }

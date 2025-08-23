@@ -1,632 +1,663 @@
 {
-  "fontWeightDescription": "Толщина шрифта субтитров",
-  "@fontWeightDescription": {},
-  "about": "О приложении",
-  "@about": {},
-  "account": "Аккаунт",
-  "@account": {},
-  "common": "Общие",
-  "@common": {},
-  "fontFamily": "Шрифт",
-  "@fontFamily": {},
-  "login": "Войти",
-  "@login": {},
-  "manga": "Манга",
-  "@manga": {},
-  "subtitlePreview": "Предпросмотр субтитров",
-  "@subtitlePreview": {},
-  "supportMaintainer": "Хотите поддержать разработчика Dartotsu?\nПодумайте о донате",
-  "@supportMaintainer": {},
-  "theme": "Тема",
-  "@theme": {},
-  "themeDescription": "Настройте внешний вид и атмосферу вашего приложения",
-  "@themeDescription": {},
-  "aboutDescription": "Узнайте больше о приложении и его создателях",
-  "@aboutDescription": {},
-  "accountDescription": "Управляйте своими аккаунтами в AniList, MAL и Discord без усилий",
-  "@accountDescription": {},
-  "anime": "Аниме",
-  "@anime": {},
-  "animeDescription": "Персонализируйте и управляйте своими предпочтениями в аниме",
-  "@animeDescription": {},
-  "anilist": "AniList",
-  "@anilist": {},
-  "appName": "Dartotsu",
-  "@appName": {},
-  "appTagline": "Новое лучшее приложение для\nотслеживания аниме и манги",
-  "@appTagline": {},
-  "backgroundColor": "Цвет фона",
-  "@backgroundColor": {},
-  "backgroundColorDescription": "Цвет фона субтитров",
-  "@backgroundColorDescription": {},
-  "bottomPadding": "Отступ снизу",
-  "@bottomPadding": {},
-  "bottomPaddingDescription": "Отступ снизу для субтитров",
-  "@bottomPaddingDescription": {},
-  "cancel": "Отмена",
-  "@cancel": {},
-  "colorPicker": "Выбор цвета",
-  "@colorPicker": {},
-  "colorPickerDescription": "Подберите цвет",
-  "@colorPickerDescription": {},
-  "commonDescription": "Доступ к общим настройкам для удобного использования приложения",
-  "@commonDescription": {},
-  "cursedSpeed": "Проклятая скорость",
-  "@cursedSpeed": {},
-  "cursedSpeedDescription": "Для людей, которые слишком заняты жизнью",
-  "@cursedSpeedDescription": {},
-  "customTheme": "Пользовательская тема",
-  "@customTheme": {},
-  "customThemeDescription": "Используйте свой собственный цвет для темы",
-  "@customThemeDescription": {},
-  "darkMode": "Тёмный режим",
-  "@darkMode": {},
-  "discord": "Discord",
-  "@discord": {},
-  "donationGoal": "Нет цели по донатам на данный момент",
-  "@donationGoal": {},
-  "enableDarkMode": "Включить тёмный режим",
-  "@enableDarkMode": {},
-  "extension": "{count, plural, =1 {Расширение} other {Расширение}}",
-  "@extension": {},
-  "extensionsDescription": "Устанавливайте и управляйте расширениями для дополнительных возможностей",
-  "@extensionsDescription": {},
-  "fontColor": "Цвет шрифта",
-  "@fontColor": {},
-  "fontColorDescription": "Цвет шрифта субтитров",
-  "@fontColorDescription": {},
-  "fontFamilyDescription": "Шрифт субтитров",
-  "@fontFamilyDescription": {},
-  "fontSize": "Размер шрифта",
-  "@fontSize": {},
-  "fontSizeDescription": "Размер шрифта субтитров",
-  "@fontSizeDescription": {},
-  "fontWeight": "Толщина шрифта",
-  "@fontWeight": {},
-  "hidePrivate": "Скрыть личное",
-  "@hidePrivate": {},
-  "hidePrivateDescription": "Скрыть частные сериалы с главной страницы.",
-  "@hidePrivateDescription": {},
-  "incognitoMode": "Режим инкогнито",
-  "@incognitoMode": {},
-  "incognitoModeDescription": "Просматривайте без сохранения активности",
-  "@incognitoModeDescription": {},
-  "logout": "Выйти {type}",
-  "@logout": {},
-  "mal": "MyAnimeList",
-  "@mal": {},
-  "mangaDescription": "Организуйте и адаптируйте ваш опыт с мангой",
-  "@mangaDescription": {},
-  "materialYou": "Material You",
-  "@materialYou": {},
-  "materialYouDescription": "Используйте тот же цвет, что и на вашем обоев",
-  "@materialYouDescription": {},
-  "no": "Нет",
-  "@no": {},
-  "notifications": "Уведомления",
-  "@notifications": {},
-  "notificationsDescription": "Настройте, как и когда вы будете получать уведомления",
-  "@notificationsDescription": {},
-  "offlineMode": "Офлайн-режим",
-  "@offlineMode": {},
-  "offlineModeDescription": "Используйте приложение без подключения к интернету",
-  "@offlineModeDescription": {},
-  "ok": "ОК",
-  "@ok": {},
-  "oledThemeVariant": "Вариант OLED темы",
-  "@oledThemeVariant": {},
-  "oledThemeVariantDescription": "Включить режим OLED",
-  "@oledThemeVariantDescription": {},
-  "outlineColor": "Цвет контура",
-  "@outlineColor": {},
-  "outlineColorDescription": "Цвет контура субтитров",
-  "@outlineColorDescription": {},
-  "playerSettingsTitle": "Настройки плеера",
-  "@playerSettingsTitle": {},
-  "resizeMode": "Режим изменения размера",
-  "@resizeMode": {},
-  "resizeModeDescription": "Режим изменения размера по умолчанию для плеера",
-  "@resizeModeDescription": {},
-  "restoreSettings": "Восстановить настройки",
-  "@restoreSettings": {},
-  "settings": "Настройки",
-  "@settings": {},
-  "showSubtitles": "Показывать субтитры",
-  "@showSubtitles": {},
-  "showSubtitlesDescription": "Показывать субтитры по умолчанию",
-  "@showSubtitlesDescription": {},
-  "skipButton": "Кнопка пропуска",
-  "@skipButton": {},
-  "skipButtonDescription": "Продолжительность кнопки пропуска",
-  "@skipButtonDescription": {},
-  "speed": "Скорость",
-  "@speed": {},
-  "speedDescription": "Скорость плеера по умолчанию",
-  "@speedDescription": {},
-  "subtitles": "Субтитры",
-  "@subtitles": {},
-  "yes": "Да",
-  "@yes": {},
-  "trending": "{type}",
-  "@trending": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "dtu": "Вниз до вверх",
-  "@dtu": {},
-  "volume": "{count, plural, =1 {объем} other {объемы}}",
-  "@volume": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "loginTo": "Вход в {service}",
-  "@loginTo": {
-    "placeholders": {
-      "service": {
-        "type": "String",
-        "examples": [
-          "Anilist",
-          "MyAnimeList",
-          "Kitsu",
-          "Discord"
-        ]
-      }
-    }
-  },
-  "activity": "{count, plural, =1 {активность} other {деятельность}}",
-  "@activity": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "topRated": "Самый рейтинговый {type}",
-  "@topRated": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa",
-          "Series"
-        ]
-      }
-    }
-  },
-  "previousSeason": "Предыдущий сезон",
-  "@previousSeason": {},
-  "popular": "Популярный {type}",
-  "@popular": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa"
-        ]
-      }
-    }
-  },
-  "confirmLogout": "Вы уверены, что хотите выйти?",
-  "@confirmLogout": {},
-  "installed": "Установка {type}",
-  "@installed": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Extensions"
-        ]
-      }
-    }
-  },
-  "mostFavourite": "Самый вкусный {type}",
-  "@mostFavourite": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa"
-        ]
-      }
-    }
-  },
-  "endDate": "Дата окончания",
-  "@endDate": {},
-  "chapterRead": "Глава Читать",
-  "@chapterRead": {},
-  "gridView": "Вид сетки",
-  "@gridView": {},
-  "browse": "{type}",
-  "@browse": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "comingSoon": "Иду",
-  "@comingSoon": {},
-  "episode": "{count, plural, =1 {Эпизод} other {Эпизоды}}",
-  "@episode": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "episodeWatched": "Эпизод Смотреть",
-  "@episodeWatched": {},
-  "popularity": "Популярность",
-  "@popularity": {},
-  "favorites": "Любимые",
-  "@favorites": {},
-  "movie": "{count, plural, =1 {фильм} other {фильмы}}",
-  "@movie": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "prequel": "PREQUEL",
-  "@prequel": {},
-  "planned": "Запланировано {type}",
-  "@planned": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "language": "Настройка",
-  "@language": {},
-  "collapseText": "показать меньше",
-  "@collapseText": {},
-  "chapter": "{count, plural, =1 {глава} other {главы}}",
-  "@chapter": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "available": "Доступно {type}",
-  "@available": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "characters": "Персонажи",
-  "@characters": {},
-  "genres": "Жанры",
-  "@genres": {},
-  "calendar": "Календарь",
-  "@calendar": {},
-  "format": "Формат",
-  "@format": {},
-  "expandText": "показать",
-  "@expandText": {},
-  "manhua": "Manhua",
-  "@manhua": {},
-  "sequel": "SEQUEL",
-  "@sequel": {},
-  "studio": "Studio",
-  "@studio": {},
-  "staff": "Сотрудники",
-  "@staff": {},
-  "status": "Статус",
-  "@status": {},
-  "relations": "Отношения",
-  "@relations": {},
-  "source": "Источник",
-  "@source": {},
-  "synonyms": "Синонимы",
-  "@synonyms": {},
-  "startDate": "Начало Дата",
-  "@startDate": {},
-  "recommendationsEmptyMessage": "Наблюдайте за аниме или мангой, чтобы получить рекомендации",
-  "@recommendationsEmptyMessage": {},
-  "averageDuration": "Средняя продолжительность",
-  "@averageDuration": {},
-  "author": "Автор",
-  "@author": {},
-  "description": "Краткое содержание",
-  "@description": {},
-  "name": "Имя",
-  "@name": {},
-  "recommended": "Рекомендовано",
-  "@recommended": {},
-  "meanScore": "Средний балл",
-  "@meanScore": {},
-  "synopsis": "Краткое содержание",
-  "@synopsis": {},
-  "nameRomaji": "Имя (Ромаджи)",
-  "@nameRomaji": {},
-  "totalEpisodes": "Эпизоды",
-  "@totalEpisodes": {},
-  "total": "Итого",
-  "@total": {},
-  "tags": "Тэги",
-  "@tags": {},
-  "totalChapters": "Главы",
-  "@totalChapters": {},
-  "manhwa": "Manhwa",
-  "@manhwa": {},
-  "kitsu": "Kitsu",
-  "@kitsu": {},
-  "ln": "Ранобэ",
-  "@ln": {},
-  "novel": "Новинка",
-  "@novel": {},
-  "series": "Серия",
-  "@series": {},
-  "home": "Домой",
-  "@home": {},
-  "addToList": "Добавить в список",
-  "@addToList": {},
-  "season": "Сезон",
-  "@season": {},
-  "compactView": "Компактный вид",
-  "@compactView": {},
-  "thisSeason": "Этот сезон",
-  "@thisSeason": {},
-  "listView": "Вид списка",
-  "@listView": {},
-  "onHold": "{type}",
-  "@onHold": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "favorite": "Любимый {type}",
-  "@favorite": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "nextSeason": "Следующий сезон",
-  "@nextSeason": {},
-  "noDropped": "Вы еще не уронили {type}.",
-  "@noDropped": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "recentUpdates": "Последние обновления",
-  "@recentUpdates": {},
-  "noOnHold": "Похоже, вы ничего не задержали.",
-  "@noOnHold": {},
-  "comments": "Комментарии",
-  "@comments": {},
-  "continueReading": "Продолжить чтение",
-  "@continueReading": {},
-  "continueWatching": "Продолжать смотреть",
-  "@continueWatching": {},
-  "info": "Информация",
-  "@info": {},
-  "list": "{type} List",
-  "@list": {
-    "placeholders": {
-      "type": {
-        "examples": "Anime list",
-        "type": "String"
-      }
-    }
-  },
-  "layout": "Layout",
-  "@layout": {},
-  "noFavourites": "Похоже, тебе ничего не нравится.\nПопытайся насладиться шоу, чтобы сохранить его здесь.",
-  "@noFavourites": {},
-  "noHiddenMediaFound": "Нет скрытых СМИ",
-  "@noHiddenMediaFound": {},
-  "options": "Параметры",
-  "@options": {},
-  "read": "Читать",
-  "@read": {},
-  "scanlators": "Скалы",
-  "@scanlators": {},
-  "search": "Поиск",
-  "@search": {},
-  "sort": "Сорт",
-  "@sort": {},
-  "topAiring": "Топ-эфир",
-  "@topAiring": {},
-  "watch": "Смотреть",
-  "@watch": {},
-  "utd": "Вниз",
-  "@utd": {},
-  "manageLayout": "Управление макетом страницы {page} для {service}",
-  "@manageLayout": {
-    "placeholders": {
-      "service": {
-        "type": "String",
-        "examples": [
-          "Anilist",
-          "MAL"
-        ]
-      },
-      "page": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Home",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "allCaughtUpNew": "Все догнали, когда Нью?",
-  "@allCaughtUpNew": {},
-  "manageLayoutDescription": "Вы можете управлять компоновкой для страницы {page}, перетаскивая и опуская элементы",
-  "@manageLayoutDescription": {
-    "placeholders": {
-      "page": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Home",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "pickColor": "Выберите цвет",
-  "@pickColor": {},
-  "hiddenMedia": "Скрытые СМИ",
-  "@hiddenMedia": {},
-  "droppedManga": "Падение Манги",
-  "@droppedManga": {},
-  "droppedAnime": "Сброшенное аниме",
-  "@droppedAnime": {},
-  "simkl": "Simkl",
-  "@simkl": {},
-  "colorPickerDefault": "По умолчанию",
-  "@colorPickerDefault": {},
-  "colorPickerCustom": "Пользователь",
-  "@colorPickerCustom": {},
-  "loadExtensionsIconDesc": "Отключить, если задержка страницы расширений",
-  "@loadExtensionsIconDesc": {},
-  "autoUpdateDesc": "Продления Auto Update",
-  "@autoUpdateDesc": {},
-  "addNovelRepoDesc": "Добавить Novel Repo из различных источников",
-  "@addNovelRepoDesc": {},
-  "autoUpdate": "Автоматическое обновление",
-  "@autoUpdate": {},
-  "logFileDescription": "Поделиться файлом журнала",
-  "@logFileDescription": {},
-  "addAnimeRepo": "Добавить аниме Repo",
-  "@addAnimeRepo": {},
-  "addMangaRepoDesc": "Добавить мангу Репо из различных источников",
-  "@addMangaRepoDesc": {},
-  "addAnimeRepoDesc": "Добавить аниме Repo из различных источников",
-  "@addAnimeRepoDesc": {},
-  "addMangaRepo": "Добавить Manga Repo",
-  "@addMangaRepo": {},
-  "logFile": "Файл журнала",
-  "@logFile": {},
-  "addNovelRepo": "Добавить значок",
-  "@addNovelRepo": {},
-  "loadExtensionsIcon": "Иконка расширения загрузки",
-  "@loadExtensionsIcon": {},
-  "selectMediaService": "Выберите медиа-сервис",
-  "@selectMediaService": {},
-  "selectDirectory": "Выберите каталог",
-  "@selectDirectory": {},
-  "customPath": "Пользовательский путь",
-  "@customPath": {},
-  "customPathDescription": "Настройка пользовательского пути для сохранения файлов\nДлинная пресса для удаления",
-  "@customPathDescription": {},
-  "noChapterFound": "Не найдена глава",
-  "@noChapterFound": {},
-  "webView": "Веб-сайт",
-  "@webView": {},
-  "watching": "Смотреть",
-  "@watching": {},
-  "outOf": "из",
-  "@outOf": {},
-  "selected": "Выбрано",
-  "@selected": {},
-  "readStatus": "Читать",
-  "@readStatus": {},
-  "youTube": "Играть на YouTube?",
-  "@youTube": {},
-  "mediaNotFound": "СМИ не нашли",
-  "@mediaNotFound": {},
-  "found": "Найден",
-  "@found": {},
-  "watchStatus": "Смотреть",
-  "@watchStatus": {},
-  "totalOf": "всего",
-  "@totalOf": {},
-  "wrongTitle": "Не тот титул?",
-  "@wrongTitle": {},
-  "installSourceToStart": "Установить источник с страницы расширения, чтобы начать",
-  "@installSourceToStart": {},
-  "reading": "Чтение",
-  "@reading": {},
-  "playerSettingsDesc": "Изменение параметров игрока",
-  "@playerSettingsDesc": {},
-  "differentCacheManager": "Разный менеджер кэша",
-  "@differentCacheManager": {},
-  "developersHelpersDesc": "Неоплачиваемый труд Дартоцу",
-  "@developersHelpersDesc": {},
-  "developersHelpers": "Разработчики / Helpers",
-  "@developersHelpers": {},
-  "differentCacheManagerDesc": "Использовать разные кэш-менеджеры изображений",
-  "@differentCacheManagerDesc": {},
-  "hidePageNumberDesc": "Скрыть номер страницы во время чтения",
-  "@hidePageNumberDesc": {},
-  "thumbLessSeekBar": "Полоса прокрутки без большого пальца",
-  "@thumbLessSeekBar": {},
-  "spacedPagesDesc": "Добавить пространство между страницами",
-  "@spacedPagesDesc": {},
-  "thumbLessSeekBarDesc": "Удалить большой палец из панели поиска",
-  "@thumbLessSeekBarDesc": {},
-  "hidePageNumber": "Имя страницы",
-  "@hidePageNumber": {},
-  "spacedPages": "Пространенные страницы",
-  "@spacedPages": {},
-  "readerSettingsDesc": "Изменение параметров чтения",
-  "@readerSettingsDesc": {},
-  "hideScrollbarDesc": "Скрыть свиток во время чтения",
-  "@hideScrollbarDesc": {},
-  "direction": "Направление",
-  "@direction": {},
-  "readerSettings": "Параметры чтения",
-  "@readerSettings": {},
-  "hideScrollbar": "Свиток",
-  "@hideScrollbar": {}
+    "fontWeightDescription": "Толщина шрифта субтитров",
+    "@fontWeightDescription": {},
+    "about": "О приложении",
+    "@about": {},
+    "account": "Аккаунт",
+    "@account": {},
+    "common": "Общие",
+    "@common": {},
+    "fontFamily": "Шрифт",
+    "@fontFamily": {},
+    "login": "Войти",
+    "@login": {},
+    "manga": "Манга",
+    "@manga": {},
+    "subtitlePreview": "Предпросмотр субтитров",
+    "@subtitlePreview": {},
+    "supportMaintainer": "Хотите поддержать разработчика Dartotsu?\nПодумайте о донате",
+    "@supportMaintainer": {},
+    "theme": "Тема",
+    "@theme": {},
+    "themeDescription": "Настройте внешний вид и атмосферу вашего приложения",
+    "@themeDescription": {},
+    "aboutDescription": "Узнайте больше о приложении и его создателях",
+    "@aboutDescription": {},
+    "accountDescription": "Управляйте своими аккаунтами в AniList, MAL и Discord без усилий",
+    "@accountDescription": {},
+    "anime": "Аниме",
+    "@anime": {},
+    "animeDescription": "Персонализируйте и управляйте своими предпочтениями в аниме",
+    "@animeDescription": {},
+    "anilist": "AniList",
+    "@anilist": {},
+    "appName": "Dartotsu",
+    "@appName": {},
+    "appTagline": "Новое лучшее приложение для\nотслеживания аниме и манги",
+    "@appTagline": {},
+    "backgroundColor": "Цвет фона",
+    "@backgroundColor": {},
+    "backgroundColorDescription": "Цвет фона субтитров",
+    "@backgroundColorDescription": {},
+    "bottomPadding": "Отступ снизу",
+    "@bottomPadding": {},
+    "bottomPaddingDescription": "Отступ снизу для субтитров",
+    "@bottomPaddingDescription": {},
+    "cancel": "Отмена",
+    "@cancel": {},
+    "colorPicker": "Выбор цвета",
+    "@colorPicker": {},
+    "colorPickerDescription": "Подберите цвет",
+    "@colorPickerDescription": {},
+    "commonDescription": "Доступ к общим настройкам для удобного использования приложения",
+    "@commonDescription": {},
+    "cursedSpeed": "Проклятая скорость",
+    "@cursedSpeed": {},
+    "cursedSpeedDescription": "Для людей, которые слишком заняты жизнью",
+    "@cursedSpeedDescription": {},
+    "customTheme": "Пользователь Тема",
+    "@customTheme": {},
+    "customThemeDescription": "Используйте свой собственный цвет для темы",
+    "@customThemeDescription": {},
+    "darkMode": "Тёмный режим",
+    "@darkMode": {},
+    "discord": "Discord",
+    "@discord": {},
+    "donationGoal": "Нет цели по донатам на данный момент",
+    "@donationGoal": {},
+    "enableDarkMode": "Включить тёмный режим",
+    "@enableDarkMode": {},
+    "extension": "{count, plural, =1 {Расширение} other {Расширение}}",
+    "@extension": {},
+    "extensionsDescription": "Устанавливайте и управляйте расширениями для дополнительных возможностей",
+    "@extensionsDescription": {},
+    "fontColor": "Цвет шрифта",
+    "@fontColor": {},
+    "fontColorDescription": "Цвет шрифта субтитров",
+    "@fontColorDescription": {},
+    "fontFamilyDescription": "Шрифт субтитров",
+    "@fontFamilyDescription": {},
+    "fontSize": "Размер шрифта",
+    "@fontSize": {},
+    "fontSizeDescription": "Размер шрифта субтитров",
+    "@fontSizeDescription": {},
+    "fontWeight": "Толщина шрифта",
+    "@fontWeight": {},
+    "hidePrivate": "Скрыть личное",
+    "@hidePrivate": {},
+    "hidePrivateDescription": "Скрыть частные сериалы с главной страницы.",
+    "@hidePrivateDescription": {},
+    "incognitoMode": "Режим инкогнито",
+    "@incognitoMode": {},
+    "incognitoModeDescription": "Просматривайте без сохранения активности",
+    "@incognitoModeDescription": {},
+    "logout": "Выйти {type}",
+    "@logout": {},
+    "mal": "MyAnimeList",
+    "@mal": {},
+    "mangaDescription": "Организуйте и адаптируйте ваш опыт с мангой",
+    "@mangaDescription": {},
+    "materialYou": "Material You",
+    "@materialYou": {},
+    "materialYouDescription": "Используйте тот же цвет, что и на вашем обоев",
+    "@materialYouDescription": {},
+    "no": "Нет",
+    "@no": {},
+    "notifications": "Уведомления",
+    "@notifications": {},
+    "notificationsDescription": "Настройте, как и когда вы будете получать уведомления",
+    "@notificationsDescription": {},
+    "offlineMode": "Офлайн-режим",
+    "@offlineMode": {},
+    "offlineModeDescription": "Используйте приложение без подключения к интернету",
+    "@offlineModeDescription": {},
+    "ok": "ОК",
+    "@ok": {},
+    "oledThemeVariant": "Вариант OLED темы",
+    "@oledThemeVariant": {},
+    "oledThemeVariantDescription": "Включить режим OLED",
+    "@oledThemeVariantDescription": {},
+    "outlineColor": "Цвет контура",
+    "@outlineColor": {},
+    "outlineColorDescription": "Цвет контура субтитров",
+    "@outlineColorDescription": {},
+    "playerSettingsTitle": "Настройки плеера",
+    "@playerSettingsTitle": {},
+    "resizeMode": "Режим изменения размера",
+    "@resizeMode": {},
+    "resizeModeDescription": "Режим изменения размера по умолчанию для плеера",
+    "@resizeModeDescription": {},
+    "restoreSettings": "Восстановить настройки",
+    "@restoreSettings": {},
+    "settings": "Настройки",
+    "@settings": {},
+    "showSubtitles": "Показывать субтитры",
+    "@showSubtitles": {},
+    "showSubtitlesDescription": "Показывать субтитры по умолчанию",
+    "@showSubtitlesDescription": {},
+    "skipButton": "Кнопка пропуска",
+    "@skipButton": {},
+    "skipButtonDescription": "Продолжительность кнопки пропуска",
+    "@skipButtonDescription": {},
+    "speed": "Скорость",
+    "@speed": {},
+    "speedDescription": "Скорость плеера по умолчанию",
+    "@speedDescription": {},
+    "subtitles": "Субтитры",
+    "@subtitles": {},
+    "yes": "Да",
+    "@yes": {},
+    "trending": "{type}",
+    "@trending": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "dtu": "Вниз до вверх",
+    "@dtu": {},
+    "volume": "{count, plural, =1 {объем} other {объемы}}",
+    "@volume": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "loginTo": "Вход в {service}",
+    "@loginTo": {
+        "placeholders": {
+            "service": {
+                "type": "String",
+                "examples": [
+                    "Anilist",
+                    "MyAnimeList",
+                    "Kitsu",
+                    "Discord"
+                ]
+            }
+        }
+    },
+    "activity": "{count, plural, =1 {активность} other {деятельность}}",
+    "@activity": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "topRated": "Самый рейтинговый {type}",
+    "@topRated": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa",
+                    "Series"
+                ]
+            }
+        }
+    },
+    "previousSeason": "Предыдущий сезон",
+    "@previousSeason": {},
+    "popular": "Популярный {type}",
+    "@popular": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa"
+                ]
+            }
+        }
+    },
+    "confirmLogout": "Вы уверены, что хотите выйти?",
+    "@confirmLogout": {},
+    "installed": "Установка {type}",
+    "@installed": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Extensions"
+                ]
+            }
+        }
+    },
+    "mostFavourite": "Самый вкусный {type}",
+    "@mostFavourite": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa"
+                ]
+            }
+        }
+    },
+    "endDate": "Дата окончания",
+    "@endDate": {},
+    "chapterRead": "Глава Читать",
+    "@chapterRead": {},
+    "gridView": "Вид сетки",
+    "@gridView": {},
+    "browse": "{type}",
+    "@browse": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "comingSoon": "Иду",
+    "@comingSoon": {},
+    "episode": "{count, plural, =1 {Эпизод} other {Эпизоды}}",
+    "@episode": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "episodeWatched": "Эпизод Смотреть",
+    "@episodeWatched": {},
+    "popularity": "Популярность",
+    "@popularity": {},
+    "favorites": "Любимые",
+    "@favorites": {},
+    "movie": "{count, plural, =1 {фильм} other {фильмы}}",
+    "@movie": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "prequel": "PREQUEL",
+    "@prequel": {},
+    "planned": "Запланировано {type}",
+    "@planned": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "language": "Настройка",
+    "@language": {},
+    "collapseText": "показать меньше",
+    "@collapseText": {},
+    "chapter": "{count, plural, =1 {глава} other {главы}}",
+    "@chapter": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "available": "Доступно {type}",
+    "@available": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "characters": "Персонажи",
+    "@characters": {},
+    "genres": "Жанры",
+    "@genres": {},
+    "calendar": "Календарь",
+    "@calendar": {},
+    "format": "Формат",
+    "@format": {},
+    "expandText": "показать",
+    "@expandText": {},
+    "manhua": "Manhua",
+    "@manhua": {},
+    "sequel": "SEQUEL",
+    "@sequel": {},
+    "studio": "Studio",
+    "@studio": {},
+    "staff": "Сотрудники",
+    "@staff": {},
+    "status": "Статус",
+    "@status": {},
+    "relations": "Отношения",
+    "@relations": {},
+    "source": "Источник",
+    "@source": {},
+    "synonyms": "Синонимы",
+    "@synonyms": {},
+    "startDate": "Начало Дата",
+    "@startDate": {},
+    "recommendationsEmptyMessage": "Наблюдайте за аниме или мангой, чтобы получить рекомендации",
+    "@recommendationsEmptyMessage": {},
+    "averageDuration": "Средняя продолжительность",
+    "@averageDuration": {},
+    "author": "Автор",
+    "@author": {},
+    "name": "Имя",
+    "@name": {},
+    "recommended": "Рекомендовано",
+    "@recommended": {},
+    "meanScore": "Средний балл",
+    "@meanScore": {},
+    "synopsis": "Краткое содержание",
+    "@synopsis": {},
+    "nameRomaji": "Имя (Ромаджи)",
+    "@nameRomaji": {},
+    "totalEpisodes": "Эпизоды",
+    "@totalEpisodes": {},
+    "total": "Итого",
+    "@total": {},
+    "tags": "Тэги",
+    "@tags": {},
+    "totalChapters": "Главы",
+    "@totalChapters": {},
+    "manhwa": "Manhwa",
+    "@manhwa": {},
+    "kitsu": "Kitsu",
+    "@kitsu": {},
+    "ln": "Ранобэ",
+    "@ln": {},
+    "novel": "Новинка",
+    "@novel": {},
+    "series": "Серия",
+    "@series": {},
+    "home": "Домой",
+    "@home": {},
+    "addToList": "Добавить в список",
+    "@addToList": {},
+    "season": "Сезон",
+    "@season": {},
+    "compactView": "Компактный вид",
+    "@compactView": {},
+    "thisSeason": "Этот сезон",
+    "@thisSeason": {},
+    "listView": "Вид списка",
+    "@listView": {},
+    "onHold": "{type}",
+    "@onHold": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "favorite": "Любимый {type}",
+    "@favorite": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "nextSeason": "Следующий сезон",
+    "@nextSeason": {},
+    "noDropped": "Вы еще не уронили {type}.",
+    "@noDropped": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "recentUpdates": "Последние обновления",
+    "@recentUpdates": {},
+    "noOnHold": "Похоже, вы ничего не задержали.",
+    "@noOnHold": {},
+    "comments": "Комментарии",
+    "@comments": {},
+    "continueReading": "Продолжить чтение",
+    "@continueReading": {},
+    "continueWatching": "Продолжать смотреть",
+    "@continueWatching": {},
+    "info": "Информация",
+    "@info": {},
+    "list": "{type} List",
+    "@list": {
+        "placeholders": {
+            "type": {
+                "examples": "Anime list",
+                "type": "String"
+            }
+        }
+    },
+    "layout": "Layout",
+    "@layout": {},
+    "noFavourites": "Похоже, тебе ничего не нравится.\nПопытайся насладиться шоу, чтобы сохранить его здесь.",
+    "@noFavourites": {},
+    "noHiddenMediaFound": "Нет скрытых СМИ",
+    "@noHiddenMediaFound": {},
+    "options": "Параметры",
+    "@options": {},
+    "read": "Читать",
+    "@read": {},
+    "scanlators": "Скалы",
+    "@scanlators": {},
+    "search": "Поиск",
+    "@search": {},
+    "sort": "Сорт",
+    "@sort": {},
+    "topAiring": "Топ-эфир",
+    "@topAiring": {},
+    "watch": "Смотреть",
+    "@watch": {},
+    "utd": "Вниз",
+    "@utd": {},
+    "manageLayout": "Управление макетом страницы {page} для {service}",
+    "@manageLayout": {
+        "placeholders": {
+            "service": {
+                "type": "String",
+                "examples": [
+                    "Anilist",
+                    "MAL"
+                ]
+            },
+            "page": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Home",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "allCaughtUpNew": "Все догнали, когда Нью?",
+    "@allCaughtUpNew": {},
+    "manageLayoutDescription": "Вы можете управлять компоновкой для страницы {page}, перетаскивая и опуская элементы",
+    "@manageLayoutDescription": {
+        "placeholders": {
+            "page": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Home",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "pickColor": "Выберите цвет",
+    "@pickColor": {},
+    "hiddenMedia": "Скрытые СМИ",
+    "@hiddenMedia": {},
+    "droppedManga": "Падение Манги",
+    "@droppedManga": {},
+    "droppedAnime": "Сброшенное аниме",
+    "@droppedAnime": {},
+    "simkl": "Simkl",
+    "@simkl": {},
+    "colorPickerDefault": "По умолчанию",
+    "@colorPickerDefault": {},
+    "colorPickerCustom": "Пользователь",
+    "@colorPickerCustom": {},
+    "loadExtensionsIconDesc": "Отключить, если задержка страницы расширений",
+    "@loadExtensionsIconDesc": {},
+    "autoUpdateDesc": "Продления Auto Update",
+    "@autoUpdateDesc": {},
+    "addNovelRepoDesc": "Добавить Novel Repo из различных источников",
+    "@addNovelRepoDesc": {},
+    "autoUpdate": "Автоматическое обновление",
+    "@autoUpdate": {},
+    "logFileDescription": "Поделиться файлом журнала",
+    "@logFileDescription": {},
+    "addAnimeRepo": "Добавить аниме Repo",
+    "@addAnimeRepo": {},
+    "addMangaRepoDesc": "Добавить мангу Репо из различных источников",
+    "@addMangaRepoDesc": {},
+    "addAnimeRepoDesc": "Добавить аниме Repo из различных источников",
+    "@addAnimeRepoDesc": {},
+    "addMangaRepo": "Добавить Manga Repo",
+    "@addMangaRepo": {},
+    "logFile": "Файл журнала",
+    "@logFile": {},
+    "addNovelRepo": "Добавить значок",
+    "@addNovelRepo": {},
+    "loadExtensionsIcon": "Иконка расширения загрузки",
+    "@loadExtensionsIcon": {},
+    "selectMediaService": "Выберите медиа-сервис",
+    "@selectMediaService": {},
+    "selectDirectory": "Выберите каталог",
+    "@selectDirectory": {},
+    "customPath": "Пользовательский путь",
+    "@customPath": {},
+    "customPathDescription": "Настройка пользовательского пути для сохранения файлов\nДлинная пресса для удаления",
+    "@customPathDescription": {},
+    "noChapterFound": "Не найдена глава",
+    "@noChapterFound": {},
+    "webView": "Веб-сайт",
+    "@webView": {},
+    "watching": "Смотреть",
+    "@watching": {},
+    "outOf": "из",
+    "@outOf": {},
+    "selected": "Выбрано",
+    "@selected": {},
+    "readStatus": "Читать",
+    "@readStatus": {},
+    "youTube": "Играть на YouTube?",
+    "@youTube": {},
+    "mediaNotFound": "СМИ не нашли",
+    "@mediaNotFound": {},
+    "found": "Найден",
+    "@found": {},
+    "watchStatus": "Смотреть",
+    "@watchStatus": {},
+    "totalOf": "всего",
+    "@totalOf": {},
+    "wrongTitle": "Не тот титул?",
+    "@wrongTitle": {},
+    "installSourceToStart": "Установить источник с страницы расширения, чтобы начать",
+    "@installSourceToStart": {},
+    "reading": "Чтение",
+    "@reading": {},
+    "playerSettingsDesc": "Изменение параметров игрока",
+    "@playerSettingsDesc": {},
+    "differentCacheManager": "Разный менеджер кэша",
+    "@differentCacheManager": {},
+    "developersHelpersDesc": "Неоплачиваемый труд Дартоцу",
+    "@developersHelpersDesc": {},
+    "developersHelpers": "Разработчики / Helpers",
+    "@developersHelpers": {},
+    "differentCacheManagerDesc": "Использовать разные кэш-менеджеры изображений",
+    "@differentCacheManagerDesc": {},
+    "hidePageNumberDesc": "Скрыть номер страницы во время чтения",
+    "@hidePageNumberDesc": {},
+    "thumbLessSeekBar": "Полоса прокрутки без большого пальца",
+    "@thumbLessSeekBar": {},
+    "spacedPagesDesc": "Добавить пространство между страницами",
+    "@spacedPagesDesc": {},
+    "thumbLessSeekBarDesc": "Удалить большой палец из панели поиска",
+    "@thumbLessSeekBarDesc": {},
+    "hidePageNumber": "Имя страницы",
+    "@hidePageNumber": {},
+    "spacedPages": "Пространенные страницы",
+    "@spacedPages": {},
+    "readerSettingsDesc": "Изменение параметров чтения",
+    "@readerSettingsDesc": {},
+    "hideScrollbarDesc": "Скрыть свиток во время чтения",
+    "@hideScrollbarDesc": {},
+    "direction": "Направление",
+    "@direction": {},
+    "readerSettings": "Параметры чтения",
+    "@readerSettings": {},
+    "hideScrollbar": "Свиток",
+    "@hideScrollbar": {},
+    "glassEffect": "Стеклянный эффект",
+    "@glassEffect": {},
+    "ltr": "Направо",
+    "@ltr": {},
+    "coverThemeDescription": "Используйте медиа-обложка изображения как цвет темы",
+    "@coverThemeDescription": {},
+    "rtl": "Налево",
+    "@rtl": {},
+    "glassEffectDescription": "Дает эффект морозного стекла для приложения",
+    "@glassEffectDescription": {},
+    "nextEpisodeRelease": "Эпизод {episode} выйдет",
+    "@nextEpisodeRelease": {
+        "description": "Message showing the next episode info",
+        "placeholders": {
+            "episode": {
+                "type": "int"
+            }
+        }
+    },
+    "topScore": "Top Score",
+    "@topScore": {},
+    "coverTheme": "Использовать Обложка",
+    "@coverTheme": {},
+    "customMPVDescription": "Enable this option to use your own MPV configuration file. Place your custom config at: {path}",
+    "@customMPVDescription": {
+        "placeholders": {
+            "path": {
+                "type": "String"
+            }
+        }
+    },
+    "customMPV": "Custom MPV Configuration",
+    "@customMPV": {}
 }

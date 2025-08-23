@@ -1,632 +1,663 @@
 {
-  "about": "గురించి",
-  "@about": {},
-  "aboutDescription": "అప్లికేషన్ మరియు దాని సృష్టికర్తల గురించి మరింత తెలుసుకోండి",
-  "@aboutDescription": {},
-  "account": "ఖాతా",
-  "@account": {},
-  "accountDescription": "మీ AniList, MAL మరియు Discord ఖాతాలను సులభంగా నిర్వహించండి",
-  "@accountDescription": {},
-  "animeDescription": "మీ ఆనిమే ప్రాధాన్యతలను వ్యక్తిగతీకరించి నిర్వహించండి",
-  "@animeDescription": {},
-  "appName": "Dartotsu",
-  "@appName": {},
-  "appTagline": "నవీకృత ఉత్తమ అప్లికేషన్\nఆనిమే మరియు మాంగా ట్రాకింగ్ కోసం",
-  "@appTagline": {},
-  "backgroundColor": "పరిసర రంగు",
-  "@backgroundColor": {},
-  "backgroundColorDescription": "ఉపశీర్షిక పరిసర రంగు",
-  "@backgroundColorDescription": {},
-  "commonDescription": "సాధారణ సెట్టింగులకు యాక్సెస్ చేయండి, అప్లికేషన్ ఉపయోగం మరింత సజావుగా ఉండాలి",
-  "@commonDescription": {},
-  "customThemeDescription": "మీ స్వంత రంగును థీమ్ కోసం ఉపయోగించండి",
-  "@customThemeDescription": {},
-  "discord": "Discord",
-  "@discord": {},
-  "donationGoal": "ప్రస్తుతం దానం లక్ష్యం లేదు",
-  "@donationGoal": {},
-  "enableDarkMode": "డార్క్ మోడ్‌ను ఎనేబుల్ చేయండి",
-  "@enableDarkMode": {},
-  "extension": "{count, plural, =1 {ఎక్స్‌టెన్షన్} other {ఎక్స్‌టెన్షన్‌లు}}",
-  "@extension": {},
-  "extensionsDescription": "మరిన్ని ఫంక్షనాలిటీ కోసం ఎక్స్‌టెన్షన్లను ఇన్‌స్టాల్ చేయండి మరియు నిర్వహించండి",
-  "@extensionsDescription": {},
-  "fontColor": "ఫాంట్ రంగు",
-  "@fontColor": {},
-  "fontColorDescription": "ఉపశీర్షిక ఫాంట్ రంగు",
-  "@fontColorDescription": {},
-  "fontFamily": "ఫాంట్ ఫ్యామిలీ",
-  "@fontFamily": {},
-  "fontFamilyDescription": "ఉపశీర్షిక ఫాంట్ ఫ్యామిలీ",
-  "@fontFamilyDescription": {},
-  "mal": "MyAnimeList",
-  "@mal": {},
-  "manga": "మాంగా",
-  "@manga": {},
-  "mangaDescription": "మీ మాంగా అనుభవాన్ని సరళంగా నిర్వహించండి",
-  "@mangaDescription": {},
-  "materialYou": "Material You",
-  "@materialYou": {},
-  "materialYouDescription": "మీ వాల్పేపర్‌తో సమాన రంగును ఉపయోగించండి",
-  "@materialYouDescription": {},
-  "no": "కాదు",
-  "@no": {},
-  "notifications": "ప్రచారాలు",
-  "@notifications": {},
-  "notificationsDescription": "మీకు ఎప్పుడు మరియు ఎలా ప్రకటనలు రాలేదో కంఫిగర్ చేయండి",
-  "@notificationsDescription": {},
-  "offlineMode": "ఆఫ్లైన్ మోడ్",
-  "@offlineMode": {},
-  "offlineModeDescription": "ఇంటర్నెట్ కనెక్షన్ లేకుండా అప్లికేషన్ ఉపయోగించండి",
-  "@offlineModeDescription": {},
-  "ok": "సరే",
-  "@ok": {},
-  "oledThemeVariant": "OLED థీమ్ వేరియంట్",
-  "@oledThemeVariant": {},
-  "oledThemeVariantDescription": "OLED మోడ్ ఎనేబుల్ చేయండి",
-  "@oledThemeVariantDescription": {},
-  "anime": "ఆనిమే",
-  "@anime": {},
-  "anilist": "AniList",
-  "@anilist": {},
-  "bottomPadding": "కింద ప్యాడింగ్",
-  "@bottomPadding": {},
-  "bottomPaddingDescription": "ఉపశీర్షిక కింద ప్యాడింగ్",
-  "@bottomPaddingDescription": {},
-  "cancel": "రద్దు",
-  "@cancel": {},
-  "colorPicker": "రంగు ఎంపిక",
-  "@colorPicker": {},
-  "colorPickerDescription": "రంగును ఎంచుకోండి",
-  "@colorPickerDescription": {},
-  "common": "సాధారణ",
-  "@common": {},
-  "cursedSpeed": "శాపిత వేగం",
-  "@cursedSpeed": {},
-  "cursedSpeedDescription": "జీవితంలో చాలా బిజీగా ఉన్న వ్యక్తుల కోసం",
-  "@cursedSpeedDescription": {},
-  "customTheme": "కస్టమ్ థీమ్",
-  "@customTheme": {},
-  "darkMode": "డార్క్ మోడ్",
-  "@darkMode": {},
-  "fontSize": "ఫాంట్ పరిమాణం",
-  "@fontSize": {},
-  "fontSizeDescription": "ఉపశీర్షిక ఫాంట్ పరిమాణం",
-  "@fontSizeDescription": {},
-  "fontWeight": "ఫాంట్ బరువు",
-  "@fontWeight": {},
-  "fontWeightDescription": "ఉపశీర్షిక ఫాంట్ బరువు",
-  "@fontWeightDescription": {},
-  "hidePrivate": "ప్రైవేట్ లను దాచండి",
-  "@hidePrivate": {},
-  "hidePrivateDescription": "హోమ్ పేజీ నుండి ప్రైవేట్ సిరీస్‌ను దాచండి.",
-  "@hidePrivateDescription": {},
-  "incognitoMode": "ఇంకాగ్నిటో మోడ్",
-  "@incognitoMode": {},
-  "incognitoModeDescription": "మీ కార్యకలాపాలను సేవ్ చేయకుండా బ్రౌజ్ చేయండి",
-  "@incognitoModeDescription": {},
-  "login": "లాగిన్",
-  "@login": {},
-  "logout": "{type} లాగౌట్",
-  "@logout": {},
-  "outlineColor": "వైపు రంగు",
-  "@outlineColor": {},
-  "outlineColorDescription": "ఉపశీర్షిక వైపు రంగు",
-  "@outlineColorDescription": {},
-  "playerSettingsTitle": "ప్లేయర్ సెట్టింగులు",
-  "@playerSettingsTitle": {},
-  "resizeMode": "పునర్విన్యాస మోడ్",
-  "@resizeMode": {},
-  "resizeModeDescription": "ప్లేయర్ కోసం డిఫాల్ట్ పునర్విన్యాస మోడ్",
-  "@resizeModeDescription": {},
-  "subtitles": "ఉపశీర్షికలు",
-  "@subtitles": {},
-  "subtitlePreview": "ఉపశీర్షిక ప్రివ్యూ",
-  "@subtitlePreview": {},
-  "supportMaintainer": "Dartotsu యొక్క నిర్వహకుడిని మద్దతు ఇవ్వాలా?\nదానం చేయాలని అనుకోండి",
-  "@supportMaintainer": {},
-  "theme": "థీమ్",
-  "@theme": {},
-  "themeDescription": "మీ అప్లికేషన్ యొక్క రూపాన్ని మరియు భావాన్ని అనుకూలీకరించండి",
-  "@themeDescription": {},
-  "yes": "ఆవును",
-  "@yes": {},
-  "restoreSettings": "సెట్టింగులను పునఃస్ధాపించండి",
-  "@restoreSettings": {},
-  "settings": "సెట్టింగులు",
-  "@settings": {},
-  "showSubtitles": "ఉపశీర్షికలు చూపించండి",
-  "@showSubtitles": {},
-  "showSubtitlesDescription": "డిఫాల్ట్‌గా ఉపశీర్షికలు చూపించండి",
-  "@showSubtitlesDescription": {},
-  "skipButton": "తిప్పిన బటన్",
-  "@skipButton": {},
-  "skipButtonDescription": "తిప్పిన బటన్ వ్యవధి",
-  "@skipButtonDescription": {},
-  "speed": "వేగం",
-  "@speed": {},
-  "speedDescription": "ప్లేయర్ కోసం డిఫాల్ట్ వేగం",
-  "@speedDescription": {},
-  "thisSeason": "ఈ సీజన్",
-  "@thisSeason": {},
-  "favorite": "{type} ప్రియం",
-  "@favorite": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "manageLayout": "{service} కోసం {page} పేజీ యొక్క లేఅవుట్‌ను నిర్వహించండి",
-  "@manageLayout": {
-    "placeholders": {
-      "service": {
-        "type": "String",
-        "examples": [
-          "Anilist",
-          "MAL"
-        ]
-      },
-      "page": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Home",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "nextSeason": "తరువాతి సీజన్",
-  "@nextSeason": {},
-  "noDropped": "మీరు ఇంకా ఏ {type}ను డ్రాప్ చేయలేదు.",
-  "@noDropped": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "novel": "నవల్",
-  "@novel": {},
-  "loginTo": "{service} లో లాగిన్ చేయండి",
-  "@loginTo": {
-    "placeholders": {
-      "service": {
-        "type": "String",
-        "examples": [
-          "Anilist",
-          "MyAnimeList",
-          "Kitsu",
-          "Discord"
-        ]
-      }
-    }
-  },
-  "activity": "{count, plural, =1 {చర్య} other {చర్యలు}}",
-  "@activity": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "continueWatching": "చూడడం కొనసాగించండి",
-  "@continueWatching": {},
-  "topRated": "టాప్ రేటెడ్ {type}",
-  "@topRated": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa",
-          "Series"
-        ]
-      }
-    }
-  },
-  "popular": "ప్రసిద్ధ {type}",
-  "@popular": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa"
-        ]
-      }
-    }
-  },
-  "confirmLogout": "మీరు లాగౌట్ చేయాలని ఖచ్చితంగా అనుకుంటున్నారా?",
-  "@confirmLogout": {},
-  "installed": "{type} ఇన్స్టాల్ చేయబడింది",
-  "@installed": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Extensions"
-        ]
-      }
-    }
-  },
-  "mostFavourite": "అతి ప్రియమైన {type}",
-  "@mostFavourite": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa"
-        ]
-      }
-    }
-  },
-  "endDate": "End Date",
-  "@endDate": {},
-  "meanScore": "Mean Score",
-  "@meanScore": {},
-  "series": "Series",
-  "@series": {},
-  "chapterRead": "అధ్యాయము చదవబడింది",
-  "@chapterRead": {},
-  "synopsis": "సారాంశం",
-  "@synopsis": {},
-  "nameRomaji": "పేరు (రోమాజి)",
-  "@nameRomaji": {},
-  "averageDuration": "సగటు వ్యవధి",
-  "@averageDuration": {},
-  "comingSoon": "త్వరలో రానున్నది",
-  "@comingSoon": {},
-  "favorites": "ఇష్టాలు",
-  "@favorites": {},
-  "collapseText": "తక్కువ చూపించు",
-  "@collapseText": {},
-  "characters": "పాత్రలు",
-  "@characters": {},
-  "source": "Source",
-  "@source": {},
-  "synonyms": "స్పష్టమైన పదాలు",
-  "@synonyms": {},
-  "startDate": "Start Date",
-  "@startDate": {},
-  "format": "ఫార్మాట్",
-  "@format": {},
-  "expandText": "మరింత చూపించు",
-  "@expandText": {},
-  "season": "సీజన్",
-  "@season": {},
-  "sequel": "SEQUEL",
-  "@sequel": {},
-  "studio": "Studio",
-  "@studio": {},
-  "staff": "స్టాఫ్",
-  "@staff": {},
-  "status": "Status",
-  "@status": {},
-  "relations": "Relations",
-  "@relations": {},
-  "author": "Author",
-  "@author": {},
-  "description": "సారాంశం",
-  "@description": {},
-  "name": "Name",
-  "@name": {},
-  "total": "Total",
-  "@total": {},
-  "tags": "Tags",
-  "@tags": {},
-  "recommended": "సిఫార్సు చేసినవి",
-  "@recommended": {},
-  "popularity": "ప్రచారము",
-  "@popularity": {},
-  "prequel": "PREQUEL",
-  "@prequel": {},
-  "totalEpisodes": "ఎపిసోడ్‌లు",
-  "@totalEpisodes": {},
-  "totalChapters": "అధ్యాయాలు",
-  "@totalChapters": {},
-  "manhwa": "Manhwa",
-  "@manhwa": {},
-  "kitsu": "Kitsu",
-  "@kitsu": {},
-  "ln": "లైట్ నవల్",
-  "@ln": {},
-  "home": "Home",
-  "@home": {},
-  "manhua": "Manhua",
-  "@manhua": {},
-  "volume": "{count, plural, =1 {ఘనత} other {ఘనతలు}}",
-  "@volume": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "episode": "{count, plural, =1 {ఎపిసోడ్} other {ఎపిసోడ్‌లు}}",
-  "@episode": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "movie": "{count, plural, =1 {చిత్రం} other {చిత్రాలు}}",
-  "@movie": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "chapter": "{count, plural, =1 {అధ్యాయం} other {అధ్యాయాలు}}",
-  "@chapter": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "genres": "వర్గాలు",
-  "@genres": {},
-  "calendar": "క్యాలెండర్",
-  "@calendar": {},
-  "compactView": "కంపాక్ట్ వీక్షణ",
-  "@compactView": {},
-  "scanlators": "స్కాన్లేటర్స్",
-  "@scanlators": {},
-  "listView": "List View",
-  "@listView": {},
-  "dtu": "Down To Up",
-  "@dtu": {},
-  "gridView": "గ్రిడ్ వీక్షణ",
-  "@gridView": {},
-  "episodeWatched": "ఎపిసోడ్ వీక్షించబడింది",
-  "@episodeWatched": {},
-  "list": "{type} జాబితా",
-  "@list": {
-    "placeholders": {
-      "type": {
-        "examples": "Anime list",
-        "type": "String"
-      }
-    }
-  },
-  "layout": "Layout",
-  "@layout": {},
-  "trending": "{type} ట్రెండింగ్",
-  "@trending": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "topAiring": "టాప్ ఎయిరింగ్",
-  "@topAiring": {},
-  "available": "{type} లభ్యమయ్యాయి",
-  "@available": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "previousSeason": "గత సీజన్",
-  "@previousSeason": {},
-  "browse": "{type} బ్రౌజ్ చేయండి",
-  "@browse": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "planned": "ఆలోచించిన {type}",
-  "@planned": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "language": "భాష",
-  "@language": {},
-  "onHold": "{type} హోల్డ్ పై",
-  "@onHold": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "continueReading": "చదవడం కొనసాగించండి",
-  "@continueReading": {},
-  "noHiddenMediaFound": "దాచిన మీడియా కనుగొనబడలేదు",
-  "@noHiddenMediaFound": {},
-  "info": "Info",
-  "@info": {},
-  "addToList": "Add To List",
-  "@addToList": {},
-  "comments": "అభిప్రాయాలు",
-  "@comments": {},
-  "hiddenMedia": "దాచిన మీడియా",
-  "@hiddenMedia": {},
-  "noFavourites": "మీరు ఏమీ ఇష్టపడట్లేదు,\nఇక్కడ ఉంచడానికి ప్రదర్శించడానికి ఒక షోను ఇష్టపడండి.",
-  "@noFavourites": {},
-  "options": "Options",
-  "@options": {},
-  "read": "చదవండి",
-  "@read": {},
-  "search": "శోధించండి",
-  "@search": {},
-  "sort": "వర్గీకరించు",
-  "@sort": {},
-  "watch": "చూడండి",
-  "@watch": {},
-  "utd": "అప్ టు డౌన్",
-  "@utd": {},
-  "manageLayoutDescription": "{page} పేజీకి సంబంధించిన లేఅవుట్‌ను నిర్వహించేందుకు మీరు అంశాలను డ్రాగ్ చేసి డ్రాప్ చేయవచ్చు",
-  "@manageLayoutDescription": {
-    "placeholders": {
-      "page": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Home",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "pickColor": "రంగు ఎంచుకోండి",
-  "@pickColor": {},
-  "allCaughtUpNew": "అన్ని పూర్తిగా చూసారు, ఏమి కొత్త?",
-  "@allCaughtUpNew": {},
-  "droppedManga": "డ్రాప్ చేసిన మంగా",
-  "@droppedManga": {},
-  "droppedAnime": "డ్రాప్ చేసిన అనిమే",
-  "@droppedAnime": {},
-  "recentUpdates": "ఇటీవలి నవీకరణలు",
-  "@recentUpdates": {},
-  "noOnHold": "మీరు ఏదైనా హోల్డ్ పై ఉంచలేదు.",
-  "@noOnHold": {},
-  "recommendationsEmptyMessage": "ప్రత్యేక సిఫార్సులను పొందడానికి కొన్ని అనిమే లేదా మంగా చూడండి/చదవండి",
-  "@recommendationsEmptyMessage": {},
-  "simkl": "Simkl",
-  "@simkl": {},
-  "colorPickerDefault": "డిఫాల్ట్",
-  "@colorPickerDefault": {},
-  "logFile": "లాగ్ ఫైల్",
-  "@logFile": {},
-  "colorPickerCustom": "అనుకూలం",
-  "@colorPickerCustom": {},
-  "logFileDescription": "లాగ్ ఫైల్‌ను భాగస్వామ్యం చేయండి",
-  "@logFileDescription": {},
-  "addAnimeRepo": "ఆనిమే రిపో జోడించండి",
-  "@addAnimeRepo": {},
-  "addMangaRepoDesc": "వివిధ మూలాల నుండి మాంగా రిపో జోడించండి",
-  "@addMangaRepoDesc": {},
-  "addAnimeRepoDesc": "వివిధ మూలాల నుండి ఆనిమే రిపో జోడించండి",
-  "@addAnimeRepoDesc": {},
-  "addMangaRepo": "మాంగా రిపో జోడించండి",
-  "@addMangaRepo": {},
-  "addNovelRepo": "నోవెల్ రిపో జోడించండి",
-  "@addNovelRepo": {},
-  "selectDirectory": "డైరెక్టరీని ఎంచుకోండి",
-  "@selectDirectory": {},
-  "customPath": "అనుకూల మార్గం",
-  "@customPath": {},
-  "customPathDescription": "ఫైల్‌లను సేవ్ చేయడానికి అనుకూల మార్గాన్ని సెట్ చేయండి\nతీసివేయడానికి ఎక్కువసేపు నొక్కండి",
-  "@customPathDescription": {},
-  "loadExtensionsIconDesc": "ఎక్స్‌టెన్షన్ పేజీ నెమ్మదిగా ఉంటే అచేతనం చేయండి",
-  "@loadExtensionsIconDesc": {},
-  "autoUpdateDesc": "ఎక్స్‌టెన్షన్లను ఆటోమేటిక్‌గా నవీకరించండి",
-  "@autoUpdateDesc": {},
-  "addNovelRepoDesc": "వివిధ మూలాల నుండి నోవెల్ రిపో జోడించండి",
-  "@addNovelRepoDesc": {},
-  "selectMediaService": "మీడియా సర్వీస్‌ని ఎంచుకోండి",
-  "@selectMediaService": {},
-  "autoUpdate": "ఆటో నవీకరణ",
-  "@autoUpdate": {},
-  "loadExtensionsIcon": "ఎక్స్‌టెన్షన్ల చిహ్నాన్ని లోడ్ చేయండి",
-  "@loadExtensionsIcon": {},
-  "noChapterFound": "అధ్యాయం కనుగొనబడలేదు",
-  "@noChapterFound": {},
-  "watching": "చూస్తున్నారు",
-  "@watching": {},
-  "outOf": "లో నుండి",
-  "@outOf": {},
-  "selected": "ఎంపిక చేయబడింది",
-  "@selected": {},
-  "readStatus": "చదవండి",
-  "@readStatus": {},
-  "youTube": "YouTube లో ప్లే చేయాలా?",
-  "@youTube": {},
-  "mediaNotFound": "మీడియా కనుగొనబడలేదు",
-  "@mediaNotFound": {},
-  "found": "కనుగొనబడింది",
-  "@found": {},
-  "watchStatus": "చూశాను",
-  "@watchStatus": {},
-  "totalOf": "మొత్తం",
-  "@totalOf": {},
-  "wrongTitle": "తప్పు శీర్షిక?",
-  "@wrongTitle": {},
-  "installSourceToStart": "ప్రారంభించడానికి పొడిగింపు పేజీ నుండి మూలాన్ని ఇన్‌స్టాల్ చేయండి",
-  "@installSourceToStart": {},
-  "webView": "వెబ్ వీక్షణం",
-  "@webView": {},
-  "reading": "చదువుతున్నారు",
-  "@reading": {},
-  "direction": "Direction",
-  "@direction": {},
-  "thumbLessSeekBar": "ThumbLess SeekBar",
-  "@thumbLessSeekBar": {},
-  "thumbLessSeekBarDesc": "Remove thumb from the seek bar",
-  "@thumbLessSeekBarDesc": {},
-  "spacedPagesDesc": "Add space between pages",
-  "@spacedPagesDesc": {},
-  "spacedPages": "Spaced Pages",
-  "@spacedPages": {},
-  "hidePageNumberDesc": "Hide page number while reading",
-  "@hidePageNumberDesc": {},
-  "hidePageNumber": "Hide Page Number",
-  "@hidePageNumber": {},
-  "developersHelpersDesc": "Dartotsu's unpaid labours",
-  "@developersHelpersDesc": {},
-  "developersHelpers": "Developers/Helpers",
-  "@developersHelpers": {},
-  "differentCacheManagerDesc": "Use different Image cache manager",
-  "@differentCacheManagerDesc": {},
-  "differentCacheManager": "Different Cache Manager",
-  "@differentCacheManager": {},
-  "readerSettingsDesc": "Change reader settings",
-  "@readerSettingsDesc": {},
-  "hideScrollbarDesc": "Hide scrollbar while reading",
-  "@hideScrollbarDesc": {},
-  "readerSettings": "Reader Settings",
-  "@readerSettings": {},
-  "hideScrollbar": "Hide Scrollbar",
-  "@hideScrollbar": {},
-  "playerSettingsDesc": "Change player settings",
-  "@playerSettingsDesc": {}
+    "about": "గురించి",
+    "@about": {},
+    "aboutDescription": "అప్లికేషన్ మరియు దాని సృష్టికర్తల గురించి మరింత తెలుసుకోండి",
+    "@aboutDescription": {},
+    "account": "ఖాతా",
+    "@account": {},
+    "accountDescription": "మీ AniList, MAL మరియు Discord ఖాతాలను సులభంగా నిర్వహించండి",
+    "@accountDescription": {},
+    "animeDescription": "మీ ఆనిమే ప్రాధాన్యతలను వ్యక్తిగతీకరించి నిర్వహించండి",
+    "@animeDescription": {},
+    "appName": "Dartotsu",
+    "@appName": {},
+    "appTagline": "నవీకృత ఉత్తమ అప్లికేషన్\nఆనిమే మరియు మాంగా ట్రాకింగ్ కోసం",
+    "@appTagline": {},
+    "backgroundColor": "పరిసర రంగు",
+    "@backgroundColor": {},
+    "backgroundColorDescription": "ఉపశీర్షిక పరిసర రంగు",
+    "@backgroundColorDescription": {},
+    "commonDescription": "సాధారణ సెట్టింగులకు యాక్సెస్ చేయండి, అప్లికేషన్ ఉపయోగం మరింత సజావుగా ఉండాలి",
+    "@commonDescription": {},
+    "customThemeDescription": "మీ స్వంత రంగును థీమ్ కోసం ఉపయోగించండి",
+    "@customThemeDescription": {},
+    "discord": "Discord",
+    "@discord": {},
+    "donationGoal": "ప్రస్తుతం దానం లక్ష్యం లేదు",
+    "@donationGoal": {},
+    "enableDarkMode": "డార్క్ మోడ్‌ను ఎనేబుల్ చేయండి",
+    "@enableDarkMode": {},
+    "extension": "{count, plural, =1 {ఎక్స్‌టెన్షన్} other {ఎక్స్‌టెన్షన్‌లు}}",
+    "@extension": {},
+    "extensionsDescription": "మరిన్ని ఫంక్షనాలిటీ కోసం ఎక్స్‌టెన్షన్లను ఇన్‌స్టాల్ చేయండి మరియు నిర్వహించండి",
+    "@extensionsDescription": {},
+    "fontColor": "ఫాంట్ రంగు",
+    "@fontColor": {},
+    "fontColorDescription": "ఉపశీర్షిక ఫాంట్ రంగు",
+    "@fontColorDescription": {},
+    "fontFamily": "ఫాంట్ ఫ్యామిలీ",
+    "@fontFamily": {},
+    "fontFamilyDescription": "ఉపశీర్షిక ఫాంట్ ఫ్యామిలీ",
+    "@fontFamilyDescription": {},
+    "mal": "MyAnimeList",
+    "@mal": {},
+    "manga": "మాంగా",
+    "@manga": {},
+    "mangaDescription": "మీ మాంగా అనుభవాన్ని సరళంగా నిర్వహించండి",
+    "@mangaDescription": {},
+    "materialYou": "Material You",
+    "@materialYou": {},
+    "materialYouDescription": "మీ వాల్పేపర్‌తో సమాన రంగును ఉపయోగించండి",
+    "@materialYouDescription": {},
+    "no": "కాదు",
+    "@no": {},
+    "notifications": "ప్రచారాలు",
+    "@notifications": {},
+    "notificationsDescription": "మీకు ఎప్పుడు మరియు ఎలా ప్రకటనలు రాలేదో కంఫిగర్ చేయండి",
+    "@notificationsDescription": {},
+    "offlineMode": "ఆఫ్లైన్ మోడ్",
+    "@offlineMode": {},
+    "offlineModeDescription": "ఇంటర్నెట్ కనెక్షన్ లేకుండా అప్లికేషన్ ఉపయోగించండి",
+    "@offlineModeDescription": {},
+    "ok": "సరే",
+    "@ok": {},
+    "oledThemeVariant": "OLED థీమ్ వేరియంట్",
+    "@oledThemeVariant": {},
+    "oledThemeVariantDescription": "OLED మోడ్ ఎనేబుల్ చేయండి",
+    "@oledThemeVariantDescription": {},
+    "anime": "ఆనిమే",
+    "@anime": {},
+    "anilist": "AniList",
+    "@anilist": {},
+    "bottomPadding": "కింద ప్యాడింగ్",
+    "@bottomPadding": {},
+    "bottomPaddingDescription": "ఉపశీర్షిక కింద ప్యాడింగ్",
+    "@bottomPaddingDescription": {},
+    "cancel": "రద్దు",
+    "@cancel": {},
+    "colorPicker": "రంగు ఎంపిక",
+    "@colorPicker": {},
+    "colorPickerDescription": "రంగును ఎంచుకోండి",
+    "@colorPickerDescription": {},
+    "common": "సాధారణ",
+    "@common": {},
+    "cursedSpeed": "శాపిత వేగం",
+    "@cursedSpeed": {},
+    "cursedSpeedDescription": "జీవితంలో చాలా బిజీగా ఉన్న వ్యక్తుల కోసం",
+    "@cursedSpeedDescription": {},
+    "customTheme": "కస్టమ్ థీమ్",
+    "@customTheme": {},
+    "darkMode": "డార్క్ మోడ్",
+    "@darkMode": {},
+    "fontSize": "ఫాంట్ పరిమాణం",
+    "@fontSize": {},
+    "fontSizeDescription": "ఉపశీర్షిక ఫాంట్ పరిమాణం",
+    "@fontSizeDescription": {},
+    "fontWeight": "ఫాంట్ బరువు",
+    "@fontWeight": {},
+    "fontWeightDescription": "ఉపశీర్షిక ఫాంట్ బరువు",
+    "@fontWeightDescription": {},
+    "hidePrivate": "ప్రైవేట్ లను దాచండి",
+    "@hidePrivate": {},
+    "hidePrivateDescription": "హోమ్ పేజీ నుండి ప్రైవేట్ సిరీస్‌ను దాచండి.",
+    "@hidePrivateDescription": {},
+    "incognitoMode": "ఇంకాగ్నిటో మోడ్",
+    "@incognitoMode": {},
+    "incognitoModeDescription": "మీ కార్యకలాపాలను సేవ్ చేయకుండా బ్రౌజ్ చేయండి",
+    "@incognitoModeDescription": {},
+    "login": "లాగిన్",
+    "@login": {},
+    "logout": "{type} లాగౌట్",
+    "@logout": {},
+    "outlineColor": "వైపు రంగు",
+    "@outlineColor": {},
+    "outlineColorDescription": "ఉపశీర్షిక వైపు రంగు",
+    "@outlineColorDescription": {},
+    "playerSettingsTitle": "ప్లేయర్ సెట్టింగులు",
+    "@playerSettingsTitle": {},
+    "resizeMode": "పునర్విన్యాస మోడ్",
+    "@resizeMode": {},
+    "resizeModeDescription": "ప్లేయర్ కోసం డిఫాల్ట్ పునర్విన్యాస మోడ్",
+    "@resizeModeDescription": {},
+    "subtitles": "ఉపశీర్షికలు",
+    "@subtitles": {},
+    "subtitlePreview": "ఉపశీర్షిక ప్రివ్యూ",
+    "@subtitlePreview": {},
+    "supportMaintainer": "Dartotsu యొక్క నిర్వహకుడిని మద్దతు ఇవ్వాలా?\nదానం చేయాలని అనుకోండి",
+    "@supportMaintainer": {},
+    "theme": "థీమ్",
+    "@theme": {},
+    "themeDescription": "మీ అప్లికేషన్ యొక్క రూపాన్ని మరియు భావాన్ని అనుకూలీకరించండి",
+    "@themeDescription": {},
+    "yes": "ఆవును",
+    "@yes": {},
+    "restoreSettings": "సెట్టింగులను పునఃస్ధాపించండి",
+    "@restoreSettings": {},
+    "settings": "సెట్టింగులు",
+    "@settings": {},
+    "showSubtitles": "ఉపశీర్షికలు చూపించండి",
+    "@showSubtitles": {},
+    "showSubtitlesDescription": "డిఫాల్ట్‌గా ఉపశీర్షికలు చూపించండి",
+    "@showSubtitlesDescription": {},
+    "skipButton": "తిప్పిన బటన్",
+    "@skipButton": {},
+    "skipButtonDescription": "తిప్పిన బటన్ వ్యవధి",
+    "@skipButtonDescription": {},
+    "speed": "వేగం",
+    "@speed": {},
+    "speedDescription": "ప్లేయర్ కోసం డిఫాల్ట్ వేగం",
+    "@speedDescription": {},
+    "thisSeason": "ఈ సీజన్",
+    "@thisSeason": {},
+    "favorite": "{type} ప్రియం",
+    "@favorite": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "manageLayout": "{service} కోసం {page} పేజీ యొక్క లేఅవుట్‌ను నిర్వహించండి",
+    "@manageLayout": {
+        "placeholders": {
+            "service": {
+                "type": "String",
+                "examples": [
+                    "Anilist",
+                    "MAL"
+                ]
+            },
+            "page": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Home",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "nextSeason": "తరువాతి సీజన్",
+    "@nextSeason": {},
+    "noDropped": "మీరు ఇంకా ఏ {type}ను డ్రాప్ చేయలేదు.",
+    "@noDropped": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "novel": "నవల్",
+    "@novel": {},
+    "loginTo": "{service} లో లాగిన్ చేయండి",
+    "@loginTo": {
+        "placeholders": {
+            "service": {
+                "type": "String",
+                "examples": [
+                    "Anilist",
+                    "MyAnimeList",
+                    "Kitsu",
+                    "Discord"
+                ]
+            }
+        }
+    },
+    "activity": "{count, plural, =1 {చర్య} other {చర్యలు}}",
+    "@activity": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "continueWatching": "చూడడం కొనసాగించండి",
+    "@continueWatching": {},
+    "topRated": "టాప్ రేటెడ్ {type}",
+    "@topRated": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa",
+                    "Series"
+                ]
+            }
+        }
+    },
+    "popular": "ప్రసిద్ధ {type}",
+    "@popular": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa"
+                ]
+            }
+        }
+    },
+    "confirmLogout": "మీరు లాగౌట్ చేయాలని ఖచ్చితంగా అనుకుంటున్నారా?",
+    "@confirmLogout": {},
+    "installed": "{type} ఇన్స్టాల్ చేయబడింది",
+    "@installed": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Extensions"
+                ]
+            }
+        }
+    },
+    "mostFavourite": "అతి ప్రియమైన {type}",
+    "@mostFavourite": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa"
+                ]
+            }
+        }
+    },
+    "endDate": "End Date",
+    "@endDate": {},
+    "meanScore": "Mean Score",
+    "@meanScore": {},
+    "series": "Series",
+    "@series": {},
+    "chapterRead": "అధ్యాయము చదవబడింది",
+    "@chapterRead": {},
+    "synopsis": "సారాంశం",
+    "@synopsis": {},
+    "nameRomaji": "పేరు (రోమాజి)",
+    "@nameRomaji": {},
+    "averageDuration": "సగటు వ్యవధి",
+    "@averageDuration": {},
+    "comingSoon": "త్వరలో రానున్నది",
+    "@comingSoon": {},
+    "favorites": "ఇష్టాలు",
+    "@favorites": {},
+    "collapseText": "తక్కువ చూపించు",
+    "@collapseText": {},
+    "characters": "పాత్రలు",
+    "@characters": {},
+    "source": "Source",
+    "@source": {},
+    "synonyms": "స్పష్టమైన పదాలు",
+    "@synonyms": {},
+    "startDate": "Start Date",
+    "@startDate": {},
+    "format": "ఫార్మాట్",
+    "@format": {},
+    "expandText": "మరింత చూపించు",
+    "@expandText": {},
+    "season": "సీజన్",
+    "@season": {},
+    "sequel": "SEQUEL",
+    "@sequel": {},
+    "studio": "Studio",
+    "@studio": {},
+    "staff": "స్టాఫ్",
+    "@staff": {},
+    "status": "Status",
+    "@status": {},
+    "relations": "Relations",
+    "@relations": {},
+    "author": "Author",
+    "@author": {},
+    "name": "Name",
+    "@name": {},
+    "total": "Total",
+    "@total": {},
+    "tags": "Tags",
+    "@tags": {},
+    "recommended": "సిఫార్సు చేసినవి",
+    "@recommended": {},
+    "popularity": "ప్రచారము",
+    "@popularity": {},
+    "prequel": "PREQUEL",
+    "@prequel": {},
+    "totalEpisodes": "ఎపిసోడ్‌లు",
+    "@totalEpisodes": {},
+    "totalChapters": "అధ్యాయాలు",
+    "@totalChapters": {},
+    "manhwa": "Manhwa",
+    "@manhwa": {},
+    "kitsu": "Kitsu",
+    "@kitsu": {},
+    "ln": "లైట్ నవల్",
+    "@ln": {},
+    "home": "Home",
+    "@home": {},
+    "manhua": "Manhua",
+    "@manhua": {},
+    "volume": "{count, plural, =1 {ఘనత} other {ఘనతలు}}",
+    "@volume": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "episode": "{count, plural, =1 {ఎపిసోడ్} other {ఎపిసోడ్‌లు}}",
+    "@episode": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "movie": "{count, plural, =1 {చిత్రం} other {చిత్రాలు}}",
+    "@movie": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "chapter": "{count, plural, =1 {అధ్యాయం} other {అధ్యాయాలు}}",
+    "@chapter": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "genres": "వర్గాలు",
+    "@genres": {},
+    "calendar": "క్యాలెండర్",
+    "@calendar": {},
+    "compactView": "కంపాక్ట్ వీక్షణ",
+    "@compactView": {},
+    "scanlators": "స్కాన్లేటర్స్",
+    "@scanlators": {},
+    "listView": "List View",
+    "@listView": {},
+    "dtu": "Down To Up",
+    "@dtu": {},
+    "gridView": "గ్రిడ్ వీక్షణ",
+    "@gridView": {},
+    "episodeWatched": "ఎపిసోడ్ వీక్షించబడింది",
+    "@episodeWatched": {},
+    "list": "{type} జాబితా",
+    "@list": {
+        "placeholders": {
+            "type": {
+                "examples": "Anime list",
+                "type": "String"
+            }
+        }
+    },
+    "layout": "Layout",
+    "@layout": {},
+    "trending": "{type} ట్రెండింగ్",
+    "@trending": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "topAiring": "టాప్ ఎయిరింగ్",
+    "@topAiring": {},
+    "available": "{type} లభ్యమయ్యాయి",
+    "@available": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "previousSeason": "గత సీజన్",
+    "@previousSeason": {},
+    "browse": "{type} బ్రౌజ్ చేయండి",
+    "@browse": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "planned": "ఆలోచించిన {type}",
+    "@planned": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "language": "భాష",
+    "@language": {},
+    "onHold": "{type} హోల్డ్ పై",
+    "@onHold": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "continueReading": "చదవడం కొనసాగించండి",
+    "@continueReading": {},
+    "noHiddenMediaFound": "దాచిన మీడియా కనుగొనబడలేదు",
+    "@noHiddenMediaFound": {},
+    "info": "Info",
+    "@info": {},
+    "addToList": "Add To List",
+    "@addToList": {},
+    "comments": "అభిప్రాయాలు",
+    "@comments": {},
+    "hiddenMedia": "దాచిన మీడియా",
+    "@hiddenMedia": {},
+    "noFavourites": "మీరు ఏమీ ఇష్టపడట్లేదు,\nఇక్కడ ఉంచడానికి ప్రదర్శించడానికి ఒక షోను ఇష్టపడండి.",
+    "@noFavourites": {},
+    "options": "Options",
+    "@options": {},
+    "read": "చదవండి",
+    "@read": {},
+    "search": "శోధించండి",
+    "@search": {},
+    "sort": "వర్గీకరించు",
+    "@sort": {},
+    "watch": "చూడండి",
+    "@watch": {},
+    "utd": "అప్ టు డౌన్",
+    "@utd": {},
+    "manageLayoutDescription": "{page} పేజీకి సంబంధించిన లేఅవుట్‌ను నిర్వహించేందుకు మీరు అంశాలను డ్రాగ్ చేసి డ్రాప్ చేయవచ్చు",
+    "@manageLayoutDescription": {
+        "placeholders": {
+            "page": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Home",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "pickColor": "రంగు ఎంచుకోండి",
+    "@pickColor": {},
+    "allCaughtUpNew": "అన్ని పూర్తిగా చూసారు, ఏమి కొత్త?",
+    "@allCaughtUpNew": {},
+    "droppedManga": "డ్రాప్ చేసిన మంగా",
+    "@droppedManga": {},
+    "droppedAnime": "డ్రాప్ చేసిన అనిమే",
+    "@droppedAnime": {},
+    "recentUpdates": "ఇటీవలి నవీకరణలు",
+    "@recentUpdates": {},
+    "noOnHold": "మీరు ఏదైనా హోల్డ్ పై ఉంచలేదు.",
+    "@noOnHold": {},
+    "recommendationsEmptyMessage": "ప్రత్యేక సిఫార్సులను పొందడానికి కొన్ని అనిమే లేదా మంగా చూడండి/చదవండి",
+    "@recommendationsEmptyMessage": {},
+    "simkl": "Simkl",
+    "@simkl": {},
+    "colorPickerDefault": "డిఫాల్ట్",
+    "@colorPickerDefault": {},
+    "logFile": "లాగ్ ఫైల్",
+    "@logFile": {},
+    "colorPickerCustom": "అనుకూలం",
+    "@colorPickerCustom": {},
+    "logFileDescription": "లాగ్ ఫైల్‌ను భాగస్వామ్యం చేయండి",
+    "@logFileDescription": {},
+    "addAnimeRepo": "ఆనిమే రిపో జోడించండి",
+    "@addAnimeRepo": {},
+    "addMangaRepoDesc": "వివిధ మూలాల నుండి మాంగా రిపో జోడించండి",
+    "@addMangaRepoDesc": {},
+    "addAnimeRepoDesc": "వివిధ మూలాల నుండి ఆనిమే రిపో జోడించండి",
+    "@addAnimeRepoDesc": {},
+    "addMangaRepo": "మాంగా రిపో జోడించండి",
+    "@addMangaRepo": {},
+    "addNovelRepo": "నోవెల్ రిపో జోడించండి",
+    "@addNovelRepo": {},
+    "selectDirectory": "డైరెక్టరీని ఎంచుకోండి",
+    "@selectDirectory": {},
+    "customPath": "అనుకూల మార్గం",
+    "@customPath": {},
+    "customPathDescription": "ఫైల్‌లను సేవ్ చేయడానికి అనుకూల మార్గాన్ని సెట్ చేయండి\nతీసివేయడానికి ఎక్కువసేపు నొక్కండి",
+    "@customPathDescription": {},
+    "loadExtensionsIconDesc": "ఎక్స్‌టెన్షన్ పేజీ నెమ్మదిగా ఉంటే అచేతనం చేయండి",
+    "@loadExtensionsIconDesc": {},
+    "autoUpdateDesc": "ఎక్స్‌టెన్షన్లను ఆటోమేటిక్‌గా నవీకరించండి",
+    "@autoUpdateDesc": {},
+    "addNovelRepoDesc": "వివిధ మూలాల నుండి నోవెల్ రిపో జోడించండి",
+    "@addNovelRepoDesc": {},
+    "selectMediaService": "మీడియా సర్వీస్‌ని ఎంచుకోండి",
+    "@selectMediaService": {},
+    "autoUpdate": "ఆటో నవీకరణ",
+    "@autoUpdate": {},
+    "loadExtensionsIcon": "ఎక్స్‌టెన్షన్ల చిహ్నాన్ని లోడ్ చేయండి",
+    "@loadExtensionsIcon": {},
+    "noChapterFound": "అధ్యాయం కనుగొనబడలేదు",
+    "@noChapterFound": {},
+    "watching": "చూస్తున్నారు",
+    "@watching": {},
+    "outOf": "లో నుండి",
+    "@outOf": {},
+    "selected": "ఎంపిక చేయబడింది",
+    "@selected": {},
+    "readStatus": "చదవండి",
+    "@readStatus": {},
+    "youTube": "YouTube లో ప్లే చేయాలా?",
+    "@youTube": {},
+    "mediaNotFound": "మీడియా కనుగొనబడలేదు",
+    "@mediaNotFound": {},
+    "found": "కనుగొనబడింది",
+    "@found": {},
+    "watchStatus": "చూశాను",
+    "@watchStatus": {},
+    "totalOf": "మొత్తం",
+    "@totalOf": {},
+    "wrongTitle": "తప్పు శీర్షిక?",
+    "@wrongTitle": {},
+    "installSourceToStart": "ప్రారంభించడానికి పొడిగింపు పేజీ నుండి మూలాన్ని ఇన్‌స్టాల్ చేయండి",
+    "@installSourceToStart": {},
+    "webView": "వెబ్ వీక్షణం",
+    "@webView": {},
+    "reading": "చదువుతున్నారు",
+    "@reading": {},
+    "direction": "Direction",
+    "@direction": {},
+    "thumbLessSeekBar": "ThumbLess SeekBar",
+    "@thumbLessSeekBar": {},
+    "thumbLessSeekBarDesc": "Remove thumb from the seek bar",
+    "@thumbLessSeekBarDesc": {},
+    "spacedPagesDesc": "Add space between pages",
+    "@spacedPagesDesc": {},
+    "spacedPages": "Spaced Pages",
+    "@spacedPages": {},
+    "hidePageNumberDesc": "Hide page number while reading",
+    "@hidePageNumberDesc": {},
+    "hidePageNumber": "Hide Page Number",
+    "@hidePageNumber": {},
+    "developersHelpersDesc": "Dartotsu's unpaid labours",
+    "@developersHelpersDesc": {},
+    "developersHelpers": "Developers/Helpers",
+    "@developersHelpers": {},
+    "differentCacheManagerDesc": "Use different Image cache manager",
+    "@differentCacheManagerDesc": {},
+    "differentCacheManager": "Different Cache Manager",
+    "@differentCacheManager": {},
+    "readerSettingsDesc": "Change reader settings",
+    "@readerSettingsDesc": {},
+    "hideScrollbarDesc": "Hide scrollbar while reading",
+    "@hideScrollbarDesc": {},
+    "readerSettings": "Reader Settings",
+    "@readerSettings": {},
+    "hideScrollbar": "Hide Scrollbar",
+    "@hideScrollbar": {},
+    "playerSettingsDesc": "Change player settings",
+    "@playerSettingsDesc": {},
+    "glassEffect": "Glass Effect",
+    "@glassEffect": {},
+    "ltr": "Left To Right",
+    "@ltr": {},
+    "coverThemeDescription": "Use media cover image as theme color",
+    "@coverThemeDescription": {},
+    "rtl": "Right To Left",
+    "@rtl": {},
+    "glassEffectDescription": "Gives a frosted glass effect to the app",
+    "@glassEffectDescription": {},
+    "nextEpisodeRelease": "Episode {episode} will be released in",
+    "@nextEpisodeRelease": {
+        "description": "Message showing the next episode info",
+        "placeholders": {
+            "episode": {
+                "type": "int"
+            }
+        }
+    },
+    "topScore": "Top Score",
+    "@topScore": {},
+    "coverTheme": "Use Cover Theme",
+    "@coverTheme": {},
+    "customMPVDescription": "Enable this option to use your own MPV configuration file. Place your custom config at: {path}",
+    "@customMPVDescription": {
+        "placeholders": {
+            "path": {
+                "type": "String"
+            }
+        }
+    },
+    "customMPV": "Custom MPV Configuration",
+    "@customMPV": {}
 }
