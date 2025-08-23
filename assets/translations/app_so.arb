@@ -1,632 +1,663 @@
 {
-  "about": "Ku Saabsan",
-  "@about": {},
-  "aboutDescription": "Wax badan ka baro app-ka iyo abuurayaashiisa",
-  "@aboutDescription": {},
-  "account": "Akoon",
-  "@account": {},
-  "accountDescription": "Maaree akoonnadaada AniList, MAL, iyo Discord si sahlan",
-  "@accountDescription": {},
-  "anime": "Anime",
-  "@anime": {},
-  "anilist": "AniList",
-  "@anilist": {},
-  "manga": "Manga",
-  "@manga": {},
-  "materialYouDescription": "Isticmaal midabkaaga wallpaper-ka",
-  "@materialYouDescription": {},
-  "no": "Maya",
-  "@no": {},
-  "notifications": "Ogeysiisyada",
-  "@notifications": {},
-  "notificationsDescription": "Deji sida iyo goorta aad ogeysiisyada helayso",
-  "@notificationsDescription": {},
-  "offlineMode": "Hab Offline",
-  "@offlineMode": {},
-  "offlineModeDescription": "Isticmaal app-ka adigoon xirin internetka",
-  "@offlineModeDescription": {},
-  "ok": "OK",
-  "@ok": {},
-  "oledThemeVariant": "Nooca OLED ee Mowduuca",
-  "@oledThemeVariant": {},
-  "oledThemeVariantDescription": "Fur Habka OLED",
-  "@oledThemeVariantDescription": {},
-  "outlineColor": "Midabka Xariiqda",
-  "@outlineColor": {},
-  "outlineColorDescription": "Midabka xariiqda ee subtitles",
-  "@outlineColorDescription": {},
-  "playerSettingsTitle": "Dejinta Ciyaaryahanka",
-  "@playerSettingsTitle": {},
-  "resizeMode": "Habka Dib-u-cabbirka",
-  "@resizeMode": {},
-  "resizeModeDescription": "Habka dib-u-cabbirka ee caadiga ah ee ciyaaryahanka",
-  "@resizeModeDescription": {},
-  "restoreSettings": "Soo celi Dejinta",
-  "@restoreSettings": {},
-  "settings": "Dejinta",
-  "@settings": {},
-  "showSubtitles": "Muuji Subtitles",
-  "@showSubtitles": {},
-  "showSubtitlesDescription": "Muuji subtitles si caadi ah",
-  "@showSubtitlesDescription": {},
-  "skipButton": "Badhamada Ka Bixinta",
-  "@skipButton": {},
-  "skipButtonDescription": "Muddada badhanka ka bixinta",
-  "@skipButtonDescription": {},
-  "speed": "Xawaare",
-  "@speed": {},
-  "speedDescription": "Xawaaraha caadiga ah ee ciyaaryahanka",
-  "@speedDescription": {},
-  "subtitles": "qoraal hoosaadyo",
-  "@subtitles": {},
-  "subtitlePreview": "Muuqaalka hore ee Subtitles",
-  "@subtitlePreview": {},
-  "supportMaintainer": "Ma dooneysaa inaad taageerto Maamulaha Dartotsu?\nTixgeli Inaad Deeq Bixiso",
-  "@supportMaintainer": {},
-  "theme": "Mowduuca",
-  "@theme": {},
-  "themeDescription": "Hagaaji muuqaalka iyo dareenka app-kaaga",
-  "@themeDescription": {},
-  "yes": "Haa",
-  "@yes": {},
-  "animeDescription": "Shakhsiyee oo maaree doorashadaada anime",
-  "@animeDescription": {},
-  "appName": "Dartotsu",
-  "@appName": {},
-  "appTagline": "App-ka Cusub ee Ugu Wanaagsan\nRaadinta Anime & Manga",
-  "@appTagline": {},
-  "backgroundColor": "Midabka Asalka",
-  "@backgroundColor": {},
-  "backgroundColorDescription": "Midabka asalka ee subtitles",
-  "@backgroundColorDescription": {},
-  "bottomPadding": "Padding-hoose",
-  "@bottomPadding": {},
-  "bottomPaddingDescription": "Padding-hoose ee subtitles",
-  "@bottomPaddingDescription": {},
-  "cancel": "Jooji",
-  "@cancel": {},
-  "colorPicker": "Xulashada Midabka",
-  "@colorPicker": {},
-  "colorPickerDescription": "Dooro midab",
-  "@colorPickerDescription": {},
-  "common": "Guud",
-  "@common": {},
-  "commonDescription": "Hel dejinta guud ee isticmaalka fudud ee app-ka",
-  "@commonDescription": {},
-  "cursedSpeed": "Xawaaraha La'aan",
-  "@cursedSpeed": {},
-  "cursedSpeedDescription": "Dadkii aadka ugu mashquulsan nolosha",
-  "@cursedSpeedDescription": {},
-  "customTheme": "Mowduuc La Habeeyay",
-  "@customTheme": {},
-  "customThemeDescription": "Isticmaal midabkaaga gaarka ah ee mowduuca",
-  "@customThemeDescription": {},
-  "darkMode": "Hab Madow",
-  "@darkMode": {},
-  "discord": "Discord",
-  "@discord": {},
-  "donationGoal": "Ma jiraan ujeeddo deeq ah hadda",
-  "@donationGoal": {},
-  "enableDarkMode": "Fur Habka Madow",
-  "@enableDarkMode": {},
-  "extension": "{count, plural, =1 {Kordhin} other {Kordhinta}}",
-  "@extension": {},
-  "extensionsDescription": "Ku rakib oo maaree kordhino si loogu daro shaqooyin dheeri ah",
-  "@extensionsDescription": {},
-  "fontColor": "Midabka Farta",
-  "@fontColor": {},
-  "fontColorDescription": "Midabka farta ee subtitles",
-  "@fontColorDescription": {},
-  "fontFamily": "Qoyska Farta",
-  "@fontFamily": {},
-  "fontFamilyDescription": "Qoyska farta ee subtitles",
-  "@fontFamilyDescription": {},
-  "fontSize": "Cabbirka Farta",
-  "@fontSize": {},
-  "fontSizeDescription": "Cabbirka farta ee subtitles",
-  "@fontSizeDescription": {},
-  "fontWeight": "Miisaanka Farta",
-  "@fontWeight": {},
-  "fontWeightDescription": "Miisaanka farta ee subtitles",
-  "@fontWeightDescription": {},
-  "hidePrivate": "Qari Xogta Gaarka ah",
-  "@hidePrivate": {},
-  "hidePrivateDescription": "Qari taxanaha gaarka ah bogga Guriga.",
-  "@hidePrivateDescription": {},
-  "incognitoMode": "Habga Sirta ah",
-  "@incognitoMode": {},
-  "incognitoModeDescription": "Ku dhex soco internetka adigoon kaydin hawshaada",
-  "@incognitoModeDescription": {},
-  "login": "Gal",
-  "@login": {},
-  "logout": "Ka bax {type}",
-  "@logout": {},
-  "mal": "MyAnimeList",
-  "@mal": {},
-  "mangaDescription": "Hagaaji oo shakhsiye manga-daada",
-  "@mangaDescription": {},
-  "materialYou": "Material You",
-  "@materialYou": {},
-  "continueReading": "Sii wad Akhrinta",
-  "@continueReading": {},
-  "compactView": "Muuqaal Kooban",
-  "@compactView": {},
-  "listView": "List View",
-  "@listView": {},
-  "trending": "{type} Ku jira Xaaladda",
-  "@trending": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "favorite": "Jecel {type}",
-  "@favorite": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "nextSeason": "Xilliga Xiga",
-  "@nextSeason": {},
-  "noDropped": "Ma joojinin {type} ilaa hadda.",
-  "@noDropped": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "activity": "{count, plural, =1 {Hawl} other {Hawlo}}",
-  "@activity": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "topRated": "Qiimeynta Sare ee {type}",
-  "@topRated": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa",
-          "Series"
-        ]
-      }
-    }
-  },
-  "previousSeason": "Xilligii Hore",
-  "@previousSeason": {},
-  "popular": "{type} Caansan",
-  "@popular": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa"
-        ]
-      }
-    }
-  },
-  "description": "Sharaxaad",
-  "@description": {},
-  "installed": "{type} La rakibay",
-  "@installed": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Extensions"
-        ]
-      }
-    }
-  },
-  "mostFavourite": "{type} Ugu Jecel",
-  "@mostFavourite": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa"
-        ]
-      }
-    }
-  },
-  "endDate": "End Date",
-  "@endDate": {},
-  "meanScore": "Mean Score",
-  "@meanScore": {},
-  "series": "Series",
-  "@series": {},
-  "chapterRead": "Qaybta La Akhriday",
-  "@chapterRead": {},
-  "gridView": "Muuqaal Shabakad",
-  "@gridView": {},
-  "averageDuration": "Muddada Celceliska",
-  "@averageDuration": {},
-  "browse": "Baadh {type}",
-  "@browse": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "comingSoon": "Waxaa Soo Socda",
-  "@comingSoon": {},
-  "episode": "{count, plural, =1 {Qaybta} other {Qaybaha}}",
-  "@episode": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "episodeWatched": "Qaybta La Daawaday",
-  "@episodeWatched": {},
-  "popularity": "Caan noqoshada",
-  "@popularity": {},
-  "totalChapters": "Cutubyo",
-  "@totalChapters": {},
-  "favorites": "Waxyaabaha Jecel",
-  "@favorites": {},
-  "movie": "{count, plural, =1 {Filim} other {Filimaan}}",
-  "@movie": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "home": "Home",
-  "@home": {},
-  "prequel": "PREQUEL",
-  "@prequel": {},
-  "planned": "{type} La qorsheeyay",
-  "@planned": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "collapseText": "muujin wax yar",
-  "@collapseText": {},
-  "addToList": "Add To List",
-  "@addToList": {},
-  "chapter": "{count, plural, =1 {Qayb} other {Qaybo}}",
-  "@chapter": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "available": "{type} La heli karo",
-  "@available": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "characters": "Dabeecadaha",
-  "@characters": {},
-  "pickColor": "Dooro midabka",
-  "@pickColor": {},
-  "genres": "Noocyada",
-  "@genres": {},
-  "author": "Author",
-  "@author": {},
-  "source": "Source",
-  "@source": {},
-  "startDate": "Start Date",
-  "@startDate": {},
-  "calendar": "Jadwal",
-  "@calendar": {},
-  "format": "Qaabka",
-  "@format": {},
-  "expandText": "muujin wax badan",
-  "@expandText": {},
-  "manhua": "Manhua",
-  "@manhua": {},
-  "season": "Xilli",
-  "@season": {},
-  "sequel": "SEQUEL",
-  "@sequel": {},
-  "staff": "Shaqaalaha",
-  "@staff": {},
-  "status": "Status",
-  "@status": {},
-  "relations": "Relations",
-  "@relations": {},
-  "studio": "Studio",
-  "@studio": {},
-  "synonyms": "Erayo Isku Mid Ah",
-  "@synonyms": {},
-  "name": "Name",
-  "@name": {},
-  "total": "Total",
-  "@total": {},
-  "tags": "Tags",
-  "@tags": {},
-  "synopsis": "Kooban",
-  "@synopsis": {},
-  "nameRomaji": "Magaca (Romaji)",
-  "@nameRomaji": {},
-  "totalEpisodes": "Qaybaha Guud",
-  "@totalEpisodes": {},
-  "kitsu": "Kitsu",
-  "@kitsu": {},
-  "loginTo": "Gal {service}",
-  "@loginTo": {
-    "placeholders": {
-      "service": {
-        "type": "String",
-        "examples": [
-          "Anilist",
-          "MyAnimeList",
-          "Kitsu",
-          "Discord"
-        ]
-      }
-    }
-  },
-  "ln": "Sheeko Iftiimin",
-  "@ln": {},
-  "manhwa": "Manhwa",
-  "@manhwa": {},
-  "novel": "Sheeko",
-  "@novel": {},
-  "volume": "{count, plural, =1 {Heer} other {Heerro}}",
-  "@volume": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "confirmLogout": "Ma hubtaa inaad rabto inaad ka baxdo?",
-  "@confirmLogout": {},
-  "thisSeason": "Xilligan",
-  "@thisSeason": {},
-  "onHold": "{type} La hakiyey",
-  "@onHold": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "continueWatching": "Sii wad Daawashada",
-  "@continueWatching": {},
-  "recentUpdates": "Cusboonaysiinta Ugu Dhaw",
-  "@recentUpdates": {},
-  "recommendationsEmptyMessage": "Daawo/Akhri qaar ka mid ah Anime ama Manga si aad u hesho Talooyin",
-  "@recommendationsEmptyMessage": {},
-  "recommended": "La Talo Bixiyay",
-  "@recommended": {},
-  "list": "{type} Liiska",
-  "@list": {
-    "placeholders": {
-      "type": {
-        "examples": "Anime list",
-        "type": "String"
-      }
-    }
-  },
-  "allCaughtUpNew": "Dhammaan waa la soo gabagabeeyay, maxaa Cusub?",
-  "@allCaughtUpNew": {},
-  "comments": "Faallooyin",
-  "@comments": {},
-  "dtu": "Down To Up",
-  "@dtu": {},
-  "hiddenMedia": "Warbaahinta Qarsoon",
-  "@hiddenMedia": {},
-  "language": "Luuqadda",
-  "@language": {},
-  "info": "Info",
-  "@info": {},
-  "layout": "Layout",
-  "@layout": {},
-  "noFavourites": "Waxay u egtahay inaadan jecleyn waxba,\nIsku day inaad jecel yahay barnaamij si aad ugu hayso halkan.",
-  "@noFavourites": {},
-  "options": "Options",
-  "@options": {},
-  "scanlators": "Tarjumayaal",
-  "@scanlators": {},
-  "read": "Akhri",
-  "@read": {},
-  "search": "Raadi",
-  "@search": {},
-  "sort": "Kala saar",
-  "@sort": {},
-  "topAiring": "Soo saarista Sare",
-  "@topAiring": {},
-  "utd": "Ka Sareeya Hoos",
-  "@utd": {},
-  "watch": "Daawo",
-  "@watch": {},
-  "manageLayout": "Maamul Qaabka {page} ee {service}",
-  "@manageLayout": {
-    "placeholders": {
-      "service": {
-        "type": "String",
-        "examples": [
-          "Anilist",
-          "MAL"
-        ]
-      },
-      "page": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Home",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "droppedManga": "Manga la Joojiyey",
-  "@droppedManga": {},
-  "droppedAnime": "Anime la Joojiyey",
-  "@droppedAnime": {},
-  "manageLayoutDescription": "Waxaad maamuli kartaa qaabka bogga {page} adigoo jiidaya oo dhigaya walxaha",
-  "@manageLayoutDescription": {
-    "placeholders": {
-      "page": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Home",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "noOnHold": "Waxay u egtahay inaadan waxba hakinin.",
-  "@noOnHold": {},
-  "noHiddenMediaFound": "Warbaahinta Qarsoon lama helin",
-  "@noHiddenMediaFound": {},
-  "simkl": "Simkl",
-  "@simkl": {},
-  "logFile": "Faylka Diyaarinta",
-  "@logFile": {},
-  "colorPickerDefault": "Dejin",
-  "@colorPickerDefault": {},
-  "logFileDescription": "La wadaag faylka log",
-  "@logFileDescription": {},
-  "addAnimeRepo": "Kudar Kaydka Anime",
-  "@addAnimeRepo": {},
-  "loadExtensionsIconDesc": "Dami haddii bogga dheeraynta uu gaabis noqdo",
-  "@loadExtensionsIconDesc": {},
-  "autoUpdateDesc": "Cusboonaysii Dheeraynta si Toos ah",
-  "@autoUpdateDesc": {},
-  "addNovelRepoDesc": "Kudar Kaydka Sheeko ilo kala duwan",
-  "@addNovelRepoDesc": {},
-  "addMangaRepo": "Kudar Kaydka Manga",
-  "@addMangaRepo": {},
-  "addMangaRepoDesc": "Kudar Kaydka Manga ilo kala duwan",
-  "@addMangaRepoDesc": {},
-  "addAnimeRepoDesc": "Kudar Kaydka Anime ilo kala duwan",
-  "@addAnimeRepoDesc": {},
-  "addNovelRepo": "Kudar Kaydka Sheeko",
-  "@addNovelRepo": {},
-  "customPath": "Dariiqa Caadiga ah",
-  "@customPath": {},
-  "autoUpdate": "Cusboonaysiin Toos ah",
-  "@autoUpdate": {},
-  "loadExtensionsIcon": "Soo rar Astaan Dheerad ah",
-  "@loadExtensionsIcon": {},
-  "colorPickerCustom": "La Habeeyay",
-  "@colorPickerCustom": {},
-  "selectMediaService": "Dooro Adeegga Warbaahinta",
-  "@selectMediaService": {},
-  "customPathDescription": "Deji waddo gaar ah si aad u kaydiso faylasha\nRiix dheer si aad meesha uga saarto",
-  "@customPathDescription": {},
-  "selectDirectory": "Dooro hage",
-  "@selectDirectory": {},
-  "noChapterFound": "Cutub lama helin",
-  "@noChapterFound": {},
-  "watching": "Daawanaya",
-  "@watching": {},
-  "outOf": "ka mid ah",
-  "@outOf": {},
-  "selected": "La xushay",
-  "@selected": {},
-  "readStatus": "Akhri",
-  "@readStatus": {},
-  "youTube": "Ka ciyaar YouTube?",
-  "@youTube": {},
-  "mediaNotFound": "Warbaahinta lama helin",
-  "@mediaNotFound": {},
-  "found": "Waa la helay",
-  "@found": {},
-  "watchStatus": "La daawaday",
-  "@watchStatus": {},
-  "totalOf": "Wadarta",
-  "@totalOf": {},
-  "wrongTitle": "Cinwaan khaldan?",
-  "@wrongTitle": {},
-  "reading": "Akhrinaya",
-  "@reading": {},
-  "installSourceToStart": "Ku rakib ilaha bogga dheeraadka si aad u bilowdo",
-  "@installSourceToStart": {},
-  "webView": "Muuqaalka Web",
-  "@webView": {},
-  "thumbLessSeekBar": "ThumbLess SeekBar",
-  "@thumbLessSeekBar": {},
-  "thumbLessSeekBarDesc": "Remove thumb from the seek bar",
-  "@thumbLessSeekBarDesc": {},
-  "hidePageNumberDesc": "Hide page number while reading",
-  "@hidePageNumberDesc": {},
-  "developersHelpersDesc": "Dartotsu's unpaid labours",
-  "@developersHelpersDesc": {},
-  "developersHelpers": "Developers/Helpers",
-  "@developersHelpers": {},
-  "hidePageNumber": "Hide Page Number",
-  "@hidePageNumber": {},
-  "differentCacheManagerDesc": "Use different Image cache manager",
-  "@differentCacheManagerDesc": {},
-  "differentCacheManager": "Different Cache Manager",
-  "@differentCacheManager": {},
-  "spacedPagesDesc": "Add space between pages",
-  "@spacedPagesDesc": {},
-  "spacedPages": "Spaced Pages",
-  "@spacedPages": {},
-  "readerSettingsDesc": "Change reader settings",
-  "@readerSettingsDesc": {},
-  "hideScrollbarDesc": "Hide scrollbar while reading",
-  "@hideScrollbarDesc": {},
-  "direction": "Direction",
-  "@direction": {},
-  "readerSettings": "Reader Settings",
-  "@readerSettings": {},
-  "hideScrollbar": "Hide Scrollbar",
-  "@hideScrollbar": {},
-  "playerSettingsDesc": "Change player settings",
-  "@playerSettingsDesc": {}
+    "about": "Ku Saabsan",
+    "@about": {},
+    "aboutDescription": "Wax badan ka baro app-ka iyo abuurayaashiisa",
+    "@aboutDescription": {},
+    "account": "Akoon",
+    "@account": {},
+    "accountDescription": "Maaree akoonnadaada AniList, MAL, iyo Discord si sahlan",
+    "@accountDescription": {},
+    "anime": "Anime",
+    "@anime": {},
+    "anilist": "AniList",
+    "@anilist": {},
+    "manga": "Manga",
+    "@manga": {},
+    "materialYouDescription": "Isticmaal midabkaaga wallpaper-ka",
+    "@materialYouDescription": {},
+    "no": "Maya",
+    "@no": {},
+    "notifications": "Ogeysiisyada",
+    "@notifications": {},
+    "notificationsDescription": "Deji sida iyo goorta aad ogeysiisyada helayso",
+    "@notificationsDescription": {},
+    "offlineMode": "Hab Offline",
+    "@offlineMode": {},
+    "offlineModeDescription": "Isticmaal app-ka adigoon xirin internetka",
+    "@offlineModeDescription": {},
+    "ok": "OK",
+    "@ok": {},
+    "oledThemeVariant": "Nooca OLED ee Mowduuca",
+    "@oledThemeVariant": {},
+    "oledThemeVariantDescription": "Fur Habka OLED",
+    "@oledThemeVariantDescription": {},
+    "outlineColor": "Midabka Xariiqda",
+    "@outlineColor": {},
+    "outlineColorDescription": "Midabka xariiqda ee subtitles",
+    "@outlineColorDescription": {},
+    "playerSettingsTitle": "Dejinta Ciyaaryahanka",
+    "@playerSettingsTitle": {},
+    "resizeMode": "Habka Dib-u-cabbirka",
+    "@resizeMode": {},
+    "resizeModeDescription": "Habka dib-u-cabbirka ee caadiga ah ee ciyaaryahanka",
+    "@resizeModeDescription": {},
+    "restoreSettings": "Soo celi Dejinta",
+    "@restoreSettings": {},
+    "settings": "Dejinta",
+    "@settings": {},
+    "showSubtitles": "Muuji Subtitles",
+    "@showSubtitles": {},
+    "showSubtitlesDescription": "Muuji subtitles si caadi ah",
+    "@showSubtitlesDescription": {},
+    "skipButton": "Badhamada Ka Bixinta",
+    "@skipButton": {},
+    "skipButtonDescription": "Muddada badhanka ka bixinta",
+    "@skipButtonDescription": {},
+    "speed": "Xawaare",
+    "@speed": {},
+    "speedDescription": "Xawaaraha caadiga ah ee ciyaaryahanka",
+    "@speedDescription": {},
+    "subtitles": "qoraal hoosaadyo",
+    "@subtitles": {},
+    "subtitlePreview": "Muuqaalka hore ee Subtitles",
+    "@subtitlePreview": {},
+    "supportMaintainer": "Ma dooneysaa inaad taageerto Maamulaha Dartotsu?\nTixgeli Inaad Deeq Bixiso",
+    "@supportMaintainer": {},
+    "theme": "Mowduuca",
+    "@theme": {},
+    "themeDescription": "Hagaaji muuqaalka iyo dareenka app-kaaga",
+    "@themeDescription": {},
+    "yes": "Haa",
+    "@yes": {},
+    "animeDescription": "Shakhsiyee oo maaree doorashadaada anime",
+    "@animeDescription": {},
+    "appName": "Dartotsu",
+    "@appName": {},
+    "appTagline": "App-ka Cusub ee Ugu Wanaagsan\nRaadinta Anime & Manga",
+    "@appTagline": {},
+    "backgroundColor": "Midabka Asalka",
+    "@backgroundColor": {},
+    "backgroundColorDescription": "Midabka asalka ee subtitles",
+    "@backgroundColorDescription": {},
+    "bottomPadding": "Padding-hoose",
+    "@bottomPadding": {},
+    "bottomPaddingDescription": "Padding-hoose ee subtitles",
+    "@bottomPaddingDescription": {},
+    "cancel": "Jooji",
+    "@cancel": {},
+    "colorPicker": "Xulashada Midabka",
+    "@colorPicker": {},
+    "colorPickerDescription": "Dooro midab",
+    "@colorPickerDescription": {},
+    "common": "Guud",
+    "@common": {},
+    "commonDescription": "Hel dejinta guud ee isticmaalka fudud ee app-ka",
+    "@commonDescription": {},
+    "cursedSpeed": "Xawaaraha La'aan",
+    "@cursedSpeed": {},
+    "cursedSpeedDescription": "Dadkii aadka ugu mashquulsan nolosha",
+    "@cursedSpeedDescription": {},
+    "customTheme": "Mowduuc La Habeeyay",
+    "@customTheme": {},
+    "customThemeDescription": "Isticmaal midabkaaga gaarka ah ee mowduuca",
+    "@customThemeDescription": {},
+    "darkMode": "Hab Madow",
+    "@darkMode": {},
+    "discord": "Discord",
+    "@discord": {},
+    "donationGoal": "Ma jiraan ujeeddo deeq ah hadda",
+    "@donationGoal": {},
+    "enableDarkMode": "Fur Habka Madow",
+    "@enableDarkMode": {},
+    "extension": "{count, plural, =1 {Kordhin} other {Kordhinta}}",
+    "@extension": {},
+    "extensionsDescription": "Ku rakib oo maaree kordhino si loogu daro shaqooyin dheeri ah",
+    "@extensionsDescription": {},
+    "fontColor": "Midabka Farta",
+    "@fontColor": {},
+    "fontColorDescription": "Midabka farta ee subtitles",
+    "@fontColorDescription": {},
+    "fontFamily": "Qoyska Farta",
+    "@fontFamily": {},
+    "fontFamilyDescription": "Qoyska farta ee subtitles",
+    "@fontFamilyDescription": {},
+    "fontSize": "Cabbirka Farta",
+    "@fontSize": {},
+    "fontSizeDescription": "Cabbirka farta ee subtitles",
+    "@fontSizeDescription": {},
+    "fontWeight": "Miisaanka Farta",
+    "@fontWeight": {},
+    "fontWeightDescription": "Miisaanka farta ee subtitles",
+    "@fontWeightDescription": {},
+    "hidePrivate": "Qari Xogta Gaarka ah",
+    "@hidePrivate": {},
+    "hidePrivateDescription": "Qari taxanaha gaarka ah bogga Guriga.",
+    "@hidePrivateDescription": {},
+    "incognitoMode": "Habga Sirta ah",
+    "@incognitoMode": {},
+    "incognitoModeDescription": "Ku dhex soco internetka adigoon kaydin hawshaada",
+    "@incognitoModeDescription": {},
+    "login": "Gal",
+    "@login": {},
+    "logout": "Ka bax {type}",
+    "@logout": {},
+    "mal": "MyAnimeList",
+    "@mal": {},
+    "mangaDescription": "Hagaaji oo shakhsiye manga-daada",
+    "@mangaDescription": {},
+    "materialYou": "Material You",
+    "@materialYou": {},
+    "continueReading": "Sii wad Akhrinta",
+    "@continueReading": {},
+    "compactView": "Muuqaal Kooban",
+    "@compactView": {},
+    "listView": "List View",
+    "@listView": {},
+    "trending": "{type} Ku jira Xaaladda",
+    "@trending": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "favorite": "Jecel {type}",
+    "@favorite": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "nextSeason": "Xilliga Xiga",
+    "@nextSeason": {},
+    "noDropped": "Ma joojinin {type} ilaa hadda.",
+    "@noDropped": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "activity": "{count, plural, =1 {Hawl} other {Hawlo}}",
+    "@activity": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "topRated": "Qiimeynta Sare ee {type}",
+    "@topRated": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa",
+                    "Series"
+                ]
+            }
+        }
+    },
+    "previousSeason": "Xilligii Hore",
+    "@previousSeason": {},
+    "popular": "{type} Caansan",
+    "@popular": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa"
+                ]
+            }
+        }
+    },
+    "installed": "{type} La rakibay",
+    "@installed": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Extensions"
+                ]
+            }
+        }
+    },
+    "mostFavourite": "{type} Ugu Jecel",
+    "@mostFavourite": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa"
+                ]
+            }
+        }
+    },
+    "endDate": "End Date",
+    "@endDate": {},
+    "meanScore": "Mean Score",
+    "@meanScore": {},
+    "series": "Series",
+    "@series": {},
+    "chapterRead": "Qaybta La Akhriday",
+    "@chapterRead": {},
+    "gridView": "Muuqaal Shabakad",
+    "@gridView": {},
+    "averageDuration": "Muddada Celceliska",
+    "@averageDuration": {},
+    "browse": "Baadh {type}",
+    "@browse": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "comingSoon": "Waxaa Soo Socda",
+    "@comingSoon": {},
+    "episode": "{count, plural, =1 {Qaybta} other {Qaybaha}}",
+    "@episode": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "episodeWatched": "Qaybta La Daawaday",
+    "@episodeWatched": {},
+    "popularity": "Caan noqoshada",
+    "@popularity": {},
+    "totalChapters": "Cutubyo",
+    "@totalChapters": {},
+    "favorites": "Waxyaabaha Jecel",
+    "@favorites": {},
+    "movie": "{count, plural, =1 {Filim} other {Filimaan}}",
+    "@movie": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "home": "Home",
+    "@home": {},
+    "prequel": "PREQUEL",
+    "@prequel": {},
+    "planned": "{type} La qorsheeyay",
+    "@planned": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "collapseText": "muujin wax yar",
+    "@collapseText": {},
+    "addToList": "Add To List",
+    "@addToList": {},
+    "chapter": "{count, plural, =1 {Qayb} other {Qaybo}}",
+    "@chapter": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "available": "{type} La heli karo",
+    "@available": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "characters": "Dabeecadaha",
+    "@characters": {},
+    "pickColor": "Dooro midabka",
+    "@pickColor": {},
+    "genres": "Noocyada",
+    "@genres": {},
+    "author": "Author",
+    "@author": {},
+    "source": "Source",
+    "@source": {},
+    "startDate": "Start Date",
+    "@startDate": {},
+    "calendar": "Jadwal",
+    "@calendar": {},
+    "format": "Qaabka",
+    "@format": {},
+    "expandText": "muujin wax badan",
+    "@expandText": {},
+    "manhua": "Manhua",
+    "@manhua": {},
+    "season": "Xilli",
+    "@season": {},
+    "sequel": "SEQUEL",
+    "@sequel": {},
+    "staff": "Shaqaalaha",
+    "@staff": {},
+    "status": "Status",
+    "@status": {},
+    "relations": "Relations",
+    "@relations": {},
+    "studio": "Studio",
+    "@studio": {},
+    "synonyms": "Erayo Isku Mid Ah",
+    "@synonyms": {},
+    "name": "Name",
+    "@name": {},
+    "total": "Total",
+    "@total": {},
+    "tags": "Tags",
+    "@tags": {},
+    "synopsis": "Kooban",
+    "@synopsis": {},
+    "nameRomaji": "Magaca (Romaji)",
+    "@nameRomaji": {},
+    "totalEpisodes": "Qaybaha Guud",
+    "@totalEpisodes": {},
+    "kitsu": "Kitsu",
+    "@kitsu": {},
+    "loginTo": "Gal {service}",
+    "@loginTo": {
+        "placeholders": {
+            "service": {
+                "type": "String",
+                "examples": [
+                    "Anilist",
+                    "MyAnimeList",
+                    "Kitsu",
+                    "Discord"
+                ]
+            }
+        }
+    },
+    "ln": "Sheeko Iftiimin",
+    "@ln": {},
+    "manhwa": "Manhwa",
+    "@manhwa": {},
+    "novel": "Sheeko",
+    "@novel": {},
+    "volume": "{count, plural, =1 {Heer} other {Heerro}}",
+    "@volume": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "confirmLogout": "Ma hubtaa inaad rabto inaad ka baxdo?",
+    "@confirmLogout": {},
+    "thisSeason": "Xilligan",
+    "@thisSeason": {},
+    "onHold": "{type} La hakiyey",
+    "@onHold": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "continueWatching": "Sii wad Daawashada",
+    "@continueWatching": {},
+    "recentUpdates": "Cusboonaysiinta Ugu Dhaw",
+    "@recentUpdates": {},
+    "recommendationsEmptyMessage": "Daawo/Akhri qaar ka mid ah Anime ama Manga si aad u hesho Talooyin",
+    "@recommendationsEmptyMessage": {},
+    "recommended": "La Talo Bixiyay",
+    "@recommended": {},
+    "list": "{type} Liiska",
+    "@list": {
+        "placeholders": {
+            "type": {
+                "examples": "Anime list",
+                "type": "String"
+            }
+        }
+    },
+    "allCaughtUpNew": "Dhammaan waa la soo gabagabeeyay, maxaa Cusub?",
+    "@allCaughtUpNew": {},
+    "comments": "Faallooyin",
+    "@comments": {},
+    "dtu": "Down To Up",
+    "@dtu": {},
+    "hiddenMedia": "Warbaahinta Qarsoon",
+    "@hiddenMedia": {},
+    "language": "Luuqadda",
+    "@language": {},
+    "info": "Info",
+    "@info": {},
+    "layout": "Layout",
+    "@layout": {},
+    "noFavourites": "Waxay u egtahay inaadan jecleyn waxba,\nIsku day inaad jecel yahay barnaamij si aad ugu hayso halkan.",
+    "@noFavourites": {},
+    "options": "Options",
+    "@options": {},
+    "scanlators": "Tarjumayaal",
+    "@scanlators": {},
+    "read": "Akhri",
+    "@read": {},
+    "search": "Raadi",
+    "@search": {},
+    "sort": "Kala saar",
+    "@sort": {},
+    "topAiring": "Soo saarista Sare",
+    "@topAiring": {},
+    "utd": "Ka Sareeya Hoos",
+    "@utd": {},
+    "watch": "Daawo",
+    "@watch": {},
+    "manageLayout": "Maamul Qaabka {page} ee {service}",
+    "@manageLayout": {
+        "placeholders": {
+            "service": {
+                "type": "String",
+                "examples": [
+                    "Anilist",
+                    "MAL"
+                ]
+            },
+            "page": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Home",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "droppedManga": "Manga la Joojiyey",
+    "@droppedManga": {},
+    "droppedAnime": "Anime la Joojiyey",
+    "@droppedAnime": {},
+    "manageLayoutDescription": "Waxaad maamuli kartaa qaabka bogga {page} adigoo jiidaya oo dhigaya walxaha",
+    "@manageLayoutDescription": {
+        "placeholders": {
+            "page": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Home",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "noOnHold": "Waxay u egtahay inaadan waxba hakinin.",
+    "@noOnHold": {},
+    "noHiddenMediaFound": "Warbaahinta Qarsoon lama helin",
+    "@noHiddenMediaFound": {},
+    "simkl": "Simkl",
+    "@simkl": {},
+    "logFile": "Faylka Diyaarinta",
+    "@logFile": {},
+    "colorPickerDefault": "Dejin",
+    "@colorPickerDefault": {},
+    "logFileDescription": "La wadaag faylka log",
+    "@logFileDescription": {},
+    "addAnimeRepo": "Kudar Kaydka Anime",
+    "@addAnimeRepo": {},
+    "loadExtensionsIconDesc": "Dami haddii bogga dheeraynta uu gaabis noqdo",
+    "@loadExtensionsIconDesc": {},
+    "autoUpdateDesc": "Cusboonaysii Dheeraynta si Toos ah",
+    "@autoUpdateDesc": {},
+    "addNovelRepoDesc": "Kudar Kaydka Sheeko ilo kala duwan",
+    "@addNovelRepoDesc": {},
+    "addMangaRepo": "Kudar Kaydka Manga",
+    "@addMangaRepo": {},
+    "addMangaRepoDesc": "Kudar Kaydka Manga ilo kala duwan",
+    "@addMangaRepoDesc": {},
+    "addAnimeRepoDesc": "Kudar Kaydka Anime ilo kala duwan",
+    "@addAnimeRepoDesc": {},
+    "addNovelRepo": "Kudar Kaydka Sheeko",
+    "@addNovelRepo": {},
+    "customPath": "Dariiqa Caadiga ah",
+    "@customPath": {},
+    "autoUpdate": "Cusboonaysiin Toos ah",
+    "@autoUpdate": {},
+    "loadExtensionsIcon": "Soo rar Astaan Dheerad ah",
+    "@loadExtensionsIcon": {},
+    "colorPickerCustom": "La Habeeyay",
+    "@colorPickerCustom": {},
+    "selectMediaService": "Dooro Adeegga Warbaahinta",
+    "@selectMediaService": {},
+    "customPathDescription": "Deji waddo gaar ah si aad u kaydiso faylasha\nRiix dheer si aad meesha uga saarto",
+    "@customPathDescription": {},
+    "selectDirectory": "Dooro hage",
+    "@selectDirectory": {},
+    "noChapterFound": "Cutub lama helin",
+    "@noChapterFound": {},
+    "watching": "Daawanaya",
+    "@watching": {},
+    "outOf": "ka mid ah",
+    "@outOf": {},
+    "selected": "La xushay",
+    "@selected": {},
+    "readStatus": "Akhri",
+    "@readStatus": {},
+    "youTube": "Ka ciyaar YouTube?",
+    "@youTube": {},
+    "mediaNotFound": "Warbaahinta lama helin",
+    "@mediaNotFound": {},
+    "found": "Waa la helay",
+    "@found": {},
+    "watchStatus": "La daawaday",
+    "@watchStatus": {},
+    "totalOf": "Wadarta",
+    "@totalOf": {},
+    "wrongTitle": "Cinwaan khaldan?",
+    "@wrongTitle": {},
+    "reading": "Akhrinaya",
+    "@reading": {},
+    "installSourceToStart": "Ku rakib ilaha bogga dheeraadka si aad u bilowdo",
+    "@installSourceToStart": {},
+    "webView": "Muuqaalka Web",
+    "@webView": {},
+    "thumbLessSeekBar": "ThumbLess SeekBar",
+    "@thumbLessSeekBar": {},
+    "thumbLessSeekBarDesc": "Remove thumb from the seek bar",
+    "@thumbLessSeekBarDesc": {},
+    "hidePageNumberDesc": "Hide page number while reading",
+    "@hidePageNumberDesc": {},
+    "developersHelpersDesc": "Dartotsu's unpaid labours",
+    "@developersHelpersDesc": {},
+    "developersHelpers": "Developers/Helpers",
+    "@developersHelpers": {},
+    "hidePageNumber": "Hide Page Number",
+    "@hidePageNumber": {},
+    "differentCacheManagerDesc": "Use different Image cache manager",
+    "@differentCacheManagerDesc": {},
+    "differentCacheManager": "Different Cache Manager",
+    "@differentCacheManager": {},
+    "spacedPagesDesc": "Add space between pages",
+    "@spacedPagesDesc": {},
+    "spacedPages": "Spaced Pages",
+    "@spacedPages": {},
+    "readerSettingsDesc": "Change reader settings",
+    "@readerSettingsDesc": {},
+    "hideScrollbarDesc": "Hide scrollbar while reading",
+    "@hideScrollbarDesc": {},
+    "direction": "Direction",
+    "@direction": {},
+    "readerSettings": "Reader Settings",
+    "@readerSettings": {},
+    "hideScrollbar": "Hide Scrollbar",
+    "@hideScrollbar": {},
+    "playerSettingsDesc": "Change player settings",
+    "@playerSettingsDesc": {},
+    "glassEffect": "Glass Effect",
+    "@glassEffect": {},
+    "ltr": "Left To Right",
+    "@ltr": {},
+    "coverThemeDescription": "Use media cover image as theme color",
+    "@coverThemeDescription": {},
+    "rtl": "Right To Left",
+    "@rtl": {},
+    "glassEffectDescription": "Gives a frosted glass effect to the app",
+    "@glassEffectDescription": {},
+    "nextEpisodeRelease": "Episode {episode} will be released in",
+    "@nextEpisodeRelease": {
+        "description": "Message showing the next episode info",
+        "placeholders": {
+            "episode": {
+                "type": "int"
+            }
+        }
+    },
+    "topScore": "Top Score",
+    "@topScore": {},
+    "coverTheme": "Use Cover Theme",
+    "@coverTheme": {},
+    "customMPVDescription": "Enable this option to use your own MPV configuration file. Place your custom config at: {path}",
+    "@customMPVDescription": {
+        "placeholders": {
+            "path": {
+                "type": "String"
+            }
+        }
+    },
+    "customMPV": "Custom MPV Configuration",
+    "@customMPV": {}
 }

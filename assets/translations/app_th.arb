@@ -1,632 +1,663 @@
 {
-  "cursedSpeedDescription": "สำหรับผู้ที่มีเวลาน้อย",
-  "@cursedSpeedDescription": {},
-  "extension": "{count, plural, =1 {ส่วนขยาย} other {ส่วนขยาย}}",
-  "@extension": {},
-  "enableDarkMode": "เปิดโหมดมืด",
-  "@enableDarkMode": {},
-  "aboutDescription": "เรียนรู้เพิ่มเติมเกี่ยวกับแอปและผู้สร้าง",
-  "@aboutDescription": {},
-  "anilist": "AniList",
-  "@anilist": {},
-  "themeDescription": "ปรับแต่งลักษณะและบรรยากาศของแอปของคุณ",
-  "@themeDescription": {},
-  "about": "เกี่ยวกับ",
-  "@about": {},
-  "account": "บัญชี",
-  "@account": {},
-  "accountDescription": "จัดการบัญชี AniList, MAL และ Discord ของคุณได้อย่างง่ายดาย",
-  "@accountDescription": {},
-  "anime": "อนิเมะ",
-  "@anime": {},
-  "animeDescription": "ปรับแต่งและจัดการความชอบของคุณเกี่ยวกับอนิเมะ",
-  "@animeDescription": {},
-  "appName": "Dartotsu",
-  "@appName": {},
-  "appTagline": "แอปที่ดีที่สุดใหม่ล่าสุดสำหรับ\nการติดตามอนิเมะและมังงะ",
-  "@appTagline": {},
-  "backgroundColor": "สีพื้นหลัง",
-  "@backgroundColor": {},
-  "backgroundColorDescription": "สีพื้นหลังของคำบรรยาย",
-  "@backgroundColorDescription": {},
-  "bottomPadding": "ระยะห่างด้านล่าง",
-  "@bottomPadding": {},
-  "bottomPaddingDescription": "ระยะห่างด้านล่างของคำบรรยาย",
-  "@bottomPaddingDescription": {},
-  "cancel": "ยกเลิก",
-  "@cancel": {},
-  "colorPicker": "ตัวเลือกสี",
-  "@colorPicker": {},
-  "colorPickerDescription": "เลือกสี",
-  "@colorPickerDescription": {},
-  "common": "ทั่วไป",
-  "@common": {},
-  "commonDescription": "เข้าถึงการตั้งค่าทั่วไปเพื่อการใช้งานแอปที่ราบรื่น",
-  "@commonDescription": {},
-  "cursedSpeed": "ความเร็วสูงสุด",
-  "@cursedSpeed": {},
-  "customTheme": "ธีมที่กำหนดเอง",
-  "@customTheme": {},
-  "customThemeDescription": "ใช้สีของคุณเองสำหรับธีม",
-  "@customThemeDescription": {},
-  "darkMode": "โหมดมืด",
-  "@darkMode": {},
-  "discord": "Discord",
-  "@discord": {},
-  "donationGoal": "ไม่มีเป้าหมายการบริจาคในขณะนี้",
-  "@donationGoal": {},
-  "extensionsDescription": "ติดตั้งและจัดการส่วนเสริมเพื่อเพิ่มฟังก์ชันการทำงาน",
-  "@extensionsDescription": {},
-  "fontColor": "สีฟอนต์",
-  "@fontColor": {},
-  "fontColorDescription": "สีฟอนต์ของคำบรรยาย",
-  "@fontColorDescription": {},
-  "fontFamily": "แบบอักษร",
-  "@fontFamily": {},
-  "fontFamilyDescription": "แบบอักษรของคำบรรยาย",
-  "@fontFamilyDescription": {},
-  "fontSize": "ขนาดฟอนต์",
-  "@fontSize": {},
-  "fontSizeDescription": "ขนาดฟอนต์ของคำบรรยาย",
-  "@fontSizeDescription": {},
-  "fontWeight": "น้ำหนักฟอนต์",
-  "@fontWeight": {},
-  "fontWeightDescription": "น้ำหนักฟอนต์ของคำบรรยาย",
-  "@fontWeightDescription": {},
-  "hidePrivate": "ซ่อนส่วนตัว",
-  "@hidePrivate": {},
-  "hidePrivateDescription": "ซ่อนซีรีส์ส่วนตัวจากหน้าหลัก",
-  "@hidePrivateDescription": {},
-  "incognitoMode": "โหมดไม่ระบุตัวตน",
-  "@incognitoMode": {},
-  "incognitoModeDescription": "เรียกดูโดยไม่บันทึกกิจกรรมของคุณ",
-  "@incognitoModeDescription": {},
-  "login": "เข้าสู่ระบบ",
-  "@login": {},
-  "logout": "ออกจากระบบ {type}",
-  "@logout": {},
-  "mal": "MyAnimeList",
-  "@mal": {},
-  "manga": "มังงะ",
-  "@manga": {},
-  "mangaDescription": "จัดระเบียบและปรับแต่งประสบการณ์การอ่านมังงะของคุณ",
-  "@mangaDescription": {},
-  "materialYou": "Material You",
-  "@materialYou": {},
-  "materialYouDescription": "ใช้สีเดียวกับวอลเปเปอร์ของคุณ",
-  "@materialYouDescription": {},
-  "no": "ไม่",
-  "@no": {},
-  "notifications": "การแจ้งเตือน",
-  "@notifications": {},
-  "notificationsDescription": "ตั้งค่าการแจ้งเตือนของคุณ",
-  "@notificationsDescription": {},
-  "offlineMode": "โหมดออฟไลน์",
-  "@offlineMode": {},
-  "offlineModeDescription": "ใช้งานแอปโดยไม่ต้องเชื่อมต่ออินเทอร์เน็ต",
-  "@offlineModeDescription": {},
-  "ok": "ตกลง",
-  "@ok": {},
-  "oledThemeVariant": "ธีม OLED",
-  "@oledThemeVariant": {},
-  "oledThemeVariantDescription": "เปิดใช้งานโหมด OLED",
-  "@oledThemeVariantDescription": {},
-  "outlineColor": "สีขอบ",
-  "@outlineColor": {},
-  "outlineColorDescription": "สีขอบของคำบรรยาย",
-  "@outlineColorDescription": {},
-  "playerSettingsTitle": "การตั้งค่าผู้เล่น",
-  "@playerSettingsTitle": {},
-  "resizeMode": "โหมดปรับขนาด",
-  "@resizeMode": {},
-  "resizeModeDescription": "โหมดปรับขนาดเริ่มต้นสำหรับผู้เล่น",
-  "@resizeModeDescription": {},
-  "restoreSettings": "คืนค่าการตั้งค่า",
-  "@restoreSettings": {},
-  "settings": "การตั้งค่า",
-  "@settings": {},
-  "showSubtitles": "แสดงคำบรรยาย",
-  "@showSubtitles": {},
-  "showSubtitlesDescription": "แสดงคำบรรยายโดยค่าเริ่มต้น",
-  "@showSubtitlesDescription": {},
-  "skipButton": "ปุ่มข้าม",
-  "@skipButton": {},
-  "skipButtonDescription": "ระยะเวลาปุ่มข้าม",
-  "@skipButtonDescription": {},
-  "speed": "ความเร็ว",
-  "@speed": {},
-  "speedDescription": "ความเร็วเริ่มต้นสำหรับผู้เล่น",
-  "@speedDescription": {},
-  "subtitles": "คำบรรยาย",
-  "@subtitles": {},
-  "subtitlePreview": "ตัวอย่างคำบรรยาย",
-  "@subtitlePreview": {},
-  "supportMaintainer": "ต้องการสนับสนุนผู้ดูแล Dartotsu?\nลองพิจารณาบริจาค",
-  "@supportMaintainer": {},
-  "theme": "ธีม",
-  "@theme": {},
-  "yes": "ใช่",
-  "@yes": {},
-  "loginTo": "เข้าสู่ระบบ {service}",
-  "@loginTo": {
-    "placeholders": {
-      "service": {
-        "type": "String",
-        "examples": [
-          "Anilist",
-          "MyAnimeList",
-          "Kitsu",
-          "Discord"
-        ]
-      }
-    }
-  },
-  "manhwa": "มันวา",
-  "@manhwa": {},
-  "manhua": "มานฮัว",
-  "@manhua": {},
-  "home": "หน้าหลัก",
-  "@home": {},
-  "ln": "ไลท์โนเวล",
-  "@ln": {},
-  "series": "ซีรีส์",
-  "@series": {},
-  "season": "ซีซั่น",
-  "@season": {},
-  "episode": "{count, plural, =1 {ตอน} other {ตอน}}",
-  "@episode": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "chapter": "{count, plural, =1 {บท} other {บท}}",
-  "@chapter": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "volume": "{count, plural, =1 {เล่ม} other {เล่ม}}",
-  "@volume": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "movie": "{count, plural, =1 {ภาพยนตร์} other {ภาพยนตร์}}",
-  "@movie": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "genres": "ประเภท",
-  "@genres": {},
-  "calendar": "ปฏิทิน",
-  "@calendar": {},
-  "scanlators": "สแกนเลเตอร์",
-  "@scanlators": {},
-  "gridView": "มุมมองตาราง",
-  "@gridView": {},
-  "listView": "มุมมองแบบรายการ",
-  "@listView": {},
-  "compactView": "มุมมองคอมแพ็ค",
-  "@compactView": {},
-  "sort": "เรียงลำดับ",
-  "@sort": {},
-  "episodeWatched": "ตอนที่ดูแล้ว",
-  "@episodeWatched": {},
-  "chapterRead": "บทที่อ่านแล้ว",
-  "@chapterRead": {},
-  "available": "มีอยู่ {type}",
-  "@available": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "installed": "ติดตั้ง {type}",
-  "@installed": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Extensions"
-        ]
-      }
-    }
-  },
-  "trending": "เทรนด์ {type}",
-  "@trending": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "mostFavourite": "ที่ชื่นชอบมากที่สุด {type}",
-  "@mostFavourite": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa"
-        ]
-      }
-    }
-  },
-  "popular": "ยอดนิยม {type}",
-  "@popular": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa"
-        ]
-      }
-    }
-  },
-  "topRated": "อันดับสูงสุด {type}",
-  "@topRated": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa",
-          "Series"
-        ]
-      }
-    }
-  },
-  "thisSeason": "ซีซั่นนี้",
-  "@thisSeason": {},
-  "nextSeason": "ซีซั่นหน้า",
-  "@nextSeason": {},
-  "previousSeason": "ซีซั่นก่อนหน้า",
-  "@previousSeason": {},
-  "planned": "วางแผน {type}",
-  "@planned": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "browse": "เรียกดู {type}",
-  "@browse": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "favorite": "โปรด {type}",
-  "@favorite": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "onHold": "พักไว้ {type}",
-  "@onHold": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "noDropped": "คุณยังไม่ได้หยุดดู {type} ใด ๆ",
-  "@noDropped": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "favorites": "รายการโปรด",
-  "@favorites": {},
-  "format": "รูปแบบ",
-  "@format": {},
-  "meanScore": "คะแนนเฉลี่ย",
-  "@meanScore": {},
-  "totalEpisodes": "ตอนทั้งหมด",
-  "@totalEpisodes": {},
-  "totalChapters": "บททั้งหมด",
-  "@totalChapters": {},
-  "relations": "ความสัมพันธ์",
-  "@relations": {},
-  "sequel": "ภาคต่อ",
-  "@sequel": {},
-  "source": "แหล่งที่มา",
-  "@source": {},
-  "staff": "ทีมงาน",
-  "@staff": {},
-  "startDate": "วันเริ่มต้น",
-  "@startDate": {},
-  "status": "สถานะ",
-  "@status": {},
-  "studio": "สตูดิโอ",
-  "@studio": {},
-  "synonyms": "คำพ้องความหมาย",
-  "@synonyms": {},
-  "author": "ผู้เขียน",
-  "@author": {},
-  "averageDuration": "ระยะเวลาเฉลี่ย",
-  "@averageDuration": {},
-  "characters": "ตัวละคร",
-  "@characters": {},
-  "collapseText": "แสดงน้อยลง",
-  "@collapseText": {},
-  "comingSoon": "มาเร็ว ๆ นี้",
-  "@comingSoon": {},
-  "description": "คำบรรยาย",
-  "@description": {},
-  "endDate": "วันสิ้นสุด",
-  "@endDate": {},
-  "expandText": "แสดงเพิ่มเติม",
-  "@expandText": {},
-  "name": "ชื่อ",
-  "@name": {},
-  "nameRomaji": "ชื่อ (โรมาจิ)",
-  "@nameRomaji": {},
-  "popularity": "ความนิยม",
-  "@popularity": {},
-  "prequel": "ภาคก่อน",
-  "@prequel": {},
-  "recommended": "แนะนำ",
-  "@recommended": {},
-  "synopsis": "สรุป",
-  "@synopsis": {},
-  "tags": "แท็ก",
-  "@tags": {},
-  "total": "ทั้งหมด",
-  "@total": {},
-  "novel": "นวนิยาย",
-  "@novel": {},
-  "confirmLogout": "คุณแน่ใจหรือไม่ว่าต้องการออกจากระบบ?",
-  "@confirmLogout": {},
-  "language": "ภาษา",
-  "@language": {},
-  "activity": "{count, plural, =1 {กิจกรรม} other {กิจกรรม}}",
-  "@activity": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "droppedAnime": "อนิเมะที่หยุดดู",
-  "@droppedAnime": {},
-  "hiddenMedia": "สื่อที่ซ่อน",
-  "@hiddenMedia": {},
-  "continueReading": "อ่านต่อ",
-  "@continueReading": {},
-  "read": "อ่าน",
-  "@read": {},
-  "addToList": "เพิ่มในรายการ",
-  "@addToList": {},
-  "comments": "ความคิดเห็น",
-  "@comments": {},
-  "continueWatching": "ดูต่อ",
-  "@continueWatching": {},
-  "dtu": "ดาวน์โหลด",
-  "@dtu": {},
-  "info": "ข้อมูล",
-  "@info": {},
-  "list": "{type} รายการ",
-  "@list": {
-    "placeholders": {
-      "type": {
-        "examples": "Anime list",
-        "type": "String"
-      }
-    }
-  },
-  "layout": "รูปแบบ",
-  "@layout": {},
-  "noFavourites": "ดูเหมือนว่าคุณยังไม่ชอบอะไร,\nลองกดถูกใจรายการเพื่อเก็บไว้ที่นี่",
-  "@noFavourites": {},
-  "options": "ตัวเลือก",
-  "@options": {},
-  "search": "ค้นหา",
-  "@search": {},
-  "topAiring": "ออกอากาศยอดนิยม",
-  "@topAiring": {},
-  "watch": "ดู",
-  "@watch": {},
-  "utd": "จากบนลงล่าง",
-  "@utd": {},
-  "manageLayout": "จัดการเลย์เอาต์หน้า {page} สำหรับ {service}",
-  "@manageLayout": {
-    "placeholders": {
-      "service": {
-        "type": "String",
-        "examples": [
-          "Anilist",
-          "MAL"
-        ]
-      },
-      "page": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Home",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "manageLayoutDescription": "คุณสามารถจัดการเลย์เอาต์หน้า {page} ได้โดยการลากและวางไอเท็ม",
-  "@manageLayoutDescription": {
-    "placeholders": {
-      "page": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Home",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "pickColor": "เลือกสี",
-  "@pickColor": {},
-  "allCaughtUpNew": "ทั้งหมดตามทันแล้ว, มีอะไรใหม่บ้าง?",
-  "@allCaughtUpNew": {},
-  "droppedManga": "มังงะที่หยุดอ่าน",
-  "@droppedManga": {},
-  "noHiddenMediaFound": "ไม่พบสื่อที่ซ่อน",
-  "@noHiddenMediaFound": {},
-  "noOnHold": "ดูเหมือนว่าคุณยังไม่ได้พักรายการใด ๆ",
-  "@noOnHold": {},
-  "recentUpdates": "การอัปเดตล่าสุด",
-  "@recentUpdates": {},
-  "recommendationsEmptyMessage": "ดู/อ่านอนิเมะหรือมังงะเพื่อรับคำแนะนำ",
-  "@recommendationsEmptyMessage": {},
-  "kitsu": "Kitsu",
-  "@kitsu": {},
-  "simkl": "Simkl",
-  "@simkl": {},
-  "logFile": "ไฟล์",
-  "@logFile": {},
-  "logFileDescription": "แชร์ไฟล์",
-  "@logFileDescription": {},
-  "colorPickerCustom": "ที่กําหนดเอง",
-  "@colorPickerCustom": {},
-  "colorPickerDefault": "ค่าเริ่มต้น",
-  "@colorPickerDefault": {},
-  "addAnimeRepo": "เพิ่มอะนิเมะ",
-  "@addAnimeRepo": {},
-  "loadExtensionsIconDesc": "ข้อเสียถ้าส่วนขยายหน้า",
-  "@loadExtensionsIconDesc": {},
-  "autoUpdateDesc": "ปรับปรุงส่วนขยายอัตโนมัติ",
-  "@autoUpdateDesc": {},
-  "addMangaRepo": "เพิ่มวิดีโอ",
-  "@addMangaRepo": {},
-  "addNovelRepoDesc": "เพิ่มปริมาณรูปแบบต่างๆ",
-  "@addNovelRepoDesc": {},
-  "addMangaRepoDesc": "เพิ่ม Repo จากแหล่งต่างๆ",
-  "@addMangaRepoDesc": {},
-  "addNovelRepo": "เพิ่มปริมาณ",
-  "@addNovelRepo": {},
-  "addAnimeRepoDesc": "เพิ่มอะนิเมะจากแหล่งต่างๆ",
-  "@addAnimeRepoDesc": {},
-  "autoUpdate": "ปรับปรุงอัตโนมัติ",
-  "@autoUpdate": {},
-  "loadExtensionsIcon": "โหลดไอคอน",
-  "@loadExtensionsIcon": {},
-  "selectMediaService": "เลือกบริการ",
-  "@selectMediaService": {},
-  "selectDirectory": "เลือกไดเรกทอรี",
-  "@selectDirectory": {},
-  "customPath": "เส้นทางที่กําหนดเอง",
-  "@customPath": {},
-  "customPathDescription": "ตั้งค่าเส้นทางที่กําหนดเองเพื่อบันทึกไฟล์\nกดยาวเพื่อลบ",
-  "@customPathDescription": {},
-  "noChapterFound": "ไม่มีบทเรียน",
-  "@noChapterFound": {},
-  "watching": "ดู",
-  "@watching": {},
-  "outOf": "ออกจาก",
-  "@outOf": {},
-  "selected": "เลือก",
-  "@selected": {},
-  "readStatus": "อ่าน",
-  "@readStatus": {},
-  "youTube": "เล่นบน YouTube?",
-  "@youTube": {},
-  "mediaNotFound": "ไม่พบสื่อ",
-  "@mediaNotFound": {},
-  "found": "พบ",
-  "@found": {},
-  "watchStatus": "ดู",
-  "@watchStatus": {},
-  "totalOf": "ทั้งหมด",
-  "@totalOf": {},
-  "wrongTitle": "ชื่อ?",
-  "@wrongTitle": {},
-  "installSourceToStart": "ติดตั้งรูปแบบจากนามสกุล",
-  "@installSourceToStart": {},
-  "webView": "ค้นหาเว็บ",
-  "@webView": {},
-  "reading": "การอ่าน",
-  "@reading": {},
-  "spacedPages": "หน้า",
-  "@spacedPages": {},
-  "readerSettings": "การตั้งค่า",
-  "@readerSettings": {},
-  "hidePageNumberDesc": "หน้าซ่อน",
-  "@hidePageNumberDesc": {},
-  "thumbLessSeekBar": "เท้า",
-  "@thumbLessSeekBar": {},
-  "developersHelpersDesc": "Dartotsu's ไม่จ่ายแรงงาน",
-  "@developersHelpersDesc": {},
-  "developersHelpers": "นักพัฒนา / การจัดการ",
-  "@developersHelpers": {},
-  "readerSettingsDesc": "เปลี่ยนการตั้งค่า",
-  "@readerSettingsDesc": {},
-  "hideScrollbarDesc": "เลื่อนหมุนในขณะที่อ่าน",
-  "@hideScrollbarDesc": {},
-  "direction": "เส้นทาง",
-  "@direction": {},
-  "thumbLessSeekBarDesc": "ลบนิ้วออกจากบาร์",
-  "@thumbLessSeekBarDesc": {},
-  "hidePageNumber": "หน้า",
-  "@hidePageNumber": {},
-  "differentCacheManagerDesc": "ใช้โปรแกรมภาพที่แตกต่างกัน",
-  "@differentCacheManagerDesc": {},
-  "differentCacheManager": "การจัดการ Cache",
-  "@differentCacheManager": {},
-  "spacedPagesDesc": "เพิ่มพื้นที่ระหว่างหน้า",
-  "@spacedPagesDesc": {},
-  "hideScrollbar": "เลื่อน",
-  "@hideScrollbar": {},
-  "playerSettingsDesc": "เปลี่ยนการตั้งค่า",
-  "@playerSettingsDesc": {}
+    "cursedSpeedDescription": "สำหรับผู้ที่มีเวลาน้อย",
+    "@cursedSpeedDescription": {},
+    "extension": "{count, plural, =1 {ส่วนขยาย} other {ส่วนขยาย}}",
+    "@extension": {},
+    "enableDarkMode": "เปิดโหมดมืด",
+    "@enableDarkMode": {},
+    "aboutDescription": "เรียนรู้เพิ่มเติมเกี่ยวกับแอปและผู้สร้าง",
+    "@aboutDescription": {},
+    "anilist": "AniList",
+    "@anilist": {},
+    "themeDescription": "ปรับแต่งลักษณะและบรรยากาศของแอปของคุณ",
+    "@themeDescription": {},
+    "about": "เกี่ยวกับ",
+    "@about": {},
+    "account": "บัญชี",
+    "@account": {},
+    "accountDescription": "จัดการบัญชี AniList, MAL และ Discord ของคุณได้อย่างง่ายดาย",
+    "@accountDescription": {},
+    "anime": "อนิเมะ",
+    "@anime": {},
+    "animeDescription": "ปรับแต่งและจัดการความชอบของคุณเกี่ยวกับอนิเมะ",
+    "@animeDescription": {},
+    "appName": "Dartotsu",
+    "@appName": {},
+    "appTagline": "แอปที่ดีที่สุดใหม่ล่าสุดสำหรับ\nการติดตามอนิเมะและมังงะ",
+    "@appTagline": {},
+    "backgroundColor": "สีพื้นหลัง",
+    "@backgroundColor": {},
+    "backgroundColorDescription": "สีพื้นหลังของคำบรรยาย",
+    "@backgroundColorDescription": {},
+    "bottomPadding": "ระยะห่างด้านล่าง",
+    "@bottomPadding": {},
+    "bottomPaddingDescription": "ระยะห่างด้านล่างของคำบรรยาย",
+    "@bottomPaddingDescription": {},
+    "cancel": "ยกเลิก",
+    "@cancel": {},
+    "colorPicker": "ตัวเลือกสี",
+    "@colorPicker": {},
+    "colorPickerDescription": "เลือกสี",
+    "@colorPickerDescription": {},
+    "common": "ทั่วไป",
+    "@common": {},
+    "commonDescription": "เข้าถึงการตั้งค่าทั่วไปเพื่อการใช้งานแอปที่ราบรื่น",
+    "@commonDescription": {},
+    "cursedSpeed": "ความเร็วสูงสุด",
+    "@cursedSpeed": {},
+    "customTheme": "ที่กําหนดเอง ธีม",
+    "@customTheme": {},
+    "customThemeDescription": "ใช้สีของคุณเองสำหรับธีม",
+    "@customThemeDescription": {},
+    "darkMode": "โหมดมืด",
+    "@darkMode": {},
+    "discord": "Discord",
+    "@discord": {},
+    "donationGoal": "ไม่มีเป้าหมายการบริจาคในขณะนี้",
+    "@donationGoal": {},
+    "extensionsDescription": "ติดตั้งและจัดการส่วนเสริมเพื่อเพิ่มฟังก์ชันการทำงาน",
+    "@extensionsDescription": {},
+    "fontColor": "สีฟอนต์",
+    "@fontColor": {},
+    "fontColorDescription": "สีฟอนต์ของคำบรรยาย",
+    "@fontColorDescription": {},
+    "fontFamily": "แบบอักษร",
+    "@fontFamily": {},
+    "fontFamilyDescription": "แบบอักษรของคำบรรยาย",
+    "@fontFamilyDescription": {},
+    "fontSize": "ขนาดฟอนต์",
+    "@fontSize": {},
+    "fontSizeDescription": "ขนาดฟอนต์ของคำบรรยาย",
+    "@fontSizeDescription": {},
+    "fontWeight": "น้ำหนักฟอนต์",
+    "@fontWeight": {},
+    "fontWeightDescription": "น้ำหนักฟอนต์ของคำบรรยาย",
+    "@fontWeightDescription": {},
+    "hidePrivate": "ซ่อนส่วนตัว",
+    "@hidePrivate": {},
+    "hidePrivateDescription": "ซ่อนซีรีส์ส่วนตัวจากหน้าหลัก",
+    "@hidePrivateDescription": {},
+    "incognitoMode": "โหมดไม่ระบุตัวตน",
+    "@incognitoMode": {},
+    "incognitoModeDescription": "เรียกดูโดยไม่บันทึกกิจกรรมของคุณ",
+    "@incognitoModeDescription": {},
+    "login": "เข้าสู่ระบบ",
+    "@login": {},
+    "logout": "ออกจากระบบ {type}",
+    "@logout": {},
+    "mal": "MyAnimeList",
+    "@mal": {},
+    "manga": "มังงะ",
+    "@manga": {},
+    "mangaDescription": "จัดระเบียบและปรับแต่งประสบการณ์การอ่านมังงะของคุณ",
+    "@mangaDescription": {},
+    "materialYou": "Material You",
+    "@materialYou": {},
+    "materialYouDescription": "ใช้สีเดียวกับวอลเปเปอร์ของคุณ",
+    "@materialYouDescription": {},
+    "no": "ไม่",
+    "@no": {},
+    "notifications": "การแจ้งเตือน",
+    "@notifications": {},
+    "notificationsDescription": "ตั้งค่าการแจ้งเตือนของคุณ",
+    "@notificationsDescription": {},
+    "offlineMode": "โหมดออฟไลน์",
+    "@offlineMode": {},
+    "offlineModeDescription": "ใช้งานแอปโดยไม่ต้องเชื่อมต่ออินเทอร์เน็ต",
+    "@offlineModeDescription": {},
+    "ok": "ตกลง",
+    "@ok": {},
+    "oledThemeVariant": "ธีม OLED",
+    "@oledThemeVariant": {},
+    "oledThemeVariantDescription": "เปิดใช้งานโหมด OLED",
+    "@oledThemeVariantDescription": {},
+    "outlineColor": "สีขอบ",
+    "@outlineColor": {},
+    "outlineColorDescription": "สีขอบของคำบรรยาย",
+    "@outlineColorDescription": {},
+    "playerSettingsTitle": "การตั้งค่าผู้เล่น",
+    "@playerSettingsTitle": {},
+    "resizeMode": "โหมดปรับขนาด",
+    "@resizeMode": {},
+    "resizeModeDescription": "โหมดปรับขนาดเริ่มต้นสำหรับผู้เล่น",
+    "@resizeModeDescription": {},
+    "restoreSettings": "คืนค่าการตั้งค่า",
+    "@restoreSettings": {},
+    "settings": "การตั้งค่า",
+    "@settings": {},
+    "showSubtitles": "แสดงคำบรรยาย",
+    "@showSubtitles": {},
+    "showSubtitlesDescription": "แสดงคำบรรยายโดยค่าเริ่มต้น",
+    "@showSubtitlesDescription": {},
+    "skipButton": "ปุ่มข้าม",
+    "@skipButton": {},
+    "skipButtonDescription": "ระยะเวลาปุ่มข้าม",
+    "@skipButtonDescription": {},
+    "speed": "ความเร็ว",
+    "@speed": {},
+    "speedDescription": "ความเร็วเริ่มต้นสำหรับผู้เล่น",
+    "@speedDescription": {},
+    "subtitles": "คำบรรยาย",
+    "@subtitles": {},
+    "subtitlePreview": "ตัวอย่างคำบรรยาย",
+    "@subtitlePreview": {},
+    "supportMaintainer": "ต้องการสนับสนุนผู้ดูแล Dartotsu?\nลองพิจารณาบริจาค",
+    "@supportMaintainer": {},
+    "theme": "ธีม",
+    "@theme": {},
+    "yes": "ใช่",
+    "@yes": {},
+    "loginTo": "เข้าสู่ระบบ {service}",
+    "@loginTo": {
+        "placeholders": {
+            "service": {
+                "type": "String",
+                "examples": [
+                    "Anilist",
+                    "MyAnimeList",
+                    "Kitsu",
+                    "Discord"
+                ]
+            }
+        }
+    },
+    "manhwa": "มันวา",
+    "@manhwa": {},
+    "manhua": "มานฮัว",
+    "@manhua": {},
+    "home": "หน้าหลัก",
+    "@home": {},
+    "ln": "ไลท์โนเวล",
+    "@ln": {},
+    "series": "ซีรีส์",
+    "@series": {},
+    "season": "ซีซั่น",
+    "@season": {},
+    "episode": "{count, plural, =1 {ตอน} other {ตอน}}",
+    "@episode": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "chapter": "{count, plural, =1 {บท} other {บท}}",
+    "@chapter": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "volume": "{count, plural, =1 {เล่ม} other {เล่ม}}",
+    "@volume": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "movie": "{count, plural, =1 {ภาพยนตร์} other {ภาพยนตร์}}",
+    "@movie": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "genres": "ประเภท",
+    "@genres": {},
+    "calendar": "ปฏิทิน",
+    "@calendar": {},
+    "scanlators": "สแกนเลเตอร์",
+    "@scanlators": {},
+    "gridView": "มุมมองตาราง",
+    "@gridView": {},
+    "listView": "มุมมองแบบรายการ",
+    "@listView": {},
+    "compactView": "มุมมองคอมแพ็ค",
+    "@compactView": {},
+    "sort": "เรียงลำดับ",
+    "@sort": {},
+    "episodeWatched": "ตอนที่ดูแล้ว",
+    "@episodeWatched": {},
+    "chapterRead": "บทที่อ่านแล้ว",
+    "@chapterRead": {},
+    "available": "มีอยู่ {type}",
+    "@available": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "installed": "ติดตั้ง {type}",
+    "@installed": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Extensions"
+                ]
+            }
+        }
+    },
+    "trending": "เทรนด์ {type}",
+    "@trending": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "mostFavourite": "ที่ชื่นชอบมากที่สุด {type}",
+    "@mostFavourite": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa"
+                ]
+            }
+        }
+    },
+    "popular": "ยอดนิยม {type}",
+    "@popular": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa"
+                ]
+            }
+        }
+    },
+    "topRated": "อันดับสูงสุด {type}",
+    "@topRated": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa",
+                    "Series"
+                ]
+            }
+        }
+    },
+    "thisSeason": "ซีซั่นนี้",
+    "@thisSeason": {},
+    "nextSeason": "ซีซั่นหน้า",
+    "@nextSeason": {},
+    "previousSeason": "ซีซั่นก่อนหน้า",
+    "@previousSeason": {},
+    "planned": "วางแผน {type}",
+    "@planned": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "browse": "เรียกดู {type}",
+    "@browse": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "favorite": "โปรด {type}",
+    "@favorite": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "onHold": "พักไว้ {type}",
+    "@onHold": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "noDropped": "คุณยังไม่ได้หยุดดู {type} ใด ๆ",
+    "@noDropped": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "favorites": "รายการโปรด",
+    "@favorites": {},
+    "format": "รูปแบบ",
+    "@format": {},
+    "meanScore": "คะแนนเฉลี่ย",
+    "@meanScore": {},
+    "totalEpisodes": "ตอนทั้งหมด",
+    "@totalEpisodes": {},
+    "totalChapters": "บททั้งหมด",
+    "@totalChapters": {},
+    "relations": "ความสัมพันธ์",
+    "@relations": {},
+    "sequel": "ภาคต่อ",
+    "@sequel": {},
+    "source": "แหล่งที่มา",
+    "@source": {},
+    "staff": "ทีมงาน",
+    "@staff": {},
+    "startDate": "วันเริ่มต้น",
+    "@startDate": {},
+    "status": "สถานะ",
+    "@status": {},
+    "studio": "สตูดิโอ",
+    "@studio": {},
+    "synonyms": "คำพ้องความหมาย",
+    "@synonyms": {},
+    "author": "ผู้เขียน",
+    "@author": {},
+    "averageDuration": "ระยะเวลาเฉลี่ย",
+    "@averageDuration": {},
+    "characters": "ตัวละคร",
+    "@characters": {},
+    "collapseText": "แสดงน้อยลง",
+    "@collapseText": {},
+    "comingSoon": "มาเร็ว ๆ นี้",
+    "@comingSoon": {},
+    "endDate": "วันสิ้นสุด",
+    "@endDate": {},
+    "expandText": "แสดงเพิ่มเติม",
+    "@expandText": {},
+    "name": "ชื่อ",
+    "@name": {},
+    "nameRomaji": "ชื่อ (โรมาจิ)",
+    "@nameRomaji": {},
+    "popularity": "ความนิยม",
+    "@popularity": {},
+    "prequel": "ภาคก่อน",
+    "@prequel": {},
+    "recommended": "แนะนำ",
+    "@recommended": {},
+    "synopsis": "สรุป",
+    "@synopsis": {},
+    "tags": "แท็ก",
+    "@tags": {},
+    "total": "ทั้งหมด",
+    "@total": {},
+    "novel": "นวนิยาย",
+    "@novel": {},
+    "confirmLogout": "คุณแน่ใจหรือไม่ว่าต้องการออกจากระบบ?",
+    "@confirmLogout": {},
+    "language": "ภาษา",
+    "@language": {},
+    "activity": "{count, plural, =1 {กิจกรรม} other {กิจกรรม}}",
+    "@activity": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "droppedAnime": "อนิเมะที่หยุดดู",
+    "@droppedAnime": {},
+    "hiddenMedia": "สื่อที่ซ่อน",
+    "@hiddenMedia": {},
+    "continueReading": "อ่านต่อ",
+    "@continueReading": {},
+    "read": "อ่าน",
+    "@read": {},
+    "addToList": "เพิ่มในรายการ",
+    "@addToList": {},
+    "comments": "ความคิดเห็น",
+    "@comments": {},
+    "continueWatching": "ดูต่อ",
+    "@continueWatching": {},
+    "dtu": "ดาวน์โหลด",
+    "@dtu": {},
+    "info": "ข้อมูล",
+    "@info": {},
+    "list": "{type} รายการ",
+    "@list": {
+        "placeholders": {
+            "type": {
+                "examples": "Anime list",
+                "type": "String"
+            }
+        }
+    },
+    "layout": "รูปแบบ",
+    "@layout": {},
+    "noFavourites": "ดูเหมือนว่าคุณยังไม่ชอบอะไร,\nลองกดถูกใจรายการเพื่อเก็บไว้ที่นี่",
+    "@noFavourites": {},
+    "options": "ตัวเลือก",
+    "@options": {},
+    "search": "ค้นหา",
+    "@search": {},
+    "topAiring": "ออกอากาศยอดนิยม",
+    "@topAiring": {},
+    "watch": "ดู",
+    "@watch": {},
+    "utd": "จากบนลงล่าง",
+    "@utd": {},
+    "manageLayout": "จัดการเลย์เอาต์หน้า {page} สำหรับ {service}",
+    "@manageLayout": {
+        "placeholders": {
+            "service": {
+                "type": "String",
+                "examples": [
+                    "Anilist",
+                    "MAL"
+                ]
+            },
+            "page": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Home",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "manageLayoutDescription": "คุณสามารถจัดการเลย์เอาต์หน้า {page} ได้โดยการลากและวางไอเท็ม",
+    "@manageLayoutDescription": {
+        "placeholders": {
+            "page": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Home",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "pickColor": "เลือกสี",
+    "@pickColor": {},
+    "allCaughtUpNew": "ทั้งหมดตามทันแล้ว, มีอะไรใหม่บ้าง?",
+    "@allCaughtUpNew": {},
+    "droppedManga": "มังงะที่หยุดอ่าน",
+    "@droppedManga": {},
+    "noHiddenMediaFound": "ไม่พบสื่อที่ซ่อน",
+    "@noHiddenMediaFound": {},
+    "noOnHold": "ดูเหมือนว่าคุณยังไม่ได้พักรายการใด ๆ",
+    "@noOnHold": {},
+    "recentUpdates": "การอัปเดตล่าสุด",
+    "@recentUpdates": {},
+    "recommendationsEmptyMessage": "ดู/อ่านอนิเมะหรือมังงะเพื่อรับคำแนะนำ",
+    "@recommendationsEmptyMessage": {},
+    "kitsu": "Kitsu",
+    "@kitsu": {},
+    "simkl": "Simkl",
+    "@simkl": {},
+    "logFile": "ไฟล์",
+    "@logFile": {},
+    "logFileDescription": "แชร์ไฟล์",
+    "@logFileDescription": {},
+    "colorPickerCustom": "ที่กําหนดเอง",
+    "@colorPickerCustom": {},
+    "colorPickerDefault": "ค่าเริ่มต้น",
+    "@colorPickerDefault": {},
+    "addAnimeRepo": "เพิ่มอะนิเมะ",
+    "@addAnimeRepo": {},
+    "loadExtensionsIconDesc": "ข้อเสียถ้าส่วนขยายหน้า",
+    "@loadExtensionsIconDesc": {},
+    "autoUpdateDesc": "ปรับปรุงส่วนขยายอัตโนมัติ",
+    "@autoUpdateDesc": {},
+    "addMangaRepo": "เพิ่มวิดีโอ",
+    "@addMangaRepo": {},
+    "addNovelRepoDesc": "เพิ่มปริมาณรูปแบบต่างๆ",
+    "@addNovelRepoDesc": {},
+    "addMangaRepoDesc": "เพิ่ม Repo จากแหล่งต่างๆ",
+    "@addMangaRepoDesc": {},
+    "addNovelRepo": "เพิ่มปริมาณ",
+    "@addNovelRepo": {},
+    "addAnimeRepoDesc": "เพิ่มอะนิเมะจากแหล่งต่างๆ",
+    "@addAnimeRepoDesc": {},
+    "autoUpdate": "ปรับปรุงอัตโนมัติ",
+    "@autoUpdate": {},
+    "loadExtensionsIcon": "โหลดไอคอน",
+    "@loadExtensionsIcon": {},
+    "selectMediaService": "เลือกบริการ",
+    "@selectMediaService": {},
+    "selectDirectory": "เลือกไดเรกทอรี",
+    "@selectDirectory": {},
+    "customPath": "เส้นทางที่กําหนดเอง",
+    "@customPath": {},
+    "customPathDescription": "ตั้งค่าเส้นทางที่กําหนดเองเพื่อบันทึกไฟล์\nกดยาวเพื่อลบ",
+    "@customPathDescription": {},
+    "noChapterFound": "ไม่มีบทเรียน",
+    "@noChapterFound": {},
+    "watching": "ดู",
+    "@watching": {},
+    "outOf": "ออกจาก",
+    "@outOf": {},
+    "selected": "เลือก",
+    "@selected": {},
+    "readStatus": "อ่าน",
+    "@readStatus": {},
+    "youTube": "เล่นบน YouTube?",
+    "@youTube": {},
+    "mediaNotFound": "ไม่พบสื่อ",
+    "@mediaNotFound": {},
+    "found": "พบ",
+    "@found": {},
+    "watchStatus": "ดู",
+    "@watchStatus": {},
+    "totalOf": "ทั้งหมด",
+    "@totalOf": {},
+    "wrongTitle": "ชื่อ?",
+    "@wrongTitle": {},
+    "installSourceToStart": "ติดตั้งรูปแบบจากนามสกุล",
+    "@installSourceToStart": {},
+    "webView": "ค้นหาเว็บ",
+    "@webView": {},
+    "reading": "การอ่าน",
+    "@reading": {},
+    "spacedPages": "หน้า",
+    "@spacedPages": {},
+    "readerSettings": "การตั้งค่า",
+    "@readerSettings": {},
+    "hidePageNumberDesc": "หน้าซ่อน",
+    "@hidePageNumberDesc": {},
+    "thumbLessSeekBar": "เท้า",
+    "@thumbLessSeekBar": {},
+    "developersHelpersDesc": "Dartotsu's ไม่จ่ายแรงงาน",
+    "@developersHelpersDesc": {},
+    "developersHelpers": "นักพัฒนา / การจัดการ",
+    "@developersHelpers": {},
+    "readerSettingsDesc": "เปลี่ยนการตั้งค่า",
+    "@readerSettingsDesc": {},
+    "hideScrollbarDesc": "เลื่อนหมุนในขณะที่อ่าน",
+    "@hideScrollbarDesc": {},
+    "direction": "เส้นทาง",
+    "@direction": {},
+    "thumbLessSeekBarDesc": "ลบนิ้วออกจากบาร์",
+    "@thumbLessSeekBarDesc": {},
+    "hidePageNumber": "หน้า",
+    "@hidePageNumber": {},
+    "differentCacheManagerDesc": "ใช้โปรแกรมภาพที่แตกต่างกัน",
+    "@differentCacheManagerDesc": {},
+    "differentCacheManager": "การจัดการ Cache",
+    "@differentCacheManager": {},
+    "spacedPagesDesc": "เพิ่มพื้นที่ระหว่างหน้า",
+    "@spacedPagesDesc": {},
+    "hideScrollbar": "เลื่อน",
+    "@hideScrollbar": {},
+    "playerSettingsDesc": "เปลี่ยนการตั้งค่า",
+    "@playerSettingsDesc": {},
+    "glassEffect": "กระจก",
+    "@glassEffect": {},
+    "ltr": "ด้านซ้าย",
+    "@ltr": {},
+    "coverThemeDescription": "ใช้ภาพสื่อในรูปแบบสี",
+    "@coverThemeDescription": {},
+    "rtl": "ด้านซ้าย",
+    "@rtl": {},
+    "glassEffectDescription": "ทําให้กระจกอ่อนขึ้นต่อแอป",
+    "@glassEffectDescription": {},
+    "nextEpisodeRelease": "ตอน {episode} จะเปิดตัวใน",
+    "@nextEpisodeRelease": {
+        "description": "Message showing the next episode info",
+        "placeholders": {
+            "episode": {
+                "type": "int"
+            }
+        }
+    },
+    "topScore": "คะแนน",
+    "@topScore": {},
+    "coverTheme": "ใช้รูปแบบ",
+    "@coverTheme": {},
+    "customMPVDescription": "Enable this option to use your own MPV configuration file. Place your custom config at: {path}",
+    "@customMPVDescription": {
+        "placeholders": {
+            "path": {
+                "type": "String"
+            }
+        }
+    },
+    "customMPV": "Custom MPV Configuration",
+    "@customMPV": {}
 }

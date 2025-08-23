@@ -1,632 +1,663 @@
 {
-  "about": "Om",
-  "@about": {},
-  "aboutDescription": "Lær mere om appen og dens skabere",
-  "@aboutDescription": {},
-  "account": "Konto",
-  "@account": {},
-  "accountDescription": "Administrer dine AniList-, MAL- og Discord-konti nemt",
-  "@accountDescription": {},
-  "anime": "Anime",
-  "@anime": {},
-  "animeDescription": "Tilpas og administrer dine anime-præferencer",
-  "@animeDescription": {},
-  "anilist": "AniList",
-  "@anilist": {},
-  "donationGoal": "Ingen donationsmål lige nu",
-  "@donationGoal": {},
-  "enableDarkMode": "Aktivér mørk tilstand",
-  "@enableDarkMode": {},
-  "extension": "{count, plural, =1 {Udvidelse} other {Udvidelses}}",
-  "@extension": {},
-  "fontColor": "Skriftfarve",
-  "@fontColor": {},
-  "fontColorDescription": "Undertekstens skriftfarve",
-  "@fontColorDescription": {},
-  "fontFamily": "Skrifttype",
-  "@fontFamily": {},
-  "fontFamilyDescription": "Undertekstens skrifttype",
-  "@fontFamilyDescription": {},
-  "fontSize": "Skriftstørrelse",
-  "@fontSize": {},
-  "fontSizeDescription": "Undertekstens skriftstørrelse",
-  "@fontSizeDescription": {},
-  "fontWeight": "Skrifttykkelse",
-  "@fontWeight": {},
-  "fontWeightDescription": "Undertekstens skrifttykkelse",
-  "@fontWeightDescription": {},
-  "hidePrivate": "Skjul privat",
-  "@hidePrivate": {},
-  "hidePrivateDescription": "Skjul private serier fra hjemmesiden.",
-  "@hidePrivateDescription": {},
-  "incognitoMode": "Inkognitotilstand",
-  "@incognitoMode": {},
-  "incognitoModeDescription": "Surf uden at gemme din aktivitet",
-  "@incognitoModeDescription": {},
-  "login": "Log ind",
-  "@login": {},
-  "logout": "Log ud {type}",
-  "@logout": {},
-  "resizeMode": "Tilpasningstilstand",
-  "@resizeMode": {},
-  "resizeModeDescription": "Standardtilpasningstilstand for afspilleren",
-  "@resizeModeDescription": {},
-  "restoreSettings": "Gendan indstillinger",
-  "@restoreSettings": {},
-  "settings": "Indstillinger",
-  "@settings": {},
-  "showSubtitles": "Vis undertekster",
-  "@showSubtitles": {},
-  "showSubtitlesDescription": "Vis undertekster som standard",
-  "@showSubtitlesDescription": {},
-  "skipButton": "Spring-knap",
-  "@skipButton": {},
-  "skipButtonDescription": "Spring-knappens varighed",
-  "@skipButtonDescription": {},
-  "speedDescription": "Standardhastighed for afspilleren",
-  "@speedDescription": {},
-  "subtitles": "Undertekster",
-  "@subtitles": {},
-  "subtitlePreview": "Forhåndsvisning af undertekster",
-  "@subtitlePreview": {},
-  "supportMaintainer": "Vil du støtte Dartotsus vedligeholder?\nOvervej at donere",
-  "@supportMaintainer": {},
-  "theme": "Tema",
-  "@theme": {},
-  "themeDescription": "Tilpas appens udseende og stemning",
-  "@themeDescription": {},
-  "yes": "Ja",
-  "@yes": {},
-  "appName": "Dartotsu",
-  "@appName": {},
-  "appTagline": "Den NYE bedste app til\nat spore anime og manga",
-  "@appTagline": {},
-  "backgroundColor": "Baggrundsfarve",
-  "@backgroundColor": {},
-  "backgroundColorDescription": "Undertekstens baggrundsfarve",
-  "@backgroundColorDescription": {},
-  "bottomPadding": "Bundmargin",
-  "@bottomPadding": {},
-  "bottomPaddingDescription": "Undertekstens bundmargin",
-  "@bottomPaddingDescription": {},
-  "cancel": "Annuller",
-  "@cancel": {},
-  "colorPicker": "Farvevælger",
-  "@colorPicker": {},
-  "colorPickerDescription": "Vælg en farve",
-  "@colorPickerDescription": {},
-  "common": "Almindelig",
-  "@common": {},
-  "commonDescription": "Få adgang til generelle indstillinger for nem appbrug",
-  "@commonDescription": {},
-  "cursedSpeed": "Forbandet Hastighed",
-  "@cursedSpeed": {},
-  "cursedSpeedDescription": "For folk, der har travlt med livet",
-  "@cursedSpeedDescription": {},
-  "customTheme": "Tilpasset tema",
-  "@customTheme": {},
-  "customThemeDescription": "Brug din egen farve til temaet",
-  "@customThemeDescription": {},
-  "darkMode": "Mørk tilstand",
-  "@darkMode": {},
-  "discord": "Discord",
-  "@discord": {},
-  "extensionsDescription": "Installer og administrer udvidelser for ekstra funktionalitet",
-  "@extensionsDescription": {},
-  "mal": "MyAnimeList",
-  "@mal": {},
-  "manga": "Manga",
-  "@manga": {},
-  "mangaDescription": "Organiser og tilpas din manga-oplevelse",
-  "@mangaDescription": {},
-  "materialYou": "Material You",
-  "@materialYou": {},
-  "materialYouDescription": "Brug samme farve som din baggrund",
-  "@materialYouDescription": {},
-  "no": "Nej",
-  "@no": {},
-  "notifications": "Notifikationer",
-  "@notifications": {},
-  "notificationsDescription": "Konfigurer hvordan og hvornår du modtager notifikationer",
-  "@notificationsDescription": {},
-  "offlineMode": "Offline-tilstand",
-  "@offlineMode": {},
-  "offlineModeDescription": "Brug appen uden internetforbindelse",
-  "@offlineModeDescription": {},
-  "ok": "OK",
-  "@ok": {},
-  "oledThemeVariant": "OLED-temavariant",
-  "@oledThemeVariant": {},
-  "oledThemeVariantDescription": "Aktivér OLED-tilstand",
-  "@oledThemeVariantDescription": {},
-  "outlineColor": "Kantfarve",
-  "@outlineColor": {},
-  "outlineColorDescription": "Undertekstens kantfarve",
-  "@outlineColorDescription": {},
-  "playerSettingsTitle": "Afspillerindstillinger",
-  "@playerSettingsTitle": {},
-  "speed": "Hastighed",
-  "@speed": {},
-  "manhwa": "Manhwa",
-  "@manhwa": {},
-  "manhua": "Manhua",
-  "@manhua": {},
-  "home": "Hjem",
-  "@home": {},
-  "novel": "Roman",
-  "@novel": {},
-  "ln": "Lettere roman",
-  "@ln": {},
-  "watch": "Se",
-  "@watch": {},
-  "addToList": "Tilføj til liste",
-  "@addToList": {},
-  "episode": "{count, plural, =1 {Episode} other {Episoder}}",
-  "@episode": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "chapter": "{count, plural, =1 {Kapitel} other {Kapitels}}",
-  "@chapter": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "volume": "{count, plural, =1 {Bind} other {Binds}}",
-  "@volume": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "movie": "{count, plural, =1 {Film} other {Films}}",
-  "@movie": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "calendar": "Kalender",
-  "@calendar": {},
-  "dtu": "Datoudgivelse",
-  "@dtu": {},
-  "list": "{type} Liste",
-  "@list": {
-    "placeholders": {
-      "type": {
-        "examples": "Anime list",
-        "type": "String"
-      }
-    }
-  },
-  "confirmLogout": "Bekræft log ud?",
-  "@confirmLogout": {},
-  "layout": "Layout",
-  "@layout": {},
-  "episodeWatched": "Episode set",
-  "@episodeWatched": {},
-  "chapterRead": "Kapitel læst",
-  "@chapterRead": {},
-  "topRated": "Top vurderet {type}",
-  "@topRated": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa",
-          "Series"
-        ]
-      }
-    }
-  },
-  "browse": "Gennemse {type}",
-  "@browse": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "favorite": "Favorit {type}",
-  "@favorite": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "onHold": "På hold {type}",
-  "@onHold": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "noDropped": "Du har ikke droppet nogen {type} endnu.",
-  "@noDropped": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "recommendationsEmptyMessage": "Ingen anbefalinger tilgængelige",
-  "@recommendationsEmptyMessage": {},
-  "author": "Forfatter",
-  "@author": {},
-  "averageDuration": "Gennemsnitlig varighed",
-  "@averageDuration": {},
-  "collapseText": "Skjul tekst",
-  "@collapseText": {},
-  "comingSoon": "Kommer snart",
-  "@comingSoon": {},
-  "description": "Synopsis",
-  "@description": {},
-  "endDate": "Slutdato",
-  "@endDate": {},
-  "expandText": "Udvid tekst",
-  "@expandText": {},
-  "favorites": "Favoritter",
-  "@favorites": {},
-  "format": "Format",
-  "@format": {},
-  "meanScore": "Gennemsnitlig score",
-  "@meanScore": {},
-  "name": "Navn",
-  "@name": {},
-  "nameRomaji": "Romaji navn",
-  "@nameRomaji": {},
-  "popularity": "Popularitet",
-  "@popularity": {},
-  "prequel": "Prequel",
-  "@prequel": {},
-  "recommended": "Anbefalet",
-  "@recommended": {},
-  "totalEpisodes": "Totale episoder",
-  "@totalEpisodes": {},
-  "totalChapters": "Totale kapitler",
-  "@totalChapters": {},
-  "relations": "Relationer",
-  "@relations": {},
-  "sequel": "Sequel",
-  "@sequel": {},
-  "source": "Kilde",
-  "@source": {},
-  "staff": "Personalet",
-  "@staff": {},
-  "startDate": "Startdato",
-  "@startDate": {},
-  "status": "Status",
-  "@status": {},
-  "studio": "Studio",
-  "@studio": {},
-  "synonyms": "Synonymer",
-  "@synonyms": {},
-  "characters": "Karakterer",
-  "@characters": {},
-  "synopsis": "Synopsis",
-  "@synopsis": {},
-  "tags": "Tags",
-  "@tags": {},
-  "total": "Total",
-  "@total": {},
-  "loginTo": "Log ind på {service}",
-  "@loginTo": {
-    "placeholders": {
-      "service": {
-        "type": "String",
-        "examples": [
-          "Anilist",
-          "MyAnimeList",
-          "Kitsu",
-          "Discord"
-        ]
-      }
-    }
-  },
-  "series": "Serie",
-  "@series": {},
-  "season": "Sæson",
-  "@season": {},
-  "genres": "Genrer",
-  "@genres": {},
-  "search": "Søg",
-  "@search": {},
-  "scanlators": "Scanlatorer",
-  "@scanlators": {},
-  "utd": "Udgivet",
-  "@utd": {},
-  "gridView": "Gittervisning",
-  "@gridView": {},
-  "listView": "Listevisning",
-  "@listView": {},
-  "compactView": "Kompakt visning",
-  "@compactView": {},
-  "available": "Tilgængelig {type}",
-  "@available": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "installed": "Installeret {type}",
-  "@installed": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Extensions"
-        ]
-      }
-    }
-  },
-  "trending": "Trendy {type}",
-  "@trending": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "mostFavourite": "Mest favoritter {type}",
-  "@mostFavourite": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa"
-        ]
-      }
-    }
-  },
-  "popular": "Populær {type}",
-  "@popular": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa"
-        ]
-      }
-    }
-  },
-  "thisSeason": "Denne sæson",
-  "@thisSeason": {},
-  "nextSeason": "Næste sæson",
-  "@nextSeason": {},
-  "previousSeason": "Forrige sæson",
-  "@previousSeason": {},
-  "language": "Sprog",
-  "@language": {},
-  "activity": "{count, plural, =1 {Aktivitet} other {Aktivitets}}",
-  "@activity": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "planned": "Planlagt {type}",
-  "@planned": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "continueWatching": "Fortsæt se",
-  "@continueWatching": {},
-  "info": "Info",
-  "@info": {},
-  "hiddenMedia": "Skjulte medier",
-  "@hiddenMedia": {},
-  "options": "Valgmuligheder",
-  "@options": {},
-  "recentUpdates": "Seneste opdateringer",
-  "@recentUpdates": {},
-  "topAiring": "Top luftning",
-  "@topAiring": {},
-  "sort": "Sorter",
-  "@sort": {},
-  "comments": "Kommentarer",
-  "@comments": {},
-  "continueReading": "Fortsæt læsning",
-  "@continueReading": {},
-  "read": "Læs",
-  "@read": {},
-  "manageLayout": "Administrer sidelayout på {page} for {service}",
-  "@manageLayout": {
-    "placeholders": {
-      "service": {
-        "type": "String",
-        "examples": [
-          "Anilist",
-          "MAL"
-        ]
-      },
-      "page": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Home",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "manageLayoutDescription": "Du kan administrere layoutet for siden {page} ved at trække og slippe elementerne",
-  "@manageLayoutDescription": {
-    "placeholders": {
-      "page": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Home",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "pickColor": "Vælg farve",
-  "@pickColor": {},
-  "allCaughtUpNew": "Alt fanget, hvad er nyt?",
-  "@allCaughtUpNew": {},
-  "droppedAnime": "Droppede anime",
-  "@droppedAnime": {},
-  "droppedManga": "Droppede manga",
-  "@droppedManga": {},
-  "noFavourites": "Det ser ud til, at du ikke kan lide noget,\nPrøv at like et show for at beholde det her.",
-  "@noFavourites": {},
-  "noHiddenMediaFound": "Ingen skjulte medier fundet",
-  "@noHiddenMediaFound": {},
-  "noOnHold": "Det ser ud til, at du ikke har sat noget i bero.",
-  "@noOnHold": {},
-  "kitsu": "Kitsu",
-  "@kitsu": {},
-  "simkl": "Simkl",
-  "@simkl": {},
-  "colorPickerCustom": "Tilpasset tilpasset",
-  "@colorPickerCustom": {},
-  "logFile": "Log på fil",
-  "@logFile": {},
-  "logFileDescription": "Del logfilen",
-  "@logFileDescription": {},
-  "colorPickerDefault": "Standard",
-  "@colorPickerDefault": {},
-  "addAnimeRepo": "Tilføj anime Repo",
-  "@addAnimeRepo": {},
-  "loadExtensionsIconDesc": "Kan ikke findes, hvis sidelag",
-  "@loadExtensionsIconDesc": {},
-  "autoUpdateDesc": "Automatisk opdateringsudvidelser",
-  "@autoUpdateDesc": {},
-  "addNovelRepoDesc": "Tilføj Novel Repo fra forskellige kilder",
-  "@addNovelRepoDesc": {},
-  "addMangaRepoDesc": "Tilføj Manga Repo fra forskellige kilder",
-  "@addMangaRepoDesc": {},
-  "addAnimeRepoDesc": "Tilføj anime Repo fra forskellige kilder",
-  "@addAnimeRepoDesc": {},
-  "addMangaRepo": "Tilføj Manga Repo",
-  "@addMangaRepo": {},
-  "addNovelRepo": "Tilføj Novel Repo",
-  "@addNovelRepo": {},
-  "autoUpdate": "Automatisk opdatering",
-  "@autoUpdate": {},
-  "loadExtensionsIcon": "Indlæs udvidelser ikon",
-  "@loadExtensionsIcon": {},
-  "customPath": "Tilpasset vej",
-  "@customPath": {},
-  "selectMediaService": "Vælg medietjeneste",
-  "@selectMediaService": {},
-  "selectDirectory": "Vælg en mappe",
-  "@selectDirectory": {},
-  "customPathDescription": "Indstil en brugerdefineret sti til at gemme filer\nLang tryk for at fjerne",
-  "@customPathDescription": {},
-  "noChapterFound": "Ingen kapitel fundet",
-  "@noChapterFound": {},
-  "watching": "Ser på",
-  "@watching": {},
-  "outOf": "ud af",
-  "@outOf": {},
-  "selected": "Udvalgt valg",
-  "@selected": {},
-  "readStatus": "Læs",
-  "@readStatus": {},
-  "youTube": "Afspil på YouTube?",
-  "@youTube": {},
-  "mediaNotFound": "Ikke fundet",
-  "@mediaNotFound": {},
-  "found": "Fundet fundet",
-  "@found": {},
-  "watchStatus": "Så",
-  "@watchStatus": {},
-  "totalOf": "Samlet set",
-  "@totalOf": {},
-  "wrongTitle": "Forkert titel?",
-  "@wrongTitle": {},
-  "installSourceToStart": "Installer en kilde fra udvidelsessiden for at starte",
-  "@installSourceToStart": {},
-  "webView": "Webvisning",
-  "@webView": {},
-  "reading": "Læselæsning",
-  "@reading": {},
-  "direction": "Retsretning",
-  "@direction": {},
-  "hidePageNumberDesc": "Skjul sidenummer, mens du læser",
-  "@hidePageNumberDesc": {},
-  "thumbLessSeekBar": "Hoteller i nærheden af ThumbLess SeekBar",
-  "@thumbLessSeekBar": {},
-  "developersHelpersDesc": "Dartotsus ulønnede arbejdere",
-  "@developersHelpersDesc": {},
-  "developersHelpers": "Udviklere/Hjælpere",
-  "@developersHelpers": {},
-  "differentCacheManagerDesc": "Brug forskellige billed cache managere",
-  "@differentCacheManagerDesc": {},
-  "differentCacheManager": "Forskellig cache Manager",
-  "@differentCacheManager": {},
-  "thumbLessSeekBarDesc": "Fjern tommelfingeren fra søgelinjen",
-  "@thumbLessSeekBarDesc": {},
-  "hidePageNumber": "Skjul sidenummer",
-  "@hidePageNumber": {},
-  "spacedPagesDesc": "Tilføj plads mellem sider",
-  "@spacedPagesDesc": {},
-  "spacedPages": "Sider i kategorien Sider",
-  "@spacedPages": {},
-  "readerSettingsDesc": "Ændring af læserindstillinger",
-  "@readerSettingsDesc": {},
-  "hideScrollbarDesc": "Skjul scrollbar, mens du læser",
-  "@hideScrollbarDesc": {},
-  "readerSettings": "Indstillinger for læserindstillinger",
-  "@readerSettings": {},
-  "hideScrollbar": "Skjul Scrollbar",
-  "@hideScrollbar": {},
-  "playerSettingsDesc": "Skift afspillerindstillinger",
-  "@playerSettingsDesc": {}
+    "about": "Om",
+    "@about": {},
+    "aboutDescription": "Lær mere om appen og dens skabere",
+    "@aboutDescription": {},
+    "account": "Konto",
+    "@account": {},
+    "accountDescription": "Administrer dine AniList-, MAL- og Discord-konti nemt",
+    "@accountDescription": {},
+    "anime": "Anime",
+    "@anime": {},
+    "animeDescription": "Tilpas og administrer dine anime-præferencer",
+    "@animeDescription": {},
+    "anilist": "AniList",
+    "@anilist": {},
+    "donationGoal": "Ingen donationsmål lige nu",
+    "@donationGoal": {},
+    "enableDarkMode": "Aktivér mørk tilstand",
+    "@enableDarkMode": {},
+    "extension": "{count, plural, =1 {Udvidelse} other {Udvidelses}}",
+    "@extension": {},
+    "fontColor": "Skriftfarve",
+    "@fontColor": {},
+    "fontColorDescription": "Undertekstens skriftfarve",
+    "@fontColorDescription": {},
+    "fontFamily": "Skrifttype",
+    "@fontFamily": {},
+    "fontFamilyDescription": "Undertekstens skrifttype",
+    "@fontFamilyDescription": {},
+    "fontSize": "Skriftstørrelse",
+    "@fontSize": {},
+    "fontSizeDescription": "Undertekstens skriftstørrelse",
+    "@fontSizeDescription": {},
+    "fontWeight": "Skrifttykkelse",
+    "@fontWeight": {},
+    "fontWeightDescription": "Undertekstens skrifttykkelse",
+    "@fontWeightDescription": {},
+    "hidePrivate": "Skjul privat",
+    "@hidePrivate": {},
+    "hidePrivateDescription": "Skjul private serier fra hjemmesiden.",
+    "@hidePrivateDescription": {},
+    "incognitoMode": "Inkognitotilstand",
+    "@incognitoMode": {},
+    "incognitoModeDescription": "Surf uden at gemme din aktivitet",
+    "@incognitoModeDescription": {},
+    "login": "Log ind",
+    "@login": {},
+    "logout": "Log ud {type}",
+    "@logout": {},
+    "resizeMode": "Tilpasningstilstand",
+    "@resizeMode": {},
+    "resizeModeDescription": "Standardtilpasningstilstand for afspilleren",
+    "@resizeModeDescription": {},
+    "restoreSettings": "Gendan indstillinger",
+    "@restoreSettings": {},
+    "settings": "Indstillinger",
+    "@settings": {},
+    "showSubtitles": "Vis undertekster",
+    "@showSubtitles": {},
+    "showSubtitlesDescription": "Vis undertekster som standard",
+    "@showSubtitlesDescription": {},
+    "skipButton": "Spring-knap",
+    "@skipButton": {},
+    "skipButtonDescription": "Spring-knappens varighed",
+    "@skipButtonDescription": {},
+    "speedDescription": "Standardhastighed for afspilleren",
+    "@speedDescription": {},
+    "subtitles": "Undertekster",
+    "@subtitles": {},
+    "subtitlePreview": "Forhåndsvisning af undertekster",
+    "@subtitlePreview": {},
+    "supportMaintainer": "Vil du støtte Dartotsus vedligeholder?\nOvervej at donere",
+    "@supportMaintainer": {},
+    "theme": "Tema",
+    "@theme": {},
+    "themeDescription": "Tilpas appens udseende og stemning",
+    "@themeDescription": {},
+    "yes": "Ja",
+    "@yes": {},
+    "appName": "Dartotsu",
+    "@appName": {},
+    "appTagline": "Den NYE bedste app til\nat spore anime og manga",
+    "@appTagline": {},
+    "backgroundColor": "Baggrundsfarve",
+    "@backgroundColor": {},
+    "backgroundColorDescription": "Undertekstens baggrundsfarve",
+    "@backgroundColorDescription": {},
+    "bottomPadding": "Bundmargin",
+    "@bottomPadding": {},
+    "bottomPaddingDescription": "Undertekstens bundmargin",
+    "@bottomPaddingDescription": {},
+    "cancel": "Annuller",
+    "@cancel": {},
+    "colorPicker": "Farvevælger",
+    "@colorPicker": {},
+    "colorPickerDescription": "Vælg en farve",
+    "@colorPickerDescription": {},
+    "common": "Almindelig",
+    "@common": {},
+    "commonDescription": "Få adgang til generelle indstillinger for nem appbrug",
+    "@commonDescription": {},
+    "cursedSpeed": "Forbandet Hastighed",
+    "@cursedSpeed": {},
+    "cursedSpeedDescription": "For folk, der har travlt med livet",
+    "@cursedSpeedDescription": {},
+    "customTheme": "Tilpasset tilpasset Tematema",
+    "@customTheme": {},
+    "customThemeDescription": "Brug din egen farve til temaet",
+    "@customThemeDescription": {},
+    "darkMode": "Mørk tilstand",
+    "@darkMode": {},
+    "discord": "Discord",
+    "@discord": {},
+    "extensionsDescription": "Installer og administrer udvidelser for ekstra funktionalitet",
+    "@extensionsDescription": {},
+    "mal": "MyAnimeList",
+    "@mal": {},
+    "manga": "Manga",
+    "@manga": {},
+    "mangaDescription": "Organiser og tilpas din manga-oplevelse",
+    "@mangaDescription": {},
+    "materialYou": "Material You",
+    "@materialYou": {},
+    "materialYouDescription": "Brug samme farve som din baggrund",
+    "@materialYouDescription": {},
+    "no": "Nej",
+    "@no": {},
+    "notifications": "Notifikationer",
+    "@notifications": {},
+    "notificationsDescription": "Konfigurer hvordan og hvornår du modtager notifikationer",
+    "@notificationsDescription": {},
+    "offlineMode": "Offline-tilstand",
+    "@offlineMode": {},
+    "offlineModeDescription": "Brug appen uden internetforbindelse",
+    "@offlineModeDescription": {},
+    "ok": "OK",
+    "@ok": {},
+    "oledThemeVariant": "OLED-temavariant",
+    "@oledThemeVariant": {},
+    "oledThemeVariantDescription": "Aktivér OLED-tilstand",
+    "@oledThemeVariantDescription": {},
+    "outlineColor": "Kantfarve",
+    "@outlineColor": {},
+    "outlineColorDescription": "Undertekstens kantfarve",
+    "@outlineColorDescription": {},
+    "playerSettingsTitle": "Afspillerindstillinger",
+    "@playerSettingsTitle": {},
+    "speed": "Hastighed",
+    "@speed": {},
+    "manhwa": "Manhwa",
+    "@manhwa": {},
+    "manhua": "Manhua",
+    "@manhua": {},
+    "home": "Hjem",
+    "@home": {},
+    "novel": "Roman",
+    "@novel": {},
+    "ln": "Lettere roman",
+    "@ln": {},
+    "watch": "Se",
+    "@watch": {},
+    "addToList": "Tilføj til liste",
+    "@addToList": {},
+    "episode": "{count, plural, =1 {Episode} other {Episoder}}",
+    "@episode": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "chapter": "{count, plural, =1 {Kapitel} other {Kapitels}}",
+    "@chapter": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "volume": "{count, plural, =1 {Bind} other {Binds}}",
+    "@volume": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "movie": "{count, plural, =1 {Film} other {Films}}",
+    "@movie": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "calendar": "Kalender",
+    "@calendar": {},
+    "dtu": "Datoudgivelse",
+    "@dtu": {},
+    "list": "{type} Liste",
+    "@list": {
+        "placeholders": {
+            "type": {
+                "examples": "Anime list",
+                "type": "String"
+            }
+        }
+    },
+    "confirmLogout": "Bekræft log ud?",
+    "@confirmLogout": {},
+    "layout": "Layout",
+    "@layout": {},
+    "episodeWatched": "Episode set",
+    "@episodeWatched": {},
+    "chapterRead": "Kapitel læst",
+    "@chapterRead": {},
+    "topRated": "Top vurderet {type}",
+    "@topRated": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa",
+                    "Series"
+                ]
+            }
+        }
+    },
+    "browse": "Gennemse {type}",
+    "@browse": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "favorite": "Favorit {type}",
+    "@favorite": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "onHold": "På hold {type}",
+    "@onHold": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "noDropped": "Du har ikke droppet nogen {type} endnu.",
+    "@noDropped": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "recommendationsEmptyMessage": "Ingen anbefalinger tilgængelige",
+    "@recommendationsEmptyMessage": {},
+    "author": "Forfatter",
+    "@author": {},
+    "averageDuration": "Gennemsnitlig varighed",
+    "@averageDuration": {},
+    "collapseText": "Skjul tekst",
+    "@collapseText": {},
+    "comingSoon": "Kommer snart",
+    "@comingSoon": {},
+    "endDate": "Slutdato",
+    "@endDate": {},
+    "expandText": "Udvid tekst",
+    "@expandText": {},
+    "favorites": "Favoritter",
+    "@favorites": {},
+    "format": "Format",
+    "@format": {},
+    "meanScore": "Gennemsnitlig score",
+    "@meanScore": {},
+    "name": "Navn",
+    "@name": {},
+    "nameRomaji": "Romaji navn",
+    "@nameRomaji": {},
+    "popularity": "Popularitet",
+    "@popularity": {},
+    "prequel": "Prequel",
+    "@prequel": {},
+    "recommended": "Anbefalet",
+    "@recommended": {},
+    "totalEpisodes": "Totale episoder",
+    "@totalEpisodes": {},
+    "totalChapters": "Totale kapitler",
+    "@totalChapters": {},
+    "relations": "Relationer",
+    "@relations": {},
+    "sequel": "Sequel",
+    "@sequel": {},
+    "source": "Kilde",
+    "@source": {},
+    "staff": "Personalet",
+    "@staff": {},
+    "startDate": "Startdato",
+    "@startDate": {},
+    "status": "Status",
+    "@status": {},
+    "studio": "Studio",
+    "@studio": {},
+    "synonyms": "Synonymer",
+    "@synonyms": {},
+    "characters": "Karakterer",
+    "@characters": {},
+    "synopsis": "Synopsis",
+    "@synopsis": {},
+    "tags": "Tags",
+    "@tags": {},
+    "total": "Total",
+    "@total": {},
+    "loginTo": "Log ind på {service}",
+    "@loginTo": {
+        "placeholders": {
+            "service": {
+                "type": "String",
+                "examples": [
+                    "Anilist",
+                    "MyAnimeList",
+                    "Kitsu",
+                    "Discord"
+                ]
+            }
+        }
+    },
+    "series": "Serie",
+    "@series": {},
+    "season": "Sæson",
+    "@season": {},
+    "genres": "Genrer",
+    "@genres": {},
+    "search": "Søg",
+    "@search": {},
+    "scanlators": "Scanlatorer",
+    "@scanlators": {},
+    "utd": "Udgivet",
+    "@utd": {},
+    "gridView": "Gittervisning",
+    "@gridView": {},
+    "listView": "Listevisning",
+    "@listView": {},
+    "compactView": "Kompakt visning",
+    "@compactView": {},
+    "available": "Tilgængelig {type}",
+    "@available": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "installed": "Installeret {type}",
+    "@installed": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Extensions"
+                ]
+            }
+        }
+    },
+    "trending": "Trendy {type}",
+    "@trending": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "mostFavourite": "Mest favoritter {type}",
+    "@mostFavourite": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa"
+                ]
+            }
+        }
+    },
+    "popular": "Populær {type}",
+    "@popular": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa"
+                ]
+            }
+        }
+    },
+    "thisSeason": "Denne sæson",
+    "@thisSeason": {},
+    "nextSeason": "Næste sæson",
+    "@nextSeason": {},
+    "previousSeason": "Forrige sæson",
+    "@previousSeason": {},
+    "language": "Sprog",
+    "@language": {},
+    "activity": "{count, plural, =1 {Aktivitet} other {Aktivitets}}",
+    "@activity": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "planned": "Planlagt {type}",
+    "@planned": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "continueWatching": "Fortsæt se",
+    "@continueWatching": {},
+    "info": "Info",
+    "@info": {},
+    "hiddenMedia": "Skjulte medier",
+    "@hiddenMedia": {},
+    "options": "Valgmuligheder",
+    "@options": {},
+    "recentUpdates": "Seneste opdateringer",
+    "@recentUpdates": {},
+    "topAiring": "Top luftning",
+    "@topAiring": {},
+    "sort": "Sorter",
+    "@sort": {},
+    "comments": "Kommentarer",
+    "@comments": {},
+    "continueReading": "Fortsæt læsning",
+    "@continueReading": {},
+    "read": "Læs",
+    "@read": {},
+    "manageLayout": "Administrer sidelayout på {page} for {service}",
+    "@manageLayout": {
+        "placeholders": {
+            "service": {
+                "type": "String",
+                "examples": [
+                    "Anilist",
+                    "MAL"
+                ]
+            },
+            "page": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Home",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "manageLayoutDescription": "Du kan administrere layoutet for siden {page} ved at trække og slippe elementerne",
+    "@manageLayoutDescription": {
+        "placeholders": {
+            "page": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Home",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "pickColor": "Vælg farve",
+    "@pickColor": {},
+    "allCaughtUpNew": "Alt fanget, hvad er nyt?",
+    "@allCaughtUpNew": {},
+    "droppedAnime": "Droppede anime",
+    "@droppedAnime": {},
+    "droppedManga": "Droppede manga",
+    "@droppedManga": {},
+    "noFavourites": "Det ser ud til, at du ikke kan lide noget,\nPrøv at like et show for at beholde det her.",
+    "@noFavourites": {},
+    "noHiddenMediaFound": "Ingen skjulte medier fundet",
+    "@noHiddenMediaFound": {},
+    "noOnHold": "Det ser ud til, at du ikke har sat noget i bero.",
+    "@noOnHold": {},
+    "kitsu": "Kitsu",
+    "@kitsu": {},
+    "simkl": "Simkl",
+    "@simkl": {},
+    "colorPickerCustom": "Tilpasset tilpasset",
+    "@colorPickerCustom": {},
+    "logFile": "Log på fil",
+    "@logFile": {},
+    "logFileDescription": "Del logfilen",
+    "@logFileDescription": {},
+    "colorPickerDefault": "Standard",
+    "@colorPickerDefault": {},
+    "addAnimeRepo": "Tilføj anime Repo",
+    "@addAnimeRepo": {},
+    "loadExtensionsIconDesc": "Kan ikke findes, hvis sidelag",
+    "@loadExtensionsIconDesc": {},
+    "autoUpdateDesc": "Automatisk opdateringsudvidelser",
+    "@autoUpdateDesc": {},
+    "addNovelRepoDesc": "Tilføj Novel Repo fra forskellige kilder",
+    "@addNovelRepoDesc": {},
+    "addMangaRepoDesc": "Tilføj Manga Repo fra forskellige kilder",
+    "@addMangaRepoDesc": {},
+    "addAnimeRepoDesc": "Tilføj anime Repo fra forskellige kilder",
+    "@addAnimeRepoDesc": {},
+    "addMangaRepo": "Tilføj Manga Repo",
+    "@addMangaRepo": {},
+    "addNovelRepo": "Tilføj Novel Repo",
+    "@addNovelRepo": {},
+    "autoUpdate": "Automatisk opdatering",
+    "@autoUpdate": {},
+    "loadExtensionsIcon": "Indlæs udvidelser ikon",
+    "@loadExtensionsIcon": {},
+    "customPath": "Tilpasset vej",
+    "@customPath": {},
+    "selectMediaService": "Vælg medietjeneste",
+    "@selectMediaService": {},
+    "selectDirectory": "Vælg en mappe",
+    "@selectDirectory": {},
+    "customPathDescription": "Indstil en brugerdefineret sti til at gemme filer\nLang tryk for at fjerne",
+    "@customPathDescription": {},
+    "noChapterFound": "Ingen kapitel fundet",
+    "@noChapterFound": {},
+    "watching": "Ser på",
+    "@watching": {},
+    "outOf": "ud af",
+    "@outOf": {},
+    "selected": "Udvalgt valg",
+    "@selected": {},
+    "readStatus": "Læs",
+    "@readStatus": {},
+    "youTube": "Afspil på YouTube?",
+    "@youTube": {},
+    "mediaNotFound": "Ikke fundet",
+    "@mediaNotFound": {},
+    "found": "Fundet fundet",
+    "@found": {},
+    "watchStatus": "Så",
+    "@watchStatus": {},
+    "totalOf": "Samlet set",
+    "@totalOf": {},
+    "wrongTitle": "Forkert titel?",
+    "@wrongTitle": {},
+    "installSourceToStart": "Installer en kilde fra udvidelsessiden for at starte",
+    "@installSourceToStart": {},
+    "webView": "Webvisning",
+    "@webView": {},
+    "reading": "Læselæsning",
+    "@reading": {},
+    "direction": "Retsretning",
+    "@direction": {},
+    "hidePageNumberDesc": "Skjul sidenummer, mens du læser",
+    "@hidePageNumberDesc": {},
+    "thumbLessSeekBar": "Hoteller i nærheden af ThumbLess SeekBar",
+    "@thumbLessSeekBar": {},
+    "developersHelpersDesc": "Dartotsus ulønnede arbejdere",
+    "@developersHelpersDesc": {},
+    "developersHelpers": "Udviklere/Hjælpere",
+    "@developersHelpers": {},
+    "differentCacheManagerDesc": "Brug forskellige billed cache managere",
+    "@differentCacheManagerDesc": {},
+    "differentCacheManager": "Forskellig cache Manager",
+    "@differentCacheManager": {},
+    "thumbLessSeekBarDesc": "Fjern tommelfingeren fra søgelinjen",
+    "@thumbLessSeekBarDesc": {},
+    "hidePageNumber": "Skjul sidenummer",
+    "@hidePageNumber": {},
+    "spacedPagesDesc": "Tilføj plads mellem sider",
+    "@spacedPagesDesc": {},
+    "spacedPages": "Sider i kategorien Sider",
+    "@spacedPages": {},
+    "readerSettingsDesc": "Ændring af læserindstillinger",
+    "@readerSettingsDesc": {},
+    "hideScrollbarDesc": "Skjul scrollbar, mens du læser",
+    "@hideScrollbarDesc": {},
+    "readerSettings": "Indstillinger for læserindstillinger",
+    "@readerSettings": {},
+    "hideScrollbar": "Skjul Scrollbar",
+    "@hideScrollbar": {},
+    "playerSettingsDesc": "Skift afspillerindstillinger",
+    "@playerSettingsDesc": {},
+    "glassEffect": "Glaseffekt",
+    "@glassEffect": {},
+    "ltr": "Venstre til højre",
+    "@ltr": {},
+    "coverThemeDescription": "Brug medie coverbillede som temafarve",
+    "@coverThemeDescription": {},
+    "rtl": "Til venstre",
+    "@rtl": {},
+    "glassEffectDescription": "Giver en frostet glaseffekt til appen",
+    "@glassEffectDescription": {},
+    "nextEpisodeRelease": "Episode {episode} vil blive frigivet i",
+    "@nextEpisodeRelease": {
+        "description": "Message showing the next episode info",
+        "placeholders": {
+            "episode": {
+                "type": "int"
+            }
+        }
+    },
+    "topScore": "Topscore",
+    "@topScore": {},
+    "coverTheme": "Brug Cover Theme",
+    "@coverTheme": {},
+    "customMPVDescription": "Enable this option to use your own MPV configuration file. Place your custom config at: {path}",
+    "@customMPVDescription": {
+        "placeholders": {
+            "path": {
+                "type": "String"
+            }
+        }
+    },
+    "customMPV": "Custom MPV Configuration",
+    "@customMPV": {}
 }

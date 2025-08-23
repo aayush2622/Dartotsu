@@ -1,632 +1,663 @@
 {
-  "fontColor": "अक्षर रंग",
-  "@fontColor": {},
-  "mal": "MyAnimeList",
-  "@mal": {},
-  "outlineColor": "आउटलाइन रंग",
-  "@outlineColor": {},
-  "outlineColorDescription": "उपशीर्षक आउटलाइन रंग",
-  "@outlineColorDescription": {},
-  "playerSettingsTitle": "प्लेयर सेटिंग्ज",
-  "@playerSettingsTitle": {},
-  "resizeMode": "पुनः आकार मोड",
-  "@resizeMode": {},
-  "resizeModeDescription": "प्लेयरसाठी डिफॉल्ट पुनः आकार मोड",
-  "@resizeModeDescription": {},
-  "restoreSettings": "सेटिंग्ज पुनर्संचयित करा",
-  "@restoreSettings": {},
-  "skipButtonDescription": "स्किप बटणाची कालावधी",
-  "@skipButtonDescription": {},
-  "speed": "गती",
-  "@speed": {},
-  "subtitles": "उपशीर्षक",
-  "@subtitles": {},
-  "about": "विषयी",
-  "@about": {},
-  "aboutDescription": "ऍप आणि त्याच्या निर्मात्यांबद्दल अधिक जाणून घ्या",
-  "@aboutDescription": {},
-  "account": "खाता",
-  "@account": {},
-  "accountDescription": "तुमचे AniList, MAL आणि Discord खाती सहजपणे व्यवस्थापित करा",
-  "@accountDescription": {},
-  "anime": "अ‍ॅनिमी",
-  "@anime": {},
-  "animeDescription": "तुमच्या अ‍ॅनिमी आवडी सानुकूलित करा आणि व्यवस्थापित करा",
-  "@animeDescription": {},
-  "anilist": "AniList",
-  "@anilist": {},
-  "appName": "Dartotsu",
-  "@appName": {},
-  "appTagline": "नवीन सर्वोत्तम अ‍ॅप\nअ‍ॅनिमी आणि मंगा ट्रॅक करण्यासाठी",
-  "@appTagline": {},
-  "backgroundColor": "पार्श्वभूमी रंग",
-  "@backgroundColor": {},
-  "backgroundColorDescription": "उपशीर्षक पार्श्वभूमी रंग",
-  "@backgroundColorDescription": {},
-  "bottomPadding": "तळाचे पॅडिंग",
-  "@bottomPadding": {},
-  "bottomPaddingDescription": "उपशीर्षक तळाचे पॅडिंग",
-  "@bottomPaddingDescription": {},
-  "cancel": "रद्द करा",
-  "@cancel": {},
-  "colorPicker": "रंग निवडक",
-  "@colorPicker": {},
-  "colorPickerDescription": "रंग निवडा",
-  "@colorPickerDescription": {},
-  "common": "साधारण",
-  "@common": {},
-  "commonDescription": "ऍप वापरण्यासाठी सामान्य सेटिंग्ज प्रवेश करा",
-  "@commonDescription": {},
-  "cursedSpeed": "शापित गती",
-  "@cursedSpeed": {},
-  "cursedSpeedDescription": "जी लोकं जीवनात फार व्यस्त असतात त्यांच्यासाठी",
-  "@cursedSpeedDescription": {},
-  "customTheme": "सानुकूल थीम",
-  "@customTheme": {},
-  "customThemeDescription": "थीमसाठी तुमचं स्वतःचा रंग वापरा",
-  "@customThemeDescription": {},
-  "darkMode": "अंधार मोड",
-  "@darkMode": {},
-  "discord": "Discord",
-  "@discord": {},
-  "donationGoal": "सध्यातरी दानाचा उद्दिष्ट नाही",
-  "@donationGoal": {},
-  "enableDarkMode": "अंधार मोड सक्षम करा",
-  "@enableDarkMode": {},
-  "extension": "{count, plural, =1 {विस्तार} other {विस्तार}}",
-  "@extension": {},
-  "extensionsDescription": "अधिक कार्यक्षमता मिळविण्यासाठी विस्तार स्थापित करा आणि व्यवस्थापित करा",
-  "@extensionsDescription": {},
-  "fontColorDescription": "उपशीर्षक अक्षर रंग",
-  "@fontColorDescription": {},
-  "fontFamily": "अक्षर कुटुंब",
-  "@fontFamily": {},
-  "fontFamilyDescription": "उपशीर्षक अक्षर कुटुंब",
-  "@fontFamilyDescription": {},
-  "fontSize": "अक्षर आकार",
-  "@fontSize": {},
-  "fontSizeDescription": "उपशीर्षक अक्षर आकार",
-  "@fontSizeDescription": {},
-  "fontWeight": "अक्षर वजन",
-  "@fontWeight": {},
-  "fontWeightDescription": "उपशीर्षक अक्षर वजन",
-  "@fontWeightDescription": {},
-  "hidePrivate": "खाजगी लपवा",
-  "@hidePrivate": {},
-  "hidePrivateDescription": "होम पृष्ठावर खाजगी मालिका लपवा.",
-  "@hidePrivateDescription": {},
-  "incognitoMode": "गोपनीय मोड",
-  "@incognitoMode": {},
-  "incognitoModeDescription": "तुमची क्रियाकलाप न जतन करता ब्राउझ करा",
-  "@incognitoModeDescription": {},
-  "login": "लॉगिन",
-  "@login": {},
-  "logout": "{type} लॉगआउट करा",
-  "@logout": {},
-  "manga": "मंगा",
-  "@manga": {},
-  "mangaDescription": "तुमच्या मंगा अनुभवाची व्यवस्था करा आणि सानुकूलित करा",
-  "@mangaDescription": {},
-  "materialYou": "Material You",
-  "@materialYou": {},
-  "materialYouDescription": "तुमच्या वॉलपेपरसारखा रंग वापरा",
-  "@materialYouDescription": {},
-  "no": "नाही",
-  "@no": {},
-  "notifications": "सूचना",
-  "@notifications": {},
-  "notificationsDescription": "तुम्ही कशा प्रकारे आणि केव्हा सूचना प्राप्त करायच्या ते कॉन्फिगर करा",
-  "@notificationsDescription": {},
-  "offlineMode": "ऑफलाइन मोड",
-  "@offlineMode": {},
-  "offlineModeDescription": "इंटरनेट कनेक्शनशिवाय ऍप वापरा",
-  "@offlineModeDescription": {},
-  "ok": "ठीक आहे",
-  "@ok": {},
-  "oledThemeVariant": "OLED थीम व्हेरिएंट",
-  "@oledThemeVariant": {},
-  "oledThemeVariantDescription": "OLED मोड सक्षम करा",
-  "@oledThemeVariantDescription": {},
-  "settings": "सेटिंग्ज",
-  "@settings": {},
-  "showSubtitles": "उपशीर्षक दर्शवा",
-  "@showSubtitles": {},
-  "showSubtitlesDescription": "डिफॉल्टने उपशीर्षक दर्शवा",
-  "@showSubtitlesDescription": {},
-  "skipButton": "स्किप बटण",
-  "@skipButton": {},
-  "speedDescription": "प्लेयरसाठी डिफॉल्ट गती",
-  "@speedDescription": {},
-  "subtitlePreview": "उपशीर्षक पूर्वावलोकन",
-  "@subtitlePreview": {},
-  "supportMaintainer": "Dartotsu च्या देखभाल करणाऱ्याला समर्थन देऊ इच्छिता?\nदान करण्याचा विचार करा",
-  "@supportMaintainer": {},
-  "theme": "थीम",
-  "@theme": {},
-  "themeDescription": "तुमच्या ऍपचा लुक आणि वाइब सानुकूलित करा",
-  "@themeDescription": {},
-  "yes": "हो",
-  "@yes": {},
-  "totalEpisodes": "एपिसोड्स",
-  "@totalEpisodes": {},
-  "onHold": "ठेवले {type}",
-  "@onHold": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "continueReading": "वाचन सुरू ठेवा",
-  "@continueReading": {},
-  "favorite": "आवडता {type}",
-  "@favorite": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "noDropped": "तुम्ही अजून काही {type} सोडले नाही.",
-  "@noDropped": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "total": "Total",
-  "@total": {},
-  "tags": "Tags",
-  "@tags": {},
-  "activity": "{count, plural, =1 {गतिवीदि} other {गतिवीधियां}}",
-  "@activity": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "continueWatching": "पाहणे सुरू ठेवा",
-  "@continueWatching": {},
-  "popular": "लोकप्रिय {type}",
-  "@popular": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa"
-        ]
-      }
-    }
-  },
-  "installed": "{type} स्थापित",
-  "@installed": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Extensions"
-        ]
-      }
-    }
-  },
-  "mostFavourite": "सर्वात आवडता {type}",
-  "@mostFavourite": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa"
-        ]
-      }
-    }
-  },
-  "synopsis": "सारांश",
-  "@synopsis": {},
-  "nameRomaji": "नाव (रोमाजी)",
-  "@nameRomaji": {},
-  "browse": "ब्राउझ करा {type}",
-  "@browse": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "comingSoon": "लवकरच येत आहे",
-  "@comingSoon": {},
-  "popularity": "लोकप्रियता",
-  "@popularity": {},
-  "allCaughtUpNew": "सर्व काही अपडेट झाले, काय नवीन आहे?",
-  "@allCaughtUpNew": {},
-  "totalChapters": "धडे",
-  "@totalChapters": {},
-  "favorites": "आवडते",
-  "@favorites": {},
-  "prequel": "PREQUEL",
-  "@prequel": {},
-  "format": "रूपरेखा",
-  "@format": {},
-  "expandText": "अधिक दाखवा",
-  "@expandText": {},
-  "sequel": "SEQUEL",
-  "@sequel": {},
-  "studio": "Studio",
-  "@studio": {},
-  "staff": "कर्मचारी",
-  "@staff": {},
-  "status": "Status",
-  "@status": {},
-  "relations": "Relations",
-  "@relations": {},
-  "source": "Source",
-  "@source": {},
-  "startDate": "Start Date",
-  "@startDate": {},
-  "synonyms": "समानार्थी शब्द",
-  "@synonyms": {},
-  "recommendationsEmptyMessage": "सुझाव मिळवण्यासाठी काही अ‍ॅनिमे किंवा मंगा वाचा/पाहा",
-  "@recommendationsEmptyMessage": {},
-  "author": "Author",
-  "@author": {},
-  "averageDuration": "सरासरी कालावधी",
-  "@averageDuration": {},
-  "characters": "लक्ष्य पात्रे",
-  "@characters": {},
-  "description": "सारांश",
-  "@description": {},
-  "endDate": "End Date",
-  "@endDate": {},
-  "collapseText": "कमी दाखवा",
-  "@collapseText": {},
-  "name": "Name",
-  "@name": {},
-  "recommended": "सुझावित",
-  "@recommended": {},
-  "meanScore": "Mean Score",
-  "@meanScore": {},
-  "kitsu": "Kitsu",
-  "@kitsu": {},
-  "manhwa": "Manhwa",
-  "@manhwa": {},
-  "loginTo": "{service} मध्ये लॉगिन करा",
-  "@loginTo": {
-    "placeholders": {
-      "service": {
-        "type": "String",
-        "examples": [
-          "Anilist",
-          "MyAnimeList",
-          "Kitsu",
-          "Discord"
-        ]
-      }
-    }
-  },
-  "manhua": "Manhua",
-  "@manhua": {},
-  "ln": "लाइट कादंबरी",
-  "@ln": {},
-  "novel": "कादंबरी",
-  "@novel": {},
-  "series": "Series",
-  "@series": {},
-  "episode": "{count, plural, =1 {एपिसोड} other {एपिसोड्स}}",
-  "@episode": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "home": "Home",
-  "@home": {},
-  "chapter": "{count, plural, =1 {धडा} other {धडे}}",
-  "@chapter": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "season": "हंगाम",
-  "@season": {},
-  "scanlators": "स्कॅनलेटर",
-  "@scanlators": {},
-  "dtu": "Down To Up",
-  "@dtu": {},
-  "volume": "{count, plural, =1 {खंड} other {खंड}}",
-  "@volume": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "movie": "{count, plural, =1 {चित्रपट} other {चित्रपट}}",
-  "@movie": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "search": "शोधा",
-  "@search": {},
-  "genres": "प्रकार",
-  "@genres": {},
-  "calendar": "कॅलेंडर",
-  "@calendar": {},
-  "confirmLogout": "आपण नक्कीच लॉगआउट करायचे आहे का?",
-  "@confirmLogout": {},
-  "compactView": "संक्षिप्त दृश्य",
-  "@compactView": {},
-  "listView": "List View",
-  "@listView": {},
-  "chapterRead": "धडा वाचला",
-  "@chapterRead": {},
-  "gridView": "ग्रिड दृश्य",
-  "@gridView": {},
-  "episodeWatched": "एपिसोड पाहिला",
-  "@episodeWatched": {},
-  "trending": "ट्रेंडिंग {type}",
-  "@trending": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "available": "{type} उपलब्ध",
-  "@available": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "thisSeason": "हा हंगाम",
-  "@thisSeason": {},
-  "nextSeason": "पुढील हंगाम",
-  "@nextSeason": {},
-  "topRated": "टॉप रेटेड {type}",
-  "@topRated": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa",
-          "Series"
-        ]
-      }
-    }
-  },
-  "previousSeason": "मागील हंगाम",
-  "@previousSeason": {},
-  "planned": "योजना {type}",
-  "@planned": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "addToList": "Add To List",
-  "@addToList": {},
-  "comments": "टिप्पण्या",
-  "@comments": {},
-  "info": "Info",
-  "@info": {},
-  "list": "{type} यादी",
-  "@list": {
-    "placeholders": {
-      "type": {
-        "examples": "Anime list",
-        "type": "String"
-      }
-    }
-  },
-  "language": "भाषा",
-  "@language": {},
-  "layout": "Layout",
-  "@layout": {},
-  "options": "Options",
-  "@options": {},
-  "read": "वाचा",
-  "@read": {},
-  "sort": "सॉर्ट करा",
-  "@sort": {},
-  "watch": "पाहा",
-  "@watch": {},
-  "utd": "वरून खाली",
-  "@utd": {},
-  "topAiring": "टॉप एअरिंग",
-  "@topAiring": {},
-  "manageLayout": "{service} साठी {page} पृष्ठाची रचना व्यवस्थापित करा",
-  "@manageLayout": {
-    "placeholders": {
-      "service": {
-        "type": "String",
-        "examples": [
-          "Anilist",
-          "MAL"
-        ]
-      },
-      "page": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Home",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "manageLayoutDescription": "आपण घटक ड्रॅग आणि ड्रॉप करून {page} पृष्ठाची रचना व्यवस्थापित करू शकता",
-  "@manageLayoutDescription": {
-    "placeholders": {
-      "page": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Home",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "pickColor": "एक रंग निवडा",
-  "@pickColor": {},
-  "droppedAnime": "सोडलेली अ‍ॅनिमे",
-  "@droppedAnime": {},
-  "hiddenMedia": "लपवलेली मीडिया",
-  "@hiddenMedia": {},
-  "droppedManga": "सोडलेली मंगा",
-  "@droppedManga": {},
-  "noFavourites": "तुम्ही काहीच आवडत नाहीत,\nकृपया शो आवडून तो येथे ठेवा.",
-  "@noFavourites": {},
-  "noOnHold": "तुम्ही अजून काही ठेवलं नाही.",
-  "@noOnHold": {},
-  "noHiddenMediaFound": "कुठलीही लपवलेली मीडिया सापडली नाही",
-  "@noHiddenMediaFound": {},
-  "recentUpdates": "अलीकडील अद्यतने",
-  "@recentUpdates": {},
-  "simkl": "Simkl",
-  "@simkl": {},
-  "colorPickerCustom": "सानुकूल",
-  "@colorPickerCustom": {},
-  "colorPickerDefault": "डीफॉल्ट",
-  "@colorPickerDefault": {},
-  "logFileDescription": "लॉग फाइल शेअर करा",
-  "@logFileDescription": {},
-  "addAnimeRepo": "ऍनिमे रेपो जोडा",
-  "@addAnimeRepo": {},
-  "loadExtensionsIconDesc": "जर एक्स्टेंशन पृष्ठ अडकत असेल तर अक्षम करा",
-  "@loadExtensionsIconDesc": {},
-  "autoUpdateDesc": "एक्स्टेंशन्स स्वयंचलित अद्यतनित करा",
-  "@autoUpdateDesc": {},
-  "addNovelRepoDesc": "विविध स्रोतांमधून कादंबरी रेपो जोडा",
-  "@addNovelRepoDesc": {},
-  "addMangaRepoDesc": "विविध स्रोतांमधून मंगा रेपो जोडा",
-  "@addMangaRepoDesc": {},
-  "addAnimeRepoDesc": "विविध स्रोतांमधून ऍनिमे रेपो जोडा",
-  "@addAnimeRepoDesc": {},
-  "addMangaRepo": "मंगा रेपो जोडा",
-  "@addMangaRepo": {},
-  "logFile": "लॉग फाइल",
-  "@logFile": {},
-  "addNovelRepo": "कादंबरी रेपो जोडा",
-  "@addNovelRepo": {},
-  "selectDirectory": "निर्देशिका निवडा",
-  "@selectDirectory": {},
-  "customPath": "सानुकूल मार्ग",
-  "@customPath": {},
-  "autoUpdate": "स्वयंचलित अद्यतन",
-  "@autoUpdate": {},
-  "loadExtensionsIcon": "एक्स्टेंशन आयकॉन लोड करा",
-  "@loadExtensionsIcon": {},
-  "selectMediaService": "मीडिया सेवा निवडा",
-  "@selectMediaService": {},
-  "customPathDescription": "फाइल सेव्ह करण्यासाठी सानुकूल मार्ग सेट करा\nकाढण्यासाठी दीर्घकाळ दाबा",
-  "@customPathDescription": {},
-  "noChapterFound": "अध्याय सापडला नाही",
-  "@noChapterFound": {},
-  "watching": "पाहत आहे",
-  "@watching": {},
-  "outOf": "पैकी",
-  "@outOf": {},
-  "selected": "निवडले",
-  "@selected": {},
-  "readStatus": "वाचा",
-  "@readStatus": {},
-  "youTube": "YouTube वर प्ले करायचे का?",
-  "@youTube": {},
-  "mediaNotFound": "मीडिया सापडले नाही",
-  "@mediaNotFound": {},
-  "found": "सापडले",
-  "@found": {},
-  "watchStatus": "पाहिले",
-  "@watchStatus": {},
-  "totalOf": "एकूण",
-  "@totalOf": {},
-  "wrongTitle": "चुकीचे शीर्षक?",
-  "@wrongTitle": {},
-  "installSourceToStart": "सुरू करण्यासाठी विस्तार पानावरून स्रोत स्थापित करा",
-  "@installSourceToStart": {},
-  "webView": "वेब दृश्य",
-  "@webView": {},
-  "reading": "वाचत आहे",
-  "@reading": {},
-  "direction": "Direction",
-  "@direction": {},
-  "hidePageNumberDesc": "Hide page number while reading",
-  "@hidePageNumberDesc": {},
-  "thumbLessSeekBar": "ThumbLess SeekBar",
-  "@thumbLessSeekBar": {},
-  "developersHelpersDesc": "Dartotsu's unpaid labours",
-  "@developersHelpersDesc": {},
-  "developersHelpers": "Developers/Helpers",
-  "@developersHelpers": {},
-  "thumbLessSeekBarDesc": "Remove thumb from the seek bar",
-  "@thumbLessSeekBarDesc": {},
-  "hidePageNumber": "Hide Page Number",
-  "@hidePageNumber": {},
-  "differentCacheManagerDesc": "Use different Image cache manager",
-  "@differentCacheManagerDesc": {},
-  "differentCacheManager": "Different Cache Manager",
-  "@differentCacheManager": {},
-  "spacedPagesDesc": "Add space between pages",
-  "@spacedPagesDesc": {},
-  "spacedPages": "Spaced Pages",
-  "@spacedPages": {},
-  "readerSettingsDesc": "Change reader settings",
-  "@readerSettingsDesc": {},
-  "hideScrollbarDesc": "Hide scrollbar while reading",
-  "@hideScrollbarDesc": {},
-  "readerSettings": "Reader Settings",
-  "@readerSettings": {},
-  "hideScrollbar": "Hide Scrollbar",
-  "@hideScrollbar": {},
-  "playerSettingsDesc": "Change player settings",
-  "@playerSettingsDesc": {}
+    "fontColor": "अक्षर रंग",
+    "@fontColor": {},
+    "mal": "MyAnimeList",
+    "@mal": {},
+    "outlineColor": "आउटलाइन रंग",
+    "@outlineColor": {},
+    "outlineColorDescription": "उपशीर्षक आउटलाइन रंग",
+    "@outlineColorDescription": {},
+    "playerSettingsTitle": "प्लेयर सेटिंग्ज",
+    "@playerSettingsTitle": {},
+    "resizeMode": "पुनः आकार मोड",
+    "@resizeMode": {},
+    "resizeModeDescription": "प्लेयरसाठी डिफॉल्ट पुनः आकार मोड",
+    "@resizeModeDescription": {},
+    "restoreSettings": "सेटिंग्ज पुनर्संचयित करा",
+    "@restoreSettings": {},
+    "skipButtonDescription": "स्किप बटणाची कालावधी",
+    "@skipButtonDescription": {},
+    "speed": "गती",
+    "@speed": {},
+    "subtitles": "उपशीर्षक",
+    "@subtitles": {},
+    "about": "विषयी",
+    "@about": {},
+    "aboutDescription": "ऍप आणि त्याच्या निर्मात्यांबद्दल अधिक जाणून घ्या",
+    "@aboutDescription": {},
+    "account": "खाता",
+    "@account": {},
+    "accountDescription": "तुमचे AniList, MAL आणि Discord खाती सहजपणे व्यवस्थापित करा",
+    "@accountDescription": {},
+    "anime": "अ‍ॅनिमी",
+    "@anime": {},
+    "animeDescription": "तुमच्या अ‍ॅनिमी आवडी सानुकूलित करा आणि व्यवस्थापित करा",
+    "@animeDescription": {},
+    "anilist": "AniList",
+    "@anilist": {},
+    "appName": "Dartotsu",
+    "@appName": {},
+    "appTagline": "नवीन सर्वोत्तम अ‍ॅप\nअ‍ॅनिमी आणि मंगा ट्रॅक करण्यासाठी",
+    "@appTagline": {},
+    "backgroundColor": "पार्श्वभूमी रंग",
+    "@backgroundColor": {},
+    "backgroundColorDescription": "उपशीर्षक पार्श्वभूमी रंग",
+    "@backgroundColorDescription": {},
+    "bottomPadding": "तळाचे पॅडिंग",
+    "@bottomPadding": {},
+    "bottomPaddingDescription": "उपशीर्षक तळाचे पॅडिंग",
+    "@bottomPaddingDescription": {},
+    "cancel": "रद्द करा",
+    "@cancel": {},
+    "colorPicker": "रंग निवडक",
+    "@colorPicker": {},
+    "colorPickerDescription": "रंग निवडा",
+    "@colorPickerDescription": {},
+    "common": "साधारण",
+    "@common": {},
+    "commonDescription": "ऍप वापरण्यासाठी सामान्य सेटिंग्ज प्रवेश करा",
+    "@commonDescription": {},
+    "cursedSpeed": "शापित गती",
+    "@cursedSpeed": {},
+    "cursedSpeedDescription": "जी लोकं जीवनात फार व्यस्त असतात त्यांच्यासाठी",
+    "@cursedSpeedDescription": {},
+    "customTheme": "सानुकूल थीम",
+    "@customTheme": {},
+    "customThemeDescription": "थीमसाठी तुमचं स्वतःचा रंग वापरा",
+    "@customThemeDescription": {},
+    "darkMode": "अंधार मोड",
+    "@darkMode": {},
+    "discord": "Discord",
+    "@discord": {},
+    "donationGoal": "सध्यातरी दानाचा उद्दिष्ट नाही",
+    "@donationGoal": {},
+    "enableDarkMode": "अंधार मोड सक्षम करा",
+    "@enableDarkMode": {},
+    "extension": "{count, plural, =1 {विस्तार} other {विस्तार}}",
+    "@extension": {},
+    "extensionsDescription": "अधिक कार्यक्षमता मिळविण्यासाठी विस्तार स्थापित करा आणि व्यवस्थापित करा",
+    "@extensionsDescription": {},
+    "fontColorDescription": "उपशीर्षक अक्षर रंग",
+    "@fontColorDescription": {},
+    "fontFamily": "अक्षर कुटुंब",
+    "@fontFamily": {},
+    "fontFamilyDescription": "उपशीर्षक अक्षर कुटुंब",
+    "@fontFamilyDescription": {},
+    "fontSize": "अक्षर आकार",
+    "@fontSize": {},
+    "fontSizeDescription": "उपशीर्षक अक्षर आकार",
+    "@fontSizeDescription": {},
+    "fontWeight": "अक्षर वजन",
+    "@fontWeight": {},
+    "fontWeightDescription": "उपशीर्षक अक्षर वजन",
+    "@fontWeightDescription": {},
+    "hidePrivate": "खाजगी लपवा",
+    "@hidePrivate": {},
+    "hidePrivateDescription": "होम पृष्ठावर खाजगी मालिका लपवा.",
+    "@hidePrivateDescription": {},
+    "incognitoMode": "गोपनीय मोड",
+    "@incognitoMode": {},
+    "incognitoModeDescription": "तुमची क्रियाकलाप न जतन करता ब्राउझ करा",
+    "@incognitoModeDescription": {},
+    "login": "लॉगिन",
+    "@login": {},
+    "logout": "{type} लॉगआउट करा",
+    "@logout": {},
+    "manga": "मंगा",
+    "@manga": {},
+    "mangaDescription": "तुमच्या मंगा अनुभवाची व्यवस्था करा आणि सानुकूलित करा",
+    "@mangaDescription": {},
+    "materialYou": "Material You",
+    "@materialYou": {},
+    "materialYouDescription": "तुमच्या वॉलपेपरसारखा रंग वापरा",
+    "@materialYouDescription": {},
+    "no": "नाही",
+    "@no": {},
+    "notifications": "सूचना",
+    "@notifications": {},
+    "notificationsDescription": "तुम्ही कशा प्रकारे आणि केव्हा सूचना प्राप्त करायच्या ते कॉन्फिगर करा",
+    "@notificationsDescription": {},
+    "offlineMode": "ऑफलाइन मोड",
+    "@offlineMode": {},
+    "offlineModeDescription": "इंटरनेट कनेक्शनशिवाय ऍप वापरा",
+    "@offlineModeDescription": {},
+    "ok": "ठीक आहे",
+    "@ok": {},
+    "oledThemeVariant": "OLED थीम व्हेरिएंट",
+    "@oledThemeVariant": {},
+    "oledThemeVariantDescription": "OLED मोड सक्षम करा",
+    "@oledThemeVariantDescription": {},
+    "settings": "सेटिंग्ज",
+    "@settings": {},
+    "showSubtitles": "उपशीर्षक दर्शवा",
+    "@showSubtitles": {},
+    "showSubtitlesDescription": "डिफॉल्टने उपशीर्षक दर्शवा",
+    "@showSubtitlesDescription": {},
+    "skipButton": "स्किप बटण",
+    "@skipButton": {},
+    "speedDescription": "प्लेयरसाठी डिफॉल्ट गती",
+    "@speedDescription": {},
+    "subtitlePreview": "उपशीर्षक पूर्वावलोकन",
+    "@subtitlePreview": {},
+    "supportMaintainer": "Dartotsu च्या देखभाल करणाऱ्याला समर्थन देऊ इच्छिता?\nदान करण्याचा विचार करा",
+    "@supportMaintainer": {},
+    "theme": "थीम",
+    "@theme": {},
+    "themeDescription": "तुमच्या ऍपचा लुक आणि वाइब सानुकूलित करा",
+    "@themeDescription": {},
+    "yes": "हो",
+    "@yes": {},
+    "totalEpisodes": "एपिसोड्स",
+    "@totalEpisodes": {},
+    "onHold": "ठेवले {type}",
+    "@onHold": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "continueReading": "वाचन सुरू ठेवा",
+    "@continueReading": {},
+    "favorite": "आवडता {type}",
+    "@favorite": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "noDropped": "तुम्ही अजून काही {type} सोडले नाही.",
+    "@noDropped": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "total": "Total",
+    "@total": {},
+    "tags": "Tags",
+    "@tags": {},
+    "activity": "{count, plural, =1 {गतिवीदि} other {गतिवीधियां}}",
+    "@activity": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "continueWatching": "पाहणे सुरू ठेवा",
+    "@continueWatching": {},
+    "popular": "लोकप्रिय {type}",
+    "@popular": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa"
+                ]
+            }
+        }
+    },
+    "installed": "{type} स्थापित",
+    "@installed": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Extensions"
+                ]
+            }
+        }
+    },
+    "mostFavourite": "सर्वात आवडता {type}",
+    "@mostFavourite": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa"
+                ]
+            }
+        }
+    },
+    "synopsis": "सारांश",
+    "@synopsis": {},
+    "nameRomaji": "नाव (रोमाजी)",
+    "@nameRomaji": {},
+    "browse": "ब्राउझ करा {type}",
+    "@browse": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "comingSoon": "लवकरच येत आहे",
+    "@comingSoon": {},
+    "popularity": "लोकप्रियता",
+    "@popularity": {},
+    "allCaughtUpNew": "सर्व काही अपडेट झाले, काय नवीन आहे?",
+    "@allCaughtUpNew": {},
+    "totalChapters": "धडे",
+    "@totalChapters": {},
+    "favorites": "आवडते",
+    "@favorites": {},
+    "prequel": "PREQUEL",
+    "@prequel": {},
+    "format": "रूपरेखा",
+    "@format": {},
+    "expandText": "अधिक दाखवा",
+    "@expandText": {},
+    "sequel": "SEQUEL",
+    "@sequel": {},
+    "studio": "Studio",
+    "@studio": {},
+    "staff": "कर्मचारी",
+    "@staff": {},
+    "status": "Status",
+    "@status": {},
+    "relations": "Relations",
+    "@relations": {},
+    "source": "Source",
+    "@source": {},
+    "startDate": "Start Date",
+    "@startDate": {},
+    "synonyms": "समानार्थी शब्द",
+    "@synonyms": {},
+    "recommendationsEmptyMessage": "सुझाव मिळवण्यासाठी काही अ‍ॅनिमे किंवा मंगा वाचा/पाहा",
+    "@recommendationsEmptyMessage": {},
+    "author": "Author",
+    "@author": {},
+    "averageDuration": "सरासरी कालावधी",
+    "@averageDuration": {},
+    "characters": "लक्ष्य पात्रे",
+    "@characters": {},
+    "endDate": "End Date",
+    "@endDate": {},
+    "collapseText": "कमी दाखवा",
+    "@collapseText": {},
+    "name": "Name",
+    "@name": {},
+    "recommended": "सुझावित",
+    "@recommended": {},
+    "meanScore": "Mean Score",
+    "@meanScore": {},
+    "kitsu": "Kitsu",
+    "@kitsu": {},
+    "manhwa": "Manhwa",
+    "@manhwa": {},
+    "loginTo": "{service} मध्ये लॉगिन करा",
+    "@loginTo": {
+        "placeholders": {
+            "service": {
+                "type": "String",
+                "examples": [
+                    "Anilist",
+                    "MyAnimeList",
+                    "Kitsu",
+                    "Discord"
+                ]
+            }
+        }
+    },
+    "manhua": "Manhua",
+    "@manhua": {},
+    "ln": "लाइट कादंबरी",
+    "@ln": {},
+    "novel": "कादंबरी",
+    "@novel": {},
+    "series": "Series",
+    "@series": {},
+    "episode": "{count, plural, =1 {एपिसोड} other {एपिसोड्स}}",
+    "@episode": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "home": "Home",
+    "@home": {},
+    "chapter": "{count, plural, =1 {धडा} other {धडे}}",
+    "@chapter": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "season": "हंगाम",
+    "@season": {},
+    "scanlators": "स्कॅनलेटर",
+    "@scanlators": {},
+    "dtu": "Down To Up",
+    "@dtu": {},
+    "volume": "{count, plural, =1 {खंड} other {खंड}}",
+    "@volume": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "movie": "{count, plural, =1 {चित्रपट} other {चित्रपट}}",
+    "@movie": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "search": "शोधा",
+    "@search": {},
+    "genres": "प्रकार",
+    "@genres": {},
+    "calendar": "कॅलेंडर",
+    "@calendar": {},
+    "confirmLogout": "आपण नक्कीच लॉगआउट करायचे आहे का?",
+    "@confirmLogout": {},
+    "compactView": "संक्षिप्त दृश्य",
+    "@compactView": {},
+    "listView": "List View",
+    "@listView": {},
+    "chapterRead": "धडा वाचला",
+    "@chapterRead": {},
+    "gridView": "ग्रिड दृश्य",
+    "@gridView": {},
+    "episodeWatched": "एपिसोड पाहिला",
+    "@episodeWatched": {},
+    "trending": "ट्रेंडिंग {type}",
+    "@trending": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "available": "{type} उपलब्ध",
+    "@available": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "thisSeason": "हा हंगाम",
+    "@thisSeason": {},
+    "nextSeason": "पुढील हंगाम",
+    "@nextSeason": {},
+    "topRated": "टॉप रेटेड {type}",
+    "@topRated": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa",
+                    "Series"
+                ]
+            }
+        }
+    },
+    "previousSeason": "मागील हंगाम",
+    "@previousSeason": {},
+    "planned": "योजना {type}",
+    "@planned": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "addToList": "Add To List",
+    "@addToList": {},
+    "comments": "टिप्पण्या",
+    "@comments": {},
+    "info": "Info",
+    "@info": {},
+    "list": "{type} यादी",
+    "@list": {
+        "placeholders": {
+            "type": {
+                "examples": "Anime list",
+                "type": "String"
+            }
+        }
+    },
+    "language": "भाषा",
+    "@language": {},
+    "layout": "Layout",
+    "@layout": {},
+    "options": "Options",
+    "@options": {},
+    "read": "वाचा",
+    "@read": {},
+    "sort": "सॉर्ट करा",
+    "@sort": {},
+    "watch": "पाहा",
+    "@watch": {},
+    "utd": "वरून खाली",
+    "@utd": {},
+    "topAiring": "टॉप एअरिंग",
+    "@topAiring": {},
+    "manageLayout": "{service} साठी {page} पृष्ठाची रचना व्यवस्थापित करा",
+    "@manageLayout": {
+        "placeholders": {
+            "service": {
+                "type": "String",
+                "examples": [
+                    "Anilist",
+                    "MAL"
+                ]
+            },
+            "page": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Home",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "manageLayoutDescription": "आपण घटक ड्रॅग आणि ड्रॉप करून {page} पृष्ठाची रचना व्यवस्थापित करू शकता",
+    "@manageLayoutDescription": {
+        "placeholders": {
+            "page": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Home",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "pickColor": "एक रंग निवडा",
+    "@pickColor": {},
+    "droppedAnime": "सोडलेली अ‍ॅनिमे",
+    "@droppedAnime": {},
+    "hiddenMedia": "लपवलेली मीडिया",
+    "@hiddenMedia": {},
+    "droppedManga": "सोडलेली मंगा",
+    "@droppedManga": {},
+    "noFavourites": "तुम्ही काहीच आवडत नाहीत,\nकृपया शो आवडून तो येथे ठेवा.",
+    "@noFavourites": {},
+    "noOnHold": "तुम्ही अजून काही ठेवलं नाही.",
+    "@noOnHold": {},
+    "noHiddenMediaFound": "कुठलीही लपवलेली मीडिया सापडली नाही",
+    "@noHiddenMediaFound": {},
+    "recentUpdates": "अलीकडील अद्यतने",
+    "@recentUpdates": {},
+    "simkl": "Simkl",
+    "@simkl": {},
+    "colorPickerCustom": "सानुकूल",
+    "@colorPickerCustom": {},
+    "colorPickerDefault": "डीफॉल्ट",
+    "@colorPickerDefault": {},
+    "logFileDescription": "लॉग फाइल शेअर करा",
+    "@logFileDescription": {},
+    "addAnimeRepo": "ऍनिमे रेपो जोडा",
+    "@addAnimeRepo": {},
+    "loadExtensionsIconDesc": "जर एक्स्टेंशन पृष्ठ अडकत असेल तर अक्षम करा",
+    "@loadExtensionsIconDesc": {},
+    "autoUpdateDesc": "एक्स्टेंशन्स स्वयंचलित अद्यतनित करा",
+    "@autoUpdateDesc": {},
+    "addNovelRepoDesc": "विविध स्रोतांमधून कादंबरी रेपो जोडा",
+    "@addNovelRepoDesc": {},
+    "addMangaRepoDesc": "विविध स्रोतांमधून मंगा रेपो जोडा",
+    "@addMangaRepoDesc": {},
+    "addAnimeRepoDesc": "विविध स्रोतांमधून ऍनिमे रेपो जोडा",
+    "@addAnimeRepoDesc": {},
+    "addMangaRepo": "मंगा रेपो जोडा",
+    "@addMangaRepo": {},
+    "logFile": "लॉग फाइल",
+    "@logFile": {},
+    "addNovelRepo": "कादंबरी रेपो जोडा",
+    "@addNovelRepo": {},
+    "selectDirectory": "निर्देशिका निवडा",
+    "@selectDirectory": {},
+    "customPath": "सानुकूल मार्ग",
+    "@customPath": {},
+    "autoUpdate": "स्वयंचलित अद्यतन",
+    "@autoUpdate": {},
+    "loadExtensionsIcon": "एक्स्टेंशन आयकॉन लोड करा",
+    "@loadExtensionsIcon": {},
+    "selectMediaService": "मीडिया सेवा निवडा",
+    "@selectMediaService": {},
+    "customPathDescription": "फाइल सेव्ह करण्यासाठी सानुकूल मार्ग सेट करा\nकाढण्यासाठी दीर्घकाळ दाबा",
+    "@customPathDescription": {},
+    "noChapterFound": "अध्याय सापडला नाही",
+    "@noChapterFound": {},
+    "watching": "पाहत आहे",
+    "@watching": {},
+    "outOf": "पैकी",
+    "@outOf": {},
+    "selected": "निवडले",
+    "@selected": {},
+    "readStatus": "वाचा",
+    "@readStatus": {},
+    "youTube": "YouTube वर प्ले करायचे का?",
+    "@youTube": {},
+    "mediaNotFound": "मीडिया सापडले नाही",
+    "@mediaNotFound": {},
+    "found": "सापडले",
+    "@found": {},
+    "watchStatus": "पाहिले",
+    "@watchStatus": {},
+    "totalOf": "एकूण",
+    "@totalOf": {},
+    "wrongTitle": "चुकीचे शीर्षक?",
+    "@wrongTitle": {},
+    "installSourceToStart": "सुरू करण्यासाठी विस्तार पानावरून स्रोत स्थापित करा",
+    "@installSourceToStart": {},
+    "webView": "वेब दृश्य",
+    "@webView": {},
+    "reading": "वाचत आहे",
+    "@reading": {},
+    "direction": "Direction",
+    "@direction": {},
+    "hidePageNumberDesc": "Hide page number while reading",
+    "@hidePageNumberDesc": {},
+    "thumbLessSeekBar": "ThumbLess SeekBar",
+    "@thumbLessSeekBar": {},
+    "developersHelpersDesc": "Dartotsu's unpaid labours",
+    "@developersHelpersDesc": {},
+    "developersHelpers": "Developers/Helpers",
+    "@developersHelpers": {},
+    "thumbLessSeekBarDesc": "Remove thumb from the seek bar",
+    "@thumbLessSeekBarDesc": {},
+    "hidePageNumber": "Hide Page Number",
+    "@hidePageNumber": {},
+    "differentCacheManagerDesc": "Use different Image cache manager",
+    "@differentCacheManagerDesc": {},
+    "differentCacheManager": "Different Cache Manager",
+    "@differentCacheManager": {},
+    "spacedPagesDesc": "Add space between pages",
+    "@spacedPagesDesc": {},
+    "spacedPages": "Spaced Pages",
+    "@spacedPages": {},
+    "readerSettingsDesc": "Change reader settings",
+    "@readerSettingsDesc": {},
+    "hideScrollbarDesc": "Hide scrollbar while reading",
+    "@hideScrollbarDesc": {},
+    "readerSettings": "Reader Settings",
+    "@readerSettings": {},
+    "hideScrollbar": "Hide Scrollbar",
+    "@hideScrollbar": {},
+    "playerSettingsDesc": "Change player settings",
+    "@playerSettingsDesc": {},
+    "glassEffect": "Glass Effect",
+    "@glassEffect": {},
+    "ltr": "Left To Right",
+    "@ltr": {},
+    "coverThemeDescription": "Use media cover image as theme color",
+    "@coverThemeDescription": {},
+    "rtl": "Right To Left",
+    "@rtl": {},
+    "glassEffectDescription": "Gives a frosted glass effect to the app",
+    "@glassEffectDescription": {},
+    "nextEpisodeRelease": "Episode {episode} will be released in",
+    "@nextEpisodeRelease": {
+        "description": "Message showing the next episode info",
+        "placeholders": {
+            "episode": {
+                "type": "int"
+            }
+        }
+    },
+    "topScore": "Top Score",
+    "@topScore": {},
+    "coverTheme": "Use Cover Theme",
+    "@coverTheme": {},
+    "customMPVDescription": "Enable this option to use your own MPV configuration file. Place your custom config at: {path}",
+    "@customMPVDescription": {
+        "placeholders": {
+            "path": {
+                "type": "String"
+            }
+        }
+    },
+    "customMPV": "Custom MPV Configuration",
+    "@customMPV": {}
 }

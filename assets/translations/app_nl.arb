@@ -1,632 +1,663 @@
 {
-  "appTagline": "De NIEUWE Beste App Voor\nHet Volgen van Anime & Manga",
-  "@appTagline": {},
-  "bottomPaddingDescription": "Onderste marge van ondertitels",
-  "@bottomPaddingDescription": {},
-  "cancel": "Annuleren",
-  "@cancel": {},
-  "colorPicker": "Kleurkiezer",
-  "@colorPicker": {},
-  "colorPickerDescription": "Selecteer een kleur",
-  "@colorPickerDescription": {},
-  "extension": "{count, plural, =1 {Uitbreiding} other {Uitbreidingen}}",
-  "@extension": {},
-  "theme": "Thema",
-  "@theme": {},
-  "themeDescription": "Pas de uitstraling en sfeer van je app aan",
-  "@themeDescription": {},
-  "accountDescription": "Beheer je AniList, MAL en Discord accounts moeiteloos",
-  "@accountDescription": {},
-  "anime": "Anime",
-  "@anime": {},
-  "animeDescription": "Personaliseer en beheer je anime voorkeuren",
-  "@animeDescription": {},
-  "about": "Over",
-  "@about": {},
-  "aboutDescription": "Leer meer over de app en de makers",
-  "@aboutDescription": {},
-  "account": "Account",
-  "@account": {},
-  "anilist": "AniList",
-  "@anilist": {},
-  "appName": "Dartotsu",
-  "@appName": {},
-  "backgroundColor": "Achtergrondkleur",
-  "@backgroundColor": {},
-  "backgroundColorDescription": "Achtergrondkleur van ondertitels",
-  "@backgroundColorDescription": {},
-  "bottomPadding": "Onderste marge",
-  "@bottomPadding": {},
-  "common": "Algemeen",
-  "@common": {},
-  "commonDescription": "Toegang tot algemene instellingen voor naadloos gebruik van de app",
-  "@commonDescription": {},
-  "cursedSpeed": "Vervloekte Snelheid",
-  "@cursedSpeed": {},
-  "cursedSpeedDescription": "Voor mensen die te druk zijn met het leven",
-  "@cursedSpeedDescription": {},
-  "customTheme": "Aangepast thema",
-  "@customTheme": {},
-  "customThemeDescription": "Gebruik je eigen kleur voor het thema",
-  "@customThemeDescription": {},
-  "darkMode": "Donkere modus",
-  "@darkMode": {},
-  "discord": "Discord",
-  "@discord": {},
-  "donationGoal": "Geen donatiedoel op dit moment",
-  "@donationGoal": {},
-  "enableDarkMode": "Donkere modus inschakelen",
-  "@enableDarkMode": {},
-  "extensionsDescription": "Installeer en beheer extensies voor extra functionaliteit",
-  "@extensionsDescription": {},
-  "fontColor": "Letterkleur",
-  "@fontColor": {},
-  "fontColorDescription": "Letterkleur van ondertitels",
-  "@fontColorDescription": {},
-  "fontFamily": "Lettertype",
-  "@fontFamily": {},
-  "fontSize": "Lettergrootte",
-  "@fontSize": {},
-  "fontSizeDescription": "Lettergrootte van ondertitels",
-  "@fontSizeDescription": {},
-  "fontFamilyDescription": "Lettertype van ondertitels",
-  "@fontFamilyDescription": {},
-  "fontWeight": "Lettervet",
-  "@fontWeight": {},
-  "fontWeightDescription": "Lettervet van ondertitels",
-  "@fontWeightDescription": {},
-  "hidePrivate": "Verberg privé",
-  "@hidePrivate": {},
-  "hidePrivateDescription": "Verberg privéseries van de startpagina.",
-  "@hidePrivateDescription": {},
-  "incognitoMode": "Incognito modus",
-  "@incognitoMode": {},
-  "incognitoModeDescription": "Blader zonder je activiteit op te slaan",
-  "@incognitoModeDescription": {},
-  "login": "Inloggen",
-  "@login": {},
-  "logout": "Uitloggen {type}",
-  "@logout": {},
-  "mal": "MyAnimeList",
-  "@mal": {},
-  "manga": "Manga",
-  "@manga": {},
-  "mangaDescription": "Organiseer en pas je manga-ervaring aan",
-  "@mangaDescription": {},
-  "materialYou": "Material You",
-  "@materialYou": {},
-  "materialYouDescription": "Gebruik dezelfde kleur als je wallpaper",
-  "@materialYouDescription": {},
-  "no": "Nee",
-  "@no": {},
-  "notifications": "Meldingen",
-  "@notifications": {},
-  "notificationsDescription": "Configureer hoe en wanneer je meldingen ontvangt",
-  "@notificationsDescription": {},
-  "offlineMode": "Offline modus",
-  "@offlineMode": {},
-  "offlineModeDescription": "Gebruik de app zonder internetverbinding",
-  "@offlineModeDescription": {},
-  "ok": "OK",
-  "@ok": {},
-  "oledThemeVariant": "OLED-themavariant",
-  "@oledThemeVariant": {},
-  "oledThemeVariantDescription": "Schakel OLED-modus in",
-  "@oledThemeVariantDescription": {},
-  "outlineColor": "Randkleur",
-  "@outlineColor": {},
-  "outlineColorDescription": "Randkleur van ondertitels",
-  "@outlineColorDescription": {},
-  "playerSettingsTitle": "Spelerinstellingen",
-  "@playerSettingsTitle": {},
-  "resizeMode": "Wijzigmodus",
-  "@resizeMode": {},
-  "resizeModeDescription": "Standaard wijzigmodus voor speler",
-  "@resizeModeDescription": {},
-  "restoreSettings": "Herstel instellingen",
-  "@restoreSettings": {},
-  "settings": "Instellingen",
-  "@settings": {},
-  "showSubtitles": "Toon ondertitels",
-  "@showSubtitles": {},
-  "showSubtitlesDescription": "Toon ondertitels standaard",
-  "@showSubtitlesDescription": {},
-  "skipButton": "Overslaan-knop",
-  "@skipButton": {},
-  "skipButtonDescription": "Duur van de overslaan-knop",
-  "@skipButtonDescription": {},
-  "speed": "Snelheid",
-  "@speed": {},
-  "speedDescription": "Standaard snelheid voor speler",
-  "@speedDescription": {},
-  "subtitles": "Ondertitels",
-  "@subtitles": {},
-  "subtitlePreview": "Ondersteunt-preview",
-  "@subtitlePreview": {},
-  "supportMaintainer": "Wil je de beheerder van Dartotsu steunen?\nOverweeg te doneren",
-  "@supportMaintainer": {},
-  "yes": "Ja",
-  "@yes": {},
-  "chapter": "{count, plural, =1 {Hoofdstuk} other {Hoofdstukken}}",
-  "@chapter": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "genres": "Genres",
-  "@genres": {},
-  "calendar": "Kalender",
-  "@calendar": {},
-  "scanlators": "Scanlators",
-  "@scanlators": {},
-  "listView": "Lijstweergave",
-  "@listView": {},
-  "compactView": "Compacte weergave",
-  "@compactView": {},
-  "episodeWatched": "Aflevering bekeken",
-  "@episodeWatched": {},
-  "installed": "Geïnstalleerd {type}",
-  "@installed": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Extensions"
-        ]
-      }
-    }
-  },
-  "previousSeason": "Vorige seizoen",
-  "@previousSeason": {},
-  "activity": "{count, plural, =1 {Activiteit} other {Activiteiten}}",
-  "@activity": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "onHold": "In de wacht {type}",
-  "@onHold": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "averageDuration": "Gemiddelde duur",
-  "@averageDuration": {},
-  "characters": "Personages",
-  "@characters": {},
-  "popularity": "Populariteit",
-  "@popularity": {},
-  "prequel": "Prequel",
-  "@prequel": {},
-  "synopsis": "Beschrijving",
-  "@synopsis": {},
-  "tags": "Tags",
-  "@tags": {},
-  "total": "Totaal",
-  "@total": {},
-  "totalEpisodes": "Afleveringen",
-  "@totalEpisodes": {},
-  "totalChapters": "Hoofdstukken",
-  "@totalChapters": {},
-  "season": "Seizoen",
-  "@season": {},
-  "author": "Auteur",
-  "@author": {},
-  "format": "Formaat",
-  "@format": {},
-  "meanScore": "Gemiddelde score",
-  "@meanScore": {},
-  "name": "Naam",
-  "@name": {},
-  "nameRomaji": "Naam (Romaji)",
-  "@nameRomaji": {},
-  "relations": "Relaties",
-  "@relations": {},
-  "sequel": "Sequel",
-  "@sequel": {},
-  "source": "Bron",
-  "@source": {},
-  "staff": "Personeel",
-  "@staff": {},
-  "startDate": "Startdatum",
-  "@startDate": {},
-  "status": "Status",
-  "@status": {},
-  "studio": "Studio",
-  "@studio": {},
-  "synonyms": "Synoniemen",
-  "@synonyms": {},
-  "collapseText": "toon minder",
-  "@collapseText": {},
-  "comingSoon": "Komt binnenkort",
-  "@comingSoon": {},
-  "description": "Synopsis",
-  "@description": {},
-  "endDate": "Einddatum",
-  "@endDate": {},
-  "expandText": "toon meer",
-  "@expandText": {},
-  "favorites": "Favorieten",
-  "@favorites": {},
-  "loginTo": "Inloggen bij {service}",
-  "@loginTo": {
-    "placeholders": {
-      "service": {
-        "type": "String",
-        "examples": [
-          "Anilist",
-          "MyAnimeList",
-          "Kitsu",
-          "Discord"
-        ]
-      }
-    }
-  },
-  "manhwa": "Manhwa",
-  "@manhwa": {},
-  "manhua": "Manhua",
-  "@manhua": {},
-  "home": "Home",
-  "@home": {},
-  "novel": "Roman",
-  "@novel": {},
-  "ln": "Lichtroman",
-  "@ln": {},
-  "series": "Serie",
-  "@series": {},
-  "episode": "{count, plural, =1 {Aflevering} other {Afleveringen}}",
-  "@episode": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "volume": "{count, plural, =1 {Deel} other {Delen}}",
-  "@volume": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "movie": "{count, plural, =1 {Film} other {Films}}",
-  "@movie": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "confirmLogout": "Weet je zeker dat je wilt uitloggen?",
-  "@confirmLogout": {},
-  "gridView": "Rasterweergave",
-  "@gridView": {},
-  "chapterRead": "Hoofdstuk gelezen",
-  "@chapterRead": {},
-  "available": "Beschikbaar {type}",
-  "@available": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "trending": "Trending {type}",
-  "@trending": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "mostFavourite": "Meest favoriete {type}",
-  "@mostFavourite": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa"
-        ]
-      }
-    }
-  },
-  "popular": "Populair {type}",
-  "@popular": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa"
-        ]
-      }
-    }
-  },
-  "topRated": "Top beoordeelde {type}",
-  "@topRated": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa",
-          "Series"
-        ]
-      }
-    }
-  },
-  "thisSeason": "Dit seizoen",
-  "@thisSeason": {},
-  "nextSeason": "Volgend seizoen",
-  "@nextSeason": {},
-  "planned": "Geplande {type}",
-  "@planned": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "browse": "Bladeren door {type}",
-  "@browse": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "favorite": "Favoriet {type}",
-  "@favorite": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "noDropped": "Je hebt nog geen {type} gedropt.",
-  "@noDropped": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "continueReading": "Doorgaan met lezen",
-  "@continueReading": {},
-  "continueWatching": "Doorgaan met kijken",
-  "@continueWatching": {},
-  "recommended": "Aanbevolen",
-  "@recommended": {},
-  "addToList": "Toevoegen aan lijst",
-  "@addToList": {},
-  "dtu": "Te updaten",
-  "@dtu": {},
-  "info": "Informatie",
-  "@info": {},
-  "list": "{type} Lijst",
-  "@list": {
-    "placeholders": {
-      "type": {
-        "examples": "Anime list",
-        "type": "String"
-      }
-    }
-  },
-  "layout": "Indeling",
-  "@layout": {},
-  "noFavourites": "Het lijkt erop dat je niets leuk vindt,\nProbeer een show leuk te vinden om deze hier te houden.",
-  "@noFavourites": {},
-  "options": "Opties",
-  "@options": {},
-  "read": "Lezen",
-  "@read": {},
-  "recentUpdates": "Recente updates",
-  "@recentUpdates": {},
-  "search": "Zoeken",
-  "@search": {},
-  "sort": "Sorteer",
-  "@sort": {},
-  "watch": "Kijken",
-  "@watch": {},
-  "utd": "Van boven naar beneden",
-  "@utd": {},
-  "comments": "Reacties",
-  "@comments": {},
-  "language": "Taal",
-  "@language": {},
-  "topAiring": "Top uitzending",
-  "@topAiring": {},
-  "manageLayout": "Beheer de {page} pagina-indeling voor {service}",
-  "@manageLayout": {
-    "placeholders": {
-      "service": {
-        "type": "String",
-        "examples": [
-          "Anilist",
-          "MAL"
-        ]
-      },
-      "page": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Home",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "manageLayoutDescription": "Je kunt de indeling voor de {page} pagina beheren door de items te slepen en neer te zetten",
-  "@manageLayoutDescription": {
-    "placeholders": {
-      "page": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Home",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "pickColor": "Kies een kleur",
-  "@pickColor": {},
-  "allCaughtUpNew": "Alles bijgelezen, wat is er nieuw?",
-  "@allCaughtUpNew": {},
-  "droppedAnime": "Gedropte anime",
-  "@droppedAnime": {},
-  "droppedManga": "Gedropte manga",
-  "@droppedManga": {},
-  "hiddenMedia": "Verborgen media",
-  "@hiddenMedia": {},
-  "noHiddenMediaFound": "Geen verborgen media gevonden",
-  "@noHiddenMediaFound": {},
-  "noOnHold": "Het lijkt erop dat je niets in de wacht hebt gezet.",
-  "@noOnHold": {},
-  "recommendationsEmptyMessage": "Bekijk/Lees wat Anime of Manga om aanbevelingen te krijgen",
-  "@recommendationsEmptyMessage": {},
-  "kitsu": "Kitsu",
-  "@kitsu": {},
-  "simkl": "Simkl",
-  "@simkl": {},
-  "logFile": "Log File",
-  "@logFile": {},
-  "colorPickerDefault": "Default",
-  "@colorPickerDefault": {},
-  "logFileDescription": "Deel het logboek",
-  "@logFileDescription": {},
-  "addAnimeRepo": "Geef Anime Repo",
-  "@addAnimeRepo": {},
-  "loadExtensionsIconDesc": "Abel als verlenging pagina's",
-  "@loadExtensionsIconDesc": {},
-  "addAnimeRepoDesc": "Voeg Anime Repo toe van verschillende bronnen",
-  "@addAnimeRepoDesc": {},
-  "autoUpdateDesc": "Auto Update Extention",
-  "@autoUpdateDesc": {},
-  "addNovelRepoDesc": "Add Novel Repo van verschillende bronnen",
-  "@addNovelRepoDesc": {},
-  "addMangaRepoDesc": "Advert Manga Vertaling",
-  "@addMangaRepoDesc": {},
-  "addMangaRepo": "Advert Manga Repo",
-  "@addMangaRepo": {},
-  "addNovelRepo": "Nieuwe repository toevoegen",
-  "@addNovelRepo": {},
-  "autoUpdate": "Auto Update",
-  "@autoUpdate": {},
-  "loadExtensionsIcon": "Laad Extenions icon",
-  "@loadExtensionsIcon": {},
-  "colorPickerCustom": "Custom",
-  "@colorPickerCustom": {},
-  "selectDirectory": "Selecteer een directeur",
-  "@selectDirectory": {},
-  "customPathDescription": "Zet een gewoon pad om bestanden te redden\nLange pers verwijdert",
-  "@customPathDescription": {},
-  "selectMediaService": "Selecteer mediaservice",
-  "@selectMediaService": {},
-  "customPath": "Aangepast pad",
-  "@customPath": {},
-  "noChapterFound": "Geen hoofdstuk gevonden",
-  "@noChapterFound": {},
-  "watching": "Kijken",
-  "@watching": {},
-  "outOf": "ga weg",
-  "@outOf": {},
-  "selected": "Verkocht",
-  "@selected": {},
-  "readStatus": "Lezen",
-  "@readStatus": {},
-  "youTube": "Op YouTube spelen?",
-  "@youTube": {},
-  "mediaNotFound": "Media niet gevonden",
-  "@mediaNotFound": {},
-  "watchStatus": "_",
-  "@watchStatus": {},
-  "totalOf": "Volledig",
-  "@totalOf": {},
-  "found": "Gevonden",
-  "@found": {},
-  "wrongTitle": "Verkeerde Title?",
-  "@wrongTitle": {},
-  "installSourceToStart": "Een bron van uitgebreide pagina om te beginnen",
-  "@installSourceToStart": {},
-  "webView": "Web View",
-  "@webView": {},
-  "reading": "Lezing",
-  "@reading": {},
-  "readerSettingsDesc": "Verandering van de lezers",
-  "@readerSettingsDesc": {},
-  "readerSettings": "Reader Setting",
-  "@readerSettings": {},
-  "hidePageNumberDesc": "Verberg paginanummer terwijl ik",
-  "@hidePageNumberDesc": {},
-  "thumbLessSeekBar": "ThumbLes SeekBar",
-  "@thumbLessSeekBar": {},
-  "developersHelpersDesc": "Dartotsu's onbetaalde arbeid",
-  "@developersHelpersDesc": {},
-  "developersHelpers": "Ontwikkelaars/Helpers",
-  "@developersHelpers": {},
-  "thumbLessSeekBarDesc": "Verwijder de duim van de bar",
-  "@thumbLessSeekBarDesc": {},
-  "hidePageNumber": "Verberg Page Number",
-  "@hidePageNumber": {},
-  "differentCacheManagerDesc": "Gebruik verschillende Image cache manager",
-  "@differentCacheManagerDesc": {},
-  "differentCacheManager": "Anders Cache Manager",
-  "@differentCacheManager": {},
-  "direction": "Direction",
-  "@direction": {},
-  "spacedPagesDesc": "Voeg ruimte tussen pagina's",
-  "@spacedPagesDesc": {},
-  "spacedPages": "Space Pages",
-  "@spacedPages": {},
-  "hideScrollbarDesc": "Verberg scrollbar terwijl je leest",
-  "@hideScrollbarDesc": {},
-  "hideScrollbar": "Verberg Scrollbar",
-  "@hideScrollbar": {},
-  "playerSettingsDesc": "Veranderingsspeler",
-  "@playerSettingsDesc": {}
+    "appTagline": "De NIEUWE Beste App Voor\nHet Volgen van Anime & Manga",
+    "@appTagline": {},
+    "bottomPaddingDescription": "Onderste marge van ondertitels",
+    "@bottomPaddingDescription": {},
+    "cancel": "Annuleren",
+    "@cancel": {},
+    "colorPicker": "Kleurkiezer",
+    "@colorPicker": {},
+    "colorPickerDescription": "Selecteer een kleur",
+    "@colorPickerDescription": {},
+    "extension": "{count, plural, =1 {Uitbreiding} other {Uitbreidingen}}",
+    "@extension": {},
+    "theme": "Thema",
+    "@theme": {},
+    "themeDescription": "Pas de uitstraling en sfeer van je app aan",
+    "@themeDescription": {},
+    "accountDescription": "Beheer je AniList, MAL en Discord accounts moeiteloos",
+    "@accountDescription": {},
+    "anime": "Anime",
+    "@anime": {},
+    "animeDescription": "Personaliseer en beheer je anime voorkeuren",
+    "@animeDescription": {},
+    "about": "Over",
+    "@about": {},
+    "aboutDescription": "Leer meer over de app en de makers",
+    "@aboutDescription": {},
+    "account": "Account",
+    "@account": {},
+    "anilist": "AniList",
+    "@anilist": {},
+    "appName": "Dartotsu",
+    "@appName": {},
+    "backgroundColor": "Achtergrondkleur",
+    "@backgroundColor": {},
+    "backgroundColorDescription": "Achtergrondkleur van ondertitels",
+    "@backgroundColorDescription": {},
+    "bottomPadding": "Onderste marge",
+    "@bottomPadding": {},
+    "common": "Algemeen",
+    "@common": {},
+    "commonDescription": "Toegang tot algemene instellingen voor naadloos gebruik van de app",
+    "@commonDescription": {},
+    "cursedSpeed": "Vervloekte Snelheid",
+    "@cursedSpeed": {},
+    "cursedSpeedDescription": "Voor mensen die te druk zijn met het leven",
+    "@cursedSpeedDescription": {},
+    "customTheme": "Custom Theem",
+    "@customTheme": {},
+    "customThemeDescription": "Gebruik je eigen kleur voor het thema",
+    "@customThemeDescription": {},
+    "darkMode": "Donkere modus",
+    "@darkMode": {},
+    "discord": "Discord",
+    "@discord": {},
+    "donationGoal": "Geen donatiedoel op dit moment",
+    "@donationGoal": {},
+    "enableDarkMode": "Donkere modus inschakelen",
+    "@enableDarkMode": {},
+    "extensionsDescription": "Installeer en beheer extensies voor extra functionaliteit",
+    "@extensionsDescription": {},
+    "fontColor": "Letterkleur",
+    "@fontColor": {},
+    "fontColorDescription": "Letterkleur van ondertitels",
+    "@fontColorDescription": {},
+    "fontFamily": "Lettertype",
+    "@fontFamily": {},
+    "fontSize": "Lettergrootte",
+    "@fontSize": {},
+    "fontSizeDescription": "Lettergrootte van ondertitels",
+    "@fontSizeDescription": {},
+    "fontFamilyDescription": "Lettertype van ondertitels",
+    "@fontFamilyDescription": {},
+    "fontWeight": "Lettervet",
+    "@fontWeight": {},
+    "fontWeightDescription": "Lettervet van ondertitels",
+    "@fontWeightDescription": {},
+    "hidePrivate": "Verberg privé",
+    "@hidePrivate": {},
+    "hidePrivateDescription": "Verberg privéseries van de startpagina.",
+    "@hidePrivateDescription": {},
+    "incognitoMode": "Incognito modus",
+    "@incognitoMode": {},
+    "incognitoModeDescription": "Blader zonder je activiteit op te slaan",
+    "@incognitoModeDescription": {},
+    "login": "Inloggen",
+    "@login": {},
+    "logout": "Uitloggen {type}",
+    "@logout": {},
+    "mal": "MyAnimeList",
+    "@mal": {},
+    "manga": "Manga",
+    "@manga": {},
+    "mangaDescription": "Organiseer en pas je manga-ervaring aan",
+    "@mangaDescription": {},
+    "materialYou": "Material You",
+    "@materialYou": {},
+    "materialYouDescription": "Gebruik dezelfde kleur als je wallpaper",
+    "@materialYouDescription": {},
+    "no": "Nee",
+    "@no": {},
+    "notifications": "Meldingen",
+    "@notifications": {},
+    "notificationsDescription": "Configureer hoe en wanneer je meldingen ontvangt",
+    "@notificationsDescription": {},
+    "offlineMode": "Offline modus",
+    "@offlineMode": {},
+    "offlineModeDescription": "Gebruik de app zonder internetverbinding",
+    "@offlineModeDescription": {},
+    "ok": "OK",
+    "@ok": {},
+    "oledThemeVariant": "OLED-themavariant",
+    "@oledThemeVariant": {},
+    "oledThemeVariantDescription": "Schakel OLED-modus in",
+    "@oledThemeVariantDescription": {},
+    "outlineColor": "Randkleur",
+    "@outlineColor": {},
+    "outlineColorDescription": "Randkleur van ondertitels",
+    "@outlineColorDescription": {},
+    "playerSettingsTitle": "Spelerinstellingen",
+    "@playerSettingsTitle": {},
+    "resizeMode": "Wijzigmodus",
+    "@resizeMode": {},
+    "resizeModeDescription": "Standaard wijzigmodus voor speler",
+    "@resizeModeDescription": {},
+    "restoreSettings": "Herstel instellingen",
+    "@restoreSettings": {},
+    "settings": "Instellingen",
+    "@settings": {},
+    "showSubtitles": "Toon ondertitels",
+    "@showSubtitles": {},
+    "showSubtitlesDescription": "Toon ondertitels standaard",
+    "@showSubtitlesDescription": {},
+    "skipButton": "Overslaan-knop",
+    "@skipButton": {},
+    "skipButtonDescription": "Duur van de overslaan-knop",
+    "@skipButtonDescription": {},
+    "speed": "Snelheid",
+    "@speed": {},
+    "speedDescription": "Standaard snelheid voor speler",
+    "@speedDescription": {},
+    "subtitles": "Ondertitels",
+    "@subtitles": {},
+    "subtitlePreview": "Ondersteunt-preview",
+    "@subtitlePreview": {},
+    "supportMaintainer": "Wil je de beheerder van Dartotsu steunen?\nOverweeg te doneren",
+    "@supportMaintainer": {},
+    "yes": "Ja",
+    "@yes": {},
+    "chapter": "{count, plural, =1 {Hoofdstuk} other {Hoofdstukken}}",
+    "@chapter": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "genres": "Genres",
+    "@genres": {},
+    "calendar": "Kalender",
+    "@calendar": {},
+    "scanlators": "Scanlators",
+    "@scanlators": {},
+    "listView": "Lijstweergave",
+    "@listView": {},
+    "compactView": "Compacte weergave",
+    "@compactView": {},
+    "episodeWatched": "Aflevering bekeken",
+    "@episodeWatched": {},
+    "installed": "Geïnstalleerd {type}",
+    "@installed": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Extensions"
+                ]
+            }
+        }
+    },
+    "previousSeason": "Vorige seizoen",
+    "@previousSeason": {},
+    "activity": "{count, plural, =1 {Activiteit} other {Activiteiten}}",
+    "@activity": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "onHold": "In de wacht {type}",
+    "@onHold": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "averageDuration": "Gemiddelde duur",
+    "@averageDuration": {},
+    "characters": "Personages",
+    "@characters": {},
+    "popularity": "Populariteit",
+    "@popularity": {},
+    "prequel": "Prequel",
+    "@prequel": {},
+    "synopsis": "Beschrijving",
+    "@synopsis": {},
+    "tags": "Tags",
+    "@tags": {},
+    "total": "Totaal",
+    "@total": {},
+    "totalEpisodes": "Afleveringen",
+    "@totalEpisodes": {},
+    "totalChapters": "Hoofdstukken",
+    "@totalChapters": {},
+    "season": "Seizoen",
+    "@season": {},
+    "author": "Auteur",
+    "@author": {},
+    "format": "Formaat",
+    "@format": {},
+    "meanScore": "Gemiddelde score",
+    "@meanScore": {},
+    "name": "Naam",
+    "@name": {},
+    "nameRomaji": "Naam (Romaji)",
+    "@nameRomaji": {},
+    "relations": "Relaties",
+    "@relations": {},
+    "sequel": "Sequel",
+    "@sequel": {},
+    "source": "Bron",
+    "@source": {},
+    "staff": "Personeel",
+    "@staff": {},
+    "startDate": "Startdatum",
+    "@startDate": {},
+    "status": "Status",
+    "@status": {},
+    "studio": "Studio",
+    "@studio": {},
+    "synonyms": "Synoniemen",
+    "@synonyms": {},
+    "collapseText": "toon minder",
+    "@collapseText": {},
+    "comingSoon": "Komt binnenkort",
+    "@comingSoon": {},
+    "endDate": "Einddatum",
+    "@endDate": {},
+    "expandText": "toon meer",
+    "@expandText": {},
+    "favorites": "Favorieten",
+    "@favorites": {},
+    "loginTo": "Inloggen bij {service}",
+    "@loginTo": {
+        "placeholders": {
+            "service": {
+                "type": "String",
+                "examples": [
+                    "Anilist",
+                    "MyAnimeList",
+                    "Kitsu",
+                    "Discord"
+                ]
+            }
+        }
+    },
+    "manhwa": "Manhwa",
+    "@manhwa": {},
+    "manhua": "Manhua",
+    "@manhua": {},
+    "home": "Home",
+    "@home": {},
+    "novel": "Roman",
+    "@novel": {},
+    "ln": "Lichtroman",
+    "@ln": {},
+    "series": "Serie",
+    "@series": {},
+    "episode": "{count, plural, =1 {Aflevering} other {Afleveringen}}",
+    "@episode": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "volume": "{count, plural, =1 {Deel} other {Delen}}",
+    "@volume": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "movie": "{count, plural, =1 {Film} other {Films}}",
+    "@movie": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "confirmLogout": "Weet je zeker dat je wilt uitloggen?",
+    "@confirmLogout": {},
+    "gridView": "Rasterweergave",
+    "@gridView": {},
+    "chapterRead": "Hoofdstuk gelezen",
+    "@chapterRead": {},
+    "available": "Beschikbaar {type}",
+    "@available": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "trending": "Trending {type}",
+    "@trending": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "mostFavourite": "Meest favoriete {type}",
+    "@mostFavourite": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa"
+                ]
+            }
+        }
+    },
+    "popular": "Populair {type}",
+    "@popular": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa"
+                ]
+            }
+        }
+    },
+    "topRated": "Top beoordeelde {type}",
+    "@topRated": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa",
+                    "Series"
+                ]
+            }
+        }
+    },
+    "thisSeason": "Dit seizoen",
+    "@thisSeason": {},
+    "nextSeason": "Volgend seizoen",
+    "@nextSeason": {},
+    "planned": "Geplande {type}",
+    "@planned": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "browse": "Bladeren door {type}",
+    "@browse": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "favorite": "Favoriet {type}",
+    "@favorite": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "noDropped": "Je hebt nog geen {type} gedropt.",
+    "@noDropped": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "continueReading": "Doorgaan met lezen",
+    "@continueReading": {},
+    "continueWatching": "Doorgaan met kijken",
+    "@continueWatching": {},
+    "recommended": "Aanbevolen",
+    "@recommended": {},
+    "addToList": "Toevoegen aan lijst",
+    "@addToList": {},
+    "dtu": "Te updaten",
+    "@dtu": {},
+    "info": "Informatie",
+    "@info": {},
+    "list": "{type} Lijst",
+    "@list": {
+        "placeholders": {
+            "type": {
+                "examples": "Anime list",
+                "type": "String"
+            }
+        }
+    },
+    "layout": "Indeling",
+    "@layout": {},
+    "noFavourites": "Het lijkt erop dat je niets leuk vindt,\nProbeer een show leuk te vinden om deze hier te houden.",
+    "@noFavourites": {},
+    "options": "Opties",
+    "@options": {},
+    "read": "Lezen",
+    "@read": {},
+    "recentUpdates": "Recente updates",
+    "@recentUpdates": {},
+    "search": "Zoeken",
+    "@search": {},
+    "sort": "Sorteer",
+    "@sort": {},
+    "watch": "Kijken",
+    "@watch": {},
+    "utd": "Van boven naar beneden",
+    "@utd": {},
+    "comments": "Reacties",
+    "@comments": {},
+    "language": "Taal",
+    "@language": {},
+    "topAiring": "Top uitzending",
+    "@topAiring": {},
+    "manageLayout": "Beheer de {page} pagina-indeling voor {service}",
+    "@manageLayout": {
+        "placeholders": {
+            "service": {
+                "type": "String",
+                "examples": [
+                    "Anilist",
+                    "MAL"
+                ]
+            },
+            "page": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Home",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "manageLayoutDescription": "Je kunt de indeling voor de {page} pagina beheren door de items te slepen en neer te zetten",
+    "@manageLayoutDescription": {
+        "placeholders": {
+            "page": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Home",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "pickColor": "Kies een kleur",
+    "@pickColor": {},
+    "allCaughtUpNew": "Alles bijgelezen, wat is er nieuw?",
+    "@allCaughtUpNew": {},
+    "droppedAnime": "Gedropte anime",
+    "@droppedAnime": {},
+    "droppedManga": "Gedropte manga",
+    "@droppedManga": {},
+    "hiddenMedia": "Verborgen media",
+    "@hiddenMedia": {},
+    "noHiddenMediaFound": "Geen verborgen media gevonden",
+    "@noHiddenMediaFound": {},
+    "noOnHold": "Het lijkt erop dat je niets in de wacht hebt gezet.",
+    "@noOnHold": {},
+    "recommendationsEmptyMessage": "Bekijk/Lees wat Anime of Manga om aanbevelingen te krijgen",
+    "@recommendationsEmptyMessage": {},
+    "kitsu": "Kitsu",
+    "@kitsu": {},
+    "simkl": "Simkl",
+    "@simkl": {},
+    "logFile": "Log File",
+    "@logFile": {},
+    "colorPickerDefault": "Default",
+    "@colorPickerDefault": {},
+    "logFileDescription": "Deel het logboek",
+    "@logFileDescription": {},
+    "addAnimeRepo": "Geef Anime Repo",
+    "@addAnimeRepo": {},
+    "loadExtensionsIconDesc": "Abel als verlenging pagina's",
+    "@loadExtensionsIconDesc": {},
+    "addAnimeRepoDesc": "Voeg Anime Repo toe van verschillende bronnen",
+    "@addAnimeRepoDesc": {},
+    "autoUpdateDesc": "Auto Update Extention",
+    "@autoUpdateDesc": {},
+    "addNovelRepoDesc": "Add Novel Repo van verschillende bronnen",
+    "@addNovelRepoDesc": {},
+    "addMangaRepoDesc": "Advert Manga Vertaling",
+    "@addMangaRepoDesc": {},
+    "addMangaRepo": "Advert Manga Repo",
+    "@addMangaRepo": {},
+    "addNovelRepo": "Nieuwe repository toevoegen",
+    "@addNovelRepo": {},
+    "autoUpdate": "Auto Update",
+    "@autoUpdate": {},
+    "loadExtensionsIcon": "Laad Extenions icon",
+    "@loadExtensionsIcon": {},
+    "colorPickerCustom": "Custom",
+    "@colorPickerCustom": {},
+    "selectDirectory": "Selecteer een directeur",
+    "@selectDirectory": {},
+    "customPathDescription": "Zet een gewoon pad om bestanden te redden\nLange pers verwijdert",
+    "@customPathDescription": {},
+    "selectMediaService": "Selecteer mediaservice",
+    "@selectMediaService": {},
+    "customPath": "Aangepast pad",
+    "@customPath": {},
+    "noChapterFound": "Geen hoofdstuk gevonden",
+    "@noChapterFound": {},
+    "watching": "Kijken",
+    "@watching": {},
+    "outOf": "ga weg",
+    "@outOf": {},
+    "selected": "Verkocht",
+    "@selected": {},
+    "readStatus": "Lezen",
+    "@readStatus": {},
+    "youTube": "Op YouTube spelen?",
+    "@youTube": {},
+    "mediaNotFound": "Media niet gevonden",
+    "@mediaNotFound": {},
+    "watchStatus": "_",
+    "@watchStatus": {},
+    "totalOf": "Volledig",
+    "@totalOf": {},
+    "found": "Gevonden",
+    "@found": {},
+    "wrongTitle": "Verkeerde Title?",
+    "@wrongTitle": {},
+    "installSourceToStart": "Een bron van uitgebreide pagina om te beginnen",
+    "@installSourceToStart": {},
+    "webView": "Web View",
+    "@webView": {},
+    "reading": "Lezing",
+    "@reading": {},
+    "readerSettingsDesc": "Verandering van de lezers",
+    "@readerSettingsDesc": {},
+    "readerSettings": "Reader Setting",
+    "@readerSettings": {},
+    "hidePageNumberDesc": "Verberg paginanummer terwijl ik",
+    "@hidePageNumberDesc": {},
+    "thumbLessSeekBar": "ThumbLes SeekBar",
+    "@thumbLessSeekBar": {},
+    "developersHelpersDesc": "Dartotsu's onbetaalde arbeid",
+    "@developersHelpersDesc": {},
+    "developersHelpers": "Ontwikkelaars/Helpers",
+    "@developersHelpers": {},
+    "thumbLessSeekBarDesc": "Verwijder de duim van de bar",
+    "@thumbLessSeekBarDesc": {},
+    "hidePageNumber": "Verberg Page Number",
+    "@hidePageNumber": {},
+    "differentCacheManagerDesc": "Gebruik verschillende Image cache manager",
+    "@differentCacheManagerDesc": {},
+    "differentCacheManager": "Anders Cache Manager",
+    "@differentCacheManager": {},
+    "direction": "Direction",
+    "@direction": {},
+    "spacedPagesDesc": "Voeg ruimte tussen pagina's",
+    "@spacedPagesDesc": {},
+    "spacedPages": "Space Pages",
+    "@spacedPages": {},
+    "hideScrollbarDesc": "Verberg scrollbar terwijl je leest",
+    "@hideScrollbarDesc": {},
+    "hideScrollbar": "Verberg Scrollbar",
+    "@hideScrollbar": {},
+    "playerSettingsDesc": "Veranderingsspeler",
+    "@playerSettingsDesc": {},
+    "glassEffect": "Glas Effect",
+    "@glassEffect": {},
+    "ltr": "Links naar rechts",
+    "@ltr": {},
+    "coverThemeDescription": "Gebruik media beeld als thema kleur",
+    "@coverThemeDescription": {},
+    "rtl": "Rechts naar links",
+    "@rtl": {},
+    "glassEffectDescription": "Geeft een glas effect op de app",
+    "@glassEffectDescription": {},
+    "nextEpisodeRelease": "Episode 8X zal worden vrijgelaten",
+    "@nextEpisodeRelease": {
+        "description": "Message showing the next episode info",
+        "placeholders": {
+            "episode": {
+                "type": "int"
+            }
+        }
+    },
+    "topScore": "Top Score",
+    "@topScore": {},
+    "coverTheme": "Gebruik decover Theme",
+    "@coverTheme": {},
+    "customMPVDescription": "Enable this option to use your own MPV configuration file. Place your custom config at: {path}",
+    "@customMPVDescription": {
+        "placeholders": {
+            "path": {
+                "type": "String"
+            }
+        }
+    },
+    "customMPV": "Custom MPV Configuration",
+    "@customMPV": {}
 }

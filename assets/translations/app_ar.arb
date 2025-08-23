@@ -1,625 +1,656 @@
 {
-  "about": "حول",
-  "@about": {},
-  "aboutDescription": "تعرف أكثر عن التطبيق والمطورين",
-  "@aboutDescription": {},
-  "account": "الحساب",
-  "@account": {},
-  "accountDescription": "إدارة حسابات AniList و MAL و Discord بكل سهولة",
-  "@accountDescription": {},
-  "appTagline": "أفضل تطبيق جديد\nلتتبع الأنمي والمانجا",
-  "@appTagline": {},
-  "backgroundColor": "لون الخلفية",
-  "@backgroundColor": {},
-  "backgroundColorDescription": "لون خلفية الترجمة",
-  "@backgroundColorDescription": {},
-  "bottomPadding": "مسافة التوسيع السفلى",
-  "@bottomPadding": {},
-  "bottomPaddingDescription": "مسافة التوسيع السفلى للترجمة",
-  "@bottomPaddingDescription": {},
-  "cancel": "إلغاء",
-  "@cancel": {},
-  "colorPicker": "اختيار اللون",
-  "@colorPicker": {},
-  "colorPickerDescription": "اختر لوناً",
-  "@colorPickerDescription": {},
-  "common": "عام",
-  "@common": {},
-  "customTheme": "ثيم مخصص",
-  "@customTheme": {},
-  "fontFamilyDescription": "نوع خط الترجمة",
-  "@fontFamilyDescription": {},
-  "fontSize": "حجم الخط",
-  "@fontSize": {},
-  "fontWeight": "وزن الخط",
-  "@fontWeight": {},
-  "manga": "المانجا",
-  "@manga": {},
-  "mangaDescription": "تنظيم وتخصيص تجربتك مع المانجا",
-  "@mangaDescription": {},
-  "materialYou": "Material You",
-  "@materialYou": {},
-  "materialYouDescription": "استخدم نفس اللون خلفية الشاشة",
-  "@materialYouDescription": {},
-  "no": "لا",
-  "@no": {},
-  "notifications": "الإشعارات",
-  "@notifications": {},
-  "notificationsDescription": "تخصيص كيفية و وقت تلقي الإشعارات",
-  "@notificationsDescription": {},
-  "offlineMode": "وضع عدم الاتصال",
-  "@offlineMode": {},
-  "offlineModeDescription": "استخدام التطبيق بدون اتصال بالإنترنت",
-  "@offlineModeDescription": {},
-  "ok": "موافق",
-  "@ok": {},
-  "themeDescription": "تخصيص مظهر التطبيق",
-  "@themeDescription": {},
-  "yes": "نعم",
-  "@yes": {},
-  "anime": "الانمي",
-  "@anime": {},
-  "animeDescription": "تخصيص وإدارة تفضيلات الانمي الخاصة بك",
-  "@animeDescription": {},
-  "anilist": "AniList",
-  "@anilist": {},
-  "appName": "Dartotsu",
-  "@appName": {},
-  "customThemeDescription": "استخدم لونك الخاص للثيم",
-  "@customThemeDescription": {},
-  "commonDescription": "الوصول إلى الإعدادات العامة لاستخدام التطبيق بسلاسة",
-  "@commonDescription": {},
-  "cursedSpeed": "سرعة ملبوسه",
-  "@cursedSpeed": {},
-  "cursedSpeedDescription": "للأشخاص الذين لا يملكون وقتاً كافياً",
-  "@cursedSpeedDescription": {},
-  "darkMode": "الوضع المظلم",
-  "@darkMode": {},
-  "discord": "Discord",
-  "@discord": {},
-  "donationGoal": "لا يوجد هدف للتبرعات حالياً",
-  "@donationGoal": {},
-  "enableDarkMode": "تفعيل الوضع المظلم",
-  "@enableDarkMode": {},
-  "extension": "{count, plural, =1 {امتداد} other {امتدادات}}",
-  "@extension": {},
-  "extensionsDescription": "تثبيت وإدارة الإضافات لإضافة وظائف إضافية",
-  "@extensionsDescription": {},
-  "fontColor": "لون الخط",
-  "@fontColor": {},
-  "fontColorDescription": "لون خط الترجمة",
-  "@fontColorDescription": {},
-  "fontFamily": "نوع الخط",
-  "@fontFamily": {},
-  "fontSizeDescription": "حجم خط الترجمة",
-  "@fontSizeDescription": {},
-  "fontWeightDescription": "وزن خط الترجمة",
-  "@fontWeightDescription": {},
-  "hidePrivate": "إخفاء المحتوى الخاص",
-  "@hidePrivate": {},
-  "hidePrivateDescription": "إخفاء المحتوى الخاص من الصفحة الرئيسية.",
-  "@hidePrivateDescription": {},
-  "incognitoMode": "وضع التصفح الخفي",
-  "@incognitoMode": {},
-  "incognitoModeDescription": "تصفح دون حفظ نشاطك (يا خبيث)",
-  "@incognitoModeDescription": {},
-  "login": "تسجيل الدخول",
-  "@login": {},
-  "logout": "تسجيل الخروج من {type}",
-  "@logout": {},
-  "mal": "MyAnimeList",
-  "@mal": {},
-  "oledThemeVariant": "نسخة OLED من الثيم",
-  "@oledThemeVariant": {},
-  "oledThemeVariantDescription": "تفعيل وضع OLED",
-  "@oledThemeVariantDescription": {},
-  "outlineColor": "لون الإطار",
-  "@outlineColor": {},
-  "outlineColorDescription": "لون إطار الترجمة",
-  "@outlineColorDescription": {},
-  "playerSettingsTitle": "إعدادات مشغل الفيديو",
-  "@playerSettingsTitle": {},
-  "resizeMode": "وضع تغيير الحجم",
-  "@resizeMode": {},
-  "resizeModeDescription": "وضع الحجم الافتراضي لمشغل الفيديو",
-  "@resizeModeDescription": {},
-  "restoreSettings": "استعادة الإعدادات الافتراضية",
-  "@restoreSettings": {},
-  "settings": "الإعدادات",
-  "@settings": {},
-  "showSubtitles": "عرض الترجمة",
-  "@showSubtitles": {},
-  "showSubtitlesDescription": "عرض الترجمة بشكل افتراضي",
-  "@showSubtitlesDescription": {},
-  "skipButton": "زر التجاوز",
-  "@skipButton": {},
-  "skipButtonDescription": "مدة زر التجاوز",
-  "@skipButtonDescription": {},
-  "speed": "السرعة",
-  "@speed": {},
-  "speedDescription": "السرعة الافتراضية مشغل الفيديو",
-  "@speedDescription": {},
-  "subtitles": "الترجمة",
-  "@subtitles": {},
-  "subtitlePreview": "معاينة الترجمة",
-  "@subtitlePreview": {},
-  "supportMaintainer": "هل تريد دعم القائم على مطور Dartotsu؟\nفكر في التبرع",
-  "@supportMaintainer": {},
-  "theme": "الثيم",
-  "@theme": {},
-  "allCaughtUpNew": "كل شيء عالق، ما هو جديد؟?",
-  "@allCaughtUpNew": {},
-  "addToList": "الاضافة الي القائمة",
-  "@addToList": {},
-  "dtu": "من الاسفل للأعلي",
-  "@dtu": {},
-  "scanlators": "المترجمين",
-  "@scanlators": {},
-  "comments": "التعليقات",
-  "@comments": {},
-  "continueWatching": "تابع المشاهدة",
-  "@continueWatching": {},
-  "continueReading": "تابع القراءة",
-  "@continueReading": {},
-  "hiddenMedia": "المحتوي المخفي",
-  "@hiddenMedia": {},
-  "noHiddenMediaFound": "لا يوجد محتوي مخفي",
-  "@noHiddenMediaFound": {},
-  "options": "اختيارات",
-  "@options": {},
-  "read": "يقرأ",
-  "@read": {},
-  "recentUpdates": "التحديثات الأخيرة",
-  "@recentUpdates": {},
-  "recommended": "الموصي به",
-  "@recommended": {},
-  "recommendationsEmptyMessage": "شاهد/اقرأ بعض الأنمي أو المانجا للحصول على توصيات",
-  "@recommendationsEmptyMessage": {},
-  "search": "البحث",
-  "@search": {},
-  "sort": "ترتيب",
-  "@sort": {},
-  "droppedManga": "المانجا المتروكة",
-  "@droppedManga": {},
-  "droppedAnime": "الانميات المتروكة",
-  "@droppedAnime": {},
-  "topAiring": "افضل الانميات الجارية",
-  "@topAiring": {},
-  "utd": "من الأعلي الي الأسفل",
-  "@utd": {},
-  "watch": "المشاهدة",
-  "@watch": {},
-  "language": "اللغة",
-  "@language": {},
-  "list": "قائمة {type}",
-  "@list": {},
-  "layout": "تَخطِيط",
-  "@layout": {},
-  "info": "المعلومات",
-  "@info": {},
-  "noOnHold": "إنت لم توقف أي شئ حتي الآن.",
-  "@noOnHold": {},
-  "noFavourites": "يبدو أنك لا تحب شيئا،\nحاول الإعجاب بالعرض للاحتفاظ به هنا.",
-  "@noFavourites": {},
-  "manhua": "المانهوا (صينية)",
-  "@manhua": {},
-  "home": "الرئيسية",
-  "@home": {},
-  "novel": "رواية(نوڤل)",
-  "@novel": {},
-  "ln": "رواية خفيفة",
-  "@ln": {},
-  "series": "سلسلة",
-  "@series": {},
-  "episode": "{count, plural, =1 {حلقة} other {حلقات}}",
-  "@episode": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "volume": "{count, plural, =1 {مجلد} other {مجلدات}}",
-  "@volume": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "genres": "الأنواع",
-  "@genres": {},
-  "calendar": "التقويم",
-  "@calendar": {},
-  "confirmLogout": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
-  "@confirmLogout": {},
-  "gridView": "وضع الشبكة",
-  "@gridView": {},
-  "listView": "وضع القائمة",
-  "@listView": {},
-  "chapterRead": "فصول تم مشاهدتها",
-  "@chapterRead": {},
-  "installed": "{type} المثبتة",
-  "@installed": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Extensions"
-        ]
-      }
-    }
-  },
-  "trending": "{type} الشائعة",
-  "@trending": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "mostFavourite": "اكثر {type} تفضيلا",
-  "@mostFavourite": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa"
-        ]
-      }
-    }
-  },
-  "topRated": "اعلي {type} تقييما",
-  "@topRated": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa",
-          "Series"
-        ]
-      }
-    }
-  },
-  "thisSeason": "هذا الموسم",
-  "@thisSeason": {},
-  "nextSeason": "الموسم القادم",
-  "@nextSeason": {},
-  "previousSeason": "الموسم السابق",
-  "@previousSeason": {},
-  "onHold": "ال{type} المتوقفة",
-  "@onHold": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "favorite": "{type} المفضلة",
-  "@favorite": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "kitsu": "Kitsu",
-  "@kitsu": {},
-  "loginTo": "سجل الدخول الي {service}",
-  "@loginTo": {
-    "placeholders": {
-      "service": {
-        "type": "String",
-        "examples": [
-          "Anilist",
-          "MyAnimeList",
-          "Kitsu",
-          "Discord"
-        ]
-      }
-    }
-  },
-  "activity": "{count, plural, =1 {نشاط} other {أنشطة}}",
-  "@activity": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "movie": "{count, plural, =1 {فيلم} other {افلام}}",
-  "@movie": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "compactView": "وضع مضغوط",
-  "@compactView": {},
-  "planned": "{type} المخطط لها",
-  "@planned": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "episodeWatched": "حلقات تم مشاهدتها",
-  "@episodeWatched": {},
-  "browse": "تصفح {type}",
-  "@browse": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "available": "{type} المتاحة",
-  "@available": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "popular": "{type} مشهورة",
-  "@popular": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa"
-        ]
-      }
-    }
-  },
-  "season": "موسم",
-  "@season": {},
-  "chapter": "{count, plural, =1 {فصل} other {فصول}}",
-  "@chapter": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "noDropped": "انت لم تترك أي {type} بعد.",
-  "@noDropped": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "manhwa": "المانهوا",
-  "@manhwa": {},
-  "manageLayoutDescription": "يمكنك تغيير شكل صفحة {page} عن طريق سحب العناصر وإفلاتها",
-  "@manageLayoutDescription": {
-    "placeholders": {
-      "page": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Home",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "manageLayout": "تعديل شكل خدمة {service} علي صفحة {page}",
-  "@manageLayout": {
-    "placeholders": {
-      "service": {
-        "type": "String",
-        "examples": [
-          "Anilist",
-          "MAL"
-        ]
-      },
-      "page": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Home",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "pickColor": "اختر لون",
-  "@pickColor": {},
-  "staff": "طاقم عمل",
-  "@staff": {},
-  "startDate": "تاريخ البدء",
-  "@startDate": {},
-  "status": "الحالة",
-  "@status": {},
-  "studio": "الاستوديو",
-  "@studio": {},
-  "collapseText": "اظهر اقل",
-  "@collapseText": {},
-  "comingSoon": "قريباً",
-  "@comingSoon": {},
-  "description": "ملخص",
-  "@description": {},
-  "endDate": "تاريخ النهاية",
-  "@endDate": {},
-  "relations": "ذات صلة",
-  "@relations": {},
-  "sequel": "التالي",
-  "@sequel": {},
-  "source": "المصدر",
-  "@source": {},
-  "synonyms": "اسماء أخري",
-  "@synonyms": {},
-  "total": "الاجمالي",
-  "@total": {},
-  "totalEpisodes": "الحلقات",
-  "@totalEpisodes": {},
-  "totalChapters": "الفصول",
-  "@totalChapters": {},
-  "characters": "الشخصيات",
-  "@characters": {},
-  "format": "الشكل",
-  "@format": {},
-  "meanScore": "متوسط التقييمات",
-  "@meanScore": {},
-  "name": "الاسم",
-  "@name": {},
-  "nameRomaji": "الاسم (رومانچي)",
-  "@nameRomaji": {},
-  "synopsis": "ملخص",
-  "@synopsis": {},
-  "author": "المؤلف",
-  "@author": {},
-  "favorites": "المفضلة",
-  "@favorites": {},
-  "averageDuration": "متوسط مدة المشاهدة",
-  "@averageDuration": {},
-  "expandText": "اظهر المزيد",
-  "@expandText": {},
-  "popularity": "الشعبية",
-  "@popularity": {},
-  "tags": "Tags",
-  "@tags": {},
-  "prequel": "السابق",
-  "@prequel": {},
-  "simkl": "Simkl",
-  "@simkl": {},
-  "colorPickerDefault": "الافتراضي",
-  "@colorPickerDefault": {},
-  "colorPickerCustom": "مُخصص",
-  "@colorPickerCustom": {},
-  "logFileDescription": "مشاركة ملف السجل",
-  "@logFileDescription": {},
-  "addAnimeRepo": "إضافة مستودع الأنمي",
-  "@addAnimeRepo": {},
-  "loadExtensionsIconDesc": "تعطيل إذا كانت صفحة الامتدادات تتأخر",
-  "@loadExtensionsIconDesc": {},
-  "autoUpdateDesc": "التحديث التلقائي للامتدادات",
-  "@autoUpdateDesc": {},
-  "addNovelRepoDesc": "إضافة مستودع جديد من مصادر مختلفة",
-  "@addNovelRepoDesc": {},
-  "addMangaRepoDesc": "إضافة مستودع الأنمي من مصادر مختلفة",
-  "@addMangaRepoDesc": {},
-  "addAnimeRepoDesc": "أضف مستودعات الأنمي من مصادر مختلفة",
-  "@addAnimeRepoDesc": {},
-  "addMangaRepo": "إضافة مستودع المانجا",
-  "@addMangaRepo": {},
-  "logFile": "ملف السجل",
-  "@logFile": {},
-  "addNovelRepo": "إضافة مستودع جديد",
-  "@addNovelRepo": {},
-  "autoUpdate": "التحديث التلقائي",
-  "@autoUpdate": {},
-  "loadExtensionsIcon": "حمل ايقونات الامتدادات",
-  "@loadExtensionsIcon": {},
-  "customPath": "مسار التنزيل",
-  "@customPath": {},
-  "selectMediaService": "اختر مزود الوسائط",
-  "@selectMediaService": {},
-  "selectDirectory": "اختر مسار",
-  "@selectDirectory": {},
-  "customPathDescription": "وضع مسار لتنزيل الملفات\nاضغط ضغطة طويلة لإزالته",
-  "@customPathDescription": {},
-  "noChapterFound": "لا يوجد فصول",
-  "@noChapterFound": {},
-  "totalOf": "من اجمالي",
-  "@totalOf": {},
-  "watching": "جاري المشاهدة",
-  "@watching": {},
-  "outOf": "من",
-  "@outOf": {},
-  "selected": "مختارة",
-  "@selected": {},
-  "readStatus": "يقرأ",
-  "@readStatus": {},
-  "youTube": "تشغيل ڤيديو اليوتيوب ؟",
-  "@youTube": {},
-  "mediaNotFound": "لم يتم العثور علي وسائط",
-  "@mediaNotFound": {},
-  "found": "وجد",
-  "@found": {},
-  "watchStatus": "تم مشاهدته",
-  "@watchStatus": {},
-  "wrongTitle": "عنوان خاطئ؟",
-  "@wrongTitle": {},
-  "installSourceToStart": "قم بتثبيت مصدر من صفحة الامتدادات",
-  "@installSourceToStart": {},
-  "webView": "Web View",
-  "@webView": {},
-  "reading": "قراءة",
-  "@reading": {},
-  "direction": "التوجيه",
-  "@direction": {},
-  "thumbLessSeekBar": "شريط بحث بدون إبهام",
-  "@thumbLessSeekBar": {},
-  "thumbLessSeekBarDesc": "إزالة إبهام من الحانه",
-  "@thumbLessSeekBarDesc": {},
-  "readerSettings": "القراء",
-  "@readerSettings": {},
-  "hidePageNumberDesc": "الاختباء رقم الصفحة أثناء القراءة",
-  "@hidePageNumberDesc": {},
-  "developersHelpersDesc": "عمل دارتوتوسو بدون أجر",
-  "@developersHelpersDesc": {},
-  "developersHelpers": "المطورون/المساعدون",
-  "@developersHelpers": {},
-  "hidePageNumber": "العدد",
-  "@hidePageNumber": {},
-  "differentCacheManagerDesc": "إستعملْ مختلف مُديرَ مخبأِ التصوير",
-  "@differentCacheManagerDesc": {},
-  "differentCacheManager": "مدير كاش مختلف",
-  "@differentCacheManager": {},
-  "spacedPagesDesc": "يضاف حيز بين الصفحات",
-  "@spacedPagesDesc": {},
-  "spacedPages": "الصفحات الفضائية",
-  "@spacedPages": {},
-  "readerSettingsDesc": "تغيير أماكن القراءة",
-  "@readerSettingsDesc": {},
-  "hideScrollbarDesc": "اختبئي في وقت القراءة",
-  "@hideScrollbarDesc": {},
-  "hideScrollbar": "إخفاء شريط التمرير",
-  "@hideScrollbar": {},
-  "playerSettingsDesc": "تغيير أماكن اللاعبين",
-  "@playerSettingsDesc": {}
+    "about": "حول",
+    "@about": {},
+    "aboutDescription": "تعرف أكثر عن التطبيق والمطورين",
+    "@aboutDescription": {},
+    "account": "الحساب",
+    "@account": {},
+    "accountDescription": "إدارة حسابات AniList و MAL و Discord بكل سهولة",
+    "@accountDescription": {},
+    "appTagline": "أفضل تطبيق جديد\nلتتبع الأنمي والمانجا",
+    "@appTagline": {},
+    "backgroundColor": "لون الخلفية",
+    "@backgroundColor": {},
+    "backgroundColorDescription": "لون خلفية الترجمة",
+    "@backgroundColorDescription": {},
+    "bottomPadding": "مسافة التوسيع السفلى",
+    "@bottomPadding": {},
+    "bottomPaddingDescription": "مسافة التوسيع السفلى للترجمة",
+    "@bottomPaddingDescription": {},
+    "cancel": "إلغاء",
+    "@cancel": {},
+    "colorPicker": "اختيار اللون",
+    "@colorPicker": {},
+    "colorPickerDescription": "اختر لوناً",
+    "@colorPickerDescription": {},
+    "common": "عام",
+    "@common": {},
+    "customTheme": "العرف الموضوع",
+    "@customTheme": {},
+    "fontFamilyDescription": "نوع خط الترجمة",
+    "@fontFamilyDescription": {},
+    "fontSize": "حجم الخط",
+    "@fontSize": {},
+    "fontWeight": "وزن الخط",
+    "@fontWeight": {},
+    "manga": "المانجا",
+    "@manga": {},
+    "mangaDescription": "تنظيم وتخصيص تجربتك مع المانجا",
+    "@mangaDescription": {},
+    "materialYou": "Material You",
+    "@materialYou": {},
+    "materialYouDescription": "استخدم نفس اللون خلفية الشاشة",
+    "@materialYouDescription": {},
+    "no": "لا",
+    "@no": {},
+    "notifications": "الإشعارات",
+    "@notifications": {},
+    "notificationsDescription": "تخصيص كيفية و وقت تلقي الإشعارات",
+    "@notificationsDescription": {},
+    "offlineMode": "وضع عدم الاتصال",
+    "@offlineMode": {},
+    "offlineModeDescription": "استخدام التطبيق بدون اتصال بالإنترنت",
+    "@offlineModeDescription": {},
+    "ok": "موافق",
+    "@ok": {},
+    "themeDescription": "تخصيص مظهر التطبيق",
+    "@themeDescription": {},
+    "yes": "نعم",
+    "@yes": {},
+    "anime": "الانمي",
+    "@anime": {},
+    "animeDescription": "تخصيص وإدارة تفضيلات الانمي الخاصة بك",
+    "@animeDescription": {},
+    "anilist": "AniList",
+    "@anilist": {},
+    "appName": "Dartotsu",
+    "@appName": {},
+    "customThemeDescription": "استخدم لونك الخاص للثيم",
+    "@customThemeDescription": {},
+    "commonDescription": "الوصول إلى الإعدادات العامة لاستخدام التطبيق بسلاسة",
+    "@commonDescription": {},
+    "cursedSpeed": "سرعة ملبوسه",
+    "@cursedSpeed": {},
+    "cursedSpeedDescription": "للأشخاص الذين لا يملكون وقتاً كافياً",
+    "@cursedSpeedDescription": {},
+    "darkMode": "الوضع المظلم",
+    "@darkMode": {},
+    "discord": "Discord",
+    "@discord": {},
+    "donationGoal": "لا يوجد هدف للتبرعات حالياً",
+    "@donationGoal": {},
+    "enableDarkMode": "تفعيل الوضع المظلم",
+    "@enableDarkMode": {},
+    "extension": "{count, plural, =1 {امتداد} other {امتدادات}}",
+    "@extension": {},
+    "extensionsDescription": "تثبيت وإدارة الإضافات لإضافة وظائف إضافية",
+    "@extensionsDescription": {},
+    "fontColor": "لون الخط",
+    "@fontColor": {},
+    "fontColorDescription": "لون خط الترجمة",
+    "@fontColorDescription": {},
+    "fontFamily": "نوع الخط",
+    "@fontFamily": {},
+    "fontSizeDescription": "حجم خط الترجمة",
+    "@fontSizeDescription": {},
+    "fontWeightDescription": "وزن خط الترجمة",
+    "@fontWeightDescription": {},
+    "hidePrivate": "إخفاء المحتوى الخاص",
+    "@hidePrivate": {},
+    "hidePrivateDescription": "إخفاء المحتوى الخاص من الصفحة الرئيسية.",
+    "@hidePrivateDescription": {},
+    "incognitoMode": "وضع التصفح الخفي",
+    "@incognitoMode": {},
+    "incognitoModeDescription": "تصفح دون حفظ نشاطك (يا خبيث)",
+    "@incognitoModeDescription": {},
+    "login": "تسجيل الدخول",
+    "@login": {},
+    "logout": "تسجيل الخروج من {type}",
+    "@logout": {},
+    "mal": "MyAnimeList",
+    "@mal": {},
+    "oledThemeVariant": "نسخة OLED من الثيم",
+    "@oledThemeVariant": {},
+    "oledThemeVariantDescription": "تفعيل وضع OLED",
+    "@oledThemeVariantDescription": {},
+    "outlineColor": "لون الإطار",
+    "@outlineColor": {},
+    "outlineColorDescription": "لون إطار الترجمة",
+    "@outlineColorDescription": {},
+    "playerSettingsTitle": "إعدادات مشغل الفيديو",
+    "@playerSettingsTitle": {},
+    "resizeMode": "وضع تغيير الحجم",
+    "@resizeMode": {},
+    "resizeModeDescription": "وضع الحجم الافتراضي لمشغل الفيديو",
+    "@resizeModeDescription": {},
+    "restoreSettings": "استعادة الإعدادات الافتراضية",
+    "@restoreSettings": {},
+    "settings": "الإعدادات",
+    "@settings": {},
+    "showSubtitles": "عرض الترجمة",
+    "@showSubtitles": {},
+    "showSubtitlesDescription": "عرض الترجمة بشكل افتراضي",
+    "@showSubtitlesDescription": {},
+    "skipButton": "زر التجاوز",
+    "@skipButton": {},
+    "skipButtonDescription": "مدة زر التجاوز",
+    "@skipButtonDescription": {},
+    "speed": "السرعة",
+    "@speed": {},
+    "speedDescription": "السرعة الافتراضية مشغل الفيديو",
+    "@speedDescription": {},
+    "subtitles": "الترجمة",
+    "@subtitles": {},
+    "subtitlePreview": "معاينة الترجمة",
+    "@subtitlePreview": {},
+    "supportMaintainer": "هل تريد دعم القائم على مطور Dartotsu؟\nفكر في التبرع",
+    "@supportMaintainer": {},
+    "theme": "الثيم",
+    "@theme": {},
+    "allCaughtUpNew": "كل شيء عالق، ما هو جديد؟?",
+    "@allCaughtUpNew": {},
+    "addToList": "الاضافة الي القائمة",
+    "@addToList": {},
+    "dtu": "من الاسفل للأعلي",
+    "@dtu": {},
+    "scanlators": "المترجمين",
+    "@scanlators": {},
+    "comments": "التعليقات",
+    "@comments": {},
+    "continueWatching": "تابع المشاهدة",
+    "@continueWatching": {},
+    "continueReading": "تابع القراءة",
+    "@continueReading": {},
+    "hiddenMedia": "المحتوي المخفي",
+    "@hiddenMedia": {},
+    "noHiddenMediaFound": "لا يوجد محتوي مخفي",
+    "@noHiddenMediaFound": {},
+    "options": "اختيارات",
+    "@options": {},
+    "read": "يقرأ",
+    "@read": {},
+    "recentUpdates": "التحديثات الأخيرة",
+    "@recentUpdates": {},
+    "recommended": "الموصي به",
+    "@recommended": {},
+    "recommendationsEmptyMessage": "شاهد/اقرأ بعض الأنمي أو المانجا للحصول على توصيات",
+    "@recommendationsEmptyMessage": {},
+    "search": "البحث",
+    "@search": {},
+    "sort": "ترتيب",
+    "@sort": {},
+    "droppedManga": "المانجا المتروكة",
+    "@droppedManga": {},
+    "droppedAnime": "الانميات المتروكة",
+    "@droppedAnime": {},
+    "topAiring": "افضل الانميات الجارية",
+    "@topAiring": {},
+    "utd": "من الأعلي الي الأسفل",
+    "@utd": {},
+    "watch": "المشاهدة",
+    "@watch": {},
+    "language": "اللغة",
+    "@language": {},
+    "list": "قائمة {type}",
+    "@list": {},
+    "layout": "تَخطِيط",
+    "@layout": {},
+    "info": "المعلومات",
+    "@info": {},
+    "noOnHold": "إنت لم توقف أي شئ حتي الآن.",
+    "@noOnHold": {},
+    "noFavourites": "يبدو أنك لا تحب شيئا،\nحاول الإعجاب بالعرض للاحتفاظ به هنا.",
+    "@noFavourites": {},
+    "manhua": "المانهوا (صينية)",
+    "@manhua": {},
+    "home": "الرئيسية",
+    "@home": {},
+    "novel": "رواية(نوڤل)",
+    "@novel": {},
+    "ln": "رواية خفيفة",
+    "@ln": {},
+    "series": "سلسلة",
+    "@series": {},
+    "episode": "{count, plural, =1 {حلقة} other {حلقات}}",
+    "@episode": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "volume": "{count, plural, =1 {مجلد} other {مجلدات}}",
+    "@volume": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "genres": "الأنواع",
+    "@genres": {},
+    "calendar": "التقويم",
+    "@calendar": {},
+    "confirmLogout": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
+    "@confirmLogout": {},
+    "gridView": "وضع الشبكة",
+    "@gridView": {},
+    "listView": "وضع القائمة",
+    "@listView": {},
+    "chapterRead": "فصول تم مشاهدتها",
+    "@chapterRead": {},
+    "installed": "{type} المثبتة",
+    "@installed": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Extensions"
+                ]
+            }
+        }
+    },
+    "trending": "{type} الشائعة",
+    "@trending": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "mostFavourite": "اكثر {type} تفضيلا",
+    "@mostFavourite": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa"
+                ]
+            }
+        }
+    },
+    "topRated": "اعلي {type} تقييما",
+    "@topRated": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa",
+                    "Series"
+                ]
+            }
+        }
+    },
+    "thisSeason": "هذا الموسم",
+    "@thisSeason": {},
+    "nextSeason": "الموسم القادم",
+    "@nextSeason": {},
+    "previousSeason": "الموسم السابق",
+    "@previousSeason": {},
+    "onHold": "ال{type} المتوقفة",
+    "@onHold": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "favorite": "{type} المفضلة",
+    "@favorite": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "kitsu": "Kitsu",
+    "@kitsu": {},
+    "loginTo": "سجل الدخول الي {service}",
+    "@loginTo": {
+        "placeholders": {
+            "service": {
+                "type": "String",
+                "examples": [
+                    "Anilist",
+                    "MyAnimeList",
+                    "Kitsu",
+                    "Discord"
+                ]
+            }
+        }
+    },
+    "activity": "{count, plural, =1 {نشاط} other {أنشطة}}",
+    "@activity": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "movie": "{count, plural, =1 {فيلم} other {افلام}}",
+    "@movie": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "compactView": "وضع مضغوط",
+    "@compactView": {},
+    "planned": "{type} المخطط لها",
+    "@planned": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "episodeWatched": "حلقات تم مشاهدتها",
+    "@episodeWatched": {},
+    "browse": "تصفح {type}",
+    "@browse": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "available": "{type} المتاحة",
+    "@available": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "popular": "{type} مشهورة",
+    "@popular": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa"
+                ]
+            }
+        }
+    },
+    "season": "موسم",
+    "@season": {},
+    "chapter": "{count, plural, =1 {فصل} other {فصول}}",
+    "@chapter": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "noDropped": "انت لم تترك أي {type} بعد.",
+    "@noDropped": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "manhwa": "المانهوا",
+    "@manhwa": {},
+    "manageLayoutDescription": "يمكنك تغيير شكل صفحة {page} عن طريق سحب العناصر وإفلاتها",
+    "@manageLayoutDescription": {
+        "placeholders": {
+            "page": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Home",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "manageLayout": "تعديل شكل خدمة {service} علي صفحة {page}",
+    "@manageLayout": {
+        "placeholders": {
+            "service": {
+                "type": "String",
+                "examples": [
+                    "Anilist",
+                    "MAL"
+                ]
+            },
+            "page": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Home",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "pickColor": "اختر لون",
+    "@pickColor": {},
+    "staff": "طاقم عمل",
+    "@staff": {},
+    "startDate": "تاريخ البدء",
+    "@startDate": {},
+    "status": "الحالة",
+    "@status": {},
+    "studio": "الاستوديو",
+    "@studio": {},
+    "collapseText": "اظهر اقل",
+    "@collapseText": {},
+    "comingSoon": "قريباً",
+    "@comingSoon": {},
+    "endDate": "تاريخ النهاية",
+    "@endDate": {},
+    "relations": "ذات صلة",
+    "@relations": {},
+    "sequel": "التالي",
+    "@sequel": {},
+    "source": "المصدر",
+    "@source": {},
+    "synonyms": "اسماء أخري",
+    "@synonyms": {},
+    "total": "الاجمالي",
+    "@total": {},
+    "totalEpisodes": "الحلقات",
+    "@totalEpisodes": {},
+    "totalChapters": "الفصول",
+    "@totalChapters": {},
+    "characters": "الشخصيات",
+    "@characters": {},
+    "format": "الشكل",
+    "@format": {},
+    "meanScore": "متوسط التقييمات",
+    "@meanScore": {},
+    "name": "الاسم",
+    "@name": {},
+    "nameRomaji": "الاسم (رومانچي)",
+    "@nameRomaji": {},
+    "synopsis": "ملخص",
+    "@synopsis": {},
+    "author": "المؤلف",
+    "@author": {},
+    "favorites": "المفضلة",
+    "@favorites": {},
+    "averageDuration": "متوسط مدة المشاهدة",
+    "@averageDuration": {},
+    "expandText": "اظهر المزيد",
+    "@expandText": {},
+    "popularity": "الشعبية",
+    "@popularity": {},
+    "tags": "Tags",
+    "@tags": {},
+    "prequel": "السابق",
+    "@prequel": {},
+    "simkl": "Simkl",
+    "@simkl": {},
+    "colorPickerDefault": "الافتراضي",
+    "@colorPickerDefault": {},
+    "colorPickerCustom": "مُخصص",
+    "@colorPickerCustom": {},
+    "logFileDescription": "مشاركة ملف السجل",
+    "@logFileDescription": {},
+    "addAnimeRepo": "إضافة مستودع الأنمي",
+    "@addAnimeRepo": {},
+    "loadExtensionsIconDesc": "تعطيل إذا كانت صفحة الامتدادات تتأخر",
+    "@loadExtensionsIconDesc": {},
+    "autoUpdateDesc": "التحديث التلقائي للامتدادات",
+    "@autoUpdateDesc": {},
+    "addNovelRepoDesc": "إضافة مستودع جديد من مصادر مختلفة",
+    "@addNovelRepoDesc": {},
+    "addMangaRepoDesc": "إضافة مستودع الأنمي من مصادر مختلفة",
+    "@addMangaRepoDesc": {},
+    "addAnimeRepoDesc": "أضف مستودعات الأنمي من مصادر مختلفة",
+    "@addAnimeRepoDesc": {},
+    "addMangaRepo": "إضافة مستودع المانجا",
+    "@addMangaRepo": {},
+    "logFile": "ملف السجل",
+    "@logFile": {},
+    "addNovelRepo": "إضافة مستودع جديد",
+    "@addNovelRepo": {},
+    "autoUpdate": "التحديث التلقائي",
+    "@autoUpdate": {},
+    "loadExtensionsIcon": "حمل ايقونات الامتدادات",
+    "@loadExtensionsIcon": {},
+    "customPath": "مسار التنزيل",
+    "@customPath": {},
+    "selectMediaService": "اختر مزود الوسائط",
+    "@selectMediaService": {},
+    "selectDirectory": "اختر مسار",
+    "@selectDirectory": {},
+    "customPathDescription": "وضع مسار لتنزيل الملفات\nاضغط ضغطة طويلة لإزالته",
+    "@customPathDescription": {},
+    "noChapterFound": "لا يوجد فصول",
+    "@noChapterFound": {},
+    "totalOf": "من اجمالي",
+    "@totalOf": {},
+    "watching": "جاري المشاهدة",
+    "@watching": {},
+    "outOf": "من",
+    "@outOf": {},
+    "selected": "مختارة",
+    "@selected": {},
+    "readStatus": "يقرأ",
+    "@readStatus": {},
+    "youTube": "تشغيل ڤيديو اليوتيوب ؟",
+    "@youTube": {},
+    "mediaNotFound": "لم يتم العثور علي وسائط",
+    "@mediaNotFound": {},
+    "found": "وجد",
+    "@found": {},
+    "watchStatus": "تم مشاهدته",
+    "@watchStatus": {},
+    "wrongTitle": "عنوان خاطئ؟",
+    "@wrongTitle": {},
+    "installSourceToStart": "قم بتثبيت مصدر من صفحة الامتدادات",
+    "@installSourceToStart": {},
+    "webView": "Web View",
+    "@webView": {},
+    "reading": "قراءة",
+    "@reading": {},
+    "direction": "التوجيه",
+    "@direction": {},
+    "thumbLessSeekBar": "شريط بحث بدون إبهام",
+    "@thumbLessSeekBar": {},
+    "thumbLessSeekBarDesc": "إزالة إبهام من الحانه",
+    "@thumbLessSeekBarDesc": {},
+    "readerSettings": "القراء",
+    "@readerSettings": {},
+    "hidePageNumberDesc": "الاختباء رقم الصفحة أثناء القراءة",
+    "@hidePageNumberDesc": {},
+    "developersHelpersDesc": "عمل دارتوتوسو بدون أجر",
+    "@developersHelpersDesc": {},
+    "developersHelpers": "المطورون/المساعدون",
+    "@developersHelpers": {},
+    "hidePageNumber": "العدد",
+    "@hidePageNumber": {},
+    "differentCacheManagerDesc": "إستعملْ مختلف مُديرَ مخبأِ التصوير",
+    "@differentCacheManagerDesc": {},
+    "differentCacheManager": "مدير كاش مختلف",
+    "@differentCacheManager": {},
+    "spacedPagesDesc": "يضاف حيز بين الصفحات",
+    "@spacedPagesDesc": {},
+    "spacedPages": "الصفحات الفضائية",
+    "@spacedPages": {},
+    "readerSettingsDesc": "تغيير أماكن القراءة",
+    "@readerSettingsDesc": {},
+    "hideScrollbarDesc": "اختبئي في وقت القراءة",
+    "@hideScrollbarDesc": {},
+    "hideScrollbar": "إخفاء شريط التمرير",
+    "@hideScrollbar": {},
+    "playerSettingsDesc": "تغيير أماكن اللاعبين",
+    "@playerSettingsDesc": {},
+    "glassEffect": "Glas Effect",
+    "@glassEffect": {},
+    "ltr": "يسار إلى اليمين",
+    "@ltr": {},
+    "coverThemeDescription": "استخدام صورة التغطية الإعلامية كلون موضوعي",
+    "@coverThemeDescription": {},
+    "rtl": "يمين إلى اليسار",
+    "@rtl": {},
+    "glassEffectDescription": "يعطي مفعولاً زجاجياً مقلياً على التطبيق",
+    "@glassEffectDescription": {},
+    "nextEpisodeRelease": "Episode {episode} will be released in",
+    "@nextEpisodeRelease": {
+        "description": "Message showing the next episode info",
+        "placeholders": {
+            "episode": {
+                "type": "int"
+            }
+        }
+    },
+    "topScore": "القمة",
+    "@topScore": {},
+    "coverTheme": "استخدام موضوع التغطية",
+    "@coverTheme": {},
+    "customMPVDescription": "Enable this option to use your own MPV configuration file. Place your custom config at: {path}",
+    "@customMPVDescription": {
+        "placeholders": {
+            "path": {
+                "type": "String"
+            }
+        }
+    },
+    "customMPV": "Custom MPV Configuration",
+    "@customMPV": {}
 }

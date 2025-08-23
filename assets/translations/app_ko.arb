@@ -1,632 +1,663 @@
 {
-  "theme": "테마",
-  "@theme": {},
-  "themeDescription": "앱의 외관과 분위기를 개인화하세요",
-  "@themeDescription": {},
-  "yes": "예",
-  "@yes": {},
-  "about": "앱 정보",
-  "@about": {},
-  "aboutDescription": "앱과 제작자에 대해 더 알아보세요",
-  "@aboutDescription": {},
-  "account": "계정",
-  "@account": {},
-  "accountDescription": "AniList, MAL, Discord 계정을 손쉽게 관리하세요",
-  "@accountDescription": {},
-  "anime": "애니메이션",
-  "@anime": {},
-  "animeDescription": "애니메이션 설정을 개인화하고 관리하세요",
-  "@animeDescription": {},
-  "anilist": "AniList",
-  "@anilist": {},
-  "appName": "Dartotsu",
-  "@appName": {},
-  "appTagline": "새로운 앱\n애니메이션 & 만화",
-  "@appTagline": {},
-  "backgroundColor": "배경 색상",
-  "@backgroundColor": {},
-  "backgroundColorDescription": "자막 배경 색상",
-  "@backgroundColorDescription": {},
-  "bottomPadding": "하단 여백",
-  "@bottomPadding": {},
-  "bottomPaddingDescription": "자막 하단 여백",
-  "@bottomPaddingDescription": {},
-  "colorPicker": "색상 선택기",
-  "@colorPicker": {},
-  "colorPickerDescription": "색상을 선택하세요",
-  "@colorPickerDescription": {},
-  "cancel": "취소",
-  "@cancel": {},
-  "common": "일반",
-  "@common": {},
-  "commonDescription": "앱 사용을 원활하게 위한 일반 설정에 접근하세요",
-  "@commonDescription": {},
-  "cursedSpeed": "저주받은 속도",
-  "@cursedSpeed": {},
-  "cursedSpeedDescription": "바쁜 사람들을 위한 속도",
-  "@cursedSpeedDescription": {},
-  "customTheme": "커스텀 테마",
-  "@customTheme": {},
-  "discord": "Discord",
-  "@discord": {},
-  "donationGoal": "현재 기부 목표 없음",
-  "@donationGoal": {},
-  "enableDarkMode": "다크 모드 활성화",
-  "@enableDarkMode": {},
-  "customThemeDescription": "자신만의 색상으로 테마를 설정하세요",
-  "@customThemeDescription": {},
-  "darkMode": "다크 모드",
-  "@darkMode": {},
-  "extension": "{count, plural, =1 {확대} other {확장}}",
-  "@extension": {},
-  "extensionsDescription": "기능을 추가하기 위해 확장을 설치하고 관리하세요",
-  "@extensionsDescription": {},
-  "fontColor": "글꼴 색상",
-  "@fontColor": {},
-  "fontColorDescription": "자막 글꼴 색상",
-  "@fontColorDescription": {},
-  "fontFamily": "글꼴 패밀리",
-  "@fontFamily": {},
-  "fontFamilyDescription": "자막 글꼴 패밀리",
-  "@fontFamilyDescription": {},
-  "fontSize": "글꼴 크기",
-  "@fontSize": {},
-  "fontSizeDescription": "자막 글꼴 크기",
-  "@fontSizeDescription": {},
-  "fontWeight": "글꼴 두께",
-  "@fontWeight": {},
-  "fontWeightDescription": "자막 글꼴 두께",
-  "@fontWeightDescription": {},
-  "hidePrivate": "비공개 숨기기",
-  "@hidePrivate": {},
-  "hidePrivateDescription": "홈 페이지의 개인 시리즈 숨기기.",
-  "@hidePrivateDescription": {},
-  "incognitoMode": "인코그니토 모드",
-  "@incognitoMode": {},
-  "incognitoModeDescription": "활동을 저장하지 않고 탐색하기",
-  "@incognitoModeDescription": {},
-  "login": "로그인",
-  "@login": {},
-  "logout": "로그아웃 {type}",
-  "@logout": {},
-  "mal": "MyAnimeList",
-  "@mal": {},
-  "manga": "만화",
-  "@manga": {},
-  "mangaDescription": "만화 경험을 조직하고 개인화하세요",
-  "@mangaDescription": {},
-  "materialYou": "Material You",
-  "@materialYou": {},
-  "materialYouDescription": "배경화면과 동일한 색상을 사용하세요",
-  "@materialYouDescription": {},
-  "no": "아니오",
-  "@no": {},
-  "notifications": "알림",
-  "@notifications": {},
-  "notificationsDescription": "알림 수신 방식과 시점을 설정하세요",
-  "@notificationsDescription": {},
-  "offlineMode": "오프라인 모드",
-  "@offlineMode": {},
-  "offlineModeDescription": "인터넷 연결 없이 앱을 사용하세요",
-  "@offlineModeDescription": {},
-  "ok": "확인",
-  "@ok": {},
-  "oledThemeVariant": "OLED 테마 변형",
-  "@oledThemeVariant": {},
-  "oledThemeVariantDescription": "OLED 모드 활성화",
-  "@oledThemeVariantDescription": {},
-  "outlineColor": "윤곽선 색상",
-  "@outlineColor": {},
-  "outlineColorDescription": "자막 윤곽선 색상",
-  "@outlineColorDescription": {},
-  "playerSettingsTitle": "플레이어 설정",
-  "@playerSettingsTitle": {},
-  "resizeMode": "크기 조정 모드",
-  "@resizeMode": {},
-  "resizeModeDescription": "플레이어의 기본 크기 조정 모드",
-  "@resizeModeDescription": {},
-  "restoreSettings": "설정 복원",
-  "@restoreSettings": {},
-  "settings": "설정",
-  "@settings": {},
-  "showSubtitles": "자막 표시",
-  "@showSubtitles": {},
-  "showSubtitlesDescription": "기본적으로 자막을 표시하세요",
-  "@showSubtitlesDescription": {},
-  "skipButton": "건너뛰기 버튼",
-  "@skipButton": {},
-  "skipButtonDescription": "건너뛰기 버튼 지속 시간",
-  "@skipButtonDescription": {},
-  "speed": "속도",
-  "@speed": {},
-  "speedDescription": "플레이어의 기본 속도",
-  "@speedDescription": {},
-  "subtitles": "자막",
-  "@subtitles": {},
-  "subtitlePreview": "자막 미리보기",
-  "@subtitlePreview": {},
-  "supportMaintainer": "Dartotsu의 유지보수를 지원하고 싶으신가요?\n기부를 고려해 주세요",
-  "@supportMaintainer": {},
-  "totalEpisodes": "인기 있는",
-  "@totalEpisodes": {},
-  "onHold": "홀딩 {type}",
-  "@onHold": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "ln": "빛 Novel",
-  "@ln": {},
-  "trending": "동향 {type}",
-  "@trending": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "favorite": "마음에 드는 {type}",
-  "@favorite": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "nextSeason": "다음 시즌",
-  "@nextSeason": {},
-  "manhwa": "언어: 한국어",
-  "@manhwa": {},
-  "novel": "이름 *",
-  "@novel": {},
-  "tags": "이름 *",
-  "@tags": {},
-  "activity": "{count, plural, =1 {활동} other {활동}}",
-  "@activity": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "continueWatching": "계속 시청",
-  "@continueWatching": {},
-  "topRated": "최고 정격 {type}",
-  "@topRated": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa",
-          "Series"
-        ]
-      }
-    }
-  },
-  "previousSeason": "이전 시즌",
-  "@previousSeason": {},
-  "popular": "인기 {type}",
-  "@popular": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa"
-        ]
-      }
-    }
-  },
-  "description": "관련 기사",
-  "@description": {},
-  "installed": "설치 {type}",
-  "@installed": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Extensions"
-        ]
-      }
-    }
-  },
-  "mostFavourite": "대부분의 Favourite {type}",
-  "@mostFavourite": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa"
-        ]
-      }
-    }
-  },
-  "endDate": "종료일",
-  "@endDate": {},
-  "chapterRead": "장 읽기",
-  "@chapterRead": {},
-  "gridView": "그리드 뷰",
-  "@gridView": {},
-  "browse": "검색 {type}",
-  "@browse": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "staff": "한국어",
-  "@staff": {},
-  "episode": "{count, plural, =1 {삽화} other {에피소드}}",
-  "@episode": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "status": "주요연혁",
-  "@status": {},
-  "popularity": "인기있는",
-  "@popularity": {},
-  "favorites": "이름 *",
-  "@favorites": {},
-  "prequel": "상품정보",
-  "@prequel": {},
-  "characters": "이름 *",
-  "@characters": {},
-  "genres": "이름 *",
-  "@genres": {},
-  "author": "이름 *",
-  "@author": {},
-  "source": "이름 *",
-  "@source": {},
-  "startDate": "시작 날짜",
-  "@startDate": {},
-  "calendar": "(주)",
-  "@calendar": {},
-  "format": "지원하다",
-  "@format": {},
-  "expandText": "더 보기",
-  "@expandText": {},
-  "sequel": "계정 만들기",
-  "@sequel": {},
-  "relations": "이름 *",
-  "@relations": {},
-  "studio": "사이트맵",
-  "@studio": {},
-  "synonyms": "동의어",
-  "@synonyms": {},
-  "averageDuration": "평균 기간",
-  "@averageDuration": {},
-  "collapseText": "더 적은",
-  "@collapseText": {},
-  "comingSoon": "공지사항",
-  "@comingSoon": {},
-  "name": "이름 *",
-  "@name": {},
-  "meanScore": "평균 점수",
-  "@meanScore": {},
-  "synopsis": "관련 기사",
-  "@synopsis": {},
-  "nameRomaji": "이름 (Romaji)",
-  "@nameRomaji": {},
-  "total": "총",
-  "@total": {},
-  "totalChapters": "한국어",
-  "@totalChapters": {},
-  "planned": "계획 {type}",
-  "@planned": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "noDropped": "아직 {type}를 떨어뜨리지 않았습니다.",
-  "@noDropped": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "droppedAnime": "콘텐츠 삭제",
-  "@droppedAnime": {},
-  "recentUpdates": "최근 업데이트",
-  "@recentUpdates": {},
-  "kitsu": "Kitsu",
-  "@kitsu": {},
-  "loginTo": "로그인 {service}",
-  "@loginTo": {
-    "placeholders": {
-      "service": {
-        "type": "String",
-        "examples": [
-          "Anilist",
-          "MyAnimeList",
-          "Kitsu",
-          "Discord"
-        ]
-      }
-    }
-  },
-  "read": "...에서",
-  "@read": {},
-  "home": "(주)",
-  "@home": {},
-  "manhua": "언어: 한국어",
-  "@manhua": {},
-  "series": "제품정보",
-  "@series": {},
-  "addToList": "기타 제품",
-  "@addToList": {},
-  "season": "【특전】",
-  "@season": {},
-  "volume": "{count, plural, =1 {용량} other {볼륨}}",
-  "@volume": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "movie": "{count, plural, =1 {영화} other {영화 산업}}",
-  "@movie": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "chapter": "{count, plural, =1 {장} other {챕터}}",
-  "@chapter": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "scanlators": "검사기",
-  "@scanlators": {},
-  "confirmLogout": "정말로 로그아웃 하시겠습니까?",
-  "@confirmLogout": {},
-  "search": "제품정보",
-  "@search": {},
-  "compactView": "컴팩트 뷰",
-  "@compactView": {},
-  "listView": "공지사항",
-  "@listView": {},
-  "episodeWatched": "드 워치",
-  "@episodeWatched": {},
-  "layout": "제품정보",
-  "@layout": {},
-  "thisSeason": "이 시즌",
-  "@thisSeason": {},
-  "available": "사용 가능한 {type}",
-  "@available": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "comments": "이름 *",
-  "@comments": {},
-  "continueReading": "계속 읽기",
-  "@continueReading": {},
-  "dtu": "맨 위로",
-  "@dtu": {},
-  "list": "{type} 목록",
-  "@list": {
-    "placeholders": {
-      "type": {
-        "examples": "Anime list",
-        "type": "String"
-      }
-    }
-  },
-  "noFavourites": "아무것도 좋아하지 않는 것 같은 것,\n그것을 유지하는 쇼를 시도해보십시오.",
-  "@noFavourites": {},
-  "options": "제품 설명",
-  "@options": {},
-  "sort": "제품정보",
-  "@sort": {},
-  "watch": "제품정보",
-  "@watch": {},
-  "utd": "맨 위로",
-  "@utd": {},
-  "recommended": "(주)",
-  "@recommended": {},
-  "language": "* 이름",
-  "@language": {},
-  "info": "- 한국어",
-  "@info": {},
-  "recommendationsEmptyMessage": "일부 애니메이션 또는 만화를보고 권고 받기",
-  "@recommendationsEmptyMessage": {},
-  "topAiring": "맨 위로",
-  "@topAiring": {},
-  "manageLayout": "{page} 페이지 레이아웃 관리 {service}",
-  "@manageLayout": {
-    "placeholders": {
-      "service": {
-        "type": "String",
-        "examples": [
-          "Anilist",
-          "MAL"
-        ]
-      },
-      "page": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Home",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "noOnHold": "당신이 파악에 아무것도 넣지 않는 것처럼 보입니다.",
-  "@noOnHold": {},
-  "hiddenMedia": "숨겨진 미디어",
-  "@hiddenMedia": {},
-  "noHiddenMediaFound": "숨겨진 미디어 발견",
-  "@noHiddenMediaFound": {},
-  "droppedManga": "옷을 벗은 만화",
-  "@droppedManga": {},
-  "allCaughtUpNew": "모든 잡은, 무엇 새로운?",
-  "@allCaughtUpNew": {},
-  "manageLayoutDescription": "{page} 페이지에 대한 레이아웃을 관리 할 수 있습니다",
-  "@manageLayoutDescription": {
-    "placeholders": {
-      "page": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Home",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "pickColor": "색상 선택",
-  "@pickColor": {},
-  "simkl": "Simkl",
-  "@simkl": {},
-  "colorPickerDefault": "기본 정보",
-  "@colorPickerDefault": {},
-  "logFileDescription": "로그 파일을 공유",
-  "@logFileDescription": {},
-  "addAnimeRepo": "추가 애니메이션 Repo",
-  "@addAnimeRepo": {},
-  "loadExtensionsIconDesc": "확장 페이지가 지연되면 비활성화",
-  "@loadExtensionsIconDesc": {},
-  "autoUpdateDesc": "자동 업데이트 확장",
-  "@autoUpdateDesc": {},
-  "addNovelRepoDesc": "다양한 소스에서 Novel Repo 추가",
-  "@addNovelRepoDesc": {},
-  "addMangaRepoDesc": "만화 추가 다양한 소스에서 Repo",
-  "@addMangaRepoDesc": {},
-  "addAnimeRepoDesc": "다양한 소스에서 애니메이션 Repo 추가",
-  "@addAnimeRepoDesc": {},
-  "addMangaRepo": "만화 Repo 추가",
-  "@addMangaRepo": {},
-  "logFile": "로그 파일",
-  "@logFile": {},
-  "addNovelRepo": "Novel Repo 추가",
-  "@addNovelRepo": {},
-  "autoUpdate": "자동 업데이트",
-  "@autoUpdate": {},
-  "loadExtensionsIcon": "Load Extensions 아이콘",
-  "@loadExtensionsIcon": {},
-  "colorPickerCustom": "제품 정보",
-  "@colorPickerCustom": {},
-  "selectMediaService": "미디어 서비스",
-  "@selectMediaService": {},
-  "selectDirectory": "자주 묻는 질문",
-  "@selectDirectory": {},
-  "customPath": "주문 경로",
-  "@customPath": {},
-  "customPathDescription": "파일을 저장하는 사용자 정의 경로를 설정\n긴 압박 제거",
-  "@customPathDescription": {},
-  "watching": "공지사항",
-  "@watching": {},
-  "youTube": "YouTube에서 재생?",
-  "@youTube": {},
-  "mediaNotFound": "찾을 수 없음",
-  "@mediaNotFound": {},
-  "noChapterFound": "찾을 수 없음",
-  "@noChapterFound": {},
-  "outOf": "현재 위치",
-  "@outOf": {},
-  "selected": "제품정보",
-  "@selected": {},
-  "readStatus": "...에서",
-  "@readStatus": {},
-  "found": "제품정보",
-  "@found": {},
-  "watchStatus": "관련 기사",
-  "@watchStatus": {},
-  "totalOf": "전체보기",
-  "@totalOf": {},
-  "wrongTitle": "잘못된 제목?",
-  "@wrongTitle": {},
-  "installSourceToStart": "확장 페이지에서 소스를 설치하기 시작",
-  "@installSourceToStart": {},
-  "webView": "웹뷰",
-  "@webView": {},
-  "reading": "이름 *",
-  "@reading": {},
-  "direction": "제품정보",
-  "@direction": {},
-  "thumbLessSeekBar": "카테고리",
-  "@thumbLessSeekBar": {},
-  "playerSettingsDesc": "Player 설정",
-  "@playerSettingsDesc": {},
-  "hidePageNumberDesc": "자주 묻는 질문",
-  "@hidePageNumberDesc": {},
-  "developersHelpersDesc": "Dartotsu의 선불 노동",
-  "@developersHelpersDesc": {},
-  "developersHelpers": "개발자 / 도우미",
-  "@developersHelpers": {},
-  "thumbLessSeekBarDesc": "찾기 바에서 엄지 제거",
-  "@thumbLessSeekBarDesc": {},
-  "hidePageNumber": "페이지 번호",
-  "@hidePageNumber": {},
-  "differentCacheManagerDesc": "다른 이미지 캐시 매니저 사용",
-  "@differentCacheManagerDesc": {},
-  "differentCacheManager": "다른 캐시 관리자",
-  "@differentCacheManager": {},
-  "spacedPagesDesc": "페이지의 공간 추가",
-  "@spacedPagesDesc": {},
-  "spacedPages": "공간 페이지",
-  "@spacedPages": {},
-  "readerSettingsDesc": "Change 리더 설정",
-  "@readerSettingsDesc": {},
-  "hideScrollbarDesc": "읽는 동안 Hide scrollbar",
-  "@hideScrollbarDesc": {},
-  "readerSettings": "Reader 설정",
-  "@readerSettings": {},
-  "hideScrollbar": "다운로드",
-  "@hideScrollbar": {}
+    "theme": "테마",
+    "@theme": {},
+    "themeDescription": "앱의 외관과 분위기를 개인화하세요",
+    "@themeDescription": {},
+    "yes": "예",
+    "@yes": {},
+    "about": "앱 정보",
+    "@about": {},
+    "aboutDescription": "앱과 제작자에 대해 더 알아보세요",
+    "@aboutDescription": {},
+    "account": "계정",
+    "@account": {},
+    "accountDescription": "AniList, MAL, Discord 계정을 손쉽게 관리하세요",
+    "@accountDescription": {},
+    "anime": "애니메이션",
+    "@anime": {},
+    "animeDescription": "애니메이션 설정을 개인화하고 관리하세요",
+    "@animeDescription": {},
+    "anilist": "AniList",
+    "@anilist": {},
+    "appName": "Dartotsu",
+    "@appName": {},
+    "appTagline": "새로운 앱\n애니메이션 & 만화",
+    "@appTagline": {},
+    "backgroundColor": "배경 색상",
+    "@backgroundColor": {},
+    "backgroundColorDescription": "자막 배경 색상",
+    "@backgroundColorDescription": {},
+    "bottomPadding": "하단 여백",
+    "@bottomPadding": {},
+    "bottomPaddingDescription": "자막 하단 여백",
+    "@bottomPaddingDescription": {},
+    "colorPicker": "색상 선택기",
+    "@colorPicker": {},
+    "colorPickerDescription": "색상을 선택하세요",
+    "@colorPickerDescription": {},
+    "cancel": "취소",
+    "@cancel": {},
+    "common": "일반",
+    "@common": {},
+    "commonDescription": "앱 사용을 원활하게 위한 일반 설정에 접근하세요",
+    "@commonDescription": {},
+    "cursedSpeed": "저주받은 속도",
+    "@cursedSpeed": {},
+    "cursedSpeedDescription": "바쁜 사람들을 위한 속도",
+    "@cursedSpeedDescription": {},
+    "customTheme": "제품 정보 이름 *",
+    "@customTheme": {},
+    "discord": "Discord",
+    "@discord": {},
+    "donationGoal": "현재 기부 목표 없음",
+    "@donationGoal": {},
+    "enableDarkMode": "다크 모드 활성화",
+    "@enableDarkMode": {},
+    "customThemeDescription": "자신만의 색상으로 테마를 설정하세요",
+    "@customThemeDescription": {},
+    "darkMode": "다크 모드",
+    "@darkMode": {},
+    "extension": "{count, plural, =1 {확대} other {확장}}",
+    "@extension": {},
+    "extensionsDescription": "기능을 추가하기 위해 확장을 설치하고 관리하세요",
+    "@extensionsDescription": {},
+    "fontColor": "글꼴 색상",
+    "@fontColor": {},
+    "fontColorDescription": "자막 글꼴 색상",
+    "@fontColorDescription": {},
+    "fontFamily": "글꼴 패밀리",
+    "@fontFamily": {},
+    "fontFamilyDescription": "자막 글꼴 패밀리",
+    "@fontFamilyDescription": {},
+    "fontSize": "글꼴 크기",
+    "@fontSize": {},
+    "fontSizeDescription": "자막 글꼴 크기",
+    "@fontSizeDescription": {},
+    "fontWeight": "글꼴 두께",
+    "@fontWeight": {},
+    "fontWeightDescription": "자막 글꼴 두께",
+    "@fontWeightDescription": {},
+    "hidePrivate": "비공개 숨기기",
+    "@hidePrivate": {},
+    "hidePrivateDescription": "홈 페이지의 개인 시리즈 숨기기.",
+    "@hidePrivateDescription": {},
+    "incognitoMode": "인코그니토 모드",
+    "@incognitoMode": {},
+    "incognitoModeDescription": "활동을 저장하지 않고 탐색하기",
+    "@incognitoModeDescription": {},
+    "login": "로그인",
+    "@login": {},
+    "logout": "로그아웃 {type}",
+    "@logout": {},
+    "mal": "MyAnimeList",
+    "@mal": {},
+    "manga": "만화",
+    "@manga": {},
+    "mangaDescription": "만화 경험을 조직하고 개인화하세요",
+    "@mangaDescription": {},
+    "materialYou": "Material You",
+    "@materialYou": {},
+    "materialYouDescription": "배경화면과 동일한 색상을 사용하세요",
+    "@materialYouDescription": {},
+    "no": "아니오",
+    "@no": {},
+    "notifications": "알림",
+    "@notifications": {},
+    "notificationsDescription": "알림 수신 방식과 시점을 설정하세요",
+    "@notificationsDescription": {},
+    "offlineMode": "오프라인 모드",
+    "@offlineMode": {},
+    "offlineModeDescription": "인터넷 연결 없이 앱을 사용하세요",
+    "@offlineModeDescription": {},
+    "ok": "확인",
+    "@ok": {},
+    "oledThemeVariant": "OLED 테마 변형",
+    "@oledThemeVariant": {},
+    "oledThemeVariantDescription": "OLED 모드 활성화",
+    "@oledThemeVariantDescription": {},
+    "outlineColor": "윤곽선 색상",
+    "@outlineColor": {},
+    "outlineColorDescription": "자막 윤곽선 색상",
+    "@outlineColorDescription": {},
+    "playerSettingsTitle": "플레이어 설정",
+    "@playerSettingsTitle": {},
+    "resizeMode": "크기 조정 모드",
+    "@resizeMode": {},
+    "resizeModeDescription": "플레이어의 기본 크기 조정 모드",
+    "@resizeModeDescription": {},
+    "restoreSettings": "설정 복원",
+    "@restoreSettings": {},
+    "settings": "설정",
+    "@settings": {},
+    "showSubtitles": "자막 표시",
+    "@showSubtitles": {},
+    "showSubtitlesDescription": "기본적으로 자막을 표시하세요",
+    "@showSubtitlesDescription": {},
+    "skipButton": "건너뛰기 버튼",
+    "@skipButton": {},
+    "skipButtonDescription": "건너뛰기 버튼 지속 시간",
+    "@skipButtonDescription": {},
+    "speed": "속도",
+    "@speed": {},
+    "speedDescription": "플레이어의 기본 속도",
+    "@speedDescription": {},
+    "subtitles": "자막",
+    "@subtitles": {},
+    "subtitlePreview": "자막 미리보기",
+    "@subtitlePreview": {},
+    "supportMaintainer": "Dartotsu의 유지보수를 지원하고 싶으신가요?\n기부를 고려해 주세요",
+    "@supportMaintainer": {},
+    "totalEpisodes": "인기 있는",
+    "@totalEpisodes": {},
+    "onHold": "홀딩 {type}",
+    "@onHold": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "ln": "빛 Novel",
+    "@ln": {},
+    "trending": "동향 {type}",
+    "@trending": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "favorite": "마음에 드는 {type}",
+    "@favorite": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "nextSeason": "다음 시즌",
+    "@nextSeason": {},
+    "manhwa": "언어: 한국어",
+    "@manhwa": {},
+    "novel": "이름 *",
+    "@novel": {},
+    "tags": "이름 *",
+    "@tags": {},
+    "activity": "{count, plural, =1 {활동} other {활동}}",
+    "@activity": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "continueWatching": "계속 시청",
+    "@continueWatching": {},
+    "topRated": "최고 정격 {type}",
+    "@topRated": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa",
+                    "Series"
+                ]
+            }
+        }
+    },
+    "previousSeason": "이전 시즌",
+    "@previousSeason": {},
+    "popular": "인기 {type}",
+    "@popular": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa"
+                ]
+            }
+        }
+    },
+    "installed": "설치 {type}",
+    "@installed": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Extensions"
+                ]
+            }
+        }
+    },
+    "mostFavourite": "대부분의 Favourite {type}",
+    "@mostFavourite": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa"
+                ]
+            }
+        }
+    },
+    "endDate": "종료일",
+    "@endDate": {},
+    "chapterRead": "장 읽기",
+    "@chapterRead": {},
+    "gridView": "그리드 뷰",
+    "@gridView": {},
+    "browse": "검색 {type}",
+    "@browse": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "staff": "한국어",
+    "@staff": {},
+    "episode": "{count, plural, =1 {삽화} other {에피소드}}",
+    "@episode": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "status": "주요연혁",
+    "@status": {},
+    "popularity": "인기있는",
+    "@popularity": {},
+    "favorites": "이름 *",
+    "@favorites": {},
+    "prequel": "상품정보",
+    "@prequel": {},
+    "characters": "이름 *",
+    "@characters": {},
+    "genres": "이름 *",
+    "@genres": {},
+    "author": "이름 *",
+    "@author": {},
+    "source": "이름 *",
+    "@source": {},
+    "startDate": "시작 날짜",
+    "@startDate": {},
+    "calendar": "(주)",
+    "@calendar": {},
+    "format": "지원하다",
+    "@format": {},
+    "expandText": "더 보기",
+    "@expandText": {},
+    "sequel": "계정 만들기",
+    "@sequel": {},
+    "relations": "이름 *",
+    "@relations": {},
+    "studio": "사이트맵",
+    "@studio": {},
+    "synonyms": "동의어",
+    "@synonyms": {},
+    "averageDuration": "평균 기간",
+    "@averageDuration": {},
+    "collapseText": "더 적은",
+    "@collapseText": {},
+    "comingSoon": "공지사항",
+    "@comingSoon": {},
+    "name": "이름 *",
+    "@name": {},
+    "meanScore": "평균 점수",
+    "@meanScore": {},
+    "synopsis": "관련 기사",
+    "@synopsis": {},
+    "nameRomaji": "이름 (Romaji)",
+    "@nameRomaji": {},
+    "total": "총",
+    "@total": {},
+    "totalChapters": "한국어",
+    "@totalChapters": {},
+    "planned": "계획 {type}",
+    "@planned": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "noDropped": "아직 {type}를 떨어뜨리지 않았습니다.",
+    "@noDropped": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "droppedAnime": "콘텐츠 삭제",
+    "@droppedAnime": {},
+    "recentUpdates": "최근 업데이트",
+    "@recentUpdates": {},
+    "kitsu": "Kitsu",
+    "@kitsu": {},
+    "loginTo": "로그인 {service}",
+    "@loginTo": {
+        "placeholders": {
+            "service": {
+                "type": "String",
+                "examples": [
+                    "Anilist",
+                    "MyAnimeList",
+                    "Kitsu",
+                    "Discord"
+                ]
+            }
+        }
+    },
+    "read": "...에서",
+    "@read": {},
+    "home": "(주)",
+    "@home": {},
+    "manhua": "언어: 한국어",
+    "@manhua": {},
+    "series": "제품정보",
+    "@series": {},
+    "addToList": "기타 제품",
+    "@addToList": {},
+    "season": "【특전】",
+    "@season": {},
+    "volume": "{count, plural, =1 {용량} other {볼륨}}",
+    "@volume": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "movie": "{count, plural, =1 {영화} other {영화 산업}}",
+    "@movie": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "chapter": "{count, plural, =1 {장} other {챕터}}",
+    "@chapter": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "scanlators": "검사기",
+    "@scanlators": {},
+    "confirmLogout": "정말로 로그아웃 하시겠습니까?",
+    "@confirmLogout": {},
+    "search": "제품정보",
+    "@search": {},
+    "compactView": "컴팩트 뷰",
+    "@compactView": {},
+    "listView": "공지사항",
+    "@listView": {},
+    "episodeWatched": "드 워치",
+    "@episodeWatched": {},
+    "layout": "제품정보",
+    "@layout": {},
+    "thisSeason": "이 시즌",
+    "@thisSeason": {},
+    "available": "사용 가능한 {type}",
+    "@available": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "comments": "이름 *",
+    "@comments": {},
+    "continueReading": "계속 읽기",
+    "@continueReading": {},
+    "dtu": "맨 위로",
+    "@dtu": {},
+    "list": "{type} 목록",
+    "@list": {
+        "placeholders": {
+            "type": {
+                "examples": "Anime list",
+                "type": "String"
+            }
+        }
+    },
+    "noFavourites": "아무것도 좋아하지 않는 것 같은 것,\n그것을 유지하는 쇼를 시도해보십시오.",
+    "@noFavourites": {},
+    "options": "제품 설명",
+    "@options": {},
+    "sort": "제품정보",
+    "@sort": {},
+    "watch": "제품정보",
+    "@watch": {},
+    "utd": "맨 위로",
+    "@utd": {},
+    "recommended": "(주)",
+    "@recommended": {},
+    "language": "* 이름",
+    "@language": {},
+    "info": "- 한국어",
+    "@info": {},
+    "recommendationsEmptyMessage": "일부 애니메이션 또는 만화를보고 권고 받기",
+    "@recommendationsEmptyMessage": {},
+    "topAiring": "맨 위로",
+    "@topAiring": {},
+    "manageLayout": "{page} 페이지 레이아웃 관리 {service}",
+    "@manageLayout": {
+        "placeholders": {
+            "service": {
+                "type": "String",
+                "examples": [
+                    "Anilist",
+                    "MAL"
+                ]
+            },
+            "page": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Home",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "noOnHold": "당신이 파악에 아무것도 넣지 않는 것처럼 보입니다.",
+    "@noOnHold": {},
+    "hiddenMedia": "숨겨진 미디어",
+    "@hiddenMedia": {},
+    "noHiddenMediaFound": "숨겨진 미디어 발견",
+    "@noHiddenMediaFound": {},
+    "droppedManga": "옷을 벗은 만화",
+    "@droppedManga": {},
+    "allCaughtUpNew": "모든 잡은, 무엇 새로운?",
+    "@allCaughtUpNew": {},
+    "manageLayoutDescription": "{page} 페이지에 대한 레이아웃을 관리 할 수 있습니다",
+    "@manageLayoutDescription": {
+        "placeholders": {
+            "page": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Home",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "pickColor": "색상 선택",
+    "@pickColor": {},
+    "simkl": "Simkl",
+    "@simkl": {},
+    "colorPickerDefault": "기본 정보",
+    "@colorPickerDefault": {},
+    "logFileDescription": "로그 파일을 공유",
+    "@logFileDescription": {},
+    "addAnimeRepo": "추가 애니메이션 Repo",
+    "@addAnimeRepo": {},
+    "loadExtensionsIconDesc": "확장 페이지가 지연되면 비활성화",
+    "@loadExtensionsIconDesc": {},
+    "autoUpdateDesc": "자동 업데이트 확장",
+    "@autoUpdateDesc": {},
+    "addNovelRepoDesc": "다양한 소스에서 Novel Repo 추가",
+    "@addNovelRepoDesc": {},
+    "addMangaRepoDesc": "만화 추가 다양한 소스에서 Repo",
+    "@addMangaRepoDesc": {},
+    "addAnimeRepoDesc": "다양한 소스에서 애니메이션 Repo 추가",
+    "@addAnimeRepoDesc": {},
+    "addMangaRepo": "만화 Repo 추가",
+    "@addMangaRepo": {},
+    "logFile": "로그 파일",
+    "@logFile": {},
+    "addNovelRepo": "Novel Repo 추가",
+    "@addNovelRepo": {},
+    "autoUpdate": "자동 업데이트",
+    "@autoUpdate": {},
+    "loadExtensionsIcon": "Load Extensions 아이콘",
+    "@loadExtensionsIcon": {},
+    "colorPickerCustom": "제품 정보",
+    "@colorPickerCustom": {},
+    "selectMediaService": "미디어 서비스",
+    "@selectMediaService": {},
+    "selectDirectory": "자주 묻는 질문",
+    "@selectDirectory": {},
+    "customPath": "주문 경로",
+    "@customPath": {},
+    "customPathDescription": "파일을 저장하는 사용자 정의 경로를 설정\n긴 압박 제거",
+    "@customPathDescription": {},
+    "watching": "공지사항",
+    "@watching": {},
+    "youTube": "YouTube에서 재생?",
+    "@youTube": {},
+    "mediaNotFound": "찾을 수 없음",
+    "@mediaNotFound": {},
+    "noChapterFound": "찾을 수 없음",
+    "@noChapterFound": {},
+    "outOf": "현재 위치",
+    "@outOf": {},
+    "selected": "제품정보",
+    "@selected": {},
+    "readStatus": "...에서",
+    "@readStatus": {},
+    "found": "제품정보",
+    "@found": {},
+    "watchStatus": "관련 기사",
+    "@watchStatus": {},
+    "totalOf": "전체보기",
+    "@totalOf": {},
+    "wrongTitle": "잘못된 제목?",
+    "@wrongTitle": {},
+    "installSourceToStart": "확장 페이지에서 소스를 설치하기 시작",
+    "@installSourceToStart": {},
+    "webView": "웹뷰",
+    "@webView": {},
+    "reading": "이름 *",
+    "@reading": {},
+    "direction": "제품정보",
+    "@direction": {},
+    "thumbLessSeekBar": "카테고리",
+    "@thumbLessSeekBar": {},
+    "playerSettingsDesc": "Player 설정",
+    "@playerSettingsDesc": {},
+    "hidePageNumberDesc": "자주 묻는 질문",
+    "@hidePageNumberDesc": {},
+    "developersHelpersDesc": "Dartotsu의 선불 노동",
+    "@developersHelpersDesc": {},
+    "developersHelpers": "개발자 / 도우미",
+    "@developersHelpers": {},
+    "thumbLessSeekBarDesc": "찾기 바에서 엄지 제거",
+    "@thumbLessSeekBarDesc": {},
+    "hidePageNumber": "페이지 번호",
+    "@hidePageNumber": {},
+    "differentCacheManagerDesc": "다른 이미지 캐시 매니저 사용",
+    "@differentCacheManagerDesc": {},
+    "differentCacheManager": "다른 캐시 관리자",
+    "@differentCacheManager": {},
+    "spacedPagesDesc": "페이지의 공간 추가",
+    "@spacedPagesDesc": {},
+    "spacedPages": "공간 페이지",
+    "@spacedPages": {},
+    "readerSettingsDesc": "Change 리더 설정",
+    "@readerSettingsDesc": {},
+    "hideScrollbarDesc": "읽는 동안 Hide scrollbar",
+    "@hideScrollbarDesc": {},
+    "readerSettings": "Reader 설정",
+    "@readerSettings": {},
+    "hideScrollbar": "다운로드",
+    "@hideScrollbar": {},
+    "glassEffect": "유리 효과",
+    "@glassEffect": {},
+    "ltr": "오른쪽으로",
+    "@ltr": {},
+    "coverThemeDescription": "테마 색상으로 미디어 커버 이미지를 사용",
+    "@coverThemeDescription": {},
+    "rtl": "왼쪽으로",
+    "@rtl": {},
+    "glassEffectDescription": "앱에 서리 유리 효과를 부여",
+    "@glassEffectDescription": {},
+    "nextEpisodeRelease": "에피소드 {episode}가 발매됩니다",
+    "@nextEpisodeRelease": {
+        "description": "Message showing the next episode info",
+        "placeholders": {
+            "episode": {
+                "type": "int"
+            }
+        }
+    },
+    "topScore": "상단 점수",
+    "@topScore": {},
+    "coverTheme": "Cover 테마 사용",
+    "@coverTheme": {},
+    "customMPVDescription": "Enable this option to use your own MPV configuration file. Place your custom config at: {path}",
+    "@customMPVDescription": {
+        "placeholders": {
+            "path": {
+                "type": "String"
+            }
+        }
+    },
+    "customMPV": "Custom MPV Configuration",
+    "@customMPV": {}
 }

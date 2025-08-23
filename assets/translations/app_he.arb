@@ -1,632 +1,663 @@
 {
-  "colorPickerDescription": "בחר גוון",
-  "@colorPickerDescription": {},
-  "common": "הגדרות כלליות",
-  "@common": {},
-  "commonDescription": "גישה להגדות כלליות לשימוש נוח באפליקציה",
-  "@commonDescription": {},
-  "cursedSpeed": "מהירות מקוללת",
-  "@cursedSpeed": {},
-  "cursedSpeedDescription": "למי שעסוקים מדי בחיים",
-  "@cursedSpeedDescription": {},
-  "customTheme": "ערכת נושא מותאמת",
-  "@customTheme": {},
-  "customThemeDescription": "השתמש בצבעים האישיים שלך עבור ערכת הנושא",
-  "@customThemeDescription": {},
-  "incognitoMode": "מצב גלישה פרטית",
-  "@incognitoMode": {},
-  "incognitoModeDescription": "גלוש מבלי לשמור את הפעילות שלך",
-  "@incognitoModeDescription": {},
-  "login": "התחבר",
-  "@login": {},
-  "manga": "מנגה",
-  "@manga": {},
-  "notificationsDescription": "הגדר איך ומתי תקבל התראות",
-  "@notificationsDescription": {},
-  "offlineMode": "מצב לא מקוון",
-  "@offlineMode": {},
-  "offlineModeDescription": "השתמש באפליקציה ללא חיבור לאינטרנט",
-  "@offlineModeDescription": {},
-  "ok": "אוקי",
-  "@ok": {},
-  "outlineColorDescription": "צבע קו המתאר לכותרת",
-  "@outlineColorDescription": {},
-  "playerSettingsTitle": "הגדרות נגן",
-  "@playerSettingsTitle": {},
-  "resizeMode": "מצב שינוי גודל",
-  "@resizeMode": {},
-  "restoreSettings": "שחזר הגדרות",
-  "@restoreSettings": {},
-  "skipButton": "כפתור דילוג",
-  "@skipButton": {},
-  "skipButtonDescription": "משך הזמן של כפתור הדילוג",
-  "@skipButtonDescription": {},
-  "speed": "מהירות",
-  "@speed": {},
-  "speedDescription": "מהירות ברירת מחדל לנגן",
-  "@speedDescription": {},
-  "subtitles": "כתוביות",
-  "@subtitles": {},
-  "subtitlePreview": "תצוגה מקדימה של כתוביות",
-  "@subtitlePreview": {},
-  "theme": "ערכת נושא",
-  "@theme": {},
-  "account": "חשבון",
-  "@account": {},
-  "about": "אודות",
-  "@about": {},
-  "aboutDescription": "למד עוד על האפליקציה והיוצרים שלה",
-  "@aboutDescription": {},
-  "accountDescription": "נהל את החשבונות שלך ב-AniList, MAL ו-Discord בקלות",
-  "@accountDescription": {},
-  "anime": "אנימה",
-  "@anime": {},
-  "animeDescription": "התאם אישית ונהל את העדפות האנימה שלך",
-  "@animeDescription": {},
-  "anilist": "AniList",
-  "@anilist": {},
-  "appName": "Dartotsu",
-  "@appName": {},
-  "appTagline": "האפליקציה החדשה והטובה ביותר\nלעקוב אחרי אנימה ומנגה",
-  "@appTagline": {},
-  "backgroundColor": "צבע רקע",
-  "@backgroundColor": {},
-  "backgroundColorDescription": "צבע רקע הכותרת",
-  "@backgroundColorDescription": {},
-  "bottomPadding": "מרווח תחתון",
-  "@bottomPadding": {},
-  "bottomPaddingDescription": "מרווח תחתון לכותרת",
-  "@bottomPaddingDescription": {},
-  "cancel": "ביטול",
-  "@cancel": {},
-  "colorPicker": "בוחר צבע",
-  "@colorPicker": {},
-  "darkMode": "מצב כהה",
-  "@darkMode": {},
-  "discord": "Discord",
-  "@discord": {},
-  "donationGoal": "אין יעד תרומות כרגע",
-  "@donationGoal": {},
-  "enableDarkMode": "הפעל מצב כהה",
-  "@enableDarkMode": {},
-  "extension": "{count, plural, =1 {תוסף} other {תוספים}}",
-  "@extension": {},
-  "extensionsDescription": "התקן ונהל הרחבות לפונקציות נוספות",
-  "@extensionsDescription": {},
-  "fontColor": "צבע גופן",
-  "@fontColor": {},
-  "fontColorDescription": "צבע גופן לכותרת",
-  "@fontColorDescription": {},
-  "fontFamily": "משפחת גופנים",
-  "@fontFamily": {},
-  "fontFamilyDescription": "משפחת גופנים לכותרת",
-  "@fontFamilyDescription": {},
-  "fontSize": "גודל גופן",
-  "@fontSize": {},
-  "fontSizeDescription": "גודל גופן לכותרת",
-  "@fontSizeDescription": {},
-  "fontWeight": "משקל גופן",
-  "@fontWeight": {},
-  "fontWeightDescription": "משקל גופן לכותרת",
-  "@fontWeightDescription": {},
-  "hidePrivate": "הסתר פרטי",
-  "@hidePrivate": {},
-  "hidePrivateDescription": "הסתר סדרות פרטיות מעמוד הבית.",
-  "@hidePrivateDescription": {},
-  "logout": "התנתק {type}",
-  "@logout": {},
-  "mal": "MyAnimeList",
-  "@mal": {},
-  "mangaDescription": "ארגן והתאם אישית את חווית המנגה שלך",
-  "@mangaDescription": {},
-  "materialYou": "Material You",
-  "@materialYou": {},
-  "materialYouDescription": "השתמש באותו צבע כמו ברקע שלך",
-  "@materialYouDescription": {},
-  "no": "לא",
-  "@no": {},
-  "notifications": "התראות",
-  "@notifications": {},
-  "oledThemeVariant": "גרסת נושא OLED",
-  "@oledThemeVariant": {},
-  "oledThemeVariantDescription": "הפעל מצב OLED",
-  "@oledThemeVariantDescription": {},
-  "outlineColor": "צבע קו מתאר",
-  "@outlineColor": {},
-  "resizeModeDescription": "מצב ברירת מחדל לשינוי גודל בנגן",
-  "@resizeModeDescription": {},
-  "settings": "הגדרות",
-  "@settings": {},
-  "showSubtitles": "הצג כתוביות",
-  "@showSubtitles": {},
-  "showSubtitlesDescription": "הצג כתוביות כברירת מחדל",
-  "@showSubtitlesDescription": {},
-  "supportMaintainer": "רוצה לתמוך במתחזק של Dartotsu?\nשקול לתרום",
-  "@supportMaintainer": {},
-  "themeDescription": "התאם אישית את המראה והאווירה של האפליקציה שלך",
-  "@themeDescription": {},
-  "yes": "כן",
-  "@yes": {},
-  "totalEpisodes": "סדרות",
-  "@totalEpisodes": {},
-  "total": "Total",
-  "@total": {},
-  "tags": "תגיות",
-  "@tags": {},
-  "hiddenMedia": "מדיה מוסתרת",
-  "@hiddenMedia": {},
-  "description": "תקציר",
-  "@description": {},
-  "name": "שם השם",
-  "@name": {},
-  "mostFavourite": "{type} המועדף ביותר",
-  "@mostFavourite": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa"
-        ]
-      }
-    }
-  },
-  "endDate": "תאריך סיום",
-  "@endDate": {},
-  "meanScore": "ציון ממוצע",
-  "@meanScore": {},
-  "chapterRead": "פרק נקרא",
-  "@chapterRead": {},
-  "noHiddenMediaFound": "לא נמצאה מדיה מוסתרת",
-  "@noHiddenMediaFound": {},
-  "synopsis": "תקציר",
-  "@synopsis": {},
-  "nameRomaji": "שם (רומאג'י)",
-  "@nameRomaji": {},
-  "gridView": "תצוגת רשת",
-  "@gridView": {},
-  "averageDuration": "משך ממוצע",
-  "@averageDuration": {},
-  "droppedManga": "מנגה מבוטלת",
-  "@droppedManga": {},
-  "comingSoon": "בקרוב",
-  "@comingSoon": {},
-  "episodeWatched": "פרק נצפה",
-  "@episodeWatched": {},
-  "popularity": "פופולריות",
-  "@popularity": {},
-  "allCaughtUpNew": "סיימת הכול, מה חדש?",
-  "@allCaughtUpNew": {},
-  "totalChapters": "פרקים",
-  "@totalChapters": {},
-  "favorites": "מועדפים",
-  "@favorites": {},
-  "movie": "{count, plural, =1 {סרט} other {סרטים}}",
-  "@movie": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "prequel": "שאלה",
-  "@prequel": {},
-  "planned": "{type} מתוכנן",
-  "@planned": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "collapseText": "הצג פחות",
-  "@collapseText": {},
-  "chapter": "{count, plural, =1 {פרק} other {פרקים}}",
-  "@chapter": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "available": "{type} זמין",
-  "@available": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "characters": "דמויות",
-  "@characters": {},
-  "genres": "ז'אנרים",
-  "@genres": {},
-  "author": "Author",
-  "@author": {},
-  "format": "פורמט",
-  "@format": {},
-  "expandText": "הצג עוד",
-  "@expandText": {},
-  "sequel": "SEQUEL",
-  "@sequel": {},
-  "studio": "סטודיו Studio",
-  "@studio": {},
-  "staff": "צוות",
-  "@staff": {},
-  "status": "סטטוס",
-  "@status": {},
-  "relations": "יחסים",
-  "@relations": {},
-  "source": "מקור Source",
-  "@source": {},
-  "synonyms": "מילים נרדפות",
-  "@synonyms": {},
-  "startDate": "התחל תאריך",
-  "@startDate": {},
-  "recommendationsEmptyMessage": "צפה/קרא קצת אנימה או מנגה כדי לקבל המלצות",
-  "@recommendationsEmptyMessage": {},
-  "ln": "רומן קל",
-  "@ln": {},
-  "manhwa": "Manhwa",
-  "@manhwa": {},
-  "kitsu": "Kitsu",
-  "@kitsu": {},
-  "novel": "רומן",
-  "@novel": {},
-  "loginTo": "התחבר ל-{service}",
-  "@loginTo": {
-    "placeholders": {
-      "service": {
-        "type": "String",
-        "examples": [
-          "Anilist",
-          "MyAnimeList",
-          "Kitsu",
-          "Discord"
-        ]
-      }
-    }
-  },
-  "series": "סדרה",
-  "@series": {},
-  "home": "בית",
-  "@home": {},
-  "manhua": "ישוע",
-  "@manhua": {},
-  "season": "עונה",
-  "@season": {},
-  "episode": "{count, plural, =1 {פרק} other {סדרות}}",
-  "@episode": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "volume": "{count, plural, =1 {כרך} other {כרכים}}",
-  "@volume": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "calendar": "לוח שנה",
-  "@calendar": {},
-  "compactView": "תצוגה קומפקטית",
-  "@compactView": {},
-  "listView": "רשימת View",
-  "@listView": {},
-  "confirmLogout": "האם אתה בטוח שברצונך להתנתק?",
-  "@confirmLogout": {},
-  "installed": "{type} מותקן",
-  "@installed": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Extensions"
-        ]
-      }
-    }
-  },
-  "trending": "{type} במגמה",
-  "@trending": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "popular": "{type} פופולרי",
-  "@popular": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa"
-        ]
-      }
-    }
-  },
-  "thisSeason": "העונה הנוכחית",
-  "@thisSeason": {},
-  "nextSeason": "העונה הבאה",
-  "@nextSeason": {},
-  "topRated": "{type} בעלי הדירוג הגבוה ביותר",
-  "@topRated": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga",
-          "Manhwa",
-          "Series"
-        ]
-      }
-    }
-  },
-  "previousSeason": "העונה הקודמת",
-  "@previousSeason": {},
-  "favorite": "{type} מועדף",
-  "@favorite": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "activity": "{count, plural, =1 {פעילות} other {פעילויות}}",
-  "@activity": {
-    "description": "count > 1 will use plural form",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "browse": "עיין ב-{type}",
-  "@browse": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "onHold": "{type} בהמתנה",
-  "@onHold": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "continueReading": "המשך לקרוא",
-  "@continueReading": {},
-  "noDropped": "לא ביטלת אף {type} עדיין.",
-  "@noDropped": {
-    "placeholders": {
-      "type": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "continueWatching": "המשך לצפות",
-  "@continueWatching": {},
-  "droppedAnime": "אנימה מבוטלת",
-  "@droppedAnime": {},
-  "recentUpdates": "עדכונים אחרונים",
-  "@recentUpdates": {},
-  "recommended": "מומלץ",
-  "@recommended": {},
-  "scanlators": "מתרגמים",
-  "@scanlators": {},
-  "search": "חיפוש",
-  "@search": {},
-  "sort": "מיין",
-  "@sort": {},
-  "utd": "מלמעלה למטה",
-  "@utd": {},
-  "addToList": "הוסף לרשימה",
-  "@addToList": {},
-  "comments": "תגובות",
-  "@comments": {},
-  "dtu": "למטה עד Up",
-  "@dtu": {},
-  "language": "שפה",
-  "@language": {},
-  "info": "מידע",
-  "@info": {},
-  "layout": "Layout",
-  "@layout": {},
-  "list": "רשימת {type}",
-  "@list": {
-    "placeholders": {
-      "type": {
-        "examples": "Anime list",
-        "type": "String"
-      }
-    }
-  },
-  "options": "אפשרויות",
-  "@options": {},
-  "read": "קרא",
-  "@read": {},
-  "topAiring": "משודרים מובילים",
-  "@topAiring": {},
-  "watch": "צפה",
-  "@watch": {},
-  "manageLayout": "נהל את הפריסה של דף {page} עבור {service}",
-  "@manageLayout": {
-    "placeholders": {
-      "service": {
-        "type": "String",
-        "examples": [
-          "Anilist",
-          "MAL"
-        ]
-      },
-      "page": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Home",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "manageLayoutDescription": "באפשרותך לנהל את פריסת דף {page} על ידי גרירה ושחרור של הפריטים",
-  "@manageLayoutDescription": {
-    "placeholders": {
-      "page": {
-        "type": "String",
-        "examples": [
-          "Anime",
-          "Home",
-          "Manga"
-        ]
-      }
-    }
-  },
-  "pickColor": "בחר צבע",
-  "@pickColor": {},
-  "noFavourites": "נראה שאתה לא אוהב כלום,\nנסה לסמן סדרה למועדפים כדי לשמור אותה כאן.",
-  "@noFavourites": {},
-  "noOnHold": "נראה שלא שמת שום דבר בהמתנה.",
-  "@noOnHold": {},
-  "simkl": "Simkl",
-  "@simkl": {},
-  "logFile": "תגית File",
-  "@logFile": {},
-  "colorPickerDefault": "Default",
-  "@colorPickerDefault": {},
-  "logFileDescription": "שתף את קובץ היומן",
-  "@logFileDescription": {},
-  "colorPickerCustom": "מותאם אישית",
-  "@colorPickerCustom": {},
-  "addNovelRepoDesc": "הוסף הרומן Repo ממקורות שונים",
-  "@addNovelRepoDesc": {},
-  "addMangaRepoDesc": "הוסף Manga Repo ממקורות שונים",
-  "@addMangaRepoDesc": {},
-  "selectMediaService": "שירות מדיה נבחר",
-  "@selectMediaService": {},
-  "addAnimeRepo": "תגית: Anime Repo",
-  "@addAnimeRepo": {},
-  "loadExtensionsIconDesc": "להשבית אם הסיומת דף lags",
-  "@loadExtensionsIconDesc": {},
-  "autoUpdateDesc": "הרחבות עדכון אוטומטי",
-  "@autoUpdateDesc": {},
-  "addAnimeRepoDesc": "הוסף Anime Repo ממקורות שונים",
-  "@addAnimeRepoDesc": {},
-  "addMangaRepo": "תגית: Manga Repo",
-  "@addMangaRepo": {},
-  "addNovelRepo": "תגית: Repo",
-  "@addNovelRepo": {},
-  "selectDirectory": "בחר מנהל",
-  "@selectDirectory": {},
-  "customPathDescription": "הגדרת נתיב מותאם אישית להצלת קבצים\nעיתונות ארוכה כדי להסיר",
-  "@customPathDescription": {},
-  "autoUpdate": "עדכון אוטומטי",
-  "@autoUpdate": {},
-  "loadExtensionsIcon": "תגית: growth",
-  "@loadExtensionsIcon": {},
-  "customPath": "נתיב מותאם אישית",
-  "@customPath": {},
-  "noChapterFound": "שום פרק לא מצא",
-  "@noChapterFound": {},
-  "watching": "צפייה",
-  "@watching": {},
-  "outOf": "בחוץ",
-  "@outOf": {},
-  "selected": "נבחר",
-  "@selected": {},
-  "readStatus": "קרא",
-  "@readStatus": {},
-  "watchStatus": "צפו",
-  "@watchStatus": {},
-  "totalOf": "Total of",
-  "@totalOf": {},
-  "wrongTitle": "כותרת שגויה?",
-  "@wrongTitle": {},
-  "installSourceToStart": "התקנת מקור מדף הרחבה כדי להתחיל",
-  "@installSourceToStart": {},
-  "webView": "Web View",
-  "@webView": {},
-  "reading": "קריאה לקריאה",
-  "@reading": {},
-  "youTube": "לשחק ב- YouTube?",
-  "@youTube": {},
-  "mediaNotFound": "מדיה לא נמצאה",
-  "@mediaNotFound": {},
-  "found": "נמצאו",
-  "@found": {},
-  "differentCacheManager": "מנהל Cache",
-  "@differentCacheManager": {},
-  "spacedPages": "דפי חלל",
-  "@spacedPages": {},
-  "readerSettingsDesc": "שינוי הגדרות הקורא",
-  "@readerSettingsDesc": {},
-  "direction": "כיוון",
-  "@direction": {},
-  "readerSettings": "הגדרות קורא",
-  "@readerSettings": {},
-  "developersHelpersDesc": "העבודה ללא תשלום של דארטוטסו",
-  "@developersHelpersDesc": {},
-  "developersHelpers": "מפתחים / Helpers",
-  "@developersHelpers": {},
-  "differentCacheManagerDesc": "השתמש במנהל תמונות שונה",
-  "@differentCacheManagerDesc": {},
-  "hideScrollbar": "תגית: Scrollbar",
-  "@hideScrollbar": {},
-  "playerSettingsDesc": "שינוי הגדרות השחקן",
-  "@playerSettingsDesc": {},
-  "thumbLessSeekBar": "שם הסרטון: ThumbLess Seek Bar",
-  "@thumbLessSeekBar": {},
-  "thumbLessSeekBarDesc": "להסיר את האגודל מהבר המבוקש",
-  "@thumbLessSeekBarDesc": {},
-  "hidePageNumberDesc": "מספר העמודים תוך כדי קריאה",
-  "@hidePageNumberDesc": {},
-  "hidePageNumber": "תגית: Page Number",
-  "@hidePageNumber": {},
-  "spacedPagesDesc": "הוסף שטח בין דפים",
-  "@spacedPagesDesc": {},
-  "hideScrollbarDesc": "Hide Galbar בזמן קריאה",
-  "@hideScrollbarDesc": {}
+    "colorPickerDescription": "בחר גוון",
+    "@colorPickerDescription": {},
+    "common": "הגדרות כלליות",
+    "@common": {},
+    "commonDescription": "גישה להגדות כלליות לשימוש נוח באפליקציה",
+    "@commonDescription": {},
+    "cursedSpeed": "מהירות מקוללת",
+    "@cursedSpeed": {},
+    "cursedSpeedDescription": "למי שעסוקים מדי בחיים",
+    "@cursedSpeedDescription": {},
+    "customTheme": "מותאם אישית נושא",
+    "@customTheme": {},
+    "customThemeDescription": "השתמש בצבעים האישיים שלך עבור ערכת הנושא",
+    "@customThemeDescription": {},
+    "incognitoMode": "מצב גלישה פרטית",
+    "@incognitoMode": {},
+    "incognitoModeDescription": "גלוש מבלי לשמור את הפעילות שלך",
+    "@incognitoModeDescription": {},
+    "login": "התחבר",
+    "@login": {},
+    "manga": "מנגה",
+    "@manga": {},
+    "notificationsDescription": "הגדר איך ומתי תקבל התראות",
+    "@notificationsDescription": {},
+    "offlineMode": "מצב לא מקוון",
+    "@offlineMode": {},
+    "offlineModeDescription": "השתמש באפליקציה ללא חיבור לאינטרנט",
+    "@offlineModeDescription": {},
+    "ok": "אוקי",
+    "@ok": {},
+    "outlineColorDescription": "צבע קו המתאר לכותרת",
+    "@outlineColorDescription": {},
+    "playerSettingsTitle": "הגדרות נגן",
+    "@playerSettingsTitle": {},
+    "resizeMode": "מצב שינוי גודל",
+    "@resizeMode": {},
+    "restoreSettings": "שחזר הגדרות",
+    "@restoreSettings": {},
+    "skipButton": "כפתור דילוג",
+    "@skipButton": {},
+    "skipButtonDescription": "משך הזמן של כפתור הדילוג",
+    "@skipButtonDescription": {},
+    "speed": "מהירות",
+    "@speed": {},
+    "speedDescription": "מהירות ברירת מחדל לנגן",
+    "@speedDescription": {},
+    "subtitles": "כתוביות",
+    "@subtitles": {},
+    "subtitlePreview": "תצוגה מקדימה של כתוביות",
+    "@subtitlePreview": {},
+    "theme": "ערכת נושא",
+    "@theme": {},
+    "account": "חשבון",
+    "@account": {},
+    "about": "אודות",
+    "@about": {},
+    "aboutDescription": "למד עוד על האפליקציה והיוצרים שלה",
+    "@aboutDescription": {},
+    "accountDescription": "נהל את החשבונות שלך ב-AniList, MAL ו-Discord בקלות",
+    "@accountDescription": {},
+    "anime": "אנימה",
+    "@anime": {},
+    "animeDescription": "התאם אישית ונהל את העדפות האנימה שלך",
+    "@animeDescription": {},
+    "anilist": "AniList",
+    "@anilist": {},
+    "appName": "Dartotsu",
+    "@appName": {},
+    "appTagline": "האפליקציה החדשה והטובה ביותר\nלעקוב אחרי אנימה ומנגה",
+    "@appTagline": {},
+    "backgroundColor": "צבע רקע",
+    "@backgroundColor": {},
+    "backgroundColorDescription": "צבע רקע הכותרת",
+    "@backgroundColorDescription": {},
+    "bottomPadding": "מרווח תחתון",
+    "@bottomPadding": {},
+    "bottomPaddingDescription": "מרווח תחתון לכותרת",
+    "@bottomPaddingDescription": {},
+    "cancel": "ביטול",
+    "@cancel": {},
+    "colorPicker": "בוחר צבע",
+    "@colorPicker": {},
+    "darkMode": "מצב כהה",
+    "@darkMode": {},
+    "discord": "Discord",
+    "@discord": {},
+    "donationGoal": "אין יעד תרומות כרגע",
+    "@donationGoal": {},
+    "enableDarkMode": "הפעל מצב כהה",
+    "@enableDarkMode": {},
+    "extension": "{count, plural, =1 {תוסף} other {תוספים}}",
+    "@extension": {},
+    "extensionsDescription": "התקן ונהל הרחבות לפונקציות נוספות",
+    "@extensionsDescription": {},
+    "fontColor": "צבע גופן",
+    "@fontColor": {},
+    "fontColorDescription": "צבע גופן לכותרת",
+    "@fontColorDescription": {},
+    "fontFamily": "משפחת גופנים",
+    "@fontFamily": {},
+    "fontFamilyDescription": "משפחת גופנים לכותרת",
+    "@fontFamilyDescription": {},
+    "fontSize": "גודל גופן",
+    "@fontSize": {},
+    "fontSizeDescription": "גודל גופן לכותרת",
+    "@fontSizeDescription": {},
+    "fontWeight": "משקל גופן",
+    "@fontWeight": {},
+    "fontWeightDescription": "משקל גופן לכותרת",
+    "@fontWeightDescription": {},
+    "hidePrivate": "הסתר פרטי",
+    "@hidePrivate": {},
+    "hidePrivateDescription": "הסתר סדרות פרטיות מעמוד הבית.",
+    "@hidePrivateDescription": {},
+    "logout": "התנתק {type}",
+    "@logout": {},
+    "mal": "MyAnimeList",
+    "@mal": {},
+    "mangaDescription": "ארגן והתאם אישית את חווית המנגה שלך",
+    "@mangaDescription": {},
+    "materialYou": "Material You",
+    "@materialYou": {},
+    "materialYouDescription": "השתמש באותו צבע כמו ברקע שלך",
+    "@materialYouDescription": {},
+    "no": "לא",
+    "@no": {},
+    "notifications": "התראות",
+    "@notifications": {},
+    "oledThemeVariant": "גרסת נושא OLED",
+    "@oledThemeVariant": {},
+    "oledThemeVariantDescription": "הפעל מצב OLED",
+    "@oledThemeVariantDescription": {},
+    "outlineColor": "צבע קו מתאר",
+    "@outlineColor": {},
+    "resizeModeDescription": "מצב ברירת מחדל לשינוי גודל בנגן",
+    "@resizeModeDescription": {},
+    "settings": "הגדרות",
+    "@settings": {},
+    "showSubtitles": "הצג כתוביות",
+    "@showSubtitles": {},
+    "showSubtitlesDescription": "הצג כתוביות כברירת מחדל",
+    "@showSubtitlesDescription": {},
+    "supportMaintainer": "רוצה לתמוך במתחזק של Dartotsu?\nשקול לתרום",
+    "@supportMaintainer": {},
+    "themeDescription": "התאם אישית את המראה והאווירה של האפליקציה שלך",
+    "@themeDescription": {},
+    "yes": "כן",
+    "@yes": {},
+    "totalEpisodes": "סדרות",
+    "@totalEpisodes": {},
+    "total": "Total",
+    "@total": {},
+    "tags": "תגיות",
+    "@tags": {},
+    "hiddenMedia": "מדיה מוסתרת",
+    "@hiddenMedia": {},
+    "name": "שם השם",
+    "@name": {},
+    "mostFavourite": "{type} המועדף ביותר",
+    "@mostFavourite": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa"
+                ]
+            }
+        }
+    },
+    "endDate": "תאריך סיום",
+    "@endDate": {},
+    "meanScore": "ציון ממוצע",
+    "@meanScore": {},
+    "chapterRead": "פרק נקרא",
+    "@chapterRead": {},
+    "noHiddenMediaFound": "לא נמצאה מדיה מוסתרת",
+    "@noHiddenMediaFound": {},
+    "synopsis": "תקציר",
+    "@synopsis": {},
+    "nameRomaji": "שם (רומאג'י)",
+    "@nameRomaji": {},
+    "gridView": "תצוגת רשת",
+    "@gridView": {},
+    "averageDuration": "משך ממוצע",
+    "@averageDuration": {},
+    "droppedManga": "מנגה מבוטלת",
+    "@droppedManga": {},
+    "comingSoon": "בקרוב",
+    "@comingSoon": {},
+    "episodeWatched": "פרק נצפה",
+    "@episodeWatched": {},
+    "popularity": "פופולריות",
+    "@popularity": {},
+    "allCaughtUpNew": "סיימת הכול, מה חדש?",
+    "@allCaughtUpNew": {},
+    "totalChapters": "פרקים",
+    "@totalChapters": {},
+    "favorites": "מועדפים",
+    "@favorites": {},
+    "movie": "{count, plural, =1 {סרט} other {סרטים}}",
+    "@movie": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "prequel": "שאלה",
+    "@prequel": {},
+    "planned": "{type} מתוכנן",
+    "@planned": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "collapseText": "הצג פחות",
+    "@collapseText": {},
+    "chapter": "{count, plural, =1 {פרק} other {פרקים}}",
+    "@chapter": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "available": "{type} זמין",
+    "@available": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "characters": "דמויות",
+    "@characters": {},
+    "genres": "ז'אנרים",
+    "@genres": {},
+    "author": "Author",
+    "@author": {},
+    "format": "פורמט",
+    "@format": {},
+    "expandText": "הצג עוד",
+    "@expandText": {},
+    "sequel": "SEQUEL",
+    "@sequel": {},
+    "studio": "סטודיו Studio",
+    "@studio": {},
+    "staff": "צוות",
+    "@staff": {},
+    "status": "סטטוס",
+    "@status": {},
+    "relations": "יחסים",
+    "@relations": {},
+    "source": "מקור Source",
+    "@source": {},
+    "synonyms": "מילים נרדפות",
+    "@synonyms": {},
+    "startDate": "התחל תאריך",
+    "@startDate": {},
+    "recommendationsEmptyMessage": "צפה/קרא קצת אנימה או מנגה כדי לקבל המלצות",
+    "@recommendationsEmptyMessage": {},
+    "ln": "רומן קל",
+    "@ln": {},
+    "manhwa": "Manhwa",
+    "@manhwa": {},
+    "kitsu": "Kitsu",
+    "@kitsu": {},
+    "novel": "רומן",
+    "@novel": {},
+    "loginTo": "התחבר ל-{service}",
+    "@loginTo": {
+        "placeholders": {
+            "service": {
+                "type": "String",
+                "examples": [
+                    "Anilist",
+                    "MyAnimeList",
+                    "Kitsu",
+                    "Discord"
+                ]
+            }
+        }
+    },
+    "series": "סדרה",
+    "@series": {},
+    "home": "בית",
+    "@home": {},
+    "manhua": "ישוע",
+    "@manhua": {},
+    "season": "עונה",
+    "@season": {},
+    "episode": "{count, plural, =1 {פרק} other {סדרות}}",
+    "@episode": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "volume": "{count, plural, =1 {כרך} other {כרכים}}",
+    "@volume": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "calendar": "לוח שנה",
+    "@calendar": {},
+    "compactView": "תצוגה קומפקטית",
+    "@compactView": {},
+    "listView": "רשימת View",
+    "@listView": {},
+    "confirmLogout": "האם אתה בטוח שברצונך להתנתק?",
+    "@confirmLogout": {},
+    "installed": "{type} מותקן",
+    "@installed": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Extensions"
+                ]
+            }
+        }
+    },
+    "trending": "{type} במגמה",
+    "@trending": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "popular": "{type} פופולרי",
+    "@popular": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa"
+                ]
+            }
+        }
+    },
+    "thisSeason": "העונה הנוכחית",
+    "@thisSeason": {},
+    "nextSeason": "העונה הבאה",
+    "@nextSeason": {},
+    "topRated": "{type} בעלי הדירוג הגבוה ביותר",
+    "@topRated": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga",
+                    "Manhwa",
+                    "Series"
+                ]
+            }
+        }
+    },
+    "previousSeason": "העונה הקודמת",
+    "@previousSeason": {},
+    "favorite": "{type} מועדף",
+    "@favorite": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "activity": "{count, plural, =1 {פעילות} other {פעילויות}}",
+    "@activity": {
+        "description": "count > 1 will use plural form",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "browse": "עיין ב-{type}",
+    "@browse": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "onHold": "{type} בהמתנה",
+    "@onHold": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "continueReading": "המשך לקרוא",
+    "@continueReading": {},
+    "noDropped": "לא ביטלת אף {type} עדיין.",
+    "@noDropped": {
+        "placeholders": {
+            "type": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "continueWatching": "המשך לצפות",
+    "@continueWatching": {},
+    "droppedAnime": "אנימה מבוטלת",
+    "@droppedAnime": {},
+    "recentUpdates": "עדכונים אחרונים",
+    "@recentUpdates": {},
+    "recommended": "מומלץ",
+    "@recommended": {},
+    "scanlators": "מתרגמים",
+    "@scanlators": {},
+    "search": "חיפוש",
+    "@search": {},
+    "sort": "מיין",
+    "@sort": {},
+    "utd": "מלמעלה למטה",
+    "@utd": {},
+    "addToList": "הוסף לרשימה",
+    "@addToList": {},
+    "comments": "תגובות",
+    "@comments": {},
+    "dtu": "למטה עד Up",
+    "@dtu": {},
+    "language": "שפה",
+    "@language": {},
+    "info": "מידע",
+    "@info": {},
+    "layout": "Layout",
+    "@layout": {},
+    "list": "רשימת {type}",
+    "@list": {
+        "placeholders": {
+            "type": {
+                "examples": "Anime list",
+                "type": "String"
+            }
+        }
+    },
+    "options": "אפשרויות",
+    "@options": {},
+    "read": "קרא",
+    "@read": {},
+    "topAiring": "משודרים מובילים",
+    "@topAiring": {},
+    "watch": "צפה",
+    "@watch": {},
+    "manageLayout": "נהל את הפריסה של דף {page} עבור {service}",
+    "@manageLayout": {
+        "placeholders": {
+            "service": {
+                "type": "String",
+                "examples": [
+                    "Anilist",
+                    "MAL"
+                ]
+            },
+            "page": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Home",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "manageLayoutDescription": "באפשרותך לנהל את פריסת דף {page} על ידי גרירה ושחרור של הפריטים",
+    "@manageLayoutDescription": {
+        "placeholders": {
+            "page": {
+                "type": "String",
+                "examples": [
+                    "Anime",
+                    "Home",
+                    "Manga"
+                ]
+            }
+        }
+    },
+    "pickColor": "בחר צבע",
+    "@pickColor": {},
+    "noFavourites": "נראה שאתה לא אוהב כלום,\nנסה לסמן סדרה למועדפים כדי לשמור אותה כאן.",
+    "@noFavourites": {},
+    "noOnHold": "נראה שלא שמת שום דבר בהמתנה.",
+    "@noOnHold": {},
+    "simkl": "Simkl",
+    "@simkl": {},
+    "logFile": "תגית File",
+    "@logFile": {},
+    "colorPickerDefault": "Default",
+    "@colorPickerDefault": {},
+    "logFileDescription": "שתף את קובץ היומן",
+    "@logFileDescription": {},
+    "colorPickerCustom": "מותאם אישית",
+    "@colorPickerCustom": {},
+    "addNovelRepoDesc": "הוסף הרומן Repo ממקורות שונים",
+    "@addNovelRepoDesc": {},
+    "addMangaRepoDesc": "הוסף Manga Repo ממקורות שונים",
+    "@addMangaRepoDesc": {},
+    "selectMediaService": "שירות מדיה נבחר",
+    "@selectMediaService": {},
+    "addAnimeRepo": "תגית: Anime Repo",
+    "@addAnimeRepo": {},
+    "loadExtensionsIconDesc": "להשבית אם הסיומת דף lags",
+    "@loadExtensionsIconDesc": {},
+    "autoUpdateDesc": "הרחבות עדכון אוטומטי",
+    "@autoUpdateDesc": {},
+    "addAnimeRepoDesc": "הוסף Anime Repo ממקורות שונים",
+    "@addAnimeRepoDesc": {},
+    "addMangaRepo": "תגית: Manga Repo",
+    "@addMangaRepo": {},
+    "addNovelRepo": "תגית: Repo",
+    "@addNovelRepo": {},
+    "selectDirectory": "בחר מנהל",
+    "@selectDirectory": {},
+    "customPathDescription": "הגדרת נתיב מותאם אישית להצלת קבצים\nעיתונות ארוכה כדי להסיר",
+    "@customPathDescription": {},
+    "autoUpdate": "עדכון אוטומטי",
+    "@autoUpdate": {},
+    "loadExtensionsIcon": "תגית: growth",
+    "@loadExtensionsIcon": {},
+    "customPath": "נתיב מותאם אישית",
+    "@customPath": {},
+    "noChapterFound": "שום פרק לא מצא",
+    "@noChapterFound": {},
+    "watching": "צפייה",
+    "@watching": {},
+    "outOf": "בחוץ",
+    "@outOf": {},
+    "selected": "נבחר",
+    "@selected": {},
+    "readStatus": "קרא",
+    "@readStatus": {},
+    "watchStatus": "צפו",
+    "@watchStatus": {},
+    "totalOf": "Total of",
+    "@totalOf": {},
+    "wrongTitle": "כותרת שגויה?",
+    "@wrongTitle": {},
+    "installSourceToStart": "התקנת מקור מדף הרחבה כדי להתחיל",
+    "@installSourceToStart": {},
+    "webView": "Web View",
+    "@webView": {},
+    "reading": "קריאה לקריאה",
+    "@reading": {},
+    "youTube": "לשחק ב- YouTube?",
+    "@youTube": {},
+    "mediaNotFound": "מדיה לא נמצאה",
+    "@mediaNotFound": {},
+    "found": "נמצאו",
+    "@found": {},
+    "differentCacheManager": "מנהל Cache",
+    "@differentCacheManager": {},
+    "spacedPages": "דפי חלל",
+    "@spacedPages": {},
+    "readerSettingsDesc": "שינוי הגדרות הקורא",
+    "@readerSettingsDesc": {},
+    "direction": "כיוון",
+    "@direction": {},
+    "readerSettings": "הגדרות קורא",
+    "@readerSettings": {},
+    "developersHelpersDesc": "העבודה ללא תשלום של דארטוטסו",
+    "@developersHelpersDesc": {},
+    "developersHelpers": "מפתחים / Helpers",
+    "@developersHelpers": {},
+    "differentCacheManagerDesc": "השתמש במנהל תמונות שונה",
+    "@differentCacheManagerDesc": {},
+    "hideScrollbar": "תגית: Scrollbar",
+    "@hideScrollbar": {},
+    "playerSettingsDesc": "שינוי הגדרות השחקן",
+    "@playerSettingsDesc": {},
+    "thumbLessSeekBar": "שם הסרטון: ThumbLess Seek Bar",
+    "@thumbLessSeekBar": {},
+    "thumbLessSeekBarDesc": "להסיר את האגודל מהבר המבוקש",
+    "@thumbLessSeekBarDesc": {},
+    "hidePageNumberDesc": "מספר העמודים תוך כדי קריאה",
+    "@hidePageNumberDesc": {},
+    "hidePageNumber": "תגית: Page Number",
+    "@hidePageNumber": {},
+    "spacedPagesDesc": "הוסף שטח בין דפים",
+    "@spacedPagesDesc": {},
+    "hideScrollbarDesc": "Hide Galbar בזמן קריאה",
+    "@hideScrollbarDesc": {},
+    "glassEffect": "אפקט זכוכית",
+    "@glassEffect": {},
+    "ltr": "לשמאל to right",
+    "@ltr": {},
+    "coverThemeDescription": "השתמש תמונת כיסוי מדיה כצבע נושא",
+    "@coverThemeDescription": {},
+    "rtl": "ימין לשמאל",
+    "@rtl": {},
+    "glassEffectDescription": "נותן אפקט זכוכית קפוא לאפליקציית",
+    "@glassEffectDescription": {},
+    "nextEpisodeRelease": "שם הסרטון: X8X ישוחרר",
+    "@nextEpisodeRelease": {
+        "description": "Message showing the next episode info",
+        "placeholders": {
+            "episode": {
+                "type": "int"
+            }
+        }
+    },
+    "topScore": "Top Score",
+    "@topScore": {},
+    "coverTheme": "ערכת נושא",
+    "@coverTheme": {},
+    "customMPVDescription": "Enable this option to use your own MPV configuration file. Place your custom config at: {path}",
+    "@customMPVDescription": {
+        "placeholders": {
+            "path": {
+                "type": "String"
+            }
+        }
+    },
+    "customMPV": "Custom MPV Configuration",
+    "@customMPV": {}
 }
