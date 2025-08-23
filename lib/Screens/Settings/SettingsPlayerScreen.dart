@@ -148,7 +148,7 @@ List<Widget> playerSettings(
         Setting(
           type: SettingType.switchType,
           name: getString.customMPV,
-          description: getString.customMPVDescription,
+          description: getString.customMPVDescription(loadData(PrefName.mpvConfigDir).fixSeparator.replaceAll(' ', '')),
           icon: Icons.extension_rounded,
           isChecked: loadData(PrefName.useCustomMpvConfig),
           onSwitchChange: (value) {
