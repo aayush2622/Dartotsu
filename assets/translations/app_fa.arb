@@ -650,7 +650,7 @@
     "@topScore": {},
     "coverTheme": "استفاده از Cover Theme",
     "@coverTheme": {},
-    "customMPVDescription": "Enable this option to use your own MPV configuration file. Place your custom config at: {path}",
+    "customMPVDescription": "این گزینه را برای استفاده از فایل پیکربندی MPV خود فعال کنید. گزینه سفارشی خود را در: {path}",
     "@customMPVDescription": {
         "placeholders": {
             "path": {
@@ -658,6 +658,6 @@
             }
         }
     },
-    "customMPV": "Custom MPV Configuration",
+    "customMPV": "MPV سفارشی پیکربندی Configuration",
     "@customMPV": {}
 }

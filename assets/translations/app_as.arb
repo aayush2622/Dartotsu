@@ -650,7 +650,7 @@
     "@topScore": {},
     "coverTheme": "কভাৰ থীম ব্যৱহাৰ কৰক",
     "@coverTheme": {},
-    "customMPVDescription": "Enable this option to use your own MPV configuration file. Place your custom config at: {path}",
+    "customMPVDescription": "আপোনাৰ নিজৰ MPV বিন্যাস নথিপত্ৰ ব্যৱহাৰ কৰিবলে এই বিকল্প সামৰ্থবান কৰক । আপোনাৰ স্বনিৰ্বাচিত বিন্যাস ইয়াত ৰাখক: {path}",
     "@customMPVDescription": {
         "placeholders": {
             "path": {
@@ -658,6 +658,6 @@
             }
         }
     },
-    "customMPV": "Custom MPV Configuration",
+    "customMPV": "স্বনিৰ্বাচিত MPV বিন্যাস",
     "@customMPV": {}
 }

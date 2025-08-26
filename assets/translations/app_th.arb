@@ -650,7 +650,7 @@
     "@topScore": {},
     "coverTheme": "ใช้รูปแบบ",
     "@coverTheme": {},
-    "customMPVDescription": "Enable this option to use your own MPV configuration file. Place your custom config at: {path}",
+    "customMPVDescription": "เปิดใช้งานตัวเลือกนี้ในการใช้ไฟล์ MPV สถานที่กําเนิด: [X88]",
     "@customMPVDescription": {
         "placeholders": {
             "path": {
@@ -658,6 +658,6 @@
             }
         }
     },
-    "customMPV": "Custom MPV Configuration",
+    "customMPV": "ที่กําหนดเอง MPV การกําหนดค่า",
     "@customMPV": {}
 }

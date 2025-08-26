@@ -650,7 +650,7 @@
     "@topScore": {},
     "coverTheme": "Utilizzare il tema della copertura",
     "@coverTheme": {},
-    "customMPVDescription": "Enable this option to use your own MPV configuration file. Place your custom config at: {path}",
+    "customMPVDescription": "Abilitare questa opzione per utilizzare il proprio file di configurazione MPV. Metti la tua configurazione personalizzata a: {path}",
     "@customMPVDescription": {
         "placeholders": {
             "path": {
@@ -658,6 +658,6 @@
             }
         }
     },
-    "customMPV": "Custom MPV Configuration",
+    "customMPV": "MPV personalizzato Configurazione",
     "@customMPV": {}
 }

@@ -650,7 +650,7 @@
     "@topScore": {},
     "coverTheme": "Χρησιμοποιήστε την κάλυψη",
     "@coverTheme": {},
-    "customMPVDescription": "Enable this option to use your own MPV configuration file. Place your custom config at: {path}",
+    "customMPVDescription": "Καθορίστε αυτή την επιλογή για να χρησιμοποιήσετε το δικό σας αρχείο διαμόρφωσης MPV. Τοποθετήστε το έθιμο σας σε: {path}",
     "@customMPVDescription": {
         "placeholders": {
             "path": {
@@ -658,6 +658,6 @@
             }
         }
     },
-    "customMPV": "Custom MPV Configuration",
+    "customMPV": "Custom MPVV Συμμόρφωση",
     "@customMPV": {}
 }
