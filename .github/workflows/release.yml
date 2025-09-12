@@ -414,55 +414,6 @@ jobs:
               -d "$discord_data" \
               "$DISCORD_WEBHOOK_URL"
 
-      - name: Send message to Telegram
-        env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHANNEL_ID }}
-          TELEGRAM_TOPIC: ${{ secrets.TELEGRAM_TOPIC_ANNOUNCEMENT }}
-        run: |
-          # Extract Features, Fixes, and Chores into separate files (with cleaning)
-          echo "**🚀 Features**" > TFeatures.txt
-          echo "$(echo "$FORMATTED_NOTES" | grep -iE '^\*\s\[[a-f0-9]+\]\(.*\):\sfeat' | sed -E 's/\): [^:]+:/) :/g' | head -n 5)" > feat.txt
-          echo "**🐛 Fixes**" > TFixes.txt
-          echo "$(echo "$FORMATTED_NOTES" | grep -iE '^\*\s\[[a-f0-9]+\]\(.*\):\sfix' | sed -E 's/\): [^:]+:/) :/g' | head -n 5)" > fixes.txt
-          echo "**🛠 Chores**" > TChores.txt
-          echo "$(echo "$FORMATTED_NOTES" | grep -iE '^\*\s\[[a-f0-9]+\]\(.*\):\schore' | sed -E 's/\): [^:]+:/) :/g' | head -n 5)" > chores.txt
-          chmod +x scripts/tel_commit_parser.sed
-          ./scripts/tel_commit_parser.sed feat.txt > feat_clean.txt
-          ./scripts/tel_commit_parser.sed fixes.txt > fixes_clean.txt
-          ./scripts/tel_commit_parser.sed chores.txt > chores_clean.txt
-          ./scripts/tel_commit_parser.sed TFeatures.txt > TFeaturesT.txt
-          ./scripts/tel_commit_parser.sed TFixes.txt > TFixesT.txt
-          ./scripts/tel_commit_parser.sed TChores.txt > TChoresT.txt
-          if [ ! -s feat_clean.txt ] || [ "$(tr -d '[:space:]' < feat_clean.txt)" = "" ]; then
-              rm -f feat_clean.txt TFeaturesT.txt
-          fi
-          if [ ! -s fixes_clean.txt ] || [ "$(tr -d '[:space:]' < fixes_clean.txt)" = "" ]; then
-              rm -f fixes_clean.txt TFixesT.txt
-          fi
-          if [ ! -s chores_clean.txt ] || [ "$(tr -d '[:space:]' < chores_clean.txt)" = "" ]; then
-              rm -f chores_clean.txt TChoresT.txt
-          fi
-          {
-              [ -f TFeaturesT.txt ] && [ -f feat_clean.txt ] && echo -n "$(cat TFeaturesT.txt) <blockquote>$(cat feat_clean.txt)</blockquote> "
-              [ -f TFixesT.txt ] && [ -f fixes_clean.txt ] && echo -n "$(cat TFixesT.txt) <blockquote>$(cat fixes_clean.txt)</blockquote> "
-              [ -f TChoresT.txt ] && [ -f chores_clean.txt ] && echo -n "$(cat TChoresT.txt) <blockquote>$(cat chores_clean.txt)</blockquote> "
-          } > output.txt
-          if [ ! -s output.txt ]; then
-              echo "No commits found. Skipping Telegram message."
-              exit 0
-          fi
-          echo -n "<a href='https://github.com/${{github.repository}}/releases/tag/${{ env.LATEST_TAG }}'>📌 Full changelog</a>" >> output.txt
-          markdown_info_tel=$(< output.txt)
-          echo "Final Telegram Message:"
-          echo "$markdown_info_tel"
-          curl -s -X POST "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage" \
-              -d "chat_id=$TELEGRAM_CHAT_ID" \
-              -d "message_thread_id=$TELEGRAM_TOPIC" \
-              -d "text=$markdown_info_tel" \
-              -d "parse_mode=HTML" \
-              -d "disable_web_page_preview=true"
-
   upload_download_url:
     runs-on: ubuntu-latest
     needs: [post-release-notes]
@@ -535,22 +486,6 @@ jobs:
             -X POST \
             -d "{\"content\": \"$MESSAGE\"}" \
             $DISCORD_WEBHOOK_URL
-      - name: Send message to Telegram
-        env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHANNEL_ID }}
-          TELEGRAM_TOPIC: ${{ secrets.TELEGRAM_TOPIC_ANNOUNCEMENT }}
-
-          MESSAGE: ${{ env.MESSAGE }}
-        run: |
-
-          FORMATTED_MESSAGE=$(echo -e "$MESSAGE")
-          # Send the message to Telegram using the Bot API
-          curl -s -X POST "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage" \
-            -d "chat_id=$TELEGRAM_CHAT_ID" \
-            -d "message_thread_id=$TELEGRAM_TOPIC" \
-            -d text="$FORMATTED_MESSAGE" \
-            -d parse_mode="Markdown"
 
   generate-changelog:
     runs-on: ubuntu-latest
