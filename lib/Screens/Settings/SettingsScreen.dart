@@ -189,13 +189,6 @@ class SettingsScreenState extends BaseSettingsScreen {
               onPressed: () =>
                   openLinkInBrowser('https://github.com/aayush2622/dartotsu'),
             ),
-            const SizedBox(width: 16),
-            IconButton(
-              color: Colors.grey.shade800,
-              iconSize: 38,
-              icon: const Icon(Icons.telegram_sharp),
-              onPressed: () => openLinkInBrowser('https://t.me/Dartotsu'),
-            ),
           ],
         ),
         const SizedBox(height: 12),
