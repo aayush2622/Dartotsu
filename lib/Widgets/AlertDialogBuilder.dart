@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 class AlertDialogBuilder {
@@ -107,9 +109,12 @@ class AlertDialogBuilder {
         _isReorderableMultiSelectable = true;
       });
 
-  void show() {
+  Future<T?> show<T>() {
     var theme = Theme.of(context).colorScheme;
-    showDialog(
+
+    _onAttach?.call();
+
+    return showDialog<T>(
       context: context,
       barrierDismissible: _cancelable,
       builder: (BuildContext context) {
@@ -128,8 +133,10 @@ class AlertDialogBuilder {
           actions: _buildActions(),
         );
       },
-    ).then((_) => _onDismiss?.call());
-    _onAttach?.call();
+    ).then((value) {
+      _onDismiss?.call();
+      return value;
+    });
   }
 
   Widget _buildContent(StateSetter setState) {

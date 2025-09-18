@@ -1,11 +1,9 @@
-import 'package:blurbox/blurbox.dart';
 import 'package:dartotsu/Functions/Extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../Api/EpisodeDetails/GetMediaIDs/GetMediaIDs.dart';
 import '../../Functions/Function.dart';
-import '../../Theme/Colors.dart';
 import '../../Theme/ThemeManager.dart';
 
 abstract class BaseMediaScreen extends GetxController {
@@ -32,19 +30,22 @@ abstract class BaseMediaScreen extends GetxController {
     if (initialLoad) return;
     scrollController.addListener(scrollListener);
     final live = Refresh.getOrPut(refreshID, false);
-    ever(live, (bool shouldRefresh) async {
-      if (running.value && shouldRefresh) {
-        running.value = false;
-        await Future.wait([
-          loadAll(),
-          GetMediaIDs.getData(),
-        ]);
-        initialLoad = true;
-        live.value = false;
-        running.value = true;
-      }
-    });
-    Refresh.activity[refreshID]?.value = true;
+    ever(
+      live,
+      (shouldRefresh) async {
+        if (running.value && shouldRefresh) {
+          running.value = false;
+          await Future.wait([
+            loadAll(),
+            GetMediaIDs.getData(),
+          ]);
+          initialLoad = true;
+          live.value = false;
+          running.value = true;
+        }
+      },
+    );
+    live.value = true;
   }
 
   bool _canScroll() {
@@ -67,42 +68,29 @@ abstract class BaseMediaScreen extends GetxController {
   }
 
   Widget buildScrollToTopButton(BuildContext context) {
-    var themeNotifier = context.themeNotifier;
-    final theme = Theme.of(context).colorScheme;
-    var icon = IconButton(
-      icon: const Icon(Icons.arrow_upward),
-      onPressed: () => scrollController.animateTo(
-        0,
-        duration: const Duration(milliseconds: 500),
-        curve: Curves.easeInOut,
-      ),
-    );
     return Positioned(
-      bottom: 72.0 + 32.bottomBar(),
-      left: (0.screenWidthWithContext(context) / 2) - 24.0,
-      child: Obx(() => scrollToTop.value
-          ? ThemedWidget(
-              context: context,
-              materialWidget: Container(
-                decoration: BoxDecoration(
-                  color: themeNotifier.isDarkMode ? greyNavDark : greyNavLight,
+      bottom: context.isPhone ? 72.0 + 32.bottomBar() : 64,
+      left: 0,
+      right: 0,
+      child: Obx(
+        () => scrollToTop.value
+            ? Center(
+                child: ThemedContainer(
+                  context: context,
                   borderRadius: BorderRadius.circular(64.0),
+                  padding: const EdgeInsets.all(4),
+                  child: IconButton(
+                    icon: const Icon(Icons.arrow_upward),
+                    onPressed: () => scrollController.animateTo(
+                      0,
+                      duration: const Duration(milliseconds: 500),
+                      curve: Curves.easeInOut,
+                    ),
+                  ),
                 ),
-                padding: const EdgeInsets.all(4.0),
-                child: icon,
-              ),
-              glassWidget: BlurBox(
-                blur: 12.0,
-                padding: const EdgeInsets.all(4.0),
-                borderRadius: BorderRadius.circular(64.0),
-                border: Border.all(
-                  color: theme.onSurface.withOpacity(0.2),
-                  width: 1,
-                ),
-                child: icon,
-              ),
-            )
-          : const SizedBox()),
+              )
+            : const SizedBox(),
+      ),
     );
   }
 }

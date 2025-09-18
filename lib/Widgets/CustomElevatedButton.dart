@@ -1,3 +1,4 @@
+import 'package:dartotsu/Functions/Extensions/ContextExtensions.dart';
 import 'package:flutter/material.dart';
 
 Widget CustomElevatedButton({
@@ -9,24 +10,10 @@ Widget CustomElevatedButton({
 }) {
   final theme = Theme.of(context);
 
-  return ElevatedButton.icon(
+  return ElevatedButton(
     onPressed: onPressed,
-    icon: iconWidget != null
-        ? Padding(
-            padding: const EdgeInsets.only(right: 24.0),
-            child: iconWidget,
-          )
-        : const SizedBox.shrink(),
-    label: Text(
-      textAlign: TextAlign.center,
-      label,
-      style: TextStyle(
-        fontFamily: 'Poppins-SemiBold',
-        color: theme.colorScheme.primaryContainer,
-      ),
-    ),
     style: ElevatedButton.styleFrom(
-      backgroundColor: Theme.of(context).primaryColor,
+      backgroundColor: theme.primaryColor,
       padding: padding ??
           const EdgeInsets.only(
             top: 16,
@@ -37,6 +24,25 @@ Widget CustomElevatedButton({
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
       ),
+    ),
+    child: Row(
+      mainAxisSize: MainAxisSize.min, // shrink to content
+      children: [
+        iconWidget ?? const SizedBox.shrink(),
+        const SizedBox(width: 8),
+        Flexible(
+          child: Text(
+            label,
+            textAlign: TextAlign.center,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: context.textTheme.labelMedium?.copyWith(
+              color: theme.colorScheme.primaryContainer,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+        ),
+      ],
     ),
   );
 }

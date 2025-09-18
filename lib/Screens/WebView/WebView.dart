@@ -93,9 +93,12 @@ class _MangaWebViewState extends State<MangaWebView> {
         urlRequest: URLRequest(url: WebUri(widget.url)),
         settings: InAppBrowserClassSettings(
           browserSettings: InAppBrowserSettings(
-              presentationStyle: ModalPresentationStyle.POPOVER),
+            presentationStyle: ModalPresentationStyle.AUTOMATIC,
+          ),
           webViewSettings: InAppWebViewSettings(
-              isInspectable: kDebugMode, useShouldOverrideUrlLoading: true),
+            isInspectable: kDebugMode,
+            useShouldOverrideUrlLoading: true,
+          ),
         ),
       );
     }
