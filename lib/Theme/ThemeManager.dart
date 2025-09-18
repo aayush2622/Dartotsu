@@ -71,13 +71,51 @@ ThemeData getTheme(ColorScheme? material, ThemeNotifier themeManager) {
         ? getCustomDarkTheme(customColor)
         : getCustomLightTheme(customColor);
   }
+  var fontFamily = "Poppins";
   return baseTheme.copyWith(
+    pageTransitionsTheme: const PageTransitionsTheme(
+      builders: {
+        TargetPlatform.android: PredictiveBackPageTransitionsBuilder(),
+      },
+    ),
     scaffoldBackgroundColor:
         isOled ? Colors.black : baseTheme.scaffoldBackgroundColor,
     colorScheme: baseTheme.colorScheme.copyWith(
       surface: isOled ? Colors.black : baseTheme.colorScheme.surface,
       surfaceContainerHighest:
           isOled ? greyNavDark : baseTheme.colorScheme.surfaceContainerHighest,
+    ),
+    textTheme: baseTheme.textTheme.copyWith(
+      labelLarge: baseTheme.textTheme.labelLarge?.copyWith(
+        fontFamily: fontFamily,
+        fontWeight: FontWeight.w800,
+        fontSize: 16,
+      ),
+      labelMedium: baseTheme.textTheme.labelMedium?.copyWith(
+        fontFamily: fontFamily,
+        fontWeight: FontWeight.w600,
+        fontSize: 14,
+      ),
+      labelSmall: baseTheme.textTheme.labelSmall?.copyWith(
+        fontFamily: fontFamily,
+        fontWeight: FontWeight.w400,
+        fontSize: 12,
+      ),
+      bodyLarge: baseTheme.textTheme.bodyLarge?.copyWith(
+        fontFamily: fontFamily,
+        fontWeight: FontWeight.w500,
+        fontSize: 14,
+      ),
+      bodyMedium: baseTheme.textTheme.bodyMedium?.copyWith(
+        fontFamily: fontFamily,
+        fontWeight: FontWeight.w400,
+        fontSize: 12,
+      ),
+      bodySmall: baseTheme.textTheme.bodySmall?.copyWith(
+        fontFamily: fontFamily,
+        fontWeight: FontWeight.w300,
+        fontSize: 10,
+      ),
     ),
     switchTheme: SwitchThemeData(
       thumbColor: WidgetStateProperty.resolveWith((states) {
@@ -137,6 +175,7 @@ Widget ThemedContainer({
   Widget? glassWidget,
   BorderRadiusGeometry? borderRadius,
   EdgeInsetsGeometry? padding,
+  AlignmentGeometry? alignment,
 }) {
   final themeManager = Provider.of<ThemeNotifier>(context, listen: false);
   final isGlassMode = themeManager.useGlassMode;
@@ -148,11 +187,12 @@ Widget ThemedContainer({
   if (isGlassMode) {
     return BlurBox(
       blur: 12.0,
+      alignment: alignment,
       padding: effectivePadding,
       color: theme.surfaceContainerLow.withOpacity(0.2),
       border: Border.all(
         color: theme.onSurface.withOpacity(0.2),
-        width: 1,
+        width: 0.5,
       ),
       borderRadius: effectiveBorderRadius,
       boxShadow: [
@@ -168,11 +208,12 @@ Widget ThemedContainer({
 
   return Container(
     padding: effectivePadding,
+    alignment: alignment,
     decoration: BoxDecoration(
       color: theme.surfaceContainerLow,
       border: Border.all(
-        color: theme.outlineVariant,
-        width: 1,
+        color: theme.onSurface.withOpacity(0.6),
+        width: 0.5,
       ),
       borderRadius: effectiveBorderRadius,
       boxShadow: [

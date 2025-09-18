@@ -57,7 +57,6 @@ class PrefManager {
   }
 
   static Future<Isar> _open(String name, String directory) async {
-    await requestPermission();
     isar = Isar.openSync(
       [
         KeyValueSchema,
@@ -79,7 +78,7 @@ class PrefManager {
 
   static void setVal<T>(Pref<T> pref, T value) {
     cache[pref.key] = value;
-    return _writeToIsar(pref.key, value);
+    _writeToIsar<T>(pref.key, value);
   }
 
   static T getVal<T>(Pref<T> pref) {
@@ -95,7 +94,7 @@ class PrefManager {
 
   static void setCustomVal<T>(String key, T value) {
     cache[key] = value;
-    return _writeToIsar(key, value);
+    _writeToIsar(key, value);
   }
 
   static T? getCustomVal<T>(
@@ -103,6 +102,7 @@ class PrefManager {
     T? defaultValue,
   }) {
     if (cache.containsKey(key) == true) {
+      if (cache[key] != null) return null;
       return cache[key] as T;
     }
     return null;
@@ -122,22 +122,22 @@ class PrefManager {
     _removeFromIsar<T>(key);
   }
 
-  static void _writeToIsar<T>(String key, T value) {
-    _dartotsuPreferences.writeTxnSync(() async {
+  static Future<void> _writeToIsar<T>(String key, T value) async {
+    await _dartotsuPreferences.writeTxn(() async {
       if (value is MediaSettings) {
         value.key = key;
-        _dartotsuPreferences.mediaSettings.putSync(value);
+        await _dartotsuPreferences.mediaSettings.put(value);
       } else if (value is ResponseToken) {
         value.key = key;
-        _dartotsuPreferences.responseTokens.putSync(value);
+        await _dartotsuPreferences.responseTokens.put(value);
       } else if (value is ShowResponse) {
         value.key = key;
-        _dartotsuPreferences.showResponses.putSync(value);
+        await _dartotsuPreferences.showResponses.put(value);
       } else {
         final keyValue = KeyValue()
           ..key = key
           ..value = value;
-        _dartotsuPreferences.keyValues.putSync(keyValue);
+        await _dartotsuPreferences.keyValues.put(keyValue);
       }
     });
   }
@@ -207,7 +207,7 @@ class PrefManager {
     return Directory(dbDir);
   }
 
-  static Future<Directory?> getDirectory({
+/*  static Future<Directory?> getDirectory({
     String? subPath,
     bool? useCustomPath = false,
     bool? useSystemPath = true,
@@ -224,8 +224,13 @@ class PrefManager {
     }
 
     if (Platform.isAndroid) {
+      var hasPermission = await requestPermission();
       DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
       final androidInfo = await deviceInfo.androidInfo;
+
+      if (!hasPermission) {
+        return Directory(appDir.path.fixSeparator);
+      }
       if (androidInfo.version.sdkInt <= 29) {
         var cDir = customPath.isNotEmpty
             ? (customPath.endsWith('Dartotsu')
@@ -265,6 +270,64 @@ class PrefManager {
     }
 
     return fullDirectory;
+  }*/
+  static Future<Directory?> getDirectory({
+    String? subPath,
+    bool useCustomPath = false,
+    bool useSystemPath = true,
+  }) async {
+    final appDir = await getApplicationDocumentsDirectory();
+    final customPath = loadData(PrefName.customPath);
+    final isApple = Platform.isIOS || Platform.isMacOS;
+
+    Future<Directory> ensureDir(String dirPath) async {
+      final dir = Directory(dirPath.fixSeparator);
+      if (!dir.existsSync()) {
+        await dir.create(recursive: true);
+      }
+      return dir;
+    }
+
+    if (isApple) {
+      final dbDir = path.join(appDir.path, 'Dartotsu', subPath ?? '');
+      return ensureDir(dbDir);
+    }
+
+    if (Platform.isAndroid) {
+      final hasPermission = await requestPermission();
+      final androidInfo = await DeviceInfoPlugin().androidInfo;
+
+      if (!hasPermission) {
+        return ensureDir(appDir.path);
+      }
+
+      final defaultPath = '/storage/emulated/0/Dartotsu';
+      final resolvedCustomPath = customPath.isNotEmpty
+          ? (customPath.endsWith('Dartotsu')
+              ? customPath
+              : path.join(customPath, 'Dartotsu'))
+          : defaultPath;
+
+      String basePath;
+
+      if (androidInfo.version.sdkInt <= 29) {
+        basePath = useSystemPath ? appDir.path : resolvedCustomPath;
+        return ensureDir(basePath);
+      } else {
+        basePath = useSystemPath ? appDir.path : resolvedCustomPath;
+      }
+
+      final fullPath = path.join(basePath, subPath ?? '');
+      return ensureDir(fullPath);
+    }
+
+    final fallbackPath = (customPath.isNotEmpty ? customPath : appDir.path);
+    final basePath = fallbackPath.endsWith('Dartotsu')
+        ? fallbackPath
+        : path.join(fallbackPath, 'Dartotsu');
+
+    final fullPath = path.join(basePath, subPath ?? '');
+    return ensureDir(fullPath);
   }
 
   static Future<bool> videoPermission() async {
