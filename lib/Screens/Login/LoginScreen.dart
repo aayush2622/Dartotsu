@@ -56,8 +56,6 @@ class LoginScreenState extends State<LoginScreen> {
                 const SizedBox(width: 16),
                 _buildSocialIcon(
                     Bootstrap.github, 'https://github.com/aayush2622/dartotsu'),
-                const SizedBox(width: 16),
-                _buildSocialIcon(Icons.telegram_sharp, 'https://t.me/Dartotsu'),
               ],
             ),
             const SizedBox(height: 16),
