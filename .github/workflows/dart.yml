@@ -553,7 +553,7 @@ jobs:
           else
             echo "ping_variable=noPing" >> $GITHUB_ENV
           fi
-      - name: Upload APK to Discord and Telegram
+      - name: Upload APK to Discord
         shell: bash
         run: |
           # Prepare Discord embed
