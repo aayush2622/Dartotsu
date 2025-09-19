@@ -580,11 +580,11 @@ class AppLocalizationsFa extends AppLocalizations {
   String get thumbLessSeekBarDesc => 'حذف انگشت از نوار جستجو';
 
   @override
-  String get customMPV => 'Custom MPV Configuration';
+  String get customMPV => 'MPV سفارشی پیکربندی Configuration';
 
   @override
   String customMPVDescription(String path) {
-    return 'Enable this option to use your own MPV configuration file. Place your custom config at: $path';
+    return 'این گزینه را برای استفاده از فایل پیکربندی MPV خود فعال کنید. گزینه سفارشی خود را در: $path';
   }
 
   @override

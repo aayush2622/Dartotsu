@@ -582,11 +582,11 @@ class AppLocalizationsHi extends AppLocalizations {
   String get thumbLessSeekBarDesc => 'तलाशी बार से अंगूठे निकालें';
 
   @override
-  String get customMPV => 'Custom MPV Configuration';
+  String get customMPV => 'कस्टम MPV विन्यास';
 
   @override
   String customMPVDescription(String path) {
-    return 'Enable this option to use your own MPV configuration file. Place your custom config at: $path';
+    return 'अपनी खुद की एमपीवी कॉन्फ़िगरेशन फ़ाइल का उपयोग करने के लिए इस विकल्प को सक्षम करें। अपने कस्टम विन्यास पर रखें: $path';
   }
 
   @override

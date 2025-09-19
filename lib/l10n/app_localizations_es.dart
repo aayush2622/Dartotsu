@@ -587,11 +587,11 @@ class AppLocalizationsEs extends AppLocalizations {
   String get thumbLessSeekBarDesc => 'Quitar el pulgar de la barra de búsqueda';
 
   @override
-  String get customMPV => 'Custom MPV Configuration';
+  String get customMPV => 'MPV personalizado Configuración';
 
   @override
   String customMPVDescription(String path) {
-    return 'Enable this option to use your own MPV configuration file. Place your custom config at: $path';
+    return 'Active esta opción para usar su propio archivo de configuración MPV. Coloque su configuración personalizada en: $path';
   }
 
   @override

@@ -571,11 +571,11 @@ class AppLocalizationsKo extends AppLocalizations {
   String get thumbLessSeekBarDesc => '찾기 바에서 엄지 제거';
 
   @override
-  String get customMPV => 'Custom MPV Configuration';
+  String get customMPV => '주문 MPV 제품 설명';
 
   @override
   String customMPVDescription(String path) {
-    return 'Enable this option to use your own MPV configuration file. Place your custom config at: $path';
+    return '이 옵션을 사용하여 자신의 MPV 구성 파일을 사용합니다. 사용자 지정 설정 배치: $path';
   }
 
   @override

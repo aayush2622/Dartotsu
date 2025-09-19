@@ -583,11 +583,11 @@ class AppLocalizationsTr extends AppLocalizations {
   String get thumbLessSeekBarDesc => 'Arama çubuğundan başparmak';
 
   @override
-  String get customMPV => 'Custom MPV Configuration';
+  String get customMPV => 'Özel MPVVV Yapılandırma';
 
   @override
   String customMPVDescription(String path) {
-    return 'Enable this option to use your own MPV configuration file. Place your custom config at: $path';
+    return 'Bu seçeneği kendi MPV yapılandırma dosyasını kullanmak için kullanılabilir. Özel yapılandırın: $path';
   }
 
   @override

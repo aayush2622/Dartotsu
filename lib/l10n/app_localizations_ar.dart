@@ -577,11 +577,11 @@ class AppLocalizationsAr extends AppLocalizations {
   String get thumbLessSeekBarDesc => 'إزالة إبهام من الحانه';
 
   @override
-  String get customMPV => 'Custom MPV Configuration';
+  String get customMPV => 'طراز Custom MPV الاتحاد';
 
   @override
   String customMPVDescription(String path) {
-    return 'Enable this option to use your own MPV configuration file. Place your custom config at: $path';
+    return 'يُمكّن هذا الخيارِ أَنْ يَستعملَ ملفَ تركيبِكَ الخاصِ MPV. ضعي ثقتك في:';
   }
 
   @override

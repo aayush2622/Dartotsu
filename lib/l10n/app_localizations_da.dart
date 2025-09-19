@@ -578,11 +578,11 @@ class AppLocalizationsDa extends AppLocalizations {
   String get thumbLessSeekBarDesc => 'Fjern tommelfingeren fra søgelinjen';
 
   @override
-  String get customMPV => 'Custom MPV Configuration';
+  String get customMPV => 'Brugerdefineret MPV Konfiguration af konfiguration';
 
   @override
   String customMPVDescription(String path) {
-    return 'Enable this option to use your own MPV configuration file. Place your custom config at: $path';
+    return 'Aktiver denne mulighed for at bruge din egen MPV konfiguration fil. Placer din brugerdefinerede config på: $path';
   }
 
   @override
