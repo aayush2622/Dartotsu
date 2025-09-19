@@ -592,11 +592,11 @@ class AppLocalizationsDe extends AppLocalizations {
       'Entfernen Sie den Daumen aus der Suchleiste';
 
   @override
-  String get customMPV => 'Custom MPV Configuration';
+  String get customMPV => 'Benutzerdefinierte MPV Konfiguration';
 
   @override
   String customMPVDescription(String path) {
-    return 'Enable this option to use your own MPV configuration file. Place your custom config at: $path';
+    return 'Aktivieren Sie diese Option, um Ihre eigene MPV-Konfigurationsdatei zu verwenden. Geben Sie Ihre benutzerdefinierte config an: $path';
   }
 
   @override

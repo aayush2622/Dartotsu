@@ -580,11 +580,11 @@ class AppLocalizationsTh extends AppLocalizations {
   String get thumbLessSeekBarDesc => 'ลบนิ้วออกจากบาร์';
 
   @override
-  String get customMPV => 'Custom MPV Configuration';
+  String get customMPV => 'ที่กําหนดเอง MPV การกําหนดค่า';
 
   @override
   String customMPVDescription(String path) {
-    return 'Enable this option to use your own MPV configuration file. Place your custom config at: $path';
+    return 'เปิดใช้งานตัวเลือกนี้ในการใช้ไฟล์ MPV สถานที่กําเนิด: [X88]';
   }
 
   @override

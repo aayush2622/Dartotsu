@@ -584,11 +584,11 @@ class AppLocalizationsPt extends AppLocalizations {
   String get thumbLessSeekBarDesc => 'Remova o polegar da barra de busca';
 
   @override
-  String get customMPV => 'Custom MPV Configuration';
+  String get customMPV => 'MPV personalizado Configuração';
 
   @override
   String customMPVDescription(String path) {
-    return 'Enable this option to use your own MPV configuration file. Place your custom config at: $path';
+    return 'Ative esta opção para usar seu próprio arquivo de configuração MPV. Coloque sua configuração personalizada em: $path';
   }
 
   @override
@@ -1373,11 +1373,11 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get thumbLessSeekBarDesc => 'Tirar o indicador da barra de progresso';
 
   @override
-  String get customMPV => 'Custom MPV Configuration';
+  String get customMPV => 'MPV personalizado Configuração';
 
   @override
   String customMPVDescription(String path) {
-    return 'Enable this option to use your own MPV configuration file. Place your custom config at: $path';
+    return 'Ative esta opção para usar seu próprio arquivo de configuração MPV. Coloque sua configuração personalizada em: $path';
   }
 
   @override
