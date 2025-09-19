@@ -571,11 +571,11 @@ class AppLocalizationsJa extends AppLocalizations {
   String get thumbLessSeekBarDesc => '求めるバーから親指を取り除く';
 
   @override
-  String get customMPV => 'Custom MPV Configuration';
+  String get customMPV => 'カスタムMPV 仕様';
 
   @override
   String customMPVDescription(String path) {
-    return 'Enable this option to use your own MPV configuration file. Place your custom config at: $path';
+    return 'このオプションを有効にすると、独自のMPV設定ファイルを使用します。 カスタムコンフィグを$pathに配置します';
   }
 
   @override

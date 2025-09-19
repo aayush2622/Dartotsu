@@ -159,8 +159,8 @@ class AnilistController extends BaseServiceData {
     chapterRead = null;
     unreadNotificationCount = 0;
     removeData(PrefName.anilistToken);
-    saveCustomData<String>("banner_ANIME_url", '');
-    saveCustomData<String>("banner_MANGA_url", '');
+    removeCustomData("banner_ANIME_url");
+    removeCustomData("banner_MANGA_url");
     run.value = true;
     isInitialized.value = false;
     Refresh.refreshService(RefreshId.Anilist);

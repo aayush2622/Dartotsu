@@ -374,7 +374,7 @@ class MediaGridState extends State<MediaAdaptor> {
           options: CarouselOptions(
             height: height,
             viewportFraction: 1.0,
-            autoPlay: true,
+            autoPlay: widget.mediaList != null,
             autoPlayInterval: const Duration(seconds: 5),
             autoPlayAnimationDuration: const Duration(milliseconds: 800),
             autoPlayCurve: Curves.fastOutSlowIn,

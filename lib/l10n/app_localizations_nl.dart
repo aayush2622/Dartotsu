@@ -584,11 +584,11 @@ class AppLocalizationsNl extends AppLocalizations {
   String get thumbLessSeekBarDesc => 'Verwijder de duim van de bar';
 
   @override
-  String get customMPV => 'Custom MPV Configuration';
+  String get customMPV => 'Custom MPV Configuratie';
 
   @override
   String customMPVDescription(String path) {
-    return 'Enable this option to use your own MPV configuration file. Place your custom config at: $path';
+    return 'Je kunt deze optie gebruiken om je eigen MPV-configuratiebestand te gebruiken. Plaats je gebruikelijke config bij:';
   }
 
   @override

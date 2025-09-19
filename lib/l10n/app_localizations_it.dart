@@ -586,11 +586,11 @@ class AppLocalizationsIt extends AppLocalizations {
       'Rimuovere il pollice dalla barra di ricerca';
 
   @override
-  String get customMPV => 'Custom MPV Configuration';
+  String get customMPV => 'MPV personalizzato Configurazione';
 
   @override
   String customMPVDescription(String path) {
-    return 'Enable this option to use your own MPV configuration file. Place your custom config at: $path';
+    return 'Abilitare questa opzione per utilizzare il proprio file di configurazione MPV. Metti la tua configurazione personalizzata a: $path';
   }
 
   @override

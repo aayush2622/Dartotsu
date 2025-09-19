@@ -1,5 +1,6 @@
 import 'package:dartotsu/Functions/Extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 import '../Theme/ThemeManager.dart';
 import 'HomeNavBar.dart';
@@ -66,48 +67,52 @@ class FloatingBottomNavBarMobile extends FloatingBottomNavBar {
   Widget _buildNavItem(NavItem item, BuildContext context) {
     final theme = Theme.of(context).colorScheme;
     final isSelected = item.index == selectedIndex;
+
     return GestureDetector(
       onTap: () => onTabSelected(item.index),
       behavior: HitTestBehavior.translucent,
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 300),
-        alignment: Alignment.center,
+      child: SizedBox(
         width: 80.0,
         height: 64.0,
-        padding: const EdgeInsets.symmetric(horizontal: 5.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: Stack(
+          alignment: Alignment.center,
           children: [
-            if (!isSelected) const SizedBox(height: 16.0),
-            if (!isSelected)
-              AnimatedOpacity(
-                  duration: const Duration(milliseconds: 300),
-                  opacity: isSelected ? 0.0 : 1.0,
-                  child: Icon(
-                    item.icon,
-                    color: theme.onSurface.withOpacity(0.7),
-                  )),
-            if (isSelected) const SizedBox(height: 12.0),
-            AnimatedOpacity(
-              duration: const Duration(milliseconds: 300),
-              opacity: isSelected ? 1.0 : 0.0,
-              child: Text(
-                item.label,
-                style: TextStyle(
-                  color: theme.primary,
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.w800,
-                  fontSize: 14,
-                ),
+            // Icon
+            Icon(
+              item.icon,
+              color: theme.onSurface.withOpacity(0.7),
+            )
+                .animate(target: isSelected ? 0 : 1)
+                .fade(duration: 300.ms)
+                .slideY(begin: -0.5, end: 0, duration: 300.ms),
+
+            // Label
+            Text(
+              item.label,
+              style: TextStyle(
+                color: theme.primary,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w800,
+                fontSize: 14,
               ),
-            ),
-            if (isSelected) const SizedBox(height: 9.0),
-            AnimatedContainer(
-              duration: const Duration(milliseconds: 300),
-              height: isSelected ? 3.0 : 0.0,
-              width: isSelected ? 18.0 : 0.0,
-              color: theme.tertiary,
-            ),
+            )
+                .animate(target: isSelected ? 1 : 0)
+                .fade(duration: 300.ms)
+                .slideY(begin: 0.9, end: 0.1, duration: 300.ms),
+
+            // Underline indicator
+            if (isSelected)
+              Positioned(
+                bottom: 6,
+                child: Container(
+                  height: 3.0,
+                  width: 18.0,
+                  color: theme.tertiary,
+                ).animate().fade(duration: 300.ms).scale(
+                      begin: const Offset(0.5, 1),
+                      end: const Offset(1, 1),
+                    ),
+              ),
           ],
         ),
       ),

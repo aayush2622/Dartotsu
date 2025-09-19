@@ -8,8 +8,7 @@ import 'package:dartotsu/Functions/Function.dart';
 import 'package:dartotsu/Screens/Anime/Player/MpvConfig.dart';
 import 'package:dartotsu/Screens/Login/LoginScreen.dart';
 import 'package:dartotsu/Screens/Manga/MangaScreen.dart';
-import 'package:dartotsu_extension_bridge/Aniyomi/AniyomiExtensions.dart';
-import 'package:dartotsu_extension_bridge/Mangayomi/MangayomiExtensions.dart';
+import 'package:dartotsu/Screens/Onboarding/OnboardingScreen.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:desktop_webview_window/desktop_webview_window.dart';
 import 'package:dynamic_color/dynamic_color.dart';
@@ -31,6 +30,7 @@ import 'Api/TypeFactory.dart';
 import 'Functions/RegisterProtocol/Api.dart';
 import 'Preferences/PrefManager.dart';
 import 'Screens/Anime/AnimeScreen.dart';
+import 'Screens/Error/ErrorScreen.dart';
 import 'Screens/Home/HomeScreen.dart';
 import 'Screens/HomeNavBar.dart';
 import 'Screens/HomeNavbarDesktop.dart';
@@ -49,6 +49,26 @@ void main(List<String> args) async {
   runZonedGuarded(
     () async {
       WidgetsFlutterBinding.ensureInitialized();
+      FlutterError.onError = (FlutterErrorDetails details) {
+        FlutterError.presentError(details);
+        handleError(
+          details.exception,
+          details.stack,
+          other: details.toString(),
+          softCrash: true,
+        );
+      };
+      PlatformDispatcher.instance.onError = (error, stack) {
+        handleError(error, stack);
+        return true;
+      };
+      ErrorWidget.builder = (FlutterErrorDetails details) {
+        return ErrorScreen(
+          error: details.exception.toString(),
+          stackTrace: details.stack?.toString() ?? details.toString(),
+          softCrash: true,
+        );
+      };
       if (Platform.isLinux && runWebViewTitleBarWidget(args)) {
         return;
       }
@@ -73,19 +93,6 @@ void main(List<String> args) async {
       },
     ),
   );
-  FlutterError.onError = (FlutterErrorDetails details) {
-    FlutterError.presentError(details);
-    Logger.log(
-      'FlutterError: ${details.exception}\n${details.stack}',
-      logLevel: LogLevel.error,
-    );
-  }; //TODO: setup error screen
-
-  PlatformDispatcher.instance.onError = (error, stack) {
-    Logger.log('PlatformDispatcher error: $error\n$stack',
-        logLevel: LogLevel.error);
-    return true;
-  };
 }
 
 Future init() async {
@@ -94,12 +101,11 @@ Future init() async {
         .forEach(registerProtocolHandler);
   }
   await PrefManager.init();
-  await DartotsuExtensionBridge().init(isar, "Darotsu");
+  await DartotsuExtensionBridge().init(isar, "Dartotsu");
   await Logger.init();
   await MpvConf.init();
   MediaService.init();
   TypeFactory.init();
-
   MediaKit.ensureInitialized();
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
     await WindowManager.instance.ensureInitialized();
@@ -138,7 +144,7 @@ void handleDeepLink(Uri uri) {
   const mangayomiSchemes = {"dar", "anymex", "sugoireads", "mangayomi"};
   const aniyomiSchemes = {"aniyomi", "tachiyomi"};
   if (mangayomiSchemes.contains(scheme)) {
-    var manager = Get.find<MangayomiExtensions>(tag: 'MangayomiExtensions');
+    var manager = ExtensionType.mangayomi.getManager();
     final repoMap = {
       ItemType.anime:
           uri.queryParameters["anime_url"] ?? uri.queryParameters["url"],
@@ -152,7 +158,7 @@ void handleDeepLink(Uri uri) {
       }
     });
   } else if (aniyomiSchemes.contains(scheme)) {
-    var manager = Get.find<AniyomiExtensions>(tag: 'AniyomiExtensions');
+    var manager = ExtensionType.aniyomi.getManager();
     final url = uri.queryParameters["url"];
     if (url != null && url.isNotEmpty) {
       manager.onRepoSaved(
@@ -284,8 +290,8 @@ class MainActivityState extends State<MainActivity> {
   }
 
   Widget get _navbar {
-    return Obx(() {
-      return context.isPhone
+    return Obx(
+      () => context.isPhone
           ? FloatingBottomNavBarMobile(
               selectedIndex: _selectedIndex.value,
               onTabSelected: _onTabSelected,
@@ -293,8 +299,8 @@ class MainActivityState extends State<MainActivity> {
           : FloatingBottomNavBarDesktop(
               selectedIndex: _selectedIndex.value,
               onTabSelected: _onTabSelected,
-            );
-    });
+            ),
+    );
   }
 
   Widget _buildBackground(ThemeNotifier themeNotifier, MediaService service) {

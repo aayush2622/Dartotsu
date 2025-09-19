@@ -585,11 +585,11 @@ class AppLocalizationsId extends AppLocalizations {
   String get thumbLessSeekBarDesc => 'Hapus thumb dari bar pencarian';
 
   @override
-  String get customMPV => 'Custom MPV Configuration';
+  String get customMPV => 'MPV kustom Login';
 
   @override
   String customMPVDescription(String path) {
-    return 'Enable this option to use your own MPV configuration file. Place your custom config at: $path';
+    return 'Aktifkan opsi ini untuk menggunakan file konfigurasi MPV Anda sendiri. Tempatkan konfigurasi kustom Anda di: $path';
   }
 
   @override

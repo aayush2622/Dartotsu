@@ -586,11 +586,11 @@ class AppLocalizationsUk extends AppLocalizations {
       'Видалити великий палець з адресного бруса';
 
   @override
-  String get customMPV => 'Custom MPV Configuration';
+  String get customMPV => 'МПВ Налаштування';
 
   @override
   String customMPVDescription(String path) {
-    return 'Enable this option to use your own MPV configuration file. Place your custom config at: $path';
+    return 'Увімкніть цей параметр, щоб використовувати власний файл конфігурації MPV. Встановіть налаштування користувацького інтерфейсу: $path';
   }
 
   @override

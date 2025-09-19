@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dartotsu/Functions/Function.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:http/http.dart' as http;
 
 import '../../Widgets/CachedNetworkImage.dart';
@@ -174,7 +175,7 @@ class Developers {
   static Widget getDevelopersWidget(BuildContext context) {
     return FutureBuilder(
       future: getDevelopersList,
-      builder: (BuildContext context, AsyncSnapshot<List<Developer>> snapshot) {
+      builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
         } else if (snapshot.hasError) {
@@ -182,10 +183,14 @@ class Developers {
         } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
           return const Center(child: Text('No developers found.'));
         } else {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: snapshot.data!.map((dev) {
-              return InkWell(
+          final developers = snapshot.data!;
+          return ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: developers.length,
+            itemBuilder: (context, index) {
+              final dev = developers[index];
+              final card = InkWell(
                 onTap: () async => openLinkInBrowser(dev.uri),
                 child: Card(
                   shape: RoundedRectangleBorder(
@@ -283,7 +288,13 @@ class Developers {
                   ),
                 ),
               );
-            }).toList(),
+
+              // animate each item
+              return card
+                  .animate()
+                  .fadeIn(duration: 400.ms, delay: (index * 50).ms)
+                  .slide(begin: const Offset(0, 0.1));
+            },
           );
         }
       },

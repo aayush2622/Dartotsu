@@ -734,7 +734,6 @@ jobs:
           curl -H "Content-Type: application/json" \
               -d "$discord_data" \
               ${{ secrets.DISCORD_WEBHOOK_URL }}
-
       - name: Upload Current SHA as Artifact
         uses: actions/upload-artifact@v4
         with:

@@ -588,11 +588,11 @@ class AppLocalizationsEl extends AppLocalizations {
       'Αφαιρέστε τον αντίχειρα από το κέντρο αναζήτησης';
 
   @override
-  String get customMPV => 'Custom MPV Configuration';
+  String get customMPV => 'Custom MPVV Συμμόρφωση';
 
   @override
   String customMPVDescription(String path) {
-    return 'Enable this option to use your own MPV configuration file. Place your custom config at: $path';
+    return 'Καθορίστε αυτή την επιλογή για να χρησιμοποιήσετε το δικό σας αρχείο διαμόρφωσης MPV. Τοποθετήστε το έθιμο σας σε: $path';
   }
 
   @override

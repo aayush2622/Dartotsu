@@ -44,19 +44,21 @@ class SettingsBottomSheetState extends State<SettingsBottomSheet> {
           padding: const EdgeInsets.only(left: 8.0, right: 24.0),
           child: (Row(
             children: [
-              Obx(() {
-                return CircleAvatar(
-                  radius: 26.0,
-                  backgroundImage: service.avatar.value.isNotEmpty
-                      ? CachedNetworkImageProvider(service.avatar.value)
-                      : null,
-                  backgroundColor: Colors.transparent,
-                  child: service.avatar.value.isEmpty
-                      ? Icon(Icons.person,
-                          color: Theme.of(context).primaryColor)
-                      : null,
-                );
-              }),
+              Obx(
+                () {
+                  return CircleAvatar(
+                    radius: 26.0,
+                    backgroundImage: service.avatar.value.isNotEmpty
+                        ? CachedNetworkImageProvider(service.avatar.value)
+                        : null,
+                    backgroundColor: Colors.transparent,
+                    child: service.avatar.value.isEmpty
+                        ? Icon(Icons.person,
+                            color: Theme.of(context).primaryColor)
+                        : null,
+                  );
+                },
+              ),
               const SizedBox(width: 16),
               Expanded(
                 child: Obx(() {

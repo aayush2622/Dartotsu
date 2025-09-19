@@ -575,11 +575,11 @@ class AppLocalizationsHe extends AppLocalizations {
   String get thumbLessSeekBarDesc => 'להסיר את האגודל מהבר המבוקש';
 
   @override
-  String get customMPV => 'Custom MPV Configuration';
+  String get customMPV => 'MPV המונחים:';
 
   @override
   String customMPVDescription(String path) {
-    return 'Enable this option to use your own MPV configuration file. Place your custom config at: $path';
+    return 'אפשרות זו להשתמש קובץ התצורה MPV שלך. הניחו את התצורה המותאמות אישית שלכם ב-X88X';
   }
 
   @override

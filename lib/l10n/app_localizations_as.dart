@@ -582,11 +582,11 @@ class AppLocalizationsAs extends AppLocalizations {
   String get thumbLessSeekBarDesc => 'ছিক বাৰৰ পৰা থাম্ব আঁতৰাওক';
 
   @override
-  String get customMPV => 'Custom MPV Configuration';
+  String get customMPV => 'স্বনিৰ্বাচিত MPV বিন্যাস';
 
   @override
   String customMPVDescription(String path) {
-    return 'Enable this option to use your own MPV configuration file. Place your custom config at: $path';
+    return 'আপোনাৰ নিজৰ MPV বিন্যাস নথিপত্ৰ ব্যৱহাৰ কৰিবলে এই বিকল্প সামৰ্থবান কৰক । আপোনাৰ স্বনিৰ্বাচিত বিন্যাস ইয়াত ৰাখক: $path';
   }
 
   @override

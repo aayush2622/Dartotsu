@@ -586,11 +586,11 @@ class AppLocalizationsRu extends AppLocalizations {
   String get thumbLessSeekBarDesc => 'Удалить большой палец из панели поиска';
 
   @override
-  String get customMPV => 'Custom MPV Configuration';
+  String get customMPV => 'Пользовательские MPV Конфигурация';
 
   @override
   String customMPVDescription(String path) {
-    return 'Enable this option to use your own MPV configuration file. Place your custom config at: $path';
+    return 'Включить эту опцию для использования собственного файла конфигурации MPV. Размещайте свою пользовательскую конфигурацию на: $path';
   }
 
   @override
