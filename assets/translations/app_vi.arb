@@ -597,7 +597,7 @@
     "@reading": {},
     "hidePageNumberDesc": "Hide page number while reading",
     "@hidePageNumberDesc": {},
-    "hidePageNumber": "Hide Page Number",
+    "hidePageNumber": "Ẩn số trang",
     "@hidePageNumber": {},
     "thumbLessSeekBar": "ThumbLess SeekBar",
     "@thumbLessSeekBar": {},
@@ -613,7 +613,7 @@
     "@differentCacheManager": {},
     "spacedPagesDesc": "Add space between pages",
     "@spacedPagesDesc": {},
-    "spacedPages": "Spaced Pages",
+    "spacedPages": "Trang có khoảng cách",
     "@spacedPages": {},
     "readerSettingsDesc": "Change reader settings",
     "@readerSettingsDesc": {},
@@ -621,9 +621,9 @@
     "@playerSettingsDesc": {},
     "hideScrollbarDesc": "Hide scrollbar while reading",
     "@hideScrollbarDesc": {},
-    "direction": "Direction",
+    "direction": "Hướng",
     "@direction": {},
-    "readerSettings": "Reader Settings",
+    "readerSettings": "Cài đặt trình đọc",
     "@readerSettings": {},
     "hideScrollbar": "Hide Scrollbar",
     "@hideScrollbar": {},
@@ -637,7 +637,7 @@
     "@rtl": {},
     "glassEffectDescription": "Gives a frosted glass effect to the app",
     "@glassEffectDescription": {},
-    "nextEpisodeRelease": "Episode {episode} will be released in",
+    "nextEpisodeRelease": "Tập %1$d sẽ được phát hành trong",
     "@nextEpisodeRelease": {
         "description": "Message showing the next episode info",
         "placeholders": {
@@ -646,7 +646,7 @@
             }
         }
     },
-    "topScore": "Top Score",
+    "topScore": "Điểm cao nhất",
     "@topScore": {},
     "coverTheme": "Use Cover Theme",
     "@coverTheme": {},
