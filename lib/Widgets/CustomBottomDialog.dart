@@ -44,6 +44,7 @@ class _CustomBottomDialogState extends State<CustomBottomDialog> {
     var theme = Theme.of(context).colorScheme;
     return ThemedContainer(
       context: context,
+      border: Border.all(width: 0),
       borderRadius: const BorderRadius.vertical(top: Radius.circular(16.0)),
       padding: const EdgeInsets.symmetric(vertical: 24.0),
       child: CustomScrollView(
