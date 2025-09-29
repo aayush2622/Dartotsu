@@ -130,8 +130,7 @@ class LinuxLoginState extends State<LinuxLogin> {
     await Future.delayed(const Duration(milliseconds: 1000));
 
     await _controller
-        .evaluateJavaScript('''window.LOCAL_STORAGE = window.localStorage;
-    Object.keys(window.localStorage);''');
+        .evaluateJavaScript('''window.LOCAL_STORAGE = window.localStorage''');
     _controller.addOnUrlRequestCallback(
       (String url) async {
         if (url != 'https://discord.com/login' && url != 'about:blank') {

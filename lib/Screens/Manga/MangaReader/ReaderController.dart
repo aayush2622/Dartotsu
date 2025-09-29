@@ -8,6 +8,8 @@ import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../Api/Discord/Discord.dart';
+import '../../../Api/Discord/DiscordService.dart';
 import '../../../Preferences/PrefManager.dart';
 import '../../../Widgets/CustomBottomDialog.dart';
 import '../../Settings/SettingsReaderScreen.dart';
@@ -51,6 +53,19 @@ class _ReaderControllerState extends State<ReaderController> {
     ever(widget.reader.currentPage, (int page) {
       saveCustomData("$key-current", page);
     });
+  }
+
+  @override
+  void dispose() {
+    if (DiscordService.isInitialized) DiscordService.stopRPC();
+    super.dispose();
+  }
+
+  Future<void> setDiscordRpc() async {
+    Discord.setRpc(
+      media,
+      episode: currentChapter,
+    );
   }
 
   @override

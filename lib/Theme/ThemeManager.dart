@@ -173,6 +173,7 @@ Widget ThemedContainer({
   required BuildContext context,
   required Widget child,
   Widget? glassWidget,
+  Border? border,
   BorderRadiusGeometry? borderRadius,
   EdgeInsetsGeometry? padding,
   AlignmentGeometry? alignment,
@@ -190,10 +191,11 @@ Widget ThemedContainer({
       alignment: alignment,
       padding: effectivePadding,
       color: theme.surfaceContainerLow.withOpacity(0.2),
-      border: Border.all(
-        color: theme.onSurface.withOpacity(0.2),
-        width: 0.5,
-      ),
+      border: border ??
+          Border.all(
+            color: theme.onSurface.withOpacity(0.2),
+            width: 0.5,
+          ),
       borderRadius: effectiveBorderRadius,
       boxShadow: [
         BoxShadow(
@@ -211,10 +213,11 @@ Widget ThemedContainer({
     alignment: alignment,
     decoration: BoxDecoration(
       color: theme.surfaceContainerLow,
-      border: Border.all(
-        color: theme.onSurface.withOpacity(0.6),
-        width: 0.5,
-      ),
+      border: border ??
+          Border.all(
+            color: theme.onSurface.withOpacity(0.6),
+            width: 0.5,
+          ),
       borderRadius: effectiveBorderRadius,
       boxShadow: [
         BoxShadow(

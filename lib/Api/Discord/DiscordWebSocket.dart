@@ -1,4 +1,5 @@
 /*
+
 import 'dart:async';
 import 'dart:convert';
 
@@ -12,12 +13,13 @@ import 'Discord.dart';
 var DiscordService = Get.put(_DiscordService());
 
 class _DiscordService extends GetxController {
-  late WebSocketChannel _webSocket = WebSocketChannel.connect(
-      Uri.parse('wss://gateway.discord.gg/?v=10&encoding=json'));
+  late IOWebSocketChannel _webSocket ;
 
-  void _connectWebSocket() {
+  _DiscordService(){
     _webSocket = IOWebSocketChannel.connect(
-        'wss://gateway.discord.gg/?v=10&encoding=json');
+    Uri.parse('wss://gateway.discord.gg/?v=10&encoding=json'));
+  }
+  void _connectWebSocket() {
     _webSocket.stream.listen(
       (message) => _handleMessage(message),
       onDone: _onWebSocketDone,
@@ -86,4 +88,5 @@ class _DiscordService extends GetxController {
     saveData(PrefName.discordAvatar, avatar);
   }
 }
+
 */

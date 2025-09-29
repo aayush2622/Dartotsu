@@ -1,4 +1,3 @@
-import 'package:dartotsu/Functions/Function.dart';
 import 'package:dartotsu/Widgets/AlertDialogBuilder.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/material.dart';
@@ -96,6 +95,7 @@ class _SourcePreferenceScreenState extends State<SourcePreferenceScreen> {
                     value: p.value ?? false,
                     onChanged: (val) {
                       p.value = val;
+                      widget.source.methods.setPreference(pref, val);
                       setState(() {});
                     },
                   );
@@ -109,18 +109,14 @@ class _SourcePreferenceScreenState extends State<SourcePreferenceScreen> {
                     onChanged: (val) {
                       p.value = val;
                       setState(() {});
-                      snackString("Saving not implemented yet");
+                      widget.source.methods.setPreference(pref, val);
                     },
                   );
                 case 'list':
                   final p = pref.listPreference!;
                   return ListTile(
                     title: TitleText(p.title ?? ''),
-                    subtitle: SubtitleText(
-                      p.summary != null && p.summary!.isNotEmpty
-                          ? p.summary!
-                          : p.entries?[p.valueIndex ?? 0] ?? '',
-                    ),
+                    subtitle: SubtitleText(p.entries?[p.valueIndex ?? 0] ?? ''),
                     onTap: () {
                       AlertDialogBuilder(context)
                         ..setTitle(p.title ?? '')
@@ -128,9 +124,13 @@ class _SourcePreferenceScreenState extends State<SourcePreferenceScreen> {
                           (p.entries ?? []),
                           p.valueIndex ?? 0,
                           (int index) {
-                            p.valueIndex = index;
-                            setState(() {});
-                            snackString("Saving not implemented yet");
+                            setState(() {
+                              p.valueIndex = index;
+                              widget.source.methods.setPreference(
+                                pref,
+                                pref.listPreference!.entryValues?[index],
+                              );
+                            });
                           },
                         )
                         ..show();
@@ -176,7 +176,7 @@ class _SourcePreferenceScreenState extends State<SourcePreferenceScreen> {
                           'OK',
                           () => setState(() {
                             p.values = newValues.toList();
-                            snackString("Saving not implemented yet");
+                            widget.source.methods.setPreference(pref, p.values);
                           }),
                         )
                         ..setNegativeButton("Cancel", () {})
@@ -203,7 +203,7 @@ class _SourcePreferenceScreenState extends State<SourcePreferenceScreen> {
                           'OK',
                           () => setState(() {
                             p.value = value;
-                            snackString("Saving not implemented yet");
+                            widget.source.methods.setPreference(pref, p.value);
                           }),
                         )
                         ..setNegativeButton("Cancel", () {})
