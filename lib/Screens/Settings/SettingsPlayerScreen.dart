@@ -363,10 +363,7 @@ Future<void> openPlayer(BuildContext context) async {
     context,
     MediaPlayer(
       isOffline: true,
-      videos: [
-        Video(pickedFile.path!.replaceAll("\\", "/"),
-            pickedFile.path!.replaceAll("\\", "/"), 'Media')
-      ],
+      videos: [Video(pickedFile.path!, pickedFile.path!, 'Media')],
       currentEpisode: episode,
       index: 0,
       source: Source(),
