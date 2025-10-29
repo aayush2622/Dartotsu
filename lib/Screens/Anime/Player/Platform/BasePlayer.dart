@@ -16,6 +16,8 @@ abstract class BasePlayer extends GetxController {
   RxList<AudioTrack> audios = <AudioTrack>[].obs;
   RxList<String> subtitle = <String>[].obs;
   Rx<double> currentSpeed = 1.0.obs;
+  Rx<String?> currentSubtitleLangage = Rx<String?>(null);
+  Rx<String?> currentSubtitleUri = Rx<String?>(null);
 
   Future<void> seek(Duration duration);
 
@@ -32,6 +34,8 @@ abstract class BasePlayer extends GetxController {
   Future<void> open(Video video, Duration duration);
 
   Future<void> setSubtitle(String subtitleUri, String language, bool isUri);
+
+  Future<void> resetSubtitle();
 
   Future<void> setAudio(String audioUri, String language, bool isUri);
 

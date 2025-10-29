@@ -13,10 +13,10 @@ import 'BasePlayer.dart';
 class WindowsPlayer extends BasePlayer {
   Rx<BoxFit> resizeMode;
   PlayerSettings settings;
+  v.Video? currentVideo;
 
   late Player player;
   late VideoController videoController;
-  String? currentSubtitle;
 
   VideoControllerConfiguration getPlatformConfig() {
     if (Platform.isAndroid) {
@@ -38,6 +38,8 @@ class WindowsPlayer extends BasePlayer {
         config: useCustomConfig,
         configDir: mpvConfPath,
         libass: settings.useLibass,
+        libassAndroidFontName: "Poppins",
+        libassAndroidFont: "assets/fonts/poppins.ttf",
       ),
     );
     videoController =
@@ -68,6 +70,7 @@ class WindowsPlayer extends BasePlayer {
 
   @override
   Future<void> open(v.Video video, Duration duration) async {
+    currentVideo = video;
     videoController.player.open(
       Media(
         video.url,
@@ -78,22 +81,24 @@ class WindowsPlayer extends BasePlayer {
   }
 
   @override
-  Future<void> setSubtitle(String subtitleUri, String language, bool isUri) {
-    currentSubtitle = language;
-    return videoController.player.setSubtitleTrack(isUri
-        ? SubtitleTrack.uri(subtitleUri, title: language)
-        : SubtitleTrack(
-            subtitleUri,
-            language,
-            language,
-            uri: false,
-            data: false,
-          ));
-  }
+  Future<void> setSubtitle(String subtitleUri, String language, bool isUri) =>
+      videoController.player.setSubtitleTrack(isUri
+          ? SubtitleTrack.uri(subtitleUri, title: language)
+          : SubtitleTrack(
+              subtitleUri,
+              language,
+              language,
+              uri: false,
+              data: false,
+            ));
 
   @override
-  Future<void> setAudio(String audioUri, String language, bool isUri) async =>
-      await videoController.player.setAudioTrack(isUri
+  Future<void> resetSubtitle() =>
+      videoController.player.setSubtitleTrack(SubtitleTrack.no());
+
+  @override
+  Future<void> setAudio(String audioUri, String language, bool isUri) =>
+      videoController.player.setAudioTrack(isUri
           ? AudioTrack.uri(audioUri, title: language)
           : AudioTrack(
               audioUri,
@@ -120,11 +125,16 @@ class WindowsPlayer extends BasePlayer {
         .listen((e) => currentPosition.value = e);
     videoController.player.stream.buffering.listen(isBuffering.call);
     videoController.player.stream.playing.listen(isPlaying.call);
-    videoController.player.stream.tracks
-        .listen((e) => subtitles.value = e.subtitle);
+    videoController.player.stream.tracks.listen((e) {
+      subtitles.value = e.subtitle;
+      _updateSubtitleTrack(videoController.player.state.track.subtitle);
+    });
     videoController.player.stream.subtitle.listen((e) => subtitle.value = e);
     videoController.player.stream.tracks.listen((e) => audios.value = e.audio);
     videoController.player.stream.rate.listen((e) => currentSpeed.value = e);
+    videoController.player.stream.track.listen((e) {
+      _updateSubtitleTrack(e.subtitle);
+    });
   }
 
   String _formatTime(int seconds) {
@@ -136,6 +146,25 @@ class WindowsPlayer extends BasePlayer {
       minutes.toString().padLeft(2, '0'),
       secs.toString().padLeft(2, '0'),
     ].join(":");
+  }
+
+  void _updateSubtitleTrack(SubtitleTrack track) {
+    if (track == SubtitleTrack.no()) {
+      currentSubtitleLangage.value = null;
+      currentSubtitleUri.value = null;
+      //Auto always select the first subtitle track
+    } else if (track == SubtitleTrack.auto()) {
+      final track = subtitles
+          .where((element) =>
+              element != SubtitleTrack.auto() && element != SubtitleTrack.no())
+          .firstOrNull;
+
+      currentSubtitleLangage.value = track?.title;
+      currentSubtitleUri.value = track?.id;
+    } else {
+      currentSubtitleLangage.value = track.title;
+      currentSubtitleUri.value = track.id;
+    }
   }
 
   @override
