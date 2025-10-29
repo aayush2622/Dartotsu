@@ -13,7 +13,6 @@ import 'BasePlayer.dart';
 class WindowsPlayer extends BasePlayer {
   Rx<BoxFit> resizeMode;
   PlayerSettings settings;
-  v.Video? currentVideo;
 
   late Player player;
   late VideoController videoController;
@@ -70,7 +69,6 @@ class WindowsPlayer extends BasePlayer {
 
   @override
   Future<void> open(v.Video video, Duration duration) async {
-    currentVideo = video;
     videoController.player.open(
       Media(
         video.url,
