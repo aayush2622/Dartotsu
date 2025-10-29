@@ -148,7 +148,7 @@ class WindowsPlayer extends BasePlayer {
 
   void _updateSubtitleTrack(SubtitleTrack track) {
     if (track == SubtitleTrack.no()) {
-      currentSubtitleLangage.value = null;
+      currentSubtitleLanguage.value = null;
       currentSubtitleUri.value = null;
       //Auto always select the first subtitle track
     } else if (track == SubtitleTrack.auto()) {
@@ -157,10 +157,10 @@ class WindowsPlayer extends BasePlayer {
               element != SubtitleTrack.auto() && element != SubtitleTrack.no())
           .firstOrNull;
 
-      currentSubtitleLangage.value = track?.title;
+      currentSubtitleLanguage.value = track?.title;
       currentSubtitleUri.value = track?.id;
     } else {
-      currentSubtitleLangage.value = track.title;
+      currentSubtitleLanguage.value = track.title;
       currentSubtitleUri.value = track.id;
     }
   }
