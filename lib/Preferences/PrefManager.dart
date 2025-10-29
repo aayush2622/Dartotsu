@@ -23,7 +23,8 @@ part 'Preferences.dart';
 
 T loadData<T>(Pref<T> pref) => PrefManager.getVal<T>(pref);
 
-T? loadCustomData<T>(String key) => PrefManager.getCustomVal<T>(key);
+T? loadCustomData<T>(String key, {T? defaultValue}) =>
+    PrefManager.getCustomVal<T>(key, defaultValue: defaultValue);
 
 void saveData<T>(Pref<T> pref, T value) => PrefManager.setVal<T>(pref, value);
 
@@ -105,7 +106,7 @@ class PrefManager {
       if (cache[key] != null) return null;
       return cache[key] as T;
     }
-    return null;
+    return defaultValue;
   }
 
   static void removeVal<T>(Pref<dynamic> pref) async {

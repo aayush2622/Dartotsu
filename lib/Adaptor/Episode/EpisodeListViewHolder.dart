@@ -107,7 +107,7 @@ class EpisodeListView extends StatelessWidget {
             borderRadius: BorderRadius.circular(16.0),
             child: cachedNetworkImage(
               imageUrl: episode.thumbnail ?? '',
-              fit: BoxFit.cover,
+              fit: BoxFit.fill,
               width: 164,
               height: 109,
               placeholder: (context, url) => Container(

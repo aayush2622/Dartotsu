@@ -40,7 +40,7 @@ Widget cachedNetworkImage({
     );
   }
   return CachedNetworkImage(
-    filterQuality: FilterQuality.high,
+    filterQuality: FilterQuality.low,
     imageUrl: imageUrl,
     fit: fit,
     width: width,
