@@ -640,6 +640,13 @@ class AppLocalizationsDa extends AppLocalizations {
   String get bottomPaddingDescription => 'Undertekstens bundmargin';
 
   @override
+  String get useLibass => 'Use Libass';
+
+  @override
+  String get useLibassDescription =>
+      'Use Libass for subtitle rendering (overrides other subtitle settings)';
+
+  @override
   String get readerSettings => 'Indstillinger for læserindstillinger';
 
   @override

@@ -608,6 +608,10 @@
   "@bottomPadding": {},
   "bottomPaddingDescription": "Subtitle bottom padding",
   "@bottomPaddingDescription": {},
+  "useLibass": "Use Libass",
+  "@useLibass": {},
+  "useLibassDescription": "Use Libass for subtitle rendering (overrides other subtitle settings)",
+  "@useLibassDescription": {},
 
   "readerSettings": "Reader Settings",
   "@readerSettings": {},

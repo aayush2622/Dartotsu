@@ -1259,6 +1259,18 @@ abstract class AppLocalizations {
   /// **'Subtitle bottom padding'**
   String get bottomPaddingDescription;
 
+  /// No description provided for @useLibass.
+  ///
+  /// In en, this message translates to:
+  /// **'Use Libass'**
+  String get useLibass;
+
+  /// No description provided for @useLibassDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Use Libass for subtitle rendering (overrides other subtitle settings)'**
+  String get useLibassDescription;
+
   /// No description provided for @readerSettings.
   ///
   /// In en, this message translates to:

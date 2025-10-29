@@ -648,6 +648,13 @@ class AppLocalizationsHr extends AppLocalizations {
   String get bottomPaddingDescription => 'Donji razmak za titlove';
 
   @override
+  String get useLibass => 'Use Libass';
+
+  @override
+  String get useLibassDescription =>
+      'Use Libass for subtitle rendering (overrides other subtitle settings)';
+
+  @override
   String get readerSettings => 'Postavke čitača';
 
   @override

@@ -644,6 +644,13 @@ class AppLocalizationsHi extends AppLocalizations {
   String get bottomPaddingDescription => 'उपशीर्षक के नीचे की गद्दी';
 
   @override
+  String get useLibass => 'Use Libass';
+
+  @override
+  String get useLibassDescription =>
+      'Use Libass for subtitle rendering (overrides other subtitle settings)';
+
+  @override
   String get readerSettings => 'रीडर सेटिंग';
 
   @override

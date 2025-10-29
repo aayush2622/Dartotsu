@@ -633,6 +633,13 @@ class AppLocalizationsKo extends AppLocalizations {
   String get bottomPaddingDescription => '자막 하단 여백';
 
   @override
+  String get useLibass => 'Use Libass';
+
+  @override
+  String get useLibassDescription =>
+      'Use Libass for subtitle rendering (overrides other subtitle settings)';
+
+  @override
   String get readerSettings => 'Reader 설정';
 
   @override

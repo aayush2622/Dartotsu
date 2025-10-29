@@ -21,6 +21,7 @@ class PlayerSettings {
   int subtitleBottomPadding;
   int skipDuration;
   int subtitleWeight;
+  bool useLibass;
 
   PlayerSettings({
     this.speed = '1x',
@@ -35,6 +36,7 @@ class PlayerSettings {
     this.subtitleBottomPadding = 0,
     this.skipDuration = 85,
     this.subtitleWeight = 5,
+    this.useLibass = false,
     //  this.useCustomMpvConfig = false,
   });
 
@@ -52,6 +54,7 @@ class PlayerSettings {
       subtitleBottomPadding: json['subtitleBottomPadding'],
       skipDuration: json['skipDuration'],
       subtitleWeight: json['subtitleWeight'],
+      useLibass: json['useLibass'] ?? false,
       //  useCustomMpvConfig: json['useCustomMpvConfig'] ?? false,
     );
   }
@@ -70,6 +73,7 @@ class PlayerSettings {
       'subtitleBottomPadding': subtitleBottomPadding,
       'skipDuration': skipDuration,
       'subtitleWeight': subtitleWeight,
+      'useLibass': useLibass,
       //'useCustomMpvConfig': useCustomMpvConfig,
     };
   }

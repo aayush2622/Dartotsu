@@ -646,6 +646,13 @@ class AppLocalizationsPt extends AppLocalizations {
   String get bottomPaddingDescription => 'Preenchimento inferior da legenda';
 
   @override
+  String get useLibass => 'Use Libass';
+
+  @override
+  String get useLibassDescription =>
+      'Use Libass for subtitle rendering (overrides other subtitle settings)';
+
+  @override
   String get readerSettings => 'Configurações do leitor';
 
   @override
