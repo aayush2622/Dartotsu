@@ -9,7 +9,6 @@ import 'package:dartotsu/Functions/Function.dart';
 import 'package:dartotsu/Functions/string_extensions.dart';
 import 'package:dartotsu/Preferences/IsarDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
 import 'package:dartotsu/Preferences/PrefManager.dart';
-import 'package:dartotsu/Screens/Anime/Player/Platform/WindowsPlayer.dart';
 import 'package:dartotsu/Theme/LanguageSwitcher.dart';
 import 'package:dartotsu/Widgets/AlertDialogBuilder.dart';
 import 'package:dartotsu/Widgets/CustomBottomDialog.dart';
@@ -749,16 +748,23 @@ class _PlayerControllerState extends State<PlayerController> {
             elevation: 4,
             child: InkWell(
               onTap: () {
-                controller
-                    .setSubtitle(
-                      sub.file ?? "",
-                      sub.label ?? "",
-                      sub.file?.toNullInt() == null,
-                    )
-                    .then(
-                      (_) => controller.play(),
-                    );
-                Get.back();
+                if (controller.currentSubtitleUri.value == sub.file) {
+                  controller.resetSubtitle().then(
+                        (_) => controller.play(),
+                      );
+                  Get.back();
+                } else {
+                  controller
+                      .setSubtitle(
+                        sub.file ?? "",
+                        sub.label ?? "",
+                        sub.file?.toNullInt() == null,
+                      )
+                      .then(
+                        (_) => controller.play(),
+                      );
+                  Get.back();
+                }
               },
               borderRadius: BorderRadius.circular(12),
               child: Padding(
@@ -768,8 +774,7 @@ class _PlayerControllerState extends State<PlayerController> {
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
-                    color: (controller as WindowsPlayer).currentSubtitle ==
-                            sub.label
+                    color: controller.currentSubtitleUri.value == sub.file
                         ? Theme.of(context).colorScheme.primary
                         : Theme.of(context).colorScheme.onSurface,
                   ),

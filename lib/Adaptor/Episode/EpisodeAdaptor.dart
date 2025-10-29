@@ -223,11 +223,10 @@ void onEpisodeClick(
           } else if (snapshot.hasData) {
             var videos = snapshot.data!;
 
-            return ListView.builder(
-              shrinkWrap: true,
-              itemCount: videos.length,
-              itemBuilder: (context, index) {
-                var item = videos[index];
+            return Column(
+              children: videos.map((item) {
+                var index = videos.indexOf(item);
+
                 var allSubtitles = <Track>[];
                 var addedSubtitleTitles = <String>{};
                 for (var video in videos) {
@@ -250,6 +249,7 @@ void onEpisodeClick(
                     video.subtitles = List.from(allSubtitles);
                   }
                 }
+
                 return Card(
                   margin:
                       const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
@@ -284,9 +284,7 @@ void onEpisodeClick(
                               style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
-                                overflow: TextOverflow.ellipsis,
                               ),
-                              maxLines: 1,
                             ),
                           ),
                           Icon(
@@ -299,7 +297,7 @@ void onEpisodeClick(
                     ),
                   ),
                 );
-              },
+              }).toList(),
             );
           } else {
             return const Center(child: Text('No sources available'));
