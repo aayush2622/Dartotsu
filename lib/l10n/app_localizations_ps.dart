@@ -650,6 +650,13 @@ class AppLocalizationsPs extends AppLocalizations {
   String get bottomPaddingDescription => 'د فرعي عنوان لاندې واټن';
 
   @override
+  String get useLibass => 'Use Libass';
+
+  @override
+  String get useLibassDescription =>
+      'Use Libass for subtitle rendering (overrides other subtitle settings)';
+
+  @override
   String get readerSettings => 'Reader Settings';
 
   @override

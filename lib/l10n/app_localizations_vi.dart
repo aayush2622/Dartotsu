@@ -148,7 +148,7 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String nextEpisodeRelease(int episode) {
-    return 'Episode $episode will be released in';
+    return 'Tập %1\$d sẽ được phát hành trong';
   }
 
   @override
@@ -225,7 +225,7 @@ class AppLocalizationsVi extends AppLocalizations {
   }
 
   @override
-  String get topScore => 'Top Score';
+  String get topScore => 'Điểm cao nhất';
 
   @override
   String mostFavourite(String type) {
@@ -307,7 +307,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get ltr => 'Left To Right';
 
   @override
-  String get direction => 'Direction';
+  String get direction => 'Hướng';
 
   @override
   String get episodeWatched => 'Tập đã xem';
@@ -646,13 +646,20 @@ class AppLocalizationsVi extends AppLocalizations {
   String get bottomPaddingDescription => 'Khoảng cách dưới của phụ đề';
 
   @override
-  String get readerSettings => 'Reader Settings';
+  String get useLibass => 'Use Libass';
+
+  @override
+  String get useLibassDescription =>
+      'Use Libass for subtitle rendering (overrides other subtitle settings)';
+
+  @override
+  String get readerSettings => 'Cài đặt trình đọc';
 
   @override
   String get readerSettingsDesc => 'Change reader settings';
 
   @override
-  String get spacedPages => 'Spaced Pages';
+  String get spacedPages => 'Trang có khoảng cách';
 
   @override
   String get spacedPagesDesc => 'Add space between pages';
@@ -664,7 +671,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get hideScrollbarDesc => 'Hide scrollbar while reading';
 
   @override
-  String get hidePageNumber => 'Hide Page Number';
+  String get hidePageNumber => 'Ẩn số trang';
 
   @override
   String get hidePageNumberDesc => 'Hide page number while reading';

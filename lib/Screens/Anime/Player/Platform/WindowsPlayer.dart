@@ -37,6 +37,7 @@ class WindowsPlayer extends BasePlayer {
         // Config Options thanks to snitchel
         config: useCustomConfig,
         configDir: mpvConfPath,
+        libass: settings.useLibass,
       ),
     );
     videoController =

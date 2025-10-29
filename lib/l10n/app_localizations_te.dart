@@ -648,6 +648,13 @@ class AppLocalizationsTe extends AppLocalizations {
   String get bottomPaddingDescription => 'ఉపశీర్షిక కింద ప్యాడింగ్';
 
   @override
+  String get useLibass => 'Use Libass';
+
+  @override
+  String get useLibassDescription =>
+      'Use Libass for subtitle rendering (overrides other subtitle settings)';
+
+  @override
   String get readerSettings => 'Reader Settings';
 
   @override

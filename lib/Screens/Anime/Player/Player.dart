@@ -239,7 +239,7 @@ class MediaPlayerState extends State<MediaPlayer>
           alignment: Alignment.center,
           children: [
             videoPlayerController.playerWidget(),
-            _buildSubtitle(),
+            if (!settings.useLibass) _buildSubtitle(),
             if (isLongPress.value)
               AnimatedAlign(
                 alignment: Alignment.topCenter,

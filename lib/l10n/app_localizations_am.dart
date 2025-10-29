@@ -636,6 +636,13 @@ class AppLocalizationsAm extends AppLocalizations {
   String get bottomPaddingDescription => 'የንዑስ ርዕስ የታችኛው ድብዳብ';
 
   @override
+  String get useLibass => 'Use Libass';
+
+  @override
+  String get useLibassDescription =>
+      'Use Libass for subtitle rendering (overrides other subtitle settings)';
+
+  @override
   String get readerSettings => 'Reader Settings';
 
   @override

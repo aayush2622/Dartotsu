@@ -148,11 +148,23 @@ List<Widget> playerSettings(
         Setting(
           type: SettingType.switchType,
           name: getString.customMPV,
-          description: getString.customMPVDescription(loadData(PrefName.mpvConfigDir).fixSeparator.replaceAll(' ', '')),
+          description: getString.customMPVDescription(
+              loadData(PrefName.mpvConfigDir).fixSeparator.replaceAll(' ', '')),
           icon: Icons.extension_rounded,
           isChecked: loadData(PrefName.useCustomMpvConfig),
           onSwitchChange: (value) {
             saveData(PrefName.useCustomMpvConfig, value);
+          },
+        ),
+        Setting(
+          type: SettingType.switchType,
+          name: getString.useLibass,
+          description: getString.useLibassDescription,
+          icon: Icons.subtitles_rounded,
+          isChecked: playerSettings.useLibass,
+          onSwitchChange: (value) {
+            playerSettings.useLibass = value;
+            savePlayerSettings(playerSettings);
           },
         ),
       ],
@@ -351,7 +363,10 @@ Future<void> openPlayer(BuildContext context) async {
     context,
     MediaPlayer(
       isOffline: true,
-      videos: [Video(pickedFile.path!, 'Media', pickedFile.path!)],
+      videos: [
+        Video(pickedFile.path!.replaceAll("\\", "/"),
+            pickedFile.path!.replaceAll("\\", "/"), 'Media')
+      ],
       currentEpisode: episode,
       index: 0,
       source: Source(),

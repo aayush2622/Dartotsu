@@ -652,6 +652,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get bottomPaddingDescription => 'Espacement inférieur du sous-titre';
 
   @override
+  String get useLibass => 'Use Libass';
+
+  @override
+  String get useLibassDescription =>
+      'Use Libass for subtitle rendering (overrides other subtitle settings)';
+
+  @override
   String get readerSettings => 'Réglages de lecteur';
 
   @override
