@@ -46,7 +46,7 @@
 
 # Dartotsu
 
-**Dartotsu** is a complete rewrite of [Dantotsu](https://github.com/rebelonion/Dantotsu/) in Flutter. It's a hybrid [**AniList**](https://anilist.co/) and [**MyAnimeList**](https://myanimelist.net/) tracking client, along with [**Simkl**](https://simkl.com/) support!  
+**Dartotsu** is a complete rewrite of [Dantotsu](https://git.rebelonion.dev/rebelonion/Dantotsu/) in Flutter. It's a hybrid [**AniList**](https://anilist.co/) and [**MyAnimeList**](https://myanimelist.net/) tracking client, along with [**Simkl**](https://simkl.com/) support!  
 > [!WARNING]  
 > **Dartotsu is a tracking and management tool only:** It does not host, provide, distribute, or maintain streaming content or extensions.  
 >  
@@ -121,3 +121,4 @@ Your efforts are invaluable.
 
 ## License
 Dartotsu is licensed under the Unabandon Public License (UPL). More info can be found [here](LICENSE.md).
+
