@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dartotsu/Adaptor/Episode/EpisodeAdaptor.dart';
+import 'package:dartotsu/Screens/Anime/Player/Widgets/SectionedRoundedRectSliderTrackShape.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:dartotsu_extension_bridge/Models/Video.dart' as v;
 import 'package:dartotsu/DataClass/Media.dart' as m;
@@ -283,114 +284,67 @@ class _PlayerControllerState extends State<PlayerController> {
   Widget _buildProgressBar() {
     var thumbLess = loadData(PrefName.thumbLessSeekBar);
     return SizedBox(
-      height: 18,
-      child: Column(
-        children: [
+        height: 18,
+        child: Column(children: [
           IgnorePointer(
-            ignoring: isControlsLocked.value,
-            child: SliderTheme(
-              data: SliderThemeData(
-                trackHeight: thumbLess ? 5.8 : 2,
-                thumbColor: Theme.of(context).colorScheme.primary,
-                activeTrackColor: Theme.of(context).colorScheme.primary,
-                inactiveTrackColor: const Color.fromARGB(255, 121, 121, 121),
-                secondaryActiveTrackColor:
-                    const Color.fromARGB(255, 167, 167, 167),
-                thumbShape: thumbLess
-                    ? SliderComponentShape.noThumb
-                    : const RoundSliderThumbShape(enabledThumbRadius: 6),
-                overlayShape: SliderComponentShape.noOverlay,
-                trackShape: const RoundedRectSliderTrackShape(),
-              ),
-              child: Obx(
-                () {
-                  var bufferingValue =
-                      _timeStringToSeconds(controller.bufferingTime.value);
-                  var currentValue = controller.currentTime.value == '00:00' &&
-                          currentProgress != null
-                      ? currentProgress!.toDouble()
-                      : _timeStringToSeconds(controller.currentTime.value);
+              ignoring: isControlsLocked.value,
+              child: Obx(() {
+                final bufferingValue =
+                    _timeStringToSeconds(controller.bufferingTime.value);
+                final currentValue = controller.currentTime.value == '00:00' &&
+                        currentProgress != null
+                    ? currentProgress!.toDouble()
+                    : _timeStringToSeconds(controller.currentTime.value);
 
-                  var maxValue =
-                      controller.maxTime.value == '00:00' && maxProgress != null
-                          ? maxProgress!.toDouble()
-                          : _timeStringToSeconds(controller.maxTime.value);
+                final maxValue =
+                    controller.maxTime.value == '00:00' && maxProgress != null
+                        ? maxProgress!.toDouble()
+                        : _timeStringToSeconds(controller.maxTime.value);
 
-                  return Stack(
-                    children: [
-                      Slider(
-                        min: 0,
-                        max: maxValue > 0 ? maxValue : 1,
-                        value: currentValue.clamp(0.0, maxValue),
-                        secondaryTrackValue:
-                            bufferingValue.clamp(0.0, maxValue),
-                        secondaryActiveColor: Colors.white,
-                        onChangeEnd: (val) async {
-                          controller.seek(Duration(seconds: val.toInt()));
+                return SliderTheme(
+                  data: SliderThemeData(
+                      trackHeight: thumbLess ? 5.8 : 2,
+                      thumbColor: Theme.of(context).colorScheme.primary,
+                      activeTrackColor: Theme.of(context).colorScheme.primary,
+                      inactiveTrackColor:
+                          const Color.fromARGB(255, 121, 121, 121),
+                      secondaryActiveTrackColor:
+                          const Color.fromARGB(255, 167, 167, 167),
+                      thumbShape: thumbLess
+                          ? SliderComponentShape.noThumb
+                          : const RoundSliderThumbShape(enabledThumbRadius: 6),
+                      overlayShape: SliderComponentShape.noOverlay,
+                      trackShape: SectionedRoundedRectSliderTrackShape(
+                          sections: timeStamps.map(
+                        (timestamp) {
+                          return TrackSection(
+                              start: timestamp.interval.startTime /
+                                  (maxValue > 0 ? maxValue : 1),
+                              end: timestamp.interval.endTime /
+                                  (maxValue > 0 ? maxValue : 1),
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .primary
+                                  .withValues(
+                                    alpha: 0.65,
+                                  ));
                         },
-                        onChanged: (double value) => controller
-                            .currentTime.value = _formatTime(value.toInt()),
-                      ),
-                      Positioned.fill(
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                            left: 3.0,
-                            right: 5.0,
-                            top: 4.4,
-                          ),
-                          child: LayoutBuilder(
-                            builder: (context, constraints) {
-                              var trackWidth = constraints.maxWidth;
-                              return Stack(
-                                children: timeStamps.map(
-                                  (timestamp) {
-                                    var startPosition =
-                                        (timestamp.interval.startTime /
-                                                maxValue) *
-                                            trackWidth;
-                                    var endPosition =
-                                        (timestamp.interval.endTime /
-                                                maxValue) *
-                                            trackWidth;
-
-                                    return Positioned(
-                                      left:
-                                          startPosition.clamp(0.0, trackWidth),
-                                      child: Row(
-                                        children: [
-                                          SizedBox(
-                                            width: endPosition - startPosition,
-                                            child: _buildLine(),
-                                          ),
-                                        ],
-                                      ),
-                                    );
-                                  },
-                                ).toList(),
-                              );
-                            },
-                          ),
-                        ),
-                      ),
-                    ],
-                  );
-                },
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildLine() {
-    return Container(
-      height: 3.4,
-      decoration: const BoxDecoration(
-        color: Color.fromARGB(255, 56, 192, 41),
-        shape: BoxShape.rectangle,
-      ),
-    );
+                      ).toList())),
+                  child: Slider(
+                    min: 0,
+                    max: maxValue > 0 ? maxValue : 1,
+                    value: currentValue.clamp(0.0, maxValue),
+                    secondaryTrackValue: bufferingValue.clamp(0.0, maxValue),
+                    secondaryActiveColor: Colors.white,
+                    onChangeEnd: (val) async {
+                      controller.seek(Duration(seconds: val.toInt()));
+                    },
+                    onChanged: (double value) => controller.currentTime.value =
+                        _formatTime(value.toInt()),
+                  ),
+                );
+              }))
+        ]));
   }
 
   Widget _buildTopControls() {
