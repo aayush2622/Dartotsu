@@ -652,5 +652,13 @@
         }
     },
     "customMPV": "طراز Custom MPV الاتحاد",
-    "@customMPV": {}
+    "@customMPV": {},
+    "useLibass": "Use Libass",
+    "@useLibass": {},
+    "useLibassDescription": "Use Libass for subtitle rendering (overrides other subtitle settings)",
+    "@useLibassDescription": {},
+    "useGpuNext": "Use gpu-next",
+    "@useGpuNext": {},
+    "useGpuNextDescription": "New rendering backend (may cause visual artifacts)",
+    "@useGpuNextDescription": {}
 }
