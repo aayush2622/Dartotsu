@@ -114,18 +114,18 @@ class MediaKitPlayer extends GetxController {
       final hw = MPVDecoder(
         id: "hw",
         name: "Hardware",
-        androidDecoder: "mediacodec",
-        iosDecoder: "videotoolbox",
-        //there is a lot of decoders for desktop, could be reduced if split by OS
-        desktopDecoder: "auto",
-      );
-      final hwPlus = MPVDecoder(
-        id: "hw-plus",
-        name: "Hardware Plus",
         androidDecoder: "mediacodec-copy",
         iosDecoder: "videotoolbox-copy",
         //there is a lot of decoders for desktop, could be reduced if split by OS
         desktopDecoder: "auto-copy",
+      );
+      final hwPlus = MPVDecoder(
+        id: "hw-plus",
+        name: "Hardware Plus",
+        androidDecoder: "mediacodec",
+        iosDecoder: "videotoolbox",
+        //there is a lot of decoders for desktop, could be reduced if split by OS
+        desktopDecoder: "auto",
       );
 
       supportedDecoders = [
@@ -228,6 +228,7 @@ class MediaKitPlayer extends GetxController {
     }
   }
 
+  //TODO: add some actual user interface to change decoder
   Future<void> useDecoder(MPVDecoder decoder) {
     if (supportedDecoders == null || !supportedDecoders!.contains(decoder)) {
       throw ArgumentError('Decoder ${decoder.id} is not supported');
