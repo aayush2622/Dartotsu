@@ -101,13 +101,8 @@ class PrefManager {
   static T? getCustomVal<T>(
     String key, {
     T? defaultValue,
-  }) {
-    if (cache.containsKey(key) == true) {
-      if (cache[key] == null) return null;
-      return cache[key] as T;
-    }
-    return defaultValue;
-  }
+  }) =>
+      cache.containsKey(key) ? cache[key] as T? : defaultValue;
 
   static void removeVal<T>(Pref<dynamic> pref) async {
     cache.remove(pref.key);
