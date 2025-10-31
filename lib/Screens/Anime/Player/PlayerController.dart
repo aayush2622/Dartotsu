@@ -87,7 +87,9 @@ class _PlayerControllerState extends State<PlayerController> {
 
   Future<void> _init() async {
     await controller.videoController.waitUntilFirstFrameRendered;
-
+    while (controller.maxTime.value == Duration.zero) {
+      await Future.delayed(const Duration(milliseconds: 100));
+    }
     setDiscordRpc();
     setTimeStamps();
 
@@ -103,7 +105,7 @@ class _PlayerControllerState extends State<PlayerController> {
 
     saveCustomData<List<int>>("continueAnimeList", list);
 
-    void processTracks(List<v.Track>? tracks, controllerTracks, String type) {
+    void processTracks(List<v.Track>? tracks, controllerTracks) {
       for (var track in controllerTracks) {
         if (track.id == 'auto' || track.id == 'no') continue;
         final trackEntry = v.Track(
@@ -118,10 +120,10 @@ class _PlayerControllerState extends State<PlayerController> {
     }
 
     currentQuality.subtitles ??= [];
-    processTracks(currentQuality.subtitles, controller.subtitles, "subtitle");
+    processTracks(currentQuality.subtitles, controller.subtitles);
 
     currentQuality.audios ??= [];
-    processTracks(currentQuality.audios, controller.audios, "audio");
+    processTracks(currentQuality.audios, controller.audios);
 
     var defaultSub = currentQuality.subtitles?.firstWhereOrNull(
       (element) => element.label == 'English',
@@ -488,8 +490,10 @@ class _PlayerControllerState extends State<PlayerController> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: playerSettings(
-                            context, widget.player.setState,
-                            media: media),
+                          context,
+                          widget.player.setState,
+                          media: media,
+                        ),
                       ),
                     ),
                   )
@@ -719,6 +723,7 @@ class _PlayerControllerState extends State<PlayerController> {
   Widget _buildSubtitleList(bool sub) {
     if (sub) {
       return const Center(
+        heightFactor: 4,
         child: Text("No subtitles available"),
       );
     } else {
@@ -776,6 +781,7 @@ class _PlayerControllerState extends State<PlayerController> {
   Widget _buildAudioList(bool audio) {
     if (audio) {
       return const Center(
+        heightFactor: 4,
         child: Text("No audio available"),
       );
     } else {

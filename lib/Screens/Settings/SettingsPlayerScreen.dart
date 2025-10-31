@@ -53,294 +53,310 @@ List<Widget> playerSettings(
   void Function(void Function()) setState, {
   Media? media,
 }) {
-  void savePlayerSettings(PlayerSettings playerSettings) {
-    if (media != null) {
-      MediaSettings.saveMediaSettings(
-          media..settings.playerSettings = playerSettings);
-    } else {
-      saveData(PrefName.playerSettings, jsonEncode(playerSettings.toJson()));
-    }
-    setState(() {});
-  }
-
   var playerSettings = media?.settings.playerSettings ??
       PlayerSettings.fromJson(
         jsonDecode(loadData(PrefName.playerSettings)),
       );
 
   return [
-    SettingsAdaptor(
-      settings: [
-        Setting(
-          type: SettingType.switchType,
-          name: getString.cursedSpeed,
-          description: getString.cursedSpeedDescription,
-          icon: Icons.accessible_forward,
-          isChecked: loadData(PrefName.cursedSpeed),
-          onSwitchChange: (value) {
-            saveData(PrefName.cursedSpeed, value);
-          },
-        ),
-        Setting(
-          type: SettingType.switchType,
-          name: getString.thumbLessSeekBar,
-          description: getString.thumbLessSeekBarDesc,
-          icon: Icons.circle_rounded,
-          isChecked: loadData(PrefName.thumbLessSeekBar),
-          onSwitchChange: (value) {
-            saveData(PrefName.thumbLessSeekBar, value);
-            setState(() {});
-          },
-        ),
-        Setting(
-          type: SettingType.normal,
-          name: getString.speed,
-          description: getString.speedDescription,
-          icon: Icons.speed_rounded,
-          onClick: () {
-            var cursed = loadData(PrefName.cursedSpeed);
-            AlertDialogBuilder(context)
-              ..setTitle(getString.speed)
-              ..singleChoiceItems(
-                speedMap(cursed),
-                !speedMap(cursed).contains(playerSettings.speed)
-                    ? 3
-                    : speedMap(cursed).indexOf(playerSettings.speed),
-                (value) {
-                  playerSettings.speed = speedMap(cursed)[value];
-                  savePlayerSettings(playerSettings);
-                },
-              )
-              ..show();
-          },
-        ),
-        Setting(
-          type: SettingType.normal,
-          name: getString.resizeMode,
-          description: getString.resizeModeDescription,
-          icon: Icons.fit_screen_rounded,
-          onClick: () {
-            AlertDialogBuilder(context)
-              ..setTitle(getString.resizeMode)
-              ..singleChoiceItems(
-                resizeStringMap.values.toList(),
-                playerSettings.resizeMode,
-                (value) {
-                  playerSettings.resizeMode = value;
-                  savePlayerSettings(playerSettings);
-                },
-              )
-              ..show();
-          },
-        ),
-        Setting(
-          type: SettingType.inputBox,
-          name: getString.skipButton,
-          description: getString.skipButtonDescription,
-          icon: Icons.fast_forward_rounded,
-          maxValue: 1000,
-          minValue: 0,
-          initialValue: playerSettings.skipDuration,
-          onInputChange: (value) {
-            playerSettings.skipDuration = value;
-            savePlayerSettings(playerSettings);
-          },
-        ),
-        Setting(
-          type: SettingType.switchType,
-          name: getString.customMPV,
-          description: getString.customMPVDescription(
-              loadData(PrefName.mpvConfigDir).fixSeparator.replaceAll(' ', '')),
-          icon: Icons.extension_rounded,
-          isChecked: loadData(PrefName.useCustomMpvConfig),
-          onSwitchChange: (value) {
-            saveData(PrefName.useCustomMpvConfig, value);
-          },
-        ),
-        if (Platform.isAndroid)
-          Setting(
-            type: SettingType.switchType,
-            name: getString.useGpuNext,
-            description: getString.useGpuNextDescription,
-            icon: Icons.memory_rounded,
-            isChecked: playerSettings.useGpuNext,
-            onSwitchChange: (value) {
-              playerSettings.useGpuNext = value;
-              savePlayerSettings(playerSettings);
-            },
-          ),
-      ],
-    ),
-    Text(
-      getString.subtitles,
-      style: const TextStyle(
-        fontSize: 14,
-        fontWeight: FontWeight.bold,
-        fontFamily: 'Poppins',
-      ),
-    ),
-    SettingsAdaptor(
-      settings: [
-        Setting(
-          type: SettingType.switchType,
-          name: getString.useLibass,
-          description: getString.useLibassDescription,
-          icon: Icons.subtitles_rounded,
-          isChecked: playerSettings.useLibass,
-          onSwitchChange: (value) {
-            playerSettings.useLibass = value;
-            savePlayerSettings(playerSettings);
-          },
-        ),
-        Setting(
-          type: SettingType.switchType,
-          name: getString.showSubtitles,
-          description: getString.showSubtitlesDescription,
-          icon: Icons.subtitles_rounded,
-          isChecked: playerSettings.showSubtitle,
-          onSwitchChange: (value) {
-            playerSettings.showSubtitle = value;
-            savePlayerSettings(playerSettings);
-          },
-        ),
-        Setting(
-          //TODO: Add subtitle fonts
-          type: SettingType.normal,
-          name: getString.fontFamily,
-          description: getString.fontFamilyDescription,
-          icon: Icons.font_download_rounded,
-          onClick: () {
-            AlertDialogBuilder(context)
-              ..setTitle(getString.fontFamily)
-              ..singleChoiceItems(
-                ['Poppins', 'Roboto', 'Arial', 'Times New Roman'],
-                ['Poppins', 'Roboto', 'Arial', 'Times New Roman']
-                    .indexOf(playerSettings.subtitleFont),
-                (value) {
-                  playerSettings.subtitleFont =
-                      ['Poppins', 'Roboto', 'Arial', 'Times New Roman'][value];
-                  savePlayerSettings(playerSettings);
-                },
-              )
-              ..show();
-          },
-        ),
-        Setting(
-          type: SettingType.slider,
-          name: getString.fontSize,
-          description: getString.fontSizeDescription,
-          icon: Icons.format_size_rounded,
-          maxValue: 100,
-          minValue: 10,
-          initialValue: playerSettings.subtitleSize,
-          onSliderChange: (value) {
-            playerSettings.subtitleSize = value;
-            savePlayerSettings(playerSettings);
-          },
-        ),
-        Setting(
-          type: SettingType.slider,
-          name: getString.fontWeight,
-          description: getString.fontWeightDescription,
-          maxValue: 8,
-          minValue: 4,
-          initialValue: playerSettings.subtitleWeight,
-          icon: Icons.format_bold_rounded,
-          onSliderChange: (value) {
-            playerSettings.subtitleWeight = value;
-            savePlayerSettings(playerSettings);
-          },
-        ),
-        Setting(
-          type: SettingType.slider,
-          name: getString.bottomPadding,
-          description: getString.bottomPaddingDescription,
-          icon: Icons.format_line_spacing,
-          maxValue: 100,
-          minValue: 0,
-          initialValue: playerSettings.subtitleBottomPadding,
-          onSliderChange: (value) {
-            playerSettings.subtitleBottomPadding = value;
-            savePlayerSettings(playerSettings);
-          },
-        ),
-        Setting(
-          type: SettingType.normal,
-          name: getString.fontColor,
-          description: getString.fontColorDescription,
-          icon: Icons.color_lens,
-          onClick: () async {
-            var color = playerSettings.subtitleColor;
-            Color? newColor =
-                await showColorPickerDialog(context, Color(color));
-            if (newColor != null) {
-              playerSettings.subtitleColor = newColor.value;
-              savePlayerSettings(playerSettings);
-            }
-          },
-        ),
-        Setting(
-          type: SettingType.normal,
-          name: getString.backgroundColor,
-          description: getString.backgroundColorDescription,
-          icon: Icons.color_lens,
-          onClick: () async {
-            var color = playerSettings.subtitleBackgroundColor;
-            Color? newColor =
-                await showColorPickerDialog(context, Color(color));
-            if (newColor != null) {
-              playerSettings.subtitleBackgroundColor = newColor.value;
-              savePlayerSettings(playerSettings);
-            }
-          },
-        ),
-        Setting(
-          type: SettingType.normal,
-          name: getString.outlineColor,
-          description: getString.outlineColorDescription,
-          icon: Icons.color_lens,
-          onClick: () async {
-            var color = playerSettings.subtitleOutlineColor;
-            Color? newColor =
-                await showColorPickerDialog(context, Color(color));
-            if (newColor != null) {
-              playerSettings.subtitleOutlineColor = newColor.value;
-              savePlayerSettings(playerSettings);
-            }
-          },
-        ),
-      ],
-    ),
-    Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        const SizedBox(height: 32),
-        Text(
-          getString.subtitlePreview,
-          style: TextStyle(
-            fontSize: playerSettings.subtitleSize.toDouble(),
-            fontFamily: playerSettings.subtitleFont,
-            fontWeight:
-                FontWeight.values[playerSettings.subtitleWeight.toInt()],
-            backgroundColor: Color(
-              playerSettings.subtitleBackgroundColor,
+    StatefulBuilder(
+      builder: (context, s) {
+        void savePlayerSettings(PlayerSettings playerSettings) {
+          if (media != null) {
+            MediaSettings.saveMediaSettings(
+                media..settings.playerSettings = playerSettings);
+          } else {
+            saveData(
+                PrefName.playerSettings, jsonEncode(playerSettings.toJson()));
+          }
+          setState(() {});
+          s(() {});
+        }
+
+        return Column(
+          children: [
+            SettingsAdaptor(
+              settings: [
+                Setting(
+                  type: SettingType.switchType,
+                  name: getString.cursedSpeed,
+                  description: getString.cursedSpeedDescription,
+                  icon: Icons.accessible_forward,
+                  isChecked: loadData(PrefName.cursedSpeed),
+                  onSwitchChange: (value) {
+                    saveData(PrefName.cursedSpeed, value);
+                  },
+                ),
+                Setting(
+                  type: SettingType.switchType,
+                  name: getString.thumbLessSeekBar,
+                  description: getString.thumbLessSeekBarDesc,
+                  icon: Icons.circle_rounded,
+                  isChecked: loadData(PrefName.thumbLessSeekBar),
+                  onSwitchChange: (value) {
+                    saveData(PrefName.thumbLessSeekBar, value);
+                    setState(() {});
+                  },
+                ),
+                Setting(
+                  type: SettingType.normal,
+                  name: getString.speed,
+                  description: getString.speedDescription,
+                  icon: Icons.speed_rounded,
+                  onClick: () {
+                    var cursed = loadData(PrefName.cursedSpeed);
+                    AlertDialogBuilder(context)
+                      ..setTitle(getString.speed)
+                      ..singleChoiceItems(
+                        speedMap(cursed),
+                        !speedMap(cursed).contains(playerSettings.speed)
+                            ? 3
+                            : speedMap(cursed).indexOf(playerSettings.speed),
+                        (value) {
+                          playerSettings.speed = speedMap(cursed)[value];
+                          savePlayerSettings(playerSettings);
+                        },
+                      )
+                      ..show();
+                  },
+                ),
+                Setting(
+                  type: SettingType.normal,
+                  name: getString.resizeMode,
+                  description: getString.resizeModeDescription,
+                  icon: Icons.fit_screen_rounded,
+                  onClick: () {
+                    AlertDialogBuilder(context)
+                      ..setTitle(getString.resizeMode)
+                      ..singleChoiceItems(
+                        resizeStringMap.values.toList(),
+                        playerSettings.resizeMode,
+                        (value) {
+                          playerSettings.resizeMode = value;
+                          savePlayerSettings(playerSettings);
+                        },
+                      )
+                      ..show();
+                  },
+                ),
+                Setting(
+                  type: SettingType.inputBox,
+                  name: getString.skipButton,
+                  description: getString.skipButtonDescription,
+                  icon: Icons.fast_forward_rounded,
+                  maxValue: 1000,
+                  minValue: 0,
+                  initialValue: playerSettings.skipDuration,
+                  onInputChange: (value) {
+                    playerSettings.skipDuration = value;
+                    savePlayerSettings(playerSettings);
+                  },
+                ),
+                Setting(
+                  type: SettingType.switchType,
+                  name: getString.customMPV,
+                  description: getString.customMPVDescription(
+                      loadData(PrefName.mpvConfigDir)
+                          .fixSeparator
+                          .replaceAll(' ', '')),
+                  icon: Icons.extension_rounded,
+                  isChecked: loadData(PrefName.useCustomMpvConfig),
+                  onSwitchChange: (value) {
+                    saveData(PrefName.useCustomMpvConfig, value);
+                  },
+                ),
+                if (Platform.isAndroid)
+                  Setting(
+                    type: SettingType.switchType,
+                    name: getString.useGpuNext,
+                    description: getString.useGpuNextDescription,
+                    icon: Icons.memory_rounded,
+                    isChecked: playerSettings.useGpuNext,
+                    onSwitchChange: (value) {
+                      playerSettings.useGpuNext = value;
+                      savePlayerSettings(playerSettings);
+                    },
+                  ),
+              ],
             ),
-            inherit: false,
-            color: Color(
-              playerSettings.subtitleColor,
-            ),
-            shadows: [
-              Shadow(
-                offset: const Offset(1.0, 1.0),
-                blurRadius: 10.0,
-                color: Color(playerSettings.subtitleOutlineColor),
+            Text(
+              getString.subtitles,
+              style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'Poppins',
               ),
-            ],
-          ),
-        ),
-      ],
-    ),
+            ),
+            SettingsAdaptor(
+              settings: [
+                Setting(
+                  type: SettingType.switchType,
+                  name: getString.useLibass,
+                  description: getString.useLibassDescription,
+                  icon: Icons.subtitles_rounded,
+                  isChecked: playerSettings.useLibass,
+                  onSwitchChange: (value) {
+                    playerSettings.useLibass = value;
+                    savePlayerSettings(playerSettings);
+                  },
+                ),
+                Setting(
+                  type: SettingType.switchType,
+                  name: getString.showSubtitles,
+                  description: getString.showSubtitlesDescription,
+                  icon: Icons.subtitles_rounded,
+                  isChecked: playerSettings.showSubtitle,
+                  onSwitchChange: (value) {
+                    playerSettings.showSubtitle = value;
+                    savePlayerSettings(playerSettings);
+                  },
+                ),
+                Setting(
+                  //TODO: Add subtitle fonts
+                  type: SettingType.normal,
+                  name: getString.fontFamily,
+                  description: getString.fontFamilyDescription,
+                  icon: Icons.font_download_rounded,
+                  onClick: () {
+                    AlertDialogBuilder(context)
+                      ..setTitle(getString.fontFamily)
+                      ..singleChoiceItems(
+                        ['Poppins', 'Roboto', 'Arial', 'Times New Roman'],
+                        ['Poppins', 'Roboto', 'Arial', 'Times New Roman']
+                            .indexOf(playerSettings.subtitleFont),
+                        (value) {
+                          playerSettings.subtitleFont = [
+                            'Poppins',
+                            'Roboto',
+                            'Arial',
+                            'Times New Roman'
+                          ][value];
+                          savePlayerSettings(playerSettings);
+                        },
+                      )
+                      ..show();
+                  },
+                ),
+                Setting(
+                  type: SettingType.slider,
+                  name: getString.fontSize,
+                  description: getString.fontSizeDescription,
+                  icon: Icons.format_size_rounded,
+                  maxValue: 100,
+                  minValue: 10,
+                  initialValue: playerSettings.subtitleSize,
+                  onSliderChange: (value) {
+                    playerSettings.subtitleSize = value;
+                    savePlayerSettings(playerSettings);
+                  },
+                ),
+                Setting(
+                  type: SettingType.slider,
+                  name: getString.fontWeight,
+                  description: getString.fontWeightDescription,
+                  maxValue: 8,
+                  minValue: 4,
+                  initialValue: playerSettings.subtitleWeight,
+                  icon: Icons.format_bold_rounded,
+                  onSliderChange: (value) {
+                    playerSettings.subtitleWeight = value;
+                    savePlayerSettings(playerSettings);
+                  },
+                ),
+                Setting(
+                  type: SettingType.slider,
+                  name: getString.bottomPadding,
+                  description: getString.bottomPaddingDescription,
+                  icon: Icons.format_line_spacing,
+                  maxValue: 100,
+                  minValue: 0,
+                  initialValue: playerSettings.subtitleBottomPadding,
+                  onSliderChange: (value) {
+                    playerSettings.subtitleBottomPadding = value;
+                    savePlayerSettings(playerSettings);
+                  },
+                ),
+                Setting(
+                  type: SettingType.normal,
+                  name: getString.fontColor,
+                  description: getString.fontColorDescription,
+                  icon: Icons.color_lens,
+                  onClick: () async {
+                    var color = playerSettings.subtitleColor;
+                    Color? newColor =
+                        await showColorPickerDialog(context, Color(color));
+                    if (newColor != null) {
+                      playerSettings.subtitleColor = newColor.value;
+                      savePlayerSettings(playerSettings);
+                    }
+                  },
+                ),
+                Setting(
+                  type: SettingType.normal,
+                  name: getString.backgroundColor,
+                  description: getString.backgroundColorDescription,
+                  icon: Icons.color_lens,
+                  onClick: () async {
+                    var color = playerSettings.subtitleBackgroundColor;
+                    Color? newColor =
+                        await showColorPickerDialog(context, Color(color));
+                    if (newColor != null) {
+                      playerSettings.subtitleBackgroundColor = newColor.value;
+                      savePlayerSettings(playerSettings);
+                    }
+                  },
+                ),
+                Setting(
+                  type: SettingType.normal,
+                  name: getString.outlineColor,
+                  description: getString.outlineColorDescription,
+                  icon: Icons.color_lens,
+                  onClick: () async {
+                    var color = playerSettings.subtitleOutlineColor;
+                    Color? newColor =
+                        await showColorPickerDialog(context, Color(color));
+                    if (newColor != null) {
+                      playerSettings.subtitleOutlineColor = newColor.value;
+                      savePlayerSettings(playerSettings);
+                    }
+                  },
+                ),
+              ],
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const SizedBox(height: 32),
+                Text(
+                  getString.subtitlePreview,
+                  style: TextStyle(
+                    fontSize: playerSettings.subtitleSize.toDouble(),
+                    fontFamily: playerSettings.subtitleFont,
+                    fontWeight: FontWeight
+                        .values[playerSettings.subtitleWeight.toInt()],
+                    backgroundColor: Color(
+                      playerSettings.subtitleBackgroundColor,
+                    ),
+                    inherit: false,
+                    color: Color(
+                      playerSettings.subtitleColor,
+                    ),
+                    shadows: [
+                      Shadow(
+                        offset: const Offset(1.0, 1.0),
+                        blurRadius: 10.0,
+                        color: Color(playerSettings.subtitleOutlineColor),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ],
+        );
+      },
+    )
   ];
 }
 

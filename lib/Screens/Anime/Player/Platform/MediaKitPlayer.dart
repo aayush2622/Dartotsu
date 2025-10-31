@@ -76,6 +76,7 @@ class MediaKitPlayer extends GetxController {
 
     player = Player(
       configuration: PlayerConfiguration(
+        logLevel: MPVLogLevel.v,
         bufferSize: 1024 * 1024 * 64,
         // Config Options thanks to snitchel
         config: useCustomConfig,
