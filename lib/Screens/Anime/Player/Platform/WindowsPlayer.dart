@@ -46,37 +46,33 @@ class WindowsPlayer extends BasePlayer {
   }
 
   @override
-  Future<void> pause() async => videoController.player.pause();
+  Future<void> pause() => videoController.player.pause();
 
   @override
-  Future<void> play() async => videoController.player.play();
+  Future<void> play() => videoController.player.play();
 
   @override
-  Future<void> playOrPause() async => videoController.player.playOrPause();
+  Future<void> playOrPause() => videoController.player.playOrPause();
 
   @override
-  Future<void> seek(Duration duration) async {
-    videoController.player.seek(duration);
-  }
+  Future<void> seek(Duration duration) => videoController.player.seek(duration);
 
   @override
-  Future<void> setRate(double rate) async =>
-      videoController.player.setRate(rate);
+  Future<void> setRate(double rate) => videoController.player.setRate(rate);
 
   @override
-  Future<void> setVolume(double volume) async =>
+  Future<void> setVolume(double volume) =>
       videoController.player.setVolume(volume);
 
   @override
-  Future<void> open(v.Video video, Duration duration) async {
-    videoController.player.open(
-      Media(
-        video.url,
-        start: duration,
-        httpHeaders: video.headers,
-      ),
-    );
-  }
+  Future<void> open(v.Video video, Duration duration) =>
+      videoController.player.open(
+        Media(
+          video.url,
+          start: duration,
+          httpHeaders: video.headers,
+        ),
+      );
 
   @override
   Future<void> setSubtitle(String subtitleUri, String language, bool isUri) =>
@@ -133,6 +129,22 @@ class WindowsPlayer extends BasePlayer {
     videoController.player.stream.track.listen((e) {
       _updateSubtitleTrack(e.subtitle);
     });
+
+    if (videoController.player.platform is NativePlayer) {
+      observeNativePropertyInt("chapter-list/count", (value) async {
+        final chapterList = <Chapter>[];
+
+        for (int i = 0; i < value; i++) {
+          final title = await getNativePropertyString("chapter-list/$i/title");
+          final startTime =
+              await getNativePropertyDouble("chapter-list/$i/time");
+
+          chapterList.add(Chapter(title: title, startTime: startTime));
+        }
+
+        chapters.value = chapterList;
+      });
+    }
   }
 
   String _formatTime(int seconds) {
@@ -176,5 +188,87 @@ class WindowsPlayer extends BasePlayer {
       controls: null,
       fit: resizeMode.value,
     );
+  }
+
+  Future<String> _getNativeProperty(String property) {
+    assert(videoController.player.platform is NativePlayer);
+
+    return (videoController.player.platform as NativePlayer)
+        .getProperty(property);
+  }
+
+  Future<void> _setNativeProperty(String property, String value) {
+    assert(videoController.player.platform is NativePlayer);
+
+    return (videoController.player.platform as NativePlayer)
+        .setProperty(property, value);
+  }
+
+  Future<void> _observeNativeProperty(
+      String property, Future<void> Function(String) listener,
+      {bool waitForInitialization = true}) {
+    assert(videoController.player.platform is NativePlayer);
+
+    return (videoController.player.platform as NativePlayer).observeProperty(
+        property, listener,
+        waitForInitialization: waitForInitialization);
+  }
+
+  Future<String> getNativePropertyString(String property) =>
+      _getNativeProperty(property);
+  Future<double> getNativePropertyDouble(String property) =>
+      _getNativeProperty(property).then((value) => double.parse(value));
+  Future<int> getNativePropertyInt(String property) =>
+      _getNativeProperty(property).then((value) => int.parse(value));
+  Future<bool> getNativePropertyBool(String property) =>
+      _getNativeProperty(property)
+          .then((value) => value == 'true' || value == '1');
+
+  Future<void> setNativePropertyString(String property, String value) =>
+      _setNativeProperty(property, value);
+  Future<void> setNativePropertyDouble(String property, double value) =>
+      _setNativeProperty(property, value.toString());
+  Future<void> setNativePropertyInt(String property, int value) =>
+      _setNativeProperty(property, value.toString());
+  Future<void> setNativePropertyBool(String property, bool value) =>
+      _setNativeProperty(property, value ? '1' : '0');
+
+  Future<void> observeNativePropertyString(
+          String property, Future<void> Function(String) listener,
+          {bool waitForInitialization = true}) =>
+      _observeNativeProperty(property, listener,
+          waitForInitialization: waitForInitialization);
+  Future<void> observeNativePropertyDouble(
+          String property, Future<void> Function(double) listener,
+          {bool waitForInitialization = true}) =>
+      _observeNativeProperty(property, (value) => listener(double.parse(value)),
+          waitForInitialization: waitForInitialization);
+  Future<void> observeNativePropertyInt(
+          String property, Future<void> Function(int) listener,
+          {bool waitForInitialization = true}) =>
+      _observeNativeProperty(property, (value) => listener(int.parse(value)),
+          waitForInitialization: waitForInitialization);
+  Future<void> observeNativePropertyBool(
+          String property, Future<void> Function(bool) listener,
+          {bool waitForInitialization = true}) =>
+      _observeNativeProperty(
+          property, (value) => listener(value == 'true' || value == '1'),
+          waitForInitialization: waitForInitialization);
+
+  Future<void> unobserveNativeProperty(String property,
+      {bool waitForInitialization = true}) {
+    assert(videoController.player.platform is NativePlayer);
+
+    return (videoController.player.platform as NativePlayer).unobserveProperty(
+        property,
+        waitForInitialization: waitForInitialization);
+  }
+
+  Future<void> nativeCommand(List<String> command,
+      {bool waitForInitialization = true}) {
+    assert(videoController.player.platform is NativePlayer);
+
+    return (videoController.player.platform as NativePlayer)
+        .command(command, waitForInitialization: waitForInitialization);
   }
 }
