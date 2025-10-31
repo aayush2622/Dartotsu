@@ -979,6 +979,10 @@ class _PlayerControllerState extends State<PlayerController> {
   void _chapterDialog() {
     controller.pause();
 
+    final currentChapter = controller.chapters.lastWhereOrNull(
+      (e) => e.startTime <= controller.currentPosition.value.inSeconds / 1.0,
+    );
+
     var chapterDialog = CustomBottomDialog(
       title:
           controller.chapters.isNotEmpty ? "Chapters" : "No Chapters Available",
@@ -1005,10 +1009,13 @@ class _PlayerControllerState extends State<PlayerController> {
                     padding: const EdgeInsets.all(16),
                     child: Text(
                       "${_formatTime(chapter.startTime.toInt())} - ${chapter.title}",
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: currentChapter != null &&
+                                  currentChapter.startTime == chapter.startTime
+                              ? Theme.of(context).colorScheme.primary
+                              : Theme.of(context).colorScheme.onSurface),
                     ),
                   ),
                 ),
