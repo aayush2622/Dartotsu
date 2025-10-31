@@ -1,6 +1,8 @@
 import 'dart:io';
 
+import 'package:collection/collection.dart';
 import 'package:dartotsu/Adaptor/Episode/EpisodeAdaptor.dart';
+import 'package:dartotsu/Screens/Anime/Player/Platform/WindowsPlayer.dart';
 import 'package:dartotsu/Screens/Anime/Player/Widgets/SectionedRoundedRectSliderTrackShape.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:dartotsu_extension_bridge/Models/Video.dart' as v;
@@ -16,6 +18,7 @@ import 'package:dartotsu/Widgets/CustomBottomDialog.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:media_kit/media_kit.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -52,6 +55,7 @@ class _PlayerControllerState extends State<PlayerController> {
   late int fitType;
   final timeStamps = <Stamp>[].obs;
   final timeStampsText = ''.obs;
+  final chapterText = ''.obs;
   final isFullScreen = false.obs;
   final isControlsLocked = false.obs;
   int? currentProgress;
@@ -107,7 +111,9 @@ class _PlayerControllerState extends State<PlayerController> {
         if (track.id == 'auto' || track.id == 'no') continue;
         final trackEntry = v.Track(
           file: track.id,
-          label: track.title ?? track.language ?? "Unknown",
+          label: track.title != null && track.language != null
+              ? "${track.title} (${track.language})"
+              : track.title ?? track.language ?? "Unknown",
         );
         tracks ??= [];
         tracks.add(trackEntry);
@@ -154,17 +160,23 @@ class _PlayerControllerState extends State<PlayerController> {
 
     controller.currentPosition.listen(
       (v) {
-        if (v.inSeconds > 0) {
-          _saveProgress(v.inSeconds);
-          timeStampsText.value = timeStamps
-                  .firstWhereOrNull(
-                    (e) =>
-                        (e.interval.startTime <= v.inSeconds) &&
-                        (e.interval.endTime >= v.inSeconds),
-                  )
-                  ?.getType() ??
-              '';
-        }
+        if (v.inSeconds > 0) _saveProgress(v.inSeconds);
+
+        chapterText.value = controller.chapters
+                .lastWhereOrNull(
+                  (e) => e.startTime <= v.inSeconds / 1.0,
+                )
+                ?.title ??
+            '';
+
+        timeStampsText.value = timeStamps
+                .firstWhereOrNull(
+                  (e) =>
+                      (e.interval.startTime <= v.inSeconds) &&
+                      (e.interval.endTime >= v.inSeconds),
+                )
+                ?.getType() ??
+            '';
       },
     );
   }
@@ -261,18 +273,28 @@ class _PlayerControllerState extends State<PlayerController> {
                   color: Colors.white.withValues(alpha: 0.5),
                 ),
               ),
-              Obx(
-                () => timeStampsText.value != ''
-                    ? Text(
-                        "  • $timeStampsText",
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w300,
-                          fontFamily: 'Poppins-SemiBold',
-                        ),
-                      )
-                    : const SizedBox(),
-              ),
+              Obx(() {
+                final sectionText = timeStampsText.value != ''
+                    ? timeStampsText.value
+                    : chapterText.value;
+
+                if (sectionText == '') {
+                  return const SizedBox();
+                }
+
+                return GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: () => _chapterDialog(),
+                  child: Text(
+                    "  • $sectionText",
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w300,
+                      fontFamily: 'Poppins-SemiBold',
+                    ),
+                  ),
+                );
+              }),
             ],
           ),
           if (!isControlsLocked.value) _buildSkipButton(),
@@ -316,20 +338,33 @@ class _PlayerControllerState extends State<PlayerController> {
                       overlayShape: SliderComponentShape.noOverlay,
                       trackShape: SectionedRoundedRectSliderTrackShape(
                           sections: timeStamps.map(
-                        (timestamp) {
-                          return TrackSection(
-                              start: timestamp.interval.startTime /
-                                  (maxValue > 0 ? maxValue : 1),
-                              end: timestamp.interval.endTime /
-                                  (maxValue > 0 ? maxValue : 1),
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .primary
-                                  .withValues(
-                                    alpha: 0.65,
-                                  ));
-                        },
-                      ).toList())),
+                            (timestamp) {
+                              return TrackSection(
+                                  start: timestamp.interval.startTime /
+                                      (maxValue > 0 ? maxValue : 1),
+                                  end: timestamp.interval.endTime /
+                                      (maxValue > 0 ? maxValue : 1),
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .primary
+                                      .withValues(
+                                        alpha: 0.65,
+                                      ));
+                            },
+                          ).toList(),
+                          chapters: controller.chapters
+                              .where((chapter) =>
+                                  chapter.startTime /
+                                      (maxValue > 0 ? maxValue : 1) >
+                                  0.01)
+                              .map(
+                            (chapter) {
+                              return TrackChapter(
+                                position: chapter.startTime /
+                                    (maxValue > 0 ? maxValue : 1),
+                              );
+                            },
+                          ).toList())),
                   child: Slider(
                     min: 0,
                     max: maxValue > 0 ? maxValue : 1,
@@ -339,8 +374,17 @@ class _PlayerControllerState extends State<PlayerController> {
                     onChangeEnd: (val) async {
                       controller.seek(Duration(seconds: val.toInt()));
                     },
-                    onChanged: (double value) => controller.currentTime.value =
-                        _formatTime(value.toInt()),
+                    onChanged: (double value) async {
+                      if (controller is WindowsPlayer &&
+                          (controller as WindowsPlayer).player.platform
+                              is NativePlayer) {
+                        await (controller as WindowsPlayer).nativeCommand(
+                          ['seek', value.toString(), "absolute+keyframes"],
+                        );
+                      } else {
+                        controller.seek(Duration(seconds: value.toInt()));
+                      }
+                    },
                   ),
                 );
               }))
@@ -689,54 +733,53 @@ class _PlayerControllerState extends State<PlayerController> {
         child: Text("No subtitles available"),
       );
     } else {
-      return ListView.builder(
-        shrinkWrap: true,
-        itemCount: currentQuality.subtitles!.length,
-        itemBuilder: (context, index) {
-          var sub = currentQuality.subtitles![index];
+      return Column(
+        children: currentQuality.subtitles!.map((sub) {
           return Card(
-            margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
-            elevation: 4,
-            child: InkWell(
-              onTap: () {
-                if (controller.currentSubtitleUri.value == sub.file) {
-                  controller.resetSubtitle().then(
-                        (_) => controller.play(),
-                      );
-                  Get.back();
-                } else {
-                  controller
-                      .setSubtitle(
-                        sub.file ?? "",
-                        sub.label ?? "",
-                        sub.file?.toNullInt() == null,
-                      )
-                      .then(
-                        (_) => controller.play(),
-                      );
-                  Get.back();
-                }
-              },
-              borderRadius: BorderRadius.circular(12),
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Text(
-                  sub.label ?? "",
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: controller.currentSubtitleUri.value == sub.file
-                        ? Theme.of(context).colorScheme.primary
-                        : Theme.of(context).colorScheme.onSurface,
+              margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              elevation: 4,
+              child: SizedBox(
+                width: double.infinity,
+                child: InkWell(
+                  onTap: () {
+                    if (controller.currentSubtitleUri.value == sub.file) {
+                      controller.resetSubtitle().then(
+                            (_) => controller.play(),
+                          );
+                      Get.back();
+                    } else {
+                      controller
+                          .setSubtitle(
+                            sub.file ?? "",
+                            sub.label ?? "",
+                            sub.file?.toNullInt() == null,
+                          )
+                          .then(
+                            (_) => controller.play(),
+                          );
+                      Get.back();
+                    }
+                  },
+                  borderRadius: BorderRadius.circular(12),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Text(
+                      sub.label ?? "",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: controller.currentSubtitleUri.value == sub.file
+                            ? Theme.of(context).colorScheme.primary
+                            : Theme.of(context).colorScheme.onSurface,
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ),
-          );
-        },
+              ));
+        }).toList(),
       );
     }
   }
@@ -747,44 +790,43 @@ class _PlayerControllerState extends State<PlayerController> {
         child: Text("No audio available"),
       );
     } else {
-      return ListView.builder(
-        shrinkWrap: true,
-        itemCount: currentQuality.audios!.length,
-        itemBuilder: (context, index) {
-          var sub = currentQuality.audios![index];
+      return Column(
+        children: currentQuality.audios!.map((audio) {
           return Card(
-            margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
-            elevation: 4,
-            child: InkWell(
-              onTap: () {
-                controller
-                    .setAudio(
-                      sub.file ?? "",
-                      sub.label ?? "",
-                      sub.file?.toNullInt() == null,
-                    )
-                    .then(
-                      (_) => controller.play(),
-                    );
-                Get.back();
-              },
-              borderRadius: BorderRadius.circular(12),
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Text(
-                  sub.label ?? "",
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
+              margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              elevation: 4,
+              child: SizedBox(
+                width: double.infinity,
+                child: InkWell(
+                  onTap: () {
+                    controller
+                        .setAudio(
+                          audio.file ?? "",
+                          audio.label ?? "",
+                          audio.file?.toNullInt() == null,
+                        )
+                        .then(
+                          (_) => controller.play(),
+                        );
+                    Get.back();
+                  },
+                  borderRadius: BorderRadius.circular(12),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Text(
+                      audio.label ?? "",
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ),
-          );
-        },
+              ));
+        }).toList(),
       );
     }
   }
@@ -876,60 +918,106 @@ class _PlayerControllerState extends State<PlayerController> {
     var episodeDialog = CustomBottomDialog(
       title: "Sources",
       viewList: [
-        ListView.builder(
-          shrinkWrap: true,
-          itemCount: videos.length,
-          itemBuilder: (context, index) {
+        Column(
+          children: videos.map((video) {
+            int index = videos.indexOf(video);
+            return Card(
+                margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                elevation: 4,
+                child: SizedBox(
+                  width: double.infinity,
+                  child: InkWell(
+                    onTap: () {
+                      if (currentQuality == videos[index]) {
+                        Get.back();
+                        return;
+                      }
+                      currentQuality = videos[index];
+                      controller.open(
+                        currentQuality,
+                        controller.currentPosition.value,
+                      );
+                      Get.back();
+                    },
+                    borderRadius: BorderRadius.circular(12),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              videos[index].title ?? videos[index].quality,
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              maxLines: 1,
+                            ),
+                          ),
+                          Icon(
+                            Icons.play_arrow,
+                            size: 24,
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ));
+          }).toList(),
+        ),
+      ],
+    );
+    showCustomBottomDialog(context, episodeDialog);
+  }
+
+  void _chapterDialog() {
+    controller.pause();
+
+    var chapterDialog = CustomBottomDialog(
+      title:
+          controller.chapters.isNotEmpty ? "Chapters" : "No Chapters Available",
+      viewList: [
+        Column(
+          children: controller.chapters.map((chapter) {
             return Card(
               margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
               elevation: 4,
-              child: InkWell(
-                onTap: () {
-                  if (currentQuality == videos[index]) {
+              child: SizedBox(
+                width: double.infinity,
+                child: InkWell(
+                  onTap: () {
+                    controller
+                        .seek(Duration(seconds: chapter.startTime.toInt()))
+                        .then((_) => controller.play());
                     Get.back();
-                    return;
-                  }
-                  currentQuality = videos[index];
-                  controller.open(
-                    currentQuality,
-                    controller.currentPosition.value,
-                  );
-                  Get.back();
-                },
-                borderRadius: BorderRadius.circular(12),
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: Text(
-                          videos[index].title ?? videos[index].quality,
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          maxLines: 1,
-                        ),
+                  },
+                  borderRadius: BorderRadius.circular(12),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Text(
+                      "${_formatTime(chapter.startTime.toInt())} - ${chapter.title}",
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
                       ),
-                      Icon(
-                        Icons.play_arrow,
-                        size: 24,
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
-                    ],
+                    ),
                   ),
                 ),
               ),
             );
-          },
+          }).toList(),
         ),
       ],
     );
-    showCustomBottomDialog(context, episodeDialog);
+    showCustomBottomDialog(context, chapterDialog);
   }
 }

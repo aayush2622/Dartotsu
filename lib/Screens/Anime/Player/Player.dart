@@ -53,8 +53,8 @@ class MediaPlayerState extends State<MediaPlayer>
   late v.Video currentQuality;
   late Rx<BoxFit> resizeMode;
   late PlayerSettings settings;
-  late AnimationController _leftAnimationController;
-  late AnimationController _rightAnimationController;
+  late AnimationController _backwardAnimationController;
+  late AnimationController _forwardAnimationController;
   var showControls = true.obs;
   var viewType = 0.obs;
   var reverse = false.obs;
@@ -73,11 +73,11 @@ class MediaPlayerState extends State<MediaPlayer>
       settings = widget.media.settings.playerSettings;
     }
     _initializePlayer();
-    _leftAnimationController = AnimationController(
+    _backwardAnimationController = AnimationController(
       duration: const Duration(milliseconds: 1000),
       vsync: this,
     );
-    _rightAnimationController = AnimationController(
+    _forwardAnimationController = AnimationController(
       duration: const Duration(milliseconds: 1000),
       vsync: this,
     );
@@ -121,8 +121,8 @@ class MediaPlayerState extends State<MediaPlayer>
     super.dispose();
     videoPlayerController.dispose();
     _hideCursorTimer?.cancel();
-    _leftAnimationController.dispose();
-    _rightAnimationController.dispose();
+    _backwardAnimationController.dispose();
+    _forwardAnimationController.dispose();
     focusNode.dispose();
     if (Platform.isAndroid || Platform.isIOS) {
       ScreenBrightness.instance
@@ -297,7 +297,8 @@ class MediaPlayerState extends State<MediaPlayer>
               ),
             ),
             _buildVideoOverlay(),
-            _buildRippleEffect(),
+            _buildBackwardRippleEffect(),
+            _buildForwardRippleEffect(),
             AnimatedOpacity(
               curve: Curves.easeInOut,
               opacity: _volumeIndicator.value ? 1.0 : 0.0,
@@ -460,16 +461,18 @@ class MediaPlayerState extends State<MediaPlayer>
     });
   }
 
-  final doubleTapLabel = 0.obs;
-  Timer? doubleTapTimeout;
-  final isLeftSide = false.obs;
-  final skipDuration = 0.obs;
+  final forwardDoubleTapLabel = 0.obs;
+  final backwardDoubleTapLabel = 0.obs;
+  Timer? forwardDoubleTapTimeout;
+  Timer? backwardsDoubleTapTimeout;
+  final skipForwardDuration = 0.obs;
+  final skipBackwardsDuration = 0.obs;
 
   void _handleDoubleTap(TapDownDetails details) {
     final screenWidth = MediaQuery.of(context).size.width;
     final tapPosition = details.globalPosition;
     final isLeft = tapPosition.dx < screenWidth / 2;
-    _skipSegments(isLeft);
+    _skipSegments(isLeft ? SkipDirection.backward : SkipDirection.forward);
   }
 
   double initialSpeed = 1.0;
@@ -500,122 +503,141 @@ class MediaPlayerState extends State<MediaPlayer>
     isLongPress.value = false;
   }
 
-  void _skipSegments(bool isLeft) {
-    if (isLeftSide.value != isLeft) {
-      doubleTapLabel.value = 0;
-      skipDuration.value = 0;
+  void _skipSegments(SkipDirection direction) {
+    if (direction == SkipDirection.backward) {
+      skipBackwardsDuration.value += 10;
+      backwardDoubleTapLabel.value += 10;
+    } else {
+      skipForwardDuration.value += 10;
+      forwardDoubleTapLabel.value += 10;
     }
-    isLeftSide.value = isLeft;
-    doubleTapLabel.value += 10;
-    skipDuration.value += 10;
-    isLeft
-        ? _leftAnimationController.forward(from: 0)
-        : _rightAnimationController.forward(from: 0);
 
-    doubleTapTimeout?.cancel();
+    direction == SkipDirection.backward
+        ? _backwardAnimationController.forward(from: 0)
+        : _forwardAnimationController.forward(from: 0);
 
-    doubleTapTimeout = Timer(const Duration(milliseconds: 900), () {
-      final currentPosition = videoPlayerController.currentPosition.value;
+    forwardDoubleTapTimeout?.cancel();
+    backwardsDoubleTapTimeout?.cancel();
+
+    final currentPosition = videoPlayerController.currentPosition.value;
+
+    if (direction == SkipDirection.backward) {
+      videoPlayerController.seek(
+        Duration(
+          seconds: max(0, currentPosition.inSeconds - 10),
+        ),
+      );
+    } else {
+      videoPlayerController.seek(
+        Duration(
+          seconds: currentPosition.inSeconds + 10,
+        ),
+      );
+    }
+
+    forwardDoubleTapTimeout = Timer(const Duration(milliseconds: 900), () {
       if (currentPosition == const Duration(seconds: 0)) return;
-      if (isLeft) {
-        videoPlayerController.seek(
-          Duration(
-            seconds: max(0, currentPosition.inSeconds - skipDuration.value),
-          ),
-        );
-      } else {
-        videoPlayerController.seek(
-          Duration(
-            seconds: currentPosition.inSeconds + skipDuration.value,
-          ),
-        );
-      }
-      _leftAnimationController.stop();
-      _rightAnimationController.stop();
-      doubleTapLabel.value = 0;
-      skipDuration.value = 0;
+
+      _forwardAnimationController.stop();
+      forwardDoubleTapLabel.value = 0;
+      skipForwardDuration.value = 0;
+    });
+
+    backwardsDoubleTapTimeout = Timer(const Duration(milliseconds: 900), () {
+      if (currentPosition == const Duration(seconds: 0)) return;
+
+      _backwardAnimationController.stop();
+      backwardDoubleTapLabel.value = 0;
+      skipBackwardsDuration.value = 0;
     });
   }
 
-  Widget _buildRippleEffect() {
-    if (doubleTapLabel.value == 0) {
-      return const SizedBox();
-    }
-    return AnimatedPositioned(
-      left: isLeftSide.value ? 0 : MediaQuery.of(context).size.width / 1.5,
-      width: MediaQuery.of(context).size.width / 2.5,
-      top: 0,
-      bottom: 0,
-      duration: const Duration(milliseconds: 1000),
-      child: AnimatedBuilder(
-        animation: isLeftSide.value
-            ? _leftAnimationController
-            : _rightAnimationController,
-        builder: (context, child) {
-          final scale = Tween<double>(begin: 1.5, end: 1).animate(
-            CurvedAnimation(
-              parent: isLeftSide.value
-                  ? _leftAnimationController
-                  : _rightAnimationController,
-              curve: Curves.bounceInOut,
-            ),
-          );
+  Widget _buildRippleEffect({
+    required RxInt tapLabel,
+    required AnimationController controller,
+    required bool isForward,
+  }) {
+    return Obx(() {
+      if (tapLabel.value == 0) return const SizedBox();
 
-          return GestureDetector(
-            onDoubleTapDown: (t) => _handleDoubleTap(t),
-            child: Opacity(
-              opacity: 1.0 -
-                  (isLeftSide.value
-                      ? _leftAnimationController.value
-                      : _rightAnimationController.value),
-              child: Container(
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.2),
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(isLeftSide.value ? 0 : 500),
-                    topRight: Radius.circular(isLeftSide.value ? 500 : 0),
-                    bottomLeft: Radius.circular(isLeftSide.value ? 0 : 500),
-                    bottomRight: Radius.circular(isLeftSide.value ? 500 : 0),
-                  ),
-                ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    ScaleTransition(
-                      scale: scale,
-                      child: Icon(
-                        isLeftSide.value
-                            ? Icons.fast_rewind_rounded
-                            : Icons.fast_forward_rounded,
-                        color: Colors.white,
-                        size: 40,
-                      ),
+      return AnimatedPositioned(
+        left: isForward ? MediaQuery.of(context).size.width / 1.5 : 0,
+        width: MediaQuery.of(context).size.width / 2.5,
+        top: 0,
+        bottom: 0,
+        duration: const Duration(milliseconds: 1000),
+        child: AnimatedBuilder(
+          animation: controller,
+          builder: (context, child) {
+            final scale = Tween<double>(begin: 1.5, end: 1).animate(
+              CurvedAnimation(parent: controller, curve: Curves.bounceInOut),
+            );
+
+            return GestureDetector(
+              onDoubleTapDown: (t) => _handleDoubleTap(t),
+              child: Opacity(
+                opacity: 1.0 - controller.value,
+                child: Container(
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.2),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(isForward ? 500 : 0),
+                      topRight: Radius.circular(isForward ? 0 : 500),
+                      bottomLeft: Radius.circular(isForward ? 500 : 0),
+                      bottomRight: Radius.circular(isForward ? 0 : 500),
                     ),
-                    Container(
-                      margin: const EdgeInsets.only(top: 20),
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 16.0,
-                        vertical: 8.0,
-                      ),
-                      child: Text(
-                        "${doubleTapLabel.value}s",
-                        style: const TextStyle(
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      ScaleTransition(
+                        scale: scale,
+                        child: Icon(
+                          isForward
+                              ? Icons.fast_forward_rounded
+                              : Icons.fast_rewind_rounded,
                           color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
+                          size: 40,
                         ),
                       ),
-                    ),
-                  ],
+                      Container(
+                        margin: const EdgeInsets.only(top: 20),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16.0,
+                          vertical: 8.0,
+                        ),
+                        child: Text(
+                          "${tapLabel.value}s",
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          );
-        },
-      ),
-    );
+            );
+          },
+        ),
+      );
+    });
   }
+
+  Widget _buildForwardRippleEffect() => _buildRippleEffect(
+        tapLabel: forwardDoubleTapLabel,
+        controller: _forwardAnimationController,
+        isForward: true,
+      );
+
+  Widget _buildBackwardRippleEffect() => _buildRippleEffect(
+        tapLabel: backwardDoubleTapLabel,
+        controller: _backwardAnimationController,
+        isForward: false,
+      );
 
   Widget _buildEpisodeList() {
     var episodeList = widget.media.anime?.episodes ?? {};
@@ -700,9 +722,9 @@ class MediaPlayerState extends State<MediaPlayer>
   void _handleKeyPress(KeyEvent event) {
     if (event is KeyDownEvent) {
       if (event.logicalKey == LogicalKeyboardKey.arrowLeft) {
-        _skipSegments(true);
+        _skipSegments(SkipDirection.backward);
       } else if (event.logicalKey == LogicalKeyboardKey.arrowRight) {
-        _skipSegments(false);
+        _skipSegments(SkipDirection.forward);
       } else if (event.logicalKey == LogicalKeyboardKey.space) {
         videoPlayerController.playOrPause();
       } else if (event.logicalKey == LogicalKeyboardKey.enter) {
@@ -736,3 +758,5 @@ class MediaPlayerState extends State<MediaPlayer>
     return 0;
   }
 }
+
+enum SkipDirection { backward, forward }
