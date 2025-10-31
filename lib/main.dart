@@ -138,7 +138,7 @@ void initIntentListener() async {
 
   intent.getMediaStream().listen(
         handleFiles,
-        onError: (err) => debugPrint('Error receiving shared media: $err'),
+        onError: (err) => snackString('Error receiving shared media: $err'),
       );
 
   final initialFiles = await intent.getInitialMedia();
