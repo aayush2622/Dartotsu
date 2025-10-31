@@ -655,6 +655,13 @@ class AppLocalizationsRu extends AppLocalizations {
       'Use Libass for subtitle rendering (overrides other subtitle settings)';
 
   @override
+  String get useGpuNext => 'Use gpu-next';
+
+  @override
+  String get useGpuNextDescription =>
+      'New rendering backend (may cause visual artifacts)';
+
+  @override
   String get readerSettings => 'Параметры чтения';
 
   @override

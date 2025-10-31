@@ -148,8 +148,8 @@ class MediaPlayerState extends State<MediaPlayer>
   }
 
   void updateProgress() {
-    var current = _timeStringToSeconds(videoPlayerController.currentTime.value);
-    var total = _timeStringToSeconds(videoPlayerController.maxTime.value);
+    var current = videoPlayerController.currentTime.value.inSeconds;
+    var total = videoPlayerController.maxTime.value.inSeconds;
     var episodeEnd = (current / total) > 0.8;
     var incognito = loadData(PrefName.incognito);
     if (incognito || !episodeEnd) return;
@@ -746,8 +746,9 @@ class MediaPlayerState extends State<MediaPlayer>
         showEpisodes.value = !showEpisodes.value;
       } else if (RegExp(r'^[0-9]$').hasMatch(event.logicalKey.keyLabel)) {
         final keyNumber = int.parse(event.logicalKey.keyLabel);
+
         final videoDurationSeconds =
-            _timeStringToSeconds(videoPlayerController.maxTime.value);
+            videoPlayerController.maxTime.value.inSeconds;
         double targetSeconds;
 
         if (keyNumber == 1) {
@@ -762,15 +763,6 @@ class MediaPlayerState extends State<MediaPlayer>
             .seek(Duration(seconds: targetSeconds.toInt()));
       }
     }
-  }
-
-  int _timeStringToSeconds(String time) {
-    final parts = time.split(':').map(int.parse).toList();
-    if (parts.length == 2) return parts[0] * 60 + parts[1];
-    if (parts.length == 3) {
-      return parts[0] * 3600 + parts[1] * 60 + parts[2];
-    }
-    return 0;
   }
 }
 

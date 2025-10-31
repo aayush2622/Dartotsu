@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'dart:math';
 
 import 'package:dartotsu/Functions/Function.dart';
@@ -156,17 +157,18 @@ List<Widget> playerSettings(
             saveData(PrefName.useCustomMpvConfig, value);
           },
         ),
-        Setting(
-          type: SettingType.switchType,
-          name: getString.useLibass,
-          description: getString.useLibassDescription,
-          icon: Icons.subtitles_rounded,
-          isChecked: playerSettings.useLibass,
-          onSwitchChange: (value) {
-            playerSettings.useLibass = value;
-            savePlayerSettings(playerSettings);
-          },
-        ),
+        if (Platform.isAndroid)
+          Setting(
+            type: SettingType.switchType,
+            name: getString.useGpuNext,
+            description: getString.useGpuNextDescription,
+            icon: Icons.memory_rounded,
+            isChecked: playerSettings.useGpuNext,
+            onSwitchChange: (value) {
+              playerSettings.useGpuNext = value;
+              savePlayerSettings(playerSettings);
+            },
+          ),
       ],
     ),
     Text(
@@ -179,6 +181,17 @@ List<Widget> playerSettings(
     ),
     SettingsAdaptor(
       settings: [
+        Setting(
+          type: SettingType.switchType,
+          name: getString.useLibass,
+          description: getString.useLibassDescription,
+          icon: Icons.subtitles_rounded,
+          isChecked: playerSettings.useLibass,
+          onSwitchChange: (value) {
+            playerSettings.useLibass = value;
+            savePlayerSettings(playerSettings);
+          },
+        ),
         Setting(
           type: SettingType.switchType,
           name: getString.showSubtitles,

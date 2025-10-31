@@ -22,6 +22,7 @@ class PlayerSettings {
   int skipDuration;
   int subtitleWeight;
   bool useLibass;
+  bool useGpuNext;
 
   PlayerSettings({
     this.speed = '1x',
@@ -37,6 +38,7 @@ class PlayerSettings {
     this.skipDuration = 85,
     this.subtitleWeight = 5,
     this.useLibass = false,
+    this.useGpuNext = false,
     //  this.useCustomMpvConfig = false,
   });
 
@@ -55,6 +57,7 @@ class PlayerSettings {
       skipDuration: json['skipDuration'],
       subtitleWeight: json['subtitleWeight'],
       useLibass: json['useLibass'] ?? false,
+      useGpuNext: json['useGpuNext'] ?? false,
       //  useCustomMpvConfig: json['useCustomMpvConfig'] ?? false,
     );
   }
@@ -74,6 +77,7 @@ class PlayerSettings {
       'skipDuration': skipDuration,
       'subtitleWeight': subtitleWeight,
       'useLibass': useLibass,
+      'useGpuNext': useGpuNext,
       //'useCustomMpvConfig': useCustomMpvConfig,
     };
   }

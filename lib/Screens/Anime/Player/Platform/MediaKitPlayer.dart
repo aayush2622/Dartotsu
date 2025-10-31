@@ -10,6 +10,32 @@ import 'package:media_kit_video/media_kit_video.dart';
 
 import 'package:dartotsu_extension_bridge/Models/Video.dart' as v;
 
+class MPVDecoder {
+  final String id;
+  final String name;
+  final String androidDecoder;
+  final String iosDecoder;
+  //maybe split in to Linux, MacOS and Windows later?
+  final String desktopDecoder;
+
+  MPVDecoder(
+      {required this.id,
+      required this.name,
+      required this.androidDecoder,
+      required this.iosDecoder,
+      required this.desktopDecoder});
+
+  String getDecoderForPlatform() {
+    if (Platform.isAndroid) {
+      return androidDecoder;
+    } else if (Platform.isIOS) {
+      return iosDecoder;
+    } else {
+      return desktopDecoder;
+    }
+  }
+}
+
 class MediaKitPlayer extends GetxController {
   Rx<BoxFit> resizeMode;
   PlayerSettings settings;
@@ -17,10 +43,10 @@ class MediaKitPlayer extends GetxController {
   late Player player;
   late VideoController videoController;
 
-  RxString currentTime = "00:00".obs;
-  Rx<Duration> currentPosition = const Duration(seconds: 0).obs;
-  RxString maxTime = "00:00".obs;
-  RxString bufferingTime = "00:00".obs;
+  Rx<Duration> currentTime = Duration.zero.obs;
+  Rx<Duration> currentPosition = Duration.zero.obs;
+  Rx<Duration> maxTime = Duration.zero.obs;
+  Rx<Duration> bufferingTime = Duration.zero.obs;
   RxBool isBuffering = true.obs;
   RxBool isPlaying = false.obs;
   RxList<SubtitleTrack> subtitles = <SubtitleTrack>[].obs;
@@ -31,10 +57,14 @@ class MediaKitPlayer extends GetxController {
   Rx<String?> currentSubtitleLanguage = Rx<String?>(null);
   Rx<String?> currentSubtitleUri = Rx<String?>(null);
 
+  late final List<MPVDecoder>? supportedDecoders;
+  Rx<MPVDecoder?> currentDecoder = Rx<MPVDecoder?>(null);
+
   VideoControllerConfiguration getPlatformConfig() {
     if (Platform.isAndroid) {
-      return const VideoControllerConfiguration(
+      return VideoControllerConfiguration(
         androidAttachSurfaceAfterVideoParameters: true,
+        vo: settings.useGpuNext ? "gpu-next" : "gpu",
       );
     }
     return const VideoControllerConfiguration();
@@ -55,8 +85,59 @@ class MediaKitPlayer extends GetxController {
         libassAndroidFont: "assets/fonts/poppins.ttf",
       ),
     );
+
     videoController =
         VideoController(player, configuration: getPlatformConfig());
+
+    if (player.platform is NativePlayer) {
+      final auto = MPVDecoder(
+        id: "auto",
+        name: "Auto",
+        androidDecoder: "auto",
+        iosDecoder: "auto",
+        desktopDecoder: "auto",
+      );
+      final autoSafe = MPVDecoder(
+        id: "auto-safe",
+        name: "Auto Safe",
+        androidDecoder: "auto-safe",
+        iosDecoder: "auto-safe",
+        desktopDecoder: "auto-safe",
+      );
+      final sw = MPVDecoder(
+        id: "sw",
+        name: "Software",
+        androidDecoder: "no",
+        iosDecoder: "no",
+        desktopDecoder: "no",
+      );
+      final hw = MPVDecoder(
+        id: "hw",
+        name: "Hardware",
+        androidDecoder: "mediacodec",
+        iosDecoder: "videotoolbox",
+        //there is a lot of decoders for desktop, could be reduced if split by OS
+        desktopDecoder: "auto",
+      );
+      final hwPlus = MPVDecoder(
+        id: "hw-plus",
+        name: "Hardware Plus",
+        androidDecoder: "mediacodec-copy",
+        iosDecoder: "videotoolbox-copy",
+        //there is a lot of decoders for desktop, could be reduced if split by OS
+        desktopDecoder: "auto-copy",
+      );
+
+      supportedDecoders = [
+        autoSafe,
+        auto,
+        sw,
+        hw,
+        hwPlus,
+      ];
+      //enforcing media-kit default decoders
+      useDecoder(Platform.isAndroid ? autoSafe : auto);
+    }
   }
 
   Future<void> pause() => videoController.player.pause();
@@ -112,12 +193,9 @@ class MediaKitPlayer extends GetxController {
   }
 
   void listenToPlayerStream() {
-    videoController.player.stream.position
-        .listen((e) => currentTime.value = _formatTime(e.inSeconds));
-    videoController.player.stream.duration
-        .listen((e) => maxTime.value = _formatTime(e.inSeconds));
-    videoController.player.stream.buffer
-        .listen((e) => bufferingTime.value = _formatTime(e.inSeconds));
+    videoController.player.stream.position.listen((e) => currentTime.value = e);
+    videoController.player.stream.duration.listen((e) => maxTime.value = e);
+    videoController.player.stream.buffer.listen((e) => bufferingTime.value = e);
     videoController.player.stream.position
         .listen((e) => currentPosition.value = e);
     videoController.player.stream.buffering.listen(isBuffering.call);
@@ -150,15 +228,15 @@ class MediaKitPlayer extends GetxController {
     }
   }
 
-  String _formatTime(int seconds) {
-    final hours = seconds ~/ 3600;
-    final minutes = (seconds % 3600) ~/ 60;
-    final secs = seconds % 60;
-    return [
-      if (hours > 0) hours.toString().padLeft(2, '0'),
-      minutes.toString().padLeft(2, '0'),
-      secs.toString().padLeft(2, '0'),
-    ].join(":");
+  Future<void> useDecoder(MPVDecoder decoder) {
+    if (supportedDecoders == null || !supportedDecoders!.contains(decoder)) {
+      throw ArgumentError('Decoder ${decoder.id} is not supported');
+    }
+
+    return setNativePropertyString("hwdec", decoder.getDecoderForPlatform())
+        .then((_) {
+      currentDecoder.value = decoder;
+    });
   }
 
   void _updateSubtitleTrack(SubtitleTrack track) {
@@ -226,8 +304,7 @@ class MediaKitPlayer extends GetxController {
       _getNativeProperty(property).then((value) => int.parse(value));
 
   Future<bool> getNativePropertyBool(String property) =>
-      _getNativeProperty(property)
-          .then((value) => value == 'true' || value == '1');
+      _getNativeProperty(property).then((value) => value == 'yes');
 
   Future<void> setNativePropertyString(String property, String value) =>
       _setNativeProperty(property, value);
@@ -239,7 +316,7 @@ class MediaKitPlayer extends GetxController {
       _setNativeProperty(property, value.toString());
 
   Future<void> setNativePropertyBool(String property, bool value) =>
-      _setNativeProperty(property, value ? '1' : '0');
+      _setNativeProperty(property, value ? 'yes' : 'no');
 
   Future<void> observeNativePropertyString(
           String property, Future<void> Function(String) listener,
@@ -262,8 +339,7 @@ class MediaKitPlayer extends GetxController {
   Future<void> observeNativePropertyBool(
           String property, Future<void> Function(bool) listener,
           {bool waitForInitialization = true}) =>
-      _observeNativeProperty(
-          property, (value) => listener(value == 'true' || value == '1'),
+      _observeNativeProperty(property, (value) => listener(value == 'yes'),
           waitForInitialization: waitForInitialization);
 
   Future<void> unobserveNativeProperty(String property,

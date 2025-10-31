@@ -1271,6 +1271,18 @@ abstract class AppLocalizations {
   /// **'Use Libass for subtitle rendering (overrides other subtitle settings)'**
   String get useLibassDescription;
 
+  /// No description provided for @useGpuNext.
+  ///
+  /// In en, this message translates to:
+  /// **'Use gpu-next'**
+  String get useGpuNext;
+
+  /// No description provided for @useGpuNextDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'New rendering backend (may cause visual artifacts)'**
+  String get useGpuNextDescription;
+
   /// No description provided for @readerSettings.
   ///
   /// In en, this message translates to:

@@ -563,6 +563,7 @@
   "thumbLessSeekBarDesc": "Remove thumb from the seek bar",
   "@thumbLessSeekBarDesc": {},
   "customMPV": "Custom MPV Configuration",
+  "@customMPV": {},
   "customMPVDescription": "Enable this option to use your own MPV configuration file. Place your custom config at: {path}",
   "@customMPVDescription" : {
     "placeholders": {
@@ -612,6 +613,10 @@
   "@useLibass": {},
   "useLibassDescription": "Use Libass for subtitle rendering (overrides other subtitle settings)",
   "@useLibassDescription": {},
+  "useGpuNext": "Use gpu-next",
+  "@useGpuNext": {},
+  "useGpuNextDescription": "New rendering backend (may cause visual artifacts)",
+  "@useGpuNextDescription": {},
 
   "readerSettings": "Reader Settings",
   "@readerSettings": {},

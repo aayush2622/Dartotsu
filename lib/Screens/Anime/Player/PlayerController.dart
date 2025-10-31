@@ -86,9 +86,7 @@ class _PlayerControllerState extends State<PlayerController> {
   }
 
   Future<void> _init() async {
-    while (controller.maxTime.value == '00:00') {
-      await Future.delayed(const Duration(milliseconds: 100));
-    }
+    await controller.videoController.waitUntilFirstFrameRendered;
 
     setDiscordRpc();
     setTimeStamps();
@@ -141,9 +139,7 @@ class _PlayerControllerState extends State<PlayerController> {
     Discord.setRpc(
       media,
       episode: currentEpisode,
-      eTime: _timeStringToSeconds(
-        controller.maxTime.value,
-      ).toInt(),
+      eTime: controller.maxTime.value.inSeconds,
       currentTime: currentProgress ?? 0,
     );
   }
@@ -152,7 +148,7 @@ class _PlayerControllerState extends State<PlayerController> {
     timeStamps.value = await AniSkip.getResult(
           malId: media.idMAL,
           episodeNumber: currentEpisode.episodeNumber.toInt(),
-          episodeLength: _timeStringToSeconds(controller.maxTime.value).toInt(),
+          episodeLength: controller.maxTime.value.inSeconds,
           useProxyForTimeStamps: false,
         ) ??
         [];
@@ -186,7 +182,7 @@ class _PlayerControllerState extends State<PlayerController> {
     var key = "${media.id}-${currentEpisode.episodeNumber}-$sourceName";
     var maxProgress = controller.maxTime.value;
     saveCustomData<int>("$key-current", currentProgress);
-    saveCustomData<int>("$key-max", _timeStringToSeconds(maxProgress).toInt());
+    saveCustomData<int>("$key-max", maxProgress.inSeconds);
   }
 
   @override
@@ -234,15 +230,6 @@ class _PlayerControllerState extends State<PlayerController> {
     ].join(":");
   }
 
-  double _timeStringToSeconds(String time) {
-    final parts = time.split(':').map(int.parse).toList();
-    if (parts.length == 2) return (parts[0] * 60 + parts[1]).toDouble();
-    if (parts.length == 3) {
-      return (parts[0] * 3600 + parts[1] * 60 + parts[2]).toDouble();
-    }
-    return 0.0;
-  }
-
   Widget _buildTimeInfo() {
     return Obx(
       () => Row(
@@ -252,10 +239,12 @@ class _PlayerControllerState extends State<PlayerController> {
           Row(
             children: [
               Text(
-                controller.currentTime.value == '00:00' &&
-                        currentProgress != null
-                    ? _formatTime(currentProgress!)
-                    : controller.currentTime.value,
+                _formatTime(
+                  controller.currentTime.value == Duration.zero &&
+                          currentProgress != null
+                      ? currentProgress!
+                      : controller.currentTime.value.inSeconds,
+                ),
                 style: const TextStyle(color: Colors.white),
               ),
               Text(
@@ -265,9 +254,10 @@ class _PlayerControllerState extends State<PlayerController> {
                 ),
               ),
               Text(
-                controller.maxTime.value == '00:00' && maxProgress != null
-                    ? _formatTime(maxProgress!)
-                    : controller.maxTime.value,
+                _formatTime(controller.maxTime.value == Duration.zero &&
+                        maxProgress != null
+                    ? maxProgress!
+                    : controller.maxTime.value.inSeconds),
                 style: TextStyle(
                   color: Colors.white.withValues(alpha: 0.5),
                 ),
@@ -311,16 +301,17 @@ class _PlayerControllerState extends State<PlayerController> {
               ignoring: isControlsLocked.value,
               child: Obx(() {
                 final bufferingValue =
-                    _timeStringToSeconds(controller.bufferingTime.value);
-                final currentValue = controller.currentTime.value == '00:00' &&
-                        currentProgress != null
-                    ? currentProgress!.toDouble()
-                    : _timeStringToSeconds(controller.currentTime.value);
+                    controller.bufferingTime.value.inSeconds.toDouble();
+                final currentValue =
+                    controller.currentTime.value == Duration.zero &&
+                            currentProgress != null
+                        ? currentProgress!.toDouble()
+                        : controller.currentTime.value.inSeconds.toDouble();
 
-                final maxValue =
-                    controller.maxTime.value == '00:00' && maxProgress != null
-                        ? maxProgress!.toDouble()
-                        : _timeStringToSeconds(controller.maxTime.value);
+                final maxValue = controller.maxTime.value == Duration.zero &&
+                        maxProgress != null
+                    ? maxProgress!.toDouble()
+                    : controller.maxTime.value.inSeconds.toDouble();
 
                 return SliderTheme(
                   data: SliderThemeData(
@@ -889,11 +880,11 @@ class _PlayerControllerState extends State<PlayerController> {
       controller.seek(Duration(seconds: current.interval.endTime.toInt()));
       return;
     }
-    var currentTime = _timeStringToSeconds(controller.currentTime.value);
-    var maxTime = _timeStringToSeconds(controller.maxTime.value);
+    var currentTime = controller.currentTime.value.inSeconds.toDouble();
+    var maxTime = controller.maxTime.value.inSeconds;
     var newTime = currentTime + seconds;
     if (newTime > maxTime) {
-      newTime = maxTime;
+      newTime = maxTime.toDouble();
     }
     controller.seek(Duration(seconds: newTime.toInt()));
   }
