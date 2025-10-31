@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:collection/collection.dart';
 import 'package:dartotsu/Adaptor/Episode/EpisodeAdaptor.dart';
-import 'package:dartotsu/Screens/Anime/Player/Platform/WindowsPlayer.dart';
+import 'package:dartotsu/Screens/Anime/Player/Platform/MediaKitPlayer.dart';
 import 'package:dartotsu/Screens/Anime/Player/Widgets/SectionedRoundedRectSliderTrackShape.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:dartotsu_extension_bridge/Models/Video.dart' as v;
@@ -27,7 +27,6 @@ import '../../../../../../Api/Discord/DiscordService.dart';
 import '../../../../../../Api/EpisodeDetails/Aniskip/Aniskip.dart';
 import '../../../Preferences/IsarDataClasses/MediaSettings/MediaSettings.dart';
 import '../../Settings/SettingsPlayerScreen.dart';
-import 'Platform/BasePlayer.dart';
 import 'Player.dart';
 
 class PlayerController extends StatefulWidget {
@@ -49,7 +48,7 @@ class _PlayerControllerState extends State<PlayerController> {
   late Rx<BoxFit> resizeMode;
   late Source source;
   late RxBool showEpisodes;
-  late BasePlayer controller;
+  late MediaKitPlayer controller;
   late v.Video currentQuality;
   late PlayerSettings settings;
   late int fitType;
@@ -340,16 +339,17 @@ class _PlayerControllerState extends State<PlayerController> {
                           sections: timeStamps.map(
                             (timestamp) {
                               return TrackSection(
-                                  start: timestamp.interval.startTime /
-                                      (maxValue > 0 ? maxValue : 1),
-                                  end: timestamp.interval.endTime /
-                                      (maxValue > 0 ? maxValue : 1),
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .primary
-                                      .withValues(
-                                        alpha: 0.65,
-                                      ));
+                                start: timestamp.interval.startTime /
+                                    (maxValue > 0 ? maxValue : 1),
+                                end: timestamp.interval.endTime /
+                                    (maxValue > 0 ? maxValue : 1),
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .inversePrimary
+                                    .withValues(
+                                      alpha: 0.65,
+                                    ),
+                              );
                             },
                           ).toList(),
                           chapters: controller.chapters
@@ -375,10 +375,8 @@ class _PlayerControllerState extends State<PlayerController> {
                       controller.seek(Duration(seconds: val.toInt()));
                     },
                     onChanged: (double value) async {
-                      if (controller is WindowsPlayer &&
-                          (controller as WindowsPlayer).player.platform
-                              is NativePlayer) {
-                        await (controller as WindowsPlayer).nativeCommand(
+                      if (controller.player.platform is NativePlayer) {
+                        await controller.nativeCommand(
                           ['seek', value.toString(), "absolute+keyframes"],
                         );
                       } else {

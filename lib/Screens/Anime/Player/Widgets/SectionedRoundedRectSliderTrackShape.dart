@@ -35,7 +35,7 @@ class SectionedRoundedRectSliderTrackShape extends SliderTrackShape
     this.chapters = const [],
   });
 
-  //Code taken from {@link RoundedRectSliderTrackShape} and modified to add sections + chapeters
+  //Code taken from {@link RoundedRectSliderTrackShape} and modified to add sections + chapters
   @override
   void paint(
     PaintingContext context,

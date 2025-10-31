@@ -4,18 +4,32 @@ import 'package:dartotsu/Preferences/IsarDataClasses/DefaultPlayerSettings/Defau
 import 'package:dartotsu/Preferences/PrefManager.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
+import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:media_kit_video/media_kit_video.dart';
 
 import 'package:dartotsu_extension_bridge/Models/Video.dart' as v;
-import 'BasePlayer.dart';
 
-class WindowsPlayer extends BasePlayer {
+class MediaKitPlayer extends GetxController {
   Rx<BoxFit> resizeMode;
   PlayerSettings settings;
 
   late Player player;
   late VideoController videoController;
+
+  RxString currentTime = "00:00".obs;
+  Rx<Duration> currentPosition = const Duration(seconds: 0).obs;
+  RxString maxTime = "00:00".obs;
+  RxString bufferingTime = "00:00".obs;
+  RxBool isBuffering = true.obs;
+  RxBool isPlaying = false.obs;
+  RxList<SubtitleTrack> subtitles = <SubtitleTrack>[].obs;
+  RxList<AudioTrack> audios = <AudioTrack>[].obs;
+  RxList<String> subtitle = <String>[].obs;
+  RxList<Chapter> chapters = <Chapter>[].obs;
+  Rx<double> currentSpeed = 1.0.obs;
+  Rx<String?> currentSubtitleLanguage = Rx<String?>(null);
+  Rx<String?> currentSubtitleUri = Rx<String?>(null);
 
   VideoControllerConfiguration getPlatformConfig() {
     if (Platform.isAndroid) {
@@ -26,7 +40,7 @@ class WindowsPlayer extends BasePlayer {
     return const VideoControllerConfiguration();
   }
 
-  WindowsPlayer(this.resizeMode, this.settings) {
+  MediaKitPlayer(this.resizeMode, this.settings) {
     final useCustomConfig = loadData(PrefName.useCustomMpvConfig);
     final mpvConfPath = loadData(PrefName.mpvConfigDir);
 
@@ -45,27 +59,20 @@ class WindowsPlayer extends BasePlayer {
         VideoController(player, configuration: getPlatformConfig());
   }
 
-  @override
   Future<void> pause() => videoController.player.pause();
 
-  @override
   Future<void> play() => videoController.player.play();
 
-  @override
   Future<void> playOrPause() => videoController.player.playOrPause();
 
-  @override
   Future<void> seek(Duration duration) => videoController.player.seek(duration);
 
-  @override
   Future<void> setRate(double rate) => videoController.player.setRate(rate);
 
-  @override
   Future<void> setVolume(double volume) =>
       videoController.player.setVolume(volume);
 
-  @override
-  Future<void> open(v.Video video, Duration duration) =>
+  Future<void> open(v.Video video, Duration duration) async =>
       videoController.player.open(
         Media(
           video.url,
@@ -74,7 +81,6 @@ class WindowsPlayer extends BasePlayer {
         ),
       );
 
-  @override
   Future<void> setSubtitle(String subtitleUri, String language, bool isUri) =>
       videoController.player.setSubtitleTrack(isUri
           ? SubtitleTrack.uri(subtitleUri, title: language)
@@ -86,11 +92,9 @@ class WindowsPlayer extends BasePlayer {
               data: false,
             ));
 
-  @override
   Future<void> resetSubtitle() =>
       videoController.player.setSubtitleTrack(SubtitleTrack.no());
 
-  @override
   Future<void> setAudio(String audioUri, String language, bool isUri) =>
       videoController.player.setAudioTrack(isUri
           ? AudioTrack.uri(audioUri, title: language)
@@ -107,7 +111,6 @@ class WindowsPlayer extends BasePlayer {
     player.dispose();
   }
 
-  @override
   void listenToPlayerStream() {
     videoController.player.stream.position
         .listen((e) => currentTime.value = _formatTime(e.inSeconds));
@@ -177,7 +180,6 @@ class WindowsPlayer extends BasePlayer {
     }
   }
 
-  @override
   Widget playerWidget() {
     return Video(
       filterQuality: FilterQuality.medium,
@@ -216,20 +218,26 @@ class WindowsPlayer extends BasePlayer {
 
   Future<String> getNativePropertyString(String property) =>
       _getNativeProperty(property);
+
   Future<double> getNativePropertyDouble(String property) =>
       _getNativeProperty(property).then((value) => double.parse(value));
+
   Future<int> getNativePropertyInt(String property) =>
       _getNativeProperty(property).then((value) => int.parse(value));
+
   Future<bool> getNativePropertyBool(String property) =>
       _getNativeProperty(property)
           .then((value) => value == 'true' || value == '1');
 
   Future<void> setNativePropertyString(String property, String value) =>
       _setNativeProperty(property, value);
+
   Future<void> setNativePropertyDouble(String property, double value) =>
       _setNativeProperty(property, value.toString());
+
   Future<void> setNativePropertyInt(String property, int value) =>
       _setNativeProperty(property, value.toString());
+
   Future<void> setNativePropertyBool(String property, bool value) =>
       _setNativeProperty(property, value ? '1' : '0');
 
@@ -238,16 +246,19 @@ class WindowsPlayer extends BasePlayer {
           {bool waitForInitialization = true}) =>
       _observeNativeProperty(property, listener,
           waitForInitialization: waitForInitialization);
+
   Future<void> observeNativePropertyDouble(
           String property, Future<void> Function(double) listener,
           {bool waitForInitialization = true}) =>
       _observeNativeProperty(property, (value) => listener(double.parse(value)),
           waitForInitialization: waitForInitialization);
+
   Future<void> observeNativePropertyInt(
           String property, Future<void> Function(int) listener,
           {bool waitForInitialization = true}) =>
       _observeNativeProperty(property, (value) => listener(int.parse(value)),
           waitForInitialization: waitForInitialization);
+
   Future<void> observeNativePropertyBool(
           String property, Future<void> Function(bool) listener,
           {bool waitForInitialization = true}) =>
@@ -271,4 +282,11 @@ class WindowsPlayer extends BasePlayer {
     return (videoController.player.platform as NativePlayer)
         .command(command, waitForInitialization: waitForInitialization);
   }
+}
+
+class Chapter {
+  final String title;
+  final double startTime;
+
+  Chapter({required this.title, required this.startTime});
 }

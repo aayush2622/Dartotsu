@@ -20,8 +20,7 @@ import '../../../../../../Widgets/ScrollConfig.dart';
 import '../../Detail/Tabs/Watch/Anime/Widget/AnimeCompactSettings.dart';
 import '../../Detail/Tabs/Watch/Anime/Widget/BuildChunkSelector.dart';
 import '../../Settings/SettingsPlayerScreen.dart';
-import 'Platform/BasePlayer.dart';
-import 'Platform/WindowsPlayer.dart';
+import 'Platform/MediaKitPlayer.dart';
 import 'PlayerController.dart';
 import 'Widgets/Indicator.dart';
 
@@ -49,7 +48,7 @@ class MediaPlayer extends StatefulWidget {
 
 class MediaPlayerState extends State<MediaPlayer>
     with TickerProviderStateMixin {
-  late BasePlayer videoPlayerController;
+  late MediaKitPlayer videoPlayerController;
   late v.Video currentQuality;
   late Rx<BoxFit> resizeMode;
   late PlayerSettings settings;
@@ -99,7 +98,7 @@ class MediaPlayerState extends State<MediaPlayer>
 
   void _initializePlayer() {
     currentQuality = widget.videos[widget.index];
-    videoPlayerController = WindowsPlayer(resizeMode, settings);
+    videoPlayerController = MediaKitPlayer(resizeMode, settings);
     var sourceName = context.currentService(listen: false).getName;
     var currentProgress = loadCustomData<int>(
       "${widget.media.id}-${widget.currentEpisode.episodeNumber}-$sourceName-current",
