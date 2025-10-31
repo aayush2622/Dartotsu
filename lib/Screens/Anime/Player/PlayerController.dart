@@ -550,7 +550,7 @@ class _PlayerControllerState extends State<PlayerController> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          (hasPreviousEpisode
+          hasPreviousEpisode
               ? _buildControlButton(
                   icon: Icons.skip_previous_rounded,
                   size: 42,
@@ -565,7 +565,7 @@ class _PlayerControllerState extends State<PlayerController> {
                     );
                   },
                 )
-              : const SizedBox(width: 42)),
+              : const SizedBox(width: 42),
           const SizedBox(width: 36),
           Obx(
             () => controller.isBuffering.value

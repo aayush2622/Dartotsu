@@ -50,7 +50,8 @@ class MediaInfoPageState extends State<MediaInfoPage> {
         tag: "${widget.mediaData.id.toString()}-${service.getName}");
 
     var key = "${service.getName}-${widget.mediaData.id}-Settings";
-    widget.mediaData.settings = loadCustomData(key) ?? MediaSettings();
+    widget.mediaData.settings =
+        loadCustomData<MediaSettings>(key) ?? MediaSettings();
     _selectedIndex.value = widget.mediaData.settings.navBarIndex;
     pageController = PageController(initialPage: _selectedIndex.value);
     mediaData = widget.mediaData;

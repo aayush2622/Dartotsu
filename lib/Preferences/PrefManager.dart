@@ -103,7 +103,7 @@ class PrefManager {
     T? defaultValue,
   }) {
     if (cache.containsKey(key) == true) {
-      if (cache[key] != null) return null;
+      if (cache[key] == null) return null;
       return cache[key] as T;
     }
     return defaultValue;
