@@ -718,22 +718,37 @@ class MediaPlayerState extends State<MediaPlayer>
         },
       ).showDialog();
 
-  void _handleKeyPress(KeyEvent event) {
+  void _handleKeyPress(KeyEvent event) async {
     if (event is KeyDownEvent) {
-      if (event.logicalKey == LogicalKeyboardKey.arrowLeft) {
-        _skipSegments(SkipDirection.backward);
-      } else if (event.logicalKey == LogicalKeyboardKey.arrowRight) {
-        _skipSegments(SkipDirection.forward);
+      final isShiftPressed = HardwareKeyboard.instance.logicalKeysPressed
+              .contains(LogicalKeyboardKey.shiftLeft) ||
+          HardwareKeyboard.instance.logicalKeysPressed
+              .contains(LogicalKeyboardKey.shiftRight) ||
+          HardwareKeyboard.instance.logicalKeysPressed
+              .contains(LogicalKeyboardKey.shift);
+
+      if (event.logicalKey == LogicalKeyboardKey.arrowLeft ||
+          event.logicalKey == LogicalKeyboardKey.arrowRight) {
+        final isRight = event.logicalKey == LogicalKeyboardKey.arrowRight;
+
+        if (isShiftPressed) {
+          await videoPlayerController
+              .nativeCommand([isRight ? 'frame-step' : 'frame-back-step']);
+          await videoPlayerController
+              .nativeCommand(['set_property', 'pause', 'yes']);
+        } else {
+          _skipSegments(
+              isRight ? SkipDirection.forward : SkipDirection.backward);
+        }
       } else if (event.logicalKey == LogicalKeyboardKey.space) {
-        videoPlayerController.playOrPause();
+        await videoPlayerController.playOrPause();
       } else if (event.logicalKey == LogicalKeyboardKey.enter) {
         showEpisodes.value = !showEpisodes.value;
       } else if (RegExp(r'^[0-9]$').hasMatch(event.logicalKey.keyLabel)) {
-        var keyNumber = int.parse(event.logicalKey.keyLabel);
-
-        var videoDurationSeconds =
+        final keyNumber = int.parse(event.logicalKey.keyLabel);
+        final videoDurationSeconds =
             _timeStringToSeconds(videoPlayerController.maxTime.value);
-        var targetSeconds = (keyNumber / 10) * videoDurationSeconds;
+        double targetSeconds;
 
         if (keyNumber == 1) {
           targetSeconds = 0;
@@ -743,7 +758,8 @@ class MediaPlayerState extends State<MediaPlayer>
           targetSeconds = (keyNumber / 10) * videoDurationSeconds;
         }
 
-        videoPlayerController.seek(Duration(seconds: targetSeconds.toInt()));
+        await videoPlayerController
+            .seek(Duration(seconds: targetSeconds.toInt()));
       }
     }
   }
