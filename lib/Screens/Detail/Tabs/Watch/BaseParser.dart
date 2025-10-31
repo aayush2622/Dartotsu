@@ -60,7 +60,7 @@ abstract class BaseParser extends GetxController {
           : source.name!;
     }
 
-    var lastUsedSource = media.settings.server;
+    var lastUsedSource = media.settings.lastUsedSource;
     if (lastUsedSource == null ||
         !sortedSources.any((e) => nameAndLang(e) == lastUsedSource)) {
       lastUsedSource = nameAndLang(sortedSources.first);

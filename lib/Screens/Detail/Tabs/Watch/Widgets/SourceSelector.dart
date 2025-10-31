@@ -52,7 +52,7 @@ class _SourceSelectorState extends State<SourceSelector> {
           : source.name!;
     }
 
-    var lastUsedSource = widget.mediaData.settings.server;
+    var lastUsedSource = widget.mediaData.settings.lastUsedSource;
     if (lastUsedSource == null ||
         !sources.any((e) => nameAndLang(e) == lastUsedSource)) {
       lastUsedSource = nameAndLang(sources.first);
@@ -75,7 +75,7 @@ class _SourceSelectorState extends State<SourceSelector> {
                 borderColor: theme.primary,
                 prefixIcon: Icons.source,
                 onChanged: (name) async {
-                  widget.mediaData.settings.server = name;
+                  widget.mediaData.settings.lastUsedSource = name;
                   MediaSettings.saveMediaSettings(widget.mediaData);
                   lastUsedSource = name;
                   source = sources.firstWhereOrNull(

@@ -732,10 +732,8 @@ class MediaPlayerState extends State<MediaPlayer>
         final isRight = event.logicalKey == LogicalKeyboardKey.arrowRight;
 
         if (isShiftPressed) {
-          await videoPlayerController
-              .nativeCommand([isRight ? 'frame-step' : 'frame-back-step']);
-          await videoPlayerController
-              .nativeCommand(['set_property', 'pause', 'yes']);
+          await videoPlayerController.nativeCommand(
+              [isRight ? 'frame-step' : 'frame-back-step', '1', 'seek']);
         } else {
           _skipSegments(
               isRight ? SkipDirection.forward : SkipDirection.backward);
