@@ -8,6 +8,7 @@ import 'package:dartotsu/Functions/Function.dart';
 import 'package:dartotsu/Screens/Anime/Player/MpvConfig.dart';
 import 'package:dartotsu/Screens/Login/LoginScreen.dart';
 import 'package:dartotsu/Screens/Manga/MangaScreen.dart';
+import 'package:dartotsu/Screens/Settings/SettingsPlayerScreen.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:desktop_webview_window/desktop_webview_window.dart';
 import 'package:dynamic_color/dynamic_color.dart';
@@ -21,6 +22,7 @@ import 'package:intl/intl.dart';
 import 'package:isar/isar.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:provider/provider.dart';
+import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 import 'package:shorebird_code_push/shorebird_code_push.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -34,6 +36,7 @@ import 'Screens/Home/HomeScreen.dart';
 import 'Screens/HomeNavBar.dart';
 import 'Screens/HomeNavbarDesktop.dart';
 import 'Screens/HomeNavbarMobile.dart';
+import 'Screens/Onboarding/OnboardingScreen.dart';
 import 'Services/MediaService.dart';
 import 'Services/ServiceSwitcher.dart';
 import 'Theme/ThemeManager.dart';
@@ -117,6 +120,33 @@ Future init() async {
 
   Discord.getSavedToken();
   initDeepLinkListener();
+  initIntentListener();
+}
+
+void initIntentListener() async {
+  if (!Platform.isAndroid) return;
+
+  final intent = ReceiveSharingIntent.instance;
+
+  void handleFiles(List<SharedMediaFile> files) {
+    if (files.isEmpty) return;
+    final file = files.first;
+    final path = file.path;
+    final name = file.path.split('/').last;
+    openPlayer(Get.context!, path, name);
+  }
+
+  intent.getMediaStream().listen(
+        handleFiles,
+        onError: (err) => debugPrint('Error receiving shared media: $err'),
+      );
+
+  final initialFiles = await intent.getInitialMedia();
+  if (initialFiles.isNotEmpty) {
+    WidgetsBinding.instance
+        .addPostFrameCallback((_) => handleFiles(initialFiles));
+    await intent.reset();
+  }
 }
 
 void initDeepLinkListener() async {
@@ -260,7 +290,9 @@ class MyApp extends StatelessWidget {
             },
             theme: getTheme(lightDynamic, themeManager),
             darkTheme: getTheme(darkDynamic, themeManager),
-            home: const MainActivity(),
+            home: !loadCustomData("initialLoaded", defaultValue: false)!
+                ? const MainActivity()
+                : const OnboardingScreen(),
           );
         },
       ),

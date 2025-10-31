@@ -45,7 +45,7 @@ class SettingsPlayerScreenState extends BaseSettingsScreen {
   List<Widget> get settingsList => playerSettings(context, setState);
 
   @override
-  Future<void> onIconPressed() async => openPlayer(context);
+  Future<void> onIconPressed() async => selectFile(context);
 }
 
 List<Widget> playerSettings(
@@ -360,7 +360,7 @@ List<Widget> playerSettings(
   ];
 }
 
-Future<void> openPlayer(BuildContext context) async {
+Future<void> selectFile(BuildContext context) async {
   if (!await PrefManager.videoPermission()) return;
   final result = await FilePicker.platform.pickFiles(
     type: FileType.custom,
@@ -370,10 +370,12 @@ Future<void> openPlayer(BuildContext context) async {
   if (result == null) return;
 
   final pickedFile = result.files.first;
-
   if (!context.mounted) return;
+  openPlayer(context, pickedFile.path!, pickedFile.name);
+}
 
-  final episode = DEpisode(episodeNumber: '1', name: pickedFile.name);
+Future<void> openPlayer(BuildContext context, String path, String name) async {
+  final episode = DEpisode(episodeNumber: '1', name: name);
   final media = Media(
     id: Random().nextInt(900000000),
     nameRomaji: 'Local file',
@@ -392,7 +394,7 @@ Future<void> openPlayer(BuildContext context) async {
     context,
     MediaPlayer(
       isOffline: true,
-      videos: [Video(pickedFile.path!, pickedFile.path!, 'Media')],
+      videos: [Video(path, path, 'Media')],
       currentEpisode: episode,
       index: 0,
       source: Source(),
