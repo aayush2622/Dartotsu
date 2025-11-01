@@ -211,9 +211,10 @@ void onEpisodeClick(
   Source source,
   Media mediaData,
   VoidCallback? onTapCallback, {
-  String? server,
+  List<Video>? servers,
 }) async {
   if (mediaData.nameRomaji == "Local files") {
+    onTapCallback?.call();
     navigateToPage(
       context,
       MediaPlayer(
@@ -226,10 +227,28 @@ void onEpisodeClick(
     );
     return;
   }
-
+  String? lastSelectedSource = mediaData.settings.server;
+  final autoSourceMatch =
+      AutoSourceMatch.fromJson(loadData(PrefName.autoSourceMatch));
+  if (servers != null) {
+    final index = findBestSourceIndex(
+            servers, lastSelectedSource ?? "", autoSourceMatch) ??
+        0;
+    onTapCallback?.call();
+    navigateToPage(
+      context,
+      MediaPlayer(
+        media: mediaData,
+        index: index,
+        videos: servers,
+        currentEpisode: episode,
+        source: source,
+      ),
+    );
+    return;
+  }
   final autoKey = "${mediaData.id}-${source.name}-autoSource";
   bool autoSelect = loadCustomData(autoKey, defaultValue: false)!;
-  String? lastSelectedSource = mediaData.settings.server;
 
   if (!autoSelect) {
     openSourceSelectionSheet(
@@ -252,8 +271,6 @@ void onEpisodeClick(
   if (!loadCustomData(autoKey, defaultValue: false)!) {
     return;
   }
-  final autoSourceMatch =
-      AutoSourceMatch.fromJson(loadData(PrefName.autoSourceMatch));
 
   final index =
       findBestSourceIndex(videos, lastSelectedSource, autoSourceMatch);

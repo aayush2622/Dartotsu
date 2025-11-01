@@ -138,7 +138,24 @@ class _PlayerControllerState extends State<PlayerController> {
     }
   }
 
+  bool tryPreLoading = true;
   Future<void> setupAutoplay() async {
+    List<Video> videos = [];
+    controller.videoController.player.stream.position.listen((p) async {
+      var current = p.inSeconds;
+      var total = controller.maxTime.value.inSeconds;
+      var episodeAboutToEnd = (current / total) > 0.8;
+      if (episodeAboutToEnd && tryPreLoading) {
+        tryPreLoading = false;
+        final episodeList = media.anime!.episodes;
+        final nextEpisode = episodeList!.values.firstWhereOrNull(
+          (e) =>
+              e.episodeNumber.toDouble() >
+              currentEpisode.episodeNumber.toDouble(),
+        );
+        videos = await source.methods.getVideoList(nextEpisode!);
+      }
+    });
     controller.videoCompleted.listen((_) {
       if (settings.autoPlay != true) return;
 
@@ -156,6 +173,7 @@ class _PlayerControllerState extends State<PlayerController> {
         source,
         media,
         () => Get.back(),
+        servers: videos.isNotEmpty ? videos : null,
       );
     });
   }
