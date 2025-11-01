@@ -148,11 +148,8 @@ class _PlayerControllerState extends State<PlayerController> {
             e.episodeNumber.toDouble() >
             currentEpisode.episodeNumber.toDouble(),
       );
-
       if (!mounted || nextEpisode == null) return;
-
       snackString("Auto-playing Episode ${nextEpisode.episodeNumber}...");
-
       return onEpisodeClick(
         context,
         nextEpisode,

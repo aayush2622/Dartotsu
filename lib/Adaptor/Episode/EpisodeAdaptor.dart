@@ -9,6 +9,7 @@ import 'package:string_similarity/string_similarity.dart';
 
 import '../../Animation/ScaleAnimation.dart';
 import '../../DataClass/Media.dart';
+import '../../Preferences/IsarDataClasses/MediaSettings/MediaSettings.dart';
 import '../../Screens/Anime/Player/Player.dart';
 import '../../Widgets/CustomBottomDialog.dart';
 import 'EpisodeCompactViewHolder.dart';
@@ -211,8 +212,9 @@ void onEpisodeClick(
   DEpisode episode,
   Source source,
   Media mediaData,
-  VoidCallback? onEpisodeClick,
-) {
+  VoidCallback? onEpisodeClick, {
+  String? server, // if server is not empty just load this
+}) {
   if (mediaData.nameRomaji == 'Local files') {
     navigateToPage(
       context,
@@ -226,8 +228,6 @@ void onEpisodeClick(
     );
     return;
   }
-
-  final lastQualityKey = "${mediaData.id}-${source.name}-lastQuality";
   final autoSourceKey = "${mediaData.id}-${source.name}-autoSource";
 
   var autoSelectSourceSetting =
@@ -239,26 +239,27 @@ void onEpisodeClick(
     title: 'Select Source',
     viewList: [
       StatefulBuilder(
-          builder: (context, setState) => Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                child: Row(
-                  children: [
-                    Checkbox(
-                      value: autoSelectSourceSetting,
-                      onChanged: (checked) {
-                        autoSelectSourceSetting = checked ?? false;
-                        saveCustomData(autoSourceKey, autoSelectSourceSetting);
-                        setState(() {});
-                      },
-                      activeColor: Theme.of(context).colorScheme.primary,
-                    ),
-                    const Text(
-                      'Auto Select Source',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-              )),
+        builder: (context, setState) => Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+          child: Row(
+            children: [
+              Checkbox(
+                value: autoSelectSourceSetting,
+                onChanged: (checked) {
+                  autoSelectSourceSetting = checked ?? false;
+                  saveCustomData(autoSourceKey, autoSelectSourceSetting);
+                  setState(() {});
+                },
+                activeColor: Theme.of(context).colorScheme.primary,
+              ),
+              const Text(
+                'Auto Select Source',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+        ),
+      ),
       FutureBuilder<List<Video>>(
         future: videos,
         builder: (context, snapshot) {
@@ -269,84 +270,8 @@ void onEpisodeClick(
           } else if (snapshot.hasData) {
             var videos = snapshot.data!;
 
-            return Column(
-              children: videos.map((item) {
-                var index = videos.indexOf(item);
+            return const Center(child: Text('No sources available'));
 
-                var allSubtitles = <Track>[];
-                var addedSubtitleTitles = <String>{};
-                for (var video in videos) {
-                  if (video.subtitles != null && video.subtitles!.length > 1) {
-                    for (var subtitle in video.subtitles!) {
-                      if (!addedSubtitleTitles.contains(subtitle.label)) {
-                        addedSubtitleTitles.add(subtitle.label ?? '');
-                        var newSubtitle = Track(
-                          label: '${subtitle.label} (from external)',
-                          file: subtitle.file,
-                        );
-                        allSubtitles.add(newSubtitle);
-                      }
-                    }
-                  }
-                }
-
-                for (var video in videos) {
-                  if (video.subtitles == null || video.subtitles!.length <= 1) {
-                    video.subtitles = List.from(allSubtitles);
-                  }
-                }
-
-                return Card(
-                  margin:
-                      const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  elevation: 4,
-                  child: InkWell(
-                    onTap: () {
-                      saveCustomData<String?>(
-                          lastQualityKey, item.title ?? item.quality);
-                      onEpisodeClick?.call();
-                      Get.back();
-                      navigateToPage(
-                        context,
-                        MediaPlayer(
-                          media: mediaData,
-                          index: index,
-                          videos: videos,
-                          currentEpisode: episode,
-                          source: source,
-                        ),
-                      );
-                    },
-                    borderRadius: BorderRadius.circular(12),
-                    child: Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            child: Text(
-                              item.title ?? item.quality,
-                              style: const TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                          Icon(
-                            Icons.play_arrow,
-                            size: 24,
-                            color: Theme.of(context).colorScheme.primary,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                );
-              }).toList(),
-            );
           } else {
             return const Center(child: Text('No sources available'));
           }
@@ -356,8 +281,7 @@ void onEpisodeClick(
   );
 
   if (autoSelectSourceSetting == true) {
-    var lastQualityTitle =
-        loadCustomData<String?>(lastQualityKey, defaultValue: null);
+    var lastQualityTitle = mediaData.settings.server;
 
     if (lastQualityTitle != null) {
       videos.then((videos) async {
@@ -388,7 +312,9 @@ void onEpisodeClick(
         }
 
         if (index == null) {
-          saveCustomData<String?>(lastQualityKey, null);
+          MediaSettings.saveMediaSettings(
+            mediaData..settings.server = null,
+          );
           showCustomBottomDialog(context, episodeDialog);
           return;
         }
@@ -412,4 +338,91 @@ void onEpisodeClick(
   }
 
   showCustomBottomDialog(context, episodeDialog);
+}
+
+Widget _buildSourceList(BuildContext context,
+    List<Video> videos,
+    DEpisode episode,
+    Source source,
+    Media mediaData,
+    VoidCallback? onEpisodeClick,) {
+  return Column(
+    children: videos.map((item) {
+      var index = videos.indexOf(item);
+
+      var allSubtitles = <Track>[];
+      var addedSubtitleTitles = <String>{};
+      for (var video in videos) {
+        if (video.subtitles != null && video.subtitles!.length > 1) {
+          for (var subtitle in video.subtitles!) {
+            if (!addedSubtitleTitles.contains(subtitle.label)) {
+              addedSubtitleTitles.add(subtitle.label ?? '');
+              var newSubtitle = Track(
+                label: '${subtitle.label} (from external)',
+                file: subtitle.file,
+              );
+              allSubtitles.add(newSubtitle);
+            }
+          }
+        }
+      }
+
+      for (var video in videos) {
+        if (video.subtitles == null || video.subtitles!.length <= 1) {
+          video.subtitles = List.from(allSubtitles);
+        }
+      }
+
+      return Card(
+        margin:
+        const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+        elevation: 4,
+        child: InkWell(
+          onTap: () {
+            MediaSettings.saveMediaSettings(
+              mediaData..settings.server = item.title ?? item.quality,
+            );
+            onEpisodeClick?.call();
+            Get.back();
+            navigateToPage(
+              context,
+              MediaPlayer(
+                media: mediaData,
+                index: index,
+                videos: videos,
+                currentEpisode: episode,
+                source: source,
+              ),
+            );
+          },
+          borderRadius: BorderRadius.circular(12),
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: Text(
+                    item.title ?? item.quality,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                Icon(
+                  Icons.play_arrow,
+                  size: 24,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    }).toList(),
+  );
 }
