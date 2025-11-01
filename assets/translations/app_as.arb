@@ -660,12 +660,13 @@
     },
     "customMPV": "স্বনিৰ্বাচিত MPV বিন্যাস",
     "@customMPV": {},
-    "useLibass": "Use Libass",
+    "useLibass": "Libass ব্যৱহাৰ কৰক",
     "@useLibass": {},
-    "useLibassDescription": "Use Libass for subtitle rendering (overrides other subtitle settings)",
+    "useLibassDescription": "ছাবটাইটেল ৰেণ্ডাৰিঙৰ বাবে Libass ব্যৱহাৰ কৰক (অন্য ছাবটাইটেল ছেটিংসমূহ ওভাৰৰাইড কৰে)",
     "@useLibassDescription": {},
-    "useGpuNext": "Use gpu-next",
+    "useGpuNext": "gpu-next ব্যৱহাৰ কৰক",
     "@useGpuNext": {},
-    "useGpuNextDescription": "New rendering backend (may cause visual artifacts)",
+    "useGpuNextDescription": "নতুন ৰেণ্ডাৰিং বেকএণ্ড (ভিজুৱেল আৰ্টিফেক্টৰ কাৰণ হ’ব পাৰে)",
+
     "@useGpuNextDescription": {}
 }
