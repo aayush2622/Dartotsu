@@ -130,16 +130,11 @@ void initIntentListener() async {
 
   void handleFiles(List<SharedMediaFile> files) {
     if (files.isEmpty) return;
-    final file = files.first;
-    final path = file.path;
-    final name = file.path.split('/').last;
-    openPlayer(Get.context!, path, name);
+
+    openPlayer(Get.context!, files.map((e) => e.path).toList());
   }
 
-  intent.getMediaStream().listen(
-        handleFiles,
-        onError: (err) => snackString('Error receiving shared media: $err'),
-      );
+  intent.getMediaStream().listen(handleFiles);
 
   final initialFiles = await intent.getInitialMedia();
   if (initialFiles.isNotEmpty) {

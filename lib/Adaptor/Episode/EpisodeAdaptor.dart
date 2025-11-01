@@ -210,6 +210,19 @@ void onEpisodeClick(
   Media mediaData,
   VoidCallback? onEpisodeClick,
 ) {
+  if (mediaData.nameRomaji == 'Local files') {
+    navigateToPage(
+      context,
+      MediaPlayer(
+        media: mediaData,
+        index: 0,
+        videos: [Video(episode.name, episode.url!, 'Media')],
+        currentEpisode: episode,
+        source: source,
+      ),
+    );
+    return;
+  }
   var episodeDialog = CustomBottomDialog(
     title: 'Select Source',
     viewList: [

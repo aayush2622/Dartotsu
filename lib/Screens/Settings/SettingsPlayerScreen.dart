@@ -362,40 +362,48 @@ List<Widget> playerSettings(
 
 Future<void> selectFile(BuildContext context) async {
   if (!await PrefManager.videoPermission()) return;
+
   final result = await FilePicker.platform.pickFiles(
     type: FileType.custom,
     allowedExtensions: vidMap,
+    allowMultiple: true,
   );
 
-  if (result == null) return;
-
-  final pickedFile = result.files.first;
+  if (result == null || result.files.isEmpty) return;
   if (!context.mounted) return;
-  openPlayer(context, pickedFile.path!, pickedFile.name);
+
+  openPlayer(context, result.files.map((e) => e.path!).toList());
 }
 
-Future<void> openPlayer(BuildContext context, String path, String name) async {
-  final episode = DEpisode(episodeNumber: '1', name: name);
+Future<void> openPlayer(BuildContext context, List<String> files) async {
+  final episodes = <String, DEpisode>{};
+  for (var i = 0; i < files.length; i++) {
+    episodes['${i + 1}'] = DEpisode(
+      episodeNumber: '${i + 1}',
+      name: files[i].split('/').last,
+      url: files[i],
+    );
+  }
+
   final media = Media(
     id: Random().nextInt(900000000),
-    nameRomaji: 'Local file',
-    userPreferredName: 'Local file',
+    nameRomaji: 'Local files',
+    userPreferredName: 'Local files',
     isAdult: false,
     settings: MediaSettings(
-        playerSetting: PlayerSettings.fromJson(
-      jsonDecode(loadData(PrefName.playerSettings)),
-    )),
-    anime: Anime(
-      episodes: {'1': episode},
+      playerSetting: PlayerSettings.fromJson(
+        jsonDecode(loadData(PrefName.playerSettings)),
+      ),
     ),
+    anime: Anime(episodes: episodes),
   );
 
   navigateToPage(
     context,
     MediaPlayer(
       isOffline: true,
-      videos: [Video(path, path, 'Media')],
-      currentEpisode: episode,
+      videos: [Video(episodes['1']?.name, episodes['1']!.url!, 'Media')],
+      currentEpisode: episodes['1']!,
       index: 0,
       source: Source(),
       media: media,

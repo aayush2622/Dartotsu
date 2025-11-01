@@ -124,8 +124,7 @@ class MediaPlayerState extends State<MediaPlayer>
     _forwardAnimationController.dispose();
     focusNode.dispose();
     if (Platform.isAndroid || Platform.isIOS) {
-      ScreenBrightness.instance
-          .setApplicationScreenBrightness(_defaultBrightness);
+      ScreenBrightness.instance.resetApplicationScreenBrightness();
       _setLandscapeMode(false);
     }
     updateProgress();
@@ -405,8 +404,6 @@ class MediaPlayerState extends State<MediaPlayer>
   var _volumeInterceptEventStream = false;
   final _volumeValue = 0.0.obs;
   final _brightnessValue = 0.0.obs;
-  var _defaultBrightness = 0.0;
-
   Future<void> _handleVolumeAndBrightness() async {
     VolumeController.instance.showSystemUI = false;
     _volumeValue.value = await VolumeController.instance.getVolume();
@@ -415,7 +412,6 @@ class MediaPlayerState extends State<MediaPlayer>
         _volumeValue.value = value;
       }
     });
-    _defaultBrightness = await ScreenBrightness.instance.system;
     _brightnessValue.value = await ScreenBrightness.instance.application;
     ScreenBrightness.instance.onCurrentBrightnessChanged.listen((value) {
       if (mounted) {
