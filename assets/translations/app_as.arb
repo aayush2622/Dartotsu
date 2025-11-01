@@ -659,5 +659,13 @@
         }
     },
     "customMPV": "স্বনিৰ্বাচিত MPV বিন্যাস",
-    "@customMPV": {}
+    "@customMPV": {},
+    "useLibass": "Libass ব্যৱহাৰ কৰক",
+    "@useLibass": {},
+    "useLibassDescription": "ছাবটাইটেল ৰেণ্ডাৰিঙৰ বাবে Libass ব্যৱহাৰ কৰক (অন্য ছাবটাইটেল ছেটিংসমূহ ওভাৰৰাইড কৰে)",
+    "@useLibassDescription": {},
+    "useGpuNext": "gpu-next ব্যৱহাৰ কৰক",
+    "@useGpuNext": {},
+    "useGpuNextDescription": "নতুন ৰেণ্ডাৰিং বেকএণ্ড (ভিজুৱেল আৰ্টিফেক্টৰ কাৰণ হ’ব পাৰে)",
+    "@useGpuNextDescription": {}
 }
