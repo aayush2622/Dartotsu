@@ -171,7 +171,10 @@ class _PlayerControllerState extends State<PlayerController> {
         nextEpisode,
         source,
         media,
-        () => Get.back(),
+        () {
+          Get.back();
+          widget.player.keepOrientation = true;
+        },
         servers: videos.isNotEmpty ? videos : null,
       );
     });
@@ -605,7 +608,10 @@ class _PlayerControllerState extends State<PlayerController> {
                       episodeList[index - 1],
                       source,
                       media,
-                      () => Get.back(),
+                      () {
+                        Get.back();
+                        widget.player.keepOrientation = true;
+                      },
                     );
                   },
                 )
@@ -634,7 +640,10 @@ class _PlayerControllerState extends State<PlayerController> {
                       episodeList[index + 1],
                       source,
                       media,
-                      () => Get.back(),
+                      () {
+                        Get.back();
+                        widget.player.keepOrientation = true;
+                      },
                     );
                   },
                 )

@@ -115,6 +115,7 @@ class MediaPlayerState extends State<MediaPlayer>
     reverse = widget.media.settings.isReverse.obs;
   }
 
+  bool keepOrientation = false;
   @override
   void dispose() {
     super.dispose();
@@ -123,7 +124,7 @@ class MediaPlayerState extends State<MediaPlayer>
     _backwardAnimationController.dispose();
     _forwardAnimationController.dispose();
     focusNode.dispose();
-    if (Platform.isAndroid || Platform.isIOS) {
+    if ((Platform.isAndroid || Platform.isIOS) && !keepOrientation) {
       ScreenBrightness.instance.resetApplicationScreenBrightness();
       _setLandscapeMode(false);
     }
