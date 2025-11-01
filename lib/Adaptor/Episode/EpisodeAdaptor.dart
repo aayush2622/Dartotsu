@@ -230,10 +230,39 @@ void onEpisodeClick(
   String? lastSelectedSource = mediaData.settings.server;
   final autoSourceMatch =
       AutoSourceMatch.fromJson(loadData(PrefName.autoSourceMatch));
+
+  final autoKey = "${mediaData.id}-${source.name}-autoSource";
+  bool autoSelect = loadCustomData(autoKey, defaultValue: false)!;
+
   if (servers != null) {
+    if (!autoSelect || lastSelectedSource == null) {
+      openSourceSelectionSheet(
+        context,
+        episode,
+        source,
+        mediaData,
+        onTapCallback,
+      );
+      return;
+    }
     final index = findBestSourceIndex(
-            servers, lastSelectedSource ?? "", autoSourceMatch) ??
-        0;
+      servers,
+      lastSelectedSource,
+      autoSourceMatch,
+    );
+
+    if (index == null) {
+      MediaSettings.saveMediaSettings(mediaData..settings.server = null);
+      openSourceSelectionSheet(
+        context,
+        episode,
+        source,
+        mediaData,
+        onTapCallback,
+      );
+      return;
+    }
+
     onTapCallback?.call();
     navigateToPage(
       context,
@@ -247,8 +276,6 @@ void onEpisodeClick(
     );
     return;
   }
-  final autoKey = "${mediaData.id}-${source.name}-autoSource";
-  bool autoSelect = loadCustomData(autoKey, defaultValue: false)!;
 
   if (!autoSelect) {
     openSourceSelectionSheet(
