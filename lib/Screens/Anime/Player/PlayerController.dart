@@ -950,7 +950,7 @@ class _PlayerControllerState extends State<PlayerController> {
   }
 
   void _sourceDialog() {
-    final lastQualityKey = "${media.id}-${source.name}-lastQuality";
+    final lastSourceKey = "${media.id}-${source.name}-lastSource";
     final autoSourceKey = "${media.id}-${source.name}-autoSource";
 
     var autoSelectSourceSetting =
@@ -1001,7 +1001,7 @@ class _PlayerControllerState extends State<PlayerController> {
                         return;
                       }
                       currentQuality = videos[index];
-                      saveCustomData(lastQualityKey,
+                      saveCustomData(lastSourceKey,
                           currentQuality.title ?? currentQuality.quality);
                       controller.open(
                         currentQuality,
