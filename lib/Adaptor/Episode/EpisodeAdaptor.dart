@@ -227,11 +227,13 @@ void onEpisodeClick(
     );
     return;
   }
-  String? lastSelectedSource = mediaData.settings.server;
+  final lastSourceKey = "${mediaData.id}-${source.name}-lastSource";
+  final autoKey = "${mediaData.id}-${source.name}-autoSource";
+
   final autoSourceMatch =
       AutoSourceMatch.fromJson(loadData(PrefName.autoSourceMatch));
 
-  final autoKey = "${mediaData.id}-${source.name}-autoSource";
+  String? lastSelectedSource = loadCustomData(lastSourceKey);
   bool autoSelect = loadCustomData(autoKey, defaultValue: false)!;
 
   if (servers != null) {
@@ -252,7 +254,7 @@ void onEpisodeClick(
     );
 
     if (index == null) {
-      MediaSettings.saveMediaSettings(mediaData..settings.server = null);
+      saveCustomData(lastSourceKey, null);
       openSourceSelectionSheet(
         context,
         episode,
@@ -289,7 +291,7 @@ void onEpisodeClick(
     return;
   }
 
-  showAutoSelectingDialog(context, mediaData, autoKey);
+  showAutoSelectingDialog(context, mediaData, autoKey, lastSourceKey);
 
   final videos = await source.methods.getVideoList(episode);
 
@@ -305,7 +307,7 @@ void onEpisodeClick(
   Navigator.pop(context);
 
   if (index == null) {
-    MediaSettings.saveMediaSettings(mediaData..settings.server = null);
+    saveCustomData(lastSourceKey, null);
     openSourceSelectionSheet(
         context, episode, source, mediaData, onTapCallback);
     return;
@@ -328,6 +330,7 @@ void showAutoSelectingDialog(
   BuildContext context,
   Media mediaData,
   String autoKey,
+  String lastSourceKey,
 ) {
   final dialog = CustomBottomDialog(
     viewList: [
@@ -356,7 +359,7 @@ void showAutoSelectingDialog(
       ),
     ],
     onClose: () {
-      MediaSettings.saveMediaSettings(mediaData..settings.server = null);
+      saveCustomData(lastSourceKey, null);
       saveCustomData(autoKey, false);
     },
   );
@@ -398,6 +401,8 @@ void openSourceSelectionSheet(
   VoidCallback? onTapCallback,
 ) {
   final autoKey = "${mediaData.id}-${source.name}-autoSource";
+  final lastSourceKey = "${mediaData.id}-${source.name}-lastSource";
+
   bool autoSelect = loadCustomData(autoKey, defaultValue: false)!;
 
   final dialog = CustomBottomDialog(
@@ -415,9 +420,7 @@ void openSourceSelectionSheet(
                   autoSelect = checked ?? false;
                   saveCustomData(autoKey, autoSelect);
                   if (!autoSelect) {
-                    MediaSettings.saveMediaSettings(
-                      mediaData..settings.server = null,
-                    );
+                    saveCustomData(lastSourceKey, null);
                   }
                   setState(() {});
                 },
