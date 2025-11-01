@@ -1,15 +1,12 @@
 import 'dart:async';
 
+import 'package:dartotsu/Theme/ThemeManager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-import '../Theme/Colors.dart';
-import '../Theme/ThemeProvider.dart';
 
 class _RefreshController extends GetxController {
   var activity = <int, RxBool>{};
@@ -83,23 +80,25 @@ Future<void> snackString(
     try {
       final scaffoldMessenger = ScaffoldMessenger.of(context);
       scaffoldMessenger.hideCurrentSnackBar();
-      final themeNotifier = Provider.of<ThemeNotifier>(context, listen: false);
       final snackBar = SnackBar(
-        backgroundColor: themeNotifier.isDarkMode ? greyNavDark : greyNavLight,
+        backgroundColor: Colors.transparent,
         behavior: SnackBarBehavior.floating,
-        margin: EdgeInsets.zero,
+        margin: const EdgeInsets.symmetric(horizontal: 12),
         elevation: 0,
-        content: GestureDetector(
-          onTap: () => scaffoldMessenger.hideCurrentSnackBar(),
-          onLongPress: () => copyToClipboard(clipboard ?? s),
-          child: Text(
-            s,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontFamily: 'Poppins',
-              fontSize: 16.0,
-              fontWeight: FontWeight.w600,
-              color: theme.onSurface,
+        content: ThemedContainer(
+          context: context,
+          child: GestureDetector(
+            onTap: () => scaffoldMessenger.hideCurrentSnackBar(),
+            onLongPress: () => copyToClipboard(clipboard ?? s),
+            child: Text(
+              s,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontFamily: 'Poppins',
+                fontSize: 16.0,
+                fontWeight: FontWeight.w600,
+                color: theme.onSurface,
+              ),
             ),
           ),
         ).animate(effects: [

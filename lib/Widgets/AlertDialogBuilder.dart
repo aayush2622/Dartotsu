@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
+import '../Theme/ThemeManager.dart';
+
 class AlertDialogBuilder {
   final BuildContext context;
   String? _title;
@@ -110,7 +112,7 @@ class AlertDialogBuilder {
       });
 
   Future<T?> show<T>() {
-    var theme = Theme.of(context).colorScheme;
+    final theme = Theme.of(context).colorScheme;
 
     _onAttach?.call();
 
@@ -119,18 +121,58 @@ class AlertDialogBuilder {
       barrierDismissible: _cancelable,
       builder: (BuildContext context) {
         _onShow?.call();
-        return AlertDialog(
-          title: _titleWidget ?? Text(_title ?? ''),
-          titleTextStyle: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-            color: theme.primary,
+        return Dialog(
+          backgroundColor: Colors.transparent,
+          insetPadding: const EdgeInsets.all(24),
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              maxWidth: MediaQuery.of(context).size.width * 0.8,
+            ),
+            child: IntrinsicWidth(
+              child: ThemedContainer(
+                context: context,
+                padding: const EdgeInsets.all(20),
+                borderRadius: BorderRadius.circular(32),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    if (_titleWidget != null || _title != null)
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 16),
+                        child: _titleWidget ??
+                            Text(
+                              _title ?? '',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: theme.primary,
+                              ),
+                            ),
+                      ),
+                    Flexible(
+                      fit: FlexFit.loose,
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(
+                          maxHeight: MediaQuery.of(context).size.height * 0.6,
+                        ),
+                        child: StatefulBuilder(
+                          builder:
+                              (BuildContext context, StateSetter setState) =>
+                                  _buildContent(setState),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: _buildActions(),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ),
-          content: StatefulBuilder(
-            builder: (BuildContext context, StateSetter setState) =>
-                _buildContent(setState),
-          ),
-          actions: _buildActions(),
         );
       },
     ).then((value) {
