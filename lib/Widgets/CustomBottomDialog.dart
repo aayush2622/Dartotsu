@@ -11,7 +11,7 @@ class CustomBottomDialog extends StatefulWidget {
   final VoidCallback? negativeCallback;
   final String? positiveText;
   final VoidCallback? positiveCallback;
-
+  final void Function()? onClose;
   const CustomBottomDialog({
     super.key,
     this.viewList = const [],
@@ -23,6 +23,7 @@ class CustomBottomDialog extends StatefulWidget {
     this.negativeCallback,
     this.positiveText,
     this.positiveCallback,
+    this.onClose,
   });
 
   @override
@@ -36,6 +37,12 @@ class _CustomBottomDialogState extends State<CustomBottomDialog> {
   void initState() {
     super.initState();
     isChecked = widget.checkChecked;
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    widget.onClose?.call();
   }
 
   @override

@@ -4,12 +4,10 @@ import 'package:dartotsu/Preferences/PrefManager.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:get/get.dart';
 import 'package:string_similarity/string_similarity.dart';
 
 import '../../Animation/ScaleAnimation.dart';
 import '../../DataClass/Media.dart';
-import '../../Preferences/IsarDataClasses/MediaSettings/MediaSettings.dart';
 import '../../Screens/Anime/Player/Player.dart';
 import '../../Widgets/CustomBottomDialog.dart';
 import 'EpisodeCompactViewHolder.dart';
@@ -212,48 +210,176 @@ void onEpisodeClick(
   DEpisode episode,
   Source source,
   Media mediaData,
-  VoidCallback? onEpisodeClick, {
-  String? server, // if server is not empty just load this
-}) {
-  if (mediaData.nameRomaji == 'Local files') {
+  VoidCallback? onTapCallback, {
+  String? server,
+}) async {
+  if (mediaData.nameRomaji == "Local files") {
     navigateToPage(
       context,
       MediaPlayer(
         media: mediaData,
         index: 0,
-        videos: [Video(episode.name, episode.url!, 'Media')],
+        videos: [Video(episode.name, episode.url!, "Media")],
         currentEpisode: episode,
         source: source,
       ),
     );
     return;
   }
-  final autoSourceKey = "${mediaData.id}-${source.name}-autoSource";
 
-  var autoSelectSourceSetting =
-      loadCustomData(autoSourceKey, defaultValue: false);
+  final autoKey = "${mediaData.id}-${source.name}-autoSource";
+  bool autoSelect = loadCustomData(autoKey, defaultValue: false)!;
+  String? lastSelectedSource = mediaData.settings.server;
 
-  final videos = source.methods.getVideoList(episode);
+  if (!autoSelect) {
+    openSourceSelectionSheet(
+        context, episode, source, mediaData, onTapCallback);
+    return;
+  }
 
-  final episodeDialog = CustomBottomDialog(
-    title: 'Select Source',
+  if (lastSelectedSource == null) {
+    openSourceSelectionSheet(
+        context, episode, source, mediaData, onTapCallback);
+    return;
+  }
+
+  showAutoSelectingDialog(context, mediaData, autoKey);
+
+  final videos = await source.methods.getVideoList(episode);
+
+  if (!context.mounted) return;
+
+  if (!loadCustomData(autoKey, defaultValue: false)!) {
+    return;
+  }
+  final autoSourceMatch =
+      AutoSourceMatch.fromJson(loadData(PrefName.autoSourceMatch));
+
+  final index =
+      findBestSourceIndex(videos, lastSelectedSource, autoSourceMatch);
+
+  Navigator.pop(context);
+
+  if (index == null) {
+    MediaSettings.saveMediaSettings(mediaData..settings.server = null);
+    openSourceSelectionSheet(
+        context, episode, source, mediaData, onTapCallback);
+    return;
+  }
+
+  onTapCallback?.call();
+  navigateToPage(
+    context,
+    MediaPlayer(
+      media: mediaData,
+      index: index,
+      videos: videos,
+      currentEpisode: episode,
+      source: source,
+    ),
+  );
+}
+
+void showAutoSelectingDialog(
+  BuildContext context,
+  Media mediaData,
+  String autoKey,
+) {
+  final dialog = CustomBottomDialog(
+    viewList: [
+      Row(
+        children: [
+          const SizedBox(width: 16),
+          const SizedBox(
+            height: 28,
+            width: 28,
+            child: CircularProgressIndicator(strokeWidth: 3),
+          ),
+          const SizedBox(width: 16),
+          const Text(
+            "Auto selecting...",
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+          ),
+          const Spacer(),
+          TextButton(
+            onPressed: () {
+              saveCustomData(autoKey, false);
+              Navigator.pop(context);
+            },
+            child: const Text("Cancel"),
+          ),
+        ],
+      ),
+    ],
+    onClose: () {
+      MediaSettings.saveMediaSettings(mediaData..settings.server = null);
+      saveCustomData(autoKey, false);
+    },
+  );
+  showCustomBottomDialog(context, dialog);
+}
+
+int? findBestSourceIndex(
+  List<Video> videos,
+  String lastSource,
+  AutoSourceMatch autoSourceMatch,
+) {
+  if (autoSourceMatch == AutoSourceMatch.Exact) {
+    final index = videos.indexWhere(
+      (v) => (v.title ?? v.quality) == lastSource,
+    );
+    return index == -1 ? null : index;
+  }
+
+  var bestScore = 0.0;
+  var bestIndex = -1;
+
+  for (var i = 0; i < videos.length; i++) {
+    final title = videos[i].title ?? videos[i].quality;
+    final score = lastSource.similarityTo(title);
+    if (score > bestScore) {
+      bestScore = score;
+      bestIndex = i;
+    }
+  }
+
+  return bestIndex >= 0 ? bestIndex : null;
+}
+
+void openSourceSelectionSheet(
+  BuildContext context,
+  DEpisode episode,
+  Source source,
+  Media mediaData,
+  VoidCallback? onTapCallback,
+) {
+  final autoKey = "${mediaData.id}-${source.name}-autoSource";
+  bool autoSelect = loadCustomData(autoKey, defaultValue: false)!;
+
+  final dialog = CustomBottomDialog(
+    title: "Select Source",
     viewList: [
       StatefulBuilder(
         builder: (context, setState) => Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+          padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Checkbox(
-                value: autoSelectSourceSetting,
+                value: autoSelect,
                 onChanged: (checked) {
-                  autoSelectSourceSetting = checked ?? false;
-                  saveCustomData(autoSourceKey, autoSelectSourceSetting);
+                  autoSelect = checked ?? false;
+                  saveCustomData(autoKey, autoSelect);
+                  if (!autoSelect) {
+                    MediaSettings.saveMediaSettings(
+                      mediaData..settings.server = null,
+                    );
+                  }
                   setState(() {});
                 },
-                activeColor: Theme.of(context).colorScheme.primary,
               ),
               const Text(
-                'Auto Select Source',
+                "Auto Select Source",
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
             ],
@@ -261,168 +387,122 @@ void onEpisodeClick(
         ),
       ),
       FutureBuilder<List<Video>>(
-        future: videos,
+        future: source.methods.getVideoList(episode),
         builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
-          } else if (snapshot.hasData) {
-            var videos = snapshot.data!;
-
-            return const Center(child: Text('No sources available'));
-
-          } else {
-            return const Center(child: Text('No sources available'));
+          if (!snapshot.hasData) {
+            return const Padding(
+              padding: EdgeInsets.all(20),
+              child: Center(child: CircularProgressIndicator()),
+            );
           }
+
+          return _buildSourceList(
+            context,
+            snapshot.data!,
+            episode,
+            source,
+            mediaData,
+            onTapCallback,
+          );
         },
       ),
     ],
   );
 
-  if (autoSelectSourceSetting == true) {
-    var lastQualityTitle = mediaData.settings.server;
+  showCustomBottomDialog(context, dialog);
+}
 
-    if (lastQualityTitle != null) {
-      videos.then((videos) async {
-        if (!context.mounted) return;
+Widget _buildSourceList(
+  BuildContext context,
+  List<Video> videos,
+  DEpisode episode,
+  Source source,
+  Media mediaData,
+  VoidCallback? onTapCallback,
+) {
+  final allSubtitles = <Track>[];
+  final seenLabels = <String>{};
 
-        final autoSourceMatch =
-            AutoSourceMatch.fromJson(loadData(PrefName.autoSourceMatch));
-
-        int? index;
-        if (autoSourceMatch == AutoSourceMatch.Exact) {
-          index = videos.indexWhere(
-              (video) => (video.title ?? video.quality) == lastQualityTitle);
-          if (index == -1) index = null;
-        } else {
-          var bestMatch = 0;
-          var bestRating = 0.0;
-
-          for (var i = 0; i < videos.length; i++) {
-            var videoTitle = videos[i].title ?? videos[i].quality;
-            var rating = lastQualityTitle.similarityTo(videoTitle);
-            if (rating > bestRating) {
-              bestRating = rating;
-              bestMatch = i;
-            }
-          }
-
-          index = videos.isNotEmpty ? bestMatch : null;
-        }
-
-        if (index == null) {
-          MediaSettings.saveMediaSettings(
-            mediaData..settings.server = null,
+  for (final video in videos) {
+    if (video.subtitles != null && video.subtitles!.isNotEmpty) {
+      for (final sub in video.subtitles!) {
+        if (sub.label != null && !seenLabels.contains(sub.label)) {
+          seenLabels.add(sub.label!);
+          allSubtitles.add(
+            Track(
+              label: "${sub.label} (from external)",
+              file: sub.file,
+            ),
           );
-          showCustomBottomDialog(context, episodeDialog);
-          return;
         }
-        if (videos.isEmpty || !context.mounted) return;
-
-        onEpisodeClick?.call();
-        navigateToPage(
-          context,
-          MediaPlayer(
-            media: mediaData,
-            index: index,
-            videos: videos,
-            currentEpisode: episode,
-            source: source,
-          ),
-        );
-      });
-
-      return;
+      }
     }
   }
 
-  showCustomBottomDialog(context, episodeDialog);
-}
+  for (var video in videos) {
+    if (video.subtitles == null || video.subtitles!.length <= 1) {
+      video.subtitles = List.from(allSubtitles);
+    }
+  }
 
-Widget _buildSourceList(BuildContext context,
-    List<Video> videos,
-    DEpisode episode,
-    Source source,
-    Media mediaData,
-    VoidCallback? onEpisodeClick,) {
   return Column(
-    children: videos.map((item) {
-      var index = videos.indexOf(item);
+    children: List.generate(
+      videos.length,
+      (index) {
+        final item = videos[index];
 
-      var allSubtitles = <Track>[];
-      var addedSubtitleTitles = <String>{};
-      for (var video in videos) {
-        if (video.subtitles != null && video.subtitles!.length > 1) {
-          for (var subtitle in video.subtitles!) {
-            if (!addedSubtitleTitles.contains(subtitle.label)) {
-              addedSubtitleTitles.add(subtitle.label ?? '');
-              var newSubtitle = Track(
-                label: '${subtitle.label} (from external)',
-                file: subtitle.file,
+        return Card(
+          margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          elevation: 4,
+          child: InkWell(
+            borderRadius: BorderRadius.circular(12),
+            onTap: () {
+              MediaSettings.saveMediaSettings(
+                mediaData..settings.server = item.title ?? item.quality,
               );
-              allSubtitles.add(newSubtitle);
-            }
-          }
-        }
-      }
 
-      for (var video in videos) {
-        if (video.subtitles == null || video.subtitles!.length <= 1) {
-          video.subtitles = List.from(allSubtitles);
-        }
-      }
+              onTapCallback?.call();
+              Navigator.pop(context);
 
-      return Card(
-        margin:
-        const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
-        elevation: 4,
-        child: InkWell(
-          onTap: () {
-            MediaSettings.saveMediaSettings(
-              mediaData..settings.server = item.title ?? item.quality,
-            );
-            onEpisodeClick?.call();
-            Get.back();
-            navigateToPage(
-              context,
-              MediaPlayer(
-                media: mediaData,
-                index: index,
-                videos: videos,
-                currentEpisode: episode,
-                source: source,
-              ),
-            );
-          },
-          borderRadius: BorderRadius.circular(12),
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: Text(
-                    item.title ?? item.quality,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
+              navigateToPage(
+                context,
+                MediaPlayer(
+                  media: mediaData,
+                  index: index,
+                  videos: videos,
+                  currentEpisode: episode,
+                  source: source,
+                ),
+              );
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: Text(
+                      item.title ?? item.quality,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
-                ),
-                Icon(
-                  Icons.play_arrow,
-                  size: 24,
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-              ],
+                  Icon(
+                    Icons.play_arrow,
+                    size: 24,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
-      );
-    }).toList(),
+        );
+      },
+    ),
   );
 }
