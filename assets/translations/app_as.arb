@@ -667,5 +667,6 @@
     "useGpuNext": "gpu-next ব্যৱহাৰ কৰক",
     "@useGpuNext": {},
     "useGpuNextDescription": "নতুন ৰেণ্ডাৰিং বেকএণ্ড (ভিজুৱেল আৰ্টিফেক্টৰ কাৰণ হ’ব পাৰে)",
+
     "@useGpuNextDescription": {}
 }

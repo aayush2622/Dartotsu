@@ -409,7 +409,7 @@ class _PlayerControllerState extends State<PlayerController> {
                   Container(
                     alignment: Alignment.topLeft,
                     child: Text(
-                      "Episode ${currentEpisode.episodeNumber}: ${currentEpisode.episodeNumber}",
+                      "Episode ${currentEpisode.episodeNumber}: ${currentEpisode.name ?? currentEpisode.episodeNumber}",
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 14,

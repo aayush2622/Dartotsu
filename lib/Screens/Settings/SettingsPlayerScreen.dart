@@ -4,6 +4,7 @@ import 'dart:math';
 
 import 'package:dartotsu/Functions/Function.dart';
 import 'package:dartotsu/Preferences/IsarDataClasses/MediaSettings/MediaSettings.dart';
+import 'package:dartotsu/Widgets/CustomBottomDialog.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +46,66 @@ class SettingsPlayerScreenState extends BaseSettingsScreen {
   List<Widget> get settingsList => playerSettings(context, setState);
 
   @override
-  Future<void> onIconPressed() async => selectFile(context);
+  Future<void> onIconPressed() async => showCustomBottomDialog(
+        context,
+        CustomBottomDialog(
+          title: "Select Option",
+          viewList: [
+            _buildOptionCard(
+              icon: Icons.video_library_rounded,
+              label: "Pick Video Files",
+              onTap: () {
+                Navigator.pop(context);
+                selectFile(context);
+              },
+            ),
+            _buildOptionCard(
+              label: "Pick Folder",
+              icon: Icons.folder_rounded,
+              onTap: () {
+                Navigator.pop(context);
+                selectFolder(context);
+              },
+            ),
+          ],
+        ),
+      );
+  Widget _buildOptionCard({
+    required String label,
+    required IconData icon,
+    required VoidCallback onTap,
+  }) {
+    return Card(
+      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
+      elevation: 4,
+      child: SizedBox(
+        width: double.infinity,
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(12),
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Row(
+              children: [
+                Icon(icon, size: 22),
+                const SizedBox(width: 12),
+                Text(
+                  label,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 }
 
 List<Widget> playerSettings(
@@ -362,40 +422,69 @@ List<Widget> playerSettings(
 
 Future<void> selectFile(BuildContext context) async {
   if (!await PrefManager.videoPermission()) return;
+
   final result = await FilePicker.platform.pickFiles(
     type: FileType.custom,
     allowedExtensions: vidMap,
+    allowMultiple: true,
   );
 
-  if (result == null) return;
-
-  final pickedFile = result.files.first;
+  if (result == null || result.files.isEmpty) return;
   if (!context.mounted) return;
-  openPlayer(context, pickedFile.path!, pickedFile.name);
+
+  final paths = result.files.map((e) => e.path!).toList();
+  openPlayer(context, paths);
 }
 
-Future<void> openPlayer(BuildContext context, String path, String name) async {
-  final episode = DEpisode(episodeNumber: '1', name: name);
+Future<void> selectFolder(BuildContext context) async {
+  final folderPath = await FilePicker.platform.getDirectoryPath();
+  if (folderPath == null) return;
+
+  final dir = Directory(folderPath);
+  if (!dir.existsSync()) return;
+
+  final paths = dir
+      .listSync(recursive: true)
+      .whereType<File>()
+      .where((file) => vidMap.contains(file.path.split('.').last.toLowerCase()))
+      .map((file) => file.path)
+      .toList();
+
+  if (paths.isEmpty) return;
+  if (!context.mounted) return;
+
+  openPlayer(context, paths);
+}
+
+Future<void> openPlayer(BuildContext context, List<String> files) async {
+  final episodes = <String, DEpisode>{};
+  for (var i = 0; i < files.length; i++) {
+    episodes['${i + 1}'] = DEpisode(
+      episodeNumber: '${i + 1}',
+      name: files[i].split('/').last,
+      url: files[i],
+    );
+  }
+
   final media = Media(
     id: Random().nextInt(900000000),
-    nameRomaji: 'Local file',
-    userPreferredName: 'Local file',
+    nameRomaji: 'Local files',
+    userPreferredName: 'Local files',
     isAdult: false,
     settings: MediaSettings(
-        playerSetting: PlayerSettings.fromJson(
-      jsonDecode(loadData(PrefName.playerSettings)),
-    )),
-    anime: Anime(
-      episodes: {'1': episode},
+      playerSetting: PlayerSettings.fromJson(
+        jsonDecode(loadData(PrefName.playerSettings)),
+      ),
     ),
+    anime: Anime(episodes: episodes),
   );
 
   navigateToPage(
     context,
     MediaPlayer(
       isOffline: true,
-      videos: [Video(path, path, 'Media')],
-      currentEpisode: episode,
+      videos: [Video(episodes['1']?.name, episodes['1']!.url!, 'Media')],
+      currentEpisode: episodes['1']!,
       index: 0,
       source: Source(),
       media: media,
@@ -403,7 +492,7 @@ Future<void> openPlayer(BuildContext context, String path, String name) async {
   );
 }
 
-List<String> vidMap = [
+const List<String> vidMap = [
   'mp4',
   'mkv',
   'webm',
@@ -420,7 +509,7 @@ List<String> vidMap = [
   'm3u8',
 ];
 
-List<String> subMap = [
+const List<String> subMap = [
   'srt',
   'ass',
   'ssa',
@@ -436,7 +525,7 @@ List<String> subMap = [
   'lrc',
   'xml'
 ];
-List<String> audioMap = [
+const List<String> audioMap = [
   'mp3',
   'aac',
   'm4a',
