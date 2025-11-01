@@ -142,6 +142,9 @@ class PrefName {
   static Pref<bool> useCustomMpvConfig =
       const Pref<bool>('useCustomMpvConfig', false);
 
+  static Pref<int> autoSourceMatch =
+      Pref<int>('autoSourceMatch', AutoSourceMatch.Exact.toJson());
+
   //Protection
   static const anilistToken = Pref('AnilistToken', '');
   static const Pref<ResponseToken?> malToken = Pref('MalToken', null);

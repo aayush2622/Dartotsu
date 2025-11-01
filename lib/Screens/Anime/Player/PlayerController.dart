@@ -151,11 +151,7 @@ class _PlayerControllerState extends State<PlayerController> {
 
       if (!mounted || nextEpisode == null) return;
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-            content:
-                Text("Auto-playing Episode ${nextEpisode.episodeNumber}...")),
-      );
+      snackString("Auto-playing Episode ${nextEpisode.episodeNumber}...");
 
       return onEpisodeClick(
         context,

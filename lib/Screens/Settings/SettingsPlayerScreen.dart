@@ -224,29 +224,6 @@ List<Widget> playerSettings(
                   },
                 ),
                 Setting(
-                  type: SettingType.normal,
-                  name: getString.automaticSourceSelection,
-                  description: getString.automaticSourceSelectionDescription,
-                  icon: Icons.source_rounded,
-                  onClick: () {
-                    AlertDialogBuilder(context)
-                      ..setTitle(getString.automaticSourceSelection)
-                      ..singleChoiceItems(
-                        ['Exact', 'Closest'],
-                        [AutoSourceMatch.Exact, AutoSourceMatch.Closest]
-                            .indexOf(playerSettings.autoSourceMatch),
-                        (value) {
-                          playerSettings.autoSourceMatch = [
-                            AutoSourceMatch.Exact,
-                            AutoSourceMatch.Closest
-                          ][value];
-                          savePlayerSettings(playerSettings);
-                        },
-                      )
-                      ..show();
-                  },
-                ),
-                Setting(
                   type: SettingType.switchType,
                   name: getString.customMPV,
                   description: getString.customMPVDescription(

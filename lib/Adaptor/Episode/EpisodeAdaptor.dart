@@ -1,5 +1,5 @@
 import 'package:dartotsu/Functions/Function.dart';
-import 'package:dartotsu/Preferences/IsarDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
+import 'package:dartotsu/Preferences/IsarDataClasses/MediaSettings/MediaSettings.dart';
 import 'package:dartotsu/Preferences/PrefManager.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/material.dart';
@@ -363,9 +363,11 @@ void onEpisodeClick(
       videos.then((videos) async {
         if (!context.mounted) return;
 
+        final autoSourceMatch =
+            AutoSourceMatch.fromJson(loadData(PrefName.autoSourceMatch));
+
         int? index;
-        if (mediaData.settings.playerSettings.autoSourceMatch ==
-            AutoSourceMatch.Exact) {
+        if (autoSourceMatch == AutoSourceMatch.Exact) {
           index = videos.indexWhere(
               (video) => (video.title ?? video.quality) == lastQualityTitle);
           if (index == -1) index = null;
