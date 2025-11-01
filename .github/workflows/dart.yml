@@ -590,7 +590,7 @@ jobs:
           # Decimal color codes for contributors
           declare -A contributor_colors
           default_color="#1ac4c5"
-          contributor_colors["aayush262"]="#5d689d"
+          contributor_colors["aayush262"]="#ff7eb6"
           contributor_colors["Sadwhy"]="#ff7e95"
           contributor_colors["grayankit"]="#c51aa1"
           contributor_colors["rebelonion"]="#d4e5ed"
