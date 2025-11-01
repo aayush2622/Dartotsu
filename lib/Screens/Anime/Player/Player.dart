@@ -514,7 +514,7 @@ class MediaPlayerState extends State<MediaPlayer>
     forwardDoubleTapTimeout?.cancel();
     backwardsDoubleTapTimeout?.cancel();
 
-    final currentPosition = videoPlayerController.currentPosition.value;
+    final currentPosition = videoPlayerController.currentTime.value;
 
     if (direction == SkipDirection.backward) {
       videoPlayerController.seek(

@@ -45,11 +45,11 @@ class MediaKitPlayer extends GetxController {
   late VideoController videoController;
 
   Rx<Duration> currentTime = Duration.zero.obs;
-  Rx<Duration> currentPosition = Duration.zero.obs;
   Rx<Duration> maxTime = Duration.zero.obs;
   Rx<Duration> bufferingTime = Duration.zero.obs;
   RxBool isBuffering = true.obs;
   RxBool isPlaying = false.obs;
+  RxBool isCompleted = false.obs;
   RxList<SubtitleTrack> subtitles = <SubtitleTrack>[].obs;
   RxList<AudioTrack> audios = <AudioTrack>[].obs;
   RxList<String> subtitle = <String>[].obs;
@@ -60,10 +60,6 @@ class MediaKitPlayer extends GetxController {
 
   late final List<MPVDecoder>? supportedDecoders;
   Rx<MPVDecoder?> currentDecoder = Rx<MPVDecoder?>(null);
-
-  StreamController<void> videoCompletedController =
-      StreamController<void>.broadcast();
-  Stream<void> get videoCompleted => videoCompletedController.stream;
 
   VideoControllerConfiguration getPlatformConfig() {
     if (Platform.isAndroid) {
@@ -199,27 +195,24 @@ class MediaKitPlayer extends GetxController {
   }
 
   void listenToPlayerStream() {
-    videoController.player.stream.position.listen((e) => currentTime.value = e);
-    videoController.player.stream.duration.listen((e) => maxTime.value = e);
-    videoController.player.stream.buffer.listen((e) => bufferingTime.value = e);
-    videoController.player.stream.position
-        .listen((e) => currentPosition.value = e);
+    videoController.player.stream.position.listen(currentTime.call);
+    videoController.player.stream.duration.listen(maxTime.call);
+    videoController.player.stream.buffer.listen(bufferingTime.call);
+    videoController.player.stream.completed.listen(isCompleted.call);
     videoController.player.stream.buffering.listen(isBuffering.call);
     videoController.player.stream.playing.listen(isPlaying.call);
+    videoController.player.stream.subtitle.listen(subtitle.call);
+    videoController.player.stream.rate.listen(currentSpeed.call);
+
     videoController.player.stream.tracks.listen((e) {
       subtitles.value = e.subtitle;
       _updateSubtitleTrack(videoController.player.state.track.subtitle);
     });
-    videoController.player.stream.subtitle.listen((e) => subtitle.value = e);
+
     videoController.player.stream.tracks.listen((e) => audios.value = e.audio);
-    videoController.player.stream.rate.listen((e) => currentSpeed.value = e);
+
     videoController.player.stream.track.listen((e) {
       _updateSubtitleTrack(e.subtitle);
-    });
-    videoController.player.stream.completed.listen((e) {
-      if (e) {
-        videoCompletedController.add(null);
-      }
     });
 
     if (videoController.player.platform is NativePlayer) {

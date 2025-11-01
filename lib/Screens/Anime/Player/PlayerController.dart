@@ -141,7 +141,7 @@ class _PlayerControllerState extends State<PlayerController> {
   bool tryPreLoading = true;
   Future<void> setupAutoplay() async {
     List<Video> videos = [];
-    controller.videoController.player.stream.position.listen((p) async {
+    controller.currentTime.listen((p) async {
       var current = p.inSeconds;
       var total = controller.maxTime.value.inSeconds;
       var episodeAboutToEnd = (current / total) > 0.8;
@@ -156,9 +156,8 @@ class _PlayerControllerState extends State<PlayerController> {
         videos = await source.methods.getVideoList(nextEpisode!);
       }
     });
-    controller.videoCompleted.listen((_) {
+    controller.isCompleted.listen((_) {
       if (settings.autoPlay != true) return;
-
       final episodeList = media.anime!.episodes;
       final nextEpisode = episodeList!.values.firstWhereOrNull(
         (e) =>
@@ -196,7 +195,7 @@ class _PlayerControllerState extends State<PlayerController> {
         ) ??
         [];
 
-    controller.currentPosition.listen(
+    controller.currentTime.listen(
       (v) {
         if (v.inSeconds > 0) _saveProgress(v.inSeconds);
 
@@ -1006,7 +1005,7 @@ class _PlayerControllerState extends State<PlayerController> {
                           currentQuality.title ?? currentQuality.quality);
                       controller.open(
                         currentQuality,
-                        controller.currentPosition.value,
+                        controller.currentTime.value,
                       );
                       Get.back();
                     },
@@ -1048,7 +1047,7 @@ class _PlayerControllerState extends State<PlayerController> {
     controller.pause();
 
     final currentChapter = controller.chapters.lastWhereOrNull(
-      (e) => e.startTime <= controller.currentPosition.value.inSeconds / 1.0,
+      (e) => e.startTime <= controller.currentTime.value.inSeconds / 1.0,
     );
 
     var chapterDialog = CustomBottomDialog(
