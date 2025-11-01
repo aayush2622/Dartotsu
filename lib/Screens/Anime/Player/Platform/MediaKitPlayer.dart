@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:dartotsu/Preferences/IsarDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
@@ -59,6 +60,10 @@ class MediaKitPlayer extends GetxController {
 
   late final List<MPVDecoder>? supportedDecoders;
   Rx<MPVDecoder?> currentDecoder = Rx<MPVDecoder?>(null);
+
+  StreamController<void> videoCompletedController =
+      StreamController<void>.broadcast();
+  Stream<void> get videoCompleted => videoCompletedController.stream;
 
   VideoControllerConfiguration getPlatformConfig() {
     if (Platform.isAndroid) {
@@ -210,6 +215,11 @@ class MediaKitPlayer extends GetxController {
     videoController.player.stream.rate.listen((e) => currentSpeed.value = e);
     videoController.player.stream.track.listen((e) {
       _updateSubtitleTrack(e.subtitle);
+    });
+    videoController.player.stream.completed.listen((e) {
+      if (e) {
+        videoCompletedController.add(null);
+      }
     });
 
     if (videoController.player.platform is NativePlayer) {

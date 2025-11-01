@@ -86,12 +86,13 @@ class _PlayerControllerState extends State<PlayerController> {
   }
 
   Future<void> _init() async {
-    await controller.videoController.waitUntilFirstFrameRendered;
     while (controller.maxTime.value == Duration.zero) {
       await Future.delayed(const Duration(milliseconds: 100));
     }
+
     setDiscordRpc();
     setTimeStamps();
+    setupAutoplay();
 
     var list = List<int>.from(
       loadCustomData<List<int>>("continueAnimeList") ?? [],
@@ -135,6 +136,28 @@ class _PlayerControllerState extends State<PlayerController> {
         defaultSub.file?.toNullInt() == null,
       );
     }
+  }
+
+  Future<void> setupAutoplay() async {
+    controller.videoCompleted.listen((_) {
+      if (settings.autoPlay != true) return;
+
+      final episodeList = media.anime!.episodes;
+      final nextEpisode = episodeList!.values.firstWhereOrNull(
+        (e) =>
+            e.episodeNumber.toDouble() >
+            currentEpisode.episodeNumber.toDouble(),
+      );
+      if (!mounted || nextEpisode == null) return;
+      snackString("Auto-playing Episode ${nextEpisode.episodeNumber}...");
+      return onEpisodeClick(
+        context,
+        nextEpisode,
+        source,
+        media,
+        () => Get.back(),
+      );
+    });
   }
 
   Future<void> setDiscordRpc() async {
@@ -910,9 +933,39 @@ class _PlayerControllerState extends State<PlayerController> {
   }
 
   void _sourceDialog() {
+    final lastQualityKey = "${media.id}-${source.name}-lastQuality";
+    final autoSourceKey = "${media.id}-${source.name}-autoSource";
+
+    var autoSelectSourceSetting =
+        loadCustomData(autoSourceKey, defaultValue: false);
+
     var episodeDialog = CustomBottomDialog(
       title: "Sources",
       viewList: [
+        StatefulBuilder(
+            builder: (context, setState) => Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                  child: Row(
+                    children: [
+                      Checkbox(
+                        value: autoSelectSourceSetting,
+                        onChanged: (checked) {
+                          setState(() {
+                            autoSelectSourceSetting = checked ?? false;
+                            saveCustomData(
+                                autoSourceKey, autoSelectSourceSetting);
+                            setState(() {});
+                          });
+                        },
+                        activeColor: Theme.of(context).colorScheme.primary,
+                      ),
+                      const Text(
+                        'Auto Select Source',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                )),
         Column(
           children: videos.map((video) {
             int index = videos.indexOf(video);
@@ -931,6 +984,8 @@ class _PlayerControllerState extends State<PlayerController> {
                         return;
                       }
                       currentQuality = videos[index];
+                      saveCustomData(lastQualityKey,
+                          currentQuality.title ?? currentQuality.quality);
                       controller.open(
                         currentQuality,
                         controller.currentPosition.value,

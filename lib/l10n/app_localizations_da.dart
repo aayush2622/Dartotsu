@@ -654,6 +654,20 @@ class AppLocalizationsDa extends AppLocalizations {
       'New rendering backend (may cause visual artifacts)';
 
   @override
+  String get autoPlayNextEpisode => 'Auto Play Next Episode';
+
+  @override
+  String get autoPlayNextEpisodeDescription =>
+      'Automatically play the next episode when the current one ends';
+
+  @override
+  String get automaticSourceSelection => 'Automatic Source Selection Method';
+
+  @override
+  String get automaticSourceSelectionDescription =>
+      'Which method to use for automatic source selection';
+
+  @override
   String get readerSettings => 'Indstillinger for læserindstillinger';
 
   @override

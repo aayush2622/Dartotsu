@@ -106,6 +106,7 @@ dependencies:
     git:
       url: https://github.com/aayush2622/DartotsuExtensionBridge.git
       ref: master
+  string_similarity: ^2.1.1
 
     #path: ../DartotsuExtensionBridge
 # Development dependencies

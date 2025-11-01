@@ -23,6 +23,7 @@ class PlayerSettings {
   int subtitleWeight;
   bool useLibass;
   bool useGpuNext;
+  bool autoPlay;
 
   PlayerSettings({
     this.speed = '1x',
@@ -39,6 +40,7 @@ class PlayerSettings {
     this.subtitleWeight = 5,
     this.useLibass = false,
     this.useGpuNext = false,
+    this.autoPlay = true,
     //  this.useCustomMpvConfig = false,
   });
 
@@ -58,6 +60,7 @@ class PlayerSettings {
       subtitleWeight: json['subtitleWeight'],
       useLibass: json['useLibass'] ?? false,
       useGpuNext: json['useGpuNext'] ?? false,
+      autoPlay: json['autoPlay'] ?? true,
       //  useCustomMpvConfig: json['useCustomMpvConfig'] ?? false,
     );
   }
@@ -78,6 +81,7 @@ class PlayerSettings {
       'subtitleWeight': subtitleWeight,
       'useLibass': useLibass,
       'useGpuNext': useGpuNext,
+      'autoPlay': autoPlay,
       //'useCustomMpvConfig': useCustomMpvConfig,
     };
   }

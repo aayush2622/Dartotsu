@@ -1283,6 +1283,30 @@ abstract class AppLocalizations {
   /// **'New rendering backend (may cause visual artifacts)'**
   String get useGpuNextDescription;
 
+  /// No description provided for @autoPlayNextEpisode.
+  ///
+  /// In en, this message translates to:
+  /// **'Auto Play Next Episode'**
+  String get autoPlayNextEpisode;
+
+  /// No description provided for @autoPlayNextEpisodeDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Automatically play the next episode when the current one ends'**
+  String get autoPlayNextEpisodeDescription;
+
+  /// No description provided for @automaticSourceSelection.
+  ///
+  /// In en, this message translates to:
+  /// **'Automatic Source Selection Method'**
+  String get automaticSourceSelection;
+
+  /// No description provided for @automaticSourceSelectionDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Which method to use for automatic source selection'**
+  String get automaticSourceSelectionDescription;
+
   /// No description provided for @readerSettings.
   ///
   /// In en, this message translates to:

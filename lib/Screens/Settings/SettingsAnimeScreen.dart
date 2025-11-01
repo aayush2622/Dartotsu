@@ -1,3 +1,4 @@
+import 'package:dartotsu/Preferences/IsarDataClasses/MediaSettings/MediaSettings.dart';
 import 'package:dartotsu/Screens/Settings/SettingsPlayerScreen.dart';
 import 'package:flutter/material.dart';
 
@@ -45,6 +46,29 @@ class SettingsAnimeScreenState extends BaseSettingsScreen {
               context,
               const SettingsPlayerScreen(),
             ),
+          ),
+          Setting(
+            type: SettingType.normal,
+            name: getString.automaticSourceSelection,
+            description: getString.automaticSourceSelectionDescription,
+            icon: Icons.source_rounded,
+            onClick: () {
+              AlertDialogBuilder(context)
+                ..setTitle(getString.automaticSourceSelection)
+                ..singleChoiceItems(
+                  ['Exact (default)', 'Closest'],
+                  [AutoSourceMatch.Exact, AutoSourceMatch.Closest].indexOf(
+                      AutoSourceMatch.fromJson(
+                          loadData(PrefName.autoSourceMatch))),
+                  (value) {
+                    saveData(
+                        PrefName.autoSourceMatch,
+                        [AutoSourceMatch.Exact, AutoSourceMatch.Closest][value]
+                            .toJson());
+                  },
+                )
+                ..show();
+            },
           ),
         ],
       ),

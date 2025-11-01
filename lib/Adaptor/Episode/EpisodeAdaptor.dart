@@ -1,11 +1,15 @@
 import 'package:dartotsu/Functions/Function.dart';
+import 'package:dartotsu/Preferences/IsarDataClasses/MediaSettings/MediaSettings.dart';
+import 'package:dartotsu/Preferences/PrefManager.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
+import 'package:string_similarity/string_similarity.dart';
 
 import '../../Animation/ScaleAnimation.dart';
 import '../../DataClass/Media.dart';
+import '../../Preferences/IsarDataClasses/MediaSettings/MediaSettings.dart';
 import '../../Screens/Anime/Player/Player.dart';
 import '../../Widgets/CustomBottomDialog.dart';
 import 'EpisodeCompactViewHolder.dart';
@@ -208,8 +212,9 @@ void onEpisodeClick(
   DEpisode episode,
   Source source,
   Media mediaData,
-  VoidCallback? onEpisodeClick,
-) {
+  VoidCallback? onEpisodeClick, {
+  String? server, // if server is not empty just load this
+}) {
   if (mediaData.nameRomaji == 'Local files') {
     navigateToPage(
       context,
@@ -223,11 +228,40 @@ void onEpisodeClick(
     );
     return;
   }
-  var episodeDialog = CustomBottomDialog(
+  final autoSourceKey = "${mediaData.id}-${source.name}-autoSource";
+
+  var autoSelectSourceSetting =
+      loadCustomData(autoSourceKey, defaultValue: false);
+
+  final videos = source.methods.getVideoList(episode);
+
+  final episodeDialog = CustomBottomDialog(
     title: 'Select Source',
     viewList: [
+      StatefulBuilder(
+        builder: (context, setState) => Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+          child: Row(
+            children: [
+              Checkbox(
+                value: autoSelectSourceSetting,
+                onChanged: (checked) {
+                  autoSelectSourceSetting = checked ?? false;
+                  saveCustomData(autoSourceKey, autoSelectSourceSetting);
+                  setState(() {});
+                },
+                activeColor: Theme.of(context).colorScheme.primary,
+              ),
+              const Text(
+                'Auto Select Source',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+        ),
+      ),
       FutureBuilder<List<Video>>(
-        future: source.methods.getVideoList(episode),
+        future: videos,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
@@ -236,82 +270,8 @@ void onEpisodeClick(
           } else if (snapshot.hasData) {
             var videos = snapshot.data!;
 
-            return Column(
-              children: videos.map((item) {
-                var index = videos.indexOf(item);
+            return const Center(child: Text('No sources available'));
 
-                var allSubtitles = <Track>[];
-                var addedSubtitleTitles = <String>{};
-                for (var video in videos) {
-                  if (video.subtitles != null && video.subtitles!.length > 1) {
-                    for (var subtitle in video.subtitles!) {
-                      if (!addedSubtitleTitles.contains(subtitle.label)) {
-                        addedSubtitleTitles.add(subtitle.label ?? '');
-                        var newSubtitle = Track(
-                          label: '${subtitle.label} (from external)',
-                          file: subtitle.file,
-                        );
-                        allSubtitles.add(newSubtitle);
-                      }
-                    }
-                  }
-                }
-
-                for (var video in videos) {
-                  if (video.subtitles == null || video.subtitles!.length <= 1) {
-                    video.subtitles = List.from(allSubtitles);
-                  }
-                }
-
-                return Card(
-                  margin:
-                      const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  elevation: 4,
-                  child: InkWell(
-                    onTap: () {
-                      onEpisodeClick?.call();
-                      Get.back();
-                      navigateToPage(
-                        context,
-                        MediaPlayer(
-                          media: mediaData,
-                          index: index,
-                          videos: videos,
-                          currentEpisode: episode,
-                          source: source,
-                        ),
-                      );
-                    },
-                    borderRadius: BorderRadius.circular(12),
-                    child: Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            child: Text(
-                              item.title ?? item.quality,
-                              style: const TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                          Icon(
-                            Icons.play_arrow,
-                            size: 24,
-                            color: Theme.of(context).colorScheme.primary,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                );
-              }).toList(),
-            );
           } else {
             return const Center(child: Text('No sources available'));
           }
@@ -319,5 +279,150 @@ void onEpisodeClick(
       ),
     ],
   );
+
+  if (autoSelectSourceSetting == true) {
+    var lastQualityTitle = mediaData.settings.server;
+
+    if (lastQualityTitle != null) {
+      videos.then((videos) async {
+        if (!context.mounted) return;
+
+        final autoSourceMatch =
+            AutoSourceMatch.fromJson(loadData(PrefName.autoSourceMatch));
+
+        int? index;
+        if (autoSourceMatch == AutoSourceMatch.Exact) {
+          index = videos.indexWhere(
+              (video) => (video.title ?? video.quality) == lastQualityTitle);
+          if (index == -1) index = null;
+        } else {
+          var bestMatch = 0;
+          var bestRating = 0.0;
+
+          for (var i = 0; i < videos.length; i++) {
+            var videoTitle = videos[i].title ?? videos[i].quality;
+            var rating = lastQualityTitle.similarityTo(videoTitle);
+            if (rating > bestRating) {
+              bestRating = rating;
+              bestMatch = i;
+            }
+          }
+
+          index = videos.isNotEmpty ? bestMatch : null;
+        }
+
+        if (index == null) {
+          MediaSettings.saveMediaSettings(
+            mediaData..settings.server = null,
+          );
+          showCustomBottomDialog(context, episodeDialog);
+          return;
+        }
+        if (videos.isEmpty || !context.mounted) return;
+
+        onEpisodeClick?.call();
+        navigateToPage(
+          context,
+          MediaPlayer(
+            media: mediaData,
+            index: index,
+            videos: videos,
+            currentEpisode: episode,
+            source: source,
+          ),
+        );
+      });
+
+      return;
+    }
+  }
+
   showCustomBottomDialog(context, episodeDialog);
+}
+
+Widget _buildSourceList(BuildContext context,
+    List<Video> videos,
+    DEpisode episode,
+    Source source,
+    Media mediaData,
+    VoidCallback? onEpisodeClick,) {
+  return Column(
+    children: videos.map((item) {
+      var index = videos.indexOf(item);
+
+      var allSubtitles = <Track>[];
+      var addedSubtitleTitles = <String>{};
+      for (var video in videos) {
+        if (video.subtitles != null && video.subtitles!.length > 1) {
+          for (var subtitle in video.subtitles!) {
+            if (!addedSubtitleTitles.contains(subtitle.label)) {
+              addedSubtitleTitles.add(subtitle.label ?? '');
+              var newSubtitle = Track(
+                label: '${subtitle.label} (from external)',
+                file: subtitle.file,
+              );
+              allSubtitles.add(newSubtitle);
+            }
+          }
+        }
+      }
+
+      for (var video in videos) {
+        if (video.subtitles == null || video.subtitles!.length <= 1) {
+          video.subtitles = List.from(allSubtitles);
+        }
+      }
+
+      return Card(
+        margin:
+        const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+        elevation: 4,
+        child: InkWell(
+          onTap: () {
+            MediaSettings.saveMediaSettings(
+              mediaData..settings.server = item.title ?? item.quality,
+            );
+            onEpisodeClick?.call();
+            Get.back();
+            navigateToPage(
+              context,
+              MediaPlayer(
+                media: mediaData,
+                index: index,
+                videos: videos,
+                currentEpisode: episode,
+                source: source,
+              ),
+            );
+          },
+          borderRadius: BorderRadius.circular(12),
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: Text(
+                    item.title ?? item.quality,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                Icon(
+                  Icons.play_arrow,
+                  size: 24,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    }).toList(),
+  );
 }

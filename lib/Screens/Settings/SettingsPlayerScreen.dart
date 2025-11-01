@@ -214,6 +214,17 @@ List<Widget> playerSettings(
                 ),
                 Setting(
                   type: SettingType.switchType,
+                  name: getString.autoPlayNextEpisode,
+                  description: getString.autoPlayNextEpisodeDescription,
+                  icon: Icons.play_circle_rounded,
+                  isChecked: playerSettings.autoPlay,
+                  onSwitchChange: (value) {
+                    playerSettings.autoPlay = value;
+                    savePlayerSettings(playerSettings);
+                  },
+                ),
+                Setting(
+                  type: SettingType.switchType,
                   name: getString.customMPV,
                   description: getString.customMPVDescription(
                       loadData(PrefName.mpvConfigDir)

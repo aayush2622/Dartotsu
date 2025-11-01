@@ -59,7 +59,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get manhua => 'Manhua';
 
   @override
-  String get novel => 'Новинка';
+  String get novel => 'Роман';
 
   @override
   String get ln => 'Ранобэ';
@@ -124,8 +124,8 @@ class AppLocalizationsRu extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'объемы',
-      one: 'объем',
+      other: 'Тома',
+      one: 'Том',
     );
     return '$_temp0';
   }
@@ -156,11 +156,11 @@ class AppLocalizationsRu extends AppLocalizations {
   String get genres => 'Жанры';
 
   @override
-  String get scanlators => 'Скалы';
+  String get scanlators => 'Сканляторы';
 
   @override
   String list(String type) {
-    return '$type List';
+    return '$type Список';
   }
 
   @override
@@ -173,7 +173,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get readStatus => 'Читать';
 
   @override
-  String get watchStatus => 'Смотреть';
+  String get watchStatus => 'Просмотренное';
 
   @override
   String planned(String type) {
@@ -186,21 +186,21 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
-  String get droppedAnime => 'Сброшенное аниме';
+  String get droppedAnime => 'Брошенное аниме';
 
   @override
-  String get droppedManga => 'Падение Манги';
+  String get droppedManga => 'Брошенная Манга';
 
   @override
   String noDropped(String type) {
-    return 'Вы еще не уронили $type.';
+    return 'Вы еще не бросили $type.';
   }
 
   @override
-  String get continueReading => 'Продолжить чтение';
+  String get continueReading => 'Продолжить читать';
 
   @override
-  String get continueWatching => 'Продолжать смотреть';
+  String get continueWatching => 'Продолжить смотреть';
 
   @override
   String browse(String type) {
@@ -230,7 +230,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String mostFavourite(String type) {
-    return 'Самый вкусный $type';
+    return 'Самый любимый $type';
   }
 
   @override
@@ -247,13 +247,13 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get recommendationsEmptyMessage =>
-      'Наблюдайте за аниме или мангой, чтобы получить рекомендации';
+      'Посмотрите/прочитайте аниме или мангу, чтобы получить рекомендации';
 
   @override
   String get recentUpdates => 'Последние обновления';
 
   @override
-  String get allCaughtUpNew => 'Все догнали, когда Нью?';
+  String get allCaughtUpNew => 'Все догнали, когда новое?';
 
   @override
   String favorite(String type) {
@@ -296,16 +296,16 @@ class AppLocalizationsRu extends AppLocalizations {
   String get sort => 'Сорт';
 
   @override
-  String get utd => 'Вниз';
+  String get utd => 'Сверху вниз';
 
   @override
-  String get dtu => 'Вниз до вверх';
+  String get dtu => 'Снизу вверх';
 
   @override
-  String get rtl => 'Налево';
+  String get rtl => 'Справа на лево';
 
   @override
-  String get ltr => 'Направо';
+  String get ltr => 'Слева на право';
 
   @override
   String get direction => 'Направление';
@@ -314,7 +314,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get episodeWatched => 'Эпизод Смотреть';
 
   @override
-  String get chapterRead => 'Глава Читать';
+  String get chapterRead => 'Глава прочитана';
 
   @override
   String get outOf => 'из';
@@ -372,7 +372,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get addNovelRepoDesc => 'Добавить Novel Repo из различных источников';
 
   @override
-  String get loadExtensionsIcon => 'Иконка расширения загрузки';
+  String get loadExtensionsIcon => 'Загрузить иконки расширений';
 
   @override
   String get loadExtensionsIconDesc =>
@@ -382,7 +382,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get autoUpdate => 'Автоматическое обновление';
 
   @override
-  String get autoUpdateDesc => 'Продления Auto Update';
+  String get autoUpdateDesc => 'Автоматически обновлять расширения';
 
   @override
   String get installSourceToStart =>
@@ -410,10 +410,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String get meanScore => 'Средний балл';
 
   @override
-  String get name => 'Имя';
+  String get name => 'Название';
 
   @override
-  String get nameRomaji => 'Имя (Ромаджи)';
+  String get nameRomaji => 'Название (Ромаджи)';
 
   @override
   String get popularity => 'Популярность';
@@ -422,10 +422,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String get relations => 'Отношения';
 
   @override
-  String get prequel => 'PREQUEL';
+  String get prequel => 'Приложение';
 
   @override
-  String get sequel => 'SEQUEL';
+  String get sequel => 'Продолжение';
 
   @override
   String get source => 'Источник';
@@ -434,7 +434,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get staff => 'Сотрудники';
 
   @override
-  String get startDate => 'Начало Дата';
+  String get startDate => 'Дата начала';
 
   @override
   String get status => 'Статус';
@@ -458,16 +458,16 @@ class AppLocalizationsRu extends AppLocalizations {
   String get expandText => 'показать';
 
   @override
-  String get comingSoon => 'Иду';
+  String get comingSoon => 'Скоро';
 
   @override
-  String get wrongTitle => 'Не тот титул?';
+  String get wrongTitle => 'Не то название?';
 
   @override
-  String get youTube => 'Играть на YouTube?';
+  String get youTube => 'Смотреть на YouTube?';
 
   @override
-  String get mediaNotFound => 'СМИ не нашли';
+  String get mediaNotFound => 'Медия не найдена';
 
   @override
   String get noChapterFound => 'Не найдена глава';
@@ -484,7 +484,7 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
-  String get language => 'Настройка';
+  String get language => 'Язык';
 
   @override
   String get account => 'Аккаунт';
@@ -542,16 +542,16 @@ class AppLocalizationsRu extends AppLocalizations {
       'Скрыть частные сериалы с главной страницы.';
 
   @override
-  String get hiddenMedia => 'Скрытые СМИ';
+  String get hiddenMedia => 'Скрытые медиа';
 
   @override
-  String get noHiddenMediaFound => 'Нет скрытых СМИ';
+  String get noHiddenMediaFound => 'Не найдено скрытых медиа';
 
   @override
   String get playerSettingsTitle => 'Настройки плеера';
 
   @override
-  String get playerSettingsDesc => 'Изменение параметров игрока';
+  String get playerSettingsDesc => 'Изменение параметров плеера';
 
   @override
   String get speed => 'Скорость';
@@ -662,6 +662,20 @@ class AppLocalizationsRu extends AppLocalizations {
       'New rendering backend (may cause visual artifacts)';
 
   @override
+  String get autoPlayNextEpisode => 'Auto Play Next Episode';
+
+  @override
+  String get autoPlayNextEpisodeDescription =>
+      'Automatically play the next episode when the current one ends';
+
+  @override
+  String get automaticSourceSelection => 'Automatic Source Selection Method';
+
+  @override
+  String get automaticSourceSelectionDescription =>
+      'Which method to use for automatic source selection';
+
+  @override
   String get readerSettings => 'Параметры чтения';
 
   @override
@@ -674,16 +688,16 @@ class AppLocalizationsRu extends AppLocalizations {
   String get spacedPagesDesc => 'Добавить пространство между страницами';
 
   @override
-  String get hideScrollbar => 'Свиток';
+  String get hideScrollbar => 'Убрать полосу прокрутки';
 
   @override
-  String get hideScrollbarDesc => 'Скрыть свиток во время чтения';
+  String get hideScrollbarDesc => 'Убрать полосу прокрутки во время чтения';
 
   @override
-  String get hidePageNumber => 'Имя страницы';
+  String get hidePageNumber => 'Убрать номер страницы';
 
   @override
-  String get hidePageNumberDesc => 'Скрыть номер страницы во время чтения';
+  String get hidePageNumberDesc => 'Убрать номер страницы во время чтения';
 
   @override
   String get theme => 'Тема';
@@ -706,7 +720,7 @@ class AppLocalizationsRu extends AppLocalizations {
       'Дает эффект морозного стекла для приложения';
 
   @override
-  String get coverTheme => 'Использовать Обложка';
+  String get coverTheme => 'Использовать тему обложки';
 
   @override
   String get coverThemeDescription =>

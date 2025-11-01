@@ -660,6 +660,20 @@ class AppLocalizationsPt extends AppLocalizations {
       'New rendering backend (may cause visual artifacts)';
 
   @override
+  String get autoPlayNextEpisode => 'Auto Play Next Episode';
+
+  @override
+  String get autoPlayNextEpisodeDescription =>
+      'Automatically play the next episode when the current one ends';
+
+  @override
+  String get automaticSourceSelection => 'Automatic Source Selection Method';
+
+  @override
+  String get automaticSourceSelectionDescription =>
+      'Which method to use for automatic source selection';
+
+  @override
   String get readerSettings => 'Configurações do leitor';
 
   @override
@@ -1447,6 +1461,20 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get bottomPaddingDescription => 'Margem inferior das legendas';
+
+  @override
+  String get useLibass => 'Use Libass';
+
+  @override
+  String get useLibassDescription =>
+      'Use Libass for subtitle rendering (overrides other subtitle settings)';
+
+  @override
+  String get useGpuNext => 'Use gpu-next';
+
+  @override
+  String get useGpuNextDescription =>
+      'New rendering backend (may cause visual artifacts)';
 
   @override
   String get readerSettings => 'Ajustes do Leitor';

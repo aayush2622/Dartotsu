@@ -12,7 +12,7 @@ class AppLocalizationsId extends AppLocalizations {
   String get appName => 'Dartotsu';
 
   @override
-  String get appTagline => 'Aplikasi Terbaik Baru Untuk\nMelacak Anime & Manga';
+  String get appTagline => 'Aplikasi Terbaik BARU Untuk\nMelacak Anime & Manga';
 
   @override
   String get anilist => 'AniList';
@@ -34,7 +34,7 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String loginTo(String service) {
-    return 'Login ke $service';
+    return 'Masuk ke $service';
   }
 
   @override
@@ -52,22 +52,22 @@ class AppLocalizationsId extends AppLocalizations {
   String get manga => 'Manga';
 
   @override
-  String get manhwa => 'Login';
+  String get manhwa => 'Manhwa';
 
   @override
-  String get manhua => 'Login';
+  String get manhua => 'Manhua';
 
   @override
-  String get novel => 'Login';
+  String get novel => 'Novel';
 
   @override
-  String get ln => 'Login';
+  String get ln => 'Novel Ringan';
 
   @override
-  String get home => 'Login';
+  String get home => 'Beranda';
 
   @override
-  String get search => 'Sitemap';
+  String get search => 'Cari';
 
   @override
   String get calendar => 'Kalender';
@@ -76,32 +76,32 @@ class AppLocalizationsId extends AppLocalizations {
   String get settings => 'Pengaturan';
 
   @override
-  String get watch => 'Login';
+  String get watch => 'Tonton';
 
   @override
-  String get read => 'Sitemap';
+  String get read => 'Baca';
 
   @override
-  String get info => 'Sitemap';
+  String get info => 'Info';
 
   @override
-  String get comments => 'Sitemap';
+  String get comments => 'Komentar';
 
   @override
   String get addToList => 'Tambahkan ke Daftar';
 
   @override
-  String get series => 'Login';
+  String get series => 'Seri';
 
   @override
-  String get season => 'Login';
+  String get season => 'Musim';
 
   @override
   String episode(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'Episodes',
+      other: 'Episode',
       one: 'Episode',
     );
     return '$_temp0';
@@ -123,8 +123,8 @@ class AppLocalizationsId extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'Volumes',
-      one: 'Volume',
+      other: 'Jilid',
+      one: 'Jilid',
     );
     return '$_temp0';
   }
@@ -134,17 +134,17 @@ class AppLocalizationsId extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'Films',
+      other: 'Film',
       one: 'Film',
     );
     return '$_temp0';
   }
 
   @override
-  String get totalEpisodes => 'Login';
+  String get totalEpisodes => 'Episode';
 
   @override
-  String get totalChapters => 'Login';
+  String get totalChapters => 'Bab';
 
   @override
   String nextEpisodeRelease(int episode) {
@@ -152,10 +152,10 @@ class AppLocalizationsId extends AppLocalizations {
   }
 
   @override
-  String get genres => 'Login';
+  String get genres => 'Genre';
 
   @override
-  String get scanlators => 'Login';
+  String get scanlators => 'Pemindai';
 
   @override
   String list(String type) {
@@ -163,16 +163,16 @@ class AppLocalizationsId extends AppLocalizations {
   }
 
   @override
-  String get watching => 'Login';
+  String get watching => 'Menonton';
 
   @override
-  String get reading => 'Login';
+  String get reading => 'Membaca';
 
   @override
-  String get readStatus => 'Sitemap';
+  String get readStatus => 'Baca';
 
   @override
-  String get watchStatus => 'Login';
+  String get watchStatus => 'Ditonton';
 
   @override
   String planned(String type) {
@@ -181,14 +181,14 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String onHold(String type) {
-    return 'Di Hold $type';
+    return 'Di Tunda $type';
   }
 
   @override
-  String get droppedAnime => 'Dijatuhkan Anime';
+  String get droppedAnime => 'Anime Dijatuhkan';
 
   @override
-  String get droppedManga => 'Manga Terjatuh';
+  String get droppedManga => 'Manga Dijatuhkan';
 
   @override
   String noDropped(String type) {
@@ -196,10 +196,10 @@ class AppLocalizationsId extends AppLocalizations {
   }
 
   @override
-  String get continueReading => 'Sitemap';
+  String get continueReading => 'Lanjutkan Membaca';
 
   @override
-  String get continueWatching => 'Sitemap';
+  String get continueWatching => 'Lanjutkan Menonton';
 
   @override
   String browse(String type) {
@@ -217,19 +217,19 @@ class AppLocalizationsId extends AppLocalizations {
   }
 
   @override
-  String get topAiring => 'Sitemap';
+  String get topAiring => 'Penayangan Teratas';
 
   @override
   String topRated(String type) {
-    return 'Nilai teratas $type';
+    return 'Penilaian teratas $type';
   }
 
   @override
-  String get topScore => 'Skor atas';
+  String get topScore => 'Skor Teratas';
 
   @override
   String mostFavourite(String type) {
-    return 'Kebanyakan Favorit $type';
+    return 'Paling Favorit $type';
   }
 
   @override
@@ -242,7 +242,7 @@ class AppLocalizationsId extends AppLocalizations {
   String get previousSeason => 'Musim Sebelumnya';
 
   @override
-  String get recommended => 'Sitemap';
+  String get recommended => 'Direkomendasikan';
 
   @override
   String get recommendationsEmptyMessage =>
@@ -260,7 +260,7 @@ class AppLocalizationsId extends AppLocalizations {
   }
 
   @override
-  String get favorites => 'Login';
+  String get favorites => 'Favorit';
 
   @override
   String get noFavourites =>
@@ -281,52 +281,52 @@ class AppLocalizationsId extends AppLocalizations {
   }
 
   @override
-  String get gridView => 'Login';
+  String get gridView => 'Tampilan Kisi';
 
   @override
-  String get listView => 'Login';
+  String get listView => 'Tampilan Daftar';
 
   @override
-  String get compactView => 'Tampilan yang ringkas';
+  String get compactView => 'Tampilan Ringkas';
 
   @override
-  String get layout => 'Login';
+  String get layout => 'Tata Letak';
 
   @override
-  String get sort => 'Login';
+  String get sort => 'Urutkan';
 
   @override
-  String get utd => 'Sitemap';
+  String get utd => 'Atas Ke Bawah';
 
   @override
-  String get dtu => 'Sitemap';
+  String get dtu => 'Bawah Ke Atas';
 
   @override
-  String get rtl => 'Hak Untuk Kiri';
+  String get rtl => 'Kanan Ke Kiri';
 
   @override
-  String get ltr => 'Login';
+  String get ltr => 'Kiri Ke Kanan';
 
   @override
-  String get direction => 'Login';
+  String get direction => 'Arah';
 
   @override
-  String get episodeWatched => 'Episode Login';
+  String get episodeWatched => 'Episode Ditonton';
 
   @override
-  String get chapterRead => 'Sitemap';
+  String get chapterRead => 'Bab Dibaca';
 
   @override
-  String get outOf => 'sitemap';
+  String get outOf => 'dari';
 
   @override
-  String get totalOf => 'Sitemap';
+  String get totalOf => 'Total dari';
 
   @override
-  String get selected => 'Login';
+  String get selected => 'Dipilih';
 
   @override
-  String get found => 'Login';
+  String get found => 'Ditemukan';
 
   @override
   String extension(int count) {
@@ -346,7 +346,7 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String installed(String type) {
-    return 'Dipasang $type';
+    return '$type Terpasang';
   }
 
   @override
@@ -372,10 +372,11 @@ class AppLocalizationsId extends AppLocalizations {
   String get addNovelRepoDesc => 'Tambahkan Novel Repo dari berbagai sumber';
 
   @override
-  String get loadExtensionsIcon => 'Ikon Ekstensi Beban';
+  String get loadExtensionsIcon => 'Memuat Ekstensi ikon';
 
   @override
-  String get loadExtensionsIconDesc => 'Diaktifkan jika ekstensi halaman lags';
+  String get loadExtensionsIconDesc =>
+      'Nonaktifkan jika ekstensi halaman lambat';
 
   @override
   String get autoUpdate => 'Pembaruan Otomatis';
@@ -385,85 +386,85 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get installSourceToStart =>
-      'Instal sumber dari halaman ekstensi untuk memulai';
+      'Pasang sumber dari halaman ekstensi untuk memulai';
 
   @override
-  String get author => 'Login';
+  String get author => 'Pengarang';
 
   @override
-  String get averageDuration => 'Durasi rata-rata';
+  String get averageDuration => 'Durasi Rata-rata';
 
   @override
-  String get characters => 'Login';
+  String get characters => 'Karakter';
 
   @override
-  String get synopsis => 'Login';
+  String get synopsis => 'Sinopsis';
 
   @override
   String get endDate => 'Tanggal Akhir';
 
   @override
-  String get format => 'Login';
+  String get format => 'Format';
 
   @override
-  String get meanScore => 'Skor';
+  String get meanScore => 'Skor Rata-rata';
 
   @override
-  String get name => 'Login';
+  String get name => 'Nama';
 
   @override
   String get nameRomaji => 'Nama (Romaji)';
 
   @override
-  String get popularity => 'Login';
+  String get popularity => 'Popularitas';
 
   @override
-  String get relations => 'Login';
+  String get relations => 'Hubungan';
 
   @override
-  String get prequel => 'LOGIN';
+  String get prequel => 'PREKUEL';
 
   @override
-  String get sequel => 'LOGIN';
+  String get sequel => 'SEKUEL';
 
   @override
-  String get source => 'Login';
+  String get source => 'Sumber';
 
   @override
-  String get staff => 'Login';
+  String get staff => 'Staf';
 
   @override
   String get startDate => 'Tanggal Mulai';
 
   @override
-  String get status => 'Login';
+  String get status => 'Status';
 
   @override
-  String get studio => 'Login';
+  String get studio => 'Studio';
 
   @override
-  String get synonyms => 'Login';
+  String get synonyms => 'Sinonim';
 
   @override
-  String get tags => 'Login';
+  String get tags => 'Tag';
 
   @override
-  String get total => 'Sitemap';
+  String get total => 'Total';
 
   @override
-  String get collapseText => 'sitemap';
+  String get collapseText => 'tampilkan sedikit';
 
   @override
-  String get expandText => 'sitemap';
+  String get expandText => 'tampilkan banyak';
 
   @override
-  String get comingSoon => 'Login';
+  String get comingSoon => 'SEGERA Hadir';
 
   @override
-  String get wrongTitle => 'Judul yang salah?';
+  String get wrongTitle => 'Salah Judul?';
 
   @override
-  String get youTube => 'Bermain di YouTube?';
+  String get youTube => 'Mainkan di YouTube?';
 
   @override
   String get mediaNotFound => 'Media tidak ditemukan';
@@ -476,14 +477,14 @@ class AppLocalizationsId extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'Aktivities',
+      other: 'Aktivitas',
       one: 'Aktivitas',
     );
     return '$_temp0';
   }
 
   @override
-  String get language => 'Login';
+  String get language => 'Bahasa';
 
   @override
   String get account => 'Akun';
@@ -579,10 +580,10 @@ class AppLocalizationsId extends AppLocalizations {
   String get skipButtonDescription => 'Durasi tombol lewati';
 
   @override
-  String get thumbLessSeekBar => 'Login';
+  String get thumbLessSeekBar => 'Seekbar Tanpa Jempol';
 
   @override
-  String get thumbLessSeekBarDesc => 'Hapus thumb dari bar pencarian';
+  String get thumbLessSeekBarDesc => 'Hapus jempol dari seekbar';
 
   @override
   String get customMPV => 'MPV kustom Login';
@@ -661,19 +662,33 @@ class AppLocalizationsId extends AppLocalizations {
       'New rendering backend (may cause visual artifacts)';
 
   @override
+  String get autoPlayNextEpisode => 'Auto Play Next Episode';
+
+  @override
+  String get autoPlayNextEpisodeDescription =>
+      'Automatically play the next episode when the current one ends';
+
+  @override
+  String get automaticSourceSelection => 'Automatic Source Selection Method';
+
+  @override
+  String get automaticSourceSelectionDescription =>
+      'Which method to use for automatic source selection';
+
+  @override
   String get readerSettings => 'Pengaturan Pembaca';
 
   @override
   String get readerSettingsDesc => 'Mengubah pengaturan pembaca';
 
   @override
-  String get spacedPages => 'Sitemap';
+  String get spacedPages => 'Halaman Berjarak';
 
   @override
   String get spacedPagesDesc => 'Tambahkan ruang antara halaman';
 
   @override
-  String get hideScrollbar => 'Login';
+  String get hideScrollbar => 'Sembunyi Scrollbar';
 
   @override
   String get hideScrollbarDesc => 'Sembunyikan scrollbar saat membaca';
@@ -717,7 +732,7 @@ class AppLocalizationsId extends AppLocalizations {
       'Gunakan warna yang sama dengan wallpaper Anda';
 
   @override
-  String get customTheme => 'Sitemap Login';
+  String get customTheme => 'Modifikasi Tema';
 
   @override
   String get customThemeDescription => 'Gunakan warna Anda sendiri untuk tema';
@@ -738,13 +753,13 @@ class AppLocalizationsId extends AppLocalizations {
   String get colorPickerDescription => 'Pilih warna';
 
   @override
-  String get colorPickerDefault => 'Login';
+  String get colorPickerDefault => 'Bawaan';
 
   @override
-  String get colorPickerCustom => 'Sitemap';
+  String get colorPickerCustom => 'Modifikasi';
 
   @override
-  String get customPath => 'Jalur Khusus';
+  String get customPath => 'Modifikasi Jalur';
 
   @override
   String get customPathDescription =>
@@ -757,7 +772,7 @@ class AppLocalizationsId extends AppLocalizations {
   String get selectMediaService => 'Pilih Layanan Media';
 
   @override
-  String get logFile => 'Login';
+  String get logFile => 'File Log';
 
   @override
   String get logFileDescription => 'Bagikan file log';
@@ -773,13 +788,13 @@ class AppLocalizationsId extends AppLocalizations {
       'Gunakan manajer cache Gambar yang berbeda';
 
   @override
-  String get webView => 'Login';
+  String get webView => 'Tampilan Web';
 
   @override
   String get developersHelpers => 'Pengembang/Pembantu';
 
   @override
-  String get developersHelpersDesc => 'Foto di Dartotsu';
+  String get developersHelpersDesc => 'Tenaga kerja tanpa bayaran di Dartotsu';
 
   @override
   String get supportMaintainer =>
@@ -789,7 +804,7 @@ class AppLocalizationsId extends AppLocalizations {
   String get donationGoal => 'Belum ada tujuan donasi saat ini';
 
   @override
-  String get options => 'Login';
+  String get options => 'Opsi';
 
   @override
   String get ok => 'OK';

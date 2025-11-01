@@ -10,6 +10,26 @@ import 'package:isar/isar.dart';
 
 part 'MediaSettings.g.dart';
 
+enum AutoSourceMatch {
+  Exact,
+  Closest;
+
+  int toJson() {
+    return switch (this) {
+      AutoSourceMatch.Exact => 0,
+      AutoSourceMatch.Closest => 1,
+    };
+  }
+
+  static AutoSourceMatch fromJson(int json) {
+    return switch (json) {
+      0 => AutoSourceMatch.Exact,
+      1 => AutoSourceMatch.Closest,
+      _ => AutoSourceMatch.Exact,
+    };
+  }
+}
+
 @collection
 class MediaSettings {
   Id id = Isar.autoIncrement;
