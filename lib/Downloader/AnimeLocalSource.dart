@@ -94,7 +94,9 @@ class AnimeLocalSourceMethods implements SourceMethods {
         final episodeName = fileName.substring(0, fileName.lastIndexOf('.'));
 
         final episodeNumber = EpisodeRecognition.parseEpisodeNumber(
-            media.title ?? "", episodeName);
+          media.title ?? "",
+          episodeName,
+        );
 
         episodes.add(
           DEpisode(
@@ -140,7 +142,12 @@ class AnimeLocalSourceMethods implements SourceMethods {
 
   @override
   Future<Pages> search(String query, int page, List filters) async {
-    return Pages(list: await _getAllMedia());
+    var media = await _getAllMedia();
+    var searchedMedia = media
+        .where((element) =>
+            (element.title ?? "").toLowerCase().contains(query.toLowerCase()))
+        .toList();
+    return Pages(list: searchedMedia);
   }
 
   @override
@@ -149,14 +156,13 @@ class AnimeLocalSourceMethods implements SourceMethods {
   }
 
   @override
-  Future<bool> setPreference(SourcePreference pref, value) {
-    throw true;
+  Future<bool> setPreference(SourcePreference pref, value) async {
+    return true;
   }
 
   @override
-  Future<Pages> getLatestUpdates(int page) {
-    //not used for anime
-    throw UnimplementedError();
+  Future<Pages> getLatestUpdates(int page) async {
+    return Pages(list: await _getAllMedia());
   }
 
   @override
