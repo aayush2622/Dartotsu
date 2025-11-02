@@ -36,6 +36,11 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_17
     }
+    packagingOptions {
+        jniLibs {
+            useLegacyPackaging true
+        }
+    }
     defaultConfig {
         applicationId = "ani.aayush262.dartotsu"
         minSdk = flutter.minSdkVersion
