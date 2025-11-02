@@ -464,6 +464,9 @@ class AppLocalizationsKn extends AppLocalizations {
   String get wrongTitle => 'ತಪ್ಪಾದ ಶೀರ್ಷಿಕೆ?';
 
   @override
+  String get missingResults => 'Missing Results?';
+
+  @override
   String get youTube => 'YouTube ನಲ್ಲಿ ಪ್ಲೇ ಮಾಡಲಾ?';
 
   @override

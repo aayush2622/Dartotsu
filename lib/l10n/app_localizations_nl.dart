@@ -464,6 +464,9 @@ class AppLocalizationsNl extends AppLocalizations {
   String get wrongTitle => 'Verkeerde Title?';
 
   @override
+  String get missingResults => 'Missing Results?';
+
+  @override
   String get youTube => 'Op YouTube spelen?';
 
   @override

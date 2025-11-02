@@ -463,6 +463,9 @@ class AppLocalizationsUk extends AppLocalizations {
   String get wrongTitle => 'Назва wrong?';
 
   @override
+  String get missingResults => 'Missing Results?';
+
+  @override
   String get youTube => 'Грати на YouTube?';
 
   @override

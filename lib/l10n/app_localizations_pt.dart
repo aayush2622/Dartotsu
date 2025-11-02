@@ -462,6 +462,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get wrongTitle => 'Título errado?';
 
   @override
+  String get missingResults => 'Missing Results?';
+
+  @override
   String get youTube => 'Jogar no YouTube?';
 
   @override

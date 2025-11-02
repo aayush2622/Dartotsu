@@ -464,6 +464,9 @@ class AppLocalizationsMr extends AppLocalizations {
   String get wrongTitle => 'चुकीचे शीर्षक?';
 
   @override
+  String get missingResults => 'Missing Results?';
+
+  @override
   String get youTube => 'YouTube वर प्ले करायचे का?';
 
   @override

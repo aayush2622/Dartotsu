@@ -461,6 +461,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get wrongTitle => 'عنوان خاطئ؟';
 
   @override
+  String get missingResults => 'Missing Results?';
+
+  @override
   String get youTube => 'تشغيل ڤيديو اليوتيوب ؟';
 
   @override

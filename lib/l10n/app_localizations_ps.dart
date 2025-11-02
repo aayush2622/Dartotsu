@@ -467,6 +467,9 @@ class AppLocalizationsPs extends AppLocalizations {
   String get wrongTitle => 'ناسم عنوان؟';
 
   @override
+  String get missingResults => 'Missing Results?';
+
+  @override
   String get youTube => 'په یوټیوب کې لوبول؟';
 
   @override

@@ -88,4 +88,9 @@ extension StringExtensions on String {
       "mov"
     ].any((extension) => toLowerCase().endsWith(extension));
   }
+
+  bool isImage() {
+    return ["jpg", "jpeg", "png", "gif", "bmp", "webp", "tiff", "svg"]
+        .any((extension) => toLowerCase().endsWith(extension));
+  }
 }

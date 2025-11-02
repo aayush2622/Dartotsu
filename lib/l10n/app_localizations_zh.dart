@@ -458,6 +458,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get wrongTitle => '标题?';
 
   @override
+  String get missingResults => 'Missing Results?';
+
+  @override
   String get youTube => '在YouTube举办活动?';
 
   @override

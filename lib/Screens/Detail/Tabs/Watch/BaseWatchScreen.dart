@@ -105,32 +105,52 @@ abstract class BaseWatchScreen<T extends StatefulWidget> extends State<T> {
             );
           }),
           const SizedBox(height: 16),
-          if (viewModel.source.value != null) _buildWrongTitle(),
+          if (viewModel.source.value != null)
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              spacing: 8,
+              children: [_buildMissingResults(), _buildWrongTitle()],
+            ),
         ],
+      ),
+    );
+  }
+
+  //todo: replace with a refresh gesture
+  Widget _buildMissingResults() {
+    var theme = Theme.of(context).colorScheme;
+    return GestureDetector(
+      onTap: () =>
+          viewModel.clearResponseCache(viewModel.source.value!, mediaData),
+      child: Text(
+        getString.missingResults,
+        style: TextStyle(
+          color: theme.secondary,
+          fontWeight: FontWeight.bold,
+          fontSize: 14,
+          decoration: TextDecoration.underline,
+          decorationColor: theme.secondary,
+          textBaseline: TextBaseline.alphabetic,
+        ),
       ),
     );
   }
 
   Widget _buildWrongTitle() {
     var theme = Theme.of(context).colorScheme;
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        GestureDetector(
-          onTap: () => viewModel.wrongTitle(context, mediaData, null),
-          child: Text(
-            getString.wrongTitle,
-            style: TextStyle(
-              color: theme.secondary,
-              fontWeight: FontWeight.bold,
-              fontSize: 14,
-              decoration: TextDecoration.underline,
-              decorationColor: theme.secondary,
-              textBaseline: TextBaseline.alphabetic,
-            ),
-          ),
-        )
-      ],
+    return GestureDetector(
+      onTap: () => viewModel.wrongTitle(context, mediaData, null),
+      child: Text(
+        getString.wrongTitle,
+        style: TextStyle(
+          color: theme.secondary,
+          fontWeight: FontWeight.bold,
+          fontSize: 14,
+          decoration: TextDecoration.underline,
+          decorationColor: theme.secondary,
+          textBaseline: TextBaseline.alphabetic,
+        ),
+      ),
     );
   }
 

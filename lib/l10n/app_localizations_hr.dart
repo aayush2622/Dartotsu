@@ -464,6 +464,9 @@ class AppLocalizationsHr extends AppLocalizations {
   String get wrongTitle => 'Pogrešan naslov?';
 
   @override
+  String get missingResults => 'Missing Results?';
+
+  @override
   String get youTube => 'Reproduciraj na YouTubeu?';
 
   @override

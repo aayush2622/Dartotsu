@@ -464,6 +464,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get wrongTitle => 'Не то название?';
 
   @override
+  String get missingResults => 'Missing Results?';
+
+  @override
   String get youTube => 'Смотреть на YouTube?';
 
   @override

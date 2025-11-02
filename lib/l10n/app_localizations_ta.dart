@@ -467,6 +467,9 @@ class AppLocalizationsTa extends AppLocalizations {
   String get wrongTitle => 'தவறான தலைப்பு?';
 
   @override
+  String get missingResults => 'Missing Results?';
+
+  @override
   String get youTube => 'YouTube-இல் இயக்கவா?';
 
   @override

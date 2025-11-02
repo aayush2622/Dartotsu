@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:async/async.dart';
+import 'package:dartotsu/AnimeLocalSource.dart';
 import 'package:dartotsu/Theme/LanguageSwitcher.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/cupertino.dart';
@@ -38,11 +39,14 @@ abstract class BaseParser extends GetxController {
         manager.getSortedInstalledExtension(itemType);
 
     _sourceListSubscription?.cancel();
-    _sourceListSubscription = sortedSourcesRx.listen((sortedSources) {
-      sourceList.value = sortedSources;
+    _sourceListSubscription = sortedSourcesRx.listen((sources) {
+      sourceList.value = [...sources, AnimeLocalSource()];
     });
 
-    final List<Source> sortedSources = sortedSourcesRx.value;
+    final List<Source> sortedSources = [
+      ...sortedSourcesRx.value,
+      AnimeLocalSource()
+    ];
 
     if (sortedSources.isEmpty) {
       sourcesLoaded.value = true;
@@ -229,6 +233,11 @@ abstract class BaseParser extends GetxController {
     var show = ShowResponse(
         name: response.title, link: response.url, coverUrl: response.cover);
     saveCustomData<ShowResponse>("${source.name}_${mediaData.id}_source", show);
+  }
+
+  void clearResponseCache(Source source, Media mediaData) {
+    removeCustomData("${source.name}_${mediaData.id}_source");
+    searchMedia(source, mediaData);
   }
 
   Future<void> wrongTitle(

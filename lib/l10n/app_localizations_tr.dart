@@ -462,6 +462,9 @@ class AppLocalizationsTr extends AppLocalizations {
   String get wrongTitle => 'Yanlış Başlık?';
 
   @override
+  String get missingResults => 'Missing Results?';
+
+  @override
   String get youTube => 'YouTube\'da oynayın?';
 
   @override

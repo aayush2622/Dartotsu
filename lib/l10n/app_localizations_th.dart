@@ -462,6 +462,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get wrongTitle => 'ชื่อ?';
 
   @override
+  String get missingResults => 'Missing Results?';
+
+  @override
   String get youTube => 'เล่นบน YouTube?';
 
   @override

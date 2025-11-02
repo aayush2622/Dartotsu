@@ -463,6 +463,8 @@ Widget _buildSourceList(
   Media mediaData,
   VoidCallback? onTapCallback,
 ) {
+  final lastSourceKey = "${mediaData.id}-${source.name}-lastSource";
+
   final allSubtitles = <Track>[];
   final seenLabels = <String>{};
 
@@ -503,8 +505,9 @@ Widget _buildSourceList(
           child: InkWell(
             borderRadius: BorderRadius.circular(12),
             onTap: () {
-              MediaSettings.saveMediaSettings(
-                mediaData..settings.server = item.title ?? item.quality,
+              saveCustomData(
+                lastSourceKey,
+                item.title ?? item.quality,
               );
 
               onTapCallback?.call();

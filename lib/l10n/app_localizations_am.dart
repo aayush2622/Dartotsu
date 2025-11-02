@@ -460,6 +460,9 @@ class AppLocalizationsAm extends AppLocalizations {
   String get wrongTitle => 'የተሳሳተ ርዕስ?';
 
   @override
+  String get missingResults => 'Missing Results?';
+
+  @override
   String get youTube => 'በዩቲዩብ ላይ ይጫወቱ?';
 
   @override

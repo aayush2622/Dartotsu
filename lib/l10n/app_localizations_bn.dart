@@ -463,6 +463,9 @@ class AppLocalizationsBn extends AppLocalizations {
   String get wrongTitle => 'ভুল শিরোনাম?';
 
   @override
+  String get missingResults => 'Missing Results?';
+
+  @override
   String get youTube => 'ইউটিউবে চালান?';
 
   @override
