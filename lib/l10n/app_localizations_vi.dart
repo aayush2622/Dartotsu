@@ -463,6 +463,9 @@ class AppLocalizationsVi extends AppLocalizations {
   String get wrongTitle => 'Tiêu đề sai?';
 
   @override
+  String get missingResults => 'Missing Results?';
+
+  @override
   String get youTube => 'Phát trên YouTube?';
 
   @override

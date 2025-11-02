@@ -464,6 +464,9 @@ class AppLocalizationsHa extends AppLocalizations {
   String get wrongTitle => 'Suna mara daidai?';
 
   @override
+  String get missingResults => 'Missing Results?';
+
+  @override
   String get youTube => 'Kalla a YouTube?';
 
   @override

@@ -463,6 +463,9 @@ class AppLocalizationsEl extends AppLocalizations {
   String get wrongTitle => 'Λάθος τίτλος?';
 
   @override
+  String get missingResults => 'Missing Results?';
+
+  @override
   String get youTube => 'Παίξτε στο YouTube?';
 
   @override

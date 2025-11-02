@@ -467,6 +467,9 @@ class AppLocalizationsSw extends AppLocalizations {
   String get wrongTitle => 'Kichwa Kibaya?';
 
   @override
+  String get missingResults => 'Missing Results?';
+
+  @override
   String get youTube => 'Cheza kwenye YouTube?';
 
   @override

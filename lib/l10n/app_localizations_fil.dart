@@ -467,6 +467,9 @@ class AppLocalizationsFil extends AppLocalizations {
   String get wrongTitle => 'maling pamagat?';
 
   @override
+  String get missingResults => 'Missing Results?';
+
+  @override
   String get youTube => 'i-play sa YouTube?';
 
   @override

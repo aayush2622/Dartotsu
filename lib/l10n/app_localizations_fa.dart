@@ -462,6 +462,9 @@ class AppLocalizationsFa extends AppLocalizations {
   String get wrongTitle => 'عنوان اشتباه؟?';
 
   @override
+  String get missingResults => 'Missing Results?';
+
+  @override
   String get youTube => 'در YouTube بازی کنید؟?';
 
   @override

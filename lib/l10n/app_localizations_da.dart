@@ -461,6 +461,9 @@ class AppLocalizationsDa extends AppLocalizations {
   String get wrongTitle => 'Forkert titel?';
 
   @override
+  String get missingResults => 'Missing Results?';
+
+  @override
   String get youTube => 'Afspil på YouTube?';
 
   @override

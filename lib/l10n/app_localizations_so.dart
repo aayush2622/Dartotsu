@@ -464,6 +464,9 @@ class AppLocalizationsSo extends AppLocalizations {
   String get wrongTitle => 'Cinwaan khaldan?';
 
   @override
+  String get missingResults => 'Missing Results?';
+
+  @override
   String get youTube => 'Ka ciyaar YouTube?';
 
   @override

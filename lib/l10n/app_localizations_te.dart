@@ -464,6 +464,9 @@ class AppLocalizationsTe extends AppLocalizations {
   String get wrongTitle => 'తప్పు శీర్షిక?';
 
   @override
+  String get missingResults => 'Missing Results?';
+
+  @override
   String get youTube => 'YouTube లో ప్లే చేయాలా?';
 
   @override

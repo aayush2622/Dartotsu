@@ -462,6 +462,9 @@ class AppLocalizationsAs extends AppLocalizations {
   String get wrongTitle => 'শিৰোনাম ভুল?';
 
   @override
+  String get missingResults => 'Missing Results?';
+
+  @override
   String get youTube => 'ইউটিউবত প্লে কৰক?';
 
   @override

@@ -458,6 +458,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get wrongTitle => '間違ったタイトル?';
 
   @override
+  String get missingResults => 'Missing Results?';
+
+  @override
   String get youTube => 'YouTubeで再生する?';
 
   @override

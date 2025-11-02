@@ -458,6 +458,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get wrongTitle => '잘못된 제목?';
 
   @override
+  String get missingResults => 'Missing Results?';
+
+  @override
   String get youTube => 'YouTube에서 재생?';
 
   @override

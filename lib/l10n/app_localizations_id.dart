@@ -464,6 +464,9 @@ class AppLocalizationsId extends AppLocalizations {
   String get wrongTitle => 'Salah Judul?';
 
   @override
+  String get missingResults => 'Missing Results?';
+
+  @override
   String get youTube => 'Mainkan di YouTube?';
 
   @override

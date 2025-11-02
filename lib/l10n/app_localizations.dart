@@ -929,6 +929,12 @@ abstract class AppLocalizations {
   /// **'Wrong Title?'**
   String get wrongTitle;
 
+  /// No description provided for @missingResults.
+  ///
+  /// In en, this message translates to:
+  /// **'Missing Results?'**
+  String get missingResults;
+
   /// No description provided for @youTube.
   ///
   /// In en, this message translates to:
