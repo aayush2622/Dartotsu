@@ -358,10 +358,6 @@ void showAutoSelectingDialog(
         ],
       ),
     ],
-    onClose: () {
-      saveCustomData(lastSourceKey, null);
-      saveCustomData(autoKey, false);
-    },
   );
   showCustomBottomDialog(context, dialog);
 }
