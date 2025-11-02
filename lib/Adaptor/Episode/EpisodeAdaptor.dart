@@ -439,6 +439,29 @@ void openSourceSelectionSheet(
             );
           }
 
+          if (snapshot.data?.length == 1) {
+            final video = snapshot.data!.first;
+            saveCustomData(
+              lastSourceKey,
+              video.title ?? video.quality,
+            );
+
+            onTapCallback?.call();
+            Navigator.pop(context);
+
+            navigateToPage(
+              context,
+              MediaPlayer(
+                media: mediaData,
+                index: 0,
+                videos: snapshot.data!,
+                currentEpisode: episode,
+                source: source,
+              ),
+            );
+            return const SizedBox.shrink();
+          }
+
           return _buildSourceList(
             context,
             snapshot.data!,
