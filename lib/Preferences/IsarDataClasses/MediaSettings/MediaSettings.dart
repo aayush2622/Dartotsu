@@ -6,7 +6,7 @@ import 'package:dartotsu/Preferences/IsarDataClasses/DefaultPlayerSettings/Defau
 import 'package:dartotsu/Preferences/IsarDataClasses/DefaultReaderSettings/DafaultReaderSettings.dart';
 import 'package:dartotsu/Preferences/PrefManager.dart';
 import 'package:get/get.dart';
-import 'package:isar/isar.dart';
+import 'package:isar_community/isar.dart';
 
 part 'MediaSettings.g.dart';
 

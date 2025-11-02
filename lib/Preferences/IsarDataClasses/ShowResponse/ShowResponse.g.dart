@@ -73,7 +73,7 @@ const ShowResponseSchema = CollectionSchema(
   getId: _showResponseGetId,
   getLinks: _showResponseGetLinks,
   attach: _showResponseAttach,
-  version: '3.1.0+1',
+  version: '3.3.0-dev.3',
 );
 
 int _showResponseEstimateSize(

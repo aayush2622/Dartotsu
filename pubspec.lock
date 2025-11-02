@@ -5,23 +5,18 @@ packages:
     dependency: transitive
     description:
       name: _fe_analyzer_shared
-      sha256: "16e298750b6d0af7ce8a3ba7c18c69c3785d11b15ec83f6dcd0ad2a0009b3cab"
+      sha256: da0d9209ca76bde579f2da330aeb9df62b6319c834fa7baae052021b0462401f
       url: "https://pub.dev"
     source: hosted
-    version: "76.0.0"
-  _macros:
-    dependency: transitive
-    description: dart
-    source: sdk
-    version: "0.3.3"
+    version: "85.0.0"
   analyzer:
-    dependency: "direct overridden"
+    dependency: transitive
     description:
       name: analyzer
-      sha256: "1f14db053a8c23e260789e9b0980fa27f2680dd640932cae5e1137cce0e46e1e"
+      sha256: "974859dc0ff5f37bc4313244b3218c791810d03ab3470a579580279ba971a48d"
       url: "https://pub.dev"
     source: hosted
-    version: "6.11.0"
+    version: "7.7.1"
   antlr4:
     dependency: transitive
     description:
@@ -122,18 +117,18 @@ packages:
     dependency: transitive
     description:
       name: build
-      sha256: "51dc711996cbf609b90cbe5b335bbce83143875a9d58e4b5c6d3c4f684d3dda7"
+      sha256: ce76b1d48875e3233fde17717c23d1f60a91cc631597e49a400c89b475395b1d
       url: "https://pub.dev"
     source: hosted
-    version: "2.5.4"
+    version: "3.1.0"
   build_config:
     dependency: transitive
     description:
       name: build_config
-      sha256: "4ae2de3e1e67ea270081eaee972e1bd8f027d459f249e0f1186730784c2e7e33"
+      sha256: "4f64382b97504dc2fcdf487d5aae33418e08b4703fc21249e4db6d804a4d0187"
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.2"
+    version: "1.2.0"
   build_daemon:
     dependency: transitive
     description:
@@ -146,26 +141,26 @@ packages:
     dependency: transitive
     description:
       name: build_resolvers
-      sha256: ee4257b3f20c0c90e72ed2b57ad637f694ccba48839a821e87db762548c22a62
+      sha256: d1d57f7807debd7349b4726a19fd32ec8bc177c71ad0febf91a20f84cd2d4b46
       url: "https://pub.dev"
     source: hosted
-    version: "2.5.4"
+    version: "3.0.3"
   build_runner:
     dependency: "direct dev"
     description:
       name: build_runner
-      sha256: "382a4d649addbfb7ba71a3631df0ec6a45d5ab9b098638144faf27f02778eb53"
+      sha256: b24597fceb695969d47025c958f3837f9f0122e237c6a22cb082a5ac66c3ca30
       url: "https://pub.dev"
     source: hosted
-    version: "2.5.4"
+    version: "2.7.1"
   build_runner_core:
     dependency: transitive
     description:
       name: build_runner_core
-      sha256: "85fbbb1036d576d966332a3f5ce83f2ce66a40bea1a94ad2d5fc29a19a0d3792"
+      sha256: "066dda7f73d8eb48ba630a55acb50c4a84a2e6b453b1cb4567f581729e794f7b"
       url: "https://pub.dev"
     source: hosted
-    version: "9.1.2"
+    version: "9.3.1"
   built_collection:
     dependency: transitive
     description:
@@ -298,26 +293,24 @@ packages:
     dependency: transitive
     description:
       name: d4rt
-      sha256: "40ecf0b73603a8268050e890eb4d037b5bdf4184f439cc18d593e83b100a19e7"
+      sha256: "1eb626145e2ed97332f9e6e842e626f973d3969ce30e2794efb4744bd8aeba63"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.9"
+    version: "0.1.7"
   dart_style:
     dependency: transitive
     description:
       name: dart_style
-      sha256: "7306ab8a2359a48d22310ad823521d723acfed60ee1f7e37388e8986853b6820"
+      sha256: "8a0e5fba27e8ee025d2ffb4ee820b4e6e2cf5e4246a6b1a477eb66866947e0bb"
       url: "https://pub.dev"
     source: hosted
-    version: "2.3.8"
+    version: "3.1.1"
   dartotsu_extension_bridge:
     dependency: "direct main"
     description:
-      path: "."
-      ref: master
-      resolved-ref: ccd30e4ec43ed27a14ac238bc995af318f40d0fc
-      url: "https://github.com/aayush2622/DartotsuExtensionBridge.git"
-    source: git
+      path: "../DartotsuExtensionBridge"
+      relative: true
+    source: path
     version: "0.0.4"
   dartx:
     dependency: transitive
@@ -885,30 +878,30 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.1.2"
-  isar:
+  isar_community:
     dependency: "direct main"
     description:
-      name: isar
-      sha256: "99165dadb2cf2329d3140198363a7e7bff9bbd441871898a87e26914d25cf1ea"
+      name: isar_community
+      sha256: "28f59e54636c45ba0bb1b3b7f2656f1c50325f740cea6efcd101900be3fba546"
       url: "https://pub.dev"
     source: hosted
-    version: "3.1.0+1"
-  isar_flutter_libs:
+    version: "3.3.0-dev.3"
+  isar_community_flutter_libs:
     dependency: "direct main"
     description:
-      name: isar_flutter_libs
-      sha256: bc6768cc4b9c61aabff77152e7f33b4b17d2fc93134f7af1c3dd51500fe8d5e8
+      name: isar_community_flutter_libs
+      sha256: c2934fe755bb3181cb67602fd5df0d080b3d3eb52799f98623aa4fc5acbea010
       url: "https://pub.dev"
     source: hosted
-    version: "3.1.0+1"
-  isar_generator:
+    version: "3.3.0-dev.3"
+  isar_community_generator:
     dependency: "direct dev"
     description:
-      name: isar_generator
-      sha256: "76c121e1295a30423604f2f819bc255bc79f852f3bc8743a24017df6068ad133"
+      name: isar_community_generator
+      sha256: "1d760de09ffbc837ad65476f14b6ad17381f0fb485e01bf77d76d825ef734bec"
       url: "https://pub.dev"
     source: hosted
-    version: "3.1.0+1"
+    version: "3.3.0-dev.3"
   js:
     dependency: "direct overridden"
     description:
@@ -945,34 +938,34 @@ packages:
     dependency: "direct dev"
     description:
       name: json_serializable
-      sha256: c2fcb3920cf2b6ae6845954186420fca40bc0a8abcc84903b7801f17d7050d7c
+      sha256: "33a040668b31b320aafa4822b7b1e177e163fc3c1e835c6750319d4ab23aa6fe"
       url: "https://pub.dev"
     source: hosted
-    version: "6.9.0"
+    version: "6.11.1"
   leak_tracker:
     dependency: transitive
     description:
       name: leak_tracker
-      sha256: "6bb818ecbdffe216e81182c2f0714a2e62b593f4a4f13098713ff1685dfb6ab0"
+      sha256: "33e2e26bdd85a0112ec15400c8cbffea70d0f9c3407491f672a2fad47915e2de"
       url: "https://pub.dev"
     source: hosted
-    version: "10.0.9"
+    version: "11.0.2"
   leak_tracker_flutter_testing:
     dependency: transitive
     description:
       name: leak_tracker_flutter_testing
-      sha256: f8b613e7e6a13ec79cfdc0e97638fddb3ab848452eff057653abd3edba760573
+      sha256: "1dbc140bb5a23c75ea9c4811222756104fbcd1a27173f0c34ca01e16bea473c1"
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.9"
+    version: "3.0.10"
   leak_tracker_testing:
     dependency: transitive
     description:
       name: leak_tracker_testing
-      sha256: "6ba465d5d76e67ddf503e1161d1f4a6bc42306f9d66ca1e8f079a47290fb06d3"
+      sha256: "8d5a2d49f4a66b49744b23b018848400d23e54caf9463f4eb20df3eb8acb2eb1"
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.1"
+    version: "3.0.2"
   lints:
     dependency: transitive
     description:
@@ -989,14 +982,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.0"
-  macros:
-    dependency: transitive
-    description:
-      name: macros
-      sha256: "1d9e801cd66f7ea3663c45fc708450db1fa57f988142c64289142c9b7ee80656"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.1.3-main.0"
   markdown:
     dependency: transitive
     description:
@@ -1042,7 +1027,7 @@ packages:
     dependency: transitive
     description:
       path: "libs/android/media_kit_libs_android_video"
-      ref: HEAD
+      ref: "62b08e33590cba8fba4797eaaa1e95b514adb437"
       resolved-ref: "62b08e33590cba8fba4797eaaa1e95b514adb437"
       url: "https://github.com/Schnitzel5/media-kit.git"
     source: git
@@ -1051,7 +1036,7 @@ packages:
     dependency: transitive
     description:
       path: "libs/ios/media_kit_libs_ios_video"
-      ref: HEAD
+      ref: "62b08e33590cba8fba4797eaaa1e95b514adb437"
       resolved-ref: "62b08e33590cba8fba4797eaaa1e95b514adb437"
       url: "https://github.com/Schnitzel5/media-kit.git"
     source: git
@@ -1060,7 +1045,7 @@ packages:
     dependency: transitive
     description:
       path: "libs/linux/media_kit_libs_linux"
-      ref: HEAD
+      ref: "62b08e33590cba8fba4797eaaa1e95b514adb437"
       resolved-ref: "62b08e33590cba8fba4797eaaa1e95b514adb437"
       url: "https://github.com/Schnitzel5/media-kit.git"
     source: git
@@ -1069,7 +1054,7 @@ packages:
     dependency: transitive
     description:
       path: "libs/macos/media_kit_libs_macos_video"
-      ref: HEAD
+      ref: "62b08e33590cba8fba4797eaaa1e95b514adb437"
       resolved-ref: "62b08e33590cba8fba4797eaaa1e95b514adb437"
       url: "https://github.com/Schnitzel5/media-kit.git"
     source: git
@@ -1087,7 +1072,7 @@ packages:
     dependency: transitive
     description:
       path: "libs/windows/media_kit_libs_windows_video"
-      ref: HEAD
+      ref: "62b08e33590cba8fba4797eaaa1e95b514adb437"
       resolved-ref: "62b08e33590cba8fba4797eaaa1e95b514adb437"
       url: "https://github.com/Schnitzel5/media-kit.git"
     source: git
@@ -1614,18 +1599,18 @@ packages:
     dependency: transitive
     description:
       name: source_gen
-      sha256: "14658ba5f669685cd3d63701d01b31ea748310f7ab854e471962670abcf57832"
+      sha256: "7b19d6ba131c6eb98bfcbf8d56c1a7002eba438af2e7ae6f8398b2b0f4f381e3"
       url: "https://pub.dev"
     source: hosted
-    version: "1.5.0"
+    version: "3.1.0"
   source_helper:
     dependency: transitive
     description:
       name: source_helper
-      sha256: "86d247119aedce8e63f4751bd9626fc9613255935558447569ad42f9f5b48b3c"
+      sha256: "6a3c6cc82073a8797f8c4dc4572146114a39652851c157db37e964d9c7038723"
       url: "https://pub.dev"
     source: hosted
-    version: "1.3.5"
+    version: "1.3.8"
   source_span:
     dependency: transitive
     description:
@@ -1742,10 +1727,10 @@ packages:
     dependency: transitive
     description:
       name: test_api
-      sha256: fb31f383e2ee25fbbfe06b40fe21e1e458d14080e3c67e7ba0acfde4df4e0bbd
+      sha256: "522f00f556e73044315fa4585ec3270f1808a4b186c936e612cab0b565ff1e00"
       url: "https://pub.dev"
     source: hosted
-    version: "0.7.4"
+    version: "0.7.6"
   time:
     dependency: transitive
     description:
@@ -1886,10 +1871,10 @@ packages:
     dependency: transitive
     description:
       name: vector_math
-      sha256: "80b3257d1492ce4d091729e3a67a60407d227c27241d6927be0130c98e741803"
+      sha256: d530bd74fea330e6e364cda7a85019c434070188383e1cd8d9777ee586914c5b
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.4"
+    version: "2.2.0"
   vm_service:
     dependency: transitive
     description:

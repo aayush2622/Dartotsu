@@ -93,7 +93,7 @@ const KeyValueSchema = CollectionSchema(
   getId: _keyValueGetId,
   getLinks: _keyValueGetLinks,
   attach: _keyValueAttach,
-  version: '3.1.0+1',
+  version: '3.3.0-dev.3',
 );
 
 int _keyValueEstimateSize(

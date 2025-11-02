@@ -90,7 +90,7 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: 3.32.5
+          flutter-version: 3.35.7
 
           # Download the keystore file (from GitHub Secrets or other storage)
       - name: Download keystore
@@ -210,7 +210,7 @@ jobs:
         id: setup-flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: 3.32.5
+          flutter-version: 3.35.7
       - name: Cache Flutter dependencies (normal)
         if: ${{!contains(github.event.head_commit.message, '[clean]')}}
         uses: actions/cache@v4
@@ -301,7 +301,7 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: 3.32.5
+          flutter-version: 3.35.7
           # cache: true
 
       # Step 3: Setup system dependencies
@@ -381,7 +381,7 @@ jobs:
         id: setup-flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: 3.32.5
+          flutter-version: 3.35.7
       - name: Cache Flutter dependencies (normal)
         if: ${{!contains(github.event.head_commit.message, '[clean]')}}
         uses: actions/cache@v4
@@ -454,7 +454,7 @@ jobs:
         id: setup-flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: 3.32.5
+          flutter-version: 3.35.7
       - name: Cache Flutter dependencies (normal)
         if: ${{!contains(github.event.head_commit.message, '[clean]')}}
         uses: actions/cache@v4

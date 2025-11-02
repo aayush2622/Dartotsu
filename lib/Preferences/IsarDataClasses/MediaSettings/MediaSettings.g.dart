@@ -93,7 +93,7 @@ const MediaSettingsSchema = CollectionSchema(
   getId: _mediaSettingsGetId,
   getLinks: _mediaSettingsGetLinks,
   attach: _mediaSettingsAttach,
-  version: '3.1.0+1',
+  version: '3.3.0-dev.3',
 );
 
 int _mediaSettingsEstimateSize(

@@ -19,7 +19,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
-import 'package:isar/isar.dart';
+import 'package:isar_community/isar.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:provider/provider.dart';
 import 'package:receive_sharing_intent/receive_sharing_intent.dart';
@@ -286,7 +286,7 @@ class MyApp extends StatelessWidget {
             theme: getTheme(lightDynamic, themeManager),
             darkTheme: getTheme(darkDynamic, themeManager),
             home: !loadCustomData("initialLoaded", defaultValue: false)!
-                ? const MainActivity()
+                ? const MainScreen()
                 : const OnboardingScreen(),
           );
         },
@@ -295,16 +295,16 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MainActivity extends StatefulWidget {
-  const MainActivity({super.key});
+class MainScreen extends StatefulWidget {
+  const MainScreen({super.key});
 
   @override
-  MainActivityState createState() => MainActivityState();
+  MainScreenState createState() => MainScreenState();
 }
 
 late FloatingBottomNavBar navbar;
 
-class MainActivityState extends State<MainActivity> {
+class MainScreenState extends State<MainScreen> {
   final _selectedIndex = 1.obs;
 
   void _onTabSelected(int index) => _selectedIndex.value = index;

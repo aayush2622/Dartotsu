@@ -68,7 +68,7 @@ const ResponseTokenSchema = CollectionSchema(
   getId: _responseTokenGetId,
   getLinks: _responseTokenGetLinks,
   attach: _responseTokenAttach,
-  version: '3.1.0+1',
+  version: '3.3.0-dev.3',
 );
 
 int _responseTokenEstimateSize(

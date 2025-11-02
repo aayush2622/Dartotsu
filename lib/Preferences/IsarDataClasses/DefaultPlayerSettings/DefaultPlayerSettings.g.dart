@@ -13,65 +13,80 @@ const PlayerSettingsSchema = Schema(
   name: r'PlayerSettings',
   id: 5441166910175932327,
   properties: {
-    r'resizeMode': PropertySchema(
+    r'autoPlay': PropertySchema(
       id: 0,
+      name: r'autoPlay',
+      type: IsarType.bool,
+    ),
+    r'resizeMode': PropertySchema(
+      id: 1,
       name: r'resizeMode',
       type: IsarType.long,
     ),
     r'showSubtitle': PropertySchema(
-      id: 1,
+      id: 2,
       name: r'showSubtitle',
       type: IsarType.bool,
     ),
     r'skipDuration': PropertySchema(
-      id: 2,
+      id: 3,
       name: r'skipDuration',
       type: IsarType.long,
     ),
     r'speed': PropertySchema(
-      id: 3,
+      id: 4,
       name: r'speed',
       type: IsarType.string,
     ),
     r'subtitleBackgroundColor': PropertySchema(
-      id: 4,
+      id: 5,
       name: r'subtitleBackgroundColor',
       type: IsarType.long,
     ),
     r'subtitleBottomPadding': PropertySchema(
-      id: 5,
+      id: 6,
       name: r'subtitleBottomPadding',
       type: IsarType.long,
     ),
     r'subtitleColor': PropertySchema(
-      id: 6,
+      id: 7,
       name: r'subtitleColor',
       type: IsarType.long,
     ),
     r'subtitleFont': PropertySchema(
-      id: 7,
+      id: 8,
       name: r'subtitleFont',
       type: IsarType.string,
     ),
     r'subtitleLanguage': PropertySchema(
-      id: 8,
+      id: 9,
       name: r'subtitleLanguage',
       type: IsarType.string,
     ),
     r'subtitleOutlineColor': PropertySchema(
-      id: 9,
+      id: 10,
       name: r'subtitleOutlineColor',
       type: IsarType.long,
     ),
     r'subtitleSize': PropertySchema(
-      id: 10,
+      id: 11,
       name: r'subtitleSize',
       type: IsarType.long,
     ),
     r'subtitleWeight': PropertySchema(
-      id: 11,
+      id: 12,
       name: r'subtitleWeight',
       type: IsarType.long,
+    ),
+    r'useGpuNext': PropertySchema(
+      id: 13,
+      name: r'useGpuNext',
+      type: IsarType.bool,
+    ),
+    r'useLibass': PropertySchema(
+      id: 14,
+      name: r'useLibass',
+      type: IsarType.bool,
     )
   },
   estimateSize: _playerSettingsEstimateSize,
@@ -98,18 +113,21 @@ void _playerSettingsSerialize(
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  writer.writeLong(offsets[0], object.resizeMode);
-  writer.writeBool(offsets[1], object.showSubtitle);
-  writer.writeLong(offsets[2], object.skipDuration);
-  writer.writeString(offsets[3], object.speed);
-  writer.writeLong(offsets[4], object.subtitleBackgroundColor);
-  writer.writeLong(offsets[5], object.subtitleBottomPadding);
-  writer.writeLong(offsets[6], object.subtitleColor);
-  writer.writeString(offsets[7], object.subtitleFont);
-  writer.writeString(offsets[8], object.subtitleLanguage);
-  writer.writeLong(offsets[9], object.subtitleOutlineColor);
-  writer.writeLong(offsets[10], object.subtitleSize);
-  writer.writeLong(offsets[11], object.subtitleWeight);
+  writer.writeBool(offsets[0], object.autoPlay);
+  writer.writeLong(offsets[1], object.resizeMode);
+  writer.writeBool(offsets[2], object.showSubtitle);
+  writer.writeLong(offsets[3], object.skipDuration);
+  writer.writeString(offsets[4], object.speed);
+  writer.writeLong(offsets[5], object.subtitleBackgroundColor);
+  writer.writeLong(offsets[6], object.subtitleBottomPadding);
+  writer.writeLong(offsets[7], object.subtitleColor);
+  writer.writeString(offsets[8], object.subtitleFont);
+  writer.writeString(offsets[9], object.subtitleLanguage);
+  writer.writeLong(offsets[10], object.subtitleOutlineColor);
+  writer.writeLong(offsets[11], object.subtitleSize);
+  writer.writeLong(offsets[12], object.subtitleWeight);
+  writer.writeBool(offsets[13], object.useGpuNext);
+  writer.writeBool(offsets[14], object.useLibass);
 }
 
 PlayerSettings _playerSettingsDeserialize(
@@ -119,18 +137,21 @@ PlayerSettings _playerSettingsDeserialize(
   Map<Type, List<int>> allOffsets,
 ) {
   final object = PlayerSettings(
-    resizeMode: reader.readLongOrNull(offsets[0]) ?? 0,
-    showSubtitle: reader.readBoolOrNull(offsets[1]) ?? true,
-    skipDuration: reader.readLongOrNull(offsets[2]) ?? 85,
-    speed: reader.readStringOrNull(offsets[3]) ?? '1x',
-    subtitleBackgroundColor: reader.readLongOrNull(offsets[4]) ?? 0x00000000,
-    subtitleBottomPadding: reader.readLongOrNull(offsets[5]) ?? 0,
-    subtitleColor: reader.readLongOrNull(offsets[6]) ?? 0xFFFFFFFF,
-    subtitleFont: reader.readStringOrNull(offsets[7]) ?? 'Poppins',
-    subtitleLanguage: reader.readStringOrNull(offsets[8]) ?? 'en',
-    subtitleOutlineColor: reader.readLongOrNull(offsets[9]) ?? 0x00000000,
-    subtitleSize: reader.readLongOrNull(offsets[10]) ?? 32,
-    subtitleWeight: reader.readLongOrNull(offsets[11]) ?? 5,
+    autoPlay: reader.readBoolOrNull(offsets[0]) ?? true,
+    resizeMode: reader.readLongOrNull(offsets[1]) ?? 0,
+    showSubtitle: reader.readBoolOrNull(offsets[2]) ?? true,
+    skipDuration: reader.readLongOrNull(offsets[3]) ?? 85,
+    speed: reader.readStringOrNull(offsets[4]) ?? '1x',
+    subtitleBackgroundColor: reader.readLongOrNull(offsets[5]) ?? 0x00000000,
+    subtitleBottomPadding: reader.readLongOrNull(offsets[6]) ?? 0,
+    subtitleColor: reader.readLongOrNull(offsets[7]) ?? 0xFFFFFFFF,
+    subtitleFont: reader.readStringOrNull(offsets[8]) ?? 'Poppins',
+    subtitleLanguage: reader.readStringOrNull(offsets[9]) ?? 'en',
+    subtitleOutlineColor: reader.readLongOrNull(offsets[10]) ?? 0x00000000,
+    subtitleSize: reader.readLongOrNull(offsets[11]) ?? 32,
+    subtitleWeight: reader.readLongOrNull(offsets[12]) ?? 5,
+    useGpuNext: reader.readBoolOrNull(offsets[13]) ?? false,
+    useLibass: reader.readBoolOrNull(offsets[14]) ?? false,
   );
   return object;
 }
@@ -143,29 +164,35 @@ P _playerSettingsDeserializeProp<P>(
 ) {
   switch (propertyId) {
     case 0:
-      return (reader.readLongOrNull(offset) ?? 0) as P;
-    case 1:
       return (reader.readBoolOrNull(offset) ?? true) as P;
-    case 2:
-      return (reader.readLongOrNull(offset) ?? 85) as P;
-    case 3:
-      return (reader.readStringOrNull(offset) ?? '1x') as P;
-    case 4:
-      return (reader.readLongOrNull(offset) ?? 0x00000000) as P;
-    case 5:
+    case 1:
       return (reader.readLongOrNull(offset) ?? 0) as P;
-    case 6:
-      return (reader.readLongOrNull(offset) ?? 0xFFFFFFFF) as P;
-    case 7:
-      return (reader.readStringOrNull(offset) ?? 'Poppins') as P;
-    case 8:
-      return (reader.readStringOrNull(offset) ?? 'en') as P;
-    case 9:
+    case 2:
+      return (reader.readBoolOrNull(offset) ?? true) as P;
+    case 3:
+      return (reader.readLongOrNull(offset) ?? 85) as P;
+    case 4:
+      return (reader.readStringOrNull(offset) ?? '1x') as P;
+    case 5:
       return (reader.readLongOrNull(offset) ?? 0x00000000) as P;
+    case 6:
+      return (reader.readLongOrNull(offset) ?? 0) as P;
+    case 7:
+      return (reader.readLongOrNull(offset) ?? 0xFFFFFFFF) as P;
+    case 8:
+      return (reader.readStringOrNull(offset) ?? 'Poppins') as P;
+    case 9:
+      return (reader.readStringOrNull(offset) ?? 'en') as P;
     case 10:
-      return (reader.readLongOrNull(offset) ?? 32) as P;
+      return (reader.readLongOrNull(offset) ?? 0x00000000) as P;
     case 11:
+      return (reader.readLongOrNull(offset) ?? 32) as P;
+    case 12:
       return (reader.readLongOrNull(offset) ?? 5) as P;
+    case 13:
+      return (reader.readBoolOrNull(offset) ?? false) as P;
+    case 14:
+      return (reader.readBoolOrNull(offset) ?? false) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
@@ -173,6 +200,16 @@ P _playerSettingsDeserializeProp<P>(
 
 extension PlayerSettingsQueryFilter
     on QueryBuilder<PlayerSettings, PlayerSettings, QFilterCondition> {
+  QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
+      autoPlayEqualTo(bool value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'autoPlay',
+        value: value,
+      ));
+    });
+  }
+
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
       resizeModeEqualTo(int value) {
     return QueryBuilder.apply(this, (query) {
@@ -1035,6 +1072,26 @@ extension PlayerSettingsQueryFilter
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
+      useGpuNextEqualTo(bool value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'useGpuNext',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
+      useLibassEqualTo(bool value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'useLibass',
+        value: value,
       ));
     });
   }

@@ -9,7 +9,7 @@ import 'package:dartotsu_extension_bridge/Mangayomi/Eval/dart/model/source_prefe
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart'
     hide isar;
 import 'package:device_info_plus/device_info_plus.dart';
-import 'package:isar/isar.dart';
+import 'package:isar_community/isar.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
