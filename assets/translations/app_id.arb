@@ -660,12 +660,12 @@
     },
     "customMPV": "MPV kustom Login",
     "@customMPV": {},
-    "useLibass": "Use Libass",
+    "useLibass": "Gunakan Libass",
     "@useLibass": {},
-    "useLibassDescription": "Use Libass for subtitle rendering (overrides other subtitle settings)",
+    "useLibassDescription": "Gunakan Libass untuk mencitrakan takarir (mengesampingkan pengaturan takarir lain)",
     "@useLibassDescription": {},
-    "useGpuNext": "Use gpu-next",
+    "useGpuNext": "Gunakan gpu-next",
     "@useGpuNext": {},
-    "useGpuNextDescription": "New rendering backend (may cause visual artifacts)",
+    "useGpuNextDescription": "Pencitraan baru backend (mungkin menyebabkan artefak visual)",
     "@useGpuNextDescription": {}
 }
