@@ -446,19 +446,21 @@ void openSourceSelectionSheet(
               video.title ?? video.quality,
             );
 
-            onTapCallback?.call();
-            Navigator.pop(context);
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              onTapCallback?.call();
+              Navigator.pop(context);
 
-            navigateToPage(
-              context,
-              MediaPlayer(
-                media: mediaData,
-                index: 0,
-                videos: snapshot.data!,
-                currentEpisode: episode,
-                source: source,
-              ),
-            );
+              navigateToPage(
+                context,
+                MediaPlayer(
+                  media: mediaData,
+                  index: 0,
+                  videos: snapshot.data!,
+                  currentEpisode: episode,
+                  source: source,
+                ),
+              );
+            });
             return const SizedBox.shrink();
           }
 
