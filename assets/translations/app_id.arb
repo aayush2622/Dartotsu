@@ -662,7 +662,7 @@
     "@customMPV": {},
     "useLibass": "Gunakan Libass",
     "@useLibass": {},
-    "useLibassDescription": "Gunakan Libass untuk mencitrakan takarir (mengesampingkan pengaturan takarir lain)",
+    "useLibassDescription": "Gunakan Libass untuk rendering sub judul (meningkatkan pengaturan sub judul lainnya)",
     "@useLibassDescription": {},
     "useGpuNext": "Gunakan gpu-next",
     "@useGpuNext": {},
