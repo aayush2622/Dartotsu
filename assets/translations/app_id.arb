@@ -666,6 +666,6 @@
     "@useLibassDescription": {},
     "useGpuNext": "Gunakan gpu-next",
     "@useGpuNext": {},
-    "useGpuNextDescription": "Pencitraan baru backend (mungkin menyebabkan artefak visual)",
+    "useGpuNextDescription": "Rendering baru backend (mungkin menyebabkan artefak visual)",
     "@useGpuNextDescription": {}
 }
