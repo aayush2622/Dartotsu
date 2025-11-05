@@ -5,11 +5,10 @@ on:
       - main
 
 env:
-  # Default Flutter version (may be overridden dynamically in jobs)
+  # change the fallback flutter vefrsion here
   FLUTTER_VERSION: 3.35.7
 
 jobs:
-  # Hidden job to define reusable YAML anchors for common steps (never runs)
   anchors:
     if: ${{ false }}
     runs-on: ubuntu-latest
@@ -74,7 +73,6 @@ jobs:
           echo "SIMKL_SECRET= $SIMKL_SECRET" > .env
   build_android:
     runs-on: ubuntu-latest
-    # Only run if commit message contain [build.apk]
     if: contains(github.event.head_commit.message, '[build.apk]') || contains(github.event.head_commit.message, '[build]') || contains(github.event.head_commit.message, '[build.all]')
     outputs:
       apk_link: ${{steps.gdriveUpload_arm64.outputs.web-content-link}}
@@ -86,13 +84,11 @@ jobs:
 
     steps:
       - *checkout
-      # Cache Flutter dependencies
       - *prepare_flutter
       - *setup_flutter
       - *cache_flutter_normal
       - *cache_flutter_clean
 
-      # Cache Gradle dependencies
       - name: Cache Gradle dependencies (normal)
         if: ${{!contains(github.event.head_commit.message, '[clean]')}}
         uses: actions/cache@v4
@@ -112,17 +108,14 @@ jobs:
             ~/.gradle/caches
             ~/.gradle/wrapper
           key: clean-v1-${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-      # Setup Cmake
       - name: Setup cmake
         uses: jwlawson/actions-setup-cmake@v2
         with:
           cmake-version: "3.18.1"
-      # Install Ninaja
       - name: Install system dependencies
         run: |
           sudo apt-get update -y
           sudo apt-get install -y ninja-build
-      # Create symlink for ninja
       - name: Create symlink for ninja
         run: |
           mkdir -p /usr/local/lib/android/sdk/cmake/3.18.1/bin
@@ -133,15 +126,12 @@ jobs:
           distribution: "oracle"
           java-version: "17"
 
-      # Note: Flutter version and setup moved above via anchors
 
-      # Download the keystore file (from GitHub Secrets or other storage)
       - name: Download keystore
         env:
           KEYSTORE_BASE64: ${{ secrets.APK_SIGN }}
         run: echo "$KEYSTORE_BASE64" | base64 --decode > android/app/dartotsu.jks
 
-      # Set up environment variables for signing
       - name: Set up signing variables
         env:
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
@@ -152,10 +142,8 @@ jobs:
           echo "keyPassword=$KEY_PASSWORD" >> android/key.properties
           echo "keyAlias=$KEY_ALIAS" >> android/key.properties
           echo "storeFile=dartotsu.jks" >> android/key.properties
-      # Create .env:
       - *setup_env
 
-      # Configure Gradle for faster builds
       - name: Configure Gradle
         run: |
           mkdir -p ~/.gradle
@@ -163,7 +151,6 @@ jobs:
           echo "org.gradle.parallel=true" >> ~/.gradle/gradle.properties
           echo "org.gradle.caching=true" >> ~/.gradle/gradle.properties
 
-      # Optimize Flutter build
       - run: flutter clean
       - run: flutter pub get
       - run: flutter build apk --release --split-per-abi
@@ -234,11 +221,9 @@ jobs:
         run: |
           mkdir $env:USERPROFILE\certs
           [System.IO.File]::WriteAllBytes("$env:USERPROFILE\certs\Dartotsu.pfx", [Convert]::FromBase64String("${{secrets.PFX_FILE}}"))
-      # Create .env:
       - *setup_env
 
       - *prepare_flutter
-      # Setup Flutter with caching
       - *setup_flutter
       - *cache_flutter_normal
       - *cache_flutter_clean
@@ -246,13 +231,11 @@ jobs:
         uses: NuGet/setup-nuget@v2.0.1
         with:
           nuget-version: "latest"
-      # Enable Windows desktop support
       - name: Enable Windows desktop support
         run: flutter config --enable-windows-desktop
 
       - run: flutter clean
 
-      # Get dependencies with cached packages
       - run: flutter pub get
 
       - name: Extract Version
@@ -263,7 +246,7 @@ jobs:
 
       - name: Find Latest SignTool Path
         id: find_signtool
-        shell: pwsh # Use PowerShell for better scripting
+        shell: pwsh 
         run: |
           $sdkBins = Get-ChildItem "C:\Program Files (x86)\Windows Kits\10\bin" -Directory | 
                      Where-Object { $_.Name -match '^\d+\.\d+\.\d+\.\d+$' } |  
@@ -303,33 +286,25 @@ jobs:
     outputs:
       zip_link: ${{steps.gdriveUpload.outputs.web-content-link}}
     steps:
-      # Step 1: Clone repository
       - *checkout
 
       - *prepare_flutter
-      # Step 2: Setup Flutter
       - *setup_flutter
 
-      # Step 3: Setup system dependencies
       - name: Install system dependencies
         run: |
           sudo apt-get update -y
           sudo apt-get install -y ninja-build libgtk-3-dev webkit2gtk-4.1 libmpv-dev pkg-config fuse
 
-      # Step 4: Cache Flutter dependencies
       - *cache_flutter_normal
       - *cache_flutter_clean
-      # Create .env:
       - *setup_env
 
-      # Step 5: Fetch Flutter dependencies
       - name: Fetch Flutter dependencies
         run: flutter pub get
 
-      # Step 6: Build the Linux application
       - name: Build Flutter Linux app
         run: flutter build linux
-      # Step 7: Archive the app
       - name: Archive app
         uses: thedoctor0/zip-release@master
         with:
@@ -337,7 +312,6 @@ jobs:
           filename: Dartotsu_Linux_${{github.ref_name}}.zip
           directory: build/linux/x64/release/bundle
 
-      # Step 9: Upload to Google Drive
       - name: Upload File To Google Drive
         id: gdriveUpload
         uses: hoatruongdev09/google-drive-file-upload-github-action@v1.1
@@ -352,22 +326,20 @@ jobs:
     if: contains(github.event.head_commit.message, '[build.ios]')  ||  contains(github.event.head_commit.message, '[build.all]')
     permissions:
       contents: write
+    outputs:
+      ipa_link: ${{steps.gdriveUpload.outputs.web-content-link}}
     steps:
-      # Step 1: Clone repository
       - *checkout
 
       - *prepare_flutter
-      # Step 2: Setup Flutter
       - *setup_flutter
       - *cache_flutter_normal
       - *cache_flutter_clean
 
       - *setup_env
 
-      # Step 3 Get Dependencies
       - name: Get Dependencies
         run: flutter pub get
-      #Step 4 Build app for iOS
       - name: Build iOS
         run: |
           flutter build ios --release --no-codesign
@@ -379,7 +351,6 @@ jobs:
           cp -R ../Runner.app .
           cd ..
           zip -r Dartotsu-iOS-${{ github.ref_name }}.ipa Payload
-      #Step 5 Upload ipa file to google drive
       - name: Upload File To Google Drive
         id: gdriveUpload
         uses: hoatruongdev09/google-drive-file-upload-github-action@v1.1
