@@ -49,7 +49,7 @@ CustomBottomDialog login(BuildContext context) {
 Future<String> fetchToken({required String code}) async {
   final uri = Uri.parse('https://api.simkl.com/oauth/token');
 
-  var secret = await loadEnv("secret");
+  var secret = await loadEnv("SIMKL_SECRET");
 
   if (secret == null) throw Exception("secret missing");
 
