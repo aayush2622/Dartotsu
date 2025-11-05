@@ -7,6 +7,7 @@ import 'package:dartotsu/Widgets/CustomBottomDialog.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:path/path.dart' as path;
@@ -28,7 +29,6 @@ class AppUpdater {
   Future<void> checkForUpdate({bool force = false}) async {
     if (!checkForUpdates && !force) return;
 
-    await BuildInfo.load();
     var response = await http.get(
       Uri.parse(
         'https://api.github.com/repos/${alphaUpdates ? alphaRepo : mainRepo}/releases/latest',
@@ -251,17 +251,9 @@ class AppUpdater {
 }
 
 class BuildInfo {
-  static String? version;
-  static int? commit;
   static String? hash;
-  static String? generated;
 
-  static Future<void> load() async {
-    final text = await rootBundle.loadString('assets/version');
-    for (final line in text.split('\n')) {
-      if (line.startsWith('version=')) version = line.split('=')[1];
-      if (line.startsWith('commit=')) commit = int.tryParse(line.split('=')[1]);
-      if (line.startsWith('hash=')) hash = line.split('=')[1];
-    }
+  static void load() {
+    hash = dotenv.env['hash'];
   }
 }
