@@ -70,7 +70,12 @@ jobs:
           SIMKL_SECRET: ${{ secrets.SIMKL_SECRET }}
         shell: bash
         run: |
-          echo "SIMKL_SECRET= $SIMKL_SECRET" > .env
+          echo "SIMKL_SECRET=$SIMKL_SECRET" > .env
+          GIT_HASH=$(git rev-parse --short HEAD)
+          echo "HASH=$GIT_HASH" >> .env
+          cat .env
+
+
   build_android:
     runs-on: ubuntu-latest
     if: contains(github.event.head_commit.message, '[build.apk]') || contains(github.event.head_commit.message, '[build]') || contains(github.event.head_commit.message, '[build.all]')
@@ -396,37 +401,6 @@ jobs:
           service-account-json: "${{secrets.GOOGLE_KEY}}"
           overrwrite: true
 
-  updateVersion:
-    name: Update Version
-    runs-on: ubuntu-latest
-    needs: [build_android, build_windows, build_linux, build_ios, build_macos]
-    if: |
-      always() && 
-      !contains(needs.*.result, 'failure') && 
-      !contains(needs.*.result, 'cancelled') &&
-      (needs.build_android.result == 'success' ||
-       needs.build_windows.result == 'success' ||
-       needs.build_linux.result == 'success' ||
-       needs.build_ios.result == 'success' ||
-       needs.build_macos.result == 'success')
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-      - name: Run update version script
-        shell: bash
-        run: |
-          GIT_HASH=$(git rev-parse --short HEAD)
-          FILE=".env"
-          cat > "$FILE" <<EOF
-          hash=$GIT_HASH
-          EOF
-      - name: Commit and Push changes
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add .env
-          git commit -m "chore: update version hash to $GIT_HASH" || echo "No changes to commit"
-          git push origin main
   sendMessage:
     runs-on: ubuntu-latest
     needs: [build_android, build_windows, build_linux, build_ios, build_macos]
