@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:dartotsu/Api/Updater/AppUpdater.dart';
 import 'package:dartotsu/Theme/LanguageSwitcher.dart';
 import 'package:dartotsu/Widgets/CustomBottomDialog.dart';
 import 'package:flutter/material.dart';
@@ -80,6 +81,32 @@ class SettingsAboutScreenState extends BaseSettingsScreen {
           }
           shareFile("$path\\appLogs.txt".fixSeparator, "LogFile");
         },
+      ),
+      Setting(
+        type: SettingType.normal,
+        name: "Check for update",
+        description: "Check For latest update",
+        icon: Icons.update_sharp,
+        onClick: () async {
+          snackString("Checking for update");
+          AppUpdater().checkForUpdate(force: true);
+        },
+      ),
+      Setting(
+        type: SettingType.switchType,
+        name: "Auto check for update",
+        description: "Auto check for update whenever the app starts",
+        icon: Icons.autorenew,
+        isChecked: loadCustomData("checkForUpdates") ?? true,
+        onSwitchChange: (v) => saveCustomData("checkForUpdates", v),
+      ),
+      Setting(
+        type: SettingType.switchType,
+        name: "Alpha updates",
+        description: "Alpha updates may contain many bugs",
+        icon: Icons.warning_amber_rounded,
+        isChecked: loadCustomData("alphaUpdates") ?? false,
+        onSwitchChange: (v) => saveCustomData("alphaUpdates", v),
       ),
     ];
   }

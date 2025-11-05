@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:ui';
 
 import 'package:app_links/app_links.dart';
+import 'package:dartotsu/Api/Updater/AppUpdater.dart';
 import 'package:dartotsu/Functions/Extensions.dart';
 import 'package:dartotsu/Functions/Function.dart';
 import 'package:dartotsu/Screens/Anime/Player/MpvConfig.dart';
@@ -117,7 +118,7 @@ Future init() async {
   for (var locale in supportedLocales) {
     initializeDateFormatting(locale);
   }
-
+  AppUpdater().checkForUpdate();
   Discord.getSavedToken();
   initDeepLinkListener();
   initIntentListener();
@@ -316,8 +317,8 @@ class MainScreenState extends State<MainScreen> {
   }
 
   Widget get _navbar {
-    return Obx(
-      () => context.isPhone
+    return Obx(() {
+      navbar = context.isPhone
           ? FloatingBottomNavBarMobile(
               selectedIndex: _selectedIndex.value,
               onTabSelected: _onTabSelected,
@@ -325,8 +326,9 @@ class MainScreenState extends State<MainScreen> {
           : FloatingBottomNavBarDesktop(
               selectedIndex: _selectedIndex.value,
               onTabSelected: _onTabSelected,
-            ),
-    );
+            );
+      return navbar;
+    });
   }
 
   Widget _buildBackground(ThemeNotifier themeNotifier, MediaService service) {

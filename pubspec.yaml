@@ -46,7 +46,7 @@ dependencies:
   precached_network_image: ^1.2.4
   flutter_svg: ^2.2.0
   flex_color_picker: ^3.7.1
-  flutter_markdown: ^0.7.7+1
+  flutter_markdown_plus: ^1.0.5
   icons_plus: ^5.0.0
   skeletonizer: ^2.1.0+1
   blurbox: ^0.0.6
@@ -87,7 +87,7 @@ dependencies:
   app_links: ^6.4.1
   win32: ^5.14.0
   ffi: ^2.1.4
-
+  install_plugin: ^2.1.0
   # Miscellaneous
   receive_sharing_intent: ^1.8.1
   device_info_plus: ^11.5.0
@@ -122,10 +122,8 @@ dev_dependencies:
   build_runner: ^2.5.3
   inno_bundle: ^0.9.0
 dependency_overrides:
-  js: ">=0.6.3 <0.7.1"
   collection: ^1.19.1
   desktop_webview_window: ^0.2.3
-
 # Flutter-specific configurations
 flutter:
   uses-material-design: true
@@ -147,6 +145,7 @@ flutter:
 
   # Assets
   assets:
+    - assets/version
     - .env
     - assets/images/logo.png
     - assets/svg/bmc-button.svg
@@ -176,11 +175,11 @@ flutter_icons:
 inno_bundle:
   sign_tool:
     command: $p
-  id: 609d9fb9-ac99-533b-a5b5-f277afa99b68 # <-- Put your app id here
-  publisher: Ankit Grai # Optional, but recommended.
-  name: Dartotsu # Also optional, but recommended.
-  version: 0.0.3 # Optional, but recommended.
+  id: 609d9fb9-ac99-533b-a5b5-f277afa99b68
+  publisher: Ankit Grai
+  name: Dartotsu
+  version: 0.0.3
   admin: auto
   installer_icon: assets/images/lol.ico
-  languages: # Arabic was causing issues so switched to only English for installer
+  languages:
     - english
