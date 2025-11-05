@@ -72,7 +72,7 @@ jobs:
         run: |
           echo "SIMKL_SECRET=$SIMKL_SECRET" > .env
           GIT_HASH=$(git rev-parse --short HEAD)
-          echo "HASH=$GIT_HASH" >> .env
+          echo "hash=$GIT_HASH" >> .env
           cat .env
 
 
