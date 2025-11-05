@@ -4,7 +4,74 @@ on:
     branches:
       - main
 
+env:
+  # Default Flutter version (may be overridden dynamically in jobs)
+  FLUTTER_VERSION: 3.35.7
+
 jobs:
+  # Hidden job to define reusable YAML anchors for common steps (never runs)
+  anchors:
+    if: ${{ false }}
+    runs-on: ubuntu-latest
+    steps:
+      - &checkout
+        name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - &prepare_flutter
+        name: Prepare Flutter version
+        shell: bash
+        env:
+          FLUTTER_VERSION_SECRET: ${{ secrets.FLUTTER_VERSION }}
+        run: |
+          # Use secret FLUTTER_VERSION if set, otherwise fallback to default from env
+          if [ -n "${FLUTTER_VERSION_SECRET}" ]; then
+            echo "FLUTTER_VERSION=${FLUTTER_VERSION_SECRET}" >> $GITHUB_ENV
+          else
+            echo "FLUTTER_VERSION=${FLUTTER_VERSION}" >> $GITHUB_ENV
+          fi
+
+      - &setup_flutter
+        name: Setup Flutter
+        id: setup-flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+
+      - &cache_flutter_normal
+        name: Cache Flutter dependencies (normal)
+        if: ${{ !contains(github.event.head_commit.message, '[clean]') }}
+        uses: actions/cache@v4
+        with:
+          path: |
+            ${{ steps.setup-flutter.outputs.pub-cache-path }}
+            build/
+            .dart_tool/
+          key: v1-${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.lock', '**/pubspec.yaml') }}
+          restore-keys: |
+            v1-${{ runner.os }}-flutter-
+            clean-v1-${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.lock', '**/pubspec.yaml') }}
+
+      - &cache_flutter_clean
+        name: Cache Flutter dependencies (clean)
+        if: contains(github.event.head_commit.message, '[clean]')
+        uses: actions/cache@v4
+        with:
+          path: |
+            ${{ steps.setup-flutter.outputs.pub-cache-path }}
+            build/
+            .dart_tool/
+          key: clean-v1-${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.lock', '**/pubspec.yaml') }}
+
+      - &setup_env
+        name: Setup env File
+        env:
+          SIMKL_SECRET: ${{ secrets.SIMKL_SECRET }}
+        shell: bash
+        run: |
+          echo "SIMKL_SECRET= $SIMKL_SECRET" > .env
   build_android:
     runs-on: ubuntu-latest
     # Only run if commit message contain [build.apk]
@@ -18,32 +85,12 @@ jobs:
       actions: read
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+      - *checkout
       # Cache Flutter dependencies
-      - name: Cache Flutter dependencies (normal)
-        if: ${{ !contains(github.event.head_commit.message, '[clean]') }}
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.pub-cache
-            build/
-            .dart_tool/
-          key: v1-${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.lock') }}
-          restore-keys: |
-            v1-${{ runner.os }}-flutter-
-            clean-v1-${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.lock') }}
-      - name: Cache Flutter dependencies (clean)
-        if: contains(github.event.head_commit.message, '[clean]')
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.pub-cache
-            build/
-            .dart_tool/
-          key: clean-v1-${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.lock') }}
+      - *prepare_flutter
+      - *setup_flutter
+      - *cache_flutter_normal
+      - *cache_flutter_clean
 
       # Cache Gradle dependencies
       - name: Cache Gradle dependencies (normal)
@@ -69,7 +116,7 @@ jobs:
       - name: Setup cmake
         uses: jwlawson/actions-setup-cmake@v2
         with:
-          cmake-version: '3.18.1'
+          cmake-version: "3.18.1"
       # Install Ninaja
       - name: Install system dependencies
         run: |
@@ -81,18 +128,14 @@ jobs:
           mkdir -p /usr/local/lib/android/sdk/cmake/3.18.1/bin
           sudo ln -s /usr/bin/ninja /usr/local/lib/android/sdk/cmake/3.18.1/bin/ninja
 
-
       - uses: actions/setup-java@v4
         with:
           distribution: "oracle"
           java-version: "17"
 
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: 3.35.7
+      # Note: Flutter version and setup moved above via anchors
 
-          # Download the keystore file (from GitHub Secrets or other storage)
+      # Download the keystore file (from GitHub Secrets or other storage)
       - name: Download keystore
         env:
           KEYSTORE_BASE64: ${{ secrets.APK_SIGN }}
@@ -110,11 +153,7 @@ jobs:
           echo "keyAlias=$KEY_ALIAS" >> android/key.properties
           echo "storeFile=dartotsu.jks" >> android/key.properties
       # Create .env:
-      - name: Setup env File
-        env:
-          SIMKL_SECRET: ${{ secrets.SIMKL_SECRET }}
-        run: |
-          echo "SIMKL_SECRET= $SIMKL_SECRET" > .env
+      - *setup_env
 
       # Configure Gradle for faster builds
       - name: Configure Gradle
@@ -189,53 +228,24 @@ jobs:
       repository-projects: write
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+      - *checkout
 
       - name: Set up Signing Tool
         run: |
           mkdir $env:USERPROFILE\certs
           [System.IO.File]::WriteAllBytes("$env:USERPROFILE\certs\Dartotsu.pfx", [Convert]::FromBase64String("${{secrets.PFX_FILE}}"))
       # Create .env:
-      - name: Setup env File
-        env:
-          SIMKL_SECRET: ${{ secrets.SIMKL_SECRET }}
-        run: |
-          echo "SIMKL_SECRET= $env:SIMKL_SECRET" > .env
+      - *setup_env
 
+      - *prepare_flutter
       # Setup Flutter with caching
-      - name: Setup Flutter
-        id: setup-flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: 3.35.7
-      - name: Cache Flutter dependencies (normal)
-        if: ${{!contains(github.event.head_commit.message, '[clean]')}}
-        uses: actions/cache@v4
-        with:
-          path: |
-            ${{ steps.setup-flutter.outputs.pub-cache-path }}
-            build
-            .dart_tool
-          key: v1-${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.lock') }}
-          restore-keys: |
-            v1-${{ runner.os }}-flutter-
-            clean-v1-${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.lock') }}
-      - name: Cache Flutter dependencies (clean)
-        if: contains(github.event.head_commit.message, '[clean]')
-        uses: actions/cache@v4
-        with:
-          path: |
-            ${{ steps.setup-flutter.outputs.pub-cache-path }}
-            build
-            .dart_tool
-          key: clean-v1-${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.lock') }}
+      - *setup_flutter
+      - *cache_flutter_normal
+      - *cache_flutter_clean
       - name: Setup NuGet.exe for use with actions
         uses: NuGet/setup-nuget@v2.0.1
         with:
-          nuget-version: 'latest'
+          nuget-version: "latest"
       # Enable Windows desktop support
       - name: Enable Windows desktop support
         run: flutter config --enable-windows-desktop
@@ -253,7 +263,7 @@ jobs:
 
       - name: Find Latest SignTool Path
         id: find_signtool
-        shell: pwsh  # Use PowerShell for better scripting
+        shell: pwsh # Use PowerShell for better scripting
         run: |
           $sdkBins = Get-ChildItem "C:\Program Files (x86)\Windows Kits\10\bin" -Directory | 
                      Where-Object { $_.Name -match '^\d+\.\d+\.\d+\.\d+$' } |  
@@ -294,15 +304,11 @@ jobs:
       zip_link: ${{steps.gdriveUpload.outputs.web-content-link}}
     steps:
       # Step 1: Clone repository
-      - name: Cloning repository
-        uses: actions/checkout@v4
+      - *checkout
 
+      - *prepare_flutter
       # Step 2: Setup Flutter
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: 3.35.7
-          # cache: true
+      - *setup_flutter
 
       # Step 3: Setup system dependencies
       - name: Install system dependencies
@@ -311,31 +317,10 @@ jobs:
           sudo apt-get install -y ninja-build libgtk-3-dev webkit2gtk-4.1 libmpv-dev pkg-config fuse
 
       # Step 4: Cache Flutter dependencies
-      - name: Cache Flutter dependencies (normal)
-        if: ${{!contains(github.event.head_commit.message, '[clean]')}}
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.pub-cache
-            build/
-          key: v1-${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.yaml') }}
-          restore-keys: |
-            v1-${{ runner.os }}-flutter-
-            clean-v1-${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.yaml') }}
-      - name: Cache Flutter dependencies (clean)
-        if: contains(github.event.head_commit.message, '[clean]')
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.pub-cache
-            build/
-          key: clean-v1-${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.yaml') }}
+      - *cache_flutter_normal
+      - *cache_flutter_clean
       # Create .env:
-      - name: Setup env File
-        env:
-          SIMKL_SECRET: ${{ secrets.SIMKL_SECRET }}
-        run: |
-          echo "SIMKL_SECRET= $SIMKL_SECRET" > .env
+      - *setup_env
 
       # Step 5: Fetch Flutter dependencies
       - name: Fetch Flutter dependencies
@@ -367,50 +352,17 @@ jobs:
     if: contains(github.event.head_commit.message, '[build.ios]')  ||  contains(github.event.head_commit.message, '[build.all]')
     permissions:
       contents: write
-      pull-requests: write
-      repository-projects: write
-    outputs:
-      ipa_link: ${{steps.gdriveUpload.outputs.web-content-link}}
     steps:
       # Step 1: Clone repository
-      - name: Cloning repository
-        uses: actions/checkout@v4
+      - *checkout
 
+      - *prepare_flutter
       # Step 2: Setup Flutter
-      - name: Setup Flutter
-        id: setup-flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: 3.35.7
-      - name: Cache Flutter dependencies (normal)
-        if: ${{!contains(github.event.head_commit.message, '[clean]')}}
-        uses: actions/cache@v4
-        with:
-          path: |
-            ${{ steps.setup-flutter.outputs.pub-cache-path }}
-            build
-            .dart_tool
-          key: v1-${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.lock') }}
-          restore-keys: |
-            v1-${{ runner.os }}-flutter-
-            clean-v1-${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.lock') }}
-      - name: Cache Flutter dependencies (clean)
-        if: contains(github.event.head_commit.message, '[clean]')
-        uses: actions/cache@v4
-        with:
-          path: |
-            ${{ steps.setup-flutter.outputs.pub-cache-path }}
-            build
-            .dart_tool
-          key: clean-v1-${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.lock') }}
+      - *setup_flutter
+      - *cache_flutter_normal
+      - *cache_flutter_clean
 
-      - name: Setup .env File for macOS
-        env:
-          SIMKL_SECRET: ${{ secrets.SIMKL_SECRET }}
-        run: |
-          echo "SIMKL_SECRET= $SIMKL_SECRET" > .env
-        shell: bash
-
+      - *setup_env
 
       # Step 3 Get Dependencies
       - name: Get Dependencies
@@ -447,41 +399,13 @@ jobs:
     outputs:
       deb_link: ${{steps.gdriveUpload.outputs.web-content-link}}
     steps:
-      - name: Cloning repository
-        uses: actions/checkout@v4
+      - *checkout
 
-      - name: Setup Flutter
-        id: setup-flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: 3.35.7
-      - name: Cache Flutter dependencies (normal)
-        if: ${{!contains(github.event.head_commit.message, '[clean]')}}
-        uses: actions/cache@v4
-        with:
-          path: |
-            ${{ steps.setup-flutter.outputs.pub-cache-path }}
-            build
-            .dart_tool
-          key: v1-${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.lock') }}
-          restore-keys: |
-            v1-${{ runner.os }}-flutter-
-            clean-v1-${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.lock') }}
-      - name: Cache Flutter dependencies (clean)
-        if: contains(github.event.head_commit.message, '[clean]')
-        uses: actions/cache@v4
-        with:
-          path: |
-            ${{ steps.setup-flutter.outputs.pub-cache-path }}
-            build
-            .dart_tool
-          key: clean-v1-${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.lock') }}
-      - name: Setup .env File for macOS
-        env:
-          SIMKL_SECRET: ${{ secrets.SIMKL_SECRET }}
-        run: |
-          echo "SIMKL_SECRET= $SIMKL_SECRET" > .env
-        shell: bash
+      - *prepare_flutter
+      - *setup_flutter
+      - *cache_flutter_normal
+      - *cache_flutter_clean
+      - *setup_env
       - name: Get Dependencies
         run: flutter pub get
       - name: Build macOS
@@ -503,7 +427,7 @@ jobs:
   sendMessage:
     runs-on: ubuntu-latest
     needs: [build_android, build_windows, build_linux, build_ios, build_macos]
-    if:  |
+    if: |
       always() && 
       !contains(needs.*.result, 'failure') && 
       !contains(needs.*.result, 'cancelled') &&
