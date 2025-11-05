@@ -73,8 +73,6 @@ jobs:
           echo "SIMKL_SECRET=$SIMKL_SECRET" > .env
           GIT_HASH=$(git rev-parse --short HEAD)
           echo "hash=$GIT_HASH" >> .env
-          cat .env
-
 
   build_android:
     runs-on: ubuntu-latest
