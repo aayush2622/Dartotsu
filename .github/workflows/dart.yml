@@ -395,6 +395,27 @@ jobs:
           upload-to-folder-id: ${{secrets.GOOGLE_FOLDER_MAIN}}
           service-account-json: "${{secrets.GOOGLE_KEY}}"
           overrwrite: true
+
+  updateVersion:
+    name: Update Version
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Run update version script
+        shell: bash
+        run: |
+          GIT_HASH=$(git rev-parse --short HEAD)
+          GIT_COUNT=$(git rev-list --count HEAD)
+          APP_VERSION=$(grep '^version:' ../pubspec.yaml | awk '{print $2}')
+          FILE="../assets/version"
+          cat > "$FILE" <<EOF
+          version=$APP_VERSION
+          commit=$GIT_COUNT
+          hash=$GIT_HASH
+          EOF
   sendMessage:
     runs-on: ubuntu-latest
     needs: [build_android, build_windows, build_linux, build_ios, build_macos]
@@ -702,3 +723,5 @@ jobs:
           curl -H "Content-Type: application/json" \
                -d "{\"content\": \"${APK_MESSAGE}\n${WINDOWS_MESSAGE}\n${LINUX_MESSAGE}\n${IOS_MESSAGE}\n${MACOS_MESSAGE}\"}" \
                "${{ secrets.DISCORD_WEBHOOK_URL }}"
+
+
