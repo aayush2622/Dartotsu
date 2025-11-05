@@ -59,16 +59,23 @@
 ## Downloads
 <p align="center">
 
-   <a href="https://github.com/aayush2622/Dartotsu/releases/latest"><img src="https://img.shields.io/github/v/release/aayush2622/Dartotsu?style=for-the-badge&logoColor=168b94&label=Stable&labelColor=06599d&color=043b69" alt="Latest Stable Release"/></a>
-   <a href="https://github.com/aayush2622/Dartotsu/releases/"><img src="https://img.shields.io/github/v/release/aayush2622/Dartotsu?style=for-the-badge&include_prereleases&logoColor=087a87&label=Beta&color=818cf8" alt="Latest Pre-release"/></a>
-   <!--<a  href="https://github.com/aayush2622/Dartotsu/releases/latest"><img src="https://img.shields.io/github/v/release/aayush2622/Dartotsu?style=for-the-badge&display_name=tag&label=Alpha&labelColor=087a87&color=168b94" alt="Latest Alpha Release"/></a>-->
-  <a href="https://apps.obtainium.imranr.dev/redirect?r=obtainium://add/https://github.com/aayush2622/Dartotsu"><img src="https://github-production-user-asset-6210df.s3.amazonaws.com/30463115/393344052-713d71c5-3dec-4ec4-a3f2-8d28d025a9c6.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20251105%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20251105T143128Z&X-Amz-Expires=300&X-Amz-Signature=854f6f4dffc923ea8da5ff30dbfdde053b871c9a8b937a8f19d4c897e5bc1cc2&X-Amz-SignedHeaders=host" alt="Get it on Obtainium" width="160"/>
+  <a href="https://github.com/aayush2622/Dartotsu/releases/latest">
+    <img src="https://img.shields.io/github/v/release/aayush2622/Dartotsu?style=for-the-badge&logoColor=168b94&label=Stable&labelColor=00ffff&color=0d1117" alt="Latest Stable Release"/>
+  </a>
+  <a href="https://github.com/aayush2622/Dartotsu/releases/">
+    <img src="https://img.shields.io/github/v/release/aayush2622/Dartotsu?style=for-the-badge&include_prereleases&logoColor=087a87&label=Beta&labelColor=00ffff&color=0d1117" alt="Latest Pre-release"/>
+  </a>
+  <!--<a href="https://github.com/aayush2622/Dartotsu/releases/latest">
+    <img src="https://img.shields.io/github/v/release/aayush2622/Dartotsu?style=for-the-badge&display_name=tag&label=Alpha&labelColor=087a87&color=168b94" alt="Latest Alpha Release"/>
+  </a>-->
+  <br/>
+   <a href="https://apps.obtainium.imranr.dev/redirect?r=obtainium://add/https://github.com/aayush2622/Dartotsu"><img src="https://github-production-user-asset-6210df.s3.amazonaws.com/30463115/393344052-713d71c5-3dec-4ec4-a3f2-8d28d025a9c6.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20251105%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20251105T143128Z&X-Amz-Expires=300&X-Amz-Signature=854f6f4dffc923ea8da5ff30dbfdde053b871c9a8b937a8f19d4c897e5bc1cc2&X-Amz-SignedHeaders=host" alt="Get it on Obtainium" width="160"/>
    </a>
-<br/>
-   
+
+</p>
+
 > [!NOTE]
 > Download, test, and share feedback or issues on <a href="https://discord.gg/eyQdCpdubF" target="_blank">Discord</a>.
-</p>
 
 ## Support Us
 <a href='https://buymeacoffee.com/aayush262' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://storage.ko-fi.com/cdn/kofi1.png?v=3' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
@@ -124,5 +131,6 @@ Your efforts are invaluable.
 
 ## License
 Dartotsu is licensed under the Unabandon Public License (UPL). More info can be found [here](LICENSE.md).
+
 
 
