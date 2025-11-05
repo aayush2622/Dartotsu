@@ -183,3 +183,15 @@ List<T> mergeMapValues<T>(Map<String, List<T>> dataMap) {
 
   return uniqueItems.toList();
 }
+
+Future<String?> loadEnv(String prop) async {
+  try {
+    final envString = await rootBundle.loadString('.env');
+    final env = envString
+        .split('\n')
+        .firstWhereOrNull((element) => element.startsWith(prop));
+    return env?.split('=')[1].trim();
+  } catch (e) {
+    return null;
+  }
+}

@@ -16,7 +16,6 @@ import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -119,8 +118,7 @@ Future init() async {
   for (var locale in supportedLocales) {
     initializeDateFormatting(locale);
   }
-  await dotenv.load(fileName: ".env");
-  BuildInfo.load();
+  await BuildInfo.load();
   AppUpdater().checkForUpdate();
   Discord.getSavedToken();
   initDeepLinkListener();

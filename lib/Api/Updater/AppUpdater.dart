@@ -6,8 +6,6 @@ import 'package:dartotsu/Preferences/PrefManager.dart';
 import 'package:dartotsu/Widgets/CustomBottomDialog.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:path/path.dart' as path;
@@ -43,6 +41,7 @@ class AppUpdater {
     var skippedUpdates =
         loadCustomData<List<String>>("skippedUpdateList") ?? [];
     if (skippedUpdates.contains(release)) return;
+    if (BuildInfo.hash == null) return;
     final compare = await http.get(
       Uri.parse(
         'https://api.github.com/repos/$mainRepo/compare/$release...${BuildInfo.hash}',
@@ -253,7 +252,7 @@ class AppUpdater {
 class BuildInfo {
   static String? hash;
 
-  static void load() {
-    hash = dotenv.env['hash'];
+  static Future<void> load() async {
+    hash = await loadEnv("hash");
   }
 }

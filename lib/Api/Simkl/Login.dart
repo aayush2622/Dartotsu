@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_web_auth_2/flutter_web_auth_2.dart';
 import 'package:http/http.dart' as http;
@@ -50,7 +49,10 @@ CustomBottomDialog login(BuildContext context) {
 Future<String> fetchToken({required String code}) async {
   final uri = Uri.parse('https://api.simkl.com/oauth/token');
 
-  var secret = dotenv.env['SIMKL_SECRET'] ?? '';
+  var secret = await loadEnv("secret");
+
+  if (secret == null) throw Exception("secret missing");
+
   final response = await http.post(
     uri,
     headers: {

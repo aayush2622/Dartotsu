@@ -101,7 +101,6 @@ dependencies:
   fuzzywuzzy: ^1.2.0
   collection: ^1.19.1
   flutter_web_auth_2: ^5.0.0-alpha.0
-  flutter_dotenv: ^5.2.1
   dartotsu_extension_bridge:
    # path: ../DartotsuExtensionBridge
    git:
@@ -145,7 +144,6 @@ flutter:
 
   # Assets
   assets:
-    - assets/version
     - .env
     - assets/images/logo.png
     - assets/svg/bmc-button.svg
