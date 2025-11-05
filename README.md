@@ -69,7 +69,7 @@
     <img src="https://img.shields.io/github/v/release/aayush2622/Dartotsu?style=for-the-badge&display_name=tag&label=Alpha&labelColor=087a87&color=168b94" alt="Latest Alpha Release"/>
   </a>-->
   <br/>
-   <a href="https://apps.obtainium.imranr.dev/redirect?r=obtainium://add/https://github.com/aayush2622/Dartotsu"><img src="https://github-production-user-asset-6210df.s3.amazonaws.com/30463115/393344052-713d71c5-3dec-4ec4-a3f2-8d28d025a9c6.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20251105%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20251105T143128Z&X-Amz-Expires=300&X-Amz-Signature=854f6f4dffc923ea8da5ff30dbfdde053b871c9a8b937a8f19d4c897e5bc1cc2&X-Amz-SignedHeaders=host" alt="Get it on Obtainium" width="160"/>
+   <a href="https://apps.obtainium.imranr.dev/redirect?r=obtainium://add/https://github.com/aayush2622/Dartotsu"><img src="https://raw.githubusercontent.com/ImranR98/Obtainium/main/assets/graphics/badge_obtainium.png" alt="Get it on Obtainium" width="160"/>
    </a>
 
 </p>
