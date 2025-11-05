@@ -42,6 +42,7 @@ class AppUpdater {
         loadCustomData<List<String>>("skippedUpdateList") ?? [];
     if (skippedUpdates.contains(release)) return;
     if (BuildInfo.hash == null) return;
+
     final compare = await http.get(
       Uri.parse(
         'https://api.github.com/repos/$mainRepo/compare/$release...${BuildInfo.hash}',
@@ -203,7 +204,7 @@ class AppUpdater {
                   ),
                   const SizedBox(height: 6),
                   Text(
-                    "${downloadedBytes.value ~/ (1024 * 1024)}MB / ${totalBytes.value ~/ (1024 * 1024)}MB (${downloadProgress.value.toStringAsFixed(1)}%)",
+                    "${downloadedBytes.value ~/ (1024 * 1024)}MB / ${totalBytes.value ~/ (1024 * 1024)}MB ${downloadProgress.value.toStringAsFixed(1)}%",
                     style: textStyle,
                   ),
                   const SizedBox(height: 12),
