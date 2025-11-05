@@ -126,10 +126,10 @@ compare_commits() {
     echo -e "${GREEN}${DIM}> Cross-referencing SHA hashes...${RESET}"
     sleep 0.5
 
-    # Get data
-    local main_commit=$(curl -s "https://api.github.com/repos/${main_repo}/commits" | grep '"sha"' | head -1 | cut -d '"' -f 4 | cut -c1-7)
-    local main_date=$(curl -s "https://api.github.com/repos/${main_repo}/commits" | grep '"date"' | head -1 | cut -d '"' -f 4)
-    local main_author=$(curl -s "https://api.github.com/repos/${main_repo}/commits" | grep '"name"' | head -1 | cut -d '"' -f 4)
+    local response=$(curl -s "https://api.github.com/repos/${main_repo}/commits?per_page=1")
+    local main_commit=$(echo "$response" | grep '"sha"' | head -1 | cut -d'"' -f4 | cut -c1-7)
+    local main_date=$(echo "$response" | grep -A 2 '"date"' | tail -1 | cut -d'"' -f4)
+    local main_author=$(echo "$response" |grep '"name"' | head -1 | cut -d '"' -f 4) 
 
     local alpha_release=$(curl -s "https://api.github.com/repos/${alpha_repo}/releases/latest")
     local alpha_tag=$(echo "$alpha_release" | grep '"tag_name"' | cut -d '"' -f 4)
