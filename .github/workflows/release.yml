@@ -1,22 +1,117 @@
-name: RELEASE
+name: Dartotsu Build Workflow
 on:
   push:
-    tags:
-      - 'v*.*.*' # Trigger on version tags like v1.0.0, v2.1.3, etc.
-  workflow_dispatch:
-jobs:
-  build_android:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pull-requests: write
-      repository-projects: write
+    branches:
+      - main
 
+env:
+  # Default Flutter version (may be overridden dynamically in jobs)
+  FLUTTER_VERSION: 3.35.7
+
+jobs:
+  # Hidden job to define reusable YAML anchors for common steps (never runs)
+  anchors:
+    if: ${{ false }}
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - &checkout
+        name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
+      - &prepare_flutter
+        name: Prepare Flutter version
+        shell: bash
+        env:
+          FLUTTER_VERSION_SECRET: ${{ secrets.FLUTTER_VERSION }}
+        run: |
+          # Use secret FLUTTER_VERSION if set, otherwise fallback to default from env
+          if [ -n "${FLUTTER_VERSION_SECRET}" ]; then
+            echo "FLUTTER_VERSION=${FLUTTER_VERSION_SECRET}" >> $GITHUB_ENV
+          else
+            echo "FLUTTER_VERSION=${FLUTTER_VERSION}" >> $GITHUB_ENV
+          fi
+
+      - &setup_flutter
+        name: Setup Flutter
+        id: setup-flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+
+      - &cache_flutter_normal
+        name: Cache Flutter dependencies (normal)
+        if: ${{ !contains(github.event.head_commit.message, '[clean]') }}
+        uses: actions/cache@v4
+        with:
+          path: |
+            ${{ steps.setup-flutter.outputs.pub-cache-path }}
+            build/
+            .dart_tool/
+          key: v1-${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.lock', '**/pubspec.yaml') }}
+          restore-keys: |
+            v1-${{ runner.os }}-flutter-
+            clean-v1-${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.lock', '**/pubspec.yaml') }}
+
+      - &cache_flutter_clean
+        name: Cache Flutter dependencies (clean)
+        if: contains(github.event.head_commit.message, '[clean]')
+        uses: actions/cache@v4
+        with:
+          path: |
+            ${{ steps.setup-flutter.outputs.pub-cache-path }}
+            build/
+            .dart_tool/
+          key: clean-v1-${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.lock', '**/pubspec.yaml') }}
+
+      - &setup_env
+        name: Setup env File
+        env:
+          SIMKL_SECRET: ${{ secrets.SIMKL_SECRET }}
+        shell: bash
+        run: |
+          echo "SIMKL_SECRET= $SIMKL_SECRET" > .env
+  build_android:
+    runs-on: ubuntu-latest
+    # Only run if commit message contain [build.apk]
+    if: contains(github.event.head_commit.message, '[build.apk]') || contains(github.event.head_commit.message, '[build]') || contains(github.event.head_commit.message, '[build.all]')
+    outputs:
+      apk_link: ${{steps.gdriveUpload_arm64.outputs.web-content-link}}
+
+    permissions:
+      contents: write
+      pull-requests: read
+      actions: read
+
+    steps:
+      - *checkout
+      # Cache Flutter dependencies
+      - *prepare_flutter
+      - *setup_flutter
+      - *cache_flutter_normal
+      - *cache_flutter_clean
+
+      # Cache Gradle dependencies
+      - name: Cache Gradle dependencies (normal)
+        if: ${{!contains(github.event.head_commit.message, '[clean]')}}
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: v1-${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            v1-${{ runner.os }}-gradle-
+            clean-v1-${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+      - name: Cache Gradle dependencies (clean)
+        if: contains(github.event.head_commit.message, '[clean]')
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: clean-v1-${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
       # Setup Cmake
       - name: Setup cmake
         uses: jwlawson/actions-setup-cmake@v2
@@ -38,13 +133,9 @@ jobs:
           distribution: "oracle"
           java-version: "17"
 
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: 3.35.7
-          cache: true
+      # Note: Flutter version and setup moved above via anchors
 
-          # Download the keystore file (from GitHub Secrets or other storage)
+      # Download the keystore file (from GitHub Secrets or other storage)
       - name: Download keystore
         env:
           KEYSTORE_BASE64: ${{ secrets.APK_SIGN }}
@@ -62,11 +153,15 @@ jobs:
           echo "keyAlias=$KEY_ALIAS" >> android/key.properties
           echo "storeFile=dartotsu.jks" >> android/key.properties
       # Create .env:
-      - name: Setup env File
-        env:
-          SIMKL_SECRET: ${{ secrets.SIMKL_SECRET }}
+      - *setup_env
+
+      # Configure Gradle for faster builds
+      - name: Configure Gradle
         run: |
-          echo "SIMKL_SECRET= $SIMKL_SECRET" > .env
+          mkdir -p ~/.gradle
+          echo "org.gradle.daemon=true" >> ~/.gradle/gradle.properties
+          echo "org.gradle.parallel=true" >> ~/.gradle/gradle.properties
+          echo "org.gradle.caching=true" >> ~/.gradle/gradle.properties
 
       # Optimize Flutter build
       - run: flutter clean
@@ -81,55 +176,72 @@ jobs:
             mv $file build/app/outputs/flutter-apk/Dartotsu_Android_${abi}_${{github.ref_name}}.apk
           done
           ls build/app/outputs/flutter-apk
-      - name: Rename Universal APK
-        run: |
-          mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/Dartotsu_Android_Universal_${{github.ref_name}}.apk
-      - name: Android Apk Release
-        uses: softprops/action-gh-release@master
-        with:
-          files: build/app/outputs/flutter-apk/Dartotsu_Android_*_${{ github.ref_name }}.apk
 
+      - name: Rename universal APK
+        run: mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/Dantotsu_Android_universal_${{github.ref_name}}.apk
+
+      - name: Upload arm64 File To Google Drive
+        id: gdriveUpload_arm64
+        uses: hoatruongdev09/google-drive-file-upload-github-action@v1.1
+        with:
+          file-path: build/app/outputs/flutter-apk/Dartotsu_Android_arm64-v8a_main.apk
+          upload-name: Dartotsu_Android_arm64-v8a_${{github.ref_name}}.apk
+          upload-to-folder-id: ${{secrets.GOOGLE_FOLDER_ANDROID}}
+          service-account-json: "${{secrets.GOOGLE_KEY}}"
+          overrwrite: true
+      - name: Upload armeabi File To Google Drive
+        id: gdriveUpload_armeabi
+        uses: hoatruongdev09/google-drive-file-upload-github-action@v1.1
+        with:
+          file-path: build/app/outputs/flutter-apk/Dartotsu_Android_armeabi-v7a_main.apk
+          upload-name: Dartotsu_Android_armeabi-v7a_${{github.ref_name}}.apk
+          upload-to-folder-id: ${{secrets.GOOGLE_FOLDER_ANDROID}}
+          service-account-json: "${{secrets.GOOGLE_KEY}}"
+          overrwrite: true
+      - name: Upload x86 File To Google Drive
+        id: gdriveUpload_x86
+        uses: hoatruongdev09/google-drive-file-upload-github-action@v1.1
+        with:
+          file-path: build/app/outputs/flutter-apk/Dartotsu_Android_x86_64_main.apk
+          upload-name: Dartotsu_Android_x86_64_${{github.ref_name}}.apk
+          upload-to-folder-id: ${{secrets.GOOGLE_FOLDER_ANDROID}}
+          service-account-json: "${{secrets.GOOGLE_KEY}}"
+          overrwrite: true
+      - name: Upload File To Google Drive
+        id: gdriveUpload_universal
+        uses: hoatruongdev09/google-drive-file-upload-github-action@v1.1
+        with:
+          file-path: build/app/outputs/flutter-apk/Dantotsu_Android_universal_${{github.ref_name}}.apk
+          upload-name: Dartotsu.apk
+          upload-to-folder-id: ${{secrets.GOOGLE_FOLDER_ANDROID}}
+          service-account-json: "${{secrets.GOOGLE_KEY}}"
+          overrwrite: true
   build_windows:
     runs-on: windows-latest
+    if: contains(github.event.head_commit.message, '[build.windows]') ||  contains(github.event.head_commit.message, '[build.all]')
+    outputs:
+      zip_link: ${{steps.gdriveUpload.outputs.web-content-link}}
+
     permissions:
       contents: write
       pull-requests: write
       repository-projects: write
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
-      # Cache Flutter and Dart dependencies
-      - uses: actions/cache@v4
-        with:
-          path: |
-            C:\hostedtoolcache\windows\flutter
-            ~\AppData\Local\Pub\Cache
-            build\
-            .dart_tool\
-          key: ${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-flutter-
+    steps:
+      - *checkout
 
       - name: Set up Signing Tool
         run: |
           mkdir $env:USERPROFILE\certs
           [System.IO.File]::WriteAllBytes("$env:USERPROFILE\certs\Dartotsu.pfx", [Convert]::FromBase64String("${{secrets.PFX_FILE}}"))
       # Create .env:
-      - name: Setup env File
-        env:
-          SIMKL_SECRET: ${{ secrets.SIMKL_SECRET }}
-        run: |
-          echo "SIMKL_SECRET= $env:SIMKL_SECRET" > .env
+      - *setup_env
 
+      - *prepare_flutter
       # Setup Flutter with caching
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: 3.35.7
-          cache: true
+      - *setup_flutter
+      - *cache_flutter_normal
+      - *cache_flutter_clean
       - name: Setup NuGet.exe for use with actions
         uses: NuGet/setup-nuget@v2.0.1
         with:
@@ -149,44 +261,66 @@ jobs:
           $version = (Get-Content pubspec.yaml | Select-String -Pattern 'version: ([\d.]+)').Matches.Groups[1].Value
           echo "version=$version" >> $env:GITHUB_ENV
 
+      - name: Find Latest SignTool Path
+        id: find_signtool
+        shell: pwsh # Use PowerShell for better scripting
+        run: |
+          $sdkBins = Get-ChildItem "C:\Program Files (x86)\Windows Kits\10\bin" -Directory | 
+                     Where-Object { $_.Name -match '^\d+\.\d+\.\d+\.\d+$' } |  
+                     Sort-Object Name -Descending | 
+                     Select-Object -First 1
+          if (-not $sdkBins) {
+            throw "No Windows SDK bin directories found!"
+          }
+          $signtoolPath = Join-Path $sdkBins.FullName "x64\signtool.exe"
+          if (-not (Test-Path $signtoolPath)) {
+            throw "signtool.exe not found at $signtoolPath"
+          }
+          echo "signtool_path=$signtoolPath" >> $env:GITHUB_OUTPUT
+
       - name: Build and Sign Setup
         run: |
-          dart run inno_bundle:build --sign-tool-params '"C:\Program Files (x86)\Windows Kits\10\bin\10.0.19041.0\x64\signtool.exe" sign /fd sha256 /f "C:\Users\runneradmin\certs\Dartotsu.pfx" /p "${{secrets.PFX_PASSWORD}}" /t http://timestamp.digicert.com /v $f' --release
-      - name: Release Windows Zip
-        uses: softprops/action-gh-release@master
+          dart run inno_bundle:build --sign-tool-params '"${{ steps.find_signtool.outputs.signtool_path }}" sign /fd sha256 /f "C:\Users\runneradmin\certs\Dartotsu.pfx" /p "${{secrets.PFX_PASSWORD}}" /tr http://timestamp.digicert.com /td sha256 /v $f' --release
+
+      # Upload to Google Drive
+      - name: Upload File To Google Drive
+        id: gdriveUpload
+        uses: hoatruongdev09/google-drive-file-upload-github-action@v1.1
         with:
-          files: build/windows/x64/installer/Release/Dartotsu-x86_64-${{env.version}}-Installer.exe
+          file-path: build\windows\x64\installer\Release\Dartotsu-x86_64-${{env.version}}-Installer.exe
+          upload-name: Dartotsu_windows.exe
+          upload-to-folder-id: ${{secrets.GOOGLE_FOLDER_MAIN}}
+          service-account-json: "${{secrets.GOOGLE_KEY}}"
+          overrwrite: true
 
   build_linux:
     runs-on: ubuntu-latest
+    if: contains(github.event.head_commit.message, '[build.linux]')  ||  contains(github.event.head_commit.message, '[build.all]') ||  contains(github.event.head_commit.message, '[build]')
     permissions:
       contents: write
       pull-requests: write
       repository-projects: write
+    outputs:
+      zip_link: ${{steps.gdriveUpload.outputs.web-content-link}}
     steps:
       # Step 1: Clone repository
-      - name: Cloning repository
-        uses: actions/checkout@v4
+      - *checkout
 
+      - *prepare_flutter
       # Step 2: Setup Flutter
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: 3.35.7
-          cache: true
+      - *setup_flutter
 
       # Step 3: Setup system dependencies
       - name: Install system dependencies
         run: |
           sudo apt-get update -y
-          sudo apt-get install -y ninja-build libgtk-3-dev webkit2gtk-4.1 libmpv-dev pkg-config fuse 
+          sudo apt-get install -y ninja-build libgtk-3-dev webkit2gtk-4.1 libmpv-dev pkg-config fuse
 
+      # Step 4: Cache Flutter dependencies
+      - *cache_flutter_normal
+      - *cache_flutter_clean
       # Create .env:
-      - name: Setup env File
-        env:
-          SIMKL_SECRET: ${{ secrets.SIMKL_SECRET }}
-        run: |
-          echo "SIMKL_SECRET= $SIMKL_SECRET" > .env
+      - *setup_env
 
       # Step 5: Fetch Flutter dependencies
       - name: Fetch Flutter dependencies
@@ -195,42 +329,40 @@ jobs:
       # Step 6: Build the Linux application
       - name: Build Flutter Linux app
         run: flutter build linux
-
       # Step 7: Archive the app
       - name: Archive app
         uses: thedoctor0/zip-release@master
         with:
           type: "zip"
-          filename: Dartotsu_LinuxZip_${{github.ref_name}}.zip
+          filename: Dartotsu_Linux_${{github.ref_name}}.zip
           directory: build/linux/x64/release/bundle
-      - name: Release Linux Zip
-        uses: softprops/action-gh-release@master
+
+      # Step 9: Upload to Google Drive
+      - name: Upload File To Google Drive
+        id: gdriveUpload
+        uses: hoatruongdev09/google-drive-file-upload-github-action@v1.1
         with:
-          files: build/linux/x64/release/bundle/Dartotsu_LinuxZip_${{github.ref_name}}.zip
+          file-path: build/linux/x64/release/bundle/Dartotsu_Linux_${{github.ref_name}}.zip
+          upload-name: Dartotsu_linux.zip
+          upload-to-folder-id: ${{secrets.GOOGLE_FOLDER_MAIN}}
+          service-account-json: "${{secrets.GOOGLE_KEY}}"
+          overrwrite: true
   build_ios:
     runs-on: macos-latest
+    if: contains(github.event.head_commit.message, '[build.ios]')  ||  contains(github.event.head_commit.message, '[build.all]')
     permissions:
       contents: write
-      pull-requests: write
-      repository-projects: write
     steps:
       # Step 1: Clone repository
-      - name: Cloning repository
-        uses: actions/checkout@v4
+      - *checkout
 
+      - *prepare_flutter
       # Step 2: Setup Flutter
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: 3.35.7
-          cache: true
+      - *setup_flutter
+      - *cache_flutter_normal
+      - *cache_flutter_clean
 
-      - name: Setup .env File for macOS
-        env:
-          SIMKL_SECRET: ${{ secrets.SIMKL_SECRET }}
-        run: |
-          echo "SIMKL_SECRET= $SIMKL_SECRET" > .env
-        shell: bash
+      - *setup_env
 
       # Step 3 Get Dependencies
       - name: Get Dependencies
@@ -240,37 +372,40 @@ jobs:
         run: |
           flutter build ios --release --no-codesign
           cd build/ios/iphoneos
+          # Remove old Payload directory to avoid cp error on cached runs
+          rm -rf Payload
           mkdir -p Payload
           cd Payload
-          ln -s ../Runner.app
+          cp -R ../Runner.app .
           cd ..
           zip -r Dartotsu-iOS-${{ github.ref_name }}.ipa Payload
-
-      - name: Release Linux Zip
-        uses: softprops/action-gh-release@master
+      #Step 5 Upload ipa file to google drive
+      - name: Upload File To Google Drive
+        id: gdriveUpload
+        uses: hoatruongdev09/google-drive-file-upload-github-action@v1.1
         with:
-          files: build/ios/iphoneos/Dartotsu-iOS-${{github.ref_name}}.ipa
+          file-path: build/ios/iphoneos/Dartotsu-iOS-${{github.ref_name}}.ipa
+          upload-name: Dartotsu-iOS-${{github.ref_name}}.ipa
+          upload-to-folder-id: ${{secrets.GOOGLE_FOLDER_MAIN}}
+          service-account-json: "${{secrets.GOOGLE_KEY}}"
+          overrwrite: true
   build_macos:
     runs-on: macos-latest
+    if: contains(github.event.head_commit.message, '[build.macos]') ||  contains(github.event.head_commit.message, '[build.all]')
     permissions:
       contents: write
       pull-requests: write
       repository-projects: write
+    outputs:
+      deb_link: ${{steps.gdriveUpload.outputs.web-content-link}}
     steps:
-      - name: Cloning repository
-        uses: actions/checkout@v4
+      - *checkout
 
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: 3.35.7
-          cache: true
-      - name: Setup .env File for macOS
-        env:
-          SIMKL_SECRET: ${{ secrets.SIMKL_SECRET }}
-        run: |
-          echo "SIMKL_SECRET= $SIMKL_SECRET" > .env
-        shell: bash
+      - *prepare_flutter
+      - *setup_flutter
+      - *cache_flutter_normal
+      - *cache_flutter_clean
+      - *setup_env
       - name: Get Dependencies
         run: flutter pub get
       - name: Build macOS
@@ -278,327 +413,321 @@ jobs:
       - name: Create DMG file for macOS Build
         run: |
           mkdir -p build/macos/Release
-          hdiutil create -volname "Dartotsu" -srcfolder build/macos/Build/Products/Release/dartotsu.app -ov -format UDZO build/macos/Release/Dartotsu-macos-${{github.ref_name}}.dmg
+          hdiutil create -volname "Dartotsu" -srcfolder build/macos/Build/Products/Release/Dartotsu.app -ov -format UDZO build/macos/Release/Dartotsu-macos-${{github.ref_name}}.dmg
         shell: bash
-      - name: Release macOS Zip
-        uses: softprops/action-gh-release@master
+      - name: Upload File To Google Drive
+        id: gdriveUpload
+        uses: hoatruongdev09/google-drive-file-upload-github-action@v1.1
         with:
-          files: build/macos/Release/Dartotsu-macos-${{github.ref_name}}.dmg
-
-  post-release-notes:
+          file-path: build/macos/Release/Dartotsu-macos-${{github.ref_name}}.dmg
+          upload-name: Dartotsu-macos-${{github.ref_name}}.dmg
+          upload-to-folder-id: ${{secrets.GOOGLE_FOLDER_MAIN}}
+          service-account-json: "${{secrets.GOOGLE_KEY}}"
+          overrwrite: true
+  sendMessage:
     runs-on: ubuntu-latest
+    needs: [build_android, build_windows, build_linux, build_ios, build_macos]
+    if: |
+      always() && 
+      !contains(needs.*.result, 'failure') && 
+      !contains(needs.*.result, 'cancelled') &&
+      (needs.build_android.result == 'success' ||
+       needs.build_windows.result == 'success' ||
+       needs.build_linux.result == 'success' ||
+       needs.build_ios.result == 'success' ||
+       needs.build_macos.result == 'success')
     permissions:
       contents: read
-    needs: [generate-changelog]
+      pull-requests: read
+      actions: read
     steps:
       - name: Cloing repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Fetch Repository Tags by Date and Time
-        id: fetch_tags
+
+      - name: Download last SHA artifact
+        uses: dawidd6/action-download-artifact@v6
+        with:
+          workflow: dart.yml
+          name: last-sha
+        continue-on-error: true
+
+      - name: Get Commits Since Last Run
         run: |
-          curl -s "https://api.github.com/repos/${{github.repository}}/tags" -o tags.json
-          TAGS=$(jq -r '.[].name' tags.json)
-          declare -a TAGS_WITH_DATES=()
-          for TAG in $TAGS; do
-            TAG_DETAILS=$(curl -s "https://api.github.com/repos/${{github.repository}}/git/refs/tags/$TAG")
-            OBJECT_URL=$(echo "$TAG_DETAILS" | jq -r '.object.url // empty')
-            if [ -n "$OBJECT_URL" ]; then
-              OBJECT_DETAILS=$(curl -s "$OBJECT_URL")
-              DATE=$(echo "$OBJECT_DETAILS" | jq -r '.tagger.date // .committer.date // empty')
-              if [ -n "$DATE" ]; then
-                TAGS_WITH_DATES+=("$DATE $TAG")
-              fi
-            fi
-          done
-          LATEST_TAG=""
-          LATEST_DATE=""
-          for TAG_DATE in "${TAGS_WITH_DATES[@]}"; do
-            TAG_DATE_TIME=$(echo "$TAG_DATE" | awk '{print $1}')
-            TAG_NAME=$(echo "$TAG_DATE" | awk '{print $2}')
-            if [[ -z "$LATEST_DATE" || "$TAG_DATE_TIME" > "$LATEST_DATE" ]]; then
-              LATEST_DATE="$TAG_DATE_TIME"
-              LATEST_TAG="$TAG_NAME"
-            fi
-          done
-          echo "$LATEST_TAG"
-          echo "LATEST_TAG=$LATEST_TAG" >> $GITHUB_ENV
-      - name: Get Latest Release Notes
-        id: get_release_notes
-        run: |
-          RELEASE_DATA=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-          "https://api.github.com/repos/${{ github.repository }}/releases/latest")
-
-          RELEASE_NOTES=$(echo "$RELEASE_DATA" | jq -r '.body')
-          echo "Release Notes: $RELEASE_NOTES"
-
-          echo "RELEASE_NOTES<<EOF" >> $GITHUB_ENV
-          echo "$RELEASE_NOTES" >> $GITHUB_ENV
-          echo "EOF" >> $GITHUB_ENV
-
-      - name: Format Release Notes
-        id: format_notes
-        run: |
-        
-          features=$(echo "$RELEASE_NOTES" | grep -iE '^\*\s\[[a-f0-9]+\]\(.*\):\sfeat' | head -n 5)
-          if [[ -n "$features" ]]; then
-            echo "**🚀 Features**" > formatted_notes.txt
-            echo "$features" >> formatted_notes.txt
-            echo "" >> formatted_notes.txt
+          if [ -f last_sha.txt ]; then
+            LAST_SHA=$(cat last_sha.txt)
+          else
+            # Fallback to first commit if no previous SHA available
+            LAST_SHA=$(git rev-list --max-parents=0 HEAD)
           fi
-      
-          fixes=$(echo "$RELEASE_NOTES" | grep -iE '^\*\s\[[a-f0-9]+\]\(.*\):\s(fix|bug|improvement|patch)' | head -n 5)
-          if [[ -n "$fixes" ]]; then
-            echo "**🐛 Fixes**" >> formatted_notes.txt
-            echo "$fixes" >> formatted_notes.txt
-            echo "" >> formatted_notes.txt
-          fi
-
-          chores=$(echo "$RELEASE_NOTES" | grep -iE '^\*\s\[[a-f0-9]+\]\(.*\):\s(chore|docs|build|ci)' | head -n 5)
-          if [[ -n "$chores" ]]; then
-            echo "**🛠 Chores**" >> formatted_notes.txt
-            echo "$chores" >> formatted_notes.txt
-            echo "" >> formatted_notes.txt
-          fi
-
-          cat formatted_notes.txt
-          FORMATTED_NOTES=$(cat formatted_notes.txt) 
-          echo "FORMATTED_NOTES<<EOF" >> $GITHUB_ENV
-          echo "$FORMATTED_NOTES" >> $GITHUB_ENV
-          echo "EOF" >> $GITHUB_ENV
-
-      - name: Send message to Discord
+          echo "Commits since $LAST_SHA:"
+          # Accumulate commit logs in a shell variable
+          COMMIT_LOGS=$(git log $LAST_SHA..HEAD --pretty=format:"● %s ~%an [֍](https://github.com/${{ github.repository }}/commit/%H)" --max-count=10)
+          # URL-encode the newline characters for GitHub Actions
+          COMMIT_LOGS="${COMMIT_LOGS//'%'/'%25'}"
+          COMMIT_LOGS="${COMMIT_LOGS//$'\n'/'%0A'}"
+          COMMIT_LOGS="${COMMIT_LOGS//$'\r'/'%0D'}"
+          # Append the encoded commit logs to the COMMIT_LOG environment variable
+          echo "COMMIT_LOG=${COMMIT_LOGS}" >> $GITHUB_ENV
+          # Debugging: Print the variable to check its content
+          echo "$COMMIT_LOGS"
+          echo "$COMMIT_LOGS" > commit_log.txt
+          # Extract branch name from github.ref
+          BRANCH=${{ github.ref }}
+          BRANCH=${BRANCH#refs/heads/}
+          echo "BRANCH=${BRANCH}" >> $GITHUB_ENV
+        shell: /usr/bin/bash -e {0}
         env:
-          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_RELEASE_URL }}
-        run: |
+          CI: true
+        continue-on-error: true
 
-          FORMATTED_NOTES=$(echo "$FORMATTED_NOTES" | sed -E 's/\): [^:]+:/) :/g')
-        
+      - name: Save Current SHA for Next Run
+        run: echo ${{ github.sha }} > last_sha.txt
+
+      - name: Check for Ping
+        id: check_noping
+        run: |
+          if [[ "${{ github.event.head_commit.message }}" == *"[Ping]"* ]]; then
+            echo "ping_variable=<@&1324799528255225997>" >> $GITHUB_ENV
+          else
+            echo "ping_variable=noPing" >> $GITHUB_ENV
+          fi
+      - name: Upload APK to Discord
+        shell: bash
+        run: |
+          # Prepare Discord embed
+          fetch_user_details() {
+            local login=$1
+            user_details=$(curl -s "https://api.github.com/users/$login")
+            name=$(echo "$user_details" | jq -r '.name // .login')
+            login=$(echo "$user_details" | jq -r '.login')
+            avatar_url=$(echo "$user_details" | jq -r '.avatar_url')
+            echo "$name|$login|$avatar_url"
+          }
+
+          # Additional information for the goats
+          declare -A additional_info
+          additional_info["ibo"]="\n Discord: <@951737931159187457>\n AniList: [takarealist112](<https://anilist.co/user/5790266/>)"
+          additional_info["aayush262"]="\n Discord: <@918825160654598224>\n AniList: [aayush262](<https://anilist.co/user/5144645/>)"
+          additional_info["Ankit Grai"]="\n Discord: <@1125628254330560623>\n AniList: [bheshnarayan](<https://anilist.co/user/6417303/>)\n X: [grayankit01](<https://x.com/grayankit01>)"
+          # Decimal color codes for contributors
+          declare -A contributor_colors
           default_color="#1ac4c5"
+          contributor_colors["aayush262"]="#ff7eb6"
+          contributor_colors["Sadwhy"]="#ff7e95"
+          contributor_colors["grayankit"]="#c51aa1"
+          contributor_colors["rebelonion"]="#d4e5ed"
           hex_to_decimal() { printf '%d' "0x${1#"#"}"; }
+
+          # Count recent commits and create an associative array
+          declare -A recent_commit_counts
+          echo "Debug: Processing COMMIT_LOG:"
+          echo "$COMMIT_LOG"
+          while read -r count name; do
+              recent_commit_counts["$name"]=$count
+              echo "Debug: Commit count for $name: $count"
+          done < <(echo "$COMMIT_LOG" | sed 's/%0A/\n/g' | grep -oP '(?<=~)[^[]*' | sort | uniq -c | sort -rn)
+
+          echo "Debug: Fetching contributors from GitHub"
+          # Fetch contributors from GitHub
+          contributors=$(curl -L \
+          -H "Accept: application/vnd.github+json" \
+          -H "X-GitHub-Api-Version: 2022-11-28" \
+          https://api.github.com/repos/${{github.repository}}/contributors)
+          echo "Debug: Contributors response:"
+          echo "$contributors"
+
+          # Create a sorted list of contributors based on recent commit counts
+          sorted_contributors=$(for login in $(echo "$contributors" | jq -r '.[].login'); do
+              user_info=$(fetch_user_details "$login")
+              name=$(echo "$user_info" | cut -d'|' -f1)
+              count=${recent_commit_counts["$name"]:-0}
+              echo "$count|$login"
+          done | sort -rn | cut -d'|' -f2)
+
+          # Initialize needed variables
+          developers=""
+          committers_count=0
+          max_commits=0
+          top_contributor=""
+          top_contributor_count=0
+          top_contributor_avatar=""
           embed_color=$(hex_to_decimal "$default_color")
 
-          # Ensure VERSION is not empty
-          VERSION=${VERSION:-"${{env.LATEST_TAG}}"}
+          # Process contributors in the new order
+          while read -r login; do
+            user_info=$(fetch_user_details "$login")
+            name=$(echo "$user_info" | cut -d'|' -f1)
+            login=$(echo "$user_info" | cut -d'|' -f2)
+            avatar_url=$(echo "$user_info" | cut -d'|' -f3)
+
+          # Only process if they have recent commits
+          commit_count=${recent_commit_counts["$name"]:-0}
+          if [ $commit_count -gt 0 ]; then
+            # Update top contributor information
+            if [ $commit_count -gt $max_commits ]; then
+              max_commits=$commit_count
+              top_contributors=("$login")
+              top_contributor_count=1
+              top_contributor_avatar="$avatar_url"
+              embed_color=$(hex_to_decimal "${contributor_colors[$name]:-$default_color}")
+            elif [ $commit_count -eq $max_commits ]; then
+              top_contributors+=("$login")
+              top_contributor_count=$((top_contributor_count + 1))
+              embed_color=$(hex_to_decimal "$default_color")
+            fi
+            echo "Debug top contributors:"
+            echo "$top_contributors"
 
 
+            # Get commit count for this contributor on the main branch
+            branch_commit_count=$(git log --author="$login" --author="$name" --oneline | awk '!seen[$0]++' | wc -l)
+
+            # Debug: Print recent_commit_counts
+            echo "Debug: recent_commit_counts contents:"
+            for key in "${!recent_commit_counts[@]}"; do
+              echo "$key: ${recent_commit_counts[$key]}"
+            done
+
+            extra_info="${additional_info[$name]}"
+            if [ -n "$extra_info" ]; then
+              extra_info=$(echo "$extra_info" | sed 's/\\n/\n- /g')
+            fi
+
+            # Construct the developer entry
+            developer_entry="◗ **${name}** ${extra_info}
+          - Github: [${login}](https://github.com/${login})
+          - Commits: ${branch_commit_count}"
+
+
+
+            # Add the entry to developers, with a newline if it's not the first entry
+            if [ -n "$developers" ]; then
+              developers="${developers}
+          ${developer_entry}"
+              else
+                developers="${developer_entry}"
+              fi
+              committers_count=$((committers_count + 1))
+            fi
+          done <<< "$sorted_contributors"
+
+          # Set the thumbnail URL and color based on top contributor(s)
+          if [ $top_contributor_count -eq 1 ]; then
+            thumbnail_url="$top_contributor_avatar"
+          else
+            thumbnail_url="https://i.imgur.com/qt1ixRk.gif"
+            embed_color=$(hex_to_decimal "$default_color")
+          fi
+
+          # Truncate field values
+          max_length=1000
+          commit_messages=$(echo "$COMMIT_LOG" | sed 's/%0A/\n/g; s/^/\n/')
+          if [ ${#developers} -gt $max_length ]; then
+            developers="${developers:0:$max_length}... (truncated)"
+          fi
+          if [ ${#commit_messages} -gt $max_length ]; then
+            commit_messages="${commit_messages:0:$max_length}... (truncated)"
+          fi
+          # Construct Discord payload
           discord_data=$(jq -nc \
-                        --arg field_value "$FORMATTED_NOTES
-
-                        
-                        [📌 Full changelog](https://github.com/${{github.repository}}/releases/tag/${{ env.LATEST_TAG }})" \
+                        --arg field_value "$commit_messages" \
+                        --arg author_value "$developers" \
                         --arg footer_text "Version $VERSION" \
                         --arg timestamp "$(date -u +%Y-%m-%dT%H:%M:%S.000Z)" \
-                        --argjson embed_color "$embed_color" \
+                        --arg thumbnail_url "$thumbnail_url" \
+                        --arg embed_color "$embed_color" \
                         '{
-                          "content": "<@&1298977336124903457>",
+                          "content": "${{env.ping_variable}}",
                           "embeds": [
                             {
-                              "title": "New App Version Dropped 🔥",
+                              "title": "New Alpha-Build dropped 🔥",
                               "color": $embed_color,
-                              "description": $field_value,
+                              "fields": [
+                                {
+                                  "name": "Commits:",
+                                  "value": $field_value,
+                                  "inline": true
+                                },
+                                {
+                                  "name": "Developers:",
+                                  "value": $author_value,
+                                  "inline": false
+                                }
+                              ],
                               "footer": {
                                 "text": $footer_text
                               },
-                              "timestamp": $timestamp
+                              "timestamp": $timestamp,
+                              "thumbnail": {
+                                "url": $thumbnail_url
+                              }
                             }
-                          ]
+                          ],
+                          "attachments": []
                         }')
-
-          echo "Debug: Final Discord payload is: $discord_data"
-
-          # Send the message to Discord using the webhook
+          echo "Debug: Final Discord payload is:"
+          echo "$discord_data"
+          # Send Discord message
           curl -H "Content-Type: application/json" \
-              -X POST \
               -d "$discord_data" \
-              "$DISCORD_WEBHOOK_URL"
-
-  upload_download_url:
-    runs-on: ubuntu-latest
-    needs: [post-release-notes]
-    permissions:
-      contents: read
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Install GitHub CLI
-        run: |
-          sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key C99B11DEB97541F0
-          curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
-          echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
-          sudo apt update
-          sudo apt install gh -y
-
-      - name: Authenticate GitHub CLI
-        run: echo "${{secrets.FINE_GRAIN_TOKEN}}" | gh auth login --with-token
-
-      - name: Fetch latest release assets with gh
-        id: fetch_assets
-        run: |
-          gh release view --repo ${{github.repository}} ${{github.ref_name}} --json assets --jq '.assets[].url' > asset_links.txt
-
-      - name: Print fetched List
-        run: cat asset_links.txt
-
-      - name: Read, sort, and format links from the file
-        id: format_links
-        run: |
-          # Read links from the file
-          LINKS=$(cat asset_links.txt | sort)
-
-          # Initialize the message
-          MESSAGE="**Dartotsu ${{github.ref_name}} Downloads:**\n\n"
-
-          # Loop through each link and format them
-          while IFS= read -r LINK; do
-            if [[ $LINK == *"arm64"* ]]; then
-              MESSAGE+="• [Android_arm64]($LINK)\n"
-            elif [[ $LINK == *"armeabi"* ]]; then
-              MESSAGE+="• [Android_armeabi-v7a]($LINK)\n"
-            elif [[ $LINK == *"Android_x86"* ]]; then
-              MESSAGE+="• [Android_x86_64]($LINK)\n"
-            elif [[ $LINK == *"Android_Universal"* ]]; then
-              MESSAGE+="• [Android_Universal]($LINK)\n"
-            elif [[ $LINK == *"iOS"* ]]; then
-              MESSAGE+="• [iOS]($LINK)\n"
-            elif [[ $LINK == *"LinuxZip"* ]]; then
-              MESSAGE+="• [Linux]($LINK)\n"
-            elif [[ $LINK == *"Linux"* ]]; then
-              MESSAGE+="• [Linux_AppImage]($LINK)\n"
-            elif [[ $LINK == *"macos"* ]]; then
-              MESSAGE+="• [macOS]($LINK)\n"
-            elif [[ $LINK == *"Installer"* ]]; then
-              MESSAGE+="• [Windows]($LINK)\n"
-            fi
-          done <<< "$LINKS"
-
-          # Save the message to an environment variable
-          echo "MESSAGE=$MESSAGE" >> $GITHUB_ENV
-      - name: Send message to Discord
+              ${{ secrets.DISCORD_WEBHOOK_URL }}
+      - name: Upload Current SHA as Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: last-sha
+          path: last_sha.txt
+      - name: Send Discord Notification with Download Links
         env:
-          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_RELEASE_URL }}
-          MESSAGE: ${{ env.MESSAGE }}
+          APK_DOWNLOAD_LINK: ${{ needs.build_android.outputs.apk_link }}
+          WINDOWS_DOWNLOAD_LINK: ${{ needs.build_windows.outputs.zip_link }}
+          LINUX_DOWNLOAD_LINK: ${{needs.build_linux.outputs.zip_link}}
+          IOS_DOWNLOAD_LINK: ${{needs.build_ios.outputs.ipa_link}}
+          MACOS_DOWNLOAD_LINK: ${{needs.build_macos.outputs.deb_link}}
         run: |
-          # Send the message to Discord using the webhook
+          # Check if APK_DOWNLOAD_LINK is not empty
+          if [[ -n "$APK_DOWNLOAD_LINK" ]]; then
+            APK_MESSAGE="[Download APK](https://drive.google.com/drive/folders/1S4QzdKz7ZofhiF5GAvjMdBvYK7YhndKM)"
+          else
+            APK_MESSAGE=""
+          fi
+
+          # Check if WINDOWS_DOWNLOAD_LINK is not empty
+          if [[ -n "$WINDOWS_DOWNLOAD_LINK" ]]; then
+            WINDOWS_MESSAGE="[Download Windows Installer]($WINDOWS_DOWNLOAD_LINK)"
+          else
+            WINDOWS_MESSAGE=""
+          fi
+
+          # Check if LINUX_DOWNLOAD_LINK is not empty
+          if [[ -n "$LINUX_DOWNLOAD_LINK" ]]; then
+            LINUX_MESSAGE="[Download LINUX ZIP]($LINUX_DOWNLOAD_LINK)"
+          else
+            LINUX_MESSAGE=""
+          fi
+
+          # Check if IOS_DOWNLOAD_LINK is not empty
+          if [[ -n "$IOS_DOWNLOAD_LINK" ]]; then
+            IOS_MESSAGE="[Download IOS IPA]($IOS_DOWNLOAD_LINK)"
+          else
+            IOS_MESSAGE=""
+          fi
+
+          # Check if MACOS_DOWNLOAD_LINK is not empty
+          if [[ -n "$MACOS_DOWNLOAD_LINK" ]]; then
+            MACOS_MESSAGE="[Download macos deb]($MACOS_DOWNLOAD_LINK)"
+          else
+            MACOS_MESSAGE=""
+          fi
+
+            echo "apk_message=$APK_MESSAGE" >> $GITHUB_ENV
+            echo "windows_message=$WINDOWS_MESSAGE" >> $GITHUB_ENV
+            echo "linux_message=$LINUX_MESSAGE" >> $GITHUB_ENV
+            echo "ios_message=$IOS_MESSAGE" >> $GITHUB_ENV
+            echo "macos_message=$MACOS_MESSAGE" >> $GITHUB_ENV
+
+          # Prepare and send the Discord message
           curl -H "Content-Type: application/json" \
-            -X POST \
-            -d "{\"content\": \"$MESSAGE\"}" \
-            $DISCORD_WEBHOOK_URL
-  generate-changelog:
-    runs-on: ubuntu-latest
-    needs: [build_android, build_windows, build_linux, build_ios, build_macos]
-    permissions:
-      contents: write
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      # Clear existing CHANGELOG.md
-      - name: Clear CHANGELOG.md
-        run: |
-          echo ""> CHANGELOG.md
-          echo "" >> CHANGELOG.md
-
-      - name: Get previous tag
-        id: get_prev_tag
-        run: |
-          echo "Getting the previous tag..."
-          PREV_TAG=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || echo "")
-          if [ -z "$PREV_TAG" ]; then
-            PREV_TAG=$(git rev-list --max-parents=0 HEAD)
-          fi
-          echo "prev_tag=$PREV_TAG" >> $GITHUB_ENV
-
-      - name: Get commit messages between tags
-        id: get_commits
-        run: |
-          COMMITS=$(git log ${{ env.prev_tag }}..HEAD --pretty=format:'%h %s' | tr '\n' '|')
-          echo "commits=$COMMITS" >> $GITHUB_ENV
-
-      - name: Categorize commits
-        id: categorize
-        run: |
-          echo "Categorizing commits..."
-          FEATURES=""
-          BUG_FIXES=""
-          REFACTORS=""
-          STYLE_CHANGES=""
-          PERFORMANCE=""
-          CHORES=""
-          REPO_URL="https://github.com/${{ github.repository }}"
-
-          IFS='|' read -ra COMMIT_LIST <<< "${{ env.commits }}"
-          echo "Commit list: ${COMMIT_LIST[@]}"
-          for LINE in "${COMMIT_LIST[@]}"; do
-          HASH=$(echo "$LINE" | awk '{print $1}')
-          MESSAGE=$(echo "$LINE" | cut -d' ' -f2-)
-          LINK="[$HASH]($REPO_URL/commit/$HASH)"
-
-          FORMATTED_COMMIT="* $LINK: $MESSAGE"
-          echo "Processing commit: $FORMATTED_COMMIT"
-          if [[ $MESSAGE == feat* ]]; then
-           FEATURES+="$FORMATTED_COMMIT\n"
-          elif [[ $MESSAGE == fix* || $MESSAGE == bug* || $MESSAGE == improvement* || $MESSAGE == patch* ]]; then
-          BUG_FIXES+="$FORMATTED_COMMIT\n"
-          elif [[ $MESSAGE == refactor* ]]; then
-          REFACTORS+="$FORMATTED_COMMIT\n"
-          elif [[ $MESSAGE == style* ]]; then
-          STYLE_CHANGES+="$FORMATTED_COMMIT\n"
-          elif [[ $MESSAGE == perf* ]]; then
-          PERFORMANCE+="$FORMATTED_COMMIT\n"
-          elif [[ $MESSAGE == chore* || $MESSAGE == docs* || $MESSAGE == build* || $MESSAGE == ci* ]]; then
-          CHORES+="$FORMATTED_COMMIT\n"
-          fi
-          done
-
-          # Removed the version tag section
-          # echo "### ${GITHUB_REF#refs/tags/}" >> CHANGELOG.md  # No version tag added
-
-          if [ -n "$FEATURES" ]; then
-          echo "### 🎉 New Features" >> CHANGELOG.md
-          echo -e "$FEATURES" >> CHANGELOG.md
-          fi
-          if [ -n "$BUG_FIXES" ]; then
-          echo "### 🛠️ Bug Fixes & Improvements" >> CHANGELOG.md
-          echo -e "$BUG_FIXES" >> CHANGELOG.md
-          fi
-          if [ -n "$REFACTORS" ]; then
-          echo "### 🔧 Refactors" >> CHANGELOG.md
-          echo -e "$REFACTORS" >> CHANGELOG.md
-          fi
-          if [ -n "$STYLE_CHANGES" ]; then
-          echo "### 🎨 Style Changes" >> CHANGELOG.md
-          echo -e "$STYLE_CHANGES" >> CHANGELOG.md
-          fi
-          if [ -n "$PERFORMANCE" ]; then
-          echo "### 🚀 Performance Improvements" >> CHANGELOG.md
-            echo -e "$PERFORMANCE" >> CHANGELOG.md
-          fi
-          if [ -n "$CHORES" ]; then
-            echo "### 🧹 Chores & Documentation" >> CHANGELOG.md
-            echo -e "$CHORES" >> CHANGELOG.md
-          fi
-
-      - name: Commit and push changelog
-        run: |
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "actions@github.com"
-          git add CHANGELOG.md
-          git commit -m "Update changelog for version ${{ github.ref_name }}"
-          git push origin HEAD:main
-
-      - name: Set Tag Variable
-        id: tag
-        run: echo "TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
-
-      - name: Create or Update Release
-        uses: ncipollo/release-action@v1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          bodyFile: CHANGELOG.md
-          tag: ${{ env.TAG }}
-          allowUpdates: true
+               -d "{\"content\": \"${APK_MESSAGE}\n${WINDOWS_MESSAGE}\n${LINUX_MESSAGE}\n${IOS_MESSAGE}\n${MACOS_MESSAGE}\"}" \
+               "${{ secrets.DISCORD_WEBHOOK_URL }}"
