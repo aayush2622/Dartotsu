@@ -88,6 +88,7 @@ dependencies:
   win32: ^5.14.0
   ffi: ^2.1.4
   install_plugin: ^2.1.0
+
   # Miscellaneous
   receive_sharing_intent: ^1.8.1
   device_info_plus: ^11.5.0
