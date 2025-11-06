@@ -40,12 +40,13 @@ class AppUpdater {
     final release = data["tag_name"];
     var skippedUpdates =
         loadCustomData<List<String>>("skippedUpdateList") ?? [];
-    if (skippedUpdates.contains(release)) return;
-    if (BuildInfo.hash == null) return;
+    var hash = await loadEnv("hash");
+    if (skippedUpdates.contains(release) && !force) return;
+    if (hash == null) return;
 
     final compare = await http.get(
       Uri.parse(
-        'https://api.github.com/repos/$mainRepo/compare/$release...${BuildInfo.hash}',
+        'https://api.github.com/repos/$mainRepo/compare/$release...$hash',
       ),
     );
     final compareData = jsonDecode(compare.body);
@@ -169,9 +170,18 @@ class AppUpdater {
           const SizedBox(height: 24),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 36),
-            child: Text(
-              "Change Logs:\n\n${data["name"]}",
-              style: textStyle,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("Change Logs:", style: textStyle),
+                const SizedBox(height: 12),
+                Text(
+                  data["body"],
+                  style: textStyle?.copyWith(
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ],
             ),
           ),
           const SizedBox(height: 24),
@@ -247,13 +257,5 @@ class AppUpdater {
         },
       ),
     );
-  }
-}
-
-class BuildInfo {
-  static String? hash;
-
-  static Future<void> load() async {
-    hash = await loadEnv("hash");
   }
 }

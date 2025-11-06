@@ -118,7 +118,6 @@ Future init() async {
   for (var locale in supportedLocales) {
     initializeDateFormatting(locale);
   }
-  await BuildInfo.load();
   AppUpdater().checkForUpdate();
   Discord.getSavedToken();
   initDeepLinkListener();

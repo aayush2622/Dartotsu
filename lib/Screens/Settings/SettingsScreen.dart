@@ -7,7 +7,6 @@ import 'package:icons_plus/icons_plus.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import '../../Adaptor/Settings/SettingsAdaptor.dart';
-import '../../Api/Updater/AppUpdater.dart';
 import '../../DataClass/Setting.dart';
 import '../../Functions/Function.dart';
 import '../../Theme/LanguageSwitcher.dart';
@@ -128,9 +127,9 @@ class SettingsScreenState extends BaseSettingsScreen {
 
   Future<void> loadVersion() async {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    var hash = await loadEnv("hash");
     setState(() {
-      appVersion =
-          '${packageInfo.version}+${packageInfo.buildNumber}-${BuildInfo.hash}';
+      appVersion = '${packageInfo.version}+$hash';
     });
   }
 
