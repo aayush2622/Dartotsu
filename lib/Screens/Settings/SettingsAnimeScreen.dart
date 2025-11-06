@@ -48,6 +48,17 @@ class SettingsAnimeScreenState extends BaseSettingsScreen {
             ),
           ),
           Setting(
+            type: SettingType.switchType,
+            name: getString.perAnimePlayerSettings,
+            description: getString.perAnimePlayerSettingsDesc,
+            icon: Icons.accessible_forward,
+            isChecked: loadData(PrefName.perAnimePlayerSettings),
+            onSwitchChange: (value) {
+              saveData(PrefName.perAnimePlayerSettings, value);
+              setState(() {});
+            },
+          ),
+          Setting(
             type: SettingType.normal,
             name: getString.automaticSourceSelection,
             description: getString.automaticSourceSelectionDescription,

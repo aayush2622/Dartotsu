@@ -279,10 +279,12 @@ class MediaPlayerState extends State<MediaPlayer>
                   final delta = e.delta.dy;
                   final Offset position = e.localPosition;
                   if (position.dx <= MediaQuery.of(context).size.width / 2) {
+                    if (!settings.adjustBrightness) return;
                     final brightness = _brightnessValue.value - delta / 500;
                     final result = brightness.clamp(0.0, 1.0);
                     setBrightness(result);
                   } else {
+                    if (!settings.adjustVolume) return;
                     final volume = _volumeValue.value - delta / 500;
                     final result = volume.clamp(0.0, 1.0);
                     setVolume(result);

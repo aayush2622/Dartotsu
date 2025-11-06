@@ -1,7 +1,9 @@
+import 'dart:convert';
 import 'dart:ui';
 
 import 'package:blur/blur.dart';
 import 'package:dartotsu/Functions/Extensions.dart';
+import 'package:dartotsu/Preferences/IsarDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
 import 'package:dartotsu/Preferences/IsarDataClasses/MediaSettings/MediaSettings.dart';
 import 'package:dartotsu/Screens/Detail/Tabs/Info/InfoPage.dart';
 import 'package:dartotsu/Screens/Detail/Tabs/Watch/Anime/AnimeWatchScreen.dart';
@@ -56,6 +58,15 @@ class MediaInfoPageState extends State<MediaInfoPage> {
     pageController = PageController(initialPage: _selectedIndex.value);
     mediaData = widget.mediaData;
     MediaSettings.saveMediaSettings(mediaData..settings.navBarIndex = 1);
+
+    var perAnimePlayerSettings =
+        loadData<bool>(PrefName.perAnimePlayerSettings);
+
+    if (!perAnimePlayerSettings) {
+      widget.mediaData.settings.playerSettings = PlayerSettings.fromJson(
+        jsonDecode(loadData(PrefName.playerSettings)),
+      );
+    }
 
     var refreshID = widget.mediaData.id;
 
