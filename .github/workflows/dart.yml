@@ -398,7 +398,6 @@ jobs:
           upload-to-folder-id: ${{secrets.GOOGLE_FOLDER_MAIN}}
           service-account-json: "${{secrets.GOOGLE_KEY}}"
           overrwrite: true
-
   sendMessage:
     runs-on: ubuntu-latest
     needs: [build_android, build_windows, build_linux, build_ios, build_macos]
@@ -415,6 +414,8 @@ jobs:
       contents: read
       pull-requests: read
       actions: read
+    outputs:
+          commit_logs: ${{ steps.set_output.outputs.commit_logs }}
     steps:
       - name: Cloing repository
         uses: actions/checkout@v4
@@ -459,6 +460,10 @@ jobs:
 
       - name: Save Current SHA for Next Run
         run: echo ${{ github.sha }} > last_sha.txt
+
+      - name: Set output
+        id: set_output
+        run: echo "commit_logs=${{ env.COMMIT_LOG }}" >> $GITHUB_OUTPUT
 
       - name: Check for Ping
         id: check_noping
@@ -707,4 +712,24 @@ jobs:
                -d "{\"content\": \"${APK_MESSAGE}\n${WINDOWS_MESSAGE}\n${LINUX_MESSAGE}\n${IOS_MESSAGE}\n${MACOS_MESSAGE}\"}" \
                "${{ secrets.DISCORD_WEBHOOK_URL }}"
 
-
+  trigger_downloader:
+    runs-on: ubuntu-latest
+    needs: [build_android, build_windows, build_linux, build_ios, build_macos, sendMessage]
+    if: |
+      always() && 
+      !contains(needs.*.result, 'failure') && 
+      !contains(needs.*.result, 'cancelled') &&
+      (needs.build_android.result == 'success' ||
+       needs.build_windows.result == 'success' ||
+       needs.build_linux.result == 'success' ||
+       needs.build_ios.result == 'success' ||
+       needs.build_macos.result == 'success')
+    steps:
+      - name: Trigger Dartotsu-Downloader workflow
+        run: |
+          curl -X POST \
+            -H "Authorization: token ${{ secrets.DOWNLOADER_TRIGGER_TOKEN_SHEBY }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://api.github.com/repos/grayankit/Dartotsu-Downloader/actions/workflows/main.yml/dispatches \
+            -d '{"ref":"main", "inputs": {"commit_sha": "${{ github.sha }}", "commit_logs": "${{ needs.sendMessage.outputs.commit_logs }}", "build_android": "${{ needs.build_android.result }}", "build_windows": "${{ needs.build_windows.result }}", "build_linux": "${{ needs.build_linux.result }}", "build_ios": "${{ needs.build_ios.result }}", "build_macos": "${{ needs.build_macos.result }}"}}'
+            
