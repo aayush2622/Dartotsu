@@ -310,7 +310,7 @@ packages:
     description:
       path: "."
       ref: master
-      resolved-ref: c11992e74807d3303838dc39bd3cce173a08d72b
+      resolved-ref: "239ef59471e8c1bc4f5e3f18c21485e3e229e212"
       url: "https://github.com/aayush2622/DartotsuExtensionBridge.git"
     source: git
     version: "0.0.4"
@@ -657,8 +657,8 @@ packages:
     dependency: transitive
     description:
       path: "."
-      ref: main
-      resolved-ref: "17d67b61a514c56c401484ed1feda99b330623d2"
+      ref: f3cef51
+      resolved-ref: f3cef51939f30812c9635cb17fad206a9d54bfa7
       url: "https://github.com/kodjodevf/flutter_qjs.git"
     source: git
     version: "0.0.1"

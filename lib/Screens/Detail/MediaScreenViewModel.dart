@@ -31,7 +31,7 @@ class MediaPageViewModel extends GetxController {
             : "${getString.readStatus} ",
       ));
       spans.add(TextSpan(
-        text: "${mediaData.userProgress}",
+        text: "${mediaData.userProgress ?? 0}",
         style: TextStyle(
           fontWeight: FontWeight.bold,
           color: theme.secondary,

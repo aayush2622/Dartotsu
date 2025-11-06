@@ -969,29 +969,29 @@ class _PlayerControllerState extends State<PlayerController> {
       title: "Sources",
       viewList: [
         StatefulBuilder(
-            builder: (context, setState) => Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                  child: Row(
-                    children: [
-                      Checkbox(
-                        value: autoSelectSourceSetting,
-                        onChanged: (checked) {
-                          setState(() {
-                            autoSelectSourceSetting = checked ?? false;
-                            saveCustomData(
-                                autoSourceKey, autoSelectSourceSetting);
-                            setState(() {});
-                          });
-                        },
-                        activeColor: Theme.of(context).colorScheme.primary,
-                      ),
-                      const Text(
-                        'Auto Select Source',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                )),
+          builder: (context, setState) => Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+            child: Row(
+              children: [
+                Checkbox(
+                  value: autoSelectSourceSetting,
+                  onChanged: (checked) {
+                    setState(() {
+                      autoSelectSourceSetting = checked ?? false;
+                      saveCustomData(autoSourceKey, autoSelectSourceSetting);
+                      setState(() {});
+                    });
+                  },
+                  activeColor: Theme.of(context).colorScheme.primary,
+                ),
+                const Text(
+                  'Auto Select Source',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+        ),
         Column(
           children: videos.map((video) {
             int index = videos.indexOf(video);
