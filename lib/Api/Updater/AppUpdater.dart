@@ -8,6 +8,9 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:markdown_widget/config/configs.dart';
+import 'package:markdown_widget/widget/blocks/leaf/link.dart';
+import 'package:markdown_widget/widget/markdown.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 import 'package:install_plugin/install_plugin.dart';
@@ -76,8 +79,8 @@ class AppUpdater {
     }
     final platformExtensions = {
       Platform.isWindows: ['.exe', '.msi'],
-      Platform.isLinux: ['.AppImage', '.deb', '.tar.gz'],
-      Platform.isMacOS: ['.dmg', '.zip'],
+      Platform.isLinux: ['.AppImage', '.deb', '.tar.gz', '.zip'],
+      Platform.isMacOS: ['.dmg'],
       Platform.isIOS: ['.ipa'],
     };
 
@@ -175,10 +178,15 @@ class AppUpdater {
               children: [
                 Text("Change Logs:", style: textStyle),
                 const SizedBox(height: 12),
-                Text(
-                  data["body"],
-                  style: textStyle?.copyWith(
-                    fontWeight: FontWeight.w400,
+                MarkdownWidget(
+                  data: data["body"],
+                  shrinkWrap: true,
+                  config: MarkdownConfig(
+                    configs: [
+                      LinkConfig(
+                        onTap: (url) => openLinkInBrowser(url),
+                      )
+                    ],
                   ),
                 ),
               ],

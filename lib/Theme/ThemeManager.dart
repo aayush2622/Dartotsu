@@ -73,11 +73,6 @@ ThemeData getTheme(ColorScheme? material, ThemeNotifier themeManager) {
   }
   var fontFamily = "Poppins";
   return baseTheme.copyWith(
-    pageTransitionsTheme: const PageTransitionsTheme(
-      builders: {
-        TargetPlatform.android: PredictiveBackPageTransitionsBuilder(),
-      },
-    ),
     scaffoldBackgroundColor:
         isOled ? Colors.black : baseTheme.scaffoldBackgroundColor,
     colorScheme: baseTheme.colorScheme.copyWith(
