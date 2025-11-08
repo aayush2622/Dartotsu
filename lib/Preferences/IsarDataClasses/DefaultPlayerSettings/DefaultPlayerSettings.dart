@@ -23,6 +23,8 @@ class PlayerSettings {
   bool useLibass;
   bool useGpuNext;
   bool autoPlay;
+  bool adjustBrightness;
+  bool adjustVolume;
 
   PlayerSettings({
     this.speed = '1x',
@@ -40,6 +42,8 @@ class PlayerSettings {
     this.useLibass = false,
     this.useGpuNext = false,
     this.autoPlay = true,
+    this.adjustBrightness = true,
+    this.adjustVolume = true,
     //  this.useCustomMpvConfig = false,
   });
 
@@ -60,6 +64,8 @@ class PlayerSettings {
       useLibass: json['useLibass'] ?? false,
       useGpuNext: json['useGpuNext'] ?? false,
       autoPlay: json['autoPlay'] ?? true,
+      adjustBrightness: json['adjustBrightness'] ?? true,
+      adjustVolume: json['adjustVolume'] ?? true,
       //  useCustomMpvConfig: json['useCustomMpvConfig'] ?? false,
     );
   }
@@ -81,6 +87,8 @@ class PlayerSettings {
       'useLibass': useLibass,
       'useGpuNext': useGpuNext,
       'autoPlay': autoPlay,
+      'adjustBrightness': adjustBrightness,
+      'adjustVolume': adjustVolume,
       //'useCustomMpvConfig': useCustomMpvConfig,
     };
   }

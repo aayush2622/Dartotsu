@@ -574,6 +574,14 @@
       }
     }
   },
+  "adjustBrightness": "Adjust Brightness",
+  "@adjustBrightness": {},
+  "adjustBrightnessDescription": "Enable brightness adjustment by swiping up/down on the left side of the screen",
+  "@adjustBrightnessDescription": {},
+  "adjustVolume": "Adjust Volume",
+  "@adjustVolume": {},
+  "adjustVolumeDescription": "Enable volume adjustment by swiping up/down on the right side of the screen",
+  "@adjustVolumeDescription": {},
 
   "subtitles": "Subtitles",
   "@subtitles": {},
@@ -627,6 +635,10 @@
   "@automaticSourceSelection": {},
   "automaticSourceSelectionDescription": "Which method to use for automatic source selection",
   "@automaticSourceSelectionDescription": {},
+  "perAnimePlayerSettings": "Per-Anime Player Settings",
+  "@perAnimePlayerSettings": {},
+  "perAnimePlayerSettingsDesc": "Use different player settings for each anime (disabling may override existing per-anime settings)",
+  "@perAnimePlayerSettingsDesc": {},
 
   "readerSettings": "Reader Settings",
   "@readerSettings": {},

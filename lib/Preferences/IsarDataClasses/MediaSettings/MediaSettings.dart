@@ -42,8 +42,8 @@ class MediaSettings {
   bool isReverse;
   String? server; // for only anime
   List<String>? selectedScanlators; // for only manga
-  PlayerSettings playerSettings;
-  ReaderSettings readerSettings;
+  late PlayerSettings playerSettings;
+  late ReaderSettings readerSettings;
 
   MediaSettings({
     this.navBarIndex = 0,
@@ -54,14 +54,22 @@ class MediaSettings {
     this.selectedScanlators,
     PlayerSettings? playerSetting,
     ReaderSettings? readerSetting,
-  })  : playerSettings = playerSetting ??
-            PlayerSettings.fromJson(
-              jsonDecode(loadData(PrefName.playerSettings)),
-            ),
-        readerSettings = readerSetting ??
-            ReaderSettings.fromJson(
-              jsonDecode(loadData(PrefName.readerSettings)),
-            );
+  }) {
+    var perPlayerSettings = loadData<bool>(PrefName.perAnimePlayerSettings);
+    late var defaultPlayerSettings = PlayerSettings.fromJson(
+      jsonDecode(loadData(PrefName.playerSettings)),
+    );
+    late var defaultReaderSettings = ReaderSettings.fromJson(
+      jsonDecode(loadData(PrefName.readerSettings)),
+    );
+
+    playerSettings = perPlayerSettings
+        ? (playerSetting ?? defaultPlayerSettings)
+        : defaultPlayerSettings;
+    readerSettings = perPlayerSettings
+        ? (readerSetting ?? defaultReaderSettings)
+        : defaultReaderSettings;
+  }
 
   factory MediaSettings.fromJson(Map<String, dynamic> json) {
     return MediaSettings(

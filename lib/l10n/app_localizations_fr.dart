@@ -601,6 +601,20 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
+  String get adjustBrightness => 'Adjust Brightness';
+
+  @override
+  String get adjustBrightnessDescription =>
+      'Enable brightness adjustment by swiping up/down on the left side of the screen';
+
+  @override
+  String get adjustVolume => 'Adjust Volume';
+
+  @override
+  String get adjustVolumeDescription =>
+      'Enable volume adjustment by swiping up/down on the right side of the screen';
+
+  @override
   String get subtitles => 'Sous-titres';
 
   @override
@@ -681,6 +695,13 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get automaticSourceSelectionDescription =>
       'Which method to use for automatic source selection';
+
+  @override
+  String get perAnimePlayerSettings => 'Per-Anime Player Settings';
+
+  @override
+  String get perAnimePlayerSettingsDesc =>
+      'Use different player settings for each anime (disabling may override existing per-anime settings)';
 
   @override
   String get readerSettings => 'Réglages de lecteur';

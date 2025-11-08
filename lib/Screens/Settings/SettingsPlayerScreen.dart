@@ -113,6 +113,8 @@ List<Widget> playerSettings(
   void Function(void Function()) setState, {
   Media? media,
 }) {
+  var perPlayerSettings = loadData<bool>(PrefName.perAnimePlayerSettings);
+
   var playerSettings = media?.settings.playerSettings ??
       PlayerSettings.fromJson(
         jsonDecode(loadData(PrefName.playerSettings)),
@@ -125,7 +127,9 @@ List<Widget> playerSettings(
           if (media != null) {
             MediaSettings.saveMediaSettings(
                 media..settings.playerSettings = playerSettings);
-          } else {
+          }
+
+          if (media == null || !perPlayerSettings) {
             saveData(
                 PrefName.playerSettings, jsonEncode(playerSettings.toJson()));
           }
@@ -209,6 +213,28 @@ List<Widget> playerSettings(
                   initialValue: playerSettings.skipDuration,
                   onInputChange: (value) {
                     playerSettings.skipDuration = value;
+                    savePlayerSettings(playerSettings);
+                  },
+                ),
+                Setting(
+                  type: SettingType.switchType,
+                  name: getString.adjustVolume,
+                  description: getString.adjustVolumeDescription,
+                  icon: Icons.accessible_forward,
+                  isChecked: playerSettings.adjustVolume,
+                  onSwitchChange: (value) {
+                    playerSettings.adjustVolume = value;
+                    savePlayerSettings(playerSettings);
+                  },
+                ),
+                Setting(
+                  type: SettingType.switchType,
+                  name: getString.adjustBrightness,
+                  description: getString.adjustBrightnessDescription,
+                  icon: Icons.accessible_forward,
+                  isChecked: playerSettings.adjustBrightness,
+                  onSwitchChange: (value) {
+                    playerSettings.adjustBrightness = value;
                     savePlayerSettings(playerSettings);
                   },
                 ),

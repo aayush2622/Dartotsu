@@ -1157,6 +1157,30 @@ abstract class AppLocalizations {
   /// **'Enable this option to use your own MPV configuration file. Place your custom config at: {path}'**
   String customMPVDescription(String path);
 
+  /// No description provided for @adjustBrightness.
+  ///
+  /// In en, this message translates to:
+  /// **'Adjust Brightness'**
+  String get adjustBrightness;
+
+  /// No description provided for @adjustBrightnessDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable brightness adjustment by swiping up/down on the left side of the screen'**
+  String get adjustBrightnessDescription;
+
+  /// No description provided for @adjustVolume.
+  ///
+  /// In en, this message translates to:
+  /// **'Adjust Volume'**
+  String get adjustVolume;
+
+  /// No description provided for @adjustVolumeDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable volume adjustment by swiping up/down on the right side of the screen'**
+  String get adjustVolumeDescription;
+
   /// No description provided for @subtitles.
   ///
   /// In en, this message translates to:
@@ -1312,6 +1336,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Which method to use for automatic source selection'**
   String get automaticSourceSelectionDescription;
+
+  /// No description provided for @perAnimePlayerSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Per-Anime Player Settings'**
+  String get perAnimePlayerSettings;
+
+  /// No description provided for @perAnimePlayerSettingsDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Use different player settings for each anime (disabling may override existing per-anime settings)'**
+  String get perAnimePlayerSettingsDesc;
 
   /// No description provided for @readerSettings.
   ///

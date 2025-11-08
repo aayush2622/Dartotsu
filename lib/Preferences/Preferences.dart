@@ -136,6 +136,7 @@ class PrefName {
       Pref('playerSetting', jsonEncode(PlayerSettings().toJson()));
   static Pref<String> readerSettings =
       Pref('readerSetting', jsonEncode(ReaderSettings().toJson()));
+  static const perAnimePlayerSettings = Pref('perAnimePlayerSettings', true);
 
   // TODO => Remoove this when you add player settings (needless to say but still)
   static Pref<String> mpvConfigDir = const Pref<String>('mpvConfigDir', '');
