@@ -794,6 +794,19 @@ class AppLocalizationsZh extends AppLocalizations {
   String get differentCacheManagerDesc => '使用不同的图像管理员';
 
   @override
+  String get backupAndRestore => 'Backup & Restore';
+
+  @override
+  String get backupAndRestoreDescription =>
+      'Save and restore the app preferences';
+
+  @override
+  String get backup => 'Backup';
+
+  @override
+  String get restore => 'Restore';
+
+  @override
   String get webView => '网站';
 
   @override

@@ -811,6 +811,19 @@ class AppLocalizationsPt extends AppLocalizations {
       'Use o gerenciador de cache de imagem diferente';
 
   @override
+  String get backupAndRestore => 'Backup & Restore';
+
+  @override
+  String get backupAndRestoreDescription =>
+      'Save and restore the app preferences';
+
+  @override
+  String get backup => 'Backup';
+
+  @override
+  String get restore => 'Restore';
+
+  @override
   String get webView => 'Visualização Web';
 
   @override

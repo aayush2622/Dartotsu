@@ -815,6 +815,19 @@ class AppLocalizationsRu extends AppLocalizations {
       'Использовать разные кэш-менеджеры изображений';
 
   @override
+  String get backupAndRestore => 'Backup & Restore';
+
+  @override
+  String get backupAndRestoreDescription =>
+      'Save and restore the app preferences';
+
+  @override
+  String get backup => 'Backup';
+
+  @override
+  String get restore => 'Restore';
+
+  @override
   String get webView => 'Веб-сайт';
 
   @override

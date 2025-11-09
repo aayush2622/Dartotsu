@@ -14,6 +14,7 @@ import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:desktop_webview_window/desktop_webview_window.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -215,82 +216,89 @@ class MyApp extends StatelessWidget {
         systemNavigationBarDividerColor: Colors.transparent,
       ),
     );
-    return KeyboardListener(
-      focusNode: FocusNode(),
-      onKeyEvent: (KeyEvent event) async {
-        if (event is KeyDownEvent) {
-          if (event.logicalKey == LogicalKeyboardKey.escape) {
-            if (Get.previousRoute.isNotEmpty) Get.back();
-          } else if (event.logicalKey == LogicalKeyboardKey.f11) {
-            bool isFullScreen = await windowManager.isFullScreen();
-            windowManager.setFullScreen(!isFullScreen);
-          } else if (event.logicalKey == LogicalKeyboardKey.enter) {
-            final isAltPressed = HardwareKeyboard.instance.logicalKeysPressed
-                    .contains(LogicalKeyboardKey.altLeft) ||
-                HardwareKeyboard.instance.logicalKeysPressed
-                    .contains(LogicalKeyboardKey.altRight);
-            if (isAltPressed) {
-              bool isFullScreen = await windowManager.isFullScreen();
-              windowManager.setFullScreen(!isFullScreen);
-            }
-          } else if (event.logicalKey == LogicalKeyboardKey.keyG) {
-            var theme = Provider.of<ThemeNotifier>(context, listen: false);
-            if (theme.useGlassMode) {
-              await theme.setGlassEffect(false);
-              snackString('Glass effect disabled');
-            } else {
-              await theme.setGlassEffect(true);
-              snackString('Glass effect enabled');
-            }
-          } else if (event.logicalKey == LogicalKeyboardKey.keyM) {
-            var theme = Provider.of<ThemeNotifier>(context, listen: false);
-            if (theme.useMaterialYou) {
-              await theme.setMaterialYou(false);
-              snackString('Material You disabled');
-            } else {
-              await theme.setMaterialYou(true);
-              snackString('Material You enabled');
-            }
-          } else if (event.logicalKey == LogicalKeyboardKey.keyD) {
-            var theme = Provider.of<ThemeNotifier>(context, listen: false);
-            if (theme.isDarkMode) {
-              await theme.setDarkMode(false);
-              snackString('Dark mode disabled');
-            } else {
-              await theme.setDarkMode(true);
-              snackString('Dark mode enabled');
-            }
-          }
+    return Listener(
+      onPointerDown: (event) {
+        if (event.buttons == kBackMouseButton) {
+          if (Navigator.canPop(Get.context!)) Get.back();
         }
       },
-      child: DynamicColorBuilder(
-        builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
-          return GetMaterialApp(
-            localizationsDelegates: const [
-              AppLocalizations.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            supportedLocales: AppLocalizations.supportedLocales,
-            locale: Locale(loadData(PrefName.defaultLanguage)),
-            title: 'Dartotsu',
-            themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
-            debugShowCheckedModeBanner: false,
-            enableLog: true,
-            logWriterCallback: (text, {isError = false}) async {
-              Logger.log(text);
-              if (isError) {
-                debugPrint(text);
+      child: KeyboardListener(
+        focusNode: FocusNode(),
+        onKeyEvent: (KeyEvent event) async {
+          if (event is KeyDownEvent) {
+            if (event.logicalKey == LogicalKeyboardKey.escape) {
+              if (Navigator.canPop(Get.context!)) Get.back();
+            } else if (event.logicalKey == LogicalKeyboardKey.f11) {
+              bool isFullScreen = await windowManager.isFullScreen();
+              windowManager.setFullScreen(!isFullScreen);
+            } else if (event.logicalKey == LogicalKeyboardKey.enter) {
+              final isAltPressed = HardwareKeyboard.instance.logicalKeysPressed
+                      .contains(LogicalKeyboardKey.altLeft) ||
+                  HardwareKeyboard.instance.logicalKeysPressed
+                      .contains(LogicalKeyboardKey.altRight);
+              if (isAltPressed) {
+                bool isFullScreen = await windowManager.isFullScreen();
+                windowManager.setFullScreen(!isFullScreen);
               }
-            },
-            theme: getTheme(lightDynamic, themeManager),
-            darkTheme: getTheme(darkDynamic, themeManager),
-            home: !loadCustomData("initialLoaded", defaultValue: false)!
-                ? const MainScreen()
-                : const OnboardingScreen(),
-          );
+            } else if (event.logicalKey == LogicalKeyboardKey.keyG) {
+              var theme = Provider.of<ThemeNotifier>(context, listen: false);
+              if (theme.useGlassMode) {
+                await theme.setGlassEffect(false);
+                snackString('Glass effect disabled');
+              } else {
+                await theme.setGlassEffect(true);
+                snackString('Glass effect enabled');
+              }
+            } else if (event.logicalKey == LogicalKeyboardKey.keyM) {
+              var theme = Provider.of<ThemeNotifier>(context, listen: false);
+              if (theme.useMaterialYou) {
+                await theme.setMaterialYou(false);
+                snackString('Material You disabled');
+              } else {
+                await theme.setMaterialYou(true);
+                snackString('Material You enabled');
+              }
+            } else if (event.logicalKey == LogicalKeyboardKey.keyD) {
+              var theme = Provider.of<ThemeNotifier>(context, listen: false);
+              if (theme.isDarkMode) {
+                await theme.setDarkMode(false);
+                snackString('Dark mode disabled');
+              } else {
+                await theme.setDarkMode(true);
+                snackString('Dark mode enabled');
+              }
+            }
+          }
         },
+        child: DynamicColorBuilder(
+          builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
+            return GetMaterialApp(
+              localizationsDelegates: const [
+                AppLocalizations.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              supportedLocales: AppLocalizations.supportedLocales,
+              locale: Locale(loadData(PrefName.defaultLanguage)),
+              title: 'Dartotsu',
+              themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
+              debugShowCheckedModeBanner: false,
+              enableLog: true,
+              logWriterCallback: (text, {isError = false}) async {
+                Logger.log(text);
+                if (isError) {
+                  debugPrint(text);
+                }
+              },
+              theme: getTheme(lightDynamic, themeManager),
+              darkTheme: getTheme(darkDynamic, themeManager),
+              home: !loadCustomData("initialLoaded", defaultValue: false)!
+                  ? const MainScreen()
+                  : const OnboardingScreen(),
+            );
+          },
+        ),
       ),
     );
   }

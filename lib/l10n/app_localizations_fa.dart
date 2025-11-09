@@ -805,6 +805,19 @@ class AppLocalizationsFa extends AppLocalizations {
   String get differentCacheManagerDesc => 'از مدیر حافظه مختلف استفاده کنید';
 
   @override
+  String get backupAndRestore => 'Backup & Restore';
+
+  @override
+  String get backupAndRestoreDescription =>
+      'Save and restore the app preferences';
+
+  @override
+  String get backup => 'Backup';
+
+  @override
+  String get restore => 'Restore';
+
+  @override
   String get webView => 'Web View';
 
   @override
