@@ -657,7 +657,7 @@
     "@useLibass": {},
     "useLibassDescription": "Використовуйте Libass для надання субтитрів (надходження інших параметрів субтитри)",
     "@useLibassDescription": {},
-    "useGpuNext": "Use gpu-next",
+    "useGpuNext": "Використання gpu-next",
     "@useGpuNext": {},
     "useGpuNextDescription": "New rendering backend (may cause visual artifacts)",
     "@useGpuNextDescription": {}
