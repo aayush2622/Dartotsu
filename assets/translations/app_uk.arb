@@ -655,7 +655,7 @@
     "@customMPV": {},
     "useLibass": "Використовуйте Лібас",
     "@useLibass": {},
-    "useLibassDescription": "Use Libass for subtitle rendering (overrides other subtitle settings)",
+    "useLibassDescription": "Використовуйте Libass для надання субтитрів (надходження інших параметрів субтитри)",
     "@useLibassDescription": {},
     "useGpuNext": "Use gpu-next",
     "@useGpuNext": {},
