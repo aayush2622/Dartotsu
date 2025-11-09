@@ -653,12 +653,12 @@
     },
     "customMPV": "МПВ Налаштування",
     "@customMPV": {},
-    "useLibass": "Використовуйте Лібас",
+    "useLibass": "Використовуйте Libass",
     "@useLibass": {},
-    "useLibassDescription": "Використовуйте Libass для надання субтитрів (надходження інших параметрів субтитри)",
+    "useLibassDescription": "Використовуйте Libass для показу субтитрів (перекриває інші налаштування субтитрів)",
     "@useLibassDescription": {},
-    "useGpuNext": "Використання gpu-next",
+    "useGpuNext": "Використовувати gpu-next",
     "@useGpuNext": {},
-    "useGpuNextDescription": "New rendering backend (may cause visual artifacts)",
+    "useGpuNextDescription": "Новий бекенд рендерингу (може викликати візуальні артефакти)",
     "@useGpuNextDescription": {}
 }
