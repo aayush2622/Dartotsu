@@ -52,18 +52,24 @@ const KeyValueSchema = CollectionSchema(
       name: r'key',
       type: IsarType.string,
     ),
-    r'serializedMapValue': PropertySchema(
+    r'location': PropertySchema(
       id: 7,
+      name: r'location',
+      type: IsarType.string,
+      enumMap: _KeyValuelocationEnumValueMap,
+    ),
+    r'serializedMapValue': PropertySchema(
+      id: 8,
       name: r'serializedMapValue',
       type: IsarType.string,
     ),
     r'stringListValue': PropertySchema(
-      id: 8,
+      id: 9,
       name: r'stringListValue',
       type: IsarType.stringList,
     ),
     r'stringValue': PropertySchema(
-      id: 9,
+      id: 10,
       name: r'stringValue',
       type: IsarType.string,
     )
@@ -121,6 +127,7 @@ int _keyValueEstimateSize(
     }
   }
   bytesCount += 3 + object.key.length * 3;
+  bytesCount += 3 + object.location.name.length * 3;
   {
     final value = object.serializedMapValue;
     if (value != null) {
@@ -161,9 +168,10 @@ void _keyValueSerialize(
   writer.writeLongList(offsets[4], object.intListValue);
   writer.writeLong(offsets[5], object.intValue);
   writer.writeString(offsets[6], object.key);
-  writer.writeString(offsets[7], object.serializedMapValue);
-  writer.writeStringList(offsets[8], object.stringListValue);
-  writer.writeString(offsets[9], object.stringValue);
+  writer.writeString(offsets[7], object.location.name);
+  writer.writeString(offsets[8], object.serializedMapValue);
+  writer.writeStringList(offsets[9], object.stringListValue);
+  writer.writeString(offsets[10], object.stringValue);
 }
 
 KeyValue _keyValueDeserialize(
@@ -181,9 +189,12 @@ KeyValue _keyValueDeserialize(
   object.intListValue = reader.readLongList(offsets[4]);
   object.intValue = reader.readLongOrNull(offsets[5]);
   object.key = reader.readString(offsets[6]);
-  object.serializedMapValue = reader.readStringOrNull(offsets[7]);
-  object.stringListValue = reader.readStringList(offsets[8]);
-  object.stringValue = reader.readStringOrNull(offsets[9]);
+  object.location =
+      _KeyValuelocationValueEnumMap[reader.readStringOrNull(offsets[7])] ??
+          PrefLocation.THEME;
+  object.serializedMapValue = reader.readStringOrNull(offsets[8]);
+  object.stringListValue = reader.readStringList(offsets[9]);
+  object.stringValue = reader.readStringOrNull(offsets[10]);
   return object;
 }
 
@@ -209,15 +220,35 @@ P _keyValueDeserializeProp<P>(
     case 6:
       return (reader.readString(offset)) as P;
     case 7:
-      return (reader.readStringOrNull(offset)) as P;
+      return (_KeyValuelocationValueEnumMap[reader.readStringOrNull(offset)] ??
+          PrefLocation.THEME) as P;
     case 8:
-      return (reader.readStringList(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 9:
+      return (reader.readStringList(offset)) as P;
+    case 10:
       return (reader.readStringOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
 }
+
+const _KeyValuelocationEnumValueMap = {
+  r'THEME': r'THEME',
+  r'COMMON': r'COMMON',
+  r'PLAYER': r'PLAYER',
+  r'READER': r'READER',
+  r'PROTECTED': r'PROTECTED',
+  r'OTHER': r'OTHER',
+};
+const _KeyValuelocationValueEnumMap = {
+  r'THEME': PrefLocation.THEME,
+  r'COMMON': PrefLocation.COMMON,
+  r'PLAYER': PrefLocation.PLAYER,
+  r'READER': PrefLocation.READER,
+  r'PROTECTED': PrefLocation.PROTECTED,
+  r'OTHER': PrefLocation.OTHER,
+};
 
 Id _keyValueGetId(KeyValue object) {
   return object.id;
@@ -1194,6 +1225,136 @@ extension KeyValueQueryFilter
     });
   }
 
+  QueryBuilder<KeyValue, KeyValue, QAfterFilterCondition> locationEqualTo(
+    PrefLocation value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'location',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<KeyValue, KeyValue, QAfterFilterCondition> locationGreaterThan(
+    PrefLocation value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'location',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<KeyValue, KeyValue, QAfterFilterCondition> locationLessThan(
+    PrefLocation value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'location',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<KeyValue, KeyValue, QAfterFilterCondition> locationBetween(
+    PrefLocation lower,
+    PrefLocation upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'location',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<KeyValue, KeyValue, QAfterFilterCondition> locationStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'location',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<KeyValue, KeyValue, QAfterFilterCondition> locationEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'location',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<KeyValue, KeyValue, QAfterFilterCondition> locationContains(
+      String value,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'location',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<KeyValue, KeyValue, QAfterFilterCondition> locationMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'location',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<KeyValue, KeyValue, QAfterFilterCondition> locationIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'location',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<KeyValue, KeyValue, QAfterFilterCondition> locationIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'location',
+        value: '',
+      ));
+    });
+  }
+
   QueryBuilder<KeyValue, KeyValue, QAfterFilterCondition>
       serializedMapValueIsNull() {
     return QueryBuilder.apply(this, (query) {
@@ -1810,6 +1971,18 @@ extension KeyValueQuerySortBy on QueryBuilder<KeyValue, KeyValue, QSortBy> {
     });
   }
 
+  QueryBuilder<KeyValue, KeyValue, QAfterSortBy> sortByLocation() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'location', Sort.asc);
+    });
+  }
+
+  QueryBuilder<KeyValue, KeyValue, QAfterSortBy> sortByLocationDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'location', Sort.desc);
+    });
+  }
+
   QueryBuilder<KeyValue, KeyValue, QAfterSortBy> sortBySerializedMapValue() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'serializedMapValue', Sort.asc);
@@ -1910,6 +2083,18 @@ extension KeyValueQuerySortThenBy
     });
   }
 
+  QueryBuilder<KeyValue, KeyValue, QAfterSortBy> thenByLocation() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'location', Sort.asc);
+    });
+  }
+
+  QueryBuilder<KeyValue, KeyValue, QAfterSortBy> thenByLocationDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'location', Sort.desc);
+    });
+  }
+
   QueryBuilder<KeyValue, KeyValue, QAfterSortBy> thenBySerializedMapValue() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'serializedMapValue', Sort.asc);
@@ -1983,6 +2168,13 @@ extension KeyValueQueryWhereDistinct
     });
   }
 
+  QueryBuilder<KeyValue, KeyValue, QDistinct> distinctByLocation(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'location', caseSensitive: caseSensitive);
+    });
+  }
+
   QueryBuilder<KeyValue, KeyValue, QDistinct> distinctBySerializedMapValue(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -2053,6 +2245,12 @@ extension KeyValueQueryProperty
   QueryBuilder<KeyValue, String, QQueryOperations> keyProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'key');
+    });
+  }
+
+  QueryBuilder<KeyValue, PrefLocation, QQueryOperations> locationProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'location');
     });
   }
 

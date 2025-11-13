@@ -6,8 +6,6 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:json_annotation/json_annotation.dart';
 
-part 'GetMediaIDs.g.dart';
-
 class GetMediaIDs {
   static List<AnimeID>? _animeListFuture;
 
@@ -158,8 +156,33 @@ class AnimeID {
     this.themoviedbId,
   });
 
-  factory AnimeID.fromJson(Map<String, dynamic> json) =>
-      _$AnimeIDFromJson(json);
+  factory AnimeID.fromJson(Map<String, dynamic> json) => AnimeID(
+        animePlanetId: json['anime-planet_id'].toString(),
+        kitsuId: (json['kitsu_id'] as num?)?.toInt(),
+        malId: (json['mal_id'] as num?)?.toInt(),
+        type: json['type'] as String?,
+        anilistId: (json['anilist_id'] as num?)?.toInt(),
+        imdbId: json['imdb_id'] as String?,
+        anisearchId: (json['anisearch_id'] as num?)?.toInt(),
+        anidbId: (json['anidb_id'] as num?)?.toInt(),
+        notifyMoeId: json['notify.moe_id'] as String?,
+        livechartId: (json['livechart_id'] as num?)?.toInt(),
+        thetvdbId: (json['thetvdb_id'] as num?)?.toInt(),
+        themoviedbId: json['themoviedb_id'].toString(),
+      );
 
-  Map<String, dynamic> toJson() => _$AnimeIDToJson(this);
+  Map<String, dynamic> toJson() => <String, dynamic>{
+        'anime-planet_id': animePlanetId,
+        'kitsu_id': kitsuId,
+        'mal_id': malId,
+        'type': type,
+        'anilist_id': anilistId,
+        'imdb_id': imdbId,
+        'anisearch_id': anisearchId,
+        'anidb_id': anidbId,
+        'notify.moe_id': notifyMoeId,
+        'livechart_id': livechartId,
+        'thetvdb_id': thetvdbId,
+        'themoviedb_id': themoviedbId,
+      };
 }

@@ -48,18 +48,35 @@ class ReaderSettings {
 
   factory ReaderSettings.fromJson(Map<String, dynamic> json) {
     return ReaderSettings(
-      layoutType: LayoutType.values[json['layoutType']],
-      direction: Direction.values[json['direction']],
-      dualPageMode: DualPageMode.values[json['dualPageMode']],
-      scrollToNext: json['scrollToNext'],
-      spacedPages: json['spacedPages'],
-      hideScrollbar: json['hideScrollbar'],
-      hidePageNumber: json['hidePageNumber'],
-      keepScreenOn: json['keepScreenOn'],
-      changePageWithVolumeButtons: json['changePageWithVolumeButtons'],
-      openImageWithLongTap: json['openImageWithLongTap'],
+      layoutType: _safeEnum(LayoutType.values, json['layoutType']) ??
+          LayoutType.Continuous,
+      direction:
+          _safeEnum(Direction.values, json['direction']) ?? Direction.UTD,
+      dualPageMode: _safeEnum(DualPageMode.values, json['dualPageMode']) ??
+          DualPageMode.Auto,
+      scrollToNext: json['scrollToNext'] ?? false,
+      spacedPages: json['spacedPages'] ?? false,
+      hideScrollbar: json['hideScrollbar'] ?? false,
+      hidePageNumber: json['hidePageNumber'] ?? false,
+      keepScreenOn: json['keepScreenOn'] ?? false,
+      changePageWithVolumeButtons: json['changePageWithVolumeButtons'] ?? false,
+      openImageWithLongTap: json['openImageWithLongTap'] ?? false,
     );
   }
+}
+
+T? _safeEnum<T>(List<T> values, dynamic raw) {
+  if (raw == null) return null;
+  if (raw is String) {
+    try {
+      return values.firstWhere((e) => e.toString().split('.').last == raw);
+    } catch (_) {}
+  }
+  if (raw is int && raw >= 0 && raw < values.length) {
+    return values[raw];
+  }
+
+  return null;
 }
 
 enum LayoutType {

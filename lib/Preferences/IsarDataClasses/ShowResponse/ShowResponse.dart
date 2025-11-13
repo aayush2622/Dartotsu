@@ -1,5 +1,7 @@
 import 'package:isar_community/isar.dart';
 
+import '../../PrefManager.dart';
+
 part 'ShowResponse.g.dart';
 
 @collection
@@ -7,7 +9,8 @@ class ShowResponse {
   Id id = Isar.autoIncrement;
   @Index(unique: true, replace: true)
   late String key;
-
+  @Enumerated(EnumType.name)
+  late PrefLocation location;
   final String? name;
   final String? link;
   final String? coverUrl;

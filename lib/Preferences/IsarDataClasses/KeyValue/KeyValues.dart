@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:isar_community/isar.dart';
 
+import '../../PrefManager.dart';
+
 part 'KeyValues.g.dart';
 
 @collection
@@ -10,6 +12,9 @@ class KeyValue {
 
   @Index(unique: true, replace: true)
   late String key;
+
+  @Enumerated(EnumType.name)
+  late PrefLocation location;
 
   String? stringValue;
   int? intValue;

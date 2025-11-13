@@ -32,13 +32,19 @@ const ResponseTokenSchema = CollectionSchema(
       name: r'key',
       type: IsarType.string,
     ),
-    r'refreshToken': PropertySchema(
+    r'location': PropertySchema(
       id: 3,
+      name: r'location',
+      type: IsarType.string,
+      enumMap: _ResponseTokenlocationEnumValueMap,
+    ),
+    r'refreshToken': PropertySchema(
+      id: 4,
       name: r'refreshToken',
       type: IsarType.string,
     ),
     r'tokenType': PropertySchema(
-      id: 4,
+      id: 5,
       name: r'tokenType',
       type: IsarType.string,
     )
@@ -79,6 +85,7 @@ int _responseTokenEstimateSize(
   var bytesCount = offsets.last;
   bytesCount += 3 + object.accessToken.length * 3;
   bytesCount += 3 + object.key.length * 3;
+  bytesCount += 3 + object.location.name.length * 3;
   bytesCount += 3 + object.refreshToken.length * 3;
   bytesCount += 3 + object.tokenType.length * 3;
   return bytesCount;
@@ -93,8 +100,9 @@ void _responseTokenSerialize(
   writer.writeString(offsets[0], object.accessToken);
   writer.writeLong(offsets[1], object.expiresIn);
   writer.writeString(offsets[2], object.key);
-  writer.writeString(offsets[3], object.refreshToken);
-  writer.writeString(offsets[4], object.tokenType);
+  writer.writeString(offsets[3], object.location.name);
+  writer.writeString(offsets[4], object.refreshToken);
+  writer.writeString(offsets[5], object.tokenType);
 }
 
 ResponseToken _responseTokenDeserialize(
@@ -106,11 +114,14 @@ ResponseToken _responseTokenDeserialize(
   final object = ResponseToken(
     accessToken: reader.readString(offsets[0]),
     expiresIn: reader.readLong(offsets[1]),
-    refreshToken: reader.readString(offsets[3]),
-    tokenType: reader.readString(offsets[4]),
+    refreshToken: reader.readString(offsets[4]),
+    tokenType: reader.readString(offsets[5]),
   );
   object.id = id;
   object.key = reader.readString(offsets[2]);
+  object.location =
+      _ResponseTokenlocationValueEnumMap[reader.readStringOrNull(offsets[3])] ??
+          PrefLocation.THEME;
   return object;
 }
 
@@ -128,13 +139,34 @@ P _responseTokenDeserializeProp<P>(
     case 2:
       return (reader.readString(offset)) as P;
     case 3:
-      return (reader.readString(offset)) as P;
+      return (_ResponseTokenlocationValueEnumMap[
+              reader.readStringOrNull(offset)] ??
+          PrefLocation.THEME) as P;
     case 4:
+      return (reader.readString(offset)) as P;
+    case 5:
       return (reader.readString(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
 }
+
+const _ResponseTokenlocationEnumValueMap = {
+  r'THEME': r'THEME',
+  r'COMMON': r'COMMON',
+  r'PLAYER': r'PLAYER',
+  r'READER': r'READER',
+  r'PROTECTED': r'PROTECTED',
+  r'OTHER': r'OTHER',
+};
+const _ResponseTokenlocationValueEnumMap = {
+  r'THEME': PrefLocation.THEME,
+  r'COMMON': PrefLocation.COMMON,
+  r'PLAYER': PrefLocation.PLAYER,
+  r'READER': PrefLocation.READER,
+  r'PROTECTED': PrefLocation.PROTECTED,
+  r'OTHER': PrefLocation.OTHER,
+};
 
 Id _responseTokenGetId(ResponseToken object) {
   return object.id;
@@ -713,6 +745,142 @@ extension ResponseTokenQueryFilter
   }
 
   QueryBuilder<ResponseToken, ResponseToken, QAfterFilterCondition>
+      locationEqualTo(
+    PrefLocation value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'location',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ResponseToken, ResponseToken, QAfterFilterCondition>
+      locationGreaterThan(
+    PrefLocation value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'location',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ResponseToken, ResponseToken, QAfterFilterCondition>
+      locationLessThan(
+    PrefLocation value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'location',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ResponseToken, ResponseToken, QAfterFilterCondition>
+      locationBetween(
+    PrefLocation lower,
+    PrefLocation upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'location',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ResponseToken, ResponseToken, QAfterFilterCondition>
+      locationStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'location',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ResponseToken, ResponseToken, QAfterFilterCondition>
+      locationEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'location',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ResponseToken, ResponseToken, QAfterFilterCondition>
+      locationContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'location',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ResponseToken, ResponseToken, QAfterFilterCondition>
+      locationMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'location',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ResponseToken, ResponseToken, QAfterFilterCondition>
+      locationIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'location',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<ResponseToken, ResponseToken, QAfterFilterCondition>
+      locationIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'location',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<ResponseToken, ResponseToken, QAfterFilterCondition>
       refreshTokenEqualTo(
     String value, {
     bool caseSensitive = true,
@@ -1031,6 +1199,19 @@ extension ResponseTokenQuerySortBy
     });
   }
 
+  QueryBuilder<ResponseToken, ResponseToken, QAfterSortBy> sortByLocation() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'location', Sort.asc);
+    });
+  }
+
+  QueryBuilder<ResponseToken, ResponseToken, QAfterSortBy>
+      sortByLocationDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'location', Sort.desc);
+    });
+  }
+
   QueryBuilder<ResponseToken, ResponseToken, QAfterSortBy>
       sortByRefreshToken() {
     return QueryBuilder.apply(this, (query) {
@@ -1111,6 +1292,19 @@ extension ResponseTokenQuerySortThenBy
     });
   }
 
+  QueryBuilder<ResponseToken, ResponseToken, QAfterSortBy> thenByLocation() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'location', Sort.asc);
+    });
+  }
+
+  QueryBuilder<ResponseToken, ResponseToken, QAfterSortBy>
+      thenByLocationDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'location', Sort.desc);
+    });
+  }
+
   QueryBuilder<ResponseToken, ResponseToken, QAfterSortBy>
       thenByRefreshToken() {
     return QueryBuilder.apply(this, (query) {
@@ -1161,6 +1355,13 @@ extension ResponseTokenQueryWhereDistinct
     });
   }
 
+  QueryBuilder<ResponseToken, ResponseToken, QDistinct> distinctByLocation(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'location', caseSensitive: caseSensitive);
+    });
+  }
+
   QueryBuilder<ResponseToken, ResponseToken, QDistinct> distinctByRefreshToken(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -1199,6 +1400,13 @@ extension ResponseTokenQueryProperty
   QueryBuilder<ResponseToken, String, QQueryOperations> keyProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'key');
+    });
+  }
+
+  QueryBuilder<ResponseToken, PrefLocation, QQueryOperations>
+      locationProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'location');
     });
   }
 
