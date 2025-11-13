@@ -812,6 +812,19 @@ class AppLocalizationsId extends AppLocalizations {
       'Gunakan manajer cache Gambar yang berbeda';
 
   @override
+  String get backupAndRestore => 'Backup & Restore';
+
+  @override
+  String get backupAndRestoreDescription =>
+      'Save and restore the app preferences';
+
+  @override
+  String get backup => 'Backup';
+
+  @override
+  String get restore => 'Restore';
+
+  @override
   String get webView => 'Tampilan Web';
 
   @override

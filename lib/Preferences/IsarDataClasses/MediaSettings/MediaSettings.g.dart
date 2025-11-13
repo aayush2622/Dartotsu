@@ -32,35 +32,41 @@ const MediaSettingsSchema = CollectionSchema(
       name: r'lastUsedSource',
       type: IsarType.string,
     ),
-    r'navBarIndex': PropertySchema(
+    r'location': PropertySchema(
       id: 3,
+      name: r'location',
+      type: IsarType.string,
+      enumMap: _MediaSettingslocationEnumValueMap,
+    ),
+    r'navBarIndex': PropertySchema(
+      id: 4,
       name: r'navBarIndex',
       type: IsarType.long,
     ),
     r'playerSettings': PropertySchema(
-      id: 4,
+      id: 5,
       name: r'playerSettings',
       type: IsarType.object,
       target: r'PlayerSettings',
     ),
     r'readerSettings': PropertySchema(
-      id: 5,
+      id: 6,
       name: r'readerSettings',
       type: IsarType.object,
       target: r'ReaderSettings',
     ),
     r'selectedScanlators': PropertySchema(
-      id: 6,
+      id: 7,
       name: r'selectedScanlators',
       type: IsarType.stringList,
     ),
     r'server': PropertySchema(
-      id: 7,
+      id: 8,
       name: r'server',
       type: IsarType.string,
     ),
     r'viewType': PropertySchema(
-      id: 8,
+      id: 9,
       name: r'viewType',
       type: IsarType.long,
     )
@@ -109,6 +115,7 @@ int _mediaSettingsEstimateSize(
       bytesCount += 3 + value.length * 3;
     }
   }
+  bytesCount += 3 + object.location.name.length * 3;
   bytesCount += 3 +
       PlayerSettingsSchema.estimateSize(
           object.playerSettings, allOffsets[PlayerSettings]!, allOffsets);
@@ -145,22 +152,23 @@ void _mediaSettingsSerialize(
   writer.writeBool(offsets[0], object.isReverse);
   writer.writeString(offsets[1], object.key);
   writer.writeString(offsets[2], object.lastUsedSource);
-  writer.writeLong(offsets[3], object.navBarIndex);
+  writer.writeString(offsets[3], object.location.name);
+  writer.writeLong(offsets[4], object.navBarIndex);
   writer.writeObject<PlayerSettings>(
-    offsets[4],
+    offsets[5],
     allOffsets,
     PlayerSettingsSchema.serialize,
     object.playerSettings,
   );
   writer.writeObject<ReaderSettings>(
-    offsets[5],
+    offsets[6],
     allOffsets,
     ReaderSettingsSchema.serialize,
     object.readerSettings,
   );
-  writer.writeStringList(offsets[6], object.selectedScanlators);
-  writer.writeString(offsets[7], object.server);
-  writer.writeLong(offsets[8], object.viewType);
+  writer.writeStringList(offsets[7], object.selectedScanlators);
+  writer.writeString(offsets[8], object.server);
+  writer.writeLong(offsets[9], object.viewType);
 }
 
 MediaSettings _mediaSettingsDeserialize(
@@ -172,21 +180,24 @@ MediaSettings _mediaSettingsDeserialize(
   final object = MediaSettings(
     isReverse: reader.readBoolOrNull(offsets[0]) ?? false,
     lastUsedSource: reader.readStringOrNull(offsets[2]),
-    navBarIndex: reader.readLongOrNull(offsets[3]) ?? 0,
-    selectedScanlators: reader.readStringList(offsets[6]),
-    server: reader.readStringOrNull(offsets[7]),
-    viewType: reader.readLongOrNull(offsets[8]) ?? 0,
+    navBarIndex: reader.readLongOrNull(offsets[4]) ?? 0,
+    selectedScanlators: reader.readStringList(offsets[7]),
+    server: reader.readStringOrNull(offsets[8]),
+    viewType: reader.readLongOrNull(offsets[9]) ?? 0,
   );
   object.id = id;
   object.key = reader.readString(offsets[1]);
+  object.location =
+      _MediaSettingslocationValueEnumMap[reader.readStringOrNull(offsets[3])] ??
+          PrefLocation.THEME;
   object.playerSettings = reader.readObjectOrNull<PlayerSettings>(
-        offsets[4],
+        offsets[5],
         PlayerSettingsSchema.deserialize,
         allOffsets,
       ) ??
       PlayerSettings();
   object.readerSettings = reader.readObjectOrNull<ReaderSettings>(
-        offsets[5],
+        offsets[6],
         ReaderSettingsSchema.deserialize,
         allOffsets,
       ) ??
@@ -208,31 +219,52 @@ P _mediaSettingsDeserializeProp<P>(
     case 2:
       return (reader.readStringOrNull(offset)) as P;
     case 3:
-      return (reader.readLongOrNull(offset) ?? 0) as P;
+      return (_MediaSettingslocationValueEnumMap[
+              reader.readStringOrNull(offset)] ??
+          PrefLocation.THEME) as P;
     case 4:
+      return (reader.readLongOrNull(offset) ?? 0) as P;
+    case 5:
       return (reader.readObjectOrNull<PlayerSettings>(
             offset,
             PlayerSettingsSchema.deserialize,
             allOffsets,
           ) ??
           PlayerSettings()) as P;
-    case 5:
+    case 6:
       return (reader.readObjectOrNull<ReaderSettings>(
             offset,
             ReaderSettingsSchema.deserialize,
             allOffsets,
           ) ??
           ReaderSettings()) as P;
-    case 6:
-      return (reader.readStringList(offset)) as P;
     case 7:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readStringList(offset)) as P;
     case 8:
+      return (reader.readStringOrNull(offset)) as P;
+    case 9:
       return (reader.readLongOrNull(offset) ?? 0) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
 }
+
+const _MediaSettingslocationEnumValueMap = {
+  r'THEME': r'THEME',
+  r'COMMON': r'COMMON',
+  r'PLAYER': r'PLAYER',
+  r'READER': r'READER',
+  r'PROTECTED': r'PROTECTED',
+  r'OTHER': r'OTHER',
+};
+const _MediaSettingslocationValueEnumMap = {
+  r'THEME': PrefLocation.THEME,
+  r'COMMON': PrefLocation.COMMON,
+  r'PLAYER': PrefLocation.PLAYER,
+  r'READER': PrefLocation.READER,
+  r'PROTECTED': PrefLocation.PROTECTED,
+  r'OTHER': PrefLocation.OTHER,
+};
 
 Id _mediaSettingsGetId(MediaSettings object) {
   return object.id;
@@ -777,6 +809,142 @@ extension MediaSettingsQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'lastUsedSource',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<MediaSettings, MediaSettings, QAfterFilterCondition>
+      locationEqualTo(
+    PrefLocation value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'location',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MediaSettings, MediaSettings, QAfterFilterCondition>
+      locationGreaterThan(
+    PrefLocation value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'location',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MediaSettings, MediaSettings, QAfterFilterCondition>
+      locationLessThan(
+    PrefLocation value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'location',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MediaSettings, MediaSettings, QAfterFilterCondition>
+      locationBetween(
+    PrefLocation lower,
+    PrefLocation upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'location',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MediaSettings, MediaSettings, QAfterFilterCondition>
+      locationStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'location',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MediaSettings, MediaSettings, QAfterFilterCondition>
+      locationEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'location',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MediaSettings, MediaSettings, QAfterFilterCondition>
+      locationContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'location',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MediaSettings, MediaSettings, QAfterFilterCondition>
+      locationMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'location',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MediaSettings, MediaSettings, QAfterFilterCondition>
+      locationIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'location',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<MediaSettings, MediaSettings, QAfterFilterCondition>
+      locationIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'location',
         value: '',
       ));
     });
@@ -1355,6 +1523,19 @@ extension MediaSettingsQuerySortBy
     });
   }
 
+  QueryBuilder<MediaSettings, MediaSettings, QAfterSortBy> sortByLocation() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'location', Sort.asc);
+    });
+  }
+
+  QueryBuilder<MediaSettings, MediaSettings, QAfterSortBy>
+      sortByLocationDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'location', Sort.desc);
+    });
+  }
+
   QueryBuilder<MediaSettings, MediaSettings, QAfterSortBy> sortByNavBarIndex() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'navBarIndex', Sort.asc);
@@ -1447,6 +1628,19 @@ extension MediaSettingsQuerySortThenBy
     });
   }
 
+  QueryBuilder<MediaSettings, MediaSettings, QAfterSortBy> thenByLocation() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'location', Sort.asc);
+    });
+  }
+
+  QueryBuilder<MediaSettings, MediaSettings, QAfterSortBy>
+      thenByLocationDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'location', Sort.desc);
+    });
+  }
+
   QueryBuilder<MediaSettings, MediaSettings, QAfterSortBy> thenByNavBarIndex() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'navBarIndex', Sort.asc);
@@ -1509,6 +1703,13 @@ extension MediaSettingsQueryWhereDistinct
     });
   }
 
+  QueryBuilder<MediaSettings, MediaSettings, QDistinct> distinctByLocation(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'location', caseSensitive: caseSensitive);
+    });
+  }
+
   QueryBuilder<MediaSettings, MediaSettings, QDistinct>
       distinctByNavBarIndex() {
     return QueryBuilder.apply(this, (query) {
@@ -1561,6 +1762,13 @@ extension MediaSettingsQueryProperty
       lastUsedSourceProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'lastUsedSource');
+    });
+  }
+
+  QueryBuilder<MediaSettings, PrefLocation, QQueryOperations>
+      locationProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'location');
     });
   }
 

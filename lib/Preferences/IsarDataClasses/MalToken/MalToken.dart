@@ -1,5 +1,7 @@
 import 'package:isar_community/isar.dart';
 
+import '../../PrefManager.dart';
+
 part 'MalToken.g.dart';
 
 @collection
@@ -7,7 +9,8 @@ class ResponseToken {
   Id id = Isar.autoIncrement;
   @Index(unique: true, replace: true)
   late String key;
-
+  @Enumerated(EnumType.name)
+  late PrefLocation location;
   final String tokenType;
   int expiresIn;
   final String accessToken;

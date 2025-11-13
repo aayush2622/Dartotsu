@@ -35,7 +35,8 @@ class MediaSettings {
   Id id = Isar.autoIncrement;
   @Index(unique: true, replace: true)
   late String key;
-
+  @Enumerated(EnumType.name)
+  late PrefLocation location;
   int navBarIndex = 0;
   String? lastUsedSource;
   int viewType;
@@ -81,7 +82,8 @@ class MediaSettings {
       selectedScanlators: json['selectedScanlators'],
       playerSetting: PlayerSettings.fromJson(
           json['playerSettings'] as Map<String, dynamic>),
-      readerSetting: json['readerSettings'],
+      readerSetting: ReaderSettings.fromJson(
+          json['playerSettings'] as Map<String, dynamic>),
     );
   }
 

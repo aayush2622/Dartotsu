@@ -94,8 +94,7 @@ class SettingsScreenState extends BaseSettingsScreen {
         name: getString.extension(2),
         description: getString.extensionsDescription,
         icon: Icons.extension,
-        onClick: () =>
-            navigateToPage(context, const SettingsExtensionsScreen()),
+        onClick: () => navigateToPage(context, const SettingsExtensionsScreen()),
         isActivity: true,
       ),
       Setting(
@@ -157,8 +156,7 @@ class SettingsScreenState extends BaseSettingsScreen {
               width: 170,
               height: 48,
             ),
-            onPressed: () =>
-                openLinkInBrowser('https://www.buymeacoffee.com/aayush262'),
+            onPressed: () => openLinkInBrowser('https://www.buymeacoffee.com/aayush262'),
           ),
         ),
         const SizedBox(height: 16),
@@ -179,16 +177,14 @@ class SettingsScreenState extends BaseSettingsScreen {
               color: Colors.grey.shade800,
               iconSize: 38,
               icon: const Icon(Icons.discord),
-              onPressed: () =>
-                  openLinkInBrowser('https://discord.gg/eyQdCpdubF'),
+              onPressed: () => openLinkInBrowser('https://discord.gg/eyQdCpdubF'),
             ),
             const SizedBox(width: 16),
             IconButton(
               color: Colors.grey.shade800,
               iconSize: 32,
               icon: const Icon(Bootstrap.github),
-              onPressed: () =>
-                  openLinkInBrowser('https://github.com/aayush2622/dartotsu'),
+              onPressed: () => openLinkInBrowser('https://github.com/aayush2622/dartotsu'),
             ),
           ],
         ),

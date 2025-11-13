@@ -9,10 +9,12 @@ import 'package:dartotsu_extension_bridge/Mangayomi/Eval/dart/model/source_prefe
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart'
     hide isar;
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:flutter/material.dart';
 import 'package:isar_community/isar.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
+import '../Theme/LanguageSwitcher.dart';
 import '../main.dart';
 import 'IsarDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
 import 'IsarDataClasses/DefaultReaderSettings/DafaultReaderSettings.dart';
@@ -38,19 +40,47 @@ void removeCustomData<T>(String key) => PrefManager.removeCustomVal<T>(key);
 class Pref<T> {
   final String key;
   final T defaultValue;
+  final PrefLocation location;
 
-  const Pref(this.key, this.defaultValue);
+  const Pref(this.key, this.defaultValue, this.location);
+}
+
+enum PrefLocation {
+  THEME,
+  COMMON,
+  PLAYER,
+  READER,
+  PROTECTED,
+  OTHER;
+
+  String label(BuildContext context) {
+    final s = getString;
+    switch (this) {
+      case PrefLocation.THEME:
+        return s.theme;
+      case PrefLocation.COMMON:
+        return s.common;
+      case PrefLocation.PLAYER:
+        return s.playerSettingsTitle;
+      case PrefLocation.READER:
+        return s.readerSettings;
+      case PrefLocation.PROTECTED:
+        return "Protected";
+      case PrefLocation.OTHER:
+        return "Other";
+    }
+  }
 }
 
 class PrefManager {
-  static late Isar _dartotsuPreferences;
+  static late Isar dartotsuPreferences;
 
   static final Map<String, dynamic> cache = {};
 
   static Future<void> init() async {
     try {
       final path = await getDirectory(subPath: 'settings');
-      _dartotsuPreferences = await _open('DartotsuSettings', path!.path);
+      dartotsuPreferences = await _open('DartotsuSettings', path!.path);
       await _populateCache();
     } catch (e) {
       Logger.log('Error initializing preferences: $e');
@@ -79,7 +109,7 @@ class PrefManager {
 
   static void setVal<T>(Pref<T> pref, T value) {
     cache[pref.key] = value;
-    _writeToIsar<T>(pref.key, value);
+    _writeToIsar<T>(pref.key, value, pref.location);
   }
 
   static T getVal<T>(Pref<T> pref) {
@@ -93,14 +123,19 @@ class PrefManager {
     return pref.defaultValue;
   }
 
-  static void setCustomVal<T>(String key, T value) {
+  static void setCustomVal<T>(
+    String key,
+    T value, {
+    PrefLocation location = PrefLocation.OTHER,
+  }) {
     cache[key] = value;
-    _writeToIsar(key, value);
+    _writeToIsar(key, value, location);
   }
 
   static T? getCustomVal<T>(
     String key, {
     T? defaultValue,
+    PrefLocation location = PrefLocation.OTHER,
   }) =>
       cache.containsKey(key) ? cache[key] as T? : defaultValue;
 
@@ -118,42 +153,51 @@ class PrefManager {
     _removeFromIsar<T>(key);
   }
 
-  static Future<void> _writeToIsar<T>(String key, T value) async {
-    await _dartotsuPreferences.writeTxn(() async {
+  static Future<void> _writeToIsar<T>(
+    String key,
+    T value,
+    PrefLocation loc,
+  ) async {
+    await dartotsuPreferences.writeTxn(() async {
       if (value is MediaSettings) {
         value.key = key;
-        await _dartotsuPreferences.mediaSettings.put(value);
-      } else if (value is ResponseToken) {
-        value.key = key;
-        await _dartotsuPreferences.responseTokens.put(value);
+        value.location = loc;
+        await dartotsuPreferences.mediaSettings.put(value);
       } else if (value is ShowResponse) {
         value.key = key;
-        await _dartotsuPreferences.showResponses.put(value);
+        value.location = loc;
+        await dartotsuPreferences.showResponses.put(value);
+      } else if (value is ResponseToken) {
+        value.key = key;
+        value.location = loc;
+        await dartotsuPreferences.responseTokens.put(value);
       } else {
-        final keyValue = KeyValue()
+        final obj = KeyValue()
           ..key = key
-          ..value = value;
-        await _dartotsuPreferences.keyValues.put(keyValue);
+          ..value = value
+          ..location = loc;
+
+        await dartotsuPreferences.keyValues.put(obj);
       }
     });
   }
 
   static Future<void> _removeFromIsar<T>(String key) async {
-    await _dartotsuPreferences.writeTxn(() async {
+    await dartotsuPreferences.writeTxn(() async {
       if (T == MediaSettings) {
-        await _dartotsuPreferences.mediaSettings.deleteByKey(key);
+        await dartotsuPreferences.mediaSettings.deleteByKey(key);
       } else if (T == ResponseToken) {
-        await _dartotsuPreferences.responseTokens.deleteByKey(key);
+        await dartotsuPreferences.responseTokens.deleteByKey(key);
       } else if (T == ShowResponse) {
-        await _dartotsuPreferences.showResponses.deleteByKey(key);
+        await dartotsuPreferences.showResponses.deleteByKey(key);
       } else {
-        await _dartotsuPreferences.keyValues.deleteByKey(key);
+        await dartotsuPreferences.keyValues.deleteByKey(key);
       }
     });
   }
 
   static Future<void> _populateCache() async {
-    final isar = _dartotsuPreferences;
+    final isar = dartotsuPreferences;
     final keyValues = await isar.keyValues.where().findAll();
     for (var item in keyValues) {
       cache[item.key] = item.value;
@@ -170,6 +214,46 @@ class PrefManager {
     for (var item in showResponse) {
       cache[item.key] = item;
     }
+  }
+
+  static Future<PrefLocation> getLocationForKey(String key) async {
+    final m = await dartotsuPreferences.mediaSettings.getByKey(key);
+
+    if (m != null) return m.location;
+
+    final s = await dartotsuPreferences.showResponses.getByKey(key);
+
+    if (s != null) return s.location;
+
+    final r = await dartotsuPreferences.responseTokens.getByKey(key);
+    if (r != null) return r.location;
+
+    final k = await dartotsuPreferences.keyValues.getByKey(key);
+    if (k != null) return k.location;
+
+    return PrefLocation.OTHER;
+  }
+
+  static dynamic parsePrefObject({
+    required String key,
+    required PrefLocation location,
+    required dynamic value,
+  }) {
+    if (value is! Map<String, dynamic>) return value;
+
+    try {
+      return MediaSettings.fromJson(value);
+    } catch (_) {}
+
+    try {
+      return ShowResponse.fromJson(value);
+    } catch (_) {}
+
+    try {
+      return ResponseToken.fromJson(value);
+    } catch (_) {}
+
+    return value;
   }
 
   static Future<bool> requestPermission() async {

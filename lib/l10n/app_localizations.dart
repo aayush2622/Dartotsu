@@ -1565,6 +1565,30 @@ abstract class AppLocalizations {
   /// **'Use different Image cache manager'**
   String get differentCacheManagerDesc;
 
+  /// No description provided for @backupAndRestore.
+  ///
+  /// In en, this message translates to:
+  /// **'Backup & Restore'**
+  String get backupAndRestore;
+
+  /// No description provided for @backupAndRestoreDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Save and restore the app preferences'**
+  String get backupAndRestoreDescription;
+
+  /// No description provided for @backup.
+  ///
+  /// In en, this message translates to:
+  /// **'Backup'**
+  String get backup;
+
+  /// No description provided for @restore.
+  ///
+  /// In en, this message translates to:
+  /// **'Restore'**
+  String get restore;
+
   /// No description provided for @webView.
   ///
   /// In en, this message translates to:

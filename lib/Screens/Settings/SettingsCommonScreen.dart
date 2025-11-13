@@ -1,7 +1,12 @@
 import 'dart:io';
+import 'dart:convert';
 
+import 'package:dartotsu/Preferences/IsarDataClasses/MalToken/MalToken.dart';
+import 'package:dartotsu/Preferences/IsarDataClasses/MediaSettings/MediaSettings.dart';
+import 'package:dartotsu/Preferences/IsarDataClasses/ShowResponse/ShowResponse.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:path/path.dart' as p;
 
 import '../../Adaptor/Settings/SettingsAdaptor.dart';
 import '../../DataClass/Setting.dart';
@@ -69,6 +74,135 @@ class SettingsCommonScreenState extends BaseSettingsScreen {
           ),
         ],
       ),
+      SettingsAdaptor(settings: [
+        Setting(
+          type: SettingType.normal,
+          name: getString.backupAndRestore,
+          description: getString.backupAndRestoreDescription,
+          icon: Icons.settings_backup_restore,
+          onClick: () {
+            final locations = PrefLocation.values;
+            final titles = locations.map((loc) => loc.label(context)).toList();
+
+            List<bool> checkedStates =
+                List<bool>.filled(locations.length, false);
+
+            AlertDialogBuilder(context)
+              ..setTitle(getString.backupAndRestore)
+              ..multiChoiceItems(
+                titles,
+                checkedStates,
+                (newCheckedStates) => checkedStates = newCheckedStates,
+              )
+              ..setPositiveButton(
+                getString.restore,
+                () async {
+                  final picked = await FilePicker.platform.pickFiles(
+                    allowMultiple: false,
+                    dialogTitle: getString.restore,
+                  );
+
+                  if (picked?.files == null || picked!.files.isEmpty) return;
+                  try {
+                    final content =
+                        await File(picked.files.first.path!).readAsString();
+                    final decoded = jsonDecode(content) as Map<String, dynamic>;
+
+                    final selectedLocations = <PrefLocation>[];
+                    for (int i = 0; i < checkedStates.length; i++) {
+                      if (checkedStates[i]) selectedLocations.add(locations[i]);
+                    }
+
+                    if (selectedLocations.isEmpty) {
+                      snackString(
+                          "Please select at least one category to restore");
+                      return;
+                    }
+                    for (final section in decoded.entries) {
+                      final loc = PrefLocation.values.firstWhere(
+                        (e) => e.name == section.key,
+                        orElse: () => PrefLocation.OTHER,
+                      );
+
+                      if (!selectedLocations.contains(loc)) continue;
+
+                      final map =
+                          (section.value as Map).cast<String, dynamic>();
+
+                      for (final entry in map.entries) {
+                        final key = entry.key;
+                        final value = entry.value;
+
+                        final parsed = PrefManager.parsePrefObject(
+                          key: key,
+                          location: loc,
+                          value: value,
+                        );
+                        PrefManager.setCustomVal(key, parsed, location: loc);
+                      }
+                    }
+                    snackString(
+                        'Preferences restored successfully\nRestart the app');
+                  } catch (e) {
+                    snackString('Failed to restore: $e');
+                  }
+                },
+              )
+              ..setNegativeButton(
+                getString.backup,
+                () async {
+                  if (!checkedStates.any((a) => a)) {
+                    snackString(
+                        'Please select at least one category to backup');
+                    return;
+                  }
+
+                  final selectedLocations = <PrefLocation>[];
+                  for (int i = 0; i < checkedStates.length; i++) {
+                    if (checkedStates[i]) selectedLocations.add(locations[i]);
+                  }
+
+                  final Map<String, Map<String, dynamic>> grouped = {};
+
+                  for (final loc in selectedLocations) {
+                    grouped[loc.name] = {};
+                  }
+
+                  for (final key in PrefManager.cache.keys) {
+                    final loc = await PrefManager.getLocationForKey(key);
+
+                    if (selectedLocations.contains(loc)) {
+                      final value = PrefManager.cache[key];
+                      grouped[loc.name]![key] = value;
+                    }
+                  }
+
+                  grouped.removeWhere((key, value) => value.isEmpty);
+
+                  try {
+                    final jsonStr =
+                        const JsonEncoder.withIndent('  ').convert(grouped);
+
+                    final dirPath = await FilePicker.platform.getDirectoryPath(
+                      dialogTitle: getString.selectDirectory,
+                      lockParentWindow: true,
+                    );
+                    if (dirPath == null) return;
+                    final fileName =
+                        'dartotsu_backup_${DateTime.now().millisecondsSinceEpoch}.json';
+                    final file = File(p.join(dirPath, fileName));
+                    await file.writeAsString(jsonStr);
+                    snackString('Backup saved to $fileName');
+                  } catch (e) {
+                    snackString('Backup failed: $e');
+                  }
+                },
+              )
+              ..setNeutralButton(getString.cancel, null)
+              ..show();
+          },
+        ),
+      ]),
       Text(
         getString.anilist,
         style: const TextStyle(
@@ -218,4 +352,11 @@ class SettingsCommonScreenState extends BaseSettingsScreen {
       ),
     ];
   }
+
+  final commonsCustomKeys = [
+    'useDifferentCacheManager',
+    'loadExtensionIcon',
+    'checkForUpdates',
+    'alphaUpdates',
+  ];
 }
