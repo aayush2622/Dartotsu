@@ -3,9 +3,31 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
+    inputs:
+      build_targets:
+        description: 'Select platforms to build'
+        required: true
+        type: choice
+        options:
+          - 'all'
+          - 'android'
+          - 'windows'
+          - 'linux'
+          - 'ios'
+          - 'macos'
+      clean_build:
+        description: 'Clean build?'
+        required: false
+        type: boolean
+        default: false
+      ping_discord:
+        description: 'Ping Discord role?'
+        required: false
+        type: boolean
+        default: false
 
 env:
-  # change the fallback flutter vefrsion here
   FLUTTER_VERSION: 3.35.7
 
 jobs:
@@ -25,7 +47,6 @@ jobs:
         env:
           FLUTTER_VERSION_SECRET: ${{ secrets.FLUTTER_VERSION }}
         run: |
-          # Use secret FLUTTER_VERSION if set, otherwise fallback to default from env
           if [ -n "${FLUTTER_VERSION_SECRET}" ]; then
             echo "FLUTTER_VERSION=${FLUTTER_VERSION_SECRET}" >> $GITHUB_ENV
           else
@@ -41,7 +62,7 @@ jobs:
 
       - &cache_flutter_normal
         name: Cache Flutter dependencies (normal)
-        if: ${{ !contains(github.event.head_commit.message, '[clean]') }}
+        if: ${{ !contains(github.event.head_commit.message, '[clean]') && !inputs.clean_build }}
         uses: actions/cache@v4
         with:
           path: |
@@ -55,7 +76,7 @@ jobs:
 
       - &cache_flutter_clean
         name: Cache Flutter dependencies (clean)
-        if: contains(github.event.head_commit.message, '[clean]')
+        if: contains(github.event.head_commit.message, '[clean]') || inputs.clean_build
         uses: actions/cache@v4
         with:
           path: |
@@ -76,7 +97,9 @@ jobs:
 
   build_android:
     runs-on: ubuntu-latest
-    if: contains(github.event.head_commit.message, '[build.apk]') || contains(github.event.head_commit.message, '[build]') || contains(github.event.head_commit.message, '[build.all]')
+    if: |
+      (github.event_name == 'push' && (contains(github.event.head_commit.message, '[build.apk]') || contains(github.event.head_commit.message, '[build]') || contains(github.event.head_commit.message, '[build.all]'))) ||
+      (github.event_name == 'workflow_dispatch' && (inputs.build_targets == 'android' || inputs.build_targets == 'all'))
     outputs:
       apk_link: ${{steps.gdriveUpload_arm64.outputs.web-content-link}}
 
@@ -93,7 +116,7 @@ jobs:
       - *cache_flutter_clean
 
       - name: Cache Gradle dependencies (normal)
-        if: ${{!contains(github.event.head_commit.message, '[clean]')}}
+        if: ${{ !contains(github.event.head_commit.message, '[clean]') && !inputs.clean_build }}
         uses: actions/cache@v4
         with:
           path: |
@@ -104,7 +127,7 @@ jobs:
             v1-${{ runner.os }}-gradle-
             clean-v1-${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
       - name: Cache Gradle dependencies (clean)
-        if: contains(github.event.head_commit.message, '[clean]')
+        if: contains(github.event.head_commit.message, '[clean]') || inputs.clean_build
         uses: actions/cache@v4
         with:
           path: |
@@ -128,7 +151,6 @@ jobs:
         with:
           distribution: "oracle"
           java-version: "17"
-
 
       - name: Download keystore
         env:
@@ -206,9 +228,12 @@ jobs:
           upload-to-folder-id: ${{secrets.GOOGLE_FOLDER_ANDROID}}
           service-account-json: "${{secrets.GOOGLE_KEY}}"
           overrwrite: true
+
   build_windows:
     runs-on: windows-latest
-    if: contains(github.event.head_commit.message, '[build.windows]') ||  contains(github.event.head_commit.message, '[build.all]')
+    if: |
+      (github.event_name == 'push' && (contains(github.event.head_commit.message, '[build.windows]') || contains(github.event.head_commit.message, '[build.all]'))) ||
+      (github.event_name == 'workflow_dispatch' && (inputs.build_targets == 'windows' || inputs.build_targets == 'all'))
     outputs:
       zip_link: ${{steps.gdriveUpload.outputs.web-content-link}}
 
@@ -238,7 +263,6 @@ jobs:
         run: flutter config --enable-windows-desktop
 
       - run: flutter clean
-
       - run: flutter pub get
 
       - name: Extract Version
@@ -268,7 +292,6 @@ jobs:
         run: |
           dart run inno_bundle:build --sign-tool-params '"${{ steps.find_signtool.outputs.signtool_path }}" sign /fd sha256 /f "C:\Users\runneradmin\certs\Dartotsu.pfx" /p "${{secrets.PFX_PASSWORD}}" /tr http://timestamp.digicert.com /td sha256 /v $f' --release
 
-      # Upload to Google Drive
       - name: Upload File To Google Drive
         id: gdriveUpload
         uses: hoatruongdev09/google-drive-file-upload-github-action@v1.1
@@ -281,7 +304,9 @@ jobs:
 
   build_linux:
     runs-on: ubuntu-latest
-    if: contains(github.event.head_commit.message, '[build.linux]')  ||  contains(github.event.head_commit.message, '[build.all]') ||  contains(github.event.head_commit.message, '[build]')
+    if: |
+      (github.event_name == 'push' && (contains(github.event.head_commit.message, '[build.linux]') || contains(github.event.head_commit.message, '[build.all]') || contains(github.event.head_commit.message, '[build]'))) ||
+      (github.event_name == 'workflow_dispatch' && (inputs.build_targets == 'linux' || inputs.build_targets == 'all'))
     permissions:
       contents: write
       pull-requests: write
@@ -290,7 +315,6 @@ jobs:
       zip_link: ${{steps.gdriveUpload.outputs.web-content-link}}
     steps:
       - *checkout
-
       - *prepare_flutter
       - *setup_flutter
 
@@ -324,21 +348,22 @@ jobs:
           upload-to-folder-id: ${{secrets.GOOGLE_FOLDER_MAIN}}
           service-account-json: "${{secrets.GOOGLE_KEY}}"
           overrwrite: true
+
   build_ios:
     runs-on: macos-latest
-    if: contains(github.event.head_commit.message, '[build.ios]')  ||  contains(github.event.head_commit.message, '[build.all]')
+    if: |
+      (github.event_name == 'push' && (contains(github.event.head_commit.message, '[build.ios]') || contains(github.event.head_commit.message, '[build.all]'))) ||
+      (github.event_name == 'workflow_dispatch' && (inputs.build_targets == 'ios' || inputs.build_targets == 'all'))
     permissions:
       contents: write
     outputs:
       ipa_link: ${{steps.gdriveUpload.outputs.web-content-link}}
     steps:
       - *checkout
-
       - *prepare_flutter
       - *setup_flutter
       - *cache_flutter_normal
       - *cache_flutter_clean
-
       - *setup_env
 
       - name: Get Dependencies
@@ -347,7 +372,6 @@ jobs:
         run: |
           flutter build ios --release --no-codesign
           cd build/ios/iphoneos
-          # Remove old Payload directory to avoid cp error on cached runs
           rm -rf Payload
           mkdir -p Payload
           cd Payload
@@ -363,9 +387,12 @@ jobs:
           upload-to-folder-id: ${{secrets.GOOGLE_FOLDER_MAIN}}
           service-account-json: "${{secrets.GOOGLE_KEY}}"
           overrwrite: true
+
   build_macos:
     runs-on: macos-latest
-    if: contains(github.event.head_commit.message, '[build.macos]') ||  contains(github.event.head_commit.message, '[build.all]')
+    if: |
+      (github.event_name == 'push' && (contains(github.event.head_commit.message, '[build.macos]') || contains(github.event.head_commit.message, '[build.all]'))) ||
+      (github.event_name == 'workflow_dispatch' && (inputs.build_targets == 'macos' || inputs.build_targets == 'all'))
     permissions:
       contents: write
       pull-requests: write
@@ -374,7 +401,6 @@ jobs:
       deb_link: ${{steps.gdriveUpload.outputs.web-content-link}}
     steps:
       - *checkout
-
       - *prepare_flutter
       - *setup_flutter
       - *cache_flutter_normal
@@ -398,6 +424,7 @@ jobs:
           upload-to-folder-id: ${{secrets.GOOGLE_FOLDER_MAIN}}
           service-account-json: "${{secrets.GOOGLE_KEY}}"
           overrwrite: true
+
   sendMessage:
     runs-on: ubuntu-latest
     needs: [build_android, build_windows, build_linux, build_ios, build_macos]
@@ -434,22 +461,16 @@ jobs:
           if [ -f last_sha.txt ]; then
             LAST_SHA=$(cat last_sha.txt)
           else
-            # Fallback to first commit if no previous SHA available
             LAST_SHA=$(git rev-list --max-parents=0 HEAD)
           fi
           echo "Commits since $LAST_SHA:"
-          # Accumulate commit logs in a shell variable
           COMMIT_LOGS=$(git log $LAST_SHA..HEAD --pretty=format:"● %s ~%an [֍](https://github.com/${{ github.repository }}/commit/%H)" --max-count=10)
-          # URL-encode the newline characters for GitHub Actions
           COMMIT_LOGS="${COMMIT_LOGS//'%'/'%25'}"
           COMMIT_LOGS="${COMMIT_LOGS//$'\n'/'%0A'}"
           COMMIT_LOGS="${COMMIT_LOGS//$'\r'/'%0D'}"
-          # Append the encoded commit logs to the COMMIT_LOG environment variable
           echo "COMMIT_LOG=${COMMIT_LOGS}" >> $GITHUB_ENV
-          # Debugging: Print the variable to check its content
           echo "$COMMIT_LOGS"
           echo "$COMMIT_LOGS" > commit_log.txt
-          # Extract branch name from github.ref
           BRANCH=${{ github.ref }}
           BRANCH=${BRANCH#refs/heads/}
           echo "BRANCH=${BRANCH}" >> $GITHUB_ENV
@@ -468,15 +489,15 @@ jobs:
       - name: Check for Ping
         id: check_noping
         run: |
-          if [[ "${{ github.event.head_commit.message }}" == *"[Ping]"* ]]; then
+          if [[ "${{ github.event.head_commit.message }}" == *"[Ping]"* ]] || [[ "${{ inputs.ping_discord }}" == "true" ]]; then
             echo "ping_variable=<@&1324799528255225997>" >> $GITHUB_ENV
           else
             echo "ping_variable=noPing" >> $GITHUB_ENV
           fi
+
       - name: Upload APK to Discord
         shell: bash
         run: |
-          # Prepare Discord embed
           fetch_user_details() {
             local login=$1
             user_details=$(curl -s "https://api.github.com/users/$login")
@@ -486,12 +507,11 @@ jobs:
             echo "$name|$login|$avatar_url"
           }
 
-          # Additional information for the goats
           declare -A additional_info
           additional_info["ibo"]="\n Discord: <@951737931159187457>\n AniList: [takarealist112](<https://anilist.co/user/5790266/>)"
           additional_info["aayush262"]="\n Discord: <@918825160654598224>\n AniList: [aayush262](<https://anilist.co/user/5144645/>)"
           additional_info["Ankit Grai"]="\n Discord: <@1125628254330560623>\n AniList: [bheshnarayan](<https://anilist.co/user/6417303/>)\n X: [grayankit01](<https://x.com/grayankit01>)"
-          # Decimal color codes for contributors
+
           declare -A contributor_colors
           default_color="#1ac4c5"
           contributor_colors["aayush262"]="#ff7eb6"
@@ -500,7 +520,6 @@ jobs:
           contributor_colors["rebelonion"]="#d4e5ed"
           hex_to_decimal() { printf '%d' "0x${1#"#"}"; }
 
-          # Count recent commits and create an associative array
           declare -A recent_commit_counts
           echo "Debug: Processing COMMIT_LOG:"
           echo "$COMMIT_LOG"
@@ -510,7 +529,6 @@ jobs:
           done < <(echo "$COMMIT_LOG" | sed 's/%0A/\n/g' | grep -oP '(?<=~)[^[]*' | sort | uniq -c | sort -rn)
 
           echo "Debug: Fetching contributors from GitHub"
-          # Fetch contributors from GitHub
           contributors=$(curl -L \
           -H "Accept: application/vnd.github+json" \
           -H "X-GitHub-Api-Version: 2022-11-28" \
@@ -518,7 +536,6 @@ jobs:
           echo "Debug: Contributors response:"
           echo "$contributors"
 
-          # Create a sorted list of contributors based on recent commit counts
           sorted_contributors=$(for login in $(echo "$contributors" | jq -r '.[].login'); do
               user_info=$(fetch_user_details "$login")
               name=$(echo "$user_info" | cut -d'|' -f1)
@@ -526,7 +543,6 @@ jobs:
               echo "$count|$login"
           done | sort -rn | cut -d'|' -f2)
 
-          # Initialize needed variables
           developers=""
           committers_count=0
           max_commits=0
@@ -535,17 +551,14 @@ jobs:
           top_contributor_avatar=""
           embed_color=$(hex_to_decimal "$default_color")
 
-          # Process contributors in the new order
           while read -r login; do
             user_info=$(fetch_user_details "$login")
             name=$(echo "$user_info" | cut -d'|' -f1)
             login=$(echo "$user_info" | cut -d'|' -f2)
             avatar_url=$(echo "$user_info" | cut -d'|' -f3)
 
-          # Only process if they have recent commits
           commit_count=${recent_commit_counts["$name"]:-0}
           if [ $commit_count -gt 0 ]; then
-            # Update top contributor information
             if [ $commit_count -gt $max_commits ]; then
               max_commits=$commit_count
               top_contributors=("$login")
@@ -560,11 +573,8 @@ jobs:
             echo "Debug top contributors:"
             echo "$top_contributors"
 
-
-            # Get commit count for this contributor on the main branch
             branch_commit_count=$(git log --author="$login" --author="$name" --oneline | awk '!seen[$0]++' | wc -l)
 
-            # Debug: Print recent_commit_counts
             echo "Debug: recent_commit_counts contents:"
             for key in "${!recent_commit_counts[@]}"; do
               echo "$key: ${recent_commit_counts[$key]}"
@@ -575,14 +585,10 @@ jobs:
               extra_info=$(echo "$extra_info" | sed 's/\\n/\n- /g')
             fi
 
-            # Construct the developer entry
             developer_entry="◗ **${name}** ${extra_info}
           - Github: [${login}](https://github.com/${login})
           - Commits: ${branch_commit_count}"
 
-
-
-            # Add the entry to developers, with a newline if it's not the first entry
             if [ -n "$developers" ]; then
               developers="${developers}
           ${developer_entry}"
@@ -593,7 +599,6 @@ jobs:
             fi
           done <<< "$sorted_contributors"
 
-          # Set the thumbnail URL and color based on top contributor(s)
           if [ $top_contributor_count -eq 1 ]; then
             thumbnail_url="$top_contributor_avatar"
           else
@@ -601,7 +606,6 @@ jobs:
             embed_color=$(hex_to_decimal "$default_color")
           fi
 
-          # Truncate field values
           max_length=1000
           commit_messages=$(echo "$COMMIT_LOG" | sed 's/%0A/\n/g; s/^/\n/')
           if [ ${#developers} -gt $max_length ]; then
@@ -610,7 +614,7 @@ jobs:
           if [ ${#commit_messages} -gt $max_length ]; then
             commit_messages="${commit_messages:0:$max_length}... (truncated)"
           fi
-          # Construct Discord payload
+
           discord_data=$(jq -nc \
                         --arg field_value "$commit_messages" \
                         --arg author_value "$developers" \
@@ -649,15 +653,17 @@ jobs:
                         }')
           echo "Debug: Final Discord payload is:"
           echo "$discord_data"
-          # Send Discord message
+
           curl -H "Content-Type: application/json" \
               -d "$discord_data" \
               ${{ secrets.DISCORD_WEBHOOK_URL }}
+
       - name: Upload Current SHA as Artifact
         uses: actions/upload-artifact@v4
         with:
           name: last-sha
           path: last_sha.txt
+
       - name: Send Discord Notification with Download Links
         env:
           APK_DOWNLOAD_LINK: ${{ needs.build_android.outputs.apk_link }}
@@ -666,35 +672,30 @@ jobs:
           IOS_DOWNLOAD_LINK: ${{needs.build_ios.outputs.ipa_link}}
           MACOS_DOWNLOAD_LINK: ${{needs.build_macos.outputs.deb_link}}
         run: |
-          # Check if APK_DOWNLOAD_LINK is not empty
           if [[ -n "$APK_DOWNLOAD_LINK" ]]; then
             APK_MESSAGE="[Download APK](https://drive.google.com/drive/folders/${{ secrets.GOOGLE_FOLDER_ANDROID }})"
           else
             APK_MESSAGE=""
           fi
 
-          # Check if WINDOWS_DOWNLOAD_LINK is not empty
           if [[ -n "$WINDOWS_DOWNLOAD_LINK" ]]; then
             WINDOWS_MESSAGE="[Download Windows Installer]($WINDOWS_DOWNLOAD_LINK)"
           else
             WINDOWS_MESSAGE=""
           fi
 
-          # Check if LINUX_DOWNLOAD_LINK is not empty
           if [[ -n "$LINUX_DOWNLOAD_LINK" ]]; then
             LINUX_MESSAGE="[Download LINUX ZIP]($LINUX_DOWNLOAD_LINK)"
           else
             LINUX_MESSAGE=""
           fi
 
-          # Check if IOS_DOWNLOAD_LINK is not empty
           if [[ -n "$IOS_DOWNLOAD_LINK" ]]; then
             IOS_MESSAGE="[Download IOS IPA]($IOS_DOWNLOAD_LINK)"
           else
             IOS_MESSAGE=""
           fi
 
-          # Check if MACOS_DOWNLOAD_LINK is not empty
           if [[ -n "$MACOS_DOWNLOAD_LINK" ]]; then
             MACOS_MESSAGE="[Download macos deb]($MACOS_DOWNLOAD_LINK)"
           else
@@ -707,7 +708,6 @@ jobs:
             echo "ios_message=$IOS_MESSAGE" >> $GITHUB_ENV
             echo "macos_message=$MACOS_MESSAGE" >> $GITHUB_ENV
 
-          # Prepare and send the Discord message
           curl -H "Content-Type: application/json" \
                -d "{\"content\": \"${APK_MESSAGE}\n${WINDOWS_MESSAGE}\n${LINUX_MESSAGE}\n${IOS_MESSAGE}\n${MACOS_MESSAGE}\"}" \
                "${{ secrets.DISCORD_WEBHOOK_URL }}"
@@ -732,4 +732,3 @@ jobs:
             -H "Accept: application/vnd.github.v3+json" \
             https://api.github.com/repos/grayankit/Dartotsu-Downloader/actions/workflows/main.yml/dispatches \
             -d '{"ref":"main", "inputs": {"commit_sha": "${{ github.sha }}", "commit_logs": "${{ needs.sendMessage.outputs.commit_logs }}", "build_android": "${{ needs.build_android.result }}", "build_windows": "${{ needs.build_windows.result }}", "build_linux": "${{ needs.build_linux.result }}", "build_ios": "${{ needs.build_ios.result }}", "build_macos": "${{ needs.build_macos.result }}"}}'
-            
