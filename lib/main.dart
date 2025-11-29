@@ -204,10 +204,40 @@ void handleDeepLink(Uri uri) {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  Future<void> _toggleFullScreen() async {
+    final isFullScreen = await windowManager.isFullScreen();
+    await windowManager.setFullScreen(!isFullScreen);
+  }
+
+  Future<void> _toggleGlass(BuildContext context) async {
+    final theme = Provider.of<ThemeNotifier>(context, listen: false);
+    final newValue = !theme.useGlassMode;
+    await theme.setGlassEffect(newValue);
+    snackString('Glass effect ${newValue ? 'enabled' : 'disabled'}');
+  }
+
+  Future<void> _toggleMaterialYou(BuildContext context) async {
+    final theme = Provider.of<ThemeNotifier>(context, listen: false);
+    final newValue = !theme.useMaterialYou;
+    await theme.setMaterialYou(newValue);
+    snackString('Material You ${newValue ? 'enabled' : 'disabled'}');
+  }
+  Future<void> _toggleDarkMode(BuildContext context) async {
+    final theme = Provider.of<ThemeNotifier>(context,listen: false);
+    final newValue = !theme.isDarkMode;
+    await theme.setDarkMode(newValue);
+    snackString('Dark mode ${newValue ? 'enabled' : 'disabled'}');
+  }
+  bool _isAltPressed() {
+    final pressed = HardwareKeyboard.instance.logicalKeysPressed;
+    return pressed.contains(LogicalKeyboardKey.altLeft) ||
+        pressed.contains(LogicalKeyboardKey.altRight);
+  }
   @override
   Widget build(BuildContext context) {
     final themeManager = Provider.of<ThemeNotifier>(context);
     final isDarkMode = themeManager.isDarkMode;
+
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
@@ -224,49 +254,33 @@ class MyApp extends StatelessWidget {
       child: KeyboardListener(
         focusNode: FocusNode(),
         onKeyEvent: (KeyEvent event) async {
-          if (event is KeyDownEvent) {
-            if (event.logicalKey == LogicalKeyboardKey.escape) {
-              if (Navigator.canPop(Get.context!)) Get.back();
-            } else if (event.logicalKey == LogicalKeyboardKey.f11) {
-              bool isFullScreen = await windowManager.isFullScreen();
-              windowManager.setFullScreen(!isFullScreen);
-            } else if (event.logicalKey == LogicalKeyboardKey.enter) {
-              final isAltPressed = HardwareKeyboard.instance.logicalKeysPressed
-                      .contains(LogicalKeyboardKey.altLeft) ||
-                  HardwareKeyboard.instance.logicalKeysPressed
-                      .contains(LogicalKeyboardKey.altRight);
-              if (isAltPressed) {
-                bool isFullScreen = await windowManager.isFullScreen();
-                windowManager.setFullScreen(!isFullScreen);
+          if (event is! KeyDownEvent) return;
+
+          if (_isAltPressed() && event.logicalKey == LogicalKeyboardKey.enter){
+            await _toggleFullScreen();
+            return;
+          }
+
+          switch (event.logicalKey){
+            case LogicalKeyboardKey.escape:
+              if (Navigator.canPop(Get.context!)){
+                Get.back();
               }
-            } else if (event.logicalKey == LogicalKeyboardKey.keyG) {
-              var theme = Provider.of<ThemeNotifier>(context, listen: false);
-              if (theme.useGlassMode) {
-                await theme.setGlassEffect(false);
-                snackString('Glass effect disabled');
-              } else {
-                await theme.setGlassEffect(true);
-                snackString('Glass effect enabled');
-              }
-            } else if (event.logicalKey == LogicalKeyboardKey.keyM) {
-              var theme = Provider.of<ThemeNotifier>(context, listen: false);
-              if (theme.useMaterialYou) {
-                await theme.setMaterialYou(false);
-                snackString('Material You disabled');
-              } else {
-                await theme.setMaterialYou(true);
-                snackString('Material You enabled');
-              }
-            } else if (event.logicalKey == LogicalKeyboardKey.keyD) {
-              var theme = Provider.of<ThemeNotifier>(context, listen: false);
-              if (theme.isDarkMode) {
-                await theme.setDarkMode(false);
-                snackString('Dark mode disabled');
-              } else {
-                await theme.setDarkMode(true);
-                snackString('Dark mode enabled');
-              }
-            }
+              break;
+            case LogicalKeyboardKey.f11:
+              await _toggleFullScreen();
+              break;
+            case LogicalKeyboardKey.keyG:
+              await _toggleGlass(context);
+              break;
+            case LogicalKeyboardKey.keyM:
+              await _toggleMaterialYou(context);
+              break;
+            case LogicalKeyboardKey.keyD:
+              await _toggleDarkMode(context);
+              break;
+            default:
+              break;
           }
         },
         child: DynamicColorBuilder(
