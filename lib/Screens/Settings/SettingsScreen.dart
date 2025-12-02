@@ -7,6 +7,7 @@ import 'package:icons_plus/icons_plus.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import '../../Adaptor/Settings/SettingsAdaptor.dart';
+import '../../Api/Updater/AppUpdater.dart';
 import '../../DataClass/Setting.dart';
 import '../../Functions/Function.dart';
 import '../../Theme/LanguageSwitcher.dart';
@@ -28,14 +29,22 @@ class SettingsScreenState extends BaseSettingsScreen {
   String title() => getString.settings;
 
   @override
-  Widget icon() => ClipOval(
+  Widget icon() {
+    return ClipOval(
+      child: GestureDetector(
+        onTap: () async {
+          snackString("Checking for update");
+          AppUpdater().checkForUpdate(force: true);
+        },
         child: Image.asset(
           'assets/images/logo.png',
           width: 64,
           height: 64,
           fit: BoxFit.cover,
         ),
-      );
+      ),
+    );
+  }
 
   @override
   List<Widget> get settingsList {

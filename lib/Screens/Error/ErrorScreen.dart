@@ -1,7 +1,11 @@
+import 'dart:io';
+
 import 'package:get/get.dart';
 import 'package:dartotsu/Widgets/ScrollConfig.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import '../../Functions/Function.dart';
+import '../../Preferences/PrefManager.dart';
 import '../../Widgets/CustomElevatedButton.dart';
 import '../../logger.dart';
 
@@ -33,7 +37,7 @@ class _ErrorScreenState extends State<ErrorScreen> {
   @override
   Widget build(BuildContext context) {
     var theme = context.theme.colorScheme;
-
+    var textTheme = context.textTheme;
     return Scaffold(
       body: CustomScrollConfig(
         context,
@@ -45,6 +49,8 @@ class _ErrorScreenState extends State<ErrorScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  _buildFactBox(theme, textTheme),
+                  const SizedBox(height: 16),
                   _buildErrorTitle(),
                   const SizedBox(height: 8),
                   _buildErrorBox(theme),
@@ -89,7 +95,17 @@ class _ErrorScreenState extends State<ErrorScreen> {
             ),
             Expanded(
               child: Text(
-                'Unexpected Error (✿◠‿◠)',
+                ([
+                  "Oopsie Woopsie (≧◡≦)",
+                  "Something Broke (ﾉ≧ڡ≦)",
+                  "Unexpected Ouch! (ಥ﹏ಥ)",
+                  "Error Vibes Only (✧∀✧)",
+                  "Plot Twist Error (•◡•) /",
+                  "Software Sadness (╥﹏╥)",
+                  "Skill Issue? (¬‿¬)",
+                  "Gremlins Did It (ᵔ◡ᵔ)",
+                ]..shuffle())
+                    .first,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: context.textTheme.labelLarge?.copyWith(
@@ -102,9 +118,31 @@ class _ErrorScreenState extends State<ErrorScreen> {
         )
             .animate()
             .fadeIn(duration: 400.ms, delay: 200.ms)
-            .slideY(begin: 0.3, end: 0),
+            .slideY(begin: 0.3, end: 0)
+            .then()
+            .shake(hz: 2),
       ),
     );
+  }
+
+  Widget _buildFactBox(ColorScheme theme, TextTheme textTheme) {
+    return Text(
+      ([
+        "Fun Fact: 98% of bugs can be solved by a restart.",
+        "This is not a bug, it's an undocumented feature.",
+        "Programmer tears detected.",
+        "Your code tried its best. It failed.",
+        "Oops. Flutter tripped over itself again.",
+      ]..shuffle())
+          .first,
+      style: textTheme.bodyMedium?.copyWith(
+        color: theme.primary,
+        fontStyle: FontStyle.italic,
+      ),
+    )
+        .animate()
+        .fadeIn(duration: 400.ms, delay: 200.ms)
+        .slideY(begin: 0.1, end: 0);
   }
 
   Widget _buildErrorTitle() {
@@ -133,13 +171,10 @@ class _ErrorScreenState extends State<ErrorScreen> {
           fontSize: 13,
         ),
       ),
-    )
-        .animate()
-        .scale(
-          begin: const Offset(0.95, 0.95),
-          end: const Offset(1, 1),
-        )
-        .fadeIn(duration: 400.ms);
+    ).animate().shimmer(delay: 200.ms, duration: 1200.ms).then().scale(
+        begin: const Offset(0.94, 1),
+        end: const Offset(1, 1),
+        duration: 300.ms);
   }
 
   Widget _buildStackTrace(ColorScheme theme) {
@@ -167,10 +202,11 @@ class _ErrorScreenState extends State<ErrorScreen> {
               color: theme.onSurface,
             ),
           ),
-        )
-            .animate()
-            .fadeIn(duration: 500.ms, delay: 200.ms)
-            .slideY(begin: -0.1, end: 0),
+        ).animate().shimmer(delay: 200.ms, duration: 1200.ms).then().scale(
+              begin: const Offset(0.94, 1),
+              end: const Offset(1, 1),
+              duration: 300.ms,
+            )
       ],
     );
   }
@@ -181,7 +217,21 @@ class _ErrorScreenState extends State<ErrorScreen> {
         Expanded(
           child: CustomElevatedButton(
             context: context,
-            onPressed: () {},
+            onPressed: () async {
+              var p = await PrefManager.getDirectory(
+                useSystemPath: false,
+                useCustomPath: true,
+              );
+              var path = p?.path ?? "";
+              if (Platform.isLinux) {
+                copyToClipboard(
+                  "$path\\appLogs.txt".fixSeparator,
+                  message: "Log file path copied to clipboard",
+                );
+                return;
+              }
+              shareFile("$path\\appLogs.txt".fixSeparator, "LogFile");
+            },
             iconWidget: Icon(
               Icons.share_rounded,
               color: theme.surface,
@@ -197,7 +247,11 @@ class _ErrorScreenState extends State<ErrorScreen> {
         Expanded(
           child: CustomElevatedButton(
             context: context,
-            onPressed: () {},
+            onPressed: () {
+              copyToClipboard(
+                "Error: ${widget.error}\n\nStack Trace:\n${widget.stackTrace}",
+              );
+            },
             iconWidget: Icon(
               Icons.copy_rounded,
               color: theme.surface,
@@ -260,6 +314,13 @@ List<TextSpan> _colorizeErrorText(String text, ColorScheme theme) {
         const TextStyle(color: Colors.lightGreen, fontStyle: FontStyle.italic),
     RegExp(r'\b(?:[a-z_]+\.)*[A-Z][a-zA-Z0-9_]*(?:\.[a-zA-Z0-9_]+)*\b'):
         const TextStyle(color: Colors.tealAccent, fontWeight: FontWeight.w300),
+    RegExp(r'\b(Exception|Error|Failure|Failed|Unhandled)\b'):
+        const TextStyle(color: Colors.redAccent, fontWeight: FontWeight.bold),
+    RegExp(r'\bnull\b'): const TextStyle(color: Colors.deepOrangeAccent),
+    RegExp(r'\bawait|async|Future\b'):
+        const TextStyle(color: Colors.cyanAccent),
+    RegExp(r'\bmissing|not found\b'):
+        const TextStyle(color: Colors.orangeAccent),
   };
 
   final spans = <TextSpan>[];

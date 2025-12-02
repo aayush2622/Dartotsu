@@ -9,13 +9,11 @@ import 'package:dartotsu_extension_bridge/Mangayomi/Eval/dart/model/source_prefe
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart'
     hide isar;
 import 'package:device_info_plus/device_info_plus.dart';
-import 'package:flutter/material.dart';
 import 'package:isar_community/isar.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import '../Theme/LanguageSwitcher.dart';
-import '../main.dart';
 import 'IsarDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
 import 'IsarDataClasses/DefaultReaderSettings/DafaultReaderSettings.dart';
 import 'IsarDataClasses/KeyValue/KeyValues.dart';
@@ -53,7 +51,7 @@ enum PrefLocation {
   PROTECTED,
   OTHER;
 
-  String label(BuildContext context) {
+  String get label {
     final s = getString;
     switch (this) {
       case PrefLocation.THEME:
@@ -74,7 +72,7 @@ enum PrefLocation {
 
 class PrefManager {
   static late Isar dartotsuPreferences;
-
+  static late Isar isar;
   static final Map<String, dynamic> cache = {};
 
   static Future<void> init() async {
@@ -82,6 +80,7 @@ class PrefManager {
       final path = await getDirectory(subPath: 'settings');
       dartotsuPreferences = await _open('DartotsuSettings', path!.path);
       await _populateCache();
+      await deleteAllStoredPreferences();
     } catch (e) {
       Logger.log('Error initializing preferences: $e');
     }
@@ -213,6 +212,20 @@ class PrefManager {
     final showResponse = await isar.showResponses.where().findAll();
     for (var item in showResponse) {
       cache[item.key] = item;
+    }
+  }
+
+  static Future<void> deleteAllStoredPreferences() async {
+    if (getCustomVal("cleanSettings") ?? true) {
+      final isar = dartotsuPreferences;
+      await isar.writeTxn(() async {
+        await isar.keyValues.clear();
+        await isar.mediaSettings.clear();
+        await isar.showResponses.clear();
+        await isar.responseTokens.clear();
+      });
+      cache.clear();
+      setCustomVal("cleanSettings", false);
     }
   }
 

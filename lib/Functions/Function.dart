@@ -85,29 +85,32 @@ Future<void> snackString(
         behavior: SnackBarBehavior.floating,
         margin: const EdgeInsets.symmetric(horizontal: 12),
         elevation: 0,
-        content: ThemedContainer(
-          context: context,
-          child: GestureDetector(
-            onTap: () => scaffoldMessenger.hideCurrentSnackBar(),
-            onLongPress: () => copyToClipboard(clipboard ?? s),
-            child: Text(
-              s,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontFamily: 'Poppins',
-                fontSize: 16.0,
-                fontWeight: FontWeight.w600,
-                color: theme.onSurface,
+        content:
+            ThemedContainer(
+              context: context,
+              child: GestureDetector(
+                onTap: () => scaffoldMessenger.hideCurrentSnackBar(),
+                onLongPress: () => copyToClipboard(clipboard ?? s),
+                child: Text(
+                  s,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontFamily: 'Poppins',
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.w600,
+                    color: theme.onSurface,
+                  ),
+                ),
               ),
+            ).animate(
+              effects: [
+                const SlideEffect(
+                  begin: Offset(0, 1),
+                  end: Offset.zero,
+                  duration: Duration(milliseconds: 200),
+                ),
+              ],
             ),
-          ),
-        ).animate(effects: [
-          const SlideEffect(
-            begin: Offset(0, 1),
-            end: Offset.zero,
-            duration: Duration(milliseconds: 200),
-          )
-        ]),
       );
 
       scaffoldMessenger.showSnackBar(snackBar);
@@ -120,7 +123,7 @@ Future<void> snackString(
   }
 }
 
-void copyToClipboard(String text) {
+void copyToClipboard(String text, {String? message}) {
   var context = Get.overlayContext;
   var theme = Theme.of(context!).colorScheme;
   Clipboard.setData(ClipboardData(text: text));
@@ -128,7 +131,7 @@ void copyToClipboard(String text) {
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
       content: Text(
-        'Copied to clipboard',
+        message ?? 'Copied to clipboard',
         style: TextStyle(
           fontFamily: 'Poppins',
           fontSize: 16.0,
@@ -137,7 +140,7 @@ void copyToClipboard(String text) {
         ),
       ),
       backgroundColor: theme.surface,
-      duration: const Duration(milliseconds: 300),
+      duration: const Duration(milliseconds: 600),
     ),
   );
 }
@@ -153,26 +156,16 @@ Future<void> openLinkInBrowser(String url) async {
 }
 
 void navigateToPage(BuildContext context, Widget page, {bool header = true}) {
-  Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => page),
-  );
+  Navigator.push(context, MaterialPageRoute(builder: (context) => page));
 }
 
 void shareLink(String link) => SharePlus.instance.share(
-      ShareParams(
-        uri: Uri.parse(link),
-        downloadFallbackEnabled: true,
-      ),
-    );
+  ShareParams(uri: Uri.parse(link), downloadFallbackEnabled: true),
+);
 
 void shareFile(String path, String text) => SharePlus.instance.share(
-      ShareParams(
-        text: text,
-        files: [XFile(path)],
-        downloadFallbackEnabled: true,
-      ),
-    );
+  ShareParams(text: text, files: [XFile(path)], downloadFallbackEnabled: true),
+);
 
 List<T> mergeMapValues<T>(Map<String, List<T>> dataMap) {
   final Set<T> uniqueItems = {};
@@ -193,5 +186,14 @@ Future<String?> loadEnv(String prop) async {
     return env?.split('=')[1].trim();
   } catch (e) {
     return null;
+  }
+}
+
+extension KotlinStd<T> on T {
+  R let<R>(R Function(T it) block) => block(this);
+
+  T also(void Function(T it) block) {
+    block(this);
+    return this;
   }
 }

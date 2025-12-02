@@ -5,6 +5,7 @@ import 'package:dartotsu/Downloader/Util/EpisodeRecognition.dart';
 import 'package:dartotsu/Functions/string_extensions.dart';
 import 'package:dartotsu/Preferences/PrefManager.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
+import 'package:fuzzywuzzy/fuzzywuzzy.dart';
 
 class AnimeLocalSource extends Source implements HasSourceMethods {
   AnimeLocalSource() : super();
@@ -143,11 +144,13 @@ class AnimeLocalSourceMethods implements SourceMethods {
   @override
   Future<Pages> search(String query, int page, List filters) async {
     var media = await _getAllMedia();
-    var searchedMedia = media
-        .where((element) =>
-            (element.title ?? "").toLowerCase().contains(query.toLowerCase()))
-        .toList();
-    return Pages(list: searchedMedia);
+    var results = media
+        .map((m) => MapEntry(m, ratio(m.title ?? '', query)))
+        .where((e) => e.value > 60)
+        .toList()
+      ..sort((a, b) => b.value.compareTo(a.value));
+
+    return Pages(list: results.map((e) => e.key).toList());
   }
 
   @override

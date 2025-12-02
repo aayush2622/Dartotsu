@@ -1,0 +1,56 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+import '../../DataClass/Media.dart';
+
+class MediaAdaptorState {
+  var overscrollProgress = 0.0.obs;
+  var isLoadingMore = false.obs;
+  var mediaList = <Media>[].obs;
+  var canLoadMore = true.obs;
+
+  double lastProgress = 0.0;
+
+  bool scrollListener(
+    ScrollNotification scroll,
+    Future<List<Media>> Function()? onLoadMore,
+  ) {
+    if (scroll.metrics.pixels > scroll.metrics.maxScrollExtent) {
+      final overscroll =
+          scroll.metrics.pixels - scroll.metrics.maxScrollExtent - 30;
+
+      overscrollProgress.value = (overscroll / 80).clamp(0.0, 1.0);
+
+      if (lastProgress < 0.70 && overscrollProgress.value >= 0.70) {
+        HapticFeedback.mediumImpact();
+      }
+      lastProgress = overscrollProgress.value;
+      if (!isLoadingMore.value &&
+          scroll is ScrollUpdateNotification &&
+          scroll.dragDetails == null &&
+          overscrollProgress.value >= 0.75) {
+        loadMore(onLoadMore);
+      }
+
+      if (scroll is ScrollUpdateNotification &&
+          scroll.dragDetails == null &&
+          overscrollProgress.value < 0.75) {
+        overscrollProgress.value = 0.0;
+      }
+    }
+    return false;
+  }
+
+  Future<void> loadMore(Future<List<Media>> Function()? onLoadMore) async {
+    isLoadingMore.value = true;
+    overscrollProgress.value = 0.0;
+    final newItems = await onLoadMore?.call();
+    if (newItems != null) {
+      mediaList.value = [...mediaList, ...newItems];
+    } else {
+      canLoadMore.value = false;
+    }
+    overscrollProgress.value = 0.0;
+    isLoadingMore.value = false;
+  }
+}

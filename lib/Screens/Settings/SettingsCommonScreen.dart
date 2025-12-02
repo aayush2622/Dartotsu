@@ -1,9 +1,6 @@
 import 'dart:io';
 import 'dart:convert';
 
-import 'package:dartotsu/Preferences/IsarDataClasses/MalToken/MalToken.dart';
-import 'package:dartotsu/Preferences/IsarDataClasses/MediaSettings/MediaSettings.dart';
-import 'package:dartotsu/Preferences/IsarDataClasses/ShowResponse/ShowResponse.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart' as p;
@@ -82,7 +79,7 @@ class SettingsCommonScreenState extends BaseSettingsScreen {
           icon: Icons.settings_backup_restore,
           onClick: () {
             final locations = PrefLocation.values;
-            final titles = locations.map((loc) => loc.label(context)).toList();
+            final titles = locations.map((loc) => loc.label).toList();
 
             List<bool> checkedStates =
                 List<bool>.filled(locations.length, false);

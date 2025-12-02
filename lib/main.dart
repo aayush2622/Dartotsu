@@ -12,6 +12,7 @@ import 'package:dartotsu/Screens/Manga/MangaScreen.dart';
 import 'package:dartotsu/Screens/Settings/SettingsPlayerScreen.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:desktop_webview_window/desktop_webview_window.dart';
+import 'package:dpad/dpad.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
@@ -21,13 +22,13 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
-import 'package:isar_community/isar.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:provider/provider.dart';
 import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 import 'package:shorebird_code_push/shorebird_code_push.dart';
 import 'package:window_manager/window_manager.dart';
-
+import 'DataClass/Media.dart' as m;
+import 'Adaptors/Media/MediaAdaptor.dart';
 import 'Api/Discord/Discord.dart';
 import 'Api/TypeFactory.dart';
 import 'Functions/RegisterProtocol/Api.dart';
@@ -47,7 +48,7 @@ import 'Widgets/CachedNetworkImage.dart';
 import 'l10n/app_localizations.dart';
 import 'logger.dart';
 
-late Isar isar;
+final FocusNode mainFocusNode = FocusNode();
 
 void main(List<String> args) async {
   runZonedGuarded(
@@ -73,9 +74,8 @@ void main(List<String> args) async {
           softCrash: true,
         );
       };
-      if (Platform.isLinux && runWebViewTitleBarWidget(args)) {
-        return;
-      }
+      if (Platform.isLinux && runWebViewTitleBarWidget(args)) return;
+
       await init();
       runApp(
         MultiProvider(
@@ -83,7 +83,7 @@ void main(List<String> args) async {
             ChangeNotifierProvider(create: (_) => ThemeNotifier()),
             ChangeNotifierProvider(create: (_) => MediaServiceProvider()),
           ],
-          child: const MyApp(),
+          child: const DpadNavigator(enabled: true, child: MyApp()),
         ),
       );
     },
@@ -101,11 +101,15 @@ void main(List<String> args) async {
 
 Future init() async {
   if (Platform.isWindows) {
-    ['dar', 'anymex', 'sugoireads', 'mangayomi']
-        .forEach(registerProtocolHandler);
+    [
+      'dar',
+      'anymex',
+      'sugoireads',
+      'mangayomi',
+    ].forEach(registerProtocolHandler);
   }
   await PrefManager.init();
-  await DartotsuExtensionBridge().init(isar, "Dartotsu");
+  await DartotsuExtensionBridge().init(PrefManager.isar, "Dartotsu");
   await Logger.init();
   await MpvConf.init();
   MediaService.init();
@@ -140,8 +144,9 @@ void initIntentListener() async {
 
   final initialFiles = await intent.getInitialMedia();
   if (initialFiles.isNotEmpty) {
-    WidgetsBinding.instance
-        .addPostFrameCallback((_) => handleFiles(initialFiles));
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) => handleFiles(initialFiles),
+    );
     await intent.reset();
   }
 }
@@ -187,10 +192,9 @@ void handleDeepLink(Uri uri) {
     var manager = ExtensionType.aniyomi.getManager();
     final url = uri.queryParameters["url"];
     if (url != null && url.isNotEmpty) {
-      manager.onRepoSaved(
-        [url],
-        scheme == "aniyomi" ? ItemType.anime : ItemType.manga,
-      );
+      manager.onRepoSaved([
+        url,
+      ], scheme == "aniyomi" ? ItemType.anime : ItemType.manga);
       isRepoAdded = true;
     }
   }
@@ -232,10 +236,13 @@ class MyApp extends StatelessWidget {
               bool isFullScreen = await windowManager.isFullScreen();
               windowManager.setFullScreen(!isFullScreen);
             } else if (event.logicalKey == LogicalKeyboardKey.enter) {
-              final isAltPressed = HardwareKeyboard.instance.logicalKeysPressed
-                      .contains(LogicalKeyboardKey.altLeft) ||
-                  HardwareKeyboard.instance.logicalKeysPressed
-                      .contains(LogicalKeyboardKey.altRight);
+              final isAltPressed =
+                  HardwareKeyboard.instance.logicalKeysPressed.contains(
+                        LogicalKeyboardKey.altLeft,
+                      ) ||
+                      HardwareKeyboard.instance.logicalKeysPressed.contains(
+                        LogicalKeyboardKey.altRight,
+                      );
               if (isAltPressed) {
                 bool isFullScreen = await windowManager.isFullScreen();
                 windowManager.setFullScreen(!isFullScreen);
@@ -373,10 +380,7 @@ class MainScreenState extends State<MainScreen> {
                     gradient: LinearGradient(
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
-                      colors: [
-                        Colors.transparent,
-                        theme.surface,
-                      ],
+                      colors: [Colors.transparent, theme.surface],
                     ),
                   ),
                 ),

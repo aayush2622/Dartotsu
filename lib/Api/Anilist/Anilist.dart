@@ -198,6 +198,8 @@ class AnilistController extends BaseServiceData {
           int.parse(response.headers['x-ratelimit-remaining'] ?? '-1');
       debugPrint("Remaining Anilist requests: $remaining");
 
+      final jsonResponse = json.decode(response.body);
+
       if (response.statusCode == 429) {
         final retry = int.parse(response.headers['Retry-After'] ?? '-1');
         rateLimitReset =
@@ -206,7 +208,25 @@ class AnilistController extends BaseServiceData {
         throw Exception("Rate limited, retry after $retry seconds");
       }
 
-      final jsonResponse = json.decode(response.body);
+      if (response.statusCode == 403 || response.statusCode == 400) {
+        String message = "Forbidden (error $status)";
+
+        try {
+          final errors = jsonResponse["errors"];
+          if (errors is List && errors.isNotEmpty) {
+            message = errors.first["message"] ?? message;
+          }
+        } catch (_) {}
+
+        if (message.contains("Invalid token")) {
+          if (!show) snackString("AniList token expired, please login again");
+        } else {
+          if (!show) snackString("Error fetching AniList data: $message");
+        }
+
+        throw Exception(message);
+      }
+
       if (!response.body.startsWith("{")) {
         snackString("Anilist seems down, maybe use a VPN or wait.");
         throw Exception("Anilist API down");

@@ -76,7 +76,10 @@ class SettingsAboutScreenState extends BaseSettingsScreen {
 
           var path = p?.path ?? "";
           if (Platform.isLinux) {
-            copyToClipboard("$path\\appLogs.txt".fixSeparator);
+            copyToClipboard(
+              "$path\\appLogs.txt".fixSeparator,
+              message: "Log file path copied to clipboard",
+            );
             return;
           }
           shareFile("$path\\appLogs.txt".fixSeparator, "LogFile");

@@ -1,5 +1,8 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
+
 import 'Preferences/PrefManager.dart';
 
 /*class Logger {
@@ -62,7 +65,7 @@ class Logger {
     _logQueue.stream.listen((log) {
       _sink.writeln(log);
     });
-
+    NativeLogger.startLogStream();
     log('\n\nLogger initialized\n\n');
   }
 
@@ -105,5 +108,20 @@ enum LogLevel {
       case LogLevel.error:
         return 'ERROR';
     }
+  }
+}
+
+class NativeLogger {
+  static const _channel = MethodChannel('native_logger');
+
+  static Future<void> startLogStream() async {
+    if (!Platform.isAndroid) return;
+    _channel.setMethodCallHandler((call) async {
+      if (call.method == 'onLog') {
+        String log = call.arguments;
+        debugPrint("[NATIVE] $log");
+      }
+    });
+    await _channel.invokeMethod('startLogs');
   }
 }

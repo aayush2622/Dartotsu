@@ -50,6 +50,8 @@ dependencies:
   skeletonizer: ^2.1.0+1
   blurbox: ^0.0.6
   markdown_widget: ^2.3.2+8
+  super_sliver_list: ^0.4.1
+  dpad: ^2.0.2
   # UI Enhancements
   blur: ^4.0.2
   expandable_page_view: ^1.0.17
@@ -89,6 +91,7 @@ dependencies:
   install_plugin: ^2.1.0
 
   # Miscellaneous
+
   receive_sharing_intent: ^1.8.1
   device_info_plus: ^11.5.0
   package_info_plus: ^8.3.0

@@ -35,6 +35,12 @@ class AppUpdater {
         'https://api.github.com/repos/${alphaUpdates ? alphaRepo : mainRepo}/releases/latest',
       ),
     );
+    if (response.statusCode == 404) {
+      if (force) {
+        snackString("Ooo Nooo you fell into limbo: ${response.reasonPhrase}");
+      }
+      return;
+    }
 
     if (response.statusCode != 200) return;
 
@@ -45,7 +51,10 @@ class AppUpdater {
         loadCustomData<List<String>>("skippedUpdateList") ?? [];
     var hash = await loadEnv("hash");
     if (skippedUpdates.contains(release) && !force) return;
-    if (hash == null) return;
+    if (hash == null) {
+      if (force) snackString("No Update Available");
+      return;
+    }
 
     final compare = await http.get(
       Uri.parse(
@@ -54,7 +63,10 @@ class AppUpdater {
     );
     final compareData = jsonDecode(compare.body);
     final isUpdate = compareData['status'] == 'behind';
-    if (!isUpdate) return;
+    if (!isUpdate) {
+      if (force) snackString("No Update Available");
+      return;
+    }
 
     updateBottomSheet(data);
   }
@@ -199,10 +211,12 @@ class AppUpdater {
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: Row(
                   children: [
-                    Obx(() => Checkbox(
-                          value: skipUpdate.value,
-                          onChanged: (val) => skipUpdate.value = val ?? false,
-                        )),
+                    Obx(
+                      () => Checkbox(
+                        value: skipUpdate.value,
+                        onChanged: (val) => skipUpdate.value = val ?? false,
+                      ),
+                    ),
                     const SizedBox(width: 8),
                     Text(
                       "Skip this update",

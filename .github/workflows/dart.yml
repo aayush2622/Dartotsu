@@ -6,7 +6,7 @@ on:
 
 env:
   # change the fallback flutter vefrsion here
-  FLUTTER_VERSION: 3.35.7
+  FLUTTER_VERSION: 3.38.2
 
 jobs:
   anchors:
