@@ -47,6 +47,14 @@ import 'Widgets/CachedNetworkImage.dart';
 import 'l10n/app_localizations.dart';
 import 'logger.dart';
 
+const Set<String> supportedSourceSchemes = {
+  'dar',
+  'anymex',
+  'sugoireads',
+  'mangayomi'
+};
+const Set<String> aniyomiSchemes = {'aniyomi', 'tachiyomi'};
+
 const String defaultWallpaperUrl = 'https://wallpapercat.com/download/1198914';
 
 late Isar isar;
@@ -103,9 +111,8 @@ void main(List<String> args) async {
 
 Future init() async {
   if (Platform.isWindows) {
-    ['dar', 'anymex', 'sugoireads', 'mangayomi']
-        .forEach(registerProtocolHandler);
-  }
+  supportedSourceSchemes.forEach(registerProtocolHandler);
+}
   await PrefManager.init();
   await DartotsuExtensionBridge().init(isar, "Dartotsu");
   await Logger.init();
@@ -168,9 +175,9 @@ void handleDeepLink(Uri uri) {
   final scheme = uri.scheme.toLowerCase();
   bool isRepoAdded = false;
 
-  const mangayomiSchemes = {"dar", "anymex", "sugoireads", "mangayomi"};
-  const aniyomiSchemes = {"aniyomi", "tachiyomi"};
-  if (mangayomiSchemes.contains(scheme)) {
+   // Schemes are defined at the top of the file
+   if (supportedSourceSchemes.contains(scheme)) {
+  
     var manager = ExtensionType.mangayomi.getManager();
     final repoMap = {
       ItemType.anime:
