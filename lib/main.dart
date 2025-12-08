@@ -47,6 +47,8 @@ import 'Widgets/CachedNetworkImage.dart';
 import 'l10n/app_localizations.dart';
 import 'logger.dart';
 
+const String defaultWallpaperUrl = 'https://wallpapercat.com/download/1198914';
+
 late Isar isar;
 
 void main(List<String> args) async {
@@ -353,7 +355,7 @@ class MainScreenState extends State<MainScreen> {
                   () => cachedNetworkImage(
                     imageUrl: service.data.bg.value.isNotEmpty
                         ? service.data.bg.value
-                        : 'https://wallpapercat.com/download/1198914',
+                        : defaultWallpaperUrl,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -464,7 +466,7 @@ Future<void> checkForUpdate() async {
       snackString('Updated to the latest version! Restart the app');
     } on UpdateException catch (error) {
       Logger.log('Error updating: $error');
-      throw ('Error updating: $error');
+      throw Exception('Error updating: $error');
     }
   }
 }
