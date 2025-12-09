@@ -149,6 +149,18 @@ List<Widget> readerSettings(
         ),
         Setting(
           type: SettingType.switchType,
+          name: "Crop Borders",
+          description: "Removes white/black borders from images",
+          isChecked: readerSettings.cropBorders,
+          onSwitchChange: (value) {
+            if (readerSettings.cropBorders != value) {
+              readerSettings.cropBorders = value;
+              saveReaderSettings(readerSettings);
+            }
+          },
+        ),
+        Setting(
+          type: SettingType.switchType,
           name: getString.hideScrollbar,
           description: getString.hideScrollbarDesc,
           isChecked: readerSettings.hideScrollbar,

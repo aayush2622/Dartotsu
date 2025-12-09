@@ -17,6 +17,7 @@ class ReaderSettings {
   bool keepScreenOn;
   bool changePageWithVolumeButtons;
   bool openImageWithLongTap;
+  bool cropBorders;
 
   ReaderSettings({
     this.layoutType = LayoutType.Continuous,
@@ -29,6 +30,7 @@ class ReaderSettings {
     this.keepScreenOn = false,
     this.changePageWithVolumeButtons = false,
     this.openImageWithLongTap = true,
+    this.cropBorders = false,
   });
 
   Map<String, dynamic> toJson() {
@@ -43,6 +45,7 @@ class ReaderSettings {
       'keepScreenOn': keepScreenOn,
       'changePageWithVolumeButtons': changePageWithVolumeButtons,
       'openImageWithLongTap': openImageWithLongTap,
+      'cropBorders': cropBorders,
     };
   }
 
@@ -61,6 +64,7 @@ class ReaderSettings {
       keepScreenOn: json['keepScreenOn'] ?? false,
       changePageWithVolumeButtons: json['changePageWithVolumeButtons'] ?? false,
       openImageWithLongTap: json['openImageWithLongTap'] ?? false,
+      cropBorders: json['cropBorders'] ?? false,
     );
   }
 }
