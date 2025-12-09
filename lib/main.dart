@@ -47,16 +47,6 @@ import 'Widgets/CachedNetworkImage.dart';
 import 'l10n/app_localizations.dart';
 import 'logger.dart';
 
-const Set<String> supportedSourceSchemes = {
-  'dar',
-  'anymex',
-  'sugoireads',
-  'mangayomi'
-};
-const Set<String> aniyomiSchemes = {'aniyomi', 'tachiyomi'};
-
-const String defaultWallpaperUrl = 'https://wallpapercat.com/download/1198914';
-
 late Isar isar;
 
 void main(List<String> args) async {
@@ -111,8 +101,9 @@ void main(List<String> args) async {
 
 Future init() async {
   if (Platform.isWindows) {
-  supportedSourceSchemes.forEach(registerProtocolHandler);
-}
+    ['dar', 'anymex', 'sugoireads', 'mangayomi']
+        .forEach(registerProtocolHandler);
+  }
   await PrefManager.init();
   await DartotsuExtensionBridge().init(isar, "Dartotsu");
   await Logger.init();
@@ -175,9 +166,9 @@ void handleDeepLink(Uri uri) {
   final scheme = uri.scheme.toLowerCase();
   bool isRepoAdded = false;
 
-   // Schemes are defined at the top of the file
-   if (supportedSourceSchemes.contains(scheme)) {
-  
+  const mangayomiSchemes = {"dar", "anymex", "sugoireads", "mangayomi"};
+  const aniyomiSchemes = {"aniyomi", "tachiyomi"};
+  if (mangayomiSchemes.contains(scheme)) {
     var manager = ExtensionType.mangayomi.getManager();
     final repoMap = {
       ItemType.anime:
@@ -362,7 +353,7 @@ class MainScreenState extends State<MainScreen> {
                   () => cachedNetworkImage(
                     imageUrl: service.data.bg.value.isNotEmpty
                         ? service.data.bg.value
-                        : defaultWallpaperUrl,
+                        : 'https://wallpapercat.com/download/1198914',
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -473,7 +464,7 @@ Future<void> checkForUpdate() async {
       snackString('Updated to the latest version! Restart the app');
     } on UpdateException catch (error) {
       Logger.log('Error updating: $error');
-      throw Exception('Error updating: $error');
+      throw ('Error updating: $error');
     }
   }
 }
