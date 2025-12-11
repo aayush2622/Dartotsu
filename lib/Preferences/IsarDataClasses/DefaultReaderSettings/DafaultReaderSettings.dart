@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:isar_community/isar.dart';
+import 'package:dartotsu/Theme/LanguageSwitcher.dart';
+
 part 'DafaultReaderSettings.g.dart';
 
 @embedded
@@ -107,13 +109,13 @@ enum Direction {
   String toString() {
     switch (this) {
       case Direction.UTD:
-        return 'getString.utd';
+        return getString.utd;
       case Direction.DTU:
-        return 'getString.dtu';
+        return getString.dtu;
       case Direction.RTL:
-        return 'getString.rtl';
+        return getString.rtl;
       case Direction.LTR:
-        return 'getString.ltr';
+        return getString.ltr;
     }
   }
 
