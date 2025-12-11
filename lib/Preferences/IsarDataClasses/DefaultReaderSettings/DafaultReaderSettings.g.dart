@@ -18,51 +18,56 @@ const ReaderSettingsSchema = Schema(
       name: r'changePageWithVolumeButtons',
       type: IsarType.bool,
     ),
-    r'direction': PropertySchema(
+    r'cropBorders': PropertySchema(
       id: 1,
+      name: r'cropBorders',
+      type: IsarType.bool,
+    ),
+    r'direction': PropertySchema(
+      id: 2,
       name: r'direction',
       type: IsarType.byte,
       enumMap: _ReaderSettingsdirectionEnumValueMap,
     ),
     r'dualPageMode': PropertySchema(
-      id: 2,
+      id: 3,
       name: r'dualPageMode',
       type: IsarType.byte,
       enumMap: _ReaderSettingsdualPageModeEnumValueMap,
     ),
     r'hidePageNumber': PropertySchema(
-      id: 3,
+      id: 4,
       name: r'hidePageNumber',
       type: IsarType.bool,
     ),
     r'hideScrollbar': PropertySchema(
-      id: 4,
+      id: 5,
       name: r'hideScrollbar',
       type: IsarType.bool,
     ),
     r'keepScreenOn': PropertySchema(
-      id: 5,
+      id: 6,
       name: r'keepScreenOn',
       type: IsarType.bool,
     ),
     r'layoutType': PropertySchema(
-      id: 6,
+      id: 7,
       name: r'layoutType',
       type: IsarType.byte,
       enumMap: _ReaderSettingslayoutTypeEnumValueMap,
     ),
     r'openImageWithLongTap': PropertySchema(
-      id: 7,
+      id: 8,
       name: r'openImageWithLongTap',
       type: IsarType.bool,
     ),
     r'scrollToNext': PropertySchema(
-      id: 8,
+      id: 9,
       name: r'scrollToNext',
       type: IsarType.bool,
     ),
     r'spacedPages': PropertySchema(
-      id: 9,
+      id: 10,
       name: r'spacedPages',
       type: IsarType.bool,
     )
@@ -89,15 +94,16 @@ void _readerSettingsSerialize(
   Map<Type, List<int>> allOffsets,
 ) {
   writer.writeBool(offsets[0], object.changePageWithVolumeButtons);
-  writer.writeByte(offsets[1], object.direction.index);
-  writer.writeByte(offsets[2], object.dualPageMode.index);
-  writer.writeBool(offsets[3], object.hidePageNumber);
-  writer.writeBool(offsets[4], object.hideScrollbar);
-  writer.writeBool(offsets[5], object.keepScreenOn);
-  writer.writeByte(offsets[6], object.layoutType.index);
-  writer.writeBool(offsets[7], object.openImageWithLongTap);
-  writer.writeBool(offsets[8], object.scrollToNext);
-  writer.writeBool(offsets[9], object.spacedPages);
+  writer.writeBool(offsets[1], object.cropBorders);
+  writer.writeByte(offsets[2], object.direction.index);
+  writer.writeByte(offsets[3], object.dualPageMode.index);
+  writer.writeBool(offsets[4], object.hidePageNumber);
+  writer.writeBool(offsets[5], object.hideScrollbar);
+  writer.writeBool(offsets[6], object.keepScreenOn);
+  writer.writeByte(offsets[7], object.layoutType.index);
+  writer.writeBool(offsets[8], object.openImageWithLongTap);
+  writer.writeBool(offsets[9], object.scrollToNext);
+  writer.writeBool(offsets[10], object.spacedPages);
 }
 
 ReaderSettings _readerSettingsDeserialize(
@@ -108,21 +114,22 @@ ReaderSettings _readerSettingsDeserialize(
 ) {
   final object = ReaderSettings(
     changePageWithVolumeButtons: reader.readBoolOrNull(offsets[0]) ?? false,
+    cropBorders: reader.readBoolOrNull(offsets[1]) ?? false,
     direction: _ReaderSettingsdirectionValueEnumMap[
-            reader.readByteOrNull(offsets[1])] ??
+            reader.readByteOrNull(offsets[2])] ??
         Direction.UTD,
     dualPageMode: _ReaderSettingsdualPageModeValueEnumMap[
-            reader.readByteOrNull(offsets[2])] ??
+            reader.readByteOrNull(offsets[3])] ??
         DualPageMode.Auto,
-    hidePageNumber: reader.readBoolOrNull(offsets[3]) ?? false,
-    hideScrollbar: reader.readBoolOrNull(offsets[4]) ?? false,
-    keepScreenOn: reader.readBoolOrNull(offsets[5]) ?? false,
+    hidePageNumber: reader.readBoolOrNull(offsets[4]) ?? false,
+    hideScrollbar: reader.readBoolOrNull(offsets[5]) ?? false,
+    keepScreenOn: reader.readBoolOrNull(offsets[6]) ?? false,
     layoutType: _ReaderSettingslayoutTypeValueEnumMap[
-            reader.readByteOrNull(offsets[6])] ??
+            reader.readByteOrNull(offsets[7])] ??
         LayoutType.Continuous,
-    openImageWithLongTap: reader.readBoolOrNull(offsets[7]) ?? true,
-    scrollToNext: reader.readBoolOrNull(offsets[8]) ?? true,
-    spacedPages: reader.readBoolOrNull(offsets[9]) ?? false,
+    openImageWithLongTap: reader.readBoolOrNull(offsets[8]) ?? true,
+    scrollToNext: reader.readBoolOrNull(offsets[9]) ?? true,
+    spacedPages: reader.readBoolOrNull(offsets[10]) ?? false,
   );
   return object;
 }
@@ -137,28 +144,30 @@ P _readerSettingsDeserializeProp<P>(
     case 0:
       return (reader.readBoolOrNull(offset) ?? false) as P;
     case 1:
+      return (reader.readBoolOrNull(offset) ?? false) as P;
+    case 2:
       return (_ReaderSettingsdirectionValueEnumMap[
               reader.readByteOrNull(offset)] ??
           Direction.UTD) as P;
-    case 2:
+    case 3:
       return (_ReaderSettingsdualPageModeValueEnumMap[
               reader.readByteOrNull(offset)] ??
           DualPageMode.Auto) as P;
-    case 3:
-      return (reader.readBoolOrNull(offset) ?? false) as P;
     case 4:
       return (reader.readBoolOrNull(offset) ?? false) as P;
     case 5:
       return (reader.readBoolOrNull(offset) ?? false) as P;
     case 6:
+      return (reader.readBoolOrNull(offset) ?? false) as P;
+    case 7:
       return (_ReaderSettingslayoutTypeValueEnumMap[
               reader.readByteOrNull(offset)] ??
           LayoutType.Continuous) as P;
-    case 7:
-      return (reader.readBoolOrNull(offset) ?? true) as P;
     case 8:
       return (reader.readBoolOrNull(offset) ?? true) as P;
     case 9:
+      return (reader.readBoolOrNull(offset) ?? true) as P;
+    case 10:
       return (reader.readBoolOrNull(offset) ?? false) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -203,6 +212,16 @@ extension ReaderSettingsQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'changePageWithVolumeButtons',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<ReaderSettings, ReaderSettings, QAfterFilterCondition>
+      cropBordersEqualTo(bool value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'cropBorders',
         value: value,
       ));
     });

@@ -1,13 +1,17 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dartotsu/Functions/Extensions.dart';
+import 'package:dartotsu/Functions/ImageCropper.dart';
 import 'package:dartotsu/Preferences/IsarDataClasses/DefaultReaderSettings/DafaultReaderSettings.dart';
 import 'package:dartotsu/Widgets/ScrollConfig.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
@@ -204,37 +208,57 @@ class MediaReaderState extends State<MediaReader> {
           constraints: BoxConstraints(
             maxWidth: MediaQuery.of(context).size.width,
           ),
-          child: CachedNetworkImage(
-            imageUrl: page.url,
-            httpHeaders: page.headers,
-            fit: BoxFit.fitWidth,
-            errorWidget: (context, url, error) => Center(
-              child: SizedBox(
-                height: MediaQuery.of(context).size.height / 2,
-                width: double.infinity,
-                child: Center(
-                  child: Text(
-                    'Failed to load image \n $error',
-                    style: const TextStyle(
-                      color: Colors.red,
+          child: readerSettings.cropBorders
+              ? FutureBuilder<Uint8List>(
+                  future: _loadAndCropImage(page),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return SizedBox(
+                        height: MediaQuery.of(context).size.height / 2,
+                        child: const Center(child: CircularProgressIndicator()),
+                      );
+                    } else if (snapshot.hasError || !snapshot.hasData) {
+                      return CachedNetworkImage(
+                          imageUrl: page.url, httpHeaders: page.headers);
+                    }
+
+                    return Image.memory(
+                      snapshot.data!,
+                      fit: BoxFit.fitWidth,
+                    );
+                  },
+                )
+              : CachedNetworkImage(
+                  imageUrl: page.url,
+                  httpHeaders: page.headers,
+                  fit: BoxFit.fitWidth,
+                  errorWidget: (context, url, error) => Center(
+                    child: SizedBox(
+                      height: MediaQuery.of(context).size.height / 2,
+                      width: double.infinity,
+                      child: Center(
+                        child: Text(
+                          'Failed to load image \n $error',
+                          style: const TextStyle(
+                            color: Colors.red,
+                          ),
+                          maxLines: 3,
+                        ),
+                      ),
                     ),
-                    maxLines: 3,
                   ),
+                  progressIndicatorBuilder: (context, url, downloadProgress) {
+                    return SizedBox(
+                      height: MediaQuery.of(context).size.height / 2,
+                      width: double.infinity,
+                      child: Center(
+                        child: CircularProgressIndicator(
+                          value: downloadProgress.progress,
+                        ),
+                      ),
+                    );
+                  },
                 ),
-              ),
-            ),
-            progressIndicatorBuilder: (context, url, downloadProgress) {
-              return SizedBox(
-                height: MediaQuery.of(context).size.height / 2,
-                width: double.infinity,
-                child: Center(
-                  child: CircularProgressIndicator(
-                    value: downloadProgress.progress,
-                  ),
-                ),
-              );
-            },
-          ),
         ),
       ),
     );
@@ -293,5 +317,13 @@ class MediaReaderState extends State<MediaReader> {
     final x = (invertedMatrix[0] * point.dx) + (invertedMatrix[12]);
     final y = (invertedMatrix[5] * point.dy) + (invertedMatrix[13]);
     return Offset(x, y);
+  }
+
+  Future<Uint8List> _loadAndCropImage(PageUrl page) async {
+    var file = await DefaultCacheManager()
+        .getSingleFile(page.url, headers: page.headers);
+    var bytes = await file.readAsBytes();
+
+    return await compute(cropImageBorders, bytes);
   }
 }
