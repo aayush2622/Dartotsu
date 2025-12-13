@@ -6,8 +6,7 @@ import 'package:win32/win32.dart';
 
 const _hive = HKEY_CURRENT_USER;
 
-class WindowsProtocolHandler extends ProtocolHandler {
-  @override
+class WindowsProtocolHandler {
   void register(String scheme, {String? executable, List<String>? arguments}) {
     if (defaultTargetPlatform != TargetPlatform.windows) return;
 
@@ -27,7 +26,6 @@ class WindowsProtocolHandler extends ProtocolHandler {
     _regCreateStringKey(_hive, '$prefix\\shell\\open\\command', '', cmd);
   }
 
-  @override
   void unregister(String scheme) {
     if (defaultTargetPlatform != TargetPlatform.windows) return;
 
@@ -72,12 +70,6 @@ class WindowsProtocolHandler extends ProtocolHandler {
 
     return '"$value"';
   }
-}
-
-abstract class ProtocolHandler {
-  void register(String scheme, {String? executable, List<String>? arguments});
-
-  void unregister(String scheme);
 
   List<String> getArguments(List<String>? arguments) {
     if (arguments == null) return ['%s'];
@@ -88,4 +80,16 @@ abstract class ProtocolHandler {
 
     return arguments;
   }
+}
+
+void registerProtocolHandler(
+  String scheme, {
+  String? executable,
+  List<String>? arguments,
+}) {
+  WindowsProtocolHandler().register(
+    scheme,
+    executable: executable,
+    arguments: arguments,
+  );
 }

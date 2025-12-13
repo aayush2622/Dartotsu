@@ -1,53 +1,26 @@
-import 'package:collection/collection.dart';
-import 'package:dartotsu/Preferences/PrefManager.dart';
+import 'package:dartotsu/Functions/Functions/GetXFunctions.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import '../Theme/LanguageSwitcher.dart';
 import '../Widgets/CustomBottomDialog.dart';
 import '../Widgets/LoadSvg.dart';
 import 'MediaService.dart';
 
-class MediaServiceProvider with ChangeNotifier {
-  late MediaService _currentService;
-
-  MediaService get currentService => _currentService;
-
-  MediaServiceProvider() {
-    var preferredService = loadData(PrefName.source);
-    _currentService =
-        _findService(preferredService) ?? MediaService.allServices.first;
-  }
-
-  void switchService(String serviceName) {
-    var newService = _findService(serviceName);
-    if (newService != null) {
-      _currentService = newService;
-      saveData(PrefName.source, serviceName);
-      notifyListeners();
-    } else {
-      throw Exception("Service with name $serviceName not found");
-    }
-  }
-
-  MediaService? _findService(String serviceName) => MediaService.allServices
-      .firstWhereOrNull((s) => s.runtimeType.toString() == serviceName);
-}
-
 void serviceSwitcher(BuildContext context) {
-  List<MediaService> mediaServices = MediaService.allServices;
-  var provider = Provider.of<MediaServiceProvider>(context, listen: false);
-  var dialog = CustomBottomDialog(
+  final mediaServices = find<MediaServiceController>();
+
+  final dialog = CustomBottomDialog(
     title: getString.selectMediaService,
     viewList: [
       ListView.builder(
         shrinkWrap: true,
-        itemCount: mediaServices.length,
+        itemCount: mediaServices.services.length,
         itemBuilder: (context, index) {
-          MediaService service = mediaServices[index];
+          final service = mediaServices.services[index];
+
           return ListTile(
-            selected:
-                provider.currentService.runtimeType == service.runtimeType,
+            selected: mediaServices.currentService.value.runtimeType ==
+                service.runtimeType,
             contentPadding:
                 const EdgeInsets.symmetric(horizontal: 24.0, vertical: 4.0),
             leading: loadSvg(
@@ -65,7 +38,7 @@ void serviceSwitcher(BuildContext context) {
               ),
             ),
             onTap: () {
-              provider.switchService(service.runtimeType.toString());
+              mediaServices.switchService(service.runtimeType.toString());
               Navigator.pop(context);
             },
           );
@@ -73,5 +46,6 @@ void serviceSwitcher(BuildContext context) {
       ),
     ],
   );
+
   showCustomBottomDialog(context, dialog);
 }

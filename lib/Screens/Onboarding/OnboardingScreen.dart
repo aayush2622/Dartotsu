@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:dartotsu/Functions/Extensions.dart';
+import 'package:dartotsu/Functions/Extensions/IntExtensions.dart';
 import 'package:dartotsu/Theme/ThemeManager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';

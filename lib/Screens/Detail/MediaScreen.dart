@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:ui';
 
 import 'package:blur/blur.dart';
-import 'package:dartotsu/Functions/Extensions.dart';
+import 'package:dartotsu/Functions/Extensions/IntExtensions.dart';
 import 'package:dartotsu/Preferences/IsarDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
 import 'package:dartotsu/Preferences/IsarDataClasses/MediaSettings/MediaSettings.dart';
 import 'package:dartotsu/Screens/Detail/Tabs/Info/InfoPage.dart';
@@ -19,7 +19,7 @@ import '../../DataClass/Media.dart';
 import '../../Functions/Function.dart';
 import '../../Preferences/PrefManager.dart';
 import '../../Theme/LanguageSwitcher.dart';
-import '../../Theme/ThemeProvider.dart';
+import '../../Theme/ThemeController.dart';
 import '../../Widgets/CachedNetworkImage.dart';
 import '../../Widgets/ScrollConfig.dart';
 import 'MediaScreenViewModel.dart';

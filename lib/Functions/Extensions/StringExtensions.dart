@@ -11,17 +11,11 @@ extension StringExtensions on String {
     return split(pattern).last;
   }
 
-  double toDouble() {
-    return double.parse(this);
-  }
+  double toDouble() => double.parse(this);
 
-  int toInt() {
-    return int.parse(this);
-  }
+  int toInt() => int.parse(this);
 
-  int? toNullInt() {
-    return int.tryParse(this);
-  }
+  int? toNullInt() => int.tryParse(this);
 
   bool isEqualTo(String? other) {
     return this == other;

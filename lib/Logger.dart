@@ -116,12 +116,14 @@ class NativeLogger {
 
   static Future<void> startLogStream() async {
     if (!Platform.isAndroid) return;
-    _channel.setMethodCallHandler((call) async {
-      if (call.method == 'onLog') {
-        String log = call.arguments;
-        debugPrint("[NATIVE] $log");
-      }
-    });
+    _channel.setMethodCallHandler(
+      (call) async {
+        if (call.method == 'onLog') {
+          String log = call.arguments;
+          debugPrint("[NATIVE] $log");
+        }
+      },
+    );
     await _channel.invokeMethod('startLogs');
   }
 }

@@ -7,9 +7,9 @@ import 'package:dartotsu/Screens/Anime/Player/Widgets/SectionedRoundedRectSlider
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:dartotsu_extension_bridge/Models/Video.dart' as v;
 import 'package:dartotsu/DataClass/Media.dart' as m;
-import 'package:dartotsu/Functions/Extensions.dart';
+import 'package:dartotsu/Functions/Extensions/IntExtensions.dart';
 import 'package:dartotsu/Functions/Function.dart';
-import 'package:dartotsu/Functions/string_extensions.dart';
+import 'package:dartotsu/Functions/Extensions/StringExtensions.dart';
 import 'package:dartotsu/Preferences/IsarDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
 import 'package:dartotsu/Preferences/PrefManager.dart';
 import 'package:dartotsu/Theme/LanguageSwitcher.dart';

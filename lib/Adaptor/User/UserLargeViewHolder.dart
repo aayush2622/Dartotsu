@@ -3,7 +3,7 @@ import 'package:dartotsu/DataClass/User.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../Theme/ThemeProvider.dart';
+import '../../Theme/ThemeController.dart';
 import '../../Widgets/CachedNetworkImage.dart';
 
 class UserLargeViewHolder extends StatelessWidget {

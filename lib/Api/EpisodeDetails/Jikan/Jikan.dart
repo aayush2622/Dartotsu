@@ -12,14 +12,14 @@ class Jikan {
   static const String apiUrl = "https://api.jikan.moe/v4";
 
   static Future<Map<String, DEpisode>> getEpisodes(Media mediaData) async {
-    if (mediaData.idMAL == null) return {};
+    //if (mediaData.idMAL == null) return {};
     final Map<String, DEpisode> eps = {};
     int page = 0;
 
     while (true) {
       page++;
-      final response = await http.get(
-          Uri.parse('$apiUrl/anime/${mediaData.idMAL}/episodes?page=$page'));
+      final response = await http
+          .get(Uri.parse('$apiUrl/anime/${mediaData.id}/episodes?page=$page'));
 
       if (response.statusCode == 200) {
         final Map<String, dynamic> jsonResponse = jsonDecode(response.body);
@@ -34,8 +34,7 @@ class Jikan {
           eps[ep] = DEpisode(
             episodeNumber: ep,
             name: it.title,
-            filler:
-                mediaData.idMAL != 34566 ? it.filler : true, //legacy continues
+            filler: mediaData.id != 34566 ? it.filler : true, //legacy continues
           );
         }
 

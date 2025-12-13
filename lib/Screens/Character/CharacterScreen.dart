@@ -1,7 +1,7 @@
 import 'package:dartotsu/Adaptor/Charactes/Widgets/EntitySection.dart';
 import 'package:dartotsu/Adaptor/Media/Widgets/MediaSection.dart';
 import 'package:dartotsu/DataClass/Character.dart';
-import 'package:dartotsu/Theme/ThemeProvider.dart';
+import 'package:dartotsu/Theme/ThemeController.dart';
 import 'package:dartotsu/Widgets/CachedNetworkImage.dart';
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';

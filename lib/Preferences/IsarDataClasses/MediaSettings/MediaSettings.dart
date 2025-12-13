@@ -1,12 +1,13 @@
 import 'dart:convert';
 
 import 'package:dartotsu/DataClass/Media.dart';
-import 'package:dartotsu/Functions/Extensions.dart';
 import 'package:dartotsu/Preferences/IsarDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
 import 'package:dartotsu/Preferences/IsarDataClasses/DefaultReaderSettings/DafaultReaderSettings.dart';
 import 'package:dartotsu/Preferences/PrefManager.dart';
-import 'package:get/get.dart';
+import 'package:dartotsu/Services/MediaService.dart';
 import 'package:isar_community/isar.dart';
+
+import '../../../Functions/Functions/GetXFunctions.dart';
 
 part 'MediaSettings.g.dart';
 
@@ -101,7 +102,7 @@ class MediaSettings {
   }
 
   static void saveMediaSettings(Media media) {
-    var service = Get.context!.currentService(listen: false);
+    var service = find<MediaServiceController>().currentService.value;
     var key = "${service.getName}-${media.id}-Settings";
     saveCustomData(key, media.settings);
   }

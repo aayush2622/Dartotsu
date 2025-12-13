@@ -19,11 +19,9 @@ dependencies:
     sdk: flutter
   async: ^2.13.0
   # State Management
-  provider: ^6.1.5
   get: ^4.7.2
 
   # Networking
-  shorebird_code_push: ^2.0.4
   http: ^1.4.0
   web_socket_channel: ^3.0.3
   http_interceptor: ^2.0.0

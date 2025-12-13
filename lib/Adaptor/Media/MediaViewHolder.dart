@@ -31,7 +31,7 @@ class MediaViewHolder extends StatelessWidget {
           _buildRelationRow(theme),
         const SizedBox(height: 8),
         _buildMediaTitle(isSkeleton),
-        if (mediaInfo.minimal != true && mediaInfo.mal != true) ...[
+        if (mediaInfo.minimal != true) ...[
           const SizedBox(height: 2),
           _buildProgressInfo(theme),
         ],
@@ -123,7 +123,7 @@ class MediaViewHolder extends StatelessWidget {
     return SizedBox(
       width: 108,
       child: Text(
-        isSkeleton ? 'Loading title' : mediaInfo.userPreferredName,
+        isSkeleton ? 'Loading title' : mediaInfo.mainName,
         style: const TextStyle(
           fontFamily: 'Poppins',
           fontSize: 14,

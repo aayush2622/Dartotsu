@@ -19,7 +19,6 @@ extension on AnilistQueries {
       media.popularity = fetchedMedia.popularity;
       media.startDate = fetchedMedia.startDate;
       media.endDate = fetchedMedia.endDate;
-      media.streamingEpisodes = fetchedMedia.streamingEpisodes;
       media.shareLink = fetchedMedia.siteUrl;
       if (fetchedMedia.genres != null) {
         media.genres = fetchedMedia.genres?.toList() ?? [];
@@ -57,11 +56,12 @@ extension on AnilistQueries {
                 gender: node.gender,
                 voiceActor: (i.voiceActors?.map((voiceActor) {
                       return author(
-                          id: voiceActor.id,
-                          name: voiceActor.name?.userPreferred,
-                          image: voiceActor.image?.large,
-                          role: voiceActor.languageV2,
-                          character: voiceActor.characters?.nodes);
+                        id: voiceActor.id,
+                        name: voiceActor.name?.userPreferred,
+                        image: voiceActor.image?.large,
+                        role: voiceActor.languageV2,
+                        character: voiceActor.characters?.nodes,
+                      );
                     }).toList()) ??
                     [],
               ),
@@ -221,12 +221,6 @@ extension on AnilistQueries {
             case "youtube":
               media.anime!.youtube = link.url;
               break;
-            case "crunchyroll":
-              media.crunchySlug = link.url?.split("/").elementAtOrNull(3);
-              break;
-            case "vrv":
-              media.vrvId = link.url?.split("/").elementAtOrNull(4);
-              break;
           }
         });
       } else if (media.manga != null) {
@@ -267,12 +261,6 @@ String _queryMedia(Media media) => '''{
     popularity
     episodes
     chapters
-    streamingEpisodes {
-      title
-      thumbnail
-      url
-      site
-    }
     mediaListEntry {
       id
       status

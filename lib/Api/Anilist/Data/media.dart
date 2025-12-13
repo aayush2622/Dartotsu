@@ -54,7 +54,6 @@ class Media {
   bool? isAdult;
   AiringSchedule? nextAiringEpisode;
   List<MediaExternalLink>? externalLinks;
-  List<MediaStreamingEpisode>? streamingEpisodes;
   MediaList? mediaListEntry;
   ReviewConnection? reviews;
   RecommendationConnection? recommendations;
@@ -107,7 +106,6 @@ class Media {
     this.isAdult,
     this.nextAiringEpisode,
     this.externalLinks,
-    this.streamingEpisodes,
     this.mediaListEntry,
     this.reviews,
     this.recommendations,
@@ -175,26 +173,6 @@ class AiringSchedule {
       _$AiringScheduleFromJson(json);
 
   Map<String, dynamic> toJson() => _$AiringScheduleToJson(this);
-}
-
-@JsonSerializable()
-class MediaStreamingEpisode {
-  String? title;
-  String? thumbnail;
-  String? url;
-  String? site;
-
-  MediaStreamingEpisode({
-    this.title,
-    this.thumbnail,
-    this.url,
-    this.site,
-  });
-
-  factory MediaStreamingEpisode.fromJson(Map<String, dynamic> json) =>
-      _$MediaStreamingEpisodeFromJson(json);
-
-  Map<String, dynamic> toJson() => _$MediaStreamingEpisodeToJson(this);
 }
 
 @JsonSerializable()

@@ -1,5 +1,5 @@
 import 'package:blur/blur.dart';
-import 'package:dartotsu/Functions/Extensions.dart';
+import 'package:dartotsu/Functions/Extensions/IntExtensions.dart';
 import 'package:dartotsu/Theme/LanguageSwitcher.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -13,7 +13,7 @@ import '../../Services/BaseServiceData.dart';
 import '../../Services/MediaService.dart';
 import '../../Services/Screens/BaseHomeScreen.dart';
 import '../../Services/ServiceSwitcher.dart';
-import '../../Theme/ThemeProvider.dart';
+import '../../Theme/ThemeController.dart';
 import '../../Widgets/CachedNetworkImage.dart';
 import '../../Widgets/CustomBottomDialog.dart';
 import '../../Widgets/LoadSvg.dart';

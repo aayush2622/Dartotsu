@@ -1,11 +1,11 @@
-import 'package:dartotsu/Functions/string_extensions.dart';
+import 'package:dartotsu/Functions/Extensions/StringExtensions.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../DataClass/Media.dart';
 import '../../Theme/Colors.dart';
-import '../../Theme/ThemeProvider.dart';
+import '../../Theme/ThemeController.dart';
 import 'Widget/HandleProgress.dart';
 
 class EpisodeCompactView extends StatelessWidget {

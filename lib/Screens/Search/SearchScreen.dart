@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:dartotsu/Functions/Extensions.dart';
+import 'package:dartotsu/Functions/Extensions/IntExtensions.dart';
 import 'package:dartotsu/Functions/Function.dart';
 import 'package:dartotsu/Preferences/PrefManager.dart';
 import 'package:dartotsu/Services/Screens/BaseSearchScreen.dart';
@@ -13,7 +13,7 @@ import '../../Adaptor/Media/MediaAdaptor.dart';
 import '../../DataClass/SearchResults.dart';
 import '../../Services/MediaService.dart';
 import '../../Theme/Colors.dart';
-import '../../Theme/ThemeProvider.dart';
+import '../../Theme/ThemeController.dart';
 import '../../Widgets/ScrollConfig.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -150,7 +150,7 @@ class SearchScreenState extends State<SearchScreen> {
                             ? MediaAdaptor(
                                 type: screen.type.value,
                                 mediaList: null,
-                                skeletonObjects: 4 ,
+                                skeletonObjects: 4,
                               )
                             : const SizedBox(height: 64),
                     ],

@@ -1,6 +1,6 @@
 import 'package:dartotsu/DataClass/Media.dart';
 import 'package:dartotsu/Functions/Function.dart';
-import 'package:dartotsu/Functions/string_extensions.dart';
+import 'package:dartotsu/Functions/Extensions/StringExtensions.dart';
 import 'package:dartotsu/Services/Api/Mutations.dart';
 import 'package:flutter/cupertino.dart';
 

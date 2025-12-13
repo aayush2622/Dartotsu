@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ui';
 
 import 'package:dartotsu/Theme/ThemeManager.dart';
 import 'package:flutter/material.dart';
@@ -85,32 +86,31 @@ Future<void> snackString(
         behavior: SnackBarBehavior.floating,
         margin: const EdgeInsets.symmetric(horizontal: 12),
         elevation: 0,
-        content:
-            ThemedContainer(
-              context: context,
-              child: GestureDetector(
-                onTap: () => scaffoldMessenger.hideCurrentSnackBar(),
-                onLongPress: () => copyToClipboard(clipboard ?? s),
-                child: Text(
-                  s,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontFamily: 'Poppins',
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.w600,
-                    color: theme.onSurface,
-                  ),
-                ),
+        content: ThemedContainer(
+          context: context,
+          child: GestureDetector(
+            onTap: () => scaffoldMessenger.hideCurrentSnackBar(),
+            onLongPress: () => copyToClipboard(clipboard ?? s),
+            child: Text(
+              s,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontFamily: 'Poppins',
+                fontSize: 16.0,
+                fontWeight: FontWeight.w600,
+                color: theme.onSurface,
               ),
-            ).animate(
-              effects: [
-                const SlideEffect(
-                  begin: Offset(0, 1),
-                  end: Offset.zero,
-                  duration: Duration(milliseconds: 200),
-                ),
-              ],
             ),
+          ),
+        ).animate(
+          effects: [
+            const SlideEffect(
+              begin: Offset(0, 1),
+              end: Offset.zero,
+              duration: Duration(milliseconds: 200),
+            ),
+          ],
+        ),
       );
 
       scaffoldMessenger.showSnackBar(snackBar);
@@ -156,16 +156,56 @@ Future<void> openLinkInBrowser(String url) async {
 }
 
 void navigateToPage(BuildContext context, Widget page, {bool header = true}) {
-  Navigator.push(context, MaterialPageRoute(builder: (context) => page));
+  Navigator.of(context).push(
+    PageRouteBuilder(
+      transitionDuration: const Duration(milliseconds: 580),
+      reverseTransitionDuration: const Duration(milliseconds: 480),
+      pageBuilder: (_, animation, secondaryAnimation) => page,
+      transitionsBuilder: (_, animation, secondaryAnimation, child) {
+        final curved = CurvedAnimation(
+          parent: animation,
+          curve: Curves.easeOutExpo,
+          reverseCurve: Curves.easeInExpo,
+        );
+
+        return AnimatedBuilder(
+          animation: curved,
+          builder: (context, _) {
+            final blur = (1 - curved.value) * 8;
+            final slideX = (1 - curved.value) * 80;
+            final angle = (1 - curved.value) * 0.12;
+            final opacity = curved.value;
+            return Opacity(
+              opacity: opacity,
+              child: Transform(
+                alignment: Alignment.center,
+                transform: Matrix4.identity()
+                  ..translate(slideX)
+                  ..rotateY(angle),
+                child: ImageFiltered(
+                  imageFilter: ImageFilter.blur(
+                    sigmaX: blur,
+                    sigmaY: blur,
+                  ),
+                  child: child,
+                ),
+              ),
+            );
+          },
+        );
+      },
+    ),
+  );
 }
 
 void shareLink(String link) => SharePlus.instance.share(
-  ShareParams(uri: Uri.parse(link), downloadFallbackEnabled: true),
-);
+      ShareParams(uri: Uri.parse(link), downloadFallbackEnabled: true),
+    );
 
 void shareFile(String path, String text) => SharePlus.instance.share(
-  ShareParams(text: text, files: [XFile(path)], downloadFallbackEnabled: true),
-);
+      ShareParams(
+          text: text, files: [XFile(path)], downloadFallbackEnabled: true),
+    );
 
 List<T> mergeMapValues<T>(Map<String, List<T>> dataMap) {
   final Set<T> uniqueItems = {};

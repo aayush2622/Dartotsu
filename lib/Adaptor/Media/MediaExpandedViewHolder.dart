@@ -29,7 +29,7 @@ class MediaExpandedViewHolder extends StatelessWidget {
         if (isLarge && mediaInfo.relation != null) _buildRelationRow(theme),
         const SizedBox(height: 8),
         _buildMediaTitle(),
-        if (mediaInfo.minimal != true && mediaInfo.mal != true) ...[
+        if (mediaInfo.minimal != true) ...[
           const SizedBox(height: 2),
           _buildProgressInfo(theme),
         ],

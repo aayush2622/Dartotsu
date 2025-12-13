@@ -8,7 +8,7 @@ import '../../Adaptor/Settings/SettingsAdaptor.dart';
 import '../../DataClass/Setting.dart';
 import '../../Theme/CustomColorPicker.dart';
 import '../../Theme/ThemeManager.dart';
-import '../../Theme/ThemeProvider.dart';
+import '../../Theme/ThemeController.dart';
 
 class SettingsThemeScreen extends StatefulWidget {
   const SettingsThemeScreen({super.key});

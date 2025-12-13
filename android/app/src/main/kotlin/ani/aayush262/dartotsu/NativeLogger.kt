@@ -25,21 +25,28 @@ class NativeLogger : FlutterPlugin {
 
     private fun startLogStreaming() {
         if (logThread != null) return
+
+        val pid = android.os.Process.myPid()
+
         logThread = Thread {
             try {
-                val process = Runtime.getRuntime().exec("logcat -v time")
+                val cmd = "logcat --pid=$pid -v time"
+                val process = Runtime.getRuntime().exec(cmd)
+
                 val reader = BufferedReader(InputStreamReader(process.inputStream))
                 var line: String?
+
                 while (reader.readLine().also { line = it } != null) {
                     channel.invokeMethod("onLog", line)
                 }
+
             } catch (e: Exception) {
                 Log.e("NativeLogger", "Error reading logcat", e)
             }
         }
+
         logThread?.start()
     }
-
     override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {
         logThread?.interrupt()
         logThread = null

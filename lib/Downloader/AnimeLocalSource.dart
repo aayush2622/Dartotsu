@@ -2,10 +2,11 @@ import 'dart:io';
 
 import 'package:collection/collection.dart';
 import 'package:dartotsu/Downloader/Util/EpisodeRecognition.dart';
-import 'package:dartotsu/Functions/string_extensions.dart';
 import 'package:dartotsu/Preferences/PrefManager.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:fuzzywuzzy/fuzzywuzzy.dart';
+
+import '../Functions/Extensions/StringExtensions.dart';
 
 class AnimeLocalSource extends Source implements HasSourceMethods {
   AnimeLocalSource() : super();

@@ -7,7 +7,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import '../../Functions/Function.dart';
 import '../../Preferences/PrefManager.dart';
 import '../../Widgets/CustomElevatedButton.dart';
-import '../../logger.dart';
+import '../../Logger.dart';
 
 class ErrorScreen extends StatefulWidget {
   final String error;

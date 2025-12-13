@@ -1,10 +1,13 @@
 import 'package:blurbox/blurbox.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_instance/src/extension_instance.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
+import '../Functions/Functions/GetXFunctions.dart';
 import '../Widgets/DropdownMenu.dart';
 import 'Colors.dart';
-import 'ThemeProvider.dart';
+import 'ThemeController.dart';
 import 'Themes/blue.dart';
 import 'Themes/fromCode.dart';
 import 'Themes/green.dart';
@@ -17,13 +20,14 @@ import 'Themes/purple.dart';
 import 'Themes/red.dart';
 import 'Themes/saikou.dart';
 
-ThemeData getTheme(ColorScheme? material, ThemeNotifier themeManager) {
-  final isOled = themeManager.isOled;
-  final theme = themeManager.theme;
-  final useMaterial = themeManager.useMaterialYou;
-  final useCustomColor = themeManager.useCustomColor;
-  final customColor = themeManager.customColor;
-  final isDarkMode = themeManager.isDarkMode;
+ThemeData getTheme(ColorScheme? material, ThemeController themeManager) {
+  final isOled = themeManager.isOled.value;
+  final theme = themeManager.theme.value;
+  final useMaterial = themeManager.useMaterialYou.value;
+  final useCustomColor = themeManager.useCustomColor.value;
+  final customColor = themeManager.customColor.value;
+  final isDarkMode = themeManager.isDarkMode.value;
+
   ThemeData baseTheme;
 
   switch (theme) {
@@ -54,24 +58,23 @@ ThemeData getTheme(ColorScheme? material, ThemeNotifier themeManager) {
     case 'ocean':
       baseTheme = isDarkMode ? oceanDarkTheme : oceanLightTheme;
       break;
-    /*case AppTheme.monochrome:
-      baseTheme = isDarkMode ? monochromeDarkTheme : monochromeLightTheme;
-      break;*/
     default:
       baseTheme = isDarkMode ? purpleDarkTheme : purpleLightTheme;
-      break;
   }
 
   if (useMaterial && material != null) {
     baseTheme =
         isDarkMode ? materialThemeDark(material) : materialThemeLight(material);
   }
+
   if (useCustomColor) {
     baseTheme = isDarkMode
         ? getCustomDarkTheme(customColor)
         : getCustomLightTheme(customColor);
   }
-  var fontFamily = "Poppins";
+
+  const fontFamily = "Poppins";
+
   return baseTheme.copyWith(
     scaffoldBackgroundColor:
         isOled ? Colors.black : baseTheme.scaffoldBackgroundColor,
@@ -130,8 +133,9 @@ ThemeData getTheme(ColorScheme? material, ThemeNotifier themeManager) {
   );
 }
 
-Widget themeDropdown(BuildContext context) {
-  final themeNotifier = Provider.of<ThemeNotifier>(context);
+Widget themeDropdown() {
+  final controller = find<ThemeController>();
+
   final themeOptions = [
     'blue',
     'green',
@@ -143,25 +147,30 @@ Widget themeDropdown(BuildContext context) {
     'lavender',
     'ocean'
   ];
-  return buildDropdownMenu(
-    padding: const EdgeInsets.symmetric(vertical: 12.0),
-    currentValue: themeNotifier.theme.toUpperCase(),
-    options: themeOptions.map((e) => e.toUpperCase()).toList(),
-    onChanged: (String newValue) =>
-        themeNotifier.setTheme(newValue.toLowerCase()),
-    prefixIcon: Icons.color_lens,
-  );
+
+  return Obx(() {
+    return buildDropdownMenu(
+      padding: const EdgeInsets.symmetric(vertical: 12.0),
+      currentValue: controller.theme.value.toUpperCase(),
+      options: themeOptions.map((e) => e.toUpperCase()).toList(),
+      onChanged: (String newValue) =>
+          controller.setTheme(newValue.toLowerCase()),
+      prefixIcon: Icons.color_lens,
+    );
+  });
 }
 
 Widget ThemedWidget({
-  required BuildContext context,
   required Widget materialWidget,
   Widget? glassWidget,
 }) {
-  var themeManager = Provider.of<ThemeNotifier>(context);
-  final isGlassMode = themeManager.useGlassMode;
+  final controller = Get.find<ThemeController>();
 
-  return isGlassMode ? glassWidget ?? materialWidget : materialWidget;
+  return Obx(() {
+    return controller.useGlassMode.value
+        ? glassWidget ?? materialWidget
+        : materialWidget;
+  });
 }
 
 Widget ThemedContainer({
@@ -173,55 +182,58 @@ Widget ThemedContainer({
   EdgeInsetsGeometry? padding,
   AlignmentGeometry? alignment,
 }) {
-  final themeManager = Provider.of<ThemeNotifier>(context, listen: false);
-  final isGlassMode = themeManager.useGlassMode;
+  final controller = find<ThemeController>();
   final theme = Theme.of(context).colorScheme;
 
-  final effectiveBorderRadius = borderRadius ?? BorderRadius.circular(64);
-  final effectivePadding = padding ?? const EdgeInsets.all(8);
+  return Obx(() {
+    final isGlassMode = controller.useGlassMode.value;
 
-  if (isGlassMode) {
-    return BlurBox(
-      blur: 12.0,
-      alignment: alignment,
+    final effectiveBorderRadius = borderRadius ?? BorderRadius.circular(64);
+    final effectivePadding = padding ?? const EdgeInsets.all(8);
+
+    if (isGlassMode) {
+      return BlurBox(
+        blur: 12.0,
+        alignment: alignment,
+        padding: effectivePadding,
+        color: theme.surfaceContainerLow.withOpacity(0.2),
+        border: border ??
+            Border.all(
+              color: theme.onSurface.withOpacity(0.2),
+              width: 0.5,
+            ),
+        borderRadius: effectiveBorderRadius,
+        boxShadow: [
+          BoxShadow(
+            color: theme.surface.withOpacity(0.2),
+            blurRadius: 6.0,
+            spreadRadius: 0.5,
+          ),
+        ],
+        child: glassWidget ?? child,
+      );
+    }
+
+    return Container(
       padding: effectivePadding,
-      color: theme.surfaceContainerLow.withOpacity(0.2),
-      border: border ??
-          Border.all(
-            color: theme.onSurface.withOpacity(0.2),
-            width: 0.5,
+      alignment: alignment,
+      decoration: BoxDecoration(
+        color: theme.surfaceContainerLow,
+        border: border ??
+            Border.all(
+              color: theme.onSurface.withOpacity(0.6),
+              width: 0.5,
+            ),
+        borderRadius: effectiveBorderRadius,
+        boxShadow: [
+          BoxShadow(
+            color: theme.shadow.withOpacity(0.1),
+            blurRadius: 20,
+            offset: const Offset(0, 6),
           ),
-      borderRadius: effectiveBorderRadius,
-      boxShadow: [
-        BoxShadow(
-          color: theme.surface.withOpacity(0.2),
-          blurRadius: 6.0,
-          spreadRadius: 0.5,
-        ),
-      ],
-      child: glassWidget ?? child,
+        ],
+      ),
+      child: child,
     );
-  }
-
-  return Container(
-    padding: effectivePadding,
-    alignment: alignment,
-    decoration: BoxDecoration(
-      color: theme.surfaceContainerLow,
-      border: border ??
-          Border.all(
-            color: theme.onSurface.withOpacity(0.6),
-            width: 0.5,
-          ),
-      borderRadius: effectiveBorderRadius,
-      boxShadow: [
-        BoxShadow(
-          color: theme.shadow.withOpacity(0.1),
-          blurRadius: 20,
-          offset: const Offset(0, 6),
-        ),
-      ],
-    ),
-    child: child,
-  );
+  });
 }

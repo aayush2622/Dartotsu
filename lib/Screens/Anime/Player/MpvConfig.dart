@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:dartotsu/Preferences/PrefManager.dart';
-import 'package:dartotsu/logger.dart';
+import 'package:dartotsu/Logger.dart';
 
 class MpvConf {
   static final shaderProfiles = {

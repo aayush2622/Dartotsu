@@ -2,14 +2,12 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:ui';
 
-import 'package:app_links/app_links.dart';
 import 'package:dartotsu/Api/Updater/AppUpdater.dart';
-import 'package:dartotsu/Functions/Extensions.dart';
+import 'package:dartotsu/Functions/Extensions/IntExtensions.dart';
 import 'package:dartotsu/Functions/Function.dart';
 import 'package:dartotsu/Screens/Anime/Player/MpvConfig.dart';
 import 'package:dartotsu/Screens/Login/LoginScreen.dart';
 import 'package:dartotsu/Screens/Manga/MangaScreen.dart';
-import 'package:dartotsu/Screens/Settings/SettingsPlayerScreen.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:desktop_webview_window/desktop_webview_window.dart';
 import 'package:dpad/dpad.dart';
@@ -23,15 +21,13 @@ import 'package:get/get.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:media_kit/media_kit.dart';
-import 'package:provider/provider.dart';
-import 'package:receive_sharing_intent/receive_sharing_intent.dart';
-import 'package:shorebird_code_push/shorebird_code_push.dart';
 import 'package:window_manager/window_manager.dart';
-import 'DataClass/Media.dart' as m;
+import 'Functions/Functions/DeepLink.dart';
+import 'Functions/Functions/GetXFunctions.dart';
+import 'Services/Model/Media.dart' as m;
 import 'Adaptors/Media/MediaAdaptor.dart';
 import 'Api/Discord/Discord.dart';
 import 'Api/TypeFactory.dart';
-import 'Functions/RegisterProtocol/Api.dart';
 import 'Preferences/PrefManager.dart';
 import 'Screens/Anime/AnimeScreen.dart';
 import 'Screens/Error/ErrorScreen.dart';
@@ -41,15 +37,17 @@ import 'Screens/HomeNavbarDesktop.dart';
 import 'Screens/HomeNavbarMobile.dart';
 import 'Screens/Onboarding/OnboardingScreen.dart';
 import 'Services/MediaService.dart';
-import 'Services/ServiceSwitcher.dart';
 import 'Theme/ThemeManager.dart';
-import 'Theme/ThemeProvider.dart';
+import 'Theme/ThemeController.dart';
 import 'Widgets/CachedNetworkImage.dart';
 import 'l10n/app_localizations.dart';
-import 'logger.dart';
+import 'Logger.dart';
 
-final FocusNode mainFocusNode = FocusNode();
+// test glass background switch
+// test theme switcher
+// test service switcher
 
+// refractor MediaSettings
 void main(List<String> args) async {
   runZonedGuarded(
     () async {
@@ -78,12 +76,9 @@ void main(List<String> args) async {
 
       await init();
       runApp(
-        MultiProvider(
-          providers: [
-            ChangeNotifierProvider(create: (_) => ThemeNotifier()),
-            ChangeNotifierProvider(create: (_) => MediaServiceProvider()),
-          ],
-          child: const DpadNavigator(enabled: true, child: MyApp()),
+        const DpadNavigator(
+          enabled: true,
+          child: MyApp(),
         ),
       );
     },
@@ -100,20 +95,14 @@ void main(List<String> args) async {
 }
 
 Future init() async {
-  if (Platform.isWindows) {
-    [
-      'dar',
-      'anymex',
-      'sugoireads',
-      'mangayomi',
-    ].forEach(registerProtocolHandler);
-  }
   await PrefManager.init();
   await DartotsuExtensionBridge().init(PrefManager.isar, "Dartotsu");
   await Logger.init();
   await MpvConf.init();
-  MediaService.init();
+  put(MediaServiceController()..init());
+  put(ThemeController());
   TypeFactory.init();
+  DeepLink.init();
   MediaKit.ensureInitialized();
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
     await WindowManager.instance.ensureInitialized();
@@ -125,85 +114,6 @@ Future init() async {
   }
   AppUpdater().checkForUpdate();
   Discord.getSavedToken();
-  initDeepLinkListener();
-  initIntentListener();
-}
-
-void initIntentListener() async {
-  if (!Platform.isAndroid) return;
-
-  final intent = ReceiveSharingIntent.instance;
-
-  void handleFiles(List<SharedMediaFile> files) {
-    if (files.isEmpty) return;
-
-    openPlayer(Get.context!, files.map((e) => e.path).toList());
-  }
-
-  intent.getMediaStream().listen(handleFiles);
-
-  final initialFiles = await intent.getInitialMedia();
-  if (initialFiles.isNotEmpty) {
-    WidgetsBinding.instance.addPostFrameCallback(
-      (_) => handleFiles(initialFiles),
-    );
-    await intent.reset();
-  }
-}
-
-void initDeepLinkListener() async {
-  final appLink = AppLinks();
-  try {
-    final initialUri = await appLink.getInitialLink();
-    if (initialUri != null) handleDeepLink(initialUri);
-  } catch (err) {
-    snackString('Error getting initial deep link: $err');
-  }
-
-  appLink.uriLinkStream.listen(
-    (uri) => handleDeepLink(uri),
-    onError: (err) => snackString('Error Opening link: $err'),
-  );
-}
-
-void handleDeepLink(Uri uri) {
-  if (uri.host != "add-repo") return;
-
-  final scheme = uri.scheme.toLowerCase();
-  bool isRepoAdded = false;
-
-  const mangayomiSchemes = {"dar", "anymex", "sugoireads", "mangayomi"};
-  const aniyomiSchemes = {"aniyomi", "tachiyomi"};
-  if (mangayomiSchemes.contains(scheme)) {
-    var manager = ExtensionType.mangayomi.getManager();
-    final repoMap = {
-      ItemType.anime:
-          uri.queryParameters["anime_url"] ?? uri.queryParameters["url"],
-      ItemType.manga: uri.queryParameters["manga_url"],
-      ItemType.novel: uri.queryParameters["novel_url"],
-    };
-    repoMap.forEach((type, url) {
-      if (url != null && url.isNotEmpty) {
-        manager.onRepoSaved([url], type);
-        isRepoAdded = true;
-      }
-    });
-  } else if (aniyomiSchemes.contains(scheme)) {
-    var manager = ExtensionType.aniyomi.getManager();
-    final url = uri.queryParameters["url"];
-    if (url != null && url.isNotEmpty) {
-      manager.onRepoSaved([
-        url,
-      ], scheme == "aniyomi" ? ItemType.anime : ItemType.manga);
-      isRepoAdded = true;
-    }
-  }
-
-  snackString(
-    isRepoAdded
-        ? "Added Repo Links Successfully!"
-        : "Missing or invalid parameters in the link.",
-  );
 }
 
 class MyApp extends StatelessWidget {
@@ -211,8 +121,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themeManager = Provider.of<ThemeNotifier>(context);
-    final isDarkMode = themeManager.isDarkMode;
+    final theme = find<ThemeController>();
+
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
@@ -220,6 +130,7 @@ class MyApp extends StatelessWidget {
         systemNavigationBarDividerColor: Colors.transparent,
       ),
     );
+
     return Listener(
       onPointerDown: (event) {
         if (event.buttons == kBackMouseButton) {
@@ -233,77 +144,110 @@ class MyApp extends StatelessWidget {
             if (event.logicalKey == LogicalKeyboardKey.escape) {
               if (Navigator.canPop(Get.context!)) Get.back();
             } else if (event.logicalKey == LogicalKeyboardKey.f11) {
-              bool isFullScreen = await windowManager.isFullScreen();
+              final isFullScreen = await windowManager.isFullScreen();
               windowManager.setFullScreen(!isFullScreen);
             } else if (event.logicalKey == LogicalKeyboardKey.enter) {
-              final isAltPressed =
-                  HardwareKeyboard.instance.logicalKeysPressed.contains(
-                        LogicalKeyboardKey.altLeft,
-                      ) ||
-                      HardwareKeyboard.instance.logicalKeysPressed.contains(
-                        LogicalKeyboardKey.altRight,
-                      );
+              final isAltPressed = HardwareKeyboard.instance.logicalKeysPressed
+                      .contains(LogicalKeyboardKey.altLeft) ||
+                  HardwareKeyboard.instance.logicalKeysPressed
+                      .contains(LogicalKeyboardKey.altRight);
+
               if (isAltPressed) {
-                bool isFullScreen = await windowManager.isFullScreen();
+                final isFullScreen = await windowManager.isFullScreen();
                 windowManager.setFullScreen(!isFullScreen);
               }
-            } else if (event.logicalKey == LogicalKeyboardKey.keyG) {
-              var theme = Provider.of<ThemeNotifier>(context, listen: false);
-              if (theme.useGlassMode) {
-                await theme.setGlassEffect(false);
-                snackString('Glass effect disabled');
-              } else {
-                await theme.setGlassEffect(true);
-                snackString('Glass effect enabled');
-              }
-            } else if (event.logicalKey == LogicalKeyboardKey.keyM) {
-              var theme = Provider.of<ThemeNotifier>(context, listen: false);
-              if (theme.useMaterialYou) {
-                await theme.setMaterialYou(false);
-                snackString('Material You disabled');
-              } else {
-                await theme.setMaterialYou(true);
-                snackString('Material You enabled');
-              }
-            } else if (event.logicalKey == LogicalKeyboardKey.keyD) {
-              var theme = Provider.of<ThemeNotifier>(context, listen: false);
-              if (theme.isDarkMode) {
-                await theme.setDarkMode(false);
-                snackString('Dark mode disabled');
-              } else {
-                await theme.setDarkMode(true);
-                snackString('Dark mode enabled');
-              }
+            }
+
+            if (event.logicalKey == LogicalKeyboardKey.keyG) {
+              theme.useGlassMode.value
+                  ? await theme.setGlassEffect(false)
+                  : await theme.setGlassEffect(true);
+
+              snackString(
+                theme.useGlassMode.value
+                    ? 'Glass effect enabled'
+                    : 'Glass effect disabled',
+              );
+            }
+
+            if (event.logicalKey == LogicalKeyboardKey.keyM) {
+              theme.useMaterialYou.value
+                  ? await theme.setMaterialYou(false)
+                  : await theme.setMaterialYou(true);
+
+              snackString(
+                theme.useMaterialYou.value
+                    ? 'Material You enabled'
+                    : 'Material You disabled',
+              );
+            }
+
+            if (event.logicalKey == LogicalKeyboardKey.keyD) {
+              theme.isDarkMode.value
+                  ? await theme.setDarkMode(false)
+                  : await theme.setDarkMode(true);
+
+              snackString(
+                theme.isDarkMode.value
+                    ? 'Dark mode enabled'
+                    : 'Dark mode disabled',
+              );
             }
           }
         },
         child: DynamicColorBuilder(
           builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
-            return GetMaterialApp(
-              localizationsDelegates: const [
-                AppLocalizations.delegate,
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-                GlobalCupertinoLocalizations.delegate,
-              ],
-              supportedLocales: AppLocalizations.supportedLocales,
-              locale: Locale(loadData(PrefName.defaultLanguage)),
-              title: 'Dartotsu',
-              themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
-              debugShowCheckedModeBanner: false,
-              enableLog: true,
-              logWriterCallback: (text, {isError = false}) async {
-                Logger.log(text);
-                if (isError) {
-                  debugPrint(text);
-                }
-              },
-              theme: getTheme(lightDynamic, themeManager),
-              darkTheme: getTheme(darkDynamic, themeManager),
-              home: !loadCustomData("initialLoaded", defaultValue: false)!
-                  ? const MainScreen()
-                  : const OnboardingScreen(),
-            );
+            return Obx(() {
+              final isDark = theme.isDarkMode.value;
+              return GetMaterialApp(
+                localizationsDelegates: const [
+                  AppLocalizations.delegate,
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate,
+                ],
+                supportedLocales: AppLocalizations.supportedLocales,
+                locale: Locale(loadData(PrefName.defaultLanguage)),
+                title: 'Dartotsu',
+                themeMode: isDark ? ThemeMode.dark : ThemeMode.light,
+                debugShowCheckedModeBanner: false,
+                enableLog: true,
+                logWriterCallback: (text, {isError = false}) async {
+                  Logger.log(text);
+                  if (isError) debugPrint(text);
+                },
+                theme: getTheme(lightDynamic, theme),
+                darkTheme: getTheme(darkDynamic, theme),
+                home: !loadCustomData("initialLoaded", defaultValue: false)!
+                    ? Scaffold(
+                        body: Column(
+                          children: [
+                            const DpadFocusable(
+                              autofocus: true,
+                              child: Text('Testing'),
+                            ),
+                            MediaAdaptor(
+                              data: MediaAdaptorData(
+                                type: 0,
+                                title: "",
+                                trailingIcon: Icons.arrow_forward_ios_rounded,
+                                onTrailingIconTap: () =>
+                                    snackString('Trailing icon tapped'),
+                                onLoadMore: () async {
+                                  await Future.delayed(
+                                      const Duration(seconds: 5));
+                                  return List.generate(
+                                      7, (_) => m.Media.skeleton());
+                                },
+                              ),
+                            ),
+                            const SizedBox(height: 12),
+                          ],
+                        ),
+                      )
+                    : const OnboardingScreen(),
+              );
+            });
           },
         ),
       ),
@@ -328,7 +272,6 @@ class MainScreenState extends State<MainScreen> {
   @override
   void initState() {
     super.initState();
-    checkForUpdate();
   }
 
   Widget get _navbar {
@@ -346,9 +289,11 @@ class MainScreenState extends State<MainScreen> {
     });
   }
 
-  Widget _buildBackground(ThemeNotifier themeNotifier, MediaService service) {
-    if (!themeNotifier.useGlassMode) return const SizedBox.shrink();
-    var theme = Theme.of(context).colorScheme;
+  Widget _buildBackground(MediaService service) {
+    final themeController = find<ThemeController>();
+    final useGlassMode = themeController.useGlassMode.value;
+    if (!useGlassMode) return const SizedBox.shrink();
+    final scheme = Theme.of(context).colorScheme;
     return Positioned.fill(
       child: Stack(
         children: [
@@ -368,19 +313,17 @@ class MainScreenState extends State<MainScreen> {
               ),
             ),
           ),
-          // Gradient overlay at the bottom 75%
           Positioned.fill(
             child: Align(
               alignment: Alignment.bottomCenter,
               child: FractionallySizedBox(
                 heightFactor: 0.75,
-                widthFactor: 1,
                 child: Container(
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
+                      colors: [Colors.transparent, scheme.surface],
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
-                      colors: [Colors.transparent, theme.surface],
                     ),
                   ),
                 ),
@@ -411,65 +354,38 @@ class MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final themeNotifier = Provider.of<ThemeNotifier>(context);
-    final service = context.currentService();
-    ThemedContainer(
-      context: context,
-      child: const Icon(Icons.search),
-      borderRadius: BorderRadius.circular(16.0),
-      padding: const EdgeInsets.all(4.0),
-    );
-    return Scaffold(
-      body: Stack(
-        children: [
-          _buildBackground(themeNotifier, service),
-          Row(
-            children: [
-              if (!context.isPhone) SizedBox(width: 100, child: _navbar),
-              Expanded(child: _buildBody(service)),
-            ],
-          ),
-          if (context.isPhone) _navbar,
-          Positioned(
-            bottom: 92.bottomBar(),
-            right: 12,
-            child: GestureDetector(
-              onLongPress: () =>
-                  service.searchScreen?.onSearchIconLongClick(context),
-              onTap: () => service.searchScreen?.onSearchIconClick(context),
-              child: ThemedContainer(
-                context: context,
-                child: Container(
-                  width: 48,
-                  height: 48,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16.0),
-                  ),
+    final serviceController = find<MediaServiceController>();
+    return Obx(() {
+      final service = serviceController.currentService.value;
+      return Scaffold(
+        body: Stack(
+          children: [
+            _buildBackground(service),
+            Row(
+              children: [
+                if (!context.isPhone) SizedBox(width: 100, child: _navbar),
+                Expanded(child: _buildBody(service)),
+              ],
+            ),
+            if (context.isPhone) _navbar,
+            Positioned(
+              bottom: 92.bottomBar(),
+              right: 12,
+              child: GestureDetector(
+                onLongPress: () =>
+                    service.searchScreen?.onSearchIconLongClick(context),
+                onTap: () => service.searchScreen?.onSearchIconClick(context),
+                child: ThemedContainer(
+                  context: context,
+                  borderRadius: BorderRadius.circular(16.0),
+                  padding: const EdgeInsets.all(4.0),
                   child: const Icon(Icons.search),
                 ),
-                borderRadius: BorderRadius.circular(16.0),
-                padding: const EdgeInsets.all(4.0),
               ),
             ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-Future<void> checkForUpdate() async {
-  final updater = ShorebirdUpdater();
-  final status = await updater.checkForUpdate();
-  debugPrint('Update Status: $status');
-  if (status == UpdateStatus.outdated) {
-    try {
-      snackString('New Update found');
-      await updater.update();
-      snackString('Updated to the latest version! Restart the app');
-    } on UpdateException catch (error) {
-      Logger.log('Error updating: $error');
-      throw ('Error updating: $error');
-    }
+          ],
+        ),
+      );
+    });
   }
 }

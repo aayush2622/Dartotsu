@@ -7,7 +7,7 @@ import '../../../Adaptor/Media/Widgets/MediaSection.dart';
 import '../../../DataClass/Media.dart';
 import '../../../Functions/Function.dart';
 import '../../../Services/Screens/BaseMangaScreen.dart';
-import '../../../logger.dart';
+import '../../../Logger.dart';
 
 class ExtensionsMangaScreen extends BaseMangaScreen {
   var data = Rxn<Map<String, List<Media>>>({});

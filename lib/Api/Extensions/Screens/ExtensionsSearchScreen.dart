@@ -6,7 +6,7 @@ import '../../../Adaptor/Media/Widgets/MediaSection.dart';
 import '../../../DataClass/Media.dart';
 import '../../../DataClass/SearchResults.dart';
 import '../../../Services/Screens/BaseSearchScreen.dart';
-import '../../../logger.dart';
+import '../../../Logger.dart';
 
 class ExtensionsSearchScreen extends BaseSearchScreen {
   var data = Rxn<Map<String, List<Media>>>({});

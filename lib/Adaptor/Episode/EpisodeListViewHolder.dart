@@ -1,6 +1,6 @@
-import 'package:dartotsu/Functions/string_extensions.dart';
+import 'package:dartotsu/Functions/Extensions/StringExtensions.dart';
 import 'package:dartotsu/Theme/Colors.dart';
-import 'package:dartotsu/Theme/ThemeProvider.dart';
+import 'package:dartotsu/Theme/ThemeController.dart';
 import 'package:dartotsu/Widgets/CachedNetworkImage.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:expandable_text/expandable_text.dart';

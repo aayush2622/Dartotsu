@@ -1,4 +1,4 @@
-import 'package:dartotsu/Functions/Extensions.dart';
+import 'package:dartotsu/Functions/Extensions/IntExtensions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -28,7 +28,6 @@ abstract class BaseMediaScreen extends GetxController {
   void onInit() {
     super.onInit();
     if (initialLoad) return;
-    scrollController.addListener(scrollListener);
     final live = Refresh.getOrPut(refreshID, false);
     ever(
       live,
@@ -46,51 +45,5 @@ abstract class BaseMediaScreen extends GetxController {
       },
     );
     live.value = true;
-  }
-
-  bool _canScroll() {
-    final maxScrollExtent = scrollController.position.maxScrollExtent;
-    final currentScroll = scrollController.offset;
-    return currentScroll > (maxScrollExtent * 0.1);
-  }
-
-  Future<void> scrollListener() async {
-    var scroll = scrollController.position;
-    if (scroll.pixels >= scroll.maxScrollExtent - 50 && loadMore.value) {
-      loadMore.value = false;
-      if (canLoadMore.value) {
-        await loadNextPage();
-      } else {
-        snackString('DAMN! YOU TRULY ARE JOBLESS\nYOU REACHED THE END');
-      }
-    }
-    scrollToTop.value = _canScroll();
-  }
-
-  Widget buildScrollToTopButton(BuildContext context) {
-    return Positioned(
-      bottom: context.isPhone ? 72.0 + 32.bottomBar() : 64,
-      left: 0,
-      right: 0,
-      child: Obx(
-        () => scrollToTop.value
-            ? Center(
-                child: ThemedContainer(
-                  context: context,
-                  borderRadius: BorderRadius.circular(64.0),
-                  padding: const EdgeInsets.all(4),
-                  child: IconButton(
-                    icon: const Icon(Icons.arrow_upward),
-                    onPressed: () => scrollController.animateTo(
-                      0,
-                      duration: const Duration(milliseconds: 500),
-                      curve: Curves.easeInOut,
-                    ),
-                  ),
-                ),
-              )
-            : const SizedBox(),
-      ),
-    );
   }
 }

@@ -1,8 +1,8 @@
 import 'package:collection/collection.dart';
 import 'package:dartotsu/Adaptor/Chapter/ChapterAdaptor.dart';
 import 'package:dartotsu/DataClass/Media.dart';
-import 'package:dartotsu/Functions/Extensions.dart';
-import 'package:dartotsu/Functions/string_extensions.dart';
+import 'package:dartotsu/Functions/Extensions/IntExtensions.dart';
+import 'package:dartotsu/Functions/Extensions/StringExtensions.dart';
 import 'package:dartotsu/Preferences/IsarDataClasses/DefaultReaderSettings/DafaultReaderSettings.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/material.dart';

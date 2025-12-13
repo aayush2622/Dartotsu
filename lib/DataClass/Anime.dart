@@ -12,7 +12,6 @@ class Anime {
   int? episodeDuration;
   String? season;
   int? seasonYear;
-
   List<String> op;
   List<String> ed;
 

@@ -1,5 +1,5 @@
 import 'package:dartotsu/Functions/Function.dart';
-import 'package:dartotsu/Functions/string_extensions.dart';
+import 'package:dartotsu/Functions/Extensions/StringExtensions.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../Animation/ScaleAnimation.dart';
