@@ -1,13 +1,13 @@
 import 'dart:convert';
 
-import 'package:dartotsu/DataClass/Media.dart';
-import 'package:dartotsu/Preferences/IsarDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
-import 'package:dartotsu/Preferences/IsarDataClasses/DefaultReaderSettings/DafaultReaderSettings.dart';
-import 'package:dartotsu/Preferences/PrefManager.dart';
-import 'package:dartotsu/Services/MediaService.dart';
 import 'package:isar_community/isar.dart';
 
 import '../../../Functions/Functions/GetXFunctions.dart';
+import '../../../Services/MediaService.dart';
+import '../../../Services/Model/Media.dart';
+import '../../PrefManager.dart';
+import '../DefaultPlayerSettings/DefaultPlayerSettings.dart';
+import '../DefaultReaderSettings/DafaultReaderSettings.dart';
 
 part 'MediaSettings.g.dart';
 

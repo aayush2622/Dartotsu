@@ -1,10 +1,7 @@
-import 'package:dartotsu/Functions/Extensions/IntExtensions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../Api/EpisodeDetails/GetMediaIDs/GetMediaIDs.dart';
 import '../../Functions/Function.dart';
-import '../../Theme/ThemeManager.dart';
 
 abstract class BaseMediaScreen extends GetxController {
   var page = 1;
@@ -36,7 +33,6 @@ abstract class BaseMediaScreen extends GetxController {
           running.value = false;
           await Future.wait([
             loadAll(),
-            GetMediaIDs.getData(),
           ]);
           initialLoad = true;
           live.value = false;

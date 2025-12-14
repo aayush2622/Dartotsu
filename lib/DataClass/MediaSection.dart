@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-import 'Media.dart';
+import '../Services/Model/Media.dart';
 
 class MediaSectionData {
   final int type;

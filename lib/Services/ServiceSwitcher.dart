@@ -1,6 +1,6 @@
-import 'package:dartotsu/Functions/Functions/GetXFunctions.dart';
 import 'package:flutter/material.dart';
 
+import '../Functions/Functions/GetXFunctions.dart';
 import '../Theme/LanguageSwitcher.dart';
 import '../Widgets/CustomBottomDialog.dart';
 import '../Widgets/LoadSvg.dart';

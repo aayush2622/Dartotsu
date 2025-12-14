@@ -1,9 +1,8 @@
-import 'package:dartotsu/DataClass/SearchResults.dart';
-import 'package:dartotsu/Functions/Function.dart';
-import 'package:dartotsu/Screens/Search/SearchScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../DataClass/SearchResults.dart';
+import '../../Functions/Function.dart';
 import '../../Widgets/CustomBottomDialog.dart';
 
 abstract class BaseSearchScreen extends GetxController {
@@ -56,13 +55,13 @@ abstract class BaseSearchScreen extends GetxController {
   ) {
     if (searchTypes.isEmpty) return;
     if (searchTypes.length == 1) {
-      navigateToPage(
+      /* navigateToPage(
         context,
         SearchScreen(
           title: searchTypes[0],
           args: null,
         ),
-      );
+      );*/
       return;
     }
     var dialog = CustomBottomDialog(title: 'Search', viewList: [
@@ -81,13 +80,13 @@ abstract class BaseSearchScreen extends GetxController {
                 borderRadius: BorderRadius.circular(12.0),
                 onTap: () {
                   Navigator.pop(context);
-                  navigateToPage(
+                  /*navigateToPage(
                     context,
                     SearchScreen(
                       title: searchTypes[index],
                       args: null,
                     ),
-                  );
+                  );*/
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),

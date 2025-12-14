@@ -1,10 +1,10 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import 'Author.dart';
-import 'Character.dart';
-import 'Media.dart';
-import 'Studio.dart';
-import 'User.dart';
+import '../Services/Model/Author.dart';
+import '../Services/Model/Character.dart';
+import '../Services/Model/Media.dart';
+import '../Services/Model/Studio.dart';
+import '../Services/Model/User.dart';
 
 part 'Data/SearchResults.g.dart';
 
@@ -29,10 +29,10 @@ class SearchResults {
   String? season;
   int? page;
   List<Media>? results;
-  List<character>? characters;
-  List<author>? staff;
-  List<userData>? users;
-  List<studio>? studios;
+  List<Character>? characters;
+  List<Author>? staff;
+  List<User>? users;
+  List<Studio>? studios;
   bool? hasNextPage;
   int? id;
   bool? hdCover;

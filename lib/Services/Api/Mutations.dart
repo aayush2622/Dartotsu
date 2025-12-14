@@ -1,4 +1,4 @@
-import 'package:dartotsu/DataClass/Media.dart';
+import '../Model/Media.dart';
 
 abstract class Mutations {
   /// Edit user list.

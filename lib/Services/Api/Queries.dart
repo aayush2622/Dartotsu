@@ -1,4 +1,4 @@
-import '../../DataClass/Media.dart';
+import '../../Services/Model/Media.dart';
 import '../../DataClass/SearchResults.dart';
 
 abstract class Queries {

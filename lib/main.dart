@@ -2,17 +2,10 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:ui';
 
-import 'package:dartotsu/Api/Updater/AppUpdater.dart';
-import 'package:dartotsu/Functions/Extensions/IntExtensions.dart';
-import 'package:dartotsu/Functions/Function.dart';
-import 'package:dartotsu/Screens/Anime/Player/MpvConfig.dart';
-import 'package:dartotsu/Screens/Login/LoginScreen.dart';
-import 'package:dartotsu/Screens/Manga/MangaScreen.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:desktop_webview_window/desktop_webview_window.dart';
 import 'package:dpad/dpad.dart';
 import 'package:dynamic_color/dynamic_color.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -22,20 +15,12 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:window_manager/window_manager.dart';
+import 'Functions/Extensions/ContextExtensions.dart';
+import 'Functions/Extensions/IntExtensions.dart';
+import 'Functions/Functions/AppShortcuts.dart';
 import 'Functions/Functions/DeepLink.dart';
 import 'Functions/Functions/GetXFunctions.dart';
-import 'Services/Model/Media.dart' as m;
-import 'Adaptors/Media/MediaAdaptor.dart';
-import 'Api/Discord/Discord.dart';
-import 'Api/TypeFactory.dart';
 import 'Preferences/PrefManager.dart';
-import 'Screens/Anime/AnimeScreen.dart';
-import 'Screens/Error/ErrorScreen.dart';
-import 'Screens/Home/HomeScreen.dart';
-import 'Screens/HomeNavBar.dart';
-import 'Screens/HomeNavbarDesktop.dart';
-import 'Screens/HomeNavbarMobile.dart';
-import 'Screens/Onboarding/OnboardingScreen.dart';
 import 'Services/MediaService.dart';
 import 'Theme/ThemeManager.dart';
 import 'Theme/ThemeController.dart';
@@ -52,16 +37,13 @@ void main(List<String> args) async {
   runZonedGuarded(
     () async {
       WidgetsFlutterBinding.ensureInitialized();
-      FlutterError.onError = (FlutterErrorDetails details) {
-        FlutterError.presentError(details);
-        handleError(
+      FlutterError.onError = (details) {
+        Zone.current.handleUncaughtError(
           details.exception,
-          details.stack,
-          other: details.toString(),
-          softCrash: true,
+          details.stack ?? StackTrace.current,
         );
       };
-      PlatformDispatcher.instance.onError = (error, stack) {
+      /*PlatformDispatcher.instance.onError = (error, stack) {
         handleError(error, stack);
         return true;
       };
@@ -71,7 +53,7 @@ void main(List<String> args) async {
           stackTrace: details.stack?.toString() ?? details.toString(),
           softCrash: true,
         );
-      };
+      };*/
       if (Platform.isLinux && runWebViewTitleBarWidget(args)) return;
 
       await init();
@@ -98,10 +80,10 @@ Future init() async {
   await PrefManager.init();
   await DartotsuExtensionBridge().init(PrefManager.isar, "Dartotsu");
   await Logger.init();
-  await MpvConf.init();
-  put(MediaServiceController()..init());
+  //await MpvConf.init();
+  put(MediaServiceController());
   put(ThemeController());
-  TypeFactory.init();
+  //TypeFactory.init();
   DeepLink.init();
   MediaKit.ensureInitialized();
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
@@ -112,16 +94,26 @@ Future init() async {
   for (var locale in supportedLocales) {
     initializeDateFormatting(locale);
   }
-  AppUpdater().checkForUpdate();
-  Discord.getSavedToken();
+  //AppUpdater().checkForUpdate();
+  //Discord.getSavedToken();
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final theme = find<ThemeController>();
+  createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  late final FocusNode _focusNode;
+
+  ThemeController get theme => find<ThemeController>();
+
+  @override
+  void initState() {
+    super.initState();
+    _focusNode = FocusNode();
 
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
@@ -130,76 +122,41 @@ class MyApp extends StatelessWidget {
         systemNavigationBarDividerColor: Colors.transparent,
       ),
     );
+  }
 
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Listener(
       onPointerDown: (event) {
-        if (event.buttons == kBackMouseButton) {
-          if (Navigator.canPop(Get.context!)) Get.back();
+        if (event.buttons == kBackMouseButton &&
+            Navigator.canPop(Get.context!)) {
+          Get.back();
         }
       },
-      child: KeyboardListener(
-        focusNode: FocusNode(),
-        onKeyEvent: (KeyEvent event) async {
-          if (event is KeyDownEvent) {
-            if (event.logicalKey == LogicalKeyboardKey.escape) {
-              if (Navigator.canPop(Get.context!)) Get.back();
-            } else if (event.logicalKey == LogicalKeyboardKey.f11) {
-              final isFullScreen = await windowManager.isFullScreen();
-              windowManager.setFullScreen(!isFullScreen);
-            } else if (event.logicalKey == LogicalKeyboardKey.enter) {
-              final isAltPressed = HardwareKeyboard.instance.logicalKeysPressed
-                      .contains(LogicalKeyboardKey.altLeft) ||
-                  HardwareKeyboard.instance.logicalKeysPressed
-                      .contains(LogicalKeyboardKey.altRight);
-
-              if (isAltPressed) {
-                final isFullScreen = await windowManager.isFullScreen();
-                windowManager.setFullScreen(!isFullScreen);
-              }
-            }
-
-            if (event.logicalKey == LogicalKeyboardKey.keyG) {
-              theme.useGlassMode.value
-                  ? await theme.setGlassEffect(false)
-                  : await theme.setGlassEffect(true);
-
-              snackString(
-                theme.useGlassMode.value
-                    ? 'Glass effect enabled'
-                    : 'Glass effect disabled',
-              );
-            }
-
-            if (event.logicalKey == LogicalKeyboardKey.keyM) {
-              theme.useMaterialYou.value
-                  ? await theme.setMaterialYou(false)
-                  : await theme.setMaterialYou(true);
-
-              snackString(
-                theme.useMaterialYou.value
-                    ? 'Material You enabled'
-                    : 'Material You disabled',
-              );
-            }
-
-            if (event.logicalKey == LogicalKeyboardKey.keyD) {
-              theme.isDarkMode.value
-                  ? await theme.setDarkMode(false)
-                  : await theme.setDarkMode(true);
-
-              snackString(
-                theme.isDarkMode.value
-                    ? 'Dark mode enabled'
-                    : 'Dark mode disabled',
-              );
-            }
-          }
+      child: Focus(
+        autofocus: true,
+        focusNode: _focusNode,
+        onKeyEvent: (_, event) {
+          final handled = appShortcuts(event);
+          return handled ? KeyEventResult.handled : KeyEventResult.ignored;
         },
         child: DynamicColorBuilder(
-          builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
+          builder: (lightDynamic, darkDynamic) {
             return Obx(() {
-              final isDark = theme.isDarkMode.value;
               return GetMaterialApp(
+                title: 'Dartotsu',
+                debugShowCheckedModeBanner: false,
+                enableLog: true,
+                logWriterCallback: (text, {isError = false}) {
+                  Logger.log(text);
+                  if (isError) debugPrint(text);
+                },
                 localizationsDelegates: const [
                   AppLocalizations.delegate,
                   GlobalMaterialLocalizations.delegate,
@@ -208,44 +165,16 @@ class MyApp extends StatelessWidget {
                 ],
                 supportedLocales: AppLocalizations.supportedLocales,
                 locale: Locale(loadData(PrefName.defaultLanguage)),
-                title: 'Dartotsu',
-                themeMode: isDark ? ThemeMode.dark : ThemeMode.light,
-                debugShowCheckedModeBanner: false,
-                enableLog: true,
-                logWriterCallback: (text, {isError = false}) async {
-                  Logger.log(text);
-                  if (isError) debugPrint(text);
-                },
+                themeMode:
+                    theme.isDarkMode.value ? ThemeMode.dark : ThemeMode.light,
                 theme: getTheme(lightDynamic, theme),
                 darkTheme: getTheme(darkDynamic, theme),
-                home: !loadCustomData("initialLoaded", defaultValue: false)!
-                    ? Scaffold(
-                        body: Column(
-                          children: [
-                            const DpadFocusable(
-                              autofocus: true,
-                              child: Text('Testing'),
-                            ),
-                            MediaAdaptor(
-                              data: MediaAdaptorData(
-                                type: 0,
-                                title: "",
-                                trailingIcon: Icons.arrow_forward_ios_rounded,
-                                onTrailingIconTap: () =>
-                                    snackString('Trailing icon tapped'),
-                                onLoadMore: () async {
-                                  await Future.delayed(
-                                      const Duration(seconds: 5));
-                                  return List.generate(
-                                      7, (_) => m.Media.skeleton());
-                                },
-                              ),
-                            ),
-                            const SizedBox(height: 12),
-                          ],
-                        ),
-                      )
-                    : const OnboardingScreen(),
+                home: !loadCustomData(
+                  "initialLoaded",
+                  defaultValue: false,
+                )!
+                    ? const MainScreen()
+                    : const SizedBox(),
               );
             });
           },
@@ -262,7 +191,7 @@ class MainScreen extends StatefulWidget {
   MainScreenState createState() => MainScreenState();
 }
 
-late FloatingBottomNavBar navbar;
+//late FloatingBottomNavBar navbar;
 
 class MainScreenState extends State<MainScreen> {
   final _selectedIndex = 1.obs;
@@ -275,7 +204,8 @@ class MainScreenState extends State<MainScreen> {
   }
 
   Widget get _navbar {
-    return Obx(() {
+    return SizedBox();
+    /* return Obx(() {
       navbar = context.isPhone
           ? FloatingBottomNavBarMobile(
               selectedIndex: _selectedIndex.value,
@@ -286,28 +216,30 @@ class MainScreenState extends State<MainScreen> {
               onTabSelected: _onTabSelected,
             );
       return navbar;
-    });
+    });*/
   }
 
   Widget _buildBackground(MediaService service) {
     final themeController = find<ThemeController>();
     final useGlassMode = themeController.useGlassMode.value;
     if (!useGlassMode) return const SizedBox.shrink();
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = context.colorScheme;
     return Positioned.fill(
       child: Stack(
         children: [
           Positioned.fill(
-            child: ImageFiltered(
-              imageFilter: ImageFilter.blur(sigmaX: 4.0, sigmaY: 4.0),
-              child: Opacity(
-                opacity: 0.8,
-                child: Obx(
-                  () => cachedNetworkImage(
-                    imageUrl: service.data.bg.value.isNotEmpty
-                        ? service.data.bg.value
-                        : 'https://wallpapercat.com/download/1198914',
-                    fit: BoxFit.cover,
+            child: RepaintBoundary(
+              child: ImageFiltered(
+                imageFilter: ImageFilter.blur(sigmaX: 4.0, sigmaY: 4.0),
+                child: Opacity(
+                  opacity: 0.8,
+                  child: Obx(
+                    () => cachedNetworkImage(
+                      imageUrl: service.data.bg.value.isNotEmpty
+                          ? service.data.bg.value
+                          : 'https://wallpapercat.com/download/1198914',
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),
@@ -339,13 +271,13 @@ class MainScreenState extends State<MainScreen> {
     return Obx(() {
       switch (_selectedIndex.value) {
         case 0:
-          return const AnimeScreen();
+          return const SizedBox();
         case 1:
-          return service.data.token.value.isNotEmpty
-              ? const HomeScreen()
-              : const LoginScreen();
+          return !service.data.token.value.isNotEmpty
+              ? const Center(child: Text("Alive"))
+              : const SizedBox();
         case 2:
-          return const MangaScreen();
+          return const SizedBox();
         default:
           return const SizedBox();
       }

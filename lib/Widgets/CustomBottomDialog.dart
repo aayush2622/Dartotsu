@@ -1,5 +1,6 @@
-import 'package:dartotsu/Theme/ThemeManager.dart';
 import 'package:flutter/material.dart';
+
+import '../Theme/ThemeManager.dart';
 
 class CustomBottomDialog extends StatefulWidget {
   final List<Widget> viewList;

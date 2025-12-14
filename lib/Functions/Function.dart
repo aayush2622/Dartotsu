@@ -1,13 +1,14 @@
 import 'dart:async';
 import 'dart:ui';
 
-import 'package:dartotsu/Theme/ThemeManager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../Theme/ThemeManager.dart';
 
 class _RefreshController extends GetxController {
   var activity = <int, RxBool>{};

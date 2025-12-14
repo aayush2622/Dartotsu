@@ -1,10 +1,10 @@
-import 'package:dartotsu/Preferences/PrefManager.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../Screens/Settings/language.dart';
+import '../Preferences/PrefManager.dart';
 import '../Widgets/DropdownMenu.dart';
 import '../l10n/app_localizations.dart';
+import 'language.dart';
 
 AppLocalizations get getString => AppLocalizations.of(Get.context!)!;
 

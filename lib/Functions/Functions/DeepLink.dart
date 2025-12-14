@@ -8,7 +8,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 
-import '../../Screens/Settings/SettingsPlayerScreen.dart';
+//import '../../Screens/Settings/SettingsPlayerScreen.dart';
 import '../Function.dart';
 import '../RegisterProtocol/WindowProtocol.dart';
 
@@ -26,7 +26,7 @@ class DeepLink {
     void handleFiles(List<SharedMediaFile> files) {
       if (files.isEmpty) return;
 
-      openPlayer(Get.context!, files.map((e) => e.path).toList());
+      //openPlayer(Get.context!, files.map((e) => e.path).toList());
     }
 
     intent.getMediaStream().listen(handleFiles);

@@ -7,6 +7,7 @@ class Studio {
   String id;
   String name;
   String? url;
+  String? image;
   bool? isAnimationStudio;
   List<Media>? media;
   bool? isFav;
@@ -16,6 +17,7 @@ class Studio {
     required this.id,
     required this.name,
     this.isAnimationStudio,
+    this.image,
     this.url,
     this.media,
     this.isFav,

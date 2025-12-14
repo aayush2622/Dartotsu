@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../Widgets/CachedNetworkImage.dart';
+import 'CachedNetworkImage.dart';
 
 Widget GenreItem(BuildContext context, String title,
     {Widget? route, String? imageUrl}) {

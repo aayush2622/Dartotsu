@@ -37,15 +37,15 @@ SearchResults _$SearchResultsFromJson(Map<String, dynamic> json) =>
               .toList() ??
           const [],
       characters: (json['characters'] as List<dynamic>?)
-              ?.map((e) => character.fromJson(e as Map<String, dynamic>))
+              ?.map((e) => Character.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
       staff: (json['staff'] as List<dynamic>?)
-              ?.map((e) => author.fromJson(e as Map<String, dynamic>))
+              ?.map((e) => Author.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
       users: (json['users'] as List<dynamic>?)
-              ?.map((e) => userData.fromJson(e as Map<String, dynamic>))
+              ?.map((e) => User.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
       hasNextPage: json['hasNextPage'] as bool? ?? false,

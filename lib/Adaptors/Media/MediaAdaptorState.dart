@@ -3,8 +3,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import '../../Api/Anilist/Anilist.dart';
-import '../../Api/Anilist/Screen/AnilistAnimeScreen.dart';
 import '../../Services/Model/Media.dart';
 
 class MediaAdaptorState {
@@ -63,15 +61,5 @@ class MediaAdaptorState {
     final skeletonMediaList = List.generate(count, (_) => Media.skeleton());
 
     mediaList.value = media ?? skeletonMediaList;
-    _loadData();
-  }
-
-  Future<void> _loadData() async {
-    var t = Get.put(AnilistAnimeScreen(Get.put(AnilistController())),
-        tag: "AnilistHomeScreen");
-    await t.loadAll();
-    var list = t.mostFavSeries.value;
-
-    mediaList.value = list ?? [];
   }
 }

@@ -1,8 +1,7 @@
+import 'package:dartotsu/Services/BaseServiceData.dart';
 import 'package:flutter/cupertino.dart';
 
-import '../../Services/BaseServiceData.dart';
-
-class KitsuController extends BaseServiceData {
+class AnilistData extends BaseServiceData {
   @override
   bool getSavedToken() {
     // TODO: implement getSavedToken
@@ -15,8 +14,8 @@ class KitsuController extends BaseServiceData {
   }
 
   @override
-  void removeSavedToken() {
-    // TODO: implement removeSavedToken
+  void removeToken() {
+    // TODO: implement removeToken
   }
 
   @override

@@ -17,7 +17,7 @@ class PrefName {
       Pref('autoUpdateExtensions', true, PrefLocation.THEME);
   static const useCoverTheme = Pref('useCoverTheme', true, PrefLocation.THEME);
 
-  static const source = Pref('source', 'ANILIST', PrefLocation.COMMON);
+  static const service = Pref('service', 'ANILIST', PrefLocation.COMMON);
   static const Pref<Map<dynamic, dynamic>> anilistHomeLayout = Pref(
       'homeLayoutOrder',
       {
