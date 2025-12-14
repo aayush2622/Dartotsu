@@ -1,0 +1,93 @@
+import 'package:flutter/material.dart';
+
+// Light Purple Theme
+final ThemeData purpleLightTheme = ThemeData(
+  brightness: Brightness.light,
+  primaryColor: const Color(0xFF7C4997),
+  colorScheme: const ColorScheme.light(
+    primary: Color(0xFF7C4997),
+    onPrimary: Color(0xFFFFFFFF),
+    primaryContainer: Color(0xFFF6D9FF),
+    onPrimaryContainer: Color(0xFF310049),
+    secondary: Color(0xFF68596D),
+    onSecondary: Color(0xFFFFFFFF),
+    secondaryContainer: Color(0xFFF0DCF4),
+    onSecondaryContainer: Color(0xFF231728),
+    tertiary: Color(0xFF815252),
+    onTertiary: Color(0xFFFFFFFF),
+    tertiaryContainer: Color(0xFFFFDAD9),
+    onTertiaryContainer: Color(0xFF331112),
+    error: Color(0xFFBA1A1A),
+    onError: Color(0xFFFFFFFF),
+    errorContainer: Color(0xFFFFDAD6),
+    onErrorContainer: Color(0xFF410002),
+    surface: Color(0xFFFFFBFF),
+    onSurface: Color(0xFF1D1B1E),
+    onSurfaceVariant: Color(0xFF4B444D),
+    outline: Color(0xFF7D747E),
+    inverseSurface: Color(0xFF332F33),
+    onInverseSurface: Color(0xFFF6EFF3),
+    inversePrimary: Color(0xFFE7B3FF),
+    shadow: Color(0xFF000000),
+    surfaceTint: Color(0xFF7C4997),
+    outlineVariant: Color(0xFFCEC3CE),
+    scrim: Color(0xFF000000),
+  ),
+  scaffoldBackgroundColor: const Color(0xFFFFFBFF),
+  appBarTheme: const AppBarTheme(
+    color: Color(0xFF7C4997),
+    iconTheme: IconThemeData(color: Color(0xFFFFFFFF)),
+  ),
+  textTheme: const TextTheme(
+    headlineLarge: TextStyle(
+        color: Color(0xFF1D1B1E), fontSize: 20, fontWeight: FontWeight.bold),
+    bodyLarge: TextStyle(color: Color(0xFF1D1B1E)),
+  ),
+  fontFamily: 'Poppins',
+);
+
+// Dark Purple Theme
+final ThemeData purpleDarkTheme = ThemeData(
+  brightness: Brightness.dark,
+  primaryColor: const Color(0xFFE7B3FF),
+  colorScheme: const ColorScheme.dark(
+    primary: Color(0xFFE7B3FF),
+    onPrimary: Color(0xFF4A1765),
+    primaryContainer: Color(0xFF62307D),
+    onPrimaryContainer: Color(0xFFF6D9FF),
+    secondary: Color(0xFFD3C0D8),
+    onSecondary: Color(0xFF382C3E),
+    secondaryContainer: Color(0xFF504255),
+    onSecondaryContainer: Color(0xFFF0DCF4),
+    tertiary: Color(0xFFF5B7B7),
+    onTertiary: Color(0xFF4C2526),
+    tertiaryContainer: Color(0xFF663B3B),
+    onTertiaryContainer: Color(0xFFFFDAD9),
+    error: Color(0xFFFFB4AB),
+    onError: Color(0xFF690005),
+    errorContainer: Color(0xFF93000A),
+    onErrorContainer: Color(0xFFFFDAD6),
+    surface: Color(0xFF1D1B1E),
+    onSurface: Color(0xFFE8E0E5),
+    onSurfaceVariant: Color(0xFFCEC3CE),
+    outline: Color(0xFF978E98),
+    inverseSurface: Color(0xFFE8E0E5),
+    onInverseSurface: Color(0xFF1D1B1E),
+    inversePrimary: Color(0xFF7C4997),
+    shadow: Color(0xFF000000),
+    surfaceTint: Color(0xFFE7B3FF),
+    outlineVariant: Color(0xFF4B444D),
+    scrim: Color(0xFF000000),
+  ),
+  scaffoldBackgroundColor: const Color(0xFF1D1B1E),
+  appBarTheme: const AppBarTheme(
+    color: Color(0xFFE7B3FF),
+    iconTheme: IconThemeData(color: Color(0xFF4A1765)),
+  ),
+  textTheme: const TextTheme(
+    headlineLarge: TextStyle(
+        color: Color(0xFF4A1765), fontSize: 20, fontWeight: FontWeight.bold),
+    bodyLarge: TextStyle(color: Color(0xFFE8E0E5)),
+  ),
+  fontFamily: 'Poppins',
+);
