@@ -19,7 +19,6 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:media_kit/media_kit.dart';
-import 'package:wakelock_plus/wakelock_plus.dart';
 import 'package:window_manager/window_manager.dart';
 
 import '../../../../../../Api/Discord/Discord.dart';
@@ -75,7 +74,7 @@ class _PlayerControllerState extends State<PlayerController> {
 
     settings = media.settings.playerSettings;
     fitType = settings.resizeMode;
-    WakelockPlus.enable();
+
     if (!widget.player.isMobile) initFullScreen();
     controller = widget.player.videoPlayerController;
     currentQuality = videos[widget.player.widget.index];
@@ -234,7 +233,6 @@ class _PlayerControllerState extends State<PlayerController> {
   void dispose() {
     super.dispose();
     if (DiscordService.isInitialized) DiscordService.stopRPC();
-    WakelockPlus.disable();
   }
 
   @override

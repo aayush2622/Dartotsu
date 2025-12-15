@@ -462,7 +462,7 @@ class AppLocalizationsAs extends AppLocalizations {
   String get wrongTitle => 'শিৰোনাম ভুল?';
 
   @override
-  String get missingResults => 'Missing Results?';
+  String get missingResults => 'অনুপস্থিত ফলাফল?';
 
   @override
   String get youTube => 'ইউটিউবত প্লে কৰক?';
@@ -593,18 +593,18 @@ class AppLocalizationsAs extends AppLocalizations {
   }
 
   @override
-  String get adjustBrightness => 'Adjust Brightness';
+  String get adjustBrightness => 'উজ্জ্বলতা সমন্বয় কৰক';
 
   @override
   String get adjustBrightnessDescription =>
-      'Enable brightness adjustment by swiping up/down on the left side of the screen';
+      'স্ক্ৰিনৰ বাঁওফালে ওপৰ/তললৈ ছোৱাইপ কৰি উজ্জ্বলতা সলনি কৰাৰ সুবিধা সক্ষম কৰক';
 
   @override
-  String get adjustVolume => 'Adjust Volume';
+  String get adjustVolume => 'ভলিউম সমন্বয় কৰক';
 
   @override
   String get adjustVolumeDescription =>
-      'Enable volume adjustment by swiping up/down on the right side of the screen';
+      'স্ক্ৰিনৰ সোঁফালে ওপৰ/তললৈ ছোৱাইপ কৰি ভলিউম সলনি কৰাৰ সুবিধা সক্ষম কৰক';
 
   @override
   String get subtitles => 'ছাবটাইটেল';
@@ -661,39 +661,39 @@ class AppLocalizationsAs extends AppLocalizations {
   String get bottomPaddingDescription => 'ছাবটাইটেলৰ তলৰ পেডিং';
 
   @override
-  String get useLibass => 'Use Libass';
+  String get useLibass => 'libass ব্যৱহাৰ কৰক';
 
   @override
   String get useLibassDescription =>
-      'Use Libass for subtitle rendering (overrides other subtitle settings)';
+      'সাবটাইটেল ৰেণ্ডাৰিংৰ বাবে libass ব্যৱহাৰ কৰক (ই আন সাবটাইটেল ছেটিংছসমূহ ওভাৰৰাইড কৰি দিব)';
 
   @override
-  String get useGpuNext => 'Use gpu-next';
+  String get useGpuNext => 'gpu-next ব্যৱহাৰ কৰক';
 
   @override
   String get useGpuNextDescription =>
-      'New rendering backend (may cause visual artifacts)';
+      'নতুন ৰেণ্ডাৰিং বেকএণ্ড (দৃশ্যত ত্ৰুটি দেখা দিব পাৰে)';
 
   @override
-  String get autoPlayNextEpisode => 'Auto Play Next Episode';
+  String get autoPlayNextEpisode => 'পৰৱৰ্তী এপিচড স্বয়ংক্ৰিয়ভাৱে চলাওক';
 
   @override
   String get autoPlayNextEpisodeDescription =>
-      'Automatically play the next episode when the current one ends';
+      'চলমান এপিচড শেষ হোৱাৰ পাছত পৰৱৰ্তী এপিচড স্বয়ংক্ৰিয়ভাৱে চলাব';
 
   @override
-  String get automaticSourceSelection => 'Automatic Source Selection Method';
+  String get automaticSourceSelection => 'স্বয়ংক্ৰিয় উৎস বাছনি পদ্ধতি';
 
   @override
   String get automaticSourceSelectionDescription =>
-      'Which method to use for automatic source selection';
+      'স্বয়ংক্ৰিয়ভাৱে উৎস বাছনি কৰিবলৈ কোন পদ্ধতি ব্যৱহাৰ কৰা হ\'ব';
 
   @override
-  String get perAnimePlayerSettings => 'Per-Anime Player Settings';
+  String get perAnimePlayerSettings => 'প্ৰতিটো এনিমে বাবে প্লেয়াৰ ছেটিংছ';
 
   @override
   String get perAnimePlayerSettingsDesc =>
-      'Use different player settings for each anime (disabling may override existing per-anime settings)';
+      'প্ৰতিটো এনিমে বাবে বেলেগ প্লেয়াৰ ছেটিংছ ব্যৱহাৰ কৰক (বন্ধ কৰিলে আগৰ বেলেগ ছেটিংছসমূহ ওভাৰৰাইড হ\'ব পাৰে)';
 
   @override
   String get readerSettings => 'ৰিডাৰ ছেটিংছ';
@@ -807,17 +807,17 @@ class AppLocalizationsAs extends AppLocalizations {
   String get differentCacheManagerDesc => 'বেলেগ ছবি কেশ্ব মেনেজাৰ ব্যৱহাৰ কৰক';
 
   @override
-  String get backupAndRestore => 'Backup & Restore';
+  String get backupAndRestore => 'ব্যাকআপ আৰু পুনৰুদ্ধাৰ';
 
   @override
   String get backupAndRestoreDescription =>
-      'Save and restore the app preferences';
+      'এপ্‌ৰ পছন্দসমূহ সংৰক্ষণ আৰু পুনৰুদ্ধাৰ কৰক';
 
   @override
-  String get backup => 'Backup';
+  String get backup => 'ব্যাকআপ';
 
   @override
-  String get restore => 'Restore';
+  String get restore => 'পুনৰুদ্ধাৰ';
 
   @override
   String get webView => 'ৱেব দৰ্শন';

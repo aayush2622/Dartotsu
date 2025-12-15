@@ -1317,6 +1317,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get wrongTitle => 'Título Errado?';
 
   @override
+  String get missingResults => 'Missing Results?';
+
+  @override
   String get youTube => 'Assistir no YouTube?';
 
   @override
@@ -1446,6 +1449,20 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   }
 
   @override
+  String get adjustBrightness => 'Adjust Brightness';
+
+  @override
+  String get adjustBrightnessDescription =>
+      'Enable brightness adjustment by swiping up/down on the left side of the screen';
+
+  @override
+  String get adjustVolume => 'Adjust Volume';
+
+  @override
+  String get adjustVolumeDescription =>
+      'Enable volume adjustment by swiping up/down on the right side of the screen';
+
+  @override
   String get subtitles => 'Legendas';
 
   @override
@@ -1512,6 +1529,27 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   @override
   String get useGpuNextDescription =>
       'New rendering backend (may cause visual artifacts)';
+
+  @override
+  String get autoPlayNextEpisode => 'Auto Play Next Episode';
+
+  @override
+  String get autoPlayNextEpisodeDescription =>
+      'Automatically play the next episode when the current one ends';
+
+  @override
+  String get automaticSourceSelection => 'Automatic Source Selection Method';
+
+  @override
+  String get automaticSourceSelectionDescription =>
+      'Which method to use for automatic source selection';
+
+  @override
+  String get perAnimePlayerSettings => 'Per-Anime Player Settings';
+
+  @override
+  String get perAnimePlayerSettingsDesc =>
+      'Use different player settings for each anime (disabling may override existing per-anime settings)';
 
   @override
   String get readerSettings => 'Ajustes do Leitor';
@@ -1626,6 +1664,19 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   @override
   String get differentCacheManagerDesc =>
       'Usar um gerenciador diferente para o cache de imagens';
+
+  @override
+  String get backupAndRestore => 'Backup & Restore';
+
+  @override
+  String get backupAndRestoreDescription =>
+      'Save and restore the app preferences';
+
+  @override
+  String get backup => 'Backup';
+
+  @override
+  String get restore => 'Restore';
 
   @override
   String get webView => 'Visualização Web';

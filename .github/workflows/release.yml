@@ -149,9 +149,26 @@ jobs:
           $version = (Get-Content pubspec.yaml | Select-String -Pattern 'version: ([\d.]+)').Matches.Groups[1].Value
           echo "version=$version" >> $env:GITHUB_ENV
 
+      - name: Find Latest SignTool Path
+        id: find_signtool
+        shell: pwsh 
+        run: |
+          $sdkBins = Get-ChildItem "C:\Program Files (x86)\Windows Kits\10\bin" -Directory | 
+                     Where-Object { $_.Name -match '^\d+\.\d+\.\d+\.\d+$' } |  
+                     Sort-Object Name -Descending | 
+                     Select-Object -First 1
+          if (-not $sdkBins) {
+            throw "No Windows SDK bin directories found!"
+          }
+          $signtoolPath = Join-Path $sdkBins.FullName "x64\signtool.exe"
+          if (-not (Test-Path $signtoolPath)) {
+            throw "signtool.exe not found at $signtoolPath"
+          }
+          echo "signtool_path=$signtoolPath" >> $env:GITHUB_OUTPUT
+
       - name: Build and Sign Setup
         run: |
-          dart run inno_bundle:build --sign-tool-params '"C:\Program Files (x86)\Windows Kits\10\bin\10.0.19041.0\x64\signtool.exe" sign /fd sha256 /f "C:\Users\runneradmin\certs\Dartotsu.pfx" /p "${{secrets.PFX_PASSWORD}}" /t http://timestamp.digicert.com /v $f' --release
+          dart run inno_bundle:build --sign-tool-params '"${{ steps.find_signtool.outputs.signtool_path }}" sign /fd sha256 /f "C:\Users\runneradmin\certs\Dartotsu.pfx" /p "${{secrets.PFX_PASSWORD}}" /tr http://timestamp.digicert.com /td sha256 /v $f' --release
       - name: Release Windows Zip
         uses: softprops/action-gh-release@master
         with:

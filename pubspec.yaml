@@ -4,7 +4,7 @@ description: "An Anilist client"
 publish_to: 'none'
 
 # Application version and build number
-version: 0.0.3+1
+version: 0.0.4+1
 
 # Dart SDK constraints
 environment:
@@ -177,7 +177,7 @@ inno_bundle:
   id: 609d9fb9-ac99-533b-a5b5-f277afa99b68
   publisher: Ankit Grai
   name: Dartotsu
-  version: 0.0.3
+  version: 0.0.4
   admin: auto
   installer_icon: assets/images/lol.ico
   languages:

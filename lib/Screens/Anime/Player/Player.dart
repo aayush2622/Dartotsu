@@ -12,6 +12,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:screen_brightness/screen_brightness.dart';
 import 'package:volume_controller/volume_controller.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
 
 import '../../../../../../Adaptor/Episode/EpisodeAdaptor.dart';
 import 'package:dartotsu_extension_bridge/Models/Video.dart' as v;
@@ -80,6 +81,7 @@ class MediaPlayerState extends State<MediaPlayer>
       duration: const Duration(milliseconds: 1000),
       vsync: this,
     );
+    WakelockPlus.enable();
     if (isMobile) {
       _setLandscapeMode(true);
       _handleVolumeAndBrightness();
@@ -128,6 +130,8 @@ class MediaPlayerState extends State<MediaPlayer>
       ScreenBrightness.instance.resetApplicationScreenBrightness();
       _setLandscapeMode(false);
     }
+    if (!keepOrientation) WakelockPlus.disable();
+
     updateProgress();
   }
 
