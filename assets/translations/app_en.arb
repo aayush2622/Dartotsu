@@ -369,6 +369,7 @@
   "@outOf": {},
   "totalOf": "Total of",
   "@totalOf": {},
+  "select": "Select",
   "selected": "Selected",
   "@selected": {},
   "found": "Found",
