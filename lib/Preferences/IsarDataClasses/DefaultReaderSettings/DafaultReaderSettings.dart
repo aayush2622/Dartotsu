@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:isar_community/isar.dart';
+import 'package:dartotsu/Theme/LanguageSwitcher.dart';
+
 part 'DafaultReaderSettings.g.dart';
 
 @embedded
@@ -17,6 +19,7 @@ class ReaderSettings {
   bool keepScreenOn;
   bool changePageWithVolumeButtons;
   bool openImageWithLongTap;
+  bool cropBorders;
 
   ReaderSettings({
     this.layoutType = LayoutType.Continuous,
@@ -29,6 +32,7 @@ class ReaderSettings {
     this.keepScreenOn = false,
     this.changePageWithVolumeButtons = false,
     this.openImageWithLongTap = true,
+    this.cropBorders = false,
   });
 
   Map<String, dynamic> toJson() {
@@ -43,6 +47,7 @@ class ReaderSettings {
       'keepScreenOn': keepScreenOn,
       'changePageWithVolumeButtons': changePageWithVolumeButtons,
       'openImageWithLongTap': openImageWithLongTap,
+      'cropBorders': cropBorders,
     };
   }
 
@@ -61,6 +66,7 @@ class ReaderSettings {
       keepScreenOn: json['keepScreenOn'] ?? false,
       changePageWithVolumeButtons: json['changePageWithVolumeButtons'] ?? false,
       openImageWithLongTap: json['openImageWithLongTap'] ?? false,
+      cropBorders: json['cropBorders'] ?? false,
     );
   }
 }
@@ -103,13 +109,13 @@ enum Direction {
   String toString() {
     switch (this) {
       case Direction.UTD:
-        return 'getString.utd';
+        return getString.utd;
       case Direction.DTU:
-        return 'getString.dtu';
+        return getString.dtu;
       case Direction.RTL:
-        return 'getString.rtl';
+        return getString.rtl;
       case Direction.LTR:
-        return 'getString.ltr';
+        return getString.ltr;
     }
   }
 
