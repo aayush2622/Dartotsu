@@ -19,10 +19,10 @@ dependencies:
     sdk: flutter
   async: ^2.13.0
   # State Management
-  get: ^4.7.2
+  get: ^4.7.3
 
   # Networking
-  http: ^1.4.0
+  dio: ^5.9.0
   web_socket_channel: ^3.0.3
   http_interceptor: ^2.0.0
 
@@ -41,18 +41,18 @@ dependencies:
   expandable_widgets: ^1.0.3+1
   expandable_text: 2.3.0
   cached_network_image: ^3.4.1
-  precached_network_image: ^1.2.4
-  flutter_svg: ^2.2.0
-  flex_color_picker: ^3.7.1
+  precached_network_image: ^1.4.0
+  flutter_svg: ^2.2.3
+  flex_color_picker: ^3.8.0
   icons_plus: ^5.0.0
-  skeletonizer: ^2.1.0+1
+  skeletonizer: ^2.1.2
   blurbox: ^0.0.6
   markdown_widget: ^2.3.2+8
   super_sliver_list: ^0.4.1
   dpad: ^2.0.2
   # UI Enhancements
   blur: ^4.0.2
-  expandable_page_view: ^1.0.17
+  expandable_page_view: ^1.2.0
   carousel_slider: ^5.1.1
   flutter_staggered_grid_view: ^0.7.0
   scrollable_positioned_list: ^0.3.8

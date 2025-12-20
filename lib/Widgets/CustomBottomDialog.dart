@@ -1,3 +1,4 @@
+import 'package:dartotsu/Widgets/ScrollConfig.dart';
 import 'package:flutter/material.dart';
 
 import '../Theme/ThemeManager.dart';
@@ -12,7 +13,6 @@ class CustomBottomDialog extends StatefulWidget {
   final VoidCallback? negativeCallback;
   final String? positiveText;
   final VoidCallback? positiveCallback;
-  final void Function()? onClose;
   const CustomBottomDialog({
     super.key,
     this.viewList = const [],
@@ -24,7 +24,6 @@ class CustomBottomDialog extends StatefulWidget {
     this.negativeCallback,
     this.positiveText,
     this.positiveCallback,
-    this.onClose,
   });
 
   @override
@@ -41,12 +40,6 @@ class _CustomBottomDialogState extends State<CustomBottomDialog> {
   }
 
   @override
-  void dispose() {
-    super.dispose();
-    widget.onClose?.call();
-  }
-
-  @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context).colorScheme;
     return ThemedContainer(
@@ -54,9 +47,10 @@ class _CustomBottomDialogState extends State<CustomBottomDialog> {
       border: Border.all(width: 0),
       borderRadius: const BorderRadius.vertical(top: Radius.circular(16.0)),
       padding: const EdgeInsets.symmetric(vertical: 24.0),
-      child: CustomScrollView(
+      child: CustomScrollConfig(
+        context,
         shrinkWrap: true,
-        slivers: [
+        children: [
           if (widget.title != null)
             SliverToBoxAdapter(
               child: Padding(
@@ -113,7 +107,7 @@ class _CustomBottomDialogState extends State<CustomBottomDialog> {
           if (widget.negativeText != null || widget.positiveText != null)
             SliverToBoxAdapter(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                padding: const EdgeInsets.symmetric(horizontal: 18.0),
                 child: Row(
                   children: [
                     if (widget.negativeText != null) ...[
@@ -121,7 +115,7 @@ class _CustomBottomDialogState extends State<CustomBottomDialog> {
                         child: OutlinedButton(
                           onPressed: widget.negativeCallback,
                           style: OutlinedButton.styleFrom(
-                            padding: const EdgeInsets.symmetric(vertical: 28.0),
+                            padding: const EdgeInsets.symmetric(vertical: 24.0),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(18.0),
                             ),
@@ -136,14 +130,14 @@ class _CustomBottomDialogState extends State<CustomBottomDialog> {
                           ),
                         ),
                       ),
-                      const SizedBox(width: 8.0),
+                      const SizedBox(width: 18.0),
                     ],
                     if (widget.positiveText != null) ...[
                       Expanded(
                         child: OutlinedButton(
                           onPressed: widget.positiveCallback,
                           style: ElevatedButton.styleFrom(
-                            padding: const EdgeInsets.symmetric(vertical: 28.0),
+                            padding: const EdgeInsets.symmetric(vertical: 24.0),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(18.0),
                             ),

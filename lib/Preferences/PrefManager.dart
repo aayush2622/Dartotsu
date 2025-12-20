@@ -72,27 +72,25 @@ enum PrefLocation {
 
 class PrefManager {
   static late Isar dartotsuPreferences;
-  static late Isar isar;
-  static final Map<String, dynamic> cache = {};
 
   static Future<void> init() async {
     try {
       final path = await getDirectory(subPath: 'settings');
-      dartotsuPreferences = await _open('DartotsuSettings', path!.path);
-      await _populateCache();
+      dartotsuPreferences = _open('DartotsuSettings', path!.path);
       await deleteAllStoredPreferences();
     } catch (e) {
       Logger.log('Error initializing preferences: $e');
     }
   }
 
-  static Future<Isar> _open(String name, String directory) async {
-    isar = Isar.openSync(
+  static Isar _open(String name, String directory) {
+    return Isar.openSync(
       [
         KeyValueSchema,
         ResponseTokenSchema,
         MediaSettingsSchema,
         ShowResponseSchema,
+        // bridge related schemas
         MSourceSchema,
         SourcePreferenceSchema,
         SourcePreferenceStringValueSchema,
@@ -102,24 +100,22 @@ class PrefManager {
       name: name,
       inspector: false,
     );
-
-    return isar;
   }
 
   static void setVal<T>(Pref<T> pref, T value) {
-    cache[pref.key] = value;
     _writeToIsar<T>(pref.key, value, pref.location);
   }
 
   static T getVal<T>(Pref<T> pref) {
-    if (cache.containsKey(pref.key) == true) {
-      if (T == Map<String, String>) {
-        return (cache[pref.key] as Map<dynamic, dynamic>).cast<String, String>()
-            as T;
-      }
-      return cache[pref.key] as T;
-    }
-    return pref.defaultValue;
+    return _getFromIsarSync<T>(pref.key, pref.location) ?? pref.defaultValue;
+  }
+
+  static T? getCustomVal<T>(
+    String key, {
+    PrefLocation location = PrefLocation.OTHER,
+    T? defaultValue,
+  }) {
+    return _getFromIsarSync<T>(key, location) ?? defaultValue;
   }
 
   static void setCustomVal<T>(
@@ -127,56 +123,62 @@ class PrefManager {
     T value, {
     PrefLocation location = PrefLocation.OTHER,
   }) {
-    cache[key] = value;
     _writeToIsar(key, value, location);
   }
 
-  static T? getCustomVal<T>(
-    String key, {
-    T? defaultValue,
-    PrefLocation location = PrefLocation.OTHER,
-  }) =>
-      cache.containsKey(key) ? cache[key] as T? : defaultValue;
-
   static void removeVal<T>(Pref<dynamic> pref) async {
-    cache.remove(pref.key);
     _removeFromIsar<T>(pref.key);
   }
 
   static void removeCustomVal<T>(
     String key,
   ) async {
-    if (cache.containsKey(key)) {
-      cache.remove(key);
-    }
     _removeFromIsar<T>(key);
   }
 
-  static Future<void> _writeToIsar<T>(
+  static T? _getFromIsarSync<T>(
+    String key,
+    PrefLocation location,
+  ) {
+    if (T == MediaSettings) {
+      return dartotsuPreferences.mediaSettings.getByKeySync(key) as T?;
+    }
+    if (T == ResponseToken) {
+      return dartotsuPreferences.responseTokens.getByKeySync(key) as T?;
+    }
+    if (T == ShowResponse) {
+      return dartotsuPreferences.showResponses.getByKeySync(key) as T?;
+    }
+
+    final kv = dartotsuPreferences.keyValues.getByKeySync(key);
+    return kv?.value as T?;
+  }
+
+  static void _writeToIsar<T>(
     String key,
     T value,
     PrefLocation loc,
-  ) async {
-    await dartotsuPreferences.writeTxn(() async {
+  ) {
+    dartotsuPreferences.writeTxnSync(() {
       if (value is MediaSettings) {
         value.key = key;
         value.location = loc;
-        await dartotsuPreferences.mediaSettings.put(value);
+        dartotsuPreferences.mediaSettings.putSync(value);
       } else if (value is ShowResponse) {
         value.key = key;
         value.location = loc;
-        await dartotsuPreferences.showResponses.put(value);
+        dartotsuPreferences.showResponses.putSync(value);
       } else if (value is ResponseToken) {
         value.key = key;
         value.location = loc;
-        await dartotsuPreferences.responseTokens.put(value);
+        dartotsuPreferences.responseTokens.putSync(value);
       } else {
         final obj = KeyValue()
           ..key = key
           ..value = value
           ..location = loc;
 
-        await dartotsuPreferences.keyValues.put(obj);
+        dartotsuPreferences.keyValues.putSync(obj);
       }
     });
   }
@@ -195,26 +197,6 @@ class PrefManager {
     });
   }
 
-  static Future<void> _populateCache() async {
-    final isar = dartotsuPreferences;
-    final keyValues = await isar.keyValues.where().findAll();
-    for (var item in keyValues) {
-      cache[item.key] = item.value;
-    }
-    final selected = await isar.mediaSettings.where().findAll();
-    for (var item in selected) {
-      cache[item.key] = item;
-    }
-    final responseToken = await isar.responseTokens.where().findAll();
-    for (var item in responseToken) {
-      cache[item.key] = item;
-    }
-    final showResponse = await isar.showResponses.where().findAll();
-    for (var item in showResponse) {
-      cache[item.key] = item;
-    }
-  }
-
   static Future<void> deleteAllStoredPreferences() async {
     if (getCustomVal("cleanSettings") ?? true) {
       final isar = dartotsuPreferences;
@@ -224,7 +206,6 @@ class PrefManager {
         await isar.showResponses.clear();
         await isar.responseTokens.clear();
       });
-      cache.clear();
       setCustomVal("cleanSettings", false);
     }
   }
@@ -370,7 +351,7 @@ class PrefManager {
     bool useSystemPath = true,
   }) async {
     final appDir = await getApplicationDocumentsDirectory();
-    final customPath = loadData(PrefName.customPath);
+    final customPath = useCustomPath ? loadData(PrefName.customPath) : '';
     final isApple = Platform.isIOS || Platform.isMacOS;
 
     Future<Directory> ensureDir(String dirPath) async {

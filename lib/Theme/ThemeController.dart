@@ -78,7 +78,6 @@ class ThemeController extends GetxController {
 
     if (value) {
       useCustomTheme(false);
-      setGlassEffect(false);
     }
   }
 

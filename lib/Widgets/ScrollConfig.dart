@@ -27,6 +27,7 @@ Widget CustomScrollConfig(
   Axis scrollDirection = Axis.vertical,
   ScrollPhysics? physics,
   ScrollController? controller,
+  bool shrinkWrap = false,
 }) {
   return CustomScrollView(
     controller: controller,
@@ -38,6 +39,7 @@ Widget CustomScrollConfig(
         PointerDeviceKind.trackpad
       },
     ),
+    shrinkWrap: shrinkWrap,
     physics: physics,
     scrollDirection: scrollDirection,
     slivers: children,

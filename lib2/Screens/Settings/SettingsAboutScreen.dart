@@ -1,11 +1,11 @@
 import 'dart:io';
 
-import 'package:dartotsu/Api/Updater/AppUpdater.dart';
 import 'package:dartotsu/Theme/LanguageSwitcher.dart';
 import 'package:dartotsu/Widgets/CustomBottomDialog.dart';
 import 'package:flutter/material.dart';
 
 import '../../Adaptor/Settings/SettingsAdaptor.dart';
+import '../../Api/Updater/AppUpdater.dart';
 import '../../DataClass/Setting.dart';
 import '../../Functions/Function.dart';
 import '../../Preferences/PrefManager.dart';

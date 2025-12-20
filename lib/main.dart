@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:ui';
 
+import 'package:dartotsu/Network/NetworkManager.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:desktop_webview_window/desktop_webview_window.dart';
 import 'package:dpad/dpad.dart';
@@ -15,12 +16,15 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:window_manager/window_manager.dart';
+import 'Api/Updater/AppUpdater.dart';
 import 'Functions/Extensions/ContextExtensions.dart';
 import 'Functions/Extensions/IntExtensions.dart';
 import 'Functions/Functions/AppShortcuts.dart';
 import 'Functions/Functions/DeepLink.dart';
 import 'Functions/Functions/GetXFunctions.dart';
 import 'Preferences/PrefManager.dart';
+import 'Screen/Error/ErrorScreen.dart';
+import 'Screen/Onboarding/OnboardingScreen.dart';
 import 'Services/MediaService.dart';
 import 'Theme/ThemeManager.dart';
 import 'Theme/ThemeController.dart';
@@ -43,7 +47,7 @@ void main(List<String> args) async {
           details.stack ?? StackTrace.current,
         );
       };
-      /*PlatformDispatcher.instance.onError = (error, stack) {
+      PlatformDispatcher.instance.onError = (error, stack) {
         handleError(error, stack);
         return true;
       };
@@ -53,7 +57,7 @@ void main(List<String> args) async {
           stackTrace: details.stack?.toString() ?? details.toString(),
           softCrash: true,
         );
-      };*/
+      };
       if (Platform.isLinux && runWebViewTitleBarWidget(args)) return;
 
       await init();
@@ -78,11 +82,13 @@ void main(List<String> args) async {
 
 Future init() async {
   await PrefManager.init();
-  await DartotsuExtensionBridge().init(PrefManager.isar, "Dartotsu");
+  await DartotsuExtensionBridge()
+      .init(PrefManager.dartotsuPreferences, "Dartotsu");
   await Logger.init();
   //await MpvConf.init();
   put(MediaServiceController());
   put(ThemeController());
+  put(NetworkManager());
   //TypeFactory.init();
   DeepLink.init();
   MediaKit.ensureInitialized();
@@ -94,7 +100,7 @@ Future init() async {
   for (var locale in supportedLocales) {
     initializeDateFormatting(locale);
   }
-  //AppUpdater().checkForUpdate();
+  AppUpdater().checkForUpdate();
   //Discord.getSavedToken();
 }
 
@@ -143,8 +149,9 @@ class _MyAppState extends State<MyApp> {
         autofocus: true,
         focusNode: _focusNode,
         onKeyEvent: (_, event) {
-          final handled = appShortcuts(event);
-          return handled ? KeyEventResult.handled : KeyEventResult.ignored;
+          return appShortcuts(event)
+              ? KeyEventResult.handled
+              : KeyEventResult.ignored;
         },
         child: DynamicColorBuilder(
           builder: (lightDynamic, darkDynamic) {
@@ -169,12 +176,12 @@ class _MyAppState extends State<MyApp> {
                     theme.isDarkMode.value ? ThemeMode.dark : ThemeMode.light,
                 theme: getTheme(lightDynamic, theme),
                 darkTheme: getTheme(darkDynamic, theme),
-                home: !loadCustomData(
+                home: loadCustomData(
                   "initialLoaded",
                   defaultValue: false,
                 )!
                     ? const MainScreen()
-                    : const SizedBox(),
+                    : const OnboardingScreen(),
               );
             });
           },
@@ -204,7 +211,7 @@ class MainScreenState extends State<MainScreen> {
   }
 
   Widget get _navbar {
-    return SizedBox();
+    return const SizedBox();
     /* return Obx(() {
       navbar = context.isPhone
           ? FloatingBottomNavBarMobile(
@@ -235,9 +242,7 @@ class MainScreenState extends State<MainScreen> {
                   opacity: 0.8,
                   child: Obx(
                     () => cachedNetworkImage(
-                      imageUrl: service.data.bg.value.isNotEmpty
-                          ? service.data.bg.value
-                          : 'https://wallpapercat.com/download/1198914',
+                      imageUrl: service.data.bg.value,
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -249,7 +254,7 @@ class MainScreenState extends State<MainScreen> {
             child: Align(
               alignment: Alignment.bottomCenter,
               child: FractionallySizedBox(
-                heightFactor: 0.75,
+                heightFactor: 0.55,
                 child: Container(
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
@@ -287,37 +292,39 @@ class MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     final serviceController = find<MediaServiceController>();
-    return Obx(() {
-      final service = serviceController.currentService.value;
-      return Scaffold(
-        body: Stack(
-          children: [
-            _buildBackground(service),
-            Row(
-              children: [
-                if (!context.isPhone) SizedBox(width: 100, child: _navbar),
-                Expanded(child: _buildBody(service)),
-              ],
-            ),
-            if (context.isPhone) _navbar,
-            Positioned(
-              bottom: 92.bottomBar(),
-              right: 12,
-              child: GestureDetector(
-                onLongPress: () =>
-                    service.searchScreen?.onSearchIconLongClick(context),
-                onTap: () => service.searchScreen?.onSearchIconClick(context),
-                child: ThemedContainer(
-                  context: context,
-                  borderRadius: BorderRadius.circular(16.0),
-                  padding: const EdgeInsets.all(4.0),
-                  child: const Icon(Icons.search),
+    return Obx(
+      () {
+        final service = serviceController.currentService.value;
+        return Scaffold(
+          body: Stack(
+            children: [
+              _buildBackground(service),
+              Row(
+                children: [
+                  if (!context.isPhone) SizedBox(width: 100, child: _navbar),
+                  Expanded(child: _buildBody(service)),
+                ],
+              ),
+              if (context.isPhone) _navbar,
+              Positioned(
+                bottom: 92.bottomBar(),
+                right: 12,
+                child: GestureDetector(
+                  onLongPress: () =>
+                      service.searchScreen?.onSearchIconLongClick(context),
+                  onTap: () => service.searchScreen?.onSearchIconClick(context),
+                  child: ThemedContainer(
+                    context: context,
+                    borderRadius: BorderRadius.circular(16.0),
+                    padding: const EdgeInsets.all(4.0),
+                    child: const Icon(Icons.search),
+                  ),
                 ),
               ),
-            ),
-          ],
-        ),
-      );
-    });
+            ],
+          ),
+        );
+      },
+    );
   }
 }

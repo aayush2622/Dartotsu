@@ -6,7 +6,6 @@ import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
 import '../Functions/Functions/GetXFunctions.dart';
 import '../Widgets/DropdownMenu.dart';
-import 'Colors.dart';
 import 'ThemeController.dart';
 import 'Themes/blue.dart';
 import 'Themes/fromCode.dart';
@@ -80,8 +79,9 @@ ThemeData getTheme(ColorScheme? material, ThemeController themeManager) {
         isOled ? Colors.black : baseTheme.scaffoldBackgroundColor,
     colorScheme: baseTheme.colorScheme.copyWith(
       surface: isOled ? Colors.black : baseTheme.colorScheme.surface,
-      surfaceContainerHighest:
-          isOled ? greyNavDark : baseTheme.colorScheme.surfaceContainerHighest,
+      surfaceContainerHighest: isOled
+          ? const Color(0xFF222222)
+          : baseTheme.colorScheme.surfaceContainerHighest,
     ),
     textTheme: baseTheme.textTheme.copyWith(
       labelLarge: baseTheme.textTheme.labelLarge?.copyWith(
@@ -176,6 +176,7 @@ Widget ThemedWidget({
 Widget ThemedContainer({
   required BuildContext context,
   required Widget child,
+  Color? color,
   Widget? glassWidget,
   Border? border,
   BorderRadiusGeometry? borderRadius,
@@ -193,10 +194,10 @@ Widget ThemedContainer({
 
     if (isGlassMode) {
       return BlurBox(
-        blur: 12.0,
+        blur: 10.0,
         alignment: alignment,
         padding: effectivePadding,
-        color: theme.surfaceContainerLow.withOpacity(0.2),
+        color: color ?? theme.surfaceContainerLow.withOpacity(0.2),
         border: border ??
             Border.all(
               color: theme.onSurface.withOpacity(0.2),
@@ -218,7 +219,7 @@ Widget ThemedContainer({
       padding: effectivePadding,
       alignment: alignment,
       decoration: BoxDecoration(
-        color: theme.surfaceContainerLow,
+        color: color ?? theme.surfaceContainerLow,
         border: border ??
             Border.all(
               color: theme.onSurface.withOpacity(0.6),
