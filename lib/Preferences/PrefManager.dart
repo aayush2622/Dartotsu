@@ -275,8 +275,8 @@ class PrefManager {
   }
 
   static Future<Directory?> getTmpDirectory() async {
-    final gefaultDirectory = await getDirectory();
-    String dbDir = path.join(gefaultDirectory!.path, 'tmp');
+    final defaultDirectory = await getDirectory();
+    String dbDir = path.join(defaultDirectory!.path, 'tmp');
     await Directory(dbDir).create(recursive: true);
     return Directory(dbDir);
   }

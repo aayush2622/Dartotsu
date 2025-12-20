@@ -120,7 +120,7 @@ class NativeLogger {
       (call) async {
         if (call.method == 'onLog') {
           String log = call.arguments;
-          debugPrint("[NATIVE] $log");
+          logger("[NATIVE] $log");
         }
       },
     );

@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:dartotsu/Functions/Function.dart';
@@ -28,11 +27,17 @@ class AppUpdater {
 
   AppUpdater() {
     checkForUpdates = loadCustomData("checkForUpdates") ?? true;
-    alphaUpdates = loadCustomData("alphaUpdates") ?? !false;
+    alphaUpdates = loadCustomData("alphaUpdates") ?? false;
   }
 
   Future<void> checkForUpdate({bool force = false}) async {
     if (!checkForUpdates && !force) return;
+    var hash = await loadEnv("hash");
+
+    if (hash == null) {
+      if (force) snackString("Hash not found");
+      return;
+    }
 
     var response = await network.get(
         'https://api.github.com/repos/${alphaUpdates ? alphaRepo : mainRepo}/releases/latest');
@@ -50,12 +55,8 @@ class AppUpdater {
     final release = data["tag_name"];
     var skippedUpdates =
         loadCustomData<List<String>>("skippedUpdateList") ?? [];
-    var hash = await loadEnv("hash");
+
     if (skippedUpdates.contains(release) && !force) return;
-    if (hash == null) {
-      if (force) snackString("No Update Available");
-      return;
-    }
 
     final compare = await network.get(
       'https://api.github.com/repos/$mainRepo/compare/$release...$hash',

@@ -1,16 +1,11 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:dio/io.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart' hide Response;
 
 class NetworkManager extends GetxController {
   late final Dio dio;
-
-  late final LogInterceptor _logInterceptor;
-
-  bool _loggingEnabled = true;
 
   @override
   void onInit() {
@@ -24,9 +19,8 @@ class NetworkManager extends GetxController {
       ),
     );
 
-    _setupLogging();
     _setupHeaders();
-    _setupDns();
+    _setupLogging();
   }
 
   void _setupLogging() {
@@ -35,6 +29,7 @@ class NetworkManager extends GetxController {
         onRequest: (options, handler) {
           options.extra['startTime'] = DateTime.now();
           debugPrint('→ ${options.method} ${options.uri}');
+          debugPrint('Headers: ${options.headers}');
           handler.next(options);
         },
         onResponse: (response, handler) {
@@ -49,6 +44,7 @@ class NetworkManager extends GetxController {
             '← ${response.statusCode} ${response.requestOptions.uri}'
             '${ms != null ? ' (${ms}ms)' : ''}',
           );
+
           handler.next(response);
         },
         onError: (error, handler) {
@@ -93,34 +89,15 @@ class NetworkManager extends GetxController {
 
   String _buildUserAgent() {
     final platform = Platform.operatingSystem;
-    final osVersion = Platform.operatingSystemVersion;
+
+    final osParts = Platform.operatingSystemVersion.split(' ');
+    final osVersion = osParts.length > 1 ? osParts[1] : osParts.first;
+
     final arch = Platform.version.split(' ').first;
     const appName = 'Dartotsu';
-    return '$appName ($platform; $osVersion; $arch) Flutter/Dio';
+
+    return '$appName ($platform: $osVersion; $arch)';
   }
-
-  void _setupDns() {
-    // one day
-    dio.httpClientAdapter = IOHttpClientAdapter(
-      createHttpClient: () {
-        final client = HttpClient();
-
-        return client;
-      },
-    );
-  }
-
-  void setLoggingEnabled(bool enabled) {
-    if (_loggingEnabled == enabled) return;
-    _loggingEnabled = enabled;
-
-    dio.interceptors.remove(_logInterceptor);
-    if (enabled) {
-      dio.interceptors.add(_logInterceptor);
-    }
-  }
-
-  bool get isLoggingEnabled => _loggingEnabled;
 
   Future<Response<T>> get<T>(
     String url, {
