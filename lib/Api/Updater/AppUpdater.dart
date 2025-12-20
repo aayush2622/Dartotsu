@@ -21,7 +21,7 @@ class AppUpdater {
   final mainRepo = 'aayush2622/Dartotsu';
   final alphaRepo = 'grayankit/Dartotsu-Downloader';
 
-  final NetworkManager network = find<NetworkManager>();
+  final network = find<NetworkManager>();
   late bool checkForUpdates;
   late bool alphaUpdates;
 
