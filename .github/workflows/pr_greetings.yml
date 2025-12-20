@@ -54,11 +54,11 @@ jobs:
         script: |
           const prNumber = context.payload.pull_request.number;
           const message = `
-          **🎉 Thank you for your contribution!**
+          **Thank you for your contribution!**
           
           Your Pull Request has been successfully submitted and is now awaiting review. We truly appreciate your efforts to improve Dartotsu.
 
-          **👥 Connect with the Community**
+          ** Connect with the Community**
           
           While you're here, why not join our communities to stay engaged?
           - **[Discord](https://discord.gg/eyQdCpdubF)**: Chat with fellow developers, ask questions, and get the latest updates.
