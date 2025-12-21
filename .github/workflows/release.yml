@@ -2,55 +2,108 @@ name: RELEASE
 on:
   push:
     tags:
-      - "v*.*.*" # Trigger on version tags like v1.0.0, v2.1.3, etc.
+      - "v*.*.*"
   workflow_dispatch:
+
+env:
+  FLUTTER_VERSION: 3.35.7
+
 jobs:
+  anchors:
+    if: ${{ false }}
+    runs-on: ubuntu-latest
+    steps:
+      - &checkout
+        name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - &prepare_flutter
+        name: Prepare Flutter version
+        shell: bash
+        env:
+          FLUTTER_VERSION_SECRET: ${{ secrets.FLUTTER_VERSION }}
+        run: |
+          if [ -n "${FLUTTER_VERSION_SECRET}" ]; then
+            echo "FLUTTER_VERSION=${FLUTTER_VERSION_SECRET}" >> $GITHUB_ENV
+          else
+            echo "FLUTTER_VERSION=${FLUTTER_VERSION}" >> $GITHUB_ENV
+          fi
+
+      - &setup_flutter
+        name: Setup Flutter
+        id: setup-flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+
+      - &cache_flutter
+        name: Cache Flutter dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ${{ steps.setup-flutter.outputs.pub-cache-path }}
+            build/
+            .dart_tool/
+          key: release-v1-${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.lock', '**/pubspec.yaml') }}
+          restore-keys: |
+            release-v1-${{ runner.os }}-flutter-
+
+      - &setup_env
+        name: Setup env File
+        shell: bash
+        env:
+          SIMKL_SECRET: ${{ secrets.SIMKL_SECRET }}
+        run: |
+          echo "SIMKL_SECRET=$SIMKL_SECRET" > .env
+          GIT_HASH=$(git rev-parse --short HEAD)
+          echo "hash=$GIT_HASH" >> .env
+
+      - &setup_cmake
+        name: Setup cmake
+        uses: jwlawson/actions-setup-cmake@v2
+        with:
+          cmake-version: "3.18.1"
+
+      - &install_android_deps
+        name: Install Android build deps
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y ninja-build
+
+      - &symlink_ninja
+        name: Create symlink for ninja
+        run: |
+          mkdir -p /usr/local/lib/android/sdk/cmake/3.18.1/bin
+          sudo ln -s /usr/bin/ninja /usr/local/lib/android/sdk/cmake/3.18.1/bin/ninja
+
   build_android:
     runs-on: ubuntu-latest
     permissions:
       contents: write
       pull-requests: write
       repository-projects: write
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      # Setup Cmake
-      - name: Setup cmake
-        uses: jwlawson/actions-setup-cmake@v2
-        with:
-          cmake-version: "3.18.1"
-      # Install Ninaja
-      - name: Install system dependencies
-        run: |
-          sudo apt-get update -y
-          sudo apt-get install -y ninja-build
-      # Create symlink for ninja
-      - name: Create symlink for ninja
-        run: |
-          mkdir -p /usr/local/lib/android/sdk/cmake/3.18.1/bin
-          sudo ln -s /usr/bin/ninja /usr/local/lib/android/sdk/cmake/3.18.1/bin/ninja
+      - *checkout
+      - *prepare_flutter
+      - *setup_flutter
+      - *cache_flutter
+      - *setup_cmake
+      - *install_android_deps
+      - *symlink_ninja
 
-      - uses: actions/setup-java@v4
+      - name: Setup Java
+        uses: actions/setup-java@v4
         with:
           distribution: "oracle"
           java-version: "17"
 
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: 3.35.7
-          cache: true
-
-          # Download the keystore file (from GitHub Secrets or other storage)
       - name: Download keystore
         env:
           KEYSTORE_BASE64: ${{ secrets.APK_SIGN }}
         run: echo "$KEYSTORE_BASE64" | base64 --decode > android/app/dartotsu.jks
 
-      # Set up environment variables for signing
       - name: Set up signing variables
         env:
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
@@ -61,16 +114,16 @@ jobs:
           echo "keyPassword=$KEY_PASSWORD" >> android/key.properties
           echo "keyAlias=$KEY_ALIAS" >> android/key.properties
           echo "storeFile=dartotsu.jks" >> android/key.properties
-      # Create .env:
-      - name: Setup env File
-        env:
-          SIMKL_SECRET: ${{ secrets.SIMKL_SECRET }}
-        run: |
-          echo "SIMKL_SECRET= $SIMKL_SECRET" > .env
-          GIT_HASH=$(git rev-parse --short HEAD)
-          echo "hash=$GIT_HASH" >> .env
 
-      # Optimize Flutter build
+      - *setup_env
+
+      - name: Configure Gradle
+        run: |
+          mkdir -p ~/.gradle
+          echo "org.gradle.daemon=true" >> ~/.gradle/gradle.properties
+          echo "org.gradle.parallel=true" >> ~/.gradle/gradle.properties
+          echo "org.gradle.caching=true" >> ~/.gradle/gradle.properties
+
       - run: flutter clean
       - run: flutter pub get
       - run: flutter build apk --release --split-per-abi
@@ -79,15 +132,16 @@ jobs:
       - name: Rename APKs
         run: |
           for file in build/app/outputs/flutter-apk/app-*-release.apk; do
-            abi=$(basename $file | sed 's/app-\(.*\)-release.apk/\1/')
-            mv $file build/app/outputs/flutter-apk/Dartotsu_Android_${abi}_${{github.ref_name}}.apk
+            abi=$(basename "$file" | sed 's/app-\(.*\)-release.apk/\1/')
+            mv "$file" build/app/outputs/flutter-apk/Dartotsu_Android_${abi}_${{ github.ref_name }}.apk
           done
           ls build/app/outputs/flutter-apk
+
       - name: Rename Universal APK
-        run: |
-          mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/Dartotsu_Android_Universal_${{github.ref_name}}.apk
-      - name: Android Apk Release
-        uses: softprops/action-gh-release@master
+        run: mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/Dartotsu_Android_Universal_${{ github.ref_name }}.apk
+
+      - name: Publish Android artifacts
+        uses: softprops/action-gh-release@v2
         with:
           files: build/app/outputs/flutter-apk/Dartotsu_Android_*_${{ github.ref_name }}.apk
 
@@ -98,53 +152,27 @@ jobs:
       pull-requests: write
       repository-projects: write
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      # Cache Flutter and Dart dependencies
-      - uses: actions/cache@v4
-        with:
-          path: |
-            C:\hostedtoolcache\windows\flutter
-            ~\AppData\Local\Pub\Cache
-            build\
-            .dart_tool\
-          key: ${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-flutter-
+      - *checkout
 
       - name: Set up Signing Tool
         run: |
           mkdir $env:USERPROFILE\certs
-          [System.IO.File]::WriteAllBytes("$env:USERPROFILE\certs\Dartotsu.pfx", [Convert]::FromBase64String("${{secrets.PFX_FILE}}"))
-      # Create .env:
-      - name: Setup env File
-        env:
-          SIMKL_SECRET: ${{ secrets.SIMKL_SECRET }}
-        run: |
-          echo "SIMKL_SECRET= $env:SIMKL_SECRET" > .env
-          GIT_HASH=$(git rev-parse --short HEAD)
-          echo "hash=$GIT_HASH" >> .env
+          [System.IO.File]::WriteAllBytes("$env:USERPROFILE\certs\Dartotsu.pfx", [Convert]::FromBase64String("${{ secrets.PFX_FILE }}"))
 
-      # Setup Flutter with caching
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: 3.35.7
-          cache: true
+      - *setup_env
+      - *prepare_flutter
+      - *setup_flutter
+      - *cache_flutter
+
       - name: Setup NuGet.exe for use with actions
         uses: NuGet/setup-nuget@v2.0.1
         with:
           nuget-version: "latest"
-      # Enable Windows desktop support
+
       - name: Enable Windows desktop support
         run: flutter config --enable-windows-desktop
 
       - run: flutter clean
-
-      # Get dependencies with cached packages
       - run: flutter pub get
 
       - name: Extract Version
@@ -157,9 +185,9 @@ jobs:
         id: find_signtool
         shell: pwsh
         run: |
-          $sdkBins = Get-ChildItem "C:\Program Files (x86)\Windows Kits\10\bin" -Directory | 
-                     Where-Object { $_.Name -match '^\d+\.\d+\.\d+\.\d+$' } |  
-                     Sort-Object Name -Descending | 
+          $sdkBins = Get-ChildItem "C:\Program Files (x86)\Windows Kits\10\bin" -Directory |
+                     Where-Object { $_.Name -match '^\d+\.\d+\.\d+\.\d+$' } |
+                     Sort-Object Name -Descending |
                      Select-Object -First 1
           if (-not $sdkBins) {
             throw "No Windows SDK bin directories found!"
@@ -172,11 +200,12 @@ jobs:
 
       - name: Build and Sign Setup
         run: |
-          dart run inno_bundle:build --sign-tool-params '"${{ steps.find_signtool.outputs.signtool_path }}" sign /fd sha256 /f "C:\Users\runneradmin\certs\Dartotsu.pfx" /p "${{secrets.PFX_PASSWORD}}" /tr http://timestamp.digicert.com /td sha256 /v $f' --release
-      - name: Release Windows Zip
-        uses: softprops/action-gh-release@master
+          dart run inno_bundle:build --sign-tool-params '"${{ steps.find_signtool.outputs.signtool_path }}" sign /fd sha256 /f "C:\Users\runneradmin\certs\Dartotsu.pfx" /p "${{ secrets.PFX_PASSWORD }}" /tr http://timestamp.digicert.com /td sha256 /v $f' --release
+
+      - name: Publish Windows installer
+        uses: softprops/action-gh-release@v2
         with:
-          files: build/windows/x64/installer/Release/Dartotsu-x86_64-${{env.version}}-Installer.exe
+          files: build/windows/x64/installer/Release/Dartotsu-x86_64-${{ env.version }}-Installer.exe
 
   build_linux:
     runs-on: ubuntu-latest
@@ -185,51 +214,36 @@ jobs:
       pull-requests: write
       repository-projects: write
     steps:
-      # Step 1: Clone repository
-      - name: Cloning repository
-        uses: actions/checkout@v4
+      - *checkout
+      - *prepare_flutter
+      - *setup_flutter
+      - *cache_flutter
 
-      # Step 2: Setup Flutter
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: 3.35.7
-          cache: true
-
-      # Step 3: Setup system dependencies
       - name: Install system dependencies
         run: |
           sudo apt-get update -y
           sudo apt-get install -y ninja-build libgtk-3-dev webkit2gtk-4.1 libmpv-dev pkg-config fuse
 
-      # Create .env:
-      - name: Setup env File
-        env:
-          SIMKL_SECRET: ${{ secrets.SIMKL_SECRET }}
-        run: |
-          echo "SIMKL_SECRET= $SIMKL_SECRET" > .env
-          GIT_HASH=$(git rev-parse --short HEAD)
-          echo "hash=$GIT_HASH" >> .env
+      - *setup_env
 
-      # Step 5: Fetch Flutter dependencies
       - name: Fetch Flutter dependencies
         run: flutter pub get
 
-      # Step 6: Build the Linux application
       - name: Build Flutter Linux app
         run: flutter build linux
 
-      # Step 7: Archive the app
       - name: Archive app
         uses: thedoctor0/zip-release@master
         with:
           type: "zip"
-          filename: Dartotsu_LinuxZip_${{github.ref_name}}.zip
+          filename: Dartotsu_LinuxZip_${{ github.ref_name }}.zip
           directory: build/linux/x64/release/bundle
-      - name: Release Linux Zip
-        uses: softprops/action-gh-release@master
+
+      - name: Publish Linux bundle
+        uses: softprops/action-gh-release@v2
         with:
-          files: build/linux/x64/release/bundle/Dartotsu_LinuxZip_${{github.ref_name}}.zip
+          files: build/linux/x64/release/bundle/Dartotsu_LinuxZip_${{ github.ref_name }}.zip
+
   build_ios:
     runs-on: macos-latest
     permissions:
@@ -237,30 +251,15 @@ jobs:
       pull-requests: write
       repository-projects: write
     steps:
-      # Step 1: Clone repository
-      - name: Cloning repository
-        uses: actions/checkout@v4
+      - *checkout
+      - *prepare_flutter
+      - *setup_flutter
+      - *cache_flutter
+      - *setup_env
 
-      # Step 2: Setup Flutter
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: 3.35.7
-          cache: true
-
-      - name: Setup .env File for macOS
-        env:
-          SIMKL_SECRET: ${{ secrets.SIMKL_SECRET }}
-        run: |
-          echo "SIMKL_SECRET= $SIMKL_SECRET" > .env
-          GIT_HASH=$(git rev-parse --short HEAD)
-          echo "hash=$GIT_HASH" >> .env
-        shell: bash
-
-      # Step 3 Get Dependencies
       - name: Get Dependencies
         run: flutter pub get
-      #Step 4 Build app for iOS
+
       - name: Build iOS
         run: |
           flutter build ios --release --no-codesign
@@ -271,10 +270,11 @@ jobs:
           cd ..
           zip -r Dartotsu-iOS-${{ github.ref_name }}.ipa Payload
 
-      - name: Release Linux Zip
-        uses: softprops/action-gh-release@master
+      - name: Publish iOS archive
+        uses: softprops/action-gh-release@v2
         with:
-          files: build/ios/iphoneos/Dartotsu-iOS-${{github.ref_name}}.ipa
+          files: build/ios/iphoneos/Dartotsu-iOS-${{ github.ref_name }}.ipa
+
   build_macos:
     runs-on: macos-latest
     permissions:
@@ -282,258 +282,44 @@ jobs:
       pull-requests: write
       repository-projects: write
     steps:
-      - name: Cloning repository
-        uses: actions/checkout@v4
+      - *checkout
+      - *prepare_flutter
+      - *setup_flutter
+      - *cache_flutter
+      - *setup_env
 
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: 3.35.7
-          cache: true
-      - name: Setup .env File for macOS
-        env:
-          SIMKL_SECRET: ${{ secrets.SIMKL_SECRET }}
-        run: |
-          echo "SIMKL_SECRET= $SIMKL_SECRET" > .env
-          GIT_HASH=$(git rev-parse --short HEAD)
-          echo "hash=$GIT_HASH" >> .env
-        shell: bash
       - name: Get Dependencies
         run: flutter pub get
+
       - name: Build macOS
         run: flutter build macos --release
+
       - name: Create DMG file for macOS Build
         run: |
           mkdir -p build/macos/Release
-          hdiutil create -volname "Dartotsu" -srcfolder build/macos/Build/Products/Release/dartotsu.app -ov -format UDZO build/macos/Release/Dartotsu-macos-${{github.ref_name}}.dmg
+          hdiutil create -volname "Dartotsu" -srcfolder build/macos/Build/Products/Release/Dartotsu.app -ov -format UDZO build/macos/Release/Dartotsu-macos-${{ github.ref_name }}.dmg
         shell: bash
-      - name: Release macOS Zip
-        uses: softprops/action-gh-release@master
+
+      - name: Publish macOS DMG
+        uses: softprops/action-gh-release@v2
         with:
-          files: build/macos/Release/Dartotsu-macos-${{github.ref_name}}.dmg
+          files: build/macos/Release/Dartotsu-macos-${{ github.ref_name }}.dmg
 
-  post-release-notes:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-    needs: [generate-changelog]
-    steps:
-      - name: Cloing repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Fetch Repository Tags by Date and Time
-        id: fetch_tags
-        run: |
-          curl -s "https://api.github.com/repos/${{github.repository}}/tags" -o tags.json
-          TAGS=$(jq -r '.[].name' tags.json)
-          declare -a TAGS_WITH_DATES=()
-          for TAG in $TAGS; do
-            TAG_DETAILS=$(curl -s "https://api.github.com/repos/${{github.repository}}/git/refs/tags/$TAG")
-            OBJECT_URL=$(echo "$TAG_DETAILS" | jq -r '.object.url // empty')
-            if [ -n "$OBJECT_URL" ]; then
-              OBJECT_DETAILS=$(curl -s "$OBJECT_URL")
-              DATE=$(echo "$OBJECT_DETAILS" | jq -r '.tagger.date // .committer.date // empty')
-              if [ -n "$DATE" ]; then
-                TAGS_WITH_DATES+=("$DATE $TAG")
-              fi
-            fi
-          done
-          LATEST_TAG=""
-          LATEST_DATE=""
-          for TAG_DATE in "${TAGS_WITH_DATES[@]}"; do
-            TAG_DATE_TIME=$(echo "$TAG_DATE" | awk '{print $1}')
-            TAG_NAME=$(echo "$TAG_DATE" | awk '{print $2}')
-            if [[ -z "$LATEST_DATE" || "$TAG_DATE_TIME" > "$LATEST_DATE" ]]; then
-              LATEST_DATE="$TAG_DATE_TIME"
-              LATEST_TAG="$TAG_NAME"
-            fi
-          done
-          echo "$LATEST_TAG"
-          echo "LATEST_TAG=$LATEST_TAG" >> $GITHUB_ENV
-      - name: Get Latest Release Notes
-        id: get_release_notes
-        run: |
-          RELEASE_DATA=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-          "https://api.github.com/repos/${{ github.repository }}/releases/latest")
-
-          RELEASE_NOTES=$(echo "$RELEASE_DATA" | jq -r '.body')
-          echo "Release Notes: $RELEASE_NOTES"
-
-          echo "RELEASE_NOTES<<EOF" >> $GITHUB_ENV
-          echo "$RELEASE_NOTES" >> $GITHUB_ENV
-          echo "EOF" >> $GITHUB_ENV
-
-      - name: Format Release Notes
-        id: format_notes
-        run: |
-
-          features=$(echo "$RELEASE_NOTES" | grep -iE '^\*\s\[[a-f0-9]+\]\(.*\):\sfeat' | head -n 5)
-          if [[ -n "$features" ]]; then
-            echo "**🚀 Features**" > formatted_notes.txt
-            echo "$features" >> formatted_notes.txt
-            echo "" >> formatted_notes.txt
-          fi
-
-          fixes=$(echo "$RELEASE_NOTES" | grep -iE '^\*\s\[[a-f0-9]+\]\(.*\):\s(fix|bug|improvement|patch)' | head -n 5)
-          if [[ -n "$fixes" ]]; then
-            echo "**🐛 Fixes**" >> formatted_notes.txt
-            echo "$fixes" >> formatted_notes.txt
-            echo "" >> formatted_notes.txt
-          fi
-
-          chores=$(echo "$RELEASE_NOTES" | grep -iE '^\*\s\[[a-f0-9]+\]\(.*\):\s(chore|docs|build|ci)' | head -n 5)
-          if [[ -n "$chores" ]]; then
-            echo "**🛠 Chores**" >> formatted_notes.txt
-            echo "$chores" >> formatted_notes.txt
-            echo "" >> formatted_notes.txt
-          fi
-
-          cat formatted_notes.txt
-          FORMATTED_NOTES=$(cat formatted_notes.txt) 
-          echo "FORMATTED_NOTES<<EOF" >> $GITHUB_ENV
-          echo "$FORMATTED_NOTES" >> $GITHUB_ENV
-          echo "EOF" >> $GITHUB_ENV
-
-      - name: Send message to Discord
-        env:
-          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_RELEASE_URL }}
-        run: |
-
-          FORMATTED_NOTES=$(echo "$FORMATTED_NOTES" | sed -E 's/\): [^:]+:/) :/g')
-
-          default_color="#1ac4c5"
-          hex_to_decimal() { printf '%d' "0x${1#"#"}"; }
-          embed_color=$(hex_to_decimal "$default_color")
-
-          # Ensure VERSION is not empty
-          VERSION=${VERSION:-"${{env.LATEST_TAG}}"}
-
-
-          discord_data=$(jq -nc \
-                        --arg field_value "$FORMATTED_NOTES
-
-
-                        [📌 Full changelog](https://github.com/${{github.repository}}/releases/tag/${{ env.LATEST_TAG }})" \
-                        --arg footer_text "Version $VERSION" \
-                        --arg timestamp "$(date -u +%Y-%m-%dT%H:%M:%S.000Z)" \
-                        --argjson embed_color "$embed_color" \
-                        '{
-                          "content": "<@&1298977336124903457>",
-                          "embeds": [
-                            {
-                              "title": "New App Version Dropped 🔥",
-                              "color": $embed_color,
-                              "description": $field_value,
-                              "footer": {
-                                "text": $footer_text
-                              },
-                              "timestamp": $timestamp
-                            }
-                          ]
-                        }')
-
-          echo "Debug: Final Discord payload is: $discord_data"
-
-          # Send the message to Discord using the webhook
-          curl -H "Content-Type: application/json" \
-              -X POST \
-              -d "$discord_data" \
-              "$DISCORD_WEBHOOK_URL"
-
-  upload_download_url:
-    runs-on: ubuntu-latest
-    needs: [post-release-notes]
-    permissions:
-      contents: read
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Install GitHub CLI
-        run: |
-          sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key C99B11DEB97541F0
-          curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
-          echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
-          sudo apt update
-          sudo apt install gh -y
-
-      - name: Authenticate GitHub CLI
-        run: echo "${{secrets.FINE_GRAIN_TOKEN}}" | gh auth login --with-token
-
-      - name: Fetch latest release assets with gh
-        id: fetch_assets
-        run: |
-          gh release view --repo ${{github.repository}} ${{github.ref_name}} --json assets --jq '.assets[].url' > asset_links.txt
-
-      - name: Print fetched List
-        run: cat asset_links.txt
-
-      - name: Read, sort, and format links from the file
-        id: format_links
-        run: |
-          # Read links from the file
-          LINKS=$(cat asset_links.txt | sort)
-
-          # Initialize the message
-          MESSAGE="**Dartotsu ${{github.ref_name}} Downloads:**\n\n"
-
-          # Loop through each link and format them
-          while IFS= read -r LINK; do
-            if [[ $LINK == *"arm64"* ]]; then
-              MESSAGE+="• [Android_arm64]($LINK)\n"
-            elif [[ $LINK == *"armeabi"* ]]; then
-              MESSAGE+="• [Android_armeabi-v7a]($LINK)\n"
-            elif [[ $LINK == *"Android_x86"* ]]; then
-              MESSAGE+="• [Android_x86_64]($LINK)\n"
-            elif [[ $LINK == *"Android_Universal"* ]]; then
-              MESSAGE+="• [Android_Universal]($LINK)\n"
-            elif [[ $LINK == *"iOS"* ]]; then
-              MESSAGE+="• [iOS]($LINK)\n"
-            elif [[ $LINK == *"LinuxZip"* ]]; then
-              MESSAGE+="• [Linux]($LINK)\n"
-            elif [[ $LINK == *"Linux"* ]]; then
-              MESSAGE+="• [Linux_AppImage]($LINK)\n"
-            elif [[ $LINK == *"macos"* ]]; then
-              MESSAGE+="• [macOS]($LINK)\n"
-            elif [[ $LINK == *"Installer"* ]]; then
-              MESSAGE+="• [Windows]($LINK)\n"
-            fi
-          done <<< "$LINKS"
-
-          # Save the message to an environment variable
-          echo "MESSAGE=$MESSAGE" >> $GITHUB_ENV
-      - name: Send message to Discord
-        env:
-          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_RELEASE_URL }}
-          MESSAGE: ${{ env.MESSAGE }}
-        run: |
-          # Send the message to Discord using the webhook
-          curl -H "Content-Type: application/json" \
-            -X POST \
-            -d "{\"content\": \"$MESSAGE\"}" \
-            $DISCORD_WEBHOOK_URL
   generate-changelog:
     runs-on: ubuntu-latest
     needs: [build_android, build_windows, build_linux, build_ios, build_macos]
     permissions:
       contents: write
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      # Clear existing CHANGELOG.md
+      - *checkout
       - name: Clear CHANGELOG.md
         run: |
-          echo ""> CHANGELOG.md
+          echo "" > CHANGELOG.md
           echo "" >> CHANGELOG.md
 
       - name: Get previous tag
         id: get_prev_tag
         run: |
-          echo "Getting the previous tag..."
           PREV_TAG=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || echo "")
           if [ -z "$PREV_TAG" ]; then
             PREV_TAG=$(git rev-list --max-parents=0 HEAD)
@@ -549,7 +335,6 @@ jobs:
       - name: Categorize commits
         id: categorize
         run: |
-          echo "Categorizing commits..."
           FEATURES=""
           BUG_FIXES=""
           REFACTORS=""
@@ -559,50 +344,45 @@ jobs:
           REPO_URL="https://github.com/${{ github.repository }}"
 
           IFS='|' read -ra COMMIT_LIST <<< "${{ env.commits }}"
-          echo "Commit list: ${COMMIT_LIST[@]}"
           for LINE in "${COMMIT_LIST[@]}"; do
-          HASH=$(echo "$LINE" | awk '{print $1}')
-          MESSAGE=$(echo "$LINE" | cut -d' ' -f2-)
-          LINK="[$HASH]($REPO_URL/commit/$HASH)"
+            HASH=$(echo "$LINE" | awk '{print $1}')
+            MESSAGE=$(echo "$LINE" | cut -d' ' -f2-)
+            LINK="[$HASH]($REPO_URL/commit/$HASH)"
 
-          FORMATTED_COMMIT="* $LINK: $MESSAGE"
-          echo "Processing commit: $FORMATTED_COMMIT"
-          if [[ $MESSAGE == feat* ]]; then
-           FEATURES+="$FORMATTED_COMMIT\n"
-          elif [[ $MESSAGE == fix* || $MESSAGE == bug* || $MESSAGE == improvement* || $MESSAGE == patch* ]]; then
-          BUG_FIXES+="$FORMATTED_COMMIT\n"
-          elif [[ $MESSAGE == refactor* ]]; then
-          REFACTORS+="$FORMATTED_COMMIT\n"
-          elif [[ $MESSAGE == style* ]]; then
-          STYLE_CHANGES+="$FORMATTED_COMMIT\n"
-          elif [[ $MESSAGE == perf* ]]; then
-          PERFORMANCE+="$FORMATTED_COMMIT\n"
-          elif [[ $MESSAGE == chore* || $MESSAGE == docs* || $MESSAGE == build* || $MESSAGE == ci* ]]; then
-          CHORES+="$FORMATTED_COMMIT\n"
-          fi
+            FORMATTED_COMMIT="* $LINK: $MESSAGE"
+            if [[ $MESSAGE == feat* ]]; then
+              FEATURES+="$FORMATTED_COMMIT\n"
+            elif [[ $MESSAGE == fix* || $MESSAGE == bug* || $MESSAGE == improvement* || $MESSAGE == patch* ]]; then
+              BUG_FIXES+="$FORMATTED_COMMIT\n"
+            elif [[ $MESSAGE == refactor* ]]; then
+              REFACTORS+="$FORMATTED_COMMIT\n"
+            elif [[ $MESSAGE == style* ]]; then
+              STYLE_CHANGES+="$FORMATTED_COMMIT\n"
+            elif [[ $MESSAGE == perf* ]]; then
+              PERFORMANCE+="$FORMATTED_COMMIT\n"
+            elif [[ $MESSAGE == chore* || $MESSAGE == docs* || $MESSAGE == build* || $MESSAGE == ci* ]]; then
+              CHORES+="$FORMATTED_COMMIT\n"
+            fi
           done
 
-          # Removed the version tag section
-          # echo "### ${GITHUB_REF#refs/tags/}" >> CHANGELOG.md  # No version tag added
-
           if [ -n "$FEATURES" ]; then
-          echo "### 🎉 New Features" >> CHANGELOG.md
-          echo -e "$FEATURES" >> CHANGELOG.md
+            echo "### 🎉 New Features" >> CHANGELOG.md
+            echo -e "$FEATURES" >> CHANGELOG.md
           fi
           if [ -n "$BUG_FIXES" ]; then
-          echo "### 🛠️ Bug Fixes & Improvements" >> CHANGELOG.md
-          echo -e "$BUG_FIXES" >> CHANGELOG.md
+            echo "### 🛠️ Bug Fixes & Improvements" >> CHANGELOG.md
+            echo -e "$BUG_FIXES" >> CHANGELOG.md
           fi
           if [ -n "$REFACTORS" ]; then
-          echo "### 🔧 Refactors" >> CHANGELOG.md
-          echo -e "$REFACTORS" >> CHANGELOG.md
+            echo "### 🔧 Refactors" >> CHANGELOG.md
+            echo -e "$REFACTORS" >> CHANGELOG.md
           fi
           if [ -n "$STYLE_CHANGES" ]; then
-          echo "### 🎨 Style Changes" >> CHANGELOG.md
-          echo -e "$STYLE_CHANGES" >> CHANGELOG.md
+            echo "### 🎨 Style Changes" >> CHANGELOG.md
+            echo -e "$STYLE_CHANGES" >> CHANGELOG.md
           fi
           if [ -n "$PERFORMANCE" ]; then
-          echo "### 🚀 Performance Improvements" >> CHANGELOG.md
+            echo "### 🚀 Performance Improvements" >> CHANGELOG.md
             echo -e "$PERFORMANCE" >> CHANGELOG.md
           fi
           if [ -n "$CHORES" ]; then
@@ -629,3 +409,174 @@ jobs:
           bodyFile: CHANGELOG.md
           tag: ${{ env.TAG }}
           allowUpdates: true
+
+  post-release-notes:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    needs: [generate-changelog]
+    steps:
+      - *checkout
+
+      - name: Fetch Repository Tags by Date and Time
+        id: fetch_tags
+        run: |
+          curl -s "https://api.github.com/repos/${{ github.repository }}/tags" -o tags.json
+          TAGS=$(jq -r '.[].name' tags.json)
+          declare -a TAGS_WITH_DATES=()
+          for TAG in $TAGS; do
+            TAG_DETAILS=$(curl -s "https://api.github.com/repos/${{ github.repository }}/git/refs/tags/$TAG")
+            OBJECT_URL=$(echo "$TAG_DETAILS" | jq -r '.object.url // empty')
+            if [ -n "$OBJECT_URL" ]; then
+              OBJECT_DETAILS=$(curl -s "$OBJECT_URL")
+              DATE=$(echo "$OBJECT_DETAILS" | jq -r '.tagger.date // .committer.date // empty')
+              if [ -n "$DATE" ]; then
+                TAGS_WITH_DATES+=("$DATE $TAG")
+              fi
+            fi
+          done
+          LATEST_TAG=""
+          LATEST_DATE=""
+          for TAG_DATE in "${TAGS_WITH_DATES[@]}"; do
+            TAG_DATE_TIME=$(echo "$TAG_DATE" | awk '{print $1}')
+            TAG_NAME=$(echo "$TAG_DATE" | awk '{print $2}')
+            if [[ -z "$LATEST_DATE" || "$TAG_DATE_TIME" > "$LATEST_DATE" ]]; then
+              LATEST_DATE="$TAG_DATE_TIME"
+              LATEST_TAG="$TAG_NAME"
+            fi
+          done
+          echo "LATEST_TAG=$LATEST_TAG" >> $GITHUB_ENV
+
+      - name: Get Latest Release Notes
+        id: get_release_notes
+        run: |
+          RELEASE_DATA=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" "https://api.github.com/repos/${{ github.repository }}/releases/latest")
+          RELEASE_NOTES=$(echo "$RELEASE_DATA" | jq -r '.body')
+          echo "RELEASE_NOTES<<EOF" >> $GITHUB_ENV
+          echo "$RELEASE_NOTES" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
+      - name: Format Release Notes
+        id: format_notes
+        run: |
+          features=$(echo "$RELEASE_NOTES" | grep -iE '^\*\s\[[a-f0-9]+\]\(.*\):\sfeat' | head -n 5)
+          if [[ -n "$features" ]]; then
+            echo "**🚀 Features**" > formatted_notes.txt
+            echo "$features" >> formatted_notes.txt
+            echo "" >> formatted_notes.txt
+          fi
+
+          fixes=$(echo "$RELEASE_NOTES" | grep -iE '^\*\s\[[a-f0-9]+\]\(.*\):\s(fix|bug|improvement|patch)' | head -n 5)
+          if [[ -n "$fixes" ]]; then
+            echo "**🐛 Fixes**" >> formatted_notes.txt
+            echo "$fixes" >> formatted_notes.txt
+            echo "" >> formatted_notes.txt
+          fi
+
+          chores=$(echo "$RELEASE_NOTES" | grep -iE '^\*\s\[[a-f0-9]+\]\(.*\):\s(chore|docs|build|ci)' | head -n 5)
+          if [[ -n "$chores" ]]; then
+            echo "**🛠 Chores**" >> formatted_notes.txt
+            echo "$chores" >> formatted_notes.txt
+            echo "" >> formatted_notes.txt
+          fi
+
+          FORMATTED_NOTES=$(cat formatted_notes.txt)
+          echo "FORMATTED_NOTES<<EOF" >> $GITHUB_ENV
+          echo "$FORMATTED_NOTES" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
+      - name: Send message to Discord
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_RELEASE_URL }}
+        run: |
+          FORMATTED_NOTES=$(echo "$FORMATTED_NOTES" | sed -E 's/\): [^:]+:/) :/g')
+
+          default_color="#1ac4c5"
+          hex_to_decimal() { printf '%d' "0x${1#"#"}"; }
+          embed_color=$(hex_to_decimal "$default_color")
+          VERSION=${VERSION:-"${{ env.LATEST_TAG }}"}
+
+          discord_data=$(jq -nc \
+            --arg field_value "$FORMATTED_NOTES
+
+
+            [📌 Full changelog](https://github.com/${{ github.repository }}/releases/tag/${{ env.LATEST_TAG }})" \
+            --arg footer_text "Version $VERSION" \
+            --arg timestamp "$(date -u +%Y-%m-%dT%H:%M:%S.000Z)" \
+            --argjson embed_color "$embed_color" \
+            '{
+              "content": "<@&1298977336124903457>",
+              "embeds": [
+                {
+                  "title": "New App Version Dropped 🔥",
+                  "color": $embed_color,
+                  "description": $field_value,
+                  "footer": { "text": $footer_text },
+                  "timestamp": $timestamp
+                }
+              ]
+            }')
+
+          curl -H "Content-Type: application/json" -X POST -d "$discord_data" "$DISCORD_WEBHOOK_URL"
+
+  upload_download_url:
+    runs-on: ubuntu-latest
+    needs: [post-release-notes]
+    permissions:
+      contents: read
+    steps:
+      - *checkout
+
+      - name: Install GitHub CLI
+        run: |
+          sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key C99B11DEB97541F0
+          curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+          echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+          sudo apt update
+          sudo apt install gh -y
+
+      - name: Authenticate GitHub CLI
+        run: echo "${{ secrets.FINE_GRAIN_TOKEN }}" | gh auth login --with-token
+
+      - name: Fetch latest release assets with gh
+        id: fetch_assets
+        run: |
+          gh release view --repo ${{ github.repository }} ${{ github.ref_name }} --json assets --jq '.assets[].url' > asset_links.txt
+
+      - name: Print fetched List
+        run: cat asset_links.txt
+
+      - name: Read, sort, and format links from the file
+        id: format_links
+        run: |
+          LINKS=$(cat asset_links.txt | sort)
+          MESSAGE="**Dartotsu ${{ github.ref_name }} Downloads:**\n\n"
+          while IFS= read -r LINK; do
+            if [[ $LINK == *"arm64"* ]]; then
+              MESSAGE+="• [Android_arm64]($LINK)\n"
+            elif [[ $LINK == *"armeabi"* ]]; then
+              MESSAGE+="• [Android_armeabi-v7a]($LINK)\n"
+            elif [[ $LINK == *"Android_x86"* ]]; then
+              MESSAGE+="• [Android_x86_64]($LINK)\n"
+            elif [[ $LINK == *"Android_Universal"* ]]; then
+              MESSAGE+="• [Android_Universal]($LINK)\n"
+            elif [[ $LINK == *"iOS"* ]]; then
+              MESSAGE+="• [iOS]($LINK)\n"
+            elif [[ $LINK == *"LinuxZip"* ]]; then
+              MESSAGE+="• [Linux]($LINK)\n"
+            elif [[ $LINK == *"Linux"* ]]; then
+              MESSAGE+="• [Linux_AppImage]($LINK)\n"
+            elif [[ $LINK == *"macos"* ]]; then
+              MESSAGE+="• [macOS]($LINK)\n"
+            elif [[ $LINK == *"Installer"* ]]; then
+              MESSAGE+="• [Windows]($LINK)\n"
+            fi
+          done <<< "$LINKS"
+          echo "MESSAGE=$MESSAGE" >> $GITHUB_ENV
+
+      - name: Send message to Discord
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_RELEASE_URL }}
+          MESSAGE: ${{ env.MESSAGE }}
+        run: |
+          curl -H "Content-Type: application/json" -X POST -d "{\"content\": \"$MESSAGE\"}" $DISCORD_WEBHOOK_URL
