@@ -37,6 +37,7 @@ class ShowResponse {
 
   Map<String, dynamic> toJson() {
     return {
+      'type': 'ShowResponse',
       'name': name,
       'link': link,
       'coverUrl': coverUrl,

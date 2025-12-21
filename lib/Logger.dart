@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
 import 'Preferences/PrefManager.dart';
@@ -51,7 +50,7 @@ class Logger {
 
     _logFile = File('${directory?.path}/appLogs.txt'.fixSeparator);
 
-    if (await _logFile.exists() && await _logFile.length() > 100 * 1024) {
+    if (await _logFile.exists() && await _logFile.length() > 100 * 512) {
       await _logFile.delete();
     }
 

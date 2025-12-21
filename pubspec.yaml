@@ -34,7 +34,8 @@ dependencies:
   isar_community_flutter_libs: ^3.3.0-dev.2
   path_provider: ^2.1.5
   path: ^1.9.1
-
+  cryptography: ^2.9.0
+  crypto: ^3.0.7
   # UI Components
   introduction_screen: ^4.0.0
   flutter_animate: ^4.5.2

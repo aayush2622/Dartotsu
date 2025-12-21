@@ -34,6 +34,7 @@ class ResponseToken {
 
   Map<String, dynamic> toJson() {
     return {
+      "type": "ResponseToken",
       "token_type": tokenType,
       "expires_in": expiresIn,
       "access_token": accessToken,

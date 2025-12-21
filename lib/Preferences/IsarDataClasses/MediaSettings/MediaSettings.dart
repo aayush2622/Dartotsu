@@ -34,16 +34,20 @@ enum AutoSourceMatch {
 @collection
 class MediaSettings {
   Id id = Isar.autoIncrement;
+
   @Index(unique: true, replace: true)
   late String key;
+
   @Enumerated(EnumType.name)
   late PrefLocation location;
-  int navBarIndex = 0;
+
+  int navBarIndex;
   String? lastUsedSource;
   int viewType;
   bool isReverse;
-  String? server; // for only anime
-  List<String>? selectedScanlators; // for only manga
+  String? server;
+  List<String>? selectedScanlators;
+
   late PlayerSettings playerSettings;
   late ReaderSettings readerSettings;
 
@@ -57,20 +61,9 @@ class MediaSettings {
     PlayerSettings? playerSetting,
     ReaderSettings? readerSetting,
   }) {
-    var perPlayerSettings = loadData<bool>(PrefName.perAnimePlayerSettings);
-    late var defaultPlayerSettings = PlayerSettings.fromJson(
-      jsonDecode(loadData(PrefName.playerSettings)),
-    );
-    late var defaultReaderSettings = ReaderSettings.fromJson(
-      jsonDecode(loadData(PrefName.readerSettings)),
-    );
-
-    playerSettings = perPlayerSettings
-        ? (playerSetting ?? defaultPlayerSettings)
-        : defaultPlayerSettings;
-    readerSettings = perPlayerSettings
-        ? (readerSetting ?? defaultReaderSettings)
-        : defaultReaderSettings;
+    // PURE defaults only
+    playerSettings = playerSetting ?? PlayerSettings();
+    readerSettings = readerSetting ?? ReaderSettings();
   }
 
   factory MediaSettings.fromJson(Map<String, dynamic> json) {
@@ -90,14 +83,15 @@ class MediaSettings {
 
   Map<String, dynamic> toJson() {
     return {
+      'type': 'MediaSettings',
       'navBarIndex': navBarIndex,
       'lastUsedSource': lastUsedSource,
       'viewType': viewType,
       'isReverse': isReverse,
       'server': server,
       'selectedScanlators': selectedScanlators,
-      'playerSettings': playerSettings,
-      'readerSettings': readerSettings,
+      'playerSettings': playerSettings.toJson(),
+      'readerSettings': readerSettings.toJson(),
     };
   }
 

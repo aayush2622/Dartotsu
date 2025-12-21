@@ -138,8 +138,6 @@ class AppUpdater {
       final filePath = '${tempDir.path}/$packageName.apk';
       final file = File(filePath);
 
-      final network = find<NetworkManager>();
-
       await network.download(
         apkUrl,
         filePath,

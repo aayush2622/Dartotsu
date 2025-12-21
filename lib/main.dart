@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 import 'dart:ui';
 
@@ -7,6 +8,7 @@ import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:desktop_webview_window/desktop_webview_window.dart';
 import 'package:dpad/dpad.dart';
 import 'package:dynamic_color/dynamic_color.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -15,6 +17,7 @@ import 'package:get/get.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:media_kit/media_kit.dart';
+import 'package:path/path.dart' as p;
 import 'package:window_manager/window_manager.dart';
 import 'Api/Updater/AppUpdater.dart';
 import 'Functions/Extensions/ContextExtensions.dart';
@@ -22,10 +25,12 @@ import 'Functions/Extensions/IntExtensions.dart';
 import 'Functions/Functions/AppShortcuts.dart';
 import 'Functions/Functions/DeepLink.dart';
 import 'Functions/Functions/GetXFunctions.dart';
+import 'Preferences/Encryptor.dart';
 import 'Preferences/PrefManager.dart';
 import 'Screen/Error/ErrorScreen.dart';
 import 'Screen/Onboarding/OnboardingScreen.dart';
 import 'Services/MediaService.dart';
+import 'Theme/LanguageSwitcher.dart';
 import 'Theme/ThemeManager.dart';
 import 'Theme/ThemeController.dart';
 import 'Widgets/CachedNetworkImage.dart';
@@ -82,9 +87,10 @@ void main(List<String> args) async {
 
 Future init() async {
   await PrefManager.init();
-  await DartotsuExtensionBridge()
-      .init(PrefManager.dartotsuPreferences, "Dartotsu");
-  await Logger.init();
+  await Future.wait([
+    DartotsuExtensionBridge().init(PrefManager.dartotsuPreferences, "Dartotsu"),
+    Logger.init(),
+  ]);
   //await MpvConf.init();
   put(MediaServiceController());
   put(ThemeController());
@@ -141,7 +147,7 @@ class _MyAppState extends State<MyApp> {
     return Listener(
       onPointerDown: (event) {
         if (event.buttons == kBackMouseButton &&
-            Navigator.canPop(Get.context!)) {
+            (Get.key.currentState?.canPop() ?? false)) {
           Get.back();
         }
       },
@@ -155,35 +161,37 @@ class _MyAppState extends State<MyApp> {
         },
         child: DynamicColorBuilder(
           builder: (lightDynamic, darkDynamic) {
-            return Obx(() {
-              return GetMaterialApp(
-                title: 'Dartotsu',
-                debugShowCheckedModeBanner: false,
-                enableLog: true,
-                logWriterCallback: (text, {isError = false}) {
-                  Logger.log(text);
-                  if (isError) debugPrint(text);
-                },
-                localizationsDelegates: const [
-                  AppLocalizations.delegate,
-                  GlobalMaterialLocalizations.delegate,
-                  GlobalWidgetsLocalizations.delegate,
-                  GlobalCupertinoLocalizations.delegate,
-                ],
-                supportedLocales: AppLocalizations.supportedLocales,
-                locale: Locale(loadData(PrefName.defaultLanguage)),
-                themeMode:
-                    theme.isDarkMode.value ? ThemeMode.dark : ThemeMode.light,
-                theme: getTheme(lightDynamic, theme),
-                darkTheme: getTheme(darkDynamic, theme),
-                home: loadCustomData(
-                  "initialLoaded",
-                  defaultValue: false,
-                )!
-                    ? const MainScreen()
-                    : const OnboardingScreen(),
-              );
-            });
+            return Obx(
+              () {
+                return GetMaterialApp(
+                  title: 'Dartotsu',
+                  debugShowCheckedModeBanner: false,
+                  enableLog: true,
+                  logWriterCallback: (text, {isError = false}) {
+                    Logger.log(text);
+                    if (isError) debugPrint(text);
+                  },
+                  localizationsDelegates: const [
+                    AppLocalizations.delegate,
+                    GlobalMaterialLocalizations.delegate,
+                    GlobalWidgetsLocalizations.delegate,
+                    GlobalCupertinoLocalizations.delegate,
+                  ],
+                  supportedLocales: AppLocalizations.supportedLocales,
+                  locale: Locale(loadData(PrefName.defaultLanguage)),
+                  themeMode:
+                      theme.isDarkMode.value ? ThemeMode.dark : ThemeMode.light,
+                  theme: getTheme(lightDynamic, theme),
+                  darkTheme: getTheme(darkDynamic, theme),
+                  home: loadCustomData(
+                    "initialLoaded",
+                    defaultValue: false,
+                  )!
+                      ? const MainScreen()
+                      : const OnboardingScreen(),
+                );
+              },
+            );
           },
         ),
       ),
