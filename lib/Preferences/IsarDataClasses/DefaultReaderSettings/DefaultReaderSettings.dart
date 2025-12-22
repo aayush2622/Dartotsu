@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:isar_community/isar.dart';
-part 'DafaultReaderSettings.g.dart';
+part 'DefaultReaderSettings.g.dart';
 
 @embedded
 class ReaderSettings {

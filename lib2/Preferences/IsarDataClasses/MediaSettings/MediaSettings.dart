@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:dartotsu/Services/Model/Media.dart';
 import 'package:dartotsu/Preferences/IsarDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
-import 'package:dartotsu/Preferences/IsarDataClasses/DefaultReaderSettings/DafaultReaderSettings.dart';
+import 'package:dartotsu/Preferences/IsarDataClasses/DefaultReaderSettings/DefaultReaderSettings.dart';
 import 'package:dartotsu/Preferences/PrefManager.dart';
 import 'package:dartotsu/Services/MediaService.dart';
 import 'package:isar_community/isar.dart';

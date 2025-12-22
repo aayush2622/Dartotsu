@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'DafaultReaderSettings.dart';
+part of 'DefaultReaderSettings.dart';
 
 // **************************************************************************
 // IsarEmbeddedGenerator

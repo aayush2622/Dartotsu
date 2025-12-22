@@ -5,7 +5,7 @@ import 'package:dartotsu/Widgets/ScrollConfig.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import '../../Functions/Function.dart';
-import '../../Preferences/PrefManager.dart';
+import '../../Preferences/StorageManager.dart';
 import '../../Widgets/CustomElevatedButton.dart';
 import '../../Logger.dart';
 
@@ -218,7 +218,7 @@ class _ErrorScreenState extends State<ErrorScreen> {
           child: CustomElevatedButton(
             context: context,
             onPressed: () async {
-              var p = await PrefManager.getDirectory(
+              var p = await StorageManager.getDirectory(
                 useSystemPath: false,
                 useCustomPath: true,
               );

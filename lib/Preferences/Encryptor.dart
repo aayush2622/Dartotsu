@@ -18,12 +18,13 @@ class Crypto {
     final salt = _randomBytes(16);
     final nonce = _randomBytes(12);
 
+    final filePassword = password ?? 'dartotsu';
     final key = await Pbkdf2(
       macAlgorithm: Hmac.sha256(),
       iterations: 100000,
       bits: 256,
     ).deriveKey(
-      secretKey: SecretKey(utf8.encode(password ?? 'dartotsu')),
+      secretKey: SecretKey(utf8.encode(filePassword)),
       nonce: salt,
     );
 
@@ -41,7 +42,7 @@ class Crypto {
       'mac': base64Encode(encrypted.mac.bytes),
       'compression': 'gzip',
       'encoding': 'utf8',
-      'password_hint': password != 'dartotsu' ? 'custom' : 'default',
+      'passwordType': filePassword != 'dartotsu' ? 'custom' : 'default',
     };
   }
 
@@ -54,13 +55,19 @@ class Crypto {
     }
     final salt = base64Decode(json['salt']);
     final nonce = base64Decode(json['nonce']);
+    final filePassword =
+        json['passwordType'] == 'default' ? 'dartotsu' : password;
+
+    if (filePassword == null) {
+      throw Exception('Password required for decryption');
+    }
 
     final key = await Pbkdf2(
       macAlgorithm: Hmac.sha256(),
       iterations: 100000,
       bits: 256,
     ).deriveKey(
-      secretKey: SecretKey(utf8.encode(password ?? 'dartotsu')),
+      secretKey: SecretKey(utf8.encode(filePassword)),
       nonce: salt,
     );
 

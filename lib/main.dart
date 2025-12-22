@@ -1,14 +1,12 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:io';
 import 'dart:ui';
 
-import 'package:dartotsu/Network/NetworkManager.dart';
+import 'Network/NetworkManager.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:desktop_webview_window/desktop_webview_window.dart';
 import 'package:dpad/dpad.dart';
 import 'package:dynamic_color/dynamic_color.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -17,7 +15,6 @@ import 'package:get/get.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:media_kit/media_kit.dart';
-import 'package:path/path.dart' as p;
 import 'package:window_manager/window_manager.dart';
 import 'Api/Updater/AppUpdater.dart';
 import 'Functions/Extensions/ContextExtensions.dart';
@@ -25,12 +22,10 @@ import 'Functions/Extensions/IntExtensions.dart';
 import 'Functions/Functions/AppShortcuts.dart';
 import 'Functions/Functions/DeepLink.dart';
 import 'Functions/Functions/GetXFunctions.dart';
-import 'Preferences/Encryptor.dart';
 import 'Preferences/PrefManager.dart';
 import 'Screen/Error/ErrorScreen.dart';
 import 'Screen/Onboarding/OnboardingScreen.dart';
 import 'Services/MediaService.dart';
-import 'Theme/LanguageSwitcher.dart';
 import 'Theme/ThemeManager.dart';
 import 'Theme/ThemeController.dart';
 import 'Widgets/CachedNetworkImage.dart';
@@ -102,10 +97,6 @@ Future init() async {
     await WindowManager.instance.ensureInitialized();
   }
   initializeDateFormatting();
-  final supportedLocales = DateFormat.allLocalesWithSymbols();
-  for (var locale in supportedLocales) {
-    initializeDateFormatting(locale);
-  }
   AppUpdater().checkForUpdate();
   //Discord.getSavedToken();
 }
