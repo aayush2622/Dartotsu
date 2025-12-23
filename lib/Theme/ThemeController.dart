@@ -12,7 +12,7 @@ class ThemeController extends GetxController {
   final useCustomColor = false.obs;
   final customColor = 4280391411.obs;
   final useGlassMode = false.obs;
-
+  final local = "en".obs;
   @override
   void onInit() {
     super.onInit();
@@ -40,6 +40,7 @@ class ThemeController extends GetxController {
     useCustomColor.value = loadData(PrefName.useCustomColor);
     customColor.value = loadData(PrefName.customColor);
     useGlassMode.value = loadData(PrefName.useGlassMode);
+    local.value = loadData(PrefName.defaultLanguage);
   }
 
   Future<void> setGlassEffect(bool value) async {
@@ -93,5 +94,11 @@ class ThemeController extends GetxController {
   Future<void> setCustomColor(Color color) async {
     customColor.value = color.value;
     saveData(PrefName.customColor, color.value);
+  }
+
+  Future<void> setLocale(Locale locale) async {
+    local.value = locale.languageCode;
+    Get.updateLocale(locale);
+    saveData(PrefName.defaultLanguage, locale.languageCode);
   }
 }

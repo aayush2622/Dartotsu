@@ -1,29 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../Preferences/PrefManager.dart';
+import '../Functions/Functions/GetXFunctions.dart';
 import '../Widgets/DropdownMenu.dart';
 import '../l10n/app_localizations.dart';
+import 'ThemeController.dart';
 import 'language.dart';
 
 AppLocalizations get getString => AppLocalizations.of(Get.context!)!;
 
 Widget languageSwitcher(BuildContext context) {
   final languageOptions = _getSupportedLanguages(context);
-
-  return buildDropdownMenu(
-    padding: const EdgeInsets.symmetric(vertical: 12.0),
-    currentValue: completeLanguageName(Get.locale!.languageCode.toUpperCase()),
-    options: languageOptions
-        .map((e) => completeLanguageName(e.toUpperCase()))
-        .toSet()
-        .toList(),
-    onChanged: (String newValue) {
-      final newLocale = Locale(completeLanguageCode(newValue).toLowerCase());
-      Get.updateLocale(newLocale);
-      saveData(PrefName.defaultLanguage, newLocale.languageCode);
-    },
-    prefixIcon: Icons.translate,
+  final themeController = find<ThemeController>();
+  return Obx(
+    () => BuildDropdownMenu(
+      padding: const EdgeInsets.symmetric(vertical: 12.0),
+      value: completeLanguageName(themeController.local.value.toUpperCase()),
+      options: languageOptions
+          .map((e) => completeLanguageName(e.toUpperCase()))
+          .toSet()
+          .toList(),
+      onChanged: (String? newValue) {
+        final newLocale = Locale(completeLanguageCode(newValue!).toLowerCase());
+        themeController.setLocale(newLocale);
+      },
+      prefixIcon: Icons.translate,
+    ),
   );
 }
 

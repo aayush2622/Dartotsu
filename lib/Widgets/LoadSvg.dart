@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 Widget loadSvg(
@@ -11,7 +11,6 @@ Widget loadSvg(
     iconPath,
     width: width,
     height: height,
-    // ignore: deprecated_member_use
-    color: color,
+    colorFilter: ColorFilter.mode(color ?? Colors.white, BlendMode.srcIn),
   );
 }

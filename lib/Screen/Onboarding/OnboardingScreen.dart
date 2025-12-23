@@ -9,6 +9,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
+import '../../Theme/LanguageSwitcher.dart';
 import '../../Widgets/CachedNetworkImage.dart';
 import '../../Widgets/ScrollConfig.dart';
 import '../../main.dart';
@@ -67,7 +68,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           "Done",
         ),
         onDone: () => Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (_) => const MainScreen()),
+          MaterialPageRoute(
+            builder: (_) => const MainScreen(),
+          ),
         ),
         onChange: (value) => setState(() => _currentPage = value),
         pages: [
@@ -102,11 +105,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           .animate(target: animate ? 1 : 0)
           .fadeIn(duration: 800.ms)
           .slideY(begin: 0.3, end: 0),
-      bodyWidget: const Column(
+      bodyWidget: Column(
         children: [
-          Text(
-              "Dartotsu is a complete rewrite of Dantotsu in Flutter.\nIt's a hybrid AniList, MyAnimeList and Simkl support!"),
-          SizedBox(height: 16),
+          Text(getString.about),
+          languageSwitcher(context),
         ],
       )
           .animate(target: animate ? 1 : 0)

@@ -1,12 +1,11 @@
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_instance/src/extension_instance.dart';
+import 'package:get/get.dart';
 
 T find<T>() => Get.find<T>();
 T put<T>(T dependency, {String? tag, bool permanent = false}) =>
     Get.put<T>(dependency, tag: tag, permanent: permanent);
 
-void lazyPut<T>(T Function() builder, {String? tag, bool fenix = false}) =>
-    Get.lazyPut<T>(builder, tag: tag, fenix: fenix);
+void lazyPut<T>(T builder, {String? tag, bool fenix = false}) =>
+    Get.lazyPut<T>(() => builder, tag: tag, fenix: fenix);
 
 T? tryFind<T>({String? tag}) =>
     isRegistered<T>(tag: tag) ? Get.find<T>(tag: tag) : null;

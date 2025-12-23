@@ -1,8 +1,6 @@
 import 'package:blurbox/blurbox.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_instance/src/extension_instance.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:get/get.dart';
 
 import '../Functions/Functions/GetXFunctions.dart';
 import '../Widgets/DropdownMenu.dart';
@@ -21,55 +19,21 @@ import 'Themes/saikou.dart';
 
 ThemeData getTheme(ColorScheme? material, ThemeController themeManager) {
   final isOled = themeManager.isOled.value;
-  final theme = themeManager.theme.value;
-  final useMaterial = themeManager.useMaterialYou.value;
-  final useCustomColor = themeManager.useCustomColor.value;
-  final customColor = themeManager.customColor.value;
-  final isDarkMode = themeManager.isDarkMode.value;
+  final isDark = themeManager.isDarkMode.value;
 
-  ThemeData baseTheme;
+  ThemeData baseTheme = _resolveBaseTheme(
+    theme: themeManager.theme.value,
+    isDark: isDark,
+  );
 
-  switch (theme) {
-    case 'blue':
-      baseTheme = isDarkMode ? cyanDarkTheme : cyanLightTheme;
-      break;
-    case 'green':
-      baseTheme = isDarkMode ? greenDarkTheme : greenLightTheme;
-      break;
-    case 'purple':
-      baseTheme = isDarkMode ? purpleDarkTheme : purpleLightTheme;
-      break;
-    case 'pink':
-      baseTheme = isDarkMode ? pinkDarkTheme : pinkLightTheme;
-      break;
-    case 'oriax':
-      baseTheme = isDarkMode ? oriaxDarkTheme : oriaxLightTheme;
-      break;
-    case 'saikou':
-      baseTheme = isDarkMode ? saikouDarkTheme : saikouLightTheme;
-      break;
-    case 'red':
-      baseTheme = isDarkMode ? redDarkTheme : redLightTheme;
-      break;
-    case 'lavender':
-      baseTheme = isDarkMode ? lavenderDarkTheme : lavenderLightTheme;
-      break;
-    case 'ocean':
-      baseTheme = isDarkMode ? oceanDarkTheme : oceanLightTheme;
-      break;
-    default:
-      baseTheme = isDarkMode ? purpleDarkTheme : purpleLightTheme;
-  }
-
-  if (useMaterial && material != null) {
+  if (themeManager.useMaterialYou.value && material != null) {
     baseTheme =
-        isDarkMode ? materialThemeDark(material) : materialThemeLight(material);
+        isDark ? materialThemeDark(material) : materialThemeLight(material);
   }
 
-  if (useCustomColor) {
-    baseTheme = isDarkMode
-        ? getCustomDarkTheme(customColor)
-        : getCustomLightTheme(customColor);
+  if (themeManager.useCustomColor.value) {
+    final color = themeManager.customColor.value;
+    baseTheme = isDark ? getCustomDarkTheme(color) : getCustomLightTheme(color);
   }
 
   const fontFamily = "Poppins";
@@ -133,10 +97,31 @@ ThemeData getTheme(ColorScheme? material, ThemeController themeManager) {
   );
 }
 
-Widget themeDropdown() {
-  final controller = find<ThemeController>();
+ThemeData _resolveBaseTheme({
+  required String theme,
+  required bool isDark,
+}) {
+  final themes = <String, ({ThemeData dark, ThemeData light})>{
+    'blue': (dark: cyanDarkTheme, light: cyanLightTheme),
+    'green': (dark: greenDarkTheme, light: greenLightTheme),
+    'purple': (dark: purpleDarkTheme, light: purpleLightTheme),
+    'pink': (dark: pinkDarkTheme, light: pinkLightTheme),
+    'oriax': (dark: oriaxDarkTheme, light: oriaxLightTheme),
+    'saikou': (dark: saikouDarkTheme, light: saikouLightTheme),
+    'red': (dark: redDarkTheme, light: redLightTheme),
+    'lavender': (dark: lavenderDarkTheme, light: lavenderLightTheme),
+    'ocean': (dark: oceanDarkTheme, light: oceanLightTheme),
+  };
 
-  final themeOptions = [
+  final selected = themes[theme] ?? themes['purple']!;
+
+  return isDark ? selected.dark : selected.light;
+}
+
+Widget themeDropdown() {
+  final c = find<ThemeController>();
+
+  const options = [
     'blue',
     'green',
     'purple',
@@ -145,26 +130,25 @@ Widget themeDropdown() {
     'saikou',
     'red',
     'lavender',
-    'ocean'
+    'ocean',
   ];
-
-  return Obx(() {
-    return buildDropdownMenu(
-      padding: const EdgeInsets.symmetric(vertical: 12.0),
-      currentValue: controller.theme.value.toUpperCase(),
-      options: themeOptions.map((e) => e.toUpperCase()).toList(),
-      onChanged: (String newValue) =>
-          controller.setTheme(newValue.toLowerCase()),
+  return ObxValue<RxString>(
+    (rx) => BuildDropdownMenu(
+      padding: const EdgeInsets.symmetric(vertical: 12),
+      value: rx.value.toUpperCase(),
+      options: options.map((e) => e.toUpperCase()).toList(),
+      onChanged: (v) => c.setTheme(v!.toLowerCase()),
       prefixIcon: Icons.color_lens,
-    );
-  });
+    ),
+    c.theme,
+  );
 }
 
 Widget ThemedWidget({
   required Widget materialWidget,
   Widget? glassWidget,
 }) {
-  final controller = Get.find<ThemeController>();
+  final controller = find<ThemeController>();
 
   return Obx(() {
     return controller.useGlassMode.value
@@ -185,12 +169,10 @@ Widget ThemedContainer({
 }) {
   final controller = find<ThemeController>();
   final theme = Theme.of(context).colorScheme;
-
+  final effectiveBorderRadius = borderRadius ?? BorderRadius.circular(64);
+  final effectivePadding = padding ?? const EdgeInsets.all(8);
   return Obx(() {
     final isGlassMode = controller.useGlassMode.value;
-
-    final effectiveBorderRadius = borderRadius ?? BorderRadius.circular(64);
-    final effectivePadding = padding ?? const EdgeInsets.all(8);
 
     if (isGlassMode) {
       return BlurBox(

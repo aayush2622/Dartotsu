@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:ui';
 
-import 'Network/NetworkManager.dart';
+import 'Functions/Network/NetworkManager.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:desktop_webview_window/desktop_webview_window.dart';
 import 'package:dpad/dpad.dart';
@@ -13,7 +13,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:intl/intl.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:window_manager/window_manager.dart';
 import 'Api/Updater/AppUpdater.dart';
@@ -87,9 +86,9 @@ Future init() async {
     Logger.init(),
   ]);
   //await MpvConf.init();
-  put(MediaServiceController());
-  put(ThemeController());
-  put(NetworkManager());
+  lazyPut(MediaServiceController());
+  lazyPut(ThemeController());
+  lazyPut(NetworkManager());
   //TypeFactory.init();
   DeepLink.init();
   MediaKit.ensureInitialized();
@@ -169,7 +168,7 @@ class _MyAppState extends State<MyApp> {
                     GlobalCupertinoLocalizations.delegate,
                   ],
                   supportedLocales: AppLocalizations.supportedLocales,
-                  locale: Locale(loadData(PrefName.defaultLanguage)),
+                  locale: Locale(theme.local.value),
                   themeMode:
                       theme.isDarkMode.value ? ThemeMode.dark : ThemeMode.light,
                   theme: getTheme(lightDynamic, theme),
@@ -202,7 +201,7 @@ class MainScreen extends StatefulWidget {
 class MainScreenState extends State<MainScreen> {
   final _selectedIndex = 1.obs;
 
-  void _onTabSelected(int index) => _selectedIndex.value = index;
+  //void _onTabSelected(int index) => _selectedIndex.value = index;
 
   @override
   void initState() {
