@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:ui';
 
+import 'package:rhttp/rhttp.dart';
+
 import 'DI.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:desktop_webview_window/desktop_webview_window.dart';
@@ -85,6 +87,7 @@ Future init() async {
     DartotsuExtensionBridge().init(PrefManager.dartotsuPreferences, "Dartotsu"),
     Logger.init(),
   ]);
+  await Rhttp.init();
   DI.init();
   //await MpvConf.init();
   //TypeFactory.init();

@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:crypto/crypto.dart';
-import 'package:dio/dio.dart';
 
 import 'package:dartotsu/Preferences/PrefManager.dart';
+import 'package:rhttp/rhttp.dart';
 import '../../../Functions/Functions/GetXFunctions.dart';
 import '../../../Functions/Network/NetworkManager.dart';
 
@@ -30,12 +30,12 @@ class MobileTokenManager {
     }
     if (_accessToken != null) return _accessToken!;
 
-    /*  final cached = loadCustomData<String>("DiscordAccessToken");
+    final cached = loadCustomData<String>("DiscordAccessToken");
     if (cached != null && await _testToken(cached)) {
       _accessToken = cached;
       return cached;
     }
-*/
+
     if (_refreshCompleter != null) {
       return _refreshCompleter!.future;
     }
@@ -44,9 +44,8 @@ class MobileTokenManager {
 
     try {
       final token = await _createToken();
-      clear();
       _accessToken = token;
-      //saveCustomData("DiscordAccessToken", token);
+      saveCustomData("DiscordAccessToken", token);
 
       _refreshCompleter!.complete(token);
       return token;
@@ -60,12 +59,13 @@ class MobileTokenManager {
 
   Future<bool> _testToken(String token) async {
     try {
-      final res = await network.dio.head(
+      final res = await network.head(
         "https://discord.com/api/v10/users/@me",
-        options: Options(headers: {
+        headers: {
           "Authorization": "Bearer $token",
-        }),
+        },
       );
+
       return res.statusCode == 200;
     } catch (_) {
       return false;
@@ -98,13 +98,13 @@ class MobileTokenManager {
         "redirect_uri": redirectUri,
         "code_challenge": challenge,
         "code_challenge_method": "S256",
-        "scope": 'identify activities.write',
+        "scope": "identify activities.write",
         "state": "undefined",
       },
-      options: Options(headers: {
-        "Authorization": authToken,
+      headers: {
+        "Authorization": authToken!,
         "Content-Type": "application/json",
-      }),
+      },
       data: const {"authorize": true},
     );
 
@@ -120,16 +120,13 @@ class MobileTokenManager {
 
     final tokenRes = await network.post(
       "https://discord.com/api/v10/oauth2/token",
-      options: Options(
-        contentType: Headers.formUrlEncodedContentType,
-      ),
-      data: {
+      data: HttpBody.form({
         "client_id": clientId,
         "code": code,
         "code_verifier": verifier,
         "grant_type": "authorization_code",
         "redirect_uri": redirectUri,
-      },
+      }),
     );
 
     final accessToken = tokenRes.data["access_token"];

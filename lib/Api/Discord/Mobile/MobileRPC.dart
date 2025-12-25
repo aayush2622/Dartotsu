@@ -1,7 +1,6 @@
 import 'package:dartotsu/Api/Discord/BaseDiscordRPC.dart';
 import 'package:dartotsu/Services/Model/Media.dart';
 import 'package:dartotsu_extension_bridge/Models/DEpisode.dart';
-import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 
 import '../../../Functions/Functions/GetXFunctions.dart';
@@ -67,23 +66,24 @@ class MobileRPC extends GetxController implements BaseDiscordRPC {
     try {
       final res = await network.post(
         "https://discord.com/api/v10/users/@me/headless-sessions",
-        options: Options(headers: {
+        headers: {
           "Authorization": "Bearer $token",
           "Content-Type": "application/json",
-        }),
+        },
         data: payload,
       );
 
       if (res.statusCode != 200) {
-        throw DioException(
-          requestOptions: res.requestOptions,
-          response: res,
+        throw NetworkException(
+          statusCode: res.statusCode,
+          message: res.statusMessage,
+          data: res.data,
         );
       }
 
       _activityToken = res.data["token"];
-    } on DioException catch (e) {
-      if (e.response?.statusCode == 401) {
+    } on NetworkException catch (e) {
+      if (e.statusCode == 401) {
         await tokenManager.clear();
         return setRpc(
           mediaData,
@@ -105,11 +105,12 @@ class MobileRPC extends GetxController implements BaseDiscordRPC {
     try {
       await network.post(
         "https://discord.com/api/v10/users/@me/headless-sessions/delete",
-        options: Options(headers: {
+        headers: {
           "Authorization": "Bearer $token",
-          "Content-Type": "application/json",
-        }),
-        data: {"token": _activityToken},
+        },
+        data: {
+          "token": _activityToken,
+        },
       );
     } finally {
       _activityToken = null;

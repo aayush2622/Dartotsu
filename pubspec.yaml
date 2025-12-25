@@ -22,7 +22,7 @@ dependencies:
   get: ^4.7.3
 
   # Networking
-  dio: ^5.9.0
+  rhttp: ^0.15.0
   web_socket_channel: ^3.0.3
   http_interceptor: ^2.0.0
 

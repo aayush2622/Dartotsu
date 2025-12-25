@@ -27,7 +27,7 @@ class AppUpdater {
 
   AppUpdater() {
     checkForUpdates = loadCustomData("checkForUpdates") ?? true;
-    alphaUpdates = loadCustomData("alphaUpdates") ?? false;
+    alphaUpdates = loadCustomData("alphaUpdates") ?? !false;
   }
 
   /// Checks for application updates by comparing the current version hash
