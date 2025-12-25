@@ -47,36 +47,87 @@ ThemeData getTheme(ColorScheme? material, ThemeController themeManager) {
           ? const Color(0xFF222222)
           : baseTheme.colorScheme.surfaceContainerHighest,
     ),
+    cardColor: deriveCardColor(
+      surface: baseTheme.colorScheme.surface,
+      isDark: isDark,
+      isOled: isOled,
+    ),
     textTheme: baseTheme.textTheme.copyWith(
-      labelLarge: baseTheme.textTheme.labelLarge?.copyWith(
+      displayLarge: baseTheme.textTheme.displayLarge?.copyWith(
         fontFamily: fontFamily,
-        fontWeight: FontWeight.w800,
-        fontSize: 16,
+        fontWeight: FontWeight.w700,
+        fontSize: 56,
+        letterSpacing: -0.5,
       ),
-      labelMedium: baseTheme.textTheme.labelMedium?.copyWith(
+      displayMedium: baseTheme.textTheme.displayMedium?.copyWith(
+        fontFamily: fontFamily,
+        fontWeight: FontWeight.w700,
+        fontSize: 48,
+      ),
+      displaySmall: baseTheme.textTheme.displaySmall?.copyWith(
         fontFamily: fontFamily,
         fontWeight: FontWeight.w600,
-        fontSize: 14,
+        fontSize: 36,
       ),
-      labelSmall: baseTheme.textTheme.labelSmall?.copyWith(
+      headlineLarge: baseTheme.textTheme.headlineLarge?.copyWith(
         fontFamily: fontFamily,
-        fontWeight: FontWeight.w400,
-        fontSize: 12,
+        fontWeight: FontWeight.w700,
+        fontSize: 32,
+      ),
+      headlineMedium: baseTheme.textTheme.headlineMedium?.copyWith(
+        fontFamily: fontFamily,
+        fontWeight: FontWeight.w600,
+        fontSize: 28,
+      ),
+      headlineSmall: baseTheme.textTheme.headlineSmall?.copyWith(
+        fontFamily: fontFamily,
+        fontWeight: FontWeight.w600,
+        fontSize: 24,
+      ),
+      titleLarge: baseTheme.textTheme.titleLarge?.copyWith(
+        fontFamily: fontFamily,
+        fontWeight: FontWeight.w600,
+        fontSize: 22,
+      ),
+      titleMedium: baseTheme.textTheme.titleMedium?.copyWith(
+        fontFamily: fontFamily,
+        fontWeight: FontWeight.w600,
+        fontSize: 18,
+      ),
+      titleSmall: baseTheme.textTheme.titleSmall?.copyWith(
+        fontFamily: fontFamily,
+        fontWeight: FontWeight.w500,
+        fontSize: 16,
       ),
       bodyLarge: baseTheme.textTheme.bodyLarge?.copyWith(
         fontFamily: fontFamily,
         fontWeight: FontWeight.w500,
-        fontSize: 14,
+        fontSize: 16,
       ),
       bodyMedium: baseTheme.textTheme.bodyMedium?.copyWith(
         fontFamily: fontFamily,
         fontWeight: FontWeight.w400,
-        fontSize: 12,
+        fontSize: 14,
       ),
       bodySmall: baseTheme.textTheme.bodySmall?.copyWith(
         fontFamily: fontFamily,
-        fontWeight: FontWeight.w300,
-        fontSize: 10,
+        fontWeight: FontWeight.w400,
+        fontSize: 12,
+      ),
+      labelLarge: baseTheme.textTheme.labelLarge?.copyWith(
+        fontFamily: fontFamily,
+        fontWeight: FontWeight.w700,
+        fontSize: 14,
+      ),
+      labelMedium: baseTheme.textTheme.labelMedium?.copyWith(
+        fontFamily: fontFamily,
+        fontWeight: FontWeight.w600,
+        fontSize: 12,
+      ),
+      labelSmall: baseTheme.textTheme.labelSmall?.copyWith(
+        fontFamily: fontFamily,
+        fontWeight: FontWeight.w500,
+        fontSize: 11,
       ),
     ),
     switchTheme: SwitchThemeData(
@@ -94,6 +145,19 @@ ThemeData getTheme(ColorScheme? material, ThemeController themeManager) {
         baseTheme.colorScheme.primary.withValues(alpha: 0.2),
       ),
     ),
+  );
+}
+
+Color deriveCardColor({
+  required Color surface,
+  required bool isDark,
+  required bool isOled,
+}) {
+  final double amount = isDark ? 0.08 : 0.05;
+  if (isOled && isDark) surface = Colors.black;
+  return Color.alphaBlend(
+    (isDark ? Colors.white : Colors.black).withOpacity(amount),
+    surface,
   );
 }
 
@@ -132,6 +196,7 @@ Widget themeDropdown() {
     'lavender',
     'ocean',
   ];
+
   return ObxValue<RxString>(
     (rx) => BuildDropdownMenu(
       padding: const EdgeInsets.symmetric(vertical: 12),
@@ -179,7 +244,7 @@ Widget ThemedContainer({
         blur: 10.0,
         alignment: alignment,
         padding: effectivePadding,
-        color: color ?? theme.surfaceContainerLow.withOpacity(0.2),
+        color: color ?? Theme.of(context).cardColor.withOpacity(0.2),
         border: border ??
             Border.all(
               color: theme.onSurface.withOpacity(0.2),
@@ -201,7 +266,7 @@ Widget ThemedContainer({
       padding: effectivePadding,
       alignment: alignment,
       decoration: BoxDecoration(
-        color: color ?? theme.surfaceContainerLow,
+        color: color ?? Theme.of(context).cardColor,
         border: border ??
             Border.all(
               color: theme.onSurface.withOpacity(0.6),

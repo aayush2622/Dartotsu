@@ -88,7 +88,7 @@ dependencies:
   win32: ^5.15.0
   ffi: ^2.1.4
   install_plugin: ^2.1.0
-
+  flutter_discord_rpc: ^1.1.0
   # Miscellaneous
 
   receive_sharing_intent: ^1.8.1

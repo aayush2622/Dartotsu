@@ -68,7 +68,7 @@ class Media {
   List<Media>? relations;
   List<Media>? recommendations;
   List<User>? users;
-  String? shareLink;
+  String shareLink;
   MediaSettings settings = MediaSettings();
 
   bool cameFromContinue = false;
@@ -122,7 +122,7 @@ class Media {
     this.recommendations,
     this.users,
     MediaSettings? settings,
-    this.shareLink,
+    required this.shareLink,
     this.cameFromContinue = false,
     this.sourceData,
   }) : settings = settings ?? MediaSettings();
@@ -160,6 +160,7 @@ class Media {
       userProgress: keptKeys.contains('userProgress')
           ? values['userProgress'] as int
           : null,
+      shareLink: 'https://github.com/aayush2622/Dartotsu',
     );
   }
 
@@ -207,7 +208,7 @@ extension M on Pages {
         nameRomaji: e.title ?? '',
         userPreferredName: e.title ?? '',
         isAdult: false,
-        shareLink: e.url,
+        shareLink: e.url!,
         minimal: true,
         anime: isAnime ? Anime() : null,
         manga: isAnime ? null : Manga(),

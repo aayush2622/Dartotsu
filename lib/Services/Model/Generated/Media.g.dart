@@ -94,7 +94,7 @@ Media _$MediaFromJson(Map<String, dynamic> json) => Media(
       settings: json['settings'] == null
           ? null
           : MediaSettings.fromJson(json['settings'] as Map<String, dynamic>),
-      shareLink: json['shareLink'] as String?,
+      shareLink: json['shareLink'] as String,
       cameFromContinue: json['cameFromContinue'] as bool? ?? false,
       sourceData: json['sourceData'] == null
           ? null

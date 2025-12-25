@@ -59,6 +59,12 @@ bool appShortcuts(KeyEvent event) {
       theme.setDarkMode(v);
       snackString(v ? 'Dark mode enabled' : 'Dark mode disabled');
       return true;
+
+    case LogicalKeyboardKey.keyO:
+      final v = !theme.isOled.value;
+      theme.setOled(v);
+      snackString(v ? 'OLED mode enabled' : 'OLED mode disabled');
+      return true;
   }
 
   return false;

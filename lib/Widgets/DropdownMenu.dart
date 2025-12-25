@@ -35,52 +35,53 @@ class BuildDropdownMenu extends StatelessWidget {
       padding: padding,
       child: GestureDetector(
         onLongPress: onLongPress,
-        child: DropdownButtonFormField<String>(
-          value: options.contains(value) ? value : null,
-          isExpanded: true,
-          icon: const Icon(Icons.expand_more_rounded),
-          menuMaxHeight: 300,
-          dropdownColor: colorScheme.surface,
-          hint: hintText != null
-              ? Text(
-                  hintText!,
-                  style: theme.textTheme.bodyMedium?.copyWith(
-                    color: colorScheme.onSurfaceVariant,
-                    fontWeight: FontWeight.w500,
-                  ),
-                )
-              : null,
-          style: theme.textTheme.bodyMedium?.copyWith(
-            fontWeight: FontWeight.w600,
-          ),
-          decoration: InputDecoration(
-            labelText: labelText,
+        child: DropdownMenu(
+          focusNode: FocusNode(skipTraversal: false),
+          initialSelection: options.contains(value) ? value : null,
+          expandedInsets: EdgeInsets.zero,
+          menuHeight: 300,
+          leadingIcon: prefixIcon != null ? Icon(prefixIcon, size: 20) : null,
+          hintText: hintText,
+          textStyle: theme.textTheme.labelLarge,
+          inputDecorationTheme: InputDecorationTheme(
             filled: true,
-            fillColor: colorScheme.surfaceContainerHighest.withOpacity(0.6),
-            prefixIcon: prefixIcon != null ? Icon(prefixIcon, size: 20) : null,
+            fillColor: theme.cardColor,
             contentPadding:
                 const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
             border: _border(colorScheme, false),
-            enabledBorder: _border(colorScheme, false),
             focusedBorder: _border(colorScheme, true),
-            floatingLabelBehavior: FloatingLabelBehavior.auto,
           ),
-          onChanged: onChanged,
-          selectedItemBuilder: (BuildContext context) => options
-              .map((String value) => Expanded(
-                    child: Text(
-                      value,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        fontFamily: 'Poppins',
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
+          menuStyle: MenuStyle(
+            elevation: const WidgetStatePropertyAll(6),
+            backgroundColor: WidgetStatePropertyAll(theme.cardColor),
+            shape: WidgetStatePropertyAll(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(18),
+              ),
+            ),
+          ),
+          onSelected: onChanged,
+          trailingIconFocusNode: null,
+          dropdownMenuEntries: options
+              .map(
+                (e) => DropdownMenuEntry(
+                  value: e,
+                  label: e,
+                  style: ButtonStyle(
+                    padding: WidgetStateProperty.all(
+                      const EdgeInsets.symmetric(horizontal: 16),
+                    ),
+                    textStyle: WidgetStateProperty.resolveWith(
+                      (states) => theme.textTheme.labelMedium?.copyWith(
+                        color: states.contains(WidgetState.selected)
+                            ? colorScheme.primary
+                            : colorScheme.onSurface,
                       ),
                     ),
-                  ))
+                  ),
+                ),
+              )
               .toList(),
-          items: options.map(_buildItem).toList(),
         ),
       ),
     );
@@ -92,37 +93,6 @@ class BuildDropdownMenu extends StatelessWidget {
       borderSide: BorderSide(
         color: focused ? scheme.primary : (borderColor ?? Colors.transparent),
         width: focused ? 1.5 : 1,
-      ),
-    );
-  }
-
-  DropdownMenuItem<String> _buildItem(String value) {
-    return DropdownMenuItem<String>(
-      value: value,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 6),
-        child: Row(
-          children: [
-            Icon(
-              Icons.circle,
-              size: 6,
-              color: Colors.grey.shade400,
-            ),
-            const SizedBox(width: 14),
-            Expanded(
-              child: Text(
-                value,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                  fontFamily: 'Poppins',
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }

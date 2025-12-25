@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:ui';
 
-import 'Functions/Network/NetworkManager.dart';
+import 'DI.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:desktop_webview_window/desktop_webview_window.dart';
 import 'package:dpad/dpad.dart';
@@ -13,7 +13,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:media_kit/media_kit.dart';
+import 'package:media_kit/media_kit.dart' as mpv;
 import 'package:window_manager/window_manager.dart';
 import 'Api/Updater/AppUpdater.dart';
 import 'Functions/Extensions/ContextExtensions.dart';
@@ -85,13 +85,11 @@ Future init() async {
     DartotsuExtensionBridge().init(PrefManager.dartotsuPreferences, "Dartotsu"),
     Logger.init(),
   ]);
+  DI.init();
   //await MpvConf.init();
-  lazyPut(MediaServiceController());
-  lazyPut(ThemeController());
-  lazyPut(NetworkManager());
   //TypeFactory.init();
   DeepLink.init();
-  MediaKit.ensureInitialized();
+  mpv.MediaKit.ensureInitialized();
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
     await WindowManager.instance.ensureInitialized();
   }
