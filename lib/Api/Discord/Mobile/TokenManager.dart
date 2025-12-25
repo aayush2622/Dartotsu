@@ -21,8 +21,7 @@ class MobileTokenManager {
   Completer<String>? _refreshCompleter;
 
   MobileTokenManager() {
-    authToken =
-        'OTE4ODI1MTYwNjU0NTk4MjI0.G_HM5d.Ww5kyt1PQquKNAVPuOIjVQ59Euj6S7d1s4wjLA'; // loadCustomData<String>('DiscordToken');
+    authToken = loadCustomData<String>('DiscordToken');
   }
 
   Future<String> getToken() async {
