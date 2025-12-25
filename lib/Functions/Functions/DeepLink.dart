@@ -4,11 +4,8 @@ import 'package:app_links/app_links.dart';
 import 'package:dartotsu_extension_bridge/ExtensionManager.dart';
 import 'package:dartotsu_extension_bridge/Models/Source.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 
-//import '../../Screens/Settings/SettingsPlayerScreen.dart';
 import '../Function.dart';
 import '../RegisterProtocol/WindowProtocol.dart';
 

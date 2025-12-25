@@ -1,15 +1,16 @@
 import 'dart:convert';
 import 'dart:io';
-import 'dart:math';
-
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:rhttp/rhttp.dart';
-import 'dart:typed_data';
+
+import 'CookieManager.dart';
+import 'DnsManager.dart';
+import 'LogInterceptor.dart';
 
 class NetworkManager extends GetxController {
   RhttpClient? _client;
-  late final String _userAgent = _buildUserAgent();
+  final String _userAgent = _buildUserAgent();
 
   Future<RhttpClient> _ensureClient() async {
     if (_client != null) return _client!;
@@ -25,9 +26,8 @@ class NetworkManager extends GetxController {
         dnsSettings: DnsSettings.dynamic(
           resolver: (host) async {
             try {
-              return await resolveWithBinaryDoh(
+              return await DnsManager.resolveWithBinaryDoh(
                 host,
-                Uri.parse(DohProvider.cloudflare.url),
               );
             } catch (e) {
               debugPrint('DoH resolution failed for $host: $e');
@@ -37,108 +37,21 @@ class NetworkManager extends GetxController {
         ),
         tlsSettings: const TlsSettings(trustRootCertificates: true),
       ),
-      interceptors: kDebugMode ? [_LoggingInterceptor()] : const [],
+      interceptors: [
+        LogInterceptor(),
+        CookieManager(),
+      ],
     );
 
     return _client!;
   }
 
-  List<String> parseDnsResponse(Uint8List data) {
-    // something is  happening here idk myself
-    int offset = 12; // skip header
-
-    // Skip question
-    while (data[offset] != 0) {
-      offset += data[offset] + 1;
-    }
-    offset += 5;
-
-    final results = <String>[];
-
-    while (offset < data.length) {
-      // name (pointer or inline)
-      if ((data[offset] & 0xC0) == 0xC0) {
-        offset += 2;
-      } else {
-        while (data[offset] != 0) {
-          offset += data[offset] + 1;
-        }
-        offset++;
-      }
-
-      final type = (data[offset] << 8) | data[offset + 1];
-      offset += 8; // TYPE + CLASS + TTL
-      final rdLength = (data[offset] << 8) | data[offset + 1];
-      offset += 2;
-
-      if (type == 1 && rdLength == 4) {
-        results.add(
-          '${data[offset]}.${data[offset + 1]}.${data[offset + 2]}.${data[offset + 3]}',
-        );
-      }
-
-      offset += rdLength;
-    }
-
-    return results;
-  }
-
-  Uint8List buildDnsQuery(String host) {
-    // something is  happening here tooo
-    final rand = Random.secure();
-    final bytes = BytesBuilder();
-
-    // Header
-    bytes.add([
-      rand.nextInt(256), rand.nextInt(256),
-      0x01, 0x00, // standard query, recursion desired
-      0x00, 0x01, // QDCOUNT = 1
-      0x00, 0x00, // ANCOUNT
-      0x00, 0x00, // NSCOUNT
-      0x00, 0x00, // ARCOUNT
-    ]);
-
-    // Question
-    for (final label in host.split('.')) {
-      bytes.add([label.length]);
-      bytes.add(label.codeUnits);
-    }
-    bytes.add([0x00]); // end of name
-    bytes.add([0x00, 0x01]); // QTYPE = A
-    bytes.add([0x00, 0x01]); // QCLASS = IN
-
-    return bytes.toBytes();
-  }
-
-  Future<List<String>> resolveWithBinaryDoh(
-    String host,
-    Uri dohEndpoint,
-  ) async {
-    final query = buildDnsQuery(host);
-
-    final res = await Rhttp.requestBytes(
-      method: HttpMethod.post,
-      url: dohEndpoint.toString(),
-      headers: const HttpHeaders.map({
-        HttpHeaderName.contentType: 'application/dns-message',
-        HttpHeaderName.accept: 'application/dns-message',
-      }),
-      body: HttpBody.bytes(query),
-    );
-
-    final bytes = res.body;
-    if (bytes.isEmpty) {
-      throw Exception('Empty DoH response');
-    }
-
-    final answers = parseDnsResponse(bytes);
-    if (answers.isEmpty) {
-      throw Exception('No A records for $host');
-    }
-
-    return answers;
-  }
-
+  /// Performs a GET request.
+  /// [url]: The URL to send the GET request to.
+  /// [query]: Optional query parameters to include in the request.
+  /// [headers]: Optional headers to include in the request.
+  /// [cancelToken]: Optional token to cancel the request.
+  /// Returns a [NetworkResponse] containing the response data.
   Future<NetworkResponse<dynamic>> get(
     String url, {
     Map<String, String>? query,
@@ -157,6 +70,13 @@ class NetworkManager extends GetxController {
     return _wrap(res);
   }
 
+  /// Performs a POST request.
+  /// [url]: The URL to send the POST request to.
+  /// [data]: Optional data to include in the request body.
+  /// [query]: Optional query parameters to include in the request.
+  /// [headers]: Optional headers to include in the request.
+  /// [cancelToken]: Optional token to cancel the request.
+  /// Returns a [NetworkResponse] containing the response data.
   Future<NetworkResponse<dynamic>> post(
     String url, {
     Object? data,
@@ -177,6 +97,12 @@ class NetworkManager extends GetxController {
     return _wrap(res);
   }
 
+  /// Performs a HEAD request.
+  /// [url]: The URL to send the HEAD request to.
+  /// [query]: Optional query parameters to include in the request.
+  /// [headers]: Optional headers to include in the request.
+  /// [cancelToken]: Optional token to cancel the request.
+  /// Returns a [NetworkResponse] containing the response data.
   Future<NetworkResponse<void>> head(
     String url, {
     Map<String, String>? query,
@@ -202,6 +128,12 @@ class NetworkManager extends GetxController {
     );
   }
 
+  /// Downloads a file from the specified URL and saves it to the given path.
+  /// [url]: The URL of the file to download.
+  /// [savePath]: The local path to save the downloaded file.
+  /// [onProgress]: Optional callback to report download progress.
+  /// [cancelToken]: Optional token to cancel the download.
+  /// Returns a [Future] that completes when the download is finished.
   Future<void> download(
     String url,
     String savePath, {
@@ -276,7 +208,7 @@ class NetworkManager extends GetxController {
     500: 'Internal Server Error',
   };
 
-  String _buildUserAgent() {
+  static String _buildUserAgent() {
     final platform = Platform.operatingSystem;
     final os = Platform.operatingSystemVersion.split(' ').first;
     final arch = Platform.version.split(' ').first;
@@ -287,73 +219,6 @@ class NetworkManager extends GetxController {
   void onClose() {
     _client?.dispose();
     super.onClose();
-  }
-}
-
-enum DohProvider {
-  cloudflare('https://cloudflare-dns.com/dns-query'),
-  google('https://dns.google/dns-query'),
-  adguard('https://dns-unfiltered.adguard.com/dns-query'),
-  quad9('https://dns.quad9.net/dns-query'),
-  alidns('https://dns.alidns.com/dns-query'),
-  dnspod('https://doh.pub/dns-query'),
-  dns360('https://doh.360.cn/dns-query'),
-  quad101('https://dns.twnic.tw/dns-query'),
-  mullvad('https://doh.mullvad.net/dns-query'),
-  controld('https://freedns.controld.com/p0'),
-  njalla('https://dns.njal.la/dns-query'),
-  shecan('https://free.shecan.ir/dns-query'),
-  libredns('https://doh.libredns.gr/dns-query');
-
-  const DohProvider(this.url);
-  final String url;
-}
-
-class _LoggingInterceptor extends Interceptor {
-  @override
-  Future<InterceptorResult<HttpRequest>> beforeRequest(
-    HttpRequest request,
-  ) async {
-    request.additionalData['startTime'] = DateTime.now();
-    debugPrint('→ ${request.method} ${request.url}');
-    debugPrint('Headers: ${request.headers}');
-    return Interceptor.next(request);
-  }
-
-  @override
-  Future<InterceptorResult<HttpResponse>> afterResponse(
-    HttpResponse response,
-  ) async {
-    final start = response.request.additionalData['startTime'];
-    final ms = start is DateTime
-        ? DateTime.now().difference(start).inMilliseconds
-        : null;
-
-    debugPrint(
-      '← ${response.statusCode} ${response.request.url}'
-      '${ms != null ? ' (${ms}ms)' : ''}',
-    );
-
-    return Interceptor.next();
-  }
-
-  @override
-  Future<InterceptorResult<RhttpException>> onError(
-    RhttpException exception,
-  ) async {
-    final req = exception.request;
-    final start = req.additionalData['startTime'];
-    final ms = start is DateTime
-        ? DateTime.now().difference(start).inMilliseconds
-        : null;
-
-    debugPrint(
-      '× ${req.method} ${req.url}'
-      '${ms != null ? ' (${ms}ms)' : ''}\n'
-      '  $exception',
-    );
-
-    return Interceptor.next();
   }
 }
 

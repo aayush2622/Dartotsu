@@ -27,7 +27,7 @@ class AppUpdater {
 
   AppUpdater() {
     checkForUpdates = loadCustomData("checkForUpdates") ?? true;
-    alphaUpdates = loadCustomData("alphaUpdates") ?? !false;
+    alphaUpdates = loadCustomData("alphaUpdates") ?? false;
   }
 
   /// Checks for application updates by comparing the current version hash
@@ -42,7 +42,6 @@ class AppUpdater {
       if (force) snackString("Hash not found");
       return;
     }
-
     var response = await network.get(
         'https://api.github.com/repos/${alphaUpdates ? alphaRepo : mainRepo}/releases/latest');
     if (response.statusCode == 404) {
