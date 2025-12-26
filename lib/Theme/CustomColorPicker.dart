@@ -62,7 +62,7 @@ Future<Color?> showColorPickerDialog(BuildContext context, Color initialColor,
                 children: [
                   TextButton(
                     child: Text(
-                      'Cancel',
+                      getString.cancel,
                       style: TextStyle(
                         color: theme.primary,
                         fontWeight: FontWeight.bold,
@@ -74,7 +74,7 @@ Future<Color?> showColorPickerDialog(BuildContext context, Color initialColor,
                   ),
                   TextButton(
                     child: Text(
-                      'Select',
+                      getString.select,
                       style: TextStyle(
                         color: theme.primary,
                         fontWeight: FontWeight.bold,

@@ -84,8 +84,8 @@ class SettingsAboutScreenState extends BaseSettingsScreen {
       ),
       Setting(
         type: SettingType.normal,
-        name: "Check for update",
-        description: "Check For latest update",
+        name: getString.checkUpdate,
+        description: getString.checkUpdateDesc,
         icon: Icons.update_sharp,
         onClick: () async {
           snackString("Checking for update");
@@ -94,16 +94,16 @@ class SettingsAboutScreenState extends BaseSettingsScreen {
       ),
       Setting(
         type: SettingType.switchType,
-        name: "Auto check for update",
-        description: "Auto check for update whenever the app starts",
+        name: getString.autoCheckUpdate,
+        description: ,
         icon: Icons.autorenew,
         isChecked: loadCustomData("checkForUpdates") ?? true,
         onSwitchChange: (v) => saveCustomData("checkForUpdates", v),
       ),
       Setting(
         type: SettingType.switchType,
-        name: "Alpha updates",
-        description: "Alpha updates may contain many bugs",
+        name: getString.alphaCheckUpdate,
+        description: getString.alphaCheckUpdateDesc,
         icon: Icons.warning_amber_rounded,
         isChecked: loadCustomData("alphaUpdates") ?? false,
         onSwitchChange: (v) => saveCustomData("alphaUpdates", v),
