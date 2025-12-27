@@ -1,8 +1,5 @@
 import 'dart:io';
 
-import 'package:dartotsu/Functions/Function.dart';
-import 'package:dartotsu/Preferences/PrefManager.dart';
-import 'package:dartotsu/Widgets/CustomBottomDialog.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,38 +9,38 @@ import 'package:markdown_widget/widget/markdown.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 import 'package:install_plugin/install_plugin.dart';
+import 'package:rhttp/rhttp.dart';
 
 import '../../Functions/Extensions/ContextExtensions.dart';
 import '../../Functions/Functions/GetXFunctions.dart';
 import '../../Functions/Network/NetworkManager.dart';
+import '../../Functions/Function.dart';
+import '../../Preferences/PrefManager.dart';
+import '../../Widgets/CustomBottomDialog.dart';
 
 class AppUpdater {
-  final mainRepo = 'aayush2622/Dartotsu';
-  final alphaRepo = 'grayankit/Dartotsu-Downloader';
+  final _skippedUpdatesKey = "skippedUpdateList";
+  final _mainRepo = 'aayush2622/Dartotsu';
+  final _alphaRepo = 'grayankit/Dartotsu-Downloader';
 
-  final network = find<NetworkManager>();
-  late bool checkForUpdates;
-  late bool alphaUpdates;
-
-  AppUpdater() {
-    checkForUpdates = loadCustomData("checkForUpdates") ?? true;
-    alphaUpdates = loadCustomData("alphaUpdates") ?? false;
-  }
+  NetworkManager get _network => find();
+  bool get _checkForUpdates => loadCustomData("checkForUpdates") ?? true;
+  bool get _alphaUpdates => loadCustomData("alphaUpdates") ?? false;
 
   /// Checks for application updates by comparing the current version hash
   /// with the latest release on GitHub. If an update is available, it shows
   /// a bottom sheet with update details and options to download and install.
   /// [force]: If true, forces the update check regardless of user settings.
   Future<void> checkForUpdate({bool force = false}) async {
-    if (!checkForUpdates && !force) return;
+    if (!_checkForUpdates && !force) return;
     var hash = await loadEnv("hash");
 
     if (hash == null) {
       if (force) snackString("Hash not found");
       return;
     }
-    var response = await network.get(
-        'https://api.github.com/repos/${alphaUpdates ? alphaRepo : mainRepo}/releases/latest');
+    var response = await _network.get(
+        'https://api.github.com/repos/${_alphaUpdates ? _alphaRepo : _mainRepo}/releases/latest');
     if (response.statusCode == 404) {
       if (force) {
         snackString("Ooo Nooo you fell into limbo: ${response.statusMessage}");
@@ -53,16 +50,26 @@ class AppUpdater {
 
     if (response.statusCode != 200) return;
 
+    if (response.data == null || response.data is! Map) {
+      if (force) snackString("Invalid update response");
+      return;
+    }
+
     final data = response.data;
 
     final release = data["tag_name"];
-    var skippedUpdates =
-        loadCustomData<List<String>>("skippedUpdateList") ?? [];
+
+    if (release == hash) {
+      if (force) snackString("Latest version is already installed");
+      return;
+    }
+
+    var skippedUpdates = loadCustomData<List<String>>(_skippedUpdatesKey) ?? [];
 
     if (skippedUpdates.contains(release) && !force) return;
 
-    final compare = await network.get(
-      'https://api.github.com/repos/$mainRepo/compare/$release...$hash',
+    final compare = await _network.get(
+      'https://api.github.com/repos/$_mainRepo/compare/$release...$hash',
     );
     final compareData = compare.data;
     final isUpdate = compareData['status'] == 'behind';
@@ -119,18 +126,18 @@ class AppUpdater {
                     borderRadius: BorderRadius.circular(14),
                   ),
                   child: Obx(() {
-                    if (downloadProgress.value >= 0) {
+                    if (_downloadProgress.value >= 0) {
                       return Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           LinearProgressIndicator(
-                            value: downloadProgress.value / 100,
+                            value: _downloadProgress.value / 100,
                           ),
                           const SizedBox(height: 8),
                           Text(
-                            "${downloadedBytes.value ~/ (1024 * 1024)} MB / "
-                            "${totalBytes.value ~/ (1024 * 1024)} MB "
-                            "${downloadProgress.value.toStringAsFixed(1)}%",
+                            "${_downloadedBytes.value ~/ (1024 * 1024)} MB / "
+                            "${_totalBytes.value ~/ (1024 * 1024)} MB "
+                            "${_downloadProgress.value.toStringAsFixed(1)}%",
                             style: textStyle,
                           ),
                         ],
@@ -156,7 +163,7 @@ class AppUpdater {
           ),
           const SizedBox(height: 16),
           Obx(() {
-            if (downloadProgress.value >= 0) {
+            if (_downloadProgress.value >= 0) {
               return const SizedBox.shrink();
             }
 
@@ -188,9 +195,9 @@ class AppUpdater {
         negativeCallback: () {
           if (skipUpdate.value) {
             final skipped =
-                loadCustomData<List<String>>("skippedUpdateList") ?? [];
+                loadCustomData<List<String>>(_skippedUpdatesKey) ?? [];
             skipped.add(data["tag_name"]);
-            saveCustomData("skippedUpdateList", skipped);
+            saveCustomData(_skippedUpdatesKey, skipped);
           }
           Get.back();
         },
@@ -207,24 +214,38 @@ class AppUpdater {
           }
         },
       ),
+      onDismissed: () {
+        if (_cancelToken != null && !_cancelToken!.isCancelled) {
+          _cancelToken!.cancel();
+        }
+        _resetDownloadState();
+      },
     );
   }
 
-  Future<String?> _getAssetDownloadUrl(List assets) async {
+  void _resetDownloadState() {
+    _downloadProgress.value = -1;
+    _downloadedBytes.value = 0;
+    _totalBytes.value = 0;
+    _cancelToken = null;
+  }
+
+  Future<String?> _getAssetDownloadUrl(List a) async {
+    var assets = a.cast<Map<String, dynamic>>();
     if (Platform.isAndroid) {
       final abi = await _getDeviceABI();
 
       if (abi != null) {
-        final match = assets.cast<Map<String, dynamic>>().firstWhere(
-              (a) => (a['name'] as String).contains('Android_$abi'),
-              orElse: () => {},
-            );
+        final match = assets.firstWhere(
+          (a) => (a['name'] as String).contains('Android_$abi'),
+          orElse: () => {},
+        );
         if (match.isNotEmpty) return match['browser_download_url'];
       }
-      final fallbackApk = assets.cast<Map<String, dynamic>>().firstWhere(
-            (a) => (a['name'] as String).endsWith('.apk'),
-            orElse: () => {},
-          );
+      final fallbackApk = assets.firstWhere(
+        (a) => (a['name'] as String).endsWith('.apk'),
+        orElse: () => {},
+      );
       if (fallbackApk.isNotEmpty) return fallbackApk['browser_download_url'];
       return null;
     }
@@ -238,10 +259,10 @@ class AppUpdater {
     for (final entry in platformExtensions.entries) {
       if (entry.key) {
         for (final ext in entry.value) {
-          final match = assets.cast<Map<String, dynamic>>().firstWhere(
-                (a) => (a['name'] as String).endsWith(ext),
-                orElse: () => {},
-              );
+          final match = assets.firstWhere(
+            (a) => (a['name'] as String).endsWith(ext),
+            orElse: () => {},
+          );
           if (match.isNotEmpty) return match['browser_download_url'];
         }
       }
@@ -261,30 +282,29 @@ class AppUpdater {
     );
   }
 
-  final RxDouble downloadProgress = (-1.0).obs;
-  final RxInt downloadedBytes = 0.obs;
-  final RxInt totalBytes = 0.obs;
-
+  final RxDouble _downloadProgress = (-1.0).obs;
+  final RxInt _downloadedBytes = 0.obs;
+  final RxInt _totalBytes = 0.obs;
+  CancelToken? _cancelToken;
   Future<void> _downloadAndInstallApk(String apkUrl) async {
     try {
       final packageName = path.basenameWithoutExtension(apkUrl);
 
-      downloadProgress.value = 0;
-      downloadedBytes.value = 0;
-      totalBytes.value = 0;
+      _resetDownloadState();
 
       final tempDir = await getTemporaryDirectory();
       final filePath = '${tempDir.path}/$packageName.apk';
       final file = File(filePath);
-
-      await network.download(
+      _cancelToken = _network.newCancelToken();
+      await _network.download(
         apkUrl,
         filePath,
+        cancelToken: _cancelToken,
         onProgress: (received, total) {
           if (total <= 0) return;
-          downloadedBytes.value = received;
-          totalBytes.value = total;
-          downloadProgress.value = (received / total) * 100;
+          _downloadedBytes.value = received;
+          _totalBytes.value = total;
+          _downloadProgress.value = (received / total) * 100;
         },
       );
 
@@ -299,9 +319,7 @@ class AppUpdater {
         await file.delete();
       }
     } catch (e) {
-      downloadProgress.value = -1;
-      downloadedBytes.value = 0;
-      totalBytes.value = 0;
+      _resetDownloadState();
       rethrow;
     }
   }

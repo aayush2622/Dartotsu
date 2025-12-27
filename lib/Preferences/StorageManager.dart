@@ -1,4 +1,3 @@
-import 'dart:developer' as Logger;
 import 'dart:io';
 
 import 'package:dartotsu/Logger.dart';
@@ -43,7 +42,7 @@ class StorageManager {
       }
 
       if (Platform.isAndroid) {
-        final hasPermission = await hasStoragePermission();
+        final hasPermission = await requestPermission();
 
         if (!hasPermission || useSystemPath) {
           final base = withAppRoot(appDir.path);
@@ -65,7 +64,7 @@ class StorageManager {
         path.join(withAppRoot(base), subPath ?? ''),
       );
     } catch (e) {
-      Logger.log('Error getting directory: $e');
+      logger('Error getting directory: $e');
       return await getApplicationDocumentsDirectory();
     }
   }

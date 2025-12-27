@@ -10,7 +10,9 @@ class Logger {
   static late File _logFile;
   static late IOSink _sink;
   static bool _initialized = false;
-  static final _logQueue = StreamController<String>();
+
+  static final _logQueue = StreamController<String>.broadcast();
+  static final List<String> _preInitBuffer = [];
 
   static Future<void> init() async {
     final directory = await StorageManager.getDirectory(
@@ -29,25 +31,42 @@ class Logger {
     }
 
     _sink = _logFile.openWrite(mode: FileMode.append);
-    _initialized = true;
+    _sink.writeln('\n\n[Dartotsu] Logger initialized\n');
 
     _logQueue.stream.listen((log) {
       _sink.writeln(log);
     });
+
+    for (final log in _preInitBuffer) {
+      _sink.writeln(log);
+    }
+    _preInitBuffer.clear();
+
+    _initialized = true;
+
     NativeLogger.startLogStream();
-    log('\n\nLogger initialized\n\n');
+    NativeLogger.importJavaCrashLogs();
   }
 
-  static void log(String message, {LogLevel logLevel = LogLevel.info}) {
-    if (!_initialized) return;
-
+  static void log(
+    String message, {
+    LogLevel logLevel = LogLevel.info,
+  }) {
     final now = DateTime.now();
-    final timestamp =
-        '${now.day.toString().padLeft(2, '0')}/${now.month.toString().padLeft(2, '0')}/${now.year.toString().padLeft(4, '0')} '
-        '${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}:${now.second.toString().padLeft(2, '0')}';
+    final timestamp = '${now.day.toString().padLeft(2, '0')}/'
+        '${now.month.toString().padLeft(2, '0')}/'
+        '${now.year.toString().padLeft(4, '0')} '
+        '${now.hour.toString().padLeft(2, '0')}:'
+        '${now.minute.toString().padLeft(2, '0')}:'
+        '${now.second.toString().padLeft(2, '0')}';
 
-    final logMessage = '[$timestamp][${logLevel.toString()}] $message';
-    _logQueue.add(logMessage);
+    final logMessage = '[$timestamp] [${logLevel.toString()}] $message';
+
+    if (_initialized) {
+      _logQueue.add(logMessage);
+    } else {
+      _preInitBuffer.add(logMessage);
+    }
   }
 
   static Future<void> dispose() async {
@@ -89,10 +108,38 @@ class NativeLogger {
       (call) async {
         if (call.method == 'onLog') {
           String log = call.arguments;
-          logger("[NATIVE] $log");
+          logger("[JAVA LOGS] $log");
         }
       },
     );
     await _channel.invokeMethod('startLogs');
+  }
+
+  static Future<void> importJavaCrashLogs() async {
+    if (!Platform.isAndroid) return;
+
+    final filesDir = await getAndroidFilesDir();
+    final file = File('${filesDir.path}/logs/java_crash.txt');
+
+    if (!await file.exists()) return;
+
+    final crashLog = await file.readAsString();
+    if (crashLog.trim().isEmpty) return;
+
+    Logger.log(
+      '\n==== JAVA CRASH DETECTED ====\n$crashLog\n============================',
+      logLevel: LogLevel.error,
+    );
+    try {
+      await file.rename('${file.path}.consumed');
+    } catch (_) {
+      await file.writeAsString('');
+    }
+  }
+
+  static Future<Directory> getAndroidFilesDir() async {
+    final path = await const MethodChannel('android_paths')
+        .invokeMethod<String>('getFilesDir');
+    return Directory(path!);
   }
 }

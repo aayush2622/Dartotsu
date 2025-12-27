@@ -1,6 +1,7 @@
 import 'package:dartotsu/Widgets/ScrollConfig.dart';
 import 'package:flutter/material.dart';
 
+import '../Functions/Extensions/ContextExtensions.dart';
 import '../Theme/ThemeManager.dart';
 
 class CustomBottomDialog extends StatefulWidget {
@@ -41,7 +42,7 @@ class _CustomBottomDialogState extends State<CustomBottomDialog> {
 
   @override
   Widget build(BuildContext context) {
-    var theme = Theme.of(context).colorScheme;
+    var theme = context.colorScheme;
     return ThemedContainer(
       context: context,
       border: Border.all(width: 0),
@@ -163,7 +164,8 @@ class _CustomBottomDialogState extends State<CustomBottomDialog> {
   }
 }
 
-void showCustomBottomDialog(BuildContext context, Widget dialog) {
+void showCustomBottomDialog(BuildContext context, Widget dialog,
+    {VoidCallback? onDismissed}) {
   showModalBottomSheet(
     enableDrag: true,
     isScrollControlled: true,
@@ -174,5 +176,7 @@ void showCustomBottomDialog(BuildContext context, Widget dialog) {
       borderRadius: BorderRadius.vertical(top: Radius.circular(24.0)),
     ),
     builder: (context) => dialog,
-  );
+  ).whenComplete(() {
+    onDismissed?.call();
+  });
 }

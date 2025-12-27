@@ -23,6 +23,7 @@ import 'Functions/Extensions/IntExtensions.dart';
 import 'Functions/Functions/AppShortcuts.dart';
 import 'Functions/Functions/DeepLink.dart';
 import 'Functions/Functions/GetXFunctions.dart';
+import 'Functions/Network/NetworkManager.dart';
 import 'Preferences/PrefManager.dart';
 import 'Screen/Error/ErrorScreen.dart';
 import 'Screen/Onboarding/OnboardingScreen.dart';
@@ -60,6 +61,7 @@ void main(List<String> args) async {
         );
       };
       if (Platform.isLinux && runWebViewTitleBarWidget(args)) return;
+      Get.log = (text, {isError = false}) => debugPrint(text);
 
       await init();
       runApp(
@@ -69,11 +71,9 @@ void main(List<String> args) async {
         ),
       );
     },
-    (error, stackTrace) {
-      debugPrint('Uncaught error: $error\n$stackTrace');
-    },
+    (error, stackTrace) => debugPrint('Uncaught error: $error\n$stackTrace'),
     zoneSpecification: ZoneSpecification(
-      print: (Zone self, ZoneDelegate parent, Zone zone, String line) {
+      print: (self, parent, zone, line) {
         Logger.log(line);
         parent.print(zone, line);
       },
@@ -81,24 +81,33 @@ void main(List<String> args) async {
   );
 }
 
-Future init() async {
+Future<void> init() async {
   await PrefManager.init();
-  await Future.wait([
-    DartotsuExtensionBridge().init(PrefManager.dartotsuPreferences, "Dartotsu"),
-    Logger.init(),
-  ]);
   await Rhttp.init();
   DI.init();
-  //await MpvConf.init();
-  //TypeFactory.init();
+
+  await Future.wait([
+    DartotsuExtensionBridge().init(
+      PrefManager.dartotsuPreferences,
+      "Dartotsu",
+      http: find<NetworkManager>().client,
+    ),
+    Logger.init(),
+    initializeDateFormatting(),
+  ]);
+
+  unawaited(_postInit());
+}
+
+Future<void> _postInit() async {
   DeepLink.init();
   mpv.MediaKit.ensureInitialized();
+
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
     await WindowManager.instance.ensureInitialized();
   }
-  initializeDateFormatting();
-  AppUpdater().checkForUpdate();
-  //Discord.getSavedToken();
+
+  unawaited(AppUpdater().checkForUpdate());
 }
 
 class MyApp extends StatefulWidget {
@@ -111,13 +120,12 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   late final FocusNode _focusNode;
 
-  ThemeController get theme => find<ThemeController>();
+  ThemeController get theme => find();
 
   @override
   void initState() {
     super.initState();
     _focusNode = FocusNode();
-
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
@@ -158,10 +166,6 @@ class _MyAppState extends State<MyApp> {
                   title: 'Dartotsu',
                   debugShowCheckedModeBanner: false,
                   enableLog: true,
-                  logWriterCallback: (text, {isError = false}) {
-                    Logger.log(text);
-                    if (isError) debugPrint(text);
-                  },
                   localizationsDelegates: const [
                     AppLocalizations.delegate,
                     GlobalMaterialLocalizations.delegate,

@@ -1,3 +1,4 @@
+import 'package:dartotsu/Functions/Function.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:rhttp/rhttp.dart';
 
@@ -25,6 +26,12 @@ class LogInterceptor extends Interceptor {
       '${ms != null ? ' (${ms}ms)' : ''}',
     );
 
+    final cloudflare = [403, 503].contains(response.statusCode) &&
+        ["cloudflare-nginx", "cloudflare"]
+            .contains(response.headerMap['server']?.toLowerCase());
+
+    if (cloudflare) snackString('  ⚠️ Detected Cloudflare protection');
+
     return Interceptor.next();
   }
 
@@ -39,7 +46,7 @@ class LogInterceptor extends Interceptor {
         : null;
 
     debugPrint(
-      '× ${req.method} ${req.url}'
+      '× ${req.method.value} ${req.url}'
       '${ms != null ? ' (${ms}ms)' : ''}\n'
       '  $exception',
     );

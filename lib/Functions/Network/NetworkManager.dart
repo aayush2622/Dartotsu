@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
@@ -9,41 +10,51 @@ import 'DnsManager.dart';
 import 'LogInterceptor.dart';
 
 class NetworkManager extends GetxController {
-  RhttpClient? _client;
   final String _userAgent = _buildUserAgent();
+  late RhttpClient _client;
 
-  Future<RhttpClient> _ensureClient() async {
-    if (_client != null) return _client!;
+  RhttpClient get client => _client;
 
-    _client = await RhttpClient.create(
-      settings: ClientSettings(
-        timeoutSettings: const TimeoutSettings(
-          connectTimeout: Duration(seconds: 15),
-          timeout: Duration(seconds: 30),
+  @override
+  onInit() {
+    _initClient();
+    super.onInit();
+  }
+
+  RhttpClient _initClient() {
+    try {
+      _client = RhttpClient.createSync(
+        interceptors: [
+          LogInterceptor(),
+          CookieManager(),
+        ],
+        settings: ClientSettings(
+          userAgent: _userAgent,
+          throwOnStatusCode: false,
+          tlsSettings: const TlsSettings(
+            trustRootCertificates: true,
+          ),
+          timeoutSettings: const TimeoutSettings(
+            connectTimeout: Duration(seconds: 15),
+            timeout: Duration(seconds: 30),
+          ),
+          dnsSettings: DnsSettings.dynamic(
+            resolver: (host) async {
+              try {
+                return await DnsManager.resolveWithDoh(host);
+              } catch (e) {
+                debugPrint('DoH failed for $host → fallback: $e');
+                final res = await InternetAddress.lookup(host);
+                return res.map((e) => e.address).toList();
+              }
+            },
+          ),
         ),
-        userAgent: _userAgent,
-        throwOnStatusCode: false,
-        dnsSettings: DnsSettings.dynamic(
-          resolver: (host) async {
-            try {
-              return await DnsManager.resolveWithBinaryDoh(
-                host,
-              );
-            } catch (e) {
-              debugPrint('DoH resolution failed for $host: $e');
-              return [];
-            }
-          },
-        ),
-        tlsSettings: const TlsSettings(trustRootCertificates: true),
-      ),
-      interceptors: [
-        LogInterceptor(),
-        CookieManager(),
-      ],
-    );
-
-    return _client!;
+      );
+      return _client;
+    } catch (_) {
+      rethrow;
+    }
   }
 
   /// Performs a GET request.
@@ -58,8 +69,6 @@ class NetworkManager extends GetxController {
     Map<String, String>? headers,
     CancelToken? cancelToken,
   }) async {
-    final client = await _ensureClient();
-
     final res = await client.get(
       url,
       query: query,
@@ -84,8 +93,6 @@ class NetworkManager extends GetxController {
     Map<String, String>? headers,
     CancelToken? cancelToken,
   }) async {
-    final client = await _ensureClient();
-
     final res = await client.post(
       url,
       query: query,
@@ -109,8 +116,6 @@ class NetworkManager extends GetxController {
     Map<String, String>? headers,
     CancelToken? cancelToken,
   }) async {
-    final client = await _ensureClient();
-
     final res = await client.request(
       method: HttpMethod.head,
       url: url,
@@ -140,7 +145,6 @@ class NetworkManager extends GetxController {
     void Function(int received, int total)? onProgress,
     CancelToken? cancelToken,
   }) async {
-    final client = await _ensureClient();
     final res = await client.getStream(url, cancelToken: cancelToken);
 
     final file = File(savePath);
@@ -217,7 +221,7 @@ class NetworkManager extends GetxController {
 
   @override
   void onClose() {
-    _client?.dispose();
+    _client.dispose();
     super.onClose();
   }
 }

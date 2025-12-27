@@ -4,14 +4,14 @@ import 'dart:typed_data';
 import 'package:rhttp/rhttp.dart';
 
 class DnsManager {
-  static Future<List<String>> resolveWithBinaryDoh(
+  static Future<List<String>> resolveWithDoh(
     String host,
   ) async {
-    final query = buildDnsQuery(host);
+    final query = _buildDnsQuery(host);
 
     final res = await Rhttp.requestBytes(
       method: HttpMethod.post,
-      url: DohProvider.google.url,
+      url: DohProvider.cloudflare.url,
       headers: const HttpHeaders.map({
         HttpHeaderName.contentType: 'application/dns-message',
         HttpHeaderName.accept: 'application/dns-message',
@@ -24,7 +24,7 @@ class DnsManager {
       throw Exception('Empty DoH response');
     }
 
-    final answers = parseDnsResponse(bytes);
+    final answers = _parseDnsResponse(bytes);
     if (answers.isEmpty) {
       throw Exception('No A records for $host');
     }
@@ -32,7 +32,7 @@ class DnsManager {
     return answers;
   }
 
-  static List<String> parseDnsResponse(Uint8List data) {
+  static List<String> _parseDnsResponse(Uint8List data) {
     // something is  happening here idk myself
     int offset = 12; // skip header
 
@@ -72,7 +72,7 @@ class DnsManager {
     return results;
   }
 
-  static Uint8List buildDnsQuery(String host) {
+  static Uint8List _buildDnsQuery(String host) {
     // something is  happening here tooo
     final rand = Random.secure();
     final bytes = BytesBuilder();
