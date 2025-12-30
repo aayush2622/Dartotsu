@@ -7,8 +7,6 @@ import '../l10n/app_localizations.dart';
 import 'ThemeController.dart';
 import 'language.dart';
 
-AppLocalizations get getString => AppLocalizations.of(Get.context!)!;
-
 Widget languageSwitcher(BuildContext context) {
   final languageOptions = _getSupportedLanguages(context);
   final themeController = find<ThemeController>();
@@ -28,6 +26,8 @@ Widget languageSwitcher(BuildContext context) {
     ),
   );
 }
+
+AppLocalizations get getString => AppLocalizations.of(Get.context!)!;
 
 List<String> _getSupportedLanguages(BuildContext context) {
   const supportedLocales = AppLocalizations.supportedLocales;

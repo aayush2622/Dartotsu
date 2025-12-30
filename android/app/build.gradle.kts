@@ -12,7 +12,6 @@ android {
     namespace = "ani.aayush262.dartotsu"
 
     compileSdk = flutter.compileSdkVersion
-    // ndkVersion = flutter.ndkVersion
     ndkVersion =flutter.ndkVersion
 
     compileOptions {
@@ -29,7 +28,17 @@ android {
     packaging {
         jniLibs {
             useLegacyPackaging = true
+            keepDebugSymbols.clear()
         }
+    }
+
+    buildFeatures {
+        viewBinding = false
+        dataBinding = false
+        aidl = false
+        renderScript = false
+        resValues = false
+        shaders = false
     }
 
     defaultConfig {

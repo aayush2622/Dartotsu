@@ -98,7 +98,7 @@ class ThemeController extends GetxController {
 
   Future<void> setLocale(Locale locale) async {
     local.value = locale.languageCode;
-    Get.updateLocale(locale);
+    //Get.updateLocale(locale);
     saveData(PrefName.defaultLanguage, locale.languageCode);
   }
 }

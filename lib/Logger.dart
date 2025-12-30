@@ -33,9 +33,7 @@ class Logger {
     _sink = _logFile.openWrite(mode: FileMode.append);
     _sink.writeln('\n\n[Dartotsu] Logger initialized\n');
 
-    _logQueue.stream.listen((log) {
-      _sink.writeln(log);
-    });
+    _logQueue.stream.listen(_sink.writeln);
 
     for (final log in _preInitBuffer) {
       _sink.writeln(log);
@@ -119,7 +117,7 @@ class NativeLogger {
     if (!Platform.isAndroid) return;
 
     final filesDir = await getAndroidFilesDir();
-    final file = File('${filesDir.path}/logs/java_crash.txt');
+    final file = File(filesDir.path);
 
     if (!await file.exists()) return;
 
@@ -138,8 +136,7 @@ class NativeLogger {
   }
 
   static Future<Directory> getAndroidFilesDir() async {
-    final path = await const MethodChannel('android_paths')
-        .invokeMethod<String>('getFilesDir');
+    final path = await _channel.invokeMethod<String>('getCrashLogFileDir');
     return Directory(path!);
   }
 }

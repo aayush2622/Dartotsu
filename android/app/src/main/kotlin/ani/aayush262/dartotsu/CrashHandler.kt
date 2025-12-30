@@ -32,8 +32,8 @@ class CrashHandler private constructor(
         thread: Thread,
         throwable: Throwable
     ) {
-        val dir = File(context.filesDir, "logs").apply { mkdirs() }
-        val file = File(dir, "java_crash.txt")
+        val file = File(context.filesDir, "logs").apply { mkdirs() }
+            .resolve("JavaCrash.txt")
 
         PrintWriter(FileWriter(file, true)).use { pw ->
             pw.println()
@@ -43,10 +43,6 @@ class CrashHandler private constructor(
             pw.println()
             throwable.printStackTrace(pw)
         }
-        android.util.Log.e(
-            "CrashHandler",
-            "Crash written to ${dir.absolutePath}"
-        )
     }
     private fun timestamp(): String =
         SimpleDateFormat(

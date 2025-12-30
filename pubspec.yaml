@@ -42,7 +42,7 @@ dependencies:
   expandable_widgets: ^1.0.3+1
   expandable_text: 2.3.0
   cached_network_image: ^3.4.1
-  precached_network_image: ^1.4.0
+  precached_network_image: ^1.4.1
   flutter_svg: ^2.2.3
   flex_color_picker: ^3.8.0
   icons_plus: ^5.0.0

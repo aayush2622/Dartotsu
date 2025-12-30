@@ -17,13 +17,16 @@ class NativeLogger : FlutterPlugin {
     private val appStartTime = System.currentTimeMillis()
 
     override fun onAttachedToEngine(binding: FlutterPlugin.FlutterPluginBinding) {
+        val context = binding.applicationContext
         channel = MethodChannel(binding.binaryMessenger, "native_logger")
-
         channel.setMethodCallHandler { call, result ->
             when (call.method) {
                 "startLogs" -> {
                     startLogStreaming(binding.applicationContext)
                     result.success(null)
+                }
+                "getCrashLogFileDir" -> {
+                    result.success("${context.filesDir.absolutePath}/logs/JavaCrash.txt")
                 }
                 else -> result.notImplemented()
             }
@@ -64,7 +67,7 @@ class NativeLogger : FlutterPlugin {
 
     private fun parseLogTime(line: String): Long? {
         return try {
-            val timePart = line.take(18) // MM-dd HH:mm:ss.SSS
+            val timePart = line.take(18)
             val now = java.util.Calendar.getInstance()
 
             val formatter = SimpleDateFormat(

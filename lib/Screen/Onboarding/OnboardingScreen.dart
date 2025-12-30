@@ -1,6 +1,8 @@
 import 'dart:ui';
 
+import 'package:dartotsu/Functions/Extensions/ContextExtensions.dart';
 import 'package:dartotsu/Functions/Functions/GetXFunctions.dart';
+import 'package:dartotsu/Theme/LanguageSwitcher.dart';
 import 'package:dartotsu/Theme/ThemeController.dart';
 import 'package:dartotsu/Theme/ThemeManager.dart';
 import 'package:dpad/dpad.dart';
@@ -109,7 +111,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           const Text(
               "Dartotsu is a complete rewrite of Dantotsu in Flutter.\nIt's a hybrid AniList, MyAnimeList and Simkl support!"),
           const SizedBox(height: 16),
-          themeDropdown()
+          languageSwitcher(context)
         ],
       )
           .animate(target: animate ? 1 : 0)

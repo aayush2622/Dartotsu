@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:ui';
 
+import 'package:flutter/foundation.dart';
 import 'package:rhttp/rhttp.dart';
 
 import 'DI.dart';
@@ -33,6 +34,10 @@ import 'Theme/ThemeController.dart';
 import 'Widgets/CachedNetworkImage.dart';
 import 'l10n/app_localizations.dart';
 import 'Logger.dart';
+
+// webview
+
+// animationController
 
 // test glass background switch
 // test theme switcher
@@ -163,6 +168,7 @@ class _MyAppState extends State<MyApp> {
             return Obx(
               () {
                 return GetMaterialApp(
+                  key: ValueKey(theme.local.value),
                   title: 'Dartotsu',
                   debugShowCheckedModeBanner: false,
                   enableLog: true,
@@ -172,16 +178,14 @@ class _MyAppState extends State<MyApp> {
                     GlobalWidgetsLocalizations.delegate,
                     GlobalCupertinoLocalizations.delegate,
                   ],
+                  showPerformanceOverlay: kDebugMode,
                   supportedLocales: AppLocalizations.supportedLocales,
                   locale: Locale(theme.local.value),
                   themeMode:
                       theme.isDarkMode.value ? ThemeMode.dark : ThemeMode.light,
                   theme: getTheme(lightDynamic, theme),
                   darkTheme: getTheme(darkDynamic, theme),
-                  home: loadCustomData(
-                    "initialLoaded",
-                    defaultValue: false,
-                  )!
+                  home: loadCustomData("initialLoaded", defaultValue: false)!
                       ? const MainScreen()
                       : const OnboardingScreen(),
                 );

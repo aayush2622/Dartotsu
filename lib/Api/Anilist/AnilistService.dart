@@ -22,7 +22,7 @@ class AnilistService extends MediaService {
   BaseServiceData get data => AnilistData();
 
   @override
-  String get getName => getString.anilist;
+  String get getName => "Anilist";
 
   @override
   BaseHomeScreen? get homeScreen => throw UnimplementedError();

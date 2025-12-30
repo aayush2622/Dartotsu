@@ -36,7 +36,11 @@ class BuildDropdownMenu extends StatelessWidget {
       child: GestureDetector(
         onLongPress: onLongPress,
         child: DropdownMenu(
-          focusNode: FocusNode(skipTraversal: false),
+          requestFocusOnTap: false,
+          enableSearch: false,
+          enableFilter: false,
+          keyboardType: TextInputType.none,
+          focusNode: FocusNode(canRequestFocus: false),
           initialSelection: options.contains(value) ? value : null,
           expandedInsets: EdgeInsets.zero,
           menuHeight: 300,

@@ -6,7 +6,7 @@ import 'BaseMediaScreen.dart';
 abstract class BaseHomeScreen extends BaseMediaScreen {
   var listImages = Rx<List<String?>>([null, null]);
 
-  String get firstInfoString => getString.episodeWatched;
+  String get firstInfoString => "getString.episodeWatched";
 
-  String get secondInfoString => getString.chapterRead;
+  String get secondInfoString => "getString.chapterRead";
 }

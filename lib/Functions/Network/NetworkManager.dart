@@ -142,10 +142,15 @@ class NetworkManager extends GetxController {
   Future<void> download(
     String url,
     String savePath, {
-    void Function(int received, int total)? onProgress,
+    Map<String, String>? headers,
     CancelToken? cancelToken,
+    void Function(int received, int total)? onProgress,
   }) async {
-    final res = await client.getStream(url, cancelToken: cancelToken);
+    final res = await client.getStream(
+      url,
+      cancelToken: cancelToken,
+      headers: _mapHeaders(headers),
+    );
 
     final file = File(savePath);
     final sink = file.openWrite();
@@ -169,11 +174,11 @@ class NetworkManager extends GetxController {
     final data = _decodeIfJson(res.body, res.headerMapList);
 
     return NetworkResponse(
-      statusCode: res.statusCode,
-      statusMessage: _statusMessages[res.statusCode],
-      data: data,
-      headers: res.headerMapList,
-    );
+        statusCode: res.statusCode,
+        statusMessage: _statusMessages[res.statusCode],
+        data: data,
+        headers: res.headerMapList,
+        rawBytes: utf8.encode(res.body));
   }
 
   static dynamic _decodeIfJson(
@@ -231,12 +236,13 @@ class NetworkResponse<T> {
   final String? statusMessage;
   final T data;
   final Map<String, List<String>> headers;
-
+  final Uint8List? rawBytes;
   NetworkResponse({
     required this.statusCode,
     required this.data,
     this.statusMessage,
     required this.headers,
+    this.rawBytes,
   });
 
   bool get isOk => statusCode >= 200 && statusCode < 300;
