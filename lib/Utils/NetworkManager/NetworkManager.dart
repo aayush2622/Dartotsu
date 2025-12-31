@@ -15,6 +15,9 @@ class NetworkManager extends GetxController {
 
   RhttpClient get client => _client;
 
+  RhttpCompatibleClient get compatibleClient =>
+      RhttpCompatibleClient.of(_client);
+
   @override
   onInit() {
     _initClient();

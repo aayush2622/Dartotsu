@@ -2,8 +2,8 @@ import 'package:blurbox/blurbox.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../Functions/Functions/GetXFunctions.dart';
-import '../Widgets/DropdownMenu.dart';
+import '../../Functions/Functions/GetXFunctions.dart';
+import '../../Widgets/DropdownMenu.dart';
 import 'ThemeController.dart';
 import 'Themes/blue.dart';
 import 'Themes/fromCode.dart';
@@ -244,7 +244,7 @@ Widget ThemedContainer({
         blur: 10.0,
         alignment: alignment,
         padding: effectivePadding,
-        color: color ?? Theme.of(context).cardColor.withOpacity(0.2),
+        color: Theme.of(context).cardColor.withOpacity(0.2),
         border: border ??
             Border.all(
               color: theme.onSurface.withOpacity(0.2),

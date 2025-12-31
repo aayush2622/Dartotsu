@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../Functions/Functions/GetXFunctions.dart';
-import '../Widgets/DropdownMenu.dart';
-import '../l10n/app_localizations.dart';
+import '../../Functions/Functions/GetXFunctions.dart';
+import '../../Widgets/DropdownMenu.dart';
+import '../../l10n/app_localizations.dart';
 import 'ThemeController.dart';
 import 'language.dart';
 

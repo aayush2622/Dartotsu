@@ -1,5 +1,5 @@
+import '../../Model/SearchResults.dart';
 import '../../Services/Model/Media.dart';
-import '../../DataClass/SearchResults.dart';
 
 abstract class Queries {
   /// Fetches user data and returns a [bool] indicating success.

@@ -1,6 +1,7 @@
-import 'package:dartotsu/Functions/Function.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:rhttp/rhttp.dart';
+
+import '../../Functions/Functions/SnackBar.dart';
 
 class LogInterceptor extends Interceptor {
   @override

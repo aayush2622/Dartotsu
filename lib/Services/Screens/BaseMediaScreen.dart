@@ -21,25 +21,4 @@ abstract class BaseMediaScreen extends GetxController {
   Future<void> loadAll();
 
   Future<void>? loadNextPage() => null;
-  @override
-  void onInit() {
-    super.onInit();
-    if (initialLoad) return;
-    final live = Refresh.getOrPut(refreshID, false);
-    ever(
-      live,
-      (shouldRefresh) async {
-        if (running.value && shouldRefresh) {
-          running.value = false;
-          await Future.wait([
-            loadAll(),
-          ]);
-          initialLoad = true;
-          live.value = false;
-          running.value = true;
-        }
-      },
-    );
-    live.value = true;
-  }
 }

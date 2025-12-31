@@ -5,7 +5,8 @@ import 'package:dartotsu/Widgets/ScrollConfig.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import '../../Functions/Function.dart';
-import '../../Preferences/StorageManager.dart';
+import '../../Functions/Functions/CopyToClip.dart';
+import '../../Utils/Preferences/StorageManager.dart';
 import '../../Widgets/CustomElevatedButton.dart';
 import '../../Logger.dart';
 

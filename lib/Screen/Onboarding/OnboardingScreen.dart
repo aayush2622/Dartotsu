@@ -1,16 +1,15 @@
 import 'dart:ui';
 
-import 'package:dartotsu/Functions/Extensions/ContextExtensions.dart';
-import 'package:dartotsu/Functions/Functions/GetXFunctions.dart';
-import 'package:dartotsu/Theme/LanguageSwitcher.dart';
-import 'package:dartotsu/Theme/ThemeController.dart';
-import 'package:dartotsu/Theme/ThemeManager.dart';
 import 'package:dpad/dpad.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
+import '../../Functions/Functions/GetXFunctions.dart';
+import '../../Utils/ThemeManager/LanguageSwitcher.dart';
+import '../../Utils/ThemeManager/ThemeController.dart';
+import '../../Utils/ThemeManager/ThemeManager.dart';
 import '../../Widgets/CachedNetworkImage.dart';
 import '../../Widgets/ScrollConfig.dart';
 import '../../main.dart';

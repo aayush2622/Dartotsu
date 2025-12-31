@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-import '../Theme/ThemeManager.dart';
+import '../Utils/ThemeManager/ThemeManager.dart';
 
 class AlertDialogBuilder {
   final BuildContext context;

@@ -4,6 +4,7 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:markdown_widget/config/configs.dart';
+import 'package:markdown_widget/widget/blocks/leaf/heading.dart';
 import 'package:markdown_widget/widget/blocks/leaf/link.dart';
 import 'package:markdown_widget/widget/markdown.dart';
 import 'package:path/path.dart' as path;
@@ -13,9 +14,10 @@ import 'package:rhttp/rhttp.dart';
 
 import '../../Functions/Extensions/ContextExtensions.dart';
 import '../../Functions/Functions/GetXFunctions.dart';
-import '../../Functions/Network/NetworkManager.dart';
 import '../../Functions/Function.dart';
-import '../../Preferences/PrefManager.dart';
+import '../../Functions/Functions/SnackBar.dart';
+import '../../Utils/NetworkManager/NetworkManager.dart';
+import '../../Utils/Preferences/PrefManager.dart';
 import '../../Widgets/CustomBottomDialog.dart';
 
 class AppUpdater {
@@ -25,7 +27,7 @@ class AppUpdater {
 
   NetworkManager get _network => find();
   bool get _checkForUpdates => loadCustomData("checkForUpdates") ?? true;
-  bool get _alphaUpdates => loadCustomData("alphaUpdates") ?? false;
+  bool get _alphaUpdates => loadCustomData("alphaUpdates") ?? !false;
 
   /// Checks for application updates by comparing the current version hash
   /// with the latest release on GitHub. If an update is available, it shows
@@ -98,7 +100,7 @@ class AppUpdater {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
               decoration: BoxDecoration(
-                color: scheme.primary.withOpacity(0.12),
+                color: context.cardColor,
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Text(
@@ -122,7 +124,7 @@ class AppUpdater {
                   constraints: const BoxConstraints(maxHeight: 260),
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: scheme.primary.withOpacity(0.12),
+                    color: context.cardColor,
                     borderRadius: BorderRadius.circular(14),
                   ),
                   child: Obx(() {
@@ -152,6 +154,12 @@ class AppUpdater {
                           LinkConfig(
                             onTap: openLinkInBrowser,
                             style: textStyle!.copyWith(color: scheme.primary),
+                          ),
+                          H1Config(
+                            style: textStyle.copyWith(
+                              fontWeight: FontWeight.bold,
+                              color: scheme.primary,
+                            ),
                           )
                         ],
                       ),

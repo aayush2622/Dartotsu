@@ -104,10 +104,10 @@ dependencies:
   collection: ^1.19.1
   flutter_web_auth_2: ^5.0.0-alpha.0
   dartotsu_extension_bridge:
-   path: ../DartotsuExtensionBridge
-   #git:
-      #url: https://github.com/aayush2622/DartotsuExtensionBridge.git
-      #ref: master
+   #path: ../DartotsuExtensionBridge
+   git:
+      url: https://github.com/aayush2622/DartotsuExtensionBridge.git
+      ref: master
   string_similarity: ^2.1.1
 
 # Development dependencies

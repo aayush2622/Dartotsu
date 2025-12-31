@@ -2,6 +2,10 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:ui';
 
+import 'Utils/NetworkManager/NetworkManager.dart';
+import 'Utils/Preferences/PrefManager.dart';
+import 'Utils/ThemeManager/ThemeController.dart';
+import 'Utils/ThemeManager/ThemeManager.dart';
 import 'package:flutter/foundation.dart';
 import 'package:rhttp/rhttp.dart';
 
@@ -24,13 +28,9 @@ import 'Functions/Extensions/IntExtensions.dart';
 import 'Functions/Functions/AppShortcuts.dart';
 import 'Functions/Functions/DeepLink.dart';
 import 'Functions/Functions/GetXFunctions.dart';
-import 'Functions/Network/NetworkManager.dart';
-import 'Preferences/PrefManager.dart';
 import 'Screen/Error/ErrorScreen.dart';
 import 'Screen/Onboarding/OnboardingScreen.dart';
 import 'Services/MediaService.dart';
-import 'Theme/ThemeManager.dart';
-import 'Theme/ThemeController.dart';
 import 'Widgets/CachedNetworkImage.dart';
 import 'l10n/app_localizations.dart';
 import 'Logger.dart';
@@ -76,7 +76,10 @@ void main(List<String> args) async {
         ),
       );
     },
-    (error, stackTrace) => debugPrint('Uncaught error: $error\n$stackTrace'),
+    (error, stackTrace) {
+      debugPrint('Uncaught error: $error\n$stackTrace');
+      handleError(error, stackTrace);
+    },
     zoneSpecification: ZoneSpecification(
       print: (self, parent, zone, line) {
         Logger.log(line);
@@ -90,12 +93,11 @@ Future<void> init() async {
   await PrefManager.init();
   await Rhttp.init();
   DI.init();
-
   await Future.wait([
     DartotsuExtensionBridge().init(
       PrefManager.dartotsuPreferences,
       "Dartotsu",
-      http: find<NetworkManager>().client,
+      http: find<NetworkManager>().compatibleClient,
     ),
     Logger.init(),
     initializeDateFormatting(),
@@ -178,7 +180,6 @@ class _MyAppState extends State<MyApp> {
                     GlobalWidgetsLocalizations.delegate,
                     GlobalCupertinoLocalizations.delegate,
                   ],
-                  showPerformanceOverlay: kDebugMode,
                   supportedLocales: AppLocalizations.supportedLocales,
                   locale: Locale(theme.local.value),
                   themeMode:

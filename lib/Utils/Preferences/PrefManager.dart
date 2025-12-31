@@ -1,12 +1,11 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:dartotsu_extension_bridge/Mangayomi/Eval/dart/model/source_preference.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart'
     hide isar;
 import 'package:isar_community/isar.dart';
-import '../Logger.dart';
-import '../Theme/LanguageSwitcher.dart';
+import '../../Logger.dart';
+import '../ThemeManager/LanguageSwitcher.dart';
 import 'Encryptor.dart';
 import 'IsarDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
 import 'IsarDataClasses/DefaultReaderSettings/DefaultReaderSettings.dart';
@@ -77,7 +76,7 @@ class PrefManager {
       dartotsuPreferences = _open('DartotsuSettings', path!.path);
       await deleteAllStoredPreferences();
     } catch (e) {
-      Logger.log('Error initializing preferences: $e');
+      logger('Error initializing preferences: $e');
     }
   }
 
@@ -89,10 +88,7 @@ class PrefManager {
         MediaSettingsSchema,
         ShowResponseSchema,
         // bridge related schemas
-        MSourceSchema,
-        SourcePreferenceSchema,
-        SourcePreferenceStringValueSchema,
-        BridgeSettingsSchema
+        ...DartotsuExtensionBridge.isarSchema,
       ],
       directory: directory,
       name: name,

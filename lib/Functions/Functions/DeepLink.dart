@@ -6,8 +6,8 @@ import 'package:dartotsu_extension_bridge/Models/Source.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 
-import '../Function.dart';
-import '../RegisterProtocol/WindowProtocol.dart';
+import 'WindowProtocol.dart';
+import 'SnackBar.dart';
 
 class DeepLink {
   static void init() {

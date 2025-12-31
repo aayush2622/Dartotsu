@@ -1,8 +1,9 @@
 import 'package:dartotsu/Widgets/ScrollConfig.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../Functions/Extensions/ContextExtensions.dart';
-import '../Theme/ThemeManager.dart';
+import '../Utils/ThemeManager/ThemeManager.dart';
 
 class CustomBottomDialog extends StatefulWidget {
   final List<Widget> viewList;
@@ -32,26 +33,44 @@ class CustomBottomDialog extends StatefulWidget {
 }
 
 class _CustomBottomDialogState extends State<CustomBottomDialog> {
-  bool isChecked = false;
-
-  @override
-  void initState() {
-    super.initState();
-    isChecked = widget.checkChecked;
-  }
-
   @override
   Widget build(BuildContext context) {
-    var theme = context.colorScheme;
+    final colorScheme = context.colorScheme;
+    final textTheme = ContextExtensions(context).textTheme;
+    final buttonStyle = OutlinedButton.styleFrom(
+      padding: const EdgeInsets.symmetric(vertical: 24),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(18),
+      ),
+      side: BorderSide(color: colorScheme.primary),
+    );
+
     return ThemedContainer(
+      color: colorScheme.surface,
       context: context,
-      border: Border.all(width: 0),
+      border:
+          Border.all(width: 0, color: colorScheme.onSurface.withOpacity(0.2)),
       borderRadius: const BorderRadius.vertical(top: Radius.circular(16.0)),
-      padding: const EdgeInsets.symmetric(vertical: 24.0),
+      padding: const EdgeInsets.only(bottom: 24.0, top: 12.0),
       child: CustomScrollConfig(
         context,
         shrinkWrap: true,
         children: [
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 12.0),
+              child: Center(
+                child: Container(
+                  width: 40,
+                  height: 4,
+                  decoration: BoxDecoration(
+                    color: colorScheme.onSurface.withOpacity(0.3),
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                ),
+              ),
+            ),
+          ),
           if (widget.title != null)
             SliverToBoxAdapter(
               child: Padding(
@@ -60,50 +79,53 @@ class _CustomBottomDialogState extends State<CustomBottomDialog> {
                   child: Text(
                     widget.title!,
                     textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.w600,
-                      fontFamily: 'Poppins',
-                    ),
+                    style: textTheme.titleMedium,
                   ),
                 ),
               ),
             ),
 
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              addAutomaticKeepAlives: false,
-              addRepaintBoundaries: false,
-              (context, index) {
-                return widget.viewList[index];
-              },
-              childCount: widget.viewList.length,
+          if (widget.viewList.isNotEmpty)
+            SliverList(
+              delegate: SliverChildListDelegate(
+                widget.viewList,
+                addAutomaticKeepAlives: false,
+                addRepaintBoundaries: false,
+              ),
             ),
-          ),
           if (widget.checkText != null)
             SliverToBoxAdapter(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                child: Row(
-                  children: [
-                    Checkbox(
-                      value: isChecked,
-                      onChanged: (checked) {
-                        setState(() {
-                          isChecked = checked ?? false;
-                        });
-                        widget.checkCallback?.call(checked ?? false);
-                      },
-                      activeColor: theme.primary,
-                    ),
-                    Text(
-                      widget.checkText!,
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                  ],
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: Obx(
+                  () {
+                    var isChecked = widget.checkChecked.obs;
+                    return Row(
+                      children: [
+                        Checkbox(
+                          value: isChecked.value,
+                          activeColor: colorScheme.primary,
+                          onChanged: (value) {
+                            final v = value ?? false;
+                            isChecked.value = v;
+                            widget.checkCallback?.call(v);
+                          },
+                        ),
+                        Expanded(
+                          child: Text(
+                            widget.checkText!,
+                            style: textTheme.bodyMedium?.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  },
                 ),
               ),
             ),
+
           // Buttons
           if (widget.negativeText != null || widget.positiveText != null)
             SliverToBoxAdapter(
@@ -115,19 +137,10 @@ class _CustomBottomDialogState extends State<CustomBottomDialog> {
                       Expanded(
                         child: OutlinedButton(
                           onPressed: widget.negativeCallback,
-                          style: OutlinedButton.styleFrom(
-                            padding: const EdgeInsets.symmetric(vertical: 24.0),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(18.0),
-                            ),
-                            side: BorderSide(color: theme.primary),
-                          ),
+                          style: buttonStyle,
                           child: Text(
                             widget.negativeText!,
-                            style: TextStyle(
-                              color: theme.primary,
-                              fontWeight: FontWeight.bold,
-                            ),
+                            style: textTheme.labelLarge,
                           ),
                         ),
                       ),
@@ -137,19 +150,10 @@ class _CustomBottomDialogState extends State<CustomBottomDialog> {
                       Expanded(
                         child: OutlinedButton(
                           onPressed: widget.positiveCallback,
-                          style: ElevatedButton.styleFrom(
-                            padding: const EdgeInsets.symmetric(vertical: 24.0),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(18.0),
-                            ),
-                            side: BorderSide(color: theme.primary),
-                          ),
+                          style: buttonStyle,
                           child: Text(
                             widget.positiveText!,
-                            style: TextStyle(
-                              color: theme.primary,
-                              fontWeight: FontWeight.bold,
-                            ),
+                            style: textTheme.labelLarge,
                           ),
                         ),
                       ),
@@ -164,7 +168,7 @@ class _CustomBottomDialogState extends State<CustomBottomDialog> {
   }
 }
 
-void showCustomBottomDialog(BuildContext context, Widget dialog,
+void showCustomBottomDialog(BuildContext context, CustomBottomDialog dialog,
     {VoidCallback? onDismissed}) {
   showModalBottomSheet(
     enableDrag: true,
@@ -172,11 +176,7 @@ void showCustomBottomDialog(BuildContext context, Widget dialog,
     context: context,
     backgroundColor: Colors.transparent,
     useSafeArea: true,
-    shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.vertical(top: Radius.circular(24.0)),
-    ),
+    elevation: 2,
     builder: (context) => dialog,
-  ).whenComplete(() {
-    onDismissed?.call();
-  });
+  ).whenComplete(() => onDismissed?.call());
 }

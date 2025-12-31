@@ -9,8 +9,6 @@ import 'package:dartotsu/Services/Screens/BaseLoginScreen.dart';
 import 'package:dartotsu/Services/Screens/BaseMangaScreen.dart';
 
 import 'package:dartotsu/Services/Screens/BaseSearchScreen.dart';
-import 'package:dartotsu/Theme/LanguageSwitcher.dart';
-
 import '../../Services/MediaService.dart';
 import 'AnilistData.dart';
 

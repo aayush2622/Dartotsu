@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:rhttp/rhttp.dart';
 
-import '../../Preferences/PrefManager.dart';
+import '../Preferences/PrefManager.dart';
 
 class CookieManager extends Interceptor {
   static const _storageKey = 'cookies';
