@@ -3,7 +3,7 @@ import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
 import '../../Adaptor/Media/Widgets/Chips.dart';
 import '../../Adaptor/Media/Widgets/MediaCard.dart';
-import '../../Services/Model/Media.dart';
+import '../../Core/Services/Model/Media.dart';
 import '../../Functions/Function.dart';
 import '../../Screens/Calendar/CalendarScreen.dart';
 import '../../Theme/LanguageSwitcher.dart';

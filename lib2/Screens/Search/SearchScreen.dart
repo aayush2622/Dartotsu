@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:dartotsu/Functions/Extensions/IntExtensions.dart';
 import 'package:dartotsu/Functions/Function.dart';
 import 'package:dartotsu/Preferences/PrefManager.dart';
-import 'package:dartotsu/Services/Screens/BaseSearchScreen.dart';
+import 'package:dartotsu/Core/Services/Screens/BaseSearchScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
@@ -11,7 +11,7 @@ import 'package:provider/provider.dart';
 
 import '../../Adaptor/Media/MediaAdaptor.dart';
 import '../../DataClass/SearchResults.dart';
-import '../../Services/MediaService.dart';
+import '../../Core/Services/MediaService.dart';
 import '../../Theme/Colors.dart';
 import '../../Theme/ThemeController.dart';
 import '../../Widgets/ScrollConfig.dart';

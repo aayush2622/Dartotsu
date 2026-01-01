@@ -1,8 +1,8 @@
 import 'package:isar_community/isar.dart';
 
-import '../../../../Functions/Functions/GetXFunctions.dart';
-import '../../../../Services/MediaService.dart';
-import '../../../../Services/Model/Media.dart';
+import '../../../../Utils/Functions/GetXFunctions.dart';
+import '../../../../Core/Services/MediaService.dart';
+import '../../../../Core/Services/Model/Media.dart';
 import '../../PrefManager.dart';
 import '../DefaultPlayerSettings/DefaultPlayerSettings.dart';
 import '../DefaultReaderSettings/DefaultReaderSettings.dart';

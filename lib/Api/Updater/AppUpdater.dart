@@ -12,12 +12,12 @@ import 'package:path_provider/path_provider.dart';
 import 'package:install_plugin/install_plugin.dart';
 import 'package:rhttp/rhttp.dart';
 
-import '../../Functions/Extensions/ContextExtensions.dart';
-import '../../Functions/Functions/GetXFunctions.dart';
-import '../../Functions/Function.dart';
-import '../../Functions/Functions/SnackBar.dart';
-import '../../Utils/NetworkManager/NetworkManager.dart';
-import '../../Utils/Preferences/PrefManager.dart';
+import '../../Utils//Function.dart';
+import '../../Utils/Extensions/ContextExtensions.dart';
+import '../../Utils/Functions/GetXFunctions.dart';
+import '../../Utils/Functions/SnackBar.dart';
+import '../../Core/NetworkManager/NetworkManager.dart';
+import '../../Core/Preferences/PrefManager.dart';
 import '../../Widgets/CustomBottomDialog.dart';
 
 class AppUpdater {

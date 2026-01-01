@@ -15,8 +15,8 @@ import 'package:provider/provider.dart';
 import '../../../../../Adaptor/Media/Widgets/MediaSection.dart';
 import '../../../../Adaptor/Media/Widgets/Chips.dart';
 import '../../../../Adaptor/Media/Widgets/MediaCard.dart';
-import '../../../../Services/Model/Media.dart';
-import '../../../../Services/ServiceSwitcher.dart';
+import '../../../../Core/Services/Model/Media.dart';
+import '../../../../Core/Services/ServiceSwitcher.dart';
 import '../../MediaScreen.dart';
 import '../../Widgets/Releasing.dart';
 

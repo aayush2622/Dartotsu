@@ -3,7 +3,7 @@ import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
-import '../../../../../Services/Model/Media.dart';
+import '../../../../../Core/Services/Model/Media.dart';
 import '../../../../../Preferences/IsarDataClasses/MediaSettings/MediaSettings.dart';
 import '../BaseParser.dart';
 import 'Widget/MangaCompactSettings.dart';

@@ -8,7 +8,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:fuzzywuzzy/fuzzywuzzy.dart';
 import 'package:get/get.dart';
 
-import '../../../../Services/Model/Media.dart';
+import '../../../../Core/Services/Model/Media.dart';
 import '../../../../Preferences/IsarDataClasses/ShowResponse/ShowResponse.dart';
 import '../../../../Preferences/PrefManager.dart';
 import '../../../../Widgets/CustomBottomDialog.dart';

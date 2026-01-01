@@ -1,6 +1,6 @@
 import 'package:dartotsu/Api/Simkl/SimklService.dart';
 import 'package:dartotsu/Functions/Function.dart';
-import 'package:dartotsu/Services/Screens/BaseLoginScreen.dart';
+import 'package:dartotsu/Core/Services/Screens/BaseLoginScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/parse_route.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';

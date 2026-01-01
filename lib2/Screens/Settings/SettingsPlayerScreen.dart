@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 
 import '../../Adaptor/Settings/SettingsAdaptor.dart';
 import '../../DataClass/Anime.dart';
-import '../../Services/Model/Media.dart';
+import '../../Core/Services/Model/Media.dart';
 import '../../DataClass/Setting.dart';
 import '../../Preferences/IsarDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
 import '../../Preferences/PrefManager.dart';

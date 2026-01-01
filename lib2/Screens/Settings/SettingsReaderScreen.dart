@@ -4,7 +4,7 @@ import 'package:dartotsu/Screens/Settings/BaseSettingsScreen.dart';
 import 'package:flutter/material.dart';
 
 import '../../Adaptor/Settings/SettingsAdaptor.dart';
-import '../../Services/Model/Media.dart';
+import '../../Core/Services/Model/Media.dart';
 import '../../DataClass/Setting.dart';
 import 'package:dartotsu/Theme/LanguageSwitcher.dart';
 import '../../Preferences/IsarDataClasses/DefaultReaderSettings/DafaultReaderSettings.dart';

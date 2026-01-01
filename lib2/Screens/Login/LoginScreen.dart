@@ -4,7 +4,7 @@ import 'package:icons_plus/icons_plus.dart';
 import 'package:provider/provider.dart';
 
 import '../../Functions/Function.dart';
-import '../../Services/ServiceSwitcher.dart';
+import '../../Core/Services/ServiceSwitcher.dart';
 import '../../Theme/LanguageSwitcher.dart';
 
 class LoginScreen extends StatefulWidget {

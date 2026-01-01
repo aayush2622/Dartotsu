@@ -4,11 +4,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 import '../../../Adaptor/Media/Widgets/MediaSection.dart';
-import '../../../Services/Model/Media.dart';
+import '../../../Core/Services/Model/Media.dart';
 import '../../../DataClass/MediaSection.dart';
 import '../../../Functions/Function.dart';
 import '../../../Preferences/PrefManager.dart';
-import '../../../Services/Screens/BaseAnimeScreen.dart';
+import '../../../Core/Services/Screens/BaseAnimeScreen.dart';
 import '../Mal.dart';
 
 class MalAnimeScreen extends BaseAnimeScreen {

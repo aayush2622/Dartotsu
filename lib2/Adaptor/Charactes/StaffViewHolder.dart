@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../Services/Model/Author.dart';
-import '../../Services/Model/Studio.dart';
+import '../../Core/Services/Model/Author.dart';
+import '../../Core/Services/Model/Studio.dart';
 import '../../Widgets/CachedNetworkImage.dart';
 
 class StaffViewHolder extends StatelessWidget {

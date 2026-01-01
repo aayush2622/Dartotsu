@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../Services/Model/Character.dart';
+import '../../Core/Services/Model/Character.dart';
 import '../../Widgets/CachedNetworkImage.dart';
 
 class CharacterViewHolder extends StatelessWidget {

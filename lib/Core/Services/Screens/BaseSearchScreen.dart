@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../Functions/Function.dart';
-import '../../Model/SearchResults.dart';
-import '../../Widgets/CustomBottomDialog.dart';
+import '../../../Model/SearchResults.dart';
+import '../../../Widgets/CustomBottomDialog.dart';
 
 abstract class BaseSearchScreen extends GetxController {
   var page = 1;

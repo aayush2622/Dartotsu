@@ -10,7 +10,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
-import '../../../Services/Model/Media.dart';
+import '../../../Core/Services/Model/Media.dart';
 import '../../../Preferences/PrefManager.dart';
 import 'ReaderController.dart';
 

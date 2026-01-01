@@ -8,8 +8,8 @@ import '../../Adaptor/Media/MediaAdaptor.dart';
 import '../../Adaptor/Media/Widgets/Chips.dart';
 import '../../Animation/SlideInAnimation.dart';
 import '../../Functions/Function.dart';
-import '../../Services/Screens/BaseAnimeScreen.dart';
-import '../../Services/ServiceSwitcher.dart';
+import '../../Core/Services/Screens/BaseAnimeScreen.dart';
+import '../../Core/Services/ServiceSwitcher.dart';
 import '../../Widgets/ScrollConfig.dart';
 import '../Home/Widgets/ServiceSwitcherBar.dart';
 

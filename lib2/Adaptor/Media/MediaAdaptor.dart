@@ -7,8 +7,8 @@ import 'package:flutter_animate/flutter_animate.dart' hide ShimmerEffect;
 import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../Functions/Functions/GetXFunctions.dart';
-import '../../Services/MediaService.dart';
-import '../../Services/Model/Media.dart';
+import '../../Core/Services/MediaService.dart';
+import '../../Core/Services/Model/Media.dart';
 import '../../Functions/Function.dart';
 import '../../Screens/Detail/MediaScreen.dart';
 import '../../Widgets/ScrollConfig.dart';

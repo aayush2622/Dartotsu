@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import '../../Services/Model/Date.dart';
-import '../../Services/Model/Media.dart';
+import '../../Core/Services/Model/Date.dart';
+import '../../Core/Services/Model/Media.dart';
 import '../../DataClass/Setting.dart';
 import '../../Functions/Function.dart';
 import '../../Widgets/CustomBottomDialog.dart';

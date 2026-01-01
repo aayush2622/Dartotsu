@@ -1,5 +1,5 @@
 import 'package:blur/blur.dart';
-import 'package:dartotsu/Services/Model/User.dart';
+import 'package:dartotsu/Core/Services/Model/User.dart';
 import 'package:flutter/material.dart';
 
 import '../../Functions/Functions/GetXFunctions.dart';

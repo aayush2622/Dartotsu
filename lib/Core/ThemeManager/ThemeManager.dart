@@ -2,7 +2,7 @@ import 'package:blurbox/blurbox.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../Functions/Functions/GetXFunctions.dart';
+import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Widgets/DropdownMenu.dart';
 import 'ThemeController.dart';
 import 'Themes/blue.dart';

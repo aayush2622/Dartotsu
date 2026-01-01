@@ -3,7 +3,7 @@ import 'package:dartotsu/Theme/ThemeManager.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../Services/ServiceSwitcher.dart';
+import '../Core/Services/ServiceSwitcher.dart';
 import '../Widgets/CustomBottomDialog.dart';
 import '../Widgets/LoadSvg.dart';
 import 'HomeNavBar.dart';

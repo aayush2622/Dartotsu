@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../../Adaptor/Chapter/ChapterAdaptor.dart';
-import '../../../../../Services/Model/Media.dart';
+import '../../../../../Core/Services/Model/Media.dart';
 import '../../../../../Theme/LanguageSwitcher.dart';
 import '../BaseWatchScreen.dart';
 import 'MangaParser.dart';

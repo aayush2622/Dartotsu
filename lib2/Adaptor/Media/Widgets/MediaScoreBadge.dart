@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../Services/Model/Media.dart';
+import '../../../Core/Services/Model/Media.dart';
 
 Widget ScoreBadge(BuildContext context, Media mediaInfo) {
   final theme = Theme.of(context).colorScheme;

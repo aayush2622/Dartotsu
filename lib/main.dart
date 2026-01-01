@@ -2,10 +2,10 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:ui';
 
-import 'Utils/NetworkManager/NetworkManager.dart';
-import 'Utils/Preferences/PrefManager.dart';
-import 'Utils/ThemeManager/ThemeController.dart';
-import 'Utils/ThemeManager/ThemeManager.dart';
+import 'Core/NetworkManager/NetworkManager.dart';
+import 'Core/Preferences/PrefManager.dart';
+import 'Core/ThemeManager/ThemeController.dart';
+import 'Core/ThemeManager/ThemeManager.dart';
 import 'package:flutter/foundation.dart';
 import 'package:rhttp/rhttp.dart';
 
@@ -23,14 +23,14 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:media_kit/media_kit.dart' as mpv;
 import 'package:window_manager/window_manager.dart';
 import 'Api/Updater/AppUpdater.dart';
-import 'Functions/Extensions/ContextExtensions.dart';
-import 'Functions/Extensions/IntExtensions.dart';
-import 'Functions/Functions/AppShortcuts.dart';
-import 'Functions/Functions/DeepLink.dart';
-import 'Functions/Functions/GetXFunctions.dart';
+import 'Utils/Extensions/ContextExtensions.dart';
+import 'Utils/Extensions/IntExtensions.dart';
+import 'Utils/Functions/AppShortcuts.dart';
+import 'Utils/Functions/DeepLink.dart';
+import 'Utils/Functions/GetXFunctions.dart';
 import 'Screen/Error/ErrorScreen.dart';
 import 'Screen/Onboarding/OnboardingScreen.dart';
-import 'Services/MediaService.dart';
+import 'Core/Services/MediaService.dart';
 import 'Widgets/CachedNetworkImage.dart';
 import 'l10n/app_localizations.dart';
 import 'Logger.dart';
@@ -78,7 +78,7 @@ void main(List<String> args) async {
     },
     (error, stackTrace) {
       debugPrint('Uncaught error: $error\n$stackTrace');
-      handleError(error, stackTrace);
+      handleError(error, stackTrace, softCrash: true);
     },
     zoneSpecification: ZoneSpecification(
       print: (self, parent, zone, line) {

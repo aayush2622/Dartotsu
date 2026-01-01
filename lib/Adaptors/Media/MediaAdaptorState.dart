@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import '../../Services/Model/Media.dart';
+import '../../Core/Services/Model/Media.dart';
 
 class MediaAdaptorState {
   var overscrollProgress = 0.0.obs;

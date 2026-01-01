@@ -1,12 +1,12 @@
 import 'dart:convert';
 
 import 'package:collection/collection.dart';
-import 'package:dartotsu/Services/Model/Media.dart' as media;
+import 'package:dartotsu/Core/Services/Model/Media.dart' as media;
 import 'package:dartotsu/DataClass/SearchResults.dart';
 import 'package:dartotsu/Preferences/PrefManager.dart';
 import 'package:flutter/foundation.dart';
 
-import '../../Services/Api/Queries.dart';
+import '../../Core/Services/Api/Queries.dart';
 import 'Data/Activity.dart';
 import 'Data/Media.dart';
 import 'Data/User.dart';

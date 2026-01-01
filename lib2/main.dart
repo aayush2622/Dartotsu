@@ -35,7 +35,7 @@ import 'Screens/HomeNavBar.dart';
 import 'Screens/HomeNavbarDesktop.dart';
 import 'Screens/HomeNavbarMobile.dart';
 import 'Screens/Onboarding/OnboardingScreen.dart';
-import 'Services/MediaService.dart';
+import 'Core/Services/MediaService.dart';
 import 'Theme/ThemeManager.dart';
 import 'Theme/ThemeController.dart';
 import 'Widgets/CachedNetworkImage.dart';

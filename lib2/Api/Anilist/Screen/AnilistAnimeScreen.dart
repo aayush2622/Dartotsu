@@ -1,4 +1,4 @@
-import 'package:dartotsu/Services/Model/Media.dart';
+import 'package:dartotsu/Core/Services/Model/Media.dart';
 import 'package:dartotsu/DataClass/SearchResults.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
@@ -7,7 +7,7 @@ import '../../../Adaptor/Media/Widgets/MediaSection.dart';
 import '../../../DataClass/MediaSection.dart';
 import '../../../Functions/Function.dart';
 import '../../../Preferences/PrefManager.dart';
-import '../../../Services/Screens/BaseAnimeScreen.dart';
+import '../../../Core/Services/Screens/BaseAnimeScreen.dart';
 import '../../../Theme/LanguageSwitcher.dart';
 import '../Anilist.dart' hide Anilist;
 

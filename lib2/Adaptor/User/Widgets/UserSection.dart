@@ -1,4 +1,4 @@
-import 'package:dartotsu/Services/Model/User.dart';
+import 'package:dartotsu/Core/Services/Model/User.dart';
 import 'package:flutter/material.dart';
 
 import '../UserAdaptor.dart';

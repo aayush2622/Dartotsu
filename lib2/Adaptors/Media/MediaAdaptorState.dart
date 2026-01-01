@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import '../../Api/Anilist/Anilist.dart';
 import '../../Api/Anilist/Screen/AnilistAnimeScreen.dart';
-import '../../Services/Model/Media.dart';
+import '../../Core/Services/Model/Media.dart';
 
 class MediaAdaptorState {
   var overscrollProgress = 0.0.obs;

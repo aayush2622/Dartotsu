@@ -3,7 +3,7 @@ import 'package:dartotsu/Functions/Function.dart';
 import 'package:dartotsu/Functions/Functions/GetXFunctions.dart';
 import 'package:dartotsu/Screens/Extensions/ExtensionScreen.dart';
 import 'package:dartotsu/Screens/Settings/SettingsScreen.dart';
-import 'package:dartotsu/Services/MediaService.dart';
+import 'package:dartotsu/Core/Services/MediaService.dart';
 import 'package:dartotsu/Widgets/AlertDialogBuilder.dart';
 import 'package:dartotsu/Widgets/CustomBottomDialog.dart';
 import 'package:dartotsu/Widgets/LoadSvg.dart';

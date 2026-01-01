@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../Adaptor/Media/Widgets/MediaSection.dart';
-import '../../../Services/Model/Media.dart';
+import '../../../Core/Services/Model/Media.dart';
 import '../../../DataClass/SearchResults.dart';
-import '../../../Services/Screens/BaseSearchScreen.dart';
+import '../../../Core/Services/Screens/BaseSearchScreen.dart';
 import '../../../Logger.dart';
 
 class ExtensionsSearchScreen extends BaseSearchScreen {

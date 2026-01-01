@@ -4,10 +4,10 @@ import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
 import '../../../Adaptor/Media/Widgets/Chips.dart';
 import '../../../Adaptor/Media/Widgets/MediaSection.dart';
-import '../../../Services/Model/Media.dart';
+import '../../../Core/Services/Model/Media.dart';
 import '../../../DataClass/MediaSection.dart';
 import '../../../Preferences/PrefManager.dart';
-import '../../../Services/Screens/BaseMangaScreen.dart';
+import '../../../Core/Services/Screens/BaseMangaScreen.dart';
 import '../../../Theme/LanguageSwitcher.dart';
 import '../Simkl.dart';
 import '../SimklQueries.dart';

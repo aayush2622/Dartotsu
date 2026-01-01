@@ -1,13 +1,13 @@
 import 'package:dartotsu/Api/MyAnimeList/Mal.dart';
-import 'package:dartotsu/Services/Screens/BaseAnimeScreen.dart';
-import 'package:dartotsu/Services/Screens/BaseHomeScreen.dart';
-import 'package:dartotsu/Services/Screens/BaseMangaScreen.dart';
+import 'package:dartotsu/Core/Services/Screens/BaseAnimeScreen.dart';
+import 'package:dartotsu/Core/Services/Screens/BaseHomeScreen.dart';
+import 'package:dartotsu/Core/Services/Screens/BaseMangaScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-import '../../Services/BaseServiceData.dart';
-import '../../Services/MediaService.dart';
-import '../../Services/Screens/BaseLoginScreen.dart';
+import '../../Core/Services/BaseServiceData.dart';
+import '../../Core/Services/MediaService.dart';
+import '../../Core/Services/Screens/BaseLoginScreen.dart';
 import '../../Theme/LanguageSwitcher.dart';
 import 'Screen/MalAnimeScreen.dart';
 import 'Screen/MalHomeScreen.dart';

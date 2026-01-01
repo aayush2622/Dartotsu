@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-import '../../Services/BaseServiceData.dart';
+import '../../Core/Services/BaseServiceData.dart';
 
 class KitsuController extends BaseServiceData {
   @override

@@ -2,7 +2,7 @@ import 'package:dartotsu/Functions/Extensions/StringExtensions.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/material.dart';
 
-import '../../Services/Model/Media.dart';
+import '../../Core/Services/Model/Media.dart';
 import '../Episode/Widget/HandleProgress.dart';
 
 class ChapterCompactView extends StatelessWidget {

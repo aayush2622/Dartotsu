@@ -1,4 +1,4 @@
-import 'package:dartotsu/Services/Model/Media.dart';
+import 'package:dartotsu/Core/Services/Model/Media.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

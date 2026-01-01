@@ -4,9 +4,9 @@ import 'package:get/get.dart';
 
 import '../../../Adaptor/Media/Widgets/Chips.dart';
 import '../../../Adaptor/Media/Widgets/MediaSection.dart';
-import '../../../Services/Model/Media.dart';
+import '../../../Core/Services/Model/Media.dart';
 import '../../../Functions/Function.dart';
-import '../../../Services/Screens/BaseMangaScreen.dart';
+import '../../../Core/Services/Screens/BaseMangaScreen.dart';
 import '../../../Logger.dart';
 
 class ExtensionsMangaScreen extends BaseMangaScreen {

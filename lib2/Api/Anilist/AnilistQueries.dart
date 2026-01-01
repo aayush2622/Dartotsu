@@ -7,10 +7,10 @@ import 'package:dartotsu/Api/Anilist/Data/fuzzyData.dart';
 import 'package:dartotsu/Functions/Function.dart';
 import 'package:flutter/foundation.dart';
 
-import '../../Services/Model/Media.dart';
+import '../../Core/Services/Model/Media.dart';
 import '../../DataClass/SearchResults.dart';
 import '../../Preferences/PrefManager.dart';
-import '../../Services/Api/Queries.dart';
+import '../../Core/Services/Api/Queries.dart';
 import 'Data/data.dart';
 import 'Data/media.dart' as api;
 import 'Data/page.dart';

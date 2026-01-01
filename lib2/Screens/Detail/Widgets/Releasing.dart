@@ -1,4 +1,4 @@
-import 'package:dartotsu/Services/Model/Media.dart';
+import 'package:dartotsu/Core/Services/Model/Media.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import '../../../Theme/LanguageSwitcher.dart';

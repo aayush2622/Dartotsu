@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
-import '../../Services/ServiceSwitcher.dart';
+import '../../Core/Services/ServiceSwitcher.dart';
 import 'MediaListTabs.dart';
 import 'MediaListViewModel.dart';
 

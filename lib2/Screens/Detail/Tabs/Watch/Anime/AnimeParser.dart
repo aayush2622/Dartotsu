@@ -9,7 +9,7 @@ import '../../../../../Api/EpisodeDetails/Anify/Anify.dart';
 import '../../../../../Api/EpisodeDetails/Jikan/Jikan.dart';
 import '../../../../../Api/EpisodeDetails/Kitsu/Kitsu.dart';
 
-import '../../../../../Services/Model/Media.dart';
+import '../../../../../Core/Services/Model/Media.dart';
 import '../../../../../Preferences/IsarDataClasses/MediaSettings/MediaSettings.dart';
 import 'Widget/AnimeCompactSettings.dart';
 

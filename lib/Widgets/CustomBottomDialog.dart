@@ -2,8 +2,8 @@ import 'package:dartotsu/Widgets/ScrollConfig.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../Functions/Extensions/ContextExtensions.dart';
-import '../Utils/ThemeManager/ThemeManager.dart';
+import '../Core/ThemeManager/ThemeManager.dart';
+import '../Utils/Extensions/ContextExtensions.dart';
 
 class CustomBottomDialog extends StatefulWidget {
   final List<Widget> viewList;

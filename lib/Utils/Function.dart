@@ -25,16 +25,6 @@ void shareFile(String path, String text) => SharePlus.instance.share(
           text: text, files: [XFile(path)], downloadFallbackEnabled: true),
     );
 
-List<T> mergeMapValues<T>(Map<String, List<T>> dataMap) {
-  final Set<T> uniqueItems = {};
-
-  for (var itemList in dataMap.values) {
-    uniqueItems.addAll(itemList);
-  }
-
-  return uniqueItems.toList();
-}
-
 Future<String?> loadEnv(String prop) async {
   try {
     final envString = await rootBundle.loadString('.env');

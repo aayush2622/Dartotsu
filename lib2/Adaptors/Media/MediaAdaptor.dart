@@ -10,7 +10,7 @@ import 'package:super_sliver_list/super_sliver_list.dart';
 import '../../Widgets/CachedNetworkImage.dart';
 import '../../Widgets/ScrollConfig.dart';
 
-import '../../Services/Model/Media.dart';
+import '../../Core/Services/Model/Media.dart';
 import 'MediaAdaptorState.dart';
 
 class MediaAdaptorData {

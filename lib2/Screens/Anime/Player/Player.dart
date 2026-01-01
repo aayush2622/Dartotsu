@@ -15,7 +15,7 @@ import 'package:volume_controller/volume_controller.dart';
 
 import '../../../../../../Adaptor/Episode/EpisodeAdaptor.dart';
 import 'package:dartotsu_extension_bridge/Models/Video.dart' as v;
-import '../../../../../../Services/Model/Media.dart' as m;
+import '../../../../../../Core/Services/Model/Media.dart' as m;
 import '../../../../../../Widgets/ScrollConfig.dart';
 import '../../Detail/Tabs/Watch/Anime/Widget/AnimeCompactSettings.dart';
 import '../../Detail/Tabs/Watch/Anime/Widget/BuildChunkSelector.dart';

@@ -1,7 +1,7 @@
 import 'package:dartotsu/Adaptor/Media/Widgets/MediaSection.dart';
 import 'package:dartotsu/Api/Simkl/Simkl.dart';
 import 'package:dartotsu/Api/Simkl/SimklQueries.dart';
-import 'package:dartotsu/Services/Model/Media.dart';
+import 'package:dartotsu/Core/Services/Model/Media.dart';
 import 'package:dartotsu/Functions/Function.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 import '../../../Adaptor/Media/Widgets/Chips.dart';
 import '../../../DataClass/MediaSection.dart';
 import '../../../Preferences/PrefManager.dart';
-import '../../../Services/Screens/BaseAnimeScreen.dart';
+import '../../../Core/Services/Screens/BaseAnimeScreen.dart';
 import '../../../Theme/LanguageSwitcher.dart';
 
 class SimklAnimeScreen extends BaseAnimeScreen {

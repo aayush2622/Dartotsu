@@ -1,5 +1,5 @@
 import 'package:dartotsu/Functions/Extensions/IntExtensions.dart';
-import 'package:dartotsu/Services/ServiceSwitcher.dart';
+import 'package:dartotsu/Core/Services/ServiceSwitcher.dart';
 import 'package:dartotsu/Widgets/LoadSvg.dart';
 import 'package:flutter/material.dart';
 

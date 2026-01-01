@@ -3,7 +3,7 @@ import 'package:dartotsu/Preferences/IsarDataClasses/MediaSettings/MediaSettings
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../Services/Model/Media.dart';
+import '../../../../../Core/Services/Model/Media.dart';
 import '../../../../../Functions/Function.dart';
 import '../../../../../Widgets/DropdownMenu.dart';
 import '../../../../Extensions/ExtensionSettings/SourcePreferenceScreen.dart';

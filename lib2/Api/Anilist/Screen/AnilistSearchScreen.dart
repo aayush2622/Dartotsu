@@ -1,5 +1,5 @@
 import 'package:dartotsu/Api/Anilist/Screen/Widgets/SearchFilter.dart';
-import 'package:dartotsu/Services/Model/User.dart';
+import 'package:dartotsu/Core/Services/Model/User.dart';
 import 'package:dartotsu/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,11 +8,11 @@ import '../../../Adaptor/Charactes/Widgets/EntitySection.dart';
 import '../../../Adaptor/Media/Widgets/Chips.dart';
 import '../../../Adaptor/Media/Widgets/MediaSection.dart';
 import '../../../Adaptor/User/Widgets/UserSection.dart';
-import '../../../Services/Model/Media.dart';
+import '../../../Core/Services/Model/Media.dart';
 import '../../../DataClass/SearchResults.dart';
 import '../../../Functions/Function.dart';
 import '../../../Screens/Search/SearchScreen.dart';
-import '../../../Services/Screens/BaseSearchScreen.dart';
+import '../../../Core/Services/Screens/BaseSearchScreen.dart';
 import '../Anilist.dart';
 
 class AnilistSearchScreen extends BaseSearchScreen {

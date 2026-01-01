@@ -4,9 +4,9 @@ import 'package:get/get.dart';
 import 'package:dartotsu/Widgets/ScrollConfig.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import '../../Functions/Function.dart';
-import '../../Functions/Functions/CopyToClip.dart';
-import '../../Utils/Preferences/StorageManager.dart';
+import '../../Utils/Function.dart';
+import '../../Utils/Functions/CopyToClip.dart';
+import '../../Core/Preferences/StorageManager.dart';
 import '../../Widgets/CustomElevatedButton.dart';
 import '../../Logger.dart';
 
@@ -92,7 +92,11 @@ class _ErrorScreenState extends State<ErrorScreen> {
                 color: theme.primary,
                 size: 18,
               ),
-              onPressed: () => Navigator.of(context).maybePop(),
+              onPressed: () {
+                if (Get.key.currentState?.canPop() ?? false) {
+                  Get.back();
+                }
+              },
             ),
             Expanded(
               child: Text(

@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:collection/collection.dart';
-import 'package:dartotsu/Services/Model/Media.dart';
+import 'package:dartotsu/Core/Services/Model/Media.dart';
 import 'package:dartotsu/DataClass/SearchResults.dart';
 import 'package:dartotsu/Functions/Function.dart';
 import 'package:dartotsu/Functions/Extensions/StringExtensions.dart';
@@ -9,7 +9,7 @@ import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:get/get.dart';
 import '../../DataClass/Author.dart';
 import '../../Preferences/PrefManager.dart';
-import '../../Services/Api/Queries.dart';
+import '../../Core/Services/Api/Queries.dart';
 import 'ExtensionsData.dart';
 
 part 'ExtensionsQueries/GetHomePageData.dart';

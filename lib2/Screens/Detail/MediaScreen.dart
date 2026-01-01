@@ -15,7 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
-import '../../Services/Model/Media.dart';
+import '../../Core/Services/Model/Media.dart';
 import '../../Functions/Function.dart';
 import '../../Preferences/PrefManager.dart';
 import '../../Theme/LanguageSwitcher.dart';

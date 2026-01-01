@@ -1,4 +1,4 @@
-import 'package:dartotsu/Services/MediaService.dart';
+import 'package:dartotsu/Core/Services/MediaService.dart';
 import 'package:flutter/material.dart';
 
 import '../../../Functions/Functions/GetXFunctions.dart';

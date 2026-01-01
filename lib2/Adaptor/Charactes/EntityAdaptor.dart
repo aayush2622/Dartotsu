@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import '../../Animation/ScaleAnimation.dart';
-import '../../Services/Model/Author.dart';
-import '../../Services/Model/Character.dart';
-import '../../Services/Model/Studio.dart';
+import '../../Core/Services/Model/Author.dart';
+import '../../Core/Services/Model/Character.dart';
+import '../../Core/Services/Model/Studio.dart';
 import '../../Widgets/ScrollConfig.dart';
 import 'CharacterViewHolder.dart';
 import 'Widgets/EntitySection.dart';

@@ -1,13 +1,13 @@
-import 'package:dartotsu/Services/Screens/BaseHomeScreen.dart';
+import 'package:dartotsu/Core/Services/Screens/BaseHomeScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../Adaptor/Media/Widgets/MediaSection.dart';
-import '../../../Services/Model/Media.dart';
+import '../../../Core/Services/Model/Media.dart';
 import '../../../DataClass/MediaSection.dart';
 import '../../../Functions/Function.dart';
 import '../../../Preferences/PrefManager.dart';
-import '../../../Services/Model/User.dart';
+import '../../../Core/Services/Model/User.dart';
 import '../../../Theme/LanguageSwitcher.dart';
 import '../../../main.dart';
 import '../Anilist.dart';

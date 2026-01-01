@@ -1,15 +1,15 @@
 import 'package:dartotsu/Api/Simkl/Screen/SimklAnimeScreen.dart';
 import 'package:dartotsu/Api/Simkl/Screen/SimklMovieScreen.dart';
-import 'package:dartotsu/Services/BaseServiceData.dart';
-import 'package:dartotsu/Services/Screens/BaseHomeScreen.dart';
+import 'package:dartotsu/Core/Services/BaseServiceData.dart';
+import 'package:dartotsu/Core/Services/Screens/BaseHomeScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../Screens/HomeNavBar.dart';
-import '../../Services/MediaService.dart';
-import '../../Services/Screens/BaseAnimeScreen.dart';
-import '../../Services/Screens/BaseLoginScreen.dart';
-import '../../Services/Screens/BaseMangaScreen.dart';
+import '../../Core/Services/MediaService.dart';
+import '../../Core/Services/Screens/BaseAnimeScreen.dart';
+import '../../Core/Services/Screens/BaseLoginScreen.dart';
+import '../../Core/Services/Screens/BaseMangaScreen.dart';
 import '../../Theme/LanguageSwitcher.dart';
 import 'Screen/SimklHomeScreen.dart';
 import 'Simkl.dart';

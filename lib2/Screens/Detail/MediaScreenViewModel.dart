@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
-import '../../Services/Model/Media.dart';
-import '../../Services/ServiceSwitcher.dart';
+import '../../Core/Services/Model/Media.dart';
+import '../../Core/Services/ServiceSwitcher.dart';
 
 class MediaPageViewModel extends GetxController {
   var dataLoaded = false.obs;

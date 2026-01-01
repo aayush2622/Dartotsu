@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../Functions/Function.dart';
-
 abstract class BaseMediaScreen extends GetxController {
   var page = 1;
   var scrollToTop = false.obs;

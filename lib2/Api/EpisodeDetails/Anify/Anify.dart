@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:dartotsu/Services/Model/Media.dart';
+import 'package:dartotsu/Core/Services/Model/Media.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:http/http.dart' as http;
 import 'package:json_annotation/json_annotation.dart';

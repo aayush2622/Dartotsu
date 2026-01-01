@@ -1,7 +1,7 @@
-import 'package:dartotsu/Services/Model/Media.dart';
+import 'package:dartotsu/Core/Services/Model/Media.dart';
 import 'package:dartotsu/Functions/Function.dart';
 import 'package:dartotsu/Functions/Extensions/StringExtensions.dart';
-import 'package:dartotsu/Services/Api/Mutations.dart';
+import 'package:dartotsu/Core/Services/Api/Mutations.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'Anilist.dart';

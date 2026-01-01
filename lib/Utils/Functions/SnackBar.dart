@@ -4,7 +4,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 
-import '../../Utils/ThemeManager/ThemeManager.dart';
+import '../../Core/ThemeManager/ThemeManager.dart';
 import '../Extensions/ContextExtensions.dart';
 import 'CopyToClip.dart';
 

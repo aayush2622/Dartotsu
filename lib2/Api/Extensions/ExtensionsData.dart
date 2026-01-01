@@ -2,7 +2,7 @@ import 'package:dartotsu/Api/Extensions/ExtensionsQueries.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-import '../../Services/BaseServiceData.dart';
+import '../../Core/Services/BaseServiceData.dart';
 
 var ExtensionsC = Get.put(ExtensionsController());
 

@@ -13,13 +13,14 @@ class CookieManager extends Interceptor {
 
     try {
       final decoded = jsonDecode(raw) as Map<String, dynamic>;
+
       return decoded.map(
-        (domain, cookies) => MapEntry(
-          domain,
-          Map<String, String>.from(cookies as Map),
+        (k, v) => MapEntry(
+          k,
+          Map<String, String>.from(v as Map),
         ),
       );
-    } catch (e) {
+    } catch (_) {
       return {};
     }
   }
@@ -60,7 +61,6 @@ class CookieManager extends Interceptor {
   @override
   Future<InterceptorResult<HttpResponse>> afterResponse(
     HttpResponse response,
-  ) async {
-    return Interceptor.next();
-  }
+  ) async =>
+      Interceptor.next();
 }

@@ -1,5 +1,5 @@
 import 'package:collection/collection.dart';
-import 'package:dartotsu/Services/Model/Media.dart';
+import 'package:dartotsu/Core/Services/Model/Media.dart';
 import 'package:dartotsu/Screens/Detail/Tabs/Watch/BaseParser.dart';
 import 'package:dartotsu/Screens/Detail/Tabs/Watch/BaseWatchScreen.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';

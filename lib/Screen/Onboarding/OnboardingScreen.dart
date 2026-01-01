@@ -6,10 +6,10 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
-import '../../Functions/Functions/GetXFunctions.dart';
-import '../../Utils/ThemeManager/LanguageSwitcher.dart';
-import '../../Utils/ThemeManager/ThemeController.dart';
-import '../../Utils/ThemeManager/ThemeManager.dart';
+import '../../Utils/Functions/GetXFunctions.dart';
+import '../../Core/ThemeManager/LanguageSwitcher.dart';
+import '../../Core/ThemeManager/ThemeController.dart';
+import '../../Core/ThemeManager/ThemeManager.dart';
 import '../../Widgets/CachedNetworkImage.dart';
 import '../../Widgets/ScrollConfig.dart';
 import '../../main.dart';

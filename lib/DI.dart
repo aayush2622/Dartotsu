@@ -1,14 +1,13 @@
 import 'dart:io';
 
-import 'package:dartotsu/Functions/Functions/RefreshController.dart';
-
 import 'Api/Discord/BaseDiscordRPC.dart';
 import 'Api/Discord/Desktop/DesktopRPC.dart';
 import 'Api/Discord/Mobile/MobileRPC.dart';
-import 'Functions/Functions/GetXFunctions.dart';
-import 'Services/MediaService.dart';
-import 'Utils/NetworkManager/NetworkManager.dart';
-import 'Utils/ThemeManager/ThemeController.dart';
+import 'Core/Services/MediaService.dart';
+import 'Core/NetworkManager/NetworkManager.dart';
+import 'Core/ThemeManager/ThemeController.dart';
+import 'Utils/Functions/GetXFunctions.dart';
+import 'Utils/Functions/RefreshController.dart';
 
 class DI {
   static void init() {

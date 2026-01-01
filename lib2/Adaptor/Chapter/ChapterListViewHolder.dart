@@ -1,7 +1,7 @@
 import 'package:dartotsu/Functions/Extensions/StringExtensions.dart';
 import 'package:flutter/material.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
-import '../../Services/Model/Media.dart';
+import '../../Core/Services/Model/Media.dart';
 import '../../Screens/Detail/Tabs/Watch/Manga/Widget/DateFormat.dart';
 
 class ChapterListView extends StatelessWidget {

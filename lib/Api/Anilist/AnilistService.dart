@@ -1,15 +1,15 @@
-import 'package:dartotsu/Services/BaseServiceData.dart';
+import 'package:dartotsu/Core/Services/BaseServiceData.dart';
 
-import 'package:dartotsu/Services/Screens/BaseAnimeScreen.dart';
+import 'package:dartotsu/Core/Services/Screens/BaseAnimeScreen.dart';
 
-import 'package:dartotsu/Services/Screens/BaseHomeScreen.dart';
+import 'package:dartotsu/Core/Services/Screens/BaseHomeScreen.dart';
 
-import 'package:dartotsu/Services/Screens/BaseLoginScreen.dart';
+import 'package:dartotsu/Core/Services/Screens/BaseLoginScreen.dart';
 
-import 'package:dartotsu/Services/Screens/BaseMangaScreen.dart';
+import 'package:dartotsu/Core/Services/Screens/BaseMangaScreen.dart';
 
-import 'package:dartotsu/Services/Screens/BaseSearchScreen.dart';
-import '../../Services/MediaService.dart';
+import 'package:dartotsu/Core/Services/Screens/BaseSearchScreen.dart';
+import '../../Core/Services/MediaService.dart';
 import 'AnilistData.dart';
 
 class AnilistService extends MediaService {

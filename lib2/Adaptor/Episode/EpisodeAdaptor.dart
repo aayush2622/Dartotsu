@@ -7,7 +7,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:string_similarity/string_similarity.dart';
 
 import '../../Animation/ScaleAnimation.dart';
-import '../../Services/Model/Media.dart';
+import '../../Core/Services/Model/Media.dart';
 import '../../Screens/Anime/Player/Player.dart';
 import '../../Widgets/CustomBottomDialog.dart';
 import 'EpisodeCompactViewHolder.dart';

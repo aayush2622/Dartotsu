@@ -3,7 +3,7 @@ import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:intl/intl.dart';
 
 import '../../Api/Anilist/Anilist.dart';
-import '../../Services/Model/Media.dart';
+import '../../Core/Services/Model/Media.dart';
 
 class CalendarViewModel extends GetxController {
   var calendarData = Rxn<Map<String, List<Media>>>();

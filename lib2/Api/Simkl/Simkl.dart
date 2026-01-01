@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 import '../../Functions/Function.dart';
-import '../../Services/BaseServiceData.dart';
+import '../../Core/Services/BaseServiceData.dart';
 import '../../Widgets/CustomBottomDialog.dart';
 import '../TypeFactory.dart';
 import 'Login.dart' as SimklLogin;

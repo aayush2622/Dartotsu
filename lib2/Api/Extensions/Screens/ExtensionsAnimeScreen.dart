@@ -4,9 +4,9 @@ import 'package:get/get.dart';
 
 import '../../../Adaptor/Media/Widgets/Chips.dart';
 import '../../../Adaptor/Media/Widgets/MediaSection.dart';
-import '../../../Services/Model/Media.dart';
+import '../../../Core/Services/Model/Media.dart';
 import '../../../Functions/Function.dart';
-import '../../../Services/Screens/BaseAnimeScreen.dart';
+import '../../../Core/Services/Screens/BaseAnimeScreen.dart';
 import '../../../Logger.dart';
 
 class ExtensionsAnimeScreen extends BaseAnimeScreen {

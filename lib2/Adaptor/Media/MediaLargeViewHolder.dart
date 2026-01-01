@@ -3,7 +3,7 @@ import 'package:dartotsu/Theme/LanguageSwitcher.dart';
 import 'package:flutter/material.dart';
 
 import '../../Functions/Functions/GetXFunctions.dart';
-import '../../Services/Model/Media.dart';
+import '../../Core/Services/Model/Media.dart';
 import '../../Theme/ThemeController.dart';
 import '../../Widgets/CachedNetworkImage.dart';
 import 'Widgets/MediaReleaseingIndicator.dart';

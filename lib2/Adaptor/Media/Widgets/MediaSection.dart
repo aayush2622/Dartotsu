@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../Services/Model/Media.dart';
+import '../../../Core/Services/Model/Media.dart';
 import '../../../Theme/ThemeManager.dart';
 import '../../../Widgets/CustomElevatedButton.dart';
 import '../MediaAdaptor.dart';

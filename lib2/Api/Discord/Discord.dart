@@ -6,7 +6,7 @@ import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../Services/Model/Media.dart';
+import '../../Core/Services/Model/Media.dart';
 import '../../Preferences/PrefManager.dart';
 import '../../Widgets/CustomBottomDialog.dart';
 import 'DiscordService.dart';

@@ -1,12 +1,12 @@
 import 'package:collection/collection.dart';
 import 'package:dartotsu/Api/MyAnimeList/Data/userData.dart';
-import 'package:dartotsu/Services/Model/Media.dart';
+import 'package:dartotsu/Core/Services/Model/Media.dart';
 import 'package:dartotsu/DataClass/SearchResults.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 import '../../Preferences/PrefManager.dart';
-import '../../Services/Api/Queries.dart';
+import '../../Core/Services/Api/Queries.dart';
 import '../../Logger.dart';
 import 'Data/data.dart';
 import 'Data/user.dart';

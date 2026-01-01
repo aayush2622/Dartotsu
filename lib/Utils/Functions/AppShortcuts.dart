@@ -3,7 +3,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:window_manager/window_manager.dart';
 
-import '../../Utils/ThemeManager/ThemeController.dart';
+import '../../Core/ThemeManager/ThemeController.dart';
 import 'GetXFunctions.dart';
 import 'SnackBar.dart';
 

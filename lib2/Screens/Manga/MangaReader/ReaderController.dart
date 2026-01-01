@@ -1,6 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:dartotsu/Adaptor/Chapter/ChapterAdaptor.dart';
-import 'package:dartotsu/Services/Model/Media.dart';
+import 'package:dartotsu/Core/Services/Model/Media.dart';
 import 'package:dartotsu/Functions/Extensions/IntExtensions.dart';
 import 'package:dartotsu/Functions/Extensions/StringExtensions.dart';
 import 'package:dartotsu/Preferences/IsarDataClasses/DefaultReaderSettings/DefaultReaderSettings.dart';

@@ -1,4 +1,4 @@
-import 'package:dartotsu/Services/BaseServiceData.dart';
+import 'package:dartotsu/Core/Services/BaseServiceData.dart';
 import 'package:flutter/cupertino.dart';
 
 class AnilistData extends BaseServiceData {

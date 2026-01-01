@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../Adaptor/Media/Widgets/MediaSection.dart';
-import '../../../Services/Model/Media.dart';
+import '../../../Core/Services/Model/Media.dart';
 import '../../../DataClass/MediaSection.dart';
-import '../../../Services/Screens/BaseHomeScreen.dart';
+import '../../../Core/Services/Screens/BaseHomeScreen.dart';
 import '../../../Theme/LanguageSwitcher.dart';
 import '../../../main.dart';
 import '../Simkl.dart';

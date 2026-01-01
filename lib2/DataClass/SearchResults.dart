@@ -1,10 +1,10 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import '../Services/Model/Author.dart';
-import '../Services/Model/Character.dart';
-import '../Services/Model/Media.dart';
-import '../Services/Model/Studio.dart';
-import '../Services/Model/User.dart';
+import '../Core/Services/Model/Author.dart';
+import '../Core/Services/Model/Character.dart';
+import '../Core/Services/Model/Media.dart';
+import '../Core/Services/Model/Studio.dart';
+import '../Core/Services/Model/User.dart';
 
 part 'Data/SearchResults.g.dart';
 

@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'package:flutter/services.dart';
 
-import 'Utils/Preferences/StorageManager.dart';
+import 'Core/Preferences/StorageManager.dart';
 
 void logger(String message, {LogLevel logLevel = LogLevel.info}) =>
     Logger.log(message, logLevel: logLevel);
