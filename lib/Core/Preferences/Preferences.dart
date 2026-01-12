@@ -12,98 +12,14 @@ class PrefName {
       Pref('customColor', 4280391411, PrefLocation.THEME);
   static const useCustomColor =
       Pref('useCustomColor', false, PrefLocation.THEME);
+
   static const showYtButton = Pref('showYtButton', true, PrefLocation.THEME);
   static const autoUpdateExtensions =
       Pref('autoUpdateExtensions', true, PrefLocation.THEME);
   static const useCoverTheme = Pref('useCoverTheme', true, PrefLocation.THEME);
 
   static const service = Pref('service', 'ANILIST', PrefLocation.COMMON);
-  static const Pref<Map<dynamic, dynamic>> anilistHomeLayout = Pref(
-      'homeLayoutOrder',
-      {
-        'Continue Watching': true,
-        'Favourite Anime': false,
-        'Planned Anime': false,
-        'Continue Reading': true,
-        'Favourite Manga': false,
-        'Planned Manga': false,
-        'Recommended': true,
-      },
-      PrefLocation.COMMON);
 
-  static const Pref<Map<dynamic, dynamic>> malHomeLayout = Pref(
-      'malHomeLayoutOrder',
-      {
-        'Continue Watching': true,
-        'OnHold Anime': false,
-        'Planned Anime': true,
-        'Dropped Anime': false,
-        'Continue Reading': true,
-        'OnHold Manga': false,
-        'Planned Manga': true,
-        'Dropped Manga': false,
-      },
-      PrefLocation.COMMON);
-
-  static const Pref<Map<dynamic, dynamic>> simklHomeLayout = Pref(
-      'simklHomeLayoutOrder',
-      {
-        'Continue Watching Anime': true,
-        'Planned Anime': false,
-        'Dropped Anime': false,
-        'On Hold Anime': false,
-        'Continue Watching Series': true,
-        'Planned Series': false,
-        'Dropped Series': false,
-        'On Hold Series': false,
-        'Planned Movies': true,
-        'Dropped Movies': false,
-      },
-      PrefLocation.COMMON);
-
-  static const Pref<Map<dynamic, dynamic>> extensionsHomeLayout = Pref(
-      'extensionsHomeLayoutOrder',
-      {
-        'Continue Watching': true,
-        'Planned Series': false,
-        'Continue Reading': true,
-        'Planned Manga': false,
-      },
-      PrefLocation.COMMON);
-  static const Pref<List<int>> anilistRemoveList =
-      Pref('anilistRemoveList', [], PrefLocation.COMMON);
-  static const Pref<List<int>> malRemoveList =
-      Pref('malRemoveList', [], PrefLocation.COMMON);
-  static const anilistHidePrivate =
-      Pref('anilistHidePrivate', false, PrefLocation.COMMON);
-
-  //anime page
-  static const Pref<Map<dynamic, dynamic>> anilistAnimeLayout = Pref(
-      'animeLayoutOrder',
-      {
-        'Recent Updates': true,
-        'Trending Movies': true,
-        'Top Rated Series': true,
-        'Most Favourite Series': true,
-      },
-      PrefLocation.COMMON);
-
-  static const Pref<Map<dynamic, dynamic>> malAnimeLayout = Pref(
-      'malAnimeLayoutOrder',
-      {
-        'Top Airing': true,
-        'Trending Movies': true,
-        'Top Rated Series': true,
-        'Most Favourite Series': true,
-      },
-      PrefLocation.COMMON);
-  static const Pref<Map<dynamic, dynamic>> simklAnimeLayout = Pref(
-      'simklAnimeLayoutOrder',
-      {
-        'Incoming': true,
-        'Airing': true,
-      },
-      PrefLocation.COMMON);
   static const adultOnly = Pref('adultOnly', false, PrefLocation.COMMON);
   static const includeAnimeList =
       Pref('includeAnimeList', false, PrefLocation.COMMON);
@@ -111,9 +27,9 @@ class PrefName {
       Pref('recentlyListOnly', false, PrefLocation.COMMON);
   static const NSFWExtensions =
       Pref('NSFWExtensions', true, PrefLocation.COMMON);
-  static const AnimeDefaultView =
+  static const animeDefaultView =
       Pref('AnimeDefaultView', 0, PrefLocation.COMMON);
-  static const MangaDefaultView =
+  static const mangaDefaultView =
       Pref('MangaDefaultView', 0, PrefLocation.COMMON);
 
   static const Pref<String> userAgent = Pref(
@@ -124,37 +40,6 @@ class PrefName {
   static const Pref<Map<String, String>> cookies =
       Pref('cookies', {}, PrefLocation.COMMON);
 
-  //manga page
-  static const Pref<Map<dynamic, dynamic>> anilistMangaLayout = Pref(
-      'mangaLayoutOrder',
-      {
-        'Trending Manhwa': true,
-        'Trending Novels': true,
-        'Top Rated Manga': true,
-        'Most Favourite Manga': true,
-      },
-      PrefLocation.COMMON);
-
-  static const Pref<Map<dynamic, dynamic>> malMangaLayout = Pref(
-      'malMangaLayoutOrder',
-      {
-        'Trending Manhwa': true,
-        'Trending Novels': true,
-        'Top Rated Manga': true,
-        'Most Favourite Manga': true,
-      },
-      PrefLocation.COMMON);
-  static const Pref<Map<dynamic, dynamic>> simklMangaLayout = Pref(
-      'simklMangaLayoutOrder',
-      {
-        'Incoming Shows': true,
-        'Airing Shows': true,
-      },
-      PrefLocation.COMMON);
-  static const includeMangaList =
-      Pref('includeMangaList', false, PrefLocation.COMMON);
-
-  //
   static const unReadCommentNotifications =
       Pref('unReadCommentNotifications', 0, PrefLocation.COMMON);
   static const incognito = Pref('incognito', false, PrefLocation.COMMON);
@@ -184,10 +69,6 @@ class PrefName {
       'autoSourceMatch', AutoSourceMatch.Exact.toJson(), PrefLocation.PLAYER);
 
   //Protection
-  static const anilistToken = Pref('AnilistToken', '', PrefLocation.PROTECTED);
-  static const Pref<ResponseToken?> malToken =
-      Pref('MalToken', null, PrefLocation.PROTECTED);
-  static const simklToken = Pref('SimklToken', '', PrefLocation.PROTECTED);
   static const discordToken = Pref('DiscordToken', '', PrefLocation.PROTECTED);
   static const discordUserName =
       Pref('discordUserName', '', PrefLocation.PROTECTED);

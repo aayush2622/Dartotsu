@@ -19,7 +19,8 @@ Widget languageSwitcher(BuildContext context) {
           .toSet()
           .toList(),
       onChanged: (String? newValue) {
-        final newLocale = Locale(completeLanguageCode(newValue!).toLowerCase());
+        if (newValue == null) return;
+        final newLocale = Locale(completeLanguageCode(newValue).toLowerCase());
         themeController.setLocale(newLocale);
       },
       prefixIcon: Icons.translate,

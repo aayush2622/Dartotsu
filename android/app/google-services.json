@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "550128233714",
+    "project_id": "dartotsu-app",
+    "storage_bucket": "dartotsu-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:550128233714:android:2318b57544f3c78ac5746b",
+        "android_client_info": {
+          "package_name": "ani.aayush262.dartotsu"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBI721f78Tm4n-4fejwE8hiKVQtqzRAZUs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

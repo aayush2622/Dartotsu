@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:dpad/dpad.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:markdown_widget/config/configs.dart';
@@ -146,22 +147,29 @@ class AppUpdater {
                       );
                     }
 
-                    return MarkdownWidget(
-                      data: data["body"] ?? "",
-                      shrinkWrap: true,
-                      config: MarkdownConfig(
-                        configs: [
-                          LinkConfig(
-                            onTap: openLinkInBrowser,
-                            style: textStyle!.copyWith(color: scheme.primary),
+                    return DpadFocusable(
+                      enabled: false,
+                      child: FocusTraversalGroup(
+                        descendantsAreFocusable: false,
+                        child: MarkdownWidget(
+                          data: data["body"] ?? "",
+                          shrinkWrap: true,
+                          config: MarkdownConfig(
+                            configs: [
+                              LinkConfig(
+                                onTap: openLinkInBrowser,
+                                style:
+                                    textStyle!.copyWith(color: scheme.primary),
+                              ),
+                              H1Config(
+                                style: textStyle.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  color: scheme.primary,
+                                ),
+                              )
+                            ],
                           ),
-                          H1Config(
-                            style: textStyle.copyWith(
-                              fontWeight: FontWeight.bold,
-                              color: scheme.primary,
-                            ),
-                          )
-                        ],
+                        ),
                       ),
                     );
                   }),

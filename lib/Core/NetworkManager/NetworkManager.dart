@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:rhttp/rhttp.dart';
@@ -145,6 +146,7 @@ class NetworkManager extends GetxController {
   Future<void> download(
     String url,
     String savePath, {
+    Map<String, String>? query,
     Map<String, String>? headers,
     CancelToken? cancelToken,
     void Function(int received, int total)? onProgress,
@@ -153,6 +155,7 @@ class NetworkManager extends GetxController {
       url,
       cancelToken: cancelToken,
       headers: _mapHeaders(headers),
+      query: query,
     );
 
     final file = File(savePath);
@@ -177,11 +180,12 @@ class NetworkManager extends GetxController {
     final data = _decodeIfJson(res.body, res.headerMapList);
 
     return NetworkResponse(
-        statusCode: res.statusCode,
-        statusMessage: _statusMessages[res.statusCode],
-        data: data,
-        headers: res.headerMapList,
-        rawBytes: utf8.encode(res.body));
+      statusCode: res.statusCode,
+      statusMessage: _statusMessages[res.statusCode],
+      data: data,
+      headers: res.headerMapList,
+      rawBytes: utf8.encode(res.body),
+    );
   }
 
   static dynamic _decodeIfJson(
@@ -207,6 +211,7 @@ class NetworkManager extends GetxController {
   }
 
   CancelToken newCancelToken() => CancelToken();
+
   bool isCancelError(Object e) => e is RhttpCancelException;
 
   static const _statusMessages = {
@@ -240,6 +245,7 @@ class NetworkResponse<T> {
   final T data;
   final Map<String, List<String>> headers;
   final Uint8List? rawBytes;
+
   NetworkResponse({
     required this.statusCode,
     required this.data,

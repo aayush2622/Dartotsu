@@ -18,6 +18,8 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   async: ^2.13.0
+  firebase_core: ^4.3.0
+  firebase_crashlytics: ^5.0.6
   # State Management
   get: ^4.7.3
 
@@ -36,6 +38,7 @@ dependencies:
   path: ^1.9.1
   cryptography: ^2.9.0
   crypto: ^3.0.7
+
   # UI Components
   introduction_screen: ^4.0.0
   flutter_animate: ^4.5.2
@@ -51,6 +54,7 @@ dependencies:
   markdown_widget: ^2.3.2+8
   super_sliver_list: ^0.4.1
   dpad: ^2.0.2
+
   # UI Enhancements
   blur: ^4.0.2
   expandable_page_view: ^1.2.0
@@ -104,8 +108,8 @@ dependencies:
   collection: ^1.19.1
   flutter_web_auth_2: ^5.0.0-alpha.0
   dartotsu_extension_bridge:
-   #path: ../DartotsuExtensionBridge
-   git:
+    #path: ../DartotsuExtensionBridge
+    git:
       url: https://github.com/aayush2622/DartotsuExtensionBridge.git
       ref: master
   string_similarity: ^2.1.1
@@ -150,14 +154,7 @@ flutter:
   assets:
     - .env
     - assets/images/logo.png
-    - assets/svg/bmc-button.svg
-    - assets/svg/anilist.svg
-    - assets/svg/discord.svg
-    - assets/svg/kitsu.svg
-    - assets/svg/mal.svg
-    - assets/svg/simkl.svg
-    - assets/svg/extensions.svg
-    - assets/svg/incognito.svg
+    - assets/svg/
 # Flutter Launcher Icons Configuration
 # dart run flutter_launcher_icons
 flutter_icons:

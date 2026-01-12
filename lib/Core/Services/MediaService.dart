@@ -1,4 +1,4 @@
-import 'package:dartotsu/Api/Anilist/AnilistService.dart';
+import '../../Api/Anilist/AnilistService.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/parse_route.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';

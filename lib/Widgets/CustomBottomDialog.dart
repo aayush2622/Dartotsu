@@ -1,4 +1,7 @@
-import 'package:dartotsu/Widgets/ScrollConfig.dart';
+import 'package:dartotsu/Utils/Functions/AppShortcuts.dart';
+import 'package:dpad/dpad.dart';
+
+import 'ScrollConfig.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -33,6 +36,14 @@ class CustomBottomDialog extends StatefulWidget {
 }
 
 class _CustomBottomDialogState extends State<CustomBottomDialog> {
+  late final RxBool isChecked;
+
+  @override
+  void initState() {
+    super.initState();
+    isChecked = widget.checkChecked.obs;
+  }
+
   @override
   Widget build(BuildContext context) {
     final colorScheme = context.colorScheme;
@@ -59,16 +70,40 @@ class _CustomBottomDialogState extends State<CustomBottomDialog> {
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.only(bottom: 12.0),
-              child: Center(
-                child: Container(
-                  width: 40,
-                  height: 4,
-                  decoration: BoxDecoration(
-                    color: colorScheme.onSurface.withOpacity(0.3),
-                    borderRadius: BorderRadius.circular(2),
-                  ),
-                ),
-              ),
+              child: DpadFocusable(
+                  autofocus: true,
+                  isEntryPoint: true,
+                  builder: (context, isFocused, child) {
+                    var focus = isFocused && usingKeyboard;
+                    return Center(
+                      child: AnimatedContainer(
+                        duration: const Duration(milliseconds: 120),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8, vertical: 6),
+                        decoration: BoxDecoration(
+                          color: focus
+                              ? colorScheme.onSurface.withOpacity(0.08)
+                              : Colors.transparent,
+                          borderRadius: BorderRadius.circular(12),
+                          border: focus
+                              ? Border.all(
+                                  color:
+                                      colorScheme.onSurface.withOpacity(0.25),
+                                  width: 1,
+                                )
+                              : null,
+                        ),
+                        child: Container(
+                          width: 40,
+                          height: 4,
+                          decoration: BoxDecoration(
+                            color: colorScheme.onSurface.withOpacity(0.3),
+                            borderRadius: BorderRadius.circular(2),
+                          ),
+                        ),
+                      ),
+                    );
+                  }),
             ),
           ),
           if (widget.title != null)
@@ -97,32 +132,29 @@ class _CustomBottomDialogState extends State<CustomBottomDialog> {
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: Obx(
-                  () {
-                    var isChecked = widget.checkChecked.obs;
-                    return Row(
-                      children: [
-                        Checkbox(
-                          value: isChecked.value,
-                          activeColor: colorScheme.primary,
-                          onChanged: (value) {
-                            final v = value ?? false;
-                            isChecked.value = v;
-                            widget.checkCallback?.call(v);
-                          },
-                        ),
-                        Expanded(
-                          child: Text(
-                            widget.checkText!,
-                            style: textTheme.bodyMedium?.copyWith(
-                              fontWeight: FontWeight.bold,
-                            ),
+                child: Obx(() {
+                  return Row(
+                    children: [
+                      Checkbox(
+                        value: isChecked.value,
+                        activeColor: colorScheme.primary,
+                        onChanged: (value) {
+                          final v = value ?? false;
+                          isChecked.value = v;
+                          widget.checkCallback?.call(v);
+                        },
+                      ),
+                      Expanded(
+                        child: Text(
+                          widget.checkText!,
+                          style: textTheme.bodyMedium?.copyWith(
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
-                      ],
-                    );
-                  },
-                ),
+                      ),
+                    ],
+                  );
+                }),
               ),
             ),
 
@@ -135,12 +167,14 @@ class _CustomBottomDialogState extends State<CustomBottomDialog> {
                   children: [
                     if (widget.negativeText != null) ...[
                       Expanded(
-                        child: OutlinedButton(
-                          onPressed: widget.negativeCallback,
-                          style: buttonStyle,
-                          child: Text(
-                            widget.negativeText!,
-                            style: textTheme.labelLarge,
+                        child: DpadFocusable(
+                          child: OutlinedButton(
+                            onPressed: widget.negativeCallback,
+                            style: buttonStyle,
+                            child: Text(
+                              widget.negativeText!,
+                              style: textTheme.labelLarge,
+                            ),
                           ),
                         ),
                       ),
@@ -148,12 +182,14 @@ class _CustomBottomDialogState extends State<CustomBottomDialog> {
                     ],
                     if (widget.positiveText != null) ...[
                       Expanded(
-                        child: OutlinedButton(
-                          onPressed: widget.positiveCallback,
-                          style: buttonStyle,
-                          child: Text(
-                            widget.positiveText!,
-                            style: textTheme.labelLarge,
+                        child: DpadFocusable(
+                          child: OutlinedButton(
+                            onPressed: widget.positiveCallback,
+                            style: buttonStyle,
+                            child: Text(
+                              widget.positiveText!,
+                              style: textTheme.labelLarge,
+                            ),
                           ),
                         ),
                       ),

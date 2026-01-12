@@ -1,10 +1,11 @@
 import 'dart:async';
 
-import 'package:dartotsu/Api/Discord/BaseDiscordRPC.dart';
-import 'package:dartotsu/Core/Services/Model/Media.dart';
 import 'package:dartotsu_extension_bridge/Models/DEpisode.dart';
 import 'package:flutter_discord_rpc/flutter_discord_rpc.dart';
 import 'package:get/get.dart';
+
+import '../../../Core/Services/Model/Media.dart';
+import '../BaseDiscordRPC.dart';
 
 class DesktopRPC extends GetxController implements BaseDiscordRPC {
   final Completer<void> _ready = Completer<void>();

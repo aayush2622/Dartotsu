@@ -7,7 +7,9 @@ import '../../Core/ThemeManager/ThemeController.dart';
 import 'GetXFunctions.dart';
 import 'SnackBar.dart';
 
+var usingKeyboard = false;
 bool appShortcuts(KeyEvent event) {
+  usingKeyboard = true;
   if (event is! KeyDownEvent) return false;
 
   final isShift = HardwareKeyboard.instance.isShiftPressed;

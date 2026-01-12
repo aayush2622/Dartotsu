@@ -1,10 +1,10 @@
-import 'package:dartotsu/Api/Discord/BaseDiscordRPC.dart';
-import 'package:dartotsu/Core/Services/Model/Media.dart';
 import 'package:dartotsu_extension_bridge/Models/DEpisode.dart';
 import 'package:get/get.dart';
 
+import '../../../Core/Services/Model/Media.dart';
 import '../../../Utils/Functions/GetXFunctions.dart';
 import '../../../Core/NetworkManager/NetworkManager.dart';
+import '../BaseDiscordRPC.dart';
 import 'TokenManager.dart';
 
 class MobileRPC extends GetxController implements BaseDiscordRPC {

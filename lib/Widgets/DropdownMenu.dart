@@ -40,7 +40,7 @@ class BuildDropdownMenu extends StatelessWidget {
           enableSearch: false,
           enableFilter: false,
           keyboardType: TextInputType.none,
-          focusNode: FocusNode(canRequestFocus: false),
+          focusNode: FocusNode(canRequestFocus: false, skipTraversal: true),
           initialSelection: options.contains(value) ? value : null,
           expandedInsets: EdgeInsets.zero,
           menuHeight: 300,
@@ -56,6 +56,9 @@ class BuildDropdownMenu extends StatelessWidget {
             focusedBorder: _border(colorScheme, true),
           ),
           menuStyle: MenuStyle(
+            padding: const WidgetStatePropertyAll(
+              EdgeInsetsGeometry.symmetric(vertical: 6),
+            ),
             elevation: const WidgetStatePropertyAll(6),
             backgroundColor: WidgetStatePropertyAll(theme.cardColor),
             shape: WidgetStatePropertyAll(
@@ -64,8 +67,14 @@ class BuildDropdownMenu extends StatelessWidget {
               ),
             ),
           ),
-          onSelected: onChanged,
-          trailingIconFocusNode: null,
+          onSelected: (v) {
+            onChanged?.call(v);
+            FocusManager.instance.primaryFocus?.unfocus();
+          },
+          trailingIconFocusNode: FocusNode(
+            canRequestFocus: true,
+            descendantsAreTraversable: false,
+          ),
           dropdownMenuEntries: options
               .map(
                 (e) => DropdownMenuEntry(

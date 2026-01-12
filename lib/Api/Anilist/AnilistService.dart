@@ -1,14 +1,10 @@
-import 'package:dartotsu/Core/Services/BaseServiceData.dart';
+import '../../Core/Services/BaseServiceData.dart';
+import '../../Core/Services/Screens/BaseAnimeScreen.dart';
+import '../../Core/Services/Screens/BaseHomeScreen.dart';
+import '../../Core/Services/Screens/BaseLoginScreen.dart';
+import '../../Core/Services/Screens/BaseMangaScreen.dart';
 
-import 'package:dartotsu/Core/Services/Screens/BaseAnimeScreen.dart';
-
-import 'package:dartotsu/Core/Services/Screens/BaseHomeScreen.dart';
-
-import 'package:dartotsu/Core/Services/Screens/BaseLoginScreen.dart';
-
-import 'package:dartotsu/Core/Services/Screens/BaseMangaScreen.dart';
-
-import 'package:dartotsu/Core/Services/Screens/BaseSearchScreen.dart';
+import '../../Core/Services/Screens/BaseSearchScreen.dart';
 import '../../Core/Services/MediaService.dart';
 import 'AnilistData.dart';
 

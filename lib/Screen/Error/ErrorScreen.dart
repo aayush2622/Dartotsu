@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:get/get.dart';
-import 'package:dartotsu/Widgets/ScrollConfig.dart';
+import '../../Widgets/ScrollConfig.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import '../../Utils/Function.dart';

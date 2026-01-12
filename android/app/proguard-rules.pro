@@ -2,9 +2,6 @@
 -keep class io.flutter.** { *; }
 -verbose
 
-# Google Play Core classes
--keep class com.google.android.play.core.** { *; }
-
 # Keep necessary AndroidX lifecycle classes
 -keep class androidx.lifecycle.** { *; }
 
@@ -23,12 +20,6 @@
 -keep class com.fasterxml.jackson.core.** { *; }
 -keep class com.fasterxml.jackson.databind.** { *; }
 
-
-# Keep Isar classes
--keep class isar.** { *; }
-
-# Keep Riverpod classes
--keep class riverpod.** { *; }
 
 # Freezed-specific rules (optimize to required classes if possible)
 -keep class ** implements kotlin.Metadata
