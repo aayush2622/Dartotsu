@@ -3,9 +3,10 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import '../../Core/Services/Model/Media.dart';
 
-class MediaAdaptorState {
+import '../../../Core/Services/Model/Media.dart';
+
+class MediaSectionState {
   var overscrollProgress = 0.0.obs;
   var isLoadingMore = false.obs;
   var mediaList = <Media>[].obs;

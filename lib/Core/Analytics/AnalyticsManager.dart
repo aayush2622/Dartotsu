@@ -1,11 +1,11 @@
 import 'dart:async';
 
-import 'package:dartotsu/Logger.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
+import '../../Logger.dart';
 import 'FirebaseOptions.dart';
 
 class AnalyticsManager extends GetxController {
@@ -18,13 +18,8 @@ class AnalyticsManager extends GetxController {
     unawaited(_initFirebase());
   }
 
-  Future<void> _initFirebase() {
+  Future<void> _initFirebase() async {
     _initCompleter ??= Completer<void>();
-    _startInit();
-    return _initCompleter!.future;
-  }
-
-  Future<void> _startInit() async {
     try {
       await Firebase.initializeApp(
         options: DefaultFirebaseOptions.currentPlatform,

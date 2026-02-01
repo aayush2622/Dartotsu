@@ -1,10 +1,11 @@
 import 'package:dartotsu/Functions/Function.dart';
 import 'package:dartotsu/Screens/WebView/WebView.dart';
 import 'package:dartotsu/Theme/LanguageSwitcher.dart';
-import 'package:dartotsu/Widgets/AlertDialogBuilder.dart';
+import 'package:dartotsu/Widgets/Components/AlertDialogBuilder.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../../../../../Core/Services/Model/Media.dart';
 import '../../../../../../Preferences/IsarDataClasses/MediaSettings/MediaSettings.dart';
 

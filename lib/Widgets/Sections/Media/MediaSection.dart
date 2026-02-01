@@ -7,13 +7,15 @@ import 'package:get/get.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:super_sliver_list/super_sliver_list.dart';
 
-import '../../Widgets/CachedNetworkImage.dart';
-import '../../Widgets/ScrollConfig.dart';
+import '../../../Core/Preferences/PrefManager.dart';
+import '../../../Core/Services/Model/Media.dart';
+import '../../../Core/ThemeManager/ThemeManager.dart';
+import '../../../Utils/Functions/SnackBar.dart';
+import '../../Components/CachedNetworkImage.dart';
+import '../../Components/ScrollConfig.dart';
+import 'MediaSectionState.dart';
 
-import '../../Core/Services/Model/Media.dart';
-import 'MediaAdaptorState.dart';
-
-class MediaAdaptorData {
+class MediaSectionData {
   final int type;
   final String? title;
   final IconData? trailingIcon;
@@ -39,7 +41,7 @@ class MediaAdaptorData {
 
   final Future<List<Media>> Function()? onLoadMore;
 
-  MediaAdaptorData({
+  MediaSectionData({
     required this.type,
     this.title,
     this.trailingIcon,
@@ -54,27 +56,41 @@ class MediaAdaptorData {
     this.onMediaLongPress,
     this.onLoadMore,
   });
+
+  factory MediaSectionData.skeleton(int type) {
+    return MediaSectionData(
+      type: type,
+      title: "Title Skeleton",
+      mediaList: List.generate(
+        20,
+        (index) => Media.skeleton(),
+      ),
+      onMediaTap: (context, index, media) => snackString("Just a skeleton"),
+      onLoadMore: () async {
+        await Future.delayed(const Duration(seconds: 2));
+        return List.generate(10, (_) => Media.skeleton());
+      },
+    );
+  }
 }
 
-class MediaAdaptor extends StatefulWidget {
-  final MediaAdaptorData data;
+class MediaSection extends StatefulWidget {
+  final MediaSectionData data;
 
-  const MediaAdaptor({super.key, required this.data});
+  const MediaSection({super.key, required this.data});
 
   @override
-  createState() => _MediaAdaptorState();
+  createState() => _MediaSectionState();
 }
 
-class _MediaAdaptorState extends State<MediaAdaptor> {
-  MediaAdaptorState state = MediaAdaptorState();
+class _MediaSectionState extends State<MediaSection> {
+  MediaSectionState state = MediaSectionState();
 
-  MediaAdaptorData get data => widget.data;
+  MediaSectionData get data => widget.data;
 
   ThemeData get theme => Theme.of(context);
 
-  double _multiplicationFactor = 1.0;
-
-  double get multiplicationFactor => _multiplicationFactor;
+  double multiplicationFactor = loadData(PrefName.cardSize);
 
   @override
   void initState() {
@@ -83,33 +99,21 @@ class _MediaAdaptorState extends State<MediaAdaptor> {
   }
 
   @override
-  void didUpdateWidget(covariant MediaAdaptor oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (oldWidget.data.mediaList != data.mediaList) {
-      state.updateMediaList(data.mediaList);
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _buildTitleRow(),
-        _buildHorizontalSliverList(),
-        Slider(
-          value: multiplicationFactor,
-          min: 1,
-          max: 3.0,
-          divisions: 15,
-          label: 'Size: ${multiplicationFactor.toStringAsFixed(2)}x',
-          onChanged: (value) {
-            setState(() {
-              _multiplicationFactor = value;
-            });
-          },
-        ),
-      ],
+    return ThemedContainer(
+      margin: const EdgeInsets.all(12),
+      context: context,
+      padding: const EdgeInsets.only(),
+      borderRadius: BorderRadius.circular(30.0),
+      border: Border.all(width: 0, color: Colors.transparent),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildTitleRow(),
+          const SizedBox(height: 8),
+          _buildHorizontalSliverList(),
+        ],
+      ),
     );
   }
 
@@ -120,7 +124,7 @@ class _MediaAdaptorState extends State<MediaAdaptor> {
     final trailing = data.trailingIcon;
 
     return Padding(
-      padding: const EdgeInsets.fromLTRB(28, 8, 16, 8),
+      padding: const EdgeInsets.fromLTRB(28, 16, 16, 0),
       child: Row(
         children: [
           Expanded(
@@ -135,7 +139,9 @@ class _MediaAdaptorState extends State<MediaAdaptor> {
                   title,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: theme.textTheme.labelLarge,
+                  style: theme.textTheme.labelLarge?.copyWith(
+                    fontSize: 18,
+                  ),
                 ),
               ),
             ),
@@ -161,7 +167,12 @@ class _MediaAdaptorState extends State<MediaAdaptor> {
   }
 
   EdgeInsetsDirectional _horizontalPadding(int index, int length) =>
-      EdgeInsetsDirectional.only(start: index == 0 ? 24 : 6.5, end: 6.5);
+      EdgeInsetsDirectional.only(
+        start: index == 0 ? 24 : 6.5 * multiplicationFactor,
+        end: 6.5 * multiplicationFactor,
+        top: 8 * multiplicationFactor,
+        bottom: 6,
+      );
 
   Widget _stretchBubble(double progress) {
     return AnimatedContainer(
@@ -188,7 +199,7 @@ class _MediaAdaptorState extends State<MediaAdaptor> {
 
   Widget _buildHorizontalSliverList() {
     return SizedBox(
-      height: 250 * multiplicationFactor,
+      height: 272 * multiplicationFactor,
       child: Obx(() {
         final canLoadMore = state.canLoadMore.value;
         final isLoadingMore = state.isLoadingMore.value;
@@ -220,7 +231,11 @@ class _MediaAdaptorState extends State<MediaAdaptor> {
                       return Align(
                         alignment: Alignment.topCenter,
                         child: Padding(
-                          padding: const EdgeInsets.only(left: 6.5, right: 24),
+                          padding: EdgeInsets.only(
+                            left: 6.5,
+                            right: 24,
+                            top: 8 * multiplicationFactor,
+                          ),
                           child: SizedBox(
                             width: 108 * multiplicationFactor,
                             height: 160 * multiplicationFactor,
@@ -268,21 +283,14 @@ class _MediaAdaptorState extends State<MediaAdaptor> {
                           state.mediaList.length,
                         ),
                         child: DpadFocusable(
+                          onSelect: () =>
+                              data.onMediaTap?.call(context, index, media),
                           child: _mediaItem(index = index, media),
                           builder: (context, focused, child) {
-                            return AnimatedContainer(
-                              duration: const Duration(milliseconds: 220),
-                              curve: Curves.easeOutCubic,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(16),
-                                border: focused
-                                    ? Border.all(
-                                        color: theme.colorScheme.primary
-                                            .withOpacity(0.85),
-                                        width: 3,
-                                      )
-                                    : null,
-                              ),
+                            return AnimatedScale(
+                              scale: focused ? 1.07 : 1.0,
+                              duration: const Duration(milliseconds: 200),
+                              curve: Curves.easeOut,
                               child: child,
                             );
                           },
@@ -323,6 +331,7 @@ class _MediaAdaptorState extends State<MediaAdaptor> {
       onEnter: (_) => hover.value = true,
       onExit: (_) => hover.value = false,
       child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
         onTap: () => data.onMediaTap?.call(context, index, media),
         child: Obx(
           () => AnimatedScale(
@@ -330,6 +339,7 @@ class _MediaAdaptorState extends State<MediaAdaptor> {
             duration: const Duration(milliseconds: 200),
             curve: Curves.easeOut,
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
                   width: 108 * multiplicationFactor,
@@ -344,7 +354,6 @@ class _MediaAdaptorState extends State<MediaAdaptor> {
                       fit: BoxFit.cover,
                       placeholder: (context, url) => Container(
                         color: Colors.white12,
-                        child: const Center(child: CircularProgressIndicator()),
                       ),
                       errorWidget: (context, url, error) => Icon(
                         Icons.broken_image_rounded,
@@ -355,7 +364,9 @@ class _MediaAdaptorState extends State<MediaAdaptor> {
                   ),
                 ),
                 const SizedBox(height: 8),
-                _buildMediaTitle(false, media.mainName)
+                _buildMediaTitle(false, media.mainName),
+                const SizedBox(height: 8),
+                _buildMediaTitle(false, "1155 | 1155")
               ],
             ),
           ),

@@ -4,22 +4,22 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dpad/dpad.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:install_plugin/install_plugin.dart';
 import 'package:markdown_widget/config/configs.dart';
 import 'package:markdown_widget/widget/blocks/leaf/heading.dart';
 import 'package:markdown_widget/widget/blocks/leaf/link.dart';
 import 'package:markdown_widget/widget/markdown.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
-import 'package:install_plugin/install_plugin.dart';
 import 'package:rhttp/rhttp.dart';
 
+import '../../Core/NetworkManager/NetworkManager.dart';
+import '../../Core/Preferences/PrefManager.dart';
 import '../../Utils//Function.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Utils/Functions/SnackBar.dart';
-import '../../Core/NetworkManager/NetworkManager.dart';
-import '../../Core/Preferences/PrefManager.dart';
-import '../../Widgets/CustomBottomDialog.dart';
+import '../../Widgets/Components/CustomBottomDialog.dart';
 
 class AppUpdater {
   final _skippedUpdatesKey = "skippedUpdateList";

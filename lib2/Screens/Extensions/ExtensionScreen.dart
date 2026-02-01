@@ -1,4 +1,4 @@
-import 'package:dartotsu/Widgets/AlertDialogBuilder.dart';
+import 'package:dartotsu/Widgets/Components/AlertDialogBuilder.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart'
     hide ExtensionList;
 import 'package:flutter/material.dart';

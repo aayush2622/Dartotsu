@@ -1,12 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dartotsu/Core/Services/MediaService.dart';
 import 'package:dartotsu/Functions/Function.dart';
 import 'package:dartotsu/Functions/Functions/GetXFunctions.dart';
 import 'package:dartotsu/Screens/Extensions/ExtensionScreen.dart';
 import 'package:dartotsu/Screens/Settings/SettingsScreen.dart';
-import 'package:dartotsu/Core/Services/MediaService.dart';
-import 'package:dartotsu/Widgets/AlertDialogBuilder.dart';
-import 'package:dartotsu/Widgets/CustomBottomDialog.dart';
-import 'package:dartotsu/Widgets/LoadSvg.dart';
+import 'package:dartotsu/Widgets/Components/AlertDialogBuilder.dart';
+import 'package:dartotsu/Widgets/Components/CustomBottomDialog.dart';
+import 'package:dartotsu/Widgets/Components/LoadSvg.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 

@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:dartotsu_extension_bridge/Models/DEpisode.dart';
-import 'package:flutter_discord_rpc/flutter_discord_rpc.dart';
+import 'package:flutter_discord_rpc_fork/flutter_discord_rpc.dart';
 import 'package:get/get.dart';
 
 import '../../../Core/Services/Model/Media.dart';
@@ -25,7 +25,7 @@ class DesktopRPC extends GetxController implements BaseDiscordRPC {
 
     try {
       await FlutterDiscordRPC.initialize("1453704458012856401");
-      FlutterDiscordRPC.instance.connect();
+      await FlutterDiscordRPC.instance.connect();
 
       if (!_disposed && !_ready.isCompleted) {
         _ready.complete();
@@ -99,16 +99,17 @@ class DesktopRPC extends GetxController implements BaseDiscordRPC {
       ),
     );
 
-    FlutterDiscordRPC.instance.setActivity(activity: _lastActivity!);
+    await FlutterDiscordRPC.instance.setActivity(activity: _lastActivity!);
   }
 
   RPCActivity? _lastActivity;
+
   @override
   Future<void> pauseRpc() async {
     await isReady;
     if (_disposed) return;
 
-    FlutterDiscordRPC.instance.clearActivity();
+    await FlutterDiscordRPC.instance.clearActivity();
   }
 
   @override
@@ -116,7 +117,7 @@ class DesktopRPC extends GetxController implements BaseDiscordRPC {
     await isReady;
     if (_disposed) return;
     if (_lastActivity == null) return;
-    FlutterDiscordRPC.instance.setActivity(activity: _lastActivity!);
+    await FlutterDiscordRPC.instance.setActivity(activity: _lastActivity!);
   }
 
   @override
@@ -125,9 +126,9 @@ class DesktopRPC extends GetxController implements BaseDiscordRPC {
     _disposed = true;
 
     if (_ready.isCompleted) {
-      FlutterDiscordRPC.instance.clearActivity();
-      FlutterDiscordRPC.instance.disconnect();
-      FlutterDiscordRPC.instance.dispose();
+      await FlutterDiscordRPC.instance.clearActivity();
+      await FlutterDiscordRPC.instance.disconnect();
+      await FlutterDiscordRPC.instance.dispose();
     }
   }
 

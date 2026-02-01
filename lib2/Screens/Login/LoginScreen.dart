@@ -1,10 +1,10 @@
-import 'package:dartotsu/Widgets/LoadSvg.dart';
+import 'package:dartotsu/Widgets/Components/LoadSvg.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:provider/provider.dart';
 
-import '../../Functions/Function.dart';
 import '../../Core/Services/ServiceSwitcher.dart';
+import '../../Functions/Function.dart';
 import '../../Theme/LanguageSwitcher.dart';
 
 class LoginScreen extends StatefulWidget {

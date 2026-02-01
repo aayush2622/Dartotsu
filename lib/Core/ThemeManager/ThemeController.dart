@@ -13,6 +13,7 @@ class ThemeController extends GetxController {
   final customColor = 4280391411.obs;
   final useGlassMode = false.obs;
   final local = "en".obs;
+
   @override
   void onInit() {
     super.onInit();
@@ -43,12 +44,12 @@ class ThemeController extends GetxController {
     local.value = loadData(PrefName.defaultLanguage);
   }
 
-  Future<void> setGlassEffect(bool value) async {
+  void setGlassEffect(bool value) {
     useGlassMode.value = value;
     saveData(PrefName.useGlassMode, value);
   }
 
-  Future<void> setDarkMode(bool value) async {
+  void setDarkMode(bool value) {
     isDarkMode.value = value;
     saveData(PrefName.isDarkMode, value ? 1 : 2);
 
@@ -57,7 +58,7 @@ class ThemeController extends GetxController {
     }
   }
 
-  Future<void> setOled(bool value) async {
+  void setOled(bool value) {
     isOled.value = value;
     saveData(PrefName.isOled, value);
 
@@ -66,14 +67,14 @@ class ThemeController extends GetxController {
     }
   }
 
-  Future<void> setTheme(String value) async {
+  void setTheme(String value) {
     theme.value = value;
     useCustomTheme(false);
     setMaterialYou(false);
     saveData(PrefName.theme, value);
   }
 
-  Future<void> setMaterialYou(bool value) async {
+  void setMaterialYou(bool value) {
     useMaterialYou.value = value;
     saveData(PrefName.useMaterialYou, value);
 
@@ -82,7 +83,7 @@ class ThemeController extends GetxController {
     }
   }
 
-  Future<void> useCustomTheme(bool value) async {
+  void useCustomTheme(bool value) {
     useCustomColor.value = value;
     saveData(PrefName.useCustomColor, value);
 
@@ -91,12 +92,12 @@ class ThemeController extends GetxController {
     }
   }
 
-  Future<void> setCustomColor(Color color) async {
+  void setCustomColor(Color color) {
     customColor.value = color.value;
     saveData(PrefName.customColor, color.value);
   }
 
-  Future<void> setLocale(Locale locale) async {
+  void setLocale(Locale locale) {
     local.value = locale.languageCode;
     //Get.updateLocale(locale);
     saveData(PrefName.defaultLanguage, locale.languageCode);

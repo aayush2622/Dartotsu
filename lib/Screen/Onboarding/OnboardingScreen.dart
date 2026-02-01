@@ -6,13 +6,12 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
-import '../../Utils/Functions/GetXFunctions.dart';
-import '../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../Core/ThemeManager/ThemeController.dart';
 import '../../Core/ThemeManager/ThemeManager.dart';
-import '../../Widgets/CachedNetworkImage.dart';
-import '../../Widgets/ScrollConfig.dart';
-import '../../main.dart';
+import '../../Utils/Functions/GetXFunctions.dart';
+import '../../Widgets/Components/CachedNetworkImage.dart';
+import '../../Widgets/Components/ScrollConfig.dart';
+import '../MainScreen.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -28,6 +27,7 @@ class OnboardingScreen extends StatefulWidget {
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
   ThemeData get theme => Theme.of(context);
+
   TextStyle? get labelStyle => theme.textTheme.labelLarge;
   int _currentPage = 0;
 
@@ -74,6 +74,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         ),
         onChange: (value) => setState(() => _currentPage = value),
         pages: [
+          _welcomePage(),
           _buildWelcomeWidget,
           PageViewModel(
             titleWidget: const Text("Title of introduction page")
@@ -97,6 +98,29 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     );
   }
 
+  PageViewModel _welcomePage() {
+    final animate = _currentPage == 0;
+
+    return PageViewModel(
+      decoration: const PageDecoration(fullScreen: true),
+      image: _buildBackground
+          .animate(target: animate ? 1 : 0)
+          .fadeIn(duration: 1200.ms)
+          .blurXY(begin: 10, end: 0),
+      titleWidget: Text(
+        "DARTOTSU",
+        style: theme.textTheme.headlineLarge,
+      ).animate(target: animate ? 1 : 0).fadeIn().slideY(begin: 0.3),
+      bodyWidget: const Text(
+        "The new best Anime & Manga experience.\nBuilt for focus. Built for you.",
+        textAlign: TextAlign.center,
+      )
+          .animate(target: animate ? 1 : 0)
+          .fadeIn(delay: 200.ms)
+          .slideY(begin: 0.4),
+    );
+  }
+
   PageViewModel get _buildWelcomeWidget {
     final animate = _currentPage == 0;
 
@@ -110,7 +134,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           const Text(
               "Dartotsu is a complete rewrite of Dantotsu in Flutter.\nIt's a hybrid AniList, MyAnimeList and Simkl support!"),
           const SizedBox(height: 16),
-          languageSwitcher(context)
+          themeDropdown(),
         ],
       )
           .animate(target: animate ? 1 : 0)

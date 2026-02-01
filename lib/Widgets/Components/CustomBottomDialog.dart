@@ -1,12 +1,11 @@
-import 'package:dartotsu/Utils/Functions/AppShortcuts.dart';
 import 'package:dpad/dpad.dart';
-
-import 'ScrollConfig.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../Core/ThemeManager/ThemeManager.dart';
-import '../Utils/Extensions/ContextExtensions.dart';
+import '../../Core/ThemeManager/ThemeManager.dart';
+import '../../Utils/Extensions/ContextExtensions.dart';
+import '../../Utils/Functions/AppShortcuts.dart';
+import 'ScrollConfig.dart';
 
 class CustomBottomDialog extends StatefulWidget {
   final List<Widget> viewList;
@@ -18,6 +17,7 @@ class CustomBottomDialog extends StatefulWidget {
   final VoidCallback? negativeCallback;
   final String? positiveText;
   final VoidCallback? positiveCallback;
+
   const CustomBottomDialog({
     super.key,
     this.viewList = const [],
@@ -71,39 +71,39 @@ class _CustomBottomDialogState extends State<CustomBottomDialog> {
             child: Padding(
               padding: const EdgeInsets.only(bottom: 12.0),
               child: DpadFocusable(
-                  autofocus: true,
-                  isEntryPoint: true,
-                  builder: (context, isFocused, child) {
-                    var focus = isFocused && usingKeyboard;
-                    return Center(
-                      child: AnimatedContainer(
-                        duration: const Duration(milliseconds: 120),
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 8, vertical: 6),
+                autofocus: true,
+                isEntryPoint: true,
+                builder: (context, isFocused, child) {
+                  var focus = isFocused && usingKeyboard;
+                  return Center(
+                    child: AnimatedContainer(
+                      duration: const Duration(milliseconds: 120),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8, vertical: 6),
+                      decoration: BoxDecoration(
+                        color: focus
+                            ? colorScheme.onSurface.withOpacity(0.08)
+                            : Colors.transparent,
+                        borderRadius: BorderRadius.circular(12),
+                        border: focus
+                            ? Border.all(
+                                color: colorScheme.onSurface.withOpacity(0.25),
+                                width: 1,
+                              )
+                            : null,
+                      ),
+                      child: Container(
+                        width: 40,
+                        height: 4,
                         decoration: BoxDecoration(
-                          color: focus
-                              ? colorScheme.onSurface.withOpacity(0.08)
-                              : Colors.transparent,
-                          borderRadius: BorderRadius.circular(12),
-                          border: focus
-                              ? Border.all(
-                                  color:
-                                      colorScheme.onSurface.withOpacity(0.25),
-                                  width: 1,
-                                )
-                              : null,
-                        ),
-                        child: Container(
-                          width: 40,
-                          height: 4,
-                          decoration: BoxDecoration(
-                            color: colorScheme.onSurface.withOpacity(0.3),
-                            borderRadius: BorderRadius.circular(2),
-                          ),
+                          color: colorScheme.onSurface.withOpacity(0.3),
+                          borderRadius: BorderRadius.circular(2),
                         ),
                       ),
-                    );
-                  }),
+                    ),
+                  );
+                },
+              ),
             ),
           ),
           if (widget.title != null)

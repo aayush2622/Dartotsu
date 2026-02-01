@@ -2,19 +2,19 @@ import 'dart:io';
 
 import 'package:collection/collection.dart';
 import 'package:dartotsu/Adaptor/Episode/EpisodeAdaptor.dart';
-import 'package:dartotsu/Screens/Anime/Player/Platform/MediaKitPlayer.dart';
-import 'package:dartotsu/Screens/Anime/Player/Widgets/SectionedRoundedRectSliderTrackShape.dart';
-import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
-import 'package:dartotsu_extension_bridge/Models/Video.dart' as v;
 import 'package:dartotsu/Core/Services/Model/Media.dart' as m;
 import 'package:dartotsu/Functions/Extensions/IntExtensions.dart';
-import 'package:dartotsu/Functions/Function.dart';
 import 'package:dartotsu/Functions/Extensions/StringExtensions.dart';
+import 'package:dartotsu/Functions/Function.dart';
 import 'package:dartotsu/Preferences/IsarDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
 import 'package:dartotsu/Preferences/PrefManager.dart';
+import 'package:dartotsu/Screens/Anime/Player/Platform/MediaKitPlayer.dart';
+import 'package:dartotsu/Screens/Anime/Player/Widgets/SectionedRoundedRectSliderTrackShape.dart';
 import 'package:dartotsu/Theme/LanguageSwitcher.dart';
-import 'package:dartotsu/Widgets/AlertDialogBuilder.dart';
-import 'package:dartotsu/Widgets/CustomBottomDialog.dart';
+import 'package:dartotsu/Widgets/Components/AlertDialogBuilder.dart';
+import 'package:dartotsu/Widgets/Components/CustomBottomDialog.dart';
+import 'package:dartotsu_extension_bridge/Models/Video.dart' as v;
+import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -139,6 +139,7 @@ class _PlayerControllerState extends State<PlayerController> {
   }
 
   bool tryPreLoading = true;
+
   Future<void> setupAutoplay() async {
     List<Video> videos = [];
     controller.currentTime.listen((p) async {

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../Utils/Functions/GetXFunctions.dart';
-import '../../Widgets/DropdownMenu.dart';
+import '../../Widgets/Components/DropdownMenu.dart';
 import 'ThemeController.dart';
 import 'Themes/blue.dart';
 import 'Themes/fromCode.dart';
@@ -230,6 +230,7 @@ Widget ThemedContainer({
   Border? border,
   BorderRadiusGeometry? borderRadius,
   EdgeInsetsGeometry? padding,
+  EdgeInsetsGeometry? margin,
   AlignmentGeometry? alignment,
 }) {
   final controller = find<ThemeController>();
@@ -240,31 +241,35 @@ Widget ThemedContainer({
     final isGlassMode = controller.useGlassMode.value;
 
     if (isGlassMode) {
-      return BlurBox(
-        blur: 10.0,
-        alignment: alignment,
-        padding: effectivePadding,
-        color: Theme.of(context).cardColor.withOpacity(0.2),
-        border: border ??
-            Border.all(
-              color: theme.onSurface.withOpacity(0.2),
-              width: 0.5,
+      return Container(
+        margin: margin,
+        child: BlurBox(
+          blur: 10.0,
+          alignment: alignment,
+          padding: effectivePadding,
+          color: Theme.of(context).cardColor.withOpacity(0.2),
+          border: border ??
+              Border.all(
+                color: theme.onSurface.withOpacity(0.2),
+                width: 0.5,
+              ),
+          borderRadius: effectiveBorderRadius,
+          boxShadow: [
+            BoxShadow(
+              color: theme.surface.withOpacity(0.2),
+              blurRadius: 6.0,
+              spreadRadius: 0.5,
             ),
-        borderRadius: effectiveBorderRadius,
-        boxShadow: [
-          BoxShadow(
-            color: theme.surface.withOpacity(0.2),
-            blurRadius: 6.0,
-            spreadRadius: 0.5,
-          ),
-        ],
-        child: glassWidget ?? child,
+          ],
+          child: glassWidget ?? child,
+        ),
       );
     }
 
     return Container(
       padding: effectivePadding,
       alignment: alignment,
+      margin: margin,
       decoration: BoxDecoration(
         color: color ?? Theme.of(context).cardColor,
         border: border ??

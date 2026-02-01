@@ -10,8 +10,8 @@ import 'Author.dart';
 import 'Character.dart';
 import 'Date.dart';
 import 'Manga.dart';
-import 'User.dart';
 import 'Review.dart';
+import 'User.dart';
 
 part 'Generated/Media.g.dart';
 
@@ -22,9 +22,9 @@ class Media {
   final Anime? anime;
   final Manga? manga;
 
-  final String? name;
-  final String? nameRomaji;
-  final String? userPreferredName;
+  String? name;
+  String? nameRomaji;
+  String? userPreferredName;
 
   String? cover;
   String? banner;
@@ -79,8 +79,8 @@ class Media {
     this.manga,
     required this.id,
     this.name,
-    required this.nameRomaji,
-    required this.userPreferredName,
+    this.nameRomaji,
+    this.userPreferredName,
     this.cover,
     this.banner,
     this.relation,
@@ -148,8 +148,7 @@ class Media {
 
     return Media(
       id: "0",
-      nameRomaji: '',
-      userPreferredName: 'dsfgdgf',
+      userPreferredName: 'Media',
       genres: ["ergsdf", "fsdf", "ergsdf", "fsdf"],
       status: "who knows",
       isAdult: false,

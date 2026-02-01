@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../Model/SearchResults.dart';
-import '../../../Widgets/CustomBottomDialog.dart';
+import '../../../Widgets/Components/CustomBottomDialog.dart';
 
 abstract class BaseSearchScreen extends GetxController {
   var page = 1;

@@ -12,7 +12,7 @@ class PrefName {
       Pref('customColor', 4280391411, PrefLocation.THEME);
   static const useCustomColor =
       Pref('useCustomColor', false, PrefLocation.THEME);
-
+  static const cardSize = Pref('cardSize', 1.0, PrefLocation.THEME);
   static const showYtButton = Pref('showYtButton', true, PrefLocation.THEME);
   static const autoUpdateExtensions =
       Pref('autoUpdateExtensions', true, PrefLocation.THEME);

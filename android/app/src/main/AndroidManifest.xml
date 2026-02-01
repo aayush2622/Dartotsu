@@ -1,24 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- duh -->
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- to shared external storage for managing app logs and files outside the app sandbox -->
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
-    <uses-permission android:name="android.permission.REQUEST_DELETE_PACKAGES" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <!-- to play local video/audio in player-->
     <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
     <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
 
-
+    <!-- to manage android extensions-->
     <uses-permission
         android:name="android.permission.QUERY_ALL_PACKAGES"
         tools:ignore="QueryAllPackagesPermission" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <uses-permission android:name="android.permission.UPDATE_PACKAGES_WITHOUT_USER_ACTION" />
+    <uses-permission android:name="android.permission.REQUEST_DELETE_PACKAGES" />
 
-    <uses-feature android:name="android.software.leanback" android:required="false" />
-    <uses-feature android:name="android.hardware.touchscreen" android:required="false" />
+    <uses-feature
+        android:name="android.software.leanback"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.touchscreen"
+        android:required="false" />
+
     <application
         android:name="${applicationName}"
         android:banner="@mipmap/ic_banner_foreground"
@@ -44,48 +54,73 @@
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
-                <category android:name="android.intent.category.LEANBACK_LAUNCHER"/>
+                <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
             </intent-filter>
 
             <intent-filter android:label="Add Repo">
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="dar" android:host="add-repo" />
+
+                <data
+                    android:host="add-repo"
+                    android:scheme="dar" />
             </intent-filter>
 
             <intent-filter android:label="Add Repo">
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="anymex" android:host="add-repo" />
+
+                <data
+                    android:host="add-repo"
+                    android:scheme="anymex" />
             </intent-filter>
 
             <intent-filter android:label="Add Repo">
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="sugoireads" android:host="add-repo" />
+
+                <data
+                    android:host="add-repo"
+                    android:scheme="sugoireads" />
             </intent-filter>
 
             <intent-filter android:label="Add Repo">
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="mangayomi" android:host="add-repo" />
+
+                <data
+                    android:host="add-repo"
+                    android:scheme="mangayomi" />
             </intent-filter>
             <intent-filter android:label="Add Repo">
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="aniyomi" android:host="add-repo" />
+
+                <data
+                    android:host="add-repo"
+                    android:scheme="aniyomi" />
             </intent-filter>
             <intent-filter android:label="Add Repo">
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="tachiyomi" android:host="add-repo" />
+
+                <data
+                    android:host="add-repo"
+                    android:scheme="tachiyomi" />
             </intent-filter>
 
             <intent-filter>
@@ -112,18 +147,27 @@
             android:exported="true">
             <intent-filter android:label="Login for Dartotsu">
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data android:scheme="dantotsu" />
             </intent-filter>
+
             <intent-filter android:label="Login for Dartotsu">
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data android:scheme="dartotsu" />
             </intent-filter>
+
         </activity>
-        <meta-data android:name="flutter_deeplinking_enabled" android:value="false" />
+
+        <meta-data
+            android:name="flutter_deeplinking_enabled"
+            android:value="false" />
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />

@@ -18,15 +18,13 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   async: ^2.13.0
-  firebase_core: ^4.3.0
-  firebase_crashlytics: ^5.0.6
+  firebase_core: ^4.4.0
+  firebase_crashlytics: ^5.0.7
   # State Management
   get: ^4.7.3
 
   # Networking
   rhttp: ^0.15.0
-  web_socket_channel: ^3.0.3
-  http_interceptor: ^2.0.0
 
   # JSON Serialization
   json_annotation: ^4.9.0
@@ -37,8 +35,6 @@ dependencies:
   path_provider: ^2.1.5
   path: ^1.9.1
   cryptography: ^2.9.0
-  crypto: ^3.0.7
-
   # UI Components
   introduction_screen: ^4.0.0
   flutter_animate: ^4.5.2
@@ -54,10 +50,11 @@ dependencies:
   markdown_widget: ^2.3.2+8
   super_sliver_list: ^0.4.1
   dpad: ^2.0.2
+  dynamic_color: ^1.8.1
 
   # UI Enhancements
   blur: ^4.0.2
-  expandable_page_view: ^1.2.0
+  expandable_page_view: ^1.2.1
   carousel_slider: ^5.1.1
   flutter_staggered_grid_view: ^0.7.0
   scrollable_positioned_list: ^0.3.8
@@ -90,29 +87,32 @@ dependencies:
   screen_brightness: ^2.1.7
   app_links: ^7.0.0
   win32: ^5.15.0
-  ffi: ^2.1.4
+  ffi: ^2.1.5
   install_plugin: ^2.1.0
-  flutter_discord_rpc: ^1.1.0
-  # Miscellaneous
+  flutter_discord_rpc_fork:
+    git:
+      url: https://github.com/Schnitzel5/flutter-discord-rpc.git
+      ref: main
 
+  # Miscellaneous
   receive_sharing_intent: ^1.8.1
   device_info_plus: ^12.3.0
   package_info_plus: ^9.0.0
-  file_picker: ^10.3.8
+  file_picker: ^10.3.10
   share_plus: ^12.0.1
   url_launcher: ^6.3.2
-  dynamic_color: ^1.8.1
   json_path: ^0.9.0
   grouped_list: ^6.0.0
   fuzzywuzzy: ^1.2.0
+  string_similarity: ^2.1.1
   collection: ^1.19.1
-  flutter_web_auth_2: ^5.0.0-alpha.0
+  flutter_web_auth_2: ^5.0.1
   dartotsu_extension_bridge:
     #path: ../DartotsuExtensionBridge
     git:
       url: https://github.com/aayush2622/DartotsuExtensionBridge.git
       ref: master
-  string_similarity: ^2.1.1
+
 
 # Development dependencies
 dev_dependencies:
@@ -130,7 +130,7 @@ dev_dependencies:
 dependency_overrides:
   collection: ^1.19.1
   desktop_webview_window: ^0.2.3
-
+  
 
 flutter:
   uses-material-design: true

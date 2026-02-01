@@ -4,14 +4,14 @@ import 'dart:math';
 
 import 'package:dartotsu/Functions/Function.dart';
 import 'package:dartotsu/Preferences/IsarDataClasses/MediaSettings/MediaSettings.dart';
-import 'package:dartotsu/Widgets/CustomBottomDialog.dart';
+import 'package:dartotsu/Widgets/Components/CustomBottomDialog.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
 import '../../Adaptor/Settings/SettingsAdaptor.dart';
-import '../../DataClass/Anime.dart';
 import '../../Core/Services/Model/Media.dart';
+import '../../DataClass/Anime.dart';
 import '../../DataClass/Setting.dart';
 import '../../Preferences/IsarDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
 import '../../Preferences/PrefManager.dart';

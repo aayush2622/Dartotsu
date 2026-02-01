@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
-import '../../Widgets/CustomBottomDialog.dart';
-import '../../Widgets/LoadSvg.dart';
+import '../../Widgets/Components/CustomBottomDialog.dart';
+import '../../Widgets/Components/LoadSvg.dart';
 import 'MediaService.dart';
 
 void serviceSwitcher(BuildContext context) {

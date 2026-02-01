@@ -21,19 +21,16 @@ import 'Api/Updater/AppUpdater.dart';
 import 'Core/Analytics/AnalyticsManager.dart';
 import 'Core/NetworkManager/NetworkManager.dart';
 import 'Core/Preferences/PrefManager.dart';
-import 'Core/Services/MediaService.dart';
 import 'Core/ThemeManager/ThemeController.dart';
 import 'Core/ThemeManager/ThemeManager.dart';
 import 'DI.dart';
 import 'Logger.dart';
 import 'Screen/Error/ErrorScreen.dart';
+import 'Screen/MainScreen.dart';
 import 'Screen/Onboarding/OnboardingScreen.dart';
-import 'Utils/Extensions/ContextExtensions.dart';
-import 'Utils/Extensions/IntExtensions.dart';
 import 'Utils/Functions/AppShortcuts.dart';
 import 'Utils/Functions/DeepLink.dart';
 import 'Utils/Functions/GetXFunctions.dart';
-import 'Widgets/CachedNetworkImage.dart';
 import 'l10n/app_localizations.dart';
 
 // webview
@@ -48,7 +45,7 @@ import 'l10n/app_localizations.dart';
 // setup firebase
 
 void main(List<String> args) async {
-  runZonedGuarded(
+  await runZonedGuarded(
     () async {
       WidgetsFlutterBinding.ensureInitialized();
       FlutterError.onError = (details) {
@@ -70,13 +67,12 @@ void main(List<String> args) async {
       };
       if (Platform.isLinux && runWebViewTitleBarWidget(args)) return;
       Get.log = (text, {isError = false}) => debugPrint(text);
-
       await init();
       runApp(const MyApp());
     },
     (error, stackTrace) {
       debugPrint('Uncaught error: $error\n$stackTrace');
-      find<AnalyticsManager>().recordError(error, stackTrace);
+      tryFind<AnalyticsManager>()?.recordError(error, stackTrace);
       handleError(error, stackTrace, softCrash: true);
     },
     zoneSpecification: ZoneSpecification(
@@ -111,7 +107,13 @@ Future<void> _postInit() async {
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
     await WindowManager.instance.ensureInitialized();
   }
-
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      systemNavigationBarColor: Colors.transparent,
+      systemNavigationBarDividerColor: Colors.transparent,
+    ),
+  );
   unawaited(AppUpdater().checkForUpdate());
 }
 
@@ -131,13 +133,6 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     _focusNode = FocusNode();
-    SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent,
-        systemNavigationBarColor: Colors.transparent,
-        systemNavigationBarDividerColor: Colors.transparent,
-      ),
-    );
   }
 
   @override
@@ -195,7 +190,7 @@ class _MyAppState extends State<MyApp> {
                         : ThemeMode.light,
                     theme: getTheme(lightDynamic, theme),
                     darkTheme: getTheme(darkDynamic, theme),
-                    home: loadCustomData("initialLoaded", defaultValue: false)!
+                    home: !loadCustomData("initialLoaded", defaultValue: false)!
                         ? const MainScreen()
                         : const OnboardingScreen(),
                   );
@@ -205,144 +200,6 @@ class _MyAppState extends State<MyApp> {
           ),
         ),
       ),
-    );
-  }
-}
-
-class MainScreen extends StatefulWidget {
-  const MainScreen({super.key});
-
-  @override
-  MainScreenState createState() => MainScreenState();
-}
-
-//late FloatingBottomNavBar navbar;
-
-class MainScreenState extends State<MainScreen> {
-  final _selectedIndex = 1.obs;
-
-  //void _onTabSelected(int index) => _selectedIndex.value = index;
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  Widget get _navbar {
-    return const SizedBox();
-    /* return Obx(() {
-      navbar = context.isPhone
-          ? FloatingBottomNavBarMobile(
-              selectedIndex: _selectedIndex.value,
-              onTabSelected: _onTabSelected,
-            )
-          : FloatingBottomNavBarDesktop(
-              selectedIndex: _selectedIndex.value,
-              onTabSelected: _onTabSelected,
-            );
-      return navbar;
-    });*/
-  }
-
-  Widget _buildBackground(MediaService service) {
-    final themeController = find<ThemeController>();
-    final useGlassMode = themeController.useGlassMode.value;
-    if (!useGlassMode) return const SizedBox.shrink();
-    final scheme = context.colorScheme;
-    return Positioned.fill(
-      child: Stack(
-        children: [
-          Positioned.fill(
-            child: RepaintBoundary(
-              child: ImageFiltered(
-                imageFilter: ImageFilter.blur(sigmaX: 4.0, sigmaY: 4.0),
-                child: Opacity(
-                  opacity: 0.8,
-                  child: Obx(
-                    () => cachedNetworkImage(
-                      imageUrl: service.data.bg.value,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-          Positioned.fill(
-            child: Align(
-              alignment: Alignment.bottomCenter,
-              child: FractionallySizedBox(
-                heightFactor: 0.55,
-                child: Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [Colors.transparent, scheme.surface],
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildBody(MediaService service) {
-    return Obx(() {
-      switch (_selectedIndex.value) {
-        case 0:
-          return const SizedBox();
-        case 1:
-          return !service.data.token.value.isNotEmpty
-              ? const Center(child: Text("Alive"))
-              : const SizedBox();
-        case 2:
-          return const SizedBox();
-        default:
-          return const SizedBox();
-      }
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final serviceController = find<MediaServiceController>();
-    return Obx(
-      () {
-        final service = serviceController.currentService.value;
-        return Scaffold(
-          body: Stack(
-            children: [
-              _buildBackground(service),
-              Row(
-                children: [
-                  if (!context.isPhone) SizedBox(width: 100, child: _navbar),
-                  Expanded(child: _buildBody(service)),
-                ],
-              ),
-              if (context.isPhone) _navbar,
-              Positioned(
-                bottom: 92.bottomBar(),
-                right: 12,
-                child: GestureDetector(
-                  onLongPress: () =>
-                      service.searchScreen?.onSearchIconLongClick(context),
-                  onTap: () => service.searchScreen?.onSearchIconClick(context),
-                  child: ThemedContainer(
-                    context: context,
-                    borderRadius: BorderRadius.circular(16.0),
-                    padding: const EdgeInsets.all(4.0),
-                    child: const Icon(Icons.search),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        );
-      },
     );
   }
 }

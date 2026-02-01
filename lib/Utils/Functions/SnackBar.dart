@@ -1,4 +1,3 @@
-export '../Functions/SnackBar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -8,11 +7,14 @@ import '../../Core/ThemeManager/ThemeManager.dart';
 import '../Extensions/ContextExtensions.dart';
 import 'CopyToClip.dart';
 
+export '../Functions/SnackBar.dart';
+
 Future<void> snackString(
   String? message, {
   String? clipboard,
   BuildContext? c,
-  IconData icon = Icons.info_rounded,
+  IconData? icon,
+  bool simple = false,
 }) async {
   final context = c ?? Get.context;
   if (context == null || message == null || message.isEmpty) return;
@@ -35,33 +37,57 @@ Future<void> snackString(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,
-        onTap: scaffold.hideCurrentSnackBar,
-        onLongPress: () => copyToClipboard(clipboard ?? message),
+        onLongPress: () =>
+            !simple ? copyToClipboard(clipboard ?? message) : null,
         child: Row(
           children: [
-            Icon(
-              icon,
-              size: 20,
-              color: theme.colorScheme.primary,
-            ),
+            icon == null
+                ? ClipOval(
+                    child: Image.asset(
+                      'assets/images/logo.png',
+                      width: 20,
+                      height: 20,
+                      fit: BoxFit.cover,
+                    ),
+                  )
+                : Icon(
+                    icon,
+                    size: 20,
+                    color: theme.colorScheme.primary,
+                  ),
             const SizedBox(width: 12),
             Expanded(
               child: Text(
                 message,
                 maxLines: 3,
                 overflow: TextOverflow.ellipsis,
-                style: ContextExtensions(context)
-                    .textTheme
-                    .labelLarge
-                    ?.copyWith(height: 1.25),
+                style: context.textTheme.bodyLarge?.copyWith(height: 1.25),
               ),
             ),
             const SizedBox(width: 8),
-            Icon(
-              Icons.close_rounded,
-              size: 18,
-              color: theme.colorScheme.onSurface.withOpacity(0.5),
-            ),
+            if (!simple) ...[
+              IconButton(
+                constraints: const BoxConstraints(),
+                icon: Icon(
+                  Icons.copy_rounded,
+                  size: 18,
+                  color: theme.colorScheme.onSurface.withOpacity(0.5),
+                ),
+                onPressed: () {
+                  scaffold.hideCurrentSnackBar();
+                  copyToClipboard(clipboard ?? message);
+                },
+              ),
+              IconButton(
+                constraints: const BoxConstraints(),
+                onPressed: scaffold.hideCurrentSnackBar,
+                icon: Icon(
+                  Icons.close_rounded,
+                  size: 18,
+                  color: theme.colorScheme.onSurface.withOpacity(0.5),
+                ),
+              )
+            ],
           ],
         ),
       ),

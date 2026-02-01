@@ -14,7 +14,7 @@ android {
     namespace = "ani.aayush262.dartotsu"
 
     compileSdk = flutter.compileSdkVersion
-    ndkVersion =flutter.ndkVersion
+    ndkVersion = flutter.ndkVersion
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -22,6 +22,7 @@ android {
     }
 
     kotlin {
+        javaToolchains
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_17)
         }
@@ -50,19 +51,19 @@ android {
         versionCode = flutter.versionCode
         versionName = flutter.versionName
     }
-
+    val keystoreFile = rootProject.file("key.properties")
+    val hasKeystore = keystoreFile.exists()
     signingConfigs {
-        create("release") {
-            val keystoreProperties = Properties()
-            val keystoreFile = rootProject.file("key.properties")
-            if (keystoreFile.exists()) {
-                keystoreProperties.load(FileInputStream(keystoreFile))
+        if (hasKeystore) {
+            create("release") {
+                val props = Properties().apply {
+                    load(FileInputStream(keystoreFile))
+                }
+                keyAlias = props["keyAlias"] as String
+                keyPassword = props["keyPassword"] as String
+                storeFile = file(props["storeFile"] as String)
+                storePassword = props["storePassword"] as String
             }
-
-            keyAlias = keystoreProperties["keyAlias"] as String?
-            keyPassword = keystoreProperties["keyPassword"] as String?
-            storeFile = keystoreProperties["storeFile"]?.let { file(it as String) }
-            storePassword = keystoreProperties["storePassword"] as String?
         }
     }
 
@@ -74,11 +75,23 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+
+            if (!hasKeystore) {
+                throw GradleException(
+                    "Release build requires key.properties"
+                )
+            }
+
             signingConfig = signingConfigs.getByName("release")
+
         }
 
         getByName("debug") {
-            signingConfig = signingConfigs.getByName("release")
+            signingConfig = if (hasKeystore) {
+                signingConfigs.getByName("release")
+            } else {
+                signingConfigs.getByName("debug")
+            }
         }
     }
 }

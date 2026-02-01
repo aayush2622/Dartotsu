@@ -3,17 +3,17 @@ import 'dart:io';
 
 import 'package:dartotsu/Functions/Function.dart';
 import 'package:dartotsu/Preferences/PrefManager.dart';
-import 'package:dartotsu/Widgets/CustomBottomDialog.dart';
+import 'package:dartotsu/Widgets/Components/CustomBottomDialog.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:install_plugin/install_plugin.dart';
 import 'package:markdown_widget/config/configs.dart';
 import 'package:markdown_widget/widget/blocks/leaf/link.dart';
 import 'package:markdown_widget/widget/markdown.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
-import 'package:install_plugin/install_plugin.dart';
 
 class AppUpdater {
   final mainRepo = 'aayush2622/Dartotsu';

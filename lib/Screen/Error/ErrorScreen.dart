@@ -1,14 +1,15 @@
 import 'dart:io';
 
-import 'package:get/get.dart';
-import '../../Widgets/ScrollConfig.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:get/get.dart';
+
+import '../../Core/Preferences/StorageManager.dart';
+import '../../Logger.dart';
 import '../../Utils/Function.dart';
 import '../../Utils/Functions/CopyToClip.dart';
-import '../../Core/Preferences/StorageManager.dart';
-import '../../Widgets/CustomElevatedButton.dart';
-import '../../Logger.dart';
+import '../../Widgets/Components/CustomElevatedButton.dart';
+import '../../Widgets/Components/ScrollConfig.dart';
 
 class ErrorScreen extends StatefulWidget {
   final String error;

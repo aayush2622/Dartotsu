@@ -1,4 +1,4 @@
-import 'package:dartotsu/Widgets/AlertDialogBuilder.dart';
+import 'package:dartotsu/Widgets/Components/AlertDialogBuilder.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 class SourcePreferenceScreen extends StatefulWidget {
   final Source source;
   final List<SourcePreference> preference;
+
   const SourcePreferenceScreen(
       {super.key, required this.source, required this.preference});
 
@@ -15,6 +16,7 @@ class SourcePreferenceScreen extends StatefulWidget {
 
 class _SourcePreferenceScreenState extends State<SourcePreferenceScreen> {
   Rx<List<SourcePreference>?> preference = Rx(null);
+
   @override
   void initState() {
     super.initState();
