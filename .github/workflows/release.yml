@@ -390,11 +390,28 @@ jobs:
             echo -e "$CHORES" >> CHANGELOG.md
           fi
 
+      - name: Generate Fastlane changelog (IzzyOnDroid)
+        run: |
+          mkdir -p fastlane/metadata/android/en-US/changelogs
+
+          awk '/^### 🎉 New Features/{flag=1; next}/^### 🔧 Refactors/{flag=0}flag' CHANGELOG.md \
+            | sed -E 's/!\[[^]]*\]\([^)]*\)//g; s/\[[^]]*\]\([^)]*\)//g; s/^\*[[:space:]]+/-/; s/^\s+//; /^$/d' \
+            > fastlane/metadata/android/en-US/changelogs/default.txt || true
+
+          echo "Fastlane changelog generated"
+
+          # Display changelog for debugging
+          echo "=== CHANGELOG.md ==="
+          cat CHANGELOG.md
+          echo ""
+          echo "=== Fastlane changelog ==="
+          cat fastlane/metadata/android/en-US/changelogs/default.txt || echo "No fastlane changelog"
+
       - name: Commit and push changelog
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
-          git add CHANGELOG.md
+          git add CHANGELOG.md fastlane/metadata/android/en-US/changelogs/default.txt
           git commit -m "Update changelog for version ${{ github.ref_name }}"
           git push origin HEAD:main
 
