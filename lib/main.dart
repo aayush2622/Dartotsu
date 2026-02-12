@@ -3,7 +3,6 @@ import 'dart:io';
 import 'dart:ui';
 
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
-import 'package:desktop_webview_window/desktop_webview_window.dart';
 import 'package:dpad/dpad.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/foundation.dart';
@@ -65,7 +64,6 @@ void main(List<String> args) async {
           softCrash: true,
         );
       };
-      if (Platform.isLinux && runWebViewTitleBarWidget(args)) return;
       Get.log = (text, {isError = false}) => debugPrint(text);
       await init();
       runApp(const MyApp());

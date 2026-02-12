@@ -9,13 +9,13 @@ import 'CopyToClip.dart';
 
 export '../Functions/SnackBar.dart';
 
-Future<void> snackString(
+void snackString(
   String? message, {
   String? clipboard,
   BuildContext? c,
   IconData? icon,
   bool simple = false,
-}) async {
+}) {
   final context = c ?? Get.context;
   if (context == null || message == null || message.isEmpty) return;
 

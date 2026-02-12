@@ -1,15 +1,19 @@
+import 'dart:async';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide ContextExtensionss;
 
+import '../Core/NetworkManager/NetworkManager.dart';
 import '../Core/Services/MediaService.dart';
 import '../Core/ThemeManager/ThemeController.dart';
 import '../Utils/Extensions/ContextExtensions.dart';
 import '../Utils/Functions/GetXFunctions.dart';
+import '../Utils/Functions/NavigateToScreen.dart';
 import '../Widgets/Components/CachedNetworkImage.dart';
 import '../Widgets/Components/ScrollConfig.dart';
 import '../Widgets/Sections/Media/MediaSection.dart';
+import 'Webview/WebView.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -136,9 +140,21 @@ class MainScreenState extends State<MainScreen> {
           context,
           children: [
             SliverToBoxAdapter(
-              child: MediaSection(
-                data: MediaSectionData.skeleton(0),
-              ),
+              child: TextButton(
+                  onLongPress: () async {
+                    var t = await find<NetworkManager>()
+                        .get("https://anilist.co/home");
+                    print(t.data);
+                  },
+                  onPressed: () async {
+                    unawaited(
+                      navigateToPage(
+                        context,
+                        const WebView(url: 'https://anilist.co/home'),
+                      ),
+                    );
+                  },
+                  child: const Text('Login')),
             ),
             SliverToBoxAdapter(
               child: MediaSection(

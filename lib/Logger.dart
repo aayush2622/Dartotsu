@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+
 import 'package:flutter/services.dart';
 
 import 'Core/Preferences/StorageManager.dart';
@@ -43,8 +44,8 @@ class Logger {
 
     _initialized = true;
 
-    NativeLogger.startLogStream();
-    NativeLogger.importJavaCrashLogs();
+    unawaited(NativeLogger.startLogStream());
+    unawaited(NativeLogger.importJavaCrashLogs());
   }
 
   static void log(

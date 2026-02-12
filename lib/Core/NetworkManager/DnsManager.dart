@@ -6,12 +6,13 @@ import 'package:rhttp/rhttp.dart';
 class DnsManager {
   static Future<List<String>> resolveWithDoh(
     String host,
+    String dnsUrl,
   ) async {
     final query = _buildDnsQuery(host);
 
     final res = await Rhttp.requestBytes(
       method: HttpMethod.post,
-      url: DohProvider.cloudflare.url,
+      url: dnsUrl,
       headers: const HttpHeaders.map({
         HttpHeaderName.contentType: 'application/dns-message',
         HttpHeaderName.accept: 'application/dns-message',

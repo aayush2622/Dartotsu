@@ -20,18 +20,19 @@ dependencies:
   async: ^2.13.0
   firebase_core: ^4.4.0
   firebase_crashlytics: ^5.0.7
+  firebase_analytics: ^12.1.2
   # State Management
   get: ^4.7.3
 
   # Networking
-  rhttp: ^0.15.0
+  rhttp: ^0.15.1
 
   # JSON Serialization
   json_annotation: ^4.9.0
 
   # Local Storage
-  isar_community: ^3.3.0-dev.2
-  isar_community_flutter_libs: ^3.3.0-dev.2
+  isar_community: ^3.3.0
+  isar_community_flutter_libs: ^3.3.0
   path_provider: ^2.1.5
   path: ^1.9.1
   cryptography: ^2.9.0
@@ -55,7 +56,7 @@ dependencies:
   # UI Enhancements
   blur: ^4.0.2
   expandable_page_view: ^1.2.1
-  carousel_slider: ^5.1.1
+  carousel_slider: ^5.1.2
   flutter_staggered_grid_view: ^0.7.0
   scrollable_positioned_list: ^0.3.8
   html: ^0.15.6
@@ -76,12 +77,8 @@ dependencies:
       path: libs/universal/media_kit_libs_video
   window_manager: ^0.5.1
   permission_handler: ^12.0.1
-  flutter_inappwebview: ^6.2.0-beta.2
-  desktop_webview_window:
-    git:
-      url: https://github.com/kodjodevf/desktop_webview_window.git
-      path: packages/desktop_webview_window
-      ref: main
+  flutter_inappwebview: ^6.2.0-beta.3
+
   wakelock_plus: ^1.4.0
   volume_controller: ^3.4.1
   screen_brightness: ^2.1.7
@@ -106,12 +103,17 @@ dependencies:
   fuzzywuzzy: ^1.2.0
   string_similarity: ^2.1.1
   collection: ^1.19.1
-  flutter_web_auth_2: ^5.0.1
+  flutter_web_auth_2:
+    path : ../flutter_web_auth/flutter_web_auth_2
+    #git:
+      #url: https://github.com/aayush2622/flutter_web_auth.git
+      #ref: master
+      #path: flutter_web_auth_2
   dartotsu_extension_bridge:
-    #path: ../DartotsuExtensionBridge
-    git:
-      url: https://github.com/aayush2622/DartotsuExtensionBridge.git
-      ref: master
+    path: ../DartotsuExtensionBridge
+      #git:
+      #url: https://github.com/aayush2622/DartotsuExtensionBridge.git
+    #ref: master
 
 
 # Development dependencies
@@ -121,16 +123,18 @@ dev_dependencies:
   flutter_launcher_icons: ^0.14.4
   flutter_lints: ^6.0.0
 
-  # Code Generation flutter pub run build_runner build
-  isar_community_generator: ^3.3.0-dev.2
+  # Code Generation dart run build_runner build
+  isar_community_generator:
+    git:
+      url: https://github.com/kodjodevf/isar-community-generator.git
+      ref: v3
   json_serializable: ^6.11.2
-  build_runner: ^2.7.1
+  build_runner: ^2.11.0
   inno_bundle: ^0.11.2
 
 dependency_overrides:
   collection: ^1.19.1
-  desktop_webview_window: ^0.2.3
-  
+
 
 flutter:
   uses-material-design: true

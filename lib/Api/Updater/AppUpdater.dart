@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
@@ -81,7 +82,7 @@ class AppUpdater {
       return;
     }
 
-    _showUpdateBottomSheet(data);
+    unawaited(_showUpdateBottomSheet(data));
   }
 
   Future<void> _showUpdateBottomSheet(dynamic data) async {
@@ -223,9 +224,9 @@ class AppUpdater {
           if (downloadUrl == null) return;
 
           if (Platform.isAndroid) {
-            _downloadAndInstallApk(downloadUrl);
+            unawaited(_downloadAndInstallApk(downloadUrl));
           } else {
-            openLinkInBrowser(downloadUrl);
+            unawaited(openLinkInBrowser(downloadUrl));
             snackString("Check your browser");
           }
         },

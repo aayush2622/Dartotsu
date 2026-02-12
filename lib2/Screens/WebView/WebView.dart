@@ -89,6 +89,7 @@ class _MangaWebViewState extends State<MangaWebView> {
           }
         },
       );
+
       await browser.openUrlRequest(
         urlRequest: URLRequest(url: WebUri(widget.url)),
         settings: InAppBrowserClassSettings(

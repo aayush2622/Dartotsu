@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:rhttp/rhttp.dart';
 
+import 'AndroidNetwork.dart';
 import 'CookieManager.dart';
 import 'DnsManager.dart';
 import 'LogInterceptor.dart';
@@ -20,41 +21,47 @@ class NetworkManager extends GetxController {
       RhttpCompatibleClient.of(_client);
 
   @override
-  onInit() {
+  void onInit() {
     _initClient();
     super.onInit();
   }
 
+  final cookieManager = CookieManager();
   RhttpClient _initClient() {
     try {
-      _client = RhttpClient.createSync(
-        interceptors: [
-          LogInterceptor(),
-          CookieManager(),
-        ],
-        settings: ClientSettings(
-          userAgent: _userAgent,
-          throwOnStatusCode: false,
-          tlsSettings: const TlsSettings(
-            trustRootCertificates: true,
-          ),
-          timeoutSettings: const TimeoutSettings(
-            connectTimeout: Duration(seconds: 15),
-            timeout: Duration(seconds: 30),
-          ),
-          dnsSettings: DnsSettings.dynamic(
-            resolver: (host) async {
-              try {
-                return await DnsManager.resolveWithDoh(host);
-              } catch (e) {
-                debugPrint('DoH failed for $host → fallback: $e');
-                final res = await InternetAddress.lookup(host);
-                return res.map((e) => e.address).toList();
-              }
-            },
-          ),
+      var dns = DohProvider.cloudflare.url;
+
+      var interceptors = [LogInterceptor(), cookieManager];
+
+      var clientSettings = ClientSettings(
+        userAgent: _userAgent,
+        throwOnStatusCode: false,
+        tlsSettings: const TlsSettings(
+          trustRootCertificates: true,
+        ),
+        timeoutSettings: const TimeoutSettings(
+          connectTimeout: Duration(seconds: 15),
+          timeout: Duration(seconds: 30),
+        ),
+        dnsSettings: DnsSettings.dynamic(
+          resolver: (host) async {
+            try {
+              return await DnsManager.resolveWithDoh(host, dns);
+            } catch (e) {
+              debugPrint('DoH failed for $host → fallback: $e');
+              final res = await InternetAddress.lookup(host);
+              return res.map((e) => e.address).toList();
+            }
+          },
         ),
       );
+
+      _client = RhttpClient.createSync(
+        interceptors: interceptors,
+        settings: clientSettings,
+      );
+
+      AndroidNetwork.initialize(dns, '');
       return _client;
     } catch (_) {
       rethrow;

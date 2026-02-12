@@ -30,7 +30,7 @@ CustomBottomDialog login(BuildContext context) {
           final token = RegExp(r'(?<=access_token=).+(?=&token_type)')
               .firstMatch(response.toString())
               ?.group(0);
-          if (token != null) Anilist.saveToken(token);
+          if (token != null) await Anilist.saveToken(token);
         },
         icon: 'assets/svg/anilist.svg',
         label: 'Login from Browser',
@@ -40,7 +40,8 @@ CustomBottomDialog login(BuildContext context) {
         context,
         onPressed: () {
           openLinkInBrowser(
-              'https://anilist.co/api/v2/oauth/authorize?client_id=21003&response_type=token');
+            'https://anilist.co/api/v2/oauth/authorize?client_id=21003&response_type=token',
+          );
           var token = '';
           AlertDialogBuilder(context)
             ..setTitle('Login with token')
