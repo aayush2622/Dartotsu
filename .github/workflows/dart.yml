@@ -304,6 +304,8 @@ jobs:
 
   build_linux:
     runs-on: ubuntu-latest
+    container:
+      image: archlinux:base-devel
     if: |
       (github.event_name == 'push' && (contains(github.event.head_commit.message, '[build.linux]') || contains(github.event.head_commit.message, '[build.all]') || contains(github.event.head_commit.message, '[build]'))) ||
       (github.event_name == 'workflow_dispatch' && (inputs.build_targets == 'linux' || inputs.build_targets == 'all'))
@@ -314,15 +316,29 @@ jobs:
     outputs:
       zip_link: ${{steps.gdriveUpload.outputs.web-content-link}}
     steps:
+      - name: Install pre dependencies
+        run: |
+          pacman -Syu --noconfirm
+          pacman -S --noconfirm jq git zip
+
+      - name: Trust all git repositories
+        run: |
+          git config --global --add safe.directory '*'
+      
       - *checkout
       - *prepare_flutter
       - *setup_flutter
 
+      - name: Install minimal stable with clippy and rustfmt
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          components: rustfmt, clippy
+
       - name: Install system dependencies
         run: |
-          sudo apt-get update -y
-          sudo apt-get install -y ninja-build libgtk-3-dev webkit2gtk-4.1 libmpv-dev pkg-config fuse
-          sudo apt-get install -y  libwpewebkit-1.0-dev
+         pacman -S --noconfirm gtk3 libsecret wpewebkit clang cmake ninja fuse mpv
 
       - *cache_flutter_normal
       - *cache_flutter_clean
