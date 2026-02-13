@@ -196,7 +196,7 @@ jobs:
         id: gdriveUpload_arm64
         uses: hoatruongdev09/google-drive-file-upload-github-action@v1.1
         with:
-          file-path: build/app/outputs/flutter-apk/Dartotsu_Android_arm64-v8a_main.apk
+          file-path: build/app/outputs/flutter-apk/Dartotsu_Android_arm64-v8a_${{github.ref_name}}.apk
           upload-name: Dartotsu_Android_arm64-v8a_${{github.ref_name}}.apk
           upload-to-folder-id: ${{secrets.GOOGLE_FOLDER_ANDROID}}
           service-account-json: "${{secrets.GOOGLE_KEY}}"
@@ -205,7 +205,7 @@ jobs:
         id: gdriveUpload_armeabi
         uses: hoatruongdev09/google-drive-file-upload-github-action@v1.1
         with:
-          file-path: build/app/outputs/flutter-apk/Dartotsu_Android_armeabi-v7a_main.apk
+          file-path: build/app/outputs/flutter-apk/Dartotsu_Android_armeabi-v7a_${{github.ref_name}}.apk
           upload-name: Dartotsu_Android_armeabi-v7a_${{github.ref_name}}.apk
           upload-to-folder-id: ${{secrets.GOOGLE_FOLDER_ANDROID}}
           service-account-json: "${{secrets.GOOGLE_KEY}}"
@@ -214,7 +214,7 @@ jobs:
         id: gdriveUpload_x86
         uses: hoatruongdev09/google-drive-file-upload-github-action@v1.1
         with:
-          file-path: build/app/outputs/flutter-apk/Dartotsu_Android_x86_64_main.apk
+          file-path: build/app/outputs/flutter-apk/Dartotsu_Android_x86_64_${{github.ref_name}}.apk
           upload-name: Dartotsu_Android_x86_64_${{github.ref_name}}.apk
           upload-to-folder-id: ${{secrets.GOOGLE_FOLDER_ANDROID}}
           service-account-json: "${{secrets.GOOGLE_KEY}}"
@@ -224,7 +224,7 @@ jobs:
         uses: hoatruongdev09/google-drive-file-upload-github-action@v1.1
         with:
           file-path: build/app/outputs/flutter-apk/Dantotsu_Android_universal_${{github.ref_name}}.apk
-          upload-name: Dartotsu.apk
+          upload-name: Dartotsu_${{github.ref_name}}.apk
           upload-to-folder-id: ${{secrets.GOOGLE_FOLDER_ANDROID}}
           service-account-json: "${{secrets.GOOGLE_KEY}}"
           overrwrite: true
