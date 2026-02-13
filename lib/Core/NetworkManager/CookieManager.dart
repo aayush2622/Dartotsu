@@ -41,9 +41,11 @@ class CookieManager extends Interceptor {
         ),
       );
 
-      all.forEach((_, cookies) {
-        cookies.removeWhere((_, c) => c.isExpired);
-      });
+      all.forEach(
+        (_, cookies) {
+          cookies.removeWhere((_, c) => c.isExpired);
+        },
+      );
 
       _cache = all;
       _lastLoad = now;
@@ -61,20 +63,24 @@ class CookieManager extends Interceptor {
 
     final normalizedHost = normalizeDomain(uri.host);
 
-    final cookies = all.entries.expand((entry) {
-      final domain = entry.key;
-      final matches =
-          normalizedHost == domain || normalizedHost.endsWith('.$domain');
+    final cookies = all.entries.expand(
+      (entry) {
+        final domain = entry.key;
+        final matches =
+            normalizedHost == domain || normalizedHost.endsWith('.$domain');
 
-      if (!matches) return const <StoredCookie>[];
+        if (!matches) return const <StoredCookie>[];
 
-      return entry.value.values.where((c) {
-        if (c.expires != null && c.expires!.isBefore(now)) return false;
-        if (!uri.path.startsWith(c.path)) return false;
-        if (c.secure && uri.scheme != 'https') return false;
-        return true;
-      });
-    }).toList();
+        return entry.value.values.where(
+          (c) {
+            if (c.expires != null && c.expires!.isBefore(now)) return false;
+            if (!uri.path.startsWith(c.path)) return false;
+            if (c.secure && uri.scheme != 'https') return false;
+            return true;
+          },
+        );
+      },
+    ).toList();
 
     cookies.sort((a, b) => b.path.length.compareTo(a.path.length));
     return cookies;
@@ -104,6 +110,13 @@ class CookieManager extends Interceptor {
     _saveAll(all);
   }
 
+  void deleteCookiesForDomain(Uri uri) {
+    final all = _loadAll();
+    final domainKey = normalizeDomain(uri.host);
+    all.remove(domainKey);
+    _saveAll(all);
+  }
+
   void _saveAll(Map<String, Map<String, StoredCookie>> all) {
     all.forEach((_, cookies) {
       cookies.removeWhere((_, c) => c.isExpired);
@@ -128,8 +141,10 @@ class CookieManager extends Interceptor {
   Future<void> readCookiesFromWebView(
       webview.WebUri url, webview.InAppWebViewController? controller) async {
     final manager = webview.CookieManager.instance();
-    final cookies =
-        await manager.getCookies(url: url, webViewController: controller);
+    final cookies = await manager.getCookies(
+      url: url,
+      webViewController: controller,
+    );
 
     if (cookies.isEmpty) return;
 

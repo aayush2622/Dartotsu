@@ -153,7 +153,7 @@ class _WebViewState extends State<WebView> {
                   await openLinkInBrowser(_url.value);
                   break;
                 case 3:
-                  await CookieManager.instance().deleteAllCookies();
+                  cookieManager.deleteCookiesForDomain(WebUri(widget.url));
                   break;
               }
             },

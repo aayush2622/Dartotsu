@@ -324,9 +324,11 @@ packages:
   dartotsu_extension_bridge:
     dependency: "direct main"
     description:
-      path: "../DartotsuExtensionBridge"
-      relative: true
-    source: path
+      path: "."
+      ref: master
+      resolved-ref: "14b0243102187d28ca0df02a194c6d8406a7561f"
+      url: "https://github.com/aayush2622/DartotsuExtensionBridge.git"
+    source: git
     version: "0.0.5"
   dartx:
     dependency: transitive
@@ -797,9 +799,11 @@ packages:
   flutter_web_auth_2:
     dependency: "direct main"
     description:
-      path: "../flutter_web_auth/flutter_web_auth_2"
-      relative: true
-    source: path
+      path: flutter_web_auth_2
+      ref: master
+      resolved-ref: abcc16389476fbcb518de127429504f941ada8d8
+      url: "https://github.com/aayush2622/flutter_web_auth.git"
+    source: git
     version: "5.0.1"
   flutter_web_auth_2_platform_interface:
     dependency: transitive
