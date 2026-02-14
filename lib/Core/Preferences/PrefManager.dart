@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart'
     hide isar;
 import 'package:isar_community/isar.dart';
+
 import '../../Logger.dart';
 import '../ThemeManager/LanguageSwitcher.dart';
 import 'Encryptor.dart';
@@ -92,7 +93,7 @@ class PrefManager {
       ],
       directory: directory,
       name: name,
-      inspector: false,
+      inspector: true,
     );
   }
 

@@ -13,7 +13,7 @@ import '../Utils/Functions/NavigateToScreen.dart';
 import '../Widgets/Components/CachedNetworkImage.dart';
 import '../Widgets/Components/ScrollConfig.dart';
 import '../Widgets/Sections/Media/MediaSection.dart';
-import 'Webview/WebView.dart';
+import 'Extension/ExtensionScreen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -150,7 +150,7 @@ class MainScreenState extends State<MainScreen> {
                     unawaited(
                       navigateToPage(
                         context,
-                        const WebView(url: 'https://anilist.co/home'),
+                        const ExtensionScreen(),
                       ),
                     );
                   },

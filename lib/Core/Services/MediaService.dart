@@ -1,12 +1,13 @@
-import '../../Api/Anilist/AnilistService.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/parse_route.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
-import '../../Utils/Functions/SnackBar.dart';
+
+import '../../Api/Anilist/AnilistService.dart';
 import '../../Core/Preferences/PrefManager.dart';
-import 'Model/Media.dart';
+import '../../Utils/Functions/SnackBar.dart';
 import 'BaseServiceData.dart';
+import 'Model/Media.dart';
 import 'Screens/BaseAnimeScreen.dart';
 import 'Screens/BaseHomeScreen.dart';
 import 'Screens/BaseLoginScreen.dart';

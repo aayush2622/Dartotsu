@@ -33,7 +33,6 @@ class AndroidNetwork {
           for (final h in headers) {
             final c = StoredCookie.parse(h, url.host);
             if (c != null) parsed.add(c);
-            print('Parsed cookie: ${c?.name}=${c?.value}');
           }
           if (parsed.isNotEmpty) client.setCookies(parsed);
           return null;
