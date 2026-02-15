@@ -11,23 +11,23 @@ on:
   workflow_dispatch:
     inputs:
       build_targets:
-        description: 'Select platforms to build'
+        description: "Select platforms to build"
         required: true
         type: choice
         options:
-          - 'all'
-          - 'android'
-          - 'windows'
-          - 'linux'
-          - 'ios'
-          - 'macos'
+          - "all"
+          - "android"
+          - "windows"
+          - "linux"
+          - "ios"
+          - "macos"
       clean_build:
-        description: 'Clean build?'
+        description: "Clean build?"
         required: false
         type: boolean
         default: false
       ping_discord:
-        description: 'Ping Discord role?'
+        description: "Ping Discord role?"
         required: false
         type: boolean
         default: false
@@ -173,7 +173,6 @@ jobs:
           echo "keyAlias=$KEY_ALIAS" >> android/key.properties
           echo "storeFile=dartotsu.jks" >> android/key.properties
       - *setup_env
-
       - name: Configure Gradle
         run: |
           mkdir -p ~/.gradle
@@ -187,6 +186,7 @@ jobs:
       - run: flutter build apk --release
 
       - name: Rename APKs
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         run: |
           for file in build/app/outputs/flutter-apk/app-*-release.apk; do
             abi=$(basename $file | sed 's/app-\(.*\)-release.apk/\1/')
@@ -195,9 +195,11 @@ jobs:
           ls build/app/outputs/flutter-apk
 
       - name: Rename universal APK
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         run: mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/Dantotsu_Android_universal_${{github.ref_name}}.apk
 
       - name: Upload arm64 File To Google Drive
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         id: gdriveUpload_arm64
         uses: hoatruongdev09/google-drive-file-upload-github-action@v1.1
         with:
@@ -207,6 +209,7 @@ jobs:
           service-account-json: "${{secrets.GOOGLE_KEY}}"
           overrwrite: true
       - name: Upload armeabi File To Google Drive
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         id: gdriveUpload_armeabi
         uses: hoatruongdev09/google-drive-file-upload-github-action@v1.1
         with:
@@ -216,6 +219,7 @@ jobs:
           service-account-json: "${{secrets.GOOGLE_KEY}}"
           overrwrite: true
       - name: Upload x86 File To Google Drive
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         id: gdriveUpload_x86
         uses: hoatruongdev09/google-drive-file-upload-github-action@v1.1
         with:
@@ -225,6 +229,7 @@ jobs:
           service-account-json: "${{secrets.GOOGLE_KEY}}"
           overrwrite: true
       - name: Upload File To Google Drive
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         id: gdriveUpload_universal
         uses: hoatruongdev09/google-drive-file-upload-github-action@v1.1
         with:
@@ -255,7 +260,6 @@ jobs:
           mkdir $env:USERPROFILE\certs
           [System.IO.File]::WriteAllBytes("$env:USERPROFILE\certs\Dartotsu.pfx", [Convert]::FromBase64String("${{secrets.PFX_FILE}}"))
       - *setup_env
-
       - *prepare_flutter
       - *setup_flutter
       - *cache_flutter_normal
@@ -298,6 +302,7 @@ jobs:
           dart run inno_bundle:build --sign-tool-params '"${{ steps.find_signtool.outputs.signtool_path }}" sign /fd sha256 /f "C:\Users\runneradmin\certs\Dartotsu.pfx" /p "${{secrets.PFX_PASSWORD}}" /tr http://timestamp.digicert.com /td sha256 /v $f' --release
 
       - name: Upload File To Google Drive
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         id: gdriveUpload
         uses: hoatruongdev09/google-drive-file-upload-github-action@v1.1
         with:
@@ -329,7 +334,7 @@ jobs:
       - name: Trust all git repositories
         run: |
           git config --global --add safe.directory '*'
-      
+
       - *checkout
       - *prepare_flutter
       - *setup_flutter
@@ -343,7 +348,7 @@ jobs:
 
       - name: Install system dependencies
         run: |
-         pacman -S --noconfirm gtk3 libsecret wpewebkit clang cmake ninja fuse mpv webkit2gtk-4.1
+          pacman -S --noconfirm gtk3 libsecret wpewebkit clang cmake ninja fuse mpv webkit2gtk-4.1
 
       - *cache_flutter_normal
       - *cache_flutter_clean
@@ -355,6 +360,7 @@ jobs:
       - name: Build Flutter Linux app
         run: flutter build linux
       - name: Archive app
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         uses: thedoctor0/zip-release@master
         with:
           type: "zip"
@@ -362,6 +368,7 @@ jobs:
           directory: build/linux/x64/release/bundle
 
       - name: Upload File To Google Drive
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         id: gdriveUpload
         uses: hoatruongdev09/google-drive-file-upload-github-action@v1.1
         with:
@@ -401,6 +408,8 @@ jobs:
           cd ..
           zip -r Dartotsu-iOS-${{ github.ref_name }}.ipa Payload
       - name: Upload File To Google Drive
+        if: |
+          github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         id: gdriveUpload
         uses: hoatruongdev09/google-drive-file-upload-github-action@v1.1
         with:
@@ -438,6 +447,7 @@ jobs:
           hdiutil create -volname "Dartotsu" -srcfolder build/macos/Build/Products/Release/Dartotsu.app -ov -format UDZO build/macos/Release/Dartotsu-macos-${{github.ref_name}}.dmg
         shell: bash
       - name: Upload File To Google Drive
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         id: gdriveUpload
         uses: hoatruongdev09/google-drive-file-upload-github-action@v1.1
         with:
@@ -451,6 +461,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build_android, build_windows, build_linux, build_ios, build_macos]
     if: |
+      github.ref == 'refs/heads/main' &&
+      github.event_name != 'pull_request' &&
       always() && 
       !contains(needs.*.result, 'failure') && 
       !contains(needs.*.result, 'cancelled') &&
@@ -736,8 +748,19 @@ jobs:
 
   trigger_downloader:
     runs-on: ubuntu-latest
-    needs: [build_android, build_windows, build_linux, build_ios, build_macos, sendMessage]
+    needs:
+      [
+        build_android,
+        build_windows,
+        build_linux,
+        build_ios,
+        build_macos,
+        sendMessage,
+      ]
+    # check if branch is main
     if: |
+      github.ref == 'refs/heads/main' &&
+      github.event_name != 'pull_request' &&
       always() && 
       !contains(needs.*.result, 'failure') && 
       !contains(needs.*.result, 'cancelled') &&
