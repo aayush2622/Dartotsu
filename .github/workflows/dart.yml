@@ -3,6 +3,11 @@ on:
   push:
     branches:
       - main
+      - rewrite-re
+  pull_request:
+    branches:
+      - main
+      - rewrite-re
   workflow_dispatch:
     inputs:
       build_targets:
@@ -338,7 +343,7 @@ jobs:
 
       - name: Install system dependencies
         run: |
-         pacman -S --noconfirm gtk3 libsecret wpewebkit clang cmake ninja fuse mpv
+         pacman -S --noconfirm gtk3 libsecret wpewebkit clang cmake ninja fuse mpv webkit2gtk-4.1
 
       - *cache_flutter_normal
       - *cache_flutter_clean
