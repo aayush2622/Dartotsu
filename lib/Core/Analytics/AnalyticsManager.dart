@@ -31,7 +31,7 @@ class AnalyticsManager extends GetxController {
       logger("Firebase initialized");
     } catch (e, s) {
       _disabled = true;
-      debugPrint("Firebase disabled: $e: \n$s");
+      logger("Firebase disabled: $e: \n$s");
     } finally {
       _initCompleter?.complete();
     }

@@ -145,6 +145,11 @@ ThemeData getTheme(ColorScheme? material, ThemeController themeManager) {
         baseTheme.colorScheme.primary.withValues(alpha: 0.2),
       ),
     ),
+    pageTransitionsTheme: const PageTransitionsTheme(
+      builders: <TargetPlatform, PageTransitionsBuilder>{
+        TargetPlatform.android: PredictiveBackPageTransitionsBuilder(),
+      },
+    ),
   );
 }
 

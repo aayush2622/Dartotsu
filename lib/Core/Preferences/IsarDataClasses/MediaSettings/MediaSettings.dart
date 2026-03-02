@@ -1,8 +1,8 @@
 import 'package:isar_community/isar.dart';
 
-import '../../../../Utils/Functions/GetXFunctions.dart';
 import '../../../../Core/Services/MediaService.dart';
 import '../../../../Core/Services/Model/Media.dart';
+import '../../../../Utils/Functions/GetXFunctions.dart';
 import '../../PrefManager.dart';
 import '../DefaultPlayerSettings/DefaultPlayerSettings.dart';
 import '../DefaultReaderSettings/DefaultReaderSettings.dart';
@@ -95,7 +95,7 @@ class MediaSettings {
 
   static void saveMediaSettings(Media media) {
     var service = find<MediaServiceController>().currentService.value;
-    var key = "${service.getName}-${media.id}-Settings";
+    var key = "${service.name}-${media.id}-Settings";
     saveCustomData(key, media.settings);
   }
 }

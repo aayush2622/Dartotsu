@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
 import 'Core/Preferences/StorageManager.dart';
@@ -36,16 +38,21 @@ class Logger {
     _sink.writeln('\n\n[Dartotsu] Logger initialized\n');
 
     _logQueue.stream.listen(_sink.writeln);
+    unawaited(NativeLogger.startLogStream());
+
+    var androidLogs = await NativeLogger.importJavaCrashLogs();
+
+    _sink.writeln(androidLogs);
 
     for (final log in _preInitBuffer) {
       _sink.writeln(log);
     }
     _preInitBuffer.clear();
 
-    _initialized = true;
+    DartotsuExtensionBridge.onLog =
+        (log) => debugPrint('[DartotsuExtensionBridge] $log');
 
-    unawaited(NativeLogger.startLogStream());
-    unawaited(NativeLogger.importJavaCrashLogs());
+    _initialized = true;
   }
 
   static void log(
@@ -104,27 +111,31 @@ class NativeLogger {
 
   static Future<void> startLogStream() async {
     if (!Platform.isAndroid) return;
-    _channel.setMethodCallHandler(
-      (call) async {
-        if (call.method == 'onLog') {
-          String log = call.arguments;
-          logger("[JAVA LOGS] $log");
+
+    _channel.setMethodCallHandler((call) async {
+      if (call.method == 'onLogs') {
+        final List<dynamic> rawLogs = call.arguments;
+        final logs = rawLogs.cast<String>();
+
+        for (final log in logs) {
+          logger('[KOTLIN LOGS] $log');
         }
-      },
-    );
+      }
+    });
+
     await _channel.invokeMethod('startLogs');
   }
 
-  static Future<void> importJavaCrashLogs() async {
-    if (!Platform.isAndroid) return;
+  static Future<String> importJavaCrashLogs() async {
+    if (!Platform.isAndroid) return '';
 
     final filesDir = await getAndroidFilesDir();
     final file = File(filesDir.path);
 
-    if (!await file.exists()) return;
+    if (!await file.exists()) return '';
 
     final crashLog = await file.readAsString();
-    if (crashLog.trim().isEmpty) return;
+    if (crashLog.trim().isEmpty) return '';
 
     Logger.log(
       '\n==== JAVA CRASH DETECTED ====\n$crashLog\n============================',
@@ -135,6 +146,7 @@ class NativeLogger {
     } catch (_) {
       await file.writeAsString('');
     }
+    return crashLog;
   }
 
   static Future<Directory> getAndroidFilesDir() async {

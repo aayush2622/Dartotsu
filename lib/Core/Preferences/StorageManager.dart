@@ -1,11 +1,11 @@
 import 'dart:io';
 
-import '../../Logger.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+import '../../Logger.dart';
 import 'PrefManager.dart';
 
 class StorageManager {
@@ -26,7 +26,7 @@ class StorageManager {
 
       Future<Directory> ensureDir(String path) async {
         final dir = Directory(path.fixSeparator);
-        if (!dir.existsSync()) {
+        if (!await dir.exists()) {
           await dir.create(recursive: true);
         }
         return dir;

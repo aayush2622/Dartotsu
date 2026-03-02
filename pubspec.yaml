@@ -81,7 +81,7 @@ dependencies:
   flutter_inappwebview: ^6.2.0-beta.3
 
   wakelock_plus: ^1.4.0
-  volume_controller: ^3.4.1
+  volume_controller: ^3.4.2
   screen_brightness: ^2.1.7
   app_links: ^7.0.0
   win32: ^5.15.0
@@ -111,10 +111,10 @@ dependencies:
       ref: master
       path: flutter_web_auth_2
   dartotsu_extension_bridge:
-    #path: ../DartotsuExtensionBridge
-    git:
-      url: https://github.com/aayush2622/DartotsuExtensionBridge.git
-      ref: master
+    path: ../DartotsuExtensionBridge
+    #git:
+      #url: https://github.com/aayush2622/DartotsuExtensionBridge.git
+      #ref: master
 
 
 # Development dependencies

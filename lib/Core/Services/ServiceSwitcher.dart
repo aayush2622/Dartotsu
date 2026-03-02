@@ -30,7 +30,7 @@ void serviceSwitcher(BuildContext context) {
               color: Theme.of(context).colorScheme.primary,
             ),
             title: Text(
-              service.getName,
+              service.name,
               style: const TextStyle(
                 fontFamily: 'Poppins',
                 fontSize: 16.0,

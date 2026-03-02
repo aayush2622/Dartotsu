@@ -13,7 +13,6 @@ import 'IsarDataClasses/DefaultReaderSettings/DefaultReaderSettings.dart';
 import 'IsarDataClasses/KeyValue/KeyValues.dart';
 import 'IsarDataClasses/MalToken/MalToken.dart';
 import 'IsarDataClasses/MediaSettings/MediaSettings.dart';
-import 'IsarDataClasses/ShowResponse/ShowResponse.dart';
 import 'StorageManager.dart';
 import 'Validator.dart';
 
@@ -74,26 +73,25 @@ class PrefManager {
   static Future<void> init() async {
     try {
       final path = await StorageManager.getDirectory(subPath: 'settings');
-      dartotsuPreferences = _open('DartotsuSettings', path!.path);
+      dartotsuPreferences = await _open('DartotsuSettings', path!.path);
       await deleteAllStoredPreferences();
     } catch (e) {
       logger('Error initializing preferences: $e');
     }
   }
 
-  static Isar _open(String name, String directory) {
-    return Isar.openSync(
+  static Future<Isar> _open(String name, String directory) async {
+    return await Isar.open(
       [
         KeyValueSchema,
         ResponseTokenSchema,
         MediaSettingsSchema,
-        ShowResponseSchema,
         // bridge related schemas
         ...DartotsuExtensionBridge.isarSchema,
       ],
       directory: directory,
       name: name,
-      inspector: true,
+      inspector: false,
     );
   }
 
@@ -135,9 +133,6 @@ class PrefManager {
     if (T == ResponseToken) {
       return dartotsuPreferences.responseTokens.getByKeySync(key) as T?;
     }
-    if (T == ShowResponse) {
-      return dartotsuPreferences.showResponses.getByKeySync(key) as T?;
-    }
 
     final kv = dartotsuPreferences.keyValues.getByKeySync(key);
     return kv?.value as T?;
@@ -148,53 +143,51 @@ class PrefManager {
     T value,
     PrefLocation loc,
   ) {
-    dartotsuPreferences.writeTxnSync(() {
-      if (value is MediaSettings) {
-        value.key = key;
-        value.location = loc;
-        dartotsuPreferences.mediaSettings.putSync(value);
-      } else if (value is ShowResponse) {
-        value.key = key;
-        value.location = loc;
-        dartotsuPreferences.showResponses.putSync(value);
-      } else if (value is ResponseToken) {
-        value.key = key;
-        value.location = loc;
-        dartotsuPreferences.responseTokens.putSync(value);
-      } else {
-        final obj = KeyValue()
-          ..key = key
-          ..value = value
-          ..location = loc;
-
-        dartotsuPreferences.keyValues.putSync(obj);
-      }
-    });
+    dartotsuPreferences.writeTxnSync(
+      () {
+        if (value is MediaSettings) {
+          value.key = key;
+          value.location = loc;
+          dartotsuPreferences.mediaSettings.putSync(value);
+        } else if (value is ResponseToken) {
+          value.key = key;
+          value.location = loc;
+          dartotsuPreferences.responseTokens.putSync(value);
+        } else {
+          final obj = KeyValue()
+            ..key = key
+            ..value = value
+            ..location = loc;
+          dartotsuPreferences.keyValues.putSync(obj);
+        }
+      },
+    );
   }
 
   static Future<void> _removeFromIsar<T>(String key) async {
-    await dartotsuPreferences.writeTxn(() async {
-      if (T == MediaSettings) {
-        await dartotsuPreferences.mediaSettings.deleteByKey(key);
-      } else if (T == ResponseToken) {
-        await dartotsuPreferences.responseTokens.deleteByKey(key);
-      } else if (T == ShowResponse) {
-        await dartotsuPreferences.showResponses.deleteByKey(key);
-      } else {
-        await dartotsuPreferences.keyValues.deleteByKey(key);
-      }
-    });
+    await dartotsuPreferences.writeTxn(
+      () async {
+        if (T == MediaSettings) {
+          await dartotsuPreferences.mediaSettings.deleteByKey(key);
+        } else if (T == ResponseToken) {
+          await dartotsuPreferences.responseTokens.deleteByKey(key);
+        } else {
+          await dartotsuPreferences.keyValues.deleteByKey(key);
+        }
+      },
+    );
   }
 
   static Future<void> deleteAllStoredPreferences() async {
     if (getCustomVal("cleanSettings") ?? true) {
       final isar = dartotsuPreferences;
-      await isar.writeTxn(() async {
-        await isar.keyValues.clear();
-        await isar.mediaSettings.clear();
-        await isar.showResponses.clear();
-        await isar.responseTokens.clear();
-      });
+      await isar.writeTxn(
+        () async {
+          await isar.keyValues.clear();
+          await isar.mediaSettings.clear();
+          await isar.responseTokens.clear();
+        },
+      );
       setCustomVal("cleanSettings", false);
     }
   }
@@ -215,7 +208,6 @@ class PrefManager {
     await isar.writeTxn(() async {
       final kvList = <KeyValue>[];
       final mediaList = <MediaSettings>[];
-      final showList = <ShowResponse>[];
       final tokenList = <ResponseToken>[];
 
       for (final section in decryptedJson.entries) {
@@ -247,14 +239,6 @@ class PrefManager {
               );
               break;
 
-            case 'ShowResponse':
-              showList.add(
-                ShowResponse.fromJson(raw)
-                  ..key = key
-                  ..location = loc,
-              );
-              break;
-
             case 'ResponseToken':
               tokenList.add(
                 ResponseToken.fromJson(raw)
@@ -271,9 +255,6 @@ class PrefManager {
       }
       if (mediaList.isNotEmpty) {
         await isar.mediaSettings.putAll(mediaList);
-      }
-      if (showList.isNotEmpty) {
-        await isar.showResponses.putAll(showList);
       }
       if (tokenList.isNotEmpty) {
         await isar.responseTokens.putAll(tokenList);
@@ -307,15 +288,6 @@ class PrefManager {
           .findAll();
       for (final ms in media) {
         result[loc.name]![ms.key] = ms.toJson();
-      }
-
-      final shows = await isar.showResponses
-          .where()
-          .filter()
-          .locationEqualTo(loc)
-          .findAll();
-      for (final sr in shows) {
-        result[loc.name]![sr.key] = sr.toJson();
       }
 
       final tokens = await isar.responseTokens

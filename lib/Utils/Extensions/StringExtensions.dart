@@ -66,25 +66,49 @@ extension StringExtensions on String {
   }
 
   bool isMediaVideo() {
-    return [
-      "3gp",
-      "avi",
-      "mpg",
-      "mpeg",
-      "webm",
-      "ogg",
-      "flv",
-      "m4v",
-      "mvp",
-      "mp4",
-      "wmv",
-      "mkv",
-      "mov"
-    ].any((extension) => toLowerCase().endsWith(extension));
+    return videoExtensions
+        .any((extension) => toLowerCase().endsWith(extension));
   }
 
   bool isImage() {
-    return ["jpg", "jpeg", "png", "gif", "bmp", "webp", "tiff", "svg"]
+    return imageExtensions
         .any((extension) => toLowerCase().endsWith(extension));
   }
 }
+
+var videoExtensions = [
+  "3gp",
+  "avi",
+  "mpg",
+  "mpeg",
+  "webm",
+  "ogg",
+  "flv",
+  "m4v",
+  "mvp",
+  "mp4",
+  "wmv",
+  "mkv",
+  "mov"
+];
+var audioExtensions = [
+  "mp3",
+  "wav",
+  "ogg",
+  "flac",
+  "aac",
+  "m4a",
+  "opus",
+  "wma",
+  "alac"
+];
+var imageExtensions = [
+  "jpg",
+  "jpeg",
+  "png",
+  "gif",
+  "bmp",
+  "webp",
+  "tiff",
+  "svg"
+];

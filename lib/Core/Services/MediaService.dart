@@ -15,7 +15,7 @@ import 'Screens/BaseMangaScreen.dart';
 import 'Screens/BaseSearchScreen.dart';
 
 abstract class MediaService {
-  String get getName;
+  String get name;
   String get iconPath;
   BaseServiceData get data;
   BaseHomeScreen? get homeScreen;
@@ -28,7 +28,7 @@ abstract class MediaService {
   void compactListEditor(BuildContext context, Media media) {}
 
   Widget notImplemented(String name) =>
-      Center(child: Text("$name not implemented on $getName"));
+      Center(child: Text("$name not implemented on $name"));
 }
 
 class MediaServiceController extends GetxController {

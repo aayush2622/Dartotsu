@@ -9,9 +9,9 @@ import 'package:dartotsu/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-void main() {
+void main(List<String> args) {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    await init();
+    await init(args);
     // Build our app and trigger a frame.
     await tester.pumpWidget(const MyApp());
 

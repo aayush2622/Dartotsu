@@ -238,7 +238,9 @@ class CookieManager extends Interceptor {
     HttpResponse response,
   ) async {
     final uri = Uri.parse(response.request.url);
-    final setCookieHeaders = response.headerMapList['set-cookie'] ?? [];
+    final setCookieHeaders = response.headerMapList['set-cookie'] ??
+        response.headerMapList['Set-Cookie'] ??
+        [];
 
     if (setCookieHeaders.isEmpty) return Interceptor.next();
 
