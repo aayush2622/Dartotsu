@@ -23,6 +23,7 @@ plugins {
     id("com.google.gms.google-services") version ("4.3.15") apply false
     id("com.google.firebase.crashlytics") version ("2.8.1") apply false
     id("org.jetbrains.kotlin.android") version "2.2.20" apply false // don't update for now it will break release builds
+    id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
 }
 
 include(":app")

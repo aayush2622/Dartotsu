@@ -700,7 +700,17 @@ Exec=$LINK
 Icon=$ICON_FILE
 Type=Application
 Categories=AudioVideo;Player
-MimeType=x-scheme-handler/dar;x-scheme-handler/anymex;x-scheme-handler/sugoireads;x-scheme-handler/mangayomi;
+
+MimeType=
+video/mp4;
+video/x-matroska;
+video/webm;
+audio/mpeg;
+audio/flac;
+x-scheme-handler/dar;
+x-scheme-handler/anymex;
+x-scheme-handler/sugoireads;
+x-scheme-handler/mangayomi;
 EOL
     chmod +x "$DESKTOP_FILE"
 

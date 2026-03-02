@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'dart:ui';
 
+import 'package:dartotsu_extension_bridge/test.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide ContextExtensionss;
 
-import '../Core/NetworkManager/NetworkManager.dart';
 import '../Core/Services/MediaService.dart';
 import '../Core/ThemeManager/ThemeController.dart';
 import '../Utils/Extensions/ContextExtensions.dart';
@@ -36,17 +36,18 @@ class MainScreenState extends State<MainScreen> {
       () {
         final service = serviceController.currentService.value;
         return Scaffold(
-          body: Stack(
-            children: [
-              _buildBackground(service),
-              Row(
-                children: [
-                  if (!context.isPhone) SizedBox(width: 100, child: _navbar),
-                  Expanded(child: _buildBody(service)),
-                ],
-              ),
-              if (context.isPhone) _navbar,
-              /*Positioned(
+          body: SafeArea(
+            child: Stack(
+              children: [
+                _buildBackground(service),
+                Row(
+                  children: [
+                    if (!context.isPhone) SizedBox(width: 100, child: _navbar),
+                    Expanded(child: _buildBody(service)),
+                  ],
+                ),
+                if (context.isPhone) _navbar,
+                /*Positioned(
                 bottom: 92.bottomBar(),
                 right: 12,
                 child: GestureDetector(
@@ -61,7 +62,8 @@ class MainScreenState extends State<MainScreen> {
                   ),
                 ),
               ),*/
-            ],
+              ],
+            ),
           ),
         );
       },
@@ -142,9 +144,7 @@ class MainScreenState extends State<MainScreen> {
             SliverToBoxAdapter(
               child: TextButton(
                   onLongPress: () async {
-                    var t = await find<NetworkManager>()
-                        .get("https://anilist.co/home");
-                    print(t.data);
+                    test().testF();
                   },
                   onPressed: () async {
                     unawaited(

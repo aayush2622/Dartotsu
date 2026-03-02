@@ -20,6 +20,7 @@ import 'Api/Updater/AppUpdater.dart';
 import 'Core/Analytics/AnalyticsManager.dart';
 import 'Core/NetworkManager/NetworkManager.dart';
 import 'Core/Preferences/PrefManager.dart';
+import 'Core/Preferences/StorageManager.dart';
 import 'Core/ThemeManager/ThemeController.dart';
 import 'Core/ThemeManager/ThemeManager.dart';
 import 'DI.dart';
@@ -32,8 +33,6 @@ import 'Utils/Functions/DeepLink.dart';
 import 'Utils/Functions/GetXFunctions.dart';
 import 'l10n/app_localizations.dart';
 
-// webview
-
 // animationController
 
 // test glass background switch
@@ -41,8 +40,6 @@ import 'l10n/app_localizations.dart';
 // test service switcher
 
 // refractor MediaSettings
-// setup firebase
-
 void main(List<String> args) async {
   await runZonedGuarded(
     () async {
@@ -65,7 +62,7 @@ void main(List<String> args) async {
         );
       };
       Get.log = (text, {isError = false}) => debugPrint(text);
-      await init();
+      await init(args);
       runApp(const MyApp());
     },
     (error, stackTrace) {
@@ -82,28 +79,29 @@ void main(List<String> args) async {
   );
 }
 
-Future<void> init() async {
+Future<void> init(List<String> args) async {
   await PrefManager.init();
   await Rhttp.init();
   DI.init();
   await Future.wait([
-    DartotsuExtensionBridge().init(
-      PrefManager.dartotsuPreferences,
-      "Dartotsu",
+    Logger.init(),
+    DartotsuExtensionBridge.init(
+      getDirectory: StorageManager.getDirectory,
+      isarInstance: PrefManager.dartotsuPreferences,
       http: find<NetworkManager>().compatibleClient,
     ),
-    Logger.init(),
     initializeDateFormatting(),
   ]);
-  unawaited(_postInit());
+  unawaited(_postInit(args));
 }
 
-Future<void> _postInit() async {
+Future<void> _postInit(List<String> args) async {
   DeepLink.init();
   mpv.MediaKit.ensureInitialized();
 
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
     await WindowManager.instance.ensureInitialized();
+    DeepLink.initVideoIntentListener(args);
   }
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(

@@ -7,7 +7,8 @@ import 'CookieManager.dart';
 import 'NetworkManager.dart';
 
 class AndroidNetwork {
-  static const MethodChannel _channel = MethodChannel('network_bridge');
+  static const MethodChannel _channel =
+      MethodChannel('flutterKotlinBridge.network');
 
   static Future<void> initialize(String dns, String proxy) async {
     if (!Platform.isAndroid) return;

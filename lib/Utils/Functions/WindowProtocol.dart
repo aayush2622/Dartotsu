@@ -82,6 +82,79 @@ class WindowsProtocolHandler {
   }
 }
 
+class WindowsFileAssociationHandler {
+  void register(
+    String extension,
+    String progId, {
+    String? description,
+    String? executable,
+    List<String>? arguments,
+  }) {
+    if (defaultTargetPlatform != TargetPlatform.windows) return;
+
+    if (!extension.startsWith('.')) {
+      throw ArgumentError('extension must start with "."');
+    }
+
+    final exe = executable ?? Platform.resolvedExecutable;
+    final args = (arguments ?? ['"%1"']).join(' ');
+
+    _regCreateStringKey(
+      _hive,
+      'SOFTWARE\\Classes\\$extension',
+      '',
+      progId,
+    );
+
+    _regCreateStringKey(
+      _hive,
+      'SOFTWARE\\Classes\\$progId',
+      '',
+      description ?? progId,
+    );
+
+    _regCreateStringKey(
+      _hive,
+      'SOFTWARE\\Classes\\$progId\\DefaultIcon',
+      '',
+      exe,
+    );
+
+    _regCreateStringKey(
+      _hive,
+      'SOFTWARE\\Classes\\$progId\\shell\\open\\command',
+      '',
+      '"$exe" $args',
+    );
+  }
+
+  int _regCreateStringKey(
+    int hKey,
+    String key,
+    String valueName,
+    String data,
+  ) {
+    final txtKey = TEXT(key);
+    final txtValue = TEXT(valueName);
+    final txtData = TEXT(data);
+
+    try {
+      return RegSetKeyValue(
+        hKey,
+        txtKey,
+        txtValue,
+        REG_VALUE_TYPE.REG_SZ,
+        txtData,
+        txtData.length * 2 + 2,
+      );
+    } finally {
+      free(txtKey);
+      free(txtValue);
+      free(txtData);
+    }
+  }
+}
+
 void registerProtocolHandler(
   String scheme, {
   String? executable,
@@ -89,6 +162,22 @@ void registerProtocolHandler(
 }) {
   WindowsProtocolHandler().register(
     scheme,
+    executable: executable,
+    arguments: arguments,
+  );
+}
+
+void registerFileAssociation(
+  String extension,
+  String progId, {
+  String? description,
+  String? executable,
+  List<String>? arguments,
+}) {
+  WindowsFileAssociationHandler().register(
+    extension,
+    progId,
+    description: description,
     executable: executable,
     arguments: arguments,
   );
