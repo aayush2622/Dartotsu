@@ -60,6 +60,17 @@ class MediaServiceController extends GetxController {
     }
   }
 
+  T? getAnyValue<T>(T? Function(MediaService manager) selector) {
+    for (final manager in services) {
+      final value = selector(manager);
+      if (value != null) {
+        if (value is String && value.isEmpty) continue;
+        return value;
+      }
+    }
+    return null;
+  }
+
   MediaService? _findService(String serviceName) {
     return services.firstWhereOrNull(
       (s) => s.runtimeType.toString() == serviceName,

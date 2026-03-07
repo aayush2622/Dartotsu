@@ -92,6 +92,7 @@ Future<void> init(List<String> args) async {
     ),
     initializeDateFormatting(),
   ]);
+
   unawaited(_postInit(args));
 }
 
@@ -134,6 +135,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void dispose() {
     _focusNode.dispose();
+    DartotsuExtensionBridge.dispose();
     super.dispose();
   }
 

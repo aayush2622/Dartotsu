@@ -8,9 +8,9 @@ abstract class BaseServiceData extends GetxController {
   Queries? query;
   Mutations? mutations;
   int? userid;
-  RxString token = "".obs;
-  RxString username = "".obs;
-  RxString avatar = "".obs;
+  RxString? token;
+  RxString? username;
+  RxString? avatar;
   RxString bg =
       "https://i.pinimg.com/736x/8c/77/28/8c7728ab98a6d4ad900d20032f6f4920.jpg"
           .obs;

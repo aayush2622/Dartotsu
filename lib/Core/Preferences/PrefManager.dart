@@ -68,6 +68,7 @@ enum PrefLocation {
 }
 
 class PrefManager {
+  PrefManager._();
   static late Isar dartotsuPreferences;
 
   static Future<void> init() async {
@@ -197,8 +198,7 @@ class PrefManager {
     Set<PrefLocation>? locations,
     String? password,
   }) async {
-    final dec = await Crypto.decrypt(json, password: password);
-    final decryptedJson = jsonDecode(dec) as Map<String, dynamic>;
+    final decryptedJson = await Crypto.decrypt(json, password: password);
 
     Validator.validate(decryptedJson);
 

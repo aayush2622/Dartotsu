@@ -1,8 +1,13 @@
 import 'dart:convert';
+import 'dart:io';
 import 'dart:math';
 import 'dart:typed_data';
-import 'dart:io';
+
 import 'package:cryptography/cryptography.dart';
+import 'package:intl/intl.dart';
+import 'package:package_info_plus/package_info_plus.dart';
+
+import '../../Utils/Function.dart';
 
 class Crypto {
   static final _algo = AesGcm.with256bits();
@@ -33,7 +38,10 @@ class Crypto {
       secretKey: key,
       nonce: nonce,
     );
-
+    final now = DateTime.now();
+    final localNow = now.toLocal();
+    final formattedTime =
+        DateFormat('dd MMM yyyy, hh:mm:ss a').format(localNow);
     return {
       'version': 1,
       'salt': base64Encode(salt),
@@ -43,10 +51,20 @@ class Crypto {
       'compression': 'gzip',
       'encoding': 'utf8',
       'passwordType': filePassword != 'dartotsu' ? 'custom' : 'default',
+      'createdAt': formattedTime,
+      'appVersion': await loadVersion(),
+      'platform': Platform.operatingSystem,
+      'osVersion': Platform.operatingSystemVersion,
     };
   }
 
-  static Future<String> decrypt(
+  static Future<String> loadVersion() async {
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    var hash = await loadEnv("hash");
+    return '${packageInfo.version}+${hash ?? ''}';
+  }
+
+  static Future<Map<String, dynamic>> decrypt(
     Map<String, dynamic> json, {
     String? password,
   }) async {
@@ -86,7 +104,7 @@ class Crypto {
 
     final jsonBytes = gzip.decode(compressedBytes);
 
-    return utf8.decode(jsonBytes);
+    return jsonDecode(utf8.decode(jsonBytes)) as Map<String, dynamic>;
   }
 
   static Uint8List _randomBytes(int length) {

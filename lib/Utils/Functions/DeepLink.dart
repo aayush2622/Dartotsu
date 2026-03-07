@@ -108,17 +108,17 @@ class DeepLink {
       };
       repoMap.forEach((type, url) {
         if (url != null && url.isNotEmpty) {
-          manager.get<MangayomiExtensions>().onRepoSaved([url], type);
+          manager.get<MangayomiExtensions>().addRepo(url, type);
           isRepoAdded = true;
         }
       });
     } else if (aniyomiSchemes.contains(scheme)) {
       final url = uri.queryParameters["url"];
       if (url != null && url.isNotEmpty) {
-        manager.get<AniyomiExtensions>().onRepoSaved(
-          [url],
-          scheme == "aniyomi" ? ItemType.anime : ItemType.manga,
-        );
+        manager.get<AniyomiExtensions>().addRepo(
+              url,
+              scheme == "aniyomi" ? ItemType.anime : ItemType.manga,
+            );
         isRepoAdded = true;
       }
     }
