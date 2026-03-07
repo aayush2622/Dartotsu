@@ -1,7 +1,5 @@
-import 'dart:async';
 import 'dart:ui';
 
-import 'package:dartotsu_extension_bridge/test.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide ContextExtensionss;
 
@@ -144,16 +142,9 @@ class MainScreenState extends State<MainScreen> {
             SliverToBoxAdapter(
               child: TextButton(
                   onLongPress: () async {
-                    test().testF();
+                    navigateToPage(context, ExtensionScreen());
                   },
-                  onPressed: () async {
-                    unawaited(
-                      navigateToPage(
-                        context,
-                        const ExtensionScreen(),
-                      ),
-                    );
-                  },
+                  onPressed: () async {},
                   child: const Text('Login')),
             ),
             SliverToBoxAdapter(
