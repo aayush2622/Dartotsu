@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter_inappwebview/flutter_inappwebview.dart' as webview;
 import 'package:rhttp/rhttp.dart';
@@ -110,11 +111,35 @@ class CookieManager extends Interceptor {
     _saveAll(all);
   }
 
-  void deleteCookiesForDomain(Uri uri) {
+  String getRootDomain(String domain) {
+    final parts = normalizeDomain(domain).split('.');
+    if (parts.length >= 2) {
+      return parts.sublist(parts.length - 2).join('.');
+    }
+    return domain;
+  }
+
+  Future<void> deleteCookiesForDomain(Uri uri) async {
     final all = _loadAll();
-    final domainKey = normalizeDomain(uri.host);
-    all.remove(domainKey);
+    final root = getRootDomain(uri.host);
+
+    final keysToRemove = all.keys.where((domain) {
+      final dRoot = getRootDomain(domain);
+      return dRoot == root;
+    }).toList();
+
+    for (final key in keysToRemove) {
+      all.remove(key);
+    }
+
     _saveAll(all);
+
+    final manager = webview.CookieManager.instance();
+    for (final domain in keysToRemove) {
+      await manager.deleteCookies(
+        url: webview.WebUri("https://$domain"),
+      );
+    }
   }
 
   void _saveAll(Map<String, Map<String, StoredCookie>> all) {
@@ -167,41 +192,47 @@ class CookieManager extends Interceptor {
     setCookies(parsed);
   }
 
-  Future<void> applyCookiesToWebView(
-      webview.WebUri url, webview.InAppWebViewController? controller) async {
+  var _cookiesApplied = false;
+  Future<void> applyAllCookiesToWebView(
+      webview.InAppWebViewController? controller) async {
+    if (_cookiesApplied || Platform.isAndroid) return;
+    _cookiesApplied = true;
     final allSnapshot = Map<String, Map<String, StoredCookie>>.from(
       _loadAll().map(
         (d, cookies) => MapEntry(d, Map<String, StoredCookie>.from(cookies)),
       ),
     );
 
-    final host = normalizeDomain(url.host);
     final manager = webview.CookieManager.instance();
+    final futures = <Future<void>>[];
 
     for (final entry in allSnapshot.entries) {
       final domain = entry.key;
-      final matches = host == domain || host.endsWith('.$domain');
 
-      if (!matches) continue;
+      final url = webview.WebUri("https://$domain");
 
       final cookies = List<StoredCookie>.from(entry.value.values);
 
       for (final c in cookies) {
         if (c.isExpired) continue;
 
-        await manager.setCookie(
-          url: url,
-          name: c.name,
-          value: c.value,
-          domain: c.domain,
-          path: c.path,
-          expiresDate: c.expires?.millisecondsSinceEpoch,
-          isSecure: c.secure,
-          isHttpOnly: c.httpOnly,
-          webViewController: controller,
+        futures.add(
+          manager.setCookie(
+            url: url,
+            name: c.name,
+            value: c.value,
+            domain: c.domain,
+            path: c.path,
+            expiresDate: c.expires?.millisecondsSinceEpoch,
+            isSecure: c.secure,
+            isHttpOnly: c.httpOnly,
+            webViewController: controller,
+          ),
         );
       }
     }
+
+    await Future.wait(futures);
   }
 
   String normalizeDomain(String domain) {
