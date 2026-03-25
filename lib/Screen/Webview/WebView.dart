@@ -35,7 +35,7 @@ class _WebViewState extends State<WebView> {
   final TextEditingController _searchController = TextEditingController();
   final FocusNode _addressFocus = FocusNode();
 
-  final cookieManager = find<NetworkManager>().cookieManager;
+  final cookieManager = Get.find<NetworkManager>().cookieManager;
 
   @override
   void initState() {
@@ -276,16 +276,14 @@ class _WebViewState extends State<WebView> {
         allowsInlineMediaPlayback: true,
         darkMode: true,
         algorithmicDarkeningAllowed: true,
+        sharedCookiesEnabled: true,
+        thirdPartyCookiesEnabled: true,
       ),
       onWebViewCreated: (controller) async {
         _controller = controller;
-        await cookieManager.applyCookiesToWebView(
-          WebUri(widget.url),
-          controller,
-        );
+        await cookieManager.applyAllCookiesToWebView(controller);
         await _updateNavState();
-        final fontData =
-            await rootBundle.load('assets/fonts/poppins_semi_bold.ttf');
+        final fontData = await rootBundle.load('assets/fonts/poppins.ttf');
         final base64Font = base64Encode(fontData.buffer.asUint8List());
 
         await controller.addUserScript(
@@ -312,11 +310,6 @@ class _WebViewState extends State<WebView> {
           ),
         );
       },
-      onLoadStart: (_, url) async {
-        if (url != null) {
-          await cookieManager.applyCookiesToWebView(url, _controller);
-        }
-      },
       onLoadStop: (_, url) async {
         if (url != null) {
           await cookieManager.readCookiesFromWebView(url, _controller);
@@ -324,10 +317,6 @@ class _WebViewState extends State<WebView> {
         await _updateNavState();
       },
       shouldOverrideUrlLoading: (_, action) async {
-        final url = action.request.url;
-        if (url != null) {
-          await cookieManager.applyCookiesToWebView(url, _controller);
-        }
         return NavigationActionPolicy.ALLOW;
       },
       onUpdateVisitedHistory: (_, url, ___) async {
@@ -348,3 +337,4 @@ class _WebViewState extends State<WebView> {
     super.dispose();
   }
 }
+
