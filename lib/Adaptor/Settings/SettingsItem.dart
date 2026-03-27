@@ -29,8 +29,13 @@ class _SettingItemState extends State<SettingItem> {
       splashColor: Colors.transparent,
       title: Row(
         children: [
-          if (widget.setting.icon != null) ...[
-            Icon(widget.setting.icon, color: Theme.of(context).primaryColor),
+          if (widget.setting.iconWidget != null ||
+              widget.setting.icon != null) ...[
+            widget.setting.iconWidget ??
+                Icon(
+                  widget.setting.icon,
+                  color: Theme.of(context).primaryColor,
+                ),
             const SizedBox(width: 24.0),
           ],
           Expanded(
@@ -123,9 +128,13 @@ class SettingSwitchItemState extends State<SettingSwitchItem> {
           padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: Row(
             children: [
-              if (widget.setting.icon != null) ...[
-                Icon(widget.setting.icon,
-                    color: Theme.of(context).primaryColor),
+              if (widget.setting.iconWidget != null ||
+                  widget.setting.icon != null) ...[
+                widget.setting.iconWidget ??
+                    Icon(
+                      widget.setting.icon,
+                      color: Theme.of(context).primaryColor,
+                    ),
                 const SizedBox(width: 24.0),
               ],
               Expanded(
@@ -210,9 +219,13 @@ class SettingSliderItemState extends State<SettingSliderItem> {
           contentPadding: const EdgeInsets.only(right: 8),
           title: Row(
             children: [
-              if (widget.setting.icon != null) ...[
-                Icon(widget.setting.icon,
-                    color: Theme.of(context).primaryColor),
+              if (widget.setting.iconWidget != null ||
+                  widget.setting.icon != null) ...[
+                widget.setting.iconWidget ??
+                    Icon(
+                      widget.setting.icon,
+                      color: Theme.of(context).primaryColor,
+                    ),
                 const SizedBox(width: 24.0),
               ],
               Expanded(
@@ -354,8 +367,13 @@ class SettingInputBoxItemState extends State<SettingInputBoxItem> {
     return ListTile(
       title: Row(
         children: [
-          if (widget.setting.icon != null) ...[
-            Icon(widget.setting.icon, color: Theme.of(context).primaryColor),
+          if (widget.setting.iconWidget != null ||
+              widget.setting.icon != null) ...[
+            widget.setting.iconWidget ??
+                Icon(
+                  widget.setting.icon,
+                  color: Theme.of(context).primaryColor,
+                ),
             const SizedBox(width: 24.0),
           ],
           Expanded(

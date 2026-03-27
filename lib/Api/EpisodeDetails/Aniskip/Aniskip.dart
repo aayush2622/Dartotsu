@@ -87,7 +87,7 @@ class Stamp {
     );
   }
 
-  String getType() {
+  String get name {
     switch (skipType) {
       case 'op':
         return 'Opening';

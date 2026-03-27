@@ -11,7 +11,7 @@ Widget loadSvg(
     iconPath,
     width: width,
     height: height,
-    // ignore: deprecated_member_use
-    color: color,
+    colorFilter:
+        color != null ? ColorFilter.mode(color, BlendMode.srcIn) : null,
   );
 }

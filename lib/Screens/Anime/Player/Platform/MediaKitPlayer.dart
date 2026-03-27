@@ -3,13 +3,12 @@ import 'dart:io';
 
 import 'package:dartotsu/Preferences/IsarDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
 import 'package:dartotsu/Preferences/PrefManager.dart';
+import 'package:dartotsu_extension_bridge/Models/Video.dart' as v;
 import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:media_kit_video/media_kit_video.dart';
-
-import 'package:dartotsu_extension_bridge/Models/Video.dart' as v;
 
 class MPVDecoder {
   final String id;
@@ -199,35 +198,37 @@ class MediaKitPlayer extends GetxController {
     videoController.player.stream.duration.listen(maxTime.call);
     videoController.player.stream.buffer.listen(bufferingTime.call);
     videoController.player.stream.completed.listen(isCompleted.call);
-    videoController.player.stream.buffering.listen(isBuffering.call);
     videoController.player.stream.playing.listen(isPlaying.call);
     videoController.player.stream.subtitle.listen(subtitle.call);
     videoController.player.stream.rate.listen(currentSpeed.call);
 
     videoController.player.stream.tracks.listen((e) {
       subtitles.value = e.subtitle;
+      audios.value = e.audio;
       _updateSubtitleTrack(videoController.player.state.track.subtitle);
     });
-
-    videoController.player.stream.tracks.listen((e) => audios.value = e.audio);
-
     videoController.player.stream.track.listen((e) {
       _updateSubtitleTrack(e.subtitle);
     });
 
     if (videoController.player.platform is NativePlayer) {
-      observeNativePropertyInt("chapter-list/count", (value) async {
-        final chapterList = <Chapter>[];
+      observeNativePropertyBool("paused-for-cache", (value) async {
+        isBuffering.value = value;
+      });
+      observeNativePropertyDouble("demuxer-cache-time", (v) async {
+        if (v < 1.0) isBuffering.value = true;
+      });
 
-        for (int i = 0; i < value; i++) {
+      observeNativePropertyInt("chapter-list/count", (value) async {
+        final futures = List.generate(value, (i) async {
           final title = await getNativePropertyString("chapter-list/$i/title");
           final startTime =
               await getNativePropertyDouble("chapter-list/$i/time");
 
-          chapterList.add(Chapter(title: title, startTime: startTime));
-        }
+          return Chapter(title: title, startTime: startTime);
+        });
 
-        chapters.value = chapterList;
+        chapters.value = await Future.wait(futures);
       });
     }
   }

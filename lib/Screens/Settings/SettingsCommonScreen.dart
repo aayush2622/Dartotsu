@@ -1,9 +1,6 @@
-import 'dart:io';
 import 'dart:convert';
+import 'dart:io';
 
-import 'package:dartotsu/Preferences/IsarDataClasses/MalToken/MalToken.dart';
-import 'package:dartotsu/Preferences/IsarDataClasses/MediaSettings/MediaSettings.dart';
-import 'package:dartotsu/Preferences/IsarDataClasses/ShowResponse/ShowResponse.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart' as p;

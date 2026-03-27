@@ -2,19 +2,19 @@ import 'dart:io';
 
 import 'package:collection/collection.dart';
 import 'package:dartotsu/Adaptor/Episode/EpisodeAdaptor.dart';
-import 'package:dartotsu/Screens/Anime/Player/Platform/MediaKitPlayer.dart';
-import 'package:dartotsu/Screens/Anime/Player/Widgets/SectionedRoundedRectSliderTrackShape.dart';
-import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
-import 'package:dartotsu_extension_bridge/Models/Video.dart' as v;
 import 'package:dartotsu/DataClass/Media.dart' as m;
 import 'package:dartotsu/Functions/Extensions.dart';
 import 'package:dartotsu/Functions/Function.dart';
 import 'package:dartotsu/Functions/string_extensions.dart';
 import 'package:dartotsu/Preferences/IsarDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
 import 'package:dartotsu/Preferences/PrefManager.dart';
+import 'package:dartotsu/Screens/Anime/Player/Platform/MediaKitPlayer.dart';
+import 'package:dartotsu/Screens/Anime/Player/Widgets/SectionedRoundedRectSliderTrackShape.dart';
 import 'package:dartotsu/Theme/LanguageSwitcher.dart';
 import 'package:dartotsu/Widgets/AlertDialogBuilder.dart';
 import 'package:dartotsu/Widgets/CustomBottomDialog.dart';
+import 'package:dartotsu_extension_bridge/Models/Video.dart' as v;
+import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -51,7 +51,7 @@ class _PlayerControllerState extends State<PlayerController> {
   late v.Video currentQuality;
   late PlayerSettings settings;
   late int fitType;
-  final timeStamps = <Stamp>[].obs;
+  final timeStamps = <TimeStamp>[].obs;
   final timeStampsText = ''.obs;
   final chapterText = ''.obs;
   final isFullScreen = false.obs;
@@ -152,7 +152,8 @@ class _PlayerControllerState extends State<PlayerController> {
               e.episodeNumber.toDouble() >
               currentEpisode.episodeNumber.toDouble(),
         );
-        videos = await source.methods.getVideoList(nextEpisode!);
+        if (!mounted || nextEpisode == null) return;
+        videos = await source.methods.getVideoList(nextEpisode);
       }
     });
     controller.isCompleted.listen((_) {
@@ -189,13 +190,22 @@ class _PlayerControllerState extends State<PlayerController> {
   }
 
   Future<void> setTimeStamps() async {
-    timeStamps.value = await AniSkip.getResult(
+    timeStamps.value += currentQuality.timeStamps ?? [];
+
+    var stamps = await AniSkip.getResult(
           malId: media.idMAL,
           episodeNumber: currentEpisode.episodeNumber.toInt(),
           episodeLength: controller.maxTime.value.inSeconds,
           useProxyForTimeStamps: false,
         ) ??
         [];
+    timeStamps.value = stamps
+        .map((e) => TimeStamp(
+              startTime: e.interval.startTime,
+              endTime: e.interval.endTime,
+              name: e.name,
+            ))
+        .toList();
 
     controller.currentTime.listen(
       (v) {
@@ -211,10 +221,10 @@ class _PlayerControllerState extends State<PlayerController> {
         timeStampsText.value = timeStamps
                 .firstWhereOrNull(
                   (e) =>
-                      (e.interval.startTime <= v.inSeconds) &&
-                      (e.interval.endTime >= v.inSeconds),
+                      (e.startTime <= v.inSeconds) &&
+                      (e.endTime >= v.inSeconds),
                 )
-                ?.getType() ??
+                ?.name ??
             '';
       },
     );
@@ -338,11 +348,13 @@ class _PlayerControllerState extends State<PlayerController> {
   Widget _buildProgressBar() {
     var thumbLess = loadData(PrefName.thumbLessSeekBar);
     return SizedBox(
-        height: 18,
-        child: Column(children: [
+      height: 18,
+      child: Column(
+        children: [
           IgnorePointer(
-              ignoring: isControlsLocked.value,
-              child: Obx(() {
+            ignoring: isControlsLocked.value,
+            child: Obx(
+              () {
                 final bufferingValue =
                     controller.bufferingTime.value.inSeconds.toDouble();
                 final currentValue =
@@ -373,9 +385,9 @@ class _PlayerControllerState extends State<PlayerController> {
                           sections: timeStamps.map(
                             (timestamp) {
                               return TrackSection(
-                                start: timestamp.interval.startTime /
+                                start: timestamp.startTime /
                                     (maxValue > 0 ? maxValue : 1),
-                                end: timestamp.interval.endTime /
+                                end: timestamp.endTime /
                                     (maxValue > 0 ? maxValue : 1),
                                 color: Theme.of(context)
                                     .colorScheme
@@ -419,8 +431,12 @@ class _PlayerControllerState extends State<PlayerController> {
                     },
                   ),
                 );
-              }))
-        ]));
+              },
+            ),
+          )
+        ],
+      ),
+    );
   }
 
   Widget _buildTopControls() {
@@ -901,9 +917,10 @@ class _PlayerControllerState extends State<PlayerController> {
                     return Text(
                       timeStampsText.value != ''
                           ? timeStamps
-                              .firstWhere(
-                                  (e) => e.getType() == timeStampsText.value)
-                              .getType()
+                                  .firstWhere(
+                                      (e) => e.name == timeStampsText.value)
+                                  .name ??
+                              ''
                           : "+${settings.skipDuration}s",
                       style: const TextStyle(
                         fontSize: 14,
@@ -929,8 +946,8 @@ class _PlayerControllerState extends State<PlayerController> {
   void _fastForward(int seconds) {
     if (timeStampsText.value != '') {
       var current = timeStamps
-          .firstWhere((element) => element.getType() == timeStampsText.value);
-      controller.seek(Duration(seconds: current.interval.endTime.toInt()));
+          .firstWhere((element) => element.name == timeStampsText.value);
+      controller.seek(Duration(seconds: current.endTime.toInt()));
       return;
     }
     var currentTime = controller.currentTime.value.inSeconds.toDouble();
@@ -1051,43 +1068,93 @@ class _PlayerControllerState extends State<PlayerController> {
   void _chapterDialog() {
     controller.pause();
 
-    final currentChapter = controller.chapters.lastWhereOrNull(
-      (e) => e.startTime <= controller.currentTime.value.inSeconds / 1.0,
+    final currentTime = controller.currentTime.value.inSeconds;
+
+    final merged = [
+      ...controller.chapters.map((c) => {
+            "time": c.startTime,
+            "title": c.title,
+            "isChapter": true,
+          }),
+      ...timeStamps.map((t) => {
+            "time": t.startTime,
+            "title": t.name ?? "Unknown",
+            "isChapter": false,
+          }),
+    ];
+
+    merged.sort((a, b) => (a["time"] as double).compareTo(b["time"] as double));
+
+    final currentItem = merged.lastWhereOrNull(
+      (e) => (e["time"] as double) <= currentTime,
     );
 
     var chapterDialog = CustomBottomDialog(
-      title:
-          controller.chapters.isNotEmpty ? "Chapters" : "No Chapters Available",
+      title: merged.isNotEmpty ? "Chapters" : "No Chapters Available",
       viewList: [
         Column(
-          children: controller.chapters.map((chapter) {
+          children: merged.map((item) {
+            final time = item["time"] as double;
+            final title = item["title"] as String;
+            final isChapter = item["isChapter"] as bool;
+
+            final isActive = currentItem != null && currentItem["time"] == time;
+
             return Card(
               margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
-              elevation: 4,
+              elevation: isChapter ? 4 : 2,
               child: SizedBox(
                 width: double.infinity,
                 child: InkWell(
                   onTap: () {
                     controller
-                        .seek(Duration(seconds: chapter.startTime.toInt()))
+                        .seek(Duration(seconds: time.toInt()))
                         .then((_) => controller.play());
                     Get.back();
                   },
                   borderRadius: BorderRadius.circular(12),
                   child: Padding(
                     padding: const EdgeInsets.all(16),
-                    child: Text(
-                      "${_formatTime(chapter.startTime.toInt())} - ${chapter.title}",
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: currentChapter != null &&
-                                  currentChapter.startTime == chapter.startTime
-                              ? Theme.of(context).colorScheme.primary
-                              : Theme.of(context).colorScheme.onSurface),
+                    child: Row(
+                      children: [
+                        Text(
+                          "[${_formatTime(time.toInt())}]",
+                          style: const TextStyle(
+                            fontSize: 13,
+                            color: Colors.grey,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: Text(
+                            title,
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.bold,
+                              color: isActive
+                                  ? Theme.of(context).colorScheme.primary
+                                  : isChapter
+                                      ? Theme.of(context).colorScheme.onSurface
+                                      : Theme.of(context)
+                                          .colorScheme
+                                          .onSurfaceVariant,
+                            ),
+                          ),
+                        ),
+                        if (!isChapter)
+                          const Text(
+                            "TS",
+                            style: TextStyle(
+                              fontSize: 11,
+                              color: Colors.grey,
+                            ),
+                          ),
+                      ],
                     ),
                   ),
                 ),
@@ -1097,6 +1164,7 @@ class _PlayerControllerState extends State<PlayerController> {
         ),
       ],
     );
+
     showCustomBottomDialog(context, chapterDialog);
   }
 }

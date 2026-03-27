@@ -17,6 +17,8 @@ class Setting {
   /// Icon of the setting
   final IconData? icon;
 
+  final Widget? iconWidget;
+
   /// [trailingIcon]: Icon at the end of the setting only for [SettingType.normal]
   final IconData? trailingIcon;
 
@@ -61,6 +63,7 @@ class Setting {
     required this.name,
     this.description,
     this.icon,
+    this.iconWidget,
     this.isVisible = true,
     this.isActivity = false,
     this.isChecked = false,

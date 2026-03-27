@@ -18,9 +18,8 @@ class ExtensionsAnimeScreen extends BaseAnimeScreen {
   @override
   Future<void> loadAll() async {
     resetPageData();
-    final manager = Get.find<ExtensionManager>().currentManager;
-
-    var sources = manager.getSortedInstalledExtension(ItemType.anime).value;
+    final manager = Get.find<ExtensionManager>().current.value;
+    var sources = manager.getInstalledRx(ItemType.anime).value;
     _buildSections(sources);
     for (var source in sources) {
       List<Media>? result;

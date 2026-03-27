@@ -6,9 +6,7 @@ import 'package:dartotsu/Functions/string_extensions.dart';
 import 'package:dartotsu/Preferences/PrefManager.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 
-class AnimeLocalSource extends Source implements HasSourceMethods {
-  AnimeLocalSource() : super();
-
+class AnimeLocalSource extends Source implements SourceMethods {
   @override
   String get name => "Local";
 
@@ -22,14 +20,7 @@ class AnimeLocalSource extends Source implements HasSourceMethods {
   ItemType get itemType => ItemType.anime;
 
   @override
-  SourceMethods get methods => AnimeLocalSourceMethods(this);
-}
-
-class AnimeLocalSourceMethods implements SourceMethods {
-  @override
-  Source source;
-
-  AnimeLocalSourceMethods(this.source);
+  Source get source => this;
 
   Future<Directory?> getAnimeDirectory() {
     return PrefManager.getDirectory(
@@ -174,6 +165,12 @@ class AnimeLocalSourceMethods implements SourceMethods {
   @override
   Future<List<PageUrl>> getPageList(DEpisode episode) {
     //not used for anime
+    throw UnimplementedError();
+  }
+
+  @override
+  Stream<Video>? getVideoListStream(DEpisode episode) {
+    // TODO: implement getVideoListStream
     throw UnimplementedError();
   }
 }

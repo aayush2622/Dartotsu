@@ -446,9 +446,12 @@ void openSourceSelectionSheet(
               video.title ?? video.quality,
             );
 
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              onTapCallback?.call();
+            Future.microtask(() {
+              if (!context.mounted) return;
+
               Navigator.pop(context);
+
+              onTapCallback?.call();
 
               navigateToPage(
                 context,

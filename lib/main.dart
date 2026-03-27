@@ -9,9 +9,7 @@ import 'package:dartotsu/Functions/Function.dart';
 import 'package:dartotsu/Screens/Anime/Player/MpvConfig.dart';
 import 'package:dartotsu/Screens/Login/LoginScreen.dart';
 import 'package:dartotsu/Screens/Manga/MangaScreen.dart';
-import 'package:dartotsu/Screens/Settings/SettingsPlayerScreen.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
-import 'package:desktop_webview_window/desktop_webview_window.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
@@ -25,12 +23,15 @@ import 'package:isar_community/isar.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:provider/provider.dart';
 import 'package:receive_sharing_intent/receive_sharing_intent.dart';
+import 'package:rhttp/rhttp.dart';
 import 'package:shorebird_code_push/shorebird_code_push.dart';
 import 'package:window_manager/window_manager.dart';
 
 import 'Api/Discord/Discord.dart';
 import 'Api/TypeFactory.dart';
 import 'Functions/RegisterProtocol/Api.dart';
+import 'Functions/string_extensions.dart';
+import 'NetworkManager/NetworkManager.dart';
 import 'Preferences/PrefManager.dart';
 import 'Screens/Anime/AnimeScreen.dart';
 import 'Screens/Error/ErrorScreen.dart';
@@ -39,6 +40,7 @@ import 'Screens/HomeNavBar.dart';
 import 'Screens/HomeNavbarDesktop.dart';
 import 'Screens/HomeNavbarMobile.dart';
 import 'Screens/Onboarding/OnboardingScreen.dart';
+import 'Screens/Settings/SettingsPlayerScreen.dart';
 import 'Services/MediaService.dart';
 import 'Services/ServiceSwitcher.dart';
 import 'Theme/ThemeManager.dart';
@@ -73,9 +75,6 @@ void main(List<String> args) async {
           softCrash: true,
         );
       };
-      if (Platform.isLinux && runWebViewTitleBarWidget(args)) {
-        return;
-      }
       await init();
       runApp(
         MultiProvider(
@@ -104,8 +103,13 @@ Future init() async {
     ['dar', 'anymex', 'sugoireads', 'mangayomi']
         .forEach(registerProtocolHandler);
   }
+  await Rhttp.init();
   await PrefManager.init();
-  await DartotsuExtensionBridge().init(isar, "Dartotsu");
+  await DartotsuExtensionBridge.init(
+    getDirectory: PrefManager.getDirectory,
+    isarInstance: PrefManager.dartotsuPreferences,
+    http: Get.put(NetworkManager()).compatibleClient,
+  );
   await Logger.init();
   await MpvConf.init();
   MediaService.init();
@@ -133,7 +137,12 @@ void initIntentListener() async {
   void handleFiles(List<SharedMediaFile> files) {
     if (files.isEmpty) return;
 
-    openPlayer(Get.context!, files.map((e) => e.path).toList());
+    final videos =
+        files.where((f) => f.path.isMediaVideo()).map((f) => f.path).toList();
+
+    if (videos.isEmpty) return;
+
+    openPlayer(Get.context!, videos);
   }
 
   intent.getMediaStream().listen(handleFiles);
@@ -150,50 +159,28 @@ void initDeepLinkListener() async {
   final appLink = AppLinks();
   try {
     final initialUri = await appLink.getInitialLink();
-    if (initialUri != null) handleDeepLink(initialUri);
+    if (initialUri != null) _handleDeepLink(initialUri);
   } catch (err) {
     snackString('Error getting initial deep link: $err');
   }
 
   appLink.uriLinkStream.listen(
-    (uri) => handleDeepLink(uri),
+    (uri) => _handleDeepLink(uri),
     onError: (err) => snackString('Error Opening link: $err'),
   );
 }
 
-void handleDeepLink(Uri uri) {
+void _handleDeepLink(Uri uri) {
   if (uri.host != "add-repo") return;
-  final scheme = uri.scheme.toLowerCase();
   bool isRepoAdded = false;
-
-  const mangayomiSchemes = {"dar", "anymex", "sugoireads", "mangayomi"};
-  const aniyomiSchemes = {"aniyomi", "tachiyomi"};
-  if (mangayomiSchemes.contains(scheme)) {
-    var manager = ExtensionType.mangayomi.getManager();
-    final repoMap = {
-      ItemType.anime:
-          uri.queryParameters["anime_url"] ?? uri.queryParameters["url"],
-      ItemType.manga: uri.queryParameters["manga_url"],
-      ItemType.novel: uri.queryParameters["novel_url"],
-    };
-    repoMap.forEach((type, url) {
-      if (url != null && url.isNotEmpty) {
-        manager.onRepoSaved([url], type);
-        isRepoAdded = true;
-      }
-    });
-  } else if (aniyomiSchemes.contains(scheme)) {
-    var manager = ExtensionType.aniyomi.getManager();
-    final url = uri.queryParameters["url"];
-    if (url != null && url.isNotEmpty) {
-      manager.onRepoSaved(
-        [url],
-        scheme == "aniyomi" ? ItemType.anime : ItemType.manga,
-      );
+  final manager = Get.find<ExtensionManager>().managers;
+  for (final handler in manager) {
+    if (handler.schemes.contains(uri.scheme.toLowerCase())) {
+      handler.handleSchemes(uri);
       isRepoAdded = true;
+      break;
     }
   }
-
   snackString(
     isRepoAdded
         ? "Added Repo Links Successfully!"

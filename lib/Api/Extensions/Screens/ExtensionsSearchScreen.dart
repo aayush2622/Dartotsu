@@ -36,9 +36,9 @@ class ExtensionsSearchScreen extends BaseSearchScreen {
 
   Future<void> _buildSections() async {
     List<Future<void>> tasks = [];
-    final manager = Get.find<ExtensionManager>().currentManager;
+    final manager = Get.find<ExtensionManager>().current.value;
     var sources = manager
-        .getSortedInstalledExtension(
+        .getInstalledRx(
           searchResults.value.type == SearchType.ANIME
               ? ItemType.anime
               : searchResults.value.type == SearchType.MANGA

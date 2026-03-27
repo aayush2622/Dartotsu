@@ -1,6 +1,5 @@
 import 'package:dartotsu/Widgets/LoadSvg.dart';
 import 'package:flutter/material.dart';
-import 'package:icons_plus/icons_plus.dart';
 import 'package:provider/provider.dart';
 
 import '../../Functions/Function.dart';
@@ -54,8 +53,13 @@ class LoginScreenState extends State<LoginScreen> {
                 _buildSocialIcon(
                     Icons.discord, 'https://discord.gg/eyQdCpdubF'),
                 const SizedBox(width: 16),
-                _buildSocialIcon(
-                    Bootstrap.github, 'https://github.com/aayush2622/dartotsu'),
+                IconButton(
+                  color: Colors.grey.shade800,
+                  iconSize: 36,
+                  icon: loadSvg("assets/svg/github.svg", color: theme.primary),
+                  onPressed: () => openLinkInBrowser(
+                      'https://github.com/aayush2622/dartotsu'),
+                ),
               ],
             ),
             const SizedBox(height: 16),

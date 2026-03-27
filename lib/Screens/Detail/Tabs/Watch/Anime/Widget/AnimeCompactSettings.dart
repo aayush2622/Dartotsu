@@ -184,7 +184,7 @@ class AnimeCompactSettings {
         IconButton(
           onPressed: () => navigateToPage(
             context,
-            MangaWebView(url: source!.baseUrl!, title: ''),
+            WebView(url: source!.baseUrl!),
           ),
           icon: const Icon(
             Icons.open_in_new_rounded,

@@ -34,9 +34,8 @@ abstract class BaseParser extends GetxController {
             ? ItemType.novel
             : ItemType.manga;
 
-    final manager = Get.find<ExtensionManager>().currentManager;
-    final Rx<List<Source>> sortedSourcesRx =
-        manager.getSortedInstalledExtension(itemType);
+    final manager = Get.find<ExtensionManager>().current.value;
+    final Rx<List<Source>> sortedSourcesRx = manager.getInstalledRx(itemType);
 
     _sourceListSubscription?.cancel();
     _sourceListSubscription = sortedSourcesRx.listen((sources) {

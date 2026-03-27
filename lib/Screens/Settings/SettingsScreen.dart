@@ -3,13 +3,13 @@ import 'package:dartotsu/Screens/Settings/SettingsAccountScreen.dart';
 import 'package:dartotsu/Screens/Settings/SettingsThemeScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:icons_plus/icons_plus.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import '../../Adaptor/Settings/SettingsAdaptor.dart';
 import '../../DataClass/Setting.dart';
 import '../../Functions/Function.dart';
 import '../../Theme/LanguageSwitcher.dart';
+import '../../Widgets/LoadSvg.dart';
 import 'SettingsAboutScreen.dart';
 import 'SettingsAnimeScreen.dart';
 import 'SettingsCommonScreen.dart';
@@ -94,7 +94,8 @@ class SettingsScreenState extends BaseSettingsScreen {
         name: getString.extension(2),
         description: getString.extensionsDescription,
         icon: Icons.extension,
-        onClick: () => navigateToPage(context, const SettingsExtensionsScreen()),
+        onClick: () =>
+            navigateToPage(context, const SettingsExtensionsScreen()),
         isActivity: true,
       ),
       Setting(
@@ -156,7 +157,8 @@ class SettingsScreenState extends BaseSettingsScreen {
               width: 170,
               height: 48,
             ),
-            onPressed: () => openLinkInBrowser('https://www.buymeacoffee.com/aayush262'),
+            onPressed: () =>
+                openLinkInBrowser('https://www.buymeacoffee.com/aayush262'),
           ),
         ),
         const SizedBox(height: 16),
@@ -177,14 +179,16 @@ class SettingsScreenState extends BaseSettingsScreen {
               color: Colors.grey.shade800,
               iconSize: 38,
               icon: const Icon(Icons.discord),
-              onPressed: () => openLinkInBrowser('https://discord.gg/eyQdCpdubF'),
+              onPressed: () =>
+                  openLinkInBrowser('https://discord.gg/eyQdCpdubF'),
             ),
             const SizedBox(width: 16),
             IconButton(
               color: Colors.grey.shade800,
               iconSize: 32,
-              icon: const Icon(Bootstrap.github),
-              onPressed: () => openLinkInBrowser('https://github.com/aayush2622/dartotsu'),
+              icon: loadSvg("assets/svg/github.svg", color: theme.primary),
+              onPressed: () =>
+                  openLinkInBrowser('https://github.com/aayush2622/dartotsu'),
             ),
           ],
         ),
