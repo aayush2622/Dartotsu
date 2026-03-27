@@ -291,7 +291,7 @@ class _WebViewState extends State<WebView> {
         Obx(
           () => IconButton(
             icon: Icon(
-              Icons.arrow_back_ios_rounded,
+              Icons.arrow_back_ios_new_rounded,
               color: _canGoBack.value
                   ? context.colorScheme.primary
                   : context.colorScheme.onSurfaceVariant,
