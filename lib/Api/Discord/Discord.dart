@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:dartotsu/Functions/Function.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
@@ -69,7 +68,7 @@ class _DiscordController extends GetxController {
         Navigator.of(context).pop();
         navigateToPage(
           context,
-          Platform.isLinux ? const LinuxLogin() : const MobileLogin(),
+          const MobileLogin(),
         );
       },
     );

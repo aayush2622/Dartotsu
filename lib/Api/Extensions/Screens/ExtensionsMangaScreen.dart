@@ -18,11 +18,11 @@ class ExtensionsMangaScreen extends BaseMangaScreen {
   @override
   Future<void> loadAll() async {
     resetPageData();
-    final manager = Get.find<ExtensionManager>().currentManager;
+    final manager = Get.find<ExtensionManager>().current.value;
 
     var sources = [
-      ...(manager.getSortedInstalledExtension(ItemType.manga)).value.take(4),
-      ...(manager.getSortedInstalledExtension(ItemType.novel)).value.take(4),
+      ...(manager.getInstalledRx(ItemType.manga)).value.take(4),
+      ...(manager.getInstalledRx(ItemType.novel)).value.take(4),
     ];
     _buildSections(sources);
     for (var source in sources) {

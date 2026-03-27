@@ -1,14 +1,13 @@
-import 'package:collection/collection.dart';
 import 'package:dartotsu/Functions/string_extensions.dart';
 import 'package:dartotsu/Screens/Detail/Tabs/Watch/BaseParser.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
 import '../../../../../Api/EpisodeDetails/Anify/Anify.dart';
 import '../../../../../Api/EpisodeDetails/Jikan/Jikan.dart';
 import '../../../../../Api/EpisodeDetails/Kitsu/Kitsu.dart';
-
 import '../../../../../DataClass/Media.dart';
 import '../../../../../Preferences/IsarDataClasses/MediaSettings/MediaSettings.dart';
 import 'Widget/AnimeCompactSettings.dart';
@@ -84,7 +83,7 @@ class AnimeParser extends BaseParser {
 
   void getEpisode(DMedia? media, Source source) async {
     if (media == null || media.url == null) {
-      episodeList.value = <String, DEpisode>{};
+      episodeList.value = {};
       errorType.value = ErrorType.NotFound;
       return;
     }
@@ -92,58 +91,30 @@ class AnimeParser extends BaseParser {
     DMedia? m;
     try {
       m = await source.methods.getDetail(media);
-    } catch (e) {
+    } catch (e, c) {
       errorType.value = ErrorType.NoResult;
+      debugPrint("Error fetching media details: $e \n$c");
       return;
     }
 
     dataLoaded.value = true;
-    var chapters = m.episodes;
+
+    final chapters = m.episodes;
     if (chapters == null) {
-      episodeList.value = <String, DEpisode>{};
+      episodeList.value = {};
       errorType.value = ErrorType.NoResult;
       return;
     }
 
-    var isFirst = true;
-    var shouldNormalize = false;
-    var additionalIndex = 0;
-    var episodeNumbers = <String, int>{};
+    Map<String, DEpisode> sorted;
 
-    episodeList.value = Map.fromEntries(
-      chapters.reversed.mapIndexed((index, chapter) {
-        final episode = chapter;
-        if (isFirst) {
-          isFirst = false;
-          if (episode.episodeNumber.toDouble() > 3.0) {
-            shouldNormalize = true;
-          }
-        }
+    if (chapters.length < 50) {
+      sorted = processEpisodes(chapters);
+    } else {
+      sorted = await compute(processEpisodes, chapters);
+    }
 
-        if (shouldNormalize) {
-          if (episode.episodeNumber.toDouble() % 1 != 0) {
-            additionalIndex--;
-            var remainder = (episode.episodeNumber.toDouble() % 1)
-                .toStringAsFixed(2)
-                .toDouble();
-            episode.episodeNumber =
-                (index + 1 + remainder + additionalIndex).toString();
-          } else {
-            episode.episodeNumber = (index + 1 + additionalIndex).toString();
-          }
-        }
-
-        var baseNumber = episode.episodeNumber;
-        if (episodeNumbers.containsKey(baseNumber)) {
-          episodeNumbers[baseNumber] = episodeNumbers[baseNumber]! + 1;
-          episode.episodeNumber = '$baseNumber.${episodeNumbers[baseNumber]}';
-        } else {
-          episodeNumbers[baseNumber] = 1;
-        }
-
-        return MapEntry(episode.episodeNumber, episode);
-      }),
-    );
+    episodeList.value = sorted;
   }
 
   var episodeDataLoaded = false.obs;
@@ -164,4 +135,56 @@ class AnimeParser extends BaseParser {
     var res = await Jikan.getEpisodes(mediaData);
     fillerEpisodesList.value ??= res;
   }
+}
+
+Map<String, DEpisode> processEpisodes(List<DEpisode> chapters) {
+  var isFirst = true;
+  var shouldNormalize = false;
+  var additionalIndex = 0;
+  var episodeNumbers = <String, int>{};
+
+  final map = Map.fromEntries(
+    chapters.reversed.toList().asMap().entries.map((entry) {
+      final index = entry.key;
+      final episode = entry.value;
+
+      if (isFirst) {
+        isFirst = false;
+        if (episode.episodeNumber.toDouble() > 3.0) {
+          shouldNormalize = true;
+        }
+      }
+
+      if (shouldNormalize) {
+        if (episode.episodeNumber.toDouble() % 1 != 0) {
+          additionalIndex--;
+          var remainder = (episode.episodeNumber.toDouble() % 1)
+              .toStringAsFixed(2)
+              .toDouble();
+          episode.episodeNumber =
+              (index + 1 + remainder + additionalIndex).toString();
+        } else {
+          episode.episodeNumber = (index + 1 + additionalIndex).toString();
+        }
+      }
+
+      var baseNumber = episode.episodeNumber;
+
+      if (episodeNumbers.containsKey(baseNumber)) {
+        episodeNumbers[baseNumber] = episodeNumbers[baseNumber]! + 1;
+        episode.episodeNumber = '$baseNumber.${episodeNumbers[baseNumber]}';
+      } else {
+        episodeNumbers[baseNumber] = 1;
+      }
+
+      return MapEntry(episode.episodeNumber, episode);
+    }),
+  );
+
+  final sorted = Map.fromEntries(
+    map.entries.toList()
+      ..sort((a, b) => double.parse(a.key).compareTo(double.parse(b.key))),
+  );
+
+  return sorted;
 }

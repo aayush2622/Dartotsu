@@ -6,7 +6,6 @@ import 'package:dartotsu/Preferences/PrefManager.dart';
 import 'package:dartotsu/Services/Screens/BaseSearchScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:icons_plus/icons_plus.dart';
 import 'package:provider/provider.dart';
 
 import '../../Adaptor/Media/MediaAdaptor.dart';
@@ -14,6 +13,7 @@ import '../../DataClass/SearchResults.dart';
 import '../../Services/MediaService.dart';
 import '../../Theme/Colors.dart';
 import '../../Theme/ThemeProvider.dart';
+import '../../Widgets/LoadSvg.dart';
 import '../../Widgets/ScrollConfig.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -116,9 +116,9 @@ class SearchScreenState extends State<SearchScreen> {
                                   left: 16,
                                 ),
                                 trailing: IconButton(
-                                  icon: const Icon(
-                                    FontAwesome.trash_solid,
-                                    size: 18,
+                                  icon: loadSvg(
+                                    "assets/svg/github.svg",
+                                    color: theme.primary,
                                   ),
                                   onPressed: () {
                                     setState(() {
@@ -150,7 +150,7 @@ class SearchScreenState extends State<SearchScreen> {
                             ? MediaAdaptor(
                                 type: screen.type.value,
                                 mediaList: null,
-                                skeletonObjects: 4 ,
+                                skeletonObjects: 4,
                               )
                             : const SizedBox(height: 64),
                     ],

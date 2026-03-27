@@ -40,6 +40,7 @@ android {
         jniLibs {
             useLegacyPackaging true
         }
+        exclude 'META-INF/versions/9/OSGI-INF/MANIFEST.MF'
     }
     defaultConfig {
         applicationId = "ani.aayush262.dartotsu"

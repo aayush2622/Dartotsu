@@ -6,14 +6,12 @@ import 'package:dartotsu/Preferences/PrefManager.dart';
 import 'package:dartotsu/Widgets/CustomBottomDialog.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown_plus/flutter_markdown_plus.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:markdown_widget/config/configs.dart';
-import 'package:markdown_widget/widget/blocks/leaf/link.dart';
-import 'package:markdown_widget/widget/markdown.dart';
+import 'package:install_plugin/install_plugin.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
-import 'package:install_plugin/install_plugin.dart';
 
 class AppUpdater {
   final mainRepo = 'aayush2622/Dartotsu';
@@ -178,16 +176,15 @@ class AppUpdater {
               children: [
                 Text("Change Logs:", style: textStyle),
                 const SizedBox(height: 12),
-                MarkdownWidget(
-                  data: data["body"],
+                MarkdownBody(
+                  data: data["body"] ?? "",
                   shrinkWrap: true,
-                  config: MarkdownConfig(
-                    configs: [
-                      LinkConfig(
-                        onTap: (url) => openLinkInBrowser(url),
-                      )
-                    ],
-                  ),
+                  selectable: true,
+                  onTapLink: (text, url, title) {
+                    if (url != null) openLinkInBrowser(url);
+                  },
+                  styleSheet:
+                      MarkdownStyleSheet.fromTheme(Theme.of(Get.context!)),
                 ),
               ],
             ),

@@ -5,6 +5,7 @@ import 'package:dartotsu/Widgets/AlertDialogBuilder.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../../../../../DataClass/Media.dart';
 import '../../../../../../Preferences/IsarDataClasses/MediaSettings/MediaSettings.dart';
 
@@ -160,7 +161,7 @@ class MangaCompactSettings {
         IconButton(
           onPressed: () => navigateToPage(
             context,
-            MangaWebView(url: source!.baseUrl!, title: ''),
+            WebView(url: source!.baseUrl!),
           ),
           icon: const Icon(
             Icons.open_in_new_rounded,

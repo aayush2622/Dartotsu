@@ -1,6 +1,7 @@
 import 'package:dartotsu/Functions/string_extensions.dart';
-import 'package:flutter/material.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
+import 'package:flutter/material.dart';
+
 import '../../DataClass/Media.dart';
 import '../../Screens/Detail/Tabs/Watch/Manga/Widget/DateFormat.dart';
 
@@ -54,7 +55,7 @@ class ChapterListView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  chapter.name ?? '',
+                  chapter.name ?? 'Chapter ${chapter.episodeNumber}',
                   maxLines: 1,
                   style: const TextStyle(
                     fontFamily: 'Poppins',

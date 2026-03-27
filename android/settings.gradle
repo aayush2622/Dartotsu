@@ -1,3 +1,5 @@
+import groovy.json.JsonSlurper
+
 pluginManagement {
     def flutterSdkPath = {
         def properties = new Properties()
@@ -21,5 +23,37 @@ plugins {
     id "com.android.application" version "8.10.0" apply false
     id "org.jetbrains.kotlin.android" version "2.2.0" apply false
 }
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
 
+    repositories {
+        google()
+        mavenCentral()
+        maven { url "https://jitpack.io" }
+        maven { url "https://storage.googleapis.com/download.flutter.io" }
+    }
+}
 include ":app"
+
+def flutterProjectRoot = rootDir.parentFile
+def pluginsFile = new File(flutterProjectRoot, ".flutter-plugins-dependencies")
+
+if (pluginsFile.exists()) {
+
+    def json = new JsonSlurper().parse(pluginsFile)
+    def androidPlugins = json.plugins.android
+
+    androidPlugins.each { plugin ->
+
+        def name = plugin.name
+        def pluginDirectory = new File(plugin.path, "android")
+        def settingsFile = new File(pluginDirectory, "settings.gradle")
+
+        include ":$name"
+        project(":$name").projectDir = pluginDirectory
+
+        if (settingsFile.exists()) {
+            apply from: settingsFile
+        }
+    }
+}

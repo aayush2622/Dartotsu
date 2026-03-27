@@ -2,9 +2,9 @@ import 'package:dartotsu/Widgets/AlertDialogBuilder.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart'
     hide ExtensionList;
 import 'package:flutter/material.dart';
-import 'package:icons_plus/icons_plus.dart';
 
 import '../../Theme/LanguageSwitcher.dart';
+import '../../Widgets/LoadSvg.dart';
 import '../Settings/language.dart';
 import 'ExtensionList.dart';
 
@@ -32,13 +32,13 @@ class _BrowseScreenState extends ExtensionManagerScreen<ExtensionScreen> {
     BuildContext context,
     TabController tabController,
     String currentLanguage,
-    Future<void> Function(List<String> repoUrl, ItemType type) onRepoSaved,
+    Future<void> Function(String repoUrl, ItemType type) onRepoSaved,
     void Function(String currentLanguage) onLanguageChanged,
   ) {
     var theme = Theme.of(context).colorScheme;
     return [
       IconButton(
-        icon: const Icon(Bootstrap.github),
+        icon: loadSvg("assets/svg/github.svg", color: theme.primary),
         onPressed: () {
           var tabIndex = tabController.index;
           var type = tabIndex == 0 || tabIndex == 1
@@ -61,7 +61,7 @@ class _BrowseScreenState extends ExtensionManagerScreen<ExtensionScreen> {
                 ),
               ],
             ))
-            ..setPositiveButton(getString.ok, () => onRepoSaved([text], type))
+            ..setPositiveButton(getString.ok, () => onRepoSaved(text, type))
             ..show();
         },
       ),

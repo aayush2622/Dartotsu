@@ -292,7 +292,8 @@ class _ReaderControllerState extends State<ReaderController> {
                       const SizedBox(width: 12),
                       Expanded(
                         child: Text(
-                          previous?.name.toString() ?? '',
+                          previous?.name?.toString() ??
+                              "Chapter ${previous?.episodeNumber}",
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 14,
@@ -315,7 +316,8 @@ class _ReaderControllerState extends State<ReaderController> {
                     children: [
                       Expanded(
                         child: Text(
-                          next?.name.toString() ?? '',
+                          next?.name?.toString() ??
+                              "Chapter ${next?.episodeNumber}",
                           textAlign: TextAlign.right,
                           style: const TextStyle(
                             color: Colors.white,

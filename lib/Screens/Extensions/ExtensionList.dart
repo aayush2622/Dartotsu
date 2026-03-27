@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:dartotsu/Preferences/PrefManager.dart';
-import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:dartotsu_extension_bridge/Screen/ExtensionList.dart' as e;
+import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/material.dart';
 
 import '../../Functions/Function.dart';
@@ -117,15 +117,6 @@ class _ExtensionListScreenState extends e.ExtensionList<ExtensionList> {
         Text("${source.version}", style: _subtitleTextStyle),
       if (source.isNsfw ?? false)
         const Text("  (18+)", style: _subtitleTextStyle),
-      if (source.isObsolete ?? false)
-        Text(
-          "  OBSOLETE",
-          style: TextStyle(
-            color: theme.error,
-            fontWeight: FontWeight.bold,
-            fontSize: 12,
-          ),
-        ),
     ];
 
     return Wrap(
@@ -144,12 +135,12 @@ class _ExtensionListScreenState extends e.ExtensionList<ExtensionList> {
             IconButton(
               icon: const Icon(Icons.update_rounded),
               tooltip: 'Update',
-              onPressed: () => manager.updateSource(source),
+              onPressed: () => manager.current.value.updateSource(source),
             ),
           IconButton(
             icon: const Icon(Icons.delete_rounded),
             tooltip: 'Uninstall',
-            onPressed: () => manager.uninstallSource(source),
+            onPressed: () => manager.current.value.uninstallSource(source),
           ),
           IconButton(
             icon: const Icon(Icons.settings_rounded),
@@ -177,7 +168,7 @@ class _ExtensionListScreenState extends e.ExtensionList<ExtensionList> {
       return IconButton(
         icon: const Icon(Icons.download_rounded),
         tooltip: 'Install',
-        onPressed: () => manager.installSource(source),
+        onPressed: () => manager.current.value.installSource(source),
       );
     }
   }

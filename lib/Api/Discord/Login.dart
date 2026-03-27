@@ -1,6 +1,4 @@
 import 'package:dartotsu/Api/Discord/Discord.dart';
-import 'package:dartotsu_extension_bridge/extension_bridge.dart';
-import 'package:desktop_webview_window/desktop_webview_window.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
@@ -45,7 +43,6 @@ class MobileLoginState extends State<MobileLogin> {
           backgroundColor: Colors.transparent,
         ),
         body: InAppWebView(
-          webViewEnvironment: webViewEnvironment,
           initialUrlRequest: URLRequest(
             url: WebUri('https://discord.com/login'),
           ),
@@ -101,92 +98,5 @@ class MobileLoginState extends State<MobileLogin> {
     snackString("Getting Data");
     DiscordService.testRpc();
     Navigator.of(context).pop();
-  }
-}
-
-class LinuxLogin extends StatefulWidget {
-  const LinuxLogin({super.key});
-
-  @override
-  LinuxLoginState createState() => LinuxLoginState();
-}
-
-class LinuxLoginState extends State<LinuxLogin> {
-  late Webview _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _initializeWebview();
-  }
-
-  Future<void> _initializeWebview() async {
-    _controller = await WebviewWindow.create();
-
-    _controller
-      ..setBrightness(Brightness.dark)
-      ..launch('https://discord.com/login');
-
-    await Future.delayed(const Duration(milliseconds: 1000));
-
-    await _controller
-        .evaluateJavaScript('''window.LOCAL_STORAGE = window.localStorage''');
-    _controller.addOnUrlRequestCallback(
-      (String url) async {
-        if (url != 'https://discord.com/login' && url != 'about:blank') {
-          await _extractToken();
-        }
-      },
-    );
-  }
-
-  Future<void> _extractToken() async {
-    try {
-      final result = await _controller.evaluateJavaScript('''
-  (function() {
-    return window.LOCAL_STORAGE.getItem('token');
-  })()
-''');
-
-      if (result != null && result != 'null') {
-        _login(result.trim().replaceAll('"', ''));
-      } else {
-        _handleError('Failed to retrieve token');
-      }
-    } catch (e) {
-      _handleError('Error extracting token: $e');
-    }
-  }
-
-  void _handleError(String message) {
-    snackString(message);
-    Navigator.of(context).pop();
-  }
-
-  void _login(String token) async {
-    snackString("Logged in successfully");
-    Discord.saveToken(token);
-    snackString("Getting Data");
-    DiscordService.testRpc();
-    Navigator.of(context).pop();
-  }
-
-  @override
-  void dispose() {
-    _controller.close();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Discord Login'),
-        backgroundColor: Colors.transparent,
-      ),
-      body: const Center(
-        child: Text('Launching webview for Discord Login...'),
-      ),
-    );
   }
 }
