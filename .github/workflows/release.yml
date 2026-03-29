@@ -113,10 +113,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-flutter-
 
-      - name: Set up Signing Tool
-        run: |
-          mkdir $env:USERPROFILE\certs
-          [System.IO.File]::WriteAllBytes("$env:USERPROFILE\certs\Dartotsu.pfx", [Convert]::FromBase64String("${{secrets.PFX_FILE}}"))
       # Create .env:
       - name: Setup env File
         env:
@@ -130,10 +126,6 @@ jobs:
         with:
           flutter-version: 3.35.7
           cache: true
-      - name: Setup NuGet.exe for use with actions
-        uses: NuGet/setup-nuget@v2.0.1
-        with:
-          nuget-version: "latest"
       # Enable Windows desktop support
       - name: Enable Windows desktop support
         run: flutter config --enable-windows-desktop
@@ -147,32 +139,31 @@ jobs:
         id: get_version
         run: |
           $version = (Get-Content pubspec.yaml | Select-String -Pattern 'version: ([\d.]+)').Matches.Groups[1].Value
+          $msixVersion = "$version.0"
           echo "version=$version" >> $env:GITHUB_ENV
+          echo "msix_version=$msixVersion" >> $env:GITHUB_ENV
 
-      - name: Find Latest SignTool Path
-        id: find_signtool
-        shell: pwsh 
+      - name: Update MSIX version in pubspec.yaml
         run: |
-          $sdkBins = Get-ChildItem "C:\Program Files (x86)\Windows Kits\10\bin" -Directory | 
-                     Where-Object { $_.Name -match '^\d+\.\d+\.\d+\.\d+$' } |  
-                     Sort-Object Name -Descending | 
-                     Select-Object -First 1
-          if (-not $sdkBins) {
-            throw "No Windows SDK bin directories found!"
-          }
-          $signtoolPath = Join-Path $sdkBins.FullName "x64\signtool.exe"
-          if (-not (Test-Path $signtoolPath)) {
-            throw "signtool.exe not found at $signtoolPath"
-          }
-          echo "signtool_path=$signtoolPath" >> $env:GITHUB_OUTPUT
+          (Get-Content pubspec.yaml) -replace 'msix_version: [\d.]+', "msix_version: $env:msix_version" | Set-Content pubspec.yaml
 
-      - name: Build and Sign Setup
+      - name: Build unsigned MSIX package
         run: |
-          dart run inno_bundle:build --sign-tool-params '"${{ steps.find_signtool.outputs.signtool_path }}" sign /fd sha256 /f "C:\Users\runneradmin\certs\Dartotsu.pfx" /p "${{secrets.PFX_PASSWORD}}" /tr http://timestamp.digicert.com /td sha256 /v $f' --release
-      - name: Release Windows Zip
+          Write-Host "Building unsigned MSIX package..."
+          Write-Host "Note: Users must enable Developer Mode to install unsigned MSIX packages"
+          flutter pub run msix:create
+
+      - name: Rename MSIX with version
+        run: |
+          $sourcePath = "build\windows\x64\runner\Release\dartotsu.msix"
+          $destPath = "build\windows\x64\runner\Release\Dartotsu-$env:msix_version-x64.msix"
+          Move-Item -Path $sourcePath -Destination $destPath -Force
+          Write-Host "Renamed MSIX to: $destPath"
+
+      - name: Release Windows MSIX
         uses: softprops/action-gh-release@master
         with:
-          files: build/windows/x64/installer/Release/Dartotsu-x86_64-${{env.version}}-Installer.exe
+          files: build/windows/x64/runner/Release/Dartotsu-${{env.msix_version}}-x64.msix
 
   build_linux:
     runs-on: ubuntu-latest
