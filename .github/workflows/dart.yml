@@ -259,7 +259,7 @@ jobs:
         run: |
           mkdir $env:USERPROFILE\certs
           [System.IO.File]::WriteAllBytes("$env:USERPROFILE\certs\Dartotsu.pfx", [Convert]::FromBase64String("${{secrets.PFX_FILE}}"))
-          Import-PfxCertificate -FilePath "$env:USERPROFILE\certs\Dartotsu.pfx" -CertStoreLocation Cert:\LocalMachine\My -Password (ConvertTo-SecureString -String "${{secrets.PFX_PASSWORD}}" -Force -AsPlainText)
+          Import-PfxCertificate -FilePath "$env:USERPROFILE\certs\Dartotsu.pfx" -CertStoreLocation Cert:\CurrentUser\My -Password (ConvertTo-SecureString -String "${{secrets.PFX_PASSWORD}}" -Force -AsPlainText)
         shell: pwsh
       - *setup_env
       - *prepare_flutter
