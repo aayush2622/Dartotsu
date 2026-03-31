@@ -119,7 +119,7 @@ dev_dependencies:
   isar_community_generator: ^3.3.2
   json_serializable: ^6.0.1
   build_runner: ^2.13.1
-  msix: ^3.16.7
+  inno_bundle: ^0.11.2
 dependency_overrides:
   collection: ^1.19.1
 # Flutter-specific configurations
@@ -162,14 +162,14 @@ flutter_icons:
     generate: true
     image_path: "assets/images/logo.png"
 
-msix_config:
-  display_name: Dartotsu
-  publisher_display_name: Ankit Grai
-  identity_name: com.ankitgrai.dartotsu
-  publisher: CN=Ankit Grai
-  msix_version: 0.0.4.0
-  logo_path: assets/images/logo.png
-  capabilities: internetClient, privateNetworkClientServer
-  languages: en-us
-  architecture: x64
-  install_certificate: false
+inno_bundle:
+  sign_tool:
+    command: $p
+  id: 609d9fb9-ac99-533b-a5b5-f277afa99b68
+  publisher: Ankit Grai
+  name: Dartotsu
+  version: 0.0.4
+  admin: auto
+  installer_icon: assets/images/lol.ico
+  languages:
+    - english
