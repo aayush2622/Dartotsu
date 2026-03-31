@@ -259,6 +259,8 @@ jobs:
         run: |
           mkdir $env:USERPROFILE\certs
           [System.IO.File]::WriteAllBytes("$env:USERPROFILE\certs\Dartotsu.pfx", [Convert]::FromBase64String("${{secrets.PFX_FILE}}"))
+          Import-PfxCertificate -FilePath "$env:USERPROFILE\certs\Dartotsu.pfx" -CertStoreLocation Cert:\LocalMachine\My -Password (ConvertTo-SecureString -String "${{secrets.PFX_PASSWORD}}" -Force -AsPlainText)
+        shell: pwsh
       - *setup_env
       - *prepare_flutter
       - *setup_flutter
@@ -296,10 +298,20 @@ jobs:
             throw "signtool.exe not found at $signtoolPath"
           }
           echo "signtool_path=$signtoolPath" >> $env:GITHUB_OUTPUT
-
+      - name: check if pfx file exists
+        run: |
+          if (-not (Test-Path "$env:USERPROFILE\certs\Dartotsu.pfx")) {
+            throw "PFX file not found at $env:USERPROFILE\certs\Dartotsu.pfx"
+          }
+      - name: Get Certificate Thumbprint
+        id: get_thumbprint
+        shell: pwsh
+        run: |
+          $cert = Get-PfxCertificate -FilePath "$env:USERPROFILE\certs\Dartotsu.pfx" -Password (ConvertTo-SecureString -String "${{secrets.PFX_PASSWORD}}" -Force -AsPlainText)
+          echo "thumbprint=$($cert.Thumbprint)" >> $env:GITHUB_OUTPUT
       - name: Build and Sign Setup
         run: |
-          dart run inno_bundle:build --sign-tool-params '"${{ steps.find_signtool.outputs.signtool_path }}" sign /fd sha256 /f "C:\Users\runneradmin\certs\Dartotsu.pfx" /p "${{secrets.PFX_PASSWORD}}" /tr http://timestamp.digicert.com /td sha256 /v $f' --release
+          dart run inno_bundle:build --sign-tool-params '"${{ steps.find_signtool.outputs.signtool_path }}" sign /fd sha256 /sha1 "${{ steps.get_thumbprint.outputs.thumbprint }}" /tr http://timestamp.digicert.com /td sha256 /v $f' --release
 
       - name: Upload File To Google Drive
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
