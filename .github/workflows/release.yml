@@ -114,9 +114,11 @@ jobs:
             ${{ runner.os }}-flutter-
 
       - name: Set up Signing Tool
+        shell: pwsh
         run: |
           mkdir $env:USERPROFILE\certs
           [System.IO.File]::WriteAllBytes("$env:USERPROFILE\certs\Dartotsu.pfx", [Convert]::FromBase64String("${{secrets.PFX_FILE}}"))
+          Import-PfxCertificate -FilePath "$env:USERPROFILE\certs\Dartotsu.pfx" -CertStoreLocation Cert:\CurrentUser\My -Password (ConvertTo-SecureString -String "${{secrets.PFX_PASSWORD}}" -Force -AsPlainText)
       # Create .env:
       - name: Setup env File
         env:
@@ -166,9 +168,16 @@ jobs:
           }
           echo "signtool_path=$signtoolPath" >> $env:GITHUB_OUTPUT
 
+      - name: Get Certificate Thumbprint
+        id: get_thumbprint
+        shell: pwsh
+        run: |
+          $cert = Get-PfxCertificate -FilePath "$env:USERPROFILE\certs\Dartotsu.pfx" -Password (ConvertTo-SecureString -String "${{secrets.PFX_PASSWORD}}" -Force -AsPlainText)
+          echo "thumbprint=$($cert.Thumbprint)" >> $env:GITHUB_OUTPUT
+
       - name: Build and Sign Setup
         run: |
-          dart run inno_bundle:build --sign-tool-params '"${{ steps.find_signtool.outputs.signtool_path }}" sign /fd sha256 /f "C:\Users\runneradmin\certs\Dartotsu.pfx" /p "${{secrets.PFX_PASSWORD}}" /tr http://timestamp.digicert.com /td sha256 /v $f' --release
+          dart run inno_bundle:build --sign-tool-params '"${{ steps.find_signtool.outputs.signtool_path }}" sign /fd sha256 /sha1 "${{ steps.get_thumbprint.outputs.thumbprint }}" /tr http://timestamp.digicert.com /td sha256 /v $f' --release
       - name: Release Windows Zip
         uses: softprops/action-gh-release@master
         with:
