@@ -637,7 +637,7 @@
     "@rtl": {},
     "glassEffectDescription": "Gives a frosted glass effect to the app",
     "@glassEffectDescription": {},
-    "nextEpisodeRelease": "Episode {episode} will be released in",
+    "nextEpisodeRelease": "ఈ ఎపిసోడ్‌ను {episode} తేదీన విడుదల చేయనున్నారు",
     "@nextEpisodeRelease": {
         "description": "Message showing the next episode info",
         "placeholders": {
