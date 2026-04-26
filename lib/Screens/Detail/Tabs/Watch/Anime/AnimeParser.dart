@@ -84,7 +84,10 @@ class AnimeParser extends BaseParser {
   void getEpisode(DMedia? media, Source source) async {
     if (media == null || media.url == null) {
       episodeList.value = {};
-      errorType.value = ErrorType.NotFound;
+      error.value = ParserError(
+        ErrorType.NotFound,
+        "Media or URL is missing",
+      );
       return;
     }
 
@@ -92,7 +95,11 @@ class AnimeParser extends BaseParser {
     try {
       m = await source.methods.getDetail(media);
     } catch (e, c) {
-      errorType.value = ErrorType.NoResult;
+      error.value = ParserError(
+        ErrorType.NoResult,
+        "Failed to fetch media details: $e",
+      );
+      episodeList.value = {};
       debugPrint("Error fetching media details: $e \n$c");
       return;
     }
@@ -102,7 +109,10 @@ class AnimeParser extends BaseParser {
     final chapters = m.episodes;
     if (chapters == null) {
       episodeList.value = {};
-      errorType.value = ErrorType.NoResult;
+      error.value = ParserError(
+        ErrorType.NoResult,
+        "No episodes found",
+      );
       return;
     }
 
@@ -115,6 +125,8 @@ class AnimeParser extends BaseParser {
     }
 
     episodeList.value = sorted;
+
+    error.value = null;
   }
 
   var episodeDataLoaded = false.obs;

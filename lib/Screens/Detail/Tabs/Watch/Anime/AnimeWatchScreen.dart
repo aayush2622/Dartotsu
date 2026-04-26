@@ -59,20 +59,14 @@ class AnimeWatchScreenState extends BaseWatchScreen<AnimeWatchScreen> {
               return const Center(child: CircularProgressIndicator());
             }
             if (episodeList.isEmpty) {
-              return Column(
-                children: [
-                  Center(
-                    child: Text(
-                      _viewModel.errorType.value == ErrorType.NotFound
-                          ? 'Media not found'
-                          : 'No episodes found',
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.onSurface,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+              return Center(
+                child: Text(
+                  _viewModel.error.value?.message ?? "No episodes found",
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.onSurface,
+                    fontWeight: FontWeight.bold,
                   ),
-                ],
+                ),
               );
             }
             updateEpisodeDetails(episodeList);
