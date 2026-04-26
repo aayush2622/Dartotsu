@@ -19,8 +19,7 @@ abstract class BaseParser extends GetxController {
   var selectedMedia = Rxn<DMedia?>(null);
   var status = Rxn<String>(null);
   var source = Rxn<Source>(null);
-  var errorType = Rxn<ErrorType>(ErrorType.None);
-
+  var error = Rxn<ParserError>();
   final Rx<List<Source>> sourceList = Rx([]);
   final RxBool sourcesLoaded = false.obs;
 
@@ -205,11 +204,16 @@ abstract class BaseParser extends GetxController {
       }
     }
     if (response != null) {
+      error.value = null;
       _saveShowResponse(mediaData, response, source);
       selectedMedia.value = response;
       onFinish?.call(response);
     } else {
       status.value = "Nothing Found";
+      error.value = ParserError(
+        ErrorType.NotFound,
+        "No matching media found",
+      );
       onFinish?.call(response);
     }
   }
@@ -257,4 +261,16 @@ abstract class BaseParser extends GetxController {
   }
 }
 
-enum ErrorType { None, NotFound, NoResult }
+class ParserError {
+  final ErrorType type;
+  final String message;
+
+  ParserError(this.type, this.message);
+}
+
+enum ErrorType {
+  None,
+  NotFound,
+  NoResult,
+  Error;
+}

@@ -68,56 +68,99 @@ enum RefreshId {
 
 var Refresh = Get.put(_RefreshController(), permanent: true);
 
-Future<void> snackString(
-  String? s, {
+void snackString(
+  String? message, {
   String? clipboard,
   BuildContext? c,
-}) async {
-  var context = c ?? Get.context;
-  debugPrint('Showing SnackBar with message: $s');
-  if (context != null && s != null && s.isNotEmpty) {
-    var theme = Theme.of(context).colorScheme;
-    try {
-      final scaffoldMessenger = ScaffoldMessenger.of(context);
-      scaffoldMessenger.hideCurrentSnackBar();
-      final snackBar = SnackBar(
-        backgroundColor: Colors.transparent,
-        behavior: SnackBarBehavior.floating,
-        margin: const EdgeInsets.symmetric(horizontal: 12),
-        elevation: 0,
-        content: ThemedContainer(
-          context: context,
-          child: GestureDetector(
-            onTap: () => scaffoldMessenger.hideCurrentSnackBar(),
-            onLongPress: () => copyToClipboard(clipboard ?? s),
-            child: Text(
-              s,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontFamily: 'Poppins',
-                fontSize: 16.0,
-                fontWeight: FontWeight.w600,
-                color: theme.onSurface,
+  IconData? icon,
+  bool simple = false,
+}) {
+  final context = c ?? Get.context;
+  if (context == null || message == null || message.isEmpty) return;
+
+  final theme = Theme.of(context);
+  final scaffold = ScaffoldMessenger.of(context);
+
+  scaffold.hideCurrentSnackBar();
+
+  final snackBar = SnackBar(
+    backgroundColor: Colors.transparent,
+    behavior: SnackBarBehavior.floating,
+    elevation: 0,
+    margin: const EdgeInsets.fromLTRB(12, 0, 12, 24),
+    duration: const Duration(seconds: 4),
+    dismissDirection: DismissDirection.down,
+    content: ThemedContainer(
+      context: context,
+      borderRadius: BorderRadius.circular(18),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onLongPress: () =>
+            !simple ? copyToClipboard(clipboard ?? message) : null,
+        child: Row(
+          children: [
+            icon == null
+                ? ClipOval(
+                    child: Image.asset(
+                      'assets/images/logo.png',
+                      width: 20,
+                      height: 20,
+                      fit: BoxFit.cover,
+                    ),
+                  )
+                : Icon(
+                    icon,
+                    size: 20,
+                    color: theme.colorScheme.primary,
+                  ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Text(
+                message,
+                maxLines: 3,
+                overflow: TextOverflow.ellipsis,
+                style: context.textTheme.bodyLarge?.copyWith(height: 1.25),
               ),
             ),
-          ),
-        ).animate(effects: [
-          const SlideEffect(
-            begin: Offset(0, 1),
-            end: Offset.zero,
-            duration: Duration(milliseconds: 200),
-          )
-        ]),
-      );
+            const SizedBox(width: 8),
+            if (!simple) ...[
+              IconButton(
+                constraints: const BoxConstraints(),
+                icon: Icon(
+                  Icons.copy_rounded,
+                  size: 18,
+                  color: theme.colorScheme.onSurface.withOpacity(0.5),
+                ),
+                onPressed: () {
+                  scaffold.hideCurrentSnackBar();
+                  copyToClipboard(clipboard ?? message);
+                },
+              ),
+              IconButton(
+                constraints: const BoxConstraints(),
+                onPressed: scaffold.hideCurrentSnackBar,
+                icon: Icon(
+                  Icons.close_rounded,
+                  size: 18,
+                  color: theme.colorScheme.onSurface.withOpacity(0.5),
+                ),
+              )
+            ],
+          ],
+        ),
+      ),
+    )
+        .animate()
+        .fadeIn(duration: 150.ms)
+        .slideY(begin: 0.4, curve: Curves.easeOutCubic)
+        .scale(
+          begin: const Offset(0.96, 0.96),
+          curve: Curves.easeOutBack,
+        ),
+  );
 
-      scaffoldMessenger.showSnackBar(snackBar);
-    } catch (e, stackTrace) {
-      debugPrint('Error showing SnackBar: $e');
-      debugPrint(stackTrace.toString());
-    }
-  } else {
-    debugPrint('No valid context or string provided.');
-  }
+  scaffold.showSnackBar(snackBar);
 }
 
 void copyToClipboard(String text) {

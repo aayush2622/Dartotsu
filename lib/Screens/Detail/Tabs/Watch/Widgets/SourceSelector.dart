@@ -14,13 +14,14 @@ class SourceSelector extends StatefulWidget {
   final Function(Source source) onSourceChange;
   final Media mediaData;
   final List<Source> sourceList;
-
+  final void Function() reload;
   const SourceSelector({
     super.key,
     this.currentSource,
     required this.onSourceChange,
     required this.mediaData,
     required this.sourceList,
+    required this.reload,
   });
 
   @override
@@ -84,6 +85,17 @@ class _SourceSelectorState extends State<SourceSelector> {
                   if (widget.currentSource?.id != source.id) {
                     widget.onSourceChange(source);
                   }
+                },
+                trailingBuilder: (item) {
+                  final isSelected = item == lastUsedSource;
+                  if (!isSelected) return const SizedBox();
+                  return IconButton(
+                    icon: const Icon(Icons.refresh, size: 18),
+                    onPressed: () {
+                      widget.reload();
+                      setState(() {});
+                    },
+                  );
                 },
               ),
             ),

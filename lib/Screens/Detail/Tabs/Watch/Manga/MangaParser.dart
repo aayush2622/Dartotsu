@@ -83,7 +83,10 @@ class MangaParser extends BaseParser {
   void getChapter(DMedia? media, Source source) async {
     if (media == null || media.url == null) {
       chapterList.value = <DEpisode>[];
-      errorType.value = ErrorType.NotFound;
+      error.value = ParserError(
+        ErrorType.NotFound,
+        "Media or URL is missing",
+      );
       return;
     }
 
@@ -92,19 +95,28 @@ class MangaParser extends BaseParser {
       m = await source.methods.getDetail(media);
     } catch (e) {
       Logger.log(e.toString());
-      errorType.value = ErrorType.NoResult;
-      m = null;
+      error.value = ParserError(
+        ErrorType.NoResult,
+        e.toString(),
+      );
+      chapterList.value = <DEpisode>[];
       return;
     }
 
     dataLoaded.value = true;
-    if (m.episodes == null) {
+
+    if (m.episodes == null || m.episodes!.isEmpty) {
       chapterList.value = <DEpisode>[];
-      errorType.value = ErrorType.NoResult;
+      error.value = ParserError(
+        ErrorType.NoResult,
+        "No chapters available",
+      );
       return;
     }
-    chapterList.value = m.episodes?.reversed.toList();
+
+    chapterList.value = m.episodes!.reversed.toList();
     unModifiedChapterList.value = chapterList.value;
+
     var uniqueScanlators = {
       for (var element in chapterList.value!)
         if (element.scanlator != null) element.scanlator!
@@ -112,5 +124,7 @@ class MangaParser extends BaseParser {
 
     scanlator.value = uniqueScanlators.toList();
     toggledScanlators.value = List<bool>.filled(uniqueScanlators.length, true);
+
+    error.value = null;
   }
 }

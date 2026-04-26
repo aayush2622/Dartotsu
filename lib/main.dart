@@ -310,6 +310,12 @@ class MainScreenState extends State<MainScreen> {
     checkForUpdate();
   }
 
+  @override
+  void dispose() {
+    DartotsuExtensionBridge.dispose();
+    super.dispose();
+  }
+
   Widget get _navbar {
     return Obx(() {
       navbar = context.isPhone
