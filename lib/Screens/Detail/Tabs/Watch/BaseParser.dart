@@ -102,119 +102,129 @@ abstract class BaseParser extends GetxController {
 
   Future<void> _performSearch(Source source, Media mediaData,
       Function(DMedia? response)? onFinish) async {
-    selectedMedia.value = null;
-    status.value = "Searching...";
-    var saved = _loadShowResponse(source, mediaData);
-    if (saved != null) {
-      var response = DMedia(
-        title: saved.name,
-        cover: saved.coverUrl,
-        url: saved.link,
-      );
-      selectedMedia.value = response;
-      _saveShowResponse(mediaData, response, source, selected: true);
-      onFinish?.call(response);
-      return;
-    }
-    DMedia? response;
-    status.value = "Searching : ${mediaData.mainName()}";
-    final mediaFuture = source.methods.search(
-      mediaData.mainName(),
-      1,
-      [],
-    );
-
-    final media = await mediaFuture;
-
-    List<DMedia> sortedResults = media.list.isNotEmpty
-        ? (media.list
-          ..sort((a, b) {
-            final aRatio = ratio(
-                a.title!.toLowerCase(), mediaData.mainName().toLowerCase());
-            final bRatio = ratio(
-                b.title!.toLowerCase(), mediaData.mainName().toLowerCase());
-            return bRatio.compareTo(aRatio);
-          }))
-        : [];
-    response = sortedResults.firstOrNull;
-
-    if (response == null ||
-        ratio(response.title!.toLowerCase(),
-                mediaData.mainName().toLowerCase()) <
-            100) {
-      status.value = "Searching : ${mediaData.nameRomaji}";
+    try {
+      selectedMedia.value = null;
+      status.value = "Searching...";
+      var saved = _loadShowResponse(source, mediaData);
+      if (saved != null) {
+        var response = DMedia(
+          title: saved.name,
+          cover: saved.coverUrl,
+          url: saved.link,
+        );
+        selectedMedia.value = response;
+        _saveShowResponse(mediaData, response, source, selected: true);
+        onFinish?.call(response);
+        return;
+      }
+      DMedia? response;
+      status.value = "Searching : ${mediaData.mainName()}";
       final mediaFuture = source.methods.search(
-        mediaData.nameRomaji,
+        mediaData.mainName(),
         1,
         [],
       );
+
       final media = await mediaFuture;
-      List<DMedia> sortedRomajiResults = media.list.isNotEmpty
+
+      List<DMedia> sortedResults = media.list.isNotEmpty
           ? (media.list
             ..sort((a, b) {
               final aRatio = ratio(
-                  a.title!.toLowerCase(), mediaData.nameRomaji.toLowerCase());
+                  a.title!.toLowerCase(), mediaData.mainName().toLowerCase());
               final bRatio = ratio(
-                  b.title!.toLowerCase(), mediaData.nameRomaji.toLowerCase());
+                  b.title!.toLowerCase(), mediaData.mainName().toLowerCase());
               return bRatio.compareTo(aRatio);
             }))
           : [];
-      var closestRomaji = sortedRomajiResults.firstOrNull;
-      if (response == null) {
-        response = closestRomaji;
-      } else {
-        var romajiRatio = ratio(closestRomaji?.title?.toLowerCase() ?? '',
-            mediaData.nameRomaji.toLowerCase());
-        var mainNameRatio = ratio(
-            response.title!.toLowerCase(), mediaData.mainName().toLowerCase());
-        if (romajiRatio > mainNameRatio) {
+      response = sortedResults.firstOrNull;
+
+      if (response == null ||
+          ratio(response.title!.toLowerCase(),
+                  mediaData.mainName().toLowerCase()) <
+              100) {
+        status.value = "Searching : ${mediaData.nameRomaji}";
+        final mediaFuture = source.methods.search(
+          mediaData.nameRomaji,
+          1,
+          [],
+        );
+        final media = await mediaFuture;
+        List<DMedia> sortedRomajiResults = media.list.isNotEmpty
+            ? (media.list
+              ..sort((a, b) {
+                final aRatio = ratio(
+                    a.title!.toLowerCase(), mediaData.nameRomaji.toLowerCase());
+                final bRatio = ratio(
+                    b.title!.toLowerCase(), mediaData.nameRomaji.toLowerCase());
+                return bRatio.compareTo(aRatio);
+              }))
+            : [];
+        var closestRomaji = sortedRomajiResults.firstOrNull;
+        if (response == null) {
           response = closestRomaji;
+        } else {
+          var romajiRatio = ratio(closestRomaji?.title?.toLowerCase() ?? '',
+              mediaData.nameRomaji.toLowerCase());
+          var mainNameRatio = ratio(response.title!.toLowerCase(),
+              mediaData.mainName().toLowerCase());
+          if (romajiRatio > mainNameRatio) {
+            response = closestRomaji;
+          }
         }
       }
-    }
-    if (response == null) {
-      for (var synonym in mediaData.synonyms) {
-        if (_isEnglish(synonym)) {
-          status.value = "Searching : $synonym";
-          final mediaFuture = source.methods.search(
-            synonym,
-            1,
-            [],
-          );
-          final media = await mediaFuture;
-          List<DMedia> sortedResults = media.list.isNotEmpty
-              ? (media.list
-                ..sort((a, b) {
-                  final aRatio =
-                      ratio(a.title!.toLowerCase(), synonym.toLowerCase());
-                  final bRatio =
-                      ratio(b.title!.toLowerCase(), synonym.toLowerCase());
-                  return bRatio.compareTo(aRatio);
-                }))
-              : [];
-          var closest = sortedResults.firstOrNull;
-          if (closest != null) {
-            if (ratio(closest.title!.toLowerCase(), synonym.toLowerCase()) >
-                90) {
-              response = closest;
-              break;
+      if (response == null) {
+        for (var synonym in mediaData.synonyms) {
+          if (_isEnglish(synonym)) {
+            status.value = "Searching : $synonym";
+            final mediaFuture = source.methods.search(
+              synonym,
+              1,
+              [],
+            );
+            final media = await mediaFuture;
+            List<DMedia> sortedResults = media.list.isNotEmpty
+                ? (media.list
+                  ..sort((a, b) {
+                    final aRatio =
+                        ratio(a.title!.toLowerCase(), synonym.toLowerCase());
+                    final bRatio =
+                        ratio(b.title!.toLowerCase(), synonym.toLowerCase());
+                    return bRatio.compareTo(aRatio);
+                  }))
+                : [];
+            var closest = sortedResults.firstOrNull;
+            if (closest != null) {
+              if (ratio(closest.title!.toLowerCase(), synonym.toLowerCase()) >
+                  90) {
+                response = closest;
+                break;
+              }
             }
           }
         }
       }
-    }
-    if (response != null) {
-      error.value = null;
-      _saveShowResponse(mediaData, response, source);
-      selectedMedia.value = response;
-      onFinish?.call(response);
-    } else {
-      status.value = "Nothing Found";
+      if (response != null) {
+        error.value = null;
+        _saveShowResponse(mediaData, response, source);
+        selectedMedia.value = response;
+        onFinish?.call(response);
+      } else {
+        status.value = "Nothing Found";
+        error.value = ParserError(
+          ErrorType.NotFound,
+          "No matching media found",
+        );
+        onFinish?.call(response);
+      }
+    } catch (e, c) {
+      status.value = "Error during search";
       error.value = ParserError(
-        ErrorType.NotFound,
-        "No matching media found",
+        ErrorType.Error,
+        e.toString(),
       );
-      onFinish?.call(response);
+      debugPrint("Error during search: $e \n$c");
+      onFinish?.call(null);
     }
   }
 
@@ -249,14 +259,15 @@ abstract class BaseParser extends GetxController {
     Function(DMedia)? onChange,
   ) async {
     var dialog = WrongTitleDialog(
-        source: source.value!,
-        mediaData: mediaData,
-        selectedMedia: selectedMedia,
-        onChanged: (m) {
-          selectedMedia.value = m;
-          _saveShowResponse(mediaData, m, source.value!, selected: true);
-          onChange?.call(m);
-        });
+      source: source.value!,
+      mediaData: mediaData,
+      selectedMedia: selectedMedia,
+      onChanged: (m) {
+        selectedMedia.value = m;
+        _saveShowResponse(mediaData, m, source.value!, selected: true);
+        onChange?.call(m);
+      },
+    );
     showCustomBottomDialog(context, dialog);
   }
 }

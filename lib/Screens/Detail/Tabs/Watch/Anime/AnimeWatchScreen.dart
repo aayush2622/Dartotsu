@@ -61,7 +61,9 @@ class AnimeWatchScreenState extends BaseWatchScreen<AnimeWatchScreen> {
             if (episodeList.isEmpty) {
               return Center(
                 child: Text(
-                  _viewModel.error.value?.message ?? "No episodes found",
+                  (_viewModel.error.value?.message ?? "No episodes found")
+                      .split('\n')
+                      .first,
                   style: TextStyle(
                     color: Theme.of(context).colorScheme.onSurface,
                     fontWeight: FontWeight.bold,
