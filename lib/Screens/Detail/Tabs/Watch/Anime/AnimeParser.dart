@@ -84,10 +84,6 @@ class AnimeParser extends BaseParser {
   void getEpisode(DMedia? media, Source source) async {
     if (media == null || media.url == null) {
       episodeList.value = {};
-      error.value = ParserError(
-        ErrorType.NotFound,
-        "Media or URL is missing",
-      );
       return;
     }
 

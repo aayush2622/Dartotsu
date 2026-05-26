@@ -49,8 +49,17 @@ class NetworkManager extends GetxController {
               return await DnsManager.resolveWithDoh(host, dns);
             } catch (e) {
               debugPrint('DoH failed for $host → fallback: $e');
-              final res = await InternetAddress.lookup(host);
-              return res.map((e) => e.address).toList();
+
+              try {
+                final res = await InternetAddress.lookup(host);
+
+                return res.map((e) => e.address).toList();
+              } catch (e, stack) {
+                debugPrint(
+                  'Fallback DNS failed for $host: $e\n$stack',
+                );
+                return [];
+              }
             }
           },
         ),
