@@ -310,7 +310,7 @@ packages:
     description:
       path: "."
       ref: master
-      resolved-ref: "4a46f631efdd7fec94fe3ae32799b5eb8bc827db"
+      resolved-ref: "32dbe43f85e8a497773850233ecea15a93daac8d"
       url: "https://github.com/aayush2622/DartotsuExtensionBridge.git"
     source: git
     version: "0.0.5"
@@ -330,14 +330,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.7.14"
-  device_apps:
-    dependency: transitive
-    description:
-      name: device_apps
-      sha256: e84dc74d55749993fd671148cc0bd53096e1be0c268fc364285511b1d8a4c19b
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.2.0"
   device_info_plus:
     dependency: "direct main"
     description:
@@ -857,6 +849,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.0"
+  installed_apps:
+    dependency: transitive
+    description:
+      name: installed_apps
+      sha256: "62b9cb196e2b34558ef0586024251e5dcc5a08199ea0c55c708f0ecc53116341"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.1"
   intl:
     dependency: "direct main"
     description:
