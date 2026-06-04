@@ -199,7 +199,10 @@ Widget ThemedContainer({
           spreadRadius: 0.5,
         ),
       ],
-      child: glassWidget ?? child,
+      child: Material(
+        color: Colors.transparent,
+        child: glassWidget ?? child,
+      ),
     );
   }
 
@@ -222,6 +225,9 @@ Widget ThemedContainer({
         ),
       ],
     ),
-    child: child,
+    child: Material(
+      color: Colors.transparent,
+      child: child,
+    ),
   );
 }

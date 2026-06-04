@@ -212,40 +212,48 @@ class SettingsBottomSheetState extends State<SettingsBottomSheet> {
       Widget? customIcon,
       required bool isChecked,
       Function(bool)? onChanged}) {
-    return SwitchListTile(
-      title: Text(
-        title,
-        style: TextStyle(
-          fontFamily: 'Poppins',
-          color: Theme.of(context).colorScheme.onSurface,
-          fontWeight: FontWeight.w600,
-          fontSize: 14,
-        ),
-      ),
-      value: isChecked,
-      onChanged: onChanged,
-      secondary:
-          customIcon ?? Icon(icon, color: Theme.of(context).primaryColor),
-    );
+    return Material(
+        color: Colors.transparent,
+        child: SwitchListTile(
+          title: Text(
+            title,
+            style: TextStyle(
+              fontFamily: 'Poppins',
+              color: Theme.of(context).colorScheme.onSurface,
+              fontWeight: FontWeight.w600,
+              fontSize: 14,
+            ),
+          ),
+          value: isChecked,
+          onChanged: onChanged,
+          secondary:
+              customIcon ?? Icon(icon, color: Theme.of(context).primaryColor),
+        ));
   }
 
   Widget _buildListTile(
       BuildContext context, String title, IconData icon, Widget open) {
-    return ListTile(
-      title: Text(
-        title,
-        style: TextStyle(
-          fontFamily: 'Poppins',
-          color: Theme.of(context).colorScheme.onSurface,
-          fontWeight: FontWeight.w600,
-          fontSize: 14,
+    return Material(
+      color: Colors.transparent,
+      child: ListTile(
+        title: Text(
+          title,
+          style: TextStyle(
+            fontFamily: 'Poppins',
+            color: Theme.of(context).colorScheme.onSurface,
+            fontWeight: FontWeight.w600,
+            fontSize: 14,
+          ),
         ),
+        leading: Icon(
+          icon,
+          color: Theme.of(context).primaryColor,
+        ),
+        onTap: () {
+          Navigator.of(context).pop();
+          navigateToPage(context, open);
+        },
       ),
-      leading: Icon(icon, color: Theme.of(context).primaryColor),
-      onTap: () {
-        Navigator.of(context).pop();
-        navigateToPage(context, open);
-      },
     );
   }
 }

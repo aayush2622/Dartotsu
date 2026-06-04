@@ -24,13 +24,13 @@ import 'package:media_kit/media_kit.dart';
 import 'package:provider/provider.dart';
 import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 import 'package:rhttp/rhttp.dart';
-import 'package:shorebird_code_push/shorebird_code_push.dart';
 import 'package:window_manager/window_manager.dart';
 
 import 'Api/Discord/Discord.dart';
 import 'Api/TypeFactory.dart';
 import 'Functions/RegisterProtocol/Api.dart';
 import 'Functions/string_extensions.dart';
+import 'NetworkManager/NetworkBridge.dart';
 import 'NetworkManager/NetworkManager.dart';
 import 'Preferences/PrefManager.dart';
 import 'Screens/Anime/AnimeScreen.dart';
@@ -100,15 +100,29 @@ void main(List<String> args) async {
 
 Future init() async {
   if (Platform.isWindows) {
-    ['dar', 'anymex', 'sugoireads', 'mangayomi']
-        .forEach(registerProtocolHandler);
+    [
+      'dar',
+      'anymex',
+      'sugoireads',
+      'mangayomi',
+    ].forEach(registerProtocolHandler);
   }
   await Rhttp.init();
   await PrefManager.init();
+  final client = Get.put(NetworkManager());
+  final cookieManager = client.cookieManager;
+
   await DartotsuExtensionBridge.init(
     getDirectory: PrefManager.getDirectory,
     isarInstance: PrefManager.dartotsuPreferences,
-    http: Get.put(NetworkManager()).compatibleClient,
+    http: client.compatibleClient,
+    network: AppBridgeNetwork(cookieManager),
+    onLog: (message, show) {
+      debugPrint("[Bridge LOGS] $message");
+      if (show) {
+        snackString(message);
+      }
+    },
   );
   await Logger.init();
   await MpvConf.init();
@@ -137,8 +151,10 @@ void initIntentListener() async {
   void handleFiles(List<SharedMediaFile> files) {
     if (files.isEmpty) return;
 
-    final videos =
-        files.where((f) => f.path.isMediaVideo()).map((f) => f.path).toList();
+    final videos = files
+        .where((f) => f.path.isMediaVideo())
+        .map((f) => f.path)
+        .toList();
 
     if (videos.isEmpty) return;
 
@@ -149,8 +165,9 @@ void initIntentListener() async {
 
   final initialFiles = await intent.getInitialMedia();
   if (initialFiles.isNotEmpty) {
-    WidgetsBinding.instance
-        .addPostFrameCallback((_) => handleFiles(initialFiles));
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) => handleFiles(initialFiles),
+    );
     await intent.reset();
   }
 }
@@ -218,10 +235,13 @@ class MyApp extends StatelessWidget {
               bool isFullScreen = await windowManager.isFullScreen();
               windowManager.setFullScreen(!isFullScreen);
             } else if (event.logicalKey == LogicalKeyboardKey.enter) {
-              final isAltPressed = HardwareKeyboard.instance.logicalKeysPressed
-                      .contains(LogicalKeyboardKey.altLeft) ||
-                  HardwareKeyboard.instance.logicalKeysPressed
-                      .contains(LogicalKeyboardKey.altRight);
+              final isAltPressed =
+                  HardwareKeyboard.instance.logicalKeysPressed.contains(
+                    LogicalKeyboardKey.altLeft,
+                  ) ||
+                  HardwareKeyboard.instance.logicalKeysPressed.contains(
+                    LogicalKeyboardKey.altRight,
+                  );
               if (isAltPressed) {
                 bool isFullScreen = await windowManager.isFullScreen();
                 windowManager.setFullScreen(!isFullScreen);
@@ -305,12 +325,6 @@ class MainScreenState extends State<MainScreen> {
   void _onTabSelected(int index) => _selectedIndex.value = index;
 
   @override
-  void initState() {
-    super.initState();
-    checkForUpdate();
-  }
-
-  @override
   void dispose() {
     DartotsuExtensionBridge.dispose();
     super.dispose();
@@ -365,10 +379,7 @@ class MainScreenState extends State<MainScreen> {
                     gradient: LinearGradient(
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
-                      colors: [
-                        Colors.transparent,
-                        theme.surface,
-                      ],
+                      colors: [Colors.transparent, theme.surface],
                     ),
                   ),
                 ),
@@ -443,21 +454,5 @@ class MainScreenState extends State<MainScreen> {
         ],
       ),
     );
-  }
-}
-
-Future<void> checkForUpdate() async {
-  final updater = ShorebirdUpdater();
-  final status = await updater.checkForUpdate();
-  debugPrint('Update Status: $status');
-  if (status == UpdateStatus.outdated) {
-    try {
-      snackString('New Update found');
-      await updater.update();
-      snackString('Updated to the latest version! Restart the app');
-    } on UpdateException catch (error) {
-      Logger.log('Error updating: $error');
-      throw ('Error updating: $error');
-    }
   }
 }

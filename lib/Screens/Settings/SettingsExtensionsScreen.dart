@@ -31,13 +31,13 @@ class SettingsExtensionsScreenState extends BaseSettingsScreen {
 
   @override
   Widget icon() => Padding(
-        padding: const EdgeInsets.only(right: 16),
-        child: Icon(
-          size: 52,
-          Icons.extension,
-          color: Theme.of(context).colorScheme.onSurface,
-        ),
-      );
+    padding: const EdgeInsets.only(right: 16),
+    child: Icon(
+      size: 52,
+      Icons.extension,
+      color: Theme.of(context).colorScheme.onSurface,
+    ),
+  );
 
   @override
   List<Widget> get settingsList {
@@ -47,46 +47,42 @@ class SettingsExtensionsScreenState extends BaseSettingsScreen {
       Row(
         children: [
           Expanded(
-            child: Obx(
-              () {
-                return buildDropdownMenu<Extension>(
-                  key: ValueKey(
-                    manager.managers
-                        .map((e) => e.plugin?.installed.value ?? false)
-                        .toList()
-                        .hashCode,
-                  ),
-                  currentValue: manager.current.value,
-                  options: manager.managers,
-                  labelBuilder: (ext) => ext.name,
-                  isEnabled: (ext) =>
-                      ext.plugin == null || ext.plugin!.installed.value,
-                  trailingBuilder: (ext) {
-                    final plugin = ext.plugin;
-                    if (plugin == null) return const SizedBox();
-                    final isInstalled = plugin.installed.value;
-                    return IconButton(
-                      icon: Icon(
-                        isInstalled ? Icons.delete : Icons.download,
-                        size: 18,
-                      ),
-                      onPressed: () async {
-                        if (Get.isDialogOpen == true) return;
-
-                        if (isInstalled) {
-                          _showDeleteDialog(context, plugin, ext.name);
-                        } else {
-                          await _showInstallDialog(context, plugin, ext.name);
-                        }
-                      },
-                    );
-                  },
-                  onChanged: (ext) {
-                    manager.switchManager(ext.id);
-                  },
-                );
-              },
-            ),
+            child: Obx(() {
+              return buildDropdownMenu<Extension>(
+                key: ValueKey(
+                  manager.managers
+                      .map((e) => e.plugin?.installed.value ?? false)
+                      .toList()
+                      .hashCode,
+                ),
+                currentValue: manager.current.value,
+                options: manager.managers,
+                labelBuilder: (ext) => ext.name,
+                isEnabled: (ext) =>
+                    ext.plugin == null || ext.plugin!.installed.value,
+                trailingBuilder: (ext) {
+                  final plugin = ext.plugin;
+                  if (plugin == null) return const SizedBox();
+                  final isInstalled = plugin.installed.value;
+                  return IconButton(
+                    icon: Icon(
+                      isInstalled ? Icons.delete : Icons.download,
+                      size: 18,
+                    ),
+                    onPressed: () async {
+                      if (isInstalled) {
+                        _showDeleteDialog(context, plugin, ext.name);
+                      } else {
+                        await _showInstallDialog(context, plugin, ext.name);
+                      }
+                    },
+                  );
+                },
+                onChanged: (ext) {
+                  manager.switchManager(ext.id);
+                },
+              );
+            }),
           ),
           IconButton(
             icon: const Icon(Icons.settings_rounded),
@@ -100,7 +96,7 @@ class SettingsExtensionsScreenState extends BaseSettingsScreen {
                 ExtensionSettingsScreen(extension: manager.current.value),
               );
             },
-          )
+          ),
         ],
       ),
       Obx(() => SettingsAdaptor(settings: _buildSettings(context))),
@@ -108,7 +104,10 @@ class SettingsExtensionsScreenState extends BaseSettingsScreen {
   }
 
   void _showDeleteDialog(
-      BuildContext context, DownloadablePlugin plugin, String name) {
+    BuildContext context,
+    DownloadablePlugin plugin,
+    String name,
+  ) {
     AlertDialogBuilder(context)
       ..setTitle("Delete $name?")
       ..setMessage("Are you sure you want to delete this plugin?")
@@ -128,6 +127,7 @@ class SettingsExtensionsScreenState extends BaseSettingsScreen {
     Map<String, dynamic> remote;
 
     try {
+      snackString("Fetching plugin info...");
       remote = await plugin.fetchRemote();
     } catch (_) {
       snackString("Failed to fetch plugin info");
@@ -173,9 +173,7 @@ class SettingsExtensionsScreenState extends BaseSettingsScreen {
               decoration: BoxDecoration(
                 color: context.cardColor,
                 borderRadius: BorderRadius.circular(18),
-                border: Border.all(
-                  color: scheme.outline.withOpacity(0.2),
-                ),
+                border: Border.all(color: scheme.outline.withOpacity(0.2)),
               ),
               child: Obx(() {
                 final downloading = plugin.downloading.value;
@@ -192,9 +190,7 @@ class SettingsExtensionsScreenState extends BaseSettingsScreen {
                       const SizedBox(height: 10),
                       Text(
                         "${(progress * 100).toStringAsFixed(1)}%",
-                        style: textStyle?.copyWith(
-                          fontWeight: FontWeight.w600,
-                        ),
+                        style: textStyle?.copyWith(fontWeight: FontWeight.w600),
                       ),
                     ],
                   );
@@ -205,14 +201,20 @@ class SettingsExtensionsScreenState extends BaseSettingsScreen {
                   children: [
                     Row(
                       children: [
-                        Icon(Icons.storage_rounded,
-                            size: 16, color: scheme.primary),
+                        Icon(
+                          Icons.storage_rounded,
+                          size: 16,
+                          color: scheme.primary,
+                        ),
                         const SizedBox(width: 6),
                         Text("Size: $sizeMB", style: textStyle),
                         const SizedBox(width: 16),
                         if (author.isNotEmpty) ...[
-                          Icon(Icons.person_rounded,
-                              size: 16, color: scheme.primary),
+                          Icon(
+                            Icons.person_rounded,
+                            size: 16,
+                            color: scheme.primary,
+                          ),
                           const SizedBox(width: 6),
                           Expanded(
                             child: Text(
@@ -221,7 +223,7 @@ class SettingsExtensionsScreenState extends BaseSettingsScreen {
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
-                        ]
+                        ],
                       ],
                     ),
                     const SizedBox(height: 14),
@@ -233,10 +235,7 @@ class SettingsExtensionsScreenState extends BaseSettingsScreen {
                       ),
                       child: Text(
                         description,
-                        style: textStyle?.copyWith(
-                          fontSize: 13,
-                          height: 1.4,
-                        ),
+                        style: textStyle?.copyWith(fontSize: 13, height: 1.4),
                       ),
                     ),
                   ],
@@ -252,6 +251,11 @@ class SettingsExtensionsScreenState extends BaseSettingsScreen {
           Navigator.pop(context);
         },
         positiveCallback: () {
+          if (!plugin.hasUpdate && plugin.installed.value) {
+            snackString("You already have the latest version of this plugin");
+            return;
+          }
+
           if (plugin.downloading.value) return;
 
           plugin.download();
@@ -327,7 +331,9 @@ class SettingsExtensionsScreenState extends BaseSettingsScreen {
         ),
       )
       ..setPositiveButton(
-          getString.ok, () async => await manager.addRepo(text, type))
+        getString.ok,
+        () async => await manager.addRepo(text, type),
+      )
       ..show();
   }
 }
@@ -347,13 +353,13 @@ class _ExtensionSettingsScreenState
 
   @override
   Widget icon() => Padding(
-        padding: const EdgeInsets.only(right: 16),
-        child: Icon(
-          Icons.extension,
-          size: 52,
-          color: ContextExtensions(context).theme.colorScheme.onSurface,
-        ),
-      );
+    padding: const EdgeInsets.only(right: 16),
+    child: Icon(
+      Icons.extension,
+      size: 52,
+      color: ContextExtensions(context).theme.colorScheme.onSurface,
+    ),
+  );
 
   @override
   List<Widget> get settingsList {

@@ -1,10 +1,6 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:dartotsu/Functions/Function.dart';
-import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
-import 'package:flutter/cupertino.dart';
-
 import 'Preferences/PrefManager.dart';
 
 /*class Logger {
@@ -69,12 +65,6 @@ class Logger {
     });
 
     log('\n\nLogger initialized\n\n');
-    DartotsuExtensionBridge.onLog = (message, show) {
-      debugPrint("[Bridge LOGS] $message");
-      if (show) {
-        snackString(message);
-      }
-    };
   }
 
   static void log(String message, {LogLevel logLevel = LogLevel.info}) {

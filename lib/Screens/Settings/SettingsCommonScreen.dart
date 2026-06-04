@@ -49,7 +49,7 @@ class SettingsCommonScreenState extends BaseSettingsScreen {
             onLongClick: () => removeData(PrefName.customPath),
             onClick: () async {
               var path = loadData(PrefName.customPath);
-              final result = await FilePicker.platform.getDirectoryPath(
+              final result = await FilePicker.getDirectoryPath(
                 dialogTitle: getString.selectDirectory,
                 lockParentWindow: true,
                 initialDirectory: path,
@@ -94,7 +94,7 @@ class SettingsCommonScreenState extends BaseSettingsScreen {
               ..setPositiveButton(
                 getString.restore,
                 () async {
-                  final picked = await FilePicker.platform.pickFiles(
+                  final picked = await FilePicker.pickFiles(
                     allowMultiple: false,
                     dialogTitle: getString.restore,
                   );
@@ -180,7 +180,7 @@ class SettingsCommonScreenState extends BaseSettingsScreen {
                     final jsonStr =
                         const JsonEncoder.withIndent('  ').convert(grouped);
 
-                    final dirPath = await FilePicker.platform.getDirectoryPath(
+                    final dirPath = await FilePicker.getDirectoryPath(
                       dialogTitle: getString.selectDirectory,
                       lockParentWindow: true,
                     );
