@@ -141,14 +141,15 @@ class _WebViewState extends State<WebView> {
             allowsInlineMediaPlayback: true,
             darkMode: true,
             algorithmicDarkeningAllowed: true,
+            thirdPartyCookiesEnabled: true,
+            cacheEnabled: true,
           ),
           pullToRefreshController: _pullToRefreshController,
           onWebViewCreated: (controller) async {
             _controller = controller;
-            await cookieManager.applyCookiesToWebView(
-              WebUri(widget.url),
-              controller,
-            );
+
+            await cookieManager.applyCookiesToWebView(controller);
+
             await _updateNavState();
             final fontData = await rootBundle.load('assets/fonts/poppins.ttf');
             final base64Font = base64Encode(fontData.buffer.asUint8List());
@@ -177,28 +178,19 @@ class _WebViewState extends State<WebView> {
               ),
             );
           },
-          onLoadStart: (_, url) async {
-            if (url != null) {
-              await cookieManager.applyCookiesToWebView(url, _controller);
-            }
-          },
           onProgressChanged: (_, progress) => _progress.value = progress / 100,
           onLoadStop: (_, url) async {
             if (url != null) {
-              await cookieManager.readCookiesFromWebView(url, _controller);
+              //await cookieManager.readCookiesFromWebView(url, _controller);
             }
             await _updateNavState();
           },
           shouldOverrideUrlLoading: (_, action) async {
-            final url = action.request.url;
-            if (url != null) {
-              await cookieManager.applyCookiesToWebView(url, _controller);
-            }
             return NavigationActionPolicy.ALLOW;
           },
           onUpdateVisitedHistory: (_, url, ___) async {
             if (url != null) {
-              await cookieManager.readCookiesFromWebView(url, _controller);
+              //await cookieManager.readCookiesFromWebView(url, _controller);
             }
             await _updateNavState();
           },
@@ -341,7 +333,7 @@ class _WebViewState extends State<WebView> {
           case 3:
             final uri = await _controller?.getUrl();
             if (uri != null) {
-              cookieManager.deleteCookiesForDomain(uri.uriValue);
+              cookieManager.deleteCookiesForDomain(uri.host);
             }
             break;
         }

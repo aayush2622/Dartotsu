@@ -38,7 +38,7 @@
 }
 # Keep annotations
 -keepattributes *Annotation*
-
+-keep, includedescriptorclasses class org.rustls.platformverifier.** { *; }
 # Optional optimizations
 -optimizationpasses 5
 -dontpreverify

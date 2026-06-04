@@ -460,7 +460,7 @@ List<Widget> playerSettings(
 Future<void> selectFile(BuildContext context) async {
   if (!await PrefManager.videoPermission()) return;
 
-  final result = await FilePicker.platform.pickFiles(
+  final result = await FilePicker.pickFiles(
     type: FileType.custom,
     allowedExtensions: vidMap,
     allowMultiple: true,
@@ -474,7 +474,7 @@ Future<void> selectFile(BuildContext context) async {
 }
 
 Future<void> selectFolder(BuildContext context) async {
-  final folderPath = await FilePicker.platform.getDirectoryPath();
+  final folderPath = await FilePicker.getDirectoryPath();
   if (folderPath == null) return;
 
   final dir = Directory(folderPath);

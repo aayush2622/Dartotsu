@@ -85,6 +85,23 @@ class MediaInfoPageState extends State<MediaInfoPage> {
     }
   }
 
+  bool? _lastDarkMode;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    final isDarkMode = context.themeNotifier.isDarkMode;
+
+    if (_lastDarkMode != isDarkMode) {
+      _lastDarkMode = isDarkMode;
+
+      if (loadData(PrefName.useCoverTheme)) {
+        loadCustomTheme(widget.mediaData.cover);
+      }
+    }
+  }
+
   @override
   void dispose() {
     super.dispose();
@@ -113,30 +130,35 @@ class MediaInfoPageState extends State<MediaInfoPage> {
   Widget build(BuildContext context) {
     return Theme(
       data: customTheme ?? Theme.of(context),
-      child: Builder(
-        builder: (context) => Scaffold(
-          body: CustomScrollConfig(
-            context,
-            children: [
-              SliverToBoxAdapter(child: _buildMediaSection(context)),
-              SliverToBoxAdapter(child: _buildMediaDetails(context)),
-              SliverList(
-                delegate: SliverChildListDelegate(
-                  [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [_buildSliverContent(context)],
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+        color: Theme.of(context).colorScheme.surface,
+        child: Builder(
+          builder: (context) => Scaffold(
+            body: CustomScrollConfig(
+              context,
+              children: [
+                SliverToBoxAdapter(child: _buildMediaSection(context)),
+                SliverToBoxAdapter(child: _buildMediaDetails(context)),
+                SliverList(
+                  delegate: SliverChildListDelegate(
+                    [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [_buildSliverContent(context)],
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-              )
-            ],
+                    ],
+                  ),
+                )
+              ],
+            ),
+            bottomNavigationBar: _buildBottomNavigationBar(context),
           ),
-          bottomNavigationBar: _buildBottomNavigationBar(context),
         ),
       ),
     );

@@ -717,7 +717,7 @@ class _PlayerControllerState extends State<PlayerController> {
       viewList: [_buildSubtitleList(noSubtitles)],
       negativeText: "Add Subtitle",
       negativeCallback: () async {
-        final pickedFile = await FilePicker.platform.pickFiles(
+        final pickedFile = await FilePicker.pickFiles(
           type: FileType.custom,
           allowedExtensions: subMap,
         );
@@ -754,7 +754,7 @@ class _PlayerControllerState extends State<PlayerController> {
       viewList: [_buildAudioList(currentQuality.audios?.isEmpty ?? true)],
       negativeText: "Add Audio",
       negativeCallback: () async {
-        final pickedFile = await FilePicker.platform.pickFiles(
+        final pickedFile = await FilePicker.pickFiles(
           type: FileType.custom,
           allowedExtensions: audioMap,
         );

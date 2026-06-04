@@ -65,7 +65,7 @@ class WrongTitleDialogState extends State<WrongTitleDialog> {
   void _search(String query) {
     query = query.trim();
 
-    if (query.isEmpty || query == _lastQuery) {
+    if (query == _lastQuery) {
       return;
     }
 
