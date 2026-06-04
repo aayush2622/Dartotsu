@@ -74,7 +74,7 @@ dependencies:
 
   wakelock_plus: ^1.6.1
   volume_controller: ^3.5.0
-  screen_brightness: ^2.1.8 #dont change
+  screen_brightness: ^2.1.8 # dont change
   app_links: ^7.1.1
   win32: ^6.3.0
   ffi: ^2.2.0
