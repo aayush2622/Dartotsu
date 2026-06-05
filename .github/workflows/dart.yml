@@ -154,8 +154,8 @@ jobs:
 
       - uses: actions/setup-java@v4
         with:
-          distribution: "oracle"
-          java-version: "17"
+          distribution: "temurin"
+          java-version: "21"
 
       - name: Download keystore
         env:
