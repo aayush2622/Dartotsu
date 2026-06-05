@@ -246,19 +246,26 @@ class SettingsExtensionsScreenState extends BaseSettingsScreen {
           const SizedBox(height: 20),
         ],
         negativeText: "Cancel",
-        positiveText: "Install",
+        positiveText: plugin.installed.value
+            ? "Installed"
+            : plugin.hasUpdate
+            ? "Update"
+            : "Install",
         negativeCallback: () {
           Navigator.pop(context);
         },
-        positiveCallback: () {
-          if (!plugin.hasUpdate && plugin.installed.value) {
-            snackString("You already have the latest version of this plugin");
+        positiveCallback: () async {
+          if (plugin.installed.value && !plugin.hasUpdate) {
             return;
           }
 
           if (plugin.downloading.value) return;
 
-          plugin.download();
+          await plugin.download();
+
+          if (plugin.installed.value) {
+            Navigator.pop(context);
+          }
         },
       ),
     );
