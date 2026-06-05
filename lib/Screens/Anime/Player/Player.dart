@@ -6,6 +6,7 @@ import 'package:dartotsu/Functions/Extensions.dart';
 import 'package:dartotsu/Preferences/IsarDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
 import 'package:dartotsu/Preferences/PrefManager.dart';
 import 'package:dartotsu/Theme/LanguageSwitcher.dart';
+import 'package:dartotsu_extension_bridge/Models/Video.dart' as v;
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -15,7 +16,6 @@ import 'package:volume_controller/volume_controller.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
 
 import '../../../../../../Adaptor/Episode/EpisodeAdaptor.dart';
-import 'package:dartotsu_extension_bridge/Models/Video.dart' as v;
 import '../../../../../../DataClass/Media.dart' as m;
 import '../../../../../../Widgets/ScrollConfig.dart';
 import '../../Detail/Tabs/Watch/Anime/Widget/AnimeCompactSettings.dart';
@@ -105,8 +105,18 @@ class MediaPlayerState extends State<MediaPlayer>
     var currentProgress = loadCustomData<int>(
       "${widget.media.id}-${widget.currentEpisode.episodeNumber}-$sourceName-current",
     );
+    final maxProgress = loadCustomData<int>(
+      "${widget.media.id}-${widget.currentEpisode.episodeNumber}-$sourceName-max",
+    );
+
+    final completed =
+        currentProgress != null &&
+        maxProgress != null &&
+        currentProgress / maxProgress > 0.90;
     videoPlayerController.open(
-        currentQuality, Duration(seconds: currentProgress ?? 0));
+      currentQuality,
+      completed ? Duration.zero : Duration(seconds: currentProgress ?? 0),
+    );
     _onMouseMoved();
   }
 
@@ -137,16 +147,13 @@ class MediaPlayerState extends State<MediaPlayer>
 
   void _setLandscapeMode(bool state) {
     if (state) {
-      SystemChrome.setPreferredOrientations(
-          [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
+      SystemChrome.setPreferredOrientations([
+        DeviceOrientation.landscapeLeft,
+        DeviceOrientation.landscapeRight,
+      ]);
       SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     } else {
-      SystemChrome.setPreferredOrientations([
-        DeviceOrientation.portraitUp,
-        DeviceOrientation.portraitDown,
-        DeviceOrientation.landscapeLeft,
-        DeviceOrientation.landscapeRight
-      ]);
+      SystemChrome.setPreferredOrientations(DeviceOrientation.values);
       SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     }
   }
@@ -160,12 +167,16 @@ class MediaPlayerState extends State<MediaPlayer>
     if (widget.isOffline) return;
 
     var service = Get.context!.currentService(listen: false);
-    var saveProgress = loadCustomData<bool>(
-            "${widget.media.id}-${service.getName}-saveProgress") ??
+    var saveProgress =
+        loadCustomData<bool>(
+          "${widget.media.id}-${service.getName}-saveProgress",
+        ) ??
         true;
     if (saveProgress) {
-      service.data.mutations
-          ?.setProgress(widget.media, widget.currentEpisode.episodeNumber);
+      service.data.mutations?.setProgress(
+        widget.media,
+        widget.currentEpisode.episodeNumber,
+      );
     }
   }
 
@@ -179,50 +190,52 @@ class MediaPlayerState extends State<MediaPlayer>
           const double minWidth = 250;
           final double availableWidth = constraints.maxWidth;
 
-          episodePanelWidth ??=
-              (availableWidth / 3).clamp(minWidth, availableWidth);
+          episodePanelWidth ??= (availableWidth / 3).clamp(
+            minWidth,
+            availableWidth,
+          );
 
           return StatefulBuilder(
             builder: (context, setState) {
               return Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Obx(
-                    () {
-                      return MouseRegion(
-                        onHover: (_) => _onMouseMoved(),
-                        cursor: showControls.value
-                            ? SystemMouseCursors.basic
-                            : SystemMouseCursors.none,
-                        child: _buildVideoPlayer(
-                            availableWidth, episodePanelWidth!),
-                      );
-                    },
-                  ),
-                  Obx(
-                    () {
-                      if (!showEpisodes.value) {
-                        return const SizedBox();
-                      }
-                      return GestureDetector(
-                        onHorizontalDragUpdate: (details) {
-                          setState(
-                            () => episodePanelWidth =
-                                (episodePanelWidth! - details.delta.dx)
-                                    .clamp(minWidth, availableWidth),
-                          );
-                        },
-                        child: SizedBox(
-                          width: episodePanelWidth,
-                          height: constraints.maxHeight,
-                          child: SingleChildScrollView(
-                            padding: const EdgeInsets.all(8.0),
-                            child: _buildEpisodeList(),
-                          ),
+                  Obx(() {
+                    return MouseRegion(
+                      onHover: (_) => _onMouseMoved(),
+                      cursor: showControls.value
+                          ? SystemMouseCursors.basic
+                          : SystemMouseCursors.none,
+                      child: _buildVideoPlayer(
+                        availableWidth,
+                        episodePanelWidth!,
+                      ),
+                    );
+                  }),
+                  Obx(() {
+                    if (!showEpisodes.value) {
+                      return const SizedBox();
+                    }
+                    return GestureDetector(
+                      onHorizontalDragUpdate: (details) {
+                        setState(
+                          () => episodePanelWidth =
+                              (episodePanelWidth! - details.delta.dx).clamp(
+                                minWidth,
+                                availableWidth,
+                              ),
+                        );
+                      },
+                      child: SizedBox(
+                        width: episodePanelWidth,
+                        height: constraints.maxHeight,
+                        child: SingleChildScrollView(
+                          padding: const EdgeInsets.all(8.0),
+                          child: _buildEpisodeList(),
                         ),
-                      );
-                    },
-                  ),
+                      ),
+                    );
+                  }),
                 ],
               );
             },
@@ -350,14 +363,14 @@ class MediaPlayerState extends State<MediaPlayer>
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 5,
+                ),
                 decoration: BoxDecoration(
                   color: videoPlayerController.subtitle[0].isEmpty
                       ? Colors.transparent
-                      : Color(
-                          settings.subtitleBackgroundColor,
-                        ),
+                      : Color(settings.subtitleBackgroundColor),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Text(
@@ -396,8 +409,8 @@ class MediaPlayerState extends State<MediaPlayer>
           opacity: showControls.value
               ? 1
               : Platform.isLinux
-                  ? 0.01
-                  : 0.0,
+              ? 0.01
+              : 0.0,
           duration: const Duration(milliseconds: 300),
           child: IgnorePointer(
             ignoring: !showControls.value,
@@ -525,15 +538,11 @@ class MediaPlayerState extends State<MediaPlayer>
 
     if (direction == SkipDirection.backward) {
       videoPlayerController.seek(
-        Duration(
-          seconds: max(0, currentPosition.inSeconds - 10),
-        ),
+        Duration(seconds: max(0, currentPosition.inSeconds - 10)),
       );
     } else {
       videoPlayerController.seek(
-        Duration(
-          seconds: currentPosition.inSeconds + 10,
-        ),
+        Duration(seconds: currentPosition.inSeconds + 10),
       );
     }
 
@@ -630,25 +639,29 @@ class MediaPlayerState extends State<MediaPlayer>
   }
 
   Widget _buildForwardRippleEffect() => _buildRippleEffect(
-        tapLabel: forwardDoubleTapLabel,
-        controller: _forwardAnimationController,
-        isForward: true,
-      );
+    tapLabel: forwardDoubleTapLabel,
+    controller: _forwardAnimationController,
+    isForward: true,
+  );
 
   Widget _buildBackwardRippleEffect() => _buildRippleEffect(
-        tapLabel: backwardDoubleTapLabel,
-        controller: _backwardAnimationController,
-        isForward: false,
-      );
+    tapLabel: backwardDoubleTapLabel,
+    controller: _backwardAnimationController,
+    isForward: false,
+  );
 
   Widget _buildEpisodeList() {
     var episodeList = widget.media.anime?.episodes ?? {};
-    var (chunk, initChunkIndex) =
-        buildChunks(context, episodeList, widget.media.userProgress.toString());
+    var (chunk, initChunkIndex) = buildChunks(
+      context,
+      episodeList,
+      widget.media.userProgress.toString(),
+    );
 
     RxInt selectedChunkIndex = (-1).obs;
-    selectedChunkIndex =
-        selectedChunkIndex.value == -1 ? initChunkIndex : selectedChunkIndex;
+    selectedChunkIndex = selectedChunkIndex.value == -1
+        ? initChunkIndex
+        : selectedChunkIndex;
 
     return ScrollConfig(
       context,
@@ -658,26 +671,19 @@ class MediaPlayerState extends State<MediaPlayer>
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           _buildTitle(),
-          ChunkSelector(
-            context,
-            chunk,
-            selectedChunkIndex,
-            reverse,
-          ),
-          Obx(
-            () {
-              var reversed = reverse.value
-                  ? chunk.map((element) => element.reversed.toList()).toList()
-                  : chunk;
-              return EpisodeAdaptor(
-                type: viewType.value,
-                source: widget.source,
-                episodeList: reversed[selectedChunkIndex.value],
-                mediaData: widget.media,
-                onEpisodeClick: () => Get.back(),
-              );
-            },
-          ),
+          ChunkSelector(context, chunk, selectedChunkIndex, reverse),
+          Obx(() {
+            var reversed = reverse.value
+                ? chunk.map((element) => element.reversed.toList()).toList()
+                : chunk;
+            return EpisodeAdaptor(
+              type: viewType.value,
+              source: widget.source,
+              episodeList: reversed[selectedChunkIndex.value],
+              mediaData: widget.media,
+              onEpisodeClick: () => Get.back(),
+            );
+          }),
         ],
       ),
     );
@@ -711,35 +717,39 @@ class MediaPlayerState extends State<MediaPlayer>
     );
   }
 
-  void settingsDialog() => AnimeCompactSettings(
-        context,
-        widget.media,
-        widget.source,
-        (i) {
-          viewType.value = i.viewType;
-          reverse.value = i.isReverse;
-        },
-      ).showDialog();
+  void settingsDialog() =>
+      AnimeCompactSettings(context, widget.media, widget.source, (i) {
+        viewType.value = i.viewType;
+        reverse.value = i.isReverse;
+      }).showDialog();
 
   void _handleKeyPress(KeyEvent event) async {
     if (event is KeyDownEvent) {
-      final isShiftPressed = HardwareKeyboard.instance.logicalKeysPressed
-              .contains(LogicalKeyboardKey.shiftLeft) ||
-          HardwareKeyboard.instance.logicalKeysPressed
-              .contains(LogicalKeyboardKey.shiftRight) ||
-          HardwareKeyboard.instance.logicalKeysPressed
-              .contains(LogicalKeyboardKey.shift);
+      final isShiftPressed =
+          HardwareKeyboard.instance.logicalKeysPressed.contains(
+            LogicalKeyboardKey.shiftLeft,
+          ) ||
+          HardwareKeyboard.instance.logicalKeysPressed.contains(
+            LogicalKeyboardKey.shiftRight,
+          ) ||
+          HardwareKeyboard.instance.logicalKeysPressed.contains(
+            LogicalKeyboardKey.shift,
+          );
 
       if (event.logicalKey == LogicalKeyboardKey.arrowLeft ||
           event.logicalKey == LogicalKeyboardKey.arrowRight) {
         final isRight = event.logicalKey == LogicalKeyboardKey.arrowRight;
 
         if (isShiftPressed) {
-          await videoPlayerController.nativeCommand(
-              [isRight ? 'frame-step' : 'frame-back-step', '1', 'seek']);
+          await videoPlayerController.nativeCommand([
+            isRight ? 'frame-step' : 'frame-back-step',
+            '1',
+            'seek',
+          ]);
         } else {
           _skipSegments(
-              isRight ? SkipDirection.forward : SkipDirection.backward);
+            isRight ? SkipDirection.forward : SkipDirection.backward,
+          );
         }
       } else if (event.logicalKey == LogicalKeyboardKey.space) {
         await videoPlayerController.playOrPause();
@@ -760,8 +770,9 @@ class MediaPlayerState extends State<MediaPlayer>
           targetSeconds = (keyNumber / 10) * videoDurationSeconds;
         }
 
-        await videoPlayerController
-            .seek(Duration(seconds: targetSeconds.toInt()));
+        await videoPlayerController.seek(
+          Duration(seconds: targetSeconds.toInt()),
+        );
       }
     }
   }
