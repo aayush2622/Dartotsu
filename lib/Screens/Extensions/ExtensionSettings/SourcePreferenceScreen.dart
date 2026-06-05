@@ -135,10 +135,16 @@ class _SourcePreferenceScreenState extends State<SourcePreferenceScreen> {
                   selectedIndex = entryValues.indexOf(p.value!);
                 }
 
-                final subtitle =
+                final entry =
                     entries.isNotEmpty && selectedIndex < entries.length
-                        ? "${p.summary ?? ''} (${entries[selectedIndex]})"
-                        : (p.summary ?? '');
+                    ? entries[selectedIndex]
+                    : null;
+
+                final summary = p.summary ?? '';
+
+                final subtitle = summary == entry
+                    ? summary
+                    : (entry != null ? '$summary ($entry)' : summary);
 
                 return ListTile(
                   title: titleText(p.title ?? ''),
@@ -146,17 +152,17 @@ class _SourcePreferenceScreenState extends State<SourcePreferenceScreen> {
                   onTap: () {
                     AlertDialogBuilder(context)
                       ..setTitle(p.title ?? '')
-                      ..singleChoiceItems(
-                        entries,
-                        selectedIndex,
-                        (int index) async {
-                          final newValue = entryValues[index];
-                          p.value = newValue;
-                          await widget.source.methods
-                              .setPreference(pref, newValue);
-                          await loadPreferences();
-                        },
-                      )
+                      ..singleChoiceItems(entries, selectedIndex, (
+                        int index,
+                      ) async {
+                        final newValue = entryValues[index];
+                        p.value = newValue;
+                        await widget.source.methods.setPreference(
+                          pref,
+                          newValue,
+                        );
+                        await loadPreferences();
+                      })
                       ..show();
                   },
                 );
@@ -168,8 +174,9 @@ class _SourcePreferenceScreenState extends State<SourcePreferenceScreen> {
                 final subtitle = (p.entries ?? [])
                     .asMap()
                     .entries
-                    .where((e) =>
-                        p.values?.contains(p.entryValues?[e.key]) ?? false)
+                    .where(
+                      (e) => p.values?.contains(p.entryValues?[e.key]) ?? false,
+                    )
                     .map((e) => e.value)
                     .join(", ");
 
@@ -200,8 +207,10 @@ class _SourcePreferenceScreenState extends State<SourcePreferenceScreen> {
                       )
                       ..setPositiveButton('OK', () async {
                         p.values = newValues.toList();
-                        await widget.source.methods
-                            .setPreference(pref, newValues.toList());
+                        await widget.source.methods.setPreference(
+                          pref,
+                          newValues.toList(),
+                        );
                         await loadPreferences();
                       })
                       ..setNegativeButton("Cancel", () {})
