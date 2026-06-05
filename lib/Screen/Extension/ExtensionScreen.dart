@@ -4,7 +4,6 @@ import 'package:dartotsu_extension_bridge/Screen/ExtensionList.dart' as e;
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:icons_plus/icons_plus.dart';
 
 import '../../Core/Preferences/PrefManager.dart';
 import '../../Core/ThemeManager/LanguageSwitcher.dart';
@@ -12,6 +11,7 @@ import '../../Core/ThemeManager/language.dart';
 import '../../Utils/Functions/SnackBar.dart';
 import '../../Widgets/Components/AlertDialogBuilder.dart';
 import '../../Widgets/Components/CachedNetworkImage.dart';
+import '../../Widgets/Components/LoadSvg.dart';
 
 class ExtensionList extends StatefulWidget implements e.ExtensionConfig {
   @override
@@ -54,9 +54,7 @@ class _ExtensionListScreenState extends e.ExtensionList<ExtensionList> {
     source = source!;
     return Card(
       color: theme.surface,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: ListTile(
         tileColor: theme.surface,
         leading: _buildIcon(source),
@@ -113,11 +111,7 @@ class _ExtensionListScreenState extends e.ExtensionList<ExtensionList> {
       if (source.isNsfw ?? false)
         const Text(" (18+)", style: _subtitleTextStyle),
     ];
-    return Wrap(
-      spacing: 4,
-      runSpacing: 2,
-      children: items,
-    );
+    return Wrap(spacing: 4, runSpacing: 2, children: items);
   }
 
   Widget _buildTrailing(Source source) {
@@ -191,32 +185,33 @@ class _BrowseScreenState extends ExtensionManagerScreen<ExtensionScreen> {
   Extension get manager => Get.find<ExtensionManager>().current.value;
   @override
   Text get title => Text(
-        getString.extension(2),
-        style: TextStyle(
-          fontFamily: 'Poppins',
-          fontWeight: FontWeight.bold,
-          fontSize: 16,
-          color: Theme.of(context).colorScheme.primary,
-        ),
-      );
+    getString.extension(2),
+    style: TextStyle(
+      fontFamily: 'Poppins',
+      fontWeight: FontWeight.bold,
+      fontSize: 16,
+      color: Theme.of(context).colorScheme.primary,
+    ),
+  );
   @override
   List<Widget> extensionActions(
     BuildContext context,
     TabController tabController,
     String currentLanguage,
+    Future<void> Function(String repoUrl, ItemType type) onRepoSaved,
     void Function(String currentLanguage) onLanguageChanged,
   ) {
     var theme = Theme.of(context).colorScheme;
     return [
       IconButton(
-        icon: const Icon(Bootstrap.github),
+        icon: loadSvg("assets/svg/github.svg", color: theme.primary),
         onPressed: () {
           var tabIndex = tabController.index;
           var type = tabIndex <= 1
               ? ItemType.anime
               : tabIndex <= 3
-                  ? ItemType.manga
-                  : ItemType.novel;
+              ? ItemType.manga
+              : ItemType.novel;
           var text = '';
           AlertDialogBuilder(context)
             ..setTitle('${type.name} sources')
@@ -226,10 +221,7 @@ class _BrowseScreenState extends ExtensionManagerScreen<ExtensionScreen> {
                 onChanged: (value) => text = value,
               ),
             )
-            ..setPositiveButton(
-              getString.ok,
-              () => manager.addRepo(text, type),
-            )
+            ..setPositiveButton(getString.ok, () => manager.addRepo(text, type))
             ..show();
         },
       ),
@@ -271,9 +263,7 @@ class _BrowseScreenState extends ExtensionManagerScreen<ExtensionScreen> {
         decoration: InputDecoration(
           hintText: getString.search,
           suffixIcon: Icon(Icons.search, color: theme.onSurface),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(28),
-          ),
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(28)),
           filled: true,
           fillColor: Colors.grey.withOpacity(0.2),
         ),
@@ -301,14 +291,15 @@ class _BrowseScreenState extends ExtensionManagerScreen<ExtensionScreen> {
               fontFamily: 'Poppins',
               fontWeight: FontWeight.bold,
             ),
-          )
+          ),
         ],
       ),
     );
   }
 
   @override
-  ExtensionScreenBuilder get extensionScreenBuilder => (
+  ExtensionScreenBuilder get extensionScreenBuilder =>
+      (
         ItemType itemType,
         bool isInstalled,
         String searchQuery,
@@ -326,10 +317,7 @@ class _BrowseScreenState extends ExtensionManagerScreen<ExtensionScreen> {
 class TestSearchScreen extends StatefulWidget {
   final Source source;
 
-  const TestSearchScreen({
-    super.key,
-    required this.source,
-  });
+  const TestSearchScreen({super.key, required this.source});
 
   @override
   State<TestSearchScreen> createState() => _TestSearchScreenState();
@@ -367,9 +355,7 @@ class _TestSearchScreenState extends State<TestSearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Search Test"),
-      ),
+      appBar: AppBar(title: const Text("Search Test")),
       body: loading
           ? const Center(child: CircularProgressIndicator())
           : ListView.builder(
@@ -438,18 +424,13 @@ class MediaDetailScreen extends StatelessWidget {
     final episodes = media.episodes ?? [];
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(media.title ?? "Details"),
-      ),
+      appBar: AppBar(title: Text(media.title ?? "Details")),
       body: Column(
         children: [
           if (media.cover != null)
             Padding(
               padding: const EdgeInsets.all(16),
-              child: Image.network(
-                media.cover!,
-                height: 200,
-              ),
+              child: Image.network(media.cover!, height: 200),
             ),
           if (media.description != null)
             Padding(
@@ -470,10 +451,8 @@ class MediaDetailScreen extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => EpisodeScreen(
-                          source: source,
-                          episode: ep,
-                        ),
+                        builder: (_) =>
+                            EpisodeScreen(source: source, episode: ep),
                       ),
                     );
                   },
@@ -491,11 +470,7 @@ class EpisodeScreen extends StatefulWidget {
   final Source source;
   final DEpisode episode;
 
-  const EpisodeScreen({
-    super.key,
-    required this.source,
-    required this.episode,
-  });
+  const EpisodeScreen({super.key, required this.source, required this.episode});
 
   @override
   State<EpisodeScreen> createState() => _EpisodeScreenState();
@@ -522,9 +497,7 @@ class _EpisodeScreenState extends State<EpisodeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.episode.name ?? "Episode"),
-      ),
+      appBar: AppBar(title: Text(widget.episode.name ?? "Episode")),
       body: loading
           ? const Center(child: CircularProgressIndicator())
           : ListView.builder(

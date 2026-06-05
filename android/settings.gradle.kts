@@ -1,3 +1,5 @@
+import groovy.json.JsonSlurper
+
 pluginManagement {
     val flutterSdkPath =
         run {
@@ -19,11 +21,34 @@ pluginManagement {
 
 plugins {
     id("dev.flutter.flutter-plugin-loader") version "1.0.0"
-    id("com.android.application") version "8.13.2" apply false
+    id("com.android.application") version "9.2.1" apply false
     id("com.google.gms.google-services") version ("4.3.15") apply false
     id("com.google.firebase.crashlytics") version ("2.8.1") apply false
-    id("org.jetbrains.kotlin.android") version "2.2.20" apply false // don't update for now it will break release builds
+    id("org.jetbrains.kotlin.android") version "2.3.21" apply false
     id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
 }
 
 include(":app")
+
+val flutterProjectRoot: File? = rootDir.parentFile
+val pluginsFile = File(flutterProjectRoot, ".flutter-plugins-dependencies")
+
+if (pluginsFile.exists()) {
+    val json = JsonSlurper().parse(pluginsFile) as Map<*, *>
+
+    val androidPlugins =
+        ((json["plugins"] as Map<*, *>)["android"] as List<Map<*, *>>)
+
+    val bridgePlugin = androidPlugins.firstOrNull {
+        it["name"] == "dartotsu_extension_bridge"
+    }
+
+    if (bridgePlugin != null) {
+        val bridgeDir = File(bridgePlugin["path"] as String)
+
+        include(":dartotsu_extension_bridge")
+        project(":dartotsu_extension_bridge").projectDir =   bridgeDir.resolve("android")
+
+        apply(from = bridgeDir.resolve("android/settings.gradle"))
+    }
+}

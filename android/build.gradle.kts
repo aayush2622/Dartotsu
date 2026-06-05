@@ -1,60 +1,51 @@
 import com.android.build.gradle.BaseExtension
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 allprojects {
     repositories {
         google()
         mavenCentral()
+        maven("https://jitpack.io")
     }
 }
 
-val newBuildDir: Directory =
-    rootProject.layout.buildDirectory
-        .dir("../../build")
-        .get()
-rootProject.layout.buildDirectory.value(newBuildDir)
-
+rootProject.layout.buildDirectory.set(file("../build"))
 subprojects {
-    val newSubprojectBuildDir: Directory = newBuildDir.dir(project.name)
-    project.layout.buildDirectory.value(newSubprojectBuildDir)
 
     afterEvaluate {
-        if (
-            plugins.hasPlugin("com.android.application") ||
-            plugins.hasPlugin("com.android.library")
-        ) {
-            extensions.configure<BaseExtension>("android") {
-                compileSdkVersion(36)
-                buildToolsVersion("36.0.0")
 
-                compileOptions {
-                    sourceCompatibility = JavaVersion.VERSION_21
-                    targetCompatibility = JavaVersion.VERSION_21
-                }
+        extensions.findByType(BaseExtension::class.java)?.apply {
+
+            compileSdkVersion(36)
+            buildToolsVersion("36.0.0")
+
+            compileOptions {
+                sourceCompatibility = JavaVersion.VERSION_17
+                targetCompatibility = JavaVersion.VERSION_17
             }
-        }
 
-        if (extensions.findByName("android") != null) {
-            extensions.configure<BaseExtension>("android") {
-                if (namespace == null) {
-                    namespace = project.group.toString()
-                }
-            }
-        }
-
-        tasks.withType<KotlinCompile>().configureEach {
-            compilerOptions {
-                jvmTarget.set(JvmTarget.JVM_21)
+            if (namespace == null) {
+                namespace = project.group.toString()
             }
         }
     }
+
+    tasks.withType<KotlinCompile>().configureEach {
+        compilerOptions {
+            jvmTarget.set(
+                org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
+            )
+        }
+    }
+
+    layout.buildDirectory.set(
+        rootProject.layout.buildDirectory.dir(name)
+    )
 }
 
 subprojects {
-    project.evaluationDependsOn(":app")
+    evaluationDependsOn(":app")
 }
-
 
 tasks.register<Delete>("clean") {
     delete(rootProject.layout.buildDirectory)
