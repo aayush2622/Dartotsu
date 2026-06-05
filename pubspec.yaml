@@ -8,8 +8,8 @@ version: 0.0.4+1
 
 # Dart SDK constraints
 environment:
-  sdk: '>=3.4.3 <4.0.0'
-
+  sdk: '>=3.12.0 <4.0.0'
+  flutter: ">=3.44.0"
 # Main dependencies
 dependencies:
   flutter:
@@ -17,10 +17,10 @@ dependencies:
 
   flutter_localizations:
     sdk: flutter
-  async: ^2.13.0
-  firebase_core: ^4.4.0
-  firebase_crashlytics: ^5.0.7
-  firebase_analytics: ^12.1.2
+  async: ^2.13.1
+  firebase_core: ^4.10.0
+  firebase_crashlytics: ^5.2.3
+  firebase_analytics: ^12.4.2
   # State Management
   get: ^4.7.3
 
@@ -31,8 +31,8 @@ dependencies:
   json_annotation: ^4.9.0
 
   # Local Storage
-  isar_community: ^3.3.0
-  isar_community_flutter_libs: ^3.3.0
+  isar_community: ^3.3.2
+  isar_community_flutter_libs: ^3.3.2
   path_provider: ^2.1.5
   path: ^1.9.1
   cryptography: ^2.9.0
@@ -44,9 +44,8 @@ dependencies:
   expandable_text: 2.3.0
   cached_network_image: ^3.4.1
   precached_network_image: ^1.4.1
-  flutter_svg: ^2.2.3
+  flutter_svg: ^2.3.0
   flex_color_picker: ^3.8.0
-  icons_plus: ^5.0.0
   skeletonizer: ^2.1.3
   blurbox: ^0.0.6
   markdown_widget: ^2.3.2+8
@@ -56,7 +55,7 @@ dependencies:
 
   # UI Enhancements
   blur: ^4.0.2
-  expandable_page_view: ^1.2.1
+  expandable_page_view: ^1.3.0
   carousel_slider: ^5.1.2
   flutter_staggered_grid_view: ^0.7.0
   scrollable_positioned_list: ^0.3.8
@@ -77,14 +76,14 @@ dependencies:
       url: https://github.com/kodjodevf/media-kit.git
       path: libs/universal/media_kit_libs_video
   window_manager: ^0.5.1
-  permission_handler: ^12.0.1
+  permission_handler: ^12.0.3
   flutter_inappwebview: ^6.2.0-beta.3
 
-  wakelock_plus: ^1.4.0
-  volume_controller: ^3.4.2
-  screen_brightness: ^2.1.7
-  app_links: ^7.0.0
-  win32: ^5.15.0
+  wakelock_plus: ^1.6.1
+  volume_controller: ^3.5.0
+  screen_brightness: ^2.1.8
+  app_links: ^7.1.1
+  win32: ^6.3.0
   ffi: ^2.2.0
   install_plugin: ^2.1.0
   flutter_discord_rpc_fork:
@@ -94,15 +93,15 @@ dependencies:
 
   # Miscellaneous
   receive_sharing_intent: ^1.8.1
-  device_info_plus: ^12.3.0
-  package_info_plus: ^9.0.0
-  file_picker: ^10.3.10
-  share_plus: ^12.0.1
+  device_info_plus: ^13.1.0
+  package_info_plus: ^10.1.0
+  file_picker: ^12.0.0-beta.5
+  share_plus: ^13.1.0
   url_launcher: ^6.3.2
   json_path: ^0.9.0
   grouped_list: ^6.0.0
   fuzzywuzzy: ^1.2.0
-  string_similarity: ^2.1.1
+  string_similarity: ^2.2.0
   collection: ^1.19.1
   flutter_web_auth_2:
     #path : ../flutter_web_auth/flutter_web_auth_2
@@ -125,12 +124,9 @@ dev_dependencies:
   flutter_lints: ^6.0.0
 
   # Code Generation dart run build_runner build
-  isar_community_generator:
-    git:
-      url: https://github.com/kodjodevf/isar-community-generator.git
-      ref: v3
+  isar_community_generator: ^3.3.2
   json_serializable: ^6.11.2
-  build_runner: ^2.11.1
+  build_runner: ^2.15.0
   inno_bundle: ^0.11.2
 
 dependency_overrides:

@@ -6,7 +6,6 @@ plugins {
     id("com.android.application")
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
-    id("kotlin-android")
     id("dev.flutter.flutter-gradle-plugin")
 }
 
@@ -17,14 +16,14 @@ android {
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_21
-        targetCompatibility = JavaVersion.VERSION_21
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     kotlin {
         javaToolchains
         compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_21)
+            jvmTarget.set(JvmTarget.JVM_17)
         }
     }
 
@@ -76,13 +75,9 @@ android {
                 "proguard-rules.pro"
             )
 
-            if (!hasKeystore) {
-                throw GradleException(
-                    "Release build requires key.properties"
-                )
+            if (hasKeystore) {
+                signingConfig = signingConfigs.getByName("release")
             }
-
-            signingConfig = signingConfigs.getByName("release")
 
         }
 
@@ -93,6 +88,11 @@ android {
                 signingConfigs.getByName("debug")
             }
         }
+    }
+}
+kotlin {
+    compilerOptions {
+        jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
     }
 }
 

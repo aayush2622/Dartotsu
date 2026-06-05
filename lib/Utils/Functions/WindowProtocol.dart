@@ -4,78 +4,95 @@ import 'package:ffi/ffi.dart';
 import 'package:flutter/foundation.dart';
 import 'package:win32/win32.dart';
 
-const _hive = HKEY_CURRENT_USER;
+final _hive = HKEY_CURRENT_USER;
 
-class WindowsProtocolHandler {
-  void register(String scheme, {String? executable, List<String>? arguments}) {
+class WindowsProtocolHandler extends ProtocolHandler {
+  @override
+  void register(
+    String scheme, {
+    String? executable,
+    List<String>? arguments,
+  }) {
     if (defaultTargetPlatform != TargetPlatform.windows) return;
 
     final prefix = _regPrefix(scheme);
-
     final capitalized = scheme[0].toUpperCase() + scheme.substring(1);
 
-    final args = getArguments(arguments).map((a) => _sanitize(a));
-
+    final args = getArguments(arguments).map(_sanitize);
     final cmd =
         '${executable ?? Platform.resolvedExecutable} ${args.join(' ')}';
 
     _regCreateStringKey(_hive, prefix, '', 'URL:$capitalized');
-
     _regCreateStringKey(_hive, prefix, 'URL Protocol', '');
-
     _regCreateStringKey(_hive, '$prefix\\shell\\open\\command', '', cmd);
   }
 
+  @override
   void unregister(String scheme) {
     if (defaultTargetPlatform != TargetPlatform.windows) return;
 
-    final txtKey = TEXT(_regPrefix(scheme));
+    final keyPtr = _regPrefix(scheme).toNativeUtf16();
 
     try {
-      RegDeleteTree(HKEY_CURRENT_USER, txtKey);
+      RegDeleteTree(
+        HKEY_CURRENT_USER,
+        PCWSTR(keyPtr),
+      );
     } finally {
-      free(txtKey);
+      calloc.free(keyPtr);
     }
   }
 
   String _regPrefix(String scheme) => 'SOFTWARE\\Classes\\$scheme';
 
-  int _regCreateStringKey(int hKey, String key, String valueName, String data) {
-    final txtKey = TEXT(key);
-
-    final txtValue = TEXT(valueName);
-
-    final txtData = TEXT(data);
+  WIN32_ERROR _regCreateStringKey(
+    HKEY hKey,
+    String key,
+    String valueName,
+    String data,
+  ) {
+    final keyPtr = key.toNativeUtf16();
+    final valuePtr = valueName.toNativeUtf16();
+    final dataPtr = data.toNativeUtf16();
 
     try {
       return RegSetKeyValue(
         hKey,
-        txtKey,
-        txtValue,
-        REG_VALUE_TYPE.REG_SZ,
-        txtData,
-        txtData.length * 2 + 2,
+        PCWSTR(keyPtr),
+        PCWSTR(valuePtr),
+        REG_SZ,
+        dataPtr,
+        (data.length + 1) * 2,
       );
     } finally {
-      free(txtKey);
-
-      free(txtValue);
-
-      free(txtData);
+      calloc.free(keyPtr);
+      calloc.free(valuePtr);
+      calloc.free(dataPtr);
     }
   }
 
   String _sanitize(String value) {
-    value = value.replaceAll(r'%s', '%1').replaceAll(r'"', '\\"');
-
+    value = value.replaceAll(r'%s', '%1').replaceAll(r'"', r'\"');
     return '"$value"';
   }
+}
+
+abstract class ProtocolHandler {
+  void register(
+    String scheme, {
+    String? executable,
+    List<String>? arguments,
+  });
+
+  void unregister(String scheme);
 
   List<String> getArguments(List<String>? arguments) {
     if (arguments == null) return ['%s'];
 
-    if (arguments.isEmpty && !arguments.any((e) => e.contains('%s'))) {
-      throw ArgumentError('arguments must contain at least 1 instance of "%s"');
+    if (arguments.isEmpty || !arguments.any((e) => e.contains('%s'))) {
+      throw ArgumentError(
+        'arguments must contain at least 1 instance of "%s"',
+      );
     }
 
     return arguments;
@@ -128,29 +145,29 @@ class WindowsFileAssociationHandler {
     );
   }
 
-  int _regCreateStringKey(
-    int hKey,
+  WIN32_ERROR _regCreateStringKey(
+    HKEY hKey,
     String key,
     String valueName,
     String data,
   ) {
-    final txtKey = TEXT(key);
-    final txtValue = TEXT(valueName);
-    final txtData = TEXT(data);
+    final keyPtr = key.toNativeUtf16();
+    final valuePtr = valueName.toNativeUtf16();
+    final dataPtr = data.toNativeUtf16();
 
     try {
       return RegSetKeyValue(
         hKey,
-        txtKey,
-        txtValue,
-        REG_VALUE_TYPE.REG_SZ,
-        txtData,
-        txtData.length * 2 + 2,
+        PCWSTR(keyPtr),
+        PCWSTR(valuePtr),
+        REG_SZ,
+        dataPtr,
+        (data.length + 1) * 2,
       );
     } finally {
-      free(txtKey);
-      free(txtValue);
-      free(txtData);
+      calloc.free(keyPtr);
+      calloc.free(valuePtr);
+      calloc.free(dataPtr);
     }
   }
 }
