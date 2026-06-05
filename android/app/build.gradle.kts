@@ -6,27 +6,10 @@ plugins {
     id("dev.flutter.flutter-gradle-plugin")
 }
 
-val localProperties = Properties()
-val localPropertiesFile = rootProject.file("local.properties")
-
-if (localPropertiesFile.exists()) {
-    localPropertiesFile.reader(Charsets.UTF_8).use {
-        localProperties.load(it)
-    }
-}
-
-val flutterVersionCode =
-        localProperties.getProperty("flutter.versionCode") ?: "1"
-
-val flutterVersionName =
-        localProperties.getProperty("flutter.versionName") ?: "1.0"
-
 android {
     namespace = "ani.aayush262.dartotsu"
     compileSdk = flutter.compileSdkVersion
-
-    // ndkVersion = flutter.ndkVersion
-    ndkVersion = "28.2.13676358"
+    ndkVersion = flutter.ndkVersion
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -47,8 +30,8 @@ android {
         applicationId = "ani.aayush262.dartotsu"
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
-        versionCode = flutterVersionCode.toInt()
-        versionName = flutterVersionName
+        versionCode = flutter.versionCode
+        versionName = flutter.versionName
     }
 
     signingConfigs {
