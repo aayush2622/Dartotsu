@@ -123,6 +123,11 @@ dev_dependencies:
   inno_bundle: ^0.11.2
 dependency_overrides:
   collection: ^1.19.1
+  flutter_inappwebview:
+    git:
+      url: https://github.com/roshancodespace/flutter_inappwebview.git
+      ref: master
+      path: flutter_inappwebview
 # Flutter-specific configurations
 flutter:
   uses-material-design: true
