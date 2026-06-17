@@ -82,19 +82,20 @@ class _ExtensionListScreenState extends e.ExtensionList<ExtensionList> {
       return const Icon(Icons.extension_rounded);
     }
 
-    if (iconUrl.startsWith('/')) {
-      final file = File(iconUrl);
+    final file = File(iconUrl);
+
+    if (file.isAbsolute) {
       if (!file.existsSync()) {
         return const Icon(Icons.extension_rounded);
       }
+
       return Image.file(
         file,
         width: 37,
         height: 37,
         fit: BoxFit.contain,
-        errorBuilder: (context, error, stackTrace) {
-          return const Icon(Icons.extension_rounded);
-        },
+        errorBuilder: (_, __, ___) =>
+        const Icon(Icons.extension_rounded),
       );
     }
 
