@@ -41,11 +41,6 @@ Media _fromMal(malApi.Media apiMedia) {
 
   return Media(
     id: apiMedia.id!,
-    idAnilist:
-        GetMediaIDs.fromID(type: AnimeIDType.malId, id: apiMedia.id)?.anilistId,
-    idKitsu: GetMediaIDs.fromID(type: AnimeIDType.malId, id: apiMedia.id)
-        ?.kitsuId
-        ?.toString(),
     idMAL: apiMedia.id,
     name: apiMedia.title ?? '',
     nameRomaji: apiMedia.alternativeTitles?.ja ?? apiMedia.title ?? '',

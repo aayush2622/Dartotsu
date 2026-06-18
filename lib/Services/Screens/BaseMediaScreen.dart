@@ -35,10 +35,9 @@ abstract class BaseMediaScreen extends GetxController {
       (shouldRefresh) async {
         if (running.value && shouldRefresh) {
           running.value = false;
-          await Future.wait([
-            loadAll(),
-            GetMediaIDs.getData(),
-          ]);
+
+          await loadAll();
+
           initialLoad = true;
           live.value = false;
           running.value = true;
