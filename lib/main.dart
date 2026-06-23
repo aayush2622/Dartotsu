@@ -141,6 +141,7 @@ Future init() async {
   }
   AppUpdater().checkForUpdate();
   Discord.getSavedToken();
+
   initDeepLinkListener();
   initIntentListener();
 }
