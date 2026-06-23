@@ -24,7 +24,7 @@ pluginManagement {
 
 plugins {
     id("dev.flutter.flutter-plugin-loader") version "1.0.0"
-    id("com.android.application") version "9.0.1" apply false
+    id("com.android.application") version "9.2.1" apply false
     id("org.jetbrains.kotlin.android") version "2.2.20" apply false
 }
 
@@ -41,26 +41,3 @@ dependencyResolutionManagement {
 }
 
 include(":app")
-
-val flutterProjectRoot: File? = rootDir.parentFile
-val pluginsFile = File(flutterProjectRoot, ".flutter-plugins-dependencies")
-
-if (pluginsFile.exists()) {
-    val json = JsonSlurper().parse(pluginsFile) as Map<*, *>
-
-    val androidPlugins =
-        ((json["plugins"] as Map<*, *>)["android"] as List<Map<*, *>>)
-
-    val bridgePlugin = androidPlugins.firstOrNull {
-        it["name"] == "dartotsu_extension_bridge"
-    }
-
-    if (bridgePlugin != null) {
-        val bridgeDir = File(bridgePlugin["path"] as String)
-
-        include(":dartotsu_extension_bridge")
-        project(":dartotsu_extension_bridge").projectDir =   bridgeDir.resolve("android")
-
-        apply(from = bridgeDir.resolve("android/settings.gradle.kts"))
-    }
-}

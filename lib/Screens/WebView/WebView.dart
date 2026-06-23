@@ -14,10 +14,7 @@ import '../../NetworkManager/NetworkManager.dart';
 class WebView extends StatefulWidget {
   final String url;
 
-  const WebView({
-    super.key,
-    required this.url,
-  });
+  const WebView({super.key, required this.url});
 
   @override
   State<WebView> createState() => _WebViewState();
@@ -115,13 +112,8 @@ class _WebViewState extends State<WebView> {
         ],
       ),
       body: ClipRRect(
-        borderRadius: const BorderRadius.vertical(
-          top: Radius.circular(24),
-        ),
-        child: Container(
-          color: scheme.surface,
-          child: _buildWebView(),
-        ),
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+        child: Container(color: scheme.surface, child: _buildWebView()),
       ),
     );
   }
@@ -130,9 +122,7 @@ class _WebViewState extends State<WebView> {
     return Stack(
       children: [
         InAppWebView(
-          initialUrlRequest: URLRequest(
-            url: WebUri(widget.url),
-          ),
+          initialUrlRequest: URLRequest(url: WebUri(widget.url)),
           initialSettings: InAppWebViewSettings(
             javaScriptEnabled: true,
             domStorageEnabled: true,
@@ -157,7 +147,8 @@ class _WebViewState extends State<WebView> {
             await controller.addUserScript(
               userScript: UserScript(
                 injectionTime: UserScriptInjectionTime.AT_DOCUMENT_START,
-                source: '''
+                source:
+                    '''
         (function () {
           const style = document.createElement('style');
           style.innerHTML = `
@@ -181,7 +172,7 @@ class _WebViewState extends State<WebView> {
           onProgressChanged: (_, progress) => _progress.value = progress / 100,
           onLoadStop: (_, url) async {
             if (url != null) {
-              //await cookieManager.readCookiesFromWebView(url, _controller);
+              await cookieManager.readCookiesFromWebView(url, _controller);
             }
             await _updateNavState();
           },
@@ -190,7 +181,7 @@ class _WebViewState extends State<WebView> {
           },
           onUpdateVisitedHistory: (_, url, ___) async {
             if (url != null) {
-              //await cookieManager.readCookiesFromWebView(url, _controller);
+              await cookieManager.readCookiesFromWebView(url, _controller);
             }
             await _updateNavState();
           },
@@ -216,65 +207,62 @@ class _WebViewState extends State<WebView> {
     final uri = Uri.tryParse(_url.value);
     final isHttps = uri?.scheme == 'https';
     final host = uri?.host ?? _url.value;
-    return Obx(
-      () {
-        return Container(
-          margin: const EdgeInsets.symmetric(horizontal: 16),
-          padding: const EdgeInsets.symmetric(horizontal: 12),
-          height: 44,
-          decoration: BoxDecoration(
-            color: context.colorScheme.surfaceVariant,
-            borderRadius: BorderRadius.circular(16),
-          ),
-          alignment: Alignment.center,
-          child: _isEditing.value
-              ? TextField(
-                  controller: _searchController,
-                  focusNode: _addressFocus,
-                  autofocus: true,
-                  textInputAction: TextInputAction.go,
-                  decoration: const InputDecoration(
-                    border: InputBorder.none,
-                    hintText: "Search or enter URL",
-                  ),
-                  onSubmitted: (value) async {
-                    FocusScope.of(context).unfocus();
-
-                    final url = normalizeUrl(value);
-                    await _controller?.loadUrl(
-                      urlRequest: URLRequest(url: WebUri(url)),
-                    );
-
-                    _isEditing.value = false;
-                  },
-                )
-              : GestureDetector(
-                  onTap: () {
-                    _isEditing.value = true;
-                    _addressFocus.requestFocus();
-                  },
-                  child: Row(
-                    children: [
-                      Icon(
-                        isHttps ? Icons.lock_outline : Icons.info_outline,
-                        size: 16,
-                        color: context.colorScheme.primary,
-                      ),
-                      const SizedBox(width: 8),
-                      Expanded(
-                        child: Text(
-                          style:
-                              ContextExtensions(context).textTheme.titleMedium,
-                          _title.value.isNotEmpty ? _title.value : host,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                    ],
-                  ),
+    return Obx(() {
+      return Container(
+        margin: const EdgeInsets.symmetric(horizontal: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 12),
+        height: 44,
+        decoration: BoxDecoration(
+          color: context.colorScheme.surfaceVariant,
+          borderRadius: BorderRadius.circular(16),
+        ),
+        alignment: Alignment.center,
+        child: _isEditing.value
+            ? TextField(
+                controller: _searchController,
+                focusNode: _addressFocus,
+                autofocus: true,
+                textInputAction: TextInputAction.go,
+                decoration: const InputDecoration(
+                  border: InputBorder.none,
+                  hintText: "Search or enter URL",
                 ),
-        );
-      },
-    );
+                onSubmitted: (value) async {
+                  FocusScope.of(context).unfocus();
+
+                  final url = normalizeUrl(value);
+                  await _controller?.loadUrl(
+                    urlRequest: URLRequest(url: WebUri(url)),
+                  );
+
+                  _isEditing.value = false;
+                },
+              )
+            : GestureDetector(
+                onTap: () {
+                  _isEditing.value = true;
+                  _addressFocus.requestFocus();
+                },
+                child: Row(
+                  children: [
+                    Icon(
+                      isHttps ? Icons.lock_outline : Icons.info_outline,
+                      size: 16,
+                      color: context.colorScheme.primary,
+                    ),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        style: ContextExtensions(context).textTheme.titleMedium,
+                        _title.value.isNotEmpty ? _title.value : host,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+      );
+    });
   }
 
   Widget _buildNavigationButtons() {

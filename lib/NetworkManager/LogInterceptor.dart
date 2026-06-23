@@ -1,7 +1,9 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:rhttp/rhttp.dart';
 
 import '../Functions/Function.dart';
+import '../Screens/WebView/WebView.dart';
 
 class LogInterceptor extends Interceptor {
   @override
@@ -21,17 +23,39 @@ class LogInterceptor extends Interceptor {
     final ms = start is DateTime
         ? DateTime.now().difference(start).inMilliseconds
         : null;
+    final remaining = response.headerMap['x-ratelimit-remaining'];
+    final parts = <String>[
+      '← ${response.statusCode}',
+      response.request.url.toString(),
+    ];
 
-    debugPrint(
-      '← ${response.statusCode} ${response.request.url}'
-      '${ms != null ? ' (${ms}ms)' : ''}',
-    );
+    if (ms != null) {
+      parts.add('(${ms}ms)');
+    }
 
-    final cloudflare = [403, 503].contains(response.statusCode) &&
-        ["cloudflare-nginx", "cloudflare"]
-            .contains(response.headerMap['server']?.toLowerCase());
+    if (remaining != null) {
+      parts.add('Remaining: $remaining');
+    }
 
-    if (cloudflare) snackString('⚠️ Detected Cloudflare protection');
+    debugPrint(parts.join(' '));
+
+    final cloudflare =
+        [403, 503].contains(response.statusCode) &&
+        [
+          "cloudflare-nginx",
+          "cloudflare",
+        ].contains(response.headerMap['server']?.toLowerCase());
+
+    if (cloudflare) {
+      snackString(
+        '⚠️ Detected Cloudflare protection',
+        child: IconButton(
+          onPressed: () =>
+              navigateToPage(Get.context!, WebView(url: response.request.url)),
+          icon: const Icon(Icons.open_in_new_rounded, size: 24),
+        ),
+      );
+    }
 
     return Interceptor.next();
   }

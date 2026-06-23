@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:dartotsu/Services/BaseServiceData.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
 
 import '../../Functions/Function.dart';
+import '../../NetworkManager/NetworkManager.dart';
 import '../../Preferences/PrefManager.dart';
 import '../../Widgets/CustomBottomDialog.dart';
 import '../TypeFactory.dart';
@@ -37,7 +37,7 @@ class AnilistController extends BaseServiceData {
     "START_DATE_DESC",
     "TITLE_ENGLISH",
     "TITLE_ENGLISH_DESC",
-    "SCORE"
+    "SCORE",
   ];
   var source = [
     "ORIGINAL",
@@ -54,7 +54,7 @@ class AnilistController extends BaseServiceData {
     "GAME",
     "COMIC",
     "MULTIMEDIA PROJECT",
-    "PICTURE BOOK"
+    "PICTURE BOOK",
   ];
 
   var animeStatus = ["FINISHED", "RELEASING", "NOT YET RELEASED", "CANCELLED"];
@@ -72,7 +72,7 @@ class AnilistController extends BaseServiceData {
     "RELEASING",
     "NOT YET RELEASED",
     "HIATUS",
-    "CANCELLED"
+    "CANCELLED",
   ];
 
   var animeFormats = [
@@ -82,7 +82,7 @@ class AnilistController extends BaseServiceData {
     "SPECIAL",
     "OVA",
     "ONA",
-    "MUSIC"
+    "MUSIC",
   ];
 
   var mangaFormats = ["MANGA", "NOVEL", "ONE SHOT"];
@@ -119,10 +119,10 @@ class AnilistController extends BaseServiceData {
   }
 
   List<Map<String, int>> get currentSeasons => [
-        getSeason(false),
-        {seasons[currentSeason]: currentYear},
-        getSeason(true),
-      ];
+    getSeason(false),
+    {seasons[currentSeason]: currentYear},
+    getSeason(true),
+  ];
 
   @override
   bool getSavedToken() {
@@ -188,20 +188,17 @@ class AnilistController extends BaseServiceData {
           'Authorization': 'Bearer ${token.value}',
       };
 
-      final response = await http.post(
+      final response = await Get.find<NetworkManager>().compatibleClient.post(
         Uri.parse("https://graphql.anilist.co/"),
         headers: headers,
         body: jsonEncode({"query": query.trim(), "variables": variables}),
       );
 
-      final remaining =
-          int.parse(response.headers['x-ratelimit-remaining'] ?? '-1');
-      debugPrint("Remaining Anilist requests: $remaining");
-
       if (response.statusCode == 429) {
         final retry = int.parse(response.headers['Retry-After'] ?? '-1');
-        rateLimitReset =
-            int.parse(response.headers['x-ratelimit-limit'] ?? '0');
+        rateLimitReset = int.parse(
+          response.headers['x-ratelimit-limit'] ?? '0',
+        );
         snackString("Rate limited, retry after $retry seconds");
         throw Exception("Rate limited, retry after $retry seconds");
       }

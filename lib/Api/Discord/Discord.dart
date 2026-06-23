@@ -57,7 +57,7 @@ class _DiscordController extends GetxController {
             "If you are on invisible mode, logging in will make you online, when you open Dartotsu.\n\n"
             "This does break the Discord TOS. \nAlthough Discord has never banned anyone for using Custom Rich Presence(what Dartotsu uses), You have still been warned.\n\ndartotsu is not responsible for anything that happens to your account.",
           ),
-        )
+        ),
       ],
       negativeText: "Cancel",
       negativeCallback: () {
@@ -66,10 +66,7 @@ class _DiscordController extends GetxController {
       positiveText: "Login",
       positiveCallback: () {
         Navigator.of(context).pop();
-        navigateToPage(
-          context,
-          const MobileLogin(),
-        );
+        navigateToPage(context, const MobileLogin());
       },
     );
     showCustomBottomDialog(context, dialog);
@@ -94,12 +91,11 @@ class _DiscordController extends GetxController {
 
     var total = (totalFromMedia ?? totalFromSource ?? "??").toString();
     DateTime startTime = DateTime.now();
-    DateTime initPosition =
-        DateTime.now().subtract(Duration(seconds: currentTime ?? 0));
+    DateTime initPosition = DateTime.now().subtract(
+      Duration(seconds: currentTime ?? 0),
+    );
     DateTime endTime = startTime.add(
-      Duration(
-        seconds: (eTime?.toInt() ?? 24 * 60 * 60) - (currentTime ?? 0),
-      ),
+      Duration(seconds: (eTime?.toInt() ?? 24 * 60 * 60) - (currentTime ?? 0)),
     );
     int startTimestamp = initPosition.millisecondsSinceEpoch;
     int endTimestamp = endTime.millisecondsSinceEpoch;
@@ -118,7 +114,8 @@ class _DiscordController extends GetxController {
               'type': 3,
               "timestamps": {"end": endTimestamp, "start": startTimestamp},
               'assets': {
-                'large_image': await (episode?.thumbnail ?? mediaData.cover)
+                'large_image':
+                    await (episode?.thumbnail ?? mediaData.cover)
                         ?.getDiscordUrl() ??
                     smallIcon,
                 'large_text': mediaData.userPreferredName,

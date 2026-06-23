@@ -1,4 +1,3 @@
-import 'package:dartotsu/logger.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
@@ -37,24 +36,22 @@ class MangaParser extends BaseParser {
           chapterList.value = unModifiedChapterList.value?.where((element) {
             var scanlator = element.scanlator;
             return scanlator == null ||
-                toggledScanlators
-                    .value![this.scanlator.value?.indexOf(scanlator) ?? 0];
+                toggledScanlators.value![this.scanlator.value?.indexOf(
+                      scanlator,
+                    ) ??
+                    0];
           }).toList();
-          MediaSettings.saveMediaSettings(media
-            ..settings.viewType = s.viewType
-            ..settings.isReverse = s.isReverse);
+          MediaSettings.saveMediaSettings(
+            media
+              ..settings.viewType = s.viewType
+              ..settings.isReverse = s.isReverse,
+          );
         },
       ).showDialog();
 
   @override
-  Future<void> wrongTitle(
-    context,
-    mediaData,
-    onChange,
-  ) async {
-    super.wrongTitle(context, mediaData, (
-      m,
-    ) {
+  Future<void> wrongTitle(context, mediaData, onChange) async {
+    super.wrongTitle(context, mediaData, (m) {
       unModifiedChapterList.value = null;
       chapterList.value = null;
       scanlator.value = null;
@@ -64,11 +61,7 @@ class MangaParser extends BaseParser {
   }
 
   @override
-  Future<void> searchMedia(
-    source,
-    mediaData, {
-    onFinish,
-  }) async {
+  Future<void> searchMedia(source, mediaData, {onFinish}) async {
     unModifiedChapterList.value = null;
     chapterList.value = null;
     scanlator.value = null;
@@ -83,22 +76,16 @@ class MangaParser extends BaseParser {
   void getChapter(DMedia? media, Source source) async {
     if (media == null || media.url == null) {
       chapterList.value = <DEpisode>[];
-      error.value = ParserError(
-        ErrorType.NotFound,
-        "Media or URL is missing",
-      );
+      error.value = ParserError(ErrorType.NotFound, "Media or URL is missing");
       return;
     }
 
     DMedia? m;
     try {
       m = await source.methods.getDetail(media);
-    } catch (e) {
-      Logger.log(e.toString());
-      error.value = ParserError(
-        ErrorType.NoResult,
-        e.toString(),
-      );
+    } catch (e, c) {
+      debugPrint("$e\n$c");
+      error.value = ParserError(ErrorType.NoResult, e.toString());
       chapterList.value = <DEpisode>[];
       return;
     }
@@ -107,10 +94,7 @@ class MangaParser extends BaseParser {
 
     if (m.episodes == null || m.episodes!.isEmpty) {
       chapterList.value = <DEpisode>[];
-      error.value = ParserError(
-        ErrorType.NoResult,
-        "No chapters available",
-      );
+      error.value = ParserError(ErrorType.NoResult, "No chapters available");
       return;
     }
 
@@ -119,7 +103,7 @@ class MangaParser extends BaseParser {
 
     var uniqueScanlators = {
       for (var element in chapterList.value!)
-        if (element.scanlator != null) element.scanlator!
+        if (element.scanlator != null) element.scanlator!,
     };
 
     scanlator.value = uniqueScanlators.toList();

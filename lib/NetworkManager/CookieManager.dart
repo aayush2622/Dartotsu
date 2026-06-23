@@ -26,10 +26,8 @@ class CookieManager extends Interceptor {
       final decoded = jsonDecode(raw) as Map<String, dynamic>;
 
       final cookies = decoded.map(
-        (k, v) => MapEntry(
-          k,
-          StoredCookie.fromJson(Map<String, dynamic>.from(v)),
-        ),
+        (k, v) =>
+            MapEntry(k, StoredCookie.fromJson(Map<String, dynamic>.from(v))),
       );
 
       cookies.removeWhere((_, c) => c.isExpired);
@@ -51,9 +49,7 @@ class CookieManager extends Interceptor {
 
     saveCustomData<String>(
       _storageKey,
-      jsonEncode(
-        all.map((k, v) => MapEntry(k, v.toJson())),
-      ),
+      jsonEncode(all.map((k, v) => MapEntry(k, v.toJson()))),
     );
   }
 
@@ -109,8 +105,9 @@ class CookieManager extends Interceptor {
     final all = _loadAll();
 
     all.removeWhere((_, c) => c.domain == domain);
-    webview.CookieManager.instance()
-        .deleteCookies(url: webview.WebUri('https://$domain'));
+    webview.CookieManager.instance().deleteCookies(
+      url: webview.WebUri('https://$domain'),
+    );
     _saveAll(all);
   }
 
@@ -132,9 +129,7 @@ class CookieManager extends Interceptor {
         .copyWithoutRaw('cookie')
         .copyWithRaw(name: 'cookie', value: cookieHeader);
 
-    return Interceptor.next(
-      request.copyWith(headers: headers),
-    );
+    return Interceptor.next(request.copyWith(headers: headers));
   }
 
   @override
@@ -143,7 +138,8 @@ class CookieManager extends Interceptor {
   ) async {
     final uri = Uri.parse(response.request.url);
 
-    final setCookieHeaders = response.headerMapList['set-cookie'] ??
+    final setCookieHeaders =
+        response.headerMapList['set-cookie'] ??
         response.headerMapList['Set-Cookie'] ??
         [];
 
@@ -175,9 +171,10 @@ class CookieManager extends Interceptor {
 
     setCookies(
       cookies.map((c) {
-        final domain = (c.domain ?? url.host)
-            .toLowerCase()
-            .replaceFirst(RegExp(r'^\.'), '');
+        final domain = (c.domain ?? url.host).toLowerCase().replaceFirst(
+          RegExp(r'^\.'),
+          '',
+        );
 
         return StoredCookie(
           name: c.name,
@@ -255,15 +252,15 @@ class StoredCookie {
   String get id => '$domain|$path|$name';
 
   Map<String, dynamic> toJson() => {
-        'name': name,
-        'value': value,
-        'domain': domain,
-        'hostOnly': hostOnly,
-        'path': path,
-        'expires': expires?.toIso8601String(),
-        'secure': secure,
-        'httpOnly': httpOnly,
-      };
+    'name': name,
+    'value': value,
+    'domain': domain,
+    'hostOnly': hostOnly,
+    'path': path,
+    'expires': expires?.toIso8601String(),
+    'secure': secure,
+    'httpOnly': httpOnly,
+  };
 
   factory StoredCookie.fromJson(Map<String, dynamic> json) {
     return StoredCookie(
@@ -272,8 +269,9 @@ class StoredCookie {
       domain: json['domain'],
       hostOnly: json['hostOnly'] ?? false,
       path: json['path'] ?? '/',
-      expires:
-          json['expires'] != null ? DateTime.tryParse(json['expires']) : null,
+      expires: json['expires'] != null
+          ? DateTime.tryParse(json['expires'])
+          : null,
       secure: json['secure'] ?? false,
       httpOnly: json['httpOnly'] ?? false,
     );

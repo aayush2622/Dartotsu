@@ -34,42 +34,103 @@ class SettingsPlayerScreenState extends BaseSettingsScreen {
 
   @override
   Widget icon() => Padding(
-        padding: const EdgeInsets.only(right: 16),
-        child: Icon(
-          size: 52,
-          Icons.video_settings,
-          color: Theme.of(context).colorScheme.onSurface,
-        ),
-      );
+    padding: const EdgeInsets.only(right: 16),
+    child: Icon(
+      size: 52,
+      Icons.video_settings,
+      color: Theme.of(context).colorScheme.onSurface,
+    ),
+  );
 
   @override
   List<Widget> get settingsList => playerSettings(context, setState);
 
   @override
   Future<void> onIconPressed() async => showCustomBottomDialog(
-        context,
-        CustomBottomDialog(
-          title: "Select Option",
-          viewList: [
-            _buildOptionCard(
-              icon: Icons.video_library_rounded,
-              label: "Pick Video Files",
-              onTap: () {
-                Navigator.pop(context);
-                selectFile(context);
-              },
-            ),
-            _buildOptionCard(
-              label: "Pick Folder",
-              icon: Icons.folder_rounded,
-              onTap: () {
-                Navigator.pop(context);
-                selectFolder(context);
-              },
-            ),
-          ],
+    context,
+    CustomBottomDialog(
+      title: "Select Option",
+      viewList: [
+        _buildOptionCard(
+          icon: Icons.video_library_rounded,
+          label: "Pick Video Files",
+          onTap: () {
+            Navigator.pop(context);
+            selectFile(context);
+          },
         ),
-      );
+        _buildOptionCard(
+          label: "Pick Folder",
+          icon: Icons.folder_rounded,
+          onTap: () {
+            Navigator.pop(context);
+            selectFolder(context);
+          },
+        ),
+        _buildOptionCard(
+          label: "Network Stream",
+          icon: Icons.stream_rounded,
+          onTap: () {
+            Navigator.pop(context);
+
+            final urlController = TextEditingController();
+            final hostController = TextEditingController();
+
+            AlertDialogBuilder(context)
+              ..setTitle("Open Network Stream")
+              ..setCustomView(
+                StatefulBuilder(
+                  builder: (context, setState) {
+                    return Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        TextField(
+                          controller: urlController,
+                          decoration: const InputDecoration(
+                            labelText: "Stream URL",
+                            hintText: "https://example.com/video.m3u8",
+                            prefixIcon: Icon(Icons.link),
+                          ),
+                          keyboardType: TextInputType.url,
+                        ),
+                        const SizedBox(height: 12),
+                        TextField(
+                          controller: hostController,
+                          decoration: const InputDecoration(
+                            labelText: "Host / Referer (optional)",
+                            hintText: "https://www.xyz.com",
+                            prefixIcon: Icon(Icons.public),
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              )
+              ..setPositiveButton(getString.ok, () {
+                final url = urlController.text.trim();
+                final host = hostController.text.trim();
+                if (url.isEmpty) return;
+                final headers = <String, String>{};
+
+                if (host.isNotEmpty) {
+                  final uri = Uri.parse(host);
+                  headers['Referer'] = host;
+                  headers['Origin'] = uri.origin;
+                }
+                openPlayer(context, [url], headers: headers);
+              })
+              ..popOnFinish(false)
+              ..setNegativeButton(
+                getString.cancel,
+                () => Navigator.of(context).pop(),
+              )
+              ..show();
+          },
+        ),
+      ],
+    ),
+  );
   Widget _buildOptionCard({
     required String label,
     required IconData icon,
@@ -77,9 +138,7 @@ class SettingsPlayerScreenState extends BaseSettingsScreen {
   }) {
     return Card(
       margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       elevation: 4,
       child: SizedBox(
         width: double.infinity,
@@ -115,10 +174,9 @@ List<Widget> playerSettings(
 }) {
   var perPlayerSettings = loadData<bool>(PrefName.perAnimePlayerSettings);
 
-  var playerSettings = media?.settings.playerSettings ??
-      PlayerSettings.fromJson(
-        jsonDecode(loadData(PrefName.playerSettings)),
-      );
+  var playerSettings =
+      media?.settings.playerSettings ??
+      PlayerSettings.fromJson(jsonDecode(loadData(PrefName.playerSettings)));
 
   return [
     StatefulBuilder(
@@ -126,12 +184,15 @@ List<Widget> playerSettings(
         void savePlayerSettings(PlayerSettings playerSettings) {
           if (media != null) {
             MediaSettings.saveMediaSettings(
-                media..settings.playerSettings = playerSettings);
+              media..settings.playerSettings = playerSettings,
+            );
           }
 
           if (media == null || !perPlayerSettings) {
             saveData(
-                PrefName.playerSettings, jsonEncode(playerSettings.toJson()));
+              PrefName.playerSettings,
+              jsonEncode(playerSettings.toJson()),
+            );
           }
           setState(() {});
           s(() {});
@@ -253,9 +314,10 @@ List<Widget> playerSettings(
                   type: SettingType.switchType,
                   name: getString.customMPV,
                   description: getString.customMPVDescription(
-                      loadData(PrefName.mpvConfigDir)
-                          .fixSeparator
-                          .replaceAll(' ', '')),
+                    loadData(
+                      PrefName.mpvConfigDir,
+                    ).fixSeparator.replaceAll(' ', ''),
+                  ),
                   icon: Icons.extension_rounded,
                   isChecked: loadData(PrefName.useCustomMpvConfig),
                   onSwitchChange: (value) {
@@ -319,14 +381,18 @@ List<Widget> playerSettings(
                       ..setTitle(getString.fontFamily)
                       ..singleChoiceItems(
                         ['Poppins', 'Roboto', 'Arial', 'Times New Roman'],
-                        ['Poppins', 'Roboto', 'Arial', 'Times New Roman']
-                            .indexOf(playerSettings.subtitleFont),
+                        [
+                          'Poppins',
+                          'Roboto',
+                          'Arial',
+                          'Times New Roman',
+                        ].indexOf(playerSettings.subtitleFont),
                         (value) {
                           playerSettings.subtitleFont = [
                             'Poppins',
                             'Roboto',
                             'Arial',
-                            'Times New Roman'
+                            'Times New Roman',
                           ][value];
                           savePlayerSettings(playerSettings);
                         },
@@ -380,8 +446,10 @@ List<Widget> playerSettings(
                   icon: Icons.color_lens,
                   onClick: () async {
                     var color = playerSettings.subtitleColor;
-                    Color? newColor =
-                        await showColorPickerDialog(context, Color(color));
+                    Color? newColor = await showColorPickerDialog(
+                      context,
+                      Color(color),
+                    );
                     if (newColor != null) {
                       playerSettings.subtitleColor = newColor.value;
                       savePlayerSettings(playerSettings);
@@ -395,8 +463,10 @@ List<Widget> playerSettings(
                   icon: Icons.color_lens,
                   onClick: () async {
                     var color = playerSettings.subtitleBackgroundColor;
-                    Color? newColor =
-                        await showColorPickerDialog(context, Color(color));
+                    Color? newColor = await showColorPickerDialog(
+                      context,
+                      Color(color),
+                    );
                     if (newColor != null) {
                       playerSettings.subtitleBackgroundColor = newColor.value;
                       savePlayerSettings(playerSettings);
@@ -410,8 +480,10 @@ List<Widget> playerSettings(
                   icon: Icons.color_lens,
                   onClick: () async {
                     var color = playerSettings.subtitleOutlineColor;
-                    Color? newColor =
-                        await showColorPickerDialog(context, Color(color));
+                    Color? newColor = await showColorPickerDialog(
+                      context,
+                      Color(color),
+                    );
                     if (newColor != null) {
                       playerSettings.subtitleOutlineColor = newColor.value;
                       savePlayerSettings(playerSettings);
@@ -436,9 +508,7 @@ List<Widget> playerSettings(
                       playerSettings.subtitleBackgroundColor,
                     ),
                     inherit: false,
-                    color: Color(
-                      playerSettings.subtitleColor,
-                    ),
+                    color: Color(playerSettings.subtitleColor),
                     shadows: [
                       Shadow(
                         offset: const Offset(1.0, 1.0),
@@ -453,7 +523,7 @@ List<Widget> playerSettings(
           ],
         );
       },
-    )
+    ),
   ];
 }
 
@@ -493,7 +563,11 @@ Future<void> selectFolder(BuildContext context) async {
   openPlayer(context, paths);
 }
 
-Future<void> openPlayer(BuildContext context, List<String> files) async {
+Future<void> openPlayer(
+  BuildContext context,
+  List<String> files, {
+  Map<String, String>? headers,
+}) async {
   final episodes = <String, DEpisode>{};
   for (var i = 0; i < files.length; i++) {
     episodes['${i + 1}'] = DEpisode(
@@ -520,7 +594,14 @@ Future<void> openPlayer(BuildContext context, List<String> files) async {
     context,
     MediaPlayer(
       isOffline: true,
-      videos: [Video(episodes['1']?.name, episodes['1']!.url!, 'Media')],
+      videos: [
+        Video(
+          episodes['1']?.name,
+          episodes['1']!.url!,
+          'Media',
+          headers: headers,
+        ),
+      ],
       currentEpisode: episodes['1']!,
       index: 0,
       source: Source(),
@@ -560,7 +641,7 @@ const List<String> subMap = [
   'ttml',
   'sbv',
   'lrc',
-  'xml'
+  'xml',
 ];
 const List<String> audioMap = [
   'mp3',
@@ -586,7 +667,7 @@ const List<String> audioMap = [
   'midi',
   'kar',
   'ra',
-  'rm'
+  'rm',
 ];
 
 List<String> speedMap(bool cursed) => cursed
@@ -605,7 +686,7 @@ List<String> speedMap(bool cursed) => cursed
         "5x",
         "10x",
         "25x",
-        "50x"
+        "50x",
       ]
     : [
         "0.25x",
@@ -620,13 +701,9 @@ List<String> speedMap(bool cursed) => cursed
         "1.5x",
         "1.66x",
         "1.75x",
-        "2x"
+        "2x",
       ];
 
 final resizeStringMap = {0: "Original", 1: "Zoom", 2: "Stretch"};
 
-final resizeMap = {
-  0: BoxFit.contain,
-  1: BoxFit.cover,
-  2: BoxFit.fill,
-};
+final resizeMap = {0: BoxFit.contain, 1: BoxFit.cover, 2: BoxFit.fill};

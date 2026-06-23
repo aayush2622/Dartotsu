@@ -1,5 +1,6 @@
 import 'package:dartotsu/Screens/Settings/BaseSettingsScreen.dart';
 import 'package:dartotsu/Screens/Settings/SettingsAccountScreen.dart';
+import 'package:dartotsu/Screens/Settings/SettingsAddonScreen.dart';
 import 'package:dartotsu/Screens/Settings/SettingsThemeScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -29,13 +30,13 @@ class SettingsScreenState extends BaseSettingsScreen {
 
   @override
   Widget icon() => ClipOval(
-        child: Image.asset(
-          'assets/images/logo.png',
-          width: 64,
-          height: 64,
-          fit: BoxFit.cover,
-        ),
-      );
+    child: Image.asset(
+      'assets/images/logo.png',
+      width: 64,
+      height: 64,
+      fit: BoxFit.cover,
+    ),
+  );
 
   @override
   List<Widget> get settingsList {
@@ -96,6 +97,14 @@ class SettingsScreenState extends BaseSettingsScreen {
         icon: Icons.extension,
         onClick: () =>
             navigateToPage(context, const SettingsExtensionsScreen()),
+        isActivity: true,
+      ),
+      Setting(
+        type: SettingType.normal,
+        name: "Addons",
+        description: "Manage and configure addons for enhanced functionality.",
+        icon: Icons.add_rounded,
+        onClick: () => navigateToPage(context, const SettingsAddonsScreen()),
         isActivity: true,
       ),
       Setting(
