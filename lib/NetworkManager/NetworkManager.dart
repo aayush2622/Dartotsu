@@ -36,7 +36,7 @@ class NetworkManager extends GetxController {
         userAgent: _userAgent,
         throwOnStatusCode: false,
         tlsSettings: const TlsSettings(
-          trustRootCertificates: true,
+          rootCertSource: RootCertSource.webpki,
           verifyCertificates: false,
         ),
         timeoutSettings: const TimeoutSettings(
@@ -54,7 +54,7 @@ class NetworkManager extends GetxController {
                 final res = await InternetAddress.lookup(host);
 
                 return res.map((e) => e.address).toList();
-              } catch (e, stack) {
+              } catch (e) {
                 debugPrint('Fallback DNS failed for $host');
                 return [];
               }

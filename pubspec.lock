@@ -310,7 +310,7 @@ packages:
     description:
       path: "."
       ref: master
-      resolved-ref: f4440c0020f38cc7d30719d021b7b3f7835aacea
+      resolved-ref: ca130f22051f354128188a60ce63af78f88b855b
       url: "https://github.com/aayush2622/DartotsuExtensionBridge.git"
     source: git
     version: "0.0.5"
@@ -447,10 +447,10 @@ packages:
     dependency: "direct main"
     description:
       name: file_picker
-      sha256: fc83774ce5bd7ce08168333b5e53dbe9090ec04eb21e7aa7cd7bac921032c934
+      sha256: fdc6a37f715d19f35b131decf1ce39242eeed5ddae18c0818c3eccb731ab76be
       url: "https://pub.dev"
     source: hosted
-    version: "12.0.0-beta.5"
+    version: "12.0.0-beta.7"
   fixnum:
     dependency: transitive
     description:
@@ -501,7 +501,7 @@ packages:
     description:
       path: flutter_inappwebview
       ref: master
-      resolved-ref: "928133d65d2f95bb1210600ce0c48386483e4fe3"
+      resolved-ref: "6646aa0ed7ba9504f367384ad62a3491472441ba"
       url: "https://github.com/roshancodespace/flutter_inappwebview.git"
     source: git
     version: "6.2.0-beta.3"
@@ -529,15 +529,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0-beta.3"
-  flutter_inappwebview_linux:
-    dependency: transitive
-    description:
-      path: flutter_inappwebview_linux
-      ref: "928133d65d2f95bb1210600ce0c48386483e4fe3"
-      resolved-ref: "928133d65d2f95bb1210600ce0c48386483e4fe3"
-      url: "https://github.com/roshancodespace/flutter_inappwebview.git"
-    source: git
-    version: "0.1.0-beta.1"
   flutter_inappwebview_macos:
     dependency: transitive
     description:
@@ -1240,10 +1231,10 @@ packages:
     dependency: transitive
     description:
       name: path_provider_platform_interface
-      sha256: "88f5779f72ba699763fa3a3b06aa4bf6de76c8e5de842cf6f29e2e06476c2334"
+      sha256: "484838772624c3a4b94f1e44a3e19897fee738f2d5c4ce448443b0417f7c9dda"
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.2"
+    version: "2.1.3"
   path_provider_windows:
     dependency: transitive
     description:
@@ -1272,10 +1263,10 @@ packages:
     dependency: transitive
     description:
       name: permission_handler_apple
-      sha256: e20daf680eef1ca62ffe8c8c526b778cc386d50137c77ac71c8ec9c88c13fb9d
+      sha256: "79dfa1df734798aa3cfdad166d3a3698c206d8813de13516ea1071b5d7e2f420"
       url: "https://pub.dev"
     source: hosted
-    version: "9.4.9"
+    version: "9.4.10"
   permission_handler_html:
     dependency: transitive
     description:
@@ -1425,10 +1416,10 @@ packages:
     description:
       path: rhttp
       ref: main
-      resolved-ref: c00325206f1bf82ff1b9b8af94b653294d8b0dc5
+      resolved-ref: "2fed149a088e3145c5fe47e38c99d220fdd5806f"
       url: "https://codeberg.org/Tienisto/rhttp.git"
     source: git
-    version: "0.17.0"
+    version: "0.18.0"
   rxdart:
     dependency: transitive
     description:
@@ -1505,42 +1496,42 @@ packages:
     dependency: transitive
     description:
       name: screen_retriever
-      sha256: "570dbc8e4f70bac451e0efc9c9bb19fa2d6799a11e6ef04f946d7886d2e23d0c"
+      sha256: "42cc3b402a0f67d2455a0d067553d0f13453f6a008d98eababf8b63958d506bd"
       url: "https://pub.dev"
     source: hosted
-    version: "0.2.0"
+    version: "0.2.1"
   screen_retriever_linux:
     dependency: transitive
     description:
       name: screen_retriever_linux
-      sha256: f7f8120c92ef0784e58491ab664d01efda79a922b025ff286e29aa123ea3dd18
+      sha256: "2a476f1a5538065bc5badf376cfdc83d6ecf07d77eb2391b9c2bff5a76970048"
       url: "https://pub.dev"
     source: hosted
-    version: "0.2.0"
+    version: "0.2.1"
   screen_retriever_macos:
     dependency: transitive
     description:
       name: screen_retriever_macos
-      sha256: "71f956e65c97315dd661d71f828708bd97b6d358e776f1a30d5aa7d22d78a149"
+      sha256: b5abb900fcb86614ff10b738b34e37b9e1d03b0447280668e2bc8a98bdc7bd59
       url: "https://pub.dev"
     source: hosted
-    version: "0.2.0"
+    version: "0.2.1"
   screen_retriever_platform_interface:
     dependency: transitive
     description:
       name: screen_retriever_platform_interface
-      sha256: ee197f4581ff0d5608587819af40490748e1e39e648d7680ecf95c05197240c0
+      sha256: "3af22d926bedf20c2caa308eea376776451a3af125919ce072e56525fded8901"
       url: "https://pub.dev"
     source: hosted
-    version: "0.2.0"
+    version: "0.2.1"
   screen_retriever_windows:
     dependency: transitive
     description:
       name: screen_retriever_windows
-      sha256: "449ee257f03ca98a57288ee526a301a430a344a161f9202b4fcc38576716fe13"
+      sha256: c44b38a4c4bab34af259180a70a4eee1e29384e7b82e627c9faa68afcdab2e73
       url: "https://pub.dev"
     source: hosted
-    version: "0.2.0"
+    version: "0.2.1"
   scrollable_positioned_list:
     dependency: "direct main"
     description:
@@ -1577,10 +1568,10 @@ packages:
     dependency: transitive
     description:
       name: shared_preferences_android
-      sha256: a2c49fc1fed7140cadd892d765bd47edbe4ac0b9c7e7e3c493dcb58126f99cf0
+      sha256: "93ae5884a9df5d3bb696825bceb3a17590754548b5d740eba51500afc8d088f5"
       url: "https://pub.dev"
     source: hosted
-    version: "2.4.25"
+    version: "2.4.26"
   shared_preferences_foundation:
     dependency: transitive
     description:
@@ -1694,10 +1685,10 @@ packages:
     dependency: transitive
     description:
       name: sqflite_common
-      sha256: cce558075afe2a83f3fd7fc123acd6b090683e4f23910d44fbb31ecd7800b014
+      sha256: "5bf6a55c166e73bf651ba7ec3ed486e577620e3dc8f3a9c6a258a8031b624590"
       url: "https://pub.dev"
     source: hosted
-    version: "2.5.9"
+    version: "2.5.11"
   sqflite_darwin:
     dependency: transitive
     description:
@@ -1902,10 +1893,10 @@ packages:
     dependency: transitive
     description:
       name: vector_graphics_compiler
-      sha256: "7ee12e6dffe0fc8e755179d6d91b3b34f5924223fc104d85572ef9180d73d172"
+      sha256: "142a9146f447d15b10bdc00e21d5f4d83e5b32bb5f8f8f5a04c75311344923a3"
       url: "https://pub.dev"
     source: hosted
-    version: "1.2.5"
+    version: "1.2.6"
   vector_math:
     dependency: transitive
     description:

@@ -53,9 +53,7 @@ class _ExtensionListScreenState extends e.ExtensionList<ExtensionList> {
     source = source!;
     return Card(
       color: theme.surface,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: ListTile(
         tileColor: theme.surface,
         leading: _buildIcon(source),
@@ -94,8 +92,7 @@ class _ExtensionListScreenState extends e.ExtensionList<ExtensionList> {
         width: 37,
         height: 37,
         fit: BoxFit.contain,
-        errorBuilder: (_, __, ___) =>
-        const Icon(Icons.extension_rounded),
+        errorBuilder: (_, _, _) => const Icon(Icons.extension_rounded),
       );
     }
 
@@ -120,11 +117,7 @@ class _ExtensionListScreenState extends e.ExtensionList<ExtensionList> {
         const Text("  (18+)", style: _subtitleTextStyle),
     ];
 
-    return Wrap(
-      spacing: 4,
-      runSpacing: 2,
-      children: items,
-    );
+    return Wrap(spacing: 4, runSpacing: 2, children: items);
   }
 
   Widget _buildTrailing(Source source) {

@@ -2,7 +2,6 @@ import 'package:dartotsu/Functions/Extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../Api/EpisodeDetails/GetMediaIDs/GetMediaIDs.dart';
 import '../../Functions/Function.dart';
 import '../../Theme/ThemeManager.dart';
 
@@ -30,20 +29,17 @@ abstract class BaseMediaScreen extends GetxController {
     if (initialLoad) return;
     scrollController.addListener(scrollListener);
     final live = Refresh.getOrPut(refreshID, false);
-    ever(
-      live,
-      (shouldRefresh) async {
-        if (running.value && shouldRefresh) {
-          running.value = false;
+    ever(live, (shouldRefresh) async {
+      if (running.value && shouldRefresh) {
+        running.value = false;
 
-          await loadAll();
+        await loadAll();
 
-          initialLoad = true;
-          live.value = false;
-          running.value = true;
-        }
-      },
-    );
+        initialLoad = true;
+        live.value = false;
+        running.value = true;
+      }
+    });
     live.value = true;
   }
 

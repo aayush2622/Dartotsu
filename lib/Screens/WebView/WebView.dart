@@ -179,7 +179,7 @@ class _WebViewState extends State<WebView> {
           shouldOverrideUrlLoading: (_, action) async {
             return NavigationActionPolicy.ALLOW;
           },
-          onUpdateVisitedHistory: (_, url, ___) async {
+          onUpdateVisitedHistory: (_, url, _) async {
             if (url != null) {
               await cookieManager.readCookiesFromWebView(url, _controller);
             }
