@@ -32,6 +32,10 @@ on:
         type: boolean
         default: false
 
+concurrency:
+  group: dartotsu-build-${{ github.ref }}
+  cancel-in-progress: true
+
 env:
   FLUTTER_VERSION: 3.44.0
 

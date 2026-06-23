@@ -4,6 +4,11 @@ on:
     tags:
       - 'v*.*.*' # Trigger on version tags like v1.0.0, v2.1.3, etc.
   workflow_dispatch:
+
+concurrency:
+  group: dartotsu-release-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build_android:
     runs-on: ubuntu-latest
