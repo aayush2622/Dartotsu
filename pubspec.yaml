@@ -68,24 +68,24 @@ dependencies:
     git:
       url: https://github.com/kodjodevf/media-kit.git
       path: libs/universal/media_kit_libs_video
-  window_manager: ^0.5.1
+  window_manager: ^0.5.2
   permission_handler: ^12.0.3
   flutter_inappwebview: ^6.2.0-beta.2
 
   wakelock_plus: ^1.6.1
   volume_controller: ^3.6.0
   screen_brightness: ^2.1.11 # dont change
-  app_links: ^7.1.2
+  app_links: ^7.2.0
   win32: ^6.3.0
   ffi: ^2.2.0
   install_plugin: ^2.1.0
 
   # Miscellaneous
-  receive_sharing_intent: ^1.8.1
-  device_info_plus: ^13.1.0
-  package_info_plus: ^10.1.0
+  receive_sharing_intent: ^1.9.0
+  device_info_plus: ^13.2.0
+  package_info_plus: ^10.2.0
   file_picker: ^12.0.0-beta.5
-  share_plus: ^13.1.0
+  share_plus: ^13.2.0
   url_launcher: ^6.3.2
   dynamic_color: ^1.8.1
   json_path: ^0.9.0
