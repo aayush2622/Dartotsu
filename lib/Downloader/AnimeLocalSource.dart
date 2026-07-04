@@ -24,7 +24,10 @@ class AnimeLocalSource extends Source implements SourceMethods {
 
   Future<Directory?> getAnimeDirectory() {
     return PrefManager.getDirectory(
-        subPath: "local/anime", useCustomPath: true, useSystemPath: false);
+      subPath: "local/anime",
+      useCustomPath: true,
+      useSystemPath: false,
+    );
   }
 
   Future<List<DMedia>> _getAllMedia() async {
@@ -52,11 +55,7 @@ class AnimeLocalSource extends Source implements SourceMethods {
         }
 
         mediaList.add(
-          DMedia(
-            title: dirName,
-            cover: coverPath,
-            url: entity.path,
-          ),
+          DMedia(title: dirName, cover: coverPath, url: entity.path),
         );
       }
     }
@@ -78,8 +77,10 @@ class AnimeLocalSource extends Source implements SourceMethods {
 
     List<DEpisode> episodes = [];
 
-    await for (var entity
-        in animeDirectory.list(recursive: false, followLinks: false)) {
+    await for (var entity in animeDirectory.list(
+      recursive: false,
+      followLinks: false,
+    )) {
       if (entity is File && entity.path.isMediaVideo()) {
         final fileName = entity.path.split(Platform.pathSeparator).last;
         final episodeName = fileName.substring(0, fileName.lastIndexOf('.'));
@@ -122,21 +123,17 @@ class AnimeLocalSource extends Source implements SourceMethods {
 
   @override
   Future<List<Video>> getVideoList(DEpisode episode) {
-    return Future.value([
-      Video(
-        "Local File",
-        episode.url!,
-        "Local File",
-      ),
-    ]);
+    return Future.value([Video("Local File", episode.url!, "Local File")]);
   }
 
   @override
   Future<Pages> search(String query, int page, List filters) async {
     var media = await _getAllMedia();
     var searchedMedia = media
-        .where((element) =>
-            (element.title ?? "").toLowerCase().contains(query.toLowerCase()))
+        .where(
+          (element) =>
+              (element.title ?? "").toLowerCase().contains(query.toLowerCase()),
+        )
         .toList();
     return Pages(list: searchedMedia);
   }
@@ -157,7 +154,7 @@ class AnimeLocalSource extends Source implements SourceMethods {
   }
 
   @override
-  Future<String?> getNovelContent(String chapterTitle, String chapterId) {
+  Future<String?> getNovelContent(DEpisode episode) {
     //not used for anime
     throw UnimplementedError();
   }

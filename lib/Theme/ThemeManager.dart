@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../Widgets/DropdownMenu.dart';
-import 'Colors.dart';
 import 'ThemeProvider.dart';
 import 'Themes/blue.dart';
 import 'Themes/fromCode.dart';
@@ -63,8 +62,9 @@ ThemeData getTheme(ColorScheme? material, ThemeNotifier themeManager) {
   }
 
   if (useMaterial && material != null) {
-    baseTheme =
-        isDarkMode ? materialThemeDark(material) : materialThemeLight(material);
+    baseTheme = isDarkMode
+        ? materialThemeDark(material)
+        : materialThemeLight(material);
   }
   if (useCustomColor) {
     baseTheme = isDarkMode
@@ -73,12 +73,14 @@ ThemeData getTheme(ColorScheme? material, ThemeNotifier themeManager) {
   }
   var fontFamily = "Poppins";
   return baseTheme.copyWith(
-    scaffoldBackgroundColor:
-        isOled ? Colors.black : baseTheme.scaffoldBackgroundColor,
+    scaffoldBackgroundColor: isOled
+        ? Colors.black
+        : baseTheme.scaffoldBackgroundColor,
     colorScheme: baseTheme.colorScheme.copyWith(
       surface: isOled ? Colors.black : baseTheme.colorScheme.surface,
-      surfaceContainerHighest:
-          isOled ? greyNavDark : baseTheme.colorScheme.surfaceContainerHighest,
+      surfaceContainerHighest: isOled
+          ? const Color(0xFF222222)
+          : baseTheme.colorScheme.surfaceContainerHighest,
     ),
     textTheme: baseTheme.textTheme.copyWith(
       labelLarge: baseTheme.textTheme.labelLarge?.copyWith(
@@ -141,7 +143,7 @@ Widget themeDropdown(BuildContext context) {
     'saikou',
     'red',
     'lavender',
-    'ocean'
+    'ocean',
   ];
   return buildDropdownMenu(
     padding: const EdgeInsets.symmetric(vertical: 12.0),
@@ -167,11 +169,13 @@ Widget ThemedWidget({
 Widget ThemedContainer({
   required BuildContext context,
   required Widget child,
+  Color? color,
   Widget? glassWidget,
   Border? border,
   BorderRadiusGeometry? borderRadius,
   EdgeInsetsGeometry? padding,
   AlignmentGeometry? alignment,
+  EdgeInsetsGeometry? margin,
 }) {
   final themeManager = Provider.of<ThemeNotifier>(context, listen: false);
   final isGlassMode = themeManager.useGlassMode;
@@ -182,15 +186,14 @@ Widget ThemedContainer({
 
   if (isGlassMode) {
     return BlurBox(
+      margin: margin,
       blur: 12.0,
       alignment: alignment,
       padding: effectivePadding,
-      color: theme.surfaceContainerLow.withOpacity(0.2),
-      border: border ??
-          Border.all(
-            color: theme.onSurface.withOpacity(0.2),
-            width: 0.5,
-          ),
+      color: color ?? theme.surfaceContainerLow.withOpacity(0.2),
+      border:
+          border ??
+          Border.all(color: theme.onSurface.withOpacity(0.2), width: 0.5),
       borderRadius: effectiveBorderRadius,
       boxShadow: [
         BoxShadow(
@@ -199,23 +202,19 @@ Widget ThemedContainer({
           spreadRadius: 0.5,
         ),
       ],
-      child: Material(
-        color: Colors.transparent,
-        child: glassWidget ?? child,
-      ),
+      child: Material(color: Colors.transparent, child: glassWidget ?? child),
     );
   }
 
   return Container(
     padding: effectivePadding,
     alignment: alignment,
+    margin: margin,
     decoration: BoxDecoration(
-      color: theme.surfaceContainerLow,
-      border: border ??
-          Border.all(
-            color: theme.onSurface.withOpacity(0.6),
-            width: 0.5,
-          ),
+      color: color ?? Theme.of(context).cardColor,
+      border:
+          border ??
+          Border.all(color: theme.onSurface.withOpacity(0.6), width: 0.5),
       borderRadius: effectiveBorderRadius,
       boxShadow: [
         BoxShadow(
@@ -225,9 +224,6 @@ Widget ThemedContainer({
         ),
       ],
     ),
-    child: Material(
-      color: Colors.transparent,
-      child: child,
-    ),
+    child: Material(color: Colors.transparent, child: child),
   );
 }

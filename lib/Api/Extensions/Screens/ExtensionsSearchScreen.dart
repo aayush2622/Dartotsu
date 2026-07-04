@@ -12,8 +12,11 @@ class ExtensionsSearchScreen extends BaseSearchScreen {
   var data = Rxn<Map<String, List<Media>>>({});
 
   @override
-  List<SearchType> get searchTypes =>
-      [SearchType.ANIME, SearchType.MANGA, SearchType.NOVEL];
+  List<SearchType> get searchTypes => [
+    SearchType.ANIME,
+    SearchType.MANGA,
+    SearchType.NOVEL,
+  ];
 
   @override
   void init({SearchResults? s}) {
@@ -36,39 +39,37 @@ class ExtensionsSearchScreen extends BaseSearchScreen {
 
   Future<void> _buildSections() async {
     List<Future<void>> tasks = [];
-    final manager = Get.find<ExtensionManager>().current.value;
-    var sources = manager
-        .getInstalledRx(
-          searchResults.value.type == SearchType.ANIME
-              ? ItemType.anime
-              : searchResults.value.type == SearchType.MANGA
-                  ? ItemType.manga
-                  : ItemType.novel,
-        )
-        .value;
+    var type = searchResults.value.type == SearchType.ANIME
+        ? ItemType.anime
+        : searchResults.value.type == SearchType.MANGA
+        ? ItemType.manga
+        : ItemType.novel;
+    final manager = Get.find<ExtensionManager>()[type];
+
+    var sources = manager.state(type).installed.value;
     for (var source in sources) {
-      tasks.add(
-        () async {
-          try {
-            var result = (await source.methods.search(
-              searchResults.value.search ?? '',
-              searchResults.value.page ?? 1,
-              [],
-            ))
-                .toMedia(
-                    isAnime: searchResults.value.type == SearchType.ANIME
-                        ? true
-                        : false,
-                    source: source);
-            if (result.isNotEmpty) {
-              data.value = {...?data.value, source.name ?? 'Unknown': result};
-            }
-          } catch (e) {
-            Logger.log(
-                'Failed to load data for source: ${source.name}, error: $e');
+      tasks.add(() async {
+        try {
+          var result =
+              (await source.methods.search(
+                searchResults.value.search ?? '',
+                searchResults.value.page ?? 1,
+                [],
+              )).toMedia(
+                isAnime: searchResults.value.type == SearchType.ANIME
+                    ? true
+                    : false,
+                source: source,
+              );
+          if (result.isNotEmpty) {
+            data.value = {...?data.value, source.name ?? 'Unknown': result};
           }
-        }(),
-      );
+        } catch (e) {
+          Logger.log(
+            'Failed to load data for source: ${source.name}, error: $e',
+          );
+        }
+      }());
     }
     await Future.wait(tasks);
   }
@@ -77,9 +78,7 @@ class ExtensionsSearchScreen extends BaseSearchScreen {
   List<Widget> searchWidget(BuildContext context) {
     return [
       if (data.value == null || data.value!.isEmpty || data.value == {})
-        const Center(
-          child: CircularProgressIndicator(),
-        )
+        const Center(child: CircularProgressIndicator())
       else
         Column(
           children: [

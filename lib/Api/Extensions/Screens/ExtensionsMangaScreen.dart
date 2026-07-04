@@ -18,17 +18,18 @@ class ExtensionsMangaScreen extends BaseMangaScreen {
   @override
   Future<void> loadAll() async {
     resetPageData();
-    final manager = Get.find<ExtensionManager>().current.value;
-
+    final manager = Get.find<ExtensionManager>()[ItemType.manga];
+    manager.anime.installed.value;
     var sources = [
-      ...(manager.getInstalledRx(ItemType.manga)).value.take(4),
-      ...(manager.getInstalledRx(ItemType.novel)).value.take(4),
+      ...manager.manga.installed.value.take(4),
+      ...manager.novel.installed.value.take(4),
     ];
     _buildSections(sources);
     for (var source in sources) {
       try {
-        var result = (await source.methods.getLatestUpdates(1))
-            .toMedia(isAnime: false, source: source);
+        var result = (await source.methods.getLatestUpdates(
+          1,
+        )).toMedia(isAnime: false, source: source);
 
         if (result.isNotEmpty) {
           trending.value = result;
@@ -44,19 +45,18 @@ class ExtensionsMangaScreen extends BaseMangaScreen {
   Future<void> _buildSections(List<Source> sources) async {
     List<Future<void>> tasks = [];
     for (var source in sources) {
-      tasks.add(
-        () async {
-          try {
-            var result = (await source.methods.getLatestUpdates(1))
-                .toMedia(isAnime: false, source: source);
-            if (result.isNotEmpty) {
-              data.value = {...data.value!, source.name ?? 'Unknown': result};
-            }
-          } catch (e) {
-            Logger.log('Failed to load data ${source.name}, error: $e');
+      tasks.add(() async {
+        try {
+          var result = (await source.methods.getLatestUpdates(
+            1,
+          )).toMedia(isAnime: false, source: source);
+          if (result.isNotEmpty) {
+            data.value = {...data.value!, source.name ?? 'Unknown': result};
           }
-        }(),
-      );
+        } catch (e) {
+          Logger.log('Failed to load data ${source.name}, error: $e');
+        }
+      }());
     }
     await Future.wait(tasks);
   }
@@ -68,9 +68,7 @@ class ExtensionsMangaScreen extends BaseMangaScreen {
   List<Widget> mediaContent(BuildContext context) {
     return [
       if (data.value == null || data.value!.isEmpty || data.value == {})
-        const Center(
-          child: CircularProgressIndicator(),
-        )
+        const Center(child: CircularProgressIndicator())
       else
         Column(
           children: [

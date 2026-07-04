@@ -12,6 +12,7 @@ analyzer:
     camel_case_types: ignore
     constant_identifier_names: ignore
     deprecated_member_use: ignore
+    experimental_member_use: ignore
     library_prefixes: ignore
 include: package:flutter_lints/flutter.yaml
 

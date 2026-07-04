@@ -82,7 +82,7 @@ class PrefManager {
       dartotsuPreferences = await _open('DartotsuSettings', path!.path);
       await _populateCache();
     } catch (e) {
-      print('Error initializing preferences: $e');
+      debugPrint('Error initializing preferences: $e');
     }
   }
 
@@ -93,7 +93,7 @@ class PrefManager {
         ResponseTokenSchema,
         MediaSettingsSchema,
         ShowResponseSchema,
-        ...DartotsuExtensionBridge.isarSchema
+        ...DartotsuExtensionBridge.isarSchema,
       ],
       directory: directory,
       name: name,
@@ -132,17 +132,14 @@ class PrefManager {
     String key, {
     T? defaultValue,
     PrefLocation location = PrefLocation.OTHER,
-  }) =>
-      cache.containsKey(key) ? cache[key] as T? : defaultValue;
+  }) => cache.containsKey(key) ? cache[key] as T? : defaultValue;
 
   static void removeVal<T>(Pref<dynamic> pref) async {
     cache.remove(pref.key);
     _removeFromIsar<T>(pref.key);
   }
 
-  static void removeCustomVal<T>(
-    String key,
-  ) async {
+  static void removeCustomVal<T>(String key) async {
     if (cache.containsKey(key)) {
       cache.remove(key);
     }
@@ -283,7 +280,7 @@ class PrefManager {
     return Directory(dbDir);
   }
 
-/*  static Future<Directory?> getDirectory({
+  /*  static Future<Directory?> getDirectory({
     String? subPath,
     bool? useCustomPath = false,
     bool? useSystemPath = true,
@@ -380,8 +377,8 @@ class PrefManager {
       final defaultPath = '/storage/emulated/0/Dartotsu';
       final resolvedCustomPath = customPath.isNotEmpty
           ? (customPath.endsWith('Dartotsu')
-              ? customPath
-              : path.join(customPath, 'Dartotsu'))
+                ? customPath
+                : path.join(customPath, 'Dartotsu'))
           : defaultPath;
 
       String basePath;

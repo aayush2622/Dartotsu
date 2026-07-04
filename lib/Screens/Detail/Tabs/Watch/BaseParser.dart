@@ -23,71 +23,119 @@ abstract class BaseParser extends GetxController {
   final Rx<List<Source>> sourceList = Rx([]);
   final RxBool sourcesLoaded = false.obs;
 
-  StreamSubscription? _sourceListSubscription;
+  StreamSubscription<List<Source>>? _sourceListSubscription;
+  Worker? _managerWorker;
 
-  void initSourceList(Media media) async {
-    var isAnime = media.anime != null;
+  void initSourceList(Media media) {
+    final isAnime = media.anime != null;
     final itemType = isAnime
         ? ItemType.anime
         : media.format?.toLowerCase() == 'novel'
-            ? ItemType.novel
-            : ItemType.manga;
+        ? ItemType.novel
+        : ItemType.manga;
 
-    final manager = Get.find<ExtensionManager>().current.value;
-    final Rx<List<Source>> sortedSourcesRx = manager.getInstalledRx(itemType);
+    final extensionManager = Get.find<ExtensionManager>();
+    String orderKey =
+        '${extensionManager[itemType].name}_${itemType.name}_order';
+
+    void updateSourceList(List<Source> sources) {
+      final sortedSources = [
+        ...applySavedOrder(List<Source>.from(sources), orderKey),
+        AnimeLocalSource(),
+      ];
+
+      sourceList.value = sortedSources;
+
+      if (!sourcesLoaded.value) {
+        if (sortedSources.isEmpty) {
+          sourcesLoaded.value = true;
+          return;
+        }
+
+        String nameAndLang(Source source) {
+          final isDuplicateName =
+              sortedSources.where((s) => s.name == source.name).length > 1;
+
+          return isDuplicateName
+              ? '${source.name!} - ${completeLanguageName(source.lang!.toLowerCase())}'
+              : source.name!;
+        }
+
+        var lastUsedSource = media.settings.lastUsedSource;
+        if (lastUsedSource == null ||
+            !sortedSources.any((e) => nameAndLang(e) == lastUsedSource)) {
+          lastUsedSource = nameAndLang(sortedSources.first);
+        }
+
+        final selectedSource =
+            sortedSources.firstWhereOrNull(
+              (e) => nameAndLang(e) == lastUsedSource,
+            ) ??
+            sortedSources.first;
+
+        source.value = selectedSource;
+        searchMedia(selectedSource, media);
+        sourcesLoaded.value = true;
+      }
+    }
+
+    void subscribeToCurrentManager() {
+      _sourceListSubscription?.cancel();
+
+      final manager = extensionManager[itemType];
+      final installedRx = manager.state(itemType).installed;
+
+      updateSourceList(installedRx.value);
+
+      _sourceListSubscription = installedRx.listen(updateSourceList);
+    }
 
     _sourceListSubscription?.cancel();
-    _sourceListSubscription = sortedSourcesRx.listen((sources) {
-      sourceList.value = [...sources, AnimeLocalSource()];
+    _managerWorker?.dispose();
+
+    subscribeToCurrentManager();
+
+    _managerWorker = ever(extensionManager.current, (_) {
+      subscribeToCurrentManager();
+    });
+  }
+
+  List<Source> applySavedOrder(List<Source> list, String orderKey) {
+    final saved = loadCustomData<List<String>>(
+      orderKey,
+      defaultValue: const [],
+    );
+
+    if (saved == null || saved.isEmpty) return list;
+
+    final order = <String, int>{
+      for (var i = 0; i < saved.length; i++) saved[i]: i,
+    };
+
+    list.sort((a, b) {
+      final ai = order[a.id] ?? 1 << 30;
+      final bi = order[b.id] ?? 1 << 30;
+      return ai.compareTo(bi);
     });
 
-    final List<Source> sortedSources = [
-      ...sortedSourcesRx.value,
-      AnimeLocalSource()
-    ];
-
-    if (sortedSources.isEmpty) {
-      sourcesLoaded.value = true;
-      return;
-    }
-
-    sourceList.value = sortedSources;
-
-    String nameAndLang(Source source) {
-      bool isDuplicateName =
-          sortedSources.where((s) => s.name == source.name).length > 1;
-
-      return isDuplicateName
-          ? '${source.name!} - ${completeLanguageName(source.lang!.toLowerCase())}'
-          : source.name!;
-    }
-
-    var lastUsedSource = media.settings.lastUsedSource;
-    if (lastUsedSource == null ||
-        !sortedSources.any((e) => nameAndLang(e) == lastUsedSource)) {
-      lastUsedSource = nameAndLang(sortedSources.first);
-    }
-
-    final Source source = sortedSources
-            .firstWhereOrNull((e) => nameAndLang(e) == lastUsedSource!) ??
-        sortedSources.first;
-
-    this.source.value = source;
-    searchMedia(source, media);
-    sourcesLoaded.value = true;
+    return list;
   }
 
   @override
   void dispose() {
-    super.dispose();
     _currentOperation?.cancel();
     _sourceListSubscription?.cancel();
+    _managerWorker?.dispose();
+    super.dispose();
   }
 
   CancelableOperation? _currentOperation;
 
-  Future<void> searchMedia(Source source, Media mediaData,
-      {Function(DMedia? response)? onFinish}) async {
+  Future<void> searchMedia(
+    Source source,
+    Media mediaData, {
+    Function(DMedia? response)? onFinish,
+  }) async {
     _currentOperation?.cancel();
 
     _currentOperation = CancelableOperation.fromFuture(
@@ -100,8 +148,11 @@ abstract class BaseParser extends GetxController {
     await _currentOperation?.valueOrCancellation();
   }
 
-  Future<void> _performSearch(Source source, Media mediaData,
-      Function(DMedia? response)? onFinish) async {
+  Future<void> _performSearch(
+    Source source,
+    Media mediaData,
+    Function(DMedia? response)? onFinish,
+  ) async {
     try {
       selectedMedia.value = null;
       status.value = "Searching...";
@@ -119,44 +170,44 @@ abstract class BaseParser extends GetxController {
       }
       DMedia? response;
       status.value = "Searching : ${mediaData.mainName()}";
-      final mediaFuture = source.methods.search(
-        mediaData.mainName(),
-        1,
-        [],
-      );
+      final mediaFuture = source.methods.search(mediaData.mainName(), 1, []);
 
       final media = await mediaFuture;
 
       List<DMedia> sortedResults = media.list.isNotEmpty
-          ? (media.list
-            ..sort((a, b) {
+          ? (media.list..sort((a, b) {
               final aRatio = ratio(
-                  a.title!.toLowerCase(), mediaData.mainName().toLowerCase());
+                a.title!.toLowerCase(),
+                mediaData.mainName().toLowerCase(),
+              );
               final bRatio = ratio(
-                  b.title!.toLowerCase(), mediaData.mainName().toLowerCase());
+                b.title!.toLowerCase(),
+                mediaData.mainName().toLowerCase(),
+              );
               return bRatio.compareTo(aRatio);
             }))
           : [];
       response = sortedResults.firstOrNull;
 
       if (response == null ||
-          ratio(response.title!.toLowerCase(),
-                  mediaData.mainName().toLowerCase()) <
+          ratio(
+                response.title!.toLowerCase(),
+                mediaData.mainName().toLowerCase(),
+              ) <
               100) {
         status.value = "Searching : ${mediaData.nameRomaji}";
-        final mediaFuture = source.methods.search(
-          mediaData.nameRomaji,
-          1,
-          [],
-        );
+        final mediaFuture = source.methods.search(mediaData.nameRomaji, 1, []);
         final media = await mediaFuture;
         List<DMedia> sortedRomajiResults = media.list.isNotEmpty
-            ? (media.list
-              ..sort((a, b) {
+            ? (media.list..sort((a, b) {
                 final aRatio = ratio(
-                    a.title!.toLowerCase(), mediaData.nameRomaji.toLowerCase());
+                  a.title!.toLowerCase(),
+                  mediaData.nameRomaji.toLowerCase(),
+                );
                 final bRatio = ratio(
-                    b.title!.toLowerCase(), mediaData.nameRomaji.toLowerCase());
+                  b.title!.toLowerCase(),
+                  mediaData.nameRomaji.toLowerCase(),
+                );
                 return bRatio.compareTo(aRatio);
               }))
             : [];
@@ -164,10 +215,14 @@ abstract class BaseParser extends GetxController {
         if (response == null) {
           response = closestRomaji;
         } else {
-          var romajiRatio = ratio(closestRomaji?.title?.toLowerCase() ?? '',
-              mediaData.nameRomaji.toLowerCase());
-          var mainNameRatio = ratio(response.title!.toLowerCase(),
-              mediaData.mainName().toLowerCase());
+          var romajiRatio = ratio(
+            closestRomaji?.title?.toLowerCase() ?? '',
+            mediaData.nameRomaji.toLowerCase(),
+          );
+          var mainNameRatio = ratio(
+            response.title!.toLowerCase(),
+            mediaData.mainName().toLowerCase(),
+          );
           if (romajiRatio > mainNameRatio) {
             response = closestRomaji;
           }
@@ -177,19 +232,18 @@ abstract class BaseParser extends GetxController {
         for (var synonym in mediaData.synonyms) {
           if (_isEnglish(synonym)) {
             status.value = "Searching : $synonym";
-            final mediaFuture = source.methods.search(
-              synonym,
-              1,
-              [],
-            );
+            final mediaFuture = source.methods.search(synonym, 1, []);
             final media = await mediaFuture;
             List<DMedia> sortedResults = media.list.isNotEmpty
-                ? (media.list
-                  ..sort((a, b) {
-                    final aRatio =
-                        ratio(a.title!.toLowerCase(), synonym.toLowerCase());
-                    final bRatio =
-                        ratio(b.title!.toLowerCase(), synonym.toLowerCase());
+                ? (media.list..sort((a, b) {
+                    final aRatio = ratio(
+                      a.title!.toLowerCase(),
+                      synonym.toLowerCase(),
+                    );
+                    final bRatio = ratio(
+                      b.title!.toLowerCase(),
+                      synonym.toLowerCase(),
+                    );
                     return bRatio.compareTo(aRatio);
                   }))
                 : [];
@@ -219,10 +273,7 @@ abstract class BaseParser extends GetxController {
       }
     } catch (e, c) {
       status.value = "Error during search";
-      error.value = ParserError(
-        ErrorType.Error,
-        e.toString(),
-      );
+      error.value = ParserError(ErrorType.Error, e.toString());
       debugPrint("Error during search: $e \n$c");
       onFinish?.call(null);
     }
@@ -235,16 +286,24 @@ abstract class BaseParser extends GetxController {
 
   ShowResponse? _loadShowResponse(Source source, Media mediaData) {
     return loadCustomData<ShowResponse?>(
-        "${source.name}_${mediaData.id}_source");
+      "${source.name}_${mediaData.id}_source",
+    );
   }
 
-  void _saveShowResponse(Media mediaData, DMedia response, Source source,
-      {bool selected = false}) {
+  void _saveShowResponse(
+    Media mediaData,
+    DMedia response,
+    Source source, {
+    bool selected = false,
+  }) {
     status.value = selected
         ? "${getString.selected} : ${response.title}"
         : "${getString.found} : ${response.title}";
     var show = ShowResponse(
-        name: response.title, link: response.url, coverUrl: response.cover);
+      name: response.title,
+      link: response.url,
+      coverUrl: response.cover,
+    );
     saveCustomData<ShowResponse>("${source.name}_${mediaData.id}_source", show);
   }
 
@@ -279,9 +338,4 @@ class ParserError {
   ParserError(this.type, this.message);
 }
 
-enum ErrorType {
-  None,
-  NotFound,
-  NoResult,
-  Error;
-}
+enum ErrorType { None, NotFound, NoResult, Error }

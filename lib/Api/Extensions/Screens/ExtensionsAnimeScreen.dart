@@ -18,8 +18,8 @@ class ExtensionsAnimeScreen extends BaseAnimeScreen {
   @override
   Future<void> loadAll() async {
     resetPageData();
-    final manager = Get.find<ExtensionManager>().current.value;
-    var sources = manager.getInstalledRx(ItemType.anime).value;
+    final manager = Get.find<ExtensionManager>()[ItemType.anime];
+    var sources = manager.anime.installed.value;
     _buildSections(sources);
     for (var source in sources) {
       List<Media>? result;
@@ -40,20 +40,20 @@ class ExtensionsAnimeScreen extends BaseAnimeScreen {
     List<Future<void>> tasks = [];
 
     for (var source in sources.take(6)) {
-      tasks.add(
-        () async {
-          try {
-            var result = (await source.methods.getPopular(1))
-                .toMedia(isAnime: true, source: source);
-            if (result.isNotEmpty) {
-              data.value = {...?data.value, source.name ?? 'Unknown': result};
-            }
-          } catch (e) {
-            Logger.log(
-                'Failed to load data for source: ${source.name}, error: $e');
+      tasks.add(() async {
+        try {
+          var result = (await source.methods.getPopular(
+            1,
+          )).toMedia(isAnime: true, source: source);
+          if (result.isNotEmpty) {
+            data.value = {...?data.value, source.name ?? 'Unknown': result};
           }
-        }(),
-      );
+        } catch (e) {
+          Logger.log(
+            'Failed to load data for source: ${source.name}, error: $e',
+          );
+        }
+      }());
     }
 
     await Future.wait(tasks);
@@ -66,9 +66,7 @@ class ExtensionsAnimeScreen extends BaseAnimeScreen {
   List<Widget> mediaContent(BuildContext context) {
     return [
       if (data.value == null || data.value!.isEmpty || data.value == {})
-        const Center(
-          child: CircularProgressIndicator(),
-        )
+        const Center(child: CircularProgressIndicator())
       else
         Column(
           children: [

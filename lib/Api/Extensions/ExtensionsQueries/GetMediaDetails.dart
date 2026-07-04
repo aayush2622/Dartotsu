@@ -2,12 +2,13 @@ part of '../ExtensionsQueries.dart';
 
 extension on ExtensionsQueries {
   Future<Media?> _mediaDetails(Media media) async {
-    final manager = Get.find<ExtensionManager>().current.value;
+    final manager = Get.find<ExtensionManager>()[media.sourceData!.itemType!];
     if (media.sourceData == null || media.sourceData!.id == null) {
       snackString('Source not found did you remove it?');
       return null;
     }
-    var sourceList = manager.getInstalledRx(media.sourceData!.itemType!).value;
+
+    var sourceList = manager.state(media.sourceData!.itemType!).installed.value;
     final source = sourceList.firstWhereOrNull(
       (s) => s.id == media.sourceData!.id,
     );
@@ -64,8 +65,8 @@ extension on ExtensionsQueries {
               var remainder = (episode.episodeNumber.toDouble() % 1)
                   .toStringAsFixed(2)
                   .toDouble();
-              episode.episodeNumber =
-                  (index + 1 + remainder + additionalIndex).toString();
+              episode.episodeNumber = (index + 1 + remainder + additionalIndex)
+                  .toString();
             } else {
               episode.episodeNumber = (index + 1 + additionalIndex).toString();
             }

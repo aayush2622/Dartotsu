@@ -17,13 +17,8 @@ class AppUpdater {
   final mainRepo = 'aayush2622/Dartotsu';
   final alphaRepo = 'grayankit/Dartotsu-Downloader';
 
-  late bool checkForUpdates;
-  late bool alphaUpdates;
-
-  AppUpdater() {
-    checkForUpdates = loadCustomData("checkForUpdates") ?? true;
-    alphaUpdates = loadCustomData("alphaUpdates") ?? false;
-  }
+  final bool checkForUpdates = loadCustomData("checkForUpdates") ?? true;
+  final bool alphaUpdates = loadCustomData("alphaUpdates") ?? false;
 
   Future<void> checkForUpdate({bool force = false}) async {
     if (!checkForUpdates && !force) return;
@@ -63,15 +58,15 @@ class AppUpdater {
 
       if (abi != null) {
         final match = assets.cast<Map<String, dynamic>>().firstWhere(
-              (a) => (a['name'] as String).contains('Android_$abi'),
-              orElse: () => {},
-            );
+          (a) => (a['name'] as String).contains('Android_$abi'),
+          orElse: () => {},
+        );
         if (match.isNotEmpty) return match['browser_download_url'];
       }
       final fallbackApk = assets.cast<Map<String, dynamic>>().firstWhere(
-            (a) => (a['name'] as String).endsWith('.apk'),
-            orElse: () => {},
-          );
+        (a) => (a['name'] as String).endsWith('.apk'),
+        orElse: () => {},
+      );
       if (fallbackApk.isNotEmpty) return fallbackApk['browser_download_url'];
       return null;
     }
@@ -86,9 +81,9 @@ class AppUpdater {
       if (entry.key) {
         for (final ext in entry.value) {
           final match = assets.cast<Map<String, dynamic>>().firstWhere(
-                (a) => (a['name'] as String).endsWith(ext),
-                orElse: () => {},
-              );
+            (a) => (a['name'] as String).endsWith(ext),
+            orElse: () => {},
+          );
           if (match.isNotEmpty) return match['browser_download_url'];
         }
       }
@@ -103,9 +98,7 @@ class AppUpdater {
     if (abis.isEmpty) return null;
 
     const preferred = ['arm64-v8a', 'armeabi-v7a', 'x86_64', 'x86'];
-    return preferred.firstWhereOrNull(
-      (abi) => abis.contains(abi),
-    );
+    return preferred.firstWhereOrNull((abi) => abis.contains(abi));
   }
 
   final RxDouble downloadProgress = (-1.0).obs;
@@ -119,16 +112,18 @@ class AppUpdater {
       downloadedBytes.value = 0;
       totalBytes.value = 0;
 
-      final response =
-          await http.Client().send(http.Request('GET', Uri.parse(apkUrl)));
+      final response = await http.Client().send(
+        http.Request('GET', Uri.parse(apkUrl)),
+      );
       if (response.statusCode != 200) throw "HTTP ${response.statusCode}";
 
       final total = response.contentLength ?? 0;
       if (total == 0) throw "Invalid file size";
       totalBytes.value = total;
 
-      final file =
-          File("${(await getTemporaryDirectory()).path}/$packageName.apk");
+      final file = File(
+        "${(await getTemporaryDirectory()).path}/$packageName.apk",
+      );
       final sink = file.openWrite();
 
       int downloaded = 0;
@@ -141,8 +136,10 @@ class AppUpdater {
       }
       await sink.close();
 
-      final result =
-          await InstallPlugin.installApk(file.path, appId: packageName);
+      final result = await InstallPlugin.installApk(
+        file.path,
+        appId: packageName,
+      );
 
       if (!result['isSuccess']) throw result['errorMessage'];
 
@@ -183,8 +180,9 @@ class AppUpdater {
                   onTapLink: (text, url, title) {
                     if (url != null) openLinkInBrowser(url);
                   },
-                  styleSheet:
-                      MarkdownStyleSheet.fromTheme(Theme.of(Get.context!)),
+                  styleSheet: MarkdownStyleSheet.fromTheme(
+                    Theme.of(Get.context!),
+                  ),
                 ),
               ],
             ),
@@ -196,15 +194,14 @@ class AppUpdater {
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: Row(
                   children: [
-                    Obx(() => Checkbox(
-                          value: skipUpdate.value,
-                          onChanged: (val) => skipUpdate.value = val ?? false,
-                        )),
-                    const SizedBox(width: 8),
-                    Text(
-                      "Skip this update",
-                      style: textStyle,
+                    Obx(
+                      () => Checkbox(
+                        value: skipUpdate.value,
+                        onChanged: (val) => skipUpdate.value = val ?? false,
+                      ),
                     ),
+                    const SizedBox(width: 8),
+                    Text("Skip this update", style: textStyle),
                   ],
                 ),
               );
@@ -214,9 +211,7 @@ class AppUpdater {
               padding: const EdgeInsets.symmetric(horizontal: 36),
               child: Column(
                 children: [
-                  LinearProgressIndicator(
-                    value: downloadProgress.value / 100,
-                  ),
+                  LinearProgressIndicator(value: downloadProgress.value / 100),
                   const SizedBox(height: 6),
                   Text(
                     "${downloadedBytes.value ~/ (1024 * 1024)}MB / ${totalBytes.value ~/ (1024 * 1024)}MB ${downloadProgress.value.toStringAsFixed(1)}%",
@@ -226,11 +221,12 @@ class AppUpdater {
                   if (downloadProgress.value == -1)
                     Row(
                       children: [
-                        Obx(() => Checkbox(
-                              value: skipUpdate.value,
-                              onChanged: (val) =>
-                                  skipUpdate.value = val ?? false,
-                            )),
+                        Obx(
+                          () => Checkbox(
+                            value: skipUpdate.value,
+                            onChanged: (val) => skipUpdate.value = val ?? false,
+                          ),
+                        ),
                         const SizedBox(width: 8),
                         const Text("Skip this update"),
                       ],

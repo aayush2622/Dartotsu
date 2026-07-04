@@ -1,8 +1,7 @@
 import 'package:dartotsu/Functions/Function.dart';
 import 'package:dartotsu/Preferences/PrefManager.dart';
-import 'package:dartotsu/Widgets/CustomBottomDialog.dart';
+import 'package:dartotsu/Theme/ThemeManager.dart';
 import 'package:dartotsu_extension_bridge/ExtensionManager.dart';
-import 'package:dartotsu_extension_bridge/Extensions/DownloadablePlugin.dart';
 import 'package:dartotsu_extension_bridge/Extensions/ExtensionSettings.dart';
 import 'package:dartotsu_extension_bridge/Extensions/Extensions.dart';
 import 'package:dartotsu_extension_bridge/Models/Source.dart';
@@ -15,7 +14,7 @@ import '../../Functions/Extensions/ContextExtensions.dart';
 import '../../Theme/LanguageSwitcher.dart';
 import '../../Widgets/AlertDialogBuilder.dart';
 import '../../Widgets/DropdownMenu.dart';
-import '../../Widgets/LoadSvg.dart';
+import '../Extensions/ExtensionScreen.dart';
 import 'BaseSettingsScreen.dart';
 
 class SettingsExtensionsScreen extends StatefulWidget {
@@ -41,265 +40,122 @@ class SettingsExtensionsScreenState extends BaseSettingsScreen {
 
   @override
   List<Widget> get settingsList {
-    final manager = Get.find<ExtensionManager>();
-
     return [
-      Row(
-        children: [
-          Expanded(
-            child: Obx(() {
-              return buildDropdownMenu<Extension>(
-                key: ValueKey(
-                  manager.managers
-                      .map((e) => e.plugin?.installed.value ?? false)
-                      .toList()
-                      .hashCode,
-                ),
-                currentValue: manager.current.value,
-                options: manager.managers,
-                labelBuilder: (ext) => ext.name,
-                isEnabled: (ext) =>
-                    ext.plugin == null || ext.plugin!.installed.value,
-                trailingBuilder: (ext) {
-                  final plugin = ext.plugin;
-                  if (plugin == null) return const SizedBox();
-                  final isInstalled = plugin.installed.value;
-                  return IconButton(
-                    icon: Icon(
-                      isInstalled ? Icons.delete : Icons.download,
-                      size: 18,
-                    ),
-                    onPressed: () async {
-                      if (isInstalled) {
-                        _showDeleteDialog(context, plugin, ext.name);
-                      } else {
-                        await _showInstallDialog(context, plugin, ext.name);
-                      }
-                    },
-                  );
-                },
-                onChanged: (ext) {
-                  manager.switchManager(ext.id);
-                },
-              );
-            }),
-          ),
-          IconButton(
-            icon: const Icon(Icons.settings_rounded),
-            onPressed: () {
-              if (manager.current.value.settings(context).isEmpty) {
-                snackString("Sorry, this extension doesn't have any settings");
-                return;
-              }
-              navigateToPage(
-                context,
-                ExtensionSettingsScreen(extension: manager.current.value),
-              );
-            },
-          ),
-        ],
-      ),
-      Obx(() => SettingsAdaptor(settings: _buildSettings(context))),
+      Obx(() => managerCard(title: "Anime Extensions", type: ItemType.anime)),
+      const SizedBox(height: 12),
+      Obx(() => managerCard(title: "Manga Extensions", type: ItemType.manga)),
+      const SizedBox(height: 12),
+      Obx(() => managerCard(title: "Novel Extensions", type: ItemType.novel)),
+      const SizedBox(height: 12),
+      SettingsAdaptor(settings: _buildSettings(context)),
     ];
   }
 
-  void _showDeleteDialog(
-    BuildContext context,
-    DownloadablePlugin plugin,
-    String name,
-  ) {
-    AlertDialogBuilder(context)
-      ..setTitle("Delete $name?")
-      ..setMessage("Are you sure you want to delete this plugin?")
-      ..setPositiveButton(getString.yes, () async {
-        await plugin.delete();
-        snackString("$name deleted");
-      })
-      ..setNegativeButton(getString.no, () {})
-      ..show();
-  }
+  Widget managerCard({required String title, required ItemType type}) {
+    final controller = Get.find<ExtensionManager>();
+    final manager = controller[type];
+    final theme = Theme.of(context).colorScheme;
+    return ThemedContainer(
+      context: context,
+      borderRadius: const BorderRadius.all(Radius.circular(32)),
+      padding: const EdgeInsets.all(32),
 
-  Future<void> _showInstallDialog(
-    BuildContext context,
-    DownloadablePlugin plugin,
-    String name,
-  ) async {
-    Map<String, dynamic> remote;
-
-    try {
-      snackString("Fetching plugin info...");
-      remote = await plugin.fetchRemote();
-    } catch (_) {
-      snackString("Failed to fetch plugin info");
-      return;
-    }
-
-    final scheme = context.colorScheme;
-    final textStyle = Theme.of(context).textTheme.labelMedium;
-
-    final version = remote["versionName"] ?? "";
-    final sizeBytes = remote["fileSize"] ?? 0;
-    final sizeMB = plugin.formatSize(sizeBytes);
-    final description = remote["description"] ?? "";
-    final author = remote["author"] ?? "";
-
-    showCustomBottomDialog(
-      context,
-      CustomBottomDialog(
-        title: "Install $name",
-        viewList: [
-          const SizedBox(height: 8),
-          Center(
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
-              decoration: BoxDecoration(
-                color: scheme.primary.withOpacity(0.12),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Text(
-                version,
-                style: textStyle?.copyWith(
-                  color: scheme.primary,
-                  fontWeight: FontWeight.w600,
+      child: Obx(() {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Icon(switch (type) {
+                  ItemType.anime => Icons.movie_filter_rounded,
+                  ItemType.manga => Icons.import_contacts,
+                  ItemType.novel => Icons.book_rounded,
+                }, color: theme.primary),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Text(
+                    title,
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
-          ),
-          const SizedBox(height: 18),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: context.cardColor,
-                borderRadius: BorderRadius.circular(18),
-                border: Border.all(color: scheme.outline.withOpacity(0.2)),
-              ),
-              child: Obx(() {
-                final downloading = plugin.downloading.value;
-                final progress = plugin.progress.value;
 
-                if (downloading) {
-                  return Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      LinearProgressIndicator(
-                        value: progress,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      const SizedBox(height: 10),
-                      Text(
-                        "${(progress * 100).toStringAsFixed(1)}%",
-                        style: textStyle?.copyWith(fontWeight: FontWeight.w600),
-                      ),
-                    ],
-                  );
-                }
-
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.storage_rounded,
-                          size: 16,
-                          color: scheme.primary,
-                        ),
-                        const SizedBox(width: 6),
-                        Text("Size: $sizeMB", style: textStyle),
-                        const SizedBox(width: 16),
-                        if (author.isNotEmpty) ...[
-                          Icon(
-                            Icons.person_rounded,
-                            size: 16,
-                            color: scheme.primary,
-                          ),
-                          const SizedBox(width: 6),
-                          Expanded(
-                            child: Text(
-                              author,
-                              style: textStyle,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                        ],
-                      ],
-                    ),
-                    const SizedBox(height: 14),
-                    Container(
-                      padding: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        color: scheme.surface.withOpacity(0.3),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Text(
-                        description,
-                        style: textStyle?.copyWith(fontSize: 13, height: 1.4),
-                      ),
-                    ),
-                  ],
+            const SizedBox(height: 20),
+            buildDropdownMenu(
+              padding: EdgeInsets.zero,
+              currentValue: controller[type],
+              options: controller.managers
+                  .where((e) => e.supports(type))
+                  .toList(),
+              labelBuilder: (e) => e.name,
+              isEnabled: (e) => e.plugin == null || e.plugin!.installed.value,
+              trailingBuilder: (ext) {
+                final plugin = ext.plugin;
+                if (plugin == null) return const SizedBox();
+                final isInstalled = plugin.installed.value;
+                return IconButton(
+                  icon: Icon(
+                    isInstalled ? Icons.delete : Icons.download,
+                    size: 18,
+                  ),
+                  onPressed: () async {
+                    if (isInstalled) {
+                      showDeleteDialog(context, plugin, ext.name);
+                    } else {
+                      await showInstallDialog(context, plugin, ext.name);
+                    }
+                  },
                 );
-              }),
+              },
+              onChanged: (e) {
+                controller.switchManager(type, e.id);
+              },
             ),
-          ),
-          const SizedBox(height: 20),
-        ],
-        negativeText: "Cancel",
-        positiveText: plugin.installed.value
-            ? "Installed"
-            : plugin.hasUpdate
-            ? "Update"
-            : "Install",
-        negativeCallback: () {
-          Navigator.pop(context);
-        },
-        positiveCallback: () async {
-          if (plugin.installed.value && !plugin.hasUpdate) {
-            return;
-          }
 
-          if (plugin.downloading.value) return;
+            const SizedBox(height: 16),
 
-          await plugin.download();
+            Wrap(
+              spacing: 12,
+              runSpacing: 12,
+              children: [
+                OutlinedButton.icon(
+                  onPressed: () => addRepo(type),
+                  icon: const Icon(Icons.add),
+                  label: const Text("Repository"),
+                ),
+                if (manager.settings(context).isNotEmpty)
+                  OutlinedButton.icon(
+                    onPressed: () {
+                      final settings = manager.settings(context);
 
-          if (plugin.installed.value) {
-            Navigator.pop(context);
-          }
-        },
-      ),
+                      if (settings.isEmpty) {
+                        snackString(
+                          "${manager.name} doesn't provide any settings.",
+                        );
+                        return;
+                      }
+
+                      navigateToPage(
+                        context,
+                        ExtensionSettingsScreen(extension: manager),
+                      );
+                    },
+                    icon: const Icon(Icons.settings),
+                    label: const Text("Settings"),
+                  ),
+              ],
+            ),
+          ],
+        );
+      }),
     );
   }
 
   List<Setting> _buildSettings(BuildContext context) {
-    final manager = Get.find<ExtensionManager>().current.value;
-    final theme = ContextExtensions(context).theme.colorScheme;
-
     return [
-      Setting(
-        type: SettingType.normal,
-        name: getString.addAnimeRepo,
-        description: getString.addAnimeRepoDesc,
-        isVisible: manager.supportsAnime,
-        iconWidget: loadSvg("assets/svg/github.svg", color: theme.primary),
-        onClick: () => addRepo(ItemType.anime),
-      ),
-      Setting(
-        type: SettingType.normal,
-        name: getString.addMangaRepo,
-        description: getString.addMangaRepoDesc,
-        isVisible: manager.supportsManga,
-        iconWidget: loadSvg("assets/svg/github.svg", color: theme.primary),
-        onClick: () => addRepo(ItemType.manga),
-      ),
-      Setting(
-        type: SettingType.normal,
-        name: getString.addNovelRepo,
-        description: getString.addNovelRepoDesc,
-        isVisible: manager.supportsNovel,
-        iconWidget: loadSvg("assets/svg/github.svg", color: theme.primary),
-        onClick: () => addRepo(ItemType.novel),
-      ),
       Setting(
         type: SettingType.switchType,
         name: getString.loadExtensionsIcon,
@@ -321,7 +177,7 @@ class SettingsExtensionsScreenState extends BaseSettingsScreen {
   }
 
   void addRepo(ItemType type) {
-    final manager = Get.find<ExtensionManager>().current.value;
+    final manager = Get.find<ExtensionManager>()[type];
     var text = '';
 
     AlertDialogBuilder(context)

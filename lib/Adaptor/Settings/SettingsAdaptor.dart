@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 import '../../DataClass/Setting.dart';
+import '../../Theme/ThemeManager.dart';
 import 'SettingsItem.dart';
 
 class SettingsAdaptor extends StatelessWidget {
@@ -10,20 +11,28 @@ class SettingsAdaptor extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // adaptor for settings so that it can be reused, see Settings.dart to see what can be passed
     return Column(
-      children: settings.map((setting) {
-        switch (setting.type) {
-          case SettingType.normal:
-            return SettingItem(setting: setting);
-          case SettingType.switchType:
-            return SettingSwitchItem(setting: setting);
-          case SettingType.slider:
-            return SettingSliderItem(setting: setting);
-          case SettingType.inputBox:
-            return SettingInputBoxItem(setting: setting);
-        }
-      }).toList(),
+      children: settings
+          .map(
+            (setting) => ThemedContainer(
+              context: context,
+              borderRadius: BorderRadius.circular(24.0),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16.0,
+                vertical: 8.0,
+              ),
+              margin: EdgeInsets.only(
+                bottom: setting == settings.last ? 0 : 12.0,
+              ),
+              child: switch (setting.type) {
+                SettingType.normal => SettingItem(setting: setting),
+                SettingType.switchType => SettingSwitchItem(setting: setting),
+                SettingType.slider => SettingSliderItem(setting: setting),
+                SettingType.inputBox => SettingInputBoxItem(setting: setting),
+              },
+            ),
+          )
+          .toList(),
     );
   }
 }

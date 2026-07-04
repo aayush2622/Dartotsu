@@ -74,11 +74,8 @@ class _SettingItemState extends State<SettingItem> {
               color: Theme.of(context).primaryColor,
             )
           : widget.setting.isActivity
-              ? Icon(
-                  Icons.arrow_forward_ios,
-                  color: Theme.of(context).primaryColor,
-                )
-              : null,
+          ? Icon(Icons.arrow_forward_ios, color: Theme.of(context).primaryColor)
+          : null,
       contentPadding: const EdgeInsets.symmetric(vertical: 8.0),
     );
   }
@@ -142,41 +139,48 @@ class SettingSwitchItemState extends State<SettingSwitchItem> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Expanded(
-                          child: Text(
-                            widget.setting.name,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16.0,
-                              fontFamily: 'Poppins',
-                            ),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                widget.setting.name,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                  fontFamily: 'Poppins',
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              const SizedBox(height: 8),
+                              if (widget.setting.description != null)
+                                Text(
+                                  widget.setting.description!,
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 14,
+                                    color: Colors.grey,
+                                    fontFamily: 'Poppins',
+                                  ),
+                                ),
+                              if (widget.setting.attach != null)
+                                widget.setting.attach!(context),
+                            ],
                           ),
                         ),
-                        GestureDetector(
-                          behavior: HitTestBehavior.translucent,
-                          child: Switch(
-                            value: _isChecked,
-                            onChanged: (value) {
-                              setState(() => _isChecked = value);
-                              widget.setting.onSwitchChange?.call(value);
-                            },
-                          ),
+                        Switch(
+                          value: _isChecked,
+                          onChanged: (value) {
+                            setState(() => _isChecked = value);
+                            widget.setting.onSwitchChange?.call(value);
+                          },
                         ),
                       ],
                     ),
-                    if (widget.setting.description != null)
-                      Text(
-                        widget.setting.description!,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 14.0,
-                          color: Colors.grey,
-                          fontFamily: 'Poppins',
-                        ),
-                      ),
                     if (widget.setting.attach != null)
                       widget.setting.attach!(context),
                   ],
@@ -258,10 +262,7 @@ class SettingSliderItemState extends State<SettingSliderItem> {
           ),
           trailing: Text(
             _sliderValue.toString(),
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 14,
-            ),
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
           ),
         ),
         Container(
@@ -285,11 +286,12 @@ class SettingSliderItemState extends State<SettingSliderItem> {
                     child: SliderTheme(
                       data: SliderTheme.of(context).copyWith(
                         activeTrackColor: theme.colorScheme.primary,
-                        inactiveTrackColor:
-                            theme.colorScheme.onSurface.withOpacity(0.4),
+                        inactiveTrackColor: theme.colorScheme.onSurface
+                            .withOpacity(0.4),
                         thumbColor: theme.colorScheme.primary,
-                        overlayColor:
-                            theme.colorScheme.primary.withOpacity(0.2),
+                        overlayColor: theme.colorScheme.primary.withOpacity(
+                          0.2,
+                        ),
                         valueIndicatorColor: theme.colorScheme.primary,
                       ),
                       child: Slider.adaptive(
@@ -409,8 +411,10 @@ class SettingInputBoxItemState extends State<SettingInputBoxItem> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 IconButton(
-                  icon:
-                      Icon(Icons.remove, color: Theme.of(context).primaryColor),
+                  icon: Icon(
+                    Icons.remove,
+                    color: Theme.of(context).primaryColor,
+                  ),
                   onPressed: _decreaseValue,
                 ),
                 Text(
