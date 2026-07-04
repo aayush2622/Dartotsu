@@ -130,6 +130,7 @@ Future init() async {
   await MpvConf.init();
   MediaService.init();
   TypeFactory.init();
+  
   MediaKit.ensureInitialized();
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
     await WindowManager.instance.ensureInitialized();
