@@ -146,110 +146,113 @@ class ExtensionScreenState extends State<ExtensionScreen>
   Widget _buildServiceManager() {
     final theme = Theme.of(context).colorScheme;
 
-    return Obx(() {
-      final type = _currentType;
+    return AnimatedBuilder(
+      animation: _tabBarController,
+      builder: (_, _) {
+        final type = _currentType;
 
-      return IconButton(
-        icon: ClipRRect(
-          borderRadius: BorderRadius.circular(12),
-          child: Image.asset(
-            manager[type].icon,
-            width: 24,
-            height: 24,
-            fit: BoxFit.cover,
-          ),
-        ),
-        onPressed: () {
-          showCustomBottomDialog(
-            context,
-            CustomBottomDialog(
-              title: "${type.name.capitalizeFirst} Manager",
-              positiveText: getString.ok,
-              positiveCallback: () => Navigator.pop(context),
-              viewList: [
-                Obx(() {
-                  final current = manager[type];
-                  final managers = manager.managers
-                      .where((e) => e.supports(type))
-                      .toList();
-
-                  return Column(
-                    children: managers.map((m) {
-                      final selected = current.id == m.id;
-                      final enabled =
-                          m.plugin == null || m.plugin!.installed.value;
-
-                      return Opacity(
-                        opacity: enabled ? 1 : 0.5,
-                        child: ThemedContainer(
-                          context: context,
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(24),
-                          ),
-                          margin: const EdgeInsets.symmetric(
-                            horizontal: 16,
-                            vertical: 8,
-                          ),
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 2,
-                            vertical: 8,
-                          ),
-                          color: selected ? theme.surfaceContainerHigh : null,
-                          child: ListTile(
-                            enabled: enabled,
-                            hoverColor: Colors.transparent,
-                            onTap: (!enabled || selected)
-                                ? null
-                                : () => manager.switchManager(type, m.id),
-                            leading: ClipOval(
-                              child: Image.asset(
-                                m.icon,
-                                width: 24,
-                                height: 24,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                            title: Text(
-                              m.name,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            trailing: m.plugin == null
-                                ? null
-                                : IconButton(
-                                    icon: Icon(
-                                      enabled ? Icons.delete : Icons.download,
-                                      size: 18,
-                                    ),
-                                    onPressed: () async {
-                                      if (enabled) {
-                                        showDeleteDialog(
-                                          context,
-                                          m.plugin!,
-                                          m.name,
-                                        );
-                                      } else {
-                                        await showInstallDialog(
-                                          context,
-                                          m.plugin!,
-                                          m.name,
-                                        );
-                                      }
-                                    },
-                                  ),
-                          ),
-                        ),
-                      );
-                    }).toList(),
-                  );
-                }),
-              ],
+        return IconButton(
+          icon: ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: Image.asset(
+              manager[type].icon,
+              width: 24,
+              height: 24,
+              fit: BoxFit.cover,
             ),
-          );
-        },
-      );
-    });
+          ),
+          onPressed: () {
+            showCustomBottomDialog(
+              context,
+              CustomBottomDialog(
+                title: "${type.name.capitalizeFirst} Manager",
+                positiveText: getString.ok,
+                positiveCallback: () => Navigator.pop(context),
+                viewList: [
+                  Obx(() {
+                    final current = manager[type];
+                    final managers = manager.managers
+                        .where((e) => e.supports(type))
+                        .toList();
+
+                    return Column(
+                      children: managers.map((m) {
+                        final selected = current.id == m.id;
+                        final enabled =
+                            m.plugin == null || m.plugin!.installed.value;
+
+                        return Opacity(
+                          opacity: enabled ? 1 : 0.5,
+                          child: ThemedContainer(
+                            context: context,
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(24),
+                            ),
+                            margin: const EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: 8,
+                            ),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 2,
+                              vertical: 8,
+                            ),
+                            color: selected ? theme.surfaceContainerHigh : null,
+                            child: ListTile(
+                              enabled: enabled,
+                              hoverColor: Colors.transparent,
+                              onTap: (!enabled || selected)
+                                  ? null
+                                  : () => manager.switchManager(type, m.id),
+                              leading: ClipOval(
+                                child: Image.asset(
+                                  m.icon,
+                                  width: 24,
+                                  height: 24,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              title: Text(
+                                m.name,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              trailing: m.plugin == null
+                                  ? null
+                                  : IconButton(
+                                      icon: Icon(
+                                        enabled ? Icons.delete : Icons.download,
+                                        size: 18,
+                                      ),
+                                      onPressed: () async {
+                                        if (enabled) {
+                                          showDeleteDialog(
+                                            context,
+                                            m.plugin!,
+                                            m.name,
+                                          );
+                                        } else {
+                                          await showInstallDialog(
+                                            context,
+                                            m.plugin!,
+                                            m.name,
+                                          );
+                                        }
+                                      },
+                                    ),
+                            ),
+                          ),
+                        );
+                      }).toList(),
+                    );
+                  }),
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
   }
 
   Widget _buildRepoManager() {
