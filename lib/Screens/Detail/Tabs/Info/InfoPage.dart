@@ -9,6 +9,7 @@ import 'package:dartotsu/Screens/Search/SearchScreen.dart';
 import 'package:dartotsu/Theme/LanguageSwitcher.dart';
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/extensions/context_extensions.dart';
 import 'package:html/parser.dart' as html_parser;
 import 'package:provider/provider.dart';
 
@@ -38,62 +39,67 @@ class InfoPageState extends State<InfoPage> {
     if (service.data.query?.mediaDetails == null) {
       return service.notImplemented(widget.runtimeType.toString());
     }
-
+    final horizontalPadding = context.isPhone ? 0.0 : 16.0;
     var type = widget.mediaData.anime != null ? "ANIME" : "MANGA";
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ...releasingIn(widget.mediaData, context),
-        _buildWithPadding([
-          ..._buildInfoSections(),
-          ..._buildNameSections(),
-        ]),
+        _buildWithPadding([..._buildInfoSections(), ..._buildNameSections()]),
         if (widget.mediaData.synonyms.isNotEmpty) ..._buildSynonyms(theme),
         FollowerWidget(follower: widget.mediaData.users, type: type),
         if (widget.mediaData.genres.isNotEmpty)
-          _buildWithPadding(
-            [
-              GenreWidget(
-                context,
-                widget.mediaData.genres,
-                widget.mediaData.anime != null
-                    ? SearchType.ANIME
-                    : SearchType.MANGA,
-              ),
-            ],
-          ),
+          _buildWithPadding([
+            GenreWidget(
+              context,
+              widget.mediaData.genres,
+              widget.mediaData.anime != null
+                  ? SearchType.ANIME
+                  : SearchType.MANGA,
+            ),
+          ]),
         if (widget.mediaData.tags.isNotEmpty) ..._buildTags(theme),
         ..._buildPrequelSection(),
-        if (widget.mediaData.relations?.isNotEmpty ?? false)
-          MediaSection(
-            context: context,
-            type: 0,
-            title: getString.relations,
-            mediaList: widget.mediaData.relations,
-            isLarge: true,
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+          child: Column(
+            spacing: 24,
+            children: [
+              if (widget.mediaData.relations?.isNotEmpty ?? false)
+                MediaSection(
+                  context: context,
+                  type: 0,
+                  title: getString.relations,
+                  mediaList: widget.mediaData.relations,
+                  isLarge: true,
+                ),
+              if (widget.mediaData.characters?.isNotEmpty ?? false)
+                entitySection(
+                  context: context,
+                  type: EntityType.Character,
+                  title: getString.characters,
+                  list: widget.mediaData.characters,
+                ),
+              if (widget.mediaData.staff?.isNotEmpty ?? false)
+                entitySection(
+                  context: context,
+                  type: EntityType.Staff,
+                  title: getString.staff,
+                  list: widget.mediaData.staff,
+                ),
+              if (widget.mediaData.recommendations?.isNotEmpty ?? false) ...[
+                MediaSection(
+                  context: context,
+                  type: 0,
+                  title: getString.recommended,
+                  mediaList: widget.mediaData.recommendations,
+                ),
+              ],
+            ],
           ),
-        if (widget.mediaData.characters?.isNotEmpty ?? false)
-          entitySection(
-            context: context,
-            type: EntityType.Character,
-            title: getString.characters,
-            list: widget.mediaData.characters,
-          ),
-        if (widget.mediaData.staff?.isNotEmpty ?? false)
-          entitySection(
-            context: context,
-            type: EntityType.Staff,
-            title: getString.staff,
-            list: widget.mediaData.staff,
-          ),
-        if (widget.mediaData.recommendations?.isNotEmpty ?? false)
-          MediaSection(
-            context: context,
-            type: 0,
-            title: getString.recommended,
-            mediaList: widget.mediaData.recommendations,
-          ),
+        ),
+
         const SizedBox(height: 64.0),
       ],
     );
@@ -114,7 +120,8 @@ class InfoPageState extends State<InfoPage> {
     var mediaData = widget.mediaData;
     bool isAnime = mediaData.anime != null;
 
-    String infoTotal = (mediaData.anime?.nextAiringEpisode != null &&
+    String infoTotal =
+        (mediaData.anime?.nextAiringEpisode != null &&
             mediaData.anime?.nextAiringEpisode != -1)
         ? "${mediaData.anime?.nextAiringEpisode} | ${mediaData.anime?.totalEpisodes ?? "~"}"
         : (mediaData.anime?.totalEpisodes ?? "~").toString();
@@ -152,7 +159,8 @@ class InfoPageState extends State<InfoPage> {
       ),
       _buildInfoRow(
         title: getString.author,
-        value: mediaData.anime?.mediaAuthor?.name ??
+        value:
+            mediaData.anime?.mediaAuthor?.name ??
             mediaData.manga?.mediaAuthor?.name,
         onClick: () => snackString(getString.comingSoon),
       ),
@@ -193,38 +201,38 @@ class InfoPageState extends State<InfoPage> {
   }
 
   List<Widget> _buildSynonyms(ColorScheme theme) => [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 32.0),
-          child: Text(
-            getString.synonyms,
-            style: TextStyle(
-              fontSize: 15,
-              fontFamily: 'Poppins',
-              fontWeight: FontWeight.bold,
-              color: theme.onSurface,
-            ),
-          ),
+    Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 32.0),
+      child: Text(
+        getString.synonyms,
+        style: TextStyle(
+          fontSize: 15,
+          fontFamily: 'Poppins',
+          fontWeight: FontWeight.bold,
+          color: theme.onSurface,
         ),
-        const SizedBox(height: 16.0),
-        ChipsWidget(chips: [..._generateSynonyms(widget.mediaData.synonyms)]),
-      ];
+      ),
+    ),
+    const SizedBox(height: 16.0),
+    ChipsWidget(chips: [..._generateSynonyms(widget.mediaData.synonyms)]),
+  ];
 
   List<Widget> _buildTags(ColorScheme theme) => [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 32.0),
-          child: Text(
-            getString.tags,
-            style: TextStyle(
-              fontSize: 15,
-              fontFamily: 'Poppins',
-              fontWeight: FontWeight.bold,
-              color: theme.onSurface,
-            ),
-          ),
+    Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 32.0),
+      child: Text(
+        getString.tags,
+        style: TextStyle(
+          fontSize: 15,
+          fontFamily: 'Poppins',
+          fontWeight: FontWeight.bold,
+          color: theme.onSurface,
         ),
-        const SizedBox(height: 16.0),
-        ChipsWidget(chips: [..._generateChips(widget.mediaData.tags)]),
-      ];
+      ),
+    ),
+    const SizedBox(height: 16.0),
+    ChipsWidget(chips: [..._generateChips(widget.mediaData.tags)]),
+  ];
 
   List<Widget> _buildPrequelSection() {
     var prequel = widget.mediaData.prequel;
@@ -242,23 +250,19 @@ class InfoPageState extends State<InfoPage> {
               context,
               getString.prequel,
               prequel.banner ?? prequel.cover ?? 'https://bit.ly/31bsIHq',
-              onTap: () => navigateToPage(
-                context,
-                MediaInfoPage(prequel, prequelTag),
-              ),
+              onTap: () =>
+                  navigateToPage(context, MediaInfoPage(prequel, prequelTag)),
             ),
           if (sequel != null)
             MediaCard(
               context,
               getString.sequel,
               sequel.banner ?? sequel.cover ?? 'https://bit.ly/2ZGfcuG',
-              onTap: () => navigateToPage(
-                context,
-                MediaInfoPage(sequel, sequelTag),
-              ),
+              onTap: () =>
+                  navigateToPage(context, MediaInfoPage(sequel, sequelTag)),
             ),
         ],
-      )
+      ),
     ];
   }
 
@@ -387,8 +391,9 @@ class InfoPageState extends State<InfoPage> {
   }
 
   List<ChipData> _generateChips(List<String> labels) {
-    var title =
-        widget.mediaData.anime != null ? SearchType.ANIME : SearchType.MANGA;
+    var title = widget.mediaData.anime != null
+        ? SearchType.ANIME
+        : SearchType.MANGA;
     return labels.map((label) {
       return ChipData(
         label: label,
@@ -404,7 +409,7 @@ class InfoPageState extends State<InfoPage> {
                 label
                     .split(" ")
                     .sublist(0, label.split(" ").length - 2)
-                    .join(" ")
+                    .join(" "),
               ],
             ),
           ),

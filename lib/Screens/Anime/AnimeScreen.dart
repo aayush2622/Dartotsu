@@ -1,7 +1,9 @@
 import 'package:dartotsu/Functions/Extensions.dart';
 import 'package:dartotsu/Theme/LanguageSwitcher.dart';
+import 'package:dartotsu/Theme/ThemeManager.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:get/get_utils/src/extensions/context_extensions.dart';
 import 'package:provider/provider.dart';
 
 import '../../Adaptor/Media/MediaAdaptor.dart';
@@ -28,13 +30,11 @@ class AnimeScreenState extends State<AnimeScreen> {
     if (screen == null) {
       return service.notImplemented(widget.runtimeType.toString());
     }
-    return Scaffold(
-      body: Stack(
-        children: [
-          _buildRefreshContent(screen),
-          screen.buildScrollToTopButton(context),
-        ],
-      ),
+    return Stack(
+      children: [
+        _buildRefreshContent(screen),
+        screen.buildScrollToTopButton(context),
+      ],
     );
   }
 
@@ -62,37 +62,45 @@ class AnimeScreenState extends State<AnimeScreen> {
   Widget _buildAnimeScreenContent(BaseAnimeScreen service) {
     return Obx(() {
       var mediaDataList = service.trending.value;
+      final horizontalPadding = context.isPhone ? 0.0 : 16.0;
       return SizedBox(
-          height: 486.statusBar(),
-          child: Stack(
-            children: [
-              SizedBox(
+        height: 486.statusBar(),
+        child: Stack(
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+              child: ThemedContainer(
+                border: Border.all(color: Colors.transparent),
+                borderRadius: const BorderRadius.all(Radius.circular(24)),
+                context: context,
+                padding: EdgeInsets.zero,
+                child: SizedBox(
                   height: 464.statusBar(),
-                  child: MediaAdaptor(type: 1, mediaList: mediaDataList)),
-              ServiceSwitcherBar(title: getString.anime.toUpperCase()),
-              Positioned(
-                bottom: 92,
-                left: 8.0,
-                right: 8.0,
-                child: Center(
-                  child: ChipsWidget(
-                    chips: service.trendingChips,
-                  ),
+                  child: MediaAdaptor(type: 1, mediaList: mediaDataList),
                 ),
               ),
-              Positioned(
-                bottom: 0,
-                left: 8.0,
-                right: 8.0,
-                child: SlideInAnimation(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: service.trendingCards(context),
-                  ),
+            ),
+            ServiceSwitcherBar(title: getString.anime.toUpperCase()),
+            Positioned(
+              bottom: 92,
+              left: 8.0,
+              right: 8.0,
+              child: Center(child: ChipsWidget(chips: service.trendingChips)),
+            ),
+            Positioned(
+              bottom: 0,
+              left: 8.0,
+              right: 8.0,
+              child: SlideInAnimation(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: service.trendingCards(context),
                 ),
               ),
-            ],
-          ));
+            ),
+          ],
+        ),
+      );
     });
   }
 
@@ -102,11 +110,7 @@ class AnimeScreenState extends State<AnimeScreen> {
         ...service.mediaContent(context),
         if (service.paging)
           !service.loadMore.value && service.canLoadMore.value
-              ? const MediaAdaptor(
-                  type: 2,
-                  mediaList: null,
-                  skeletonObjects: 2,
-                )
+              ? const MediaAdaptor(type: 2, mediaList: null, skeletonObjects: 2)
               : const SizedBox(height: 216),
       ],
     );

@@ -18,6 +18,7 @@ import 'package:provider/provider.dart';
 import '../../DataClass/Media.dart';
 import '../../Functions/Function.dart';
 import '../../Preferences/PrefManager.dart';
+import '../../Services/MediaService.dart';
 import '../../Theme/LanguageSwitcher.dart';
 import '../../Theme/ThemeProvider.dart';
 import '../../Widgets/CachedNetworkImage.dart';
@@ -48,8 +49,10 @@ class MediaInfoPageState extends State<MediaInfoPage> {
   @override
   void initState() {
     var service = context.currentService(listen: false);
-    _viewModel = Get.put(MediaPageViewModel(),
-        tag: "${widget.mediaData.id.toString()}-${service.getName}");
+    _viewModel = Get.put(
+      MediaPageViewModel(),
+      tag: "${widget.mediaData.id.toString()}-${service.getName}",
+    );
 
     var key = "${service.getName}-${widget.mediaData.id}-Settings";
     widget.mediaData.settings =
@@ -59,8 +62,9 @@ class MediaInfoPageState extends State<MediaInfoPage> {
     mediaData = widget.mediaData;
     MediaSettings.saveMediaSettings(mediaData..settings.navBarIndex = 1);
 
-    var perAnimePlayerSettings =
-        loadData<bool>(PrefName.perAnimePlayerSettings);
+    var perAnimePlayerSettings = loadData<bool>(
+      PrefName.perAnimePlayerSettings,
+    );
 
     if (!perAnimePlayerSettings) {
       widget.mediaData.settings.playerSettings = PlayerSettings.fromJson(
@@ -126,8 +130,61 @@ class MediaInfoPageState extends State<MediaInfoPage> {
     setState(() {});
   }
 
+  Widget _buildBackground(ThemeNotifier themeNotifier, MediaService service) {
+    if (!themeNotifier.useGlassMode) return const SizedBox.shrink();
+    var theme = Theme.of(context).colorScheme;
+    return Positioned.fill(
+      child: Stack(
+        children: [
+          Positioned.fill(
+            child: ImageFiltered(
+              imageFilter: ImageFilter.blur(sigmaX: 4.0, sigmaY: 4.0),
+              child: Opacity(
+                opacity: 0.8,
+                child: Obx(() {
+                  final bg = service.data.bg.value;
+
+                  return cachedNetworkImage(
+                    imageUrl:
+                        mediaData.banner ??
+                        mediaData.cover ??
+                        (bg.isNotEmpty
+                            ? bg
+                            : 'https://wallpapercat.com/download/1198914'),
+                    fit: BoxFit.cover,
+                  );
+                }),
+              ),
+            ),
+          ),
+          // Gradient overlay at the bottom 75%
+          Positioned.fill(
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: FractionallySizedBox(
+                heightFactor: 0.75,
+                widthFactor: 1,
+                child: Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [Colors.transparent, theme.surface],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    final themeNotifier = Provider.of<ThemeNotifier>(context);
+    final service = context.currentService();
     return Theme(
       data: customTheme ?? Theme.of(context),
       child: AnimatedContainer(
@@ -136,25 +193,28 @@ class MediaInfoPageState extends State<MediaInfoPage> {
         color: Theme.of(context).colorScheme.surface,
         child: Builder(
           builder: (context) => Scaffold(
-            body: CustomScrollConfig(
-              context,
+            body: Stack(
               children: [
-                SliverToBoxAdapter(child: _buildMediaSection(context)),
-                SliverToBoxAdapter(child: _buildMediaDetails(context)),
-                SliverList(
-                  delegate: SliverChildListDelegate(
-                    [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [_buildSliverContent(context)],
+                _buildBackground(themeNotifier, service),
+                CustomScrollConfig(
+                  context,
+                  children: [
+                    SliverToBoxAdapter(child: _buildMediaSection(context)),
+                    SliverToBoxAdapter(child: _buildMediaDetails(context)),
+                    SliverList(
+                      delegate: SliverChildListDelegate([
+                        Padding(
+                          padding: const EdgeInsets.symmetric(),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [_buildSliverContent(context)],
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                )
+                      ]),
+                    ),
+                  ],
+                ),
               ],
             ),
             bottomNavigationBar: _buildBottomNavigationBar(context),
@@ -172,7 +232,7 @@ class MediaInfoPageState extends State<MediaInfoPage> {
         dragDevices: {
           PointerDeviceKind.touch,
           PointerDeviceKind.mouse,
-          PointerDeviceKind.trackpad
+          PointerDeviceKind.trackpad,
         },
       ),
       children: [
@@ -184,8 +244,8 @@ class MediaInfoPageState extends State<MediaInfoPage> {
                 child: mediaData.sourceData != null
                     ? Source(media: mediaData)
                     : mediaData.anime != null
-                        ? AnimeWatchScreen(mediaData: mediaData)
-                        : MangaWatchScreen(mediaData: mediaData),
+                    ? AnimeWatchScreen(mediaData: mediaData)
+                    : MangaWatchScreen(mediaData: mediaData),
               )
             : _buildProgressIndicator(),
         loaded ? const SizedBox() : _buildProgressIndicator(),
@@ -196,9 +256,7 @@ class MediaInfoPageState extends State<MediaInfoPage> {
   Widget _buildProgressIndicator() {
     return const SizedBox(
       height: 251,
-      child: Center(
-        child: CircularProgressIndicator(),
-      ),
+      child: Center(child: CircularProgressIndicator()),
     );
   }
 
@@ -221,8 +279,8 @@ class MediaInfoPageState extends State<MediaInfoPage> {
                     isAnime
                         ? Icons.movie_filter_rounded
                         : mediaData.format?.toLowerCase() != 'novel'
-                            ? Icons.import_contacts
-                            : Icons.book_rounded,
+                        ? Icons.import_contacts
+                        : Icons.book_rounded,
                   ),
             label: isAnime
                 ? getString.watch.toUpperCase()
@@ -268,8 +326,10 @@ class MediaInfoPageState extends State<MediaInfoPage> {
               Expanded(
                 child: RichText(
                   text: TextSpan(
-                    children:
-                        _viewModel.buildMediaDetailsSpans(mediaData, context),
+                    children: _viewModel.buildMediaDetailsSpans(
+                      mediaData,
+                      context,
+                    ),
                     style: TextStyle(
                       fontFamily: 'Poppins',
                       fontSize: 16.0,
@@ -314,51 +374,54 @@ class MediaInfoPageState extends State<MediaInfoPage> {
   }
 
   Widget _buildMediaSection(BuildContext context) {
-    final isDarkMode = Provider.of<ThemeNotifier>(context).isDarkMode;
+    final themeNotifier = Provider.of<ThemeNotifier>(context);
+    final isDarkMode = themeNotifier.isDarkMode;
     final theme = Theme.of(context).colorScheme;
     final gradientColors = isDarkMode
         ? [Colors.transparent, theme.surface]
         : [Colors.white.withValues(alpha: 0.2), theme.surface];
-
     return SizedBox(
       height: 384 + (0.statusBar() * 2),
       child: Stack(
         children: [
-          cachedNetworkImage(
-            imageUrl: mediaData.banner ?? mediaData.cover ?? '',
-            fit: BoxFit.cover,
-            width: double.infinity,
-            height: 384 + (0.statusBar() * 2),
-          ),
-          Container(
-            width: double.infinity,
-            height: 384 + (0.statusBar() * 2),
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: gradientColors,
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
+          if (!themeNotifier.useGlassMode) ...[
+            cachedNetworkImage(
+              imageUrl: mediaData.banner ?? mediaData.cover ?? '',
+              fit: BoxFit.cover,
+              width: double.infinity,
+              height: 384 + (0.statusBar() * 2),
+            ),
+            Container(
+              width: double.infinity,
+              height: 384 + (0.statusBar() * 2),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: gradientColors,
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                ),
               ),
             ),
-          ),
-          Blur(
-            colorOpacity: 0.0,
-            blur: 10,
-            blurColor: Colors.transparent,
-            child: Container(),
-          ),
+            Blur(
+              colorOpacity: 0.0,
+              blur: 10,
+              blurColor: Colors.transparent,
+              child: Container(),
+            ),
+          ],
           _buildCloseButton(theme),
           Padding(
-              padding: EdgeInsets.only(
-                top: 64.statusBar(),
-                left: Directionality.of(context) == TextDirection.rtl
-                    ? 0.0
-                    : 32.0,
-                right: Directionality.of(context) == TextDirection.rtl
-                    ? 32.0
-                    : 0.0,
-              ),
-              child: _buildMediaInfo(theme)),
+            padding: EdgeInsets.only(
+              top: 64.statusBar(),
+              left: Directionality.of(context) == TextDirection.rtl
+                  ? 0.0
+                  : 32.0,
+              right: Directionality.of(context) == TextDirection.rtl
+                  ? 32.0
+                  : 0.0,
+            ),
+            child: _buildMediaInfo(theme),
+          ),
           _buildAddToListButton(theme),
         ],
       ),
@@ -399,11 +462,8 @@ class MediaInfoPageState extends State<MediaInfoPage> {
           fit: BoxFit.cover,
           width: 108,
           height: 160,
-          placeholder: (context, url) => Container(
-            color: Colors.white12,
-            width: 108,
-            height: 160,
-          ),
+          placeholder: (context, url) =>
+              Container(color: Colors.white12, width: 108, height: 160),
         ),
       ),
     );
@@ -448,7 +508,7 @@ class MediaInfoPageState extends State<MediaInfoPage> {
               ),
             ),
           ],
-        )
+        ),
       ],
     );
   }
@@ -462,8 +522,8 @@ class MediaInfoPageState extends State<MediaInfoPage> {
       child: OutlinedButton(
         onPressed: () => loaded
             ? context
-                .currentService(listen: false)
-                .listEditor(context, mediaData)
+                  .currentService(listen: false)
+                  .listEditor(context, mediaData)
             : null,
         style: OutlinedButton.styleFrom(
           padding: const EdgeInsets.all(8.0),

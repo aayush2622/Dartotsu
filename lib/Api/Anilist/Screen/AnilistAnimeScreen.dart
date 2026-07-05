@@ -2,6 +2,7 @@ import 'package:dartotsu/DataClass/Media.dart';
 import 'package:dartotsu/DataClass/SearchResults.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
+import 'package:get/get_utils/src/extensions/context_extensions.dart';
 
 import '../../../Adaptor/Media/Widgets/MediaSection.dart';
 import '../../../DataClass/MediaSection.dart';
@@ -58,13 +59,15 @@ class AnilistAnimeScreen extends BaseAnimeScreen {
 
   @override
   Future<void> loadNextPage() async {
-    final result = await Anilist.query!.search(SearchResults(
-      type: SearchType.ANIME,
-      page: page + 1,
-      perPage: 50,
-      sort: Anilist.sortBy[1],
-      onList: loadData(PrefName.includeAnimeList),
-    ));
+    final result = await Anilist.query!.search(
+      SearchResults(
+        type: SearchType.ANIME,
+        page: page + 1,
+        perPage: 50,
+        sort: Anilist.sortBy[1],
+        onList: loadData(PrefName.includeAnimeList),
+      ),
+    );
     page++;
     if (result != null) {
       canLoadMore.value = result.hasNextPage ?? false;
@@ -79,14 +82,16 @@ class AnilistAnimeScreen extends BaseAnimeScreen {
     var currentSeasonMap = Anilist.currentSeasons[page];
     var season = currentSeasonMap.keys.first;
     var year = currentSeasonMap.values.first;
-    var trending = await Anilist.query!.search(SearchResults(
-      type: SearchType.ANIME,
-      perPage: 12,
-      sort: Anilist.sortBy[2],
-      season: season,
-      seasonYear: year,
-      hdCover: true,
-    ));
+    var trending = await Anilist.query!.search(
+      SearchResults(
+        type: SearchType.ANIME,
+        perPage: 12,
+        sort: Anilist.sortBy[2],
+        season: season,
+        seasonYear: year,
+        hdCover: true,
+      ),
+    );
     this.trending.value = trending?.results;
   }
 
@@ -118,31 +123,85 @@ class AnilistAnimeScreen extends BaseAnimeScreen {
         list: mostFavSeries.value,
       ),
     ];
+
     final animeLayoutMap = loadData(PrefName.anilistAnimeLayout);
+
     final sectionMap = {
-      for (var section in mediaSections) section.pairTitle: section
+      for (final section in mediaSections) section.pairTitle: section,
     };
-    return animeLayoutMap.entries
+
+    final sections = animeLayoutMap.entries
         .where((entry) => entry.value)
         .map((entry) => sectionMap[entry.key])
         .whereType<MediaSectionData>()
+        .toList();
+
+    final groupedWidgets = sections
         .map(
           (section) => MediaSection(
             context: context,
             type: section.type,
             title: section.title,
             mediaList: section.list,
-            scrollController: section.scrollController,
           ),
         )
-        .toList()
-      ..add(
-        MediaSection(
-          context: context,
-          type: 2,
-          title: getString.popular(getString.anime),
-          mediaList: animePopular.value,
-        ),
-      );
+        .toList();
+    final popularSection = MediaSection(
+      context: context,
+      type: 2,
+      title: getString.popular(getString.anime),
+      mediaList: animePopular.value,
+    );
+
+    return [
+      LayoutBuilder(
+        builder: (context, constraints) {
+          const spacing = 16.0;
+          final horizontalPadding = context.isPhone ? 0.0 : 16.0;
+          final maxWidth = constraints.maxWidth - (horizontalPadding * 2);
+
+          final columns = context.isPhone ? 1 : 2;
+          final width = (maxWidth - ((columns - 1) * spacing)) / columns;
+          final useColumnLayout = width < 480;
+
+          final children = groupedWidgets
+              .map(
+                (widget) => SizedBox(
+                  width: useColumnLayout ? null : width,
+                  child: widget,
+                ),
+              )
+              .toList();
+
+          return Padding(
+            padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+            child: Column(
+              children: [
+                useColumnLayout
+                    ? Column(
+                        children: children
+                            .map(
+                              (child) => Padding(
+                                padding: const EdgeInsets.only(bottom: spacing),
+                                child: child,
+                              ),
+                            )
+                            .toList(),
+                      )
+                    : Wrap(
+                        spacing: spacing,
+                        runSpacing: spacing,
+                        children: children,
+                      ),
+                const SizedBox(height: spacing),
+
+                popularSection,
+                const SizedBox(height: 128),
+              ],
+            ),
+          );
+        },
+      ),
+    ];
   }
 }
