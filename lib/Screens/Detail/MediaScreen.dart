@@ -138,7 +138,7 @@ class MediaInfoPageState extends State<MediaInfoPage> {
         children: [
           Positioned.fill(
             child: ImageFiltered(
-              imageFilter: ImageFilter.blur(sigmaX: 4.0, sigmaY: 4.0),
+              imageFilter: ImageFilter.blur(sigmaX: 8.0, sigmaY: 4.0),
               child: Opacity(
                 opacity: 0.8,
                 child: Obx(() {
@@ -162,7 +162,7 @@ class MediaInfoPageState extends State<MediaInfoPage> {
             child: Align(
               alignment: Alignment.bottomCenter,
               child: FractionallySizedBox(
-                heightFactor: 0.75,
+                heightFactor: 0.85,
                 widthFactor: 1,
                 child: Container(
                   decoration: BoxDecoration(
