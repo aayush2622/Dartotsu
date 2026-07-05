@@ -2,7 +2,6 @@ import 'package:dartotsu/Theme/ThemeManager.dart';
 import 'package:dartotsu/Widgets/AlertDialogBuilder.dart';
 import 'package:dartotsu_extension_bridge/Extensions/DownloadablePlugin.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
@@ -77,7 +76,7 @@ class ExtensionScreenState extends State<ExtensionScreen>
               fontFamily: 'Poppins',
               fontWeight: FontWeight.bold,
               fontSize: 16.0,
-              color: Theme.of(context).colorScheme.primary,
+              color: theme.primary,
             ),
           ),
           iconTheme: IconThemeData(color: theme.primary),
@@ -91,14 +90,25 @@ class ExtensionScreenState extends State<ExtensionScreen>
               () => TabBar(
                 controller: _tabBarController,
                 isScrollable: true,
-                indicatorSize: TabBarIndicatorSize.label,
-                dragStartBehavior: DragStartBehavior.start,
+                dividerColor: Colors.transparent,
+                indicator: BoxDecoration(
+                  color: theme.surfaceContainerHigh,
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                indicatorPadding: const EdgeInsets.symmetric(
+                  horizontal: 1,
+                  vertical: 6,
+                ),
+                labelPadding: EdgeInsets.zero,
+                labelColor: theme.primary,
+                unselectedLabelColor: theme.onSurfaceVariant,
+                splashFactory: NoSplash.splashFactory,
+                overlayColor: WidgetStateProperty.all(Colors.transparent),
                 tabs: _buildTabs(context),
               ),
             ),
             const SizedBox(height: 8),
             _searchBar(),
-            const SizedBox(height: 8),
             Obx(() {
               return Expanded(
                 child: TabBarView(
@@ -393,62 +403,78 @@ class ExtensionScreenState extends State<ExtensionScreen>
   }
 
   Widget _searchBar() {
-    var theme = Theme.of(context).colorScheme;
+    final theme = Theme.of(context).colorScheme;
+
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      padding: const EdgeInsets.symmetric(horizontal: 20),
       child: TextField(
-        style: TextStyle(
-          fontFamily: 'Poppins',
-          fontWeight: FontWeight.bold,
-          fontSize: 14.0,
-          color: theme.onSurface,
-        ),
         controller: _textEditingController,
-        decoration: InputDecoration(
-          hintText: getString.search,
-          hintStyle: TextStyle(
-            fontFamily: 'Poppins',
-            fontWeight: FontWeight.bold,
-            fontSize: 14.0,
-            color: theme.onSurface,
-          ),
-          suffixIcon: Icon(Icons.search, color: theme.onSurface),
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(28)),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(28),
-            borderSide: BorderSide(color: theme.primaryContainer, width: 1.0),
-          ),
-          filled: true,
-          fillColor: Colors.grey.withOpacity(0.2),
+        style: const TextStyle(
+          fontFamily: "Poppins",
+          fontSize: 15,
+          fontWeight: FontWeight.w500,
         ),
-        onChanged: (value) => _searchQuery.value = _textEditingController.text,
+        decoration: InputDecoration(
+          hintText: "Search extensions...",
+          prefixIcon: const Icon(Icons.search_rounded),
+          filled: true,
+          fillColor: theme.surfaceContainerHigh,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(24),
+            borderSide: BorderSide.none,
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(24),
+            borderSide: BorderSide.none,
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(24),
+            borderSide: BorderSide(
+              color: theme.primary.withOpacity(.5),
+              width: 1.5,
+            ),
+          ),
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 20,
+            vertical: 16,
+          ),
+        ),
+        onChanged: (v) => _searchQuery.value = v,
       ),
     );
   }
 
   Widget tabWidget(BuildContext context, String label, int count) {
+    final theme = Theme.of(context).colorScheme;
+
     return Tab(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            label,
-            style: const TextStyle(
-              fontFamily: 'Poppins',
-              fontWeight: FontWeight.bold,
-              fontSize: 14.0,
+      height: 46,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              label,
+              style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
             ),
-          ),
-          const SizedBox(width: 8),
-          Text(
-            "($count)",
-            style: const TextStyle(
-              fontSize: 12,
-              fontFamily: 'Poppins',
-              fontWeight: FontWeight.bold,
+            const SizedBox(width: 8),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+              decoration: BoxDecoration(
+                color: theme.surfaceContainerHighest,
+                borderRadius: BorderRadius.circular(100),
+              ),
+              child: Text(
+                "$count",
+                style: const TextStyle(
+                  fontSize: 11,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
