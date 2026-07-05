@@ -13,6 +13,7 @@ import '../../Core/ThemeManager/language.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Functions/SnackBar.dart';
 import '../../Widgets/Components/AlertDialogBuilder.dart';
+import '../../Widgets/Components/BaseScreen.dart';
 import '../../Widgets/Components/CustomBottomDialog.dart';
 import '../../Widgets/Components/LoadSvg.dart';
 import '../../Widgets/Components/ScrollConfig.dart';
@@ -25,7 +26,7 @@ class ExtensionScreen extends StatefulWidget {
   State<ExtensionScreen> createState() => ExtensionScreenState();
 }
 
-class ExtensionScreenState extends State<ExtensionScreen>
+class ExtensionScreenState extends BaseScreen<ExtensionScreen>
     with TickerProviderStateMixin {
   late TabController _tabBarController;
 
@@ -44,6 +45,11 @@ class ExtensionScreenState extends State<ExtensionScreen>
       length: ItemType.values.length * 2,
       vsync: this,
     );
+    _tabBarController.addListener(() {
+      if (mounted) {
+        setState(() {});
+      }
+    });
   }
 
   @override
@@ -61,12 +67,13 @@ class ExtensionScreenState extends State<ExtensionScreen>
     _ => ItemType.novel,
   };
   @override
-  Widget build(BuildContext context) {
+  Widget buildContent(BuildContext context) {
     final theme = Theme.of(context).colorScheme;
 
     return ScrollConfig(
       context,
       child: Scaffold(
+        backgroundColor: Colors.transparent,
         appBar: AppBar(
           elevation: 0,
           backgroundColor: Colors.transparent,
@@ -91,14 +98,10 @@ class ExtensionScreenState extends State<ExtensionScreen>
                 controller: _tabBarController,
                 isScrollable: true,
                 dividerColor: Colors.transparent,
-                indicator: BoxDecoration(
-                  color: theme.surfaceContainerHigh,
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                indicatorPadding: const EdgeInsets.symmetric(
-                  horizontal: 1,
-                  vertical: 6,
-                ),
+                tabAlignment: TabAlignment.start,
+                indicator: const BoxDecoration(),
+                indicatorPadding: EdgeInsets.zero,
+                padding: EdgeInsets.zero,
                 labelPadding: EdgeInsets.zero,
                 labelColor: theme.primary,
                 unselectedLabelColor: theme.onSurfaceVariant,
@@ -107,7 +110,6 @@ class ExtensionScreenState extends State<ExtensionScreen>
                 tabs: _buildTabs(context),
               ),
             ),
-            const SizedBox(height: 8),
             _searchBar(),
             Obx(() {
               return Expanded(
@@ -406,70 +408,85 @@ class ExtensionScreenState extends State<ExtensionScreen>
     final theme = Theme.of(context).colorScheme;
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: TextField(
-        controller: _textEditingController,
-        style: const TextStyle(
-          fontFamily: "Poppins",
-          fontSize: 15,
-          fontWeight: FontWeight.w500,
-        ),
-        decoration: InputDecoration(
-          hintText: "Search extensions...",
-          prefixIcon: const Icon(Icons.search_rounded),
-          filled: true,
-          fillColor: theme.surfaceContainerHigh,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(24),
-            borderSide: BorderSide.none,
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+      child: ThemedContainer(
+        context: context,
+        borderRadius: BorderRadius.circular(24),
+        padding: const EdgeInsets.symmetric(horizontal: 8),
+        child: TextField(
+          controller: _textEditingController,
+          style: const TextStyle(
+            fontFamily: "Poppins",
+            fontSize: 15,
+            fontWeight: FontWeight.w500,
           ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(24),
-            borderSide: BorderSide.none,
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(24),
-            borderSide: BorderSide(
-              color: theme.primary.withOpacity(.5),
-              width: 1.5,
+          decoration: InputDecoration(
+            hintText: "Search extensions...",
+            prefixIcon: Icon(
+              Icons.search_rounded,
+              color: theme.onSurfaceVariant,
+            ),
+            border: InputBorder.none,
+            enabledBorder: InputBorder.none,
+            focusedBorder: InputBorder.none,
+            fillColor: Colors.transparent,
+            filled: false,
+            isDense: true,
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 12,
+              vertical: 16,
             ),
           ),
-          contentPadding: const EdgeInsets.symmetric(
-            horizontal: 20,
-            vertical: 16,
-          ),
+          onChanged: (v) => _searchQuery.value = v,
         ),
-        onChanged: (v) => _searchQuery.value = v,
       ),
     );
   }
 
-  Widget tabWidget(BuildContext context, String label, int count) {
+  Widget tabWidget(
+    BuildContext context,
+    String label,
+    int count,
+    bool selected,
+  ) {
     final theme = Theme.of(context).colorScheme;
 
-    return Tab(
-      height: 46,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 200),
+      curve: Curves.easeOut,
+      margin: const EdgeInsets.symmetric(horizontal: 4, vertical: 6),
+      child: ThemedContainer(
+        context: context,
+        color: selected ? theme.surfaceContainerHigh : null,
+        borderRadius: BorderRadius.circular(16),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
               label,
-              style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 14,
+                color: selected ? theme.primary : theme.onSurfaceVariant,
+              ),
             ),
             const SizedBox(width: 8),
-            Container(
+            AnimatedContainer(
+              duration: const Duration(milliseconds: 200),
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
               decoration: BoxDecoration(
-                color: theme.surfaceContainerHighest,
+                color: selected
+                    ? theme.primary.withOpacity(0.15)
+                    : theme.surfaceContainerHighest,
                 borderRadius: BorderRadius.circular(100),
               ),
               child: Text(
                 "$count",
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 11,
                   fontWeight: FontWeight.bold,
+                  color: selected ? theme.primary : theme.onSurfaceVariant,
                 ),
               ),
             ),
@@ -481,6 +498,7 @@ class ExtensionScreenState extends State<ExtensionScreen>
 
   List<Widget> _buildTabs(BuildContext context) {
     final tabs = <Widget>[];
+    int index = 0;
 
     for (final type in _tabOrder) {
       final manager = this.manager[type].state(type);
@@ -490,6 +508,7 @@ class ExtensionScreenState extends State<ExtensionScreen>
           context,
           'Installed ${type.name}',
           manager.installed.value.length,
+          _tabBarController.index == index++,
         ),
       );
 
@@ -498,7 +517,15 @@ class ExtensionScreenState extends State<ExtensionScreen>
           context,
           'Available ${type.name}',
           manager.available.value.length,
+          _tabBarController.index == index++,
         ),
+      );
+    }
+
+    if (tabs.isNotEmpty) {
+      tabs[0] = Padding(
+        padding: const EdgeInsets.only(left: 16),
+        child: tabs[0],
       );
     }
 
