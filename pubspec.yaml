@@ -18,14 +18,14 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   async: ^2.13.1
-  firebase_core: ^4.10.0
-  firebase_crashlytics: ^5.2.3
-  firebase_analytics: ^12.4.2
+  firebase_core: ^4.11.0
+  firebase_crashlytics: ^5.2.4
+  firebase_analytics: ^12.4.3
   # State Management
   get: ^4.7.3
 
   # Networking
-  rhttp: ^0.15.1
+  rhttp: ^0.18.0
 
   # JSON Serialization
   json_annotation: ^4.9.0
@@ -33,7 +33,7 @@ dependencies:
   # Local Storage
   isar_community: ^3.3.2
   isar_community_flutter_libs: ^3.3.2
-  path_provider: ^2.1.5
+  path_provider: ^2.1.6
   path: ^1.9.1
   cryptography: ^2.9.0
 
@@ -50,7 +50,7 @@ dependencies:
   blurbox: ^0.0.6
   markdown_widget: ^2.3.2+8
   super_sliver_list: ^0.4.1
-  dpad: ^2.0.2
+  dpad: ^3.0.0
   dynamic_color: ^1.8.1
 
   # UI Enhancements
@@ -75,28 +75,28 @@ dependencies:
     git:
       url: https://github.com/kodjodevf/media-kit.git
       path: libs/universal/media_kit_libs_video
-  window_manager: ^0.5.1
+  window_manager: ^0.5.2
   permission_handler: ^12.0.3
   flutter_inappwebview: ^6.2.0-beta.3
 
   wakelock_plus: ^1.6.1
-  volume_controller: ^3.5.0
-  screen_brightness: ^2.1.8
-  app_links: ^7.1.1
+  volume_controller: ^3.6.0
+  screen_brightness: ^2.1.11
+  app_links: ^7.2.0
   win32: ^6.3.0
   ffi: ^2.2.0
   install_plugin: ^2.1.0
   flutter_discord_rpc_fork:
     git:
-      url: https://github.com/Schnitzel5/flutter-discord-rpc.git
-      ref: main
+      url: https://github.com/kodjodevf/flutter-discord-rpc.git
+      ref: update_frb
 
   # Miscellaneous
-  receive_sharing_intent: ^1.8.1
-  device_info_plus: ^13.1.0
-  package_info_plus: ^10.1.0
+  receive_sharing_intent: ^1.9.0
+  device_info_plus: ^13.2.0
+  package_info_plus: ^10.2.0
   file_picker: ^12.0.0-beta.5
-  share_plus: ^13.1.0
+  share_plus: ^13.2.0
   url_launcher: ^6.3.2
   json_path: ^0.9.0
   grouped_list: ^6.0.0

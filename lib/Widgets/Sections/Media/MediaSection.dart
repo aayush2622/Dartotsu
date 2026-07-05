@@ -37,7 +37,7 @@ class MediaSectionData {
   final void Function(BuildContext context, int index, Media media)? onMediaTap;
 
   final void Function(BuildContext context, int index, Media media)?
-      onMediaLongPress;
+  onMediaLongPress;
 
   final Future<List<Media>> Function()? onLoadMore;
 
@@ -61,10 +61,7 @@ class MediaSectionData {
     return MediaSectionData(
       type: type,
       title: "Title Skeleton",
-      mediaList: List.generate(
-        20,
-        (index) => Media.skeleton(),
-      ),
+      mediaList: List.generate(20, (index) => Media.skeleton()),
       onMediaTap: (context, index, media) => snackString("Just a skeleton"),
       onLoadMore: () async {
         await Future.delayed(const Duration(seconds: 2));
@@ -139,16 +136,15 @@ class _MediaSectionState extends State<MediaSection> {
                   title,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: theme.textTheme.labelLarge?.copyWith(
-                    fontSize: 18,
-                  ),
+                  style: theme.textTheme.labelLarge?.copyWith(fontSize: 18),
                 ),
               ),
             ),
           ),
           if (trailing != null)
             DpadFocusable(
-              enabled: data.onTrailingIconTap != null ||
+              enabled:
+                  data.onTrailingIconTap != null ||
                   data.onTrailingIconLongPress != null,
               onSelect: data.onTrailingIconTap ?? data.onTrailingIconLongPress,
               child: IconButton(
@@ -206,10 +202,8 @@ class _MediaSectionState extends State<MediaSection> {
         final overscroll = state.overscrollProgress.value;
 
         return NotificationListener<ScrollNotification>(
-          onNotification: (scroll) => state.scrollListener(
-            scroll,
-            data.onLoadMore,
-          ),
+          onNotification: (scroll) =>
+              state.scrollListener(scroll, data.onLoadMore),
           child: CustomScrollConfig(
             context,
             scrollDirection: Axis.horizontal,
@@ -219,102 +213,97 @@ class _MediaSectionState extends State<MediaSection> {
             ),
             children: [
               SuperSliverList(
-                delegate: SliverChildBuilderDelegate(
-                  (context, index) {
-                    final isLast = index == state.mediaList.length;
+                delegate: SliverChildBuilderDelegate((context, index) {
+                  final isLast = index == state.mediaList.length;
 
-                    if (isLast) {
-                      if (data.onLoadMore == null || !canLoadMore) {
-                        return const SizedBox(width: 17.5);
-                      }
-
-                      return Align(
-                        alignment: Alignment.topCenter,
-                        child: Padding(
-                          padding: EdgeInsets.only(
-                            left: 6.5,
-                            right: 24,
-                            top: 8 * multiplicationFactor,
-                          ),
-                          child: SizedBox(
-                            width: 108 * multiplicationFactor,
-                            height: 160 * multiplicationFactor,
-                            child: DpadFocusable(
-                              onFocus: () => state.overscrollProgress.value = 1,
-                              onBlur: () => state.overscrollProgress.value = 0,
-                              onSelect: () => state.loadMore(data.onLoadMore),
-                              child: Center(
-                                child: AnimatedSwitcher(
-                                  duration: const Duration(milliseconds: 180),
-                                  child: (overscroll == 0 && !isLoadingMore)
-                                      ? const SizedBox.shrink()
-                                      : isLoadingMore
-                                          ? Skeletonizer(
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                  16.0,
-                                                ),
-                                                child: Container(
-                                                  color: Colors.white12,
-                                                  width: 108 *
-                                                      multiplicationFactor,
-                                                  height: 160 *
-                                                      multiplicationFactor,
-                                                ),
-                                              ),
-                                            )
-                                          : _stretchBubble(overscroll),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      );
+                  if (isLast) {
+                    if (data.onLoadMore == null || !canLoadMore) {
+                      return const SizedBox(width: 17.5);
                     }
-
-                    final media = state.mediaList[index];
 
                     return Align(
                       alignment: Alignment.topCenter,
                       child: Padding(
-                        padding: _horizontalPadding(
-                          index,
-                          state.mediaList.length,
+                        padding: EdgeInsets.only(
+                          left: 6.5,
+                          right: 24,
+                          top: 8 * multiplicationFactor,
                         ),
-                        child: DpadFocusable(
-                          onSelect: () =>
-                              data.onMediaTap?.call(context, index, media),
-                          child: _mediaItem(index = index, media),
-                          builder: (context, focused, child) {
-                            return AnimatedScale(
-                              scale: focused ? 1.07 : 1.0,
-                              duration: const Duration(milliseconds: 200),
-                              curve: Curves.easeOut,
-                              child: child,
-                            );
-                          },
+                        child: SizedBox(
+                          width: 108 * multiplicationFactor,
+                          height: 160 * multiplicationFactor,
+                          child: DpadFocusable(
+                            onFocusChange: (focused) {
+                              state.overscrollProgress.value = focused ? 1 : 0;
+                            },
+                            onSelect: () => state.loadMore(data.onLoadMore),
+                            child: Center(
+                              child: AnimatedSwitcher(
+                                duration: const Duration(milliseconds: 180),
+                                child: (overscroll == 0 && !isLoadingMore)
+                                    ? const SizedBox.shrink()
+                                    : isLoadingMore
+                                    ? Skeletonizer(
+                                        child: ClipRRect(
+                                          borderRadius: BorderRadius.circular(
+                                            16,
+                                          ),
+                                          child: Container(
+                                            color: Colors.white12,
+                                            width: 108 * multiplicationFactor,
+                                            height: 160 * multiplicationFactor,
+                                          ),
+                                        ),
+                                      )
+                                    : _stretchBubble(overscroll),
+                              ),
+                            ),
+                          ),
                         ),
                       ),
-                    ).animate(
-                      effects: [
-                        const SlideEffect(
-                          begin: Offset(1, 0),
-                          end: Offset.zero,
-                          curve: Curves.easeInOut,
-                          duration: Duration(milliseconds: 200),
-                        ),
-                        const ScaleEffect(
-                          begin: Offset(0.1, 0.1),
-                          end: Offset(1, 1),
-                          curve: Curves.easeInOut,
-                          duration: Duration(milliseconds: 400),
-                        ),
-                      ],
                     );
-                  },
-                  childCount: state.mediaList.length + 1,
-                ),
+                  }
+
+                  final media = state.mediaList[index];
+
+                  return Align(
+                    alignment: Alignment.topCenter,
+                    child: Padding(
+                      padding: _horizontalPadding(
+                        index,
+                        state.mediaList.length,
+                      ),
+                      child: DpadFocusable(
+                        onSelect: () =>
+                            data.onMediaTap?.call(context, index, media),
+                        child: _mediaItem(index = index, media),
+                        builder: (context, state, child) {
+                          return AnimatedScale(
+                            scale: state.focused ? 1.07 : 1.0,
+                            duration: const Duration(milliseconds: 200),
+                            curve: Curves.easeOut,
+                            child: child,
+                          );
+                        },
+                      ),
+                    ),
+                  ).animate(
+                    effects: [
+                      const SlideEffect(
+                        begin: Offset(1, 0),
+                        end: Offset.zero,
+                        curve: Curves.easeInOut,
+                        duration: Duration(milliseconds: 200),
+                      ),
+                      const ScaleEffect(
+                        begin: Offset(0.1, 0.1),
+                        end: Offset(1, 1),
+                        curve: Curves.easeInOut,
+                        duration: Duration(milliseconds: 400),
+                      ),
+                    ],
+                  );
+                }, childCount: state.mediaList.length + 1),
               ),
             ],
           ),
@@ -347,14 +336,14 @@ class _MediaSectionState extends State<MediaSection> {
                   child: Card(
                     elevation: 5,
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16)),
+                      borderRadius: BorderRadius.circular(16),
+                    ),
                     clipBehavior: Clip.antiAlias,
                     child: cachedNetworkImage(
                       imageUrl: media.cover ?? '',
                       fit: BoxFit.cover,
-                      placeholder: (context, url) => Container(
-                        color: Colors.white12,
-                      ),
+                      placeholder: (context, url) =>
+                          Container(color: Colors.white12),
                       errorWidget: (context, url, error) => Icon(
                         Icons.broken_image_rounded,
                         color: theme.colorScheme.error,
@@ -366,7 +355,7 @@ class _MediaSectionState extends State<MediaSection> {
                 const SizedBox(height: 8),
                 _buildMediaTitle(false, media.mainName),
                 const SizedBox(height: 8),
-                _buildMediaTitle(false, "1155 | 1155")
+                _buildMediaTitle(false, "1155 | 1155"),
               ],
             ),
           ),

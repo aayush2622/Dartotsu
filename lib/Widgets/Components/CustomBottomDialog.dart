@@ -50,17 +50,17 @@ class _CustomBottomDialogState extends State<CustomBottomDialog> {
     final textTheme = ContextExtensions(context).textTheme;
     final buttonStyle = OutlinedButton.styleFrom(
       padding: const EdgeInsets.symmetric(vertical: 24),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(18),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
       side: BorderSide(color: colorScheme.primary),
     );
 
     return ThemedContainer(
       color: colorScheme.surface,
       context: context,
-      border:
-          Border.all(width: 0, color: colorScheme.onSurface.withOpacity(0.2)),
+      border: Border.all(
+        width: 0,
+        color: colorScheme.onSurface.withOpacity(0.2),
+      ),
       borderRadius: const BorderRadius.vertical(top: Radius.circular(16.0)),
       padding: const EdgeInsets.only(bottom: 24.0, top: 12.0),
       child: CustomScrollConfig(
@@ -72,14 +72,26 @@ class _CustomBottomDialogState extends State<CustomBottomDialog> {
               padding: const EdgeInsets.only(bottom: 12.0),
               child: DpadFocusable(
                 autofocus: true,
-                isEntryPoint: true,
-                builder: (context, isFocused, child) {
-                  var focus = isFocused && usingKeyboard;
+                entry: true,
+                onSelect: () => Get.back(),
+                child: Container(
+                  width: 40,
+                  height: 4,
+                  decoration: BoxDecoration(
+                    color: colorScheme.onSurface.withOpacity(0.3),
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                ),
+                builder: (context, state, child) {
+                  final focus = state.focused && usingKeyboard;
+
                   return Center(
                     child: AnimatedContainer(
                       duration: const Duration(milliseconds: 120),
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 8, vertical: 6),
+                        horizontal: 8,
+                        vertical: 6,
+                      ),
                       decoration: BoxDecoration(
                         color: focus
                             ? colorScheme.onSurface.withOpacity(0.08)
@@ -92,14 +104,7 @@ class _CustomBottomDialogState extends State<CustomBottomDialog> {
                               )
                             : null,
                       ),
-                      child: Container(
-                        width: 40,
-                        height: 4,
-                        decoration: BoxDecoration(
-                          color: colorScheme.onSurface.withOpacity(0.3),
-                          borderRadius: BorderRadius.circular(2),
-                        ),
-                      ),
+                      child: child,
                     ),
                   );
                 },
@@ -204,8 +209,11 @@ class _CustomBottomDialogState extends State<CustomBottomDialog> {
   }
 }
 
-void showCustomBottomDialog(BuildContext context, CustomBottomDialog dialog,
-    {VoidCallback? onDismissed}) {
+void showCustomBottomDialog(
+  BuildContext context,
+  CustomBottomDialog dialog, {
+  VoidCallback? onDismissed,
+}) {
   showModalBottomSheet(
     enableDrag: true,
     isScrollControlled: true,

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -14,10 +15,7 @@ import '../../Utils/Functions/GetXFunctions.dart';
 class WebView extends StatefulWidget {
   final String url;
 
-  const WebView({
-    super.key,
-    required this.url,
-  });
+  const WebView({super.key, required this.url});
 
   @override
   State<WebView> createState() => _WebViewState();
@@ -31,17 +29,36 @@ class _WebViewState extends State<WebView> {
   final _canGoBack = false.obs;
   final _canGoForward = false.obs;
   final _isEditing = false.obs;
-
+  final _progress = 0.0.obs;
   final TextEditingController _searchController = TextEditingController();
   final FocusNode _addressFocus = FocusNode();
 
-  final cookieManager = Get.find<NetworkManager>().cookieManager;
-
+  final cookieManager = find<NetworkManager>().cookieManager;
+  PullToRefreshController? _pullToRefreshController;
   @override
   void initState() {
     super.initState();
     _url.value = widget.url;
     _searchController.text = widget.url;
+    if (Platform.isAndroid || Platform.isIOS) {
+      _pullToRefreshController = PullToRefreshController(
+        onRefresh: () async {
+          await _controller?.reload();
+        },
+      );
+    } else {
+      _pullToRefreshController = null;
+    }
+  }
+
+  Timer? _cookieSyncTimer;
+
+  Future<void> _syncCookies(WebUri url) async {
+    _cookieSyncTimer?.cancel();
+
+    _cookieSyncTimer = Timer(const Duration(milliseconds: 200), () async {
+      await cookieManager.readCookiesFromWebView(url, _controller);
+    });
   }
 
   Future<void> _updateNavState() async {
@@ -101,9 +118,7 @@ class _WebViewState extends State<WebView> {
         ],
       ),
       body: ClipRRect(
-        borderRadius: const BorderRadius.vertical(
-          top: Radius.circular(16),
-        ),
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
         child: Container(
           color: context.colorScheme.surface,
           child: _buildWebView(),
@@ -155,10 +170,9 @@ class _WebViewState extends State<WebView> {
                           _title.value.isNotEmpty ? _title.value : _url.value,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: ContextExtensions(context)
-                              .theme
-                              .textTheme
-                              .bodyMedium,
+                          style: ContextExtensions(
+                            context,
+                          ).theme.textTheme.bodyMedium,
                         ),
                       ),
                     ],
@@ -190,9 +204,7 @@ class _WebViewState extends State<WebView> {
         onSubmitted: (value) async {
           final url = normalizeUrl(value);
           _searchController.text = url;
-          await _controller?.loadUrl(
-            urlRequest: URLRequest(url: WebUri(url)),
-          );
+          await _controller?.loadUrl(urlRequest: URLRequest(url: WebUri(url)));
           FocusManager.instance.primaryFocus?.unfocus();
         },
       ),
@@ -231,9 +243,7 @@ class _WebViewState extends State<WebView> {
 
   Widget _buildPopupMenu() {
     return PopupMenuButton<int>(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       icon: const Icon(Icons.more_vert),
       onSelected: (value) async {
         switch (value) {
@@ -249,7 +259,8 @@ class _WebViewState extends State<WebView> {
           case 3:
             final uri = await _controller?.getUrl();
             if (uri != null) {
-              cookieManager.deleteCookiesForDomain(uri.uriValue);
+              await cookieManager.deleteCookiesForDomain(uri.host);
+              await _controller?.reload();
             }
             break;
         }
@@ -264,32 +275,36 @@ class _WebViewState extends State<WebView> {
   }
 
   Widget _buildWebView() {
-    return InAppWebView(
-      initialUrlRequest: URLRequest(
-        url: WebUri(widget.url),
-      ),
-      initialSettings: InAppWebViewSettings(
-        javaScriptEnabled: true,
-        domStorageEnabled: true,
-        useShouldOverrideUrlLoading: true,
-        mediaPlaybackRequiresUserGesture: false,
-        allowsInlineMediaPlayback: true,
-        darkMode: true,
-        algorithmicDarkeningAllowed: true,
-        sharedCookiesEnabled: true,
-        thirdPartyCookiesEnabled: true,
-      ),
-      onWebViewCreated: (controller) async {
-        _controller = controller;
-        await cookieManager.applyAllCookiesToWebView(controller);
-        await _updateNavState();
-        final fontData = await rootBundle.load('assets/fonts/poppins.ttf');
-        final base64Font = base64Encode(fontData.buffer.asUint8List());
+    return Stack(
+      children: [
+        InAppWebView(
+          initialUrlRequest: URLRequest(url: WebUri(widget.url)),
+          initialSettings: InAppWebViewSettings(
+            javaScriptEnabled: true,
+            domStorageEnabled: true,
+            useShouldOverrideUrlLoading: true,
+            mediaPlaybackRequiresUserGesture: false,
+            allowsInlineMediaPlayback: true,
+            darkMode: true,
+            algorithmicDarkeningAllowed: true,
+            thirdPartyCookiesEnabled: true,
+            cacheEnabled: true,
+          ),
+          pullToRefreshController: _pullToRefreshController,
+          onWebViewCreated: (controller) async {
+            _controller = controller;
 
-        await controller.addUserScript(
-          userScript: UserScript(
-            injectionTime: UserScriptInjectionTime.AT_DOCUMENT_START,
-            source: '''
+            await cookieManager.applyCookiesToWebView(controller);
+
+            await _updateNavState();
+            final fontData = await rootBundle.load('assets/fonts/poppins.ttf');
+            final base64Font = base64Encode(fontData.buffer.asUint8List());
+
+            await controller.addUserScript(
+              userScript: UserScript(
+                injectionTime: UserScriptInjectionTime.AT_DOCUMENT_START,
+                source:
+                    '''
         (function () {
           const style = document.createElement('style');
           style.innerHTML = `
@@ -307,25 +322,58 @@ class _WebViewState extends State<WebView> {
           document.documentElement.appendChild(style);
         })();
       ''',
-          ),
-        );
-      },
-      onLoadStop: (_, url) async {
-        if (url != null) {
-          await cookieManager.readCookiesFromWebView(url, _controller);
-        }
-        await _updateNavState();
-      },
-      shouldOverrideUrlLoading: (_, action) async {
-        return NavigationActionPolicy.ALLOW;
-      },
-      onUpdateVisitedHistory: (_, url, ___) async {
-        if (url != null) {
-          await cookieManager.readCookiesFromWebView(url, _controller);
-        }
-        await _updateNavState();
-      },
-      onTitleChanged: (_, title) => _title.value = title ?? '',
+              ),
+            );
+          },
+          onLoadResource: (_, _) async {
+            final url = await _controller?.getUrl();
+            if (url != null) {
+              await _syncCookies(url);
+            }
+          },
+          onReceivedHttpAuthRequest: (_, __) async {
+            final url = await _controller?.getUrl();
+            if (url != null) {
+              await _syncCookies(url);
+            }
+            return null;
+          },
+          onLoadStart: (_, url) async {
+            if (url != null) {
+              await cookieManager.applyCookiesToWebView(_controller);
+            }
+          },
+          onProgressChanged: (_, progress) => _progress.value = progress / 100,
+          onLoadStop: (_, url) async {
+            if (url != null) {
+              await _syncCookies(url);
+            }
+            await _updateNavState();
+          },
+          shouldOverrideUrlLoading: (_, action) async {
+            return NavigationActionPolicy.ALLOW;
+          },
+          onUpdateVisitedHistory: (_, url, _) async {
+            if (url != null) {
+              await _syncCookies(url);
+            }
+            await _updateNavState();
+          },
+          onTitleChanged: (_, title) => _title.value = title ?? '',
+        ),
+        Obx(
+          () => _progress.value < 1.0
+              ? AnimatedOpacity(
+                  opacity: _progress.value < 1.0 ? 1 : 0,
+                  duration: const Duration(milliseconds: 300),
+                  child: LinearProgressIndicator(
+                    value: _progress.value,
+                    minHeight: 2,
+                  ),
+                )
+              : const SizedBox(),
+        ),
+      ],
     );
   }
 
@@ -334,7 +382,7 @@ class _WebViewState extends State<WebView> {
     _addressFocus.dispose();
     _searchController.dispose();
     _controller = null;
+    _cookieSyncTimer?.cancel();
     super.dispose();
   }
 }
-
