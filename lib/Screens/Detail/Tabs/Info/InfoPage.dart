@@ -61,6 +61,7 @@ class InfoPageState extends State<InfoPage> {
           ]),
         if (widget.mediaData.tags.isNotEmpty) ..._buildTags(theme),
         ..._buildPrequelSection(),
+        const SizedBox(height: 12),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
           child: Column(
@@ -107,7 +108,7 @@ class InfoPageState extends State<InfoPage> {
 
   Widget _buildWithPadding(List<Widget> widgets) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 32.0),
+      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 24.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,

@@ -12,13 +12,15 @@ Widget GenreWidget(BuildContext context, List<String> genres, SearchType type) {
   final theme = Theme.of(context).colorScheme;
   final screenWidth = MediaQuery.of(context).size.width;
   const sidePadding = 16.0 * 2;
-  const minGap = 12.0;
-  const maxGap = 24.0;
+  const minGap = 8.0;
+  const maxGap = 12.0;
   final itemWidth = 154;
 
   final availableWidth = screenWidth - sidePadding;
-  final crossAxisCount =
-      max(1, (availableWidth / (itemWidth + minGap)).floor());
+  final crossAxisCount = max(
+    1,
+    (availableWidth / (itemWidth + minGap)).floor(),
+  );
 
   final totalItemWidth = crossAxisCount * itemWidth;
   final totalGapSpace = availableWidth - totalItemWidth;
@@ -28,7 +30,7 @@ Widget GenreWidget(BuildContext context, List<String> genres, SearchType type) {
   final adjustedGap = gap.clamp(minGap, maxGap);
 
   return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+    padding: EdgeInsets.zero,
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
@@ -71,10 +73,7 @@ Widget GenreWidget(BuildContext context, List<String> genres, SearchType type) {
               child: SizedBox(
                 width: itemWidth.toDouble(),
                 height: 54,
-                child: GenreItem(
-                  context,
-                  genres[index].toUpperCase(),
-                ),
+                child: GenreItem(context, genres[index].toUpperCase()),
               ),
             );
           },

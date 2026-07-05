@@ -19,8 +19,9 @@ class FollowerWidget extends StatelessWidget {
     if (follower == null || follower!.isEmpty) return const SizedBox();
 
     final followers = List<userData>.from(follower!);
-    final targetIndex = followers
-        .indexWhere((user) => Anilist.username.value.isEqualTo(user.name));
+    final targetIndex = followers.indexWhere(
+      (user) => Anilist.username.value.isEqualTo(user.name),
+    );
     if (targetIndex != -1) {
       final targetUser = followers.removeAt(targetIndex);
       followers.insert(0, targetUser);
@@ -31,7 +32,7 @@ class FollowerWidget extends StatelessWidget {
     const marginValue = 6.5;
 
     return SizedBox(
-      height: 250,
+      height: 224,
       child: ScrollConfig(
         context,
         child: ListView.builder(
