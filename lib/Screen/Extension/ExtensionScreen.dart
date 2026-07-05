@@ -36,7 +36,7 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
   final _searchQuery = ''.obs;
 
   final _textEditingController = TextEditingController();
-
+  final _currentIndex = 0.obs;
   @override
   void initState() {
     super.initState();
@@ -46,9 +46,7 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
       vsync: this,
     );
     _tabBarController.addListener(() {
-      if (mounted) {
-        setState(() {});
-      }
+      _currentIndex.value = _tabBarController.index;
     });
   }
 
@@ -61,11 +59,7 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
     super.dispose();
   }
 
-  ItemType get _currentType => switch (_tabBarController.index ~/ 2) {
-    0 => ItemType.anime,
-    1 => ItemType.manga,
-    _ => ItemType.novel,
-  };
+  ItemType get _currentType => _tabOrder[_currentIndex.value ~/ 2];
   @override
   Widget buildContent(BuildContext context) {
     final theme = Theme.of(context).colorScheme;
@@ -79,11 +73,9 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
           backgroundColor: Colors.transparent,
           title: Text(
             getString.extension(2),
-            style: TextStyle(
-              fontFamily: 'Poppins',
-              fontWeight: FontWeight.bold,
-              fontSize: 16.0,
+            style: context.textTheme.bodyLarge?.copyWith(
               color: theme.primary,
+              fontWeight: FontWeight.w600,
             ),
           ),
           iconTheme: IconThemeData(color: theme.primary),
@@ -158,113 +150,112 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
   Widget _buildServiceManager() {
     final theme = Theme.of(context).colorScheme;
 
-    return AnimatedBuilder(
-      animation: _tabBarController,
-      builder: (_, _) {
-        final type = _currentType;
-
-        return IconButton(
-          icon: ClipRRect(
-            borderRadius: BorderRadius.circular(12),
-            child: Image.asset(
-              manager[type].icon,
-              width: 24,
-              height: 24,
-              fit: BoxFit.cover,
-            ),
+    return Obx(() {
+      final type = _currentType;
+      return IconButton(
+        icon: ClipRRect(
+          borderRadius: BorderRadius.circular(12),
+          child: Image.asset(
+            manager.current[type]!.icon,
+            width: 24,
+            height: 24,
+            fit: BoxFit.cover,
           ),
-          onPressed: () {
-            showCustomBottomDialog(
-              context,
-              CustomBottomDialog(
-                title: "${type.name.capitalizeFirst} Manager",
-                positiveText: getString.ok,
-                positiveCallback: () => Navigator.pop(context),
-                viewList: [
-                  Obx(() {
-                    final current = manager[type];
-                    final managers = manager.managers
-                        .where((e) => e.supports(type))
-                        .toList();
+        ),
+        onPressed: () {
+          showCustomBottomDialog(
+            context,
+            CustomBottomDialog(
+              title: "${type.name.capitalizeFirst} Manager",
+              positiveText: getString.ok,
+              positiveCallback: () => Navigator.pop(context),
+              viewList: [
+                Obx(() {
+                  final current = manager[type];
+                  final managers = manager.managers
+                      .where((e) => e.supports(type))
+                      .toList();
 
-                    return Column(
-                      children: managers.map((m) {
-                        final selected = current.id == m.id;
-                        final enabled =
-                            m.plugin == null || m.plugin!.installed.value;
+                  return Column(
+                    children: managers.map((m) {
+                      final selected = current.id == m.id;
+                      final enabled =
+                          m.plugin == null || m.plugin!.installed.value;
 
-                        return Opacity(
-                          opacity: enabled ? 1 : 0.5,
-                          child: ThemedContainer(
-                            context: context,
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(24),
-                            ),
-                            margin: const EdgeInsets.symmetric(
-                              horizontal: 16,
-                              vertical: 8,
-                            ),
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 2,
-                              vertical: 8,
-                            ),
-                            color: selected ? theme.surfaceContainerHigh : null,
-                            child: ListTile(
-                              enabled: enabled,
-                              hoverColor: Colors.transparent,
-                              onTap: (!enabled || selected)
-                                  ? null
-                                  : () => manager.switchManager(type, m.id),
-                              leading: ClipOval(
-                                child: Image.asset(
-                                  m.icon,
-                                  width: 24,
-                                  height: 24,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              title: Text(
-                                m.name,
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              trailing: m.plugin == null
-                                  ? null
-                                  : IconButton(
-                                      icon: Icon(
-                                        enabled ? Icons.delete : Icons.download,
-                                        size: 18,
-                                      ),
-                                      onPressed: () async {
-                                        if (enabled) {
-                                          showDeleteDialog(
-                                            context,
-                                            m.plugin!,
-                                            m.name,
-                                          );
-                                        } else {
-                                          await showInstallDialog(
-                                            context,
-                                            m.plugin!,
-                                            m.name,
-                                          );
-                                        }
-                                      },
-                                    ),
-                            ),
+                      return Opacity(
+                        opacity: enabled ? 1 : 0.5,
+                        child: ThemedContainer(
+                          context: context,
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(24),
                           ),
-                        );
-                      }).toList(),
-                    );
-                  }),
-                ],
-              ),
-            );
-          },
-        );
-      },
-    );
+                          margin: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 8,
+                          ),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 2,
+                            vertical: 8,
+                          ),
+                          color: selected ? theme.surfaceContainerHigh : null,
+                          child: ListTile(
+                            enabled: enabled,
+                            hoverColor: Colors.transparent,
+                            onLongPress: () {
+                              snackString(
+                                "${m.name} ${selected ? "selected" : "not selected"}",
+                              );
+                            },
+                            onTap: (!enabled || selected)
+                                ? null
+                                : () => manager.switchManager(type, m.id),
+                            leading: ClipOval(
+                              child: Image.asset(
+                                m.icon,
+                                width: 24,
+                                height: 24,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            title: Text(
+                              m.name,
+                              style: context.textTheme.labelLarge,
+                            ),
+                            trailing: m.plugin == null
+                                ? null
+                                : IconButton(
+                                    icon: Icon(
+                                      enabled ? Icons.delete : Icons.download,
+                                      size: 18,
+                                    ),
+                                    onPressed: () async {
+                                      if (enabled) {
+                                        showDeleteDialog(
+                                          context,
+                                          m.plugin!,
+                                          m.name,
+                                        );
+                                      } else {
+                                        await showInstallDialog(
+                                          context,
+                                          m.plugin!,
+                                          m.name,
+                                        );
+                                      }
+                                    },
+                                  ),
+                          ),
+                        ),
+                      );
+                    }).toList(),
+                  );
+                }),
+              ],
+            ),
+          );
+        },
+      );
+    });
   }
 
   Widget _buildRepoManager() {
@@ -381,7 +372,10 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
                             const SizedBox(height: 4),
                             Text(
                               "${repo.extensions ?? "?"} extensions",
-                              style: TextStyle(color: theme.primary),
+                              style: context.textTheme.labelLarge?.copyWith(
+                                color: theme.primary,
+                                fontSize: 12,
+                              ),
                             ),
                           ],
                         ),
@@ -465,8 +459,7 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
           children: [
             Text(
               label,
-              style: TextStyle(
-                fontWeight: FontWeight.w600,
+              style: context.textTheme.titleMedium?.copyWith(
                 fontSize: 14,
                 color: selected ? theme.primary : theme.onSurfaceVariant,
               ),
@@ -483,9 +476,7 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
               ),
               child: Text(
                 "$count",
-                style: TextStyle(
-                  fontSize: 11,
-                  fontWeight: FontWeight.bold,
+                style: context.textTheme.labelMedium?.copyWith(
                   color: selected ? theme.primary : theme.onSurfaceVariant,
                 ),
               ),
@@ -503,21 +494,27 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
     for (final type in _tabOrder) {
       final manager = this.manager[type].state(type);
 
+      final installedIndex = index++;
       tabs.add(
-        tabWidget(
-          context,
-          'Installed ${type.name}',
-          manager.installed.value.length,
-          _tabBarController.index == index++,
+        Obx(
+          () => tabWidget(
+            context,
+            'Installed ${type.name}',
+            manager.installed.value.length,
+            _currentIndex.value == installedIndex,
+          ),
         ),
       );
 
+      final availableIndex = index++;
       tabs.add(
-        tabWidget(
-          context,
-          'Available ${type.name}',
-          manager.available.value.length,
-          _tabBarController.index == index++,
+        Obx(
+          () => tabWidget(
+            context,
+            'Available ${type.name}',
+            manager.available.value.length,
+            _currentIndex.value == availableIndex,
+          ),
         ),
       );
     }
