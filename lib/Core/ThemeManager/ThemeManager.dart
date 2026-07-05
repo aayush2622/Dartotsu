@@ -27,8 +27,9 @@ ThemeData getTheme(ColorScheme? material, ThemeController themeManager) {
   );
 
   if (themeManager.useMaterialYou.value && material != null) {
-    baseTheme =
-        isDark ? materialThemeDark(material) : materialThemeLight(material);
+    baseTheme = isDark
+        ? materialThemeDark(material)
+        : materialThemeLight(material);
   }
 
   if (themeManager.useCustomColor.value) {
@@ -39,8 +40,9 @@ ThemeData getTheme(ColorScheme? material, ThemeController themeManager) {
   const fontFamily = "Poppins";
 
   return baseTheme.copyWith(
-    scaffoldBackgroundColor:
-        isOled ? Colors.black : baseTheme.scaffoldBackgroundColor,
+    scaffoldBackgroundColor: isOled
+        ? Colors.black
+        : baseTheme.scaffoldBackgroundColor,
     colorScheme: baseTheme.colorScheme.copyWith(
       surface: isOled ? Colors.black : baseTheme.colorScheme.surface,
       surfaceContainerHighest: isOled
@@ -166,10 +168,7 @@ Color deriveCardColor({
   );
 }
 
-ThemeData _resolveBaseTheme({
-  required String theme,
-  required bool isDark,
-}) {
+ThemeData _resolveBaseTheme({required String theme, required bool isDark}) {
   final themes = <String, ({ThemeData dark, ThemeData light})>{
     'blue': (dark: cyanDarkTheme, light: cyanLightTheme),
     'green': (dark: greenDarkTheme, light: greenLightTheme),
@@ -214,10 +213,7 @@ Widget themeDropdown() {
   );
 }
 
-Widget ThemedWidget({
-  required Widget materialWidget,
-  Widget? glassWidget,
-}) {
+Widget ThemedWidget({required Widget materialWidget, Widget? glassWidget}) {
   final controller = find<ThemeController>();
 
   return Obx(() {
@@ -253,11 +249,9 @@ Widget ThemedContainer({
           alignment: alignment,
           padding: effectivePadding,
           color: Theme.of(context).cardColor.withOpacity(0.2),
-          border: border ??
-              Border.all(
-                color: theme.onSurface.withOpacity(0.2),
-                width: 0.5,
-              ),
+          border:
+              border ??
+              Border.all(color: theme.onSurface.withOpacity(0.2), width: 0.5),
           borderRadius: effectiveBorderRadius,
           boxShadow: [
             BoxShadow(
@@ -266,7 +260,10 @@ Widget ThemedContainer({
               spreadRadius: 0.5,
             ),
           ],
-          child: glassWidget ?? child,
+          child: Material(
+            color: Colors.transparent,
+            child: glassWidget ?? child,
+          ),
         ),
       );
     }
@@ -277,11 +274,9 @@ Widget ThemedContainer({
       margin: margin,
       decoration: BoxDecoration(
         color: color ?? Theme.of(context).cardColor,
-        border: border ??
-            Border.all(
-              color: theme.onSurface.withOpacity(0.6),
-              width: 0.5,
-            ),
+        border:
+            border ??
+            Border.all(color: theme.onSurface.withOpacity(0.6), width: 0.5),
         borderRadius: effectiveBorderRadius,
         boxShadow: [
           BoxShadow(
@@ -291,7 +286,7 @@ Widget ThemedContainer({
           ),
         ],
       ),
-      child: child,
+      child: Material(color: Colors.transparent, child: child),
     );
   });
 }

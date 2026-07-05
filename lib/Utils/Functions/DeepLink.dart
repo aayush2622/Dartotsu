@@ -2,9 +2,6 @@ import 'dart:io';
 
 import 'package:app_links/app_links.dart';
 import 'package:dartotsu_extension_bridge/ExtensionManager.dart';
-import 'package:dartotsu_extension_bridge/Models/Source.dart';
-import 'package:dartotsu_extension_bridge/Services/Aniyomi/AniyomiExtensions.dart';
-import 'package:dartotsu_extension_bridge/Services/Mangayomi/MangayomiExtensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 
@@ -93,36 +90,14 @@ class DeepLink {
   static void _handleDeepLink(Uri uri) {
     if (uri.host != "add-repo") return;
     bool isRepoAdded = false;
-    final scheme = uri.scheme.toLowerCase();
-    final manager = find<ExtensionManager>();
-
-    const mangayomiSchemes = {"dar", "anymex", "sugoireads", "mangayomi"};
-    const aniyomiSchemes = {"aniyomi", "tachiyomi"};
-
-    if (mangayomiSchemes.contains(scheme)) {
-      final repoMap = {
-        ItemType.anime:
-            uri.queryParameters["anime_url"] ?? uri.queryParameters["url"],
-        ItemType.manga: uri.queryParameters["manga_url"],
-        ItemType.novel: uri.queryParameters["novel_url"],
-      };
-      repoMap.forEach((type, url) {
-        if (url != null && url.isNotEmpty) {
-          manager.get<MangayomiExtensions>().addRepo(url, type);
-          isRepoAdded = true;
-        }
-      });
-    } else if (aniyomiSchemes.contains(scheme)) {
-      final url = uri.queryParameters["url"];
-      if (url != null && url.isNotEmpty) {
-        manager.get<AniyomiExtensions>().addRepo(
-              url,
-              scheme == "aniyomi" ? ItemType.anime : ItemType.manga,
-            );
+    final manager = find<ExtensionManager>().managers;
+    for (final handler in manager) {
+      if (handler.schemes.contains(uri.scheme.toLowerCase())) {
+        handler.handleSchemes(uri);
         isRepoAdded = true;
+        break;
       }
     }
-
     snackString(
       isRepoAdded
           ? "Added Repo Links Successfully!"

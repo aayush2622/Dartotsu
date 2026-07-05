@@ -18,6 +18,7 @@ import 'package:window_manager/window_manager.dart';
 
 import 'Api/Updater/AppUpdater.dart';
 import 'Core/Analytics/AnalyticsManager.dart';
+import 'Core/NetworkManager/NetworkBridge.dart';
 import 'Core/NetworkManager/NetworkManager.dart';
 import 'Core/Preferences/PrefManager.dart';
 import 'Core/Preferences/StorageManager.dart';
@@ -31,6 +32,7 @@ import 'Screen/Onboarding/OnboardingScreen.dart';
 import 'Utils/Functions/AppShortcuts.dart';
 import 'Utils/Functions/DeepLink.dart';
 import 'Utils/Functions/GetXFunctions.dart';
+import 'Utils/Functions/SnackBar.dart';
 import 'l10n/app_localizations.dart';
 
 // animationController
@@ -83,12 +85,21 @@ Future<void> init(List<String> args) async {
   await PrefManager.init();
   await Rhttp.init();
   DI.init();
+  final client = find<NetworkManager>();
+  final cookieManager = client.cookieManager;
   await Future.wait([
     Logger.init(),
     DartotsuExtensionBridge.init(
       getDirectory: StorageManager.getDirectory,
       isarInstance: PrefManager.dartotsuPreferences,
-      http: find<NetworkManager>().compatibleClient,
+      http: client.compatibleClient,
+      network: AppBridgeNetwork(cookieManager),
+      onLog: (message, show) {
+        debugPrint("[Bridge LOGS] $message");
+        if (show) {
+          snackString(message);
+        }
+      },
     ),
     initializeDateFormatting(),
   ]);
@@ -150,52 +161,43 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return DpadNavigator(
-      focusMemory: const FocusMemoryOptions(
-        enabled: true,
-        maxHistory: 20,
-      ),
-      enabled: true,
-      onBackPressed: _handleBack,
-      child: Listener(
-        onPointerDown: (event) =>
-            (event.buttons == kBackMouseButton) ? _handleBack() : null,
-        child: Focus(
-          autofocus: true,
-          focusNode: _focusNode,
-          onKeyEvent: (_, event) => appShortcuts(event)
-              ? KeyEventResult.handled
-              : KeyEventResult.ignored,
-          child: DynamicColorBuilder(
-            builder: (lightDynamic, darkDynamic) {
-              return Obx(
-                () {
-                  return GetMaterialApp(
-                    key: ValueKey(theme.local.value),
-                    title: 'Dartotsu',
-                    debugShowCheckedModeBanner: false,
-                    enableLog: true,
-                    localizationsDelegates: const [
-                      AppLocalizations.delegate,
-                      GlobalMaterialLocalizations.delegate,
-                      GlobalWidgetsLocalizations.delegate,
-                      GlobalCupertinoLocalizations.delegate,
-                    ],
-                    supportedLocales: AppLocalizations.supportedLocales,
-                    locale: Locale(theme.local.value),
-                    themeMode: theme.isDarkMode.value
-                        ? ThemeMode.dark
-                        : ThemeMode.light,
-                    theme: getTheme(lightDynamic, theme),
-                    darkTheme: getTheme(darkDynamic, theme),
-                    home: !loadCustomData("initialLoaded", defaultValue: false)!
-                        ? const MainScreen()
-                        : const OnboardingScreen(),
-                  );
-                },
+    return Listener(
+      onPointerDown: (event) =>
+          event.buttons == kBackMouseButton ? _handleBack() : null,
+      child: Focus(
+        autofocus: true,
+        focusNode: _focusNode,
+        onKeyEvent: (_, event) => appShortcuts(event)
+            ? KeyEventResult.handled
+            : KeyEventResult.ignored,
+        child: DynamicColorBuilder(
+          builder: (lightDynamic, darkDynamic) {
+            return Obx(() {
+              return GetMaterialApp(
+                key: ValueKey(theme.local.value),
+                title: 'Dartotsu',
+                debugShowCheckedModeBanner: false,
+                enableLog: true,
+                builder: Dpad.wrap(onBack: _handleBack),
+                localizationsDelegates: const [
+                  AppLocalizations.delegate,
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate,
+                ],
+                supportedLocales: AppLocalizations.supportedLocales,
+                locale: Locale(theme.local.value),
+                themeMode: theme.isDarkMode.value
+                    ? ThemeMode.dark
+                    : ThemeMode.light,
+                theme: getTheme(lightDynamic, theme),
+                darkTheme: getTheme(darkDynamic, theme),
+                home: !loadCustomData("initialLoaded", defaultValue: false)!
+                    ? const MainScreen()
+                    : const OnboardingScreen(),
               );
-            },
-          ),
+            });
+          },
         ),
       ),
     );

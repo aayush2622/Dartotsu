@@ -6,7 +6,6 @@ import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:rhttp/rhttp.dart';
 
-import 'AndroidNetwork.dart';
 import 'CookieManager.dart';
 import 'DnsManager.dart';
 import 'LogInterceptor.dart';
@@ -37,7 +36,8 @@ class NetworkManager extends GetxController {
         userAgent: _userAgent,
         throwOnStatusCode: false,
         tlsSettings: const TlsSettings(
-          trustRootCertificates: true,
+          rootCertSource: RootCertSource.webpki,
+          verifyCertificates: false,
         ),
         timeoutSettings: const TimeoutSettings(
           connectTimeout: Duration(seconds: 15),
@@ -61,7 +61,6 @@ class NetworkManager extends GetxController {
         settings: clientSettings,
       );
 
-      AndroidNetwork.initialize(dns, '');
       return _client;
     } catch (_) {
       rethrow;
@@ -195,10 +194,7 @@ class NetworkManager extends GetxController {
     );
   }
 
-  static dynamic _decodeIfJson(
-    String body,
-    Map<String, List<String>> headers,
-  ) {
+  static dynamic _decodeIfJson(String body, Map<String, List<String>> headers) {
     final contentType = headers['content-type']?.first;
     if (contentType?.contains('application/json') == true) {
       return jsonDecode(body);
@@ -269,11 +265,7 @@ class NetworkException implements Exception {
   final String? message;
   final dynamic data;
 
-  NetworkException({
-    required this.statusCode,
-    this.message,
-    this.data,
-  });
+  NetworkException({required this.statusCode, this.message, this.data});
 
   @override
   String toString() =>

@@ -1,244 +1,149 @@
-import 'dart:io';
-
-import 'package:dartotsu_extension_bridge/Screen/ExtensionList.dart' as e;
+import 'package:dartotsu_extension_bridge/Extensions/DownloadablePlugin.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_instance/src/extension_instance.dart';
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:get/get_utils/src/extensions/string_extensions.dart';
 
-import '../../Core/Preferences/PrefManager.dart';
 import '../../Core/ThemeManager/LanguageSwitcher.dart';
+import '../../Core/ThemeManager/ThemeManager.dart';
 import '../../Core/ThemeManager/language.dart';
+import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Functions/SnackBar.dart';
 import '../../Widgets/Components/AlertDialogBuilder.dart';
-import '../../Widgets/Components/CachedNetworkImage.dart';
+import '../../Widgets/Components/CustomBottomDialog.dart';
 import '../../Widgets/Components/LoadSvg.dart';
-
-class ExtensionList extends StatefulWidget implements e.ExtensionConfig {
-  @override
-  final ItemType itemType;
-  @override
-  final bool isInstalled;
-  @override
-  final String searchQuery;
-  @override
-  final String selectedLanguage;
-  const ExtensionList({
-    required this.itemType,
-    required this.isInstalled,
-    required this.searchQuery,
-    required this.selectedLanguage,
-    super.key,
-  });
-  @override
-  State<ExtensionList> createState() => _ExtensionListScreenState();
-}
-
-class _ExtensionListScreenState extends e.ExtensionList<ExtensionList> {
-  Extension get extension => Get.find<ExtensionManager>().current.value;
-  @override
-  Widget extensionItem(bool isHeader, String lang, Source? source) {
-    final theme = Theme.of(context).colorScheme;
-    if (isHeader) {
-      return Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8),
-        child: Text(
-          completeLanguageName(lang),
-          style: const TextStyle(
-            fontFamily: 'Poppins',
-            fontWeight: FontWeight.bold,
-            fontSize: 16,
-          ),
-        ),
-      );
-    }
-    source = source!;
-    return Card(
-      color: theme.surface,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      child: ListTile(
-        tileColor: theme.surface,
-        leading: _buildIcon(source),
-        title: Text(
-          source.name ?? 'Unknown Source',
-          style: const TextStyle(
-            fontFamily: 'Poppins',
-            fontWeight: FontWeight.bold,
-            fontSize: 15,
-          ),
-        ),
-        subtitle: _buildSubtitle(source, theme),
-        trailing: _buildTrailing(source),
-      ),
-    );
-  }
-
-  Widget _buildIcon(Source source) {
-    final iconUrl = source.iconUrl;
-    if (iconUrl == null ||
-        iconUrl.isEmpty ||
-        !(loadCustomData<bool?>('loadExtensionIcon') ?? true)) {
-      return const Icon(Icons.extension_rounded);
-    }
-    if (iconUrl.startsWith('/')) {
-      final file = File(iconUrl);
-      if (!file.existsSync()) {
-        return const Icon(Icons.extension_rounded);
-      }
-      return Image.file(
-        file,
-        width: 37,
-        height: 37,
-        fit: BoxFit.contain,
-        errorBuilder: (_, __, ___) => const Icon(Icons.extension_rounded),
-      );
-    }
-    return cachedNetworkImage(
-      imageUrl: iconUrl,
-      width: 37,
-      height: 37,
-      fit: BoxFit.contain,
-      placeholder: (_, __) => const Icon(Icons.extension_rounded),
-      errorWidget: (_, __, ___) => const Icon(Icons.extension_rounded),
-    );
-  }
-
-  Widget _buildSubtitle(Source source, ColorScheme theme) {
-    final lang = completeLanguageName(source.lang?.toLowerCase() ?? "unknown");
-    final items = [
-      Text(lang, style: _subtitleTextStyle),
-      if ((source.version ?? '').isNotEmpty)
-        Text("${source.version}", style: _subtitleTextStyle),
-      if (source.isNsfw ?? false)
-        const Text(" (18+)", style: _subtitleTextStyle),
-    ];
-    return Wrap(spacing: 4, runSpacing: 2, children: items);
-  }
-
-  Widget _buildTrailing(Source source) {
-    if (widget.isInstalled) {
-      return Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          if (source.hasUpdate ?? false)
-            IconButton(
-              icon: const Icon(Icons.update_rounded),
-              onPressed: () => extension.updateSource(source),
-            ),
-          IconButton(
-            icon: const Icon(Icons.delete_rounded),
-            onPressed: () => extension.uninstallSource(source),
-          ),
-          ElevatedButton(
-            onPressed: () async {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => TestSearchScreen(source: source),
-                ),
-              );
-            },
-            child: const Text("Test Search"),
-          ),
-          IconButton(
-            icon: const Icon(Icons.settings_rounded),
-            onPressed: () async {
-              var preference = await source.methods.getPreference();
-              if (preference.isEmpty) {
-                snackString("Source doesn't have any settings");
-                return;
-              }
-              /*if (mounted) {
-                navigateToPage(
-                  context,
-                  SourcePreferenceScreen(
-                    source: source,
-                    preference: preference,
-                  ),
-                );
-              }*/
-            },
-          ),
-        ],
-      );
-    }
-    return IconButton(
-      icon: const Icon(Icons.download_rounded),
-      onPressed: () => extension.installSource(source),
-    );
-  }
-
-  static const _subtitleTextStyle = TextStyle(
-    fontFamily: 'Poppins',
-    fontWeight: FontWeight.bold,
-    fontSize: 10,
-  );
-}
+import '../../Widgets/Components/ScrollConfig.dart';
+import 'ExtensionList.dart';
 
 class ExtensionScreen extends StatefulWidget {
   const ExtensionScreen({super.key});
+
   @override
-  State<ExtensionScreen> createState() => _BrowseScreenState();
+  State<ExtensionScreen> createState() => ExtensionScreenState();
 }
 
-class _BrowseScreenState extends ExtensionManagerScreen<ExtensionScreen> {
+class ExtensionScreenState extends State<ExtensionScreen>
+    with TickerProviderStateMixin {
+  late TabController _tabBarController;
+
+  final manager = Get.find<ExtensionManager>();
+
+  final _selectedLanguage = 'All'.obs;
+  final _searchQuery = ''.obs;
+
+  final _textEditingController = TextEditingController();
+
   @override
-  Extension get manager => Get.find<ExtensionManager>().current.value;
+  void initState() {
+    super.initState();
+    manager.initializeAvailable();
+    _tabBarController = TabController(
+      length: ItemType.values.length * 2,
+      vsync: this,
+    );
+  }
+
   @override
-  Text get title => Text(
-    getString.extension(2),
-    style: TextStyle(
-      fontFamily: 'Poppins',
-      fontWeight: FontWeight.bold,
-      fontSize: 16,
-      color: Theme.of(context).colorScheme.primary,
-    ),
-  );
+  void dispose() {
+    _tabBarController.dispose();
+    _textEditingController.dispose();
+    _selectedLanguage.close();
+    _searchQuery.close();
+    super.dispose();
+  }
+
+  ItemType get _currentType => switch (_tabBarController.index ~/ 2) {
+    0 => ItemType.anime,
+    1 => ItemType.manga,
+    _ => ItemType.novel,
+  };
   @override
-  List<Widget> extensionActions(
-    BuildContext context,
-    TabController tabController,
-    String currentLanguage,
-    Future<void> Function(String repoUrl, ItemType type) onRepoSaved,
-    void Function(String currentLanguage) onLanguageChanged,
-  ) {
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context).colorScheme;
+
+    return ScrollConfig(
+      context,
+      child: Scaffold(
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          title: Text(
+            getString.extension(2),
+            style: TextStyle(
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.bold,
+              fontSize: 16.0,
+              color: theme.primary,
+            ),
+          ),
+          iconTheme: IconThemeData(color: theme.primary),
+          actions: [
+            Row(children: [..._buildActions(), const SizedBox(width: 8)]),
+          ],
+        ),
+        body: Column(
+          children: [
+            Obx(
+              () => TabBar(
+                controller: _tabBarController,
+                isScrollable: true,
+                dividerColor: Colors.transparent,
+                indicator: BoxDecoration(
+                  color: theme.surfaceContainerHigh,
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                indicatorPadding: const EdgeInsets.symmetric(
+                  horizontal: 1,
+                  vertical: 6,
+                ),
+                labelPadding: EdgeInsets.zero,
+                labelColor: theme.primary,
+                unselectedLabelColor: theme.onSurfaceVariant,
+                splashFactory: NoSplash.splashFactory,
+                overlayColor: WidgetStateProperty.all(Colors.transparent),
+                tabs: _buildTabs(context),
+              ),
+            ),
+            const SizedBox(height: 8),
+            _searchBar(),
+            Obx(() {
+              return Expanded(
+                child: TabBarView(
+                  controller: _tabBarController,
+                  children: _buildTabViews(
+                    _searchQuery.value,
+                    _selectedLanguage.value,
+                  ),
+                ),
+              );
+            }),
+          ],
+        ),
+      ),
+    );
+  }
+
+  List<Widget> _buildActions() {
     var theme = Theme.of(context).colorScheme;
     return [
-      IconButton(
-        icon: loadSvg("assets/svg/github.svg", color: theme.primary),
-        onPressed: () {
-          var tabIndex = tabController.index;
-          var type = tabIndex <= 1
-              ? ItemType.anime
-              : tabIndex <= 3
-              ? ItemType.manga
-              : ItemType.novel;
-          var text = '';
-          AlertDialogBuilder(context)
-            ..setTitle('${type.name} sources')
-            ..setCustomView(
-              TextField(
-                decoration: const InputDecoration(hintText: 'Repo URL'),
-                onChanged: (value) => text = value,
-              ),
-            )
-            ..setPositiveButton(getString.ok, () => manager.addRepo(text, type))
-            ..show();
-        },
-      ),
+      _buildServiceManager(),
+      _buildRepoManager(),
       IconButton(
         icon: Icon(Icons.language_rounded, color: theme.primary),
         onPressed: () {
-          var language = completeLanguageName(currentLanguage);
+          var language = completeLanguageName(_selectedLanguage.value);
+
           AlertDialogBuilder(context)
             ..setTitle(getString.language)
             ..singleChoiceItems(
               sortedLanguagesMap.keys.toList(),
               sortedLanguagesMap.keys.toList().indexOf(language),
               (index) {
-                onLanguageChanged(
-                  completeLanguageCode(
-                    sortedLanguagesMap.keys.elementAt(index),
-                  ),
+                _selectedLanguage.value = completeLanguageCode(
+                  sortedLanguagesMap.keys.elementAt(index),
                 );
               },
             )
@@ -248,269 +153,574 @@ class _BrowseScreenState extends ExtensionManagerScreen<ExtensionScreen> {
     ];
   }
 
-  @override
-  Widget searchBar(
-    BuildContext context,
-    TextEditingController textEditingController,
-    void Function() onChanged,
-  ) {
+  Widget _buildServiceManager() {
+    final theme = Theme.of(context).colorScheme;
+
+    return AnimatedBuilder(
+      animation: _tabBarController,
+      builder: (_, _) {
+        final type = _currentType;
+
+        return IconButton(
+          icon: ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: Image.asset(
+              manager[type].icon,
+              width: 24,
+              height: 24,
+              fit: BoxFit.cover,
+            ),
+          ),
+          onPressed: () {
+            showCustomBottomDialog(
+              context,
+              CustomBottomDialog(
+                title: "${type.name.capitalizeFirst} Manager",
+                positiveText: getString.ok,
+                positiveCallback: () => Navigator.pop(context),
+                viewList: [
+                  Obx(() {
+                    final current = manager[type];
+                    final managers = manager.managers
+                        .where((e) => e.supports(type))
+                        .toList();
+
+                    return Column(
+                      children: managers.map((m) {
+                        final selected = current.id == m.id;
+                        final enabled =
+                            m.plugin == null || m.plugin!.installed.value;
+
+                        return Opacity(
+                          opacity: enabled ? 1 : 0.5,
+                          child: ThemedContainer(
+                            context: context,
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(24),
+                            ),
+                            margin: const EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: 8,
+                            ),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 2,
+                              vertical: 8,
+                            ),
+                            color: selected ? theme.surfaceContainerHigh : null,
+                            child: ListTile(
+                              enabled: enabled,
+                              hoverColor: Colors.transparent,
+                              onTap: (!enabled || selected)
+                                  ? null
+                                  : () => manager.switchManager(type, m.id),
+                              leading: ClipOval(
+                                child: Image.asset(
+                                  m.icon,
+                                  width: 24,
+                                  height: 24,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              title: Text(
+                                m.name,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              trailing: m.plugin == null
+                                  ? null
+                                  : IconButton(
+                                      icon: Icon(
+                                        enabled ? Icons.delete : Icons.download,
+                                        size: 18,
+                                      ),
+                                      onPressed: () async {
+                                        if (enabled) {
+                                          showDeleteDialog(
+                                            context,
+                                            m.plugin!,
+                                            m.name,
+                                          );
+                                        } else {
+                                          await showInstallDialog(
+                                            context,
+                                            m.plugin!,
+                                            m.name,
+                                          );
+                                        }
+                                      },
+                                    ),
+                            ),
+                          ),
+                        );
+                      }).toList(),
+                    );
+                  }),
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  Widget _buildRepoManager() {
     var theme = Theme.of(context).colorScheme;
+    return IconButton(
+      icon: loadSvg("assets/svg/github.svg", color: theme.primary),
+      onPressed: () {
+        final type = _currentType;
+        showCustomBottomDialog(
+          context,
+          CustomBottomDialog(
+            title: "${type.name.capitalizeFirst} Repositories",
+            positiveText: getString.ok,
+            positiveCallback: () => Navigator.pop(context),
+            negativeText: "Add Repository",
+            negativeCallback: () {
+              final controller = TextEditingController();
+
+              AlertDialogBuilder(context)
+                ..setTitle("Add Repository")
+                ..setCustomView(
+                  TextField(
+                    controller: controller,
+                    decoration: const InputDecoration(
+                      hintText: "Repository URL",
+                    ),
+                  ),
+                )
+                ..setPositiveButton(getString.ok, () async {
+                  try {
+                    await manager[type].addRepo(controller.text, type);
+                  } catch (_) {}
+                })
+                ..show();
+            },
+            viewList: [
+              Obx(() {
+                final extension = manager[type];
+                final repos = extension.state(type).repos.value;
+                final active = extension.state(type).activeRepo.value;
+
+                if (repos.isEmpty) {
+                  return const Padding(
+                    padding: EdgeInsets.all(24),
+                    child: Center(child: Text("No repositories added")),
+                  );
+                }
+
+                return Column(
+                  children: repos.map((repo) {
+                    final selected = active?.url == repo.url;
+
+                    return ThemedContainer(
+                      context: context,
+                      borderRadius: const BorderRadius.all(Radius.circular(24)),
+                      margin: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 8,
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 2,
+                        vertical: 8,
+                      ),
+
+                      color: selected ? theme.surfaceContainerHigh : null,
+                      child: ListTile(
+                        hoverColor: Colors.transparent,
+
+                        onTap: () async {
+                          if (!selected) {
+                            await extension.selectRepo(repo, type);
+                          }
+                        },
+                        leading: repo.iconUrl != null
+                            ? ClipRRect(
+                                borderRadius: BorderRadius.circular(12),
+                                child: Image.network(
+                                  repo.iconUrl!,
+                                  width: 48,
+                                  height: 48,
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (_, _, _) =>
+                                      const Icon(Icons.storage_rounded),
+                                ),
+                              )
+                            : loadSvg(
+                                "assets/svg/github.svg",
+                                color: theme.primary,
+                              ),
+
+                        title: Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                repo.name ??
+                                    Uri.tryParse(repo.url)?.host ??
+                                    repo.url,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        subtitle: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              repo.url,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              "${repo.extensions ?? "?"} extensions",
+                              style: TextStyle(color: theme.primary),
+                            ),
+                          ],
+                        ),
+
+                        trailing: IconButton(
+                          icon: const Icon(Icons.delete_rounded),
+                          onPressed: () async {
+                            await extension.removeRepo(repo.url, type);
+                          },
+                        ),
+                      ),
+                    );
+                  }).toList(),
+                );
+              }),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _searchBar() {
+    final theme = Theme.of(context).colorScheme;
+
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 20),
       child: TextField(
-        controller: textEditingController,
-        onChanged: (_) => onChanged(),
+        controller: _textEditingController,
+        style: const TextStyle(
+          fontFamily: "Poppins",
+          fontSize: 15,
+          fontWeight: FontWeight.w500,
+        ),
         decoration: InputDecoration(
-          hintText: getString.search,
-          suffixIcon: Icon(Icons.search, color: theme.onSurface),
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(28)),
+          hintText: "Search extensions...",
+          prefixIcon: const Icon(Icons.search_rounded),
           filled: true,
-          fillColor: Colors.grey.withOpacity(0.2),
+          fillColor: theme.surfaceContainerHigh,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(24),
+            borderSide: BorderSide.none,
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(24),
+            borderSide: BorderSide.none,
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(24),
+            borderSide: BorderSide(
+              color: theme.primary.withOpacity(.5),
+              width: 1.5,
+            ),
+          ),
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 20,
+            vertical: 16,
+          ),
+        ),
+        onChanged: (v) => _searchQuery.value = v,
+      ),
+    );
+  }
+
+  Widget tabWidget(BuildContext context, String label, int count) {
+    final theme = Theme.of(context).colorScheme;
+
+    return Tab(
+      height: 46,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              label,
+              style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
+            ),
+            const SizedBox(width: 8),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+              decoration: BoxDecoration(
+                color: theme.surfaceContainerHighest,
+                borderRadius: BorderRadius.circular(100),
+              ),
+              child: Text(
+                "$count",
+                style: const TextStyle(
+                  fontSize: 11,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
   }
 
-  @override
-  Widget tabWidget(BuildContext context, String label, int count) {
-    return Tab(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            label,
-            style: const TextStyle(
-              fontFamily: 'Poppins',
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const SizedBox(width: 8),
-          Text(
-            "($count)",
-            style: const TextStyle(
-              fontFamily: 'Poppins',
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+  List<Widget> _buildTabs(BuildContext context) {
+    final tabs = <Widget>[];
 
-  @override
-  ExtensionScreenBuilder get extensionScreenBuilder =>
-      (
-        ItemType itemType,
-        bool isInstalled,
-        String searchQuery,
-        String selectedLanguage,
-      ) {
-        return ExtensionList(
-          itemType: itemType,
-          isInstalled: isInstalled,
-          searchQuery: searchQuery,
-          selectedLanguage: selectedLanguage,
-        );
-      };
-}
+    for (final type in _tabOrder) {
+      final manager = this.manager[type].state(type);
 
-class TestSearchScreen extends StatefulWidget {
-  final Source source;
+      tabs.add(
+        tabWidget(
+          context,
+          'Installed ${type.name}',
+          manager.installed.value.length,
+        ),
+      );
 
-  const TestSearchScreen({super.key, required this.source});
-
-  @override
-  State<TestSearchScreen> createState() => _TestSearchScreenState();
-}
-
-class _TestSearchScreenState extends State<TestSearchScreen> {
-  late SourceMethods methods;
-
-  List<DMedia> results = [];
-  bool loading = false;
-
-  @override
-  void initState() {
-    super.initState();
-
-    methods = widget.source.methods;
-
-    runSearch();
-  }
-
-  Future<void> runSearch() async {
-    setState(() => loading = true);
-
-    try {
-      Pages pages = await methods.search("naruto", 1, []);
-
-      results = pages.list;
-    } catch (e) {
-      debugPrint("Search error: $e");
+      tabs.add(
+        tabWidget(
+          context,
+          'Available ${type.name}',
+          manager.available.value.length,
+        ),
+      );
     }
 
-    setState(() => loading = false);
+    return tabs;
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text("Search Test")),
-      body: loading
-          ? const Center(child: CircularProgressIndicator())
-          : ListView.builder(
-              itemCount: results.length,
-              itemBuilder: (context, index) {
-                final media = results[index];
+  static const _tabOrder = [ItemType.anime, ItemType.manga, ItemType.novel];
+  List<Widget> _buildTabViews(String query, String lang) {
+    final views = <Widget>[];
 
-                return ListTile(
-                  leading: media.cover != null
-                      ? Image.network(
-                          media.cover!,
-                          width: 50,
-                          fit: BoxFit.cover,
-                        )
-                      : null,
-                  title: Text(media.title ?? "No title"),
-                  subtitle: Text(media.url ?? ""),
-                  onTap: () async {
-                    final navigator = Navigator.of(context);
+    for (final type in _tabOrder) {
+      final manager = this.manager[type].state(type);
 
-                    if (!mounted) return;
-                    setState(() => loading = true);
+      final installed = manager.installed.value;
+      final available = manager.available.value;
 
-                    DMedia detailed;
+      views.add(
+        installed.isEmpty
+            ? _emptyMessage('No installed ${type.name} extensions')
+            : ExtensionList(
+                itemType: type,
+                isInstalled: true,
+                searchQuery: query,
+                selectedLanguage: lang,
+              ),
+      );
 
-                    try {
-                      detailed = await methods.getDetail(media);
-                    } catch (e, s) {
-                      debugPrint("Detail error: $e $s");
-                      if (mounted) setState(() => loading = false);
-                      return;
-                    }
+      views.add(
+        manager.loadingAvailable.value
+            ? const Center(
+                child: SizedBox(
+                  width: 36,
+                  height: 36,
+                  child: CircularProgressIndicator(),
+                ),
+              )
+            : available.isEmpty
+            ? _emptyMessage('No available ${type.name} extensions')
+            : ExtensionList(
+                itemType: type,
+                isInstalled: false,
+                searchQuery: query,
+                selectedLanguage: lang,
+              ),
+      );
+    }
 
-                    if (!mounted) return;
+    return views;
+  }
 
-                    setState(() => loading = false);
-
-                    navigator.push(
-                      MaterialPageRoute(
-                        builder: (_) => MediaDetailScreen(
-                          source: widget.source,
-                          media: detailed,
-                        ),
-                      ),
-                    );
-                  },
-                );
-              },
-            ),
+  Widget _emptyMessage(String message) {
+    final theme = Theme.of(context).colorScheme;
+    return Center(
+      child: Text(message, style: TextStyle(color: theme.onSurface)),
     );
   }
 }
 
-class MediaDetailScreen extends StatelessWidget {
-  final Source source;
-  final DMedia media;
+void showDeleteDialog(
+  BuildContext context,
+  DownloadablePlugin plugin,
+  String name,
+) {
+  AlertDialogBuilder(context)
+    ..setTitle("Delete $name?")
+    ..setMessage("Are you sure you want to delete this plugin?")
+    ..setPositiveButton(getString.yes, () async {
+      await plugin.delete();
+      snackString("$name deleted");
+    })
+    ..setNegativeButton(getString.no, () {})
+    ..show();
+}
 
-  const MediaDetailScreen({
-    super.key,
-    required this.source,
-    required this.media,
-  });
+Future<void> showInstallDialog(
+  BuildContext context,
+  DownloadablePlugin plugin,
+  String name,
+) async {
+  Map<String, dynamic> remote;
 
-  @override
-  Widget build(BuildContext context) {
-    final episodes = media.episodes ?? [];
+  try {
+    snackString("Fetching plugin info...");
+    remote = await plugin.fetchRemote();
+  } catch (_) {
+    snackString("Failed to fetch plugin info");
+    return;
+  }
+  if (!context.mounted) return;
+  final scheme = context.colorScheme;
+  final textStyle = Theme.of(context).textTheme.labelMedium;
 
-    return Scaffold(
-      appBar: AppBar(title: Text(media.title ?? "Details")),
-      body: Column(
-        children: [
-          if (media.cover != null)
-            Padding(
-              padding: const EdgeInsets.all(16),
-              child: Image.network(media.cover!, height: 200),
+  final version = remote["versionName"] ?? "";
+  final sizeBytes = remote["fileSize"] ?? 0;
+  final sizeMB = plugin.formatSize(sizeBytes);
+  final description = remote["description"] ?? "";
+  final author = remote["author"] ?? "";
+
+  showCustomBottomDialog(
+    context,
+    CustomBottomDialog(
+      title: "Install $name",
+      viewList: [
+        const SizedBox(height: 8),
+        Center(
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+            decoration: BoxDecoration(
+              color: scheme.primary.withOpacity(0.12),
+              borderRadius: BorderRadius.circular(20),
             ),
-          if (media.description != null)
-            Padding(
-              padding: const EdgeInsets.all(16),
-              child: Text(media.description!),
-            ),
-          const Divider(),
-          Expanded(
-            child: ListView.builder(
-              itemCount: episodes.length,
-              itemBuilder: (context, index) {
-                final ep = episodes[index];
-
-                return ListTile(
-                  title: Text(ep.name ?? "Episode ${ep.episodeNumber}"),
-                  subtitle: Text(ep.url ?? ""),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) =>
-                            EpisodeScreen(source: source, episode: ep),
-                      ),
-                    );
-                  },
-                );
-              },
+            child: Text(
+              version,
+              style: textStyle?.copyWith(
+                color: scheme.primary,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ),
-        ],
-      ),
-    );
-  }
-}
-
-class EpisodeScreen extends StatefulWidget {
-  final Source source;
-  final DEpisode episode;
-
-  const EpisodeScreen({super.key, required this.source, required this.episode});
-
-  @override
-  State<EpisodeScreen> createState() => _EpisodeScreenState();
-}
-
-class _EpisodeScreenState extends State<EpisodeScreen> {
-  late SourceMethods methods;
-
-  bool loading = true;
-  List<Video> videos = [];
-
-  @override
-  void initState() {
-    super.initState();
-    methods = widget.source.methods;
-    load();
-  }
-
-  Future<void> load() async {
-    videos = await methods.getVideoList(widget.episode);
-    setState(() => loading = false);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text(widget.episode.name ?? "Episode")),
-      body: loading
-          ? const Center(child: CircularProgressIndicator())
-          : ListView.builder(
-              itemCount: videos.length,
-              itemBuilder: (context, index) {
-                final v = videos[index];
-
-                return ListTile(
-                  title: Text(v.title ?? "Video ${index + 1}"),
-                  subtitle: Text(v.url),
-                );
-              },
+        ),
+        const SizedBox(height: 18),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Container(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: context.cardColor,
+              borderRadius: BorderRadius.circular(18),
+              border: Border.all(color: scheme.outline.withOpacity(0.2)),
             ),
-    );
-  }
+            child: Obx(() {
+              final downloading = plugin.downloading.value;
+              final progress = plugin.progress.value;
+
+              if (downloading) {
+                return Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    LinearProgressIndicator(
+                      value: progress,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      "${(progress * 100).toStringAsFixed(1)}%",
+                      style: textStyle?.copyWith(fontWeight: FontWeight.w600),
+                    ),
+                  ],
+                );
+              }
+
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.storage_rounded,
+                        size: 16,
+                        color: scheme.primary,
+                      ),
+                      const SizedBox(width: 6),
+                      Text("Size: $sizeMB", style: textStyle),
+                      const SizedBox(width: 16),
+                      if (author.isNotEmpty) ...[
+                        Icon(
+                          Icons.person_rounded,
+                          size: 16,
+                          color: scheme.primary,
+                        ),
+                        const SizedBox(width: 6),
+                        Expanded(
+                          child: Text(
+                            author,
+                            style: textStyle,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
+                    ],
+                  ),
+                  const SizedBox(height: 14),
+                  Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: scheme.surface.withOpacity(0.3),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Text(
+                      description,
+                      style: textStyle?.copyWith(fontSize: 13, height: 1.4),
+                    ),
+                  ),
+                ],
+              );
+            }),
+          ),
+        ),
+        const SizedBox(height: 20),
+      ],
+      negativeText: "Cancel",
+      positiveText: plugin.installed.value
+          ? "Installed"
+          : plugin.hasUpdate
+          ? "Update"
+          : "Install",
+      negativeCallback: () {
+        Navigator.pop(context);
+      },
+      positiveCallback: () async {
+        if (plugin.installed.value && !plugin.hasUpdate) {
+          return;
+        }
+
+        if (plugin.downloading.value) return;
+
+        await plugin.download();
+        if (!context.mounted) return;
+        if (plugin.installed.value) {
+          Navigator.pop(context);
+        }
+      },
+    ),
+  );
 }

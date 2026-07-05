@@ -2,19 +2,12 @@ import 'dart:async';
 import 'dart:collection';
 import 'dart:io';
 
-import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:device_info_plus/device_info_plus.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
 import 'Core/Preferences/StorageManager.dart';
-import 'Utils/Functions/SnackBar.dart';
 
-void logger(
-  String message, {
-  LogLevel logLevel = LogLevel.info,
-  String? tag,
-}) =>
+void logger(String message, {LogLevel logLevel = LogLevel.info, String? tag}) =>
     Logger.log(message, logLevel: logLevel, tag: tag);
 
 class Logger {
@@ -68,11 +61,6 @@ class Logger {
     _startWriter();
 
     unawaited(NativeLogger.startLogStream());
-
-    DartotsuExtensionBridge.onLog = (log, show) {
-      debugPrint('[ExtensionBridge] $log');
-      if (show) snackString(log);
-    };
   }
 
   static void log(
@@ -142,7 +130,8 @@ class Logger {
     required String message,
     String? tag,
   }) {
-    final ts = '${time.hour.toString().padLeft(2, '0')}:'
+    final ts =
+        '${time.hour.toString().padLeft(2, '0')}:'
         '${time.minute.toString().padLeft(2, '0')}:'
         '${time.second.toString().padLeft(2, '0')}.'
         '${time.millisecond.toString().padLeft(3, '0')}';
@@ -246,12 +235,7 @@ class Logger {
   }
 }
 
-enum LogLevel {
-  debug,
-  info,
-  warning,
-  error,
-}
+enum LogLevel { debug, info, warning, error }
 
 class NativeLogger {
   static const _channel = MethodChannel('native_logger');

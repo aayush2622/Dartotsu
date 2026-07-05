@@ -46,52 +46,36 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         showBackButton: true,
         allowImplicitScrolling: true,
         freeze: false,
-        overrideBack: (context, onPressed) => _buildNavButton(
-          context,
-          onPressed,
-          "Back",
-        ),
-        overrideNext: (context, onPressed) => _buildNavButton(
-          context,
-          onPressed,
-          "Next",
-          autoFocus: true,
-        ),
-        overrideSkip: (context, onPressed) => _buildNavButton(
-          context,
-          onPressed,
-          "Skip",
-        ),
-        overrideDone: (context, onPressed) => _buildNavButton(
-          context,
-          onPressed,
-          "Done",
-        ),
+        overrideBack: (context, onPressed) =>
+            _buildNavButton(context, onPressed, "Back"),
+        overrideNext: (context, onPressed) =>
+            _buildNavButton(context, onPressed, "Next", autoFocus: true),
+        overrideSkip: (context, onPressed) =>
+            _buildNavButton(context, onPressed, "Skip"),
+        overrideDone: (context, onPressed) =>
+            _buildNavButton(context, onPressed, "Done"),
         onDone: () => Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-            builder: (_) => const MainScreen(),
-          ),
+          MaterialPageRoute(builder: (_) => const MainScreen()),
         ),
         onChange: (value) => setState(() => _currentPage = value),
         pages: [
           _welcomePage(),
           _buildWelcomeWidget,
           PageViewModel(
-            titleWidget: const Text("Title of introduction page")
-                .animate()
-                .fadeIn(duration: 600.ms)
-                .slideY(begin: 0.3, end: 0),
+            titleWidget: const Text(
+              "Title of introduction page",
+            ).animate().fadeIn(duration: 600.ms).slideY(begin: 0.3, end: 0),
             bodyWidget: const Text(
-                    "Welcome to the app! This is a description of how it works.")
-                .animate()
-                .fadeIn(duration: 800.ms)
-                .slideY(begin: 0.5, end: 0),
-            image: const Center(
-              child: Icon(Icons.waving_hand_rounded, size: 50.0),
-            )
-                .animate()
-                .scale(begin: const Offset(0.5, 0.5), end: const Offset(1, 1))
-                .fadeIn(duration: 800.ms),
+              "Welcome to the app! This is a description of how it works.",
+            ).animate().fadeIn(duration: 800.ms).slideY(begin: 0.5, end: 0),
+            image:
+                const Center(child: Icon(Icons.waving_hand_rounded, size: 50.0))
+                    .animate()
+                    .scale(
+                      begin: const Offset(0.5, 0.5),
+                      end: const Offset(1, 1),
+                    )
+                    .fadeIn(duration: 800.ms),
           ),
         ],
       ),
@@ -114,10 +98,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       bodyWidget: const Text(
         "The new best Anime & Manga experience.\nBuilt for focus. Built for you.",
         textAlign: TextAlign.center,
-      )
-          .animate(target: animate ? 1 : 0)
-          .fadeIn(delay: 200.ms)
-          .slideY(begin: 0.4),
+      ).animate(target: animate ? 1 : 0).fadeIn(delay: 200.ms).slideY(begin: 0.4),
     );
   }
 
@@ -129,17 +110,19 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           .animate(target: animate ? 1 : 0)
           .fadeIn(duration: 800.ms)
           .slideY(begin: 0.3, end: 0),
-      bodyWidget: Column(
-        children: [
-          const Text(
-              "Dartotsu is a complete rewrite of Dantotsu in Flutter.\nIt's a hybrid AniList, MyAnimeList and Simkl support!"),
-          const SizedBox(height: 16),
-          themeDropdown(),
-        ],
-      )
-          .animate(target: animate ? 1 : 0)
-          .fadeIn(duration: 1000.ms)
-          .slideY(begin: 0.3, end: 0),
+      bodyWidget:
+          Column(
+                children: [
+                  const Text(
+                    "Dartotsu is a complete rewrite of Dantotsu in Flutter.\nIt's a hybrid AniList, MyAnimeList and Simkl support!",
+                  ),
+                  const SizedBox(height: 16),
+                  themeDropdown(),
+                ],
+              )
+              .animate(target: animate ? 1 : 0)
+              .fadeIn(duration: 1000.ms)
+              .slideY(begin: 0.3, end: 0),
       image: _buildBackground
           .animate(target: animate ? 1 : 0)
           .fadeIn(duration: 1200.ms)
@@ -181,25 +164,44 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     return DpadFocusable(
       autofocus: autoFocus,
       onSelect: onPressed,
-      builder: (_, isFocused, __) {
-        return InkWell(
-          onTap: onPressed,
-          canRequestFocus: false,
-          borderRadius: radius,
-          child: ThemedContainer(
-            context: context,
-            alignment: Alignment.center,
-            padding: const EdgeInsets.all(12),
-            borderRadius: radius,
-            color: isFocused
-                ? theme.cardColor.withOpacity(0.6)
-                : Colors.transparent,
-            child: Text(
-              label,
-              textAlign: TextAlign.center,
-              style: labelStyle?.copyWith(color: theme.primaryColor),
-            ),
-          ),
+      child: InkWell(
+        onTap: onPressed,
+        canRequestFocus: false,
+        borderRadius: radius,
+        child: Builder(
+          builder: (context) {
+            final theme = Theme.of(context);
+
+            return ThemedContainer(
+              context: context,
+              alignment: Alignment.center,
+              padding: const EdgeInsets.all(12),
+              borderRadius: radius,
+              child: Text(
+                label,
+                textAlign: TextAlign.center,
+                style: labelStyle?.copyWith(color: theme.primaryColor),
+              ),
+            );
+          },
+        ),
+      ),
+      builder: (_, state, child) {
+        return Builder(
+          builder: (context) {
+            final theme = Theme.of(context);
+
+            return ThemedContainer(
+              context: context,
+              alignment: Alignment.center,
+              padding: const EdgeInsets.all(12),
+              borderRadius: radius,
+              color: state.focused
+                  ? theme.cardColor.withOpacity(0.6)
+                  : Colors.transparent,
+              child: child,
+            );
+          },
         );
       },
     );
