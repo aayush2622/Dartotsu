@@ -16,7 +16,9 @@ abstract class BaseScreen<T extends StatefulWidget> extends State<T> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Stack(children: [_buildBackground(), buildContent(context)]),
+      child: Stack(
+        children: [Obx(() => _buildBackground()), buildContent(context)],
+      ),
     );
   }
 
