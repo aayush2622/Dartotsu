@@ -32,16 +32,18 @@ class MainScreenState extends BaseScreen<MainScreen> {
     final serviceController = find<MediaServiceController>();
     return Obx(() {
       final service = serviceController.currentService.value;
-      return Stack(
-        children: [
-          Row(
-            children: [
-              if (!context.isPhone) SizedBox(width: 100, child: _navbar),
-              Expanded(child: _buildBody(service)),
-            ],
-          ),
-          if (context.isPhone) _navbar,
-          /*Positioned(
+      return Scaffold(
+        backgroundColor: Colors.transparent,
+        body: Stack(
+          children: [
+            Row(
+              children: [
+                if (!context.isPhone) SizedBox(width: 100, child: _navbar),
+                Expanded(child: _buildBody(service)),
+              ],
+            ),
+            if (context.isPhone) _navbar,
+            /*Positioned(
                 bottom: 92.bottomBar(),
                 right: 12,
                 child: GestureDetector(
@@ -56,7 +58,8 @@ class MainScreenState extends BaseScreen<MainScreen> {
                   ),
                 ),
               ),*/
-        ],
+          ],
+        ),
       );
     });
   }
