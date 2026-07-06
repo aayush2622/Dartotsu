@@ -68,6 +68,7 @@ enum RefreshId {
 
 var Refresh = Get.put(_RefreshController(), permanent: true);
 
+OverlayEntry? _snackOverlay;
 void snackString(
   String? message, {
   String? clipboard,
@@ -76,93 +77,132 @@ void snackString(
   bool simple = false,
   Widget? child,
 }) {
-  final context = c ?? Get.context;
+  final context = c ?? Get.overlayContext ?? Get.context;
   if (context == null || message == null || message.isEmpty) return;
 
   final theme = Theme.of(context);
-  final scaffold = ScaffoldMessenger.of(context);
 
-  scaffold.hideCurrentSnackBar();
+  _snackOverlay?.remove();
+  _snackOverlay = null;
 
-  final snackBar = SnackBar(
-    backgroundColor: Colors.transparent,
-    behavior: SnackBarBehavior.floating,
-    elevation: 0,
-    margin: const EdgeInsets.fromLTRB(12, 0, 12, 24),
-    duration: const Duration(seconds: 4),
-    dismissDirection: DismissDirection.down,
-    content:
-        ThemedContainer(
-              context: context,
-              borderRadius: BorderRadius.circular(18),
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-              child: GestureDetector(
-                behavior: HitTestBehavior.opaque,
-                onLongPress: () =>
-                    !simple ? copyToClipboard(clipboard ?? message) : null,
-                child: Row(
-                  children: [
-                    icon == null
-                        ? ClipOval(
-                            child: Image.asset(
-                              'assets/images/logo.png',
-                              width: 20,
-                              height: 20,
-                              fit: BoxFit.cover,
-                            ),
-                          )
-                        : Icon(
-                            icon,
-                            size: 20,
-                            color: theme.colorScheme.primary,
+  _snackOverlay = OverlayEntry(
+    builder: (_) => SafeArea(
+      child:
+          IgnorePointer(
+                ignoring: false,
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(12, 0, 12, 24),
+                    child: IntrinsicWidth(
+                      child: Material(
+                        color: Colors.transparent,
+                        child: ThemedContainer(
+                          context: context,
+                          borderRadius: BorderRadius.circular(18),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 14,
                           ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: Text(
-                        message,
-                        maxLines: 3,
-                        overflow: TextOverflow.ellipsis,
-                        style: context.textTheme.bodyLarge?.copyWith(
-                          height: 1.25,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              icon == null
+                                  ? ClipOval(
+                                      child: Image.asset(
+                                        'assets/images/logo.png',
+                                        width: 20,
+                                        height: 20,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    )
+                                  : Icon(
+                                      icon,
+                                      size: 20,
+                                      color: theme.colorScheme.primary,
+                                    ),
+                              const SizedBox(width: 12),
+                              Flexible(
+                                fit: FlexFit.loose,
+                                child: Text(
+                                  message,
+                                  maxLines: 3,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: context.textTheme.bodyLarge?.copyWith(
+                                    height: 1.25,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(width: simple ? 0 : 8),
+                              if (!simple) ...[
+                                const SizedBox(width: 8),
+                                IconButton(
+                                  constraints: const BoxConstraints(),
+                                  padding: EdgeInsets.zero,
+                                  visualDensity: VisualDensity.compact,
+                                  icon: Icon(
+                                    Icons.copy_rounded,
+                                    size: 18,
+                                    color: theme.colorScheme.onSurface
+                                        .withOpacity(0.5),
+                                  ),
+                                  onPressed: () {
+                                    _snackOverlay?.remove();
+                                    _snackOverlay = null;
+                                    copyToClipboard(clipboard ?? message);
+                                  },
+                                ),
+                                IconButton(
+                                  constraints: const BoxConstraints(),
+                                  padding: EdgeInsets.zero,
+                                  visualDensity: VisualDensity.compact,
+                                  icon: Icon(
+                                    Icons.close_rounded,
+                                    size: 18,
+                                    color: theme.colorScheme.onSurface
+                                        .withOpacity(0.5),
+                                  ),
+                                  onPressed: () {
+                                    _snackOverlay?.remove();
+                                    _snackOverlay = null;
+                                  },
+                                ),
+                              ],
+                              if (child != null) ...[
+                                const SizedBox(width: 8),
+                                child,
+                              ],
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                    const SizedBox(width: 8),
-                    if (!simple) ...[
-                      IconButton(
-                        constraints: const BoxConstraints(),
-                        icon: Icon(
-                          Icons.copy_rounded,
-                          size: 18,
-                          color: theme.colorScheme.onSurface.withOpacity(0.5),
-                        ),
-                        onPressed: () {
-                          scaffold.hideCurrentSnackBar();
-                          copyToClipboard(clipboard ?? message);
-                        },
-                      ),
-                      IconButton(
-                        constraints: const BoxConstraints(),
-                        onPressed: scaffold.hideCurrentSnackBar,
-                        icon: Icon(
-                          Icons.close_rounded,
-                          size: 18,
-                          color: theme.colorScheme.onSurface.withOpacity(0.5),
-                        ),
-                      ),
-                    ],
-                    if (child != null) ...[const SizedBox(width: 8), child],
-                  ],
+                  ),
                 ),
+              )
+              .animate()
+              .fadeIn(duration: 150.ms)
+              .slideY(begin: 0.4, curve: Curves.easeOutCubic)
+              .scale(
+                begin: const Offset(0.96, 0.96),
+                curve: Curves.easeOutBack,
               ),
-            )
-            .animate()
-            .fadeIn(duration: 150.ms)
-            .slideY(begin: 0.4, curve: Curves.easeOutCubic)
-            .scale(begin: const Offset(0.96, 0.96), curve: Curves.easeOutBack),
+    ),
   );
 
-  scaffold.showSnackBar(snackBar);
+  final overlayState =
+      Get.key.currentState?.overlay ??
+      Navigator.of(context, rootNavigator: true).overlay;
+
+  if (overlayState == null) return;
+
+  overlayState.insert(_snackOverlay!);
+
+  Future.delayed(const Duration(seconds: 4), () {
+    _snackOverlay?.remove();
+    _snackOverlay = null;
+  });
 }
 
 void copyToClipboard(String text) {
