@@ -32,7 +32,7 @@ class AppBridgeNetwork implements BridgeNetwork {
     final parsed = <StoredCookie>[];
 
     for (final header in cookies) {
-      final cookie = StoredCookie.parse(header, uri.host);
+      final cookie = cookieManager.parseSingleCookie(header, uri);
 
       if (cookie != null) {
         parsed.add(cookie);

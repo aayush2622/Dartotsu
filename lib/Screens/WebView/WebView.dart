@@ -28,22 +28,17 @@ class _WebViewState extends State<WebView> {
   final _canGoBack = false.obs;
   final _canGoForward = false.obs;
   final _isEditing = false.obs;
-
   final _progress = 0.0.obs;
-
   final TextEditingController _searchController = TextEditingController();
   final FocusNode _addressFocus = FocusNode();
 
   final cookieManager = Get.find<NetworkManager>().cookieManager;
-
   PullToRefreshController? _pullToRefreshController;
-
   @override
   void initState() {
     super.initState();
     _url.value = widget.url;
     _searchController.text = widget.url;
-
     if (Platform.isAndroid || Platform.isIOS) {
       _pullToRefreshController = PullToRefreshController(
         onRefresh: () async {
@@ -53,6 +48,16 @@ class _WebViewState extends State<WebView> {
     } else {
       _pullToRefreshController = null;
     }
+  }
+
+  Timer? _cookieSyncTimer;
+
+  Future<void> _syncCookies(WebUri url) async {
+    _cookieSyncTimer?.cancel();
+
+    _cookieSyncTimer = Timer(const Duration(milliseconds: 200), () async {
+      await cookieManager.readCookiesFromWebView(url, _controller);
+    });
   }
 
   Future<void> _updateNavState() async {
@@ -78,15 +83,16 @@ class _WebViewState extends State<WebView> {
   String normalizeUrl(String input) {
     final trimmed = input.trim();
 
-    final uri = Uri.tryParse(trimmed);
-
-    if (uri != null && uri.hasScheme) return trimmed;
+    if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) {
+      return trimmed;
+    }
 
     if (trimmed.contains('.') && !trimmed.contains(' ')) {
       return 'https://$trimmed';
     }
 
-    return 'https://www.google.com/search?q=${Uri.encodeComponent(trimmed)}';
+    final query = Uri.encodeComponent(trimmed);
+    return 'https://www.google.com/search?q=$query';
   }
 
   @override
@@ -102,7 +108,6 @@ class _WebViewState extends State<WebView> {
         leading: IconButton(
           icon: const Icon(Icons.close_rounded),
           onPressed: () => Navigator.pop(context),
-          color: context.colorScheme.primary,
         ),
         title: _buildAddressSurface(),
         actions: [
@@ -112,9 +117,159 @@ class _WebViewState extends State<WebView> {
         ],
       ),
       body: ClipRRect(
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
-        child: Container(color: scheme.surface, child: _buildWebView()),
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
+        child: Container(
+          color: context.colorScheme.surface,
+          child: _buildWebView(),
+        ),
       ),
+    );
+  }
+
+  Widget _buildAddressSurface() {
+    final scheme = context.colorScheme;
+    final uri = Uri.tryParse(_url.value);
+    final isHttps = uri?.scheme == 'https';
+    return Obx(() {
+      return AnimatedSwitcher(
+        duration: const Duration(milliseconds: 180),
+        child: Container(
+          key: ValueKey(_isEditing.value),
+          margin: const EdgeInsets.symmetric(horizontal: 16),
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+          height: 44,
+          decoration: BoxDecoration(
+            color: scheme.surfaceVariant,
+            borderRadius: BorderRadius.circular(16),
+          ),
+          alignment: Alignment.center,
+          child: _isEditing.value
+              ? _buildAddressFieldInline()
+              : GestureDetector(
+                  onTap: () {
+                    _isEditing.value = true;
+                    _addressFocus.requestFocus();
+                    _searchController.selection = TextSelection(
+                      baseOffset: 0,
+                      extentOffset: _searchController.text.length,
+                    );
+                  },
+                  child: Row(
+                    children: [
+                      Icon(
+                        isHttps ? Icons.lock_outline : Icons.info_outline,
+                        size: 16,
+                        color: isHttps
+                            ? Theme.of(context).colorScheme.primary
+                            : Theme.of(context).colorScheme.error,
+                      ),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: Text(
+                          _title.value.isNotEmpty ? _title.value : _url.value,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: ContextExtensions(
+                            context,
+                          ).theme.textTheme.bodyMedium,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+        ),
+      );
+    });
+  }
+
+  Widget _buildAddressFieldInline() {
+    return Focus(
+      onFocusChange: (hasFocus) {
+        if (!hasFocus) {
+          _isEditing.value = false;
+        }
+      },
+      child: TextField(
+        controller: _searchController,
+        focusNode: _addressFocus,
+        style: ContextExtensions(context).textTheme.bodyMedium,
+        autofocus: true,
+        textInputAction: TextInputAction.go,
+        decoration: const InputDecoration(
+          hintText: 'Search or enter URL',
+          border: InputBorder.none,
+          isDense: true,
+        ),
+        onSubmitted: (value) async {
+          final url = normalizeUrl(value);
+          _searchController.text = url;
+          await _controller?.loadUrl(urlRequest: URLRequest(url: WebUri(url)));
+          FocusManager.instance.primaryFocus?.unfocus();
+        },
+      ),
+    );
+  }
+
+  Widget _buildNavigationButtons() {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Obx(
+          () => IconButton(
+            icon: const Icon(Icons.arrow_back_ios_rounded),
+            onPressed: _canGoBack.value
+                ? () async {
+                    await _controller?.goBack();
+                    await _updateNavState();
+                  }
+                : null,
+          ),
+        ),
+        Obx(
+          () => IconButton(
+            icon: const Icon(Icons.arrow_forward_ios_rounded),
+            onPressed: _canGoForward.value
+                ? () async {
+                    await _controller?.goForward();
+                    await _updateNavState();
+                  }
+                : null,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildPopupMenu() {
+    return PopupMenuButton<int>(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      icon: const Icon(Icons.more_vert),
+      onSelected: (value) async {
+        switch (value) {
+          case 0:
+            await _controller?.reload();
+            break;
+          case 1:
+            shareLink(_url.value);
+            break;
+          case 2:
+            await openLinkInBrowser(_url.value);
+            break;
+          case 3:
+            final uri = await _controller?.getUrl();
+            if (uri != null) {
+              await cookieManager.deleteCookiesForDomain(uri.host);
+              await _controller?.reload();
+            }
+            break;
+        }
+      },
+      itemBuilder: (_) => const [
+        PopupMenuItem(value: 0, child: Text('Refresh')),
+        PopupMenuItem(value: 1, child: Text('Share')),
+        PopupMenuItem(value: 2, child: Text('Open in browser')),
+        PopupMenuItem(value: 3, child: Text('Clear cookies')),
+      ],
     );
   }
 
@@ -169,10 +324,62 @@ class _WebViewState extends State<WebView> {
               ),
             );
           },
+          onLoadResource: (_, _) async {
+            final url = await _controller?.getUrl();
+            if (url != null) {
+              await _syncCookies(url);
+            }
+          },
+          shouldInterceptFetchRequest: (controller, fetchRequest) async {
+            final res = await Get.find<NetworkManager>().get(
+              fetchRequest.url.toString(),
+              headers: {
+                for (final e in (fetchRequest.headers ?? {}).entries)
+                  e.key: e.value,
+              },
+            );
+
+            return FetchRequest(
+              url: fetchRequest.url,
+              method: fetchRequest.method,
+              headers: {
+                for (final e in res.headers.entries) e.key: e.value.join(','),
+              },
+              body: res.rawBytes,
+            );
+          },
+          shouldInterceptRequest: (controller, request) async {
+            final res = await Get.find<NetworkManager>().get(
+              request.url.toString(),
+              headers: request.headers,
+            );
+
+            return WebResourceResponse(
+              data: res.rawBytes,
+              statusCode: res.statusCode,
+              reasonPhrase: res.statusMessage,
+              headers: {
+                for (final e in res.headers.entries) e.key: e.value.join(','),
+              },
+              contentType: res.headers['content-type']?.first,
+            );
+          },
+          onReceivedHttpAuthRequest: (_, _) async {
+            final url = await _controller?.getUrl();
+            if (url != null) {
+              await _syncCookies(url);
+            }
+            return null;
+          },
+          onLoadStart: (_, url) async {
+            if (url != null) {
+              await cookieManager.applyCookiesToWebView(_controller);
+            }
+          },
           onProgressChanged: (_, progress) => _progress.value = progress / 100,
           onLoadStop: (_, url) async {
             if (url != null) {
-              await cookieManager.readCookiesFromWebView(url, _controller);
+              await _syncCookies(url);
             }
             await _updateNavState();
           },
@@ -181,7 +388,7 @@ class _WebViewState extends State<WebView> {
           },
           onUpdateVisitedHistory: (_, url, _) async {
             if (url != null) {
-              await cookieManager.readCookiesFromWebView(url, _controller);
+              await _syncCookies(url);
             }
             await _updateNavState();
           },
@@ -203,142 +410,12 @@ class _WebViewState extends State<WebView> {
     );
   }
 
-  Widget _buildAddressSurface() {
-    final uri = Uri.tryParse(_url.value);
-    final isHttps = uri?.scheme == 'https';
-    final host = uri?.host ?? _url.value;
-    return Obx(() {
-      return Container(
-        margin: const EdgeInsets.symmetric(horizontal: 16),
-        padding: const EdgeInsets.symmetric(horizontal: 12),
-        height: 44,
-        decoration: BoxDecoration(
-          color: context.colorScheme.surfaceVariant,
-          borderRadius: BorderRadius.circular(16),
-        ),
-        alignment: Alignment.center,
-        child: _isEditing.value
-            ? TextField(
-                controller: _searchController,
-                focusNode: _addressFocus,
-                autofocus: true,
-                textInputAction: TextInputAction.go,
-                decoration: const InputDecoration(
-                  border: InputBorder.none,
-                  hintText: "Search or enter URL",
-                ),
-                onSubmitted: (value) async {
-                  FocusScope.of(context).unfocus();
-
-                  final url = normalizeUrl(value);
-                  await _controller?.loadUrl(
-                    urlRequest: URLRequest(url: WebUri(url)),
-                  );
-
-                  _isEditing.value = false;
-                },
-              )
-            : GestureDetector(
-                onTap: () {
-                  _isEditing.value = true;
-                  _addressFocus.requestFocus();
-                },
-                child: Row(
-                  children: [
-                    Icon(
-                      isHttps ? Icons.lock_outline : Icons.info_outline,
-                      size: 16,
-                      color: context.colorScheme.primary,
-                    ),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: Text(
-                        style: ContextExtensions(context).textTheme.titleMedium,
-                        _title.value.isNotEmpty ? _title.value : host,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-      );
-    });
-  }
-
-  Widget _buildNavigationButtons() {
-    return Row(
-      children: [
-        Obx(
-          () => IconButton(
-            icon: Icon(
-              Icons.arrow_back_ios_new_rounded,
-              color: _canGoBack.value
-                  ? context.colorScheme.primary
-                  : context.colorScheme.onSurfaceVariant,
-            ),
-            onPressed: _canGoBack.value
-                ? () async {
-                    await _controller?.goBack();
-                    await _updateNavState();
-                  }
-                : null,
-          ),
-        ),
-        Obx(
-          () => IconButton(
-            icon: Icon(
-              Icons.arrow_forward_ios_rounded,
-              color: _canGoForward.value
-                  ? context.colorScheme.primary
-                  : context.colorScheme.onSurfaceVariant,
-            ),
-            onPressed: _canGoForward.value
-                ? () async {
-                    await _controller?.goForward();
-                    await _updateNavState();
-                  }
-                : null,
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildPopupMenu() {
-    return PopupMenuButton<int>(
-      iconColor: context.colorScheme.primary,
-      onSelected: (value) async {
-        switch (value) {
-          case 0:
-            await _controller?.reload();
-            break;
-          case 1:
-            shareLink(_url.value);
-            break;
-          case 2:
-            await openLinkInBrowser(_url.value);
-            break;
-          case 3:
-            final uri = await _controller?.getUrl();
-            if (uri != null) {
-              cookieManager.deleteCookiesForDomain(uri.host);
-            }
-            break;
-        }
-      },
-      itemBuilder: (_) => const [
-        PopupMenuItem(value: 0, child: Text('Refresh')),
-        PopupMenuItem(value: 1, child: Text('Share')),
-        PopupMenuItem(value: 2, child: Text('Open in browser')),
-        PopupMenuItem(value: 3, child: Text('Clear cookies')),
-      ],
-    );
-  }
-
   @override
   void dispose() {
     _addressFocus.dispose();
     _searchController.dispose();
+    _controller = null;
+    _cookieSyncTimer?.cancel();
     super.dispose();
   }
 }
