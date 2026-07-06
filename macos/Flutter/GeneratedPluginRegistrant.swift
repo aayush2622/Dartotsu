@@ -6,7 +6,6 @@ import FlutterMacOS
 import Foundation
 
 import app_links
-import dartotsu_extension_bridge
 import device_info_plus
 import dynamic_color
 import file_picker
@@ -30,7 +29,6 @@ import window_to_front
 
 func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
   AppLinksMacosPlugin.register(with: registry.registrar(forPlugin: "AppLinksMacosPlugin"))
-  DartotsuExtensionBridgePlugin.register(with: registry.registrar(forPlugin: "DartotsuExtensionBridgePlugin"))
   DeviceInfoPlusMacosPlugin.register(with: registry.registrar(forPlugin: "DeviceInfoPlusMacosPlugin"))
   DynamicColorPlugin.register(with: registry.registrar(forPlugin: "DynamicColorPlugin"))
   FilePickerPlugin.register(with: registry.registrar(forPlugin: "FilePickerPlugin"))

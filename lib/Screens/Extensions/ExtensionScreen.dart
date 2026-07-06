@@ -31,7 +31,6 @@ class ExtensionScreenState extends State<ExtensionScreen>
 
   final manager = Get.find<ExtensionManager>();
 
-  final _selectedLanguage = 'All'.obs;
   final _searchQuery = ''.obs;
 
   final _textEditingController = TextEditingController();
@@ -44,13 +43,17 @@ class ExtensionScreenState extends State<ExtensionScreen>
       length: ItemType.values.length * 2,
       vsync: this,
     );
+
+    _tabBarController.addListener(() {
+      if (_tabBarController.indexIsChanging) return;
+    });
   }
 
   @override
   void dispose() {
     _tabBarController.dispose();
     _textEditingController.dispose();
-    _selectedLanguage.close();
+
     _searchQuery.close();
     super.dispose();
   }
@@ -113,10 +116,7 @@ class ExtensionScreenState extends State<ExtensionScreen>
               return Expanded(
                 child: TabBarView(
                   controller: _tabBarController,
-                  children: _buildTabViews(
-                    _searchQuery.value,
-                    _selectedLanguage.value,
-                  ),
+                  children: _buildTabViews(_searchQuery.value),
                 ),
               );
             }),
@@ -134,18 +134,27 @@ class ExtensionScreenState extends State<ExtensionScreen>
       IconButton(
         icon: Icon(Icons.language_rounded, color: theme.primary),
         onPressed: () {
-          var language = completeLanguageName(_selectedLanguage.value);
-
+          final type = _currentType;
+          final extension = manager[type];
+          final languages = extension.getLanguages(type);
+          final state = extension.state(type);
           AlertDialogBuilder(context)
             ..setTitle(getString.language)
-            ..singleChoiceItems(
-              sortedLanguagesMap.keys.toList(),
-              sortedLanguagesMap.keys.toList().indexOf(language),
-              (index) {
-                _selectedLanguage.value = completeLanguageCode(
-                  sortedLanguagesMap.keys.elementAt(index),
-                );
+            ..multiChoiceItems(
+              languages.map(completeLanguageName).toList(),
+              languages.map(state.selectedLanguages.contains).toList(),
+              (checked) {
+                final selected = <String>{
+                  for (var i = 0; i < languages.length; i++)
+                    if (checked[i]) languages[i],
+                };
+
+                extension.saveSelectedLanguages(type, selected);
               },
+            )
+            ..setNegativeButton(
+              "Reset",
+              () => extension.saveSelectedLanguages(type, {}),
             )
             ..show();
         },
@@ -506,7 +515,7 @@ class ExtensionScreenState extends State<ExtensionScreen>
   }
 
   static const _tabOrder = [ItemType.anime, ItemType.manga, ItemType.novel];
-  List<Widget> _buildTabViews(String query, String lang) {
+  List<Widget> _buildTabViews(String query) {
     final views = <Widget>[];
 
     for (final type in _tabOrder) {
@@ -522,7 +531,6 @@ class ExtensionScreenState extends State<ExtensionScreen>
                 itemType: type,
                 isInstalled: true,
                 searchQuery: query,
-                selectedLanguage: lang,
               ),
       );
 
@@ -541,7 +549,6 @@ class ExtensionScreenState extends State<ExtensionScreen>
                 itemType: type,
                 isInstalled: false,
                 searchQuery: query,
-                selectedLanguage: lang,
               ),
       );
     }

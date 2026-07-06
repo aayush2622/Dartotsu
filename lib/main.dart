@@ -130,7 +130,7 @@ Future init() async {
   await MpvConf.init();
   MediaService.init();
   TypeFactory.init();
-  
+
   MediaKit.ensureInitialized();
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
     await WindowManager.instance.ensureInitialized();
@@ -392,8 +392,6 @@ class MainScreenState extends State<MainScreen> {
             bottom: 92.bottomBar(),
             right: 12,
             child: GestureDetector(
-              onLongPress: () =>
-                  service.searchScreen?.onSearchIconLongClick(context),
               onTap: () => service.searchScreen?.onSearchIconClick(context),
               child: ThemedContainer(
                 context: context,

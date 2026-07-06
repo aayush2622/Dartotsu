@@ -25,7 +25,7 @@ abstract class BaseParser extends GetxController {
 
   StreamSubscription<List<Source>>? _sourceListSubscription;
   Worker? _managerWorker;
-
+  Worker? _languageWorker;
   void initSourceList(Media media) {
     final isAnime = media.anime != null;
     final itemType = isAnime
@@ -39,8 +39,18 @@ abstract class BaseParser extends GetxController {
         '${extensionManager[itemType].name}_${itemType.name}_order';
 
     void updateSourceList(List<Source> sources) {
+      final selectedLanguages = extensionManager[itemType]
+          .state(itemType)
+          .selectedLanguages;
+      final filteredSources = selectedLanguages.isEmpty
+          ? sources
+          : sources.where((source) {
+              final lang = source.lang?.toLowerCase() ?? '';
+              return selectedLanguages.contains(lang);
+            }).toList();
+
       final sortedSources = [
-        ...applySavedOrder(List<Source>.from(sources), orderKey),
+        ...applySavedOrder(List<Source>.from(filteredSources), orderKey),
         AnimeLocalSource(),
       ];
 
@@ -81,13 +91,19 @@ abstract class BaseParser extends GetxController {
 
     void subscribeToCurrentManager() {
       _sourceListSubscription?.cancel();
+      _languageWorker?.dispose();
 
       final manager = extensionManager[itemType];
-      final installedRx = manager.state(itemType).installed;
+      final state = manager.state(itemType);
 
-      updateSourceList(installedRx.value);
+      updateSourceList(state.installed.value);
 
-      _sourceListSubscription = installedRx.listen(updateSourceList);
+      _sourceListSubscription = state.installed.listen(updateSourceList);
+
+      _languageWorker = ever<Set<String>>(
+        state.selectedLanguages,
+        (_) => updateSourceList(state.installed.value),
+      );
     }
 
     _sourceListSubscription?.cancel();
@@ -126,6 +142,7 @@ abstract class BaseParser extends GetxController {
     _currentOperation?.cancel();
     _sourceListSubscription?.cancel();
     _managerWorker?.dispose();
+    _languageWorker?.dispose();
     super.dispose();
   }
 

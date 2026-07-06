@@ -5,6 +5,7 @@
 list(APPEND FLUTTER_PLUGIN_LIST
   dartotsu_extension_bridge
   dynamic_color
+  flutter_inappwebview_linux
   flutter_qjs
   gtk
   isar_community_flutter_libs

@@ -15,14 +15,12 @@ class ExtensionList extends StatefulWidget {
   final ItemType itemType;
   final bool isInstalled;
   final String searchQuery;
-  final String selectedLanguage;
 
   const ExtensionList({
     super.key,
     required this.itemType,
     required this.isInstalled,
     required this.searchQuery,
-    required this.selectedLanguage,
   });
 
   @override
@@ -36,12 +34,10 @@ class _ExtensionListState extends State<ExtensionList> {
 
   Extension get extension => manager[widget.itemType];
 
+  Set<String> get selectedLanguages => state.selectedLanguages;
   ExtensionState get state => extension.state(widget.itemType);
 
   String get _search => widget.searchQuery.trim().toLowerCase();
-
-  bool get _showAllLanguages =>
-      widget.selectedLanguage == 'All' || widget.selectedLanguage == 'all';
 
   String get _orderKey => '${extension.name}_${widget.itemType.name}_order';
 
@@ -184,10 +180,14 @@ class _ExtensionListState extends State<ExtensionList> {
       List<Source>.from(state.installed.value),
     );
 
-    if (_search.isEmpty) return installed;
-
     return installed.where((source) {
-      return source.name?.toLowerCase().contains(_search) ?? false;
+      final matchesSearch =
+          source.name?.toLowerCase().contains(_search) ?? false;
+
+      final matchesLanguage =
+          selectedLanguages.isEmpty || selectedLanguages.contains(source.lang);
+
+      return matchesSearch && matchesLanguage;
     }).toList();
   }
 
@@ -195,9 +195,9 @@ class _ExtensionListState extends State<ExtensionList> {
     final grouped = <String, List<Source>>{};
 
     for (final source in state.available.value) {
-      final lang = source.lang ?? 'Unknown';
+      final lang = source.lang?.toLowerCase() ?? 'Unknown';
 
-      if (!_showAllLanguages && lang != widget.selectedLanguage) {
+      if (selectedLanguages.isNotEmpty && !selectedLanguages.contains(lang)) {
         continue;
       }
 

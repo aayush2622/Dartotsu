@@ -157,7 +157,7 @@ class AnilistMangaScreen extends BaseMangaScreen {
     return [
       LayoutBuilder(
         builder: (context, constraints) {
-          const spacing = 16.0;
+          final spacing = context.isPhone ? 0.0 : 16.0;
           final horizontalPadding = context.isPhone ? 0.0 : 16.0;
           final maxWidth = constraints.maxWidth - (horizontalPadding * 2);
 
@@ -183,7 +183,7 @@ class AnilistMangaScreen extends BaseMangaScreen {
                         children: children
                             .map(
                               (child) => Padding(
-                                padding: const EdgeInsets.only(bottom: spacing),
+                                padding: EdgeInsets.only(bottom: spacing),
                                 child: child,
                               ),
                             )
@@ -195,7 +195,7 @@ class AnilistMangaScreen extends BaseMangaScreen {
                         children: children,
                       ),
 
-                const SizedBox(height: spacing),
+                SizedBox(height: spacing),
 
                 popularSection,
                 const SizedBox(height: 128),
