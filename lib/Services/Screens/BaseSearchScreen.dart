@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../Widgets/CustomBottomDialog.dart';
+import '../../main.dart';
 
 abstract class BaseSearchScreen extends GetxController {
   var page = 1;
@@ -16,9 +17,7 @@ abstract class BaseSearchScreen extends GetxController {
 
   bool get paging => true;
 
-  Rx<SearchResults> searchResults = SearchResults(
-    type: SearchType.ANIME,
-  ).obs;
+  Rx<SearchResults> searchResults = SearchResults(type: SearchType.ANIME).obs;
 
   RxBool showHistory = true.obs;
 
@@ -49,63 +48,63 @@ abstract class BaseSearchScreen extends GetxController {
     canLoadMore.value = true;
   }
 
-  void onSearchIconLongClick(BuildContext context) {}
-
-  void onSearchIconClick(
-    BuildContext context,
-  ) {
-    if (searchTypes.isEmpty) return;
-    if (searchTypes.length == 1) {
-      navigateToPage(
-        context,
-        SearchScreen(
-          title: searchTypes[0],
-          args: null,
-        ),
-      );
+  void onSearchIconClick(BuildContext context) {
+    if (navbar.selectedIndex == 0) {
+      navigateToPage(context, SearchScreen(title: searchTypes[0], args: null));
+      return;
+    } else if (navbar.selectedIndex == 2) {
+      navigateToPage(context, SearchScreen(title: searchTypes[1], args: null));
       return;
     }
-    var dialog = CustomBottomDialog(title: 'Search', viewList: [
-      ListView.builder(
-        shrinkWrap: true,
-        itemCount: searchTypes.length,
-        itemBuilder: (BuildContext context, int index) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-            child: Card(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12.0),
+    if (searchTypes.isEmpty) return;
+    if (searchTypes.length == 1) {
+      navigateToPage(context, SearchScreen(title: searchTypes[0], args: null));
+      return;
+    }
+    var dialog = CustomBottomDialog(
+      title: 'Search',
+      viewList: [
+        ListView.builder(
+          shrinkWrap: true,
+          itemCount: searchTypes.length,
+          itemBuilder: (BuildContext context, int index) {
+            return Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 8.0,
+                vertical: 4.0,
               ),
-              elevation: 4,
-              child: InkWell(
-                borderRadius: BorderRadius.circular(12.0),
-                onTap: () {
-                  Navigator.pop(context);
-                  navigateToPage(
-                    context,
-                    SearchScreen(
-                      title: searchTypes[index],
-                      args: null,
-                    ),
-                  );
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Text(
-                    searchTypes[index].name,
-                    style: const TextStyle(
-                      fontFamily: 'Poppins',
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.w600,
+              child: Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12.0),
+                ),
+                elevation: 4,
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(12.0),
+                  onTap: () {
+                    Navigator.pop(context);
+                    navigateToPage(
+                      context,
+                      SearchScreen(title: searchTypes[index], args: null),
+                    );
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Text(
+                      searchTypes[index].name,
+                      style: const TextStyle(
+                        fontFamily: 'Poppins',
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-          );
-        },
-      ),
-    ]);
+            );
+          },
+        ),
+      ],
+    );
     showCustomBottomDialog(context, dialog);
   }
 

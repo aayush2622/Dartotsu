@@ -1,6 +1,5 @@
 import 'package:dartotsu/Api/Anilist/Screen/Widgets/SearchFilter.dart';
 import 'package:dartotsu/DataClass/User.dart';
-import 'package:dartotsu/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -10,8 +9,6 @@ import '../../../Adaptor/Media/Widgets/MediaSection.dart';
 import '../../../Adaptor/User/Widgets/UserSection.dart';
 import '../../../DataClass/Media.dart';
 import '../../../DataClass/SearchResults.dart';
-import '../../../Functions/Function.dart';
-import '../../../Screens/Search/SearchScreen.dart';
 import '../../../Services/Screens/BaseSearchScreen.dart';
 import '../Anilist.dart';
 
@@ -22,13 +19,13 @@ class AnilistSearchScreen extends BaseSearchScreen {
 
   @override
   List<SearchType> get searchTypes => [
-        SearchType.ANIME,
-        SearchType.MANGA,
-        SearchType.CHARACTER,
-        SearchType.STAFF,
-        SearchType.STUDIO,
-        SearchType.USER
-      ];
+    SearchType.ANIME,
+    SearchType.MANGA,
+    SearchType.CHARACTER,
+    SearchType.STAFF,
+    SearchType.STUDIO,
+    SearchType.USER,
+  ];
 
   var searchResult = Rxn<List<Object>?>();
 
@@ -78,30 +75,10 @@ class AnilistSearchScreen extends BaseSearchScreen {
   }
 
   @override
-  void onSearchIconLongClick(BuildContext context) {
-    if (navbar.selectedIndex == 0) {
-      navigateToPage(
-        context,
-        SearchScreen(
-          title: searchTypes[0],
-          args: null,
-        ),
-      );
-    } else if (navbar.selectedIndex == 2) {
-      navigateToPage(
-        context,
-        SearchScreen(
-          title: searchTypes[1],
-          args: null,
-        ),
-      );
-    }
-  }
-
-  @override
   Future<void>? loadNextPage() async {
-    searchResults.value.page =
-        searchResults.value.page != null ? searchResults.value.page! + 1 : 2;
+    searchResults.value.page = searchResults.value.page != null
+        ? searchResults.value.page! + 1
+        : 2;
     var res = await Anilist.query?.search(searchResults.value);
     if (res != null) {
       searchResult.value = [...searchResult.value ?? [], ...results(res) ?? []];
@@ -197,23 +174,21 @@ class AnilistSearchScreen extends BaseSearchScreen {
               children: [
                 Expanded(
                   child: ChipsWidget(
-                    chips: searchResults.value.toChipList().map(
-                      (label) {
-                        return ChipData(
-                          label: label.text.replaceAll("_", " "),
-                          action: () {
-                            searchResults.value.removeChip(label);
-                            if (searchResults.value.toChipList().isEmpty &&
-                                (searchResults.value.search == null ||
-                                    searchResults.value.search!.isEmpty)) {
-                              showHistory.value = true;
-                            } else {
-                              search();
-                            }
-                          },
-                        );
-                      },
-                    ).toList(),
+                    chips: searchResults.value.toChipList().map((label) {
+                      return ChipData(
+                        label: label.text.replaceAll("_", " "),
+                        action: () {
+                          searchResults.value.removeChip(label);
+                          if (searchResults.value.toChipList().isEmpty &&
+                              (searchResults.value.search == null ||
+                                  searchResults.value.search!.isEmpty)) {
+                            showHistory.value = true;
+                          } else {
+                            search();
+                          }
+                        },
+                      );
+                    }).toList(),
                   ),
                 ),
                 Padding(
@@ -243,7 +218,7 @@ class AnilistSearchScreen extends BaseSearchScreen {
             const SizedBox(height: 4),
           ],
         );
-      })
+      }),
     ];
   }
 
@@ -259,8 +234,6 @@ class AnilistSearchScreen extends BaseSearchScreen {
     ];
   }
 
-
-
   List<Widget> userResults(BuildContext context) {
     return [
       userSection(
@@ -274,7 +247,9 @@ class AnilistSearchScreen extends BaseSearchScreen {
   }
 
   List<Widget> animeAndMangaResults(
-      BuildContext context, SearchType mediaType) {
+    BuildContext context,
+    SearchType mediaType,
+  ) {
     return [
       MediaSection(
         context: context,
@@ -287,39 +262,33 @@ class AnilistSearchScreen extends BaseSearchScreen {
   }
 
   Widget _buildTrailingIcon(BuildContext context) {
-    final icons = [
-      Icons.view_list_sharp,
-      Icons.grid_view_rounded,
-    ];
+    final icons = [Icons.view_list_sharp, Icons.grid_view_rounded];
 
     final theme = Theme.of(context).colorScheme;
     return Row(
-      children: List.generate(
-        icons.length,
-        (index) {
-          var value = index == 0 ? 2 : 3;
-          final isSelected = value == type.value;
-          return Padding(
-            padding: const EdgeInsets.only(left: 10),
-            child: IconButton(
-              icon: Transform(
-                alignment: Alignment.center,
-                transform: index == 0
-                    ? Matrix4.rotationY(3.14159)
-                    : Matrix4.identity(),
-                child: Icon(icons[index]),
-              ),
-              iconSize: 24,
-              color: isSelected
-                  ? theme.onSurface
-                  : theme.onSurface.withOpacity(0.33),
-              onPressed: () {
-                if (!isSelected) type.value = value;
-              },
+      children: List.generate(icons.length, (index) {
+        var value = index == 0 ? 2 : 3;
+        final isSelected = value == type.value;
+        return Padding(
+          padding: const EdgeInsets.only(left: 10),
+          child: IconButton(
+            icon: Transform(
+              alignment: Alignment.center,
+              transform: index == 0
+                  ? Matrix4.rotationY(3.14159)
+                  : Matrix4.identity(),
+              child: Icon(icons[index]),
             ),
-          );
-        },
-      ),
+            iconSize: 24,
+            color: isSelected
+                ? theme.onSurface
+                : theme.onSurface.withOpacity(0.33),
+            onPressed: () {
+              if (!isSelected) type.value = value;
+            },
+          ),
+        );
+      }),
     );
   }
 }
