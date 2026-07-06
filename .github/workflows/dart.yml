@@ -442,7 +442,7 @@ jobs:
           overrwrite: true
 
   build_macos:
-    runs-on: macos-latest
+    runs-on: macos-26
     if: |
       (github.event_name == 'push' && (contains(github.event.head_commit.message, '[build.macos]') || contains(github.event.head_commit.message, '[build.all]'))) ||
       (github.event_name == 'workflow_dispatch' && (inputs.build_targets == 'macos' || inputs.build_targets == 'all'))
@@ -456,6 +456,9 @@ jobs:
       - *checkout
       - *prepare_flutter
       - *setup_flutter
+      - uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: '26.3'
       - *cache_flutter_normal
       - *cache_flutter_clean
       - *setup_env

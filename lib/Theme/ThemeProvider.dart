@@ -56,10 +56,6 @@ class ThemeNotifier extends ChangeNotifier {
   Future<void> setGlassEffect(bool useGlassEffect) async {
     _useGlassMode = useGlassEffect;
     saveData(PrefName.useGlassMode, useGlassEffect);
-    if (useGlassEffect) {
-      //setOled(false);
-      setMaterialYou(false);
-    }
     notifyListeners();
   }
 
