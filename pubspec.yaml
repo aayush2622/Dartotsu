@@ -99,10 +99,10 @@ dependencies:
       ref: master
       path: flutter_web_auth_2
   dartotsu_extension_bridge:
-   path: ../DartotsuExtensionBridge
-   #git:
-      #url: https://github.com/aayush2622/DartotsuExtensionBridge.git
-      #ref: master
+   #path: ../DartotsuExtensionBridge
+   git:
+      url: https://github.com/aayush2622/DartotsuExtensionBridge.git
+      ref: master
   string_similarity: ^2.2.0
   rhttp:
     git:
