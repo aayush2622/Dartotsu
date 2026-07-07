@@ -31,7 +31,7 @@ import 'Preferences/PrefManager.dart';
     _logFile.writeAsStringSync(logMessage, mode: FileMode.append);
   }
 }*/
-void logger(String message, {LogLevel logLevel = LogLevel.info}) =>
+void logger(String message, {LogLevel logLevel = LogLevel.info, bool? show}) =>
     Logger.log(message, logLevel: logLevel);
 
 class Logger {

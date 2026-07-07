@@ -326,29 +326,24 @@ class _ExtensionListState extends State<ExtensionList> {
       );
     }
 
-    return Column(
-      children: [
-        const SizedBox(height: 12),
-        Row(
-          children: [
-            chip(completeLanguageName(source.lang?.toLowerCase() ?? 'unknown')),
+    return Padding(
+      padding: const EdgeInsets.only(top: 12),
+      child: Wrap(
+        spacing: 6,
+        runSpacing: 6,
+        children: [
+          chip(completeLanguageName(source.lang?.toLowerCase() ?? 'unknown')),
 
-            if ((source.version ?? '').isNotEmpty) ...[
-              const SizedBox(width: 6),
-              chip('v${source.version}'),
-            ],
+          if ((source.version ?? '').isNotEmpty) chip('v${source.version}'),
 
-            if (source.isNsfw ?? false) ...[
-              const SizedBox(width: 6),
-              chip(
-                '18+',
-                background: theme.errorContainer.withOpacity(.35),
-                foreground: theme.error,
-              ),
-            ],
-          ],
-        ),
-      ],
+          if (source.isNsfw ?? false)
+            chip(
+              '18+',
+              background: theme.errorContainer.withOpacity(.35),
+              foreground: theme.error,
+            ),
+        ],
+      ),
     );
   }
 

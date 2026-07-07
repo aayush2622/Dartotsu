@@ -119,7 +119,8 @@ class MediaPlayerState extends State<MediaPlayer>
           currentQuality,
           completed ? Duration.zero : Duration(seconds: currentProgress ?? 0),
         )
-        .catchError((e) {
+        .catchError((e, s) {
+          debugPrint("Error opening video: $e\n$s");
           if (mounted) {
             Navigator.pop(context);
           }

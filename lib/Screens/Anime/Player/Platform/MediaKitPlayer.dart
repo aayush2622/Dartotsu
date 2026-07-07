@@ -161,6 +161,9 @@ class MediaKitPlayer extends GetxController {
       final addon = Get.find<AddonManager>().get<LibtorrentAddon>();
 
       if (!addon.installed.value) {
+        debugPrint(
+          "Libtorrent addon is not installed. Please install it from Addons.",
+        );
         throw StateError(
           "Libtorrent addon is not installed. Please install it from Addons.",
         );
@@ -211,6 +214,8 @@ class MediaKitPlayer extends GetxController {
   void dispose() {
     super.dispose();
     player.dispose();
+    final addon = Get.find<AddonManager>().get<LibtorrentAddon>();
+    addon.stopStream();
   }
 
   void listenToPlayerStream() {
