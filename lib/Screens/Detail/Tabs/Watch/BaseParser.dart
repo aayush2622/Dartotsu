@@ -20,6 +20,10 @@ abstract class BaseParser extends GetxController {
   var status = Rxn<String>(null);
   var source = Rxn<Source>(null);
   var error = Rxn<ParserError>();
+
+  var scanlator = Rxn<List<String>>(null);
+
+  var toggledScanlators = Rxn<List<bool>>(null);
   final Rx<List<Source>> sourceList = Rx([]);
   final RxBool sourcesLoaded = false.obs;
 

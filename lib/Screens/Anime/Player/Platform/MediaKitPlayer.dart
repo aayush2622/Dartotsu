@@ -61,7 +61,6 @@ class MediaKitPlayer extends GetxController {
   Rx<double> currentSpeed = 1.0.obs;
   Rx<String?> currentSubtitleLanguage = Rx<String?>(null);
   Rx<String?> currentSubtitleUri = Rx<String?>(null);
-  StreamSubscription? _torrentSubscription;
   late final List<MPVDecoder>? supportedDecoders;
   Rx<MPVDecoder?> currentDecoder = Rx<MPVDecoder?>(null);
 

@@ -17,7 +17,7 @@ class MangaCompactSettings {
 
   List<bool>? toggledScanlators;
   final Function(MediaSettings settings, List<bool>? toggledScanlators)
-      onFinished;
+  onFinished;
   final ColorScheme theme;
 
   MangaCompactSettings(
@@ -63,63 +63,49 @@ class MangaCompactSettings {
         getString.ok,
         () => onFinished(settings, toggledScanlators),
       )
-      ..setNegativeButton(
-        getString.cancel,
-        () {},
-      )
+      ..setNegativeButton(getString.cancel, () {})
       ..show();
   }
 
   Widget _buildLayoutSettings() {
-    final icons = [
-      Icons.view_list_sharp,
-      Icons.view_comfy_rounded,
-    ];
-    final descriptions = [
-      getString.listView,
-      getString.compactView,
-    ];
+    final icons = [Icons.view_list_sharp, Icons.view_comfy_rounded];
+    final descriptions = [getString.listView, getString.compactView];
 
-    return Obx(
-      () {
-        final currentViewType = viewType.value;
-        return Row(
-          children: [
-            _buildInfo(getString.layout, descriptions[currentViewType]),
-            Row(
-              children: List.generate(
-                icons.length,
-                (index) {
-                  final isSelected = currentViewType == index;
-                  return Padding(
-                    padding: const EdgeInsets.only(left: 10),
-                    child: IconButton(
-                      icon: Transform(
-                        alignment: Alignment.center,
-                        transform: index == 0
-                            ? Matrix4.rotationY(3.14159)
-                            : Matrix4.identity(),
-                        child: Icon(icons[index]),
-                      ),
-                      iconSize: 24,
-                      color: isSelected
-                          ? theme.onSurface
-                          : theme.onSurface.withOpacity(0.33),
-                      onPressed: () {
-                        if (!isSelected) {
-                          settings.viewType = index;
-                          viewType.value = index;
-                        }
-                      },
-                    ),
-                  );
-                },
-              ),
-            ),
-          ],
-        );
-      },
-    );
+    return Obx(() {
+      final currentViewType = viewType.value;
+      return Row(
+        children: [
+          _buildInfo(getString.layout, descriptions[currentViewType]),
+          Row(
+            children: List.generate(icons.length, (index) {
+              final isSelected = currentViewType == index;
+              return Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: IconButton(
+                  icon: Transform(
+                    alignment: Alignment.center,
+                    transform: index == 0
+                        ? Matrix4.rotationY(3.14159)
+                        : Matrix4.identity(),
+                    child: Icon(icons[index]),
+                  ),
+                  iconSize: 24,
+                  color: isSelected
+                      ? theme.onSurface
+                      : theme.onSurface.withOpacity(0.33),
+                  onPressed: () {
+                    if (!isSelected) {
+                      settings.viewType = index;
+                      viewType.value = index;
+                    }
+                  },
+                ),
+              );
+            }),
+          ),
+        ],
+      );
+    });
   }
 
   Widget _buildSortSettings() {
@@ -127,31 +113,23 @@ class MangaCompactSettings {
       Icons.keyboard_arrow_up_rounded,
       Icons.keyboard_arrow_down_rounded,
     ];
-    final descriptions = [
-      getString.utd,
-      getString.dtu,
-    ];
+    final descriptions = [getString.utd, getString.dtu];
 
-    return Obx(
-      () {
-        final currentSortType = reverse.value;
-        return Row(
-          children: [
-            _buildInfo(getString.sort, descriptions[currentSortType ? 1 : 0]),
-            IconButton(
-              onPressed: () {
-                reverse.value = !reverse.value;
-                settings.isReverse = reverse.value;
-              },
-              icon: Icon(
-                icons[currentSortType ? 1 : 0],
-                size: 24,
-              ),
-            ),
-          ],
-        );
-      },
-    );
+    return Obx(() {
+      final currentSortType = reverse.value;
+      return Row(
+        children: [
+          _buildInfo(getString.sort, descriptions[currentSortType ? 1 : 0]),
+          IconButton(
+            onPressed: () {
+              reverse.value = !reverse.value;
+              settings.isReverse = reverse.value;
+            },
+            icon: Icon(icons[currentSortType ? 1 : 0], size: 24),
+          ),
+        ],
+      );
+    });
   }
 
   Widget _buildWebViewSettings() {
@@ -159,14 +137,9 @@ class MangaCompactSettings {
       children: [
         _buildInfo("Web View", source?.baseUrl ?? ''),
         IconButton(
-          onPressed: () => navigateToPage(
-            context,
-            WebView(url: source!.baseUrl!),
-          ),
-          icon: const Icon(
-            Icons.open_in_new_rounded,
-            size: 24,
-          ),
+          onPressed: () =>
+              navigateToPage(context, WebView(url: source!.baseUrl!)),
+          icon: const Icon(Icons.open_in_new_rounded, size: 24),
         ),
       ],
     );
@@ -178,23 +151,36 @@ class MangaCompactSettings {
         _buildInfo(getString.scanlators, scanlators?.length.toString() ?? '0'),
         IconButton(
           onPressed: toggleScanlators,
-          icon: const Icon(
-            Icons.notes_rounded,
-            size: 24,
-          ),
+          icon: const Icon(Icons.notes_rounded, size: 24),
         ),
       ],
     );
   }
 
   void toggleScanlators() {
-    if (scanlators == null || scanlators?.length == 1) return;
-    var t = <bool>[];
+    if (scanlators == null || scanlators!.length <= 1) return;
+
+    toggledScanlators ??= List.filled(scanlators!.length, true);
+
+    if (toggledScanlators!.length != scanlators!.length) {
+      toggledScanlators = List.generate(
+        scanlators!.length,
+        (i) => i < toggledScanlators!.length ? toggledScanlators![i] : true,
+      );
+    }
+
+    var t = List<bool>.from(toggledScanlators!);
+
     AlertDialogBuilder(context)
       ..setTitle(getString.scanlators)
       ..multiChoiceItems(
-          scanlators!, toggledScanlators, (selected) => t = selected)
-      ..setPositiveButton(getString.ok, () => toggledScanlators = t)
+        scanlators!,
+        t,
+        (selected) => t = List<bool>.from(selected),
+      )
+      ..setPositiveButton(getString.ok, () {
+        toggledScanlators = t;
+      })
       ..setNegativeButton(getString.cancel, () {})
       ..show();
   }

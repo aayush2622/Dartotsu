@@ -13,6 +13,7 @@ import '../../../../../Preferences/IsarDataClasses/MediaSettings/MediaSettings.d
 import 'Widget/AnimeCompactSettings.dart';
 
 class AnimeParser extends BaseParser {
+  var unModifiedEpisodeList = Rxn<Map<String, DEpisode>>(null);
   var episodeList = Rxn<Map<String, DEpisode>>(null);
   var anifyEpisodeList = Rxn<Map<String, DEpisode>>(null);
   var kitsuEpisodeList = Rxn<Map<String, DEpisode>>(null);
@@ -42,9 +43,24 @@ class AnimeParser extends BaseParser {
         context,
         media,
         source.value,
-        (s) {
+        scanlator.value,
+        toggledScanlators.value,
+        (s, t) {
           viewType.value = s.viewType;
           reversed.value = s.isReverse;
+          toggledScanlators.value = t;
+          episodeList.value = Map.fromEntries(
+            unModifiedEpisodeList.value!.entries.where((entry) {
+              final scanlator = entry.value.scanlator;
+
+              if (scanlator == null) return true;
+
+              final index = this.scanlator.value?.indexOf(scanlator) ?? -1;
+              if (index < 0) return false;
+
+              return toggledScanlators.value![index];
+            }),
+          );
           MediaSettings.saveMediaSettings(
             media
               ..settings.viewType = s.viewType
@@ -54,26 +70,22 @@ class AnimeParser extends BaseParser {
       ).showDialog();
 
   @override
-  Future<void> wrongTitle(
-    context,
-    mediaData,
-    onChange,
-  ) async {
-    super.wrongTitle(context, mediaData, (
-      m,
-    ) {
+  Future<void> wrongTitle(context, mediaData, onChange) async {
+    super.wrongTitle(context, mediaData, (m) {
+      unModifiedEpisodeList.value = null;
+      scanlator.value = null;
+      toggledScanlators.value = null;
       episodeList.value = null;
       getEpisode(m, source.value!);
     });
   }
 
   @override
-  Future<void> searchMedia(
-    source,
-    mediaData, {
-    onFinish,
-  }) async {
+  Future<void> searchMedia(source, mediaData, {onFinish}) async {
+    unModifiedEpisodeList.value = null;
     episodeList.value = null;
+    scanlator.value = null;
+    toggledScanlators.value = null;
     super.searchMedia(
       source,
       mediaData,
@@ -105,10 +117,7 @@ class AnimeParser extends BaseParser {
     final chapters = m.episodes;
     if (chapters == null) {
       episodeList.value = {};
-      error.value = ParserError(
-        ErrorType.NoResult,
-        "No episodes found",
-      );
+      error.value = ParserError(ErrorType.NoResult, "No episodes found");
       return;
     }
 
@@ -121,6 +130,14 @@ class AnimeParser extends BaseParser {
     }
 
     episodeList.value = sorted;
+    unModifiedEpisodeList.value = sorted;
+    var uniqueScanlators = {
+      for (var element in episodeList.value!.values)
+        if (element.scanlator != null) element.scanlator!,
+    };
+
+    scanlator.value = uniqueScanlators.toList();
+    toggledScanlators.value = List<bool>.filled(uniqueScanlators.length, true);
 
     error.value = null;
   }
@@ -133,7 +150,7 @@ class AnimeParser extends BaseParser {
     });
     var data = await Future.wait([
       Anify.fetchAndParseMetadata(mediaData),
-      Kitsu.getKitsuEpisodesDetails(mediaData)
+      Kitsu.getKitsuEpisodesDetails(mediaData),
     ]);
     anifyEpisodeList.value ??= data[0];
     kitsuEpisodeList.value ??= data[1];
@@ -169,8 +186,8 @@ Map<String, DEpisode> processEpisodes(List<DEpisode> chapters) {
           var remainder = (episode.episodeNumber.toDouble() % 1)
               .toStringAsFixed(2)
               .toDouble();
-          episode.episodeNumber =
-              (index + 1 + remainder + additionalIndex).toString();
+          episode.episodeNumber = (index + 1 + remainder + additionalIndex)
+              .toString();
         } else {
           episode.episodeNumber = (index + 1 + additionalIndex).toString();
         }

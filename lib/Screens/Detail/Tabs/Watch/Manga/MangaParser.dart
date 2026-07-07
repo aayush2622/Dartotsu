@@ -19,8 +19,6 @@ class MangaParser extends BaseParser {
 
   var viewType = 0.obs;
   var reversed = false.obs;
-  var scanlator = Rxn<List<String>>(null);
-  var toggledScanlators = Rxn<List<bool>>(null);
 
   void settingsDialog(BuildContext context, Media media) =>
       MangaCompactSettings(

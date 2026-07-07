@@ -13,12 +13,22 @@ class AnimeCompactSettings {
   final BuildContext context;
   final Media media;
   final Source? source;
-  final Function(MediaSettings settings) onFinished;
+  final List<String>? scanlators;
+
+  List<bool>? toggledScanlators;
+  final Function(MediaSettings settings, List<bool>? toggledScanlators)
+  onFinished;
 
   final ColorScheme theme;
 
-  AnimeCompactSettings(this.context, this.media, this.source, this.onFinished)
-    : theme = Theme.of(context).colorScheme;
+  AnimeCompactSettings(
+    this.context,
+    this.media,
+    this.source,
+    this.scanlators,
+    this.toggledScanlators,
+    this.onFinished,
+  ) : theme = Theme.of(context).colorScheme;
 
   late MediaSettings settings;
 
@@ -45,10 +55,15 @@ class AnimeCompactSettings {
             _buildSortSettings(),
             const SizedBox(height: 12),
             _buildWebViewSettings(),
+            const SizedBox(height: 12),
+            _buildScanlatorSettings(),
           ],
         ),
       )
-      ..setPositiveButton(getString.ok, () => onFinished(settings))
+      ..setPositiveButton(
+        getString.ok,
+        () => onFinished(settings, toggledScanlators),
+      )
       ..setNegativeButton(getString.cancel, () {})
       ..show();
   }
@@ -100,6 +115,46 @@ class AnimeCompactSettings {
         ],
       );
     });
+  }
+
+  void toggleScanlators() {
+    if (scanlators == null || scanlators!.length <= 1) return;
+
+    toggledScanlators ??= List.filled(scanlators!.length, true);
+
+    if (toggledScanlators!.length != scanlators!.length) {
+      toggledScanlators = List.generate(
+        scanlators!.length,
+        (i) => i < toggledScanlators!.length ? toggledScanlators![i] : true,
+      );
+    }
+
+    var t = List<bool>.from(toggledScanlators!);
+
+    AlertDialogBuilder(context)
+      ..setTitle(getString.scanlators)
+      ..multiChoiceItems(
+        scanlators!,
+        t,
+        (selected) => t = List<bool>.from(selected),
+      )
+      ..setPositiveButton(getString.ok, () {
+        toggledScanlators = t;
+      })
+      ..setNegativeButton(getString.cancel, () {})
+      ..show();
+  }
+
+  Widget _buildScanlatorSettings() {
+    return Row(
+      children: [
+        _buildInfo(getString.scanlators, scanlators?.length.toString() ?? '0'),
+        IconButton(
+          onPressed: toggleScanlators,
+          icon: const Icon(Icons.notes_rounded, size: 24),
+        ),
+      ],
+    );
   }
 
   Widget _buildSortSettings() {

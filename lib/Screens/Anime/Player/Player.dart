@@ -725,11 +725,17 @@ class MediaPlayerState extends State<MediaPlayer>
     );
   }
 
-  void settingsDialog() =>
-      AnimeCompactSettings(context, widget.media, widget.source, (i) {
-        viewType.value = i.viewType;
-        reverse.value = i.isReverse;
-      }).showDialog();
+  void settingsDialog() => AnimeCompactSettings(
+    context,
+    widget.media,
+    widget.source,
+    [],
+    [],
+    (i, t) {
+      viewType.value = i.viewType;
+      reverse.value = i.isReverse;
+    },
+  ).showDialog();
 
   void _handleKeyPress(KeyEvent event) async {
     if (event is KeyDownEvent) {

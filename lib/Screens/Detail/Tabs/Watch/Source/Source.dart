@@ -46,23 +46,29 @@ class SourceState extends State<Source> {
       unModifiedChapterList.value = chapterList.value;
       var uniqueScanlators = {
         for (var element in chapterList.value!)
-          if (element.scanlator != null) element.scanlator!
+          if (element.scanlator != null) element.scanlator!,
       };
 
       scanlator.value = uniqueScanlators.toList();
-      toggledScanlators.value =
-          List<bool>.filled(uniqueScanlators.length, true);
+      toggledScanlators.value = List<bool>.filled(
+        uniqueScanlators.length,
+        true,
+      );
     }
   }
 
   Widget _buildChapterList() {
     if (chapterList.value!.isEmpty) return Container();
     var (chunks, initChunkIndex) = m.buildChunks(
-        context, chapterList.value!, widget.media.userProgress.toString());
+      context,
+      chapterList.value!,
+      widget.media.userProgress.toString(),
+    );
 
     RxInt selectedChunkIndex = (-1).obs;
-    selectedChunkIndex =
-        selectedChunkIndex.value == -1 ? initChunkIndex : selectedChunkIndex;
+    selectedChunkIndex = selectedChunkIndex.value == -1
+        ? initChunkIndex
+        : selectedChunkIndex;
     return ScrollConfig(
       context,
       child: Column(
@@ -71,12 +77,7 @@ class SourceState extends State<Source> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           _buildTitle(),
-          m.buildChunkSelector(
-            context,
-            chunks,
-            selectedChunkIndex,
-            reverse,
-          ),
+          m.buildChunkSelector(context, chunks, selectedChunkIndex, reverse),
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 18, vertical: 4),
             child: Obx(() {
@@ -91,7 +92,7 @@ class SourceState extends State<Source> {
                 mediaData: widget.media,
               );
             }),
-          )
+          ),
         ],
       ),
     );
@@ -101,11 +102,15 @@ class SourceState extends State<Source> {
     var episodeList = widget.media.anime?.episodes ?? {};
     if (episodeList.isEmpty) return Container();
     var (chunk, initChunkIndex) = a.buildChunks(
-        context, episodeList, widget.media.userProgress.toString());
+      context,
+      episodeList,
+      widget.media.userProgress.toString(),
+    );
 
     RxInt selectedChunkIndex = (-1).obs;
-    selectedChunkIndex =
-        selectedChunkIndex.value == -1 ? initChunkIndex : selectedChunkIndex;
+    selectedChunkIndex = selectedChunkIndex.value == -1
+        ? initChunkIndex
+        : selectedChunkIndex;
 
     return ScrollConfig(
       context,
@@ -115,28 +120,21 @@ class SourceState extends State<Source> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           _buildTitle(),
-          a.ChunkSelector(
-            context,
-            chunk,
-            selectedChunkIndex,
-            reverse,
-          ),
+          a.ChunkSelector(context, chunk, selectedChunkIndex, reverse),
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 18),
-            child: Obx(
-              () {
-                var reversed = reverse.value
-                    ? chunk.map((element) => element.reversed.toList()).toList()
-                    : chunk;
-                return EpisodeAdaptor(
-                  type: viewType.value,
-                  source: widget.media.sourceData!,
-                  episodeList: reversed[selectedChunkIndex.value],
-                  mediaData: widget.media,
-                );
-              },
-            ),
-          )
+            child: Obx(() {
+              var reversed = reverse.value
+                  ? chunk.map((element) => element.reversed.toList()).toList()
+                  : chunk;
+              return EpisodeAdaptor(
+                type: viewType.value,
+                source: widget.media.sourceData!,
+                episodeList: reversed[selectedChunkIndex.value],
+                mediaData: widget.media,
+              );
+            }),
+          ),
         ],
       ),
     );
@@ -174,31 +172,40 @@ class SourceState extends State<Source> {
   }
 
   void animeSettingsDialog() => a.AnimeCompactSettings(
-        context,
-        widget.media,
-        widget.media.sourceData,
-        (i) {
-          viewType.value = i.viewType;
-          reverse.value = i.isReverse;
-        },
-      ).showDialog();
+    context,
+    widget.media,
+    widget.media.sourceData,
+    scanlator.value,
+    toggledScanlators.value,
+    (i, t) {
+      viewType.value = i.viewType;
+      reverse.value = i.isReverse;
+      toggledScanlators.value = t;
+      chapterList.value = unModifiedChapterList.value?.where((element) {
+        var scanlator = element.scanlator;
+        return scanlator == null ||
+            toggledScanlators.value![this.scanlator.value?.indexOf(scanlator) ??
+                0];
+      }).toList();
+    },
+  ).showDialog();
 
   void mangaSettingsDialog() => m.MangaCompactSettings(
-        context,
-        widget.media,
-        widget.media.sourceData,
-        scanlator.value,
-        toggledScanlators.value,
-        (i, t) {
-          viewType.value = i.viewType;
-          reverse.value = i.isReverse;
-          toggledScanlators.value = t;
-          chapterList.value = unModifiedChapterList.value?.where((element) {
-            var scanlator = element.scanlator;
-            return scanlator == null ||
-                toggledScanlators
-                    .value![this.scanlator.value?.indexOf(scanlator) ?? 0];
-          }).toList();
-        },
-      ).showDialog();
+    context,
+    widget.media,
+    widget.media.sourceData,
+    scanlator.value,
+    toggledScanlators.value,
+    (i, t) {
+      viewType.value = i.viewType;
+      reverse.value = i.isReverse;
+      toggledScanlators.value = t;
+      chapterList.value = unModifiedChapterList.value?.where((element) {
+        var scanlator = element.scanlator;
+        return scanlator == null ||
+            toggledScanlators.value![this.scanlator.value?.indexOf(scanlator) ??
+                0];
+      }).toList();
+    },
+  ).showDialog();
 }
