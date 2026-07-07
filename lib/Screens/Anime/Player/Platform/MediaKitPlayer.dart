@@ -3,8 +3,12 @@ import 'dart:io';
 
 import 'package:dartotsu/Preferences/IsarDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
 import 'package:dartotsu/Preferences/PrefManager.dart';
+import 'package:dartotsu_extension_bridge/AddonManager.dart';
+import 'package:dartotsu_extension_bridge/Engines/TorrentEngine/LibTorrentAddon.dart';
 import 'package:dartotsu_extension_bridge/Models/Video.dart' as v;
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:media_kit/media_kit.dart';
@@ -18,12 +22,13 @@ class MPVDecoder {
   //maybe split in to Linux, MacOS and Windows later?
   final String desktopDecoder;
 
-  MPVDecoder(
-      {required this.id,
-      required this.name,
-      required this.androidDecoder,
-      required this.iosDecoder,
-      required this.desktopDecoder});
+  MPVDecoder({
+    required this.id,
+    required this.name,
+    required this.androidDecoder,
+    required this.iosDecoder,
+    required this.desktopDecoder,
+  });
 
   String getDecoderForPlatform() {
     if (Platform.isAndroid) {
@@ -56,7 +61,7 @@ class MediaKitPlayer extends GetxController {
   Rx<double> currentSpeed = 1.0.obs;
   Rx<String?> currentSubtitleLanguage = Rx<String?>(null);
   Rx<String?> currentSubtitleUri = Rx<String?>(null);
-
+  StreamSubscription? _torrentSubscription;
   late final List<MPVDecoder>? supportedDecoders;
   Rx<MPVDecoder?> currentDecoder = Rx<MPVDecoder?>(null);
 
@@ -87,8 +92,10 @@ class MediaKitPlayer extends GetxController {
       ),
     );
 
-    videoController =
-        VideoController(player, configuration: getPlatformConfig());
+    videoController = VideoController(
+      player,
+      configuration: getPlatformConfig(),
+    );
 
     if (player.platform is NativePlayer) {
       final auto = MPVDecoder(
@@ -129,13 +136,7 @@ class MediaKitPlayer extends GetxController {
         desktopDecoder: "auto",
       );
 
-      supportedDecoders = [
-        autoSafe,
-        auto,
-        sw,
-        hw,
-        hwPlus,
-      ];
+      supportedDecoders = [autoSafe, auto, sw, hw, hwPlus];
       //enforcing media-kit default decoders
       useDecoder(Platform.isAndroid ? autoSafe : auto);
     }
@@ -154,38 +155,58 @@ class MediaKitPlayer extends GetxController {
   Future<void> setVolume(double volume) =>
       videoController.player.setVolume(volume);
 
-  Future<void> open(v.Video video, Duration duration) async =>
-      videoController.player.open(
-        Media(
-          video.url,
-          start: duration,
-          httpHeaders: video.headers,
-        ),
-      );
+  Future<void> open(v.Video video, Duration duration) async {
+    var url = video.url;
+
+    if (_isTorrent(url)) {
+      final addon = Get.find<AddonManager>().get<LibtorrentAddon>();
+
+      if (!addon.installed.value) {
+        throw StateError(
+          "Libtorrent addon is not installed. Please install it from Addons.",
+        );
+      }
+
+      final stream = await addon.startStream(url: url);
+
+      url = stream.url;
+    }
+
+    await videoController.player.open(
+      Media(url, start: duration, httpHeaders: video.headers),
+    );
+  }
+
+  bool _isTorrent(String url) {
+    final lower = url.toLowerCase();
+
+    return lower.startsWith("magnet:") ||
+        lower.endsWith(".torrent") ||
+        lower.contains(".torrent?");
+  }
 
   Future<void> setSubtitle(String subtitleUri, String language, bool isUri) =>
-      videoController.player.setSubtitleTrack(isUri
-          ? SubtitleTrack.uri(subtitleUri, title: language)
-          : SubtitleTrack(
-              subtitleUri,
-              language,
-              language,
-              uri: false,
-              data: false,
-            ));
+      videoController.player.setSubtitleTrack(
+        isUri
+            ? SubtitleTrack.uri(subtitleUri, title: language)
+            : SubtitleTrack(
+                subtitleUri,
+                language,
+                language,
+                uri: false,
+                data: false,
+              ),
+      );
 
   Future<void> resetSubtitle() =>
       videoController.player.setSubtitleTrack(SubtitleTrack.no());
 
   Future<void> setAudio(String audioUri, String language, bool isUri) =>
-      videoController.player.setAudioTrack(isUri
-          ? AudioTrack.uri(audioUri, title: language)
-          : AudioTrack(
-              audioUri,
-              language,
-              language,
-              uri: false,
-            ));
+      videoController.player.setAudioTrack(
+        isUri
+            ? AudioTrack.uri(audioUri, title: language)
+            : AudioTrack(audioUri, language, language, uri: false),
+      );
 
   @override
   void dispose() {
@@ -222,8 +243,9 @@ class MediaKitPlayer extends GetxController {
       observeNativePropertyInt("chapter-list/count", (value) async {
         final futures = List.generate(value, (i) async {
           final title = await getNativePropertyString("chapter-list/$i/title");
-          final startTime =
-              await getNativePropertyDouble("chapter-list/$i/time");
+          final startTime = await getNativePropertyDouble(
+            "chapter-list/$i/time",
+          );
 
           return Chapter(title: title, startTime: startTime);
         });
@@ -239,8 +261,10 @@ class MediaKitPlayer extends GetxController {
       throw ArgumentError('Decoder ${decoder.id} is not supported');
     }
 
-    return setNativePropertyString("hwdec", decoder.getDecoderForPlatform())
-        .then((_) {
+    return setNativePropertyString(
+      "hwdec",
+      decoder.getDecoderForPlatform(),
+    ).then((_) {
       currentDecoder.value = decoder;
     });
   }
@@ -252,8 +276,11 @@ class MediaKitPlayer extends GetxController {
       //Auto always select the first subtitle track
     } else if (track == SubtitleTrack.auto()) {
       final track = subtitles
-          .where((element) =>
-              element != SubtitleTrack.auto() && element != SubtitleTrack.no())
+          .where(
+            (element) =>
+                element != SubtitleTrack.auto() &&
+                element != SubtitleTrack.no(),
+          )
           .firstOrNull;
 
       currentSubtitleLanguage.value = track?.title;
@@ -279,25 +306,32 @@ class MediaKitPlayer extends GetxController {
   Future<String> _getNativeProperty(String property) {
     assert(videoController.player.platform is NativePlayer);
 
-    return (videoController.player.platform as NativePlayer)
-        .getProperty(property);
+    return (videoController.player.platform as NativePlayer).getProperty(
+      property,
+    );
   }
 
   Future<void> _setNativeProperty(String property, String value) {
     assert(videoController.player.platform is NativePlayer);
 
-    return (videoController.player.platform as NativePlayer)
-        .setProperty(property, value);
+    return (videoController.player.platform as NativePlayer).setProperty(
+      property,
+      value,
+    );
   }
 
   Future<void> _observeNativeProperty(
-      String property, Future<void> Function(String) listener,
-      {bool waitForInitialization = true}) {
+    String property,
+    Future<void> Function(String) listener, {
+    bool waitForInitialization = true,
+  }) {
     assert(videoController.player.platform is NativePlayer);
 
     return (videoController.player.platform as NativePlayer).observeProperty(
-        property, listener,
-        waitForInitialization: waitForInitialization);
+      property,
+      listener,
+      waitForInitialization: waitForInitialization,
+    );
   }
 
   Future<String> getNativePropertyString(String property) =>
@@ -325,44 +359,67 @@ class MediaKitPlayer extends GetxController {
       _setNativeProperty(property, value ? 'yes' : 'no');
 
   Future<void> observeNativePropertyString(
-          String property, Future<void> Function(String) listener,
-          {bool waitForInitialization = true}) =>
-      _observeNativeProperty(property, listener,
-          waitForInitialization: waitForInitialization);
+    String property,
+    Future<void> Function(String) listener, {
+    bool waitForInitialization = true,
+  }) => _observeNativeProperty(
+    property,
+    listener,
+    waitForInitialization: waitForInitialization,
+  );
 
   Future<void> observeNativePropertyDouble(
-          String property, Future<void> Function(double) listener,
-          {bool waitForInitialization = true}) =>
-      _observeNativeProperty(property, (value) => listener(double.parse(value)),
-          waitForInitialization: waitForInitialization);
+    String property,
+    Future<void> Function(double) listener, {
+    bool waitForInitialization = true,
+  }) => _observeNativeProperty(
+    property,
+    (value) => listener(double.parse(value)),
+    waitForInitialization: waitForInitialization,
+  );
 
   Future<void> observeNativePropertyInt(
-          String property, Future<void> Function(int) listener,
-          {bool waitForInitialization = true}) =>
-      _observeNativeProperty(property, (value) => listener(int.parse(value)),
-          waitForInitialization: waitForInitialization);
+    String property,
+    Future<void> Function(int) listener, {
+    bool waitForInitialization = true,
+  }) => _observeNativeProperty(
+    property,
+    (value) => listener(int.parse(value)),
+    waitForInitialization: waitForInitialization,
+  );
 
   Future<void> observeNativePropertyBool(
-          String property, Future<void> Function(bool) listener,
-          {bool waitForInitialization = true}) =>
-      _observeNativeProperty(property, (value) => listener(value == 'yes'),
-          waitForInitialization: waitForInitialization);
+    String property,
+    Future<void> Function(bool) listener, {
+    bool waitForInitialization = true,
+  }) => _observeNativeProperty(
+    property,
+    (value) => listener(value == 'yes'),
+    waitForInitialization: waitForInitialization,
+  );
 
-  Future<void> unobserveNativeProperty(String property,
-      {bool waitForInitialization = true}) {
+  Future<void> unobserveNativeProperty(
+    String property, {
+    bool waitForInitialization = true,
+  }) {
     assert(videoController.player.platform is NativePlayer);
 
     return (videoController.player.platform as NativePlayer).unobserveProperty(
-        property,
-        waitForInitialization: waitForInitialization);
+      property,
+      waitForInitialization: waitForInitialization,
+    );
   }
 
-  Future<void> nativeCommand(List<String> command,
-      {bool waitForInitialization = true}) {
+  Future<void> nativeCommand(
+    List<String> command, {
+    bool waitForInitialization = true,
+  }) {
     assert(videoController.player.platform is NativePlayer);
 
-    return (videoController.player.platform as NativePlayer)
-        .command(command, waitForInitialization: waitForInitialization);
+    return (videoController.player.platform as NativePlayer).command(
+      command,
+      waitForInitialization: waitForInitialization,
+    );
   }
 }
 

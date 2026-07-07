@@ -288,7 +288,12 @@ class _WebViewState extends State<WebView> {
             algorithmicDarkeningAllowed: true,
             thirdPartyCookiesEnabled: true,
             cacheEnabled: true,
+            userAgent:
+                'Mozilla/5.0 (Windows NT 10.0; Win64; x64) '
+                'AppleWebKit/537.36 (KHTML, like Gecko) '
+                'Chrome/138.0.0.0 Safari/537.36',
           ),
+
           pullToRefreshController: _pullToRefreshController,
           onWebViewCreated: (controller) async {
             _controller = controller;
@@ -330,40 +335,7 @@ class _WebViewState extends State<WebView> {
               await _syncCookies(url);
             }
           },
-          shouldInterceptFetchRequest: (controller, fetchRequest) async {
-            final res = await Get.find<NetworkManager>().get(
-              fetchRequest.url.toString(),
-              headers: {
-                for (final e in (fetchRequest.headers ?? {}).entries)
-                  e.key: e.value,
-              },
-            );
 
-            return FetchRequest(
-              url: fetchRequest.url,
-              method: fetchRequest.method,
-              headers: {
-                for (final e in res.headers.entries) e.key: e.value.join(','),
-              },
-              body: res.rawBytes,
-            );
-          },
-          shouldInterceptRequest: (controller, request) async {
-            final res = await Get.find<NetworkManager>().get(
-              request.url.toString(),
-              headers: request.headers,
-            );
-
-            return WebResourceResponse(
-              data: res.rawBytes,
-              statusCode: res.statusCode,
-              reasonPhrase: res.statusMessage,
-              headers: {
-                for (final e in res.headers.entries) e.key: e.value.join(','),
-              },
-              contentType: res.headers['content-type']?.first,
-            );
-          },
           onReceivedHttpAuthRequest: (_, _) async {
             final url = await _controller?.getUrl();
             if (url != null) {

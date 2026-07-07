@@ -164,13 +164,21 @@ class CookieManager extends Interceptor {
 
     final persistent = _loadAll();
 
-    persistent.removeWhere(
-      (_, cookie) => normalizeDomain(cookie.domain) == domain,
-    );
+    persistent.removeWhere((_, cookie) {
+      return domainMatches(
+        normalizeDomain(domain),
+        normalizeDomain(cookie.domain),
+        cookie.hostOnly,
+      );
+    });
 
-    _sessionCookies.removeWhere(
-      (_, cookie) => normalizeDomain(cookie.domain) == domain,
-    );
+    _sessionCookies.removeWhere((_, cookie) {
+      return domainMatches(
+        normalizeDomain(domain),
+        normalizeDomain(cookie.domain),
+        cookie.hostOnly,
+      );
+    });
 
     _saveAll(persistent);
 
@@ -466,7 +474,7 @@ class CookieManager extends Interceptor {
         url: webview.WebUri("$scheme://${cookie.domain}"),
         name: cookie.name,
         value: cookie.value,
-        domain: cookie.domain,
+        domain: ".${cookie.domain}",
         path: cookie.path,
         expiresDate: cookie.session
             ? null

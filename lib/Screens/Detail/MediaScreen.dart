@@ -101,7 +101,7 @@ class MediaInfoPageState extends State<MediaInfoPage> {
       _lastDarkMode = isDarkMode;
 
       if (loadData(PrefName.useCoverTheme)) {
-        loadCustomTheme(widget.mediaData.cover);
+        loadCustomTheme(widget.mediaData.banner ?? widget.mediaData.cover);
       }
     }
   }
@@ -130,7 +130,11 @@ class MediaInfoPageState extends State<MediaInfoPage> {
     setState(() {});
   }
 
-  Widget _buildBackground(ThemeNotifier themeNotifier, MediaService service) {
+  Widget _buildBackground(
+    ThemeNotifier themeNotifier,
+    MediaService service,
+    BuildContext context,
+  ) {
     if (!themeNotifier.useGlassMode) return const SizedBox.shrink();
     var theme = Theme.of(context).colorScheme;
     return Positioned.fill(
@@ -195,7 +199,7 @@ class MediaInfoPageState extends State<MediaInfoPage> {
           builder: (context) => Scaffold(
             body: Stack(
               children: [
-                _buildBackground(themeNotifier, service),
+                _buildBackground(themeNotifier, service, context),
                 CustomScrollConfig(
                   context,
                   children: [

@@ -113,10 +113,18 @@ class MediaPlayerState extends State<MediaPlayer>
         currentProgress != null &&
         maxProgress != null &&
         currentProgress / maxProgress > 0.90;
-    videoPlayerController.open(
-      currentQuality,
-      completed ? Duration.zero : Duration(seconds: currentProgress ?? 0),
-    );
+
+    videoPlayerController
+        .open(
+          currentQuality,
+          completed ? Duration.zero : Duration(seconds: currentProgress ?? 0),
+        )
+        .catchError((e) {
+          if (mounted) {
+            Navigator.pop(context);
+          }
+        });
+
     _onMouseMoved();
   }
 
