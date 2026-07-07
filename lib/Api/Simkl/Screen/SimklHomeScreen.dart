@@ -66,13 +66,14 @@ class SimklHomeScreen extends BaseHomeScreen {
     movieDropped.value = res['droppedMovies'] ?? [];
 
     if (animeContinue.value != null && animeContinue.value!.isNotEmpty) {
-      listImage.add((List.from(animeContinue.value ?? [])..shuffle(Random()))
-          .first
-          .cover);
+      listImage.add(
+        (List.from(animeContinue.value ?? [])..shuffle(Random())).first.cover,
+      );
     }
     if (showContinue.value != null && showContinue.value!.isNotEmpty) {
       listImage.add(
-          (List.from(showContinue.value ?? [])..shuffle(Random())).first.cover);
+        (List.from(showContinue.value ?? [])..shuffle(Random())).first.cover,
+      );
     }
     if (listImage.isNotEmpty) {
       if (listImage.length < 2) {
@@ -179,7 +180,7 @@ class SimklHomeScreen extends BaseHomeScreen {
 
     final homeLayoutMap = loadData(PrefName.simklHomeLayout);
     final sectionMap = {
-      for (var section in mediaSections) section.pairTitle: section
+      for (var section in mediaSections) section.pairTitle: section,
     };
     final sectionWidgets = homeLayoutMap.entries
         .where((entry) => entry.value)
@@ -204,54 +205,48 @@ class SimklHomeScreen extends BaseHomeScreen {
         ),
       );
     }).toList();
-
+    final allSections = List<Widget>.from(result);
     return [
-      Obx(
-        () {
-          final allSections = List<Widget>.from(result);
+      LayoutBuilder(
+        builder: (context, constraints) {
+          final spacing = 16.0;
+          final horizontalPadding = context.isPhone ? 0.0 : 16.0;
+          final maxWidth = constraints.maxWidth - horizontalPadding;
 
-          return LayoutBuilder(
-            builder: (context, constraints) {
-              final spacing = 16.0;
-              final horizontalPadding = context.isPhone ? 0.0 : 16.0;
-              final maxWidth = constraints.maxWidth - horizontalPadding;
+          final columns = context.isPhone ? 1 : 2;
+          final width = (maxWidth - ((columns - 1) * spacing)) / columns;
+          final useColumnLayout = width < 480;
 
-              final columns = context.isPhone ? 1 : 2;
-              final width = (maxWidth - ((columns - 1) * spacing)) / columns;
-              final useColumnLayout = width < 480;
+          final children = allSections.map((section) {
+            return SizedBox(
+              width: useColumnLayout ? null : width,
+              child: section,
+            );
+          }).toList();
 
-              final children = allSections.map((section) {
-                return SizedBox(
-                  width: useColumnLayout ? null : width,
-                  child: section,
-                );
-              }).toList();
-
-              return Padding(
-                padding: EdgeInsets.only(right: horizontalPadding),
-                child: Column(
-                  children: [
-                    useColumnLayout
-                        ? Column(
-                            children: children
-                                .map(
-                                  (child) => Padding(
-                                    padding: EdgeInsets.only(bottom: spacing),
-                                    child: child,
-                                  ),
-                                )
-                                .toList(),
-                          )
-                        : Wrap(
-                            spacing: spacing,
-                            runSpacing: spacing,
-                            children: children,
-                          ),
-                    const SizedBox(height: 128),
-                  ],
-                ),
-              );
-            },
+          return Padding(
+            padding: EdgeInsets.only(right: horizontalPadding),
+            child: Column(
+              children: [
+                useColumnLayout
+                    ? Column(
+                        children: children
+                            .map(
+                              (child) => Padding(
+                                padding: EdgeInsets.only(bottom: spacing),
+                                child: child,
+                              ),
+                            )
+                            .toList(),
+                      )
+                    : Wrap(
+                        spacing: spacing,
+                        runSpacing: spacing,
+                        children: children,
+                      ),
+                const SizedBox(height: 128),
+              ],
+            ),
           );
         },
       ),
