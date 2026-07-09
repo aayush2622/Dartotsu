@@ -3,6 +3,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 
 import '../../Core/ThemeManager/ThemeManager.dart';
+import '../Animation/WidgetAnimations.dart';
 import '../Extensions/ContextExtensions.dart';
 import 'CopyToClip.dart';
 
@@ -15,6 +16,7 @@ void snackString(
   BuildContext? c,
   IconData? icon,
   bool simple = false,
+  Widget? child,
 }) {
   final context = c ?? Get.overlayContext ?? Get.context;
   if (context == null || message == null || message.isEmpty) return;
@@ -105,6 +107,7 @@ void snackString(
                           },
                         ),
                       ],
+                      if (child != null) ...[const SizedBox(width: 8), child],
                     ],
                   ),
                 ),
@@ -112,7 +115,7 @@ void snackString(
             ),
           ),
         ),
-      ),
+      ).animateFadeUp(),
     ),
   );
 

@@ -44,7 +44,8 @@ class AppUpdater {
       return;
     }
     var response = await _network.get(
-        'https://api.github.com/repos/${_alphaUpdates ? _alphaRepo : _mainRepo}/releases/latest');
+      'https://api.github.com/repos/${_alphaUpdates ? _alphaRepo : _mainRepo}/releases/latest',
+    );
     if (response.statusCode == 404) {
       if (force) {
         snackString("Ooo Nooo you fell into limbo: ${response.statusMessage}");
@@ -102,7 +103,7 @@ class AppUpdater {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
               decoration: BoxDecoration(
-                color: context.cardColor,
+                color: context.cardColor.withOpacity(.4),
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Text(
@@ -117,16 +118,13 @@ class AppUpdater {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  "Change Logs: ",
-                  style: textStyle,
-                ),
+                Text("Change Logs: ", style: textStyle),
                 const SizedBox(height: 8),
                 Container(
                   constraints: const BoxConstraints(maxHeight: 260),
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: context.cardColor,
+                    color: context.cardColor.withOpacity(.4),
                     borderRadius: BorderRadius.circular(14),
                   ),
                   child: Obx(() {
@@ -159,15 +157,16 @@ class AppUpdater {
                             configs: [
                               LinkConfig(
                                 onTap: openLinkInBrowser,
-                                style:
-                                    textStyle!.copyWith(color: scheme.primary),
+                                style: textStyle!.copyWith(
+                                  color: scheme.primary,
+                                ),
                               ),
                               H1Config(
                                 style: textStyle.copyWith(
                                   fontWeight: FontWeight.bold,
                                   color: scheme.primary,
                                 ),
-                              )
+                              ),
                             ],
                           ),
                         ),
@@ -294,9 +293,7 @@ class AppUpdater {
     if (abis.isEmpty) return null;
 
     const preferred = ['arm64-v8a', 'armeabi-v7a', 'x86_64', 'x86'];
-    return preferred.firstWhereOrNull(
-      (abi) => abis.contains(abi),
-    );
+    return preferred.firstWhereOrNull((abi) => abis.contains(abi));
   }
 
   final RxDouble _downloadProgress = (-1.0).obs;
@@ -325,8 +322,10 @@ class AppUpdater {
         },
       );
 
-      final result =
-          await InstallPlugin.installApk(file.path, appId: packageName);
+      final result = await InstallPlugin.installApk(
+        file.path,
+        appId: packageName,
+      );
 
       if (result['isSuccess'] != true) {
         throw result['errorMessage'] ?? 'APK install failed';

@@ -1,11 +1,12 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 
 import '../../Core/Preferences/StorageManager.dart';
 import '../../Logger.dart';
+import '../../Utils/Animation/WidgetAnimations.dart';
+import '../../Utils/Extensions/NumExtensions.dart';
 import '../../Utils/Function.dart';
 import '../../Utils/Functions/CopyToClip.dart';
 import '../../Widgets/Components/CustomElevatedButton.dart';
@@ -110,8 +111,7 @@ class _ErrorScreenState extends State<ErrorScreen> {
                   "Software Sadness (╥﹏╥)",
                   "Skill Issue? (¬‿¬)",
                   "Gremlins Did It (ᵔ◡ᵔ)",
-                ]..shuffle())
-                    .first,
+                ]..shuffle()).first,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: context.textTheme.labelLarge?.copyWith(
@@ -121,12 +121,7 @@ class _ErrorScreenState extends State<ErrorScreen> {
               ),
             ),
           ],
-        )
-            .animate()
-            .fadeIn(duration: 400.ms, delay: 200.ms)
-            .slideY(begin: 0.3, end: 0)
-            .then()
-            .shake(hz: 2),
+        ).animateAttention(delay: 200.ms),
       ),
     );
   }
@@ -139,28 +134,19 @@ class _ErrorScreenState extends State<ErrorScreen> {
         "Programmer tears detected.",
         "Your code tried its best. It failed.",
         "Oops. Flutter tripped over itself again.",
-      ]..shuffle())
-          .first,
+      ]..shuffle()).first,
       style: textTheme.bodyMedium?.copyWith(
         color: theme.primary,
         fontStyle: FontStyle.italic,
       ),
-    )
-        .animate()
-        .fadeIn(duration: 400.ms, delay: 200.ms)
-        .slideY(begin: 0.1, end: 0);
+    ).animateFadeUp(begin: 0.1, delay: 200.ms);
   }
 
   Widget _buildErrorTitle() {
     return const Text(
       "Error :",
-      style: TextStyle(
-        fontWeight: FontWeight.w600,
-      ),
-    )
-        .animate()
-        .fadeIn(duration: 300.ms, delay: 200.ms)
-        .slideX(begin: -0.2, end: 0);
+      style: TextStyle(fontWeight: FontWeight.w600),
+    ).animateFadeSlideX(begin: -0.2, delay: 200.ms);
   }
 
   Widget _buildErrorBox(ColorScheme theme) {
@@ -172,15 +158,9 @@ class _ErrorScreenState extends State<ErrorScreen> {
       ),
       child: SelectableText(
         widget.error,
-        style: const TextStyle(
-          fontFamily: "monospace",
-          fontSize: 13,
-        ),
+        style: const TextStyle(fontFamily: "monospace", fontSize: 13),
       ),
-    ).animate().shimmer(delay: 200.ms, duration: 1200.ms).then().scale(
-        begin: const Offset(0.94, 1),
-        end: const Offset(1, 1),
-        duration: 300.ms);
+    ).animateShimmerPop();
   }
 
   Widget _buildStackTrace(ColorScheme theme) {
@@ -198,9 +178,7 @@ class _ErrorScreenState extends State<ErrorScreen> {
             borderRadius: BorderRadius.circular(10),
           ),
           child: SelectableText.rich(
-            TextSpan(
-              children: _colorizeErrorText(widget.stackTrace, theme),
-            ),
+            TextSpan(children: _colorizeErrorText(widget.stackTrace, theme)),
             style: TextStyle(
               fontFamily: "monospace",
               fontSize: 13,
@@ -208,11 +186,7 @@ class _ErrorScreenState extends State<ErrorScreen> {
               color: theme.onSurface,
             ),
           ),
-        ).animate().shimmer(delay: 200.ms, duration: 1200.ms).then().scale(
-              begin: const Offset(0.94, 1),
-              end: const Offset(1, 1),
-              duration: 300.ms,
-            )
+        ).animateShimmerPop(),
       ],
     );
   }
@@ -238,16 +212,10 @@ class _ErrorScreenState extends State<ErrorScreen> {
               }
               shareFile("$path\\appLogs.txt".fixSeparator, "LogFile");
             },
-            iconWidget: Icon(
-              Icons.share_rounded,
-              color: theme.surface,
-            ),
+            iconWidget: Icon(Icons.share_rounded, color: theme.surface),
             label: "Share log file",
             padding: const EdgeInsets.only(),
-          )
-              .animate()
-              .fadeIn(duration: 400.ms, delay: 300.ms)
-              .slideX(begin: -0.2, end: 0),
+          ).animateFadeSlideX(begin: -0.2, delay: 300.ms),
         ),
         const SizedBox(width: 12),
         Expanded(
@@ -258,16 +226,10 @@ class _ErrorScreenState extends State<ErrorScreen> {
                 "Error: ${widget.error}\n\nStack Trace:\n${widget.stackTrace}",
               );
             },
-            iconWidget: Icon(
-              Icons.copy_rounded,
-              color: theme.surface,
-            ),
+            iconWidget: Icon(Icons.copy_rounded, color: theme.surface),
             label: "Copy Logs",
             padding: const EdgeInsets.only(),
-          )
-              .animate()
-              .fadeIn(duration: 400.ms, delay: 400.ms)
-              .slideX(begin: 0.2, end: 0),
+          ).animateFadeSlideX(begin: -0.2, delay: 300.ms),
         ),
       ],
     );
@@ -316,17 +278,23 @@ List<TextSpan> _colorizeErrorText(String text, ColorScheme theme) {
     RegExp(r'\bv?\d+(?:\.\d+)*\b'): const TextStyle(color: Colors.amberAccent),
     RegExp(r'\b(?:dart:[\w/.]+|package:[\w./_]+|https?://\S+)\b'):
         const TextStyle(color: Colors.blueAccent, fontWeight: FontWeight.w500),
-    RegExp(r'(/[\w./_-]+\.\w+|\w+\.java:\d+)'):
-        const TextStyle(color: Colors.lightGreen, fontStyle: FontStyle.italic),
+    RegExp(r'(/[\w./_-]+\.\w+|\w+\.java:\d+)'): const TextStyle(
+      color: Colors.lightGreen,
+      fontStyle: FontStyle.italic,
+    ),
     RegExp(r'\b(?:[a-z_]+\.)*[A-Z][a-zA-Z0-9_]*(?:\.[a-zA-Z0-9_]+)*\b'):
         const TextStyle(color: Colors.tealAccent, fontWeight: FontWeight.w300),
-    RegExp(r'\b(Exception|Error|Failure|Failed|Unhandled)\b'):
-        const TextStyle(color: Colors.redAccent, fontWeight: FontWeight.bold),
+    RegExp(r'\b(Exception|Error|Failure|Failed|Unhandled)\b'): const TextStyle(
+      color: Colors.redAccent,
+      fontWeight: FontWeight.bold,
+    ),
     RegExp(r'\bnull\b'): const TextStyle(color: Colors.deepOrangeAccent),
-    RegExp(r'\bawait|async|Future\b'):
-        const TextStyle(color: Colors.cyanAccent),
-    RegExp(r'\bmissing|not found\b'):
-        const TextStyle(color: Colors.orangeAccent),
+    RegExp(r'\bawait|async|Future\b'): const TextStyle(
+      color: Colors.cyanAccent,
+    ),
+    RegExp(r'\bmissing|not found\b'): const TextStyle(
+      color: Colors.orangeAccent,
+    ),
   };
 
   final spans = <TextSpan>[];
@@ -348,9 +316,7 @@ List<TextSpan> _colorizeErrorText(String text, ColorScheme theme) {
       spans.add(
         TextSpan(
           text: text,
-          style: const TextStyle(
-            color: Colors.white70,
-          ),
+          style: const TextStyle(color: Colors.white70),
         ),
       );
       break;
@@ -360,9 +326,7 @@ List<TextSpan> _colorizeErrorText(String text, ColorScheme theme) {
       spans.add(
         TextSpan(
           text: text.substring(0, earliestMatch.start),
-          style: const TextStyle(
-            color: Colors.white70,
-          ),
+          style: const TextStyle(color: Colors.white70),
         ),
       );
     }
@@ -370,10 +334,8 @@ List<TextSpan> _colorizeErrorText(String text, ColorScheme theme) {
     spans.add(
       TextSpan(
         text: earliestMatch.group(0),
-        style: patterns[matchedPattern] ??
-            const TextStyle(
-              color: Colors.white70,
-            ),
+        style:
+            patterns[matchedPattern] ?? const TextStyle(color: Colors.white70),
       ),
     );
 

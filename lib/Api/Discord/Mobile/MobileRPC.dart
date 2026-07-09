@@ -1,9 +1,9 @@
 import 'package:dartotsu_extension_bridge/Models/DEpisode.dart';
 import 'package:get/get.dart';
 
+import '../../../Core/NetworkManager/NetworkManager.dart';
 import '../../../Core/Services/Model/Media.dart';
 import '../../../Utils/Functions/GetXFunctions.dart';
-import '../../../Core/NetworkManager/NetworkManager.dart';
 import '../BaseDiscordRPC.dart';
 import 'TokenManager.dart';
 
@@ -24,8 +24,9 @@ class MobileRPC extends GetxController implements BaseDiscordRPC {
 
     final now = DateTime.now().millisecondsSinceEpoch;
     final start = now - ((currentTime ?? 0) * 1000);
-    final end =
-        endTime != null ? now + ((endTime - (currentTime ?? 0)) * 1000) : null;
+    final end = endTime != null
+        ? now + ((endTime - (currentTime ?? 0)) * 1000)
+        : null;
 
     final payload = {
       "activities": [
@@ -36,10 +37,7 @@ class MobileRPC extends GetxController implements BaseDiscordRPC {
           "state":
               "${isAnime ? "Episode" : "Chapter"} ${episode?.episodeNumber ?? "?"}",
           "type": 3,
-          "timestamps": {
-            "start": start,
-            if (end != null) "end": end,
-          },
+          "timestamps": {"start": start, "end": ?end},
           "platform": "desktop",
           "assets": {
             "large_image": episode?.thumbnail ?? mediaData.cover,
@@ -49,16 +47,13 @@ class MobileRPC extends GetxController implements BaseDiscordRPC {
             'small_text': 'Dartotsu',
           },
           "buttons": [
-            {
-              "label": "View Anime",
-              "url": mediaData.shareLink,
-            },
+            {"label": "View Anime", "url": mediaData.shareLink},
             {
               "label": "Open Dartotsu",
               "url": "https://github.com/aayush2622/Dartotsu",
-            }
+            },
           ],
-        }
+        },
       ],
       if (_activityToken != null) "token": _activityToken,
     };
@@ -105,12 +100,8 @@ class MobileRPC extends GetxController implements BaseDiscordRPC {
     try {
       await network.post(
         "https://discord.com/api/v10/users/@me/headless-sessions/delete",
-        headers: {
-          "Authorization": "Bearer $token",
-        },
-        data: {
-          "token": _activityToken,
-        },
+        headers: {"Authorization": "Bearer $token"},
+        data: {"token": _activityToken},
       );
     } finally {
       _activityToken = null;

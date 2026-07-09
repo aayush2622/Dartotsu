@@ -70,44 +70,49 @@ class _CustomBottomDialogState extends State<CustomBottomDialog> {
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.only(bottom: 12.0),
-              child: DpadFocusable(
-                autofocus: true,
-                entry: true,
-                onSelect: () => Get.back(),
-                child: Container(
-                  width: 40,
-                  height: 4,
-                  decoration: BoxDecoration(
-                    color: colorScheme.onSurface.withOpacity(0.3),
-                    borderRadius: BorderRadius.circular(2),
-                  ),
-                ),
-                builder: (context, state, child) {
-                  final focus = state.focused && usingKeyboard;
-
-                  return Center(
-                    child: AnimatedContainer(
-                      duration: const Duration(milliseconds: 120),
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 8,
-                        vertical: 6,
-                      ),
-                      decoration: BoxDecoration(
-                        color: focus
-                            ? colorScheme.onSurface.withOpacity(0.08)
-                            : Colors.transparent,
-                        borderRadius: BorderRadius.circular(12),
-                        border: focus
-                            ? Border.all(
-                                color: colorScheme.onSurface.withOpacity(0.25),
-                                width: 1,
-                              )
-                            : null,
-                      ),
-                      child: child,
+              child: IgnorePointer(
+                ignoring: true,
+                child: DpadFocusable(
+                  autofocus: true,
+                  entry: true,
+                  onSelect: () => Get.back(),
+                  child: Container(
+                    width: 40,
+                    height: 4,
+                    decoration: BoxDecoration(
+                      color: colorScheme.onSurface.withOpacity(0.3),
+                      borderRadius: BorderRadius.circular(2),
                     ),
-                  );
-                },
+                  ),
+                  builder: (context, state, child) {
+                    final focus = state.focused && usingKeyboard;
+
+                    return Center(
+                      child: AnimatedContainer(
+                        duration: const Duration(milliseconds: 120),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 6,
+                        ),
+                        decoration: BoxDecoration(
+                          color: focus
+                              ? colorScheme.onSurface.withOpacity(0.08)
+                              : Colors.transparent,
+                          borderRadius: BorderRadius.circular(12),
+                          border: focus
+                              ? Border.all(
+                                  color: colorScheme.onSurface.withOpacity(
+                                    0.25,
+                                  ),
+                                  width: 1,
+                                )
+                              : null,
+                        ),
+                        child: child,
+                      ),
+                    );
+                  },
+                ),
               ),
             ),
           ),

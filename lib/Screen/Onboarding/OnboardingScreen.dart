@@ -2,12 +2,13 @@ import 'dart:ui';
 
 import 'package:dpad/dpad.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
 import '../../Core/ThemeManager/ThemeController.dart';
 import '../../Core/ThemeManager/ThemeManager.dart';
+import '../../Utils/Animation/WidgetAnimations.dart';
+import '../../Utils/Extensions/NumExtensions.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Widgets/Components/CachedNetworkImage.dart';
 import '../../Widgets/Components/ScrollConfig.dart';
@@ -64,18 +65,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           PageViewModel(
             titleWidget: const Text(
               "Title of introduction page",
-            ).animate().fadeIn(duration: 600.ms).slideY(begin: 0.3, end: 0),
+            ).animateFadeUp(duration: 600),
             bodyWidget: const Text(
               "Welcome to the app! This is a description of how it works.",
-            ).animate().fadeIn(duration: 800.ms).slideY(begin: 0.5, end: 0),
-            image:
-                const Center(child: Icon(Icons.waving_hand_rounded, size: 50.0))
-                    .animate()
-                    .scale(
-                      begin: const Offset(0.5, 0.5),
-                      end: const Offset(1, 1),
-                    )
-                    .fadeIn(duration: 800.ms),
+            ).animateFadeUp(begin: 0.5, duration: 800),
+            image: const Center(
+              child: Icon(Icons.waving_hand_rounded, size: 50.0),
+            ).animatePopIn(),
           ),
         ],
       ),
@@ -87,46 +83,35 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
     return PageViewModel(
       decoration: const PageDecoration(fullScreen: true),
-      image: _buildBackground
-          .animate(target: animate ? 1 : 0)
-          .fadeIn(duration: 1200.ms)
-          .blurXY(begin: 10, end: 0),
+      image: _buildBackground.animateBlurIn(target: animate),
       titleWidget: Text(
         "DARTOTSU",
         style: theme.textTheme.headlineLarge,
-      ).animate(target: animate ? 1 : 0).fadeIn().slideY(begin: 0.3),
+      ).animateFadeUp(target: animate),
       bodyWidget: const Text(
         "The new best Anime & Manga experience.\nBuilt for focus. Built for you.",
         textAlign: TextAlign.center,
-      ).animate(target: animate ? 1 : 0).fadeIn(delay: 200.ms).slideY(begin: 0.4),
+      ).animateFadeUp(target: animate, begin: 0.4, delay: 200.ms),
     );
   }
 
   PageViewModel get _buildWelcomeWidget {
-    final animate = _currentPage == 0;
+    final animate = _currentPage == 1;
 
     return PageViewModel(
-      titleWidget: const Text("Welcome to Dartotsu")
-          .animate(target: animate ? 1 : 0)
-          .fadeIn(duration: 800.ms)
-          .slideY(begin: 0.3, end: 0),
-      bodyWidget:
-          Column(
-                children: [
-                  const Text(
-                    "Dartotsu is a complete rewrite of Dantotsu in Flutter.\nIt's a hybrid AniList, MyAnimeList and Simkl support!",
-                  ),
-                  const SizedBox(height: 16),
-                  themeDropdown(),
-                ],
-              )
-              .animate(target: animate ? 1 : 0)
-              .fadeIn(duration: 1000.ms)
-              .slideY(begin: 0.3, end: 0),
-      image: _buildBackground
-          .animate(target: animate ? 1 : 0)
-          .fadeIn(duration: 1200.ms)
-          .blurXY(begin: 10, end: 0),
+      titleWidget: const Text(
+        "Welcome to Dartotsu",
+      ).animateFadeUp(target: animate, duration: 800),
+      bodyWidget: Column(
+        children: [
+          const Text(
+            "Dartotsu is a complete rewrite of Dantotsu in Flutter.\nIt's a hybrid AniList, MyAnimeList and Simkl support!",
+          ),
+          const SizedBox(height: 16),
+          themeDropdown(),
+        ],
+      ).animateFadeUp(target: animate, duration: 1000),
+      image: _buildBackground.animateBlurIn(target: animate),
       decoration: const PageDecoration(fullScreen: true),
     );
   }

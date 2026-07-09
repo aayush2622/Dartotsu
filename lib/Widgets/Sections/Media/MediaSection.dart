@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:dpad/dpad.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:super_sliver_list/super_sliver_list.dart';
@@ -10,6 +9,7 @@ import 'package:super_sliver_list/super_sliver_list.dart';
 import '../../../Core/Preferences/PrefManager.dart';
 import '../../../Core/Services/Model/Media.dart';
 import '../../../Core/ThemeManager/ThemeManager.dart';
+import '../../../Utils/Animation/WidgetAnimations.dart';
 import '../../../Utils/Functions/SnackBar.dart';
 import '../../Components/CachedNetworkImage.dart';
 import '../../Components/ScrollConfig.dart';
@@ -287,22 +287,7 @@ class _MediaSectionState extends State<MediaSection> {
                         },
                       ),
                     ),
-                  ).animate(
-                    effects: [
-                      const SlideEffect(
-                        begin: Offset(1, 0),
-                        end: Offset.zero,
-                        curve: Curves.easeInOut,
-                        duration: Duration(milliseconds: 200),
-                      ),
-                      const ScaleEffect(
-                        begin: Offset(0.1, 0.1),
-                        end: Offset(1, 1),
-                        curve: Curves.easeInOut,
-                        duration: Duration(milliseconds: 400),
-                      ),
-                    ],
-                  );
+                  ).animateHorizontalEntrance();
                 }, childCount: state.mediaList.length + 1),
               ),
             ],

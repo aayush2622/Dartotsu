@@ -12,7 +12,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:media_kit/media_kit.dart' as mpv;
+import 'package:media_kit/media_kit.dart';
 import 'package:rhttp/rhttp.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -74,7 +74,7 @@ void main(List<String> args) async {
     },
     zoneSpecification: ZoneSpecification(
       print: (self, parent, zone, line) {
-        Logger.log(line);
+        logger(line);
         parent.print(zone, line);
       },
     ),
@@ -109,7 +109,7 @@ Future<void> init(List<String> args) async {
 
 Future<void> _postInit(List<String> args) async {
   DeepLink.init();
-  mpv.MediaKit.ensureInitialized();
+  MediaKit.ensureInitialized();
 
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
     await WindowManager.instance.ensureInitialized();
