@@ -110,37 +110,6 @@ abstract class RefreshManager<T extends StatefulWidget> extends State<T>
   }
 }
 
-enum RefreshId {
-  Anilist,
-  Mal,
-  Kitsu,
-  Simkl,
-  Extensions;
-
-  List<int> get ids => List.generate(5, (index) => baseId + index);
-
-  int get baseId {
-    switch (this) {
-      case RefreshId.Anilist:
-        return 10;
-      case RefreshId.Mal:
-        return 20;
-      case RefreshId.Kitsu:
-        return 30;
-      case RefreshId.Simkl:
-        return 40;
-      case RefreshId.Extensions:
-        return 50;
-    }
-  }
-
-  int get animePage => baseId;
-
-  int get mangaPage => baseId + 1;
-
-  int get homePage => baseId + 2;
-}
-
 abstract class RefreshIds {
   String get animePage;
   String get mangaPage;

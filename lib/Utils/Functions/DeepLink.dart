@@ -23,7 +23,7 @@ class DeepLink {
     }).toList();
 
     if (mediaFiles.isEmpty) return;
-    print("Received video files: ${mediaFiles.map((e) => e).join(', ')}");
+    debugPrint("Received video files: ${mediaFiles.map((e) => e).join(', ')}");
     //openPlayer(Get.context!, videoPaths);
   }
 

@@ -249,7 +249,7 @@ class NativeLogger {
       if (call.method == 'onLogs') {
         final logs = (call.arguments as List).cast<String>();
         for (final log in logs) {
-          Logger.log(log, tag: 'native');
+          logger(log, tag: 'native');
         }
       }
     });

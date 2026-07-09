@@ -1,16 +1,14 @@
 import 'package:dartotsu_extension_bridge/Extensions/DownloadablePlugin.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_instance/src/extension_instance.dart';
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
-import 'package:get/get_utils/src/extensions/string_extensions.dart';
+import 'package:get/get.dart';
 
 import '../../Core/ThemeManager/LanguageSwitcher.dart';
+import '../../Core/ThemeManager/ThemeController.dart';
 import '../../Core/ThemeManager/ThemeManager.dart';
 import '../../Core/ThemeManager/language.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
+import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Utils/Functions/SnackBar.dart';
 import '../../Widgets/Components/AlertDialogBuilder.dart';
 import '../../Widgets/Components/BaseScreen.dart';
@@ -32,7 +30,6 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
 
   final manager = Get.find<ExtensionManager>();
 
-  final _selectedLanguage = 'All'.obs;
   final _searchQuery = ''.obs;
 
   final _textEditingController = TextEditingController();
@@ -45,6 +42,7 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
       length: ItemType.values.length * 2,
       vsync: this,
     );
+
     _tabBarController.addListener(() {
       _currentIndex.value = _tabBarController.index;
     });
@@ -54,7 +52,6 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
   void dispose() {
     _tabBarController.dispose();
     _textEditingController.dispose();
-    _selectedLanguage.close();
     _searchQuery.close();
     super.dispose();
   }
@@ -63,61 +60,69 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
   @override
   Widget buildContent(BuildContext context) {
     final theme = Theme.of(context).colorScheme;
+    final controller = find<ThemeController>();
 
-    return ScrollConfig(
-      context,
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: Colors.transparent,
-          title: Text(
-            getString.extension(2),
-            style: context.textTheme.bodyLarge?.copyWith(
-              color: theme.primary,
-              fontWeight: FontWeight.w600,
+    return Obx(() {
+      final isGlassMode = controller.useGlassMode.value;
+      return ScrollConfig(
+        context,
+        child: Scaffold(
+          backgroundColor: isGlassMode ? Colors.transparent : null,
+          appBar: AppBar(
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back_ios_new),
+              onPressed: () => Navigator.of(context).pop(),
             ),
-          ),
-          iconTheme: IconThemeData(color: theme.primary),
-          actions: [
-            Row(children: [..._buildActions(), const SizedBox(width: 8)]),
-          ],
-        ),
-        body: Column(
-          children: [
-            Obx(
-              () => TabBar(
-                controller: _tabBarController,
-                isScrollable: true,
-                dividerColor: Colors.transparent,
-                tabAlignment: TabAlignment.start,
-                indicator: const BoxDecoration(),
-                indicatorPadding: EdgeInsets.zero,
-                padding: EdgeInsets.zero,
-                labelPadding: EdgeInsets.zero,
-                labelColor: theme.primary,
-                unselectedLabelColor: theme.onSurfaceVariant,
-                splashFactory: NoSplash.splashFactory,
-                overlayColor: WidgetStateProperty.all(Colors.transparent),
-                tabs: _buildTabs(context),
+            elevation: 0,
+            backgroundColor: Colors.transparent,
+            title: Text(
+              getString.extension(2),
+              style: TextStyle(
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.bold,
+                fontSize: 16.0,
+                color: theme.primary,
               ),
             ),
-            _searchBar(),
-            Obx(() {
-              return Expanded(
-                child: TabBarView(
+            iconTheme: IconThemeData(color: theme.primary),
+            actions: [
+              Row(children: [..._buildActions(), const SizedBox(width: 8)]),
+            ],
+          ),
+          body: Column(
+            children: [
+              Obx(
+                () => TabBar(
                   controller: _tabBarController,
-                  children: _buildTabViews(
-                    _searchQuery.value,
-                    _selectedLanguage.value,
-                  ),
+                  isScrollable: true,
+                  dividerColor: Colors.transparent,
+                  tabAlignment: TabAlignment.start,
+                  indicator: const BoxDecoration(),
+                  indicatorPadding: EdgeInsets.zero,
+                  padding: EdgeInsets.zero,
+                  labelPadding: EdgeInsets.zero,
+                  labelColor: theme.primary,
+                  unselectedLabelColor: theme.onSurfaceVariant,
+                  splashFactory: NoSplash.splashFactory,
+                  overlayColor: WidgetStateProperty.all(Colors.transparent),
+                  tabs: _buildTabs(context),
                 ),
-              );
-            }),
-          ],
+              ),
+              const SizedBox(height: 8),
+              _searchBar(),
+              Obx(() {
+                return Expanded(
+                  child: TabBarView(
+                    controller: _tabBarController,
+                    children: _buildTabViews(_searchQuery.value),
+                  ),
+                );
+              }),
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    });
   }
 
   List<Widget> _buildActions() {
@@ -128,18 +133,27 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
       IconButton(
         icon: Icon(Icons.language_rounded, color: theme.primary),
         onPressed: () {
-          var language = completeLanguageName(_selectedLanguage.value);
-
+          final type = _currentType;
+          final extension = manager[type];
+          final languages = extension.getLanguages(type);
+          final state = extension.state(type);
           AlertDialogBuilder(context)
             ..setTitle(getString.language)
-            ..singleChoiceItems(
-              sortedLanguagesMap.keys.toList(),
-              sortedLanguagesMap.keys.toList().indexOf(language),
-              (index) {
-                _selectedLanguage.value = completeLanguageCode(
-                  sortedLanguagesMap.keys.elementAt(index),
-                );
+            ..multiChoiceItems(
+              languages.map(completeLanguageName).toList(),
+              languages.map(state.selectedLanguages.contains).toList(),
+              (checked) {
+                final selected = <String>{
+                  for (var i = 0; i < languages.length; i++)
+                    if (checked[i]) languages[i],
+                };
+
+                extension.saveSelectedLanguages(type, selected);
               },
+            )
+            ..setNegativeButton(
+              "Reset",
+              () => extension.saveSelectedLanguages(type, {}),
             )
             ..show();
         },
@@ -150,112 +164,113 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
   Widget _buildServiceManager() {
     final theme = Theme.of(context).colorScheme;
 
-    return Obx(() {
-      final type = _currentType;
-      return IconButton(
-        icon: ClipRRect(
-          borderRadius: BorderRadius.circular(12),
-          child: Image.asset(
-            manager.current[type]!.icon,
-            width: 24,
-            height: 24,
-            fit: BoxFit.cover,
-          ),
-        ),
-        onPressed: () {
-          showCustomBottomDialog(
-            context,
-            CustomBottomDialog(
-              title: "${type.name.capitalizeFirst} Manager",
-              positiveText: getString.ok,
-              positiveCallback: () => Navigator.pop(context),
-              viewList: [
-                Obx(() {
-                  final current = manager[type];
-                  final managers = manager.managers
-                      .where((e) => e.supports(type))
-                      .toList();
+    return AnimatedBuilder(
+      animation: _tabBarController,
+      builder: (_, _) {
+        final type = _currentType;
 
-                  return Column(
-                    children: managers.map((m) {
-                      final selected = current.id == m.id;
-                      final enabled =
-                          m.plugin == null || m.plugin!.installed.value;
-
-                      return Opacity(
-                        opacity: enabled ? 1 : 0.5,
-                        child: ThemedContainer(
-                          context: context,
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(24),
-                          ),
-                          margin: const EdgeInsets.symmetric(
-                            horizontal: 16,
-                            vertical: 8,
-                          ),
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 2,
-                            vertical: 8,
-                          ),
-                          color: selected ? theme.surfaceContainerHigh : null,
-                          child: ListTile(
-                            enabled: enabled,
-                            hoverColor: Colors.transparent,
-                            onLongPress: () {
-                              snackString(
-                                "${m.name} ${selected ? "selected" : "not selected"}",
-                              );
-                            },
-                            onTap: (!enabled || selected)
-                                ? null
-                                : () => manager.switchManager(type, m.id),
-                            leading: ClipOval(
-                              child: Image.asset(
-                                m.icon,
-                                width: 24,
-                                height: 24,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                            title: Text(
-                              m.name,
-                              style: context.textTheme.labelLarge,
-                            ),
-                            trailing: m.plugin == null
-                                ? null
-                                : IconButton(
-                                    icon: Icon(
-                                      enabled ? Icons.delete : Icons.download,
-                                      size: 18,
-                                    ),
-                                    onPressed: () async {
-                                      if (enabled) {
-                                        showDeleteDialog(
-                                          context,
-                                          m.plugin!,
-                                          m.name,
-                                        );
-                                      } else {
-                                        await showInstallDialog(
-                                          context,
-                                          m.plugin!,
-                                          m.name,
-                                        );
-                                      }
-                                    },
-                                  ),
-                          ),
-                        ),
-                      );
-                    }).toList(),
-                  );
-                }),
-              ],
+        return IconButton(
+          icon: ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: Image.asset(
+              manager[type].icon,
+              width: 24,
+              height: 24,
+              fit: BoxFit.cover,
             ),
-          );
-        },
-      );
-    });
+          ),
+          onPressed: () {
+            showCustomBottomDialog(
+              context,
+              CustomBottomDialog(
+                title: "${type.name.capitalizeFirst} Manager",
+                positiveText: getString.ok,
+                positiveCallback: () => Navigator.pop(context),
+                viewList: [
+                  Obx(() {
+                    final current = manager[type];
+                    final managers = manager.managers
+                        .where((e) => e.supports(type))
+                        .toList();
+
+                    return Column(
+                      children: managers.map((m) {
+                        final selected = current.id == m.id;
+                        final enabled =
+                            m.plugin == null || m.plugin!.installed.value;
+
+                        return Opacity(
+                          opacity: enabled ? 1 : 0.5,
+                          child: ThemedContainer(
+                            context: context,
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(24),
+                            ),
+                            margin: const EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: 8,
+                            ),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 2,
+                              vertical: 8,
+                            ),
+                            color: selected ? theme.surfaceContainerHigh : null,
+                            child: ListTile(
+                              enabled: enabled,
+                              hoverColor: Colors.transparent,
+                              onTap: (!enabled || selected)
+                                  ? null
+                                  : () => manager.switchManager(type, m.id),
+                              leading: ClipOval(
+                                child: Image.asset(
+                                  m.icon,
+                                  width: 24,
+                                  height: 24,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              title: Text(
+                                m.name,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              trailing: m.plugin == null
+                                  ? null
+                                  : IconButton(
+                                      icon: Icon(
+                                        enabled ? Icons.delete : Icons.download,
+                                        size: 18,
+                                      ),
+                                      onPressed: () async {
+                                        if (enabled) {
+                                          showDeleteDialog(
+                                            context,
+                                            m.plugin!,
+                                            m.name,
+                                          );
+                                        } else {
+                                          await showInstallDialog(
+                                            context,
+                                            m.plugin!,
+                                            m.name,
+                                          );
+                                        }
+                                      },
+                                    ),
+                            ),
+                          ),
+                        );
+                      }).toList(),
+                    );
+                  }),
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
   }
 
   Widget _buildRepoManager() {
@@ -372,10 +387,7 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
                             const SizedBox(height: 4),
                             Text(
                               "${repo.extensions ?? "?"} extensions",
-                              style: context.textTheme.labelLarge?.copyWith(
-                                color: theme.primary,
-                                fontSize: 12,
-                              ),
+                              style: TextStyle(color: theme.primary),
                             ),
                           ],
                         ),
@@ -405,7 +417,7 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
       child: ThemedContainer(
         context: context,
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: BorderRadius.circular(16),
         padding: const EdgeInsets.symmetric(horizontal: 8),
         child: TextField(
           controller: _textEditingController,
@@ -459,7 +471,7 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
           children: [
             Text(
               label,
-              style: context.textTheme.titleMedium?.copyWith(
+              style: ContextExtensions(context).textTheme.titleMedium?.copyWith(
                 fontSize: 14,
                 color: selected ? theme.primary : theme.onSurfaceVariant,
               ),
@@ -476,9 +488,10 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
               ),
               child: Text(
                 "$count",
-                style: context.textTheme.labelMedium?.copyWith(
-                  color: selected ? theme.primary : theme.onSurfaceVariant,
-                ),
+                style: ContextExtensions(context).textTheme.labelMedium
+                    ?.copyWith(
+                      color: selected ? theme.primary : theme.onSurfaceVariant,
+                    ),
               ),
             ),
           ],
@@ -496,26 +509,50 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
 
       final installedIndex = index++;
       tabs.add(
-        Obx(
-          () => tabWidget(
+        Obx(() {
+          final count = manager.installed.value.where((source) {
+            final matchesSearch =
+                source.name?.toLowerCase().contains(_searchQuery.value) ??
+                false;
+
+            final matchesLanguage =
+                manager.selectedLanguages.isEmpty ||
+                manager.selectedLanguages.contains(source.lang);
+
+            return matchesSearch && matchesLanguage;
+          }).length;
+
+          return tabWidget(
             context,
             'Installed ${type.name}',
-            manager.installed.value.length,
+            count,
             _currentIndex.value == installedIndex,
-          ),
-        ),
+          );
+        }),
       );
 
       final availableIndex = index++;
       tabs.add(
-        Obx(
-          () => tabWidget(
+        Obx(() {
+          final count = manager.available.value.where((source) {
+            final matchesSearch =
+                source.name?.toLowerCase().contains(_searchQuery.value) ??
+                false;
+
+            final matchesLanguage =
+                manager.selectedLanguages.isEmpty ||
+                manager.selectedLanguages.contains(source.lang);
+
+            return matchesSearch && matchesLanguage;
+          }).length;
+
+          return tabWidget(
             context,
             'Available ${type.name}',
-            manager.available.value.length,
+            count,
             _currentIndex.value == availableIndex,
-          ),
-        ),
+          );
+        }),
       );
     }
 
@@ -530,7 +567,7 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
   }
 
   static const _tabOrder = [ItemType.anime, ItemType.manga, ItemType.novel];
-  List<Widget> _buildTabViews(String query, String lang) {
+  List<Widget> _buildTabViews(String query) {
     final views = <Widget>[];
 
     for (final type in _tabOrder) {
@@ -546,7 +583,6 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
                 itemType: type,
                 isInstalled: true,
                 searchQuery: query,
-                selectedLanguage: lang,
               ),
       );
 
@@ -565,7 +601,6 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
                 itemType: type,
                 isInstalled: false,
                 searchQuery: query,
-                selectedLanguage: lang,
               ),
       );
     }

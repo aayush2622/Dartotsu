@@ -15,10 +15,18 @@ abstract class BaseScreen<T extends StatefulWidget> extends State<T> {
 
   @override
   Widget build(BuildContext context) {
+    final controller = find<ThemeController>();
+
     return SafeArea(
-      child: Stack(
-        children: [Obx(() => _buildBackground()), buildContent(context)],
-      ),
+      child: Obx(() {
+        final isGlassMode = controller.useGlassMode.value;
+        return Scaffold(
+          backgroundColor: isGlassMode ? Colors.transparent : null,
+          body: Stack(
+            children: [Obx(() => _buildBackground()), buildContent(context)],
+          ),
+        );
+      }),
     );
   }
 

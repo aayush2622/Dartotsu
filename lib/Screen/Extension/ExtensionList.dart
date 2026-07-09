@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import '../../Core/Preferences/PrefManager.dart';
 import '../../Core/ThemeManager/ThemeManager.dart';
 import '../../Core/ThemeManager/language.dart';
+import '../../Utils/Animation/WidgetAnimations.dart';
 import '../../Utils/Functions/SnackBar.dart';
 import '../../Widgets/Components/CachedNetworkImage.dart';
 
@@ -14,14 +15,12 @@ class ExtensionList extends StatefulWidget {
   final ItemType itemType;
   final bool isInstalled;
   final String searchQuery;
-  final String selectedLanguage;
 
   const ExtensionList({
     super.key,
     required this.itemType,
     required this.isInstalled,
     required this.searchQuery,
-    required this.selectedLanguage,
   });
 
   @override
@@ -35,12 +34,11 @@ class _ExtensionListState extends State<ExtensionList> {
 
   Extension get extension => manager[widget.itemType];
 
+  Set<String> get selectedLanguages => state.selectedLanguages;
+
   ExtensionState get state => extension.state(widget.itemType);
 
   String get _search => widget.searchQuery.trim().toLowerCase();
-
-  bool get _showAllLanguages =>
-      widget.selectedLanguage == 'All' || widget.selectedLanguage == 'all';
 
   String get _orderKey => '${extension.name}_${widget.itemType.name}_order';
 
@@ -84,8 +82,11 @@ class _ExtensionListState extends State<ExtensionList> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context).colorScheme;
     return Obx(
       () => RefreshIndicator(
+        backgroundColor: theme.primary,
+        color: theme.onPrimary,
         onRefresh: _refreshData,
         child: widget.isInstalled
             ? _buildInstalledList()
@@ -116,7 +117,7 @@ class _ExtensionListState extends State<ExtensionList> {
 
         return KeyedSubtree(
           key: ValueKey(source.id),
-          child: _buildSourceCard(source, index),
+          child: _buildSourceCard(source, index).animateDropIn(),
         );
       },
     );
@@ -131,21 +132,25 @@ class _ExtensionListState extends State<ExtensionList> {
         SliverPadding(
           padding: const EdgeInsets.all(8),
           sliver: SliverList(
-            delegate: SliverChildBuilderDelegate((context, index) {
-              final item = items[index];
+            delegate: SliverChildBuilderDelegate(
+              (context, index) {
+                final item = items[index];
+                if (item.isHeader) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    child: Text(
+                      completeLanguageName(item.language!),
+                      style: _headerStyle,
+                    ),
+                  );
+                }
 
-              if (item.isHeader) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8),
-                  child: Text(
-                    completeLanguageName(item.language!),
-                    style: _headerStyle,
-                  ),
-                );
-              }
-
-              return _buildSourceCard(item.source!, 0);
-            }, childCount: items.length),
+                return _buildSourceCard(item.source!, index).animateDropIn();
+              },
+              childCount: items.length,
+              addAutomaticKeepAlives: false,
+              addRepaintBoundaries: true,
+            ),
           ),
         ),
       ],
@@ -183,10 +188,14 @@ class _ExtensionListState extends State<ExtensionList> {
       List<Source>.from(state.installed.value),
     );
 
-    if (_search.isEmpty) return installed;
-
     return installed.where((source) {
-      return source.name?.toLowerCase().contains(_search) ?? false;
+      final matchesSearch =
+          source.name?.toLowerCase().contains(_search) ?? false;
+
+      final matchesLanguage =
+          selectedLanguages.isEmpty || selectedLanguages.contains(source.lang);
+
+      return matchesSearch && matchesLanguage;
     }).toList();
   }
 
@@ -194,9 +203,9 @@ class _ExtensionListState extends State<ExtensionList> {
     final grouped = <String, List<Source>>{};
 
     for (final source in state.available.value) {
-      final lang = source.lang ?? 'Unknown';
+      final lang = source.lang?.toLowerCase() ?? 'Unknown';
 
-      if (!_showAllLanguages && lang != widget.selectedLanguage) {
+      if (selectedLanguages.isNotEmpty && !selectedLanguages.contains(lang)) {
         continue;
       }
 
@@ -325,29 +334,24 @@ class _ExtensionListState extends State<ExtensionList> {
       );
     }
 
-    return Column(
-      children: [
-        const SizedBox(height: 12),
-        Row(
-          children: [
-            chip(completeLanguageName(source.lang?.toLowerCase() ?? 'unknown')),
+    return Padding(
+      padding: const EdgeInsets.only(top: 12),
+      child: Wrap(
+        spacing: 6,
+        runSpacing: 6,
+        children: [
+          chip(completeLanguageName(source.lang?.toLowerCase() ?? 'unknown')),
 
-            if ((source.version ?? '').isNotEmpty) ...[
-              const SizedBox(width: 6),
-              chip('v${source.version}'),
-            ],
+          if ((source.version ?? '').isNotEmpty) chip('v${source.version}'),
 
-            if (source.isNsfw ?? false) ...[
-              const SizedBox(width: 6),
-              chip(
-                '18+',
-                background: theme.errorContainer.withOpacity(.35),
-                foreground: theme.error,
-              ),
-            ],
-          ],
-        ),
-      ],
+          if (source.isNsfw ?? false)
+            chip(
+              '18+',
+              background: theme.errorContainer.withOpacity(.35),
+              foreground: theme.error,
+            ),
+        ],
+      ),
     );
   }
 
@@ -389,7 +393,7 @@ class _ExtensionListState extends State<ExtensionList> {
 
             if (!mounted) return;
 
-            /*navigateToPage(
+            /* navigateToPage(
               context,
               SourcePreferenceScreen(source: source, preference: preference),
             );*/
