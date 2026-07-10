@@ -141,6 +141,7 @@ Future init() async {
     initializeDateFormatting(locale);
   }
   AppUpdater().checkForUpdate();
+
   Discord.getSavedToken();
 
   initDeepLinkListener();
