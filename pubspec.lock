@@ -1431,11 +1431,10 @@ packages:
   rhttp:
     dependency: "direct main"
     description:
-      path: rhttp
-      ref: main
-      resolved-ref: "9871f1c25d0cf75553af85698b9f03d38f438aed"
-      url: "https://codeberg.org/Tienisto/rhttp.git"
-    source: git
+      name: rhttp
+      sha256: "954d5a9aa5a4f1e2a8612e8cb9ecbe4fc0826fcbf0406f40115573e2e92b7dde"
+      url: "https://pub.dev"
+    source: hosted
     version: "0.18.0"
   rxdart:
     dependency: transitive

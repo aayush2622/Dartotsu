@@ -104,11 +104,7 @@ dependencies:
       url: https://github.com/aayush2622/DartotsuExtensionBridge.git
       ref: master
   string_similarity: ^2.2.0
-  rhttp:
-    git:
-      url: https://codeberg.org/Tienisto/rhttp.git
-      ref: main
-      path: rhttp
+  rhttp: ^0.18.0
 # Development dependencies
 dev_dependencies:
   flutter_test:
