@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:dartotsu/Functions/Function.dart';
 import 'package:dartotsu/Preferences/IsarDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
 import 'package:dartotsu/Preferences/PrefManager.dart';
 import 'package:dartotsu_extension_bridge/AddonManager.dart';
@@ -161,7 +162,7 @@ class MediaKitPlayer extends GetxController {
       final addon = Get.find<AddonManager>().get<LibtorrentAddon>();
 
       if (!addon.installed.value) {
-        debugPrint(
+        snackString(
           "Libtorrent addon is not installed. Please install it from Addons.",
         );
         throw StateError(

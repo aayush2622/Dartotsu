@@ -47,7 +47,10 @@ class AppUpdater {
     );
     final compareData = jsonDecode(compare.body);
     final isUpdate = compareData['status'] == 'behind';
-    if (!isUpdate) return;
+    if (!isUpdate) {
+      if (force) snackString("No Update Available");
+      return;
+    }
 
     updateBottomSheet(data);
   }

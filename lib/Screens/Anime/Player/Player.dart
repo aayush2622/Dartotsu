@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:dartotsu/Functions/Extensions.dart';
+import 'package:dartotsu/Functions/Function.dart';
 import 'package:dartotsu/Preferences/IsarDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
 import 'package:dartotsu/Preferences/PrefManager.dart';
 import 'package:dartotsu/Theme/LanguageSwitcher.dart';
@@ -120,7 +121,7 @@ class MediaPlayerState extends State<MediaPlayer>
           completed ? Duration.zero : Duration(seconds: currentProgress ?? 0),
         )
         .catchError((e, s) {
-          debugPrint("Error opening video: $e\n$s");
+          snackString("Error opening video: $e\n$s");
           if (mounted) {
             Navigator.pop(context);
           }
