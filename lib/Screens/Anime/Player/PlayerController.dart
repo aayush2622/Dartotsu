@@ -31,10 +31,7 @@ import 'Player.dart';
 class PlayerController extends StatefulWidget {
   final MediaPlayerState player;
 
-  const PlayerController({
-    super.key,
-    required this.player,
-  });
+  const PlayerController({super.key, required this.player});
 
   @override
   State<PlayerController> createState() => _PlayerControllerState();
@@ -166,17 +163,10 @@ class _PlayerControllerState extends State<PlayerController> {
       );
       if (!mounted || nextEpisode == null) return;
       snackString("Auto-playing Episode ${nextEpisode.episodeNumber}...");
-      return onEpisodeClick(
-        context,
-        nextEpisode,
-        source,
-        media,
-        () {
-          Get.back();
-          widget.player.keepOrientation = true;
-        },
-        servers: videos.isNotEmpty ? videos : null,
-      );
+      return onEpisodeClick(context, nextEpisode, source, media, () {
+        Get.back();
+        widget.player.keepOrientation = true;
+      }, servers: videos.isNotEmpty ? videos : null);
     });
   }
 
@@ -192,7 +182,8 @@ class _PlayerControllerState extends State<PlayerController> {
   Future<void> setTimeStamps() async {
     timeStamps.value += currentQuality.timeStamps ?? [];
 
-    var stamps = await AniSkip.getResult(
+    var stamps =
+        await AniSkip.getResult(
           malId: media.idMAL,
           episodeNumber: currentEpisode.episodeNumber.toInt(),
           episodeLength: controller.maxTime.value.inSeconds,
@@ -200,34 +191,33 @@ class _PlayerControllerState extends State<PlayerController> {
         ) ??
         [];
     timeStamps.value = stamps
-        .map((e) => TimeStamp(
-              startTime: e.interval.startTime,
-              endTime: e.interval.endTime,
-              name: e.name,
-            ))
+        .map(
+          (e) => TimeStamp(
+            startTime: e.interval.startTime,
+            endTime: e.interval.endTime,
+            name: e.name,
+          ),
+        )
         .toList();
 
-    controller.currentTime.listen(
-      (v) {
-        if (v.inSeconds > 0) _saveProgress(v.inSeconds);
+    controller.currentTime.listen((v) {
+      if (v.inSeconds > 0) _saveProgress(v.inSeconds);
 
-        chapterText.value = controller.chapters
-                .lastWhereOrNull(
-                  (e) => e.startTime <= v.inSeconds / 1.0,
-                )
-                ?.title ??
-            '';
+      chapterText.value =
+          controller.chapters
+              .lastWhereOrNull((e) => e.startTime <= v.inSeconds / 1.0)
+              ?.title ??
+          '';
 
-        timeStampsText.value = timeStamps
-                .firstWhereOrNull(
-                  (e) =>
-                      (e.startTime <= v.inSeconds) &&
-                      (e.endTime >= v.inSeconds),
-                )
-                ?.name ??
-            '';
-      },
-    );
+      timeStampsText.value =
+          timeStamps
+              .firstWhereOrNull(
+                (e) =>
+                    (e.startTime <= v.inSeconds) && (e.endTime >= v.inSeconds),
+              )
+              ?.name ??
+          '';
+    });
   }
 
   Future<void> _saveProgress(int currentProgress) async {
@@ -257,10 +247,7 @@ class _PlayerControllerState extends State<PlayerController> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               _buildTimeInfo(),
-              Transform.scale(
-                scaleX: 1.01,
-                child: _buildProgressBar(),
-              ),
+              Transform.scale(scaleX: 1.01, child: _buildProgressBar()),
               _buildBottomControls(),
             ],
           ),
@@ -302,18 +289,16 @@ class _PlayerControllerState extends State<PlayerController> {
               ),
               Text(
                 " / ",
-                style: TextStyle(
-                  color: Colors.white.withValues(alpha: 0.5),
-                ),
+                style: TextStyle(color: Colors.white.withValues(alpha: 0.5)),
               ),
               Text(
-                _formatTime(controller.maxTime.value == Duration.zero &&
-                        maxProgress != null
-                    ? maxProgress!
-                    : controller.maxTime.value.inSeconds),
-                style: TextStyle(
-                  color: Colors.white.withValues(alpha: 0.5),
+                _formatTime(
+                  controller.maxTime.value == Duration.zero &&
+                          maxProgress != null
+                      ? maxProgress!
+                      : controller.maxTime.value.inSeconds,
                 ),
+                style: TextStyle(color: Colors.white.withValues(alpha: 0.5)),
               ),
               Obx(() {
                 final sectionText = timeStampsText.value != ''
@@ -353,87 +338,89 @@ class _PlayerControllerState extends State<PlayerController> {
         children: [
           IgnorePointer(
             ignoring: isControlsLocked.value,
-            child: Obx(
-              () {
-                final bufferingValue =
-                    controller.bufferingTime.value.inSeconds.toDouble();
-                final currentValue =
-                    controller.currentTime.value == Duration.zero &&
-                            currentProgress != null
-                        ? currentProgress!.toDouble()
-                        : controller.currentTime.value.inSeconds.toDouble();
+            child: Obx(() {
+              final bufferingValue = controller.bufferingTime.value.inSeconds
+                  .toDouble();
+              final currentValue =
+                  controller.currentTime.value == Duration.zero &&
+                      currentProgress != null
+                  ? currentProgress!.toDouble()
+                  : controller.currentTime.value.inSeconds.toDouble();
 
-                final maxValue = controller.maxTime.value == Duration.zero &&
-                        maxProgress != null
-                    ? maxProgress!.toDouble()
-                    : controller.maxTime.value.inSeconds.toDouble();
+              final maxValue =
+                  controller.maxTime.value == Duration.zero &&
+                      maxProgress != null
+                  ? maxProgress!.toDouble()
+                  : controller.maxTime.value.inSeconds.toDouble();
 
-                return SliderTheme(
-                  data: SliderThemeData(
-                      trackHeight: thumbLess ? 5.8 : 2,
-                      thumbColor: Theme.of(context).colorScheme.primary,
-                      activeTrackColor: Theme.of(context).colorScheme.primary,
-                      inactiveTrackColor:
-                          const Color.fromARGB(255, 121, 121, 121),
-                      secondaryActiveTrackColor:
-                          const Color.fromARGB(255, 167, 167, 167),
-                      thumbShape: thumbLess
-                          ? SliderComponentShape.noThumb
-                          : const RoundSliderThumbShape(enabledThumbRadius: 6),
-                      overlayShape: SliderComponentShape.noOverlay,
-                      trackShape: SectionedRoundedRectSliderTrackShape(
-                          sections: timeStamps.map(
-                            (timestamp) {
-                              return TrackSection(
-                                start: timestamp.startTime /
-                                    (maxValue > 0 ? maxValue : 1),
-                                end: timestamp.endTime /
-                                    (maxValue > 0 ? maxValue : 1),
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .inversePrimary
-                                    .withValues(
-                                      alpha: 0.65,
-                                    ),
-                              );
-                            },
-                          ).toList(),
-                          chapters: controller.chapters
-                              .where((chapter) =>
-                                  chapter.startTime /
-                                      (maxValue > 0 ? maxValue : 1) >
-                                  0.01)
-                              .map(
-                            (chapter) {
-                              return TrackChapter(
-                                position: chapter.startTime /
-                                    (maxValue > 0 ? maxValue : 1),
-                              );
-                            },
-                          ).toList())),
-                  child: Slider(
-                    min: 0,
-                    max: maxValue > 0 ? maxValue : 1,
-                    value: currentValue.clamp(0.0, maxValue),
-                    secondaryTrackValue: bufferingValue.clamp(0.0, maxValue),
-                    secondaryActiveColor: Colors.white,
-                    onChangeEnd: (val) async {
-                      controller.seek(Duration(seconds: val.toInt()));
-                    },
-                    onChanged: (double value) async {
-                      if (controller.player.platform is NativePlayer) {
-                        await controller.nativeCommand(
-                          ['seek', value.toString(), "absolute+keyframes"],
-                        );
-                      } else {
-                        controller.seek(Duration(seconds: value.toInt()));
-                      }
-                    },
+              return SliderTheme(
+                data: SliderThemeData(
+                  trackHeight: thumbLess ? 5.8 : 2,
+                  thumbColor: Theme.of(context).colorScheme.primary,
+                  activeTrackColor: Theme.of(context).colorScheme.primary,
+                  inactiveTrackColor: const Color.fromARGB(255, 121, 121, 121),
+                  secondaryActiveTrackColor: const Color.fromARGB(
+                    255,
+                    167,
+                    167,
+                    167,
                   ),
-                );
-              },
-            ),
-          )
+                  thumbShape: thumbLess
+                      ? SliderComponentShape.noThumb
+                      : const RoundSliderThumbShape(enabledThumbRadius: 6),
+                  overlayShape: SliderComponentShape.noOverlay,
+                  trackShape: SectionedRoundedRectSliderTrackShape(
+                    sections: timeStamps.map((timestamp) {
+                      return TrackSection(
+                        start:
+                            timestamp.startTime / (maxValue > 0 ? maxValue : 1),
+                        end: timestamp.endTime / (maxValue > 0 ? maxValue : 1),
+                        color: Theme.of(
+                          context,
+                        ).colorScheme.inversePrimary.withValues(alpha: 0.65),
+                      );
+                    }).toList(),
+                    chapters: controller.chapters
+                        .where(
+                          (chapter) =>
+                              chapter.startTime /
+                                  (maxValue > 0 ? maxValue : 1) >
+                              0.01,
+                        )
+                        .map((chapter) {
+                          return TrackChapter(
+                            position:
+                                chapter.startTime /
+                                (maxValue > 0 ? maxValue : 1),
+                          );
+                        })
+                        .toList(),
+                  ),
+                ),
+                child: Slider(
+                  min: 0,
+                  max: maxValue > 0 ? maxValue : 1,
+                  value: currentValue.clamp(0.0, maxValue),
+                  secondaryTrackValue: bufferingValue.clamp(0.0, maxValue),
+                  secondaryActiveColor: Colors.white,
+                  onChangeEnd: (val) async {
+                    controller.seek(Duration(seconds: val.toInt()));
+                  },
+                  onChanged: (double value) async {
+                    if (controller.player.platform is NativePlayer) {
+                      await controller.nativeCommand([
+                        'seek',
+                        value.toString(),
+                        "absolute+keyframes",
+                      ]);
+                    } else {
+                      controller.seek(Duration(seconds: value.toInt()));
+                    }
+                  },
+                ),
+              );
+            }),
+          ),
         ],
       ),
     );
@@ -447,52 +434,47 @@ class _PlayerControllerState extends State<PlayerController> {
           onTap: () => Navigator.pop(context),
           child: const Padding(
             padding: EdgeInsets.only(top: 5.0),
-            child: Icon(
-              Icons.arrow_back_ios_new_rounded,
-              color: Colors.white,
-            ),
+            child: Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white),
           ),
         ),
         const SizedBox(width: 10),
         Expanded(
-          child: Obx(
-            () {
-              if (isControlsLocked.value) {
-                return const SizedBox(height: 24);
-              }
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    alignment: Alignment.topLeft,
-                    child: Text(
-                      "Episode ${currentEpisode.episodeNumber}: ${currentEpisode.name ?? currentEpisode.episodeNumber}",
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      maxLines: 1,
+          child: Obx(() {
+            if (isControlsLocked.value) {
+              return const SizedBox(height: 24);
+            }
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    "Episode ${currentEpisode.episodeNumber}: ${currentEpisode.name ?? currentEpisode.episodeNumber}",
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+                Container(
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    media.mainName(),
+                    style: const TextStyle(
+                      color: Color.fromARGB(255, 190, 190, 190),
+                      fontSize: 13,
                       overflow: TextOverflow.ellipsis,
                     ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
-                  Container(
-                    alignment: Alignment.topLeft,
-                    child: Text(
-                      media.mainName(),
-                      style: const TextStyle(
-                        color: Color.fromARGB(255, 190, 190, 190),
-                        fontSize: 13,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                ],
-              );
-            },
-          ),
+                ),
+              ],
+            );
+          }),
         ),
         _buildControlButton(
           icon: Icons.video_collection_rounded,
@@ -504,17 +486,15 @@ class _PlayerControllerState extends State<PlayerController> {
           onPressed: () => _playBackSpeedDialog(),
         ),
         const SizedBox(width: 24),
-        Obx(
-          () {
-            return _buildControlButton(
-              icon: isControlsLocked.value
-                  ? Icons.lock_rounded
-                  : Icons.lock_open_rounded,
-              onPressed: () => isControlsLocked.value = !isControlsLocked.value,
-              shouldLock: false,
-            );
-          },
-        ),
+        Obx(() {
+          return _buildControlButton(
+            icon: isControlsLocked.value
+                ? Icons.lock_rounded
+                : Icons.lock_open_rounded,
+            onPressed: () => isControlsLocked.value = !isControlsLocked.value,
+            shouldLock: false,
+          );
+        }),
       ],
     );
   }
@@ -522,10 +502,7 @@ class _PlayerControllerState extends State<PlayerController> {
   Widget _buildBottomControls() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        _buildLeftBottomControls(),
-        _buildRightBottomControls(),
-      ],
+      children: [_buildLeftBottomControls(), _buildRightBottomControls()],
     );
   }
 
@@ -553,7 +530,7 @@ class _PlayerControllerState extends State<PlayerController> {
                         ),
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
             );
@@ -617,6 +594,7 @@ class _PlayerControllerState extends State<PlayerController> {
                   size: 42,
                   onPressed: () {
                     controller.pause();
+
                     onEpisodeClick(
                       context,
                       episodeList[index - 1],
@@ -675,16 +653,22 @@ class _PlayerControllerState extends State<PlayerController> {
     bool shouldLock = true,
   }) {
     if (shouldLock) {
-      return Obx(() => isControlsLocked.value
-          ? const SizedBox(height: 24)
-          : _buildButton(icon, onPressed, size, color));
+      return Obx(
+        () => isControlsLocked.value
+            ? const SizedBox(height: 24)
+            : _buildButton(icon, onPressed, size, color),
+      );
     } else {
       return _buildButton(icon, onPressed, size, color);
     }
   }
 
   Widget _buildButton(
-      IconData icon, VoidCallback onPressed, double size, Color color) {
+    IconData icon,
+    VoidCallback onPressed,
+    double size,
+    Color color,
+  ) {
     return InkWell(
       borderRadius: BorderRadius.circular(10),
       onTap: onPressed,
@@ -700,9 +684,11 @@ class _PlayerControllerState extends State<PlayerController> {
       ..singleChoiceItems(speedMap(cursed), selectedItemIndex, (index) {
         settings.speed = speedMap(cursed)[index];
         MediaSettings.saveMediaSettings(
-            media..settings.playerSettings.speed = settings.speed);
+          media..settings.playerSettings.speed = settings.speed,
+        );
         controller.setRate(
-            double.parse(speedMap(cursed)[index].replaceFirst("x", "")));
+          double.parse(speedMap(cursed)[index].replaceFirst("x", "")),
+        );
       })
       ..show();
   }
@@ -727,10 +713,7 @@ class _PlayerControllerState extends State<PlayerController> {
         final file = pickedFile!.files.single;
         currentQuality.subtitles ??= [];
         currentQuality.subtitles!.add(
-          v.Track(
-            file: file.path!,
-            label: file.name,
-          ),
+          v.Track(file: file.path!, label: file.name),
         );
 
         controller.setSubtitle(
@@ -763,12 +746,7 @@ class _PlayerControllerState extends State<PlayerController> {
 
         final file = pickedFile!.files.single;
         currentQuality.audios ??= [];
-        currentQuality.audios!.add(
-          v.Track(
-            file: file.path,
-            label: file.name,
-          ),
-        );
+        currentQuality.audios!.add(v.Track(file: file.path, label: file.name));
         await controller.setAudio(
           file.path!,
           file.name,
@@ -793,49 +771,46 @@ class _PlayerControllerState extends State<PlayerController> {
       return Column(
         children: currentQuality.subtitles!.map((sub) {
           return Card(
-              margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-              shape: RoundedRectangleBorder(
+            margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            elevation: 4,
+            child: SizedBox(
+              width: double.infinity,
+              child: InkWell(
+                onTap: () {
+                  if (controller.currentSubtitleUri.value == sub.file) {
+                    controller.resetSubtitle().then((_) => controller.play());
+                    Get.back();
+                  } else {
+                    controller
+                        .setSubtitle(
+                          sub.file ?? "",
+                          sub.label ?? "",
+                          sub.file?.toNullInt() == null,
+                        )
+                        .then((_) => controller.play());
+                    Get.back();
+                  }
+                },
                 borderRadius: BorderRadius.circular(12),
-              ),
-              elevation: 4,
-              child: SizedBox(
-                width: double.infinity,
-                child: InkWell(
-                  onTap: () {
-                    if (controller.currentSubtitleUri.value == sub.file) {
-                      controller.resetSubtitle().then(
-                            (_) => controller.play(),
-                          );
-                      Get.back();
-                    } else {
-                      controller
-                          .setSubtitle(
-                            sub.file ?? "",
-                            sub.label ?? "",
-                            sub.file?.toNullInt() == null,
-                          )
-                          .then(
-                            (_) => controller.play(),
-                          );
-                      Get.back();
-                    }
-                  },
-                  borderRadius: BorderRadius.circular(12),
-                  child: Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Text(
-                      sub.label ?? "",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: controller.currentSubtitleUri.value == sub.file
-                            ? Theme.of(context).colorScheme.primary
-                            : Theme.of(context).colorScheme.onSurface,
-                      ),
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Text(
+                    sub.label ?? "",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: controller.currentSubtitleUri.value == sub.file
+                          ? Theme.of(context).colorScheme.primary
+                          : Theme.of(context).colorScheme.onSurface,
                     ),
                   ),
                 ),
-              ));
+              ),
+            ),
+          );
         }).toList(),
       );
     }
@@ -843,47 +818,43 @@ class _PlayerControllerState extends State<PlayerController> {
 
   Widget _buildAudioList(bool audio) {
     if (audio) {
-      return const Center(
-        heightFactor: 4,
-        child: Text("No audio available"),
-      );
+      return const Center(heightFactor: 4, child: Text("No audio available"));
     } else {
       return Column(
         children: currentQuality.audios!.map((audio) {
           return Card(
-              margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-              shape: RoundedRectangleBorder(
+            margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            elevation: 4,
+            child: SizedBox(
+              width: double.infinity,
+              child: InkWell(
+                onTap: () {
+                  controller
+                      .setAudio(
+                        audio.file ?? "",
+                        audio.label ?? "",
+                        audio.file?.toNullInt() == null,
+                      )
+                      .then((_) => controller.play());
+                  Get.back();
+                },
                 borderRadius: BorderRadius.circular(12),
-              ),
-              elevation: 4,
-              child: SizedBox(
-                width: double.infinity,
-                child: InkWell(
-                  onTap: () {
-                    controller
-                        .setAudio(
-                          audio.file ?? "",
-                          audio.label ?? "",
-                          audio.file?.toNullInt() == null,
-                        )
-                        .then(
-                          (_) => controller.play(),
-                        );
-                    Get.back();
-                  },
-                  borderRadius: BorderRadius.circular(12),
-                  child: Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Text(
-                      audio.label ?? "",
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Text(
+                    audio.label ?? "",
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
-              ));
+              ),
+            ),
+          );
         }).toList(),
       );
     }
@@ -901,9 +872,7 @@ class _PlayerControllerState extends State<PlayerController> {
             backgroundColor: Colors.black.withValues(alpha: 0.2),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15),
-              side: BorderSide(
-                color: Theme.of(context).colorScheme.primary,
-              ),
+              side: BorderSide(color: Theme.of(context).colorScheme.primary),
             ),
           ),
           child: SizedBox(
@@ -912,41 +881,38 @@ class _PlayerControllerState extends State<PlayerController> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Obx(
-                  () {
-                    return Text(
-                      timeStampsText.value != ''
-                          ? timeStamps
+                Obx(() {
+                  return Text(
+                    timeStampsText.value != ''
+                        ? timeStamps
                                   .firstWhere(
-                                      (e) => e.name == timeStampsText.value)
+                                    (e) => e.name == timeStampsText.value,
+                                  )
                                   .name ??
                               ''
-                          : "+${settings.skipDuration}s",
-                      style: const TextStyle(
-                        fontSize: 14,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.bold,
-                      ),
-                    );
-                  },
-                ),
-                const Icon(
-                  Icons.fast_forward_rounded,
-                  size: 24,
-                )
+                        : "+${settings.skipDuration}s",
+                    style: const TextStyle(
+                      fontSize: 14,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.bold,
+                    ),
+                  );
+                }),
+                const Icon(Icons.fast_forward_rounded, size: 24),
               ],
             ),
           ),
         ),
-        const SizedBox(height: 8)
+        const SizedBox(height: 8),
       ],
     );
   }
 
   void _fastForward(int seconds) {
     if (timeStampsText.value != '') {
-      var current = timeStamps
-          .firstWhere((element) => element.name == timeStampsText.value);
+      var current = timeStamps.firstWhere(
+        (element) => element.name == timeStampsText.value,
+      );
       controller.seek(Duration(seconds: current.endTime.toInt()));
       return;
     }
@@ -969,7 +935,8 @@ class _PlayerControllerState extends State<PlayerController> {
     resizeMode.value = resizeMap[fitType] ?? BoxFit.contain;
     settings.resizeMode = fitType;
     MediaSettings.saveMediaSettings(
-        media..settings.playerSettings.resizeMode = fitType);
+      media..settings.playerSettings.resizeMode = fitType,
+    );
     snackString(resizeStringMap[fitType]);
   }
 
@@ -977,8 +944,10 @@ class _PlayerControllerState extends State<PlayerController> {
     final lastSourceKey = "${media.id}-${source.name}-lastSource";
     final autoSourceKey = "${media.id}-${source.name}-autoSource";
 
-    var autoSelectSourceSetting =
-        loadCustomData(autoSourceKey, defaultValue: false);
+    var autoSelectSourceSetting = loadCustomData(
+      autoSourceKey,
+      defaultValue: false,
+    );
 
     var episodeDialog = CustomBottomDialog(
       title: "Sources",
@@ -1011,53 +980,57 @@ class _PlayerControllerState extends State<PlayerController> {
           children: videos.map((video) {
             int index = videos.indexOf(video);
             return Card(
-                margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                elevation: 4,
-                child: SizedBox(
-                  width: double.infinity,
-                  child: InkWell(
-                    onTap: () {
-                      if (currentQuality == videos[index]) {
-                        Get.back();
-                        return;
-                      }
-                      currentQuality = videos[index];
-                      saveCustomData(lastSourceKey,
-                          currentQuality.title ?? currentQuality.quality);
-                      controller.open(
-                        currentQuality,
-                        controller.currentTime.value,
-                      );
+              margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              elevation: 4,
+              child: SizedBox(
+                width: double.infinity,
+                child: InkWell(
+                  onTap: () async {
+                    if (currentQuality == videos[index]) {
                       Get.back();
-                    },
-                    borderRadius: BorderRadius.circular(12),
-                    child: Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            child: Text(
-                              videos[index].title ?? videos[index].quality,
-                              style: const TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
+                      return;
+                    }
+                    currentQuality = videos[index];
+                    saveCustomData(
+                      lastSourceKey,
+                      currentQuality.title ?? currentQuality.quality,
+                    );
+                    controller.open(
+                      currentQuality,
+                      controller.currentTime.value,
+                    );
+                    await widget.player.mediaSession.forceSync();
+                    Get.back();
+                  },
+                  borderRadius: BorderRadius.circular(12),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            videos[index].title ?? videos[index].quality,
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
-                          Icon(
-                            Icons.play_arrow,
-                            size: 24,
-                            color: Theme.of(context).colorScheme.primary,
-                          ),
-                        ],
-                      ),
+                        ),
+                        Icon(
+                          Icons.play_arrow,
+                          size: 24,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                      ],
                     ),
                   ),
-                ));
+                ),
+              ),
+            );
           }).toList(),
         ),
       ],
@@ -1071,16 +1044,16 @@ class _PlayerControllerState extends State<PlayerController> {
     final currentTime = controller.currentTime.value.inSeconds;
 
     final merged = [
-      ...controller.chapters.map((c) => {
-            "time": c.startTime,
-            "title": c.title,
-            "isChapter": true,
-          }),
-      ...timeStamps.map((t) => {
-            "time": t.startTime,
-            "title": t.name ?? "Unknown",
-            "isChapter": false,
-          }),
+      ...controller.chapters.map(
+        (c) => {"time": c.startTime, "title": c.title, "isChapter": true},
+      ),
+      ...timeStamps.map(
+        (t) => {
+          "time": t.startTime,
+          "title": t.name ?? "Unknown",
+          "isChapter": false,
+        },
+      ),
     ];
 
     merged.sort((a, b) => (a["time"] as double).compareTo(b["time"] as double));
@@ -1139,20 +1112,17 @@ class _PlayerControllerState extends State<PlayerController> {
                               color: isActive
                                   ? Theme.of(context).colorScheme.primary
                                   : isChapter
-                                      ? Theme.of(context).colorScheme.onSurface
-                                      : Theme.of(context)
-                                          .colorScheme
-                                          .onSurfaceVariant,
+                                  ? Theme.of(context).colorScheme.onSurface
+                                  : Theme.of(
+                                      context,
+                                    ).colorScheme.onSurfaceVariant,
                             ),
                           ),
                         ),
                         if (!isChapter)
                           const Text(
                             "TS",
-                            style: TextStyle(
-                              fontSize: 11,
-                              color: Colors.grey,
-                            ),
+                            style: TextStyle(fontSize: 11, color: Colors.grey),
                           ),
                       ],
                     ),

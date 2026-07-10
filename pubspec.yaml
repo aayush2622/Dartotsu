@@ -71,7 +71,7 @@ dependencies:
   window_manager: ^0.5.2
   permission_handler: ^12.0.3
   flutter_inappwebview: ^6.2.0-beta.2
-
+  flutter_media_session: any
   wakelock_plus: ^1.6.1
   volume_controller: ^3.6.0
   screen_brightness: ^2.1.11 # dont change

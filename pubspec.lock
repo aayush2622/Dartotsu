@@ -639,6 +639,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.12"
+  flutter_media_session:
+    dependency: "direct main"
+    description:
+      name: flutter_media_session
+      sha256: "147c2ac8ddcbaf8caed231b21083bac9d1e36cccb7782a0fde974961e8e8e5c9"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.0"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:

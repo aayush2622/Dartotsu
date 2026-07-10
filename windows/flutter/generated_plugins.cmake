@@ -7,6 +7,7 @@ list(APPEND FLUTTER_PLUGIN_LIST
   dartotsu_extension_bridge
   dynamic_color
   flutter_inappwebview_windows
+  flutter_media_session
   flutter_qjs
   isar_community_flutter_libs
   media_kit_libs_windows_video

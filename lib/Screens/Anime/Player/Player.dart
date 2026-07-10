@@ -22,6 +22,7 @@ import '../../../../../../Widgets/ScrollConfig.dart';
 import '../../Detail/Tabs/Watch/Anime/Widget/AnimeCompactSettings.dart';
 import '../../Detail/Tabs/Watch/Anime/Widget/BuildChunkSelector.dart';
 import '../../Settings/SettingsPlayerScreen.dart';
+import 'MediaSessionManager.dart';
 import 'Platform/MediaKitPlayer.dart';
 import 'PlayerController.dart';
 import 'Widgets/Indicator.dart';
@@ -56,6 +57,7 @@ class MediaPlayerState extends State<MediaPlayer>
   late PlayerSettings settings;
   late AnimationController _backwardAnimationController;
   late AnimationController _forwardAnimationController;
+  late final MediaSessionManager mediaSession;
   var showControls = true.obs;
   var viewType = 0.obs;
   var reverse = false.obs;
@@ -74,6 +76,13 @@ class MediaPlayerState extends State<MediaPlayer>
       settings = widget.media.settings.playerSettings;
     }
     _initializePlayer();
+    mediaSession = MediaSessionManager(
+      player: videoPlayerController,
+      media: widget.media,
+      episode: widget.currentEpisode,
+    );
+
+    Future.microtask(mediaSession.initialize);
     _backwardAnimationController = AnimationController(
       duration: const Duration(milliseconds: 1000),
       vsync: this,
@@ -140,7 +149,7 @@ class MediaPlayerState extends State<MediaPlayer>
   bool keepOrientation = false;
   @override
   void dispose() {
-    super.dispose();
+    mediaSession.dispose();
     videoPlayerController.dispose();
     _hideCursorTimer?.cancel();
     _backwardAnimationController.dispose();
@@ -153,6 +162,7 @@ class MediaPlayerState extends State<MediaPlayer>
     if (!keepOrientation) WakelockPlus.disable();
 
     updateProgress();
+    super.dispose();
   }
 
   void _setLandscapeMode(bool state) {
