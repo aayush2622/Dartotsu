@@ -1,9 +1,9 @@
 import 'dart:async';
-import 'dart:ui';
 
 import 'package:dartotsu/DataClass/Media.dart' as m;
 import 'package:dartotsu/Screens/Anime/Player/Platform/MediaKitPlayer.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_media_session/flutter_media_session.dart';
 import 'package:flutter_media_session/flutter_media_session_platform_interface.dart';
 import 'package:get/get.dart';
@@ -37,18 +37,23 @@ class MediaSessionManager implements MediaSessionAdapter {
   Future<void> initialize() async {
     if (_active) return;
 
-    await _session.activate();
+    try {
+      await _session.activate();
+      await _session.setSkipIntervals(forwardSeconds: 10, backwardSeconds: 10);
 
-    await _session.setSkipIntervals(forwardSeconds: 10, backwardSeconds: 10);
+      _session.bind(this);
 
-    _session.bind(this);
-    _active = true;
-    await updateAvailableActions();
+      _active = true;
 
-    _listenActions();
-    _observePlayer();
+      await updateAvailableActions();
 
-    await sync();
+      _listenActions();
+      _observePlayer();
+
+      await sync();
+    } catch (e, s) {
+      debugPrint("MediaSession initialize failed: $e\n$s");
+    }
   }
 
   @override
@@ -168,62 +173,70 @@ class MediaSessionManager implements MediaSessionAdapter {
   Future<void> updateMetadata() async {
     if (!_active) return;
 
-    final artwork = media.cover ?? media.banner;
+    try {
+      final artwork = episode.thumbnail ?? media.cover ?? media.banner;
 
-    await FlutterMediaSessionPlatform.instance.updateMetadata(
-      MediaMetadata(
-        title: episode.name?.isNotEmpty == true
-            ? "Episode ${episode.episodeNumber}: ${episode.name}"
-            : "Episode ${episode.episodeNumber}",
-        artist: media.mainName(),
-        album: media.mainName(),
-        artworkUri: artwork,
-        duration: player.maxTime.value,
-      ),
-    );
+      await FlutterMediaSessionPlatform.instance.updateMetadata(
+        MediaMetadata(
+          title: episode.name?.isNotEmpty == true
+              ? "Ep ${episode.episodeNumber}: ${episode.name}"
+              : "Ep ${episode.episodeNumber}",
+          artist: media.mainName(),
+          album: media.mainName(),
+          artworkUri: artwork,
+          duration: player.maxTime.value,
+        ),
+      );
+    } catch (_) {}
   }
 
   Future<void> updatePlayback() async {
     if (!_active) return;
 
-    PlaybackStatus status;
+    try {
+      PlaybackStatus status;
 
-    if (player.isBuffering.value) {
-      status = PlaybackStatus.buffering;
-    } else if (player.isCompleted.value) {
-      status = PlaybackStatus.ended;
-    } else if (player.isPlaying.value) {
-      status = PlaybackStatus.playing;
-    } else {
-      status = PlaybackStatus.paused;
-    }
+      if (player.isBuffering.value) {
+        status = PlaybackStatus.buffering;
+      } else if (player.isCompleted.value) {
+        status = PlaybackStatus.ended;
+      } else if (player.isPlaying.value) {
+        status = PlaybackStatus.playing;
+      } else {
+        status = PlaybackStatus.paused;
+      }
 
-    await FlutterMediaSessionPlatform.instance.updatePlaybackState(
-      PlaybackState(status: status, position: player.currentTime.value),
-    );
+      await FlutterMediaSessionPlatform.instance.updatePlaybackState(
+        PlaybackState(status: status, position: player.currentTime.value),
+      );
+    } catch (_) {}
   }
 
   Future<void> updateAvailableActions() async {
     if (!_active) return;
 
-    final actions = <MediaAction>{
-      MediaAction.play,
-      MediaAction.pause,
-      MediaAction.stop,
-      MediaAction.seekTo,
-      MediaAction.fastForward,
-      MediaAction.rewind,
-    };
+    try {
+      final actions = <MediaAction>{
+        MediaAction.play,
+        MediaAction.pause,
+        MediaAction.stop,
+        MediaAction.seekTo,
+        MediaAction.fastForward,
+        MediaAction.rewind,
+      };
 
-    if (onNextEpisode != null) {
-      actions.add(MediaAction.skipToNext);
-    }
+      if (onNextEpisode != null) {
+        actions.add(MediaAction.skipToNext);
+      }
 
-    if (onPreviousEpisode != null) {
-      actions.add(MediaAction.skipToPrevious);
-    }
+      if (onPreviousEpisode != null) {
+        actions.add(MediaAction.skipToPrevious);
+      }
 
-    await FlutterMediaSessionPlatform.instance.updateAvailableActions(actions);
+      await FlutterMediaSessionPlatform.instance.updateAvailableActions(
+        actions,
+      );
+    } catch (_) {}
   }
 
   Future<void> forceSync() => sync();
@@ -238,8 +251,10 @@ class MediaSessionManager implements MediaSessionAdapter {
     _actionSubscription = null;
 
     if (_active) {
-      _session.unbind();
-      await _session.deactivate();
+      try {
+        _session.unbind();
+        await _session.deactivate();
+      } catch (_) {}
     }
 
     _active = false;

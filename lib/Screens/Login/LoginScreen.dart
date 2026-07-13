@@ -23,6 +23,7 @@ class LoginScreenState extends State<LoginScreen> {
       return service.notImplemented(widget.runtimeType.toString());
     }
     return Scaffold(
+      backgroundColor: Colors.transparent,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -51,14 +52,17 @@ class LoginScreenState extends State<LoginScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 _buildSocialIcon(
-                    Icons.discord, 'https://discord.gg/eyQdCpdubF'),
+                  Icons.discord,
+                  'https://discord.gg/eyQdCpdubF',
+                ),
                 const SizedBox(width: 16),
                 IconButton(
                   color: Colors.grey.shade800,
                   iconSize: 36,
                   icon: loadSvg("assets/svg/github.svg", color: theme.primary),
                   onPressed: () => openLinkInBrowser(
-                      'https://github.com/aayush2622/dartotsu'),
+                    'https://github.com/aayush2622/dartotsu',
+                  ),
                 ),
               ],
             ),
@@ -112,9 +116,7 @@ class LoginScreenState extends State<LoginScreen> {
           left: 24,
           right: 42,
         ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       ),
     );
   }
