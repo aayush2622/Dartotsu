@@ -54,7 +54,7 @@ dependencies:
   scrollable_positioned_list: ^0.3.8
   html: ^0.15.6
   intl: ^0.20.2
-
+  flutter_html: ^3.0.0
   # Platform Specific
   media_kit:
     git:

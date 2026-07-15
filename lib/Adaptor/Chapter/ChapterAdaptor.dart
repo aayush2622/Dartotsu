@@ -1,5 +1,3 @@
-import 'package:dartotsu/Functions/Function.dart';
-import 'package:dartotsu/Screens/Manga/MangaReader/Reader.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -7,6 +5,9 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import '../../Animation/ScaleAnimation.dart';
 import '../../DataClass/Media.dart';
+import '../../Functions/Function.dart';
+import '../../Screens/Manga/MangaReader/Reader.dart';
+import '../../Screens/Manga/NovelReader/Novelreader.dart';
 import '../../Widgets/CustomBottomDialog.dart';
 import 'ChapterCompactViewHolder.dart';
 import 'ChapterListViewHolder.dart';
@@ -71,21 +72,21 @@ class ChapterAdaptorState extends State<ChapterAdaptor> {
           itemCount: chapterList.length,
           itemBuilder: (context, index) {
             return GestureDetector(
-              onTap: () => onChapterClick(
-                context,
-                chapterList[index],
-                widget.source,
-                widget.mediaData,
-                widget.onEpisodeClick,
-              ),
-              child: SizedBox(
-                width: double.infinity,
-                child: ChapterListView(
-                  chapter: chapterList[index],
-                  mediaData: widget.mediaData,
-                ),
-              ),
-            )
+                  onTap: () => onChapterClick(
+                    context,
+                    chapterList[index],
+                    widget.source,
+                    widget.mediaData,
+                    widget.onEpisodeClick,
+                  ),
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: ChapterListView(
+                      chapter: chapterList[index],
+                      mediaData: widget.mediaData,
+                    ),
+                  ),
+                )
                 .animate()
                 .slide(
                   begin: const Offset(0, -1),
@@ -114,40 +115,39 @@ class ChapterAdaptorState extends State<ChapterAdaptor> {
         return AnimatedSwitcher(
           duration: const Duration(milliseconds: 500),
           child: Padding(
-            padding:
-                const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
+            padding: const EdgeInsets.symmetric(
+              vertical: 16.0,
+              horizontal: 16.0,
+            ),
             child: StaggeredGrid.count(
               crossAxisCount: crossAxisCount,
-              children: List.generate(
-                chapterList.length,
-                (index) {
-                  return SlideAndScaleAnimation(
-                    initialScale: 0.0,
-                    finalScale: 1.0,
-                    initialOffset: const Offset(1.0, 0.0),
-                    finalOffset: Offset.zero,
-                    duration: const Duration(milliseconds: 200),
-                    child: GestureDetector(
-                      onTap: () => onChapterClick(
-                        context,
-                        chapterList[index],
-                        widget.source,
-                        widget.mediaData,
-                        widget.onEpisodeClick,
-                      ),
-                      onLongPress: () {},
-                      child: SizedBox(
-                        width: 82,
-                        height: 82,
-                        child: ChapterCompactView(
-                          chapter: chapterList[index],
-                          mediaData: widget.mediaData,
-                        ),
+              children: List.generate(chapterList.length, (index) {
+                return SlideAndScaleAnimation(
+                  initialScale: 0.0,
+                  finalScale: 1.0,
+                  initialOffset: const Offset(1.0, 0.0),
+                  finalOffset: Offset.zero,
+                  duration: const Duration(milliseconds: 200),
+                  child: GestureDetector(
+                    onTap: () => onChapterClick(
+                      context,
+                      chapterList[index],
+                      widget.source,
+                      widget.mediaData,
+                      widget.onEpisodeClick,
+                    ),
+                    onLongPress: () {},
+                    child: SizedBox(
+                      width: 82,
+                      height: 82,
+                      child: ChapterCompactView(
+                        chapter: chapterList[index],
+                        mediaData: widget.mediaData,
                       ),
                     ),
-                  );
-                },
-              ),
+                  ),
+                );
+              }),
             ),
           ),
         );
@@ -163,21 +163,43 @@ Future<void> onChapterClick(
   Media mediaData,
   VoidCallback? onChapterClick,
 ) async {
+  final isNovel = mediaData.format?.toLowerCase() == 'novel';
+
   showCustomBottomDialog(
     context,
     const CustomBottomDialog(
-      viewList: [
-        Center(
-          child: CircularProgressIndicator(),
-        ),
-      ],
+      viewList: [Center(child: CircularProgressIndicator())],
     ),
   );
 
-  final pages = await source.methods.getPageList(chapter);
-  if (context.mounted) {
+  if (isNovel) {
+    final content = await source.methods.getNovelContent(chapter);
+    if (!context.mounted) return;
+
     onChapterClick?.call();
     Navigator.pop(context);
+
+    if (content == null || content.isEmpty) {
+      snackString("Failed to load chapter content");
+      return;
+    }
+
+    navigateToPage(
+      context,
+      NovelReader(
+        media: mediaData,
+        currentChapter: chapter,
+        htmlContent: content,
+        source: source,
+      ),
+    );
+  } else {
+    final pages = await source.methods.getPageList(chapter);
+    if (!context.mounted) return;
+
+    onChapterClick?.call();
+    Navigator.pop(context);
+
     navigateToPage(
       context,
       MediaReader(

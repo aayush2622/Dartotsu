@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dartotsu_extension_bridge/ExtensionBridge.dart';
 
 import 'CookieManager.dart';
@@ -22,7 +24,7 @@ class AppBridgeNetwork implements BridgeNetwork {
       return null;
     }
 
-    return cookies.map((c) => '${c.name}=${c.value}').join('; ');
+    return jsonEncode(cookies.map((c) => c.toJson()).toList());
   }
 
   @override

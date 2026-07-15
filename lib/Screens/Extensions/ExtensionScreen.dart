@@ -187,6 +187,8 @@ class ExtensionScreenState extends State<ExtensionScreen>
                 title: "${type.name.capitalizeFirst} Manager",
                 positiveText: getString.ok,
                 positiveCallback: () => Navigator.pop(context),
+                negativeText: "Add Repository",
+                negativeCallback: () => _showAddRepositoryDialog(),
                 viewList: [
                   Obx(() {
                     final current = manager[type];
@@ -195,74 +197,11 @@ class ExtensionScreenState extends State<ExtensionScreen>
                         .toList();
 
                     return Column(
-                      children: managers.map((m) {
-                        final selected = current.id == m.id;
-                        final enabled =
-                            m.plugin == null || m.plugin!.installed.value;
-
-                        return Opacity(
-                          opacity: enabled ? 1 : 0.5,
-                          child: ThemedContainer(
-                            context: context,
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(24),
-                            ),
-                            margin: const EdgeInsets.symmetric(
-                              horizontal: 16,
-                              vertical: 8,
-                            ),
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 2,
-                              vertical: 8,
-                            ),
-                            color: selected ? theme.surfaceContainerHigh : null,
-                            child: ListTile(
-                              enabled: enabled,
-                              hoverColor: Colors.transparent,
-                              onTap: (!enabled || selected)
-                                  ? null
-                                  : () => manager.switchManager(type, m.id),
-                              leading: ClipOval(
-                                child: Image.asset(
-                                  m.icon,
-                                  width: 24,
-                                  height: 24,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              title: Text(
-                                m.name,
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              trailing: m.plugin == null
-                                  ? null
-                                  : IconButton(
-                                      icon: Icon(
-                                        enabled ? Icons.delete : Icons.download,
-                                        size: 18,
-                                      ),
-                                      onPressed: () async {
-                                        if (enabled) {
-                                          showDeleteDialog(
-                                            context,
-                                            m.plugin!,
-                                            m.name,
-                                          );
-                                        } else {
-                                          await showInstallDialog(
-                                            context,
-                                            m.plugin!,
-                                            m.name,
-                                          );
-                                        }
-                                      },
-                                    ),
-                            ),
-                          ),
-                        );
-                      }).toList(),
+                      children: managers
+                          .map(
+                            (m) => _buildServiceTile(theme, type, current, m),
+                          )
+                          .toList(),
                     );
                   }),
                 ],
@@ -272,6 +211,131 @@ class ExtensionScreenState extends State<ExtensionScreen>
         );
       },
     );
+  }
+
+  Widget _buildServiceTile(
+    ColorScheme theme,
+    ItemType type,
+    dynamic current,
+    dynamic m,
+  ) {
+    final selected = current.id == m.id;
+    final installed = m.plugin == null || m.plugin!.installed.value;
+    final availableInRepo = m.plugin == null || m.plugin!.availableInRepo.value;
+    final enabled = installed;
+    final opacity = installed || availableInRepo ? 1.0 : 0.5;
+
+    return Opacity(
+      opacity: opacity,
+      child: ThemedContainer(
+        context: context,
+        borderRadius: const BorderRadius.all(Radius.circular(24)),
+        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 8),
+        color: selected ? theme.surfaceContainerHigh : null,
+        child: ListTile(
+          enabled: enabled,
+          hoverColor: Colors.transparent,
+          onTap: (!enabled || selected)
+              ? null
+              : () => manager.switchManager(type, m.id),
+          leading: ClipOval(
+            child: Image.asset(
+              m.icon,
+              width: 24,
+              height: 24,
+              fit: BoxFit.cover,
+            ),
+          ),
+          title: Text(
+            m.name,
+            style: const TextStyle(fontWeight: FontWeight.w600),
+          ),
+          trailing: _buildServiceTrailing(m, installed, availableInRepo),
+        ),
+      ),
+    );
+  }
+
+  Widget? _buildServiceTrailing(
+    dynamic m,
+    bool installed,
+    bool availableInRepo,
+  ) {
+    if (m.plugin == null) return null;
+
+    if (installed) {
+      return IconButton(
+        icon: const Icon(Icons.delete, size: 18),
+        onPressed: () => showDeleteDialog(context, m.plugin!, m.name),
+      );
+    }
+
+    if (availableInRepo) {
+      return IconButton(
+        icon: const Icon(Icons.download, size: 18),
+        onPressed: () => showInstallDialog(context, m.plugin!, m.name),
+      );
+    }
+
+    return null;
+  }
+
+  void _showAddRepositoryDialog() {
+    final controller = TextEditingController(text: DownloadablePlugin.indexUrl);
+    final refreshing = false.obs;
+
+    AlertDialogBuilder(context)
+      ..setTitle("Add Plugin Repository")
+      ..setCustomView(
+        StatefulBuilder(
+          builder: (dialogContext, setState) {
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextField(
+                  controller: controller,
+                  decoration: const InputDecoration(
+                    hintText: "Plugin index URL",
+                  ),
+                ),
+                Obx(
+                  () => refreshing.value
+                      ? const Padding(
+                          padding: EdgeInsets.only(top: 12),
+                          child: SizedBox(
+                            width: 20,
+                            height: 20,
+                            child: CircularProgressIndicator(strokeWidth: 2),
+                          ),
+                        )
+                      : const SizedBox.shrink(),
+                ),
+              ],
+            );
+          },
+        ),
+      )
+      ..setPositiveButton(getString.ok, () async {
+        final url = controller.text.trim();
+        if (url.isEmpty || refreshing.value) return;
+
+        DownloadablePlugin.setIndexUrl(url);
+
+        refreshing.value = true;
+        try {
+          await Future.wait([
+            for (final m in manager.managers)
+              if (m.plugin != null) m.plugin!.checkAvailability(),
+          ]);
+          snackString("Plugin repository updated");
+        } catch (e) {
+          snackString("Failed to refresh plugin repository");
+        } finally {
+          refreshing.value = false;
+        }
+      })
+      ..show();
   }
 
   Widget _buildRepoManager() {
@@ -585,15 +649,19 @@ Future<void> showInstallDialog(
   DownloadablePlugin plugin,
   String name,
 ) async {
-  Map<String, dynamic> remote;
+  Map<String, dynamic>? remote;
 
   try {
-    snackString("Fetching plugin info...");
     remote = await plugin.fetchRemote();
+    if (remote == null) {
+      snackString("$name is not available in the configured repo");
+      return;
+    }
   } catch (_) {
     snackString("Failed to fetch plugin info");
     return;
   }
+
   if (!context.mounted) return;
   final scheme = context.colorScheme;
   final textStyle = Theme.of(context).textTheme.labelMedium;

@@ -622,15 +622,15 @@ class StoredCookie {
     "domain": domain,
     "hostOnly": hostOnly,
     "path": path,
-    "expires": expires?.toIso8601String(),
+    "expires": expires?.toUtc().toIso8601String(),
     "secure": secure,
     "httpOnly": httpOnly,
     "sameSite": sameSite?.name,
     "priority": priority.name,
     "partitioned": partitioned,
     "session": session,
-    "created": created.toIso8601String(),
-    "lastAccessed": lastAccessed.toIso8601String(),
+    "created": created.toUtc().toIso8601String(),
+    "lastAccessed": lastAccessed.toUtc().toIso8601String(),
   };
 
   factory StoredCookie.fromJson(Map<String, dynamic> json) {
@@ -642,7 +642,7 @@ class StoredCookie {
       path: json["path"] ?? "/",
       expires: json["expires"] == null
           ? null
-          : DateTime.tryParse(json["expires"]),
+          : DateTime.tryParse(json["expires"])?.toUtc(),
       secure: json["secure"] ?? false,
       httpOnly: json["httpOnly"] ?? false,
       sameSite: json["sameSite"] == null
@@ -659,10 +659,10 @@ class StoredCookie {
       session: json["session"] ?? false,
       created: json["created"] == null
           ? DateTime.now()
-          : DateTime.parse(json["created"]),
+          : DateTime.parse(json["created"]).toUtc(),
       lastAccessed: json["lastAccessed"] == null
           ? DateTime.now()
-          : DateTime.parse(json["lastAccessed"]),
+          : DateTime.parse(json["lastAccessed"]).toUtc(),
     );
   }
 
