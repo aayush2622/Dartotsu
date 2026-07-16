@@ -428,11 +428,7 @@ class MediaPlayerState extends State<MediaPlayer>
     return Obx(() {
       return Positioned.fill(
         child: AnimatedOpacity(
-          opacity: showControls.value
-              ? 1
-              : Platform.isLinux
-              ? 0.01
-              : 0.0,
+          opacity: showControls.value ? 1 : 0.0,
           duration: const Duration(milliseconds: 300),
           child: IgnorePointer(
             ignoring: !showControls.value,

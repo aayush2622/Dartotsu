@@ -170,45 +170,49 @@ class ExtensionScreenState extends State<ExtensionScreen>
       builder: (_, _) {
         final type = _currentType;
 
-        return IconButton(
-          icon: ClipRRect(
-            borderRadius: BorderRadius.circular(12),
-            child: Image.asset(
-              manager[type].icon,
-              width: 24,
-              height: 24,
-              fit: BoxFit.cover,
-            ),
-          ),
-          onPressed: () {
-            showCustomBottomDialog(
-              context,
-              CustomBottomDialog(
-                title: "${type.name.capitalizeFirst} Manager",
-                positiveText: getString.ok,
-                positiveCallback: () => Navigator.pop(context),
-                negativeText: "Add Repository",
-                negativeCallback: () => _showAddRepositoryDialog(),
-                viewList: [
-                  Obx(() {
-                    final current = manager[type];
-                    final managers = manager.managers
-                        .where((e) => e.supports(type))
-                        .toList();
+        return Obx(() {
+          final currentManager = manager[type];
 
-                    return Column(
-                      children: managers
-                          .map(
-                            (m) => _buildServiceTile(theme, type, current, m),
-                          )
-                          .toList(),
-                    );
-                  }),
-                ],
+          return IconButton(
+            icon: ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: Image.asset(
+                currentManager.icon,
+                width: 24,
+                height: 24,
+                fit: BoxFit.cover,
               ),
-            );
-          },
-        );
+            ),
+            onPressed: () {
+              showCustomBottomDialog(
+                context,
+                CustomBottomDialog(
+                  title: "${type.name.capitalizeFirst} Manager",
+                  positiveText: getString.ok,
+                  positiveCallback: () => Navigator.pop(context),
+                  negativeText: "Add Repository",
+                  negativeCallback: () => _showAddRepositoryDialog(),
+                  viewList: [
+                    Obx(() {
+                      final current = manager[type];
+                      final managers = manager.managers
+                          .where((e) => e.supports(type))
+                          .toList();
+
+                      return Column(
+                        children: managers
+                            .map(
+                              (m) => _buildServiceTile(theme, type, current, m),
+                            )
+                            .toList(),
+                      );
+                    }),
+                  ],
+                ),
+              );
+            },
+          );
+        });
       },
     );
   }
