@@ -23,13 +23,13 @@ class SettingsAnimeScreenState extends BaseSettingsScreen {
 
   @override
   Widget icon() => Padding(
-        padding: const EdgeInsets.only(right: 16),
-        child: Icon(
-          size: 52,
-          Icons.movie_filter_rounded,
-          color: Theme.of(context).colorScheme.onSurface,
-        ),
-      );
+    padding: const EdgeInsets.only(right: 16),
+    child: Icon(
+      size: 52,
+      Icons.movie_filter_rounded,
+      color: Theme.of(context).colorScheme.onSurface,
+    ),
+  );
 
   @override
   List<Widget> get settingsList {
@@ -42,10 +42,8 @@ class SettingsAnimeScreenState extends BaseSettingsScreen {
             description: getString.playerSettingsDesc,
             icon: Icons.video_settings,
             isActivity: true,
-            onClick: () => navigateToPage(
-              context,
-              const SettingsPlayerScreen(),
-            ),
+            onClick: () =>
+                navigateToPage(context, const SettingsPlayerScreen()),
           ),
           Setting(
             type: SettingType.switchType,
@@ -69,13 +67,18 @@ class SettingsAnimeScreenState extends BaseSettingsScreen {
                 ..singleChoiceItems(
                   ['Exact (default)', 'Closest'],
                   [AutoSourceMatch.Exact, AutoSourceMatch.Closest].indexOf(
-                      AutoSourceMatch.fromJson(
-                          loadData(PrefName.autoSourceMatch))),
+                    AutoSourceMatch.fromJson(
+                      loadData(PrefName.autoSourceMatch),
+                    ),
+                  ),
                   (value) {
                     saveData(
-                        PrefName.autoSourceMatch,
-                        [AutoSourceMatch.Exact, AutoSourceMatch.Closest][value]
-                            .toJson());
+                      PrefName.autoSourceMatch,
+                      [
+                        AutoSourceMatch.Exact,
+                        AutoSourceMatch.Closest,
+                      ][value].toJson(),
+                    );
                   },
                 )
                 ..show();
@@ -101,12 +104,14 @@ class SettingsAnimeScreenState extends BaseSettingsScreen {
             onClick: () async {
               final homeLayoutMap = loadData(PrefName.anilistAnimeLayout);
               var titles = List<String>.from(homeLayoutMap.keys.toList());
-              var checkedStates =
-                  List<bool>.from(homeLayoutMap.values.toList());
+              var checkedStates = List<bool>.from(
+                homeLayoutMap.values.toList(),
+              );
 
               AlertDialogBuilder(context)
                 ..setTitle(
-                    getString.manageLayout(getString.anilist, getString.anime))
+                  getString.manageLayout(getString.anilist, getString.anime),
+                )
                 ..reorderableMultiSelectableItems(
                   titles,
                   checkedStates,
@@ -144,11 +149,13 @@ class SettingsAnimeScreenState extends BaseSettingsScreen {
             onClick: () async {
               final homeLayoutMap = loadData(PrefName.malAnimeLayout);
               var titles = List<String>.from(homeLayoutMap.keys.toList());
-              var checkedStates =
-                  List<bool>.from(homeLayoutMap.values.toList());
+              var checkedStates = List<bool>.from(
+                homeLayoutMap.values.toList(),
+              );
               AlertDialogBuilder(context)
                 ..setTitle(
-                    getString.manageLayout(getString.mal, getString.home))
+                  getString.manageLayout(getString.mal, getString.home),
+                )
                 ..reorderableMultiSelectableItems(
                   titles,
                   checkedStates,
@@ -186,11 +193,13 @@ class SettingsAnimeScreenState extends BaseSettingsScreen {
             onClick: () async {
               final homeLayoutMap = loadData(PrefName.simklAnimeLayout);
               var titles = List<String>.from(homeLayoutMap.keys.toList());
-              var checkedStates =
-                  List<bool>.from(homeLayoutMap.values.toList());
+              var checkedStates = List<bool>.from(
+                homeLayoutMap.values.toList(),
+              );
               AlertDialogBuilder(context)
                 ..setTitle(
-                    getString.manageLayout(getString.home, getString.simkl))
+                  getString.manageLayout(getString.home, getString.simkl),
+                )
                 ..reorderableMultiSelectableItems(
                   titles,
                   checkedStates,

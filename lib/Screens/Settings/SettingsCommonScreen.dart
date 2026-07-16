@@ -26,13 +26,13 @@ class SettingsCommonScreenState extends BaseSettingsScreen {
 
   @override
   Widget icon() => Padding(
-        padding: const EdgeInsets.only(right: 16),
-        child: Icon(
-          size: 52,
-          Icons.lightbulb_outline,
-          color: Theme.of(context).colorScheme.onSurface,
-        ),
-      );
+    padding: const EdgeInsets.only(right: 16),
+    child: Icon(
+      size: 52,
+      Icons.lightbulb_outline,
+      color: Theme.of(context).colorScheme.onSurface,
+    ),
+  );
 
   @override
   List<Widget> get settingsList {
@@ -71,29 +71,33 @@ class SettingsCommonScreenState extends BaseSettingsScreen {
           ),
         ],
       ),
-      SettingsAdaptor(settings: [
-        Setting(
-          type: SettingType.normal,
-          name: getString.backupAndRestore,
-          description: getString.backupAndRestoreDescription,
-          icon: Icons.settings_backup_restore,
-          onClick: () {
-            final locations = PrefLocation.values;
-            final titles = locations.map((loc) => loc.label(context)).toList();
 
-            List<bool> checkedStates =
-                List<bool>.filled(locations.length, false);
+      SettingsAdaptor(
+        settings: [
+          Setting(
+            type: SettingType.normal,
+            name: getString.backupAndRestore,
+            description: getString.backupAndRestoreDescription,
+            icon: Icons.settings_backup_restore,
+            onClick: () {
+              final locations = PrefLocation.values;
+              final titles = locations
+                  .map((loc) => loc.label(context))
+                  .toList();
 
-            AlertDialogBuilder(context)
-              ..setTitle(getString.backupAndRestore)
-              ..multiChoiceItems(
-                titles,
-                checkedStates,
-                (newCheckedStates) => checkedStates = newCheckedStates,
-              )
-              ..setPositiveButton(
-                getString.restore,
-                () async {
+              List<bool> checkedStates = List<bool>.filled(
+                locations.length,
+                false,
+              );
+
+              AlertDialogBuilder(context)
+                ..setTitle(getString.backupAndRestore)
+                ..multiChoiceItems(
+                  titles,
+                  checkedStates,
+                  (newCheckedStates) => checkedStates = newCheckedStates,
+                )
+                ..setPositiveButton(getString.restore, () async {
                   final picked = await FilePicker.pickFiles(
                     allowMultiple: false,
                     dialogTitle: getString.restore,
@@ -101,8 +105,9 @@ class SettingsCommonScreenState extends BaseSettingsScreen {
 
                   if (picked?.files == null || picked!.files.isEmpty) return;
                   try {
-                    final content =
-                        await File(picked.files.first.path!).readAsString();
+                    final content = await File(
+                      picked.files.first.path!,
+                    ).readAsString();
                     final decoded = jsonDecode(content) as Map<String, dynamic>;
 
                     final selectedLocations = <PrefLocation>[];
@@ -112,7 +117,8 @@ class SettingsCommonScreenState extends BaseSettingsScreen {
 
                     if (selectedLocations.isEmpty) {
                       snackString(
-                          "Please select at least one category to restore");
+                        "Please select at least one category to restore",
+                      );
                       return;
                     }
                     for (final section in decoded.entries) {
@@ -123,8 +129,8 @@ class SettingsCommonScreenState extends BaseSettingsScreen {
 
                       if (!selectedLocations.contains(loc)) continue;
 
-                      final map =
-                          (section.value as Map).cast<String, dynamic>();
+                      final map = (section.value as Map)
+                          .cast<String, dynamic>();
 
                       for (final entry in map.entries) {
                         final key = entry.key;
@@ -139,18 +145,17 @@ class SettingsCommonScreenState extends BaseSettingsScreen {
                       }
                     }
                     snackString(
-                        'Preferences restored successfully\nRestart the app');
+                      'Preferences restored successfully\nRestart the app',
+                    );
                   } catch (e) {
                     snackString('Failed to restore: $e');
                   }
-                },
-              )
-              ..setNegativeButton(
-                getString.backup,
-                () async {
+                })
+                ..setNegativeButton(getString.backup, () async {
                   if (!checkedStates.any((a) => a)) {
                     snackString(
-                        'Please select at least one category to backup');
+                      'Please select at least one category to backup',
+                    );
                     return;
                   }
 
@@ -177,8 +182,9 @@ class SettingsCommonScreenState extends BaseSettingsScreen {
                   grouped.removeWhere((key, value) => value.isEmpty);
 
                   try {
-                    final jsonStr =
-                        const JsonEncoder.withIndent('  ').convert(grouped);
+                    final jsonStr = const JsonEncoder.withIndent(
+                      '  ',
+                    ).convert(grouped);
 
                     final dirPath = await FilePicker.getDirectoryPath(
                       dialogTitle: getString.selectDirectory,
@@ -193,13 +199,13 @@ class SettingsCommonScreenState extends BaseSettingsScreen {
                   } catch (e) {
                     snackString('Backup failed: $e');
                   }
-                },
-              )
-              ..setNeutralButton(getString.cancel, null)
-              ..show();
-          },
-        ),
-      ]),
+                })
+                ..setNeutralButton(getString.cancel, null)
+                ..show();
+            },
+          ),
+        ],
+      ),
       Text(
         getString.anilist,
         style: const TextStyle(
@@ -228,14 +234,17 @@ class SettingsCommonScreenState extends BaseSettingsScreen {
             icon: Icons.tune,
             onClick: () async {
               final homeLayoutMap = loadData(PrefName.anilistHomeLayout);
-              List<String> titles =
-                  List<String>.from(homeLayoutMap.keys.toList());
-              List<bool> checkedStates =
-                  List<bool>.from(homeLayoutMap.values.toList());
+              List<String> titles = List<String>.from(
+                homeLayoutMap.keys.toList(),
+              );
+              List<bool> checkedStates = List<bool>.from(
+                homeLayoutMap.values.toList(),
+              );
 
               AlertDialogBuilder(context)
                 ..setTitle(
-                    getString.manageLayout(getString.anilist, getString.home))
+                  getString.manageLayout(getString.anilist, getString.home),
+                )
                 ..reorderableMultiSelectableItems(
                   titles,
                   checkedStates,
@@ -243,8 +252,10 @@ class SettingsCommonScreenState extends BaseSettingsScreen {
                   (newCheckedStates) => checkedStates = newCheckedStates,
                 )
                 ..setPositiveButton(getString.ok, () {
-                  saveData(PrefName.anilistHomeLayout,
-                      Map.fromIterables(titles, checkedStates));
+                  saveData(
+                    PrefName.anilistHomeLayout,
+                    Map.fromIterables(titles, checkedStates),
+                  );
                   Refresh.activity[RefreshId.Anilist.homePage]?.value = true;
                 })
                 ..setNegativeButton(getString.cancel, null)
@@ -270,30 +281,30 @@ class SettingsCommonScreenState extends BaseSettingsScreen {
             icon: Icons.tune,
             onClick: () async {
               final homeLayoutMap = loadData(PrefName.malHomeLayout);
-              List<String> titles =
-                  List<String>.from(homeLayoutMap.keys.toList());
-              List<bool> checkedStates =
-                  List<bool>.from(homeLayoutMap.values.toList());
+              List<String> titles = List<String>.from(
+                homeLayoutMap.keys.toList(),
+              );
+              List<bool> checkedStates = List<bool>.from(
+                homeLayoutMap.values.toList(),
+              );
 
               AlertDialogBuilder(context)
                 ..setTitle(
-                    getString.manageLayout(getString.mal, getString.home))
+                  getString.manageLayout(getString.mal, getString.home),
+                )
                 ..reorderableMultiSelectableItems(
                   titles,
                   checkedStates,
                   (reorderedItems) => titles = reorderedItems,
                   (newCheckedStates) => checkedStates = newCheckedStates,
                 )
-                ..setPositiveButton(
-                  getString.ok,
-                  () {
-                    saveData(
-                      PrefName.malHomeLayout,
-                      Map.fromIterables(titles, checkedStates),
-                    );
-                    Refresh.activity[RefreshId.Mal.homePage]?.value = true;
-                  },
-                )
+                ..setPositiveButton(getString.ok, () {
+                  saveData(
+                    PrefName.malHomeLayout,
+                    Map.fromIterables(titles, checkedStates),
+                  );
+                  Refresh.activity[RefreshId.Mal.homePage]?.value = true;
+                })
                 ..setNegativeButton(getString.cancel, null)
                 ..show();
             },
@@ -317,30 +328,30 @@ class SettingsCommonScreenState extends BaseSettingsScreen {
             icon: Icons.tune,
             onClick: () async {
               final homeLayoutMap = loadData(PrefName.simklHomeLayout);
-              List<String> titles =
-                  List<String>.from(homeLayoutMap.keys.toList());
-              List<bool> checkedStates =
-                  List<bool>.from(homeLayoutMap.values.toList());
+              List<String> titles = List<String>.from(
+                homeLayoutMap.keys.toList(),
+              );
+              List<bool> checkedStates = List<bool>.from(
+                homeLayoutMap.values.toList(),
+              );
 
               AlertDialogBuilder(context)
                 ..setTitle(
-                    getString.manageLayout(getString.simkl, getString.home))
+                  getString.manageLayout(getString.simkl, getString.home),
+                )
                 ..reorderableMultiSelectableItems(
                   titles,
                   checkedStates,
                   (reorderedItems) => titles = reorderedItems,
                   (newCheckedStates) => checkedStates = newCheckedStates,
                 )
-                ..setPositiveButton(
-                  getString.ok,
-                  () {
-                    saveData(
-                      PrefName.simklHomeLayout,
-                      Map.fromIterables(titles, checkedStates),
-                    );
-                    Refresh.activity[RefreshId.Simkl.homePage]?.value = true;
-                  },
-                )
+                ..setPositiveButton(getString.ok, () {
+                  saveData(
+                    PrefName.simklHomeLayout,
+                    Map.fromIterables(titles, checkedStates),
+                  );
+                  Refresh.activity[RefreshId.Simkl.homePage]?.value = true;
+                })
                 ..setNegativeButton(getString.cancel, null)
                 ..show();
             },

@@ -16,14 +16,12 @@ class SettingsAdaptor extends StatelessWidget {
           .map(
             (setting) => ThemedContainer(
               context: context,
-              borderRadius: BorderRadius.circular(24.0),
+              borderRadius: BorderRadius.circular(32.0),
               padding: const EdgeInsets.symmetric(
                 horizontal: 16.0,
                 vertical: 8.0,
               ),
-              margin: EdgeInsets.only(
-                bottom: setting == settings.last ? 0 : 12.0,
-              ),
+              margin: EdgeInsets.only(bottom: 24.0),
               child: switch (setting.type) {
                 SettingType.normal => SettingItem(setting: setting),
                 SettingType.switchType => SettingSwitchItem(setting: setting),

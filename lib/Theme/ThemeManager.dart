@@ -71,6 +71,28 @@ ThemeData getTheme(ColorScheme? material, ThemeNotifier themeManager) {
         ? getCustomDarkTheme(customColor)
         : getCustomLightTheme(customColor);
   }
+  ColorScheme scheme = baseTheme.colorScheme;
+
+  scheme = scheme.copyWith(
+    surfaceContainerLow: Color.alphaBlend(
+      scheme.primary.withOpacity(0.03),
+      scheme.surface,
+    ),
+    surfaceContainer: Color.alphaBlend(
+      scheme.primary.withOpacity(0.05),
+      scheme.surface,
+    ),
+    surfaceContainerHigh: Color.alphaBlend(
+      scheme.primary.withOpacity(0.08),
+      scheme.surface,
+    ),
+    surfaceContainerHighest: Color.alphaBlend(
+      scheme.primary.withOpacity(0.11),
+      scheme.surface,
+    ),
+  );
+
+  baseTheme = baseTheme.copyWith(colorScheme: scheme);
   var fontFamily = "Poppins";
   return baseTheme.copyWith(
     scaffoldBackgroundColor: isOled
