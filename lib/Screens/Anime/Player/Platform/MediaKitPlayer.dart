@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:dartotsu/Functions/Function.dart';
 import 'package:dartotsu/Preferences/IsarDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
-import 'package:dartotsu/Preferences/PrefManager.dart';
 import 'package:dartotsu_extension_bridge/AddonManager.dart';
 import 'package:dartotsu_extension_bridge/Engines/TorrentEngine/LibTorrentAddon.dart';
 import 'package:dartotsu_extension_bridge/Models/Video.dart' as v;
@@ -68,24 +67,18 @@ class MediaKitPlayer extends GetxController {
   VideoControllerConfiguration getPlatformConfig() {
     if (Platform.isAndroid) {
       return VideoControllerConfiguration(
-        androidAttachSurfaceAfterVideoParameters: true,
         vo: settings.useGpuNext ? "gpu-next" : "gpu",
+        androidAttachSurfaceAfterVideoParameters: true,
       );
     }
     return const VideoControllerConfiguration();
   }
 
   MediaKitPlayer(this.resizeMode, this.settings) {
-    final useCustomConfig = loadData(PrefName.useCustomMpvConfig);
-    final mpvConfPath = loadData(PrefName.mpvConfigDir);
-
     player = Player(
       configuration: PlayerConfiguration(
         logLevel: MPVLogLevel.v,
         bufferSize: 1024 * 1024 * 64,
-        // Config Options thanks to snitchel
-        config: useCustomConfig,
-        configDir: mpvConfPath,
         libass: settings.useLibass,
         libassAndroidFontName: "Poppins",
         libassAndroidFont: "assets/fonts/poppins.ttf",

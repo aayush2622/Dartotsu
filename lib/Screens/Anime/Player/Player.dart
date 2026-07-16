@@ -126,20 +126,10 @@ class MediaPlayerState extends State<MediaPlayer>
 
     (() async {
       try {
-        await videoPlayerController.open(currentQuality, Duration.zero);
-
-        if (!completed && currentProgress != null) {
-          while (mounted &&
-              videoPlayerController.maxTime.value == Duration.zero) {
-            await Future.delayed(const Duration(milliseconds: 100));
-          }
-
-          if (mounted) {
-            await videoPlayerController.seek(
-              Duration(seconds: currentProgress),
-            );
-          }
-        }
+        await videoPlayerController.open(
+          currentQuality,
+          completed ? Duration.zero : Duration(seconds: currentProgress ?? 0),
+        );
       } catch (e, s) {
         snackString("Error opening video: $e\n$s");
         if (mounted) {

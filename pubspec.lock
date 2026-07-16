@@ -310,7 +310,7 @@ packages:
     description:
       path: "."
       ref: master
-      resolved-ref: dd9d38eaf90bf2efb9f0200b645d68b6c9052a0d
+      resolved-ref: ac12b639522072ed8a21c028bf4f4a0001c50c3d
       url: "https://github.com/aayush2622/DartotsuExtensionBridge.git"
     source: git
     version: "0.0.5"
@@ -1080,74 +1080,83 @@ packages:
     dependency: "direct main"
     description:
       path: media_kit
-      ref: HEAD
-      resolved-ref: f5796d287b642548e7e703bbc592f01dd7b1befe
-      url: "https://github.com/kodjodevf/media-kit.git"
+      ref: main
+      resolved-ref: "963383b1215ec543742ded3a0f850c15574a757b"
+      url: "https://github.com/aayush2622/media-kit.git"
     source: git
-    version: "1.2.2"
+    version: "1.1.11"
   media_kit_libs_android_video:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       path: "libs/android/media_kit_libs_android_video"
-      ref: f5796d287b642548e7e703bbc592f01dd7b1befe
-      resolved-ref: f5796d287b642548e7e703bbc592f01dd7b1befe
-      url: "https://github.com/kodjodevf/media-kit.git"
+      ref: main
+      resolved-ref: "963383b1215ec543742ded3a0f850c15574a757b"
+      url: "https://github.com/aayush2622/media-kit.git"
     source: git
-    version: "1.3.8"
+    version: "1.3.6"
   media_kit_libs_ios_video:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       path: "libs/ios/media_kit_libs_ios_video"
-      ref: f5796d287b642548e7e703bbc592f01dd7b1befe
-      resolved-ref: f5796d287b642548e7e703bbc592f01dd7b1befe
-      url: "https://github.com/kodjodevf/media-kit.git"
+      ref: main
+      resolved-ref: "963383b1215ec543742ded3a0f850c15574a757b"
+      url: "https://github.com/aayush2622/media-kit.git"
     source: git
     version: "1.1.4"
   media_kit_libs_linux:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       path: "libs/linux/media_kit_libs_linux"
-      ref: f5796d287b642548e7e703bbc592f01dd7b1befe
-      resolved-ref: f5796d287b642548e7e703bbc592f01dd7b1befe
-      url: "https://github.com/kodjodevf/media-kit.git"
+      ref: main
+      resolved-ref: "963383b1215ec543742ded3a0f850c15574a757b"
+      url: "https://github.com/aayush2622/media-kit.git"
     source: git
-    version: "1.2.1"
+    version: "1.1.3"
   media_kit_libs_macos_video:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       path: "libs/macos/media_kit_libs_macos_video"
-      ref: f5796d287b642548e7e703bbc592f01dd7b1befe
-      resolved-ref: f5796d287b642548e7e703bbc592f01dd7b1befe
-      url: "https://github.com/kodjodevf/media-kit.git"
+      ref: main
+      resolved-ref: "963383b1215ec543742ded3a0f850c15574a757b"
+      url: "https://github.com/aayush2622/media-kit.git"
     source: git
     version: "1.1.4"
+  media_kit_libs_ohos:
+    dependency: transitive
+    description:
+      path: "libs/ohos/media_kit_libs_ohos"
+      ref: "963383b1215ec543742ded3a0f850c15574a757b"
+      resolved-ref: "963383b1215ec543742ded3a0f850c15574a757b"
+      url: "https://github.com/aayush2622/media-kit.git"
+    source: git
+    version: "1.0.0"
   media_kit_libs_video:
     dependency: "direct main"
     description:
       path: "libs/universal/media_kit_libs_video"
-      ref: HEAD
-      resolved-ref: f5796d287b642548e7e703bbc592f01dd7b1befe
-      url: "https://github.com/kodjodevf/media-kit.git"
+      ref: main
+      resolved-ref: "963383b1215ec543742ded3a0f850c15574a757b"
+      url: "https://github.com/aayush2622/media-kit.git"
     source: git
-    version: "1.0.7"
+    version: "1.0.5"
   media_kit_libs_windows_video:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       path: "libs/windows/media_kit_libs_windows_video"
-      ref: f5796d287b642548e7e703bbc592f01dd7b1befe
-      resolved-ref: f5796d287b642548e7e703bbc592f01dd7b1befe
-      url: "https://github.com/kodjodevf/media-kit.git"
+      ref: main
+      resolved-ref: "963383b1215ec543742ded3a0f850c15574a757b"
+      url: "https://github.com/aayush2622/media-kit.git"
     source: git
-    version: "1.0.11"
+    version: "1.0.10"
   media_kit_video:
     dependency: "direct main"
     description:
       path: media_kit_video
-      ref: HEAD
-      resolved-ref: f5796d287b642548e7e703bbc592f01dd7b1befe
-      url: "https://github.com/kodjodevf/media-kit.git"
+      ref: main
+      resolved-ref: "963383b1215ec543742ded3a0f850c15574a757b"
+      url: "https://github.com/aayush2622/media-kit.git"
     source: git
-    version: "2.0.0"
+    version: "1.2.5"
   meta:
     dependency: transitive
     description:
@@ -1961,6 +1970,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.6.1"
+  wakelock_plus_ohos:
+    dependency: transitive
+    description:
+      name: wakelock_plus_ohos
+      sha256: b22af297411555b5ec0fe43ec2960cd5f019dd23b83853214ebe6dcc97b337bd
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.3"
   wakelock_plus_platform_interface:
     dependency: transitive
     description:

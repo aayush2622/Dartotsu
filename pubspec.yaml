@@ -56,18 +56,23 @@ dependencies:
   intl: ^0.20.2
   flutter_html: ^3.0.0
   # Platform Specific
+
   media_kit:
     git:
-      url: https://github.com/kodjodevf/media-kit.git
-      path: media_kit
+      url: https://github.com/Predidit/media-kit.git
+      ref: main
+      path: ./media_kit
   media_kit_video:
     git:
-      url: https://github.com/kodjodevf/media-kit.git
-      path: media_kit_video
+      url: https://github.com/aayush2622/media-kit.git
+      ref: main
+      path: ./media_kit_video
   media_kit_libs_video:
     git:
-      url: https://github.com/kodjodevf/media-kit.git
-      path: libs/universal/media_kit_libs_video
+      url: https://github.com/aayush2622/media-kit.git
+      ref: main
+      path: ./libs/universal/media_kit_libs_video
+
   window_manager: ^0.5.2
   permission_handler: ^12.0.3
   flutter_inappwebview: ^6.2.0-beta.2
@@ -83,15 +88,17 @@ dependencies:
   # Miscellaneous
   receive_sharing_intent: ^1.9.0
   device_info_plus: ^13.2.0
-  package_info_plus: ^10.2.0
+  package_info_plus: ^10.2.1
   file_picker: ^12.0.0-beta.5
-  share_plus: ^13.2.0
+  share_plus: ^13.2.1
   url_launcher: ^6.3.2
   dynamic_color: ^1.8.1
   json_path: ^0.9.0
   grouped_list: ^6.0.0
   fuzzywuzzy: ^1.2.0
   collection: ^1.19.1
+
+
   flutter_web_auth_2:
     #path : ../flutter_web_auth/flutter_web_auth_2
     git:
@@ -99,12 +106,13 @@ dependencies:
       ref: master
       path: flutter_web_auth_2
   dartotsu_extension_bridge:
-   #path: ../DartotsuExtensionBridge
-   git:
+    #path: ../DartotsuExtensionBridge
+    git:
       url: https://github.com/aayush2622/DartotsuExtensionBridge.git
       ref: master
   string_similarity: ^2.2.0
   rhttp: ^0.18.0
+
 # Development dependencies
 dev_dependencies:
   flutter_test:
@@ -117,7 +125,49 @@ dev_dependencies:
   json_serializable: ^6.0.1
   build_runner: ^2.13.1
   inno_bundle: ^0.11.2
+
 dependency_overrides:
+  media_kit:
+    git:
+      url: https://github.com/aayush2622/media-kit.git
+      ref: main
+      path: ./media_kit
+  media_kit_video:
+    git:
+      url: https://github.com/aayush2622/media-kit.git
+      ref: main
+      path: ./media_kit_video
+  media_kit_libs_video:
+    git:
+      url: https://github.com/aayush2622/media-kit.git
+      ref: main
+      path: ./libs/universal/media_kit_libs_video
+  media_kit_libs_linux:
+    git:
+      url: https://github.com/aayush2622/media-kit.git
+      ref: main
+      path: ./libs/linux/media_kit_libs_linux
+  media_kit_libs_ios_video:
+    git:
+      url: https://github.com/aayush2622/media-kit.git
+      ref: main
+      path: ./libs/ios/media_kit_libs_ios_video
+  media_kit_libs_android_video:
+    git:
+      url: https://github.com/aayush2622/media-kit.git
+      ref: main
+      path: ./libs/android/media_kit_libs_android_video
+  media_kit_libs_windows_video:
+    git:
+      url: https://github.com/aayush2622/media-kit.git
+      ref: main
+      path: ./libs/windows/media_kit_libs_windows_video
+  media_kit_libs_macos_video:
+    git:
+      url: https://github.com/aayush2622/media-kit.git
+      ref: main
+      path: ./libs/macos/media_kit_libs_macos_video
+
   collection: ^1.19.1
   flutter_inappwebview:
     git:
