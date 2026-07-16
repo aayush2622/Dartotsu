@@ -10,6 +10,7 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
 
 import '../../../DataClass/Media.dart';
+import '../../../Services/MediaService.dart';
 import 'Novelreadercontroller.dart';
 
 class NovelReader extends StatefulWidget {
@@ -61,6 +62,13 @@ class NovelReaderState extends State<NovelReader> {
     WidgetsBinding.instance.addPostFrameCallback((_) => _restoreProgress());
   }
 
+  late final MediaService _service;
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _service = context.currentService(listen: false);
+  }
+
   @override
   void dispose() {
     focusNode.dispose();
@@ -78,7 +86,7 @@ class NovelReaderState extends State<NovelReader> {
   String get _settingsKey => "novelReaderSettings";
 
   String get _progressKey {
-    var sourceName = Get.context!.currentService(listen: false).getName;
+    var sourceName = _service.getName;
     return "${widget.media.id}-${widget.currentChapter.episodeNumber}-$sourceName";
   }
 
@@ -142,15 +150,14 @@ class NovelReaderState extends State<NovelReader> {
     var chapterEnd = scrollProgress.value > 0.95;
     if (incognito || !chapterEnd) return;
 
-    var service = context.currentService(listen: false);
     var saveProgress =
         loadCustomData<bool>(
-          "${widget.media.id}-${service.getName}-saveProgress",
+          "${widget.media.id}-${_service.getName}-saveProgress",
         ) ??
         true;
 
     if (saveProgress) {
-      service.data.mutations?.setProgress(
+      _service.data.mutations?.setProgress(
         widget.media,
         widget.currentChapter.episodeNumber,
       );
