@@ -20,7 +20,6 @@ import 'package:get/get.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:isar_community/isar.dart';
-import 'package:media_kit/media_kit.dart';
 import 'package:provider/provider.dart';
 import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 import 'package:rhttp/rhttp.dart';
@@ -76,6 +75,7 @@ void main(List<String> args) async {
           softCrash: true,
         );
       };
+      Get.log = (text, {isError = false}) => debugPrint(text);
       await init();
       runApp(
         MultiProvider(
@@ -131,7 +131,7 @@ Future init() async {
   MediaService.init();
   TypeFactory.init();
 
-  MediaKit.ensureInitialized();
+  //MediaKit.ensureInitialized();
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
     await WindowManager.instance.ensureInitialized();
   }
@@ -251,12 +251,6 @@ class MyApp extends StatelessWidget {
               themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
               debugShowCheckedModeBanner: false,
               enableLog: true,
-              logWriterCallback: (text, {isError = false}) async {
-                Logger.log(text);
-                if (isError) {
-                  debugPrint(text);
-                }
-              },
               theme: getTheme(lightDynamic, themeManager),
               darkTheme: getTheme(darkDynamic, themeManager),
               home: !loadCustomData("initialLoaded", defaultValue: false)!
