@@ -3,11 +3,15 @@ import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../Adaptor/Chapter/ChapterAdaptor.dart';
+import '../../../Api/Discord/Discord.dart';
+import '../../../Api/Discord/DiscordService.dart';
 import '../../../DataClass/Media.dart';
+import '../../../Functions/Function.dart';
 import '../../../Functions/string_extensions.dart';
 import '../../../Widgets/CustomBottomDialog.dart';
 import 'Novelreader.dart';
+
+const List<String> _kNovelFonts = ['Poppins', 'Roboto', 'monospace', 'Serif'];
 
 class NovelReaderController extends StatefulWidget {
   final NovelReaderState reader;
@@ -23,12 +27,129 @@ class _NovelReaderControllerState extends State<NovelReaderController> {
   late Source source;
   late DEpisode currentChapter;
 
+  String? _preloadedNextContent;
+  DEpisode? _preloadedFor;
+  bool _isPreloading = false;
+  bool _autoNextTriggered = false;
+
   @override
   void initState() {
     super.initState();
     media = widget.reader.widget.media;
     currentChapter = widget.reader.widget.currentChapter;
     source = widget.reader.widget.source;
+
+    setDiscordRpc();
+
+    ever(widget.reader.scrollProgress, (double progress) {
+      final next = _nextChapter();
+
+      if (progress > 0.85) {
+        _maybePreloadNext(next);
+      }
+
+      if (progress > 0.98 &&
+          widget.reader.autoNextChapter &&
+          !_autoNextTriggered &&
+          next != null) {
+        _autoNextTriggered = true;
+        _navigateToChapter(
+          next,
+          preloaded: _preloadedFor == next ? _preloadedNextContent : null,
+        );
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    if (DiscordService.isInitialized) DiscordService.stopRPC();
+    super.dispose();
+  }
+
+  Future<void> setDiscordRpc() async {
+    Discord.setRpc(media, episode: currentChapter);
+  }
+
+  List<DEpisode> get _chapterList =>
+      media.manga?.chapters?.toList() ?? <DEpisode>[];
+
+  DEpisode? _previousChapter() {
+    final chapterList = _chapterList;
+    final index = chapterList.indexOf(currentChapter);
+    final sorted = chapterList.toList()
+      ..sort(
+        (a, b) =>
+            a.episodeNumber.toDouble().compareTo(b.episodeNumber.toDouble()),
+      );
+    return sorted.lastWhereOrNull(
+          (c) =>
+              c.episodeNumber.toDouble() <
+              currentChapter.episodeNumber.toDouble(),
+        ) ??
+        (index > 0 ? chapterList[index - 1] : null);
+  }
+
+  DEpisode? _nextChapter() {
+    final chapterList = _chapterList;
+    final index = chapterList.indexOf(currentChapter);
+    final sorted = chapterList.toList()
+      ..sort(
+        (a, b) =>
+            a.episodeNumber.toDouble().compareTo(b.episodeNumber.toDouble()),
+      );
+    return sorted.firstWhereOrNull(
+          (c) =>
+              c.episodeNumber.toDouble() >
+              currentChapter.episodeNumber.toDouble(),
+        ) ??
+        (index < chapterList.length - 1 ? chapterList[index + 1] : null);
+  }
+
+  Future<void> _maybePreloadNext(DEpisode? next) async {
+    if (next == null || _isPreloading || _preloadedFor == next) return;
+    _isPreloading = true;
+    try {
+      final content = await source.methods.getNovelContent(next);
+      _preloadedNextContent = content;
+      _preloadedFor = next;
+    } catch (_) {
+    } finally {
+      _isPreloading = false;
+    }
+  }
+
+  Future<void> _navigateToChapter(DEpisode chapter, {String? preloaded}) async {
+    String? content = preloaded;
+
+    if (content == null) {
+      showCustomBottomDialog(
+        context,
+        const CustomBottomDialog(
+          viewList: [Center(child: CircularProgressIndicator())],
+        ),
+      );
+      content = await source.methods.getNovelContent(chapter);
+      if (!context.mounted) return;
+      Navigator.pop(context);
+    }
+
+    if (content == null || content.isEmpty) {
+      snackString("Failed to load chapter content");
+      return;
+    }
+
+    if (!context.mounted) return;
+    Get.back();
+    navigateToPage(
+      context,
+      NovelReader(
+        media: media,
+        currentChapter: chapter,
+        htmlContent: content,
+        source: source,
+      ),
+    );
   }
 
   @override
@@ -113,6 +234,7 @@ class _NovelReaderControllerState extends State<NovelReaderController> {
             ],
           ),
         ),
+        const SizedBox(width: 20),
         _buildControlButton(
           icon: Icons.text_fields_rounded,
           onPressed: _showTextSettingsDialog,
@@ -122,33 +244,8 @@ class _NovelReaderControllerState extends State<NovelReaderController> {
   }
 
   Widget _buildBottomControls() {
-    // NOTE: assumes Media exposes a `novel` field with a `chapters` list,
-    // mirroring `media.manga!.chapters` / `media.anime!.episodes`.
-    // Point this at whatever your actual novel chapter source is.
-    var chapterList = media.manga?.chapters?.toList() ?? <DEpisode>[];
-    var index = chapterList.indexOf(currentChapter);
-
-    var sortedList = chapterList.toList()
-      ..sort(
-        (a, b) =>
-            a.episodeNumber.toDouble().compareTo(b.episodeNumber.toDouble()),
-      );
-
-    var previous =
-        sortedList.lastWhereOrNull(
-          (c) =>
-              c.episodeNumber.toDouble() <
-              currentChapter.episodeNumber.toDouble(),
-        ) ??
-        (index > 0 ? chapterList[index - 1] : null);
-
-    var next =
-        sortedList.firstWhereOrNull(
-          (c) =>
-              c.episodeNumber.toDouble() >
-              currentChapter.episodeNumber.toDouble(),
-        ) ??
-        (index < chapterList.length - 1 ? chapterList[index + 1] : null);
+    final previous = _previousChapter();
+    final next = _nextChapter();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -169,6 +266,7 @@ class _NovelReaderControllerState extends State<NovelReaderController> {
               min: 0,
               max: 1,
               onChanged: (value) {
+                widget.reader.stopAutoScroll();
                 widget.reader.scrollProgress.value = value;
                 widget.reader.jumpToProgress(value);
               },
@@ -185,24 +283,39 @@ class _NovelReaderControllerState extends State<NovelReaderController> {
                 visible: previous != null,
                 child: _buildControlButton(
                   icon: Icons.skip_previous_rounded,
-                  onPressed: () => onChapterClick(
-                    context,
-                    previous!,
-                    source,
-                    media,
-                    () => Get.back(),
-                  ),
+                  onPressed: () => _navigateToChapter(previous!),
                 ),
               ),
             ),
             Obx(
-              () => Text(
-                "${(widget.reader.scrollProgress.value * 100).toStringAsFixed(0)}%",
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 12,
-                  fontWeight: FontWeight.bold,
-                ),
+              () => Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    "${(widget.reader.scrollProgress.value * 100).toStringAsFixed(0)}%",
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    "${widget.reader.minutesRemaining} min left",
+                    style: const TextStyle(
+                      color: Color.fromARGB(255, 190, 190, 190),
+                      fontSize: 10,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Obx(
+              () => _buildControlButton(
+                icon: widget.reader.isAutoScrolling.value
+                    ? Icons.pause_circle_outline_rounded
+                    : Icons.play_circle_outline_rounded,
+                onPressed: widget.reader.toggleAutoScroll,
+                onLongPress: _showAutoScrollSpeedDialog,
               ),
             ),
             SizedBox(
@@ -211,12 +324,11 @@ class _NovelReaderControllerState extends State<NovelReaderController> {
                 visible: next != null,
                 child: _buildControlButton(
                   icon: Icons.skip_next_rounded,
-                  onPressed: () => onChapterClick(
-                    context,
+                  onPressed: () => _navigateToChapter(
                     next!,
-                    source,
-                    media,
-                    () => Get.back(),
+                    preloaded: _preloadedFor == next
+                        ? _preloadedNextContent
+                        : null,
                   ),
                 ),
               ),
@@ -224,6 +336,40 @@ class _NovelReaderControllerState extends State<NovelReaderController> {
           ],
         ),
       ],
+    );
+  }
+
+  void _showAutoScrollSpeedDialog() {
+    showCustomBottomDialog(
+      context,
+      CustomBottomDialog(
+        title: "Auto-Scroll Speed",
+        viewList: [
+          StatefulBuilder(
+            builder: (context, setState) => Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Slider(
+                    value: widget.reader.autoScrollSpeed.clamp(10, 200),
+                    min: 10,
+                    max: 200,
+                    onChanged: (value) {
+                      setState(() {
+                        widget.reader.setAutoScrollSpeed(value);
+                      });
+                    },
+                  ),
+                  Text(
+                    "${widget.reader.autoScrollSpeed.toStringAsFixed(0)} px/s",
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -310,6 +456,74 @@ class _NovelReaderControllerState extends State<NovelReaderController> {
                     ],
                   ),
                   const SizedBox(height: 12),
+                  Row(
+                    children: [
+                      const Text(
+                        "Font",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      const Spacer(),
+                      DropdownButton<String>(
+                        value: widget.reader.fontFamily,
+                        dropdownColor: Colors.grey[900],
+                        items: _kNovelFonts
+                            .map(
+                              (f) => DropdownMenuItem(
+                                value: f,
+                                child: Text(f, style: TextStyle(fontFamily: f)),
+                              ),
+                            )
+                            .toList(),
+                        onChanged: (value) {
+                          if (value == null) return;
+                          setState(() {
+                            widget.reader.fontFamily = value;
+                          });
+                          widget.reader.setState(() {});
+                          widget.reader.saveSettings();
+                        },
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      const Text(
+                        "Justify Text",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      const Spacer(),
+                      Switch(
+                        value: widget.reader.textAlign == TextAlign.justify,
+                        onChanged: (value) {
+                          setState(() {
+                            widget.reader.textAlign = value
+                                ? TextAlign.justify
+                                : TextAlign.left;
+                          });
+                          widget.reader.setState(() {});
+                          widget.reader.saveSettings();
+                        },
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      const Text(
+                        "Auto-Next Chapter",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      const Spacer(),
+                      Switch(
+                        value: widget.reader.autoNextChapter,
+                        onChanged: (value) {
+                          setState(() {
+                            widget.reader.setAutoNextChapter(value);
+                          });
+                        },
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 12),
                   const Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
@@ -379,12 +593,14 @@ class _NovelReaderControllerState extends State<NovelReaderController> {
   Widget _buildControlButton({
     required IconData icon,
     required VoidCallback onPressed,
+    VoidCallback? onLongPress,
     double size = 24,
     Color color = Colors.white,
   }) {
     return InkWell(
       borderRadius: BorderRadius.circular(10),
       onTap: onPressed,
+      onLongPress: onLongPress,
       child: Icon(icon, color: color, size: size),
     );
   }

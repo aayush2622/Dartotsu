@@ -79,15 +79,15 @@ class PrefManager {
   static Future<void> init() async {
     try {
       final path = await getDirectory(subPath: 'settings');
-      dartotsuPreferences = await _open('DartotsuSettings', path!.path);
+      dartotsuPreferences = _open('DartotsuSettings', path!.path);
       await _populateCache();
     } catch (e) {
       debugPrint('Error initializing preferences: $e');
     }
   }
 
-  static Future<Isar> _open(String name, String directory) async {
-    isar = await Isar.open(
+  static Isar _open(String name, String directory) {
+    isar = Isar.openSync(
       [
         KeyValueSchema,
         ResponseTokenSchema,
