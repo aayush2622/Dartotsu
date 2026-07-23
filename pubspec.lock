@@ -310,7 +310,7 @@ packages:
     description:
       path: "."
       ref: master
-      resolved-ref: f16844cb3c43278ddf2789ea96b878e0cece684c
+      resolved-ref: "4f3d7260d35aa3447ef3a7eaf441ae0bd3eaa98e"
       url: "https://github.com/aayush2622/DartotsuExtensionBridge.git"
     source: git
     version: "0.0.5"
@@ -492,10 +492,10 @@ packages:
     dependency: transitive
     description:
       name: flutter_cache_manager
-      sha256: "400b6592f16a4409a7f2bb929a9a7e38c72cceb8ffb99ee57bbf2cb2cecf8386"
+      sha256: "1de7849213b4c73c85aca7e0ac687a9a5d82ccdb594366b9dcc26cb6a2189cd2"
       url: "https://pub.dev"
     source: hosted
-    version: "3.4.1"
+    version: "3.4.2"
   flutter_html:
     dependency: "direct main"
     description:
@@ -1473,10 +1473,10 @@ packages:
     dependency: transitive
     description:
       name: safe_local_storage
-      sha256: "7483b3d5e8976f0bd263647c03b96131ee8e43f48b56fa8a8ec459e8515d74b0"
+      sha256: "494b982d5edb71030650ea463d939670e91b232b588323dc75229d2c5f23e7b7"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.4"
+    version: "2.0.6"
   screen_brightness:
     dependency: "direct main"
     description:
@@ -1790,10 +1790,10 @@ packages:
     dependency: transitive
     description:
       name: synchronized
-      sha256: "93b153dcb6a26dcddee6ca087dd634b53e38c10b5aa163e8e49501a776456153"
+      sha256: "61894a1956de6b4fc1aefd0892e109514a1a706cbece3ac59decd90ff5a7a423"
       url: "https://pub.dev"
     source: hosted
-    version: "3.4.1"
+    version: "3.4.1+1"
   term_glyph:
     dependency: transitive
     description:
@@ -1966,10 +1966,10 @@ packages:
     dependency: "direct main"
     description:
       name: wakelock_plus
-      sha256: "824c5bba0f800e86d32e57d3d1843c531f090005cc89d9a837933e6601093d53"
+      sha256: "7253bca0fcf40d8413ddfcf4d2a1fa0a82475e79be25a4f2c564b695c9351486"
       url: "https://pub.dev"
     source: hosted
-    version: "1.6.1"
+    version: "1.7.0"
   wakelock_plus_ohos:
     dependency: transitive
     description:
@@ -1982,10 +1982,10 @@ packages:
     dependency: transitive
     description:
       name: wakelock_plus_platform_interface
-      sha256: b13f99e992e7ae6a152e16c5559d3c07ff445b13330192662494e614ca3e7d7b
+      sha256: "0618d1799f0b28bcf98255b4ee8313e6fc4d38589dc4ee5fe5840d57d1aff6da"
       url: "https://pub.dev"
     source: hosted
-    version: "1.5.1"
+    version: "1.6.0"
   watcher:
     dependency: transitive
     description:
