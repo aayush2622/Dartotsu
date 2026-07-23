@@ -779,16 +779,12 @@ Future<void> showInstallDialog(
         const SizedBox(height: 20),
       ],
       negativeText: "Cancel",
-      positiveText: plugin.installed.value
-          ? "Installed"
-          : plugin.hasUpdate
-          ? "Update"
-          : "Install",
+      positiveText: plugin.installed.value ? "Installed" : "Install",
       negativeCallback: () {
         Navigator.pop(context);
       },
       positiveCallback: () async {
-        if (plugin.installed.value && !plugin.hasUpdate) {
+        if (plugin.installed.value) {
           return;
         }
 
