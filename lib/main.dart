@@ -20,6 +20,7 @@ import 'package:get/get.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:isar_community/isar.dart';
+import 'package:media_kit/media_kit.dart';
 import 'package:provider/provider.dart';
 import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 import 'package:rhttp/rhttp.dart';
@@ -131,7 +132,7 @@ Future init() async {
   MediaService.init();
   TypeFactory.init();
 
-  //MediaKit.ensureInitialized();
+  MediaKit.ensureInitialized();
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
     await WindowManager.instance.ensureInitialized();
   }
