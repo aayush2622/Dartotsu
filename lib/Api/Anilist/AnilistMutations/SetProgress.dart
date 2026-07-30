@@ -4,27 +4,33 @@ extension on AnilistMutations {
   Future<void> _setProgress(Media media, String episode) async {
     if (Anilist.userid == null) return;
 
-    if (media.userProgress == episode.toDouble().toInt()) return;
+    final progress = episode.toDouble().toInt();
 
-    media.userProgress = episode.toDouble().toInt();
-    media.status = media.status == "REPEATING" ? "REPEATING" : "CURRENT";
-    if (media.startDate == null) {
-      var currentDate = DateTime.now();
-      media.startDate = FuzzyDate(
-        year: currentDate.year,
-        month: currentDate.month,
-        day: currentDate.day,
-      );
+    final isCompleted =
+        media.anime?.totalEpisodes == progress ||
+        media.manga?.totalChapters == progress;
+    final isRewatch =
+        media.userStatus == "REPEATING" ||
+        (media.userStatus == "COMPLETED" &&
+            progress < (media.userProgress ?? 0));
+
+    final isFinishingCurrentRewatch = isRewatch && isCompleted;
+    if (media.userProgress == progress && !isFinishingCurrentRewatch) return;
+
+    media.userProgress = progress;
+    media.userStatus = isRewatch ? "REPEATING" : "CURRENT";
+
+    if (!isRewatch && media.userStartedAt?.year == null) {
+      media.userStartedAt = _currentFuzzyDate();
     }
-    if (media.anime?.totalEpisodes == media.userProgress ||
-        media.manga?.totalChapters == media.userProgress) {
+
+    if (isCompleted) {
       media.userStatus = "COMPLETED";
-      var currentDate = DateTime.now();
-      media.userCompletedAt = FuzzyDate(
-        year: currentDate.year,
-        month: currentDate.month,
-        day: currentDate.day,
-      );
+      if (isRewatch) {
+        media.userRepeat++;
+      } else if (media.userCompletedAt?.year == null) {
+        media.userCompletedAt = _currentFuzzyDate();
+      }
     }
 
     await _editList(media);
@@ -32,4 +38,13 @@ extension on AnilistMutations {
     Refresh.activity[media.id]?.value = true;
     snackString("Setting progress to ${media.userProgress}");
   }
+}
+
+FuzzyDate _currentFuzzyDate() {
+  final currentDate = DateTime.now();
+  return FuzzyDate(
+    year: currentDate.year,
+    month: currentDate.month,
+    day: currentDate.day,
+  );
 }
