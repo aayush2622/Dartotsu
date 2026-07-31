@@ -40,8 +40,8 @@ enum RefreshId {
   Mal,
   Kitsu,
   Simkl,
-  Extensions,
-  MangaBaka;
+  MangaBaka,
+  Extensions;
 
   List<int> get ids => List.generate(5, (index) => baseId + index);
 
