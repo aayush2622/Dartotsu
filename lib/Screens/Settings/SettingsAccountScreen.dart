@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 
 import '../../Api/Anilist/Anilist.dart';
 import '../../Api/Discord/Discord.dart';
+import '../../Api/MangaBaka/MangaBaka.dart';
 import '../../Api/MyAnimeList/Mal.dart';
 import '../../Api/Simkl/Simkl.dart';
 import '../../Theme/LanguageSwitcher.dart';
@@ -81,6 +82,21 @@ class SettingsAccountScreenState extends BaseSettingsScreen {
           ..setNegativeButton(getString.no, null)
           ..show(),
         onLogIn: () => Simkl.login(context),
+      ),
+      _buildAccountSection(
+        context,
+        iconPath: 'assets/svg/mangabaka.svg',
+        title: "MangaBaka",
+        isLoggedIn: MangaBaka.token,
+        username: MangaBaka.username,
+        avatarUrl: MangaBaka.avatar,
+        onLogOut: () => AlertDialogBuilder(context)
+          ..setTitle(getString.logout("MangaBaka"))
+          ..setMessage(getString.confirmLogout)
+          ..setPositiveButton(getString.yes, MangaBaka.removeSavedToken)
+          ..setNegativeButton(getString.no, null)
+          ..show(),
+        onLogIn: () => MangaBaka.login(context),
       ),
       _buildAccountSection(
         context,
