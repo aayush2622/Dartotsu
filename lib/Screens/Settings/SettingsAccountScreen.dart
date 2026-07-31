@@ -85,7 +85,7 @@ class SettingsAccountScreenState extends BaseSettingsScreen {
       ),
       _buildAccountSection(
         context,
-        iconPath: 'assets/svg/mangabaka.svg',
+        iconPath: 'assets/images/mangabaka.png',
         title: "MangaBaka",
         isLoggedIn: MangaBaka.token,
         username: MangaBaka.username,
