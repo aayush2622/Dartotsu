@@ -55,9 +55,9 @@ enum RefreshId {
         return 30;
       case RefreshId.Simkl:
         return 40;
-      case RefreshId.Extensions:
-        return 50;
       case RefreshId.MangaBaka:
+        return 50;
+      case RefreshId.Extensions:
         return 60;
     }
   }
