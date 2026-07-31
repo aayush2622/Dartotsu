@@ -188,6 +188,7 @@ class PrefName {
   static const Pref<ResponseToken?> malToken =
       Pref('MalToken', null, PrefLocation.PROTECTED);
   static const simklToken = Pref('SimklToken', '', PrefLocation.PROTECTED);
+  static const mangaBakaToken = Pref('MangaBakaToken', '', PrefLocation.PROTECTED);
   static const discordToken = Pref('DiscordToken', '', PrefLocation.PROTECTED);
   static const discordUserName =
       Pref('discordUserName', '', PrefLocation.PROTECTED);
