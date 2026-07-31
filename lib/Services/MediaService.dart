@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../Api/Anilist/AnilistService.dart';
 import '../Api/Extensions/ExtensionsService.dart';
+import '../Api/MangaBaka/MangaBakaService.dart';
 import '../Api/MyAnimeList/MalService.dart';
 import '../DataClass/Media.dart';
 import '../Screens/HomeNavBar.dart';
@@ -70,6 +71,7 @@ abstract class MediaService {
     AnilistService();
     MalService();
     SimklService();
+    MangaBakaService();
     ExtensionsService();
   }
 }
