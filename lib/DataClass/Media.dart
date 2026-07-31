@@ -10,6 +10,7 @@ import '../Api/Anilist/Data/media.dart' as anilistApi;
 import '../Api/Anilist/Data/others.dart';
 import '../Api/MyAnimeList/Data/media.dart' as malApi;
 import '../Api/Simkl/Data/Media.dart' as simklApi;
+import '../Api/MangaBaka/MangaBakaModels.dart';
 import '../Preferences/PrefManager.dart';
 import 'Anime.dart';
 import 'Author.dart';
@@ -21,6 +22,7 @@ part 'Data/Media.g.dart';
 part 'Media/AnilistMedia.dart';
 part 'Media/MalMedia.dart';
 part 'Media/SimklMedia.dart';
+part 'Media/MangaBakaMedia.dart';
 
 class MediaMapWrapper {
   final Map<String, List<Media>> mediaMap;
@@ -118,6 +120,7 @@ class Media {
   int? idMAL;
   String? idKitsu;
   int? idSimkl;
+  int? idMangaBaka;
   Source? sourceData;
 
   Media({
@@ -180,6 +183,7 @@ class Media {
     this.idAnilist,
     this.idMAL,
     this.idSimkl,
+    this.idMangaBaka,
     this.cameFromContinue = false,
     this.mal = false,
     this.kitsu = false,
@@ -215,6 +219,11 @@ class Media {
 
   factory Media.fromSimklMovies(simklApi.MovieElement apiMedia) =>
       _fromSimklMovies(apiMedia);
+
+  //MangaBaka
+  factory Media.fromMangaBaka(MangaBakaSeries series,
+          {MangaBakaLibraryEntry? libraryEntry}) =>
+      _fromMangaBaka(series, libraryEntry: libraryEntry);
 
   factory Media.skeleton() {
     final random = Random();
