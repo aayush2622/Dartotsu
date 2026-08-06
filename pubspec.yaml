@@ -172,7 +172,6 @@ dependency_overrides:
   flutter_inappwebview:
     git:
       url: https://github.com/roshancodespace/flutter_inappwebview.git
-      ref: 928133d
       path: flutter_inappwebview
 # Flutter-specific configurations
 flutter:
