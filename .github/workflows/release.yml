@@ -20,8 +20,6 @@ jobs:
       - &checkout
         name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - &prepare_flutter
         name: Prepare Flutter version
@@ -41,18 +39,7 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           flutter-version: ${{ env.FLUTTER_VERSION }}
-
-      - &cache_flutter
-        name: Cache Flutter dependencies
-        uses: actions/cache@v4
-        with:
-          path: |
-            ${{ steps.setup-flutter.outputs.pub-cache-path }}
-            build/
-            .dart_tool/
-          key: v1-${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.lock', '**/pubspec.yaml') }}
-          restore-keys: |
-            v1-${{ runner.os }}-flutter-
+          cache: true
 
       - &setup_env
         name: Setup env File
@@ -66,6 +53,7 @@ jobs:
 
   build_android:
     runs-on: ubuntu-latest
+    timeout-minutes: 60
     permissions:
       contents: write
       pull-requests: write
@@ -74,7 +62,6 @@ jobs:
       - *checkout
       - *prepare_flutter
       - *setup_flutter
-      - *cache_flutter
 
       - name: Cache Gradle dependencies
         uses: actions/cache@v4
@@ -129,7 +116,9 @@ jobs:
           echo "org.gradle.parallel=true" >> ~/.gradle/gradle.properties
           echo "org.gradle.caching=true" >> ~/.gradle/gradle.properties
 
-      - run: flutter clean
+      - name: Clean build (optional)
+        if: ${{ contains(github.event.head_commit.message || '', '[clean]') }}
+        run: flutter clean
       - run: flutter pub get
       - run: flutter build apk --release --split-per-abi
       - run: flutter build apk --release
@@ -147,12 +136,13 @@ jobs:
           mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/Dartotsu_Android_Universal_${{github.ref_name}}.apk
 
       - name: Android Apk Release
-        uses: softprops/action-gh-release@master
+        uses: softprops/action-gh-release@v3.0.2
         with:
           files: build/app/outputs/flutter-apk/Dartotsu_Android_*_${{ github.ref_name }}.apk
 
   build_windows:
     runs-on: windows-latest
+    timeout-minutes: 60
     permissions:
       contents: write
       pull-requests: write
@@ -170,7 +160,6 @@ jobs:
       - *setup_env
       - *prepare_flutter
       - *setup_flutter
-      - *cache_flutter
 
       - name: Setup NuGet.exe for use with actions
         uses: NuGet/setup-nuget@v2.0.1
@@ -180,7 +169,9 @@ jobs:
       - name: Enable Windows desktop support
         run: flutter config --enable-windows-desktop
 
-      - run: flutter clean
+      - name: Clean build (optional)
+        if: ${{ contains(github.event.head_commit.message || '', '[clean]') }}
+        run: flutter clean
       - run: flutter pub get
 
       - name: Extract Version
@@ -224,12 +215,13 @@ jobs:
           dart run inno_bundle:build --sign-tool-params '"${{ steps.find_signtool.outputs.signtool_path }}" sign /fd sha256 /sha1 "${{ steps.get_thumbprint.outputs.thumbprint }}" /tr http://timestamp.digicert.com /td sha256 /v $f' --release
 
       - name: Release Windows Installer
-        uses: softprops/action-gh-release@master
+        uses: softprops/action-gh-release@v3.0.2
         with:
           files: build\windows\x64\installer\Release\Dartotsu-x86_64-${{env.version}}-Installer.exe
 
   build_linux:
     runs-on: ubuntu-latest
+    timeout-minutes: 60
     container:
       image: archlinux:base-devel
     permissions:
@@ -261,7 +253,6 @@ jobs:
         run: |
           pacman -S --noconfirm gtk3 libsecret wpewebkit clang cmake ninja fuse mpv webkit2gtk-4.1 unzip
 
-      - *cache_flutter
       - *setup_env
 
       - name: Fetch Flutter dependencies
@@ -271,19 +262,20 @@ jobs:
         run: flutter build linux
 
       - name: Archive app
-        uses: thedoctor0/zip-release@master
+        uses: thedoctor0/zip-release@0.7.6
         with:
           type: "zip"
           filename: Dartotsu_LinuxZip_${{github.ref_name}}.zip
           directory: build/linux/x64/release/bundle
 
       - name: Release Linux Zip
-        uses: softprops/action-gh-release@master
+        uses: softprops/action-gh-release@v3.0.2
         with:
           files: build/linux/x64/release/bundle/Dartotsu_LinuxZip_${{github.ref_name}}.zip
 
   build_ios:
     runs-on: macos-26
+    timeout-minutes: 75
     permissions:
       contents: write
       pull-requests: write
@@ -297,7 +289,6 @@ jobs:
           xcode-version: '26.3'
       - name: Show Xcode version
         run: xcodebuild -version
-      - *cache_flutter
       - *setup_env
 
       - name: Get Dependencies
@@ -315,12 +306,13 @@ jobs:
           zip -r Dartotsu-iOS-${{ github.ref_name }}.ipa Payload
 
       - name: Release iOS IPA
-        uses: softprops/action-gh-release@master
+        uses: softprops/action-gh-release@v3.0.2
         with:
           files: build/ios/iphoneos/Dartotsu-iOS-${{github.ref_name}}.ipa
 
   build_macos:
     runs-on: macos-26
+    timeout-minutes: 75
     permissions:
       contents: write
       pull-requests: write
@@ -332,7 +324,6 @@ jobs:
       - uses: maxim-lobanov/setup-xcode@v1
         with:
           xcode-version: '26.3'
-      - *cache_flutter
       - *setup_env
 
       - name: Get Dependencies
@@ -348,12 +339,13 @@ jobs:
         shell: bash
 
       - name: Release macOS DMG
-        uses: softprops/action-gh-release@master
+        uses: softprops/action-gh-release@v3.0.2
         with:
           files: build/macos/Release/Dartotsu-macos-${{github.ref_name}}.dmg
 
   generate-changelog:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     needs: [build_android, build_windows, build_linux, build_ios, build_macos]
     permissions:
       contents: write
@@ -475,6 +467,7 @@ jobs:
 
   post-release-notes:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     permissions:
       contents: read
     needs: [generate-changelog]
@@ -586,6 +579,7 @@ jobs:
 
   upload_download_url:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     needs: [post-release-notes]
     permissions:
       contents: read

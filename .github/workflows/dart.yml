@@ -47,8 +47,6 @@ jobs:
       - &checkout
         name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - &prepare_flutter
         name: Prepare Flutter version
@@ -68,31 +66,7 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           flutter-version: ${{ env.FLUTTER_VERSION }}
-
-      - &cache_flutter_normal
-        name: Cache Flutter dependencies (normal)
-        if: ${{ !contains(github.event.head_commit.message, '[clean]') && !inputs.clean_build }}
-        uses: actions/cache@v4
-        with:
-          path: |
-            ${{ steps.setup-flutter.outputs.pub-cache-path }}
-            build/
-            .dart_tool/
-          key: v1-${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.lock', '**/pubspec.yaml') }}
-          restore-keys: |
-            v1-${{ runner.os }}-flutter-
-            clean-v1-${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.lock', '**/pubspec.yaml') }}
-
-      - &cache_flutter_clean
-        name: Cache Flutter dependencies (clean)
-        if: contains(github.event.head_commit.message, '[clean]') || inputs.clean_build
-        uses: actions/cache@v4
-        with:
-          path: |
-            ${{ steps.setup-flutter.outputs.pub-cache-path }}
-            build/
-            .dart_tool/
-          key: clean-v1-${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.lock', '**/pubspec.yaml') }}
+          cache: true
 
       - &setup_env
         name: Setup env File
@@ -106,6 +80,7 @@ jobs:
 
   build_android:
     runs-on: ubuntu-latest
+    timeout-minutes: 60
     if: |
       (github.event_name == 'push' && (contains(github.event.head_commit.message, '[build.apk]') || contains(github.event.head_commit.message, '[build]') || contains(github.event.head_commit.message, '[build.all]'))) ||
       (github.event_name == 'workflow_dispatch' && (inputs.build_targets == 'android' || inputs.build_targets == 'all'))
@@ -121,8 +96,6 @@ jobs:
       - *checkout
       - *prepare_flutter
       - *setup_flutter
-      - *cache_flutter_normal
-      - *cache_flutter_clean
 
       - name: Cache Gradle dependencies (normal)
         if: ${{ !contains(github.event.head_commit.message, '[clean]') && !inputs.clean_build }}
@@ -184,7 +157,9 @@ jobs:
           echo "org.gradle.parallel=true" >> ~/.gradle/gradle.properties
           echo "org.gradle.caching=true" >> ~/.gradle/gradle.properties
 
-      - run: flutter clean
+      - name: Clean build (optional)
+        if: ${{ inputs.clean_build == true || contains(github.event.head_commit.message || '', '[clean]') }}
+        run: flutter clean
       - run: flutter pub get
       - run: flutter build apk --release --split-per-abi
       - run: flutter build apk --release
@@ -200,7 +175,7 @@ jobs:
 
       - name: Rename universal APK
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
-        run: mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/Dantotsu_Android_universal_${{github.ref_name}}.apk
+        run: mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/Dartotsu_Android_universal_${{github.ref_name}}.apk
 
       - name: Upload arm64 File To Google Drive
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
@@ -237,7 +212,7 @@ jobs:
         id: gdriveUpload_universal
         uses: hoatruongdev09/google-drive-file-upload-github-action@v1.1
         with:
-          file-path: build/app/outputs/flutter-apk/Dantotsu_Android_universal_${{github.ref_name}}.apk
+          file-path: build/app/outputs/flutter-apk/Dartotsu_Android_universal_${{github.ref_name}}.apk
           upload-name: Dartotsu_${{github.ref_name}}.apk
           upload-to-folder-id: ${{secrets.GOOGLE_FOLDER_ANDROID}}
           service-account-json: "${{secrets.GOOGLE_KEY}}"
@@ -245,6 +220,7 @@ jobs:
 
   build_windows:
     runs-on: windows-latest
+    timeout-minutes: 60
     if: |
       (github.event_name == 'push' && (contains(github.event.head_commit.message, '[build.windows]') || contains(github.event.head_commit.message, '[build.all]'))) ||
       (github.event_name == 'workflow_dispatch' && (inputs.build_targets == 'windows' || inputs.build_targets == 'all'))
@@ -268,8 +244,6 @@ jobs:
       - *setup_env
       - *prepare_flutter
       - *setup_flutter
-      - *cache_flutter_normal
-      - *cache_flutter_clean
       - name: Setup NuGet.exe for use with actions
         uses: NuGet/setup-nuget@v2.0.1
         with:
@@ -277,7 +251,9 @@ jobs:
       - name: Enable Windows desktop support
         run: flutter config --enable-windows-desktop
 
-      - run: flutter clean
+      - name: Clean build (optional)
+        if: ${{ inputs.clean_build == true || contains(github.event.head_commit.message || '', '[clean]') }}
+        run: flutter clean
       - run: flutter pub get
 
       - name: Extract Version
@@ -330,6 +306,7 @@ jobs:
   
   build_linux:
     runs-on: ubuntu-latest
+    timeout-minutes: 60
     container:
       image: archlinux:base-devel
     if: |
@@ -366,8 +343,6 @@ jobs:
         run: |
           pacman -S --noconfirm gtk3 libsecret wpewebkit clang cmake ninja fuse mpv webkit2gtk-4.1 unzip
 
-      - *cache_flutter_normal
-      - *cache_flutter_clean
       - *setup_env
 
       - name: Fetch Flutter dependencies
@@ -377,7 +352,7 @@ jobs:
         run: flutter build linux
       - name: Archive app
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
-        uses: thedoctor0/zip-release@master
+        uses: thedoctor0/zip-release@0.7.6
         with:
           type: "zip"
           filename: Dartotsu_Linux_${{github.ref_name}}.zip
@@ -396,6 +371,7 @@ jobs:
 
   build_ios:
     runs-on: macos-26
+    timeout-minutes: 75
 
     if: |
       (github.event_name == 'push' && (contains(github.event.head_commit.message, '[build.ios]') || contains(github.event.head_commit.message, '[build.all]'))) ||
@@ -413,8 +389,6 @@ jobs:
           xcode-version: '26.3'
       - name: Show Xcode version
         run: xcodebuild -version
-      - *cache_flutter_normal
-      - *cache_flutter_clean
       - *setup_env
 
       - name: Get Dependencies
@@ -443,6 +417,7 @@ jobs:
 
   build_macos:
     runs-on: macos-26
+    timeout-minutes: 75
     if: |
       (github.event_name == 'push' && (contains(github.event.head_commit.message, '[build.macos]') || contains(github.event.head_commit.message, '[build.all]'))) ||
       (github.event_name == 'workflow_dispatch' && (inputs.build_targets == 'macos' || inputs.build_targets == 'all'))
@@ -451,7 +426,7 @@ jobs:
       pull-requests: write
       repository-projects: write
     outputs:
-      deb_link: ${{steps.gdriveUpload.outputs.web-content-link}}
+      dmg_link: ${{steps.gdriveUpload.outputs.web-content-link}}
     steps:
       - *checkout
       - *prepare_flutter
@@ -459,8 +434,6 @@ jobs:
       - uses: maxim-lobanov/setup-xcode@v1
         with:
           xcode-version: '26.3'
-      - *cache_flutter_normal
-      - *cache_flutter_clean
       - *setup_env
       - name: Get Dependencies
         run: flutter pub get
@@ -484,6 +457,7 @@ jobs:
 
   sendMessage:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     needs: [build_android, build_windows, build_linux, build_ios, build_macos]
     if: |
       github.ref == 'refs/heads/main' &&
@@ -729,7 +703,7 @@ jobs:
           WINDOWS_DOWNLOAD_LINK: ${{ needs.build_windows.outputs.zip_link }}
           LINUX_DOWNLOAD_LINK: ${{needs.build_linux.outputs.zip_link}}
           IOS_DOWNLOAD_LINK: ${{needs.build_ios.outputs.ipa_link}}
-          MACOS_DOWNLOAD_LINK: ${{needs.build_macos.outputs.deb_link}}
+          MACOS_DOWNLOAD_LINK: ${{needs.build_macos.outputs.dmg_link}}
         run: |
           if [[ -n "$APK_DOWNLOAD_LINK" ]]; then
             APK_MESSAGE="[Download APK](https://drive.google.com/drive/folders/${{ secrets.GOOGLE_FOLDER_ANDROID }})"
@@ -756,7 +730,7 @@ jobs:
           fi
 
           if [[ -n "$MACOS_DOWNLOAD_LINK" ]]; then
-            MACOS_MESSAGE="[Download macos deb]($MACOS_DOWNLOAD_LINK)"
+            MACOS_MESSAGE="[Download macOS DMG]($MACOS_DOWNLOAD_LINK)"
           else
             MACOS_MESSAGE=""
           fi
@@ -773,6 +747,7 @@ jobs:
 
   trigger_downloader:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     needs:
       [
         build_android,
