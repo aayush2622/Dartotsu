@@ -77,6 +77,7 @@ jobs:
           echo "SIMKL_SECRET=$SIMKL_SECRET" > .env
           GIT_HASH=$(git rev-parse --short HEAD)
           echo "hash=$GIT_HASH" >> .env
+          echo "SAFE_REF=${GITHUB_REF_NAME//\//-}" >> $GITHUB_ENV
 
   build_android:
     runs-on: ubuntu-latest
@@ -169,21 +170,21 @@ jobs:
         run: |
           for file in build/app/outputs/flutter-apk/app-*-release.apk; do
             abi=$(basename $file | sed 's/app-\(.*\)-release.apk/\1/')
-            mv $file build/app/outputs/flutter-apk/Dartotsu_Android_${abi}_${{github.ref_name}}.apk
+            mv $file build/app/outputs/flutter-apk/Dartotsu_Android_${abi}_${{ env.SAFE_REF }}.apk
           done
           ls build/app/outputs/flutter-apk
 
       - name: Rename universal APK
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
-        run: mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/Dartotsu_Android_universal_${{github.ref_name}}.apk
+        run: mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/Dartotsu_Android_universal_${{ env.SAFE_REF }}.apk
 
       - name: Upload arm64 File To Google Drive
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         id: gdriveUpload_arm64
         uses: hoatruongdev09/google-drive-file-upload-github-action@v1.1
         with:
-          file-path: build/app/outputs/flutter-apk/Dartotsu_Android_arm64-v8a_${{github.ref_name}}.apk
-          upload-name: Dartotsu_Android_arm64-v8a_${{github.ref_name}}.apk
+          file-path: build/app/outputs/flutter-apk/Dartotsu_Android_arm64-v8a_${{ env.SAFE_REF }}.apk
+          upload-name: Dartotsu_Android_arm64-v8a_${{ env.SAFE_REF }}.apk
           upload-to-folder-id: ${{secrets.GOOGLE_FOLDER_ANDROID}}
           service-account-json: "${{secrets.GOOGLE_KEY}}"
           overrwrite: true
@@ -192,8 +193,8 @@ jobs:
         id: gdriveUpload_armeabi
         uses: hoatruongdev09/google-drive-file-upload-github-action@v1.1
         with:
-          file-path: build/app/outputs/flutter-apk/Dartotsu_Android_armeabi-v7a_${{github.ref_name}}.apk
-          upload-name: Dartotsu_Android_armeabi-v7a_${{github.ref_name}}.apk
+          file-path: build/app/outputs/flutter-apk/Dartotsu_Android_armeabi-v7a_${{ env.SAFE_REF }}.apk
+          upload-name: Dartotsu_Android_armeabi-v7a_${{ env.SAFE_REF }}.apk
           upload-to-folder-id: ${{secrets.GOOGLE_FOLDER_ANDROID}}
           service-account-json: "${{secrets.GOOGLE_KEY}}"
           overrwrite: true
@@ -202,8 +203,8 @@ jobs:
         id: gdriveUpload_x86
         uses: hoatruongdev09/google-drive-file-upload-github-action@v1.1
         with:
-          file-path: build/app/outputs/flutter-apk/Dartotsu_Android_x86_64_${{github.ref_name}}.apk
-          upload-name: Dartotsu_Android_x86_64_${{github.ref_name}}.apk
+          file-path: build/app/outputs/flutter-apk/Dartotsu_Android_x86_64_${{ env.SAFE_REF }}.apk
+          upload-name: Dartotsu_Android_x86_64_${{ env.SAFE_REF }}.apk
           upload-to-folder-id: ${{secrets.GOOGLE_FOLDER_ANDROID}}
           service-account-json: "${{secrets.GOOGLE_KEY}}"
           overrwrite: true
@@ -212,8 +213,8 @@ jobs:
         id: gdriveUpload_universal
         uses: hoatruongdev09/google-drive-file-upload-github-action@v1.1
         with:
-          file-path: build/app/outputs/flutter-apk/Dartotsu_Android_universal_${{github.ref_name}}.apk
-          upload-name: Dartotsu_${{github.ref_name}}.apk
+          file-path: build/app/outputs/flutter-apk/Dartotsu_Android_universal_${{ env.SAFE_REF }}.apk
+          upload-name: Dartotsu_${{ env.SAFE_REF }}.apk
           upload-to-folder-id: ${{secrets.GOOGLE_FOLDER_ANDROID}}
           service-account-json: "${{secrets.GOOGLE_KEY}}"
           overrwrite: true
@@ -355,7 +356,7 @@ jobs:
         uses: thedoctor0/zip-release@0.7.6
         with:
           type: "zip"
-          filename: Dartotsu_Linux_${{github.ref_name}}.zip
+          filename: Dartotsu_Linux_${{ env.SAFE_REF }}.zip
           directory: build/linux/x64/release/bundle
 
       - name: Upload File To Google Drive
@@ -363,7 +364,7 @@ jobs:
         id: gdriveUpload
         uses: hoatruongdev09/google-drive-file-upload-github-action@v1.1
         with:
-          file-path: build/linux/x64/release/bundle/Dartotsu_Linux_${{github.ref_name}}.zip
+          file-path: build/linux/x64/release/bundle/Dartotsu_Linux_${{ env.SAFE_REF }}.zip
           upload-name: Dartotsu_linux.zip
           upload-to-folder-id: ${{secrets.GOOGLE_FOLDER_MAIN}}
           service-account-json: "${{secrets.GOOGLE_KEY}}"
@@ -402,15 +403,15 @@ jobs:
           cd Payload
           cp -R ../Runner.app .
           cd ..
-          zip -r Dartotsu-iOS-${{ github.ref_name }}.ipa Payload
+          zip -r Dartotsu-iOS-${{ env.SAFE_REF }}.ipa Payload
       - name: Upload File To Google Drive
         if: |
           github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         id: gdriveUpload
         uses: hoatruongdev09/google-drive-file-upload-github-action@v1.1
         with:
-          file-path: build/ios/iphoneos/Dartotsu-iOS-${{github.ref_name}}.ipa
-          upload-name: Dartotsu-iOS-${{github.ref_name}}.ipa
+          file-path: build/ios/iphoneos/Dartotsu-iOS-${{ env.SAFE_REF }}.ipa
+          upload-name: Dartotsu-iOS-${{ env.SAFE_REF }}.ipa
           upload-to-folder-id: ${{secrets.GOOGLE_FOLDER_MAIN}}
           service-account-json: "${{secrets.GOOGLE_KEY}}"
           overrwrite: true
@@ -442,15 +443,15 @@ jobs:
       - name: Create DMG file for macOS Build
         run: |
           mkdir -p build/macos/Release
-          hdiutil create -volname "Dartotsu" -srcfolder build/macos/Build/Products/Release/Dartotsu.app -ov -format UDZO build/macos/Release/Dartotsu-macos-${{github.ref_name}}.dmg
+          hdiutil create -volname "Dartotsu" -srcfolder build/macos/Build/Products/Release/Dartotsu.app -ov -format UDZO build/macos/Release/Dartotsu-macos-${{ env.SAFE_REF }}.dmg
         shell: bash
       - name: Upload File To Google Drive
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         id: gdriveUpload
         uses: hoatruongdev09/google-drive-file-upload-github-action@v1.1
         with:
-          file-path: build/macos/Release/Dartotsu-macos-${{github.ref_name}}.dmg
-          upload-name: Dartotsu-macos-${{github.ref_name}}.dmg
+          file-path: build/macos/Release/Dartotsu-macos-${{ env.SAFE_REF }}.dmg
+          upload-name: Dartotsu-macos-${{ env.SAFE_REF }}.dmg
           upload-to-folder-id: ${{secrets.GOOGLE_FOLDER_MAIN}}
           service-account-json: "${{secrets.GOOGLE_KEY}}"
           overrwrite: true

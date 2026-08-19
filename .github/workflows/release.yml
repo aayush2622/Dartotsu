@@ -50,6 +50,7 @@ jobs:
           echo "SIMKL_SECRET=$SIMKL_SECRET" > .env
           GIT_HASH=$(git rev-parse --short HEAD)
           echo "hash=$GIT_HASH" >> .env
+          echo "SAFE_REF=${GITHUB_REF_NAME//\//-}" >> $GITHUB_ENV
 
   build_android:
     runs-on: ubuntu-latest
@@ -127,18 +128,18 @@ jobs:
         run: |
           for file in build/app/outputs/flutter-apk/app-*-release.apk; do
             abi=$(basename $file | sed 's/app-\(.*\)-release.apk/\1/')
-            mv $file build/app/outputs/flutter-apk/Dartotsu_Android_${abi}_${{github.ref_name}}.apk
+            mv $file build/app/outputs/flutter-apk/Dartotsu_Android_${abi}_${{ env.SAFE_REF }}.apk
           done
           ls build/app/outputs/flutter-apk
 
       - name: Rename Universal APK
         run: |
-          mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/Dartotsu_Android_Universal_${{github.ref_name}}.apk
+          mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/Dartotsu_Android_Universal_${{ env.SAFE_REF }}.apk
 
       - name: Android Apk Release
         uses: softprops/action-gh-release@v3.0.2
         with:
-          files: build/app/outputs/flutter-apk/Dartotsu_Android_*_${{ github.ref_name }}.apk
+          files: build/app/outputs/flutter-apk/Dartotsu_Android_*_${{ env.SAFE_REF }}.apk
 
   build_windows:
     runs-on: windows-latest
@@ -265,13 +266,13 @@ jobs:
         uses: thedoctor0/zip-release@0.7.6
         with:
           type: "zip"
-          filename: Dartotsu_LinuxZip_${{github.ref_name}}.zip
+          filename: Dartotsu_LinuxZip_${{ env.SAFE_REF }}.zip
           directory: build/linux/x64/release/bundle
 
       - name: Release Linux Zip
         uses: softprops/action-gh-release@v3.0.2
         with:
-          files: build/linux/x64/release/bundle/Dartotsu_LinuxZip_${{github.ref_name}}.zip
+          files: build/linux/x64/release/bundle/Dartotsu_LinuxZip_${{ env.SAFE_REF }}.zip
 
   build_ios:
     runs-on: macos-26
@@ -303,12 +304,12 @@ jobs:
           cd Payload
           cp -R ../Runner.app .
           cd ..
-          zip -r Dartotsu-iOS-${{ github.ref_name }}.ipa Payload
+          zip -r Dartotsu-iOS-${{ env.SAFE_REF }}.ipa Payload
 
       - name: Release iOS IPA
         uses: softprops/action-gh-release@v3.0.2
         with:
-          files: build/ios/iphoneos/Dartotsu-iOS-${{github.ref_name}}.ipa
+          files: build/ios/iphoneos/Dartotsu-iOS-${{ env.SAFE_REF }}.ipa
 
   build_macos:
     runs-on: macos-26
@@ -335,13 +336,13 @@ jobs:
       - name: Create DMG file for macOS Build
         run: |
           mkdir -p build/macos/Release
-          hdiutil create -volname "Dartotsu" -srcfolder build/macos/Build/Products/Release/Dartotsu.app -ov -format UDZO build/macos/Release/Dartotsu-macos-${{github.ref_name}}.dmg
+          hdiutil create -volname "Dartotsu" -srcfolder build/macos/Build/Products/Release/Dartotsu.app -ov -format UDZO build/macos/Release/Dartotsu-macos-${{ env.SAFE_REF }}.dmg
         shell: bash
 
       - name: Release macOS DMG
         uses: softprops/action-gh-release@v3.0.2
         with:
-          files: build/macos/Release/Dartotsu-macos-${{github.ref_name}}.dmg
+          files: build/macos/Release/Dartotsu-macos-${{ env.SAFE_REF }}.dmg
 
   generate-changelog:
     runs-on: ubuntu-latest
