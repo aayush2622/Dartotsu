@@ -19,7 +19,7 @@ env:
 
 jobs:
   build_android:
-    uses: ./.github/workflows/modules/build-android.yml
+    uses: ./.github/workflows/build-android.yml
     with:
       flutter-version: "3.44.0"
       clean-build: false
@@ -33,7 +33,7 @@ jobs:
       KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
 
   build_windows:
-    uses: ./.github/workflows/modules/build-windows.yml
+    uses: ./.github/workflows/build-windows.yml
     with:
       flutter-version: "3.44.0"
       clean-build: false
@@ -45,7 +45,7 @@ jobs:
       PFX_PASSWORD: ${{ secrets.PFX_PASSWORD }}
 
   build_linux:
-    uses: ./.github/workflows/modules/build-linux.yml
+    uses: ./.github/workflows/build-linux.yml
     with:
       flutter-version: "3.44.0"
       clean-build: false
@@ -56,7 +56,7 @@ jobs:
       SIMKL_SECRET: ${{ secrets.SIMKL_SECRET }}
 
   build_ios:
-    uses: ./.github/workflows/modules/build-ios.yml
+    uses: ./.github/workflows/build-ios.yml
     with:
       flutter-version: "3.44.0"
       clean-build: false
@@ -66,7 +66,7 @@ jobs:
       SIMKL_SECRET: ${{ secrets.SIMKL_SECRET }}
 
   build_macos:
-    uses: ./.github/workflows/modules/build-macos.yml
+    uses: ./.github/workflows/build-macos.yml
     with:
       flutter-version: "3.44.0"
       clean-build: false

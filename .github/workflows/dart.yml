@@ -44,7 +44,7 @@ jobs:
     if: |
       (github.event_name == 'push' && (contains(github.event.head_commit.message, '[build.apk]') || contains(github.event.head_commit.message, '[build]') || contains(github.event.head_commit.message, '[build.all]'))) ||
       (github.event_name == 'workflow_dispatch' && (inputs.build_targets == 'android' || inputs.build_targets == 'all'))
-    uses: ./.github/workflows/modules/build-android.yml
+    uses: ./.github/workflows/build-android.yml
     with:
       flutter-version: "3.44.0"
       clean-build: ${{ github.event_name == 'workflow_dispatch' && inputs.clean_build || false }}
@@ -63,7 +63,7 @@ jobs:
     if: |
       (github.event_name == 'push' && (contains(github.event.head_commit.message, '[build.windows]') || contains(github.event.head_commit.message, '[build.all]'))) ||
       (github.event_name == 'workflow_dispatch' && (inputs.build_targets == 'windows' || inputs.build_targets == 'all'))
-    uses: ./.github/workflows/modules/build-windows.yml
+    uses: ./.github/workflows/build-windows.yml
     with:
       flutter-version: "3.44.0"
       clean-build: ${{ github.event_name == 'workflow_dispatch' && inputs.clean_build || false }}
@@ -80,7 +80,7 @@ jobs:
     if: |
       (github.event_name == 'push' && (contains(github.event.head_commit.message, '[build.linux]') || contains(github.event.head_commit.message, '[build.all]') || contains(github.event.head_commit.message, '[build]'))) ||
       (github.event_name == 'workflow_dispatch' && (inputs.build_targets == 'linux' || inputs.build_targets == 'all'))
-    uses: ./.github/workflows/modules/build-linux.yml
+    uses: ./.github/workflows/build-linux.yml
     with:
       flutter-version: "3.44.0"
       clean-build: ${{ github.event_name == 'workflow_dispatch' && inputs.clean_build || false }}
@@ -96,7 +96,7 @@ jobs:
     if: |
       (github.event_name == 'push' && (contains(github.event.head_commit.message, '[build.ios]') || contains(github.event.head_commit.message, '[build.all]'))) ||
       (github.event_name == 'workflow_dispatch' && (inputs.build_targets == 'ios' || inputs.build_targets == 'all'))
-    uses: ./.github/workflows/modules/build-ios.yml
+    uses: ./.github/workflows/build-ios.yml
     with:
       flutter-version: "3.44.0"
       clean-build: ${{ github.event_name == 'workflow_dispatch' && inputs.clean_build || false }}
@@ -111,7 +111,7 @@ jobs:
     if: |
       (github.event_name == 'push' && (contains(github.event.head_commit.message, '[build.macos]') || contains(github.event.head_commit.message, '[build.all]'))) ||
       (github.event_name == 'workflow_dispatch' && (inputs.build_targets == 'macos' || inputs.build_targets == 'all'))
-    uses: ./.github/workflows/modules/build-macos.yml
+    uses: ./.github/workflows/build-macos.yml
     with:
       flutter-version: "3.44.0"
       clean-build: ${{ github.event_name == 'workflow_dispatch' && inputs.clean_build || false }}
