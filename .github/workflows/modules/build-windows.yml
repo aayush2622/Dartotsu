@@ -1,0 +1,126 @@
+name: Build Windows
+on:
+  workflow_call:
+    inputs:
+      flutter-version:
+        type: string
+        required: true
+      clean-build:
+        type: boolean
+        required: false
+        default: false
+      publish-mode:
+        type: string
+        required: false
+        default: gdrive
+    outputs:
+      zip_link:
+        description: Drive web content link
+        value: ${{ jobs.build.outputs.zip_link }}
+    secrets:
+      FLUTTER_VERSION:
+        required: false
+      SIMKL_SECRET:
+        required: false
+      PFX_FILE:
+        required: true
+      PFX_PASSWORD:
+        required: true
+      GOOGLE_FOLDER_MAIN:
+        required: false
+      GOOGLE_KEY:
+        required: false
+
+jobs:
+  build:
+    runs-on: windows-latest
+    timeout-minutes: 60
+    outputs:
+      zip_link: ${{ steps.gdriveUpload.outputs.web-content-link }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Signing Tool
+        shell: pwsh
+        run: |
+          mkdir $env:USERPROFILE\certs
+          [System.IO.File]::WriteAllBytes("$env:USERPROFILE\certs\Dartotsu.pfx", [Convert]::FromBase64String("${{ secrets.PFX_FILE }}"))
+          Import-PfxCertificate -FilePath "$env:USERPROFILE\certs\Dartotsu.pfx" -CertStoreLocation Cert:\CurrentUser\My -Password (ConvertTo-SecureString -String "${{ secrets.PFX_PASSWORD }}" -Force -AsPlainText)
+
+      - name: Setup Flutter env
+        uses: ./.github/actions/setup-flutter-env
+        with:
+          flutter-version: ${{ inputs.flutter-version }}
+          flutter-version-secret: ${{ secrets.FLUTTER_VERSION }}
+          simkl-secret: ${{ secrets.SIMKL_SECRET }}
+
+      - name: Setup NuGet.exe for use with actions
+        uses: NuGet/setup-nuget@v2.0.1
+        with:
+          nuget-version: latest
+
+      - name: Enable Windows desktop support
+        run: flutter config --enable-windows-desktop
+
+      - name: Clean build (optional)
+        if: ${{ inputs.clean-build || contains(github.event.head_commit.message || '', '[clean]') }}
+        run: flutter clean
+
+      - run: flutter pub get
+
+      - name: Extract Version
+        shell: pwsh
+        run: |
+          $version = (Get-Content pubspec.yaml | Select-String -Pattern 'version: ([\d.]+)').Matches.Groups[1].Value
+          echo "version=$version" >> $env:GITHUB_ENV
+
+      - name: Find Latest SignTool Path
+        id: find_signtool
+        shell: pwsh
+        run: |
+          $sdkBins = Get-ChildItem "C:\Program Files (x86)\Windows Kits\10\bin" -Directory |
+                     Where-Object { $_.Name -match '^\d+\.\d+\.\d+\.\d+$' } |
+                     Sort-Object Name -Descending |
+                     Select-Object -First 1
+          if (-not $sdkBins) { throw "No Windows SDK bin directories found!" }
+          $signtoolPath = Join-Path $sdkBins.FullName "x64\signtool.exe"
+          if (-not (Test-Path $signtoolPath)) { throw "signtool.exe not found at $signtoolPath" }
+          echo "signtool_path=$signtoolPath" >> $env:GITHUB_OUTPUT
+
+      - name: Check if pfx file exists
+        shell: pwsh
+        run: |
+          if (-not (Test-Path "$env:USERPROFILE\certs\Dartotsu.pfx")) {
+            throw "PFX file not found at $env:USERPROFILE\certs\Dartotsu.pfx"
+          }
+
+      - name: Get Certificate Thumbprint
+        id: get_thumbprint
+        shell: pwsh
+        run: |
+          $cert = Get-PfxCertificate -FilePath "$env:USERPROFILE\certs\Dartotsu.pfx" -Password (ConvertTo-SecureString -String "${{ secrets.PFX_PASSWORD }}" -Force -AsPlainText)
+          echo "thumbprint=$($cert.Thumbprint)" >> $env:GITHUB_OUTPUT
+
+      - name: Build and Sign Setup
+        run: |
+          dart run inno_bundle:build --sign-tool-params '"${{ steps.find_signtool.outputs.signtool_path }}" sign /fd sha256 /sha1 "${{ steps.get_thumbprint.outputs.thumbprint }}" /tr http://timestamp.digicert.com /td sha256 /v $f' --release
+
+      - name: Upload Windows artifact
+        if: ${{ inputs.publish-mode == 'artifact' || inputs.publish-mode == 'both' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-installer
+          path: build/windows/x64/installer/Release/Dartotsu-x86_64-${{ env.version }}-Installer.exe
+          if-no-files-found: error
+
+      - name: Upload File To Google Drive
+        if: ${{ (inputs.publish-mode == 'gdrive' || inputs.publish-mode == 'both') && github.ref == 'refs/heads/main' && github.event_name != 'pull_request' }}
+        id: gdriveUpload
+        uses: hoatruongdev09/google-drive-file-upload-github-action@v1.1
+        with:
+          file-path: build\windows\x64\installer\Release\Dartotsu-x86_64-${{ env.version }}-Installer.exe
+          upload-name: Dartotsu_windows.exe
+          upload-to-folder-id: ${{ secrets.GOOGLE_FOLDER_MAIN }}
+          service-account-json: "${{ secrets.GOOGLE_KEY }}"
+          overrwrite: true

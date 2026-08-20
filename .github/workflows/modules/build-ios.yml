@@ -1,0 +1,95 @@
+name: Build iOS
+on:
+  workflow_call:
+    inputs:
+      flutter-version:
+        type: string
+        required: true
+      clean-build:
+        type: boolean
+        required: false
+        default: false
+      publish-mode:
+        type: string
+        required: false
+        default: gdrive
+      xcode-version:
+        type: string
+        required: false
+        default: "26.3"
+    outputs:
+      ipa_link:
+        description: Drive web content link
+        value: ${{ jobs.build.outputs.ipa_link }}
+    secrets:
+      FLUTTER_VERSION:
+        required: false
+      SIMKL_SECRET:
+        required: false
+      GOOGLE_FOLDER_MAIN:
+        required: false
+      GOOGLE_KEY:
+        required: false
+
+jobs:
+  build:
+    runs-on: macos-26
+    timeout-minutes: 75
+    outputs:
+      ipa_link: ${{ steps.gdriveUpload.outputs.web-content-link }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter env
+        uses: ./.github/actions/setup-flutter-env
+        with:
+          flutter-version: ${{ inputs.flutter-version }}
+          flutter-version-secret: ${{ secrets.FLUTTER_VERSION }}
+          simkl-secret: ${{ secrets.SIMKL_SECRET }}
+
+      - uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: ${{ inputs.xcode-version }}
+
+      - name: Show Xcode version
+        run: xcodebuild -version
+
+      - name: Clean build (optional)
+        if: ${{ inputs.clean-build || contains(github.event.head_commit.message || '', '[clean]') }}
+        run: flutter clean
+
+      - name: Get Dependencies
+        run: flutter pub get
+
+      - name: Build iOS
+        run: |
+          flutter build ios --release --no-codesign
+          cd build/ios/iphoneos
+          rm -rf Payload
+          mkdir -p Payload
+          cd Payload
+          cp -R ../Runner.app .
+          cd ..
+          zip -r "Dartotsu-iOS-${SAFE_REF}.ipa" Payload
+        env:
+          SAFE_REF: ${{ env.SAFE_REF }}
+
+      - name: Upload iOS artifact
+        if: ${{ inputs.publish-mode == 'artifact' || inputs.publish-mode == 'both' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-ipa
+          path: build/ios/iphoneos/Dartotsu-iOS-${{ env.SAFE_REF }}.ipa
+          if-no-files-found: error
+
+      - name: Upload File To Google Drive
+        if: ${{ (inputs.publish-mode == 'gdrive' || inputs.publish-mode == 'both') && github.ref == 'refs/heads/main' && github.event_name != 'pull_request' }}
+        id: gdriveUpload
+        uses: hoatruongdev09/google-drive-file-upload-github-action@v1.1
+        with:
+          file-path: build/ios/iphoneos/Dartotsu-iOS-${{ env.SAFE_REF }}.ipa
+          upload-name: Dartotsu-iOS-${{ env.SAFE_REF }}.ipa
+          upload-to-folder-id: ${{ secrets.GOOGLE_FOLDER_MAIN }}
+          service-account-json: "${{ secrets.GOOGLE_KEY }}"
+          overrwrite: true

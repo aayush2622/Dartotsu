@@ -1,0 +1,45 @@
+name: Setup Flutter env
+description: Resolve Flutter version, install Flutter with cache, write .env and SAFE_REF
+inputs:
+  flutter-version:
+    description: Default Flutter version when secret is unset
+    required: true
+  flutter-version-secret:
+    description: Optional override from secrets.FLUTTER_VERSION
+    required: false
+    default: ""
+  simkl-secret:
+    description: SIMKL_SECRET for .env
+    required: false
+    default: ""
+runs:
+  using: composite
+  steps:
+    - name: Prepare Flutter version
+      shell: bash
+      env:
+        FLUTTER_VERSION_DEFAULT: ${{ inputs.flutter-version }}
+        FLUTTER_VERSION_SECRET: ${{ inputs.flutter-version-secret }}
+      run: |
+        if [ -n "${FLUTTER_VERSION_SECRET}" ]; then
+          echo "FLUTTER_VERSION=${FLUTTER_VERSION_SECRET}" >> "$GITHUB_ENV"
+        else
+          echo "FLUTTER_VERSION=${FLUTTER_VERSION_DEFAULT}" >> "$GITHUB_ENV"
+        fi
+
+    - name: Setup Flutter
+      id: setup-flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: ${{ env.FLUTTER_VERSION }}
+        cache: true
+
+    - name: Setup env file
+      shell: bash
+      env:
+        SIMKL_SECRET: ${{ inputs.simkl-secret }}
+      run: |
+        echo "SIMKL_SECRET=$SIMKL_SECRET" > .env
+        GIT_HASH=$(git rev-parse --short HEAD)
+        echo "hash=$GIT_HASH" >> .env
+        echo "SAFE_REF=${GITHUB_REF_NAME//\//-}" >> "$GITHUB_ENV"

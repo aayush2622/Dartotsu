@@ -1,0 +1,79 @@
+name: Setup Android build
+description: Gradle cache, cmake/ninja, Java, keystore signing
+inputs:
+  clean-build:
+    description: Force clean Gradle cache key
+    required: false
+    default: "false"
+  keystore-base64:
+    description: Base64-encoded keystore
+    required: true
+  keystore-password:
+    description: Keystore / key password
+    required: true
+  key-alias:
+    description: Key alias
+    required: true
+runs:
+  using: composite
+  steps:
+    - name: Cache Gradle dependencies (normal)
+      if: ${{ inputs.clean-build != 'true' && !contains(github.event.head_commit.message || '', '[clean]') }}
+      uses: actions/cache@v4
+      with:
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+        key: v1-${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+        restore-keys: |
+          v1-${{ runner.os }}-gradle-
+          clean-v1-${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+
+    - name: Cache Gradle dependencies (clean)
+      if: ${{ inputs.clean-build == 'true' || contains(github.event.head_commit.message || '', '[clean]') }}
+      uses: actions/cache@v4
+      with:
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+        key: clean-v1-${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+
+    - name: Setup cmake
+      uses: jwlawson/actions-setup-cmake@v2
+      with:
+        cmake-version: "3.18.1"
+
+    - name: Install system dependencies
+      shell: bash
+      run: |
+        sudo apt-get update -y
+        sudo apt-get install -y ninja-build
+
+    - name: Create symlink for ninja
+      shell: bash
+      run: |
+        mkdir -p /usr/local/lib/android/sdk/cmake/3.18.1/bin
+        sudo ln -sf /usr/bin/ninja /usr/local/lib/android/sdk/cmake/3.18.1/bin/ninja
+
+    - name: Setup Java
+      uses: actions/setup-java@v4
+      with:
+        distribution: temurin
+        java-version: "21"
+
+    - name: Download keystore
+      shell: bash
+      env:
+        KEYSTORE_BASE64: ${{ inputs.keystore-base64 }}
+      run: echo "$KEYSTORE_BASE64" | base64 --decode > android/app/dartotsu.jks
+
+    - name: Set up signing variables
+      shell: bash
+      env:
+        KEYSTORE_PASSWORD: ${{ inputs.keystore-password }}
+        KEY_ALIAS: ${{ inputs.key-alias }}
+      run: |
+        echo "storePassword=$KEYSTORE_PASSWORD" > android/key.properties
+        echo "keyPassword=$KEYSTORE_PASSWORD" >> android/key.properties
+        echo "keyAlias=$KEY_ALIAS" >> android/key.properties
+        echo "storeFile=dartotsu.jks" >> android/key.properties

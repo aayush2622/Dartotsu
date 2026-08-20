@@ -1,0 +1,140 @@
+name: Build Android
+on:
+  workflow_call:
+    inputs:
+      flutter-version:
+        type: string
+        required: true
+      clean-build:
+        type: boolean
+        required: false
+        default: false
+      publish-mode:
+        description: "gdrive | artifact | both"
+        type: string
+        required: false
+        default: gdrive
+      universal-name:
+        description: "universal or Universal in filename"
+        type: string
+        required: false
+        default: universal
+    outputs:
+      apk_link:
+        description: arm64 Drive web content link
+        value: ${{ jobs.build.outputs.apk_link }}
+    secrets:
+      FLUTTER_VERSION:
+        required: false
+      SIMKL_SECRET:
+        required: false
+      APK_SIGN:
+        required: true
+      KEYSTORE_PASSWORD:
+        required: true
+      KEY_ALIAS:
+        required: true
+      GOOGLE_FOLDER_ANDROID:
+        required: false
+      GOOGLE_KEY:
+        required: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    outputs:
+      apk_link: ${{ steps.gdriveUpload_arm64.outputs.web-content-link }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter env
+        uses: ./.github/actions/setup-flutter-env
+        with:
+          flutter-version: ${{ inputs.flutter-version }}
+          flutter-version-secret: ${{ secrets.FLUTTER_VERSION }}
+          simkl-secret: ${{ secrets.SIMKL_SECRET }}
+
+      - name: Setup Android build
+        uses: ./.github/actions/setup-android-build
+        with:
+          clean-build: ${{ inputs.clean-build }}
+          keystore-base64: ${{ secrets.APK_SIGN }}
+          keystore-password: ${{ secrets.KEYSTORE_PASSWORD }}
+          key-alias: ${{ secrets.KEY_ALIAS }}
+
+      - name: Clean build (optional)
+        if: ${{ inputs.clean-build || contains(github.event.head_commit.message || '', '[clean]') }}
+        run: flutter clean
+
+      - run: flutter pub get
+      - run: flutter build apk --release --split-per-abi
+      - run: flutter build apk --release
+
+      - name: Rename APKs
+        run: |
+          for file in build/app/outputs/flutter-apk/app-*-release.apk; do
+            base=$(basename "$file")
+            # skip fat/universal apk (matched by empty glob star)
+            if [[ "$base" == "app-release.apk" ]]; then
+              continue
+            fi
+            abi=$(echo "$base" | sed 's/app-\(.*\)-release.apk/\1/')
+            mv "$file" "build/app/outputs/flutter-apk/Dartotsu_Android_${abi}_${SAFE_REF}.apk"
+          done
+          mv build/app/outputs/flutter-apk/app-release.apk \
+            "build/app/outputs/flutter-apk/Dartotsu_Android_${UNIVERSAL_NAME}_${SAFE_REF}.apk"
+          ls build/app/outputs/flutter-apk
+        env:
+          SAFE_REF: ${{ env.SAFE_REF }}
+          UNIVERSAL_NAME: ${{ inputs.universal-name }}
+
+      - name: Upload Android artifacts
+        if: ${{ inputs.publish-mode == 'artifact' || inputs.publish-mode == 'both' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-apks
+          path: build/app/outputs/flutter-apk/Dartotsu_Android_*.apk
+          if-no-files-found: error
+
+      - name: Upload arm64 File To Google Drive
+        if: ${{ (inputs.publish-mode == 'gdrive' || inputs.publish-mode == 'both') && github.ref == 'refs/heads/main' && github.event_name != 'pull_request' }}
+        id: gdriveUpload_arm64
+        uses: hoatruongdev09/google-drive-file-upload-github-action@v1.1
+        with:
+          file-path: build/app/outputs/flutter-apk/Dartotsu_Android_arm64-v8a_${{ env.SAFE_REF }}.apk
+          upload-name: Dartotsu_Android_arm64-v8a_${{ env.SAFE_REF }}.apk
+          upload-to-folder-id: ${{ secrets.GOOGLE_FOLDER_ANDROID }}
+          service-account-json: "${{ secrets.GOOGLE_KEY }}"
+          overrwrite: true
+
+      - name: Upload armeabi File To Google Drive
+        if: ${{ (inputs.publish-mode == 'gdrive' || inputs.publish-mode == 'both') && github.ref == 'refs/heads/main' && github.event_name != 'pull_request' }}
+        uses: hoatruongdev09/google-drive-file-upload-github-action@v1.1
+        with:
+          file-path: build/app/outputs/flutter-apk/Dartotsu_Android_armeabi-v7a_${{ env.SAFE_REF }}.apk
+          upload-name: Dartotsu_Android_armeabi-v7a_${{ env.SAFE_REF }}.apk
+          upload-to-folder-id: ${{ secrets.GOOGLE_FOLDER_ANDROID }}
+          service-account-json: "${{ secrets.GOOGLE_KEY }}"
+          overrwrite: true
+
+      - name: Upload x86 File To Google Drive
+        if: ${{ (inputs.publish-mode == 'gdrive' || inputs.publish-mode == 'both') && github.ref == 'refs/heads/main' && github.event_name != 'pull_request' }}
+        uses: hoatruongdev09/google-drive-file-upload-github-action@v1.1
+        with:
+          file-path: build/app/outputs/flutter-apk/Dartotsu_Android_x86_64_${{ env.SAFE_REF }}.apk
+          upload-name: Dartotsu_Android_x86_64_${{ env.SAFE_REF }}.apk
+          upload-to-folder-id: ${{ secrets.GOOGLE_FOLDER_ANDROID }}
+          service-account-json: "${{ secrets.GOOGLE_KEY }}"
+          overrwrite: true
+
+      - name: Upload universal File To Google Drive
+        if: ${{ (inputs.publish-mode == 'gdrive' || inputs.publish-mode == 'both') && github.ref == 'refs/heads/main' && github.event_name != 'pull_request' }}
+        uses: hoatruongdev09/google-drive-file-upload-github-action@v1.1
+        with:
+          file-path: build/app/outputs/flutter-apk/Dartotsu_Android_${{ inputs.universal-name }}_${{ env.SAFE_REF }}.apk
+          upload-name: Dartotsu_${{ env.SAFE_REF }}.apk
+          upload-to-folder-id: ${{ secrets.GOOGLE_FOLDER_ANDROID }}
+          service-account-json: "${{ secrets.GOOGLE_KEY }}"
+          overrwrite: true

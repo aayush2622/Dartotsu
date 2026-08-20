@@ -1,0 +1,104 @@
+name: Build Linux
+on:
+  workflow_call:
+    inputs:
+      flutter-version:
+        type: string
+        required: true
+      clean-build:
+        type: boolean
+        required: false
+        default: false
+      publish-mode:
+        type: string
+        required: false
+        default: gdrive
+      zip-name-prefix:
+        description: "Dartotsu_Linux or Dartotsu_LinuxZip"
+        type: string
+        required: false
+        default: Dartotsu_Linux
+    outputs:
+      zip_link:
+        description: Drive web content link
+        value: ${{ jobs.build.outputs.zip_link }}
+    secrets:
+      FLUTTER_VERSION:
+        required: false
+      SIMKL_SECRET:
+        required: false
+      GOOGLE_FOLDER_MAIN:
+        required: false
+      GOOGLE_KEY:
+        required: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    container:
+      image: archlinux:base-devel
+    outputs:
+      zip_link: ${{ steps.gdriveUpload.outputs.web-content-link }}
+    steps:
+      - name: Install pre dependencies
+        run: |
+          pacman -Syu --noconfirm
+          pacman -S --noconfirm jq git zip
+
+      - name: Trust all git repositories
+        run: git config --global --add safe.directory '*'
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter env
+        uses: ./.github/actions/setup-flutter-env
+        with:
+          flutter-version: ${{ inputs.flutter-version }}
+          flutter-version-secret: ${{ secrets.FLUTTER_VERSION }}
+          simkl-secret: ${{ secrets.SIMKL_SECRET }}
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install system dependencies
+        run: |
+          pacman -S --noconfirm gtk3 libsecret wpewebkit clang cmake ninja fuse mpv webkit2gtk-4.1 unzip
+
+      - name: Clean build (optional)
+        if: ${{ inputs.clean-build || contains(github.event.head_commit.message || '', '[clean]') }}
+        run: flutter clean
+
+      - name: Fetch Flutter dependencies
+        run: flutter pub get
+
+      - name: Build Flutter Linux app
+        run: flutter build linux
+
+      - name: Archive app
+        if: ${{ inputs.publish-mode == 'gdrive' || inputs.publish-mode == 'artifact' || inputs.publish-mode == 'both' }}
+        uses: thedoctor0/zip-release@0.7.6
+        with:
+          type: zip
+          filename: ${{ inputs.zip-name-prefix }}_${{ env.SAFE_REF }}.zip
+          directory: build/linux/x64/release/bundle
+
+      - name: Upload Linux artifact
+        if: ${{ inputs.publish-mode == 'artifact' || inputs.publish-mode == 'both' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux-zip
+          path: build/linux/x64/release/bundle/${{ inputs.zip-name-prefix }}_${{ env.SAFE_REF }}.zip
+          if-no-files-found: error
+
+      - name: Upload File To Google Drive
+        if: ${{ (inputs.publish-mode == 'gdrive' || inputs.publish-mode == 'both') && github.ref == 'refs/heads/main' && github.event_name != 'pull_request' }}
+        id: gdriveUpload
+        uses: hoatruongdev09/google-drive-file-upload-github-action@v1.1
+        with:
+          file-path: build/linux/x64/release/bundle/${{ inputs.zip-name-prefix }}_${{ env.SAFE_REF }}.zip
+          upload-name: Dartotsu_linux.zip
+          upload-to-folder-id: ${{ secrets.GOOGLE_FOLDER_MAIN }}
+          service-account-json: "${{ secrets.GOOGLE_KEY }}"
+          overrwrite: true
