@@ -74,14 +74,14 @@ dependencies:
       path: ./libs/universal/media_kit_libs_video
 
   window_manager: ^0.5.2
-  permission_handler: ^12.0.3
+  permission_handler: ^13.0.1
   flutter_inappwebview: ^6.2.0-beta.2
   flutter_media_session: any
   wakelock_plus: ^1.7.0
   volume_controller: ^3.6.0
   screen_brightness: ^2.1.11
   app_links: ^7.2.1
-  win32: ^6.3.0
+  win32: ^6.4.0
   ffi: ^2.2.0
   install_plugin: ^2.1.0
 
@@ -90,9 +90,9 @@ dependencies:
   device_info_plus: ^13.2.0
   package_info_plus: ^10.2.1
   file_picker: ^12.0.0-beta.5
-  share_plus: ^13.2.1
+  share_plus: ^13.3.0
   url_launcher: ^6.3.2
-  dynamic_color: ^1.8.1
+  dynamic_color: ^1.9.0
   json_path: ^0.9.0
   grouped_list: ^6.0.0
   fuzzywuzzy: ^1.2.0
@@ -154,7 +154,7 @@ dependency_overrides:
       path: ./libs/ios/media_kit_libs_ios_video
   media_kit_libs_android_video:
     git:
-      url: https://github.com/aayush2622/media-kit.git
+      url: https://github.com/media-kit/media-kit.git
       ref: main
       path: ./libs/android/media_kit_libs_android_video
   media_kit_libs_windows_video:

@@ -14,6 +14,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../Theme/LanguageSwitcher.dart';
+import '../logger.dart';
 import '../main.dart';
 import 'IsarDataClasses/DefaultPlayerSettings/DefaultPlayerSettings.dart';
 import 'IsarDataClasses/DefaultReaderSettings/DafaultReaderSettings.dart';
@@ -250,32 +251,27 @@ class PrefManager {
   }
 
   static Future<bool> requestPermission() async {
-    if (!Platform.isAndroid) {
-      return true;
-    }
+    if (!Platform.isAndroid) return true;
 
     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
     final androidInfo = await deviceInfo.androidInfo;
     if (androidInfo.version.sdkInt <= 29) {
       final storagePermission = Permission.storage;
-      if (await storagePermission.isGranted) {
-        return true;
-      }
+      if (await storagePermission.isGranted) return true;
       final storageStatus = await storagePermission.request();
       return storageStatus.isGranted;
     }
 
     final manageStoragePermission = Permission.manageExternalStorage;
-    if (await manageStoragePermission.isGranted) {
-      return true;
-    }
+
+    if (await manageStoragePermission.isGranted) return true;
     final manageStorageStatus = await manageStoragePermission.request();
     return manageStorageStatus.isGranted;
   }
 
   static Future<Directory?> getTmpDirectory() async {
-    final gefaultDirectory = await getDirectory();
-    String dbDir = path.join(gefaultDirectory!.path, 'tmp');
+    final defaultDirectory = await getDirectory();
+    String dbDir = path.join(defaultDirectory!.path, 'tmp');
     await Directory(dbDir).create(recursive: true);
     return Directory(dbDir);
   }
@@ -349,70 +345,73 @@ class PrefManager {
     bool useCustomPath = false,
     bool useSystemPath = true,
   }) async {
-    final appDir = await getApplicationDocumentsDirectory();
-    final customPath = loadData(PrefName.customPath);
-    final isApple = Platform.isIOS || Platform.isMacOS;
+    try {
+      final appDir = await getApplicationDocumentsDirectory();
+      final customPath = useCustomPath ? loadData(PrefName.customPath) : '';
+      final isApple = Platform.isIOS || Platform.isMacOS;
 
-    Future<Directory> ensureDir(String dirPath) async {
-      final dir = Directory(dirPath.fixSeparator);
-      if (!dir.existsSync()) {
-        await dir.create(recursive: true);
-      }
-      return dir;
-    }
-
-    if (isApple) {
-      final dbDir = path.join(appDir.path, 'Dartotsu', subPath ?? '');
-      return ensureDir(dbDir);
-    }
-
-    if (Platform.isAndroid) {
-      final hasPermission = await requestPermission();
-      final androidInfo = await DeviceInfoPlugin().androidInfo;
-
-      if (!hasPermission) {
-        return ensureDir(appDir.path);
+      Future<Directory> ensureDir(String path) async {
+        final dir = Directory(path.fixSeparator);
+        if (!await dir.exists()) {
+          await dir.create(recursive: true);
+        }
+        return dir;
       }
 
-      final defaultPath = '/storage/emulated/0/Dartotsu';
-      final resolvedCustomPath = customPath.isNotEmpty
-          ? (customPath.endsWith('Dartotsu')
-                ? customPath
-                : path.join(customPath, 'Dartotsu'))
-          : defaultPath;
+      String withAppRoot(String base) =>
+          base.endsWith('Dartotsu') ? base : path.join(base, 'Dartotsu');
 
-      String basePath;
-
-      if (androidInfo.version.sdkInt <= 29) {
-        basePath = useSystemPath ? appDir.path : resolvedCustomPath;
-        return ensureDir(basePath);
-      } else {
-        basePath = useSystemPath ? appDir.path : resolvedCustomPath;
+      if (isApple) {
+        return ensureDir(path.join(appDir.path, 'Dartotsu', subPath ?? ''));
       }
 
-      final fullPath = path.join(basePath, subPath ?? '');
-      return ensureDir(fullPath);
+      if (Platform.isAndroid) {
+        final hasPermission = await requestPermission();
+
+        if (!hasPermission || useSystemPath) {
+          final base = withAppRoot(appDir.path);
+          return ensureDir(path.join(base, subPath ?? ''));
+        }
+
+        final emulatedRoot = await getEmulatedRoot();
+        logger('[Storage] emulated root = $emulatedRoot');
+
+        final basePath = customPath.isNotEmpty
+            ? withAppRoot(customPath)
+            : withAppRoot(emulatedRoot);
+
+        return ensureDir(path.join(basePath, subPath ?? ''));
+      }
+
+      final base = customPath.isNotEmpty ? customPath : appDir.path;
+      return ensureDir(path.join(withAppRoot(base), subPath ?? ''));
+    } catch (e) {
+      logger('Error getting directory: $e');
+      return await getApplicationDocumentsDirectory();
     }
+  }
 
-    final fallbackPath = (customPath.isNotEmpty ? customPath : appDir.path);
-    final basePath = fallbackPath.endsWith('Dartotsu')
-        ? fallbackPath
-        : path.join(fallbackPath, 'Dartotsu');
+  static Future<String> getEmulatedRoot() async {
+    try {
+      final dir = await getExternalStorageDirectory();
+      final pathStr = dir?.path ?? '';
 
-    final fullPath = path.join(basePath, subPath ?? '');
-    return ensureDir(fullPath);
+      final match = RegExp(r'/storage/emulated/(\d+)/').firstMatch(pathStr);
+
+      return match != null
+          ? '/storage/emulated/${match.group(1)}'
+          : '/storage/emulated/0';
+    } catch (_) {
+      return '/storage/emulated/0';
+    }
   }
 
   static Future<bool> videoPermission() async {
-    if (Platform.isAndroid) {
-      if (await Permission.videos.isDenied ||
-          await Permission.videos.isPermanentlyDenied) {
-        final state = await Permission.videos.request();
-        if (!state.isGranted) {
-          return false;
-        }
-      }
-      return true;
+    if (!Platform.isAndroid) return true;
+    if (await Permission.videos.isDenied ||
+        await Permission.videos.isPermanentlyDenied) {
+      final state = await Permission.videos.request();
+      return state.isGranted;
     }
     return true;
   }
