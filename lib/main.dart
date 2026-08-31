@@ -48,10 +48,10 @@ void main(List<String> args) async {
         return true;
       };
       ErrorWidget.builder = (details) => ErrorScreen(
-            error: details.exception.toString(),
-            stackTrace: details.stack?.toString() ?? details.toString(),
-            softCrash: true,
-          );
+        error: details.exception.toString(),
+        stackTrace: details.stack?.toString() ?? details.toString(),
+        softCrash: true,
+      );
       Get.log = (text, {isError = false}) => debugPrint(text);
 
       await init(args);

@@ -48,7 +48,8 @@ class ThemedContainer extends StatelessWidget {
             alignment: alignment,
             padding: pad,
             color: Theme.of(context).cardColor.withValues(alpha: 0.2),
-            border: border ??
+            border:
+                border ??
                 Border.all(
                   color: scheme.onSurface.withValues(alpha: 0.2),
                   width: 0.5,
@@ -75,7 +76,8 @@ class ThemedContainer extends StatelessWidget {
         margin: margin,
         decoration: BoxDecoration(
           color: color ?? Theme.of(context).cardColor,
-          border: border ??
+          border:
+              border ??
               Border.all(
                 color: scheme.onSurface.withValues(alpha: 0.6),
                 width: 0.5,

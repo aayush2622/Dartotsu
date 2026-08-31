@@ -9,10 +9,10 @@ export 'Themes/material.dart';
 
 extension ThemeModePrefX on ThemeModePref {
   ThemeMode get themeMode => switch (this) {
-        ThemeModePref.system => ThemeMode.system,
-        ThemeModePref.light => ThemeMode.light,
-        ThemeModePref.dark => ThemeMode.dark,
-      };
+    ThemeModePref.system => ThemeMode.system,
+    ThemeModePref.light => ThemeMode.light,
+    ThemeModePref.dark => ThemeMode.dark,
+  };
 }
 
 /// Applies the app's typography, component themes and OLED tweaks on top of a
@@ -31,8 +31,7 @@ ThemeData buildAppTheme(ThemeData base, {required bool isOled}) {
 
   return base.copyWith(
     colorScheme: scheme,
-    scaffoldBackgroundColor:
-        oled ? Colors.black : base.scaffoldBackgroundColor,
+    scaffoldBackgroundColor: oled ? Colors.black : base.scaffoldBackgroundColor,
     cardColor: deriveCardColor(
       surface: scheme.surface,
       isDark: dark,
