@@ -6,10 +6,12 @@ import '../../Core/Services/MediaServiceController.dart';
 import '../../Core/Services/ServiceSwitcher.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
+import '../../Utils/Functions/NavigateToScreen.dart';
 import '../../Widgets/Components/CachedNetworkImage.dart';
 import '../../Widgets/Components/CustomBottomDialog.dart';
 import '../../Widgets/Components/LoadSvg.dart';
 import '../Login/LoginScreen.dart';
+import '../Settings/SettingsScreen.dart';
 
 class HomeHeader extends StatelessWidget {
   const HomeHeader({super.key});
@@ -90,6 +92,14 @@ class HomeHeader extends StatelessWidget {
             onTap: () {
               Navigator.pop(context);
               serviceSwitcher(context);
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.settings_rounded),
+            title: const Text('Settings'),
+            onTap: () {
+              Navigator.pop(context);
+              navigateToPage(context, const SettingsScreen());
             },
           ),
           if (service is LoginHandler)

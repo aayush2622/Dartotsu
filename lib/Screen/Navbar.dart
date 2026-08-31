@@ -7,8 +7,10 @@ import '../Core/ThemeManager/LanguageSwitcher.dart';
 import '../Utils/Animation/WidgetAnimations.dart';
 import '../Utils/Extensions/ContextExtensions.dart';
 import '../Utils/Functions/GetXFunctions.dart';
+import '../Utils/Functions/NavigateToScreen.dart';
 import '../Widgets/Components/LoadSvg.dart';
 import '../Widgets/Components/ThemedContainer.dart';
+import 'Settings/SettingsScreen.dart';
 
 class FloatingBottomNavBar extends StatefulWidget {
   final int selectedIndex;
@@ -130,7 +132,7 @@ class _FloatingBottomNavBarState extends State<FloatingBottomNavBar> {
 
               _navButton(
                 context: context,
-                onTap: () {},
+                onTap: () => navigateToPage(context, const SettingsScreen()),
                 iconBuilder: () => Icon(
                   Icons.settings_rounded,
                   size: 24,
