@@ -11,6 +11,7 @@ import '../../Widgets/Components/CachedNetworkImage.dart';
 import '../../Widgets/Components/CustomBottomDialog.dart';
 import '../../Widgets/Components/LoadSvg.dart';
 import '../Login/LoginScreen.dart';
+import '../Notifications/NotificationsScreen.dart';
 import '../Search/SearchScreen.dart';
 import '../Settings/SettingsScreen.dart';
 
@@ -50,6 +51,7 @@ class HomeHeader extends StatelessWidget {
                 ],
               ),
             ),
+            if (user != null) _BellButton(unread: user.unreadNotifications),
             IconButton(
               icon: const Icon(Icons.search_rounded),
               onPressed: () => navigateToPage(context, const SearchScreen()),
@@ -130,6 +132,46 @@ class HomeHeader extends StatelessWidget {
             }),
         ],
       ),
+    );
+  }
+}
+
+class _BellButton extends StatelessWidget {
+  final int unread;
+  const _BellButton({required this.unread});
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      clipBehavior: Clip.none,
+      children: [
+        IconButton(
+          icon: const Icon(Icons.notifications_none_rounded),
+          onPressed: () => navigateToPage(context, const NotificationsScreen()),
+        ),
+        if (unread > 0)
+          Positioned(
+            right: 6,
+            top: 6,
+            child: Container(
+              padding: const EdgeInsets.all(3),
+              constraints: const BoxConstraints(minWidth: 16, minHeight: 16),
+              decoration: BoxDecoration(
+                color: context.colorScheme.error,
+                shape: BoxShape.circle,
+              ),
+              child: Text(
+                unread > 99 ? '99+' : '$unread',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 9,
+                  fontWeight: FontWeight.bold,
+                  color: context.colorScheme.onError,
+                ),
+              ),
+            ),
+          ),
+      ],
     );
   }
 }
