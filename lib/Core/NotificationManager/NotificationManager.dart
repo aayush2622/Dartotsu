@@ -10,10 +10,12 @@ import 'package:get/get.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
+import '../../Utils/Functions/GetXFunctions.dart';
+
 class NotificationManager extends GetxController {
   NotificationManager();
 
-  static NotificationManager get instance => Get.find();
+  static NotificationManager get instance => find<NotificationManager>();
 
   final FlutterLocalNotificationsPlugin _plugin =
       FlutterLocalNotificationsPlugin();
