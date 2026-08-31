@@ -80,7 +80,7 @@ void snackString(
                           icon: Icon(
                             Icons.copy_rounded,
                             size: 18,
-                            color: theme.colorScheme.onSurface.withOpacity(0.5),
+                            color: theme.colorScheme.onSurface.withValues(alpha: 0.5),
                           ),
                           onPressed: () {
                             _snackOverlay?.remove();
@@ -95,7 +95,7 @@ void snackString(
                           icon: Icon(
                             Icons.close_rounded,
                             size: 18,
-                            color: theme.colorScheme.onSurface.withOpacity(0.5),
+                            color: theme.colorScheme.onSurface.withValues(alpha: 0.5),
                           ),
                           onPressed: () {
                             _snackOverlay?.remove();

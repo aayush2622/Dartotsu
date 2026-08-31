@@ -58,7 +58,7 @@ class _CustomBottomDialogState extends State<CustomBottomDialog> {
       color: colorScheme.surface,
       border: Border.all(
         width: 0,
-        color: colorScheme.onSurface.withOpacity(0.2),
+        color: colorScheme.onSurface.withValues(alpha: 0.2),
       ),
       borderRadius: const BorderRadius.vertical(top: Radius.circular(16.0)),
       padding: const EdgeInsets.only(bottom: 24.0, top: 12.0),
@@ -79,7 +79,7 @@ class _CustomBottomDialogState extends State<CustomBottomDialog> {
                     width: 40,
                     height: 4,
                     decoration: BoxDecoration(
-                      color: colorScheme.onSurface.withOpacity(0.3),
+                      color: colorScheme.onSurface.withValues(alpha: 0.3),
                       borderRadius: BorderRadius.circular(2),
                     ),
                   ),
@@ -95,14 +95,13 @@ class _CustomBottomDialogState extends State<CustomBottomDialog> {
                         ),
                         decoration: BoxDecoration(
                           color: focus
-                              ? colorScheme.onSurface.withOpacity(0.08)
+                              ? colorScheme.onSurface.withValues(alpha: 0.08)
                               : Colors.transparent,
                           borderRadius: BorderRadius.circular(12),
                           border: focus
                               ? Border.all(
-                                  color: colorScheme.onSurface.withOpacity(
-                                    0.25,
-                                  ),
+                                  color: colorScheme.onSurface
+                                      .withValues(alpha: 0.25),
                                   width: 1,
                                 )
                               : null,

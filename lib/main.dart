@@ -16,7 +16,6 @@ import 'package:rhttp/rhttp.dart';
 import 'package:window_manager/window_manager.dart';
 
 import 'Api/Updater/AppUpdater.dart';
-import 'Core/Analytics/AnalyticsManager.dart';
 import 'Core/NetworkManager/NetworkBridge.dart';
 import 'Core/NetworkManager/NetworkManager.dart';
 import 'Core/Preferences/PrefManager.dart';
@@ -60,7 +59,6 @@ void main(List<String> args) async {
     },
     (error, stackTrace) {
       debugPrint('Uncaught error: $error\n$stackTrace');
-      tryFind<AnalyticsManager>()?.recordError(error, stackTrace);
       handleError(error, stackTrace, softCrash: true);
     },
     zoneSpecification: ZoneSpecification(
@@ -114,7 +112,7 @@ Future<void> _postInit(List<String> args) async {
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
     DeepLink.initVideoIntentListener(args);
   }
-  unawaited(AppUpdater().checkForUpdate());
+  unawaited(find<AppUpdater>().checkForUpdate());
 }
 
 class MyApp extends StatefulWidget {

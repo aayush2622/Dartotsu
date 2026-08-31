@@ -134,7 +134,7 @@ class _FloatingBottomNavBarState extends State<FloatingBottomNavBar> {
                 iconBuilder: () => Icon(
                   Icons.settings_rounded,
                   size: 24,
-                  color: theme.onSurface.withOpacity(.72),
+                  color: theme.onSurface.withValues(alpha: .72),
                 ),
               ),
             ],
@@ -261,9 +261,9 @@ class _FloatingBottomNavBarState extends State<FloatingBottomNavBar> {
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: selected
-                      ? theme.primary.withOpacity(.75)
+                      ? theme.primary.withValues(alpha: .75)
                       : hovered
-                      ? theme.primary.withOpacity(.10)
+                      ? theme.primary.withValues(alpha: .10)
                       : Colors.transparent,
                 ),
               ).animateNavSelection(selected: selected),
@@ -275,7 +275,7 @@ class _FloatingBottomNavBarState extends State<FloatingBottomNavBar> {
                     ? theme.surface
                     : hovered
                     ? theme.primary
-                    : theme.onSurface.withOpacity(.72),
+                    : theme.onSurface.withValues(alpha: .72),
               ),
             ],
           ).animateNavItem(selected: selected, active: hovered),

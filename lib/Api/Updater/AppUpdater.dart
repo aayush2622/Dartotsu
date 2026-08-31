@@ -16,20 +16,19 @@ import 'package:rhttp/rhttp.dart';
 
 import '../../Core/NetworkManager/NetworkManager.dart';
 import '../../Core/Preferences/PrefManager.dart';
-import '../../Utils//Function.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
+import '../../Utils/Function.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Utils/Functions/SnackBar.dart';
 import '../../Widgets/Components/CustomBottomDialog.dart';
 
-class AppUpdater {
-  final _skippedUpdatesKey = "skippedUpdateList";
-  final _mainRepo = 'aayush2622/Dartotsu';
-  final _alphaRepo = 'grayankit/Dartotsu-Downloader';
+class AppUpdater extends GetxController {
+  static const _mainRepo = 'aayush2622/Dartotsu';
+  static const _alphaRepo = 'grayankit/Dartotsu-Downloader';
 
   NetworkManager get _network => find();
-  bool get _checkForUpdates => loadCustomData("checkForUpdates") ?? true;
-  bool get _alphaUpdates => loadCustomData("alphaUpdates") ?? false;
+  bool get _checkForUpdates => PrefName.checkForUpdates.value;
+  bool get _alphaUpdates => PrefName.alphaUpdates.value;
 
   /// Checks for application updates by comparing the current version hash
   /// with the latest release on GitHub. If an update is available, it shows
@@ -69,9 +68,7 @@ class AppUpdater {
       return;
     }
 
-    var skippedUpdates = loadCustomData<List<String>>(_skippedUpdatesKey) ?? [];
-
-    if (skippedUpdates.contains(release) && !force) return;
+    if (!force && PrefName.skippedUpdates.value.contains(release)) return;
 
     final compare = await _network.get(
       'https://api.github.com/repos/$_mainRepo/compare/$release...$hash',
@@ -103,7 +100,7 @@ class AppUpdater {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
               decoration: BoxDecoration(
-                color: context.cardColor.withOpacity(.4),
+                color: context.cardColor.withValues(alpha: .4),
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Text(
@@ -124,7 +121,7 @@ class AppUpdater {
                   constraints: const BoxConstraints(maxHeight: 260),
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: context.cardColor.withOpacity(.4),
+                    color: context.cardColor.withValues(alpha: .4),
                     borderRadius: BorderRadius.circular(14),
                   ),
                   child: Obx(() {
@@ -197,7 +194,7 @@ class AppUpdater {
                     "Skip this update",
                     style: textStyle?.copyWith(
                       fontSize: 13,
-                      color: scheme.onSurface.withOpacity(0.7),
+                      color: scheme.onSurface.withValues(alpha: 0.7),
                     ),
                   ),
                 ],
@@ -209,11 +206,12 @@ class AppUpdater {
         negativeText: "Later",
         positiveText: "Update",
         negativeCallback: () {
-          if (skipUpdate.value) {
-            final skipped =
-                loadCustomData<List<String>>(_skippedUpdatesKey) ?? [];
-            skipped.add(data["tag_name"]);
-            saveCustomData(_skippedUpdatesKey, skipped);
+          final tag = data["tag_name"];
+          if (skipUpdate.value && tag is String) {
+            PrefName.skippedUpdates.value = [
+              ...PrefName.skippedUpdates.value,
+              tag,
+            ];
           }
           Get.back();
         },

@@ -181,7 +181,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               padding: const EdgeInsets.all(12),
               borderRadius: radius,
               color: state.focused
-                  ? theme.cardColor.withOpacity(0.6)
+                  ? theme.cardColor.withValues(alpha: 0.6)
                   : Colors.transparent,
               child: child,
             );

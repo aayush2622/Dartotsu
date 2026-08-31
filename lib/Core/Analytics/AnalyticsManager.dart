@@ -8,8 +8,10 @@ import 'package:get/get.dart';
 import '../../Logger.dart';
 import 'FirebaseOptions.dart';
 
+/// Firebase Crashlytics wrapper. [recordError] is safe to call before init
+/// completes (it awaits) and silently no-ops if Firebase failed to start.
 class AnalyticsManager extends GetxController {
-  Completer<void>? _initCompleter;
+  final Completer<void> _ready = Completer<void>();
   bool _disabled = false;
 
   @override
@@ -19,21 +21,18 @@ class AnalyticsManager extends GetxController {
   }
 
   Future<void> _initFirebase() async {
-    _initCompleter ??= Completer<void>();
     try {
       await Firebase.initializeApp(
         options: DefaultFirebaseOptions.currentPlatform,
       );
-
       await FirebaseCrashlytics.instance
           .setCrashlyticsCollectionEnabled(!kDebugMode);
-
-      logger("Firebase initialized");
+      logger('Firebase initialized');
     } catch (e, s) {
       _disabled = true;
-      logger("Firebase disabled: $e: \n$s");
+      logger('Firebase disabled: $e\n$s');
     } finally {
-      _initCompleter?.complete();
+      if (!_ready.isCompleted) _ready.complete();
     }
   }
 
@@ -42,13 +41,10 @@ class AnalyticsManager extends GetxController {
     StackTrace? stack, {
     bool fatal = false,
   }) async {
-    await _initCompleter?.future;
-
+    await _ready.future;
     if (_disabled) return;
-
     try {
-      await FirebaseCrashlytics.instance
-          .recordError(error, stack, fatal: fatal);
+      await FirebaseCrashlytics.instance.recordError(error, stack, fatal: fatal);
     } catch (_) {}
   }
 }

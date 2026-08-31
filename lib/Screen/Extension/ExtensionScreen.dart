@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../Core/ThemeManager/LanguageSwitcher.dart';
-import '../../Core/ThemeManager/ThemeController.dart';
-import '../../Widgets/Components/ThemedContainer.dart';
 import '../../Core/ThemeManager/language.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
@@ -14,7 +12,7 @@ import '../../Widgets/Components/AlertDialogBuilder.dart';
 import '../../Widgets/Components/BaseScreen.dart';
 import '../../Widgets/Components/CustomBottomDialog.dart';
 import '../../Widgets/Components/LoadSvg.dart';
-import '../../Widgets/Components/ScrollConfig.dart';
+import '../../Widgets/Components/ThemedContainer.dart';
 import 'ExtensionList.dart';
 
 class ExtensionScreen extends StatefulWidget {
@@ -28,7 +26,7 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
     with TickerProviderStateMixin {
   late TabController _tabBarController;
 
-  final manager = Get.find<ExtensionManager>();
+  final manager = find<ExtensionManager>();
 
   final _searchQuery = ''.obs;
 
@@ -62,69 +60,64 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
   @override
   Widget buildContent(BuildContext context) {
     final theme = Theme.of(context).colorScheme;
-    final controller = find<ThemeController>();
 
-    return Obx(() {
-      final isGlassMode = controller.useGlassMode.value;
-      return ScrollConfig(
-        context,
-        child: Scaffold(
-          backgroundColor: isGlassMode ? Colors.transparent : null,
-          appBar: AppBar(
-            leading: IconButton(
-              icon: const Icon(Icons.arrow_back_ios_new),
-              onPressed: () => Navigator.of(context).pop(),
-            ),
-            elevation: 0,
-            backgroundColor: Colors.transparent,
-            title: Text(
-              getString.extension(2),
-              style: TextStyle(
-                fontFamily: 'Poppins',
-                fontWeight: FontWeight.bold,
-                fontSize: 16.0,
-                color: theme.primary,
-              ),
-            ),
-            iconTheme: IconThemeData(color: theme.primary),
-            actions: [
-              Row(children: [..._buildActions(), const SizedBox(width: 8)]),
-            ],
-          ),
-          body: Column(
-            children: [
-              Obx(
-                () => TabBar(
-                  controller: _tabBarController,
-                  isScrollable: true,
-                  dividerColor: Colors.transparent,
-                  tabAlignment: TabAlignment.start,
-                  indicator: const BoxDecoration(),
-                  indicatorPadding: EdgeInsets.zero,
-                  padding: EdgeInsets.zero,
-                  labelPadding: EdgeInsets.zero,
-                  labelColor: theme.primary,
-                  unselectedLabelColor: theme.onSurfaceVariant,
-                  splashFactory: NoSplash.splashFactory,
-                  overlayColor: WidgetStateProperty.all(Colors.transparent),
-                  tabs: _buildTabs(context),
-                ),
-              ),
-              const SizedBox(height: 8),
-              _searchBar(),
-              Obx(() {
-                return Expanded(
-                  child: TabBarView(
-                    controller: _tabBarController,
-                    children: _buildTabViews(_searchQuery.value),
-                  ),
-                );
-              }),
-            ],
+    // BaseScreen already supplies the SafeArea + Scaffold + glass backdrop;
+    // this inner (transparent) Scaffold only exists to host the AppBar.
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        title: Text(
+          getString.extension(2),
+          style: TextStyle(
+            fontFamily: 'Poppins',
+            fontWeight: FontWeight.bold,
+            fontSize: 16.0,
+            color: theme.primary,
           ),
         ),
-      );
-    });
+        iconTheme: IconThemeData(color: theme.primary),
+        actions: [
+          Row(children: [..._buildActions(), const SizedBox(width: 8)]),
+        ],
+      ),
+      body: Column(
+        children: [
+          Obx(
+            () => TabBar(
+              controller: _tabBarController,
+              isScrollable: true,
+              dividerColor: Colors.transparent,
+              tabAlignment: TabAlignment.start,
+              indicator: const BoxDecoration(),
+              indicatorPadding: EdgeInsets.zero,
+              padding: EdgeInsets.zero,
+              labelPadding: EdgeInsets.zero,
+              labelColor: theme.primary,
+              unselectedLabelColor: theme.onSurfaceVariant,
+              splashFactory: NoSplash.splashFactory,
+              overlayColor: WidgetStateProperty.all(Colors.transparent),
+              tabs: _buildTabs(context),
+            ),
+          ),
+          const SizedBox(height: 8),
+          _searchBar(),
+          Obx(
+            () => Expanded(
+              child: TabBarView(
+                controller: _tabBarController,
+                children: _buildTabViews(_searchQuery.value),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   List<Widget> _buildActions() {
@@ -548,7 +541,7 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
               decoration: BoxDecoration(
                 color: selected
-                    ? theme.primary.withOpacity(0.15)
+                    ? theme.primary.withValues(alpha: 0.15)
                     : theme.surfaceContainerHighest,
                 borderRadius: BorderRadius.circular(100),
               ),
@@ -739,7 +732,7 @@ Future<void> showInstallDialog(
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
             decoration: BoxDecoration(
-              color: scheme.primary.withOpacity(0.12),
+              color: scheme.primary.withValues(alpha: 0.12),
               borderRadius: BorderRadius.circular(20),
             ),
             child: Text(
@@ -759,7 +752,7 @@ Future<void> showInstallDialog(
             decoration: BoxDecoration(
               color: context.cardColor,
               borderRadius: BorderRadius.circular(18),
-              border: Border.all(color: scheme.outline.withOpacity(0.2)),
+              border: Border.all(color: scheme.outline.withValues(alpha: 0.2)),
             ),
             child: Obx(() {
               final downloading = plugin.downloading.value;
@@ -816,7 +809,7 @@ Future<void> showInstallDialog(
                   Container(
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
-                      color: scheme.surface.withOpacity(0.3),
+                      color: scheme.surface.withValues(alpha: 0.3),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Text(

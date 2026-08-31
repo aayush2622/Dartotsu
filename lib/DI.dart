@@ -4,6 +4,7 @@ import 'dart:io';
 import 'Api/Discord/BaseDiscordRPC.dart';
 import 'Api/Discord/Desktop/DesktopRPC.dart';
 import 'Api/Discord/Mobile/MobileRPC.dart';
+import 'Api/Updater/AppUpdater.dart';
 import 'Core/Analytics/AnalyticsManager.dart';
 import 'Core/NetworkManager/NetworkManager.dart';
 import 'Core/NotificationManager/NotificationManager.dart';
@@ -29,6 +30,7 @@ class DI {
     lazyPut<LocaleController>(LocaleController.new);
     lazyPut<MediaServiceController>(MediaServiceController.new);
     lazyPut<RefreshController>(RefreshController.new);
+    lazyPut<AppUpdater>(AppUpdater.new);
     lazyPut<BaseDiscordRPC>(
       () => Platform.isAndroid || Platform.isIOS ? MobileRPC() : DesktopRPC(),
     );
