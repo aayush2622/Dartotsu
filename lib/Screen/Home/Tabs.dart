@@ -4,14 +4,15 @@ import '../../Api/Services/Anilist/AnilistApi.dart';
 import '../../Api/Services/Anilist/AnilistAuth.dart';
 import '../../Core/Services/Model/Media.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
+import '../../Utils/Functions/NavigateToScreen.dart';
+import '../Detail/DetailScreen.dart';
 import 'HomeHeader.dart';
 import 'MediaRailsScreen.dart';
 
 AnilistApi get _api => AnilistApi(find<AnilistAuth>().client);
 
-void _openDetail(BuildContext context, Media media) {
-  // Detail screen pending.
-}
+void _openDetail(BuildContext context, Media media) =>
+    navigateToPage(context, DetailScreen(media: media));
 
 class HomeTab extends StatelessWidget {
   const HomeTab({super.key});
