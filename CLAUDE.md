@@ -18,16 +18,14 @@ Targets 5 platforms: Android, iOS, Windows, Linux, macOS. Distributed outside ap
 
 ### State of the rewrite (2026-09-01)
 
-Early stage. ~155 Dart files vs `main`'s ~350. Infrastructure (DI, prefs, theme, network,
-notifications, analytics, logger, extension screen, updater, webview, deep links, i18n) is
-ported and working — the foundation layers (Preferences, Theme, DI, networking) had a
-correctness/consistency pass on 2026-09-01 (`flutter analyze` clean, `flutter build linux` +
-`flutter run -d linux` verified). **Feature screens are mostly stubs** — `MainScreen` renders a
-placeholder body, there is no real Home/Anime/Manga/Detail/Player/Reader/Search/Settings UI
-yet, and only two `MediaService`s exist as id/name/icon shells (`AnilistService`,
-`ExtensionService`) with no API layer wired in. The worktree usually carries large
-**uncommitted WIP ahead of the committed branch** — run `git status` before reasoning about
-current state.
+~180 Dart files vs `main`'s ~350. On 2026-09-01 the foundation layers (Preferences, Theme, DI,
+networking) got a correctness/consistency pass, then a **read-path AniList vertical slice** was
+built: onboarding → login → home/anime/manga rails → media detail → list editor → search →
+settings, all on live AniList GraphQL. `flutter analyze` clean; `flutter build linux` +
+`flutter run -d linux` verified each step. `ExtensionService` is still an id/name/icon shell.
+**Not built:** watch/read (extension sources, player, reader), MAL/Simkl, calendar,
+notifications feed, offline. The worktree usually carries large **uncommitted WIP ahead of the
+committed branch** — run `git status` first.
 
 ## Commands
 
@@ -161,18 +159,55 @@ context-free access (`getString`, snackbars).
   `services.assignAll([AnilistService(), ExtensionService()])`, restores last choice from
   `PrefName.service.value` (by `id`). `switchService(id)` persists. `get<T>()` /
   `getAnyValue<T>(selector)` for cross-service lookups.
-- **`Core/Services/Features/NavbarProvider.dart`** — optional `abstract interface class
-  NavBarProvider { List<NavItem> get navBarItems; }`. A service *may* implement it to customise
-  the nav bar (`AnilistService` does); otherwise `FloatingBottomNavBar` falls back to the
-  default Anime/Home/Manga items.
+- **`Core/Services/Features/`** — optional capability interfaces a service *may* implement:
+  `NavBarProvider` (custom nav items), `LoginHandler` (`isLoggedIn` / `login()` / `logout()`).
+  Screens do `if (service is LoginHandler) …`.
 - **`Core/Services/ServiceSwitcher.dart`** — `serviceSwitcher(context)` shows the picker
   bottom sheet (`CustomBottomDialog`).
-- **`Core/Services/Api/Queries.dart` + `Mutations.dart`** — `abstract class Queries` /
-  `Mutations` describing the per-service API surface (`getMedia`, `initHomePage`,
-  `getMediaLists`, `search`, …). No concrete implementation exists on this branch yet.
+- **`Core/Services/Api/Queries.dart` + `Mutations.dart`** — the *planned* abstract surface;
+  **not implemented**. AniList currently uses a concrete `AnilistApi` (see below) instead.
 
 Per-service code goes under **`lib/Api/Services/<Service>/`** (note: `Api/Services/`, not
 `main`'s `Api/<Service>/`).
+
+### AniList service (the only wired backend)
+
+**`lib/Api/Services/Anilist/`**:
+
+- `AnilistClient` — typed GraphQL POST to `graphql.anilist.co` via `NetworkManager`;
+  rate-limit aware; takes a `String Function()` token provider.
+- `AnilistAuth` (GetxController, `lazyPut`) — `token` = `PrefName.anilistToken.rx`,
+  `user` = `Rxn<AnilistUser>` (cached to prefs). `login()` runs `FlutterWebAuth2` implicit
+  grant (`client_id 14959`, scheme `dantotsu`); `applyToken(t)` for paste-token;
+  `refreshUser()` fetches `Viewer`.
+- `AnilistApi(client)` — `home({anime, userId})` (user status lists + trending/seasonal/
+  popular/top rails), `dashboard({userId})`, `details(id)`, `search({anime, term, page})`,
+  `saveListEntry(...)` / `deleteListEntry(id)`.
+- `AnilistMedia.dart` — `anilistMediaFragment` / `anilistDetailQuery` GraphQL fragments +
+  `mapAnilistMedia` / `mapAnilistDetail` → the domain `Media`.
+- `AnilistService implements LoginHandler` (delegates to `find<AnilistAuth>()`).
+
+### Feature screens
+
+Entry flow: `OnboardingScreen` (3 pages: welcome / theme / sync) → `LoginScreen`
+(service-aware; "continue as guest" or AniList OAuth/token) → sets
+`PrefName.hasCompletedOnboarding` → `MainScreen`.
+
+- **`Screen/MainScreen.dart`** — 3-tab shell (`AnimeTab` / `HomeTab` / `MangaTab` in
+  `Screen/Home/Tabs.dart`), lazy-mounted in an `IndexedStack`, `FloatingBottomNavBar`.
+- **`Screen/Home/MediaRailsScreen.dart`** — generic pull-to-refresh list of `MediaSection`
+  rails from a `RailLoader`; skeleton / error states; reloads on AniList user change.
+- **`Screen/Home/HomeHeader.dart`** — greeting + avatar + search icon + account bottom sheet.
+- **`Screen/Detail/DetailScreen.dart`** — collapsing banner, header, genres, expandable
+  synopsis, character rail, relation / recommendation `MediaSection`s; FAB → `ListEditorSheet`
+  (status / progress / score, save + remove) when signed in.
+- **`Screen/Search/SearchScreen.dart`** — debounced AniList search, anime/manga toggle,
+  infinite-scroll grid.
+- **`Screen/Settings/SettingsScreen.dart`** — appearance (theme / mode / OLED / glass /
+  Material You / accent), account, update channel, about.
+
+**Not built yet:** watch/read (extension sources, player, reader), MAL / Simkl services,
+calendar, notifications feed, character/staff/profile pages, offline, `main`'s `Detail/Tabs`.
 
 ### Models
 
