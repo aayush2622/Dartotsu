@@ -5,11 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../Core/Preferences/PrefManager.dart';
-import '../../Widgets/Components/ThemedContainer.dart';
 import '../../Core/ThemeManager/language.dart';
 import '../../Utils/Animation/WidgetAnimations.dart';
+import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Utils/Functions/SnackBar.dart';
 import '../../Widgets/Components/CachedNetworkImage.dart';
+import '../../Widgets/Components/ThemedContainer.dart';
 
 class ExtensionList extends StatefulWidget {
   final ItemType itemType;
@@ -30,7 +31,7 @@ class ExtensionList extends StatefulWidget {
 class _ExtensionListState extends State<ExtensionList> {
   final ScrollController controller = ScrollController();
 
-  final ExtensionManager manager = Get.find();
+  final ExtensionManager manager = find();
 
   Extension get extension => manager[widget.itemType];
 
@@ -40,7 +41,11 @@ class _ExtensionListState extends State<ExtensionList> {
 
   String get _search => widget.searchQuery.trim().toLowerCase();
 
-  String get _orderKey => '${extension.name}_${widget.itemType.name}_order';
+  Pref<List<String>> get _orderPref =>
+      PrefName.extensionOrder(extension.name, widget.itemType.name);
+
+  /// Read once — the toggle only takes effect on the next screen open.
+  final bool _showIcons = PrefName.loadExtensionIcon.value;
 
   @override
   void dispose() {
@@ -239,21 +244,12 @@ class _ExtensionListState extends State<ExtensionList> {
   }
 
   void _saveOrder(List<Source> list) {
-    saveCustomData<List<String>>(
-      _orderKey,
-      list.map((e) => e.id).whereType<String>().toList(),
-    );
+    _orderPref.value = list.map((e) => e.id).whereType<String>().toList();
   }
 
   List<Source> _applySavedOrder(List<Source> list) {
-    final saved = loadCustomData<List<String>>(
-      _orderKey,
-      defaultValue: const [],
-    );
-
-    if (saved == null || saved.isEmpty) {
-      return list;
-    }
+    final saved = _orderPref.value;
+    if (saved.isEmpty) return list;
 
     final order = <String, int>{
       for (var i = 0; i < saved.length; i++) saved[i]: i,
@@ -283,9 +279,7 @@ class _ExtensionListState extends State<ExtensionList> {
   Widget _buildIcon(Source source) {
     final iconUrl = source.iconUrl;
 
-    if (iconUrl == null ||
-        iconUrl.isEmpty ||
-        !(loadCustomData<bool?>('loadExtensionIcon') ?? true)) {
+    if (iconUrl == null || iconUrl.isEmpty || !_showIcons) {
       return const ColoredBox(
         color: Colors.transparent,
         child: Icon(Icons.extension_rounded),
@@ -317,9 +311,9 @@ class _ExtensionListState extends State<ExtensionList> {
       return Container(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
         decoration: BoxDecoration(
-          color: background ?? theme.surfaceContainerHighest.withOpacity(.4),
+          color: background ?? theme.surfaceContainerHighest.withValues(alpha: .4),
           borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: theme.outline.withOpacity(.15)),
+          border: Border.all(color: theme.outline.withValues(alpha: .15)),
         ),
         child: Text(
           text,
@@ -346,7 +340,7 @@ class _ExtensionListState extends State<ExtensionList> {
           if (source.isNsfw ?? false)
             chip(
               '18+',
-              background: theme.errorContainer.withOpacity(.35),
+              background: theme.errorContainer.withValues(alpha: .35),
               foreground: theme.error,
             ),
         ],

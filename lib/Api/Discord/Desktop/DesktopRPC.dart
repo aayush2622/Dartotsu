@@ -122,19 +122,25 @@ class DesktopRPC extends GetxController implements BaseDiscordRPC {
 
   @override
   Future<void> removeRpc() async {
+    _lastActivity = null;
+    if (_disposed || !_ready.isCompleted) return;
+    await FlutterDiscordRPC.instance.clearActivity();
+  }
+
+  Future<void> _teardown() async {
     if (_disposed) return;
     _disposed = true;
-
-    if (_ready.isCompleted) {
+    if (!_ready.isCompleted) return;
+    try {
       await FlutterDiscordRPC.instance.clearActivity();
       await FlutterDiscordRPC.instance.disconnect();
       await FlutterDiscordRPC.instance.dispose();
-    }
+    } catch (_) {}
   }
 
   @override
   void onClose() {
-    removeRpc();
+    _teardown();
     super.onClose();
   }
 }

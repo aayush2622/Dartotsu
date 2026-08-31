@@ -3,12 +3,14 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../Core/Analytics/AnalyticsManager.dart';
 import '../../Core/Preferences/StorageManager.dart';
 import '../../Logger.dart';
 import '../../Utils/Animation/WidgetAnimations.dart';
 import '../../Utils/Extensions/NumExtensions.dart';
 import '../../Utils/Function.dart';
 import '../../Utils/Functions/CopyToClip.dart';
+import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Widgets/Components/CustomElevatedButton.dart';
 import '../../Widgets/Components/ScrollConfig.dart';
 
@@ -31,6 +33,9 @@ class ErrorScreen extends StatefulWidget {
 }
 
 class _ErrorScreenState extends State<ErrorScreen> {
+  late final List<TextSpan> _stackSpans =
+      _colorizeErrorText(widget.stackTrace);
+
   @override
   void dispose() {
     widget.onClose?.call();
@@ -178,7 +183,7 @@ class _ErrorScreenState extends State<ErrorScreen> {
             borderRadius: BorderRadius.circular(10),
           ),
           child: SelectableText.rich(
-            TextSpan(children: _colorizeErrorText(widget.stackTrace, theme)),
+            TextSpan(children: _stackSpans),
             style: TextStyle(
               fontFamily: "monospace",
               fontSize: 13,
@@ -198,19 +203,20 @@ class _ErrorScreenState extends State<ErrorScreen> {
           child: CustomElevatedButton(
             context: context,
             onPressed: () async {
-              var p = await StorageManager.getDirectory(
+              final dir = await StorageManager.getDirectory(
                 useSystemPath: false,
                 useCustomPath: true,
               );
-              var path = p?.path ?? "";
+              final logPath = '${dir?.path ?? ''}/appLogs.txt'.fixSeparator;
+
               if (Platform.isLinux) {
                 copyToClipboard(
-                  "$path\\appLogs.txt".fixSeparator,
-                  message: "Log file path copied to clipboard",
+                  logPath,
+                  message: 'Log file path copied to clipboard',
                 );
-                return;
+              } else {
+                shareFile(logPath, 'LogFile');
               }
-              shareFile("$path\\appLogs.txt".fixSeparator, "LogFile");
             },
             iconWidget: Icon(Icons.share_rounded, color: theme.surface),
             label: "Share log file",
@@ -245,6 +251,7 @@ void handleError(
   bool softCrash = false,
 }) {
   logger('$error: \n$stack', logLevel: LogLevel.error);
+  tryFind<AnalyticsManager>()?.recordError(error, stack, fatal: !softCrash);
 
   final nav = Get.key.currentState;
   if (nav != null) {
@@ -273,7 +280,7 @@ void handleError(
   }
 }
 
-List<TextSpan> _colorizeErrorText(String text, ColorScheme theme) {
+List<TextSpan> _colorizeErrorText(String text) {
   final patterns = {
     RegExp(r'\bv?\d+(?:\.\d+)*\b'): const TextStyle(color: Colors.amberAccent),
     RegExp(r'\b(?:dart:[\w/.]+|package:[\w./_]+|https?://\S+)\b'):

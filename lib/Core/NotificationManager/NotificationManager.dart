@@ -997,8 +997,6 @@ enum NotificationChannel {
     this.importance = Importance.high,
     this.playSound = true,
     this.showBadge = true,
-    this.enableLights = true,
-    this.enableVibration = true,
   });
 
   final String id;
@@ -1008,8 +1006,9 @@ enum NotificationChannel {
   final Importance importance;
   final bool playSound;
   final bool showBadge;
-  final bool enableLights;
-  final bool enableVibration;
+
+  final bool enableLights = true;
+  final bool enableVibration = true;
 }
 
 class NotificationOptions {
