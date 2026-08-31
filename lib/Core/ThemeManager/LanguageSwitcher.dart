@@ -4,24 +4,26 @@ import 'package:get/get.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Widgets/Components/DropdownMenu.dart';
 import '../../l10n/app_localizations.dart';
-import 'ThemeController.dart';
+import 'LocaleController.dart';
 import 'language.dart';
 
 Widget languageSwitcher(BuildContext context) {
-  final languageOptions = _getSupportedLanguages(context);
-  final themeController = find<ThemeController>();
+  final locale = find<LocaleController>();
+  final options = AppLocalizations.supportedLocales
+      .map((l) => completeLanguageName(l.languageCode.toUpperCase()))
+      .toSet()
+      .toList();
+
   return Obx(
     () => BuildDropdownMenu(
       padding: const EdgeInsets.symmetric(vertical: 12.0),
-      value: completeLanguageName(themeController.local.value.toUpperCase()),
-      options: languageOptions
-          .map((e) => completeLanguageName(e.toUpperCase()))
-          .toSet()
-          .toList(),
-      onChanged: (String? newValue) {
+      value: completeLanguageName(locale.code.value.toUpperCase()),
+      options: options,
+      onChanged: (newValue) {
         if (newValue == null) return;
-        final newLocale = Locale(completeLanguageCode(newValue).toLowerCase());
-        themeController.setLocale(newLocale);
+        locale.setLocale(
+          Locale(completeLanguageCode(newValue).toLowerCase()),
+        );
       },
       prefixIcon: Icons.translate,
     ),
@@ -29,8 +31,3 @@ Widget languageSwitcher(BuildContext context) {
 }
 
 AppLocalizations get getString => AppLocalizations.of(Get.context!)!;
-
-List<String> _getSupportedLanguages(BuildContext context) {
-  const supportedLocales = AppLocalizations.supportedLocales;
-  return supportedLocales.map((locale) => locale.languageCode).toList();
-}

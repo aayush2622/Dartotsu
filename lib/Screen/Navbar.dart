@@ -2,15 +2,14 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../Core/Services/Features/NavbarProvider.dart';
 import '../Core/Services/MediaServiceController.dart';
 import '../Core/Services/ServiceSwitcher.dart';
 import '../Core/ThemeManager/LanguageSwitcher.dart';
-import '../Core/ThemeManager/ThemeManager.dart';
 import '../Utils/Animation/WidgetAnimations.dart';
 import '../Utils/Extensions/ContextExtensions.dart';
 import '../Utils/Functions/GetXFunctions.dart';
 import '../Widgets/Components/LoadSvg.dart';
+import '../Widgets/Components/ThemedContainer.dart';
 
 class FloatingBottomNavBar extends StatefulWidget {
   final int selectedIndex;
@@ -82,7 +81,6 @@ class _FloatingBottomNavBarState extends State<FloatingBottomNavBar> {
       child: Align(
         alignment: Alignment.topCenter,
         child: ThemedContainer(
-          context: context,
           borderRadius: BorderRadius.circular(48),
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
           child: Column(
@@ -174,7 +172,6 @@ class _FloatingBottomNavBarState extends State<FloatingBottomNavBar> {
               Align(
                 alignment: Alignment.center,
                 child: ThemedContainer(
-                  context: context,
                   borderRadius: BorderRadius.circular(32),
                   padding: EdgeInsets.zero,
                   child: SizedBox(

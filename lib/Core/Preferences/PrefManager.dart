@@ -1,65 +1,90 @@
-import 'dart:convert';
+import 'dart:async';
 
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart'
     hide isar;
+import 'package:get/get.dart';
 import 'package:isar_community/isar.dart';
 
 import '../../Logger.dart';
-import 'Encryptor.dart';
+import '../ThemeManager/ThemeMode.dart';
 import 'IsarDataClasses/KeyValue/KeyValues.dart';
+import 'Pref.dart';
 import 'StorageManager.dart';
-import 'Validator.dart';
+
+export 'Pref.dart' show Pref, PrefLocation, enumPref, jsonPref;
 
 part 'Preferences.dart';
 
-T loadData<T>(Pref<T> pref) => PrefManager.getVal(pref);
+// ---------------------------------------------------------------------------
+// Free-function shims (kept for the existing call sites)
+// ---------------------------------------------------------------------------
 
-T? loadCustomData<T>(String key, {T? defaultValue}) =>
-    PrefManager.getCustomVal(key, defaultValue: defaultValue);
+T loadData<T>(Pref<T> pref) => PrefManager.getVal(pref);
 
 void saveData<T>(Pref<T> pref, T value) => PrefManager.setVal(pref, value);
 
-void saveCustomData<T>(String key, T value) =>
-    PrefManager.setCustomVal(key, value);
-
 void removeData(Pref<dynamic> pref) => PrefManager.removeVal(pref);
 
-void removeCustomData(String key) => PrefManager.removeCustomVal(key);
+T? loadCustomData<T>(
+  String key, {
+  T? defaultValue,
+  PrefLocation location = PrefLocation.OTHER,
+}) =>
+    PrefManager.getCustomVal<T>(
+      key,
+      defaultValue: defaultValue,
+      location: location,
+    );
 
-class Pref<T> {
-  final String key;
-  final T defaultValue;
-  final PrefLocation location;
+void saveCustomData<T>(
+  String key,
+  T value, {
+  PrefLocation location = PrefLocation.OTHER,
+}) =>
+    PrefManager.setCustomVal<T>(key, value, location: location);
 
-  const Pref(this.key, this.defaultValue, this.location);
+void removeCustomData(
+  String key, {
+  PrefLocation location = PrefLocation.OTHER,
+}) =>
+    PrefManager.removeCustomVal(key, location: location);
+
+// ---------------------------------------------------------------------------
+
+class _Pending {
+  final Object? raw;
+  final bool delete;
+  const _Pending(this.raw, {this.delete = false});
 }
 
-enum PrefLocation { THEME, COMMON, PLAYER, READER, PROTECTED, OTHER }
-
+/// Isar-backed typed key-value store with a synchronous in-memory cache, a
+/// shared reactive layer ([Pref.rx]) and microtask-batched writes so callers
+/// never block on disk.
 class PrefManager {
   PrefManager._();
 
   static late Isar dartotsuPreferences;
 
-  static IsarCollection<KeyValue> get _keyValues =>
-      dartotsuPreferences.keyValues;
+  static IsarCollection<KeyValue> get _kv => dartotsuPreferences.keyValues;
+
+  /// Bump when the on-disk shape changes; triggers a one-time wipe.
+  static const _schemaVersion = 2;
+  static const _schemaVersionKey = 'OTHER/__prefSchemaVersion';
 
   static final Map<String, Object?> _cache = {};
+  static final Map<String, Rx<dynamic>> _rx = {};
+  static final Map<String, _Pending> _pending = {};
+  static bool _flushScheduled = false;
 
-  static final Map<String, PrefLocation> _locationMap = {
-    for (final e in PrefLocation.values) e.name: e,
-  };
-
-  static String _cacheKey(String key, PrefLocation location) =>
-      '$key|${location.index}';
+  // -------------------------------------------------------------------------
+  // Lifecycle
+  // -------------------------------------------------------------------------
 
   static Future<void> init() async {
     try {
       final path = await StorageManager.getDirectory(subPath: 'settings');
-
       dartotsuPreferences = await _open('DartotsuSettings', path!.path);
-
-      await deleteAllStoredPreferences();
+      _migrate();
     } catch (e) {
       logger('Error initializing preferences: $e');
     }
@@ -74,24 +99,100 @@ class PrefManager {
     );
   }
 
-  static KeyValue? _find(String key, PrefLocation location) {
-    return _keyValues
-        .where()
-        .filter()
-        .keyEqualTo(key)
-        .locationEqualTo(location)
-        .findFirstSync();
+  static void _migrate() {
+    final current = _kv.getByKeySync(_schemaVersionKey)?.value as int?;
+    if (current == _schemaVersion) return;
+
+    dartotsuPreferences.writeTxnSync(() {
+      _kv.clearSync();
+      _kv.putByKeySync(
+        KeyValue()
+          ..key = _schemaVersionKey
+          ..value = _schemaVersion,
+      );
+    });
+    _cache.clear();
   }
 
-  static T getVal<T>(Pref<T> pref) =>
-      _getFromIsarSync(pref.key, pref.location) ?? pref.defaultValue;
+  /// Wipes every stored preference. Intended for an explicit "reset settings"
+  /// action — a restart is expected afterwards.
+  static Future<void> resetAll() async {
+    await dartotsuPreferences.writeTxn(() => _kv.clear());
+    _cache.clear();
+    _pending.clear();
+    _rx.clear();
+  }
+
+  /// Force any queued writes to disk now (call on app pause / shutdown).
+  static void flush() {
+    if (_pending.isNotEmpty) _flushPending();
+  }
+
+  // -------------------------------------------------------------------------
+  // Typed prefs
+  // -------------------------------------------------------------------------
+
+  static T getVal<T>(Pref<T> pref) {
+    final raw = _readRaw(pref.storageKey);
+    if (raw == null) return pref.defaultValue;
+    final decode = pref.decode;
+    return decode != null ? decode(raw) : raw as T;
+  }
+
+  static void setVal<T>(Pref<T> pref, T value) {
+    final raw = pref.encode != null ? pref.encode!(value) : value;
+    _writeRaw(pref.storageKey, raw);
+
+    final rx = _rx[pref.storageKey];
+    if (rx is Rx<T> && rx.value != value) rx.value = value;
+  }
+
+  static void removeVal<T>(Pref<T> pref) {
+    _cache[pref.storageKey] = null;
+    _enqueue(pref.storageKey, null, delete: true);
+
+    final rx = _rx[pref.storageKey];
+    if (rx is Rx<T>) rx.value = pref.defaultValue;
+  }
+
+  /// Shared [Rx] for [pref]. Assigning to it persists automatically.
+  static Rx<T> rxOf<T>(Pref<T> pref) {
+    final existing = _rx[pref.storageKey];
+    if (existing is Rx<T>) return existing;
+
+    final rx = getVal(pref).obs;
+    _rx[pref.storageKey] = rx;
+    ever<T>(rx, (v) => setVal(pref, v));
+    return rx;
+  }
+
+  // -------------------------------------------------------------------------
+  // Ad-hoc / custom keys
+  // -------------------------------------------------------------------------
 
   static T? getCustomVal<T>(
     String key, {
     PrefLocation location = PrefLocation.OTHER,
     T? defaultValue,
   }) {
-    return _getFromIsarSync(key, location) ?? defaultValue;
+    return _readRaw('${location.name}/$key') as T? ?? defaultValue;
+  }
+
+  static void setCustomVal<T>(
+    String key,
+    T value, {
+    PrefLocation location = PrefLocation.OTHER,
+  }) {
+    _writeRaw('${location.name}/$key', value);
+  }
+
+  static void removeCustomVal(
+    String key, {
+    PrefLocation location = PrefLocation.OTHER,
+  }) {
+    final storageKey = '${location.name}/$key';
+    _cache[storageKey] = null;
+    _enqueue(storageKey, null, delete: true);
   }
 
   static T? getCustomType<T>(
@@ -100,24 +201,7 @@ class PrefManager {
     PrefLocation location = PrefLocation.OTHER,
   }) {
     final map = getCustomVal<Map<String, dynamic>>(key, location: location);
-
-    if (map == null) {
-      return null;
-    }
-
-    return fromJson(map);
-  }
-
-  static void setVal<T>(Pref<T> pref, T value) {
-    _writeToIsar(pref.key, value, pref.location);
-  }
-
-  static void setCustomVal<T>(
-    String key,
-    T value, {
-    PrefLocation location = PrefLocation.OTHER,
-  }) {
-    _writeToIsar(key, value, location);
+    return map == null ? null : fromJson(map);
   }
 
   static void setCustomType<T>(
@@ -129,160 +213,72 @@ class PrefManager {
     setCustomVal<Map<String, dynamic>>(key, toJson(value), location: location);
   }
 
-  static void removeVal(Pref<dynamic> pref) {
-    _removeFromIsar(pref.key, pref.location);
-  }
+  // -------------------------------------------------------------------------
+  // Backup helpers (used by PrefBackup)
+  // -------------------------------------------------------------------------
 
-  static void removeCustomVal(
-    String key, {
-    PrefLocation location = PrefLocation.OTHER,
-  }) {
-    _removeFromIsar(key, location);
-  }
+  static List<KeyValue> allEntries() => _kv.where().findAllSync();
 
-  static T? _getFromIsarSync<T>(String key, PrefLocation location) {
-    final cacheKey = _cacheKey(key, location);
-
-    if (_cache.containsKey(cacheKey)) {
-      return _cache[cacheKey] as T?;
+  static Future<void> putEntries(List<KeyValue> entries) async {
+    if (entries.isEmpty) return;
+    await dartotsuPreferences.writeTxn(() async {
+      for (final e in entries) {
+        await _kv.putByKey(e);
+      }
+    });
+    for (final e in entries) {
+      _cache[e.key] = e.value;
     }
-
-    final kv = _find(key, location);
-
-    final value = kv?.value;
-
-    if (value != null) {
-      _cache[cacheKey] = value;
-    }
-
-    return value as T?;
   }
 
-  static void _writeToIsar<T>(String key, T value, PrefLocation location) {
-    final cacheKey = _cacheKey(key, location);
+  // -------------------------------------------------------------------------
+  // Internals
+  // -------------------------------------------------------------------------
 
-    dartotsuPreferences.writeTxnSync(() {
-      final existing = _find(key, location);
+  static Object? _readRaw(String storageKey) {
+    if (_cache.containsKey(storageKey)) return _cache[storageKey];
+    final value = _kv.getByKeySync(storageKey)?.value;
+    _cache[storageKey] = value;
+    return value;
+  }
 
-      if (existing != null) {
-        if (existing.value == value) {
-          return;
+  static void _writeRaw(String storageKey, Object? raw) {
+    if (_cache.containsKey(storageKey) && _cache[storageKey] == raw) return;
+    _cache[storageKey] = raw;
+    _enqueue(storageKey, raw);
+  }
+
+  static void _enqueue(String key, Object? raw, {bool delete = false}) {
+    _pending[key] = _Pending(raw, delete: delete);
+    if (!_flushScheduled) {
+      _flushScheduled = true;
+      scheduleMicrotask(_flushPending);
+    }
+  }
+
+  static void _flushPending() {
+    _flushScheduled = false;
+    if (_pending.isEmpty) return;
+
+    final batch = Map<String, _Pending>.of(_pending);
+    _pending.clear();
+
+    try {
+      dartotsuPreferences.writeTxnSync(() {
+        for (final entry in batch.entries) {
+          if (entry.value.delete) {
+            _kv.deleteByKeySync(entry.key);
+          } else {
+            _kv.putByKeySync(
+              KeyValue()
+                ..key = entry.key
+                ..value = entry.value.raw,
+            );
+          }
         }
-
-        existing.value = value;
-        _keyValues.putSync(existing);
-      } else {
-        _keyValues.putSync(
-          KeyValue()
-            ..key = key
-            ..location = location
-            ..value = value,
-        );
-      }
-
-      _cache[cacheKey] = value;
-    });
-  }
-
-  static Future<void> _removeFromIsar(String key, PrefLocation location) async {
-    final cacheKey = _cacheKey(key, location);
-
-    await dartotsuPreferences.writeTxn(() async {
-      final existing = _find(key, location);
-
-      if (existing != null) {
-        await _keyValues.delete(existing.id);
-      }
-    });
-
-    _cache.remove(cacheKey);
-  }
-
-  static Future<void> deleteAllStoredPreferences() async {
-    if (!(getCustomVal<bool>("cleanSettings") ?? true)) {
-      return;
+      });
+    } catch (e) {
+      logger('PrefManager flush failed: $e');
     }
-
-    await dartotsuPreferences.writeTxn(() async {
-      await _keyValues.clear();
-    });
-
-    _cache.clear();
-
-    setCustomVal("cleanSettings", false);
-  }
-
-  static Future<void> restoreBackup({
-    required Map<String, dynamic> json,
-    Set<PrefLocation>? locations,
-    String? password,
-  }) async {
-    final decrypted = await Crypto.decrypt(json, password: password);
-
-    Validator.validate(decrypted);
-
-    final selected = locations ?? PrefLocation.values.toSet();
-
-    final kvList = <KeyValue>[];
-
-    for (final section in decrypted.entries) {
-      if (section.key == "_meta") {
-        continue;
-      }
-
-      final location = _locationMap[section.key] ?? PrefLocation.OTHER;
-
-      if (!selected.contains(location)) {
-        continue;
-      }
-
-      final values = (section.value as Map).cast<String, dynamic>();
-
-      for (final value in values.values) {
-        kvList.add(KeyValue.fromJson(value as Map<String, dynamic>));
-      }
-    }
-
-    await dartotsuPreferences.writeTxn(() async {
-      if (kvList.isNotEmpty) {
-        await _keyValues.putAll(kvList);
-      }
-    });
-
-    _cache.clear();
-
-    for (final kv in kvList) {
-      _cache[_cacheKey(kv.key, kv.location)] = kv.value;
-    }
-  }
-
-  static Future<Map<String, dynamic>> exportBackup({
-    Set<PrefLocation>? locations,
-    String? password,
-  }) async {
-    final selected = locations ?? PrefLocation.values.toSet();
-
-    final result = <String, Map<String, dynamic>>{};
-
-    for (final location in selected) {
-      result[location.name] = {};
-    }
-
-    final all = await _keyValues.where().findAll();
-
-    for (final kv in all) {
-      if (!selected.contains(kv.location)) {
-        continue;
-      }
-
-      result[kv.location.name]![kv.key] = kv.toJson();
-    }
-
-    result.removeWhere((_, value) => value.isEmpty);
-
-    return Crypto.encrypt(
-      jsonEncode(Validator.wrap(result)),
-      password: password,
-    );
   }
 }

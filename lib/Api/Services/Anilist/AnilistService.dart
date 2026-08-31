@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
-import '../../../Core/Services/Features/NavbarProvider.dart';
-import '../../../Core/Services/MediaServiceController.dart';
+import '../../../Core/Services/MediaService.dart';
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
 
 class AnilistService extends MediaService implements NavBarProvider {
   @override
-  String get name => "Anilist";
+  String get id => "anilist";
+
+  @override
+  String get name => "AniList";
 
   @override
   String get iconPath => "assets/svg/anilist.svg";

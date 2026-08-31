@@ -36,6 +36,8 @@ dependencies:
   path_provider: ^2.1.6
   path: ^1.9.1
   cryptography: ^2.9.0
+  crypto: ^3.0.6
+  timezone: ^0.11.1
 
   # UI Components
   introduction_screen: ^4.0.0

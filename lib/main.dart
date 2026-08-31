@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:io';
-import 'dart:ui';
 
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:dpad/dpad.dart';
@@ -22,8 +21,8 @@ import 'Core/NetworkManager/NetworkBridge.dart';
 import 'Core/NetworkManager/NetworkManager.dart';
 import 'Core/Preferences/PrefManager.dart';
 import 'Core/Preferences/StorageManager.dart';
+import 'Core/ThemeManager/LocaleController.dart';
 import 'Core/ThemeManager/ThemeController.dart';
-import 'Core/ThemeManager/ThemeManager.dart';
 import 'DI.dart';
 import 'Logger.dart';
 import 'Screen/Error/ErrorScreen.dart';
@@ -35,13 +34,6 @@ import 'Utils/Functions/GetXFunctions.dart';
 import 'Utils/Functions/SnackBar.dart';
 import 'l10n/app_localizations.dart';
 
-// animationController
-
-// test glass background switch
-// test theme switcher
-// test service switcher
-
-// refractor MediaSettings
 void main(List<String> args) async {
   await runZonedGuarded(
     () async {
@@ -56,14 +48,13 @@ void main(List<String> args) async {
         Zone.current.handleUncaughtError(error, stack);
         return true;
       };
-      ErrorWidget.builder = (FlutterErrorDetails details) {
-        return ErrorScreen(
-          error: details.exception.toString(),
-          stackTrace: details.stack?.toString() ?? details.toString(),
-          softCrash: true,
-        );
-      };
+      ErrorWidget.builder = (details) => ErrorScreen(
+            error: details.exception.toString(),
+            stackTrace: details.stack?.toString() ?? details.toString(),
+            softCrash: true,
+          );
       Get.log = (text, {isError = false}) => debugPrint(text);
+
       await init(args);
       runApp(const MyApp());
     },
@@ -85,36 +76,27 @@ Future<void> init(List<String> args) async {
   await PrefManager.init();
   await Rhttp.init();
   DI.init();
+
   final client = find<NetworkManager>();
-  final cookieManager = client.cookieManager;
+
   await Future.wait([
     Logger.init(),
     DartotsuExtensionBridge.init(
       getDirectory: StorageManager.getDirectory,
       isarInstance: PrefManager.dartotsuPreferences,
       http: client.compatibleClient,
-      network: AppBridgeNetwork(cookieManager),
+      network: AppBridgeNetwork(client.cookieManager),
       onLog: (message, show) {
-        debugPrint("[Bridge LOGS] $message");
-        if (show) {
-          snackString(message);
-        }
+        debugPrint('[Bridge LOGS] $message');
+        if (show) snackString(message);
       },
     ),
     initializeDateFormatting(),
+    if (Platform.isWindows || Platform.isLinux || Platform.isMacOS)
+      WindowManager.instance.ensureInitialized(),
   ]);
 
-  unawaited(_postInit(args));
-}
-
-Future<void> _postInit(List<String> args) async {
-  DeepLink.init();
   MediaKit.ensureInitialized();
-
-  if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
-    await WindowManager.instance.ensureInitialized();
-    DeepLink.initVideoIntentListener(args);
-  }
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
@@ -122,6 +104,16 @@ Future<void> _postInit(List<String> args) async {
       systemNavigationBarDividerColor: Colors.transparent,
     ),
   );
+
+  unawaited(_postInit(args));
+}
+
+/// Work that can safely run after the first frame.
+Future<void> _postInit(List<String> args) async {
+  DeepLink.init();
+  if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+    DeepLink.initVideoIntentListener(args);
+  }
   unawaited(AppUpdater().checkForUpdate());
 }
 
@@ -129,24 +121,20 @@ class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
-  createState() => _MyAppState();
+  State<MyApp> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
-  late final FocusNode _focusNode;
-
-  ThemeController theme = find();
-
-  @override
-  void initState() {
-    super.initState();
-    _focusNode = FocusNode();
-  }
+  final _focusNode = FocusNode();
+  final ThemeController _theme = find();
+  final LocaleController _locale = find();
 
   @override
   void dispose() {
     _focusNode.dispose();
-    DartotsuExtensionBridge.dispose();
+    try {
+      DartotsuExtensionBridge.dispose();
+    } catch (_) {}
     super.dispose();
   }
 
@@ -172,9 +160,9 @@ class _MyAppState extends State<MyApp> {
             : KeyEventResult.ignored,
         child: DynamicColorBuilder(
           builder: (lightDynamic, darkDynamic) {
-            return Obx(() {
-              return GetMaterialApp(
-                key: ValueKey(theme.local.value),
+            _theme.setDynamicSchemes(lightDynamic, darkDynamic);
+            return Obx(
+              () => GetMaterialApp(
                 title: 'Dartotsu',
                 debugShowCheckedModeBanner: false,
                 enableLog: true,
@@ -186,17 +174,15 @@ class _MyAppState extends State<MyApp> {
                   GlobalCupertinoLocalizations.delegate,
                 ],
                 supportedLocales: AppLocalizations.supportedLocales,
-                locale: Locale(theme.local.value),
-                themeMode: theme.isDarkMode.value
-                    ? ThemeMode.dark
-                    : ThemeMode.light,
-                theme: getTheme(lightDynamic, theme),
-                darkTheme: getTheme(darkDynamic, theme),
-                home: !loadCustomData("initialLoaded", defaultValue: false)!
+                locale: _locale.locale,
+                themeMode: _theme.themeMode,
+                theme: _theme.light,
+                darkTheme: _theme.dark,
+                home: PrefName.hasCompletedOnboarding.value
                     ? const MainScreen()
                     : const OnboardingScreen(),
-              );
-            });
+              ),
+            );
           },
         ),
       ),

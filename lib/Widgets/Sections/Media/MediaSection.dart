@@ -8,7 +8,7 @@ import 'package:super_sliver_list/super_sliver_list.dart';
 
 import '../../../Core/Preferences/PrefManager.dart';
 import '../../../Core/Services/Model/Media.dart';
-import '../../../Core/ThemeManager/ThemeManager.dart';
+import '../../Components/ThemedContainer.dart';
 import '../../../Utils/Animation/WidgetAnimations.dart';
 import '../../../Utils/Functions/SnackBar.dart';
 import '../../Components/CachedNetworkImage.dart';
@@ -99,7 +99,6 @@ class _MediaSectionState extends State<MediaSection> {
   Widget build(BuildContext context) {
     return ThemedContainer(
       margin: const EdgeInsets.all(12),
-      context: context,
       padding: const EdgeInsets.only(),
       borderRadius: BorderRadius.circular(30.0),
       border: Border.all(width: 0, color: Colors.transparent),

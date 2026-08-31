@@ -19,7 +19,7 @@ void serviceSwitcher(BuildContext context) {
           final service = mediaServices.services[index];
 
           return ListTile(
-            selected: mediaServices.currentService.value.name == service.name,
+            selected: mediaServices.currentService.value.id == service.id,
             contentPadding: const EdgeInsets.symmetric(
               horizontal: 24.0,
               vertical: 4.0,
@@ -39,7 +39,7 @@ void serviceSwitcher(BuildContext context) {
               ),
             ),
             onTap: () {
-              mediaServices.switchService(service.name);
+              mediaServices.switchService(service.id);
               Navigator.pop(context);
             },
           );
