@@ -7,6 +7,7 @@ list(APPEND FLUTTER_PLUGIN_LIST
   dynamic_color
   flutter_inappwebview_linux
   flutter_qjs
+  flutter_timezone
   gtk
   isar_community_flutter_libs
   media_kit_libs_linux

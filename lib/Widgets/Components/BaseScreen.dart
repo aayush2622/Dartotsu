@@ -1,9 +1,9 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:get/get.dart';
 
-import '../../Core/Services/MediaService.dart';
+import '../../Core/Services/MediaServiceController.dart';
 import '../../Core/ThemeManager/ThemeController.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
 import 'CachedNetworkImage.dart';
@@ -51,7 +51,10 @@ abstract class BaseScreen<T extends StatefulWidget> extends State<T> {
                 child: Opacity(
                   opacity: 0.8,
                   child: cachedNetworkImage(
-                    imageUrl: service.data.bg.value,
+                    imageUrl:
+                        "https://i.pinimg.com/1200x/b2/e7/7f/b2e77f955c3d39655cc7a46802f94748.jpg"
+                            .obs
+                            .value,
                     fit: BoxFit.cover,
                   ),
                 ),
