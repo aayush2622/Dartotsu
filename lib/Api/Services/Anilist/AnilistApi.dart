@@ -65,6 +65,107 @@ query {
     ].where((r) => r.media.isNotEmpty).toList();
   }
 
+  Future<List<MediaRail>> dashboard({int? userId}) async {
+    final loggedIn = userId != null;
+    final userLists = loggedIn
+        ? '''
+  watching: MediaListCollection(userId: $userId, type: ANIME, status_in: [CURRENT, REPEATING], sort: UPDATED_TIME_DESC) {
+    lists { entries { media { $anilistMediaFragment } } }
+  }
+  reading: MediaListCollection(userId: $userId, type: MANGA, status_in: [CURRENT, REPEATING], sort: UPDATED_TIME_DESC) {
+    lists { entries { media { $anilistMediaFragment } } }
+  }'''
+        : '';
+    final query =
+        '''
+query {
+$userLists
+  trendingAnime: Page(page: 1, perPage: 25) {
+    media(type: ANIME, sort: TRENDING_DESC, isAdult: false) { $anilistMediaFragment }
+  }
+  trendingManga: Page(page: 1, perPage: 25) {
+    media(type: MANGA, sort: TRENDING_DESC, isAdult: false) { $anilistMediaFragment }
+  }
+  popularAnime: Page(page: 1, perPage: 25) {
+    media(type: ANIME, sort: POPULARITY_DESC, isAdult: false) { $anilistMediaFragment }
+  }
+}
+''';
+
+    final data = await client.query(query);
+
+    List<Media> page(String key) {
+      final list =
+          (data[key] as Map<String, dynamic>?)?['media'] as List? ?? const [];
+      return list
+          .cast<Map<String, dynamic>>()
+          .map((e) => mapAnilistMedia(e))
+          .toList();
+    }
+
+    List<Media> collection(String key) {
+      final lists = (data[key] as Map<String, dynamic>?)?['lists'] as List? ??
+          const [];
+      final out = <Media>[];
+      for (final l in lists.cast<Map<String, dynamic>>()) {
+        for (final e in (l['entries'] as List? ?? const [])
+            .cast<Map<String, dynamic>>()) {
+          final m = e['media'] as Map<String, dynamic>?;
+          if (m != null) out.add(mapAnilistMedia(m));
+        }
+      }
+      return out;
+    }
+
+    return [
+      if (loggedIn) MediaRail('Continue Watching', collection('watching')),
+      if (loggedIn) MediaRail('Continue Reading', collection('reading')),
+      MediaRail('Trending Anime', page('trendingAnime')),
+      MediaRail('Trending Manga', page('trendingManga')),
+      MediaRail('Popular Anime', page('popularAnime')),
+    ].where((r) => r.media.isNotEmpty).toList();
+  }
+
+  Future<List<Media>> userList({
+    required int userId,
+    required bool anime,
+    List<String> statuses = const ['CURRENT', 'REPEATING'],
+  }) async {
+    final query =
+        '''
+query (\$userId: Int, \$type: MediaType, \$status: [MediaListStatus]) {
+  MediaListCollection(userId: \$userId, type: \$type, status_in: \$status, sort: UPDATED_TIME_DESC) {
+    lists {
+      entries {
+        media { $anilistMediaFragment }
+      }
+    }
+  }
+}
+''';
+    final data = await client.query(
+      query,
+      variables: {
+        'userId': userId,
+        'type': anime ? 'ANIME' : 'MANGA',
+        'status': statuses,
+      },
+    );
+
+    final lists = (data['MediaListCollection']
+            as Map<String, dynamic>?)?['lists'] as List? ??
+        const [];
+    final out = <Media>[];
+    for (final list in lists.cast<Map<String, dynamic>>()) {
+      final entries = list['entries'] as List? ?? const [];
+      for (final entry in entries.cast<Map<String, dynamic>>()) {
+        final media = entry['media'] as Map<String, dynamic>?;
+        if (media != null) out.add(mapAnilistMedia(media));
+      }
+    }
+    return out;
+  }
+
   Future<List<Media>> search({
     required bool anime,
     required String term,

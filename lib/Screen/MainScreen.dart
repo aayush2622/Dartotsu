@@ -3,7 +3,7 @@ import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../Utils/Extensions/ContextExtensions.dart';
 import '../Widgets/Components/BaseScreen.dart';
-import 'Home/MediaHomeScreen.dart';
+import 'Home/Tabs.dart';
 import 'Navbar.dart';
 
 class MainScreen extends StatefulWidget {
@@ -15,24 +15,30 @@ class MainScreen extends StatefulWidget {
 
 class MainScreenState extends BaseScreen<MainScreen> {
   final _tab = 1.obs;
+  final _built = <int>{1};
 
-  static const _screens = [
-    MediaHomeScreen(key: ValueKey('anime'), anime: true),
-    MediaHomeScreen(key: ValueKey('home'), anime: true),
-    MediaHomeScreen(key: ValueKey('manga'), anime: false),
-  ];
+  static const _tabs = [AnimeTab(), HomeTab(), MangaTab()];
 
   Widget get _navbar => Obx(
         () => FloatingBottomNavBar(
           selectedIndex: _tab.value,
-          onTabSelected: (i) => _tab.value = i,
+          onTabSelected: (i) {
+            _built.add(i);
+            _tab.value = i;
+          },
         ),
       );
 
   @override
   Widget buildContent(BuildContext context) {
     final body = Obx(
-      () => IndexedStack(index: _tab.value, children: _screens),
+      () => IndexedStack(
+        index: _tab.value,
+        children: [
+          for (var i = 0; i < _tabs.length; i++)
+            _built.contains(i) ? _tabs[i] : const SizedBox.shrink(),
+        ],
+      ),
     );
 
     return Stack(
