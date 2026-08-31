@@ -8,7 +8,8 @@ part of '../SearchResults.dart';
 
 SearchResults _$SearchResultsFromJson(Map<String, dynamic> json) =>
     SearchResults(
-      type: $enumDecodeNullable(_$SearchTypeEnumMap, json['type']) ??
+      type:
+          $enumDecodeNullable(_$SearchTypeEnumMap, json['type']) ??
           SearchType.ANIME,
       isAdult: json['isAdult'] as bool?,
       onList: json['onList'] as bool?,
@@ -16,8 +17,9 @@ SearchResults _$SearchResultsFromJson(Map<String, dynamic> json) =>
       search: json['search'] as String?,
       countryOfOrigin: json['countryOfOrigin'] as String?,
       sort: json['sort'] as String?,
-      genres:
-          (json['genres'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      genres: (json['genres'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
       excludedGenres: (json['excludedGenres'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
@@ -32,19 +34,23 @@ SearchResults _$SearchResultsFromJson(Map<String, dynamic> json) =>
       startYear: (json['startYear'] as num?)?.toInt(),
       season: json['season'] as String?,
       page: (json['page'] as num?)?.toInt() ?? 1,
-      results: (json['results'] as List<dynamic>?)
+      results:
+          (json['results'] as List<dynamic>?)
               ?.map((e) => Media.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
-      characters: (json['characters'] as List<dynamic>?)
+      characters:
+          (json['characters'] as List<dynamic>?)
               ?.map((e) => Character.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
-      staff: (json['staff'] as List<dynamic>?)
+      staff:
+          (json['staff'] as List<dynamic>?)
               ?.map((e) => Author.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
-      users: (json['users'] as List<dynamic>?)
+      users:
+          (json['users'] as List<dynamic>?)
               ?.map((e) => User.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],

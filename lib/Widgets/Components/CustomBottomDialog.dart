@@ -100,8 +100,9 @@ class _CustomBottomDialogState extends State<CustomBottomDialog> {
                           borderRadius: BorderRadius.circular(12),
                           border: focus
                               ? Border.all(
-                                  color: colorScheme.onSurface
-                                      .withValues(alpha: 0.25),
+                                  color: colorScheme.onSurface.withValues(
+                                    alpha: 0.25,
+                                  ),
                                   width: 1,
                                 )
                               : null,

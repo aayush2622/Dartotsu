@@ -13,12 +13,7 @@ class Manga {
 
   Author? author;
 
-  Manga({
-    this.totalChapters,
-    this.selectedChapter,
-    this.chapters,
-    this.author,
-  });
+  Manga({this.totalChapters, this.selectedChapter, this.chapters, this.author});
 
   factory Manga.fromJson(Map<String, dynamic> json) => _$MangaFromJson(json);
   Map<String, dynamic> toJson() => _$MangaToJson(this);

@@ -4,10 +4,7 @@ import 'dart:typed_data';
 import 'package:rhttp/rhttp.dart';
 
 class DnsManager {
-  static Future<List<String>> resolveWithDoh(
-    String host,
-    String dnsUrl,
-  ) async {
+  static Future<List<String>> resolveWithDoh(String host, String dnsUrl) async {
     final query = _buildDnsQuery(host);
 
     final res = await Rhttp.requestBytes(

@@ -60,9 +60,7 @@ class MobileTokenManager {
     try {
       final res = await network.head(
         "https://discord.com/api/v10/users/@me",
-        headers: {
-          "Authorization": "Bearer $token",
-        },
+        headers: {"Authorization": "Bearer $token"},
       );
 
       return res.statusCode == 200;
@@ -76,8 +74,10 @@ class MobileTokenManager {
 
   String _randomString(int length) {
     final rnd = Random.secure();
-    return List.generate(length, (_) => _chars[rnd.nextInt(_chars.length)])
-        .join();
+    return List.generate(
+      length,
+      (_) => _chars[rnd.nextInt(_chars.length)],
+    ).join();
   }
 
   String _codeChallenge(String verifier) {

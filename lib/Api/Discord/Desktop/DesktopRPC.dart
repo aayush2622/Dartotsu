@@ -65,11 +65,7 @@ class DesktopRPC extends GetxController implements BaseDiscordRPC {
     final safeCurrent = (currentTime ?? 0).clamp(0, endTime ?? 1440);
 
     final start = now.subtract(Duration(seconds: safeCurrent));
-    final end = now.add(
-      Duration(
-        seconds: (endTime ?? 1440) - safeCurrent,
-      ),
-    );
+    final end = now.add(Duration(seconds: (endTime ?? 1440) - safeCurrent));
 
     _lastActivity = RPCActivity(
       activityType: ActivityType.watching,

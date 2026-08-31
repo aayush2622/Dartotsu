@@ -37,7 +37,10 @@ final ThemeData blueLightTheme = ThemeData(
   ),
   textTheme: const TextTheme(
     headlineLarge: TextStyle(
-        color: Color(0xFFFFFFFF), fontSize: 20, fontWeight: FontWeight.bold),
+      color: Color(0xFFFFFFFF),
+      fontSize: 20,
+      fontWeight: FontWeight.bold,
+    ),
     bodyLarge: TextStyle(color: Color(0xFF191C1E)),
   ),
   fontFamily: 'Poppins',
@@ -80,7 +83,10 @@ final ThemeData blueDarkTheme = ThemeData(
   ),
   textTheme: const TextTheme(
     headlineLarge: TextStyle(
-        color: Color(0xFF00344C), fontSize: 20, fontWeight: FontWeight.bold),
+      color: Color(0xFF00344C),
+      fontSize: 20,
+      fontWeight: FontWeight.bold,
+    ),
     bodyLarge: TextStyle(color: Color(0xFFE2E2E5)),
   ),
   fontFamily: 'Poppins',

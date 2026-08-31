@@ -55,10 +55,7 @@ class HomeHeader extends StatelessWidget {
               onPressed: () => navigateToPage(context, const SearchScreen()),
             ),
             const SizedBox(width: 4),
-            _Avatar(
-              url: user?.avatar,
-              onTap: () => _accountSheet(context),
-            ),
+            _Avatar(url: user?.avatar, onTap: () => _accountSheet(context)),
           ],
         );
       }),
@@ -88,7 +85,9 @@ class HomeHeader extends StatelessWidget {
               leading: _Avatar(url: user?.avatar, size: 40),
               title: Text(user?.name ?? 'Guest'),
               subtitle: user != null
-                  ? Text('${user.episodesWatched} eps · ${user.chaptersRead} ch')
+                  ? Text(
+                      '${user.episodesWatched} eps · ${user.chaptersRead} ch',
+                    )
                   : null,
             );
           }),
@@ -161,8 +160,6 @@ class _Avatar extends StatelessWidget {
             : cachedNetworkImage(imageUrl: url, fit: BoxFit.cover),
       ),
     );
-    return onTap == null
-        ? child
-        : GestureDetector(onTap: onTap, child: child);
+    return onTap == null ? child : GestureDetector(onTap: onTap, child: child);
   }
 }

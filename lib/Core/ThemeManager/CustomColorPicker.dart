@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 
 import 'LanguageSwitcher.dart';
 
-Future<Color?> showColorPickerDialog(BuildContext context, Color initialColor,
-    {bool showTransparent = true}) async {
+Future<Color?> showColorPickerDialog(
+  BuildContext context,
+  Color initialColor, {
+  bool showTransparent = true,
+}) async {
   Color selectedColor = initialColor;
   var theme = Theme.of(context).colorScheme;
   final Color? result = await showDialog<Color>(
@@ -13,10 +16,7 @@ Future<Color?> showColorPickerDialog(BuildContext context, Color initialColor,
       return AlertDialog(
         title: Text(
           getString.pickColor,
-          style: TextStyle(
-            color: theme.primary,
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(color: theme.primary, fontWeight: FontWeight.bold),
         ),
         content: SingleChildScrollView(
           child: ColorPicker(

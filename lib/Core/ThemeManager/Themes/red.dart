@@ -38,7 +38,10 @@ final ThemeData redLightTheme = ThemeData(
   ),
   textTheme: const TextTheme(
     headlineLarge: TextStyle(
-        color: Color(0xFF201A19), fontSize: 20, fontWeight: FontWeight.bold),
+      color: Color(0xFF201A19),
+      fontSize: 20,
+      fontWeight: FontWeight.bold,
+    ),
     bodyLarge: TextStyle(color: Color(0xFF201A19)),
   ),
   fontFamily: 'Poppins',
@@ -82,7 +85,10 @@ final ThemeData redDarkTheme = ThemeData(
   ),
   textTheme: const TextTheme(
     headlineLarge: TextStyle(
-        color: Color(0xFFEDE0DE), fontSize: 20, fontWeight: FontWeight.bold),
+      color: Color(0xFFEDE0DE),
+      fontSize: 20,
+      fontWeight: FontWeight.bold,
+    ),
     bodyLarge: TextStyle(color: Color(0xFFEDE0DE)),
   ),
   fontFamily: 'Poppins',

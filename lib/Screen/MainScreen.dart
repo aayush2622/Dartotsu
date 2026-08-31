@@ -20,14 +20,14 @@ class MainScreenState extends BaseScreen<MainScreen> {
   static const _tabs = [AnimeTab(), HomeTab(), MangaTab()];
 
   Widget get _navbar => Obx(
-        () => FloatingBottomNavBar(
-          selectedIndex: _tab.value,
-          onTabSelected: (i) {
-            _built.add(i);
-            _tab.value = i;
-          },
-        ),
-      );
+    () => FloatingBottomNavBar(
+      selectedIndex: _tab.value,
+      onTabSelected: (i) {
+        _built.add(i);
+        _tab.value = i;
+      },
+    ),
+  );
 
   @override
   Widget buildContent(BuildContext context) {

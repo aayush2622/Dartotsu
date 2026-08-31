@@ -22,9 +22,7 @@ ThemeData getCustomLightTheme(int color) {
         fontSize: 20,
         fontWeight: FontWeight.bold,
       ),
-      bodyLarge: TextStyle(
-        color: theme.onSurface,
-      ),
+      bodyLarge: TextStyle(color: theme.onSurface),
     ),
     fontFamily: 'Poppins',
   );
@@ -51,9 +49,7 @@ ThemeData getCustomDarkTheme(int color) {
         fontSize: 20,
         fontWeight: FontWeight.bold,
       ),
-      bodyLarge: TextStyle(
-        color: theme.onSurface,
-      ),
+      bodyLarge: TextStyle(color: theme.onSurface),
     ),
     fontFamily: 'Poppins',
   );
@@ -78,9 +74,7 @@ Future<ThemeData> getImageDarkTheme(String imageUrl) async {
         fontSize: 20,
         fontWeight: FontWeight.bold,
       ),
-      bodyLarge: TextStyle(
-        color: colorScheme.onSurface,
-      ),
+      bodyLarge: TextStyle(color: colorScheme.onSurface),
     ),
     fontFamily: 'Poppins',
   );
@@ -105,16 +99,16 @@ Future<ThemeData> getImageLightTheme(String imageUrl) async {
         fontSize: 20,
         fontWeight: FontWeight.bold,
       ),
-      bodyLarge: TextStyle(
-        color: colorScheme.onSurface,
-      ),
+      bodyLarge: TextStyle(color: colorScheme.onSurface),
     ),
     fontFamily: 'Poppins',
   );
 }
 
 Future<ColorScheme> getImageMainColor(
-    String imageUrl, Brightness brightness) async {
+  String imageUrl,
+  Brightness brightness,
+) async {
   return await ColorScheme.fromImageProvider(
     provider: CachedNetworkImageProvider(imageUrl),
     brightness: brightness,

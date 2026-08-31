@@ -7,7 +7,7 @@ part 'DefaultPlayerSettings.g.dart';
 class PlayerSettings {
   String speed;
   int resizeMode;
-//  bool useCustomMpvConfig;
+  //  bool useCustomMpvConfig;
 
   // subtitlesSettings
   bool showSubtitle;

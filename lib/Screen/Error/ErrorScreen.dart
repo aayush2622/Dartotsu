@@ -33,8 +33,7 @@ class ErrorScreen extends StatefulWidget {
 }
 
 class _ErrorScreenState extends State<ErrorScreen> {
-  late final List<TextSpan> _stackSpans =
-      _colorizeErrorText(widget.stackTrace);
+  late final List<TextSpan> _stackSpans = _colorizeErrorText(widget.stackTrace);
 
   @override
   void dispose() {

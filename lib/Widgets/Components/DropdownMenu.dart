@@ -50,8 +50,10 @@ class BuildDropdownMenu extends StatelessWidget {
           inputDecorationTheme: InputDecorationTheme(
             filled: true,
             fillColor: theme.cardColor,
-            contentPadding:
-                const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 14,
+            ),
             border: _border(colorScheme, false),
             focusedBorder: _border(colorScheme, true),
           ),
@@ -62,9 +64,7 @@ class BuildDropdownMenu extends StatelessWidget {
             elevation: const WidgetStatePropertyAll(6),
             backgroundColor: WidgetStatePropertyAll(theme.cardColor),
             shape: WidgetStatePropertyAll(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(18),
-              ),
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
             ),
           ),
           onSelected: (v) {

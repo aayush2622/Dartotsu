@@ -44,10 +44,12 @@ class MediaServiceController extends GetxController {
     return null;
   }
 
-  T get<T extends MediaService>() => services.firstWhere(
-        (s) => s is T,
-        orElse: () => throw StateError('Service $T not registered'),
-      ) as T;
+  T get<T extends MediaService>() =>
+      services.firstWhere(
+            (s) => s is T,
+            orElse: () => throw StateError('Service $T not registered'),
+          )
+          as T;
 
   MediaService? _byId(String id) =>
       services.firstWhereOrNull((s) => s.id == id);

@@ -205,9 +205,7 @@ class _SettingsBodyState extends BaseScreen<_SettingsBody> {
             ListTile(
               contentPadding: EdgeInsets.zero,
               leading: Icon(
-                handler.isLoggedIn
-                    ? Icons.logout_rounded
-                    : Icons.login_rounded,
+                handler.isLoggedIn ? Icons.logout_rounded : Icons.login_rounded,
               ),
               title: Text(handler.isLoggedIn ? 'Log out' : 'Log in'),
               onTap: () {
@@ -226,25 +224,25 @@ class _SettingsBodyState extends BaseScreen<_SettingsBody> {
   }
 
   Widget _section(String title, List<Widget> children) => Padding(
-        padding: const EdgeInsets.only(bottom: 16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(4, 8, 4, 8),
-              child: Text(
-                title,
-                style: context.textTheme.titleSmall?.copyWith(
-                  color: context.colorScheme.primary,
-                ),
-              ),
+    padding: const EdgeInsets.only(bottom: 16),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.fromLTRB(4, 8, 4, 8),
+          child: Text(
+            title,
+            style: context.textTheme.titleSmall?.copyWith(
+              color: context.colorScheme.primary,
             ),
-            ThemedContainer(
-              borderRadius: BorderRadius.circular(20),
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: Column(children: children),
-            ),
-          ],
+          ),
         ),
-      );
+        ThemedContainer(
+          borderRadius: BorderRadius.circular(20),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          child: Column(children: children),
+        ),
+      ],
+    ),
+  );
 }

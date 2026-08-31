@@ -131,23 +131,23 @@ class _MediaRailsScreenState extends State<MediaRailsScreen>
   }
 
   Widget _errorBox(String text) => Padding(
-        padding: const EdgeInsets.fromLTRB(24, 80, 24, 24),
-        child: Column(
-          children: [
-            Icon(Icons.cloud_off_rounded,
-                size: 40, color: context.colorScheme.onSurfaceVariant),
-            const SizedBox(height: 12),
-            Text(
-              text,
-              textAlign: TextAlign.center,
-              style: context.textTheme.bodyMedium,
-            ),
-            const SizedBox(height: 12),
-            FilledButton.tonal(
-              onPressed: _load,
-              child: const Text('Retry'),
-            ),
-          ],
+    padding: const EdgeInsets.fromLTRB(24, 80, 24, 24),
+    child: Column(
+      children: [
+        Icon(
+          Icons.cloud_off_rounded,
+          size: 40,
+          color: context.colorScheme.onSurfaceVariant,
         ),
-      );
+        const SizedBox(height: 12),
+        Text(
+          text,
+          textAlign: TextAlign.center,
+          style: context.textTheme.bodyMedium,
+        ),
+        const SizedBox(height: 12),
+        FilledButton.tonal(onPressed: _load, child: const Text('Retry')),
+      ],
+    ),
+  );
 }

@@ -53,15 +53,9 @@ class _DetailScreenState extends State<DetailScreen> {
         if (!find<AnilistAuth>().isLoggedIn) return const SizedBox.shrink();
         final m = _media.value;
         return FloatingActionButton.extended(
-          onPressed: () => showListEditor(
-            context,
-            media: m,
-            api: _api,
-            onSaved: _fetch,
-          ),
-          icon: Icon(
-            m.userStatus == null ? Icons.add : Icons.edit_rounded,
-          ),
+          onPressed: () =>
+              showListEditor(context, media: m, api: _api, onSaved: _fetch),
+          icon: Icon(m.userStatus == null ? Icons.add : Icons.edit_rounded),
           label: Text(_statusLabel(m.userStatus)),
         );
       }),
@@ -72,8 +66,7 @@ class _DetailScreenState extends State<DetailScreen> {
           children: [
             _appBar(m),
             SliverToBoxAdapter(child: _headerCard(m)),
-            if (m.genres.isNotEmpty)
-              SliverToBoxAdapter(child: _genres(m)),
+            if (m.genres.isNotEmpty) SliverToBoxAdapter(child: _genres(m)),
             if ((m.description ?? '').isNotEmpty)
               SliverToBoxAdapter(child: _description(m)),
             if ((m.characters ?? []).isNotEmpty)
@@ -126,10 +119,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
-                  colors: [
-                    Colors.transparent,
-                    context.colorScheme.surface,
-                  ],
+                  colors: [Colors.transparent, context.colorScheme.surface],
                 ),
               ),
             ),
@@ -198,71 +188,69 @@ class _DetailScreenState extends State<DetailScreen> {
   }
 
   Widget _meta(IconData? icon, String text) => Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          if (icon != null) ...[
-            Icon(icon, size: 15, color: context.colorScheme.primary),
-            const SizedBox(width: 3),
-          ],
-          Text(text, style: context.textTheme.labelMedium),
-        ],
-      );
+    mainAxisSize: MainAxisSize.min,
+    children: [
+      if (icon != null) ...[
+        Icon(icon, size: 15, color: context.colorScheme.primary),
+        const SizedBox(width: 3),
+      ],
+      Text(text, style: context.textTheme.labelMedium),
+    ],
+  );
 
   Widget _genres(Media m) => Padding(
-        padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
-        child: Wrap(
-          spacing: 8,
-          runSpacing: 8,
-          children: [
-            for (final g in m.genres)
-              Chip(
-                label: Text(g, style: context.textTheme.labelMedium),
-                visualDensity: VisualDensity.compact,
-                side: BorderSide(
-                  color: context.colorScheme.outlineVariant,
-                ),
-              ),
-          ],
-        ),
-      );
+    padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
+    child: Wrap(
+      spacing: 8,
+      runSpacing: 8,
+      children: [
+        for (final g in m.genres)
+          Chip(
+            label: Text(g, style: context.textTheme.labelMedium),
+            visualDensity: VisualDensity.compact,
+            side: BorderSide(color: context.colorScheme.outlineVariant),
+          ),
+      ],
+    ),
+  );
 
   Widget _description(Media m) => Padding(
-        padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-        child: _Expandable(text: m.description!.stripHtml),
-      );
+    padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+    child: _Expandable(text: m.description!.stripHtml),
+  );
 
   Widget _characters(List<Character> chars) => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(24, 8, 16, 8),
-            child: Text('Characters', style: context.textTheme.titleMedium),
-          ),
-          SizedBox(
-            height: 150,
-            child: ListView.separated(
-              scrollDirection: Axis.horizontal,
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              itemCount: chars.length,
-              separatorBuilder: (_, i) => const SizedBox(width: 12),
-              itemBuilder: (_, i) => _CharacterCard(character: chars[i]),
-            ),
-          ),
-        ],
-      );
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Padding(
+        padding: const EdgeInsets.fromLTRB(24, 8, 16, 8),
+        child: Text('Characters', style: context.textTheme.titleMedium),
+      ),
+      SizedBox(
+        height: 150,
+        child: ListView.separated(
+          scrollDirection: Axis.horizontal,
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          itemCount: chars.length,
+          separatorBuilder: (_, i) => const SizedBox(width: 12),
+          itemBuilder: (_, i) => _CharacterCard(character: chars[i]),
+        ),
+      ),
+    ],
+  );
 
   void _open(BuildContext context, int index, Media media) =>
       navigateToPage(context, DetailScreen(media: media));
 
   static String _statusLabel(String? status) => switch (status) {
-        'CURRENT' => 'Watching',
-        'PLANNING' => 'Planned',
-        'COMPLETED' => 'Completed',
-        'PAUSED' => 'Paused',
-        'DROPPED' => 'Dropped',
-        'REPEATING' => 'Rewatching',
-        _ => 'Add to List',
-      };
+    'CURRENT' => 'Watching',
+    'PLANNING' => 'Planned',
+    'COMPLETED' => 'Completed',
+    'PAUSED' => 'Paused',
+    'DROPPED' => 'Dropped',
+    'REPEATING' => 'Rewatching',
+    _ => 'Add to List',
+  };
 }
 
 class _Expandable extends StatefulWidget {

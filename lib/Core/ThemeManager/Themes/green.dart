@@ -40,7 +40,10 @@ final ThemeData greenLightTheme = ThemeData(
   ),
   textTheme: const TextTheme(
     headlineLarge: TextStyle(
-        color: Color(0xFF1B1C18), fontSize: 20, fontWeight: FontWeight.bold),
+      color: Color(0xFF1B1C18),
+      fontSize: 20,
+      fontWeight: FontWeight.bold,
+    ),
     bodyLarge: TextStyle(color: Color(0xFF1B1C18)),
   ),
   fontFamily: 'Poppins',
@@ -86,7 +89,10 @@ final ThemeData greenDarkTheme = ThemeData(
   ),
   textTheme: const TextTheme(
     headlineLarge: TextStyle(
-        color: Color(0xFF1D3700), fontSize: 20, fontWeight: FontWeight.bold),
+      color: Color(0xFF1D3700),
+      fontSize: 20,
+      fontWeight: FontWeight.bold,
+    ),
     bodyLarge: TextStyle(color: Color(0xFFE3E3DB)),
   ),
   fontFamily: 'Poppins',

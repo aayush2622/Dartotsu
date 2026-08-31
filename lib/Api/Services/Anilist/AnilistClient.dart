@@ -29,7 +29,9 @@ class AnilistClient {
   }) async {
     final nowSec = DateTime.now().millisecondsSinceEpoch ~/ 1000;
     if (_rateLimitResetEpoch > nowSec) {
-      throw AnilistException('Rate limited, wait ${_rateLimitResetEpoch - nowSec}s');
+      throw AnilistException(
+        'Rate limited, wait ${_rateLimitResetEpoch - nowSec}s',
+      );
     }
 
     final token = _tokenProvider();

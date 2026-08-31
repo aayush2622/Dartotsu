@@ -27,9 +27,12 @@ class LogInterceptor extends Interceptor {
       '${ms != null ? ' (${ms}ms)' : ''}',
     );
 
-    final cloudflare = [403, 503].contains(response.statusCode) &&
-        ["cloudflare-nginx", "cloudflare"]
-            .contains(response.headerMap['server']?.toLowerCase());
+    final cloudflare =
+        [403, 503].contains(response.statusCode) &&
+        [
+          "cloudflare-nginx",
+          "cloudflare",
+        ].contains(response.headerMap['server']?.toLowerCase());
 
     if (cloudflare) snackString('  ⚠️ Detected Cloudflare protection');
 

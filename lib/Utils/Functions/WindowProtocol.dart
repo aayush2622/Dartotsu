@@ -8,11 +8,7 @@ final _hive = HKEY_CURRENT_USER;
 
 class WindowsProtocolHandler extends ProtocolHandler {
   @override
-  void register(
-    String scheme, {
-    String? executable,
-    List<String>? arguments,
-  }) {
+  void register(String scheme, {String? executable, List<String>? arguments}) {
     if (defaultTargetPlatform != TargetPlatform.windows) return;
 
     final prefix = _regPrefix(scheme);
@@ -34,10 +30,7 @@ class WindowsProtocolHandler extends ProtocolHandler {
     final keyPtr = _regPrefix(scheme).toNativeUtf16();
 
     try {
-      RegDeleteTree(
-        HKEY_CURRENT_USER,
-        PCWSTR(keyPtr),
-      );
+      RegDeleteTree(HKEY_CURRENT_USER, PCWSTR(keyPtr));
     } finally {
       calloc.free(keyPtr);
     }
@@ -78,11 +71,7 @@ class WindowsProtocolHandler extends ProtocolHandler {
 }
 
 abstract class ProtocolHandler {
-  void register(
-    String scheme, {
-    String? executable,
-    List<String>? arguments,
-  });
+  void register(String scheme, {String? executable, List<String>? arguments});
 
   void unregister(String scheme);
 
@@ -90,9 +79,7 @@ abstract class ProtocolHandler {
     if (arguments == null) return ['%s'];
 
     if (arguments.isEmpty || !arguments.any((e) => e.contains('%s'))) {
-      throw ArgumentError(
-        'arguments must contain at least 1 instance of "%s"',
-      );
+      throw ArgumentError('arguments must contain at least 1 instance of "%s"');
     }
 
     return arguments;
@@ -116,12 +103,7 @@ class WindowsFileAssociationHandler {
     final exe = executable ?? Platform.resolvedExecutable;
     final args = (arguments ?? ['"%1"']).join(' ');
 
-    _regCreateStringKey(
-      _hive,
-      'SOFTWARE\\Classes\\$extension',
-      '',
-      progId,
-    );
+    _regCreateStringKey(_hive, 'SOFTWARE\\Classes\\$extension', '', progId);
 
     _regCreateStringKey(
       _hive,

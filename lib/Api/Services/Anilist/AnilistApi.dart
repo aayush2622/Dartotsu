@@ -78,8 +78,8 @@ $userLists
     final rails = <MediaRail>[];
 
     if (loggedIn) {
-      final lists = (data['userList'] as Map<String, dynamic>?)?['lists']
-              as List? ??
+      final lists =
+          (data['userList'] as Map<String, dynamic>?)?['lists'] as List? ??
           const [];
       final byStatus = <String, List<Media>>{};
       for (final l in lists.cast<Map<String, dynamic>>()) {
@@ -150,12 +150,13 @@ $userLists
     }
 
     List<Media> collection(String key) {
-      final lists = (data[key] as Map<String, dynamic>?)?['lists'] as List? ??
-          const [];
+      final lists =
+          (data[key] as Map<String, dynamic>?)?['lists'] as List? ?? const [];
       final out = <Media>[];
       for (final l in lists.cast<Map<String, dynamic>>()) {
-        for (final e in (l['entries'] as List? ?? const [])
-            .cast<Map<String, dynamic>>()) {
+        for (final e
+            in (l['entries'] as List? ?? const [])
+                .cast<Map<String, dynamic>>()) {
           final m = e['media'] as Map<String, dynamic>?;
           if (m != null) out.add(mapAnilistMedia(m));
         }
@@ -244,8 +245,9 @@ query (\$userId: Int, \$type: MediaType, \$status: [MediaListStatus]) {
       },
     );
 
-    final lists = (data['MediaListCollection']
-            as Map<String, dynamic>?)?['lists'] as List? ??
+    final lists =
+        (data['MediaListCollection'] as Map<String, dynamic>?)?['lists']
+            as List? ??
         const [];
     final out = <Media>[];
     for (final list in lists.cast<Map<String, dynamic>>()) {
@@ -277,8 +279,8 @@ query (\$search: String, \$page: Int) {
       query,
       variables: {'search': term, 'page': page},
     );
-    final list = (data['Page'] as Map<String, dynamic>?)?['media'] as List? ??
-        const [];
+    final list =
+        (data['Page'] as Map<String, dynamic>?)?['media'] as List? ?? const [];
     return list
         .cast<Map<String, dynamic>>()
         .map((e) => mapAnilistMedia(e))

@@ -17,13 +17,12 @@ Future<void> openLinkInBrowser(String url) async {
 }
 
 void shareLink(String link) => SharePlus.instance.share(
-      ShareParams(uri: Uri.parse(link), downloadFallbackEnabled: true),
-    );
+  ShareParams(uri: Uri.parse(link), downloadFallbackEnabled: true),
+);
 
 void shareFile(String path, String text) => SharePlus.instance.share(
-      ShareParams(
-          text: text, files: [XFile(path)], downloadFallbackEnabled: true),
-    );
+  ShareParams(text: text, files: [XFile(path)], downloadFallbackEnabled: true),
+);
 
 Future<String?> loadEnv(String prop) async {
   try {

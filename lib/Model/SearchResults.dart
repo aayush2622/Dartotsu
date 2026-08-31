@@ -169,5 +169,5 @@ enum SearchType {
   CHARACTER,
   STAFF,
   STUDIO,
-  USER
+  USER,
 }

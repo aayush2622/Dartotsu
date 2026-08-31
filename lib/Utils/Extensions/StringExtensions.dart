@@ -48,9 +48,9 @@ extension StringExtensions on String {
 
   String replaceForbiddenCharacters(String source) {
     return replaceAll(
-        RegExp(
-            r'[\\/:*?"<>|\0]|(^CON$|^PRN$|^AUX$|^NUL$|^COM[1-9]$|^LPT[1-9]$)'),
-        source);
+      RegExp(r'[\\/:*?"<>|\0]|(^CON$|^PRN$|^AUX$|^NUL$|^COM[1-9]$|^LPT[1-9]$)'),
+      source,
+    );
   }
 
   String get getUrlWithoutDomain {
@@ -66,13 +66,15 @@ extension StringExtensions on String {
   }
 
   bool isMediaVideo() {
-    return videoExtensions
-        .any((extension) => toLowerCase().endsWith(extension));
+    return videoExtensions.any(
+      (extension) => toLowerCase().endsWith(extension),
+    );
   }
 
   bool isImage() {
-    return imageExtensions
-        .any((extension) => toLowerCase().endsWith(extension));
+    return imageExtensions.any(
+      (extension) => toLowerCase().endsWith(extension),
+    );
   }
 
   String get stripHtml => replaceAll(RegExp(r'<\s*br\s*/?\s*>'), '\n')
@@ -100,7 +102,7 @@ var videoExtensions = [
   "mp4",
   "wmv",
   "mkv",
-  "mov"
+  "mov",
 ];
 var audioExtensions = [
   "mp3",
@@ -111,7 +113,7 @@ var audioExtensions = [
   "m4a",
   "opus",
   "wma",
-  "alac"
+  "alac",
 ];
 var imageExtensions = [
   "jpg",
@@ -121,5 +123,5 @@ var imageExtensions = [
   "bmp",
   "webp",
   "tiff",
-  "svg"
+  "svg",
 ];

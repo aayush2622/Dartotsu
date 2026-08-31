@@ -25,8 +25,9 @@ class AnalyticsManager extends GetxController {
       await Firebase.initializeApp(
         options: DefaultFirebaseOptions.currentPlatform,
       );
-      await FirebaseCrashlytics.instance
-          .setCrashlyticsCollectionEnabled(!kDebugMode);
+      await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(
+        !kDebugMode,
+      );
       logger('Firebase initialized');
     } catch (e, s) {
       _disabled = true;
@@ -44,7 +45,11 @@ class AnalyticsManager extends GetxController {
     await _ready.future;
     if (_disabled) return;
     try {
-      await FirebaseCrashlytics.instance.recordError(error, stack, fatal: fatal);
+      await FirebaseCrashlytics.instance.recordError(
+        error,
+        stack,
+        fatal: fatal,
+      );
     } catch (_) {}
   }
 }

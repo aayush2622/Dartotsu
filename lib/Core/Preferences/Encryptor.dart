@@ -28,10 +28,7 @@ class Crypto {
       macAlgorithm: Hmac.sha256(),
       iterations: 100000,
       bits: 256,
-    ).deriveKey(
-      secretKey: SecretKey(utf8.encode(filePassword)),
-      nonce: salt,
-    );
+    ).deriveKey(secretKey: SecretKey(utf8.encode(filePassword)), nonce: salt);
 
     final encrypted = await _algo.encrypt(
       utf8.encode(compressedBase64),
@@ -40,8 +37,9 @@ class Crypto {
     );
     final now = DateTime.now();
     final localNow = now.toLocal();
-    final formattedTime =
-        DateFormat('dd MMM yyyy, hh:mm:ss a').format(localNow);
+    final formattedTime = DateFormat(
+      'dd MMM yyyy, hh:mm:ss a',
+    ).format(localNow);
     return {
       'version': 1,
       'salt': base64Encode(salt),
@@ -73,8 +71,9 @@ class Crypto {
     }
     final salt = base64Decode(json['salt']);
     final nonce = base64Decode(json['nonce']);
-    final filePassword =
-        json['passwordType'] == 'default' ? 'dartotsu' : password;
+    final filePassword = json['passwordType'] == 'default'
+        ? 'dartotsu'
+        : password;
 
     if (filePassword == null) {
       throw Exception('Password required for decryption');
@@ -84,10 +83,7 @@ class Crypto {
       macAlgorithm: Hmac.sha256(),
       iterations: 100000,
       bits: 256,
-    ).deriveKey(
-      secretKey: SecretKey(utf8.encode(filePassword)),
-      nonce: salt,
-    );
+    ).deriveKey(secretKey: SecretKey(utf8.encode(filePassword)), nonce: salt);
 
     final secretBox = SecretBox(
       base64Decode(json['cipherText']),
@@ -95,10 +91,7 @@ class Crypto {
       mac: Mac(base64Decode(json['mac'])),
     );
 
-    final decryptedBytes = await _algo.decrypt(
-      secretBox,
-      secretKey: key,
-    );
+    final decryptedBytes = await _algo.decrypt(secretBox, secretKey: key);
 
     final compressedBytes = base64Decode(utf8.decode(decryptedBytes));
 
