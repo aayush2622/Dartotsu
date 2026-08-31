@@ -33,13 +33,30 @@ class AppLocalizationsNe extends AppLocalizations {
   String get login => 'लगइन';
 
   @override
-  String loginTo(String service) {
-    return '$service मा लगइन गर्नुहोस्';
+  String get continueAsGuest => 'Continue as guest';
+
+  @override
+  String get getStarted => 'Get Started';
+
+  @override
+  String get loginWithToken => 'Login with token';
+
+  @override
+  String get pasteTokenHint => 'Paste your access token';
+
+  @override
+  String loggedInAs(Object name) {
+    return 'Logged in as $name';
   }
 
   @override
   String logout(String type) {
     return 'लगआउट $type';
+  }
+
+  @override
+  String loginTo(String service) {
+    return '$service मा लगइन गर्नुहोस्';
   }
 
   @override

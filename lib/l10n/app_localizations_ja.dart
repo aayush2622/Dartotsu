@@ -33,13 +33,30 @@ class AppLocalizationsJa extends AppLocalizations {
   String get login => 'ログイン';
 
   @override
-  String loginTo(String service) {
-    return '$serviceにログイン';
+  String get continueAsGuest => 'Continue as guest';
+
+  @override
+  String get getStarted => 'Get Started';
+
+  @override
+  String get loginWithToken => 'Login with token';
+
+  @override
+  String get pasteTokenHint => 'Paste your access token';
+
+  @override
+  String loggedInAs(Object name) {
+    return 'Logged in as $name';
   }
 
   @override
   String logout(String type) {
     return 'ログアウト $type';
+  }
+
+  @override
+  String loginTo(String service) {
+    return '$serviceにログイン';
   }
 
   @override

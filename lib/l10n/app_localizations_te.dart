@@ -34,13 +34,30 @@ class AppLocalizationsTe extends AppLocalizations {
   String get login => 'లాగిన్';
 
   @override
-  String loginTo(String service) {
-    return '$service లో లాగిన్ చేయండి';
+  String get continueAsGuest => 'Continue as guest';
+
+  @override
+  String get getStarted => 'Get Started';
+
+  @override
+  String get loginWithToken => 'Login with token';
+
+  @override
+  String get pasteTokenHint => 'Paste your access token';
+
+  @override
+  String loggedInAs(Object name) {
+    return 'Logged in as $name';
   }
 
   @override
   String logout(String type) {
     return '$type లాగౌట్';
+  }
+
+  @override
+  String loginTo(String service) {
+    return '$service లో లాగిన్ చేయండి';
   }
 
   @override

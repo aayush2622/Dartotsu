@@ -34,13 +34,30 @@ class AppLocalizationsHr extends AppLocalizations {
   String get login => 'Prijava';
 
   @override
-  String loginTo(String service) {
-    return 'Prijavi se na $service';
+  String get continueAsGuest => 'Continue as guest';
+
+  @override
+  String get getStarted => 'Get Started';
+
+  @override
+  String get loginWithToken => 'Login with token';
+
+  @override
+  String get pasteTokenHint => 'Paste your access token';
+
+  @override
+  String loggedInAs(Object name) {
+    return 'Logged in as $name';
   }
 
   @override
   String logout(String type) {
     return 'Odjavi se $type';
+  }
+
+  @override
+  String loginTo(String service) {
+    return 'Prijavi se na $service';
   }
 
   @override

@@ -34,13 +34,30 @@ class AppLocalizationsTh extends AppLocalizations {
   String get login => 'เข้าสู่ระบบ';
 
   @override
-  String loginTo(String service) {
-    return 'เข้าสู่ระบบ $service';
+  String get continueAsGuest => 'Continue as guest';
+
+  @override
+  String get getStarted => 'Get Started';
+
+  @override
+  String get loginWithToken => 'Login with token';
+
+  @override
+  String get pasteTokenHint => 'Paste your access token';
+
+  @override
+  String loggedInAs(Object name) {
+    return 'Logged in as $name';
   }
 
   @override
   String logout(String type) {
     return 'ออกจากระบบ $type';
+  }
+
+  @override
+  String loginTo(String service) {
+    return 'เข้าสู่ระบบ $service';
   }
 
   @override

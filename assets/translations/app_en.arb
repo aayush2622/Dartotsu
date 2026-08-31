@@ -17,6 +17,20 @@
 
   "login": "Login",
   "@login": {},
+  "continueAsGuest": "Continue as guest",
+  "@continueAsGuest": {},
+  "getStarted": "Get Started",
+  "@getStarted": {},
+  "loginWithToken": "Login with token",
+  "@loginWithToken": {},
+  "pasteTokenHint": "Paste your access token",
+  "@pasteTokenHint": {},
+  "loggedInAs": "Logged in as {name}",
+  "@loggedInAs": {
+    "placeholders": { "name": {} }
+  },
+  "logout": "Log out",
+  "@logout": {},
   "loginTo": "Login to {service}",
   "@loginTo": {
     "placeholders": {

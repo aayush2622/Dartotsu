@@ -34,13 +34,30 @@ class AppLocalizationsEs extends AppLocalizations {
   String get login => 'Iniciar Sesión';
 
   @override
-  String loginTo(String service) {
-    return 'Iniciar sesión en $service';
+  String get continueAsGuest => 'Continue as guest';
+
+  @override
+  String get getStarted => 'Get Started';
+
+  @override
+  String get loginWithToken => 'Login with token';
+
+  @override
+  String get pasteTokenHint => 'Paste your access token';
+
+  @override
+  String loggedInAs(Object name) {
+    return 'Logged in as $name';
   }
 
   @override
   String logout(String type) {
     return 'Cerrar sesión $type';
+  }
+
+  @override
+  String loginTo(String service) {
+    return 'Iniciar sesión en $service';
   }
 
   @override

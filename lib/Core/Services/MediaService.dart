@@ -1,3 +1,4 @@
+export 'Features/LoginHandler.dart';
 export 'Features/NavbarProvider.dart';
 
 /// A media-tracking backend: AniList, MyAnimeList, Simkl, or the on-device

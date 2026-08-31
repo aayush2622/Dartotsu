@@ -33,13 +33,30 @@ class AppLocalizationsPt extends AppLocalizations {
   String get login => 'Entrar';
 
   @override
-  String loginTo(String service) {
-    return 'Conecte-se ao $service';
+  String get continueAsGuest => 'Continue as guest';
+
+  @override
+  String get getStarted => 'Get Started';
+
+  @override
+  String get loginWithToken => 'Login with token';
+
+  @override
+  String get pasteTokenHint => 'Paste your access token';
+
+  @override
+  String loggedInAs(Object name) {
+    return 'Logged in as $name';
   }
 
   @override
   String logout(String type) {
     return 'Sair de $type';
+  }
+
+  @override
+  String loginTo(String service) {
+    return 'Conecte-se ao $service';
   }
 
   @override
@@ -884,13 +901,13 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get login => 'Login';
 
   @override
-  String loginTo(String service) {
-    return 'Entrar no $service';
+  String logout(String type) {
+    return 'Sair $type';
   }
 
   @override
-  String logout(String type) {
-    return 'Sair $type';
+  String loginTo(String service) {
+    return 'Entrar no $service';
   }
 
   @override
