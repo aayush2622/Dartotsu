@@ -30,12 +30,12 @@ class ThemeController extends GetxController {
   ThemeMode get themeMode => mode.value.themeMode;
 
   bool get isDarkModeActive => switch (mode.value) {
-        ThemeModePref.dark => true,
-        ThemeModePref.light => false,
-        ThemeModePref.system =>
-          WidgetsBinding.instance.platformDispatcher.platformBrightness ==
-              Brightness.dark,
-      };
+    ThemeModePref.dark => true,
+    ThemeModePref.light => false,
+    ThemeModePref.system =>
+      WidgetsBinding.instance.platformDispatcher.platformBrightness ==
+          Brightness.dark,
+  };
 
   // -- memoized theme data --------------------------------------------------
 
@@ -98,9 +98,8 @@ class ThemeController extends GetxController {
     if (value == ThemeModePref.light) isOled.value = false;
   }
 
-  void toggleDarkMode() => setThemeMode(
-        isDarkModeActive ? ThemeModePref.light : ThemeModePref.dark,
-      );
+  void toggleDarkMode() =>
+      setThemeMode(isDarkModeActive ? ThemeModePref.light : ThemeModePref.dark);
 
   void setOled(bool value) {
     isOled.value = value;

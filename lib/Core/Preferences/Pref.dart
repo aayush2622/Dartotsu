@@ -26,8 +26,8 @@ class Pref<T> {
   final PrefDecode<T>? decode;
 
   const Pref(this.key, this.defaultValue, this.location)
-      : encode = null,
-        decode = null;
+    : encode = null,
+      decode = null;
 
   const Pref.coded(
     this.key,
@@ -62,10 +62,8 @@ Pref<E> enumPref<E extends Enum>(
     defaultValue,
     location,
     encode: (e) => e.name,
-    decode: (raw) => values.firstWhere(
-      (e) => e.name == raw,
-      orElse: () => defaultValue,
-    ),
+    decode: (raw) =>
+        values.firstWhere((e) => e.name == raw, orElse: () => defaultValue),
   );
 }
 
@@ -82,8 +80,7 @@ Pref<T> jsonPref<T>(
     defaultValue,
     location,
     encode: (v) => toJson(v),
-    decode: (raw) => raw is Map
-        ? fromJson(Map<String, dynamic>.from(raw))
-        : defaultValue,
+    decode: (raw) =>
+        raw is Map ? fromJson(Map<String, dynamic>.from(raw)) : defaultValue,
   );
 }

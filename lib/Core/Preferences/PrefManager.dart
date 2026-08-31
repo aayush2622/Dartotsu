@@ -15,10 +15,6 @@ export 'Pref.dart' show Pref, PrefLocation, enumPref, jsonPref;
 
 part 'Preferences.dart';
 
-// ---------------------------------------------------------------------------
-// Free-function shims (kept for the existing call sites)
-// ---------------------------------------------------------------------------
-
 T loadData<T>(Pref<T> pref) => PrefManager.getVal(pref);
 
 void saveData<T>(Pref<T> pref, T value) => PrefManager.setVal(pref, value);
@@ -29,27 +25,22 @@ T? loadCustomData<T>(
   String key, {
   T? defaultValue,
   PrefLocation location = PrefLocation.OTHER,
-}) =>
-    PrefManager.getCustomVal<T>(
-      key,
-      defaultValue: defaultValue,
-      location: location,
-    );
+}) => PrefManager.getCustomVal<T>(
+  key,
+  defaultValue: defaultValue,
+  location: location,
+);
 
 void saveCustomData<T>(
   String key,
   T value, {
   PrefLocation location = PrefLocation.OTHER,
-}) =>
-    PrefManager.setCustomVal<T>(key, value, location: location);
+}) => PrefManager.setCustomVal<T>(key, value, location: location);
 
 void removeCustomData(
   String key, {
   PrefLocation location = PrefLocation.OTHER,
-}) =>
-    PrefManager.removeCustomVal(key, location: location);
-
-// ---------------------------------------------------------------------------
+}) => PrefManager.removeCustomVal(key, location: location);
 
 class _Pending {
   final Object? raw;
@@ -75,11 +66,6 @@ class PrefManager {
   static final Map<String, Rx<dynamic>> _rx = {};
   static final Map<String, _Pending> _pending = {};
   static bool _flushScheduled = false;
-
-  // -------------------------------------------------------------------------
-  // Lifecycle
-  // -------------------------------------------------------------------------
-
   static Future<void> init() async {
     try {
       final path = await StorageManager.getDirectory(subPath: 'settings');
@@ -128,10 +114,6 @@ class PrefManager {
     if (_pending.isNotEmpty) _flushPending();
   }
 
-  // -------------------------------------------------------------------------
-  // Typed prefs
-  // -------------------------------------------------------------------------
-
   static T getVal<T>(Pref<T> pref) {
     final raw = _readRaw(pref.storageKey);
     if (raw == null) return pref.defaultValue;
@@ -165,10 +147,6 @@ class PrefManager {
     ever<T>(rx, (v) => setVal(pref, v));
     return rx;
   }
-
-  // -------------------------------------------------------------------------
-  // Ad-hoc / custom keys
-  // -------------------------------------------------------------------------
 
   static T? getCustomVal<T>(
     String key, {
@@ -213,10 +191,6 @@ class PrefManager {
     setCustomVal<Map<String, dynamic>>(key, toJson(value), location: location);
   }
 
-  // -------------------------------------------------------------------------
-  // Backup helpers (used by PrefBackup)
-  // -------------------------------------------------------------------------
-
   static List<KeyValue> allEntries() => _kv.where().findAllSync();
 
   static Future<void> putEntries(List<KeyValue> entries) async {
@@ -230,10 +204,6 @@ class PrefManager {
       _cache[e.key] = e.value;
     }
   }
-
-  // -------------------------------------------------------------------------
-  // Internals
-  // -------------------------------------------------------------------------
 
   static Object? _readRaw(String storageKey) {
     if (_cache.containsKey(storageKey)) return _cache[storageKey];
