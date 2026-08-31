@@ -22,14 +22,32 @@ class AnilistApi {
 
   static const _seasons = ['WINTER', 'SPRING', 'SUMMER', 'FALL'];
 
-  Future<List<MediaRail>> home({required bool anime}) async {
+  static const _userStatuses = {
+    'CURRENT': 'Watching',
+    'REPEATING': 'Rewatching',
+    'PLANNING': 'Planned',
+    'PAUSED': 'On Hold',
+    'COMPLETED': 'Completed',
+    'DROPPED': 'Dropped',
+  };
+
+  Future<List<MediaRail>> home({required bool anime, int? userId}) async {
     final type = anime ? 'ANIME' : 'MANGA';
     final season = _seasons[_season];
     final year = DateTime.now().year;
+    final loggedIn = userId != null;
+
+    final userLists = loggedIn
+        ? '''
+  userList: MediaListCollection(userId: $userId, type: $type, sort: UPDATED_TIME_DESC) {
+    lists { name status entries { media { $anilistMediaFragment } } }
+  }'''
+        : '';
 
     final query =
         '''
 query {
+$userLists
   trending: Page(page: 1, perPage: 25) {
     media(type: $type, sort: TRENDING_DESC, isAdult: false) { $anilistMediaFragment }
   }
@@ -57,12 +75,40 @@ query {
           .toList();
     }
 
-    return [
+    final rails = <MediaRail>[];
+
+    if (loggedIn) {
+      final lists = (data['userList'] as Map<String, dynamic>?)?['lists']
+              as List? ??
+          const [];
+      final byStatus = <String, List<Media>>{};
+      for (final l in lists.cast<Map<String, dynamic>>()) {
+        final status = l['status'] as String?;
+        if (status == null) continue;
+        final media = (l['entries'] as List? ?? const [])
+            .cast<Map<String, dynamic>>()
+            .map((e) => e['media'] as Map<String, dynamic>?)
+            .whereType<Map<String, dynamic>>()
+            .map((m) => mapAnilistMedia(m))
+            .toList();
+        byStatus.putIfAbsent(status, () => []).addAll(media);
+      }
+      for (final entry in _userStatuses.entries) {
+        final media = byStatus[entry.key];
+        if (media != null && media.isNotEmpty) {
+          rails.add(MediaRail(entry.value, media));
+        }
+      }
+    }
+
+    rails.addAll([
       MediaRail('Trending Now', rail('trending')),
       if (anime) MediaRail('Popular This Season', rail('season')),
       MediaRail(anime ? 'Popular Anime' : 'Popular Manga', rail('popular')),
       MediaRail('Highest Rated', rail('top')),
-    ].where((r) => r.media.isNotEmpty).toList();
+    ]);
+
+    return rails.where((r) => r.media.isNotEmpty).toList();
   }
 
   Future<List<MediaRail>> dashboard({int? userId}) async {
