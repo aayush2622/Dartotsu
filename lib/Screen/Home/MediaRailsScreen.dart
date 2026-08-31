@@ -15,12 +15,14 @@ class MediaRailsScreen extends StatefulWidget {
   final RailLoader loader;
   final Widget? header;
   final void Function(Media media)? onMediaTap;
+  final VoidCallback? onSearch;
 
   const MediaRailsScreen({
     super.key,
     required this.loader,
     this.header,
     this.onMediaTap,
+    this.onSearch,
   });
 
   @override
@@ -59,6 +61,24 @@ class _MediaRailsScreenState extends State<MediaRailsScreen>
   @override
   Widget build(BuildContext context) {
     super.build(context);
+    final list = _list(context);
+    if (widget.onSearch == null) return list;
+    return Stack(
+      children: [
+        list,
+        Positioned(
+          right: 16,
+          bottom: 120.bottomBar(),
+          child: FloatingActionButton.small(
+            onPressed: widget.onSearch,
+            child: const Icon(Icons.search_rounded),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _list(BuildContext context) {
     return RefreshIndicator(
       onRefresh: _load,
       child: Obx(() {

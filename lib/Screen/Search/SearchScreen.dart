@@ -1,0 +1,185 @@
+import 'dart:async';
+
+import 'package:flutter/material.dart';
+import 'package:get/get.dart' hide ContextExtensionss;
+
+import '../../Api/Services/Anilist/AnilistApi.dart';
+import '../../Api/Services/Anilist/AnilistAuth.dart';
+import '../../Core/Services/Model/Media.dart';
+import '../../Utils/Extensions/ContextExtensions.dart';
+import '../../Utils/Functions/GetXFunctions.dart';
+import '../../Utils/Functions/NavigateToScreen.dart';
+import '../../Widgets/Components/BaseScreen.dart';
+import '../../Widgets/Components/CachedNetworkImage.dart';
+import '../Detail/DetailScreen.dart';
+
+class SearchScreen extends StatefulWidget {
+  final bool anime;
+  const SearchScreen({super.key, this.anime = true});
+
+  @override
+  State<SearchScreen> createState() => _SearchScreenState();
+}
+
+class _SearchScreenState extends BaseScreen<SearchScreen> {
+  late final AnilistApi _api = AnilistApi(find<AnilistAuth>().client);
+  final _controller = TextEditingController();
+
+  final _results = <Media>[].obs;
+  final _loading = false.obs;
+  late final _anime = widget.anime.obs;
+
+  Timer? _debounce;
+  String _term = '';
+  int _page = 1;
+  bool _hasMore = true;
+
+  @override
+  void dispose() {
+    _debounce?.cancel();
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void _onChanged(String value) {
+    _debounce?.cancel();
+    _debounce = Timer(const Duration(milliseconds: 400), () {
+      _term = value.trim();
+      _page = 1;
+      _hasMore = true;
+      _results.clear();
+      if (_term.isNotEmpty) _search();
+    });
+  }
+
+  Future<void> _search() async {
+    if (_loading.value || _term.isEmpty) return;
+    _loading.value = true;
+    try {
+      final next = await _api.search(
+        anime: _anime.value,
+        term: _term,
+        page: _page,
+      );
+      if (next.isEmpty) _hasMore = false;
+      _results.addAll(next);
+      _page++;
+    } catch (_) {
+      _hasMore = false;
+    } finally {
+      _loading.value = false;
+    }
+  }
+
+  @override
+  Widget buildContent(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        titleSpacing: 0,
+        title: TextField(
+          controller: _controller,
+          autofocus: true,
+          textInputAction: TextInputAction.search,
+          decoration: const InputDecoration(
+            hintText: 'Search AniList',
+            border: InputBorder.none,
+          ),
+          onChanged: _onChanged,
+        ),
+        actions: [
+          Obx(
+            () => Padding(
+              padding: const EdgeInsets.only(right: 8),
+              child: SegmentedButton<bool>(
+                showSelectedIcon: false,
+                segments: const [
+                  ButtonSegment(value: true, label: Text('Anime')),
+                  ButtonSegment(value: false, label: Text('Manga')),
+                ],
+                selected: {_anime.value},
+                onSelectionChanged: (s) {
+                  _anime.value = s.first;
+                  _onChanged(_controller.text);
+                },
+              ),
+            ),
+          ),
+        ],
+      ),
+      body: Obx(() {
+        if (_results.isEmpty) {
+          return Center(
+            child: Text(
+              _loading.value ? 'Searching…' : 'Type to search',
+              style: context.textTheme.bodyMedium,
+            ),
+          );
+        }
+        return NotificationListener<ScrollNotification>(
+          onNotification: (n) {
+            if (_hasMore &&
+                n.metrics.pixels > n.metrics.maxScrollExtent - 600) {
+              _search();
+            }
+            return false;
+          },
+          child: GridView.builder(
+            padding: const EdgeInsets.all(12),
+            gridDelegate:
+                const SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: 120,
+              childAspectRatio: 0.52,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 14,
+            ),
+            itemCount: _results.length,
+            itemBuilder: (_, i) => _ResultCard(
+              media: _results[i],
+              onTap: () => navigateToPage(
+                context,
+                DetailScreen(media: _results[i]),
+              ),
+            ),
+          ),
+        );
+      }),
+    );
+  }
+}
+
+class _ResultCard extends StatelessWidget {
+  final Media media;
+  final VoidCallback onTap;
+  const _ResultCard({required this.media, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: cachedNetworkImage(
+                imageUrl: media.cover,
+                fit: BoxFit.cover,
+                width: double.infinity,
+              ),
+            ),
+          ),
+          const SizedBox(height: 6),
+          Text(
+            media.mainName,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: context.textTheme.labelSmall,
+          ),
+        ],
+      ),
+    );
+  }
+}

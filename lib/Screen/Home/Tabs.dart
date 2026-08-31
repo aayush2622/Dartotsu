@@ -6,6 +6,7 @@ import '../../Core/Services/Model/Media.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Utils/Functions/NavigateToScreen.dart';
 import '../Detail/DetailScreen.dart';
+import '../Search/SearchScreen.dart';
 import 'HomeHeader.dart';
 import 'MediaRailsScreen.dart';
 
@@ -35,6 +36,10 @@ class AnimeTab extends StatelessWidget {
   Widget build(BuildContext context) => MediaRailsScreen(
         loader: () => _api.home(anime: true),
         onMediaTap: (m) => _openDetail(context, m),
+        onSearch: () => navigateToPage(
+          context,
+          const SearchScreen(anime: true),
+        ),
       );
 }
 
@@ -45,5 +50,9 @@ class MangaTab extends StatelessWidget {
   Widget build(BuildContext context) => MediaRailsScreen(
         loader: () => _api.home(anime: false),
         onMediaTap: (m) => _openDetail(context, m),
+        onSearch: () => navigateToPage(
+          context,
+          const SearchScreen(anime: false),
+        ),
       );
 }

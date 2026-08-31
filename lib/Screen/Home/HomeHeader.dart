@@ -11,6 +11,7 @@ import '../../Widgets/Components/CachedNetworkImage.dart';
 import '../../Widgets/Components/CustomBottomDialog.dart';
 import '../../Widgets/Components/LoadSvg.dart';
 import '../Login/LoginScreen.dart';
+import '../Search/SearchScreen.dart';
 import '../Settings/SettingsScreen.dart';
 
 class HomeHeader extends StatelessWidget {
@@ -49,6 +50,11 @@ class HomeHeader extends StatelessWidget {
                 ],
               ),
             ),
+            IconButton(
+              icon: const Icon(Icons.search_rounded),
+              onPressed: () => navigateToPage(context, const SearchScreen()),
+            ),
+            const SizedBox(width: 4),
             _Avatar(
               url: user?.avatar,
               onTap: () => _accountSheet(context),
