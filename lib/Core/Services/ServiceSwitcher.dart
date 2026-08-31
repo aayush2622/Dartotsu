@@ -4,7 +4,7 @@ import '../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Widgets/Components/CustomBottomDialog.dart';
 import '../../Widgets/Components/LoadSvg.dart';
-import 'MediaService.dart';
+import 'MediaServiceController.dart';
 
 void serviceSwitcher(BuildContext context) {
   final mediaServices = find<MediaServiceController>();
@@ -19,10 +19,11 @@ void serviceSwitcher(BuildContext context) {
           final service = mediaServices.services[index];
 
           return ListTile(
-            selected: mediaServices.currentService.value.runtimeType ==
-                service.runtimeType,
-            contentPadding:
-                const EdgeInsets.symmetric(horizontal: 24.0, vertical: 4.0),
+            selected: mediaServices.currentService.value.name == service.name,
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 24.0,
+              vertical: 4.0,
+            ),
             leading: loadSvg(
               service.iconPath,
               width: 32.0,
@@ -38,7 +39,7 @@ void serviceSwitcher(BuildContext context) {
               ),
             ),
             onTap: () {
-              mediaServices.switchService(service.runtimeType.toString());
+              mediaServices.switchService(service.name);
               Navigator.pop(context);
             },
           );

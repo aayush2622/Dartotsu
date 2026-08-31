@@ -23,11 +23,7 @@ const PlayerSettingsSchema = Schema(
       name: r'adjustVolume',
       type: IsarType.bool,
     ),
-    r'autoPlay': PropertySchema(
-      id: 2,
-      name: r'autoPlay',
-      type: IsarType.bool,
-    ),
+    r'autoPlay': PropertySchema(id: 2, name: r'autoPlay', type: IsarType.bool),
     r'resizeMode': PropertySchema(
       id: 3,
       name: r'resizeMode',
@@ -43,11 +39,7 @@ const PlayerSettingsSchema = Schema(
       name: r'skipDuration',
       type: IsarType.long,
     ),
-    r'speed': PropertySchema(
-      id: 6,
-      name: r'speed',
-      type: IsarType.string,
-    ),
+    r'speed': PropertySchema(id: 6, name: r'speed', type: IsarType.string),
     r'subtitleBackgroundColor': PropertySchema(
       id: 7,
       name: r'subtitleBackgroundColor',
@@ -97,8 +89,9 @@ const PlayerSettingsSchema = Schema(
       id: 16,
       name: r'useLibass',
       type: IsarType.bool,
-    )
+    ),
   },
+
   estimateSize: _playerSettingsEstimateSize,
   serialize: _playerSettingsSerialize,
   deserialize: _playerSettingsDeserialize,
@@ -219,205 +212,202 @@ P _playerSettingsDeserializeProp<P>(
 extension PlayerSettingsQueryFilter
     on QueryBuilder<PlayerSettings, PlayerSettings, QFilterCondition> {
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      adjustBrightnessEqualTo(bool value) {
+  adjustBrightnessEqualTo(bool value) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'adjustBrightness',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'adjustBrightness', value: value),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      adjustVolumeEqualTo(bool value) {
+  adjustVolumeEqualTo(bool value) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'adjustVolume',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'adjustVolume', value: value),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      autoPlayEqualTo(bool value) {
+  autoPlayEqualTo(bool value) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'autoPlay',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'autoPlay', value: value),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      resizeModeEqualTo(int value) {
+  resizeModeEqualTo(int value) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'resizeMode',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'resizeMode', value: value),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      resizeModeGreaterThan(
-    int value, {
-    bool include = false,
-  }) {
+  resizeModeGreaterThan(int value, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'resizeMode',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'resizeMode',
+          value: value,
+        ),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      resizeModeLessThan(
-    int value, {
-    bool include = false,
-  }) {
+  resizeModeLessThan(int value, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'resizeMode',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'resizeMode',
+          value: value,
+        ),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      resizeModeBetween(
+  resizeModeBetween(
     int lower,
     int upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'resizeMode',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'resizeMode',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+        ),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      showSubtitleEqualTo(bool value) {
+  showSubtitleEqualTo(bool value) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'showSubtitle',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'showSubtitle', value: value),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      skipDurationEqualTo(int value) {
+  skipDurationEqualTo(int value) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'skipDuration',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'skipDuration', value: value),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      skipDurationGreaterThan(
-    int value, {
-    bool include = false,
-  }) {
+  skipDurationGreaterThan(int value, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'skipDuration',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'skipDuration',
+          value: value,
+        ),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      skipDurationLessThan(
-    int value, {
-    bool include = false,
-  }) {
+  skipDurationLessThan(int value, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'skipDuration',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'skipDuration',
+          value: value,
+        ),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      skipDurationBetween(
+  skipDurationBetween(
     int lower,
     int upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'skipDuration',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'skipDuration',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+        ),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      speedEqualTo(
-    String value, {
-    bool caseSensitive = true,
-  }) {
+  speedEqualTo(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'speed',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(
+          property: r'speed',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      speedGreaterThan(
-    String value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'speed',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      speedLessThan(
+  speedGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'speed',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'speed',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      speedBetween(
+  speedLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'speed',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
+  speedBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -425,303 +415,311 @@ extension PlayerSettingsQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'speed',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'speed',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      speedStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
+  speedStartsWith(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'speed',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.startsWith(
+          property: r'speed',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      speedEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
+  speedEndsWith(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'speed',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.endsWith(
+          property: r'speed',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      speedContains(String value, {bool caseSensitive = true}) {
+  speedContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'speed',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.contains(
+          property: r'speed',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      speedMatches(String pattern, {bool caseSensitive = true}) {
+  speedMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'speed',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.matches(
+          property: r'speed',
+          wildcard: pattern,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      speedIsEmpty() {
+  speedIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'speed',
-        value: '',
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'speed', value: ''),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      speedIsNotEmpty() {
+  speedIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'speed',
-        value: '',
-      ));
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(property: r'speed', value: ''),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      subtitleBackgroundColorEqualTo(int value) {
+  subtitleBackgroundColorEqualTo(int value) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'subtitleBackgroundColor',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(
+          property: r'subtitleBackgroundColor',
+          value: value,
+        ),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      subtitleBackgroundColorGreaterThan(
-    int value, {
-    bool include = false,
-  }) {
+  subtitleBackgroundColorGreaterThan(int value, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'subtitleBackgroundColor',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'subtitleBackgroundColor',
+          value: value,
+        ),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      subtitleBackgroundColorLessThan(
-    int value, {
-    bool include = false,
-  }) {
+  subtitleBackgroundColorLessThan(int value, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'subtitleBackgroundColor',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'subtitleBackgroundColor',
+          value: value,
+        ),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      subtitleBackgroundColorBetween(
+  subtitleBackgroundColorBetween(
     int lower,
     int upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'subtitleBackgroundColor',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'subtitleBackgroundColor',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+        ),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      subtitleBottomPaddingEqualTo(int value) {
+  subtitleBottomPaddingEqualTo(int value) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'subtitleBottomPadding',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(
+          property: r'subtitleBottomPadding',
+          value: value,
+        ),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      subtitleBottomPaddingGreaterThan(
-    int value, {
-    bool include = false,
-  }) {
+  subtitleBottomPaddingGreaterThan(int value, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'subtitleBottomPadding',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'subtitleBottomPadding',
+          value: value,
+        ),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      subtitleBottomPaddingLessThan(
-    int value, {
-    bool include = false,
-  }) {
+  subtitleBottomPaddingLessThan(int value, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'subtitleBottomPadding',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'subtitleBottomPadding',
+          value: value,
+        ),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      subtitleBottomPaddingBetween(
+  subtitleBottomPaddingBetween(
     int lower,
     int upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'subtitleBottomPadding',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'subtitleBottomPadding',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+        ),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      subtitleColorEqualTo(int value) {
+  subtitleColorEqualTo(int value) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'subtitleColor',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'subtitleColor', value: value),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      subtitleColorGreaterThan(
-    int value, {
-    bool include = false,
-  }) {
+  subtitleColorGreaterThan(int value, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'subtitleColor',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'subtitleColor',
+          value: value,
+        ),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      subtitleColorLessThan(
-    int value, {
-    bool include = false,
-  }) {
+  subtitleColorLessThan(int value, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'subtitleColor',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'subtitleColor',
+          value: value,
+        ),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      subtitleColorBetween(
+  subtitleColorBetween(
     int lower,
     int upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'subtitleColor',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'subtitleColor',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+        ),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      subtitleFontEqualTo(
-    String value, {
-    bool caseSensitive = true,
-  }) {
+  subtitleFontEqualTo(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'subtitleFont',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(
+          property: r'subtitleFont',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      subtitleFontGreaterThan(
-    String value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'subtitleFont',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      subtitleFontLessThan(
+  subtitleFontGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'subtitleFont',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'subtitleFont',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      subtitleFontBetween(
+  subtitleFontLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'subtitleFont',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
+  subtitleFontBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -729,135 +727,140 @@ extension PlayerSettingsQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'subtitleFont',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'subtitleFont',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      subtitleFontStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
+  subtitleFontStartsWith(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'subtitleFont',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.startsWith(
+          property: r'subtitleFont',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      subtitleFontEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
+  subtitleFontEndsWith(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'subtitleFont',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.endsWith(
+          property: r'subtitleFont',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      subtitleFontContains(String value, {bool caseSensitive = true}) {
+  subtitleFontContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'subtitleFont',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.contains(
+          property: r'subtitleFont',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      subtitleFontMatches(String pattern, {bool caseSensitive = true}) {
+  subtitleFontMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'subtitleFont',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.matches(
+          property: r'subtitleFont',
+          wildcard: pattern,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      subtitleFontIsEmpty() {
+  subtitleFontIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'subtitleFont',
-        value: '',
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'subtitleFont', value: ''),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      subtitleFontIsNotEmpty() {
+  subtitleFontIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'subtitleFont',
-        value: '',
-      ));
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(property: r'subtitleFont', value: ''),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      subtitleLanguageEqualTo(
-    String value, {
-    bool caseSensitive = true,
-  }) {
+  subtitleLanguageEqualTo(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'subtitleLanguage',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(
+          property: r'subtitleLanguage',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      subtitleLanguageGreaterThan(
-    String value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'subtitleLanguage',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      subtitleLanguageLessThan(
+  subtitleLanguageGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'subtitleLanguage',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'subtitleLanguage',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      subtitleLanguageBetween(
+  subtitleLanguageLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'subtitleLanguage',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
+  subtitleLanguageBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -865,272 +868,272 @@ extension PlayerSettingsQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'subtitleLanguage',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'subtitleLanguage',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      subtitleLanguageStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
+  subtitleLanguageStartsWith(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'subtitleLanguage',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.startsWith(
+          property: r'subtitleLanguage',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      subtitleLanguageEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
+  subtitleLanguageEndsWith(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'subtitleLanguage',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.endsWith(
+          property: r'subtitleLanguage',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      subtitleLanguageContains(String value, {bool caseSensitive = true}) {
+  subtitleLanguageContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'subtitleLanguage',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.contains(
+          property: r'subtitleLanguage',
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      subtitleLanguageMatches(String pattern, {bool caseSensitive = true}) {
+  subtitleLanguageMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'subtitleLanguage',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.matches(
+          property: r'subtitleLanguage',
+          wildcard: pattern,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      subtitleLanguageIsEmpty() {
+  subtitleLanguageIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'subtitleLanguage',
-        value: '',
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'subtitleLanguage', value: ''),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      subtitleLanguageIsNotEmpty() {
+  subtitleLanguageIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'subtitleLanguage',
-        value: '',
-      ));
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(property: r'subtitleLanguage', value: ''),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      subtitleOutlineColorEqualTo(int value) {
+  subtitleOutlineColorEqualTo(int value) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'subtitleOutlineColor',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(
+          property: r'subtitleOutlineColor',
+          value: value,
+        ),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      subtitleOutlineColorGreaterThan(
-    int value, {
-    bool include = false,
-  }) {
+  subtitleOutlineColorGreaterThan(int value, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'subtitleOutlineColor',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'subtitleOutlineColor',
+          value: value,
+        ),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      subtitleOutlineColorLessThan(
-    int value, {
-    bool include = false,
-  }) {
+  subtitleOutlineColorLessThan(int value, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'subtitleOutlineColor',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'subtitleOutlineColor',
+          value: value,
+        ),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      subtitleOutlineColorBetween(
+  subtitleOutlineColorBetween(
     int lower,
     int upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'subtitleOutlineColor',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'subtitleOutlineColor',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+        ),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      subtitleSizeEqualTo(int value) {
+  subtitleSizeEqualTo(int value) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'subtitleSize',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'subtitleSize', value: value),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      subtitleSizeGreaterThan(
-    int value, {
-    bool include = false,
-  }) {
+  subtitleSizeGreaterThan(int value, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'subtitleSize',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'subtitleSize',
+          value: value,
+        ),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      subtitleSizeLessThan(
-    int value, {
-    bool include = false,
-  }) {
+  subtitleSizeLessThan(int value, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'subtitleSize',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'subtitleSize',
+          value: value,
+        ),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      subtitleSizeBetween(
+  subtitleSizeBetween(
     int lower,
     int upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'subtitleSize',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'subtitleSize',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+        ),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      subtitleWeightEqualTo(int value) {
+  subtitleWeightEqualTo(int value) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'subtitleWeight',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'subtitleWeight', value: value),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      subtitleWeightGreaterThan(
-    int value, {
-    bool include = false,
-  }) {
+  subtitleWeightGreaterThan(int value, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'subtitleWeight',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'subtitleWeight',
+          value: value,
+        ),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      subtitleWeightLessThan(
-    int value, {
-    bool include = false,
-  }) {
+  subtitleWeightLessThan(int value, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'subtitleWeight',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'subtitleWeight',
+          value: value,
+        ),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      subtitleWeightBetween(
+  subtitleWeightBetween(
     int lower,
     int upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'subtitleWeight',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'subtitleWeight',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+        ),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      useGpuNextEqualTo(bool value) {
+  useGpuNextEqualTo(bool value) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'useGpuNext',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'useGpuNext', value: value),
+      );
     });
   }
 
   QueryBuilder<PlayerSettings, PlayerSettings, QAfterFilterCondition>
-      useLibassEqualTo(bool value) {
+  useLibassEqualTo(bool value) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'useLibass',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'useLibass', value: value),
+      );
     });
   }
 }

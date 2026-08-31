@@ -65,8 +65,9 @@ const ReaderSettingsSchema = Schema(
       id: 9,
       name: r'spacedPages',
       type: IsarType.bool,
-    )
+    ),
   },
+
   estimateSize: _readerSettingsEstimateSize,
   serialize: _readerSettingsSerialize,
   deserialize: _readerSettingsDeserialize,
@@ -108,17 +109,23 @@ ReaderSettings _readerSettingsDeserialize(
 ) {
   final object = ReaderSettings(
     changePageWithVolumeButtons: reader.readBoolOrNull(offsets[0]) ?? false,
-    direction: _ReaderSettingsdirectionValueEnumMap[
-            reader.readByteOrNull(offsets[1])] ??
+    direction:
+        _ReaderSettingsdirectionValueEnumMap[reader.readByteOrNull(
+          offsets[1],
+        )] ??
         Direction.UTD,
-    dualPageMode: _ReaderSettingsdualPageModeValueEnumMap[
-            reader.readByteOrNull(offsets[2])] ??
+    dualPageMode:
+        _ReaderSettingsdualPageModeValueEnumMap[reader.readByteOrNull(
+          offsets[2],
+        )] ??
         DualPageMode.Auto,
     hidePageNumber: reader.readBoolOrNull(offsets[3]) ?? false,
     hideScrollbar: reader.readBoolOrNull(offsets[4]) ?? false,
     keepScreenOn: reader.readBoolOrNull(offsets[5]) ?? false,
-    layoutType: _ReaderSettingslayoutTypeValueEnumMap[
-            reader.readByteOrNull(offsets[6])] ??
+    layoutType:
+        _ReaderSettingslayoutTypeValueEnumMap[reader.readByteOrNull(
+          offsets[6],
+        )] ??
         LayoutType.Continuous,
     openImageWithLongTap: reader.readBoolOrNull(offsets[7]) ?? true,
     scrollToNext: reader.readBoolOrNull(offsets[8]) ?? true,
@@ -137,13 +144,17 @@ P _readerSettingsDeserializeProp<P>(
     case 0:
       return (reader.readBoolOrNull(offset) ?? false) as P;
     case 1:
-      return (_ReaderSettingsdirectionValueEnumMap[
-              reader.readByteOrNull(offset)] ??
-          Direction.UTD) as P;
+      return (_ReaderSettingsdirectionValueEnumMap[reader.readByteOrNull(
+                offset,
+              )] ??
+              Direction.UTD)
+          as P;
     case 2:
-      return (_ReaderSettingsdualPageModeValueEnumMap[
-              reader.readByteOrNull(offset)] ??
-          DualPageMode.Auto) as P;
+      return (_ReaderSettingsdualPageModeValueEnumMap[reader.readByteOrNull(
+                offset,
+              )] ??
+              DualPageMode.Auto)
+          as P;
     case 3:
       return (reader.readBoolOrNull(offset) ?? false) as P;
     case 4:
@@ -151,9 +162,11 @@ P _readerSettingsDeserializeProp<P>(
     case 5:
       return (reader.readBoolOrNull(offset) ?? false) as P;
     case 6:
-      return (_ReaderSettingslayoutTypeValueEnumMap[
-              reader.readByteOrNull(offset)] ??
-          LayoutType.Continuous) as P;
+      return (_ReaderSettingslayoutTypeValueEnumMap[reader.readByteOrNull(
+                offset,
+              )] ??
+              LayoutType.Continuous)
+          as P;
     case 7:
       return (reader.readBoolOrNull(offset) ?? true) as P;
     case 8:
@@ -187,10 +200,7 @@ const _ReaderSettingsdualPageModeValueEnumMap = {
   1: DualPageMode.Single,
   2: DualPageMode.ForcedDouble,
 };
-const _ReaderSettingslayoutTypeEnumValueMap = {
-  'Continuous': 0,
-  'Paged': 1,
-};
+const _ReaderSettingslayoutTypeEnumValueMap = {'Continuous': 0, 'Paged': 1};
 const _ReaderSettingslayoutTypeValueEnumMap = {
   0: LayoutType.Continuous,
   1: LayoutType.Paged,
@@ -199,240 +209,236 @@ const _ReaderSettingslayoutTypeValueEnumMap = {
 extension ReaderSettingsQueryFilter
     on QueryBuilder<ReaderSettings, ReaderSettings, QFilterCondition> {
   QueryBuilder<ReaderSettings, ReaderSettings, QAfterFilterCondition>
-      changePageWithVolumeButtonsEqualTo(bool value) {
+  changePageWithVolumeButtonsEqualTo(bool value) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'changePageWithVolumeButtons',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(
+          property: r'changePageWithVolumeButtons',
+          value: value,
+        ),
+      );
     });
   }
 
   QueryBuilder<ReaderSettings, ReaderSettings, QAfterFilterCondition>
-      directionEqualTo(Direction value) {
+  directionEqualTo(Direction value) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'direction',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'direction', value: value),
+      );
     });
   }
 
   QueryBuilder<ReaderSettings, ReaderSettings, QAfterFilterCondition>
-      directionGreaterThan(
-    Direction value, {
-    bool include = false,
-  }) {
+  directionGreaterThan(Direction value, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'direction',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'direction',
+          value: value,
+        ),
+      );
     });
   }
 
   QueryBuilder<ReaderSettings, ReaderSettings, QAfterFilterCondition>
-      directionLessThan(
-    Direction value, {
-    bool include = false,
-  }) {
+  directionLessThan(Direction value, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'direction',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'direction',
+          value: value,
+        ),
+      );
     });
   }
 
   QueryBuilder<ReaderSettings, ReaderSettings, QAfterFilterCondition>
-      directionBetween(
+  directionBetween(
     Direction lower,
     Direction upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'direction',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'direction',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+        ),
+      );
     });
   }
 
   QueryBuilder<ReaderSettings, ReaderSettings, QAfterFilterCondition>
-      dualPageModeEqualTo(DualPageMode value) {
+  dualPageModeEqualTo(DualPageMode value) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'dualPageMode',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'dualPageMode', value: value),
+      );
     });
   }
 
   QueryBuilder<ReaderSettings, ReaderSettings, QAfterFilterCondition>
-      dualPageModeGreaterThan(
-    DualPageMode value, {
-    bool include = false,
-  }) {
+  dualPageModeGreaterThan(DualPageMode value, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'dualPageMode',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'dualPageMode',
+          value: value,
+        ),
+      );
     });
   }
 
   QueryBuilder<ReaderSettings, ReaderSettings, QAfterFilterCondition>
-      dualPageModeLessThan(
-    DualPageMode value, {
-    bool include = false,
-  }) {
+  dualPageModeLessThan(DualPageMode value, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'dualPageMode',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'dualPageMode',
+          value: value,
+        ),
+      );
     });
   }
 
   QueryBuilder<ReaderSettings, ReaderSettings, QAfterFilterCondition>
-      dualPageModeBetween(
+  dualPageModeBetween(
     DualPageMode lower,
     DualPageMode upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'dualPageMode',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'dualPageMode',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+        ),
+      );
     });
   }
 
   QueryBuilder<ReaderSettings, ReaderSettings, QAfterFilterCondition>
-      hidePageNumberEqualTo(bool value) {
+  hidePageNumberEqualTo(bool value) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'hidePageNumber',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'hidePageNumber', value: value),
+      );
     });
   }
 
   QueryBuilder<ReaderSettings, ReaderSettings, QAfterFilterCondition>
-      hideScrollbarEqualTo(bool value) {
+  hideScrollbarEqualTo(bool value) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'hideScrollbar',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'hideScrollbar', value: value),
+      );
     });
   }
 
   QueryBuilder<ReaderSettings, ReaderSettings, QAfterFilterCondition>
-      keepScreenOnEqualTo(bool value) {
+  keepScreenOnEqualTo(bool value) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'keepScreenOn',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'keepScreenOn', value: value),
+      );
     });
   }
 
   QueryBuilder<ReaderSettings, ReaderSettings, QAfterFilterCondition>
-      layoutTypeEqualTo(LayoutType value) {
+  layoutTypeEqualTo(LayoutType value) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'layoutType',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'layoutType', value: value),
+      );
     });
   }
 
   QueryBuilder<ReaderSettings, ReaderSettings, QAfterFilterCondition>
-      layoutTypeGreaterThan(
-    LayoutType value, {
-    bool include = false,
-  }) {
+  layoutTypeGreaterThan(LayoutType value, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'layoutType',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.greaterThan(
+          include: include,
+          property: r'layoutType',
+          value: value,
+        ),
+      );
     });
   }
 
   QueryBuilder<ReaderSettings, ReaderSettings, QAfterFilterCondition>
-      layoutTypeLessThan(
-    LayoutType value, {
-    bool include = false,
-  }) {
+  layoutTypeLessThan(LayoutType value, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'layoutType',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.lessThan(
+          include: include,
+          property: r'layoutType',
+          value: value,
+        ),
+      );
     });
   }
 
   QueryBuilder<ReaderSettings, ReaderSettings, QAfterFilterCondition>
-      layoutTypeBetween(
+  layoutTypeBetween(
     LayoutType lower,
     LayoutType upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'layoutType',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.between(
+          property: r'layoutType',
+          lower: lower,
+          includeLower: includeLower,
+          upper: upper,
+          includeUpper: includeUpper,
+        ),
+      );
     });
   }
 
   QueryBuilder<ReaderSettings, ReaderSettings, QAfterFilterCondition>
-      openImageWithLongTapEqualTo(bool value) {
+  openImageWithLongTapEqualTo(bool value) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'openImageWithLongTap',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(
+          property: r'openImageWithLongTap',
+          value: value,
+        ),
+      );
     });
   }
 
   QueryBuilder<ReaderSettings, ReaderSettings, QAfterFilterCondition>
-      scrollToNextEqualTo(bool value) {
+  scrollToNextEqualTo(bool value) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'scrollToNext',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'scrollToNext', value: value),
+      );
     });
   }
 
   QueryBuilder<ReaderSettings, ReaderSettings, QAfterFilterCondition>
-      spacedPagesEqualTo(bool value) {
+  spacedPagesEqualTo(bool value) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'spacedPages',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        FilterCondition.equalTo(property: r'spacedPages', value: value),
+      );
     });
   }
 }

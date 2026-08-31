@@ -1,6 +1,6 @@
 import 'package:isar_community/isar.dart';
 
-import '../../../../Core/Services/MediaService.dart';
+import '../../../../Core/Services/MediaServiceController.dart';
 import '../../../../Core/Services/Model/Media.dart';
 import '../../../../Utils/Functions/GetXFunctions.dart';
 import '../../PrefManager.dart';
@@ -73,9 +73,11 @@ class MediaSettings {
       server: json['server'],
       selectedScanlators: json['selectedScanlators'],
       playerSetting: PlayerSettings.fromJson(
-          json['playerSettings'] as Map<String, dynamic>),
+        json['playerSettings'] as Map<String, dynamic>,
+      ),
       readerSetting: ReaderSettings.fromJson(
-          json['playerSettings'] as Map<String, dynamic>),
+        json['playerSettings'] as Map<String, dynamic>,
+      ),
     );
   }
 

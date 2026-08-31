@@ -9,6 +9,7 @@ list(APPEND FLUTTER_PLUGIN_LIST
   firebase_core
   flutter_inappwebview_windows
   flutter_qjs
+  flutter_timezone
   isar_community_flutter_libs
   media_kit_libs_windows_video
   media_kit_video
@@ -24,6 +25,7 @@ list(APPEND FLUTTER_PLUGIN_LIST
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST
   flutter_discord_rpc_fork
+  flutter_local_notifications_windows
   jni
   rhttp
 )

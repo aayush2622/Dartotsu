@@ -29,7 +29,7 @@ class AppUpdater {
 
   NetworkManager get _network => find();
   bool get _checkForUpdates => loadCustomData("checkForUpdates") ?? true;
-  bool get _alphaUpdates => loadCustomData("alphaUpdates") ?? !false;
+  bool get _alphaUpdates => loadCustomData("alphaUpdates") ?? false;
 
   /// Checks for application updates by comparing the current version hash
   /// with the latest release on GitHub. If an update is available, it shows

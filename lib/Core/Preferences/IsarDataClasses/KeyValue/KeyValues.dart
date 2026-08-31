@@ -25,111 +25,96 @@ class KeyValue {
   List<String>? stringListValue;
   List<int>? intListValue;
   List<bool>? boolListValue;
+
   String? serializedMapValue;
+
   KeyValue();
+
+  static final Map<String, PrefLocation> _locationMap = {
+    for (final e in PrefLocation.values) e.name: e,
+  };
+
   factory KeyValue.fromJson(Map<String, dynamic> json) {
     final kv = KeyValue()
       ..key = json['key'] as String
-      ..location = PrefLocation.values.firstWhere(
-        (e) => e.name == json['location'],
-        orElse: () => PrefLocation.OTHER,
-      );
+      ..location = _locationMap[json['location']] ?? PrefLocation.OTHER;
 
-    final type = json['dataType'];
-    final value = json['value'];
-
-    switch (type) {
-      case 'string':
-        kv.stringValue = value;
-        break;
-      case 'int':
-        kv.intValue = value;
-        break;
-      case 'double':
-        kv.doubleValue = (value as num).toDouble();
-        break;
-      case 'bool':
-        kv.boolValue = value;
-        break;
-      case 'datetime':
-        kv.dateTimeValue = value;
-        break;
-      case 'string_list':
-        kv.stringListValue = List<String>.from(value);
-        break;
-      case 'int_list':
-        kv.intListValue = List<int>.from(value);
-        break;
-      case 'bool_list':
-        kv.boolListValue = List<bool>.from(value);
-        break;
-      case 'map':
-        kv.serializedMapValue = jsonEncode(value);
-        break;
-      default:
-        throw UnsupportedError('Unknown type $type');
-    }
+    kv.value = _deserialize(json['dataType'] as String, json['value']);
 
     return kv;
   }
-}
 
-extension KeyValueJson on KeyValue {
-  Map<String, dynamic> toJson() {
-    final v = value;
-    return {
-      'key': key,
-      'location': location.name,
-      'type': 'KeyValue',
-      'dataType': _typeOf(v),
-      'value': _serialize(v),
-    };
-  }
-
-  static String _typeOf(dynamic v) {
-    if (v is String) return 'string';
-    if (v is int) return 'int';
-    if (v is double) return 'double';
-    if (v is bool) return 'bool';
-    if (v is DateTime) return 'datetime';
-    if (v is List<String>) return 'string_list';
-    if (v is List<int>) return 'int_list';
-    if (v is List<bool>) return 'bool_list';
-    if (v is Map<dynamic, dynamic>) return 'map';
-    throw UnsupportedError('Unsupported type: ${v.runtimeType}');
-  }
-
-  static dynamic _serialize(dynamic v) {
-    if (v is DateTime) return v.toIso8601String();
-    return v;
-  }
-}
-
-extension KeyValueX on KeyValue {
-  set value(dynamic value) {
-    if (value is String) {
-      stringValue = value;
-    } else if (value is int) {
-      intValue = value;
-    } else if (value is double) {
-      doubleValue = value;
-    } else if (value is bool) {
-      boolValue = value;
-    } else if (value is DateTime) {
-      dateTimeValue = value.toIso8601String();
-    } else if (value is List<String>) {
-      stringListValue = value;
-    } else if (value is List<int>) {
-      intListValue = value;
-    } else if (value is List<bool>) {
-      boolListValue = value;
-    } else if (value is Map<dynamic, dynamic>) {
-      serializedMapValue = jsonEncode(value); // Serialize the Map
-    } else {
-      throw UnsupportedError('${value.runtimeType} is not supported');
+  static dynamic _deserialize(String type, dynamic value) {
+    switch (type) {
+      case 'string':
+        return value as String;
+      case 'int':
+        return value as int;
+      case 'double':
+        return (value as num).toDouble();
+      case 'bool':
+        return value as bool;
+      case 'datetime':
+        return DateTime.parse(value as String);
+      case 'string_list':
+        return List<String>.from(value);
+      case 'int_list':
+        return List<int>.from(value);
+      case 'bool_list':
+        return List<bool>.from(value);
+      case 'map':
+        return Map<String, dynamic>.from(value);
+      default:
+        throw UnsupportedError('Unknown type: $type');
     }
   }
 
+  static String _typeOf(dynamic value) {
+    switch (value) {
+      case String _:
+        return 'string';
+      case int _:
+        return 'int';
+      case double _:
+        return 'double';
+      case bool _:
+        return 'bool';
+      case DateTime _:
+        return 'datetime';
+      case List<String> _:
+        return 'string_list';
+      case List<int> _:
+        return 'int_list';
+      case List<bool> _:
+        return 'bool_list';
+      case Map<String, dynamic> _:
+        return 'map';
+      default:
+        throw UnsupportedError('Unsupported type: ${value.runtimeType}');
+    }
+  }
+
+  static dynamic _serialize(dynamic value) {
+    if (value is DateTime) {
+      return value.toIso8601String();
+    }
+    return value;
+  }
+
+  void _clearValues() {
+    stringValue = null;
+    intValue = null;
+    doubleValue = null;
+    boolValue = null;
+    dateTimeValue = null;
+    stringListValue = null;
+    intListValue = null;
+    boolListValue = null;
+    serializedMapValue = null;
+  }
+}
+
+extension KeyValueValue on KeyValue {
   dynamic get value {
     if (stringValue != null) return stringValue;
     if (intValue != null) return intValue;
@@ -139,7 +124,68 @@ extension KeyValueX on KeyValue {
     if (intListValue != null) return intListValue;
     if (boolListValue != null) return boolListValue;
     if (dateTimeValue != null) return DateTime.parse(dateTimeValue!);
-    if (serializedMapValue != null) return jsonDecode(serializedMapValue!);
+    if (serializedMapValue != null) {
+      return jsonDecode(serializedMapValue!) as Map<String, dynamic>;
+    }
     return null;
+  }
+
+  set value(dynamic value) {
+    _clearValues();
+
+    switch (value) {
+      case String v:
+        stringValue = v;
+        break;
+
+      case int v:
+        intValue = v;
+        break;
+
+      case double v:
+        doubleValue = v;
+        break;
+
+      case bool v:
+        boolValue = v;
+        break;
+
+      case DateTime v:
+        dateTimeValue = v.toIso8601String();
+        break;
+
+      case List<String> v:
+        stringListValue = v;
+        break;
+
+      case List<int> v:
+        intListValue = v;
+        break;
+
+      case List<bool> v:
+        boolListValue = v;
+        break;
+
+      case Map<String, dynamic> v:
+        serializedMapValue = jsonEncode(v);
+        break;
+
+      default:
+        throw UnsupportedError('${value.runtimeType} is not supported');
+    }
+  }
+}
+
+extension KeyValueJson on KeyValue {
+  Map<String, dynamic> toJson() {
+    final current = value;
+
+    return {
+      'key': key,
+      'location': location.name,
+      'type': 'KeyValue',
+      'dataType': KeyValue._typeOf(current),
+      'value': KeyValue._serialize(current),
+    };
   }
 }
