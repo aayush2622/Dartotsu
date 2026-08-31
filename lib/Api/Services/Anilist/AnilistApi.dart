@@ -126,6 +126,52 @@ $userLists
     ].where((r) => r.media.isNotEmpty).toList();
   }
 
+  Future<void> saveListEntry({
+    required int mediaId,
+    String? status,
+    int? progress,
+    num? score,
+    bool? private,
+  }) async {
+    await client.query(
+      '''
+mutation (\$mediaId: Int, \$status: MediaListStatus, \$progress: Int, \$score: Float, \$private: Boolean) {
+  SaveMediaListEntry(mediaId: \$mediaId, status: \$status, progress: \$progress, score: \$score, private: \$private) {
+    id status progress score
+  }
+}
+''',
+      variables: {
+        'mediaId': mediaId,
+        'status': ?status,
+        'progress': ?progress,
+        'score': ?score,
+        'private': ?private,
+      },
+    );
+  }
+
+  Future<void> deleteListEntry(int entryId) async {
+    await client.query(
+      'mutation (\$id: Int) { DeleteMediaListEntry(id: \$id) { deleted } }',
+      variables: {'id': entryId},
+    );
+  }
+
+  Future<Media> details(int id) async {
+    final data = await client.query(
+      '''
+query (\$id: Int) {
+  Media(id: \$id) { $anilistDetailQuery }
+}
+''',
+      variables: {'id': id},
+    );
+    final media = data['Media'] as Map<String, dynamic>?;
+    if (media == null) throw AnilistException('Media not found');
+    return mapAnilistDetail(media);
+  }
+
   Future<List<Media>> userList({
     required int userId,
     required bool anime,

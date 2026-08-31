@@ -74,6 +74,17 @@ extension StringExtensions on String {
     return imageExtensions
         .any((extension) => toLowerCase().endsWith(extension));
   }
+
+  String get stripHtml => replaceAll(RegExp(r'<\s*br\s*/?\s*>'), '\n')
+      .replaceAll(RegExp(r'</\s*p\s*>'), '\n\n')
+      .replaceAll(RegExp(r'<[^>]+>'), '')
+      .replaceAll('&nbsp;', ' ')
+      .replaceAll('&amp;', '&')
+      .replaceAll('&quot;', '"')
+      .replaceAll('&#039;', "'")
+      .replaceAll('&mdash;', '—')
+      .replaceAll(RegExp(r'\n{3,}'), '\n\n')
+      .trim();
 }
 
 var videoExtensions = [
