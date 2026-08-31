@@ -8,11 +8,7 @@ class Validator {
 
   static Map<String, dynamic> wrap(Map<String, dynamic> data) {
     return {
-      '_meta': {
-        'app': 'Dartotsu',
-        'schema': 1,
-        'checksum': _checksum(data),
-      },
+      '_meta': {'app': 'Dartotsu', 'schema': 1, 'checksum': _checksum(data)},
       ...data,
     };
   }
@@ -32,7 +28,9 @@ class Validator {
   /// SHA-256 over a canonical (recursively key-sorted) JSON encoding so a
   /// round-trip through a file that reorders keys still verifies.
   static String _checksum(Object? value) {
-    return sha256.convert(utf8.encode(jsonEncode(_canonical(value)))).toString();
+    return sha256
+        .convert(utf8.encode(jsonEncode(_canonical(value))))
+        .toString();
   }
 
   static Object? _canonical(Object? value) {

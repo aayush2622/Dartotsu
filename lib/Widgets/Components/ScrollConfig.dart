@@ -36,7 +36,7 @@ Widget CustomScrollConfig(
       dragDevices: {
         PointerDeviceKind.touch,
         PointerDeviceKind.mouse,
-        PointerDeviceKind.trackpad
+        PointerDeviceKind.trackpad,
       },
     ),
     shrinkWrap: shrinkWrap,

@@ -21,10 +21,7 @@ Widget cachedNetworkImage({
         child: placeholder.call(Get.context!, imageUrl ?? ""),
       );
     }
-    return SizedBox(
-      width: width,
-      height: height,
-    );
+    return SizedBox(width: width, height: height);
   }
   if (PrefName.useDifferentCacheManager.value) {
     return PrecachedNetworkImage(
@@ -44,10 +41,12 @@ Widget cachedNetworkImage({
     fit: fit,
     width: width,
     height: height,
-    memCacheWidth:
-        (width != null && width.isFinite) ? (width * 2).toInt() : null,
-    memCacheHeight:
-        (height != null && height.isFinite) ? (height * 2).toInt() : null,
+    memCacheWidth: (width != null && width.isFinite)
+        ? (width * 2).toInt()
+        : null,
+    memCacheHeight: (height != null && height.isFinite)
+        ? (height * 2).toInt()
+        : null,
     placeholder: placeholder ?? (context, url) => const SizedBox.shrink(),
     errorWidget:
         errorWidget ?? (context, url, error) => const SizedBox.shrink(),

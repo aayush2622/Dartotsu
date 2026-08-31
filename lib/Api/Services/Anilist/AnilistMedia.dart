@@ -51,8 +51,8 @@ Media mapAnilistMedia(Map<String, dynamic> json, {String? relation}) {
             season: json['season'] as String?,
             seasonYear: (json['seasonYear'] as num?)?.toInt(),
             nextAiringEpisode: (airing?['episode'] as num?)?.toInt(),
-            nextAiringEpisodeTime:
-                (airing?['timeUntilAiring'] as num?)?.toInt(),
+            nextAiringEpisodeTime: (airing?['timeUntilAiring'] as num?)
+                ?.toInt(),
           )
         : null,
     manga: isAnime
@@ -60,7 +60,8 @@ Media mapAnilistMedia(Map<String, dynamic> json, {String? relation}) {
         : Manga(totalChapters: (json['chapters'] as num?)?.toInt()),
     name: title['english'] as String?,
     nameRomaji: title['romaji'] as String?,
-    userPreferredName: title['userPreferred'] as String? ??
+    userPreferredName:
+        title['userPreferred'] as String? ??
         title['romaji'] as String? ??
         title['english'] as String?,
     cover: cover['extraLarge'] as String? ?? cover['large'] as String?,
@@ -70,7 +71,8 @@ Media mapAnilistMedia(Map<String, dynamic> json, {String? relation}) {
     isFav: json['isFavourite'] as bool? ?? false,
     favourites: (json['favourites'] as num?)?.toInt(),
     popularity: (json['popularity'] as num?)?.toInt(),
-    meanScore: (json['meanScore'] as num?)?.toInt() ??
+    meanScore:
+        (json['meanScore'] as num?)?.toInt() ??
         (json['averageScore'] as num?)?.toInt(),
     status: json['status'] as String?,
     format: json['format'] as String?,
@@ -86,8 +88,7 @@ Media mapAnilistMedia(Map<String, dynamic> json, {String? relation}) {
     userScore: (entry?['score'] as num?)?.round() ?? 0,
     userRepeat: (entry?['repeat'] as num?)?.toInt() ?? 0,
     isListPrivate: entry?['private'] as bool? ?? false,
-    shareLink:
-        'https://anilist.co/${isAnime ? 'anime' : 'manga'}/$id',
+    shareLink: 'https://anilist.co/${isAnime ? 'anime' : 'manga'}/$id',
   );
 }
 
@@ -100,7 +101,8 @@ Date? _date(Object? raw) {
   return Date(year: year, month: month, day: day);
 }
 
-const anilistDetailQuery = '''
+const anilistDetailQuery =
+    '''
   $anilistMediaFragment
   synonyms
   trailer { id site }
@@ -157,11 +159,13 @@ List<Character> _characters(Object? raw) {
     final node = e['node'] as Map<String, dynamic>;
     final vas = (e['voiceActors'] as List? ?? const [])
         .cast<Map<String, dynamic>>()
-        .map((v) => Author(
-              id: v['id'].toString(),
-              name: (v['name'] as Map?)?['userPreferred'] as String?,
-              image: (v['image'] as Map?)?['large'] as String?,
-            ))
+        .map(
+          (v) => Author(
+            id: v['id'].toString(),
+            name: (v['name'] as Map?)?['userPreferred'] as String?,
+            image: (v['image'] as Map?)?['large'] as String?,
+          ),
+        )
         .toList();
     return Character(
       id: node['id'].toString(),

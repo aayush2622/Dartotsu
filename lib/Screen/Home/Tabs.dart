@@ -38,8 +38,7 @@ class AnimeTab extends StatelessWidget {
     return MediaRailsScreen(
       loader: () => _api.home(anime: true, userId: auth.user.value?.id),
       onMediaTap: (m) => _openDetail(context, m),
-      onSearch: () =>
-          navigateToPage(context, const SearchScreen(anime: true)),
+      onSearch: () => navigateToPage(context, const SearchScreen(anime: true)),
     );
   }
 }
@@ -53,8 +52,7 @@ class MangaTab extends StatelessWidget {
     return MediaRailsScreen(
       loader: () => _api.home(anime: false, userId: auth.user.value?.id),
       onMediaTap: (m) => _openDetail(context, m),
-      onSearch: () =>
-          navigateToPage(context, const SearchScreen(anime: false)),
+      onSearch: () => navigateToPage(context, const SearchScreen(anime: false)),
     );
   }
 }

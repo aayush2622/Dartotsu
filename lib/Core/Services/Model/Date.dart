@@ -36,7 +36,7 @@ class Date {
       9: "September",
       10: "October",
       11: "November",
-      12: "December"
+      12: "December",
     };
     if (day != null && month != null && year != null) {
       return "$day ${monthName[month]} $year";

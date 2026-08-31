@@ -135,11 +135,7 @@ class Media {
 
   factory Media.skeleton() {
     final random = Random();
-    final values = {
-      'userScore': 26,
-      'meanScore': 32,
-      'userProgress': 100,
-    };
+    final values = {'userScore': 26, 'meanScore': 32, 'userProgress': 100};
 
     final keys = values.keys.toList()..shuffle(random);
     final keepCount = random.nextInt(values.length + 1);
@@ -152,10 +148,12 @@ class Media {
       genres: ["ergsdf", "fsdf", "ergsdf", "fsdf"],
       status: "who knows",
       isAdult: false,
-      userScore:
-          keptKeys.contains('userScore') ? values['userScore'] as int : 0,
-      meanScore:
-          keptKeys.contains('meanScore') ? values['meanScore'] as int : null,
+      userScore: keptKeys.contains('userScore')
+          ? values['userScore'] as int
+          : 0,
+      meanScore: keptKeys.contains('meanScore')
+          ? values['meanScore'] as int
+          : null,
       userProgress: keptKeys.contains('userProgress')
           ? values['userProgress'] as int
           : null,
@@ -180,14 +178,20 @@ class MediaMapWrapper {
 
   factory MediaMapWrapper.fromJson(Map<String, dynamic> json) {
     return MediaMapWrapper(
-      mediaMap: json.map((key, value) => MapEntry(
-          key, (value as List).map((e) => Media.fromJson(e)).toList())),
+      mediaMap: json.map(
+        (key, value) => MapEntry(
+          key,
+          (value as List).map((e) => Media.fromJson(e)).toList(),
+        ),
+      ),
     );
   }
 
   Map<String, dynamic> toJson() {
-    return mediaMap.map((key, value) =>
-        MapEntry(key, value.map((media) => media.toJson()).toList()));
+    return mediaMap.map(
+      (key, value) =>
+          MapEntry(key, value.map((media) => media.toJson()).toList()),
+    );
   }
 }
 

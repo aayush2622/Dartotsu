@@ -39,7 +39,10 @@ final ThemeData pinkLightTheme = ThemeData(
   ),
   textTheme: const TextTheme(
     headlineLarge: TextStyle(
-        color: Color(0xFF1F1A1C), fontSize: 20, fontWeight: FontWeight.bold),
+      color: Color(0xFF1F1A1C),
+      fontSize: 20,
+      fontWeight: FontWeight.bold,
+    ),
     bodyLarge: TextStyle(color: Color(0xFF1F1A1C)),
   ),
   fontFamily: 'Poppins',
@@ -84,7 +87,10 @@ final ThemeData pinkDarkTheme = ThemeData(
   ),
   textTheme: const TextTheme(
     headlineLarge: TextStyle(
-        color: Color(0xFF610046), fontSize: 20, fontWeight: FontWeight.bold),
+      color: Color(0xFF610046),
+      fontSize: 20,
+      fontWeight: FontWeight.bold,
+    ),
     bodyLarge: TextStyle(color: Color(0xFFEBE0E2)),
   ),
   fontFamily: 'Poppins',

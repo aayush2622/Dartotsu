@@ -37,8 +37,7 @@ class AnilistUser {
       avatar: avatar is Map ? avatar['large'] as String? : null,
       banner: viewer['bannerImage'] as String?,
       about: viewer['about'] as String?,
-      episodesWatched:
-          (animeStats?['episodesWatched'] as num?)?.toInt() ?? 0,
+      episodesWatched: (animeStats?['episodesWatched'] as num?)?.toInt() ?? 0,
       chaptersRead: (mangaStats?['chaptersRead'] as num?)?.toInt() ?? 0,
       unreadNotifications:
           (viewer['unreadNotificationCount'] as num?)?.toInt() ?? 0,
@@ -48,29 +47,28 @@ class AnilistUser {
   }
 
   Map<String, dynamic> toJson() => {
-        'id': id,
-        'name': name,
-        'avatar': avatar,
-        'banner': banner,
-        'about': about,
-        'episodesWatched': episodesWatched,
-        'chaptersRead': chaptersRead,
-        'unreadNotifications': unreadNotifications,
-        'adultContent': adultContent,
-        'scoreFormat': scoreFormat,
-      };
+    'id': id,
+    'name': name,
+    'avatar': avatar,
+    'banner': banner,
+    'about': about,
+    'episodesWatched': episodesWatched,
+    'chaptersRead': chaptersRead,
+    'unreadNotifications': unreadNotifications,
+    'adultContent': adultContent,
+    'scoreFormat': scoreFormat,
+  };
 
   factory AnilistUser.fromJson(Map<String, dynamic> json) => AnilistUser(
-        id: (json['id'] as num).toInt(),
-        name: json['name'] as String,
-        avatar: json['avatar'] as String?,
-        banner: json['banner'] as String?,
-        about: json['about'] as String?,
-        episodesWatched: (json['episodesWatched'] as num?)?.toInt() ?? 0,
-        chaptersRead: (json['chaptersRead'] as num?)?.toInt() ?? 0,
-        unreadNotifications:
-            (json['unreadNotifications'] as num?)?.toInt() ?? 0,
-        adultContent: json['adultContent'] as bool? ?? false,
-        scoreFormat: json['scoreFormat'] as String? ?? 'POINT_10',
-      );
+    id: (json['id'] as num).toInt(),
+    name: json['name'] as String,
+    avatar: json['avatar'] as String?,
+    banner: json['banner'] as String?,
+    about: json['about'] as String?,
+    episodesWatched: (json['episodesWatched'] as num?)?.toInt() ?? 0,
+    chaptersRead: (json['chaptersRead'] as num?)?.toInt() ?? 0,
+    unreadNotifications: (json['unreadNotifications'] as num?)?.toInt() ?? 0,
+    adultContent: json['adultContent'] as bool? ?? false,
+    scoreFormat: json['scoreFormat'] as String? ?? 'POINT_10',
+  );
 }

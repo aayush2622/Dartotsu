@@ -75,41 +75,46 @@ class AlertDialogBuilder {
         _onNeutralButtonClick = onClick;
       });
 
-  AlertDialogBuilder singleChoiceItems(List<String> items,
-          int selectedItemIndex, ValueChanged<int> onItemSelected) =>
-      _with(() {
-        _items = items;
-        _selectedItemIndex = selectedItemIndex;
-        _onItemSelected = onItemSelected;
-      });
+  AlertDialogBuilder singleChoiceItems(
+    List<String> items,
+    int selectedItemIndex,
+    ValueChanged<int> onItemSelected,
+  ) => _with(() {
+    _items = items;
+    _selectedItemIndex = selectedItemIndex;
+    _onItemSelected = onItemSelected;
+  });
 
-  AlertDialogBuilder multiChoiceItems(List<String> items,
-          List<bool>? checkedItems, ValueChanged<List<bool>> onItemsSelected) =>
-      _with(() {
-        _items = items;
-        _checkedItems = checkedItems ?? List<bool>.filled(items.length, false);
-        _onItemsSelected = onItemsSelected;
-      });
+  AlertDialogBuilder multiChoiceItems(
+    List<String> items,
+    List<bool>? checkedItems,
+    ValueChanged<List<bool>> onItemsSelected,
+  ) => _with(() {
+    _items = items;
+    _checkedItems = checkedItems ?? List<bool>.filled(items.length, false);
+    _onItemsSelected = onItemsSelected;
+  });
 
   AlertDialogBuilder reorderableItems(
-          List<String> items, ValueChanged<List<String>> onReorderedItems) =>
-      _with(() {
-        _reorderableItems = items;
-        _onReorderedItems = onReorderedItems;
-      });
+    List<String> items,
+    ValueChanged<List<String>> onReorderedItems,
+  ) => _with(() {
+    _reorderableItems = items;
+    _onReorderedItems = onReorderedItems;
+  });
 
   AlertDialogBuilder reorderableMultiSelectableItems(
-          List<String> items,
-          List<bool>? checkedItems,
-          ValueChanged<List<String>> onReorderedItems,
-          ValueChanged<List<bool>> onReorderedItemsSelected) =>
-      _with(() {
-        _reorderableItems = items;
-        _checkedItems = checkedItems ?? List<bool>.filled(items.length, false);
-        _onReorderedItems = onReorderedItems;
-        _onItemsSelected = onReorderedItemsSelected;
-        _isReorderableMultiSelectable = true;
-      });
+    List<String> items,
+    List<bool>? checkedItems,
+    ValueChanged<List<String>> onReorderedItems,
+    ValueChanged<List<bool>> onReorderedItemsSelected,
+  ) => _with(() {
+    _reorderableItems = items;
+    _checkedItems = checkedItems ?? List<bool>.filled(items.length, false);
+    _onReorderedItems = onReorderedItems;
+    _onItemsSelected = onReorderedItemsSelected;
+    _isReorderableMultiSelectable = true;
+  });
 
   Future<T?> show<T>() {
     final theme = Theme.of(context).colorScheme;
@@ -139,7 +144,8 @@ class AlertDialogBuilder {
                     if (_titleWidget != null || _title != null)
                       Padding(
                         padding: const EdgeInsets.only(bottom: 16),
-                        child: _titleWidget ??
+                        child:
+                            _titleWidget ??
                             Text(
                               _title ?? '',
                               style: TextStyle(
@@ -221,110 +227,105 @@ class AlertDialogBuilder {
       });
 
   Widget _buildReorderableWithCheckBoxWidget(
-          StateSetter setState, void Function(int, int) onReorder) =>
-      SizedBox(
-        width: MediaQuery.of(context).size.width * 0.7,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Expanded(
-              child: ReorderableListView(
-                onReorder: onReorder,
-                children: _reorderableItems!.asMap().entries.map((entry) {
-                  int index = entry.key;
-                  String item = entry.value;
-                  return CheckboxListTile(
-                    key: ValueKey(item),
-                    title: Text(
-                      item,
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    value: _checkedItems![index],
-                    onChanged: (bool? value) {
-                      setState(() {
-                        _checkedItems![index] = value!;
-                        _onItemsSelected?.call(_checkedItems!);
-                      });
-                    },
-                    controlAffinity: ListTileControlAffinity.leading,
-                  );
-                }).toList(),
-              ),
-            ),
-          ],
+    StateSetter setState,
+    void Function(int, int) onReorder,
+  ) => SizedBox(
+    width: MediaQuery.of(context).size.width * 0.7,
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Expanded(
+          child: ReorderableListView(
+            onReorder: onReorder,
+            children: _reorderableItems!.asMap().entries.map((entry) {
+              int index = entry.key;
+              String item = entry.value;
+              return CheckboxListTile(
+                key: ValueKey(item),
+                title: Text(
+                  item,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                value: _checkedItems![index],
+                onChanged: (bool? value) {
+                  setState(() {
+                    _checkedItems![index] = value!;
+                    _onItemsSelected?.call(_checkedItems!);
+                  });
+                },
+                controlAffinity: ListTileControlAffinity.leading,
+              );
+            }).toList(),
+          ),
         ),
-      );
+      ],
+    ),
+  );
 
   Widget _buildReorderableWidget(
-          StateSetter setState, void Function(int, int) onReorder) =>
-      SizedBox(
-        width: MediaQuery.of(context).size.width * 0.7,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Expanded(
-              child: ReorderableListView(
-                onReorder: onReorder,
-                children: _reorderableItems!.map((item) {
-                  return ListTile(
-                    key: ValueKey(item),
-                    title: Text(
-                      item,
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  );
-                }).toList(),
-              ),
-            ),
-          ],
+    StateSetter setState,
+    void Function(int, int) onReorder,
+  ) => SizedBox(
+    width: MediaQuery.of(context).size.width * 0.7,
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Expanded(
+          child: ReorderableListView(
+            onReorder: onReorder,
+            children: _reorderableItems!.map((item) {
+              return ListTile(
+                key: ValueKey(item),
+                title: Text(
+                  item,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              );
+            }).toList(),
+          ),
         ),
-      );
+      ],
+    ),
+  );
 
   Widget _buildRadioListContent(StateSetter setState) => _buildListContent(
-        (item) => RadioListTile<int>(
+    (item) => RadioListTile<int>(
+      title: Text(
+        item,
+        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+      ),
+      value: _items!.indexOf(item),
+      groupValue: _selectedItemIndex,
+      onChanged: (int? value) {
+        setState(() => _selectedItemIndex = value!);
+        _onItemSelected?.call(value!);
+        Navigator.of(context).pop();
+      },
+    ),
+  );
+
+  Widget _buildCheckboxListContent(StateSetter setState) =>
+      _buildListContent((item) {
+        final index = _items!.indexOf(item);
+        return CheckboxListTile(
           title: Text(
             item,
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
-          value: _items!.indexOf(item),
-          groupValue: _selectedItemIndex,
-          onChanged: (int? value) {
-            setState(() => _selectedItemIndex = value!);
-            _onItemSelected?.call(value!);
-            Navigator.of(context).pop();
+          value: _checkedItems![index],
+          onChanged: (bool? value) {
+            setState(() => _checkedItems![index] = value!);
+            _onItemsSelected?.call(_checkedItems!);
           },
-        ),
-      );
-
-  Widget _buildCheckboxListContent(StateSetter setState) => _buildListContent(
-        (item) {
-          final index = _items!.indexOf(item);
-          return CheckboxListTile(
-            title: Text(
-              item,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            value: _checkedItems![index],
-            onChanged: (bool? value) {
-              setState(() => _checkedItems![index] = value!);
-              _onItemsSelected?.call(_checkedItems!);
-            },
-            controlAffinity: ListTileControlAffinity.leading,
-          );
-        },
-      );
+          controlAffinity: ListTileControlAffinity.leading,
+        );
+      });
 
   Widget _buildListContent(Widget Function(String) itemBuilder) {
     final media = MediaQuery.of(context).size;
@@ -339,40 +340,28 @@ class AlertDialogBuilder {
   }
 
   Widget _buildDefaultContent() => ConstrainedBox(
-        constraints: BoxConstraints(
-          minWidth: MediaQuery.of(context).size.width * 0.7,
-        ),
-        child: _customView ?? Text(_message ?? ''),
-      );
+    constraints: BoxConstraints(
+      minWidth: MediaQuery.of(context).size.width * 0.7,
+    ),
+    child: _customView ?? Text(_message ?? ''),
+  );
 
   List<Widget> _buildActions() {
     var theme = Theme.of(context).colorScheme;
     final actions = <Widget>[];
     if (_neutralButtonTitle != null) {
       actions.add(
-        _buildButton(
-          _neutralButtonTitle!,
-          _onNeutralButtonClick,
-          theme,
-        ),
+        _buildButton(_neutralButtonTitle!, _onNeutralButtonClick, theme),
       );
     }
     if (_negativeButtonTitle != null) {
       actions.add(
-        _buildButton(
-          _negativeButtonTitle!,
-          _onNegativeButtonClick,
-          theme,
-        ),
+        _buildButton(_negativeButtonTitle!, _onNegativeButtonClick, theme),
       );
     }
     if (_positiveButtonTitle != null) {
       actions.add(
-        _buildButton(
-          _positiveButtonTitle!,
-          _onPositiveButtonClick,
-          theme,
-        ),
+        _buildButton(_positiveButtonTitle!, _onPositiveButtonClick, theme),
       );
     }
     return actions;

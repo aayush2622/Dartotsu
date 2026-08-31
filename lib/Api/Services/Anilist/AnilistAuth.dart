@@ -28,7 +28,10 @@ class AnilistAuth extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    final cached = PrefManager.getCustomType(_userCacheKey, AnilistUser.fromJson);
+    final cached = PrefManager.getCustomType(
+      _userCacheKey,
+      AnilistUser.fromJson,
+    );
     if (cached != null) user.value = cached;
     if (isLoggedIn) unawaited(refreshUser());
   }
@@ -43,8 +46,7 @@ class AnilistAuth extends GetxController {
           useWebview: true,
         ),
       );
-      final match =
-          RegExp(r'access_token=([^&]+)').firstMatch(result);
+      final match = RegExp(r'access_token=([^&]+)').firstMatch(result);
       final token = match?.group(1);
       if (token == null || token.isEmpty) {
         snackString('Login cancelled');

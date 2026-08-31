@@ -32,7 +32,10 @@ final ThemeData saikouLightTheme = ThemeData(
   ),
   textTheme: const TextTheme(
     headlineLarge: TextStyle(
-        color: Color(0xFF1C1B20), fontSize: 20, fontWeight: FontWeight.bold),
+      color: Color(0xFF1C1B20),
+      fontSize: 20,
+      fontWeight: FontWeight.bold,
+    ),
     bodyLarge: TextStyle(color: Color(0xFF1C1B20)),
   ),
   fontFamily: 'Poppins',
@@ -70,7 +73,10 @@ final ThemeData saikouDarkTheme = ThemeData(
   ),
   textTheme: const TextTheme(
     headlineLarge: TextStyle(
-        color: Color(0xFFEEEEEE), fontSize: 20, fontWeight: FontWeight.bold),
+      color: Color(0xFFEEEEEE),
+      fontSize: 20,
+      fontWeight: FontWeight.bold,
+    ),
     bodyLarge: TextStyle(color: Color(0xFFEEEEEE)),
   ),
   fontFamily: 'Poppins',

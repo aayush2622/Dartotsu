@@ -15,8 +15,8 @@ T? tryFind<T>({String? tag}) =>
 
 T getOrPut<T>(T dependency, {String? tag, bool permanent = false}) =>
     isRegistered<T>(tag: tag)
-        ? Get.find<T>(tag: tag)
-        : Get.put<T>(dependency, tag: tag, permanent: permanent);
+    ? Get.find<T>(tag: tag)
+    : Get.put<T>(dependency, tag: tag, permanent: permanent);
 
 T getOrLazyPut<T>(T Function() builder, {String? tag, bool fenix = false}) {
   if (!isRegistered<T>(tag: tag)) {

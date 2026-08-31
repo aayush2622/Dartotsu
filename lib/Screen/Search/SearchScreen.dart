@@ -127,8 +127,7 @@ class _SearchScreenState extends BaseScreen<SearchScreen> {
           },
           child: GridView.builder(
             padding: const EdgeInsets.all(12),
-            gridDelegate:
-                const SliverGridDelegateWithMaxCrossAxisExtent(
+            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
               maxCrossAxisExtent: 120,
               childAspectRatio: 0.52,
               crossAxisSpacing: 10,
@@ -137,10 +136,8 @@ class _SearchScreenState extends BaseScreen<SearchScreen> {
             itemCount: _results.length,
             itemBuilder: (_, i) => _ResultCard(
               media: _results[i],
-              onTap: () => navigateToPage(
-                context,
-                DetailScreen(media: _results[i]),
-              ),
+              onTap: () =>
+                  navigateToPage(context, DetailScreen(media: _results[i])),
             ),
           ),
         );

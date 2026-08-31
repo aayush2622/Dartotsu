@@ -36,9 +36,9 @@ class _LoginScreenState extends BaseScreen<LoginScreen> {
 
   void _enter() {
     PrefName.hasCompletedOnboarding.value = true;
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(builder: (_) => const MainScreen()),
-    );
+    Navigator.of(
+      context,
+    ).pushReplacement(MaterialPageRoute(builder: (_) => const MainScreen()));
   }
 
   void _tokenDialog(LoginHandler handler) {

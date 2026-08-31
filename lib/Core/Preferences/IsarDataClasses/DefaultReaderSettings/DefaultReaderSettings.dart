@@ -48,11 +48,13 @@ class ReaderSettings {
 
   factory ReaderSettings.fromJson(Map<String, dynamic> json) {
     return ReaderSettings(
-      layoutType: _safeEnum(LayoutType.values, json['layoutType']) ??
+      layoutType:
+          _safeEnum(LayoutType.values, json['layoutType']) ??
           LayoutType.Continuous,
       direction:
           _safeEnum(Direction.values, json['direction']) ?? Direction.UTD,
-      dualPageMode: _safeEnum(DualPageMode.values, json['dualPageMode']) ??
+      dualPageMode:
+          _safeEnum(DualPageMode.values, json['dualPageMode']) ??
           DualPageMode.Auto,
       scrollToNext: json['scrollToNext'] ?? false,
       spacedPages: json['spacedPages'] ?? false,
@@ -140,8 +142,4 @@ enum Direction {
   }
 }
 
-enum DualPageMode {
-  Auto,
-  Single,
-  ForcedDouble,
-}
+enum DualPageMode { Auto, Single, ForcedDouble }

@@ -40,8 +40,6 @@ enum AppTheme {
     };
   }
 
-  static AppTheme byName(String name) => values.firstWhere(
-        (e) => e.name == name,
-        orElse: () => AppTheme.purple,
-      );
+  static AppTheme byName(String name) =>
+      values.firstWhere((e) => e.name == name, orElse: () => AppTheme.purple);
 }
