@@ -313,16 +313,44 @@ class _MediaSectionState extends State<MediaSection> {
                   borderRadius: BorderRadius.circular(16),
                 ),
                 clipBehavior: Clip.antiAlias,
-                child: cachedNetworkImage(
-                  imageUrl: media.cover ?? '',
-                  fit: BoxFit.cover,
-                  placeholder: (context, url) =>
-                      Container(color: Colors.white12),
-                  errorWidget: (context, url, error) => Icon(
-                    Icons.broken_image_rounded,
-                    color: theme.colorScheme.error,
-                    size: 32,
-                  ),
+                child: Stack(
+                  fit: StackFit.expand,
+                  children: [
+                    cachedNetworkImage(
+                      imageUrl: media.cover ?? '',
+                      fit: BoxFit.cover,
+                      placeholder: (context, url) =>
+                          Container(color: Colors.white12),
+                      errorWidget: (context, url, error) => Icon(
+                        Icons.broken_image_rounded,
+                        color: theme.colorScheme.error,
+                        size: 32,
+                      ),
+                    ),
+                    if (_progressLabel(media) case final label?)
+                      Positioned(
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 3,
+                            horizontal: 6,
+                          ),
+                          color: Colors.black.withValues(alpha: 0.55),
+                          child: Text(
+                            label,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              fontFamily: 'Poppins',
+                              fontSize: 11,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                  ],
                 ),
               ),
             ),
@@ -344,6 +372,13 @@ class _MediaSectionState extends State<MediaSection> {
         overflow: TextOverflow.ellipsis,
       ),
     );
+  }
+
+  static String? _progressLabel(Media media) {
+    final progress = media.userProgress;
+    if (progress == null || media.userStatus == null) return null;
+    final total = media.anime?.totalEpisodes ?? media.manga?.totalChapters;
+    return total != null ? '$progress / $total' : '$progress';
   }
 }
 

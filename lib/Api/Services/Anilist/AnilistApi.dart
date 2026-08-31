@@ -1,6 +1,7 @@
 import '../../../Core/Services/Model/Media.dart';
 import 'AnilistClient.dart';
 import 'AnilistMedia.dart';
+import 'AnilistNotification.dart';
 
 class MediaRail {
   final String title;
@@ -171,6 +172,37 @@ $userLists
       MediaRail('Trending Manga', page('trendingManga')),
       MediaRail('Popular Anime', page('popularAnime')),
     ].where((r) => r.media.isNotEmpty).toList();
+  }
+
+  Future<List<AnilistNotification>> notifications({int page = 1}) async {
+    final data = await client.query(
+      '''
+query (\$page: Int) {
+  Page(page: \$page, perPage: 30) {
+    notifications(resetNotificationCount: true) {
+      __typename
+      ... on AiringNotification { id type episode createdAt media { id title { userPreferred } coverImage { large } } }
+      ... on RelatedMediaAdditionNotification { id type createdAt media { id title { userPreferred } coverImage { large } } }
+      ... on FollowingNotification { id type context createdAt user { name avatar { large } } }
+      ... on ActivityMentionNotification { id type context createdAt user { name avatar { large } } }
+      ... on ActivityReplyNotification { id type context createdAt user { name avatar { large } } }
+      ... on ActivityLikeNotification { id type context createdAt user { name avatar { large } } }
+      ... on ActivityReplyLikeNotification { id type context createdAt user { name avatar { large } } }
+    }
+  }
+}
+''',
+      variables: {'page': page},
+    );
+
+    final list =
+        (data['Page'] as Map<String, dynamic>?)?['notifications'] as List? ??
+        const [];
+    return list
+        .cast<Map<String, dynamic>>()
+        .map(AnilistNotification.fromJson)
+        .whereType<AnilistNotification>()
+        .toList();
   }
 
   Future<void> saveListEntry({
