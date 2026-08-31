@@ -2,19 +2,19 @@ import 'dart:convert';
 
 import 'package:isar_community/isar.dart';
 
-import '../../PrefManager.dart';
+import '../../Pref.dart';
 
 part 'KeyValues.g.dart';
 
+/// One row of the typed key-value store. [key] is the fully-qualified
+/// `<LOCATION>/<name>` storage key (see [Pref.storageKey]) and is globally
+/// unique, so it alone is the row identity.
 @collection
 class KeyValue {
   Id id = Isar.autoIncrement;
 
   @Index(unique: true, replace: true)
   late String key;
-
-  @Enumerated(EnumType.name)
-  late PrefLocation location;
 
   String? stringValue;
   int? intValue;
@@ -30,18 +30,30 @@ class KeyValue {
 
   KeyValue();
 
-  static final Map<String, PrefLocation> _locationMap = {
-    for (final e in PrefLocation.values) e.name: e,
-  };
+  /// Backup grouping bucket, derived from the key prefix.
+  @ignore
+  PrefLocation get location {
+    final prefix = key.contains('/') ? key.split('/').first : '';
+    return PrefLocation.values.firstWhere(
+      (e) => e.name == prefix,
+      orElse: () => PrefLocation.OTHER,
+    );
+  }
 
   factory KeyValue.fromJson(Map<String, dynamic> json) {
-    final kv = KeyValue()
+    return KeyValue()
       ..key = json['key'] as String
-      ..location = _locationMap[json['location']] ?? PrefLocation.OTHER;
+      ..value = _deserialize(json['dataType'] as String, json['value']);
+  }
 
-    kv.value = _deserialize(json['dataType'] as String, json['value']);
-
-    return kv;
+  Map<String, dynamic> toJson() {
+    final current = value;
+    return {
+      'key': key,
+      'type': 'KeyValue',
+      'dataType': _typeOf(current),
+      'value': _serialize(current),
+    };
   }
 
   static dynamic _deserialize(String type, dynamic value) {
@@ -57,49 +69,35 @@ class KeyValue {
       case 'datetime':
         return DateTime.parse(value as String);
       case 'string_list':
-        return List<String>.from(value);
+        return List<String>.from(value as List);
       case 'int_list':
-        return List<int>.from(value);
+        return List<int>.from(value as List);
       case 'bool_list':
-        return List<bool>.from(value);
+        return List<bool>.from(value as List);
       case 'map':
-        return Map<String, dynamic>.from(value);
+        return Map<String, dynamic>.from(value as Map);
       default:
         throw UnsupportedError('Unknown type: $type');
     }
   }
 
   static String _typeOf(dynamic value) {
-    switch (value) {
-      case String _:
-        return 'string';
-      case int _:
-        return 'int';
-      case double _:
-        return 'double';
-      case bool _:
-        return 'bool';
-      case DateTime _:
-        return 'datetime';
-      case List<String> _:
-        return 'string_list';
-      case List<int> _:
-        return 'int_list';
-      case List<bool> _:
-        return 'bool_list';
-      case Map<String, dynamic> _:
-        return 'map';
-      default:
-        throw UnsupportedError('Unsupported type: ${value.runtimeType}');
-    }
+    return switch (value) {
+      String _ => 'string',
+      int _ => 'int',
+      double _ => 'double',
+      bool _ => 'bool',
+      DateTime _ => 'datetime',
+      List<String> _ => 'string_list',
+      List<int> _ => 'int_list',
+      List<bool> _ => 'bool_list',
+      Map<String, dynamic> _ => 'map',
+      _ => throw UnsupportedError('Unsupported type: ${value.runtimeType}'),
+    };
   }
 
-  static dynamic _serialize(dynamic value) {
-    if (value is DateTime) {
-      return value.toIso8601String();
-    }
-    return value;
-  }
+  static dynamic _serialize(dynamic value) =>
+      value is DateTime ? value.toIso8601String() : value;
 
   void _clearValues() {
     stringValue = null;
@@ -115,6 +113,7 @@ class KeyValue {
 }
 
 extension KeyValueValue on KeyValue {
+  @ignore
   dynamic get value {
     if (stringValue != null) return stringValue;
     if (intValue != null) return intValue;
@@ -136,56 +135,28 @@ extension KeyValueValue on KeyValue {
     switch (value) {
       case String v:
         stringValue = v;
-        break;
-
       case int v:
         intValue = v;
-        break;
-
       case double v:
         doubleValue = v;
-        break;
-
       case bool v:
         boolValue = v;
-        break;
-
       case DateTime v:
         dateTimeValue = v.toIso8601String();
-        break;
-
       case List<String> v:
         stringListValue = v;
-        break;
-
       case List<int> v:
         intListValue = v;
-        break;
-
       case List<bool> v:
         boolListValue = v;
-        break;
-
       case Map<String, dynamic> v:
         serializedMapValue = jsonEncode(v);
+      case Map v:
+        serializedMapValue = jsonEncode(Map<String, dynamic>.from(v));
+      case null:
         break;
-
       default:
         throw UnsupportedError('${value.runtimeType} is not supported');
     }
-  }
-}
-
-extension KeyValueJson on KeyValue {
-  Map<String, dynamic> toJson() {
-    final current = value;
-
-    return {
-      'key': key,
-      'location': location.name,
-      'type': 'KeyValue',
-      'dataType': KeyValue._typeOf(current),
-      'value': KeyValue._serialize(current),
-    };
   }
 }

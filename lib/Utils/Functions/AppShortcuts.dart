@@ -1,6 +1,5 @@
 import 'package:flutter/services.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/src/extension_navigation.dart';
+import 'package:get/get.dart';
 import 'package:window_manager/window_manager.dart';
 
 import '../../Core/ThemeManager/ThemeController.dart';
@@ -57,9 +56,10 @@ bool appShortcuts(KeyEvent event) {
       return true;
 
     case LogicalKeyboardKey.keyD:
-      final v = !theme.isDarkMode.value;
-      theme.setDarkMode(v);
-      snackString(v ? 'Dark mode enabled' : 'Dark mode disabled');
+      theme.toggleDarkMode();
+      snackString(
+        theme.isDarkModeActive ? 'Dark mode enabled' : 'Dark mode disabled',
+      );
       return true;
 
     case LogicalKeyboardKey.keyO:

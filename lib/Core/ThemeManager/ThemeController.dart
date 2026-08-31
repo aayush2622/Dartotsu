@@ -2,104 +2,136 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../Preferences/PrefManager.dart';
+import 'ThemeManager.dart';
 
+/// Reactive theme state. Every field is a shared auto-persisting [Pref.rx];
+/// [light] / [dark] are memoized and only rebuilt when an input changes.
 class ThemeController extends GetxController {
-  // Reactive variables
-  final isDarkMode = false.obs;
-  final isOled = false.obs;
-  final theme = 'purple'.obs;
-  final useMaterialYou = false.obs;
-  final useCustomColor = false.obs;
-  final customColor = 4280391411.obs;
-  final useGlassMode = false.obs;
-  final local = "en".obs;
+  final useGlassMode = PrefName.useGlassMode.rx;
+  final isOled = PrefName.isOled.rx;
+  final themeName = PrefName.theme.rx;
+  final useMaterialYou = PrefName.useMaterialYou.rx;
+  final useCustomColor = PrefName.useCustomColor.rx;
+  final customColor = PrefName.customColor.rx; // ARGB int
+  final cardSize = PrefName.cardSize.rx;
+  final mode = PrefName.themeMode.rx;
 
-  @override
-  void onInit() {
-    super.onInit();
-    _initialize();
+  ColorScheme? _dynamicLight;
+  ColorScheme? _dynamicDark;
+
+  /// Fed by `DynamicColorBuilder` in `MyApp`.
+  void setDynamicSchemes(ColorScheme? light, ColorScheme? dark) {
+    if (_dynamicLight == light && _dynamicDark == dark) return;
+    _dynamicLight = light;
+    _dynamicDark = dark;
+    _cacheKey = null;
   }
 
-  void _initialize() {
-    var darkMode = loadData(PrefName.isDarkMode);
-    bool isDark;
+  ThemeMode get themeMode => mode.value.themeMode;
 
-    if (darkMode == 0) {
-      isDark =
-          WidgetsBinding.instance.window.platformBrightness == Brightness.dark;
-      saveData(PrefName.isDarkMode, isDark ? 1 : 2);
-    } else if (darkMode == 1) {
-      isDark = true;
+  bool get isDarkModeActive => switch (mode.value) {
+        ThemeModePref.dark => true,
+        ThemeModePref.light => false,
+        ThemeModePref.system =>
+          WidgetsBinding.instance.platformDispatcher.platformBrightness ==
+              Brightness.dark,
+      };
+
+  // -- memoized theme data --------------------------------------------------
+
+  List<Object?>? _cacheKey;
+  ThemeData? _light;
+  ThemeData? _dark;
+
+  ThemeData get light {
+    _ensure();
+    return _light!;
+  }
+
+  ThemeData get dark {
+    _ensure();
+    return _dark!;
+  }
+
+  void _ensure() {
+    final key = <Object?>[
+      themeName.value,
+      isOled.value,
+      useMaterialYou.value,
+      useCustomColor.value,
+      customColor.value,
+      _dynamicLight,
+      _dynamicDark,
+    ];
+    if (_cacheKey != null && _listEquals(_cacheKey!, key)) return;
+    _cacheKey = key;
+    _light = _build(Brightness.light);
+    _dark = _build(Brightness.dark);
+  }
+
+  ThemeData _build(Brightness brightness) {
+    final dark = brightness == Brightness.dark;
+    final dynamicScheme = dark ? _dynamicDark : _dynamicLight;
+
+    ThemeData base;
+    if (useCustomColor.value) {
+      base = dark
+          ? getCustomDarkTheme(customColor.value)
+          : getCustomLightTheme(customColor.value);
+    } else if (useMaterialYou.value && dynamicScheme != null) {
+      base = dark
+          ? materialThemeDark(dynamicScheme)
+          : materialThemeLight(dynamicScheme);
     } else {
-      isDark = false;
+      base = AppTheme.byName(themeName.value).themeFor(brightness);
     }
 
-    isDarkMode.value = isDark;
-    isOled.value = loadData(PrefName.isOled);
-    theme.value = loadData(PrefName.theme);
-    useMaterialYou.value = loadData(PrefName.useMaterialYou);
-    useCustomColor.value = loadData(PrefName.useCustomColor);
-    customColor.value = loadData(PrefName.customColor);
-    useGlassMode.value = loadData(PrefName.useGlassMode);
-    local.value = loadData(PrefName.defaultLanguage);
+    return buildAppTheme(base, isOled: isOled.value);
   }
 
-  void setGlassEffect(bool value) {
-    useGlassMode.value = value;
-    saveData(PrefName.useGlassMode, value);
+  // -- mutations (guarded combos) -----------------------------------------
+
+  void setGlassEffect(bool value) => useGlassMode.value = value;
+
+  void setThemeMode(ThemeModePref value) {
+    mode.value = value;
+    if (value == ThemeModePref.light) isOled.value = false;
   }
 
-  void setDarkMode(bool value) {
-    isDarkMode.value = value;
-    saveData(PrefName.isDarkMode, value ? 1 : 2);
-
-    if (!value) {
-      setOled(false);
-    }
-  }
+  void toggleDarkMode() => setThemeMode(
+        isDarkModeActive ? ThemeModePref.light : ThemeModePref.dark,
+      );
 
   void setOled(bool value) {
     isOled.value = value;
-    saveData(PrefName.isOled, value);
-
-    if (value) {
-      setDarkMode(true);
+    if (value && mode.value != ThemeModePref.dark) {
+      mode.value = ThemeModePref.dark;
     }
   }
 
-  void setTheme(String value) {
-    theme.value = value;
-    useCustomTheme(false);
-    setMaterialYou(false);
-    saveData(PrefName.theme, value);
+  void setTheme(String name) {
+    useCustomColor.value = false;
+    useMaterialYou.value = false;
+    themeName.value = name;
   }
 
   void setMaterialYou(bool value) {
+    if (value) useCustomColor.value = false;
     useMaterialYou.value = value;
-    saveData(PrefName.useMaterialYou, value);
-
-    if (value) {
-      useCustomTheme(false);
-    }
   }
 
-  void useCustomTheme(bool value) {
+  void setUseCustomColor(bool value) {
+    if (value) useMaterialYou.value = false;
     useCustomColor.value = value;
-    saveData(PrefName.useCustomColor, value);
-
-    if (value) {
-      setMaterialYou(false);
-    }
   }
 
-  void setCustomColor(Color color) {
-    customColor.value = color.value;
-    saveData(PrefName.customColor, color.value);
-  }
+  void setCustomColor(Color color) => customColor.value = color.toARGB32();
+}
 
-  void setLocale(Locale locale) {
-    local.value = locale.languageCode;
-    //Get.updateLocale(locale);
-    saveData(PrefName.defaultLanguage, locale.languageCode);
+bool _listEquals(List<Object?> a, List<Object?> b) {
+  if (a.length != b.length) return false;
+  for (var i = 0; i < a.length; i++) {
+    if (a[i] != b[i]) return false;
   }
+  return true;
 }

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../Core/Preferences/PrefManager.dart';
-import '../../Core/ThemeManager/ThemeManager.dart';
+import '../../Widgets/Components/ThemedContainer.dart';
 import '../../Core/ThemeManager/language.dart';
 import '../../Utils/Animation/WidgetAnimations.dart';
 import '../../Utils/Functions/SnackBar.dart';
@@ -165,7 +165,6 @@ class _ExtensionListState extends State<ExtensionList> {
         vertical: 6,
         horizontal: widget.isInstalled ? 0 : 8,
       ),
-      context: context,
       child: ListTile(
         leading: ClipRRect(
           borderRadius: BorderRadius.circular(64),

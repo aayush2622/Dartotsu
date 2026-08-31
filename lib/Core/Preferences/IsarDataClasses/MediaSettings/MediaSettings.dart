@@ -76,7 +76,7 @@ class MediaSettings {
         json['playerSettings'] as Map<String, dynamic>,
       ),
       readerSetting: ReaderSettings.fromJson(
-        json['playerSettings'] as Map<String, dynamic>,
+        json['readerSettings'] as Map<String, dynamic>,
       ),
     );
   }
@@ -95,9 +95,17 @@ class MediaSettings {
     };
   }
 
+  static String _key(Media media) {
+    final service = find<MediaServiceController>().currentService.value;
+    return 'mediaSettings/${service.id}/${media.id}';
+  }
+
   static void saveMediaSettings(Media media) {
-    var service = find<MediaServiceController>().currentService.value;
-    var key = "${service.name}-${media.id}-Settings";
-    saveCustomData(key, media.settings);
+    PrefManager.setCustomType(_key(media), media.settings, (s) => s.toJson());
+  }
+
+  static MediaSettings loadMediaSettings(Media media) {
+    return PrefManager.getCustomType(_key(media), MediaSettings.fromJson) ??
+        MediaSettings();
   }
 }

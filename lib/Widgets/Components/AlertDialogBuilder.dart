@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-import '../../Core/ThemeManager/ThemeManager.dart';
+import 'ThemedContainer.dart';
 
 class AlertDialogBuilder {
   final BuildContext context;
@@ -130,7 +130,6 @@ class AlertDialogBuilder {
             ),
             child: IntrinsicWidth(
               child: ThemedContainer(
-                context: context,
                 padding: const EdgeInsets.all(20),
                 borderRadius: BorderRadius.circular(32),
                 child: Column(

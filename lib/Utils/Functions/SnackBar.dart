@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/src/extension_navigation.dart';
+import 'package:get/get.dart' hide ContextExtensionss;
 
-import '../../Core/ThemeManager/ThemeManager.dart';
+import '../../Widgets/Components/ThemedContainer.dart';
 import '../Animation/WidgetAnimations.dart';
 import '../Extensions/ContextExtensions.dart';
 import 'CopyToClip.dart';
-
-export '../Functions/SnackBar.dart';
 
 OverlayEntry? _snackOverlay;
 void snackString(
@@ -38,7 +35,6 @@ void snackString(
               child: Material(
                 color: Colors.transparent,
                 child: ThemedContainer(
-                  context: context,
                   borderRadius: BorderRadius.circular(18),
                   padding: const EdgeInsets.symmetric(
                     horizontal: 16,

@@ -5,13 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
+import '../../Core/Preferences/PrefManager.dart';
 import '../../Core/ThemeManager/ThemeController.dart';
-import '../../Core/ThemeManager/ThemeManager.dart';
 import '../../Utils/Animation/WidgetAnimations.dart';
 import '../../Utils/Extensions/NumExtensions.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Widgets/Components/CachedNetworkImage.dart';
 import '../../Widgets/Components/ScrollConfig.dart';
+import '../../Widgets/Components/ThemedContainer.dart';
 import '../MainScreen.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -32,9 +33,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   TextStyle? get labelStyle => theme.textTheme.labelLarge;
   int _currentPage = 0;
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
+  void _finish() {
+    PrefName.hasCompletedOnboarding.value = true;
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(builder: (_) => const MainScreen()),
+    );
   }
 
   @override
@@ -55,9 +58,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             _buildNavButton(context, onPressed, "Skip"),
         overrideDone: (context, onPressed) =>
             _buildNavButton(context, onPressed, "Done"),
-        onDone: () => Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (_) => const MainScreen()),
-        ),
+        onDone: _finish,
         onChange: (value) => setState(() => _currentPage = value),
         pages: [
           _welcomePage(),
@@ -158,7 +159,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             final theme = Theme.of(context);
 
             return ThemedContainer(
-              context: context,
               alignment: Alignment.center,
               padding: const EdgeInsets.all(12),
               borderRadius: radius,
@@ -177,7 +177,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             final theme = Theme.of(context);
 
             return ThemedContainer(
-              context: context,
               alignment: Alignment.center,
               padding: const EdgeInsets.all(12),
               borderRadius: radius,

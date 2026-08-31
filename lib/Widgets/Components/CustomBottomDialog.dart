@@ -2,7 +2,7 @@ import 'package:dpad/dpad.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../Core/ThemeManager/ThemeManager.dart';
+import 'ThemedContainer.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Functions/AppShortcuts.dart';
 import 'ScrollConfig.dart';
@@ -56,7 +56,6 @@ class _CustomBottomDialogState extends State<CustomBottomDialog> {
 
     return ThemedContainer(
       color: colorScheme.surface,
-      context: context,
       border: Border.all(
         width: 0,
         color: colorScheme.onSurface.withOpacity(0.2),

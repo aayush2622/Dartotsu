@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 
 import '../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../Core/ThemeManager/ThemeController.dart';
-import '../../Core/ThemeManager/ThemeManager.dart';
+import '../../Widgets/Components/ThemedContainer.dart';
 import '../../Core/ThemeManager/language.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
@@ -233,7 +233,6 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
     return Opacity(
       opacity: opacity,
       child: ThemedContainer(
-        context: context,
         borderRadius: const BorderRadius.all(Radius.circular(24)),
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 8),
@@ -394,7 +393,6 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
                     final selected = active?.url == repo.url;
 
                     return ThemedContainer(
-                      context: context,
                       borderRadius: const BorderRadius.all(Radius.circular(24)),
                       margin: const EdgeInsets.symmetric(
                         horizontal: 16,
@@ -486,7 +484,6 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
       child: ThemedContainer(
-        context: context,
         borderRadius: BorderRadius.circular(16),
         padding: const EdgeInsets.symmetric(horizontal: 8),
         child: TextField(
@@ -532,7 +529,6 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
       curve: Curves.easeOut,
       margin: const EdgeInsets.symmetric(horizontal: 4, vertical: 6),
       child: ThemedContainer(
-        context: context,
         color: selected ? theme.surfaceContainerHigh : null,
         borderRadius: BorderRadius.circular(16),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
@@ -710,12 +706,14 @@ Future<void> showInstallDialog(
 ) async {
   Map<String, dynamic>? remote;
 
+  var hasUpdate = false;
   try {
     remote = await plugin.fetchRemote();
     if (remote == null) {
       snackString("$name is not available in the configured repo");
       return;
     }
+    if (plugin.installed.value) hasUpdate = await plugin.checkForUpdate();
   } catch (_) {
     snackString("Failed to fetch plugin info");
     return;
@@ -834,16 +832,16 @@ Future<void> showInstallDialog(
         const SizedBox(height: 20),
       ],
       negativeText: "Cancel",
-      positiveText: plugin.installed.value
-          ? "Installed"
-          : plugin.hasUpdate
+      positiveText: !plugin.installed.value
+          ? "Install"
+          : hasUpdate
           ? "Update"
-          : "Install",
+          : "Installed",
       negativeCallback: () {
         Navigator.pop(context);
       },
       positiveCallback: () async {
-        if (plugin.installed.value && !plugin.hasUpdate) {
+        if (plugin.installed.value && !hasUpdate) {
           return;
         }
 

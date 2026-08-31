@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 // Light Cyan Theme
-final ThemeData cyanLightTheme = ThemeData(
+final ThemeData blueLightTheme = ThemeData(
   brightness: Brightness.light,
   primaryColor: const Color(0xFF00658E),
   colorScheme: const ColorScheme.light(
@@ -44,7 +44,7 @@ final ThemeData cyanLightTheme = ThemeData(
 );
 
 // Dark Cyan Theme
-final ThemeData cyanDarkTheme = ThemeData(
+final ThemeData blueDarkTheme = ThemeData(
   brightness: Brightness.dark,
   primaryColor: const Color(0xFF84CFFF),
   colorScheme: const ColorScheme.dark(
