@@ -8,6 +8,7 @@ import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:get/get.dart';
 
 import '../../Core/NetworkManager/NetworkManager.dart';
+import '../../Core/ThemeManager/ThemeController.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Function.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
@@ -35,6 +36,8 @@ class _WebViewState extends State<WebView> {
 
   final cookieManager = find<NetworkManager>().cookieManager;
   PullToRefreshController? _pullToRefreshController;
+
+  bool get _isDark => find<ThemeController>().isDarkModeActive;
   @override
   void initState() {
     super.initState();
@@ -140,7 +143,7 @@ class _WebViewState extends State<WebView> {
           padding: const EdgeInsets.symmetric(horizontal: 12),
           height: 44,
           decoration: BoxDecoration(
-            color: scheme.surfaceVariant,
+            color: scheme.surfaceContainerHighest,
             borderRadius: BorderRadius.circular(16),
           ),
           alignment: Alignment.center,
@@ -285,8 +288,8 @@ class _WebViewState extends State<WebView> {
             useShouldOverrideUrlLoading: true,
             mediaPlaybackRequiresUserGesture: false,
             allowsInlineMediaPlayback: true,
-            darkMode: true,
-            algorithmicDarkeningAllowed: true,
+            darkMode: _isDark,
+            algorithmicDarkeningAllowed: _isDark,
             thirdPartyCookiesEnabled: true,
             cacheEnabled: true,
           ),
@@ -332,7 +335,7 @@ class _WebViewState extends State<WebView> {
             }
           },
           shouldInterceptFetchRequest: (controller, fetchRequest) async {
-            final res = await Get.find<NetworkManager>().get(
+            final res = await find<NetworkManager>().get(
               fetchRequest.url.toString(),
               headers: {
                 for (final e in (fetchRequest.headers ?? {}).entries)
@@ -350,7 +353,7 @@ class _WebViewState extends State<WebView> {
             );
           },
           shouldInterceptRequest: (controller, request) async {
-            final res = await Get.find<NetworkManager>().get(
+            final res = await find<NetworkManager>().get(
               request.url.toString(),
               headers: request.headers,
             );
@@ -417,6 +420,12 @@ class _WebViewState extends State<WebView> {
     _searchController.dispose();
     _controller = null;
     _cookieSyncTimer?.cancel();
+    _url.close();
+    _title.close();
+    _canGoBack.close();
+    _canGoForward.close();
+    _isEditing.close();
+    _progress.close();
     super.dispose();
   }
 }

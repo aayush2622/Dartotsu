@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -89,25 +88,16 @@ class _FloatingBottomNavBarState extends State<FloatingBottomNavBar> {
               _navButton(
                 context: context,
                 onTap: () => serviceSwitcher(context),
-                iconBuilder: () => Obx(() {
-                  final avatar = "".obs.value;
-
-                  return CircleAvatar(
-                    radius: 24,
-                    backgroundColor: Colors.transparent,
-                    backgroundImage: avatar.isEmpty
-                        ? null
-                        : CachedNetworkImageProvider(avatar),
-                    child: avatar.isEmpty
-                        ? loadSvg(
-                            service.iconPath,
-                            width: 26,
-                            height: 26,
-                            color: theme.onSurface,
-                          )
-                        : null,
-                  ).animateNavAvatar();
-                }),
+                iconBuilder: () => CircleAvatar(
+                  radius: 24,
+                  backgroundColor: Colors.transparent,
+                  child: loadSvg(
+                    service.iconPath,
+                    width: 26,
+                    height: 26,
+                    color: theme.onSurface,
+                  ),
+                ).animateNavAvatar(),
               ),
 
               ..._items.map(

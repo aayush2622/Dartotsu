@@ -10,6 +10,13 @@ import 'CookieManager.dart';
 import 'DnsManager.dart';
 import 'LogInterceptor.dart';
 
+/// TLS certificate verification is **deliberately off**. Dartotsu proxies
+/// traffic for arbitrary third-party extension sources (many with broken,
+/// expired or self-signed certificates) and for the in-app WebView's
+/// request interception. Verifying would break a large fraction of sources.
+/// Do not flip this without a per-request opt-out for extension traffic.
+const bool kVerifyTlsCertificates = false;
+
 class NetworkManager extends GetxController {
   final String _userAgent = _buildUserAgent();
   late RhttpClient _client;
@@ -37,7 +44,7 @@ class NetworkManager extends GetxController {
         throwOnStatusCode: false,
         tlsSettings: const TlsSettings(
           rootCertSource: RootCertSource.webpki,
-          verifyCertificates: false,
+          verifyCertificates: kVerifyTlsCertificates,
         ),
         timeoutSettings: const TimeoutSettings(
           connectTimeout: Duration(seconds: 15),
@@ -195,11 +202,15 @@ class NetworkManager extends GetxController {
   }
 
   static dynamic _decodeIfJson(String body, Map<String, List<String>> headers) {
-    final contentType = headers['content-type']?.first;
-    if (contentType?.contains('application/json') == true) {
+    final contentType =
+        (headers['content-type'] ?? headers['Content-Type'])?.first ?? '';
+    // application/json, text/json, application/*+json, …
+    if (!contentType.contains('json')) return body;
+    try {
       return jsonDecode(body);
+    } catch (_) {
+      return body;
     }
-    return body;
   }
 
   static HttpHeaders? _mapHeaders(Map<String, String>? headers) =>
@@ -231,12 +242,12 @@ class NetworkManager extends GetxController {
   static String _buildUserAgent() {
     final platform = Platform.operatingSystem;
     final os = Platform.operatingSystemVersion.split(' ').first;
-    final arch = Platform.version.split(' ').first;
-    return 'Dartotsu ($platform $os; $arch)';
+    return 'Dartotsu ($platform $os)';
   }
 
   @override
   void onClose() {
+    cookieManager.dispose();
     _client.dispose();
     super.onClose();
   }

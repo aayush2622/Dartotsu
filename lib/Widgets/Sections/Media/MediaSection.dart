@@ -275,7 +275,7 @@ class _MediaSectionState extends State<MediaSection> {
                       child: DpadFocusable(
                         onSelect: () =>
                             data.onMediaTap?.call(context, index, media),
-                        child: _mediaItem(index = index, media),
+                        child: _mediaItem(index, media),
                         builder: (context, state, child) {
                           return AnimatedScale(
                             scale: state.focused ? 1.07 : 1.0,
@@ -297,65 +297,79 @@ class _MediaSectionState extends State<MediaSection> {
   }
 
   Widget _mediaItem(int index, Media media) {
-    var hover = false.obs;
-
-    return MouseRegion(
-      cursor: SystemMouseCursors.click,
-      onEnter: (_) => hover.value = true,
-      onExit: (_) => hover.value = false,
+    return _HoverScale(
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,
         onTap: () => data.onMediaTap?.call(context, index, media),
-        child: Obx(
-          () => AnimatedScale(
-            scale: hover.value ? 1.07 : 1.0,
-            duration: const Duration(milliseconds: 200),
-            curve: Curves.easeOut,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  width: 108 * multiplicationFactor,
-                  height: 160 * multiplicationFactor,
-                  child: Card(
-                    elevation: 5,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    clipBehavior: Clip.antiAlias,
-                    child: cachedNetworkImage(
-                      imageUrl: media.cover ?? '',
-                      fit: BoxFit.cover,
-                      placeholder: (context, url) =>
-                          Container(color: Colors.white12),
-                      errorWidget: (context, url, error) => Icon(
-                        Icons.broken_image_rounded,
-                        color: theme.colorScheme.error,
-                        size: 32,
-                      ),
-                    ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              width: 108 * multiplicationFactor,
+              height: 160 * multiplicationFactor,
+              child: Card(
+                elevation: 5,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                clipBehavior: Clip.antiAlias,
+                child: cachedNetworkImage(
+                  imageUrl: media.cover ?? '',
+                  fit: BoxFit.cover,
+                  placeholder: (context, url) =>
+                      Container(color: Colors.white12),
+                  errorWidget: (context, url, error) => Icon(
+                    Icons.broken_image_rounded,
+                    color: theme.colorScheme.error,
+                    size: 32,
                   ),
                 ),
-                const SizedBox(height: 8),
-                _buildMediaTitle(false, media.mainName),
-                const SizedBox(height: 8),
-                _buildMediaTitle(false, "1155 | 1155"),
-              ],
+              ),
             ),
-          ),
+            const SizedBox(height: 8),
+            _buildMediaTitle(media.mainName),
+          ],
         ),
       ),
     );
   }
 
-  Widget _buildMediaTitle(bool isSkeleton, String title) {
+  Widget _buildMediaTitle(String title) {
     return SizedBox(
       width: 108,
       child: Text(
-        isSkeleton ? 'Loading title' : title,
+        title,
         style: theme.textTheme.bodyLarge,
         maxLines: 2,
         overflow: TextOverflow.ellipsis,
+      ),
+    );
+  }
+}
+
+class _HoverScale extends StatefulWidget {
+  final Widget child;
+
+  const _HoverScale({required this.child});
+
+  @override
+  State<_HoverScale> createState() => _HoverScaleState();
+}
+
+class _HoverScaleState extends State<_HoverScale> {
+  bool _hover = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      onEnter: (_) => setState(() => _hover = true),
+      onExit: (_) => setState(() => _hover = false),
+      child: AnimatedScale(
+        scale: _hover ? 1.07 : 1.0,
+        duration: const Duration(milliseconds: 200),
+        curve: Curves.easeOut,
+        child: widget.child,
       ),
     );
   }

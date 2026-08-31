@@ -11,6 +11,7 @@ Widget loadSvg(
     iconPath,
     width: width,
     height: height,
-    colorFilter: ColorFilter.mode(color ?? Colors.white, BlendMode.srcIn),
+    colorFilter:
+        color == null ? null : ColorFilter.mode(color, BlendMode.srcIn),
   );
 }

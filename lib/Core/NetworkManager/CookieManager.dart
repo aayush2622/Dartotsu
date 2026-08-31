@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
@@ -8,10 +9,36 @@ import '../Preferences/PrefManager.dart';
 
 class CookieManager extends Interceptor {
   static const _storageKey = "cookies";
+  static const _flushDelay = Duration(seconds: 2);
 
   Map<String, StoredCookie>? _cache;
 
   final Map<String, StoredCookie> _sessionCookies = {};
+
+  Timer? _flushTimer;
+  bool _dirty = false;
+
+  /// Marks the persistent store dirty and coalesces disk writes — cookie reads
+  /// happen on every request, but `lastAccessed` churn does not need to hit
+  /// disk synchronously.
+  void _scheduleFlush() {
+    _dirty = true;
+    _flushTimer ??= Timer(_flushDelay, flush);
+  }
+
+  /// Writes pending cookie changes to disk now.
+  void flush() {
+    _flushTimer?.cancel();
+    _flushTimer = null;
+    if (!_dirty || _cache == null) return;
+    _dirty = false;
+    saveCustomData<String>(
+      _storageKey,
+      jsonEncode(_cache!.map((k, v) => MapEntry(k, v.toJson()))),
+    );
+  }
+
+  void dispose() => flush();
 
   Map<String, StoredCookie> _loadAll() {
     if (_cache != null) {
@@ -44,23 +71,21 @@ class CookieManager extends Interceptor {
 
   void _saveAll(Map<String, StoredCookie> cookies) {
     cookies.removeWhere((_, cookie) => cookie.isExpired);
-
     _cache = cookies;
-
-    saveCustomData<String>(
-      _storageKey,
-      jsonEncode(cookies.map((k, v) => MapEntry(k, v.toJson()))),
-    );
+    _scheduleFlush();
   }
 
+  /// Prune expired cookies from memory. Persistence is deferred.
   void _cleanup() {
     final persistent = _loadAll();
+    final before = persistent.length + _sessionCookies.length;
 
     persistent.removeWhere((_, cookie) => cookie.isExpired);
-
     _sessionCookies.removeWhere((_, cookie) => cookie.isExpired);
 
-    _saveAll(persistent);
+    if (persistent.length + _sessionCookies.length != before) {
+      _scheduleFlush();
+    }
   }
 
   Iterable<StoredCookie> get _allCookies sync* {
@@ -96,28 +121,18 @@ class CookieManager extends Interceptor {
         continue;
       }
 
-      result.add(cookie.touch());
-
-      if (cookie.session) {
-        _sessionCookies[cookie.id] = cookie.touch();
-      } else {
-        _cache?[cookie.id] = cookie.touch();
-      }
+      final touched = cookie.touch();
+      result.add(touched);
+      (cookie.session ? _sessionCookies : _cache)?[cookie.id] = touched;
     }
 
     result.sort((a, b) {
       final cmp = b.path.length.compareTo(a.path.length);
-
-      if (cmp != 0) {
-        return cmp;
-      }
-
+      if (cmp != 0) return cmp;
       return a.created.compareTo(b.created);
     });
 
-    if (_cache != null) {
-      _saveAll(_cache!);
-    }
+    if (result.isNotEmpty) _scheduleFlush();
 
     return result;
   }
@@ -155,8 +170,8 @@ class CookieManager extends Interceptor {
   void clear() {
     _cache = {};
     _sessionCookies.clear();
-
-    saveCustomData<String>(_storageKey, "{}");
+    _dirty = true;
+    flush();
   }
 
   Future<void> deleteCookiesForDomain(String domain) async {
@@ -173,6 +188,7 @@ class CookieManager extends Interceptor {
     );
 
     _saveAll(persistent);
+    flush();
 
     final manager = webview.CookieManager.instance();
 
@@ -478,26 +494,6 @@ class CookieManager extends Interceptor {
     }
   }
 
-  void clearExpired() {
-    final persistent = _loadAll();
-
-    persistent.removeWhere((_, cookie) => cookie.isExpired);
-
-    _sessionCookies.removeWhere((_, cookie) => cookie.isExpired);
-
-    _saveAll(persistent);
-  }
-
-  void clearSessionCookies() {
-    _sessionCookies.clear();
-  }
-
-  void clearPersistentCookies() {
-    _cache?.clear();
-
-    saveCustomData<String>(_storageKey, "{}");
-  }
-
   List<StoredCookie> getCookiesForDomain(String domain) {
     domain = normalizeDomain(domain);
 
@@ -530,24 +526,11 @@ class CookieManager extends Interceptor {
     }
   }
 
-  void deleteCookie(String domain, String name, {String path = "/"}) {
-    domain = normalizeDomain(domain);
-
-    final persistent = _loadAll();
-
-    final id = "$domain|$path|$name";
-
-    persistent.remove(id);
-    _sessionCookies.remove(id);
-
-    _saveAll(persistent);
-  }
-
   Future<void> deleteAll() async {
     _cache = {};
     _sessionCookies.clear();
-
-    saveCustomData<String>(_storageKey, "{}");
+    _dirty = true;
+    flush();
 
     await webview.CookieManager.instance().deleteAllCookies();
   }

@@ -26,9 +26,7 @@ Widget cachedNetworkImage({
       height: height,
     );
   }
-  var useDifferentCacheManager =
-      loadCustomData<bool>('useDifferentCacheManager') ?? false;
-  if (useDifferentCacheManager) {
+  if (PrefName.useDifferentCacheManager.value) {
     return PrecachedNetworkImage(
       url: imageUrl,
       width: width ?? 100,
