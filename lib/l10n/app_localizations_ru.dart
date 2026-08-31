@@ -34,13 +34,30 @@ class AppLocalizationsRu extends AppLocalizations {
   String get login => 'Войти';
 
   @override
-  String loginTo(String service) {
-    return 'Вход в $service';
+  String get continueAsGuest => 'Continue as guest';
+
+  @override
+  String get getStarted => 'Get Started';
+
+  @override
+  String get loginWithToken => 'Login with token';
+
+  @override
+  String get pasteTokenHint => 'Paste your access token';
+
+  @override
+  String loggedInAs(Object name) {
+    return 'Logged in as $name';
   }
 
   @override
   String logout(String type) {
     return 'Выйти $type';
+  }
+
+  @override
+  String loginTo(String service) {
+    return 'Вход в $service';
   }
 
   @override

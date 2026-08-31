@@ -1,12 +1,8 @@
 part of 'PrefManager.dart';
 
-/// Every persisted setting, declared once. Read `PrefName.x.value`, write
-/// `PrefName.x.value = y`, or bind `PrefName.x.rx` for a shared reactive view
-/// that persists on change.
 class PrefName {
   PrefName._();
 
-  // -- theme --------------------------------------------------------------
   static const useGlassMode = Pref('useGlassMode', false, PrefLocation.THEME);
   static const isOled = Pref('isOled', false, PrefLocation.THEME);
   static const useMaterialYou =
@@ -25,14 +21,14 @@ class PrefName {
     PrefLocation.THEME,
   );
 
-  // -- common -----------------------------------------------------------
   static const service = Pref('service', 'anilist', PrefLocation.COMMON);
   static const appLocale = Pref('appLocale', 'en', PrefLocation.COMMON);
   static const customPath = Pref('customPath', '', PrefLocation.COMMON);
   static const hasCompletedOnboarding =
       Pref('hasCompletedOnboarding', false, PrefLocation.COMMON);
 
-  // -- updater --------------------------------------------------------------
+  static const anilistToken = Pref('anilistToken', '', PrefLocation.PROTECTED);
+
   static const checkForUpdates =
       Pref('checkForUpdates', true, PrefLocation.COMMON);
   static const alphaUpdates =
@@ -40,13 +36,11 @@ class PrefName {
   static const skippedUpdates =
       Pref<List<String>>('skippedUpdates', [], PrefLocation.COMMON);
 
-  // -- extensions ------------------------------------------------------------
   static const loadExtensionIcon =
       Pref('loadExtensionIcon', true, PrefLocation.COMMON);
   static const useDifferentCacheManager =
       Pref('useDifferentCacheManager', false, PrefLocation.COMMON);
 
-  /// Per-list drag order for an installed-extension list.
   static Pref<List<String>> extensionOrder(String extension, String itemType) =>
       Pref<List<String>>(
         'extensionOrder/$extension/$itemType',

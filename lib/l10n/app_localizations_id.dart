@@ -33,13 +33,30 @@ class AppLocalizationsId extends AppLocalizations {
   String get login => 'Masuk';
 
   @override
-  String loginTo(String service) {
-    return 'Masuk ke $service';
+  String get continueAsGuest => 'Continue as guest';
+
+  @override
+  String get getStarted => 'Get Started';
+
+  @override
+  String get loginWithToken => 'Login with token';
+
+  @override
+  String get pasteTokenHint => 'Paste your access token';
+
+  @override
+  String loggedInAs(Object name) {
+    return 'Logged in as $name';
   }
 
   @override
   String logout(String type) {
     return 'Keluar $type';
+  }
+
+  @override
+  String loginTo(String service) {
+    return 'Masuk ke $service';
   }
 
   @override

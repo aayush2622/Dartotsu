@@ -227,17 +227,47 @@ abstract class AppLocalizations {
   /// **'Login'**
   String get login;
 
-  /// No description provided for @loginTo.
+  /// No description provided for @continueAsGuest.
   ///
   /// In en, this message translates to:
-  /// **'Login to {service}'**
-  String loginTo(String service);
+  /// **'Continue as guest'**
+  String get continueAsGuest;
+
+  /// No description provided for @getStarted.
+  ///
+  /// In en, this message translates to:
+  /// **'Get Started'**
+  String get getStarted;
+
+  /// No description provided for @loginWithToken.
+  ///
+  /// In en, this message translates to:
+  /// **'Login with token'**
+  String get loginWithToken;
+
+  /// No description provided for @pasteTokenHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Paste your access token'**
+  String get pasteTokenHint;
+
+  /// No description provided for @loggedInAs.
+  ///
+  /// In en, this message translates to:
+  /// **'Logged in as {name}'**
+  String loggedInAs(Object name);
 
   /// No description provided for @logout.
   ///
   /// In en, this message translates to:
   /// **'Logout {type}'**
   String logout(String type);
+
+  /// No description provided for @loginTo.
+  ///
+  /// In en, this message translates to:
+  /// **'Login to {service}'**
+  String loginTo(String service);
 
   /// No description provided for @confirmLogout.
   ///

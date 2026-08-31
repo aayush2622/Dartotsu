@@ -34,13 +34,30 @@ class AppLocalizationsSa extends AppLocalizations {
   String get login => 'प्रवेशनम्';
 
   @override
-  String loginTo(String service) {
-    return 'प्रवेशयतु $service';
+  String get continueAsGuest => 'Continue as guest';
+
+  @override
+  String get getStarted => 'Get Started';
+
+  @override
+  String get loginWithToken => 'Login with token';
+
+  @override
+  String get pasteTokenHint => 'Paste your access token';
+
+  @override
+  String loggedInAs(Object name) {
+    return 'Logged in as $name';
   }
 
   @override
   String logout(String type) {
     return 'निर्गमनम् $type';
+  }
+
+  @override
+  String loginTo(String service) {
+    return 'प्रवेशयतु $service';
   }
 
   @override

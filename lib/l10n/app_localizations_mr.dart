@@ -34,13 +34,30 @@ class AppLocalizationsMr extends AppLocalizations {
   String get login => 'लॉगिन';
 
   @override
-  String loginTo(String service) {
-    return '$service मध्ये लॉगिन करा';
+  String get continueAsGuest => 'Continue as guest';
+
+  @override
+  String get getStarted => 'Get Started';
+
+  @override
+  String get loginWithToken => 'Login with token';
+
+  @override
+  String get pasteTokenHint => 'Paste your access token';
+
+  @override
+  String loggedInAs(Object name) {
+    return 'Logged in as $name';
   }
 
   @override
   String logout(String type) {
     return '$type लॉगआउट करा';
+  }
+
+  @override
+  String loginTo(String service) {
+    return '$service मध्ये लॉगिन करा';
   }
 
   @override

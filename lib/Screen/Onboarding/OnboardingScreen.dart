@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
-import '../../Core/Preferences/PrefManager.dart';
+import '../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../Core/ThemeManager/ThemeController.dart';
 import '../../Utils/Animation/WidgetAnimations.dart';
 import '../../Utils/Extensions/NumExtensions.dart';
@@ -13,32 +13,25 @@ import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Widgets/Components/CachedNetworkImage.dart';
 import '../../Widgets/Components/ScrollConfig.dart';
 import '../../Widgets/Components/ThemedContainer.dart';
-import '../MainScreen.dart';
+import '../Login/LoginScreen.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
 
   @override
-  createState() => _OnboardingScreenState();
+  State<OnboardingScreen> createState() => _OnboardingScreenState();
 }
 
-// welcome
-// login
-// theme
-// support
-
 class _OnboardingScreenState extends State<OnboardingScreen> {
+  ThemeController get _theme => find();
+  int _page = 0;
+
   ThemeData get theme => Theme.of(context);
+  TextStyle? get _labelStyle => theme.textTheme.labelLarge;
 
-  TextStyle? get labelStyle => theme.textTheme.labelLarge;
-  int _currentPage = 0;
-
-  void _finish() {
-    PrefName.hasCompletedOnboarding.value = true;
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(builder: (_) => const MainScreen()),
-    );
-  }
+  void _finish() => Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (_) => const LoginScreen()),
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -49,145 +42,129 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         showNextButton: true,
         showBackButton: true,
         allowImplicitScrolling: true,
-        freeze: false,
-        overrideBack: (context, onPressed) =>
-            _buildNavButton(context, onPressed, "Back"),
-        overrideNext: (context, onPressed) =>
-            _buildNavButton(context, onPressed, "Next", autoFocus: true),
-        overrideSkip: (context, onPressed) =>
-            _buildNavButton(context, onPressed, "Skip"),
-        overrideDone: (context, onPressed) =>
-            _buildNavButton(context, onPressed, "Done"),
+        overrideBack: (c, cb) => _navButton(cb, 'Back'),
+        overrideNext: (c, cb) => _navButton(cb, 'Next', autoFocus: true),
+        overrideSkip: (c, cb) => _navButton(cb, 'Skip'),
+        overrideDone: (c, cb) => _navButton(cb, getString.getStarted),
         onDone: _finish,
-        onChange: (value) => setState(() => _currentPage = value),
+        onSkip: _finish,
+        onChange: (v) => setState(() => _page = v),
         pages: [
-          _welcomePage(),
-          _buildWelcomeWidget,
-          PageViewModel(
-            titleWidget: const Text(
-              "Title of introduction page",
-            ).animateFadeUp(duration: 600),
-            bodyWidget: const Text(
-              "Welcome to the app! This is a description of how it works.",
-            ).animateFadeUp(begin: 0.5, duration: 800),
-            image: const Center(
-              child: Icon(Icons.waving_hand_rounded, size: 50.0),
-            ).animatePopIn(),
-          ),
+          _page0(),
+          _page1(),
+          _page2(),
         ],
       ),
     );
   }
 
-  PageViewModel _welcomePage() {
-    final animate = _currentPage == 0;
-
-    return PageViewModel(
-      decoration: const PageDecoration(fullScreen: true),
-      image: _buildBackground.animateBlurIn(target: animate),
-      titleWidget: Text(
-        "DARTOTSU",
-        style: theme.textTheme.headlineLarge,
-      ).animateFadeUp(target: animate),
-      bodyWidget: const Text(
-        "The new best Anime & Manga experience.\nBuilt for focus. Built for you.",
-        textAlign: TextAlign.center,
-      ).animateFadeUp(target: animate, begin: 0.4, delay: 200.ms),
-    );
-  }
-
-  PageViewModel get _buildWelcomeWidget {
-    final animate = _currentPage == 1;
-
-    return PageViewModel(
-      titleWidget: const Text(
-        "Welcome to Dartotsu",
-      ).animateFadeUp(target: animate, duration: 800),
-      bodyWidget: Column(
-        children: [
-          const Text(
-            "Dartotsu is a complete rewrite of Dantotsu in Flutter.\nIt's a hybrid AniList, MyAnimeList and Simkl support!",
+  PageViewModel _page0() => PageViewModel(
+        decoration: const PageDecoration(fullScreen: true),
+        image: _background.animateBlurIn(target: _page == 0),
+        titleWidget: Text(
+          getString.appName.toUpperCase(),
+          style: theme.textTheme.displayMedium?.copyWith(
+            fontWeight: FontWeight.w200,
+            color: theme.colorScheme.primary,
           ),
-          const SizedBox(height: 16),
-          themeDropdown(),
-        ],
-      ).animateFadeUp(target: animate, duration: 1000),
-      image: _buildBackground.animateBlurIn(target: animate),
-      decoration: const PageDecoration(fullScreen: true),
-    );
-  }
+        ).animateFadeUp(target: _page == 0),
+        bodyWidget: Text(
+          getString.appTagline,
+          textAlign: TextAlign.center,
+        ).animateFadeUp(target: _page == 0, begin: 0.4, delay: 200.ms),
+      );
 
-  Widget get _buildBackground {
-    return Obx(() {
-      var theme = find<ThemeController>();
-      var glass = theme.useGlassMode.value;
-      if (!glass) return const SizedBox();
+  PageViewModel _page1() => PageViewModel(
+        decoration: const PageDecoration(fullScreen: true),
+        image: _background.animateBlurIn(target: _page == 1),
+        titleWidget: const Text('Make it yours')
+            .animateFadeUp(target: _page == 1, duration: 700),
+        bodyWidget: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Text(
+              'Pick a palette. Every accent, from cards to the player, follows it.',
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 20),
+            ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 320),
+              child: themeDropdown(),
+            ),
+            const SizedBox(height: 8),
+            Obx(
+              () => SwitchListTile(
+                title: const Text('Glass mode'),
+                value: _theme.useGlassMode.value,
+                onChanged: _theme.setGlassEffect,
+              ),
+            ),
+          ],
+        ).animateFadeUp(target: _page == 1, duration: 900),
+      );
 
-      return SizedBox.expand(
-        child: RepaintBoundary(
-          child: ImageFiltered(
-            imageFilter: ImageFilter.blur(sigmaX: 4.0, sigmaY: 4.0),
-            child: Opacity(
-              opacity: 0.8,
-              child: cachedNetworkImage(
-                imageUrl: 'https://wallpapercat.com/download/1198914',
-                fit: BoxFit.cover,
+  PageViewModel _page2() => PageViewModel(
+        decoration: const PageDecoration(fullScreen: true),
+        image: const Center(
+          child: Icon(Icons.sync_rounded, size: 64),
+        ).animatePopIn(),
+        titleWidget: const Text('Sync your library')
+            .animateFadeUp(target: _page == 2, duration: 700),
+        bodyWidget: const Text(
+          'Sign in with AniList to bring your lists, progress and scores '
+          'with you. Or skip and browse as a guest.',
+          textAlign: TextAlign.center,
+        ).animateFadeUp(target: _page == 2, begin: 0.4, delay: 150.ms),
+      );
+
+  Widget get _background => Obx(() {
+        if (!_theme.useGlassMode.value) return const SizedBox();
+        return SizedBox.expand(
+          child: RepaintBoundary(
+            child: ImageFiltered(
+              imageFilter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
+              child: Opacity(
+                opacity: 0.8,
+                child: cachedNetworkImage(
+                  imageUrl: 'https://wallpapercat.com/download/1198914',
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ),
-        ),
-      );
-    });
-  }
+        );
+      });
 
-  Widget _buildNavButton(
-    BuildContext context,
-    VoidCallback? onPressed,
-    String label, {
-    bool autoFocus = false,
-  }) {
+  Widget _navButton(VoidCallback? onPressed, String label,
+      {bool autoFocus = false}) {
     final radius = BorderRadius.circular(16);
     return DpadFocusable(
       autofocus: autoFocus,
       onSelect: onPressed,
+      builder: (_, state, child) => ThemedContainer(
+        alignment: Alignment.center,
+        padding: const EdgeInsets.all(12),
+        borderRadius: radius,
+        color: state.focused
+            ? theme.cardColor.withValues(alpha: 0.6)
+            : Colors.transparent,
+        child: child,
+      ),
       child: InkWell(
         onTap: onPressed,
         canRequestFocus: false,
         borderRadius: radius,
-        child: Builder(
-          builder: (context) {
-            final theme = Theme.of(context);
-
-            return ThemedContainer(
-              alignment: Alignment.center,
-              padding: const EdgeInsets.all(12),
-              borderRadius: radius,
-              child: Text(
-                label,
-                textAlign: TextAlign.center,
-                style: labelStyle?.copyWith(color: theme.primaryColor),
-              ),
-            );
-          },
+        child: ThemedContainer(
+          alignment: Alignment.center,
+          padding: const EdgeInsets.all(12),
+          borderRadius: radius,
+          child: Text(
+            label,
+            textAlign: TextAlign.center,
+            style: _labelStyle?.copyWith(color: theme.colorScheme.primary),
+          ),
         ),
       ),
-      builder: (_, state, child) {
-        return Builder(
-          builder: (context) {
-            final theme = Theme.of(context);
-
-            return ThemedContainer(
-              alignment: Alignment.center,
-              padding: const EdgeInsets.all(12),
-              borderRadius: radius,
-              color: state.focused
-                  ? theme.cardColor.withValues(alpha: 0.6)
-                  : Colors.transparent,
-              child: child,
-            );
-          },
-        );
-      },
     );
   }
 }
