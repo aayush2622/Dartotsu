@@ -33,26 +33,28 @@ class AnimeTab extends StatelessWidget {
   const AnimeTab({super.key});
 
   @override
-  Widget build(BuildContext context) => MediaRailsScreen(
-        loader: () => _api.home(anime: true),
-        onMediaTap: (m) => _openDetail(context, m),
-        onSearch: () => navigateToPage(
-          context,
-          const SearchScreen(anime: true),
-        ),
-      );
+  Widget build(BuildContext context) {
+    final auth = find<AnilistAuth>();
+    return MediaRailsScreen(
+      loader: () => _api.home(anime: true, userId: auth.user.value?.id),
+      onMediaTap: (m) => _openDetail(context, m),
+      onSearch: () =>
+          navigateToPage(context, const SearchScreen(anime: true)),
+    );
+  }
 }
 
 class MangaTab extends StatelessWidget {
   const MangaTab({super.key});
 
   @override
-  Widget build(BuildContext context) => MediaRailsScreen(
-        loader: () => _api.home(anime: false),
-        onMediaTap: (m) => _openDetail(context, m),
-        onSearch: () => navigateToPage(
-          context,
-          const SearchScreen(anime: false),
-        ),
-      );
+  Widget build(BuildContext context) {
+    final auth = find<AnilistAuth>();
+    return MediaRailsScreen(
+      loader: () => _api.home(anime: false, userId: auth.user.value?.id),
+      onMediaTap: (m) => _openDetail(context, m),
+      onSearch: () =>
+          navigateToPage(context, const SearchScreen(anime: false)),
+    );
+  }
 }

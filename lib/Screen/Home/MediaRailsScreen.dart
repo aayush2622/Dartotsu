@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../Api/Services/Anilist/AnilistApi.dart';
+import '../../Api/Services/Anilist/AnilistAuth.dart';
 import '../../Api/Services/Anilist/AnilistClient.dart';
 import '../../Core/Services/Model/Media.dart';
+import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Extensions/IntExtensions.dart';
 import '../../Widgets/Components/ScrollConfig.dart';
@@ -35,6 +37,8 @@ class _MediaRailsScreenState extends State<MediaRailsScreen>
   final _loading = true.obs;
   final _error = RxnString();
 
+  late final Worker _authWorker;
+
   @override
   bool get wantKeepAlive => true;
 
@@ -42,6 +46,13 @@ class _MediaRailsScreenState extends State<MediaRailsScreen>
   void initState() {
     super.initState();
     _load();
+    _authWorker = ever(find<AnilistAuth>().user, (_) => _load());
+  }
+
+  @override
+  void dispose() {
+    _authWorker.dispose();
+    super.dispose();
   }
 
   Future<void> _load() async {
