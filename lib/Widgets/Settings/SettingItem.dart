@@ -75,7 +75,7 @@ class SettingItem extends StatelessWidget {
     return DpadFocusable(
       onSelect: setting.onClick,
       onLongSelect: setting.onLongClick,
-      effects: const [DpadBorderEffect(borderRadius: BorderRadius.zero)],
+      effects: const [DpadScaleEffect(scale: 1.04)],
       child: InkWell(
         onTap: setting.onClick,
         onLongPress: setting.onLongClick,
@@ -101,7 +101,7 @@ class SettingSwitchItem extends StatelessWidget {
     return DpadFocusable(
       onSelect: _toggle,
       onLongSelect: setting.onLongClick,
-      effects: const [DpadBorderEffect(borderRadius: BorderRadius.zero)],
+      effects: const [DpadScaleEffect(scale: 1.04)],
       child: InkWell(
         onTap: _toggle,
         onLongPress: setting.onLongClick,
