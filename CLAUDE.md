@@ -126,7 +126,7 @@ in **`lib/Utils/Functions/GetXFunctions.dart`** and are used everywhere instead 
 | `ThemeController` | `lazyPut` | reactive theme state (no locale) |
 | `LocaleController` | `lazyPut` | `PrefName.appLocale.rx` + `Get.updateLocale` |
 | `MediaServiceController` | `lazyPut` | current service + list of services |
-| `RefreshController` | `lazyPut` | pub/sub refresh flags; `RefreshManager<T>` state mixin re-runs `onRefresh` on route re-entry |
+| `RefreshController` | `lazyPut` | pub/sub refresh flags (`getOrPut(key)` → `RxBool`, `.all()`); mutations signal it, screens `ever()`-subscribe. `routeObserver` (same file) is on `GetMaterialApp.navigatorObservers`; `RefreshManager<T>` mixin also exists for route-re-entry refresh |
 | `AppUpdater` | `lazyPut` | GetxController; GitHub-release update check + APK install |
 | `BaseDiscordRPC` | `lazyPut` | `MobileRPC` on Android/iOS, else `DesktopRPC` |
 
@@ -146,9 +146,12 @@ context-free access (`getString`, snackbars).
   `ThemeData` getters (rebuilt only when an input in the cache-key tuple changes; reading the
   tuple keeps them reactive inside `Obx`). `themeMode` / `isDarkModeActive` derive from `mode`.
   Guarded combo setters (`setTheme`, `setOled`, `setMaterialYou`, …).
-- **`Core/ThemeManager/ThemeManager.dart`** — pure builders: `buildAppTheme(base, {isOled})`
-  applies the (colour-independent, built-once) Poppins `TextTheme`, switch theme, OLED
-  overrides and predictive-back transitions. `deriveCardColor`. Barrel-exports `AppTheme`,
+- **`Core/ThemeManager/ThemeManager.dart`** — pure builders: `buildAppTheme(base, {isOled,
+  glass})` applies the (colour-independent, built-once) Poppins `TextTheme`, switch theme, OLED
+  overrides and predictive-back transitions. **`glass`** makes the scaffold + app bars
+  transparent and card/dialog/sheet surfaces translucent, so the blurred `GlassBackground`
+  shows through the whole stack (not just cards); it's in `ThemeController`'s memo key so a
+  glass toggle is a normal `AnimatedTheme` lerp. `deriveCardColor`. Barrel-exports `AppTheme`,
   `ThemeMode`, `Themes/DynamicThemes.dart` (`getCustom*Theme` seed themes, `getImage*Theme`),
   `Themes/material.dart`.
 - **`Widgets/Components/ThemedContainer.dart`** — `ThemedContainer` / `ThemedWidget` are real
@@ -230,9 +233,11 @@ Entry flow: `OnboardingScreen` (welcome / theme / sync) → `LoginScreen` (drive
   `SectionsLoader = Future<Map<String,List<Media>>> Function()` + optional `reloadOn` stream;
   with `cacheId:` it paints the last result from disk on frame 1 via
   `Core/Services/SectionCache.dart` — sync read — then revalidates and patches sections
-  key-by-key without a full reload),
-  `DetailScreen` (`Queries` + `Mutations?`; collapsing banner, genres, expandable synopsis,
-  character strip, relation/recommendation sections; FAB → `ListEditorSheet` →
+  key-by-key without a full reload; **`RouteAware`** — revalidates on `didPopNext`; subscribes
+  to `RefreshController` under its `cacheId` so a mutation refreshes it),
+  `DetailScreen` (`extends BaseScreen`, media art as its glass backdrop; `Queries` +
+  `Mutations?`; pull-to-refresh; collapsing banner, genres, expandable synopsis, character
+  strip, relation/recommendation sections; FAB → `ListEditorSheet` →
   `editList` / `deleteFromList`), `SearchScreen` (debounced, anime/manga toggle,
   infinite-scroll grid, builds a `SearchResults`), `NotificationsScreen`, `HomeHeader`
   (greeting + avatar + bell + search + account sheet).
@@ -347,7 +352,11 @@ defines `handleError(e, st, {softCrash})` (called from the zone handler in `main
   wrapper (`cachedNetworkImage(...)`), `loadSvg(...)`, `ScrollConfig` / `CustomScrollConfig`
   (bouncing physics, no scrollbars, mouse+trackpad drag), `CustomElevatedButton`, `GenreItem`.
 - `Widgets/Sections/Media/` — `MediaSection` + `MediaSectionState` (horizontal media rail with
-  skeleton loading and overscroll-to-load-more + haptics). The main reusable content widget.
+  skeleton loading — `MediaSectionData.loading()` → `Skeletonizer` — and overscroll-to-load-more
+  + haptics). The main reusable content widget. Cards keyed by `media.id` (+
+  `findChildIndexCallback`) so a cache patch touches only what changed. The poster card shows
+  the full detail set like `main`: score badge, `RELEASING` dot, `progress | next/total` info
+  line, relation prefix on the title.
 - `Utils/Animation/WidgetAnimations.dart` — `extension WidgetAnimations on Widget` built on
   `flutter_animate`: `animateFadeUp`, `animateDropIn`, `animatePageTransition`, `animateNav*`,
   etc. Global `kAnimationSpeed` (`<= 0` disables). Recent commits are heavy on animation polish.
