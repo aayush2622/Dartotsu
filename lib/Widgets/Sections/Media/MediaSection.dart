@@ -7,7 +7,11 @@ import 'package:skeletonizer/skeletonizer.dart';
 import 'package:super_sliver_list/super_sliver_list.dart';
 
 import '../../../Core/Services/Model/Media.dart';
+import '../../../Core/ThemeManager/CardStyleController.dart';
+import '../../../Model/CardStyle.dart';
+import '../../../Utils/Extensions/CardStyleMetrics.dart';
 import '../../../Utils/Extensions/Responsive.dart';
+import '../../../Utils/Functions/GetXFunctions.dart';
 import '../../Components/ScrollConfig.dart';
 import '../../Components/SectionCard.dart';
 import '../../Components/ThemedContainer.dart';
@@ -93,9 +97,12 @@ class _MediaSectionState extends State<MediaSection> {
 
   ThemeData get theme => Theme.of(context);
 
-  double get _cardW => Dimens.railItemW;
-  double get _cardH => Dimens.railImageH;
-  double get _railH => Dimens.railItemH;
+  CardStyle get _style =>
+      tryFind<CardStyleController>()?.current ?? const CardStyle();
+
+  double get _cardW => _style.itemWidth;
+  double get _cardH => _style.imageHeight;
+  double get _railH => _style.itemHeight;
   double get _gap => Dimens.railGap;
 
   @override
@@ -337,15 +344,10 @@ class _MediaSectionState extends State<MediaSection> {
           : media.mainName,
       subtitle: detailed ? _infoText(media) : null,
       progress: detailed ? _progress(media) : null,
-      badge: detailed && _score(media) != null
-          ? RailScoreBadge(
-              score: _score(media)!,
-              highlight: (media.userScore ?? 0) > 0,
-            )
-          : null,
-      cornerMark: detailed && media.status == 'RELEASING'
-          ? const RailAiringDot()
-          : null,
+      progressText: detailed ? _progressText(media) : null,
+      score: detailed ? _score(media) : null,
+      scoreHighlight: (media.userScore ?? 0) > 0,
+      airing: detailed && media.status == 'RELEASING',
       onTap: () => data.onMediaTap?.call(context, index, media),
       onLongPress: data.onMediaLongPress == null
           ? null
@@ -353,17 +355,27 @@ class _MediaSectionState extends State<MediaSection> {
     );
   }
 
+  static int? _total(Media media) => media.anime != null
+      ? media.anime?.totalEpisodes
+      : media.manga?.totalChapters;
+
   static String _infoText(Media media) {
     final left = media.userProgress?.toString() ?? '~';
-    final isAnime = media.anime != null;
-    final total = isAnime
-        ? media.anime?.totalEpisodes
-        : media.manga?.totalChapters;
+    final total = _total(media);
     final next = media.anime?.nextAiringEpisode;
     final right = next != null && next > 0
         ? '$next / ${total ?? '~'}'
         : '${total ?? '~'}';
     return '$left  |  $right';
+  }
+
+  /// "12 · 24" for the progress pill — only for titles on the viewer's list
+  /// (a null `userProgress` means it isn't being tracked).
+  static String? _progressText(Media media) {
+    final done = media.userProgress;
+    if (done == null) return null;
+    final total = _total(media);
+    return '$done · ${total ?? '?'}';
   }
 
   static double? _score(Media media) {

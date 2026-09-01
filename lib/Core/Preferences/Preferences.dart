@@ -29,6 +29,14 @@ class PrefName {
     PrefLocation.THEME,
   );
 
+  static final cardStyle = jsonPref<CardStyle>(
+    'cardStyle',
+    const CardStyle(),
+    PrefLocation.THEME,
+    toJson: (v) => v.toJson(),
+    fromJson: CardStyle.fromJson,
+  );
+
   static const service = Pref('service', 'anilist', PrefLocation.COMMON);
   static const appLocale = Pref('appLocale', 'en', PrefLocation.COMMON);
   static const customPath = Pref('customPath', '', PrefLocation.COMMON);

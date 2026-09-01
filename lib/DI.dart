@@ -10,6 +10,7 @@ import 'Core/Analytics/AnalyticsManager.dart';
 import 'Core/NetworkManager/NetworkManager.dart';
 import 'Core/NotificationManager/NotificationManager.dart';
 import 'Core/Services/MediaServiceController.dart';
+import 'Core/ThemeManager/CardStyleController.dart';
 import 'Core/ThemeManager/LocaleController.dart';
 import 'Core/ThemeManager/ThemeController.dart';
 import 'Utils/Functions/GetXFunctions.dart';
@@ -28,6 +29,7 @@ class DI {
 
     // Lazy — resolved on demand.
     lazyPut<ThemeController>(ThemeController.new);
+    lazyPut<CardStyleController>(CardStyleController.new);
     lazyPut<LocaleController>(LocaleController.new);
     lazyPut<MediaServiceController>(MediaServiceController.new);
     lazyPut<AnilistAuth>(AnilistAuth.new);
