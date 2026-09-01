@@ -36,7 +36,7 @@ class ThemedContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = find<ThemeController>();
     final scheme = Theme.of(context).colorScheme;
-    final radius = borderRadius ?? BorderRadius.circular(64);
+    final radius = borderRadius ?? BorderRadius.circular(28);
     final pad = padding ?? const EdgeInsets.all(8);
 
     return Obx(() {
@@ -44,22 +44,22 @@ class ThemedContainer extends StatelessWidget {
         return Container(
           margin: margin,
           child: BlurBox(
-            blur: 10,
+            blur: 12,
             alignment: alignment,
             padding: pad,
-            color: Theme.of(context).cardColor.withValues(alpha: 0.2),
+            color: scheme.surface.withValues(alpha: 0.12),
             border:
                 border ??
                 Border.all(
-                  color: scheme.onSurface.withValues(alpha: 0.2),
-                  width: 0.5,
+                  color: scheme.onSurface.withValues(alpha: 0.14),
+                  width: 0.75,
                 ),
             borderRadius: radius,
             boxShadow: [
               BoxShadow(
-                color: scheme.surface.withValues(alpha: 0.2),
-                blurRadius: 6,
-                spreadRadius: 0.5,
+                color: scheme.shadow.withValues(alpha: 0.16),
+                blurRadius: 24,
+                offset: const Offset(0, 8),
               ),
             ],
             child: Material(
@@ -75,19 +75,15 @@ class ThemedContainer extends StatelessWidget {
         alignment: alignment,
         margin: margin,
         decoration: BoxDecoration(
-          color: color ?? Theme.of(context).cardColor,
-          border:
-              border ??
-              Border.all(
-                color: scheme.onSurface.withValues(alpha: 0.6),
-                width: 0.5,
-              ),
+          // M3: an explicitly toned surface container rather than a bare card.
+          color: color ?? scheme.surfaceContainerHigh,
+          border: border,
           borderRadius: radius,
           boxShadow: [
             BoxShadow(
-              color: scheme.shadow.withValues(alpha: 0.1),
-              blurRadius: 20,
-              offset: const Offset(0, 6),
+              color: scheme.shadow.withValues(alpha: 0.08),
+              blurRadius: 16,
+              offset: const Offset(0, 4),
             ),
           ],
         ),

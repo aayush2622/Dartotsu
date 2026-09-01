@@ -11,13 +11,12 @@ Widget GenreItem(
 }) {
   double radius = 16;
 
+  final scheme = context.theme.colorScheme;
+
   return Card(
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(radius),
-      side: BorderSide(
-        color: context.theme.colorScheme.primaryContainer,
-        width: 1.5,
-      ),
+      side: BorderSide(color: scheme.outlineVariant, width: 1),
     ),
     clipBehavior: Clip.antiAlias,
     child: Stack(
@@ -26,23 +25,15 @@ Widget GenreItem(
         if (imageUrl != null)
           cachedNetworkImage(imageUrl: imageUrl, fit: BoxFit.cover),
         Container(
-          color: Colors.black.withValues(alpha: 0.6),
+          color: scheme.scrim.withValues(alpha: 0.55),
           child: Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  title,
-                  style: const TextStyle(
-                    fontFamily: 'Poppins',
-                    fontSize: 14.0,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 1,
-                ),
-              ],
+            child: Text(
+              title,
+              style: context.textTheme.labelLarge?.copyWith(
+                color: Colors.white,
+              ),
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
             ),
           ),
         ),

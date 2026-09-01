@@ -12,6 +12,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:media_kit/media_kit.dart';
+import 'package:sizer/sizer.dart';
 import 'package:rhttp/rhttp.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -171,27 +172,31 @@ class _MyAppState extends State<MyApp> {
         child: DynamicColorBuilder(
           builder: (lightDynamic, darkDynamic) {
             _theme.setDynamicSchemes(lightDynamic, darkDynamic);
-            return Obx(
-              () => GetMaterialApp(
-                title: 'Dartotsu',
-                debugShowCheckedModeBanner: false,
-                enableLog: true,
-                builder: _appBuilder,
-                localizationsDelegates: const [
-                  AppLocalizations.delegate,
-                  GlobalMaterialLocalizations.delegate,
-                  GlobalWidgetsLocalizations.delegate,
-                  GlobalCupertinoLocalizations.delegate,
-                ],
-                supportedLocales: AppLocalizations.supportedLocales,
-                locale: _locale.locale,
-                navigatorObservers: [routeObserver],
-                themeMode: _theme.themeMode,
-                theme: _theme.light,
-                darkTheme: _theme.dark,
-                home: PrefName.hasCompletedOnboarding.value
-                    ? const MainScreen()
-                    : const OnboardingScreen(),
+            return Sizer(
+              maxMobileWidth: 600,
+              maxTabletWidth: 1100,
+              builder: (context, orientation, screenType) => Obx(
+                () => GetMaterialApp(
+                  title: 'Dartotsu',
+                  debugShowCheckedModeBanner: false,
+                  enableLog: true,
+                  builder: _appBuilder,
+                  localizationsDelegates: const [
+                    AppLocalizations.delegate,
+                    GlobalMaterialLocalizations.delegate,
+                    GlobalWidgetsLocalizations.delegate,
+                    GlobalCupertinoLocalizations.delegate,
+                  ],
+                  supportedLocales: AppLocalizations.supportedLocales,
+                  locale: _locale.locale,
+                  navigatorObservers: [routeObserver],
+                  themeMode: _theme.themeMode,
+                  theme: _theme.light,
+                  darkTheme: _theme.dark,
+                  home: PrefName.hasCompletedOnboarding.value
+                      ? const MainScreen()
+                      : const OnboardingScreen(),
+                ),
               ),
             );
           },
