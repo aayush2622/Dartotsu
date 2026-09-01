@@ -14,8 +14,9 @@ import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Extensions/Responsive.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Utils/Functions/NavigateToScreen.dart';
+import '../../Widgets/Components/AppControls.dart';
 import '../../Widgets/Components/BaseScreen.dart';
-import '../../Widgets/Sections/RailCard.dart';
+import '../../Widgets/Sections/PosterCard.dart';
 import 'DetailScreen.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -120,18 +121,17 @@ class _SearchScreenState extends BaseScreen<SearchScreen> {
           Obx(
             () => Padding(
               padding: const EdgeInsets.only(right: 8),
-              child: SegmentedButton<bool>(
-                showSelectedIcon: false,
-                style: const ButtonStyle(visualDensity: VisualDensity.compact),
-                segments: const [
-                  ButtonSegment(value: true, label: Text('Anime')),
-                  ButtonSegment(value: false, label: Text('Manga')),
-                ],
-                selected: {_anime.value},
-                onSelectionChanged: (s) {
-                  _anime.value = s.first;
+              child: AppSegmented<bool>(
+                expand: false,
+                value: _anime.value,
+                onChanged: (v) {
+                  _anime.value = v;
                   _onChanged(_controller.text);
                 },
+                segments: const [
+                  AppSegment(true, label: 'Anime'),
+                  AppSegment(false, label: 'Manga'),
+                ],
               ),
             ),
           ),
@@ -157,7 +157,7 @@ class _SearchScreenState extends BaseScreen<SearchScreen> {
 
   Widget _card(Media m) {
     final year = m.startDate?.year;
-    return RailCard(
+    return PosterCard(
       imageUrl: m.cover,
       title: m.mainName,
       subtitle: [
@@ -194,9 +194,9 @@ class _SearchScreenState extends BaseScreen<SearchScreen> {
         Dimens.gapXl,
       ),
       gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-        maxCrossAxisExtent: style.itemWidth + Dimens.railGap + 6,
+        maxCrossAxisExtent: style.itemWidth + Dimens.cardGap + 6,
         childAspectRatio: style.itemWidth / style.itemHeight,
-        crossAxisSpacing: Dimens.railGap,
+        crossAxisSpacing: Dimens.cardGap,
         mainAxisSpacing: Dimens.gap,
       ),
       itemCount: children.length,

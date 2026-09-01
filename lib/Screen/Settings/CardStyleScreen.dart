@@ -8,10 +8,11 @@ import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Extensions/Responsive.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Utils/Functions/RefreshController.dart';
+import '../../Widgets/Components/AppControls.dart';
 import '../../Widgets/Components/BaseScreen.dart';
 import '../../Widgets/Components/ScrollConfig.dart';
 import '../../Widgets/Components/SectionCard.dart';
-import '../../Widgets/Sections/RailCard.dart';
+import '../../Widgets/Sections/PosterCard.dart';
 
 class CardStyleScreen extends StatefulWidget {
   const CardStyleScreen({super.key});
@@ -33,7 +34,6 @@ class _CardStyleScreenState extends BaseScreen<CardStyleScreen> {
 
   @override
   void dispose() {
-    // feeds read the style non-reactively — nudge them to rebuild.
     tryFind<RefreshController>()?.all();
     super.dispose();
   }
@@ -70,9 +70,8 @@ class _CardStyleScreenState extends BaseScreen<CardStyleScreen> {
               SizedBox(height: Dimens.gap),
               _layout(s),
               SizedBox(height: Dimens.gap),
-              _sizeShape(s),
-              SizedBox(height: Dimens.gap),
-              _overlays(s),
+              _shape(s),
+              if (!s.compact) ...[SizedBox(height: Dimens.gap), _overlays(s)],
             ],
           );
         }),
@@ -92,7 +91,7 @@ class _CardStyleScreenState extends BaseScreen<CardStyleScreen> {
           child: ListView(
             scrollDirection: Axis.horizontal,
             children: [
-              RailCard(
+              PosterCard(
                 style: s,
                 demo: true,
                 title: 'Solo Leveling Season 2 – Arise from the Shadow',
@@ -102,8 +101,8 @@ class _CardStyleScreenState extends BaseScreen<CardStyleScreen> {
                 progress: 0.34,
                 progressText: '1 · 12',
               ),
-              SizedBox(width: Dimens.railGap),
-              RailCard(
+              SizedBox(width: Dimens.cardGap),
+              PosterCard(
                 style: s,
                 demo: true,
                 title: 'BLEACH: Thousand-Year Blood War',
@@ -124,9 +123,9 @@ class _CardStyleScreenState extends BaseScreen<CardStyleScreen> {
   Widget _presets(CardStyle s) {
     const names = {
       'poster': 'Poster',
+      'card': 'Card',
       'cozy': 'Cozy',
       'compact': 'Compact',
-      'detailed': 'Detailed',
     };
     return SectionCard(
       title: 'Preset',
@@ -157,91 +156,114 @@ class _CardStyleScreenState extends BaseScreen<CardStyleScreen> {
 
   Widget _layout(CardStyle s) {
     return SectionCard(
-      title: 'Title',
+      title: 'Layout',
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _label('Position'),
-          SizedBox(
-            width: double.infinity,
-            child: SegmentedButton<CardTitle>(
-              showSelectedIcon: false,
+          LabeledField(
+            label: 'Mode',
+            child: AppSegmented<CardMode>(
+              value: s.mode,
+              onChanged: (v) => _edit((c) => c.copyWith(mode: v)),
               segments: const [
-                ButtonSegment(
-                  value: CardTitle.overlay,
-                  label: Text('On card'),
-                  icon: Icon(Icons.vertical_align_bottom_rounded),
+                AppSegment(
+                  CardMode.normal,
+                  label: 'Normal',
+                  icon: Icons.crop_portrait_rounded,
                 ),
-                ButtonSegment(
-                  value: CardTitle.below,
-                  label: Text('Below'),
-                  icon: Icon(Icons.notes_rounded),
+                AppSegment(
+                  CardMode.onCard,
+                  label: 'On card',
+                  icon: Icons.vertical_align_bottom_rounded,
                 ),
-                ButtonSegment(
-                  value: CardTitle.hidden,
-                  label: Text('Hidden'),
-                  icon: Icon(Icons.visibility_off_rounded),
+                AppSegment(
+                  CardMode.inCard,
+                  label: 'In card',
+                  icon: Icons.dashboard_rounded,
                 ),
               ],
-              selected: {s.title},
-              onSelectionChanged: (v) =>
-                  _edit((c) => c.copyWith(title: v.first)),
             ),
           ),
-          if (s.title != CardTitle.hidden) ...[
-            SizedBox(height: Dimens.gap),
+          SizedBox(height: Dimens.gap),
+          LabeledField(
+            label: 'Size',
+            child: AppSegmented<CardSize>(
+              value: s.size,
+              onChanged: (v) => _edit((c) => c.copyWith(size: v)),
+              segments: const [
+                AppSegment(CardSize.small, label: 'S'),
+                AppSegment(CardSize.medium, label: 'M'),
+                AppSegment(CardSize.large, label: 'L'),
+                AppSegment(CardSize.custom, label: 'Custom'),
+              ],
+            ),
+          ),
+          if (s.size == CardSize.custom) ...[
+            const SizedBox(height: 4),
+            LabeledSlider(
+              label: 'Card width',
+              value: s.customScale,
+              min: 0.7,
+              max: 1.5,
+              valueLabel: '${(s.customScale * 100).round()}%',
+              onChanged: (v) => _edit((c) => c.copyWith(customScale: v)),
+            ),
+          ],
+          SizedBox(height: Dimens.gapSm),
+          SwitchListTile(
+            contentPadding: EdgeInsets.zero,
+            title: const Text('Compact'),
+            subtitle: const Text('Cover and title only'),
+            value: s.compact,
+            onChanged: (v) => _edit((c) => c.copyWith(compact: v)),
+          ),
+          if (!s.compact)
             Row(
               children: [
-                _label('Lines'),
-                const Spacer(),
-                SegmentedButton<int>(
-                  showSelectedIcon: false,
+                Expanded(
+                  child: Text(
+                    'Title lines',
+                    style: context.textTheme.bodyMedium,
+                  ),
+                ),
+                AppSegmented<int>(
+                  expand: false,
+                  value: s.titleLines,
+                  onChanged: (v) => _edit((c) => c.copyWith(titleLines: v)),
                   segments: const [
-                    ButtonSegment(value: 1, label: Text('1')),
-                    ButtonSegment(value: 2, label: Text('2')),
+                    AppSegment(1, label: '1'),
+                    AppSegment(2, label: '2'),
                   ],
-                  selected: {s.titleLines},
-                  onSelectionChanged: (v) =>
-                      _edit((c) => c.copyWith(titleLines: v.first)),
                 ),
               ],
             ),
-          ],
         ],
       ),
     );
   }
 
-  // --- size & shape ------------------------------------------------
+  // --- shape ------------------------------------------------------
 
-  Widget _sizeShape(CardStyle s) {
+  Widget _shape(CardStyle s) {
     return SectionCard(
-      title: 'Size & shape',
+      title: 'Shape',
       child: Column(
         children: [
-          _slider(
-            'Card size',
-            s.widthScale,
-            0.75,
-            1.35,
-            (v) => _edit((c) => c.copyWith(widthScale: v)),
-            display: '${(s.widthScale * 100).round()}%',
+          LabeledSlider(
+            label: 'Poster shape',
+            value: s.aspect,
+            min: 1.2,
+            max: 1.62,
+            valueLabel: s.aspect.toStringAsFixed(2),
+            onChanged: (v) => _edit((c) => c.copyWith(aspect: v)),
           ),
-          _slider(
-            'Poster shape',
-            s.aspect,
-            1.2,
-            1.62,
-            (v) => _edit((c) => c.copyWith(aspect: v)),
-            display: s.aspect.toStringAsFixed(2),
-          ),
-          _slider(
-            'Corner radius',
-            s.radius,
-            2,
-            28,
-            (v) => _edit((c) => c.copyWith(radius: v)),
-            display: '${s.radius.round()}',
+          LabeledSlider(
+            label: 'Corner radius',
+            value: s.radius,
+            min: 2,
+            max: 28,
+            valueLabel: '${s.radius.round()}',
+            onChanged: (v) => _edit((c) => c.copyWith(radius: v)),
           ),
         ],
       ),
@@ -256,51 +278,35 @@ class _CardStyleScreenState extends BaseScreen<CardStyleScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _label('Progress'),
-          SizedBox(
-            width: double.infinity,
-            child: SegmentedButton<CardProgressStyle>(
-              showSelectedIcon: false,
+          LabeledField(
+            label: 'Progress',
+            child: AppSegmented<CardProgressStyle>(
+              value: s.progress,
+              onChanged: (v) => _edit((c) => c.copyWith(progress: v)),
               segments: const [
-                ButtonSegment(
-                  value: CardProgressStyle.pill,
-                  label: Text('Pill'),
-                ),
-                ButtonSegment(value: CardProgressStyle.bar, label: Text('Bar')),
-                ButtonSegment(
-                  value: CardProgressStyle.none,
-                  label: Text('Off'),
-                ),
+                AppSegment(CardProgressStyle.pill, label: 'Pill'),
+                AppSegment(CardProgressStyle.bar, label: 'Bar'),
+                AppSegment(CardProgressStyle.none, label: 'Off'),
               ],
-              selected: {s.progress},
-              onSelectionChanged: (v) =>
-                  _edit((c) => c.copyWith(progress: v.first)),
             ),
           ),
           SizedBox(height: Dimens.gap),
-          _label('Score badge'),
-          Wrap(
-            spacing: 8,
-            runSpacing: 8,
-            children: [
-              for (final entry in const {
-                CardCorner.none: 'Off',
-                CardCorner.topLeft: 'Top left',
-                CardCorner.topRight: 'Top right',
-                CardCorner.bottomLeft: 'Bottom left',
-                CardCorner.bottomRight: 'Bottom right',
-              }.entries)
-                ChoiceChip(
-                  label: Text(entry.value),
-                  selected: s.scoreCorner == entry.key,
-                  showCheckmark: false,
-                  onSelected: (_) =>
-                      _edit((c) => c.copyWith(scoreCorner: entry.key)),
-                ),
-            ],
+          LabeledField(
+            label: 'Score badge',
+            child: AppChoiceChips<CardCorner>(
+              value: s.scoreCorner,
+              onChanged: (v) => _edit((c) => c.copyWith(scoreCorner: v)),
+              options: const [
+                AppSegment(CardCorner.none, label: 'Off'),
+                AppSegment(CardCorner.topLeft, label: 'Top left'),
+                AppSegment(CardCorner.topRight, label: 'Top right'),
+                AppSegment(CardCorner.bottomLeft, label: 'Bottom left'),
+                AppSegment(CardCorner.bottomRight, label: 'Bottom right'),
+              ],
+            ),
           ),
           const SizedBox(height: 4),
-          if (s.title == CardTitle.below)
+          if (s.mode != CardMode.onCard)
             SwitchListTile(
               contentPadding: EdgeInsets.zero,
               title: const Text('Info line under title'),
@@ -317,50 +323,6 @@ class _CardStyleScreenState extends BaseScreen<CardStyleScreen> {
           ),
         ],
       ),
-    );
-  }
-
-  // --- bits --------------------------------------------------------
-
-  Widget _label(String t) => Padding(
-    padding: const EdgeInsets.only(bottom: 8),
-    child: Text(
-      t,
-      style: context.textTheme.labelLarge?.copyWith(
-        color: context.colorScheme.onSurfaceVariant,
-      ),
-    ),
-  );
-
-  Widget _slider(
-    String name,
-    double value,
-    double min,
-    double max,
-    ValueChanged<double> onChanged, {
-    required String display,
-  }) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          children: [
-            Expanded(child: Text(name, style: context.textTheme.bodyMedium)),
-            Text(
-              display,
-              style: context.textTheme.labelLarge?.copyWith(
-                color: context.colorScheme.primary,
-              ),
-            ),
-          ],
-        ),
-        Slider(
-          value: value.clamp(min, max),
-          min: min,
-          max: max,
-          onChanged: onChanged,
-        ),
-      ],
     );
   }
 }

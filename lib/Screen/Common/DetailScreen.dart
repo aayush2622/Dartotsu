@@ -15,7 +15,7 @@ import '../../Widgets/Components/CachedNetworkImage.dart';
 import '../../Widgets/Components/ScrollConfig.dart';
 import '../../Widgets/Components/SectionCard.dart';
 import '../../Widgets/Sections/Media/MediaSection.dart';
-import '../../Widgets/Sections/PeopleRail.dart';
+import '../../Widgets/Sections/PeopleShelf.dart';
 import 'ListEditorSheet.dart';
 
 class DetailScreen extends StatefulWidget {
@@ -102,11 +102,11 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
               if (m.tags.isNotEmpty) SliverToBoxAdapter(child: _tags(m)),
               if ((m.characters ?? const []).isNotEmpty)
                 SliverToBoxAdapter(
-                  child: PeopleRail(
+                  child: PeopleShelf(
                     title: 'Characters',
                     people: [
                       for (final c in m.characters!)
-                        RailPerson(
+                        ShelfPerson(
                           image: c.image,
                           name: c.name ?? '',
                           role: [
@@ -121,11 +121,11 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
                 ),
               if ((m.staff ?? const []).isNotEmpty)
                 SliverToBoxAdapter(
-                  child: PeopleRail(
+                  child: PeopleShelf(
                     title: 'Staff',
                     people: [
                       for (final s in m.staff!)
-                        RailPerson(
+                        ShelfPerson(
                           image: s.image,
                           name: s.name ?? '',
                           role: s.role == null ? null : _pretty(s.role!),

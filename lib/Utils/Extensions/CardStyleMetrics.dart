@@ -1,22 +1,27 @@
 import '../../Model/CardStyle.dart';
 import 'Responsive.dart';
 
-/// Layout maths for a [CardStyle], derived from the shared [Dimens.railItemW]
-/// base so every rail card scales together.
+/// Layout maths for a [CardStyle], derived from the shared [Dimens.cardW] base
+/// so every poster card scales together.
 extension CardStyleMetrics on CardStyle {
-  double get itemWidth => Dimens.railItemW * widthScale;
+  double get itemWidth => Dimens.cardW * scale;
 
   double get imageHeight => itemWidth * aspect;
 
-  /// Height a horizontal rail must reserve for one card in this style.
+  /// Height a horizontal shelf must reserve for one card in this style.
   double get itemHeight {
-    if (title != CardTitle.below) return imageHeight + 6;
-    var h = imageHeight + 7 + titleLines * 20;
-    if (preset == 'people') {
-      h += 34; // two-line role / VA caption
-    } else if (infoLine) {
-      h += 17;
+    switch (mode) {
+      case CardMode.onCard:
+        return imageHeight + 6;
+      case CardMode.normal:
+        var h = imageHeight + 7 + lines * 20;
+        if (showInfo || preset == 'people') h += 17;
+        return h + 4;
+      case CardMode.inCard:
+        // poster + a padded text block on the same card surface
+        var h = imageHeight + 10 + lines * 20;
+        if (showInfo || preset == 'people') h += 16;
+        return h + 12;
     }
-    return h + 4;
   }
 }

@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import '../../Model/CardStyle.dart';
 import '../Preferences/PrefManager.dart';
 
-/// Holds the current [CardStyle] so every `RailCard` can read it without
+/// Holds the current [CardStyle] so every `PosterCard` can read it without
 /// re-decoding the pref on each build. The settings screen writes through
 /// [apply]; feeds pick the change up on their next rebuild.
 class CardStyleController extends GetxController {

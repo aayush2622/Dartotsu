@@ -5,26 +5,26 @@ import '../../Utils/Extensions/CardStyleMetrics.dart';
 import '../../Utils/Extensions/Responsive.dart';
 import '../Components/ScrollConfig.dart';
 import '../Components/SectionCard.dart';
-import 'RailCard.dart';
+import 'PosterCard.dart';
 
-/// A person for a [PeopleRail] item — a character or a staff member.
-class RailPerson {
+/// A person for a [PeopleShelf] item — a character or a staff member.
+class ShelfPerson {
   final String? image;
   final String name;
   final String? role;
 
-  const RailPerson({required this.name, this.image, this.role});
+  const ShelfPerson({required this.name, this.image, this.role});
 }
 
-/// Titled card holding a horizontal rail of people (characters / staff).
+/// Titled card holding a horizontal shelf of people (characters / staff).
 /// Uses the same card surface and item dimensions as [MediaSection] so the
-/// detail page reads as one consistent list of rails.
-class PeopleRail extends StatelessWidget {
+/// detail page reads as one consistent list of shelves.
+class PeopleShelf extends StatelessWidget {
   final String title;
-  final List<RailPerson> people;
-  final void Function(RailPerson person)? onTap;
+  final List<ShelfPerson> people;
+  final void Function(ShelfPerson person)? onTap;
 
-  const PeopleRail({
+  const PeopleShelf({
     super.key,
     required this.title,
     required this.people,
@@ -53,10 +53,10 @@ class PeopleRail extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             padding: EdgeInsets.only(right: Dimens.cardPad),
             itemCount: people.length,
-            separatorBuilder: (_, _) => SizedBox(width: Dimens.railGap),
+            separatorBuilder: (_, _) => SizedBox(width: Dimens.cardGap),
             itemBuilder: (_, i) {
               final p = people[i];
-              return RailCard(
+              return PosterCard(
                 style: CardStyle.people,
                 imageUrl: p.image,
                 title: p.name,

@@ -15,7 +15,7 @@ import '../../../Utils/Functions/GetXFunctions.dart';
 import '../../Components/ScrollConfig.dart';
 import '../../Components/SectionCard.dart';
 import '../../Components/ThemedContainer.dart';
-import '../RailCard.dart';
+import '../PosterCard.dart';
 import 'MediaSectionState.dart';
 
 class MediaSectionData {
@@ -103,7 +103,7 @@ class _MediaSectionState extends State<MediaSection> {
   double get _cardW => _style.itemWidth;
   double get _cardH => _style.imageHeight;
   double get _railH => _style.itemHeight;
-  double get _gap => Dimens.railGap;
+  double get _gap => Dimens.cardGap;
 
   @override
   void initState() {
@@ -337,7 +337,7 @@ class _MediaSectionState extends State<MediaSection> {
 
   Widget _mediaItem(int index, Media media) {
     final detailed = !media.minimal;
-    return RailCard(
+    return PosterCard(
       imageUrl: media.cover,
       title: media.relation != null
           ? '${media.relation} · ${media.mainName}'
