@@ -359,10 +359,17 @@ defines `handleError(e, st, {softCrash})` (called from the zone handler in `main
   (used by rails where the card *is* the row). **Use this, not a bare `Container`/`ThemedContainer`,
   for anything with text behind it.**
 - **`Widgets/Sections/RailCard.dart`** — **the** item for every horizontal rail: media,
-  character, staff, search-grid results. Poster/portrait (fixed `Dimens.railItemW` ×
-  `railImageH`) + 2-line title + optional 1-line subtitle + optional `badge` (`RailScoreBadge`),
-  `cornerMark` (`RailAiringDot`), `progress` bar. One hover/d-pad scale. Identical dimensions
-  everywhere by construction.
+  character, staff, search-grid results. Renders whatever the current **`CardStyle`**
+  (`Model/CardStyle.dart`) says: title `overlay`(on the poster, over a scrim) / `below` /
+  `hidden`, `widthScale` / `aspect` / `radius`, progress as a green `pill` / thin `bar` / off,
+  score-badge corner, info line, airing dot. `score`/`airing` are plain params. Style comes
+  from `find<CardStyleController>().current` (DI, caches the JSON pref so it isn't re-decoded
+  per build) unless a `style:` override is passed. Character/staff pin to `CardStyle.people`.
+  Presets Poster (default) / Cozy / Compact / Detailed + Custom, edited in **Settings ›
+  Appearance › Card style** (`Screen/Settings/CardStyleScreen.dart` — live preview + chips +
+  sliders, applies live, feeds rebuild via `RefreshController.all()` on exit).
+  `CardStyleMetrics` (`Utils/Extensions/`) derives `itemWidth`/`itemHeight` from
+  `Dimens.railItemW`; `MediaSection` / `PeopleRail` / search grid size their rails off it.
 - **`Widgets/Sections/PeopleRail.dart`** — `PeopleRail({title, people: List<RailPerson>})` =
   a `SectionCard` holding a horizontal list of `RailCard`s. Characters & staff on the detail
   page.
