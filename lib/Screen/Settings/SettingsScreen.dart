@@ -10,11 +10,13 @@ import '../../Core/ThemeManager/CustomColorPicker.dart';
 import '../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../Core/ThemeManager/ThemeController.dart';
 import '../../Core/ThemeManager/ThemeMode.dart';
+import '../../Model/Setting.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Function.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Widgets/Components/BaseScreen.dart';
 import '../../Widgets/Components/ThemedContainer.dart';
+import '../../Widgets/Settings/SettingsAdaptor.dart';
 import '../Login/LoginScreen.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -32,7 +34,11 @@ class _SettingsBody extends StatefulWidget {
 }
 
 class _SettingsBodyState extends BaseScreen<_SettingsBody> {
+  final _query = ''.obs;
   final _version = ''.obs;
+
+  ThemeController get _theme => find();
+  MediaServiceController get _services => find();
 
   @override
   void initState() {
@@ -44,8 +50,6 @@ class _SettingsBodyState extends BaseScreen<_SettingsBody> {
 
   @override
   Widget buildContent(BuildContext context) {
-    final theme = find<ThemeController>();
-
     return Scaffold(
       backgroundColor: Colors.transparent,
       appBar: AppBar(
@@ -53,194 +57,264 @@ class _SettingsBodyState extends BaseScreen<_SettingsBody> {
         title: const Text('Settings'),
       ),
       body: ListView(
-        padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
+        padding: const EdgeInsets.fromLTRB(16, 4, 16, 40),
         children: [
-          _section('Appearance', [
-            themeDropdown(),
-            const SizedBox(height: 4),
-            Obx(
-              () => SegmentedButton<ThemeModePref>(
-                segments: const [
-                  ButtonSegment(
-                    value: ThemeModePref.system,
-                    icon: Icon(Icons.brightness_auto_rounded),
+          ThemedContainer(
+            borderRadius: BorderRadius.circular(28),
+            padding: EdgeInsets.zero,
+            child: TextField(
+              onChanged: (v) => _query.value = v.trim(),
+              textInputAction: TextInputAction.search,
+              decoration: const InputDecoration(
+                hintText: 'Search settings',
+                prefixIcon: Icon(Icons.search_rounded),
+                border: InputBorder.none,
+                contentPadding: EdgeInsets.symmetric(vertical: 16),
+              ),
+            ),
+          ),
+          const SizedBox(height: 16),
+          Obx(() {
+            final filtered = _filter(_all(context), _query.value);
+            if (filtered.isEmpty) {
+              return Padding(
+                padding: const EdgeInsets.only(top: 64),
+                child: Center(
+                  child: Text(
+                    'No settings match "${_query.value}"',
+                    style: context.textTheme.bodyMedium?.copyWith(
+                      color: context.colorScheme.onSurfaceVariant,
+                    ),
                   ),
-                  ButtonSegment(
-                    value: ThemeModePref.light,
-                    icon: Icon(Icons.light_mode_rounded),
-                  ),
-                  ButtonSegment(
-                    value: ThemeModePref.dark,
-                    icon: Icon(Icons.dark_mode_rounded),
-                  ),
-                ],
-                selected: {theme.mode.value},
-                onSelectionChanged: (s) => theme.setThemeMode(s.first),
-              ),
-            ),
-            Obx(
-              () => SwitchListTile(
-                contentPadding: EdgeInsets.zero,
-                title: const Text('AMOLED black'),
-                value: theme.isOled.value,
-                onChanged: theme.setOled,
-              ),
-            ),
-            Obx(
-              () => SwitchListTile(
-                contentPadding: EdgeInsets.zero,
-                title: const Text('Glass mode'),
-                subtitle: const Text('Frosted surfaces over your library art'),
-                value: theme.useGlassMode.value,
-                onChanged: theme.setGlassEffect,
-              ),
-            ),
-            Obx(
-              () => SwitchListTile(
-                contentPadding: EdgeInsets.zero,
-                title: const Text('Material You'),
-                value: theme.useMaterialYou.value,
-                onChanged: theme.setMaterialYou,
-              ),
-            ),
-            Obx(
-              () => ListTile(
-                contentPadding: EdgeInsets.zero,
-                enabled: !theme.useMaterialYou.value,
-                title: const Text('Custom accent colour'),
-                trailing: CircleAvatar(
-                  radius: 12,
-                  backgroundColor: Color(theme.customColor.value),
                 ),
-                onTap: () async {
-                  final picked = await showColorPickerDialog(
-                    context,
-                    Color(theme.customColor.value),
-                    showTransparent: false,
-                  );
-                  if (picked != null) {
-                    theme
-                      ..setUseCustomColor(true)
-                      ..setCustomColor(picked);
-                  }
-                },
-              ),
-            ),
-          ]),
-          _section('General', [languageSwitcher(context)]),
-          _section('Account', [_accountTile(context)]),
-          _section('Updates', [
-            Obx(
-              () => SwitchListTile(
-                contentPadding: EdgeInsets.zero,
-                title: const Text('Check for updates'),
-                value: PrefName.checkForUpdates.rx.value,
-                onChanged: (v) => PrefName.checkForUpdates.value = v,
-              ),
-            ),
-            Obx(
-              () => SwitchListTile(
-                contentPadding: EdgeInsets.zero,
-                title: const Text('Alpha channel'),
-                value: PrefName.alphaUpdates.rx.value,
-                onChanged: (v) => PrefName.alphaUpdates.value = v,
-              ),
-            ),
-            ListTile(
-              contentPadding: EdgeInsets.zero,
-              title: const Text('Check now'),
-              trailing: const Icon(Icons.refresh_rounded),
-              onTap: () => find<AppUpdater>().checkForUpdate(force: true),
-            ),
-          ]),
-          _section('About', [
-            Obx(
-              () => ListTile(
-                contentPadding: EdgeInsets.zero,
-                title: const Text('Version'),
-                subtitle: Text(_version.value),
-              ),
-            ),
-            ListTile(
-              contentPadding: EdgeInsets.zero,
-              title: const Text('GitHub'),
-              trailing: const Icon(Icons.open_in_new_rounded),
-              onTap: () =>
-                  openLinkInBrowser('https://github.com/aayush2622/Dartotsu'),
-            ),
-            ListTile(
-              contentPadding: EdgeInsets.zero,
-              title: const Text('Discord'),
-              trailing: const Icon(Icons.open_in_new_rounded),
-              onTap: () => openLinkInBrowser('https://discord.gg/eyQdCpdubF'),
-            ),
-          ]),
+              );
+            }
+            return SettingsAdaptor(settings: filtered);
+          }),
         ],
       ),
     );
   }
 
-  Widget _accountTile(BuildContext context) {
-    final controller = find<MediaServiceController>();
-
-    return Obx(() {
-      final service = controller.currentService.value;
-      final auth = service.auth;
-      final user = auth?.user.value;
-
-      return Column(
-        children: [
-          ListTile(
-            contentPadding: EdgeInsets.zero,
-            title: Text(service.name),
-            subtitle: Text(user?.name ?? 'Not signed in'),
-            trailing: TextButton(
-              onPressed: () => serviceSwitcher(context),
-              child: const Text('Switch'),
-            ),
-          ),
-          if (auth != null)
-            ListTile(
-              contentPadding: EdgeInsets.zero,
-              leading: Icon(
-                auth.isLoggedIn ? Icons.logout_rounded : Icons.login_rounded,
-              ),
-              title: Text(auth.isLoggedIn ? 'Log out' : 'Log in'),
-              onTap: () {
-                if (auth.isLoggedIn) {
-                  auth.logout();
-                } else {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(builder: (_) => const LoginScreen()),
-                  );
-                }
-              },
-            ),
-        ],
-      );
-    });
+  /// Drop settings that don't match; drop a header whose whole group is gone.
+  List<Setting> _filter(List<Setting> all, String query) {
+    if (query.isEmpty) return all;
+    final out = <Setting>[];
+    for (var i = 0; i < all.length; i++) {
+      final s = all[i];
+      if (s.type == SettingType.header) {
+        final group = <Setting>[];
+        for (var j = i + 1; j < all.length; j++) {
+          if (all[j].type == SettingType.header) break;
+          if (all[j].matches(query)) group.add(all[j]);
+        }
+        if (group.isNotEmpty) out.add(s);
+      } else if (s.matches(query)) {
+        out.add(s);
+      }
+    }
+    return out;
   }
 
-  Widget _section(String title, List<Widget> children) => Padding(
-    padding: const EdgeInsets.only(bottom: 16),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.fromLTRB(4, 8, 4, 8),
-          child: Text(
-            title,
-            style: context.textTheme.titleSmall?.copyWith(
+  List<Setting> _all(BuildContext context) {
+    final t = _theme;
+    final service = _services.currentService.value;
+    final auth = service.auth;
+    final user = auth?.user.value;
+
+    return [
+      const Setting.header('APPEARANCE'),
+      Setting(
+        type: SettingType.custom,
+        name: 'Theme palette colour scheme accent',
+        builder: (_) => themeDropdown(),
+      ),
+      Setting(
+        type: SettingType.custom,
+        name: 'Theme mode light dark system appearance',
+        builder: (context) => Row(
+          children: [
+            Icon(
+              Icons.brightness_6_rounded,
+              size: 22,
               color: context.colorScheme.primary,
             ),
-          ),
+            const SizedBox(width: 20),
+            Expanded(
+              child: Text(
+                'Mode',
+                style: context.textTheme.bodyLarge?.copyWith(
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+            SegmentedButton<ThemeModePref>(
+              showSelectedIcon: false,
+              segments: const [
+                ButtonSegment(
+                  value: ThemeModePref.system,
+                  icon: Icon(Icons.brightness_auto_rounded),
+                ),
+                ButtonSegment(
+                  value: ThemeModePref.light,
+                  icon: Icon(Icons.light_mode_rounded),
+                ),
+                ButtonSegment(
+                  value: ThemeModePref.dark,
+                  icon: Icon(Icons.dark_mode_rounded),
+                ),
+              ],
+              selected: {t.mode.value},
+              onSelectionChanged: (s) => t.setThemeMode(s.first),
+            ),
+          ],
         ),
-        ThemedContainer(
-          borderRadius: BorderRadius.circular(20),
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: Column(children: children),
+      ),
+      Setting(
+        type: SettingType.switchType,
+        name: 'AMOLED black',
+        description: 'Pure black surfaces on dark mode',
+        icon: Icons.brightness_3_rounded,
+        isChecked: t.isOled.value,
+        onSwitchChange: t.setOled,
+      ),
+      Setting(
+        type: SettingType.switchType,
+        name: 'Glass mode',
+        description: 'Frosted surfaces over your library art',
+        icon: Icons.blur_on_rounded,
+        isChecked: t.useGlassMode.value,
+        onSwitchChange: t.setGlassEffect,
+      ),
+      Setting(
+        type: SettingType.switchType,
+        name: 'Material You',
+        description: 'Dynamic colour from the system',
+        icon: Icons.palette_rounded,
+        isChecked: t.useMaterialYou.value,
+        onSwitchChange: t.setMaterialYou,
+      ),
+      Setting(
+        type: SettingType.normal,
+        name: 'Custom accent colour',
+        description: t.useMaterialYou.value
+            ? 'Turn off Material You to use a custom colour'
+            : 'Pick your own primary colour',
+        icon: Icons.colorize_rounded,
+        isVisible: !t.useMaterialYou.value,
+        trailing: CircleAvatar(
+          radius: 12,
+          backgroundColor: Color(t.customColor.value),
         ),
-      ],
-    ),
-  );
+        onClick: () async {
+          final picked = await showColorPickerDialog(
+            context,
+            Color(t.customColor.value),
+            showTransparent: false,
+          );
+          if (picked != null) {
+            t
+              ..setUseCustomColor(true)
+              ..setCustomColor(picked);
+          }
+        },
+      ),
+
+      const Setting.header('GENERAL'),
+      Setting(
+        type: SettingType.custom,
+        name: 'Language locale translation',
+        builder: (_) => languageSwitcher(context),
+      ),
+
+      const Setting.header('ACCOUNT'),
+      Setting(
+        type: SettingType.normal,
+        name: 'Tracking service',
+        description: service.name,
+        icon: Icons.sync_alt_rounded,
+        isActivity: true,
+        onClick: () => serviceSwitcher(context),
+      ),
+      Setting(
+        type: SettingType.normal,
+        name: 'Account',
+        description: user?.name ?? 'Not signed in',
+        icon: Icons.person_rounded,
+        isVisible: auth != null,
+        trailingIcon: auth?.isLoggedIn == true
+            ? Icons.logout_rounded
+            : Icons.login_rounded,
+        onClick: () {
+          if (auth == null) return;
+          if (auth.isLoggedIn) {
+            auth.logout();
+          } else {
+            Navigator.of(
+              context,
+            ).push(MaterialPageRoute(builder: (_) => const LoginScreen()));
+          }
+        },
+      ),
+
+      const Setting.header('UPDATES'),
+      Setting(
+        type: SettingType.switchType,
+        name: 'Check for updates',
+        description: 'Notify on a new GitHub release',
+        icon: Icons.system_update_rounded,
+        isChecked: PrefName.checkForUpdates.rx.value,
+        onSwitchChange: (v) => PrefName.checkForUpdates.value = v,
+      ),
+      Setting(
+        type: SettingType.switchType,
+        name: 'Alpha channel',
+        description: 'Include pre-release builds',
+        icon: Icons.science_rounded,
+        isChecked: PrefName.alphaUpdates.rx.value,
+        onSwitchChange: (v) => PrefName.alphaUpdates.value = v,
+      ),
+      Setting(
+        type: SettingType.normal,
+        name: 'Check now',
+        icon: Icons.refresh_rounded,
+        trailingIcon: Icons.chevron_right_rounded,
+        onClick: () => find<AppUpdater>().checkForUpdate(force: true),
+      ),
+
+      const Setting.header('ABOUT'),
+      Setting(
+        type: SettingType.normal,
+        name: 'Version',
+        description: _version.value,
+        icon: Icons.info_outline_rounded,
+      ),
+      Setting(
+        type: SettingType.normal,
+        name: 'GitHub',
+        description: 'Source, issues and releases',
+        icon: Icons.code_rounded,
+        trailingIcon: Icons.open_in_new_rounded,
+        onClick: () =>
+            openLinkInBrowser('https://github.com/aayush2622/Dartotsu'),
+      ),
+      Setting(
+        type: SettingType.normal,
+        name: 'Discord',
+        description: 'Community and support',
+        icon: Icons.forum_rounded,
+        trailingIcon: Icons.open_in_new_rounded,
+        onClick: () => openLinkInBrowser('https://discord.gg/eyQdCpdubF'),
+      ),
+      Setting(
+        type: SettingType.normal,
+        name: 'Buy me a coffee support the maintainer donate',
+        description: 'Support development',
+        icon: Icons.favorite_rounded,
+        trailingIcon: Icons.open_in_new_rounded,
+        onClick: () =>
+            openLinkInBrowser('https://www.buymeacoffee.com/aayush262'),
+      ),
+    ];
+  }
 }

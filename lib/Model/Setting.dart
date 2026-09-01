@@ -1,78 +1,95 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/widgets.dart';
 
-enum SettingType { normal, switchType, slider, inputBox }
+enum SettingType { header, normal, switchType, slider, inputBox, custom }
 
+/// A single row of a settings screen, rendered by `SettingsAdaptor`.
+///
+/// - [SettingType.header]: a plain section label (not a card, not searchable
+///   on its own — shown only while a following row in its group matches)
+/// - [SettingType.normal]: tappable row (`onClick`, optional `trailingIcon` /
+///   `isActivity` chevron)
+/// - [SettingType.switchType]: a labelled toggle (`isChecked`, `onSwitchChange`)
+/// - [SettingType.slider] / [SettingType.inputBox]: numeric (`minValue`,
+///   `maxValue`, `initialValue`, `onSliderChange` / `onInputChange`)
+/// - [SettingType.custom]: [builder] provides the whole control
 class Setting {
-  /// [SettingType.normal]: for setting that can be clicked
-  ///
-  /// [SettingType.switchType]: for setting that can be switched on/off
   final SettingType type;
-
-  /// Title of the setting
   final String name;
-
-  /// Description of the setting
   final String? description;
 
-  /// Icon of the setting
   final IconData? icon;
-
-  /// [trailingIcon]: Icon at the end of the setting only for [SettingType.normal]
+  final Widget? iconWidget;
   final IconData? trailingIcon;
+  final Widget? trailing;
 
-  /// [isVisible]: to determine whether the setting is visible or not
   final bool isVisible;
-
-  /// [isActivity]: to determine whether the setting has arrow icon at the end only for [SettingType.normal]
   final bool isActivity;
-
-  /// [isChecked]: to determine whether the switch is on or off only for [SettingType.switchType]
   final bool isChecked;
 
-  /// [onClick]: function to be executed when the setting is clicked only for [SettingType.normal]
-  final Function()? onClick;
+  final VoidCallback? onClick;
+  final VoidCallback? onLongClick;
+  final ValueChanged<bool>? onSwitchChange;
 
-  /// [onLongClick]: function to be executed when the setting is long clicked only for [SettingType.normal]
-  final Function()? onLongClick;
+  /// Extra widget rendered under the row (for [normal] / [switchType]).
+  final WidgetBuilder? attach;
 
-  /// [onSwitchChange]: function to be executed when the switch is changed only for [SettingType.switchType]
-  final Function(bool)? onSwitchChange;
+  /// The full control, for [SettingType.custom].
+  final WidgetBuilder? builder;
 
-  /// [attach]: additional widget to be attached to the setting
-  final Widget Function(BuildContext)? attach;
-
-  /// [minValue]: Min value only for [SettingType.slider] and [SettingType.inputBox]
   final int? minValue;
-
-  /// [maxValue]: Max value only for [SettingType.slider] and [SettingType.inputBox]
   final int? maxValue;
-
-  /// [initialValue]: Initial value only for [SettingType.slider] and [SettingType.inputBox]
   final int? initialValue;
+  final ValueChanged<int>? onSliderChange;
+  final ValueChanged<int>? onInputChange;
 
-  /// [onSliderChange]: function to be executed when the slider value changes only for [SettingType.slider]
-  final Function(int)? onSliderChange;
-
-  /// [onInputChange]: function to be executed when the input value changes only for [SettingType.inputBox]
-  final Function(int)? onInputChange;
-
-  Setting({
+  const Setting({
     required this.type,
     required this.name,
     this.description,
     this.icon,
+    this.iconWidget,
     this.isVisible = true,
     this.isActivity = false,
     this.isChecked = false,
     this.trailingIcon,
+    this.trailing,
     this.onClick,
     this.onLongClick,
     this.onSwitchChange,
     this.attach,
+    this.builder,
     this.minValue,
     this.maxValue,
     this.initialValue,
     this.onSliderChange,
     this.onInputChange,
   });
+
+  const Setting.header(this.name)
+    : type = SettingType.header,
+      description = null,
+      icon = null,
+      iconWidget = null,
+      trailingIcon = null,
+      trailing = null,
+      isVisible = true,
+      isActivity = false,
+      isChecked = false,
+      onClick = null,
+      onLongClick = null,
+      onSwitchChange = null,
+      attach = null,
+      builder = null,
+      minValue = null,
+      maxValue = null,
+      initialValue = null,
+      onSliderChange = null,
+      onInputChange = null;
+
+  bool matches(String query) {
+    if (query.isEmpty) return true;
+    final q = query.toLowerCase();
+    return name.toLowerCase().contains(q) ||
+        (description?.toLowerCase().contains(q) ?? false);
+  }
 }
