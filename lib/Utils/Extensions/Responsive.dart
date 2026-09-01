@@ -19,7 +19,7 @@ T responsive<T>({required T mobile, T? tablet, T? desktop}) =>
       ScreenType.desktop => desktop ?? tablet ?? mobile,
     };
 
-/// The single source of truth for spacing, radii and card/rail dimensions.
+/// The single source of truth for spacing, radii and card dimensions.
 ///
 /// Every value scales with the layout class (via [responsive]) so the app
 /// feels native on a phone and roomy on desktop without per-widget guesswork.
@@ -46,15 +46,10 @@ abstract final class Dimens {
   static BorderRadius get borderSm => BorderRadius.circular(radiusSm);
   static BorderRadius get borderLg => BorderRadius.circular(radiusLg);
 
-  // --- rail item (media / character / staff cards all share these) ---
-  static double get railItemW =>
-      responsive(mobile: 112, tablet: 128, desktop: 122);
-  static double get railImageH => railItemW * 1.42;
-  static double get railGap => responsive(mobile: 10, tablet: 12, desktop: 12);
-
-  /// Height a horizontal rail must reserve: image + progress bar + 2-line
-  /// title + 1-line subtitle + the gaps between them.
-  static double get railItemH => railImageH + 94;
+  // --- poster card base (media / character / staff cards all scale off this) ---
+  static double get cardW => responsive(mobile: 112, tablet: 128, desktop: 122);
+  static double get cardImageH => cardW * 1.42;
+  static double get cardGap => responsive(mobile: 10, tablet: 12, desktop: 12);
 
   // --- detail poster ---
   static double get detailPosterW =>

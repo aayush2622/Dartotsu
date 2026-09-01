@@ -13,6 +13,7 @@ import '../../Model/Setting.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Function.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
+import '../../Widgets/Components/AppControls.dart';
 import '../../Widgets/Components/ThemedContainer.dart';
 import '../Login/LoginScreen.dart';
 import 'CardStyleScreen.dart';
@@ -104,24 +105,18 @@ List<Setting> appearanceSettings(BuildContext context) {
               ),
             ),
           ),
-          SegmentedButton<ThemeModePref>(
-            showSelectedIcon: false,
+          AppSegmented<ThemeModePref>(
+            expand: false,
+            value: t.mode.value,
+            onChanged: t.setThemeMode,
             segments: const [
-              ButtonSegment(
-                value: ThemeModePref.system,
-                icon: Icon(Icons.brightness_auto_rounded),
+              AppSegment(
+                ThemeModePref.system,
+                icon: Icons.brightness_auto_rounded,
               ),
-              ButtonSegment(
-                value: ThemeModePref.light,
-                icon: Icon(Icons.light_mode_rounded),
-              ),
-              ButtonSegment(
-                value: ThemeModePref.dark,
-                icon: Icon(Icons.dark_mode_rounded),
-              ),
+              AppSegment(ThemeModePref.light, icon: Icons.light_mode_rounded),
+              AppSegment(ThemeModePref.dark, icon: Icons.dark_mode_rounded),
             ],
-            selected: {t.mode.value},
-            onSelectionChanged: (s) => t.setThemeMode(s.first),
           ),
         ],
       ),

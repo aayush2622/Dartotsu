@@ -5,6 +5,7 @@ import '../../Core/Services/Api/Mutations.dart';
 import '../../Core/Services/Model/Media.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Functions/SnackBar.dart';
+import '../../Widgets/Components/AppControls.dart';
 import '../../Widgets/Components/CustomBottomDialog.dart';
 
 const _statuses = {
@@ -137,27 +138,15 @@ void showListEditor(
               ),
               const SizedBox(height: 12),
               Obx(
-                () => Row(
-                  children: [
-                    label('Score'),
-                    const Spacer(),
-                    Text(
-                      score.value == 0
-                          ? '–'
-                          : (score.value / 10).toStringAsFixed(1),
-                      style: context.textTheme.titleMedium?.copyWith(
-                        color: context.colorScheme.primary,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Obx(
-                () => Slider(
-                  value: score.value.clamp(0, 100),
+                () => LabeledSlider(
+                  label: 'Score',
+                  value: score.value,
+                  min: 0,
                   max: 100,
                   divisions: 20,
-                  label: (score.value / 10).toStringAsFixed(1),
+                  valueLabel: score.value == 0
+                      ? '–'
+                      : (score.value / 10).toStringAsFixed(1),
                   onChanged: (v) => score.value = v,
                 ),
               ),

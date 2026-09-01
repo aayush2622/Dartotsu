@@ -11,12 +11,12 @@ import '../Components/CachedNetworkImage.dart';
 const _progressGreen = Color(0xFF37DFA0);
 const _progressGreenInk = Color(0xFF05271B);
 
-/// One item in a horizontal rail — a poster/portrait, a title and an optional
-/// subtitle. Media cards, character cards and staff cards all use this. Its
-/// look (title position, size, progress, badges) follows the current
-/// [CardStyle]; pass [style] to override (character rails, the settings
-/// preview).
-class RailCard extends StatefulWidget {
+/// One item in a horizontal shelf — a poster/portrait, a title and an optional
+/// subtitle. Media cards, character cards and staff cards all use this; its
+/// look follows the current [CardStyle] (normal / on-card / in-card, size,
+/// progress, badges). Pass [style] to override (character shelves, the
+/// settings preview).
+class PosterCard extends StatefulWidget {
   final String? imageUrl;
   final String title;
 
@@ -43,7 +43,7 @@ class RailCard extends StatefulWidget {
   /// used by the card-style settings preview.
   final bool demo;
 
-  const RailCard({
+  const PosterCard({
     super.key,
     required this.title,
     this.imageUrl,
@@ -60,10 +60,10 @@ class RailCard extends StatefulWidget {
   });
 
   @override
-  State<RailCard> createState() => _RailCardState();
+  State<PosterCard> createState() => _PosterCardState();
 }
 
-class _RailCardState extends State<RailCard> {
+class _PosterCardState extends State<PosterCard> {
   bool _hover = false;
 
   CardStyle get _style =>
@@ -77,129 +77,134 @@ class _RailCardState extends State<RailCard> {
     final scheme = context.colorScheme;
     final w = s.itemWidth;
     final imgH = s.imageHeight;
-    final overlay = s.title == CardTitle.overlay;
-
-    final poster = ClipRRect(
-      borderRadius: BorderRadius.circular(s.radius),
-      child: SizedBox(
-        width: w,
-        height: imgH,
-        child: Stack(
-          fit: StackFit.expand,
-          children: [
-            if (widget.demo && (widget.imageUrl?.isEmpty ?? true))
-              DecoratedBox(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [
-                      scheme.primaryContainer,
-                      scheme.surfaceContainerHighest,
-                      scheme.tertiaryContainer,
-                    ],
-                  ),
-                ),
-              )
-            else
-              cachedNetworkImage(
-                imageUrl: widget.imageUrl ?? '',
-                fit: BoxFit.cover,
-                placeholder: (_, _) =>
-                    ColoredBox(color: scheme.surfaceContainerHighest),
-                errorWidget: (_, _, _) => ColoredBox(
-                  color: scheme.surfaceContainerHighest,
-                  child: Icon(
-                    Icons.broken_image_rounded,
-                    color: scheme.error,
-                    size: 28,
-                  ),
-                ),
-              ),
-            if (overlay || s.progress == CardProgressStyle.pill) const _Scrim(),
-            if (widget.score case final sc?
-                when s.scoreCorner != CardCorner.none)
-              _corner(
-                s.scoreCorner,
-                _ScoreBadge(score: sc, highlight: widget.scoreHighlight),
-              ),
-            if (widget.airing && s.airingDot)
-              _corner(_airingCorner(s.scoreCorner), const _AiringDot()),
-            if (s.progress == CardProgressStyle.bar && widget.progress != null)
-              Positioned(
-                left: 0,
-                right: 0,
-                bottom: 0,
-                child: _Bar(fraction: widget.progress!, color: scheme.primary),
-              ),
-            if (s.progress == CardProgressStyle.pill &&
-                widget.progressText != null)
-              Positioned(
-                left: 6,
-                right: 6,
-                bottom: 6,
-                child: _Pill(text: widget.progressText!),
-              ),
-            if (overlay)
-              Positioned(
-                left: 9,
-                right: 9,
-                bottom: s.progress == CardProgressStyle.pill ? 32 : 10,
-                child: Text(
-                  widget.title,
-                  maxLines: s.titleLines,
-                  overflow: TextOverflow.ellipsis,
-                  style: context.textTheme.labelLarge?.copyWith(
-                    color: Colors.white,
-                    height: 1.16,
-                    shadows: const [
-                      Shadow(color: Colors.black87, blurRadius: 5),
-                    ],
-                  ),
-                ),
-              ),
-          ],
-        ),
-      ),
-    );
-
     final people = s.preset == 'people';
     final showSub =
-        (s.infoLine || people) && (widget.subtitle?.isNotEmpty ?? false);
+        (s.showInfo || people) && (widget.subtitle?.isNotEmpty ?? false);
 
-    final Widget card;
-    if (s.title == CardTitle.below) {
-      card = Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
+    Widget posterStack({required bool overlayTitle, required bool roundSelf}) {
+      final pillOn = s.showProgress && s.progress == CardProgressStyle.pill;
+      final stack = Stack(
+        fit: StackFit.expand,
         children: [
-          poster,
-          const SizedBox(height: 7),
-          SizedBox(
-            width: w,
-            child: Text(
-              widget.title,
-              style: context.textTheme.bodyLarge,
-              maxLines: s.titleLines,
-              overflow: TextOverflow.ellipsis,
+          _image(scheme),
+          if (overlayTitle || pillOn) const _Scrim(),
+          if (s.showScore && widget.score != null)
+            _corner(
+              s.scoreCorner,
+              _ScoreBadge(
+                score: widget.score!,
+                highlight: widget.scoreHighlight,
+              ),
             ),
-          ),
-          if (showSub)
-            SizedBox(
-              width: w,
+          if (s.showAiring && widget.airing)
+            _corner(_airingCorner(s.scoreCorner), const _AiringDot()),
+          if (s.showProgress &&
+              s.progress == CardProgressStyle.bar &&
+              widget.progress != null)
+            Positioned(
+              left: 0,
+              right: 0,
+              bottom: 0,
+              child: _Bar(fraction: widget.progress!, color: scheme.primary),
+            ),
+          if (pillOn && widget.progressText != null)
+            Positioned(
+              left: 6,
+              right: 6,
+              bottom: 6,
+              child: _Pill(text: widget.progressText!),
+            ),
+          if (overlayTitle)
+            Positioned(
+              left: 9,
+              right: 9,
+              bottom: pillOn ? 32 : 10,
               child: Text(
-                widget.subtitle!,
-                style: context.textTheme.labelMedium?.copyWith(
-                  color: scheme.onSurfaceVariant,
-                ),
-                maxLines: people ? 2 : 1,
+                widget.title,
+                maxLines: s.lines,
                 overflow: TextOverflow.ellipsis,
+                style: context.textTheme.labelLarge?.copyWith(
+                  color: Colors.white,
+                  height: 1.16,
+                  shadows: const [Shadow(color: Colors.black87, blurRadius: 5)],
+                ),
               ),
             ),
         ],
       );
-    } else {
-      card = poster;
+      final sized = SizedBox(width: w, height: imgH, child: stack);
+      return roundSelf
+          ? ClipRRect(
+              borderRadius: BorderRadius.circular(s.radius),
+              child: sized,
+            )
+          : sized;
+    }
+
+    Widget titleBelow(double width) => SizedBox(
+      width: width,
+      child: Text(
+        widget.title,
+        style: context.textTheme.bodyLarge,
+        maxLines: s.lines,
+        overflow: TextOverflow.ellipsis,
+      ),
+    );
+
+    Widget subtitleBelow(double width) => SizedBox(
+      width: width,
+      child: Text(
+        widget.subtitle!,
+        style: context.textTheme.labelMedium?.copyWith(
+          color: scheme.onSurfaceVariant,
+        ),
+        maxLines: people ? 2 : 1,
+        overflow: TextOverflow.ellipsis,
+      ),
+    );
+
+    final Widget card;
+    switch (s.mode) {
+      case CardMode.onCard:
+        card = posterStack(overlayTitle: true, roundSelf: true);
+      case CardMode.normal:
+        card = Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            posterStack(overlayTitle: false, roundSelf: true),
+            const SizedBox(height: 7),
+            titleBelow(w),
+            if (showSub) subtitleBelow(w),
+          ],
+        );
+      case CardMode.inCard:
+        card = Container(
+          width: w,
+          decoration: BoxDecoration(
+            color: scheme.surfaceContainerHigh,
+            borderRadius: BorderRadius.circular(s.radius),
+          ),
+          clipBehavior: Clip.antiAlias,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              posterStack(overlayTitle: false, roundSelf: false),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(8, 7, 8, 9),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    titleBelow(w - 16),
+                    if (showSub) subtitleBelow(w - 16),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        );
     }
 
     final gesture = MouseRegion(
@@ -223,6 +228,33 @@ class _RailCardState extends State<RailCard> {
       builder: (context, state, child) =>
           _scaled(child, (_hover || state.focused) ? 1.06 : 1.0),
       child: gesture,
+    );
+  }
+
+  Widget _image(ColorScheme scheme) {
+    if (widget.demo && (widget.imageUrl?.isEmpty ?? true)) {
+      return DecoratedBox(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              scheme.primaryContainer,
+              scheme.surfaceContainerHighest,
+              scheme.tertiaryContainer,
+            ],
+          ),
+        ),
+      );
+    }
+    return cachedNetworkImage(
+      imageUrl: widget.imageUrl ?? '',
+      fit: BoxFit.cover,
+      placeholder: (_, _) => ColoredBox(color: scheme.surfaceContainerHighest),
+      errorWidget: (_, _, _) => ColoredBox(
+        color: scheme.surfaceContainerHighest,
+        child: Icon(Icons.broken_image_rounded, color: scheme.error, size: 28),
+      ),
     );
   }
 
@@ -269,8 +301,7 @@ class _ScoreBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final scheme = context.colorScheme;
-    final fg = highlight ? scheme.tertiary : Colors.white;
+    final fg = highlight ? context.colorScheme.tertiary : Colors.white;
     return Container(
       height: 19,
       padding: const EdgeInsets.symmetric(horizontal: 6),
