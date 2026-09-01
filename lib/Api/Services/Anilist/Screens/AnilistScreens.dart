@@ -13,45 +13,41 @@ import '../AnilistAuth.dart';
 
 AnilistAuth get _auth => find<AnilistAuth>();
 
+void _openDetail(BuildContext context, Media media) => navigateToPage(
+  context,
+  DetailScreen(media: media, api: _auth.api, mutations: _auth.api),
+);
+
 class AnilistHomeScreen implements HomeScreenView {
   @override
   Widget build(BuildContext context) => MediaRailsScreen(
     header: const HomeHeader(),
-    loader: _auth.api.homeRails,
+    loader: _auth.api.getHomeRails,
     reloadOn: _auth.user.stream,
-    onMediaTap: (m) => navigateToPage(
-      context,
-      DetailScreen(media: m, api: _auth.api, mutations: _auth.api),
-    ),
-  );
-}
-
-class _AnilistMediaScreen {
-  final bool anime;
-  const _AnilistMediaScreen(this.anime);
-
-  Widget build(BuildContext context) => MediaRailsScreen(
-    loader: () => _auth.api.mediaRails(anime: anime),
-    reloadOn: _auth.user.stream,
-    onMediaTap: (m) => navigateToPage(
-      context,
-      DetailScreen(media: m, api: _auth.api, mutations: _auth.api),
-    ),
-    onSearch: () =>
-        navigateToPage(context, SearchScreen(api: _auth.api, anime: anime)),
+    onMediaTap: (m) => _openDetail(context, m),
   );
 }
 
 class AnilistAnimeScreen implements AnimeScreenView {
   @override
-  Widget build(BuildContext context) =>
-      const _AnilistMediaScreen(true).build(context);
+  Widget build(BuildContext context) => MediaRailsScreen(
+    loader: _auth.api.getAnimeRails,
+    reloadOn: _auth.user.stream,
+    onMediaTap: (m) => _openDetail(context, m),
+    onSearch: () =>
+        navigateToPage(context, SearchScreen(api: _auth.api, anime: true)),
+  );
 }
 
 class AnilistMangaScreen implements MangaScreenView {
   @override
-  Widget build(BuildContext context) =>
-      const _AnilistMediaScreen(false).build(context);
+  Widget build(BuildContext context) => MediaRailsScreen(
+    loader: _auth.api.getMangaRails,
+    reloadOn: _auth.user.stream,
+    onMediaTap: (m) => _openDetail(context, m),
+    onSearch: () =>
+        navigateToPage(context, SearchScreen(api: _auth.api, anime: false)),
+  );
 }
 
 class AnilistSearchScreen implements SearchScreenView {

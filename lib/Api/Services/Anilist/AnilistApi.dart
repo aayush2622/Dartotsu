@@ -56,7 +56,7 @@ class AnilistApi implements ServiceApi, ServiceMutations {
   }
 
   @override
-  Future<List<MediaRail>> homeRails() async {
+  Future<List<MediaRail>> getHomeRails() async {
     final userId = _userId();
     final userLists = userId != null
         ? '''
@@ -95,7 +95,12 @@ $userLists
   }
 
   @override
-  Future<List<MediaRail>> mediaRails({required bool anime}) async {
+  Future<List<MediaRail>> getAnimeRails() => _mediaRails(anime: true);
+
+  @override
+  Future<List<MediaRail>> getMangaRails() => _mediaRails(anime: false);
+
+  Future<List<MediaRail>> _mediaRails({required bool anime}) async {
     final type = anime ? 'ANIME' : 'MANGA';
     final userId = _userId();
 
@@ -165,7 +170,7 @@ $userList
   }
 
   @override
-  Future<Media> details(String id) async {
+  Future<Media> getMediaDetails(String id) async {
     final data = await client.query(
       'query (\$id: Int) { Media(id: \$id) { $anilistDetailQuery } }',
       variables: {'id': int.parse(id)},
@@ -202,7 +207,7 @@ query (\$search: String, \$page: Int) {
   }
 
   @override
-  Future<List<ServiceNotification>> notifications({int page = 1}) async {
+  Future<List<ServiceNotification>> getNotifications({int page = 1}) async {
     final data = await client.query(
       '''
 query (\$page: Int) {

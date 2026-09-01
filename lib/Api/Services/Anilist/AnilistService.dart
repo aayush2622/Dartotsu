@@ -25,20 +25,21 @@ class AnilistService extends MediaService {
   ServiceAuth get auth => _auth;
 
   @override
-  HomeScreenView get homeScreen => AnilistHomeScreen();
+  HomeScreenView get getHomeScreen => AnilistHomeScreen();
 
   @override
-  AnimeScreenView get animeScreen => AnilistAnimeScreen();
+  AnimeScreenView get getAnimeScreen => AnilistAnimeScreen();
 
   @override
-  MangaScreenView get mangaScreen => AnilistMangaScreen();
+  MangaScreenView get getMangaScreen => AnilistMangaScreen();
 
   @override
-  SearchScreenView get searchScreen => AnilistSearchScreen();
+  SearchScreenView get getSearchScreen => AnilistSearchScreen();
 
   @override
-  DetailScreenView get detailScreen => AnilistDetailScreen();
+  DetailScreenView get getDetailScreen => AnilistDetailScreen();
 
   @override
-  NotificationScreenView get notificationScreen => AnilistNotificationScreen();
+  NotificationScreenView get getNotificationScreen =>
+      AnilistNotificationScreen();
 }

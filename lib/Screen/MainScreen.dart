@@ -25,13 +25,13 @@ class MainScreenState extends BaseScreen<MainScreen> {
     final s = _services.currentService.value;
     return switch (index) {
       0 =>
-        s.animeScreen?.build(context) ??
+        s.getAnimeScreen?.build(context) ??
             NotImplemented(service: s.name, area: 'Anime'),
       2 =>
-        s.mangaScreen?.build(context) ??
+        s.getMangaScreen?.build(context) ??
             NotImplemented(service: s.name, area: 'Manga'),
       _ =>
-        s.homeScreen?.build(context) ??
+        s.getHomeScreen?.build(context) ??
             NotImplemented(service: s.name, area: 'Home'),
     };
   }

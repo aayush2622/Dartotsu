@@ -25,11 +25,13 @@ class ServiceNotification {
 /// Read surface a service exposes. `MediaService.api == null` means the service
 /// has no query layer yet — screens fall back to "not implemented".
 abstract class ServiceApi {
-  Future<List<MediaRail>> homeRails();
+  Future<List<MediaRail>> getHomeRails();
 
-  Future<List<MediaRail>> mediaRails({required bool anime});
+  Future<List<MediaRail>> getAnimeRails();
 
-  Future<Media> details(String id);
+  Future<List<MediaRail>> getMangaRails();
+
+  Future<Media> getMediaDetails(String id);
 
   Future<List<Media>> search({
     required bool anime,
@@ -37,7 +39,7 @@ abstract class ServiceApi {
     int page = 1,
   });
 
-  Future<List<ServiceNotification>> notifications({int page = 1}) async =>
+  Future<List<ServiceNotification>> getNotifications({int page = 1}) async =>
       const [];
 }
 

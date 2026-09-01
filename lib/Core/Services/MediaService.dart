@@ -29,21 +29,21 @@ abstract class MediaService {
 
   ServiceAuth? get auth => null;
 
-  HomeScreenView? get homeScreen => null;
+  HomeScreenView? get getHomeScreen => null;
 
-  AnimeScreenView? get animeScreen => null;
+  AnimeScreenView? get getAnimeScreen => null;
 
-  MangaScreenView? get mangaScreen => null;
+  MangaScreenView? get getMangaScreen => null;
 
-  SearchScreenView? get searchScreen => null;
+  SearchScreenView? get getSearchScreen => null;
 
-  DetailScreenView? get detailScreen => null;
+  DetailScreenView? get getDetailScreen => null;
 
-  LoginScreenView? get loginScreen => null;
+  LoginScreenView? get getLoginScreen => null;
 
-  SettingsScreenView? get settingsScreen => null;
+  SettingsScreenView? get getSettingsScreen => null;
 
-  NotificationScreenView? get notificationScreen => null;
+  NotificationScreenView? get getNotificationScreen => null;
 
   /// `false` for services that never require an account (extensions).
   bool get requiresLogin => auth != null;

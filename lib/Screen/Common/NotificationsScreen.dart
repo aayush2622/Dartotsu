@@ -33,7 +33,7 @@ class _NotificationsScreenState extends BaseScreen<NotificationsScreen> {
   Future<void> _load() async {
     _loading.value = true;
     try {
-      _items.value = await widget.api.notifications();
+      _items.value = await widget.api.getNotifications();
       final auth = find<MediaServiceController>().currentService.value.auth;
       if (auth != null) unawaited(auth.refreshUser());
     } catch (_) {
