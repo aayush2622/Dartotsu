@@ -348,10 +348,10 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
     ];
     if (stats.isEmpty) return const SizedBox.shrink();
     return SizedBox(
-      height: 84,
+      height: 96,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
-        padding: const EdgeInsets.fromLTRB(16, 4, 16, 4),
+        padding: const EdgeInsets.fromLTRB(16, 6, 16, 6),
         itemCount: stats.length,
         separatorBuilder: (_, i) => const SizedBox(width: 10),
         itemBuilder: (_, i) => SizedBox(width: 96, child: stats[i]),
@@ -727,16 +727,17 @@ class _StatTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final scheme = context.colorScheme;
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 4),
+      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
       decoration: BoxDecoration(
         color: scheme.surfaceContainerHigh,
         borderRadius: BorderRadius.circular(16),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
         children: [
           Icon(icon, size: 17, color: scheme.primary),
-          const SizedBox(height: 5),
+          const SizedBox(height: 4),
           Text(
             value,
             maxLines: 1,
