@@ -13,7 +13,6 @@ class ThemeController extends GetxController {
   final useMaterialYou = PrefName.useMaterialYou.rx;
   final useCustomColor = PrefName.useCustomColor.rx;
   final customColor = PrefName.customColor.rx; // ARGB int
-  final cardSize = PrefName.cardSize.rx;
   final mode = PrefName.themeMode.rx;
 
   ColorScheme? _dynamicLight;

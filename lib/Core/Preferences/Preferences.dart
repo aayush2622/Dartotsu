@@ -21,7 +21,6 @@ class PrefName {
     false,
     PrefLocation.THEME,
   );
-  static const cardSize = Pref('cardSize', 1.0, PrefLocation.THEME);
 
   static final themeMode = enumPref(
     'themeMode',

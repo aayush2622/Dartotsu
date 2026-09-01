@@ -6,8 +6,8 @@ import 'package:get/get.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:super_sliver_list/super_sliver_list.dart';
 
-import '../../../Core/Preferences/PrefManager.dart';
 import '../../../Core/Services/Model/Media.dart';
+import '../../../Utils/Extensions/Responsive.dart';
 import '../../Components/ThemedContainer.dart';
 import '../../Components/CachedNetworkImage.dart';
 import '../../Components/ScrollConfig.dart';
@@ -92,7 +92,12 @@ class _MediaSectionState extends State<MediaSection> {
 
   ThemeData get theme => Theme.of(context);
 
-  double multiplicationFactor = loadData(PrefName.cardSize);
+  // Poster dimensions per layout class — a native-feeling size on each
+  // platform rather than a scaled logical constant.
+  double get _cardW => responsive(mobile: 112, tablet: 132, desktop: 124);
+  double get _cardH => _cardW * 1.48;
+  double get _railH => _cardH + 112;
+  double get _gap => responsive(mobile: 8, tablet: 12, desktop: 10);
 
   @override
   void initState() {
@@ -194,9 +199,9 @@ class _MediaSectionState extends State<MediaSection> {
 
   EdgeInsetsDirectional _horizontalPadding(int index, int length) =>
       EdgeInsetsDirectional.only(
-        start: index == 0 ? 24 : 6.5 * multiplicationFactor,
-        end: 6.5 * multiplicationFactor,
-        top: 8 * multiplicationFactor,
+        start: index == 0 ? 24 : _gap,
+        end: _gap,
+        top: 8.0,
         bottom: 6,
       );
 
@@ -208,7 +213,7 @@ class _MediaSectionState extends State<MediaSection> {
       height: 42,
       decoration: BoxDecoration(
         color: theme.primaryColor,
-        borderRadius: BorderRadius.circular(16 * multiplicationFactor),
+        borderRadius: BorderRadius.circular(16.0),
       ),
       child: Center(
         child: Transform.translate(
@@ -226,21 +231,21 @@ class _MediaSectionState extends State<MediaSection> {
   Widget _buildHorizontalSliverList() {
     if (data.loading) {
       return SizedBox(
-        height: 272 * multiplicationFactor,
+        height: _railH,
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
           physics: const NeverScrollableScrollPhysics(),
           padding: const EdgeInsets.only(left: 24),
           itemCount: 8,
           itemBuilder: (context, index) => Padding(
-            padding: EdgeInsets.only(right: 13 * multiplicationFactor, top: 8),
+            padding: EdgeInsets.only(right: _gap, top: 8),
             child: _mediaItem(index, Media.skeleton()),
           ),
         ),
       );
     }
     return SizedBox(
-      height: 272 * multiplicationFactor,
+      height: _railH,
       child: NotificationListener<ScrollNotification>(
         onNotification: (scroll) =>
             state.scrollListener(scroll, data.onLoadMore),
@@ -309,14 +314,10 @@ class _MediaSectionState extends State<MediaSection> {
       return Align(
         alignment: Alignment.topCenter,
         child: Padding(
-          padding: EdgeInsets.only(
-            left: 6.5,
-            right: 24,
-            top: 8 * multiplicationFactor,
-          ),
+          padding: const EdgeInsets.only(left: 6.5, right: 24, top: 8),
           child: SizedBox(
-            width: 108 * multiplicationFactor,
-            height: 160 * multiplicationFactor,
+            width: _cardW,
+            height: _cardH,
             child: DpadFocusable(
               onFocusChange: (focused) {
                 state.overscrollProgress.value = focused ? 1 : 0;
@@ -333,8 +334,8 @@ class _MediaSectionState extends State<MediaSection> {
                             borderRadius: BorderRadius.circular(16),
                             child: Container(
                               color: Colors.white12,
-                              width: 108 * multiplicationFactor,
-                              height: 160 * multiplicationFactor,
+                              width: _cardW,
+                              height: _cardH,
                             ),
                           ),
                         )
@@ -350,7 +351,7 @@ class _MediaSectionState extends State<MediaSection> {
 
   Widget _mediaItem(int index, Media media) {
     final scheme = theme.colorScheme;
-    final width = 108 * multiplicationFactor;
+    final width = _cardW;
     final detailed = !media.minimal;
 
     return _HoverScale(
@@ -362,7 +363,7 @@ class _MediaSectionState extends State<MediaSection> {
           children: [
             SizedBox(
               width: width,
-              height: 160 * multiplicationFactor,
+              height: _cardH,
               child: Card(
                 elevation: 3,
                 shape: RoundedRectangleBorder(
