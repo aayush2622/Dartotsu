@@ -355,6 +355,7 @@ class _MediaSectionState extends State<MediaSection> {
     final scheme = theme.colorScheme;
     final width = _cardW;
     final detailed = !media.minimal;
+    final progress = detailed ? _progress(media) : null;
 
     return _HoverScale(
       child: GestureDetector(
@@ -407,6 +408,10 @@ class _MediaSectionState extends State<MediaSection> {
                 ),
               ),
             ),
+            if (progress != null) ...[
+              const SizedBox(height: 5),
+              _ProgressBar(fraction: progress, width: width),
+            ],
             const SizedBox(height: 8),
             _buildMediaTitle(media),
             if (detailed) ...[
@@ -471,6 +476,41 @@ class _MediaSectionState extends State<MediaSection> {
         ? media.userScore!
         : (media.meanScore ?? 0);
     return raw > 0 ? raw / 10 : null;
+  }
+
+  /// Watched/read fraction — only for titles the viewer has started but not
+  /// finished.
+  static double? _progress(Media media) {
+    final done = media.userProgress ?? 0;
+    final total = media.anime?.totalEpisodes ?? media.manga?.totalChapters;
+    if (done <= 0 || total == null || total <= 0 || done >= total) return null;
+    return done / total;
+  }
+}
+
+class _ProgressBar extends StatelessWidget {
+  final double fraction;
+  final double width;
+  const _ProgressBar({required this.fraction, required this.width});
+
+  @override
+  Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(3),
+      child: SizedBox(
+        width: width,
+        height: 4,
+        child: ColoredBox(
+          color: scheme.surfaceContainerHighest,
+          child: FractionallySizedBox(
+            alignment: Alignment.centerLeft,
+            widthFactor: fraction.clamp(0.0, 1.0),
+            child: ColoredBox(color: scheme.primary),
+          ),
+        ),
+      ),
+    );
   }
 }
 
