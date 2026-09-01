@@ -241,7 +241,13 @@ Entry flow: `OnboardingScreen` (welcome / theme / sync) → `LoginScreen` (drive
   `editList` / `deleteFromList`), `SearchScreen` (debounced, anime/manga toggle,
   infinite-scroll grid, builds a `SearchResults`), `NotificationsScreen`, `HomeHeader`
   (greeting + avatar + bell + search + account sheet).
-- **`Screen/Settings/SettingsScreen.dart`** — appearance / account / update channel / about.
+- **`Screen/Settings/`** — data-driven, `main`-style. `Model/Setting.dart` (`SettingType`
+  header/normal/switchType/slider/inputBox/custom) → `Widgets/Settings/SettingsAdaptor` (one
+  card per `Setting`) + `SettingItem` renderers. `SettingsCategories.dart` holds a
+  `SettingsCategory` registry + a `List<Setting>` builder per category; `SettingsScreen` is
+  the category menu, each row opens `SettingsCategoryScreen`. `Widgets/Settings/SettingsListView`
+  (shared) = a search field over `SettingsAdaptor` — the top screen searches every category at
+  once (flat, headered), a sub-screen just its own.
 
 **Not built yet:** watch/read (extension sources, player, reader), MAL / Simkl services
 (the abstraction is ready — they're just unwritten subclasses), calendar, character/staff/
