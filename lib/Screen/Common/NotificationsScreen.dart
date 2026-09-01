@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide ContextExtensionss;
+import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../Core/Services/MediaServiceController.dart';
 import '../../Core/Services/Model/Media.dart';
@@ -54,68 +55,173 @@ class _NotificationsScreenState extends BaseScreen<NotificationsScreen> {
       body: RefreshIndicator(
         onRefresh: _load,
         child: Obx(() {
-          if (_loading.value && _items.isEmpty) {
-            return const Center(child: CircularProgressIndicator());
-          }
+          if (_loading.value && _items.isEmpty) return _skeleton();
           if (_items.isEmpty) {
             return Center(
-              child: Text('Nothing new', style: context.textTheme.bodyMedium),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    Icons.notifications_off_rounded,
+                    size: 44,
+                    color: context.colorScheme.onSurfaceVariant,
+                  ),
+                  const SizedBox(height: 12),
+                  Text('Nothing new', style: context.textTheme.bodyMedium),
+                ],
+              ),
             );
           }
-          return ListView.separated(
-            padding: const EdgeInsets.symmetric(vertical: 8),
-            itemCount: _items.length,
-            separatorBuilder: (_, i) => const Divider(height: 1),
-            itemBuilder: (_, i) {
-              final n = _items[i];
-              return ListTile(
-                leading: n.imageUrl == null
-                    ? const Icon(Icons.notifications_rounded)
-                    : ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: SizedBox(
-                          width: 40,
-                          height: 52,
-                          child: cachedNetworkImage(
-                            imageUrl: n.imageUrl,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                title: Text(n.text, style: context.textTheme.bodyMedium),
-                subtitle: Text(
-                  _ago(n.createdAt),
-                  style: context.textTheme.labelSmall,
+          return ListView(
+            padding: const EdgeInsets.fromLTRB(12, 4, 12, 24),
+            children: [
+              for (final group in _grouped()) ...[
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(8, 16, 8, 8),
+                  child: Text(
+                    group.$1,
+                    style: context.textTheme.labelLarge?.copyWith(
+                      color: context.colorScheme.primary,
+                    ),
+                  ),
                 ),
-                onTap: n.mediaId == null
-                    ? null
-                    : () => navigateToPage(
-                        context,
-                        DetailScreen(
-                          media: Media(
-                            id: n.mediaId!,
-                            cover: n.imageUrl,
-                            shareLink: 'https://anilist.co/anime/${n.mediaId}',
-                          ),
-                          queries: widget.queries,
-                          mutations: find<MediaServiceController>()
-                              .currentService
-                              .value
-                              .getMutations,
-                        ),
-                      ),
-              );
-            },
+                for (final n in group.$2) _row(n),
+              ],
+            ],
           );
         }),
       ),
     );
   }
 
+  Widget _row(ServiceNotification n) {
+    final scheme = context.colorScheme;
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: Material(
+        color: scheme.surfaceContainerHigh,
+        borderRadius: BorderRadius.circular(18),
+        clipBehavior: Clip.antiAlias,
+        child: InkWell(
+          onTap: n.mediaId == null ? null : () => _open(n),
+          child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: Row(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: SizedBox(
+                    width: 44,
+                    height: 58,
+                    child: n.imageUrl == null
+                        ? ColoredBox(
+                            color: scheme.surfaceContainerHighest,
+                            child: Icon(
+                              Icons.notifications_rounded,
+                              color: scheme.onSurfaceVariant,
+                              size: 20,
+                            ),
+                          )
+                        : cachedNetworkImage(
+                            imageUrl: n.imageUrl,
+                            fit: BoxFit.cover,
+                          ),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        n.text,
+                        style: context.textTheme.bodyMedium,
+                        maxLines: 3,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        _ago(n.createdAt),
+                        style: context.textTheme.labelSmall?.copyWith(
+                          color: scheme.onSurfaceVariant,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                if (n.mediaId != null)
+                  Icon(
+                    Icons.chevron_right_rounded,
+                    color: scheme.onSurfaceVariant,
+                  ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _open(ServiceNotification n) => navigateToPage(
+    context,
+    DetailScreen(
+      media: Media(
+        id: n.mediaId!,
+        cover: n.imageUrl,
+        shareLink: 'https://anilist.co/anime/${n.mediaId}',
+      ),
+      queries: widget.queries,
+      mutations:
+          find<MediaServiceController>().currentService.value.getMutations,
+    ),
+  );
+
+  Widget _skeleton() => Skeletonizer(
+    child: ListView.builder(
+      padding: const EdgeInsets.fromLTRB(12, 12, 12, 24),
+      itemCount: 8,
+      itemBuilder: (_, i) => _row(
+        ServiceNotification(
+          id: '$i',
+          text: 'A new episode of something has just aired somewhere',
+          createdAt: DateTime.now(),
+        ),
+      ),
+    ),
+  );
+
+  List<(String, List<ServiceNotification>)> _grouped() {
+    final now = DateTime.now();
+    final today = DateTime(now.year, now.month, now.day);
+    final buckets = <String, List<ServiceNotification>>{
+      'Today': [],
+      'This week': [],
+      'Earlier': [],
+    };
+    for (final n in _items) {
+      final d = today.difference(
+        DateTime(n.createdAt.year, n.createdAt.month, n.createdAt.day),
+      ).inDays;
+      if (d <= 0) {
+        buckets['Today']!.add(n);
+      } else if (d <= 7) {
+        buckets['This week']!.add(n);
+      } else {
+        buckets['Earlier']!.add(n);
+      }
+    }
+    return [
+      for (final e in buckets.entries)
+        if (e.value.isNotEmpty) (e.key, e.value),
+    ];
+  }
+
   static String _ago(DateTime time) {
     final d = DateTime.now().difference(time);
+    if (d.inMinutes < 1) return 'just now';
     if (d.inMinutes < 60) return '${d.inMinutes}m ago';
     if (d.inHours < 24) return '${d.inHours}h ago';
-    return '${d.inDays}d ago';
+    if (d.inDays < 7) return '${d.inDays}d ago';
+    return '${(d.inDays / 7).floor()}w ago';
   }
 }
