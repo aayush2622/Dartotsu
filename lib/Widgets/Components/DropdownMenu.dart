@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class BuildDropdownMenu extends StatelessWidget {
+class BuildDropdownMenu extends StatefulWidget {
   final String? value;
   final List<String> options;
   final ValueChanged<String?>? onChanged;
@@ -27,24 +27,45 @@ class BuildDropdownMenu extends StatelessWidget {
   });
 
   @override
+  State<BuildDropdownMenu> createState() => _BuildDropdownMenuState();
+}
+
+class _BuildDropdownMenuState extends State<BuildDropdownMenu> {
+  final _trailingFocus = FocusNode(
+    canRequestFocus: true,
+    descendantsAreTraversable: false,
+  );
+
+  @override
+  void dispose() {
+    _trailingFocus.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
+    final options = widget.options;
 
     return Padding(
-      padding: padding,
+      padding: widget.padding,
       child: GestureDetector(
-        onLongPress: onLongPress,
+        onLongPress: widget.onLongPress,
         child: DropdownMenu(
           requestFocusOnTap: true,
           enableSearch: false,
           enableFilter: false,
           keyboardType: TextInputType.none,
-          initialSelection: options.contains(value) ? value : null,
+          initialSelection: options.contains(widget.value)
+              ? widget.value
+              : null,
           expandedInsets: EdgeInsets.zero,
           menuHeight: 300,
-          leadingIcon: prefixIcon != null ? Icon(prefixIcon, size: 20) : null,
-          hintText: hintText,
+          leadingIcon: widget.prefixIcon != null
+              ? Icon(widget.prefixIcon, size: 20)
+              : null,
+          hintText: widget.hintText,
           textStyle: theme.textTheme.labelLarge,
           inputDecorationTheme: InputDecorationTheme(
             filled: true,
@@ -67,13 +88,10 @@ class BuildDropdownMenu extends StatelessWidget {
             ),
           ),
           onSelected: (v) {
-            onChanged?.call(v);
+            widget.onChanged?.call(v);
             FocusManager.instance.primaryFocus?.unfocus();
           },
-          trailingIconFocusNode: FocusNode(
-            canRequestFocus: true,
-            descendantsAreTraversable: false,
-          ),
+          trailingIconFocusNode: _trailingFocus,
           dropdownMenuEntries: options
               .map(
                 (e) => DropdownMenuEntry(
@@ -101,9 +119,11 @@ class BuildDropdownMenu extends StatelessWidget {
 
   OutlineInputBorder _border(ColorScheme scheme, bool focused) {
     return OutlineInputBorder(
-      borderRadius: BorderRadius.circular(borderRadius),
+      borderRadius: BorderRadius.circular(widget.borderRadius),
       borderSide: BorderSide(
-        color: focused ? scheme.primary : (borderColor ?? Colors.transparent),
+        color: focused
+            ? scheme.primary
+            : (widget.borderColor ?? Colors.transparent),
         width: focused ? 1.5 : 1,
       ),
     );
