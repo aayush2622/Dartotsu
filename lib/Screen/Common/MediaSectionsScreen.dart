@@ -60,6 +60,7 @@ class _MediaSectionsScreenState extends State<MediaSectionsScreen>
   Worker? _signalWorker;
   bool _subscribed = false;
   bool _refreshing = false;
+  final _loaded = false.obs;
 
   @override
   bool get wantKeepAlive => true;
@@ -112,6 +113,7 @@ class _MediaSectionsScreenState extends State<MediaSectionsScreen>
     try {
       final fresh = await (_cache?.fetch() ?? widget.loader());
       _apply(fresh);
+      _loaded.value = true;
     } catch (e) {
       if (_sections.isEmpty) _error.value = e.toString();
     } finally {
@@ -175,8 +177,10 @@ class _MediaSectionsScreenState extends State<MediaSectionsScreen>
     return RefreshIndicator(
       onRefresh: _refresh,
       child: Obx(() {
-        final showError = _error.value != null && _sections.isEmpty;
-        final showSkeleton = _sections.isEmpty && !showError;
+        final empty = _sections.isEmpty;
+        final showError = _error.value != null && empty;
+        final showEmpty = empty && !showError && _loaded.value;
+        final showSkeleton = empty && !showError && !showEmpty;
         final entries = _sections.entries.toList();
 
         return CustomScrollConfig(
@@ -194,6 +198,8 @@ class _MediaSectionsScreenState extends State<MediaSectionsScreen>
                 )
             else if (showError)
               SliverToBoxAdapter(child: _errorBox(_error.value!))
+            else if (showEmpty)
+              SliverToBoxAdapter(child: _emptyBox())
             else
               for (final (i, section) in entries.indexed)
                 SliverToBoxAdapter(
@@ -223,6 +229,37 @@ class _MediaSectionsScreenState extends State<MediaSectionsScreen>
       delay: Duration(milliseconds: 40 * index),
     );
   }
+
+  Widget _emptyBox() => Padding(
+    padding: const EdgeInsets.fromLTRB(24, 100, 24, 24),
+    child: Column(
+      children: [
+        Icon(
+          Icons.auto_awesome_motion_rounded,
+          size: 44,
+          color: context.colorScheme.onSurfaceVariant,
+        ),
+        const SizedBox(height: 12),
+        Text(
+          'Nothing to show yet',
+          style: context.textTheme.titleMedium,
+        ),
+        const SizedBox(height: 4),
+        Text(
+          'Add some titles to your list and they\'ll appear here.',
+          textAlign: TextAlign.center,
+          style: context.textTheme.bodyMedium?.copyWith(
+            color: context.colorScheme.onSurfaceVariant,
+          ),
+        ),
+        const SizedBox(height: 16),
+        FilledButton.tonal(
+          onPressed: _refresh,
+          child: const Text('Refresh'),
+        ),
+      ],
+    ),
+  );
 
   Widget _errorBox(String text) => Padding(
     padding: const EdgeInsets.fromLTRB(24, 80, 24, 24),
