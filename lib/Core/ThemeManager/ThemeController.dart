@@ -57,6 +57,7 @@ class ThemeController extends GetxController {
     final key = <Object?>[
       themeName.value,
       isOled.value,
+      useGlassMode.value,
       useMaterialYou.value,
       useCustomColor.value,
       customColor.value,
@@ -86,7 +87,7 @@ class ThemeController extends GetxController {
       base = AppTheme.byName(themeName.value).themeFor(brightness);
     }
 
-    return buildAppTheme(base, isOled: isOled.value);
+    return buildAppTheme(base, isOled: isOled.value, glass: useGlassMode.value);
   }
 
   // -- mutations (guarded combos) -----------------------------------------

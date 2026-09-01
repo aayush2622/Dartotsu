@@ -17,7 +17,14 @@ extension ThemeModePrefX on ThemeModePref {
 
 /// Applies the app's typography, component themes and OLED tweaks on top of a
 /// palette's [ThemeData]. Pure — [ThemeController] memoizes the result.
-ThemeData buildAppTheme(ThemeData base, {required bool isOled}) {
+///
+/// In glass mode the scaffold, app bars and sheets go transparent so the
+/// blurred [GlassBackground] painted by `BaseScreen` shows through everywhere.
+ThemeData buildAppTheme(
+  ThemeData base, {
+  required bool isOled,
+  bool glass = false,
+}) {
   final dark = base.brightness == Brightness.dark;
   final oled = isOled && dark;
 
@@ -29,13 +36,34 @@ ThemeData buildAppTheme(ThemeData base, {required bool isOled}) {
     );
   }
 
+  final scaffoldBg = glass
+      ? Colors.transparent
+      : oled
+      ? Colors.black
+      : base.scaffoldBackgroundColor;
+
+  final cardColor = glass
+      ? scheme.surface.withValues(alpha: 0.14)
+      : deriveCardColor(surface: scheme.surface, isDark: dark, isOled: oled);
+
   return base.copyWith(
     colorScheme: scheme,
-    scaffoldBackgroundColor: oled ? Colors.black : base.scaffoldBackgroundColor,
-    cardColor: deriveCardColor(
-      surface: scheme.surface,
-      isDark: dark,
-      isOled: oled,
+    scaffoldBackgroundColor: scaffoldBg,
+    canvasColor: glass ? Colors.transparent : base.canvasColor,
+    cardColor: cardColor,
+    appBarTheme: base.appBarTheme.copyWith(
+      backgroundColor: glass ? Colors.transparent : null,
+      scrolledUnderElevation: glass ? 0 : null,
+      elevation: glass ? 0 : null,
+    ),
+    bottomSheetTheme: base.bottomSheetTheme.copyWith(
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      modalBackgroundColor: Colors.transparent,
+      modalElevation: 0,
+    ),
+    dialogTheme: base.dialogTheme.copyWith(
+      backgroundColor: glass ? scheme.surface.withValues(alpha: 0.6) : null,
     ),
     textTheme: base.textTheme.merge(_poppinsTextTheme),
     switchTheme: SwitchThemeData(
