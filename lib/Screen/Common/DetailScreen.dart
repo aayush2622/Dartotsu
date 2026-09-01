@@ -9,6 +9,7 @@ import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Extensions/StringExtensions.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Utils/Functions/NavigateToScreen.dart';
+import '../../Widgets/Components/BaseScreen.dart';
 import '../../Widgets/Components/CachedNetworkImage.dart';
 import '../../Widgets/Components/ScrollConfig.dart';
 import '../../Widgets/Sections/Media/MediaSection.dart';
@@ -30,11 +31,15 @@ class DetailScreen extends StatefulWidget {
   State<DetailScreen> createState() => _DetailScreenState();
 }
 
-class _DetailScreenState extends State<DetailScreen> {
+class _DetailScreenState extends BaseScreen<DetailScreen> {
   late final _media = widget.media.obs;
   final _loading = true.obs;
 
   bool get _isAnime => _media.value.anime != null;
+
+  @override
+  String? get glassBackgroundUrl =>
+      _media.value.banner ?? _media.value.cover ?? super.glassBackgroundUrl;
 
   @override
   void initState() {
@@ -64,8 +69,9 @@ class _DetailScreenState extends State<DetailScreen> {
   );
 
   @override
-  Widget build(BuildContext context) {
+  Widget buildContent(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.transparent,
       floatingActionButton: Obx(() {
         final mutations = widget.mutations;
         final auth = find<MediaServiceController>().currentService.value.auth;
@@ -133,7 +139,6 @@ class _DetailScreenState extends State<DetailScreen> {
     return SliverAppBar(
       expandedHeight: 220,
       pinned: true,
-      backgroundColor: context.colorScheme.surface,
       flexibleSpace: FlexibleSpaceBar(
         background: Stack(
           fit: StackFit.expand,
