@@ -3,10 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../Core/Services/MediaServiceController.dart';
-import '../../Core/Services/Model/Author.dart';
-import '../../Core/Services/Model/Character.dart';
 import '../../Core/Services/Model/Media.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
+import '../../Utils/Extensions/Responsive.dart';
 import '../../Utils/Extensions/StringExtensions.dart';
 import '../../Utils/Function.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
@@ -14,7 +13,9 @@ import '../../Utils/Functions/NavigateToScreen.dart';
 import '../../Widgets/Components/BaseScreen.dart';
 import '../../Widgets/Components/CachedNetworkImage.dart';
 import '../../Widgets/Components/ScrollConfig.dart';
+import '../../Widgets/Components/SectionCard.dart';
 import '../../Widgets/Sections/Media/MediaSection.dart';
+import '../../Widgets/Sections/PeopleRail.dart';
 import 'ListEditorSheet.dart';
 
 class DetailScreen extends StatefulWidget {
@@ -71,6 +72,11 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
     ),
   );
 
+  EdgeInsets get _sectionMargin => EdgeInsets.symmetric(
+    horizontal: Dimens.gap,
+    vertical: Dimens.gapSm / 2,
+  );
+
   @override
   Widget buildContent(BuildContext context) {
     return Scaffold(
@@ -86,28 +92,47 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
             children: [
               _appBar(m),
               SliverToBoxAdapter(child: _header(m)),
-              SliverToBoxAdapter(child: _statStrip(m)),
+              if (_statItems(m).isNotEmpty)
+                SliverToBoxAdapter(child: _statStrip(m)),
               if (_airingIn(m) case final airing?)
                 SliverToBoxAdapter(child: _airingCard(m, airing)),
               if ((m.description ?? '').trim().isNotEmpty)
                 SliverToBoxAdapter(child: _synopsis(m)),
-              if (m.genres.isNotEmpty)
-                SliverToBoxAdapter(child: _genres(m)),
+              if (m.genres.isNotEmpty) SliverToBoxAdapter(child: _genres(m)),
               if (_infoRows(m).isNotEmpty)
                 SliverToBoxAdapter(child: _infoCard(m)),
               if (m.tags.isNotEmpty) SliverToBoxAdapter(child: _tags(m)),
               if ((m.characters ?? const []).isNotEmpty)
                 SliverToBoxAdapter(
-                  child: _peopleStrip(
-                    'Characters',
-                    [for (final c in m.characters!) _person(c)],
+                  child: PeopleRail(
+                    title: 'Characters',
+                    people: [
+                      for (final c in m.characters!)
+                        RailPerson(
+                          image: c.image,
+                          name: c.name ?? '',
+                          role: [
+                            if (c.role != null) _pretty(c.role!),
+                            if ((c.voiceActor?.isNotEmpty ?? false) &&
+                                c.voiceActor!.first.name != null)
+                              c.voiceActor!.first.name!,
+                          ].join(' · '),
+                        ),
+                    ],
                   ),
                 ),
               if ((m.staff ?? const []).isNotEmpty)
                 SliverToBoxAdapter(
-                  child: _peopleStrip(
-                    'Staff',
-                    [for (final s in m.staff!) _staff(s)],
+                  child: PeopleRail(
+                    title: 'Staff',
+                    people: [
+                      for (final s in m.staff!)
+                        RailPerson(
+                          image: s.image,
+                          name: s.name ?? '',
+                          role: s.role == null ? null : _pretty(s.role!),
+                        ),
+                    ],
                   ),
                 ),
               if ((m.relations ?? const []).isNotEmpty)
@@ -140,7 +165,7 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
     );
   }
 
-  // --- app bar ---------------------------------------------------------------
+  // --- app bar ------------------------------------------------------------
 
   Widget _appBar(Media m) {
     final scheme = context.colorScheme;
@@ -236,58 +261,60 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
     );
   }
 
-  // --- header ---------------------------------------------------------------
+  // --- header -----------------------------------------------------------
 
   Widget _header(Media m) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 12, 16, 4),
-      child: Column(
+      padding: EdgeInsets.fromLTRB(Dimens.gap, Dimens.gap, Dimens.gap, 0),
+      child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _Poster(url: m.cover),
-              const SizedBox(width: 14),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      m.mainName,
-                      style: context.textTheme.titleLarge,
-                      maxLines: 3,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    if (m.nameRomaji != null &&
-                        m.nameRomaji != m.mainName) ...[
-                      const SizedBox(height: 2),
-                      Text(
-                        m.nameRomaji!,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: context.textTheme.bodySmall?.copyWith(
-                          color: context.colorScheme.onSurfaceVariant,
-                        ),
-                      ),
-                    ],
-                    const SizedBox(height: 10),
-                    _metaPills(m),
-                    if (m.trailer != null) ...[
-                      const SizedBox(height: 10),
-                      OutlinedButton.icon(
-                        onPressed: () => openLinkInBrowser(m.trailer!),
-                        icon: const Icon(Icons.play_arrow_rounded, size: 18),
-                        label: const Text('Trailer'),
-                        style: OutlinedButton.styleFrom(
-                          visualDensity: VisualDensity.compact,
-                        ),
-                      ),
-                    ],
-                  ],
+          ClipRRect(
+            borderRadius: BorderRadius.circular(Dimens.radiusSm),
+            child: Container(
+              width: Dimens.detailPosterW,
+              height: Dimens.detailPosterH,
+              color: context.colorScheme.surfaceContainerHigh,
+              child: cachedNetworkImage(imageUrl: m.cover, fit: BoxFit.cover),
+            ),
+          ),
+          SizedBox(width: Dimens.gap),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  m.mainName,
+                  style: context.textTheme.titleLarge,
+                  maxLines: 3,
+                  overflow: TextOverflow.ellipsis,
                 ),
-              ),
-            ],
+                if (m.nameRomaji != null && m.nameRomaji != m.mainName) ...[
+                  const SizedBox(height: 2),
+                  Text(
+                    m.nameRomaji!,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: context.textTheme.bodySmall?.copyWith(
+                      color: context.colorScheme.onSurfaceVariant,
+                    ),
+                  ),
+                ],
+                SizedBox(height: Dimens.gapSm),
+                _metaPills(m),
+                if (m.trailer != null) ...[
+                  SizedBox(height: Dimens.gapSm),
+                  OutlinedButton.icon(
+                    onPressed: () => openLinkInBrowser(m.trailer!),
+                    icon: const Icon(Icons.play_arrow_rounded, size: 18),
+                    label: const Text('Trailer'),
+                    style: OutlinedButton.styleFrom(
+                      visualDensity: VisualDensity.compact,
+                    ),
+                  ),
+                ],
+              ],
+            ),
           ),
         ],
       ),
@@ -317,49 +344,42 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
     return Wrap(spacing: 8, runSpacing: 8, children: pills);
   }
 
-  // --- stat strip ---------------------------------------------------------
+  // --- stat strip -----------------------------------------------------
+
+  List<(IconData, String, String)> _statItems(Media m) => [
+    if ((m.meanScore ?? 0) > 0)
+      (Icons.star_rounded, 'Score', (m.meanScore! / 10).toStringAsFixed(1)),
+    if ((m.popularity ?? 0) > 0)
+      (Icons.people_alt_rounded, 'Popularity', _compact(m.popularity!)),
+    if ((m.favourites ?? 0) > 0)
+      (Icons.favorite_rounded, 'Favourites', _compact(m.favourites!)),
+    if (m.anime?.episodeDuration != null)
+      (Icons.schedule_rounded, 'Duration', '${m.anime!.episodeDuration}m'),
+  ];
 
   Widget _statStrip(Media m) {
-    final stats = <Widget>[
-      if ((m.meanScore ?? 0) > 0)
-        _StatTile(
-          icon: Icons.star_rounded,
-          label: 'Score',
-          value: (m.meanScore! / 10).toStringAsFixed(1),
-        ),
-      if ((m.popularity ?? 0) > 0)
-        _StatTile(
-          icon: Icons.people_alt_rounded,
-          label: 'Popularity',
-          value: _compact(m.popularity!),
-        ),
-      if ((m.favourites ?? 0) > 0)
-        _StatTile(
-          icon: Icons.favorite_rounded,
-          label: 'Favourites',
-          value: _compact(m.favourites!),
-        ),
-      if (m.anime?.episodeDuration != null)
-        _StatTile(
-          icon: Icons.schedule_rounded,
-          label: 'Duration',
-          value: '${m.anime!.episodeDuration}m',
-        ),
-    ];
-    if (stats.isEmpty) return const SizedBox.shrink();
-    return SizedBox(
-      height: 96,
-      child: ListView.separated(
-        scrollDirection: Axis.horizontal,
-        padding: const EdgeInsets.fromLTRB(16, 6, 16, 6),
-        itemCount: stats.length,
-        separatorBuilder: (_, i) => const SizedBox(width: 10),
-        itemBuilder: (_, i) => SizedBox(width: 96, child: stats[i]),
+    final items = _statItems(m);
+    return SectionCard(
+      margin: _sectionMargin,
+      child: Row(
+        children: [
+          for (final (i, stat) in items.indexed) ...[
+            Expanded(child: _Stat(icon: stat.$1, label: stat.$2, value: stat.$3)),
+            if (i != items.length - 1)
+              Container(
+                width: 1,
+                height: 34,
+                color: context.colorScheme.outlineVariant.withValues(
+                  alpha: 0.5,
+                ),
+              ),
+          ],
+        ],
       ),
     );
   }
 
-  // --- airing card ------------------------------------------------------
+  // --- airing ---------------------------------------------------------
 
   Duration? _airingIn(Media m) {
     final at = m.anime?.nextAiringEpisodeTime;
@@ -372,70 +392,49 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
   Widget _airingCard(Media m, Duration until) {
     final scheme = context.colorScheme;
     final ep = m.anime?.nextAiringEpisode;
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 8, 16, 4),
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        decoration: BoxDecoration(
-          color: scheme.secondaryContainer.withValues(alpha: 0.6),
-          borderRadius: BorderRadius.circular(18),
-        ),
-        child: Row(
-          children: [
-            Icon(Icons.podcasts_rounded, color: scheme.onSecondaryContainer),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Text(
-                ep != null
-                    ? 'Episode $ep airs in ${_fmtDuration(until)}'
-                    : 'Next episode in ${_fmtDuration(until)}',
-                style: context.textTheme.bodyMedium?.copyWith(
-                  color: scheme.onSecondaryContainer,
-                ),
-              ),
+    return SectionCard(
+      margin: _sectionMargin,
+      child: Row(
+        children: [
+          Icon(Icons.podcasts_rounded, color: scheme.primary),
+          SizedBox(width: Dimens.gap),
+          Expanded(
+            child: Text(
+              ep != null
+                  ? 'Episode $ep airs in ${_fmtDuration(until)}'
+                  : 'Next episode in ${_fmtDuration(until)}',
+              style: context.textTheme.bodyMedium,
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
 
-  // --- synopsis --------------------------------------------------------
+  // --- text sections ------------------------------------------------
 
-  Widget _synopsis(Media m) => Padding(
-    padding: const EdgeInsets.fromLTRB(20, 12, 20, 4),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const _SectionHeader(title: 'Synopsis'),
-        const SizedBox(height: 6),
-        _Expandable(text: m.description!.stripHtml),
-      ],
-    ),
+  Widget _synopsis(Media m) => SectionCard(
+    margin: _sectionMargin,
+    title: 'Synopsis',
+    child: _Expandable(text: m.description!.stripHtml),
   );
 
-  Widget _genres(Media m) => Padding(
-    padding: const EdgeInsets.fromLTRB(20, 12, 20, 4),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+  Widget _genres(Media m) => SectionCard(
+    margin: _sectionMargin,
+    title: 'Genres',
+    child: Wrap(
+      spacing: 8,
+      runSpacing: 8,
       children: [
-        const _SectionHeader(title: 'Genres'),
-        const SizedBox(height: 8),
-        Wrap(
-          spacing: 8,
-          runSpacing: 8,
-          children: [
-            for (final g in m.genres)
-              Chip(
-                label: Text(g),
-                labelStyle: context.textTheme.labelMedium,
-                visualDensity: VisualDensity.compact,
-                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                side: BorderSide(color: context.colorScheme.outlineVariant),
-                backgroundColor: Colors.transparent,
-              ),
-          ],
-        ),
+        for (final g in m.genres)
+          Chip(
+            label: Text(g),
+            labelStyle: context.textTheme.labelMedium,
+            visualDensity: VisualDensity.compact,
+            materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            side: BorderSide(color: context.colorScheme.outlineVariant),
+            backgroundColor: Colors.transparent,
+          ),
       ],
     ),
   );
@@ -449,52 +448,42 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
         ),
     ]..sort((a, b) => _rankNum(b.rank).compareTo(_rankNum(a.rank)));
 
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 12, 20, 4),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const _SectionHeader(title: 'Tags'),
-          const SizedBox(height: 8),
-          Obx(() {
-            final shown = _tagsExpanded.value
-                ? parsed
-                : parsed.take(12).toList();
-            return Wrap(
-              spacing: 8,
-              runSpacing: 8,
-              children: [
-                for (final t in shown)
-                  Chip(
-                    label: Text('${t.name}  ${t.rank}'),
-                    labelStyle: context.textTheme.labelSmall,
-                    visualDensity: VisualDensity.compact,
-                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                    backgroundColor:
-                        context.colorScheme.surfaceContainerHighest,
-                    side: BorderSide.none,
-                  ),
-                if (parsed.length > 12)
-                  ActionChip(
-                    label: Text(
-                      _tagsExpanded.value
-                          ? 'Show less'
-                          : '+${parsed.length - 12} more',
-                    ),
-                    labelStyle: context.textTheme.labelSmall,
-                    visualDensity: VisualDensity.compact,
-                    onPressed: () =>
-                        _tagsExpanded.value = !_tagsExpanded.value,
-                  ),
-              ],
-            );
-          }),
-        ],
-      ),
+    return SectionCard(
+      margin: _sectionMargin,
+      title: 'Tags',
+      child: Obx(() {
+        final shown = _tagsExpanded.value ? parsed : parsed.take(12).toList();
+        return Wrap(
+          spacing: 8,
+          runSpacing: 8,
+          children: [
+            for (final t in shown)
+              Chip(
+                label: Text('${t.name}  ${t.rank}'),
+                labelStyle: context.textTheme.labelSmall,
+                visualDensity: VisualDensity.compact,
+                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                backgroundColor: context.colorScheme.surfaceContainerHighest,
+                side: BorderSide.none,
+              ),
+            if (parsed.length > 12)
+              ActionChip(
+                label: Text(
+                  _tagsExpanded.value
+                      ? 'Show less'
+                      : '+${parsed.length - 12} more',
+                ),
+                labelStyle: context.textTheme.labelSmall,
+                visualDensity: VisualDensity.compact,
+                onPressed: () => _tagsExpanded.value = !_tagsExpanded.value,
+              ),
+          ],
+        );
+      }),
     );
   }
 
-  // --- info card ------------------------------------------------------
+  // --- info card ----------------------------------------------------
 
   List<(String, String)> _infoRows(Media m) {
     final a = m.anime;
@@ -502,83 +491,22 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
       if (a?.studio?.name.isNotEmpty ?? false) ('Studio', a!.studio!.name),
       if (m.source != null) ('Source', _pretty(m.source!)),
       if (m.countryOfOrigin != null) ('Country', m.countryOfOrigin!),
-      if (m.startDate?.getFormattedDate() != null)
-        ('Aired', _airedRange(m)),
+      if (m.startDate?.getFormattedDate() != null) ('Aired', _airedRange(m)),
       if (m.format != null) ('Format', _pretty(m.format!)),
     ];
   }
 
-  Widget _infoCard(Media m) {
-    final rows = _infoRows(m);
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 12, 20, 4),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const _SectionHeader(title: 'Details'),
-          const SizedBox(height: 8),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-            decoration: BoxDecoration(
-              color: context.colorScheme.surfaceContainerHigh,
-              borderRadius: BorderRadius.circular(18),
-            ),
-            child: Column(
-              children: [
-                for (final (label, value) in rows) _InfoRow(label, value),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  // --- people ---------------------------------------------------------
-
-  Widget _peopleStrip(String title, List<Widget> cards) => Padding(
-    padding: const EdgeInsets.only(top: 12),
+  Widget _infoCard(Media m) => SectionCard(
+    margin: _sectionMargin,
+    title: 'Details',
     child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: _SectionHeader(title: title),
-        ),
-        const SizedBox(height: 8),
-        SizedBox(
-          height: 184,
-          child: ListView.separated(
-            scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            itemCount: cards.length,
-            separatorBuilder: (_, i) => const SizedBox(width: 12),
-            itemBuilder: (_, i) => cards[i],
-          ),
-        ),
+        for (final (label, value) in _infoRows(m)) _InfoRow(label, value),
       ],
     ),
   );
 
-  Widget _person(Character c) {
-    final va = (c.voiceActor?.isNotEmpty ?? false) ? c.voiceActor!.first : null;
-    return _PersonCard(
-      image: c.image,
-      name: c.name ?? '',
-      subtitle: [
-        if (c.role != null) _pretty(c.role!),
-        if (va?.name != null) va!.name!,
-      ].join(' · '),
-    );
-  }
-
-  Widget _staff(Author a) => _PersonCard(
-    image: a.image,
-    name: a.name ?? '',
-    subtitle: a.role == null ? '' : _pretty(a.role!),
-  );
-
-  // --- fab ----------------------------------------------------------------
+  // --- fab ----------------------------------------------------------
 
   Widget _fab(BuildContext context) {
     return Obx(() {
@@ -607,7 +535,7 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
     });
   }
 
-  // --- format helpers -------------------------------------------------
+  // --- format helpers ---------------------------------------------
 
   static String _pretty(String raw) {
     final words = raw.toLowerCase().replaceAll('_', ' ').split(' ');
@@ -650,40 +578,7 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
   };
 }
 
-// --- shared bits ---------------------------------------------------------
-
-class _SectionHeader extends StatelessWidget {
-  final String title;
-  const _SectionHeader({required this.title});
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      title,
-      style: context.textTheme.titleMedium?.copyWith(
-        fontWeight: FontWeight.w700,
-      ),
-    );
-  }
-}
-
-class _Poster extends StatelessWidget {
-  final String? url;
-  const _Poster({this.url});
-
-  @override
-  Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(14),
-      child: Container(
-        width: 108,
-        height: 156,
-        color: context.colorScheme.surfaceContainerHigh,
-        child: cachedNetworkImage(imageUrl: url, fit: BoxFit.cover),
-      ),
-    );
-  }
-}
+// --- shared bits ------------------------------------------------------
 
 class _MetaPill extends StatelessWidget {
   final String text;
@@ -713,49 +608,37 @@ class _MetaPill extends StatelessWidget {
   }
 }
 
-class _StatTile extends StatelessWidget {
+class _Stat extends StatelessWidget {
   final IconData icon;
   final String label;
   final String value;
-  const _StatTile({
-    required this.icon,
-    required this.label,
-    required this.value,
-  });
+  const _Stat({required this.icon, required this.label, required this.value});
 
   @override
   Widget build(BuildContext context) {
     final scheme = context.colorScheme;
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
-      decoration: BoxDecoration(
-        color: scheme.surfaceContainerHigh,
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(icon, size: 17, color: scheme.primary),
-          const SizedBox(height: 4),
-          Text(
-            value,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: context.textTheme.titleSmall?.copyWith(
-              fontWeight: FontWeight.w700,
-            ),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(icon, size: 18, color: scheme.primary),
+        const SizedBox(height: 5),
+        Text(
+          value,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: context.textTheme.titleSmall?.copyWith(
+            fontWeight: FontWeight.w700,
           ),
-          Text(
-            label,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: context.textTheme.labelSmall?.copyWith(
-              color: scheme.onSurfaceVariant,
-            ),
+        ),
+        Text(
+          label,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: context.textTheme.labelSmall?.copyWith(
+            color: scheme.onSurfaceVariant,
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
@@ -786,57 +669,6 @@ class _InfoRow extends StatelessWidget {
           Expanded(
             child: Text(value, style: context.textTheme.bodyMedium),
           ),
-        ],
-      ),
-    );
-  }
-}
-
-class _PersonCard extends StatelessWidget {
-  final String? image;
-  final String name;
-  final String subtitle;
-  const _PersonCard({
-    required this.image,
-    required this.name,
-    required this.subtitle,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: 104,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(14),
-            child: Container(
-              width: 104,
-              height: 112,
-              color: context.colorScheme.surfaceContainerHigh,
-              child: cachedNetworkImage(imageUrl: image, fit: BoxFit.cover),
-            ),
-          ),
-          const SizedBox(height: 6),
-          Text(
-            name,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: context.textTheme.labelMedium,
-          ),
-          if (subtitle.isNotEmpty)
-            Flexible(
-              child: Text(
-                subtitle,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: context.textTheme.labelSmall?.copyWith(
-                  color: context.colorScheme.onSurfaceVariant,
-                ),
-              ),
-            ),
         ],
       ),
     );
