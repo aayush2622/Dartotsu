@@ -126,7 +126,16 @@ class _MyAppState extends State<MyApp> {
   final _focusNode = FocusNode();
   final ThemeController _theme = find();
   final LocaleController _locale = find();
-  late final _appBuilder = Dpad.wrap(onBack: _handleBack);
+  late final _appBuilder = Dpad.wrap(
+    onBack: _handleBack,
+    theme: const DpadThemeData(
+      effects: [
+        DpadScaleEffect(scale: 1.04),
+        DpadGlowEffect(opacity: 0.5, blurRadius: 22),
+        DpadBorderEffect(width: 2.5),
+      ],
+    ),
+  );
 
   @override
   void dispose() {
@@ -152,8 +161,9 @@ class _MyAppState extends State<MyApp> {
       onPointerDown: (event) =>
           event.buttons == kBackMouseButton ? _handleBack() : null,
       child: Focus(
-        autofocus: true,
         focusNode: _focusNode,
+        canRequestFocus: false,
+        skipTraversal: true,
         onKeyEvent: (_, event) => appShortcuts(event)
             ? KeyEventResult.handled
             : KeyEventResult.ignored,

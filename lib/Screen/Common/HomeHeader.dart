@@ -1,3 +1,4 @@
+import 'package:dpad/dpad.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide ContextExtensionss;
 
@@ -222,6 +223,14 @@ class _Avatar extends StatelessWidget {
             : cachedNetworkImage(imageUrl: url, fit: BoxFit.cover),
       ),
     );
-    return onTap == null ? child : GestureDetector(onTap: onTap, child: child);
+    if (onTap == null) return child;
+    return DpadFocusable(
+      onSelect: onTap,
+      effects: const [
+        DpadScaleEffect(scale: 1.1),
+        DpadGlowEffect(borderRadius: BorderRadius.all(Radius.circular(64))),
+      ],
+      child: child,
+    );
   }
 }

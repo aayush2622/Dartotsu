@@ -1,3 +1,4 @@
+import 'package:dpad/dpad.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide ContextExtensionss;
 
@@ -287,8 +288,9 @@ class _ExpandableState extends State<_Expandable> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => setState(() => _expanded = !_expanded),
+    return DpadFocusable(
+      onSelect: () => setState(() => _expanded = !_expanded),
+      effects: const [DpadBorderEffect(borderRadius: BorderRadius.zero)],
       child: AnimatedSize(
         duration: const Duration(milliseconds: 180),
         alignment: Alignment.topCenter,
