@@ -20,10 +20,12 @@ Targets 5 platforms: Android, iOS, Windows, Linux, macOS. Distributed outside ap
 
 ~200 Dart files vs `main`'s ~350. On 2026-09-01 the foundation layers (Preferences, Theme, DI,
 networking) got a correctness/consistency pass; then a **pluggable per-service architecture**
-was built (abstract `*ScreenView` / `ServiceApi` / `ServiceMutations` / `ServiceAuth`, see
-below) with a full **AniList read + list-management slice** on it: onboarding → login →
-home/anime/manga rails (folding in the viewer's status lists) → media detail → list editor →
-search → notifications → settings, all on live AniList GraphQL. `flutter analyze` clean;
+was built (abstract `*ScreenView` / `Queries` / `Mutations` / `ServiceAuth`, see below) with a
+full **AniList read + list-management slice** on it: onboarding → login →
+home/anime/manga sections (folding in the viewer's status lists) → media detail → list editor →
+search → notifications → settings, all on live AniList GraphQL. The service read/write surface
+was then split into `main`-style `Queries` / `Mutations` part files (`AnilistQueries/*`,
+`AnilistMutations/*`) with every query ported from `main`. `flutter analyze` clean;
 `flutter build linux` + `flutter run -d linux` verified each step. `ExtensionService` is still
 an id/name/icon shell → every screen renders `NotImplemented`. **Not built:** watch/read
 (extension sources, player, reader), MAL/Simkl subclasses, calendar, profile/character pages,
@@ -160,17 +162,18 @@ context-free access (`getString`, snackbars).
 
 | Getter | Type | Purpose |
 |---|---|---|
-| `api` | `ServiceApi?` | reads: `getHomeRails()`, `getAnimeRails()`, `getMangaRails()`, `getMediaDetails(id)`, `search(...)`, `getNotifications(...)` |
-| `mutations` | `ServiceMutations?` | `saveListEntry(...)` / `deleteListEntry(id)` |
+| `getQueries` | `Queries?` | reads: `getUserData()`, `getMedia(id)`, `mediaDetails(m)`, `initHomePage()`, `getAnimeList()`, `getMangaList()`, `getMediaLists({anime,userId?})`, `getCalendarData()`, `getGenresAndTags()`, `getBannerImages()`, `getNotifications({page})`, `search(SearchResults?)` |
+| `getMutations` | `Mutations?` | `editList(Media,{customList})` / `deleteFromList(Media)` / `setProgress(Media,progress)` — each takes a `Media` carrying the desired user-list fields |
 | `auth` | `ServiceAuth?` | `user` (`Rxn<ServiceUser>`), `isLoggedIn`, `login()` / `loginWithToken(t)` / `logout()` / `refreshUser()` |
 | `getHomeScreen` / `getAnimeScreen` / `getMangaScreen` / `getSearchScreen` / `getDetailScreen` / `getNotificationScreen` / `getLoginScreen` / `getSettingsScreen` | `*ScreenView?` | one abstract class per screen area (`Core/Services/ServiceScreens.dart`); `build(context, …)` returns the widget |
 
+- **`Core/Services/Api/Queries.dart` / `Mutations.dart`** — the abstract read/write surface
+  (mirrors `main`'s `lib/Services/Api/`). List-shaped queries return an **insertion-ordered
+  `Map<String, List<Media>>`** — key = section title to render, value = its media.
 - **`Core/Services/MediaServiceController.dart`** — `RxList<MediaService> services`
   (`[AnilistService(), ExtensionService()]`), `Rx<MediaService> currentService` restored from
   `PrefName.service.value` by `id`.
 - **`Core/Services/ServiceSwitcher.dart`** — `serviceSwitcher(context)` picker bottom sheet.
-- `Core/Services/Api/Queries.dart` / `Mutations.dart` — old stubs, superseded by
-  `ServiceApi` / `ServiceMutations`; not used.
 
 Per-service code goes under **`lib/Api/Services/<Service>/`**.
 
@@ -179,17 +182,26 @@ Per-service code goes under **`lib/Api/Services/<Service>/`**.
 **`lib/Api/Services/Anilist/`**:
 
 - `AnilistClient` — typed GraphQL POST to `graphql.anilist.co` via `NetworkManager`;
-  rate-limit aware; takes a `String Function()` token provider.
+  rate-limit aware; takes a `String Function()` token provider. Exposes the
+  `ExecuteAnilistQuery` typedef (`client.query` torn off and injected into the query files).
 - `AnilistAuth implements ServiceAuth` (GetxController, `lazyPut`) — `token` =
   `PrefName.anilistToken.rx`, `user` = `Rxn<ServiceUser>` holding an `AnilistUser`
   (cached to prefs). `login()` runs `FlutterWebAuth2` implicit grant (`client_id 14959`,
-  scheme `dantotsu`); owns `AnilistApi api`.
-- `AnilistApi implements ServiceApi, ServiceMutations` — GraphQL for every read/write; folds
-  the viewer's status lists above the discovery rails when a userId is present.
-- `AnilistUser implements ServiceUser`; `AnilistMedia.dart` = GraphQL fragments +
-  `mapAnilistMedia` / `mapAnilistDetail` → the domain `Media`.
+  scheme `dantotsu`); owns `AnilistQueries queries` + `AnilistMutations mutations`.
+- `AnilistQueries extends Queries` — main file + `part 'AnilistQueries/GetX.dart'` files
+  (`GetUserData`, `GetHomePageData`, `GetAnimeMangaListData`, `GetMediaDetails`, `GetMediaData`,
+  `GetCalendarData`, `GetGenresAndTags`, `GetBannerImages`, `GetUserMediaList`,
+  `GetNotifications`, `Search`), each an `extension on AnilistQueries` — GraphQL strings ported
+  from `main`'s `AnilistQueries`, map-parsed via the `AnilistMedia.dart` mappers (no
+  TypeFactory / generated response models). `AnilistMutations extends Mutations` — parts
+  `EditList` / `SetProgress` / `DeleteFromList`.
+- `AnilistMedia extends Media` (`AnilistMedia.dart`) — the AniList-only extras (`idMal`,
+  `inCustomListsOf`, `userFavOrder`); `anilistMediaFragment` / `anilistAuthorRoles` +
+  `mapAnilistMedia` / `mapAnilistListEntry` / `mapAnilistDetail`. `AnilistUser implements
+  ServiceUser`.
 - `Screens/AnilistScreens.dart` — thin `*ScreenView` classes wiring the shared widgets to
-  `AnilistAuth.api`.
+  `AnilistAuth.queries` / `.mutations`; anime/manga tabs merge `getMediaLists` above the
+  browse sections.
 - `AnilistService` — the getters just return `find<AnilistAuth>()` and the view classes.
 
 ### Feature screens
@@ -201,11 +213,13 @@ Entry flow: `OnboardingScreen` (welcome / theme / sync) → `LoginScreen` (drive
 - **`Screen/MainScreen.dart`** — 3-tab shell; each tab is
   `service.<home|anime|manga>Screen?.build(context) ?? NotImplemented(...)`, lazy-mounted in
   an `IndexedStack` keyed by `serviceId-tab`, `FloatingBottomNavBar`.
-- **`Screen/Common/`** — the service-agnostic widgets every `ServiceApi` reuses:
-  `MediaRailsScreen` (pull-to-refresh `MediaSection` rails from a `RailLoader` + optional
-  `reloadOn` stream), `DetailScreen` (collapsing banner, genres, expandable synopsis,
-  character rail, relation/recommendation rails; FAB → `ListEditorSheet`), `SearchScreen`
-  (debounced, anime/manga toggle, infinite-scroll grid), `NotificationsScreen`, `HomeHeader`
+- **`Screen/Common/`** — the service-agnostic widgets every `Queries` impl reuses:
+  `MediaSectionsScreen` (pull-to-refresh `MediaSection` list from a
+  `SectionsLoader = Future<Map<String,List<Media>>> Function()` + optional `reloadOn` stream),
+  `DetailScreen` (`Queries` + `Mutations?`; collapsing banner, genres, expandable synopsis,
+  character strip, relation/recommendation sections; FAB → `ListEditorSheet` →
+  `editList` / `deleteFromList`), `SearchScreen` (debounced, anime/manga toggle,
+  infinite-scroll grid, builds a `SearchResults`), `NotificationsScreen`, `HomeHeader`
   (greeting + avatar + bell + search + account sheet).
 - **`Screen/Settings/SettingsScreen.dart`** — appearance / account / update channel / about.
 
@@ -219,9 +233,14 @@ Two model areas, both `@JsonSerializable` with committed generated code:
 
 - **`Core/Services/Model/`** — the domain model: `Media`, `Anime`, `Manga`, `Character`,
   `Author`, `Studio`, `Review`, `User`, `Date`. Generated files in
-  `Core/Services/Model/Generated/*.g.dart`. `Media` is the central type (mirrors `main`'s
-  `DataClass/Media.dart`) and has `Media.skeleton()` for skeleton loaders + `extension M on
-  Pages` to convert extension-bridge results.
+  `Core/Services/Model/Generated/*.g.dart` — **build_runner writes `Model/*.g.dart` adjacent;
+  they're then moved into `Generated/` and both `part` directives fixed** (see `git log`
+  `5f039d1`). `Media` is the central type (mirrors `main`'s `DataClass/Media.dart`); detail-only
+  fields (`characters`, `relations`, `review`, `users`, `settings`, `sourceData`, …) are
+  `@JsonKey(includeFromJson: false, includeToJson: false)`. `Media.skeleton()` for skeleton
+  loaders, `mainName` / `isAnime` / `totalUnits` getters, `extension M on Pages` for
+  extension-bridge results. **A service with extra fields subclasses it** — `AnilistMedia
+  extends Media`; the subclass is never serialized, only the base.
 - **`Model/`** — app-level types: `SearchResults` (+ `Model/Data/SearchResults.g.dart`),
   `Setting`.
 
@@ -400,7 +419,7 @@ whenever you need the real implementation of a screen/flow that's still a stub h
 | Theme registry | list duplicated in resolver + dropdown + `Themes/` | single `AppTheme` enum |
 | Crash reporting | manual (`logger` + native) | Firebase Crashlytics (`AnalyticsManager`) + manual |
 | Notifications | scattered | `Core/NotificationManager` unified API |
-| `MediaService` | `BaseServiceData` + `Base*Screen` delegates + `TypeFactory` | thin `id`/`name`/`iconPath`, optional `NavBarProvider`, `Api/Queries`+`Mutations` interfaces |
+| `MediaService` | `BaseServiceData` + `Base*Screen` delegates + `TypeFactory` | thin `id`/`name`/`iconPath`, nullable `getQueries`/`getMutations`/`auth`/`get*Screen`, optional `NavBarProvider` |
 | ext bridge | git dep | `path: ../DartotsuExtensionBridge` |
 | HTTP | `rhttp` + `http` | `rhttp` only |
 | Screen base | ad-hoc | `BaseScreen<T>` |

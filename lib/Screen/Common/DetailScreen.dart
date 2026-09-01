@@ -15,13 +15,13 @@ import 'ListEditorSheet.dart';
 
 class DetailScreen extends StatefulWidget {
   final Media media;
-  final ServiceApi api;
-  final ServiceMutations? mutations;
+  final Queries queries;
+  final Mutations? mutations;
 
   const DetailScreen({
     super.key,
     required this.media,
-    required this.api,
+    required this.queries,
     this.mutations,
   });
 
@@ -33,7 +33,6 @@ class _DetailScreenState extends State<DetailScreen> {
   late final _media = widget.media.obs;
   final _loading = true.obs;
 
-  ServiceApi get _api => widget.api;
   bool get _isAnime => _media.value.anime != null;
 
   @override
@@ -45,9 +44,10 @@ class _DetailScreenState extends State<DetailScreen> {
   Future<void> _fetch() async {
     _loading.value = true;
     try {
-      _media.value = await _api.getMediaDetails(widget.media.id);
+      final full = await widget.queries.mediaDetails(_media.value);
+      if (full != null) _media.refresh();
     } catch (_) {
-      // keep the partial media from the rail
+      // keep the partial media we were opened with
     } finally {
       _loading.value = false;
     }
@@ -55,7 +55,11 @@ class _DetailScreenState extends State<DetailScreen> {
 
   void _open(BuildContext context, Media media) => navigateToPage(
     context,
-    DetailScreen(media: media, api: widget.api, mutations: widget.mutations),
+    DetailScreen(
+      media: media,
+      queries: widget.queries,
+      mutations: widget.mutations,
+    ),
   );
 
   @override

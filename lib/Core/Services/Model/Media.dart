@@ -15,6 +15,8 @@ import 'User.dart';
 
 part 'Generated/Media.g.dart';
 
+/// The one shared media type. A service that carries extra data subclasses this
+/// (see `AnilistMedia`) — the subclass is never serialized, only the base is.
 @JsonSerializable()
 class Media {
   String id;
@@ -30,48 +32,64 @@ class Media {
   String? banner;
   String? relation;
   int? favourites;
-  bool? minimal = false;
+  bool minimal;
   bool isAdult;
-  bool isFav = false;
+  bool isFav;
 
+  // -- user list entry --
   int? userListId;
-  bool isListPrivate = false;
+  bool isListPrivate;
   String? notes;
   int? userProgress;
   String? userStatus;
-  int? userScore = 0;
-  int userRepeat = 0;
+  int? userScore;
+  int userRepeat;
   int? userUpdatedAt;
   Date? userStartedAt;
   Date? userCompletedAt;
-  Map<String, bool>? inCustomListsOf;
 
+  // -- metadata --
   String? status;
   String? format;
   String? source;
   String? countryOfOrigin;
   int? meanScore;
-  List<String> genres = [];
-  List<String> tags = [];
+  List<String> genres;
+  List<String> tags;
   String? description;
-  List<String> synonyms = [];
+  List<String> synonyms;
   String? trailer;
   Date? startDate;
   Date? endDate;
   int? popularity;
   int? timeUntilAiring;
-  List<Character>? characters;
-  List<Review>? review;
-  List<Author>? staff;
-  Media? prequel;
-  Media? sequel;
-  List<Media>? relations;
-  List<Media>? recommendations;
-  List<User>? users;
-  String shareLink;
-  MediaSettings settings = MediaSettings();
 
-  bool cameFromContinue = false;
+  // -- detail page (not persisted) --
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  List<Character>? characters;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  List<Review>? review;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  List<Author>? staff;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  Media? prequel;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  Media? sequel;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  List<Media>? relations;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  List<Media>? recommendations;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  List<User>? users;
+
+  String shareLink;
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  MediaSettings settings;
+
+  bool cameFromContinue;
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
   Source? sourceData;
 
   Media({
@@ -98,7 +116,6 @@ class Media {
     this.userUpdatedAt,
     this.userStartedAt,
     this.userCompletedAt,
-    this.inCustomListsOf,
     this.status,
     this.format,
     this.source,
@@ -131,68 +148,38 @@ class Media {
 
   Map<String, dynamic> toJson() => _$MediaToJson(this);
 
-  String get mainName => userPreferredName ?? name ?? nameRomaji ?? "";
+  String get mainName => userPreferredName ?? name ?? nameRomaji ?? '';
+
+  bool get isAnime => anime != null;
+
+  int? get totalUnits => anime?.totalEpisodes ?? manga?.totalChapters;
 
   factory Media.skeleton() {
     final random = Random();
     final values = {'userScore': 26, 'meanScore': 32, 'userProgress': 100};
-
     final keys = values.keys.toList()..shuffle(random);
-    final keepCount = random.nextInt(values.length + 1);
-
-    final keptKeys = keys.take(keepCount).toSet();
+    final kept = keys.take(random.nextInt(values.length + 1)).toSet();
 
     return Media(
-      id: "0",
+      id: '0',
       userPreferredName: 'Media',
-      genres: ["ergsdf", "fsdf", "ergsdf", "fsdf"],
-      status: "who knows",
-      isAdult: false,
-      userScore: keptKeys.contains('userScore')
-          ? values['userScore'] as int
-          : 0,
-      meanScore: keptKeys.contains('meanScore')
-          ? values['meanScore'] as int
-          : null,
-      userProgress: keptKeys.contains('userProgress')
-          ? values['userProgress'] as int
+      genres: const ['ergsdf', 'fsdf', 'ergsdf', 'fsdf'],
+      status: 'who knows',
+      userScore: kept.contains('userScore') ? values['userScore'] : 0,
+      meanScore: kept.contains('meanScore') ? values['meanScore'] : null,
+      userProgress: kept.contains('userProgress')
+          ? values['userProgress']
           : null,
       shareLink: 'https://github.com/aayush2622/Dartotsu',
     );
   }
 
-  DMedia toDMedia() {
-    return DMedia(
-      title: name,
-      url: shareLink,
-      cover: cover,
-      description: description,
-    );
-  }
-}
-
-class MediaMapWrapper {
-  final Map<String, List<Media>> mediaMap;
-
-  MediaMapWrapper({required this.mediaMap});
-
-  factory MediaMapWrapper.fromJson(Map<String, dynamic> json) {
-    return MediaMapWrapper(
-      mediaMap: json.map(
-        (key, value) => MapEntry(
-          key,
-          (value as List).map((e) => Media.fromJson(e)).toList(),
-        ),
-      ),
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return mediaMap.map(
-      (key, value) =>
-          MapEntry(key, value.map((media) => media.toJson()).toList()),
-    );
-  }
+  DMedia toDMedia() => DMedia(
+    title: name,
+    url: shareLink,
+    cover: cover,
+    description: description,
+  );
 }
 
 extension M on Pages {
@@ -200,9 +187,8 @@ extension M on Pages {
     return list.map((e) {
       var id = loadCustomData<String>('${source?.name}-${e.url}');
       if (id == null) {
-        var hash = e.hashCode;
-        saveCustomData('${source?.name}-${e.url}', hash);
-        id = hash.toString();
+        id = e.hashCode.toString();
+        saveCustomData('${source?.name}-${e.url}', id);
       }
       return Media(
         id: id,
@@ -210,7 +196,6 @@ extension M on Pages {
         cover: e.cover,
         nameRomaji: e.title ?? '',
         userPreferredName: e.title ?? '',
-        isAdult: false,
         shareLink: e.url!,
         minimal: true,
         anime: isAnime ? Anime() : null,

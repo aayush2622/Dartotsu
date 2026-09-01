@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide ContextExtensionss;
 
+import '../../Core/Services/Api/Mutations.dart';
 import '../../Core/Services/Model/Media.dart';
-import '../../Core/Services/ServiceApi.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Functions/SnackBar.dart';
 import '../../Widgets/Components/CustomBottomDialog.dart';
@@ -19,24 +19,23 @@ const _statuses = {
 void showListEditor(
   BuildContext context, {
   required Media media,
-  required ServiceMutations mutations,
+  required Mutations mutations,
   required Future<void> Function() onSaved,
 }) {
   final status = (media.userStatus ?? 'PLANNING').obs;
   final progress = (media.userProgress ?? 0).obs;
   final score = (media.userScore ?? 0).toDouble().obs;
-  final total = media.anime?.totalEpisodes ?? media.manga?.totalChapters;
+  final total = media.totalUnits;
   final busy = false.obs;
 
   Future<void> save() async {
     busy.value = true;
     try {
-      await mutations.saveListEntry(
-        mediaId: media.id,
-        status: status.value,
-        progress: progress.value,
-        score: score.value,
-      );
+      media
+        ..userStatus = status.value
+        ..userProgress = progress.value
+        ..userScore = score.value.round();
+      await mutations.editList(media);
       await onSaved();
       if (context.mounted) Navigator.pop(context);
       snackString('Saved to your list');
@@ -48,11 +47,9 @@ void showListEditor(
   }
 
   Future<void> remove() async {
-    final id = media.userListId;
-    if (id == null) return;
     busy.value = true;
     try {
-      await mutations.deleteListEntry('$id');
+      await mutations.deleteFromList(media);
       await onSaved();
       if (context.mounted) Navigator.pop(context);
       snackString('Removed from your list');
@@ -119,11 +116,10 @@ void showListEditor(
               Text('Score', style: context.textTheme.labelMedium),
               Obx(
                 () => Slider(
-                  value: score.value,
-                  min: 0,
-                  max: 10,
+                  value: score.value.clamp(0, 100),
+                  max: 100,
                   divisions: 20,
-                  label: score.value.toStringAsFixed(1),
+                  label: (score.value / 10).toStringAsFixed(1),
                   onChanged: (v) => score.value = v,
                 ),
               ),

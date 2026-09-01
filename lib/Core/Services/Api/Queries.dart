@@ -1,75 +1,51 @@
 import '../../../Model/SearchResults.dart';
 import '../Model/Media.dart';
+import '../ServiceNotification.dart';
 
+/// Read surface a service exposes. `MediaService.getQueries == null` => that
+/// service's screens fall back to "not implemented".
+///
+/// The list-shaped getters return an insertion-ordered map: the key is the
+/// section title to render, the value the media in that section.
 abstract class Queries {
-  /// Fetches user data and returns a [bool] indicating success.
-  Future<bool>? getUserData();
+  /// Fetch + cache the signed-in user. Returns success.
+  Future<bool> getUserData();
 
-  /// Retrieves media details for the given [id].
-  ///
-  /// If [mal] is true, it will use MyAnimeList's mapping for the ID.
-  /// Returns a [Media] object if found.
-  Future<Media?>? getMedia(int id, {bool mal = true});
+  /// A single media by id (native id in string form).
+  Future<Media?> getMedia(String id);
 
-  /// Fetches additional media details for the provided [media] object.
-  /// Returns an updated [media] object.
-  Future<Media?>? mediaDetails(Media media);
+  /// Fill [media] with detail-page data (characters, relations, …) and return it.
+  Future<Media?> mediaDetails(Media media);
 
-  /// Initializes and returns media data for the homepage in the form of a map.
-  /// The keys are section names, and values are lists of [Media] objects.
-  Future<Map<String, List<Media>>>? initHomePage();
+  /// Home dashboard sections.
+  Future<Map<String, List<Media>>> initHomePage();
 
-  /// Fetches Genres and Tags data.
-  /// Returns a [bool] indicating success.
-  Future<bool>? getGenresAndTags();
+  /// Anime tab sections.
+  Future<Map<String, List<Media>>> getAnimeList();
 
-  /// Fetches the user's media lists.
-  ///
-  /// Required:
-  /// - [anime]: If true, fetches anime lists. If false, fetches manga lists.
-  /// - [userId]: The user's ID.
-  /// - [sortOrder]: Sort order for the lists.
-  /// Returns a map where the keys are list categories and values are lists of [Media] objects.
+  /// Manga tab sections.
+  Future<Map<String, List<Media>>> getMangaList();
+
+  /// The signed-in user's own lists. [userId] defaults to the current user.
   Future<Map<String, List<Media>>> getMediaLists({
     required bool anime,
-    required int userId,
+    int? userId,
     String? sortOrder,
   });
 
-  /// Retrieves a list of banner image URLs for the homepage.
-  /// Returns a list of [String] representing the URLs.
-  Future<List<String?>> getBannerImages() => Future.value([]);
-
-  /// Fetches the anime list.
-  /// Returns a map where the keys are list categories and values are lists of [Media] objects.
-  Future<Map<String, List<Media>>> getAnimeList();
-
-  /// Fetches the manga list.
-  /// Returns a map where the keys are list categories and values are lists of [Media] objects.
-  Future<Map<String, List<Media>>> getMangaList();
-
-  /// Fetches the calender data.
-  /// Returns a list of [Media] objects.
+  /// Airing calendar.
   Future<List<Media>> getCalendarData();
 
-  /// Searches for media based on various parameters.
-  ///
-  /// Required:
-  /// - [type]: Type of media (e.g., anime, manga).
-  ///
-  /// Optional:
-  /// - [page], [perPage]: Pagination options.
-  /// - [search]: Search query.
-  /// - [sort]: Sorting method.
-  /// - [genres], [tags]: Filters by genre or tag.
-  /// - [status], [source], [format], [countryOfOrigin]: Additional filters.
-  /// - [isAdult]: Include adult content if true.
-  /// - [onList]: If true, only media on the user's list is included.
-  /// - [excludedGenres], [excludedTags]: Exclude specific genres or tags.
-  /// - [startYear], [seasonYear], [season]: Filter by year or season.
-  /// - [id]: Specific media ID.
-  /// - [hd], [adultOnly]: Additional display and filtering options.
-  ///
-  /// Returns a [SearchResults] object containing the search results.
-  Future<SearchResults?> search(SearchResults? searchResults);
+  /// Genre + tag vocabulary; caches to prefs. Returns success.
+  Future<bool> getGenresAndTags();
+
+  /// One banner image url per type (`ANIME`, `MANGA`) for the home header.
+  Future<List<String?>> getBannerImages() => Future.value([null, null]);
+
+  /// Activity / airing notifications.
+  Future<List<ServiceNotification>> getNotifications({int page = 1}) =>
+      Future.value(const []);
+
+  /// Search. Mutates and returns [results] with `.results` / `.hasNextPage`.
+  Future<SearchResults?> search(SearchResults? results);
 }

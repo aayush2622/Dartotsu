@@ -5,6 +5,7 @@ import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../Core/Services/MediaServiceController.dart';
 import '../../Core/Services/Model/Media.dart';
+import '../../Model/SearchResults.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Utils/Functions/NavigateToScreen.dart';
@@ -14,12 +15,12 @@ import 'DetailScreen.dart';
 
 class SearchScreen extends StatefulWidget {
   final bool anime;
-  final ServiceApi api;
+  final Queries queries;
   final String? query;
 
   const SearchScreen({
     super.key,
-    required this.api,
+    required this.queries,
     this.anime = true,
     this.query,
   });
@@ -29,7 +30,7 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends BaseScreen<SearchScreen> {
-  ServiceApi get _api => widget.api;
+  Queries get _queries => widget.queries;
   final _controller = TextEditingController();
 
   final _results = <Media>[].obs;
@@ -69,15 +70,19 @@ class _SearchScreenState extends BaseScreen<SearchScreen> {
   }
 
   Future<void> _search() async {
-    if (_loading.value || _term.isEmpty) return;
+    if (_loading.value || _term.isEmpty || !_hasMore) return;
     _loading.value = true;
     try {
-      final next = await _api.search(
-        anime: _anime.value,
-        term: _term,
-        page: _page,
+      final res = await _queries.search(
+        SearchResults(
+          type: _anime.value ? SearchType.ANIME : SearchType.MANGA,
+          search: _term,
+          page: _page,
+          perPage: 30,
+        ),
       );
-      if (next.isEmpty) _hasMore = false;
+      final next = res?.results ?? const [];
+      _hasMore = res?.hasNextPage ?? false;
       _results.addAll(next);
       _page++;
     } catch (_) {
@@ -156,11 +161,11 @@ class _SearchScreenState extends BaseScreen<SearchScreen> {
                 context,
                 DetailScreen(
                   media: _results[i],
-                  api: widget.api,
+                  queries: widget.queries,
                   mutations: find<MediaServiceController>()
                       .currentService
                       .value
-                      .mutations,
+                      .getMutations,
                 ),
               ),
             ),

@@ -1,18 +1,21 @@
-import 'ServiceApi.dart';
+import 'Api/Mutations.dart';
+import 'Api/Queries.dart';
 import 'ServiceAuth.dart';
 import 'ServiceScreens.dart';
 
+export 'Api/Mutations.dart';
+export 'Api/Queries.dart';
 export 'Features/NavbarProvider.dart';
-export 'ServiceApi.dart';
 export 'ServiceAuth.dart';
+export 'ServiceNotification.dart';
 export 'ServiceScreens.dart';
 
 /// A media-tracking backend: AniList, MyAnimeList, Simkl, or the on-device
 /// extension aggregator. Concrete services live under `lib/Api/Services/`.
 ///
 /// A new service is added by subclassing this and filling in whichever
-/// capabilities it supports — the core never needs to change. Anything left
-/// `null` renders as "not implemented on `name`".
+/// capabilities it supports — the core never changes. Anything left `null`
+/// renders as "not implemented on `name`".
 abstract class MediaService {
   /// Stable identifier, used for persistence. Must never change once shipped.
   String get id;
@@ -23,9 +26,9 @@ abstract class MediaService {
   /// Asset path to the service's SVG icon.
   String get iconPath;
 
-  ServiceApi? get api => null;
+  Queries? get getQueries => null;
 
-  ServiceMutations? get mutations => null;
+  Mutations? get getMutations => null;
 
   ServiceAuth? get auth => null;
 

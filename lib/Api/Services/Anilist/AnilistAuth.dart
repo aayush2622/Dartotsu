@@ -6,8 +6,9 @@ import 'package:get/get.dart';
 import '../../../Core/Preferences/PrefManager.dart';
 import '../../../Core/Services/ServiceAuth.dart';
 import '../../../Utils/Functions/SnackBar.dart';
-import 'AnilistApi.dart';
 import 'AnilistClient.dart';
+import 'AnilistMutations.dart';
+import 'AnilistQueries.dart';
 import 'AnilistUser.dart';
 
 class AnilistAuth extends GetxController implements ServiceAuth {
@@ -26,7 +27,20 @@ class AnilistAuth extends GetxController implements ServiceAuth {
   final loading = false.obs;
 
   late final AnilistClient client = AnilistClient(() => token.value);
-  late final AnilistApi api = AnilistApi(client, () => user.value?.id);
+
+  late final AnilistQueries queries = AnilistQueries(
+    client.query,
+    userId: () => user.value?.id,
+    refreshUser: () async {
+      await refreshUser();
+      return user.value != null;
+    },
+  );
+
+  late final AnilistMutations mutations = AnilistMutations(
+    client.query,
+    userId: () => user.value?.id,
+  );
 
   @override
   bool get isLoggedIn => token.value.isNotEmpty;

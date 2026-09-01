@@ -4,7 +4,7 @@ import '../../../../Core/Services/Model/Media.dart';
 import '../../../../Core/Services/ServiceScreens.dart';
 import '../../../../Screen/Common/DetailScreen.dart';
 import '../../../../Screen/Common/HomeHeader.dart';
-import '../../../../Screen/Common/MediaRailsScreen.dart';
+import '../../../../Screen/Common/MediaSectionsScreen.dart';
 import '../../../../Screen/Common/NotificationsScreen.dart';
 import '../../../../Screen/Common/SearchScreen.dart';
 import '../../../../Utils/Functions/GetXFunctions.dart';
@@ -15,14 +15,26 @@ AnilistAuth get _auth => find<AnilistAuth>();
 
 void _openDetail(BuildContext context, Media media) => navigateToPage(
   context,
-  DetailScreen(media: media, api: _auth.api, mutations: _auth.api),
+  DetailScreen(
+    media: media,
+    queries: _auth.queries,
+    mutations: _auth.mutations,
+  ),
 );
+
+Future<Map<String, List<Media>>> _mediaTab({required bool anime}) async {
+  final results = await Future.wait([
+    _auth.queries.getMediaLists(anime: anime),
+    anime ? _auth.queries.getAnimeList() : _auth.queries.getMangaList(),
+  ]);
+  return {...results[0], ...results[1]};
+}
 
 class AnilistHomeScreen implements HomeScreenView {
   @override
-  Widget build(BuildContext context) => MediaRailsScreen(
+  Widget build(BuildContext context) => MediaSectionsScreen(
     header: const HomeHeader(),
-    loader: _auth.api.getHomeRails,
+    loader: _auth.queries.initHomePage,
     reloadOn: _auth.user.stream,
     onMediaTap: (m) => _openDetail(context, m),
   );
@@ -30,39 +42,47 @@ class AnilistHomeScreen implements HomeScreenView {
 
 class AnilistAnimeScreen implements AnimeScreenView {
   @override
-  Widget build(BuildContext context) => MediaRailsScreen(
-    loader: _auth.api.getAnimeRails,
+  Widget build(BuildContext context) => MediaSectionsScreen(
+    loader: () => _mediaTab(anime: true),
     reloadOn: _auth.user.stream,
     onMediaTap: (m) => _openDetail(context, m),
-    onSearch: () =>
-        navigateToPage(context, SearchScreen(api: _auth.api, anime: true)),
+    onSearch: () => navigateToPage(
+      context,
+      SearchScreen(queries: _auth.queries, anime: true),
+    ),
   );
 }
 
 class AnilistMangaScreen implements MangaScreenView {
   @override
-  Widget build(BuildContext context) => MediaRailsScreen(
-    loader: _auth.api.getMangaRails,
+  Widget build(BuildContext context) => MediaSectionsScreen(
+    loader: () => _mediaTab(anime: false),
     reloadOn: _auth.user.stream,
     onMediaTap: (m) => _openDetail(context, m),
-    onSearch: () =>
-        navigateToPage(context, SearchScreen(api: _auth.api, anime: false)),
+    onSearch: () => navigateToPage(
+      context,
+      SearchScreen(queries: _auth.queries, anime: false),
+    ),
   );
 }
 
 class AnilistSearchScreen implements SearchScreenView {
   @override
   Widget build(BuildContext context, {required bool anime, String? query}) =>
-      SearchScreen(api: _auth.api, anime: anime, query: query);
+      SearchScreen(queries: _auth.queries, anime: anime, query: query);
 }
 
 class AnilistDetailScreen implements DetailScreenView {
   @override
-  Widget build(BuildContext context, Media media) =>
-      DetailScreen(media: media, api: _auth.api, mutations: _auth.api);
+  Widget build(BuildContext context, Media media) => DetailScreen(
+    media: media,
+    queries: _auth.queries,
+    mutations: _auth.mutations,
+  );
 }
 
 class AnilistNotificationScreen implements NotificationScreenView {
   @override
-  Widget build(BuildContext context) => NotificationsScreen(api: _auth.api);
+  Widget build(BuildContext context) =>
+      NotificationsScreen(queries: _auth.queries);
 }

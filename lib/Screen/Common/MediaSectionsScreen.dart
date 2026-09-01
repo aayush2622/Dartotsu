@@ -4,16 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../Core/Services/Model/Media.dart';
-import '../../Core/Services/ServiceApi.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Extensions/IntExtensions.dart';
 import '../../Widgets/Components/ScrollConfig.dart';
 import '../../Widgets/Sections/Media/MediaSection.dart';
 
-typedef RailLoader = Future<List<MediaRail>> Function();
+typedef SectionsLoader = Future<Map<String, List<Media>>> Function();
 
-class MediaRailsScreen extends StatefulWidget {
-  final RailLoader loader;
+/// Renders an ordered set of horizontal media sections. The loader's map keys
+/// are the section titles; empty sections are dropped by the loader.
+class MediaSectionsScreen extends StatefulWidget {
+  final SectionsLoader loader;
   final Widget? header;
   final void Function(Media media)? onMediaTap;
   final VoidCallback? onSearch;
@@ -21,7 +22,7 @@ class MediaRailsScreen extends StatefulWidget {
   /// Emits whenever the screen should refetch (e.g. the account changed).
   final Stream<Object?>? reloadOn;
 
-  const MediaRailsScreen({
+  const MediaSectionsScreen({
     super.key,
     required this.loader,
     this.header,
@@ -31,12 +32,12 @@ class MediaRailsScreen extends StatefulWidget {
   });
 
   @override
-  State<MediaRailsScreen> createState() => _MediaRailsScreenState();
+  State<MediaSectionsScreen> createState() => _MediaSectionsScreenState();
 }
 
-class _MediaRailsScreenState extends State<MediaRailsScreen>
+class _MediaSectionsScreenState extends State<MediaSectionsScreen>
     with AutomaticKeepAliveClientMixin {
-  final _rails = <MediaRail>[].obs;
+  final _sections = <String, List<Media>>{}.obs;
   final _loading = true.obs;
   final _error = RxnString();
 
@@ -62,7 +63,7 @@ class _MediaRailsScreenState extends State<MediaRailsScreen>
     _loading.value = true;
     _error.value = null;
     try {
-      _rails.value = await widget.loader();
+      _sections.value = await widget.loader();
     } catch (e) {
       _error.value = e.toString();
     } finally {
@@ -94,8 +95,9 @@ class _MediaRailsScreenState extends State<MediaRailsScreen>
     return RefreshIndicator(
       onRefresh: _load,
       child: Obx(() {
-        final showSkeleton = _loading.value && _rails.isEmpty;
-        final showError = _error.value != null && _rails.isEmpty;
+        final showSkeleton = _loading.value && _sections.isEmpty;
+        final showError = _error.value != null && _sections.isEmpty;
+        final entries = _sections.entries.toList();
 
         return CustomScrollConfig(
           context,
@@ -112,13 +114,13 @@ class _MediaRailsScreenState extends State<MediaRailsScreen>
             else if (showError)
               SliverToBoxAdapter(child: _errorBox(_error.value!))
             else
-              for (final rail in _rails)
+              for (final section in entries)
                 SliverToBoxAdapter(
                   child: MediaSection(
                     data: MediaSectionData(
                       type: 0,
-                      title: rail.title,
-                      mediaList: rail.media,
+                      title: section.key,
+                      mediaList: section.value,
                       onMediaTap: (ctx, i, media) =>
                           widget.onMediaTap?.call(media),
                     ),
