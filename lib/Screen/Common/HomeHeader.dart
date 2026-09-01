@@ -22,13 +22,11 @@ class HomeHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(24, 20, 20, 8),
+      padding: const EdgeInsets.fromLTRB(24, 22, 16, 6),
       child: Obx(() {
         final service = _controller.currentService.value;
         final user = service.auth?.user.value;
-        final greeting = user != null
-            ? 'Welcome back, ${user.name}'
-            : 'Welcome to Dartotsu';
+        final greeting = user?.name ?? 'Welcome';
 
         return Row(
           children: [
@@ -42,11 +40,14 @@ class HomeHeader extends StatelessWidget {
                       color: context.colorScheme.onSurfaceVariant,
                     ),
                   ),
+                  const SizedBox(height: 2),
                   Text(
                     greeting,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: context.textTheme.titleLarge,
+                    style: context.textTheme.headlineSmall?.copyWith(
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
                 ],
               ),
@@ -71,7 +72,7 @@ class HomeHeader extends StatelessWidget {
                 );
               },
             ),
-            const SizedBox(width: 4),
+            const SizedBox(width: 6),
             _Avatar(url: user?.avatar, onTap: () => _accountSheet(context)),
           ],
         );
@@ -202,22 +203,30 @@ class _Avatar extends StatelessWidget {
   final double size;
   final VoidCallback? onTap;
 
-  const _Avatar({this.url, this.size = 44, this.onTap});
+  const _Avatar({this.url, this.size = 46, this.onTap});
 
   @override
   Widget build(BuildContext context) {
     final scheme = context.colorScheme;
-    final child = ClipOval(
-      child: SizedBox(
-        width: size,
-        height: size,
+    final child = Container(
+      width: size,
+      height: size,
+      padding: const EdgeInsets.all(2),
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        border: Border.all(
+          color: scheme.primary.withValues(alpha: 0.35),
+          width: 1.5,
+        ),
+      ),
+      child: ClipOval(
         child: url == null
             ? ColoredBox(
                 color: scheme.surfaceContainerHighest,
                 child: Icon(
                   Icons.person_rounded,
                   color: scheme.onSurfaceVariant,
-                  size: size * 0.55,
+                  size: size * 0.5,
                 ),
               )
             : cachedNetworkImage(imageUrl: url, fit: BoxFit.cover),

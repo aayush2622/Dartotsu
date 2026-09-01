@@ -188,25 +188,15 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
       ],
       flexibleSpace: FlexibleSpaceBar(
         titlePadding: const EdgeInsetsDirectional.only(
-          start: 56,
-          end: 56,
+          start: 52,
+          end: 52,
           bottom: 14,
         ),
-        title: LayoutBuilder(
-          builder: (context, c) {
-            // Only show the title once the bar has collapsed.
-            final collapsed = c.maxHeight < 96;
-            return AnimatedOpacity(
-              opacity: collapsed ? 1 : 0,
-              duration: const Duration(milliseconds: 150),
-              child: Text(
-                m.mainName,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: context.textTheme.titleSmall,
-              ),
-            );
-          },
+        title: Text(
+          m.mainName,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: context.textTheme.titleSmall,
         ),
         background: Stack(
           fit: StackFit.expand,
