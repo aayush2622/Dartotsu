@@ -547,7 +547,7 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
         ),
         const SizedBox(height: 8),
         SizedBox(
-          height: 168,
+          height: 184,
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -807,12 +807,13 @@ class _PersonCard extends StatelessWidget {
       width: 104,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(14),
             child: Container(
               width: 104,
-              height: 118,
+              height: 112,
               color: context.colorScheme.surfaceContainerHigh,
               child: cachedNetworkImage(imageUrl: image, fit: BoxFit.cover),
             ),
@@ -825,12 +826,14 @@ class _PersonCard extends StatelessWidget {
             style: context.textTheme.labelMedium,
           ),
           if (subtitle.isNotEmpty)
-            Text(
-              subtitle,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: context.textTheme.labelSmall?.copyWith(
-                color: context.colorScheme.onSurfaceVariant,
+            Flexible(
+              child: Text(
+                subtitle,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: context.textTheme.labelSmall?.copyWith(
+                  color: context.colorScheme.onSurfaceVariant,
+                ),
               ),
             ),
         ],

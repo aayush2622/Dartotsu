@@ -286,7 +286,19 @@ List<Setting> categoryMenu(BuildContext context) => [
       type: SettingType.normal,
       name: c.title,
       description: c.description,
-      icon: c.icon,
+      iconWidget: Container(
+        width: 42,
+        height: 42,
+        decoration: BoxDecoration(
+          color: context.colorScheme.primaryContainer,
+          shape: BoxShape.circle,
+        ),
+        child: Icon(
+          c.icon,
+          size: 21,
+          color: context.colorScheme.onPrimaryContainer,
+        ),
+      ),
       isActivity: true,
       onClick: () => Navigator.of(context).push(
         MaterialPageRoute(builder: (_) => SettingsCategoryScreen(category: c)),
