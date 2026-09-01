@@ -118,9 +118,9 @@ class _MediaSectionState extends State<MediaSection> {
   Widget build(BuildContext context) {
     return RepaintBoundary(
       child: ThemedContainer(
-        margin: const EdgeInsets.all(12),
+        margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         padding: const EdgeInsets.only(),
-        borderRadius: BorderRadius.circular(30.0),
+        borderRadius: BorderRadius.circular(28.0),
         border: Border.all(width: 0, color: Colors.transparent),
         child: Skeletonizer(
           enabled: data.loading,
@@ -156,7 +156,7 @@ class _MediaSectionState extends State<MediaSection> {
     final trailing = data.trailingIcon;
 
     return Padding(
-      padding: const EdgeInsets.fromLTRB(28, 16, 16, 0),
+      padding: const EdgeInsets.fromLTRB(24, 16, 12, 0),
       child: Row(
         children: [
           Expanded(
@@ -171,7 +171,9 @@ class _MediaSectionState extends State<MediaSection> {
                   title,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: theme.textTheme.labelLarge?.copyWith(fontSize: 18),
+                  style: theme.textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
               ),
             ),
@@ -419,7 +421,7 @@ class _MediaSectionState extends State<MediaSection> {
 
   Widget _buildMediaTitle(Media media) {
     return SizedBox(
-      width: 108,
+      width: _cardW,
       child: Text(
         media.relation != null
             ? '${media.relation} · ${media.mainName}'
@@ -443,7 +445,7 @@ class _MediaSectionState extends State<MediaSection> {
         : '${total ?? '~'}';
 
     return SizedBox(
-      width: 108,
+      width: _cardW,
       child: Text.rich(
         TextSpan(
           children: [

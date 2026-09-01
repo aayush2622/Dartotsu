@@ -8,7 +8,7 @@ import '../../Utils/Functions/SnackBar.dart';
 import '../../Widgets/Components/CustomBottomDialog.dart';
 
 const _statuses = {
-  'CURRENT': 'Watching / Reading',
+  'CURRENT': 'Watching',
   'PLANNING': 'Planning',
   'COMPLETED': 'Completed',
   'PAUSED': 'Paused',
@@ -60,60 +60,98 @@ void showListEditor(
     }
   }
 
+  Widget label(String text) => Padding(
+    padding: const EdgeInsets.only(bottom: 8),
+    child: Text(
+      text,
+      style: context.textTheme.labelLarge?.copyWith(
+        color: context.colorScheme.onSurfaceVariant,
+      ),
+    ),
+  );
+
   showCustomBottomDialog(
     context,
     CustomBottomDialog(
       title: media.mainName,
       viewList: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.fromLTRB(20, 16, 20, 4),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 8),
-              Text('Status', style: context.textTheme.labelMedium),
+              label('Status'),
               Obx(
                 () => Wrap(
                   spacing: 8,
+                  runSpacing: 8,
                   children: [
                     for (final e in _statuses.entries)
                       ChoiceChip(
                         label: Text(e.value),
                         selected: status.value == e.key,
+                        showCheckmark: false,
                         onSelected: (_) => status.value = e.key,
                       ),
                   ],
                 ),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 20),
+              label('Progress'),
               Obx(
                 () => Row(
                   children: [
-                    Text('Progress', style: context.textTheme.labelMedium),
-                    const Spacer(),
-                    IconButton(
+                    IconButton.filledTonal(
                       onPressed: progress.value > 0
                           ? () => progress.value--
                           : null,
-                      icon: const Icon(Icons.remove_circle_outline),
+                      icon: const Icon(Icons.remove_rounded),
                     ),
-                    Text(
-                      total == null
-                          ? '${progress.value}'
-                          : '${progress.value} / $total',
-                      style: context.textTheme.titleMedium,
+                    Expanded(
+                      child: Center(
+                        child: Text(
+                          total == null
+                              ? '${progress.value}'
+                              : '${progress.value} / $total',
+                          style: context.textTheme.titleMedium,
+                        ),
+                      ),
                     ),
-                    IconButton(
+                    IconButton.filledTonal(
                       onPressed: (total == null || progress.value < total)
                           ? () => progress.value++
                           : null,
-                      icon: const Icon(Icons.add_circle_outline),
+                      icon: const Icon(Icons.add_rounded),
+                    ),
+                    if (total != null) ...[
+                      const SizedBox(width: 4),
+                      TextButton(
+                        onPressed: progress.value == total
+                            ? null
+                            : () => progress.value = total,
+                        child: const Text('Max'),
+                      ),
+                    ],
+                  ],
+                ),
+              ),
+              const SizedBox(height: 12),
+              Obx(
+                () => Row(
+                  children: [
+                    label('Score'),
+                    const Spacer(),
+                    Text(
+                      score.value == 0
+                          ? '–'
+                          : (score.value / 10).toStringAsFixed(1),
+                      style: context.textTheme.titleMedium?.copyWith(
+                        color: context.colorScheme.primary,
+                      ),
                     ),
                   ],
                 ),
               ),
-              const SizedBox(height: 8),
-              Text('Score', style: context.textTheme.labelMedium),
               Obx(
                 () => Slider(
                   value: score.value.clamp(0, 100),
@@ -123,15 +161,18 @@ void showListEditor(
                   onChanged: (v) => score.value = v,
                 ),
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: 12),
               Obx(
                 () => Row(
                   children: [
                     if (media.userListId != null)
                       TextButton.icon(
                         onPressed: busy.value ? null : remove,
-                        icon: const Icon(Icons.delete_outline),
+                        icon: const Icon(Icons.delete_outline_rounded),
                         label: const Text('Remove'),
+                        style: TextButton.styleFrom(
+                          foregroundColor: context.colorScheme.error,
+                        ),
                       ),
                     const Spacer(),
                     FilledButton(

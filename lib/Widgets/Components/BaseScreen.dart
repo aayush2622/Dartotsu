@@ -60,18 +60,34 @@ class GlassBackground extends StatelessWidget {
       child: Stack(
         fit: StackFit.expand,
         children: [
-          RepaintBoundary(
-            child: ImageFiltered(
-              imageFilter: _blur,
-              child: Opacity(
-                opacity: 0.8,
-                child: cachedNetworkImage(
-                  imageUrl: imageUrl,
-                  fit: BoxFit.cover,
-                ),
+          // Themed base so glass mode never falls back to bare black when the
+          // artwork is missing or still loading.
+          DecoratedBox(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  scheme.surfaceContainerHigh,
+                  scheme.surface,
+                  scheme.primaryContainer.withValues(alpha: 0.35),
+                ],
               ),
             ),
           ),
+          if (imageUrl != null)
+            RepaintBoundary(
+              child: ImageFiltered(
+                imageFilter: _blur,
+                child: Opacity(
+                  opacity: 0.8,
+                  child: cachedNetworkImage(
+                    imageUrl: imageUrl,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+            ),
           DecoratedBox(
             decoration: BoxDecoration(
               gradient: LinearGradient(

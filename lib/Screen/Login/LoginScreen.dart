@@ -65,90 +65,117 @@ class _LoginScreenState extends BaseScreen<LoginScreen> {
 
     return Center(
       child: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 32),
-        child: Obx(() {
-          final service = _services.currentService.value;
-          final auth = service.auth;
+        padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 40),
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 380),
+          child: Obx(() {
+            final service = _services.currentService.value;
+            final auth = service.auth;
 
-          return Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                getString.appName,
-                style: context.textTheme.displayLarge?.copyWith(
-                  fontWeight: FontWeight.w200,
-                  color: scheme.primary,
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  width: 96,
+                  height: 96,
+                  decoration: BoxDecoration(
+                    color: scheme.surfaceContainerHigh,
+                    borderRadius: BorderRadius.circular(28),
+                  ),
+                  clipBehavior: Clip.antiAlias,
+                  child: Image.asset(
+                    'assets/images/logo.png',
+                    fit: BoxFit.cover,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                getString.appTagline,
-                textAlign: TextAlign.center,
-                style: context.textTheme.bodyMedium,
-              ),
-              const SizedBox(height: 40),
-              ElevatedButton.icon(
-                onPressed: _busy.value || auth == null
-                    ? null
-                    : () => _run(auth.login),
-                icon: _busy.value
-                    ? const SizedBox(
-                        width: 18,
-                        height: 18,
-                        child: CircularProgressIndicator(strokeWidth: 2),
-                      )
-                    : loadSvg(
-                        service.iconPath,
-                        width: 18,
-                        height: 18,
-                        color: scheme.onPrimaryContainer,
+                const SizedBox(height: 20),
+                Text(
+                  getString.appName,
+                  style: context.textTheme.displaySmall?.copyWith(
+                    fontWeight: FontWeight.w200,
+                    color: scheme.primary,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  getString.appTagline,
+                  textAlign: TextAlign.center,
+                  style: context.textTheme.bodyMedium?.copyWith(
+                    color: scheme.onSurfaceVariant,
+                  ),
+                ),
+                const SizedBox(height: 40),
+                SizedBox(
+                  width: double.infinity,
+                  child: FilledButton.icon(
+                    onPressed: _busy.value || auth == null
+                        ? null
+                        : () => _run(auth.login),
+                    icon: _busy.value
+                        ? const SizedBox(
+                            width: 18,
+                            height: 18,
+                            child: CircularProgressIndicator(strokeWidth: 2),
+                          )
+                        : loadSvg(
+                            service.iconPath,
+                            width: 18,
+                            height: 18,
+                            color: scheme.onPrimary,
+                          ),
+                    label: Text(
+                      auth == null
+                          ? getString.continueAsGuest
+                          : getString.loginTo(service.name),
+                    ),
+                    style: FilledButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 18),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
                       ),
-                label: Text(
-                  auth == null
-                      ? getString.continueAsGuest
-                      : getString.loginTo(service.name),
-                ),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: scheme.primaryContainer,
-                  foregroundColor: scheme.onPrimaryContainer,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 28,
-                    vertical: 20,
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 12),
-              if (auth != null)
+                const SizedBox(height: 10),
+                if (auth != null)
+                  SizedBox(
+                    width: double.infinity,
+                    child: OutlinedButton(
+                      onPressed: _busy.value
+                          ? null
+                          : () => _tokenDialog(auth.loginWithToken),
+                      style: OutlinedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                      ),
+                      child: Text(getString.loginWithToken),
+                    ),
+                  ),
+                const SizedBox(height: 10),
                 TextButton(
-                  onPressed: _busy.value
-                      ? null
-                      : () => _tokenDialog(auth.loginWithToken),
-                  child: Text(getString.loginWithToken),
+                  onPressed: _busy.value ? null : _enter,
+                  child: Text(getString.continueAsGuest),
                 ),
-              TextButton(
-                onPressed: _busy.value ? null : _enter,
-                child: Text(getString.continueAsGuest),
-              ),
-              const SizedBox(height: 8),
-              TextButton.icon(
-                onPressed: () => serviceSwitcher(context),
-                icon: loadSvg(
-                  service.iconPath,
-                  width: 16,
-                  height: 16,
-                  color: scheme.onSurface.withValues(alpha: 0.6),
+                const SizedBox(height: 4),
+                TextButton.icon(
+                  onPressed: () => serviceSwitcher(context),
+                  icon: loadSvg(
+                    service.iconPath,
+                    width: 16,
+                    height: 16,
+                    color: scheme.onSurface.withValues(alpha: 0.6),
+                  ),
+                  label: Text(
+                    getString.selectMediaService,
+                    style: context.textTheme.labelMedium,
+                  ),
                 ),
-                label: Text(
-                  getString.selectMediaService,
-                  style: context.textTheme.labelMedium,
-                ),
-              ),
-            ],
-          );
-        }),
+              ],
+            );
+          }),
+        ),
       ),
     );
   }

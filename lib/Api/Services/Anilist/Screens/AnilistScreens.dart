@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../Core/Services/Model/Media.dart';
 import '../../../../Core/Services/ServiceScreens.dart';
 import '../../../../Screen/Common/DetailScreen.dart';
+import '../../../../Screen/Common/FeedHeader.dart';
 import '../../../../Screen/Common/HomeHeader.dart';
 import '../../../../Screen/Common/MediaSectionsScreen.dart';
 import '../../../../Screen/Common/NotificationsScreen.dart';
@@ -44,28 +45,34 @@ class AnilistHomeScreen implements HomeScreenView {
 class AnilistAnimeScreen implements AnimeScreenView {
   @override
   Widget build(BuildContext context) => MediaSectionsScreen(
+    header: FeedHeader(
+      title: 'Anime',
+      onSearch: () => navigateToPage(
+        context,
+        SearchScreen(queries: _auth.queries, anime: true),
+      ),
+    ),
     loader: () => _mediaTab(anime: true),
     cacheId: 'anilist/anime',
     reloadOn: _auth.user.stream,
     onMediaTap: (m) => _openDetail(context, m),
-    onSearch: () => navigateToPage(
-      context,
-      SearchScreen(queries: _auth.queries, anime: true),
-    ),
   );
 }
 
 class AnilistMangaScreen implements MangaScreenView {
   @override
   Widget build(BuildContext context) => MediaSectionsScreen(
+    header: FeedHeader(
+      title: 'Manga',
+      onSearch: () => navigateToPage(
+        context,
+        SearchScreen(queries: _auth.queries, anime: false),
+      ),
+    ),
     loader: () => _mediaTab(anime: false),
     cacheId: 'anilist/manga',
     reloadOn: _auth.user.stream,
     onMediaTap: (m) => _openDetail(context, m),
-    onSearch: () => navigateToPage(
-      context,
-      SearchScreen(queries: _auth.queries, anime: false),
-    ),
   );
 }
 
