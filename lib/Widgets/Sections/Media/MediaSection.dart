@@ -9,7 +9,6 @@ import 'package:super_sliver_list/super_sliver_list.dart';
 import '../../../Core/Preferences/PrefManager.dart';
 import '../../../Core/Services/Model/Media.dart';
 import '../../Components/ThemedContainer.dart';
-import '../../../Utils/Functions/SnackBar.dart';
 import '../../Components/CachedNetworkImage.dart';
 import '../../Components/ScrollConfig.dart';
 import 'MediaSectionState.dart';
@@ -20,6 +19,9 @@ class MediaSectionData {
   final IconData? trailingIcon;
 
   final List<Media>? mediaList;
+
+  /// Renders shimmering placeholder cards instead of real content.
+  final bool loading;
 
   final ScrollController? scrollController;
 
@@ -40,11 +42,12 @@ class MediaSectionData {
 
   final Future<List<Media>> Function()? onLoadMore;
 
-  MediaSectionData({
+  const MediaSectionData({
     required this.type,
     this.title,
     this.trailingIcon,
     this.mediaList,
+    this.loading = false,
     this.scrollController,
     this.customNullListIndicator,
     this.onTrailingIconTap,
@@ -56,18 +59,21 @@ class MediaSectionData {
     this.onLoadMore,
   });
 
-  factory MediaSectionData.skeleton(int type) {
-    return MediaSectionData(
-      type: type,
-      title: "Title Skeleton",
-      mediaList: List.generate(20, (index) => Media.skeleton()),
-      onMediaTap: (context, index, media) => snackString("Just a skeleton"),
-      onLoadMore: () async {
-        await Future.delayed(const Duration(seconds: 2));
-        return List.generate(10, (_) => Media.skeleton());
-      },
-    );
-  }
+  const MediaSectionData.loading()
+    : type = 0,
+      loading = true,
+      title = null,
+      trailingIcon = null,
+      mediaList = null,
+      scrollController = null,
+      customNullListIndicator = null,
+      onTrailingIconTap = null,
+      onTrailingIconLongPress = null,
+      onTitleTap = null,
+      onTitleLongPress = null,
+      onMediaTap = null,
+      onMediaLongPress = null,
+      onLoadMore = null;
 }
 
 class MediaSection extends StatefulWidget {
@@ -91,14 +97,15 @@ class _MediaSectionState extends State<MediaSection> {
   @override
   void initState() {
     super.initState();
-    state.updateMediaList(data.mediaList);
+    state.updateMediaList(data.loading ? null : data.mediaList);
   }
 
   @override
   void didUpdateWidget(covariant MediaSection oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (!identical(oldWidget.data.mediaList, data.mediaList)) {
-      state.updateMediaList(data.mediaList);
+    if (oldWidget.data.loading != data.loading ||
+        !identical(oldWidget.data.mediaList, data.mediaList)) {
+      state.updateMediaList(data.loading ? null : data.mediaList);
     }
   }
 
@@ -110,13 +117,16 @@ class _MediaSectionState extends State<MediaSection> {
         padding: const EdgeInsets.only(),
         borderRadius: BorderRadius.circular(30.0),
         border: Border.all(width: 0, color: Colors.transparent),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildTitleRow(),
-            const SizedBox(height: 8),
-            _buildHorizontalSliverList(),
-          ],
+        child: Skeletonizer(
+          enabled: data.loading,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildTitleRow(),
+              const SizedBox(height: 8),
+              _buildHorizontalSliverList(),
+            ],
+          ),
         ),
       ),
     );
@@ -124,6 +134,18 @@ class _MediaSectionState extends State<MediaSection> {
 
   Widget _buildTitleRow() {
     final title = data.title;
+    if (data.loading) {
+      return const Padding(
+        padding: EdgeInsets.fromLTRB(28, 16, 16, 0),
+        child: Align(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            'Loading section',
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+          ),
+        ),
+      );
+    }
     if (title == null || title.isEmpty) return const SizedBox.shrink();
 
     final trailing = data.trailingIcon;
@@ -202,6 +224,21 @@ class _MediaSectionState extends State<MediaSection> {
   }
 
   Widget _buildHorizontalSliverList() {
+    if (data.loading) {
+      return SizedBox(
+        height: 272 * multiplicationFactor,
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          physics: const NeverScrollableScrollPhysics(),
+          padding: const EdgeInsets.only(left: 24),
+          itemCount: 8,
+          itemBuilder: (context, index) => Padding(
+            padding: EdgeInsets.only(right: 13 * multiplicationFactor, top: 8),
+            child: _mediaItem(index, Media.skeleton()),
+          ),
+        ),
+      );
+    }
     return SizedBox(
       height: 272 * multiplicationFactor,
       child: NotificationListener<ScrollNotification>(

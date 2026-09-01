@@ -215,7 +215,10 @@ Entry flow: `OnboardingScreen` (welcome / theme / sync) → `LoginScreen` (drive
   an `IndexedStack` keyed by `serviceId-tab`, `FloatingBottomNavBar`.
 - **`Screen/Common/`** — the service-agnostic widgets every `Queries` impl reuses:
   `MediaSectionsScreen` (pull-to-refresh `MediaSection` list from a
-  `SectionsLoader = Future<Map<String,List<Media>>> Function()` + optional `reloadOn` stream),
+  `SectionsLoader = Future<Map<String,List<Media>>> Function()` + optional `reloadOn` stream;
+  with `cacheId:` it paints the last result from disk on frame 1 via
+  `Core/Services/SectionCache.dart` — sync read — then revalidates and patches sections
+  key-by-key without a full reload),
   `DetailScreen` (`Queries` + `Mutations?`; collapsing banner, genres, expandable synopsis,
   character strip, relation/recommendation sections; FAB → `ListEditorSheet` →
   `editList` / `deleteFromList`), `SearchScreen` (debounced, anime/manga toggle,

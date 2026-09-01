@@ -35,6 +35,7 @@ class AnilistHomeScreen implements HomeScreenView {
   Widget build(BuildContext context) => MediaSectionsScreen(
     header: const HomeHeader(),
     loader: _auth.queries.initHomePage,
+    cacheId: 'anilist/home',
     reloadOn: _auth.user.stream,
     onMediaTap: (m) => _openDetail(context, m),
   );
@@ -44,6 +45,7 @@ class AnilistAnimeScreen implements AnimeScreenView {
   @override
   Widget build(BuildContext context) => MediaSectionsScreen(
     loader: () => _mediaTab(anime: true),
+    cacheId: 'anilist/anime',
     reloadOn: _auth.user.stream,
     onMediaTap: (m) => _openDetail(context, m),
     onSearch: () => navigateToPage(
@@ -57,6 +59,7 @@ class AnilistMangaScreen implements MangaScreenView {
   @override
   Widget build(BuildContext context) => MediaSectionsScreen(
     loader: () => _mediaTab(anime: false),
+    cacheId: 'anilist/manga',
     reloadOn: _auth.user.stream,
     onMediaTap: (m) => _openDetail(context, m),
     onSearch: () => navigateToPage(
