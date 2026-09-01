@@ -10,8 +10,8 @@ Future<T?> navigateToPage<T>(
 }) {
   return Navigator.of(context).push(
     PageRouteBuilder(
-      transitionDuration: 580.ms,
-      reverseTransitionDuration: 480.ms,
+      transitionDuration: 380.ms,
+      reverseTransitionDuration: 300.ms,
       pageBuilder: (_, _, _) => page,
       transitionsBuilder: (_, animation, _, child) {
         return child.animatePageTransition(animation.value);
