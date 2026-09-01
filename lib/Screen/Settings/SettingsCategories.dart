@@ -15,6 +15,7 @@ import '../../Utils/Function.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Widgets/Components/ThemedContainer.dart';
 import '../Login/LoginScreen.dart';
+import 'CardStyleScreen.dart';
 import 'SettingsCategoryScreen.dart';
 
 /// One settings sub-screen: a title/icon for the top-level menu and a builder
@@ -140,6 +141,16 @@ List<Setting> appearanceSettings(BuildContext context) {
       icon: Icons.blur_on_rounded,
       isChecked: t.useGlassMode.value,
       onSwitchChange: t.setGlassEffect,
+    ),
+    Setting(
+      type: SettingType.normal,
+      name: 'Card style',
+      description: 'Title placement, size, progress and badges',
+      icon: Icons.dashboard_customize_rounded,
+      isActivity: true,
+      onClick: () => Navigator.of(
+        context,
+      ).push(MaterialPageRoute(builder: (_) => const CardStyleScreen())),
     ),
     Setting(
       type: SettingType.switchType,

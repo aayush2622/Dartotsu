@@ -6,7 +6,10 @@ import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../Core/Services/MediaServiceController.dart';
 import '../../Core/Services/Model/Media.dart';
+import '../../Core/ThemeManager/CardStyleController.dart';
+import '../../Model/CardStyle.dart';
 import '../../Model/SearchResults.dart';
+import '../../Utils/Extensions/CardStyleMetrics.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Extensions/Responsive.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
@@ -161,9 +164,7 @@ class _SearchScreenState extends BaseScreen<SearchScreen> {
         if (m.format != null) _pretty(m.format!),
         if (year != null) '$year',
       ].join(' · '),
-      badge: (m.meanScore ?? 0) > 0
-          ? RailScoreBadge(score: m.meanScore! / 10)
-          : null,
+      score: (m.meanScore ?? 0) > 0 ? m.meanScore! / 10 : null,
       onTap: () => navigateToPage(
         context,
         DetailScreen(
@@ -184,6 +185,7 @@ class _SearchScreenState extends BaseScreen<SearchScreen> {
   }
 
   Widget _grid(List<Widget> children, {bool skeleton = false}) {
+    final style = tryFind<CardStyleController>()?.current ?? const CardStyle();
     final grid = GridView.builder(
       padding: EdgeInsets.fromLTRB(
         Dimens.pagePad,
@@ -192,8 +194,8 @@ class _SearchScreenState extends BaseScreen<SearchScreen> {
         Dimens.gapXl,
       ),
       gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-        maxCrossAxisExtent: Dimens.railItemW + Dimens.railGap + 6,
-        childAspectRatio: Dimens.railItemW / Dimens.railItemH,
+        maxCrossAxisExtent: style.itemWidth + Dimens.railGap + 6,
+        childAspectRatio: style.itemWidth / style.itemHeight,
         crossAxisSpacing: Dimens.railGap,
         mainAxisSpacing: Dimens.gap,
       ),

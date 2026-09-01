@@ -28,52 +28,77 @@ class HomeHeader extends StatelessWidget {
         final user = service.auth?.user.value;
         final greeting = user?.name ?? 'Welcome';
 
-        return Row(
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    _timeGreeting(),
-                    style: context.textTheme.labelMedium?.copyWith(
-                      color: context.colorScheme.onSurfaceVariant,
+            Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        _timeGreeting(),
+                        style: context.textTheme.labelMedium?.copyWith(
+                          color: context.colorScheme.onSurfaceVariant,
+                        ),
+                      ),
+                      const SizedBox(height: 2),
+                      Text(
+                        greeting,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: context.textTheme.headlineSmall?.copyWith(
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                if (user != null && service.getNotificationScreen != null)
+                  _BellButton(
+                    unread: user.unreadNotifications,
+                    onOpen: () => navigateToPage(
+                      context,
+                      service.getNotificationScreen!.build(context),
                     ),
                   ),
-                  const SizedBox(height: 2),
-                  Text(
-                    greeting,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: context.textTheme.headlineSmall?.copyWith(
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ],
-              ),
+                IconButton(
+                  icon: const Icon(Icons.search_rounded),
+                  onPressed: () {
+                    final view = service.getSearchScreen;
+                    navigateToPage(
+                      context,
+                      view != null
+                          ? view.build(context, anime: true)
+                          : NotImplemented(
+                              service: service.name,
+                              area: 'Search',
+                            ),
+                    );
+                  },
+                ),
+                const SizedBox(width: 6),
+                _Avatar(url: user?.avatar, onTap: () => _accountSheet(context)),
+              ],
             ),
-            if (user != null && service.getNotificationScreen != null)
-              _BellButton(
-                unread: user.unreadNotifications,
-                onOpen: () => navigateToPage(
-                  context,
-                  service.getNotificationScreen!.build(context),
+            if (user != null && (user.episodesWatched + user.chaptersRead) > 0)
+              Padding(
+                padding: const EdgeInsets.only(top: 10, right: 8),
+                child: Row(
+                  children: [
+                    _StatPill(
+                      icon: Icons.smart_display_rounded,
+                      label: '${user.episodesWatched} ep',
+                    ),
+                    const SizedBox(width: 8),
+                    _StatPill(
+                      icon: Icons.menu_book_rounded,
+                      label: '${user.chaptersRead} ch',
+                    ),
+                  ],
                 ),
               ),
-            IconButton(
-              icon: const Icon(Icons.search_rounded),
-              onPressed: () {
-                final view = service.getSearchScreen;
-                navigateToPage(
-                  context,
-                  view != null
-                      ? view.build(context, anime: true)
-                      : NotImplemented(service: service.name, area: 'Search'),
-                );
-              },
-            ),
-            const SizedBox(width: 6),
-            _Avatar(url: user?.avatar, onTap: () => _accountSheet(context)),
           ],
         );
       }),
@@ -154,6 +179,37 @@ class _AuthTile extends StatelessWidget {
         },
       );
     });
+  }
+}
+
+class _StatPill extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  const _StatPill({required this.icon, required this.label});
+
+  @override
+  Widget build(BuildContext context) {
+    final scheme = context.colorScheme;
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      decoration: BoxDecoration(
+        color: scheme.surfaceContainerHigh,
+        borderRadius: BorderRadius.circular(999),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, size: 15, color: scheme.primary),
+          const SizedBox(width: 6),
+          Text(
+            label,
+            style: context.textTheme.labelMedium?.copyWith(
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
 

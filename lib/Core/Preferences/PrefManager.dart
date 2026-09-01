@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:isar_community/isar.dart';
 
 import '../../Logger.dart';
+import '../../Model/CardStyle.dart';
 import '../ThemeManager/ThemeMode.dart';
 import 'IsarDataClasses/KeyValue/KeyValues.dart';
 import 'Pref.dart';

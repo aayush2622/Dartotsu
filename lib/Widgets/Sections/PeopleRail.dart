@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../Model/CardStyle.dart';
+import '../../Utils/Extensions/CardStyleMetrics.dart';
 import '../../Utils/Extensions/Responsive.dart';
 import '../Components/ScrollConfig.dart';
 import '../Components/SectionCard.dart';
@@ -44,7 +46,7 @@ class PeopleRail extends StatelessWidget {
       ),
       title: title,
       child: SizedBox(
-        height: Dimens.railItemH,
+        height: CardStyle.people.itemHeight,
         child: ScrollConfig(
           context,
           child: ListView.separated(
@@ -55,6 +57,7 @@ class PeopleRail extends StatelessWidget {
             itemBuilder: (_, i) {
               final p = people[i];
               return RailCard(
+                style: CardStyle.people,
                 imageUrl: p.image,
                 title: p.name,
                 subtitle: p.role,
