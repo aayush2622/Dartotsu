@@ -1,4 +1,4 @@
-import '../../../Core/Services/ServiceApi.dart';
+import '../../../Core/Services/ServiceNotification.dart';
 
 ServiceNotification? parseAnilistNotification(Map<String, dynamic> json) {
   final type = json['__typename'] as String?;

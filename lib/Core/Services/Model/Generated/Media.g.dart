@@ -38,9 +38,6 @@ Media _$MediaFromJson(Map<String, dynamic> json) => Media(
   userCompletedAt: json['userCompletedAt'] == null
       ? null
       : Date.fromJson(json['userCompletedAt'] as Map<String, dynamic>),
-  inCustomListsOf: (json['inCustomListsOf'] as Map<String, dynamic>?)?.map(
-    (k, e) => MapEntry(k, e as bool),
-  ),
   status: json['status'] as String?,
   format: json['format'] as String?,
   source: json['source'] as String?,
@@ -65,38 +62,8 @@ Media _$MediaFromJson(Map<String, dynamic> json) => Media(
       : Date.fromJson(json['endDate'] as Map<String, dynamic>),
   popularity: (json['popularity'] as num?)?.toInt(),
   timeUntilAiring: (json['timeUntilAiring'] as num?)?.toInt(),
-  characters: (json['characters'] as List<dynamic>?)
-      ?.map((e) => Character.fromJson(e as Map<String, dynamic>))
-      .toList(),
-  review: (json['review'] as List<dynamic>?)
-      ?.map((e) => Review.fromJson(e as Map<String, dynamic>))
-      .toList(),
-  staff: (json['staff'] as List<dynamic>?)
-      ?.map((e) => Author.fromJson(e as Map<String, dynamic>))
-      .toList(),
-  prequel: json['prequel'] == null
-      ? null
-      : Media.fromJson(json['prequel'] as Map<String, dynamic>),
-  sequel: json['sequel'] == null
-      ? null
-      : Media.fromJson(json['sequel'] as Map<String, dynamic>),
-  relations: (json['relations'] as List<dynamic>?)
-      ?.map((e) => Media.fromJson(e as Map<String, dynamic>))
-      .toList(),
-  recommendations: (json['recommendations'] as List<dynamic>?)
-      ?.map((e) => Media.fromJson(e as Map<String, dynamic>))
-      .toList(),
-  users: (json['users'] as List<dynamic>?)
-      ?.map((e) => User.fromJson(e as Map<String, dynamic>))
-      .toList(),
-  settings: json['settings'] == null
-      ? null
-      : MediaSettings.fromJson(json['settings'] as Map<String, dynamic>),
   shareLink: json['shareLink'] as String,
   cameFromContinue: json['cameFromContinue'] as bool? ?? false,
-  sourceData: json['sourceData'] == null
-      ? null
-      : Source.fromJson(json['sourceData'] as Map<String, dynamic>),
 );
 
 Map<String, dynamic> _$MediaToJson(Media instance) => <String, dynamic>{
@@ -123,7 +90,6 @@ Map<String, dynamic> _$MediaToJson(Media instance) => <String, dynamic>{
   'userUpdatedAt': instance.userUpdatedAt,
   'userStartedAt': instance.userStartedAt,
   'userCompletedAt': instance.userCompletedAt,
-  'inCustomListsOf': instance.inCustomListsOf,
   'status': instance.status,
   'format': instance.format,
   'source': instance.source,
@@ -138,16 +104,6 @@ Map<String, dynamic> _$MediaToJson(Media instance) => <String, dynamic>{
   'endDate': instance.endDate,
   'popularity': instance.popularity,
   'timeUntilAiring': instance.timeUntilAiring,
-  'characters': instance.characters,
-  'review': instance.review,
-  'staff': instance.staff,
-  'prequel': instance.prequel,
-  'sequel': instance.sequel,
-  'relations': instance.relations,
-  'recommendations': instance.recommendations,
-  'users': instance.users,
   'shareLink': instance.shareLink,
-  'settings': instance.settings,
   'cameFromContinue': instance.cameFromContinue,
-  'sourceData': instance.sourceData,
 };

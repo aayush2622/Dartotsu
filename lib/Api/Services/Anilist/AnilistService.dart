@@ -16,10 +16,10 @@ class AnilistService extends MediaService {
   AnilistAuth get _auth => find();
 
   @override
-  ServiceApi get api => _auth.api;
+  Queries get getQueries => _auth.queries;
 
   @override
-  ServiceMutations get mutations => _auth.api;
+  Mutations get getMutations => _auth.mutations;
 
   @override
   ServiceAuth get auth => _auth;

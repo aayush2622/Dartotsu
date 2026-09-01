@@ -11,6 +11,16 @@ class AnilistException implements Exception {
   String toString() => message;
 }
 
+/// The GraphQL runner injected into [AnilistQueries] / [AnilistMutations] so the
+/// query files never touch the client or the network layer directly.
+typedef ExecuteAnilistQuery =
+    Future<Map<String, dynamic>> Function(
+      String query, {
+      Map<String, dynamic> variables,
+      bool useToken,
+      bool showErrors,
+    });
+
 class AnilistClient {
   static const _endpoint = 'https://graphql.anilist.co/';
 

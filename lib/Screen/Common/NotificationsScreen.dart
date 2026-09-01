@@ -13,8 +13,8 @@ import '../../Widgets/Components/CachedNetworkImage.dart';
 import 'DetailScreen.dart';
 
 class NotificationsScreen extends StatefulWidget {
-  final ServiceApi api;
-  const NotificationsScreen({super.key, required this.api});
+  final Queries queries;
+  const NotificationsScreen({super.key, required this.queries});
 
   @override
   State<NotificationsScreen> createState() => _NotificationsScreenState();
@@ -33,7 +33,7 @@ class _NotificationsScreenState extends BaseScreen<NotificationsScreen> {
   Future<void> _load() async {
     _loading.value = true;
     try {
-      _items.value = await widget.api.getNotifications();
+      _items.value = await widget.queries.getNotifications();
       final auth = find<MediaServiceController>().currentService.value.auth;
       if (auth != null) unawaited(auth.refreshUser());
     } catch (_) {
@@ -97,7 +97,11 @@ class _NotificationsScreenState extends BaseScreen<NotificationsScreen> {
                             cover: n.imageUrl,
                             shareLink: 'https://anilist.co/anime/${n.mediaId}',
                           ),
-                          api: widget.api,
+                          queries: widget.queries,
+                          mutations: find<MediaServiceController>()
+                              .currentService
+                              .value
+                              .getMutations,
                         ),
                       ),
               );

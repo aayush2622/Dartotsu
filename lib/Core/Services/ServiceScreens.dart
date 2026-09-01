@@ -6,7 +6,7 @@ import 'Model/Media.dart';
 /// implementation; when it doesn't, the shell shows `NotImplemented`.
 ///
 /// Implementations are usually thin — delegate to the shared widgets in
-/// `Screen/` wired to the service's own `ServiceApi`.
+/// `Screen/Common/` wired to the service's own `Queries` / `Mutations`.
 abstract class HomeScreenView {
   Widget build(BuildContext context);
 }
