@@ -2,22 +2,33 @@ part of '../AnilistQueries.dart';
 
 extension on AnilistQueries {
   Future<Media?> _mediaDetails(Media media) async {
-    var data = await executeQuery(_queryMediaDetails(media));
-    var node = data['Media'] as Map<String, dynamic>?;
-
-    if (node == null) {
-      data = await executeQuery(_queryMediaDetails(media), useToken: false);
-      node = data['Media'] as Map<String, dynamic>?;
-      if (node == null) {
+    try {
+      final body = await client.queryRaw(_queryMediaDetails(media));
+      return await compute(_parseDetail, {'media': media, 'body': body});
+    } on AnilistException {
+      // adult content / auth quirk — retry anonymously
+      try {
+        final body = await client.queryRaw(
+          _queryMediaDetails(media),
+          useToken: false,
+        );
+        return await compute(_parseDetail, {'media': media, 'body': body});
+      } catch (_) {
         snackString('Error getting data from AniList.');
         return media;
       }
     }
-
-    node['Page'] = data['Page'];
-    mapAnilistDetail(media, node);
-    return media;
   }
+}
+
+Media _parseDetail(Map<String, dynamic> args) {
+  final media = args['media'] as Media;
+  final data = anilistData(args['body'] as String);
+  final node = data['Media'] as Map<String, dynamic>?;
+  if (node == null) return media;
+  node['Page'] = data['Page'];
+  mapAnilistDetail(media, node);
+  return media;
 }
 
 String _queryMediaDetails(Media media) =>

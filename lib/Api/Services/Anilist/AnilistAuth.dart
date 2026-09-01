@@ -29,7 +29,7 @@ class AnilistAuth extends GetxController implements ServiceAuth {
   late final AnilistClient client = AnilistClient(() => token.value);
 
   late final AnilistQueries queries = AnilistQueries(
-    client.query,
+    client,
     userId: () => user.value?.id,
     refreshUser: () async {
       await refreshUser();
@@ -38,7 +38,7 @@ class AnilistAuth extends GetxController implements ServiceAuth {
   );
 
   late final AnilistMutations mutations = AnilistMutations(
-    client.query,
+    client,
     userId: () => user.value?.id,
   );
 

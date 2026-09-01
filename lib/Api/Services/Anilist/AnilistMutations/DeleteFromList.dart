@@ -6,7 +6,7 @@ extension on AnilistMutations {
     final id = media.userListId;
     if (id == null) return;
 
-    await executeQuery(
+    await client.query(
       r'mutation ($id: Int) { DeleteMediaListEntry(id: $id) { deleted } }',
       variables: {'id': id},
     );
@@ -17,7 +17,7 @@ extension on AnilistMutations {
   }
 
   Future<int?> _mediaListId(Media media) async {
-    final data = await executeQuery(
+    final data = await client.query(
       '{ Media(id: ${media.id}) { id mediaListEntry { id } } }',
     );
     return ((data['Media'] as Map<String, dynamic>?)?['mediaListEntry']

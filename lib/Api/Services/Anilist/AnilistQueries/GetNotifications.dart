@@ -3,7 +3,7 @@ part of '../AnilistQueries.dart';
 extension on AnilistQueries {
   Future<List<ServiceNotification>> _getNotifications(int page) async {
     if (userId() == null) return const [];
-    final data = await executeQuery(
+    final data = await client.query(
       _queryNotifications,
       variables: {'page': page},
     );

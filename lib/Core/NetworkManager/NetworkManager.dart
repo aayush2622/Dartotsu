@@ -109,6 +109,7 @@ class NetworkManager extends GetxController {
     Map<String, String>? query,
     Map<String, String>? headers,
     CancelToken? cancelToken,
+    bool decodeJson = true,
   }) async {
     final res = await client.post(
       url,
@@ -118,7 +119,7 @@ class NetworkManager extends GetxController {
       cancelToken: cancelToken,
     );
 
-    return _wrap(res);
+    return _wrap(res, decodeJson: decodeJson);
   }
 
   /// Performs a HEAD request.
@@ -189,8 +190,13 @@ class NetworkManager extends GetxController {
     }
   }
 
-  NetworkResponse<dynamic> _wrap(HttpTextResponse res) {
-    final data = _decodeIfJson(res.body, res.headerMapList);
+  NetworkResponse<dynamic> _wrap(
+    HttpTextResponse res, {
+    bool decodeJson = true,
+  }) {
+    final data = decodeJson
+        ? _decodeIfJson(res.body, res.headerMapList)
+        : res.body;
 
     return NetworkResponse(
       statusCode: res.statusCode,

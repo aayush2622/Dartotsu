@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:collection/collection.dart';
+import 'package:flutter/foundation.dart';
 
 import '../../../Core/Preferences/PrefManager.dart';
 import '../../../Core/Services/Api/Queries.dart';
@@ -29,12 +30,12 @@ part 'AnilistQueries/GetUserMediaList.dart';
 part 'AnilistQueries/Search.dart';
 
 class AnilistQueries extends Queries {
-  final ExecuteAnilistQuery executeQuery;
+  final AnilistClient client;
   final int? Function() userId;
   final Future<bool> Function() refreshUser;
 
   AnilistQueries(
-    this.executeQuery, {
+    this.client, {
     required this.userId,
     required this.refreshUser,
   });

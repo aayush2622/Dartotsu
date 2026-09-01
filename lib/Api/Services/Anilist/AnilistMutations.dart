@@ -9,10 +9,10 @@ part 'AnilistMutations/EditList.dart';
 part 'AnilistMutations/SetProgress.dart';
 
 class AnilistMutations extends Mutations {
-  final ExecuteAnilistQuery executeQuery;
+  final AnilistClient client;
   final int? Function() userId;
 
-  AnilistMutations(this.executeQuery, {required this.userId});
+  AnilistMutations(this.client, {required this.userId});
 
   @override
   Future<void> editList(Media media, {List<String>? customList}) =>

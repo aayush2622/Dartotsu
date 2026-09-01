@@ -3,39 +3,45 @@ part of '../AnilistQueries.dart';
 extension on AnilistQueries {
   Future<Map<String, List<Media>>> _initHomePage() async {
     final id = userId();
-    final data = await executeQuery(_queryHome(id));
-    final out = <String, List<Media>>{};
-
-    if (id != null) {
-      out['Continue Watching'] = _collectionMedia(
-        data['currentAnime'] as Map<String, dynamic>?,
-      );
-      out['Continue Reading'] = _collectionMedia(
-        data['currentManga'] as Map<String, dynamic>?,
-      );
-      out['Planned Anime'] = _collectionMedia(
-        data['plannedAnime'] as Map<String, dynamic>?,
-      );
-      out['Planned Manga'] = _collectionMedia(
-        data['plannedManga'] as Map<String, dynamic>?,
-      );
-      out['Favourite Anime'] = _favourites(data['favoriteAnime'], anime: true);
-      out['Favourite Manga'] = _favourites(data['favoriteManga'], anime: false);
-      out['Recommended For You'] = _recommended(data['recommended']);
-    } else {
-      out['Trending Anime'] = _pageMedia(
-        data['trendingAnime'] as Map<String, dynamic>?,
-      );
-      out['Trending Manga'] = _pageMedia(
-        data['trendingManga'] as Map<String, dynamic>?,
-      );
-      out['Popular Anime'] = _pageMedia(
-        data['popularAnime'] as Map<String, dynamic>?,
-      );
-    }
-
-    return _nonEmpty(out);
+    final body = await client.queryRaw(_queryHome(id));
+    return compute(_parseHome, {'body': body, 'loggedIn': id != null});
   }
+}
+
+Map<String, List<Media>> _parseHome(Map<String, dynamic> args) {
+  final data = anilistData(args['body'] as String);
+  final loggedIn = args['loggedIn'] as bool;
+  final out = <String, List<Media>>{};
+
+  if (loggedIn) {
+    out['Continue Watching'] = _collectionMedia(
+      data['currentAnime'] as Map<String, dynamic>?,
+    );
+    out['Continue Reading'] = _collectionMedia(
+      data['currentManga'] as Map<String, dynamic>?,
+    );
+    out['Planned Anime'] = _collectionMedia(
+      data['plannedAnime'] as Map<String, dynamic>?,
+    );
+    out['Planned Manga'] = _collectionMedia(
+      data['plannedManga'] as Map<String, dynamic>?,
+    );
+    out['Favourite Anime'] = _favourites(data['favoriteAnime'], anime: true);
+    out['Favourite Manga'] = _favourites(data['favoriteManga'], anime: false);
+    out['Recommended For You'] = _recommended(data['recommended']);
+  } else {
+    out['Trending Anime'] = _pageMedia(
+      data['trendingAnime'] as Map<String, dynamic>?,
+    );
+    out['Trending Manga'] = _pageMedia(
+      data['trendingManga'] as Map<String, dynamic>?,
+    );
+    out['Popular Anime'] = _pageMedia(
+      data['popularAnime'] as Map<String, dynamic>?,
+    );
+  }
+
+  return _nonEmpty(out);
 }
 
 List<Media> _favourites(Object? user, {required bool anime}) {

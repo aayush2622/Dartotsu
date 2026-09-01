@@ -1,38 +1,40 @@
 part of '../AnilistQueries.dart';
 
 extension on AnilistQueries {
-  Future<Map<String, List<Media>>> _getAnimeList() async {
-    final data = await executeQuery(_queryAnimeList());
-    return _nonEmpty({
-      'Recent Updates': _recentUpdates(data['recentUpdates']),
-      'Trending Now': _pageMedia(
-        data['trendingAnime'] as Map<String, dynamic>?,
-      ),
-      'Popular This Season': _pageMedia(
-        data['season'] as Map<String, dynamic>?,
-      ),
-      'Trending Movies': _pageMedia(data['movies'] as Map<String, dynamic>?),
-      'Top Rated Series': _pageMedia(data['topRated'] as Map<String, dynamic>?),
-      'Most Favourite Series': _pageMedia(
-        data['mostFav'] as Map<String, dynamic>?,
-      ),
-      'Popular Anime': _pageMedia(data['popular'] as Map<String, dynamic>?),
-    });
-  }
+  Future<Map<String, List<Media>>> _getAnimeList() async =>
+      compute(_parseAnimeList, await client.queryRaw(_queryAnimeList()));
 
-  Future<Map<String, List<Media>>> _getMangaList() async {
-    final data = await executeQuery(_queryMangaList());
-    return _nonEmpty({
-      'Trending Now': _pageMedia(data['trending'] as Map<String, dynamic>?),
-      'Trending Manhwa': _pageMedia(data['manhwa'] as Map<String, dynamic>?),
-      'Trending Novels': _pageMedia(data['novels'] as Map<String, dynamic>?),
-      'Top Rated Manga': _pageMedia(data['topRated'] as Map<String, dynamic>?),
-      'Most Favourite Manga': _pageMedia(
-        data['mostFav'] as Map<String, dynamic>?,
-      ),
-      'Popular Manga': _pageMedia(data['popular'] as Map<String, dynamic>?),
-    });
-  }
+  Future<Map<String, List<Media>>> _getMangaList() async =>
+      compute(_parseMangaList, await client.queryRaw(_queryMangaList()));
+}
+
+Map<String, List<Media>> _parseAnimeList(String body) {
+  final data = anilistData(body);
+  return _nonEmpty({
+    'Recent Updates': _recentUpdates(data['recentUpdates']),
+    'Trending Now': _pageMedia(data['trendingAnime'] as Map<String, dynamic>?),
+    'Popular This Season': _pageMedia(data['season'] as Map<String, dynamic>?),
+    'Trending Movies': _pageMedia(data['movies'] as Map<String, dynamic>?),
+    'Top Rated Series': _pageMedia(data['topRated'] as Map<String, dynamic>?),
+    'Most Favourite Series': _pageMedia(
+      data['mostFav'] as Map<String, dynamic>?,
+    ),
+    'Popular Anime': _pageMedia(data['popular'] as Map<String, dynamic>?),
+  });
+}
+
+Map<String, List<Media>> _parseMangaList(String body) {
+  final data = anilistData(body);
+  return _nonEmpty({
+    'Trending Now': _pageMedia(data['trending'] as Map<String, dynamic>?),
+    'Trending Manhwa': _pageMedia(data['manhwa'] as Map<String, dynamic>?),
+    'Trending Novels': _pageMedia(data['novels'] as Map<String, dynamic>?),
+    'Top Rated Manga': _pageMedia(data['topRated'] as Map<String, dynamic>?),
+    'Most Favourite Manga': _pageMedia(
+      data['mostFav'] as Map<String, dynamic>?,
+    ),
+    'Popular Manga': _pageMedia(data['popular'] as Map<String, dynamic>?),
+  });
 }
 
 List<Media> _recentUpdates(Object? page) {

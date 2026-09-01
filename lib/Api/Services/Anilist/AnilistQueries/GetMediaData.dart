@@ -2,7 +2,7 @@ part of '../AnilistQueries.dart';
 
 extension on AnilistQueries {
   Future<Media?> _getMedia(String id, {bool mal = false}) async {
-    final data = await executeQuery(_queryMediaData(id, mal: mal));
+    final data = await client.query(_queryMediaData(id, mal: mal));
     final media = data['Media'] as Map<String, dynamic>?;
     return media == null ? null : mapAnilistMedia(media);
   }
