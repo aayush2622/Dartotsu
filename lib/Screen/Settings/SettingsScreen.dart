@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide ContextExtensionss;
 import 'package:package_info_plus/package_info_plus.dart';
 
-import '../../Api/Services/Anilist/AnilistAuth.dart';
 import '../../Api/Updater/AppUpdater.dart';
 import '../../Core/Preferences/PrefManager.dart';
 import '../../Core/Services/MediaServiceController.dart';
@@ -183,12 +182,11 @@ class _SettingsBodyState extends BaseScreen<_SettingsBody> {
 
   Widget _accountTile(BuildContext context) {
     final controller = find<MediaServiceController>();
-    final auth = find<AnilistAuth>();
 
     return Obx(() {
       final service = controller.currentService.value;
-      final user = auth.user.value;
-      final handler = service is LoginHandler ? service as LoginHandler : null;
+      final auth = service.auth;
+      final user = auth?.user.value;
 
       return Column(
         children: [
@@ -201,16 +199,16 @@ class _SettingsBodyState extends BaseScreen<_SettingsBody> {
               child: const Text('Switch'),
             ),
           ),
-          if (handler != null)
+          if (auth != null)
             ListTile(
               contentPadding: EdgeInsets.zero,
               leading: Icon(
-                handler.isLoggedIn ? Icons.logout_rounded : Icons.login_rounded,
+                auth.isLoggedIn ? Icons.logout_rounded : Icons.login_rounded,
               ),
-              title: Text(handler.isLoggedIn ? 'Log out' : 'Log in'),
+              title: Text(auth.isLoggedIn ? 'Log out' : 'Log in'),
               onTap: () {
-                if (handler.isLoggedIn) {
-                  handler.logout();
+                if (auth.isLoggedIn) {
+                  auth.logout();
                 } else {
                   Navigator.of(context).push(
                     MaterialPageRoute(builder: (_) => const LoginScreen()),

@@ -4,25 +4,31 @@ import 'package:flutter_web_auth_2/flutter_web_auth_2.dart';
 import 'package:get/get.dart';
 
 import '../../../Core/Preferences/PrefManager.dart';
+import '../../../Core/Services/ServiceAuth.dart';
 import '../../../Utils/Functions/SnackBar.dart';
+import 'AnilistApi.dart';
 import 'AnilistClient.dart';
 import 'AnilistUser.dart';
 
-class AnilistAuth extends GetxController {
+class AnilistAuth extends GetxController implements ServiceAuth {
   static const _clientId = '14959';
   static const _callbackScheme = 'dantotsu';
   static const _authUrl =
       'https://anilist.co/api/v2/oauth/authorize'
       '?client_id=$_clientId&response_type=token';
-
   static const _userCacheKey = 'anilistUser';
 
   final token = PrefName.anilistToken.rx;
-  final user = Rxn<AnilistUser>();
+
+  @override
+  final user = Rxn<ServiceUser>();
+
   final loading = false.obs;
 
   late final AnilistClient client = AnilistClient(() => token.value);
+  late final AnilistApi api = AnilistApi(client, () => user.value?.id);
 
+  @override
   bool get isLoggedIn => token.value.isNotEmpty;
 
   @override
@@ -36,6 +42,7 @@ class AnilistAuth extends GetxController {
     if (isLoggedIn) unawaited(refreshUser());
   }
 
+  @override
   Future<bool> login() async {
     try {
       final result = await FlutterWebAuth2.authenticate(
@@ -52,16 +59,18 @@ class AnilistAuth extends GetxController {
         snackString('Login cancelled');
         return false;
       }
-      return applyToken(token);
+      return loginWithToken(token);
     } catch (e) {
       snackString('Login failed: $e');
       return false;
     }
   }
 
-  Future<bool> applyToken(String newToken) async {
+  @override
+  Future<bool> loginWithToken(String newToken) async {
     token.value = newToken.trim();
-    final ok = await refreshUser();
+    await refreshUser();
+    final ok = user.value != null;
     if (!ok) {
       token.value = '';
       snackString('Invalid token');
@@ -69,24 +78,25 @@ class AnilistAuth extends GetxController {
     return ok;
   }
 
-  Future<bool> refreshUser() async {
-    if (!isLoggedIn) return false;
+  @override
+  Future<void> refreshUser() async {
+    if (!isLoggedIn) return;
     loading.value = true;
     try {
       final data = await client.query(_viewerQuery, showErrors: false);
       final viewer = data['Viewer'] as Map<String, dynamic>?;
-      if (viewer == null) return false;
+      if (viewer == null) return;
       final parsed = AnilistUser.fromViewer(viewer);
       user.value = parsed;
       PrefManager.setCustomType(_userCacheKey, parsed, (u) => u.toJson());
-      return true;
     } on AnilistException {
-      return false;
+      // leave the cached user in place
     } finally {
       loading.value = false;
     }
   }
 
+  @override
   void logout() {
     token.value = '';
     user.value = null;
@@ -96,18 +106,12 @@ class AnilistAuth extends GetxController {
   static const _viewerQuery = '''
 query {
   Viewer {
-    id
-    name
-    about
-    bannerImage
+    id name about bannerImage
     avatar { large medium }
     unreadNotificationCount
     options { displayAdultContent titleLanguage }
     mediaListOptions { scoreFormat }
-    statistics {
-      anime { episodesWatched }
-      manga { chaptersRead }
-    }
+    statistics { anime { episodesWatched } manga { chaptersRead } }
   }
 }
 ''';

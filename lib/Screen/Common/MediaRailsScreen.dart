@@ -1,11 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide ContextExtensionss;
 
-import '../../Api/Services/Anilist/AnilistApi.dart';
-import '../../Api/Services/Anilist/AnilistAuth.dart';
-import '../../Api/Services/Anilist/AnilistClient.dart';
 import '../../Core/Services/Model/Media.dart';
-import '../../Utils/Functions/GetXFunctions.dart';
+import '../../Core/Services/ServiceApi.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Extensions/IntExtensions.dart';
 import '../../Widgets/Components/ScrollConfig.dart';
@@ -19,12 +18,16 @@ class MediaRailsScreen extends StatefulWidget {
   final void Function(Media media)? onMediaTap;
   final VoidCallback? onSearch;
 
+  /// Emits whenever the screen should refetch (e.g. the account changed).
+  final Stream<Object?>? reloadOn;
+
   const MediaRailsScreen({
     super.key,
     required this.loader,
     this.header,
     this.onMediaTap,
     this.onSearch,
+    this.reloadOn,
   });
 
   @override
@@ -37,7 +40,7 @@ class _MediaRailsScreenState extends State<MediaRailsScreen>
   final _loading = true.obs;
   final _error = RxnString();
 
-  late final Worker _authWorker;
+  StreamSubscription<Object?>? _reloadSub;
 
   @override
   bool get wantKeepAlive => true;
@@ -46,12 +49,12 @@ class _MediaRailsScreenState extends State<MediaRailsScreen>
   void initState() {
     super.initState();
     _load();
-    _authWorker = ever(find<AnilistAuth>().user, (_) => _load());
+    _reloadSub = widget.reloadOn?.listen((_) => _load());
   }
 
   @override
   void dispose() {
-    _authWorker.dispose();
+    _reloadSub?.cancel();
     super.dispose();
   }
 
@@ -60,8 +63,6 @@ class _MediaRailsScreenState extends State<MediaRailsScreen>
     _error.value = null;
     try {
       _rails.value = await widget.loader();
-    } on AnilistException catch (e) {
-      _error.value = e.message;
     } catch (e) {
       _error.value = e.toString();
     } finally {

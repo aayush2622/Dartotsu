@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide ContextExtensionss;
 
-import '../../Api/Services/Anilist/AnilistApi.dart';
-import '../../Api/Services/Anilist/AnilistAuth.dart';
+import '../../Core/Services/MediaServiceController.dart';
 import '../../Core/Services/Model/Character.dart';
 import '../../Core/Services/Model/Media.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
@@ -16,17 +15,25 @@ import 'ListEditorSheet.dart';
 
 class DetailScreen extends StatefulWidget {
   final Media media;
-  const DetailScreen({super.key, required this.media});
+  final ServiceApi api;
+  final ServiceMutations? mutations;
+
+  const DetailScreen({
+    super.key,
+    required this.media,
+    required this.api,
+    this.mutations,
+  });
 
   @override
   State<DetailScreen> createState() => _DetailScreenState();
 }
 
 class _DetailScreenState extends State<DetailScreen> {
-  late final AnilistApi _api = AnilistApi(find<AnilistAuth>().client);
   late final _media = widget.media.obs;
   final _loading = true.obs;
 
+  ServiceApi get _api => widget.api;
   bool get _isAnime => _media.value.anime != null;
 
   @override
@@ -38,7 +45,7 @@ class _DetailScreenState extends State<DetailScreen> {
   Future<void> _fetch() async {
     _loading.value = true;
     try {
-      _media.value = await _api.details(int.parse(widget.media.id));
+      _media.value = await _api.details(widget.media.id);
     } catch (_) {
       // keep the partial media from the rail
     } finally {
@@ -46,15 +53,28 @@ class _DetailScreenState extends State<DetailScreen> {
     }
   }
 
+  void _open(BuildContext context, Media media) => navigateToPage(
+    context,
+    DetailScreen(media: media, api: widget.api, mutations: widget.mutations),
+  );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: Obx(() {
-        if (!find<AnilistAuth>().isLoggedIn) return const SizedBox.shrink();
+        final mutations = widget.mutations;
+        final auth = find<MediaServiceController>().currentService.value.auth;
+        if (mutations == null || auth == null || !auth.isLoggedIn) {
+          return const SizedBox.shrink();
+        }
         final m = _media.value;
         return FloatingActionButton.extended(
-          onPressed: () =>
-              showListEditor(context, media: m, api: _api, onSaved: _fetch),
+          onPressed: () => showListEditor(
+            context,
+            media: m,
+            mutations: mutations,
+            onSaved: _fetch,
+          ),
           icon: Icon(m.userStatus == null ? Icons.add : Icons.edit_rounded),
           label: Text(_statusLabel(m.userStatus)),
         );
@@ -78,7 +98,7 @@ class _DetailScreenState extends State<DetailScreen> {
                     type: 0,
                     title: 'Relations',
                     mediaList: m.relations,
-                    onMediaTap: _open,
+                    onMediaTap: (ctx, i, media) => _open(ctx, media),
                   ),
                 ),
               ),
@@ -89,7 +109,7 @@ class _DetailScreenState extends State<DetailScreen> {
                     type: 0,
                     title: 'Recommendations',
                     mediaList: m.recommendations,
-                    onMediaTap: _open,
+                    onMediaTap: (ctx, i, media) => _open(ctx, media),
                   ),
                 ),
               ),
@@ -238,9 +258,6 @@ class _DetailScreenState extends State<DetailScreen> {
       ),
     ],
   );
-
-  void _open(BuildContext context, int index, Media media) =>
-      navigateToPage(context, DetailScreen(media: media));
 
   static String _statusLabel(String? status) => switch (status) {
     'CURRENT' => 'Watching',

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide ContextExtensionss;
 
-import '../../Api/Services/Anilist/AnilistApi.dart';
 import '../../Core/Services/Model/Media.dart';
+import '../../Core/Services/ServiceApi.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Functions/SnackBar.dart';
 import '../../Widgets/Components/CustomBottomDialog.dart';
@@ -19,7 +19,7 @@ const _statuses = {
 void showListEditor(
   BuildContext context, {
   required Media media,
-  required AnilistApi api,
+  required ServiceMutations mutations,
   required Future<void> Function() onSaved,
 }) {
   final status = (media.userStatus ?? 'PLANNING').obs;
@@ -31,8 +31,8 @@ void showListEditor(
   Future<void> save() async {
     busy.value = true;
     try {
-      await api.saveListEntry(
-        mediaId: int.parse(media.id),
+      await mutations.saveListEntry(
+        mediaId: media.id,
         status: status.value,
         progress: progress.value,
         score: score.value,
@@ -52,7 +52,7 @@ void showListEditor(
     if (id == null) return;
     busy.value = true;
     try {
-      await api.deleteListEntry(id);
+      await mutations.deleteListEntry('$id');
       await onSaved();
       if (context.mounted) Navigator.pop(context);
       snackString('Removed from your list');
