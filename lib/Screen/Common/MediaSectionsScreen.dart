@@ -8,9 +8,11 @@ import '../../Core/Services/SectionCache.dart';
 import '../../Utils/Animation/WidgetAnimations.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Extensions/IntExtensions.dart';
+import '../../Utils/Extensions/Responsive.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Utils/Functions/RefreshController.dart';
 import '../../Widgets/Components/ScrollConfig.dart';
+import '../../Widgets/Components/SectionCard.dart';
 import '../../Widgets/Sections/Media/MediaSection.dart';
 
 /// Renders an ordered set of horizontal media sections. The loader's map keys
@@ -230,55 +232,50 @@ class _MediaSectionsScreenState extends State<MediaSectionsScreen>
     );
   }
 
-  Widget _emptyBox() => Padding(
-    padding: const EdgeInsets.fromLTRB(24, 100, 24, 24),
-    child: Column(
-      children: [
-        Icon(
-          Icons.auto_awesome_motion_rounded,
-          size: 44,
-          color: context.colorScheme.onSurfaceVariant,
-        ),
-        const SizedBox(height: 12),
-        Text(
-          'Nothing to show yet',
-          style: context.textTheme.titleMedium,
-        ),
-        const SizedBox(height: 4),
-        Text(
-          'Add some titles to your list and they\'ll appear here.',
-          textAlign: TextAlign.center,
-          style: context.textTheme.bodyMedium?.copyWith(
-            color: context.colorScheme.onSurfaceVariant,
-          ),
-        ),
-        const SizedBox(height: 16),
-        FilledButton.tonal(
-          onPressed: _refresh,
-          child: const Text('Refresh'),
-        ),
-      ],
-    ),
+  Widget _emptyBox() => _messageCard(
+    icon: Icons.auto_awesome_motion_rounded,
+    title: 'Nothing to show yet',
+    body: 'Add some titles to your list and they\'ll appear here.',
+    action: 'Refresh',
   );
 
-  Widget _errorBox(String text) => Padding(
-    padding: const EdgeInsets.fromLTRB(24, 80, 24, 24),
-    child: Column(
-      children: [
-        Icon(
-          Icons.cloud_off_rounded,
-          size: 40,
-          color: context.colorScheme.onSurfaceVariant,
-        ),
-        const SizedBox(height: 12),
-        Text(
-          text,
-          textAlign: TextAlign.center,
-          style: context.textTheme.bodyMedium,
-        ),
-        const SizedBox(height: 12),
-        FilledButton.tonal(onPressed: _refresh, child: const Text('Retry')),
-      ],
+  Widget _errorBox(String text) => _messageCard(
+    icon: Icons.cloud_off_rounded,
+    title: 'Couldn\'t load',
+    body: text,
+    action: 'Retry',
+  );
+
+  Widget _messageCard({
+    required IconData icon,
+    required String title,
+    required String body,
+    required String action,
+  }) => Padding(
+    padding: EdgeInsets.fromLTRB(
+      Dimens.gap,
+      Dimens.gapXl,
+      Dimens.gap,
+      Dimens.gap,
+    ),
+    child: SectionCard(
+      child: Column(
+        children: [
+          Icon(icon, size: 42, color: context.colorScheme.onSurfaceVariant),
+          SizedBox(height: Dimens.gap),
+          Text(title, style: context.textTheme.titleMedium),
+          SizedBox(height: Dimens.gapXs),
+          Text(
+            body,
+            textAlign: TextAlign.center,
+            style: context.textTheme.bodyMedium?.copyWith(
+              color: context.colorScheme.onSurfaceVariant,
+            ),
+          ),
+          SizedBox(height: Dimens.gap),
+          FilledButton.tonal(onPressed: _refresh, child: Text(action)),
+        ],
+      ),
     ),
   );
 }

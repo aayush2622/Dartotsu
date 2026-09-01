@@ -33,8 +33,7 @@ abstract final class Dimens {
   static double get gapXl => responsive(mobile: 28, tablet: 34, desktop: 40);
 
   // --- page + card padding ---
-  static double get pagePad =>
-      responsive(mobile: 16, tablet: 20, desktop: 22);
+  static double get pagePad => responsive(mobile: 16, tablet: 20, desktop: 22);
   static double get cardPad => responsive(mobile: 16, tablet: 18, desktop: 18);
   static EdgeInsets get pageInsets => EdgeInsets.symmetric(horizontal: pagePad);
   static EdgeInsets get cardInsets => EdgeInsets.all(cardPad);

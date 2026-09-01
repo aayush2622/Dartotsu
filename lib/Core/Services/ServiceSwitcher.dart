@@ -20,8 +20,7 @@ void serviceSwitcher(BuildContext context) {
             for (final service in mediaServices.services)
               _ServiceRow(
                 service: service,
-                selected:
-                    mediaServices.currentService.value.id == service.id,
+                selected: mediaServices.currentService.value.id == service.id,
                 onTap: () {
                   mediaServices.switchService(service.id);
                   Navigator.pop(context);

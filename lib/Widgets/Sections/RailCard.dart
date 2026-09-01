@@ -176,7 +176,11 @@ class _ProgressBar extends StatelessWidget {
 class RailScoreBadge extends StatelessWidget {
   final double score;
   final bool highlight;
-  const RailScoreBadge({super.key, required this.score, this.highlight = false});
+  const RailScoreBadge({
+    super.key,
+    required this.score,
+    this.highlight = false,
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -3,6 +3,7 @@ import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../Model/Setting.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
+import '../../Utils/Extensions/Responsive.dart';
 import '../Components/ThemedContainer.dart';
 import 'SettingsAdaptor.dart';
 
@@ -31,10 +32,15 @@ class _SettingsListViewState extends State<SettingsListView> {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding: const EdgeInsets.fromLTRB(16, 4, 16, 40),
+      padding: EdgeInsets.fromLTRB(
+        Dimens.pagePad,
+        Dimens.gapXs,
+        Dimens.pagePad,
+        Dimens.gapXl,
+      ),
       children: [
         ThemedContainer(
-          borderRadius: BorderRadius.circular(28),
+          borderRadius: Dimens.borderLg,
           padding: EdgeInsets.zero,
           child: TextField(
             onChanged: (v) => _query.value = v.trim(),
@@ -47,7 +53,7 @@ class _SettingsListViewState extends State<SettingsListView> {
             ),
           ),
         ),
-        const SizedBox(height: 16),
+        SizedBox(height: Dimens.gap),
         Obx(() {
           final q = _query.value;
           if (q.isEmpty) {
