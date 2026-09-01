@@ -18,14 +18,17 @@ Targets 5 platforms: Android, iOS, Windows, Linux, macOS. Distributed outside ap
 
 ### State of the rewrite (2026-09-01)
 
-~180 Dart files vs `main`'s ~350. On 2026-09-01 the foundation layers (Preferences, Theme, DI,
-networking) got a correctness/consistency pass, then a **read-path AniList vertical slice** was
-built: onboarding → login → home/anime/manga rails → media detail → list editor → search →
-settings, all on live AniList GraphQL. `flutter analyze` clean; `flutter build linux` +
-`flutter run -d linux` verified each step. `ExtensionService` is still an id/name/icon shell.
-**Not built:** watch/read (extension sources, player, reader), MAL/Simkl, calendar,
-notifications feed, offline. The worktree usually carries large **uncommitted WIP ahead of the
-committed branch** — run `git status` first.
+~200 Dart files vs `main`'s ~350. On 2026-09-01 the foundation layers (Preferences, Theme, DI,
+networking) got a correctness/consistency pass; then a **pluggable per-service architecture**
+was built (abstract `*ScreenView` / `ServiceApi` / `ServiceMutations` / `ServiceAuth`, see
+below) with a full **AniList read + list-management slice** on it: onboarding → login →
+home/anime/manga rails (folding in the viewer's status lists) → media detail → list editor →
+search → notifications → settings, all on live AniList GraphQL. `flutter analyze` clean;
+`flutter build linux` + `flutter run -d linux` verified each step. `ExtensionService` is still
+an id/name/icon shell → every screen renders `NotImplemented`. **Not built:** watch/read
+(extension sources, player, reader), MAL/Simkl subclasses, calendar, profile/character pages,
+offline. The worktree usually carries large **uncommitted WIP ahead of the committed
+branch** — run `git status` first.
 
 ## Commands
 
@@ -157,10 +160,10 @@ context-free access (`getString`, snackbars).
 
 | Getter | Type | Purpose |
 |---|---|---|
-| `api` | `ServiceApi?` | reads: `homeRails()`, `mediaRails({anime})`, `details(id)`, `search(...)`, `notifications(...)` |
+| `api` | `ServiceApi?` | reads: `getHomeRails()`, `getAnimeRails()`, `getMangaRails()`, `getMediaDetails(id)`, `search(...)`, `getNotifications(...)` |
 | `mutations` | `ServiceMutations?` | `saveListEntry(...)` / `deleteListEntry(id)` |
 | `auth` | `ServiceAuth?` | `user` (`Rxn<ServiceUser>`), `isLoggedIn`, `login()` / `loginWithToken(t)` / `logout()` / `refreshUser()` |
-| `homeScreen` / `animeScreen` / `mangaScreen` / `searchScreen` / `detailScreen` / `notificationScreen` / `loginScreen` / `settingsScreen` | `*ScreenView?` | one abstract class per screen area (`Core/Services/ServiceScreens.dart`); `build(context, …)` returns the widget |
+| `getHomeScreen` / `getAnimeScreen` / `getMangaScreen` / `getSearchScreen` / `getDetailScreen` / `getNotificationScreen` / `getLoginScreen` / `getSettingsScreen` | `*ScreenView?` | one abstract class per screen area (`Core/Services/ServiceScreens.dart`); `build(context, …)` returns the widget |
 
 - **`Core/Services/MediaServiceController.dart`** — `RxList<MediaService> services`
   (`[AnilistService(), ExtensionService()]`), `Rx<MediaService> currentService` restored from

@@ -50,18 +50,18 @@ class HomeHeader extends StatelessWidget {
                 ],
               ),
             ),
-            if (user != null && service.notificationScreen != null)
+            if (user != null && service.getNotificationScreen != null)
               _BellButton(
                 unread: user.unreadNotifications,
                 onOpen: () => navigateToPage(
                   context,
-                  service.notificationScreen!.build(context),
+                  service.getNotificationScreen!.build(context),
                 ),
               ),
             IconButton(
               icon: const Icon(Icons.search_rounded),
               onPressed: () {
-                final view = service.searchScreen;
+                final view = service.getSearchScreen;
                 navigateToPage(
                   context,
                   view != null

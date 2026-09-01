@@ -45,7 +45,7 @@ class _DetailScreenState extends State<DetailScreen> {
   Future<void> _fetch() async {
     _loading.value = true;
     try {
-      _media.value = await _api.details(widget.media.id);
+      _media.value = await _api.getMediaDetails(widget.media.id);
     } catch (_) {
       // keep the partial media from the rail
     } finally {
