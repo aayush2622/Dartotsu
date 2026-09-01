@@ -214,10 +214,11 @@ extension WidgetAnimations on Widget {
   Widget animatePageTransition(double animation) {
     if (_disabled) return this;
 
+    // No blur here — animating an ImageFilter over a full content page repaints
+    // every frame and janks on heavy screens. Fade + slide reads just as well.
     return animate(adapter: ValueAdapter(animation))
         .fade(begin: 0, end: 1, curve: Curves.easeOutExpo)
-        .slideX(begin: 0.18, end: 0, curve: Curves.easeOutExpo)
-        .blurXY(begin: 8, end: 0, curve: Curves.easeOutExpo);
+        .slideX(begin: 0.12, end: 0, curve: Curves.easeOutExpo);
   }
 
   Widget animateNavItem({required bool selected, bool active = false}) {
