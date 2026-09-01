@@ -8,6 +8,8 @@ import '../../Core/Services/SectionCache.dart';
 import '../../Utils/Animation/WidgetAnimations.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Extensions/IntExtensions.dart';
+import '../../Utils/Functions/GetXFunctions.dart';
+import '../../Utils/Functions/RefreshController.dart';
 import '../../Widgets/Components/ScrollConfig.dart';
 import '../../Widgets/Sections/Media/MediaSection.dart';
 
@@ -42,7 +44,7 @@ class MediaSectionsScreen extends StatefulWidget {
 }
 
 class _MediaSectionsScreenState extends State<MediaSectionsScreen>
-    with AutomaticKeepAliveClientMixin {
+    with AutomaticKeepAliveClientMixin, RouteAware {
   final _sections = <String, List<Media>>{}.obs;
   final _error = RxnString();
 
@@ -55,6 +57,9 @@ class _MediaSectionsScreenState extends State<MediaSectionsScreen>
       : SectionCache(widget.cacheId!, widget.loader);
 
   StreamSubscription<Object?>? _reloadSub;
+  Worker? _signalWorker;
+  bool _subscribed = false;
+  bool _refreshing = false;
 
   @override
   bool get wantKeepAlive => true;
@@ -66,21 +71,51 @@ class _MediaSectionsScreenState extends State<MediaSectionsScreen>
     if (cached != null && cached.isNotEmpty) _sections.value = cached;
     _refresh();
     _reloadSub = widget.reloadOn?.listen((_) => _refresh());
+
+    final key = widget.cacheId;
+    if (key != null) {
+      final flag = find<RefreshController>().getOrPut(key, false);
+      _signalWorker = ever<bool>(flag, (v) {
+        if (!v) return;
+        flag.value = false;
+        _refresh();
+      });
+    }
   }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final route = ModalRoute.of(context);
+    if (!_subscribed && route is PageRoute) {
+      routeObserver.subscribe(this, route);
+      _subscribed = true;
+    }
+  }
+
+  /// Returning to this screen from a pushed route (e.g. a detail page).
+  @override
+  void didPopNext() => _refresh();
 
   @override
   void dispose() {
     _reloadSub?.cancel();
+    _signalWorker?.dispose();
+    if (_subscribed) routeObserver.unsubscribe(this);
     super.dispose();
   }
 
   Future<void> _refresh() async {
+    if (_refreshing) return;
+    _refreshing = true;
     _error.value = null;
     try {
       final fresh = await (_cache?.fetch() ?? widget.loader());
       _apply(fresh);
     } catch (e) {
       if (_sections.isEmpty) _error.value = e.toString();
+    } finally {
+      _refreshing = false;
     }
   }
 
@@ -106,7 +141,10 @@ class _MediaSectionsScreenState extends State<MediaSectionsScreen>
   bool _sameOrder(List<Media> a, List<Media> b) {
     if (a.length != b.length) return false;
     for (var i = 0; i < a.length; i++) {
-      if (a[i].id != b[i].id || a[i].userProgress != b[i].userProgress) {
+      if (a[i].id != b[i].id ||
+          a[i].userProgress != b[i].userProgress ||
+          a[i].userStatus != b[i].userStatus ||
+          a[i].userScore != b[i].userScore) {
         return false;
       }
     }

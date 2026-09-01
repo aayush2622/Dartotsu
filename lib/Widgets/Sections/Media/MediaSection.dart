@@ -255,33 +255,41 @@ class _MediaSectionState extends State<MediaSection> {
             Obx(() {
               final list = state.mediaList;
               return SuperSliverList(
-                delegate: SliverChildBuilderDelegate((context, index) {
-                  if (index == list.length) return _loadMoreTrailer();
+                delegate: SliverChildBuilderDelegate(
+                  (context, index) {
+                    if (index == list.length) return _loadMoreTrailer();
 
-                  final media = list[index];
-                  return RepaintBoundary(
-                    key: ValueKey(index),
-                    child: Align(
-                      alignment: Alignment.topCenter,
-                      child: Padding(
-                        padding: _horizontalPadding(index, list.length),
-                        child: DpadFocusable(
-                          onSelect: () =>
-                              data.onMediaTap?.call(context, index, media),
-                          child: _mediaItem(index, media),
-                          builder: (context, state, child) {
-                            return AnimatedScale(
-                              scale: state.focused ? 1.07 : 1.0,
-                              duration: const Duration(milliseconds: 200),
-                              curve: Curves.easeOut,
-                              child: child,
-                            );
-                          },
+                    final media = list[index];
+                    return RepaintBoundary(
+                      key: ValueKey('media:${media.id}'),
+                      child: Align(
+                        alignment: Alignment.topCenter,
+                        child: Padding(
+                          padding: _horizontalPadding(index, list.length),
+                          child: DpadFocusable(
+                            onSelect: () =>
+                                data.onMediaTap?.call(context, index, media),
+                            child: _mediaItem(index, media),
+                            builder: (context, state, child) {
+                              return AnimatedScale(
+                                scale: state.focused ? 1.07 : 1.0,
+                                duration: const Duration(milliseconds: 200),
+                                curve: Curves.easeOut,
+                                child: child,
+                              );
+                            },
+                          ),
                         ),
                       ),
-                    ),
-                  );
-                }, childCount: list.length + 1),
+                    );
+                  },
+                  childCount: list.length + 1,
+                  findChildIndexCallback: (key) {
+                    final id = (key as ValueKey<String>).value.substring(6);
+                    final i = list.indexWhere((m) => m.id == id);
+                    return i < 0 ? null : i;
+                  },
+                ),
               );
             }),
           ],
@@ -341,6 +349,10 @@ class _MediaSectionState extends State<MediaSection> {
   }
 
   Widget _mediaItem(int index, Media media) {
+    final scheme = theme.colorScheme;
+    final width = 108 * multiplicationFactor;
+    final detailed = !media.minimal;
+
     return _HoverScale(
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,
@@ -349,10 +361,10 @@ class _MediaSectionState extends State<MediaSection> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              width: 108 * multiplicationFactor,
+              width: width,
               height: 160 * multiplicationFactor,
               child: Card(
-                elevation: 5,
+                elevation: 3,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16),
                 ),
@@ -364,53 +376,53 @@ class _MediaSectionState extends State<MediaSection> {
                       imageUrl: media.cover ?? '',
                       fit: BoxFit.cover,
                       placeholder: (context, url) =>
-                          Container(color: Colors.white12),
+                          ColoredBox(color: scheme.surfaceContainerHighest),
                       errorWidget: (context, url, error) => Icon(
                         Icons.broken_image_rounded,
-                        color: theme.colorScheme.error,
+                        color: scheme.error,
                         size: 32,
                       ),
                     ),
-                    if (_progressLabel(media) case final label?)
-                      Positioned(
-                        left: 0,
-                        right: 0,
-                        bottom: 0,
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 3,
-                            horizontal: 6,
-                          ),
-                          color: Colors.black.withValues(alpha: 0.55),
-                          child: Text(
-                            label,
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              fontFamily: 'Poppins',
-                              fontSize: 11,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.white,
-                            ),
+                    if (detailed) ...[
+                      if (media.status == 'RELEASING')
+                        const Positioned(
+                          bottom: 4,
+                          left: 4,
+                          child: _ReleasingDot(),
+                        ),
+                      if (_score(media) case final score?)
+                        Positioned(
+                          right: 0,
+                          bottom: 0,
+                          child: _ScoreBadge(
+                            score: score,
+                            user: (media.userScore ?? 0) > 0,
                           ),
                         ),
-                      ),
+                    ],
                   ],
                 ),
               ),
             ),
             const SizedBox(height: 8),
-            _buildMediaTitle(media.mainName),
+            _buildMediaTitle(media),
+            if (detailed) ...[
+              const SizedBox(height: 2),
+              _infoLine(media, scheme),
+            ],
           ],
         ),
       ),
     );
   }
 
-  Widget _buildMediaTitle(String title) {
+  Widget _buildMediaTitle(Media media) {
     return SizedBox(
       width: 108,
       child: Text(
-        title,
+        media.relation != null
+            ? '${media.relation} · ${media.mainName}'
+            : media.mainName,
         style: theme.textTheme.bodyLarge,
         maxLines: 2,
         overflow: TextOverflow.ellipsis,
@@ -418,11 +430,101 @@ class _MediaSectionState extends State<MediaSection> {
     );
   }
 
-  static String? _progressLabel(Media media) {
-    final progress = media.userProgress;
-    if (progress == null || media.userStatus == null) return null;
-    final total = media.anime?.totalEpisodes ?? media.manga?.totalChapters;
-    return total != null ? '$progress / $total' : '$progress';
+  Widget _infoLine(Media media, ColorScheme scheme) {
+    final left = '${media.userProgress ?? '~'}';
+    final isAnime = media.anime != null;
+    final total = isAnime
+        ? media.anime?.totalEpisodes
+        : media.manga?.totalChapters;
+    final next = media.anime?.nextAiringEpisode;
+    final right = next != null && next > 0
+        ? '$next / ${total ?? '~'}'
+        : '${total ?? '~'}';
+
+    return SizedBox(
+      width: 108,
+      child: Text.rich(
+        TextSpan(
+          children: [
+            TextSpan(
+              text: left,
+              style: TextStyle(color: scheme.secondary),
+            ),
+            const TextSpan(text: '  |  '),
+            TextSpan(text: right),
+          ],
+        ),
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+        style: theme.textTheme.labelMedium?.copyWith(
+          color: scheme.onSurfaceVariant,
+        ),
+      ),
+    );
+  }
+
+  static double? _score(Media media) {
+    final raw = (media.userScore ?? 0) > 0
+        ? media.userScore!
+        : (media.meanScore ?? 0);
+    return raw > 0 ? raw / 10 : null;
+  }
+}
+
+class _ScoreBadge extends StatelessWidget {
+  final double score;
+  final bool user;
+
+  const _ScoreBadge({required this.score, required this.user});
+
+  @override
+  Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+    final bg = user ? scheme.tertiary : scheme.primary;
+    final fg = user ? scheme.onTertiary : scheme.onPrimary;
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
+      decoration: BoxDecoration(
+        color: bg,
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(14),
+          bottomRight: Radius.circular(15),
+        ),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            score.toStringAsFixed(1),
+            style: TextStyle(
+              fontFamily: 'Poppins',
+              color: fg,
+              fontWeight: FontWeight.w800,
+              fontSize: 12,
+            ),
+          ),
+          Icon(Icons.star_rounded, color: fg, size: 13),
+        ],
+      ),
+    );
+  }
+}
+
+class _ReleasingDot extends StatelessWidget {
+  const _ReleasingDot();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 14,
+      height: 14,
+      decoration: BoxDecoration(
+        color: const Color(0xFF6BF170),
+        shape: BoxShape.circle,
+        border: Border.all(color: const Color(0xFF208358), width: 2),
+      ),
+    );
   }
 }
 

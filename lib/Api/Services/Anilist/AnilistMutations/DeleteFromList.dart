@@ -13,6 +13,7 @@ extension on AnilistMutations {
     media.userListId = null;
     media.userStatus = null;
     media.userProgress = null;
+    _signalRefresh();
     snackString('Removed ${media.mainName} from your list');
   }
 

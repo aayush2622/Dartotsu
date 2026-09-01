@@ -1,6 +1,8 @@
 import '../../../Core/Services/Api/Mutations.dart';
 import '../../../Core/Services/Model/Date.dart';
 import '../../../Core/Services/Model/Media.dart';
+import '../../../Utils/Functions/GetXFunctions.dart';
+import '../../../Utils/Functions/RefreshController.dart';
 import '../../../Utils/Functions/SnackBar.dart';
 import 'AnilistClient.dart';
 
@@ -30,3 +32,6 @@ Date _currentDate() {
   final now = DateTime.now();
   return Date(year: now.year, month: now.month, day: now.day);
 }
+
+/// Tell every subscribed screen to revalidate after a successful write.
+void _signalRefresh() => tryFind<RefreshController>()?.all();

@@ -86,40 +86,44 @@ class _DetailScreenState extends State<DetailScreen> {
       }),
       body: Obx(() {
         final m = _media.value;
-        return CustomScrollConfig(
-          context,
-          children: [
-            _appBar(m),
-            SliverToBoxAdapter(child: _headerCard(m)),
-            if (m.genres.isNotEmpty) SliverToBoxAdapter(child: _genres(m)),
-            if ((m.description ?? '').isNotEmpty)
-              SliverToBoxAdapter(child: _description(m)),
-            if ((m.characters ?? []).isNotEmpty)
-              SliverToBoxAdapter(child: _characters(m.characters!)),
-            if ((m.relations ?? []).isNotEmpty)
-              SliverToBoxAdapter(
-                child: MediaSection(
-                  data: MediaSectionData(
-                    type: 0,
-                    title: 'Relations',
-                    mediaList: m.relations,
-                    onMediaTap: (ctx, i, media) => _open(ctx, media),
+        return RefreshIndicator(
+          onRefresh: _fetch,
+          child: CustomScrollConfig(
+            context,
+            physics: const AlwaysScrollableScrollPhysics(),
+            children: [
+              _appBar(m),
+              SliverToBoxAdapter(child: _headerCard(m)),
+              if (m.genres.isNotEmpty) SliverToBoxAdapter(child: _genres(m)),
+              if ((m.description ?? '').isNotEmpty)
+                SliverToBoxAdapter(child: _description(m)),
+              if ((m.characters ?? []).isNotEmpty)
+                SliverToBoxAdapter(child: _characters(m.characters!)),
+              if ((m.relations ?? []).isNotEmpty)
+                SliverToBoxAdapter(
+                  child: MediaSection(
+                    data: MediaSectionData(
+                      type: 0,
+                      title: 'Relations',
+                      mediaList: m.relations,
+                      onMediaTap: (ctx, i, media) => _open(ctx, media),
+                    ),
                   ),
                 ),
-              ),
-            if ((m.recommendations ?? []).isNotEmpty)
-              SliverToBoxAdapter(
-                child: MediaSection(
-                  data: MediaSectionData(
-                    type: 0,
-                    title: 'Recommendations',
-                    mediaList: m.recommendations,
-                    onMediaTap: (ctx, i, media) => _open(ctx, media),
+              if ((m.recommendations ?? []).isNotEmpty)
+                SliverToBoxAdapter(
+                  child: MediaSection(
+                    data: MediaSectionData(
+                      type: 0,
+                      title: 'Recommendations',
+                      mediaList: m.recommendations,
+                      onMediaTap: (ctx, i, media) => _open(ctx, media),
+                    ),
                   ),
                 ),
-              ),
-            const SliverToBoxAdapter(child: SizedBox(height: 96)),
-          ],
+              const SliverToBoxAdapter(child: SizedBox(height: 96)),
+            ],
+          ),
         );
       }),
     );

@@ -23,6 +23,7 @@ import 'Core/Preferences/StorageManager.dart';
 import 'Core/ThemeManager/LocaleController.dart';
 import 'Core/ThemeManager/ThemeController.dart';
 import 'DI.dart';
+import 'Utils/Functions/RefreshController.dart';
 import 'Logger.dart';
 import 'Screen/Error/ErrorScreen.dart';
 import 'Screen/MainScreen.dart';
@@ -184,6 +185,7 @@ class _MyAppState extends State<MyApp> {
                 ],
                 supportedLocales: AppLocalizations.supportedLocales,
                 locale: _locale.locale,
+                navigatorObservers: [routeObserver],
                 themeMode: _theme.themeMode,
                 theme: _theme.light,
                 darkTheme: _theme.dark,

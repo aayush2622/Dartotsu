@@ -35,6 +35,7 @@ mutation (
     };
 
     await client.query(query, variables: variables, showErrors: true);
+    _signalRefresh();
   }
 }
 
