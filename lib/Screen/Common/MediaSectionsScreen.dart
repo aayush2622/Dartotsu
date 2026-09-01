@@ -4,18 +4,22 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../Core/Services/Model/Media.dart';
+import '../../Core/Services/SectionCache.dart';
 import '../../Utils/Animation/WidgetAnimations.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Extensions/IntExtensions.dart';
 import '../../Widgets/Components/ScrollConfig.dart';
 import '../../Widgets/Sections/Media/MediaSection.dart';
 
-typedef SectionsLoader = Future<Map<String, List<Media>>> Function();
-
 /// Renders an ordered set of horizontal media sections. The loader's map keys
-/// are the section titles; empty sections are dropped by the loader.
+/// are the section titles.
+///
+/// When [cacheId] is set, the last successful result is shown from disk on the
+/// first frame and the network fetch runs in the background — new/changed/gone
+/// sections are patched in without a full reload.
 class MediaSectionsScreen extends StatefulWidget {
   final SectionsLoader loader;
+  final String? cacheId;
   final Widget? header;
   final void Function(Media media)? onMediaTap;
   final VoidCallback? onSearch;
@@ -26,6 +30,7 @@ class MediaSectionsScreen extends StatefulWidget {
   const MediaSectionsScreen({
     super.key,
     required this.loader,
+    this.cacheId,
     this.header,
     this.onMediaTap,
     this.onSearch,
@@ -41,6 +46,14 @@ class _MediaSectionsScreenState extends State<MediaSectionsScreen>
   final _sections = <String, List<Media>>{}.obs;
   final _error = RxnString();
 
+  /// Section titles already shown once — they don't replay the entrance when
+  /// the background refresh patches them.
+  final _seen = <String>{};
+
+  late final SectionCache? _cache = widget.cacheId == null
+      ? null
+      : SectionCache(widget.cacheId!, widget.loader);
+
   StreamSubscription<Object?>? _reloadSub;
 
   @override
@@ -49,8 +62,10 @@ class _MediaSectionsScreenState extends State<MediaSectionsScreen>
   @override
   void initState() {
     super.initState();
-    _load();
-    _reloadSub = widget.reloadOn?.listen((_) => _load());
+    final cached = _cache?.read();
+    if (cached != null && cached.isNotEmpty) _sections.value = cached;
+    _refresh();
+    _reloadSub = widget.reloadOn?.listen((_) => _refresh());
   }
 
   @override
@@ -59,13 +74,43 @@ class _MediaSectionsScreenState extends State<MediaSectionsScreen>
     super.dispose();
   }
 
-  Future<void> _load() async {
+  Future<void> _refresh() async {
     _error.value = null;
     try {
-      _sections.value = await widget.loader();
+      final fresh = await (_cache?.fetch() ?? widget.loader());
+      _apply(fresh);
     } catch (e) {
       if (_sections.isEmpty) _error.value = e.toString();
     }
+  }
+
+  /// Patch the visible map key-by-key so unchanged rails keep their state and
+  /// only what actually moved rebuilds.
+  void _apply(Map<String, List<Media>> fresh) {
+    var changed = _sections.length != fresh.length;
+    fresh.forEach((title, media) {
+      final current = _sections[title];
+      if (current == null || !_sameOrder(current, media)) {
+        _sections[title] = media;
+        changed = true;
+      }
+    });
+    _sections.removeWhere((title, _) {
+      final gone = !fresh.containsKey(title);
+      if (gone) changed = true;
+      return gone;
+    });
+    if (changed) _sections.refresh();
+  }
+
+  bool _sameOrder(List<Media> a, List<Media> b) {
+    if (a.length != b.length) return false;
+    for (var i = 0; i < a.length; i++) {
+      if (a[i].id != b[i].id || a[i].userProgress != b[i].userProgress) {
+        return false;
+      }
+    }
+    return true;
   }
 
   @override
@@ -90,7 +135,7 @@ class _MediaSectionsScreenState extends State<MediaSectionsScreen>
 
   Widget _list(BuildContext context) {
     return RefreshIndicator(
-      onRefresh: _load,
+      onRefresh: _refresh,
       child: Obx(() {
         final showError = _error.value != null && _sections.isEmpty;
         final showSkeleton = _sections.isEmpty && !showError;
@@ -104,10 +149,10 @@ class _MediaSectionsScreenState extends State<MediaSectionsScreen>
               SliverToBoxAdapter(child: widget.header!),
             const SliverToBoxAdapter(child: SizedBox(height: 8)),
             if (showSkeleton)
-              for (var i = 0; i < 3; i++)
+              for (var i = 0; i < 4; i++)
                 SliverToBoxAdapter(
                   key: ValueKey('skeleton-$i'),
-                  child: MediaSection(data: MediaSectionData.skeleton(0)),
+                  child: const MediaSection(data: MediaSectionData.loading()),
                 )
             else if (showError)
               SliverToBoxAdapter(child: _errorBox(_error.value!))
@@ -115,25 +160,29 @@ class _MediaSectionsScreenState extends State<MediaSectionsScreen>
               for (final (i, section) in entries.indexed)
                 SliverToBoxAdapter(
                   key: ValueKey('section-${section.key}'),
-                  child:
-                      MediaSection(
-                        key: ValueKey('section-${section.key}'),
-                        data: MediaSectionData(
-                          type: 0,
-                          title: section.key,
-                          mediaList: section.value,
-                          onMediaTap: (ctx, idx, media) =>
-                              widget.onMediaTap?.call(media),
-                        ),
-                      ).animateFadeUp(
-                        begin: 0.15,
-                        delay: Duration(milliseconds: 40 * i),
-                      ),
+                  child: _section(i, section.key, section.value),
                 ),
             SliverToBoxAdapter(child: SizedBox(height: 120.bottomBar())),
           ],
         );
       }),
+    );
+  }
+
+  Widget _section(int index, String title, List<Media> media) {
+    final section = MediaSection(
+      key: ValueKey('section-$title'),
+      data: MediaSectionData(
+        type: 0,
+        title: title,
+        mediaList: media,
+        onMediaTap: (ctx, idx, m) => widget.onMediaTap?.call(m),
+      ),
+    );
+    if (!_seen.add(title)) return section;
+    return section.animateFadeUp(
+      begin: 0.15,
+      delay: Duration(milliseconds: 40 * index),
     );
   }
 
@@ -153,7 +202,7 @@ class _MediaSectionsScreenState extends State<MediaSectionsScreen>
           style: context.textTheme.bodyMedium,
         ),
         const SizedBox(height: 12),
-        FilledButton.tonal(onPressed: _load, child: const Text('Retry')),
+        FilledButton.tonal(onPressed: _refresh, child: const Text('Retry')),
       ],
     ),
   );
