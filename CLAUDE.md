@@ -372,7 +372,11 @@ defines `handleError(e, st, {softCrash})` (called from the zone handler in `main
   **Overlay-based** (not GetX/Scaffold snackbars) so it renders above bottom sheets; single
   `_snackOverlay` entry, auto-dismiss after 4 s.
 - `Utils/Extensions/` — `ContextExtensions` (`isPhone` = shortestSide < 700, `textTheme`,
-  `colorScheme`, …), `IntExtensions`, `NumExtensions` (`580.ms`), `StringExtensions`.
+  `colorScheme`, …), `IntExtensions`, `NumExtensions` (`580.ms`), `StringExtensions`,
+  `Responsive.dart` (`sizer` — `Sizer` wraps `GetMaterialApp` in `main.dart`; `screenType`
+  mobile `<600` / tablet `<1100` / desktop, `isMobile/isTablet/isDesktop`,
+  `responsive<T>(mobile:, tablet:, desktop:)` — `MediaSection` sizes its poster this way, no
+  more `cardSize` factor).
 - `Utils/Function.dart` — `openLinkInBrowser`, `shareLink`, `shareFile`, `loadEnv`, Kotlin-std
   `let`/`also` extensions.
 
