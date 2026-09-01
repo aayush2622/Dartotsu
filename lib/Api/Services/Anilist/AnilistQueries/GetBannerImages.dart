@@ -20,7 +20,7 @@ extension on AnilistQueries {
             1;
     if (cached != null && cached.isNotEmpty && !stale) return cached;
 
-    final data = await executeQuery(_queryBanner(id, type));
+    final data = await client.query(_queryBanner(id, type));
     final lists =
         ((data['MediaListCollection'] as Map<String, dynamic>?)?['lists']
             as List?) ??

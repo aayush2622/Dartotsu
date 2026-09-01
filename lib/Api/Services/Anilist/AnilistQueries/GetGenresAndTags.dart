@@ -12,13 +12,13 @@ extension on AnilistQueries {
         loadCustomData<List<String>>(_nonAdultTagsKey) ?? const [];
 
     if (genres.isEmpty) {
-      final data = await executeQuery('{ GenreCollection }', useToken: false);
+      final data = await client.query('{ GenreCollection }', useToken: false);
       genres = (data['GenreCollection'] as List?)?.cast<String>() ?? const [];
       if (genres.isNotEmpty) saveCustomData(_genresKey, genres.toList());
     }
 
     if (adultTags.isEmpty || nonAdultTags.isEmpty) {
-      final data = await executeQuery(
+      final data = await client.query(
         '{ MediaTagCollection { name isAdult } }',
       );
       final tags =

@@ -34,7 +34,7 @@ mutation (
       if (completed?.year != null) 'completedAt': _fuzzy(completed!),
     };
 
-    await executeQuery(query, variables: variables, showErrors: true);
+    await client.query(query, variables: variables, showErrors: true);
   }
 }
 

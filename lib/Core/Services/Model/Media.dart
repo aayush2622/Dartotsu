@@ -84,8 +84,14 @@ class Media {
 
   String shareLink;
 
+  /// Lazily created — a rail of 300 media should not allocate 300 settings
+  /// objects, and this keeps [Media] cheap to copy across an isolate.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  MediaSettings settings;
+  MediaSettings? _settings;
+
+  MediaSettings get settings => _settings ??= MediaSettings();
+
+  set settings(MediaSettings value) => _settings = value;
 
   bool cameFromContinue;
 
@@ -138,11 +144,10 @@ class Media {
     this.relations,
     this.recommendations,
     this.users,
-    MediaSettings? settings,
     required this.shareLink,
     this.cameFromContinue = false,
     this.sourceData,
-  }) : settings = settings ?? MediaSettings();
+  });
 
   factory Media.fromJson(Map<String, dynamic> json) => _$MediaFromJson(json);
 

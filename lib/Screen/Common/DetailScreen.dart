@@ -45,7 +45,7 @@ class _DetailScreenState extends State<DetailScreen> {
     _loading.value = true;
     try {
       final full = await widget.queries.mediaDetails(_media.value);
-      if (full != null) _media.refresh();
+      if (full != null) _media.value = full;
     } catch (_) {
       // keep the partial media we were opened with
     } finally {

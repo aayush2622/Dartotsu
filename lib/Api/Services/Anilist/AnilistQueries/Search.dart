@@ -45,7 +45,7 @@ extension on AnilistQueries {
       if (r.excludedTags?.isNotEmpty == true) 'excludedTags': r.excludedTags,
     };
 
-    final data = await executeQuery(
+    final data = await client.query(
       _querySearchMedia(r.perPage ?? 30),
       variables: variables,
     );
@@ -69,7 +69,7 @@ extension on AnilistQueries {
     String field,
     String fragment,
   ) async {
-    final data = await executeQuery('''
+    final data = await client.query('''
 {
   Page(page: ${r.page ?? 1}, perPage: ${r.perPage ?? 30}) {
     pageInfo { currentPage hasNextPage }
