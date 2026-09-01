@@ -96,9 +96,16 @@ Then `runApp(MyApp())`. `MyApp` is a `StatefulWidget` wrapping `DynamicColorBuil
 (feeds the dynamic `ColorScheme`s into `ThemeController.setDynamicSchemes`) → `Obx` →
 `GetMaterialApp` bound to `_theme.light` / `_theme.dark` / `_theme.themeMode` and
 `_locale.locale` (no app-remount key — locale changes via `Get.updateLocale`). It also
-installs a `Listener` for the mouse back-button and a `Focus` node feeding `appShortcuts`, and
-wraps with `Dpad.wrap` for TV/remote navigation. `home:` is gated on
-`PrefName.hasCompletedOnboarding`.
+installs a `Listener` for the mouse back-button and a non-focusable `Focus` node feeding
+`appShortcuts`, and wraps with `Dpad.wrap` (D-pad/keyboard TV nav: global
+`DpadTraversalPolicy`, `onBack`, a `DpadThemeData` with scale+glow+border focus effects).
+`home:` is gated on `PrefName.hasCompletedOnboarding`.
+
+**TV / keyboard navigation** — `Dpad.wrap` handles arrow-key directional focus + `onBack`
+app-wide. Standard Material widgets participate automatically; custom tap targets are wrapped
+in `DpadFocusable` (`onSelect`, auto-scroll-to-focus, focus effects): `MediaSection` cards,
+`Navbar` items, `HomeHeader` avatar, `SearchScreen` result cards, `DetailScreen` synopsis,
+onboarding buttons. `BuildDropdownMenu` uses `requestFocusOnTap: true` for keyboard open.
 
 ### State management — pure GetX (no `provider`)
 
@@ -181,9 +188,14 @@ Per-service code goes under **`lib/Api/Services/<Service>/`**.
 
 **`lib/Api/Services/Anilist/`**:
 
-- `AnilistClient` — typed GraphQL POST to `graphql.anilist.co` via `NetworkManager`;
-  rate-limit aware; takes a `String Function()` token provider. Exposes the
-  `ExecuteAnilistQuery` typedef (`client.query` torn off and injected into the query files).
+- `AnilistClient` — GraphQL POST to `graphql.anilist.co` via `NetworkManager`; rate-limit
+  aware; `String Function()` token provider. Injected into `AnilistQueries`/`AnilistMutations`.
+  `query()` returns the decoded `data` node (light queries + mutations); `queryRaw()` returns
+  the response **string** with no main-thread decode — the big list queries
+  (`initHomePage` / `getAnimeList` / `getMangaList` / `getMediaLists` / `getCalendarData` /
+  `mediaDetails`) run `compute(_parseX, rawBody)` so `jsonDecode` + map→`Media` + sort are all
+  off the UI thread. `anilistData(body)` is the top-level envelope decoder used inside the
+  isolate. `Media.settings` is a lazy getter so `Media` is cheap to send across the boundary.
 - `AnilistAuth implements ServiceAuth` (GetxController, `lazyPut`) — `token` =
   `PrefName.anilistToken.rx`, `user` = `Rxn<ServiceUser>` holding an `AnilistUser`
   (cached to prefs). `login()` runs `FlutterWebAuth2` implicit grant (`client_id 14959`,

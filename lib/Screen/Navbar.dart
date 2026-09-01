@@ -1,3 +1,4 @@
+import 'package:dpad/dpad.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -29,11 +30,8 @@ class FloatingBottomNavBar extends StatefulWidget {
 class _FloatingBottomNavBarState extends State<FloatingBottomNavBar> {
   MediaServiceController get _services => find();
 
-  /// desktop hover
+  /// desktop hover / d-pad focus mirror
   final hoveredIndex = (-1).obs;
-
-  /// mobile press
-  final pressedIndex = (-1).obs;
 
   List<NavItem> get _items {
     final service = _services.currentService.value;
@@ -180,9 +178,6 @@ class _FloatingBottomNavBarState extends State<FloatingBottomNavBar> {
                   return Expanded(
                     child: Obx(() {
                       final selected = widget.selectedIndex == item.index;
-
-                      final pressed = pressedIndex.value == item.index;
-
                       final hovered = hoveredIndex.value == item.index;
 
                       return MouseRegion(
@@ -195,18 +190,11 @@ class _FloatingBottomNavBarState extends State<FloatingBottomNavBar> {
                             hoveredIndex.value = -1;
                           }
                         },
-                        child: GestureDetector(
-                          behavior: HitTestBehavior.translucent,
-                          onTapDown: (_) => pressedIndex.value = item.index,
-                          onTapCancel: () => pressedIndex.value = -1,
-                          onTapUp: (_) => pressedIndex.value = -1,
-                          onTap: () => widget.onTabSelected(item.index),
-                          child: _buildItem(
-                            item,
-                            context,
-                            selected: selected,
-                            hovered: pressed || hovered,
-                          ),
+                        child: _buildItem(
+                          item,
+                          context,
+                          selected: selected,
+                          hovered: hovered,
                         ),
                       );
                     }),
@@ -225,11 +213,14 @@ class _FloatingBottomNavBarState extends State<FloatingBottomNavBar> {
     required VoidCallback onTap,
     required Widget Function() iconBuilder,
   }) {
-    return MouseRegion(
-      cursor: SystemMouseCursors.click,
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: onTap,
+    return DpadFocusable(
+      onSelect: onTap,
+      effects: const [
+        DpadScaleEffect(scale: 1.12),
+        DpadGlowEffect(borderRadius: BorderRadius.all(Radius.circular(28))),
+      ],
+      child: MouseRegion(
+        cursor: SystemMouseCursors.click,
         child: SizedBox(
           width: 56,
           height: 56,
@@ -247,9 +238,12 @@ class _FloatingBottomNavBarState extends State<FloatingBottomNavBar> {
   }) {
     final theme = Theme.of(context).colorScheme;
 
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      onTap: () => widget.onTabSelected(item.index),
+    return DpadFocusable(
+      onSelect: () => widget.onTabSelected(item.index),
+      effects: const [
+        DpadScaleEffect(scale: 1.12),
+        DpadGlowEffect(borderRadius: BorderRadius.all(Radius.circular(24))),
+      ],
       child: SizedBox(
         width: 64,
         height: 64,
