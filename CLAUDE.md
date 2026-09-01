@@ -358,18 +358,25 @@ defines `handleError(e, st, {softCrash})` (called from the zone handler in `main
   radius from `Dimens`, optional consistent header. `SectionHeader` = the standalone title
   (used by rails where the card *is* the row). **Use this, not a bare `Container`/`ThemedContainer`,
   for anything with text behind it.**
-- **`Widgets/Sections/RailCard.dart`** — **the** item for every horizontal rail: media,
+- **`Widgets/Sections/PosterCard.dart`** — **the** item for every horizontal shelf: media,
   character, staff, search-grid results. Renders whatever the current **`CardStyle`**
-  (`Model/CardStyle.dart`) says: title `overlay`(on the poster, over a scrim) / `below` /
-  `hidden`, `widthScale` / `aspect` / `radius`, progress as a green `pill` / thin `bar` / off,
-  score-badge corner, info line, airing dot. `score`/`airing` are plain params. Style comes
-  from `find<CardStyleController>().current` (DI, caches the JSON pref so it isn't re-decoded
-  per build) unless a `style:` override is passed. Character/staff pin to `CardStyle.people`.
-  Presets Poster (default) / Cozy / Compact / Detailed + Custom, edited in **Settings ›
-  Appearance › Card style** (`Screen/Settings/CardStyleScreen.dart` — live preview + chips +
-  sliders, applies live, feeds rebuild via `RefreshController.all()` on exit).
-  `CardStyleMetrics` (`Utils/Extensions/`) derives `itemWidth`/`itemHeight` from
-  `Dimens.railItemW`; `MediaSection` / `PeopleRail` / search grid size their rails off it.
+  (`Model/CardStyle.dart`, Flutter-free) says: `CardMode` `normal` (bare poster, loose title
+  below) / `onCard` (everything overlaid over a scrim) / `inCard` (poster wrapped in a rounded
+  card that extends below it for the title); `CardSize` `small`/`medium`/`large`/`custom`
+  (+ `customScale`); `compact` (cover + title only — hides all overlays); `aspect`, `radius`,
+  `titleLines`; progress green `pill` / thin `bar` / off; score-badge corner; info line;
+  airing dot. `score`/`airing` are plain params. Style comes from
+  `find<CardStyleController>().current` (DI, caches the JSON pref) unless a `style:` override
+  is passed. Character/staff pin to `CardStyle.people`. Presets Poster (default) / Card /
+  Cozy / Compact + Custom, edited in **Settings › Appearance › Card style**
+  (`Screen/Settings/CardStyleScreen.dart` — live preview, applies live, feeds rebuild via
+  `RefreshController.all()` on exit). `CardStyleMetrics` (`Utils/Extensions/`) derives
+  `itemWidth`/`itemHeight` from `Dimens.cardW`; `MediaSection` / `PeopleShelf` / search grid
+  size off it.
+- **`Widgets/Components/AppControls.dart`** — the shared form controls, **use these not the
+  bare Material widgets**: `AppSegmented<T>` (+ `AppSegment<T>`), `LabeledSlider`,
+  `AppChoiceChips<T>`, `LabeledField` (label above a child). Used by the card-style screen,
+  search Anime/Manga toggle, settings theme-mode, list editor.
 - **`Widgets/Sections/PeopleRail.dart`** — `PeopleRail({title, people: List<RailPerson>})` =
   a `SectionCard` holding a horizontal list of `RailCard`s. Characters & staff on the detail
   page.
