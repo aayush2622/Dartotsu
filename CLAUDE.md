@@ -150,64 +150,65 @@ context-free access (`getString`, snackbars).
 
 ### `MediaService` abstraction
 
-- **`Core/Services/MediaService.dart`** — `abstract class MediaService { String get id;
-  String get name; String get iconPath; }` (much thinner than `main`'s — no `BaseServiceData`,
-  no `Base*Screen` delegates yet). `id` is the stable persistence key (`'anilist'`,
-  `'extension'`); `name` is display-only. Barrel-exports `Features/NavbarProvider.dart`.
-- **`Core/Services/MediaServiceController.dart`** — GetxController holding `services`
-  (`RxList<MediaService>`) and `currentService` (`Rx<MediaService>`). `onInit`:
-  `services.assignAll([AnilistService(), ExtensionService()])`, restores last choice from
-  `PrefName.service.value` (by `id`). `switchService(id)` persists. `get<T>()` /
-  `getAnyValue<T>(selector)` for cross-service lookups.
-- **`Core/Services/Features/`** — optional capability interfaces a service *may* implement:
-  `NavBarProvider` (custom nav items), `LoginHandler` (`isLoggedIn` / `login()` / `logout()`).
-  Screens do `if (service is LoginHandler) …`.
-- **`Core/Services/ServiceSwitcher.dart`** — `serviceSwitcher(context)` shows the picker
-  bottom sheet (`CustomBottomDialog`).
-- **`Core/Services/Api/Queries.dart` + `Mutations.dart`** — the *planned* abstract surface;
-  **not implemented**. AniList currently uses a concrete `AnilistApi` (see below) instead.
+**A new service is one subclass with zero core edits.** `MediaService`
+(`Core/Services/MediaService.dart`) is an `abstract class` with `id` / `name` / `iconPath` and
+**nullable getters** for every capability — anything left `null` renders as
+`NotImplemented(service, area)`:
 
-Per-service code goes under **`lib/Api/Services/<Service>/`** (note: `Api/Services/`, not
-`main`'s `Api/<Service>/`).
+| Getter | Type | Purpose |
+|---|---|---|
+| `api` | `ServiceApi?` | reads: `homeRails()`, `mediaRails({anime})`, `details(id)`, `search(...)`, `notifications(...)` |
+| `mutations` | `ServiceMutations?` | `saveListEntry(...)` / `deleteListEntry(id)` |
+| `auth` | `ServiceAuth?` | `user` (`Rxn<ServiceUser>`), `isLoggedIn`, `login()` / `loginWithToken(t)` / `logout()` / `refreshUser()` |
+| `homeScreen` / `animeScreen` / `mangaScreen` / `searchScreen` / `detailScreen` / `notificationScreen` / `loginScreen` / `settingsScreen` | `*ScreenView?` | one abstract class per screen area (`Core/Services/ServiceScreens.dart`); `build(context, …)` returns the widget |
 
-### AniList service (the only wired backend)
+- **`Core/Services/MediaServiceController.dart`** — `RxList<MediaService> services`
+  (`[AnilistService(), ExtensionService()]`), `Rx<MediaService> currentService` restored from
+  `PrefName.service.value` by `id`.
+- **`Core/Services/ServiceSwitcher.dart`** — `serviceSwitcher(context)` picker bottom sheet.
+- `Core/Services/Api/Queries.dart` / `Mutations.dart` — old stubs, superseded by
+  `ServiceApi` / `ServiceMutations`; not used.
+
+Per-service code goes under **`lib/Api/Services/<Service>/`**.
+
+### AniList service (the one wired backend)
 
 **`lib/Api/Services/Anilist/`**:
 
 - `AnilistClient` — typed GraphQL POST to `graphql.anilist.co` via `NetworkManager`;
   rate-limit aware; takes a `String Function()` token provider.
-- `AnilistAuth` (GetxController, `lazyPut`) — `token` = `PrefName.anilistToken.rx`,
-  `user` = `Rxn<AnilistUser>` (cached to prefs). `login()` runs `FlutterWebAuth2` implicit
-  grant (`client_id 14959`, scheme `dantotsu`); `applyToken(t)` for paste-token;
-  `refreshUser()` fetches `Viewer`.
-- `AnilistApi(client)` — `home({anime, userId})` (user status lists + trending/seasonal/
-  popular/top rails), `dashboard({userId})`, `details(id)`, `search({anime, term, page})`,
-  `saveListEntry(...)` / `deleteListEntry(id)`.
-- `AnilistMedia.dart` — `anilistMediaFragment` / `anilistDetailQuery` GraphQL fragments +
+- `AnilistAuth implements ServiceAuth` (GetxController, `lazyPut`) — `token` =
+  `PrefName.anilistToken.rx`, `user` = `Rxn<ServiceUser>` holding an `AnilistUser`
+  (cached to prefs). `login()` runs `FlutterWebAuth2` implicit grant (`client_id 14959`,
+  scheme `dantotsu`); owns `AnilistApi api`.
+- `AnilistApi implements ServiceApi, ServiceMutations` — GraphQL for every read/write; folds
+  the viewer's status lists above the discovery rails when a userId is present.
+- `AnilistUser implements ServiceUser`; `AnilistMedia.dart` = GraphQL fragments +
   `mapAnilistMedia` / `mapAnilistDetail` → the domain `Media`.
-- `AnilistService implements LoginHandler` (delegates to `find<AnilistAuth>()`).
+- `Screens/AnilistScreens.dart` — thin `*ScreenView` classes wiring the shared widgets to
+  `AnilistAuth.api`.
+- `AnilistService` — the getters just return `find<AnilistAuth>()` and the view classes.
 
 ### Feature screens
 
-Entry flow: `OnboardingScreen` (3 pages: welcome / theme / sync) → `LoginScreen`
-(service-aware; "continue as guest" or AniList OAuth/token) → sets
-`PrefName.hasCompletedOnboarding` → `MainScreen`.
+Entry flow: `OnboardingScreen` (welcome / theme / sync) → `LoginScreen` (drives
+`service.auth`; "continue as guest" or OAuth/token) → sets `PrefName.hasCompletedOnboarding`
+→ `MainScreen`.
 
-- **`Screen/MainScreen.dart`** — 3-tab shell (`AnimeTab` / `HomeTab` / `MangaTab` in
-  `Screen/Home/Tabs.dart`), lazy-mounted in an `IndexedStack`, `FloatingBottomNavBar`.
-- **`Screen/Home/MediaRailsScreen.dart`** — generic pull-to-refresh list of `MediaSection`
-  rails from a `RailLoader`; skeleton / error states; reloads on AniList user change.
-- **`Screen/Home/HomeHeader.dart`** — greeting + avatar + search icon + account bottom sheet.
-- **`Screen/Detail/DetailScreen.dart`** — collapsing banner, header, genres, expandable
-  synopsis, character rail, relation / recommendation `MediaSection`s; FAB → `ListEditorSheet`
-  (status / progress / score, save + remove) when signed in.
-- **`Screen/Search/SearchScreen.dart`** — debounced AniList search, anime/manga toggle,
-  infinite-scroll grid.
-- **`Screen/Settings/SettingsScreen.dart`** — appearance (theme / mode / OLED / glass /
-  Material You / accent), account, update channel, about.
+- **`Screen/MainScreen.dart`** — 3-tab shell; each tab is
+  `service.<home|anime|manga>Screen?.build(context) ?? NotImplemented(...)`, lazy-mounted in
+  an `IndexedStack` keyed by `serviceId-tab`, `FloatingBottomNavBar`.
+- **`Screen/Common/`** — the service-agnostic widgets every `ServiceApi` reuses:
+  `MediaRailsScreen` (pull-to-refresh `MediaSection` rails from a `RailLoader` + optional
+  `reloadOn` stream), `DetailScreen` (collapsing banner, genres, expandable synopsis,
+  character rail, relation/recommendation rails; FAB → `ListEditorSheet`), `SearchScreen`
+  (debounced, anime/manga toggle, infinite-scroll grid), `NotificationsScreen`, `HomeHeader`
+  (greeting + avatar + bell + search + account sheet).
+- **`Screen/Settings/SettingsScreen.dart`** — appearance / account / update channel / about.
 
-**Not built yet:** watch/read (extension sources, player, reader), MAL / Simkl services,
-calendar, notifications feed, character/staff/profile pages, offline, `main`'s `Detail/Tabs`.
+**Not built yet:** watch/read (extension sources, player, reader), MAL / Simkl services
+(the abstraction is ready — they're just unwritten subclasses), calendar, character/staff/
+profile pages, offline.
 
 ### Models
 
