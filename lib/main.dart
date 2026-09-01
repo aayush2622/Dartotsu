@@ -128,7 +128,8 @@ class _MyAppState extends State<MyApp> {
   final _focusNode = FocusNode();
   final ThemeController _theme = find();
   final LocaleController _locale = find();
-  late final _appBuilder = Dpad.wrap(
+
+  late final _dpadWrap = Dpad.wrap(
     onBack: _handleBack,
     theme: const DpadThemeData(
       effects: [
@@ -138,6 +139,21 @@ class _MyAppState extends State<MyApp> {
       ],
     ),
   );
+
+  /// `MaterialApp.builder`: feed `sizer`'s [Device] from `MediaQuery` (no
+  /// `LayoutBuilder` above the app — that breaks semantics on Flutter 3.29+),
+  /// then the d-pad wrapper.
+  Widget _appBuilder(BuildContext context, Widget? child) {
+    final mq = MediaQuery.of(context);
+    Device.setScreenSize(
+      context,
+      BoxConstraints.tightFor(width: mq.size.width, height: mq.size.height),
+      mq.orientation,
+      600,
+      1100,
+    );
+    return _dpadWrap(context, child);
+  }
 
   @override
   void dispose() {
@@ -172,31 +188,27 @@ class _MyAppState extends State<MyApp> {
         child: DynamicColorBuilder(
           builder: (lightDynamic, darkDynamic) {
             _theme.setDynamicSchemes(lightDynamic, darkDynamic);
-            return Sizer(
-              maxMobileWidth: 600,
-              maxTabletWidth: 1100,
-              builder: (context, orientation, screenType) => Obx(
-                () => GetMaterialApp(
-                  title: 'Dartotsu',
-                  debugShowCheckedModeBanner: false,
-                  enableLog: true,
-                  builder: _appBuilder,
-                  localizationsDelegates: const [
-                    AppLocalizations.delegate,
-                    GlobalMaterialLocalizations.delegate,
-                    GlobalWidgetsLocalizations.delegate,
-                    GlobalCupertinoLocalizations.delegate,
-                  ],
-                  supportedLocales: AppLocalizations.supportedLocales,
-                  locale: _locale.locale,
-                  navigatorObservers: [routeObserver],
-                  themeMode: _theme.themeMode,
-                  theme: _theme.light,
-                  darkTheme: _theme.dark,
-                  home: PrefName.hasCompletedOnboarding.value
-                      ? const MainScreen()
-                      : const OnboardingScreen(),
-                ),
+            return Obx(
+              () => GetMaterialApp(
+                title: 'Dartotsu',
+                debugShowCheckedModeBanner: false,
+                enableLog: true,
+                builder: _appBuilder,
+                localizationsDelegates: const [
+                  AppLocalizations.delegate,
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate,
+                ],
+                supportedLocales: AppLocalizations.supportedLocales,
+                locale: _locale.locale,
+                navigatorObservers: [routeObserver],
+                themeMode: _theme.themeMode,
+                theme: _theme.light,
+                darkTheme: _theme.dark,
+                home: PrefName.hasCompletedOnboarding.value
+                    ? const MainScreen()
+                    : const OnboardingScreen(),
               ),
             );
           },
