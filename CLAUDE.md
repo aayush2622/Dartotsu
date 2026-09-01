@@ -352,17 +352,31 @@ defines `handleError(e, st, {softCrash})` (called from the zone handler in `main
 
 ### UI building blocks (`lib/Widgets/`, `lib/Utils/`)
 
+- **`Widgets/Components/SectionCard.dart`** — **the** wrapper behind every block of content
+  (synopsis, detail tables, settings rows, rails, empty states). `SectionCard({title?,
+  trailing?, child, padding?, margin?})` — glass/M3 surface via `ThemedContainer`, padding +
+  radius from `Dimens`, optional consistent header. `SectionHeader` = the standalone title
+  (used by rails where the card *is* the row). **Use this, not a bare `Container`/`ThemedContainer`,
+  for anything with text behind it.**
+- **`Widgets/Sections/RailCard.dart`** — **the** item for every horizontal rail: media,
+  character, staff, search-grid results. Poster/portrait (fixed `Dimens.railItemW` ×
+  `railImageH`) + 2-line title + optional 1-line subtitle + optional `badge` (`RailScoreBadge`),
+  `cornerMark` (`RailAiringDot`), `progress` bar. One hover/d-pad scale. Identical dimensions
+  everywhere by construction.
+- **`Widgets/Sections/PeopleRail.dart`** — `PeopleRail({title, people: List<RailPerson>})` =
+  a `SectionCard` holding a horizontal list of `RailCard`s. Characters & staff on the detail
+  page.
 - `Widgets/Components/` — `ThemedContainer` / `ThemedWidget` / `themeDropdown`
-  (`ThemedContainer.dart`), `BaseScreen` + `GlassBackground`, `CustomBottomDialog` +
-  `showCustomBottomDialog`, `AlertDialogBuilder`, `BuildDropdownMenu`, `CachedNetworkImage`
+  (`ThemedContainer.dart`) — low-level glass/M3 surface, prefer `SectionCard` over it,
+  `BaseScreen` + `GlassBackground`, `CustomBottomDialog` + `showCustomBottomDialog`,
+  `AlertDialogBuilder`, `BuildDropdownMenu` (owns its trailing `FocusNode`), `CachedNetworkImage`
   wrapper (`cachedNetworkImage(...)`), `loadSvg(...)`, `ScrollConfig` / `CustomScrollConfig`
-  (bouncing physics, no scrollbars, mouse+trackpad drag), `CustomElevatedButton`, `GenreItem`.
+  (bouncing physics, no scrollbars, mouse+trackpad drag), `CustomElevatedButton` (→ `FilledButton`),
+  `GenreItem`, `NotImplemented`.
 - `Widgets/Sections/Media/` — `MediaSection` + `MediaSectionState` (horizontal media rail with
   skeleton loading — `MediaSectionData.loading()` → `Skeletonizer` — and overscroll-to-load-more
-  + haptics). The main reusable content widget. Cards keyed by `media.id` (+
-  `findChildIndexCallback`) so a cache patch touches only what changed. The poster card shows
-  the full detail set like `main`: score badge, `RELEASING` dot, `progress | next/total` info
-  line, relation prefix on the title.
+  + haptics). Wraps `RailCard` items in its `ThemedContainer` + `SuperSliverList`. Cards keyed
+  by `media.id` (+ `findChildIndexCallback`) so a cache patch touches only what changed.
 - `Utils/Animation/WidgetAnimations.dart` — `extension WidgetAnimations on Widget` built on
   `flutter_animate`: `animateFadeUp`, `animateDropIn`, `animatePageTransition`, `animateNav*`,
   etc. Global `kAnimationSpeed` (`<= 0` disables). Recent commits are heavy on animation polish.
@@ -373,10 +387,12 @@ defines `handleError(e, st, {softCrash})` (called from the zone handler in `main
   `_snackOverlay` entry, auto-dismiss after 4 s.
 - `Utils/Extensions/` — `ContextExtensions` (`isPhone` = shortestSide < 700, `textTheme`,
   `colorScheme`, …), `IntExtensions`, `NumExtensions` (`580.ms`), `StringExtensions`,
-  `Responsive.dart` (`sizer` — `Sizer` wraps `GetMaterialApp` in `main.dart`; `screenType`
-  mobile `<600` / tablet `<1100` / desktop, `isMobile/isTablet/isDesktop`,
-  `responsive<T>(mobile:, tablet:, desktop:)` — `MediaSection` sizes its poster this way, no
-  more `cardSize` factor).
+  `Responsive.dart` — `screenType` (mobile `<600` / tablet `<1100` / desktop, fed from
+  `MediaQuery` by the app builder in `main.dart`), `isMobile/isTablet/isDesktop`,
+  `responsive<T>(mobile:, tablet:, desktop:)`, and **`Dimens`** — the single spacing / radius /
+  rail-size scale (`gapXs…gapXl`, `pagePad`, `cardPad`, `radius*`, `railItemW/railImageH/
+  railItemH/railGap`, `detailPoster*`), all layout-class aware. **Use `Dimens.*` for padding /
+  gaps / card sizes, not raw pixel constants.**
 - `Utils/Function.dart` — `openLinkInBrowser`, `shareLink`, `shareFile`, `loadEnv`, Kotlin-std
   `let`/`also` extensions.
 
