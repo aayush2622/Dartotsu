@@ -8,9 +8,10 @@ import 'package:super_sliver_list/super_sliver_list.dart';
 
 import '../../../Core/Services/Model/Media.dart';
 import '../../../Utils/Extensions/Responsive.dart';
-import '../../Components/ThemedContainer.dart';
-import '../../Components/CachedNetworkImage.dart';
 import '../../Components/ScrollConfig.dart';
+import '../../Components/SectionCard.dart';
+import '../../Components/ThemedContainer.dart';
+import '../RailCard.dart';
 import 'MediaSectionState.dart';
 
 class MediaSectionData {
@@ -92,12 +93,10 @@ class _MediaSectionState extends State<MediaSection> {
 
   ThemeData get theme => Theme.of(context);
 
-  // Poster dimensions per layout class — a native-feeling size on each
-  // platform rather than a scaled logical constant.
-  double get _cardW => responsive(mobile: 112, tablet: 132, desktop: 124);
-  double get _cardH => _cardW * 1.48;
-  double get _railH => _cardH + 112;
-  double get _gap => responsive(mobile: 8, tablet: 12, desktop: 10);
+  double get _cardW => Dimens.railItemW;
+  double get _cardH => Dimens.railImageH;
+  double get _railH => Dimens.railItemH;
+  double get _gap => Dimens.railGap;
 
   @override
   void initState() {
@@ -118,17 +117,20 @@ class _MediaSectionState extends State<MediaSection> {
   Widget build(BuildContext context) {
     return RepaintBoundary(
       child: ThemedContainer(
-        margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-        padding: const EdgeInsets.only(),
-        borderRadius: BorderRadius.circular(28.0),
-        border: Border.all(width: 0, color: Colors.transparent),
+        margin: EdgeInsets.symmetric(
+          horizontal: Dimens.gap,
+          vertical: Dimens.gapSm / 2,
+        ),
+        padding: EdgeInsets.zero,
+        borderRadius: Dimens.border,
+        border: const Border.fromBorderSide(BorderSide.none),
         child: Skeletonizer(
           enabled: data.loading,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _buildTitleRow(),
-              const SizedBox(height: 8),
+              SizedBox(height: Dimens.gapSm),
               _buildHorizontalSliverList(),
             ],
           ),
@@ -140,9 +142,9 @@ class _MediaSectionState extends State<MediaSection> {
   Widget _buildTitleRow() {
     final title = data.title;
     if (data.loading) {
-      return const Padding(
-        padding: EdgeInsets.fromLTRB(28, 16, 16, 0),
-        child: Align(
+      return Padding(
+        padding: EdgeInsets.fromLTRB(Dimens.cardPad + 8, Dimens.cardPad, 12, 0),
+        child: const Align(
           alignment: Alignment.centerLeft,
           child: Text(
             'Loading section',
@@ -156,55 +158,36 @@ class _MediaSectionState extends State<MediaSection> {
     final trailing = data.trailingIcon;
 
     return Padding(
-      padding: const EdgeInsets.fromLTRB(24, 16, 12, 0),
-      child: Row(
-        children: [
-          Expanded(
-            child: DpadFocusable(
-              enabled: data.onTitleTap != null || data.onTitleLongPress != null,
-              onSelect: data.onTitleTap ?? data.onTitleLongPress,
-              child: GestureDetector(
-                onLongPress: data.onTitleLongPress,
-                onTap: data.onTitleTap,
-                behavior: HitTestBehavior.translucent,
-                child: Text(
-                  title,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: theme.textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.w700,
+      padding: EdgeInsets.fromLTRB(Dimens.cardPad + 8, Dimens.cardPad, 8, 0),
+      child: SectionHeader(
+        title: title,
+        onTap: data.onTitleTap,
+        trailing: trailing == null
+            ? null
+            : DpadFocusable(
+                enabled:
+                    data.onTrailingIconTap != null ||
+                    data.onTrailingIconLongPress != null,
+                onSelect:
+                    data.onTrailingIconTap ?? data.onTrailingIconLongPress,
+                child: IconButton(
+                  icon: Icon(
+                    trailing,
+                    size: 24,
+                    color: theme.colorScheme.onSurface,
                   ),
+                  onPressed: data.onTrailingIconTap,
+                  onLongPress: data.onTrailingIconLongPress,
                 ),
               ),
-            ),
-          ),
-          if (trailing != null)
-            DpadFocusable(
-              enabled:
-                  data.onTrailingIconTap != null ||
-                  data.onTrailingIconLongPress != null,
-              onSelect: data.onTrailingIconTap ?? data.onTrailingIconLongPress,
-              child: IconButton(
-                icon: Icon(
-                  trailing,
-                  size: 24,
-                  color: theme.colorScheme.onSurface,
-                ),
-                onPressed: data.onTrailingIconTap,
-                onLongPress: data.onTrailingIconLongPress,
-              ),
-            ),
-        ],
       ),
     );
   }
 
   EdgeInsetsDirectional _horizontalPadding(int index, int length) =>
       EdgeInsetsDirectional.only(
-        start: index == 0 ? 24 : _gap,
+        start: index == 0 ? Dimens.cardPad + 8 : _gap,
         end: _gap,
-        top: 8.0,
-        bottom: 6,
       );
 
   Widget _stretchBubble(double progress) {
@@ -237,10 +220,10 @@ class _MediaSectionState extends State<MediaSection> {
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
           physics: const NeverScrollableScrollPhysics(),
-          padding: const EdgeInsets.only(left: 24),
+          padding: EdgeInsets.only(left: Dimens.cardPad + 8),
           itemCount: 8,
           itemBuilder: (context, index) => Padding(
-            padding: EdgeInsets.only(right: _gap, top: 8),
+            padding: EdgeInsets.only(right: _gap),
             child: _mediaItem(index, Media.skeleton()),
           ),
         ),
@@ -273,19 +256,7 @@ class _MediaSectionState extends State<MediaSection> {
                         alignment: Alignment.topCenter,
                         child: Padding(
                           padding: _horizontalPadding(index, list.length),
-                          child: DpadFocusable(
-                            onSelect: () =>
-                                data.onMediaTap?.call(context, index, media),
-                            child: _mediaItem(index, media),
-                            builder: (context, state, child) {
-                              return AnimatedScale(
-                                scale: state.focused ? 1.07 : 1.0,
-                                duration: const Duration(milliseconds: 200),
-                                curve: Curves.easeOut,
-                                child: child,
-                              );
-                            },
-                          ),
+                          child: _mediaItem(index, media),
                         ),
                       ),
                     );
@@ -316,7 +287,11 @@ class _MediaSectionState extends State<MediaSection> {
       return Align(
         alignment: Alignment.topCenter,
         child: Padding(
-          padding: const EdgeInsets.only(left: 6.5, right: 24, top: 8),
+          padding: EdgeInsets.only(
+            left: 6.5,
+            right: Dimens.cardPad + 8,
+            top: Dimens.gapSm,
+          ),
           child: SizedBox(
             width: _cardW,
             height: _cardH,
@@ -333,7 +308,9 @@ class _MediaSectionState extends State<MediaSection> {
                       : isLoadingMore
                       ? Skeletonizer(
                           child: ClipRRect(
-                            borderRadius: BorderRadius.circular(16),
+                            borderRadius: BorderRadius.circular(
+                              Dimens.radiusSm,
+                            ),
                             child: Container(
                               color: Colors.white12,
                               width: _cardW,
@@ -352,94 +329,32 @@ class _MediaSectionState extends State<MediaSection> {
   }
 
   Widget _mediaItem(int index, Media media) {
-    final scheme = theme.colorScheme;
-    final width = _cardW;
     final detailed = !media.minimal;
-    final progress = detailed ? _progress(media) : null;
-
-    return _HoverScale(
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: () => data.onMediaTap?.call(context, index, media),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              width: width,
-              height: _cardH,
-              child: Card(
-                elevation: 3,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                clipBehavior: Clip.antiAlias,
-                child: Stack(
-                  fit: StackFit.expand,
-                  children: [
-                    cachedNetworkImage(
-                      imageUrl: media.cover ?? '',
-                      fit: BoxFit.cover,
-                      placeholder: (context, url) =>
-                          ColoredBox(color: scheme.surfaceContainerHighest),
-                      errorWidget: (context, url, error) => Icon(
-                        Icons.broken_image_rounded,
-                        color: scheme.error,
-                        size: 32,
-                      ),
-                    ),
-                    if (detailed) ...[
-                      if (media.status == 'RELEASING')
-                        const Positioned(
-                          bottom: 4,
-                          left: 4,
-                          child: _ReleasingDot(),
-                        ),
-                      if (_score(media) case final score?)
-                        Positioned(
-                          right: 0,
-                          bottom: 0,
-                          child: _ScoreBadge(
-                            score: score,
-                            user: (media.userScore ?? 0) > 0,
-                          ),
-                        ),
-                    ],
-                  ],
-                ),
-              ),
-            ),
-            if (progress != null) ...[
-              const SizedBox(height: 5),
-              _ProgressBar(fraction: progress, width: width),
-            ],
-            const SizedBox(height: 8),
-            _buildMediaTitle(media),
-            if (detailed) ...[
-              const SizedBox(height: 2),
-              _infoLine(media, scheme),
-            ],
-          ],
-        ),
-      ),
+    return RailCard(
+      imageUrl: media.cover,
+      title: media.relation != null
+          ? '${media.relation} · ${media.mainName}'
+          : media.mainName,
+      subtitle: detailed ? _infoText(media) : null,
+      progress: detailed ? _progress(media) : null,
+      badge: detailed && _score(media) != null
+          ? RailScoreBadge(
+              score: _score(media)!,
+              highlight: (media.userScore ?? 0) > 0,
+            )
+          : null,
+      cornerMark: detailed && media.status == 'RELEASING'
+          ? const RailAiringDot()
+          : null,
+      onTap: () => data.onMediaTap?.call(context, index, media),
+      onLongPress: data.onMediaLongPress == null
+          ? null
+          : () => data.onMediaLongPress!(context, index, media),
     );
   }
 
-  Widget _buildMediaTitle(Media media) {
-    return SizedBox(
-      width: _cardW,
-      child: Text(
-        media.relation != null
-            ? '${media.relation} · ${media.mainName}'
-            : media.mainName,
-        style: theme.textTheme.bodyLarge,
-        maxLines: 2,
-        overflow: TextOverflow.ellipsis,
-      ),
-    );
-  }
-
-  Widget _infoLine(Media media, ColorScheme scheme) {
-    final left = '${media.userProgress ?? '~'}';
+  static String _infoText(Media media) {
+    final left = media.userProgress?.toString() ?? '~';
     final isAnime = media.anime != null;
     final total = isAnime
         ? media.anime?.totalEpisodes
@@ -448,27 +363,7 @@ class _MediaSectionState extends State<MediaSection> {
     final right = next != null && next > 0
         ? '$next / ${total ?? '~'}'
         : '${total ?? '~'}';
-
-    return SizedBox(
-      width: _cardW,
-      child: Text.rich(
-        TextSpan(
-          children: [
-            TextSpan(
-              text: left,
-              style: TextStyle(color: scheme.secondary),
-            ),
-            const TextSpan(text: '  |  '),
-            TextSpan(text: right),
-          ],
-        ),
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-        style: theme.textTheme.labelMedium?.copyWith(
-          color: scheme.onSurfaceVariant,
-        ),
-      ),
-    );
+    return '$left  |  $right';
   }
 
   static double? _score(Media media) {
@@ -485,116 +380,5 @@ class _MediaSectionState extends State<MediaSection> {
     final total = media.anime?.totalEpisodes ?? media.manga?.totalChapters;
     if (done <= 0 || total == null || total <= 0 || done >= total) return null;
     return done / total;
-  }
-}
-
-class _ProgressBar extends StatelessWidget {
-  final double fraction;
-  final double width;
-  const _ProgressBar({required this.fraction, required this.width});
-
-  @override
-  Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(3),
-      child: SizedBox(
-        width: width,
-        height: 4,
-        child: ColoredBox(
-          color: scheme.surfaceContainerHighest,
-          child: FractionallySizedBox(
-            alignment: Alignment.centerLeft,
-            widthFactor: fraction.clamp(0.0, 1.0),
-            child: ColoredBox(color: scheme.primary),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _ScoreBadge extends StatelessWidget {
-  final double score;
-  final bool user;
-
-  const _ScoreBadge({required this.score, required this.user});
-
-  @override
-  Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
-    final bg = user ? scheme.tertiary : scheme.primary;
-    final fg = user ? scheme.onTertiary : scheme.onPrimary;
-
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
-      decoration: BoxDecoration(
-        color: bg,
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(14),
-          bottomRight: Radius.circular(15),
-        ),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            score.toStringAsFixed(1),
-            style: TextStyle(
-              fontFamily: 'Poppins',
-              color: fg,
-              fontWeight: FontWeight.w800,
-              fontSize: 12,
-            ),
-          ),
-          Icon(Icons.star_rounded, color: fg, size: 13),
-        ],
-      ),
-    );
-  }
-}
-
-class _ReleasingDot extends StatelessWidget {
-  const _ReleasingDot();
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 14,
-      height: 14,
-      decoration: BoxDecoration(
-        color: const Color(0xFF6BF170),
-        shape: BoxShape.circle,
-        border: Border.all(color: const Color(0xFF208358), width: 2),
-      ),
-    );
-  }
-}
-
-class _HoverScale extends StatefulWidget {
-  final Widget child;
-
-  const _HoverScale({required this.child});
-
-  @override
-  State<_HoverScale> createState() => _HoverScaleState();
-}
-
-class _HoverScaleState extends State<_HoverScale> {
-  bool _hover = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return MouseRegion(
-      cursor: SystemMouseCursors.click,
-      onEnter: (_) => setState(() => _hover = true),
-      onExit: (_) => setState(() => _hover = false),
-      child: AnimatedScale(
-        scale: _hover ? 1.07 : 1.0,
-        duration: const Duration(milliseconds: 200),
-        curve: Curves.easeOut,
-        child: widget.child,
-      ),
-    );
   }
 }
