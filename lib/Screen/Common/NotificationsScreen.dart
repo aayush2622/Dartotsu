@@ -3,27 +3,25 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide ContextExtensionss;
 
-import '../../Api/Services/Anilist/AnilistApi.dart';
-import '../../Api/Services/Anilist/AnilistAuth.dart';
-import '../../Api/Services/Anilist/AnilistNotification.dart';
+import '../../Core/Services/MediaServiceController.dart';
 import '../../Core/Services/Model/Media.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Utils/Functions/NavigateToScreen.dart';
 import '../../Widgets/Components/BaseScreen.dart';
 import '../../Widgets/Components/CachedNetworkImage.dart';
-import '../Detail/DetailScreen.dart';
+import 'DetailScreen.dart';
 
 class NotificationsScreen extends StatefulWidget {
-  const NotificationsScreen({super.key});
+  final ServiceApi api;
+  const NotificationsScreen({super.key, required this.api});
 
   @override
   State<NotificationsScreen> createState() => _NotificationsScreenState();
 }
 
 class _NotificationsScreenState extends BaseScreen<NotificationsScreen> {
-  late final AnilistApi _api = AnilistApi(find<AnilistAuth>().client);
-  final _items = <AnilistNotification>[].obs;
+  final _items = <ServiceNotification>[].obs;
   final _loading = true.obs;
 
   @override
@@ -35,8 +33,9 @@ class _NotificationsScreenState extends BaseScreen<NotificationsScreen> {
   Future<void> _load() async {
     _loading.value = true;
     try {
-      _items.value = await _api.notifications();
-      unawaited(find<AnilistAuth>().refreshUser());
+      _items.value = await widget.api.notifications();
+      final auth = find<MediaServiceController>().currentService.value.auth;
+      if (auth != null) unawaited(auth.refreshUser());
     } catch (_) {
       // leave list empty
     } finally {
@@ -94,10 +93,11 @@ class _NotificationsScreenState extends BaseScreen<NotificationsScreen> {
                         context,
                         DetailScreen(
                           media: Media(
-                            id: '${n.mediaId}',
+                            id: n.mediaId!,
                             cover: n.imageUrl,
                             shareLink: 'https://anilist.co/anime/${n.mediaId}',
                           ),
+                          api: widget.api,
                         ),
                       ),
               );
@@ -108,10 +108,8 @@ class _NotificationsScreenState extends BaseScreen<NotificationsScreen> {
     );
   }
 
-  static String _ago(int epochSeconds) {
-    final d = DateTime.now().difference(
-      DateTime.fromMillisecondsSinceEpoch(epochSeconds * 1000),
-    );
+  static String _ago(DateTime time) {
+    final d = DateTime.now().difference(time);
     if (d.inMinutes < 60) return '${d.inMinutes}m ago';
     if (d.inHours < 24) return '${d.inHours}h ago';
     return '${d.inDays}d ago';

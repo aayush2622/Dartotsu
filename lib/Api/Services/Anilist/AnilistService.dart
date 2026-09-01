@@ -1,8 +1,9 @@
 import '../../../Core/Services/MediaService.dart';
 import '../../../Utils/Functions/GetXFunctions.dart';
 import 'AnilistAuth.dart';
+import 'Screens/AnilistScreens.dart';
 
-class AnilistService extends MediaService implements LoginHandler {
+class AnilistService extends MediaService {
   @override
   String get id => 'anilist';
 
@@ -12,14 +13,32 @@ class AnilistService extends MediaService implements LoginHandler {
   @override
   String get iconPath => 'assets/svg/anilist.svg';
 
-  AnilistAuth get auth => find();
+  AnilistAuth get _auth => find();
 
   @override
-  bool get isLoggedIn => auth.isLoggedIn;
+  ServiceApi get api => _auth.api;
 
   @override
-  Future<void> login() => auth.login();
+  ServiceMutations get mutations => _auth.api;
 
   @override
-  void logout() => auth.logout();
+  ServiceAuth get auth => _auth;
+
+  @override
+  HomeScreenView get homeScreen => AnilistHomeScreen();
+
+  @override
+  AnimeScreenView get animeScreen => AnilistAnimeScreen();
+
+  @override
+  MangaScreenView get mangaScreen => AnilistMangaScreen();
+
+  @override
+  SearchScreenView get searchScreen => AnilistSearchScreen();
+
+  @override
+  DetailScreenView get detailScreen => AnilistDetailScreen();
+
+  @override
+  NotificationScreenView get notificationScreen => AnilistNotificationScreen();
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide ContextExtensionss;
 
-import '../../Api/Services/Anilist/AnilistAuth.dart';
 import '../../Core/Services/MediaServiceController.dart';
 import '../../Core/Services/ServiceSwitcher.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
@@ -10,22 +9,22 @@ import '../../Utils/Functions/NavigateToScreen.dart';
 import '../../Widgets/Components/CachedNetworkImage.dart';
 import '../../Widgets/Components/CustomBottomDialog.dart';
 import '../../Widgets/Components/LoadSvg.dart';
+import '../../Widgets/Components/NotImplemented.dart';
 import '../Login/LoginScreen.dart';
-import '../Notifications/NotificationsScreen.dart';
-import '../Search/SearchScreen.dart';
 import '../Settings/SettingsScreen.dart';
 
 class HomeHeader extends StatelessWidget {
   const HomeHeader({super.key});
 
+  MediaServiceController get _controller => find();
+
   @override
   Widget build(BuildContext context) {
-    final auth = find<AnilistAuth>();
-
     return Padding(
       padding: const EdgeInsets.fromLTRB(24, 20, 20, 8),
       child: Obx(() {
-        final user = auth.user.value;
+        final service = _controller.currentService.value;
+        final user = service.auth?.user.value;
         final greeting = user != null
             ? 'Welcome back, ${user.name}'
             : 'Welcome to Dartotsu';
@@ -51,10 +50,25 @@ class HomeHeader extends StatelessWidget {
                 ],
               ),
             ),
-            if (user != null) _BellButton(unread: user.unreadNotifications),
+            if (user != null && service.notificationScreen != null)
+              _BellButton(
+                unread: user.unreadNotifications,
+                onOpen: () => navigateToPage(
+                  context,
+                  service.notificationScreen!.build(context),
+                ),
+              ),
             IconButton(
               icon: const Icon(Icons.search_rounded),
-              onPressed: () => navigateToPage(context, const SearchScreen()),
+              onPressed: () {
+                final view = service.searchScreen;
+                navigateToPage(
+                  context,
+                  view != null
+                      ? view.build(context, anime: true)
+                      : NotImplemented(service: service.name, area: 'Search'),
+                );
+              },
             ),
             const SizedBox(width: 4),
             _Avatar(url: user?.avatar, onTap: () => _accountSheet(context)),
@@ -72,9 +86,8 @@ class HomeHeader extends StatelessWidget {
   }
 
   void _accountSheet(BuildContext context) {
-    final controller = find<MediaServiceController>();
-    final service = controller.currentService.value;
-    final auth = find<AnilistAuth>();
+    final service = _controller.currentService.value;
+    final auth = service.auth;
 
     showCustomBottomDialog(
       context,
@@ -82,7 +95,7 @@ class HomeHeader extends StatelessWidget {
         title: service.name,
         viewList: [
           Obx(() {
-            final user = auth.user.value;
+            final user = auth?.user.value;
             return ListTile(
               leading: _Avatar(url: user?.avatar, size: 40),
               title: Text(user?.name ?? 'Guest'),
@@ -109,36 +122,43 @@ class HomeHeader extends StatelessWidget {
               navigateToPage(context, const SettingsScreen());
             },
           ),
-          if (service is LoginHandler)
-            Obx(() {
-              final handler = service as LoginHandler;
-              final loggedIn = auth.token.value.isNotEmpty;
-              return ListTile(
-                leading: Icon(
-                  loggedIn ? Icons.logout_rounded : Icons.login_rounded,
-                ),
-                title: Text(loggedIn ? 'Log out' : 'Log in'),
-                onTap: () {
-                  Navigator.pop(context);
-                  if (loggedIn) {
-                    handler.logout();
-                  } else {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(builder: (_) => const LoginScreen()),
-                    );
-                  }
-                },
-              );
-            }),
+          if (auth != null) _AuthTile(auth: auth),
         ],
       ),
     );
   }
 }
 
+class _AuthTile extends StatelessWidget {
+  final ServiceAuth auth;
+  const _AuthTile({required this.auth});
+
+  @override
+  Widget build(BuildContext context) {
+    return Obx(() {
+      final loggedIn = auth.user.value != null || auth.isLoggedIn;
+      return ListTile(
+        leading: Icon(loggedIn ? Icons.logout_rounded : Icons.login_rounded),
+        title: Text(loggedIn ? 'Log out' : 'Log in'),
+        onTap: () {
+          Navigator.pop(context);
+          if (loggedIn) {
+            auth.logout();
+          } else {
+            Navigator.of(
+              context,
+            ).push(MaterialPageRoute(builder: (_) => const LoginScreen()));
+          }
+        },
+      );
+    });
+  }
+}
+
 class _BellButton extends StatelessWidget {
   final int unread;
-  const _BellButton({required this.unread});
+  final VoidCallback onOpen;
+  const _BellButton({required this.unread, required this.onOpen});
 
   @override
   Widget build(BuildContext context) {
@@ -147,7 +167,7 @@ class _BellButton extends StatelessWidget {
       children: [
         IconButton(
           icon: const Icon(Icons.notifications_none_rounded),
-          onPressed: () => navigateToPage(context, const NotificationsScreen()),
+          onPressed: onOpen,
         ),
         if (unread > 0)
           Positioned(

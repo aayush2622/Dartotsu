@@ -3,26 +3,33 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide ContextExtensionss;
 
-import '../../Api/Services/Anilist/AnilistApi.dart';
-import '../../Api/Services/Anilist/AnilistAuth.dart';
+import '../../Core/Services/MediaServiceController.dart';
 import '../../Core/Services/Model/Media.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Utils/Functions/NavigateToScreen.dart';
 import '../../Widgets/Components/BaseScreen.dart';
 import '../../Widgets/Components/CachedNetworkImage.dart';
-import '../Detail/DetailScreen.dart';
+import 'DetailScreen.dart';
 
 class SearchScreen extends StatefulWidget {
   final bool anime;
-  const SearchScreen({super.key, this.anime = true});
+  final ServiceApi api;
+  final String? query;
+
+  const SearchScreen({
+    super.key,
+    required this.api,
+    this.anime = true,
+    this.query,
+  });
 
   @override
   State<SearchScreen> createState() => _SearchScreenState();
 }
 
 class _SearchScreenState extends BaseScreen<SearchScreen> {
-  late final AnilistApi _api = AnilistApi(find<AnilistAuth>().client);
+  ServiceApi get _api => widget.api;
   final _controller = TextEditingController();
 
   final _results = <Media>[].obs;
@@ -33,6 +40,15 @@ class _SearchScreenState extends BaseScreen<SearchScreen> {
   String _term = '';
   int _page = 1;
   bool _hasMore = true;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.query != null && widget.query!.isNotEmpty) {
+      _controller.text = widget.query!;
+      _onChanged(widget.query!);
+    }
+  }
 
   @override
   void dispose() {
@@ -136,8 +152,17 @@ class _SearchScreenState extends BaseScreen<SearchScreen> {
             itemCount: _results.length,
             itemBuilder: (_, i) => _ResultCard(
               media: _results[i],
-              onTap: () =>
-                  navigateToPage(context, DetailScreen(media: _results[i])),
+              onTap: () => navigateToPage(
+                context,
+                DetailScreen(
+                  media: _results[i],
+                  api: widget.api,
+                  mutations: find<MediaServiceController>()
+                      .currentService
+                      .value
+                      .mutations,
+                ),
+              ),
             ),
           ),
         );

@@ -24,16 +24,6 @@ class _LoginScreenState extends BaseScreen<LoginScreen> {
 
   MediaServiceController get _services => find();
 
-  Future<void> _login(LoginHandler handler) async {
-    _busy.value = true;
-    try {
-      await handler.login();
-      if (handler.isLoggedIn && mounted) _enter();
-    } finally {
-      _busy.value = false;
-    }
-  }
-
   void _enter() {
     PrefName.hasCompletedOnboarding.value = true;
     Navigator.of(
@@ -41,7 +31,17 @@ class _LoginScreenState extends BaseScreen<LoginScreen> {
     ).pushReplacement(MaterialPageRoute(builder: (_) => const MainScreen()));
   }
 
-  void _tokenDialog(LoginHandler handler) {
+  Future<void> _run(Future<bool> Function() action) async {
+    _busy.value = true;
+    try {
+      final ok = await action();
+      if (ok && mounted) _enter();
+    } finally {
+      _busy.value = false;
+    }
+  }
+
+  void _tokenDialog(Future<bool> Function(String) apply) {
     var token = '';
     AlertDialogBuilder(context)
       ..setTitle(getString.loginWithToken)
@@ -52,15 +52,8 @@ class _LoginScreenState extends BaseScreen<LoginScreen> {
           onChanged: (v) => token = v,
         ),
       )
-      ..setPositiveButton(getString.login, () async {
-        if (token.trim().isEmpty) return;
-        _busy.value = true;
-        try {
-          await handler.login();
-        } finally {
-          _busy.value = false;
-        }
-        if (handler.isLoggedIn && mounted) _enter();
+      ..setPositiveButton(getString.login, () {
+        if (token.trim().isNotEmpty) _run(() => apply(token.trim()));
       })
       ..setNegativeButton(getString.cancel, null)
       ..show();
@@ -75,9 +68,7 @@ class _LoginScreenState extends BaseScreen<LoginScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 32),
         child: Obx(() {
           final service = _services.currentService.value;
-          final handler = service is LoginHandler
-              ? service as LoginHandler
-              : null;
+          final auth = service.auth;
 
           return Column(
             mainAxisSize: MainAxisSize.min,
@@ -96,11 +87,45 @@ class _LoginScreenState extends BaseScreen<LoginScreen> {
                 style: context.textTheme.bodyMedium,
               ),
               const SizedBox(height: 40),
-              _serviceButton(service, handler),
-              const SizedBox(height: 16),
-              if (handler != null)
+              ElevatedButton.icon(
+                onPressed: _busy.value || auth == null
+                    ? null
+                    : () => _run(auth.login),
+                icon: _busy.value
+                    ? const SizedBox(
+                        width: 18,
+                        height: 18,
+                        child: CircularProgressIndicator(strokeWidth: 2),
+                      )
+                    : loadSvg(
+                        service.iconPath,
+                        width: 18,
+                        height: 18,
+                        color: scheme.onPrimaryContainer,
+                      ),
+                label: Text(
+                  auth == null
+                      ? getString.continueAsGuest
+                      : getString.loginTo(service.name),
+                ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: scheme.primaryContainer,
+                  foregroundColor: scheme.onPrimaryContainer,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 28,
+                    vertical: 20,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 12),
+              if (auth != null)
                 TextButton(
-                  onPressed: _busy.value ? null : () => _tokenDialog(handler),
+                  onPressed: _busy.value
+                      ? null
+                      : () => _tokenDialog(auth.loginWithToken),
                   child: Text(getString.loginWithToken),
                 ),
               TextButton(
@@ -124,42 +149,6 @@ class _LoginScreenState extends BaseScreen<LoginScreen> {
             ],
           );
         }),
-      ),
-    );
-  }
-
-  Widget _serviceButton(MediaService service, LoginHandler? handler) {
-    final scheme = context.colorScheme;
-    return Obx(
-      () => ElevatedButton.icon(
-        onPressed: _busy.value || handler == null
-            ? null
-            : () => _login(handler),
-        icon: _busy.value
-            ? const SizedBox(
-                width: 18,
-                height: 18,
-                child: CircularProgressIndicator(strokeWidth: 2),
-              )
-            : loadSvg(
-                service.iconPath,
-                width: 18,
-                height: 18,
-                color: scheme.onPrimaryContainer,
-              ),
-        label: Text(
-          handler == null
-              ? getString.continueAsGuest
-              : getString.loginTo(service.name),
-        ),
-        style: ElevatedButton.styleFrom(
-          backgroundColor: scheme.primaryContainer,
-          foregroundColor: scheme.onPrimaryContainer,
-          padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 20),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
-          ),
-        ),
       ),
     );
   }

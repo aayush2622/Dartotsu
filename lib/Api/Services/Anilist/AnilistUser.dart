@@ -1,12 +1,22 @@
-class AnilistUser {
+import '../../../Core/Services/ServiceAuth.dart';
+
+class AnilistUser implements ServiceUser {
+  @override
   final int id;
+  @override
   final String name;
+  @override
   final String? avatar;
+  @override
   final String? banner;
-  final String? about;
+  @override
   final int episodesWatched;
+  @override
   final int chaptersRead;
+  @override
   final int unreadNotifications;
+
+  final String? about;
   final bool adultContent;
   final String scoreFormat;
 

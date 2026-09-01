@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide ContextExtensionss;
 
+import '../Core/Services/MediaServiceController.dart';
 import '../Utils/Extensions/ContextExtensions.dart';
+import '../Utils/Functions/GetXFunctions.dart';
 import '../Widgets/Components/BaseScreen.dart';
-import 'Home/Tabs.dart';
+import '../Widgets/Components/NotImplemented.dart';
 import 'Navbar.dart';
 
 class MainScreen extends StatefulWidget {
@@ -17,7 +19,22 @@ class MainScreenState extends BaseScreen<MainScreen> {
   final _tab = 1.obs;
   final _built = <int>{1};
 
-  static const _tabs = [AnimeTab(), HomeTab(), MangaTab()];
+  MediaServiceController get _services => find();
+
+  Widget _tabView(BuildContext context, int index) {
+    final s = _services.currentService.value;
+    return switch (index) {
+      0 =>
+        s.animeScreen?.build(context) ??
+            NotImplemented(service: s.name, area: 'Anime'),
+      2 =>
+        s.mangaScreen?.build(context) ??
+            NotImplemented(service: s.name, area: 'Manga'),
+      _ =>
+        s.homeScreen?.build(context) ??
+            NotImplemented(service: s.name, area: 'Home'),
+    };
+  }
 
   Widget get _navbar => Obx(
     () => FloatingBottomNavBar(
@@ -31,15 +48,22 @@ class MainScreenState extends BaseScreen<MainScreen> {
 
   @override
   Widget buildContent(BuildContext context) {
-    final body = Obx(
-      () => IndexedStack(
+    final body = Obx(() {
+      // Depend on the current service so tabs rebuild on a switch.
+      _services.currentService.value;
+      return IndexedStack(
         index: _tab.value,
         children: [
-          for (var i = 0; i < _tabs.length; i++)
-            _built.contains(i) ? _tabs[i] : const SizedBox.shrink(),
+          for (var i = 0; i < 3; i++)
+            _built.contains(i)
+                ? KeyedSubtree(
+                    key: ValueKey('${_services.currentService.value.id}-$i'),
+                    child: _tabView(context, i),
+                  )
+                : const SizedBox.shrink(),
         ],
-      ),
-    );
+      );
+    });
 
     return Stack(
       children: [
