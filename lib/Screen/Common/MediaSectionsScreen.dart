@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../Core/Services/Model/Media.dart';
+import '../../Utils/Animation/WidgetAnimations.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Extensions/IntExtensions.dart';
 import '../../Widgets/Components/ScrollConfig.dart';
@@ -38,7 +39,6 @@ class MediaSectionsScreen extends StatefulWidget {
 class _MediaSectionsScreenState extends State<MediaSectionsScreen>
     with AutomaticKeepAliveClientMixin {
   final _sections = <String, List<Media>>{}.obs;
-  final _loading = true.obs;
   final _error = RxnString();
 
   StreamSubscription<Object?>? _reloadSub;
@@ -60,14 +60,11 @@ class _MediaSectionsScreenState extends State<MediaSectionsScreen>
   }
 
   Future<void> _load() async {
-    _loading.value = true;
     _error.value = null;
     try {
       _sections.value = await widget.loader();
     } catch (e) {
-      _error.value = e.toString();
-    } finally {
-      _loading.value = false;
+      if (_sections.isEmpty) _error.value = e.toString();
     }
   }
 
@@ -95,8 +92,8 @@ class _MediaSectionsScreenState extends State<MediaSectionsScreen>
     return RefreshIndicator(
       onRefresh: _load,
       child: Obx(() {
-        final showSkeleton = _loading.value && _sections.isEmpty;
         final showError = _error.value != null && _sections.isEmpty;
+        final showSkeleton = _sections.isEmpty && !showError;
         final entries = _sections.entries.toList();
 
         return CustomScrollConfig(
@@ -109,22 +106,29 @@ class _MediaSectionsScreenState extends State<MediaSectionsScreen>
             if (showSkeleton)
               for (var i = 0; i < 3; i++)
                 SliverToBoxAdapter(
+                  key: ValueKey('skeleton-$i'),
                   child: MediaSection(data: MediaSectionData.skeleton(0)),
                 )
             else if (showError)
               SliverToBoxAdapter(child: _errorBox(_error.value!))
             else
-              for (final section in entries)
+              for (final (i, section) in entries.indexed)
                 SliverToBoxAdapter(
-                  child: MediaSection(
-                    data: MediaSectionData(
-                      type: 0,
-                      title: section.key,
-                      mediaList: section.value,
-                      onMediaTap: (ctx, i, media) =>
-                          widget.onMediaTap?.call(media),
-                    ),
-                  ),
+                  key: ValueKey('section-${section.key}'),
+                  child:
+                      MediaSection(
+                        key: ValueKey('section-${section.key}'),
+                        data: MediaSectionData(
+                          type: 0,
+                          title: section.key,
+                          mediaList: section.value,
+                          onMediaTap: (ctx, idx, media) =>
+                              widget.onMediaTap?.call(media),
+                        ),
+                      ).animateFadeUp(
+                        begin: 0.15,
+                        delay: Duration(milliseconds: 40 * i),
+                      ),
                 ),
             SliverToBoxAdapter(child: SizedBox(height: 120.bottomBar())),
           ],

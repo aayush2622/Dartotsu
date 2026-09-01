@@ -57,10 +57,11 @@ class MediaSectionState {
   }
 
   void updateMediaList(List<Media>? media) {
-    final random = Random();
-    final count = random.nextInt(11) + 7;
-    final skeletonMediaList = List.generate(count, (_) => Media.skeleton());
-
-    mediaList.value = media ?? skeletonMediaList;
+    if (media != null) {
+      mediaList.value = media;
+      return;
+    }
+    final count = Random().nextInt(11) + 7;
+    mediaList.value = List.generate(count, (_) => Media.skeleton());
   }
 }

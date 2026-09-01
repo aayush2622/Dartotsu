@@ -126,6 +126,7 @@ class _MyAppState extends State<MyApp> {
   final _focusNode = FocusNode();
   final ThemeController _theme = find();
   final LocaleController _locale = find();
+  late final _appBuilder = Dpad.wrap(onBack: _handleBack);
 
   @override
   void dispose() {
@@ -164,7 +165,7 @@ class _MyAppState extends State<MyApp> {
                 title: 'Dartotsu',
                 debugShowCheckedModeBanner: false,
                 enableLog: true,
-                builder: Dpad.wrap(onBack: _handleBack),
+                builder: _appBuilder,
                 localizationsDelegates: const [
                   AppLocalizations.delegate,
                   GlobalMaterialLocalizations.delegate,
