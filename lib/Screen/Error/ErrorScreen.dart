@@ -217,7 +217,7 @@ class _ErrorScreenState extends State<ErrorScreen> {
                 shareFile(logPath, 'LogFile');
               }
             },
-            iconWidget: Icon(Icons.share_rounded, color: theme.surface),
+            iconWidget: const Icon(Icons.share_rounded, size: 18),
             label: "Share log file",
             padding: const EdgeInsets.only(),
           ).animateFadeSlideX(begin: -0.2, delay: 300.ms),
@@ -231,7 +231,7 @@ class _ErrorScreenState extends State<ErrorScreen> {
                 "Error: ${widget.error}\n\nStack Trace:\n${widget.stackTrace}",
               );
             },
-            iconWidget: Icon(Icons.copy_rounded, color: theme.surface),
+            iconWidget: const Icon(Icons.copy_rounded, size: 18),
             label: "Copy Logs",
             padding: const EdgeInsets.only(),
           ).animateFadeSlideX(begin: -0.2, delay: 300.ms),
