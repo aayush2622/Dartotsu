@@ -7,10 +7,12 @@ import 'package:skeletonizer/skeletonizer.dart';
 import '../../Core/Services/MediaServiceController.dart';
 import '../../Core/Services/Model/Media.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
+import '../../Utils/Extensions/Responsive.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Utils/Functions/NavigateToScreen.dart';
 import '../../Widgets/Components/BaseScreen.dart';
 import '../../Widgets/Components/CachedNetworkImage.dart';
+import '../../Widgets/Components/SectionCard.dart';
 import 'DetailScreen.dart';
 
 class NotificationsScreen extends StatefulWidget {
@@ -73,11 +75,21 @@ class _NotificationsScreenState extends BaseScreen<NotificationsScreen> {
             );
           }
           return ListView(
-            padding: const EdgeInsets.fromLTRB(12, 4, 12, 24),
+            padding: EdgeInsets.fromLTRB(
+              Dimens.gap,
+              Dimens.gapXs,
+              Dimens.gap,
+              Dimens.gapXl,
+            ),
             children: [
               for (final group in _grouped()) ...[
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(8, 16, 8, 8),
+                  padding: EdgeInsets.fromLTRB(
+                    Dimens.gapSm,
+                    Dimens.gap,
+                    Dimens.gapSm,
+                    Dimens.gapSm,
+                  ),
                   child: Text(
                     group.$1,
                     style: context.textTheme.labelLarge?.copyWith(
@@ -97,64 +109,67 @@ class _NotificationsScreenState extends BaseScreen<NotificationsScreen> {
   Widget _row(ServiceNotification n) {
     final scheme = context.colorScheme;
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4),
-      child: Material(
-        color: scheme.surfaceContainerHigh,
-        borderRadius: BorderRadius.circular(18),
-        clipBehavior: Clip.antiAlias,
-        child: InkWell(
-          onTap: n.mediaId == null ? null : () => _open(n),
-          child: Padding(
-            padding: const EdgeInsets.all(10),
-            child: Row(
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: SizedBox(
-                    width: 44,
-                    height: 58,
-                    child: n.imageUrl == null
-                        ? ColoredBox(
-                            color: scheme.surfaceContainerHighest,
-                            child: Icon(
-                              Icons.notifications_rounded,
-                              color: scheme.onSurfaceVariant,
-                              size: 20,
+      padding: EdgeInsets.symmetric(vertical: Dimens.gapXs),
+      child: SectionCard(
+        padding: EdgeInsets.zero,
+        child: Material(
+          color: Colors.transparent,
+          borderRadius: Dimens.border,
+          clipBehavior: Clip.antiAlias,
+          child: InkWell(
+            onTap: n.mediaId == null ? null : () => _open(n),
+            child: Padding(
+              padding: EdgeInsets.all(Dimens.gapSm + 2),
+              child: Row(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: SizedBox(
+                      width: 44,
+                      height: 58,
+                      child: n.imageUrl == null
+                          ? ColoredBox(
+                              color: scheme.surfaceContainerHighest,
+                              child: Icon(
+                                Icons.notifications_rounded,
+                                color: scheme.onSurfaceVariant,
+                                size: 20,
+                              ),
+                            )
+                          : cachedNetworkImage(
+                              imageUrl: n.imageUrl,
+                              fit: BoxFit.cover,
                             ),
-                          )
-                        : cachedNetworkImage(
-                            imageUrl: n.imageUrl,
-                            fit: BoxFit.cover,
-                          ),
+                    ),
                   ),
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        n.text,
-                        style: context.textTheme.bodyMedium,
-                        maxLines: 3,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        _ago(n.createdAt),
-                        style: context.textTheme.labelSmall?.copyWith(
-                          color: scheme.onSurfaceVariant,
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          n.text,
+                          style: context.textTheme.bodyMedium,
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
                         ),
-                      ),
-                    ],
+                        const SizedBox(height: 4),
+                        Text(
+                          _ago(n.createdAt),
+                          style: context.textTheme.labelSmall?.copyWith(
+                            color: scheme.onSurfaceVariant,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                if (n.mediaId != null)
-                  Icon(
-                    Icons.chevron_right_rounded,
-                    color: scheme.onSurfaceVariant,
-                  ),
-              ],
+                  if (n.mediaId != null)
+                    Icon(
+                      Icons.chevron_right_rounded,
+                      color: scheme.onSurfaceVariant,
+                    ),
+                ],
+              ),
             ),
           ),
         ),
@@ -199,9 +214,11 @@ class _NotificationsScreenState extends BaseScreen<NotificationsScreen> {
       'Earlier': [],
     };
     for (final n in _items) {
-      final d = today.difference(
-        DateTime(n.createdAt.year, n.createdAt.month, n.createdAt.day),
-      ).inDays;
+      final d = today
+          .difference(
+            DateTime(n.createdAt.year, n.createdAt.month, n.createdAt.day),
+          )
+          .inDays;
       if (d <= 0) {
         buckets['Today']!.add(n);
       } else if (d <= 7) {

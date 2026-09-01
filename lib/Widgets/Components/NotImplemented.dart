@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../Utils/Extensions/ContextExtensions.dart';
+import '../../Utils/Extensions/Responsive.dart';
+import 'SectionCard.dart';
 
 class NotImplemented extends StatelessWidget {
   final String service;
@@ -13,38 +15,40 @@ class NotImplemented extends StatelessWidget {
     final scheme = context.colorScheme;
     return Center(
       child: Padding(
-        padding: const EdgeInsets.all(32),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              width: 88,
-              height: 88,
-              decoration: BoxDecoration(
-                color: scheme.surfaceContainerHigh,
-                shape: BoxShape.circle,
+        padding: EdgeInsets.all(Dimens.gapXl),
+        child: SectionCard(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                width: 84,
+                height: 84,
+                decoration: BoxDecoration(
+                  color: scheme.primaryContainer,
+                  shape: BoxShape.circle,
+                ),
+                child: Icon(
+                  Icons.rocket_launch_rounded,
+                  size: 36,
+                  color: scheme.onPrimaryContainer,
+                ),
               ),
-              child: Icon(
-                Icons.rocket_launch_rounded,
-                size: 38,
-                color: scheme.primary,
+              SizedBox(height: Dimens.gapLg),
+              Text(
+                '$area — coming soon',
+                textAlign: TextAlign.center,
+                style: context.textTheme.titleMedium,
               ),
-            ),
-            const SizedBox(height: 20),
-            Text(
-              '$area — coming soon',
-              textAlign: TextAlign.center,
-              style: context.textTheme.titleMedium,
-            ),
-            const SizedBox(height: 6),
-            Text(
-              '$service doesn\'t support this yet.',
-              textAlign: TextAlign.center,
-              style: context.textTheme.bodyMedium?.copyWith(
-                color: scheme.onSurfaceVariant,
+              SizedBox(height: Dimens.gapXs),
+              Text(
+                '$service doesn\'t support this yet.',
+                textAlign: TextAlign.center,
+                style: context.textTheme.bodyMedium?.copyWith(
+                  color: scheme.onSurfaceVariant,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

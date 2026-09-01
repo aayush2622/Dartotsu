@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 
 import '../../Model/Setting.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
-import '../Components/ThemedContainer.dart';
+import '../../Utils/Extensions/Responsive.dart';
+import '../Components/SectionCard.dart';
 import 'SettingItem.dart';
 
-/// Renders a flat `List<Setting>` — one [ThemedContainer] card per row, plain
-/// labels for [SettingType.header]. Mirrors `main`'s `SettingsAdaptor`.
+/// Renders a flat `List<Setting>` — one [SectionCard] per row, plain labels for
+/// [SettingType.header]. Same card surface and spacing as the rest of the app.
 class SettingsAdaptor extends StatelessWidget {
   final List<Setting> settings;
 
@@ -23,7 +24,12 @@ class SettingsAdaptor extends StatelessWidget {
         for (final setting in visible)
           if (setting.type == SettingType.header)
             Padding(
-              padding: const EdgeInsets.fromLTRB(8, 8, 8, 10),
+              padding: EdgeInsets.fromLTRB(
+                Dimens.gapSm,
+                Dimens.gapSm,
+                Dimens.gapSm,
+                Dimens.gapSm + 2,
+              ),
               child: Text(
                 setting.name,
                 style: context.textTheme.titleSmall?.copyWith(
@@ -34,12 +40,11 @@ class SettingsAdaptor extends StatelessWidget {
             )
           else
             Padding(
-              padding: const EdgeInsets.only(bottom: 14),
-              child: ThemedContainer(
-                borderRadius: BorderRadius.circular(24),
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 6,
+              padding: EdgeInsets.only(bottom: Dimens.gap),
+              child: SectionCard(
+                padding: EdgeInsets.symmetric(
+                  horizontal: Dimens.cardPad,
+                  vertical: Dimens.gapXs + 2,
                 ),
                 child: switch (setting.type) {
                   SettingType.switchType => SettingSwitchItem(setting: setting),

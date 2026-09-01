@@ -72,10 +72,8 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
     ),
   );
 
-  EdgeInsets get _sectionMargin => EdgeInsets.symmetric(
-    horizontal: Dimens.gap,
-    vertical: Dimens.gapSm / 2,
-  );
+  EdgeInsets get _sectionMargin =>
+      EdgeInsets.symmetric(horizontal: Dimens.gap, vertical: Dimens.gapSm / 2);
 
   @override
   Widget buildContent(BuildContext context) {
@@ -364,7 +362,9 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
       child: Row(
         children: [
           for (final (i, stat) in items.indexed) ...[
-            Expanded(child: _Stat(icon: stat.$1, label: stat.$2, value: stat.$3)),
+            Expanded(
+              child: _Stat(icon: stat.$1, label: stat.$2, value: stat.$3),
+            ),
             if (i != items.length - 1)
               Container(
                 width: 1,
@@ -666,9 +666,7 @@ class _InfoRow extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 12),
-          Expanded(
-            child: Text(value, style: context.textTheme.bodyMedium),
-          ),
+          Expanded(child: Text(value, style: context.textTheme.bodyMedium)),
         ],
       ),
     );

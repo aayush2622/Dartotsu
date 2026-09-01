@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:dpad/dpad.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide ContextExtensionss;
 import 'package:skeletonizer/skeletonizer.dart';
@@ -13,7 +12,7 @@ import '../../Utils/Extensions/Responsive.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Utils/Functions/NavigateToScreen.dart';
 import '../../Widgets/Components/BaseScreen.dart';
-import '../../Widgets/Components/CachedNetworkImage.dart';
+import '../../Widgets/Sections/RailCard.dart';
 import 'DetailScreen.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -120,9 +119,7 @@ class _SearchScreenState extends BaseScreen<SearchScreen> {
               padding: const EdgeInsets.only(right: 8),
               child: SegmentedButton<bool>(
                 showSelectedIcon: false,
-                style: const ButtonStyle(
-                  visualDensity: VisualDensity.compact,
-                ),
+                style: const ButtonStyle(visualDensity: VisualDensity.compact),
                 segments: const [
                   ButtonSegment(value: true, label: Text('Anime')),
                   ButtonSegment(value: false, label: Text('Manga')),
@@ -149,51 +146,66 @@ class _SearchScreenState extends BaseScreen<SearchScreen> {
             }
             return false;
           },
-          child: _grid([
-            for (final m in _results)
-              _ResultCard(
-                media: m,
-                onTap: () => navigateToPage(
-                  context,
-                  DetailScreen(
-                    media: m,
-                    queries: widget.queries,
-                    mutations: find<MediaServiceController>()
-                        .currentService
-                        .value
-                        .getMutations,
-                  ),
-                ),
-              ),
-          ]),
+          child: _grid([for (final m in _results) _card(m)]),
         );
       }),
     );
   }
 
-  Widget _grid(List<Widget> children, {bool skeleton = false}) {
-    final extent = responsive<double>(
-      mobile: 118,
-      tablet: 138,
-      desktop: 132,
+  Widget _card(Media m) {
+    final year = m.startDate?.year;
+    return RailCard(
+      imageUrl: m.cover,
+      title: m.mainName,
+      subtitle: [
+        if (m.format != null) _pretty(m.format!),
+        if (year != null) '$year',
+      ].join(' · '),
+      badge: (m.meanScore ?? 0) > 0
+          ? RailScoreBadge(score: m.meanScore! / 10)
+          : null,
+      onTap: () => navigateToPage(
+        context,
+        DetailScreen(
+          media: m,
+          queries: widget.queries,
+          mutations:
+              find<MediaServiceController>().currentService.value.getMutations,
+        ),
+      ),
     );
+  }
+
+  static String _pretty(String raw) {
+    final words = raw.toLowerCase().replaceAll('_', ' ').split(' ');
+    return words
+        .map((w) => w.isEmpty ? w : '${w[0].toUpperCase()}${w.substring(1)}')
+        .join(' ');
+  }
+
+  Widget _grid(List<Widget> children, {bool skeleton = false}) {
     final grid = GridView.builder(
-      padding: const EdgeInsets.fromLTRB(14, 6, 14, 24),
+      padding: EdgeInsets.fromLTRB(
+        Dimens.pagePad,
+        Dimens.gapSm,
+        Dimens.pagePad,
+        Dimens.gapXl,
+      ),
       gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-        maxCrossAxisExtent: extent,
-        childAspectRatio: 0.54,
-        crossAxisSpacing: 12,
-        mainAxisSpacing: 16,
+        maxCrossAxisExtent: Dimens.railItemW + Dimens.railGap + 6,
+        childAspectRatio: Dimens.railItemW / Dimens.railItemH,
+        crossAxisSpacing: Dimens.railGap,
+        mainAxisSpacing: Dimens.gap,
       ),
       itemCount: children.length,
-      itemBuilder: (_, i) => children[i],
+      itemBuilder: (_, i) =>
+          Align(alignment: Alignment.topCenter, child: children[i]),
     );
     return skeleton ? Skeletonizer(child: grid) : grid;
   }
 
   List<Widget> _skeletons() => [
-    for (var i = 0; i < 12; i++)
-      _ResultCard(media: Media.skeleton(), onTap: () {}),
+    for (var i = 0; i < 12; i++) _card(Media.skeleton()),
   ];
 
   Widget _empty() {
@@ -216,97 +228,6 @@ class _SearchScreenState extends BaseScreen<SearchScreen> {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class _ResultCard extends StatelessWidget {
-  final Media media;
-  final VoidCallback onTap;
-  const _ResultCard({required this.media, required this.onTap});
-
-  double? get _score {
-    final raw = (media.meanScore ?? 0);
-    return raw > 0 ? raw / 10 : null;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final scheme = context.colorScheme;
-    return DpadFocusable(
-      onSelect: onTap,
-      effects: const [DpadScaleEffect(scale: 1.05)],
-      child: GestureDetector(
-        onTap: onTap,
-        behavior: HitTestBehavior.opaque,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(14),
-                child: Stack(
-                  fit: StackFit.expand,
-                  children: [
-                    cachedNetworkImage(
-                      imageUrl: media.cover,
-                      fit: BoxFit.cover,
-                      placeholder: (_, _) =>
-                          ColoredBox(color: scheme.surfaceContainerHighest),
-                      errorWidget: (_, _, _) => Icon(
-                        Icons.broken_image_rounded,
-                        color: scheme.error,
-                        size: 28,
-                      ),
-                    ),
-                    if (_score case final s?)
-                      Positioned(
-                        right: 0,
-                        bottom: 0,
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 6,
-                            vertical: 2,
-                          ),
-                          decoration: BoxDecoration(
-                            color: scheme.primary,
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(12),
-                            ),
-                          ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(
-                                s.toStringAsFixed(1),
-                                style: context.textTheme.labelSmall?.copyWith(
-                                  color: scheme.onPrimary,
-                                  fontWeight: FontWeight.w800,
-                                ),
-                              ),
-                              Icon(
-                                Icons.star_rounded,
-                                size: 11,
-                                color: scheme.onPrimary,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(height: 6),
-            Text(
-              media.mainName,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: context.textTheme.labelMedium,
-            ),
-          ],
-        ),
       ),
     );
   }
