@@ -184,7 +184,7 @@ area)`.
 | `getQueries` | `Queries?` | raw fetch layer: `getUserData()`, `getMedia(id)`, `mediaDetails(m)`, `initHomePage()`, `getAnimeList()`, `getMangaList()`, `getMediaLists({anime,userId?})`, `getCalendarData()`, `getGenresAndTags()`, `getBannerImages()`, `getNotifications({page})`, `search(SearchResults?)` |
 | `getMutations` | `Mutations?` | `editList(Media,{customList})` / `deleteFromList(Media)` / `setProgress(Media,progress)` |
 | `auth` | `ServiceAuth?` | `user` (`Rxn<ServiceUser>`), `isLoggedIn`, `login()` / `loginWithToken(t)` / `logout()` / `refreshUser()` |
-| `homeView` / `animeView` / `mangaView` / `searchView` / `detailView` / `notificationView` / `settingsView` | `*ScreenView?` | **per-screen data views** (`Core/Services/Screens/ServiceScreens.dart`) — one abstract class per screen, grouping the `Queries` its screen needs + screen config, all returning **data, never widgets**. `anime/mangaView` share `FeedScreenView` (`userLists()` / `browse()` / `loadMore(section, page)` per-section pagination / `chips()` → `FeedChip` / `shortcuts()` → `FeedShortcut`). `searchView` adds `filters(anime:)` → `SearchFilterSpec` (filter vocab). `settingsView.build(context)` → `List<Setting>` folded into the Account category. Grow a view with methods as its screen gains features; never push screen concerns into `Queries`. |
+| `feedTypes` / `feedView` / `homeView` / `searchView` / `detailView` / `notificationView` / `settingsView` | `List<MediaType>` / `*ScreenView?` | **per-screen data views** (`Core/Services/Screens/ServiceScreens.dart`) — one abstract class per screen, grouping the `Queries` its screen needs + screen config, all returning **data, never widgets**. `feedTypes` declares the browse tabs; one `FeedScreenView` serves them all, every method parameterised by `MediaType` (`userLists(type)` / `browse(type)` / `loadMore(type, section, page)` per-section pagination / `chips(type)` / `shortcuts(type)`). `searchView.types` + `filters(type)` → `SearchFilterSpec` (filter vocab). `settingsView.build(context)` → `List<Setting>` folded into the Account category. Grow a view with methods as its screen gains features; never push screen concerns into `Queries`. |
 
 - **`Core/Services/Api/Queries.dart` / `Mutations.dart`** — the raw read/write surface the
   views build on (mirrors `main`'s `Queries` + `Base*Screen` split). List-shaped queries
@@ -236,13 +236,18 @@ Entry flow: `OnboardingScreen` (welcome / theme / sync) → `LoginScreen` (drive
 `service.auth`; "continue as guest" or OAuth/token) → sets `PrefName.hasCompletedOnboarding`
 → `MainScreen`.
 
-- **`Screen/MainScreen.dart`** — 3-tab shell; each tab is `HomeFeed(service:)` /
-  `BrowseFeed(service:, anime:)` (`Screen/Feed/FeedScreens.dart`), lazy-mounted in an
-  `IndexedStack` keyed by `serviceId-tab`, `FloatingBottomNavBar`.
-- **`Screen/Feed/`** — service-agnostic feed composition. `HomeFeed` / `BrowseFeed` build a
-  `MediaSectionsScreen` from `service.getQueries` (browse = `getMediaLists` merged above
-  `getAnimeList`/`getMangaList`, `cacheId` `'<service.id>/<tab>'`, `reloadOn`
-  `service.auth?.user.stream`). `FeedNavigation.dart` = `openDetail` / `openSearch` /
+- **`Screen/MainScreen.dart`** — **dynamic tab shell**. `Screen/Feed/FeedTabs.dart`
+  `feedTabsFor(service)` builds the tabs from `service.feedTypes` (`List<MediaType>` —
+  anime/manga/novel/movie/series) split around a centred Home
+  (`[anime] Home [manga]`, `Home [novel]` for one, `[Home]` for none); `homeTabIndex` is the
+  default. `IndexedStack` keyed by `serviceId-i`, lazy-built; `FloatingBottomNavBar` is handed
+  the `NavItem`s (per-type icon from `FeedTab.icon`) — a service switch resets tab + `_built`.
+- **`Screen/Home/HomeFeed.dart`** — Home tab: `HomeHeader` + a `StackedCarousel` spotlight +
+  `HomeScreenView.sections()`. **`Screen/Feed/BrowseFeed.dart`** — one browse tab per
+  `MediaType`: `FeedHeader` + `FeedScreenView.userLists(type)` merged above `browse(type)`,
+  `onSectionLoadMore` → `loadMore(type, …)`, **no carousel**. Both → `MediaSectionsScreen`,
+  `cacheId` `'<service.id>/<type.name|home>'`, `reloadOn` `service.auth?.user.stream`.
+- **`Screen/Feed/FeedNavigation.dart`** — `openDetail` / `openSearch(type:)` /
   `openNotifications` free functions (take a `MediaService`, push the shared screen or
   `NotImplemented`). `FeedHeader` = the browse-tab title bar.
 - **`Screen/Feed/MediaSectionsScreen.dart`** — shared feed list widget:
