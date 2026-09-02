@@ -37,9 +37,12 @@ abstract class MediaService {
 
   HomeScreenView? get homeView => null;
 
-  AnimeScreenView? get animeView => null;
+  /// Browsable media categories, in tab order (empty => no browse tabs).
+  /// Most services offer one or two — anime + manga, novels + movies, …
+  List<MediaType> get feedTypes => const [];
 
-  MangaScreenView? get mangaView => null;
+  /// Serves every tab in [feedTypes].
+  FeedScreenView? get feedView => null;
 
   SearchScreenView? get searchView => null;
 

@@ -28,10 +28,10 @@ class AnilistService extends MediaService {
   HomeScreenView get homeView => AnilistHomeView();
 
   @override
-  AnimeScreenView get animeView => AnilistAnimeView();
+  List<MediaType> get feedTypes => const [MediaType.anime, MediaType.manga];
 
   @override
-  MangaScreenView get mangaView => AnilistMangaView();
+  FeedScreenView get feedView => AnilistFeedView();
 
   @override
   SearchScreenView get searchView => AnilistSearchView();

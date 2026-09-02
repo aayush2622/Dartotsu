@@ -1,9 +1,12 @@
 import 'package:flutter/widgets.dart';
 
+import '../../../Model/MediaType.dart';
 import '../../../Model/SearchResults.dart';
 import '../../../Model/Setting.dart';
 import '../Model/Media.dart';
 import '../ServiceNotification.dart';
+
+export '../../../Model/MediaType.dart';
 
 typedef Sections = Future<Map<String, List<Media>>>;
 
@@ -29,24 +32,22 @@ abstract class HomeScreenView {
   Future<List<String?>> bannerImages() => Future.value(const [null, null]);
 }
 
-/// Shared surface for the Anime and Manga browse tabs.
+/// One browse tab, parameterised by [MediaType] — a service serves the same
+/// view for every type it declares in [MediaService.feedTypes].
 abstract class FeedScreenView {
-  Sections userLists();
+  Sections userLists(MediaType type);
 
-  Sections browse();
+  Sections browse(MediaType type);
 
   /// Next page for a browse [section] (keyed by its display title). Return
   /// `null` when the section can't paginate or has no more items.
-  Future<List<Media>?> loadMore(String section, int page) => Future.value(null);
+  Future<List<Media>?> loadMore(MediaType type, String section, int page) =>
+      Future.value(null);
 
-  List<FeedChip> chips() => const [];
+  List<FeedChip> chips(MediaType type) => const [];
 
-  List<FeedShortcut> shortcuts() => const [];
+  List<FeedShortcut> shortcuts(MediaType type) => const [];
 }
-
-abstract class AnimeScreenView extends FeedScreenView {}
-
-abstract class MangaScreenView extends FeedScreenView {}
 
 /// Which filters a service's search supports, and their vocab. Everything is a
 /// plain list so the search UI is entirely service-driven — a service with no
@@ -93,10 +94,12 @@ class SearchFilterSpec {
 abstract class SearchScreenView {
   Future<SearchResults?> search(SearchResults query);
 
-  List<SearchType> get types => const [SearchType.ANIME, SearchType.MANGA];
+  /// Media types the search can target; the first is the default. Usually the
+  /// same as [MediaService.feedTypes].
+  List<MediaType> get types => const [MediaType.anime, MediaType.manga];
 
-  /// Filter vocabulary for [anime] vs manga search. Default: no filters.
-  SearchFilterSpec filters({required bool anime}) => SearchFilterSpec.none;
+  /// Filter vocabulary for [type]. Default: no filters.
+  SearchFilterSpec filters(MediaType type) => SearchFilterSpec.none;
 }
 
 abstract class DetailScreenView {
