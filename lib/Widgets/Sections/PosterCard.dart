@@ -118,43 +118,46 @@ class _PosterCardState extends State<PosterCard> {
 
   // --- modes ---------------------------------------------------------
 
-  Widget _onCard(CardStyle s) => _poster(
-    s,
-    round: true,
-    overlays: [
-      const _Scrim(kind: _ScrimKind.full),
-      ..._cornerMarks(s, bottomTaken: _pillOn || _barOn),
-      if (_barOn)
+  Widget _onCard(CardStyle s) {
+    final pill = _pillOn && widget.progressText != null;
+    return _poster(
+      s,
+      round: true,
+      overlays: [
+        const _Scrim(kind: _ScrimKind.full),
+        ..._cornerMarks(s, bottomTaken: pill || _barOn),
+        if (_barOn)
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: _Bar(fraction: widget.progress!, color: _scheme.primary),
+          ),
+        if (pill)
+          Positioned(
+            left: 6,
+            right: 6,
+            bottom: 6,
+            child: _Pill(text: widget.progressText!),
+          ),
         Positioned(
-          left: 0,
-          right: 0,
-          bottom: 0,
-          child: _Bar(fraction: widget.progress!, color: _scheme.primary),
-        ),
-      if (_pillOn)
-        Positioned(
-          left: 6,
-          right: 6,
-          bottom: 6,
-          child: _Pill(text: widget.progressText!),
-        ),
-      Positioned(
-        left: 9,
-        right: 9,
-        bottom: _pillOn && widget.progressText != null ? 32 : 10,
-        child: Text(
-          widget.title,
-          maxLines: s.lines,
-          overflow: TextOverflow.ellipsis,
-          style: context.textTheme.labelLarge?.copyWith(
-            color: Colors.white,
-            height: 1.16,
-            shadows: const [Shadow(color: Colors.black87, blurRadius: 5)],
+          left: 9,
+          right: 9,
+          bottom: pill ? 32 : 10,
+          child: Text(
+            widget.title,
+            maxLines: s.lines,
+            overflow: TextOverflow.ellipsis,
+            style: context.textTheme.labelLarge?.copyWith(
+              color: Colors.white,
+              height: 1.16,
+              shadows: const [Shadow(color: Colors.black87, blurRadius: 5)],
+            ),
           ),
         ),
-      ),
-    ],
-  );
+      ],
+    );
+  }
 
   Widget _normal(CardStyle s) {
     final w = s.itemWidth;

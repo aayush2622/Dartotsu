@@ -374,13 +374,12 @@ class _MediaSectionState extends State<MediaSection> {
   }
 
   /// "12 · 24" for the progress pill — only for titles on the viewer's list
-  /// (a null `userProgress` means it isn't being tracked).
-  static String _progressText(Media media) {
+  /// (a null `userProgress` means it isn't being tracked, so no pill).
+  static String? _progressText(Media media) {
     final done = media.userProgress;
-    final total = _total(media);
-    if (done == null) return '~ · ${total ?? '~'}';
+    if (done == null) return null;
 
-    return '$done · ${total ?? '~'}';
+    return '$done · ${_total(media) ?? '~'}';
   }
 
   static double? _score(Media media) {
