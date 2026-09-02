@@ -17,9 +17,10 @@ import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Utils/Functions/NavigateToScreen.dart';
 import '../../Widgets/Components/AppControls.dart';
 import '../../Widgets/Components/BaseScreen.dart';
+import '../../Widgets/Components/ScrollConfig.dart';
 import '../../Widgets/Shelf/PosterCard.dart';
 import '../Detail/DetailScreen.dart';
-import '../../Widgets/Components/ScrollConfig.dart';
+import 'Components/SearchFilterSheet.dart';
 
 class SearchScreen extends StatefulWidget {
   final bool anime;
@@ -39,22 +40,32 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends BaseScreen<SearchScreen> {
   final _controller = TextEditingController();
-
   final _results = <Media>[].obs;
   final _loading = false.obs;
   late final _anime = widget.anime.obs;
 
+  /// The live query — search term plus every applied filter.
+  late final _query = SearchResults(
+    type: widget.anime ? SearchType.ANIME : SearchType.MANGA,
+    perPage: 30,
+  ).obs;
+
   Timer? _debounce;
-  String _term = '';
-  int _page = 1;
   bool _hasMore = true;
+
+  SearchFilterSpec get _spec => widget.view.filters(anime: _anime.value);
+
+  bool get _hasCriteria =>
+      (_query.value.search?.isNotEmpty ?? false) ||
+      _query.value.toChipList().isNotEmpty;
 
   @override
   void initState() {
     super.initState();
     if (widget.query != null && widget.query!.isNotEmpty) {
       _controller.text = widget.query!;
-      _onChanged(widget.query!);
+      _query.value.search = widget.query;
+      _restart();
     }
   }
 
@@ -65,38 +76,47 @@ class _SearchScreenState extends BaseScreen<SearchScreen> {
     super.dispose();
   }
 
-  void _onChanged(String value) {
+  void _onTermChanged(String value) {
     _debounce?.cancel();
     _debounce = Timer(const Duration(milliseconds: 400), () {
-      _term = value.trim();
-      _page = 1;
-      _hasMore = true;
-      _results.clear();
-      if (_term.isNotEmpty) _search();
+      _query.value.search = value.trim();
+      _restart();
     });
   }
 
+  void _restart() {
+    _query.value.page = 1;
+    _hasMore = true;
+    _results.clear();
+    _query.refresh();
+    if (_hasCriteria) _search();
+  }
+
   Future<void> _search() async {
-    if (_loading.value || _term.isEmpty || !_hasMore) return;
+    if (_loading.value || !_hasMore || !_hasCriteria) return;
     _loading.value = true;
     try {
-      final res = await widget.view.search(
-        SearchResults(
-          type: _anime.value ? SearchType.ANIME : SearchType.MANGA,
-          search: _term,
-          page: _page,
-          perPage: 30,
-        ),
-      );
-      final next = res?.results ?? const [];
+      final res = await widget.view.search(_query.value);
+      _query.value.page = (_query.value.page ?? 1) + 1;
       _hasMore = res?.hasNextPage ?? false;
-      _results.addAll(next);
-      _page++;
+      _results.addAll(res?.results ?? const []);
     } catch (_) {
       _hasMore = false;
     } finally {
       _loading.value = false;
     }
+  }
+
+  void _openFilters() => showSearchFilterSheet(
+    context,
+    spec: _spec,
+    current: _query.value,
+    onApply: (_) => _restart(),
+  );
+
+  void _removeChip(SearchChip chip) {
+    _query.value.removeChip(chip);
+    _restart();
   }
 
   @override
@@ -116,43 +136,87 @@ class _SearchScreenState extends BaseScreen<SearchScreen> {
             hintText: 'Search $serviceName',
             border: InputBorder.none,
           ),
-          onChanged: _onChanged,
+          onChanged: _onTermChanged,
         ),
         actions: [
-          Obx(
-            () => Padding(
-              padding: const EdgeInsets.only(right: 8),
-              child: AppSegmented<bool>(
-                expand: false,
-                value: _anime.value,
-                onChanged: (v) {
-                  _anime.value = v;
-                  _onChanged(_controller.text);
-                },
-                segments: const [
-                  AppSegment(true, label: 'Anime'),
-                  AppSegment(false, label: 'Manga'),
-                ],
+          if (widget.view.types.length > 1)
+            Obx(
+              () => Padding(
+                padding: const EdgeInsets.only(right: 4),
+                child: AppSegmented<bool>(
+                  expand: false,
+                  value: _anime.value,
+                  onChanged: (v) {
+                    _anime.value = v;
+                    _query.value.type = v ? SearchType.ANIME : SearchType.MANGA;
+                    _restart();
+                  },
+                  segments: const [
+                    AppSegment(true, label: 'Anime'),
+                    AppSegment(false, label: 'Manga'),
+                  ],
+                ),
               ),
             ),
+          if (!_spec.isEmpty)
+            Obx(() {
+              final n = _query.value.toChipList().length;
+              return IconButton(
+                onPressed: _openFilters,
+                icon: Badge(
+                  isLabelVisible: n > 0,
+                  label: Text('$n'),
+                  child: const Icon(Icons.tune_rounded),
+                ),
+              );
+            }),
+          const SizedBox(width: 4),
+        ],
+      ),
+      body: Column(
+        children: [
+          Obx(() {
+            final chips = _query.value.toChipList();
+            if (chips.isEmpty) return const SizedBox.shrink();
+            return SizedBox(
+              height: 44,
+              child: ScrollConfig(
+                context,
+                child: ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  padding: EdgeInsets.symmetric(horizontal: Dimens.gap),
+                  itemCount: chips.length,
+                  separatorBuilder: (_, _) => const SizedBox(width: 6),
+                  itemBuilder: (_, i) => Center(
+                    child: InputChip(
+                      label: Text(chips[i].text),
+                      onDeleted: () => _removeChip(chips[i]),
+                      visualDensity: VisualDensity.compact,
+                    ),
+                  ),
+                ),
+              ),
+            );
+          }),
+          Expanded(
+            child: Obx(() {
+              final busyFirstPage = _loading.value && _results.isEmpty;
+              if (busyFirstPage) return _grid(_skeletons(), skeleton: true);
+              if (_results.isEmpty) return _empty();
+              return NotificationListener<ScrollNotification>(
+                onNotification: (n) {
+                  if (_hasMore &&
+                      n.metrics.pixels > n.metrics.maxScrollExtent - 600) {
+                    _search();
+                  }
+                  return false;
+                },
+                child: _grid([for (final m in _results) _card(m)]),
+              );
+            }),
           ),
         ],
       ),
-      body: Obx(() {
-        final busyFirstPage = _loading.value && _results.isEmpty;
-        if (busyFirstPage) return _grid(_skeletons(), skeleton: true);
-        if (_results.isEmpty) return _empty();
-        return NotificationListener<ScrollNotification>(
-          onNotification: (n) {
-            if (_hasMore &&
-                n.metrics.pixels > n.metrics.maxScrollExtent - 600) {
-              _search();
-            }
-            return false;
-          },
-          child: _grid([for (final m in _results) _card(m)]),
-        );
-      }),
     );
   }
 
@@ -214,7 +278,7 @@ class _SearchScreenState extends BaseScreen<SearchScreen> {
 
   Widget _empty() {
     final scheme = context.colorScheme;
-    final searched = _term.isNotEmpty && !_loading.value;
+    final searched = _hasCriteria && !_loading.value;
     return Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -226,7 +290,7 @@ class _SearchScreenState extends BaseScreen<SearchScreen> {
           ),
           const SizedBox(height: 12),
           Text(
-            searched ? 'No results for "$_term"' : 'Type to search',
+            searched ? 'Nothing matched' : 'Search or set a filter',
             style: context.textTheme.bodyMedium?.copyWith(
               color: scheme.onSurfaceVariant,
             ),

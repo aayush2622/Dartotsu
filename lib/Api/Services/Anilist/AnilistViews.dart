@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../Core/Preferences/PrefManager.dart';
 import '../../../Core/Services/MediaService.dart';
 import '../../../Core/Services/Model/Media.dart';
 import '../../../Model/SearchResults.dart';
@@ -94,6 +95,15 @@ class AnilistMangaView extends MangaScreenView {
       _loadMoreSection(section, page, anime: false);
 }
 
+const _anilistSorts = {
+  'SCORE_DESC': 'Top rated',
+  'POPULARITY_DESC': 'Most popular',
+  'TRENDING_DESC': 'Trending',
+  'START_DATE_DESC': 'Newest',
+  'TITLE_ROMAJI': 'A–Z',
+  'FAVOURITES_DESC': 'Most favourited',
+};
+
 class AnilistSearchView implements SearchScreenView {
   @override
   Future<SearchResults?> search(SearchResults query) =>
@@ -101,6 +111,49 @@ class AnilistSearchView implements SearchScreenView {
 
   @override
   List<SearchType> get types => const [SearchType.ANIME, SearchType.MANGA];
+
+  @override
+  SearchFilterSpec filters({required bool anime}) {
+    final genres =
+        loadCustomData<List<String>>('anilist_genres') ?? const <String>[];
+    final tags =
+        loadCustomData<List<String>>('anilist_tags_nonadult') ??
+        const <String>[];
+    return SearchFilterSpec(
+      sorts: _anilistSorts,
+      formats: anime
+          ? const ['TV', 'TV SHORT', 'MOVIE', 'SPECIAL', 'OVA', 'ONA', 'MUSIC']
+          : const ['MANGA', 'NOVEL', 'ONE SHOT'],
+      statuses: const [
+        'RELEASING',
+        'FINISHED',
+        'NOT YET RELEASED',
+        'CANCELLED',
+        'HIATUS',
+      ],
+      sources: const [
+        'ORIGINAL',
+        'MANGA',
+        'LIGHT NOVEL',
+        'VISUAL NOVEL',
+        'VIDEO GAME',
+        'NOVEL',
+        'WEB NOVEL',
+        'OTHER',
+      ],
+      genres: genres,
+      tags: tags,
+      countries: const {
+        '': 'Any country',
+        'JP': 'Japan',
+        'KR': 'Korea',
+        'CN': 'China',
+        'TW': 'Taiwan',
+      },
+      season: anime,
+      year: true,
+    );
+  }
 }
 
 class AnilistDetailView implements DetailScreenView {
