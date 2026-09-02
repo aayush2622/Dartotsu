@@ -3,6 +3,7 @@ import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../Core/Services/MediaServiceController.dart';
 import '../../Core/Services/Model/Media.dart';
+import '../../Core/ThemeManager/ThemeController.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Extensions/Responsive.dart';
 import '../../Utils/Extensions/StringExtensions.dart';
@@ -25,12 +26,14 @@ class DetailScreen extends StatefulWidget {
   final Media media;
   final DetailScreenView view;
   final Mutations? mutations;
+  final String? heroTag;
 
   const DetailScreen({
     super.key,
     required this.media,
     required this.view,
     this.mutations,
+    this.heroTag,
   });
 
   @override
@@ -65,10 +68,18 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
     }
   }
 
-  void _open(BuildContext context, Media media) => navigateToPage(
-    context,
-    DetailScreen(media: media, view: widget.view, mutations: widget.mutations),
-  );
+  void _open(BuildContext context, Media media, String? heroTag) =>
+      navigateToPage(
+        context,
+        DetailScreen(
+          media: media,
+          view: widget.view,
+          mutations: widget.mutations,
+          heroTag: heroTag,
+        ),
+      );
+
+  bool get _glass => find<ThemeController>().useGlassMode.value;
 
   EdgeInsets get _sectionMargin =>
       EdgeInsets.symmetric(horizontal: Dimens.gap, vertical: Dimens.gapSm / 2);
@@ -86,8 +97,7 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
             context,
             physics: const AlwaysScrollableScrollPhysics(),
             children: [
-              _appBar(m),
-              SliverToBoxAdapter(child: _header(m)),
+              SliverToBoxAdapter(child: _hero(m)),
               if (_statItems(m).isNotEmpty)
                 SliverToBoxAdapter(child: _statStrip(m)),
               if (_airingIn(m) case final airing?)
@@ -138,7 +148,8 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
                       type: 0,
                       title: 'Relations',
                       mediaList: m.relations,
-                      onMediaTap: (ctx, i, media) => _open(ctx, media),
+                      onMediaTap: (ctx, i, media, tag) =>
+                          _open(ctx, media, tag),
                     ),
                   ),
                 ),
@@ -149,7 +160,8 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
                       type: 0,
                       title: 'Recommendations',
                       mediaList: m.recommendations,
-                      onMediaTap: (ctx, i, media) => _open(ctx, media),
+                      onMediaTap: (ctx, i, media, tag) =>
+                          _open(ctx, media, tag),
                     ),
                   ),
                 ),
@@ -161,157 +173,225 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
     );
   }
 
-  Widget _appBar(Media m) {
+  Widget _hero(Media m) {
     final scheme = context.colorScheme;
-    return SliverAppBar(
-      expandedHeight: 208,
-      pinned: true,
-      backgroundColor: scheme.surface,
-      surfaceTintColor: Colors.transparent,
-      actions: [
-        IconButton(
-          tooltip: 'Share',
-          icon: const Icon(Icons.share_rounded),
-          onPressed: () => shareLink(m.shareLink),
-        ),
-        PopupMenuButton<String>(
-          icon: const Icon(Icons.more_vert_rounded),
-          onSelected: (v) {
-            if (v == 'browser') openLinkInBrowser(m.shareLink);
-            if (v == 'trailer' && m.trailer != null) {
-              openLinkInBrowser(m.trailer!);
-            }
-          },
-          itemBuilder: (_) => [
-            if (m.trailer != null)
-              const PopupMenuItem(
-                value: 'trailer',
-                child: ListTile(
-                  dense: true,
-                  contentPadding: EdgeInsets.zero,
-                  leading: Icon(Icons.play_circle_outline_rounded),
-                  title: Text('Watch trailer'),
-                ),
-              ),
-            const PopupMenuItem(
-              value: 'browser',
-              child: ListTile(
-                dense: true,
-                contentPadding: EdgeInsets.zero,
-                leading: Icon(Icons.open_in_new_rounded),
-                title: Text('Open in browser'),
-              ),
-            ),
-          ],
-        ),
-      ],
-      flexibleSpace: FlexibleSpaceBar(
-        titlePadding: const EdgeInsetsDirectional.only(
-          start: 52,
-          end: 52,
-          bottom: 14,
-        ),
-        title: Text(
-          m.mainName,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          style: context.textTheme.titleSmall,
-        ),
-        background: Stack(
-          fit: StackFit.expand,
+    final top = MediaQuery.paddingOf(context).top;
+    final coverW = Dimens.detailPosterW;
+    final coverH = Dimens.detailPosterH;
+    const bannerH = 196.0;
+    final overhang = coverH * 0.42;
+
+    return Column(
+      children: [
+        Stack(
+          clipBehavior: Clip.none,
           children: [
-            if ((m.banner ?? m.cover) != null)
-              cachedNetworkImage(
-                imageUrl: m.banner ?? m.cover,
-                fit: BoxFit.cover,
-              )
-            else
-              ColoredBox(color: scheme.surfaceContainerHigh),
-            DecoratedBox(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  stops: const [0.0, 0.55, 1.0],
-                  colors: [
-                    scheme.surface.withValues(alpha: 0.1),
-                    scheme.surface.withValues(alpha: 0.35),
-                    scheme.surface,
-                  ],
-                ),
+            SizedBox(
+              height: bannerH + top,
+              width: double.infinity,
+              child: _glass
+                  ? const SizedBox.shrink()
+                  : Stack(
+                      fit: StackFit.expand,
+                      children: [
+                        (m.banner ?? m.cover) != null
+                            ? cachedNetworkImage(
+                                imageUrl: m.banner ?? m.cover,
+                                fit: BoxFit.cover,
+                              )
+                            : ColoredBox(color: scheme.surfaceContainerHigh),
+                        DecoratedBox(
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              stops: const [0.0, 0.5, 1.0],
+                              colors: [
+                                scheme.surface.withValues(alpha: 0.15),
+                                scheme.surface.withValues(alpha: 0.45),
+                                scheme.surface,
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+            ),
+            Positioned(
+              top: top + 4,
+              left: 6,
+              right: 6,
+              child: Row(
+                children: [
+                  _circleButton(Icons.arrow_back_rounded, guardedBack),
+                  const Spacer(),
+                  _circleButton(
+                    Icons.share_rounded,
+                    () => shareLink(m.shareLink),
+                  ),
+                  const SizedBox(width: 6),
+                  _menuButton(m),
+                ],
               ),
             ),
-            Obx(
-              () => _loading.value
-                  ? const Align(
-                      alignment: Alignment.bottomCenter,
-                      child: LinearProgressIndicator(minHeight: 2),
-                    )
-                  : const SizedBox.shrink(),
+            Positioned(
+              top: top,
+              left: 0,
+              right: 0,
+              child: Obx(
+                () => _loading.value
+                    ? const LinearProgressIndicator(minHeight: 2)
+                    : const SizedBox.shrink(),
+              ),
+            ),
+            Positioned(
+              left: Dimens.gap,
+              right: Dimens.gap,
+              bottom: -overhang,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  _cover(m, coverW, coverH),
+                  SizedBox(width: Dimens.gap),
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.only(bottom: overhang),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            m.mainName,
+                            style: context.textTheme.titleLarge?.copyWith(
+                              fontWeight: FontWeight.w700,
+                            ),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          if (m.nameRomaji != null &&
+                              m.nameRomaji != m.mainName) ...[
+                            const SizedBox(height: 2),
+                            Text(
+                              m.nameRomaji!,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: context.textTheme.bodySmall?.copyWith(
+                                color: scheme.onSurfaceVariant,
+                              ),
+                            ),
+                          ],
+                          if (m.status != null) ...[
+                            const SizedBox(height: 6),
+                            Text(
+                              m.status!.titleCase,
+                              style: context.textTheme.labelLarge?.copyWith(
+                                color: scheme.primary,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                          ],
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ],
         ),
-      ),
+        SizedBox(height: overhang + Dimens.gapSm),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: Dimens.gap),
+          child: Align(alignment: Alignment.centerLeft, child: _metaPills(m)),
+        ),
+        if (m.trailer != null)
+          Padding(
+            padding: EdgeInsets.fromLTRB(
+              Dimens.gap,
+              Dimens.gapSm,
+              Dimens.gap,
+              0,
+            ),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: OutlinedButton.icon(
+                onPressed: () => openLinkInBrowser(m.trailer!),
+                icon: const Icon(Icons.play_arrow_rounded, size: 18),
+                label: const Text('Trailer'),
+                style: OutlinedButton.styleFrom(
+                  visualDensity: VisualDensity.compact,
+                ),
+              ),
+            ),
+          ),
+        SizedBox(height: Dimens.gapSm),
+      ],
     );
   }
 
-  Widget _header(Media m) {
-    return Padding(
-      padding: EdgeInsets.fromLTRB(Dimens.gap, Dimens.gap, Dimens.gap, 0),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(Dimens.radiusSm),
-            child: Container(
-              width: Dimens.detailPosterW,
-              height: Dimens.detailPosterH,
-              color: context.colorScheme.surfaceContainerHigh,
-              child: cachedNetworkImage(imageUrl: m.cover, fit: BoxFit.cover),
-            ),
-          ),
-          SizedBox(width: Dimens.gap),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  m.mainName,
-                  style: context.textTheme.titleLarge,
-                  maxLines: 3,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                if (m.nameRomaji != null && m.nameRomaji != m.mainName) ...[
-                  const SizedBox(height: 2),
-                  Text(
-                    m.nameRomaji!,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: context.textTheme.bodySmall?.copyWith(
-                      color: context.colorScheme.onSurfaceVariant,
-                    ),
-                  ),
-                ],
-                SizedBox(height: Dimens.gapSm),
-                _metaPills(m),
-                if (m.trailer != null) ...[
-                  SizedBox(height: Dimens.gapSm),
-                  OutlinedButton.icon(
-                    onPressed: () => openLinkInBrowser(m.trailer!),
-                    icon: const Icon(Icons.play_arrow_rounded, size: 18),
-                    label: const Text('Trailer'),
-                    style: OutlinedButton.styleFrom(
-                      visualDensity: VisualDensity.compact,
-                    ),
-                  ),
-                ],
-              ],
-            ),
-          ),
-        ],
+  Widget _cover(Media m, double w, double h) {
+    final image = ClipRRect(
+      borderRadius: BorderRadius.circular(Dimens.radiusSm),
+      child: Container(
+        width: w,
+        height: h,
+        color: context.colorScheme.surfaceContainerHigh,
+        child: cachedNetworkImage(imageUrl: m.cover, fit: BoxFit.cover),
       ),
     );
+    if (widget.heroTag == null) return image;
+    return Hero(
+      tag: widget.heroTag!,
+      flightShuttleBuilder: (_, _, _, _, toContext) =>
+          (toContext.widget as Hero).child,
+      child: image,
+    );
   }
+
+  Widget _circleButton(IconData icon, VoidCallback onTap) => Material(
+    color: context.colorScheme.surface.withValues(alpha: 0.7),
+    shape: const CircleBorder(),
+    clipBehavior: Clip.antiAlias,
+    child: IconButton(
+      icon: Icon(icon, size: 20),
+      onPressed: onTap,
+      visualDensity: VisualDensity.compact,
+    ),
+  );
+
+  Widget _menuButton(Media m) => Material(
+    color: context.colorScheme.surface.withValues(alpha: 0.7),
+    shape: const CircleBorder(),
+    clipBehavior: Clip.antiAlias,
+    child: PopupMenuButton<String>(
+      icon: const Icon(Icons.more_vert_rounded, size: 20),
+      onSelected: (v) {
+        if (v == 'browser') openLinkInBrowser(m.shareLink);
+        if (v == 'trailer' && m.trailer != null) openLinkInBrowser(m.trailer!);
+      },
+      itemBuilder: (_) => [
+        if (m.trailer != null)
+          const PopupMenuItem(
+            value: 'trailer',
+            child: ListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              leading: Icon(Icons.play_circle_outline_rounded),
+              title: Text('Watch trailer'),
+            ),
+          ),
+        const PopupMenuItem(
+          value: 'browser',
+          child: ListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            leading: Icon(Icons.open_in_new_rounded),
+            title: Text('Open in browser'),
+          ),
+        ),
+      ],
+    ),
+  );
 
   Widget _metaPills(Media m) {
     final pills = <Widget>[

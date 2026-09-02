@@ -213,7 +213,10 @@ class _FloatingBottomNavBarState extends State<FloatingBottomNavBar> {
   }) {
     return DpadFocusable(
       onSelect: onTap,
-      effects: const [DpadScaleEffect(scale: 1.06)],
+      effects: const [
+        DpadScaleEffect(scale: 1.06),
+        DpadGlowEffect(opacity: 0.3, blurRadius: 12, spreadRadius: 0),
+      ],
       child: MouseRegion(
         cursor: SystemMouseCursors.click,
         child: SizedBox(
@@ -235,7 +238,10 @@ class _FloatingBottomNavBarState extends State<FloatingBottomNavBar> {
 
     return DpadFocusable(
       onSelect: () => widget.onTabSelected(item.index),
-      effects: const [DpadScaleEffect(scale: 1.06)],
+      effects: const [
+        DpadScaleEffect(scale: 1.06),
+        DpadGlowEffect(opacity: 0.3, blurRadius: 12, spreadRadius: 0),
+      ],
       child: SizedBox(
         width: 64,
         height: 64,

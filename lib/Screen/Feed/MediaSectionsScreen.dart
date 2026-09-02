@@ -19,7 +19,7 @@ class MediaSectionsScreen extends StatefulWidget {
   final SectionsLoader loader;
   final String? cacheId;
   final Widget? header;
-  final void Function(Media media)? onMediaTap;
+  final void Function(Media media, String? heroTag)? onMediaTap;
   final VoidCallback? onSearch;
 
   final Stream<Object?>? reloadOn;
@@ -195,7 +195,7 @@ class _MediaSectionsScreenState extends State<MediaSectionsScreen>
         type: 0,
         title: title,
         mediaList: media,
-        onMediaTap: (ctx, idx, m) => widget.onMediaTap?.call(m),
+        onMediaTap: (ctx, idx, m, tag) => widget.onMediaTap?.call(m, tag),
       ),
     );
     if (!_seen.add(title)) return section;

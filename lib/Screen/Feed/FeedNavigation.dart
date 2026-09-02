@@ -8,7 +8,12 @@ import '../Detail/DetailScreen.dart';
 import '../Notifications/NotificationsScreen.dart';
 import '../Search/SearchScreen.dart';
 
-void openDetail(BuildContext context, MediaService service, Media media) {
+void openDetail(
+  BuildContext context,
+  MediaService service,
+  Media media, {
+  String? heroTag,
+}) {
   final view = service.detailView;
   navigateToPage(
     context,
@@ -18,6 +23,7 @@ void openDetail(BuildContext context, MediaService service, Media media) {
             media: media,
             view: view,
             mutations: service.getMutations,
+            heroTag: heroTag,
           ),
   );
 }

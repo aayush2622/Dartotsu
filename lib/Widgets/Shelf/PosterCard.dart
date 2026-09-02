@@ -34,6 +34,10 @@ class PosterCard extends StatefulWidget {
 
   final bool demo;
 
+  /// When set, the cover image is a [Hero] with this tag — pair it with the
+  /// detail screen's cover for a shared-element open.
+  final String? heroTag;
+
   const PosterCard({
     super.key,
     required this.title,
@@ -48,6 +52,7 @@ class PosterCard extends StatefulWidget {
     this.onLongPress,
     this.style,
     this.demo = false,
+    this.heroTag,
   });
 
   @override
@@ -284,13 +289,19 @@ class _PosterCardState extends State<PosterCard> {
     required List<Widget> overlays,
     required bool round,
   }) {
+    Widget image = _image(_scheme);
+    if (widget.heroTag != null) {
+      image = Hero(
+        tag: widget.heroTag!,
+        flightShuttleBuilder: (_, _, _, _, toContext) =>
+            (toContext.widget as Hero).child,
+        child: image,
+      );
+    }
     final base = SizedBox(
       width: s.itemWidth,
       height: s.imageHeight,
-      child: Stack(
-        fit: StackFit.expand,
-        children: [_image(_scheme), ...overlays],
-      ),
+      child: Stack(fit: StackFit.expand, children: [image, ...overlays]),
     );
     return round
         ? ClipRRect(borderRadius: BorderRadius.circular(s.radius), child: base)
