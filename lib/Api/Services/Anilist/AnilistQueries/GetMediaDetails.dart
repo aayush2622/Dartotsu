@@ -13,6 +13,9 @@ extension on AnilistQueries {
           useToken: false,
         );
         return await compute(_parseDetail, {'media': media, 'body': body});
+      } on AnilistException catch (e) {
+        snackString('AniList: ${e.message}');
+        return media;
       } catch (_) {
         snackString('Error getting data from AniList.');
         return media;
