@@ -101,7 +101,9 @@ Then `runApp(MyApp())`. `MyApp` is a `StatefulWidget` wrapping `DynamicColorBuil
 `_locale.locale` (no app-remount key — locale changes via `Get.updateLocale`). It also
 installs a `Listener` for the mouse back-button and a non-focusable `Focus` node feeding
 `appShortcuts`, and wraps with `Dpad.wrap` (D-pad/keyboard TV nav: global
-`DpadTraversalPolicy`, `onBack`, a `DpadThemeData` with scale+glow+border focus effects).
+`DpadTraversalPolicy`, `onBack` (via the shared `guardedBack()` — re-entrant back presses
+that used to trip `Navigator._debugLocked` are swallowed), a `DpadThemeData` with a restrained
+1.03 scale + 2px border focus effect, no glow).
 `home:` is gated on `PrefName.hasCompletedOnboarding`.
 
 **TV / keyboard navigation** — `Dpad.wrap` handles arrow-key directional focus + `onBack`
