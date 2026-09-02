@@ -24,9 +24,11 @@ got a correctness/consistency pass; then a **pluggable per-service architecture*
 list-management slice** on it: onboarding → login → home/anime/manga sections (folding in the
 viewer's status lists) → media detail → list editor → search → notifications → settings, all
 on live AniList GraphQL. The service read/write surface was split into `main`-style `Queries`
-/ `Mutations` part files. On 2026-09-03 **services became data-only** — the `*ScreenView`
-layer was deleted; feed composition + navigation moved to `Screen/Feed/` (generic across
-services) and each feature screen's components moved into a `Components/` subfolder.
+/ `Mutations` part files. On 2026-09-03 the service layer went **data-only**: per-screen
+`*ScreenView` classes whose methods return data (section maps, `SearchResults`, `Media`,
+`List<Setting>`) — never a widget — plus a `SettingsScreenView` for a service's own settings;
+`Screen/Feed/` renders them; each feature screen's components moved into a `Components/`
+subfolder.
 `flutter analyze` clean; `flutter build linux` + `flutter run -d linux` verified each step. `ExtensionService` is still
 an id/name/icon shell → every screen renders `NotImplemented`. **Not built:** watch/read
 (extension sources, player, reader), MAL/Simkl subclasses, calendar, profile/character pages,
@@ -171,20 +173,24 @@ context-free access (`getString`, snackbars).
 ### `MediaService` abstraction
 
 **A new service is one subclass with zero core edits.** `MediaService`
-(`Core/Services/MediaService.dart`) is a **data-only** `abstract class` — `id` / `name` /
-`iconPath` plus **nullable capability getters**. It never returns a widget; the screens under
-`lib/Screen/` render whatever the current service's data allows, falling back to
-`NotImplemented(service, area)`:
+(`Core/Services/MediaService.dart`) is **data-only** — every getter returns data or config,
+**never a widget**. Anything `null` makes that screen fall back to `NotImplemented(service,
+area)`.
 
 | Getter | Type | Purpose |
 |---|---|---|
-| `getQueries` | `Queries?` | reads: `getUserData()`, `getMedia(id)`, `mediaDetails(m)`, `initHomePage()`, `getAnimeList()`, `getMangaList()`, `getMediaLists({anime,userId?})`, `getCalendarData()`, `getGenresAndTags()`, `getBannerImages()`, `getNotifications({page})`, `search(SearchResults?)` |
-| `getMutations` | `Mutations?` | `editList(Media,{customList})` / `deleteFromList(Media)` / `setProgress(Media,progress)` — each takes a `Media` carrying the desired user-list fields |
+| `getQueries` | `Queries?` | raw fetch layer: `getUserData()`, `getMedia(id)`, `mediaDetails(m)`, `initHomePage()`, `getAnimeList()`, `getMangaList()`, `getMediaLists({anime,userId?})`, `getCalendarData()`, `getGenresAndTags()`, `getBannerImages()`, `getNotifications({page})`, `search(SearchResults?)` |
+| `getMutations` | `Mutations?` | `editList(Media,{customList})` / `deleteFromList(Media)` / `setProgress(Media,progress)` |
 | `auth` | `ServiceAuth?` | `user` (`Rxn<ServiceUser>`), `isLoggedIn`, `login()` / `loginWithToken(t)` / `logout()` / `refreshUser()` |
+| `homeView` / `animeView` / `mangaView` / `searchView` / `detailView` / `notificationView` / `settingsView` | `*ScreenView?` | **per-screen data views** (`Core/Services/Screens/ServiceScreens.dart`) — one abstract class per screen, grouping the `Queries` its screen needs + screen config (`chips()` → `FeedChip`, `shortcuts()` → `FeedShortcut`, `settingsView.build(context)` → `List<Setting>`). Grow a view with methods as its screen gains features; never push screen concerns into `Queries`. `anime/mangaView` share `FeedScreenView` (`userLists()` / `browse()`). |
 
-- **`Core/Services/Api/Queries.dart` / `Mutations.dart`** — the abstract read/write surface
-  (mirrors `main`'s `lib/Services/Api/`). List-shaped queries return an **insertion-ordered
-  `Map<String, List<Media>>`** — key = section title to render, value = its media.
+- **`Core/Services/Api/Queries.dart` / `Mutations.dart`** — the raw read/write surface the
+  views build on (mirrors `main`'s `Queries` + `Base*Screen` split). List-shaped queries
+  return an **insertion-ordered `Map<String, List<Media>>`** — key = section title, value =
+  its media.
+- **`Api/Services/Anilist/AnilistViews.dart`** — the AniList `*ScreenView` impls, each
+  delegating to `find<AnilistAuth>().queries`. `AnilistSettingsView` gives a profile link +
+  "refresh from AniList".
 - **`Core/Services/MediaServiceController.dart`** — `RxList<MediaService> services`
   (`[AnilistService(), ExtensionService()]`), `Rx<MediaService> currentService` restored from
   `PrefName.service.value` by `id`.
