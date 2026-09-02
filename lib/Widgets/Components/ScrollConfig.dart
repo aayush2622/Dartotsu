@@ -2,11 +2,11 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 
-const _dragDevices = {
-  PointerDeviceKind.touch,
-  PointerDeviceKind.trackpad,
-  PointerDeviceKind.stylus,
-};
+// Only true touch drags scroll. Mouse and trackpad scroll via the wheel /
+// two-finger gesture, which works regardless — listing them here makes a
+// click with 1px of movement (kPrecisePointerPanSlop) lose the gesture arena
+// to the scrollable, so taps silently do nothing.
+const _dragDevices = {PointerDeviceKind.touch, PointerDeviceKind.stylus};
 
 Widget ScrollConfig(
   BuildContext context, {
