@@ -14,6 +14,7 @@ import '../../Widgets/Components/BaseScreen.dart';
 import '../../Widgets/Components/CachedNetworkImage.dart';
 import '../../Widgets/Components/SectionCard.dart';
 import '../Detail/DetailScreen.dart';
+import '../../Widgets/Components/ScrollConfig.dart';
 
 class NotificationsScreen extends StatefulWidget {
   final NotificationScreenView view;
@@ -73,32 +74,35 @@ class _NotificationsScreenState extends BaseScreen<NotificationsScreen> {
               ),
             );
           }
-          return ListView(
-            padding: EdgeInsets.fromLTRB(
-              Dimens.gap,
-              Dimens.gapXs,
-              Dimens.gap,
-              Dimens.gapXl,
-            ),
-            children: [
-              for (final group in _grouped()) ...[
-                Padding(
-                  padding: EdgeInsets.fromLTRB(
-                    Dimens.gapSm,
-                    Dimens.gap,
-                    Dimens.gapSm,
-                    Dimens.gapSm,
-                  ),
-                  child: Text(
-                    group.$1,
-                    style: context.textTheme.labelLarge?.copyWith(
-                      color: context.colorScheme.primary,
+          return ScrollConfig(
+            context,
+            child: ListView(
+              padding: EdgeInsets.fromLTRB(
+                Dimens.gap,
+                Dimens.gapXs,
+                Dimens.gap,
+                Dimens.gapXl,
+              ),
+              children: [
+                for (final group in _grouped()) ...[
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(
+                      Dimens.gapSm,
+                      Dimens.gap,
+                      Dimens.gapSm,
+                      Dimens.gapSm,
+                    ),
+                    child: Text(
+                      group.$1,
+                      style: context.textTheme.labelLarge?.copyWith(
+                        color: context.colorScheme.primary,
+                      ),
                     ),
                   ),
-                ),
-                for (final n in group.$2) _row(n),
+                  for (final n in group.$2) _row(n),
+                ],
               ],
-            ],
+            ),
           );
         }),
       ),

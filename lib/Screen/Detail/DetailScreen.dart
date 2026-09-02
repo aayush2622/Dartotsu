@@ -178,7 +178,7 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
     final top = MediaQuery.paddingOf(context).top;
     final coverW = Dimens.detailPosterW;
     final coverH = Dimens.detailPosterH;
-    const bannerH = 196.0;
+    final bannerH = _glass ? coverH * 0.66 : 196.0;
     final overhang = coverH * 0.42;
 
     return Column(
@@ -396,7 +396,6 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
   Widget _metaPills(Media m) {
     final pills = <Widget>[
       if (m.format != null) MetaPill(text: m.format!.titleCase),
-      if (m.status != null) MetaPill(text: m.status!.titleCase),
       if (_isAnime && m.anime?.totalEpisodes != null)
         MetaPill(icon: Icons.tv_rounded, text: '${m.anime!.totalEpisodes} ep'),
       if (!_isAnime && m.manga?.totalChapters != null)

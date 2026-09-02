@@ -19,6 +19,7 @@ import '../../Widgets/Components/AppControls.dart';
 import '../../Widgets/Components/BaseScreen.dart';
 import '../../Widgets/Shelf/PosterCard.dart';
 import '../Detail/DetailScreen.dart';
+import '../../Widgets/Components/ScrollConfig.dart';
 
 class SearchScreen extends StatefulWidget {
   final bool anime;
@@ -203,7 +204,8 @@ class _SearchScreenState extends BaseScreen<SearchScreen> {
       itemBuilder: (_, i) =>
           Align(alignment: Alignment.topCenter, child: children[i]),
     );
-    return skeleton ? Skeletonizer(child: grid) : grid;
+    final scrolling = ScrollConfig(context, child: grid);
+    return skeleton ? Skeletonizer(child: scrolling) : scrolling;
   }
 
   List<Widget> _skeletons() => [
