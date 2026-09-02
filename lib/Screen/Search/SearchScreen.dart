@@ -21,12 +21,12 @@ import '../Detail/DetailScreen.dart';
 
 class SearchScreen extends StatefulWidget {
   final bool anime;
-  final Queries queries;
+  final SearchScreenView view;
   final String? query;
 
   const SearchScreen({
     super.key,
-    required this.queries,
+    required this.view,
     this.anime = true,
     this.query,
   });
@@ -36,7 +36,6 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends BaseScreen<SearchScreen> {
-  Queries get _queries => widget.queries;
   final _controller = TextEditingController();
 
   final _results = <Media>[].obs;
@@ -79,7 +78,7 @@ class _SearchScreenState extends BaseScreen<SearchScreen> {
     if (_loading.value || _term.isEmpty || !_hasMore) return;
     _loading.value = true;
     try {
-      final res = await _queries.search(
+      final res = await widget.view.search(
         SearchResults(
           type: _anime.value ? SearchType.ANIME : SearchType.MANGA,
           search: _term,
@@ -165,15 +164,15 @@ class _SearchScreenState extends BaseScreen<SearchScreen> {
         if (year != null) '$year',
       ].join(' · '),
       score: (m.meanScore ?? 0) > 0 ? m.meanScore! / 10 : null,
-      onTap: () => navigateToPage(
-        context,
-        DetailScreen(
-          media: m,
-          queries: widget.queries,
-          mutations:
-              find<MediaServiceController>().currentService.value.getMutations,
-        ),
-      ),
+      onTap: () {
+        final service = find<MediaServiceController>().currentService.value;
+        final view = service.detailView;
+        if (view == null) return;
+        navigateToPage(
+          context,
+          DetailScreen(media: m, view: view, mutations: service.getMutations),
+        );
+      },
     );
   }
 

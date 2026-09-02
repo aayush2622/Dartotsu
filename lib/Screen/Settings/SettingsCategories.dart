@@ -218,6 +218,10 @@ List<Setting> accountSettings(BuildContext context) {
         }
       },
     ),
+    if (service.settingsView case final view?) ...[
+      Setting(type: SettingType.header, name: '${service.name} settings'),
+      ...view.build(context),
+    ],
   ];
 }
 
