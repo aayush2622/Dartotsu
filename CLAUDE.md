@@ -247,9 +247,10 @@ Entry flow: `OnboardingScreen` (welcome / theme / sync) → `LoginScreen` (drive
   (pull-to-refresh `MediaSection` list from a
   `SectionsLoader = Future<Map<String,List<Media>>> Function()` + optional `reloadOn` stream;
   with `cacheId:` it paints the last result from disk on frame 1 via
-  `Core/Services/SectionCache.dart` — sync read — then revalidates and patches sections
-  key-by-key without a full reload; **`RouteAware`** — revalidates on `didPopNext`; subscribes
-  to `RefreshController` under its `cacheId` so a mutation refreshes it) and `ListEditorSheet`.
+  `Core/Services/SectionCache.dart` — sync read — then revalidates **once on mount** and
+  patches sections key-by-key without a full reload. Kept alive; it does **not** refetch on
+  route re-entry — a refresh comes only from `reloadOn`, pull-to-refresh, or a
+  `RefreshController` signal under its `cacheId` (mutations fire this).) and `ListEditorSheet`.
 - **Feature screen folders** — each screen owns its top-level components in a `Components/`
   subfolder (nothing dangling at file scope):
   - `Screen/Detail/DetailScreen.dart` (`extends BaseScreen`, media art as glass backdrop;
