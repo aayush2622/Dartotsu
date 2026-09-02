@@ -10,7 +10,7 @@ import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Extensions/IntExtensions.dart';
 import '../../Utils/Extensions/Responsive.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
-import '../../Utils/Functions/RefreshController.dart';
+import '../../Utils/Functions/RefreshController.dart' show RefreshController;
 import '../../Widgets/Components/ScrollConfig.dart';
 import '../../Widgets/Components/SectionCard.dart';
 import '../../Widgets/Shelf/MediaSection.dart';
@@ -39,7 +39,7 @@ class MediaSectionsScreen extends StatefulWidget {
 }
 
 class _MediaSectionsScreenState extends State<MediaSectionsScreen>
-    with AutomaticKeepAliveClientMixin, RouteAware {
+    with AutomaticKeepAliveClientMixin {
   final _sections = <String, List<Media>>{}.obs;
   final _error = RxnString();
 
@@ -51,7 +51,6 @@ class _MediaSectionsScreenState extends State<MediaSectionsScreen>
 
   StreamSubscription<Object?>? _reloadSub;
   Worker? _signalWorker;
-  bool _subscribed = false;
   bool _refreshing = false;
   final _loaded = false.obs;
 
@@ -78,23 +77,9 @@ class _MediaSectionsScreenState extends State<MediaSectionsScreen>
   }
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    final route = ModalRoute.of(context);
-    if (!_subscribed && route is PageRoute) {
-      routeObserver.subscribe(this, route);
-      _subscribed = true;
-    }
-  }
-
-  @override
-  void didPopNext() => _refresh();
-
-  @override
   void dispose() {
     _reloadSub?.cancel();
     _signalWorker?.dispose();
-    if (_subscribed) routeObserver.unsubscribe(this);
     super.dispose();
   }
 
