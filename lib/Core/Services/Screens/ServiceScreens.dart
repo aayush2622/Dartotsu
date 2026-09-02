@@ -48,10 +48,55 @@ abstract class AnimeScreenView extends FeedScreenView {}
 
 abstract class MangaScreenView extends FeedScreenView {}
 
+/// Which filters a service's search supports, and their vocab. Everything is a
+/// plain list so the search UI is entirely service-driven — a service with no
+/// filtering returns `SearchFilterSpec.none`.
+class SearchFilterSpec {
+  /// `apiValue -> label`, in menu order.
+  final Map<String, String> sorts;
+  final List<String> formats;
+  final List<String> statuses;
+  final List<String> sources;
+  final List<String> genres;
+  final List<String> tags;
+
+  /// `apiValue -> label` (`''` = any); empty disables the control.
+  final Map<String, String> countries;
+  final bool season;
+  final bool year;
+
+  const SearchFilterSpec({
+    this.sorts = const {},
+    this.formats = const [],
+    this.statuses = const [],
+    this.sources = const [],
+    this.genres = const [],
+    this.tags = const [],
+    this.countries = const {},
+    this.season = false,
+    this.year = false,
+  });
+
+  static const none = SearchFilterSpec();
+
+  bool get isEmpty =>
+      sorts.isEmpty &&
+      formats.isEmpty &&
+      statuses.isEmpty &&
+      sources.isEmpty &&
+      genres.isEmpty &&
+      countries.isEmpty &&
+      !season &&
+      !year;
+}
+
 abstract class SearchScreenView {
   Future<SearchResults?> search(SearchResults query);
 
   List<SearchType> get types => const [SearchType.ANIME, SearchType.MANGA];
+
+  /// Filter vocabulary for [anime] vs manga search. Default: no filters.
+  SearchFilterSpec filters({required bool anime}) => SearchFilterSpec.none;
 }
 
 abstract class DetailScreenView {
