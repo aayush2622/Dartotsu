@@ -17,7 +17,7 @@ import '../../Utils/Functions/NavigateToScreen.dart';
 import '../../Widgets/Components/AppControls.dart';
 import '../../Widgets/Components/BaseScreen.dart';
 import '../../Widgets/Sections/PosterCard.dart';
-import 'DetailScreen.dart';
+import '../Detail/DetailScreen.dart';
 
 class SearchScreen extends StatefulWidget {
   final bool anime;

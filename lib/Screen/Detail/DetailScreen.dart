@@ -16,7 +16,7 @@ import '../../Widgets/Components/ScrollConfig.dart';
 import '../../Widgets/Components/SectionCard.dart';
 import '../../Widgets/Sections/Media/MediaSection.dart';
 import '../../Widgets/Sections/PeopleShelf.dart';
-import 'ListEditorSheet.dart';
+import '../Common/ListEditorSheet.dart';
 
 class DetailScreen extends StatefulWidget {
   final Media media;

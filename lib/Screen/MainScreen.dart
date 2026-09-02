@@ -5,7 +5,7 @@ import '../Core/Services/MediaServiceController.dart';
 import '../Utils/Extensions/ContextExtensions.dart';
 import '../Utils/Functions/GetXFunctions.dart';
 import '../Widgets/Components/BaseScreen.dart';
-import '../Widgets/Components/NotImplemented.dart';
+import 'Feed/FeedScreens.dart';
 import 'Navbar.dart';
 
 class MainScreen extends StatefulWidget {
@@ -24,15 +24,9 @@ class MainScreenState extends BaseScreen<MainScreen> {
   Widget _tabView(BuildContext context, int index) {
     final s = _services.currentService.value;
     return switch (index) {
-      0 =>
-        s.getAnimeScreen?.build(context) ??
-            NotImplemented(service: s.name, area: 'Anime'),
-      2 =>
-        s.getMangaScreen?.build(context) ??
-            NotImplemented(service: s.name, area: 'Manga'),
-      _ =>
-        s.getHomeScreen?.build(context) ??
-            NotImplemented(service: s.name, area: 'Home'),
+      0 => BrowseFeed(service: s, anime: true),
+      2 => BrowseFeed(service: s, anime: false),
+      _ => HomeFeed(service: s),
     };
   }
 
