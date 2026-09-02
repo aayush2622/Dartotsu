@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../Core/Services/MediaService.dart';
-import 'FeedScreens.dart';
+import '../Home/HomeFeed.dart';
+import 'BrowseFeed.dart';
 
 /// One shell tab — a browse [type], or Home when `type` is null.
 class FeedTab {
