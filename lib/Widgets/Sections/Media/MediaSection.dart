@@ -139,6 +139,7 @@ class _MediaSectionState extends State<MediaSection> {
               _buildTitleRow(),
               SizedBox(height: Dimens.gapSm),
               _buildHorizontalSliverList(),
+              SizedBox(height: Dimens.cardPad),
             ],
           ),
         ),

@@ -11,6 +11,8 @@ import '../Components/CachedNetworkImage.dart';
 const _progressGreen = Color(0xFF37DFA0);
 const _progressGreenInk = Color(0xFF05271B);
 
+enum _ScrimKind { none, short, full }
+
 /// One item in a horizontal shelf — a poster/portrait, a title and an optional
 /// subtitle. Media cards, character cards and staff cards all use this; its
 /// look follows the current [CardStyle] (normal / on-card / in-card, size,
@@ -66,6 +68,8 @@ class PosterCard extends StatefulWidget {
 class _PosterCardState extends State<PosterCard> {
   bool _hover = false;
 
+  ColorScheme get _scheme => context.colorScheme;
+
   CardStyle get _style =>
       widget.style ??
       tryFind<CardStyleController>()?.current ??
@@ -74,138 +78,11 @@ class _PosterCardState extends State<PosterCard> {
   @override
   Widget build(BuildContext context) {
     final s = _style;
-    final scheme = context.colorScheme;
-    final w = s.itemWidth;
-    final imgH = s.imageHeight;
-    final people = s.preset == 'people';
-    final showSub =
-        (s.showInfo || people) && (widget.subtitle?.isNotEmpty ?? false);
-
-    Widget posterStack({required bool overlayTitle, required bool roundSelf}) {
-      final pillOn = s.showProgress && s.progress == CardProgressStyle.pill;
-      final stack = Stack(
-        fit: StackFit.expand,
-        children: [
-          _image(scheme),
-          if (overlayTitle || pillOn) const _Scrim(),
-          if (s.showScore && widget.score != null)
-            _corner(
-              s.scoreCorner,
-              _ScoreBadge(
-                score: widget.score!,
-                highlight: widget.scoreHighlight,
-              ),
-            ),
-          if (s.showAiring && widget.airing)
-            _corner(_airingCorner(s.scoreCorner), const _AiringDot()),
-          if (s.showProgress &&
-              s.progress == CardProgressStyle.bar &&
-              widget.progress != null)
-            Positioned(
-              left: 0,
-              right: 0,
-              bottom: 0,
-              child: _Bar(fraction: widget.progress!, color: scheme.primary),
-            ),
-          if (pillOn && widget.progressText != null)
-            Positioned(
-              left: 6,
-              right: 6,
-              bottom: 6,
-              child: _Pill(text: widget.progressText!),
-            ),
-          if (overlayTitle)
-            Positioned(
-              left: 9,
-              right: 9,
-              bottom: pillOn ? 32 : 10,
-              child: Text(
-                widget.title,
-                maxLines: s.lines,
-                overflow: TextOverflow.ellipsis,
-                style: context.textTheme.labelLarge?.copyWith(
-                  color: Colors.white,
-                  height: 1.16,
-                  shadows: const [Shadow(color: Colors.black87, blurRadius: 5)],
-                ),
-              ),
-            ),
-        ],
-      );
-      final sized = SizedBox(width: w, height: imgH, child: stack);
-      return roundSelf
-          ? ClipRRect(
-              borderRadius: BorderRadius.circular(s.radius),
-              child: sized,
-            )
-          : sized;
-    }
-
-    Widget titleBelow(double width) => SizedBox(
-      width: width,
-      child: Text(
-        widget.title,
-        style: context.textTheme.bodyLarge,
-        maxLines: s.lines,
-        overflow: TextOverflow.ellipsis,
-      ),
-    );
-
-    Widget subtitleBelow(double width) => SizedBox(
-      width: width,
-      child: Text(
-        widget.subtitle!,
-        style: context.textTheme.labelMedium?.copyWith(
-          color: scheme.onSurfaceVariant,
-        ),
-        maxLines: people ? 2 : 1,
-        overflow: TextOverflow.ellipsis,
-      ),
-    );
-
-    final Widget card;
-    switch (s.mode) {
-      case CardMode.onCard:
-        card = posterStack(overlayTitle: true, roundSelf: true);
-      case CardMode.normal:
-        card = Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            posterStack(overlayTitle: false, roundSelf: true),
-            const SizedBox(height: 7),
-            titleBelow(w),
-            if (showSub) subtitleBelow(w),
-          ],
-        );
-      case CardMode.inCard:
-        card = Container(
-          width: w,
-          decoration: BoxDecoration(
-            color: scheme.surfaceContainerHigh,
-            borderRadius: BorderRadius.circular(s.radius),
-          ),
-          clipBehavior: Clip.antiAlias,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              posterStack(overlayTitle: false, roundSelf: false),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(8, 7, 8, 9),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    titleBelow(w - 16),
-                    if (showSub) subtitleBelow(w - 16),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        );
-    }
+    final card = switch (s.mode) {
+      CardMode.onCard => _onCard(s),
+      CardMode.normal => _normal(s),
+      CardMode.inCard => _inCard(s),
+    };
 
     final gesture = MouseRegion(
       cursor: SystemMouseCursors.click,
@@ -230,6 +107,209 @@ class _PosterCardState extends State<PosterCard> {
       child: gesture,
     );
   }
+
+  bool get _pillOn =>
+      _style.showProgress && _style.progress == CardProgressStyle.pill;
+  bool get _barOn =>
+      _style.showProgress &&
+      _style.progress == CardProgressStyle.bar &&
+      widget.progress != null;
+
+  // --- modes ---------------------------------------------------------
+
+  Widget _onCard(CardStyle s) => _poster(
+    s,
+    round: true,
+    overlays: [
+      const _Scrim(kind: _ScrimKind.full),
+      ..._cornerMarks(s),
+      if (_barOn)
+        Positioned(
+          left: 0,
+          right: 0,
+          bottom: 0,
+          child: _Bar(fraction: widget.progress!, color: _scheme.primary),
+        ),
+      if (_pillOn && widget.progressText != null)
+        Positioned(
+          left: 6,
+          right: 6,
+          bottom: 6,
+          child: _Pill(text: widget.progressText!),
+        ),
+      Positioned(
+        left: 9,
+        right: 9,
+        bottom: _pillOn && widget.progressText != null ? 32 : 10,
+        child: Text(
+          widget.title,
+          maxLines: s.lines,
+          overflow: TextOverflow.ellipsis,
+          style: context.textTheme.labelLarge?.copyWith(
+            color: Colors.white,
+            height: 1.16,
+            shadows: const [Shadow(color: Colors.black87, blurRadius: 5)],
+          ),
+        ),
+      ),
+    ],
+  );
+
+  Widget _normal(CardStyle s) {
+    final w = s.itemWidth;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        _poster(
+          s,
+          round: true,
+          overlays: [
+            if (_pillOn) const _Scrim(kind: _ScrimKind.full),
+            ..._cornerMarks(s),
+            if (_barOn)
+              Positioned(
+                left: 0,
+                right: 0,
+                bottom: 0,
+                child: _Bar(fraction: widget.progress!, color: _scheme.primary),
+              ),
+            if (_pillOn && widget.progressText != null)
+              Positioned(
+                left: 6,
+                right: 6,
+                bottom: 6,
+                child: _Pill(text: widget.progressText!),
+              ),
+          ],
+        ),
+        const SizedBox(height: 7),
+        _titleBelow(s, w),
+        if (_showSub(s)) _subtitleBelow(s, w),
+      ],
+    );
+  }
+
+  Widget _inCard(CardStyle s) {
+    final w = s.itemWidth;
+    final imgH = s.imageHeight;
+    final scoreOverlaps = s.showScore && widget.score != null;
+    final onRight =
+        s.scoreCorner == CardCorner.bottomRight ||
+        s.scoreCorner == CardCorner.topRight ||
+        s.scoreCorner == CardCorner.none;
+
+    return Container(
+      width: w,
+      decoration: BoxDecoration(
+        color: _scheme.surfaceContainerHigh,
+        borderRadius: BorderRadius.circular(s.radius),
+      ),
+      clipBehavior: Clip.antiAlias,
+      child: Stack(
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              _poster(
+                s,
+                round: false,
+                overlays: [
+                  const _Scrim(kind: _ScrimKind.short),
+                  if (s.showAiring && widget.airing)
+                    _corner(CardCorner.topLeft, const _AiringDot()),
+                ],
+              ),
+              if (_barOn)
+                _Bar(
+                  fraction: widget.progress!,
+                  color: _scheme.primary,
+                  height: 4,
+                ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(9, scoreOverlaps ? 13 : 8, 9, 9),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    _titleBelow(s, w - 18),
+                    if (_showSub(s)) _subtitleBelow(s, w - 18),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          if (scoreOverlaps)
+            Positioned(
+              right: onRight ? 8 : null,
+              left: onRight ? null : 8,
+              top: imgH - 10,
+              child: _ScoreBadge(
+                score: widget.score!,
+                highlight: widget.scoreHighlight,
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+
+  // --- pieces -------------------------------------------------------
+
+  List<Widget> _cornerMarks(CardStyle s) => [
+    if (s.showScore && widget.score != null)
+      _corner(
+        s.scoreCorner,
+        _ScoreBadge(score: widget.score!, highlight: widget.scoreHighlight),
+      ),
+    if (s.showAiring && widget.airing)
+      _corner(_airingCorner(s.scoreCorner), const _AiringDot()),
+  ];
+
+  Widget _poster(
+    CardStyle s, {
+    required List<Widget> overlays,
+    required bool round,
+  }) {
+    final base = SizedBox(
+      width: s.itemWidth,
+      height: s.imageHeight,
+      child: Stack(
+        fit: StackFit.expand,
+        children: [_image(_scheme), ...overlays],
+      ),
+    );
+    return round
+        ? ClipRRect(borderRadius: BorderRadius.circular(s.radius), child: base)
+        : base;
+  }
+
+  bool _showSub(CardStyle s) =>
+      (s.showInfo || s.preset == 'people') &&
+      (widget.subtitle?.isNotEmpty ?? false);
+
+  Widget _titleBelow(CardStyle s, double width) => SizedBox(
+    width: width,
+    child: Text(
+      widget.title,
+      style: context.textTheme.bodyLarge,
+      maxLines: s.lines,
+      overflow: TextOverflow.ellipsis,
+    ),
+  );
+
+  Widget _subtitleBelow(CardStyle s, double width) => SizedBox(
+    width: width,
+    child: Text(
+      widget.subtitle!,
+      style: context.textTheme.labelMedium?.copyWith(
+        color: _scheme.onSurfaceVariant,
+      ),
+      maxLines: s.preset == 'people' ? 2 : 1,
+      overflow: TextOverflow.ellipsis,
+    ),
+  );
 
   Widget _image(ColorScheme scheme) {
     if (widget.demo && (widget.imageUrl?.isEmpty ?? true)) {
@@ -280,18 +360,27 @@ class _PosterCardState extends State<PosterCard> {
 }
 
 class _Scrim extends StatelessWidget {
-  const _Scrim();
+  final _ScrimKind kind;
+  const _Scrim({required this.kind});
+
   @override
-  Widget build(BuildContext context) => const DecoratedBox(
-    decoration: BoxDecoration(
-      gradient: LinearGradient(
-        begin: Alignment.topCenter,
-        end: Alignment.bottomCenter,
-        stops: [0.42, 1.0],
-        colors: [Colors.transparent, Color(0xE6060A12)],
+  Widget build(BuildContext context) {
+    final (stop, color) = switch (kind) {
+      _ScrimKind.full => (0.42, const Color(0xE6060A12)),
+      _ScrimKind.short => (0.64, const Color(0xB3060A12)),
+      _ScrimKind.none => (1.0, const Color(0x00000000)),
+    };
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          stops: [stop, 1.0],
+          colors: [Colors.transparent, color],
+        ),
       ),
-    ),
-  );
+    );
+  }
 }
 
 class _ScoreBadge extends StatelessWidget {
@@ -303,10 +392,10 @@ class _ScoreBadge extends StatelessWidget {
   Widget build(BuildContext context) {
     final fg = highlight ? context.colorScheme.tertiary : Colors.white;
     return Container(
-      height: 19,
+      height: 20,
       padding: const EdgeInsets.symmetric(horizontal: 6),
       decoration: BoxDecoration(
-        color: const Color(0xB8060A12),
+        color: const Color(0xCC060A12),
         borderRadius: BorderRadius.circular(999),
       ),
       child: Row(
@@ -344,13 +433,14 @@ class _AiringDot extends StatelessWidget {
 class _Bar extends StatelessWidget {
   final double fraction;
   final Color color;
-  const _Bar({required this.fraction, required this.color});
+  final double height;
+  const _Bar({required this.fraction, required this.color, this.height = 3});
 
   @override
   Widget build(BuildContext context) => SizedBox(
-    height: 3,
+    height: height,
     child: ColoredBox(
-      color: const Color(0x66060A12),
+      color: const Color(0x59060A12),
       child: FractionallySizedBox(
         alignment: Alignment.centerLeft,
         widthFactor: fraction.clamp(0.0, 1.0),
