@@ -16,8 +16,8 @@ import '../../Widgets/Components/SectionCard.dart';
 import '../Detail/DetailScreen.dart';
 
 class NotificationsScreen extends StatefulWidget {
-  final Queries queries;
-  const NotificationsScreen({super.key, required this.queries});
+  final NotificationScreenView view;
+  const NotificationsScreen({super.key, required this.view});
 
   @override
   State<NotificationsScreen> createState() => _NotificationsScreenState();
@@ -36,7 +36,7 @@ class _NotificationsScreenState extends BaseScreen<NotificationsScreen> {
   Future<void> _load() async {
     _loading.value = true;
     try {
-      _items.value = await widget.queries.getNotifications();
+      _items.value = await widget.view.notifications();
       final auth = find<MediaServiceController>().currentService.value.auth;
       if (auth != null) unawaited(auth.refreshUser());
     } catch (_) {
@@ -176,19 +176,23 @@ class _NotificationsScreenState extends BaseScreen<NotificationsScreen> {
     );
   }
 
-  void _open(ServiceNotification n) => navigateToPage(
-    context,
-    DetailScreen(
-      media: Media(
-        id: n.mediaId!,
-        cover: n.imageUrl,
-        shareLink: 'https://anilist.co/anime/${n.mediaId}',
+  void _open(ServiceNotification n) {
+    final service = find<MediaServiceController>().currentService.value;
+    final view = service.detailView;
+    if (view == null) return;
+    navigateToPage(
+      context,
+      DetailScreen(
+        media: Media(
+          id: n.mediaId!,
+          cover: n.imageUrl,
+          shareLink: 'https://anilist.co/anime/${n.mediaId}',
+        ),
+        view: view,
+        mutations: service.getMutations,
       ),
-      queries: widget.queries,
-      mutations:
-          find<MediaServiceController>().currentService.value.getMutations,
-    ),
-  );
+    );
+  }
 
   Widget _skeleton() => Skeletonizer(
     child: ListView.builder(

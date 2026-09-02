@@ -9,14 +9,14 @@ import '../Notifications/NotificationsScreen.dart';
 import '../Search/SearchScreen.dart';
 
 void openDetail(BuildContext context, MediaService service, Media media) {
-  final queries = service.getQueries;
+  final view = service.detailView;
   navigateToPage(
     context,
-    queries == null
+    view == null
         ? NotImplemented(service: service.name, area: 'Details')
         : DetailScreen(
             media: media,
-            queries: queries,
+            view: view,
             mutations: service.getMutations,
           ),
   );
@@ -28,21 +28,21 @@ void openSearch(
   bool anime = true,
   String? query,
 }) {
-  final queries = service.getQueries;
+  final view = service.searchView;
   navigateToPage(
     context,
-    queries == null
+    view == null
         ? NotImplemented(service: service.name, area: 'Search')
-        : SearchScreen(queries: queries, anime: anime, query: query),
+        : SearchScreen(view: view, anime: anime, query: query),
   );
 }
 
 void openNotifications(BuildContext context, MediaService service) {
-  final queries = service.getQueries;
+  final view = service.notificationView;
   navigateToPage(
     context,
-    queries == null
+    view == null
         ? NotImplemented(service: service.name, area: 'Notifications')
-        : NotificationsScreen(queries: queries),
+        : NotificationsScreen(view: view),
   );
 }

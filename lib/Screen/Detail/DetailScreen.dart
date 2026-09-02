@@ -23,13 +23,13 @@ import 'Components/StatTile.dart';
 
 class DetailScreen extends StatefulWidget {
   final Media media;
-  final Queries queries;
+  final DetailScreenView view;
   final Mutations? mutations;
 
   const DetailScreen({
     super.key,
     required this.media,
-    required this.queries,
+    required this.view,
     this.mutations,
   });
 
@@ -57,7 +57,7 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
   Future<void> _fetch() async {
     _loading.value = true;
     try {
-      final full = await widget.queries.mediaDetails(_media.value);
+      final full = await widget.view.details(_media.value);
       if (full != null) _media.value = full;
     } catch (_) {
     } finally {
@@ -67,11 +67,7 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
 
   void _open(BuildContext context, Media media) => navigateToPage(
     context,
-    DetailScreen(
-      media: media,
-      queries: widget.queries,
-      mutations: widget.mutations,
-    ),
+    DetailScreen(media: media, view: widget.view, mutations: widget.mutations),
   );
 
   EdgeInsets get _sectionMargin =>

@@ -51,7 +51,7 @@ class HomeHeader extends StatelessWidget {
                     ],
                   ),
                 ),
-                if (user != null && service.getQueries != null)
+                if (user != null && service.notificationView != null)
                   BellButton(
                     unread: user.unreadNotifications,
                     onOpen: () => openNotifications(context, service),

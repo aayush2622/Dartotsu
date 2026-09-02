@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
 import '../../Core/Services/MediaService.dart';
-import '../../Core/Services/Model/Media.dart';
 import '../../Widgets/Components/NotImplemented.dart';
-import 'MediaSectionsScreen.dart';
 import '../Home/HomeHeader.dart';
 import 'FeedHeader.dart';
 import 'FeedNavigation.dart';
+import 'MediaSectionsScreen.dart';
 
 class HomeFeed extends StatelessWidget {
   final MediaService service;
@@ -14,13 +13,13 @@ class HomeFeed extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final queries = service.getQueries;
-    if (queries == null) {
+    final view = service.homeView;
+    if (view == null) {
       return NotImplemented(service: service.name, area: 'Home');
     }
     return MediaSectionsScreen(
       header: const HomeHeader(),
-      loader: queries.initHomePage,
+      loader: view.sections,
       cacheId: '${service.id}/home',
       reloadOn: service.auth?.user.stream,
       onMediaTap: (m) => openDetail(context, service, m),
@@ -35,18 +34,12 @@ class BrowseFeed extends StatelessWidget {
 
   String get _area => anime ? 'Anime' : 'Manga';
 
-  Future<Map<String, List<Media>>> _load(Queries queries) async {
-    final results = await Future.wait([
-      queries.getMediaLists(anime: anime),
-      anime ? queries.getAnimeList() : queries.getMangaList(),
-    ]);
-    return {...results[0], ...results[1]};
-  }
+  FeedScreenView? get _view => anime ? service.animeView : service.mangaView;
 
   @override
   Widget build(BuildContext context) {
-    final queries = service.getQueries;
-    if (queries == null) {
+    final view = _view;
+    if (view == null) {
       return NotImplemented(service: service.name, area: _area);
     }
     return MediaSectionsScreen(
@@ -54,7 +47,10 @@ class BrowseFeed extends StatelessWidget {
         title: _area,
         onSearch: () => openSearch(context, service, anime: anime),
       ),
-      loader: () => _load(queries),
+      loader: () async {
+        final results = await Future.wait([view.userLists(), view.browse()]);
+        return {...results[0], ...results[1]};
+      },
       cacheId: '${service.id}/${anime ? 'anime' : 'manga'}',
       reloadOn: service.auth?.user.stream,
       onMediaTap: (m) => openDetail(context, service, m),

@@ -1,6 +1,7 @@
 import '../../../Core/Services/MediaService.dart';
 import '../../../Utils/Functions/GetXFunctions.dart';
 import 'AnilistAuth.dart';
+import 'AnilistViews.dart';
 
 class AnilistService extends MediaService {
   @override
@@ -22,4 +23,25 @@ class AnilistService extends MediaService {
 
   @override
   ServiceAuth get auth => _auth;
+
+  @override
+  HomeScreenView get homeView => AnilistHomeView();
+
+  @override
+  AnimeScreenView get animeView => AnilistAnimeView();
+
+  @override
+  MangaScreenView get mangaView => AnilistMangaView();
+
+  @override
+  SearchScreenView get searchView => AnilistSearchView();
+
+  @override
+  DetailScreenView get detailView => AnilistDetailView();
+
+  @override
+  NotificationScreenView get notificationView => AnilistNotificationView();
+
+  @override
+  SettingsScreenView get settingsView => AnilistSettingsView();
 }

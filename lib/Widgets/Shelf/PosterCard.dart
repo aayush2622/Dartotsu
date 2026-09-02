@@ -148,7 +148,7 @@ class _PosterCardState extends State<PosterCard> {
 
   Widget _normal(CardStyle s) {
     final w = s.itemWidth;
-    final pill = _pillOn && widget.progressText != null;
+    final showBar = _style.showProgress && widget.progress != null;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
@@ -157,21 +157,13 @@ class _PosterCardState extends State<PosterCard> {
           s,
           round: true,
           overlays: [
-            if (pill) const _Scrim(kind: _ScrimKind.full),
-            ..._cornerMarks(s, bottomTaken: pill || _barOn),
-            if (_barOn)
+            ..._cornerMarks(s, bottomTaken: showBar),
+            if (showBar)
               Positioned(
                 left: 0,
                 right: 0,
                 bottom: 0,
                 child: _Bar(fraction: widget.progress!, color: _scheme.primary),
-              ),
-            if (pill)
-              Positioned(
-                left: 6,
-                right: 6,
-                bottom: 6,
-                child: _Pill(text: widget.progressText!),
               ),
           ],
         ),
