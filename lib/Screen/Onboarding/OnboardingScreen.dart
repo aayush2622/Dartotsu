@@ -28,7 +28,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   int _page = 0;
 
   ThemeData get theme => Theme.of(context);
-  TextStyle? get _labelStyle => theme.textTheme.labelLarge;
 
   void _finish() => Navigator.of(
     context,
@@ -175,33 +174,15 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     String label, {
     bool autoFocus = false,
   }) {
-    final radius = BorderRadius.circular(16);
     return DpadFocusable(
       autofocus: autoFocus,
       onSelect: onPressed,
-      builder: (_, state, child) => ThemedContainer(
-        alignment: Alignment.center,
-        padding: const EdgeInsets.all(12),
-        borderRadius: radius,
-        color: state.focused
-            ? theme.cardColor.withValues(alpha: 0.6)
-            : Colors.transparent,
-        child: child,
-      ),
-      child: InkWell(
-        onTap: onPressed,
-        canRequestFocus: false,
-        borderRadius: radius,
-        child: ThemedContainer(
-          alignment: Alignment.center,
-          padding: const EdgeInsets.all(12),
-          borderRadius: radius,
-          child: Text(
-            label,
-            textAlign: TextAlign.center,
-            style: _labelStyle?.copyWith(color: theme.colorScheme.primary),
-          ),
+      child: TextButton(
+        onPressed: onPressed,
+        style: TextButton.styleFrom(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
         ),
+        child: Text(label, textAlign: TextAlign.center),
       ),
     );
   }
