@@ -39,7 +39,6 @@ extension WidgetAnimations on Widget {
     );
   }
 
-  /// Drops in from above with a slight zoom.
   Widget animateDropIn({bool target = true}) {
     if (_disabled) return this;
 
@@ -58,7 +57,6 @@ extension WidgetAnimations on Widget {
         );
   }
 
-  /// Horizontal entrance.
   Widget animateHorizontalEntrance({bool target = true}) {
     if (_disabled) return this;
 
@@ -77,7 +75,6 @@ extension WidgetAnimations on Widget {
         );
   }
 
-  /// Fade + slide up.
   Widget animateFadeUp({
     bool target = true,
     double begin = 0.3,
@@ -96,7 +93,6 @@ extension WidgetAnimations on Widget {
     );
   }
 
-  /// Fade + slide horizontally.
   Widget animateFadeSlideX({
     bool target = true,
     required double begin,
@@ -115,7 +111,6 @@ extension WidgetAnimations on Widget {
     );
   }
 
-  /// Fade + slide + pop.
   Widget animateFadeScale({
     bool target = true,
     double slideBegin = 0.4,
@@ -140,7 +135,6 @@ extension WidgetAnimations on Widget {
         );
   }
 
-  /// Fade + pop.
   Widget animatePopIn({
     bool target = true,
     Offset begin = const Offset(0.5, 0.5),
@@ -158,7 +152,6 @@ extension WidgetAnimations on Widget {
     );
   }
 
-  /// Shimmer then pop.
   Widget animateShimmerPop({
     bool target = true,
     Duration delay = const Duration(milliseconds: 200),
@@ -176,7 +169,6 @@ extension WidgetAnimations on Widget {
         );
   }
 
-  /// Fade in, lift, then shake.
   Widget animateAttention({
     bool target = true,
     Duration delay = Duration.zero,
@@ -195,7 +187,6 @@ extension WidgetAnimations on Widget {
         .shake(hz: 2);
   }
 
-  /// Fade + unblur.
   Widget animateBlurIn({
     bool target = true,
     double blur = 10,
@@ -214,8 +205,6 @@ extension WidgetAnimations on Widget {
   Widget animatePageTransition(double animation) {
     if (_disabled) return this;
 
-    // No blur here — animating an ImageFilter over a full content page repaints
-    // every frame and janks on heavy screens. Fade + slide reads just as well.
     return animate(adapter: ValueAdapter(animation))
         .fade(begin: 0, end: 1, curve: Curves.easeOutExpo)
         .slideX(begin: 0.12, end: 0, curve: Curves.easeOutExpo);
@@ -234,7 +223,6 @@ extension WidgetAnimations on Widget {
     );
   }
 
-  /// Icon -> disappear when selected.
   Widget animateNavIcon({bool selected = false}) {
     if (_disabled) return this;
 
@@ -300,7 +288,6 @@ extension WidgetAnimations on Widget {
     );
   }
 
-  /// Service button animation.
   Widget animateNavAvatar({bool active = true}) {
     if (_disabled) return this;
 

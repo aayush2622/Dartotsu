@@ -106,7 +106,7 @@ installs a `Listener` for the mouse back-button and a non-focusable `Focus` node
 app-wide. Standard Material widgets participate automatically; custom tap targets are wrapped
 in `DpadFocusable` (`onSelect`, auto-scroll-to-focus, focus effects): `MediaSection` cards,
 `Navbar` items, `HomeHeader` avatar, `SearchScreen` result cards, `DetailScreen` synopsis,
-onboarding buttons. `BuildDropdownMenu` uses `requestFocusOnTap: true` for keyboard open.
+onboarding buttons. `AppDropdown` uses `requestFocusOnTap: true` for keyboard open.
 
 ### State management — pure GetX (no `provider`)
 
@@ -148,8 +148,12 @@ context-free access (`getString`, snackbars).
   tuple keeps them reactive inside `Obx`). `themeMode` / `isDarkModeActive` derive from `mode`.
   Guarded combo setters (`setTheme`, `setOled`, `setMaterialYou`, …).
 - **`Core/ThemeManager/ThemeManager.dart`** — pure builders: `buildAppTheme(base, {isOled,
-  glass})` applies the (colour-independent, built-once) Poppins `TextTheme`, switch theme, OLED
-  overrides and predictive-back transitions. **`glass`** makes the scaffold + app bars
+  glass})` applies the (colour-independent, built-once) Poppins `TextTheme` plus the
+  **M3-expressive component themes** — pill buttons (`StadiumBorder`, 48px min), rounded icon
+  buttons, 20px FAB, connected `SegmentedButton` group on `secondaryContainer`, stadium chips,
+  28px cards/dialogs/sheets, 16px menus/inputs/snackbars, filled inputs, `InkSparkle`, and the
+  updated (`year2023:false`) slider + progress indicator — then switch theme, OLED overrides
+  and predictive-back transitions. **`glass`** makes the scaffold + app bars
   transparent and card/dialog/sheet surfaces translucent, so the blurred `GlassBackground`
   shows through the whole stack (not just cards); it's in `ThemeController`'s memo key so a
   glass toggle is a normal `AnimatedTheme` lerp. `deriveCardColor`. Barrel-exports `AppTheme`,
@@ -233,7 +237,7 @@ Entry flow: `OnboardingScreen` (welcome / theme / sync) → `LoginScreen` (drive
   `service.auth?.user.stream`). `FeedNavigation.dart` = `openDetail` / `openSearch` /
   `openNotifications` free functions (take a `MediaService`, push the shared screen or
   `NotImplemented`). `FeedHeader` = the browse-tab title bar.
-- **`Screen/Common/`** — the widgets shared across screens: `MediaSectionsScreen`
+- **`Screen/Feed/MediaSectionsScreen.dart`** — shared feed list widget:
   (pull-to-refresh `MediaSection` list from a
   `SectionsLoader = Future<Map<String,List<Media>>> Function()` + optional `reloadOn` stream;
   with `cacheId:` it paints the last result from disk on frame 1 via
@@ -367,7 +371,7 @@ defines `handleError(e, st, {softCrash})` (called from the zone handler in `main
   radius from `Dimens`, optional consistent header. `SectionHeader` = the standalone title
   (used by rails where the card *is* the row). **Use this, not a bare `Container`/`ThemedContainer`,
   for anything with text behind it.**
-- **`Widgets/Sections/PosterCard.dart`** — **the** item for every horizontal shelf: media,
+- **`Widgets/Shelf/PosterCard.dart`** — **the** item for every horizontal shelf: media,
   character, staff, search-grid results. Renders whatever the current **`CardStyle`**
   (`Model/CardStyle.dart`, Flutter-free) says: `CardMode` `normal` (bare poster, loose title
   below) / `onCard` (everything overlaid over a scrim) / `inCard` (poster wrapped in a rounded
@@ -386,21 +390,21 @@ defines `handleError(e, st, {softCrash})` (called from the zone handler in `main
   bare Material widgets**: `AppSegmented<T>` (+ `AppSegment<T>`), `LabeledSlider`,
   `AppChoiceChips<T>`, `LabeledField` (label above a child). Used by the card-style screen,
   search Anime/Manga toggle, settings theme-mode, list editor.
-- **`Widgets/Sections/ShelfFrame.dart`** — the panel + title row every horizontal shelf sits
+- **`Widgets/Shelf/ShelfFrame.dart`** — the panel + title row every horizontal shelf sits
   in (trending media, the viewer's lists, characters, staff, relations, recommendations). One
   chrome so a feed / detail page reads as a single stack. `MediaSection` and `PeopleShelf`
   both route through it.
-- **`Widgets/Sections/PeopleShelf.dart`** — `PeopleShelf({title, people: List<ShelfPerson>})`
+- **`Widgets/Shelf/PeopleShelf.dart`** — `PeopleShelf({title, people: List<ShelfPerson>})`
   = `ShelfFrame` + a horizontal list of `PosterCard`s pinned to `CardStyle.people`.
   Characters & staff on the detail page — same card, same frame as media shelves.
 - `Widgets/Components/` — `ThemedContainer` / `ThemedWidget` / `themeDropdown`
   (`ThemedContainer.dart`) — low-level glass/M3 surface, prefer `SectionCard` over it,
   `BaseScreen` + `GlassBackground`, `CustomBottomDialog` + `showCustomBottomDialog`,
-  `AlertDialogBuilder`, `BuildDropdownMenu` (owns its trailing `FocusNode`), `CachedNetworkImage`
+  `AlertDialogBuilder`, `AppDropdown` (owns its trailing `FocusNode`), `CachedNetworkImage`
   wrapper (`cachedNetworkImage(...)`), `loadSvg(...)`, `ScrollConfig` / `CustomScrollConfig`
-  (bouncing physics, no scrollbars, mouse+trackpad drag), `CustomElevatedButton` (→ `FilledButton`),
+  (bouncing physics, no scrollbars, mouse+trackpad drag), `AppButton` (→ `FilledButton`),
   `GenreItem`, `NotImplemented`.
-- `Widgets/Sections/Media/` — `MediaSection` + `MediaSectionState` (horizontal media shelf in
+- `Widgets/Shelf/` — `MediaSection` + `MediaSectionState` (horizontal media shelf in
   a `ShelfFrame` with skeleton loading — `MediaSectionData.loading()` → `Skeletonizer` — and
   overscroll-to-load-more + haptics). `PosterCard` items in a `SuperSliverList`, keyed by
   `media.id` (+ `findChildIndexCallback`) so a cache patch touches only what changed.
