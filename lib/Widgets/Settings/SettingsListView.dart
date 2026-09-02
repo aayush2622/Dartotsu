@@ -4,6 +4,7 @@ import 'package:get/get.dart' hide ContextExtensionss;
 import '../../Model/Setting.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Extensions/Responsive.dart';
+import '../Components/ScrollConfig.dart';
 import '../Components/ThemedContainer.dart';
 import 'SettingsAdaptor.dart';
 
@@ -28,53 +29,56 @@ class _SettingsListViewState extends State<SettingsListView> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      padding: EdgeInsets.fromLTRB(
-        Dimens.pagePad,
-        Dimens.gapXs,
-        Dimens.pagePad,
-        Dimens.gapXl,
-      ),
-      children: [
-        ThemedContainer(
-          borderRadius: Dimens.borderLg,
-          padding: EdgeInsets.zero,
-          child: TextField(
-            onChanged: (v) => _query.value = v.trim(),
-            textInputAction: TextInputAction.search,
-            decoration: InputDecoration(
-              hintText: widget.hint,
-              prefixIcon: const Icon(Icons.search_rounded),
-              border: InputBorder.none,
-              contentPadding: const EdgeInsets.symmetric(vertical: 16),
+    return ScrollConfig(
+      context,
+      child: ListView(
+        padding: EdgeInsets.fromLTRB(
+          Dimens.pagePad,
+          Dimens.gapXs,
+          Dimens.pagePad,
+          Dimens.gapXl,
+        ),
+        children: [
+          ThemedContainer(
+            borderRadius: Dimens.borderLg,
+            padding: EdgeInsets.zero,
+            child: TextField(
+              onChanged: (v) => _query.value = v.trim(),
+              textInputAction: TextInputAction.search,
+              decoration: InputDecoration(
+                hintText: widget.hint,
+                prefixIcon: const Icon(Icons.search_rounded),
+                border: InputBorder.none,
+                contentPadding: const EdgeInsets.symmetric(vertical: 16),
+              ),
             ),
           ),
-        ),
-        SizedBox(height: Dimens.gap),
-        Obx(() {
-          final q = _query.value;
-          if (q.isEmpty) {
-            return SettingsAdaptor(
-              settings: (widget.menu ?? widget.searchable)(context),
-            );
-          }
-          final filtered = _filter(widget.searchable(context), q);
-          if (filtered.isEmpty) {
-            return Padding(
-              padding: const EdgeInsets.only(top: 64),
-              child: Center(
-                child: Text(
-                  'Nothing matches "$q"',
-                  style: context.textTheme.bodyMedium?.copyWith(
-                    color: context.colorScheme.onSurfaceVariant,
+          SizedBox(height: Dimens.gap),
+          Obx(() {
+            final q = _query.value;
+            if (q.isEmpty) {
+              return SettingsAdaptor(
+                settings: (widget.menu ?? widget.searchable)(context),
+              );
+            }
+            final filtered = _filter(widget.searchable(context), q);
+            if (filtered.isEmpty) {
+              return Padding(
+                padding: const EdgeInsets.only(top: 64),
+                child: Center(
+                  child: Text(
+                    'Nothing matches "$q"',
+                    style: context.textTheme.bodyMedium?.copyWith(
+                      color: context.colorScheme.onSurfaceVariant,
+                    ),
                   ),
                 ),
-              ),
-            );
-          }
-          return SettingsAdaptor(settings: filtered);
-        }),
-      ],
+              );
+            }
+            return SettingsAdaptor(settings: filtered);
+          }),
+        ],
+      ),
     );
   }
 
