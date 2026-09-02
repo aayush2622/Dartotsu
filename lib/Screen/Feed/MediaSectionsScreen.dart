@@ -22,6 +22,10 @@ class MediaSectionsScreen extends StatefulWidget {
   final void Function(Media media, String? heroTag)? onMediaTap;
   final VoidCallback? onSearch;
 
+  /// Fetches page [page] of a browse [section] (by title). `null` => no more.
+  final Future<List<Media>?> Function(String section, int page)?
+  onSectionLoadMore;
+
   final Stream<Object?>? reloadOn;
 
   const MediaSectionsScreen({
@@ -31,6 +35,7 @@ class MediaSectionsScreen extends StatefulWidget {
     this.header,
     this.onMediaTap,
     this.onSearch,
+    this.onSectionLoadMore,
     this.reloadOn,
   });
 
@@ -44,6 +49,7 @@ class _MediaSectionsScreenState extends State<MediaSectionsScreen>
   final _error = RxnString();
 
   final _seen = <String>{};
+  final _pages = <String, int>{};
 
   late final SectionCache? _cache = widget.cacheId == null
       ? null
@@ -188,6 +194,16 @@ class _MediaSectionsScreenState extends State<MediaSectionsScreen>
     );
   }
 
+  Future<List<Media>?> _loadMoreSection(String title) async {
+    final fn = widget.onSectionLoadMore;
+    if (fn == null) return null;
+    final page = (_pages[title] ?? 1) + 1;
+    final more = await fn(title, page);
+    if (more == null || more.isEmpty) return null;
+    _pages[title] = page;
+    return more;
+  }
+
   Widget _section(int index, String title, List<Media> media) {
     final section = MediaSection(
       key: ValueKey('section-$title'),
@@ -196,6 +212,9 @@ class _MediaSectionsScreenState extends State<MediaSectionsScreen>
         title: title,
         mediaList: media,
         onMediaTap: (ctx, idx, m, tag) => widget.onMediaTap?.call(m, tag),
+        onLoadMore: widget.onSectionLoadMore == null
+            ? null
+            : () => _loadMoreSection(title),
       ),
     );
     if (!_seen.add(title)) return section;

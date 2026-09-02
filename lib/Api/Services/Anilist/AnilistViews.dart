@@ -18,12 +18,68 @@ class AnilistHomeView implements HomeScreenView {
   Future<List<String?>> bannerImages() => _auth.queries.getBannerImages();
 }
 
+(String, int) _currentSeason() {
+  final now = DateTime.now();
+  final season = switch (now.month) {
+    12 || 1 || 2 => 'WINTER',
+    3 || 4 || 5 => 'SPRING',
+    6 || 7 || 8 => 'SUMMER',
+    _ => 'FALL',
+  };
+  final year = (now.month == 12) ? now.year + 1 : now.year;
+  return (season, year);
+}
+
+/// Maps a browse section title to the query that continues it. `null` for
+/// sections that can't be paged (airing schedule, the viewer's own lists).
+Future<List<Media>?> _loadMoreSection(
+  String section,
+  int page, {
+  required bool anime,
+}) {
+  final type = anime ? SearchType.ANIME : SearchType.MANGA;
+  final base = SearchResults(type: type, page: page, perPage: 30);
+  final query = switch (section) {
+    'Trending Now' => base..sort = 'TRENDING_DESC',
+    'Popular Anime' || 'Popular Manga' => base..sort = 'POPULARITY_DESC',
+    'Top Rated Series' || 'Top Rated Manga' => base..sort = 'SCORE_DESC',
+    'Most Favourite Series' ||
+    'Most Favourite Manga' => base..sort = 'FAVOURITES_DESC',
+    'Trending Movies' =>
+      base
+        ..sort = 'TRENDING_DESC'
+        ..format = 'MOVIE',
+    'Trending Manhwa' =>
+      base
+        ..sort = 'TRENDING_DESC'
+        ..countryOfOrigin = 'KR',
+    'Trending Novels' =>
+      base
+        ..sort = 'TRENDING_DESC'
+        ..format = 'NOVEL',
+    'Popular This Season' => () {
+      final (s, y) = _currentSeason();
+      return base
+        ..sort = 'POPULARITY_DESC'
+        ..season = s
+        ..seasonYear = y;
+    }(),
+    _ => null,
+  };
+  if (query == null) return Future.value(null);
+  return _auth.queries.search(query).then((r) => r?.results);
+}
+
 class AnilistAnimeView extends AnimeScreenView {
   @override
   Sections userLists() => _auth.queries.getMediaLists(anime: true);
 
   @override
   Sections browse() => _auth.queries.getAnimeList();
+
+  @override
+  Future<List<Media>?> loadMore(String section, int page) =>
+      _loadMoreSection(section, page, anime: true);
 }
 
 class AnilistMangaView extends MangaScreenView {
@@ -32,6 +88,10 @@ class AnilistMangaView extends MangaScreenView {
 
   @override
   Sections browse() => _auth.queries.getMangaList();
+
+  @override
+  Future<List<Media>?> loadMore(String section, int page) =>
+      _loadMoreSection(section, page, anime: false);
 }
 
 class AnilistSearchView implements SearchScreenView {

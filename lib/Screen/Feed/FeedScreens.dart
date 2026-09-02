@@ -56,6 +56,7 @@ class BrowseFeed extends StatelessWidget {
       cacheId: '${service.id}/${anime ? 'anime' : 'manga'}',
       reloadOn: service.auth?.user.stream,
       onMediaTap: (m, tag) => openDetail(context, service, m, heroTag: tag),
+      onSectionLoadMore: view.loadMore,
     );
   }
 }

@@ -49,7 +49,7 @@ class MediaSectionData {
   final void Function(BuildContext context, int index, Media media)?
   onMediaLongPress;
 
-  final Future<List<Media>> Function()? onLoadMore;
+  final Future<List<Media>?> Function()? onLoadMore;
 
   const MediaSectionData({
     required this.type,

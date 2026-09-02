@@ -35,6 +35,10 @@ abstract class FeedScreenView {
 
   Sections browse();
 
+  /// Next page for a browse [section] (keyed by its display title). Return
+  /// `null` when the section can't paginate or has no more items.
+  Future<List<Media>?> loadMore(String section, int page) => Future.value(null);
+
   List<FeedChip> chips() => const [];
 
   List<FeedShortcut> shortcuts() => const [];
