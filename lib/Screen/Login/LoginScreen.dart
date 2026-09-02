@@ -108,9 +108,9 @@ class _LoginScreenState extends BaseScreen<LoginScreen> {
                 SizedBox(
                   width: double.infinity,
                   child: FilledButton.icon(
-                    onPressed: _busy.value || auth == null
+                    onPressed: _busy.value
                         ? null
-                        : () => _run(auth.login),
+                        : (auth == null ? _enter : () => _run(auth.login)),
                     icon: _busy.value
                         ? const SizedBox(
                             width: 18,
@@ -130,14 +130,11 @@ class _LoginScreenState extends BaseScreen<LoginScreen> {
                     ),
                     style: FilledButton.styleFrom(
                       padding: const EdgeInsets.symmetric(vertical: 18),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16),
-                      ),
                     ),
                   ),
                 ),
                 const SizedBox(height: 10),
-                if (auth != null)
+                if (auth != null) ...[
                   SizedBox(
                     width: double.infinity,
                     child: OutlinedButton(
@@ -146,18 +143,16 @@ class _LoginScreenState extends BaseScreen<LoginScreen> {
                           : () => _tokenDialog(auth.loginWithToken),
                       style: OutlinedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(vertical: 16),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16),
-                        ),
                       ),
                       child: Text(getString.loginWithToken),
                     ),
                   ),
-                const SizedBox(height: 10),
-                TextButton(
-                  onPressed: _busy.value ? null : _enter,
-                  child: Text(getString.continueAsGuest),
-                ),
+                  const SizedBox(height: 10),
+                  TextButton(
+                    onPressed: _busy.value ? null : _enter,
+                    child: Text(getString.continueAsGuest),
+                  ),
+                ],
                 const SizedBox(height: 4),
                 TextButton.icon(
                   onPressed: () => serviceSwitcher(context),
