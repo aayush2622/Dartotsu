@@ -14,6 +14,7 @@ import '../../Utils/Functions/RefreshController.dart' show RefreshController;
 import '../../Widgets/Components/ScrollConfig.dart';
 import '../../Widgets/Components/SectionCard.dart';
 import '../../Widgets/Shelf/MediaSection.dart';
+import '../../Widgets/Shelf/StackedCarousel.dart';
 
 class MediaSectionsScreen extends StatefulWidget {
   final SectionsLoader loader;
@@ -26,6 +27,10 @@ class MediaSectionsScreen extends StatefulWidget {
   final Future<List<Media>?> Function(String section, int page)?
   onSectionLoadMore;
 
+  /// Section title to render as a [StackedCarousel] above the rails (and hide
+  /// from the rail list).
+  final String? spotlight;
+
   final Stream<Object?>? reloadOn;
 
   const MediaSectionsScreen({
@@ -36,6 +41,7 @@ class MediaSectionsScreen extends StatefulWidget {
     this.onMediaTap,
     this.onSearch,
     this.onSectionLoadMore,
+    this.spotlight,
     this.reloadOn,
   });
 
@@ -162,7 +168,11 @@ class _MediaSectionsScreenState extends State<MediaSectionsScreen>
         final showError = _error.value != null && empty;
         final showEmpty = empty && !showError && _loaded.value;
         final showSkeleton = empty && !showError && !showEmpty;
-        final entries = _sections.entries.toList();
+        final spotlight = widget.spotlight;
+        final spotItems = spotlight == null ? null : _sections[spotlight];
+        final entries = _sections.entries
+            .where((e) => e.key != spotlight)
+            .toList();
 
         return CustomScrollConfig(
           context,
@@ -170,6 +180,16 @@ class _MediaSectionsScreenState extends State<MediaSectionsScreen>
           children: [
             if (widget.header != null)
               SliverToBoxAdapter(child: widget.header!),
+            if (spotItems != null && spotItems.isNotEmpty)
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(vertical: Dimens.gapSm),
+                  child: StackedCarousel(
+                    items: spotItems.take(10).toList(),
+                    onTap: (m, tag) => widget.onMediaTap?.call(m, tag),
+                  ),
+                ),
+              ),
             const SliverToBoxAdapter(child: SizedBox(height: 8)),
             if (showSkeleton)
               for (var i = 0; i < 4; i++)

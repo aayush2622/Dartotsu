@@ -57,6 +57,7 @@ class BrowseFeed extends StatelessWidget {
       reloadOn: service.auth?.user.stream,
       onMediaTap: (m, tag) => openDetail(context, service, m, heroTag: tag),
       onSectionLoadMore: view.loadMore,
+      spotlight: 'Trending Now',
     );
   }
 }
