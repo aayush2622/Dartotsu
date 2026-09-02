@@ -184,7 +184,7 @@ area)`.
 | `getQueries` | `Queries?` | raw fetch layer: `getUserData()`, `getMedia(id)`, `mediaDetails(m)`, `initHomePage()`, `getAnimeList()`, `getMangaList()`, `getMediaLists({anime,userId?})`, `getCalendarData()`, `getGenresAndTags()`, `getBannerImages()`, `getNotifications({page})`, `search(SearchResults?)` |
 | `getMutations` | `Mutations?` | `editList(Media,{customList})` / `deleteFromList(Media)` / `setProgress(Media,progress)` |
 | `auth` | `ServiceAuth?` | `user` (`Rxn<ServiceUser>`), `isLoggedIn`, `login()` / `loginWithToken(t)` / `logout()` / `refreshUser()` |
-| `homeView` / `animeView` / `mangaView` / `searchView` / `detailView` / `notificationView` / `settingsView` | `*ScreenView?` | **per-screen data views** (`Core/Services/Screens/ServiceScreens.dart`) — one abstract class per screen, grouping the `Queries` its screen needs + screen config (`chips()` → `FeedChip`, `shortcuts()` → `FeedShortcut`, `settingsView.build(context)` → `List<Setting>`). Grow a view with methods as its screen gains features; never push screen concerns into `Queries`. `anime/mangaView` share `FeedScreenView` (`userLists()` / `browse()`). |
+| `homeView` / `animeView` / `mangaView` / `searchView` / `detailView` / `notificationView` / `settingsView` | `*ScreenView?` | **per-screen data views** (`Core/Services/Screens/ServiceScreens.dart`) — one abstract class per screen, grouping the `Queries` its screen needs + screen config, all returning **data, never widgets**. `anime/mangaView` share `FeedScreenView` (`userLists()` / `browse()` / `loadMore(section, page)` per-section pagination / `chips()` → `FeedChip` / `shortcuts()` → `FeedShortcut`). `searchView` adds `filters(anime:)` → `SearchFilterSpec` (filter vocab). `settingsView.build(context)` → `List<Setting>` folded into the Account category. Grow a view with methods as its screen gains features; never push screen concerns into `Queries`. |
 
 - **`Core/Services/Api/Queries.dart` / `Mutations.dart`** — the raw read/write surface the
   views build on (mirrors `main`'s `Queries` + `Base*Screen` split). List-shaped queries
@@ -252,16 +252,30 @@ Entry flow: `OnboardingScreen` (welcome / theme / sync) → `LoginScreen` (drive
   `Core/Services/SectionCache.dart` — sync read — then revalidates **once on mount** and
   patches sections key-by-key without a full reload. Kept alive; it does **not** refetch on
   route re-entry — a refresh comes only from `reloadOn`, pull-to-refresh, or a
-  `RefreshController` signal under its `cacheId` (mutations fire this).) and `ListEditorSheet`.
+  `RefreshController` signal under its `cacheId` (mutations fire this). `onSectionLoadMore`
+  gives each rail per-section pagination — an overscroll fetches page N of that section via
+  `FeedScreenView.loadMore(title, page)`. `spotlight:` renders one section as a
+  `StackedCarousel` above the rails and drops it from the list.) and `ListEditorSheet`.
+- **`Widgets/Shelf/StackedCarousel.dart`** — the spotlight carousel: centre card in front,
+  neighbours fanned behind like a deck (`PageView` + per-page `Transform`), auto-advances +
+  loops, a drag pauses it. Cards `Hero` into the detail cover. Used by `HomeFeed` /
+  `BrowseFeed` via `MediaSectionsScreen.spotlight`.
 - **Feature screen folders** — each screen owns its top-level components in a `Components/`
   subfolder (nothing dangling at file scope):
-  - `Screen/Detail/DetailScreen.dart` (`extends BaseScreen`, media art as glass backdrop;
-    `Queries` + `Mutations?`; pull-to-refresh; collapsing banner, genres, synopsis, character
-    & staff `PeopleShelf`s, relation/recommendation `MediaSection`s; FAB → `ListEditorSheet`)
-    + `Components/{MetaPill,StatTile,InfoRow,ExpandableText}.dart`.
+  - `Screen/Detail/DetailScreen.dart` (`extends BaseScreen`, `DetailScreenView` +
+    `Mutations?`; pull-to-refresh; **`_hero`** = main-style fixed top — banner behind (skipped
+    in glass, where the blurred bg *is* the banner), circular back/share/menu, cover
+    (`Hero`, tag from `openDetail(heroTag:)`) + title + status overlapping the banner bottom;
+    then stat strip, synopsis, genres, character & staff `PeopleShelf`s, relation/rec
+    `MediaSection`s, FAB → `ListEditorSheet`) + `Components/{MetaPill,StatTile,InfoRow,
+    ExpandableText}.dart`.
   - `Screen/Home/HomeHeader.dart` (greeting + avatar + bell + search)
     + `Components/{HeaderAvatar,BellButton,HeaderStatPill,AccountSheet}.dart`.
-  - `Screen/Search/SearchScreen.dart` (debounced, anime/manga toggle, infinite-scroll grid).
+  - `Screen/Search/SearchScreen.dart` — one live `SearchResults`; term OR any filter drives
+    it (doubles as a browser); removable active-filter chips; `Components/SearchFilterSheet`
+    is a bottom sheet built entirely from `SearchScreenView.filters(anime:)` →
+    `SearchFilterSpec` (sort / format / status / source / country / season / year / genres /
+    tags vocab — service-defined, `SearchFilterSpec.none` hides the tune button).
   - `Screen/Notifications/NotificationsScreen.dart` (grouped, `_row` builder).
 - **`Screen/Settings/`** — data-driven, `main`-style. `Model/Setting.dart` (`SettingType`
   header/normal/switchType/slider/inputBox/custom) → `Widgets/Settings/SettingsAdaptor` (one
