@@ -13,9 +13,8 @@ import '../../../Utils/Extensions/CardStyleMetrics.dart';
 import '../../../Utils/Extensions/Responsive.dart';
 import '../../../Utils/Functions/GetXFunctions.dart';
 import '../../Components/ScrollConfig.dart';
-import '../../Components/SectionCard.dart';
-import '../../Components/ThemedContainer.dart';
 import '../PosterCard.dart';
+import '../ShelfFrame.dart';
 import 'MediaSectionState.dart';
 
 class MediaSectionData {
@@ -108,8 +107,6 @@ class _MediaSectionState extends State<MediaSection> {
 
   double get _gap => Dimens.cardGap;
 
-  bool get _hasTitle => data.loading || (data.title?.isNotEmpty ?? false);
-
   @override
   void initState() {
     super.initState();
@@ -127,75 +124,27 @@ class _MediaSectionState extends State<MediaSection> {
 
   @override
   Widget build(BuildContext context) {
-    return RepaintBoundary(
-      child: ThemedContainer(
-        margin: EdgeInsets.symmetric(
-          horizontal: Dimens.gap,
-          vertical: Dimens.gapSm / 2,
-        ),
-        padding: EdgeInsets.zero,
-        borderRadius: Dimens.border,
-        border: const Border.fromBorderSide(BorderSide.none),
-        child: Skeletonizer(
-          enabled: data.loading,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              if (_hasTitle) ...[
-                _buildTitleRow(),
-                SizedBox(height: Dimens.gapSm),
-              ] else
-                SizedBox(height: Dimens.cardPad),
-              _buildHorizontalSliverList(),
-              SizedBox(height: Dimens.cardPad),
-            ],
-          ),
-        ),
-      ),
+    final frame = ShelfFrame(
+      title: data.loading ? 'Loading' : data.title,
+      onTitleTap: data.onTitleTap,
+      trailing: _trailingButton(),
+      child: _buildHorizontalSliverList(),
     );
+    return data.loading ? Skeletonizer(child: frame) : frame;
   }
 
-  Widget _buildTitleRow() {
-    final title = data.title;
-    if (data.loading) {
-      return Padding(
-        padding: EdgeInsets.fromLTRB(Dimens.cardPad + 8, Dimens.cardPad, 12, 0),
-        child: const Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            'Loading section',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-          ),
-        ),
-      );
-    }
-    if (title == null || title.isEmpty) return const SizedBox.shrink();
-
-    final trailing = data.trailingIcon;
-
-    return Padding(
-      padding: EdgeInsets.fromLTRB(Dimens.cardPad + 8, Dimens.cardPad, 8, 0),
-      child: SectionHeader(
-        title: title,
-        onTap: data.onTitleTap,
-        trailing: trailing == null
-            ? null
-            : DpadFocusable(
-                enabled:
-                    data.onTrailingIconTap != null ||
-                    data.onTrailingIconLongPress != null,
-                onSelect:
-                    data.onTrailingIconTap ?? data.onTrailingIconLongPress,
-                child: IconButton(
-                  icon: Icon(
-                    trailing,
-                    size: 24,
-                    color: theme.colorScheme.onSurface,
-                  ),
-                  onPressed: data.onTrailingIconTap,
-                  onLongPress: data.onTrailingIconLongPress,
-                ),
-              ),
+  Widget? _trailingButton() {
+    final icon = data.trailingIcon;
+    if (icon == null || data.loading) return null;
+    return DpadFocusable(
+      enabled:
+          data.onTrailingIconTap != null ||
+          data.onTrailingIconLongPress != null,
+      onSelect: data.onTrailingIconTap ?? data.onTrailingIconLongPress,
+      child: IconButton(
+        icon: Icon(icon, size: 24, color: theme.colorScheme.onSurface),
+        onPressed: data.onTrailingIconTap,
+        onLongPress: data.onTrailingIconLongPress,
       ),
     );
   }
