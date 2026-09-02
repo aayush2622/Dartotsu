@@ -133,9 +133,11 @@ class _MyAppState extends State<MyApp> {
     onBack: _handleBack,
     theme: const DpadThemeData(
       effects: [
-        DpadScaleEffect(scale: 1.04),
-        DpadGlowEffect(opacity: 0.5, blurRadius: 22),
-        DpadBorderEffect(width: 2.5),
+        DpadScaleEffect(scale: 1.03),
+        DpadBorderEffect(
+          width: 2,
+          borderRadius: BorderRadius.all(Radius.circular(18)),
+        ),
       ],
     ),
   );

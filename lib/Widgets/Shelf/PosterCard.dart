@@ -73,27 +73,24 @@ class _PosterCardState extends State<PosterCard> {
       CardMode.inCard => _inCard(s),
     };
 
-    final gesture = MouseRegion(
-      cursor: SystemMouseCursors.click,
+    final visual = MouseRegion(
+      cursor: widget.onTap == null
+          ? MouseCursor.defer
+          : SystemMouseCursors.click,
       onEnter: (_) => setState(() => _hover = true),
       onExit: (_) => setState(() => _hover = false),
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: widget.onTap,
-        onLongPress: widget.onLongPress,
-        child: card,
-      ),
+      child: card,
     );
 
     if (widget.onTap == null) {
-      return _scaled(gesture, _hover ? 1.05 : 1.0);
+      return _scaled(visual, _hover ? 1.02 : 1.0);
     }
     return DpadFocusable(
       onSelect: widget.onTap,
       onLongSelect: widget.onLongPress,
       builder: (context, state, child) =>
-          _scaled(child, (_hover || state.focused) ? 1.06 : 1.0),
-      child: gesture,
+          _scaled(child, (_hover || state.focused) ? 1.03 : 1.0),
+      child: visual,
     );
   }
 
