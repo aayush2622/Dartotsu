@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../Core/Services/MediaService.dart';
 import '../../Core/Services/Model/Media.dart';
 import '../../Widgets/Components/NotImplemented.dart';
-import '../Common/MediaSectionsScreen.dart';
+import 'MediaSectionsScreen.dart';
 import '../Home/HomeHeader.dart';
 import 'FeedHeader.dart';
 import 'FeedNavigation.dart';

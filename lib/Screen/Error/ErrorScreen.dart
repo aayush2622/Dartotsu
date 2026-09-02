@@ -11,7 +11,7 @@ import '../../Utils/Extensions/NumExtensions.dart';
 import '../../Utils/Function.dart';
 import '../../Utils/Functions/CopyToClip.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
-import '../../Widgets/Components/CustomElevatedButton.dart';
+import '../../Widgets/Components/AppButton.dart';
 import '../../Widgets/Components/ScrollConfig.dart';
 
 class ErrorScreen extends StatefulWidget {
@@ -199,7 +199,7 @@ class _ErrorScreenState extends State<ErrorScreen> {
     return Row(
       children: [
         Expanded(
-          child: CustomElevatedButton(
+          child: AppButton(
             context: context,
             onPressed: () async {
               final dir = await StorageManager.getDirectory(
@@ -224,7 +224,7 @@ class _ErrorScreenState extends State<ErrorScreen> {
         ),
         const SizedBox(width: 12),
         Expanded(
-          child: CustomElevatedButton(
+          child: AppButton(
             context: context,
             onPressed: () {
               copyToClipboard(

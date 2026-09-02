@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import '../../../Core/Services/Model/Media.dart';
+import '../../Core/Services/Model/Media.dart';
 
 class MediaSectionState {
   var overscrollProgress = 0.0.obs;

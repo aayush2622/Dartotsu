@@ -16,7 +16,7 @@ import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Utils/Functions/NavigateToScreen.dart';
 import '../../Widgets/Components/AppControls.dart';
 import '../../Widgets/Components/BaseScreen.dart';
-import '../../Widgets/Sections/PosterCard.dart';
+import '../../Widgets/Shelf/PosterCard.dart';
 import '../Detail/DetailScreen.dart';
 
 class SearchScreen extends StatefulWidget {

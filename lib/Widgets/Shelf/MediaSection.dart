@@ -6,15 +6,15 @@ import 'package:get/get.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:super_sliver_list/super_sliver_list.dart';
 
-import '../../../Core/Services/Model/Media.dart';
-import '../../../Core/ThemeManager/CardStyleController.dart';
+import '../../Core/Services/Model/Media.dart';
+import '../../Core/ThemeManager/CardStyleController.dart';
 import '../../../Model/CardStyle.dart';
-import '../../../Utils/Extensions/CardStyleMetrics.dart';
-import '../../../Utils/Extensions/Responsive.dart';
-import '../../../Utils/Functions/GetXFunctions.dart';
-import '../../Components/ScrollConfig.dart';
-import '../PosterCard.dart';
-import '../ShelfFrame.dart';
+import '../../Utils/Extensions/CardStyleMetrics.dart';
+import '../../Utils/Extensions/Responsive.dart';
+import '../../Utils/Functions/GetXFunctions.dart';
+import '../Components/ScrollConfig.dart';
+import 'PosterCard.dart';
+import 'ShelfFrame.dart';
 import 'MediaSectionState.dart';
 
 class MediaSectionData {

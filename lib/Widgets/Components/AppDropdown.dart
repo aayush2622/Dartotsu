@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class BuildDropdownMenu extends StatefulWidget {
+class AppDropdown extends StatefulWidget {
   final String? value;
   final List<String> options;
   final ValueChanged<String?>? onChanged;
@@ -12,7 +12,7 @@ class BuildDropdownMenu extends StatefulWidget {
   final Color? borderColor;
   final String? hintText;
 
-  const BuildDropdownMenu({
+  const AppDropdown({
     super.key,
     required this.options,
     this.value,
@@ -27,10 +27,10 @@ class BuildDropdownMenu extends StatefulWidget {
   });
 
   @override
-  State<BuildDropdownMenu> createState() => _BuildDropdownMenuState();
+  State<AppDropdown> createState() => _AppDropdownState();
 }
 
-class _BuildDropdownMenuState extends State<BuildDropdownMenu> {
+class _AppDropdownState extends State<AppDropdown> {
   final _trailingFocus = FocusNode(
     canRequestFocus: true,
     descendantsAreTraversable: false,

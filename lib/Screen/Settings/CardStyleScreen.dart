@@ -12,7 +12,7 @@ import '../../Widgets/Components/AppControls.dart';
 import '../../Widgets/Components/BaseScreen.dart';
 import '../../Widgets/Components/ScrollConfig.dart';
 import '../../Widgets/Components/SectionCard.dart';
-import '../../Widgets/Sections/PosterCard.dart';
+import '../../Widgets/Shelf/PosterCard.dart';
 
 class CardStyleScreen extends StatefulWidget {
   const CardStyleScreen({super.key});

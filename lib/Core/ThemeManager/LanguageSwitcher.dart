@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../Utils/Functions/GetXFunctions.dart';
-import '../../Widgets/Components/DropdownMenu.dart';
+import '../../Widgets/Components/AppDropdown.dart';
 import '../../l10n/app_localizations.dart';
 import 'LocaleController.dart';
 import 'language.dart';
@@ -15,7 +15,7 @@ Widget languageSwitcher(BuildContext context) {
       .toList();
 
   return Obx(
-    () => BuildDropdownMenu(
+    () => AppDropdown(
       padding: const EdgeInsets.symmetric(vertical: 12.0),
       value: completeLanguageName(locale.code.value.toUpperCase()),
       options: options,
