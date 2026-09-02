@@ -147,6 +147,7 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
                     data: MediaSectionData(
                       type: 0,
                       title: 'Relations',
+                      heroPrefix: 'detail:${m.id}',
                       mediaList: m.relations,
                       onMediaTap: (ctx, i, media, tag) =>
                           _open(ctx, media, tag),
@@ -159,6 +160,7 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
                     data: MediaSectionData(
                       type: 0,
                       title: 'Recommendations',
+                      heroPrefix: 'detail:${m.id}',
                       mediaList: m.recommendations,
                       onMediaTap: (ctx, i, media, tag) =>
                           _open(ctx, media, tag),
