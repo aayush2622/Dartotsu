@@ -157,6 +157,7 @@ class _PosterCardState extends State<PosterCard> {
 
   Widget _normal(CardStyle s) {
     final w = s.itemWidth;
+    final pill = _pillOn && widget.progressText != null;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
@@ -165,7 +166,7 @@ class _PosterCardState extends State<PosterCard> {
           s,
           round: true,
           overlays: [
-            if (_pillOn) const _Scrim(kind: _ScrimKind.full),
+            if (pill) const _Scrim(kind: _ScrimKind.full),
             ..._cornerMarks(s),
             if (_barOn)
               Positioned(
@@ -174,7 +175,7 @@ class _PosterCardState extends State<PosterCard> {
                 bottom: 0,
                 child: _Bar(fraction: widget.progress!, color: _scheme.primary),
               ),
-            if (_pillOn && widget.progressText != null)
+            if (pill)
               Positioned(
                 left: 6,
                 right: 6,
@@ -193,7 +194,11 @@ class _PosterCardState extends State<PosterCard> {
   Widget _inCard(CardStyle s) {
     final w = s.itemWidth;
     final imgH = s.imageHeight;
-    final scoreOverlaps = s.showScore && widget.score != null;
+    final hasScore = s.showScore && widget.score != null;
+    final pill = _pillOn && widget.progressText != null;
+    // With a pill on the cover the score sits in its corner; otherwise it
+    // floats at the poster/text seam.
+    final scoreFloats = hasScore && !pill;
     final onRight =
         s.scoreCorner == CardCorner.bottomRight ||
         s.scoreCorner == CardCorner.topRight ||
@@ -218,7 +223,24 @@ class _PosterCardState extends State<PosterCard> {
                 overlays: [
                   const _Scrim(kind: _ScrimKind.short),
                   if (s.showAiring && widget.airing)
-                    _corner(CardCorner.topLeft, const _AiringDot()),
+                    _corner(_airingCorner(s.scoreCorner), const _AiringDot()),
+                  if (hasScore && !scoreFloats)
+                    _corner(
+                      s.scoreCorner == CardCorner.none
+                          ? CardCorner.topLeft
+                          : s.scoreCorner,
+                      _ScoreBadge(
+                        score: widget.score!,
+                        highlight: widget.scoreHighlight,
+                      ),
+                    ),
+                  if (pill)
+                    Positioned(
+                      left: 6,
+                      right: 6,
+                      bottom: 6,
+                      child: _Pill(text: widget.progressText!),
+                    ),
                 ],
               ),
               if (_barOn)
@@ -228,7 +250,7 @@ class _PosterCardState extends State<PosterCard> {
                   height: 4,
                 ),
               Padding(
-                padding: EdgeInsets.fromLTRB(9, scoreOverlaps ? 13 : 8, 9, 9),
+                padding: EdgeInsets.fromLTRB(9, scoreFloats ? 13 : 8, 9, 9),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
@@ -240,7 +262,7 @@ class _PosterCardState extends State<PosterCard> {
               ),
             ],
           ),
-          if (scoreOverlaps)
+          if (scoreFloats)
             Positioned(
               right: onRight ? 8 : null,
               left: onRight ? null : 8,
