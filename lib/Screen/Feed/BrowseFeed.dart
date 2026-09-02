@@ -6,8 +6,9 @@ import 'FeedHeader.dart';
 import 'FeedNavigation.dart';
 import 'MediaSectionsScreen.dart';
 
-/// One browse tab for a [MediaType] the service declares — the viewer's lists
-/// folded above the browse rows, per-section pagination, no carousel.
+/// One browse tab for a [MediaType] the service declares — a spotlight
+/// carousel, the viewer's lists folded above the browse rows, and per-section
+/// pagination.
 class BrowseFeed extends StatelessWidget {
   final MediaService service;
   final MediaType type;
@@ -37,6 +38,7 @@ class BrowseFeed extends StatelessWidget {
       reloadOn: service.auth?.user.stream,
       onMediaTap: (m, tag) => openDetail(context, service, m, heroTag: tag),
       onSectionLoadMore: (section, page) => view.loadMore(type, section, page),
+      spotlight: 'Trending Now',
     );
   }
 }
