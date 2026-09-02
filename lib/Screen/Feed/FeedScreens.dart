@@ -22,7 +22,7 @@ class HomeFeed extends StatelessWidget {
       loader: view.sections,
       cacheId: '${service.id}/home',
       reloadOn: service.auth?.user.stream,
-      onMediaTap: (m) => openDetail(context, service, m),
+      onMediaTap: (m, tag) => openDetail(context, service, m, heroTag: tag),
     );
   }
 }
@@ -55,7 +55,7 @@ class BrowseFeed extends StatelessWidget {
       },
       cacheId: '${service.id}/${anime ? 'anime' : 'manga'}',
       reloadOn: service.auth?.user.stream,
-      onMediaTap: (m) => openDetail(context, service, m),
+      onMediaTap: (m, tag) => openDetail(context, service, m, heroTag: tag),
     );
   }
 }

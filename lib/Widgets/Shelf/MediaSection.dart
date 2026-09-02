@@ -38,7 +38,13 @@ class MediaSectionData {
 
   final void Function()? onTitleLongPress;
 
-  final void Function(BuildContext context, int index, Media media)? onMediaTap;
+  final void Function(
+    BuildContext context,
+    int index,
+    Media media,
+    String? heroTag,
+  )?
+  onMediaTap;
 
   final void Function(BuildContext context, int index, Media media)?
   onMediaLongPress;
@@ -294,7 +300,9 @@ class _MediaSectionState extends State<MediaSection> {
 
   Widget _mediaItem(int index, Media media) {
     final detailed = !media.minimal;
+    final heroTag = detailed ? 'cover:${data.title}:$index:${media.id}' : null;
     return PosterCard(
+      heroTag: heroTag,
       imageUrl: media.cover,
       title: media.relation != null
           ? '${media.relation} · ${media.mainName}'
@@ -305,7 +313,7 @@ class _MediaSectionState extends State<MediaSection> {
       score: detailed ? _score(media) : null,
       scoreHighlight: (media.userScore ?? 0) > 0,
       airing: detailed && media.status == 'RELEASING',
-      onTap: () => data.onMediaTap?.call(context, index, media),
+      onTap: () => data.onMediaTap?.call(context, index, media, heroTag),
       onLongPress: data.onMediaLongPress == null
           ? null
           : () => data.onMediaLongPress!(context, index, media),

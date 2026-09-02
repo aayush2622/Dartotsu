@@ -41,7 +41,10 @@ class HeaderAvatar extends StatelessWidget {
     if (onTap == null) return child;
     return DpadFocusable(
       onSelect: onTap,
-      effects: const [DpadScaleEffect(scale: 1.06)],
+      effects: const [
+        DpadScaleEffect(scale: 1.06),
+        DpadGlowEffect(opacity: 0.3, blurRadius: 12, spreadRadius: 0),
+      ],
       child: child,
     );
   }

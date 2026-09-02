@@ -155,9 +155,11 @@ class _SearchScreenState extends BaseScreen<SearchScreen> {
     );
   }
 
-  Widget _card(Media m) {
+  Widget _card(Media m, {bool skeleton = false}) {
     final year = m.startDate?.year;
+    final tag = skeleton ? null : 'search:${m.id}';
     return PosterCard(
+      heroTag: tag,
       imageUrl: m.cover,
       title: m.mainName,
       subtitle: [
@@ -171,7 +173,12 @@ class _SearchScreenState extends BaseScreen<SearchScreen> {
         if (view == null) return;
         navigateToPage(
           context,
-          DetailScreen(media: m, view: view, mutations: service.getMutations),
+          DetailScreen(
+            media: m,
+            view: view,
+            mutations: service.getMutations,
+            heroTag: tag,
+          ),
         );
       },
     );
@@ -200,7 +207,7 @@ class _SearchScreenState extends BaseScreen<SearchScreen> {
   }
 
   List<Widget> _skeletons() => [
-    for (var i = 0; i < 12; i++) _card(Media.skeleton()),
+    for (var i = 0; i < 12; i++) _card(Media.skeleton(), skeleton: true),
   ];
 
   Widget _empty() {
