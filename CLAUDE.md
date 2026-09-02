@@ -409,7 +409,7 @@ defines `handleError(e, st, {softCrash})` (called from the zone handler in `main
   `BaseScreen` + `GlassBackground`, `CustomBottomDialog` + `showCustomBottomDialog`,
   `AlertDialogBuilder`, `AppDropdown` (owns its trailing `FocusNode`), `CachedNetworkImage`
   wrapper (`cachedNetworkImage(...)`), `loadSvg(...)`, `ScrollConfig` / `CustomScrollConfig`
-  (bouncing physics, no scrollbars, mouse+trackpad drag), `AppButton` (→ `FilledButton`),
+  (bouncing physics, no scrollbars; only touch drags — mouse/trackpad use the wheel, so a slightly-moved click never loses to the scroller), `AppButton` (→ `FilledButton`),
   `GenreItem`, `NotImplemented`.
 - `Widgets/Shelf/` — `MediaSection` + `MediaSectionState` (horizontal media shelf in
   a `ShelfFrame` with skeleton loading — `MediaSectionData.loading()` → `Skeletonizer` — and
