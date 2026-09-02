@@ -16,17 +16,18 @@ streaming/reading content comes from third-party extensions loaded at runtime vi
 Targets 5 platforms: Android, iOS, Windows, Linux, macOS. Distributed outside app stores
 (GitHub releases, Obtainium), so the app self-updates (`lib/Api/Updater/AppUpdater.dart`).
 
-### State of the rewrite (2026-09-01)
+### State of the rewrite (2026-09-03)
 
-~200 Dart files vs `main`'s ~350. On 2026-09-01 the foundation layers (Preferences, Theme, DI,
-networking) got a correctness/consistency pass; then a **pluggable per-service architecture**
-was built (abstract `*ScreenView` / `Queries` / `Mutations` / `ServiceAuth`, see below) with a
-full **AniList read + list-management slice** on it: onboarding → login →
-home/anime/manga sections (folding in the viewer's status lists) → media detail → list editor →
-search → notifications → settings, all on live AniList GraphQL. The service read/write surface
-was then split into `main`-style `Queries` / `Mutations` part files (`AnilistQueries/*`,
-`AnilistMutations/*`) with every query ported from `main`. `flutter analyze` clean;
-`flutter build linux` + `flutter run -d linux` verified each step. `ExtensionService` is still
+~200 Dart files vs `main`'s ~350. The foundation layers (Preferences, Theme, DI, networking)
+got a correctness/consistency pass; then a **pluggable per-service architecture** was built
+(`Queries` / `Mutations` / `ServiceAuth`, see below) with a full **AniList read +
+list-management slice** on it: onboarding → login → home/anime/manga sections (folding in the
+viewer's status lists) → media detail → list editor → search → notifications → settings, all
+on live AniList GraphQL. The service read/write surface was split into `main`-style `Queries`
+/ `Mutations` part files. On 2026-09-03 **services became data-only** — the `*ScreenView`
+layer was deleted; feed composition + navigation moved to `Screen/Feed/` (generic across
+services) and each feature screen's components moved into a `Components/` subfolder.
+`flutter analyze` clean; `flutter build linux` + `flutter run -d linux` verified each step. `ExtensionService` is still
 an id/name/icon shell → every screen renders `NotImplemented`. **Not built:** watch/read
 (extension sources, player, reader), MAL/Simkl subclasses, calendar, profile/character pages,
 offline. The worktree usually carries large **uncommitted WIP ahead of the committed
@@ -166,8 +167,9 @@ context-free access (`getString`, snackbars).
 ### `MediaService` abstraction
 
 **A new service is one subclass with zero core edits.** `MediaService`
-(`Core/Services/MediaService.dart`) is an `abstract class` with `id` / `name` / `iconPath` and
-**nullable getters** for every capability — anything left `null` renders as
+(`Core/Services/MediaService.dart`) is a **data-only** `abstract class` — `id` / `name` /
+`iconPath` plus **nullable capability getters**. It never returns a widget; the screens under
+`lib/Screen/` render whatever the current service's data allows, falling back to
 `NotImplemented(service, area)`:
 
 | Getter | Type | Purpose |
@@ -175,7 +177,6 @@ context-free access (`getString`, snackbars).
 | `getQueries` | `Queries?` | reads: `getUserData()`, `getMedia(id)`, `mediaDetails(m)`, `initHomePage()`, `getAnimeList()`, `getMangaList()`, `getMediaLists({anime,userId?})`, `getCalendarData()`, `getGenresAndTags()`, `getBannerImages()`, `getNotifications({page})`, `search(SearchResults?)` |
 | `getMutations` | `Mutations?` | `editList(Media,{customList})` / `deleteFromList(Media)` / `setProgress(Media,progress)` — each takes a `Media` carrying the desired user-list fields |
 | `auth` | `ServiceAuth?` | `user` (`Rxn<ServiceUser>`), `isLoggedIn`, `login()` / `loginWithToken(t)` / `logout()` / `refreshUser()` |
-| `getHomeScreen` / `getAnimeScreen` / `getMangaScreen` / `getSearchScreen` / `getDetailScreen` / `getNotificationScreen` / `getLoginScreen` / `getSettingsScreen` | `*ScreenView?` | one abstract class per screen area (`Core/Services/ServiceScreens.dart`); `build(context, …)` returns the widget |
 
 - **`Core/Services/Api/Queries.dart` / `Mutations.dart`** — the abstract read/write surface
   (mirrors `main`'s `lib/Services/Api/`). List-shaped queries return an **insertion-ordered
@@ -214,10 +215,8 @@ Per-service code goes under **`lib/Api/Services/<Service>/`**.
   `inCustomListsOf`, `userFavOrder`); `anilistMediaFragment` / `anilistAuthorRoles` +
   `mapAnilistMedia` / `mapAnilistListEntry` / `mapAnilistDetail`. `AnilistUser implements
   ServiceUser`.
-- `Screens/AnilistScreens.dart` — thin `*ScreenView` classes wiring the shared widgets to
-  `AnilistAuth.queries` / `.mutations`; anime/manga tabs merge `getMediaLists` above the
-  browse sections.
-- `AnilistService` — the getters just return `find<AnilistAuth>()` and the view classes.
+- `AnilistService` — `getQueries` / `getMutations` / `auth` all just return
+  `find<AnilistAuth>()`'s members. No screen code (feed composition lives in `Screen/Feed/`).
 
 ### Feature screens
 
@@ -225,22 +224,32 @@ Entry flow: `OnboardingScreen` (welcome / theme / sync) → `LoginScreen` (drive
 `service.auth`; "continue as guest" or OAuth/token) → sets `PrefName.hasCompletedOnboarding`
 → `MainScreen`.
 
-- **`Screen/MainScreen.dart`** — 3-tab shell; each tab is
-  `service.<home|anime|manga>Screen?.build(context) ?? NotImplemented(...)`, lazy-mounted in
-  an `IndexedStack` keyed by `serviceId-tab`, `FloatingBottomNavBar`.
-- **`Screen/Common/`** — the service-agnostic widgets every `Queries` impl reuses:
-  `MediaSectionsScreen` (pull-to-refresh `MediaSection` list from a
+- **`Screen/MainScreen.dart`** — 3-tab shell; each tab is `HomeFeed(service:)` /
+  `BrowseFeed(service:, anime:)` (`Screen/Feed/FeedScreens.dart`), lazy-mounted in an
+  `IndexedStack` keyed by `serviceId-tab`, `FloatingBottomNavBar`.
+- **`Screen/Feed/`** — service-agnostic feed composition. `HomeFeed` / `BrowseFeed` build a
+  `MediaSectionsScreen` from `service.getQueries` (browse = `getMediaLists` merged above
+  `getAnimeList`/`getMangaList`, `cacheId` `'<service.id>/<tab>'`, `reloadOn`
+  `service.auth?.user.stream`). `FeedNavigation.dart` = `openDetail` / `openSearch` /
+  `openNotifications` free functions (take a `MediaService`, push the shared screen or
+  `NotImplemented`). `FeedHeader` = the browse-tab title bar.
+- **`Screen/Common/`** — the widgets shared across screens: `MediaSectionsScreen`
+  (pull-to-refresh `MediaSection` list from a
   `SectionsLoader = Future<Map<String,List<Media>>> Function()` + optional `reloadOn` stream;
   with `cacheId:` it paints the last result from disk on frame 1 via
   `Core/Services/SectionCache.dart` — sync read — then revalidates and patches sections
   key-by-key without a full reload; **`RouteAware`** — revalidates on `didPopNext`; subscribes
-  to `RefreshController` under its `cacheId` so a mutation refreshes it),
-  `DetailScreen` (`extends BaseScreen`, media art as its glass backdrop; `Queries` +
-  `Mutations?`; pull-to-refresh; collapsing banner, genres, expandable synopsis, character
-  strip, relation/recommendation sections; FAB → `ListEditorSheet` →
-  `editList` / `deleteFromList`), `SearchScreen` (debounced, anime/manga toggle,
-  infinite-scroll grid, builds a `SearchResults`), `NotificationsScreen`, `HomeHeader`
-  (greeting + avatar + bell + search + account sheet).
+  to `RefreshController` under its `cacheId` so a mutation refreshes it) and `ListEditorSheet`.
+- **Feature screen folders** — each screen owns its top-level components in a `Components/`
+  subfolder (nothing dangling at file scope):
+  - `Screen/Detail/DetailScreen.dart` (`extends BaseScreen`, media art as glass backdrop;
+    `Queries` + `Mutations?`; pull-to-refresh; collapsing banner, genres, synopsis, character
+    & staff `PeopleShelf`s, relation/recommendation `MediaSection`s; FAB → `ListEditorSheet`)
+    + `Components/{MetaPill,StatTile,InfoRow,ExpandableText}.dart`.
+  - `Screen/Home/HomeHeader.dart` (greeting + avatar + bell + search)
+    + `Components/{HeaderAvatar,BellButton,HeaderStatPill,AccountSheet}.dart`.
+  - `Screen/Search/SearchScreen.dart` (debounced, anime/manga toggle, infinite-scroll grid).
+  - `Screen/Notifications/NotificationsScreen.dart` (grouped, `_row` builder).
 - **`Screen/Settings/`** — data-driven, `main`-style. `Model/Setting.dart` (`SettingType`
   header/normal/switchType/slider/inputBox/custom) → `Widgets/Settings/SettingsAdaptor` (one
   card per `Setting`) + `SettingItem` renderers. `SettingsCategories.dart` holds a
@@ -377,9 +386,13 @@ defines `handleError(e, st, {softCrash})` (called from the zone handler in `main
   bare Material widgets**: `AppSegmented<T>` (+ `AppSegment<T>`), `LabeledSlider`,
   `AppChoiceChips<T>`, `LabeledField` (label above a child). Used by the card-style screen,
   search Anime/Manga toggle, settings theme-mode, list editor.
-- **`Widgets/Sections/PeopleRail.dart`** — `PeopleRail({title, people: List<RailPerson>})` =
-  a `SectionCard` holding a horizontal list of `RailCard`s. Characters & staff on the detail
-  page.
+- **`Widgets/Sections/ShelfFrame.dart`** — the panel + title row every horizontal shelf sits
+  in (trending media, the viewer's lists, characters, staff, relations, recommendations). One
+  chrome so a feed / detail page reads as a single stack. `MediaSection` and `PeopleShelf`
+  both route through it.
+- **`Widgets/Sections/PeopleShelf.dart`** — `PeopleShelf({title, people: List<ShelfPerson>})`
+  = `ShelfFrame` + a horizontal list of `PosterCard`s pinned to `CardStyle.people`.
+  Characters & staff on the detail page — same card, same frame as media shelves.
 - `Widgets/Components/` — `ThemedContainer` / `ThemedWidget` / `themeDropdown`
   (`ThemedContainer.dart`) — low-level glass/M3 surface, prefer `SectionCard` over it,
   `BaseScreen` + `GlassBackground`, `CustomBottomDialog` + `showCustomBottomDialog`,
@@ -387,10 +400,10 @@ defines `handleError(e, st, {softCrash})` (called from the zone handler in `main
   wrapper (`cachedNetworkImage(...)`), `loadSvg(...)`, `ScrollConfig` / `CustomScrollConfig`
   (bouncing physics, no scrollbars, mouse+trackpad drag), `CustomElevatedButton` (→ `FilledButton`),
   `GenreItem`, `NotImplemented`.
-- `Widgets/Sections/Media/` — `MediaSection` + `MediaSectionState` (horizontal media rail with
-  skeleton loading — `MediaSectionData.loading()` → `Skeletonizer` — and overscroll-to-load-more
-  + haptics). Wraps `RailCard` items in its `ThemedContainer` + `SuperSliverList`. Cards keyed
-  by `media.id` (+ `findChildIndexCallback`) so a cache patch touches only what changed.
+- `Widgets/Sections/Media/` — `MediaSection` + `MediaSectionState` (horizontal media shelf in
+  a `ShelfFrame` with skeleton loading — `MediaSectionData.loading()` → `Skeletonizer` — and
+  overscroll-to-load-more + haptics). `PosterCard` items in a `SuperSliverList`, keyed by
+  `media.id` (+ `findChildIndexCallback`) so a cache patch touches only what changed.
 - `Utils/Animation/WidgetAnimations.dart` — `extension WidgetAnimations on Widget` built on
   `flutter_animate`: `animateFadeUp`, `animateDropIn`, `animatePageTransition`, `animateNav*`,
   etc. Global `kAnimationSpeed` (`<= 0` disables). Recent commits are heavy on animation polish.
