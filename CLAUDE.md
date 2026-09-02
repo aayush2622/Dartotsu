@@ -242,11 +242,12 @@ Entry flow: `OnboardingScreen` (welcome / theme / sync) → `LoginScreen` (drive
   (`[anime] Home [manga]`, `Home [novel]` for one, `[Home]` for none); `homeTabIndex` is the
   default. `IndexedStack` keyed by `serviceId-i`, lazy-built; `FloatingBottomNavBar` is handed
   the `NavItem`s (per-type icon from `FeedTab.icon`) — a service switch resets tab + `_built`.
-- **`Screen/Home/HomeFeed.dart`** — Home tab: `HomeHeader` + a `StackedCarousel` spotlight +
-  `HomeScreenView.sections()`. **`Screen/Feed/BrowseFeed.dart`** — one browse tab per
-  `MediaType`: `FeedHeader` + `FeedScreenView.userLists(type)` merged above `browse(type)`,
-  `onSectionLoadMore` → `loadMore(type, …)`, **no carousel**. Both → `MediaSectionsScreen`,
-  `cacheId` `'<service.id>/<type.name|home>'`, `reloadOn` `service.auth?.user.stream`.
+- **`Screen/Home/HomeFeed.dart`** — Home tab: `HomeHeader` + `HomeScreenView.sections()`, no
+  carousel (it's the dashboard). **`Screen/Feed/BrowseFeed.dart`** — one browse tab per
+  `MediaType`: a `StackedCarousel` spotlight (`spotlight: 'Trending Now'`) + `FeedHeader` +
+  `FeedScreenView.userLists(type)` merged above `browse(type)`, `onSectionLoadMore` →
+  `loadMore(type, …)`. Both → `MediaSectionsScreen`, `cacheId`
+  `'<service.id>/<type.name|home>'`, `reloadOn` `service.auth?.user.stream`.
 - **`Screen/Feed/FeedNavigation.dart`** — `openDetail` / `openSearch(type:)` /
   `openNotifications` free functions (take a `MediaService`, push the shared screen or
   `NotImplemented`). `FeedHeader` = the browse-tab title bar.
