@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../../Utils/Extensions/ContextExtensions.dart';
 
-/// A label / value row in the detail "Details" card.
 class InfoRow extends StatelessWidget {
   final String label;
   final String value;

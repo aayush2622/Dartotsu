@@ -19,8 +19,6 @@ import '../Login/LoginScreen.dart';
 import 'CardStyleScreen.dart';
 import 'SettingsCategoryScreen.dart';
 
-/// One settings sub-screen: a title/icon for the top-level menu and a builder
-/// for its `List<Setting>`.
 class SettingsCategory {
   final String title;
   final String description;
@@ -68,15 +66,12 @@ const List<SettingsCategory> settingsCategories = [
   ),
 ];
 
-/// Every category flattened with its title as a header — for the global search.
 List<Setting> allSettings(BuildContext context) => [
   for (final c in settingsCategories) ...[
     Setting.header(c.title.toUpperCase()),
     ...c.build(context),
   ],
 ];
-
-// -- category builders --------------------------------------------------------
 
 List<Setting> appearanceSettings(BuildContext context) {
   final t = find<ThemeController>();
@@ -285,7 +280,6 @@ List<Setting> aboutSettings(BuildContext context) => [
   ),
 ];
 
-/// Top-level menu: one row per category, opening its sub-screen.
 List<Setting> categoryMenu(BuildContext context) => [
   for (final c in settingsCategories)
     Setting(
@@ -312,5 +306,4 @@ List<Setting> categoryMenu(BuildContext context) => [
     ),
 ];
 
-/// Filled once by `SettingsScreen`; read reactively by [aboutSettings].
 final settingsAppVersion = ''.obs;

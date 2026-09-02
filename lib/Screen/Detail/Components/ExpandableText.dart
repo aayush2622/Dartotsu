@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 
 import '../../../Utils/Extensions/ContextExtensions.dart';
 
-/// Synopsis text that collapses to five lines with a Read more / Show less
-/// toggle. Focusable for D-pad navigation.
 class ExpandableText extends StatefulWidget {
   final String text;
   const ExpandableText({super.key, required this.text});

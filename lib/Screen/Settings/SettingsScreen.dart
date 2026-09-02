@@ -5,8 +5,6 @@ import '../../Widgets/Components/BaseScreen.dart';
 import '../../Widgets/Settings/SettingsListView.dart';
 import 'SettingsCategories.dart';
 
-/// Top-level settings: a menu of category sub-screens, plus a search that spans
-/// every category at once.
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
 

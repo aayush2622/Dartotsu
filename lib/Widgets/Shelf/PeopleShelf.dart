@@ -7,7 +7,6 @@ import '../Components/ScrollConfig.dart';
 import 'PosterCard.dart';
 import 'ShelfFrame.dart';
 
-/// A person for a [PeopleShelf] item — a character or a staff member.
 class ShelfPerson {
   final String? image;
   final String name;
@@ -16,9 +15,6 @@ class ShelfPerson {
   const ShelfPerson({required this.name, this.image, this.role});
 }
 
-/// Titled horizontal shelf of people (characters / staff). Same [ShelfFrame]
-/// chrome and same [PosterCard] as the media shelves — only the card style is
-/// pinned to [CardStyle.people] (portrait aspect, no score/progress).
 class PeopleShelf extends StatelessWidget {
   final String title;
   final List<ShelfPerson> people;

@@ -10,8 +10,6 @@ import '../../Login/LoginScreen.dart';
 import '../../Settings/SettingsScreen.dart';
 import 'HeaderAvatar.dart';
 
-/// The bottom sheet behind the home-header avatar — account summary, service
-/// switch, settings, and log in / out.
 void showAccountSheet(BuildContext context, MediaServiceController controller) {
   final service = controller.currentService.value;
   final auth = service.auth;

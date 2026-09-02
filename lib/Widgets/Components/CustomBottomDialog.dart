@@ -167,7 +167,6 @@ class _CustomBottomDialogState extends State<CustomBottomDialog> {
               ),
             ),
 
-          // Buttons
           if (widget.negativeText != null || widget.positiveText != null)
             SliverToBoxAdapter(
               child: Padding(

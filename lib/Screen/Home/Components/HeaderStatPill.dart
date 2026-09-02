@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../../Utils/Extensions/ContextExtensions.dart';
 
-/// Watched-episodes / read-chapters pill under the home greeting.
 class HeaderStatPill extends StatelessWidget {
   final IconData icon;
   final String label;

@@ -61,8 +61,6 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
   Widget buildContent(BuildContext context) {
     final theme = Theme.of(context).colorScheme;
 
-    // BaseScreen already supplies the SafeArea + Scaffold + glass backdrop;
-    // this inner (transparent) Scaffold only exists to host the AppBar.
     return Scaffold(
       backgroundColor: Colors.transparent,
       appBar: AppBar(

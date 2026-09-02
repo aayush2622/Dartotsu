@@ -211,7 +211,6 @@ class _SettingInputBoxItemState extends State<SettingInputBoxItem> {
   }
 }
 
-/// [builder] provides the whole control; [Setting.name] is only for search.
 class SettingCustomItem extends StatelessWidget {
   final Setting setting;
 

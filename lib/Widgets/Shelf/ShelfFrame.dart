@@ -4,11 +4,6 @@ import '../../Utils/Extensions/Responsive.dart';
 import '../Components/SectionCard.dart';
 import '../Components/ThemedContainer.dart';
 
-/// The panel every horizontal card shelf sits in — trending media, the viewer's
-/// lists, character rows, staff rows, relations, recommendations. One chrome so
-/// a feed reads as a single consistent stack of shelves.
-///
-/// [child] is the horizontal list itself, already constrained to its height.
 class ShelfFrame extends StatelessWidget {
   final String? title;
   final Widget? trailing;

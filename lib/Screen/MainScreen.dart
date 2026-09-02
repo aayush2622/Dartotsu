@@ -43,7 +43,6 @@ class MainScreenState extends BaseScreen<MainScreen> {
   @override
   Widget buildContent(BuildContext context) {
     final body = Obx(() {
-      // Depend on the current service so tabs rebuild on a switch.
       _services.currentService.value;
       return IndexedStack(
         index: _tab.value,

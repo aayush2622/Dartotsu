@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../Utils/Extensions/ContextExtensions.dart';
 
-/// Lightweight title bar for the browse feeds (Anime / Manga tabs).
 class FeedHeader extends StatelessWidget {
   final String title;
   final VoidCallback? onSearch;

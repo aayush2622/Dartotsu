@@ -10,7 +10,6 @@ import 'Components/BellButton.dart';
 import 'Components/HeaderAvatar.dart';
 import 'Components/HeaderStatPill.dart';
 
-/// The greeting + avatar + bell + search bar at the top of the Home feed.
 class HomeHeader extends StatelessWidget {
   const HomeHeader({super.key});
 

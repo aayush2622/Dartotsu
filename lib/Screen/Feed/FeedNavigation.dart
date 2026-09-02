@@ -8,9 +8,6 @@ import '../Detail/DetailScreen.dart';
 import '../Notifications/NotificationsScreen.dart';
 import '../Search/SearchScreen.dart';
 
-/// Screen navigation driven purely by a [MediaService]'s data surface — the
-/// service never hands back a widget, the app decides what to show.
-
 void openDetail(BuildContext context, MediaService service, Media media) {
   final queries = service.getQueries;
   navigateToPage(

@@ -39,9 +39,9 @@ abstract final class Dimens {
   static EdgeInsets get cardInsets => EdgeInsets.all(cardPad);
 
   // --- radii ---
-  static double get radius => 22;
-  static double get radiusSm => 16;
-  static double get radiusLg => 28;
+  static double get radius => 26;
+  static double get radiusSm => 18;
+  static double get radiusLg => 34;
   static BorderRadius get border => BorderRadius.circular(radius);
   static BorderRadius get borderSm => BorderRadius.circular(radiusSm);
   static BorderRadius get borderLg => BorderRadius.circular(radiusLg);

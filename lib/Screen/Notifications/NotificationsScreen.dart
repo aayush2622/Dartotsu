@@ -40,7 +40,6 @@ class _NotificationsScreenState extends BaseScreen<NotificationsScreen> {
       final auth = find<MediaServiceController>().currentService.value.auth;
       if (auth != null) unawaited(auth.refreshUser());
     } catch (_) {
-      // leave list empty
     } finally {
       _loading.value = false;
     }

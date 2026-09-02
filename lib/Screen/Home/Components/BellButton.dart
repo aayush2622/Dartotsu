@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../../Utils/Extensions/ContextExtensions.dart';
 
-/// Notification bell with an unread-count badge.
 class BellButton extends StatelessWidget {
   final int unread;
   final VoidCallback onOpen;

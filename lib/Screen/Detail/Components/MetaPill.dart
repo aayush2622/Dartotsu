@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../../Utils/Extensions/ContextExtensions.dart';
 
-/// A small rounded chip in the detail header — format, status, episode count,
-/// season.
 class MetaPill extends StatelessWidget {
   final String text;
   final IconData? icon;

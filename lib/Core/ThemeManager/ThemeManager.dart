@@ -15,11 +15,11 @@ extension ThemeModePrefX on ThemeModePref {
   };
 }
 
-/// Applies the app's typography, component themes and OLED tweaks on top of a
-/// palette's [ThemeData]. Pure — [ThemeController] memoizes the result.
-///
-/// In glass mode the scaffold, app bars and sheets go transparent so the
-/// blurred [GlassBackground] painted by `BaseScreen` shows through everywhere.
+const _shapeXl = 28.0;
+const _shapeLg = 20.0;
+const _shapeMd = 16.0;
+const _pill = StadiumBorder();
+
 ThemeData buildAppTheme(
   ThemeData base, {
   required bool isOled,
@@ -46,25 +46,138 @@ ThemeData buildAppTheme(
       ? scheme.surface.withValues(alpha: 0.14)
       : deriveCardColor(surface: scheme.surface, isDark: dark, isOled: oled);
 
+  ButtonStyle button({EdgeInsetsGeometry? padding}) => ButtonStyle(
+    shape: const WidgetStatePropertyAll(_pill),
+    padding: WidgetStatePropertyAll(
+      padding ?? const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+    ),
+    minimumSize: const WidgetStatePropertyAll(Size(0, 48)),
+    textStyle: WidgetStatePropertyAll(
+      _poppinsTextTheme.labelLarge?.copyWith(fontWeight: FontWeight.w700),
+    ),
+    animationDuration: Durations.short4,
+  );
+
   return base.copyWith(
     colorScheme: scheme,
     scaffoldBackgroundColor: scaffoldBg,
     canvasColor: glass ? Colors.transparent : base.canvasColor,
     cardColor: cardColor,
+    splashFactory: InkSparkle.splashFactory,
     appBarTheme: base.appBarTheme.copyWith(
       backgroundColor: glass ? Colors.transparent : null,
       scrolledUnderElevation: glass ? 0 : null,
       elevation: glass ? 0 : null,
+      centerTitle: false,
+      titleTextStyle: _poppinsTextTheme.titleLarge?.copyWith(
+        color: scheme.onSurface,
+      ),
+    ),
+    cardTheme: base.cardTheme.copyWith(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(_shapeXl),
+      ),
+      clipBehavior: Clip.antiAlias,
+    ),
+    filledButtonTheme: FilledButtonThemeData(style: button()),
+    elevatedButtonTheme: ElevatedButtonThemeData(style: button()),
+    outlinedButtonTheme: OutlinedButtonThemeData(style: button()),
+    textButtonTheme: TextButtonThemeData(
+      style: button(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      ),
+    ),
+    iconButtonTheme: const IconButtonThemeData(
+      style: ButtonStyle(
+        shape: WidgetStatePropertyAll(_pill),
+        animationDuration: Durations.short4,
+      ),
+    ),
+    floatingActionButtonTheme: base.floatingActionButtonTheme.copyWith(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(_shapeLg),
+      ),
+      extendedTextStyle: _poppinsTextTheme.labelLarge?.copyWith(
+        fontWeight: FontWeight.w700,
+      ),
+    ),
+    segmentedButtonTheme: SegmentedButtonThemeData(
+      style: ButtonStyle(
+        shape: WidgetStatePropertyAll(
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(_shapeMd)),
+        ),
+        backgroundColor: WidgetStateProperty.resolveWith(
+          (s) => s.contains(WidgetState.selected)
+              ? scheme.secondaryContainer
+              : Colors.transparent,
+        ),
+        visualDensity: VisualDensity.compact,
+        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+      ),
+    ),
+    chipTheme: base.chipTheme.copyWith(
+      shape: _pill,
+      side: BorderSide.none,
+      elevation: 0,
+      pressElevation: 0,
+    ),
+    dialogTheme: base.dialogTheme.copyWith(
+      backgroundColor: glass ? scheme.surface.withValues(alpha: 0.6) : null,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(_shapeXl),
+      ),
     ),
     bottomSheetTheme: base.bottomSheetTheme.copyWith(
       backgroundColor: Colors.transparent,
       elevation: 0,
       modalBackgroundColor: Colors.transparent,
       modalElevation: 0,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(_shapeXl)),
+      ),
     ),
-    dialogTheme: base.dialogTheme.copyWith(
-      backgroundColor: glass ? scheme.surface.withValues(alpha: 0.6) : null,
+    snackBarTheme: base.snackBarTheme.copyWith(
+      behavior: SnackBarBehavior.floating,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(_shapeMd),
+      ),
     ),
+    menuTheme: MenuThemeData(
+      style: MenuStyle(
+        shape: WidgetStatePropertyAll(
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(_shapeMd)),
+        ),
+      ),
+    ),
+    popupMenuTheme: base.popupMenuTheme.copyWith(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(_shapeMd),
+      ),
+    ),
+    tooltipTheme: base.tooltipTheme.copyWith(
+      decoration: BoxDecoration(
+        color: scheme.inverseSurface,
+        borderRadius: BorderRadius.circular(8),
+      ),
+    ),
+    inputDecorationTheme: base.inputDecorationTheme.copyWith(
+      filled: true,
+      fillColor: scheme.surfaceContainerHighest.withValues(alpha: 0.5),
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(_shapeMd),
+        borderSide: BorderSide.none,
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(_shapeMd),
+        borderSide: BorderSide.none,
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(_shapeMd),
+        borderSide: BorderSide(color: scheme.primary, width: 2),
+      ),
+    ),
+    sliderTheme: const SliderThemeData(year2023: false),
+    progressIndicatorTheme: const ProgressIndicatorThemeData(year2023: false),
     textTheme: base.textTheme.merge(_poppinsTextTheme),
     switchTheme: SwitchThemeData(
       thumbColor: WidgetStateProperty.resolveWith(
@@ -77,6 +190,7 @@ ThemeData buildAppTheme(
             ? scheme.primary
             : scheme.surfaceContainerHighest,
       ),
+      trackOutlineColor: const WidgetStatePropertyAll(Colors.transparent),
       overlayColor: WidgetStateProperty.all(
         scheme.primary.withValues(alpha: 0.2),
       ),
@@ -102,8 +216,6 @@ Color deriveCardColor({
   );
 }
 
-/// Colour-independent Poppins typography, computed once. Merged onto each
-/// palette's [TextTheme] so per-palette text colours are preserved.
 const _fontFamily = 'Poppins';
 
 final TextTheme _poppinsTextTheme = const TextTheme(

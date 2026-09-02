@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// M3 filled button with an optional leading icon. Kept as a function for the
-/// existing call sites.
 Widget AppButton({
   required BuildContext context,
   required VoidCallback? onPressed,
@@ -9,12 +7,9 @@ Widget AppButton({
   Widget? iconWidget,
   EdgeInsetsGeometry? padding,
 }) {
-  final style = FilledButton.styleFrom(
-    padding:
-        padding ?? const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-    textStyle: Theme.of(context).textTheme.labelLarge,
-  );
+  final style = padding == null
+      ? null
+      : FilledButton.styleFrom(padding: padding);
 
   final text = Text(
     label,

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../../Utils/Extensions/ContextExtensions.dart';
 
-/// One cell of the detail stat strip — icon over a value over a label.
 class StatTile extends StatelessWidget {
   final IconData icon;
   final String label;

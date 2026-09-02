@@ -13,27 +13,18 @@ const _progressGreenInk = Color(0xFF05271B);
 
 enum _ScrimKind { none, short, full }
 
-/// One item in a horizontal shelf — a poster/portrait, a title and an optional
-/// subtitle. Media cards, character cards and staff cards all use this; its
-/// look follows the current [CardStyle] (normal / on-card / in-card, size,
-/// progress, badges). Pass [style] to override (character shelves, the
-/// settings preview).
 class PosterCard extends StatefulWidget {
   final String? imageUrl;
   final String title;
 
-  /// Shown under the title when the style has an info line (media) or always
-  /// for people cards (role / VA).
   final String? subtitle;
 
   final double? score;
   final bool scoreHighlight;
   final bool airing;
 
-  /// 0–1 watched/read fraction — drives the bar.
   final double? progress;
 
-  /// "12 · 24" — drives the pill.
   final String? progressText;
 
   final VoidCallback? onTap;
@@ -41,8 +32,6 @@ class PosterCard extends StatefulWidget {
 
   final CardStyle? style;
 
-  /// Paints a gradient placeholder instead of flat grey when there's no image —
-  /// used by the card-style settings preview.
   final bool demo;
 
   const PosterCard({
@@ -115,8 +104,6 @@ class _PosterCardState extends State<PosterCard> {
       _style.showProgress &&
       _style.progress == CardProgressStyle.bar &&
       widget.progress != null;
-
-  // --- modes ---------------------------------------------------------
 
   Widget _onCard(CardStyle s) {
     final pill = _pillOn && widget.progressText != null;
@@ -200,11 +187,7 @@ class _PosterCardState extends State<PosterCard> {
     final imgH = s.imageHeight;
     final hasScore = s.showScore && widget.score != null;
     final pill = _pillOn && widget.progressText != null;
-    // With a pill on the cover the score sits in its corner; otherwise it
-    // floats at the poster/text seam.
     final scoreFloats = hasScore && !pill;
-    // With a pill on the cover the score goes to a top corner (the pill owns the
-    // bottom); the airing dot takes the other top corner.
     final posterCorner = _scoreCorner(s, bottomTaken: true);
     final onRight =
         s.scoreCorner == CardCorner.bottomRight ||
@@ -282,10 +265,6 @@ class _PosterCardState extends State<PosterCard> {
     );
   }
 
-  // --- pieces -------------------------------------------------------
-
-  /// The score badge's corner, kept clear of a bottom-row overlay (pill/bar) —
-  /// a bottom corner is bumped to the matching top corner when [bottomTaken].
   CardCorner _scoreCorner(CardStyle s, {required bool bottomTaken}) {
     final c = s.scoreCorner == CardCorner.none
         ? CardCorner.topLeft
