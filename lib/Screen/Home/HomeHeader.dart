@@ -10,7 +10,7 @@ import '../../Utils/Functions/NavigateToScreen.dart';
 import '../../Widgets/Components/CachedNetworkImage.dart';
 import '../../Widgets/Components/CustomBottomDialog.dart';
 import '../../Widgets/Components/LoadSvg.dart';
-import '../../Widgets/Components/NotImplemented.dart';
+import '../Feed/FeedNavigation.dart';
 import '../Login/LoginScreen.dart';
 import '../Settings/SettingsScreen.dart';
 
@@ -55,28 +55,14 @@ class HomeHeader extends StatelessWidget {
                     ],
                   ),
                 ),
-                if (user != null && service.getNotificationScreen != null)
+                if (user != null && service.getQueries != null)
                   _BellButton(
                     unread: user.unreadNotifications,
-                    onOpen: () => navigateToPage(
-                      context,
-                      service.getNotificationScreen!.build(context),
-                    ),
+                    onOpen: () => openNotifications(context, service),
                   ),
                 IconButton(
                   icon: const Icon(Icons.search_rounded),
-                  onPressed: () {
-                    final view = service.getSearchScreen;
-                    navigateToPage(
-                      context,
-                      view != null
-                          ? view.build(context, anime: true)
-                          : NotImplemented(
-                              service: service.name,
-                              area: 'Search',
-                            ),
-                    );
-                  },
+                  onPressed: () => openSearch(context, service, anime: true),
                 ),
                 const SizedBox(width: 6),
                 _Avatar(url: user?.avatar, onTap: () => _accountSheet(context)),

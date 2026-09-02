@@ -13,7 +13,7 @@ import '../../Utils/Functions/NavigateToScreen.dart';
 import '../../Widgets/Components/BaseScreen.dart';
 import '../../Widgets/Components/CachedNetworkImage.dart';
 import '../../Widgets/Components/SectionCard.dart';
-import 'DetailScreen.dart';
+import '../Detail/DetailScreen.dart';
 
 class NotificationsScreen extends StatefulWidget {
   final Queries queries;
