@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import '../../Core/ThemeManager/AppTheme.dart';
 import '../../Core/ThemeManager/ThemeController.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
-import 'DropdownMenu.dart';
+import 'AppDropdown.dart';
 
 /// A surface that renders as a solid card normally and as a frosted-glass
 /// panel when glass mode is on. Reacts to the glass-mode toggle via a single
@@ -121,7 +121,7 @@ Widget themeDropdown() {
   final options = AppTheme.values.map((e) => e.label).toList();
 
   return Obx(
-    () => BuildDropdownMenu(
+    () => AppDropdown(
       padding: const EdgeInsets.symmetric(vertical: 12),
       value: AppTheme.byName(controller.themeName.value).label,
       options: options,

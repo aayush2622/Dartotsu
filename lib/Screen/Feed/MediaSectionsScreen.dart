@@ -13,7 +13,7 @@ import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Utils/Functions/RefreshController.dart';
 import '../../Widgets/Components/ScrollConfig.dart';
 import '../../Widgets/Components/SectionCard.dart';
-import '../../Widgets/Sections/Media/MediaSection.dart';
+import '../../Widgets/Shelf/MediaSection.dart';
 
 /// Renders an ordered set of horizontal media sections. The loader's map keys
 /// are the section titles.

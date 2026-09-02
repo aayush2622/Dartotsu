@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 /// M3 filled button with an optional leading icon. Kept as a function for the
 /// existing call sites.
-Widget CustomElevatedButton({
+Widget AppButton({
   required BuildContext context,
   required VoidCallback? onPressed,
   required String label,
