@@ -6,8 +6,9 @@ import '../Feed/FeedNavigation.dart';
 import '../Feed/MediaSectionsScreen.dart';
 import 'HomeHeader.dart';
 
-/// The Home tab — the viewer's dashboard, a spotlight carousel and the
-/// service's editorial rows. `HomeScreenView` supplies the data.
+/// The Home tab — the viewer's dashboard and the service's editorial rows.
+/// `HomeScreenView` supplies the data. No carousel — that lives on the browse
+/// tabs.
 class HomeFeed extends StatelessWidget {
   final MediaService service;
   const HomeFeed({super.key, required this.service});
@@ -24,7 +25,6 @@ class HomeFeed extends StatelessWidget {
       cacheId: '${service.id}/home',
       reloadOn: service.auth?.user.stream,
       onMediaTap: (m, tag) => openDetail(context, service, m, heroTag: tag),
-      spotlight: 'Trending Anime',
     );
   }
 }
