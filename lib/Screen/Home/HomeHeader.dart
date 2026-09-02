@@ -56,10 +56,11 @@ class HomeHeader extends StatelessWidget {
                     unread: user.unreadNotifications,
                     onOpen: () => openNotifications(context, service),
                   ),
-                IconButton(
-                  icon: const Icon(Icons.search_rounded),
-                  onPressed: () => openSearch(context, service, anime: true),
-                ),
+                if (service.searchView != null)
+                  IconButton(
+                    icon: const Icon(Icons.search_rounded),
+                    onPressed: () => openSearch(context, service, anime: true),
+                  ),
                 const SizedBox(width: 6),
                 HeaderAvatar(
                   url: user?.avatar,
