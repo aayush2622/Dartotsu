@@ -108,6 +108,8 @@ class _MediaSectionState extends State<MediaSection> {
 
   double get _gap => Dimens.cardGap;
 
+  bool get _hasTitle => data.loading || (data.title?.isNotEmpty ?? false);
+
   @override
   void initState() {
     super.initState();
@@ -139,8 +141,11 @@ class _MediaSectionState extends State<MediaSection> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildTitleRow(),
-              SizedBox(height: Dimens.gapSm),
+              if (_hasTitle) ...[
+                _buildTitleRow(),
+                SizedBox(height: Dimens.gapSm),
+              ] else
+                SizedBox(height: Dimens.cardPad),
               _buildHorizontalSliverList(),
               SizedBox(height: Dimens.cardPad),
             ],
