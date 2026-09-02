@@ -1,4 +1,3 @@
-import 'package:dpad/dpad.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide ContextExtensionss;
 
@@ -17,6 +16,10 @@ import '../../Widgets/Components/SectionCard.dart';
 import '../../Widgets/Sections/Media/MediaSection.dart';
 import '../../Widgets/Sections/PeopleShelf.dart';
 import '../Common/ListEditorSheet.dart';
+import 'Components/ExpandableText.dart';
+import 'Components/InfoRow.dart';
+import 'Components/MetaPill.dart';
+import 'Components/StatTile.dart';
 
 class DetailScreen extends StatefulWidget {
   final Media media;
@@ -321,17 +324,17 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
 
   Widget _metaPills(Media m) {
     final pills = <Widget>[
-      if (m.format != null) _MetaPill(text: _pretty(m.format!)),
-      if (m.status != null) _MetaPill(text: _pretty(m.status!)),
+      if (m.format != null) MetaPill(text: _pretty(m.format!)),
+      if (m.status != null) MetaPill(text: _pretty(m.status!)),
       if (_isAnime && m.anime?.totalEpisodes != null)
-        _MetaPill(icon: Icons.tv_rounded, text: '${m.anime!.totalEpisodes} ep'),
+        MetaPill(icon: Icons.tv_rounded, text: '${m.anime!.totalEpisodes} ep'),
       if (!_isAnime && m.manga?.totalChapters != null)
-        _MetaPill(
+        MetaPill(
           icon: Icons.menu_book_rounded,
           text: '${m.manga!.totalChapters} ch',
         ),
       if (m.anime?.seasonYear != null)
-        _MetaPill(
+        MetaPill(
           text: [
             if (m.anime?.season != null) _pretty(m.anime!.season!),
             m.anime!.seasonYear,
@@ -363,7 +366,7 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
         children: [
           for (final (i, stat) in items.indexed) ...[
             Expanded(
-              child: _Stat(icon: stat.$1, label: stat.$2, value: stat.$3),
+              child: StatTile(icon: stat.$1, label: stat.$2, value: stat.$3),
             ),
             if (i != items.length - 1)
               Container(
@@ -416,7 +419,7 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
   Widget _synopsis(Media m) => SectionCard(
     margin: _sectionMargin,
     title: 'Synopsis',
-    child: _Expandable(text: m.description!.stripHtml),
+    child: ExpandableText(text: m.description!.stripHtml),
   );
 
   Widget _genres(Media m) => SectionCard(
@@ -501,7 +504,7 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
     title: 'Details',
     child: Column(
       children: [
-        for (final (label, value) in _infoRows(m)) _InfoRow(label, value),
+        for (final (label, value) in _infoRows(m)) InfoRow(label, value),
       ],
     ),
   );
@@ -576,151 +579,4 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
     'REPEATING' => 'Rewatching',
     _ => 'Add to List',
   };
-}
-
-// --- shared bits ------------------------------------------------------
-
-class _MetaPill extends StatelessWidget {
-  final String text;
-  final IconData? icon;
-  const _MetaPill({required this.text, this.icon});
-
-  @override
-  Widget build(BuildContext context) {
-    final scheme = context.colorScheme;
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-      decoration: BoxDecoration(
-        color: scheme.surfaceContainerHighest,
-        borderRadius: BorderRadius.circular(999),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          if (icon != null) ...[
-            Icon(icon, size: 13, color: scheme.primary),
-            const SizedBox(width: 4),
-          ],
-          Text(text, style: context.textTheme.labelMedium),
-        ],
-      ),
-    );
-  }
-}
-
-class _Stat extends StatelessWidget {
-  final IconData icon;
-  final String label;
-  final String value;
-  const _Stat({required this.icon, required this.label, required this.value});
-
-  @override
-  Widget build(BuildContext context) {
-    final scheme = context.colorScheme;
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Icon(icon, size: 18, color: scheme.primary),
-        const SizedBox(height: 5),
-        Text(
-          value,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          style: context.textTheme.titleSmall?.copyWith(
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-        Text(
-          label,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          style: context.textTheme.labelSmall?.copyWith(
-            color: scheme.onSurfaceVariant,
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class _InfoRow extends StatelessWidget {
-  final String label;
-  final String value;
-  const _InfoRow(this.label, this.value);
-
-  @override
-  Widget build(BuildContext context) {
-    final scheme = context.colorScheme;
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 9),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            width: 92,
-            child: Text(
-              label,
-              style: context.textTheme.labelMedium?.copyWith(
-                color: scheme.onSurfaceVariant,
-              ),
-            ),
-          ),
-          const SizedBox(width: 12),
-          Expanded(child: Text(value, style: context.textTheme.bodyMedium)),
-        ],
-      ),
-    );
-  }
-}
-
-class _Expandable extends StatefulWidget {
-  final String text;
-  const _Expandable({required this.text});
-
-  @override
-  State<_Expandable> createState() => _ExpandableState();
-}
-
-class _ExpandableState extends State<_Expandable> {
-  bool _expanded = false;
-
-  void _toggle() => setState(() => _expanded = !_expanded);
-
-  @override
-  Widget build(BuildContext context) {
-    final long = widget.text.length > 260;
-    return DpadFocusable(
-      onSelect: _toggle,
-      effects: const [DpadScaleEffect(scale: 1.01)],
-      child: GestureDetector(
-        onTap: long ? _toggle : null,
-        behavior: HitTestBehavior.opaque,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            AnimatedSize(
-              duration: const Duration(milliseconds: 180),
-              alignment: Alignment.topCenter,
-              child: Text(
-                widget.text,
-                maxLines: _expanded ? null : 5,
-                overflow: _expanded ? null : TextOverflow.ellipsis,
-                style: context.textTheme.bodyMedium?.copyWith(height: 1.5),
-              ),
-            ),
-            if (long)
-              Padding(
-                padding: const EdgeInsets.only(top: 4),
-                child: Text(
-                  _expanded ? 'Show less' : 'Read more',
-                  style: context.textTheme.labelMedium?.copyWith(
-                    color: context.colorScheme.primary,
-                  ),
-                ),
-              ),
-          ],
-        ),
-      ),
-    );
-  }
 }

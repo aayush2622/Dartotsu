@@ -4,8 +4,8 @@ import '../../Model/CardStyle.dart';
 import '../../Utils/Extensions/CardStyleMetrics.dart';
 import '../../Utils/Extensions/Responsive.dart';
 import '../Components/ScrollConfig.dart';
-import '../Components/SectionCard.dart';
 import 'PosterCard.dart';
+import 'ShelfFrame.dart';
 
 /// A person for a [PeopleShelf] item — a character or a staff member.
 class ShelfPerson {
@@ -16,9 +16,9 @@ class ShelfPerson {
   const ShelfPerson({required this.name, this.image, this.role});
 }
 
-/// Titled card holding a horizontal shelf of people (characters / staff).
-/// Uses the same card surface and item dimensions as [MediaSection] so the
-/// detail page reads as one consistent list of shelves.
+/// Titled horizontal shelf of people (characters / staff). Same [ShelfFrame]
+/// chrome and same [PosterCard] as the media shelves — only the card style is
+/// pinned to [CardStyle.people] (portrait aspect, no score/progress).
 class PeopleShelf extends StatelessWidget {
   final String title;
   final List<ShelfPerson> people;
@@ -33,17 +33,7 @@ class PeopleShelf extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SectionCard(
-      margin: EdgeInsets.symmetric(
-        horizontal: Dimens.gap,
-        vertical: Dimens.gapSm / 2,
-      ),
-      padding: EdgeInsets.fromLTRB(
-        Dimens.cardPad,
-        Dimens.cardPad,
-        0,
-        Dimens.cardPad,
-      ),
+    return ShelfFrame(
       title: title,
       child: SizedBox(
         height: CardStyle.people.itemHeight,
@@ -51,7 +41,7 @@ class PeopleShelf extends StatelessWidget {
           context,
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
-            padding: EdgeInsets.only(right: Dimens.cardPad),
+            padding: EdgeInsets.symmetric(horizontal: Dimens.cardPad + 8),
             itemCount: people.length,
             separatorBuilder: (_, _) => SizedBox(width: Dimens.cardGap),
             itemBuilder: (_, i) {
