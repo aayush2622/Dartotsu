@@ -15,7 +15,7 @@ class MediaSectionState {
 
   bool scrollListener(
     ScrollNotification scroll,
-    Future<List<Media>> Function()? onLoadMore,
+    Future<List<Media>?> Function()? onLoadMore,
   ) {
     if (scroll.metrics.pixels > scroll.metrics.maxScrollExtent) {
       final overscroll =
@@ -43,7 +43,7 @@ class MediaSectionState {
     return false;
   }
 
-  Future<void> loadMore(Future<List<Media>> Function()? onLoadMore) async {
+  Future<void> loadMore(Future<List<Media>?> Function()? onLoadMore) async {
     isLoadingMore.value = true;
     overscrollProgress.value = 0.0;
     final newItems = await onLoadMore?.call();
