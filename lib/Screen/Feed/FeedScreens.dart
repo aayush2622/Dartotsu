@@ -45,7 +45,9 @@ class BrowseFeed extends StatelessWidget {
     return MediaSectionsScreen(
       header: FeedHeader(
         title: _area,
-        onSearch: () => openSearch(context, service, anime: anime),
+        onSearch: service.searchView == null
+            ? null
+            : () => openSearch(context, service, anime: anime),
       ),
       loader: () async {
         final results = await Future.wait([view.userLists(), view.browse()]);
