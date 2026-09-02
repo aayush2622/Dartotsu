@@ -8,8 +8,6 @@ import '../Home/HomeHeader.dart';
 import 'FeedHeader.dart';
 import 'FeedNavigation.dart';
 
-/// The Home tab — the viewer's dashboard plus editorial rows. Works for any
-/// [MediaService] that exposes [Queries]; the service supplies only data.
 class HomeFeed extends StatelessWidget {
   final MediaService service;
   const HomeFeed({super.key, required this.service});
@@ -30,8 +28,6 @@ class HomeFeed extends StatelessWidget {
   }
 }
 
-/// The Anime / Manga browse tab — the viewer's own lists folded above the
-/// browse sections.
 class BrowseFeed extends StatelessWidget {
   final MediaService service;
   final bool anime;

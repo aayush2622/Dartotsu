@@ -7,9 +7,6 @@ import '../../Utils/Extensions/Responsive.dart';
 import '../Components/ThemedContainer.dart';
 import 'SettingsAdaptor.dart';
 
-/// A searchable settings body: a search field over a `List<Setting>` rendered by
-/// [SettingsAdaptor]. [menu] is shown while the query is empty (a category list
-/// on the top screen), [searchable] is the flat set the query filters.
 class SettingsListView extends StatefulWidget {
   final List<Setting> Function(BuildContext) searchable;
   final List<Setting> Function(BuildContext)? menu;
@@ -81,7 +78,6 @@ class _SettingsListViewState extends State<SettingsListView> {
     );
   }
 
-  /// Keep matching rows; keep a header only while its group still has one.
   static List<Setting> _filter(List<Setting> all, String query) {
     final out = <Setting>[];
     for (var i = 0; i < all.length; i++) {

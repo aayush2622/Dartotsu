@@ -4,12 +4,6 @@ import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Extensions/Responsive.dart';
 import 'ThemedContainer.dart';
 
-/// The one card surface used behind every block of content in the app —
-/// synopsis, detail tables, settings rows, rails, empty states.
-///
-/// It is glass-mode aware (delegates the surface to [ThemedContainer]) and
-/// pulls its padding / radius from [Dimens] so every card in the app matches.
-/// Give it a [title] to get a consistent section header inside the card.
 class SectionCard extends StatelessWidget {
   final String? title;
   final Widget? trailing;
@@ -52,8 +46,6 @@ class SectionCard extends StatelessWidget {
   }
 }
 
-/// Standalone section title — for rails and lists where the card is the row
-/// itself rather than a wrapper around text.
 class SectionHeader extends StatelessWidget {
   final String title;
   final Widget? trailing;

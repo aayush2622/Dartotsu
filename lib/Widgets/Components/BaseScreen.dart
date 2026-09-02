@@ -7,20 +7,12 @@ import '../../Core/ThemeManager/ThemeController.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
 import 'CachedNetworkImage.dart';
 
-/// Placeholder art for glass mode until services expose the current media's
-/// banner.
 const kFallbackGlassBackground =
     'https://i.pinimg.com/1200x/b2/e7/7f/b2e77f955c3d39655cc7a46802f94748.jpg';
 
-/// Base for full-screen `State`s. Implement [buildContent] instead of `build`;
-/// this handles the `SafeArea` + `Scaffold` and the reactive blurred backdrop
-/// used in glass mode. [buildContent] is built once per `build` and reused
-/// across glass-mode toggles.
 abstract class BaseScreen<T extends StatefulWidget> extends State<T> {
   Widget buildContent(BuildContext context);
 
-  /// Image shown blurred behind [buildContent] in glass mode. Override to use
-  /// the current media's artwork.
   String? get glassBackgroundUrl => kFallbackGlassBackground;
 
   @override
@@ -60,8 +52,6 @@ class GlassBackground extends StatelessWidget {
       child: Stack(
         fit: StackFit.expand,
         children: [
-          // Themed base so glass mode never falls back to bare black when the
-          // artwork is missing or still loading.
           DecoratedBox(
             decoration: BoxDecoration(
               gradient: LinearGradient(

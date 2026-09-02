@@ -7,9 +7,6 @@ import '../../Core/ThemeManager/ThemeController.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
 import 'AppDropdown.dart';
 
-/// A surface that renders as a solid card normally and as a frosted-glass
-/// panel when glass mode is on. Reacts to the glass-mode toggle via a single
-/// [Obx].
 class ThemedContainer extends StatelessWidget {
   final Widget child;
   final Widget? glassChild;
@@ -75,7 +72,6 @@ class ThemedContainer extends StatelessWidget {
         alignment: alignment,
         margin: margin,
         decoration: BoxDecoration(
-          // M3: an explicitly toned surface container rather than a bare card.
           color: color ?? scheme.surfaceContainerHigh,
           border: border,
           borderRadius: radius,
@@ -93,7 +89,6 @@ class ThemedContainer extends StatelessWidget {
   }
 }
 
-/// Picks between a material and a glass widget based on the glass-mode toggle.
 class ThemedWidget extends StatelessWidget {
   final Widget materialWidget;
   final Widget? glassWidget;
@@ -115,7 +110,6 @@ class ThemedWidget extends StatelessWidget {
   }
 }
 
-/// Dropdown bound to [ThemeController.themeName], listing every [AppTheme].
 Widget themeDropdown() {
   final controller = find<ThemeController>();
   final options = AppTheme.values.map((e) => e.label).toList();

@@ -79,8 +79,6 @@ class _CardStyleScreenState extends BaseScreen<CardStyleScreen> {
     );
   }
 
-  // --- preview --------------------------------------------------------
-
   Widget _preview(CardStyle s) {
     return SectionCard(
       title: 'Preview',
@@ -118,8 +116,6 @@ class _CardStyleScreenState extends BaseScreen<CardStyleScreen> {
     );
   }
 
-  // --- presets -------------------------------------------------------
-
   Widget _presets(CardStyle s) {
     const names = {
       'poster': 'Poster',
@@ -151,8 +147,6 @@ class _CardStyleScreenState extends BaseScreen<CardStyleScreen> {
       ),
     );
   }
-
-  // --- layout -------------------------------------------------------
 
   Widget _layout(CardStyle s) {
     return SectionCard(
@@ -242,8 +236,6 @@ class _CardStyleScreenState extends BaseScreen<CardStyleScreen> {
     );
   }
 
-  // --- shape ------------------------------------------------------
-
   Widget _shape(CardStyle s) {
     return SectionCard(
       title: 'Shape',
@@ -269,8 +261,6 @@ class _CardStyleScreenState extends BaseScreen<CardStyleScreen> {
       ),
     );
   }
-
-  // --- overlays --------------------------------------------------
 
   Widget _overlays(CardStyle s) {
     return SectionCard(

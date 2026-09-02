@@ -30,7 +30,6 @@ class FloatingBottomNavBar extends StatefulWidget {
 class _FloatingBottomNavBarState extends State<FloatingBottomNavBar> {
   MediaServiceController get _services => find();
 
-  /// desktop hover / d-pad focus mirror
   final hoveredIndex = (-1).obs;
 
   List<NavItem> get _items {
@@ -171,7 +170,6 @@ class _FloatingBottomNavBarState extends State<FloatingBottomNavBar> {
                 ),
               ),
 
-              /// Navigation items
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: _items.map((item) {

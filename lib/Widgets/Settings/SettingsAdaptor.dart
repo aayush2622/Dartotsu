@@ -6,8 +6,6 @@ import '../../Utils/Extensions/Responsive.dart';
 import '../Components/SectionCard.dart';
 import 'SettingItem.dart';
 
-/// Renders a flat `List<Setting>` — one [SectionCard] per row, plain labels for
-/// [SettingType.header]. Same card surface and spacing as the rest of the app.
 class SettingsAdaptor extends StatelessWidget {
   final List<Setting> settings;
 

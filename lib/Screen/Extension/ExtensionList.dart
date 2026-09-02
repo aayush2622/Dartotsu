@@ -44,7 +44,6 @@ class _ExtensionListState extends State<ExtensionList> {
   Pref<List<String>> get _orderPref =>
       PrefName.extensionOrder(extension.name, widget.itemType.name);
 
-  /// Read once — the toggle only takes effect on the next screen open.
   final bool _showIcons = PrefName.loadExtensionIcon.value;
 
   @override

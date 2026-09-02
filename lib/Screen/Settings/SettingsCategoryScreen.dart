@@ -4,7 +4,6 @@ import '../../Widgets/Components/BaseScreen.dart';
 import '../../Widgets/Settings/SettingsListView.dart';
 import 'SettingsCategories.dart';
 
-/// A settings sub-screen: the category's `List<Setting>` with its own search.
 class SettingsCategoryScreen extends StatefulWidget {
   final SettingsCategory category;
 

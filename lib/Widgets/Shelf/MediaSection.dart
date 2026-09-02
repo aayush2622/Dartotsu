@@ -24,7 +24,6 @@ class MediaSectionData {
 
   final List<Media>? mediaList;
 
-  /// Renders shimmering placeholder cards instead of real content.
   final bool loading;
 
   final ScrollController? scrollController;
@@ -327,8 +326,6 @@ class _MediaSectionState extends State<MediaSection> {
     return '$left  |  $right';
   }
 
-  /// "12 · 24" for the progress pill — only for titles on the viewer's list
-  /// (a null `userProgress` means it isn't being tracked, so no pill).
   static String? _progressText(Media media) {
     final done = media.userProgress;
     if (done == null) return null;
@@ -343,8 +340,6 @@ class _MediaSectionState extends State<MediaSection> {
     return raw > 0 ? raw / 10 : null;
   }
 
-  /// Watched/read fraction — only for titles the viewer has started but not
-  /// finished.
   static double? _progress(Media media) {
     final done = media.userProgress ?? 0;
     final total = media.anime?.totalEpisodes ?? media.manga?.totalChapters;

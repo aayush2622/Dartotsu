@@ -15,12 +15,6 @@ import '../../Widgets/Components/ScrollConfig.dart';
 import '../../Widgets/Components/SectionCard.dart';
 import '../../Widgets/Shelf/MediaSection.dart';
 
-/// Renders an ordered set of horizontal media sections. The loader's map keys
-/// are the section titles.
-///
-/// When [cacheId] is set, the last successful result is shown from disk on the
-/// first frame and the network fetch runs in the background — new/changed/gone
-/// sections are patched in without a full reload.
 class MediaSectionsScreen extends StatefulWidget {
   final SectionsLoader loader;
   final String? cacheId;
@@ -28,7 +22,6 @@ class MediaSectionsScreen extends StatefulWidget {
   final void Function(Media media)? onMediaTap;
   final VoidCallback? onSearch;
 
-  /// Emits whenever the screen should refetch (e.g. the account changed).
   final Stream<Object?>? reloadOn;
 
   const MediaSectionsScreen({
@@ -50,8 +43,6 @@ class _MediaSectionsScreenState extends State<MediaSectionsScreen>
   final _sections = <String, List<Media>>{}.obs;
   final _error = RxnString();
 
-  /// Section titles already shown once — they don't replay the entrance when
-  /// the background refresh patches them.
   final _seen = <String>{};
 
   late final SectionCache? _cache = widget.cacheId == null
@@ -96,7 +87,6 @@ class _MediaSectionsScreenState extends State<MediaSectionsScreen>
     }
   }
 
-  /// Returning to this screen from a pushed route (e.g. a detail page).
   @override
   void didPopNext() => _refresh();
 
@@ -123,8 +113,6 @@ class _MediaSectionsScreenState extends State<MediaSectionsScreen>
     }
   }
 
-  /// Patch the visible map key-by-key so unchanged rails keep their state and
-  /// only what actually moved rebuilds.
   void _apply(Map<String, List<Media>> fresh) {
     var changed = _sections.length != fresh.length;
     fresh.forEach((title, media) {

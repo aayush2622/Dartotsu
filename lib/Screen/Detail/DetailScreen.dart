@@ -60,7 +60,6 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
       final full = await widget.queries.mediaDetails(_media.value);
       if (full != null) _media.value = full;
     } catch (_) {
-      // keep the partial media we were opened with
     } finally {
       _loading.value = false;
     }
@@ -166,8 +165,6 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
     );
   }
 
-  // --- app bar ------------------------------------------------------------
-
   Widget _appBar(Media m) {
     final scheme = context.colorScheme;
     return SliverAppBar(
@@ -262,8 +259,6 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
     );
   }
 
-  // --- header -----------------------------------------------------------
-
   Widget _header(Media m) {
     return Padding(
       padding: EdgeInsets.fromLTRB(Dimens.gap, Dimens.gap, Dimens.gap, 0),
@@ -345,8 +340,6 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
     return Wrap(spacing: 8, runSpacing: 8, children: pills);
   }
 
-  // --- stat strip -----------------------------------------------------
-
   List<(IconData, String, String)> _statItems(Media m) => [
     if ((m.meanScore ?? 0) > 0)
       (Icons.star_rounded, 'Score', (m.meanScore! / 10).toStringAsFixed(1)),
@@ -382,8 +375,6 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
     );
   }
 
-  // --- airing ---------------------------------------------------------
-
   Duration? _airingIn(Media m) {
     final at = m.anime?.nextAiringEpisodeTime;
     if (at == null) return null;
@@ -413,8 +404,6 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
       ),
     );
   }
-
-  // --- text sections ------------------------------------------------
 
   Widget _synopsis(Media m) => SectionCard(
     margin: _sectionMargin,
@@ -486,8 +475,6 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
     );
   }
 
-  // --- info card ----------------------------------------------------
-
   List<(String, String)> _infoRows(Media m) {
     final a = m.anime;
     return [
@@ -508,8 +495,6 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
       ],
     ),
   );
-
-  // --- fab ----------------------------------------------------------
 
   Widget _fab(BuildContext context) {
     return Obx(() {
@@ -537,8 +522,6 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
       );
     });
   }
-
-  // --- format helpers ---------------------------------------------
 
   static String _pretty(String raw) {
     final words = raw.toLowerCase().replaceAll('_', ' ').split(' ');

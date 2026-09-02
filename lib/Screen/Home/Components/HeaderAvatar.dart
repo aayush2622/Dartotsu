@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import '../../../Utils/Extensions/ContextExtensions.dart';
 import '../../../Widgets/Components/CachedNetworkImage.dart';
 
-/// The circular account avatar in the home header and the account sheet.
 class HeaderAvatar extends StatelessWidget {
   final String? url;
   final double size;

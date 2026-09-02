@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../Utils/Extensions/ContextExtensions.dart';
 
-/// One choice in an [AppSegmented].
 class AppSegment<T> {
   final T value;
   final String? label;
@@ -10,14 +9,11 @@ class AppSegment<T> {
   const AppSegment(this.value, {this.label, this.icon});
 }
 
-/// The app's single-select segmented control — one styling, used everywhere
-/// instead of a bare [SegmentedButton].
 class AppSegmented<T> extends StatelessWidget {
   final List<AppSegment<T>> segments;
   final T value;
   final ValueChanged<T> onChanged;
 
-  /// Stretch to fill the available width.
   final bool expand;
 
   const AppSegmented({
@@ -32,10 +28,6 @@ class AppSegmented<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     final control = SegmentedButton<T>(
       showSelectedIcon: false,
-      style: const ButtonStyle(
-        visualDensity: VisualDensity.compact,
-        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-      ),
       segments: [
         for (final s in segments)
           ButtonSegment<T>(
@@ -52,8 +44,6 @@ class AppSegmented<T> extends StatelessWidget {
   }
 }
 
-/// A labelled slider — name on the left, live value on the right, [Slider]
-/// below. Replaces the ad-hoc "Row + Slider" pattern across settings.
 class LabeledSlider extends StatelessWidget {
   final String label;
   final double value;
@@ -106,7 +96,6 @@ class LabeledSlider extends StatelessWidget {
   }
 }
 
-/// A single-select group of [ChoiceChip]s — the app's chip picker.
 class AppChoiceChips<T> extends StatelessWidget {
   final List<AppSegment<T>> options;
   final T value;
@@ -138,7 +127,6 @@ class AppChoiceChips<T> extends StatelessWidget {
   }
 }
 
-/// A titled control block used inside settings cards — a label above its child.
 class LabeledField extends StatelessWidget {
   final String label;
   final Widget child;
