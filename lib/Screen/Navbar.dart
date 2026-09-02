@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 
 import '../Core/Services/MediaServiceController.dart';
 import '../Core/Services/ServiceSwitcher.dart';
-import '../Core/ThemeManager/LanguageSwitcher.dart';
 import '../Utils/Animation/WidgetAnimations.dart';
 import '../Utils/Extensions/ContextExtensions.dart';
 import '../Utils/Functions/GetXFunctions.dart';
@@ -16,11 +15,13 @@ import 'Settings/SettingsScreen.dart';
 class FloatingBottomNavBar extends StatefulWidget {
   final int selectedIndex;
   final ValueChanged<int> onTabSelected;
+  final List<NavItem> items;
 
   const FloatingBottomNavBar({
     super.key,
     required this.selectedIndex,
     required this.onTabSelected,
+    required this.items,
   });
 
   @override
@@ -34,28 +35,10 @@ class _FloatingBottomNavBarState extends State<FloatingBottomNavBar> {
 
   List<NavItem> get _items {
     final service = _services.currentService.value;
-
     if (service is NavBarProvider) {
       return (service as NavBarProvider).navBarItems;
     }
-
-    return [
-      NavItem(
-        index: 0,
-        icon: Icons.movie_filter_rounded,
-        label: getString.anime.toUpperCase(),
-      ),
-      NavItem(
-        index: 1,
-        icon: Icons.home_rounded,
-        label: getString.home.toUpperCase(),
-      ),
-      NavItem(
-        index: 2,
-        icon: Icons.import_contacts,
-        label: getString.manga.toUpperCase(),
-      ),
-    ];
+    return widget.items;
   }
 
   @override

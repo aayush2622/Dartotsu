@@ -59,7 +59,7 @@ class HomeHeader extends StatelessWidget {
                 if (service.searchView != null)
                   IconButton(
                     icon: const Icon(Icons.search_rounded),
-                    onPressed: () => openSearch(context, service, anime: true),
+                    onPressed: () => openSearch(context, service),
                   ),
                 const SizedBox(width: 6),
                 HeaderAvatar(

@@ -23,14 +23,14 @@ import '../Detail/DetailScreen.dart';
 import 'Components/SearchFilterSheet.dart';
 
 class SearchScreen extends StatefulWidget {
-  final bool anime;
+  final MediaType type;
   final SearchScreenView view;
   final String? query;
 
   const SearchScreen({
     super.key,
     required this.view,
-    this.anime = true,
+    required this.type,
     this.query,
   });
 
@@ -42,18 +42,18 @@ class _SearchScreenState extends BaseScreen<SearchScreen> {
   final _controller = TextEditingController();
   final _results = <Media>[].obs;
   final _loading = false.obs;
-  late final _anime = widget.anime.obs;
+  late final _type = widget.type.obs;
 
   /// The live query — search term plus every applied filter.
   late final _query = SearchResults(
-    type: widget.anime ? SearchType.ANIME : SearchType.MANGA,
+    type: widget.type.searchType,
     perPage: 30,
   ).obs;
 
   Timer? _debounce;
   bool _hasMore = true;
 
-  SearchFilterSpec get _spec => widget.view.filters(anime: _anime.value);
+  SearchFilterSpec get _spec => widget.view.filters(_type.value);
 
   bool get _hasCriteria =>
       (_query.value.search?.isNotEmpty ?? false) ||
@@ -143,17 +143,17 @@ class _SearchScreenState extends BaseScreen<SearchScreen> {
             Obx(
               () => Padding(
                 padding: const EdgeInsets.only(right: 4),
-                child: AppSegmented<bool>(
+                child: AppSegmented<MediaType>(
                   expand: false,
-                  value: _anime.value,
-                  onChanged: (v) {
-                    _anime.value = v;
-                    _query.value.type = v ? SearchType.ANIME : SearchType.MANGA;
+                  value: _type.value,
+                  onChanged: (t) {
+                    _type.value = t;
+                    _query.value.type = t.searchType;
                     _restart();
                   },
-                  segments: const [
-                    AppSegment(true, label: 'Anime'),
-                    AppSegment(false, label: 'Manga'),
+                  segments: [
+                    for (final t in widget.view.types)
+                      AppSegment(t, label: t.label),
                   ],
                 ),
               ),

@@ -5,7 +5,7 @@ import '../Core/Services/MediaServiceController.dart';
 import '../Utils/Extensions/ContextExtensions.dart';
 import '../Utils/Functions/GetXFunctions.dart';
 import '../Widgets/Components/BaseScreen.dart';
-import 'Feed/FeedScreens.dart';
+import 'Feed/FeedTabs.dart';
 import 'Navbar.dart';
 
 class MainScreen extends StatefulWidget {
@@ -16,42 +16,60 @@ class MainScreen extends StatefulWidget {
 }
 
 class MainScreenState extends BaseScreen<MainScreen> {
-  final _tab = 1.obs;
-  final _built = <int>{1};
-
   MediaServiceController get _services => find();
 
-  Widget _tabView(BuildContext context, int index) {
-    final s = _services.currentService.value;
-    return switch (index) {
-      0 => BrowseFeed(service: s, anime: true),
-      2 => BrowseFeed(service: s, anime: false),
-      _ => HomeFeed(service: s),
-    };
+  late final _tab = homeTabIndex(_services.currentService.value).obs;
+  final _built = <int>{};
+  Worker? _serviceWorker;
+
+  @override
+  void initState() {
+    super.initState();
+    _built.add(_tab.value);
+    _serviceWorker = ever(_services.currentService, (_) {
+      _built
+        ..clear()
+        ..add(homeTabIndex(_services.currentService.value));
+      _tab.value = homeTabIndex(_services.currentService.value);
+    });
   }
 
-  Widget get _navbar => Obx(
-    () => FloatingBottomNavBar(
-      selectedIndex: _tab.value,
+  @override
+  void dispose() {
+    _serviceWorker?.dispose();
+    super.dispose();
+  }
+
+  Widget get _navbar => Obx(() {
+    final service = _services.currentService.value;
+    final tabs = feedTabsFor(service);
+    return FloatingBottomNavBar(
+      selectedIndex: _tab.value.clamp(0, tabs.length - 1),
+      items: [
+        for (final (i, t) in tabs.indexed)
+          NavItem(index: i, icon: t.icon, label: t.label.toUpperCase()),
+      ],
       onTabSelected: (i) {
         _built.add(i);
         _tab.value = i;
       },
-    ),
-  );
+    );
+  });
 
   @override
   Widget buildContent(BuildContext context) {
     final body = Obx(() {
-      _services.currentService.value;
+      final service = _services.currentService.value;
+      final tabs = feedTabsFor(service);
+      final index = _tab.value.clamp(0, tabs.length - 1);
       return IndexedStack(
-        index: _tab.value,
+        index: index,
         children: [
-          for (var i = 0; i < 3; i++)
+          for (final (i, t) in tabs.indexed)
             _built.contains(i)
                 ? KeyedSubtree(
-                    key: ValueKey('${_services.currentService.value.id}-$i'),
-                    child: _tabView(context, i),
+                    key: ValueKey('${service.id}-$i'),
+                    child: t.build(service),
                   )
                 : const SizedBox.shrink(),
         ],

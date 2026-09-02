@@ -34,12 +34,11 @@ class AnilistHomeView implements HomeScreenView {
 /// Maps a browse section title to the query that continues it. `null` for
 /// sections that can't be paged (airing schedule, the viewer's own lists).
 Future<List<Media>?> _loadMoreSection(
+  MediaType type,
   String section,
-  int page, {
-  required bool anime,
-}) {
-  final type = anime ? SearchType.ANIME : SearchType.MANGA;
-  final base = SearchResults(type: type, page: page, perPage: 30);
+  int page,
+) {
+  final base = SearchResults(type: type.searchType, page: page, perPage: 30);
   final query = switch (section) {
     'Trending Now' => base..sort = 'TRENDING_DESC',
     'Popular Anime' || 'Popular Manga' => base..sort = 'POPULARITY_DESC',
@@ -71,28 +70,19 @@ Future<List<Media>?> _loadMoreSection(
   return _auth.queries.search(query).then((r) => r?.results);
 }
 
-class AnilistAnimeView extends AnimeScreenView {
+class AnilistFeedView extends FeedScreenView {
   @override
-  Sections userLists() => _auth.queries.getMediaLists(anime: true);
+  Sections userLists(MediaType type) =>
+      _auth.queries.getMediaLists(anime: type.isVideo);
 
   @override
-  Sections browse() => _auth.queries.getAnimeList();
+  Sections browse(MediaType type) => type.isVideo
+      ? _auth.queries.getAnimeList()
+      : _auth.queries.getMangaList();
 
   @override
-  Future<List<Media>?> loadMore(String section, int page) =>
-      _loadMoreSection(section, page, anime: true);
-}
-
-class AnilistMangaView extends MangaScreenView {
-  @override
-  Sections userLists() => _auth.queries.getMediaLists(anime: false);
-
-  @override
-  Sections browse() => _auth.queries.getMangaList();
-
-  @override
-  Future<List<Media>?> loadMore(String section, int page) =>
-      _loadMoreSection(section, page, anime: false);
+  Future<List<Media>?> loadMore(MediaType type, String section, int page) =>
+      _loadMoreSection(type, section, page);
 }
 
 const _anilistSorts = {
@@ -110,10 +100,11 @@ class AnilistSearchView implements SearchScreenView {
       _auth.queries.search(query);
 
   @override
-  List<SearchType> get types => const [SearchType.ANIME, SearchType.MANGA];
+  List<MediaType> get types => const [MediaType.anime, MediaType.manga];
 
   @override
-  SearchFilterSpec filters({required bool anime}) {
+  SearchFilterSpec filters(MediaType type) {
+    final anime = type.isVideo;
     final genres =
         loadCustomData<List<String>>('anilist_genres') ?? const <String>[];
     final tags =

@@ -31,7 +31,7 @@ void openDetail(
 void openSearch(
   BuildContext context,
   MediaService service, {
-  bool anime = true,
+  MediaType? type,
   String? query,
 }) {
   final view = service.searchView;
@@ -39,7 +39,11 @@ void openSearch(
     context,
     view == null
         ? NotImplemented(service: service.name, area: 'Search')
-        : SearchScreen(view: view, anime: anime, query: query),
+        : SearchScreen(
+            view: view,
+            type: type ?? view.types.first,
+            query: query,
+          ),
   );
 }
 
