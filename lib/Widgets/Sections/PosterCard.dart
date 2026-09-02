@@ -110,6 +110,7 @@ class _PosterCardState extends State<PosterCard> {
 
   bool get _pillOn =>
       _style.showProgress && _style.progress == CardProgressStyle.pill;
+
   bool get _barOn =>
       _style.showProgress &&
       _style.progress == CardProgressStyle.bar &&
@@ -122,7 +123,7 @@ class _PosterCardState extends State<PosterCard> {
     round: true,
     overlays: [
       const _Scrim(kind: _ScrimKind.full),
-      ..._cornerMarks(s),
+      ..._cornerMarks(s, bottomTaken: _pillOn || _barOn),
       if (_barOn)
         Positioned(
           left: 0,
@@ -130,7 +131,7 @@ class _PosterCardState extends State<PosterCard> {
           bottom: 0,
           child: _Bar(fraction: widget.progress!, color: _scheme.primary),
         ),
-      if (_pillOn && widget.progressText != null)
+      if (_pillOn)
         Positioned(
           left: 6,
           right: 6,
@@ -167,7 +168,7 @@ class _PosterCardState extends State<PosterCard> {
           round: true,
           overlays: [
             if (pill) const _Scrim(kind: _ScrimKind.full),
-            ..._cornerMarks(s),
+            ..._cornerMarks(s, bottomTaken: pill || _barOn),
             if (_barOn)
               Positioned(
                 left: 0,
@@ -199,6 +200,9 @@ class _PosterCardState extends State<PosterCard> {
     // With a pill on the cover the score sits in its corner; otherwise it
     // floats at the poster/text seam.
     final scoreFloats = hasScore && !pill;
+    // With a pill on the cover the score goes to a top corner (the pill owns the
+    // bottom); the airing dot takes the other top corner.
+    final posterCorner = _scoreCorner(s, bottomTaken: true);
     final onRight =
         s.scoreCorner == CardCorner.bottomRight ||
         s.scoreCorner == CardCorner.topRight ||
@@ -223,12 +227,10 @@ class _PosterCardState extends State<PosterCard> {
                 overlays: [
                   const _Scrim(kind: _ScrimKind.short),
                   if (s.showAiring && widget.airing)
-                    _corner(_airingCorner(s.scoreCorner), const _AiringDot()),
+                    _corner(_airingCorner(posterCorner), const _AiringDot()),
                   if (hasScore && !scoreFloats)
                     _corner(
-                      s.scoreCorner == CardCorner.none
-                          ? CardCorner.topLeft
-                          : s.scoreCorner,
+                      posterCorner,
                       _ScoreBadge(
                         score: widget.score!,
                         highlight: widget.scoreHighlight,
@@ -279,15 +281,32 @@ class _PosterCardState extends State<PosterCard> {
 
   // --- pieces -------------------------------------------------------
 
-  List<Widget> _cornerMarks(CardStyle s) => [
-    if (s.showScore && widget.score != null)
-      _corner(
-        s.scoreCorner,
-        _ScoreBadge(score: widget.score!, highlight: widget.scoreHighlight),
-      ),
-    if (s.showAiring && widget.airing)
-      _corner(_airingCorner(s.scoreCorner), const _AiringDot()),
-  ];
+  /// The score badge's corner, kept clear of a bottom-row overlay (pill/bar) —
+  /// a bottom corner is bumped to the matching top corner when [bottomTaken].
+  CardCorner _scoreCorner(CardStyle s, {required bool bottomTaken}) {
+    final c = s.scoreCorner == CardCorner.none
+        ? CardCorner.topLeft
+        : s.scoreCorner;
+    if (!bottomTaken) return c;
+    return switch (c) {
+      CardCorner.bottomLeft => CardCorner.topLeft,
+      CardCorner.bottomRight => CardCorner.topRight,
+      _ => c,
+    };
+  }
+
+  List<Widget> _cornerMarks(CardStyle s, {bool bottomTaken = false}) {
+    final corner = _scoreCorner(s, bottomTaken: bottomTaken);
+    return [
+      if (s.showScore && widget.score != null)
+        _corner(
+          corner,
+          _ScoreBadge(score: widget.score!, highlight: widget.scoreHighlight),
+        ),
+      if (s.showAiring && widget.airing)
+        _corner(_airingCorner(corner), const _AiringDot()),
+    ];
+  }
 
   Widget _poster(
     CardStyle s, {
@@ -383,6 +402,7 @@ class _PosterCardState extends State<PosterCard> {
 
 class _Scrim extends StatelessWidget {
   final _ScrimKind kind;
+
   const _Scrim({required this.kind});
 
   @override
@@ -408,6 +428,7 @@ class _Scrim extends StatelessWidget {
 class _ScoreBadge extends StatelessWidget {
   final double score;
   final bool highlight;
+
   const _ScoreBadge({required this.score, required this.highlight});
 
   @override
@@ -440,6 +461,7 @@ class _ScoreBadge extends StatelessWidget {
 
 class _AiringDot extends StatelessWidget {
   const _AiringDot();
+
   @override
   Widget build(BuildContext context) => Container(
     width: 13,
@@ -456,6 +478,7 @@ class _Bar extends StatelessWidget {
   final double fraction;
   final Color color;
   final double height;
+
   const _Bar({required this.fraction, required this.color, this.height = 3});
 
   @override
@@ -474,6 +497,7 @@ class _Bar extends StatelessWidget {
 
 class _Pill extends StatelessWidget {
   final String text;
+
   const _Pill({required this.text});
 
   @override

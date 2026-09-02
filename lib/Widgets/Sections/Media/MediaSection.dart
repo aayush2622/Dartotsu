@@ -101,8 +101,11 @@ class _MediaSectionState extends State<MediaSection> {
       tryFind<CardStyleController>()?.current ?? const CardStyle();
 
   double get _cardW => _style.itemWidth;
+
   double get _cardH => _style.imageHeight;
+
   double get _railH => _style.itemHeight;
+
   double get _gap => Dimens.cardGap;
 
   @override
@@ -372,11 +375,12 @@ class _MediaSectionState extends State<MediaSection> {
 
   /// "12 · 24" for the progress pill — only for titles on the viewer's list
   /// (a null `userProgress` means it isn't being tracked).
-  static String? _progressText(Media media) {
+  static String _progressText(Media media) {
     final done = media.userProgress;
-    if (done == null) return null;
     final total = _total(media);
-    return '$done · ${total ?? '?'}';
+    if (done == null) return '~ · ${total ?? '~'}';
+
+    return '$done · ${total ?? '~'}';
   }
 
   static double? _score(Media media) {

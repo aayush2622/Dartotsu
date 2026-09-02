@@ -9,14 +9,16 @@ extension CardStyleMetrics on CardStyle {
   double get imageHeight => itemWidth * aspect;
 
   /// Height reserved below the poster for the caption — one info line for
-  /// media, a two-line role/VA line for people.
+  /// media, a two-line role/VA line for people (labelMedium, ~18px/line).
   double get _captionHeight => preset == 'people'
-      ? 36
+      ? 38
       : showInfo
-      ? 18
+      ? 20
       : 0;
 
-  double get _titleHeight => lines * 22;
+  /// bodyLarge renders at a 24px line height (Material3 default, Poppins has no
+  /// override).
+  double get _titleHeight => lines * 24;
 
   /// Height a horizontal shelf must reserve for one card in this style.
   double get itemHeight {
