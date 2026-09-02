@@ -57,6 +57,8 @@ class _MediaSectionsScreenState extends State<MediaSectionsScreen>
   final _seen = <String>{};
   final _pages = <String, int>{};
 
+  String get _heroPrefix => widget.cacheId ?? identityHashCode(this).toString();
+
   late final SectionCache? _cache = widget.cacheId == null
       ? null
       : SectionCache(widget.cacheId!, widget.loader);
@@ -186,6 +188,7 @@ class _MediaSectionsScreenState extends State<MediaSectionsScreen>
                   padding: EdgeInsets.symmetric(vertical: Dimens.gapSm),
                   child: StackedCarousel(
                     items: spotItems.take(10).toList(),
+                    heroPrefix: _heroPrefix,
                     onTap: (m, tag) => widget.onMediaTap?.call(m, tag),
                   ),
                 ),
@@ -231,6 +234,7 @@ class _MediaSectionsScreenState extends State<MediaSectionsScreen>
         type: 0,
         title: title,
         mediaList: media,
+        heroPrefix: _heroPrefix,
         onMediaTap: (ctx, idx, m, tag) => widget.onMediaTap?.call(m, tag),
         onLoadMore: widget.onSectionLoadMore == null
             ? null

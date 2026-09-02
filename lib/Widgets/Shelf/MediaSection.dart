@@ -51,6 +51,10 @@ class MediaSectionData {
 
   final Future<List<Media>?> Function()? onLoadMore;
 
+  /// Namespaces this section's `Hero` tags so the same media in another
+  /// mounted feed (IndexedStack tabs) can't clash.
+  final String heroPrefix;
+
   const MediaSectionData({
     required this.type,
     this.title,
@@ -66,6 +70,7 @@ class MediaSectionData {
     this.onMediaTap,
     this.onMediaLongPress,
     this.onLoadMore,
+    this.heroPrefix = '',
   });
 
   const MediaSectionData.loading()
@@ -82,7 +87,8 @@ class MediaSectionData {
       onTitleLongPress = null,
       onMediaTap = null,
       onMediaLongPress = null,
-      onLoadMore = null;
+      onLoadMore = null,
+      heroPrefix = '';
 }
 
 class MediaSection extends StatefulWidget {
@@ -300,7 +306,9 @@ class _MediaSectionState extends State<MediaSection> {
 
   Widget _mediaItem(int index, Media media) {
     final detailed = !media.minimal;
-    final heroTag = detailed ? 'cover:${data.title}:$index:${media.id}' : null;
+    final heroTag = detailed
+        ? 'cover:${data.heroPrefix}:${data.title}:$index:${media.id}'
+        : null;
     return PosterCard(
       heroTag: heroTag,
       imageUrl: media.cover,

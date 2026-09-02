@@ -14,7 +14,15 @@ class StackedCarousel extends StatefulWidget {
   final List<Media> items;
   final void Function(Media media, String heroTag) onTap;
 
-  const StackedCarousel({super.key, required this.items, required this.onTap});
+  /// Namespaces the `Hero` tags per feed so two mounted carousels can't clash.
+  final String heroPrefix;
+
+  const StackedCarousel({
+    super.key,
+    required this.items,
+    required this.onTap,
+    this.heroPrefix = '',
+  });
 
   @override
   State<StackedCarousel> createState() => _StackedCarouselState();
@@ -112,7 +120,7 @@ class _StackedCarouselState extends State<StackedCarousel> {
 
   Widget _card(Media m, int page, double cardW) {
     final scheme = context.colorScheme;
-    final tag = 'spotlight:$page:${m.id}';
+    final tag = 'spotlight:${widget.heroPrefix}:$page:${m.id}';
     final score = (m.meanScore ?? 0) > 0 ? m.meanScore! / 10 : null;
 
     return Padding(

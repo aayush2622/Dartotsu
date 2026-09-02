@@ -6,7 +6,14 @@ import 'package:flutter/cupertino.dart';
 // two-finger gesture, which works regardless — listing them here makes a
 // click with 1px of movement (kPrecisePointerPanSlop) lose the gesture arena
 // to the scrollable, so taps silently do nothing.
-const _dragDevices = {PointerDeviceKind.touch, PointerDeviceKind.stylus};
+const _dragDevices = {
+  PointerDeviceKind.touch,
+  PointerDeviceKind.stylus,
+  PointerDeviceKind.invertedStylus,
+  PointerDeviceKind.unknown,
+  PointerDeviceKind.trackpad,
+  PointerDeviceKind.mouse,
+};
 
 Widget ScrollConfig(
   BuildContext context, {
