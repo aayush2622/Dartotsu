@@ -32,6 +32,7 @@ import 'Screen/Onboarding/OnboardingScreen.dart';
 import 'Utils/Functions/AppShortcuts.dart';
 import 'Utils/Functions/DeepLink.dart';
 import 'Utils/Functions/GetXFunctions.dart';
+import 'Utils/Functions/NavigateToScreen.dart';
 import 'Utils/Functions/SnackBar.dart';
 import 'l10n/app_localizations.dart';
 
@@ -166,14 +167,7 @@ class _MyAppState extends State<MyApp> {
     super.dispose();
   }
 
-  bool _handleBack() {
-    final nav = Get.key.currentState;
-    if (nav?.canPop() ?? false) {
-      Get.back();
-      return true;
-    }
-    return false;
-  }
+  bool _handleBack() => guardedBack();
 
   @override
   Widget build(BuildContext context) {

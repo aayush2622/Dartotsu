@@ -1,9 +1,9 @@
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
 import 'package:window_manager/window_manager.dart';
 
 import '../../Core/ThemeManager/ThemeController.dart';
 import 'GetXFunctions.dart';
+import 'NavigateToScreen.dart';
 import 'SnackBar.dart';
 
 var usingKeyboard = false;
@@ -21,11 +21,7 @@ bool appShortcuts(KeyEvent event) {
 
   switch (event.logicalKey) {
     case LogicalKeyboardKey.escape:
-      if (Get.key.currentState?.canPop() ?? false) {
-        Get.back();
-        return true;
-      }
-      return false;
+      return guardedBack();
 
     case LogicalKeyboardKey.f11:
       toggleFullscreen();
