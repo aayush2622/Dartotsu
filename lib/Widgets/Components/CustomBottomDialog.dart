@@ -176,6 +176,7 @@ class _CustomBottomDialogState extends State<CustomBottomDialog> {
                     if (widget.negativeText != null) ...[
                       Expanded(
                         child: DpadFocusable(
+                          onSelect: widget.negativeCallback,
                           child: OutlinedButton(
                             onPressed: widget.negativeCallback,
                             style: buttonStyle,
@@ -191,6 +192,7 @@ class _CustomBottomDialogState extends State<CustomBottomDialog> {
                     if (widget.positiveText != null) ...[
                       Expanded(
                         child: DpadFocusable(
+                          onSelect: widget.positiveCallback,
                           child: OutlinedButton(
                             onPressed: widget.positiveCallback,
                             style: buttonStyle,
