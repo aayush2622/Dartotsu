@@ -108,7 +108,7 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
                           image: c.image,
                           name: c.name ?? '',
                           role: [
-                            if (c.role != null) _pretty(c.role!),
+                            if (c.role != null) c.role!.titleCase,
                             if ((c.voiceActor?.isNotEmpty ?? false) &&
                                 c.voiceActor!.first.name != null)
                               c.voiceActor!.first.name!,
@@ -126,7 +126,7 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
                         ShelfPerson(
                           image: s.image,
                           name: s.name ?? '',
-                          role: s.role == null ? null : _pretty(s.role!),
+                          role: s.role?.titleCase,
                         ),
                     ],
                   ),
@@ -315,8 +315,8 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
 
   Widget _metaPills(Media m) {
     final pills = <Widget>[
-      if (m.format != null) MetaPill(text: _pretty(m.format!)),
-      if (m.status != null) MetaPill(text: _pretty(m.status!)),
+      if (m.format != null) MetaPill(text: m.format!.titleCase),
+      if (m.status != null) MetaPill(text: m.status!.titleCase),
       if (_isAnime && m.anime?.totalEpisodes != null)
         MetaPill(icon: Icons.tv_rounded, text: '${m.anime!.totalEpisodes} ep'),
       if (!_isAnime && m.manga?.totalChapters != null)
@@ -327,7 +327,7 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
       if (m.anime?.seasonYear != null)
         MetaPill(
           text: [
-            if (m.anime?.season != null) _pretty(m.anime!.season!),
+            if (m.anime?.season != null) m.anime!.season!.titleCase,
             m.anime!.seasonYear,
           ].join(' '),
         ),
@@ -475,10 +475,10 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
     final a = m.anime;
     return [
       if (a?.studio?.name.isNotEmpty ?? false) ('Studio', a!.studio!.name),
-      if (m.source != null) ('Source', _pretty(m.source!)),
+      if (m.source != null) ('Source', m.source!.titleCase),
       if (m.countryOfOrigin != null) ('Country', m.countryOfOrigin!),
       if (m.startDate?.getFormattedDate() != null) ('Aired', _airedRange(m)),
-      if (m.format != null) ('Format', _pretty(m.format!)),
+      if (m.format != null) ('Format', m.format!.titleCase),
     ];
   }
 
@@ -519,13 +519,6 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
     });
   }
 
-  static String _pretty(String raw) {
-    final words = raw.toLowerCase().replaceAll('_', ' ').split(' ');
-    return words
-        .map((w) => w.isEmpty ? w : '${w[0].toUpperCase()}${w.substring(1)}')
-        .join(' ');
-  }
-
   String _airedRange(Media m) {
     final start = m.startDate?.getFormattedDate();
     final end = m.endDate?.getFormattedDate();
@@ -549,13 +542,13 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
     return '${d.inMinutes}m';
   }
 
-  static String _statusLabel(String? status) => switch (status) {
-    'CURRENT' => 'Watching',
+  String _statusLabel(String? status) => switch (status) {
+    'CURRENT' => _isAnime ? 'Watching' : 'Reading',
     'PLANNING' => 'Planned',
     'COMPLETED' => 'Completed',
     'PAUSED' => 'Paused',
     'DROPPED' => 'Dropped',
-    'REPEATING' => 'Rewatching',
+    'REPEATING' => _isAnime ? 'Rewatching' : 'Rereading',
     _ => 'Add to List',
   };
 }

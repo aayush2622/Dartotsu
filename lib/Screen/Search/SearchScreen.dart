@@ -12,6 +12,7 @@ import '../../Model/SearchResults.dart';
 import '../../Utils/Extensions/CardStyleMetrics.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Extensions/Responsive.dart';
+import '../../Utils/Extensions/StringExtensions.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Utils/Functions/NavigateToScreen.dart';
 import '../../Widgets/Components/AppControls.dart';
@@ -160,7 +161,7 @@ class _SearchScreenState extends BaseScreen<SearchScreen> {
       imageUrl: m.cover,
       title: m.mainName,
       subtitle: [
-        if (m.format != null) _pretty(m.format!),
+        if (m.format != null) m.format!.titleCase,
         if (year != null) '$year',
       ].join(' · '),
       score: (m.meanScore ?? 0) > 0 ? m.meanScore! / 10 : null,
@@ -174,13 +175,6 @@ class _SearchScreenState extends BaseScreen<SearchScreen> {
         );
       },
     );
-  }
-
-  static String _pretty(String raw) {
-    final words = raw.toLowerCase().replaceAll('_', ' ').split(' ');
-    return words
-        .map((w) => w.isEmpty ? w : '${w[0].toUpperCase()}${w.substring(1)}')
-        .join(' ');
   }
 
   Widget _grid(List<Widget> children, {bool skeleton = false}) {
