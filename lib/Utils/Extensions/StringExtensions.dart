@@ -1,4 +1,11 @@
 extension StringExtensions on String {
+  /// `SLICE_OF_LIFE` / `slice_of_life` -> `Slice Of Life`.
+  String get titleCase => toLowerCase()
+      .replaceAll('_', ' ')
+      .split(' ')
+      .map((w) => w.isEmpty ? w : '${w[0].toUpperCase()}${w.substring(1)}')
+      .join(' ');
+
   String substringAfter(String pattern) {
     final startIndex = indexOf(pattern);
     if (startIndex == -1) return substring(0);
