@@ -22,6 +22,7 @@ class ShelfFrame extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
     return RepaintBoundary(
       child: ThemedContainer(
         margin: EdgeInsets.symmetric(
@@ -30,7 +31,10 @@ class ShelfFrame extends StatelessWidget {
         ),
         padding: EdgeInsets.zero,
         borderRadius: Dimens.border,
-        border: const Border.fromBorderSide(BorderSide.none),
+        border: Border.all(
+          color: scheme.outlineVariant.withValues(alpha: 0.5),
+          width: 1,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

@@ -118,10 +118,24 @@ class _MediaSectionState extends State<MediaSection> {
 
   double get _gap => Dimens.cardGap;
 
+  Worker? _styleWorker;
+
   @override
   void initState() {
     super.initState();
     state.updateMediaList(data.loading ? null : data.mediaList);
+    final c = tryFind<CardStyleController>();
+    if (c != null) {
+      _styleWorker = ever(c.style, (_) {
+        if (mounted) setState(() {});
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    _styleWorker?.dispose();
+    super.dispose();
   }
 
   @override
@@ -135,17 +149,13 @@ class _MediaSectionState extends State<MediaSection> {
 
   @override
   Widget build(BuildContext context) {
-    // Rebuild live when the card style changes — `_railH` (read below) touches
-    // `CardStyleController.current`.
-    return Obx(() {
-      final frame = ShelfFrame(
-        title: data.loading ? 'Loading' : data.title,
-        onTitleTap: data.onTitleTap,
-        trailing: _trailingButton(),
-        child: _buildHorizontalSliverList(),
-      );
-      return data.loading ? Skeletonizer(child: frame) : frame;
-    });
+    final frame = ShelfFrame(
+      title: data.loading ? 'Loading' : data.title,
+      onTitleTap: data.onTitleTap,
+      trailing: _trailingButton(),
+      child: _buildHorizontalSliverList(),
+    );
+    return data.loading ? Skeletonizer(child: frame) : frame;
   }
 
   Widget? _trailingButton() {

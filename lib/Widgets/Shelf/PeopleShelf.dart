@@ -21,7 +21,7 @@ class ShelfPerson {
 /// Characters / staff. Same [PosterCard] and [ShelfFrame] as the media shelves,
 /// following the viewer's live card style — only the `people` preset flag is
 /// forced so the role line always shows and its caption is sized for it.
-class PeopleShelf extends StatelessWidget {
+class PeopleShelf extends StatefulWidget {
   final String title;
   final List<ShelfPerson> people;
   final void Function(ShelfPerson person)? onTap;
@@ -34,36 +34,57 @@ class PeopleShelf extends StatelessWidget {
   });
 
   @override
+  State<PeopleShelf> createState() => _PeopleShelfState();
+}
+
+class _PeopleShelfState extends State<PeopleShelf> {
+  Worker? _styleWorker;
+
+  @override
+  void initState() {
+    super.initState();
+    final c = tryFind<CardStyleController>();
+    if (c != null) {
+      _styleWorker = ever(c.style, (_) {
+        if (mounted) setState(() {});
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    _styleWorker?.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Obx(() {
-      final style =
-          (tryFind<CardStyleController>()?.current ?? const CardStyle())
-              .copyWith(preset: 'people');
-      return ShelfFrame(
-        title: title,
-        child: SizedBox(
-          height: style.itemHeight,
-          child: ScrollConfig(
-            context,
-            child: ListView.separated(
-              scrollDirection: Axis.horizontal,
-              padding: EdgeInsets.symmetric(horizontal: Dimens.cardPad + 8),
-              itemCount: people.length,
-              separatorBuilder: (_, _) => SizedBox(width: Dimens.cardGap),
-              itemBuilder: (_, i) {
-                final p = people[i];
-                return PosterCard(
-                  style: style,
-                  imageUrl: p.image,
-                  title: p.name,
-                  subtitle: p.role,
-                  onTap: onTap == null ? null : () => onTap!(p),
-                );
-              },
-            ),
+    final style = (tryFind<CardStyleController>()?.current ?? const CardStyle())
+        .copyWith(preset: 'people');
+    return ShelfFrame(
+      title: widget.title,
+      child: SizedBox(
+        height: style.itemHeight,
+        child: ScrollConfig(
+          context,
+          child: ListView.separated(
+            scrollDirection: Axis.horizontal,
+            padding: EdgeInsets.symmetric(horizontal: Dimens.cardPad + 8),
+            itemCount: widget.people.length,
+            separatorBuilder: (_, _) => SizedBox(width: Dimens.cardGap),
+            itemBuilder: (_, i) {
+              final p = widget.people[i];
+              return PosterCard(
+                style: style,
+                imageUrl: p.image,
+                title: p.name,
+                subtitle: p.role,
+                onTap: widget.onTap == null ? null : () => widget.onTap!(p),
+              );
+            },
           ),
         ),
-      );
-    });
+      ),
+    );
   }
 }

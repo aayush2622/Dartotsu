@@ -64,21 +64,34 @@ class _PosterCardState extends State<PosterCard> {
   bool _hover = false;
 
   late CardStyle _style;
+  Worker? _styleWorker;
 
   ColorScheme get _scheme => context.colorScheme;
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
     // Media cards follow the live CardStyleController; an explicit style
     // (people shelves, the settings preview) is used verbatim.
-    if (widget.style != null) return _build(widget.style!);
-    return Obx(
-      () =>
-          _build(tryFind<CardStyleController>()?.current ?? const CardStyle()),
-    );
+    if (widget.style == null) {
+      _styleWorker = ever(find<CardStyleController>().style, (_) {
+        if (mounted) setState(() {});
+      });
+    }
   }
 
-  Widget _build(CardStyle s) {
+  @override
+  void dispose() {
+    _styleWorker?.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final s =
+        widget.style ??
+        tryFind<CardStyleController>()?.current ??
+        const CardStyle();
     _style = s;
     final card = switch (s.mode) {
       CardMode.onCard => _onCard(s),
