@@ -1,5 +1,6 @@
 import 'package:dpad/dpad.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../Core/ThemeManager/CardStyleController.dart';
 import '../../Model/CardStyle.dart';
@@ -62,16 +63,23 @@ class PosterCard extends StatefulWidget {
 class _PosterCardState extends State<PosterCard> {
   bool _hover = false;
 
-  ColorScheme get _scheme => context.colorScheme;
+  late CardStyle _style;
 
-  CardStyle get _style =>
-      widget.style ??
-      tryFind<CardStyleController>()?.current ??
-      const CardStyle();
+  ColorScheme get _scheme => context.colorScheme;
 
   @override
   Widget build(BuildContext context) {
-    final s = _style;
+    // Media cards follow the live CardStyleController; an explicit style
+    // (people shelves, the settings preview) is used verbatim.
+    if (widget.style != null) return _build(widget.style!);
+    return Obx(
+      () =>
+          _build(tryFind<CardStyleController>()?.current ?? const CardStyle()),
+    );
+  }
+
+  Widget _build(CardStyle s) {
+    _style = s;
     final card = switch (s.mode) {
       CardMode.onCard => _onCard(s),
       CardMode.normal => _normal(s),

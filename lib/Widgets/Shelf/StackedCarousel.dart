@@ -6,6 +6,7 @@ import '../../Core/Services/Model/Media.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Extensions/Responsive.dart';
 import '../Components/CachedNetworkImage.dart';
+import '../Components/ScrollConfig.dart';
 
 /// A spotlight carousel: the centre card sits in front, its neighbours fan out
 /// behind it like a shuffled deck. Auto-advances and loops forever; a drag
@@ -86,33 +87,36 @@ class _StackedCarouselState extends State<StackedCarousel> {
           }
           return false;
         },
-        child: PageView.builder(
-          controller: _controller,
-          padEnds: true,
-          itemBuilder: (context, page) {
-            final delta = page - _page;
-            final absd = delta.abs();
-            if (absd > 2.4) return const SizedBox.shrink();
+        child: ScrollConfig(
+          context,
+          child: PageView.builder(
+            controller: _controller,
+            padEnds: true,
+            itemBuilder: (context, page) {
+              final delta = page - _page;
+              final absd = delta.abs();
+              if (absd > 2.4) return const SizedBox.shrink();
 
-            final scale = (1.0 - 0.16 * absd).clamp(0.62, 1.0);
-            final dy = 18.0 * absd.clamp(0.0, 2.0);
-            final rot = 0.05 * delta.clamp(-2.0, 2.0);
-            final opacity = (1.0 - 0.33 * absd).clamp(0.0, 1.0);
+              final scale = (1.0 - 0.16 * absd).clamp(0.62, 1.0);
+              final dy = 18.0 * absd.clamp(0.0, 2.0);
+              final rot = 0.05 * delta.clamp(-2.0, 2.0);
+              final opacity = (1.0 - 0.33 * absd).clamp(0.0, 1.0);
 
-            return Transform.translate(
-              offset: Offset(0, dy),
-              child: Transform.rotate(
-                angle: rot,
-                child: Transform.scale(
-                  scale: scale,
-                  child: Opacity(
-                    opacity: opacity,
-                    child: _card(_mediaAt(page), page, cardW),
+              return Transform.translate(
+                offset: Offset(0, dy),
+                child: Transform.rotate(
+                  angle: rot,
+                  child: Transform.scale(
+                    scale: scale,
+                    child: Opacity(
+                      opacity: opacity,
+                      child: _card(_mediaAt(page), page, cardW),
+                    ),
                   ),
                 ),
-              ),
-            );
-          },
+              );
+            },
+          ),
         ),
       ),
     );

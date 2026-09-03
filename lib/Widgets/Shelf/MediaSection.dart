@@ -135,13 +135,17 @@ class _MediaSectionState extends State<MediaSection> {
 
   @override
   Widget build(BuildContext context) {
-    final frame = ShelfFrame(
-      title: data.loading ? 'Loading' : data.title,
-      onTitleTap: data.onTitleTap,
-      trailing: _trailingButton(),
-      child: _buildHorizontalSliverList(),
-    );
-    return data.loading ? Skeletonizer(child: frame) : frame;
+    // Rebuild live when the card style changes — `_railH` (read below) touches
+    // `CardStyleController.current`.
+    return Obx(() {
+      final frame = ShelfFrame(
+        title: data.loading ? 'Loading' : data.title,
+        onTitleTap: data.onTitleTap,
+        trailing: _trailingButton(),
+        child: _buildHorizontalSliverList(),
+      );
+      return data.loading ? Skeletonizer(child: frame) : frame;
+    });
   }
 
   Widget? _trailingButton() {

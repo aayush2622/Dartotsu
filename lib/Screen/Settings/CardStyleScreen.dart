@@ -7,7 +7,6 @@ import '../../Utils/Extensions/CardStyleMetrics.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Extensions/Responsive.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
-import '../../Utils/Functions/RefreshController.dart';
 import '../../Widgets/Components/AppControls.dart';
 import '../../Widgets/Components/BaseScreen.dart';
 import '../../Widgets/Components/ScrollConfig.dart';
@@ -31,12 +30,6 @@ class _CardStyleScreenState extends BaseScreen<CardStyleScreen> {
   }
 
   void _edit(CardStyle Function(CardStyle) f) => _set(f(_draft.value).asCustom);
-
-  @override
-  void dispose() {
-    tryFind<RefreshController>()?.all();
-    super.dispose();
-  }
 
   @override
   Widget buildContent(BuildContext context) {
