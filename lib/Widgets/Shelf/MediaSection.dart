@@ -10,6 +10,7 @@ import '../../Core/Services/Model/Media.dart';
 import '../../Core/ThemeManager/CardStyleController.dart';
 import '../../../Model/CardStyle.dart';
 import '../../Utils/Extensions/CardStyleMetrics.dart';
+import '../../Utils/Animation/WidgetAnimations.dart';
 import '../../Utils/Extensions/Responsive.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
 import '../Components/ScrollConfig.dart';
@@ -339,7 +340,7 @@ class _MediaSectionState extends State<MediaSection> {
       onLongPress: data.onMediaLongPress == null
           ? null
           : () => data.onMediaLongPress!(context, index, media),
-    );
+    ).animateHorizontalEntrance();
   }
 
   static int? _total(Media media) => media.anime != null
