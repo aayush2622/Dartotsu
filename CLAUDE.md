@@ -408,13 +408,15 @@ defines `handleError(e, st, {softCrash})` (called from the zone handler in `main
   (+ `customScale`); `compact` (cover + title only — hides all overlays); `aspect`, `radius`,
   `titleLines`; progress green `pill` / thin `bar` / off; score-badge corner; info line;
   airing dot. `score`/`airing` are plain params. Style comes from
-  `find<CardStyleController>().current` (DI, caches the JSON pref) unless a `style:` override
-  is passed. Character/staff pin to `CardStyle.people`. Presets Poster (default) / Card /
-  Cozy / Compact + Custom, edited in **Settings › Appearance › Card style**
-  (`Screen/Settings/CardStyleScreen.dart` — live preview, applies live, feeds rebuild via
-  `RefreshController.all()` on exit). `CardStyleMetrics` (`Utils/Extensions/`) derives
-  `itemWidth`/`itemHeight` from `Dimens.cardW`; `MediaSection` / `PeopleShelf` / search grid
-  size off it.
+  `CardStyleController.current` (DI, caches the decoded pref in an `Rx`) unless a `style:`
+  override is passed — `PosterCard` / `MediaSection` / `PeopleShelf` read it **inside an
+  `Obx`**, so a change on the Card-style screen updates every feed live. Character/staff use
+  the same style with only the `people` preset flag forced (`copyWith(preset: 'people')` —
+  keeps the role line + its caption height). Presets Poster (default) / Card / Cozy /
+  Compact + Custom, edited in **Settings › Appearance › Card style**
+  (`Screen/Settings/CardStyleScreen.dart` — live preview + live feed). `CardStyleMetrics`
+  (`Utils/Extensions/`) derives `itemWidth`/`itemHeight` from `Dimens.cardW`; `MediaSection` /
+  `PeopleShelf` / search grid size off it.
 - **`Widgets/Components/AppControls.dart`** — the shared form controls, **use these not the
   bare Material widgets**: `AppSegmented<T>` (+ `AppSegment<T>`), `LabeledSlider`,
   `AppChoiceChips<T>`, `LabeledField` (label above a child). Used by the card-style screen,
