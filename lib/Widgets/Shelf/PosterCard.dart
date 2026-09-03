@@ -176,19 +176,32 @@ class _PosterCardState extends State<PosterCard> {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        _poster(
-          s,
-          round: true,
-          overlays: [
-            ..._cornerMarks(s, bottomTaken: showBar),
-            if (showBar)
-              Positioned(
-                left: 0,
-                right: 0,
-                bottom: 0,
-                child: _Bar(fraction: widget.progress!, color: _scheme.primary),
-              ),
-          ],
+        DecoratedBox(
+          position: DecorationPosition.foreground,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(s.radius),
+            border: Border.all(
+              color: _scheme.outlineVariant.withValues(alpha: 0.45),
+              width: 1,
+            ),
+          ),
+          child: _poster(
+            s,
+            round: true,
+            overlays: [
+              ..._cornerMarks(s, bottomTaken: showBar),
+              if (showBar)
+                Positioned(
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  child: _Bar(
+                    fraction: widget.progress!,
+                    color: _scheme.primary,
+                  ),
+                ),
+            ],
+          ),
         ),
         const SizedBox(height: 7),
         _titleBelow(s, w),
