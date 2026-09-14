@@ -348,30 +348,91 @@ class _ExtensionListState extends State<ExtensionList> {
     );
   }
 
+  /// A small ring standing in for an install/update button while it's in
+  /// flight, sized/positioned to match an IconButton's 48x48 tap-target
+  /// footprint so it doesn't shift surrounding layout when swapped in.
+  /// `progress` null or 0 renders indeterminate (byte progress isn't known
+  /// yet - either the download just started or this backend doesn't report
+  /// content-length); once it's > 0 the ring fills in and a live percentage
+  /// fades in above it.
+  Widget _installProgressIndicator(double? progress) {
+    final theme = Theme.of(context).colorScheme;
+    final known = progress != null && progress > 0;
+
+    return SizedBox(
+      key: const ValueKey('progress'),
+      width: 48,
+      height: 48,
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          if (known)
+            Positioned(
+              top: 2,
+              child: Text(
+                "${(progress.clamp(0.0, 1.0) * 100).toStringAsFixed(0)}%",
+                style: TextStyle(
+                  fontSize: 8,
+                  fontWeight: FontWeight.w700,
+                  color: theme.primary,
+                ),
+              ),
+            ).animateFadeScale(),
+          SizedBox(
+            width: 22,
+            height: 22,
+            child: CircularProgressIndicator(
+              strokeWidth: 2.4,
+              color: theme.primary,
+              backgroundColor: theme.primary.withValues(alpha: 0.15),
+              value: known ? progress.clamp(0.0, 1.0) : null,
+            ),
+          ),
+        ],
+      ),
+    ).animatePopIn();
+  }
+
   Widget _buildTrailing(Source source, int index) {
     final repo = manager[source.itemType!];
+    final installProgress = source.id == null
+        ? null
+        : state.installProgress[source.id];
+    final isInstalling = installProgress != null;
 
     if (!widget.isInstalled) {
-      return IconButton(
-        icon: const Icon(Icons.download_rounded),
-        tooltip: 'Install',
-        onPressed: () => repo.installSource(source),
+      return AnimatedSwitcher(
+        duration: const Duration(milliseconds: 180),
+        child: isInstalling
+            ? _installProgressIndicator(installProgress)
+            : IconButton(
+                key: const ValueKey('install'),
+                icon: const Icon(Icons.download_rounded),
+                tooltip: 'Install',
+                onPressed: () => repo.installSource(source),
+              ),
       );
     }
 
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        if (source.hasUpdate ?? false)
-          IconButton(
-            icon: const Icon(Icons.update_rounded),
-            tooltip: 'Update',
-            onPressed: () => repo.updateSource(source),
+        if ((source.hasUpdate ?? false) || isInstalling)
+          AnimatedSwitcher(
+            duration: const Duration(milliseconds: 180),
+            child: isInstalling
+                ? _installProgressIndicator(installProgress)
+                : IconButton(
+                    key: const ValueKey('update'),
+                    icon: const Icon(Icons.update_rounded),
+                    tooltip: 'Update',
+                    onPressed: () => repo.updateSource(source),
+                  ),
           ),
         IconButton(
           icon: const Icon(Icons.delete_rounded),
           tooltip: 'Uninstall',
-          onPressed: () => repo.uninstallSource(source),
+          onPressed: isInstalling ? null : () => repo.uninstallSource(source),
         ),
         IconButton(
           icon: const Icon(Icons.settings_rounded),

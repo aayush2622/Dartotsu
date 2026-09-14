@@ -361,12 +361,106 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
                 )
                 ..setPositiveButton(getString.ok, () async {
                   try {
-                    await manager[type].addRepo(controller.text, type);
+                    // addRepo() now streams progress (see the loading
+                    // banner in viewList below) - drain() subscribes,
+                    // waits for completion, and still surfaces the same
+                    // error a plain await would have.
+                    await manager[type]
+                        .addRepo(controller.text, type)
+                        .drain<void>();
                   } catch (_) {}
                 })
                 ..show();
             },
             viewList: [
+              // Some repos (e.g. Kotatsu's shared parsers jar) are large
+              // enough that a bare "Add Repository" tap with no feedback
+              // looks hung - show real progress when the backend reports
+              // it, an indeterminate bar otherwise. Styled to match the
+              // plugin-install card in showInstallDialog below, so this
+              // reads as the same "downloading" affordance everywhere in
+              // the app rather than a one-off widget.
+              Obx(() {
+                final extension = manager[type];
+                final loading = extension.state(type).loadingRepo.value;
+                final progress = extension.state(type).repoLoadProgress.value;
+                final scheme = Theme.of(context).colorScheme;
+                final textStyle = Theme.of(context).textTheme.labelMedium;
+
+                return AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 220),
+                  transitionBuilder: (child, animation) => FadeTransition(
+                    opacity: animation,
+                    child: SizeTransition(
+                      sizeFactor: animation,
+                      axisAlignment: -1,
+                      child: child,
+                    ),
+                  ),
+                  child: !loading
+                      ? const SizedBox.shrink(key: ValueKey('idle'))
+                      : Padding(
+                          key: const ValueKey('loading'),
+                          padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
+                          child: Container(
+                            padding: const EdgeInsets.all(14),
+                            decoration: BoxDecoration(
+                              color: context.cardColor,
+                              borderRadius: BorderRadius.circular(18),
+                              border: Border.all(
+                                color: scheme.outline.withValues(alpha: 0.2),
+                              ),
+                            ),
+                            child: Row(
+                              children: [
+                                Icon(
+                                  Icons.cloud_download_rounded,
+                                  color: scheme.primary,
+                                  size: 22,
+                                ),
+                                const SizedBox(width: 12),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Downloading repository…",
+                                        style: textStyle?.copyWith(
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 8),
+                                      ClipRRect(
+                                        borderRadius: BorderRadius.circular(
+                                          10,
+                                        ),
+                                        child: LinearProgressIndicator(
+                                          value: progress,
+                                          minHeight: 6,
+                                          backgroundColor: scheme.primary
+                                              .withValues(alpha: 0.12),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                if (progress != null) ...[
+                                  const SizedBox(width: 12),
+                                  Text(
+                                    "${(progress * 100).toStringAsFixed(0)}%",
+                                    style: textStyle?.copyWith(
+                                      fontWeight: FontWeight.w700,
+                                      color: scheme.primary,
+                                    ),
+                                  ),
+                                ],
+                              ],
+                            ),
+                          ),
+                        ),
+                );
+              }),
               Obx(() {
                 final extension = manager[type];
                 final repos = extension.state(type).repos.value;
