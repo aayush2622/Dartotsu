@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../Api/Updater/AppUpdater.dart';
+import '../../Core/NetworkManager/NetworkManager.dart';
 import '../../Core/Preferences/PrefManager.dart';
 import '../../Core/Services/MediaServiceController.dart';
 import '../../Core/Services/ServiceSwitcher.dart';
@@ -13,6 +14,7 @@ import '../../Model/Setting.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Function.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
+import '../../Widgets/Components/AlertDialogBuilder.dart';
 import '../../Widgets/Components/AppControls.dart';
 import '../../Widgets/Components/ThemedContainer.dart';
 import '../Login/LoginScreen.dart';
@@ -57,6 +59,12 @@ const List<SettingsCategory> settingsCategories = [
     description: 'Release channel and checks',
     icon: Icons.system_update_alt_rounded,
     build: updateSettings,
+  ),
+  SettingsCategory(
+    title: 'Network',
+    description: 'User-Agent, DNS, proxy, cookies',
+    icon: Icons.wifi_tethering_rounded,
+    build: networkSettings,
   ),
   SettingsCategory(
     title: 'About',
@@ -250,6 +258,93 @@ List<Setting> updateSettings(BuildContext context) => [
     onClick: () => find<AppUpdater>().checkForUpdate(force: true),
   ),
 ];
+
+List<Setting> networkSettings(BuildContext context) {
+  final network = find<NetworkManager>();
+
+  return [
+    Setting(
+      type: SettingType.normal,
+      name: 'User-Agent',
+      description: PrefName.customUserAgent.rx.value.isEmpty
+          ? 'Default'
+          : PrefName.customUserAgent.rx.value,
+      icon: Icons.badge_outlined,
+      isActivity: true,
+      onClick: () => _promptNetworkText(
+        context,
+        title: 'Custom User-Agent',
+        hint: network.userAgent,
+        pref: PrefName.customUserAgent,
+        onSaved: () => network.reinitialize(),
+      ),
+    ),
+    Setting(
+      type: SettingType.normal,
+      name: 'DNS-over-HTTPS',
+      description: PrefName.customDnsUrl.rx.value.isEmpty
+          ? 'Default (Cloudflare)'
+          : PrefName.customDnsUrl.rx.value,
+      icon: Icons.dns_outlined,
+      isActivity: true,
+      onClick: () => _promptNetworkText(
+        context,
+        title: 'Custom DNS-over-HTTPS URL',
+        hint: 'https://cloudflare-dns.com/dns-query',
+        pref: PrefName.customDnsUrl,
+      ),
+    ),
+    Setting(
+      type: SettingType.normal,
+      name: 'Proxy',
+      description: PrefName.proxyUrl.rx.value.isEmpty
+          ? 'None'
+          : PrefName.proxyUrl.rx.value,
+      icon: Icons.vpn_lock_outlined,
+      isActivity: true,
+      onClick: () => _promptNetworkText(
+        context,
+        title: 'HTTP proxy (host:port)',
+        hint: 'proxy.example.com:8080',
+        pref: PrefName.proxyUrl,
+        onSaved: () => network.reinitialize(),
+      ),
+    ),
+    Setting(
+      type: SettingType.normal,
+      name: 'Clear cookies',
+      description: 'Remove every stored cookie',
+      icon: Icons.cookie_outlined,
+      onClick: () => network.cookieManager.clear(),
+    ),
+  ];
+}
+
+void _promptNetworkText(
+  BuildContext context, {
+  required String title,
+  required String hint,
+  required Pref<String> pref,
+  VoidCallback? onSaved,
+}) {
+  final controller = TextEditingController(text: pref.value);
+
+  AlertDialogBuilder(context)
+      .setTitle(title)
+      .setCustomView(
+        TextField(
+          controller: controller,
+          decoration: InputDecoration(hintText: hint),
+          autofocus: true,
+        ),
+      )
+      .setNegativeButton('Cancel', null)
+      .setPositiveButton('Save', () {
+        pref.value = controller.text.trim();
+        onSaved?.call();
+      })
+      .show();
+}
 
 List<Setting> aboutSettings(BuildContext context) => [
   Setting(
