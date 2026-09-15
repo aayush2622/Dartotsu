@@ -181,7 +181,14 @@ class _ExtensionListState extends State<ExtensionList> {
           style: _titleStyle,
         ),
         subtitle: _buildSubtitle(source),
-        trailing: _buildTrailing(source, index),
+        // `installProgress` is read deep inside _buildTrailing, which is
+        // invoked lazily by the list/sliver machinery in its own build
+        // pass - separate from, and later than, the synchronous callback
+        // of the single Obx wrapping the whole list in build() above. That
+        // outer Obx never sees this read, so it never reacts to progress
+        // updates. Wrapping just the trailing widget lets it track
+        // installProgress (and hasUpdate) on its own.
+        trailing: Obx(() => _buildTrailing(source, index)),
       ),
     );
   }
@@ -393,6 +400,18 @@ class _ExtensionListState extends State<ExtensionList> {
     ).animatePopIn();
   }
 
+  /// installSource/updateSource return a broadcast `Stream<double>` that
+  /// starts eagerly on its own regardless of whether anything listens (see
+  /// progressStream() in the bridge). An unlistened stream's addError is a
+  /// silent no-op though, so a plain `repo.installSource(source)` fire-and-
+  /// forget - as before this screen tracked progress - would swallow
+  /// install/update failures entirely. Drain it here so errors surface.
+  void _runProgressOp(Stream<double> Function() op, String failureLabel) {
+    op().drain<void>().catchError((e) {
+      snackString('$failureLabel: $e');
+    });
+  }
+
   Widget _buildTrailing(Source source, int index) {
     final repo = manager[source.itemType!];
     final installProgress = source.id == null
@@ -409,7 +428,10 @@ class _ExtensionListState extends State<ExtensionList> {
                 key: const ValueKey('install'),
                 icon: const Icon(Icons.download_rounded),
                 tooltip: 'Install',
-                onPressed: () => repo.installSource(source),
+                onPressed: () => _runProgressOp(
+                  () => repo.installSource(source),
+                  'Install failed',
+                ),
               ),
       );
     }
@@ -426,7 +448,10 @@ class _ExtensionListState extends State<ExtensionList> {
                     key: const ValueKey('update'),
                     icon: const Icon(Icons.update_rounded),
                     tooltip: 'Update',
-                    onPressed: () => repo.updateSource(source),
+                    onPressed: () => _runProgressOp(
+                      () => repo.updateSource(source),
+                      'Update failed',
+                    ),
                   ),
           ),
         IconButton(
