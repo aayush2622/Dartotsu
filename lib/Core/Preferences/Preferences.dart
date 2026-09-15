@@ -77,4 +77,12 @@ class PrefName {
         const [],
         PrefLocation.COMMON,
       );
+
+  static const customUserAgent = Pref(
+    'customUserAgent',
+    '',
+    PrefLocation.COMMON,
+  );
+  static const customDnsUrl = Pref('customDnsUrl', '', PrefLocation.COMMON);
+  static const proxyUrl = Pref('proxyUrl', '', PrefLocation.COMMON);
 }

@@ -1,18 +1,24 @@
+import 'dart:convert';
+
 import 'package:dartotsu_extension_bridge/ExtensionBridge.dart';
 
 import 'CookieManager.dart';
-import 'DnsManager.dart';
+import 'NetworkManager.dart';
 
 class AppBridgeNetwork implements BridgeNetwork {
   final CookieManager cookieManager;
+  final NetworkManager networkManager;
 
-  AppBridgeNetwork(this.cookieManager);
-
-  @override
-  String? get dns => DohProvider.cloudflare.url;
+  AppBridgeNetwork(this.cookieManager, this.networkManager);
 
   @override
-  String? get proxy => null;
+  String? get dns => networkManager.dnsUrl;
+
+  @override
+  String? get proxy => networkManager.proxyUrl;
+
+  @override
+  String? get userAgent => networkManager.userAgent;
 
   @override
   Future<String?> getCookies(String url) async {
@@ -22,7 +28,7 @@ class AppBridgeNetwork implements BridgeNetwork {
       return null;
     }
 
-    return cookies.map((c) => '${c.name}=${c.value}').join('; ');
+    return jsonEncode(cookies.map((c) => c.toJson()).toList());
   }
 
   @override

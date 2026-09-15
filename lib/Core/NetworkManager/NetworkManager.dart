@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:rhttp/rhttp.dart';
 
+import '../Preferences/PrefManager.dart';
 import 'CookieManager.dart';
 import 'DnsManager.dart';
 import 'LogInterceptor.dart';
@@ -18,13 +19,33 @@ import 'LogInterceptor.dart';
 const bool kVerifyTlsCertificates = false;
 
 class NetworkManager extends GetxController {
-  final String _userAgent = _buildUserAgent();
   late RhttpClient _client;
 
   RhttpClient get client => _client;
 
   RhttpCompatibleClient get compatibleClient =>
       RhttpCompatibleClient.of(_client);
+
+  /// The effective User-Agent every request (including extension traffic via
+  /// [AppBridgeNetwork]) sends: [PrefName.customUserAgent] if set, else the
+  /// generated default.
+  String get userAgent {
+    final custom = PrefName.customUserAgent.value;
+    return custom.isNotEmpty ? custom : _buildUserAgent();
+  }
+
+  /// The effective DNS-over-HTTPS resolver endpoint: [PrefName.customDnsUrl]
+  /// if set, else Cloudflare's.
+  String get dnsUrl {
+    final custom = PrefName.customDnsUrl.value;
+    return custom.isNotEmpty ? custom : DohProvider.cloudflare.url;
+  }
+
+  /// `host:port` of the configured HTTP proxy, or `null` for none.
+  String? get proxyUrl {
+    final custom = PrefName.proxyUrl.value;
+    return custom.isEmpty ? null : custom;
+  }
 
   @override
   void onInit() {
@@ -33,14 +54,21 @@ class NetworkManager extends GetxController {
   }
 
   final cookieManager = CookieManager();
+
+  /// Rebuilds the rhttp client to pick up a changed [userAgent] or
+  /// [proxyUrl] - both are baked into [ClientSettings] at construction time,
+  /// unlike [dnsUrl] which the resolver below reads live on every lookup.
+  void reinitialize() {
+    _client.dispose();
+    _initClient();
+  }
+
   RhttpClient _initClient() {
     try {
-      var dns = DohProvider.cloudflare.url;
-
       var interceptors = [LogInterceptor(), cookieManager];
 
       var clientSettings = ClientSettings(
-        userAgent: _userAgent,
+        userAgent: userAgent,
         throwOnStatusCode: false,
         tlsSettings: const TlsSettings(
           rootCertSource: RootCertSource.webpki,
@@ -53,7 +81,7 @@ class NetworkManager extends GetxController {
         dnsSettings: DnsSettings.dynamic(
           resolver: (host) async {
             try {
-              return await DnsManager.resolveWithDoh(host, dns);
+              return await DnsManager.resolveWithDoh(host, dnsUrl);
             } catch (e) {
               debugPrint('DoH failed for $host → fallback: $e');
               final res = await InternetAddress.lookup(host);
@@ -61,6 +89,9 @@ class NetworkManager extends GetxController {
             }
           },
         ),
+        proxySettings: proxyUrl == null
+            ? null
+            : ProxySettings.proxy('http://$proxyUrl'),
       );
 
       _client = RhttpClient.createSync(
