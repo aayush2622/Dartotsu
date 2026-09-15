@@ -55,12 +55,21 @@ class _WebViewState extends State<WebView> {
   }
 
   Timer? _cookieSyncTimer;
+  Timer? _cookieSyncRetryTimer;
 
   Future<void> _syncCookies(WebUri url) async {
     _cookieSyncTimer?.cancel();
+    _cookieSyncRetryTimer?.cancel();
 
     _cookieSyncTimer = Timer(const Duration(milliseconds: 200), () async {
       await cookieManager.readCookiesFromWebView(url, _controller);
+
+      // Some native cookie stores haven't flushed a just-set cookie into
+      // memory yet even 200ms after the triggering event - a second read
+      // catches what the first one raced ahead of.
+      _cookieSyncRetryTimer = Timer(const Duration(milliseconds: 500), () {
+        cookieManager.readCookiesFromWebView(url, _controller);
+      });
     });
   }
 
@@ -420,6 +429,7 @@ class _WebViewState extends State<WebView> {
     _searchController.dispose();
     _controller = null;
     _cookieSyncTimer?.cancel();
+    _cookieSyncRetryTimer?.cancel();
     _url.close();
     _title.close();
     _canGoBack.close();

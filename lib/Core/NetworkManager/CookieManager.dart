@@ -478,6 +478,12 @@ class CookieManager extends Interceptor {
 
       final scheme = cookie.secure ? "https" : "http";
 
+      // A `null` expiresDate makes some native cookie stores (notably
+      // WKHTTPCookieStore on iOS/macOS) treat this as a true session cookie
+      // that's dropped on the next WebView/app restart, even though our own
+      // store is happy to keep serving it - give session cookies a
+      // synthetic far-future expiry here so they survive being pushed back
+      // into the WebView, without changing how this app itself tracks them.
       await manager.setCookie(
         url: webview.WebUri("$scheme://${cookie.domain}"),
         name: cookie.name,
@@ -485,7 +491,9 @@ class CookieManager extends Interceptor {
         domain: cookie.domain,
         path: cookie.path,
         expiresDate: cookie.session
-            ? null
+            ? DateTime.now()
+                  .add(const Duration(days: 365))
+                  .millisecondsSinceEpoch
             : cookie.expires?.millisecondsSinceEpoch,
         isSecure: cookie.secure,
         isHttpOnly: cookie.httpOnly,
