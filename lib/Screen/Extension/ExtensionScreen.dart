@@ -368,7 +368,9 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
                     await manager[type]
                         .addRepo(controller.text, type)
                         .drain<void>();
-                  } catch (_) {}
+                  } catch (e) {
+                    snackString('Failed to add repository: $e');
+                  }
                 })
                 ..show();
             },
