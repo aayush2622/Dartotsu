@@ -195,7 +195,7 @@ class _ExtensionListState extends State<ExtensionList> {
 
   List<Source> _filteredInstalled() {
     final installed = _applySavedOrder(
-      List<Source>.from(state.installed.value),
+      _dedupeById(state.installed.value),
     );
 
     return installed.where((source) {
@@ -247,6 +247,16 @@ class _ExtensionListState extends State<ExtensionList> {
         ...entry.value.map(_ListItem.source),
       ],
     ];
+  }
+
+  // Backend bugs can surface two installed Sources sharing an id (e.g. a
+  // stale leftover file from an update that failed to clean up). Each item
+  // is keyed by ValueKey(source.id) in the ReorderableListView below, so a
+  // duplicate id crashes with "Multiple widgets used the same GlobalKey"
+  // instead of just showing a stale entry - dedupe defensively here.
+  List<Source> _dedupeById(List<Source> list) {
+    final seen = <String?>{};
+    return list.where((s) => seen.add(s.id)).toList();
   }
 
   void _saveOrder(List<Source> list) {
