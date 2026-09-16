@@ -10,7 +10,7 @@ import '../Utils/Functions/GetXFunctions.dart';
 import '../Utils/Functions/NavigateToScreen.dart';
 import '../Widgets/Components/LoadSvg.dart';
 import '../Widgets/Components/ThemedContainer.dart';
-import 'Settings/SettingsScreen.dart';
+import 'Extension/ExtensionScreen.dart';
 
 class FloatingBottomNavBar extends StatefulWidget {
   final int selectedIndex;
@@ -112,7 +112,7 @@ class _FloatingBottomNavBarState extends State<FloatingBottomNavBar> {
 
               _navButton(
                 context: context,
-                onTap: () => navigateToPage(context, const SettingsScreen()),
+                onTap: () => navigateToPage(context, const ExtensionScreen()),
                 iconBuilder: () => Icon(
                   Icons.settings_rounded,
                   size: 24,

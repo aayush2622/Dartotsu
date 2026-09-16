@@ -70,6 +70,29 @@ add_executable(${BINARY_NAME}
 # that need different build settings.
 apply_standard_settings(${BINARY_NAME})
 
+# --- Nix-specific: fix up media_kit's downloaded libmpv.so.2 ---
+# media_kit_video downloads a prebuilt, third-party libmpv.so.2 into
+# ${CMAKE_BINARY_DIR}/mpv rather than using a distro package, so its own
+# transitive shared-library deps (VAAPI, VDPAU, PulseAudio, GnuTLS,
+# libarchive, X11 extensions, EGL, ...) are never pkg-config'd or
+# find_package'd by anything and the final link fails with "undefined
+# reference" for all of them. FLUTTER_NIX_LIB_DIRS (set by
+# modules/apps/development/languages/flutter/Flutter.nix in the vayume
+# flake) is a colon-separated list of the Nix store lib/ dirs providing
+# those - patched directly into libmpv.so.2's own RPATH here, since the
+# linker does search a referenced .so's own RPATH to resolve its
+# transitive symbols (verified empirically - this works reliably, unlike
+# trying to get LIBRARY_PATH/NIX_LDFLAGS to reach this specific link
+# command). PRE_LINK so it's done before ${BINARY_NAME} itself links
+# against it. Store paths change on every nixpkgs rebuild, so this reads
+# the list live from the environment rather than hardcoding a snapshot.
+if(DEFINED ENV{FLUTTER_NIX_LIB_DIRS})
+  add_custom_command(TARGET ${BINARY_NAME} PRE_LINK
+    COMMAND bash -c "if [ -f \"${CMAKE_BINARY_DIR}/mpv/libmpv.so.2\" ]; then patchelf --set-rpath \"$ENV{FLUTTER_NIX_LIB_DIRS}\" \"${CMAKE_BINARY_DIR}/mpv/libmpv.so.2\"; fi"
+    VERBATIM
+  )
+endif()
+
 # Add dependency libraries. Add any application-specific dependencies here.
 target_link_libraries(${BINARY_NAME} PRIVATE flutter)
 target_link_libraries(${BINARY_NAME} PRIVATE PkgConfig::GTK)
@@ -95,10 +118,20 @@ include(flutter/generated_plugins.cmake)
 # === Installation ===
 # By default, "installing" just makes a relocatable bundle in the build
 # directory.
+#
+# The upstream Flutter template guards this with
+# `if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)`, which is meant to
+# only override CMAKE_INSTALL_PREFIX when the user hasn't set one. That
+# flag's exact semantics around nested project()/add_subdirectory() calls
+# (e.g. from cargokit's rhttp subproject) vary across CMake versions -
+# here (CMake 4.4.2) it evaluates false even on a from-scratch configure,
+# leaving CMAKE_INSTALL_PREFIX at CMake's own /usr/local default and
+# making `ninja install` try to write there instead of into the bundle,
+# failing without root. There is no scenario where `flutter run`/`flutter
+# build linux` actually wants a different, real install prefix, so force
+# it unconditionally instead of trusting that flag.
 set(BUILD_BUNDLE_DIR "${PROJECT_BINARY_DIR}/bundle")
-if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
-  set(CMAKE_INSTALL_PREFIX "${BUILD_BUNDLE_DIR}" CACHE PATH "..." FORCE)
-endif()
+set(CMAKE_INSTALL_PREFIX "${BUILD_BUNDLE_DIR}" CACHE PATH "..." FORCE)
 
 # Start with a clean build bundle directory every time.
 install(CODE "
@@ -111,6 +144,31 @@ set(INSTALL_BUNDLE_LIB_DIR "${CMAKE_INSTALL_PREFIX}/lib")
 install(TARGETS ${BINARY_NAME} RUNTIME DESTINATION "${CMAKE_INSTALL_PREFIX}"
   COMPONENT Runtime)
 
+# --- Nix-specific: fix nested dlopen() for Cargokit-built plugins ---
+# Cargokit's Rust FFI loader (used by e.g. the rhttp plugin) calls
+# DynamicLibrary.open('librhttp.so') with a bare filename rather than a
+# full path. CMAKE_INSTALL_RPATH above ("$ORIGIN/lib") already covers
+# the executable's own direct linked libs, but that's not enough: bare
+# dlopen() calls made from code already running in the process don't
+# reliably consult it either way, RPATH or RUNPATH (tried converting
+# the ELF tag via patchelf --force-rpath first - verified empirically
+# that it did NOT fix this, despite fixing everything else, so this
+# isn't just an RPATH-vs-RUNPATH tagging issue). The standard, always-
+# reliable fix is a launcher wrapper: rename the real binary and put a
+# tiny script in its place that sets LD_LIBRARY_PATH before exec'ing
+# it, since LD_LIBRARY_PATH is unambiguously consulted for every
+# dlopen() everywhere. Runs after install(TARGETS) so it wraps the
+# actual bundled binary the user (or `flutter run`) launches by name.
+install(CODE "
+  file(RENAME \"${CMAKE_INSTALL_PREFIX}/${BINARY_NAME}\" \"${CMAKE_INSTALL_PREFIX}/${BINARY_NAME}.bin\")
+  file(WRITE \"${CMAKE_INSTALL_PREFIX}/${BINARY_NAME}\" \"#!/usr/bin/env sh
+DIR=\\\"\\$(cd \\\"\\$(dirname \\\"\\$0\\\")\\\" && pwd)\\\"
+export LD_LIBRARY_PATH=\\\"\\$DIR/lib:\\$LD_LIBRARY_PATH\\\"
+exec \\\"\\$DIR/${BINARY_NAME}.bin\\\" \\\"\\$@\\\"
+\")
+  execute_process(COMMAND chmod +x \"${CMAKE_INSTALL_PREFIX}/${BINARY_NAME}\")
+  " COMPONENT Runtime)
+
 install(FILES "${FLUTTER_ICU_DATA_FILE}" DESTINATION "${INSTALL_BUNDLE_DATA_DIR}"
   COMPONENT Runtime)
 
@@ -122,6 +180,19 @@ foreach(bundled_library ${PLUGIN_BUNDLED_LIBRARIES})
     DESTINATION "${INSTALL_BUNDLE_LIB_DIR}"
     COMPONENT Runtime)
 endforeach(bundled_library)
+
+# The PRE_LINK patchelf above only fixes the pre-install copy in
+# ${CMAKE_BINARY_DIR}/mpv - this is a *separately copied* file at
+# install time, and a fresh reconfigure/redownload of the source copy
+# (e.g. after this CMakeLists.txt itself changes) doesn't carry the
+# patch over to it, so it needs its own independent patch here too.
+if(DEFINED ENV{FLUTTER_NIX_LIB_DIRS})
+  install(CODE "
+    if(EXISTS \"${INSTALL_BUNDLE_LIB_DIR}/libmpv.so.2\")
+      execute_process(COMMAND patchelf --set-rpath \"$ENV{FLUTTER_NIX_LIB_DIRS}\" \"${INSTALL_BUNDLE_LIB_DIR}/libmpv.so.2\")
+    endif()
+    " COMPONENT Runtime)
+endif()
 
 # Copy the native assets provided by the build.dart from all packages.
 set(NATIVE_ASSETS_DIR "${PROJECT_BUILD_DIR}native_assets/linux/")

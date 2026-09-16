@@ -67,16 +67,19 @@ dependencies:
   # Platform Specific
   media_kit:
     git:
-      url: https://github.com/kodjodevf/media-kit.git
-      path: media_kit
+      url: https://github.com/Predidit/media-kit.git
+      ref: main
+      path: ./media_kit
   media_kit_video:
     git:
-      url: https://github.com/kodjodevf/media-kit.git
-      path: media_kit_video
+      url: https://github.com/aayush2622/media-kit.git
+      ref: main
+      path: ./media_kit_video
   media_kit_libs_video:
     git:
-      url: https://github.com/kodjodevf/media-kit.git
-      path: libs/universal/media_kit_libs_video
+      url: https://github.com/aayush2622/media-kit.git
+      ref: main
+      path: ./libs/universal/media_kit_libs_video
   window_manager: ^0.5.2
   permission_handler: ^12.0.3
   flutter_inappwebview: ^6.2.0-beta.3
@@ -135,6 +138,26 @@ dev_dependencies:
 
 dependency_overrides:
   collection: ^1.19.1
+  media_kit:
+    git:
+      url: https://github.com/aayush2622/media-kit.git
+      ref: main
+      path: ./media_kit
+  media_kit_video:
+    git:
+      url: https://github.com/aayush2622/media-kit.git
+      ref: main
+      path: ./media_kit_video
+  media_kit_libs_video:
+    git:
+      url: https://github.com/aayush2622/media-kit.git
+      ref: main
+      path: ./libs/universal/media_kit_libs_video
+  media_kit_libs_linux:
+    git:
+      url: https://github.com/aayush2622/media-kit.git
+      ref: main
+      path: ./libs/linux/media_kit_libs_linux
 
 
 flutter:

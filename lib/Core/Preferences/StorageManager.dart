@@ -36,7 +36,9 @@ class StorageManager {
           base.endsWith('Dartotsu') ? base : path.join(base, 'Dartotsu');
 
       if (isApple) {
-        return ensureDir(path.join(appDir.path, 'Dartotsu', subPath ?? ''));
+        return await ensureDir(
+          path.join(appDir.path, 'Dartotsu', subPath ?? ''),
+        );
       }
 
       if (Platform.isAndroid) {
@@ -44,7 +46,7 @@ class StorageManager {
 
         if (!hasPermission || useSystemPath) {
           final base = withAppRoot(appDir.path);
-          return ensureDir(path.join(base, subPath ?? ''));
+          return await ensureDir(path.join(base, subPath ?? ''));
         }
 
         final emulatedRoot = await getEmulatedRoot();
@@ -54,11 +56,11 @@ class StorageManager {
             ? withAppRoot(customPath)
             : withAppRoot(emulatedRoot);
 
-        return ensureDir(path.join(basePath, subPath ?? ''));
+        return await ensureDir(path.join(basePath, subPath ?? ''));
       }
 
       final base = customPath.isNotEmpty ? customPath : appDir.path;
-      return ensureDir(path.join(withAppRoot(base), subPath ?? ''));
+      return await ensureDir(path.join(withAppRoot(base), subPath ?? ''));
     } catch (e) {
       logger('Error getting directory: $e');
       return await getApplicationDocumentsDirectory();

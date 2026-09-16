@@ -73,7 +73,7 @@ class AnilistAuth extends GetxController implements ServiceAuth {
         snackString('Login cancelled');
         return false;
       }
-      return loginWithToken(token);
+      return await loginWithToken(token);
     } catch (e) {
       snackString('Login failed: $e');
       return false;
