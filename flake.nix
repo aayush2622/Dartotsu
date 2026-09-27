@@ -55,6 +55,7 @@
             pkgs.autoPatchelfHook
             pkgs.makeWrapper
             pkgs.copyDesktopItems
+            pkgs.imagemagick
           ];
 
           buildInputs = with pkgs; [
@@ -147,6 +148,16 @@
               --prefix LD_LIBRARY_PATH : "$out/app/dartotsu/lib" \
               --prefix LD_LIBRARY_PATH : ${pkgs.lib.makeLibraryPath finalAttrs.buildInputs}
 
+            logo=$out/app/dartotsu/data/flutter_assets/assets/images/logo.png
+            if [ -f "$logo" ]; then
+              size=$(identify -format '%wx%h' "$logo")
+              install -Dm644 "$logo" "$out/share/icons/hicolor/$size/apps/${exe}.png"
+              install -Dm644 "$logo" "$out/share/pixmaps/${exe}.png"
+            else
+              echo "logo.png missing from the release bundle - desktop entry would have no icon" >&2
+              exit 1
+            fi
+
             runHook postInstall
           '';
 
@@ -154,7 +165,7 @@
             (pkgs.makeDesktopItem {
               name = exe;
               exec = exe;
-              icon = "dartotsu";
+              icon = exe;
               desktopName = "Dartotsu" + pkgs.lib.optionalString (channel != "stable") " (${channel})";
               genericName = "Anilist client";
               comment = "The Ultimate Anime & Manga Experience";
