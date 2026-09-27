@@ -21,6 +21,7 @@ import 'Core/NetworkManager/NetworkBridge.dart';
 import 'Core/NetworkManager/NetworkManager.dart';
 import 'Core/Preferences/PrefManager.dart';
 import 'Core/Preferences/StorageManager.dart';
+import 'Core/ThemeManager/DynamicColorScheme.dart';
 import 'Core/ThemeManager/LocaleController.dart';
 import 'Core/ThemeManager/ThemeController.dart';
 import 'DI.dart';
@@ -189,7 +190,10 @@ class _MyAppState extends State<MyApp> {
             : KeyEventResult.ignored,
         child: DynamicColorBuilder(
           builder: (lightDynamic, darkDynamic) {
-            _theme.setDynamicSchemes(lightDynamic, darkDynamic);
+            _theme.setDynamicSchemes(
+              lightDynamic?.toFlutterScheme(),
+              darkDynamic?.toFlutterScheme(),
+            );
             return Obx(
               () => GetMaterialApp(
                 title: 'Dartotsu',

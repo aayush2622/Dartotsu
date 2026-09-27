@@ -49,3 +49,16 @@ app.*.map.json
 # FVM Version Cache
 .fvm/
 /lib3/
+graft/.cache/
+graft/.graph/
+/graft/
+/.mcp.json
+/AGENTS.md
+/opencode.json
+
+graft-hooks.cjs
+graft-statusline.cjs
+/.claude
+
+
+.ignore

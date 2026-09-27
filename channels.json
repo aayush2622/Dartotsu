@@ -1,0 +1,10 @@
+{
+  "stable": {
+    "version": "1.0.0",
+    "hash": "sha256-K8+DtFnlemihKq5ilP5S853eZ6IlehdpQs/O0blyogk="
+  },
+  "alpha": {
+    "version": "0.0.4",
+    "hash": "sha256-5N1TGiQ1gNAjyu6lk6BGzZVMjliEFFerOEAUe5ZnOas="
+  }
+}

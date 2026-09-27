@@ -40,20 +40,22 @@ dependencies:
   timezone: ^0.11.1
 
   # UI Components
-  introduction_screen: ^4.0.0
+  introduction_screen: ^5.0.1
   flutter_animate: ^4.5.2
   expandable_widgets: ^1.0.3+1
   expandable_text: 2.3.0
-  cached_network_image: ^3.4.1
+  cached_network_image: ^4.0.2
   precached_network_image: ^1.4.1
   flutter_svg: ^2.3.0
-  flex_color_picker: ^3.8.0
-  skeletonizer: ^2.1.3
+  flex_color_picker: ^4.0.0
+  skeletonizer: ^3.0.0
   blurbox: ^0.0.6
   markdown_widget: ^2.3.2+8
   super_sliver_list: ^0.4.1
   dpad: ^3.0.0
-  dynamic_color: ^1.8.1
+  dynamic_color: ^2.1.0
+  # dynamic_color 2.x exposes material_ui's ColorScheme; see Core/ThemeManager/DynamicColorScheme.dart
+  material_ui: ^1.4.0
 
   # UI Enhancements
   blur: ^4.0.2
@@ -81,7 +83,7 @@ dependencies:
       ref: main
       path: ./libs/universal/media_kit_libs_video
   window_manager: ^0.5.2
-  permission_handler: ^12.0.3
+  permission_handler: ^13.0.2
   flutter_inappwebview: ^6.2.0-beta.3
   flutter_local_notifications: ^22.0.1
   flutter_timezone: ^5.1.0
@@ -101,7 +103,7 @@ dependencies:
   receive_sharing_intent: ^1.9.0
   device_info_plus: ^13.2.0
   package_info_plus: ^10.2.0
-  file_picker: ^12.0.0-beta.5
+  file_picker: ^13.1.0
   share_plus: ^13.2.0
   url_launcher: ^6.3.2
   json_path: ^0.9.0
@@ -134,7 +136,7 @@ dev_dependencies:
   isar_community_generator: ^3.3.2
   json_serializable: ^6.11.2
   build_runner: ^2.15.1
-  inno_bundle: ^0.11.2
+  inno_bundle: ^0.12.0
 
 dependency_overrides:
   collection: ^1.19.1
