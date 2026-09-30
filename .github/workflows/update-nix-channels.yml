@@ -1,0 +1,91 @@
+name: Update Nix channels.json
+on:
+  release:
+    types: [published]
+  schedule:
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+
+jobs:
+  update-channels:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: rewrite-re
+          fetch-depth: 0
+
+      - uses: DeterminateSystems/nix-installer-action@main
+
+      - name: Fetch latest release zip per channel
+        id: releases
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+
+          fetch_zip_url() {
+            local repo="$1" endpoint="$2"
+            gh api "repos/$repo/$endpoint" --jq '
+              (if type == "array" then .[0] else . end)
+              | .assets[]? | select(.name | test("\\.zip$")) | .browser_download_url
+            ' 2>/dev/null | head -n1
+          }
+
+          {
+            echo "stable_url=$(fetch_zip_url aayush2622/Dartotsu releases/latest)"
+            echo "prerelease_url=$(fetch_zip_url aayush2622/Dartotsu releases)"
+            echo "alpha_url=$(fetch_zip_url grayankit/Dartotsu-Downloader releases/latest)"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Update channels.json
+        run: |
+          set -euo pipefail
+
+          to_sri() {
+            nix hash to-sri --type sha256 "$1" 2>/dev/null \
+              || nix hash convert --hash-algo sha256 --to sri "$1"
+          }
+
+          update_channel() {
+            local key="$1" url="$2"
+            if [ -z "$url" ] || [ "$url" = "null" ]; then
+              echo "::warning::no .zip asset found for the $key channel, leaving channels.json untouched for it"
+              return
+            fi
+
+            local version base32_hash hash tmp
+            version="$(basename "$(dirname "$url")")"
+            version="${version#v}"
+
+            base32_hash="$(nix-prefetch-url --unpack --type sha256 "$url" 2>/dev/null | tail -n1)"
+            hash="$(to_sri "$base32_hash")"
+
+            tmp="$(mktemp)"
+            jq --arg key "$key" --arg v "$version" --arg u "$url" --arg h "$hash" \
+              '.[$key] = {version: $v, url: $u, hash: $h}' \
+              channels.json > "$tmp"
+            mv "$tmp" channels.json
+          }
+
+          update_channel stable "${{ steps.releases.outputs.stable_url }}"
+          update_channel prerelease "${{ steps.releases.outputs.prerelease_url }}"
+          update_channel alpha "${{ steps.releases.outputs.alpha_url }}"
+
+      - name: Verify the flake still builds
+        run: nix build .#stable .#prerelease .#alpha --no-link -L --accept-flake-config
+
+      - name: Commit and push if channels.json changed
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- channels.json; then
+            echo "channels.json unchanged, nothing to commit"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add channels.json
+          git commit -m "chore: bump nix channels.json"
+          git push origin HEAD:rewrite-re
