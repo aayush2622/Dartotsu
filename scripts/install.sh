@@ -383,6 +383,90 @@ nix_environment_notice() {
     echo
 }
 
+nix_update_check() {
+    local exe="" channel="" pname=""
+    for candidate in dartotsu dartotsu-prerelease dartotsu-alpha; do
+        if command -v "$candidate" >/dev/null 2>&1; then
+            exe="$candidate"
+            case "$candidate" in
+                dartotsu) channel="stable"; pname="dartotsu" ;;
+                dartotsu-prerelease) channel="prerelease"; pname="dartotsu-prerelease" ;;
+                dartotsu-alpha) channel="alpha"; pname="dartotsu-alpha" ;;
+            esac
+            break
+        fi
+    done
+
+    if [ -z "$exe" ]; then
+        nix_environment_notice
+        return
+    fi
+
+    local bin_path store_path derivation_dir derivation_name installed_version
+    bin_path="$(command -v "$exe")"
+    store_path="$(readlink -f "$bin_path" 2>/dev/null)"
+    case "$store_path" in
+        /nix/store/*) ;;
+        *)
+            warn_msg "Found '$exe' on PATH but couldn't resolve it to a Nix store path."
+            return
+            ;;
+    esac
+
+    derivation_dir="$(echo "$store_path" | sed -E 's#(/nix/store/[^/]+)/.*#\1#')"
+    derivation_name="$(basename "$derivation_dir")"
+    installed_version="$(echo "$derivation_name" | sed -E "s/^[0-9a-z]{32}-${pname}-//")"
+
+    if [ -z "$installed_version" ] || [ "$installed_version" = "$derivation_name" ]; then
+        warn_msg "Couldn't parse an installed version out of: $derivation_name"
+        return
+    fi
+
+    info_msg "Installed via Nix: ${BOLD}$exe${RESET} ${GRAY}($channel channel)${RESET} -- version ${BOLD}$installed_version${RESET}"
+
+    local remote_version
+    remote_version="$(curl -fsSL "https://raw.githubusercontent.com/aayush2622/Dartotsu/rewrite-re/channels.json" 2>/dev/null \
+        | grep -A3 "\"$channel\":" \
+        | grep '"version"' \
+        | head -n1 \
+        | sed -E 's/.*"version"[[:space:]]*:[[:space:]]*"([^"]*)".*/\1/')"
+
+    if [ -z "$remote_version" ]; then
+        warn_msg "Couldn't fetch the latest $channel version to compare against."
+        return
+    fi
+
+    if [ "$installed_version" = "$remote_version" ]; then
+        success_msg "You're already on the latest $channel version ($installed_version)."
+        return
+    fi
+
+    echo
+    warn_msg "Update available: ${installed_version} -> ${remote_version}"
+    echo
+
+    if nix profile list 2>/dev/null | grep -q "dartotsu"; then
+        echo -ne "${YELLOW}${BOLD}Run 'nix profile upgrade' now?${RESET} ${GRAY}(y/N)${RESET}: "
+        read -rn 1 RUN_UPGRADE
+        echo
+        if [[ "${RUN_UPGRADE,,}" == "y" ]]; then
+            if nix profile upgrade '.*dartotsu.*'; then
+                success_msg "Updated to $remote_version!"
+            else
+                warn_msg "Automatic upgrade failed -- run this yourself:"
+                echo -e "  ${BOLD}${GREEN}nix profile upgrade '.*dartotsu.*'${RESET}"
+            fi
+        else
+            info_msg "Skipped. Run this whenever you're ready:"
+            echo -e "  ${BOLD}${GREEN}nix profile upgrade '.*dartotsu.*'${RESET}"
+        fi
+    else
+        info_msg "This looks like a NixOS/home-manager managed install -- update it by rebuilding your system:"
+        echo -e "  ${BOLD}${GREEN}nix flake update dartotsu${RESET}  ${GRAY}# in whichever flake declares it${RESET}"
+        echo -e "  ${BOLD}${GREEN}sudo nixos-rebuild switch${RESET}  ${GRAY}# or: home-manager switch${RESET}"
+    fi
+}
+
 # =============================================================================
 # 🛠️ ENHANCED DEPENDENCY MANAGEMENT
 # =============================================================================
@@ -815,6 +899,13 @@ uninstall_app() {
 
 update_app() {
     section_header "UPDATE PROCESS" "${ICON_UPDATE}"
+
+    if is_nix_environment; then
+        nix_update_check
+        echo -e "${GRAY}${DIM}Press any key to continue...${RESET}"
+        read -rn 1
+        return
+    fi
 
     if [ ! -d "$INSTALL_DIR" ] && [ ! -L "$LINK" ]; then
         warn_msg "$APP_NAME doesn't appear to be installed!"
