@@ -243,12 +243,36 @@ List<Setting> updateSettings(BuildContext context) => [
     onSwitchChange: (v) => PrefName.checkForUpdates.value = v,
   ),
   Setting(
-    type: SettingType.switchType,
-    name: 'Alpha channel',
-    description: 'Include pre-release builds',
-    icon: Icons.science_rounded,
-    isChecked: PrefName.alphaUpdates.rx.value,
-    onSwitchChange: (v) => PrefName.alphaUpdates.value = v,
+    type: SettingType.custom,
+    name: 'Update channel',
+    builder: (context) => Row(
+      children: [
+        Icon(
+          Icons.science_rounded,
+          size: 22,
+          color: context.colorScheme.primary,
+        ),
+        const SizedBox(width: 20),
+        Expanded(
+          child: Text(
+            'Channel',
+            style: context.textTheme.bodyLarge?.copyWith(
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ),
+        AppSegmented<UpdateChannel>(
+          expand: false,
+          value: PrefName.updateChannel.rx.value,
+          onChanged: (v) => PrefName.updateChannel.value = v,
+          segments: const [
+            AppSegment(UpdateChannel.stable, label: 'Stable'),
+            AppSegment(UpdateChannel.prerelease, label: 'Pre-release'),
+            AppSegment(UpdateChannel.alpha, label: 'Alpha'),
+          ],
+        ),
+      ],
+    ),
   ),
   Setting(
     type: SettingType.normal,
