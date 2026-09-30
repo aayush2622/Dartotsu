@@ -31,10 +31,10 @@
       channels = builtins.fromJSON (builtins.readFile ./channels.json);
 
       channelExtraLibs = {
-        alpha = [ pkgs.webkitgtk_4_1 ];
+        prerelease = [ pkgs.webkitgtk_4_1 ];
       };
 
-      mkDartotsu = channel: { version, hash }:
+      mkDartotsu = channel: { version, url, hash }:
         let
           suffix = pkgs.lib.optionalString (channel != "stable") "-${channel}";
           exe = "dartotsu${suffix}";
@@ -46,8 +46,7 @@
           passthru.channel = channel;
 
           src = pkgs.fetchzip {
-            url = "https://github.com/aayush2622/Dartotsu/releases/download/v${finalAttrs.version}/Dartotsu_LinuxZip_v${finalAttrs.version}.zip";
-            inherit hash;
+            inherit url hash;
             stripRoot = false;
           };
 
@@ -146,6 +145,7 @@
             mkdir -p $out/bin
             makeWrapper $out/app/dartotsu/dartotsu $out/bin/${exe} \
               --prefix LD_LIBRARY_PATH : "$out/app/dartotsu/lib" \
+              --prefix LD_LIBRARY_PATH : "${pkgs.addDriverRunpath.driverLink}/lib" \
               --prefix LD_LIBRARY_PATH : ${pkgs.lib.makeLibraryPath finalAttrs.buildInputs}
 
             logo=$out/app/dartotsu/data/flutter_assets/assets/images/logo.png
