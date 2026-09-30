@@ -28,6 +28,27 @@
     <string>LaunchScreen</string>
     <key>UIMainStoryboardFile</key>
     <string>Main</string>
+    <key>UIApplicationSceneManifest</key>
+    <dict>
+      <key>UIApplicationSupportsMultipleScenes</key>
+      <false/>
+      <key>UISceneConfigurations</key>
+      <dict>
+        <key>UIWindowSceneSessionRoleApplication</key>
+        <array>
+          <dict>
+            <key>UISceneClassName</key>
+            <string>UIWindowScene</string>
+            <key>UISceneConfigurationName</key>
+            <string>flutter</string>
+            <key>UISceneDelegateClassName</key>
+            <string>$(PRODUCT_MODULE_NAME).SceneDelegate</string>
+            <key>UISceneStoryboardFile</key>
+            <string>Main</string>
+          </dict>
+        </array>
+      </dict>
+    </dict>
     <key>CFBundleURLTypes</key>
     <array>
       <dict>
@@ -38,6 +59,38 @@
         <key>CFBundleURLSchemes</key>
         <array>
           <string>dartotsu</string>
+        </array>
+      </dict>
+      <dict>
+        <key>CFBundleURLName</key>
+        <string>anymex</string>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>anymex</string>
+        </array>
+      </dict>
+      <dict>
+        <key>CFBundleURLName</key>
+        <string>dar</string>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>dar</string>
+        </array>
+      </dict>
+      <dict>
+        <key>CFBundleURLName</key>
+        <string>mangayomi</string>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>mangayomi</string>
+        </array>
+      </dict>
+      <dict>
+        <key>CFBundleURLName</key>
+        <string>sugoireads</string>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>sugoireads</string>
         </array>
       </dict>
     </array>
@@ -73,40 +126,5 @@
 	<true/>
 	<key>FlutterDeepLinkingEnabled</key>
     <false/>
-    <key>CFBundleURLTypes</key>
-    <array>
-        <dict>
-            <key>CFBundleURLName</key>
-            <string>anymex</string>
-            <key>CFBundleURLSchemes</key>
-            <array>
-                <string>anymex</string>
-            </array>
-        </dict>
-        <dict>
-            <key>CFBundleURLName</key>
-            <string>dar</string>
-            <key>CFBundleURLSchemes</key>
-            <array>
-                <string>dar</string>
-            </array>
-        </dict>
-        <dict>
-            <key>CFBundleURLName</key>
-            <string>mangayomi</string>
-            <key>CFBundleURLSchemes</key>
-            <array>
-                <string>mangayomi</string>
-            </array>
-        </dict>
-        <dict>
-            <key>CFBundleURLName</key>
-            <string>sugoireads</string>
-            <key>CFBundleURLSchemes</key>
-            <array>
-                <string>sugoireads</string>
-            </array>
-        </dict>
-    </array>
   </dict>
 </plist>
