@@ -59,6 +59,7 @@
         <key>CFBundleURLSchemes</key>
         <array>
           <string>dartotsu</string>
+          <string>dantotsu</string>
         </array>
       </dict>
       <dict>
@@ -83,6 +84,22 @@
         <key>CFBundleURLSchemes</key>
         <array>
           <string>mangayomi</string>
+        </array>
+      </dict>
+      <dict>
+        <key>CFBundleURLName</key>
+        <string>aniyomi</string>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>aniyomi</string>
+        </array>
+      </dict>
+      <dict>
+        <key>CFBundleURLName</key>
+        <string>tachiyomi</string>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>tachiyomi</string>
         </array>
       </dict>
       <dict>

@@ -56,6 +56,8 @@ class DeepLink {
         'anymex',
         'sugoireads',
         'mangayomi',
+        'aniyomi',
+        'tachiyomi',
       ].forEach(registerProtocolHandler);
 
       for (var e in videoExtensions) {
