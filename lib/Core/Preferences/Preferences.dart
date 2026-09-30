@@ -1,5 +1,7 @@
 part of 'PrefManager.dart';
 
+enum UpdateChannel { stable, prerelease, alpha }
+
 class PrefName {
   PrefName._();
 
@@ -53,7 +55,12 @@ class PrefName {
     true,
     PrefLocation.COMMON,
   );
-  static const alphaUpdates = Pref('alphaUpdates', false, PrefLocation.COMMON);
+  static final updateChannel = enumPref(
+    'updateChannel',
+    UpdateChannel.stable,
+    UpdateChannel.values,
+    PrefLocation.COMMON,
+  );
   static const skippedUpdates = Pref<List<String>>(
     'skippedUpdates',
     [],

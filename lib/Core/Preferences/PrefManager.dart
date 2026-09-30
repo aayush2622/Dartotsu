@@ -139,7 +139,7 @@ class PrefManager {
   }
 
   /// Shared [Rx] for [pref]. Assigning to it persists automatically.
-  static Rx<T> rxOf<T>(Pref<T> pref) {
+  static Rx<T> watch<T>(Pref<T> pref) {
     final existing = _rx[pref.storageKey];
     if (existing is Rx<T>) return existing;
 

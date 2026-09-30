@@ -45,7 +45,7 @@ class Pref<T> {
   set value(T v) => PrefManager.setVal(this, v);
 
   /// Shared reactive view. Assigning `pref.rx.value = x` persists automatically.
-  Rx<T> get rx => PrefManager.rxOf(this);
+  Rx<T> get rx => PrefManager.watch(this);
 
   void remove() => PrefManager.removeVal(this);
 }
