@@ -356,6 +356,34 @@ add_updater_alias() {
 
 
 # =============================================================================
+# ❄️  NIX / NIXOS DETECTION
+# =============================================================================
+
+is_nix_environment() {
+    [ -d /nix/store ] || command -v nix >/dev/null 2>&1
+}
+
+nix_environment_notice() {
+    echo
+    echo -e "${BOLD}${CYAN}╭─────────────────────────────────────────────────────────────────╮${RESET}"
+    echo -e "${BOLD}${CYAN}│${RESET} ${ICON_MAGIC} ${BOLD}${WHITE}Nix / NixOS detected${RESET}                                       ${CYAN}${BOLD}│${RESET}"
+    echo -e "${BOLD}${CYAN}╰─────────────────────────────────────────────────────────────────╯${RESET}"
+    echo
+    warn_msg "This script can't install $APP_NAME here: it downloads a plain"
+    warn_msg "glibc binary and reaches for apt/dnf/pacman/zypper, and none of"
+    warn_msg "that works against the Nix store."
+    echo
+    info_msg "Use the flake instead -- it packages the same releases properly:"
+    echo
+    echo -e "  ${BOLD}${GREEN}nix run github:aayush2622/Dartotsu/rewrite-re#stable${RESET}"
+    echo -e "  ${BOLD}${GREEN}nix profile install github:aayush2622/Dartotsu/rewrite-re#stable${RESET}"
+    echo
+    info_msg "Swap ${BOLD}#stable${RESET} for ${BOLD}#prerelease${RESET} or ${BOLD}#alpha${RESET} for the other channels."
+    info_msg "Already have it as a flake input? ${BOLD}nix flake update dartotsu${RESET} and rebuild to update."
+    echo
+}
+
+# =============================================================================
 # 🛠️ ENHANCED DEPENDENCY MANAGEMENT
 # =============================================================================
 
@@ -598,6 +626,13 @@ download_with_progress() {
 
 install_app() {
     section_header "INSTALLATION PROCESS" "${ICON_INSTALL}"
+
+    if is_nix_environment; then
+        nix_environment_notice
+        echo -e "${GRAY}${DIM}Press any key to continue...${RESET}"
+        read -rn 1
+        return
+    fi
 
     # Check dependencies with enhanced system
     info_msg "Checking system dependencies..."
