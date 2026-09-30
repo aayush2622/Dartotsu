@@ -18,6 +18,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   async: ^2.13.1
+  archive: ^4.3.0
   firebase_core: ^4.11.0
   firebase_crashlytics: ^5.2.4
   firebase_analytics: ^12.4.3

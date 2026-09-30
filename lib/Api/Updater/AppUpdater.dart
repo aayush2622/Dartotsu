@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:archive/archive_io.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dpad/dpad.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +29,11 @@ class AppUpdater extends GetxController {
 
   NetworkManager get _network => find();
   bool get _checkForUpdates => PrefName.checkForUpdates.value;
-  bool get _alphaUpdates => PrefName.alphaUpdates.value;
+
+  UpdateChannel get _channel => PrefManager.watch(PrefName.updateChannel).value;
+
+  bool get _isNixManaged =>
+      Platform.isLinux && Platform.resolvedExecutable.contains('/nix/store/');
 
   /// Checks for application updates by comparing the current version hash
   /// with the latest release on GitHub. If an update is available, it shows
@@ -42,24 +47,9 @@ class AppUpdater extends GetxController {
       if (force) snackString("Hash not found");
       return;
     }
-    var response = await _network.get(
-      'https://api.github.com/repos/${_alphaUpdates ? _alphaRepo : _mainRepo}/releases/latest',
-    );
-    if (response.statusCode == 404) {
-      if (force) {
-        snackString("Ooo Nooo you fell into limbo: ${response.statusMessage}");
-      }
-      return;
-    }
 
-    if (response.statusCode != 200) return;
-
-    if (response.data == null || response.data is! Map) {
-      if (force) snackString("Invalid update response");
-      return;
-    }
-
-    final data = response.data;
+    final data = await _fetchLatestRelease(force: force);
+    if (data == null) return;
 
     final release = data["tag_name"];
 
@@ -74,13 +64,54 @@ class AppUpdater extends GetxController {
       'https://api.github.com/repos/$_mainRepo/compare/$release...$hash',
     );
     final compareData = compare.data;
-    final isUpdate = compareData['status'] == 'behind';
+    final isUpdate = compareData is Map && compareData['status'] == 'behind';
     if (!isUpdate) {
       if (force) snackString("No Update Available");
       return;
     }
 
     unawaited(_showUpdateBottomSheet(data));
+  }
+
+  Future<Map?> _fetchLatestRelease({required bool force}) async {
+    switch (_channel) {
+      case UpdateChannel.stable:
+        final response = await _network.get(
+          'https://api.github.com/repos/$_mainRepo/releases/latest',
+        );
+        return _unwrapRelease(response, force: force);
+      case UpdateChannel.alpha:
+        final response = await _network.get(
+          'https://api.github.com/repos/$_alphaRepo/releases/latest',
+        );
+        return _unwrapRelease(response, force: force);
+      case UpdateChannel.prerelease:
+        final response = await _network.get(
+          'https://api.github.com/repos/$_mainRepo/releases',
+        );
+        if (response.statusCode != 200 ||
+            response.data is! List ||
+            (response.data as List).isEmpty) {
+          if (force) snackString("No releases found");
+          return null;
+        }
+        return (response.data as List).first as Map;
+    }
+  }
+
+  Map? _unwrapRelease(NetworkResponse<dynamic> response, {required bool force}) {
+    if (response.statusCode == 404) {
+      if (force) {
+        snackString("Ooo Nooo you fell into limbo: ${response.statusMessage}");
+      }
+      return null;
+    }
+    if (response.statusCode != 200) return null;
+    if (response.data == null || response.data is! Map) {
+      if (force) snackString("Invalid update response");
+      return null;
+    }
+    return response.data as Map;
   }
 
   Future<void> _showUpdateBottomSheet(dynamic data) async {
@@ -216,12 +247,38 @@ class AppUpdater extends GetxController {
           Get.back();
         },
         positiveCallback: () async {
+          if (Platform.isAndroid) {
+            final assets = data['assets'] as List;
+            final downloadUrl = await _getAssetDownloadUrl(assets);
+            if (downloadUrl == null) return;
+            unawaited(_downloadAndInstallApk(downloadUrl));
+            return;
+          }
+
+          if (Platform.isIOS) {
+            final releasePage = data['html_url'] as String?;
+            if (releasePage != null) unawaited(openLinkInBrowser(releasePage));
+            snackString(
+              "iOS builds aren't on the App Store — grab the .ipa from "
+              "the release page and sideload it with AltStore or SideStore",
+            );
+            return;
+          }
+
+          if (_isNixManaged) {
+            snackString(
+              'This build is managed by Nix — run "nix flake update" on '
+              'your flake and rebuild instead of updating from here',
+            );
+            return;
+          }
+
           final assets = data['assets'] as List;
           final downloadUrl = await _getAssetDownloadUrl(assets);
           if (downloadUrl == null) return;
 
-          if (Platform.isAndroid) {
-            unawaited(_downloadAndInstallApk(downloadUrl));
+          if (Platform.isLinux || Platform.isWindows || Platform.isMacOS) {
+            unawaited(_selfUpdateDesktop(downloadUrl));
           } else {
             unawaited(openLinkInBrowser(downloadUrl));
             snackString("Check your browser");
@@ -336,5 +393,193 @@ class AppUpdater extends GetxController {
       _resetDownloadState();
       rethrow;
     }
+  }
+
+  Future<String> _downloadUpdateArchive(String url) async {
+    final tempDir = await getTemporaryDirectory();
+    final ext = path.extension(Uri.parse(url).path);
+    final filePath = path.join(tempDir.path, 'dartotsu_update$ext');
+    _cancelToken = _network.newCancelToken();
+    await _network.download(
+      url,
+      filePath,
+      cancelToken: _cancelToken,
+      onProgress: (received, total) {
+        if (total <= 0) return;
+        _downloadedBytes.value = received;
+        _totalBytes.value = total;
+        _downloadProgress.value = (received / total) * 100;
+      },
+    );
+    return filePath;
+  }
+
+  bool _canWrite(Directory dir) {
+    try {
+      final probe = File(path.join(dir.path, '.dartotsu-write-test-$pid'));
+      probe.writeAsStringSync('');
+      probe.deleteSync();
+      return true;
+    } catch (_) {
+      return false;
+    }
+  }
+
+  Directory _resolveBundleRoot(Directory extracted) {
+    final entries = extracted.listSync();
+    if (entries.length == 1 && entries.single is Directory) {
+      return entries.single as Directory;
+    }
+    return extracted;
+  }
+
+  Future<void> _selfUpdateDesktop(String url) async {
+    try {
+      _resetDownloadState();
+      final filePath = await _downloadUpdateArchive(url);
+      if (Platform.isLinux) {
+        await _applyLinuxUpdate(filePath);
+      } else if (Platform.isMacOS) {
+        await _applyMacUpdate(filePath);
+      } else if (Platform.isWindows) {
+        await _applyWindowsUpdate(filePath);
+      }
+    } catch (e) {
+      _resetDownloadState();
+      snackString(
+        'Automatic update failed ($e) — opening the download page instead',
+      );
+      unawaited(openLinkInBrowser(url));
+    }
+  }
+
+  Future<void> _applyLinuxUpdate(String zipPath) async {
+    final exePath = File(
+      Platform.resolvedExecutable,
+    ).resolveSymbolicLinksSync();
+    final installDir = Directory(path.dirname(exePath));
+    final parentDir = installDir.parent;
+
+    if (_isNixManaged || !_canWrite(parentDir)) {
+      throw 'install directory is not writable';
+    }
+
+    final stagingDir = Directory(
+      path.join(parentDir.path, '.dartotsu-update-staging'),
+    );
+    if (stagingDir.existsSync()) stagingDir.deleteSync(recursive: true);
+    await extractFileToDisk(zipPath, stagingDir.path);
+    final bundleRoot = _resolveBundleRoot(stagingDir);
+
+    for (final name in ['dartotsu', 'dartotsu.bin']) {
+      final f = File(path.join(bundleRoot.path, name));
+      if (f.existsSync()) {
+        await Process.run('chmod', ['+x', f.path]);
+      }
+    }
+
+    final backupDir = Directory(
+      '${installDir.path}.bak-${DateTime.now().millisecondsSinceEpoch}',
+    );
+    installDir.renameSync(backupDir.path);
+    bundleRoot.renameSync(installDir.path);
+    if (stagingDir.existsSync()) {
+      try {
+        stagingDir.deleteSync(recursive: true);
+      } catch (_) {}
+    }
+
+    await Process.start(
+      path.join(installDir.path, 'dartotsu'),
+      [],
+      mode: ProcessStartMode.detached,
+    );
+
+    try {
+      backupDir.deleteSync(recursive: true);
+    } catch (_) {}
+
+    exit(0);
+  }
+
+  Future<void> _applyWindowsUpdate(String installerPath) async {
+    await Process.start(
+      installerPath,
+      [],
+      mode: ProcessStartMode.detached,
+      runInShell: true,
+    );
+    exit(0);
+  }
+
+  Future<void> _applyMacUpdate(String dmgPath) async {
+    final exePath = Platform.resolvedExecutable;
+    final appDir = Directory(
+      path.dirname(path.dirname(path.dirname(exePath))),
+    );
+
+    if (!appDir.path.endsWith('.app') || !_canWrite(appDir.parent)) {
+      throw 'app bundle location is not writable';
+    }
+
+    final mountPoint = path.join(
+      Directory.systemTemp.path,
+      'dartotsu-update-mount-${DateTime.now().millisecondsSinceEpoch}',
+    );
+    final attach = await Process.run('hdiutil', [
+      'attach',
+      dmgPath,
+      '-nobrowse',
+      '-mountpoint',
+      mountPoint,
+      '-quiet',
+    ]);
+    if (attach.exitCode != 0) {
+      throw 'failed to mount update image: ${attach.stderr}';
+    }
+
+    try {
+      final mounted = Directory(
+        mountPoint,
+      ).listSync().whereType<Directory>().firstWhere(
+        (d) => d.path.endsWith('.app'),
+      );
+
+      final stagingApp = Directory(
+        path.join(appDir.parent.path, '.dartotsu-update-staging.app'),
+      );
+      if (stagingApp.existsSync()) stagingApp.deleteSync(recursive: true);
+      final copy = await Process.run('cp', [
+        '-R',
+        mounted.path,
+        stagingApp.path,
+      ]);
+      if (copy.exitCode != 0) {
+        throw 'failed to copy update: ${copy.stderr}';
+      }
+
+      final backupDir = Directory(
+        '${appDir.path}.bak-${DateTime.now().millisecondsSinceEpoch}',
+      );
+      appDir.renameSync(backupDir.path);
+      stagingApp.renameSync(appDir.path);
+
+      await Process.run('xattr', ['-dr', 'com.apple.quarantine', appDir.path]);
+      await Process.start('open', [
+        '-n',
+        appDir.path,
+      ], mode: ProcessStartMode.detached);
+
+      try {
+        backupDir.deleteSync(recursive: true);
+      } catch (_) {}
+    } finally {
+      await Process.run('hdiutil', ['detach', mountPoint, '-quiet']);
+      try {
+        File(dmgPath).deleteSync();
+      } catch (_) {}
+    }
+
+    exit(0);
   }
 }
