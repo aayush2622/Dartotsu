@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../Model/Setting.dart';
+import '../../Utils/Animation/WidgetAnimations.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Extensions/Responsive.dart';
 import '../Components/SectionCard.dart';
@@ -16,44 +17,55 @@ class SettingsAdaptor extends StatelessWidget {
     final visible = settings.where((s) => s.isVisible).toList();
     if (visible.isEmpty) return const SizedBox.shrink();
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        for (final setting in visible)
-          if (setting.type == SettingType.header)
-            Padding(
-              padding: EdgeInsets.fromLTRB(
-                Dimens.gapSm,
-                Dimens.gapSm,
-                Dimens.gapSm,
-                Dimens.gapSm + 2,
-              ),
-              child: Text(
-                setting.name,
-                style: context.textTheme.titleSmall?.copyWith(
-                  color: context.colorScheme.primary,
-                  letterSpacing: 0.4,
-                ),
-              ),
-            )
-          else
-            Padding(
-              padding: EdgeInsets.only(bottom: Dimens.gap),
-              child: SectionCard(
-                padding: EdgeInsets.symmetric(
-                  horizontal: Dimens.cardPad,
-                  vertical: Dimens.gapXs + 2,
-                ),
-                child: switch (setting.type) {
-                  SettingType.switchType => SettingSwitchItem(setting: setting),
-                  SettingType.slider => SettingSliderItem(setting: setting),
-                  SettingType.inputBox => SettingInputBoxItem(setting: setting),
-                  SettingType.custom => SettingCustomItem(setting: setting),
-                  _ => SettingItem(setting: setting),
-                },
+    final children = <Widget>[];
+    int cardIndex = 0;
+
+    for (final setting in visible) {
+      if (setting.type == SettingType.header) {
+        children.add(
+          Padding(
+            padding: EdgeInsets.fromLTRB(
+              Dimens.gapSm,
+              Dimens.gapSm,
+              Dimens.gapSm,
+              Dimens.gapSm + 2,
+            ),
+            child: Text(
+              setting.name,
+              style: context.textTheme.titleSmall?.copyWith(
+                color: context.colorScheme.primary,
+                letterSpacing: 0.4,
               ),
             ),
-      ],
+          ),
+        );
+      } else {
+        final delay = cardIndex * 40;
+        cardIndex++;
+        children.add(
+          Padding(
+            padding: EdgeInsets.only(bottom: Dimens.gap),
+            child: SectionCard(
+              padding: EdgeInsets.symmetric(
+                horizontal: Dimens.cardPad,
+                vertical: Dimens.gapXs + 2,
+              ),
+              child: switch (setting.type) {
+                SettingType.switchType => SettingSwitchItem(setting: setting),
+                SettingType.slider => SettingSliderItem(setting: setting),
+                SettingType.inputBox => SettingInputBoxItem(setting: setting),
+                SettingType.custom => SettingCustomItem(setting: setting),
+                _ => SettingItem(setting: setting),
+              },
+            ),
+          ).animateFadeUp(delay: Duration(milliseconds: delay)),
+        );
+      }
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: children,
     );
   }
 }
