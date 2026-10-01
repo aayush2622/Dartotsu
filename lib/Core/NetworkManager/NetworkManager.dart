@@ -41,10 +41,9 @@ class NetworkManager extends GetxController {
     return custom.isNotEmpty ? custom : DohProvider.cloudflare.url;
   }
 
-  /// `host:port` of the configured HTTP proxy, or `null` for none.
   String? get proxyUrl {
-    final custom = PrefName.proxyUrl.value;
-    return custom.isEmpty ? null : custom;
+    final v = PrefName.proxyUrl.value;
+    return v.isEmpty ? null : v;
   }
 
   @override
@@ -89,9 +88,7 @@ class NetworkManager extends GetxController {
             }
           },
         ),
-        proxySettings: proxyUrl == null
-            ? null
-            : ProxySettings.proxy('http://$proxyUrl'),
+        proxySettings: proxyUrl == null ? null : _buildProxySettings(proxyUrl!),
       );
 
       _client = RhttpClient.createSync(
@@ -103,6 +100,11 @@ class NetworkManager extends GetxController {
     } catch (_) {
       rethrow;
     }
+  }
+
+  static ProxySettings _buildProxySettings(String proxy) {
+    if (!proxy.contains('://')) return ProxySettings.proxy('http://$proxy');
+    return ProxySettings.proxy(proxy);
   }
 
   /// Performs a GET request.
