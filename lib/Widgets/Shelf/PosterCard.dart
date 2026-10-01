@@ -1,4 +1,4 @@
-import 'package:dpad/dpad.dart';
+import '../../Utils/Nav/DpadNav.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide ContextExtensionss;
 
@@ -115,7 +115,7 @@ class _PosterCardState extends State<PosterCard> {
       onSelect: widget.onTap,
       onLongSelect: widget.onLongPress,
       builder: (context, state, child) =>
-          _scaled(child, (_hover || state.focused) ? 1.03 : 1.0),
+          _scaled(child, (_hover || kDpadFocused(state)) ? 1.03 : 1.0),
       child: visual,
     );
   }

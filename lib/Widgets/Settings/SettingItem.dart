@@ -1,5 +1,6 @@
-import 'package:dpad/dpad.dart';
+import '../../Utils/Nav/DpadNav.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../Model/Setting.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
@@ -72,12 +73,22 @@ class SettingItem extends StatelessWidget {
       );
     }
 
+    void onTap() {
+      HapticFeedback.selectionClick();
+      setting.onClick?.call();
+    }
+
     return DpadFocusable(
-      onSelect: setting.onClick,
+      onSelect: setting.onClick == null ? null : onTap,
       onLongSelect: setting.onLongClick,
-      effects: const [DpadScaleEffect(scale: 1.04)],
+      builder: (_, state, child) => AnimatedScale(
+        scale: kDpadFocused(state) ? 1.04 : 1.0,
+        duration: Durations.short3,
+        curve: Curves.easeOutBack,
+        child: child,
+      ),
       child: InkWell(
-        onTap: setting.onClick,
+        onTap: setting.onClick == null ? null : onTap,
         onLongPress: setting.onLongClick,
         borderRadius: BorderRadius.circular(16),
         child: Padding(
@@ -94,14 +105,22 @@ class SettingSwitchItem extends StatelessWidget {
 
   const SettingSwitchItem({super.key, required this.setting});
 
-  void _toggle() => setting.onSwitchChange?.call(!setting.isChecked);
+  void _toggle() {
+    HapticFeedback.selectionClick();
+    setting.onSwitchChange?.call(!setting.isChecked);
+  }
 
   @override
   Widget build(BuildContext context) {
     return DpadFocusable(
       onSelect: _toggle,
       onLongSelect: setting.onLongClick,
-      effects: const [DpadScaleEffect(scale: 1.04)],
+      builder: (_, state, child) => AnimatedScale(
+        scale: kDpadFocused(state) ? 1.04 : 1.0,
+        duration: Durations.short3,
+        curve: Curves.easeOutBack,
+        child: child,
+      ),
       child: InkWell(
         onTap: _toggle,
         onLongPress: setting.onLongClick,

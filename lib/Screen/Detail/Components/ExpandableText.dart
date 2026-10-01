@@ -1,4 +1,4 @@
-import 'package:dpad/dpad.dart';
+import '../../../Utils/Nav/DpadNav.dart';
 import 'package:flutter/material.dart';
 
 import '../../../Utils/Extensions/ContextExtensions.dart';
@@ -21,7 +21,12 @@ class _ExpandableTextState extends State<ExpandableText> {
     final long = widget.text.length > 260;
     return DpadFocusable(
       onSelect: _toggle,
-      effects: const [DpadScaleEffect(scale: 1.01)],
+      builder: (_, state, child) => AnimatedScale(
+        scale: kDpadFocused(state) ? 1.01 : 1.0,
+        duration: Durations.short3,
+        curve: Curves.easeOutBack,
+        child: child,
+      ),
       child: GestureDetector(
         onTap: long ? _toggle : null,
         behavior: HitTestBehavior.opaque,

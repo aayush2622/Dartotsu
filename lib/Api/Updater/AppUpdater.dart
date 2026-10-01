@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:archive/archive_io.dart';
 import 'package:device_info_plus/device_info_plus.dart';
-import 'package:dpad/dpad.dart';
+import '../../Utils/Nav/DpadNav.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:install_plugin/install_plugin.dart';

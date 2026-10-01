@@ -1,4 +1,4 @@
-import 'package:dpad/dpad.dart';
+import '../../Utils/Nav/DpadNav.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -196,10 +196,12 @@ class _FloatingBottomNavBarState extends State<FloatingBottomNavBar> {
   }) {
     return DpadFocusable(
       onSelect: onTap,
-      effects: const [
-        DpadScaleEffect(scale: 1.06),
-        DpadGlowEffect(opacity: 0.3, blurRadius: 12, spreadRadius: 0),
-      ],
+      builder: (_, state, child) => AnimatedScale(
+        scale: kDpadFocused(state) ? 1.06 : 1.0,
+        duration: Durations.short3,
+        curve: Curves.easeOutBack,
+        child: child,
+      ),
       child: MouseRegion(
         cursor: SystemMouseCursors.click,
         child: SizedBox(
@@ -221,10 +223,12 @@ class _FloatingBottomNavBarState extends State<FloatingBottomNavBar> {
 
     return DpadFocusable(
       onSelect: () => widget.onTabSelected(item.index),
-      effects: const [
-        DpadScaleEffect(scale: 1.06),
-        DpadGlowEffect(opacity: 0.3, blurRadius: 12, spreadRadius: 0),
-      ],
+      builder: (_, state, child) => AnimatedScale(
+        scale: kDpadFocused(state) ? 1.06 : 1.0,
+        duration: Durations.short3,
+        curve: Curves.easeOutBack,
+        child: child,
+      ),
       child: SizedBox(
         width: 64,
         height: 64,

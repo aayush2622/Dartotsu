@@ -1,4 +1,4 @@
-import 'package:dpad/dpad.dart';
+import '../../../Utils/Nav/DpadNav.dart';
 import 'package:flutter/material.dart';
 
 import '../../../Utils/Extensions/ContextExtensions.dart';
@@ -41,10 +41,12 @@ class HeaderAvatar extends StatelessWidget {
     if (onTap == null) return child;
     return DpadFocusable(
       onSelect: onTap,
-      effects: const [
-        DpadScaleEffect(scale: 1.06),
-        DpadGlowEffect(opacity: 0.3, blurRadius: 12, spreadRadius: 0),
-      ],
+      builder: (_, state, child) => AnimatedScale(
+        scale: kDpadFocused(state) ? 1.06 : 1.0,
+        duration: Durations.short3,
+        curve: Curves.easeOutBack,
+        child: child,
+      ),
       child: child,
     );
   }
