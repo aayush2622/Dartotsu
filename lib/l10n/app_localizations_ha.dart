@@ -22,9 +22,6 @@ class AppLocalizationsHa extends AppLocalizations {
   String get mal => 'MyAnimeList';
 
   @override
-  String get kitsu => 'Kitsu';
-
-  @override
   String get simkl => 'Simkl';
 
   @override
@@ -46,271 +43,77 @@ class AppLocalizationsHa extends AppLocalizations {
   String get pasteTokenHint => 'Paste your access token';
 
   @override
-  String loggedInAs(Object name) {
-    return 'Logged in as $name';
-  }
-
-  @override
-  String logout(String type) {
-    return 'Fita $type';
-  }
-
-  @override
   String loginTo(String service) {
     return 'Shiga $service';
   }
 
   @override
-  String get confirmLogout => 'Shin ka tabbata kana son fita?';
-
-  @override
-  String get anime => 'Anime';
-
-  @override
-  String get manga => 'Manga';
-
-  @override
-  String get manhwa => 'Manhwa';
-
-  @override
-  String get manhua => 'Manhua';
-
-  @override
-  String get novel => 'Labarin kwaikwayo';
-
-  @override
-  String get ln => 'Labarin haske';
-
-  @override
-  String get home => 'Gida';
-
-  @override
-  String get search => 'Bincike';
-
-  @override
-  String get calendar => 'Kalanda';
-
-  @override
   String get settings => 'Saituna';
 
   @override
-  String get watch => 'Kalli';
+  String get account => 'Asusu';
 
   @override
-  String get read => 'Karanta';
+  String get about => 'Game da';
 
   @override
-  String get info => 'Bayanan';
+  String get language => 'Harshe';
 
   @override
-  String get comments => 'Ra\'ayoyi';
-
-  @override
-  String get addToList => 'Ƙara zuwa Jerin';
-
-  @override
-  String get series => 'Jerinsu';
-
-  @override
-  String get season => 'Zaman';
-
-  @override
-  String episode(int count) {
+  String extension(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'Shaharrarru',
-      one: 'Shahararriya',
+      other: 'Karin',
+      one: 'Kari',
     );
     return '$_temp0';
   }
 
   @override
-  String chapter(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'Babobi',
-      one: 'Babi',
-    );
-    return '$_temp0';
-  }
+  String get ok => 'OK';
 
   @override
-  String volume(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'Juzu\'in',
-      one: 'Juzu\'i',
-    );
-    return '$_temp0';
-  }
+  String get cancel => 'Soke';
 
   @override
-  String movie(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'Fimoci',
-      one: 'Fim',
-    );
-    return '$_temp0';
-  }
+  String get yes => 'Ee';
 
   @override
-  String get totalEpisodes => 'Shahararru';
+  String get no => 'A\'a';
 
   @override
-  String get totalChapters => 'Babobi';
+  String get save => 'Save';
 
   @override
-  String nextEpisodeRelease(int episode) {
-    return 'Episode $episode will be released in';
-  }
+  String get reset => 'Reset';
 
   @override
-  String get genres => 'Nau\'o\'i';
+  String get clear => 'Clear';
 
   @override
-  String get scanlators => 'Masu fassara';
+  String get test => 'Test';
 
   @override
-  String list(String type) {
-    return '$type Jerin';
-  }
+  String get testing => 'Testing…';
 
   @override
-  String get watching => 'Ana kallo';
+  String get resolving => 'Resolving…';
 
   @override
-  String get reading => 'Ana karantawa';
+  String get none => 'None';
 
   @override
-  String get readStatus => 'Karanta';
+  String get selectMediaService => 'Zaɓi Sabis na Mai jarida';
 
   @override
-  String get watchStatus => 'An kalla';
+  String get pickColor => 'Zabi launi';
 
   @override
-  String planned(String type) {
-    return 'Shirya $type';
-  }
+  String get colorPickerDefault => 'Tsoho';
 
   @override
-  String onHold(String type) {
-    return 'A Tsaye $type';
-  }
-
-  @override
-  String get droppedAnime => 'An dakatar da Anime';
-
-  @override
-  String get droppedManga => 'An dakatar da Manga';
-
-  @override
-  String noDropped(String type) {
-    return 'Ba ka dakatar da kowanne $type ba tukuna.';
-  }
-
-  @override
-  String get continueReading => 'Ci gaba da Karanta';
-
-  @override
-  String get continueWatching => 'Ci gaba da Kallo';
-
-  @override
-  String browse(String type) {
-    return 'Bincika $type';
-  }
-
-  @override
-  String trending(String type) {
-    return 'Abubuwan Da Suke Hawa $type';
-  }
-
-  @override
-  String popular(String type) {
-    return 'Shahararru $type';
-  }
-
-  @override
-  String get topAiring => 'Mafi Girma na Kallon';
-
-  @override
-  String topRated(String type) {
-    return 'Mafi Kyawu $type';
-  }
-
-  @override
-  String get topScore => 'Top Score';
-
-  @override
-  String mostFavourite(String type) {
-    return 'Mafi So $type';
-  }
-
-  @override
-  String get thisSeason => 'Wannan Zaman';
-
-  @override
-  String get nextSeason => 'Zaman Gaba';
-
-  @override
-  String get previousSeason => 'Zaman Kafin';
-
-  @override
-  String get recommended => 'An bada shawara';
-
-  @override
-  String get recommendationsEmptyMessage =>
-      'Kalli/karanta wasu Anime ko Manga don samun shawarwari';
-
-  @override
-  String get recentUpdates => 'Sabbin Sabuntawa';
-
-  @override
-  String get allCaughtUpNew => 'An kammala, menene Sabon?';
-
-  @override
-  String favorite(String type) {
-    return 'Mafi so $type';
-  }
-
-  @override
-  String get favorites => 'Abubuwan da aka fi so';
-
-  @override
-  String get noFavourites =>
-      'Alama babu abin da ka fi so,\nGwada son shahararriya don kiyaye shi a nan.';
-
-  @override
-  String get noOnHold => 'Alama babu abin da ka sanya a tsaye.';
-
-  @override
-  String manageLayout(String service, String page) {
-    return 'Gudanar da Tsarin $page shafi don $service';
-  }
-
-  @override
-  String manageLayoutDescription(String page) {
-    return 'Za ka iya gudanar da tsarin $page shafi ta hanyar ja da sauke abubuwa';
-  }
-
-  @override
-  String get gridView => 'Duba Grid';
-
-  @override
-  String get listView => 'Duba Jerin';
-
-  @override
-  String get compactView => 'Duba Compact';
-
-  @override
-  String get layout => 'Tsari';
-
-  @override
-  String get sort => 'Tsara';
+  String get colorPickerCustom => 'Na Musamman';
 
   @override
   String get utd => 'Daga sama zuwa ƙasa';
@@ -325,546 +128,193 @@ class AppLocalizationsHa extends AppLocalizations {
   String get ltr => 'Left To Right';
 
   @override
-  String get direction => 'Direction';
+  String get searchSettings => 'Search settings';
 
   @override
-  String get episodeWatched => 'Shahararriya da aka kalli';
-
-  @override
-  String get chapterRead => 'Babi da aka karanta';
-
-  @override
-  String get outOf => 'daga';
-
-  @override
-  String get totalOf => 'Jimillar';
-
-  @override
-  String get selected => 'An zaɓa';
-
-  @override
-  String get found => 'An samu';
-
-  @override
-  String extension(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'Karin',
-      one: 'Kari',
-    );
-    return '$_temp0';
+  String nothingMatches(String query) {
+    return 'Nothing matches \"$query\"';
   }
 
   @override
-  String available(String type) {
-    return 'Akwai $type';
+  String searchCategory(String category) {
+    return 'Search $category';
   }
 
   @override
-  String installed(String type) {
-    return 'An girka $type';
-  }
+  String get settingsAppearance => 'Appearance';
 
   @override
-  String get extensionsDescription =>
-      'Shigar da sarrafa ƙarin aikin don ƙarin amfani';
+  String get settingsAppearanceDesc => 'Theme, colours, glass mode';
 
   @override
-  String get addAnimeRepo => 'Ƙara Ma\'ajiyar Anime';
+  String get settingsGeneral => 'General';
 
   @override
-  String get addAnimeRepoDesc => 'Ƙara Ma\'ajiyar Anime daga tushe daban-daban';
+  String get settingsGeneralDesc => 'Language and behaviour';
 
   @override
-  String get addMangaRepo => 'Ƙara Ma\'ajiyar Manga';
+  String get settingsAccountDesc => 'Tracking service and sign-in';
 
   @override
-  String get addMangaRepoDesc => 'Ƙara Ma\'ajiyar Manga daga tushe daban-daban';
+  String get settingsUpdates => 'Updates';
 
   @override
-  String get addNovelRepo => 'Ƙara Ma\'ajiyar Littafi';
+  String get settingsUpdatesDesc => 'Release channel and checks';
 
   @override
-  String get addNovelRepoDesc =>
-      'Ƙara Ma\'ajiyar Littafi daga tushe daban-daban';
+  String get settingsNetwork => 'Network';
 
   @override
-  String get loadExtensionsIcon => 'Loda Alamar Ƙarin Fasali';
+  String get settingsNetworkDesc => 'User-Agent, DNS, proxy, cookies';
 
   @override
-  String get loadExtensionsIconDesc =>
-      'Kashe idan shafin ƙarin fasali yana jinkiri';
+  String get settingsAboutDesc => 'Version, links, support';
 
   @override
-  String get autoUpdate => 'Sabunta Ta atomatik';
+  String get amoledBlack => 'AMOLED black';
 
   @override
-  String get autoUpdateDesc => 'Sabunta Ƙarin Fasali Ta atomatik';
+  String get amoledBlackDesc => 'Pure black surfaces on dark mode';
 
   @override
-  String get installSourceToStart => 'Saka tushe daga shafin kari don farawa';
+  String get glassMode => 'Glass mode';
 
   @override
-  String get author => 'Mawallafi';
+  String get glassModeDesc => 'Frosted surfaces over your library art';
 
   @override
-  String get averageDuration => 'Tsawon lokaci na gaba ɗaya';
+  String get cardStyle => 'Card style';
 
   @override
-  String get characters => 'Hanyoyin';
-
-  @override
-  String get synopsis => 'Takaitaccen Bayani';
-
-  @override
-  String get endDate => 'Ranar ƙarshe';
-
-  @override
-  String get format => 'Tsarin';
-
-  @override
-  String get meanScore => 'Matsakaicin Ƙimar';
-
-  @override
-  String get name => 'Suna';
-
-  @override
-  String get nameRomaji => 'Sunan (Romaji)';
-
-  @override
-  String get popularity => 'Shahararsa';
-
-  @override
-  String get relations => 'Dangantaka';
-
-  @override
-  String get prequel => 'Bari';
-
-  @override
-  String get sequel => 'Ci gaba';
-
-  @override
-  String get source => 'Tushen';
-
-  @override
-  String get staff => 'Ma\'aikata';
-
-  @override
-  String get startDate => 'Ranar farawa';
-
-  @override
-  String get status => 'Matsayi';
-
-  @override
-  String get studio => 'Dakin Koyi';
-
-  @override
-  String get synonyms => 'Ma\'anoni masu kama';
-
-  @override
-  String get tags => 'Alamar';
-
-  @override
-  String get total => 'Jimilla';
-
-  @override
-  String get collapseText => 'nuni ƙasa';
-
-  @override
-  String get expandText => 'nuni fiye';
-
-  @override
-  String get comingSoon => 'Zuwa SOON';
-
-  @override
-  String get wrongTitle => 'Suna mara daidai?';
-
-  @override
-  String get missingResults => 'Missing Results?';
-
-  @override
-  String get youTube => 'Kalla a YouTube?';
-
-  @override
-  String get mediaNotFound => 'Ba a samo media ba';
-
-  @override
-  String get noChapterFound => 'Babu babi da aka samu';
-
-  @override
-  String activity(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'Ayyuka',
-      one: 'Ayyuka',
-    );
-    return '$_temp0';
-  }
-
-  @override
-  String get language => 'Harshe';
-
-  @override
-  String get account => 'Asusu';
-
-  @override
-  String get accountDescription =>
-      'Yi sarrafa asusun AniList, MAL, da Discord cikin sauƙi';
-
-  @override
-  String get common => 'Na gama gari';
-
-  @override
-  String get commonDescription =>
-      'Samun dama ga saitunan gaba ɗaya don amfani mai sauƙi';
-
-  @override
-  String get animeDescription => 'Kirkira da sarrafa zabin anime naka';
-
-  @override
-  String get mangaDescription => 'Tsara da keɓance ƙwarewar manga naka';
-
-  @override
-  String get about => 'Game da';
-
-  @override
-  String get aboutDescription =>
-      'Koyi ƙarin game da aikace-aikacen da masu ƙirƙirarsa';
-
-  @override
-  String get notifications => 'Sanarwa';
-
-  @override
-  String get notificationsDescription =>
-      'Saita yadda da lokacin da za ka karɓi sanarwa';
-
-  @override
-  String get offlineMode => 'Yanayin Babu Intanet';
-
-  @override
-  String get offlineModeDescription =>
-      'Yi amfani da aikace-aikacen ba tare da haɗin intanet ba';
-
-  @override
-  String get incognitoMode => 'Yanayin Sirri';
-
-  @override
-  String get incognitoModeDescription =>
-      'Yi bincike ba tare da ajiye ayyukan ka ba';
-
-  @override
-  String get hidePrivate => 'Rufe Sirri';
-
-  @override
-  String get hidePrivateDescription => 'Boye jerin sirri daga shafin gida.';
-
-  @override
-  String get hiddenMedia => 'Boye Media';
-
-  @override
-  String get noHiddenMediaFound => 'Babu media da aka boye da aka samu';
-
-  @override
-  String get playerSettingsTitle => 'Saitunan Mai Nuna Bidiyo';
-
-  @override
-  String get playerSettingsDesc => 'Change player settings';
-
-  @override
-  String get speed => 'Gudun';
-
-  @override
-  String get speedDescription => 'Gudun tsoho na mai nuna bidiyo';
-
-  @override
-  String get cursedSpeed => 'Gudun Mai Laifi';
-
-  @override
-  String get cursedSpeedDescription => 'Ga masu cike da abubuwa a rayuwa';
-
-  @override
-  String get resizeMode => 'Yanayin Girma';
-
-  @override
-  String get resizeModeDescription =>
-      'Yanayin girma na tsoho don mai nuna bidiyo';
-
-  @override
-  String get skipButton => 'Maballin Tsallake';
-
-  @override
-  String get skipButtonDescription => 'Tsawon lokaci na maballin tsallake';
-
-  @override
-  String get thumbLessSeekBar => 'ThumbLess SeekBar';
-
-  @override
-  String get thumbLessSeekBarDesc => 'Remove thumb from the seek bar';
-
-  @override
-  String get customMPV => 'Custom MPV Configuration';
-
-  @override
-  String customMPVDescription(String path) {
-    return 'Enable this option to use your own MPV configuration file. Place your custom config at: $path';
-  }
-
-  @override
-  String get adjustBrightness => 'Adjust Brightness';
-
-  @override
-  String get adjustBrightnessDescription =>
-      'Enable brightness adjustment by swiping up/down on the left side of the screen';
-
-  @override
-  String get adjustVolume => 'Adjust Volume';
-
-  @override
-  String get adjustVolumeDescription =>
-      'Enable volume adjustment by swiping up/down on the right side of the screen';
-
-  @override
-  String get subtitles => 'Subtiṭa';
-
-  @override
-  String get showSubtitles => 'Nuna Subtiṭa';
-
-  @override
-  String get showSubtitlesDescription => 'Nuna subtiṭa ta tsoho';
-
-  @override
-  String get subtitlePreview => 'Duban Subtiṭa';
-
-  @override
-  String get fontColor => 'Launin Harafi';
-
-  @override
-  String get fontColorDescription => 'Launin harafin subtiṭa';
-
-  @override
-  String get fontFamily => 'Iyalin Harafi';
-
-  @override
-  String get fontFamilyDescription => 'Iyalin harafin subtiṭa';
-
-  @override
-  String get fontSize => 'Girman Harafi';
-
-  @override
-  String get fontSizeDescription => 'Girman harafin subtiṭa';
-
-  @override
-  String get fontWeight => 'Nauyin Harafi';
-
-  @override
-  String get fontWeightDescription => 'Nauyin harafin subtiṭa';
-
-  @override
-  String get backgroundColor => 'Launin Baya';
-
-  @override
-  String get backgroundColorDescription => 'Launin bango na subtiṭa';
-
-  @override
-  String get outlineColor => 'Launin Hasken Waje';
-
-  @override
-  String get outlineColorDescription => 'Launin hasken waje na subtiṭa';
-
-  @override
-  String get bottomPadding => 'Tura Ƙasa';
-
-  @override
-  String get bottomPaddingDescription => 'Tura ƙasa na subtiṭa';
-
-  @override
-  String get useLibass => 'Use Libass';
-
-  @override
-  String get useLibassDescription =>
-      'Use Libass for subtitle rendering (overrides other subtitle settings)';
-
-  @override
-  String get useGpuNext => 'Use gpu-next';
-
-  @override
-  String get useGpuNextDescription =>
-      'New rendering backend (may cause visual artifacts)';
-
-  @override
-  String get autoPlayNextEpisode => 'Auto Play Next Episode';
-
-  @override
-  String get autoPlayNextEpisodeDescription =>
-      'Automatically play the next episode when the current one ends';
-
-  @override
-  String get automaticSourceSelection => 'Automatic Source Selection Method';
-
-  @override
-  String get automaticSourceSelectionDescription =>
-      'Which method to use for automatic source selection';
-
-  @override
-  String get perAnimePlayerSettings => 'Per-Anime Player Settings';
-
-  @override
-  String get perAnimePlayerSettingsDesc =>
-      'Use different player settings for each anime (disabling may override existing per-anime settings)';
-
-  @override
-  String get readerSettings => 'Reader Settings';
-
-  @override
-  String get readerSettingsDesc => 'Change reader settings';
-
-  @override
-  String get spacedPages => 'Spaced Pages';
-
-  @override
-  String get spacedPagesDesc => 'Add space between pages';
-
-  @override
-  String get hideScrollbar => 'Hide Scrollbar';
-
-  @override
-  String get hideScrollbarDesc => 'Hide scrollbar while reading';
-
-  @override
-  String get hidePageNumber => 'Hide Page Number';
-
-  @override
-  String get hidePageNumberDesc => 'Hide page number while reading';
-
-  @override
-  String get theme => 'Jigo';
-
-  @override
-  String get themeDescription => 'Keɓance kyawun aikace-aikacen da yanayin sa';
-
-  @override
-  String get darkMode => 'Yanayin Duhu';
-
-  @override
-  String get enableDarkMode => 'Kunna Yanayin Duhu';
-
-  @override
-  String get glassEffect => 'Glass Effect';
-
-  @override
-  String get glassEffectDescription =>
-      'Gives a frosted glass effect to the app';
-
-  @override
-  String get coverTheme => 'Use Cover Theme';
-
-  @override
-  String get coverThemeDescription => 'Use media cover image as theme color';
+  String get cardStyleDesc => 'Title placement, size, progress and badges';
 
   @override
   String get materialYou => 'Material You';
 
   @override
-  String get materialYouDescription => 'Yi amfani da launin bango ɗinka';
+  String get materialYouDesc => 'Dynamic colour from the system';
 
   @override
-  String get customTheme => 'Jigon Musamman';
+  String get customAccent => 'Custom accent colour';
 
   @override
-  String get customThemeDescription => 'Yi amfani da launin naka don jigo';
+  String get customAccentDesc => 'Pick your own primary colour';
 
   @override
-  String get oledThemeVariant => 'Jigon OLED';
+  String get customAccentDisabledDesc =>
+      'Turn off Material You to use a custom colour';
 
   @override
-  String get oledThemeVariantDescription => 'Kunna Yanayin OLED';
+  String get themeMode => 'Theme mode';
 
   @override
-  String get colorPicker => 'Zaɓin Launi';
+  String get mode => 'Mode';
 
   @override
-  String get pickColor => 'Zabi launi';
+  String get trackingService => 'Tracking service';
 
   @override
-  String get colorPickerDescription => 'Zaɓi launi';
+  String get signOut => 'Sign out';
 
   @override
-  String get colorPickerDefault => 'Tsoho';
+  String get signIn => 'Sign in';
 
   @override
-  String get colorPickerCustom => 'Na Musamman';
+  String get notSignedIn => 'Not signed in';
 
   @override
-  String get customPath => 'Hanyar Al\'ada';
+  String signOutOf(String service) {
+    return 'Sign out of $service?';
+  }
 
   @override
-  String get customPathDescription =>
-      'Saita hanya ta al\'ada don adana fayiloli\nDogon danna don cirewa';
+  String get checkForUpdates => 'Check for updates';
 
   @override
-  String get selectDirectory => 'Zaɓi directory';
+  String get checkForUpdatesDesc => 'Notify on a new GitHub release';
 
   @override
-  String get selectMediaService => 'Zaɓi Sabis na Mai jarida';
+  String get updateChannel => 'Update channel';
 
   @override
-  String get logFile => 'Fayil ɗin log';
+  String get channel => 'Channel';
 
   @override
-  String get logFileDescription => 'Raba fayil ɗin log ɗin';
+  String get stable => 'Stable';
 
   @override
-  String get restoreSettings => 'Mayar da Saituna';
+  String get preRelease => 'Pre-release';
 
   @override
-  String get differentCacheManager => 'Different Cache Manager';
+  String get alpha => 'Alpha';
 
   @override
-  String get differentCacheManagerDesc => 'Use different Image cache manager';
+  String get checkNow => 'Check now';
 
   @override
-  String get backupAndRestore => 'Backup & Restore';
+  String get userAgent => 'User-Agent';
 
   @override
-  String get backupAndRestoreDescription =>
-      'Save and restore the app preferences';
+  String get settingDefault => 'Default';
 
   @override
-  String get backup => 'Backup';
+  String get dnsOverHttps => 'DNS-over-HTTPS';
 
   @override
-  String get restore => 'Restore';
+  String get dnsDefault => 'Default (Cloudflare)';
 
   @override
-  String get webView => 'Duba yanar gizo';
+  String get proxy => 'Proxy';
 
   @override
-  String get developersHelpers => 'Developers/Helpers';
+  String get clearCookies => 'Clear cookies';
 
   @override
-  String get developersHelpersDesc => 'Dartotsu\'s unpaid labours';
+  String get clearCookiesDesc => 'Remove every stored cookie';
 
   @override
-  String get supportMaintainer =>
-      'Kuna son tallafawa Mai Gudanar da Dartotsu?\nYi la\'akari da Ba da Gudummawa';
+  String get clearCookiesConfirm =>
+      'Remove all stored cookies? This may sign you out of some sources.';
 
   @override
-  String get donationGoal => 'Babu manufa ta gudummawa a halin yanzu';
+  String get version => 'Version';
 
   @override
-  String get options => 'Zaɓuɓɓuka';
+  String get gitHub => 'GitHub';
 
   @override
-  String get ok => 'OK';
+  String get gitHubDesc => 'Source, issues and releases';
 
   @override
-  String get cancel => 'Soke';
+  String get discordDesc => 'Community and support';
 
   @override
-  String get yes => 'Ee';
+  String get donate => 'Buy me a coffee';
 
   @override
-  String get no => 'A\'a';
+  String get donateDesc => 'Support development';
+
+  @override
+  String get sectionColors => 'Colors';
+
+  @override
+  String get sectionDisplay => 'Display';
+
+  @override
+  String get sectionStyle => 'Style';
+
+  @override
+  String get sectionCommunity => 'Community';
+
+  @override
+  String get sectionAppInfo => 'App Info';
+
+  @override
+  String get sectionCache => 'Cache';
+
+  @override
+  String get sectionRequests => 'Requests';
+
+  @override
+  String get sectionDnsProxy => 'DNS & Proxy';
 }

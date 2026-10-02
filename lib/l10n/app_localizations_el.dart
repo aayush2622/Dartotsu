@@ -22,9 +22,6 @@ class AppLocalizationsEl extends AppLocalizations {
   String get mal => 'MyAnimeList';
 
   @override
-  String get kitsu => 'Kitsu';
-
-  @override
   String get simkl => 'Simkl';
 
   @override
@@ -46,271 +43,77 @@ class AppLocalizationsEl extends AppLocalizations {
   String get pasteTokenHint => 'Paste your access token';
 
   @override
-  String loggedInAs(Object name) {
-    return 'Logged in as $name';
-  }
-
-  @override
-  String logout(String type) {
-    return 'Αποσύνδεση $type';
-  }
-
-  @override
   String loginTo(String service) {
     return 'Σύνδεση στο $service';
   }
 
   @override
-  String get confirmLogout => 'Είστε σίγουροι ότι θέλετε να αποσυνδεθείτε;';
-
-  @override
-  String get anime => 'Άνιμε';
-
-  @override
-  String get manga => 'Manga';
-
-  @override
-  String get manhwa => 'Μανχούα';
-
-  @override
-  String get manhua => 'Manhua';
-
-  @override
-  String get novel => 'Μυθιστόρημα';
-
-  @override
-  String get ln => 'Ελαφρύ Μυθιστόρημα';
-
-  @override
-  String get home => 'Αρχική';
-
-  @override
-  String get search => 'Αναζήτηση';
-
-  @override
-  String get calendar => 'Ημερολόγιο';
-
-  @override
   String get settings => 'Ρυθμίσεις';
 
   @override
-  String get watch => 'Παρακολούθηση';
+  String get account => 'Λογαριασμός';
 
   @override
-  String get read => 'Ανάγνωση';
+  String get about => 'Σχετικά';
 
   @override
-  String get info => 'Πληροφορίες';
+  String get language => 'Γλώσσα';
 
   @override
-  String get comments => 'Σχόλια';
-
-  @override
-  String get addToList => 'Προσθήκη στη Λίστα';
-
-  @override
-  String get series => 'Σειρές';
-
-  @override
-  String get season => 'Σεζόν';
-
-  @override
-  String episode(int count) {
+  String extension(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'Επεισόδια',
-      one: 'Επεισόδιο',
+      other: 'Επεκτάσεις',
+      one: 'Επέκταση',
     );
     return '$_temp0';
   }
 
   @override
-  String chapter(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'Κεφάλαια',
-      one: 'Κεφάλαιο',
-    );
-    return '$_temp0';
-  }
+  String get ok => 'Εντάξει';
 
   @override
-  String volume(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'Τόμοι',
-      one: 'Τόμος',
-    );
-    return '$_temp0';
-  }
+  String get cancel => 'Ακύρωση';
 
   @override
-  String movie(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'Ταινίες',
-      one: 'Ταινία',
-    );
-    return '$_temp0';
-  }
+  String get yes => 'Ναι';
 
   @override
-  String get totalEpisodes => 'Επεισόδια';
+  String get no => 'Όχι';
 
   @override
-  String get totalChapters => 'Κεφάλαια';
+  String get save => 'Save';
 
   @override
-  String nextEpisodeRelease(int episode) {
-    return 'Το επεισόδιο $episode θα κυκλοφορήσει στο';
-  }
+  String get reset => 'Reset';
 
   @override
-  String get genres => 'Είδη';
+  String get clear => 'Clear';
 
   @override
-  String get scanlators => 'Μεταφραστές';
+  String get test => 'Test';
 
   @override
-  String list(String type) {
-    return '$type Λίστα';
-  }
+  String get testing => 'Testing…';
 
   @override
-  String get watching => 'Παρακολουθώντας';
+  String get resolving => 'Resolving…';
 
   @override
-  String get reading => 'Διαβάζοντας ανάγνωση';
+  String get none => 'None';
 
   @override
-  String get readStatus => 'Ανάγνωση';
+  String get selectMediaService => 'Επιλέξτε Media Service';
 
   @override
-  String get watchStatus => 'Παρακολούθησαν';
+  String get pickColor => 'Επιλέξτε χρώμα';
 
   @override
-  String planned(String type) {
-    return 'Σχεδιασμένο $type';
-  }
+  String get colorPickerDefault => 'Default';
 
   @override
-  String onHold(String type) {
-    return 'Σε Αναμονή $type';
-  }
-
-  @override
-  String get droppedAnime => 'Εγκαταλελειμμένο Anime';
-
-  @override
-  String get droppedManga => 'Εγκαταλελειμμένο Manga';
-
-  @override
-  String noDropped(String type) {
-    return 'Δεν έχετε εγκαταλείψει κανένα $type ακόμα.';
-  }
-
-  @override
-  String get continueReading => 'Συνέχεια Ανάγνωσης';
-
-  @override
-  String get continueWatching => 'Συνέχεια Παρακολούθησης';
-
-  @override
-  String browse(String type) {
-    return 'Περιήγηση $type';
-  }
-
-  @override
-  String trending(String type) {
-    return 'Επικρατεί $type';
-  }
-
-  @override
-  String popular(String type) {
-    return 'Δημοφιλές $type';
-  }
-
-  @override
-  String get topAiring => 'Κορυφαία Προβολή';
-
-  @override
-  String topRated(String type) {
-    return 'Κορυφαία Βαθμολογία $type';
-  }
-
-  @override
-  String get topScore => 'Top Score';
-
-  @override
-  String mostFavourite(String type) {
-    return 'Πιο Δημοφιλές $type';
-  }
-
-  @override
-  String get thisSeason => 'Αυτή η Σεζόν';
-
-  @override
-  String get nextSeason => 'Επόμενη Σεζόν';
-
-  @override
-  String get previousSeason => 'Προηγούμενη Σεζόν';
-
-  @override
-  String get recommended => 'Συνιστώμενο';
-
-  @override
-  String get recommendationsEmptyMessage =>
-      'Παρακολουθήστε/Διαβάστε κάποιο Anime ή Manga για να πάρετε Προτάσεις';
-
-  @override
-  String get recentUpdates => 'Πρόσφατες Ενημερώσεις';
-
-  @override
-  String get allCaughtUpNew => 'Όλα εντάξει, τι νέο υπάρχει;';
-
-  @override
-  String favorite(String type) {
-    return 'Αγαπημένο $type';
-  }
-
-  @override
-  String get favorites => 'Αγαπημένα';
-
-  @override
-  String get noFavourites =>
-      'Φαίνεται ότι δεν σας αρέσει τίποτα,\nΔοκιμάστε να προσθέσετε ένα σόου στα αγαπημένα σας για να το κρατήσετε εδώ.';
-
-  @override
-  String get noOnHold => 'Φαίνεται ότι δεν έχετε βάλει κάτι σε αναμονή.';
-
-  @override
-  String manageLayout(String service, String page) {
-    return 'Διαχείριση διάταξης σελίδας $page για $service';
-  }
-
-  @override
-  String manageLayoutDescription(String page) {
-    return 'Μπορείτε να διαχειριστείτε τη διάταξη της σελίδας $page σύροντας και αποθέτοντας τα αντικείμενα';
-  }
-
-  @override
-  String get gridView => 'Προβολή Πλέγματος';
-
-  @override
-  String get listView => 'Προβολή Λίστας';
-
-  @override
-  String get compactView => 'Συμπαγής Προβολή';
-
-  @override
-  String get layout => 'Διάταξη';
-
-  @override
-  String get sort => 'Ταξινόμηση';
+  String get colorPickerCustom => 'Εθιμο';
 
   @override
   String get utd => 'Από Κάτω προς Πάνω';
@@ -325,555 +128,193 @@ class AppLocalizationsEl extends AppLocalizations {
   String get ltr => 'Αριστερά δεξιά';
 
   @override
-  String get direction => 'Σκηνοθεσία';
+  String get searchSettings => 'Search settings';
 
   @override
-  String get episodeWatched => 'Επεισόδιο Παρακολουθημένο';
-
-  @override
-  String get chapterRead => 'Κεφάλαιο Διαβασμένο';
-
-  @override
-  String get outOf => 'έξω';
-
-  @override
-  String get totalOf => 'Total of Total';
-
-  @override
-  String get selected => 'Επιλέξτε';
-
-  @override
-  String get found => 'Θεμελιώ';
-
-  @override
-  String extension(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'Επεκτάσεις',
-      one: 'Επέκταση',
-    );
-    return '$_temp0';
+  String nothingMatches(String query) {
+    return 'Nothing matches \"$query\"';
   }
 
   @override
-  String available(String type) {
-    return 'Διαθέσιμο $type';
+  String searchCategory(String category) {
+    return 'Search $category';
   }
 
   @override
-  String installed(String type) {
-    return 'Εγκατεστημένο $type';
-  }
+  String get settingsAppearance => 'Appearance';
 
   @override
-  String get extensionsDescription =>
-      'Εγκαταστήστε και διαχειριστείτε επεκτάσεις για επιπλέον λειτουργικότητα';
+  String get settingsAppearanceDesc => 'Theme, colours, glass mode';
 
   @override
-  String get addAnimeRepo => 'Προσθέστε DU Repo';
+  String get settingsGeneral => 'General';
 
   @override
-  String get addAnimeRepoDesc => 'Προσθέστε το DU Repo από διάφορες πηγές';
+  String get settingsGeneralDesc => 'Language and behaviour';
 
   @override
-  String get addMangaRepo => 'Προσθέστε Manga Repo';
+  String get settingsAccountDesc => 'Tracking service and sign-in';
 
   @override
-  String get addMangaRepoDesc => 'Προσθέστε Manga Αποκάλυψη από διάφορες πηγές';
+  String get settingsUpdates => 'Updates';
 
   @override
-  String get addNovelRepo => 'Προσθήκη Novel Repo';
+  String get settingsUpdatesDesc => 'Release channel and checks';
 
   @override
-  String get addNovelRepoDesc => 'Add Novel Repo από διάφορες πηγές';
+  String get settingsNetwork => 'Network';
 
   @override
-  String get loadExtensionsIcon => 'Φόρες επεκτάσεις εικόνων';
+  String get settingsNetworkDesc => 'User-Agent, DNS, proxy, cookies';
 
   @override
-  String get loadExtensionsIconDesc => 'Αποδεικνύεται αν η σελίδα lags';
+  String get settingsAboutDesc => 'Version, links, support';
 
   @override
-  String get autoUpdate => 'Auto Update Auto Update';
+  String get amoledBlack => 'AMOLED black';
 
   @override
-  String get autoUpdateDesc => 'Αυτόματη ενημέρωση επεκτάσεων';
+  String get amoledBlackDesc => 'Pure black surfaces on dark mode';
 
   @override
-  String get installSourceToStart =>
-      'Εγκαταστήστε μια πηγή από σελίδα επέκτασης για να ξεκινήσετε';
+  String get glassMode => 'Glass mode';
 
   @override
-  String get author => 'Συγγραφέας';
+  String get glassModeDesc => 'Frosted surfaces over your library art';
 
   @override
-  String get averageDuration => 'Μέση Διάρκεια';
+  String get cardStyle => 'Card style';
 
   @override
-  String get characters => 'Χαρακτήρες';
-
-  @override
-  String get synopsis => 'Περίληψη';
-
-  @override
-  String get endDate => 'Ημερομηνία Λήξης';
-
-  @override
-  String get format => 'Μορφή';
-
-  @override
-  String get meanScore => 'Μέση Βαθμολογία';
-
-  @override
-  String get name => 'Όνομα';
-
-  @override
-  String get nameRomaji => 'Όνομα (Ρομάτζι)';
-
-  @override
-  String get popularity => 'Δημοτικότητα';
-
-  @override
-  String get relations => 'Σχέσεις';
-
-  @override
-  String get prequel => 'Προιστορία';
-
-  @override
-  String get sequel => 'Συνέχεια';
-
-  @override
-  String get source => 'Πηγή';
-
-  @override
-  String get staff => 'Προσωπικό';
-
-  @override
-  String get startDate => 'Ημερομηνία Έναρξης';
-
-  @override
-  String get status => 'Κατάσταση';
-
-  @override
-  String get studio => 'Στούντιο';
-
-  @override
-  String get synonyms => 'Συνώνυμα';
-
-  @override
-  String get tags => 'Ετικέτες';
-
-  @override
-  String get total => 'Σύνολο';
-
-  @override
-  String get collapseText => 'εμφάνιση λιγότερων';
-
-  @override
-  String get expandText => 'εμφάνιση περισσότερων';
-
-  @override
-  String get comingSoon => 'Έρχεται Σύντομα';
-
-  @override
-  String get wrongTitle => 'Λάθος τίτλος?';
-
-  @override
-  String get missingResults => 'Missing Results?';
-
-  @override
-  String get youTube => 'Παίξτε στο YouTube?';
-
-  @override
-  String get mediaNotFound => 'Media που δεν βρέθηκαν';
-
-  @override
-  String get noChapterFound => 'Κανένα κεφάλαιο δεν βρέθηκε';
-
-  @override
-  String activity(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'Δραστηριότητες',
-      one: 'Δραστηριότητα',
-    );
-    return '$_temp0';
-  }
-
-  @override
-  String get language => 'Γλώσσα';
-
-  @override
-  String get account => 'Λογαριασμός';
-
-  @override
-  String get accountDescription =>
-      'Διαχειριστείτε εύκολα τους λογαριασμούς σας στο AniList, MAL και Discord';
-
-  @override
-  String get common => 'Κοινό';
-
-  @override
-  String get commonDescription =>
-      'Πρόσβαση στις γενικές ρυθμίσεις για αδιάλειπτη χρήση της εφαρμογής';
-
-  @override
-  String get animeDescription =>
-      'Προσαρμόστε και διαχειριστείτε τις προτιμήσεις σας για το άνιμε';
-
-  @override
-  String get mangaDescription =>
-      'Οργανώστε και προσαρμόστε την εμπειρία σας με το μάνγκα';
-
-  @override
-  String get about => 'Σχετικά';
-
-  @override
-  String get aboutDescription =>
-      'Μάθετε περισσότερα για την εφαρμογή και τους δημιουργούς της';
-
-  @override
-  String get notifications => 'Ειδοποιήσεις';
-
-  @override
-  String get notificationsDescription =>
-      'Ρυθμίστε πώς και πότε θα λαμβάνετε ειδοποιήσεις';
-
-  @override
-  String get offlineMode => 'Λειτουργία Εκτός Σύνδεσης';
-
-  @override
-  String get offlineModeDescription =>
-      'Χρησιμοποιήστε την εφαρμογή χωρίς σύνδεση στο διαδίκτυο';
-
-  @override
-  String get incognitoMode => 'Λειτουργία Ανώνυμης Περιήγησης';
-
-  @override
-  String get incognitoModeDescription =>
-      'Περιήγηση χωρίς αποθήκευση της δραστηριότητάς σας';
-
-  @override
-  String get hidePrivate => 'Απόκρυψη Ιδιωτικού';
-
-  @override
-  String get hidePrivateDescription =>
-      'Απόκρυψη ιδιωτικών σειρών από την αρχική σελίδα.';
-
-  @override
-  String get hiddenMedia => 'Κρυφό Υλικό';
-
-  @override
-  String get noHiddenMediaFound => 'Δεν βρέθηκε κρυφό υλικό';
-
-  @override
-  String get playerSettingsTitle => 'Ρυθμίσεις Αναπαραγωγέα';
-
-  @override
-  String get playerSettingsDesc => 'Αλλάξτε ρυθμίσεις παίκτη';
-
-  @override
-  String get speed => 'Ταχύτητα';
-
-  @override
-  String get speedDescription => 'Προεπιλεγμένη ταχύτητα για τον αναπαραγωγέα';
-
-  @override
-  String get cursedSpeed => 'Καταραμένη Ταχύτητα';
-
-  @override
-  String get cursedSpeedDescription =>
-      'Για άτομα που είναι πολύ απασχολημένα με τη ζωή';
-
-  @override
-  String get resizeMode => 'Λειτουργία Μεγέθυνσης';
-
-  @override
-  String get resizeModeDescription =>
-      'Προεπιλεγμένη λειτουργία μεγέθυνσης για τον αναπαραγωγέα';
-
-  @override
-  String get skipButton => 'Κουμπί Παράλειψης';
-
-  @override
-  String get skipButtonDescription => 'Διάρκεια κουμπιού παράλειψης';
-
-  @override
-  String get thumbLessSeekBar => 'ThumbLess Seek Bar';
-
-  @override
-  String get thumbLessSeekBarDesc =>
-      'Αφαιρέστε τον αντίχειρα από το κέντρο αναζήτησης';
-
-  @override
-  String get customMPV => 'Custom MPVV Συμμόρφωση';
-
-  @override
-  String customMPVDescription(String path) {
-    return 'Καθορίστε αυτή την επιλογή για να χρησιμοποιήσετε το δικό σας αρχείο διαμόρφωσης MPV. Τοποθετήστε το έθιμο σας σε: $path';
-  }
-
-  @override
-  String get adjustBrightness => 'Adjust Brightness';
-
-  @override
-  String get adjustBrightnessDescription =>
-      'Enable brightness adjustment by swiping up/down on the left side of the screen';
-
-  @override
-  String get adjustVolume => 'Adjust Volume';
-
-  @override
-  String get adjustVolumeDescription =>
-      'Enable volume adjustment by swiping up/down on the right side of the screen';
-
-  @override
-  String get subtitles => 'Υπότιτλοι';
-
-  @override
-  String get showSubtitles => 'Εμφάνιση Υποτίτλων';
-
-  @override
-  String get showSubtitlesDescription => 'Εμφάνιση υποτίτλων από προεπιλογή';
-
-  @override
-  String get subtitlePreview => 'Προεπισκόπηση Υποτίτλων';
-
-  @override
-  String get fontColor => 'Χρώμα Γραμματοσειράς';
-
-  @override
-  String get fontColorDescription => 'Χρώμα γραμματοσειράς υποτίτλων';
-
-  @override
-  String get fontFamily => 'Οικογένεια Γραμματοσειράς';
-
-  @override
-  String get fontFamilyDescription => 'Οικογένεια γραμματοσειράς υποτίτλων';
-
-  @override
-  String get fontSize => 'Μέγεθος Γραμματοσειράς';
-
-  @override
-  String get fontSizeDescription => 'Μέγεθος γραμματοσειράς υποτίτλων';
-
-  @override
-  String get fontWeight => 'Βάρος Γραμματοσειράς';
-
-  @override
-  String get fontWeightDescription => 'Βάρος γραμματοσειράς υποτίτλων';
-
-  @override
-  String get backgroundColor => 'Χρώμα Φόντου';
-
-  @override
-  String get backgroundColorDescription => 'Χρώμα φόντου υποτίτλων';
-
-  @override
-  String get outlineColor => 'Χρώμα Περιγράμματος';
-
-  @override
-  String get outlineColorDescription => 'Χρώμα περιγράμματος υποτίτλων';
-
-  @override
-  String get bottomPadding => 'Κάτω Περιθώριο';
-
-  @override
-  String get bottomPaddingDescription => 'Κάτω περιθώριο υποτίτλων';
-
-  @override
-  String get useLibass => 'Use Libass';
-
-  @override
-  String get useLibassDescription =>
-      'Use Libass for subtitle rendering (overrides other subtitle settings)';
-
-  @override
-  String get useGpuNext => 'Use gpu-next';
-
-  @override
-  String get useGpuNextDescription =>
-      'New rendering backend (may cause visual artifacts)';
-
-  @override
-  String get autoPlayNextEpisode => 'Auto Play Next Episode';
-
-  @override
-  String get autoPlayNextEpisodeDescription =>
-      'Automatically play the next episode when the current one ends';
-
-  @override
-  String get automaticSourceSelection => 'Automatic Source Selection Method';
-
-  @override
-  String get automaticSourceSelectionDescription =>
-      'Which method to use for automatic source selection';
-
-  @override
-  String get perAnimePlayerSettings => 'Per-Anime Player Settings';
-
-  @override
-  String get perAnimePlayerSettingsDesc =>
-      'Use different player settings for each anime (disabling may override existing per-anime settings)';
-
-  @override
-  String get readerSettings => 'Επιλογές Reader';
-
-  @override
-  String get readerSettingsDesc => 'Αλλαγή ρυθμίσεις αναγνώστη';
-
-  @override
-  String get spacedPages => 'Spaced Σελίδες';
-
-  @override
-  String get spacedPagesDesc => 'Προσθέστε χώρο μεταξύ σελίδων';
-
-  @override
-  String get hideScrollbar => 'Απόκρυψη γραμμής κύλισης';
-
-  @override
-  String get hideScrollbarDesc => 'Hide Scrollbar κατά την ανάγνωση';
-
-  @override
-  String get hidePageNumber => 'Απόκρυψη αριθμού σελίδας';
-
-  @override
-  String get hidePageNumberDesc => 'Αριθμός σελίδας Hide κατά την ανάγνωση';
-
-  @override
-  String get theme => 'Θέμα';
-
-  @override
-  String get themeDescription =>
-      'Προσαρμόστε την εμφάνιση και την ατμόσφαιρα της εφαρμογής σας';
-
-  @override
-  String get darkMode => 'Σκοτεινή Λειτουργία';
-
-  @override
-  String get enableDarkMode => 'Ενεργοποιήστε τη Σκοτεινή Λειτουργία';
-
-  @override
-  String get glassEffect => 'Γυάλινη επίδραση';
-
-  @override
-  String get glassEffectDescription =>
-      'Δίνει μια παγετοποιημένη γυάλινη επίδραση στην εφαρμογή';
-
-  @override
-  String get coverTheme => 'Χρησιμοποιήστε την κάλυψη';
-
-  @override
-  String get coverThemeDescription =>
-      'Χρησιμοποιήστε την εικόνα των μέσων ενημέρωσης ως θέμα χρώμα';
+  String get cardStyleDesc => 'Title placement, size, progress and badges';
 
   @override
   String get materialYou => 'Material You';
 
   @override
-  String get materialYouDescription =>
-      'Χρησιμοποιήστε το ίδιο χρώμα με το φόντο σας';
+  String get materialYouDesc => 'Dynamic colour from the system';
 
   @override
-  String get customTheme => 'Custom Custom Custom Custom Custom Theme';
+  String get customAccent => 'Custom accent colour';
 
   @override
-  String get customThemeDescription =>
-      'Χρησιμοποιήστε το δικό σας χρώμα για το θέμα';
+  String get customAccentDesc => 'Pick your own primary colour';
 
   @override
-  String get oledThemeVariant => 'Παραλλαγή Θέματος OLED';
+  String get customAccentDisabledDesc =>
+      'Turn off Material You to use a custom colour';
 
   @override
-  String get oledThemeVariantDescription => 'Ενεργοποιήστε τη Λειτουργία OLED';
+  String get themeMode => 'Theme mode';
 
   @override
-  String get colorPicker => 'Επιλογέας Χρώματος';
+  String get mode => 'Mode';
 
   @override
-  String get pickColor => 'Επιλέξτε χρώμα';
+  String get trackingService => 'Tracking service';
 
   @override
-  String get colorPickerDescription => 'Επιλέξτε ένα χρώμα';
+  String get signOut => 'Sign out';
 
   @override
-  String get colorPickerDefault => 'Default';
+  String get signIn => 'Sign in';
 
   @override
-  String get colorPickerCustom => 'Εθιμο';
+  String get notSignedIn => 'Not signed in';
 
   @override
-  String get customPath => 'Προσαρμοσμένη διαδρομή';
+  String signOutOf(String service) {
+    return 'Sign out of $service?';
+  }
 
   @override
-  String get customPathDescription =>
-      'Ορίστε ένα προσαρμοσμένο μονοπάτι για να αποθηκεύσετε αρχεία\nLong Press για να αφαιρέσετε';
+  String get checkForUpdates => 'Check for updates';
 
   @override
-  String get selectDirectory => 'Επιλέξτε έναν κατάλογο';
+  String get checkForUpdatesDesc => 'Notify on a new GitHub release';
 
   @override
-  String get selectMediaService => 'Επιλέξτε Media Service';
+  String get updateChannel => 'Update channel';
 
   @override
-  String get logFile => 'Log File';
+  String get channel => 'Channel';
 
   @override
-  String get logFileDescription => 'Μοιραστείτε το αρχείο καταγραφής';
+  String get stable => 'Stable';
 
   @override
-  String get restoreSettings => 'Επαναφορά Ρυθμίσεων';
+  String get preRelease => 'Pre-release';
 
   @override
-  String get differentCacheManager => 'Διαφορετική Cache Manager';
+  String get alpha => 'Alpha';
 
   @override
-  String get differentCacheManagerDesc =>
-      'Χρησιμοποιήστε διαφορετικό διαχειριστή μνήμης εικόνας';
+  String get checkNow => 'Check now';
 
   @override
-  String get backupAndRestore => 'Backup & Restore';
+  String get userAgent => 'User-Agent';
 
   @override
-  String get backupAndRestoreDescription =>
-      'Save and restore the app preferences';
+  String get settingDefault => 'Default';
 
   @override
-  String get backup => 'Backup';
+  String get dnsOverHttps => 'DNS-over-HTTPS';
 
   @override
-  String get restore => 'Restore';
+  String get dnsDefault => 'Default (Cloudflare)';
 
   @override
-  String get webView => 'Web View';
+  String get proxy => 'Proxy';
 
   @override
-  String get developersHelpers => 'Προγραμματιστές/Βοηθοί';
+  String get clearCookies => 'Clear cookies';
 
   @override
-  String get developersHelpersDesc => 'Η μη αμειβόμενη εργασία του Dartotsu';
+  String get clearCookiesDesc => 'Remove every stored cookie';
 
   @override
-  String get supportMaintainer =>
-      'Θέλετε να υποστηρίξετε τον συντηρητή του Dartotsu;\nΣκεφτείτε να δωρίσετε';
+  String get clearCookiesConfirm =>
+      'Remove all stored cookies? This may sign you out of some sources.';
 
   @override
-  String get donationGoal => 'Δεν υπάρχει στόχος δωρεάς αυτή τη στιγμή';
+  String get version => 'Version';
 
   @override
-  String get options => 'Ρυθμίσεις';
+  String get gitHub => 'GitHub';
 
   @override
-  String get ok => 'Εντάξει';
+  String get gitHubDesc => 'Source, issues and releases';
 
   @override
-  String get cancel => 'Ακύρωση';
+  String get discordDesc => 'Community and support';
 
   @override
-  String get yes => 'Ναι';
+  String get donate => 'Buy me a coffee';
 
   @override
-  String get no => 'Όχι';
+  String get donateDesc => 'Support development';
+
+  @override
+  String get sectionColors => 'Colors';
+
+  @override
+  String get sectionDisplay => 'Display';
+
+  @override
+  String get sectionStyle => 'Style';
+
+  @override
+  String get sectionCommunity => 'Community';
+
+  @override
+  String get sectionAppInfo => 'App Info';
+
+  @override
+  String get sectionCache => 'Cache';
+
+  @override
+  String get sectionRequests => 'Requests';
+
+  @override
+  String get sectionDnsProxy => 'DNS & Proxy';
 }

@@ -22,9 +22,6 @@ class AppLocalizationsHe extends AppLocalizations {
   String get mal => 'MyAnimeList';
 
   @override
-  String get kitsu => 'Kitsu';
-
-  @override
   String get simkl => 'Simkl';
 
   @override
@@ -46,271 +43,77 @@ class AppLocalizationsHe extends AppLocalizations {
   String get pasteTokenHint => 'Paste your access token';
 
   @override
-  String loggedInAs(Object name) {
-    return 'Logged in as $name';
-  }
-
-  @override
-  String logout(String type) {
-    return 'התנתק $type';
-  }
-
-  @override
   String loginTo(String service) {
     return 'התחבר ל-$service';
   }
 
   @override
-  String get confirmLogout => 'האם אתה בטוח שברצונך להתנתק?';
-
-  @override
-  String get anime => 'אנימה';
-
-  @override
-  String get manga => 'מנגה';
-
-  @override
-  String get manhwa => 'Manhwa';
-
-  @override
-  String get manhua => 'ישוע';
-
-  @override
-  String get novel => 'רומן';
-
-  @override
-  String get ln => 'רומן קל';
-
-  @override
-  String get home => 'בית';
-
-  @override
-  String get search => 'חיפוש';
-
-  @override
-  String get calendar => 'לוח שנה';
-
-  @override
   String get settings => 'הגדרות';
 
   @override
-  String get watch => 'צפה';
+  String get account => 'חשבון';
 
   @override
-  String get read => 'קרא';
+  String get about => 'אודות';
 
   @override
-  String get info => 'מידע';
+  String get language => 'שפה';
 
   @override
-  String get comments => 'תגובות';
-
-  @override
-  String get addToList => 'הוסף לרשימה';
-
-  @override
-  String get series => 'סדרה';
-
-  @override
-  String get season => 'עונה';
-
-  @override
-  String episode(int count) {
+  String extension(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'סדרות',
-      one: 'פרק',
+      other: 'תוספים',
+      one: 'תוסף',
     );
     return '$_temp0';
   }
 
   @override
-  String chapter(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'פרקים',
-      one: 'פרק',
-    );
-    return '$_temp0';
-  }
+  String get ok => 'אוקי';
 
   @override
-  String volume(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'כרכים',
-      one: 'כרך',
-    );
-    return '$_temp0';
-  }
+  String get cancel => 'ביטול';
 
   @override
-  String movie(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'סרטים',
-      one: 'סרט',
-    );
-    return '$_temp0';
-  }
+  String get yes => 'כן';
 
   @override
-  String get totalEpisodes => 'סדרות';
+  String get no => 'לא';
 
   @override
-  String get totalChapters => 'פרקים';
+  String get save => 'Save';
 
   @override
-  String nextEpisodeRelease(int episode) {
-    return 'שם הסרטון: X8X ישוחרר';
-  }
+  String get reset => 'Reset';
 
   @override
-  String get genres => 'ז\'אנרים';
+  String get clear => 'Clear';
 
   @override
-  String get scanlators => 'מתרגמים';
+  String get test => 'Test';
 
   @override
-  String list(String type) {
-    return 'רשימת $type';
-  }
+  String get testing => 'Testing…';
 
   @override
-  String get watching => 'צפייה';
+  String get resolving => 'Resolving…';
 
   @override
-  String get reading => 'קריאה לקריאה';
+  String get none => 'None';
 
   @override
-  String get readStatus => 'קרא';
+  String get selectMediaService => 'שירות מדיה נבחר';
 
   @override
-  String get watchStatus => 'צפו';
+  String get pickColor => 'בחר צבע';
 
   @override
-  String planned(String type) {
-    return '$type מתוכנן';
-  }
+  String get colorPickerDefault => 'Default';
 
   @override
-  String onHold(String type) {
-    return '$type בהמתנה';
-  }
-
-  @override
-  String get droppedAnime => 'אנימה מבוטלת';
-
-  @override
-  String get droppedManga => 'מנגה מבוטלת';
-
-  @override
-  String noDropped(String type) {
-    return 'לא ביטלת אף $type עדיין.';
-  }
-
-  @override
-  String get continueReading => 'המשך לקרוא';
-
-  @override
-  String get continueWatching => 'המשך לצפות';
-
-  @override
-  String browse(String type) {
-    return 'עיין ב-$type';
-  }
-
-  @override
-  String trending(String type) {
-    return '$type במגמה';
-  }
-
-  @override
-  String popular(String type) {
-    return '$type פופולרי';
-  }
-
-  @override
-  String get topAiring => 'משודרים מובילים';
-
-  @override
-  String topRated(String type) {
-    return '$type בעלי הדירוג הגבוה ביותר';
-  }
-
-  @override
-  String get topScore => 'Top Score';
-
-  @override
-  String mostFavourite(String type) {
-    return '$type המועדף ביותר';
-  }
-
-  @override
-  String get thisSeason => 'העונה הנוכחית';
-
-  @override
-  String get nextSeason => 'העונה הבאה';
-
-  @override
-  String get previousSeason => 'העונה הקודמת';
-
-  @override
-  String get recommended => 'מומלץ';
-
-  @override
-  String get recommendationsEmptyMessage =>
-      'צפה/קרא קצת אנימה או מנגה כדי לקבל המלצות';
-
-  @override
-  String get recentUpdates => 'עדכונים אחרונים';
-
-  @override
-  String get allCaughtUpNew => 'סיימת הכול, מה חדש?';
-
-  @override
-  String favorite(String type) {
-    return '$type מועדף';
-  }
-
-  @override
-  String get favorites => 'מועדפים';
-
-  @override
-  String get noFavourites =>
-      'נראה שאתה לא אוהב כלום,\nנסה לסמן סדרה למועדפים כדי לשמור אותה כאן.';
-
-  @override
-  String get noOnHold => 'נראה שלא שמת שום דבר בהמתנה.';
-
-  @override
-  String manageLayout(String service, String page) {
-    return 'נהל את הפריסה של דף $page עבור $service';
-  }
-
-  @override
-  String manageLayoutDescription(String page) {
-    return 'באפשרותך לנהל את פריסת דף $page על ידי גרירה ושחרור של הפריטים';
-  }
-
-  @override
-  String get gridView => 'תצוגת רשת';
-
-  @override
-  String get listView => 'רשימת View';
-
-  @override
-  String get compactView => 'תצוגה קומפקטית';
-
-  @override
-  String get layout => 'Layout';
-
-  @override
-  String get sort => 'מיין';
+  String get colorPickerCustom => 'מותאם אישית';
 
   @override
   String get utd => 'מלמעלה למטה';
@@ -325,537 +128,193 @@ class AppLocalizationsHe extends AppLocalizations {
   String get ltr => 'לשמאל to right';
 
   @override
-  String get direction => 'כיוון';
+  String get searchSettings => 'Search settings';
 
   @override
-  String get episodeWatched => 'פרק נצפה';
-
-  @override
-  String get chapterRead => 'פרק נקרא';
-
-  @override
-  String get outOf => 'בחוץ';
-
-  @override
-  String get totalOf => 'Total of';
-
-  @override
-  String get selected => 'נבחר';
-
-  @override
-  String get found => 'נמצאו';
-
-  @override
-  String extension(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'תוספים',
-      one: 'תוסף',
-    );
-    return '$_temp0';
+  String nothingMatches(String query) {
+    return 'Nothing matches \"$query\"';
   }
 
   @override
-  String available(String type) {
-    return '$type זמין';
+  String searchCategory(String category) {
+    return 'Search $category';
   }
 
   @override
-  String installed(String type) {
-    return '$type מותקן';
-  }
+  String get settingsAppearance => 'Appearance';
 
   @override
-  String get extensionsDescription => 'התקן ונהל הרחבות לפונקציות נוספות';
+  String get settingsAppearanceDesc => 'Theme, colours, glass mode';
 
   @override
-  String get addAnimeRepo => 'תגית: Anime Repo';
+  String get settingsGeneral => 'General';
 
   @override
-  String get addAnimeRepoDesc => 'הוסף Anime Repo ממקורות שונים';
+  String get settingsGeneralDesc => 'Language and behaviour';
 
   @override
-  String get addMangaRepo => 'תגית: Manga Repo';
+  String get settingsAccountDesc => 'Tracking service and sign-in';
 
   @override
-  String get addMangaRepoDesc => 'הוסף Manga Repo ממקורות שונים';
+  String get settingsUpdates => 'Updates';
 
   @override
-  String get addNovelRepo => 'תגית: Repo';
+  String get settingsUpdatesDesc => 'Release channel and checks';
 
   @override
-  String get addNovelRepoDesc => 'הוסף הרומן Repo ממקורות שונים';
+  String get settingsNetwork => 'Network';
 
   @override
-  String get loadExtensionsIcon => 'תגית: growth';
+  String get settingsNetworkDesc => 'User-Agent, DNS, proxy, cookies';
 
   @override
-  String get loadExtensionsIconDesc => 'להשבית אם הסיומת דף lags';
+  String get settingsAboutDesc => 'Version, links, support';
 
   @override
-  String get autoUpdate => 'עדכון אוטומטי';
+  String get amoledBlack => 'AMOLED black';
 
   @override
-  String get autoUpdateDesc => 'הרחבות עדכון אוטומטי';
+  String get amoledBlackDesc => 'Pure black surfaces on dark mode';
 
   @override
-  String get installSourceToStart => 'התקנת מקור מדף הרחבה כדי להתחיל';
+  String get glassMode => 'Glass mode';
 
   @override
-  String get author => 'Author';
+  String get glassModeDesc => 'Frosted surfaces over your library art';
 
   @override
-  String get averageDuration => 'משך ממוצע';
+  String get cardStyle => 'Card style';
 
   @override
-  String get characters => 'דמויות';
-
-  @override
-  String get synopsis => 'תקציר';
-
-  @override
-  String get endDate => 'תאריך סיום';
-
-  @override
-  String get format => 'פורמט';
-
-  @override
-  String get meanScore => 'ציון ממוצע';
-
-  @override
-  String get name => 'שם השם';
-
-  @override
-  String get nameRomaji => 'שם (רומאג\'י)';
-
-  @override
-  String get popularity => 'פופולריות';
-
-  @override
-  String get relations => 'יחסים';
-
-  @override
-  String get prequel => 'שאלה';
-
-  @override
-  String get sequel => 'SEQUEL';
-
-  @override
-  String get source => 'מקור Source';
-
-  @override
-  String get staff => 'צוות';
-
-  @override
-  String get startDate => 'התחל תאריך';
-
-  @override
-  String get status => 'סטטוס';
-
-  @override
-  String get studio => 'סטודיו Studio';
-
-  @override
-  String get synonyms => 'מילים נרדפות';
-
-  @override
-  String get tags => 'תגיות';
-
-  @override
-  String get total => 'Total';
-
-  @override
-  String get collapseText => 'הצג פחות';
-
-  @override
-  String get expandText => 'הצג עוד';
-
-  @override
-  String get comingSoon => 'בקרוב';
-
-  @override
-  String get wrongTitle => 'כותרת שגויה?';
-
-  @override
-  String get missingResults => 'Missing Results?';
-
-  @override
-  String get youTube => 'לשחק ב- YouTube?';
-
-  @override
-  String get mediaNotFound => 'מדיה לא נמצאה';
-
-  @override
-  String get noChapterFound => 'שום פרק לא מצא';
-
-  @override
-  String activity(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'פעילויות',
-      one: 'פעילות',
-    );
-    return '$_temp0';
-  }
-
-  @override
-  String get language => 'שפה';
-
-  @override
-  String get account => 'חשבון';
-
-  @override
-  String get accountDescription =>
-      'נהל את החשבונות שלך ב-AniList, MAL ו-Discord בקלות';
-
-  @override
-  String get common => 'הגדרות כלליות';
-
-  @override
-  String get commonDescription => 'גישה להגדות כלליות לשימוש נוח באפליקציה';
-
-  @override
-  String get animeDescription => 'התאם אישית ונהל את העדפות האנימה שלך';
-
-  @override
-  String get mangaDescription => 'ארגן והתאם אישית את חווית המנגה שלך';
-
-  @override
-  String get about => 'אודות';
-
-  @override
-  String get aboutDescription => 'למד עוד על האפליקציה והיוצרים שלה';
-
-  @override
-  String get notifications => 'התראות';
-
-  @override
-  String get notificationsDescription => 'הגדר איך ומתי תקבל התראות';
-
-  @override
-  String get offlineMode => 'מצב לא מקוון';
-
-  @override
-  String get offlineModeDescription => 'השתמש באפליקציה ללא חיבור לאינטרנט';
-
-  @override
-  String get incognitoMode => 'מצב גלישה פרטית';
-
-  @override
-  String get incognitoModeDescription => 'גלוש מבלי לשמור את הפעילות שלך';
-
-  @override
-  String get hidePrivate => 'הסתר פרטי';
-
-  @override
-  String get hidePrivateDescription => 'הסתר סדרות פרטיות מעמוד הבית.';
-
-  @override
-  String get hiddenMedia => 'מדיה מוסתרת';
-
-  @override
-  String get noHiddenMediaFound => 'לא נמצאה מדיה מוסתרת';
-
-  @override
-  String get playerSettingsTitle => 'הגדרות נגן';
-
-  @override
-  String get playerSettingsDesc => 'שינוי הגדרות השחקן';
-
-  @override
-  String get speed => 'מהירות';
-
-  @override
-  String get speedDescription => 'מהירות ברירת מחדל לנגן';
-
-  @override
-  String get cursedSpeed => 'מהירות מקוללת';
-
-  @override
-  String get cursedSpeedDescription => 'למי שעסוקים מדי בחיים';
-
-  @override
-  String get resizeMode => 'מצב שינוי גודל';
-
-  @override
-  String get resizeModeDescription => 'מצב ברירת מחדל לשינוי גודל בנגן';
-
-  @override
-  String get skipButton => 'כפתור דילוג';
-
-  @override
-  String get skipButtonDescription => 'משך הזמן של כפתור הדילוג';
-
-  @override
-  String get thumbLessSeekBar => 'שם הסרטון: ThumbLess Seek Bar';
-
-  @override
-  String get thumbLessSeekBarDesc => 'להסיר את האגודל מהבר המבוקש';
-
-  @override
-  String get customMPV => 'MPV המונחים:';
-
-  @override
-  String customMPVDescription(String path) {
-    return 'אפשרות זו להשתמש קובץ התצורה MPV שלך. הניחו את התצורה המותאמות אישית שלכם ב-X88X';
-  }
-
-  @override
-  String get adjustBrightness => 'Adjust Brightness';
-
-  @override
-  String get adjustBrightnessDescription =>
-      'Enable brightness adjustment by swiping up/down on the left side of the screen';
-
-  @override
-  String get adjustVolume => 'Adjust Volume';
-
-  @override
-  String get adjustVolumeDescription =>
-      'Enable volume adjustment by swiping up/down on the right side of the screen';
-
-  @override
-  String get subtitles => 'כתוביות';
-
-  @override
-  String get showSubtitles => 'הצג כתוביות';
-
-  @override
-  String get showSubtitlesDescription => 'הצג כתוביות כברירת מחדל';
-
-  @override
-  String get subtitlePreview => 'תצוגה מקדימה של כתוביות';
-
-  @override
-  String get fontColor => 'צבע גופן';
-
-  @override
-  String get fontColorDescription => 'צבע גופן לכותרת';
-
-  @override
-  String get fontFamily => 'משפחת גופנים';
-
-  @override
-  String get fontFamilyDescription => 'משפחת גופנים לכותרת';
-
-  @override
-  String get fontSize => 'גודל גופן';
-
-  @override
-  String get fontSizeDescription => 'גודל גופן לכותרת';
-
-  @override
-  String get fontWeight => 'משקל גופן';
-
-  @override
-  String get fontWeightDescription => 'משקל גופן לכותרת';
-
-  @override
-  String get backgroundColor => 'צבע רקע';
-
-  @override
-  String get backgroundColorDescription => 'צבע רקע הכותרת';
-
-  @override
-  String get outlineColor => 'צבע קו מתאר';
-
-  @override
-  String get outlineColorDescription => 'צבע קו המתאר לכותרת';
-
-  @override
-  String get bottomPadding => 'מרווח תחתון';
-
-  @override
-  String get bottomPaddingDescription => 'מרווח תחתון לכותרת';
-
-  @override
-  String get useLibass => 'Use Libass';
-
-  @override
-  String get useLibassDescription =>
-      'Use Libass for subtitle rendering (overrides other subtitle settings)';
-
-  @override
-  String get useGpuNext => 'Use gpu-next';
-
-  @override
-  String get useGpuNextDescription =>
-      'New rendering backend (may cause visual artifacts)';
-
-  @override
-  String get autoPlayNextEpisode => 'Auto Play Next Episode';
-
-  @override
-  String get autoPlayNextEpisodeDescription =>
-      'Automatically play the next episode when the current one ends';
-
-  @override
-  String get automaticSourceSelection => 'Automatic Source Selection Method';
-
-  @override
-  String get automaticSourceSelectionDescription =>
-      'Which method to use for automatic source selection';
-
-  @override
-  String get perAnimePlayerSettings => 'Per-Anime Player Settings';
-
-  @override
-  String get perAnimePlayerSettingsDesc =>
-      'Use different player settings for each anime (disabling may override existing per-anime settings)';
-
-  @override
-  String get readerSettings => 'הגדרות קורא';
-
-  @override
-  String get readerSettingsDesc => 'שינוי הגדרות הקורא';
-
-  @override
-  String get spacedPages => 'דפי חלל';
-
-  @override
-  String get spacedPagesDesc => 'הוסף שטח בין דפים';
-
-  @override
-  String get hideScrollbar => 'תגית: Scrollbar';
-
-  @override
-  String get hideScrollbarDesc => 'Hide Galbar בזמן קריאה';
-
-  @override
-  String get hidePageNumber => 'תגית: Page Number';
-
-  @override
-  String get hidePageNumberDesc => 'מספר העמודים תוך כדי קריאה';
-
-  @override
-  String get theme => 'ערכת נושא';
-
-  @override
-  String get themeDescription =>
-      'התאם אישית את המראה והאווירה של האפליקציה שלך';
-
-  @override
-  String get darkMode => 'מצב כהה';
-
-  @override
-  String get enableDarkMode => 'הפעל מצב כהה';
-
-  @override
-  String get glassEffect => 'אפקט זכוכית';
-
-  @override
-  String get glassEffectDescription => 'נותן אפקט זכוכית קפוא לאפליקציית';
-
-  @override
-  String get coverTheme => 'ערכת נושא';
-
-  @override
-  String get coverThemeDescription => 'השתמש תמונת כיסוי מדיה כצבע נושא';
+  String get cardStyleDesc => 'Title placement, size, progress and badges';
 
   @override
   String get materialYou => 'Material You';
 
   @override
-  String get materialYouDescription => 'השתמש באותו צבע כמו ברקע שלך';
+  String get materialYouDesc => 'Dynamic colour from the system';
 
   @override
-  String get customTheme => 'מותאם אישית נושא';
+  String get customAccent => 'Custom accent colour';
 
   @override
-  String get customThemeDescription =>
-      'השתמש בצבעים האישיים שלך עבור ערכת הנושא';
+  String get customAccentDesc => 'Pick your own primary colour';
 
   @override
-  String get oledThemeVariant => 'גרסת נושא OLED';
+  String get customAccentDisabledDesc =>
+      'Turn off Material You to use a custom colour';
 
   @override
-  String get oledThemeVariantDescription => 'הפעל מצב OLED';
+  String get themeMode => 'Theme mode';
 
   @override
-  String get colorPicker => 'בוחר צבע';
+  String get mode => 'Mode';
 
   @override
-  String get pickColor => 'בחר צבע';
+  String get trackingService => 'Tracking service';
 
   @override
-  String get colorPickerDescription => 'בחר גוון';
+  String get signOut => 'Sign out';
 
   @override
-  String get colorPickerDefault => 'Default';
+  String get signIn => 'Sign in';
 
   @override
-  String get colorPickerCustom => 'מותאם אישית';
+  String get notSignedIn => 'Not signed in';
 
   @override
-  String get customPath => 'נתיב מותאם אישית';
+  String signOutOf(String service) {
+    return 'Sign out of $service?';
+  }
 
   @override
-  String get customPathDescription =>
-      'הגדרת נתיב מותאם אישית להצלת קבצים\nעיתונות ארוכה כדי להסיר';
+  String get checkForUpdates => 'Check for updates';
 
   @override
-  String get selectDirectory => 'בחר מנהל';
+  String get checkForUpdatesDesc => 'Notify on a new GitHub release';
 
   @override
-  String get selectMediaService => 'שירות מדיה נבחר';
+  String get updateChannel => 'Update channel';
 
   @override
-  String get logFile => 'תגית File';
+  String get channel => 'Channel';
 
   @override
-  String get logFileDescription => 'שתף את קובץ היומן';
+  String get stable => 'Stable';
 
   @override
-  String get restoreSettings => 'שחזר הגדרות';
+  String get preRelease => 'Pre-release';
 
   @override
-  String get differentCacheManager => 'מנהל Cache';
+  String get alpha => 'Alpha';
 
   @override
-  String get differentCacheManagerDesc => 'השתמש במנהל תמונות שונה';
+  String get checkNow => 'Check now';
 
   @override
-  String get backupAndRestore => 'Backup & Restore';
+  String get userAgent => 'User-Agent';
 
   @override
-  String get backupAndRestoreDescription =>
-      'Save and restore the app preferences';
+  String get settingDefault => 'Default';
 
   @override
-  String get backup => 'Backup';
+  String get dnsOverHttps => 'DNS-over-HTTPS';
 
   @override
-  String get restore => 'Restore';
+  String get dnsDefault => 'Default (Cloudflare)';
 
   @override
-  String get webView => 'Web View';
+  String get proxy => 'Proxy';
 
   @override
-  String get developersHelpers => 'מפתחים / Helpers';
+  String get clearCookies => 'Clear cookies';
 
   @override
-  String get developersHelpersDesc => 'העבודה ללא תשלום של דארטוטסו';
+  String get clearCookiesDesc => 'Remove every stored cookie';
 
   @override
-  String get supportMaintainer => 'רוצה לתמוך במתחזק של Dartotsu?\nשקול לתרום';
+  String get clearCookiesConfirm =>
+      'Remove all stored cookies? This may sign you out of some sources.';
 
   @override
-  String get donationGoal => 'אין יעד תרומות כרגע';
+  String get version => 'Version';
 
   @override
-  String get options => 'אפשרויות';
+  String get gitHub => 'GitHub';
 
   @override
-  String get ok => 'אוקי';
+  String get gitHubDesc => 'Source, issues and releases';
 
   @override
-  String get cancel => 'ביטול';
+  String get discordDesc => 'Community and support';
 
   @override
-  String get yes => 'כן';
+  String get donate => 'Buy me a coffee';
 
   @override
-  String get no => 'לא';
+  String get donateDesc => 'Support development';
+
+  @override
+  String get sectionColors => 'Colors';
+
+  @override
+  String get sectionDisplay => 'Display';
+
+  @override
+  String get sectionStyle => 'Style';
+
+  @override
+  String get sectionCommunity => 'Community';
+
+  @override
+  String get sectionAppInfo => 'App Info';
+
+  @override
+  String get sectionCache => 'Cache';
+
+  @override
+  String get sectionRequests => 'Requests';
+
+  @override
+  String get sectionDnsProxy => 'DNS & Proxy';
 }

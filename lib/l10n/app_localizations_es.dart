@@ -22,9 +22,6 @@ class AppLocalizationsEs extends AppLocalizations {
   String get mal => 'MyAnimeList';
 
   @override
-  String get kitsu => 'Kitsu';
-
-  @override
   String get simkl => 'Simkl';
 
   @override
@@ -46,271 +43,77 @@ class AppLocalizationsEs extends AppLocalizations {
   String get pasteTokenHint => 'Paste your access token';
 
   @override
-  String loggedInAs(Object name) {
-    return 'Logged in as $name';
-  }
-
-  @override
-  String logout(String type) {
-    return 'Cerrar sesión $type';
-  }
-
-  @override
   String loginTo(String service) {
     return 'Iniciar sesión en $service';
   }
 
   @override
-  String get confirmLogout => '¿Estás seguro de que quieres cerrar sesión?';
-
-  @override
-  String get anime => 'Anime';
-
-  @override
-  String get manga => 'Manga';
-
-  @override
-  String get manhwa => 'Manhwa';
-
-  @override
-  String get manhua => 'Manhua';
-
-  @override
-  String get novel => 'Novela';
-
-  @override
-  String get ln => 'Novela Ligera';
-
-  @override
-  String get home => 'Home';
-
-  @override
-  String get search => 'Buscar';
-
-  @override
-  String get calendar => 'Calendario';
-
-  @override
   String get settings => 'Ajustes';
 
   @override
-  String get watch => 'Ver';
+  String get account => 'Cuenta';
 
   @override
-  String get read => 'Leer';
+  String get about => 'Acerca de';
 
   @override
-  String get info => 'Info';
+  String get language => 'Idioma';
 
   @override
-  String get comments => 'Comentarios';
-
-  @override
-  String get addToList => 'Añadir a la lista';
-
-  @override
-  String get series => 'Serie';
-
-  @override
-  String get season => 'Temporada';
-
-  @override
-  String episode(int count) {
+  String extension(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'Episodios',
-      one: 'Episodio',
+      other: 'Extensiones',
+      one: 'Extensión',
     );
     return '$_temp0';
   }
 
   @override
-  String chapter(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'Capítulos',
-      one: 'Capítulo',
-    );
-    return '$_temp0';
-  }
+  String get ok => 'Aceptar';
 
   @override
-  String volume(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'Volúmenes',
-      one: 'Volumen',
-    );
-    return '$_temp0';
-  }
+  String get cancel => 'Cancelar';
 
   @override
-  String movie(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'Películas',
-      one: 'Película',
-    );
-    return '$_temp0';
-  }
+  String get yes => 'Sí';
 
   @override
-  String get totalEpisodes => 'Episodios';
+  String get no => 'No';
 
   @override
-  String get totalChapters => 'Capítulos';
+  String get save => 'Save';
 
   @override
-  String nextEpisodeRelease(int episode) {
-    return 'Episodio $episode será liberado';
-  }
+  String get reset => 'Reset';
 
   @override
-  String get genres => 'Géneros';
+  String get clear => 'Clear';
 
   @override
-  String get scanlators => 'Scanlators';
+  String get test => 'Test';
 
   @override
-  String list(String type) {
-    return 'Lista de $type';
-  }
+  String get testing => 'Testing…';
 
   @override
-  String get watching => 'Mirando';
+  String get resolving => 'Resolving…';
 
   @override
-  String get reading => 'Lectura';
+  String get none => 'None';
 
   @override
-  String get readStatus => 'Leer';
+  String get selectMediaService => 'Seleccionar servicio de medios';
 
   @override
-  String get watchStatus => 'Vigilado';
+  String get pickColor => 'Seleccionar un color';
 
   @override
-  String planned(String type) {
-    return 'Planeado $type';
-  }
+  String get colorPickerDefault => 'Default';
 
   @override
-  String onHold(String type) {
-    return 'En espera $type';
-  }
-
-  @override
-  String get droppedAnime => 'Anime abandonado';
-
-  @override
-  String get droppedManga => 'Manga abandonado';
-
-  @override
-  String noDropped(String type) {
-    return 'No has dejado ningún $type aún.';
-  }
-
-  @override
-  String get continueReading => 'Seguir leyendo';
-
-  @override
-  String get continueWatching => 'Seguir viendo';
-
-  @override
-  String browse(String type) {
-    return 'Explorar $type';
-  }
-
-  @override
-  String trending(String type) {
-    return '$type en tendencia';
-  }
-
-  @override
-  String popular(String type) {
-    return 'Popular $type';
-  }
-
-  @override
-  String get topAiring => 'Mejor emisión';
-
-  @override
-  String topRated(String type) {
-    return 'Mejor valorado $type';
-  }
-
-  @override
-  String get topScore => 'Top Score';
-
-  @override
-  String mostFavourite(String type) {
-    return 'Más favorito $type';
-  }
-
-  @override
-  String get thisSeason => 'Esta temporada';
-
-  @override
-  String get nextSeason => 'Próxima temporada';
-
-  @override
-  String get previousSeason => 'Temporada anterior';
-
-  @override
-  String get recommended => 'Recomendado';
-
-  @override
-  String get recommendationsEmptyMessage =>
-      'Mira/Lee algo de Anime o Manga para obtener recomendaciones';
-
-  @override
-  String get recentUpdates => 'Actualizaciones recientes';
-
-  @override
-  String get allCaughtUpNew => 'Todo al día, ¿qué hay de nuevo?';
-
-  @override
-  String favorite(String type) {
-    return 'Favorito $type';
-  }
-
-  @override
-  String get favorites => 'Favoritos';
-
-  @override
-  String get noFavourites =>
-      'Parece que no te gusta nada,\nPrueba a marcar un show como favorito para mantenerlo aquí.';
-
-  @override
-  String get noOnHold => 'Parece que no has puesto nada en espera.';
-
-  @override
-  String manageLayout(String service, String page) {
-    return 'Gestionar el diseño de la página $page para $service';
-  }
-
-  @override
-  String manageLayoutDescription(String page) {
-    return 'Puedes gestionar el diseño de la página $page arrastrando y soltando los elementos';
-  }
-
-  @override
-  String get gridView => 'Vista en cuadrícula';
-
-  @override
-  String get listView => 'Lista Ver';
-
-  @override
-  String get compactView => 'Vista compacta';
-
-  @override
-  String get layout => 'A ti';
-
-  @override
-  String get sort => 'Ordenar';
+  String get colorPickerCustom => 'Aduanas';
 
   @override
   String get utd => 'De Arriba a Abajo';
@@ -325,554 +128,193 @@ class AppLocalizationsEs extends AppLocalizations {
   String get ltr => 'Izquierda a la derecha';
 
   @override
-  String get direction => 'Dirección';
+  String get searchSettings => 'Search settings';
 
   @override
-  String get episodeWatched => 'Episodio visto';
-
-  @override
-  String get chapterRead => 'Capítulo leído';
-
-  @override
-  String get outOf => 'fuera de';
-
-  @override
-  String get totalOf => 'Suma de';
-
-  @override
-  String get selected => 'Seleccionado';
-
-  @override
-  String get found => 'Encontró';
-
-  @override
-  String extension(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'Extensiones',
-      one: 'Extensión',
-    );
-    return '$_temp0';
+  String nothingMatches(String query) {
+    return 'Nothing matches \"$query\"';
   }
 
   @override
-  String available(String type) {
-    return 'Disponible $type';
+  String searchCategory(String category) {
+    return 'Search $category';
   }
 
   @override
-  String installed(String type) {
-    return 'Instalado $type';
-  }
+  String get settingsAppearance => 'Appearance';
 
   @override
-  String get extensionsDescription =>
-      'Instala y administra extensiones para funcionalidad adicional';
+  String get settingsAppearanceDesc => 'Theme, colours, glass mode';
 
   @override
-  String get addAnimeRepo => 'Añadir Anime Repo';
+  String get settingsGeneral => 'General';
 
   @override
-  String get addAnimeRepoDesc => 'Añadir Anime Repo de diversas fuentes';
+  String get settingsGeneralDesc => 'Language and behaviour';
 
   @override
-  String get addMangaRepo => 'Añadir Manga Repo';
+  String get settingsAccountDesc => 'Tracking service and sign-in';
 
   @override
-  String get addMangaRepoDesc => 'Añadir Manga Repo from various sources';
+  String get settingsUpdates => 'Updates';
 
   @override
-  String get addNovelRepo => 'Agregar nuevo repositorio';
+  String get settingsUpdatesDesc => 'Release channel and checks';
 
   @override
-  String get addNovelRepoDesc =>
-      'Añadir un nuevo repositorio desde varias fuentes';
+  String get settingsNetwork => 'Network';
 
   @override
-  String get loadExtensionsIcon => 'Cargar Extensiones icono';
+  String get settingsNetworkDesc => 'User-Agent, DNS, proxy, cookies';
 
   @override
-  String get loadExtensionsIconDesc => 'Desactivar si extensiones página lags';
+  String get settingsAboutDesc => 'Version, links, support';
 
   @override
-  String get autoUpdate => 'Actualización automática';
+  String get amoledBlack => 'AMOLED black';
 
   @override
-  String get autoUpdateDesc => 'Extensiones de actualización automática';
+  String get amoledBlackDesc => 'Pure black surfaces on dark mode';
 
   @override
-  String get installSourceToStart =>
-      'Instalar una fuente de página de extensión para empezar';
+  String get glassMode => 'Glass mode';
 
   @override
-  String get author => 'Autor';
+  String get glassModeDesc => 'Frosted surfaces over your library art';
 
   @override
-  String get averageDuration => 'Duración promedio';
+  String get cardStyle => 'Card style';
 
   @override
-  String get characters => 'Personajes';
-
-  @override
-  String get synopsis => 'Sinopsis';
-
-  @override
-  String get endDate => 'Fecha final';
-
-  @override
-  String get format => 'Formato';
-
-  @override
-  String get meanScore => 'Significado';
-
-  @override
-  String get name => 'Nombre';
-
-  @override
-  String get nameRomaji => 'Nombre (Romaji)';
-
-  @override
-  String get popularity => 'Popularidad';
-
-  @override
-  String get relations => 'Relaciones';
-
-  @override
-  String get prequel => 'PREQUEL';
-
-  @override
-  String get sequel => 'SEQUEL';
-
-  @override
-  String get source => 'Fuente';
-
-  @override
-  String get staff => 'Personal';
-
-  @override
-  String get startDate => 'Fecha de inicio';
-
-  @override
-  String get status => 'Situación';
-
-  @override
-  String get studio => 'Studio';
-
-  @override
-  String get synonyms => 'Sinónimos';
-
-  @override
-  String get tags => 'Etiquetas';
-
-  @override
-  String get total => 'Total';
-
-  @override
-  String get collapseText => 'ver menos';
-
-  @override
-  String get expandText => 'ver más';
-
-  @override
-  String get comingSoon => 'Próximamente';
-
-  @override
-  String get wrongTitle => '¿Título equivocado?';
-
-  @override
-  String get missingResults => 'Missing Results?';
-
-  @override
-  String get youTube => '¿Jugar en YouTube?';
-
-  @override
-  String get mediaNotFound => 'Medios no encontrados';
-
-  @override
-  String get noChapterFound => 'No hay capítulo encontrado';
-
-  @override
-  String activity(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'Actividades',
-      one: 'Actividad',
-    );
-    return '$_temp0';
-  }
-
-  @override
-  String get language => 'Idioma';
-
-  @override
-  String get account => 'Cuenta';
-
-  @override
-  String get accountDescription =>
-      'Administra tus cuentas de AniList, MAL y Discord sin esfuerzo';
-
-  @override
-  String get common => 'Común';
-
-  @override
-  String get commonDescription =>
-      'Accede a ajustes generales para un uso fluido de la aplicación';
-
-  @override
-  String get animeDescription =>
-      'Personaliza y administra tus preferencias de anime';
-
-  @override
-  String get mangaDescription =>
-      'Organiza y personaliza tu experiencia de manga';
-
-  @override
-  String get about => 'Acerca de';
-
-  @override
-  String get aboutDescription =>
-      'Aprende más sobre la aplicación y sus creadores';
-
-  @override
-  String get notifications => 'Notificaciones';
-
-  @override
-  String get notificationsDescription =>
-      'Configura cómo y cuándo recibes notificaciones';
-
-  @override
-  String get offlineMode => 'Modo Sin Conexión';
-
-  @override
-  String get offlineModeDescription =>
-      'Usa la aplicación sin conexión a internet';
-
-  @override
-  String get incognitoMode => 'Modo Incógnito';
-
-  @override
-  String get incognitoModeDescription => 'Navegar sin guardar tu actividad';
-
-  @override
-  String get hidePrivate => 'Ocultar Privado';
-
-  @override
-  String get hidePrivateDescription =>
-      'Ocultar series privadas en la página de inicio.';
-
-  @override
-  String get hiddenMedia => 'Medios ocultos';
-
-  @override
-  String get noHiddenMediaFound => 'No se encontraron medios ocultos';
-
-  @override
-  String get playerSettingsTitle => 'Ajustes del Reproductor';
-
-  @override
-  String get playerSettingsDesc => 'Cambiar la configuración del reproductor';
-
-  @override
-  String get speed => 'Velocidad';
-
-  @override
-  String get speedDescription => 'Velocidad predeterminada para el reproductor';
-
-  @override
-  String get cursedSpeed => 'Velocidad Maldita';
-
-  @override
-  String get cursedSpeedDescription =>
-      'Para personas demasiado ocupadas con la vida';
-
-  @override
-  String get resizeMode => 'Modo de redimensionamiento';
-
-  @override
-  String get resizeModeDescription =>
-      'Modo de redimensionamiento predeterminado para el reproductor';
-
-  @override
-  String get skipButton => 'Botón de Saltar';
-
-  @override
-  String get skipButtonDescription => 'Duración del botón de saltar';
-
-  @override
-  String get thumbLessSeekBar => 'Barra de búsqueda sin pulgar';
-
-  @override
-  String get thumbLessSeekBarDesc => 'Quitar el pulgar de la barra de búsqueda';
-
-  @override
-  String get customMPV => 'MPV personalizado Configuración';
-
-  @override
-  String customMPVDescription(String path) {
-    return 'Active esta opción para usar su propio archivo de configuración MPV. Coloque su configuración personalizada en: $path';
-  }
-
-  @override
-  String get adjustBrightness => 'Adjust Brightness';
-
-  @override
-  String get adjustBrightnessDescription =>
-      'Enable brightness adjustment by swiping up/down on the left side of the screen';
-
-  @override
-  String get adjustVolume => 'Adjust Volume';
-
-  @override
-  String get adjustVolumeDescription =>
-      'Enable volume adjustment by swiping up/down on the right side of the screen';
-
-  @override
-  String get subtitles => 'Subtítulos';
-
-  @override
-  String get showSubtitles => 'Mostrar Subtítulos';
-
-  @override
-  String get showSubtitlesDescription => 'Mostrar subtítulos por defecto';
-
-  @override
-  String get subtitlePreview => 'Vista Previa de Subtítulos';
-
-  @override
-  String get fontColor => 'Color de Fuente';
-
-  @override
-  String get fontColorDescription => 'Color de fuente de los subtítulos';
-
-  @override
-  String get fontFamily => 'Familia de Fuente';
-
-  @override
-  String get fontFamilyDescription => 'Familia de fuente de los subtítulos';
-
-  @override
-  String get fontSize => 'Tamaño de Fuente';
-
-  @override
-  String get fontSizeDescription => 'Tamaño de fuente de los subtítulos';
-
-  @override
-  String get fontWeight => 'Peso de Fuente';
-
-  @override
-  String get fontWeightDescription => 'Peso de fuente de los subtítulos';
-
-  @override
-  String get backgroundColor => 'Color de Fondo';
-
-  @override
-  String get backgroundColorDescription => 'Color de fondo de los subtítulos';
-
-  @override
-  String get outlineColor => 'Color de Contorno';
-
-  @override
-  String get outlineColorDescription => 'Color de contorno de los subtítulos';
-
-  @override
-  String get bottomPadding => 'Relleno Inferior';
-
-  @override
-  String get bottomPaddingDescription => 'Relleno inferior de los subtítulos';
-
-  @override
-  String get useLibass => 'Use Libass';
-
-  @override
-  String get useLibassDescription =>
-      'Use Libass for subtitle rendering (overrides other subtitle settings)';
-
-  @override
-  String get useGpuNext => 'Use gpu-next';
-
-  @override
-  String get useGpuNextDescription =>
-      'New rendering backend (may cause visual artifacts)';
-
-  @override
-  String get autoPlayNextEpisode => 'Auto Play Next Episode';
-
-  @override
-  String get autoPlayNextEpisodeDescription =>
-      'Automatically play the next episode when the current one ends';
-
-  @override
-  String get automaticSourceSelection => 'Automatic Source Selection Method';
-
-  @override
-  String get automaticSourceSelectionDescription =>
-      'Which method to use for automatic source selection';
-
-  @override
-  String get perAnimePlayerSettings => 'Per-Anime Player Settings';
-
-  @override
-  String get perAnimePlayerSettingsDesc =>
-      'Use different player settings for each anime (disabling may override existing per-anime settings)';
-
-  @override
-  String get readerSettings => 'Ajustes del lector';
-
-  @override
-  String get readerSettingsDesc => 'Cambiar la configuración del lector';
-
-  @override
-  String get spacedPages => 'Páginas espaciadas';
-
-  @override
-  String get spacedPagesDesc => 'Agregar espacio entre páginas';
-
-  @override
-  String get hideScrollbar => 'Ocultar barra de desplazamiento';
-
-  @override
-  String get hideScrollbarDesc =>
-      'Esconder barra de desplazamiento mientras lee';
-
-  @override
-  String get hidePageNumber => 'Número de página';
-
-  @override
-  String get hidePageNumberDesc => 'Ocultar número de página mientras se lee';
-
-  @override
-  String get theme => 'Tema';
-
-  @override
-  String get themeDescription =>
-      'Personaliza la apariencia y el ambiente de tu aplicación';
-
-  @override
-  String get darkMode => 'Modo Oscuro';
-
-  @override
-  String get enableDarkMode => 'Activar Modo Oscuro';
-
-  @override
-  String get glassEffect => 'Efecto de vidrio';
-
-  @override
-  String get glassEffectDescription =>
-      'Da un efecto de vidrio congelado a la aplicación';
-
-  @override
-  String get coverTheme => 'Use Cover Theme';
-
-  @override
-  String get coverThemeDescription =>
-      'Use la imagen de la cubierta multimedia como color de tema';
+  String get cardStyleDesc => 'Title placement, size, progress and badges';
 
   @override
   String get materialYou => 'Material You';
 
   @override
-  String get materialYouDescription =>
-      'Usar el mismo color que tu fondo de pantalla';
+  String get materialYouDesc => 'Dynamic colour from the system';
 
   @override
-  String get customTheme => 'Aduanas Tema';
+  String get customAccent => 'Custom accent colour';
 
   @override
-  String get customThemeDescription => 'Usa tu propio color para el tema';
+  String get customAccentDesc => 'Pick your own primary colour';
 
   @override
-  String get oledThemeVariant => 'Variante de Tema OLED';
+  String get customAccentDisabledDesc =>
+      'Turn off Material You to use a custom colour';
 
   @override
-  String get oledThemeVariantDescription => 'Activar Modo OLED';
+  String get themeMode => 'Theme mode';
 
   @override
-  String get colorPicker => 'Selector de Color';
+  String get mode => 'Mode';
 
   @override
-  String get pickColor => 'Seleccionar un color';
+  String get trackingService => 'Tracking service';
 
   @override
-  String get colorPickerDescription => 'Elige un color';
+  String get signOut => 'Sign out';
 
   @override
-  String get colorPickerDefault => 'Default';
+  String get signIn => 'Sign in';
 
   @override
-  String get colorPickerCustom => 'Aduanas';
+  String get notSignedIn => 'Not signed in';
 
   @override
-  String get customPath => 'Sendero personalizado';
+  String signOutOf(String service) {
+    return 'Sign out of $service?';
+  }
 
   @override
-  String get customPathDescription =>
-      'Establecer una ruta personalizada para guardar archivos\nLong press to remove';
+  String get checkForUpdates => 'Check for updates';
 
   @override
-  String get selectDirectory => 'Seleccione un directorio';
+  String get checkForUpdatesDesc => 'Notify on a new GitHub release';
 
   @override
-  String get selectMediaService => 'Seleccionar servicio de medios';
+  String get updateChannel => 'Update channel';
 
   @override
-  String get logFile => 'Archivo de registro';
+  String get channel => 'Channel';
 
   @override
-  String get logFileDescription => 'Compartir el archivo de registro';
+  String get stable => 'Stable';
 
   @override
-  String get restoreSettings => 'Restaurar Ajustes';
+  String get preRelease => 'Pre-release';
 
   @override
-  String get differentCacheManager => 'Diferente Cache Manager';
+  String get alpha => 'Alpha';
 
   @override
-  String get differentCacheManagerDesc =>
-      'Utilice diferentes gestores de caché de imagen';
+  String get checkNow => 'Check now';
 
   @override
-  String get backupAndRestore => 'Backup & Restore';
+  String get userAgent => 'User-Agent';
 
   @override
-  String get backupAndRestoreDescription =>
-      'Save and restore the app preferences';
+  String get settingDefault => 'Default';
 
   @override
-  String get backup => 'Backup';
+  String get dnsOverHttps => 'DNS-over-HTTPS';
 
   @override
-  String get restore => 'Restore';
+  String get dnsDefault => 'Default (Cloudflare)';
 
   @override
-  String get webView => 'Web View';
+  String get proxy => 'Proxy';
 
   @override
-  String get developersHelpers => 'Desarrolladores/Helpers';
+  String get clearCookies => 'Clear cookies';
 
   @override
-  String get developersHelpersDesc => 'Trabajos no remunerados de Dartotsu';
+  String get clearCookiesDesc => 'Remove every stored cookie';
 
   @override
-  String get supportMaintainer =>
-      '¿Quieres apoyar al Mantenedor de Dartotsu?\nConsidera Donar';
+  String get clearCookiesConfirm =>
+      'Remove all stored cookies? This may sign you out of some sources.';
 
   @override
-  String get donationGoal => 'Sin meta de donación por el momento';
+  String get version => 'Version';
 
   @override
-  String get options => 'Opciones';
+  String get gitHub => 'GitHub';
 
   @override
-  String get ok => 'Aceptar';
+  String get gitHubDesc => 'Source, issues and releases';
 
   @override
-  String get cancel => 'Cancelar';
+  String get discordDesc => 'Community and support';
 
   @override
-  String get yes => 'Sí';
+  String get donate => 'Buy me a coffee';
 
   @override
-  String get no => 'No';
+  String get donateDesc => 'Support development';
+
+  @override
+  String get sectionColors => 'Colors';
+
+  @override
+  String get sectionDisplay => 'Display';
+
+  @override
+  String get sectionStyle => 'Style';
+
+  @override
+  String get sectionCommunity => 'Community';
+
+  @override
+  String get sectionAppInfo => 'App Info';
+
+  @override
+  String get sectionCache => 'Cache';
+
+  @override
+  String get sectionRequests => 'Requests';
+
+  @override
+  String get sectionDnsProxy => 'DNS & Proxy';
 }

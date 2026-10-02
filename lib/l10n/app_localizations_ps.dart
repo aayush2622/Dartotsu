@@ -21,9 +21,6 @@ class AppLocalizationsPs extends AppLocalizations {
   String get mal => 'MyAnimeList';
 
   @override
-  String get kitsu => 'Kitsu';
-
-  @override
   String get simkl => 'Simkl';
 
   @override
@@ -45,273 +42,77 @@ class AppLocalizationsPs extends AppLocalizations {
   String get pasteTokenHint => 'Paste your access token';
 
   @override
-  String loggedInAs(Object name) {
-    return 'Logged in as $name';
-  }
-
-  @override
-  String logout(String type) {
-    return 'خروج $type';
-  }
-
-  @override
   String loginTo(String service) {
     return 'ورود به $service';
   }
 
   @override
-  String get confirmLogout =>
-      'آیا مطمئن هستید که می‌خواهید از سیستم خارج شوید؟';
-
-  @override
-  String get anime => 'انیمه';
-
-  @override
-  String get manga => 'مانګا';
-
-  @override
-  String get manhwa => 'Manhwa';
-
-  @override
-  String get manhua => 'Manhua';
-
-  @override
-  String get novel => 'رمان';
-
-  @override
-  String get ln => 'لایت ناول';
-
-  @override
-  String get home => 'خانه';
-
-  @override
-  String get search => 'جستجو';
-
-  @override
-  String get calendar => 'تقویم';
-
-  @override
   String get settings => 'تنظیمات';
 
   @override
-  String get watch => 'تماشا';
+  String get account => 'حساب';
 
   @override
-  String get read => 'خواندن';
+  String get about => 'په اړه';
 
   @override
-  String get info => 'اطلاعات';
+  String get language => 'زبان';
 
   @override
-  String get comments => 'نظرات';
-
-  @override
-  String get addToList => 'افزودن به فهرست';
-
-  @override
-  String get series => 'سریال';
-
-  @override
-  String get season => 'فصل';
-
-  @override
-  String episode(int count) {
+  String extension(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'قسمت‌ها',
-      one: 'قسمت',
+      other: 'افزونه‌ها',
+      one: 'افزونه',
     );
-    return '$_temp0';
+    return 'غځونه$_temp0';
   }
 
   @override
-  String chapter(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'فصل‌ها',
-      one: 'فصل',
-    );
-    return '$_temp0';
-  }
+  String get ok => 'سم';
 
   @override
-  String volume(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'جلدها',
-      one: 'جلد',
-    );
-    return '$_temp0';
-  }
+  String get cancel => 'لغوه';
 
   @override
-  String movie(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'فیلم‌ها',
-      one: 'فیلم',
-    );
-    return '$_temp0';
-  }
+  String get yes => 'هو';
 
   @override
-  String get totalEpisodes => 'قسمت‌ها';
+  String get no => 'نه';
 
   @override
-  String get totalChapters => 'فصل‌ها';
+  String get save => 'Save';
 
   @override
-  String nextEpisodeRelease(int episode) {
-    return 'Episode $episode will be released in';
-  }
+  String get reset => 'Reset';
 
   @override
-  String get genres => 'ژانرها';
+  String get clear => 'Clear';
 
   @override
-  String get scanlators => 'اسکن‌لترها';
+  String get test => 'Test';
 
   @override
-  String list(String type) {
-    return 'فهرست $type';
-  }
+  String get testing => 'Testing…';
 
   @override
-  String get watching => 'کتل';
+  String get resolving => 'Resolving…';
 
   @override
-  String get reading => 'لوستل';
+  String get none => 'None';
 
   @override
-  String get readStatus => 'خواندن';
+  String get selectMediaService => 'د رسنیو خدمت غوره کړئ';
 
   @override
-  String get watchStatus => 'لیدل شوی';
+  String get pickColor => 'یک رنگ انتخاب کنید';
 
   @override
-  String planned(String type) {
-    return '$type برنامه‌ریزی شده';
-  }
+  String get colorPickerDefault => 'ډیفالټ';
 
   @override
-  String onHold(String type) {
-    return 'در حال تعلیق $type';
-  }
-
-  @override
-  String get droppedAnime => 'انیمه‌های کنار گذاشته شده';
-
-  @override
-  String get droppedManga => 'مانگاهای کنار گذاشته شده';
-
-  @override
-  String noDropped(String type) {
-    return 'شما هنوز هیچ $type را کنار نگذاشته‌اید.';
-  }
-
-  @override
-  String get continueReading => 'ادامه خواندن';
-
-  @override
-  String get continueWatching => 'ادامه تماشا کردن';
-
-  @override
-  String browse(String type) {
-    return 'مرور $type';
-  }
-
-  @override
-  String trending(String type) {
-    return '$type پرطرفدار';
-  }
-
-  @override
-  String popular(String type) {
-    return 'محبوب‌ترین $typeپرطرفدار $type';
-  }
-
-  @override
-  String get topAiring => 'پخش برتر';
-
-  @override
-  String topRated(String type) {
-    return 'بالاترین امتیاز $type';
-  }
-
-  @override
-  String get topScore => 'Top Score';
-
-  @override
-  String mostFavourite(String type) {
-    return 'محبوب‌ترین $type';
-  }
-
-  @override
-  String get thisSeason => 'این فصل';
-
-  @override
-  String get nextSeason => 'فصل بعد';
-
-  @override
-  String get previousSeason => 'فصل گذشته';
-
-  @override
-  String get recommended => 'توصیه شده';
-
-  @override
-  String get recommendationsEmptyMessage =>
-      'برای دریافت پیشنهادات، چند انیمه یا مانگا تماشا/خوانده کنید';
-
-  @override
-  String get recentUpdates => 'بروزرسانی‌های اخیر';
-
-  @override
-  String get allCaughtUpNew => 'همه را تماشا کرده‌اید، کی قسمت جدید می‌آید؟';
-
-  @override
-  String favorite(String type) {
-    return 'محبوب $type';
-  }
-
-  @override
-  String get favorites => 'علاقه‌مندی‌ها';
-
-  @override
-  String get noFavourites =>
-      'به نظر می‌رسد شما هیچ چیزی را دوست ندارید،\nسعی کنید یک برنامه را پسند کنید تا در اینجا نگه داشته شود.';
-
-  @override
-  String get noOnHold =>
-      'به نظر می‌رسد شما هیچ چیزی را در حال تعلیق قرار نداده‌اید.';
-
-  @override
-  String manageLayout(String service, String page) {
-    return 'مدیریت چیدمان صفحه $page برای $service';
-  }
-
-  @override
-  String manageLayoutDescription(String page) {
-    return 'شما می‌توانید چیدمان صفحه $page را با کشیدن و رها کردن آیتم‌ها مدیریت کنید';
-  }
-
-  @override
-  String get gridView => 'نمای شبکه‌ای';
-
-  @override
-  String get listView => 'نمای فهرست';
-
-  @override
-  String get compactView => 'نمای فشرده';
-
-  @override
-  String get layout => 'چیدمان';
-
-  @override
-  String get sort => 'مرتب‌سازی';
+  String get colorPickerCustom => 'ګمرکي';
 
   @override
   String get utd => 'بالا به پایین';
@@ -326,549 +127,193 @@ class AppLocalizationsPs extends AppLocalizations {
   String get ltr => 'Left To Right';
 
   @override
-  String get direction => 'Direction';
+  String get searchSettings => 'Search settings';
 
   @override
-  String get episodeWatched => 'قسمت تماشا شده';
-
-  @override
-  String get chapterRead => 'فصل خوانده شده';
-
-  @override
-  String get outOf => 'له';
-
-  @override
-  String get totalOf => 'ټول';
-
-  @override
-  String get selected => 'غوره شوی';
-
-  @override
-  String get found => 'موندل شوی';
-
-  @override
-  String extension(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'افزونه‌ها',
-      one: 'افزونه',
-    );
-    return 'غځونه$_temp0';
+  String nothingMatches(String query) {
+    return 'Nothing matches \"$query\"';
   }
 
   @override
-  String available(String type) {
-    return '$type در دسترس';
+  String searchCategory(String category) {
+    return 'Search $category';
   }
 
   @override
-  String installed(String type) {
-    return '$type نصب شده';
-  }
+  String get settingsAppearance => 'Appearance';
 
   @override
-  String get extensionsDescription =>
-      'اضافي فعالیت لپاره غځونې نصب او مدیریت کړئ';
+  String get settingsAppearanceDesc => 'Theme, colours, glass mode';
 
   @override
-  String get addAnimeRepo => 'د انیمې ذخیره اضافه کړئ';
+  String get settingsGeneral => 'General';
 
   @override
-  String get addAnimeRepoDesc =>
-      'د بیلابیلو سرچینو څخه د انیمې ذخیره اضافه کړئ';
+  String get settingsGeneralDesc => 'Language and behaviour';
 
   @override
-  String get addMangaRepo => 'د مانګا ذخیره اضافه کړئ';
+  String get settingsAccountDesc => 'Tracking service and sign-in';
 
   @override
-  String get addMangaRepoDesc =>
-      'د بیلابیلو سرچینو څخه د مانګا ذخیره اضافه کړئ';
+  String get settingsUpdates => 'Updates';
 
   @override
-  String get addNovelRepo => 'د ناول ذخیره اضافه کړئ';
+  String get settingsUpdatesDesc => 'Release channel and checks';
 
   @override
-  String get addNovelRepoDesc => 'د بیلابیلو سرچینو څخه د ناول ذخیره اضافه کړئ';
+  String get settingsNetwork => 'Network';
 
   @override
-  String get loadExtensionsIcon => 'د غزونو نښه پورته کړئ';
+  String get settingsNetworkDesc => 'User-Agent, DNS, proxy, cookies';
 
   @override
-  String get loadExtensionsIconDesc =>
-      'که د غزونو پاڼه ځنډېږي، دا غیر فعال کړئ';
+  String get settingsAboutDesc => 'Version, links, support';
 
   @override
-  String get autoUpdate => 'خودکار تازه کول';
+  String get amoledBlack => 'AMOLED black';
 
   @override
-  String get autoUpdateDesc => 'د غزونو خودکار تازه کول';
+  String get amoledBlackDesc => 'Pure black surfaces on dark mode';
 
   @override
-  String get installSourceToStart =>
-      'د پیل لپاره د غزونې پاڼې څخه سرچینه نصب کړئ';
+  String get glassMode => 'Glass mode';
 
   @override
-  String get author => 'نویسنده';
+  String get glassModeDesc => 'Frosted surfaces over your library art';
 
   @override
-  String get averageDuration => 'مدت زمان متوسط';
+  String get cardStyle => 'Card style';
 
   @override
-  String get characters => 'شخصیت‌ها';
-
-  @override
-  String get synopsis => 'خلاصه';
-
-  @override
-  String get endDate => 'تاریخ پایان';
-
-  @override
-  String get format => 'فرمت';
-
-  @override
-  String get meanScore => 'امتیاز متوسط';
-
-  @override
-  String get name => 'نام';
-
-  @override
-  String get nameRomaji => 'نام (رومجی)';
-
-  @override
-  String get popularity => 'محبوبیت';
-
-  @override
-  String get relations => 'روابط';
-
-  @override
-  String get prequel => 'پیش‌درآمد';
-
-  @override
-  String get sequel => 'دنباله';
-
-  @override
-  String get source => 'منبع';
-
-  @override
-  String get staff => 'کارکنان';
-
-  @override
-  String get startDate => 'تاریخ شروع';
-
-  @override
-  String get status => 'وضعیت';
-
-  @override
-  String get studio => 'استودیو';
-
-  @override
-  String get synonyms => 'مترادف‌ها';
-
-  @override
-  String get tags => 'برچسب‌ها';
-
-  @override
-  String get total => 'مجموع';
-
-  @override
-  String get collapseText => 'نمایش کمتر';
-
-  @override
-  String get expandText => 'تاریخ ختم';
-
-  @override
-  String get comingSoon => 'به زودی می‌آید';
-
-  @override
-  String get wrongTitle => 'ناسم عنوان؟';
-
-  @override
-  String get missingResults => 'Missing Results?';
-
-  @override
-  String get youTube => 'په یوټیوب کې لوبول؟';
-
-  @override
-  String get mediaNotFound => 'میډیا ونه موندل شوه';
-
-  @override
-  String get noChapterFound => 'هیڅ څپرکی ونه موندل شو';
-
-  @override
-  String activity(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'فعالیت‌ها',
-      one: 'فعالیت',
-    );
-    return '$_temp0';
-  }
-
-  @override
-  String get language => 'زبان';
-
-  @override
-  String get account => 'حساب';
-
-  @override
-  String get accountDescription =>
-      'خپل AniList، MAL، او Discord حسابونه په اسانۍ سره مدیریت کړئ';
-
-  @override
-  String get common => 'عام';
-
-  @override
-  String get commonDescription =>
-      'د اپلیکیشن د اسانه کارولو لپاره عمومي تنظیمات ته لاسرسی';
-
-  @override
-  String get animeDescription => 'خپل د انیمې خوښې تنظیم کړئ او مدیریت یې کړئ';
-
-  @override
-  String get mangaDescription => 'خپل د مانګا تجربه تنظیم کړئ او اداره یې کړئ';
-
-  @override
-  String get about => 'په اړه';
-
-  @override
-  String get aboutDescription =>
-      'د اپلیکیشن او د دې جوړونکو په اړه نور معلومات ترلاسه کړئ';
-
-  @override
-  String get notifications => 'خبرتیاوې';
-
-  @override
-  String get notificationsDescription =>
-      'تاسو څنګه او کله خبرتیاوې ترلاسه کوئ تنظیم کړئ';
-
-  @override
-  String get offlineMode => 'بې انټرنیټ حالت';
-
-  @override
-  String get offlineModeDescription => 'اپلیکیشن د انټرنیټ پرته وکاروئ';
-
-  @override
-  String get incognitoMode => 'پټ حالت';
-
-  @override
-  String get incognitoModeDescription =>
-      'بې له دې چې ستاسو فعالیت خوندي شي، لټون وکړئ';
-
-  @override
-  String get hidePrivate => 'پټ معلومات پټ کړئ';
-
-  @override
-  String get hidePrivateDescription =>
-      'سریال‌های خصوصی را از صفحه اصلی پنهان کن.';
-
-  @override
-  String get hiddenMedia => 'رسانه‌های پنهان شده';
-
-  @override
-  String get noHiddenMediaFound => 'رسانه‌ی پنهانی پیدا نشد';
-
-  @override
-  String get playerSettingsTitle => 'د پلیر تنظیمات';
-
-  @override
-  String get playerSettingsDesc => 'Change player settings';
-
-  @override
-  String get speed => 'سرعت';
-
-  @override
-  String get speedDescription => 'د پلیر لپاره ډیفالټ سرعت';
-
-  @override
-  String get cursedSpeed => 'بد قسمت سرعت';
-
-  @override
-  String get cursedSpeedDescription =>
-      'د هغو کسانو لپاره چې په ژوند کې ډېر بوخت دي';
-
-  @override
-  String get resizeMode => 'د اندازې بدلولو حالت';
-
-  @override
-  String get resizeModeDescription =>
-      'د پلیر لپاره د اندازې بدلولو ډیفالټ حالت';
-
-  @override
-  String get skipButton => 'د پریښودو تڼۍ';
-
-  @override
-  String get skipButtonDescription => 'د پریښودو تڼۍ موده';
-
-  @override
-  String get thumbLessSeekBar => 'ThumbLess SeekBar';
-
-  @override
-  String get thumbLessSeekBarDesc => 'Remove thumb from the seek bar';
-
-  @override
-  String get customMPV => 'Custom MPV Configuration';
-
-  @override
-  String customMPVDescription(String path) {
-    return 'Enable this option to use your own MPV configuration file. Place your custom config at: $path';
-  }
-
-  @override
-  String get adjustBrightness => 'Adjust Brightness';
-
-  @override
-  String get adjustBrightnessDescription =>
-      'Enable brightness adjustment by swiping up/down on the left side of the screen';
-
-  @override
-  String get adjustVolume => 'Adjust Volume';
-
-  @override
-  String get adjustVolumeDescription =>
-      'Enable volume adjustment by swiping up/down on the right side of the screen';
-
-  @override
-  String get subtitles => 'فرعي عنوانونه';
-
-  @override
-  String get showSubtitles => 'فرعي عنوان ښکاره کړئ';
-
-  @override
-  String get showSubtitlesDescription => 'فرعي عنوان په ډیفالټ ډول ښکاره کړئ';
-
-  @override
-  String get subtitlePreview => 'د فرعي عنوان بیاکتنه';
-
-  @override
-  String get fontColor => 'د فونټ رنګ';
-
-  @override
-  String get fontColorDescription => 'د فرعي عنوان فونټ رنګ';
-
-  @override
-  String get fontFamily => 'د فونټ کورنۍ';
-
-  @override
-  String get fontFamilyDescription => 'د فرعي عنوان فونټ کورنۍ';
-
-  @override
-  String get fontSize => 'د فونټ اندازه';
-
-  @override
-  String get fontSizeDescription => 'د فرعي عنوان د فونټ اندازه';
-
-  @override
-  String get fontWeight => 'د فونټ وزن';
-
-  @override
-  String get fontWeightDescription => 'د فرعي عنوان د فونټ وزن';
-
-  @override
-  String get backgroundColor => 'د شاګرد رنګ';
-
-  @override
-  String get backgroundColorDescription => 'د فرعي عنوان د شاګرد رنګ';
-
-  @override
-  String get outlineColor => 'د کرښې رنګ';
-
-  @override
-  String get outlineColorDescription => 'د فرعي عنوان د کرښې رنګ';
-
-  @override
-  String get bottomPadding => 'لاندې واټن';
-
-  @override
-  String get bottomPaddingDescription => 'د فرعي عنوان لاندې واټن';
-
-  @override
-  String get useLibass => 'Use Libass';
-
-  @override
-  String get useLibassDescription =>
-      'Use Libass for subtitle rendering (overrides other subtitle settings)';
-
-  @override
-  String get useGpuNext => 'Use gpu-next';
-
-  @override
-  String get useGpuNextDescription =>
-      'New rendering backend (may cause visual artifacts)';
-
-  @override
-  String get autoPlayNextEpisode => 'Auto Play Next Episode';
-
-  @override
-  String get autoPlayNextEpisodeDescription =>
-      'Automatically play the next episode when the current one ends';
-
-  @override
-  String get automaticSourceSelection => 'Automatic Source Selection Method';
-
-  @override
-  String get automaticSourceSelectionDescription =>
-      'Which method to use for automatic source selection';
-
-  @override
-  String get perAnimePlayerSettings => 'Per-Anime Player Settings';
-
-  @override
-  String get perAnimePlayerSettingsDesc =>
-      'Use different player settings for each anime (disabling may override existing per-anime settings)';
-
-  @override
-  String get readerSettings => 'Reader Settings';
-
-  @override
-  String get readerSettingsDesc => 'Change reader settings';
-
-  @override
-  String get spacedPages => 'Spaced Pages';
-
-  @override
-  String get spacedPagesDesc => 'Add space between pages';
-
-  @override
-  String get hideScrollbar => 'Hide Scrollbar';
-
-  @override
-  String get hideScrollbarDesc => 'Hide scrollbar while reading';
-
-  @override
-  String get hidePageNumber => 'Hide Page Number';
-
-  @override
-  String get hidePageNumberDesc => 'Hide page number while reading';
-
-  @override
-  String get theme => 'موضوع';
-
-  @override
-  String get themeDescription => 'د اپلیکیشن بڼه او حس تنظیم کړئ';
-
-  @override
-  String get darkMode => 'تیاره حالت';
-
-  @override
-  String get enableDarkMode => 'تیاره حالت فعال کړئ';
-
-  @override
-  String get glassEffect => 'Glass Effect';
-
-  @override
-  String get glassEffectDescription =>
-      'Gives a frosted glass effect to the app';
-
-  @override
-  String get coverTheme => 'Use Cover Theme';
-
-  @override
-  String get coverThemeDescription => 'Use media cover image as theme color';
+  String get cardStyleDesc => 'Title placement, size, progress and badges';
 
   @override
   String get materialYou => 'Material You';
 
   @override
-  String get materialYouDescription => 'خپل د وال پیپر په څېر رنګ وکاروئ';
+  String get materialYouDesc => 'Dynamic colour from the system';
 
   @override
-  String get customTheme => 'ګمرکي موضوع';
+  String get customAccent => 'Custom accent colour';
 
   @override
-  String get customThemeDescription => 'د موضوع لپاره خپل رنګ وکاروئ';
+  String get customAccentDesc => 'Pick your own primary colour';
 
   @override
-  String get oledThemeVariant => 'د OLED موضوع ډول';
+  String get customAccentDisabledDesc =>
+      'Turn off Material You to use a custom colour';
 
   @override
-  String get oledThemeVariantDescription => 'د OLED حالت فعال کړئ';
+  String get themeMode => 'Theme mode';
 
   @override
-  String get colorPicker => 'رنګ غوره کول';
+  String get mode => 'Mode';
 
   @override
-  String get pickColor => 'یک رنگ انتخاب کنید';
+  String get trackingService => 'Tracking service';
 
   @override
-  String get colorPickerDescription => 'رنګ وټاکئ';
+  String get signOut => 'Sign out';
 
   @override
-  String get colorPickerDefault => 'ډیفالټ';
+  String get signIn => 'Sign in';
 
   @override
-  String get colorPickerCustom => 'ګمرکي';
+  String get notSignedIn => 'Not signed in';
 
   @override
-  String get customPath => 'دودیزه لاره';
+  String signOutOf(String service) {
+    return 'Sign out of $service?';
+  }
 
   @override
-  String get customPathDescription =>
-      'د فایلونو خوندي کولو لپاره دودیز لاره تنظیم کړئ\nد لرې کولو لپاره اوږد فشار ورکړئ';
+  String get checkForUpdates => 'Check for updates';
 
   @override
-  String get selectDirectory => 'لارښود غوره کړئ';
+  String get checkForUpdatesDesc => 'Notify on a new GitHub release';
 
   @override
-  String get selectMediaService => 'د رسنیو خدمت غوره کړئ';
+  String get updateChannel => 'Update channel';
 
   @override
-  String get logFile => 'لاګ فایل';
+  String get channel => 'Channel';
 
   @override
-  String get logFileDescription => 'د لاګ فایل شریک کړئ';
+  String get stable => 'Stable';
 
   @override
-  String get restoreSettings => 'تنظیمات بېرته راولي';
+  String get preRelease => 'Pre-release';
 
   @override
-  String get differentCacheManager => 'Different Cache Manager';
+  String get alpha => 'Alpha';
 
   @override
-  String get differentCacheManagerDesc => 'Use different Image cache manager';
+  String get checkNow => 'Check now';
 
   @override
-  String get backupAndRestore => 'Backup & Restore';
+  String get userAgent => 'User-Agent';
 
   @override
-  String get backupAndRestoreDescription =>
-      'Save and restore the app preferences';
+  String get settingDefault => 'Default';
 
   @override
-  String get backup => 'Backup';
+  String get dnsOverHttps => 'DNS-over-HTTPS';
 
   @override
-  String get restore => 'Restore';
+  String get dnsDefault => 'Default (Cloudflare)';
 
   @override
-  String get webView => 'ویب لید';
+  String get proxy => 'Proxy';
 
   @override
-  String get developersHelpers => 'Developers/Helpers';
+  String get clearCookies => 'Clear cookies';
 
   @override
-  String get developersHelpersDesc => 'Dartotsu\'s unpaid labours';
+  String get clearCookiesDesc => 'Remove every stored cookie';
 
   @override
-  String get supportMaintainer =>
-      'غواړئ د Dartotsu ساتونکي ملاتړ وکړئ؟\nمرسته وکړئ';
+  String get clearCookiesConfirm =>
+      'Remove all stored cookies? This may sign you out of some sources.';
 
   @override
-  String get donationGoal => 'اوسمهال د کومې مرستې موخه نشته';
+  String get version => 'Version';
 
   @override
-  String get options => 'گزینه‌ها';
+  String get gitHub => 'GitHub';
 
   @override
-  String get ok => 'سم';
+  String get gitHubDesc => 'Source, issues and releases';
 
   @override
-  String get cancel => 'لغوه';
+  String get discordDesc => 'Community and support';
 
   @override
-  String get yes => 'هو';
+  String get donate => 'Buy me a coffee';
 
   @override
-  String get no => 'نه';
+  String get donateDesc => 'Support development';
+
+  @override
+  String get sectionColors => 'Colors';
+
+  @override
+  String get sectionDisplay => 'Display';
+
+  @override
+  String get sectionStyle => 'Style';
+
+  @override
+  String get sectionCommunity => 'Community';
+
+  @override
+  String get sectionAppInfo => 'App Info';
+
+  @override
+  String get sectionCache => 'Cache';
+
+  @override
+  String get sectionRequests => 'Requests';
+
+  @override
+  String get sectionDnsProxy => 'DNS & Proxy';
 }

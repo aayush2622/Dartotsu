@@ -21,9 +21,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mal => 'MyAnimeList';
 
   @override
-  String get kitsu => 'Kitsu';
-
-  @override
   String get simkl => 'Simkl';
 
   @override
@@ -45,269 +42,77 @@ class AppLocalizationsZh extends AppLocalizations {
   String get pasteTokenHint => 'Paste your access token';
 
   @override
-  String loggedInAs(Object name) {
-    return 'Logged in as $name';
-  }
-
-  @override
-  String logout(String type) {
-    return '退出登录 $type';
-  }
-
-  @override
   String loginTo(String service) {
     return '登录到 $service';
   }
 
   @override
-  String get confirmLogout => '确认退出?';
-
-  @override
-  String get anime => '动漫';
-
-  @override
-  String get manga => '漫画';
-
-  @override
-  String get manhwa => '韩漫';
-
-  @override
-  String get manhua => '中文漫画';
-
-  @override
-  String get novel => '小说';
-
-  @override
-  String get ln => '轻小说';
-
-  @override
-  String get home => '首页';
-
-  @override
-  String get search => '搜索';
-
-  @override
-  String get calendar => '日历';
-
-  @override
   String get settings => '设置';
 
   @override
-  String get watch => '观看';
+  String get account => '账户';
 
   @override
-  String get read => '阅读';
+  String get about => '关于';
 
   @override
-  String get info => '信息';
+  String get language => '语言';
 
   @override
-  String get comments => '评论';
-
-  @override
-  String get addToList => '加入列表';
-
-  @override
-  String get series => '系列';
-
-  @override
-  String get season => '季';
-
-  @override
-  String episode(int count) {
+  String extension(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '剧集',
-      one: '剧集',
+      other: '扩展名',
+      one: '扩展名',
     );
     return '$_temp0';
   }
 
   @override
-  String chapter(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '章节',
-      one: '章节',
-    );
-    return '$_temp0';
-  }
+  String get ok => '确定';
 
   @override
-  String volume(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '卷',
-      one: '卷',
-    );
-    return '$_temp0';
-  }
+  String get cancel => '取消';
 
   @override
-  String movie(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '电影',
-      one: '电影',
-    );
-    return '$_temp0';
-  }
+  String get yes => '是';
 
   @override
-  String get totalEpisodes => '总集数';
+  String get no => '否';
 
   @override
-  String get totalChapters => '总章节数';
+  String get save => 'Save';
 
   @override
-  String nextEpisodeRelease(int episode) {
-    return 'Episode $episode will be released in';
-  }
+  String get reset => 'Reset';
 
   @override
-  String get genres => '类型';
+  String get clear => 'Clear';
 
   @override
-  String get scanlators => '翻译组';
+  String get test => 'Test';
 
   @override
-  String list(String type) {
-    return '$type 列表';
-  }
+  String get testing => 'Testing…';
 
   @override
-  String get watching => '观察';
+  String get resolving => 'Resolving…';
 
   @override
-  String get reading => '阅读';
+  String get none => 'None';
 
   @override
-  String get readStatus => '阅读';
+  String get selectMediaService => '选择媒体服务';
 
   @override
-  String get watchStatus => '观察';
+  String get pickColor => '选择颜色';
 
   @override
-  String planned(String type) {
-    return '计划中 $type';
-  }
+  String get colorPickerDefault => '违约';
 
   @override
-  String onHold(String type) {
-    return '暂缓 $type';
-  }
-
-  @override
-  String get droppedAnime => '已弃番剧';
-
-  @override
-  String get droppedManga => '已弃漫画';
-
-  @override
-  String noDropped(String type) {
-    return '您尚未删除任何 $type。';
-  }
-
-  @override
-  String get continueReading => '继续阅读';
-
-  @override
-  String get continueWatching => '继续观看';
-
-  @override
-  String browse(String type) {
-    return '浏览 $type';
-  }
-
-  @override
-  String trending(String type) {
-    return '趋势 $type';
-  }
-
-  @override
-  String popular(String type) {
-    return '热门 $type';
-  }
-
-  @override
-  String get topAiring => '本季热播';
-
-  @override
-  String topRated(String type) {
-    return '最高评分 $type';
-  }
-
-  @override
-  String get topScore => 'Top Score';
-
-  @override
-  String mostFavourite(String type) {
-    return '最受欢迎 $type';
-  }
-
-  @override
-  String get thisSeason => '本季';
-
-  @override
-  String get nextSeason => '下季';
-
-  @override
-  String get previousSeason => '上一季';
-
-  @override
-  String get recommended => '推荐';
-
-  @override
-  String get recommendationsEmptyMessage => '暂无推荐';
-
-  @override
-  String get recentUpdates => '最近更新';
-
-  @override
-  String get allCaughtUpNew => '所有人都被抓住,什么是新?';
-
-  @override
-  String favorite(String type) {
-    return '收藏 $type';
-  }
-
-  @override
-  String get favorites => '收藏';
-
-  @override
-  String get noFavourites => '看来你什么都不喜欢\n尝试喜欢某个节目并将其保留在这里。';
-
-  @override
-  String get noOnHold => '看来你还没有搁置任何事情。';
-
-  @override
-  String manageLayout(String service, String page) {
-    return '管理 $service 的 $page 页面布局';
-  }
-
-  @override
-  String manageLayoutDescription(String page) {
-    return '您可以通过拖放项目来管理 $page 页面的布局';
-  }
-
-  @override
-  String get gridView => '网格视图';
-
-  @override
-  String get listView => '列表视图';
-
-  @override
-  String get compactView => '紧凑视图';
-
-  @override
-  String get layout => '布局';
-
-  @override
-  String get sort => '排序';
+  String get colorPickerCustom => '习俗';
 
   @override
   String get utd => '更新日期';
@@ -322,534 +127,193 @@ class AppLocalizationsZh extends AppLocalizations {
   String get ltr => 'Left To Right';
 
   @override
-  String get direction => '方向';
+  String get searchSettings => 'Search settings';
 
   @override
-  String get episodeWatched => '已观看集数';
-
-  @override
-  String get chapterRead => '已阅读章节';
-
-  @override
-  String get outOf => '页: 1';
-
-  @override
-  String get totalOf => '共计';
-
-  @override
-  String get selected => '选';
-
-  @override
-  String get found => '创始人';
-
-  @override
-  String extension(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '扩展名',
-      one: '扩展名',
-    );
-    return '$_temp0';
+  String nothingMatches(String query) {
+    return 'Nothing matches \"$query\"';
   }
 
   @override
-  String available(String type) {
-    return '可用 $type';
+  String searchCategory(String category) {
+    return 'Search $category';
   }
 
   @override
-  String installed(String type) {
-    return '已安装 $type';
-  }
+  String get settingsAppearance => 'Appearance';
 
   @override
-  String get extensionsDescription => '安装并管理扩展以增加功能';
+  String get settingsAppearanceDesc => 'Theme, colours, glass mode';
 
   @override
-  String get addAnimeRepo => '添加动漫库';
+  String get settingsGeneral => 'General';
 
   @override
-  String get addAnimeRepoDesc => '不同来源的Anime Repo';
+  String get settingsGeneralDesc => 'Language and behaviour';
 
   @override
-  String get addMangaRepo => '添加漫画库';
+  String get settingsAccountDesc => 'Tracking service and sign-in';
 
   @override
-  String get addMangaRepoDesc => 'Add Manga 不同来源的传承';
+  String get settingsUpdates => 'Updates';
 
   @override
-  String get addNovelRepo => '纽约总部';
+  String get settingsUpdatesDesc => 'Release channel and checks';
 
   @override
-  String get addNovelRepoDesc => '从各种来源添加小说 Repo';
+  String get settingsNetwork => 'Network';
 
   @override
-  String get loadExtensionsIcon => '延期';
+  String get settingsNetworkDesc => 'User-Agent, DNS, proxy, cookies';
 
   @override
-  String get loadExtensionsIconDesc => '如果延长页滞后,可处理';
+  String get settingsAboutDesc => 'Version, links, support';
 
   @override
-  String get autoUpdate => 'A. 自动更新';
+  String get amoledBlack => 'AMOLED black';
 
   @override
-  String get autoUpdateDesc => 'A. 自动更新延期';
+  String get amoledBlackDesc => 'Pure black surfaces on dark mode';
 
   @override
-  String get installSourceToStart => '从延长页到开始';
+  String get glassMode => 'Glass mode';
 
   @override
-  String get author => '作者';
+  String get glassModeDesc => 'Frosted surfaces over your library art';
 
   @override
-  String get averageDuration => '平均时长';
+  String get cardStyle => 'Card style';
 
   @override
-  String get characters => '角色';
-
-  @override
-  String get synopsis => '简介';
-
-  @override
-  String get endDate => '结束日期';
-
-  @override
-  String get format => '格式';
-
-  @override
-  String get meanScore => '平均评分';
-
-  @override
-  String get name => '名称';
-
-  @override
-  String get nameRomaji => '罗马字名称';
-
-  @override
-  String get popularity => '人气';
-
-  @override
-  String get relations => '关系';
-
-  @override
-  String get prequel => '前传';
-
-  @override
-  String get sequel => '续集';
-
-  @override
-  String get source => '来源';
-
-  @override
-  String get staff => '工作人员';
-
-  @override
-  String get startDate => '开始日期';
-
-  @override
-  String get status => '状态';
-
-  @override
-  String get studio => '工作室';
-
-  @override
-  String get synonyms => '同义词';
-
-  @override
-  String get tags => '标签';
-
-  @override
-  String get total => '总数';
-
-  @override
-  String get collapseText => '收起';
-
-  @override
-  String get expandText => '展开';
-
-  @override
-  String get comingSoon => '即将推出';
-
-  @override
-  String get wrongTitle => '标题?';
-
-  @override
-  String get missingResults => 'Missing Results?';
-
-  @override
-  String get youTube => '在YouTube举办活动?';
-
-  @override
-  String get mediaNotFound => '未发现的媒体';
-
-  @override
-  String get noChapterFound => '无章可查';
-
-  @override
-  String activity(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '活动',
-      one: '活动',
-    );
-    return '$_temp0';
-  }
-
-  @override
-  String get language => '语言';
-
-  @override
-  String get account => '账户';
-
-  @override
-  String get accountDescription => '轻松管理你的AniList、MAL和Discord账户';
-
-  @override
-  String get common => '常规';
-
-  @override
-  String get commonDescription => '访问常规设置以便顺畅使用应用';
-
-  @override
-  String get animeDescription => '个性化并管理你的动漫偏好';
-
-  @override
-  String get mangaDescription => '组织并定制你的漫画体验';
-
-  @override
-  String get about => '关于';
-
-  @override
-  String get aboutDescription => '了解更多关于应用和它的创作者';
-
-  @override
-  String get notifications => '通知';
-
-  @override
-  String get notificationsDescription => '配置你如何以及何时接收通知';
-
-  @override
-  String get offlineMode => '离线模式';
-
-  @override
-  String get offlineModeDescription => '在没有互联网连接的情况下使用应用';
-
-  @override
-  String get incognitoMode => '隐身模式';
-
-  @override
-  String get incognitoModeDescription => '浏览时不保存活动记录';
-
-  @override
-  String get hidePrivate => '隐藏私密';
-
-  @override
-  String get hidePrivateDescription => '从主页隐藏私人系列。';
-
-  @override
-  String get hiddenMedia => '隐藏的媒体';
-
-  @override
-  String get noHiddenMediaFound => '没有找到隐藏的媒体';
-
-  @override
-  String get playerSettingsTitle => '播放器设置';
-
-  @override
-  String get playerSettingsDesc => 'B. 变化中的参与者';
-
-  @override
-  String get speed => '速度';
-
-  @override
-  String get speedDescription => '播放器的默认速度';
-
-  @override
-  String get cursedSpeed => '诅咒速度';
-
-  @override
-  String get cursedSpeedDescription => '适合忙碌的人';
-
-  @override
-  String get resizeMode => '调整模式';
-
-  @override
-  String get resizeModeDescription => '播放器的默认调整模式';
-
-  @override
-  String get skipButton => '跳过按钮';
-
-  @override
-  String get skipButtonDescription => '跳过按钮持续时间';
-
-  @override
-  String get thumbLessSeekBar => '争取获得粮食';
-
-  @override
-  String get thumbLessSeekBarDesc => 'seek从寻求的酒吧搬走';
-
-  @override
-  String get customMPV => 'Custom MPV Configuration';
-
-  @override
-  String customMPVDescription(String path) {
-    return 'Enable this option to use your own MPV configuration file. Place your custom config at: $path';
-  }
-
-  @override
-  String get adjustBrightness => 'Adjust Brightness';
-
-  @override
-  String get adjustBrightnessDescription =>
-      'Enable brightness adjustment by swiping up/down on the left side of the screen';
-
-  @override
-  String get adjustVolume => 'Adjust Volume';
-
-  @override
-  String get adjustVolumeDescription =>
-      'Enable volume adjustment by swiping up/down on the right side of the screen';
-
-  @override
-  String get subtitles => '字幕';
-
-  @override
-  String get showSubtitles => '显示字幕';
-
-  @override
-  String get showSubtitlesDescription => '默认显示字幕';
-
-  @override
-  String get subtitlePreview => '字幕预览';
-
-  @override
-  String get fontColor => '字体颜色';
-
-  @override
-  String get fontColorDescription => '字幕字体颜色';
-
-  @override
-  String get fontFamily => '字体';
-
-  @override
-  String get fontFamilyDescription => '字幕字体类型';
-
-  @override
-  String get fontSize => '字体大小';
-
-  @override
-  String get fontSizeDescription => '字幕字体大小';
-
-  @override
-  String get fontWeight => '字体粗细';
-
-  @override
-  String get fontWeightDescription => '字幕字体粗细';
-
-  @override
-  String get backgroundColor => '背景颜色';
-
-  @override
-  String get backgroundColorDescription => '字幕背景颜色';
-
-  @override
-  String get outlineColor => '轮廓颜色';
-
-  @override
-  String get outlineColorDescription => '字幕轮廓颜色';
-
-  @override
-  String get bottomPadding => '底部间距';
-
-  @override
-  String get bottomPaddingDescription => '字幕底部间距';
-
-  @override
-  String get useLibass => 'Use Libass';
-
-  @override
-  String get useLibassDescription =>
-      'Use Libass for subtitle rendering (overrides other subtitle settings)';
-
-  @override
-  String get useGpuNext => 'Use gpu-next';
-
-  @override
-  String get useGpuNextDescription =>
-      'New rendering backend (may cause visual artifacts)';
-
-  @override
-  String get autoPlayNextEpisode => 'Auto Play Next Episode';
-
-  @override
-  String get autoPlayNextEpisodeDescription =>
-      'Automatically play the next episode when the current one ends';
-
-  @override
-  String get automaticSourceSelection => 'Automatic Source Selection Method';
-
-  @override
-  String get automaticSourceSelectionDescription =>
-      'Which method to use for automatic source selection';
-
-  @override
-  String get perAnimePlayerSettings => 'Per-Anime Player Settings';
-
-  @override
-  String get perAnimePlayerSettingsDesc =>
-      'Use different player settings for each anime (disabling may override existing per-anime settings)';
-
-  @override
-  String get readerSettings => '读者背景';
-
-  @override
-  String get readerSettingsDesc => 'A. 改观环境';
-
-  @override
-  String get spacedPages => '散页';
-
-  @override
-  String get spacedPagesDesc => '段 次 页 次';
-
-  @override
-  String get hideScrollbar => '隐藏滚动条';
-
-  @override
-  String get hideScrollbarDesc => '阅读';
-
-  @override
-  String get hidePageNumber => '页 次';
-
-  @override
-  String get hidePageNumberDesc => '阅读时使用页数';
-
-  @override
-  String get theme => '主题';
-
-  @override
-  String get themeDescription => '自定义应用的外观和氛围';
-
-  @override
-  String get darkMode => '深色模式';
-
-  @override
-  String get enableDarkMode => '启用深色模式';
-
-  @override
-  String get glassEffect => 'Glass Effect';
-
-  @override
-  String get glassEffectDescription =>
-      'Gives a frosted glass effect to the app';
-
-  @override
-  String get coverTheme => 'Use Cover Theme';
-
-  @override
-  String get coverThemeDescription => 'Use media cover image as theme color';
+  String get cardStyleDesc => 'Title placement, size, progress and badges';
 
   @override
   String get materialYou => 'Material You';
 
   @override
-  String get materialYouDescription => '使用与墙纸相同的颜色';
+  String get materialYouDesc => 'Dynamic colour from the system';
 
   @override
-  String get customTheme => '自定义主题';
+  String get customAccent => 'Custom accent colour';
 
   @override
-  String get customThemeDescription => '使用你自己的颜色作为主题';
+  String get customAccentDesc => 'Pick your own primary colour';
 
   @override
-  String get oledThemeVariant => 'OLED主题变体';
+  String get customAccentDisabledDesc =>
+      'Turn off Material You to use a custom colour';
 
   @override
-  String get oledThemeVariantDescription => '启用OLED模式';
+  String get themeMode => 'Theme mode';
 
   @override
-  String get colorPicker => '颜色选择器';
+  String get mode => 'Mode';
 
   @override
-  String get pickColor => '选择颜色';
+  String get trackingService => 'Tracking service';
 
   @override
-  String get colorPickerDescription => '选择一个颜色';
+  String get signOut => 'Sign out';
 
   @override
-  String get colorPickerDefault => '违约';
+  String get signIn => 'Sign in';
 
   @override
-  String get colorPickerCustom => '习俗';
+  String get notSignedIn => 'Not signed in';
 
   @override
-  String get customPath => '习俗之路';
+  String signOutOf(String service) {
+    return 'Sign out of $service?';
+  }
 
   @override
-  String get customPathDescription => '2. 确立一条习俗,以挽救档案\n长期停业';
+  String get checkForUpdates => 'Check for updates';
 
   @override
-  String get selectDirectory => '选择名录';
+  String get checkForUpdatesDesc => 'Notify on a new GitHub release';
 
   @override
-  String get selectMediaService => '选择媒体服务';
+  String get updateChannel => 'Update channel';
 
   @override
-  String get logFile => '记录';
+  String get channel => 'Channel';
 
   @override
-  String get logFileDescription => '分享记录档案';
+  String get stable => 'Stable';
 
   @override
-  String get restoreSettings => '恢复设置';
+  String get preRelease => 'Pre-release';
 
   @override
-  String get differentCacheManager => '不同Cache管理员';
+  String get alpha => 'Alpha';
 
   @override
-  String get differentCacheManagerDesc => '使用不同的图像管理员';
+  String get checkNow => 'Check now';
 
   @override
-  String get backupAndRestore => 'Backup & Restore';
+  String get userAgent => 'User-Agent';
 
   @override
-  String get backupAndRestoreDescription =>
-      'Save and restore the app preferences';
+  String get settingDefault => 'Default';
 
   @override
-  String get backup => 'Backup';
+  String get dnsOverHttps => 'DNS-over-HTTPS';
 
   @override
-  String get restore => 'Restore';
+  String get dnsDefault => 'Default (Cloudflare)';
 
   @override
-  String get webView => '网站';
+  String get proxy => 'Proxy';
 
   @override
-  String get developersHelpers => '开发商/经理';
+  String get clearCookies => 'Clear cookies';
 
   @override
-  String get developersHelpersDesc => 'Dartotsu的无报酬劳动';
+  String get clearCookiesDesc => 'Remove every stored cookie';
 
   @override
-  String get supportMaintainer => '想要支持Dartotsu的维护者吗？\n考虑捐赠';
+  String get clearCookiesConfirm =>
+      'Remove all stored cookies? This may sign you out of some sources.';
 
   @override
-  String get donationGoal => '目前没有捐赠目标';
+  String get version => 'Version';
 
   @override
-  String get options => '选项';
+  String get gitHub => 'GitHub';
 
   @override
-  String get ok => '确定';
+  String get gitHubDesc => 'Source, issues and releases';
 
   @override
-  String get cancel => '取消';
+  String get discordDesc => 'Community and support';
 
   @override
-  String get yes => '是';
+  String get donate => 'Buy me a coffee';
 
   @override
-  String get no => '否';
+  String get donateDesc => 'Support development';
+
+  @override
+  String get sectionColors => 'Colors';
+
+  @override
+  String get sectionDisplay => 'Display';
+
+  @override
+  String get sectionStyle => 'Style';
+
+  @override
+  String get sectionCommunity => 'Community';
+
+  @override
+  String get sectionAppInfo => 'App Info';
+
+  @override
+  String get sectionCache => 'Cache';
+
+  @override
+  String get sectionRequests => 'Requests';
+
+  @override
+  String get sectionDnsProxy => 'DNS & Proxy';
 }
