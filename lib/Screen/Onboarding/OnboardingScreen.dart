@@ -13,8 +13,8 @@ import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Widgets/Components/BaseScreen.dart';
 import '../../Widgets/Components/CachedNetworkImage.dart';
 import '../../Widgets/Components/ScrollConfig.dart';
-import '../../Widgets/Components/ThemedContainer.dart';
 import '../Login/LoginScreen.dart';
+import '../Settings/Widgets/ThemeDropdown.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
