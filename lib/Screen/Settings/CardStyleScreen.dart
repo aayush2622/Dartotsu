@@ -38,7 +38,7 @@ class _CardStyleScreenState extends BaseScreen<CardStyleScreen> {
       body: CustomScrollConfig(
         context,
         children: [
-          SliverAppBar.large(
+          SliverAppBar.medium(
             backgroundColor: Colors.transparent,
             titleSpacing: 4,
             leading: IconButton(
