@@ -8,6 +8,7 @@ import '../../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../../Model/Setting.dart';
 import '../../../Utils/Extensions/ContextExtensions.dart';
 import '../../../Utils/Functions/GetXFunctions.dart';
+import '../../../Utils/Functions/NavigateToScreen.dart';
 import '../../../Widgets/Components/AlertDialogBuilder.dart';
 import '../../../Widgets/Components/CustomBottomDialog.dart';
 import '../../../Widgets/Components/ThemedContainer.dart';
@@ -108,7 +109,7 @@ Widget _sheetActions(
         const Spacer(),
       ],
       TextButton(
-        onPressed: () => Navigator.of(context).pop(),
+        onPressed: () => popPage(context),
         child: Text(getString.cancel),
       ),
       const SizedBox(width: 8),
@@ -220,7 +221,7 @@ class _ProxySheetState extends State<_ProxySheet> {
   void _save() {
     PrefName.proxyUrl.value = _ctrl.text.trim();
     widget.network.reinitialize();
-    Navigator.of(context).pop();
+    popPage(context);
   }
 
   @override
@@ -396,7 +397,7 @@ class _DnsSheetState extends State<_DnsSheet> {
 
   void _save() {
     PrefName.customDnsUrl.value = _ctrl.text.trim();
-    Navigator.of(context).pop();
+    popPage(context);
   }
 
   @override
@@ -508,7 +509,7 @@ class _UaSheetState extends State<_UaSheet> {
   void _save() {
     PrefName.customUserAgent.value = _ctrl.text.trim();
     widget.network.reinitialize();
-    Navigator.of(context).pop();
+    popPage(context);
   }
 
   @override

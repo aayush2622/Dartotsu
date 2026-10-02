@@ -7,6 +7,7 @@ import '../../Utils/Animation/WidgetAnimations.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Extensions/Responsive.dart';
 import '../../Core/ThemeManager/LanguageSwitcher.dart';
+import '../../Utils/Functions/NavigateToScreen.dart';
 import '../../Widgets/Components/BaseScreen.dart';
 import '../../Widgets/Components/ScrollConfig.dart';
 import '../../Widgets/Components/ThemedContainer.dart';
@@ -49,9 +50,7 @@ class _SettingsScreenState extends BaseScreen<SettingsScreen> {
                 size: 20,
                 color: context.colorScheme.onSurfaceVariant,
               ),
-              onPressed: () {
-                if (Get.key.currentState?.canPop() ?? false) Get.back();
-              },
+              onPressed: () => popPage(context),
             ),
             backgroundColor: Colors.transparent,
             title: Text(getString.settings),
@@ -167,24 +166,12 @@ class _CategoryRowState extends State<_CategoryRow> {
     final c = widget.category;
 
     return InkWell(
-      onTap: () => Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (_) => SettingsCategoryScreen(category: c),
-        ),
-      ),
+      onTap: () => navigateToPage(context,SettingsCategoryScreen(category: c)),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
         child: Row(
           children: [
-            Container(
-              width: 42,
-              height: 42,
-              decoration: BoxDecoration(
-                color: scheme.secondaryContainer,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Icon(c.icon, size: 22, color: scheme.onSecondaryContainer),
-            ),
+            Icon(c.icon, size: 22, color: scheme.onSecondaryContainer),
             const SizedBox(width: 16),
             Expanded(
               child: Column(

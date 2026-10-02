@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
+import '../../Utils/Functions/NavigateToScreen.dart';
 import 'ThemedContainer.dart';
 
 class AlertDialogBuilder {
@@ -305,7 +306,7 @@ class AlertDialogBuilder {
       onChanged: (int? value) {
         setState(() => _selectedItemIndex = value!);
         _onItemSelected?.call(value!);
-        Navigator.of(context).pop();
+        popPage(context);
       },
     ),
   );
@@ -372,7 +373,7 @@ class AlertDialogBuilder {
         onPressed: () {
           onClick?.call();
           if (_popOnFinish) {
-            Navigator.of(context).pop();
+            popPage(context);
           }
         },
         child: Text(

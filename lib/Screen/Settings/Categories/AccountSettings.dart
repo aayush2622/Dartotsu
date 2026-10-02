@@ -5,6 +5,7 @@ import '../../../Core/Services/ServiceSwitcher.dart';
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../../Model/Setting.dart';
 import '../../../Utils/Functions/GetXFunctions.dart';
+import '../../../Utils/Functions/NavigateToScreen.dart';
 import '../../../Widgets/Components/AlertDialogBuilder.dart';
 import '../../Login/LoginScreen.dart';
 
@@ -39,9 +40,7 @@ List<Setting> accountSettings(BuildContext context) {
               .setPositiveButton(getString.signOut, auth.logout)
               .show();
         } else {
-          Navigator.of(
-            context,
-          ).push(MaterialPageRoute(builder: (_) => const LoginScreen()));
+          navigateToPage(context, const LoginScreen());
         }
       },
     ),

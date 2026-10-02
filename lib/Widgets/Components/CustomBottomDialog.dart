@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'ThemedContainer.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Functions/AppShortcuts.dart';
+import '../../Utils/Functions/NavigateToScreen.dart';
 import 'ScrollConfig.dart';
 
 class CustomBottomDialog extends StatefulWidget {
@@ -74,7 +75,7 @@ class _CustomBottomDialogState extends State<CustomBottomDialog> {
                 child: DpadFocusable(
                   autofocus: true,
                   entry: true,
-                  onSelect: () => Get.back(),
+                  onSelect: () => popPage(context),
                   child: Container(
                     width: 40,
                     height: 4,
@@ -214,13 +215,6 @@ class _CustomBottomDialogState extends State<CustomBottomDialog> {
   }
 }
 
-/// Opens [child] in the app's standard themed, draggable, safe-area bottom
-/// sheet. [child] is most often a [CustomBottomDialog], but any widget works
-/// — this is the one place every bottom sheet in the app should go through,
-/// so they all share the same backdrop/elevation/safe-area behavior.
-///
-/// Pop with a value (`Navigator.of(context).pop(value)`) to resolve the
-/// returned future to it.
 Future<T?> showCustomBottomDialog<T>(
   BuildContext context,
   Widget child, {

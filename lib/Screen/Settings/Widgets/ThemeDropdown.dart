@@ -9,6 +9,7 @@ import '../../../Core/ThemeManager/CustomColorPicker.dart';
 import '../../../Core/ThemeManager/ThemeController.dart';
 import '../../../Utils/Extensions/ContextExtensions.dart';
 import '../../../Utils/Functions/GetXFunctions.dart';
+import '../../../Utils/Functions/NavigateToScreen.dart';
 import '../../../Widgets/Components/CustomBottomDialog.dart';
 import '../../../Widgets/Components/ThemedContainer.dart';
 
@@ -214,7 +215,7 @@ class _ThemePickerSheet extends StatelessWidget {
                 child: Align(
                   alignment: Alignment.centerRight,
                   child: FilledButton(
-                    onPressed: () => Navigator.of(context).pop(),
+                    onPressed: () => popPage(context),
                     child: const Text('Done'),
                   ),
                 ),
@@ -335,8 +336,6 @@ class _UiSkeletonPreview extends StatelessWidget {
       child: LayoutBuilder(
         builder: (_, cs) {
           final h = cs.maxHeight;
-          // Split the space left after the two bars evenly: half to the
-          // hero image, half to the two list rows below it.
           final available = (h - barH * 2 - gap * 3 - 4).clamp(0.0, h);
           final heroH = available * 0.5;
           final rowH = available * 0.25;
@@ -348,7 +347,6 @@ class _UiSkeletonPreview extends StatelessWidget {
             children: [
               Positioned.fill(child: Container(color: bg)),
 
-              // ── app bar ──
               Positioned(
                 top: 0,
                 left: 0,
@@ -374,7 +372,6 @@ class _UiSkeletonPreview extends StatelessWidget {
                 ),
               ),
 
-              // ── hero image block ──
               Positioned(
                 top: heroTop,
                 left: 5,
@@ -394,7 +391,6 @@ class _UiSkeletonPreview extends StatelessWidget {
                 ),
               ),
 
-              // ── list rows ──
               Positioned(
                 top: row1Top,
                 left: 5,
@@ -410,7 +406,6 @@ class _UiSkeletonPreview extends StatelessWidget {
                 child: _listRow(card, img.withValues(alpha: 0.5), line),
               ),
 
-              // ── bottom nav ──
               Positioned(
                 bottom: 0,
                 left: 0,

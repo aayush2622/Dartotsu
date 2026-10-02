@@ -21,6 +21,13 @@ Future<T?> navigateToPage<T>(
   );
 }
 
+/// The single pop entry point for every screen/sheet/dialog — swap what
+/// runs here (Navigator, GetX, …) in one place instead of chasing call sites.
+void popPage<T extends Object?>(BuildContext context, [T? result]) {
+  final nav = Navigator.of(context);
+  if (nav.canPop()) nav.pop<T>(result);
+}
+
 bool _backBusy = false;
 
 /// The single back entry point for ESC, the mouse back-button and the d-pad

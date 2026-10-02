@@ -7,6 +7,7 @@ import '../../Utils/Extensions/CardStyleMetrics.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Extensions/Responsive.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
+import '../../Utils/Functions/NavigateToScreen.dart';
 import '../../Widgets/Components/AppControls.dart';
 import '../../Widgets/Components/BaseScreen.dart';
 import '../../Widgets/Components/ScrollConfig.dart';
@@ -47,9 +48,7 @@ class _CardStyleScreenState extends BaseScreen<CardStyleScreen> {
                 size: 20,
                 color: context.colorScheme.onSurfaceVariant,
               ),
-              onPressed: () {
-                if (Get.key.currentState?.canPop() ?? false) Get.back();
-              },
+              onPressed: () => popPage(context),
             ),
             title: const Text('Card style'),
             actions: [

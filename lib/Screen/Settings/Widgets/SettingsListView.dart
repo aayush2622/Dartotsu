@@ -5,6 +5,7 @@ import '../../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../../Model/Setting.dart';
 import '../../../Utils/Extensions/ContextExtensions.dart';
 import '../../../Utils/Extensions/Responsive.dart';
+import '../../../Utils/Functions/NavigateToScreen.dart';
 import '../../../Widgets/Components/ScrollConfig.dart';
 import 'SettingsAdaptor.dart';
 import 'SettingsSearchField.dart';
@@ -48,9 +49,7 @@ class _SettingsListViewState extends State<SettingsListView> {
                 size: 20,
                 color: context.colorScheme.onSurfaceVariant,
               ),
-              onPressed: () {
-                if (Get.key.currentState?.canPop() ?? false) Get.back();
-              },
+              onPressed: () => popPage(context),
             ),
             title: Text(widget.title!),
           ),
