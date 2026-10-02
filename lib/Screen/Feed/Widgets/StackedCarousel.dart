@@ -2,11 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-import '../../Core/Services/Model/Media.dart';
-import '../../Utils/Extensions/ContextExtensions.dart';
-import '../../Utils/Extensions/Responsive.dart';
-import '../Components/CachedNetworkImage.dart';
-import '../Components/ScrollConfig.dart';
+import '../../../Core/Services/Model/Media.dart';
+import '../../../Utils/Extensions/ContextExtensions.dart';
+import '../../../Utils/Extensions/Responsive.dart';
+import '../../../Widgets/Components/CachedNetworkImage.dart';
+import '../../../Widgets/Components/ScrollConfig.dart';
 
 /// A spotlight carousel: the centre card sits in front, its neighbours fan out
 /// behind it like a shuffled deck. Auto-advances and loops forever; a drag
@@ -157,13 +157,16 @@ class _StackedCarouselState extends State<StackedCarousel> {
                       ColoredBox(color: scheme.surfaceContainerHigh),
                 ),
               ),
-              const DecoratedBox(
+              DecoratedBox(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
-                    stops: [0.45, 1.0],
-                    colors: [Colors.transparent, Color(0xE6060A12)],
+                    stops: const [0.45, 1.0],
+                    colors: [
+                      Colors.transparent,
+                      scheme.scrim.withValues(alpha: 0.9),
+                    ],
                   ),
                 ),
               ),
@@ -177,7 +180,7 @@ class _StackedCarouselState extends State<StackedCarousel> {
                       vertical: 4,
                     ),
                     decoration: BoxDecoration(
-                      color: const Color(0xCC060A12),
+                      color: scheme.inverseSurface.withValues(alpha: 0.8),
                       borderRadius: BorderRadius.circular(999),
                     ),
                     child: Row(
@@ -186,15 +189,15 @@ class _StackedCarouselState extends State<StackedCarousel> {
                         Text(
                           score.toStringAsFixed(1),
                           style: context.textTheme.labelMedium?.copyWith(
-                            color: Colors.white,
+                            color: scheme.onInverseSurface,
                             fontWeight: FontWeight.w800,
                           ),
                         ),
                         const SizedBox(width: 2),
-                        const Icon(
+                        Icon(
                           Icons.star_rounded,
                           size: 13,
-                          color: Colors.white,
+                          color: scheme.onInverseSurface,
                         ),
                       ],
                     ),

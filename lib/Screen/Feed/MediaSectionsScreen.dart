@@ -14,7 +14,7 @@ import '../../Utils/Functions/RefreshController.dart' show RefreshController;
 import '../../Widgets/Components/ScrollConfig.dart';
 import '../../Widgets/Components/SectionCard.dart';
 import '../../Widgets/Shelf/MediaSection.dart';
-import '../../Widgets/Shelf/StackedCarousel.dart';
+import 'Widgets/StackedCarousel.dart';
 
 class MediaSectionsScreen extends StatefulWidget {
   final SectionsLoader loader;

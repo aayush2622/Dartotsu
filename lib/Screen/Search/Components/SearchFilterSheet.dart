@@ -6,7 +6,7 @@ import '../../../Utils/Extensions/ContextExtensions.dart';
 import '../../../Utils/Extensions/Responsive.dart';
 import '../../../Utils/Extensions/StringExtensions.dart';
 import '../../../Widgets/Components/AppControls.dart';
-import '../../../Widgets/Components/AppDropdown.dart';
+import '../Widgets/AppDropdown.dart';
 import '../../../Widgets/Components/CustomBottomDialog.dart';
 import '../../../Widgets/Components/ScrollConfig.dart';
 

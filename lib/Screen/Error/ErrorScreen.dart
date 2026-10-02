@@ -11,7 +11,7 @@ import '../../Utils/Extensions/NumExtensions.dart';
 import '../../Utils/Function.dart';
 import '../../Utils/Functions/CopyToClip.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
-import '../../Widgets/Components/AppButton.dart';
+import 'Widgets/AppButton.dart';
 import '../../Widgets/Components/ScrollConfig.dart';
 
 class ErrorScreen extends StatefulWidget {
