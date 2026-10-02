@@ -24,17 +24,36 @@ ThemeData buildAppTheme(
   ThemeData base, {
   required bool isOled,
   bool glass = false,
+  String? fontFamily,
 }) {
   final dark = base.brightness == Brightness.dark;
   final oled = isOled && dark;
+  final appTextTheme = _buildTextTheme(fontFamily ?? _defaultFontFamily);
 
   var scheme = base.colorScheme;
   if (oled) {
-    scheme = scheme.copyWith(
-      surface: Colors.black,
-      surfaceContainerHighest: const Color(0xFF222222),
-    );
+    scheme = scheme.copyWith(surface: Colors.black);
   }
+
+  // Hand-authored themes only ever set `surface` + `surfaceContainerHighest`;
+  // the other container roles then fall back to Flutter's hardcoded M3
+  // baseline defaults, which aren't derived from this scheme's actual
+  // `surface` — on several palettes that default lands almost on top of
+  // `surface`, making every card/sheet background invisible against the
+  // scaffold. Rebuild the whole ladder from this scheme's own surface so
+  // cards are always visibly distinct, on every theme.
+  Color tint(double amount) => Color.alphaBlend(
+    (dark ? Colors.white : Colors.black).withValues(alpha: amount),
+    scheme.surface,
+  );
+
+  scheme = scheme.copyWith(
+    surfaceContainerLowest: tint(0),
+    surfaceContainerLow: tint(0.04),
+    surfaceContainer: tint(0.07),
+    surfaceContainerHigh: tint(0.10),
+    surfaceContainerHighest: tint(0.13),
+  );
 
   final scaffoldBg = glass
       ? Colors.transparent
@@ -53,7 +72,7 @@ ThemeData buildAppTheme(
     ),
     minimumSize: const WidgetStatePropertyAll(Size(0, 48)),
     textStyle: WidgetStatePropertyAll(
-      _poppinsTextTheme.labelLarge?.copyWith(fontWeight: FontWeight.w700),
+      appTextTheme.labelLarge?.copyWith(fontWeight: FontWeight.w700),
     ),
     animationDuration: Durations.short4,
   );
@@ -69,7 +88,7 @@ ThemeData buildAppTheme(
       scrolledUnderElevation: glass ? 0 : null,
       elevation: glass ? 0 : null,
       centerTitle: false,
-      titleTextStyle: _poppinsTextTheme.titleLarge?.copyWith(
+      titleTextStyle: appTextTheme.titleLarge?.copyWith(
         color: scheme.onSurface,
       ),
     ),
@@ -97,7 +116,7 @@ ThemeData buildAppTheme(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(_shapeLg),
       ),
-      extendedTextStyle: _poppinsTextTheme.labelLarge?.copyWith(
+      extendedTextStyle: appTextTheme.labelLarge?.copyWith(
         fontWeight: FontWeight.w700,
       ),
     ),
@@ -178,7 +197,7 @@ ThemeData buildAppTheme(
     ),
     sliderTheme: const SliderThemeData(year2023: false),
     progressIndicatorTheme: const ProgressIndicatorThemeData(year2023: false),
-    textTheme: base.textTheme.merge(_poppinsTextTheme),
+    textTheme: base.textTheme.merge(appTextTheme),
     switchTheme: SwitchThemeData(
       thumbColor: WidgetStateProperty.resolveWith(
         (states) => states.contains(WidgetState.selected)
@@ -216,82 +235,82 @@ Color deriveCardColor({
   );
 }
 
-const _fontFamily = 'Poppins';
+const _defaultFontFamily = 'Poppins';
 
-final TextTheme _poppinsTextTheme = const TextTheme(
+TextTheme _buildTextTheme(String fontFamily) => TextTheme(
   displayLarge: TextStyle(
-    fontFamily: _fontFamily,
+    fontFamily: fontFamily,
     fontWeight: FontWeight.w700,
     fontSize: 56,
     letterSpacing: -0.5,
   ),
   displayMedium: TextStyle(
-    fontFamily: _fontFamily,
+    fontFamily: fontFamily,
     fontWeight: FontWeight.w700,
     fontSize: 48,
   ),
   displaySmall: TextStyle(
-    fontFamily: _fontFamily,
+    fontFamily: fontFamily,
     fontWeight: FontWeight.w600,
     fontSize: 36,
   ),
   headlineLarge: TextStyle(
-    fontFamily: _fontFamily,
+    fontFamily: fontFamily,
     fontWeight: FontWeight.w700,
     fontSize: 32,
   ),
   headlineMedium: TextStyle(
-    fontFamily: _fontFamily,
+    fontFamily: fontFamily,
     fontWeight: FontWeight.w600,
     fontSize: 28,
   ),
   headlineSmall: TextStyle(
-    fontFamily: _fontFamily,
+    fontFamily: fontFamily,
     fontWeight: FontWeight.w600,
     fontSize: 24,
   ),
   titleLarge: TextStyle(
-    fontFamily: _fontFamily,
+    fontFamily: fontFamily,
     fontWeight: FontWeight.w600,
     fontSize: 22,
   ),
   titleMedium: TextStyle(
-    fontFamily: _fontFamily,
+    fontFamily: fontFamily,
     fontWeight: FontWeight.w600,
     fontSize: 18,
   ),
   titleSmall: TextStyle(
-    fontFamily: _fontFamily,
+    fontFamily: fontFamily,
     fontWeight: FontWeight.w500,
     fontSize: 16,
   ),
   bodyLarge: TextStyle(
-    fontFamily: _fontFamily,
+    fontFamily: fontFamily,
     fontWeight: FontWeight.w500,
     fontSize: 16,
   ),
   bodyMedium: TextStyle(
-    fontFamily: _fontFamily,
+    fontFamily: fontFamily,
     fontWeight: FontWeight.w400,
     fontSize: 14,
   ),
   bodySmall: TextStyle(
-    fontFamily: _fontFamily,
+    fontFamily: fontFamily,
     fontWeight: FontWeight.w400,
     fontSize: 12,
   ),
   labelLarge: TextStyle(
-    fontFamily: _fontFamily,
+    fontFamily: fontFamily,
     fontWeight: FontWeight.w700,
     fontSize: 14,
   ),
   labelMedium: TextStyle(
-    fontFamily: _fontFamily,
+    fontFamily: fontFamily,
     fontWeight: FontWeight.w600,
     fontSize: 12,
   ),
   labelSmall: TextStyle(
-    fontFamily: _fontFamily,
+    fontFamily: fontFamily,
     fontWeight: FontWeight.w500,
     fontSize: 11,
   ),

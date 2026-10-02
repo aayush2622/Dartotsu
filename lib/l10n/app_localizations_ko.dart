@@ -188,6 +188,15 @@ class AppLocalizationsKo extends AppLocalizations {
   String get cardStyleDesc => 'Title placement, size, progress and badges';
 
   @override
+  String get customFont => 'Custom font';
+
+  @override
+  String get customFontDesc => 'Use a .ttf or .otf file from your device';
+
+  @override
+  String get customFontError => 'Couldn\'t load that font file';
+
+  @override
   String get materialYou => 'Material You';
 
   @override

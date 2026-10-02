@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:path/path.dart' as p;
 
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../../Core/ThemeManager/ThemeController.dart';
@@ -6,6 +7,7 @@ import '../../../Core/ThemeManager/ThemeMode.dart';
 import '../../../Model/Setting.dart';
 import '../../../Utils/Extensions/ContextExtensions.dart';
 import '../../../Utils/Functions/GetXFunctions.dart';
+import '../../../Utils/Functions/SnackBar.dart';
 import '../../../Widgets/Components/AppControls.dart';
 import '../../../Widgets/Components/ThemedContainer.dart';
 import '../CardStyleScreen.dart';
@@ -36,7 +38,7 @@ List<Setting> appearanceSettings(BuildContext context) {
           Icon(
             Icons.brightness_6_rounded,
             size: 22,
-            color: context.colorScheme.primary,
+            color: context.colorScheme.onSurfaceVariant,
           ),
           const SizedBox(width: 20),
           Expanded(
@@ -89,6 +91,25 @@ List<Setting> appearanceSettings(BuildContext context) {
       onClick: () => Navigator.of(
         context,
       ).push(MaterialPageRoute(builder: (_) => const CardStyleScreen())),
+    ),
+    Setting(
+      type: SettingType.normal,
+      name: getString.customFont,
+      description: t.useCustomFont.value
+          ? p.basename(t.customFontPath.value)
+          : getString.customFontDesc,
+      icon: Icons.text_fields_rounded,
+      trailing: t.useCustomFont.value
+          ? IconButton(
+              icon: const Icon(Icons.close_rounded),
+              tooltip: getString.reset,
+              onPressed: t.clearCustomFont,
+            )
+          : null,
+      onClick: () async {
+        final ok = await t.pickCustomFont();
+        if (!ok) snackString(getString.customFontError);
+      },
     ),
   ];
 }

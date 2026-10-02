@@ -23,6 +23,8 @@ class PrefName {
     false,
     PrefLocation.THEME,
   );
+  static const useCustomFont = Pref('useCustomFont', false, PrefLocation.THEME);
+  static const customFontPath = Pref('customFontPath', '', PrefLocation.THEME);
 
   static final themeMode = enumPref(
     'themeMode',

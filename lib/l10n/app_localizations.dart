@@ -509,6 +509,24 @@ abstract class AppLocalizations {
   /// **'Title placement, size, progress and badges'**
   String get cardStyleDesc;
 
+  /// No description provided for @customFont.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom font'**
+  String get customFont;
+
+  /// No description provided for @customFontDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Use a .ttf or .otf file from your device'**
+  String get customFontDesc;
+
+  /// No description provided for @customFontError.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t load that font file'**
+  String get customFontError;
+
   /// No description provided for @materialYou.
   ///
   /// In en, this message translates to:

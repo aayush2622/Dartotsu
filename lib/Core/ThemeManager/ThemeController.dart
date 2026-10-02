@@ -1,7 +1,11 @@
+import 'dart:async';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../Preferences/PrefManager.dart';
+import 'CustomFontLoader.dart';
 import 'ThemeManager.dart';
 
 /// Reactive theme state. Every field is a shared auto-persisting [Pref.rx];
@@ -15,8 +19,61 @@ class ThemeController extends GetxController {
   final customColor = PrefName.customColor.rx; // ARGB int
   final mode = PrefName.themeMode.rx;
 
+  final useCustomFont = PrefName.useCustomFont.rx;
+  final customFontPath = PrefName.customFontPath.rx;
+
+  /// Engine-registered family name for [customFontPath], once loaded. `null`
+  /// until the async [FontLoader] call completes, even if [useCustomFont] is
+  /// already true (e.g. right after a cold start restoring a saved pick).
+  String? _loadedFontFamily;
+  final _fontLoadTick = 0.obs;
+
   ColorScheme? _dynamicLight;
   ColorScheme? _dynamicDark;
+
+  @override
+  void onInit() {
+    super.onInit();
+    if (useCustomFont.value && customFontPath.value.isNotEmpty) {
+      unawaited(_loadFont(customFontPath.value));
+    }
+  }
+
+  Future<String?> _loadFont(String path) async {
+    final family = await CustomFontLoader.load(path);
+    if (family != null) {
+      _loadedFontFamily = family;
+      _fontLoadTick.value++;
+    }
+    return family;
+  }
+
+  /// Opens a system file picker for a `.ttf`/`.otf` file and applies it live.
+  /// Returns `false` if the user cancelled or the file couldn't be loaded.
+  Future<bool> pickCustomFont() async {
+    final file = await FilePicker.pickFile(
+      type: FileType.custom,
+      allowedExtensions: ['ttf', 'otf'],
+    );
+    final path = file?.path;
+    if (path == null) return false;
+    return setCustomFont(path);
+  }
+
+  /// Loads the font at [path] and, if successful, enables it immediately.
+  Future<bool> setCustomFont(String path) async {
+    final family = await _loadFont(path);
+    if (family == null) return false;
+    customFontPath.value = path;
+    useCustomFont.value = true;
+    return true;
+  }
+
+  void clearCustomFont() {
+    useCustomFont.value = false;
+    customFontPath.value = '';
+    _loadedFontFamily = null;
+  }
 
   /// Fed by `DynamicColorBuilder` in `MyApp`.
   void setDynamicSchemes(ColorScheme? light, ColorScheme? dark) {
@@ -60,6 +117,8 @@ class ThemeController extends GetxController {
       useMaterialYou.value,
       useCustomColor.value,
       customColor.value,
+      useCustomFont.value,
+      _fontLoadTick.value,
       _dynamicLight,
       _dynamicDark,
     ];
@@ -86,7 +145,13 @@ class ThemeController extends GetxController {
       base = AppTheme.byName(themeName.value).themeFor(brightness);
     }
 
-    return buildAppTheme(base, isOled: isOled.value, glass: useGlassMode.value);
+    final fontFamily = useCustomFont.value ? _loadedFontFamily : null;
+    return buildAppTheme(
+      base,
+      isOled: isOled.value,
+      glass: useGlassMode.value,
+      fontFamily: fontFamily,
+    );
   }
 
   // -- mutations (guarded combos) -----------------------------------------
