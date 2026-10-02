@@ -5,9 +5,6 @@ import '../../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../../Utils/Extensions/ContextExtensions.dart';
 import '../../../Widgets/Components/ThemedContainer.dart';
 
-/// The pill-shaped search field used atop both the settings menu and each
-/// category's search view — a themed, glass-aware surface around a
-/// borderless [TextField], with a clear button once there's text.
 class SettingsSearchField extends StatefulWidget {
   final RxString query;
   final String? hint;
