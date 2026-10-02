@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 
 import 'Themes/blue.dart';
+import 'Themes/catppuccin.dart';
 import 'Themes/green.dart';
 import 'Themes/lavender.dart';
 import 'Themes/ocean.dart';
+import 'Themes/onedark.dart';
 import 'Themes/oriax.dart';
 import 'Themes/pink.dart';
 import 'Themes/purple.dart';
 import 'Themes/red.dart';
+import 'Themes/rosepine.dart';
 import 'Themes/saikou.dart';
 
 /// The single source of truth for the built-in colour palettes. The theme
@@ -21,9 +24,16 @@ enum AppTheme {
   saikou,
   red,
   lavender,
-  ocean;
+  ocean,
+  rosePine,
+  catppuccin,
+  oneDark;
 
-  String get label => name[0].toUpperCase() + name.substring(1);
+  String get label => switch (this) {
+    AppTheme.rosePine => 'Rosé Pine',
+    AppTheme.oneDark => 'One Dark',
+    _ => name[0].toUpperCase() + name.substring(1),
+  };
 
   ThemeData themeFor(Brightness brightness) {
     final dark = brightness == Brightness.dark;
@@ -37,6 +47,9 @@ enum AppTheme {
       AppTheme.red => dark ? redDarkTheme : redLightTheme,
       AppTheme.lavender => dark ? lavenderDarkTheme : lavenderLightTheme,
       AppTheme.ocean => dark ? oceanDarkTheme : oceanLightTheme,
+      AppTheme.rosePine => dark ? rosePineDarkTheme : rosePineLightTheme,
+      AppTheme.catppuccin => dark ? catppuccinDarkTheme : catppuccinLightTheme,
+      AppTheme.oneDark => dark ? oneDarkDarkTheme : oneDarkLightTheme,
     };
   }
 
