@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../Widgets/Components/BaseScreen.dart';
-import '../../Widgets/Settings/SettingsListView.dart';
+import 'Widgets/SettingsListView.dart';
 import 'SettingsCategories.dart';
 
 class SettingsCategoryScreen extends StatefulWidget {
@@ -24,7 +25,7 @@ class _SettingsCategoryScreenState extends BaseScreen<SettingsCategoryScreen> {
       ),
       body: SettingsListView(
         searchable: widget.category.build,
-        hint: 'Search ${widget.category.title.toLowerCase()}',
+        hint: getString.searchCategory(widget.category.title.toLowerCase()),
       ),
     );
   }

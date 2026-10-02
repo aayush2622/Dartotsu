@@ -1,26 +1,55 @@
-import '../../Utils/Nav/DpadNav.dart';
+import '../../../Utils/Nav/DpadNav.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../Model/Setting.dart';
-import '../../Utils/Extensions/ContextExtensions.dart';
+import '../../../Model/Setting.dart';
+import '../../../Utils/Extensions/ContextExtensions.dart';
+
+// ─── shared label row ─────────────────────────────────────────────────────────
 
 class _Label extends StatelessWidget {
   final Setting setting;
   final Widget? trailing;
+  final Color? iconContainerColor;
+  final Color? iconOnColor;
 
-  const _Label({required this.setting, this.trailing});
+  const _Label({
+    required this.setting,
+    this.trailing,
+    this.iconContainerColor,
+    this.iconOnColor,
+  });
 
   @override
   Widget build(BuildContext context) {
     final scheme = context.colorScheme;
+
+    Widget? leading;
+    if (setting.iconWidget != null) {
+      leading = setting.iconWidget;
+    } else if (setting.icon != null) {
+      if (iconContainerColor != null) {
+        leading = Container(
+          width: 36,
+          height: 36,
+          decoration: BoxDecoration(
+            color: iconContainerColor,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Icon(
+            setting.icon,
+            size: 20,
+            color: iconOnColor ?? scheme.onPrimaryContainer,
+          ),
+        );
+      } else {
+        leading = Icon(setting.icon, color: scheme.onSurfaceVariant, size: 22);
+      }
+    }
+
     return Row(
       children: [
-        if (setting.iconWidget != null || setting.icon != null) ...[
-          setting.iconWidget ??
-              Icon(setting.icon, color: scheme.primary, size: 22),
-          const SizedBox(width: 20),
-        ],
+        if (leading != null) ...[leading, const SizedBox(width: 16)],
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -33,7 +62,7 @@ class _Label extends StatelessWidget {
                 ),
               ),
               if (setting.description != null) ...[
-                const SizedBox(height: 4),
+                const SizedBox(height: 3),
                 Text(
                   setting.description!,
                   style: context.textTheme.bodySmall?.copyWith(
@@ -54,10 +83,19 @@ class _Label extends StatelessWidget {
   }
 }
 
+// ─── normal row ──────────────────────────────────────────────────────────────
+
 class SettingItem extends StatelessWidget {
   final Setting setting;
+  final Color? iconContainerColor;
+  final Color? iconOnColor;
 
-  const SettingItem({super.key, required this.setting});
+  const SettingItem({
+    super.key,
+    required this.setting,
+    this.iconContainerColor,
+    this.iconOnColor,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +120,7 @@ class SettingItem extends StatelessWidget {
       onSelect: setting.onClick == null ? null : onTap,
       onLongSelect: setting.onLongClick,
       builder: (_, state, child) => AnimatedScale(
-        scale: kDpadFocused(state) ? 1.04 : 1.0,
+        scale: kDpadFocused(state) ? 1.02 : 1.0,
         duration: Durations.short3,
         curve: Curves.easeOutBack,
         child: child,
@@ -90,20 +128,33 @@ class SettingItem extends StatelessWidget {
       child: InkWell(
         onTap: setting.onClick == null ? null : onTap,
         onLongPress: setting.onLongClick,
-        borderRadius: BorderRadius.circular(16),
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 12),
-          child: _Label(setting: setting, trailing: trailing),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+          child: _Label(
+            setting: setting,
+            trailing: trailing,
+            iconContainerColor: iconContainerColor,
+            iconOnColor: iconOnColor,
+          ),
         ),
       ),
     );
   }
 }
 
+// ─── switch row ──────────────────────────────────────────────────────────────
+
 class SettingSwitchItem extends StatelessWidget {
   final Setting setting;
+  final Color? iconContainerColor;
+  final Color? iconOnColor;
 
-  const SettingSwitchItem({super.key, required this.setting});
+  const SettingSwitchItem({
+    super.key,
+    required this.setting,
+    this.iconContainerColor,
+    this.iconOnColor,
+  });
 
   void _toggle() {
     HapticFeedback.selectionClick();
@@ -116,7 +167,7 @@ class SettingSwitchItem extends StatelessWidget {
       onSelect: _toggle,
       onLongSelect: setting.onLongClick,
       builder: (_, state, child) => AnimatedScale(
-        scale: kDpadFocused(state) ? 1.04 : 1.0,
+        scale: kDpadFocused(state) ? 1.02 : 1.0,
         duration: Durations.short3,
         curve: Curves.easeOutBack,
         child: child,
@@ -124,15 +175,16 @@ class SettingSwitchItem extends StatelessWidget {
       child: InkWell(
         onTap: _toggle,
         onLongPress: setting.onLongClick,
-        borderRadius: BorderRadius.circular(16),
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           child: _Label(
             setting: setting,
             trailing: Switch(
               value: setting.isChecked,
               onChanged: setting.onSwitchChange,
             ),
+            iconContainerColor: iconContainerColor,
+            iconOnColor: iconOnColor,
           ),
         ),
       ),
@@ -140,10 +192,19 @@ class SettingSwitchItem extends StatelessWidget {
   }
 }
 
+// ─── slider row ──────────────────────────────────────────────────────────────
+
 class SettingSliderItem extends StatefulWidget {
   final Setting setting;
+  final Color? iconContainerColor;
+  final Color? iconOnColor;
 
-  const SettingSliderItem({super.key, required this.setting});
+  const SettingSliderItem({
+    super.key,
+    required this.setting,
+    this.iconContainerColor,
+    this.iconOnColor,
+  });
 
   @override
   State<SettingSliderItem> createState() => _SettingSliderItemState();
@@ -159,7 +220,7 @@ class _SettingSliderItemState extends State<SettingSliderItem> {
     final max = (s.maxValue ?? 100).toDouble();
 
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10),
+      padding: const EdgeInsets.fromLTRB(16, 14, 16, 4),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -169,6 +230,8 @@ class _SettingSliderItemState extends State<SettingSliderItem> {
               '${_value.round()}',
               style: context.textTheme.labelLarge,
             ),
+            iconContainerColor: widget.iconContainerColor,
+            iconOnColor: widget.iconOnColor,
           ),
           Slider(
             min: min,
@@ -184,10 +247,19 @@ class _SettingSliderItemState extends State<SettingSliderItem> {
   }
 }
 
+// ─── input-box (stepper) row ──────────────────────────────────────────────────
+
 class SettingInputBoxItem extends StatefulWidget {
   final Setting setting;
+  final Color? iconContainerColor;
+  final Color? iconOnColor;
 
-  const SettingInputBoxItem({super.key, required this.setting});
+  const SettingInputBoxItem({
+    super.key,
+    required this.setting,
+    this.iconContainerColor,
+    this.iconOnColor,
+  });
 
   @override
   State<SettingInputBoxItem> createState() => _SettingInputBoxItemState();
@@ -206,29 +278,37 @@ class _SettingInputBoxItemState extends State<SettingInputBoxItem> {
 
   @override
   Widget build(BuildContext context) {
-    final scheme = context.colorScheme;
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: _Label(
         setting: widget.setting,
         trailing: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            IconButton(
-              icon: Icon(Icons.remove_rounded, color: scheme.primary),
+            IconButton.filledTonal(
+              icon: const Icon(Icons.remove_rounded, size: 18),
               onPressed: () => _step(-1),
+              visualDensity: VisualDensity.compact,
             ),
-            Text('$_value', style: context.textTheme.titleMedium),
-            IconButton(
-              icon: Icon(Icons.add_rounded, color: scheme.primary),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Text('$_value', style: context.textTheme.titleMedium),
+            ),
+            IconButton.filledTonal(
+              icon: const Icon(Icons.add_rounded, size: 18),
               onPressed: () => _step(1),
+              visualDensity: VisualDensity.compact,
             ),
           ],
         ),
+        iconContainerColor: widget.iconContainerColor,
+        iconOnColor: widget.iconOnColor,
       ),
     );
   }
 }
+
+// ─── custom row ──────────────────────────────────────────────────────────────
 
 class SettingCustomItem extends StatelessWidget {
   final Setting setting;
@@ -238,7 +318,7 @@ class SettingCustomItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: setting.builder?.call(context) ?? const SizedBox.shrink(),
     );
   }

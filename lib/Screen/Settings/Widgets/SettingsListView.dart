@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide ContextExtensionss;
 
-import '../../Model/Setting.dart';
-import '../../Utils/Extensions/ContextExtensions.dart';
-import '../../Utils/Extensions/Responsive.dart';
-import '../Components/ScrollConfig.dart';
-import '../Components/ThemedContainer.dart';
+import '../../../Core/ThemeManager/LanguageSwitcher.dart';
+import '../../../Model/Setting.dart';
+import '../../../Utils/Extensions/ContextExtensions.dart';
+import '../../../Utils/Extensions/Responsive.dart';
+import '../../../Widgets/Components/ScrollConfig.dart';
 import 'SettingsAdaptor.dart';
 
 class SettingsListView extends StatefulWidget {
   final List<Setting> Function(BuildContext) searchable;
   final List<Setting> Function(BuildContext)? menu;
-  final String hint;
+  final String? hint;
 
   const SettingsListView({
     super.key,
     required this.searchable,
     this.menu,
-    this.hint = 'Search settings',
+    this.hint,
   });
 
   @override
@@ -39,18 +39,33 @@ class _SettingsListViewState extends State<SettingsListView> {
           Dimens.gapXl,
         ),
         children: [
-          ThemedContainer(
-            borderRadius: Dimens.borderLg,
-            padding: EdgeInsets.zero,
-            child: TextField(
-              onChanged: (v) => _query.value = v.trim(),
-              textInputAction: TextInputAction.search,
-              decoration: InputDecoration(
-                hintText: widget.hint,
-                prefixIcon: const Icon(Icons.search_rounded),
-                border: InputBorder.none,
-                contentPadding: const EdgeInsets.symmetric(vertical: 16),
+          TextField(
+            onChanged: (v) => _query.value = v.trim(),
+            textInputAction: TextInputAction.search,
+            decoration: InputDecoration(
+              hintText: widget.hint ?? getString.searchSettings,
+              prefixIcon: Icon(
+                Icons.search_rounded,
+                color: context.colorScheme.onSurfaceVariant,
               ),
+              filled: true,
+              fillColor: context.colorScheme.surfaceContainerLow,
+              border: OutlineInputBorder(
+                borderRadius: Dimens.border,
+                borderSide: BorderSide.none,
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: Dimens.border,
+                borderSide: BorderSide.none,
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: Dimens.border,
+                borderSide: BorderSide(
+                  color: context.colorScheme.primary,
+                  width: 2,
+                ),
+              ),
+              contentPadding: const EdgeInsets.symmetric(vertical: 16),
             ),
           ),
           SizedBox(height: Dimens.gap),
@@ -67,7 +82,7 @@ class _SettingsListViewState extends State<SettingsListView> {
                 padding: const EdgeInsets.only(top: 64),
                 child: Center(
                   child: Text(
-                    'Nothing matches "$q"',
+                    getString.nothingMatches(q),
                     style: context.textTheme.bodyMedium?.copyWith(
                       color: context.colorScheme.onSurfaceVariant,
                     ),

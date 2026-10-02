@@ -6,9 +6,11 @@ import '../../Model/Setting.dart';
 import '../../Utils/Animation/WidgetAnimations.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Extensions/Responsive.dart';
+import '../../Core/ThemeManager/LanguageSwitcher.dart';
+import '../../Widgets/Components/BaseScreen.dart';
 import '../../Widgets/Components/ScrollConfig.dart';
 import '../../Widgets/Components/ThemedContainer.dart';
-import '../../Widgets/Settings/SettingsAdaptor.dart';
+import 'Widgets/SettingsAdaptor.dart';
 import 'SettingsCategories.dart';
 import 'SettingsCategoryScreen.dart';
 
@@ -19,7 +21,7 @@ class SettingsScreen extends StatefulWidget {
   State<SettingsScreen> createState() => _SettingsScreenState();
 }
 
-class _SettingsScreenState extends State<SettingsScreen> {
+class _SettingsScreenState extends BaseScreen<SettingsScreen> {
   final _query = ''.obs;
 
   @override
@@ -33,12 +35,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget buildContent(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        title: const Text('Settings'),
+        title: Text(getString.settings),
       ),
       body: ScrollConfig(
         context,
@@ -50,25 +52,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
             Dimens.gapXl,
           ),
           children: [
-            ThemedContainer(
-              borderRadius: Dimens.borderLg,
-              padding: EdgeInsets.zero,
-              child: TextField(
-                onChanged: (v) => _query.value = v.trim(),
-                textInputAction: TextInputAction.search,
-                decoration: const InputDecoration(
-                  hintText: 'Search settings',
-                  prefixIcon: Icon(Icons.search_rounded),
-                  border: InputBorder.none,
-                  contentPadding: EdgeInsets.symmetric(vertical: 16),
-                ),
-              ),
-            ),
+            _SearchBar(query: _query),
             SizedBox(height: Dimens.gap),
             Obx(() {
               final q = _query.value;
               if (q.isNotEmpty) return _searchResults(context, q);
-              return _categoryGrid(context);
+              return _categoryList(context);
             }),
           ],
         ),
@@ -76,37 +65,32 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  Widget _categoryGrid(BuildContext context) {
-    final cols = isMobile ? 2 : 3;
+  Widget _categoryList(BuildContext context) {
+    final scheme = context.colorScheme;
     final categories = settingsCategories;
-    final rows = (categories.length / cols).ceil();
 
-    return Column(
-      children: [
-        for (var row = 0; row < rows; row++)
-          Padding(
-            padding: EdgeInsets.only(bottom: Dimens.gap),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                for (var col = 0; col < cols; col++) ...[
-                  if (col > 0) SizedBox(width: Dimens.gap),
-                  Expanded(
-                    child: () {
-                      final i = row * cols + col;
-                      if (i >= categories.length) return const SizedBox.shrink();
-                      return _CategoryCard(
-                        category: categories[i],
-                        index: i,
-                      );
-                    }(),
-                  ),
-                ],
-              ],
-            ),
-          ),
-      ],
-    );
+    return ClipRRect(
+      borderRadius: Dimens.border,
+      child: ThemedContainer(
+        color: scheme.surfaceContainerLow,
+        borderRadius: Dimens.border,
+        padding: EdgeInsets.zero,
+        child: Column(
+          children: [
+            for (var i = 0; i < categories.length; i++) ...[
+              if (i > 0)
+                Divider(
+                  height: 1,
+                  indent: 72,
+                  endIndent: 0,
+                  color: scheme.outlineVariant.withValues(alpha: 0.5),
+                ),
+              _CategoryRow(category: categories[i]),
+            ],
+          ],
+        ),
+      ),
+    ).animateFadeUp();
   }
 
   Widget _searchResults(BuildContext context, String query) {
@@ -117,7 +101,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         padding: const EdgeInsets.only(top: 64),
         child: Center(
           child: Text(
-            'Nothing matches "$query"',
+            getString.nothingMatches(query),
             style: context.textTheme.bodyMedium?.copyWith(
               color: context.colorScheme.onSurfaceVariant,
             ),
@@ -150,100 +134,111 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 }
 
-class _CategoryCard extends StatefulWidget {
-  final SettingsCategory category;
-  final int index;
+// ─── search bar ──────────────────────────────────────────────────────────────
 
-  const _CategoryCard({required this.category, required this.index});
+class _SearchBar extends StatelessWidget {
+  final RxString query;
+  const _SearchBar({required this.query});
 
   @override
-  State<_CategoryCard> createState() => _CategoryCardState();
+  Widget build(BuildContext context) {
+    final scheme = context.colorScheme;
+    return TextField(
+      onChanged: (v) => query.value = v.trim(),
+      textInputAction: TextInputAction.search,
+      decoration: InputDecoration(
+        hintText: getString.searchSettings,
+        prefixIcon: Icon(Icons.search_rounded, color: scheme.onSurfaceVariant),
+        filled: true,
+        fillColor: scheme.surfaceContainerLow,
+        border: OutlineInputBorder(
+          borderRadius: Dimens.border,
+          borderSide: BorderSide.none,
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: Dimens.border,
+          borderSide: BorderSide.none,
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: Dimens.border,
+          borderSide: BorderSide(color: scheme.primary, width: 2),
+        ),
+        contentPadding: const EdgeInsets.symmetric(vertical: 16),
+      ),
+    );
+  }
 }
 
-class _CategoryCardState extends State<_CategoryCard> {
-  bool _hovered = false;
+// ─── category row ─────────────────────────────────────────────────────────────
 
+class _CategoryRow extends StatefulWidget {
+  final SettingsCategory category;
+
+  const _CategoryRow({required this.category});
+
+  @override
+  State<_CategoryRow> createState() => _CategoryRowState();
+}
+
+class _CategoryRowState extends State<_CategoryRow> {
   @override
   Widget build(BuildContext context) {
     final scheme = context.colorScheme;
     final c = widget.category;
 
-    final accent = _categoryColor(scheme, widget.index);
-
-    return MouseRegion(
-      cursor: SystemMouseCursors.click,
-      onEnter: (_) => setState(() => _hovered = true),
-      onExit: (_) => setState(() => _hovered = false),
-      child: GestureDetector(
-        onTap: () => Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (_) => SettingsCategoryScreen(category: c),
-          ),
+    return InkWell(
+      onTap: () => Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (_) => SettingsCategoryScreen(category: c),
         ),
-        child: AnimatedScale(
-          scale: _hovered ? 1.03 : 1.0,
-          duration: Durations.short3,
-          curve: Curves.easeOutBack,
-          child: ThemedContainer(
-            color: accent.withValues(alpha: 0.08),
-            border: Border.all(
-              color: accent.withValues(alpha: _hovered ? 0.35 : 0.15),
-              width: 1.5,
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        child: Row(
+          children: [
+            Container(
+              width: 42,
+              height: 42,
+              decoration: BoxDecoration(
+                color: scheme.secondaryContainer,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Icon(c.icon, size: 22, color: scheme.onSecondaryContainer),
             ),
-            borderRadius: Dimens.border,
-            padding: EdgeInsets.all(Dimens.gapLg),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  width: 48,
-                  height: 48,
-                  decoration: BoxDecoration(
-                    color: accent.withValues(alpha: 0.15),
-                    borderRadius: BorderRadius.circular(14),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    c.title,
+                    style: context.textTheme.bodyLarge?.copyWith(
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
-                  child: Icon(c.icon, size: 24, color: accent),
-                ),
-                SizedBox(height: Dimens.gapSm),
-                Text(
-                  c.title,
-                  style: context.textTheme.titleSmall?.copyWith(
-                    fontWeight: FontWeight.w700,
-                    color: scheme.onSurface,
+                  const SizedBox(height: 2),
+                  Text(
+                    c.description,
+                    style: context.textTheme.bodySmall?.copyWith(
+                      color: scheme.onSurfaceVariant,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
-                ),
-                SizedBox(height: Dimens.gapXs),
-                Text(
-                  c.description,
-                  style: context.textTheme.bodySmall?.copyWith(
-                    color: scheme.onSurfaceVariant,
-                    height: 1.3,
-                  ),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ],
+                ],
+              ),
             ),
-          ).animateFadeUp(delay: Duration(milliseconds: widget.index * 55)),
+            const SizedBox(width: 8),
+            Icon(
+              Icons.chevron_right_rounded,
+              color: scheme.onSurfaceVariant,
+              size: 20,
+            ),
+          ],
         ),
       ),
     );
   }
 
-  Color _categoryColor(ColorScheme s, int index) {
-    const cycle = [
-      0, // primary
-      1, // tertiary
-      2, // secondary
-      3, // error-ish
-      0,
-      1,
-    ];
-    return switch (cycle[index % cycle.length]) {
-      1 => s.tertiary,
-      2 => s.secondary,
-      3 => s.error,
-      _ => s.primary,
-    };
-  }
 }
