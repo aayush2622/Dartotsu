@@ -41,7 +41,7 @@ Future<Color?> showColorPickerDialog(
                 ColorPickerType.accent: getString.colorPickerDefault,
                 ColorPickerType.wheel: getString.colorPickerCustom,
               },
-              showColorName: true,
+              showColorName: false,
               showColorCode: true,
               colorCodeHasColor: true,
             ),

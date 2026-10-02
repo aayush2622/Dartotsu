@@ -126,7 +126,7 @@ class _ThemeDropdown extends StatelessWidget {
     backgroundColor: Colors.transparent,
     useSafeArea: true,
     builder: (_) => FractionallySizedBox(
-      heightFactor: 0.6,
+      heightFactor: 0.65,
       child: _ThemePickerSheet(
         openColorPicker: (current) => showColorPickerDialog(
           context,
@@ -207,9 +207,10 @@ class _ThemePickerSheet extends StatelessWidget {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return ClipRRect(
-      borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
-      child: Material(
-        color: scheme.surface,
+      borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
+      child: ThemedContainer(
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
+        padding: EdgeInsets.zero,
         child: Padding(
           padding: const EdgeInsets.only(bottom: 24, top: 12),
           child: Column(
@@ -256,7 +257,7 @@ class _ThemePickerSheet extends StatelessWidget {
                       ),
                       itemCount: itemCount,
                       itemBuilder: (ctx, i) {
-                        if (i == AppTheme.values.length) {
+                        if (i == 0) {
                           final selected = isCustom;
                           final displayColor = customColor ?? scheme.primary;
                           return GestureDetector(
@@ -279,7 +280,7 @@ class _ThemePickerSheet extends StatelessWidget {
                             ),
                           );
                         }
-                        final t = AppTheme.values[i];
+                        final t = AppTheme.values[i - 1];
                         final color = t
                             .themeFor(
                               isDark ? Brightness.dark : Brightness.light,
@@ -355,7 +356,7 @@ class _ThemeCell extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
           color: selected ? color : scheme.onSurface.withValues(alpha: 0.1),
-          width: selected ? 2 : 1,
+          width: 1,
         ),
       ),
       child: Column(
@@ -420,138 +421,178 @@ class _UiSkeletonPreview extends StatelessWidget {
     final card = isDark
         ? Color.lerp(const Color(0xFF1A1A1A), primary, 0.10)!
         : Color.lerp(Colors.white, primary, 0.08)!;
-    final line = scheme.onSurface.withValues(alpha: 0.12);
-    final img = primary.withValues(alpha: isDark ? 0.5 : 0.35);
+    final line = scheme.onSurface.withValues(alpha: 0.13);
+    final img = primary.withValues(alpha: isDark ? 0.45 : 0.3);
+
+    const barH = 12.0;
+    const posterH = 22.0;
 
     return ClipRRect(
       borderRadius: const BorderRadius.vertical(top: Radius.circular(10)),
-      child: Container(
-        color: bg,
-        padding: const EdgeInsets.fromLTRB(5, 5, 5, 4),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            // Nav bar
-            Container(
-              height: 9,
-              decoration: BoxDecoration(
-                color: card,
-                borderRadius: BorderRadius.circular(3),
-              ),
-              padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
-              child: Row(
-                children: [
-                  Container(
-                    width: 4,
-                    height: 4,
-                    decoration: BoxDecoration(
-                      color: primary,
-                      shape: BoxShape.circle,
-                    ),
+      child: LayoutBuilder(
+        builder: (_, cs) {
+          final h = cs.maxHeight;
+          final heroH = h * 0.44;
+          final posterTop = barH + 3 + heroH + 3;
+          final sectionTop = posterTop + posterH + 4;
+
+          return Stack(
+            children: [
+              // bg
+              Positioned.fill(child: Container(color: bg)),
+
+              // ── app bar ──
+              Positioned(
+                top: 0, left: 0, right: 0, height: barH,
+                child: Container(
+                  color: card,
+                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3.5),
+                  child: Row(
+                    children: [
+                      _dot(primary, 3.5),
+                      const SizedBox(width: 3),
+                      Expanded(child: _line(line, 2.5)),
+                      const SizedBox(width: 4),
+                      _dot(line, 3),
+                      const SizedBox(width: 2),
+                      _dot(line, 3),
+                    ],
                   ),
-                  const SizedBox(width: 3),
-                  Expanded(
+                ),
+              ),
+
+              // ── hero banner ──
+              Positioned(
+                top: barH + 3, left: 4, right: 4,
+                height: heroH,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(5),
+                  child: Stack(
+                    fit: StackFit.expand,
+                    children: [
+                      Container(color: img),
+                      Positioned(
+                        left: 0, right: 0, bottom: 0,
+                        child: Container(
+                          padding: const EdgeInsets.fromLTRB(5, 14, 5, 5),
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              begin: Alignment.bottomCenter,
+                              end: Alignment.topCenter,
+                              colors: [bg.withValues(alpha: 0.92), Colors.transparent],
+                            ),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              _line(line, 3, width: 32),
+                              const SizedBox(height: 2.5),
+                              _line(line.withValues(alpha: 0.5), 2, width: 20),
+                              const SizedBox(height: 4),
+                              Container(
+                                height: 6, width: 24,
+                                decoration: BoxDecoration(
+                                  color: primary,
+                                  borderRadius: BorderRadius.circular(99),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+
+              // ── poster row ──
+              Positioned(
+                top: posterTop, left: 4, right: 4, height: posterH,
+                child: Row(
+                  children: List.generate(4, (i) => Expanded(
                     child: Container(
-                      height: 3,
+                      margin: EdgeInsets.only(left: i > 0 ? 3 : 0),
                       decoration: BoxDecoration(
-                        color: line,
-                        borderRadius: BorderRadius.circular(2),
+                        color: i == 0 ? img : card,
+                        borderRadius: BorderRadius.circular(3),
                       ),
                     ),
-                  ),
-                  const SizedBox(width: 4),
-                  Container(
-                    width: 4,
-                    height: 4,
-                    decoration: BoxDecoration(
-                      color: primary.withValues(alpha: 0.5),
-                      shape: BoxShape.circle,
-                    ),
-                  ),
-                ],
+                  )),
+                ),
               ),
-            ),
-            const SizedBox(height: 4),
-            // Card 1
-            _miniCard(card, img, line),
-            const SizedBox(height: 3),
-            // Card 2
-            _miniCard(card, img, line),
-            const SizedBox(height: 4),
-            // Chip row
-            Row(
-              children: [
-                _chip(primary, 22),
-                const SizedBox(width: 3),
-                _chip(primary.withValues(alpha: 0.3), 16),
-              ],
-            ),
-          ],
-        ),
+
+              // ── section label + list rows ──
+              Positioned(
+                top: sectionTop, left: 4, right: 4,
+                bottom: barH + 2,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    _line(primary.withValues(alpha: 0.55), 2.5, width: 22),
+                    const SizedBox(height: 3),
+                    _listRow(card, img, line),
+                    const SizedBox(height: 2.5),
+                    _listRow(card, img.withValues(alpha: 0.2), line),
+                    const SizedBox(height: 2.5),
+                    _listRow(card, img.withValues(alpha: 0.12), line),
+                  ],
+                ),
+              ),
+
+              // ── bottom nav ──
+              Positioned(
+                bottom: 0, left: 0, right: 0, height: barH,
+                child: Container(
+                  color: card,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [_dot(primary, 4), _dot(line, 4), _dot(line, 4)],
+                  ),
+                ),
+              ),
+            ],
+          );
+        },
       ),
     );
   }
 
-  Widget _miniCard(Color card, Color img, Color line) => Container(
-    height: 20,
-    decoration: BoxDecoration(
-      color: card,
-      borderRadius: BorderRadius.circular(4),
-    ),
-    padding: const EdgeInsets.all(3),
-    child: Row(
-      children: [
-        Container(
-          width: 14,
-          decoration: BoxDecoration(
-            color: img,
-            borderRadius: BorderRadius.circular(2),
-          ),
-        ),
-        const SizedBox(width: 3),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                height: 3,
-                decoration: BoxDecoration(
-                  color: line,
-                  borderRadius: BorderRadius.circular(2),
-                ),
-              ),
-              const SizedBox(height: 3),
-              Container(
-                height: 3,
-                width: 16,
-                decoration: BoxDecoration(
-                  color: line.withValues(alpha: 0.6),
-                  borderRadius: BorderRadius.circular(2),
-                ),
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(width: 3),
-        Container(
-          width: 5,
-          height: 5,
-          decoration: BoxDecoration(
-            color: primary,
-            shape: BoxShape.circle,
-          ),
-        ),
-      ],
-    ),
+  Widget _dot(Color color, double size) => Container(
+    width: size,
+    height: size,
+    decoration: BoxDecoration(color: color, shape: BoxShape.circle),
   );
 
-  Widget _chip(Color color, double width) => Container(
-    height: 7,
+  Widget _line(Color color, double height, {double? width}) => Container(
+    height: height,
     width: width,
     decoration: BoxDecoration(
       color: color,
-      borderRadius: BorderRadius.circular(99),
+      borderRadius: BorderRadius.circular(2),
+    ),
+  );
+
+  Widget _listRow(Color card, Color img, Color line) => Container(
+    height: 10,
+    padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 2),
+    decoration: BoxDecoration(
+      color: card,
+      borderRadius: BorderRadius.circular(2),
+    ),
+    child: Row(
+      children: [
+        Container(
+          width: 6,
+          decoration: BoxDecoration(
+            color: img,
+            borderRadius: BorderRadius.circular(1),
+          ),
+        ),
+        const SizedBox(width: 2),
+        Expanded(child: _line(line, 2)),
+      ],
     ),
   );
 }
