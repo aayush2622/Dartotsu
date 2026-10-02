@@ -38,29 +38,33 @@ class _SettingsScreenState extends BaseScreen<SettingsScreen> {
   Widget buildContent(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        title: Text(getString.settings),
-      ),
-      body: ScrollConfig(
+      body: CustomScrollConfig(
         context,
-        child: ListView(
-          padding: EdgeInsets.fromLTRB(
-            Dimens.pagePad,
-            Dimens.gapXs,
-            Dimens.pagePad,
-            Dimens.gapXl,
+        children: [
+          SliverAppBar.large(
+            backgroundColor: Colors.transparent,
+            title: Text(getString.settings),
           ),
-          children: [
-            _SearchBar(query: _query),
-            SizedBox(height: Dimens.gap),
-            Obx(() {
-              final q = _query.value;
-              if (q.isNotEmpty) return _searchResults(context, q);
-              return _categoryList(context);
-            }),
-          ],
-        ),
+          SliverPadding(
+            padding: EdgeInsets.fromLTRB(
+              Dimens.pagePad,
+              Dimens.gapXs,
+              Dimens.pagePad,
+              Dimens.gapXl,
+            ),
+            sliver: SliverList(
+              delegate: SliverChildListDelegate([
+                _SearchBar(query: _query),
+                SizedBox(height: Dimens.gap),
+                Obx(() {
+                  final q = _query.value;
+                  if (q.isNotEmpty) return _searchResults(context, q);
+                  return _categoryList(context);
+                }),
+              ]),
+            ),
+          ),
+        ],
       ),
     );
   }

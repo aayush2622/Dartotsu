@@ -13,11 +13,16 @@ class SettingsListView extends StatefulWidget {
   final List<Setting> Function(BuildContext)? menu;
   final String? hint;
 
+  /// When set, renders an M3 large collapsing top app bar with this title as
+  /// the first sliver instead of leaving the caller's own [Scaffold.appBar].
+  final String? title;
+
   const SettingsListView({
     super.key,
     required this.searchable,
     this.menu,
     this.hint,
+    this.title,
   });
 
   @override
@@ -29,71 +34,91 @@ class _SettingsListViewState extends State<SettingsListView> {
 
   @override
   Widget build(BuildContext context) {
-    return ScrollConfig(
+    return CustomScrollConfig(
       context,
-      child: ListView(
-        padding: EdgeInsets.fromLTRB(
-          Dimens.pagePad,
-          Dimens.gapXs,
-          Dimens.pagePad,
-          Dimens.gapXl,
-        ),
-        children: [
-          TextField(
-            onChanged: (v) => _query.value = v.trim(),
-            textInputAction: TextInputAction.search,
-            decoration: InputDecoration(
-              hintText: widget.hint ?? getString.searchSettings,
-              prefixIcon: Icon(
-                Icons.search_rounded,
+      children: [
+        if (widget.title != null)
+          SliverAppBar.large(
+            backgroundColor: Colors.transparent,
+            titleSpacing: 4,
+            leading: IconButton(
+              icon: Icon(
+                Icons.arrow_back_ios_new_rounded,
+                size: 20,
                 color: context.colorScheme.onSurfaceVariant,
               ),
-              filled: true,
-              fillColor: context.colorScheme.surfaceContainerLow,
-              border: OutlineInputBorder(
-                borderRadius: Dimens.border,
-                borderSide: BorderSide.none,
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: Dimens.border,
-                borderSide: BorderSide.none,
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: Dimens.border,
-                borderSide: BorderSide(
-                  color: context.colorScheme.primary,
-                  width: 2,
-                ),
-              ),
-              contentPadding: const EdgeInsets.symmetric(vertical: 16),
+              onPressed: () {
+                if (Get.key.currentState?.canPop() ?? false) Get.back();
+              },
             ),
+            title: Text(widget.title!),
           ),
-          SizedBox(height: Dimens.gap),
-          Obx(() {
-            final q = _query.value;
-            if (q.isEmpty) {
-              return SettingsAdaptor(
-                settings: (widget.menu ?? widget.searchable)(context),
-              );
-            }
-            final filtered = _filter(widget.searchable(context), q);
-            if (filtered.isEmpty) {
-              return Padding(
-                padding: const EdgeInsets.only(top: 64),
-                child: Center(
-                  child: Text(
-                    getString.nothingMatches(q),
-                    style: context.textTheme.bodyMedium?.copyWith(
-                      color: context.colorScheme.onSurfaceVariant,
+        SliverPadding(
+          padding: EdgeInsets.fromLTRB(
+            Dimens.pagePad,
+            Dimens.gapXs,
+            Dimens.pagePad,
+            Dimens.gapXl,
+          ),
+          sliver: SliverList(
+            delegate: SliverChildListDelegate([
+              TextField(
+                onChanged: (v) => _query.value = v.trim(),
+                textInputAction: TextInputAction.search,
+                decoration: InputDecoration(
+                  hintText: widget.hint ?? getString.searchSettings,
+                  prefixIcon: Icon(
+                    Icons.search_rounded,
+                    color: context.colorScheme.onSurfaceVariant,
+                  ),
+                  filled: true,
+                  fillColor: context.colorScheme.surfaceContainerLow,
+                  border: OutlineInputBorder(
+                    borderRadius: Dimens.border,
+                    borderSide: BorderSide.none,
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: Dimens.border,
+                    borderSide: BorderSide.none,
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: Dimens.border,
+                    borderSide: BorderSide(
+                      color: context.colorScheme.primary,
+                      width: 2,
                     ),
                   ),
+                  contentPadding: const EdgeInsets.symmetric(vertical: 16),
                 ),
-              );
-            }
-            return SettingsAdaptor(settings: filtered);
-          }),
-        ],
-      ),
+              ),
+              SizedBox(height: Dimens.gap),
+              Obx(() {
+                final q = _query.value;
+                if (q.isEmpty) {
+                  return SettingsAdaptor(
+                    settings: (widget.menu ?? widget.searchable)(context),
+                  );
+                }
+                final filtered = _filter(widget.searchable(context), q);
+                if (filtered.isEmpty) {
+                  return Padding(
+                    padding: const EdgeInsets.only(top: 64),
+                    child: Center(
+                      child: Text(
+                        getString.nothingMatches(q),
+                        style: context.textTheme.bodyMedium?.copyWith(
+                          color: context.colorScheme.onSurfaceVariant,
+                        ),
+                      ),
+                    ),
+                  );
+                }
+                return SettingsAdaptor(settings: filtered);
+              }),
+            ]),
+          ),
+        ),
+      ],
     );
   }
 

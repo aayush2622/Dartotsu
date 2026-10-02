@@ -35,41 +35,62 @@ class _CardStyleScreenState extends BaseScreen<CardStyleScreen> {
   Widget buildContent(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        title: const Text('Card style'),
-        actions: [
-          TextButton(
-            onPressed: () => _set(const CardStyle()),
-            child: const Text('Reset'),
-          ),
-        ],
-      ),
-      body: ScrollConfig(
+      body: CustomScrollConfig(
         context,
-        child: Obx(() {
-          final s = _draft.value;
-          return ListView(
+        children: [
+          SliverAppBar.large(
+            backgroundColor: Colors.transparent,
+            titleSpacing: 4,
+            leading: IconButton(
+              icon: Icon(
+                Icons.arrow_back_ios_new_rounded,
+                size: 20,
+                color: context.colorScheme.onSurfaceVariant,
+              ),
+              onPressed: () {
+                if (Get.key.currentState?.canPop() ?? false) Get.back();
+              },
+            ),
+            title: const Text('Card style'),
+            actions: [
+              TextButton(
+                onPressed: () => _set(const CardStyle()),
+                child: const Text('Reset'),
+              ),
+            ],
+          ),
+          SliverPadding(
             padding: EdgeInsets.fromLTRB(
               Dimens.pagePad,
               Dimens.gapSm,
               Dimens.pagePad,
               Dimens.gapXl,
             ),
-            children: [
-              _preview(s),
-              SizedBox(height: Dimens.gap),
-              _presets(s),
-              SizedBox(height: Dimens.gap),
-              _layout(s),
-              SizedBox(height: Dimens.gap),
-              _shape(s),
-              if (!s.compact) ...[SizedBox(height: Dimens.gap), _overlays(s)],
-            ],
-          );
-        }),
+            sliver: SliverToBoxAdapter(
+              child: Obx(
+                () => Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: _bodyChildren(_draft.value),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
+  }
+
+  List<Widget> _bodyChildren(CardStyle s) {
+    return [
+      _preview(s),
+      SizedBox(height: Dimens.gap),
+      _presets(s),
+      SizedBox(height: Dimens.gap),
+      _layout(s),
+      SizedBox(height: Dimens.gap),
+      _shape(s),
+      if (!s.compact) ...[SizedBox(height: Dimens.gap), _overlays(s)],
+    ];
   }
 
   Widget _preview(CardStyle s) {

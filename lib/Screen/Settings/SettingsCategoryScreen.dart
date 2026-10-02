@@ -19,11 +19,8 @@ class _SettingsCategoryScreenState extends BaseScreen<SettingsCategoryScreen> {
   Widget buildContent(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        title: Text(widget.category.title),
-      ),
       body: SettingsListView(
+        title: widget.category.title,
         searchable: widget.category.build,
         hint: getString.searchCategory(widget.category.title.toLowerCase()),
       ),
