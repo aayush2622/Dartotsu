@@ -512,13 +512,13 @@ abstract class AppLocalizations {
   /// No description provided for @customFont.
   ///
   /// In en, this message translates to:
-  /// **'Custom font'**
+  /// **'Font'**
   String get customFont;
 
   /// No description provided for @customFontDesc.
   ///
   /// In en, this message translates to:
-  /// **'Use a .ttf or .otf file from your device'**
+  /// **'Default, a file from your device, or Google Fonts'**
   String get customFontDesc;
 
   /// No description provided for @customFontError.
@@ -526,6 +526,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Couldn\'t load that font file'**
   String get customFontError;
+
+  /// No description provided for @googleFontError.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t download that font'**
+  String get googleFontError;
+
+  /// No description provided for @yourFonts.
+  ///
+  /// In en, this message translates to:
+  /// **'Your fonts'**
+  String get yourFonts;
+
+  /// No description provided for @addFontFile.
+  ///
+  /// In en, this message translates to:
+  /// **'Add font file…'**
+  String get addFontFile;
+
+  /// No description provided for @browseGoogleFonts.
+  ///
+  /// In en, this message translates to:
+  /// **'Browse Google Fonts…'**
+  String get browseGoogleFonts;
+
+  /// No description provided for @searchGoogleFonts.
+  ///
+  /// In en, this message translates to:
+  /// **'Search Google Fonts'**
+  String get searchGoogleFonts;
+
+  /// No description provided for @defaultFont.
+  ///
+  /// In en, this message translates to:
+  /// **'Default'**
+  String get defaultFont;
 
   /// No description provided for @materialYou.
   ///

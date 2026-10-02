@@ -36,6 +36,7 @@ dependencies:
   isar_community_flutter_libs: ^3.3.2
   path_provider: ^2.1.6
   path: ^1.9.1
+  google_fonts: ^6.2.1
   cryptography: ^2.9.0
   crypto: ^3.0.6
   timezone: ^0.11.1

@@ -189,13 +189,32 @@ class AppLocalizationsHi extends AppLocalizations {
   String get cardStyleDesc => 'Title placement, size, progress and badges';
 
   @override
-  String get customFont => 'Custom font';
+  String get customFont => 'Font';
 
   @override
-  String get customFontDesc => 'Use a .ttf or .otf file from your device';
+  String get customFontDesc =>
+      'Default, a file from your device, or Google Fonts';
 
   @override
   String get customFontError => 'Couldn\'t load that font file';
+
+  @override
+  String get googleFontError => 'Couldn\'t download that font';
+
+  @override
+  String get yourFonts => 'Your fonts';
+
+  @override
+  String get addFontFile => 'Add font file…';
+
+  @override
+  String get browseGoogleFonts => 'Browse Google Fonts…';
+
+  @override
+  String get searchGoogleFonts => 'Search Google Fonts';
+
+  @override
+  String get defaultFont => 'Default';
 
   @override
   String get materialYou => 'Material You';

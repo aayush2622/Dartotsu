@@ -7,10 +7,10 @@ import '../../../Core/ThemeManager/ThemeMode.dart';
 import '../../../Model/Setting.dart';
 import '../../../Utils/Extensions/ContextExtensions.dart';
 import '../../../Utils/Functions/GetXFunctions.dart';
-import '../../../Utils/Functions/SnackBar.dart';
 import '../../../Widgets/Components/AppControls.dart';
-import '../../../Widgets/Components/ThemedContainer.dart';
 import '../CardStyleScreen.dart';
+import '../Widgets/FontPickerSheet.dart';
+import '../Widgets/ThemeDropdown.dart';
 
 List<Setting> appearanceSettings(BuildContext context) {
   final t = find<ThemeController>();
@@ -95,21 +95,14 @@ List<Setting> appearanceSettings(BuildContext context) {
     Setting(
       type: SettingType.normal,
       name: getString.customFont,
-      description: t.useCustomFont.value
-          ? p.basename(t.customFontPath.value)
+      description: t.useGoogleFont.value
+          ? t.googleFontFamily.value
+          : t.useCustomFont.value
+          ? p.basenameWithoutExtension(t.customFontPath.value)
           : getString.customFontDesc,
       icon: Icons.text_fields_rounded,
-      trailing: t.useCustomFont.value
-          ? IconButton(
-              icon: const Icon(Icons.close_rounded),
-              tooltip: getString.reset,
-              onPressed: t.clearCustomFont,
-            )
-          : null,
-      onClick: () async {
-        final ok = await t.pickCustomFont();
-        if (!ok) snackString(getString.customFontError);
-      },
+      isActivity: true,
+      onClick: () => showFontPicker(context),
     ),
   ];
 }
