@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide ContextExtensionss;
+import 'package:path/path.dart' as p;
 
 import '../../../Core/ThemeManager/CustomFontLoader.dart';
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../../Core/ThemeManager/ThemeController.dart';
 import '../../../Utils/Extensions/ContextExtensions.dart';
 import '../../../Utils/Functions/GetXFunctions.dart';
+import '../../../Utils/Functions/NavigateToScreen.dart';
 import '../../../Utils/Functions/SnackBar.dart';
 import '../../../Widgets/Components/CustomBottomDialog.dart';
+import '../../../Widgets/Components/SheetTile.dart';
 import '../../../Widgets/Components/ThemedContainer.dart';
 
 Future<void> showGoogleFontsPicker(BuildContext context) =>
@@ -35,10 +38,10 @@ class _GoogleFontsSheetState extends State<_GoogleFontsSheet> {
 
   Future<void> _apply(String family) async {
     _downloading.value = family;
-    final ok = await _t.setGoogleFont(family);
+    final ok = await _t.pickGoogleFont(family);
     _downloading.value = '';
     if (ok) {
-      if (mounted) Navigator.of(context).pop();
+      if (mounted) popPage(context);
     } else {
       snackString(getString.googleFontError);
     }
@@ -94,14 +97,21 @@ class _GoogleFontsSheetState extends State<_GoogleFontsSheet> {
                       ? _all
                       : _all.where((f) => f.toLowerCase().contains(q)).toList();
                   final busy = _downloading.value;
+                  final activeName = _t.useCustomFont.value
+                      ? p.basenameWithoutExtension(_t.customFontPath.value)
+                      : null;
                   return ListView.builder(
                     padding: const EdgeInsets.symmetric(horizontal: 12),
+                    itemExtent: 60,
+                    addAutomaticKeepAlives: false,
                     itemCount: filtered.length,
                     itemBuilder: (_, i) {
                       final family = filtered[i];
                       final isBusy = busy == family;
-                      return ListTile(
+                      final isActive = activeName == family;
+                      return SheetTile(
                         enabled: busy.isEmpty,
+                        selected: isActive,
                         onTap: () => _apply(family),
                         title: Text(family),
                         trailing: isBusy
@@ -113,9 +123,6 @@ class _GoogleFontsSheetState extends State<_GoogleFontsSheet> {
                                 ),
                               )
                             : null,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
                       );
                     },
                   );

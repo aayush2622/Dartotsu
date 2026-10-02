@@ -6,8 +6,10 @@ import '../../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../../Core/ThemeManager/ThemeController.dart';
 import '../../../Utils/Extensions/ContextExtensions.dart';
 import '../../../Utils/Functions/GetXFunctions.dart';
+import '../../../Utils/Functions/NavigateToScreen.dart';
 import '../../../Utils/Functions/SnackBar.dart';
 import '../../../Widgets/Components/CustomBottomDialog.dart';
+import '../../../Widgets/Components/SheetTile.dart';
 import '../../../Widgets/Components/ThemedContainer.dart';
 import 'GoogleFontsSheet.dart';
 
@@ -48,7 +50,7 @@ class _FontPickerSheetState extends State<_FontPickerSheet> {
       snackString(getString.customFontError);
       return;
     }
-    if (mounted) Navigator.of(context).pop();
+    if (mounted) popPage(context);
   }
 
   @override
@@ -96,25 +98,12 @@ class _FontPickerSheetState extends State<_FontPickerSheet> {
                           icon: Icons.text_fields_rounded,
                           title: getString.defaultFont,
                           subtitle: 'Poppins',
-                          selected:
-                              !_t.useCustomFont.value &&
-                              !_t.useGoogleFont.value,
+                          selected: !_t.useCustomFont.value,
                           onTap: () {
                             _t.clearCustomFont();
-                            Navigator.of(context).pop();
+                            popPage(context);
                           },
                         ),
-                      ),
-                      Obx(
-                        () => _t.useGoogleFont.value
-                            ? _tile(
-                                context,
-                                icon: Icons.travel_explore_rounded,
-                                title: _t.googleFontFamily.value,
-                                selected: true,
-                                onTap: () {},
-                              )
-                            : const SizedBox.shrink(),
                       ),
                       if (_saved.isNotEmpty) ...[
                         const SizedBox(height: 12),
@@ -140,9 +129,7 @@ class _FontPickerSheetState extends State<_FontPickerSheet> {
                                   _t.customFontPath.value == path,
                               onTap: () async {
                                 final ok = await _t.setCustomFont(path);
-                                if (ok && context.mounted) {
-                                  Navigator.of(context).pop();
-                                }
+                                if (ok && context.mounted) popPage(context);
                               },
                               trailing: IconButton(
                                 icon: Icon(
@@ -169,7 +156,7 @@ class _FontPickerSheetState extends State<_FontPickerSheet> {
                         icon: Icons.travel_explore_rounded,
                         title: getString.browseGoogleFonts,
                         onTap: () {
-                          Navigator.of(context).pop();
+                          popPage(context);
                           showGoogleFontsPicker(context);
                         },
                       ),
@@ -194,20 +181,16 @@ class _FontPickerSheetState extends State<_FontPickerSheet> {
     Widget? trailing,
   }) {
     final scheme = context.colorScheme;
-    return ListTile(
+    return SheetTile(
       onTap: onTap,
-      leading: Icon(icon, color: scheme.onSurfaceVariant),
-      title: Text(
-        title,
-        style: TextStyle(
-          fontWeight: selected ? FontWeight.w700 : FontWeight.normal,
-        ),
+      selected: selected,
+      leading: Icon(
+        icon,
+        color: selected ? scheme.onSecondaryContainer : scheme.onSurfaceVariant,
       ),
+      title: Text(title),
       subtitle: subtitle != null ? Text(subtitle) : null,
-      trailing:
-          trailing ??
-          (selected ? Icon(Icons.check_rounded, color: scheme.primary) : null),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      trailing: trailing,
     );
   }
 }

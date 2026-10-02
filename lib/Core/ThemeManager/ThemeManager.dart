@@ -35,13 +35,8 @@ ThemeData buildAppTheme(
     scheme = scheme.copyWith(surface: Colors.black);
   }
 
-  // Hand-authored themes only ever set `surface` + `surfaceContainerHighest`;
-  // the other container roles then fall back to Flutter's hardcoded M3
-  // baseline defaults, which aren't derived from this scheme's actual
-  // `surface` — on several palettes that default lands almost on top of
-  // `surface`, making every card/sheet background invisible against the
-  // scaffold. Rebuild the whole ladder from this scheme's own surface so
-  // cards are always visibly distinct, on every theme.
+  // Unset container roles fall back to Flutter's hardcoded M3 defaults,
+  // not this scheme's surface — on some palettes that makes cards invisible.
   Color tint(double amount) => Color.alphaBlend(
     (dark ? Colors.white : Colors.black).withValues(alpha: amount),
     scheme.surface,

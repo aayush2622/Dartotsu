@@ -25,12 +25,6 @@ class PrefName {
   );
   static const useCustomFont = Pref('useCustomFont', false, PrefLocation.THEME);
   static const customFontPath = Pref('customFontPath', '', PrefLocation.THEME);
-  static const useGoogleFont = Pref('useGoogleFont', false, PrefLocation.THEME);
-  static const googleFontFamily = Pref(
-    'googleFontFamily',
-    '',
-    PrefLocation.THEME,
-  );
 
   static final themeMode = enumPref(
     'themeMode',

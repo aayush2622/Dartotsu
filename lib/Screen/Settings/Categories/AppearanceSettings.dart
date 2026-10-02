@@ -7,6 +7,7 @@ import '../../../Core/ThemeManager/ThemeMode.dart';
 import '../../../Model/Setting.dart';
 import '../../../Utils/Extensions/ContextExtensions.dart';
 import '../../../Utils/Functions/GetXFunctions.dart';
+import '../../../Utils/Functions/NavigateToScreen.dart';
 import '../../../Widgets/Components/AppControls.dart';
 import '../CardStyleScreen.dart';
 import '../Widgets/FontPickerSheet.dart';
@@ -88,16 +89,12 @@ List<Setting> appearanceSettings(BuildContext context) {
       description: getString.cardStyleDesc,
       icon: Icons.dashboard_customize_rounded,
       isActivity: true,
-      onClick: () => Navigator.of(
-        context,
-      ).push(MaterialPageRoute(builder: (_) => const CardStyleScreen())),
+      onClick: () => navigateToPage(context, const CardStyleScreen()),
     ),
     Setting(
       type: SettingType.normal,
       name: getString.customFont,
-      description: t.useGoogleFont.value
-          ? t.googleFontFamily.value
-          : t.useCustomFont.value
+      description: t.useCustomFont.value
           ? p.basenameWithoutExtension(t.customFontPath.value)
           : getString.customFontDesc,
       icon: Icons.text_fields_rounded,

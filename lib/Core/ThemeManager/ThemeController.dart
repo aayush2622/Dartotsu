@@ -21,13 +21,7 @@ class ThemeController extends GetxController {
 
   final useCustomFont = PrefName.useCustomFont.rx;
   final customFontPath = PrefName.customFontPath.rx;
-  final useGoogleFont = PrefName.useGoogleFont.rx;
-  final googleFontFamily = PrefName.googleFontFamily.rx;
 
-  /// Engine-registered family name for whichever of [useCustomFont] /
-  /// [useGoogleFont] is active, once loaded. `null` until the async load
-  /// completes, even right after a cold start restoring a saved pick — see
-  /// [_fontLoadTick].
   String? _loadedFontFamily;
   final _fontLoadTick = 0.obs;
 
@@ -37,9 +31,7 @@ class ThemeController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    if (useGoogleFont.value && googleFontFamily.value.isNotEmpty) {
-      unawaited(_loadGoogleFont(googleFontFamily.value));
-    } else if (useCustomFont.value && customFontPath.value.isNotEmpty) {
+    if (useCustomFont.value && customFontPath.value.isNotEmpty) {
       unawaited(_loadFont(customFontPath.value));
     }
   }
@@ -53,19 +45,6 @@ class ThemeController extends GetxController {
     return family;
   }
 
-  Future<String?> _loadGoogleFont(String family) async {
-    final resolved = await CustomFontLoader.loadGoogleFont(family);
-    if (resolved != null) {
-      _loadedFontFamily = resolved;
-      _fontLoadTick.value++;
-    }
-    return resolved;
-  }
-
-  /// Opens a system file picker for a `.ttf`/`.otf` file, copies it into the
-  /// app's own fonts folder (so deleting the original elsewhere never breaks
-  /// it) and applies it live. Returns `false` if the user cancelled or the
-  /// file couldn't be loaded.
   Future<bool> pickCustomFont() async {
     final file = await FilePicker.pickFile(
       type: FileType.custom,
@@ -77,31 +56,24 @@ class ThemeController extends GetxController {
     return setCustomFont(imported);
   }
 
-  /// Loads an already-saved font at [path] (from the fonts folder) and, if
-  /// successful, enables it immediately.
+  /// Downloads [family] from Google Fonts into the local fonts folder and
+  /// applies it — same code path as [setCustomFont] from there on.
+  Future<bool> pickGoogleFont(String family) async {
+    final path = await CustomFontLoader.downloadGoogleFont(family);
+    if (path == null) return false;
+    return setCustomFont(path);
+  }
+
   Future<bool> setCustomFont(String path) async {
     final family = await _loadFont(path);
     if (family == null) return false;
     customFontPath.value = path;
     useCustomFont.value = true;
-    useGoogleFont.value = false;
-    return true;
-  }
-
-  /// Downloads (if needed) and applies a Google Fonts family by name.
-  Future<bool> setGoogleFont(String family) async {
-    final resolved = await _loadGoogleFont(family);
-    if (resolved == null) return false;
-    googleFontFamily.value = family;
-    useGoogleFont.value = true;
-    useCustomFont.value = false;
     return true;
   }
 
   Future<List<String>> listSavedFonts() => CustomFontLoader.listSavedFonts();
 
-  /// Deletes a saved font file; if it was the active font, reverts to the
-  /// default.
   Future<void> deleteSavedFont(String path) async {
     await CustomFontLoader.deleteSavedFont(path);
     if (customFontPath.value == path) clearCustomFont();
@@ -109,9 +81,7 @@ class ThemeController extends GetxController {
 
   void clearCustomFont() {
     useCustomFont.value = false;
-    useGoogleFont.value = false;
     customFontPath.value = '';
-    googleFontFamily.value = '';
     _loadedFontFamily = null;
   }
 
@@ -158,7 +128,6 @@ class ThemeController extends GetxController {
       useCustomColor.value,
       customColor.value,
       useCustomFont.value,
-      useGoogleFont.value,
       _fontLoadTick.value,
       _dynamicLight,
       _dynamicDark,
@@ -186,9 +155,7 @@ class ThemeController extends GetxController {
       base = AppTheme.byName(themeName.value).themeFor(brightness);
     }
 
-    final fontFamily = (useCustomFont.value || useGoogleFont.value)
-        ? _loadedFontFamily
-        : null;
+    final fontFamily = useCustomFont.value ? _loadedFontFamily : null;
     return buildAppTheme(
       base,
       isOled: isOled.value,
