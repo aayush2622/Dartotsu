@@ -144,9 +144,16 @@ class _ThemeDropdown extends StatelessWidget {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Obx(() {
+      final isCustom = controller.useCustomColor.value;
+      final customArgb = controller.customColor.value;
       final current = AppTheme.byName(controller.themeName.value);
-      final swatch =
-          current.themeFor(isDark ? Brightness.dark : Brightness.light).colorScheme.primary;
+      final label = isCustom ? 'Custom' : current.label;
+      final swatch = isCustom && customArgb != 0
+          ? Color(customArgb)
+          : current
+                .themeFor(isDark ? Brightness.dark : Brightness.light)
+                .colorScheme
+                .primary;
 
       return InkWell(
         onTap: () => _open(context),
@@ -155,7 +162,7 @@ class _ThemeDropdown extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 12),
           child: Row(
             children: [
-              Icon(Icons.color_lens, size: 22, color: scheme.primary),
+              Icon(Icons.color_lens, size: 22, color: scheme.onSurfaceVariant),
               const SizedBox(width: 20),
               Expanded(
                 child: Text(
@@ -165,7 +172,7 @@ class _ThemeDropdown extends StatelessWidget {
                 ),
               ),
               Text(
-                current.label,
+                label,
                 style: context.textTheme.bodyMedium
                     ?.copyWith(color: scheme.onSurfaceVariant),
               ),
@@ -424,29 +431,39 @@ class _UiSkeletonPreview extends StatelessWidget {
     final line = scheme.onSurface.withValues(alpha: 0.13);
     final img = primary.withValues(alpha: isDark ? 0.45 : 0.3);
 
-    const barH = 12.0;
-    const posterH = 22.0;
+    const barH = 11.0;
+    const gap = 5.0;
 
     return ClipRRect(
       borderRadius: const BorderRadius.vertical(top: Radius.circular(10)),
       child: LayoutBuilder(
         builder: (_, cs) {
           final h = cs.maxHeight;
-          final heroH = h * 0.44;
-          final posterTop = barH + 3 + heroH + 3;
-          final sectionTop = posterTop + posterH + 4;
+          // Split the space left after the two bars evenly: half to the
+          // hero image, half to the two list rows below it.
+          final available = (h - barH * 2 - gap * 3 - 4).clamp(0.0, h);
+          final heroH = available * 0.5;
+          final rowH = available * 0.25;
+          final heroTop = barH + gap;
+          final row1Top = heroTop + heroH + gap;
+          final row2Top = row1Top + rowH + 4;
 
           return Stack(
             children: [
-              // bg
               Positioned.fill(child: Container(color: bg)),
 
               // ── app bar ──
               Positioned(
-                top: 0, left: 0, right: 0, height: barH,
+                top: 0,
+                left: 0,
+                right: 0,
+                height: barH,
                 child: Container(
                   color: card,
-                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3.5),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 6,
+                    vertical: 3,
+                  ),
                   child: Row(
                     children: [
                       _dot(primary, 3.5),
@@ -461,89 +478,48 @@ class _UiSkeletonPreview extends StatelessWidget {
                 ),
               ),
 
-              // ── hero banner ──
+              // ── hero image block ──
               Positioned(
-                top: barH + 3, left: 4, right: 4,
+                top: heroTop,
+                left: 5,
+                right: 5,
                 height: heroH,
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(5),
-                  child: Stack(
-                    fit: StackFit.expand,
-                    children: [
-                      Container(color: img),
-                      Positioned(
-                        left: 0, right: 0, bottom: 0,
-                        child: Container(
-                          padding: const EdgeInsets.fromLTRB(5, 14, 5, 5),
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              begin: Alignment.bottomCenter,
-                              end: Alignment.topCenter,
-                              colors: [bg.withValues(alpha: 0.92), Colors.transparent],
-                            ),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              _line(line, 3, width: 32),
-                              const SizedBox(height: 2.5),
-                              _line(line.withValues(alpha: 0.5), 2, width: 20),
-                              const SizedBox(height: 4),
-                              Container(
-                                height: 6, width: 24,
-                                decoration: BoxDecoration(
-                                  color: primary,
-                                  borderRadius: BorderRadius.circular(99),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
+                  borderRadius: BorderRadius.circular(6),
+                  child: Container(
+                    color: img,
+                    alignment: Alignment.center,
+                    child: Icon(
+                      Icons.image_rounded,
+                      size: 14,
+                      color: bg.withValues(alpha: 0.5),
+                    ),
                   ),
                 ),
               ),
 
-              // ── poster row ──
+              // ── list rows ──
               Positioned(
-                top: posterTop, left: 4, right: 4, height: posterH,
-                child: Row(
-                  children: List.generate(4, (i) => Expanded(
-                    child: Container(
-                      margin: EdgeInsets.only(left: i > 0 ? 3 : 0),
-                      decoration: BoxDecoration(
-                        color: i == 0 ? img : card,
-                        borderRadius: BorderRadius.circular(3),
-                      ),
-                    ),
-                  )),
-                ),
+                top: row1Top,
+                left: 5,
+                right: 5,
+                height: rowH,
+                child: _listRow(card, img, line),
               ),
-
-              // ── section label + list rows ──
               Positioned(
-                top: sectionTop, left: 4, right: 4,
-                bottom: barH + 2,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    _line(primary.withValues(alpha: 0.55), 2.5, width: 22),
-                    const SizedBox(height: 3),
-                    _listRow(card, img, line),
-                    const SizedBox(height: 2.5),
-                    _listRow(card, img.withValues(alpha: 0.2), line),
-                    const SizedBox(height: 2.5),
-                    _listRow(card, img.withValues(alpha: 0.12), line),
-                  ],
-                ),
+                top: row2Top,
+                left: 5,
+                right: 5,
+                height: rowH,
+                child: _listRow(card, img.withValues(alpha: 0.5), line),
               ),
 
               // ── bottom nav ──
               Positioned(
-                bottom: 0, left: 0, right: 0, height: barH,
+                bottom: 0,
+                left: 0,
+                right: 0,
+                height: barH,
                 child: Container(
                   color: card,
                   child: Row(
@@ -575,23 +551,29 @@ class _UiSkeletonPreview extends StatelessWidget {
   );
 
   Widget _listRow(Color card, Color img, Color line) => Container(
-    height: 10,
-    padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 2),
+    padding: const EdgeInsets.all(3),
     decoration: BoxDecoration(
       color: card,
-      borderRadius: BorderRadius.circular(2),
+      borderRadius: BorderRadius.circular(4),
     ),
     child: Row(
       children: [
-        Container(
-          width: 6,
-          decoration: BoxDecoration(
-            color: img,
-            borderRadius: BorderRadius.circular(1),
+        ClipRRect(
+          borderRadius: BorderRadius.circular(2),
+          child: Container(width: 14, color: img),
+        ),
+        const SizedBox(width: 4),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              _line(line, 2.5, width: 28),
+              const SizedBox(height: 2.5),
+              _line(line.withValues(alpha: 0.6), 2, width: 18),
+            ],
           ),
         ),
-        const SizedBox(width: 2),
-        Expanded(child: _line(line, 2)),
       ],
     ),
   );
