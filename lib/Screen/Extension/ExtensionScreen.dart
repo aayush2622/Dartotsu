@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dartotsu_extension_bridge/Extensions/DownloadablePlugin.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/material.dart';
@@ -434,9 +436,7 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
                                       ),
                                       const SizedBox(height: 8),
                                       ClipRRect(
-                                        borderRadius: BorderRadius.circular(
-                                          10,
-                                        ),
+                                        borderRadius: BorderRadius.circular(10),
                                         child: LinearProgressIndicator(
                                           value: progress,
                                           minHeight: 6,
@@ -816,130 +816,134 @@ Future<void> showInstallDialog(
   final description = remote["description"] ?? "";
   final author = remote["author"] ?? "";
 
-  showCustomBottomDialog(
-    context,
-    CustomBottomDialog(
-      title: "Install $name",
-      viewList: [
-        const SizedBox(height: 8),
-        Center(
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
-            decoration: BoxDecoration(
-              color: scheme.primary.withValues(alpha: 0.12),
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Text(
-              version,
-              style: textStyle?.copyWith(
-                color: scheme.primary,
-                fontWeight: FontWeight.w600,
+  unawaited(
+    showCustomBottomDialog(
+      context,
+      CustomBottomDialog(
+        title: "Install $name",
+        viewList: [
+          const SizedBox(height: 8),
+          Center(
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+              decoration: BoxDecoration(
+                color: scheme.primary.withValues(alpha: 0.12),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Text(
+                version,
+                style: textStyle?.copyWith(
+                  color: scheme.primary,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
           ),
-        ),
-        const SizedBox(height: 18),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Container(
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: context.cardColor,
-              borderRadius: BorderRadius.circular(18),
-              border: Border.all(color: scheme.outline.withValues(alpha: 0.2)),
-            ),
-            child: Obx(() {
-              final downloading = plugin.downloading.value;
-              final progress = plugin.progress.value;
+          const SizedBox(height: 18),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: context.cardColor,
+                borderRadius: BorderRadius.circular(18),
+                border: Border.all(
+                  color: scheme.outline.withValues(alpha: 0.2),
+                ),
+              ),
+              child: Obx(() {
+                final downloading = plugin.downloading.value;
+                final progress = plugin.progress.value;
 
-              if (downloading) {
-                return Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    LinearProgressIndicator(
-                      value: progress,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    const SizedBox(height: 10),
-                    Text(
-                      "${(progress * 100).toStringAsFixed(1)}%",
-                      style: textStyle?.copyWith(fontWeight: FontWeight.w600),
-                    ),
-                  ],
-                );
-              }
-
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
+                if (downloading) {
+                  return Column(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      Icon(
-                        Icons.storage_rounded,
-                        size: 16,
-                        color: scheme.primary,
+                      LinearProgressIndicator(
+                        value: progress,
+                        borderRadius: BorderRadius.circular(10),
                       ),
-                      const SizedBox(width: 6),
-                      Text("Size: $sizeMB", style: textStyle),
-                      const SizedBox(width: 16),
-                      if (author.isNotEmpty) ...[
+                      const SizedBox(height: 10),
+                      Text(
+                        "${(progress * 100).toStringAsFixed(1)}%",
+                        style: textStyle?.copyWith(fontWeight: FontWeight.w600),
+                      ),
+                    ],
+                  );
+                }
+
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
                         Icon(
-                          Icons.person_rounded,
+                          Icons.storage_rounded,
                           size: 16,
                           color: scheme.primary,
                         ),
                         const SizedBox(width: 6),
-                        Expanded(
-                          child: Text(
-                            author,
-                            style: textStyle,
-                            overflow: TextOverflow.ellipsis,
+                        Text("Size: $sizeMB", style: textStyle),
+                        const SizedBox(width: 16),
+                        if (author.isNotEmpty) ...[
+                          Icon(
+                            Icons.person_rounded,
+                            size: 16,
+                            color: scheme.primary,
                           ),
-                        ),
+                          const SizedBox(width: 6),
+                          Expanded(
+                            child: Text(
+                              author,
+                              style: textStyle,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                        ],
                       ],
-                    ],
-                  ),
-                  const SizedBox(height: 14),
-                  Container(
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: scheme.surface.withValues(alpha: 0.3),
-                      borderRadius: BorderRadius.circular(12),
                     ),
-                    child: Text(
-                      description,
-                      style: textStyle?.copyWith(fontSize: 13, height: 1.4),
+                    const SizedBox(height: 14),
+                    Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: scheme.surface.withValues(alpha: 0.3),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Text(
+                        description,
+                        style: textStyle?.copyWith(fontSize: 13, height: 1.4),
+                      ),
                     ),
-                  ),
-                ],
-              );
-            }),
+                  ],
+                );
+              }),
+            ),
           ),
-        ),
-        const SizedBox(height: 20),
-      ],
-      negativeText: "Cancel",
-      positiveText: !plugin.installed.value
-          ? "Install"
-          : hasUpdate
-          ? "Update"
-          : "Installed",
-      negativeCallback: () {
-        Navigator.pop(context);
-      },
-      positiveCallback: () async {
-        if (plugin.installed.value && !hasUpdate) {
-          return;
-        }
-
-        if (plugin.downloading.value) return;
-
-        await plugin.download();
-        if (!context.mounted) return;
-        if (plugin.installed.value) {
+          const SizedBox(height: 20),
+        ],
+        negativeText: "Cancel",
+        positiveText: !plugin.installed.value
+            ? "Install"
+            : hasUpdate
+            ? "Update"
+            : "Installed",
+        negativeCallback: () {
           Navigator.pop(context);
-        }
-      },
+        },
+        positiveCallback: () async {
+          if (plugin.installed.value && !hasUpdate) {
+            return;
+          }
+
+          if (plugin.downloading.value) return;
+
+          await plugin.download();
+          if (!context.mounted) return;
+          if (plugin.installed.value) {
+            Navigator.pop(context);
+          }
+        },
+      ),
     ),
   );
 }

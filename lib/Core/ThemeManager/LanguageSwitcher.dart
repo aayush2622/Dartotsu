@@ -4,6 +4,7 @@ import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
+import '../../Widgets/Components/CustomBottomDialog.dart';
 import '../../Widgets/Components/ThemedContainer.dart';
 import '../../l10n/app_localizations.dart';
 import 'LocaleController.dart';
@@ -14,13 +15,8 @@ Widget languageSwitcher(BuildContext context) => const _LanguageSwitcher();
 class _LanguageSwitcher extends StatelessWidget {
   const _LanguageSwitcher();
 
-  void _open(BuildContext context) => showModalBottomSheet<void>(
-    context: context,
-    isScrollControlled: true,
-    backgroundColor: Colors.transparent,
-    useSafeArea: true,
-    builder: (_) => const _LanguageSheet(),
-  );
+  void _open(BuildContext context) =>
+      showCustomBottomDialog<void>(context, const _LanguageSheet());
 
   @override
   Widget build(BuildContext context) {
@@ -45,14 +41,16 @@ class _LanguageSwitcher extends StatelessWidget {
                   children: [
                     Text(
                       'Language',
-                      style: context.textTheme.bodyLarge
-                          ?.copyWith(fontWeight: FontWeight.w600),
+                      style: context.textTheme.bodyLarge?.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                     const SizedBox(height: 2),
                     Text(
                       name,
-                      style: context.textTheme.bodySmall
-                          ?.copyWith(color: scheme.onSurfaceVariant),
+                      style: context.textTheme.bodySmall?.copyWith(
+                        color: scheme.onSurfaceVariant,
+                      ),
                     ),
                   ],
                 ),
@@ -80,11 +78,12 @@ class _LanguageSheet extends StatefulWidget {
 class _LanguageSheetState extends State<_LanguageSheet> {
   var _query = '';
 
-  late final _options = AppLocalizations.supportedLocales
-      .map((l) => completeLanguageName(l.languageCode.toUpperCase()))
-      .toSet()
-      .toList()
-    ..sort();
+  late final _options =
+      AppLocalizations.supportedLocales
+          .map((l) => completeLanguageName(l.languageCode.toUpperCase()))
+          .toSet()
+          .toList()
+        ..sort();
 
   List<String> get _filtered => _query.isEmpty
       ? _options
@@ -94,8 +93,7 @@ class _LanguageSheetState extends State<_LanguageSheet> {
   Widget build(BuildContext context) {
     final locale = find<LocaleController>();
     final scheme = context.colorScheme;
-    final currentName =
-        completeLanguageName(locale.code.value.toUpperCase());
+    final currentName = completeLanguageName(locale.code.value.toUpperCase());
 
     return SizedBox(
       height: MediaQuery.of(context).size.height * 0.72,
@@ -148,14 +146,12 @@ class _LanguageSheetState extends State<_LanguageSheet> {
                   final name = _filtered[i];
                   final selected = name == currentName;
                   return ListTile(
-                    contentPadding:
-                        const EdgeInsets.symmetric(horizontal: 20),
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 20),
                     title: Text(
                       name,
                       style: context.textTheme.bodyMedium?.copyWith(
                         color: selected ? scheme.primary : null,
-                        fontWeight:
-                            selected ? FontWeight.w700 : null,
+                        fontWeight: selected ? FontWeight.w700 : null,
                       ),
                     ),
                     trailing: selected
@@ -168,9 +164,7 @@ class _LanguageSheetState extends State<_LanguageSheet> {
                     onTap: () {
                       HapticFeedback.selectionClick();
                       locale.setLocale(
-                        Locale(
-                          completeLanguageCode(name).toLowerCase(),
-                        ),
+                        Locale(completeLanguageCode(name).toLowerCase()),
                       );
                       Navigator.of(context).pop();
                     },

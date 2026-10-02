@@ -3,25 +3,27 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:material_ui/material_ui.dart' as mui;
 
+import '../../Widgets/Components/AlertDialogBuilder.dart';
 import 'LanguageSwitcher.dart';
 
 Future<Color?> showColorPickerDialog(
   BuildContext context,
   Color initialColor, {
   bool showTransparent = true,
-}) async {
+}) {
   Color selectedColor = initialColor;
-  final theme = Theme.of(context).colorScheme;
+  // `Get.overlayContext` so the dialog always has a live MaterialLocalizations
+  // ancestor regardless of which screen triggered it.
   final dialogContext = Get.overlayContext ?? context;
-  final Color? result = await showDialog<Color>(
-    context: dialogContext,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: Text(
-          getString.pickColor,
-          style: TextStyle(color: theme.primary, fontWeight: FontWeight.bold),
-        ),
-        content: mui.Material(
+
+  return AlertDialogBuilder(dialogContext)
+      .popOnFinish(false)
+      .setTitle(getString.pickColor)
+      .setCustomView(
+        // `material_ui`'s ColorPicker/TextField look up a `mui.Material`
+        // ancestor specifically — Flutter's own `Material` (which
+        // AlertDialogBuilder already wraps content in) isn't enough.
+        mui.Material(
           color: Colors.transparent,
           child: SingleChildScrollView(
             child: ColorPicker(
@@ -47,57 +49,17 @@ Future<Color?> showColorPickerDialog(
             ),
           ),
         ),
-        actions: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              if (showTransparent)
-                TextButton(
-                  child: Text(
-                    'Transparent',
-                    style: TextStyle(
-                      color: theme.primary,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  onPressed: () {
-                    selectedColor = Colors.transparent;
-                    Navigator.of(context).pop(selectedColor);
-                  },
-                ),
-              Row(
-                children: [
-                  TextButton(
-                    child: Text(
-                      'Cancel',
-                      style: TextStyle(
-                        color: theme.primary,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                  TextButton(
-                    child: Text(
-                      'Select',
-                      style: TextStyle(
-                        color: theme.primary,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).pop(selectedColor);
-                    },
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ],
-      );
-    },
-  );
-  return result;
+      )
+      .setNeutralButton(
+        showTransparent ? 'Transparent' : null,
+        showTransparent
+            ? () => Navigator.of(dialogContext).pop(Colors.transparent)
+            : null,
+      )
+      .setNegativeButton('Cancel', () => Navigator.of(dialogContext).pop())
+      .setPositiveButton(
+        'Select',
+        () => Navigator.of(dialogContext).pop(selectedColor),
+      )
+      .show<Color>();
 }

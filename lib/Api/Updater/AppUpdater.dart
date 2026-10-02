@@ -99,7 +99,10 @@ class AppUpdater extends GetxController {
     }
   }
 
-  Map? _unwrapRelease(NetworkResponse<dynamic> response, {required bool force}) {
+  Map? _unwrapRelease(
+    NetworkResponse<dynamic> response, {
+    required bool force,
+  }) {
     if (response.statusCode == 404) {
       if (force) {
         snackString("Ooo Nooo you fell into limbo: ${response.statusMessage}");
@@ -121,176 +124,183 @@ class AppUpdater extends GetxController {
 
     final skipUpdate = false.obs;
 
-    showCustomBottomDialog(
-      context,
-      CustomBottomDialog(
-        title: "Update Available",
-        viewList: [
-          const SizedBox(height: 12),
-          Center(
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-              decoration: BoxDecoration(
-                color: context.cardColor.withValues(alpha: .4),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Text(
-                data["tag_name"] ?? "",
-                style: textStyle?.copyWith(color: scheme.primary),
+    unawaited(
+      showCustomBottomDialog(
+        context,
+        CustomBottomDialog(
+          title: "Update Available",
+          viewList: [
+            const SizedBox(height: 12),
+            Center(
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 6,
+                ),
+                decoration: BoxDecoration(
+                  color: context.cardColor.withValues(alpha: .4),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Text(
+                  data["tag_name"] ?? "",
+                  style: textStyle?.copyWith(color: scheme.primary),
+                ),
               ),
             ),
-          ),
-          const SizedBox(height: 20),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text("Change Logs: ", style: textStyle),
-                const SizedBox(height: 8),
-                Container(
-                  constraints: const BoxConstraints(maxHeight: 260),
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: context.cardColor.withValues(alpha: .4),
-                    borderRadius: BorderRadius.circular(14),
-                  ),
-                  child: Obx(() {
-                    if (_downloadProgress.value >= 0) {
-                      return Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          LinearProgressIndicator(
-                            value: _downloadProgress.value / 100,
-                          ),
-                          const SizedBox(height: 8),
-                          Text(
-                            "${_downloadedBytes.value ~/ (1024 * 1024)} MB / "
-                            "${_totalBytes.value ~/ (1024 * 1024)} MB "
-                            "${_downloadProgress.value.toStringAsFixed(1)}%",
-                            style: textStyle,
-                          ),
-                        ],
-                      );
-                    }
+            const SizedBox(height: 20),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text("Change Logs: ", style: textStyle),
+                  const SizedBox(height: 8),
+                  Container(
+                    constraints: const BoxConstraints(maxHeight: 260),
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: context.cardColor.withValues(alpha: .4),
+                      borderRadius: BorderRadius.circular(14),
+                    ),
+                    child: Obx(() {
+                      if (_downloadProgress.value >= 0) {
+                        return Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            LinearProgressIndicator(
+                              value: _downloadProgress.value / 100,
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              "${_downloadedBytes.value ~/ (1024 * 1024)} MB / "
+                              "${_totalBytes.value ~/ (1024 * 1024)} MB "
+                              "${_downloadProgress.value.toStringAsFixed(1)}%",
+                              style: textStyle,
+                            ),
+                          ],
+                        );
+                      }
 
-                    return DpadFocusable(
-                      enabled: false,
-                      child: FocusTraversalGroup(
-                        descendantsAreFocusable: false,
-                        child: MarkdownWidget(
-                          data: data["body"] ?? "",
-                          shrinkWrap: true,
-                          config: MarkdownConfig(
-                            configs: [
-                              LinkConfig(
-                                onTap: openLinkInBrowser,
-                                style: textStyle!.copyWith(
-                                  color: scheme.primary,
+                      return DpadFocusable(
+                        enabled: false,
+                        child: FocusTraversalGroup(
+                          descendantsAreFocusable: false,
+                          child: MarkdownWidget(
+                            data: data["body"] ?? "",
+                            shrinkWrap: true,
+                            config: MarkdownConfig(
+                              configs: [
+                                LinkConfig(
+                                  onTap: openLinkInBrowser,
+                                  style: textStyle!.copyWith(
+                                    color: scheme.primary,
+                                  ),
                                 ),
-                              ),
-                              H1Config(
-                                style: textStyle.copyWith(
-                                  fontWeight: FontWeight.bold,
-                                  color: scheme.primary,
+                                H1Config(
+                                  style: textStyle.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                    color: scheme.primary,
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                    );
-                  }),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 16),
-          Obx(() {
-            if (_downloadProgress.value >= 0) {
-              return const SizedBox.shrink();
-            }
-
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: Row(
-                children: [
-                  Checkbox(
-                    value: skipUpdate.value,
-                    visualDensity: VisualDensity.compact,
-                    onChanged: (v) => skipUpdate.value = v ?? false,
-                  ),
-                  const SizedBox(width: 6),
-                  Text(
-                    "Skip this update",
-                    style: textStyle?.copyWith(
-                      fontSize: 13,
-                      color: scheme.onSurface.withValues(alpha: 0.7),
-                    ),
+                      );
+                    }),
                   ),
                 ],
               ),
-            );
-          }),
-          const SizedBox(height: 8),
-        ],
-        negativeText: "Later",
-        positiveText: "Update",
-        negativeCallback: () {
-          final tag = data["tag_name"];
-          if (skipUpdate.value && tag is String) {
-            PrefName.skippedUpdates.value = [
-              ...PrefName.skippedUpdates.value,
-              tag,
-            ];
-          }
-          Get.back();
-        },
-        positiveCallback: () async {
-          if (Platform.isAndroid) {
+            ),
+            const SizedBox(height: 16),
+            Obx(() {
+              if (_downloadProgress.value >= 0) {
+                return const SizedBox.shrink();
+              }
+
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: Row(
+                  children: [
+                    Checkbox(
+                      value: skipUpdate.value,
+                      visualDensity: VisualDensity.compact,
+                      onChanged: (v) => skipUpdate.value = v ?? false,
+                    ),
+                    const SizedBox(width: 6),
+                    Text(
+                      "Skip this update",
+                      style: textStyle?.copyWith(
+                        fontSize: 13,
+                        color: scheme.onSurface.withValues(alpha: 0.7),
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            }),
+            const SizedBox(height: 8),
+          ],
+          negativeText: "Later",
+          positiveText: "Update",
+          negativeCallback: () {
+            final tag = data["tag_name"];
+            if (skipUpdate.value && tag is String) {
+              PrefName.skippedUpdates.value = [
+                ...PrefName.skippedUpdates.value,
+                tag,
+              ];
+            }
+            Get.back();
+          },
+          positiveCallback: () async {
+            if (Platform.isAndroid) {
+              final assets = data['assets'] as List;
+              final downloadUrl = await _getAssetDownloadUrl(assets);
+              if (downloadUrl == null) return;
+              unawaited(_downloadAndInstallApk(downloadUrl));
+              return;
+            }
+
+            if (Platform.isIOS) {
+              final releasePage = data['html_url'] as String?;
+              if (releasePage != null) {
+                unawaited(openLinkInBrowser(releasePage));
+              }
+              snackString(
+                "iOS builds aren't on the App Store — grab the .ipa from "
+                "the release page and sideload it with AltStore or SideStore",
+              );
+              return;
+            }
+
+            if (_isNixManaged) {
+              snackString(
+                'This build is managed by Nix — run "nix flake update" on '
+                'your flake and rebuild instead of updating from here',
+              );
+              return;
+            }
+
             final assets = data['assets'] as List;
             final downloadUrl = await _getAssetDownloadUrl(assets);
             if (downloadUrl == null) return;
-            unawaited(_downloadAndInstallApk(downloadUrl));
-            return;
-          }
 
-          if (Platform.isIOS) {
-            final releasePage = data['html_url'] as String?;
-            if (releasePage != null) unawaited(openLinkInBrowser(releasePage));
-            snackString(
-              "iOS builds aren't on the App Store — grab the .ipa from "
-              "the release page and sideload it with AltStore or SideStore",
-            );
-            return;
+            if (Platform.isLinux || Platform.isWindows || Platform.isMacOS) {
+              unawaited(_selfUpdateDesktop(downloadUrl));
+            } else {
+              unawaited(openLinkInBrowser(downloadUrl));
+              snackString("Check your browser");
+            }
+          },
+        ),
+        onDismissed: () {
+          if (_cancelToken != null && !_cancelToken!.isCancelled) {
+            _cancelToken!.cancel();
           }
-
-          if (_isNixManaged) {
-            snackString(
-              'This build is managed by Nix — run "nix flake update" on '
-              'your flake and rebuild instead of updating from here',
-            );
-            return;
-          }
-
-          final assets = data['assets'] as List;
-          final downloadUrl = await _getAssetDownloadUrl(assets);
-          if (downloadUrl == null) return;
-
-          if (Platform.isLinux || Platform.isWindows || Platform.isMacOS) {
-            unawaited(_selfUpdateDesktop(downloadUrl));
-          } else {
-            unawaited(openLinkInBrowser(downloadUrl));
-            snackString("Check your browser");
-          }
+          _resetDownloadState();
         },
       ),
-      onDismissed: () {
-        if (_cancelToken != null && !_cancelToken!.isCancelled) {
-          _cancelToken!.cancel();
-        }
-        _resetDownloadState();
-      },
     );
   }
 
@@ -514,9 +524,7 @@ class AppUpdater extends GetxController {
 
   Future<void> _applyMacUpdate(String dmgPath) async {
     final exePath = Platform.resolvedExecutable;
-    final appDir = Directory(
-      path.dirname(path.dirname(path.dirname(exePath))),
-    );
+    final appDir = Directory(path.dirname(path.dirname(path.dirname(exePath))));
 
     if (!appDir.path.endsWith('.app') || !_canWrite(appDir.parent)) {
       throw 'app bundle location is not writable';
@@ -539,11 +547,10 @@ class AppUpdater extends GetxController {
     }
 
     try {
-      final mounted = Directory(
-        mountPoint,
-      ).listSync().whereType<Directory>().firstWhere(
-        (d) => d.path.endsWith('.app'),
-      );
+      final mounted = Directory(mountPoint)
+          .listSync()
+          .whereType<Directory>()
+          .firstWhere((d) => d.path.endsWith('.app'));
 
       final stagingApp = Directory(
         path.join(appDir.parent.path, '.dartotsu-update-staging.app'),

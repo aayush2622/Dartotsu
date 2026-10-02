@@ -214,18 +214,25 @@ class _CustomBottomDialogState extends State<CustomBottomDialog> {
   }
 }
 
-void showCustomBottomDialog(
+/// Opens [child] in the app's standard themed, draggable, safe-area bottom
+/// sheet. [child] is most often a [CustomBottomDialog], but any widget works
+/// — this is the one place every bottom sheet in the app should go through,
+/// so they all share the same backdrop/elevation/safe-area behavior.
+///
+/// Pop with a value (`Navigator.of(context).pop(value)`) to resolve the
+/// returned future to it.
+Future<T?> showCustomBottomDialog<T>(
   BuildContext context,
-  CustomBottomDialog dialog, {
+  Widget child, {
   VoidCallback? onDismissed,
 }) {
-  showModalBottomSheet(
+  return showModalBottomSheet<T>(
     enableDrag: true,
     isScrollControlled: true,
     context: context,
     backgroundColor: Colors.transparent,
     useSafeArea: true,
     elevation: 2,
-    builder: (context) => dialog,
+    builder: (context) => child,
   ).whenComplete(() => onDismissed?.call());
 }

@@ -9,6 +9,7 @@ import '../../../Model/Setting.dart';
 import '../../../Utils/Extensions/ContextExtensions.dart';
 import '../../../Utils/Functions/GetXFunctions.dart';
 import '../../../Widgets/Components/AlertDialogBuilder.dart';
+import '../../../Widgets/Components/CustomBottomDialog.dart';
 import '../../../Widgets/Components/ThemedContainer.dart';
 
 List<Setting> networkSettings(BuildContext context) {
@@ -83,7 +84,11 @@ Widget _sheetHandle(BuildContext context) => Padding(
 
 Widget _sheetTitle(BuildContext context, String title) => Padding(
   padding: const EdgeInsets.fromLTRB(24, 0, 24, 16),
-  child: Text(title, style: context.textTheme.titleMedium, textAlign: TextAlign.center),
+  child: Text(
+    title,
+    style: context.textTheme.titleMedium,
+    textAlign: TextAlign.center,
+  ),
 );
 
 Widget _sheetActions(
@@ -96,7 +101,10 @@ Widget _sheetActions(
   child: Row(
     children: [
       if (onNeutral != null) ...[
-        TextButton(onPressed: onNeutral, child: Text(neutralLabel ?? getString.reset)),
+        TextButton(
+          onPressed: onNeutral,
+          child: Text(neutralLabel ?? getString.reset),
+        ),
         const Spacer(),
       ],
       TextButton(
@@ -147,12 +155,18 @@ class _TestChip extends StatelessWidget {
                     SizedBox(
                       width: 12,
                       height: 12,
-                      child: CircularProgressIndicator(strokeWidth: 1.5, color: color),
+                      child: CircularProgressIndicator(
+                        strokeWidth: 1.5,
+                        color: color,
+                      ),
                     )
                   else
                     Icon(icon, size: 14, color: color),
                   const SizedBox(width: 5),
-                  Text(message, style: context.textTheme.labelSmall?.copyWith(color: color)),
+                  Text(
+                    message,
+                    style: context.textTheme.labelSmall?.copyWith(color: color),
+                  ),
                 ],
               ),
             ),
@@ -163,14 +177,15 @@ class _TestChip extends StatelessWidget {
 // ─── proxy sheet ──────────────────────────────────────────────────────────────
 
 void _showProxySheet(BuildContext context, NetworkManager network) =>
-    showModalBottomSheet<void>(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
-      useSafeArea: true,
-      builder: (ctx) => Padding(
-        padding: EdgeInsets.only(bottom: MediaQuery.of(ctx).viewInsets.bottom),
-        child: _ProxySheet(network: network),
+    showCustomBottomDialog<void>(
+      context,
+      Builder(
+        builder: (ctx) => Padding(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(ctx).viewInsets.bottom,
+          ),
+          child: _ProxySheet(network: network),
+        ),
       ),
     );
 
@@ -219,7 +234,10 @@ class _ProxySheetState extends State<_ProxySheet> {
     final scheme = context.colorScheme;
     return ThemedContainer(
       color: scheme.surface,
-      border: Border.all(width: 0, color: scheme.onSurface.withValues(alpha: 0.1)),
+      border: Border.all(
+        width: 0,
+        color: scheme.onSurface.withValues(alpha: 0.1),
+      ),
       borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
       padding: const EdgeInsets.only(bottom: 24, top: 12),
       child: Column(
@@ -262,15 +280,22 @@ class _ProxySheetState extends State<_ProxySheet> {
                       duration: const Duration(milliseconds: 180),
                       child: Container(
                         key: ValueKey(type),
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 3,
+                        ),
                         decoration: BoxDecoration(
                           color: color.withValues(alpha: 0.12),
                           borderRadius: BorderRadius.circular(12),
-                          border: Border.all(color: color.withValues(alpha: 0.3)),
+                          border: Border.all(
+                            color: color.withValues(alpha: 0.3),
+                          ),
                         ),
                         child: Text(
                           type,
-                          style: context.textTheme.labelSmall?.copyWith(color: color),
+                          style: context.textTheme.labelSmall?.copyWith(
+                            color: color,
+                          ),
                         ),
                       ),
                     );
@@ -329,14 +354,15 @@ Future<(bool, String)> _testProxyConnection(String proxy) async {
 // ─── DNS sheet ────────────────────────────────────────────────────────────────
 
 void _showDnsSheet(BuildContext context, NetworkManager network) =>
-    showModalBottomSheet<void>(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
-      useSafeArea: true,
-      builder: (ctx) => Padding(
-        padding: EdgeInsets.only(bottom: MediaQuery.of(ctx).viewInsets.bottom),
-        child: _DnsSheet(network: network),
+    showCustomBottomDialog<void>(
+      context,
+      Builder(
+        builder: (ctx) => Padding(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(ctx).viewInsets.bottom,
+          ),
+          child: _DnsSheet(network: network),
+        ),
       ),
     );
 
@@ -384,7 +410,10 @@ class _DnsSheetState extends State<_DnsSheet> {
     final scheme = context.colorScheme;
     return ThemedContainer(
       color: scheme.surface,
-      border: Border.all(width: 0, color: scheme.onSurface.withValues(alpha: 0.1)),
+      border: Border.all(
+        width: 0,
+        color: scheme.onSurface.withValues(alpha: 0.1),
+      ),
       borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
       padding: const EdgeInsets.only(bottom: 24, top: 12),
       child: Column(
@@ -451,14 +480,15 @@ Future<(bool, String)> _testDns(String url) async {
 // ─── user-agent sheet ─────────────────────────────────────────────────────────
 
 void _showUaSheet(BuildContext context, NetworkManager network) =>
-    showModalBottomSheet<void>(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
-      useSafeArea: true,
-      builder: (ctx) => Padding(
-        padding: EdgeInsets.only(bottom: MediaQuery.of(ctx).viewInsets.bottom),
-        child: _UaSheet(network: network),
+    showCustomBottomDialog<void>(
+      context,
+      Builder(
+        builder: (ctx) => Padding(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(ctx).viewInsets.bottom,
+          ),
+          child: _UaSheet(network: network),
+        ),
       ),
     );
 
@@ -471,7 +501,9 @@ class _UaSheet extends StatefulWidget {
 }
 
 class _UaSheetState extends State<_UaSheet> {
-  late final _ctrl = TextEditingController(text: PrefName.customUserAgent.value);
+  late final _ctrl = TextEditingController(
+    text: PrefName.customUserAgent.value,
+  );
 
   void _save() {
     PrefName.customUserAgent.value = _ctrl.text.trim();
@@ -490,7 +522,10 @@ class _UaSheetState extends State<_UaSheet> {
     final scheme = context.colorScheme;
     return ThemedContainer(
       color: scheme.surface,
-      border: Border.all(width: 0, color: scheme.onSurface.withValues(alpha: 0.1)),
+      border: Border.all(
+        width: 0,
+        color: scheme.onSurface.withValues(alpha: 0.1),
+      ),
       borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
       padding: const EdgeInsets.only(bottom: 24, top: 12),
       child: Column(
