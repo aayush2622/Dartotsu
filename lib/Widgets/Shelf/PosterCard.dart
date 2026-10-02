@@ -449,12 +449,13 @@ class _ScoreBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final fg = highlight ? context.colorScheme.tertiary : Colors.white;
+    final scheme = context.colorScheme;
+    final fg = highlight ? scheme.tertiary : scheme.onInverseSurface;
     return Container(
       height: 20,
       padding: const EdgeInsets.symmetric(horizontal: 6),
       decoration: BoxDecoration(
-        color: const Color(0xCC060A12),
+        color: scheme.inverseSurface.withValues(alpha: 0.8),
         borderRadius: BorderRadius.circular(999),
       ),
       child: Row(

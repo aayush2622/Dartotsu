@@ -303,7 +303,7 @@ class _MediaSectionState extends State<MediaSection> {
                               Dimens.radiusSm,
                             ),
                             child: Container(
-                              color: Colors.white12,
+                              color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.12),
                               width: _cardW,
                               height: _cardH,
                             ),

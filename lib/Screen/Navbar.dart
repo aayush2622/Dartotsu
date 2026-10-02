@@ -236,27 +236,28 @@ class _FloatingBottomNavBarState extends State<FloatingBottomNavBar> {
           child: Stack(
             alignment: Alignment.center,
             children: [
-              Container(
-                width: 46,
-                height: 46,
+              AnimatedContainer(
+                duration: Durations.short4,
+                curve: Curves.easeOutCubic,
+                width: selected ? 56 : hovered ? 48 : 0,
+                height: 32,
                 decoration: BoxDecoration(
-                  shape: BoxShape.circle,
+                  borderRadius: BorderRadius.circular(999),
                   color: selected
-                      ? theme.primary.withValues(alpha: .75)
+                      ? theme.secondaryContainer
                       : hovered
-                      ? theme.primary.withValues(alpha: .10)
+                      ? theme.onSurface.withValues(alpha: .08)
                       : Colors.transparent,
                 ),
-              ).animateNavSelection(selected: selected),
-
+              ),
               Icon(
                 item.icon,
                 size: 24,
                 color: selected
-                    ? theme.surface
+                    ? theme.onSecondaryContainer
                     : hovered
-                    ? theme.primary
-                    : theme.onSurface.withValues(alpha: .72),
+                    ? theme.onSurface
+                    : theme.onSurfaceVariant,
               ),
             ],
           ).animateNavItem(selected: selected, active: hovered),
