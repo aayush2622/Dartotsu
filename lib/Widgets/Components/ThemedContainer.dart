@@ -125,9 +125,15 @@ class _ThemeDropdown extends StatelessWidget {
     isScrollControlled: true,
     backgroundColor: Colors.transparent,
     useSafeArea: true,
-    builder: (_) => const FractionallySizedBox(
+    builder: (_) => FractionallySizedBox(
       heightFactor: 0.6,
-      child: _ThemePickerSheet(),
+      child: _ThemePickerSheet(
+        openColorPicker: (current) => showColorPickerDialog(
+          context,
+          current,
+          showTransparent: false,
+        ),
+      ),
     ),
   );
 
@@ -191,7 +197,8 @@ class _ThemeDropdown extends StatelessWidget {
 }
 
 class _ThemePickerSheet extends StatelessWidget {
-  const _ThemePickerSheet();
+  final Future<Color?> Function(Color current) openColorPicker;
+  const _ThemePickerSheet({required this.openColorPicker});
 
   @override
   Widget build(BuildContext context) {
@@ -255,11 +262,8 @@ class _ThemePickerSheet extends StatelessWidget {
                           return GestureDetector(
                             onTap: () async {
                               unawaited(HapticFeedback.selectionClick());
-                              final picked = await showColorPickerDialog(
-                                context,
-                                displayColor,
-                                showTransparent: false,
-                              );
+                              final picked =
+                                  await openColorPicker(displayColor);
                               if (picked != null) {
                                 controller.setCustomColor(picked);
                                 controller.setUseCustomColor(true);

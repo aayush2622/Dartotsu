@@ -1,5 +1,7 @@
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:material_ui/material_ui.dart' as mui;
 
 import 'LanguageSwitcher.dart';
 
@@ -9,36 +11,40 @@ Future<Color?> showColorPickerDialog(
   bool showTransparent = true,
 }) async {
   Color selectedColor = initialColor;
-  var theme = Theme.of(context).colorScheme;
+  final theme = Theme.of(context).colorScheme;
+  final dialogContext = Get.overlayContext ?? context;
   final Color? result = await showDialog<Color>(
-    context: context,
+    context: dialogContext,
     builder: (BuildContext context) {
       return AlertDialog(
         title: Text(
           getString.pickColor,
           style: TextStyle(color: theme.primary, fontWeight: FontWeight.bold),
         ),
-        content: SingleChildScrollView(
-          child: ColorPicker(
-            wheelDiameter: 300,
-            wheelWidth: 10,
-            borderRadius: 24,
-            color: selectedColor,
-            onColorChanged: (Color color) {
-              selectedColor = color;
-            },
-            pickersEnabled: const <ColorPickerType, bool>{
-              ColorPickerType.primary: false,
-              ColorPickerType.accent: true,
-              ColorPickerType.wheel: true,
-            },
-            pickerTypeLabels: <ColorPickerType, String>{
-              ColorPickerType.accent: getString.colorPickerDefault,
-              ColorPickerType.wheel: getString.colorPickerCustom,
-            },
-            showColorName: true,
-            showColorCode: true,
-            colorCodeHasColor: true,
+        content: mui.Material(
+          color: Colors.transparent,
+          child: SingleChildScrollView(
+            child: ColorPicker(
+              wheelDiameter: 300,
+              wheelWidth: 10,
+              borderRadius: 24,
+              color: selectedColor,
+              onColorChanged: (Color color) {
+                selectedColor = color;
+              },
+              pickersEnabled: const <ColorPickerType, bool>{
+                ColorPickerType.primary: false,
+                ColorPickerType.accent: true,
+                ColorPickerType.wheel: true,
+              },
+              pickerTypeLabels: <ColorPickerType, String>{
+                ColorPickerType.accent: getString.colorPickerDefault,
+                ColorPickerType.wheel: getString.colorPickerCustom,
+              },
+              showColorName: true,
+              showColorCode: true,
+              colorCodeHasColor: true,
+            ),
           ),
         ),
         actions: [
