@@ -7,6 +7,7 @@ import '../../../Utils/Extensions/ContextExtensions.dart';
 import '../../../Utils/Extensions/Responsive.dart';
 import '../../../Widgets/Components/ScrollConfig.dart';
 import 'SettingsAdaptor.dart';
+import 'SettingsSearchField.dart';
 
 class SettingsListView extends StatefulWidget {
   final List<Setting> Function(BuildContext) searchable;
@@ -38,7 +39,7 @@ class _SettingsListViewState extends State<SettingsListView> {
       context,
       children: [
         if (widget.title != null)
-          SliverAppBar.large(
+          SliverAppBar.medium(
             backgroundColor: Colors.transparent,
             titleSpacing: 4,
             leading: IconButton(
@@ -62,35 +63,7 @@ class _SettingsListViewState extends State<SettingsListView> {
           ),
           sliver: SliverList(
             delegate: SliverChildListDelegate([
-              TextField(
-                onChanged: (v) => _query.value = v.trim(),
-                textInputAction: TextInputAction.search,
-                decoration: InputDecoration(
-                  hintText: widget.hint ?? getString.searchSettings,
-                  prefixIcon: Icon(
-                    Icons.search_rounded,
-                    color: context.colorScheme.onSurfaceVariant,
-                  ),
-                  filled: true,
-                  fillColor: context.colorScheme.surfaceContainerLow,
-                  border: OutlineInputBorder(
-                    borderRadius: Dimens.border,
-                    borderSide: BorderSide.none,
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: Dimens.border,
-                    borderSide: BorderSide.none,
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: Dimens.border,
-                    borderSide: BorderSide(
-                      color: context.colorScheme.primary,
-                      width: 2,
-                    ),
-                  ),
-                  contentPadding: const EdgeInsets.symmetric(vertical: 16),
-                ),
-              ),
+              SettingsSearchField(query: _query, hint: widget.hint),
               SizedBox(height: Dimens.gap),
               Obx(() {
                 final q = _query.value;

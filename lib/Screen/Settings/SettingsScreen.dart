@@ -11,6 +11,7 @@ import '../../Widgets/Components/BaseScreen.dart';
 import '../../Widgets/Components/ScrollConfig.dart';
 import '../../Widgets/Components/ThemedContainer.dart';
 import 'Widgets/SettingsAdaptor.dart';
+import 'Widgets/SettingsSearchField.dart';
 import 'SettingsCategories.dart';
 import 'SettingsCategoryScreen.dart';
 
@@ -41,7 +42,17 @@ class _SettingsScreenState extends BaseScreen<SettingsScreen> {
       body: CustomScrollConfig(
         context,
         children: [
-          SliverAppBar.large(
+          SliverAppBar.medium(
+            leading: IconButton(
+              icon: Icon(
+                Icons.arrow_back_ios_new_rounded,
+                size: 20,
+                color: context.colorScheme.onSurfaceVariant,
+              ),
+              onPressed: () {
+                if (Get.key.currentState?.canPop() ?? false) Get.back();
+              },
+            ),
             backgroundColor: Colors.transparent,
             title: Text(getString.settings),
           ),
@@ -54,7 +65,7 @@ class _SettingsScreenState extends BaseScreen<SettingsScreen> {
             ),
             sliver: SliverList(
               delegate: SliverChildListDelegate([
-                _SearchBar(query: _query),
+                SettingsSearchField(query: _query),
                 SizedBox(height: Dimens.gap),
                 Obx(() {
                   final q = _query.value;
@@ -135,41 +146,6 @@ class _SettingsScreenState extends BaseScreen<SettingsScreen> {
       }
     }
     return out;
-  }
-}
-
-// ─── search bar ──────────────────────────────────────────────────────────────
-
-class _SearchBar extends StatelessWidget {
-  final RxString query;
-  const _SearchBar({required this.query});
-
-  @override
-  Widget build(BuildContext context) {
-    final scheme = context.colorScheme;
-    return TextField(
-      onChanged: (v) => query.value = v.trim(),
-      textInputAction: TextInputAction.search,
-      decoration: InputDecoration(
-        hintText: getString.searchSettings,
-        prefixIcon: Icon(Icons.search_rounded, color: scheme.onSurfaceVariant),
-        filled: true,
-        fillColor: scheme.surfaceContainerLow,
-        border: OutlineInputBorder(
-          borderRadius: Dimens.border,
-          borderSide: BorderSide.none,
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: Dimens.border,
-          borderSide: BorderSide.none,
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: Dimens.border,
-          borderSide: BorderSide(color: scheme.primary, width: 2),
-        ),
-        contentPadding: const EdgeInsets.symmetric(vertical: 16),
-      ),
-    );
   }
 }
 
