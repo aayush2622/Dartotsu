@@ -614,7 +614,7 @@ abstract class AppLocalizations {
   /// No description provided for @jsonThemeDesc.
   ///
   /// In en, this message translates to:
-  /// **'Live colours from ~/.config/dartotsu/theme.json (e.g. matugen)'**
+  /// **'Live colours from ~/.config/dartotsu/theme.json (a custom script, or your own edits)'**
   String get jsonThemeDesc;
 
   /// No description provided for @customAccentDisabledDesc.

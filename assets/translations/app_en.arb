@@ -161,7 +161,7 @@
   "@customAccentDesc": {},
   "jsonTheme": "Custom theme file",
   "@jsonTheme": {},
-  "jsonThemeDesc": "Live colours from ~/.config/dartotsu/theme.json (e.g. matugen)",
+  "jsonThemeDesc": "Live colours from ~/.config/dartotsu/theme.json (a custom script, or your own edits)",
   "@jsonThemeDesc": {},
   "customAccentDisabledDesc": "Turn off Material You to use a custom colour",
   "@customAccentDisabledDesc": {},

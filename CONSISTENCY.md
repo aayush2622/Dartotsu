@@ -44,7 +44,7 @@ call is usually a sign a wrapper was skipped, not that one doesn't exist.
   - The one legitimate exception: reading from a path a *third-party package/tool* owns and
     controls the layout of — e.g. `google_fonts`' own on-disk cache in
     `getApplicationSupportDirectory()` (`CustomFontLoader`), or the XDG config file an external
-    tool like `matugen` writes to (`~/.config/dartotsu/theme.json`, read live by
+    tool (pywal, a custom script, …) writes to (`~/.config/dartotsu/theme.json`, read live by
     `CustomJsonTheme`) — that's not "our" storage, so `StorageManager` doesn't apply to the read
     side, only to wherever a result then gets copied into our own app directory.
 

@@ -243,7 +243,7 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get jsonThemeDesc =>
-      'Live colours from ~/.config/dartotsu/theme.json (e.g. matugen)';
+      'Live colours from ~/.config/dartotsu/theme.json (a custom script, or your own edits)';
 
   @override
   String get customAccentDisabledDesc =>
