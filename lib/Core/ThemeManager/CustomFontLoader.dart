@@ -92,10 +92,7 @@ class CustomFontLoader {
   static List<String> googleFontFamilies() =>
       GoogleFonts.asMap().keys.toList()..sort();
 
-  /// Downloads [family] via `package:google_fonts`, then copies the file it
-  /// cached into the app's own fonts folder and returns that path — so a
-  /// downloaded Google Font becomes just another saved font, loaded the
-  /// same way as an imported one, with no separate state to track.
+
   static Future<String?> downloadGoogleFont(String family) async {
     if (!GoogleFonts.asMap().containsKey(family)) return null;
     try {
@@ -107,14 +104,24 @@ class CustomFontLoader {
 
     final supportDir = await getApplicationSupportDirectory();
     if (!await supportDir.exists()) return null;
-    final prefix = '${family}_';
+    final prefix = '${family.replaceAll(' ', '')}_';
+
     File? cached;
-    await for (final entry in supportDir.list()) {
-      if (entry is File &&
-          p.basename(entry.path).startsWith(prefix) &&
-          entry.path.toLowerCase().endsWith('.ttf')) {
-        cached = entry;
-        break;
+    for (var attempt = 0; attempt < 30 && cached == null; attempt++) {
+      if (attempt > 0) {
+        await Future.delayed(const Duration(milliseconds: 150));
+      }
+      await for (final entry in supportDir.list()) {
+        if (entry is File &&
+            p.basename(entry.path).startsWith(prefix) &&
+            entry.path.toLowerCase().endsWith('.ttf')) {
+          final len1 = await entry.length();
+          if (len1 == 0) continue;
+          await Future.delayed(const Duration(milliseconds: 80));
+          final len2 = await entry.length();
+          if (len1 == len2) cached = entry;
+          break;
+        }
       }
     }
     if (cached == null) return null;
