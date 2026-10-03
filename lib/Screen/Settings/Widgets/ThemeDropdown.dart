@@ -7,6 +7,7 @@ import 'package:get/get.dart' hide ContextExtensionss;
 import '../../../Core/ThemeManager/AppTheme.dart';
 import '../../../Core/ThemeManager/CustomColorPicker.dart';
 import '../../../Core/ThemeManager/ThemeController.dart';
+import '../../../Core/ThemeManager/Themes/DynamicThemes.dart';
 import '../../../Utils/Extensions/ContextExtensions.dart';
 import '../../../Utils/Functions/GetXFunctions.dart';
 import '../../../Utils/Functions/NavigateToScreen.dart';
@@ -37,10 +38,13 @@ class _ThemeDropdown extends StatelessWidget {
 
     return Obx(() {
       final isCustom = controller.useCustomColor.value;
+      final isJson = controller.useJsonTheme.value;
       final customArgb = controller.customColor.value;
       final current = AppTheme.byName(controller.themeName.value);
-      final label = isCustom ? 'Custom' : current.label;
-      final swatch = isCustom && customArgb != 0
+      final label = isJson ? 'File' : isCustom ? 'Custom' : current.label;
+      final swatch = isJson
+          ? (isDark ? controller.dark : controller.light).colorScheme.primary
+          : isCustom && customArgb != 0
           ? Color(customArgb)
           : current
                 .themeFor(isDark ? Brightness.dark : Brightness.light)
@@ -162,6 +166,16 @@ class _ThemePickerSheet extends StatelessWidget {
                         if (i == 0) {
                           final selected = isCustom;
                           final displayColor = customColor ?? scheme.primary;
+                          final previewScheme = customColor == null
+                              ? null
+                              : (isDark
+                                        ? getCustomDarkTheme(
+                                            customColor.toARGB32(),
+                                          )
+                                        : getCustomLightTheme(
+                                            customColor.toARGB32(),
+                                          ))
+                                    .colorScheme;
                           return GestureDetector(
                             onTap: () async {
                               unawaited(HapticFeedback.selectionClick());
@@ -175,21 +189,19 @@ class _ThemePickerSheet extends StatelessWidget {
                             },
                             child: _ThemeCell(
                               label: 'Custom',
-                              primaryColor: customColor,
+                              previewScheme: previewScheme,
                               selected: selected,
                               isCustom: true,
-                              isDark: isDark,
                               scheme: scheme,
                             ),
                           );
                         }
                         final t = AppTheme.values[i - 1];
-                        final color = t
+                        final previewScheme = t
                             .themeFor(
                               isDark ? Brightness.dark : Brightness.light,
                             )
-                            .colorScheme
-                            .primary;
+                            .colorScheme;
                         final selected = !isCustom && t.name == current;
                         return GestureDetector(
                           onTap: () {
@@ -198,9 +210,8 @@ class _ThemePickerSheet extends StatelessWidget {
                           },
                           child: _ThemeCell(
                             label: t.label,
-                            primaryColor: color,
+                            previewScheme: previewScheme,
                             selected: selected,
-                            isDark: isDark,
                             scheme: scheme,
                           ),
                         );
@@ -230,24 +241,22 @@ class _ThemePickerSheet extends StatelessWidget {
 
 class _ThemeCell extends StatelessWidget {
   final String label;
-  final Color? primaryColor;
+  final ColorScheme? previewScheme;
   final bool selected;
   final bool isCustom;
-  final bool isDark;
   final ColorScheme scheme;
 
   const _ThemeCell({
     required this.label,
-    required this.primaryColor,
+    required this.previewScheme,
     required this.selected,
     this.isCustom = false,
-    required this.isDark,
     required this.scheme,
   });
 
   @override
   Widget build(BuildContext context) {
-    final color = primaryColor ?? scheme.primary;
+    final color = previewScheme?.primary ?? scheme.primary;
 
     return AnimatedContainer(
       duration: const Duration(milliseconds: 180),
@@ -266,13 +275,9 @@ class _ThemeCell extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Expanded(
-            child: isCustom && primaryColor == null
+            child: previewScheme == null
                 ? _RainbowPreview()
-                : _UiSkeletonPreview(
-                    primary: color,
-                    isDark: isDark,
-                    scheme: scheme,
-                  ),
+                : _UiSkeletonPreview(previewScheme: previewScheme!),
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(6, 5, 6, 6),
@@ -307,26 +312,19 @@ class _ThemeCell extends StatelessWidget {
 }
 
 class _UiSkeletonPreview extends StatelessWidget {
-  final Color primary;
-  final bool isDark;
-  final ColorScheme scheme;
+  final ColorScheme previewScheme;
 
-  const _UiSkeletonPreview({
-    required this.primary,
-    required this.isDark,
-    required this.scheme,
-  });
+  const _UiSkeletonPreview({required this.previewScheme});
 
   @override
   Widget build(BuildContext context) {
-    final bg = isDark
-        ? Color.lerp(const Color(0xFF0D0D0D), primary, 0.07)!
-        : Color.lerp(const Color(0xFFF8F8F8), primary, 0.05)!;
-    final card = isDark
-        ? Color.lerp(const Color(0xFF1A1A1A), primary, 0.10)!
-        : Color.lerp(Colors.white, primary, 0.08)!;
-    final line = scheme.onSurface.withValues(alpha: 0.13);
-    final img = primary.withValues(alpha: isDark ? 0.45 : 0.3);
+    final bg = previewScheme.surface;
+    final card = previewScheme.surfaceContainerHighest;
+    final primary = previewScheme.primary;
+    final secondary = previewScheme.secondary;
+    final tertiary = previewScheme.tertiary;
+    final line = previewScheme.onSurface.withValues(alpha: 0.3);
+    final img = primary.withValues(alpha: 0.5);
 
     const barH = 11.0;
     const gap = 5.0;
@@ -364,9 +362,9 @@ class _UiSkeletonPreview extends StatelessWidget {
                       const SizedBox(width: 3),
                       Expanded(child: _line(line, 2.5)),
                       const SizedBox(width: 4),
-                      _dot(line, 3),
+                      _dot(secondary, 3),
                       const SizedBox(width: 2),
-                      _dot(line, 3),
+                      _dot(tertiary, 3),
                     ],
                   ),
                 ),
@@ -396,14 +394,14 @@ class _UiSkeletonPreview extends StatelessWidget {
                 left: 5,
                 right: 5,
                 height: rowH,
-                child: _listRow(card, img, line),
+                child: _listRow(card, secondary.withValues(alpha: 0.5), line),
               ),
               Positioned(
                 top: row2Top,
                 left: 5,
                 right: 5,
                 height: rowH,
-                child: _listRow(card, img.withValues(alpha: 0.5), line),
+                child: _listRow(card, tertiary.withValues(alpha: 0.5), line),
               ),
 
               Positioned(
@@ -415,7 +413,11 @@ class _UiSkeletonPreview extends StatelessWidget {
                   color: card,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [_dot(primary, 4), _dot(line, 4), _dot(line, 4)],
+                    children: [
+                      _dot(primary, 4),
+                      _dot(secondary, 4),
+                      _dot(tertiary, 4),
+                    ],
                   ),
                 ),
               ),
