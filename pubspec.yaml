@@ -19,9 +19,9 @@ dependencies:
     sdk: flutter
   async: ^2.13.1
   archive: ^4.3.0
-  firebase_core: ^4.11.0
-  firebase_crashlytics: ^5.2.4
-  firebase_analytics: ^12.4.3
+  firebase_core: ^4.15.0
+  firebase_crashlytics: ^5.4.0
+  firebase_analytics: ^12.6.0
   # State Management
   get: ^4.7.3
 
@@ -36,9 +36,9 @@ dependencies:
   isar_community_flutter_libs: ^3.3.2
   path_provider: ^2.1.6
   path: ^1.9.1
-  google_fonts: ^6.2.1
+  google_fonts: ^9.0.0
   cryptography: ^2.9.0
-  crypto: ^3.0.6
+  crypto: ^3.0.7
   timezone: ^0.11.1
 
   # UI Components
@@ -46,7 +46,7 @@ dependencies:
   flutter_animate: ^4.5.2
   expandable_widgets: ^1.0.3+1
   expandable_text: 2.3.0
-  cached_network_image: ^4.0.2
+  cached_network_image: ^4.0.4
   precached_network_image: ^1.4.1
   flutter_svg: ^2.3.0
   flex_color_picker: ^4.0.0
@@ -57,7 +57,7 @@ dependencies:
   dpad: ^3.0.0
   dynamic_color: ^2.1.0
   # dynamic_color 2.x exposes material_ui's ColorScheme; see Core/ThemeManager/DynamicColorScheme.dart
-  material_ui: ^1.4.0
+  material_ui: ^1.5.0
 
   # UI Enhancements
   blur: ^4.0.2
@@ -65,7 +65,7 @@ dependencies:
   carousel_slider: ^5.1.2
   flutter_staggered_grid_view: ^0.7.0
   scrollable_positioned_list: ^0.3.8
-  html: ^0.15.6
+  html: ^0.15.7
   intl: any
 
   # Platform Specific
@@ -88,12 +88,12 @@ dependencies:
   permission_handler: ^13.0.2
   flutter_inappwebview: ^6.2.0-beta.3
   flutter_local_notifications: ^22.0.1
-  flutter_timezone: ^5.1.0
+  flutter_timezone: ^5.1.1
   wakelock_plus: ^1.6.1
-  volume_controller: ^3.6.0
+  volume_controller: ^3.7.1
   screen_brightness: ^2.1.11
   app_links: ^7.2.1
-  win32: ^6.3.0
+  win32: ^6.4.0
   ffi: ^2.2.0
   install_plugin: ^2.1.0
   flutter_discord_rpc_fork:
@@ -103,11 +103,11 @@ dependencies:
 
   # Miscellaneous
   receive_sharing_intent: ^1.9.0
-  device_info_plus: ^13.2.0
-  package_info_plus: ^10.2.0
+  device_info_plus: ^13.3.0
+  package_info_plus: ^10.2.2
   file_picker: ^13.1.0
-  share_plus: ^13.2.0
-  url_launcher: ^6.3.2
+  share_plus: ^13.3.1
+  url_launcher: ^6.3.3
   json_path: ^0.9.0
   grouped_list: ^6.0.0
   fuzzywuzzy: ^1.2.0

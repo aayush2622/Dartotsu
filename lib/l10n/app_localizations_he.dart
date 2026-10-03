@@ -81,6 +81,42 @@ class AppLocalizationsHe extends AppLocalizations {
   }
 
   @override
+  String get unknownSource => 'Unknown Source';
+
+  @override
+  String get install => 'Install';
+
+  @override
+  String get update => 'Update';
+
+  @override
+  String get uninstall => 'Uninstall';
+
+  @override
+  String get installFailed => 'Install failed';
+
+  @override
+  String get updateFailed => 'Update failed';
+
+  @override
+  String get noSourceSettings => 'Source doesn\'t have any settings';
+
+  @override
+  String get addPluginRepository => 'Add Plugin Repository';
+
+  @override
+  String get pluginIndexUrlHint => 'Plugin index URL';
+
+  @override
+  String get addRepository => 'Add Repository';
+
+  @override
+  String get pluginRepoUpdated => 'Plugin repository updated';
+
+  @override
+  String get pluginRepoUpdateFailed => 'Failed to refresh plugin repository';
+
+  @override
   String get ok => 'אוקי';
 
   @override

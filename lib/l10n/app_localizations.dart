@@ -299,6 +299,78 @@ abstract class AppLocalizations {
   /// **'{count, plural, =1 {Extension} other {Extensions}}'**
   String extension(int count);
 
+  /// No description provided for @unknownSource.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown Source'**
+  String get unknownSource;
+
+  /// No description provided for @install.
+  ///
+  /// In en, this message translates to:
+  /// **'Install'**
+  String get install;
+
+  /// No description provided for @update.
+  ///
+  /// In en, this message translates to:
+  /// **'Update'**
+  String get update;
+
+  /// No description provided for @uninstall.
+  ///
+  /// In en, this message translates to:
+  /// **'Uninstall'**
+  String get uninstall;
+
+  /// No description provided for @installFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Install failed'**
+  String get installFailed;
+
+  /// No description provided for @updateFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Update failed'**
+  String get updateFailed;
+
+  /// No description provided for @noSourceSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Source doesn\'t have any settings'**
+  String get noSourceSettings;
+
+  /// No description provided for @addPluginRepository.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Plugin Repository'**
+  String get addPluginRepository;
+
+  /// No description provided for @pluginIndexUrlHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Plugin index URL'**
+  String get pluginIndexUrlHint;
+
+  /// No description provided for @addRepository.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Repository'**
+  String get addRepository;
+
+  /// No description provided for @pluginRepoUpdated.
+  ///
+  /// In en, this message translates to:
+  /// **'Plugin repository updated'**
+  String get pluginRepoUpdated;
+
+  /// No description provided for @pluginRepoUpdateFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to refresh plugin repository'**
+  String get pluginRepoUpdateFailed;
+
   /// No description provided for @ok.
   ///
   /// In en, this message translates to:

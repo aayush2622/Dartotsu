@@ -11,6 +11,7 @@ import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Utils/Functions/NavigateToScreen.dart';
 import '../../Utils/Functions/SnackBar.dart';
+import '../../Utils/Nav/DpadNav.dart';
 import '../../Widgets/Components/AlertDialogBuilder.dart';
 import '../../Widgets/Components/BaseScreen.dart';
 import '../../Widgets/Components/CustomBottomDialog.dart';
@@ -35,6 +36,14 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
 
   final _textEditingController = TextEditingController();
   final _currentIndex = 0.obs;
+  final _focusedTabIndex = Rxn<int>();
+  final _appBarLaneKey = GlobalKey<DpadRegionState>();
+  final _tabsLaneKey = GlobalKey<DpadRegionState>();
+  final _searchLaneKey = GlobalKey<DpadRegionState>();
+  final Map<int, GlobalKey<DpadRegionState>> _firstRowKeys = {
+    for (var i = 0; i < ItemType.values.length * 2; i++)
+      i: GlobalKey<DpadRegionState>(),
+  };
 
   @override
   void initState() {
@@ -66,46 +75,87 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
 
     return Scaffold(
       backgroundColor: Colors.transparent,
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new),
-          onPressed: () => popPage(context),
-        ),
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        title: Text(
-          getString.extension(2),
-          style: context.textTheme.titleMedium?.copyWith(
-            fontWeight: FontWeight.bold,
-            color: theme.primary,
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(kToolbarHeight),
+        child: DpadLane(
+          laneKey: _appBarLaneKey,
+          verticalEdge: DpadEdgeBehavior.stop,
+          onEdge: (direction) {
+            if (direction == TraversalDirection.down) {
+              DpadLane.focusFirst(_tabsLaneKey);
+            }
+          },
+          child: AppBar(
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back_ios_new_rounded),
+              onPressed: () => popPage(context),
+            ),
+            elevation: 0,
+            backgroundColor: Colors.transparent,
+            title: Text(
+              getString.extension(2),
+              style: context.textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.bold,
+                color: theme.primary,
+              ),
+            ),
+            iconTheme: IconThemeData(color: theme.primary),
+            actions: [
+              Row(children: [..._buildActions(), const SizedBox(width: 8)]),
+            ],
           ),
         ),
-        iconTheme: IconThemeData(color: theme.primary),
-        actions: [
-          Row(children: [..._buildActions(), const SizedBox(width: 8)]),
-        ],
       ),
       body: Column(
         children: [
-          Obx(
-            () => TabBar(
-              controller: _tabBarController,
-              isScrollable: true,
-              dividerColor: Colors.transparent,
-              tabAlignment: TabAlignment.start,
-              indicator: const BoxDecoration(),
-              indicatorPadding: EdgeInsets.zero,
-              padding: EdgeInsets.zero,
-              labelPadding: EdgeInsets.zero,
-              labelColor: theme.primary,
-              unselectedLabelColor: theme.onSurfaceVariant,
-              splashFactory: NoSplash.splashFactory,
-              overlayColor: WidgetStateProperty.all(Colors.transparent),
-              tabs: _buildTabs(context),
+          DpadLane(
+            laneKey: _tabsLaneKey,
+            verticalEdge: DpadEdgeBehavior.stop,
+            onEdge: (direction) {
+              if (direction == TraversalDirection.up) {
+                DpadLane.focusFirst(_appBarLaneKey);
+              } else if (direction == TraversalDirection.down) {
+                DpadLane.focusFirst(_searchLaneKey);
+              }
+            },
+            child: Obx(
+              () => TabBar(
+                controller: _tabBarController,
+                isScrollable: true,
+                dividerColor: Colors.transparent,
+                tabAlignment: TabAlignment.start,
+                indicator: const BoxDecoration(),
+                indicatorPadding: EdgeInsets.zero,
+                padding: EdgeInsets.zero,
+                labelPadding: EdgeInsets.zero,
+                labelColor: theme.primary,
+                unselectedLabelColor: theme.onSurfaceVariant,
+                splashFactory: NoSplash.splashFactory,
+                overlayColor: WidgetStateProperty.all(Colors.transparent),
+                onFocusChange: (focused, index) =>
+                    _focusedTabIndex.value = focused
+                    ? index
+                    : (_focusedTabIndex.value == index
+                          ? null
+                          : _focusedTabIndex.value),
+                tabs: _buildTabs(context),
+              ),
             ),
           ),
           const SizedBox(height: 8),
-          _searchBar(),
+          DpadLane(
+            laneKey: _searchLaneKey,
+            verticalEdge: DpadEdgeBehavior.stop,
+            onEdge: (direction) {
+              if (direction == TraversalDirection.up) {
+                DpadLane.focusFirst(_tabsLaneKey);
+              } else if (direction == TraversalDirection.down) {
+                final key = _firstRowKeys[_currentIndex.value];
+                if (key != null) DpadLane.focusFirst(key);
+              }
+            },
+            child: _searchBar(),
+          ),
           Obx(
             () => Expanded(
               child: TabBarView(
@@ -146,7 +196,7 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
               },
             )
             ..setNegativeButton(
-              "Reset",
+              getString.reset,
               () => extension.saveSelectedLanguages(type, {}),
             )
             ..show();
@@ -183,7 +233,7 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
                   title: "${type.name.capitalizeFirst} Manager",
                   positiveText: getString.ok,
                   positiveCallback: () => popPage(context),
-                  negativeText: "Add Repository",
+                  negativeText: getString.addRepository,
                   negativeCallback: () => _showAddRepositoryDialog(),
                   viewList: [
                     Obx(() {
@@ -284,7 +334,7 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
     final refreshing = false.obs;
 
     AlertDialogBuilder(context)
-      ..setTitle("Add Plugin Repository")
+      ..setTitle(getString.addPluginRepository)
       ..setCustomView(
         StatefulBuilder(
           builder: (dialogContext, setState) {
@@ -293,8 +343,8 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
               children: [
                 TextField(
                   controller: controller,
-                  decoration: const InputDecoration(
-                    hintText: "Plugin index URL",
+                  decoration: InputDecoration(
+                    hintText: getString.pluginIndexUrlHint,
                   ),
                 ),
                 Obx(
@@ -326,9 +376,9 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
             for (final m in manager.managers)
               if (m.plugin != null) m.plugin!.checkAvailability(),
           ]);
-          snackString("Plugin repository updated");
+          snackString(getString.pluginRepoUpdated);
         } catch (e) {
-          snackString("Failed to refresh plugin repository");
+          snackString(getString.pluginRepoUpdateFailed);
         } finally {
           refreshing.value = false;
         }
@@ -339,7 +389,12 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
   Widget _buildRepoManager() {
     var theme = Theme.of(context).colorScheme;
     return IconButton(
-      icon: loadSvg("assets/svg/github.svg", color: theme.primary),
+      icon: loadSvg(
+        "assets/svg/github.svg",
+        width: 24,
+        height: 24,
+        color: theme.primary,
+      ),
       onPressed: () {
         final type = _currentType;
         showCustomBottomDialog(
@@ -608,8 +663,9 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
     BuildContext context,
     String label,
     int count,
-    bool selected,
-  ) {
+    bool selected, {
+    bool focused = false,
+  }) {
     final theme = Theme.of(context).colorScheme;
 
     return AnimatedContainer(
@@ -617,7 +673,11 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
       curve: Curves.easeOut,
       margin: const EdgeInsets.symmetric(horizontal: 4, vertical: 6),
       child: ThemedContainer(
-        color: selected ? theme.surfaceContainerHigh : null,
+        color: focused
+            ? theme.secondaryContainer
+            : selected
+            ? theme.surfaceContainerHigh
+            : null,
         borderRadius: BorderRadius.circular(16),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         child: Row(
@@ -681,6 +741,7 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
             'Installed ${type.name}',
             count,
             _currentIndex.value == installedIndex,
+            focused: kFocused(_focusedTabIndex.value == installedIndex),
           );
         }),
       );
@@ -705,6 +766,7 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
             'Available ${type.name}',
             count,
             _currentIndex.value == availableIndex,
+            focused: kFocused(_focusedTabIndex.value == availableIndex),
           );
         }),
       );
@@ -738,6 +800,8 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
                 itemType: type,
                 isInstalled: true,
                 searchQuery: query,
+                onFirstRowUp: () => DpadLane.focusFirst(_searchLaneKey),
+                firstRowKey: _firstRowKeys[views.length],
               ),
       );
 
@@ -756,6 +820,8 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
                 itemType: type,
                 isInstalled: false,
                 searchQuery: query,
+                onFirstRowUp: () => DpadLane.focusFirst(_searchLaneKey),
+                firstRowKey: _firstRowKeys[views.length],
               ),
       );
     }

@@ -11,11 +11,7 @@ import 'CookieManager.dart';
 import 'DnsManager.dart';
 import 'LogInterceptor.dart';
 
-/// TLS certificate verification is **deliberately off**. Dartotsu proxies
-/// traffic for arbitrary third-party extension sources (many with broken,
-/// expired or self-signed certificates) and for the in-app WebView's
-/// request interception. Verifying would break a large fraction of sources.
-/// Do not flip this without a per-request opt-out for extension traffic.
+
 const bool kVerifyTlsCertificates = false;
 
 class NetworkManager extends GetxController {
@@ -26,25 +22,16 @@ class NetworkManager extends GetxController {
   RhttpCompatibleClient get compatibleClient =>
       RhttpCompatibleClient.of(_client);
 
-  /// The effective User-Agent every request (including extension traffic via
-  /// [AppBridgeNetwork]) sends: [PrefName.customUserAgent] if set, else
-  /// [defaultUserAgent].
   String get userAgent {
     final custom = PrefName.customUserAgent.value;
     return custom.isNotEmpty ? custom : defaultUserAgent;
   }
 
-  /// The default User-Agent, ignoring [PrefName.customUserAgent] - the real
-  /// in-app WebView engine UA once [PrefName.fetchedUserAgent] has been
-  /// fetched (see [WebView]'s `onWebViewCreated`), else a synthetic
-  /// placeholder until that happens.
   String get defaultUserAgent {
     final fetched = PrefName.fetchedUserAgent.value;
     return fetched.isNotEmpty ? fetched : _buildUserAgent();
   }
 
-  /// The effective DNS-over-HTTPS resolver endpoint: [PrefName.customDnsUrl]
-  /// if set, else Cloudflare's.
   String get dnsUrl {
     final custom = PrefName.customDnsUrl.value;
     return custom.isNotEmpty ? custom : DohProvider.cloudflare.url;
@@ -63,9 +50,6 @@ class NetworkManager extends GetxController {
 
   final cookieManager = CookieManager();
 
-  /// Rebuilds the rhttp client to pick up a changed [userAgent] or
-  /// [proxyUrl] - both are baked into [ClientSettings] at construction time,
-  /// unlike [dnsUrl] which the resolver below reads live on every lookup.
   void reinitialize() {
     _client.dispose();
     _initClient();
@@ -121,12 +105,6 @@ class NetworkManager extends GetxController {
     return ProxySettings.proxy(proxy);
   }
 
-  /// Performs a GET request.
-  /// [url]: The URL to send the GET request to.
-  /// [query]: Optional query parameters to include in the request.
-  /// [headers]: Optional headers to include in the request.
-  /// [cancelToken]: Optional token to cancel the request.
-  /// Returns a [NetworkResponse] containing the response data.
   Future<NetworkResponse<dynamic>> get(
     String url, {
     Map<String, String>? query,
@@ -143,13 +121,6 @@ class NetworkManager extends GetxController {
     return _wrap(res);
   }
 
-  /// Performs a POST request.
-  /// [url]: The URL to send the POST request to.
-  /// [data]: Optional data to include in the request body.
-  /// [query]: Optional query parameters to include in the request.
-  /// [headers]: Optional headers to include in the request.
-  /// [cancelToken]: Optional token to cancel the request.
-  /// Returns a [NetworkResponse] containing the response data.
   Future<NetworkResponse<dynamic>> post(
     String url, {
     Object? data,
@@ -169,12 +140,6 @@ class NetworkManager extends GetxController {
     return _wrap(res, decodeJson: decodeJson);
   }
 
-  /// Performs a HEAD request.
-  /// [url]: The URL to send the HEAD request to.
-  /// [query]: Optional query parameters to include in the request.
-  /// [headers]: Optional headers to include in the request.
-  /// [cancelToken]: Optional token to cancel the request.
-  /// Returns a [NetworkResponse] containing the response data.
   Future<NetworkResponse<void>> head(
     String url, {
     Map<String, String>? query,
@@ -198,12 +163,6 @@ class NetworkManager extends GetxController {
     );
   }
 
-  /// Downloads a file from the specified URL and saves it to the given path.
-  /// [url]: The URL of the file to download.
-  /// [savePath]: The local path to save the downloaded file.
-  /// [onProgress]: Optional callback to report download progress.
-  /// [cancelToken]: Optional token to cancel the download.
-  /// Returns a [Future] that completes when the download is finished.
   Future<void> download(
     String url,
     String savePath, {

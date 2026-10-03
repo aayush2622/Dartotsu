@@ -5,24 +5,31 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../Core/Preferences/PrefManager.dart';
+import '../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../Core/ThemeManager/language.dart';
 import '../../Utils/Animation/WidgetAnimations.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
+import '../../Utils/Extensions/Responsive.dart';
+import '../../Utils/Functions/AppShortcuts.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Utils/Functions/SnackBar.dart';
+import '../../Utils/Nav/DpadNav.dart';
 import '../../Widgets/Components/CachedNetworkImage.dart';
-import '../../Widgets/Components/ThemedContainer.dart';
 
 class ExtensionList extends StatefulWidget {
   final ItemType itemType;
   final bool isInstalled;
   final String searchQuery;
+  final VoidCallback? onFirstRowUp;
+  final GlobalKey<DpadRegionState>? firstRowKey;
 
   const ExtensionList({
     super.key,
     required this.itemType,
     required this.isInstalled,
     required this.searchQuery,
+    this.onFirstRowUp,
+    this.firstRowKey,
   });
 
   @override
@@ -46,6 +53,8 @@ class _ExtensionListState extends State<ExtensionList> {
       PrefName.extensionOrder(extension.name, widget.itemType.name);
 
   final bool _showIcons = PrefName.loadExtensionIcon.value;
+
+  final _secondRowKey = GlobalKey<DpadRegionState>();
 
   @override
   void dispose() {
@@ -122,7 +131,14 @@ class _ExtensionListState extends State<ExtensionList> {
 
         return KeyedSubtree(
           key: ValueKey(source.id),
-          child: _buildSourceCard(source, index).animateDropIn(),
+          child: _buildSourceCard(
+            source,
+            index,
+            isFirst: index == 0,
+            isLast: index == installed.length - 1,
+            isVeryFirst: index == 0,
+            isVerySecond: index == 1,
+          ).animateDropIn(),
         );
       },
     );
@@ -130,6 +146,12 @@ class _ExtensionListState extends State<ExtensionList> {
 
   Widget _buildAvailableList() {
     final items = _filteredAvailable();
+    final sourceIndices = [
+      for (var i = 0; i < items.length; i++)
+        if (!items[i].isHeader) i,
+    ];
+    final firstSourceIndex = sourceIndices.isEmpty ? -1 : sourceIndices[0];
+    final secondSourceIndex = sourceIndices.length > 1 ? sourceIndices[1] : -1;
 
     return CustomScrollView(
       controller: controller,
@@ -152,7 +174,17 @@ class _ExtensionListState extends State<ExtensionList> {
                   );
                 }
 
-                return _buildSourceCard(item.source!, index).animateDropIn();
+                final previous = index > 0 ? items[index - 1] : null;
+                final next = index < items.length - 1 ? items[index + 1] : null;
+
+                return _buildSourceCard(
+                  item.source!,
+                  index,
+                  isFirst: previous == null || previous.isHeader,
+                  isLast: next == null || next.isHeader,
+                  isVeryFirst: index == firstSourceIndex,
+                  isVerySecond: index == secondSourceIndex,
+                ).animateDropIn();
               },
               childCount: items.length,
               addAutomaticKeepAlives: false,
@@ -164,44 +196,66 @@ class _ExtensionListState extends State<ExtensionList> {
     );
   }
 
-  Widget _buildSourceCard(Source source, int index) {
-    return ThemedContainer(
-      padding: const EdgeInsets.all(8),
-      borderRadius: BorderRadius.circular(24),
-      margin: EdgeInsets.symmetric(
-        vertical: 6,
-        horizontal: widget.isInstalled ? 0 : 8,
-      ),
-      child: ListTile(
-        leading: ClipRRect(
-          borderRadius: BorderRadius.circular(64),
-          child: SizedBox(width: 42, height: 42, child: _buildIcon(source)),
-        ),
-        title: Text(
-          source.name ?? 'Unknown Source',
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          style: context.textTheme.bodyLarge?.copyWith(
-            fontWeight: FontWeight.bold,
+  Widget _buildSourceCard(
+    Source source,
+    int index, {
+    required bool isFirst,
+    required bool isLast,
+    required bool isVeryFirst,
+    required bool isVerySecond,
+  }) {
+    final scheme = Theme.of(context).colorScheme;
+
+    return _SourceCardShell(
+      isFirst: isFirst,
+      isLast: isLast,
+      onEdgeUp: isVeryFirst ? widget.onFirstRowUp : null,
+      onEdgeDown: isVeryFirst ? () => DpadLane.focusFirst(_secondRowKey) : null,
+      regionKey: isVeryFirst
+          ? widget.firstRowKey
+          : (isVerySecond ? _secondRowKey : null),
+      child: Column(
+        children: [
+          if (!isFirst)
+            Divider(
+              height: 1,
+              indent: 64,
+              color: scheme.outlineVariant.withValues(alpha: 0.5),
+            ),
+          ListTile(
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 6,
+            ),
+            leading: ClipRRect(
+              borderRadius: BorderRadius.circular(64),
+              child: SizedBox(width: 42, height: 42, child: _buildIcon(source)),
+            ),
+            title: Text(
+              source.name ?? getString.unknownSource,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: context.textTheme.bodyLarge?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            subtitle: _buildSubtitle(source),
+            // `installProgress` is read deep inside _buildTrailing, which is
+            // invoked lazily by the list/sliver machinery in its own build
+            // pass - separate from, and later than, the synchronous callback
+            // of the single Obx wrapping the whole list in build() above. That
+            // outer Obx never sees this read, so it never reacts to progress
+            // updates. Wrapping just the trailing widget lets it track
+            // installProgress (and hasUpdate) on its own.
+            trailing: Obx(() => _buildTrailing(source, index)),
           ),
-        ),
-        subtitle: _buildSubtitle(source),
-        // `installProgress` is read deep inside _buildTrailing, which is
-        // invoked lazily by the list/sliver machinery in its own build
-        // pass - separate from, and later than, the synchronous callback
-        // of the single Obx wrapping the whole list in build() above. That
-        // outer Obx never sees this read, so it never reacts to progress
-        // updates. Wrapping just the trailing widget lets it track
-        // installProgress (and hasUpdate) on its own.
-        trailing: Obx(() => _buildTrailing(source, index)),
+        ],
       ),
     );
   }
 
   List<Source> _filteredInstalled() {
-    final installed = _applySavedOrder(
-      _dedupeById(state.installed.value),
-    );
+    final installed = _applySavedOrder(_dedupeById(state.installed.value));
 
     return installed.where((source) {
       final matchesSearch =
@@ -428,10 +482,10 @@ class _ExtensionListState extends State<ExtensionList> {
             : IconButton(
                 key: const ValueKey('install'),
                 icon: const Icon(Icons.download_rounded),
-                tooltip: 'Install',
+                tooltip: getString.install,
                 onPressed: () => _runProgressOp(
                   () => repo.installSource(source),
-                  'Install failed',
+                  getString.installFailed,
                 ),
               ),
       );
@@ -448,26 +502,26 @@ class _ExtensionListState extends State<ExtensionList> {
                 : IconButton(
                     key: const ValueKey('update'),
                     icon: const Icon(Icons.update_rounded),
-                    tooltip: 'Update',
+                    tooltip: getString.update,
                     onPressed: () => _runProgressOp(
                       () => repo.updateSource(source),
-                      'Update failed',
+                      getString.updateFailed,
                     ),
                   ),
           ),
         IconButton(
           icon: const Icon(Icons.delete_rounded),
-          tooltip: 'Uninstall',
+          tooltip: getString.uninstall,
           onPressed: isInstalling ? null : () => repo.uninstallSource(source),
         ),
         IconButton(
           icon: const Icon(Icons.settings_rounded),
-          tooltip: 'Settings',
+          tooltip: getString.settings,
           onPressed: () async {
             final preference = await source.methods.getPreference();
 
             if (preference.isEmpty) {
-              snackString("Source doesn't have any settings");
+              snackString(getString.noSourceSettings);
               return;
             }
 
@@ -503,4 +557,67 @@ class _ListItem {
 
   const _ListItem.source(Source source)
     : this._(isHeader: false, source: source);
+}
+
+class _SourceCardShell extends StatefulWidget {
+  final bool isFirst;
+  final bool isLast;
+  final VoidCallback? onEdgeUp;
+  final VoidCallback? onEdgeDown;
+  final GlobalKey<DpadRegionState>? regionKey;
+  final Widget child;
+
+  const _SourceCardShell({
+    required this.isFirst,
+    required this.isLast,
+    this.onEdgeUp,
+    this.onEdgeDown,
+    this.regionKey,
+    required this.child,
+  });
+
+  @override
+  State<_SourceCardShell> createState() => _SourceCardShellState();
+}
+
+class _SourceCardShellState extends State<_SourceCardShell> {
+  bool _focused = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+    final highlighted = _focused && usingKeyboard;
+
+    return ClipRRect(
+      borderRadius: BorderRadius.vertical(
+        top: Radius.circular(widget.isFirst ? Dimens.radius : 0),
+        bottom: Radius.circular(widget.isLast ? Dimens.radius : 0),
+      ),
+      child: DpadRegion(
+        key: widget.regionKey,
+        horizontalEdge: DpadEdgeBehavior.stop,
+        verticalEdge: (widget.onEdgeUp == null && widget.onEdgeDown == null)
+            ? DpadEdgeBehavior.leave
+            : DpadEdgeBehavior.stop,
+        onEdge: (widget.onEdgeUp == null && widget.onEdgeDown == null)
+            ? null
+            : (direction) {
+                if (direction == TraversalDirection.up) {
+                  widget.onEdgeUp?.call();
+                } else if (direction == TraversalDirection.down) {
+                  widget.onEdgeDown?.call();
+                }
+              },
+        onFocusChange: (focused) {
+          if (mounted) setState(() => _focused = focused);
+        },
+        child: Container(
+          color: highlighted
+              ? scheme.secondaryContainer
+              : scheme.surfaceContainerLow,
+          child: widget.child,
+        ),
+      ),
+    );
+  }
 }
