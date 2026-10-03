@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide ContextExtensionss;
 
-import '../../../Core/ThemeManager/LanguageSwitcher.dart';
-import '../../../Model/Setting.dart';
-import '../../../Utils/Extensions/ContextExtensions.dart';
-import '../../../Utils/Extensions/Responsive.dart';
-import '../../../Utils/Functions/NavigateToScreen.dart';
-import '../../../Widgets/Components/ScrollConfig.dart';
-import 'SettingsAdaptor.dart';
-import 'SettingsSearchField.dart';
+import '../../Core/ThemeManager/LanguageSwitcher.dart';
+import '../../Model/Setting.dart';
+import '../../Utils/Extensions/ContextExtensions.dart';
+import '../../Utils/Extensions/Responsive.dart';
+import '../../Utils/Functions/NavigateToScreen.dart';
+import '../../Widgets/Components/ScrollConfig.dart';
+import 'Widgets/SettingsAdaptor.dart';
+import 'Widgets/SettingsSearchField.dart';
 
 class SettingsListView extends StatefulWidget {
   final List<Setting> Function(BuildContext) searchable;
@@ -19,12 +19,17 @@ class SettingsListView extends StatefulWidget {
   /// the first sliver instead of leaving the caller's own [Scaffold.appBar].
   final String? title;
 
+  /// Replaces the default [SettingsAdaptor] list for the empty-query state
+  /// (e.g. the top-level screen's category picker instead of a flat list).
+  final WidgetBuilder? emptyBuilder;
+
   const SettingsListView({
     super.key,
     required this.searchable,
     this.menu,
     this.hint,
     this.title,
+    this.emptyBuilder,
   });
 
   @override
@@ -47,11 +52,17 @@ class _SettingsListViewState extends State<SettingsListView> {
               icon: Icon(
                 Icons.arrow_back_ios_new_rounded,
                 size: 20,
-                color: context.colorScheme.onSurfaceVariant,
+                color: context.colorScheme.primary,
               ),
               onPressed: () => popPage(context),
             ),
-            title: Text(widget.title!),
+            title: Text(
+              widget.title!,
+              style: context.textTheme.titleLarge?.copyWith(
+                fontWeight: FontWeight.bold,
+                color: context.colorScheme.primary,
+              ),
+            ),
           ),
         SliverPadding(
           padding: EdgeInsets.fromLTRB(
@@ -67,9 +78,10 @@ class _SettingsListViewState extends State<SettingsListView> {
               Obx(() {
                 final q = _query.value;
                 if (q.isEmpty) {
-                  return SettingsAdaptor(
-                    settings: (widget.menu ?? widget.searchable)(context),
-                  );
+                  return widget.emptyBuilder?.call(context) ??
+                      SettingsAdaptor(
+                        settings: (widget.menu ?? widget.searchable)(context),
+                      );
                 }
                 final filtered = _filter(widget.searchable(context), q);
                 if (filtered.isEmpty) {

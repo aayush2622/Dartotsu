@@ -186,7 +186,7 @@ class _FontPickerSheetState extends State<_FontPickerSheet> {
       selected: selected,
       leading: Icon(
         icon,
-        color: selected ? scheme.onSecondaryContainer : scheme.onSurfaceVariant,
+        color: selected ? scheme.onSecondaryContainer : scheme.primary,
       ),
       title: Text(title),
       subtitle: subtitle != null ? Text(subtitle) : null,

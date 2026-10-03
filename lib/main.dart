@@ -182,6 +182,7 @@ class _MyAppState extends State<MyApp> {
     return Listener(
       onPointerDown: (event) =>
           event.buttons == kBackMouseButton ? _handleBack() : null,
+      onPointerHover: (_) => usingKeyboard = false,
       child: Focus(
         focusNode: _focusNode,
         canRequestFocus: false,

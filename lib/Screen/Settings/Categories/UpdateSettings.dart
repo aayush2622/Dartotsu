@@ -26,7 +26,7 @@ List<Setting> updateSettings(BuildContext context) => [
         Icon(
           Icons.science_rounded,
           size: 22,
-          color: context.colorScheme.onSurfaceVariant,
+          color: context.colorScheme.primary,
         ),
         const SizedBox(width: 20),
         Expanded(

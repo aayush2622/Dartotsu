@@ -34,7 +34,7 @@ List<Setting> generalSettings(BuildContext context) => [
         Icon(
           Icons.animation_rounded,
           size: 22,
-          color: context.colorScheme.onSurfaceVariant,
+          color: context.colorScheme.primary,
         ),
         const SizedBox(width: 20),
         Expanded(

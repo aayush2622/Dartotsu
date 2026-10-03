@@ -23,28 +23,13 @@ class _Label extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scheme = context.colorScheme;
+    final accent = iconContainerColor ?? scheme.primary;
 
     Widget? leading;
     if (setting.iconWidget != null) {
       leading = setting.iconWidget;
     } else if (setting.icon != null) {
-      if (iconContainerColor != null) {
-        leading = Container(
-          width: 36,
-          height: 36,
-          decoration: BoxDecoration(
-            color: iconContainerColor,
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Icon(
-            setting.icon,
-            size: 20,
-            color: iconOnColor ?? scheme.onPrimaryContainer,
-          ),
-        );
-      } else {
-        leading = Icon(setting.icon, color: scheme.onSurfaceVariant, size: 22);
-      }
+      leading = Icon(setting.icon, color: iconOnColor ?? accent, size: 22);
     }
 
     return Row(
@@ -119,12 +104,8 @@ class SettingItem extends StatelessWidget {
     return DpadFocusable(
       onSelect: setting.onClick == null ? null : onTap,
       onLongSelect: setting.onLongClick,
-      builder: (_, state, child) => AnimatedScale(
-        scale: kDpadFocused(state) ? 1.02 : 1.0,
-        duration: Durations.short3,
-        curve: Curves.easeOutBack,
-        child: child,
-      ),
+      tapToSelect: false,
+      builder: dpadFocusHighlight,
       child: InkWell(
         onTap: setting.onClick == null ? null : onTap,
         onLongPress: setting.onLongClick,
@@ -166,12 +147,8 @@ class SettingSwitchItem extends StatelessWidget {
     return DpadFocusable(
       onSelect: _toggle,
       onLongSelect: setting.onLongClick,
-      builder: (_, state, child) => AnimatedScale(
-        scale: kDpadFocused(state) ? 1.02 : 1.0,
-        duration: Durations.short3,
-        curve: Curves.easeOutBack,
-        child: child,
-      ),
+      tapToSelect: false,
+      builder: dpadFocusHighlight,
       child: InkWell(
         onTap: _toggle,
         onLongPress: setting.onLongClick,
@@ -317,9 +294,14 @@ class SettingCustomItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: setting.builder?.call(context) ?? const SizedBox.shrink(),
+    return DpadFocusable(
+      tapToSelect: false,
+      excludeChildFocus: false,
+      builder: dpadFocusHighlight,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        child: setting.builder?.call(context) ?? const SizedBox.shrink(),
+      ),
     );
   }
 }

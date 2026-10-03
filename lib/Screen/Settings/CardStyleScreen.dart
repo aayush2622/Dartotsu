@@ -46,11 +46,17 @@ class _CardStyleScreenState extends BaseScreen<CardStyleScreen> {
               icon: Icon(
                 Icons.arrow_back_ios_new_rounded,
                 size: 20,
-                color: context.colorScheme.onSurfaceVariant,
+                color: context.colorScheme.primary,
               ),
               onPressed: () => popPage(context),
             ),
-            title: const Text('Card style'),
+            title: Text(
+              'Card style',
+              style: context.textTheme.titleLarge?.copyWith(
+                fontWeight: FontWeight.bold,
+                color: context.colorScheme.primary,
+              ),
+            ),
             actions: [
               TextButton(
                 onPressed: () => _set(const CardStyle()),

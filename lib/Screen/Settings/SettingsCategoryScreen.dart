@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../Widgets/Components/BaseScreen.dart';
-import 'Widgets/SettingsListView.dart';
+import 'SettingsListView.dart';
 import 'SettingsCategories.dart';
 
 class SettingsCategoryScreen extends StatefulWidget {
