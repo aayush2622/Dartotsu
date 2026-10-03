@@ -98,6 +98,48 @@ class CustomJsonTheme {
     }
   }
 
+  static String _hex(Color c) =>
+      '#${c.toARGB32().toRadixString(16).padLeft(8, '0').substring(2)}';
+
+  static Map<String, String> _toJson(ColorScheme s) => {
+    'primary': _hex(s.primary),
+    'onPrimary': _hex(s.onPrimary),
+    'primaryContainer': _hex(s.primaryContainer),
+    'onPrimaryContainer': _hex(s.onPrimaryContainer),
+    'secondary': _hex(s.secondary),
+    'onSecondary': _hex(s.onSecondary),
+    'secondaryContainer': _hex(s.secondaryContainer),
+    'onSecondaryContainer': _hex(s.onSecondaryContainer),
+    'tertiary': _hex(s.tertiary),
+    'onTertiary': _hex(s.onTertiary),
+    'tertiaryContainer': _hex(s.tertiaryContainer),
+    'onTertiaryContainer': _hex(s.onTertiaryContainer),
+    'error': _hex(s.error),
+    'onError': _hex(s.onError),
+    'errorContainer': _hex(s.errorContainer),
+    'onErrorContainer': _hex(s.onErrorContainer),
+    'surface': _hex(s.surface),
+    'onSurface': _hex(s.onSurface),
+    'surfaceContainerHighest': _hex(s.surfaceContainerHighest),
+    'onSurfaceVariant': _hex(s.onSurfaceVariant),
+    'outline': _hex(s.outline),
+    'outlineVariant': _hex(s.outlineVariant),
+    'inverseSurface': _hex(s.inverseSurface),
+    'onInverseSurface': _hex(s.onInverseSurface),
+    'inversePrimary': _hex(s.inversePrimary),
+    'shadow': _hex(s.shadow),
+    'surfaceTint': _hex(s.surfaceTint),
+    'scrim': _hex(s.scrim),
+  };
+
+  static Future<void> seedIfMissing(ColorScheme light, ColorScheme dark) async {
+    final f = await file();
+    if (await f.exists()) return;
+    await f.parent.create(recursive: true);
+    final json = {'light': _toJson(light), 'dark': _toJson(dark)};
+    await f.writeAsString(const JsonEncoder.withIndent('  ').convert(json));
+  }
+
   static Stream<void> watch() async* {
     final f = await file();
     final dir = f.parent;
@@ -106,7 +148,10 @@ class CustomJsonTheme {
     }
     yield null;
     await for (final event in dir.watch(
-      events: FileSystemEvent.modify | FileSystemEvent.create,
+      events:
+          FileSystemEvent.modify |
+          FileSystemEvent.create |
+          FileSystemEvent.delete,
     )) {
       if (event.path == f.path) yield null;
     }

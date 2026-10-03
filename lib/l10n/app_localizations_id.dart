@@ -59,6 +59,16 @@ class AppLocalizationsId extends AppLocalizations {
   String get language => 'Bahasa';
 
   @override
+  String get animationSpeed => 'Animations';
+
+  @override
+  String get animationSpeedDesc =>
+      'Speed of transitions and entrance effects across the app';
+
+  @override
+  String get animationSpeedOff => 'Off';
+
+  @override
   String extension(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
@@ -226,6 +236,13 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get customAccentDesc => 'Pick your own primary colour';
+
+  @override
+  String get jsonTheme => 'Custom theme file';
+
+  @override
+  String get jsonThemeDesc =>
+      'Live colours from ~/.config/dartotsu/theme.json (e.g. matugen)';
 
   @override
   String get customAccentDisabledDesc =>

@@ -275,6 +275,24 @@ abstract class AppLocalizations {
   /// **'Language'**
   String get language;
 
+  /// No description provided for @animationSpeed.
+  ///
+  /// In en, this message translates to:
+  /// **'Animations'**
+  String get animationSpeed;
+
+  /// No description provided for @animationSpeedDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Speed of transitions and entrance effects across the app'**
+  String get animationSpeedDesc;
+
+  /// No description provided for @animationSpeedOff.
+  ///
+  /// In en, this message translates to:
+  /// **'Off'**
+  String get animationSpeedOff;
+
   /// No description provided for @extension.
   ///
   /// In en, this message translates to:
@@ -586,6 +604,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Pick your own primary colour'**
   String get customAccentDesc;
+
+  /// No description provided for @jsonTheme.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom theme file'**
+  String get jsonTheme;
+
+  /// No description provided for @jsonThemeDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Live colours from ~/.config/dartotsu/theme.json (e.g. matugen)'**
+  String get jsonThemeDesc;
 
   /// No description provided for @customAccentDisabledDesc.
   ///

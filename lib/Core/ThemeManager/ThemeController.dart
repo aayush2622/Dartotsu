@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,7 @@ import 'package:get/get.dart';
 
 import '../Preferences/PrefManager.dart';
 import 'CustomFontLoader.dart';
+import 'CustomJsonTheme.dart';
 import 'ThemeManager.dart';
 
 /// Reactive theme state. Every field is a shared auto-persisting [Pref.rx];
@@ -22,11 +24,18 @@ class ThemeController extends GetxController {
   final useCustomFont = PrefName.useCustomFont.rx;
   final customFontPath = PrefName.customFontPath.rx;
 
+  final useJsonTheme = PrefName.useJsonTheme.rx;
+
   String? _loadedFontFamily;
   final _fontLoadTick = 0.obs;
 
   ColorScheme? _dynamicLight;
   ColorScheme? _dynamicDark;
+
+  ColorScheme? _jsonLight;
+  ColorScheme? _jsonDark;
+  StreamSubscription<void>? _jsonWatchSub;
+  final _jsonThemeTick = 0.obs;
 
   @override
   void onInit() {
@@ -34,6 +43,38 @@ class ThemeController extends GetxController {
     if (useCustomFont.value && customFontPath.value.isNotEmpty) {
       unawaited(_loadFont(customFontPath.value));
     }
+    if (Platform.isLinux) _startJsonWatch();
+  }
+
+  @override
+  void onClose() {
+    _jsonWatchSub?.cancel();
+    super.onClose();
+  }
+
+  void _startJsonWatch() {
+    _jsonWatchSub?.cancel();
+    final seedLight = AppTheme.oneDark.themeFor(Brightness.light).colorScheme;
+    final seedDark = AppTheme.oneDark.themeFor(Brightness.dark).colorScheme;
+    _jsonWatchSub = CustomJsonTheme.watch().listen((_) async {
+      var schemes = await CustomJsonTheme.read();
+      if (schemes == null) {
+        await CustomJsonTheme.seedIfMissing(seedLight, seedDark);
+        schemes = await CustomJsonTheme.read();
+      }
+      _jsonLight = schemes?.$1;
+      _jsonDark = schemes?.$2;
+      _jsonThemeTick.value++;
+    });
+  }
+
+  void setUseJsonTheme(bool value) {
+    if (!Platform.isLinux) return;
+    if (value) {
+      useCustomColor.value = false;
+      useMaterialYou.value = false;
+    }
+    useJsonTheme.value = value;
   }
 
   Future<String?> _loadFont(String path) async {
@@ -56,8 +97,6 @@ class ThemeController extends GetxController {
     return setCustomFont(imported);
   }
 
-  /// Downloads [family] from Google Fonts into the local fonts folder and
-  /// applies it — same code path as [setCustomFont] from there on.
   Future<bool> pickGoogleFont(String family) async {
     final path = await CustomFontLoader.downloadGoogleFont(family);
     if (path == null) return false;
@@ -131,6 +170,8 @@ class ThemeController extends GetxController {
       _fontLoadTick.value,
       _dynamicLight,
       _dynamicDark,
+      useJsonTheme.value,
+      _jsonThemeTick.value,
     ];
     if (_cacheKey != null && _listEquals(_cacheKey!, key)) return;
     _cacheKey = key;
@@ -142,8 +183,14 @@ class ThemeController extends GetxController {
     final dark = brightness == Brightness.dark;
     final dynamicScheme = dark ? _dynamicDark : _dynamicLight;
 
+    final jsonScheme = dark ? _jsonDark : _jsonLight;
+
     ThemeData base;
-    if (useCustomColor.value) {
+    if (useJsonTheme.value && jsonScheme != null) {
+      base = dark
+          ? materialThemeDark(jsonScheme)
+          : materialThemeLight(jsonScheme);
+    } else if (useCustomColor.value) {
       base = dark
           ? getCustomDarkTheme(customColor.value)
           : getCustomLightTheme(customColor.value);
@@ -186,16 +233,23 @@ class ThemeController extends GetxController {
   void setTheme(String name) {
     useCustomColor.value = false;
     useMaterialYou.value = false;
+    if (useJsonTheme.value) setUseJsonTheme(false);
     themeName.value = name;
   }
 
   void setMaterialYou(bool value) {
-    if (value) useCustomColor.value = false;
+    if (value) {
+      useCustomColor.value = false;
+      if (useJsonTheme.value) setUseJsonTheme(false);
+    }
     useMaterialYou.value = value;
   }
 
   void setUseCustomColor(bool value) {
-    if (value) useMaterialYou.value = false;
+    if (value) {
+      useMaterialYou.value = false;
+      if (useJsonTheme.value) setUseJsonTheme(false);
+    }
     useCustomColor.value = value;
   }
 

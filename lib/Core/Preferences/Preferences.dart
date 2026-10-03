@@ -12,7 +12,7 @@ class PrefName {
     false,
     PrefLocation.THEME,
   );
-  static const theme = Pref('theme', 'purple', PrefLocation.THEME);
+  static const theme = Pref('theme', 'oneDark', PrefLocation.THEME);
   static const customColor = Pref(
     'customColor',
     0xFF6200EE,
@@ -25,6 +25,7 @@ class PrefName {
   );
   static const useCustomFont = Pref('useCustomFont', false, PrefLocation.THEME);
   static const customFontPath = Pref('customFontPath', '', PrefLocation.THEME);
+  static const useJsonTheme = Pref('useJsonTheme', false, PrefLocation.THEME);
 
   static final themeMode = enumPref(
     'themeMode',
@@ -72,6 +73,11 @@ class PrefName {
   static const loadExtensionIcon = Pref(
     'loadExtensionIcon',
     true,
+    PrefLocation.COMMON,
+  );
+  static const animationSpeed = Pref<double>(
+    'animationSpeed',
+    1.0,
     PrefLocation.COMMON,
   );
   static const useDifferentCacheManager = Pref(

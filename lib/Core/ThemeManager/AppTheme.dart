@@ -1,58 +1,66 @@
 import 'package:flutter/material.dart';
 
-import 'Themes/blue.dart';
 import 'Themes/catppuccin.dart';
-import 'Themes/green.dart';
-import 'Themes/lavender.dart';
-import 'Themes/ocean.dart';
+import 'Themes/dracula.dart';
+import 'Themes/everforest.dart';
+import 'Themes/github.dart';
+import 'Themes/gruvbox.dart';
+import 'Themes/kanagawa.dart';
+import 'Themes/monokai.dart';
+import 'Themes/nord.dart';
 import 'Themes/onedark.dart';
 import 'Themes/oriax.dart';
-import 'Themes/pink.dart';
-import 'Themes/purple.dart';
-import 'Themes/red.dart';
 import 'Themes/rosepine.dart';
 import 'Themes/saikou.dart';
+import 'Themes/solarized.dart';
+import 'Themes/tokyonight.dart';
 
 /// The single source of truth for the built-in colour palettes. The theme
 /// resolver and the theme picker both iterate [AppTheme.values].
 enum AppTheme {
-  purple,
-  blue,
-  green,
-  pink,
   oriax,
   saikou,
-  red,
-  lavender,
-  ocean,
   rosePine,
   catppuccin,
-  oneDark;
+  oneDark,
+  gruvbox,
+  nord,
+  dracula,
+  tokyoNight,
+  github,
+  everforest,
+  kanagawa,
+  monokai,
+  solarized;
 
   String get label => switch (this) {
     AppTheme.rosePine => 'Rosé Pine',
     AppTheme.oneDark => 'One Dark',
+    AppTheme.tokyoNight => 'Tokyo Night',
+    AppTheme.github => 'GitHub',
     _ => name[0].toUpperCase() + name.substring(1),
   };
 
   ThemeData themeFor(Brightness brightness) {
     final dark = brightness == Brightness.dark;
     return switch (this) {
-      AppTheme.purple => dark ? purpleDarkTheme : purpleLightTheme,
-      AppTheme.blue => dark ? blueDarkTheme : blueLightTheme,
-      AppTheme.green => dark ? greenDarkTheme : greenLightTheme,
-      AppTheme.pink => dark ? pinkDarkTheme : pinkLightTheme,
       AppTheme.oriax => dark ? oriaxDarkTheme : oriaxLightTheme,
       AppTheme.saikou => dark ? saikouDarkTheme : saikouLightTheme,
-      AppTheme.red => dark ? redDarkTheme : redLightTheme,
-      AppTheme.lavender => dark ? lavenderDarkTheme : lavenderLightTheme,
-      AppTheme.ocean => dark ? oceanDarkTheme : oceanLightTheme,
       AppTheme.rosePine => dark ? rosePineDarkTheme : rosePineLightTheme,
       AppTheme.catppuccin => dark ? catppuccinDarkTheme : catppuccinLightTheme,
       AppTheme.oneDark => dark ? oneDarkDarkTheme : oneDarkLightTheme,
+      AppTheme.gruvbox => dark ? gruvboxDarkTheme : gruvboxLightTheme,
+      AppTheme.nord => dark ? nordDarkTheme : nordLightTheme,
+      AppTheme.dracula => dark ? draculaDarkTheme : draculaLightTheme,
+      AppTheme.tokyoNight => dark ? tokyonightDarkTheme : tokyonightLightTheme,
+      AppTheme.github => dark ? githubDarkTheme : githubLightTheme,
+      AppTheme.everforest => dark ? everforestDarkTheme : everforestLightTheme,
+      AppTheme.kanagawa => dark ? kanagawaDarkTheme : kanagawaLightTheme,
+      AppTheme.monokai => dark ? monokaiDarkTheme : monokaiLightTheme,
+      AppTheme.solarized => dark ? solarizedDarkTheme : solarizedLightTheme,
     };
   }
 
   static AppTheme byName(String name) =>
-      values.firstWhere((e) => e.name == name, orElse: () => AppTheme.purple);
+      values.firstWhere((e) => e.name == name, orElse: () => AppTheme.oneDark);
 }

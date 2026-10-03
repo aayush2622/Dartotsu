@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'ThemedContainer.dart';
+import '../../Utils/Animation/WidgetAnimations.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Functions/AppShortcuts.dart';
 import '../../Utils/Functions/NavigateToScreen.dart';
@@ -211,7 +212,7 @@ class _CustomBottomDialogState extends State<CustomBottomDialog> {
             ),
         ],
       ),
-    );
+    ).animateSheetIn();
   }
 }
 

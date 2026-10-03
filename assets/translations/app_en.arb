@@ -36,6 +36,12 @@
   "@about": {},
   "language": "Language",
   "@language": {},
+  "animationSpeed": "Animations",
+  "@animationSpeed": {},
+  "animationSpeedDesc": "Speed of transitions and entrance effects across the app",
+  "@animationSpeedDesc": {},
+  "animationSpeedOff": "Off",
+  "@animationSpeedOff": {},
 
   "extension": "{count, plural, =1 {Extension} other {Extensions}}",
   "@extension": {
@@ -153,6 +159,10 @@
   "@customAccent": {},
   "customAccentDesc": "Pick your own primary colour",
   "@customAccentDesc": {},
+  "jsonTheme": "Custom theme file",
+  "@jsonTheme": {},
+  "jsonThemeDesc": "Live colours from ~/.config/dartotsu/theme.json (e.g. matugen)",
+  "@jsonThemeDesc": {},
   "customAccentDisabledDesc": "Turn off Material You to use a custom colour",
   "@customAccentDisabledDesc": {},
   "themeMode": "Theme mode",

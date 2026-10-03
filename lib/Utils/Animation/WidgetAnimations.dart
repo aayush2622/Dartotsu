@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
-const double kAnimationSpeed = 1.0;
+import '../../Core/Preferences/PrefManager.dart';
+
+double get kAnimationSpeed => PrefName.animationSpeed.value;
 
 extension WidgetAnimations on Widget {
   Duration _duration(int ms) =>
@@ -37,6 +39,29 @@ extension WidgetAnimations on Widget {
       duration: _duration(scaleDuration),
       curve: scaleCurve,
     );
+  }
+
+  Widget animateSheetIn({bool target = true, Duration delay = Duration.zero}) {
+    if (_disabled) return this;
+
+    const emphasizedDecelerate = Cubic(0.05, 0.7, 0.1, 1.0);
+
+    return _animation(target)
+        .fade(delay: delay, duration: _duration(260), curve: Curves.easeOut)
+        .slideY(
+          begin: 0.06,
+          end: 0,
+          delay: delay,
+          duration: _duration(380),
+          curve: emphasizedDecelerate,
+        )
+        .scale(
+          begin: const Offset(0.98, 0.98),
+          end: const Offset(1, 1),
+          delay: delay,
+          duration: _duration(380),
+          curve: emphasizedDecelerate,
+        );
   }
 
   Widget animateDropIn({bool target = true}) {

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:path/path.dart' as p;
 
@@ -30,6 +32,15 @@ List<Setting> appearanceSettings(BuildContext context) {
       isChecked: t.useMaterialYou.value,
       onSwitchChange: t.setMaterialYou,
     ),
+    if (Platform.isLinux)
+      Setting(
+        type: SettingType.switchType,
+        name: getString.jsonTheme,
+        description: getString.jsonThemeDesc,
+        icon: Icons.insert_drive_file_outlined,
+        isChecked: t.useJsonTheme.value,
+        onSwitchChange: t.setUseJsonTheme,
+      ),
     Setting.header(getString.sectionDisplay),
     Setting(
       type: SettingType.custom,
