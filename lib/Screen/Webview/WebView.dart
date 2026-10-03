@@ -8,6 +8,7 @@ import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:get/get.dart';
 
 import '../../Core/NetworkManager/NetworkManager.dart';
+import '../../Core/Preferences/PrefManager.dart';
 import '../../Core/ThemeManager/ThemeController.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Function.dart';
@@ -38,6 +39,17 @@ class _WebViewState extends State<WebView> {
   PullToRefreshController? _pullToRefreshController;
 
   bool get _isDark => find<ThemeController>().isDarkModeActive;
+
+  Future<void> _captureRealUserAgent() async {
+    if (PrefName.fetchedUserAgent.value.isNotEmpty) return;
+    try {
+      final ua = await InAppWebViewController.getDefaultUserAgent();
+      if (ua.isEmpty) return;
+      PrefName.fetchedUserAgent.value = ua;
+      find<NetworkManager>().reinitialize();
+    } catch (_) {}
+  }
+
   @override
   void initState() {
     super.initState();
@@ -305,6 +317,7 @@ class _WebViewState extends State<WebView> {
           pullToRefreshController: _pullToRefreshController,
           onWebViewCreated: (controller) async {
             _controller = controller;
+            unawaited(_captureRealUserAgent());
 
             await cookieManager.applyCookiesToWebView(controller);
 

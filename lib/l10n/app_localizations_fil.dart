@@ -303,6 +303,11 @@ class AppLocalizationsFil extends AppLocalizations {
   String get settingDefault => 'Default';
 
   @override
+  String currentlyUsing(String value) {
+    return 'Currently: $value';
+  }
+
+  @override
   String get dnsOverHttps => 'DNS-over-HTTPS';
 
   @override
@@ -310,6 +315,24 @@ class AppLocalizationsFil extends AppLocalizations {
 
   @override
   String get proxy => 'Proxy';
+
+  @override
+  String get proxyProtocol => 'Type';
+
+  @override
+  String get proxyHost => 'Host';
+
+  @override
+  String get proxyPort => 'Port';
+
+  @override
+  String get proxyUsername => 'Username';
+
+  @override
+  String get proxyPassword => 'Password';
+
+  @override
+  String get optional => 'Optional';
 
   @override
   String get clearCookies => 'Clear cookies';

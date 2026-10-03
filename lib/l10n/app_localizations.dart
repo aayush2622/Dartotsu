@@ -725,6 +725,12 @@ abstract class AppLocalizations {
   /// **'Default'**
   String get settingDefault;
 
+  /// No description provided for @currentlyUsing.
+  ///
+  /// In en, this message translates to:
+  /// **'Currently: {value}'**
+  String currentlyUsing(String value);
+
   /// No description provided for @dnsOverHttps.
   ///
   /// In en, this message translates to:
@@ -742,6 +748,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Proxy'**
   String get proxy;
+
+  /// No description provided for @proxyProtocol.
+  ///
+  /// In en, this message translates to:
+  /// **'Type'**
+  String get proxyProtocol;
+
+  /// No description provided for @proxyHost.
+  ///
+  /// In en, this message translates to:
+  /// **'Host'**
+  String get proxyHost;
+
+  /// No description provided for @proxyPort.
+  ///
+  /// In en, this message translates to:
+  /// **'Port'**
+  String get proxyPort;
+
+  /// No description provided for @proxyUsername.
+  ///
+  /// In en, this message translates to:
+  /// **'Username'**
+  String get proxyUsername;
+
+  /// No description provided for @proxyPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get proxyPassword;
+
+  /// No description provided for @optional.
+  ///
+  /// In en, this message translates to:
+  /// **'Optional'**
+  String get optional;
 
   /// No description provided for @clearCookies.
   ///

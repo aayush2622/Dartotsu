@@ -27,11 +27,20 @@ class NetworkManager extends GetxController {
       RhttpCompatibleClient.of(_client);
 
   /// The effective User-Agent every request (including extension traffic via
-  /// [AppBridgeNetwork]) sends: [PrefName.customUserAgent] if set, else the
-  /// generated default.
+  /// [AppBridgeNetwork]) sends: [PrefName.customUserAgent] if set, else
+  /// [defaultUserAgent].
   String get userAgent {
     final custom = PrefName.customUserAgent.value;
-    return custom.isNotEmpty ? custom : _buildUserAgent();
+    return custom.isNotEmpty ? custom : defaultUserAgent;
+  }
+
+  /// The default User-Agent, ignoring [PrefName.customUserAgent] - the real
+  /// in-app WebView engine UA once [PrefName.fetchedUserAgent] has been
+  /// fetched (see [WebView]'s `onWebViewCreated`), else a synthetic
+  /// placeholder until that happens.
+  String get defaultUserAgent {
+    final fetched = PrefName.fetchedUserAgent.value;
+    return fetched.isNotEmpty ? fetched : _buildUserAgent();
   }
 
   /// The effective DNS-over-HTTPS resolver endpoint: [PrefName.customDnsUrl]
@@ -80,7 +89,12 @@ class NetworkManager extends GetxController {
         dnsSettings: DnsSettings.dynamic(
           resolver: (host) async {
             try {
-              return await DnsManager.resolveWithDoh(host, dnsUrl);
+              return await DnsManager.resolveWithDoh(
+                host,
+                dnsUrl,
+                bootstrapIps:
+                    DohProvider.forUrl(dnsUrl)?.bootstrapIps ?? const [],
+              );
             } catch (e) {
               debugPrint('DoH failed for $host → fallback: $e');
               final res = await InternetAddress.lookup(host);

@@ -98,6 +98,15 @@ class PrefName {
     '',
     PrefLocation.COMMON,
   );
+
+  /// The real engine User-Agent fetched from the in-app WebView the first
+  /// time it opens - used as [NetworkManager]'s default once known, instead
+  /// of the synthetic placeholder string.
+  static const fetchedUserAgent = Pref(
+    'fetchedUserAgent',
+    '',
+    PrefLocation.COMMON,
+  );
   static const customDnsUrl = Pref('customDnsUrl', '', PrefLocation.COMMON);
   static const proxyUrl = Pref('proxyUrl', '', PrefLocation.COMMON);
 }

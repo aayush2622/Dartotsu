@@ -10,6 +10,7 @@ import '../../../Utils/Extensions/ContextExtensions.dart';
 import '../../../Utils/Functions/GetXFunctions.dart';
 import '../../../Utils/Functions/NavigateToScreen.dart';
 import '../../../Widgets/Components/AlertDialogBuilder.dart';
+import '../../../Widgets/Components/AppControls.dart';
 import '../../../Widgets/Components/CustomBottomDialog.dart';
 
 List<Setting> networkSettings(BuildContext context) {
@@ -146,13 +147,67 @@ class _ProxySheet extends StatefulWidget {
   State<_ProxySheet> createState() => _ProxySheetState();
 }
 
+typedef _ParsedProxy = ({
+  String protocol,
+  String host,
+  String port,
+  String user,
+  String pass,
+});
+
+_ParsedProxy _parseProxyUrl(String raw) {
+  if (raw.isEmpty) {
+    return (protocol: 'http', host: '', port: '', user: '', pass: '');
+  }
+  try {
+    final uri = Uri.parse(raw.contains('://') ? raw : 'http://$raw');
+    final protocol = uri.scheme.startsWith('socks') ? 'socks5' : 'http';
+    final userInfo = uri.userInfo.split(':');
+    return (
+      protocol: protocol,
+      host: uri.host,
+      port: uri.hasPort ? uri.port.toString() : '',
+      user: userInfo.isNotEmpty ? userInfo[0] : '',
+      pass: userInfo.length > 1 ? userInfo.sublist(1).join(':') : '',
+    );
+  } catch (_) {
+    return (protocol: 'http', host: raw, port: '', user: '', pass: '');
+  }
+}
+
 class _ProxySheetState extends State<_ProxySheet> {
-  late final _ctrl = TextEditingController(text: PrefName.proxyUrl.value);
+  late String _protocol;
+  late final TextEditingController _host;
+  late final TextEditingController _port;
+  late final TextEditingController _user;
+  late final TextEditingController _pass;
+  bool _obscurePass = true;
   _NetTestState _testState = _NetTestState.idle;
   String _testMsg = '';
 
+  @override
+  void initState() {
+    super.initState();
+    final parsed = _parseProxyUrl(PrefName.proxyUrl.value);
+    _protocol = parsed.protocol;
+    _host = TextEditingController(text: parsed.host);
+    _port = TextEditingController(text: parsed.port);
+    _user = TextEditingController(text: parsed.user);
+    _pass = TextEditingController(text: parsed.pass);
+  }
+
+  String get _composedUrl {
+    final host = _host.text.trim();
+    if (host.isEmpty) return '';
+    final port = _port.text.trim();
+    final user = _user.text.trim();
+    final pass = _pass.text.trim();
+    final auth = user.isEmpty ? '' : '$user${pass.isEmpty ? '' : ':$pass'}@';
+    return '$_protocol://$auth$host${port.isEmpty ? '' : ':$port'}';
+  }
+
   Future<void> _test() async {
-    final proxy = _ctrl.text.trim();
+    final proxy = _composedUrl;
     if (proxy.isEmpty) return;
     setState(() {
       _testState = _NetTestState.loading;
@@ -167,20 +222,42 @@ class _ProxySheetState extends State<_ProxySheet> {
   }
 
   void _save() {
-    PrefName.proxyUrl.value = _ctrl.text.trim();
+    PrefName.proxyUrl.value = _composedUrl;
     widget.network.reinitialize();
     popPage(context);
   }
 
+  void _resetTest() => setState(() => _testState = _NetTestState.idle);
+
   @override
   void dispose() {
-    _ctrl.dispose();
+    _host.dispose();
+    _port.dispose();
+    _user.dispose();
+    _pass.dispose();
     super.dispose();
+  }
+
+  InputDecoration _decoration(
+    BuildContext context,
+    String hint, {
+    Widget? suffixIcon,
+  }) {
+    final scheme = context.colorScheme;
+    return InputDecoration(
+      hintText: hint,
+      suffixIcon: suffixIcon,
+      filled: true,
+      fillColor: scheme.surfaceContainerHigh,
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(16),
+        borderSide: BorderSide.none,
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    final scheme = context.colorScheme;
     return CustomBottomDialog(
       title: getString.proxy,
       negativeText: getString.cancel,
@@ -190,20 +267,96 @@ class _ProxySheetState extends State<_ProxySheet> {
       viewList: [
         Padding(
           padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
-          child: TextField(
-            controller: _ctrl,
-            autofocus: true,
-            decoration: InputDecoration(
-              hintText: 'host:port  or  socks5://user:pass@host:port',
-              prefixIcon: const Icon(Icons.vpn_lock_outlined),
-              filled: true,
-              fillColor: scheme.surfaceContainerHigh,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
-                borderSide: BorderSide.none,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                width: 120,
+                child: LabeledField(
+                  label: getString.proxyProtocol,
+                  child: DropdownButtonFormField<String>(
+                    initialValue: _protocol,
+                    isExpanded: true,
+                    onChanged: (v) => setState(() {
+                      _protocol = v!;
+                      _resetTest();
+                    }),
+                    decoration: _decoration(context, ''),
+                    items: const [
+                      DropdownMenuItem(value: 'http', child: Text('HTTP')),
+                      DropdownMenuItem(value: 'socks5', child: Text('SOCKS5')),
+                    ],
+                  ),
+                ),
               ),
-            ),
-            onChanged: (_) => setState(() => _testState = _NetTestState.idle),
+              const SizedBox(width: 10),
+              Expanded(
+                flex: 3,
+                child: LabeledField(
+                  label: getString.proxyHost,
+                  child: TextField(
+                    controller: _host,
+                    autofocus: true,
+                    decoration: _decoration(context, 'proxy.example.com'),
+                    onChanged: (_) => _resetTest(),
+                  ),
+                ),
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: LabeledField(
+                  label: getString.proxyPort,
+                  child: TextField(
+                    controller: _port,
+                    keyboardType: TextInputType.number,
+                    decoration: _decoration(context, '1080'),
+                    onChanged: (_) => _resetTest(),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: LabeledField(
+                  label: getString.proxyUsername,
+                  child: TextField(
+                    controller: _user,
+                    decoration: _decoration(context, getString.optional),
+                    onChanged: (_) => _resetTest(),
+                  ),
+                ),
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: LabeledField(
+                  label: getString.proxyPassword,
+                  child: TextField(
+                    controller: _pass,
+                    obscureText: _obscurePass,
+                    decoration: _decoration(
+                      context,
+                      getString.optional,
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          _obscurePass
+                              ? Icons.visibility_outlined
+                              : Icons.visibility_off_outlined,
+                        ),
+                        onPressed: () =>
+                            setState(() => _obscurePass = !_obscurePass),
+                      ),
+                    ),
+                    onChanged: (_) => _resetTest(),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
         Padding(
@@ -213,43 +366,6 @@ class _ProxySheetState extends State<_ProxySheet> {
             spacing: 10,
             runSpacing: 8,
             children: [
-              ListenableBuilder(
-                listenable: _ctrl,
-                builder: (context, _) {
-                  final v = _ctrl.text.trim();
-                  final type = v.isEmpty
-                      ? getString.none
-                      : v.startsWith('socks5://') || v.startsWith('socks://')
-                      ? 'SOCKS5'
-                      : 'HTTP';
-                  final color = type == 'SOCKS5'
-                      ? scheme.tertiary
-                      : type == 'HTTP'
-                      ? scheme.primary
-                      : scheme.onSurfaceVariant;
-                  return AnimatedSwitcher(
-                    duration: const Duration(milliseconds: 180),
-                    child: Container(
-                      key: ValueKey(type),
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 8,
-                        vertical: 3,
-                      ),
-                      decoration: BoxDecoration(
-                        color: color.withValues(alpha: 0.12),
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: color.withValues(alpha: 0.3)),
-                      ),
-                      child: Text(
-                        type,
-                        style: context.textTheme.labelSmall?.copyWith(
-                          color: color,
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              ),
               FilledButton.tonalIcon(
                 onPressed: _testState == _NetTestState.loading ? null : _test,
                 icon: const Icon(Icons.wifi_find_rounded, size: 18),
@@ -387,6 +503,24 @@ class _DnsSheetState extends State<_DnsSheet> {
           ),
         ),
         Padding(
+          padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
+          child: Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: [
+              for (final p in DohProvider.values)
+                ChoiceChip(
+                  label: Text(p.name),
+                  selected: _ctrl.text.trim() == p.url,
+                  onSelected: (_) => setState(() {
+                    _ctrl.text = p.url;
+                    _testState = _NetTestState.idle;
+                  }),
+                ),
+            ],
+          ),
+        ),
+        Padding(
           padding: const EdgeInsets.fromLTRB(16, 0, 16, 4),
           child: Wrap(
             crossAxisAlignment: WrapCrossAlignment.center,
@@ -411,7 +545,11 @@ class _DnsSheetState extends State<_DnsSheet> {
 Future<(bool, String)> _testDns(String url) async {
   final sw = Stopwatch()..start();
   try {
-    final addrs = await DnsManager.resolveWithDoh('google.com', url);
+    final addrs = await DnsManager.resolveWithDoh(
+      'google.com',
+      url,
+      bootstrapIps: DohProvider.forUrl(url)?.bootstrapIps ?? const [],
+    );
     sw.stop();
     return addrs.isNotEmpty
         ? (true, '${addrs.first} · ${sw.elapsedMilliseconds} ms')
@@ -475,13 +613,22 @@ class _UaSheetState extends State<_UaSheet> {
       viewList: [
         Padding(
           padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+          child: Text(
+            getString.currentlyUsing(widget.network.userAgent),
+            style: context.textTheme.labelSmall?.copyWith(
+              color: scheme.onSurfaceVariant,
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
           child: TextField(
             controller: _ctrl,
             autofocus: true,
             maxLines: 3,
             minLines: 1,
             decoration: InputDecoration(
-              hintText: widget.network.userAgent,
+              hintText: widget.network.defaultUserAgent,
               prefixIcon: const Icon(Icons.badge_outlined),
               suffixIcon: IconButton(
                 icon: const Icon(Icons.clear_rounded),
