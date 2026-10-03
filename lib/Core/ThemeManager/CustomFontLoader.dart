@@ -1,11 +1,14 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
 import '../Preferences/StorageManager.dart';
+
+Uint8List _readFontBytes(String path) => File(path).readAsBytesSync();
 
 class CustomFontLoader {
   CustomFontLoader._();
@@ -76,7 +79,7 @@ class CustomFontLoader {
     if (!file.existsSync()) return null;
 
     try {
-      final bytes = await file.readAsBytes();
+      final bytes = await compute(_readFontBytes, path);
       final family = _familyFor(path);
       final loader = FontLoader(family)
         ..addFont(Future.value(ByteData.view(bytes.buffer)));

@@ -14,92 +14,22 @@ import '../../../Utils/Functions/NavigateToScreen.dart';
 import '../../../Widgets/Components/CustomBottomDialog.dart';
 import '../../../Widgets/Components/ThemedContainer.dart';
 
-Widget themeDropdown() => const _ThemeDropdown();
-
-class _ThemeDropdown extends StatelessWidget {
-  const _ThemeDropdown();
-
-  void _open(BuildContext context) => showCustomBottomDialog<void>(
-    context,
-    FractionallySizedBox(
-      heightFactor: 0.65,
-      child: _ThemePickerSheet(
-        openColorPicker: (current) =>
-            showColorPickerDialog(context, current, showTransparent: false),
-      ),
-    ),
-  );
-
-  @override
-  Widget build(BuildContext context) {
-    final controller = find<ThemeController>();
-    final scheme = context.colorScheme;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-
-    return Obx(() {
-      final isCustom = controller.useCustomColor.value;
-      final isJson = controller.useJsonTheme.value;
-      final customArgb = controller.customColor.value;
-      final current = AppTheme.byName(controller.themeName.value);
-      final label = isJson ? 'File' : isCustom ? 'Custom' : current.label;
-      final swatch = isJson
-          ? (isDark ? controller.dark : controller.light).colorScheme.primary
-          : isCustom && customArgb != 0
-          ? Color(customArgb)
-          : current
-                .themeFor(isDark ? Brightness.dark : Brightness.light)
-                .colorScheme
-                .primary;
-
-      return InkWell(
-        onTap: () => _open(context),
-        borderRadius: BorderRadius.circular(12),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 12),
-          child: Row(
-            children: [
-              Icon(Icons.color_lens, size: 22, color: scheme.onSurfaceVariant),
-              const SizedBox(width: 20),
-              Expanded(
-                child: Text(
-                  'Theme',
-                  style: context.textTheme.bodyLarge?.copyWith(
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-              Text(
-                label,
-                style: context.textTheme.bodyMedium?.copyWith(
-                  color: scheme.onSurfaceVariant,
-                ),
-              ),
-              const SizedBox(width: 10),
-              Container(
-                width: 22,
-                height: 22,
-                decoration: BoxDecoration(
-                  color: swatch,
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                    color: scheme.onSurface.withValues(alpha: 0.18),
-                    width: 2,
-                  ),
-                ),
-              ),
-              const SizedBox(width: 6),
-              Icon(
-                Icons.chevron_right_rounded,
-                size: 18,
-                color: scheme.onSurfaceVariant,
-              ),
-            ],
-          ),
-        ),
-      );
-    });
-  }
+String themeLabel(ThemeController t) {
+  if (t.useCustomColor.value) return 'Custom';
+  return AppTheme.byName(t.themeName.value).label;
 }
+
+Future<void> openThemePicker(BuildContext context) =>
+    showCustomBottomDialog<void>(
+      context,
+      FractionallySizedBox(
+        heightFactor: 0.65,
+        child: _ThemePickerSheet(
+          openColorPicker: (current) =>
+              showColorPickerDialog(context, current, showTransparent: false),
+        ),
+      ),
+    );
 
 class _ThemePickerSheet extends StatelessWidget {
   final Future<Color?> Function(Color current) openColorPicker;
@@ -319,120 +249,135 @@ class _UiSkeletonPreview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bg = previewScheme.surface;
-    final card = previewScheme.surfaceContainerHighest;
+    final onBg = previewScheme.onSurface;
     final primary = previewScheme.primary;
     final secondary = previewScheme.secondary;
     final tertiary = previewScheme.tertiary;
-    final line = previewScheme.onSurface.withValues(alpha: 0.3);
-    final img = primary.withValues(alpha: 0.5);
+    final navBg = previewScheme.surfaceContainerHigh;
 
-    const barH = 11.0;
-    const gap = 5.0;
+    const topBarH = 13.0;
+    const navH = 15.0;
+    const gap = 4.0;
+    const side = 5.0;
 
     return ClipRRect(
       borderRadius: const BorderRadius.vertical(top: Radius.circular(10)),
-      child: LayoutBuilder(
-        builder: (_, cs) {
-          final h = cs.maxHeight;
-          final available = (h - barH * 2 - gap * 3 - 4).clamp(0.0, h);
-          final heroH = available * 0.5;
-          final rowH = available * 0.25;
-          final heroTop = barH + gap;
-          final row1Top = heroTop + heroH + gap;
-          final row2Top = row1Top + rowH + 4;
+      child: Container(
+        color: bg,
+        child: LayoutBuilder(
+          builder: (_, cs) {
+            final posterH =
+                (cs.maxHeight - topBarH - navH - gap * 2).clamp(
+                  0.0,
+                  cs.maxHeight,
+                ) *
+                0.62;
 
-          return Stack(
-            children: [
-              Positioned.fill(child: Container(color: bg)),
-
-              Positioned(
-                top: 0,
-                left: 0,
-                right: 0,
-                height: barH,
-                child: Container(
-                  color: card,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 6,
-                    vertical: 3,
-                  ),
-                  child: Row(
-                    children: [
-                      _dot(primary, 3.5),
-                      const SizedBox(width: 3),
-                      Expanded(child: _line(line, 2.5)),
-                      const SizedBox(width: 4),
-                      _dot(secondary, 3),
-                      const SizedBox(width: 2),
-                      _dot(tertiary, 3),
-                    ],
-                  ),
-                ),
-              ),
-
-              Positioned(
-                top: heroTop,
-                left: 5,
-                right: 5,
-                height: heroH,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(6),
-                  child: Container(
-                    color: img,
-                    alignment: Alignment.center,
-                    child: Icon(
-                      Icons.image_rounded,
-                      size: 14,
-                      color: bg.withValues(alpha: 0.5),
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: topBarH,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: side,
+                      vertical: 3,
+                    ),
+                    child: Row(
+                      children: [
+                        _line(onBg.withValues(alpha: 0.85), 4, width: 26),
+                        const Spacer(),
+                        Icon(
+                          Icons.search_rounded,
+                          size: 9,
+                          color: onBg.withValues(alpha: 0.6),
+                        ),
+                      ],
                     ),
                   ),
                 ),
-              ),
-
-              Positioned(
-                top: row1Top,
-                left: 5,
-                right: 5,
-                height: rowH,
-                child: _listRow(card, secondary.withValues(alpha: 0.5), line),
-              ),
-              Positioned(
-                top: row2Top,
-                left: 5,
-                right: 5,
-                height: rowH,
-                child: _listRow(card, tertiary.withValues(alpha: 0.5), line),
-              ),
-
-              Positioned(
-                bottom: 0,
-                left: 0,
-                right: 0,
-                height: barH,
-                child: Container(
-                  color: card,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                const SizedBox(height: gap),
+                SizedBox(
+                  height: posterH,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: side),
+                    child: Row(
+                      children: [
+                        Expanded(child: _poster(primary, bg)),
+                        const SizedBox(width: 4),
+                        Expanded(child: _poster(secondary, bg)),
+                        const SizedBox(width: 4),
+                        Expanded(child: _poster(tertiary, bg)),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 5),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: side),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      _dot(primary, 4),
-                      _dot(secondary, 4),
-                      _dot(tertiary, 4),
+                      _line(onBg.withValues(alpha: 0.75), 2.5, width: 32),
+                      const SizedBox(height: 3),
+                      _line(onBg.withValues(alpha: 0.4), 2, width: 20),
                     ],
                   ),
                 ),
-              ),
-            ],
-          );
-        },
+                const Spacer(),
+                Container(
+                  height: navH,
+                  color: navBg,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      _navIcon(Icons.home_rounded, primary, active: true),
+                      _navIcon(
+                        Icons.explore_outlined,
+                        onBg.withValues(alpha: 0.45),
+                      ),
+                      _navIcon(
+                        Icons.person_outline_rounded,
+                        onBg.withValues(alpha: 0.45),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            );
+          },
+        ),
       ),
     );
   }
 
-  Widget _dot(Color color, double size) => Container(
-    width: size,
-    height: size,
-    decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+  Widget _poster(Color color, Color bg) => AspectRatio(
+    aspectRatio: 2 / 3,
+    child: ClipRRect(
+      borderRadius: BorderRadius.circular(4),
+      child: Container(
+        color: color,
+        alignment: Alignment.center,
+        child: Icon(
+          Icons.play_arrow_rounded,
+          size: 10,
+          color: bg.withValues(alpha: 0.7),
+        ),
+      ),
+    ),
   );
+
+  Widget _navIcon(IconData icon, Color color, {bool active = false}) =>
+      Container(
+        padding: const EdgeInsets.all(2),
+        decoration: active
+            ? BoxDecoration(
+                color: color.withValues(alpha: 0.18),
+                borderRadius: BorderRadius.circular(5),
+              )
+            : null,
+        child: Icon(icon, size: 8, color: color),
+      );
 
   Widget _line(Color color, double height, {double? width}) => Container(
     height: height,
@@ -440,34 +385,6 @@ class _UiSkeletonPreview extends StatelessWidget {
     decoration: BoxDecoration(
       color: color,
       borderRadius: BorderRadius.circular(2),
-    ),
-  );
-
-  Widget _listRow(Color card, Color img, Color line) => Container(
-    padding: const EdgeInsets.all(3),
-    decoration: BoxDecoration(
-      color: card,
-      borderRadius: BorderRadius.circular(4),
-    ),
-    child: Row(
-      children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(2),
-          child: Container(width: 14, color: img),
-        ),
-        const SizedBox(width: 4),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              _line(line, 2.5, width: 28),
-              const SizedBox(height: 2.5),
-              _line(line.withValues(alpha: 0.6), 2, width: 18),
-            ],
-          ),
-        ),
-      ],
     ),
   );
 }

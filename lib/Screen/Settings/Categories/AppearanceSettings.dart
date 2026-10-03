@@ -20,9 +20,16 @@ List<Setting> appearanceSettings(BuildContext context) {
   return [
     Setting.header(getString.sectionColors),
     Setting(
-      type: SettingType.custom,
+      type: SettingType.normal,
       name: getString.settingsAppearance,
-      builder: (_) => themeDropdown(),
+      icon: Icons.color_lens_rounded,
+      trailing: Icon(
+        Icons.chevron_right_rounded,
+        size: 18,
+        color: context.colorScheme.onSurfaceVariant,
+      ),
+      description: themeLabel(t),
+      onClick: () => openThemePicker(context),
     ),
     Setting(
       type: SettingType.switchType,
@@ -50,7 +57,7 @@ List<Setting> appearanceSettings(BuildContext context) {
           Icon(
             Icons.brightness_6_rounded,
             size: 22,
-            color: context.colorScheme.onSurfaceVariant,
+            color: context.colorScheme.primary,
           ),
           const SizedBox(width: 20),
           Expanded(
