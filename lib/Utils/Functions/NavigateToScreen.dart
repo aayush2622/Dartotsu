@@ -21,8 +21,6 @@ Future<T?> navigateToPage<T>(
   );
 }
 
-/// The single pop entry point for every screen/sheet/dialog — swap what
-/// runs here (Navigator, GetX, …) in one place instead of chasing call sites.
 void popPage<T extends Object?>(BuildContext context, [T? result]) {
   final nav = Navigator.of(context);
   if (nav.canPop()) nav.pop<T>(result);
@@ -30,10 +28,6 @@ void popPage<T extends Object?>(BuildContext context, [T? result]) {
 
 bool _backBusy = false;
 
-/// The single back entry point for ESC, the mouse back-button and the d-pad
-/// back key. Re-entrant presses while a pop is already running are swallowed
-/// (they used to trip `Navigator._debugLocked`). Returns `true` if a pop was
-/// started, `false` if nothing could be popped.
 bool guardedBack() {
   if (_backBusy) return true;
   final nav = Get.key.currentState;
