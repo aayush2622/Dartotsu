@@ -3,12 +3,13 @@ import 'dart:async';
 import 'package:dartotsu_extension_bridge/Extensions/DownloadablePlugin.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../Core/ThemeManager/language.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
+import '../../Utils/Functions/NavigateToScreen.dart';
 import '../../Utils/Functions/SnackBar.dart';
 import '../../Widgets/Components/AlertDialogBuilder.dart';
 import '../../Widgets/Components/BaseScreen.dart';
@@ -68,16 +69,14 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new),
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () => popPage(context),
         ),
         elevation: 0,
         backgroundColor: Colors.transparent,
         title: Text(
           getString.extension(2),
-          style: TextStyle(
-            fontFamily: 'Poppins',
+          style: context.textTheme.titleMedium?.copyWith(
             fontWeight: FontWeight.bold,
-            fontSize: 16.0,
             color: theme.primary,
           ),
         ),
@@ -183,7 +182,7 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
                 CustomBottomDialog(
                   title: "${type.name.capitalizeFirst} Manager",
                   positiveText: getString.ok,
-                  positiveCallback: () => Navigator.pop(context),
+                  positiveCallback: () => popPage(context),
                   negativeText: "Add Repository",
                   negativeCallback: () => _showAddRepositoryDialog(),
                   viewList: [
@@ -246,7 +245,9 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
           ),
           title: Text(
             m.name,
-            style: const TextStyle(fontWeight: FontWeight.w600),
+            style: context.textTheme.bodyLarge?.copyWith(
+              fontWeight: FontWeight.w600,
+            ),
           ),
           trailing: _buildServiceTrailing(m, installed, availableInRepo),
         ),
@@ -346,7 +347,7 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
           CustomBottomDialog(
             title: "${type.name.capitalizeFirst} Repositories",
             positiveText: getString.ok,
-            positiveCallback: () => Navigator.pop(context),
+            positiveCallback: () => popPage(context),
             negativeText: "Add Repository",
             negativeCallback: () {
               final controller = TextEditingController();
@@ -523,7 +524,7 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
                                 repo.name ??
                                     Uri.tryParse(repo.url)?.host ??
                                     repo.url,
-                                style: const TextStyle(
+                                style: context.textTheme.bodyLarge?.copyWith(
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
@@ -542,7 +543,9 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
                             const SizedBox(height: 4),
                             Text(
                               "${repo.extensions ?? "?"} extensions",
-                              style: TextStyle(color: theme.primary),
+                              style: context.textTheme.bodySmall?.copyWith(
+                                color: theme.primary,
+                              ),
                             ),
                           ],
                         ),
@@ -575,9 +578,7 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
         padding: const EdgeInsets.symmetric(horizontal: 8),
         child: TextField(
           controller: _textEditingController,
-          style: const TextStyle(
-            fontFamily: "Poppins",
-            fontSize: 15,
+          style: context.textTheme.bodyLarge?.copyWith(
             fontWeight: FontWeight.w500,
           ),
           decoration: InputDecoration(
@@ -765,7 +766,10 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
   Widget _emptyMessage(String message) {
     final theme = Theme.of(context).colorScheme;
     return Center(
-      child: Text(message, style: TextStyle(color: theme.onSurface)),
+      child: Text(
+        message,
+        style: context.textTheme.bodyMedium?.copyWith(color: theme.onSurface),
+      ),
     );
   }
 }
@@ -928,7 +932,7 @@ Future<void> showInstallDialog(
             ? "Update"
             : "Installed",
         negativeCallback: () {
-          Navigator.pop(context);
+          popPage(context);
         },
         positiveCallback: () async {
           if (plugin.installed.value && !hasUpdate) {
@@ -940,7 +944,7 @@ Future<void> showInstallDialog(
           await plugin.download();
           if (!context.mounted) return;
           if (plugin.installed.value) {
-            Navigator.pop(context);
+            popPage(context);
           }
         },
       ),

@@ -12,11 +12,11 @@ import 'package:markdown_widget/widget/blocks/leaf/heading.dart';
 import 'package:markdown_widget/widget/blocks/leaf/link.dart';
 import 'package:markdown_widget/widget/markdown.dart';
 import 'package:path/path.dart' as path;
-import 'package:path_provider/path_provider.dart';
 import 'package:rhttp/rhttp.dart';
 
 import '../../Core/NetworkManager/NetworkManager.dart';
 import '../../Core/Preferences/PrefManager.dart';
+import '../../Core/Preferences/StorageManager.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Function.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
@@ -371,8 +371,8 @@ class AppUpdater extends GetxController {
 
       _resetDownloadState();
 
-      final tempDir = await getTemporaryDirectory();
-      final filePath = '${tempDir.path}/$packageName.apk';
+      final tempDir = await StorageManager.getTmpDirectory();
+      final filePath = '${tempDir!.path}/$packageName.apk';
       final file = File(filePath);
       _cancelToken = _network.newCancelToken();
       await _network.download(
@@ -406,9 +406,9 @@ class AppUpdater extends GetxController {
   }
 
   Future<String> _downloadUpdateArchive(String url) async {
-    final tempDir = await getTemporaryDirectory();
+    final tempDir = await StorageManager.getTmpDirectory();
     final ext = path.extension(Uri.parse(url).path);
-    final filePath = path.join(tempDir.path, 'dartotsu_update$ext');
+    final filePath = path.join(tempDir!.path, 'dartotsu_update$ext');
     _cancelToken = _network.newCancelToken();
     await _network.download(
       url,

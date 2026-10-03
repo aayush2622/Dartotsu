@@ -2,11 +2,12 @@ import 'dart:io';
 
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../Core/Preferences/PrefManager.dart';
 import '../../Core/ThemeManager/language.dart';
 import '../../Utils/Animation/WidgetAnimations.dart';
+import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Utils/Functions/SnackBar.dart';
 import '../../Widgets/Components/CachedNetworkImage.dart';
@@ -144,7 +145,9 @@ class _ExtensionListState extends State<ExtensionList> {
                     padding: const EdgeInsets.symmetric(vertical: 8),
                     child: Text(
                       completeLanguageName(item.language!),
-                      style: _headerStyle,
+                      style: context.textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   );
                 }
@@ -178,7 +181,9 @@ class _ExtensionListState extends State<ExtensionList> {
           source.name ?? 'Unknown Source',
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
-          style: _titleStyle,
+          style: context.textTheme.bodyLarge?.copyWith(
+            fontWeight: FontWeight.bold,
+          ),
         ),
         subtitle: _buildSubtitle(source),
         // `installProgress` is read deep inside _buildTrailing, which is
@@ -280,18 +285,6 @@ class _ExtensionListState extends State<ExtensionList> {
     return list;
   }
 
-  static const _titleStyle = TextStyle(
-    fontFamily: 'Poppins',
-    fontWeight: FontWeight.bold,
-    fontSize: 15,
-  );
-
-  static const _headerStyle = TextStyle(
-    fontFamily: 'Poppins',
-    fontWeight: FontWeight.bold,
-    fontSize: 16,
-  );
-
   Widget _buildIcon(Source source) {
     final iconUrl = source.iconUrl;
 
@@ -334,9 +327,7 @@ class _ExtensionListState extends State<ExtensionList> {
         ),
         child: Text(
           text,
-          style: TextStyle(
-            fontFamily: 'Poppins',
-            fontSize: 11,
+          style: context.textTheme.labelSmall?.copyWith(
             fontWeight: FontWeight.w600,
             color: foreground ?? theme.onSurfaceVariant,
           ),
@@ -388,7 +379,7 @@ class _ExtensionListState extends State<ExtensionList> {
               top: 2,
               child: Text(
                 "${(progress.clamp(0.0, 1.0) * 100).toStringAsFixed(0)}%",
-                style: TextStyle(
+                style: context.textTheme.labelSmall?.copyWith(
                   fontSize: 8,
                   fontWeight: FontWeight.w700,
                   color: theme.primary,

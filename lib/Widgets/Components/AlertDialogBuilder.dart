@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
+import '../../Utils/Animation/WidgetAnimations.dart';
+import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Functions/NavigateToScreen.dart';
 import 'ThemedContainer.dart';
 
@@ -122,10 +124,26 @@ class AlertDialogBuilder {
 
     _onAttach?.call();
 
-    return showDialog<T>(
+    return showGeneralDialog<T>(
       context: context,
       barrierDismissible: _cancelable,
-      builder: (BuildContext context) {
+      barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
+      barrierColor: Colors.black54,
+      transitionDuration: Duration(
+        milliseconds: (300 * kAnimationSpeed).round(),
+      ),
+      transitionBuilder: (context, animation, secondaryAnimation, child) {
+        final curved = CurvedAnimation(
+          parent: animation,
+          curve: Curves.easeOutBack,
+          reverseCurve: Curves.easeIn,
+        );
+        return FadeTransition(
+          opacity: animation,
+          child: ScaleTransition(scale: curved, child: child),
+        );
+      },
+      pageBuilder: (context, animation, secondaryAnimation) {
         _onShow?.call();
         return Dialog(
           backgroundColor: Colors.transparent,
@@ -149,9 +167,7 @@ class AlertDialogBuilder {
                             _titleWidget ??
                             Text(
                               _title ?? '',
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
+                              style: context.textTheme.titleLarge?.copyWith(
                                 color: theme.primary,
                               ),
                             ),
@@ -245,8 +261,7 @@ class AlertDialogBuilder {
                 key: ValueKey(item),
                 title: Text(
                   item,
-                  style: const TextStyle(
-                    fontSize: 16,
+                  style: context.textTheme.bodyLarge?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -282,8 +297,7 @@ class AlertDialogBuilder {
                 key: ValueKey(item),
                 title: Text(
                   item,
-                  style: const TextStyle(
-                    fontSize: 16,
+                  style: context.textTheme.bodyLarge?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -299,7 +313,7 @@ class AlertDialogBuilder {
     (item) => RadioListTile<int>(
       title: Text(
         item,
-        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+        style: context.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
       ),
       value: _items!.indexOf(item),
       groupValue: _selectedItemIndex,
@@ -317,7 +331,7 @@ class AlertDialogBuilder {
         return CheckboxListTile(
           title: Text(
             item,
-            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            style: context.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
           ),
           value: _checkedItems![index],
           onChanged: (bool? value) {
@@ -378,8 +392,7 @@ class AlertDialogBuilder {
         },
         child: Text(
           title,
-          style: TextStyle(
-            fontSize: 16,
+          style: context.textTheme.labelLarge?.copyWith(
             fontWeight: FontWeight.bold,
             color: theme.primary,
           ),

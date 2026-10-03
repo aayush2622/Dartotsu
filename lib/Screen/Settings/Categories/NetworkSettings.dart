@@ -11,7 +11,6 @@ import '../../../Utils/Functions/GetXFunctions.dart';
 import '../../../Utils/Functions/NavigateToScreen.dart';
 import '../../../Widgets/Components/AlertDialogBuilder.dart';
 import '../../../Widgets/Components/CustomBottomDialog.dart';
-import '../../../Widgets/Components/ThemedContainer.dart';
 
 List<Setting> networkSettings(BuildContext context) {
   final network = find<NetworkManager>();
@@ -66,57 +65,6 @@ List<Setting> networkSettings(BuildContext context) {
     ),
   ];
 }
-
-// ─── shared sheet helpers ─────────────────────────────────────────────────────
-
-Widget _sheetHandle(BuildContext context) => Padding(
-  padding: const EdgeInsets.only(bottom: 12),
-  child: Center(
-    child: Container(
-      width: 40,
-      height: 4,
-      decoration: BoxDecoration(
-        color: context.colorScheme.onSurface.withValues(alpha: 0.3),
-        borderRadius: BorderRadius.circular(2),
-      ),
-    ),
-  ),
-);
-
-Widget _sheetTitle(BuildContext context, String title) => Padding(
-  padding: const EdgeInsets.fromLTRB(24, 0, 24, 16),
-  child: Text(
-    title,
-    style: context.textTheme.titleMedium,
-    textAlign: TextAlign.center,
-  ),
-);
-
-Widget _sheetActions(
-  BuildContext context, {
-  required VoidCallback onSave,
-  VoidCallback? onNeutral,
-  String? neutralLabel,
-}) => Padding(
-  padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
-  child: Row(
-    children: [
-      if (onNeutral != null) ...[
-        TextButton(
-          onPressed: onNeutral,
-          child: Text(neutralLabel ?? getString.reset),
-        ),
-        const Spacer(),
-      ],
-      TextButton(
-        onPressed: () => popPage(context),
-        child: Text(getString.cancel),
-      ),
-      const SizedBox(width: 8),
-      FilledButton(onPressed: onSave, child: Text(getString.save)),
-    ],
-  ),
-);
 
 // ─── test chip ────────────────────────────────────────────────────────────────
 
@@ -233,89 +181,86 @@ class _ProxySheetState extends State<_ProxySheet> {
   @override
   Widget build(BuildContext context) {
     final scheme = context.colorScheme;
-    return ThemedContainer(
-      color: scheme.surface,
-      border: Border.all(
-        width: 0,
-        color: scheme.onSurface.withValues(alpha: 0.1),
-      ),
-      borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
-      padding: const EdgeInsets.only(bottom: 24, top: 12),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          _sheetHandle(context),
-          _sheetTitle(context, getString.proxy),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: TextField(
-              controller: _ctrl,
-              autofocus: true,
-              decoration: const InputDecoration(
-                hintText: 'host:port  or  socks5://user:pass@host:port',
-                prefixIcon: Icon(Icons.vpn_lock_outlined),
+    return CustomBottomDialog(
+      title: getString.proxy,
+      negativeText: getString.cancel,
+      negativeCallback: () => popPage(context),
+      positiveText: getString.save,
+      positiveCallback: _save,
+      viewList: [
+        Padding(
+          padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
+          child: TextField(
+            controller: _ctrl,
+            autofocus: true,
+            decoration: InputDecoration(
+              hintText: 'host:port  or  socks5://user:pass@host:port',
+              prefixIcon: const Icon(Icons.vpn_lock_outlined),
+              filled: true,
+              fillColor: scheme.surfaceContainerHigh,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16),
+                borderSide: BorderSide.none,
               ),
-              onChanged: (_) => setState(() => _testState = _NetTestState.idle),
             ),
+            onChanged: (_) => setState(() => _testState = _NetTestState.idle),
           ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(24, 12, 24, 0),
-            child: Row(
-              children: [
-                ListenableBuilder(
-                  listenable: _ctrl,
-                  builder: (context, _) {
-                    final v = _ctrl.text.trim();
-                    final type = v.isEmpty
-                        ? getString.none
-                        : v.startsWith('socks5://') || v.startsWith('socks://')
-                        ? 'SOCKS5'
-                        : 'HTTP';
-                    final color = type == 'SOCKS5'
-                        ? scheme.tertiary
-                        : type == 'HTTP'
-                        ? scheme.primary
-                        : scheme.onSurfaceVariant;
-                    return AnimatedSwitcher(
-                      duration: const Duration(milliseconds: 180),
-                      child: Container(
-                        key: ValueKey(type),
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 8,
-                          vertical: 3,
-                        ),
-                        decoration: BoxDecoration(
-                          color: color.withValues(alpha: 0.12),
-                          borderRadius: BorderRadius.circular(12),
-                          border: Border.all(
-                            color: color.withValues(alpha: 0.3),
-                          ),
-                        ),
-                        child: Text(
-                          type,
-                          style: context.textTheme.labelSmall?.copyWith(
-                            color: color,
-                          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(16, 0, 16, 4),
+          child: Wrap(
+            crossAxisAlignment: WrapCrossAlignment.center,
+            spacing: 10,
+            runSpacing: 8,
+            children: [
+              ListenableBuilder(
+                listenable: _ctrl,
+                builder: (context, _) {
+                  final v = _ctrl.text.trim();
+                  final type = v.isEmpty
+                      ? getString.none
+                      : v.startsWith('socks5://') || v.startsWith('socks://')
+                      ? 'SOCKS5'
+                      : 'HTTP';
+                  final color = type == 'SOCKS5'
+                      ? scheme.tertiary
+                      : type == 'HTTP'
+                      ? scheme.primary
+                      : scheme.onSurfaceVariant;
+                  return AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 180),
+                    child: Container(
+                      key: ValueKey(type),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 3,
+                      ),
+                      decoration: BoxDecoration(
+                        color: color.withValues(alpha: 0.12),
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: color.withValues(alpha: 0.3)),
+                      ),
+                      child: Text(
+                        type,
+                        style: context.textTheme.labelSmall?.copyWith(
+                          color: color,
                         ),
                       ),
-                    );
-                  },
-                ),
-                const SizedBox(width: 12),
-                FilledButton.tonalIcon(
-                  onPressed: _testState == _NetTestState.loading ? null : _test,
-                  icon: const Icon(Icons.wifi_find_rounded, size: 18),
-                  label: Text(getString.test),
-                ),
-                const SizedBox(width: 10),
-                _TestChip(state: _testState, message: _testMsg),
-              ],
-            ),
+                    ),
+                  );
+                },
+              ),
+              FilledButton.tonalIcon(
+                onPressed: _testState == _NetTestState.loading ? null : _test,
+                icon: const Icon(Icons.wifi_find_rounded, size: 18),
+                label: Text(getString.test),
+              ),
+              _TestChip(state: _testState, message: _testMsg),
+            ],
           ),
-          _sheetActions(context, onSave: _save),
-        ],
-      ),
+        ),
+        const SizedBox(height: 8),
+      ],
     );
   }
 }
@@ -409,56 +354,56 @@ class _DnsSheetState extends State<_DnsSheet> {
   @override
   Widget build(BuildContext context) {
     final scheme = context.colorScheme;
-    return ThemedContainer(
-      color: scheme.surface,
-      border: Border.all(
-        width: 0,
-        color: scheme.onSurface.withValues(alpha: 0.1),
-      ),
-      borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
-      padding: const EdgeInsets.only(bottom: 24, top: 12),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          _sheetHandle(context),
-          _sheetTitle(context, getString.dnsOverHttps),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: TextField(
-              controller: _ctrl,
-              autofocus: true,
-              decoration: const InputDecoration(
-                hintText: 'https://cloudflare-dns.com/dns-query',
-                prefixIcon: Icon(Icons.dns_outlined),
+    return CustomBottomDialog(
+      title: getString.dnsOverHttps,
+      negativeText: getString.cancel,
+      negativeCallback: () => popPage(context),
+      positiveText: getString.save,
+      positiveCallback: _save,
+      viewList: [
+        Padding(
+          padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
+          child: TextField(
+            controller: _ctrl,
+            autofocus: true,
+            decoration: InputDecoration(
+              hintText: 'https://cloudflare-dns.com/dns-query',
+              prefixIcon: const Icon(Icons.dns_outlined),
+              suffixIcon: IconButton(
+                icon: const Icon(Icons.clear_rounded),
+                onPressed: () {
+                  _ctrl.clear();
+                  setState(() => _testState = _NetTestState.idle);
+                },
               ),
-              onChanged: (_) => setState(() => _testState = _NetTestState.idle),
+              filled: true,
+              fillColor: scheme.surfaceContainerHigh,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16),
+                borderSide: BorderSide.none,
+              ),
             ),
+            onChanged: (_) => setState(() => _testState = _NetTestState.idle),
           ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(24, 12, 24, 0),
-            child: Row(
-              children: [
-                FilledButton.tonalIcon(
-                  onPressed: _testState == _NetTestState.loading ? null : _test,
-                  icon: const Icon(Icons.manage_search_rounded, size: 18),
-                  label: Text(getString.test),
-                ),
-                const SizedBox(width: 10),
-                _TestChip(state: _testState, message: _testMsg),
-              ],
-            ),
+        ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(16, 0, 16, 4),
+          child: Wrap(
+            crossAxisAlignment: WrapCrossAlignment.center,
+            spacing: 10,
+            runSpacing: 8,
+            children: [
+              FilledButton.tonalIcon(
+                onPressed: _testState == _NetTestState.loading ? null : _test,
+                icon: const Icon(Icons.manage_search_rounded, size: 18),
+                label: Text(getString.test),
+              ),
+              _TestChip(state: _testState, message: _testMsg),
+            ],
           ),
-          _sheetActions(
-            context,
-            onSave: _save,
-            onNeutral: () {
-              _ctrl.clear();
-              setState(() => _testState = _NetTestState.idle);
-            },
-          ),
-        ],
-      ),
+        ),
+        const SizedBox(height: 8),
+      ],
     );
   }
 }
@@ -521,37 +466,38 @@ class _UaSheetState extends State<_UaSheet> {
   @override
   Widget build(BuildContext context) {
     final scheme = context.colorScheme;
-    return ThemedContainer(
-      color: scheme.surface,
-      border: Border.all(
-        width: 0,
-        color: scheme.onSurface.withValues(alpha: 0.1),
-      ),
-      borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
-      padding: const EdgeInsets.only(bottom: 24, top: 12),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          _sheetHandle(context),
-          _sheetTitle(context, getString.userAgent),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: TextField(
-              controller: _ctrl,
-              autofocus: true,
-              maxLines: 3,
-              minLines: 1,
-              decoration: InputDecoration(
-                hintText: widget.network.userAgent,
-                prefixIcon: const Icon(Icons.badge_outlined),
-                alignLabelWithHint: true,
+    return CustomBottomDialog(
+      title: getString.userAgent,
+      negativeText: getString.cancel,
+      negativeCallback: () => popPage(context),
+      positiveText: getString.save,
+      positiveCallback: _save,
+      viewList: [
+        Padding(
+          padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+          child: TextField(
+            controller: _ctrl,
+            autofocus: true,
+            maxLines: 3,
+            minLines: 1,
+            decoration: InputDecoration(
+              hintText: widget.network.userAgent,
+              prefixIcon: const Icon(Icons.badge_outlined),
+              suffixIcon: IconButton(
+                icon: const Icon(Icons.clear_rounded),
+                onPressed: _ctrl.clear,
+              ),
+              alignLabelWithHint: true,
+              filled: true,
+              fillColor: scheme.surfaceContainerHigh,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16),
+                borderSide: BorderSide.none,
               ),
             ),
           ),
-          _sheetActions(context, onSave: _save, onNeutral: () => _ctrl.clear()),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
