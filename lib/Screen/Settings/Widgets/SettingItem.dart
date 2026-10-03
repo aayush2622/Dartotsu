@@ -296,7 +296,7 @@ class SettingCustomItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return DpadFocusable(
       tapToSelect: false,
-      excludeChildFocus: false,
+      onDirection: setting.onDirection,
       builder: dpadFocusHighlight,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),

@@ -36,6 +36,11 @@ class Setting {
   /// The full control, for [SettingType.custom].
   final WidgetBuilder? builder;
 
+  /// D-pad left/right while the row is focused, for [SettingType.custom]
+  /// rows whose control can't host its own focus (e.g. a segmented value
+  /// picker) - return true once handled to keep focus on the row.
+  final bool Function(TraversalDirection)? onDirection;
+
   final int? minValue;
   final int? maxValue;
   final int? initialValue;
@@ -58,6 +63,7 @@ class Setting {
     this.onSwitchChange,
     this.attach,
     this.builder,
+    this.onDirection,
     this.minValue,
     this.maxValue,
     this.initialValue,
@@ -80,6 +86,7 @@ class Setting {
       onSwitchChange = null,
       attach = null,
       builder = null,
+      onDirection = null,
       minValue = null,
       maxValue = null,
       initialValue = null,

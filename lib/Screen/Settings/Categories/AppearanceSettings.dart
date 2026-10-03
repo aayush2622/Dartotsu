@@ -13,6 +13,7 @@ import '../../../Utils/Functions/NavigateToScreen.dart';
 import '../../../Widgets/Components/AppControls.dart';
 import '../CardStyleScreen.dart';
 import '../Widgets/FontPickerSheet.dart';
+import '../Widgets/SegmentedSetting.dart';
 import '../Widgets/ThemeDropdown.dart';
 
 List<Setting> appearanceSettings(BuildContext context) {
@@ -49,40 +50,17 @@ List<Setting> appearanceSettings(BuildContext context) {
         onSwitchChange: t.setUseJsonTheme,
       ),
     Setting.header(getString.sectionDisplay),
-    Setting(
-      type: SettingType.custom,
+    segmentedSetting<ThemeModePref>(
       name: getString.themeMode,
-      builder: (context) => Row(
-        children: [
-          Icon(
-            Icons.brightness_6_rounded,
-            size: 22,
-            color: context.colorScheme.primary,
-          ),
-          const SizedBox(width: 20),
-          Expanded(
-            child: Text(
-              getString.mode,
-              style: context.textTheme.bodyLarge?.copyWith(
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
-          AppSegmented<ThemeModePref>(
-            expand: false,
-            value: t.mode.value,
-            onChanged: t.setThemeMode,
-            segments: const [
-              AppSegment(
-                ThemeModePref.system,
-                icon: Icons.brightness_auto_rounded,
-              ),
-              AppSegment(ThemeModePref.light, icon: Icons.light_mode_rounded),
-              AppSegment(ThemeModePref.dark, icon: Icons.dark_mode_rounded),
-            ],
-          ),
-        ],
-      ),
+      icon: Icons.brightness_6_rounded,
+      label: getString.mode,
+      value: t.mode.value,
+      onChanged: t.setThemeMode,
+      segments: const [
+        AppSegment(ThemeModePref.system, icon: Icons.brightness_auto_rounded),
+        AppSegment(ThemeModePref.light, icon: Icons.light_mode_rounded),
+        AppSegment(ThemeModePref.dark, icon: Icons.dark_mode_rounded),
+      ],
     ),
     Setting(
       type: SettingType.switchType,

@@ -15,9 +15,7 @@ Widget dpadFocusHighlight(
 ) {
   final focused = kDpadFocused(state);
   final scheme = context.colorScheme;
-  return AnimatedContainer(
-    duration: Durations.short3,
-    curve: Curves.easeOutCubic,
+  return Container(
     decoration: BoxDecoration(
       color: focused ? scheme.secondaryContainer : Colors.transparent,
       borderRadius: BorderRadius.circular(14),
