@@ -226,6 +226,7 @@ class _SearchScreenState extends BaseScreen<SearchScreen> {
     return PosterCard(
       heroTag: tag,
       imageUrl: m.cover,
+      sourceIconUrl: m.sourceData?.iconUrl,
       title: m.mainName,
       subtitle: [
         if (m.format != null) m.format!.titleCase,

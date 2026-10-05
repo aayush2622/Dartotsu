@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide ContextExtensionss;
@@ -346,16 +344,6 @@ class _ExtensionListState extends State<ExtensionList> {
       return const ColoredBox(
         color: Colors.transparent,
         child: Icon(Icons.extension_rounded),
-      );
-    }
-
-    final file = File(iconUrl);
-
-    if (file.isAbsolute) {
-      return Image.file(
-        file,
-        fit: BoxFit.cover,
-        errorBuilder: (_, _, _) => const Icon(Icons.extension_rounded),
       );
     }
 

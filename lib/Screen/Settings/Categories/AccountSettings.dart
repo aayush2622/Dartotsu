@@ -14,16 +14,14 @@ List<Setting> accountSettings(BuildContext context) {
   final auth = service.auth;
   final user = auth?.user.value;
   return [
-    Setting(
-      type: SettingType.normal,
+    Setting.normal(
       name: getString.trackingService,
       description: service.name,
       icon: Icons.sync_alt_rounded,
       isActivity: true,
       onClick: () => serviceSwitcher(context),
     ),
-    Setting(
-      type: SettingType.normal,
+    Setting.normal(
       name: auth?.isLoggedIn == true ? getString.signOut : getString.signIn,
       description: user?.name ?? getString.notSignedIn,
       icon: auth?.isLoggedIn == true
@@ -44,9 +42,5 @@ List<Setting> accountSettings(BuildContext context) {
         }
       },
     ),
-    if (service.settingsView case final view?) ...[
-      Setting(type: SettingType.header, name: '${service.name} settings'),
-      ...view.build(context),
-    ],
   ];
 }

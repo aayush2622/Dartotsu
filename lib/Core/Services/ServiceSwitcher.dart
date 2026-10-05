@@ -1,14 +1,22 @@
 import 'package:flutter/material.dart';
 
-import '../../Core/ThemeManager/LanguageSwitcher.dart';
+import '../../Screen/Settings/ServiceSettingsScreen.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
+import '../../Utils/Functions/NavigateToScreen.dart';
 import '../../Widgets/Components/CustomBottomDialog.dart';
 import '../../Widgets/Components/LoadSvg.dart';
+import '../ThemeManager/LanguageSwitcher.dart';
 import 'MediaServiceController.dart';
 
 void serviceSwitcher(BuildContext context) {
   final mediaServices = find<MediaServiceController>();
+
+  void openServiceSettings(MediaService service) {
+    if (service.settingsView == null) return;
+    Navigator.pop(context);
+    navigateToPage(context, ServiceSettingsScreen(initial: service));
+  }
 
   final dialog = CustomBottomDialog(
     title: getString.selectMediaService,
@@ -25,6 +33,9 @@ void serviceSwitcher(BuildContext context) {
                   mediaServices.switchService(service.id);
                   Navigator.pop(context);
                 },
+                onSettings: service.settingsView == null
+                    ? null
+                    : () => openServiceSettings(service),
               ),
           ],
         ),
@@ -39,11 +50,13 @@ class _ServiceRow extends StatelessWidget {
   final MediaService service;
   final bool selected;
   final VoidCallback onTap;
+  final VoidCallback? onSettings;
 
   const _ServiceRow({
     required this.service,
     required this.selected,
     required this.onTap,
+    this.onSettings,
   });
 
   @override
@@ -84,9 +97,23 @@ class _ServiceRow extends StatelessWidget {
               color: scheme.onSurfaceVariant,
             ),
           ),
-          trailing: selected
-              ? Icon(Icons.check_circle_rounded, color: scheme.primary)
-              : null,
+          trailing: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (onSettings != null)
+                IconButton(
+                  icon: Icon(
+                    Icons.settings_rounded,
+                    color: scheme.onSurfaceVariant,
+                    size: 20,
+                  ),
+                  tooltip: getString.settings,
+                  onPressed: onSettings,
+                ),
+              if (selected)
+                Icon(Icons.check_circle_rounded, color: scheme.primary),
+            ],
+          ),
         ),
       ),
     );

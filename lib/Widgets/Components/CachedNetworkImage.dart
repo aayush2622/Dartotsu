@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,6 +24,17 @@ Widget cachedNetworkImage({
       );
     }
     return SizedBox(width: width, height: height);
+  }
+  if (File(imageUrl).isAbsolute) {
+    return Image.file(
+      File(imageUrl),
+      fit: fit,
+      width: width,
+      height: height,
+      errorBuilder: (context, _, _) =>
+          errorWidget?.call(context, imageUrl, null) ??
+          SizedBox(width: width, height: height),
+    );
   }
   if (PrefName.useDifferentCacheManager.value) {
     return PrecachedNetworkImage(
