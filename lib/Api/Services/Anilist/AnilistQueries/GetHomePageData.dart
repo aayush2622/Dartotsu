@@ -1,21 +1,9 @@
 part of '../AnilistQueries.dart';
 
 extension on AnilistQueries {
-  Future<Map<String, List<Media>>> _initHomePage() =>
-      foldSections(runSectionJobs(_homeJobs(), parallel: false));
-
-  List<SectionJob> _homeJobs({bool resolveUser = true}) {
+  List<SectionJob> _homeJobs() {
     final id = userId();
-    if (id == null) {
-      if (resolveUser) return [_resolveUserThenHome];
-      return [
-        () => _parseSections(_guestHomeQuery(), const [
-          'Trending Anime',
-          'Trending Manga',
-          'Popular Anime',
-        ]),
-      ];
-    }
+    if (id == null) return const [];
 
     final layout = AnilistPref.homeLayout.value;
     final wantHidden = layout['Hidden Media'] == true;
@@ -47,13 +35,6 @@ extension on AnilistQueries {
     return [
       for (final section in sections) job([section]),
     ];
-  }
-
-  Future<Map<String, List<Media>>> _resolveUserThenHome() async {
-    await refreshUser();
-    return foldSections(
-      runSectionJobs(_homeJobs(resolveUser: false), parallel: false),
-    );
   }
 
   Future<Map<String, List<Media>>> _parseSections(
@@ -121,13 +102,13 @@ Map<String, List<Media>> _parseHome(Map<String, dynamic> args) {
         data,
         'currentAnime',
         'repeatingAnime',
-        (args['continueAnime'] as List).cast<String>(),
+        (args['continueAnime'] as Map).cast<String, int>(),
       ),
       'Continue Reading' => _continueMedia(
         data,
         'currentManga',
         'repeatingManga',
-        (args['continueManga'] as List).cast<String>(),
+        (args['continueManga'] as Map).cast<String, int>(),
       ),
       'Planned Anime' => _collectionMedia(
         data['plannedAnime'] as Map<String, dynamic>?,
@@ -138,15 +119,6 @@ Map<String, List<Media>> _parseHome(Map<String, dynamic> args) {
       'Favourite Anime' => _favouriteMedia(data['favoriteAnime'], anime: true),
       'Favourite Manga' => _favouriteMedia(data['favoriteManga'], anime: false),
       'Recommended' => _recommended(data),
-      'Trending Anime' => _pageMedia(
-        data['trendingAnime'] as Map<String, dynamic>?,
-      ),
-      'Trending Manga' => _pageMedia(
-        data['trendingManga'] as Map<String, dynamic>?,
-      ),
-      'Popular Anime' => _pageMedia(
-        data['popularAnime'] as Map<String, dynamic>?,
-      ),
       _ => const <Media>[],
     };
     out[section] = keep(media);
@@ -160,7 +132,7 @@ List<Media> _continueMedia(
   Map<String, dynamic> data,
   String current,
   String repeating,
-  List<String> order,
+  Map<String, int> touched,
 ) {
   final byId = <String, Media>{};
   for (final media in [
@@ -170,14 +142,14 @@ List<Media> _continueMedia(
     media.cameFromContinue = true;
     byId[media.id] = media;
   }
-  if (order.isEmpty) return byId.values.toList();
 
-  final out = <Media>[];
-  for (final id in order.reversed) {
-    final media = byId.remove(id);
-    if (media != null) out.add(media);
+  int latest(Media media) {
+    final local = touched[media.id] ?? 0;
+    final live = media.userUpdatedAt ?? 0;
+    return local > live ? local : live;
   }
-  return out..addAll(byId.values);
+
+  return byId.values.toList()..sort((a, b) => latest(b).compareTo(latest(a)));
 }
 
 List<Media> _favouriteMedia(Object? user, {required bool anime}) {
@@ -246,17 +218,3 @@ Page(page: 1, perPage: 30) {
       mediaRecommendation { $anilistMediaFragment }
     }
   }''';
-
-String _guestHomeQuery() =>
-    '''
-{
-  trendingAnime: Page(page: 1, perPage: 25) {
-    media(type: ANIME, sort: TRENDING_DESC, isAdult: false) { $anilistMediaFragment }
-  }
-  trendingManga: Page(page: 1, perPage: 25) {
-    media(type: MANGA, sort: TRENDING_DESC, isAdult: false) { $anilistMediaFragment }
-  }
-  popularAnime: Page(page: 1, perPage: 25) {
-    media(type: ANIME, sort: POPULARITY_DESC, isAdult: false) { $anilistMediaFragment }
-  }
-}''';

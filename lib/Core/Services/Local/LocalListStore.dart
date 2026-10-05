@@ -13,11 +13,7 @@ class LocalListStore {
 
   static final Map<String, List<Media>> _decoded = {};
 
-  static void clearCache() => _decoded.clear();
-
   String get _key => 'localList/$serviceId';
-
-  ContinueOrder get order => ContinueOrder(serviceId);
 
   List<Media> read() => _decoded[_key] ??= _load();
 
@@ -63,13 +59,13 @@ class LocalListStore {
   }
 
   void upsert(Media media) {
-    media.userUpdatedAt = DateTime.now().millisecondsSinceEpoch ~/ 1000;
+    media.userUpdatedAt = DateTime.now().millisecondsSinceEpoch;
     final items = read().toList()..removeWhere((m) => m.id == media.id);
     _write([media, ...items]);
   }
 
   void touch(Media media) {
-    order.touch(media.id, anime: media.isAnime);
+    ContinueOrder(serviceId).touch(media.id, anime: media.isAnime);
     upsert(media);
   }
 
@@ -115,15 +111,19 @@ class ContinueOrder {
   String _key(bool anime) =>
       'continueOrder/$serviceId/${anime ? 'anime' : 'manga'}';
 
-  List<String> read({required bool anime}) =>
-      loadCustomData<List<String>>(_key(anime)) ?? const [];
+  Map<String, int> read({required bool anime}) {
+    final raw = loadCustomData<Map<String, dynamic>>(_key(anime));
+    if (raw == null) return {};
+    return {for (final e in raw.entries) e.key: e.value as int};
+  }
 
   void touch(String id, {required bool anime}) {
-    final list = read(anime: anime).toList()..remove(id);
-    list.add(id);
-    saveCustomData<List<String>>(
-      _key(anime),
-      list.length > _cap ? list.sublist(list.length - _cap) : list,
-    );
+    final entries = read(anime: anime)
+      ..[id] = DateTime.now().millisecondsSinceEpoch;
+    final newest = entries.entries.toList()
+      ..sort((a, b) => b.value.compareTo(a.value));
+    saveCustomData<Map<String, dynamic>>(_key(anime), {
+      for (final e in newest.take(_cap)) e.key: e.value,
+    });
   }
 }
