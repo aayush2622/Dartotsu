@@ -16,9 +16,13 @@ class FloatingBottomNavBar extends StatefulWidget {
   final int selectedIndex;
   final ValueChanged<int> onTabSelected;
   final List<NavItem> items;
+  final bool standalone;
+  final GlobalKey<DpadRegionState>? laneKey;
 
   const FloatingBottomNavBar({
     super.key,
+    this.standalone = false,
+    this.laneKey,
     required this.selectedIndex,
     required this.onTabSelected,
     required this.items,
@@ -35,7 +39,7 @@ class _FloatingBottomNavBarState extends State<FloatingBottomNavBar> {
 
   List<NavItem> get _items {
     final service = _services.currentService.value;
-    if (service is NavBarProvider) {
+    if (!widget.standalone && service is NavBarProvider) {
       return (service as NavBarProvider).navBarItems;
     }
     return widget.items;
@@ -67,20 +71,21 @@ class _FloatingBottomNavBarState extends State<FloatingBottomNavBar> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              _navButton(
-                context: context,
-                onTap: () => serviceSwitcher(context),
-                iconBuilder: () => CircleAvatar(
-                  radius: 24,
-                  backgroundColor: Colors.transparent,
-                  child: loadSvg(
-                    service.iconPath,
-                    width: 26,
-                    height: 26,
-                    color: theme.onSurface,
-                  ),
-                ).animateNavAvatar(),
-              ),
+              if (!widget.standalone)
+                _navButton(
+                  context: context,
+                  onTap: () => serviceSwitcher(context),
+                  iconBuilder: () => CircleAvatar(
+                    radius: 24,
+                    backgroundColor: Colors.transparent,
+                    child: loadSvg(
+                      service.iconPath,
+                      width: 26,
+                      height: 26,
+                      color: theme.onSurface,
+                    ),
+                  ).animateNavAvatar(),
+                ),
 
               ..._items.map(
                 (item) => Padding(
@@ -110,15 +115,16 @@ class _FloatingBottomNavBarState extends State<FloatingBottomNavBar> {
                 ),
               ),
 
-              _navButton(
-                context: context,
-                onTap: () => navigateToPage(context, const ExtensionScreen()),
-                iconBuilder: () => Icon(
-                  Icons.settings_rounded,
-                  size: 24,
-                  color: theme.onSurface.withValues(alpha: .72),
+              if (!widget.standalone)
+                _navButton(
+                  context: context,
+                  onTap: () => navigateToPage(context, const ExtensionScreen()),
+                  iconBuilder: () => Icon(
+                    Icons.settings_rounded,
+                    size: 24,
+                    color: theme.onSurface.withValues(alpha: .72),
+                  ),
                 ),
-              ),
             ],
           ),
         ).animateDropIn(),
@@ -153,34 +159,36 @@ class _FloatingBottomNavBarState extends State<FloatingBottomNavBar> {
                 ),
               ),
 
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: _items.map((item) {
-                  return Expanded(
-                    child: Obx(() {
-                      final selected = widget.selectedIndex == item.index;
-                      final hovered = hoveredIndex.value == item.index;
+              _lane(
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: _items.map((item) {
+                    return Expanded(
+                      child: Obx(() {
+                        final selected = widget.selectedIndex == item.index;
+                        final hovered = hoveredIndex.value == item.index;
 
-                      return MouseRegion(
-                        cursor: SystemMouseCursors.click,
-                        onEnter: (_) => !(widget.selectedIndex == item.index)
-                            ? hoveredIndex.value = item.index
-                            : null,
-                        onExit: (_) {
-                          if (hoveredIndex.value == item.index) {
-                            hoveredIndex.value = -1;
-                          }
-                        },
-                        child: _buildItem(
-                          item,
-                          context,
-                          selected: selected,
-                          hovered: hovered,
-                        ),
-                      );
-                    }),
-                  );
-                }).toList(),
+                        return MouseRegion(
+                          cursor: SystemMouseCursors.click,
+                          onEnter: (_) => !(widget.selectedIndex == item.index)
+                              ? hoveredIndex.value = item.index
+                              : null,
+                          onExit: (_) {
+                            if (hoveredIndex.value == item.index) {
+                              hoveredIndex.value = -1;
+                            }
+                          },
+                          child: _buildItem(
+                            item,
+                            context,
+                            selected: selected,
+                            hovered: hovered,
+                          ),
+                        );
+                      }),
+                    );
+                  }).toList(),
+                ),
               ),
             ],
           ),
@@ -188,6 +196,15 @@ class _FloatingBottomNavBarState extends State<FloatingBottomNavBar> {
       ),
     );
   }
+
+  Widget _lane(Widget child) => widget.laneKey == null
+      ? child
+      : DpadLane(
+          laneKey: widget.laneKey,
+          verticalEdge: DpadEdgeBehavior.leave,
+          horizontalEdge: DpadEdgeBehavior.stop,
+          child: child,
+        );
 
   Widget _navButton({
     required BuildContext context,

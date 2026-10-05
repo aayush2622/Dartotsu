@@ -110,11 +110,11 @@ class _CardShelfState extends State<CardShelf> {
     );
   }
 
+  double get _inset =>
+      ShelfFlat.of(context) ? Dimens.pagePad : Dimens.cardPad + 8;
+
   EdgeInsetsDirectional _horizontalPadding(int index, int length) =>
-      EdgeInsetsDirectional.only(
-        start: index == 0 ? Dimens.cardPad + 8 : _gap,
-        end: _gap,
-      );
+      EdgeInsetsDirectional.only(start: index == 0 ? _inset : _gap, end: _gap);
 
   Widget _stretchBubble(double progress) {
     return AnimatedContainer(
@@ -148,7 +148,7 @@ class _CardShelfState extends State<CardShelf> {
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
           physics: const NeverScrollableScrollPhysics(),
-          padding: EdgeInsets.only(left: Dimens.cardPad + 8),
+          padding: EdgeInsets.only(left: _inset),
           itemCount: 8,
           itemBuilder: (context, index) => Padding(
             padding: EdgeInsets.only(right: _gap),
@@ -204,8 +204,7 @@ class _CardShelfState extends State<CardShelf> {
     );
   }
 
-  EdgeInsets get _rowPadding =>
-      EdgeInsets.fromLTRB(Dimens.cardPad + 8, 0, Dimens.cardPad + 8, _gap);
+  EdgeInsets get _rowPadding => EdgeInsets.fromLTRB(_inset, 0, _inset, _gap);
 
   Widget _buildVerticalRows() {
     if (_loading) {
@@ -270,11 +269,7 @@ class _CardShelfState extends State<CardShelf> {
       return Align(
         alignment: Alignment.topCenter,
         child: Padding(
-          padding: EdgeInsets.only(
-            left: 6.5,
-            right: Dimens.cardPad + 8,
-            top: Dimens.gapSm,
-          ),
+          padding: EdgeInsets.only(left: 6.5, right: _inset, top: Dimens.gapSm),
           child: SizedBox(
             width: _cardW,
             height: _cardH,
@@ -328,6 +323,7 @@ class _CardShelfState extends State<CardShelf> {
       airing: item.airing,
       onTap: item.onTap,
       onLongPress: item.onLongPress,
+      focusable: item.focusable,
     );
     final card = item.cardBuilder?.call(defaultCard) ?? defaultCard;
     return _style.isGrid

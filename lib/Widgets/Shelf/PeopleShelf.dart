@@ -32,6 +32,7 @@ class PeopleShelf extends StatelessWidget {
     title: p.name,
     subtitle: p.role,
     onTap: onTap == null ? null : () => onTap!(p),
+    focusable: true,
   );
 
   @override

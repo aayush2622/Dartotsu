@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 
 import '../../Core/Services/Model/Media.dart';
 import '../../Core/Services/Screens/ScreenWidget.dart';
+import '../../Core/Services/Model/Author.dart';
+import '../../Core/Services/Model/Character.dart';
+import '../../Utils/Extensions/StringExtensions.dart';
 import '../../Widgets/Shelf/MediaSection.dart';
 import '../../Widgets/Shelf/PeopleShelf.dart';
-import 'Components/DataCard.dart';
+import 'Components/DataSection.dart';
 
 class ScreenWidgetView extends StatelessWidget {
   final ScreenWidget item;
@@ -24,7 +27,7 @@ class ScreenWidgetView extends StatelessWidget {
     ScreenWidgetType.character => PeopleShelf(
       title: item.title ?? 'Characters',
       people: [
-        for (final c in item.characters ?? const [])
+        for (final Character c in item.characters ?? const <Character>[])
           ShelfPerson(
             image: c.image,
             name: c.name ?? '',
@@ -40,7 +43,7 @@ class ScreenWidgetView extends StatelessWidget {
     ScreenWidgetType.staff => PeopleShelf(
       title: item.title ?? 'Staff',
       people: [
-        for (final s in item.staff ?? const [])
+        for (final Author s in item.staff ?? const <Author>[])
           ShelfPerson(
             image: s.image,
             name: s.name ?? '',
@@ -48,7 +51,7 @@ class ScreenWidgetView extends StatelessWidget {
           ),
       ],
     ),
-    ScreenWidgetType.data => DataCard(title: item.title, data: item.data!),
+    ScreenWidgetType.data => DataSection(title: item.title, data: item.data!),
     ScreenWidgetType.extra => item.widget!,
   };
 

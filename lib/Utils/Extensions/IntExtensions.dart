@@ -25,4 +25,12 @@ extension IntExtension on int {
     var context = Get.context;
     return MediaQuery.of(context!).size.height;
   }
+
+  String get durationLabel {
+    final h = this ~/ 60;
+    final m = this % 60;
+    if (h > 0 && m > 0) return '${h}h ${m}m';
+    if (h > 0) return '${h}h';
+    return '${m}m';
+  }
 }

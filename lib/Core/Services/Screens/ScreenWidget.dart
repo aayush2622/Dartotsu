@@ -12,8 +12,12 @@ class ScreenData {
   final List<String> chips;
   final int chipLimit;
   final List<(String, String)> rows;
+  final void Function(String chip)? onChipTap;
+  final int? columns;
 
   const ScreenData({
+    this.onChipTap,
+    this.columns,
     this.text,
     this.chips = const [],
     this.chipLimit = 12,

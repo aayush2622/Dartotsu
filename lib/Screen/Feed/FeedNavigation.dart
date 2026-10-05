@@ -22,6 +22,7 @@ void openDetail(
       mutations: service.getMutations,
       heroTag: heroTag,
     ),
+    hero: true,
   );
 }
 

@@ -243,6 +243,7 @@ class _SearchScreenState extends BaseScreen<SearchScreen> {
             mutations: service.getMutations,
             heroTag: tag,
           ),
+          hero: true,
         );
       },
     );

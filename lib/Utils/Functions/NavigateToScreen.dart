@@ -8,6 +8,7 @@ Future<T?> navigateToPage<T>(
   BuildContext context,
   Widget page, {
   bool header = true,
+  bool hero = false,
 }) {
   return Navigator.of(context).push(
     PageRouteBuilder(
@@ -15,6 +16,15 @@ Future<T?> navigateToPage<T>(
       reverseTransitionDuration: 300.ms,
       pageBuilder: (_, _, _) => page,
       transitionsBuilder: (_, animation, _, child) {
+        if (hero) {
+          return FadeTransition(
+            opacity: CurvedAnimation(
+              parent: animation,
+              curve: const Interval(0, 0.5, curve: Curves.easeOut),
+            ),
+            child: child,
+          );
+        }
         return child.animatePageTransition(animation.value);
       },
     ),

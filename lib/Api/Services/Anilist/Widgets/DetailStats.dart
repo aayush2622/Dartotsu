@@ -4,12 +4,8 @@ import 'package:get/get.dart' hide ContextExtensionss;
 import '../../../../Core/Services/Model/Media.dart';
 import '../../../../Core/Services/Screens/DetailHost.dart';
 import '../../../../Utils/Extensions/ContextExtensions.dart';
+import '../../../../Utils/Extensions/IntExtensions.dart';
 import '../../../../Utils/Extensions/Responsive.dart';
-import '../../../../Widgets/Components/SectionCard.dart';
-import 'StatTile.dart';
-
-EdgeInsets get _margin =>
-    EdgeInsets.symmetric(horizontal: Dimens.gap, vertical: Dimens.gapSm / 2);
 
 class AnilistDetailStats extends StatelessWidget {
   final DetailHost host;
@@ -22,21 +18,19 @@ class AnilistDetailStats extends StatelessWidget {
     return '$n';
   }
 
-  static String _duration(Duration d) {
+  static String _countdown(Duration d) {
     if (d.inDays > 0) return '${d.inDays}d ${d.inHours % 24}h';
     if (d.inHours > 0) return '${d.inHours}h ${d.inMinutes % 60}m';
     return '${d.inMinutes}m';
   }
 
-  static List<(IconData, String, String)> _items(Media m) => [
+  static List<(String, String)> _items(Media m) => [
     if ((m.meanScore ?? 0) > 0)
-      (Icons.star_rounded, 'Score', (m.meanScore! / 10).toStringAsFixed(1)),
-    if ((m.popularity ?? 0) > 0)
-      (Icons.people_alt_rounded, 'Popularity', _compact(m.popularity!)),
-    if ((m.favourites ?? 0) > 0)
-      (Icons.favorite_rounded, 'Favourites', _compact(m.favourites!)),
+      ('Score', (m.meanScore! / 10).toStringAsFixed(1)),
+    if ((m.popularity ?? 0) > 0) ('Popularity', _compact(m.popularity!)),
+    if ((m.favourites ?? 0) > 0) ('Favorites', _compact(m.favourites!)),
     if (m.anime?.episodeDuration != null)
-      (Icons.schedule_rounded, 'Duration', '${m.anime!.episodeDuration}m'),
+      ('Duration', m.anime!.episodeDuration!.durationLabel),
   ];
 
   static Duration? _airingIn(Media m) {
@@ -53,55 +47,86 @@ class AnilistDetailStats extends StatelessWidget {
     final m = host.media.value;
     final items = _items(m);
     final airing = _airingIn(m);
-    return Column(
-      children: [
-        if (items.isNotEmpty) _strip(context, items),
-        if (airing != null) _airing(context, m, airing),
-      ],
+    if (items.isEmpty && airing == null) return const SizedBox.shrink();
+    final scheme = context.colorScheme;
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: Dimens.pagePad),
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          color: scheme.surfaceContainerLow,
+          borderRadius: Dimens.borderSm,
+        ),
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: Dimens.gap,
+            vertical: Dimens.gapLg - 2,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (items.isNotEmpty)
+                Row(
+                  children: [
+                    for (final (label, value) in items)
+                      Expanded(child: _stat(context, label, value)),
+                  ],
+                ),
+              if (airing != null) ...[
+                if (items.isNotEmpty) SizedBox(height: Dimens.gapLg - 2),
+                _airing(context, m, airing),
+              ],
+            ],
+          ),
+        ),
+      ),
     );
   });
 
-  Widget _strip(BuildContext context, List<(IconData, String, String)> items) {
-    return SectionCard(
-      margin: _margin,
-      child: Row(
-        children: [
-          for (final (i, stat) in items.indexed) ...[
-            Expanded(
-              child: StatTile(icon: stat.$1, label: stat.$2, value: stat.$3),
-            ),
-            if (i != items.length - 1)
-              Container(
-                width: 1,
-                height: 34,
-                color: context.colorScheme.outlineVariant.withValues(
-                  alpha: 0.5,
-                ),
-              ),
-          ],
-        ],
-      ),
+  Widget _stat(BuildContext context, String label, String value) {
+    final scheme = context.colorScheme;
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+          value,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: context.textTheme.titleLarge?.copyWith(
+            fontWeight: FontWeight.w700,
+            color: scheme.onSurface,
+          ),
+        ),
+        const SizedBox(height: 2),
+        Text(
+          label,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: context.textTheme.labelMedium?.copyWith(
+            color: scheme.onSurfaceVariant,
+          ),
+        ),
+      ],
     );
   }
 
   Widget _airing(BuildContext context, Media m, Duration until) {
     final ep = m.anime?.nextAiringEpisode;
-    return SectionCard(
-      margin: _margin,
-      child: Row(
-        children: [
-          Icon(Icons.podcasts_rounded, color: context.colorScheme.primary),
-          SizedBox(width: Dimens.gap),
-          Expanded(
-            child: Text(
-              ep != null
-                  ? 'Episode $ep airs in ${_duration(until)}'
-                  : 'Next episode in ${_duration(until)}',
-              style: context.textTheme.bodyMedium,
+    final scheme = context.colorScheme;
+    return Row(
+      children: [
+        Icon(Icons.sensors_rounded, size: 18, color: scheme.primary),
+        SizedBox(width: Dimens.gapSm),
+        Expanded(
+          child: Text(
+            ep != null
+                ? 'Episode $ep airs in ${_countdown(until)}'
+                : 'Next episode in ${_countdown(until)}',
+            style: context.textTheme.bodyMedium?.copyWith(
+              color: scheme.onSurface,
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

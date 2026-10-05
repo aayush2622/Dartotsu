@@ -32,6 +32,7 @@ class DpadLane extends StatelessWidget {
   final String? memoryKey;
   final GlobalKey<DpadRegionState>? laneKey;
   final DpadEdgeBehavior verticalEdge;
+  final DpadEdgeBehavior horizontalEdge;
   final ValueChanged<TraversalDirection>? onEdge;
 
   const DpadLane({
@@ -40,6 +41,7 @@ class DpadLane extends StatelessWidget {
     this.memoryKey,
     this.laneKey,
     this.verticalEdge = DpadEdgeBehavior.leave,
+    this.horizontalEdge = DpadEdgeBehavior.stop,
     this.onEdge,
   });
 
@@ -56,7 +58,7 @@ class DpadLane extends StatelessWidget {
   Widget build(BuildContext context) {
     return DpadRegion(
       key: laneKey,
-      horizontalEdge: DpadEdgeBehavior.stop,
+      horizontalEdge: horizontalEdge,
       verticalEdge: verticalEdge,
       memoryKey: memoryKey,
       onEdge: onEdge,

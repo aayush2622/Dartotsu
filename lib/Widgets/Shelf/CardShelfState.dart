@@ -18,6 +18,7 @@ class ShelfCardItem {
   final String? heroTag;
   final VoidCallback? onTap;
   final VoidCallback? onLongPress;
+  final bool focusable;
 
   final Widget Function(Widget defaultCard)? cardBuilder;
 
@@ -35,6 +36,7 @@ class ShelfCardItem {
     this.heroTag,
     this.onTap,
     this.onLongPress,
+    this.focusable = false,
     this.cardBuilder,
   });
 

@@ -193,6 +193,7 @@ class _NotificationsScreenState extends BaseScreen<NotificationsScreen> {
         view: service.detailView,
         mutations: service.getMutations,
       ),
+      hero: true,
     );
   }
 
