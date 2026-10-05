@@ -19,16 +19,7 @@ void showAccountSheet(BuildContext context, MediaServiceController controller) {
     CustomBottomDialog(
       title: service.name,
       viewList: [
-        Obx(() {
-          final user = auth?.user.value;
-          return ListTile(
-            leading: HeaderAvatar(url: user?.avatar, size: 40),
-            title: Text(user?.name ?? 'Guest'),
-            subtitle: user != null
-                ? Text('${user.episodesWatched} eps · ${user.chaptersRead} ch')
-                : null,
-          );
-        }),
+        _UserTile(auth: auth),
         ListTile(
           leading: loadSvg(service.iconPath, width: 22, height: 22),
           title: const Text('Switch service'),
@@ -48,6 +39,27 @@ void showAccountSheet(BuildContext context, MediaServiceController controller) {
         if (auth != null) _AuthTile(auth: auth),
       ],
     ),
+  );
+}
+
+class _UserTile extends StatelessWidget {
+  final ServiceAuth? auth;
+
+  const _UserTile({required this.auth});
+
+  @override
+  Widget build(BuildContext context) {
+    final auth = this.auth;
+    if (auth == null) return _tile(null);
+    return Obx(() => _tile(auth.user.value));
+  }
+
+  Widget _tile(ServiceUser? user) => ListTile(
+    leading: HeaderAvatar(url: user?.avatar, size: 40),
+    title: Text(user?.name ?? 'Guest'),
+    subtitle: user != null
+        ? Text('${user.episodesWatched} eps · ${user.chaptersRead} ch')
+        : null,
   );
 }
 
