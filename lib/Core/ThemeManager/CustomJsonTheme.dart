@@ -23,7 +23,10 @@ class CustomJsonTheme {
     return value == null ? null : Color(value);
   }
 
-  static ColorScheme _scheme(Map<String, dynamic>? json, Brightness brightness) {
+  static ColorScheme _scheme(
+    Map<String, dynamic>? json,
+    Brightness brightness,
+  ) {
     final fallback = brightness == Brightness.dark
         ? const ColorScheme.dark()
         : const ColorScheme.light();
@@ -36,16 +39,10 @@ class CustomJsonTheme {
       primary: c('primary', fallback.primary),
       onPrimary: c('onPrimary', fallback.onPrimary),
       primaryContainer: c('primaryContainer', fallback.primaryContainer),
-      onPrimaryContainer: c(
-        'onPrimaryContainer',
-        fallback.onPrimaryContainer,
-      ),
+      onPrimaryContainer: c('onPrimaryContainer', fallback.onPrimaryContainer),
       secondary: c('secondary', fallback.secondary),
       onSecondary: c('onSecondary', fallback.onSecondary),
-      secondaryContainer: c(
-        'secondaryContainer',
-        fallback.secondaryContainer,
-      ),
+      secondaryContainer: c('secondaryContainer', fallback.secondaryContainer),
       onSecondaryContainer: c(
         'onSecondaryContainer',
         fallback.onSecondaryContainer,

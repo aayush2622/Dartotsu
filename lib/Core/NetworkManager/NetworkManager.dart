@@ -11,7 +11,6 @@ import 'CookieManager.dart';
 import 'DnsManager.dart';
 import 'LogInterceptor.dart';
 
-
 const bool kVerifyTlsCertificates = false;
 
 class NetworkManager extends GetxController {

@@ -313,7 +313,9 @@ class AlertDialogBuilder {
     (item) => RadioListTile<int>(
       title: Text(
         item,
-        style: context.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
+        style: context.textTheme.bodyLarge?.copyWith(
+          fontWeight: FontWeight.bold,
+        ),
       ),
       value: _items!.indexOf(item),
       groupValue: _selectedItemIndex,
@@ -331,7 +333,9 @@ class AlertDialogBuilder {
         return CheckboxListTile(
           title: Text(
             item,
-            style: context.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
+            style: context.textTheme.bodyLarge?.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
           ),
           value: _checkedItems![index],
           onChanged: (bool? value) {

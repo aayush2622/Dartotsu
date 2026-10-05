@@ -239,7 +239,11 @@ class _FloatingBottomNavBarState extends State<FloatingBottomNavBar> {
               AnimatedContainer(
                 duration: Durations.short4,
                 curve: Curves.easeOutCubic,
-                width: selected ? 56 : hovered ? 48 : 0,
+                width: selected
+                    ? 56
+                    : hovered
+                    ? 48
+                    : 0,
                 height: 32,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(999),

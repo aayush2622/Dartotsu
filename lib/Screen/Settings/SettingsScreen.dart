@@ -84,7 +84,8 @@ class _CategoryRow extends StatelessWidget {
     final scheme = context.colorScheme;
     final c = category;
 
-    void onTap() => navigateToPage(context, SettingsCategoryScreen(category: c));
+    void onTap() =>
+        navigateToPage(context, SettingsCategoryScreen(category: c));
 
     return DpadFocusable(
       onSelect: onTap,

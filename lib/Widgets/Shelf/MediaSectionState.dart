@@ -67,6 +67,9 @@ class MediaSectionState {
 
   List<Media> _dedupe(List<Media> media) {
     final seen = <String>{};
-    return [for (final m in media) if (seen.add(m.id)) m];
+    return [
+      for (final m in media)
+        if (seen.add(m.id)) m,
+    ];
   }
 }

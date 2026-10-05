@@ -67,7 +67,9 @@ class _LanguageSheetState extends State<LanguageSheet> {
             title: Text(name),
             onTap: () {
               HapticFeedback.selectionClick();
-              locale.setLocale(Locale(completeLanguageCode(name).toLowerCase()));
+              locale.setLocale(
+                Locale(completeLanguageCode(name).toLowerCase()),
+              );
               popPage(context);
             },
           ),

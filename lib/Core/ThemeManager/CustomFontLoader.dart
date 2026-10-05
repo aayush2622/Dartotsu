@@ -95,7 +95,6 @@ class CustomFontLoader {
   static List<String> googleFontFamilies() =>
       GoogleFonts.asMap().keys.toList()..sort();
 
-
   static Future<String?> downloadGoogleFont(String family) async {
     if (!GoogleFonts.asMap().containsKey(family)) return null;
     try {
