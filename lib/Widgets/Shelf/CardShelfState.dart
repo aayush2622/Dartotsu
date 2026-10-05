@@ -9,7 +9,7 @@ class ShelfCardItem {
   final String? imageUrl;
   final String title;
   final String? subtitle;
-  final String? sourceIconUrl;
+  final Widget? overlay;
   final double? score;
   final bool scoreHighlight;
   final bool airing;
@@ -26,7 +26,7 @@ class ShelfCardItem {
     required this.title,
     this.imageUrl,
     this.subtitle,
-    this.sourceIconUrl,
+    this.overlay,
     this.score,
     this.scoreHighlight = false,
     this.airing = false,

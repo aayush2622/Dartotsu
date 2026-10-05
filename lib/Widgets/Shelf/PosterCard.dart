@@ -21,7 +21,7 @@ class PosterCard extends StatefulWidget {
 
   final String? subtitle;
 
-  final String? sourceIconUrl;
+  final Widget? overlay;
 
   final double? score;
   final bool scoreHighlight;
@@ -47,7 +47,7 @@ class PosterCard extends StatefulWidget {
     required this.title,
     this.imageUrl,
     this.subtitle,
-    this.sourceIconUrl,
+    this.overlay,
     this.score,
     this.scoreHighlight = false,
     this.airing = false,
@@ -320,15 +320,9 @@ class _PosterCardState extends State<PosterCard> {
   }
 
   List<Widget> _sourceMark({required double bottom}) {
-    final url = widget.sourceIconUrl;
-    if (url == null || url.isEmpty) return const [];
-    return [
-      Positioned(
-        left: 6,
-        bottom: bottom,
-        child: _SourceBadge(url: url),
-      ),
-    ];
+    final overlay = widget.overlay;
+    if (overlay == null) return const [];
+    return [Positioned(left: 6, bottom: bottom, child: overlay)];
   }
 
   List<Widget> _cornerMarks(CardStyle s, {bool bottomTaken = false}) {
@@ -668,35 +662,6 @@ class _ScoreBadge extends StatelessWidget {
           const SizedBox(width: 2),
           Icon(Icons.star_rounded, color: fg, size: 12),
         ],
-      ),
-    );
-  }
-}
-
-class _SourceBadge extends StatelessWidget {
-  final String url;
-
-  const _SourceBadge({required this.url});
-
-  @override
-  Widget build(BuildContext context) {
-    final scheme = context.colorScheme;
-    return Container(
-      width: 20,
-      height: 20,
-      decoration: BoxDecoration(
-        color: scheme.inverseSurface.withValues(alpha: 0.8),
-        borderRadius: BorderRadius.circular(6),
-      ),
-      clipBehavior: Clip.antiAlias,
-      child: cachedNetworkImage(
-        imageUrl: url,
-        fit: BoxFit.cover,
-        errorWidget: (_, _, _) => Icon(
-          Icons.extension_rounded,
-          size: 12,
-          color: scheme.onInverseSurface,
-        ),
       ),
     );
   }

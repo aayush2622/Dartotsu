@@ -127,7 +127,9 @@ class MediaSection extends StatelessWidget {
     return done / total;
   }
 
-  ShelfCardItem _toItem(BuildContext context, int index, Media media) {
+  Widget? overlay(Media media) => null;
+
+  ShelfCardItem toItem(BuildContext context, int index, Media media) {
     final detailed = !media.minimal;
     final heroTag = detailed
         ? 'cover:${data.heroPrefix}:${data.title}:$index:${media.id}'
@@ -137,7 +139,7 @@ class MediaSection extends StatelessWidget {
       id: media.id,
       heroTag: heroTag,
       imageUrl: media.cover,
-      sourceIconUrl: source?.iconUrl,
+      overlay: overlay(media),
       title: media.relation != null && source == null
           ? '${media.relation} · ${media.mainName}'
           : media.mainName,
@@ -161,7 +163,7 @@ class MediaSection extends StatelessWidget {
   List<ShelfCardItem>? _items(BuildContext context) {
     final media = data.mediaList;
     if (data.loading || media == null) return null;
-    return [for (final (index, m) in media.indexed) _toItem(context, index, m)];
+    return [for (final (index, m) in media.indexed) toItem(context, index, m)];
   }
 
   @override
@@ -182,7 +184,7 @@ class MediaSection extends StatelessWidget {
               if (more == null || !context.mounted) return null;
               return [
                 for (final (index, m) in more.indexed)
-                  _toItem(context, index, m),
+                  toItem(context, index, m),
               ];
             },
     );

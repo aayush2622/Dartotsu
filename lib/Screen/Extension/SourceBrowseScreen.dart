@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide ContextExtensionss;
 import 'package:skeletonizer/skeletonizer.dart';
 
+import '../../Api/Services/Extension/Widgets/ExtensionSourceBadge.dart';
 import '../../Api/Services/Extension/ExtensionServices.dart';
 import '../../Core/Services/MediaServiceController.dart';
 import '../../Core/Services/Model/Media.dart';
@@ -197,7 +198,7 @@ class _SourceBrowseScreenState extends BaseScreen<SourceBrowseScreen> {
     return PosterCard(
       imageUrl: media.cover,
       title: media.mainName,
-      sourceIconUrl: skeleton ? null : media.sourceData?.iconUrl,
+      overlay: skeleton ? null : extensionSourceBadge(media),
       progressText: media.userProgress == null ? null : '${media.userProgress}',
       onTap: skeleton ? null : () => openDetail(context, service, media),
     );

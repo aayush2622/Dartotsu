@@ -318,7 +318,7 @@ class _CardShelfState extends State<CardShelf> {
       style: widget.styleOverride,
       heroTag: item.heroTag,
       imageUrl: item.imageUrl,
-      sourceIconUrl: item.sourceIconUrl,
+      overlay: item.overlay,
       title: item.title,
       subtitle: item.subtitle,
       progress: item.progress,
