@@ -1,28 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../Core/Services/MediaService.dart';
-import '../../Widgets/Components/NotImplemented.dart';
 import '../Feed/FeedNavigation.dart';
-import '../Feed/MediaSectionsScreen.dart';
+import 'Components/LoginPrompt.dart';
 import 'HomeHeader.dart';
+import 'HomeScreenList.dart';
 
-/// The Home tab — the viewer's dashboard and the service's editorial rows.
-/// `HomeScreenView` supplies the data. No carousel — that lives on the browse
-/// tabs.
 class HomeFeed extends StatelessWidget {
   final MediaService service;
+
   const HomeFeed({super.key, required this.service});
 
   @override
   Widget build(BuildContext context) {
-    final view = service.homeView;
-    if (view == null) {
-      return NotImplemented(service: service.name, area: 'Home');
-    }
-    return MediaSectionsScreen(
-      header: const HomeHeader(),
-      loader: view.sections,
-      cacheId: '${service.id}/home',
+    if (service.auth == null) return _feed(context, signedIn: false);
+    return Obx(() => _feed(context, signedIn: service.isLoggedIn));
+  }
+
+  Widget _feed(BuildContext context, {required bool signedIn}) {
+    final view = signedIn
+        ? (service.homeView ?? service.localHomeView)
+        : service.localHomeView;
+    final id = '${service.id}/home/${signedIn ? 'api' : 'local'}';
+
+    return HomeScreenList(
+      key: ValueKey(id),
+      header: Column(
+        children: [
+          const HomeHeader(),
+          if (!signedIn && service.auth != null) LoginPrompt(service: service),
+        ],
+      ),
+      loader: view.screenStream,
+      cacheId: id,
       reloadOn: service.auth?.user.stream,
       onMediaTap: (m, tag) => openDetail(context, service, m, heroTag: tag),
     );

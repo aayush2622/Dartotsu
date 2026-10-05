@@ -27,18 +27,12 @@ class BrowseFeed extends StatelessWidget {
             ? null
             : () => openSearch(context, service, type: type),
       ),
-      loader: () async {
-        final results = await Future.wait([
-          view.userLists(type),
-          view.browse(type),
-        ]);
-        return {...results[0], ...results[1]};
-      },
+      loader: () => view.sectionsStream(type),
       cacheId: '${service.id}/${type.name}',
       reloadOn: service.auth?.user.stream,
       onMediaTap: (m, tag) => openDetail(context, service, m, heroTag: tag),
       onSectionLoadMore: (section, page) => view.loadMore(type, section, page),
-      spotlight: 'Trending Now',
+      spotlight: view.spotlight(type),
     );
   }
 }

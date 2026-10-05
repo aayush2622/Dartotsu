@@ -2,20 +2,17 @@ import '../../Logger.dart';
 import '../Preferences/PrefManager.dart';
 import 'Model/Media.dart';
 
-typedef SectionsLoader = Future<Map<String, List<Media>>> Function();
-
 /// Disk-backed last-known result for a `Map<String, List<Media>>` screen
 /// (home / anime / manga). Read is synchronous so a screen can paint cached
 /// content on the first frame, then revalidate over the network.
 class SectionCache {
   final String id;
-  final SectionsLoader loader;
 
   /// Only the first [_cap] media per section are persisted — enough to fill
   /// the visible rail; the fresh fetch restores the rest.
   static const _cap = 30;
 
-  const SectionCache(this.id, this.loader);
+  const SectionCache(this.id);
 
   String get _key => 'sections/$id';
 
@@ -47,12 +44,5 @@ class SectionCache {
     } catch (e) {
       logger('SectionCache($id) write failed: $e');
     }
-  }
-
-  /// Fetch fresh, persist on success.
-  Future<Map<String, List<Media>>> fetch() async {
-    final data = await loader();
-    write(data);
-    return data;
   }
 }
