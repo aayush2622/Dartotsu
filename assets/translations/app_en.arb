@@ -13,6 +13,9 @@
   "discord": "Discord",
   "@discord": {},
 
+  "loadMore": "Load more",
+  "@loadMore": {},
+
   "login": "Login",
   "@login": {},
   "continueAsGuest": "Continue as guest",
@@ -269,6 +272,18 @@
   "@donate": {},
   "donateDesc": "Support development",
   "@donateDesc": {},
+  "contributors": "Contributors",
+  "@contributors": {},
+  "contributorsDesc": "The people who built Dartotsu",
+  "@contributorsDesc": {},
+  "contributorsLoadFailed": "Couldn't load contributors",
+  "@contributorsLoadFailed": {},
+  "forks": "Forks",
+  "@forks": {},
+  "forksDesc": "Projects built on top of Dartotsu",
+  "@forksDesc": {},
+  "forksEmpty": "No forks found",
+  "@forksEmpty": {},
 
   "sectionColors": "Colors",
   "@sectionColors": {},

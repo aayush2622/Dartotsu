@@ -215,6 +215,12 @@ abstract class AppLocalizations {
   /// **'Discord'**
   String get discord;
 
+  /// No description provided for @loadMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Load more'**
+  String get loadMore;
+
   /// No description provided for @login.
   ///
   /// In en, this message translates to:
@@ -910,6 +916,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Support development'**
   String get donateDesc;
+
+  /// No description provided for @contributors.
+  ///
+  /// In en, this message translates to:
+  /// **'Contributors'**
+  String get contributors;
+
+  /// No description provided for @contributorsDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'The people who built Dartotsu'**
+  String get contributorsDesc;
+
+  /// No description provided for @contributorsLoadFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t load contributors'**
+  String get contributorsLoadFailed;
+
+  /// No description provided for @forks.
+  ///
+  /// In en, this message translates to:
+  /// **'Forks'**
+  String get forks;
+
+  /// No description provided for @forksDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Projects built on top of Dartotsu'**
+  String get forksDesc;
+
+  /// No description provided for @forksEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No forks found'**
+  String get forksEmpty;
 
   /// No description provided for @sectionColors.
   ///

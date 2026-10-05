@@ -27,6 +27,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get discord => 'Discord';
 
   @override
+  String get loadMore => 'Load more';
+
+  @override
   String get login => '로그인';
 
   @override
@@ -396,6 +399,24 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get donateDesc => 'Support development';
+
+  @override
+  String get contributors => 'Contributors';
+
+  @override
+  String get contributorsDesc => 'The people who built Dartotsu';
+
+  @override
+  String get contributorsLoadFailed => 'Couldn\'t load contributors';
+
+  @override
+  String get forks => 'Forks';
+
+  @override
+  String get forksDesc => 'Projects built on top of Dartotsu';
+
+  @override
+  String get forksEmpty => 'No forks found';
 
   @override
   String get sectionColors => 'Colors';
