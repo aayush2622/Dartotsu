@@ -60,7 +60,7 @@ List<SettingsCategory> get settingsCategories => [
     title: getString.about,
     description: getString.settingsAboutDesc,
     icon: Icons.info_outline_rounded,
-    build: (_) => aboutSettings(),
+    build: aboutSettings,
   ),
 ];
 
