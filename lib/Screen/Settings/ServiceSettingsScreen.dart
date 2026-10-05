@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../Core/Services/MediaServiceController.dart';
 import '../../Core/ThemeManager/LanguageSwitcher.dart';
@@ -9,7 +8,7 @@ import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Utils/Functions/NavigateToScreen.dart';
 import '../../Widgets/Components/BaseScreen.dart';
 import '../../Widgets/Components/LoadSvg.dart';
-import 'Widgets/SettingsAdaptor.dart';
+import 'Components/ServiceSettingsBody.dart';
 
 class ServiceSettingsScreen extends StatefulWidget {
   final MediaService initial;
@@ -104,29 +103,8 @@ class _ServiceSettingsScreenState extends BaseScreen<ServiceSettingsScreen>
         controller: _tab,
         children: [
           for (final service in _services)
-            _ServiceSettingsBody(service: service),
+            ServiceSettingsBody(service: service),
         ],
-      ),
-    );
-  }
-}
-
-class _ServiceSettingsBody extends StatelessWidget {
-  final MediaService service;
-
-  const _ServiceSettingsBody({required this.service});
-
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      padding: EdgeInsets.fromLTRB(
-        Dimens.pagePad,
-        Dimens.gap,
-        Dimens.pagePad,
-        Dimens.gapXl,
-      ),
-      child: Obx(
-        () => SettingsAdaptor(settings: service.settingsView!.build(context)),
       ),
     );
   }
