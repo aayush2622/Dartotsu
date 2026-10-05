@@ -3,9 +3,13 @@ import '../../../Utils/Functions/GetXFunctions.dart';
 import 'AnilistAuth.dart';
 import 'AnilistViews.dart';
 
+const anilistServiceId = 'anilist';
+
+const anilistContinueOrder = ContinueOrder(anilistServiceId);
+
 class AnilistService extends MediaService {
   @override
-  String get id => 'anilist';
+  String get id => anilistServiceId;
 
   @override
   String get name => 'AniList';
@@ -19,7 +23,7 @@ class AnilistService extends MediaService {
   Queries get getQueries => _auth.queries;
 
   @override
-  Mutations get getMutations => _auth.mutations;
+  Mutations get apiMutations => _auth.mutations;
 
   @override
   ServiceAuth get auth => _auth;

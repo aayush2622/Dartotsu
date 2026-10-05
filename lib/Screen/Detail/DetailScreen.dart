@@ -61,7 +61,10 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
     _loading.value = true;
     try {
       final full = await widget.view.details(_media.value);
-      if (full != null) _media.value = full;
+      if (full != null) {
+        _media.value = full;
+        _media.refresh();
+      }
     } catch (_) {
     } finally {
       _loading.value = false;
@@ -576,10 +579,7 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
   Widget _fab(BuildContext context) {
     return Obx(() {
       final mutations = widget.mutations;
-      final auth = find<MediaServiceController>().currentService.value.auth;
-      if (mutations == null || auth == null || !auth.isLoggedIn) {
-        return const SizedBox.shrink();
-      }
+      if (mutations == null) return const SizedBox.shrink();
       final m = _media.value;
       final onList = m.userStatus != null;
       final progress = m.userProgress ?? 0;

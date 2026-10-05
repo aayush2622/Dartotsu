@@ -1,11 +1,17 @@
 import 'Api/Mutations.dart';
 import 'Api/Queries.dart';
+import 'Local/LocalHomeView.dart';
+import 'Local/LocalListStore.dart';
+import 'Local/LocalMutations.dart';
 import 'ServiceAuth.dart';
 import 'Screens/ServiceScreens.dart';
 
 export 'Api/Mutations.dart';
 export 'Api/Queries.dart';
 export 'Features/NavbarProvider.dart';
+export 'Local/LocalHomeView.dart';
+export 'Local/LocalListStore.dart';
+export 'Local/LocalMutations.dart';
 export 'ServiceAuth.dart';
 export 'ServiceNotification.dart';
 export 'Screens/ServiceScreens.dart';
@@ -31,11 +37,21 @@ abstract class MediaService {
 
   Queries? get getQueries => null;
 
-  Mutations? get getMutations => null;
+  Mutations? get apiMutations => null;
+
+  Mutations? get getMutations => isLoggedIn ? apiMutations : localMutations;
+
+  Mutations get localMutations => LocalMutations(this);
+
+  LocalListStore localStore({required bool anime}) => LocalListStore(id);
 
   ServiceAuth? get auth => null;
 
+  bool get isLoggedIn => auth?.isLoggedIn ?? false;
+
   HomeScreenView? get homeView => null;
+
+  HomeScreenView get localHomeView => LocalHomeView(this);
 
   /// Browsable media categories, in tab order (empty => no browse tabs).
   /// Most services offer one or two — anime + manga, novels + movies, …
@@ -52,6 +68,5 @@ abstract class MediaService {
 
   SettingsScreenView? get settingsView => null;
 
-  /// `false` for services that never require an account (extensions).
-  bool get requiresLogin => auth != null;
+  bool get promptsLogin => auth != null && !isLoggedIn;
 }
