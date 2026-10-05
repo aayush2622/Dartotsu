@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../Core/Services/MediaServiceController.dart';
+import '../Core/ThemeManager/CardStyleController.dart';
 import '../Utils/Extensions/ContextExtensions.dart';
 import '../Utils/Functions/GetXFunctions.dart';
 import '../Widgets/Components/BaseScreen.dart';
@@ -69,7 +70,10 @@ class MainScreenState extends BaseScreen<MainScreen> {
             _built.contains(i)
                 ? KeyedSubtree(
                     key: ValueKey('${service.id}-$i'),
-                    child: t.build(service),
+                    child: Obx(() {
+                      if (i == index) find<CardStyleController>().epoch.value;
+                      return t.build(service);
+                    }),
                   )
                 : const SizedBox.shrink(),
         ],

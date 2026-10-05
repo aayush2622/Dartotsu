@@ -4,18 +4,54 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import '../../Core/Services/Model/Media.dart';
+class ShelfCardItem {
+  final String id;
+  final String? imageUrl;
+  final String title;
+  final String? subtitle;
+  final String? sourceIconUrl;
+  final double? score;
+  final bool scoreHighlight;
+  final bool airing;
+  final double? progress;
+  final String? progressText;
+  final String? heroTag;
+  final VoidCallback? onTap;
+  final VoidCallback? onLongPress;
 
-class MediaSectionState {
+  final Widget Function(Widget defaultCard)? cardBuilder;
+
+  const ShelfCardItem({
+    required this.id,
+    required this.title,
+    this.imageUrl,
+    this.subtitle,
+    this.sourceIconUrl,
+    this.score,
+    this.scoreHighlight = false,
+    this.airing = false,
+    this.progress,
+    this.progressText,
+    this.heroTag,
+    this.onTap,
+    this.onLongPress,
+    this.cardBuilder,
+  });
+
+  factory ShelfCardItem.skeleton() =>
+      const ShelfCardItem(id: '', title: 'Loading title');
+}
+
+class CardShelfState {
   var overscrollProgress = 0.0.obs;
   var isLoadingMore = false.obs;
-  var mediaList = <Media>[].obs;
+  var items = <ShelfCardItem>[].obs;
   var canLoadMore = true.obs;
   double lastProgress = 0.0;
 
   bool scrollListener(
     ScrollNotification scroll,
-    Future<List<Media>?> Function()? onLoadMore,
+    Future<List<ShelfCardItem>?> Function()? onLoadMore,
   ) {
     if (scroll.metrics.pixels > scroll.metrics.maxScrollExtent) {
       final overscroll =
@@ -43,12 +79,14 @@ class MediaSectionState {
     return false;
   }
 
-  Future<void> loadMore(Future<List<Media>?> Function()? onLoadMore) async {
+  Future<void> loadMore(
+    Future<List<ShelfCardItem>?> Function()? onLoadMore,
+  ) async {
     isLoadingMore.value = true;
     overscrollProgress.value = 0.0;
     final newItems = await onLoadMore?.call();
     if (newItems != null) {
-      mediaList.value = _dedupe([...mediaList, ...newItems]);
+      items.value = _dedupe([...items, ...newItems]);
     } else {
       canLoadMore.value = false;
     }
@@ -56,17 +94,20 @@ class MediaSectionState {
     isLoadingMore.value = false;
   }
 
-  void updateMediaList(List<Media>? media) {
-    if (media != null) {
-      mediaList.value = _dedupe(media);
+  void updateItems(List<ShelfCardItem>? next) {
+    if (next != null) {
+      items.value = _dedupe(next);
       return;
     }
     final count = Random().nextInt(11) + 7;
-    mediaList.value = List.generate(count, (_) => Media.skeleton());
+    items.value = List.generate(count, (_) => ShelfCardItem.skeleton());
   }
 
-  List<Media> _dedupe(List<Media> media) {
+  List<ShelfCardItem> _dedupe(List<ShelfCardItem> list) {
     final seen = <String>{};
-    return [for (final m in media) if (seen.add(m.id)) m];
+    return [
+      for (final it in list)
+        if (seen.add(it.id)) it,
+    ];
   }
 }

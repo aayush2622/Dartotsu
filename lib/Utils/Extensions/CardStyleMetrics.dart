@@ -33,4 +33,11 @@ extension CardStyleMetrics on CardStyle {
         return imageHeight + 4 + 13 + _titleHeight + _captionHeight + 9 + 6;
     }
   }
+
+  double get rowThumbWidth => switch (layout) {
+    CardLayout.banner => 108 * scale,
+    _ => 72 * scale,
+  };
+
+  double get rowThumbHeight => rowThumbWidth * aspect;
 }

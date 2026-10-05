@@ -34,36 +34,38 @@ class _CardStyleScreenState extends BaseScreen<CardStyleScreen> {
 
   @override
   Widget buildContent(BuildContext context) {
+    final scheme = context.colorScheme;
     return Scaffold(
       backgroundColor: Colors.transparent,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        titleSpacing: 4,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back_ios_new_rounded,
+            size: 20,
+            color: scheme.primary,
+          ),
+          onPressed: () => popPage(context),
+        ),
+        title: Text(
+          'Card style',
+          style: context.textTheme.titleLarge?.copyWith(
+            fontWeight: FontWeight.bold,
+            color: scheme.primary,
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => _set(const CardStyle()),
+            child: const Text('Reset'),
+          ),
+        ],
+      ),
       body: CustomScrollConfig(
         context,
         children: [
-          SliverAppBar.medium(
-            backgroundColor: Colors.transparent,
-            titleSpacing: 4,
-            leading: IconButton(
-              icon: Icon(
-                Icons.arrow_back_ios_new_rounded,
-                size: 20,
-                color: context.colorScheme.primary,
-              ),
-              onPressed: () => popPage(context),
-            ),
-            title: Text(
-              'Card style',
-              style: context.textTheme.titleLarge?.copyWith(
-                fontWeight: FontWeight.bold,
-                color: context.colorScheme.primary,
-              ),
-            ),
-            actions: [
-              TextButton(
-                onPressed: () => _set(const CardStyle()),
-                child: const Text('Reset'),
-              ),
-            ],
-          ),
           SliverPadding(
             padding: EdgeInsets.fromLTRB(
               Dimens.pagePad,
@@ -86,10 +88,12 @@ class _CardStyleScreenState extends BaseScreen<CardStyleScreen> {
   }
 
   List<Widget> _bodyChildren(CardStyle s) {
+    final grid = s.isGrid;
     return [
       _preview(s),
       SizedBox(height: Dimens.gap),
-      _presets(s),
+      _layoutType(s),
+      if (grid) ...[SizedBox(height: Dimens.gap), _presets(s)],
       SizedBox(height: Dimens.gap),
       _layout(s),
       SizedBox(height: Dimens.gap),
@@ -98,7 +102,88 @@ class _CardStyleScreenState extends BaseScreen<CardStyleScreen> {
     ];
   }
 
+  Widget _layoutType(CardStyle s) {
+    return SectionCard(
+      title: 'Layout',
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          AppSegmented<CardLayout>(
+            value: s.layout,
+            onChanged: (v) => _edit((c) => c.copyWith(layout: v)),
+            segments: const [
+              AppSegment(
+                CardLayout.grid,
+                label: 'Card',
+                icon: Icons.grid_view_rounded,
+              ),
+              AppSegment(
+                CardLayout.list,
+                label: 'List',
+                icon: Icons.view_list_rounded,
+              ),
+              AppSegment(
+                CardLayout.banner,
+                label: 'Banner',
+                icon: Icons.view_agenda_rounded,
+              ),
+            ],
+          ),
+          SizedBox(height: Dimens.gapXs),
+          Text(
+            switch (s.layout) {
+              CardLayout.grid => 'A horizontal shelf of poster cards.',
+              CardLayout.list =>
+                'A compact, top-to-bottom list — thumbnail and title in a row.',
+              CardLayout.banner =>
+                'A wide, top-to-bottom list with a blurred banner behind each row.',
+            },
+            style: context.textTheme.bodySmall?.copyWith(
+              color: context.colorScheme.onSurfaceVariant,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  List<Widget> _previewCards(CardStyle s) => [
+    PosterCard(
+      style: s,
+      demo: true,
+      title: 'Solo Leveling Season 2 – Arise from the Shadow',
+      subtitle: '1  |  3 / 12',
+      score: 8.6,
+      airing: true,
+      progress: 0.34,
+      progressText: '1 · 12',
+    ),
+    PosterCard(
+      style: s,
+      demo: true,
+      title: 'BLEACH: Thousand-Year Blood War',
+      subtitle: '~  |  14',
+      score: 8.7,
+      scoreHighlight: true,
+      progressText: '0 · 14',
+    ),
+  ];
+
   Widget _preview(CardStyle s) {
+    final cards = _previewCards(s);
+    if (!s.isGrid) {
+      return SectionCard(
+        title: 'Preview',
+        child: Column(
+          children: [
+            for (final (i, c) in cards.indexed) ...[
+              c,
+              if (i != cards.length - 1) SizedBox(height: Dimens.cardGap),
+            ],
+          ],
+        ),
+      );
+    }
     return SectionCard(
       title: 'Preview',
       child: SizedBox(
@@ -108,26 +193,7 @@ class _CardStyleScreenState extends BaseScreen<CardStyleScreen> {
           child: ListView(
             scrollDirection: Axis.horizontal,
             children: [
-              PosterCard(
-                style: s,
-                demo: true,
-                title: 'Solo Leveling Season 2 – Arise from the Shadow',
-                subtitle: '1  |  3 / 12',
-                score: 8.6,
-                airing: true,
-                progress: 0.34,
-                progressText: '1 · 12',
-              ),
-              SizedBox(width: Dimens.cardGap),
-              PosterCard(
-                style: s,
-                demo: true,
-                title: 'BLEACH: Thousand-Year Blood War',
-                subtitle: '~  |  14',
-                score: 8.7,
-                scoreHighlight: true,
-                progressText: '0 · 14',
-              ),
+              for (final c in cards) ...[c, SizedBox(width: Dimens.cardGap)],
             ],
           ),
         ),
@@ -169,35 +235,37 @@ class _CardStyleScreenState extends BaseScreen<CardStyleScreen> {
 
   Widget _layout(CardStyle s) {
     return SectionCard(
-      title: 'Layout',
+      title: 'Style',
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          LabeledField(
-            label: 'Mode',
-            child: AppSegmented<CardMode>(
-              value: s.mode,
-              onChanged: (v) => _edit((c) => c.copyWith(mode: v)),
-              segments: const [
-                AppSegment(
-                  CardMode.normal,
-                  label: 'Normal',
-                  icon: Icons.crop_portrait_rounded,
-                ),
-                AppSegment(
-                  CardMode.onCard,
-                  label: 'On card',
-                  icon: Icons.vertical_align_bottom_rounded,
-                ),
-                AppSegment(
-                  CardMode.inCard,
-                  label: 'In card',
-                  icon: Icons.dashboard_rounded,
-                ),
-              ],
+          if (s.isGrid) ...[
+            LabeledField(
+              label: 'Mode',
+              child: AppSegmented<CardMode>(
+                value: s.mode,
+                onChanged: (v) => _edit((c) => c.copyWith(mode: v)),
+                segments: const [
+                  AppSegment(
+                    CardMode.normal,
+                    label: 'Normal',
+                    icon: Icons.crop_portrait_rounded,
+                  ),
+                  AppSegment(
+                    CardMode.onCard,
+                    label: 'On card',
+                    icon: Icons.vertical_align_bottom_rounded,
+                  ),
+                  AppSegment(
+                    CardMode.inCard,
+                    label: 'In card',
+                    icon: Icons.dashboard_rounded,
+                  ),
+                ],
+              ),
             ),
-          ),
-          SizedBox(height: Dimens.gap),
+            SizedBox(height: Dimens.gap),
+          ],
           LabeledField(
             label: 'Size',
             child: AppSegmented<CardSize>(
@@ -282,47 +350,57 @@ class _CardStyleScreenState extends BaseScreen<CardStyleScreen> {
   }
 
   Widget _overlays(CardStyle s) {
+    final cornerOptions = [
+      const AppSegment(CardCorner.none, label: 'Off'),
+      const AppSegment(CardCorner.topLeft, label: 'Top left'),
+      const AppSegment(CardCorner.topRight, label: 'Top right'),
+      if (s.bottomCornersUsable) ...[
+        const AppSegment(CardCorner.bottomLeft, label: 'Bottom left'),
+        const AppSegment(CardCorner.bottomRight, label: 'Bottom right'),
+      ],
+    ];
     return SectionCard(
       title: 'Overlays',
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           LabeledField(
-            label: 'Progress',
+            label: 'Progress / count',
             child: AppSegmented<CardProgressStyle>(
               value: s.progress,
               onChanged: (v) => _edit((c) => c.copyWith(progress: v)),
               segments: const [
                 AppSegment(CardProgressStyle.pill, label: 'Pill'),
                 AppSegment(CardProgressStyle.bar, label: 'Bar'),
+                AppSegment(CardProgressStyle.outside, label: 'Outside'),
                 AppSegment(CardProgressStyle.none, label: 'Off'),
               ],
+            ),
+          ),
+          SizedBox(height: Dimens.gapXs),
+          Text(
+            'Pill and bar overlay the poster; outside shows the same count '
+            'as plain text instead — pick one.',
+            style: context.textTheme.bodySmall?.copyWith(
+              color: context.colorScheme.onSurfaceVariant,
             ),
           ),
           SizedBox(height: Dimens.gap),
           LabeledField(
             label: 'Score badge',
             child: AppChoiceChips<CardCorner>(
-              value: s.scoreCorner,
+              value: s.bottomCornersUsable
+                  ? s.scoreCorner
+                  : switch (s.scoreCorner) {
+                      CardCorner.bottomLeft => CardCorner.topLeft,
+                      CardCorner.bottomRight => CardCorner.topRight,
+                      final c => c,
+                    },
               onChanged: (v) => _edit((c) => c.copyWith(scoreCorner: v)),
-              options: const [
-                AppSegment(CardCorner.none, label: 'Off'),
-                AppSegment(CardCorner.topLeft, label: 'Top left'),
-                AppSegment(CardCorner.topRight, label: 'Top right'),
-                AppSegment(CardCorner.bottomLeft, label: 'Bottom left'),
-                AppSegment(CardCorner.bottomRight, label: 'Bottom right'),
-              ],
+              options: cornerOptions,
             ),
           ),
-          const SizedBox(height: 4),
-          if (s.mode != CardMode.onCard)
-            SwitchListTile(
-              contentPadding: EdgeInsets.zero,
-              title: const Text('Info line under title'),
-              subtitle: const Text('progress | total'),
-              value: s.infoLine,
-              onChanged: (v) => _edit((c) => c.copyWith(infoLine: v)),
-            ),
+          SizedBox(height: Dimens.gapSm),
           SwitchListTile(
             contentPadding: EdgeInsets.zero,
             title: const Text('Airing dot'),
