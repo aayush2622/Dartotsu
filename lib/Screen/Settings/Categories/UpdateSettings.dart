@@ -10,8 +10,7 @@ import '../Widgets/SegmentedSetting.dart';
 
 List<Setting> updateSettings(BuildContext context) => [
   Setting.header(getString.channel),
-  Setting(
-    type: SettingType.switchType,
+  Setting.switchType(
     name: getString.checkForUpdates,
     description: getString.checkForUpdatesDesc,
     icon: Icons.system_update_rounded,
@@ -30,8 +29,7 @@ List<Setting> updateSettings(BuildContext context) => [
       AppSegment(UpdateChannel.alpha, label: getString.alpha),
     ],
   ),
-  Setting(
-    type: SettingType.normal,
+  Setting.normal(
     name: getString.checkNow,
     icon: Icons.refresh_rounded,
     trailingIcon: Icons.chevron_right_rounded,

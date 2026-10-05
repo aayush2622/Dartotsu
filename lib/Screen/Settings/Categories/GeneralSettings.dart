@@ -12,8 +12,7 @@ import '../../../Widgets/Components/CustomBottomDialog.dart';
 import '../Widgets/SegmentedSetting.dart';
 
 List<Setting> generalSettings(BuildContext context) => [
-  Setting(
-    type: SettingType.normal,
+  Setting.normal(
     name: getString.language,
     icon: Icons.translate,
     trailing: Icon(

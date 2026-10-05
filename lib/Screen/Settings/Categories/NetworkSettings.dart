@@ -17,8 +17,7 @@ List<Setting> networkSettings(BuildContext context) {
   final network = find<NetworkManager>();
   return [
     Setting.header(getString.sectionRequests),
-    Setting(
-      type: SettingType.normal,
+    Setting.normal(
       name: getString.userAgent,
       description: PrefName.customUserAgent.rx.value.isEmpty
           ? getString.settingDefault
@@ -28,8 +27,7 @@ List<Setting> networkSettings(BuildContext context) {
       onClick: () => _showUaSheet(context, network),
     ),
     Setting.header(getString.sectionDnsProxy),
-    Setting(
-      type: SettingType.normal,
+    Setting.normal(
       name: getString.dnsOverHttps,
       description: PrefName.customDnsUrl.rx.value.isEmpty
           ? getString.dnsDefault
@@ -38,8 +36,7 @@ List<Setting> networkSettings(BuildContext context) {
       isActivity: true,
       onClick: () => _showDnsSheet(context, network),
     ),
-    Setting(
-      type: SettingType.normal,
+    Setting.normal(
       name: getString.proxy,
       description: PrefName.proxyUrl.rx.value.isEmpty
           ? getString.none
@@ -49,8 +46,7 @@ List<Setting> networkSettings(BuildContext context) {
       onClick: () => _showProxySheet(context, network),
     ),
     Setting.header(getString.sectionCache),
-    Setting(
-      type: SettingType.normal,
+    Setting.normal(
       name: getString.clearCookies,
       description: getString.clearCookiesDesc,
       icon: Icons.cookie_outlined,

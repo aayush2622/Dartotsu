@@ -20,8 +20,7 @@ List<Setting> appearanceSettings(BuildContext context) {
   final t = find<ThemeController>();
   return [
     Setting.header(getString.sectionColors),
-    Setting(
-      type: SettingType.normal,
+    Setting.normal(
       name: getString.settingsAppearance,
       icon: Icons.color_lens_rounded,
       trailing: Icon(
@@ -32,8 +31,7 @@ List<Setting> appearanceSettings(BuildContext context) {
       description: themeLabel(t),
       onClick: () => openThemePicker(context),
     ),
-    Setting(
-      type: SettingType.switchType,
+    Setting.switchType(
       name: getString.materialYou,
       description: getString.materialYouDesc,
       icon: Icons.color_lens_outlined,
@@ -41,8 +39,7 @@ List<Setting> appearanceSettings(BuildContext context) {
       onSwitchChange: t.setMaterialYou,
     ),
     if (Platform.isLinux)
-      Setting(
-        type: SettingType.switchType,
+      Setting.switchType(
         name: getString.jsonTheme,
         description: getString.jsonThemeDesc,
         icon: Icons.insert_drive_file_outlined,
@@ -62,16 +59,14 @@ List<Setting> appearanceSettings(BuildContext context) {
         AppSegment(ThemeModePref.dark, icon: Icons.dark_mode_rounded),
       ],
     ),
-    Setting(
-      type: SettingType.switchType,
+    Setting.switchType(
       name: getString.amoledBlack,
       description: getString.amoledBlackDesc,
       icon: Icons.brightness_3_rounded,
       isChecked: t.isOled.value,
       onSwitchChange: t.setOled,
     ),
-    Setting(
-      type: SettingType.switchType,
+    Setting.switchType(
       name: getString.glassMode,
       description: getString.glassModeDesc,
       icon: Icons.blur_on_rounded,
@@ -79,16 +74,14 @@ List<Setting> appearanceSettings(BuildContext context) {
       onSwitchChange: t.setGlassEffect,
     ),
     Setting.header(getString.sectionStyle),
-    Setting(
-      type: SettingType.normal,
+    Setting.normal(
       name: getString.cardStyle,
       description: getString.cardStyleDesc,
       icon: Icons.dashboard_customize_rounded,
       isActivity: true,
       onClick: () => navigateToPage(context, const CardStyleScreen()),
     ),
-    Setting(
-      type: SettingType.normal,
+    Setting.normal(
       name: getString.customFont,
       description: t.useCustomFont.value
           ? p.basenameWithoutExtension(t.customFontPath.value)

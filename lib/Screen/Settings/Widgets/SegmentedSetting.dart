@@ -28,8 +28,7 @@ Setting segmentedSetting<T>({
     return false;
   }
 
-  return Setting(
-    type: SettingType.custom,
+  return Setting.custom(
     name: name,
     description: description,
     onDirection: onDirection,
