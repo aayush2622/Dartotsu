@@ -33,6 +33,7 @@ class PosterCard extends StatefulWidget {
 
   final VoidCallback? onTap;
   final VoidCallback? onLongPress;
+  final bool focusable;
 
   final CardStyle? style;
 
@@ -55,6 +56,7 @@ class PosterCard extends StatefulWidget {
     this.progressText,
     this.onTap,
     this.onLongPress,
+    this.focusable = false,
     this.style,
     this.demo = false,
     this.heroTag,
@@ -97,11 +99,11 @@ class _PosterCardState extends State<PosterCard> {
       child: card,
     );
 
-    if (widget.onTap == null) {
+    if (widget.onTap == null && !widget.focusable) {
       return _scaled(visual, _hover ? 1.02 : 1.0);
     }
     return DpadFocusable(
-      onSelect: widget.onTap,
+      onSelect: widget.onTap ?? () {},
       onLongSelect: widget.onLongPress,
       builder: (context, state, child) =>
           _scaled(child, (_hover || kDpadFocused(state)) ? 1.03 : 1.0),
@@ -110,19 +112,18 @@ class _PosterCardState extends State<PosterCard> {
   }
 
   bool get _pillOn =>
-      _style.showProgress && _style.progress == CardProgressStyle.pill;
+      _style.showProgress && _style.effectiveProgress == CardProgressStyle.pill;
 
   bool get _barOn =>
       _style.showProgress &&
-      _style.progress == CardProgressStyle.bar &&
+      _style.effectiveProgress == CardProgressStyle.bar &&
       widget.progress != null;
 
   Color _cardSurface() => _scheme.surfaceContainerHighest;
 
   Widget _onCard(CardStyle s) {
     final pill = _pillOn && widget.progressText != null;
-    final showSub =
-        !s.compact && !pill && (widget.subtitle?.isNotEmpty ?? false);
+    final showSub = _showSub(s);
     return _poster(
       s,
       round: true,
@@ -183,7 +184,8 @@ class _PosterCardState extends State<PosterCard> {
 
   Widget _normal(CardStyle s) {
     final w = s.itemWidth;
-    final showBar = _style.showProgress && widget.progress != null;
+    final showBar = _barOn;
+    final pill = _pillOn && widget.progressText != null;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
@@ -201,8 +203,14 @@ class _PosterCardState extends State<PosterCard> {
             s,
             round: true,
             overlays: [
-              ..._cornerMarks(s, bottomTaken: showBar),
-              ..._sourceMark(bottom: showBar ? 8 : 6),
+              ..._cornerMarks(s, bottomTaken: showBar || pill),
+              ..._sourceMark(
+                bottom: pill
+                    ? 32
+                    : showBar
+                    ? 8
+                    : 6,
+              ),
               if (showBar)
                 Positioned(
                   left: 0,
@@ -212,6 +220,13 @@ class _PosterCardState extends State<PosterCard> {
                     fraction: widget.progress!,
                     color: _scheme.primary,
                   ),
+                ),
+              if (pill)
+                Positioned(
+                  left: 6,
+                  right: 6,
+                  bottom: 6,
+                  child: _Pill(text: widget.progressText!),
                 ),
             ],
           ),
@@ -368,7 +383,10 @@ class _PosterCardState extends State<PosterCard> {
     final thumbW = s.rowThumbWidth;
     final thumbH = s.rowThumbHeight;
     final hasScore = s.showScore && widget.score != null;
-    final showSub = !s.compact && (widget.subtitle?.isNotEmpty ?? false);
+    final showSub =
+        (!s.compact &&
+            (s.progress != CardProgressStyle.none || s.preset == 'people')) &&
+        (widget.subtitle?.isNotEmpty ?? false);
     return Container(
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
@@ -440,7 +458,10 @@ class _PosterCardState extends State<PosterCard> {
     final thumbW = s.rowThumbWidth;
     final thumbH = s.rowThumbHeight;
     final hasScore = s.showScore && widget.score != null;
-    final showSub = !s.compact && (widget.subtitle?.isNotEmpty ?? false);
+    final showSub =
+        (!s.compact &&
+            (s.progress != CardProgressStyle.none || s.preset == 'people')) &&
+        (widget.subtitle?.isNotEmpty ?? false);
     return ClipRRect(
       borderRadius: BorderRadius.circular(s.radius),
       child: SizedBox(
@@ -533,8 +554,13 @@ class _PosterCardState extends State<PosterCard> {
     );
   }
 
+  bool get _progressOverlaid =>
+      (_pillOn && widget.progressText != null) || _barOn;
+
   bool _showSub(CardStyle s) =>
-      (s.showInfo || s.preset == 'people') &&
+      (s.showInfo ||
+          s.preset == 'people' ||
+          (s.mayShowInfo && !_progressOverlaid)) &&
       (widget.subtitle?.isNotEmpty ?? false);
 
   Widget _titleBelow(CardStyle s, double width) => SizedBox(

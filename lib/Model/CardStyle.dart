@@ -101,14 +101,31 @@ class CardStyle {
   bool get showScore => !compact && scoreCorner != CardCorner.none;
   bool get showAiring => !compact && airingDot;
 
+  /// On-card mode has nothing "outside" the poster, so [CardProgressStyle.outside]
+  /// resolves to the pill there.
+  CardProgressStyle get effectiveProgress =>
+      (isGrid &&
+          mode == CardMode.onCard &&
+          progress == CardProgressStyle.outside)
+      ? CardProgressStyle.pill
+      : progress;
+
   bool get showProgress =>
       !compact &&
-      (progress == CardProgressStyle.pill || progress == CardProgressStyle.bar);
+      (effectiveProgress == CardProgressStyle.pill ||
+          effectiveProgress == CardProgressStyle.bar);
 
-  bool get showInfo => !compact && progress == CardProgressStyle.outside;
+  bool get showInfo =>
+      !compact && effectiveProgress == CardProgressStyle.outside;
+
+  bool get mayShowInfo =>
+      !compact && effectiveProgress != CardProgressStyle.none;
 
   bool get bottomCornersUsable =>
-      isGrid && mode == CardMode.normal && progress != CardProgressStyle.bar;
+      isGrid &&
+      mode == CardMode.normal &&
+      effectiveProgress != CardProgressStyle.bar &&
+      effectiveProgress != CardProgressStyle.pill;
 
   // --- json ------------------------------------------------------------
 

@@ -33,6 +33,7 @@ class LocalListStore {
     final media = Media.fromJson(
       raw is Map ? Map<String, dynamic>.from(raw) : entry,
     );
+    media.minimal = false;
     final source = entry['source'];
     if (source is Map) {
       media.sourceData = Source.fromJson(Map<String, dynamic>.from(source));
@@ -59,6 +60,7 @@ class LocalListStore {
   }
 
   void upsert(Media media) {
+    media.minimal = false;
     media.userUpdatedAt = DateTime.now().millisecondsSinceEpoch;
     final items = read().toList()..removeWhere((m) => m.id == media.id);
     _write([media, ...items]);

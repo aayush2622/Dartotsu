@@ -12,7 +12,7 @@ extension CardStyleMetrics on CardStyle {
   /// media, a two-line role/VA line for people (labelMedium, ~18px/line).
   double get _captionHeight => preset == 'people'
       ? 38
-      : showInfo
+      : mayShowInfo
       ? 20
       : 0;
 

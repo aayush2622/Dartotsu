@@ -152,7 +152,7 @@ class _CardStyleScreenState extends BaseScreen<CardStyleScreen> {
       style: s,
       demo: true,
       title: 'Solo Leveling Season 2 – Arise from the Shadow',
-      subtitle: '1  |  3 / 12',
+      subtitle: '1 | 3 | 12',
       score: 8.6,
       airing: true,
       progress: 0.34,
@@ -162,7 +162,7 @@ class _CardStyleScreenState extends BaseScreen<CardStyleScreen> {
       style: s,
       demo: true,
       title: 'BLEACH: Thousand-Year Blood War',
-      subtitle: '~  |  14',
+      subtitle: '~ | 14',
       score: 8.7,
       scoreHighlight: true,
       progressText: '0 · 14',
@@ -367,13 +367,14 @@ class _CardStyleScreenState extends BaseScreen<CardStyleScreen> {
           LabeledField(
             label: 'Progress / count',
             child: AppSegmented<CardProgressStyle>(
-              value: s.progress,
+              value: s.effectiveProgress,
               onChanged: (v) => _edit((c) => c.copyWith(progress: v)),
-              segments: const [
-                AppSegment(CardProgressStyle.pill, label: 'Pill'),
-                AppSegment(CardProgressStyle.bar, label: 'Bar'),
-                AppSegment(CardProgressStyle.outside, label: 'Outside'),
-                AppSegment(CardProgressStyle.none, label: 'Off'),
+              segments: [
+                const AppSegment(CardProgressStyle.pill, label: 'Pill'),
+                const AppSegment(CardProgressStyle.bar, label: 'Bar'),
+                if (!(s.isGrid && s.mode == CardMode.onCard))
+                  const AppSegment(CardProgressStyle.outside, label: 'Outside'),
+                const AppSegment(CardProgressStyle.none, label: 'Off'),
               ],
             ),
           ),

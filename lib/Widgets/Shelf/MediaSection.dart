@@ -102,15 +102,17 @@ class MediaSection extends StatelessWidget {
     final total = _total(media);
     final next = media.anime?.nextAiringEpisode;
     final right = next != null && next > 0
-        ? '$next / ${total ?? '~'}'
+        ? '$next | ${total ?? '~'}'
         : '${total ?? '~'}';
-    return '$left  |  $right';
+    return '$left | $right';
   }
 
   static String? _progressText(Media media) {
-    final done = media.userProgress;
-    if (done == null) return null;
-    return '$done · ${_total(media) ?? '~'}';
+    final done = media.userProgress?.toString() ?? '~';
+    final next = media.anime?.nextAiringEpisode;
+    final total =
+        _total(media)?.toString() ?? (next != null && next > 0 ? '$next' : '~');
+    return '$done · $total';
   }
 
   static double? _score(Media media) {
