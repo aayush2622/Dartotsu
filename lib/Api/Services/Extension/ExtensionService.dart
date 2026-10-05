@@ -1,6 +1,10 @@
 import '../../../Core/Services/MediaService.dart';
 import 'ExtensionServices.dart';
-import 'ExtensionViews.dart';
+import 'Screens/Detail.dart';
+import 'Screens/Feed.dart';
+import 'Screens/Home.dart';
+import 'Screens/Search.dart';
+import 'Screens/Settings.dart';
 
 class ExtensionService extends MediaService {
   @override
@@ -22,13 +26,13 @@ class ExtensionService extends MediaService {
   SearchScreenView get searchView => ExtensionSearchView();
 
   @override
-  DetailScreenView get detailView => ExtensionDetailView();
+  DetailScreenView get detailView => ExtensionDetailView(this);
 
   @override
   SettingsScreenView get settingsView => ExtensionSettingsView();
 
   @override
-  HomeScreenView get localHomeView => ExtensionHomeView(this);
+  HomeScreenView get homeView => ExtensionHomeView(this);
 
   @override
   LocalListStore localStore({required bool anime}) =>

@@ -1,26 +1,15 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../Core/Services/MediaServiceController.dart';
 import '../../Core/Services/Model/Media.dart';
-import '../../Core/ThemeManager/ThemeController.dart';
-import '../../Utils/Extensions/ContextExtensions.dart';
-import '../../Utils/Extensions/Responsive.dart';
-import '../../Utils/Extensions/StringExtensions.dart';
-import '../../Utils/Function.dart';
-import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Utils/Functions/NavigateToScreen.dart';
 import '../../Widgets/Components/BaseScreen.dart';
-import '../../Widgets/Components/CachedNetworkImage.dart';
 import '../../Widgets/Components/ScrollConfig.dart';
-import '../../Widgets/Components/SectionCard.dart';
-import '../../Widgets/Shelf/MediaSection.dart';
-import '../../Widgets/Shelf/PeopleShelf.dart';
+import '../Widgets/ScreenWidgetView.dart';
 import 'ListEditorSheet.dart';
-import 'Components/ExpandableText.dart';
-import 'Components/InfoRow.dart';
-import 'Components/MetaPill.dart';
-import 'Components/StatTile.dart';
 
 class DetailScreen extends StatefulWidget {
   final Media media;
@@ -41,546 +30,84 @@ class DetailScreen extends StatefulWidget {
 }
 
 class _DetailScreenState extends BaseScreen<DetailScreen> {
-  late final _media = widget.media.obs;
-  final _loading = true.obs;
-  final _tagsExpanded = false.obs;
+  late final DetailHost _host = DetailHost(
+    media: widget.media,
+    loading: true.obs,
+    heroTag: widget.heroTag,
+    open: _open,
+    refresh: _load,
+  );
+  final _widgets = <ScreenWidget>[].obs;
 
-  bool get _isAnime => _media.value.anime != null;
+  bool get _isAnime => _host.media.value.anime != null;
 
   @override
   String? get glassBackgroundUrl =>
-      _media.value.banner ?? _media.value.cover ?? super.glassBackgroundUrl;
+      _host.media.value.banner ??
+      _host.media.value.cover ??
+      super.glassBackgroundUrl;
 
   @override
   void initState() {
     super.initState();
-    _fetch();
+    unawaited(_load());
   }
 
-  Future<void> _fetch() async {
-    _loading.value = true;
+  Future<void> _load() async {
+    _host.loading.value = true;
     try {
-      final full = await widget.view.details(_media.value);
-      if (full != null) {
-        _media.value = full;
-        _media.refresh();
+      await for (final list in widget.view.screenStream(_host)) {
+        _widgets.value = list;
       }
     } catch (_) {
     } finally {
-      _loading.value = false;
+      _host.loading.value = false;
     }
   }
 
-  void _open(BuildContext context, Media media, String? heroTag) =>
-      navigateToPage(
-        context,
-        DetailScreen(
-          media: media,
-          view: widget.view,
-          mutations: widget.mutations,
-          heroTag: heroTag,
-        ),
-      );
-
-  bool get _glass => find<ThemeController>().useGlassMode.value;
-
-  EdgeInsets get _sectionMargin =>
-      EdgeInsets.symmetric(horizontal: Dimens.gap, vertical: Dimens.gapSm / 2);
+  void _open(Media media, String? heroTag) => navigateToPage(
+    context,
+    DetailScreen(
+      media: media,
+      view: widget.view,
+      mutations: widget.mutations,
+      heroTag: heroTag,
+    ),
+  );
 
   @override
   Widget buildContent(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
       floatingActionButton: _fab(context),
-      body: Obx(() {
-        final m = _media.value;
-        return RefreshIndicator(
-          onRefresh: _fetch,
-          child: CustomScrollConfig(
+      body: RefreshIndicator(
+        onRefresh: _load,
+        child: Obx(
+          () => CustomScrollConfig(
             context,
             physics: const AlwaysScrollableScrollPhysics(),
             children: [
-              SliverToBoxAdapter(child: _hero(m)),
-              if (_statItems(m).isNotEmpty)
-                SliverToBoxAdapter(child: _statStrip(m)),
-              if (_airingIn(m) case final airing?)
-                SliverToBoxAdapter(child: _airingCard(m, airing)),
-              if ((m.description ?? '').trim().isNotEmpty)
-                SliverToBoxAdapter(child: _synopsis(m)),
-              if (m.genres.isNotEmpty) SliverToBoxAdapter(child: _genres(m)),
-              if (_infoRows(m).isNotEmpty)
-                SliverToBoxAdapter(child: _infoCard(m)),
-              if (m.tags.isNotEmpty) SliverToBoxAdapter(child: _tags(m)),
-              if ((m.characters ?? const []).isNotEmpty)
+              for (final item in _widgets)
                 SliverToBoxAdapter(
-                  child: PeopleShelf(
-                    title: 'Characters',
-                    people: [
-                      for (final c in m.characters!)
-                        ShelfPerson(
-                          image: c.image,
-                          name: c.name ?? '',
-                          role: [
-                            if (c.role != null) c.role!.titleCase,
-                            if ((c.voiceActor?.isNotEmpty ?? false) &&
-                                c.voiceActor!.first.name != null)
-                              c.voiceActor!.first.name!,
-                          ].join(' · '),
-                        ),
-                    ],
-                  ),
-                ),
-              if ((m.staff ?? const []).isNotEmpty)
-                SliverToBoxAdapter(
-                  child: PeopleShelf(
-                    title: 'Staff',
-                    people: [
-                      for (final s in m.staff!)
-                        ShelfPerson(
-                          image: s.image,
-                          name: s.name ?? '',
-                          role: s.role?.titleCase,
-                        ),
-                    ],
-                  ),
-                ),
-              if ((m.relations ?? const []).isNotEmpty)
-                SliverToBoxAdapter(
-                  child: MediaSection(
-                    data: MediaSectionData(
-                      type: 0,
-                      title: 'Relations',
-                      heroPrefix: 'detail:${m.id}',
-                      mediaList: m.relations,
-                      onMediaTap: (ctx, i, media, tag) =>
-                          _open(ctx, media, tag),
-                    ),
-                  ),
-                ),
-              if ((m.recommendations ?? const []).isNotEmpty)
-                SliverToBoxAdapter(
-                  child: MediaSection(
-                    data: MediaSectionData(
-                      type: 0,
-                      title: 'Recommendations',
-                      heroPrefix: 'detail:${m.id}',
-                      mediaList: m.recommendations,
-                      onMediaTap: (ctx, i, media, tag) =>
-                          _open(ctx, media, tag),
-                    ),
+                  child: ScreenWidgetView(
+                    item,
+                    heroPrefix: 'detail:${_host.media.value.id}',
+                    onMediaTap: _open,
                   ),
                 ),
               const SliverToBoxAdapter(child: SizedBox(height: 110)),
             ],
           ),
-        );
-      }),
-    );
-  }
-
-  Widget _hero(Media m) {
-    final scheme = context.colorScheme;
-    final top = MediaQuery.paddingOf(context).top;
-    final coverW = Dimens.detailPosterW;
-    final coverH = Dimens.detailPosterH;
-    final bannerH = _glass ? coverH * 0.66 : 196.0;
-    final overhang = coverH * 0.42;
-
-    return Column(
-      children: [
-        Stack(
-          clipBehavior: Clip.none,
-          children: [
-            SizedBox(
-              height: bannerH + top,
-              width: double.infinity,
-              child: _glass
-                  ? const SizedBox.shrink()
-                  : Stack(
-                      fit: StackFit.expand,
-                      children: [
-                        (m.banner ?? m.cover) != null
-                            ? cachedNetworkImage(
-                                imageUrl: m.banner ?? m.cover,
-                                fit: BoxFit.cover,
-                              )
-                            : ColoredBox(color: scheme.surfaceContainerHigh),
-                        DecoratedBox(
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              stops: const [0.0, 0.5, 1.0],
-                              colors: [
-                                scheme.surface.withValues(alpha: 0.15),
-                                scheme.surface.withValues(alpha: 0.45),
-                                scheme.surface,
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-            ),
-            Positioned(
-              top: top + 4,
-              left: 6,
-              right: 6,
-              child: Row(
-                children: [
-                  _circleButton(Icons.arrow_back_rounded, guardedBack),
-                  const Spacer(),
-                  _circleButton(
-                    Icons.share_rounded,
-                    () => shareLink(m.shareLink),
-                  ),
-                  const SizedBox(width: 6),
-                  _menuButton(m),
-                ],
-              ),
-            ),
-            Positioned(
-              top: top,
-              left: 0,
-              right: 0,
-              child: Obx(
-                () => _loading.value
-                    ? const LinearProgressIndicator(minHeight: 2)
-                    : const SizedBox.shrink(),
-              ),
-            ),
-            Positioned(
-              left: Dimens.gap,
-              right: Dimens.gap,
-              bottom: -overhang,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  _cover(m, coverW, coverH),
-                  SizedBox(width: Dimens.gap),
-                  Expanded(
-                    child: Padding(
-                      padding: EdgeInsets.only(bottom: overhang),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            m.mainName,
-                            style: context.textTheme.titleLarge?.copyWith(
-                              fontWeight: FontWeight.w700,
-                            ),
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          if (m.nameRomaji != null &&
-                              m.nameRomaji != m.mainName) ...[
-                            const SizedBox(height: 2),
-                            Text(
-                              m.nameRomaji!,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: context.textTheme.bodySmall?.copyWith(
-                                color: scheme.onSurfaceVariant,
-                              ),
-                            ),
-                          ],
-                          if (m.status != null) ...[
-                            const SizedBox(height: 6),
-                            Text(
-                              m.status!.titleCase,
-                              style: context.textTheme.labelLarge?.copyWith(
-                                color: scheme.primary,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                          ],
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
         ),
-        SizedBox(height: overhang + Dimens.gapSm),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: Dimens.gap),
-          child: Align(alignment: Alignment.centerLeft, child: _metaPills(m)),
-        ),
-        if (m.trailer != null)
-          Padding(
-            padding: EdgeInsets.fromLTRB(
-              Dimens.gap,
-              Dimens.gapSm,
-              Dimens.gap,
-              0,
-            ),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: OutlinedButton.icon(
-                onPressed: () => openLinkInBrowser(m.trailer!),
-                icon: const Icon(Icons.play_arrow_rounded, size: 18),
-                label: const Text('Trailer'),
-                style: OutlinedButton.styleFrom(
-                  visualDensity: VisualDensity.compact,
-                ),
-              ),
-            ),
-          ),
-        SizedBox(height: Dimens.gapSm),
-      ],
-    );
-  }
-
-  Widget _cover(Media m, double w, double h) {
-    final image = ClipRRect(
-      borderRadius: BorderRadius.circular(Dimens.radiusSm),
-      child: Container(
-        width: w,
-        height: h,
-        color: context.colorScheme.surfaceContainerHigh,
-        child: cachedNetworkImage(imageUrl: m.cover, fit: BoxFit.cover),
-      ),
-    );
-    if (widget.heroTag == null) return image;
-    return Hero(
-      tag: widget.heroTag!,
-      flightShuttleBuilder: (_, _, _, _, toContext) =>
-          (toContext.widget as Hero).child,
-      child: image,
-    );
-  }
-
-  Widget _circleButton(IconData icon, VoidCallback onTap) => Material(
-    color: context.colorScheme.surface.withValues(alpha: 0.7),
-    shape: const CircleBorder(),
-    clipBehavior: Clip.antiAlias,
-    child: IconButton(
-      icon: Icon(icon, size: 20),
-      onPressed: onTap,
-      visualDensity: VisualDensity.compact,
-    ),
-  );
-
-  Widget _menuButton(Media m) => Material(
-    color: context.colorScheme.surface.withValues(alpha: 0.7),
-    shape: const CircleBorder(),
-    clipBehavior: Clip.antiAlias,
-    child: PopupMenuButton<String>(
-      icon: const Icon(Icons.more_vert_rounded, size: 20),
-      onSelected: (v) {
-        if (v == 'browser') openLinkInBrowser(m.shareLink);
-        if (v == 'trailer' && m.trailer != null) openLinkInBrowser(m.trailer!);
-      },
-      itemBuilder: (_) => [
-        if (m.trailer != null)
-          const PopupMenuItem(
-            value: 'trailer',
-            child: ListTile(
-              dense: true,
-              contentPadding: EdgeInsets.zero,
-              leading: Icon(Icons.play_circle_outline_rounded),
-              title: Text('Watch trailer'),
-            ),
-          ),
-        const PopupMenuItem(
-          value: 'browser',
-          child: ListTile(
-            dense: true,
-            contentPadding: EdgeInsets.zero,
-            leading: Icon(Icons.open_in_new_rounded),
-            title: Text('Open in browser'),
-          ),
-        ),
-      ],
-    ),
-  );
-
-  Widget _metaPills(Media m) {
-    final pills = <Widget>[
-      if (m.format != null) MetaPill(text: m.format!.titleCase),
-      if (_isAnime && m.anime?.totalEpisodes != null)
-        MetaPill(icon: Icons.tv_rounded, text: '${m.anime!.totalEpisodes} ep'),
-      if (!_isAnime && m.manga?.totalChapters != null)
-        MetaPill(
-          icon: Icons.menu_book_rounded,
-          text: '${m.manga!.totalChapters} ch',
-        ),
-      if (m.anime?.seasonYear != null)
-        MetaPill(
-          text: [
-            if (m.anime?.season != null) m.anime!.season!.titleCase,
-            m.anime!.seasonYear,
-          ].join(' '),
-        ),
-    ];
-    if (pills.isEmpty) return const SizedBox.shrink();
-    return Wrap(spacing: 8, runSpacing: 8, children: pills);
-  }
-
-  List<(IconData, String, String)> _statItems(Media m) => [
-    if ((m.meanScore ?? 0) > 0)
-      (Icons.star_rounded, 'Score', (m.meanScore! / 10).toStringAsFixed(1)),
-    if ((m.popularity ?? 0) > 0)
-      (Icons.people_alt_rounded, 'Popularity', _compact(m.popularity!)),
-    if ((m.favourites ?? 0) > 0)
-      (Icons.favorite_rounded, 'Favourites', _compact(m.favourites!)),
-    if (m.anime?.episodeDuration != null)
-      (Icons.schedule_rounded, 'Duration', '${m.anime!.episodeDuration}m'),
-  ];
-
-  Widget _statStrip(Media m) {
-    final items = _statItems(m);
-    return SectionCard(
-      margin: _sectionMargin,
-      child: Row(
-        children: [
-          for (final (i, stat) in items.indexed) ...[
-            Expanded(
-              child: StatTile(icon: stat.$1, label: stat.$2, value: stat.$3),
-            ),
-            if (i != items.length - 1)
-              Container(
-                width: 1,
-                height: 34,
-                color: context.colorScheme.outlineVariant.withValues(
-                  alpha: 0.5,
-                ),
-              ),
-          ],
-        ],
       ),
     );
   }
-
-  Duration? _airingIn(Media m) {
-    final at = m.anime?.nextAiringEpisodeTime;
-    if (at == null) return null;
-    final target = DateTime.fromMillisecondsSinceEpoch(at * 1000);
-    final diff = target.difference(DateTime.now());
-    return diff.isNegative ? null : diff;
-  }
-
-  Widget _airingCard(Media m, Duration until) {
-    final scheme = context.colorScheme;
-    final ep = m.anime?.nextAiringEpisode;
-    return SectionCard(
-      margin: _sectionMargin,
-      child: Row(
-        children: [
-          Icon(Icons.podcasts_rounded, color: scheme.primary),
-          SizedBox(width: Dimens.gap),
-          Expanded(
-            child: Text(
-              ep != null
-                  ? 'Episode $ep airs in ${_fmtDuration(until)}'
-                  : 'Next episode in ${_fmtDuration(until)}',
-              style: context.textTheme.bodyMedium,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _synopsis(Media m) => SectionCard(
-    margin: _sectionMargin,
-    title: 'Synopsis',
-    child: ExpandableText(text: m.description!.stripHtml),
-  );
-
-  Widget _genres(Media m) => SectionCard(
-    margin: _sectionMargin,
-    title: 'Genres',
-    child: Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: [
-        for (final g in m.genres)
-          Chip(
-            label: Text(g),
-            labelStyle: context.textTheme.labelMedium,
-            visualDensity: VisualDensity.compact,
-            materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            side: BorderSide(color: context.colorScheme.outlineVariant),
-            backgroundColor: Colors.transparent,
-          ),
-      ],
-    ),
-  );
-
-  Widget _tags(Media m) {
-    final parsed = [
-      for (final raw in m.tags)
-        (
-          name: raw.split(' : ').first,
-          rank: raw.contains(' : ') ? raw.split(' : ').last : '',
-        ),
-    ]..sort((a, b) => _rankNum(b.rank).compareTo(_rankNum(a.rank)));
-
-    return SectionCard(
-      margin: _sectionMargin,
-      title: 'Tags',
-      child: Obx(() {
-        final shown = _tagsExpanded.value ? parsed : parsed.take(12).toList();
-        return Wrap(
-          spacing: 8,
-          runSpacing: 8,
-          children: [
-            for (final t in shown)
-              Chip(
-                label: Text('${t.name}  ${t.rank}'),
-                labelStyle: context.textTheme.labelSmall,
-                visualDensity: VisualDensity.compact,
-                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                backgroundColor: context.colorScheme.surfaceContainerHighest,
-                side: BorderSide.none,
-              ),
-            if (parsed.length > 12)
-              ActionChip(
-                label: Text(
-                  _tagsExpanded.value
-                      ? 'Show less'
-                      : '+${parsed.length - 12} more',
-                ),
-                labelStyle: context.textTheme.labelSmall,
-                visualDensity: VisualDensity.compact,
-                onPressed: () => _tagsExpanded.value = !_tagsExpanded.value,
-              ),
-          ],
-        );
-      }),
-    );
-  }
-
-  List<(String, String)> _infoRows(Media m) {
-    final a = m.anime;
-    return [
-      if (a?.studio?.name.isNotEmpty ?? false) ('Studio', a!.studio!.name),
-      if (m.source != null) ('Source', m.source!.titleCase),
-      if (m.countryOfOrigin != null) ('Country', m.countryOfOrigin!),
-      if (m.startDate?.getFormattedDate() != null) ('Aired', _airedRange(m)),
-      if (m.format != null) ('Format', m.format!.titleCase),
-    ];
-  }
-
-  Widget _infoCard(Media m) => SectionCard(
-    margin: _sectionMargin,
-    title: 'Details',
-    child: Column(
-      children: [
-        for (final (label, value) in _infoRows(m)) InfoRow(label, value),
-      ],
-    ),
-  );
 
   Widget _fab(BuildContext context) {
     return Obx(() {
       final mutations = widget.mutations;
       if (mutations == null) return const SizedBox.shrink();
-      final m = _media.value;
+      final m = _host.media.value;
       final onList = m.userStatus != null;
       final progress = m.userProgress ?? 0;
       return FloatingActionButton.extended(
@@ -588,7 +115,7 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
           context,
           media: m,
           mutations: mutations,
-          onSaved: _fetch,
+          onSaved: _load,
         ),
         icon: Icon(onList ? Icons.edit_rounded : Icons.add_rounded),
         label: Text(
@@ -598,29 +125,6 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
         ),
       );
     });
-  }
-
-  String _airedRange(Media m) {
-    final start = m.startDate?.getFormattedDate();
-    final end = m.endDate?.getFormattedDate();
-    if (start == null) return '';
-    if (end == null || end == start) return start;
-    return '$start  –  $end';
-  }
-
-  static double _rankNum(String rank) =>
-      double.tryParse(rank.replaceAll('%', '').trim()) ?? 0;
-
-  static String _compact(int n) {
-    if (n >= 1000000) return '${(n / 1000000).toStringAsFixed(1)}M';
-    if (n >= 1000) return '${(n / 1000).toStringAsFixed(1)}K';
-    return '$n';
-  }
-
-  static String _fmtDuration(Duration d) {
-    if (d.inDays > 0) return '${d.inDays}d ${d.inHours % 24}h';
-    if (d.inHours > 0) return '${d.inHours}h ${d.inMinutes % 60}m';
-    return '${d.inMinutes}m';
   }
 
   String _statusLabel(String? status) => switch (status) {

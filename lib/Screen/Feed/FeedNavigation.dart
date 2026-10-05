@@ -14,17 +14,14 @@ void openDetail(
   Media media, {
   String? heroTag,
 }) {
-  final view = service.detailView;
   navigateToPage(
     context,
-    view == null
-        ? NotImplemented(service: service.name, area: 'Details')
-        : DetailScreen(
-            media: media,
-            view: view,
-            mutations: service.getMutations,
-            heroTag: heroTag,
-          ),
+    DetailScreen(
+      media: media,
+      view: service.detailView,
+      mutations: service.getMutations,
+      heroTag: heroTag,
+    ),
   );
 }
 

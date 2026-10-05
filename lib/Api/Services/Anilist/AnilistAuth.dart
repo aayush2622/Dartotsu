@@ -5,12 +5,15 @@ import 'package:get/get.dart';
 
 import '../../../Core/Preferences/PrefManager.dart';
 import '../../../Core/Services/ServiceAuth.dart';
+import '../../../Utils/Functions/GetXFunctions.dart';
 import '../../../Utils/Functions/SnackBar.dart';
 import 'AnilistClient.dart';
 import 'AnilistPrefs.dart';
 import 'AnilistMutations.dart';
 import 'AnilistQueries.dart';
 import 'AnilistUser.dart';
+
+AnilistAuth get anilistAuth => find<AnilistAuth>();
 
 class AnilistAuth extends GetxController implements ServiceAuth {
   static const _clientId = '14959';

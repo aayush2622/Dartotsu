@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../Utils/Extensions/ContextExtensions.dart';
+import '../../../../Utils/Extensions/ContextExtensions.dart';
 
 class StatTile extends StatelessWidget {
   final IconData icon;

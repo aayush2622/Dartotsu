@@ -1,59 +1,50 @@
 import 'package:flutter/widgets.dart';
 
-import '../../../Model/MediaType.dart';
 import '../../../Model/SearchResults.dart';
 import '../../../Model/Setting.dart';
-import '../Api/SectionJobs.dart';
+import '../../../Screen/Detail/DetailWidgets.dart';
 import '../Model/Media.dart';
-import '../ServiceNotification.dart';
-import 'ScreenWidget.dart';
+import '../MediaService.dart';
 
 export '../../../Model/MediaType.dart';
 export '../Api/SectionJobs.dart';
+export 'DetailHost.dart';
 export 'ScreenWidget.dart';
 
-typedef Sections = Future<Map<String, List<Media>>>;
+class HomeScreenView {
+  final MediaService service;
 
-typedef SectionsStream = Stream<Map<String, List<Media>>>;
+  HomeScreenView(this.service);
 
-/// A labelled section switch in a browse feed's header — season, media type.
-/// [load] fetches the sections to show while the chip is active.
-class FeedChip {
-  final String label;
-  final Sections Function() load;
-  const FeedChip(this.label, this.load);
-}
+  Future<SectionMap> localSections() async {
+    final anime = service.localStore(anime: true);
+    final manga = service.localStore(anime: false);
+    if (anime.serviceId == manga.serviceId) return anime.sections();
+    return {...anime.sections(anime: true), ...manga.sections(anime: false)};
+  }
 
-enum FeedShortcut { genres, calendar }
-
-abstract class HomeScreenView {
-  Stream<List<ScreenWidget>> screenStream();
+  Stream<List<ScreenWidget>> screenStream() async* {
+    final sections = await localSections();
+    yield [
+      for (final e in sections.entries) ScreenWidget.media(e.key, e.value),
+    ];
+  }
 
   Future<List<String?>> bannerImages() => Future.value(const [null, null]);
 }
 
-/// One browse tab, parameterised by [MediaType] — a service serves the same
-/// view for every type it declares in [MediaService.feedTypes].
-abstract class FeedScreenView {
-  List<SectionJob> jobs(MediaType type);
+class FeedScreenView {
+  final MediaService service;
 
-  bool parallelJobs(MediaType type) => true;
+  FeedScreenView(this.service);
 
-  SectionsStream sectionsStream(MediaType type) =>
-      runSectionJobs(jobs(type), parallel: parallelJobs(type));
-
-  Sections sections(MediaType type) => foldSections(sectionsStream(type));
-
-  String? spotlight(MediaType type) => null;
-
-  /// Next page for a browse [section] (keyed by its display title). Return
-  /// `null` when the section can't paginate or has no more items.
-  Future<List<Media>?> loadMore(MediaType type, String section, int page) =>
-      Future.value(null);
-
-  List<FeedChip> chips(MediaType type) => const [];
-
-  List<FeedShortcut> shortcuts(MediaType type) => const [];
+  Stream<List<ScreenWidget>> screenStream(MediaType type) async* {
+    final anime = type.isVideo;
+    final sections = service.localStore(anime: anime).sections(anime: anime);
+    yield [
+      for (final e in sections.entries) ScreenWidget.media(e.key, e.value),
+    ];
+  }
 }
 
 /// Which filters a service's search supports, and their vocab. Everything is a
@@ -105,12 +96,20 @@ abstract class SearchScreenView {
   /// same as [MediaService.feedTypes].
   List<MediaType> get types => const [MediaType.anime, MediaType.manga];
 
+  Widget? overlay(Media media) => null;
+
   /// Filter vocabulary for [type]. Default: no filters.
   SearchFilterSpec filters(MediaType type) => SearchFilterSpec.none;
 }
 
-abstract class DetailScreenView {
-  Future<Media?> details(Media media);
+class DetailScreenView {
+  final MediaService service;
+
+  DetailScreenView(this.service);
+
+  Stream<List<ScreenWidget>> screenStream(DetailHost host) async* {
+    yield defaultDetailWidgets(host);
+  }
 }
 
 abstract class NotificationScreenView {

@@ -1,7 +1,12 @@
 import '../../../Core/Services/MediaService.dart';
 import '../../../Utils/Functions/GetXFunctions.dart';
 import 'AnilistAuth.dart';
-import 'AnilistViews.dart';
+import 'Screens/Detail.dart';
+import 'Screens/Feed.dart';
+import 'Screens/Home.dart';
+import 'Screens/Notifications.dart';
+import 'Screens/Search.dart';
+import 'Screens/Settings.dart';
 
 const anilistServiceId = 'anilist';
 
@@ -29,19 +34,19 @@ class AnilistService extends MediaService {
   ServiceAuth get auth => _auth;
 
   @override
-  HomeScreenView get homeView => AnilistHomeView();
+  HomeScreenView get homeView => AnilistHomeView(this);
 
   @override
   List<MediaType> get feedTypes => const [MediaType.anime, MediaType.manga];
 
   @override
-  FeedScreenView get feedView => AnilistFeedView();
+  FeedScreenView get feedView => AnilistFeedView(this);
 
   @override
   SearchScreenView get searchView => AnilistSearchView();
 
   @override
-  DetailScreenView get detailView => AnilistDetailView();
+  DetailScreenView get detailView => AnilistDetailView(this);
 
   @override
   NotificationScreenView get notificationView => AnilistNotificationView();

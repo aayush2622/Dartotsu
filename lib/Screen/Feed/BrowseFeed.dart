@@ -4,11 +4,8 @@ import '../../Core/Services/MediaService.dart';
 import '../../Widgets/Components/NotImplemented.dart';
 import 'FeedHeader.dart';
 import 'FeedNavigation.dart';
-import 'MediaSectionsScreen.dart';
+import 'ScreenWidgetList.dart';
 
-/// One browse tab for a [MediaType] the service declares — a spotlight
-/// carousel, the viewer's lists folded above the browse rows, and per-section
-/// pagination.
 class BrowseFeed extends StatelessWidget {
   final MediaService service;
   final MediaType type;
@@ -20,19 +17,17 @@ class BrowseFeed extends StatelessWidget {
     if (view == null) {
       return NotImplemented(service: service.name, area: type.label);
     }
-    return MediaSectionsScreen(
+    return ScreenWidgetList(
       header: FeedHeader(
         title: type.label,
         onSearch: service.searchView == null
             ? null
             : () => openSearch(context, service, type: type),
       ),
-      loader: () => view.sectionsStream(type),
+      loader: () => view.screenStream(type),
       cacheId: '${service.id}/${type.name}',
       reloadOn: service.auth?.user.stream,
       onMediaTap: (m, tag) => openDetail(context, service, m, heroTag: tag),
-      onSectionLoadMore: (section, page) => view.loadMore(type, section, page),
-      spotlight: view.spotlight(type),
     );
   }
 }

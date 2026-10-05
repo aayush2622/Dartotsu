@@ -53,15 +53,6 @@ class AnilistQueries extends Queries {
   Future<Media?> mediaDetails(Media media) => _mediaDetails(media);
 
   @override
-  Future<Map<String, List<Media>>> initHomePage() => _initHomePage();
-
-  @override
-  Future<Map<String, List<Media>>> getAnimeList() => _getAnimeList();
-
-  @override
-  Future<Map<String, List<Media>>> getMangaList() => _getMangaList();
-
-  @override
   List<SectionJob> homeJobs() => _homeJobs();
 
   @override
@@ -117,4 +108,15 @@ List<Media> _collectionMedia(Map<String, dynamic>? collection) {
 Map<String, List<Media>> _nonEmpty(Map<String, List<Media>> map) {
   map.removeWhere((_, v) => v.isEmpty);
   return map;
+}
+
+(String, int) currentAnilistSeason() {
+  final now = DateTime.now();
+  final season = switch (now.month) {
+    12 || 1 || 2 => 'WINTER',
+    3 || 4 || 5 => 'SPRING',
+    6 || 7 || 8 => 'SUMMER',
+    _ => 'FALL',
+  };
+  return (season, now.month == 12 ? now.year + 1 : now.year);
 }

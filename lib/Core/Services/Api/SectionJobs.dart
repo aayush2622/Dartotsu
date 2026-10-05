@@ -1,5 +1,6 @@
 import '../../../Logger.dart';
 import '../Model/Media.dart';
+import '../Screens/ScreenWidget.dart';
 
 typedef SectionMap = Map<String, List<Media>>;
 
@@ -40,10 +41,14 @@ Stream<SectionMap> runSectionJobs(
   }
 }
 
-Future<SectionMap> foldSections(Stream<SectionMap> stream) async {
-  final out = <String, List<Media>>{};
-  await for (final patch in stream) {
-    out.addAll(patch);
+Stream<List<ScreenWidget>> sectionWidgets(
+  List<SectionJob> jobs, {
+  bool parallel = true,
+  required ScreenWidget Function(String title, List<Media> media) build,
+}) async* {
+  final acc = <String, List<Media>>{};
+  await for (final patch in runSectionJobs(jobs, parallel: parallel)) {
+    acc.addAll(patch);
+    yield [for (final e in acc.entries) build(e.key, e.value)];
   }
-  return out;
 }

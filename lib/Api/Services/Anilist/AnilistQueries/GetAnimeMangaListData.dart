@@ -18,12 +18,6 @@ class _BrowseRail {
 }
 
 extension on AnilistQueries {
-  Future<Map<String, List<Media>>> _getAnimeList() =>
-      foldSections(runSectionJobs(_browseJobs(anime: true), parallel: false));
-
-  Future<Map<String, List<Media>>> _getMangaList() =>
-      foldSections(runSectionJobs(_browseJobs(anime: false), parallel: false));
-
   List<SectionJob> _browseJobs({required bool anime}) {
     final rails = anime ? _animeRails() : _mangaRails();
     if (AnilistPref.queryLoadMode.value == QueryLoadMode.stacked) {
@@ -57,7 +51,7 @@ Map<String, List<Media>> _parseBrowse(Map<String, dynamic> args) {
 
 List<_BrowseRail> _animeRails() {
   final now = DateTime.now();
-  final season = ['WINTER', 'SPRING', 'SUMMER', 'FALL'][(now.month - 1) ~/ 3];
+  final (season, seasonYear) = currentAnilistSeason();
   final cutoff = now.millisecondsSinceEpoch ~/ 1000 - 10000;
   return [
     _BrowseRail('Recent Updates', 'recentUpdates', '''
@@ -79,7 +73,7 @@ List<_BrowseRail> _animeRails() {
         'POPULARITY_DESC',
         'ANIME',
         season: season,
-        seasonYear: now.year,
+        seasonYear: seasonYear,
       ),
     ),
     _BrowseRail(

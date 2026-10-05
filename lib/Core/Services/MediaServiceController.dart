@@ -34,23 +34,6 @@ class MediaServiceController extends GetxController {
     PrefName.service.value = id;
   }
 
-  T? getAnyValue<T>(T? Function(MediaService service) selector) {
-    for (final service in services) {
-      final value = selector(service);
-      if (value == null) continue;
-      if (value is String && value.isEmpty) continue;
-      return value;
-    }
-    return null;
-  }
-
-  T get<T extends MediaService>() =>
-      services.firstWhere(
-            (s) => s is T,
-            orElse: () => throw StateError('Service $T not registered'),
-          )
-          as T;
-
   MediaService? _byId(String id) =>
       services.firstWhereOrNull((s) => s.id == id);
 }

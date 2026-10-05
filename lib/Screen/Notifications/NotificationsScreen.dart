@@ -182,8 +182,6 @@ class _NotificationsScreenState extends BaseScreen<NotificationsScreen> {
 
   void _open(ServiceNotification n) {
     final service = find<MediaServiceController>().currentService.value;
-    final view = service.detailView;
-    if (view == null) return;
     navigateToPage(
       context,
       DetailScreen(
@@ -192,7 +190,7 @@ class _NotificationsScreenState extends BaseScreen<NotificationsScreen> {
           cover: n.imageUrl,
           shareLink: 'https://anilist.co/anime/${n.mediaId}',
         ),
-        view: view,
+        view: service.detailView,
         mutations: service.getMutations,
       ),
     );

@@ -226,7 +226,7 @@ class _SearchScreenState extends BaseScreen<SearchScreen> {
     return PosterCard(
       heroTag: tag,
       imageUrl: m.cover,
-      sourceIconUrl: m.sourceData?.iconUrl,
+      overlay: skeleton ? null : widget.view.overlay(m),
       title: m.mainName,
       subtitle: [
         if (m.format != null) m.format!.titleCase,
@@ -235,13 +235,11 @@ class _SearchScreenState extends BaseScreen<SearchScreen> {
       score: (m.meanScore ?? 0) > 0 ? m.meanScore! / 10 : null,
       onTap: () {
         final service = find<MediaServiceController>().currentService.value;
-        final view = service.detailView;
-        if (view == null) return;
         navigateToPage(
           context,
           DetailScreen(
             media: m,
-            view: view,
+            view: service.detailView,
             mutations: service.getMutations,
             heroTag: tag,
           ),

@@ -3,9 +3,9 @@ import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../Core/Services/MediaService.dart';
 import '../Feed/FeedNavigation.dart';
+import '../Feed/ScreenWidgetList.dart';
 import 'Components/LoginPrompt.dart';
 import 'HomeHeader.dart';
-import 'HomeScreenList.dart';
 
 class HomeFeed extends StatelessWidget {
   final MediaService service;
@@ -19,12 +19,10 @@ class HomeFeed extends StatelessWidget {
   }
 
   Widget _feed(BuildContext context, {required bool signedIn}) {
-    final view = signedIn
-        ? (service.homeView ?? service.localHomeView)
-        : service.localHomeView;
+    final view = service.homeView;
     final id = '${service.id}/home/${signedIn ? 'api' : 'local'}';
 
-    return HomeScreenList(
+    return ScreenWidgetList(
       key: ValueKey(id),
       header: Column(
         children: [

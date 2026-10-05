@@ -10,17 +10,9 @@ abstract class Queries {
 
   Future<Media?> mediaDetails(Media media);
 
-  Future<Map<String, List<Media>>> initHomePage();
+  List<SectionJob> homeJobs();
 
-  Future<Map<String, List<Media>>> getAnimeList();
-
-  Future<Map<String, List<Media>>> getMangaList();
-
-  List<SectionJob> homeJobs() => [initHomePage];
-
-  List<SectionJob> browseJobs({required bool anime}) => [
-    anime ? getAnimeList : getMangaList,
-  ];
+  List<SectionJob> browseJobs({required bool anime});
 
   Future<Map<String, List<Media>>> getMediaLists({
     required bool anime,
