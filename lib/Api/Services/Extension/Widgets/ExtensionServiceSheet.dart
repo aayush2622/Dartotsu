@@ -104,13 +104,13 @@ class ExtensionServiceSheet extends StatelessWidget {
                         children: [
                           for (final source in sources)
                             Obx(
-                              () => CheckboxListTile(
+                              () => SwitchListTile(
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(14),
                                 ),
                                 value: isSourceLoaded(type, source),
                                 onChanged: (v) {
-                                  setSourceLoaded(type, source, v ?? false);
+                                  setSourceLoaded(type, source, v);
                                   tryFind<RefreshController>()?.all();
                                 },
                                 title: Text(

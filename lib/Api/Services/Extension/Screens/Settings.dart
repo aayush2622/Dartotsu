@@ -3,12 +3,15 @@ import 'package:flutter/material.dart';
 
 import '../../../../Core/Services/MediaService.dart';
 import '../../../../Model/Setting.dart';
+import '../../../../Screen/Settings/Widgets/SegmentedSetting.dart';
+import '../../../../Widgets/Components/AppControls.dart';
 import '../ExtensionServices.dart';
 import '../Widgets/ExtensionServiceSheet.dart';
 
 class ExtensionSettingsView implements SettingsScreenView {
   @override
   List<Setting> build(BuildContext context) => [
+    const Setting.header('Services'),
     for (final (label, type, icon) in const [
       ('Anime', ItemType.anime, Icons.movie_filter_rounded),
       ('Manga', ItemType.manga, Icons.menu_book_rounded),
@@ -20,6 +23,19 @@ class ExtensionSettingsView implements SettingsScreenView {
         isActivity: true,
         onClick: () => showExtensionServiceSheet(context, type),
       ),
+    const Setting.header('Browse'),
+    segmentedSetting<String>(
+      name: 'Default feed',
+      description: 'Which list a source opens with',
+      icon: Icons.explore_rounded,
+      label: 'Default feed',
+      value: extensionDefaultFeedPref.rx.value,
+      segments: const [
+        AppSegment('popular', label: 'Popular'),
+        AppSegment('latest', label: 'Latest'),
+      ],
+      onChanged: (v) => extensionDefaultFeedPref.rx.value = v,
+    ),
   ];
 
   String _description(ItemType type) {

@@ -28,6 +28,12 @@ Pref<List<String>> mutedSourcesPref(String serviceId, ItemType type) => Pref(
   PrefLocation.OTHER,
 );
 
+const extensionDefaultFeedPref = Pref(
+  'extensionDefaultFeed',
+  'popular',
+  PrefLocation.OTHER,
+);
+
 List<Extension> extensionServicesFor(ItemType type) =>
     tryFind<ExtensionManager>()?.managers
         .where((e) => e.supports(type))
@@ -49,36 +55,61 @@ void setExtensionService(ItemType type, String id) {
 List<Source> installedSources(ItemType type) =>
     extensionServiceFor(type)?.state(type).installed.value ?? const [];
 
+String _sourceGroup(Source source) {
+  final name = (source.name ?? '').trim().toLowerCase();
+  return name.isEmpty ? 'id:${source.id}' : name;
+}
+
+List<Source> _onePerName(List<Source> sources) {
+  final groups = <String, List<Source>>{};
+  for (final s in sources) {
+    groups.putIfAbsent(_sourceGroup(s), () => []).add(s);
+  }
+  final keep = <Source>{
+    for (final group in groups.values)
+      group.firstWhereOrNull((s) => s.lang == 'en') ?? group.first,
+  };
+  return [
+    for (final s in sources)
+      if (keep.contains(s)) s,
+  ];
+}
+
 List<Source> loadedSources(ItemType type) {
   final service = extensionServiceFor(type);
   if (service == null) return const [];
   final muted = mutedSourcesPref(service.id, type).rx.value.toSet();
-  return service
-      .state(type)
-      .installed
-      .value
-      .where((s) => !muted.contains(s.id))
-      .toList();
+  return _onePerName(
+    service
+        .state(type)
+        .installed
+        .value
+        .where((s) => !muted.contains(s.id))
+        .toList(),
+  );
 }
 
-bool isSourceLoaded(ItemType type, Source source) {
-  final service = extensionServiceFor(type);
-  if (service == null) return false;
-  return !mutedSourcesPref(service.id, type).rx.value.contains(source.id);
-}
+bool isSourceLoaded(ItemType type, Source source) =>
+    loadedSources(type).any((s) => s.id == source.id);
 
 void setSourceLoaded(ItemType type, Source source, bool loaded) {
   final service = extensionServiceFor(type);
   final id = source.id;
   if (service == null || id == null) return;
   final pref = mutedSourcesPref(service.id, type);
-  final muted = pref.rx.value.toList();
+  final muted = pref.rx.value.toSet();
+  final siblings = [
+    for (final s in service.state(type).installed.value)
+      if (s.id != null && s.id != id && _sourceGroup(s) == _sourceGroup(source))
+        s.id!,
+  ];
+  muted.addAll(siblings);
   if (loaded) {
     muted.remove(id);
-  } else if (!muted.contains(id)) {
+  } else {
     muted.add(id);
   }
-  pref.rx.value = muted;
+  pref.rx.value = muted.toList();
 }
 
 LocalListStore extensionStore(ItemType type) {
