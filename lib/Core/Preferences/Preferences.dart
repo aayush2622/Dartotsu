@@ -51,8 +51,6 @@ class PrefName {
     PrefLocation.COMMON,
   );
 
-  static const anilistToken = Pref('anilistToken', '', PrefLocation.PROTECTED);
-
   static const checkForUpdates = Pref(
     'checkForUpdates',
     true,

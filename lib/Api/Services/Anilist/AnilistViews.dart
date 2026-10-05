@@ -5,15 +5,30 @@ import '../../../Core/Services/MediaService.dart';
 import '../../../Core/Services/Model/Media.dart';
 import '../../../Model/SearchResults.dart';
 import '../../../Model/Setting.dart';
+import '../../../Screen/Settings/Widgets/SegmentedSetting.dart';
 import '../../../Utils/Function.dart';
 import '../../../Utils/Functions/GetXFunctions.dart';
+import '../../../Widgets/Components/AppControls.dart';
 import 'AnilistAuth.dart';
+import 'AnilistPrefs.dart';
+import 'Widgets/HomeLayoutSheet.dart';
 
 AnilistAuth get _auth => find<AnilistAuth>();
 
+bool get _stacked => AnilistPref.queryLoadMode.value == QueryLoadMode.stacked;
+
 class AnilistHomeView implements HomeScreenView {
   @override
-  Sections sections() => _auth.queries.initHomePage();
+  Stream<List<ScreenWidget>> screenStream() async* {
+    final acc = <String, List<Media>>{};
+    await for (final patch in runSectionJobs(
+      _auth.queries.homeJobs(),
+      parallel: _stacked,
+    )) {
+      acc.addAll(patch);
+      yield [for (final e in acc.entries) ScreenWidget.media(e.key, e.value)];
+    }
+  }
 
   @override
   Future<List<String?>> bannerImages() => _auth.queries.getBannerImages();
@@ -72,13 +87,17 @@ Future<List<Media>?> _loadMoreSection(
 
 class AnilistFeedView extends FeedScreenView {
   @override
-  Sections userLists(MediaType type) =>
-      _auth.queries.getMediaLists(anime: type.isVideo);
+  List<SectionJob> jobs(MediaType type) => [
+    if (_auth.isLoggedIn)
+      () => _auth.queries.getMediaLists(anime: type.isVideo),
+    ..._auth.queries.browseJobs(anime: type.isVideo),
+  ];
 
   @override
-  Sections browse(MediaType type) => type.isVideo
-      ? _auth.queries.getAnimeList()
-      : _auth.queries.getMangaList();
+  bool parallelJobs(MediaType type) => _stacked;
+
+  @override
+  String? spotlight(MediaType type) => 'Trending Now';
 
   @override
   Future<List<Media>?> loadMore(MediaType type, String section, int page) =>
@@ -162,9 +181,42 @@ class AnilistSettingsView implements SettingsScreenView {
   @override
   List<Setting> build(BuildContext context) {
     final user = _auth.user.value;
+    final layout = AnilistPref.homeLayout.rx.value;
+    final shown = layout.values.where((v) => v).length;
     return [
-      Setting(
-        type: SettingType.normal,
+      segmentedSetting<QueryLoadMode>(
+        name: 'Section loading',
+        description:
+            'All at once sends one stacked request per page — fastest, but a '
+            'big single hit on the API. One by one fetches each row '
+            'separately: slower, but rows appear as they arrive and it eats '
+            'far less of your rate limit.',
+        icon: Icons.bolt_rounded,
+        label: 'Fetch',
+        value: AnilistPref.queryLoadMode.rx.value,
+        onChanged: (v) => AnilistPref.queryLoadMode.rx.value = v,
+        segments: const [
+          AppSegment(QueryLoadMode.stacked, label: 'All at once'),
+          AppSegment(QueryLoadMode.sequential, label: 'One by one'),
+        ],
+      ),
+      Setting.normal(
+        name: 'Home sections',
+        description:
+            '$shown of ${layout.length} shown — tap to pick and reorder',
+        icon: Icons.dashboard_customize_rounded,
+        isActivity: true,
+        isVisible: _auth.isLoggedIn,
+        onClick: () => showHomeLayoutSheet(context),
+      ),
+      Setting.switchType(
+        name: 'Hide private entries',
+        description: 'Keep entries marked private on AniList out of the feed',
+        icon: Icons.lock_outline_rounded,
+        isChecked: AnilistPref.hidePrivate.rx.value,
+        onSwitchChange: (v) => AnilistPref.hidePrivate.rx.value = v,
+      ),
+      Setting.normal(
         name: 'AniList profile',
         description: user?.name ?? 'Not signed in',
         icon: Icons.open_in_new_rounded,
@@ -172,8 +224,7 @@ class AnilistSettingsView implements SettingsScreenView {
         onClick: () =>
             openLinkInBrowser('https://anilist.co/user/${user?.name}'),
       ),
-      Setting(
-        type: SettingType.normal,
+      Setting.normal(
         name: 'Refresh from AniList',
         description: 'Re-pull your profile and counts',
         icon: Icons.refresh_rounded,

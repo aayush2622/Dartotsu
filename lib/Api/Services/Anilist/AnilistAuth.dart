@@ -7,6 +7,7 @@ import '../../../Core/Preferences/PrefManager.dart';
 import '../../../Core/Services/ServiceAuth.dart';
 import '../../../Utils/Functions/SnackBar.dart';
 import 'AnilistClient.dart';
+import 'AnilistPrefs.dart';
 import 'AnilistMutations.dart';
 import 'AnilistQueries.dart';
 import 'AnilistUser.dart';
@@ -19,7 +20,7 @@ class AnilistAuth extends GetxController implements ServiceAuth {
       '?client_id=$_clientId&response_type=token';
   static const _userCacheKey = 'anilistUser';
 
-  final token = PrefName.anilistToken.rx;
+  final token = AnilistPref.token.rx;
 
   @override
   final user = Rxn<ServiceUser>();

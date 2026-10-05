@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 
 import '../../../Core/Preferences/PrefManager.dart';
 import '../../../Core/Services/Api/Queries.dart';
+import '../../../Core/Services/Api/SectionJobs.dart';
 import '../../../Core/Services/Model/Author.dart';
 import '../../../Core/Services/Model/Character.dart';
 import '../../../Core/Services/Model/Media.dart';
@@ -16,6 +17,8 @@ import '../../../Utils/Functions/SnackBar.dart';
 import 'AnilistClient.dart';
 import 'AnilistMedia.dart';
 import 'AnilistNotification.dart';
+import 'AnilistPrefs.dart';
+import 'AnilistService.dart';
 
 part 'AnilistQueries/GetAnimeMangaListData.dart';
 part 'AnilistQueries/GetBannerImages.dart';
@@ -57,6 +60,13 @@ class AnilistQueries extends Queries {
 
   @override
   Future<Map<String, List<Media>>> getMangaList() => _getMangaList();
+
+  @override
+  List<SectionJob> homeJobs() => _homeJobs();
+
+  @override
+  List<SectionJob> browseJobs({required bool anime}) =>
+      _browseJobs(anime: anime);
 
   @override
   Future<Map<String, List<Media>>> getMediaLists({

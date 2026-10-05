@@ -1,41 +1,154 @@
 part of '../AnilistQueries.dart';
 
+class _BrowseRail {
+  final String title;
+  final String alias;
+  final String fragment;
+
+  final String kind;
+
+  const _BrowseRail(
+    this.title,
+    this.alias,
+    this.fragment, {
+    this.kind = 'page',
+  });
+
+  List<String> get args => [title, alias, kind];
+}
+
 extension on AnilistQueries {
-  Future<Map<String, List<Media>>> _getAnimeList() async =>
-      compute(_parseAnimeList, await client.queryRaw(_queryAnimeList()));
+  Future<Map<String, List<Media>>> _getAnimeList() =>
+      foldSections(runSectionJobs(_browseJobs(anime: true), parallel: false));
 
-  Future<Map<String, List<Media>>> _getMangaList() async =>
-      compute(_parseMangaList, await client.queryRaw(_queryMangaList()));
+  Future<Map<String, List<Media>>> _getMangaList() =>
+      foldSections(runSectionJobs(_browseJobs(anime: false), parallel: false));
+
+  List<SectionJob> _browseJobs({required bool anime}) {
+    final rails = anime ? _animeRails() : _mangaRails();
+    if (AnilistPref.queryLoadMode.value == QueryLoadMode.stacked) {
+      return [() => _fetchRails(rails)];
+    }
+    return [
+      for (final rail in rails) () => _fetchRails([rail]),
+    ];
+  }
+
+  Future<Map<String, List<Media>>> _fetchRails(List<_BrowseRail> rails) async {
+    final gql = rails.map((r) => r.fragment).join('\n');
+    return compute(_parseBrowse, {
+      'body': await client.queryRaw('{$gql}'),
+      'rails': [for (final rail in rails) rail.args],
+    });
+  }
 }
 
-Map<String, List<Media>> _parseAnimeList(String body) {
-  final data = anilistData(body);
-  return _nonEmpty({
-    'Recent Updates': _recentUpdates(data['recentUpdates']),
-    'Trending Now': _pageMedia(data['trendingAnime'] as Map<String, dynamic>?),
-    'Popular This Season': _pageMedia(data['season'] as Map<String, dynamic>?),
-    'Trending Movies': _pageMedia(data['movies'] as Map<String, dynamic>?),
-    'Top Rated Series': _pageMedia(data['topRated'] as Map<String, dynamic>?),
-    'Most Favourite Series': _pageMedia(
-      data['mostFav'] as Map<String, dynamic>?,
+Map<String, List<Media>> _parseBrowse(Map<String, dynamic> args) {
+  final data = anilistData(args['body'] as String);
+  final out = <String, List<Media>>{};
+  for (final rail in (args['rails'] as List).cast<List>()) {
+    final [title, alias, kind] = rail.cast<String>();
+    out[title] = kind == 'airing'
+        ? _recentUpdates(data[alias])
+        : _pageMedia(data[alias] as Map<String, dynamic>?);
+  }
+  return _nonEmpty(out);
+}
+
+List<_BrowseRail> _animeRails() {
+  final now = DateTime.now();
+  final season = ['WINTER', 'SPRING', 'SUMMER', 'FALL'][(now.month - 1) ~/ 3];
+  final cutoff = now.millisecondsSinceEpoch ~/ 1000 - 10000;
+  return [
+    _BrowseRail('Recent Updates', 'recentUpdates', '''
+  recentUpdates: Page(page: 1, perPage: 50) {
+    airingSchedules(airingAt_greater: 0, airingAt_lesser: $cutoff, sort: TIME_DESC) {
+      episode airingAt media { $anilistMediaFragment }
+    }
+  }''', kind: 'airing'),
+    _BrowseRail(
+      'Trending Now',
+      'trendingAnime',
+      _browseQuery('trendingAnime', 'TRENDING_DESC', 'ANIME', perPage: 20),
     ),
-    'Popular Anime': _pageMedia(data['popular'] as Map<String, dynamic>?),
-  });
+    _BrowseRail(
+      'Popular This Season',
+      'season',
+      _browseQuery(
+        'season',
+        'POPULARITY_DESC',
+        'ANIME',
+        season: season,
+        seasonYear: now.year,
+      ),
+    ),
+    _BrowseRail(
+      'Trending Movies',
+      'movies',
+      _browseQuery('movies', 'POPULARITY_DESC', 'ANIME', format: 'MOVIE'),
+    ),
+    _BrowseRail(
+      'Top Rated Series',
+      'topRated',
+      _browseQuery('topRated', 'SCORE_DESC', 'ANIME', format: 'TV'),
+    ),
+    _BrowseRail(
+      'Most Favourite Series',
+      'mostFav',
+      _browseQuery('mostFav', 'FAVOURITES_DESC', 'ANIME', format: 'TV'),
+    ),
+    _BrowseRail(
+      'Popular Anime',
+      'popular',
+      _browseQuery('popular', 'POPULARITY_DESC', 'ANIME'),
+    ),
+  ];
 }
 
-Map<String, List<Media>> _parseMangaList(String body) {
-  final data = anilistData(body);
-  return _nonEmpty({
-    'Trending Now': _pageMedia(data['trending'] as Map<String, dynamic>?),
-    'Trending Manhwa': _pageMedia(data['manhwa'] as Map<String, dynamic>?),
-    'Trending Novels': _pageMedia(data['novels'] as Map<String, dynamic>?),
-    'Top Rated Manga': _pageMedia(data['topRated'] as Map<String, dynamic>?),
-    'Most Favourite Manga': _pageMedia(
-      data['mostFav'] as Map<String, dynamic>?,
+List<_BrowseRail> _mangaRails() => [
+  _BrowseRail(
+    'Trending Now',
+    'trending',
+    _browseQuery(
+      'trending',
+      'TRENDING_DESC',
+      'MANGA',
+      country: 'JP',
+      perPage: 20,
     ),
-    'Popular Manga': _pageMedia(data['popular'] as Map<String, dynamic>?),
-  });
-}
+  ),
+  _BrowseRail(
+    'Trending Manhwa',
+    'manhwa',
+    _browseQuery('manhwa', 'POPULARITY_DESC', 'MANGA', country: 'KR'),
+  ),
+  _BrowseRail(
+    'Trending Novels',
+    'novels',
+    _browseQuery(
+      'novels',
+      'POPULARITY_DESC',
+      'MANGA',
+      format: 'NOVEL',
+      country: 'JP',
+    ),
+  ),
+  _BrowseRail(
+    'Top Rated Manga',
+    'topRated',
+    _browseQuery('topRated', 'SCORE_DESC', 'MANGA'),
+  ),
+  _BrowseRail(
+    'Most Favourite Manga',
+    'mostFav',
+    _browseQuery('mostFav', 'FAVOURITES_DESC', 'MANGA'),
+  ),
+  _BrowseRail(
+    'Popular Manga',
+    'popular',
+    _browseQuery('popular', 'POPULARITY_DESC', 'MANGA', country: 'JP'),
+  ),
+];
 
 List<Media> _recentUpdates(Object? page) {
   final seen = <String>{};
@@ -73,34 +186,3 @@ String _browseQuery(
     media($filters) { $anilistMediaFragment }
   }''';
 }
-
-String _queryAnimeList() {
-  final now = DateTime.now();
-  final season = ['WINTER', 'SPRING', 'SUMMER', 'FALL'][(now.month - 1) ~/ 3];
-  final cutoff = now.millisecondsSinceEpoch ~/ 1000 - 10000;
-  return '''
-{
-  recentUpdates: Page(page: 1, perPage: 50) {
-    airingSchedules(airingAt_greater: 0, airingAt_lesser: $cutoff, sort: TIME_DESC) {
-      episode airingAt media { $anilistMediaFragment }
-    }
-  }
-${_browseQuery('trendingAnime', 'TRENDING_DESC', 'ANIME', perPage: 20)}
-${_browseQuery('season', 'POPULARITY_DESC', 'ANIME', season: season, seasonYear: now.year)}
-${_browseQuery('movies', 'POPULARITY_DESC', 'ANIME', format: 'MOVIE')}
-${_browseQuery('topRated', 'SCORE_DESC', 'ANIME', format: 'TV')}
-${_browseQuery('mostFav', 'FAVOURITES_DESC', 'ANIME', format: 'TV')}
-${_browseQuery('popular', 'POPULARITY_DESC', 'ANIME')}
-}''';
-}
-
-String _queryMangaList() =>
-    '''
-{
-${_browseQuery('trending', 'TRENDING_DESC', 'MANGA', country: 'JP', perPage: 20)}
-${_browseQuery('manhwa', 'POPULARITY_DESC', 'MANGA', country: 'KR')}
-${_browseQuery('novels', 'POPULARITY_DESC', 'MANGA', format: 'NOVEL', country: 'JP')}
-${_browseQuery('topRated', 'SCORE_DESC', 'MANGA')}
-${_browseQuery('mostFav', 'FAVOURITES_DESC', 'MANGA')}
-${_browseQuery('popular', 'POPULARITY_DESC', 'MANGA', country: 'JP')}
-}''';
