@@ -1,10 +1,12 @@
+import 'package:flutter/foundation.dart';
+
 import '../../Logger.dart';
 import '../Preferences/PrefManager.dart';
 import 'Model/Media.dart';
 
 /// Disk-backed last-known result for a `Map<String, List<Media>>` screen
-/// (home / anime / manga). Read is synchronous so a screen can paint cached
-/// content on the first frame, then revalidate over the network.
+/// (home / anime / manga). Decoding and encoding run on a worker isolate so
+/// painting cached content and persisting fresh content never janks a frame.
 class SectionCache {
   final String id;
 
@@ -16,33 +18,38 @@ class SectionCache {
 
   String get _key => 'sections/$id';
 
-  Map<String, List<Media>>? read() {
+  Future<Map<String, List<Media>>?> read() async {
     final raw = loadCustomData<Map<String, dynamic>>(_key);
     if (raw == null || raw.isEmpty) return null;
     try {
-      final out = <String, List<Media>>{};
-      raw.forEach((section, list) {
-        out[section] = [
-          for (final e in list as List)
-            Media.fromJson(Map<String, dynamic>.from(e as Map)),
-        ];
-      });
-      return out;
+      return await compute(_decode, raw);
     } catch (e) {
       logger('SectionCache($id) read failed: $e');
       return null;
     }
   }
 
-  void write(Map<String, List<Media>> data) {
+  Future<void> write(Map<String, List<Media>> data) async {
     try {
-      final json = <String, dynamic>{};
-      data.forEach((section, list) {
-        json[section] = [for (final m in list.take(_cap)) m.toJson()];
-      });
+      final capped = {
+        for (final e in data.entries) e.key: e.value.take(_cap).toList(),
+      };
+      final json = await compute(_encode, capped);
       saveCustomData<Map<String, dynamic>>(_key, json);
     } catch (e) {
       logger('SectionCache($id) write failed: $e');
     }
   }
 }
+
+Map<String, List<Media>> _decode(Map<String, dynamic> raw) => {
+  for (final e in raw.entries)
+    e.key: [
+      for (final item in e.value as List)
+        Media.fromJson(Map<String, dynamic>.from(item as Map)),
+    ],
+};
+
+Map<String, dynamic> _encode(Map<String, List<Media>> data) => {
+  for (final e in data.entries) e.key: [for (final m in e.value) m.toJson()],
+};

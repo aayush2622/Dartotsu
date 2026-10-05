@@ -68,14 +68,7 @@ class _ScreenWidgetListState extends State<ScreenWidgetList>
   @override
   void initState() {
     super.initState();
-    final cached = _cache?.read();
-    if (cached != null && cached.isNotEmpty) {
-      _mediaByTitle.addAll(cached);
-      _order.addAll(cached.keys);
-      _current.value = [
-        for (final e in cached.entries) ScreenWidget.media(e.key, e.value),
-      ];
-    }
+    unawaited(_paintCached());
     _refresh();
     _reloadSub = widget.reloadOn?.listen((_) => _refresh());
 
@@ -90,8 +83,19 @@ class _ScreenWidgetListState extends State<ScreenWidgetList>
     }
   }
 
+  Future<void> _paintCached() async {
+    final cached = await _cache?.read();
+    if (!mounted || cached == null || cached.isEmpty || _loaded.value) return;
+    _mediaByTitle.addAll(cached);
+    _order.addAll(cached.keys);
+    _current.value = [
+      for (final e in cached.entries) ScreenWidget.media(e.key, e.value),
+    ];
+  }
+
   @override
   void dispose() {
+    _composeTimer?.cancel();
     _reloadSub?.cancel();
     _signalWorker?.dispose();
     super.dispose();
@@ -131,11 +135,7 @@ class _ScreenWidgetListState extends State<ScreenWidgetList>
       final title = item.title!;
       if (!_order.contains(title)) _order.add(title);
       final incoming = item.media!;
-      final previous = _mediaByTitle[title];
-      _mediaByTitle[title] =
-          (previous != null && _sameOrder(previous, incoming))
-          ? previous
-          : incoming;
+      _mediaByTitle[title] = incoming;
       _remember(_loadMoreFns, title, item.onLoadMore);
       _remember(_sectionBuilders, title, item.section);
       if (item.spotlight) {
@@ -144,7 +144,7 @@ class _ScreenWidgetListState extends State<ScreenWidgetList>
         _spotlight.remove(title);
       }
     }
-    _compose(list);
+    _composeThrottled(list);
   }
 
   void _remember<T>(Map<String, T> map, String title, T? value) {
@@ -165,8 +165,28 @@ class _ScreenWidgetListState extends State<ScreenWidgetList>
     _loadMoreFns.removeWhere((t, _) => !keep.contains(t));
     _sectionBuilders.removeWhere((t, _) => !keep.contains(t));
     _spotlight.removeWhere((t) => !keep.contains(t));
+    _composeTimer?.cancel();
+    _composeTimer = null;
+    _pendingCompose = null;
     _compose(finalList);
-    if (_mediaByTitle.isNotEmpty) _cache?.write(_mediaByTitle);
+    if (_mediaByTitle.isNotEmpty) unawaited(_cache?.write(_mediaByTitle));
+  }
+
+  Timer? _composeTimer;
+  List<ScreenWidget>? _pendingCompose;
+
+  void _composeThrottled(List<ScreenWidget> latest) {
+    if (_current.isEmpty) {
+      _compose(latest);
+      return;
+    }
+    _pendingCompose = latest;
+    _composeTimer ??= Timer(const Duration(milliseconds: 120), () {
+      _composeTimer = null;
+      final pending = _pendingCompose;
+      _pendingCompose = null;
+      if (mounted && pending != null) _compose(pending);
+    });
   }
 
   void _compose(List<ScreenWidget> latest) {
@@ -190,19 +210,6 @@ class _ScreenWidgetListState extends State<ScreenWidgetList>
     if (more == null || more.isEmpty) return null;
     _pages[title] = page;
     return more;
-  }
-
-  bool _sameOrder(List<Media> a, List<Media> b) {
-    if (a.length != b.length) return false;
-    for (var i = 0; i < a.length; i++) {
-      if (a[i].id != b[i].id ||
-          a[i].userProgress != b[i].userProgress ||
-          a[i].userStatus != b[i].userStatus ||
-          a[i].userScore != b[i].userScore) {
-        return false;
-      }
-    }
-    return true;
   }
 
   @override

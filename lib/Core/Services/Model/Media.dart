@@ -190,11 +190,8 @@ class Media {
 extension M on Pages {
   List<Media> toMedia({bool isAnime = false, Source? source}) {
     return list.map((e) {
-      var id = loadCustomData<String>('${source?.name}-${e.url}');
-      if (id == null) {
-        id = e.hashCode.toString();
-        saveCustomData('${source?.name}-${e.url}', id);
-      }
+      final key = '${source?.name}-${e.url}';
+      final id = loadCustomData<String>(key) ?? _stableId(key);
       return Media(
         id: id,
         name: e.title,
@@ -210,4 +207,13 @@ extension M on Pages {
       );
     }).toList();
   }
+}
+
+String _stableId(String key) {
+  var hash = 0xcbf29ce484222325;
+  for (final unit in key.codeUnits) {
+    hash ^= unit;
+    hash *= 0x100000001b3;
+  }
+  return (hash & 0x7fffffffffffffff).toString();
 }
