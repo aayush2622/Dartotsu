@@ -13,6 +13,14 @@ class MediaServiceController extends GetxController {
 
   late final Rx<MediaService> currentService;
 
+  String? get currentBanner => currentService.value.auth?.user.value?.banner;
+
+  Map<String, String> get accounts => {
+    for (final service in services)
+      if (service.auth?.user.value != null)
+        service.name: service.auth!.user.value!.name,
+  };
+
   @override
   void onInit() {
     super.onInit();

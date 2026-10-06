@@ -1,9 +1,7 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:path/path.dart' as p;
 
 import '../../../Core/Preferences/PrefManager.dart';
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
@@ -11,13 +9,12 @@ import '../../../Core/ThemeManager/LocaleController.dart';
 import '../../../Core/ThemeManager/language.dart';
 import '../../../Model/Setting.dart';
 import '../../../Utils/Extensions/ContextExtensions.dart';
-import '../../../Core/Preferences/PrefBackup.dart';
 import '../../../Utils/Functions/GetXFunctions.dart';
-import '../../../Utils/Functions/SnackBar.dart';
-import '../../../Widgets/Components/AlertDialogBuilder.dart';
 import '../../../Widgets/Components/AppControls.dart';
 import '../../../Widgets/Components/CustomBottomDialog.dart';
+import '../Widgets/Backup/BackupSheet.dart';
 import '../Widgets/SegmentedSetting.dart';
+import 'NetworkSettings.dart';
 
 List<Setting> generalSettings(BuildContext context) => [
   Setting.normal(
@@ -77,70 +74,7 @@ List<Setting> generalSettings(BuildContext context) => [
     description: getString.backupAndRestoreDesc,
     icon: Icons.settings_backup_restore_rounded,
     isActivity: true,
-    onClick: () => _showBackupDialog(context),
+    onClick: () => showBackupSheet(context),
   ),
+  ...networkSettings(context),
 ];
-
-void _showBackupDialog(BuildContext context) {
-  final locations = PrefLocation.values;
-  var checked = List<bool>.filled(locations.length, false);
-
-  Set<PrefLocation>? selected() {
-    final chosen = {
-      for (var i = 0; i < locations.length; i++)
-        if (checked[i]) locations[i],
-    };
-    if (chosen.isEmpty) {
-      snackString('Select at least one category');
-      return null;
-    }
-    return chosen;
-  }
-
-  AlertDialogBuilder(context)
-    ..setTitle(getString.backupAndRestore)
-    ..multiChoiceItems(
-      [
-        for (final l in locations)
-          l.name[0] + l.name.substring(1).toLowerCase(),
-      ],
-      checked,
-      (next) => checked = next,
-    )
-    ..setPositiveButton(getString.restore, () async {
-      final chosen = selected();
-      if (chosen == null) return;
-      final picked = await FilePicker.pickFile(dialogTitle: getString.restore);
-      final path = picked?.path;
-      if (path == null) return;
-      try {
-        final json = jsonDecode(await File(path).readAsString());
-        await PrefBackup.restore(
-          json: (json as Map).cast<String, dynamic>(),
-          locations: chosen,
-        );
-        snackString('Preferences restored. Restart the app');
-      } catch (e) {
-        snackString('Failed to restore: $e');
-      }
-    })
-    ..setNegativeButton(getString.backup, () async {
-      final chosen = selected();
-      if (chosen == null) return;
-      try {
-        final dir = await FilePicker.getDirectoryPath(
-          dialogTitle: getString.selectDirectory,
-        );
-        if (dir == null) return;
-        final data = await PrefBackup.export(locations: chosen);
-        final name =
-            'dartotsu_backup_${DateTime.now().millisecondsSinceEpoch}.json';
-        await File(p.join(dir, name)).writeAsString(jsonEncode(data));
-        snackString('Backup saved to $name');
-      } catch (e) {
-        snackString('Backup failed: $e');
-      }
-    })
-    ..setNeutralButton(getString.cancel, null)
-    ..show();
-}

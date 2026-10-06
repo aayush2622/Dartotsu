@@ -8,7 +8,6 @@ import 'Categories/AddonSettings.dart';
 import 'Categories/ExtensionSettings.dart';
 import 'Categories/AppearanceSettings.dart';
 import 'Categories/GeneralSettings.dart';
-import 'Categories/NetworkSettings.dart';
 import 'Categories/UpdateSettings.dart';
 
 export 'Categories/AboutSettings.dart' show settingsAppVersion;
@@ -63,12 +62,6 @@ List<SettingsCategory> get settingsCategories => [
     description: getString.settingsUpdatesDesc,
     icon: Icons.system_update_alt_rounded,
     build: updateSettings,
-  ),
-  SettingsCategory(
-    title: getString.settingsNetwork,
-    description: getString.settingsNetworkDesc,
-    icon: Icons.wifi_tethering_rounded,
-    build: networkSettings,
   ),
   SettingsCategory(
     title: getString.about,

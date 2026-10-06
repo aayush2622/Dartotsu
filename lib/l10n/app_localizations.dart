@@ -677,18 +677,6 @@ abstract class AppLocalizations {
   /// **'Show source icons in the extension lists'**
   String get loadExtensionsIconDesc;
 
-  /// No description provided for @autoUpdate.
-  ///
-  /// In en, this message translates to:
-  /// **'Auto-update'**
-  String get autoUpdate;
-
-  /// No description provided for @autoUpdateDesc.
-  ///
-  /// In en, this message translates to:
-  /// **'Keep addons up to date automatically'**
-  String get autoUpdateDesc;
-
   /// No description provided for @sectionStorage.
   ///
   /// In en, this message translates to:
@@ -712,6 +700,264 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Options'**
   String get sectionOptions;
+
+  /// No description provided for @backupTabBackup.
+  ///
+  /// In en, this message translates to:
+  /// **'Back up'**
+  String get backupTabBackup;
+
+  /// No description provided for @backupTabRestore.
+  ///
+  /// In en, this message translates to:
+  /// **'Restore'**
+  String get backupTabRestore;
+
+  /// No description provided for @backupSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'{keys} settings in {categories} categories'**
+  String backupSummary(Object keys, Object categories);
+
+  /// No description provided for @backupLastBackup.
+  ///
+  /// In en, this message translates to:
+  /// **'Last backup {time}'**
+  String backupLastBackup(Object time);
+
+  /// No description provided for @backupNever.
+  ///
+  /// In en, this message translates to:
+  /// **'No backup yet'**
+  String get backupNever;
+
+  /// No description provided for @backupSelectAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Select all'**
+  String get backupSelectAll;
+
+  /// No description provided for @backupClearAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear'**
+  String get backupClearAll;
+
+  /// No description provided for @backupKeys.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} settings'**
+  String backupKeys(Object count);
+
+  /// No description provided for @backupShowKeys.
+  ///
+  /// In en, this message translates to:
+  /// **'Show settings'**
+  String get backupShowKeys;
+
+  /// No description provided for @backupPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Password (optional)'**
+  String get backupPassword;
+
+  /// No description provided for @backupPasswordHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Leave empty to use the default'**
+  String get backupPasswordHint;
+
+  /// No description provided for @backupSensitive.
+  ///
+  /// In en, this message translates to:
+  /// **'Includes login tokens. Keep this file private'**
+  String get backupSensitive;
+
+  /// No description provided for @backupCreate.
+  ///
+  /// In en, this message translates to:
+  /// **'Create backup'**
+  String get backupCreate;
+
+  /// No description provided for @backupSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Backup saved to {name}'**
+  String backupSaved(Object name);
+
+  /// No description provided for @backupFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Backup failed: {error}'**
+  String backupFailed(Object error);
+
+  /// No description provided for @backupPickFile.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a backup file'**
+  String get backupPickFile;
+
+  /// No description provided for @backupPickFileDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick a .json file made by Dartotsu'**
+  String get backupPickFileDesc;
+
+  /// No description provided for @backupChooseAnother.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose another file'**
+  String get backupChooseAnother;
+
+  /// No description provided for @backupCreatedAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Created'**
+  String get backupCreatedAt;
+
+  /// No description provided for @backupAppVersion.
+  ///
+  /// In en, this message translates to:
+  /// **'App version'**
+  String get backupAppVersion;
+
+  /// No description provided for @backupDevice.
+  ///
+  /// In en, this message translates to:
+  /// **'Device'**
+  String get backupDevice;
+
+  /// No description provided for @backupAccounts.
+  ///
+  /// In en, this message translates to:
+  /// **'Accounts'**
+  String get backupAccounts;
+
+  /// No description provided for @backupSize.
+  ///
+  /// In en, this message translates to:
+  /// **'Size'**
+  String get backupSize;
+
+  /// No description provided for @backupEncrypted.
+  ///
+  /// In en, this message translates to:
+  /// **'Password protected'**
+  String get backupEncrypted;
+
+  /// No description provided for @backupUnlock.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlock'**
+  String get backupUnlock;
+
+  /// No description provided for @backupWrongPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not read this file. Check the password'**
+  String get backupWrongPassword;
+
+  /// No description provided for @backupRestoreSelected.
+  ///
+  /// In en, this message translates to:
+  /// **'Restore selected'**
+  String get backupRestoreSelected;
+
+  /// No description provided for @backupRestoreConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Restore {count} settings? Existing values in these categories are overwritten.'**
+  String backupRestoreConfirm(Object count);
+
+  /// No description provided for @backupRestored.
+  ///
+  /// In en, this message translates to:
+  /// **'Restored. Restart the app to apply everything'**
+  String get backupRestored;
+
+  /// No description provided for @backupRestoreFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Restore failed: {error}'**
+  String backupRestoreFailed(Object error);
+
+  /// No description provided for @backupSelectOne.
+  ///
+  /// In en, this message translates to:
+  /// **'Select at least one category'**
+  String get backupSelectOne;
+
+  /// No description provided for @backupCatTheme.
+  ///
+  /// In en, this message translates to:
+  /// **'Appearance'**
+  String get backupCatTheme;
+
+  /// No description provided for @backupCatThemeDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Theme, colors, glass, fonts and card style'**
+  String get backupCatThemeDesc;
+
+  /// No description provided for @backupCatCommon.
+  ///
+  /// In en, this message translates to:
+  /// **'General'**
+  String get backupCatCommon;
+
+  /// No description provided for @backupCatCommonDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Language, storage, network and extension options'**
+  String get backupCatCommonDesc;
+
+  /// No description provided for @backupCatPlayer.
+  ///
+  /// In en, this message translates to:
+  /// **'Player'**
+  String get backupCatPlayer;
+
+  /// No description provided for @backupCatPlayerDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Player preferences'**
+  String get backupCatPlayerDesc;
+
+  /// No description provided for @backupCatReader.
+  ///
+  /// In en, this message translates to:
+  /// **'Reader'**
+  String get backupCatReader;
+
+  /// No description provided for @backupCatReaderDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Reader preferences'**
+  String get backupCatReaderDesc;
+
+  /// No description provided for @backupCatProtected.
+  ///
+  /// In en, this message translates to:
+  /// **'Accounts'**
+  String get backupCatProtected;
+
+  /// No description provided for @backupCatProtectedDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Login tokens and sign-in data'**
+  String get backupCatProtectedDesc;
+
+  /// No description provided for @backupCatOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Services and feeds'**
+  String get backupCatOther;
+
+  /// No description provided for @backupCatOtherDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Feed layouts, lists and service options'**
+  String get backupCatOtherDesc;
 
   /// No description provided for @glassBackground.
   ///

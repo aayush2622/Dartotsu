@@ -276,12 +276,6 @@ class AppLocalizationsPt extends AppLocalizations {
   String get loadExtensionsIconDesc => 'Desabilitar se extensões página lags';
 
   @override
-  String get autoUpdate => 'Atualização automática';
-
-  @override
-  String get autoUpdateDesc => 'Extensões de atualização automática';
-
-  @override
   String get sectionStorage => 'Storage';
 
   @override
@@ -292,6 +286,151 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get sectionOptions => 'Options';
+
+  @override
+  String get backupTabBackup => 'Back up';
+
+  @override
+  String get backupTabRestore => 'Restore';
+
+  @override
+  String backupSummary(Object keys, Object categories) {
+    return '$keys settings in $categories categories';
+  }
+
+  @override
+  String backupLastBackup(Object time) {
+    return 'Last backup $time';
+  }
+
+  @override
+  String get backupNever => 'No backup yet';
+
+  @override
+  String get backupSelectAll => 'Select all';
+
+  @override
+  String get backupClearAll => 'Clear';
+
+  @override
+  String backupKeys(Object count) {
+    return '$count settings';
+  }
+
+  @override
+  String get backupShowKeys => 'Show settings';
+
+  @override
+  String get backupPassword => 'Password (optional)';
+
+  @override
+  String get backupPasswordHint => 'Leave empty to use the default';
+
+  @override
+  String get backupSensitive => 'Includes login tokens. Keep this file private';
+
+  @override
+  String get backupCreate => 'Create backup';
+
+  @override
+  String backupSaved(Object name) {
+    return 'Backup saved to $name';
+  }
+
+  @override
+  String backupFailed(Object error) {
+    return 'Backup failed: $error';
+  }
+
+  @override
+  String get backupPickFile => 'Choose a backup file';
+
+  @override
+  String get backupPickFileDesc => 'Pick a .json file made by Dartotsu';
+
+  @override
+  String get backupChooseAnother => 'Choose another file';
+
+  @override
+  String get backupCreatedAt => 'Created';
+
+  @override
+  String get backupAppVersion => 'App version';
+
+  @override
+  String get backupDevice => 'Device';
+
+  @override
+  String get backupAccounts => 'Accounts';
+
+  @override
+  String get backupSize => 'Size';
+
+  @override
+  String get backupEncrypted => 'Password protected';
+
+  @override
+  String get backupUnlock => 'Unlock';
+
+  @override
+  String get backupWrongPassword =>
+      'Could not read this file. Check the password';
+
+  @override
+  String get backupRestoreSelected => 'Restore selected';
+
+  @override
+  String backupRestoreConfirm(Object count) {
+    return 'Restore $count settings? Existing values in these categories are overwritten.';
+  }
+
+  @override
+  String get backupRestored => 'Restored. Restart the app to apply everything';
+
+  @override
+  String backupRestoreFailed(Object error) {
+    return 'Restore failed: $error';
+  }
+
+  @override
+  String get backupSelectOne => 'Select at least one category';
+
+  @override
+  String get backupCatTheme => 'Appearance';
+
+  @override
+  String get backupCatThemeDesc => 'Theme, colors, glass, fonts and card style';
+
+  @override
+  String get backupCatCommon => 'General';
+
+  @override
+  String get backupCatCommonDesc =>
+      'Language, storage, network and extension options';
+
+  @override
+  String get backupCatPlayer => 'Player';
+
+  @override
+  String get backupCatPlayerDesc => 'Player preferences';
+
+  @override
+  String get backupCatReader => 'Reader';
+
+  @override
+  String get backupCatReaderDesc => 'Reader preferences';
+
+  @override
+  String get backupCatProtected => 'Accounts';
+
+  @override
+  String get backupCatProtectedDesc => 'Login tokens and sign-in data';
+
+  @override
+  String get backupCatOther => 'Services and feeds';
+
+  @override
+  String get backupCatOtherDesc => 'Feed layouts, lists and service options';
 
   @override
   String get glassBackground => 'Glass background';
@@ -631,12 +770,6 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   @override
   String get loadExtensionsIconDesc =>
       'Desative se a página de extensões ficar lenta';
-
-  @override
-  String get autoUpdate => 'Atualização Automática';
-
-  @override
-  String get autoUpdateDesc => 'Atualização Automática das Extensões';
 
   @override
   String get materialYou => 'Material You';
