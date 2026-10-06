@@ -5,6 +5,7 @@ import '../../Widgets/Components/NotImplemented.dart';
 import 'FeedHeader.dart';
 import 'FeedNavigation.dart';
 import 'ScreenWidgetList.dart';
+import '../Detail/ListEditorSheet.dart';
 
 class BrowseFeed extends StatelessWidget {
   final MediaService service;

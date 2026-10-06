@@ -15,6 +15,7 @@ import '../../Widgets/Shelf/MediaRows.dart';
 import '../../Widgets/Shelf/PosterCard.dart';
 import '../Feed/FeedNavigation.dart';
 import '../../Widgets/Components/EmptyState.dart';
+import '../Detail/ListEditorSheet.dart';
 import '../../Widgets/Components/AppTabs.dart';
 
 class MediaListScreen extends StatefulWidget {

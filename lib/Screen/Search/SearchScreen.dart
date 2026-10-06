@@ -29,9 +29,9 @@ import '../../Widgets/Components/ScrollConfig.dart';
 import '../../Widgets/Shelf/MediaRows.dart';
 import '../../Widgets/Shelf/PosterCard.dart';
 import '../Detail/DetailScreen.dart';
-import '../Feed/FeedNavigation.dart';
 import 'Components/SearchFilterSheet.dart';
 import '../../Widgets/Components/EmptyState.dart';
+import '../Detail/ListEditorSheet.dart';
 
 enum _ResultView { grid, list, banner }
 
@@ -180,7 +180,8 @@ class _SearchScreenState extends BaseScreen<SearchScreen> {
       'search_history/${find<MediaServiceController>().currentService.value.id}/${_type.value.name}';
 
   List<String> get _history =>
-      loadCustomData<List<String>>(_historyKey) ?? const <String>[];
+      loadCustomData<List<String>>(_historyKey, location: PrefLocation.CACHE) ??
+      const <String>[];
 
   void _remember(String term) {
     final t = term.trim();
@@ -189,7 +190,11 @@ class _SearchScreenState extends BaseScreen<SearchScreen> {
       t,
       ..._history.where((e) => e.toLowerCase() != t.toLowerCase()),
     ];
-    saveCustomData<List<String>>(_historyKey, next.take(20).toList());
+    saveCustomData<List<String>>(
+      _historyKey,
+      next.take(20).toList(),
+      location: PrefLocation.CACHE,
+    );
     _historyTick.value++;
   }
 
@@ -197,6 +202,7 @@ class _SearchScreenState extends BaseScreen<SearchScreen> {
     saveCustomData<List<String>>(
       _historyKey,
       _history.where((e) => e != term).toList(),
+      location: PrefLocation.CACHE,
     );
     _historyTick.value++;
   }
@@ -490,7 +496,11 @@ class _SearchScreenState extends BaseScreen<SearchScreen> {
               const Spacer(),
               TextButton(
                 onPressed: () {
-                  saveCustomData<List<String>>(_historyKey, <String>[]);
+                  saveCustomData<List<String>>(
+                    _historyKey,
+                    <String>[],
+                    location: PrefLocation.CACHE,
+                  );
                   _historyTick.value++;
                 },
                 child: const Text('Clear'),

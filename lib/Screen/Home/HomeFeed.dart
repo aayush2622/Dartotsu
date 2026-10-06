@@ -6,6 +6,7 @@ import '../Feed/FeedNavigation.dart';
 import '../Feed/ScreenWidgetList.dart';
 import 'Components/LoginPrompt.dart';
 import 'HomeHeader.dart';
+import '../Detail/ListEditorSheet.dart';
 
 class HomeFeed extends StatelessWidget {
   final MediaService service;

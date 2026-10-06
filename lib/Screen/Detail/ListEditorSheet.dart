@@ -1,8 +1,11 @@
-import 'package:flutter/material.dart';
+import 'dart:async';
 
-import '../../Core/Services/Api/Mutations.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+import '../../Core/Services/MediaService.dart';
+import '../../Core/Services/Screens/DetailCache.dart';
 import '../../Core/Services/Model/Media.dart';
-import '../../Core/Services/Screens/ServiceScreens.dart';
 import '../../Utils/Functions/SnackBar.dart';
 import '../../Widgets/Components/CustomBottomDialog.dart';
 import '../Widgets/ScreenWidgetView.dart';
@@ -48,5 +51,35 @@ void showListEditor(
       negativeCallback: () =>
           run(() => mutations.deleteFromList(media), 'Removed from your list'),
     ),
+  );
+}
+
+Future<void> showQuickListEditor(
+  BuildContext context,
+  MediaService service,
+  Media media,
+) async {
+  final mutations = service.getMutations;
+  if (mutations == null) {
+    snackString('${service.name} has no list to edit');
+    return;
+  }
+  unawaited(HapticFeedback.mediumImpact());
+  final key = '${service.id}/${media.id}';
+  var full = DetailCache.get(key);
+  if (full == null) {
+    snackString('Loading…', simple: true);
+    try {
+      full = await service.getQueries?.mediaDetails(media);
+      if (full != null) DetailCache.put(key, full);
+    } catch (_) {}
+  }
+  if (!context.mounted) return;
+  showListEditor(
+    context,
+    media: full ?? media,
+    view: service.detailView.listEditor,
+    mutations: mutations,
+    onSaved: () async => DetailCache.remove(key),
   );
 }
