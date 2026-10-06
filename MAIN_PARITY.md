@@ -37,6 +37,13 @@ switching services or extension managers never errors.
 - Chapter filters for extension sources (`ListTileChapterFilter`).
 - Settings screens: Player, Reader, per-anime player settings, automatic source selection.
 
+## Library import and export
+
+Done: Settings › Extensions › Lists imports Aniyomi, Mihon / Tachiyomi (`.tachibk`) and Kotatsu (`.zip`)
+backups into the local lists, and exports the local lists back out (`Core/Backup/ExternalLists`, hand-written
+protobuf codec, no generated code). Categories become the list status (Watching / Plan / Completed ...);
+sources are not mapped, so imported titles carry no extension source until they are opened through search.
+
 ## 4. Other services
 
 - MyAnimeList, Simkl, MangaBaka, Kitsu: login, home, anime and manga screens, list editors.

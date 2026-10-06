@@ -48,9 +48,8 @@ class ExtensionQueries extends Queries {
   @override
   List<SectionJob> homeJobs() => [
     for (final anime in const [true, false])
-      () async => filterUninstalled(
-        extensionStore(itemTypeFor(anime: anime)).sections(anime: anime),
-      ),
+      () async =>
+          extensionStore(itemTypeFor(anime: anime)).sections(anime: anime),
   ];
 
   @override
@@ -115,9 +114,7 @@ class ExtensionQueries extends Queries {
     required bool anime,
     int? userId,
     String? sortOrder,
-  }) async => filterUninstalled(
-    extensionStore(itemTypeFor(anime: anime)).sections(anime: anime),
-  );
+  }) async => extensionStore(itemTypeFor(anime: anime)).sections(anime: anime);
 
   @override
   Future<List<Media>> getCalendarData() async => const [];

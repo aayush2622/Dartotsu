@@ -9,7 +9,7 @@ class LocalListStore {
 
   const LocalListStore(this.serviceId);
 
-  static const _cap = 300;
+  static const _cap = 3000;
 
   static final Map<String, List<Media>> _decoded = {};
 
@@ -64,6 +64,38 @@ class LocalListStore {
     media.userUpdatedAt = DateTime.now().millisecondsSinceEpoch;
     final items = read().toList()..removeWhere((m) => m.id == media.id);
     _write([media, ...items]);
+  }
+
+  int addAll(List<Media> incoming, {required bool merge}) {
+    final existing = read().toList();
+    final byId = {for (final m in existing) m.id: m};
+    var added = 0;
+    final result = <Media>[];
+    for (final media in incoming) {
+      media.minimal = false;
+      final current = byId[media.id];
+      if (current == null) {
+        result.add(media);
+        added++;
+      } else if (merge) {
+        if ((media.userProgress ?? 0) > (current.userProgress ?? 0)) {
+          current.userProgress = media.userProgress;
+          current.userStatus = media.userStatus ?? current.userStatus;
+          current.userUpdatedAt = media.userUpdatedAt ?? current.userUpdatedAt;
+        }
+        current.cover ??= media.cover;
+        current.description ??= media.description;
+        if (current.genres.isEmpty) current.genres = media.genres;
+      } else {
+        byId.remove(media.id);
+        result.add(media);
+        added++;
+      }
+    }
+    final all = [...result, ...byId.values]
+      ..sort((a, b) => (b.userUpdatedAt ?? 0).compareTo(a.userUpdatedAt ?? 0));
+    _write(all);
+    return added;
   }
 
   void touch(Media media) {
