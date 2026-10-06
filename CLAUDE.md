@@ -211,7 +211,7 @@ Per-service code goes under **`lib/Api/Services/<Service>/`**.
   (`initHomePage` / `getAnimeList` / `getMangaList` / `getMediaLists` / `getCalendarData` /
   `mediaDetails`) run `compute(_parseX, rawBody)` so `jsonDecode` + map→`Media` + sort are all
   off the UI thread. `anilistData(body)` is the top-level envelope decoder used inside the
-  isolate. `Media.settings` is a lazy getter so `Media` is cheap to send across the boundary.
+  isolate.
 - `AnilistAuth implements ServiceAuth` (GetxController, `lazyPut`) — `token` =
   `PrefName.anilistToken.rx`, `user` = `Rxn<ServiceUser>` holding an `AnilistUser`
   (cached to prefs). `login()` runs `FlutterWebAuth2` implicit grant (`client_id 14959`,
