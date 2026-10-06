@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../Utils/Extensions/ClickCursor.dart';
+
 import '../../Utils/Extensions/ContextExtensions.dart';
 
 class AppSegment<T> {
@@ -116,6 +118,7 @@ class AppChoiceChips<T> extends StatelessWidget {
       children: [
         for (final o in options)
           ChoiceChip(
+            mouseCursor: kClickCursor,
             label: Text(o.label ?? '$o'),
             avatar: o.icon == null ? null : Icon(o.icon, size: 16),
             selected: value == o.value,

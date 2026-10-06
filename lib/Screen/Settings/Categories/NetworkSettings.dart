@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+import '../../../Utils/Extensions/ClickCursor.dart';
 import 'package:rhttp/rhttp.dart';
 
 import '../../../Core/NetworkManager/DnsManager.dart';
@@ -506,6 +508,7 @@ class _DnsSheetState extends State<_DnsSheet> {
             children: [
               for (final p in DohProvider.values)
                 ChoiceChip(
+                  mouseCursor: kClickCursor,
                   label: Text(p.name),
                   selected: _ctrl.text.trim() == p.url,
                   onSelected: (_) => setState(() {

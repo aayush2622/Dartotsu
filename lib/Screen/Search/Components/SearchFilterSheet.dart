@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../Utils/Extensions/ClickCursor.dart';
+
 import '../../../Core/Services/MediaService.dart';
 import '../../../Model/SearchResults.dart';
 import '../../../Utils/Extensions/ContextExtensions.dart';
@@ -322,6 +324,7 @@ class _FilterBodyState extends State<_FilterBody> {
               final excluded = exclude?.contains(o) ?? false;
               final on = selected.contains(o);
               return FilterChip(
+                mouseCursor: kClickCursor,
                 label: Text(o.titleCase),
                 avatar: excluded
                     ? Icon(Icons.block_rounded, size: 16, color: scheme.error)

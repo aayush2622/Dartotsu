@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+import '../../Utils/Extensions/ClickCursor.dart';
 import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../Core/ThemeManager/CardStyleController.dart';
@@ -138,6 +140,7 @@ class _CardStyleScreenState extends BaseScreen<CardStyleScreen> {
         children: [
           for (final id in CardStyle.presetIds)
             ChoiceChip(
+              mouseCursor: kClickCursor,
               label: Text(names[id]!),
               selected: s.preset == id,
               showCheckmark: false,
@@ -145,6 +148,7 @@ class _CardStyleScreenState extends BaseScreen<CardStyleScreen> {
             ),
           if (s.preset == 'custom')
             const ChoiceChip(
+              mouseCursor: kClickCursor,
               label: Text('Custom'),
               selected: true,
               showCheckmark: false,

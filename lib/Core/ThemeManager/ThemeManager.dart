@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../Utils/Extensions/ClickCursor.dart';
 import 'ThemeMode.dart';
 
 export 'AppTheme.dart';
@@ -70,6 +71,7 @@ ThemeData buildAppTheme(
       appTextTheme.labelLarge?.copyWith(fontWeight: FontWeight.w700),
     ),
     animationDuration: Durations.short4,
+    mouseCursor: kClickCursor,
   );
 
   return base.copyWith(
@@ -105,6 +107,7 @@ ThemeData buildAppTheme(
       style: ButtonStyle(
         shape: WidgetStatePropertyAll(_pill),
         animationDuration: Durations.short4,
+        mouseCursor: kClickCursor,
       ),
     ),
     floatingActionButtonTheme: base.floatingActionButtonTheme.copyWith(
@@ -127,6 +130,7 @@ ThemeData buildAppTheme(
         ),
         visualDensity: VisualDensity.compact,
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        mouseCursor: kClickCursor,
       ),
     ),
     chipTheme: base.chipTheme.copyWith(
@@ -164,6 +168,7 @@ ThemeData buildAppTheme(
       ),
     ),
     popupMenuTheme: base.popupMenuTheme.copyWith(
+      mouseCursor: kClickCursor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(_shapeMd),
       ),
@@ -190,10 +195,21 @@ ThemeData buildAppTheme(
         borderSide: BorderSide(color: scheme.primary, width: 2),
       ),
     ),
-    sliderTheme: const SliderThemeData(year2023: false),
+    sliderTheme: const SliderThemeData(
+      year2023: false,
+      mouseCursor: kClickCursor,
+    ),
+    listTileTheme: base.listTileTheme.copyWith(mouseCursor: kClickCursor),
+    tabBarTheme: base.tabBarTheme.copyWith(mouseCursor: kClickCursor),
+    checkboxTheme: base.checkboxTheme.copyWith(mouseCursor: kClickCursor),
+    radioTheme: base.radioTheme.copyWith(mouseCursor: kClickCursor),
+    menuButtonTheme: const MenuButtonThemeData(
+      style: ButtonStyle(mouseCursor: kClickCursor),
+    ),
     progressIndicatorTheme: const ProgressIndicatorThemeData(year2023: false),
     textTheme: base.textTheme.merge(appTextTheme),
     switchTheme: SwitchThemeData(
+      mouseCursor: kClickCursor,
       thumbColor: WidgetStateProperty.resolveWith(
         (states) => states.contains(WidgetState.selected)
             ? scheme.surface

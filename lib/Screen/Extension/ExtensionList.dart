@@ -513,9 +513,12 @@ class _ExtensionListState extends State<ExtensionList> {
         ),
         Padding(
           padding: const EdgeInsets.only(left: 8),
-          child: ReorderableDragStartListener(
-            index: index,
-            child: const Icon(Icons.drag_indicator_rounded),
+          child: MouseRegion(
+            cursor: SystemMouseCursors.grab,
+            child: ReorderableDragStartListener(
+              index: index,
+              child: const Icon(Icons.drag_indicator_rounded),
+            ),
           ),
         ),
       ],

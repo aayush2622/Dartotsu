@@ -127,11 +127,14 @@ class _HomeLayoutSheetState extends State<HomeLayoutSheet> {
                                   horizontal: 16,
                                   vertical: 2,
                                 ),
-                                leading: ReorderableDragStartListener(
-                                  index: i,
-                                  child: Icon(
-                                    Icons.drag_indicator_rounded,
-                                    color: scheme.onSurfaceVariant,
+                                leading: MouseRegion(
+                                  cursor: SystemMouseCursors.grab,
+                                  child: ReorderableDragStartListener(
+                                    index: i,
+                                    child: Icon(
+                                      Icons.drag_indicator_rounded,
+                                      color: scheme.onSurfaceVariant,
+                                    ),
                                   ),
                                 ),
                                 title: Text(

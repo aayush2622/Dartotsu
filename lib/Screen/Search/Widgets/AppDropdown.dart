@@ -50,68 +50,71 @@ class _AppDropdownState extends State<AppDropdown> {
 
     return Padding(
       padding: widget.padding,
-      child: GestureDetector(
-        onLongPress: widget.onLongPress,
-        child: DropdownMenu(
-          requestFocusOnTap: true,
-          enableSearch: false,
-          enableFilter: false,
-          keyboardType: TextInputType.none,
-          initialSelection: options.contains(widget.value)
-              ? widget.value
-              : null,
-          expandedInsets: EdgeInsets.zero,
-          menuHeight: 300,
-          leadingIcon: widget.prefixIcon != null
-              ? Icon(widget.prefixIcon, size: 20)
-              : null,
-          hintText: widget.hintText,
-          textStyle: theme.textTheme.labelLarge,
-          inputDecorationTheme: InputDecorationTheme(
-            filled: true,
-            fillColor: theme.cardColor,
-            contentPadding: const EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 14,
+      child: MouseRegion(
+        cursor: SystemMouseCursors.click,
+        child: GestureDetector(
+          onLongPress: widget.onLongPress,
+          child: DropdownMenu(
+            requestFocusOnTap: true,
+            enableSearch: false,
+            enableFilter: false,
+            keyboardType: TextInputType.none,
+            initialSelection: options.contains(widget.value)
+                ? widget.value
+                : null,
+            expandedInsets: EdgeInsets.zero,
+            menuHeight: 300,
+            leadingIcon: widget.prefixIcon != null
+                ? Icon(widget.prefixIcon, size: 20)
+                : null,
+            hintText: widget.hintText,
+            textStyle: theme.textTheme.labelLarge,
+            inputDecorationTheme: InputDecorationTheme(
+              filled: true,
+              fillColor: theme.cardColor,
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 16,
+                vertical: 14,
+              ),
+              border: _border(colorScheme, false),
+              focusedBorder: _border(colorScheme, true),
             ),
-            border: _border(colorScheme, false),
-            focusedBorder: _border(colorScheme, true),
-          ),
-          menuStyle: MenuStyle(
-            padding: const WidgetStatePropertyAll(
-              EdgeInsetsGeometry.symmetric(vertical: 6),
+            menuStyle: MenuStyle(
+              padding: const WidgetStatePropertyAll(
+                EdgeInsetsGeometry.symmetric(vertical: 6),
+              ),
+              elevation: const WidgetStatePropertyAll(6),
+              backgroundColor: WidgetStatePropertyAll(theme.cardColor),
+              shape: WidgetStatePropertyAll(
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+              ),
             ),
-            elevation: const WidgetStatePropertyAll(6),
-            backgroundColor: WidgetStatePropertyAll(theme.cardColor),
-            shape: WidgetStatePropertyAll(
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
-            ),
-          ),
-          onSelected: (v) {
-            widget.onChanged?.call(v);
-            FocusManager.instance.primaryFocus?.unfocus();
-          },
-          trailingIconFocusNode: _trailingFocus,
-          dropdownMenuEntries: options
-              .map(
-                (e) => DropdownMenuEntry(
-                  value: e,
-                  label: e,
-                  style: ButtonStyle(
-                    padding: WidgetStateProperty.all(
-                      const EdgeInsets.symmetric(horizontal: 16),
-                    ),
-                    textStyle: WidgetStateProperty.resolveWith(
-                      (states) => theme.textTheme.labelMedium?.copyWith(
-                        color: states.contains(WidgetState.selected)
-                            ? colorScheme.primary
-                            : colorScheme.onSurface,
+            onSelected: (v) {
+              widget.onChanged?.call(v);
+              FocusManager.instance.primaryFocus?.unfocus();
+            },
+            trailingIconFocusNode: _trailingFocus,
+            dropdownMenuEntries: options
+                .map(
+                  (e) => DropdownMenuEntry(
+                    value: e,
+                    label: e,
+                    style: ButtonStyle(
+                      padding: WidgetStateProperty.all(
+                        const EdgeInsets.symmetric(horizontal: 16),
+                      ),
+                      textStyle: WidgetStateProperty.resolveWith(
+                        (states) => theme.textTheme.labelMedium?.copyWith(
+                          color: states.contains(WidgetState.selected)
+                              ? colorScheme.primary
+                              : colorScheme.onSurface,
+                        ),
                       ),
                     ),
                   ),
-                ),
-              )
-              .toList(),
+                )
+                .toList(),
+          ),
         ),
       ),
     );

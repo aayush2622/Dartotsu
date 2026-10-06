@@ -1,10 +1,85 @@
-import 'package:dpad/dpad.dart';
-export 'package:dpad/dpad.dart';
+import 'package:dpad/dpad.dart' hide DpadFocusable;
+import 'package:dpad/dpad.dart' as base show DpadFocusable;
+export 'package:dpad/dpad.dart' hide DpadFocusable;
 
 import 'package:flutter/material.dart';
 
+import '../Extensions/ClickCursor.dart';
+
 import '../Extensions/ContextExtensions.dart';
 import '../Functions/AppShortcuts.dart';
+
+class DpadFocusable extends StatelessWidget {
+  final Widget child;
+  final List<DpadEffect>? effects;
+  final DpadFocusableBuilder? builder;
+  final VoidCallback? onSelect;
+  final VoidCallback? onLongSelect;
+  final ValueChanged<bool>? onFocusChange;
+  final DpadDirectionCallback? onDirection;
+  final bool autofocus;
+  final bool enabled;
+  final bool entry;
+  final FocusNode? focusNode;
+  final String? debugLabel;
+  final bool autoScroll;
+  final double? scrollPadding;
+  final Duration? scrollDuration;
+  final Curve? scrollCurve;
+  final bool excludeChildFocus;
+  final bool tapToSelect;
+
+  const DpadFocusable({
+    super.key,
+    required this.child,
+    this.effects,
+    this.builder,
+    this.onSelect,
+    this.onLongSelect,
+    this.onFocusChange,
+    this.onDirection,
+    this.autofocus = false,
+    this.enabled = true,
+    this.entry = false,
+    this.focusNode,
+    this.debugLabel,
+    this.autoScroll = true,
+    this.scrollPadding,
+    this.scrollDuration,
+    this.scrollCurve,
+    this.excludeChildFocus = true,
+    this.tapToSelect = true,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final clickable =
+        enabled && tapToSelect && (onSelect != null || onLongSelect != null);
+    return MouseRegion(
+      cursor: clickable ? SystemMouseCursors.click : MouseCursor.defer,
+      child: base.DpadFocusable(
+        effects: effects,
+        builder: builder,
+        onSelect: onSelect,
+        onLongSelect: onLongSelect,
+        onFocusChange: onFocusChange,
+        onDirection: onDirection,
+        autofocus: autofocus,
+        enabled: enabled,
+        entry: entry,
+        focusNode: focusNode,
+        debugLabel: debugLabel,
+        autoScroll: autoScroll,
+        scrollPadding: scrollPadding,
+        scrollDuration: scrollDuration,
+        scrollCurve: scrollCurve,
+        excludeChildFocus: excludeChildFocus,
+        tapToSelect: tapToSelect,
+        child: child,
+      ),
+    );
+  }
+}
 
 bool kFocused(bool rawFocused) => rawFocused && usingKeyboard;
 
@@ -81,16 +156,20 @@ class DpadTap extends StatelessWidget {
             ),
       child: ripple
           ? InkWell(
+              mouseCursor: kClickCursor,
               onTap: onTap,
               onLongPress: onLongPress,
               borderRadius: radius,
               child: child,
             )
-          : GestureDetector(
-              behavior: HitTestBehavior.opaque,
-              onTap: onTap,
-              onLongPress: onLongPress,
-              child: child,
+          : MouseRegion(
+              cursor: SystemMouseCursors.click,
+              child: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: onTap,
+                onLongPress: onLongPress,
+                child: child,
+              ),
             ),
     );
   }

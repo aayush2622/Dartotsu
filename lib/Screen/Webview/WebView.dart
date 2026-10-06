@@ -170,36 +170,39 @@ class _WebViewState extends State<WebView> {
           alignment: Alignment.center,
           child: _isEditing.value
               ? _buildAddressFieldInline()
-              : GestureDetector(
-                  onTap: () {
-                    _isEditing.value = true;
-                    _addressFocus.requestFocus();
-                    _searchController.selection = TextSelection(
-                      baseOffset: 0,
-                      extentOffset: _searchController.text.length,
-                    );
-                  },
-                  child: Row(
-                    children: [
-                      Icon(
-                        isHttps ? Icons.lock_outline : Icons.info_outline,
-                        size: 16,
-                        color: isHttps
-                            ? Theme.of(context).colorScheme.primary
-                            : Theme.of(context).colorScheme.error,
-                      ),
-                      const SizedBox(width: 8),
-                      Expanded(
-                        child: Text(
-                          _title.value.isNotEmpty ? _title.value : _url.value,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: ContextExtensions(
-                            context,
-                          ).theme.textTheme.bodyMedium,
+              : MouseRegion(
+                  cursor: SystemMouseCursors.click,
+                  child: GestureDetector(
+                    onTap: () {
+                      _isEditing.value = true;
+                      _addressFocus.requestFocus();
+                      _searchController.selection = TextSelection(
+                        baseOffset: 0,
+                        extentOffset: _searchController.text.length,
+                      );
+                    },
+                    child: Row(
+                      children: [
+                        Icon(
+                          isHttps ? Icons.lock_outline : Icons.info_outline,
+                          size: 16,
+                          color: isHttps
+                              ? Theme.of(context).colorScheme.primary
+                              : Theme.of(context).colorScheme.error,
                         ),
-                      ),
-                    ],
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: Text(
+                            _title.value.isNotEmpty ? _title.value : _url.value,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: ContextExtensions(
+                              context,
+                            ).theme.textTheme.bodyMedium,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
         ),

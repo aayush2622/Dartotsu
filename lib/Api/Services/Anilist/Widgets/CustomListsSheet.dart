@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide ContextExtensionss;
 
-import '../../../../Utils/Extensions/ContextExtensions.dart';
 import '../../../../Utils/Functions/SnackBar.dart';
 import '../../../../Widgets/Components/CustomBottomDialog.dart';
-import '../../../../Widgets/Components/ThemedContainer.dart';
+import '../../../../Widgets/Components/AppSheet.dart';
 import '../Auth.dart';
 import '../Data/User.dart';
 
@@ -82,79 +81,54 @@ class _CustomListsSheetState extends State<CustomListsSheet> {
 
   @override
   Widget build(BuildContext context) {
-    final scheme = context.colorScheme;
     final kind = widget.anime ? 'Anime' : 'Manga';
-    return Padding(
-      padding: EdgeInsets.only(bottom: MediaQuery.viewInsetsOf(context).bottom),
-      child: ClipRRect(
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
-        child: ThemedContainer(
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
-          padding: EdgeInsets.zero,
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Center(
-                  child: Container(
-                    width: 40,
-                    height: 4,
-                    margin: const EdgeInsets.only(bottom: 12),
-                    decoration: BoxDecoration(
-                      color: scheme.onSurface.withValues(alpha: 0.3),
-                      borderRadius: BorderRadius.circular(2),
-                    ),
-                  ),
-                ),
-                Text(
-                  '$kind custom lists',
-                  style: context.textTheme.titleMedium,
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 12),
-                Flexible(
-                  child: ListView(
-                    shrinkWrap: true,
-                    children: [
-                      for (var i = 0; i < _names.length; i++)
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 8),
-                          child: TextField(
-                            controller: _names[i],
-                            decoration: InputDecoration(
-                              labelText: 'List name',
-                              suffixIcon: IconButton(
-                                icon: const Icon(Icons.delete_outline_rounded),
-                                onPressed: () => _remove(i),
-                              ),
-                            ),
+    return AppSheet(
+      title: '$kind custom lists',
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(20, 0, 20, 24),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Flexible(
+              child: ListView(
+                shrinkWrap: true,
+                children: [
+                  for (var i = 0; i < _names.length; i++)
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 8),
+                      child: TextField(
+                        controller: _names[i],
+                        decoration: InputDecoration(
+                          labelText: 'List name',
+                          suffixIcon: IconButton(
+                            icon: const Icon(Icons.delete_outline_rounded),
+                            onPressed: () => _remove(i),
                           ),
                         ),
-                    ],
-                  ),
-                ),
-                Row(
-                  children: [
-                    TextButton.icon(
-                      onPressed: () =>
-                          setState(() => _names.add(TextEditingController())),
-                      icon: const Icon(Icons.add_rounded),
-                      label: const Text('Add list'),
-                    ),
-                    const Spacer(),
-                    Obx(
-                      () => FilledButton(
-                        onPressed: _busy.value ? null : _save,
-                        child: const Text('Save'),
                       ),
                     ),
-                  ],
+                ],
+              ),
+            ),
+            Row(
+              children: [
+                TextButton.icon(
+                  onPressed: () =>
+                      setState(() => _names.add(TextEditingController())),
+                  icon: const Icon(Icons.add_rounded),
+                  label: const Text('Add list'),
+                ),
+                const Spacer(),
+                Obx(
+                  () => FilledButton(
+                    onPressed: _busy.value ? null : _save,
+                    child: const Text('Save'),
+                  ),
                 ),
               ],
             ),
-          ),
+          ],
         ),
       ),
     );
