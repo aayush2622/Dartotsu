@@ -16,6 +16,7 @@ import '../../../Core/Services/ServiceNotification.dart';
 import '../../../Model/SearchResults.dart';
 import '../../../Utils/Functions/SnackBar.dart';
 import 'Client.dart';
+import 'Data/Entity.dart';
 import 'Data/Mapper.dart';
 import 'Data/Notification.dart';
 import 'Prefs.dart';
@@ -24,6 +25,7 @@ import 'AnilistService.dart';
 part 'Queries/GetAnimeMangaListData.dart';
 part 'Queries/GetBannerImages.dart';
 part 'Queries/GetCalendarData.dart';
+part 'Queries/GetEntityData.dart';
 part 'Queries/GetGenresAndTags.dart';
 part 'Queries/GetHomePageData.dart';
 part 'Queries/GetMediaData.dart';
@@ -43,6 +45,22 @@ class AnilistQueries extends Queries {
     required this.userId,
     required this.refreshUser,
   });
+
+  Future<Map<String, dynamic>?> character(String id) => _character(id);
+
+  Future<Map<String, dynamic>?> staff(String id) => _staff(id);
+
+  Future<List<Media>?> characterMedia(String id, String type, int page) =>
+      _characterMedia(id, type, page);
+
+  Future<List<Media>?> staffMedia(String id, String type, int page) =>
+      _staffMedia(id, type, page);
+
+  Future<List<Character>?> staffCharacters(String id, int page) =>
+      _staffCharacters(id, page);
+
+  Future<bool> toggleFavourite(bool character, String id) =>
+      _toggleFavourite(character, id);
 
   @override
   Future<bool> getUserData() => _getUserData();

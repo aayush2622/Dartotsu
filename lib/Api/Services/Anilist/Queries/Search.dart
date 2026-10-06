@@ -27,7 +27,7 @@ extension on AnilistQueries {
           ? 'MANGA'
           : 'ANIME',
       'page': r.page ?? 1,
-      'isAdult': r.isAdult ?? false,
+      'isAdult': r.isAdult ?? (AnilistPref.displayAdult.value ? null : false),
       if (r.onList != null) 'onList': r.onList,
       if (r.id != null) 'id': r.id,
       if (r.search != null && r.search!.isNotEmpty) 'search': r.search,

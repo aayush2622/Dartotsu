@@ -6,7 +6,6 @@ extension on AnilistQueries {
     if (id == null) return const [];
 
     final layout = AnilistPref.homeLayout.value;
-    final wantHidden = layout['Hidden Media'] == true;
     final sections = layout.entries
         .where((e) => e.value && e.key != 'Hidden Media')
         .map((e) => e.key)
@@ -23,8 +22,15 @@ extension on AnilistQueries {
       for (final media in chunk.remove('Hidden Media') ?? const <Media>[]) {
         hidden[media.id] = media;
       }
-      if (wantHidden && hidden.isNotEmpty) {
-        chunk['Hidden Media'] = hidden.values.toList();
+      if (hidden.isNotEmpty) {
+        final touched = {
+          ...anilistContinueOrder.read(anime: true),
+          ...anilistContinueOrder.read(anime: false),
+        };
+        chunk['Hidden Media'] = hidden.values.toList()
+          ..sort(
+            (a, b) => _lastModified(b, touched) - _lastModified(a, touched),
+          );
       }
       return chunk;
     };
@@ -128,6 +134,12 @@ Map<String, List<Media>> _parseHome(Map<String, dynamic> args) {
   return anilistNonEmpty(out);
 }
 
+int _lastModified(Media media, Map<String, int> touched) {
+  final local = touched[media.id] ?? 0;
+  final remote = media.userUpdatedAt ?? 0;
+  return local > remote ? local : remote;
+}
+
 List<Media> _continueMedia(
   Map<String, dynamic> data,
   String current,
@@ -143,13 +155,8 @@ List<Media> _continueMedia(
     byId[media.id] = media;
   }
 
-  int latest(Media media) {
-    final local = touched[media.id] ?? 0;
-    final live = media.userUpdatedAt ?? 0;
-    return local > live ? local : live;
-  }
-
-  return byId.values.toList()..sort((a, b) => latest(b).compareTo(latest(a)));
+  return byId.values.toList()
+    ..sort((a, b) => _lastModified(b, touched) - _lastModified(a, touched));
 }
 
 List<Media> _favouriteMedia(Object? user, {required bool anime}) {

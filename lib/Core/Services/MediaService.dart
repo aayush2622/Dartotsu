@@ -59,6 +59,8 @@ abstract class MediaService {
 
   DetailScreenView get detailView => DetailScreenView(this);
 
+  EntityScreenView? get entityView => null;
+
   NotificationScreenView? get notificationView => null;
 
   SettingsScreenView? get settingsView => null;

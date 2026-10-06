@@ -366,6 +366,22 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
                     item,
                     heroPrefix: 'detail:${_host.media.value.id}',
                     onMediaTap: _open,
+                    onCharacterTap: (c) => openEntity(
+                      context,
+                      widget.view.service,
+                      EntityKind.character,
+                      c.id,
+                      name: c.name,
+                      image: c.image,
+                    ),
+                    onStaffTap: (s) => openEntity(
+                      context,
+                      widget.view.service,
+                      EntityKind.staff,
+                      s.id,
+                      name: s.name,
+                      image: s.image,
+                    ),
                   ).animateFadeUp(
                     begin: 0.06,
                     delay: Duration(milliseconds: 40 * i),

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../Core/Services/Model/Media.dart';
@@ -30,6 +31,7 @@ class ScreenWidgetList extends StatefulWidget {
   final void Function(Media media)? onMediaLongPress;
   final Stream<Object?>? reloadOn;
   final int Function(String title)? sectionTypeOf;
+  final bool Function(String title)? isHidden;
   final List<FeedChip> chips;
   final Future<List<Media>?> Function(FeedChip chip)? onChip;
 
@@ -42,6 +44,7 @@ class ScreenWidgetList extends StatefulWidget {
     this.onMediaLongPress,
     this.reloadOn,
     this.sectionTypeOf,
+    this.isHidden,
     this.chips = const [],
     this.onChip,
   });
@@ -59,6 +62,8 @@ class _ScreenWidgetListState extends State<ScreenWidgetList>
   final _chip = RxnString();
   final _chipMedia = Rxn<List<Media>>();
   final _chipLoading = false.obs;
+  final _showHidden = false.obs;
+  String? _firstTitle;
 
   final _seen = <String>{};
   final _mediaByTitle = <String, List<Media>>{};
@@ -405,13 +410,26 @@ class _ScreenWidgetListState extends State<ScreenWidgetList>
               else if (showEmpty)
                 SliverToBoxAdapter(child: _emptyBox())
               else
-                ..._sections(list.where((e) => !e.isCarousel).toList()),
+                ..._sections(_visible(list)),
               SliverToBoxAdapter(child: SizedBox(height: 120.bottomBar())),
             ],
           ),
         );
       }),
     );
+  }
+
+  List<ScreenWidget> _visible(List<ScreenWidget> list) {
+    final visible = [
+      for (final e in list)
+        if (!e.isCarousel && (_showHidden.value || !_isHidden(e.title))) e,
+    ];
+    final shown = [
+      ...visible.where((e) => _isHidden(e.title)),
+      ...visible.where((e) => !_isHidden(e.title)),
+    ];
+    _firstTitle = shown.firstWhereOrNull((e) => e.title != null)?.title;
+    return shown;
   }
 
   bool _isPaged(ScreenWidget item) =>
@@ -455,7 +473,10 @@ class _ScreenWidgetListState extends State<ScreenWidgetList>
             Dimens.pagePad,
             Dimens.gapSm,
           ),
-          child: SectionHeader(title: title),
+          child: SectionHeader(
+            title: title,
+            onLongPress: _titleLongPress(title),
+          ),
         ),
       ),
       SliverPadding(
@@ -494,6 +515,19 @@ class _ScreenWidgetListState extends State<ScreenWidgetList>
           ),
         ),
     ];
+  }
+
+  bool _isHidden(String? title) =>
+      title != null && (widget.isHidden?.call(title) ?? false);
+
+  void _toggleHidden() {
+    _showHidden.value = !_showHidden.value;
+    unawaited(HapticFeedback.mediumImpact());
+  }
+
+  VoidCallback? _titleLongPress(String title) {
+    if (!_current.any((e) => _isHidden(e.title))) return null;
+    return title == _firstTitle || _isHidden(title) ? _toggleHidden : null;
   }
 
   Future<void> _selectChip(String? id) async {
@@ -589,6 +623,7 @@ class _ScreenWidgetListState extends State<ScreenWidgetList>
       onMediaLongPress: widget.onMediaLongPress == null
           ? null
           : (ctx, idx, m) => widget.onMediaLongPress!(m),
+      onTitleLongPress: _titleLongPress(title),
       onLoadMore: _loadMoreFns[title] == null
           ? null
           : () => _loadMoreSection(title),

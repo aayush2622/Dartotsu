@@ -10,8 +10,9 @@ class ShelfPerson {
   final String? image;
   final String name;
   final String? role;
+  final Object? tag;
 
-  const ShelfPerson({required this.name, this.image, this.role});
+  const ShelfPerson({required this.name, this.image, this.role, this.tag});
 }
 
 class PeopleShelf extends StatelessWidget {
@@ -27,7 +28,7 @@ class PeopleShelf extends StatelessWidget {
   });
 
   ShelfCardItem _toItem(ShelfPerson p) => ShelfCardItem(
-    id: p.name,
+    id: '${p.tag ?? ''}${p.name}',
     imageUrl: p.image,
     title: p.name,
     subtitle: p.role,

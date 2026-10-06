@@ -10,6 +10,7 @@ import '../MediaService.dart';
 export '../../../Model/MediaType.dart';
 export '../Api/SectionJobs.dart';
 export 'DetailHost.dart';
+export 'EntityHost.dart';
 export 'ListEditorDraft.dart';
 export 'ScreenWidget.dart';
 
@@ -33,6 +34,8 @@ class HomeScreenView {
   }
 
   Future<List<String?>> bannerImages() => Future.value(const [null, null]);
+
+  bool isHiddenSection(String title) => false;
 }
 
 class FeedChip {
@@ -141,6 +144,22 @@ abstract class SearchScreenView {
 
   /// Filter vocabulary for [type]. Default: no filters.
   SearchFilterSpec filters(MediaType type) => SearchFilterSpec.none;
+}
+
+class EntityScreenView {
+  final MediaService service;
+
+  EntityScreenView(this.service);
+
+  Stream<List<ScreenWidget>> screenStream(EntityHost host) async* {}
+
+  bool canFavourite(EntityKind kind) => false;
+
+  Future<bool?> toggleFavourite(
+    EntityKind kind,
+    String id,
+    bool current,
+  ) async => null;
 }
 
 class DetailScreenView {

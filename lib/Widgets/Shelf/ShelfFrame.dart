@@ -18,6 +18,7 @@ class ShelfFrame extends StatelessWidget {
   final String? title;
   final Widget? trailing;
   final VoidCallback? onTitleTap;
+  final VoidCallback? onTitleLongPress;
   final Widget child;
 
   const ShelfFrame({
@@ -25,6 +26,7 @@ class ShelfFrame extends StatelessWidget {
     this.title,
     this.trailing,
     this.onTitleTap,
+    this.onTitleLongPress,
     required this.child,
   });
 
@@ -61,6 +63,7 @@ class ShelfFrame extends StatelessWidget {
                 child: SectionHeader(
                   title: title!,
                   onTap: onTitleTap,
+                  onLongPress: onTitleLongPress,
                   trailing: trailing,
                 ),
               ),
@@ -85,6 +88,7 @@ class ShelfFrame extends StatelessWidget {
             child: SectionHeader(
               title: title!,
               onTap: onTitleTap,
+              onLongPress: onTitleLongPress,
               trailing: trailing,
             ),
           ),

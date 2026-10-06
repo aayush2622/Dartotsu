@@ -212,6 +212,7 @@ class MediaSection extends StatelessWidget {
       onTrailingIconTap: data.onTrailingIconTap,
       onTrailingIconLongPress: data.onTrailingIconLongPress,
       onTitleTap: data.onTitleTap,
+      onTitleLongPress: data.onTitleLongPress,
       items: _items(context),
       dataKey: data.loading ? null : data.mediaList,
       scrollController: data.scrollController,

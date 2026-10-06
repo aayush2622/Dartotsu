@@ -51,12 +51,14 @@ class SectionHeader extends StatelessWidget {
   final String title;
   final Widget? trailing;
   final VoidCallback? onTap;
+  final VoidCallback? onLongPress;
 
   const SectionHeader({
     super.key,
     required this.title,
     this.trailing,
     this.onTap,
+    this.onLongPress,
   });
 
   @override
@@ -72,9 +74,14 @@ class SectionHeader extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          child: onTap == null
+          child: onTap == null && onLongPress == null
               ? text
-              : DpadTap(ripple: false, onTap: onTap, child: text),
+              : DpadTap(
+                  ripple: false,
+                  onTap: onTap,
+                  onLongPress: onLongPress,
+                  child: text,
+                ),
         ),
         ?trailing,
       ],

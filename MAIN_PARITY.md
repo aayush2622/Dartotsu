@@ -22,7 +22,7 @@ switching services or extension managers never errors.
 ## 2. Pages not built
 
 - Calendar screen (query exists: `GetCalendarData`).
-- Character page and Staff page. Character and staff cards on the detail page do nothing when tapped.
+- Character page and Staff page: done (`Screen/Entity`, service-driven via `EntityScreenView`; AniList implements it). Tapping character/staff cards on the detail page and in search opens them.
 - User profile page. Search results for characters, staff, studios and users only open the web link.
 
 ## 3. Watching and reading (largest chunk)

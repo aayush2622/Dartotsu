@@ -5,6 +5,7 @@ import '../../Core/Services/Model/Media.dart';
 import '../../Utils/Functions/NavigateToScreen.dart';
 import '../../Widgets/Components/NotImplemented.dart';
 import '../Detail/DetailScreen.dart';
+import '../Entity/EntityScreen.dart';
 import '../Notifications/NotificationsScreen.dart';
 import '../Search/SearchScreen.dart';
 
@@ -52,5 +53,31 @@ void openNotifications(BuildContext context, MediaService service) {
     view == null
         ? NotImplemented(service: service.name, area: 'Notifications')
         : NotificationsScreen(view: view),
+  );
+}
+
+void openEntity(
+  BuildContext context,
+  MediaService service,
+  EntityKind kind,
+  String id, {
+  String? name,
+  String? image,
+}) {
+  final view = service.entityView;
+  navigateToPage(
+    context,
+    view == null
+        ? NotImplemented(
+            service: service.name,
+            area: kind == EntityKind.character ? 'Characters' : 'Staff',
+          )
+        : EntityScreen(
+            view: view,
+            kind: kind,
+            id: id,
+            name: name,
+            image: image,
+          ),
   );
 }

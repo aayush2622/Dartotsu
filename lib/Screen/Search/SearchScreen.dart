@@ -29,6 +29,7 @@ import '../../Widgets/Components/ScrollConfig.dart';
 import '../../Widgets/Shelf/MediaRows.dart';
 import '../../Widgets/Shelf/PosterCard.dart';
 import '../Detail/DetailScreen.dart';
+import '../Feed/FeedNavigation.dart';
 import 'Components/SearchFilterSheet.dart';
 import '../../Widgets/Components/EmptyState.dart';
 import '../Detail/ListEditorSheet.dart';
@@ -228,6 +229,20 @@ class _SearchScreenState extends BaseScreen<SearchScreen> {
           heroTag: tag,
         ),
         hero: true,
+      );
+      return;
+    }
+    final service = find<MediaServiceController>().currentService.value;
+    if (service.entityView != null && (item is Character || item is Author)) {
+      final character = item is Character ? item : null;
+      final staff = item is Author ? item : null;
+      openEntity(
+        context,
+        service,
+        character != null ? EntityKind.character : EntityKind.staff,
+        (character?.id ?? staff!.id),
+        name: character?.name ?? staff?.name,
+        image: character?.image ?? staff?.image,
       );
       return;
     }

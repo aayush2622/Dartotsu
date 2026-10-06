@@ -22,6 +22,7 @@ class CardShelf extends StatefulWidget {
   final void Function()? onTrailingIconTap;
   final void Function()? onTrailingIconLongPress;
   final void Function()? onTitleTap;
+  final void Function()? onTitleLongPress;
   final List<ShelfCardItem>? items;
   final Future<List<ShelfCardItem>?> Function()? onLoadMore;
   final ScrollController? scrollController;
@@ -37,6 +38,7 @@ class CardShelf extends StatefulWidget {
     this.onTrailingIconTap,
     this.onTrailingIconLongPress,
     this.onTitleTap,
+    this.onTitleLongPress,
     required this.items,
     this.onLoadMore,
     this.scrollController,
@@ -87,6 +89,7 @@ class _CardShelfState extends State<CardShelf> {
     final frame = ShelfFrame(
       title: _loading ? 'Loading' : widget.title,
       onTitleTap: widget.onTitleTap,
+      onTitleLongPress: widget.onTitleLongPress,
       trailing: _trailingButton(),
       child: _buildBody(),
     );

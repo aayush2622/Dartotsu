@@ -2,6 +2,7 @@ import '../../../Core/Services/MediaService.dart';
 import '../../../Utils/Functions/GetXFunctions.dart';
 import 'Auth.dart';
 import 'Screens/Detail.dart';
+import 'Screens/Entity.dart';
 import 'Screens/Feed.dart';
 import 'Screens/Home.dart';
 import 'Screens/Notifications.dart';
@@ -47,6 +48,9 @@ class AnilistService extends MediaService {
 
   @override
   DetailScreenView get detailView => AnilistDetailView(this);
+
+  @override
+  EntityScreenView get entityView => AnilistEntityView(this);
 
   @override
   NotificationScreenView get notificationView => AnilistNotificationView();
