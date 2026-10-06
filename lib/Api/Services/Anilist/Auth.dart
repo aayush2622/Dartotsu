@@ -55,6 +55,7 @@ class AnilistAuth extends GetxController implements ServiceAuth {
     final cached = PrefManager.getCustomType(
       _userCacheKey,
       AnilistUser.fromJson,
+      location: PrefLocation.CACHE,
     );
     if (cached != null) user.value = cached;
     if (isLoggedIn) unawaited(refreshUser());
@@ -110,7 +111,12 @@ class AnilistAuth extends GetxController implements ServiceAuth {
       if (viewer == null) return;
       final parsed = AnilistUser.fromViewer(viewer);
       user.value = parsed;
-      PrefManager.setCustomType(_userCacheKey, parsed, (u) => u.toJson());
+      PrefManager.setCustomType(
+        _userCacheKey,
+        parsed,
+        (u) => u.toJson(),
+        location: PrefLocation.CACHE,
+      );
     } on AnilistException {
       // leave the cached user in place
     } finally {
@@ -122,7 +128,7 @@ class AnilistAuth extends GetxController implements ServiceAuth {
   void logout() {
     token.value = '';
     user.value = null;
-    PrefManager.removeCustomVal(_userCacheKey);
+    PrefManager.removeCustomVal(_userCacheKey, location: PrefLocation.CACHE);
   }
 
   static const _viewerQuery = '''

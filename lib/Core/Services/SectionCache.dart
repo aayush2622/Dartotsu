@@ -19,7 +19,10 @@ class SectionCache {
   String get _key => 'sections/$id';
 
   Future<Map<String, List<Media>>?> read() async {
-    final raw = loadCustomData<Map<String, dynamic>>(_key);
+    final raw = loadCustomData<Map<String, dynamic>>(
+      _key,
+      location: PrefLocation.CACHE,
+    );
     if (raw == null || raw.isEmpty) return null;
     try {
       return await compute(_decode, raw);
@@ -35,7 +38,11 @@ class SectionCache {
         for (final e in data.entries) e.key: e.value.take(_cap).toList(),
       };
       final json = await compute(_encode, capped);
-      saveCustomData<Map<String, dynamic>>(_key, json);
+      saveCustomData<Map<String, dynamic>>(
+        _key,
+        json,
+        location: PrefLocation.CACHE,
+      );
     } catch (e) {
       logger('SectionCache($id) write failed: $e');
     }

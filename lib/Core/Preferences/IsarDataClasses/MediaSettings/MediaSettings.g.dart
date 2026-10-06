@@ -262,6 +262,7 @@ const _MediaSettingslocationEnumValueMap = {
   r'READER': r'READER',
   r'PROTECTED': r'PROTECTED',
   r'OTHER': r'OTHER',
+  r'CACHE': r'CACHE',
 };
 const _MediaSettingslocationValueEnumMap = {
   r'THEME': PrefLocation.THEME,
@@ -270,6 +271,7 @@ const _MediaSettingslocationValueEnumMap = {
   r'READER': PrefLocation.READER,
   r'PROTECTED': PrefLocation.PROTECTED,
   r'OTHER': PrefLocation.OTHER,
+  r'CACHE': PrefLocation.CACHE,
 };
 
 Id _mediaSettingsGetId(MediaSettings object) {

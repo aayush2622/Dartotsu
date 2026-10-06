@@ -6,15 +6,35 @@ const _nonAdultTagsKey = 'anilist_tags_nonadult';
 
 extension on AnilistQueries {
   Future<bool> _getGenresAndTags() async {
-    var genres = loadCustomData<List<String>>(_genresKey) ?? const [];
-    var adultTags = loadCustomData<List<String>>(_adultTagsKey) ?? const [];
+    var genres =
+        loadCustomData<List<String>>(
+          _genresKey,
+          location: PrefLocation.CACHE,
+        ) ??
+        const [];
+    var adultTags =
+        loadCustomData<List<String>>(
+          _adultTagsKey,
+          location: PrefLocation.CACHE,
+        ) ??
+        const [];
     var nonAdultTags =
-        loadCustomData<List<String>>(_nonAdultTagsKey) ?? const [];
+        loadCustomData<List<String>>(
+          _nonAdultTagsKey,
+          location: PrefLocation.CACHE,
+        ) ??
+        const [];
 
     if (genres.isEmpty) {
       final data = await client.query('{ GenreCollection }', useToken: false);
       genres = (data['GenreCollection'] as List?)?.cast<String>() ?? const [];
-      if (genres.isNotEmpty) saveCustomData(_genresKey, genres.toList());
+      if (genres.isNotEmpty) {
+        saveCustomData(
+          _genresKey,
+          genres.toList(),
+          location: PrefLocation.CACHE,
+        );
+      }
     }
 
     if (adultTags.isEmpty || nonAdultTags.isEmpty) {
@@ -32,8 +52,12 @@ extension on AnilistQueries {
       if (tags.isNotEmpty) {
         adultTags = adult;
         nonAdultTags = nonAdult;
-        saveCustomData(_adultTagsKey, adult);
-        saveCustomData(_nonAdultTagsKey, nonAdult);
+        saveCustomData(_adultTagsKey, adult, location: PrefLocation.CACHE);
+        saveCustomData(
+          _nonAdultTagsKey,
+          nonAdult,
+          location: PrefLocation.CACHE,
+        );
       }
     }
 

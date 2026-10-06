@@ -77,11 +77,7 @@ class PrefName {
   static const incognito = Pref('incognito', false, PrefLocation.COMMON);
   static const offlineMode = Pref('offlineMode', false, PrefLocation.COMMON);
 
-  static const autoUpdateExtensions = Pref(
-    'autoUpdateExtensions',
-    true,
-    PrefLocation.COMMON,
-  );
+  static const lastBackupAt = Pref('lastBackupAt', '', PrefLocation.COMMON);
 
   static const loadExtensionIcon = Pref(
     'loadExtensionIcon',

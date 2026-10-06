@@ -54,12 +54,5 @@ List<Setting> extensionSettings(BuildContext context) {
       isChecked: PrefName.loadExtensionIcon.rx.value,
       onSwitchChange: (v) => PrefName.loadExtensionIcon.rx.value = v,
     ),
-    Setting.switchType(
-      name: getString.autoUpdate,
-      description: getString.autoUpdateDesc,
-      icon: Icons.update_rounded,
-      isChecked: PrefName.autoUpdateExtensions.rx.value,
-      onSwitchChange: (v) => PrefName.autoUpdateExtensions.rx.value = v,
-    ),
   ];
 }

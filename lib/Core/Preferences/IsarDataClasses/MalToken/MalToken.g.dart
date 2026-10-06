@@ -158,6 +158,7 @@ const _ResponseTokenlocationEnumValueMap = {
   r'READER': r'READER',
   r'PROTECTED': r'PROTECTED',
   r'OTHER': r'OTHER',
+  r'CACHE': r'CACHE',
 };
 const _ResponseTokenlocationValueEnumMap = {
   r'THEME': PrefLocation.THEME,
@@ -166,6 +167,7 @@ const _ResponseTokenlocationValueEnumMap = {
   r'READER': PrefLocation.READER,
   r'PROTECTED': PrefLocation.PROTECTED,
   r'OTHER': PrefLocation.OTHER,
+  r'CACHE': PrefLocation.CACHE,
 };
 
 Id _responseTokenGetId(ResponseToken object) {

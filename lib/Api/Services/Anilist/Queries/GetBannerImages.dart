@@ -10,8 +10,14 @@ extension on AnilistQueries {
     final id = userId();
     if (id == null) return null;
 
-    final cached = loadCustomData<String>('banner_${type}_url');
-    final savedAt = loadCustomData<int>('banner_${type}_time');
+    final cached = loadCustomData<String>(
+      'banner_${type}_url',
+      location: PrefLocation.CACHE,
+    );
+    final savedAt = loadCustomData<int>(
+      'banner_${type}_time',
+      location: PrefLocation.CACHE,
+    );
     final stale =
         savedAt == null ||
         DateTime.now()
@@ -42,10 +48,15 @@ extension on AnilistQueries {
     final pick = banners.isEmpty
         ? null
         : banners[Random().nextInt(banners.length)];
-    saveCustomData('banner_${type}_url', pick ?? '');
+    saveCustomData(
+      'banner_${type}_url',
+      pick ?? '',
+      location: PrefLocation.CACHE,
+    );
     saveCustomData(
       'banner_${type}_time',
       DateTime.now().millisecondsSinceEpoch,
+      location: PrefLocation.CACHE,
     );
     return pick;
   }

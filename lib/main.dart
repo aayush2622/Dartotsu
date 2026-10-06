@@ -118,9 +118,6 @@ Future<void> _postInit(List<String> args) async {
     DeepLink.initVideoIntentListener(args);
   }
   unawaited(find<AppUpdater>().checkForUpdate());
-  if (PrefName.autoUpdateExtensions.value) {
-    unawaited(tryFind<AddonManager>()?.autoUpdate());
-  }
 }
 
 class MyApp extends StatefulWidget {

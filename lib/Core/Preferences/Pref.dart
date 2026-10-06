@@ -4,7 +4,7 @@ import 'PrefManager.dart';
 
 /// Storage bucket for a preference. Used as a namespace prefix on the stored key
 /// and as a grouping key for backup import/export.
-enum PrefLocation { THEME, COMMON, PLAYER, READER, PROTECTED, OTHER }
+enum PrefLocation { THEME, COMMON, PLAYER, READER, PROTECTED, OTHER, CACHE }
 
 typedef PrefEncode<T> = Object? Function(T value);
 typedef PrefDecode<T> = T Function(Object? raw);

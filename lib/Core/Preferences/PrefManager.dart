@@ -87,6 +87,37 @@ class PrefManager {
   }
 
   static void _migrate() {
+    _migrateSchema();
+    _moveLegacyCaches();
+  }
+
+  static const _cachesMovedKey = 'OTHER/__cachesMoved';
+  static const _legacyCachePrefixes = [
+    'OTHER/sections/',
+    'OTHER/search_history/',
+    'OTHER/banner_',
+    'OTHER/anilist_genres',
+    'OTHER/anilist_tags_',
+    'OTHER/anilistUser',
+  ];
+
+  static void _moveLegacyCaches() {
+    if (_kv.getByKeySync(_cachesMovedKey) != null) return;
+    final stale = [
+      for (final kv in _kv.where().findAllSync())
+        if (_legacyCachePrefixes.any(kv.key.startsWith)) kv.key,
+    ];
+    dartotsuPreferences.writeTxnSync(() {
+      _kv.deleteAllByKeySync(stale);
+      _kv.putByKeySync(
+        KeyValue()
+          ..key = _cachesMovedKey
+          ..value = true,
+      );
+    });
+  }
+
+  static void _migrateSchema() {
     final current = _kv.getByKeySync(_schemaVersionKey)?.value as int?;
     if (current == _schemaVersion) return;
 
