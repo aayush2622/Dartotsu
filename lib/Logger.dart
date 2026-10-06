@@ -12,6 +12,8 @@ void logger(String message, {LogLevel logLevel = LogLevel.info, String? tag}) =>
 
 class Logger {
   static late File _logFile;
+
+  static String get filePath => _logFile.path;
   static late IOSink _sink;
 
   static bool _initialized = false;

@@ -959,6 +959,24 @@ abstract class AppLocalizations {
   /// **'Feed layouts, lists and service options'**
   String get backupCatOtherDesc;
 
+  /// No description provided for @logFile.
+  ///
+  /// In en, this message translates to:
+  /// **'Log file'**
+  String get logFile;
+
+  /// No description provided for @logFileDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Share the app log, or copy its path on Linux'**
+  String get logFileDesc;
+
+  /// No description provided for @logFileCopied.
+  ///
+  /// In en, this message translates to:
+  /// **'Log path copied'**
+  String get logFileCopied;
+
   /// No description provided for @glassBackground.
   ///
   /// In en, this message translates to:

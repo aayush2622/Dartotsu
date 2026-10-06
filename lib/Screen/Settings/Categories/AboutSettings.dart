@@ -1,9 +1,13 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../../Model/Setting.dart';
+import '../../../Logger.dart';
 import '../../../Utils/Function.dart';
+import '../../../Utils/Functions/CopyToClip.dart';
 import '../../../Utils/Functions/NavigateToScreen.dart';
 import '../Developer/DeveloperPage.dart';
 import '../Forks/ForksPage.dart';
@@ -31,6 +35,12 @@ List<Setting> aboutSettings(BuildContext context) => [
     isActivity: true,
     onClick: () => navigateToPage(context, const ForksPage()),
   ),
+  Setting.normal(
+    name: getString.logFile,
+    description: getString.logFileDesc,
+    icon: Icons.description_outlined,
+    onClick: _shareLog,
+  ),
   Setting.header(getString.sectionCommunity),
   Setting.normal(
     name: getString.gitHub,
@@ -54,3 +64,12 @@ List<Setting> aboutSettings(BuildContext context) => [
     onClick: () => openLinkInBrowser('https://www.buymeacoffee.com/aayush262'),
   ),
 ];
+
+void _shareLog() {
+  final path = Logger.filePath;
+  if (Platform.isLinux) {
+    copyToClipboard(path, message: getString.logFileCopied);
+    return;
+  }
+  shareFile(path, getString.logFile);
+}

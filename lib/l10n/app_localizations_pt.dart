@@ -433,6 +433,15 @@ class AppLocalizationsPt extends AppLocalizations {
   String get backupCatOtherDesc => 'Feed layouts, lists and service options';
 
   @override
+  String get logFile => 'Arquivo de log';
+
+  @override
+  String get logFileDesc => 'Share the app log, or copy its path on Linux';
+
+  @override
+  String get logFileCopied => 'Log path copied';
+
+  @override
   String get glassBackground => 'Glass background';
 
   @override
@@ -770,6 +779,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   @override
   String get loadExtensionsIconDesc =>
       'Desative se a página de extensões ficar lenta';
+
+  @override
+  String get logFile => 'Arquivo de Log';
 
   @override
   String get materialYou => 'Material You';

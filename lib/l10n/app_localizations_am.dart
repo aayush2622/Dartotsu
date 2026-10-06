@@ -432,6 +432,15 @@ class AppLocalizationsAm extends AppLocalizations {
   String get backupCatOtherDesc => 'Feed layouts, lists and service options';
 
   @override
+  String get logFile => 'የምዝግብ ማስታወሻ ፋይል';
+
+  @override
+  String get logFileDesc => 'Share the app log, or copy its path on Linux';
+
+  @override
+  String get logFileCopied => 'Log path copied';
+
+  @override
   String get glassBackground => 'Glass background';
 
   @override
