@@ -1,4 +1,4 @@
-part of '../AnilistQueries.dart';
+part of '../Queries.dart';
 
 class _BrowseRail {
   final String title;
@@ -53,9 +53,9 @@ Map<String, List<Media>> _parseBrowse(Map<String, dynamic> args) {
     final [title, alias, kind] = rail.cast<String>();
     out[title] = kind == 'airing'
         ? _recentUpdates(data[alias])
-        : _pageMedia(data[alias] as Map<String, dynamic>?);
+        : anilistPageMedia(data[alias] as Map<String, dynamic>?);
   }
-  return _nonEmpty(out);
+  return anilistNonEmpty(out);
 }
 
 List<_BrowseRail> _animeRails() {

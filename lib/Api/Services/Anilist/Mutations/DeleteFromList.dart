@@ -1,4 +1,4 @@
-part of '../AnilistMutations.dart';
+part of '../Mutations.dart';
 
 extension on AnilistMutations {
   Future<void> _deleteFromList(Media media) async {

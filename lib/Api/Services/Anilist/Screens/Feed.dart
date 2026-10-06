@@ -1,8 +1,8 @@
 import '../../../../Core/Services/MediaService.dart';
 import '../../../../Core/Services/Model/Media.dart';
 import '../../../../Model/SearchResults.dart';
-import '../AnilistAuth.dart';
-import '../AnilistPrefs.dart';
+import '../Auth.dart';
+import '../Prefs.dart';
 import 'Anime.dart';
 import 'Manga.dart';
 
@@ -16,11 +16,8 @@ abstract class AnilistTypeFeed {
   /// The query that fetches further pages of [title]; null = no paging.
   SearchResults? sectionQuery(SearchResults base, String title);
 
-  List<SectionJob> jobs() => [
-    if (anilistAuth.isLoggedIn)
-      () => anilistAuth.queries.getMediaLists(anime: type.isVideo),
-    ...anilistAuth.queries.browseJobs(anime: type.isVideo),
-  ];
+  List<SectionJob> jobs() =>
+      anilistAuth.queries.browseJobs(anime: type.isVideo);
 }
 
 class AnilistFeedView extends FeedScreenView {

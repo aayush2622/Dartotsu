@@ -3,8 +3,8 @@ import 'package:flutter/widgets.dart';
 import '../../../../Core/Services/MediaService.dart';
 import '../../../../Core/Services/Model/Media.dart';
 import '../../../../Model/SearchResults.dart';
-import '../ExtensionQueries.dart';
-import '../Widgets/ExtensionSourceBadge.dart';
+import '../Queries.dart';
+import '../Widgets/SourceBadge.dart';
 
 class ExtensionSearchView extends SearchScreenView {
   final ExtensionQueries queries;

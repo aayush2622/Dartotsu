@@ -273,6 +273,47 @@ class _Genres extends StatelessWidget {
   }
 }
 
+class _ScoreChip extends StatelessWidget {
+  final double score;
+  final bool highlight;
+
+  const _ScoreChip(this.score, {this.highlight = false});
+
+  @override
+  Widget build(BuildContext context) {
+    final scheme = context.colorScheme;
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: highlight
+            ? scheme.primaryContainer
+            : scheme.surfaceContainerHighest,
+        borderRadius: BorderRadius.circular(999),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              Icons.star_rounded,
+              size: 13,
+              color: highlight ? scheme.onPrimaryContainer : scheme.primary,
+            ),
+            const SizedBox(width: 2),
+            Text(
+              score.toStringAsFixed(1),
+              style: context.textTheme.labelSmall?.copyWith(
+                fontWeight: FontWeight.w800,
+                color: highlight ? scheme.onPrimaryContainer : null,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 class MediaListTile extends StatelessWidget {
   final Media media;
   final String tag;
@@ -326,13 +367,27 @@ class MediaListTile extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      media.mainName,
-                      maxLines: style.lines,
-                      overflow: TextOverflow.ellipsis,
-                      style: text.titleSmall?.copyWith(
-                        fontWeight: FontWeight.w800,
-                      ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            media.mainName,
+                            maxLines: style.lines,
+                            overflow: TextOverflow.ellipsis,
+                            style: text.titleSmall?.copyWith(
+                              fontWeight: FontWeight.w800,
+                            ),
+                          ),
+                        ),
+                        if (style.showScore && facts.score != null) ...[
+                          const SizedBox(width: 8),
+                          _ScoreChip(
+                            facts.score!,
+                            highlight: (media.userScore ?? 0) > 0,
+                          ),
+                        ],
+                      ],
                     ),
                     if (meta.isNotEmpty) ...[
                       const SizedBox(height: 3),
@@ -359,31 +414,16 @@ class MediaListTile extends StatelessWidget {
                     ],
                     if (!style.compact) _Genres(media),
                     const Spacer(),
-                    Row(
-                      children: [
-                        if (facts.status != null)
-                          Flexible(
-                            child: Text(
-                              facts.status!,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: text.labelMedium?.copyWith(
-                                color: scheme.primary,
-                                fontWeight: FontWeight.w800,
-                              ),
-                            ),
-                          ),
-                        const Spacer(),
-                        if (style.showScore && facts.score != null)
-                          _Stat(
-                            Icons.star_rounded,
-                            facts.score!.toStringAsFixed(1),
-                            color: (media.userScore ?? 0) > 0
-                                ? scheme.primary
-                                : null,
-                          ),
-                      ],
-                    ),
+                    if (facts.status != null)
+                      Text(
+                        facts.status!,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: text.labelMedium?.copyWith(
+                          color: scheme.primary,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
                     if (style.showProgress) _Progress(facts),
                   ],
                 ),

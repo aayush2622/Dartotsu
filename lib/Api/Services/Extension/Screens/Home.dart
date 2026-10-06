@@ -1,7 +1,7 @@
 import '../../../../Core/Services/MediaService.dart';
 import '../../../../Screen/Extension/Widgets/ExtensionSourcesRail.dart';
-import '../ExtensionQueries.dart';
-import '../Widgets/ExtensionMediaSection.dart';
+import '../Queries.dart';
+import '../Widgets/MediaSection.dart';
 
 class ExtensionHomeView extends HomeScreenView {
   final ExtensionQueries queries;

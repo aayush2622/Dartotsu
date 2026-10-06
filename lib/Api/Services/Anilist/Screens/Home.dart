@@ -1,6 +1,6 @@
 import '../../../../Core/Services/MediaService.dart';
-import '../AnilistAuth.dart';
-import '../AnilistPrefs.dart';
+import '../Auth.dart';
+import '../Prefs.dart';
 
 class AnilistHomeView extends HomeScreenView {
   AnilistHomeView(super.service);

@@ -63,42 +63,14 @@ class AnilistClient {
     return true;
   }
 
-  /// Decoded `data` node. Use for light queries and mutations.
-  Future<Map<String, dynamic>> query(
-    String gql, {
-    Map<String, dynamic> variables = const {},
-    bool useToken = true,
-    bool showErrors = true,
-  }) async {
-    final nowSec = DateTime.now().millisecondsSinceEpoch ~/ 1000;
-    _rateGuard(nowSec);
-
-    try {
-      final res = await _network.post(
-        _endpoint,
-        headers: _headers(useToken),
-        data: {'query': gql.trim(), 'variables': variables},
-      );
-      if (_handle429(res, nowSec)) {
-        throw AnilistException('Rate limited, try again shortly');
-      }
-      final body = res.data;
-      return anilistData(body is String ? body : jsonEncode(body));
-    } on AnilistException {
-      rethrow;
-    } catch (e) {
-      if (showErrors) snackString('AniList: $e');
-      throw AnilistException(e.toString());
-    }
-  }
-
-  /// Raw response body — no main-thread decode. The caller decodes + parses
-  /// inside an isolate via [anilistData]. Use for the large list queries.
-  Future<String> queryRaw(
-    String gql, {
-    Map<String, dynamic> variables = const {},
-    bool useToken = true,
-  }) async {
+  /// Raw response body — no decode. [query] decodes it on the caller's
+  /// thread; the large list queries decode + parse inside an isolate via
+  /// [anilistData].
+  Future<String> _send(
+    String gql,
+    Map<String, dynamic> variables,
+    bool useToken,
+  ) async {
     final nowSec = DateTime.now().millisecondsSinceEpoch ~/ 1000;
     _rateGuard(nowSec);
 
@@ -113,4 +85,28 @@ class AnilistClient {
     }
     return res.data as String;
   }
+
+  /// Decoded `data` node. Use for light queries and mutations.
+  Future<Map<String, dynamic>> query(
+    String gql, {
+    Map<String, dynamic> variables = const {},
+    bool useToken = true,
+    bool showErrors = true,
+  }) async {
+    try {
+      return anilistData(await _send(gql, variables, useToken));
+    } on AnilistException {
+      rethrow;
+    } catch (e) {
+      if (showErrors) snackString('AniList: $e');
+      throw AnilistException(e.toString());
+    }
+  }
+
+  /// Raw response body for the large list queries.
+  Future<String> queryRaw(
+    String gql, {
+    Map<String, dynamic> variables = const {},
+    bool useToken = true,
+  }) => _send(gql, variables, useToken);
 }

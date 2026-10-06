@@ -4,7 +4,7 @@ import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import '../../../Core/Services/MediaService.dart';
 import '../../../Core/Services/Model/Media.dart';
 import '../../../Model/SearchResults.dart';
-import 'ExtensionServices.dart';
+import 'Services.dart';
 
 String _popularTitle(Source source) => 'Popular on ${source.name}';
 

@@ -7,11 +7,11 @@ import '../../../Core/Preferences/PrefManager.dart';
 import '../../../Core/Services/ServiceAuth.dart';
 import '../../../Utils/Functions/GetXFunctions.dart';
 import '../../../Utils/Functions/SnackBar.dart';
-import 'AnilistClient.dart';
-import 'AnilistPrefs.dart';
-import 'AnilistMutations.dart';
-import 'AnilistQueries.dart';
-import 'AnilistUser.dart';
+import 'Client.dart';
+import 'Prefs.dart';
+import 'Mutations.dart';
+import 'Queries.dart';
+import 'Data/User.dart';
 
 AnilistAuth get anilistAuth => find<AnilistAuth>();
 
@@ -83,6 +83,10 @@ class AnilistAuth extends GetxController implements ServiceAuth {
       return false;
     }
   }
+
+  @override
+  String get tokenLoginUrl =>
+      'https://anilist.co/api/v2/oauth/authorize?client_id=21003&response_type=token';
 
   @override
   Future<bool> loginWithToken(String newToken) async {

@@ -1,4 +1,4 @@
-part of '../AnilistQueries.dart';
+part of '../Queries.dart';
 
 const _genresKey = 'anilist_genres';
 const _adultTagsKey = 'anilist_tags_adult';

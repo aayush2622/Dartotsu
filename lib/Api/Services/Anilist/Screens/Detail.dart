@@ -1,8 +1,8 @@
 import '../../../../Core/Services/MediaService.dart';
 import '../../../../Core/Services/Model/Media.dart';
 import '../../../../Utils/Extensions/StringExtensions.dart';
-import '../AnilistAuth.dart';
-import '../AnilistMedia.dart';
+import '../Auth.dart';
+import '../Data/Media.dart';
 import '../Widgets/DetailStats.dart';
 import '../Widgets/FollowersShelf.dart';
 

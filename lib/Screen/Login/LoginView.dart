@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide ContextExtensionss;
 
@@ -5,28 +7,44 @@ import '../../Core/Services/MediaServiceController.dart';
 import '../../Core/Services/ServiceSwitcher.dart';
 import '../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
+import '../../Utils/Function.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
+import '../../Utils/Functions/SnackBar.dart';
 import '../../Widgets/Components/AlertDialogBuilder.dart';
 import '../../Widgets/Components/LoadSvg.dart';
+
+String _cleanToken(String raw) {
+  final text = raw.trim();
+  final match = RegExp(r'access_token=([^&\s]+)').firstMatch(text);
+  return (match?.group(1) ?? text).replaceAll(RegExp(r'\s'), '');
+}
 
 void showTokenLogin(
   BuildContext context,
   ServiceAuth auth, {
   void Function(bool ok)? onResult,
 }) {
-  var token = '';
+  final controller = TextEditingController();
+  final url = auth.tokenLoginUrl;
+  if (url != null) unawaited(openLinkInBrowser(url));
   AlertDialogBuilder(context)
     ..setTitle(getString.loginWithToken)
     ..setCustomView(
       TextField(
+        controller: controller,
         autofocus: true,
         decoration: InputDecoration(hintText: getString.pasteTokenHint),
-        onChanged: (v) => token = v,
       ),
     )
     ..setPositiveButton(getString.login, () async {
-      if (token.trim().isEmpty) return;
-      onResult?.call(await auth.loginWithToken(token.trim()));
+      final token = _cleanToken(controller.text);
+      if (token.isEmpty) {
+        snackString(getString.pasteTokenHint);
+        return;
+      }
+      final ok = await auth.loginWithToken(token);
+      if (ok) snackString('Logged in');
+      onResult?.call(ok);
     })
     ..setNegativeButton(getString.cancel, null)
     ..show();

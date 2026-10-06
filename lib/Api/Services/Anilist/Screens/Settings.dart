@@ -5,9 +5,9 @@ import '../../../../Model/Setting.dart';
 import '../../../../Screen/Settings/Widgets/SegmentedSetting.dart';
 import '../../../../Utils/Function.dart';
 import '../../../../Widgets/Components/AppControls.dart';
-import '../AnilistPrefs.dart';
+import '../Prefs.dart';
 import '../Widgets/HomeLayoutSheet.dart';
-import '../AnilistAuth.dart';
+import '../Auth.dart';
 
 class AnilistSettingsView extends SettingsScreenView {
   @override

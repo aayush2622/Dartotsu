@@ -5,7 +5,6 @@ import '../../../Model/SearchResults.dart';
 import '../../../Utils/Extensions/ContextExtensions.dart';
 import '../../../Utils/Extensions/Responsive.dart';
 import '../../../Utils/Extensions/StringExtensions.dart';
-import '../../../Widgets/Components/AppControls.dart';
 import '../Widgets/AppDropdown.dart';
 import '../../../Widgets/Components/CustomBottomDialog.dart';
 import '../../../Widgets/Components/ScrollConfig.dart';
@@ -51,7 +50,9 @@ class _FilterBodyState extends State<_FilterBody> {
   late String? _season = widget.start.season;
   late int? _year = widget.start.seasonYear ?? widget.start.startYear;
   late final Set<String> _genres = {...?widget.start.genres};
+  late final Set<String> _noGenres = {...?widget.start.excludedGenres};
   late final Set<String> _tags = {...?widget.start.tags};
+  late final Set<String> _noTags = {...?widget.start.excludedTags};
   bool _allTags = false;
 
   SearchFilterSpec get s => widget.spec;
@@ -68,6 +69,8 @@ class _FilterBodyState extends State<_FilterBody> {
       ..startYear = s.season ? null : _year
       ..genres = _genres.isEmpty ? null : _genres.toList()
       ..tags = _tags.isEmpty ? null : _tags.toList()
+      ..excludedGenres = _noGenres.isEmpty ? null : _noGenres.toList()
+      ..excludedTags = _noTags.isEmpty ? null : _noTags.toList()
       ..page = 1;
     widget.onApply(q);
     Navigator.pop(context);
@@ -77,57 +80,61 @@ class _FilterBodyState extends State<_FilterBody> {
     _sort = _format = _status = _source = _country = _season = null;
     _year = null;
     _genres.clear();
+    _noGenres.clear();
     _tags.clear();
+    _noTags.clear();
   });
 
   @override
   Widget build(BuildContext context) {
     final years = [for (var y = DateTime.now().year + 1; y >= 1970; y--) '$y'];
-    return SizedBox(
-      height: MediaQuery.sizeOf(context).height * 0.7,
+    return ConstrainedBox(
+      constraints: BoxConstraints(
+        maxHeight: MediaQuery.sizeOf(context).height * 0.78,
+      ),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Expanded(
+          _header(),
+          Flexible(
             child: ScrollConfig(
               context,
               child: ListView(
+                shrinkWrap: true,
                 padding: EdgeInsets.symmetric(horizontal: Dimens.gap),
                 children: [
-                  if (s.sorts.isNotEmpty)
-                    _Field(
-                      'Sort by',
-                      AppChoiceChips<String?>(
-                        value: _sort,
-                        onChanged: (v) => setState(() => _sort = v),
-                        options: [
-                          const AppSegment(null, label: 'Default'),
-                          for (final e in s.sorts.entries)
-                            AppSegment(e.key, label: e.value),
-                        ],
-                      ),
-                    ),
-                  _dropRow([
-                    if (s.formats.isNotEmpty)
-                      _drop('Format', s.formats, _format, (v) => _format = v),
-                    if (s.statuses.isNotEmpty)
-                      _drop('Status', s.statuses, _status, (v) => _status = v),
-                  ]),
+                  SizedBox(height: Dimens.gapSm),
                   _dropRow([
                     if (s.sources.isNotEmpty)
-                      _drop('Source', s.sources, _source, (v) => _source = v),
-                    if (s.countries.isNotEmpty)
                       _drop(
-                        'Country',
-                        s.countries.keys.toList(),
-                        _country,
-                        (v) => _country = v,
-                        labels: s.countries,
+                        'Source',
+                        Icons.menu_book_rounded,
+                        s.sources,
+                        _source,
+                        (v) => _source = v,
+                      ),
+                    if (s.formats.isNotEmpty)
+                      _drop(
+                        'Format',
+                        Icons.movie_filter_rounded,
+                        s.formats,
+                        _format,
+                        (v) => _format = v,
                       ),
                   ]),
                   _dropRow([
+                    if (s.statuses.isNotEmpty)
+                      _drop(
+                        'Status',
+                        Icons.podcasts_rounded,
+                        s.statuses,
+                        _status,
+                        (v) => _status = v,
+                      ),
                     if (s.season)
                       _drop(
                         'Season',
+                        Icons.wb_sunny_rounded,
                         const ['WINTER', 'SPRING', 'SUMMER', 'FALL'],
                         _season,
                         (v) => _season = v,
@@ -135,32 +142,32 @@ class _FilterBodyState extends State<_FilterBody> {
                     if (s.year)
                       _drop(
                         'Year',
+                        Icons.calendar_month_rounded,
                         years,
                         _year?.toString(),
                         (v) => _year = v == null ? null : int.parse(v),
                       ),
                   ]),
-                  if (s.genres.isNotEmpty)
-                    _Field('Genres', _chipWrap(s.genres, _genres)),
-                  if (s.tags.isNotEmpty)
-                    _Field(
-                      'Tags',
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          _chipWrap(
-                            _allTags ? s.tags : s.tags.take(24).toList(),
-                            _tags,
-                          ),
-                          if (s.tags.length > 24)
-                            TextButton(
-                              onPressed: () =>
-                                  setState(() => _allTags = !_allTags),
-                              child: Text(_allTags ? 'Show less' : 'Show all'),
-                            ),
-                        ],
-                      ),
+                  if (s.genres.isNotEmpty) ...[
+                    _title('Genres'),
+                    _chipWrap(s.genres, _genres, exclude: _noGenres),
+                  ],
+                  if (s.tags.isNotEmpty) ...[
+                    _title('Tags'),
+                    _chipWrap(
+                      _allTags ? s.tags : s.tags.take(30).toList(),
+                      _tags,
+                      exclude: _noTags,
                     ),
+                    if (s.tags.length > 30)
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: TextButton(
+                          onPressed: () => setState(() => _allTags = !_allTags),
+                          child: Text(_allTags ? 'Show less' : 'Show all'),
+                        ),
+                      ),
+                  ],
                   SizedBox(height: Dimens.gap),
                 ],
               ),
@@ -177,13 +184,12 @@ class _FilterBodyState extends State<_FilterBody> {
               children: [
                 Expanded(
                   child: OutlinedButton(
-                    onPressed: _clear,
-                    child: const Text('Clear'),
+                    onPressed: () => Navigator.pop(context),
+                    child: const Text('Cancel'),
                   ),
                 ),
                 SizedBox(width: Dimens.gap),
                 Expanded(
-                  flex: 2,
                   child: FilledButton(
                     onPressed: _apply,
                     child: const Text('Apply'),
@@ -197,6 +203,73 @@ class _FilterBodyState extends State<_FilterBody> {
     );
   }
 
+  Widget _header() {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: Dimens.gapSm),
+      child: Row(
+        children: [
+          IconButton(
+            tooltip: 'Reset',
+            onPressed: _clear,
+            icon: const Icon(Icons.close_rounded, size: 28),
+          ),
+          Expanded(
+            child: Text(
+              'Filter',
+              textAlign: TextAlign.center,
+              style: context.textTheme.headlineSmall?.copyWith(
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ),
+          if (s.countries.isNotEmpty)
+            PopupMenuButton<String>(
+              tooltip: 'Country',
+              icon: Icon(
+                Icons.public_rounded,
+                size: 28,
+                color: (_country?.isNotEmpty ?? false)
+                    ? context.colorScheme.primary
+                    : null,
+              ),
+              onSelected: (v) =>
+                  setState(() => _country = v.isEmpty ? null : v),
+              itemBuilder: (_) => [
+                for (final e in s.countries.entries)
+                  PopupMenuItem(value: e.key, child: Text(e.value)),
+              ],
+            ),
+          if (s.sorts.isNotEmpty)
+            PopupMenuButton<String>(
+              tooltip: 'Sort',
+              icon: Icon(
+                Icons.filter_list_rounded,
+                size: 28,
+                color: _sort != null ? context.colorScheme.primary : null,
+              ),
+              onSelected: (v) => setState(() => _sort = v.isEmpty ? null : v),
+              itemBuilder: (_) => [
+                const PopupMenuItem(value: '', child: Text('Default')),
+                for (final e in s.sorts.entries)
+                  PopupMenuItem(value: e.key, child: Text(e.value)),
+              ],
+            ),
+          if (s.countries.isEmpty && s.sorts.isEmpty) const SizedBox(width: 48),
+        ],
+      ),
+    );
+  }
+
+  Widget _title(String text) => Padding(
+    padding: EdgeInsets.only(top: Dimens.gap, bottom: Dimens.gapSm, left: 4),
+    child: Text(
+      text,
+      style: context.textTheme.titleMedium?.copyWith(
+        fontWeight: FontWeight.w700,
+      ),
+    ),
+  );
+
   Widget _dropRow(List<Widget> children) {
     final visible = children.whereType<Widget>().toList();
     if (visible.isEmpty) return const SizedBox.shrink();
@@ -208,7 +281,6 @@ class _FilterBodyState extends State<_FilterBody> {
             if (i > 0) SizedBox(width: Dimens.gapSm),
             Expanded(child: c),
           ],
-          if (visible.length == 1) const Spacer(),
         ],
       ),
     );
@@ -218,13 +290,14 @@ class _FilterBodyState extends State<_FilterBody> {
 
   Widget _drop(
     String hint,
+    IconData icon,
     List<String> options,
     String? value,
-    ValueChanged<String?> onChanged, {
-    Map<String, String>? labels,
-  }) {
+    ValueChanged<String?> onChanged,
+  ) {
     return AppDropdown(
-      hintText: hint,
+      labelText: hint,
+      prefixIcon: icon,
       value: value == null || value.isEmpty ? _any : value,
       options: [_any, ...options],
       onChanged: (v) =>
@@ -232,47 +305,43 @@ class _FilterBodyState extends State<_FilterBody> {
     );
   }
 
-  Widget _chipWrap(List<String> options, Set<String> selected) {
+  Widget _chipWrap(
+    List<String> options,
+    Set<String> selected, {
+    Set<String>? exclude,
+  }) {
+    final scheme = context.colorScheme;
     return Wrap(
       spacing: 8,
       runSpacing: 8,
       children: [
         for (final o in options)
-          FilterChip(
-            label: Text(o.titleCase),
-            selected: selected.contains(o),
-            showCheckmark: false,
-            onSelected: (on) => setState(() {
-              on ? selected.add(o) : selected.remove(o);
-            }),
+          Builder(
+            builder: (_) {
+              final excluded = exclude?.contains(o) ?? false;
+              final on = selected.contains(o);
+              return FilterChip(
+                label: Text(o.titleCase),
+                avatar: excluded
+                    ? Icon(Icons.block_rounded, size: 16, color: scheme.error)
+                    : null,
+                selected: on || excluded,
+                selectedColor: excluded ? scheme.errorContainer : null,
+                showCheckmark: false,
+                onSelected: (_) => setState(() {
+                  if (on) {
+                    selected.remove(o);
+                    if (exclude != null) exclude.add(o);
+                  } else if (excluded) {
+                    exclude!.remove(o);
+                  } else {
+                    selected.add(o);
+                  }
+                }),
+              );
+            },
           ),
       ],
     );
   }
-}
-
-class _Field extends StatelessWidget {
-  final String label;
-  final Widget child;
-  const _Field(this.label, this.child);
-
-  @override
-  Widget build(BuildContext context) => Padding(
-    padding: EdgeInsets.only(top: Dimens.gap),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(bottom: 8),
-          child: Text(
-            label,
-            style: context.textTheme.labelLarge?.copyWith(
-              color: context.colorScheme.onSurfaceVariant,
-            ),
-          ),
-        ),
-        child,
-      ],
-    ),
-  );
 }

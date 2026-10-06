@@ -70,6 +70,12 @@ class SearchFilterSpec {
   final bool season;
   final bool year;
 
+  /// Offers the adult-content switch.
+  final bool adult;
+
+  /// Offers the "only titles on my list" switch.
+  final bool onList;
+
   const SearchFilterSpec({
     this.sorts = const {},
     this.formats = const [],
@@ -80,6 +86,8 @@ class SearchFilterSpec {
     this.countries = const {},
     this.season = false,
     this.year = false,
+    this.adult = false,
+    this.onList = false,
   });
 
   static const none = SearchFilterSpec();
@@ -92,15 +100,29 @@ class SearchFilterSpec {
       genres.isEmpty &&
       countries.isEmpty &&
       !season &&
-      !year;
+      !year &&
+      !adult &&
+      !onList;
 }
 
 abstract class SearchScreenView {
   Future<SearchResults?> search(SearchResults query);
 
+  /// Warms whatever the filter vocabulary needs (genre and tag lists).
+  Future<void> prepare() async {}
+
   /// Media types the search can target; the first is the default. Usually the
   /// same as [MediaService.feedTypes].
   List<MediaType> get types => const [MediaType.anime, MediaType.manga];
+
+  /// Everything the search can target — media types plus characters, staff,
+  /// studios and users where the service supports them. The first is the
+  /// default.
+  List<SearchType> get searchTypes => [for (final t in types) t.searchType];
+
+  /// A web page for a non-media result ([entity] is a `Character`, `Author`,
+  /// `Studio` or `User`), or null when there is nothing to open.
+  String? entityUrl(SearchType type, Object entity) => null;
 
   Widget? overlay(Media media) => null;
 

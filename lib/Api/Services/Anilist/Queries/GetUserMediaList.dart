@@ -1,4 +1,4 @@
-part of '../AnilistQueries.dart';
+part of '../Queries.dart';
 
 extension on AnilistQueries {
   Future<Map<String, List<Media>>> _getMediaLists({
@@ -88,7 +88,7 @@ Map<String, List<Media>> _parseUserLists(Map<String, dynamic> args) {
   if (favourites.isNotEmpty) sorted['Favourites'] = favourites;
   sorted['All'] = all;
 
-  return _nonEmpty(sorted);
+  return anilistNonEmpty(sorted);
 }
 
 String _queryFavMedia(int userId, bool anime, int page) =>

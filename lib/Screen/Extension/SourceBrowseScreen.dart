@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide ContextExtensionss;
 import 'package:skeletonizer/skeletonizer.dart';
 
-import '../../Api/Services/Extension/Widgets/ExtensionSourceBadge.dart';
-import '../../Api/Services/Extension/ExtensionServices.dart';
+import '../../Api/Services/Extension/Widgets/SourceBadge.dart';
+import '../../Api/Services/Extension/Services.dart';
 import '../../Core/Services/MediaServiceController.dart';
 import '../../Core/Services/Model/Media.dart';
 import '../../Core/ThemeManager/CardStyleController.dart';

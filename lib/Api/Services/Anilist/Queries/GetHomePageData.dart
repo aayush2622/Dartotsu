@@ -1,4 +1,4 @@
-part of '../AnilistQueries.dart';
+part of '../Queries.dart';
 
 extension on AnilistQueries {
   List<SectionJob> _homeJobs() {
@@ -110,10 +110,10 @@ Map<String, List<Media>> _parseHome(Map<String, dynamic> args) {
         'repeatingManga',
         (args['continueManga'] as Map).cast<String, int>(),
       ),
-      'Planned Anime' => _collectionMedia(
+      'Planned Anime' => anilistCollectionMedia(
         data['plannedAnime'] as Map<String, dynamic>?,
       ),
-      'Planned Manga' => _collectionMedia(
+      'Planned Manga' => anilistCollectionMedia(
         data['plannedManga'] as Map<String, dynamic>?,
       ),
       'Favourite Anime' => _favouriteMedia(data['favoriteAnime'], anime: true),
@@ -125,7 +125,7 @@ Map<String, List<Media>> _parseHome(Map<String, dynamic> args) {
   }
 
   if (hidden.isNotEmpty) out['Hidden Media'] = hidden;
-  return _nonEmpty(out);
+  return anilistNonEmpty(out);
 }
 
 List<Media> _continueMedia(
@@ -136,8 +136,8 @@ List<Media> _continueMedia(
 ) {
   final byId = <String, Media>{};
   for (final media in [
-    ..._collectionMedia(data[current] as Map<String, dynamic>?),
-    ..._collectionMedia(data[repeating] as Map<String, dynamic>?),
+    ...anilistCollectionMedia(data[current] as Map<String, dynamic>?),
+    ...anilistCollectionMedia(data[repeating] as Map<String, dynamic>?),
   ]) {
     media.cameFromContinue = true;
     byId[media.id] = media;
@@ -178,8 +178,12 @@ List<Media> _recommended(Map<String, dynamic> data) {
     byId[media.id] = media;
   }
   for (final media in [
-    ..._collectionMedia(data['recommendedAnime'] as Map<String, dynamic>?),
-    ..._collectionMedia(data['recommendedManga'] as Map<String, dynamic>?),
+    ...anilistCollectionMedia(
+      data['recommendedAnime'] as Map<String, dynamic>?,
+    ),
+    ...anilistCollectionMedia(
+      data['recommendedManga'] as Map<String, dynamic>?,
+    ),
   ]) {
     if (media.status == 'RELEASING' || media.status == 'FINISHED') {
       byId[media.id] = media;

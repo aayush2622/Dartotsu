@@ -1,6 +1,6 @@
 import '../../../Core/Services/MediaService.dart';
-import 'ExtensionQueries.dart';
-import 'ExtensionServices.dart';
+import 'Queries.dart';
+import 'Services.dart';
 import 'Screens/Detail.dart';
 import 'Screens/Feed.dart';
 import 'Screens/Home.dart';

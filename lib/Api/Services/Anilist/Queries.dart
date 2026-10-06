@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:collection/collection.dart';
@@ -14,23 +15,23 @@ import '../../../Core/Services/Model/User.dart';
 import '../../../Core/Services/ServiceNotification.dart';
 import '../../../Model/SearchResults.dart';
 import '../../../Utils/Functions/SnackBar.dart';
-import 'AnilistClient.dart';
-import 'AnilistMedia.dart';
-import 'AnilistNotification.dart';
-import 'AnilistPrefs.dart';
+import 'Client.dart';
+import 'Data/Mapper.dart';
+import 'Data/Notification.dart';
+import 'Prefs.dart';
 import 'AnilistService.dart';
 
-part 'AnilistQueries/GetAnimeMangaListData.dart';
-part 'AnilistQueries/GetBannerImages.dart';
-part 'AnilistQueries/GetCalendarData.dart';
-part 'AnilistQueries/GetGenresAndTags.dart';
-part 'AnilistQueries/GetHomePageData.dart';
-part 'AnilistQueries/GetMediaData.dart';
-part 'AnilistQueries/GetMediaDetails.dart';
-part 'AnilistQueries/GetNotifications.dart';
-part 'AnilistQueries/GetUserData.dart';
-part 'AnilistQueries/GetUserMediaList.dart';
-part 'AnilistQueries/Search.dart';
+part 'Queries/GetAnimeMangaListData.dart';
+part 'Queries/GetBannerImages.dart';
+part 'Queries/GetCalendarData.dart';
+part 'Queries/GetGenresAndTags.dart';
+part 'Queries/GetHomePageData.dart';
+part 'Queries/GetMediaData.dart';
+part 'Queries/GetMediaDetails.dart';
+part 'Queries/GetNotifications.dart';
+part 'Queries/GetUserData.dart';
+part 'Queries/GetUserMediaList.dart';
+part 'Queries/Search.dart';
 
 class AnilistQueries extends Queries {
   final AnilistClient client;
@@ -81,42 +82,4 @@ class AnilistQueries extends Queries {
 
   @override
   Future<SearchResults?> search(SearchResults? results) => _search(results);
-}
-
-/// Shared parse for a `Page { media { ... } }` node.
-List<Media> _pageMedia(Map<String, dynamic>? page) =>
-    ((page?['media'] as List?) ?? const [])
-        .cast<Map<String, dynamic>>()
-        .map((e) => mapAnilistMedia(e))
-        .toList();
-
-/// Shared parse for a `MediaListCollection { lists { entries { media } } }` node.
-List<Media> _collectionMedia(Map<String, dynamic>? collection) {
-  final out = <Media>[];
-  for (final list
-      in ((collection?['lists'] as List?) ?? const [])
-          .cast<Map<String, dynamic>>()) {
-    for (final entry
-        in ((list['entries'] as List?) ?? const [])
-            .cast<Map<String, dynamic>>()) {
-      if (entry['media'] != null) out.add(mapAnilistListEntry(entry));
-    }
-  }
-  return out;
-}
-
-Map<String, List<Media>> _nonEmpty(Map<String, List<Media>> map) {
-  map.removeWhere((_, v) => v.isEmpty);
-  return map;
-}
-
-(String, int) currentAnilistSeason() {
-  final now = DateTime.now();
-  final season = switch (now.month) {
-    12 || 1 || 2 => 'WINTER',
-    3 || 4 || 5 => 'SPRING',
-    6 || 7 || 8 => 'SUMMER',
-    _ => 'FALL',
-  };
-  return (season, now.month == 12 ? now.year + 1 : now.year);
 }

@@ -1,7 +1,7 @@
 import '../../../../Core/Services/MediaService.dart';
-import '../ExtensionQueries.dart';
-import '../ExtensionServices.dart';
-import '../Widgets/ExtensionMediaSection.dart';
+import '../Queries.dart';
+import '../Services.dart';
+import '../Widgets/MediaSection.dart';
 
 class ExtensionFeedView extends FeedScreenView {
   final ExtensionQueries queries;

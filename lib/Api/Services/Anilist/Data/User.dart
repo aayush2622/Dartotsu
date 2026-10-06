@@ -1,4 +1,4 @@
-import '../../../Core/Services/ServiceAuth.dart';
+import '../../../../Core/Services/ServiceAuth.dart';
 
 class AnilistUser implements ServiceUser {
   @override

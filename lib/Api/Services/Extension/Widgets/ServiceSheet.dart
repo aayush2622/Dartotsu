@@ -10,7 +10,7 @@ import '../../../../Widgets/Components/CachedNetworkImage.dart';
 import '../../../../Widgets/Components/CustomBottomDialog.dart';
 import '../../../../Widgets/Components/SheetTile.dart';
 import '../../../../Widgets/Components/ThemedContainer.dart';
-import '../ExtensionServices.dart';
+import '../Services.dart';
 
 class ExtensionServiceSheet extends StatelessWidget {
   final ItemType type;

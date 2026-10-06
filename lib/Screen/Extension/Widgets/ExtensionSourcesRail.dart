@@ -2,7 +2,7 @@ import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide ContextExtensionss;
 
-import '../../../Api/Services/Extension/ExtensionServices.dart';
+import '../../../Api/Services/Extension/Services.dart';
 import '../../../Utils/Extensions/ContextExtensions.dart';
 import '../../../Utils/Extensions/Responsive.dart';
 import '../../../Utils/Functions/NavigateToScreen.dart';

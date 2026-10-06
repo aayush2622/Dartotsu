@@ -1,6 +1,6 @@
 import '../../../Core/Services/MediaService.dart';
 import '../../../Utils/Functions/GetXFunctions.dart';
-import 'AnilistAuth.dart';
+import 'Auth.dart';
 import 'Screens/Detail.dart';
 import 'Screens/Feed.dart';
 import 'Screens/Home.dart';

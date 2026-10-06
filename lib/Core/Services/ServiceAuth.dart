@@ -23,6 +23,10 @@ abstract class ServiceAuth {
   /// Interactive OAuth / web-auth flow. Returns whether it succeeded.
   Future<bool> login();
 
+  /// Page that shows the user a token to paste, opened in the browser before
+  /// the token dialog. Null = nothing to open.
+  String? get tokenLoginUrl => null;
+
   /// Manual token entry fallback.
   Future<bool> loginWithToken(String token);
 

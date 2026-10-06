@@ -1,64 +1,14 @@
-import '../../../Core/Services/Model/Anime.dart';
-import '../../../Core/Services/Model/Author.dart';
-import '../../../Core/Services/Model/Character.dart';
-import '../../../Core/Services/Model/Date.dart';
-import '../../../Core/Services/Model/Manga.dart';
-import '../../../Core/Services/Model/Media.dart';
-import '../../../Core/Services/Model/Review.dart';
-import '../../../Core/Services/Model/Studio.dart';
-import '../../../Core/Services/Model/User.dart';
+import '../../../../Core/Services/Model/Anime.dart';
+import '../../../../Core/Services/Model/Author.dart';
+import '../../../../Core/Services/Model/Character.dart';
+import '../../../../Core/Services/Model/Date.dart';
+import '../../../../Core/Services/Model/Manga.dart';
+import '../../../../Core/Services/Model/Media.dart';
+import '../../../../Core/Services/Model/Review.dart';
+import '../../../../Core/Services/Model/Studio.dart';
+import '../../../../Core/Services/Model/User.dart';
 
-/// AniList carries a few fields the shared [Media] doesn't need. The subclass is
-/// never serialized — only the base [Media] is.
-class AnilistMedia extends Media {
-  int? idMal;
-  Map<String, bool> inCustomListsOf;
-  int? userFavOrder;
-
-  AnilistMedia({
-    required super.id,
-    this.idMal,
-    Map<String, bool>? inCustomListsOf,
-    this.userFavOrder,
-    super.anime,
-    super.manga,
-    super.name,
-    super.nameRomaji,
-    super.userPreferredName,
-    super.cover,
-    super.banner,
-    super.relation,
-    super.favourites,
-    super.minimal = false,
-    super.isAdult = false,
-    super.isFav = false,
-    super.userListId,
-    super.isListPrivate = false,
-    super.notes,
-    super.userProgress,
-    super.userStatus,
-    super.userScore = 0,
-    super.userRepeat = 0,
-    super.userUpdatedAt,
-    super.userStartedAt,
-    super.userCompletedAt,
-    super.status,
-    super.format,
-    super.source,
-    super.countryOfOrigin,
-    super.meanScore,
-    super.genres = const [],
-    super.tags = const [],
-    super.description,
-    super.synonyms = const [],
-    super.trailer,
-    super.startDate,
-    super.endDate,
-    super.popularity,
-    super.timeUntilAiring,
-    required super.shareLink,
-  }) : inCustomListsOf = inCustomListsOf ?? {};
-}
+import 'Media.dart';
 
 /// Basic media fields requested by every list/browse query. Score is POINT_100
 /// to match AniList's `scoreRaw` mutation input.
@@ -416,4 +366,42 @@ List<User> _users(Object? raw) {
     );
   }
   return out;
+}
+
+/// Shared parse for a `Page { media { ... } }` node.
+List<Media> anilistPageMedia(Map<String, dynamic>? page) =>
+    ((page?['media'] as List?) ?? const [])
+        .cast<Map<String, dynamic>>()
+        .map((e) => mapAnilistMedia(e))
+        .toList();
+
+/// Shared parse for a `MediaListCollection { lists { entries { media } } }` node.
+List<Media> anilistCollectionMedia(Map<String, dynamic>? collection) {
+  final out = <Media>[];
+  for (final list
+      in ((collection?['lists'] as List?) ?? const [])
+          .cast<Map<String, dynamic>>()) {
+    for (final entry
+        in ((list['entries'] as List?) ?? const [])
+            .cast<Map<String, dynamic>>()) {
+      if (entry['media'] != null) out.add(mapAnilistListEntry(entry));
+    }
+  }
+  return out;
+}
+
+Map<String, List<Media>> anilistNonEmpty(Map<String, List<Media>> map) {
+  map.removeWhere((_, v) => v.isEmpty);
+  return map;
+}
+
+(String, int) currentAnilistSeason() {
+  final now = DateTime.now();
+  final season = switch (now.month) {
+    12 || 1 || 2 => 'WINTER',
+    3 || 4 || 5 => 'SPRING',
+    6 || 7 || 8 => 'SUMMER',
+    _ => 'FALL',
+  };
+  return (season, now.month == 12 ? now.year + 1 : now.year);
 }

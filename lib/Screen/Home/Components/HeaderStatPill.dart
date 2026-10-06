@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../Utils/Extensions/ContextExtensions.dart';
+import '../../../Widgets/Components/ThemedContainer.dart';
 
 class HeaderStatPill extends StatelessWidget {
   final IconData icon;
@@ -10,12 +11,10 @@ class HeaderStatPill extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scheme = context.colorScheme;
-    return Container(
+    return ThemedContainer(
+      blur: false,
+      borderRadius: BorderRadius.circular(999),
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-      decoration: BoxDecoration(
-        color: scheme.surfaceContainerHigh,
-        borderRadius: BorderRadius.circular(999),
-      ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [

@@ -1,4 +1,4 @@
-part of '../AnilistQueries.dart';
+part of '../Queries.dart';
 
 extension on AnilistQueries {
   Future<Media?> _getMedia(String id, {bool mal = false}) async {

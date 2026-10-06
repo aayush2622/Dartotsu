@@ -4,7 +4,7 @@ import 'dart:io';
 import 'Api/Discord/BaseDiscordRPC.dart';
 import 'Api/Discord/Desktop/DesktopRPC.dart';
 import 'Api/Discord/Mobile/MobileRPC.dart';
-import 'Api/Services/Anilist/AnilistAuth.dart';
+import 'Api/Services/Anilist/Auth.dart';
 import 'Api/Updater/AppUpdater.dart';
 import 'Core/Analytics/AnalyticsManager.dart';
 import 'Core/NetworkManager/NetworkManager.dart';

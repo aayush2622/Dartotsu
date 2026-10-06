@@ -1,5 +1,5 @@
 import '../../../../Core/Services/MediaService.dart';
-import '../AnilistAuth.dart';
+import '../Auth.dart';
 
 class AnilistNotificationView implements NotificationScreenView {
   @override

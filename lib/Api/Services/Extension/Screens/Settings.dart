@@ -5,8 +5,8 @@ import '../../../../Core/Services/MediaService.dart';
 import '../../../../Model/Setting.dart';
 import '../../../../Screen/Settings/Widgets/SegmentedSetting.dart';
 import '../../../../Widgets/Components/AppControls.dart';
-import '../ExtensionServices.dart';
-import '../Widgets/ExtensionServiceSheet.dart';
+import '../Services.dart';
+import '../Widgets/ServiceSheet.dart';
 
 class ExtensionSettingsView extends SettingsScreenView {
   @override

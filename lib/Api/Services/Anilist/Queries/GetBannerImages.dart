@@ -1,4 +1,4 @@
-part of '../AnilistQueries.dart';
+part of '../Queries.dart';
 
 extension on AnilistQueries {
   Future<List<String?>> _getBannerImages() async => [

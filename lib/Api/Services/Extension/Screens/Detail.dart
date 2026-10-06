@@ -1,6 +1,6 @@
 import '../../../../Core/Services/MediaService.dart';
 import '../../../../Screen/Detail/DetailWidgets.dart';
-import '../ExtensionQueries.dart';
+import '../Queries.dart';
 
 class ExtensionDetailView extends DetailScreenView {
   final ExtensionQueries queries;

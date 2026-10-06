@@ -5,12 +5,12 @@ import '../../../Core/Services/Model/Media.dart';
 import '../../../Utils/Functions/GetXFunctions.dart';
 import '../../../Utils/Functions/RefreshController.dart';
 import '../../../Utils/Functions/SnackBar.dart';
-import 'AnilistClient.dart';
+import 'Client.dart';
 import 'AnilistService.dart';
 
-part 'AnilistMutations/DeleteFromList.dart';
-part 'AnilistMutations/EditList.dart';
-part 'AnilistMutations/SetProgress.dart';
+part 'Mutations/DeleteFromList.dart';
+part 'Mutations/EditList.dart';
+part 'Mutations/SetProgress.dart';
 
 class AnilistMutations extends Mutations {
   final AnilistClient client;

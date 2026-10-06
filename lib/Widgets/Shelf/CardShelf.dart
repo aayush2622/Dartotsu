@@ -228,17 +228,11 @@ class _CardShelfState extends State<CardShelf> {
                       ? const SizedBox.shrink()
                       : isLoadingMore
                       ? Skeletonizer(
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(
-                              Dimens.radiusSm,
-                            ),
-                            child: Container(
-                              color: Theme.of(
-                                context,
-                              ).colorScheme.onSurface.withValues(alpha: 0.12),
-                              width: _cardW,
-                              height: _cardH,
-                            ),
+                          child: OverflowBox(
+                            alignment: Alignment.topCenter,
+                            minHeight: 0,
+                            maxHeight: double.infinity,
+                            child: _cardFor(0, ShelfCardItem.skeleton()),
                           ),
                         )
                       : _stretchBubble(overscroll),

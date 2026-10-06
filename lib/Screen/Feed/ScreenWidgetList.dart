@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide ContextExtensionss;
 
@@ -12,7 +13,8 @@ import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Extensions/IntExtensions.dart';
 import '../../Utils/Extensions/Responsive.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
-import '../../Utils/Functions/RefreshController.dart' show RefreshController;
+import '../../Utils/Functions/RefreshController.dart'
+    show RefreshController, routeObserver;
 import '../../Widgets/Components/ScrollConfig.dart';
 import '../../Widgets/Components/SectionCard.dart';
 import '../../Widgets/Shelf/MediaSection.dart';
@@ -41,7 +43,7 @@ class ScreenWidgetList extends StatefulWidget {
 }
 
 class _ScreenWidgetListState extends State<ScreenWidgetList>
-    with AutomaticKeepAliveClientMixin {
+    with AutomaticKeepAliveClientMixin, RouteAware {
   final _current = <ScreenWidget>[].obs;
   final _error = RxnString();
 
@@ -83,10 +85,46 @@ class _ScreenWidgetListState extends State<ScreenWidgetList>
       _signalWorker = ever<bool>(flag, (v) {
         if (!v) return;
         flag.value = false;
-        _refresh();
+        if (_visibleNow) {
+          _refresh();
+        } else {
+          _dirty = true;
+        }
       });
     }
   }
+
+  bool _dirty = false;
+  ValueListenable<bool>? _tickers;
+  ModalRoute<void>? _route;
+
+  bool get _visibleNow =>
+      mounted && (_tickers?.value ?? true) && (_route?.isCurrent ?? true);
+
+  void _flushDirty() {
+    if (!_dirty || !_visibleNow) return;
+    _dirty = false;
+    unawaited(_refresh());
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final tickers = TickerMode.getNotifier(context);
+    if (!identical(tickers, _tickers)) {
+      _tickers?.removeListener(_flushDirty);
+      _tickers = tickers..addListener(_flushDirty);
+    }
+    final route = ModalRoute.of(context);
+    if (route != null && !identical(route, _route)) {
+      routeObserver.unsubscribe(this);
+      _route = route;
+      routeObserver.subscribe(this, route);
+    }
+  }
+
+  @override
+  void didPopNext() => _flushDirty();
 
   Future<void> _paintCached() async {
     final cached = await _cache?.read();
@@ -108,6 +146,8 @@ class _ScreenWidgetListState extends State<ScreenWidgetList>
     _cacheTimer?.cancel();
     _reloadSub?.cancel();
     _signalWorker?.dispose();
+    _tickers?.removeListener(_flushDirty);
+    routeObserver.unsubscribe(this);
     super.dispose();
   }
 

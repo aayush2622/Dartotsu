@@ -1,4 +1,4 @@
-part of '../AnilistQueries.dart';
+part of '../Queries.dart';
 
 extension on AnilistQueries {
   Future<SearchResults?> _search(SearchResults? results) async {
@@ -73,7 +73,7 @@ extension on AnilistQueries {
 {
   Page(page: ${r.page ?? 1}, perPage: ${r.perPage ?? 30}) {
     pageInfo { currentPage hasNextPage }
-    $field(search: "${r.search ?? ''}") { $fragment }
+    $field(search: ${jsonEncode(r.search ?? '')}) { $fragment }
   }
 }''');
     final page = data['Page'] as Map<String, dynamic>?;

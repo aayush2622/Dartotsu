@@ -1,6 +1,6 @@
 import '../../../../Core/Services/MediaService.dart';
 import '../../../../Model/SearchResults.dart';
-import '../AnilistQueries.dart';
+import '../Data/Mapper.dart';
 import 'Feed.dart';
 
 class AnilistAnimeFeed extends AnilistTypeFeed {

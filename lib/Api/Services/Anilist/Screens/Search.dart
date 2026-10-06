@@ -1,7 +1,11 @@
 import '../../../../Core/Preferences/PrefManager.dart';
 import '../../../../Core/Services/MediaService.dart';
+import '../../../../Core/Services/Model/Author.dart';
+import '../../../../Core/Services/Model/Character.dart';
+import '../../../../Core/Services/Model/Studio.dart';
+import '../../../../Core/Services/Model/User.dart';
 import '../../../../Model/SearchResults.dart';
-import '../AnilistAuth.dart';
+import '../Auth.dart';
 
 const _anilistSorts = {
   'SCORE_DESC': 'Top rated',
@@ -18,7 +22,36 @@ class AnilistSearchView extends SearchScreenView {
       anilistAuth.queries.search(query);
 
   @override
+  Future<void> prepare() async {
+    try {
+      await anilistAuth.queries.getGenresAndTags();
+    } catch (_) {}
+  }
+
+  @override
   List<MediaType> get types => const [MediaType.anime, MediaType.manga];
+
+  @override
+  List<SearchType> get searchTypes => const [
+    SearchType.ANIME,
+    SearchType.MANGA,
+    SearchType.CHARACTER,
+    SearchType.STAFF,
+    SearchType.STUDIO,
+    SearchType.USER,
+  ];
+
+  @override
+  String? entityUrl(SearchType type, Object entity) {
+    const base = 'https://anilist.co';
+    return switch (entity) {
+      Character c => '$base/character/${c.id}',
+      Author a => '$base/staff/${a.id}',
+      Studio s => '$base/studio/${s.id}',
+      User u => '$base/user/${u.name}',
+      _ => null,
+    };
+  }
 
   @override
   SearchFilterSpec filters(MediaType type) {
@@ -61,6 +94,8 @@ class AnilistSearchView extends SearchScreenView {
       },
       season: anime,
       year: true,
+      adult: true,
+      onList: anilistAuth.isLoggedIn,
     );
   }
 }

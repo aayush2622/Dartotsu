@@ -7,9 +7,7 @@ import '../../Utils/Extensions/CardStyleMetrics.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
 import '../Components/CachedNetworkImage.dart';
-
-const _progressGreen = Color(0xFF37DFA0);
-const _progressGreenInk = Color(0xFF05271B);
+import '../Components/ThemedContainer.dart';
 
 enum _ScrimKind { none, short, full }
 
@@ -244,74 +242,81 @@ class _PosterCardState extends State<PosterCard> {
         s.scoreCorner == CardCorner.topRight ||
         s.scoreCorner == CardCorner.none;
 
-    return Container(
+    return SizedBox(
       width: w,
-      decoration: BoxDecoration(
-        color: _cardSurface(),
+      child: ClipRRect(
         borderRadius: BorderRadius.circular(s.radius),
-      ),
-      clipBehavior: Clip.antiAlias,
-      child: Stack(
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
+        child: ThemedContainer(
+          blur: false,
+          color: _cardSurface(),
+          padding: EdgeInsets.zero,
+          borderRadius: BorderRadius.circular(s.radius),
+          child: Stack(
             children: [
-              _poster(
-                s,
-                round: false,
-                overlays: [
-                  if (pill) const _Scrim(kind: _ScrimKind.short),
-                  ..._sourceMark(bottom: pill ? 32 : 6),
-                  if (s.showAiring && widget.airing)
-                    _corner(_airingCorner(posterCorner), const _AiringDot()),
-                  if (hasScore && !scoreFloats)
-                    _corner(
-                      posterCorner,
-                      _ScoreBadge(
-                        score: widget.score!,
-                        highlight: widget.scoreHighlight,
-                      ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  _poster(
+                    s,
+                    round: false,
+                    overlays: [
+                      if (pill) const _Scrim(kind: _ScrimKind.short),
+                      ..._sourceMark(bottom: pill ? 32 : 6),
+                      if (s.showAiring && widget.airing)
+                        _corner(
+                          _airingCorner(posterCorner),
+                          const _AiringDot(),
+                        ),
+                      if (hasScore && !scoreFloats)
+                        _corner(
+                          posterCorner,
+                          _ScoreBadge(
+                            score: widget.score!,
+                            highlight: widget.scoreHighlight,
+                          ),
+                        ),
+                      if (pill)
+                        Positioned(
+                          left: 6,
+                          right: 6,
+                          bottom: 6,
+                          child: _Pill(text: widget.progressText!),
+                        ),
+                    ],
+                  ),
+                  if (_barOn)
+                    _Bar(
+                      fraction: widget.progress!,
+                      color: _scheme.primary,
+                      height: 4,
                     ),
-                  if (pill)
-                    Positioned(
-                      left: 6,
-                      right: 6,
-                      bottom: 6,
-                      child: _Pill(text: widget.progressText!),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(9, scoreFloats ? 13 : 8, 9, 9),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        _titleBelow(s, w - 18),
+                        if (_showSub(s)) _subtitleBelow(s, w - 18),
+                      ],
                     ),
+                  ),
                 ],
               ),
-              if (_barOn)
-                _Bar(
-                  fraction: widget.progress!,
-                  color: _scheme.primary,
-                  height: 4,
+              if (scoreFloats)
+                Positioned(
+                  right: onRight ? 8 : null,
+                  left: onRight ? null : 8,
+                  top: imgH - 10,
+                  child: _ScoreBadge(
+                    score: widget.score!,
+                    highlight: widget.scoreHighlight,
+                  ),
                 ),
-              Padding(
-                padding: EdgeInsets.fromLTRB(9, scoreFloats ? 13 : 8, 9, 9),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    _titleBelow(s, w - 18),
-                    if (_showSub(s)) _subtitleBelow(s, w - 18),
-                  ],
-                ),
-              ),
             ],
           ),
-          if (scoreFloats)
-            Positioned(
-              right: onRight ? 8 : null,
-              left: onRight ? null : 8,
-              top: imgH - 10,
-              child: _ScoreBadge(
-                score: widget.score!,
-                highlight: widget.scoreHighlight,
-              ),
-            ),
-        ],
+        ),
       ),
     );
   }
@@ -486,12 +491,14 @@ class _ScoreBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scheme = context.colorScheme;
-    final fg = highlight ? scheme.tertiary : scheme.onInverseSurface;
+    final fg = highlight ? scheme.onPrimaryContainer : scheme.onSurface;
     return Container(
       height: 20,
       padding: const EdgeInsets.symmetric(horizontal: 6),
       decoration: BoxDecoration(
-        color: scheme.inverseSurface.withValues(alpha: 0.8),
+        color: highlight
+            ? scheme.primaryContainer
+            : scheme.surfaceContainerHighest.withValues(alpha: 0.92),
         borderRadius: BorderRadius.circular(999),
       ),
       child: Row(
@@ -558,7 +565,7 @@ class _Pill extends StatelessWidget {
     height: 19,
     alignment: Alignment.center,
     decoration: BoxDecoration(
-      color: _progressGreen,
+      color: context.colorScheme.primary,
       borderRadius: BorderRadius.circular(999),
     ),
     child: Text(
@@ -566,7 +573,7 @@ class _Pill extends StatelessWidget {
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
       style: context.textTheme.labelSmall?.copyWith(
-        color: _progressGreenInk,
+        color: context.colorScheme.onPrimary,
         fontWeight: FontWeight.w700,
       ),
     ),
