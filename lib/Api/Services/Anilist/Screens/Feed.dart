@@ -16,6 +16,10 @@ abstract class AnilistTypeFeed {
   /// The query that fetches further pages of [title]; null = no paging.
   SearchResults? sectionQuery(SearchResults base, String title);
 
+  List<FeedChip> get chips => const [];
+
+  Future<List<Media>?> chipMedia(FeedChip chip) async => null;
+
   List<SectionJob> jobs() =>
       anilistAuth.queries.browseJobs(anime: type.isVideo);
 }
@@ -30,6 +34,13 @@ class AnilistFeedView extends FeedScreenView {
 
   @override
   int sectionType(MediaType type, String title) => _of(type).typeOf(title);
+
+  @override
+  List<FeedChip> chips(MediaType type) => _of(type).chips;
+
+  @override
+  Future<List<Media>?> chipMedia(MediaType type, FeedChip chip) =>
+      _of(type).chipMedia(chip);
 
   @override
   Stream<List<ScreenWidget>> screenStream(MediaType type) {

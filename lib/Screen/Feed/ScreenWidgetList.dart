@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../Core/Services/Model/Media.dart';
-import '../../Core/Services/Screens/ScreenWidget.dart';
+import '../../Core/Services/Screens/ServiceScreens.dart';
 import '../../Core/Services/SectionCache.dart';
 import '../../Widgets/Shelf/MediaRows.dart';
 import '../../Utils/Animation/WidgetAnimations.dart';
@@ -15,7 +15,9 @@ import '../../Utils/Extensions/Responsive.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Utils/Functions/RefreshController.dart'
     show RefreshController, routeObserver;
+import '../../Widgets/Components/AppControls.dart';
 import '../../Widgets/Components/ScrollConfig.dart';
+import '../../Widgets/Components/ThemedContainer.dart';
 import '../../Widgets/Components/SectionCard.dart';
 import '../../Widgets/Shelf/MediaSection.dart';
 import '../Widgets/ScreenWidgetView.dart';
@@ -28,6 +30,8 @@ class ScreenWidgetList extends StatefulWidget {
   final void Function(Media media)? onMediaLongPress;
   final Stream<Object?>? reloadOn;
   final int Function(String title)? sectionTypeOf;
+  final List<FeedChip> chips;
+  final Future<List<Media>?> Function(FeedChip chip)? onChip;
 
   const ScreenWidgetList({
     super.key,
@@ -38,6 +42,8 @@ class ScreenWidgetList extends StatefulWidget {
     this.onMediaLongPress,
     this.reloadOn,
     this.sectionTypeOf,
+    this.chips = const [],
+    this.onChip,
   });
 
   @override
@@ -48,6 +54,11 @@ class _ScreenWidgetListState extends State<ScreenWidgetList>
     with AutomaticKeepAliveClientMixin, RouteAware {
   final _current = <ScreenWidget>[].obs;
   final _error = RxnString();
+  final _scroll = ScrollController();
+  final _showTop = false.obs;
+  final _chip = RxnString();
+  final _chipMedia = Rxn<List<Media>>();
+  final _chipLoading = false.obs;
 
   final _seen = <String>{};
   final _mediaByTitle = <String, List<Media>>{};
@@ -148,6 +159,7 @@ class _ScreenWidgetListState extends State<ScreenWidgetList>
     _cacheTimer?.cancel();
     _reloadSub?.cancel();
     _signalWorker?.dispose();
+    _scroll.dispose();
     _tickers?.removeListener(_flushDirty);
     routeObserver.unsubscribe(this);
     super.dispose();
@@ -307,6 +319,36 @@ class _ScreenWidgetListState extends State<ScreenWidgetList>
   @override
   Widget build(BuildContext context) {
     super.build(context);
+    return Stack(children: [_list(context), _topButton(context)]);
+  }
+
+  Widget _topButton(BuildContext context) {
+    return Positioned(
+      bottom: context.isPhone ? 72.0 + 32.bottomBar() : 64,
+      left: 0,
+      right: 0,
+      child: Obx(
+        () => _showTop.value
+            ? Center(
+                child: ThemedContainer(
+                  borderRadius: BorderRadius.circular(64),
+                  padding: const EdgeInsets.all(4),
+                  child: IconButton(
+                    icon: const Icon(Icons.arrow_upward_rounded),
+                    onPressed: () => _scroll.animateTo(
+                      0,
+                      duration: const Duration(milliseconds: 500),
+                      curve: Curves.easeInOut,
+                    ),
+                  ),
+                ),
+              )
+            : const SizedBox.shrink(),
+      ),
+    );
+  }
+
+  Widget _list(BuildContext context) {
     return RefreshIndicator(
       onRefresh: _refresh,
       child: Obx(() {
@@ -321,6 +363,7 @@ class _ScreenWidgetListState extends State<ScreenWidgetList>
           onNotification: _onScroll,
           child: CustomScrollConfig(
             context,
+            controller: _scroll,
             physics: const AlwaysScrollableScrollPhysics(),
             children: [
               if (widget.header != null)
@@ -329,20 +372,25 @@ class _ScreenWidgetListState extends State<ScreenWidgetList>
                 if (item.media!.isNotEmpty)
                   SliverToBoxAdapter(
                     key: ValueKey('spotlight-${item.title}'),
-                    child: MediaSection(
-                      data: MediaSectionData(
-                        type: 1,
-                        title: item.title,
-                        mediaList: item.media!.take(10).toList(),
-                        heroPrefix: _heroPrefix,
-                        onMediaTap: (_, _, m, tag) =>
-                            widget.onMediaTap?.call(m, tag),
-                        onMediaLongPress: widget.onMediaLongPress == null
-                            ? null
-                            : (_, _, m) => widget.onMediaLongPress!(m),
-                      ),
-                    ),
+                    child: _chipLoading.value
+                        ? const MediaSection(data: MediaSectionData.loading())
+                        : MediaSection(
+                            data: MediaSectionData(
+                              type: 1,
+                              title: item.title,
+                              mediaList: (_chipMedia.value ?? item.media!)
+                                  .take(10)
+                                  .toList(),
+                              heroPrefix: _heroPrefix,
+                              onMediaTap: (_, _, m, tag) =>
+                                  widget.onMediaTap?.call(m, tag),
+                              onMediaLongPress: widget.onMediaLongPress == null
+                                  ? null
+                                  : (_, _, m) => widget.onMediaLongPress!(m),
+                            ),
+                          ),
                   ),
+              SliverToBoxAdapter(child: _chipRow()),
               const SliverToBoxAdapter(child: SizedBox(height: 8)),
               if (showSkeleton)
                 for (var i = 0; i < 4; i++)
@@ -446,7 +494,55 @@ class _ScreenWidgetListState extends State<ScreenWidgetList>
     ];
   }
 
+  Future<void> _selectChip(String? id) async {
+    final onChip = widget.onChip;
+    if (onChip == null) return;
+    if (id == null || id == _chip.value) {
+      _chip.value = null;
+      _chipMedia.value = null;
+      return;
+    }
+    _chip.value = id;
+    _chipLoading.value = true;
+    try {
+      final chip = widget.chips.firstWhere((c) => c.id == id);
+      final media = await onChip(chip);
+      if (_chip.value == id) _chipMedia.value = media;
+    } catch (_) {
+      if (_chip.value == id) _chipMedia.value = null;
+    } finally {
+      if (_chip.value == id) _chipLoading.value = false;
+    }
+  }
+
+  Widget _chipRow() {
+    if (widget.chips.isEmpty || widget.onChip == null) {
+      return const SizedBox.shrink();
+    }
+    return Obx(
+      () => Padding(
+        padding: EdgeInsets.fromLTRB(
+          Dimens.pagePad,
+          Dimens.gapSm,
+          Dimens.pagePad,
+          0,
+        ),
+        child: AppChoiceChips<String?>(
+          value: _chip.value,
+          onChanged: _selectChip,
+          options: [
+            for (final c in widget.chips)
+              AppSegment<String?>(c.id, label: c.label),
+          ],
+        ),
+      ),
+    );
+  }
+
   bool _onScroll(ScrollNotification n) {
+    if (n.depth == 0 && n.metrics.axis == Axis.vertical) {
+      _showTop.value = n.metrics.pixels > 700;
+    }
     final title = _tailTitle;
     if (title != null &&
         n.depth == 0 &&

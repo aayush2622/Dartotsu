@@ -35,10 +35,23 @@ class HomeScreenView {
   Future<List<String?>> bannerImages() => Future.value(const [null, null]);
 }
 
+class FeedChip {
+  final String id;
+  final String label;
+
+  const FeedChip(this.id, this.label);
+}
+
 class FeedScreenView {
   final MediaService service;
 
   FeedScreenView(this.service);
+
+  /// Filters shown under the carousel of the [type] feed. Empty = none.
+  List<FeedChip> chips(MediaType type) => const [];
+
+  /// The carousel's media while [chip] is selected; null = nothing changes.
+  Future<List<Media>?> chipMedia(MediaType type, FeedChip chip) async => null;
 
   /// How the list called [title] renders (see `ScreenWidget.sectionType`).
   /// Also used to paint the cached lists before the first fetch lands.
