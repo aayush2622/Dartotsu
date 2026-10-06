@@ -11,6 +11,8 @@ import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Extensions/Responsive.dart';
 import '../../Utils/Functions/AppShortcuts.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
+import '../../Utils/Functions/NavigateToScreen.dart';
+import 'SourcePreferenceScreen.dart';
 import '../../Utils/Functions/SnackBar.dart';
 import '../../Utils/Nav/DpadNav.dart';
 import '../../Widgets/Components/CachedNetworkImage.dart';
@@ -506,21 +508,8 @@ class _ExtensionListState extends State<ExtensionList> {
         IconButton(
           icon: const Icon(Icons.settings_rounded),
           tooltip: getString.settings,
-          onPressed: () async {
-            final preference = await source.methods.getPreference();
-
-            if (preference.isEmpty) {
-              snackString(getString.noSourceSettings);
-              return;
-            }
-
-            if (!mounted) return;
-
-            /* navigateToPage(
-              context,
-              SourcePreferenceScreen(source: source, preference: preference),
-            );*/
-          },
+          onPressed: () =>
+              navigateToPage(context, SourcePreferenceScreen(source: source)),
         ),
         Padding(
           padding: const EdgeInsets.only(left: 8),
