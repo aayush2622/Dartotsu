@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import '../../Preferences/IsarDataClasses/MediaSettings/MediaSettings.dart';
 import '../../Preferences/PrefManager.dart';
 import 'Anime.dart';
 import 'Author.dart';
@@ -83,15 +82,6 @@ class Media {
   List<User>? users;
 
   String shareLink;
-
-  /// Lazily created — a rail of 300 media should not allocate 300 settings
-  /// objects, and this keeps [Media] cheap to copy across an isolate.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  MediaSettings? _settings;
-
-  MediaSettings get settings => _settings ??= MediaSettings();
-
-  set settings(MediaSettings value) => _settings = value;
 
   bool cameFromContinue;
 

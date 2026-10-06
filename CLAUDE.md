@@ -304,7 +304,7 @@ Two model areas, both `@JsonSerializable` with committed generated code:
   `Core/Services/Model/Generated/*.g.dart` — **build_runner writes `Model/*.g.dart` adjacent;
   they're then moved into `Generated/` and both `part` directives fixed** (see `git log`
   `5f039d1`). `Media` is the central type (mirrors `main`'s `DataClass/Media.dart`); detail-only
-  fields (`characters`, `relations`, `review`, `users`, `settings`, `sourceData`, …) are
+  fields (`characters`, `relations`, `review`, `users`, `sourceData`, …) are
   `@JsonKey(includeFromJson: false, includeToJson: false)`. `Media.skeleton()` for skeleton
   loaders, `mainName` / `isAnime` / `totalUnits` getters, `extension M on Pages` for
   extension-bridge results. **A service with extra fields subclasses it** — `AnilistMedia
@@ -332,9 +332,8 @@ Isar-backed typed KV store with a synchronous in-memory cache, a **shared reacti
   integrity-checked via `Validator.dart`, which now hashes a canonicalised encoding).
 - Single Isar instance `PrefManager.dartotsuPreferences` (schema = `KeyValueSchema` +
   `DartotsuExtensionBridge.isarSchema`), also handed to the bridge.
-- Isar collection classes in `Core/Preferences/IsarDataClasses/**` with committed `*.g.dart`
-  (`KeyValue`, `MalToken`, `MediaSettings`, `DefaultPlayerSettings`, `DefaultReaderSettings`,
-  `ShowResponse`). `MediaSettings`/`ResponseToken` collections aren't opened yet.
+- The only Isar collection is `KeyValue` (`Core/Preferences/IsarDataClasses/KeyValue/`, committed
+  `*.g.dart`); structured values are stored as maps through `setCustomType`.
 - **`Core/Preferences/StorageManager.dart`** — `getDirectory({subPath, useCustomPath,
   useSystemPath})` is the single source of truth for on-disk paths (handles Android scoped
   storage / `MANAGE_EXTERNAL_STORAGE`, custom path, Apple sandbox). `String.fixSeparator`
