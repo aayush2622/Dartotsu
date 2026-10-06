@@ -8,8 +8,8 @@ import '../../../Utils/Function.dart';
 import '../../../Utils/Functions/NavigateToScreen.dart';
 import '../../../Widgets/Components/CustomBottomDialog.dart';
 
-void maybeShowDonateSheet(BuildContext context, {int oneIn = 1}) {
-  if (Random().nextInt(oneIn) != 0) return;
+void maybeShowDonateSheet(BuildContext context, {double chance = 0.45}) {
+  if (Random().nextDouble() >= chance) return;
   showCustomBottomDialog(context, const _DonateSheet());
 }
 
