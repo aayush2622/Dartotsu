@@ -44,8 +44,8 @@ List<Setting> appearanceSettings(BuildContext context) {
       name: getString.followCover,
       description: getString.followCoverDesc,
       icon: Icons.palette_outlined,
-      isChecked: t.followCover.value,
-      onSwitchChange: (v) => t.followCover.value = v,
+      isChecked: t.cover.enabled.value,
+      onSwitchChange: (v) => t.cover.enabled.value = v,
     ),
     if (Platform.isLinux)
       Setting.switchType(

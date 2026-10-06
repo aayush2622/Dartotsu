@@ -8,13 +8,7 @@ const kFallbackGlassBackground =
 String resolveGlassBackground() {
   final custom = PrefName.glassBackgroundUrl.rx.value.trim();
   if (custom.isNotEmpty) return custom;
-  final banner = tryFind<MediaServiceController>()
-      ?.currentService
-      .value
-      .auth
-      ?.user
-      .value
-      ?.banner;
+  final banner = tryFind<MediaServiceController>()?.currentBanner;
   if (banner != null && banner.isNotEmpty) return banner;
   return kFallbackGlassBackground;
 }
