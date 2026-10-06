@@ -20,6 +20,7 @@ import '../../Widgets/Components/LoadSvg.dart';
 import '../../Widgets/Components/ThemedContainer.dart';
 import 'ExtensionList.dart';
 import 'Widgets/ExtensionManagerSheet.dart';
+import '../../Widgets/Components/AppTabs.dart';
 
 class ExtensionScreen extends StatefulWidget {
   const ExtensionScreen({super.key});

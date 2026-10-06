@@ -1,11 +1,8 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../Core/Services/MediaServiceController.dart';
 import '../../Core/ThemeManager/ThemeController.dart';
-import '../../Widgets/Components/CachedNetworkImage.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
 import '../Feed/FeedNavigation.dart';
@@ -14,6 +11,7 @@ import '../MediaList/MediaListScreen.dart';
 import 'Components/AccountSheet.dart';
 import 'Components/BellButton.dart';
 import 'Components/HeaderAvatar.dart';
+import 'Components/HeaderBanner.dart';
 import 'Components/HeaderStatPill.dart';
 
 class HomeHeader extends StatelessWidget {
@@ -31,7 +29,7 @@ class HomeHeader extends StatelessWidget {
       return Stack(
         children: [
           if (banner != null && banner.isNotEmpty)
-            Positioned.fill(child: _HeaderBanner(url: banner)),
+            Positioned.fill(child: HeaderBanner(url: banner)),
           ConstrainedBox(
             constraints: BoxConstraints(minHeight: banner == null ? 0 : 176),
             child: Padding(
@@ -132,36 +130,5 @@ class HomeHeader extends StatelessWidget {
     if (h < 12) return 'Good morning';
     if (h < 18) return 'Good afternoon';
     return 'Good evening';
-  }
-}
-
-class _HeaderBanner extends StatelessWidget {
-  final String url;
-
-  const _HeaderBanner({required this.url});
-
-  @override
-  Widget build(BuildContext context) {
-    final surface = context.colorScheme.surface;
-    return ClipRect(
-      child: Stack(
-        fit: StackFit.expand,
-        children: [
-          ImageFiltered(
-            imageFilter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
-            child: cachedNetworkImage(imageUrl: url, fit: BoxFit.cover),
-          ),
-          DecoratedBox(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [surface.withValues(alpha: 0.25), surface],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
   }
 }

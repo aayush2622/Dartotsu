@@ -7,6 +7,7 @@ import '../../Widgets/Components/AppBars.dart';
 import '../../Widgets/Components/BaseScreen.dart';
 import '../../Widgets/Components/LoadSvg.dart';
 import 'Components/ServiceSettingsBody.dart';
+import '../../Widgets/Components/AppTabs.dart';
 
 class ServiceSettingsScreen extends StatefulWidget {
   final MediaService initial;
