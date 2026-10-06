@@ -7,6 +7,7 @@ import '../../../../Utils/Extensions/Responsive.dart';
 import '../../../../Utils/Extensions/StringExtensions.dart';
 import '../../../../Utils/Nav/DpadNav.dart';
 import '../../../../Widgets/Components/CachedNetworkImage.dart';
+import '../../../../Widgets/Components/ScrollConfig.dart';
 import '../../../../Widgets/Shelf/ShelfFrame.dart';
 
 class FollowersShelf extends StatelessWidget {
@@ -31,15 +32,18 @@ class FollowersShelf extends StatelessWidget {
       title: 'Following',
       child: SizedBox(
         height: 190,
-        child: ListView.separated(
-          scrollDirection: Axis.horizontal,
-          padding: EdgeInsets.symmetric(horizontal: Dimens.pagePad),
-          itemCount: ordered.length,
-          separatorBuilder: (_, _) => SizedBox(width: Dimens.gapSm),
-          itemBuilder: (_, i) => _Follower(
-            user: ordered[i],
-            media: media,
-            isMe: ordered[i].name == me,
+        child: ScrollConfig(
+          context,
+          child: ListView.separated(
+            scrollDirection: Axis.horizontal,
+            padding: EdgeInsets.symmetric(horizontal: Dimens.pagePad),
+            itemCount: ordered.length,
+            separatorBuilder: (_, _) => SizedBox(width: Dimens.gapSm),
+            itemBuilder: (_, i) => _Follower(
+              user: ordered[i],
+              media: media,
+              isMe: ordered[i].name == me,
+            ),
           ),
         ),
       ),
