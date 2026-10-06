@@ -25,6 +25,12 @@ class PrefName {
   );
   static const useCustomFont = Pref('useCustomFont', false, PrefLocation.THEME);
   static const customFontPath = Pref('customFontPath', '', PrefLocation.THEME);
+  static const glassBackgroundUrl = Pref(
+    'glassBackgroundUrl',
+    '',
+    PrefLocation.THEME,
+  );
+  static const followCover = Pref('followCover', false, PrefLocation.THEME);
   static const useJsonTheme = Pref('useJsonTheme', false, PrefLocation.THEME);
 
   static final themeMode = enumPref(
@@ -65,6 +71,15 @@ class PrefName {
   static const skippedUpdates = Pref<List<String>>(
     'skippedUpdates',
     [],
+    PrefLocation.COMMON,
+  );
+
+  static const incognito = Pref('incognito', false, PrefLocation.COMMON);
+  static const offlineMode = Pref('offlineMode', false, PrefLocation.COMMON);
+
+  static const autoUpdateExtensions = Pref(
+    'autoUpdateExtensions',
+    true,
     PrefLocation.COMMON,
   );
 

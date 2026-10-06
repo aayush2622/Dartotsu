@@ -231,6 +231,85 @@ class AppLocalizationsAs extends AppLocalizations {
   String get glassModeDesc => 'Frosted surfaces over your library art';
 
   @override
+  String get settingsExtensionsDesc =>
+      'Source managers, repositories and extension options';
+
+  @override
+  String get settingsAddons => 'Addons';
+
+  @override
+  String get settingsAddonsDesc =>
+      'Optional components such as the torrent server';
+
+  @override
+  String get customPath => 'কাষ্টম পথ';
+
+  @override
+  String get customPathDesc => 'Where app data is kept. Long-press to reset';
+
+  @override
+  String get selectDirectory => 'ডাইৰেক্টৰি বাছক';
+
+  @override
+  String get differentCacheManager => 'বেলেগ কেশ্ব মেনেজাৰ';
+
+  @override
+  String get differentCacheManagerDesc => 'বেলেগ ছবি কেশ্ব মেনেজাৰ ব্যৱহাৰ কৰক';
+
+  @override
+  String get backupAndRestore => 'Backup and restore';
+
+  @override
+  String get backupAndRestoreDesc => 'Save or load your preferences';
+
+  @override
+  String get backup => 'Backup';
+
+  @override
+  String get restore => 'Restore';
+
+  @override
+  String get loadExtensionsIcon => 'এক্সটেনশ্যনৰ আইকন লোড কৰক';
+
+  @override
+  String get loadExtensionsIconDesc => 'এক্সটেনশ্যন পৃষ্ঠা লেগ কৰিলে অক্ষম কৰক';
+
+  @override
+  String get autoUpdate => 'স্বয়ংক্ৰিয় আপডেট';
+
+  @override
+  String get autoUpdateDesc => 'এক্সটেনশ্যনসমূহ স্বয়ংক্ৰিয়ভাৱে আপডেট কৰক';
+
+  @override
+  String get sectionStorage => 'Storage';
+
+  @override
+  String get sectionBackup => 'Backup';
+
+  @override
+  String get sectionManagers => 'Managers';
+
+  @override
+  String get sectionOptions => 'Options';
+
+  @override
+  String get glassBackground => 'Glass background';
+
+  @override
+  String get glassBackgroundDesc =>
+      'Your profile banner unless you set an image link';
+
+  @override
+  String get glassBackgroundHint => 'Image link (leave empty for your banner)';
+
+  @override
+  String get followCover => 'Follow cover';
+
+  @override
+  String get followCoverDesc =>
+      'Colors follow the background, and the cover on detail pages';
+
+  @override
   String get cardStyle => 'Card style';
 
   @override

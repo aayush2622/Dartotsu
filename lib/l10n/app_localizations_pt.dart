@@ -231,6 +231,86 @@ class AppLocalizationsPt extends AppLocalizations {
   String get glassModeDesc => 'Frosted surfaces over your library art';
 
   @override
+  String get settingsExtensionsDesc =>
+      'Source managers, repositories and extension options';
+
+  @override
+  String get settingsAddons => 'Addons';
+
+  @override
+  String get settingsAddonsDesc =>
+      'Optional components such as the torrent server';
+
+  @override
+  String get customPath => 'Caminho personalizado';
+
+  @override
+  String get customPathDesc => 'Where app data is kept. Long-press to reset';
+
+  @override
+  String get selectDirectory => 'Selecione um diretório';
+
+  @override
+  String get differentCacheManager => 'Gerente de Cache diferente';
+
+  @override
+  String get differentCacheManagerDesc =>
+      'Use o gerenciador de cache de imagem diferente';
+
+  @override
+  String get backupAndRestore => 'Backup and restore';
+
+  @override
+  String get backupAndRestoreDesc => 'Save or load your preferences';
+
+  @override
+  String get backup => 'Backup';
+
+  @override
+  String get restore => 'Restore';
+
+  @override
+  String get loadExtensionsIcon => 'Ícone de extensões de carga';
+
+  @override
+  String get loadExtensionsIconDesc => 'Desabilitar se extensões página lags';
+
+  @override
+  String get autoUpdate => 'Atualização automática';
+
+  @override
+  String get autoUpdateDesc => 'Extensões de atualização automática';
+
+  @override
+  String get sectionStorage => 'Storage';
+
+  @override
+  String get sectionBackup => 'Backup';
+
+  @override
+  String get sectionManagers => 'Managers';
+
+  @override
+  String get sectionOptions => 'Options';
+
+  @override
+  String get glassBackground => 'Glass background';
+
+  @override
+  String get glassBackgroundDesc =>
+      'Your profile banner unless you set an image link';
+
+  @override
+  String get glassBackgroundHint => 'Image link (leave empty for your banner)';
+
+  @override
+  String get followCover => 'Follow cover';
+
+  @override
+  String get followCoverDesc =>
+      'Colors follow the background, and the cover on detail pages';
+
+  @override
   String get cardStyle => 'Card style';
 
   @override
@@ -531,6 +611,32 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get ltr => 'Esquerda para a direita';
+
+  @override
+  String get customPath => 'Caminho Personalizado';
+
+  @override
+  String get selectDirectory => 'Escolha uma pasta';
+
+  @override
+  String get differentCacheManager => 'Gerenciador de Cache Alternativo';
+
+  @override
+  String get differentCacheManagerDesc =>
+      'Usar um gerenciador diferente para o cache de imagens';
+
+  @override
+  String get loadExtensionsIcon => 'Carregar ícone das extensões';
+
+  @override
+  String get loadExtensionsIconDesc =>
+      'Desative se a página de extensões ficar lenta';
+
+  @override
+  String get autoUpdate => 'Atualização Automática';
+
+  @override
+  String get autoUpdateDesc => 'Atualização Automática das Extensões';
 
   @override
   String get materialYou => 'Material You';

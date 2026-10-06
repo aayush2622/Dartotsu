@@ -231,6 +231,85 @@ class AppLocalizationsZh extends AppLocalizations {
   String get glassModeDesc => 'Frosted surfaces over your library art';
 
   @override
+  String get settingsExtensionsDesc =>
+      'Source managers, repositories and extension options';
+
+  @override
+  String get settingsAddons => 'Addons';
+
+  @override
+  String get settingsAddonsDesc =>
+      'Optional components such as the torrent server';
+
+  @override
+  String get customPath => '习俗之路';
+
+  @override
+  String get customPathDesc => 'Where app data is kept. Long-press to reset';
+
+  @override
+  String get selectDirectory => '选择名录';
+
+  @override
+  String get differentCacheManager => '不同Cache管理员';
+
+  @override
+  String get differentCacheManagerDesc => '使用不同的图像管理员';
+
+  @override
+  String get backupAndRestore => 'Backup and restore';
+
+  @override
+  String get backupAndRestoreDesc => 'Save or load your preferences';
+
+  @override
+  String get backup => 'Backup';
+
+  @override
+  String get restore => 'Restore';
+
+  @override
+  String get loadExtensionsIcon => '延期';
+
+  @override
+  String get loadExtensionsIconDesc => '如果延长页滞后,可处理';
+
+  @override
+  String get autoUpdate => 'A. 自动更新';
+
+  @override
+  String get autoUpdateDesc => 'A. 自动更新延期';
+
+  @override
+  String get sectionStorage => 'Storage';
+
+  @override
+  String get sectionBackup => 'Backup';
+
+  @override
+  String get sectionManagers => 'Managers';
+
+  @override
+  String get sectionOptions => 'Options';
+
+  @override
+  String get glassBackground => 'Glass background';
+
+  @override
+  String get glassBackgroundDesc =>
+      'Your profile banner unless you set an image link';
+
+  @override
+  String get glassBackgroundHint => 'Image link (leave empty for your banner)';
+
+  @override
+  String get followCover => 'Follow cover';
+
+  @override
+  String get followCoverDesc =>
+      'Colors follow the background, and the cover on detail pages';
+
+  @override
   String get cardStyle => 'Card style';
 
   @override

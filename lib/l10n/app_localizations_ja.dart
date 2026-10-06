@@ -231,6 +231,85 @@ class AppLocalizationsJa extends AppLocalizations {
   String get glassModeDesc => 'Frosted surfaces over your library art';
 
   @override
+  String get settingsExtensionsDesc =>
+      'Source managers, repositories and extension options';
+
+  @override
+  String get settingsAddons => 'Addons';
+
+  @override
+  String get settingsAddonsDesc =>
+      'Optional components such as the torrent server';
+
+  @override
+  String get customPath => 'カスタムパス';
+
+  @override
+  String get customPathDesc => 'Where app data is kept. Long-press to reset';
+
+  @override
+  String get selectDirectory => 'ディレクトリを選択';
+
+  @override
+  String get differentCacheManager => '別のキャッシュマネージャ';
+
+  @override
+  String get differentCacheManagerDesc => '異なるイメージキャッシュマネージャを使用する';
+
+  @override
+  String get backupAndRestore => 'Backup and restore';
+
+  @override
+  String get backupAndRestoreDesc => 'Save or load your preferences';
+
+  @override
+  String get backup => 'Backup';
+
+  @override
+  String get restore => 'Restore';
+
+  @override
+  String get loadExtensionsIcon => 'ロードエクステンションアイコン';
+
+  @override
+  String get loadExtensionsIconDesc => '拡張ページが遅れた場合は無効';
+
+  @override
+  String get autoUpdate => '自動更新';
+
+  @override
+  String get autoUpdateDesc => '自動更新延長';
+
+  @override
+  String get sectionStorage => 'Storage';
+
+  @override
+  String get sectionBackup => 'Backup';
+
+  @override
+  String get sectionManagers => 'Managers';
+
+  @override
+  String get sectionOptions => 'Options';
+
+  @override
+  String get glassBackground => 'Glass background';
+
+  @override
+  String get glassBackgroundDesc =>
+      'Your profile banner unless you set an image link';
+
+  @override
+  String get glassBackgroundHint => 'Image link (leave empty for your banner)';
+
+  @override
+  String get followCover => 'Follow cover';
+
+  @override
+  String get followCoverDesc =>
+      'Colors follow the background, and the cover on detail pages';
+
+  @override
   String get cardStyle => 'Card style';
 
   @override

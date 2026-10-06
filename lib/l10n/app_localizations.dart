@@ -593,6 +593,156 @@ abstract class AppLocalizations {
   /// **'Frosted surfaces over your library art'**
   String get glassModeDesc;
 
+  /// No description provided for @settingsExtensionsDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Source managers, repositories and extension options'**
+  String get settingsExtensionsDesc;
+
+  /// No description provided for @settingsAddons.
+  ///
+  /// In en, this message translates to:
+  /// **'Addons'**
+  String get settingsAddons;
+
+  /// No description provided for @settingsAddonsDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Optional components such as the torrent server'**
+  String get settingsAddonsDesc;
+
+  /// No description provided for @customPath.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom storage path'**
+  String get customPath;
+
+  /// No description provided for @customPathDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Where app data is kept. Long-press to reset'**
+  String get customPathDesc;
+
+  /// No description provided for @selectDirectory.
+  ///
+  /// In en, this message translates to:
+  /// **'Select directory'**
+  String get selectDirectory;
+
+  /// No description provided for @differentCacheManager.
+  ///
+  /// In en, this message translates to:
+  /// **'Alternative image cache'**
+  String get differentCacheManager;
+
+  /// No description provided for @differentCacheManagerDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Use a different cache manager for images'**
+  String get differentCacheManagerDesc;
+
+  /// No description provided for @backupAndRestore.
+  ///
+  /// In en, this message translates to:
+  /// **'Backup and restore'**
+  String get backupAndRestore;
+
+  /// No description provided for @backupAndRestoreDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Save or load your preferences'**
+  String get backupAndRestoreDesc;
+
+  /// No description provided for @backup.
+  ///
+  /// In en, this message translates to:
+  /// **'Backup'**
+  String get backup;
+
+  /// No description provided for @restore.
+  ///
+  /// In en, this message translates to:
+  /// **'Restore'**
+  String get restore;
+
+  /// No description provided for @loadExtensionsIcon.
+  ///
+  /// In en, this message translates to:
+  /// **'Load extension icons'**
+  String get loadExtensionsIcon;
+
+  /// No description provided for @loadExtensionsIconDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Show source icons in the extension lists'**
+  String get loadExtensionsIconDesc;
+
+  /// No description provided for @autoUpdate.
+  ///
+  /// In en, this message translates to:
+  /// **'Auto-update'**
+  String get autoUpdate;
+
+  /// No description provided for @autoUpdateDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep addons up to date automatically'**
+  String get autoUpdateDesc;
+
+  /// No description provided for @sectionStorage.
+  ///
+  /// In en, this message translates to:
+  /// **'Storage'**
+  String get sectionStorage;
+
+  /// No description provided for @sectionBackup.
+  ///
+  /// In en, this message translates to:
+  /// **'Backup'**
+  String get sectionBackup;
+
+  /// No description provided for @sectionManagers.
+  ///
+  /// In en, this message translates to:
+  /// **'Managers'**
+  String get sectionManagers;
+
+  /// No description provided for @sectionOptions.
+  ///
+  /// In en, this message translates to:
+  /// **'Options'**
+  String get sectionOptions;
+
+  /// No description provided for @glassBackground.
+  ///
+  /// In en, this message translates to:
+  /// **'Glass background'**
+  String get glassBackground;
+
+  /// No description provided for @glassBackgroundDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Your profile banner unless you set an image link'**
+  String get glassBackgroundDesc;
+
+  /// No description provided for @glassBackgroundHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Image link (leave empty for your banner)'**
+  String get glassBackgroundHint;
+
+  /// No description provided for @followCover.
+  ///
+  /// In en, this message translates to:
+  /// **'Follow cover'**
+  String get followCover;
+
+  /// No description provided for @followCoverDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Colors follow the background, and the cover on detail pages'**
+  String get followCoverDesc;
+
   /// No description provided for @cardStyle.
   ///
   /// In en, this message translates to:

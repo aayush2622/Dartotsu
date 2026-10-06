@@ -232,6 +232,86 @@ class AppLocalizationsHi extends AppLocalizations {
   String get glassModeDesc => 'Frosted surfaces over your library art';
 
   @override
+  String get settingsExtensionsDesc =>
+      'Source managers, repositories and extension options';
+
+  @override
+  String get settingsAddons => 'Addons';
+
+  @override
+  String get settingsAddonsDesc =>
+      'Optional components such as the torrent server';
+
+  @override
+  String get customPath => 'कस्टम पथ';
+
+  @override
+  String get customPathDesc => 'Where app data is kept. Long-press to reset';
+
+  @override
+  String get selectDirectory => 'निर्देशिका चुनें';
+
+  @override
+  String get differentCacheManager => 'विभिन्न कैश मैनेजर';
+
+  @override
+  String get differentCacheManagerDesc =>
+      'विभिन्न छवि कैश मैनेजर का उपयोग करें';
+
+  @override
+  String get backupAndRestore => 'Backup and restore';
+
+  @override
+  String get backupAndRestoreDesc => 'Save or load your preferences';
+
+  @override
+  String get backup => 'Backup';
+
+  @override
+  String get restore => 'Restore';
+
+  @override
+  String get loadExtensionsIcon => 'लोड एक्सटेंशन आइकन';
+
+  @override
+  String get loadExtensionsIconDesc => 'यदि एक्सटेंशन पृष्ठ अंतराल';
+
+  @override
+  String get autoUpdate => 'ऑटो अपडेट';
+
+  @override
+  String get autoUpdateDesc => 'ऑटो अपडेट एक्सटेंशन';
+
+  @override
+  String get sectionStorage => 'Storage';
+
+  @override
+  String get sectionBackup => 'Backup';
+
+  @override
+  String get sectionManagers => 'Managers';
+
+  @override
+  String get sectionOptions => 'Options';
+
+  @override
+  String get glassBackground => 'Glass background';
+
+  @override
+  String get glassBackgroundDesc =>
+      'Your profile banner unless you set an image link';
+
+  @override
+  String get glassBackgroundHint => 'Image link (leave empty for your banner)';
+
+  @override
+  String get followCover => 'Follow cover';
+
+  @override
+  String get followCoverDesc =>
+      'Colors follow the background, and the cover on detail pages';
+
+  @override
   String get cardStyle => 'Card style';
 
   @override
