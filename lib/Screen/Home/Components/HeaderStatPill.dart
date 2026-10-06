@@ -1,17 +1,24 @@
 import 'package:flutter/material.dart';
 
 import '../../../Utils/Extensions/ContextExtensions.dart';
+import '../../../Utils/Nav/DpadNav.dart';
 import '../../../Widgets/Components/ThemedContainer.dart';
 
 class HeaderStatPill extends StatelessWidget {
   final IconData icon;
   final String label;
-  const HeaderStatPill({super.key, required this.icon, required this.label});
+  final VoidCallback? onTap;
+  const HeaderStatPill({
+    super.key,
+    required this.icon,
+    required this.label,
+    this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
     final scheme = context.colorScheme;
-    return ThemedContainer(
+    final pill = ThemedContainer(
       blur: false,
       borderRadius: BorderRadius.circular(999),
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
@@ -28,6 +35,12 @@ class HeaderStatPill extends StatelessWidget {
           ),
         ],
       ),
+    );
+    if (onTap == null) return pill;
+    return DpadTap(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(999),
+      child: pill,
     );
   }
 }

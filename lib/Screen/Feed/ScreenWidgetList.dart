@@ -25,6 +25,7 @@ class ScreenWidgetList extends StatefulWidget {
   final String? cacheId;
   final Widget? header;
   final void Function(Media media, String? heroTag)? onMediaTap;
+  final void Function(Media media)? onMediaLongPress;
   final Stream<Object?>? reloadOn;
   final int Function(String title)? sectionTypeOf;
 
@@ -34,6 +35,7 @@ class ScreenWidgetList extends StatefulWidget {
     this.cacheId,
     this.header,
     this.onMediaTap,
+    this.onMediaLongPress,
     this.reloadOn,
     this.sectionTypeOf,
   });
@@ -335,6 +337,9 @@ class _ScreenWidgetListState extends State<ScreenWidgetList>
                         heroPrefix: _heroPrefix,
                         onMediaTap: (_, _, m, tag) =>
                             widget.onMediaTap?.call(m, tag),
+                        onMediaLongPress: widget.onMediaLongPress == null
+                            ? null
+                            : (_, _, m) => widget.onMediaLongPress!(m),
                       ),
                     ),
                   ),
@@ -412,9 +417,20 @@ class _ScreenWidgetListState extends State<ScreenWidgetList>
             final m = media[i];
             final tag = 'row:$_heroPrefix:$title:${m.id}';
             void tap() => widget.onMediaTap?.call(m, tag);
+            void hold() => widget.onMediaLongPress?.call(m);
             return banner
-                ? MediaBannerTile(media: m, tag: tag, onTap: tap)
-                : MediaListTile(media: m, tag: tag, onTap: tap);
+                ? MediaBannerTile(
+                    media: m,
+                    tag: tag,
+                    onTap: tap,
+                    onLongPress: hold,
+                  )
+                : MediaListTile(
+                    media: m,
+                    tag: tag,
+                    onTap: tap,
+                    onLongPress: hold,
+                  );
           },
         ),
       ),
@@ -472,6 +488,9 @@ class _ScreenWidgetListState extends State<ScreenWidgetList>
       mediaList: item.media,
       heroPrefix: _heroPrefix,
       onMediaTap: (ctx, idx, m, tag) => widget.onMediaTap?.call(m, tag),
+      onMediaLongPress: widget.onMediaLongPress == null
+          ? null
+          : (ctx, idx, m) => widget.onMediaLongPress!(m),
       onLoadMore: _loadMoreFns[title] == null
           ? null
           : () => _loadMoreSection(title),

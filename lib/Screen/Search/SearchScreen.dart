@@ -22,13 +22,16 @@ import '../../Utils/Function.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Utils/Functions/NavigateToScreen.dart';
 import '../../Utils/Nav/DpadNav.dart';
+import '../../Widgets/Components/AppBars.dart';
 import '../../Widgets/Components/BaseScreen.dart';
 import '../../Widgets/Components/CachedNetworkImage.dart';
 import '../../Widgets/Components/ScrollConfig.dart';
 import '../../Widgets/Shelf/MediaRows.dart';
 import '../../Widgets/Shelf/PosterCard.dart';
 import '../Detail/DetailScreen.dart';
+import '../Feed/FeedNavigation.dart';
 import 'Components/SearchFilterSheet.dart';
+import '../../Widgets/Components/EmptyState.dart';
 
 enum _ResultView { grid, list, banner }
 
@@ -251,10 +254,7 @@ class _SearchScreenState extends BaseScreen<SearchScreen> {
       ),
       child: Row(
         children: [
-          IconButton(
-            onPressed: () => Navigator.maybePop(context),
-            icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 20),
-          ),
+          const AppBackButton(),
           Expanded(
             child: Obx(() {
               final hint = _label(_type.value);
@@ -588,6 +588,13 @@ class _SearchScreenState extends BaseScreen<SearchScreen> {
         ].join(' · '),
         score: (item.meanScore ?? 0) > 0 ? item.meanScore! / 10 : null,
         onTap: skeleton ? null : () => _open(item, tag!),
+        onLongPress: skeleton
+            ? null
+            : () => showQuickListEditor(
+                context,
+                find<MediaServiceController>().currentService.value,
+                item,
+              ),
       );
     }
     return switch (item) {
@@ -750,26 +757,10 @@ class _SearchScreenState extends BaseScreen<SearchScreen> {
   ];
 
   Widget _empty() {
-    final scheme = context.colorScheme;
     final searched = _hasCriteria && !_loading.value;
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(
-            searched ? Icons.search_off_rounded : Icons.search_rounded,
-            size: 44,
-            color: scheme.onSurfaceVariant,
-          ),
-          const SizedBox(height: 12),
-          Text(
-            searched ? 'Nothing matched' : 'Search or set a filter',
-            style: context.textTheme.bodyMedium?.copyWith(
-              color: scheme.onSurfaceVariant,
-            ),
-          ),
-        ],
-      ),
+    return EmptyState(
+      icon: searched ? Icons.search_off_rounded : Icons.search_rounded,
+      title: searched ? 'Nothing matched' : 'Search or set a filter',
     );
   }
 

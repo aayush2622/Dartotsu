@@ -34,6 +34,7 @@ class HomeFeed extends StatelessWidget {
       cacheId: id,
       reloadOn: service.auth?.user.stream,
       onMediaTap: (m, tag) => openDetail(context, service, m, heroTag: tag),
+      onMediaLongPress: (m) => showQuickListEditor(context, service, m),
     );
   }
 }
