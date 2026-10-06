@@ -4,7 +4,7 @@ import 'Entity.dart';
 
 class AnilistStaffScreen extends AnilistEntityScreen {
   @override
-  bool get isCharacter => false;
+  String get kind => 'staff';
 
   @override
   Future<Map<String, dynamic>?> fetch(String id) => queries.staff(id);

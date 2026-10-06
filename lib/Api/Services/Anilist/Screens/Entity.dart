@@ -5,11 +5,12 @@ import '../Data/Entity.dart';
 import '../Queries.dart';
 import 'Character.dart';
 import 'Staff.dart';
+import 'Studio.dart';
 
 abstract class AnilistEntityScreen {
   AnilistQueries get queries => anilistAuth.queries;
 
-  bool get isCharacter;
+  String get kind;
 
   Future<Map<String, dynamic>?> fetch(String id);
 
@@ -40,9 +41,13 @@ class AnilistEntityView extends EntityScreenView {
 
   final _character = AnilistCharacterScreen();
   final _staff = AnilistStaffScreen();
+  final _studio = AnilistStudioScreen();
 
-  AnilistEntityScreen _of(EntityKind kind) =>
-      kind == EntityKind.character ? _character : _staff;
+  AnilistEntityScreen _of(EntityKind kind) => switch (kind) {
+    EntityKind.character => _character,
+    EntityKind.staff => _staff,
+    EntityKind.studio => _studio,
+  };
 
   @override
   bool canFavourite(EntityKind kind) => true;
@@ -54,10 +59,7 @@ class AnilistEntityView extends EntityScreenView {
     bool current,
   ) async {
     if (!anilistAuth.isLoggedIn) return null;
-    final done = await anilistAuth.queries.toggleFavourite(
-      _of(kind).isCharacter,
-      id,
-    );
+    final done = await anilistAuth.queries.toggleFavourite(_of(kind).kind, id);
     return done ? !current : current;
   }
 

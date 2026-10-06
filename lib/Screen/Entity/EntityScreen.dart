@@ -12,10 +12,12 @@ import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Utils/Functions/SnackBar.dart';
 import '../../Widgets/Components/BaseScreen.dart';
 import '../../Widgets/Components/EmptyState.dart';
-import '../../Widgets/Components/MarkupText.dart';
+import '../../Widgets/Components/AniHtml.dart';
 import '../../Widgets/Components/ScrollConfig.dart';
 import '../../Widgets/Shelf/MediaSection.dart';
 import '../Feed/FeedNavigation.dart';
+import '../Social/Components/AniMediaCard.dart';
+import '../Social/SocialNavigation.dart';
 import '../Widgets/Components/DataSection.dart';
 import '../Widgets/ScreenWidgetView.dart';
 import 'Components/EntityHeader.dart';
@@ -294,7 +296,12 @@ class _EntityScreenState extends BaseScreen<EntityScreen> {
             ),
           ),
           SizedBox(height: Dimens.gapSm),
-          MarkupText(text: description),
+          AniHtml(
+            html: description,
+            collapsedHeight: 240,
+            onLink: (url) => openAppLink(context, _service, url),
+            linkCard: aniLinkCards(_service),
+          ),
         ],
       ),
     );

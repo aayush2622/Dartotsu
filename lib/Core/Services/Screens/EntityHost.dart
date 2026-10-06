@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 
 import '../Model/Media.dart';
 
-enum EntityKind { character, staff }
+enum EntityKind { character, staff, studio }
 
 class EntityProfile {
   final String id;

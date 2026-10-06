@@ -116,6 +116,15 @@ String? anilistDate(Map<String, dynamic>? date) {
   ].join(' ');
 }
 
+EntityProfile studioProfile(Map<String, dynamic> json) => EntityProfile(
+  id: json['id'].toString(),
+  name: json['name'] as String? ?? '',
+  subtitle: json['isAnimationStudio'] == true ? 'Animation studio' : 'Studio',
+  favourites: (json['favourites'] as num?)?.toInt(),
+  isFavourite: json['isFavourite'] == true,
+  url: json['siteUrl'] as String?,
+);
+
 EntityProfile characterProfile(Map<String, dynamic> json) {
   final name = json['name'] as Map<String, dynamic>? ?? const {};
   final image = json['image'] as Map?;

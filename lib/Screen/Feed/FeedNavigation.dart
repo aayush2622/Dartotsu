@@ -70,7 +70,11 @@ void openEntity(
     view == null
         ? NotImplemented(
             service: service.name,
-            area: kind == EntityKind.character ? 'Characters' : 'Staff',
+            area: switch (kind) {
+              EntityKind.character => 'Characters',
+              EntityKind.staff => 'Staff',
+              EntityKind.studio => 'Studios',
+            },
           )
         : EntityScreen(
             view: view,

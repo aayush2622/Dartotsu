@@ -200,7 +200,13 @@ class EntityHeaderDelegate extends SliverPersistentHeaderDelegate {
         width: _portraitWidth,
         height: _portraitHeight,
         child: url == null
-            ? Icon(Icons.person_rounded, size: 48, color: scheme.outline)
+            ? Icon(
+                host.kind == EntityKind.studio
+                    ? Icons.business_rounded
+                    : Icons.person_rounded,
+                size: 48,
+                color: scheme.outline,
+              )
             : cachedNetworkImage(
                 imageUrl: url,
                 fit: BoxFit.cover,

@@ -50,9 +50,28 @@ extension on AnilistQueries {
     return mapStaffCharacters(connection);
   }
 
-  Future<bool> _toggleFavourite(bool character, String id) async {
+  Future<Map<String, dynamic>?> _studio(String id) async {
     final data = await client.query(
-      _mutationToggleFavourite(character),
+      _queryStudio,
+      variables: {'id': int.parse(id)},
+    );
+    return data['Studio'] as Map<String, dynamic>?;
+  }
+
+  Future<List<Media>?> _studioMedia(String id, bool main, int page) async {
+    final data = await client.query(
+      _queryStudioMedia,
+      variables: {'id': int.parse(id), 'main': main, 'page': page},
+    );
+    final connection =
+        (data['Studio'] as Map<String, dynamic>?)?['media']
+            as Map<String, dynamic>?;
+    return mapEntityMedia(connection, 'none');
+  }
+
+  Future<bool> _toggleFavourite(String kind, String id) async {
+    final data = await client.query(
+      _mutationToggleFavourite(kind),
       variables: {'id': int.parse(id)},
     );
     return data['ToggleFavourite'] != null;
@@ -88,7 +107,7 @@ query (\$id: Int) {
     id
     name { $_characterNameFields }
     image { large medium }
-    description(asHtml: false)
+    description(asHtml: true)
     gender
     dateOfBirth { year month day }
     age
@@ -109,7 +128,7 @@ query (\$id: Int) {
     name { $_staffNameFields }
     languageV2
     image { large medium }
-    description(asHtml: false)
+    description(asHtml: true)
     primaryOccupations
     gender
     dateOfBirth { year month day }
@@ -162,10 +181,48 @@ query (\$id: Int, \$page: Int) {
   }
 }''';
 
-String _mutationToggleFavourite(bool character) =>
+final _queryStudio =
     '''
-mutation (\$id: Int) {
-  ToggleFavourite(${character ? 'characterId' : 'staffId'}: \$id) {
-    ${character ? 'characters' : 'staff'}(page: 1, perPage: 1) { pageInfo { total } }
+query (\$id: Int) {
+  Studio(id: \$id) {
+    id
+    name
+    isAnimationStudio
+    isFavourite
+    favourites
+    siteUrl
+    main: media(isMain: true, sort: [START_DATE_DESC], page: 1, perPage: 25) {
+      pageInfo { hasNextPage }
+      edges { node { $anilistMediaFragment } }
+    }
+    other: media(isMain: false, sort: [START_DATE_DESC], page: 1, perPage: 25) {
+      pageInfo { hasNextPage }
+      edges { node { $anilistMediaFragment } }
+    }
   }
 }''';
+
+final _queryStudioMedia =
+    '''
+query (\$id: Int, \$main: Boolean, \$page: Int) {
+  Studio(id: \$id) {
+    media(isMain: \$main, sort: [START_DATE_DESC], page: \$page, perPage: 25) {
+      pageInfo { hasNextPage }
+      edges { node { $anilistMediaFragment } }
+    }
+  }
+}''';
+
+String _mutationToggleFavourite(String kind) {
+  final (arg, field) = switch (kind) {
+    'character' => ('characterId', 'characters'),
+    'studio' => ('studioId', 'studios'),
+    _ => ('staffId', 'staff'),
+  };
+  return '''
+mutation (\$id: Int) {
+  ToggleFavourite($arg: \$id) {
+    $field(page: 1, perPage: 1) { pageInfo { total } }
+  }
+}''';
+}
