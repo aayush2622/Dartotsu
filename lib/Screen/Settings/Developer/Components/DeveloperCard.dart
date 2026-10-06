@@ -38,6 +38,7 @@ class DeveloperCard extends StatelessWidget {
     final dev = developer;
 
     return ThemedContainer(
+      blur: false,
       padding: EdgeInsets.zero,
       borderRadius: Dimens.border,
       child: DpadTap(

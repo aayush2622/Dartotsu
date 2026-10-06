@@ -39,6 +39,7 @@ class SectionCard extends StatelessWidget {
     }
 
     return ThemedContainer(
+      blur: false,
       margin: margin,
       padding: padding ?? Dimens.cardInsets,
       borderRadius: Dimens.border,

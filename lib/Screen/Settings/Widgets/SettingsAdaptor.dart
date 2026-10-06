@@ -91,6 +91,7 @@ class _SectionGroup extends StatelessWidget {
             ClipRRect(
               borderRadius: Dimens.border,
               child: ThemedContainer(
+                blur: false,
                 color: scheme.surfaceContainerLow,
                 borderRadius: Dimens.border,
                 padding: EdgeInsets.zero,

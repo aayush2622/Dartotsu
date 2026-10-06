@@ -12,6 +12,7 @@ Widget cachedNetworkImage({
   BoxFit? fit,
   double? width,
   double? height,
+  int? cacheWidth,
   Widget Function(BuildContext, String)? placeholder,
   Widget Function(BuildContext, String, dynamic)? errorWidget,
 }) {
@@ -54,9 +55,9 @@ Widget cachedNetworkImage({
     fit: fit,
     width: width,
     height: height,
-    memCacheWidth: (width != null && width.isFinite)
-        ? (width * 2).toInt()
-        : null,
+    memCacheWidth:
+        cacheWidth ??
+        ((width != null && width.isFinite) ? (width * 2).toInt() : null),
     memCacheHeight: (height != null && height.isFinite)
         ? (height * 2).toInt()
         : null,

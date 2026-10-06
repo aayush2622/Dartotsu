@@ -361,15 +361,18 @@ class _PosterCardState extends State<PosterCard> {
     final base = SizedBox(
       width: s.itemWidth,
       height: s.imageHeight,
-      child: Stack(fit: StackFit.expand, children: [_heroImage(), ...overlays]),
+      child: Stack(
+        fit: StackFit.expand,
+        children: [_heroImage(s), ...overlays],
+      ),
     );
     return round
         ? ClipRRect(borderRadius: BorderRadius.circular(s.radius), child: base)
         : base;
   }
 
-  Widget _heroImage() {
-    final image = _image(_scheme);
+  Widget _heroImage(CardStyle s) {
+    final image = _image(_scheme, s);
     if (widget.heroTag == null) return image;
     return Hero(
       tag: widget.heroTag!,
@@ -410,7 +413,7 @@ class _PosterCardState extends State<PosterCard> {
     ),
   );
 
-  Widget _image(ColorScheme scheme) {
+  Widget _image(ColorScheme scheme, CardStyle s) {
     if (widget.demo && (widget.imageUrl?.isEmpty ?? true)) {
       return DecoratedBox(
         decoration: BoxDecoration(
@@ -429,6 +432,8 @@ class _PosterCardState extends State<PosterCard> {
     return cachedNetworkImage(
       imageUrl: widget.imageUrl ?? '',
       fit: BoxFit.cover,
+      cacheWidth: (s.itemWidth * MediaQuery.devicePixelRatioOf(context))
+          .round(),
       placeholder: (_, _) => ColoredBox(color: scheme.surfaceContainerHighest),
       errorWidget: (_, _, _) => ColoredBox(
         color: scheme.surfaceContainerHighest,

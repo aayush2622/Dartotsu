@@ -72,6 +72,7 @@ class GlassBackground extends StatelessWidget {
                   child: cachedNetworkImage(
                     imageUrl: imageUrl,
                     fit: BoxFit.cover,
+                    cacheWidth: 640,
                     errorWidget: imageUrl == kFallbackGlassBackground
                         ? null
                         : (_, _, _) => cachedNetworkImage(

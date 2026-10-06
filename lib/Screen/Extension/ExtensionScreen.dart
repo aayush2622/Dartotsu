@@ -358,6 +358,7 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
                     final selected = active?.url == repo.url;
 
                     return ThemedContainer(
+                      blur: false,
                       borderRadius: const BorderRadius.all(Radius.circular(24)),
                       margin: const EdgeInsets.symmetric(
                         horizontal: 16,
