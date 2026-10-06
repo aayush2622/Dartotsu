@@ -5,7 +5,10 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../Utils/Functions/GetXFunctions.dart';
 import '../Preferences/PrefManager.dart';
+import '../Services/MediaServiceController.dart';
+import 'GlassBackgroundSource.dart';
 import 'CustomFontLoader.dart';
 import 'CustomJsonTheme.dart';
 import 'ThemeManager.dart';
@@ -26,6 +29,17 @@ class ThemeController extends GetxController {
 
   final useJsonTheme = PrefName.useJsonTheme.rx;
 
+  final followCover = PrefName.followCover.rx;
+  final _glassBackgroundUrl = PrefName.glassBackgroundUrl.rx;
+
+  final _coverUrl = RxnString();
+  Object? _coverOwner;
+  String? _imageUrl;
+  ColorScheme? _imageLight;
+  ColorScheme? _imageDark;
+  final _imageTick = 0.obs;
+  StreamSubscription<void>? _userSub;
+
   String? _loadedFontFamily;
   final _fontLoadTick = 0.obs;
 
@@ -44,11 +58,76 @@ class ThemeController extends GetxController {
       unawaited(_loadFont(customFontPath.value));
     }
     if (Platform.isLinux) _startJsonWatch();
+    everAll([followCover, _glassBackgroundUrl, _coverUrl], (_) => _syncImage());
+    final services = tryFind<MediaServiceController>();
+    if (services != null) {
+      ever(services.currentService, (_) => _bindUser());
+      _bindUser();
+    }
+    unawaited(_syncImage());
+  }
+
+  void _bindUser() {
+    _userSub?.cancel();
+    _userSub = tryFind<MediaServiceController>()
+        ?.currentService
+        .value
+        .auth
+        ?.user
+        .stream
+        .listen((_) => _syncImage());
+    unawaited(_syncImage());
+  }
+
+  void setCover(Object owner, String? url) {
+    _coverOwner = owner;
+    _coverUrl.value = url;
+  }
+
+  void clearCover(Object owner) {
+    if (_coverOwner != owner) return;
+    _coverOwner = null;
+    _coverUrl.value = null;
+  }
+
+  Future<void> _syncImage() async {
+    if (!followCover.value) {
+      if (_imageUrl != null) {
+        _imageUrl = null;
+        _imageLight = null;
+        _imageDark = null;
+        _imageTick.value++;
+      }
+      return;
+    }
+    final url = _coverUrl.value ?? resolveGlassBackground();
+    if (url == _imageUrl) return;
+    _imageUrl = url;
+    final schemes =
+        await _schemesFor(url) ??
+        (url == kFallbackGlassBackground
+            ? null
+            : await _schemesFor(kFallbackGlassBackground));
+    if (_imageUrl != url || schemes == null) return;
+    _imageLight = schemes.$1;
+    _imageDark = schemes.$2;
+    _imageTick.value++;
+  }
+
+  Future<(ColorScheme, ColorScheme)?> _schemesFor(String url) async {
+    try {
+      final light = await getImageMainColor(url, Brightness.light);
+      final dark = await getImageMainColor(url, Brightness.dark);
+      return (light, dark);
+    } catch (_) {
+      return null;
+    }
   }
 
   @override
   void onClose() {
     _jsonWatchSub?.cancel();
+    _userSub?.cancel();
     super.onClose();
   }
 
@@ -172,6 +251,8 @@ class ThemeController extends GetxController {
       _dynamicDark,
       useJsonTheme.value,
       _jsonThemeTick.value,
+      followCover.value,
+      _imageTick.value,
     ];
     if (_cacheKey != null && _listEquals(_cacheKey!, key)) return;
     _cacheKey = key;
@@ -185,8 +266,14 @@ class ThemeController extends GetxController {
 
     final jsonScheme = dark ? _jsonDark : _jsonLight;
 
+    final imageScheme = dark ? _imageDark : _imageLight;
+
     ThemeData base;
-    if (useJsonTheme.value && jsonScheme != null) {
+    if (followCover.value && imageScheme != null) {
+      base = dark
+          ? materialThemeDark(imageScheme)
+          : materialThemeLight(imageScheme);
+    } else if (useJsonTheme.value && jsonScheme != null) {
       base = dark
           ? materialThemeDark(jsonScheme)
           : materialThemeLight(jsonScheme);

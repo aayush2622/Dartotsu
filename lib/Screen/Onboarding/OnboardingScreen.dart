@@ -10,11 +10,11 @@ import '../../Core/ThemeManager/ThemeController.dart';
 import '../../Utils/Animation/WidgetAnimations.dart';
 import '../../Utils/Extensions/NumExtensions.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
-import '../../Widgets/Components/BaseScreen.dart';
 import '../../Widgets/Components/CachedNetworkImage.dart';
 import '../../Widgets/Components/ScrollConfig.dart';
 import '../Login/LoginScreen.dart';
 import '../Settings/Widgets/ThemeDropdown.dart';
+import '../../Core/ThemeManager/GlassBackgroundSource.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});

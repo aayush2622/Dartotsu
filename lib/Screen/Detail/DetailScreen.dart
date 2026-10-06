@@ -55,6 +55,7 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
     search: _search,
     refresh: () => _load(force: true),
   );
+  Worker? _coverWorker;
   final _widgets = <ScreenWidget>[].obs;
   final _ready = false.obs;
   final _tab = 0.obs;
@@ -110,11 +111,19 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
     super.initState();
     FocusManager.instance.addListener(_keepFocusVisible);
     _scroll.addListener(_scheduleSnap);
+    final theme = find<ThemeController>();
+    theme.setCover(this, _host.media.value.cover);
+    _coverWorker = ever(
+      _host.media,
+      (media) => theme.setCover(this, media.cover),
+    );
     unawaited(_load());
   }
 
   @override
   void dispose() {
+    _coverWorker?.dispose();
+    find<ThemeController>().clearCover(this);
     FocusManager.instance.removeListener(_keepFocusVisible);
     _snapTimer?.cancel();
     _scroll.dispose();

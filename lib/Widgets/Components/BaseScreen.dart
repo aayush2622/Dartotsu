@@ -3,17 +3,15 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../Core/ThemeManager/GlassBackgroundSource.dart';
 import '../../Core/ThemeManager/ThemeController.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
 import 'CachedNetworkImage.dart';
 
-const kFallbackGlassBackground =
-    'https://i.pinimg.com/1200x/b2/e7/7f/b2e77f955c3d39655cc7a46802f94748.jpg';
-
 abstract class BaseScreen<T extends StatefulWidget> extends State<T> {
   Widget buildContent(BuildContext context);
 
-  String? get glassBackgroundUrl => kFallbackGlassBackground;
+  String? get glassBackgroundUrl => resolveGlassBackground();
 
   @override
   Widget build(BuildContext context) {
@@ -74,6 +72,12 @@ class GlassBackground extends StatelessWidget {
                   child: cachedNetworkImage(
                     imageUrl: imageUrl,
                     fit: BoxFit.cover,
+                    errorWidget: imageUrl == kFallbackGlassBackground
+                        ? null
+                        : (_, _, _) => cachedNetworkImage(
+                            imageUrl: kFallbackGlassBackground,
+                            fit: BoxFit.cover,
+                          ),
                   ),
                 ),
               ),

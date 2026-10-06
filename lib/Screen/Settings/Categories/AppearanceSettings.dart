@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart' as p;
 
+import '../../../Core/Preferences/PrefManager.dart';
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../../Core/ThemeManager/ThemeController.dart';
 import '../../../Core/ThemeManager/ThemeMode.dart';
@@ -13,6 +14,7 @@ import '../../../Utils/Functions/NavigateToScreen.dart';
 import '../../../Widgets/Components/AppControls.dart';
 import '../CardStyleScreen.dart';
 import '../Widgets/FontPickerSheet.dart';
+import '../Widgets/GlassBackgroundSheet.dart';
 import '../Widgets/SegmentedSetting.dart';
 import '../Widgets/ThemeDropdown.dart';
 
@@ -37,6 +39,13 @@ List<Setting> appearanceSettings(BuildContext context) {
       icon: Icons.color_lens_outlined,
       isChecked: t.useMaterialYou.value,
       onSwitchChange: t.setMaterialYou,
+    ),
+    Setting.switchType(
+      name: getString.followCover,
+      description: getString.followCoverDesc,
+      icon: Icons.palette_outlined,
+      isChecked: t.followCover.value,
+      onSwitchChange: (v) => t.followCover.value = v,
     ),
     if (Platform.isLinux)
       Setting.switchType(
@@ -72,6 +81,15 @@ List<Setting> appearanceSettings(BuildContext context) {
       icon: Icons.blur_on_rounded,
       isChecked: t.useGlassMode.value,
       onSwitchChange: t.setGlassEffect,
+    ),
+    Setting.normal(
+      name: getString.glassBackground,
+      description: PrefName.glassBackgroundUrl.rx.value.isEmpty
+          ? getString.glassBackgroundDesc
+          : PrefName.glassBackgroundUrl.rx.value,
+      icon: Icons.wallpaper_rounded,
+      isActivity: true,
+      onClick: () => showGlassBackgroundSheet(context),
     ),
     Setting.header(getString.sectionStyle),
     Setting.normal(
