@@ -1,11 +1,12 @@
-import '../../Utils/Nav/DpadNav.dart';
 import 'package:flutter/material.dart';
 
+import '../../Core/Services/ScoreFormat.dart';
 import '../../Core/ThemeManager/CardStyleController.dart';
 import '../../Model/CardStyle.dart';
 import '../../Utils/Extensions/CardStyleMetrics.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
+import '../../Utils/Nav/DpadNav.dart';
 import '../Components/CachedNetworkImage.dart';
 import '../Components/ThemedContainer.dart';
 
@@ -505,7 +506,7 @@ class _ScoreBadge extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            score.toStringAsFixed(1),
+            highlight ? score.userScoreLabel : score.toStringAsFixed(1),
             style: context.textTheme.labelSmall?.copyWith(
               color: fg,
               fontWeight: FontWeight.w800,

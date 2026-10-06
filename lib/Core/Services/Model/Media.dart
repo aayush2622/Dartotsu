@@ -38,6 +38,8 @@ class Media {
   // -- user list entry --
   int? userListId;
   bool isListPrivate;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  bool? hiddenFromStatusLists;
   String? notes;
   int? userProgress;
   String? userStatus;

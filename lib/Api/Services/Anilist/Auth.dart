@@ -111,6 +111,7 @@ class AnilistAuth extends GetxController implements ServiceAuth {
       if (viewer == null) return;
       final parsed = AnilistUser.fromViewer(viewer);
       user.value = parsed;
+      AnilistPref.displayAdult.value = parsed.adultContent;
       PrefManager.setCustomType(
         _userCacheKey,
         parsed,
@@ -122,6 +123,12 @@ class AnilistAuth extends GetxController implements ServiceAuth {
     } finally {
       loading.value = false;
     }
+  }
+
+  Future<bool> updateSettings(Map<String, dynamic> changes) async {
+    final ok = await mutations.updateSettings(changes);
+    if (ok) await refreshUser();
+    return ok;
   }
 
   @override
@@ -137,8 +144,15 @@ query {
     id name about bannerImage
     avatar { large medium }
     unreadNotificationCount
-    options { displayAdultContent titleLanguage }
-    mediaListOptions { scoreFormat }
+    options {
+      displayAdultContent titleLanguage staffNameLanguage activityMergeTime
+      airingNotifications restrictMessagesToFollowing timezone
+    }
+    mediaListOptions {
+      scoreFormat rowOrder
+      animeList { customLists }
+      mangaList { customLists }
+    }
     statistics { anime { episodesWatched } manga { chaptersRead } }
   }
 }

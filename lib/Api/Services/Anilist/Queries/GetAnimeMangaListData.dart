@@ -42,6 +42,7 @@ extension on AnilistQueries {
     return compute(_parseBrowse, {
       'body': await client.queryRaw('{$gql}'),
       'rails': [for (final rail in rails) rail.args],
+      'adult': AnilistPref.displayAdult.value,
     });
   }
 }
@@ -52,7 +53,7 @@ Map<String, List<Media>> _parseBrowse(Map<String, dynamic> args) {
   for (final rail in (args['rails'] as List).cast<List>()) {
     final [title, alias, kind] = rail.cast<String>();
     out[title] = kind == 'airing'
-        ? _recentUpdates(data[alias])
+        ? _recentUpdates(data[alias], adult: args['adult'] as bool)
         : anilistPageMedia(data[alias] as Map<String, dynamic>?);
   }
   return anilistNonEmpty(out);
@@ -153,14 +154,16 @@ List<_BrowseRail> _mangaRails() => [
   ),
 ];
 
-List<Media> _recentUpdates(Object? page) {
+List<Media> _recentUpdates(Object? page, {required bool adult}) {
   final seen = <String>{};
   return (((page as Map<String, dynamic>?)?['airingSchedules'] as List?) ??
           const [])
       .cast<Map<String, dynamic>>()
       .map((s) => s['media'] as Map<String, dynamic>?)
       .whereType<Map<String, dynamic>>()
-      .where((m) => m['isAdult'] != true && seen.add(m['id'].toString()))
+      .where(
+        (m) => (adult || m['isAdult'] != true) && seen.add(m['id'].toString()),
+      )
       .map((m) => mapAnilistMedia(m))
       .toList();
 }
@@ -178,7 +181,7 @@ String _browseQuery(
   final filters = [
     'sort: $sort',
     'type: $type',
-    'isAdult: false',
+    if (!AnilistPref.displayAdult.value) 'isAdult: false',
     if (format != null) 'format: $format',
     if (country != null) 'countryOfOrigin: $country',
     if (season != null) 'season: $season',

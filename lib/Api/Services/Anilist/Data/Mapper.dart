@@ -113,6 +113,8 @@ void _applyEntry(Media media, Map<String, dynamic>? entry) {
   if (score != null) media.userScore = score;
   media.userRepeat = (entry['repeat'] as num?)?.toInt() ?? media.userRepeat;
   media.isListPrivate = entry['private'] as bool? ?? media.isListPrivate;
+  media.hiddenFromStatusLists =
+      entry['hiddenFromStatusLists'] as bool? ?? media.hiddenFromStatusLists;
   media.notes = entry['notes'] as String? ?? media.notes;
   final updatedAt = (entry['updatedAt'] as num?)?.toInt();
   if (updatedAt != null) media.userUpdatedAt = updatedAt * 1000;

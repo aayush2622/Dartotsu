@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../Core/Services/Model/Media.dart';
+import '../../Core/Services/ScoreFormat.dart';
 import '../../Core/ThemeManager/CardStyleController.dart';
 import '../../Core/ThemeManager/ThemeController.dart';
 import '../../Model/CardStyle.dart';
@@ -301,7 +302,7 @@ class _ScoreChip extends StatelessWidget {
             ),
             const SizedBox(width: 2),
             Text(
-              score.toStringAsFixed(1),
+              highlight ? score.userScoreLabel : score.toStringAsFixed(1),
               style: context.textTheme.labelSmall?.copyWith(
                 fontWeight: FontWeight.w800,
                 color: highlight ? scheme.onPrimaryContainer : null,

@@ -3,6 +3,7 @@ import '../../../../Core/Services/Model/Media.dart';
 import '../../../../Utils/Extensions/StringExtensions.dart';
 import '../Auth.dart';
 import '../Data/Media.dart';
+import '../Data/User.dart';
 import '../Widgets/DetailStats.dart';
 import '../Widgets/FollowersShelf.dart';
 
@@ -141,6 +142,14 @@ class AnilistListEditorView extends ListEditorScreenView {
   bool get advanced => true;
 
   @override
-  Map<String, bool> customLists(Media media) =>
-      media is AnilistMedia ? media.inCustomListsOf : const {};
+  Map<String, bool> customLists(Media media) {
+    final user = anilistAuth.user.value;
+    return {
+      if (user is AnilistUser)
+        for (final name
+            in media.isAnime ? user.animeCustomLists : user.mangaCustomLists)
+          name: false,
+      if (media is AnilistMedia) ...media.inCustomListsOf,
+    };
+  }
 }

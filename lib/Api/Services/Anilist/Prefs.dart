@@ -81,6 +81,12 @@ class AnilistPref {
     PrefLocation.OTHER,
   );
 
+  static const displayAdult = Pref(
+    'anilistDisplayAdult',
+    false,
+    PrefLocation.CACHE,
+  );
+
   static const hidePrivate = Pref(
     'anilistHidePrivate',
     false,

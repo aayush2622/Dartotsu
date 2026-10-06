@@ -7,13 +7,13 @@ extension on AnilistMutations {
 
     final query = '''
 mutation (
-  \$mediaId: Int, \$progress: Int, \$private: Boolean, \$repeat: Int,
+  \$mediaId: Int, \$progress: Int, \$private: Boolean, \$hidden: Boolean, \$repeat: Int,
   \$notes: String, \$customLists: [String], \$scoreRaw: Int,
   \$status: MediaListStatus, \$startedAt: FuzzyDateInput, \$completedAt: FuzzyDateInput
 ) {
   SaveMediaListEntry(
     mediaId: \$mediaId, progress: \$progress, repeat: \$repeat, notes: \$notes,
-    private: \$private, scoreRaw: \$scoreRaw, status: \$status,
+    private: \$private, hiddenFromStatusLists: \$hidden, scoreRaw: \$scoreRaw, status: \$status,
     startedAt: \$startedAt, completedAt: \$completedAt, customLists: \$customLists
   ) {
     id status progress
@@ -23,6 +23,7 @@ mutation (
     final variables = <String, dynamic>{
       'mediaId': int.parse(media.id),
       'private': media.isListPrivate,
+      'hidden': ?media.hiddenFromStatusLists,
       if (media.userProgress != null) 'progress': media.userProgress,
       if (media.userScore != null && media.userScore != 0)
         'scoreRaw': media.userScore,

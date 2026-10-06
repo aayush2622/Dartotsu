@@ -61,6 +61,12 @@ Map<String, List<Media>> _parseUserLists(Map<String, dynamic> args) {
             as Map<String, dynamic>?;
   final sectionOrder = listOptions?['sectionOrder'] as List?;
 
+  final rowOrder = options?['rowOrder'] as String? ?? 'score';
+  for (final entries in unsorted.values) {
+    _sortEntries(entries, rowOrder);
+  }
+  _sortEntries(all, rowOrder);
+
   final sorted = <String, List<Media>>{};
   for (final section in (sectionOrder ?? const []).cast<String>()) {
     if (unsorted.containsKey(section)) sorted[section] = unsorted[section]!;
@@ -89,6 +95,25 @@ Map<String, List<Media>> _parseUserLists(Map<String, dynamic> args) {
   sorted['All'] = all;
 
   return anilistNonEmpty(sorted);
+}
+
+void _sortEntries(List<Media> entries, String rowOrder) {
+  switch (rowOrder) {
+    case 'title':
+      entries.sort(
+        (a, b) => a.mainName.toLowerCase().compareTo(b.mainName.toLowerCase()),
+      );
+    case 'updatedAt':
+      entries.sort(
+        (a, b) => (b.userUpdatedAt ?? 0).compareTo(a.userUpdatedAt ?? 0),
+      );
+    case 'id':
+      entries.sort(
+        (a, b) => (int.tryParse(b.id) ?? 0).compareTo(int.tryParse(a.id) ?? 0),
+      );
+    default:
+      entries.sort((a, b) => (b.userScore ?? 0).compareTo(a.userScore ?? 0));
+  }
 }
 
 String _queryFavMedia(int userId, bool anime, int page) =>

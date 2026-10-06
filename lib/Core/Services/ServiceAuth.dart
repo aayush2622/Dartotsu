@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import 'ScoreFormat.dart';
+
 abstract class ServiceUser {
   int get id;
   String get name;
@@ -8,6 +10,8 @@ abstract class ServiceUser {
   int get episodesWatched;
   int get chaptersRead;
   int get unreadNotifications;
+
+  ScoreFormat? get scoreFormat => null;
 }
 
 /// Account layer. `MediaService.auth == null` means the service needs no login

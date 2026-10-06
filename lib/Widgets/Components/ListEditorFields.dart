@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../Core/Services/Model/Date.dart';
+import '../../Core/Services/ScoreFormat.dart';
 import '../../Core/Services/Screens/ListEditorDraft.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Extensions/Responsive.dart';
@@ -136,9 +137,7 @@ class ListScoreField extends StatefulWidget {
 
 class _ListScoreFieldState extends State<ListScoreField> {
   late final _controller = TextEditingController(
-    text: widget.draft.score.value == 0
-        ? ''
-        : (widget.draft.score.value / 10).toString(),
+    text: ScoreFormat.current.input(widget.draft.score.value),
   );
 
   @override
@@ -147,23 +146,50 @@ class _ListScoreFieldState extends State<ListScoreField> {
     super.dispose();
   }
 
+  RegExp _allowed(ScoreFormat format) => switch (format) {
+    ScoreFormat.point100 => RegExp(r'^(100|\d{0,2})$'),
+    ScoreFormat.point10Decimal => RegExp(r'^(10(\.0?)?|\d(\.\d?)?)?$'),
+    ScoreFormat.point10 => RegExp(r'^(10|\d?)$'),
+    _ => RegExp(r'^[0-5]?$'),
+  };
+
   @override
-  Widget build(BuildContext context) => ListEditorPad(
-    child: TextField(
-      controller: _controller,
-      keyboardType: const TextInputType.numberWithOptions(decimal: true),
-      inputFormatters: [
-        FilteringTextInputFormatter.allow(RegExp(r'^(10(\.0?)?|\d(\.\d?)?)?$')),
-      ],
-      decoration: const InputDecoration(
-        labelText: 'Score',
-        prefixIcon: Icon(Icons.star_rounded),
-        suffixText: '/ 10',
+  Widget build(BuildContext context) {
+    final format = ScoreFormat.current;
+    if (!format.typed) {
+      return ListEditorPad(
+        child: Obx(
+          () => LabeledField(
+            label: 'Score',
+            child: AppSegmented<int>(
+              value: ScoreFormat.smileyStep(widget.draft.score.value),
+              onChanged: (v) =>
+                  widget.draft.score.value = ScoreFormat.smileyRaw(v),
+              segments: const [
+                AppSegment(0, label: '-'),
+                AppSegment(1, label: ':('),
+                AppSegment(2, label: ':|'),
+                AppSegment(3, label: ':)'),
+              ],
+            ),
+          ),
+        ),
+      );
+    }
+    return ListEditorPad(
+      child: TextField(
+        controller: _controller,
+        keyboardType: TextInputType.numberWithOptions(decimal: format.decimal),
+        inputFormatters: [FilteringTextInputFormatter.allow(_allowed(format))],
+        decoration: InputDecoration(
+          labelText: 'Score',
+          prefixIcon: const Icon(Icons.star_rounded),
+          suffixText: '/ ${format.max}',
+        ),
+        onChanged: (v) => widget.draft.score.value = format.toRaw(v),
       ),
-      onChanged: (v) => widget.draft.score.value =
-          ((double.tryParse(v) ?? 0) * 10).round().clamp(0, 100),
-    ),
-  );
+    );
+  }
 }
 
 class ListDatesField extends StatelessWidget {
@@ -244,12 +270,23 @@ class ListPrivateField extends StatelessWidget {
   @override
   Widget build(BuildContext context) => ListEditorPad(
     child: Obx(
-      () => SwitchListTile(
-        contentPadding: EdgeInsets.zero,
-        secondary: const Icon(Icons.lock_outline_rounded),
-        title: const Text('Private'),
-        value: draft.isPrivate.value,
-        onChanged: (v) => draft.isPrivate.value = v,
+      () => Column(
+        children: [
+          SwitchListTile(
+            contentPadding: EdgeInsets.zero,
+            secondary: const Icon(Icons.lock_outline_rounded),
+            title: const Text('Private'),
+            value: draft.isPrivate.value,
+            onChanged: (v) => draft.isPrivate.value = v,
+          ),
+          SwitchListTile(
+            contentPadding: EdgeInsets.zero,
+            secondary: const Icon(Icons.visibility_off_outlined),
+            title: const Text('Hide from status lists'),
+            value: draft.hiddenFromStatusLists.value,
+            onChanged: (v) => draft.hiddenFromStatusLists.value = v,
+          ),
+        ],
       ),
     ),
   );

@@ -8,6 +8,7 @@ class ListEditorDraft {
   final progress = 0.obs;
   final score = 0.obs;
   final isPrivate = false.obs;
+  final hiddenFromStatusLists = false.obs;
   final repeat = 0.obs;
   final notes = ''.obs;
   final startedAt = Rxn<Date>();
@@ -19,6 +20,7 @@ class ListEditorDraft {
     progress.value = media.userProgress ?? 0;
     score.value = media.userScore ?? 0;
     isPrivate.value = media.isListPrivate;
+    hiddenFromStatusLists.value = media.hiddenFromStatusLists ?? false;
     repeat.value = media.userRepeat;
     notes.value = media.notes ?? '';
     startedAt.value = media.userStartedAt;
@@ -37,6 +39,7 @@ class ListEditorDraft {
       ..userProgress = progress.value
       ..userScore = score.value
       ..isListPrivate = isPrivate.value
+      ..hiddenFromStatusLists = hiddenFromStatusLists.value
       ..userRepeat = repeat.value
       ..notes = notes.value
       ..userStartedAt = startedAt.value

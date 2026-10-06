@@ -52,7 +52,7 @@ String _queryMediaDetails(Media media) =>
     externalLinks { site url }
     mediaListEntry {
       id status score(format: POINT_100) progress private notes repeat
-      updatedAt
+      hiddenFromStatusLists updatedAt
       startedAt { year month day }
       completedAt { year month day }
       customLists
