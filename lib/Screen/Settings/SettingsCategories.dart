@@ -4,6 +4,8 @@ import '../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../Model/Setting.dart';
 import 'Categories/AboutSettings.dart';
 import 'Categories/AccountSettings.dart';
+import 'Categories/AddonSettings.dart';
+import 'Categories/ExtensionSettings.dart';
 import 'Categories/AppearanceSettings.dart';
 import 'Categories/GeneralSettings.dart';
 import 'Categories/NetworkSettings.dart';
@@ -37,6 +39,18 @@ List<SettingsCategory> get settingsCategories => [
     description: getString.settingsGeneralDesc,
     icon: Icons.tune_rounded,
     build: generalSettings,
+  ),
+  SettingsCategory(
+    title: getString.extension(2),
+    description: getString.settingsExtensionsDesc,
+    icon: Icons.extension_rounded,
+    build: extensionSettings,
+  ),
+  SettingsCategory(
+    title: getString.settingsAddons,
+    description: getString.settingsAddonsDesc,
+    icon: Icons.add_box_rounded,
+    build: addonSettings,
   ),
   SettingsCategory(
     title: getString.account,

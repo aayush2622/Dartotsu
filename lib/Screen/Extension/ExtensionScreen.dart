@@ -13,11 +13,13 @@ import '../../Utils/Functions/NavigateToScreen.dart';
 import '../../Utils/Functions/SnackBar.dart';
 import '../../Utils/Nav/DpadNav.dart';
 import '../../Widgets/Components/AlertDialogBuilder.dart';
+import '../../Widgets/Components/AppBars.dart';
 import '../../Widgets/Components/BaseScreen.dart';
 import '../../Widgets/Components/CustomBottomDialog.dart';
 import '../../Widgets/Components/LoadSvg.dart';
 import '../../Widgets/Components/ThemedContainer.dart';
 import 'ExtensionList.dart';
+import 'Widgets/ExtensionManagerSheet.dart';
 
 class ExtensionScreen extends StatefulWidget {
   const ExtensionScreen({super.key});
@@ -71,8 +73,6 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
 
   @override
   Widget buildContent(BuildContext context) {
-    final theme = Theme.of(context).colorScheme;
-
     return Scaffold(
       backgroundColor: Colors.transparent,
       appBar: PreferredSize(
@@ -85,21 +85,8 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
               DpadLane.focusFirst(_tabsLaneKey);
             }
           },
-          child: AppBar(
-            leading: IconButton(
-              icon: const Icon(Icons.arrow_back_ios_new_rounded),
-              onPressed: () => popPage(context),
-            ),
-            elevation: 0,
-            backgroundColor: Colors.transparent,
-            title: Text(
-              getString.extension(2),
-              style: context.textTheme.titleMedium?.copyWith(
-                fontWeight: FontWeight.bold,
-                color: theme.primary,
-              ),
-            ),
-            iconTheme: IconThemeData(color: theme.primary),
+          child: AppScreenBar(
+            title: getString.extension(2),
             actions: [
               Row(children: [..._buildActions(), const SizedBox(width: 8)]),
             ],
@@ -119,19 +106,8 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
               }
             },
             child: Obx(
-              () => TabBar(
+              () => AppTabBar(
                 controller: _tabBarController,
-                isScrollable: true,
-                dividerColor: Colors.transparent,
-                tabAlignment: TabAlignment.start,
-                indicator: const BoxDecoration(),
-                indicatorPadding: EdgeInsets.zero,
-                padding: EdgeInsets.zero,
-                labelPadding: EdgeInsets.zero,
-                labelColor: theme.primary,
-                unselectedLabelColor: theme.onSurfaceVariant,
-                splashFactory: NoSplash.splashFactory,
-                overlayColor: WidgetStateProperty.all(Colors.transparent),
                 onFocusChange: (focused, index) =>
                     _focusedTabIndex.value = focused
                     ? index
@@ -206,8 +182,6 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
   }
 
   Widget _buildServiceManager() {
-    final theme = Theme.of(context).colorScheme;
-
     return AnimatedBuilder(
       animation: _tabBarController,
       builder: (_, _) {
@@ -226,164 +200,11 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
                 fit: BoxFit.cover,
               ),
             ),
-            onPressed: () {
-              showCustomBottomDialog(
-                context,
-                CustomBottomDialog(
-                  title: "${type.name.capitalizeFirst} Manager",
-                  positiveText: getString.ok,
-                  positiveCallback: () => popPage(context),
-                  negativeText: getString.addRepository,
-                  negativeCallback: () => _showAddRepositoryDialog(),
-                  viewList: [
-                    Obx(() {
-                      final current = manager[type];
-                      final managers = manager.managers
-                          .where((e) => e.supports(type))
-                          .toList();
-
-                      return Column(
-                        children: managers
-                            .map(
-                              (m) => _buildServiceTile(theme, type, current, m),
-                            )
-                            .toList(),
-                      );
-                    }),
-                  ],
-                ),
-              );
-            },
+            onPressed: () => showExtensionManagerSheet(context, type),
           );
         });
       },
     );
-  }
-
-  Widget _buildServiceTile(
-    ColorScheme theme,
-    ItemType type,
-    dynamic current,
-    dynamic m,
-  ) {
-    final selected = current.id == m.id;
-    final installed = m.plugin == null || m.plugin!.installed.value;
-    final availableInRepo = m.plugin == null || m.plugin!.availableInRepo.value;
-    final enabled = installed;
-    final opacity = installed || availableInRepo ? 1.0 : 0.5;
-
-    return Opacity(
-      opacity: opacity,
-      child: ThemedContainer(
-        borderRadius: const BorderRadius.all(Radius.circular(24)),
-        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 8),
-        color: selected ? theme.surfaceContainerHigh : null,
-        child: ListTile(
-          enabled: enabled,
-          hoverColor: Colors.transparent,
-          onTap: (!enabled || selected)
-              ? null
-              : () => manager.switchManager(type, m.id),
-          leading: ClipOval(
-            child: Image.asset(
-              m.icon,
-              width: 24,
-              height: 24,
-              fit: BoxFit.cover,
-            ),
-          ),
-          title: Text(
-            m.name,
-            style: context.textTheme.bodyLarge?.copyWith(
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          trailing: _buildServiceTrailing(m, installed, availableInRepo),
-        ),
-      ),
-    );
-  }
-
-  Widget? _buildServiceTrailing(
-    dynamic m,
-    bool installed,
-    bool availableInRepo,
-  ) {
-    if (m.plugin == null) return null;
-
-    if (installed) {
-      return IconButton(
-        icon: const Icon(Icons.delete, size: 18),
-        onPressed: () => showDeleteDialog(context, m.plugin!, m.name),
-      );
-    }
-
-    if (availableInRepo) {
-      return IconButton(
-        icon: const Icon(Icons.download, size: 18),
-        onPressed: () => showInstallDialog(context, m.plugin!, m.name),
-      );
-    }
-
-    return null;
-  }
-
-  void _showAddRepositoryDialog() {
-    final controller = TextEditingController(text: DownloadablePlugin.indexUrl);
-    final refreshing = false.obs;
-
-    AlertDialogBuilder(context)
-      ..setTitle(getString.addPluginRepository)
-      ..setCustomView(
-        StatefulBuilder(
-          builder: (dialogContext, setState) {
-            return Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                TextField(
-                  controller: controller,
-                  decoration: InputDecoration(
-                    hintText: getString.pluginIndexUrlHint,
-                  ),
-                ),
-                Obx(
-                  () => refreshing.value
-                      ? const Padding(
-                          padding: EdgeInsets.only(top: 12),
-                          child: SizedBox(
-                            width: 20,
-                            height: 20,
-                            child: CircularProgressIndicator(strokeWidth: 2),
-                          ),
-                        )
-                      : const SizedBox.shrink(),
-                ),
-              ],
-            );
-          },
-        ),
-      )
-      ..setPositiveButton(getString.ok, () async {
-        final url = controller.text.trim();
-        if (url.isEmpty || refreshing.value) return;
-
-        DownloadablePlugin.setIndexUrl(url);
-
-        refreshing.value = true;
-        try {
-          await Future.wait([
-            for (final m in manager.managers)
-              if (m.plugin != null) m.plugin!.checkAvailability(),
-          ]);
-          snackString(getString.pluginRepoUpdated);
-        } catch (e) {
-          snackString(getString.pluginRepoUpdateFailed);
-        } finally {
-          refreshing.value = false;
-        }
-      })
-      ..show();
   }
 
   Widget _buildRepoManager() {
@@ -547,69 +368,72 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
                       ),
 
                       color: selected ? theme.surfaceContainerHigh : null,
-                      child: ListTile(
-                        hoverColor: Colors.transparent,
+                      child: Material(
+                        type: MaterialType.transparency,
+                        child: ListTile(
+                          hoverColor: Colors.transparent,
 
-                        onTap: () async {
-                          if (!selected) {
-                            await extension.selectRepo(repo, type);
-                          }
-                        },
-                        leading: repo.iconUrl != null
-                            ? ClipRRect(
-                                borderRadius: BorderRadius.circular(12),
-                                child: Image.network(
-                                  repo.iconUrl!,
-                                  width: 48,
-                                  height: 48,
-                                  fit: BoxFit.cover,
-                                  errorBuilder: (_, _, _) =>
-                                      const Icon(Icons.storage_rounded),
-                                ),
-                              )
-                            : loadSvg(
-                                "assets/svg/github.svg",
-                                color: theme.primary,
-                              ),
-
-                        title: Row(
-                          children: [
-                            Expanded(
-                              child: Text(
-                                repo.name ??
-                                    Uri.tryParse(repo.url)?.host ??
-                                    repo.url,
-                                style: context.textTheme.bodyLarge?.copyWith(
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-
-                        subtitle: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              repo.url,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            const SizedBox(height: 4),
-                            Text(
-                              "${repo.extensions ?? "?"} extensions",
-                              style: context.textTheme.bodySmall?.copyWith(
-                                color: theme.primary,
-                              ),
-                            ),
-                          ],
-                        ),
-
-                        trailing: IconButton(
-                          icon: const Icon(Icons.delete_rounded),
-                          onPressed: () async {
-                            await extension.removeRepo(repo.url, type);
+                          onTap: () async {
+                            if (!selected) {
+                              await extension.selectRepo(repo, type);
+                            }
                           },
+                          leading: repo.iconUrl != null
+                              ? ClipRRect(
+                                  borderRadius: BorderRadius.circular(12),
+                                  child: Image.network(
+                                    repo.iconUrl!,
+                                    width: 48,
+                                    height: 48,
+                                    fit: BoxFit.cover,
+                                    errorBuilder: (_, _, _) =>
+                                        const Icon(Icons.storage_rounded),
+                                  ),
+                                )
+                              : loadSvg(
+                                  "assets/svg/github.svg",
+                                  color: theme.primary,
+                                ),
+
+                          title: Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  repo.name ??
+                                      Uri.tryParse(repo.url)?.host ??
+                                      repo.url,
+                                  style: context.textTheme.bodyLarge?.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+
+                          subtitle: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                repo.url,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                "${repo.extensions ?? "?"} extensions",
+                                style: context.textTheme.bodySmall?.copyWith(
+                                  color: theme.primary,
+                                ),
+                              ),
+                            ],
+                          ),
+
+                          trailing: IconButton(
+                            icon: const Icon(Icons.delete_rounded),
+                            onPressed: () async {
+                              await extension.removeRepo(repo.url, type);
+                            },
+                          ),
                         ),
                       ),
                     );
@@ -659,61 +483,6 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
     );
   }
 
-  Widget tabWidget(
-    BuildContext context,
-    String label,
-    int count,
-    bool selected, {
-    bool focused = false,
-  }) {
-    final theme = Theme.of(context).colorScheme;
-
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 200),
-      curve: Curves.easeOut,
-      margin: const EdgeInsets.symmetric(horizontal: 4, vertical: 6),
-      child: ThemedContainer(
-        color: focused
-            ? theme.secondaryContainer
-            : selected
-            ? theme.surfaceContainerHigh
-            : null,
-        borderRadius: BorderRadius.circular(16),
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              label,
-              style: ContextExtensions(context).textTheme.titleMedium?.copyWith(
-                fontSize: 14,
-                color: selected ? theme.primary : theme.onSurfaceVariant,
-              ),
-            ),
-            const SizedBox(width: 8),
-            AnimatedContainer(
-              duration: const Duration(milliseconds: 200),
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-              decoration: BoxDecoration(
-                color: selected
-                    ? theme.primary.withValues(alpha: 0.15)
-                    : theme.surfaceContainerHighest,
-                borderRadius: BorderRadius.circular(100),
-              ),
-              child: Text(
-                "$count",
-                style: ContextExtensions(context).textTheme.labelMedium
-                    ?.copyWith(
-                      color: selected ? theme.primary : theme.onSurfaceVariant,
-                    ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
   List<Widget> _buildTabs(BuildContext context) {
     final tabs = <Widget>[];
     int index = 0;
@@ -736,11 +505,10 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
             return matchesSearch && matchesLanguage;
           }).length;
 
-          return tabWidget(
-            context,
-            'Installed ${type.name}',
-            count,
-            _currentIndex.value == installedIndex,
+          return AppTab(
+            label: 'Installed ${type.name}',
+            count: count,
+            selected: _currentIndex.value == installedIndex,
             focused: kFocused(_focusedTabIndex.value == installedIndex),
           );
         }),
@@ -761,21 +529,13 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
             return matchesSearch && matchesLanguage;
           }).length;
 
-          return tabWidget(
-            context,
-            'Available ${type.name}',
-            count,
-            _currentIndex.value == availableIndex,
+          return AppTab(
+            label: 'Available ${type.name}',
+            count: count,
+            selected: _currentIndex.value == availableIndex,
             focused: kFocused(_focusedTabIndex.value == availableIndex),
           );
         }),
-      );
-    }
-
-    if (tabs.isNotEmpty) {
-      tabs[0] = Padding(
-        padding: const EdgeInsets.only(left: 16),
-        child: tabs[0],
       );
     }
 
