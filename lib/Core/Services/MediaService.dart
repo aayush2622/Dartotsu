@@ -61,6 +61,8 @@ abstract class MediaService {
 
   EntityScreenView? get entityView => null;
 
+  SocialScreenView? get socialView => null;
+
   NotificationScreenView? get notificationView => null;
 
   SettingsScreenView? get settingsView => null;

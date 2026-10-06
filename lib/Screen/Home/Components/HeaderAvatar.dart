@@ -8,8 +8,15 @@ class HeaderAvatar extends StatelessWidget {
   final String? url;
   final double size;
   final VoidCallback? onTap;
+  final VoidCallback? onLongPress;
 
-  const HeaderAvatar({super.key, this.url, this.size = 46, this.onTap});
+  const HeaderAvatar({
+    super.key,
+    this.url,
+    this.size = 46,
+    this.onTap,
+    this.onLongPress,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +48,7 @@ class HeaderAvatar extends StatelessWidget {
     if (onTap == null) return child;
     return DpadFocusable(
       onSelect: onTap,
+      onLongSelect: onLongPress,
       builder: dpadScaleFocus,
       child: child,
     );

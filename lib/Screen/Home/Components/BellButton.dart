@@ -5,7 +5,13 @@ import '../../../Utils/Extensions/ContextExtensions.dart';
 class BellButton extends StatelessWidget {
   final int unread;
   final VoidCallback onOpen;
-  const BellButton({super.key, required this.unread, required this.onOpen});
+  final VoidCallback? onLongPress;
+  const BellButton({
+    super.key,
+    required this.unread,
+    required this.onOpen,
+    this.onLongPress,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +21,7 @@ class BellButton extends StatelessWidget {
         IconButton(
           icon: const Icon(Icons.notifications_none_rounded),
           onPressed: onOpen,
+          onLongPress: onLongPress,
         ),
         if (unread > 0)
           Positioned(

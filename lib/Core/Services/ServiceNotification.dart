@@ -4,6 +4,8 @@ class ServiceNotification {
   final String? imageUrl;
   final DateTime createdAt;
   final String? mediaId;
+  final String? userId;
+  final String? activityId;
 
   const ServiceNotification({
     required this.id,
@@ -11,5 +13,7 @@ class ServiceNotification {
     this.imageUrl,
     required this.createdAt,
     this.mediaId,
+    this.userId,
+    this.activityId,
   });
 }

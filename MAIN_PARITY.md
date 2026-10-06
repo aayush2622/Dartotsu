@@ -23,7 +23,8 @@ switching services or extension managers never errors.
 
 - Calendar screen (query exists: `GetCalendarData`).
 - Character page and Staff page: done (`Screen/Entity`, service-driven via `EntityScreenView`; AniList implements it). Tapping character/staff cards on the detail page and in search opens them.
-- User profile page. Search results for characters, staff, studios and users only open the web link.
+- Studio page: done (`EntityKind.studio`, service-driven like character and staff; reachable from search, the detail page's studio chip and favourites).
+- User profile: done. `Screen/Social/ProfileScreen` (Profile / Feed / Stats tabs, follow, followers and following, anime and manga lists of that user, favourites), activity feed (following and global, filter, post, edit, delete, likes, replies, subscribe), markdown composer and stories (home row, viewer with seen state). All of it reads `MediaService.socialView` (`SocialScreenView`), so another service only has to implement that view.
 
 ## 3. Watching and reading (largest chunk)
 

@@ -13,6 +13,7 @@ export 'DetailHost.dart';
 export 'EntityHost.dart';
 export 'ListEditorDraft.dart';
 export 'ScreenWidget.dart';
+export '../Model/Social.dart';
 
 class HomeScreenView {
   final MediaService service;
@@ -223,4 +224,85 @@ abstract class SettingsScreenView {
   List<ScreenWidget> widgets(BuildContext context) => [
     ScreenWidget.settings(null, build(context)),
   ];
+}
+
+/// Profiles, activity feeds, likes, replies and stories. Every method returns
+/// plain data; `null` / empty results mean the service doesn't offer it.
+class SocialScreenView {
+  final MediaService service;
+
+  SocialScreenView(this.service);
+
+  String? get currentUserId => service.auth?.user.value?.id.toString();
+
+  bool get canInteract => service.isLoggedIn;
+
+  bool get hasStories => false;
+
+  bool get hasGlobalFeed => true;
+
+  Future<SocialUser?> profile({String? id, String? name}) async => null;
+
+  Future<SocialFavourites> favourites(String userId) async =>
+      const SocialFavourites();
+
+  Future<UserPage> follows(
+    String userId, {
+    required bool followers,
+    int page = 1,
+  }) async => const UserPage([]);
+
+  Future<List<Media>> favouriteMedia(
+    String userId, {
+    required bool anime,
+    int page = 1,
+  }) async => const [];
+
+  Future<bool?> toggleFollow(String userId) async => null;
+
+  Future<ActivityPage> activities(
+    ActivityScope scope, {
+    String? userId,
+    String? activityId,
+    int page = 1,
+  }) async => const ActivityPage([]);
+
+  Future<ReplyPage> replies(String activityId, {int page = 1}) async =>
+      const ReplyPage([]);
+
+  Future<bool> toggleLike(String id, {bool reply = false}) async => false;
+
+  Future<bool> toggleSubscription(String activityId, bool subscribe) async =>
+      false;
+
+  Future<bool> postActivity(String text, {String? edit}) async => false;
+
+  Future<bool> postMessage(
+    String userId,
+    String text, {
+    String? edit,
+    bool isPrivate = false,
+  }) async => false;
+
+  Future<bool> postReply(
+    String activityId,
+    String text, {
+    String? edit,
+  }) async => false;
+
+  Future<bool> deleteActivity(String id) async => false;
+
+  Future<bool> deleteReply(String id) async => false;
+
+  Future<UserStats?> stats(String userId) async => null;
+
+  Future<List<ActivityDay>> activityHistory(String userId) async => const [];
+
+  Future<List<StoryGroup>> stories() async => const [];
+
+  Future<Map<String, Media>> mediaByIds(List<String> ids) async => const {};
+
+  String? profileUrl(String name) => null;
+
+  AppLink? parseLink(String url) => null;
 }

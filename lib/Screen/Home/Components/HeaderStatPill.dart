@@ -8,11 +8,13 @@ class HeaderStatPill extends StatelessWidget {
   final IconData icon;
   final String label;
   final VoidCallback? onTap;
+  final VoidCallback? onLongPress;
   const HeaderStatPill({
     super.key,
     required this.icon,
     required this.label,
     this.onTap,
+    this.onLongPress,
   });
 
   @override
@@ -39,6 +41,7 @@ class HeaderStatPill extends StatelessWidget {
     if (onTap == null) return pill;
     return DpadTap(
       onTap: onTap,
+      onLongPress: onLongPress,
       borderRadius: BorderRadius.circular(999),
       child: pill,
     );

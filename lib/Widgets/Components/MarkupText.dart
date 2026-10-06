@@ -2,17 +2,24 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import '../../Utils/Extensions/ContextExtensions.dart';
+import '../../Utils/Function.dart';
 
 class MarkupText extends StatefulWidget {
   final String text;
   final int collapsedLines;
   final int collapseAbove;
+  final bool collapsible;
+  final ValueChanged<String>? onLink;
+  final Color? color;
 
   const MarkupText({
     super.key,
     required this.text,
     this.collapsedLines = 6,
     this.collapseAbove = 320,
+    this.collapsible = true,
+    this.onLink,
+    this.color,
   });
 
   @override
@@ -20,6 +27,9 @@ class MarkupText extends StatefulWidget {
 }
 
 class _MarkupTextState extends State<MarkupText> {
+  static final _embed = RegExp(
+    r'img\d*%?\(([^)\s]+)\)|\[([^\]]+)\]\(([^)\s]+)\)|(https?://[^\s)<>]+)',
+  );
   static final _spoiler = RegExp(r'~!(.*?)!~', dotAll: true);
   static final _bold = RegExp(r'(__|\*\*)(.+?)\1', dotAll: true);
   static final _italic = RegExp(r'(?<![\w])(_|\*)(?!\s)(.+?)(?<!\s)\1(?![\w])');
@@ -64,6 +74,65 @@ class _MarkupTextState extends State<MarkupText> {
   ]) {
     final spans = <InlineSpan>[];
     var cursor = 0;
+    for (final m in _embed.allMatches(text)) {
+      if (m.start > cursor) {
+        spans.addAll(_styled(text.substring(cursor, m.start), base, tap));
+      }
+      final image = m.group(1);
+      final label = m.group(2);
+      final url = m.group(3) ?? m.group(4);
+      if (image != null) {
+        spans.add(_imageSpan(image));
+      } else if (url != null) {
+        final recognizer = TapGestureRecognizer()
+          ..onTap = () => (widget.onLink ?? openLinkInBrowser)(url);
+        _recognizers.add(recognizer);
+        spans.add(
+          TextSpan(
+            text: label ?? url,
+            recognizer: recognizer,
+            mouseCursor: SystemMouseCursors.click,
+            style: base.copyWith(
+              color: context.colorScheme.primary,
+              decoration: TextDecoration.underline,
+              decorationColor: context.colorScheme.primary,
+            ),
+          ),
+        );
+      }
+      cursor = m.end;
+    }
+    if (cursor < text.length) {
+      spans.addAll(_styled(text.substring(cursor), base, tap));
+    }
+    return spans;
+  }
+
+  InlineSpan _imageSpan(String url) => WidgetSpan(
+    alignment: PlaceholderAlignment.middle,
+    child: Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 320, maxHeight: 320),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(10),
+          child: Image.network(
+            url,
+            fit: BoxFit.contain,
+            errorBuilder: (_, _, _) => const SizedBox.shrink(),
+          ),
+        ),
+      ),
+    ),
+  );
+
+  List<InlineSpan> _styled(
+    String text,
+    TextStyle base, [
+    GestureRecognizer? tap,
+  ]) {
+    final spans = <InlineSpan>[];
+    var cursor = 0;
     for (final m in _bold.allMatches(text)) {
       if (m.start > cursor) {
         spans.addAll(_italics(text.substring(cursor, m.start), base, tap));
@@ -93,6 +162,7 @@ class _MarkupTextState extends State<MarkupText> {
             text: text.substring(cursor, m.start),
             style: base,
             recognizer: tap,
+            mouseCursor: tap == null ? null : SystemMouseCursors.click,
           ),
         );
       }
@@ -101,6 +171,7 @@ class _MarkupTextState extends State<MarkupText> {
           text: m.group(2),
           style: base.copyWith(fontStyle: FontStyle.italic),
           recognizer: tap,
+          mouseCursor: tap == null ? null : SystemMouseCursors.click,
         ),
       );
       cursor = m.end;
@@ -156,10 +227,10 @@ class _MarkupTextState extends State<MarkupText> {
   Widget build(BuildContext context) {
     _disposeRecognizers();
     final text = _clean(widget.text);
-    final long = text.length > widget.collapseAbove;
+    final long = widget.collapsible && text.length > widget.collapseAbove;
     final base = context.textTheme.bodyMedium!.copyWith(
       height: 1.55,
-      color: context.colorScheme.onSurface,
+      color: widget.color ?? context.colorScheme.onSurface,
     );
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

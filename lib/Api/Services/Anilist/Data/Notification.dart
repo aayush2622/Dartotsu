@@ -36,7 +36,9 @@ ServiceNotification? parseAnilistNotification(Map<String, dynamic> json) {
         mediaId: (media?['id'] as num?)?.toInt().toString(),
       );
     case 'FollowingNotification':
+    case 'ActivityMessageNotification':
     case 'ActivityMentionNotification':
+    case 'ActivityReplySubscribedNotification':
     case 'ActivityReplyNotification':
     case 'ActivityLikeNotification':
     case 'ActivityReplyLikeNotification':
@@ -47,6 +49,10 @@ ServiceNotification? parseAnilistNotification(Map<String, dynamic> json) {
         text: '$name $context'.trim(),
         imageUrl: avatar(user),
         createdAt: createdAt,
+        userId:
+            (json['userId'] as num?)?.toInt().toString() ??
+            (user?['id'] as num?)?.toInt().toString(),
+        activityId: (json['activityId'] as num?)?.toInt().toString(),
       );
     default:
       return null;

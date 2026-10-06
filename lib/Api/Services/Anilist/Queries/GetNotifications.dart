@@ -25,11 +25,13 @@ query ($page: Int) {
       __typename
       ... on AiringNotification { id type episode createdAt media { id title { userPreferred } coverImage { large } } }
       ... on RelatedMediaAdditionNotification { id type createdAt media { id title { userPreferred } coverImage { large } } }
-      ... on FollowingNotification { id type context createdAt user { name avatar { large } } }
-      ... on ActivityMentionNotification { id type context createdAt user { name avatar { large } } }
-      ... on ActivityReplyNotification { id type context createdAt user { name avatar { large } } }
-      ... on ActivityLikeNotification { id type context createdAt user { name avatar { large } } }
-      ... on ActivityReplyLikeNotification { id type context createdAt user { name avatar { large } } }
+      ... on FollowingNotification { id type userId context createdAt user { id name avatar { large } } }
+      ... on ActivityMessageNotification { id type userId activityId context createdAt user { id name avatar { large } } }
+      ... on ActivityMentionNotification { id type userId activityId context createdAt user { id name avatar { large } } }
+      ... on ActivityReplyNotification { id type userId activityId context createdAt user { id name avatar { large } } }
+      ... on ActivityReplySubscribedNotification { id type userId activityId context createdAt user { id name avatar { large } } }
+      ... on ActivityLikeNotification { id type userId activityId context createdAt user { id name avatar { large } } }
+      ... on ActivityReplyLikeNotification { id type userId activityId context createdAt user { id name avatar { large } } }
     }
   }
 }

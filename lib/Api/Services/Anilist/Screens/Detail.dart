@@ -6,6 +6,7 @@ import '../Data/Media.dart';
 import '../Data/User.dart';
 import '../Widgets/DetailStats.dart';
 import '../Widgets/FollowersShelf.dart';
+import '../Widgets/StudioChip.dart';
 
 class AnilistDetailView extends DetailScreenView {
   AnilistDetailView(super.service);
@@ -29,8 +30,19 @@ class AnilistDetailView extends DetailScreenView {
     return [
       ScreenWidget.extra(AnilistDetailStats(host)),
       if (description.isNotEmpty)
-        ScreenWidget.data('Synopsis', ScreenData(text: description.stripHtml)),
+        ScreenWidget.data(
+          'Synopsis',
+          ScreenData(
+            html: description.contains('<')
+                ? description
+                : description.replaceAll('\n', '<br>'),
+          ),
+        ),
       ..._info(m),
+      if (m.anime?.studio != null)
+        ScreenWidget.extra(
+          StudioChip(service: service, studio: m.anime!.studio!),
+        ),
       ..._names(m),
       if (m.genres.isNotEmpty)
         ScreenWidget.data(
@@ -95,6 +107,7 @@ class AnilistDetailView extends DetailScreenView {
           media: m,
           users: users,
           me: anilistAuth.user.value?.name,
+          service: service,
         ),
       ),
     ];

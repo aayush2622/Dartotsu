@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../Core/Services/MediaServiceController.dart';
@@ -8,6 +11,7 @@ import '../../Utils/Functions/GetXFunctions.dart';
 import '../Feed/FeedNavigation.dart';
 import '../../Utils/Functions/NavigateToScreen.dart';
 import '../MediaList/MediaListScreen.dart';
+import '../Social/SocialNavigation.dart';
 import 'Components/AccountSheet.dart';
 import 'Components/BellButton.dart';
 import 'Components/HeaderAvatar.dart';
@@ -74,6 +78,17 @@ class HomeHeader extends StatelessWidget {
                   BellButton(
                     unread: user.unreadNotifications,
                     onOpen: () => openNotifications(context, service),
+                    onLongPress: service.socialView == null
+                        ? null
+                        : () => openActivityFeed(context, service),
+                  ),
+                if (user != null && service.socialView != null)
+                  IconButton(
+                    tooltip: 'Activity',
+                    icon: const Icon(Icons.forum_outlined),
+                    onPressed: () => openActivityFeed(context, service),
+                    onLongPress: () =>
+                        openProfile(context, service, id: '${user.id}', tab: 1),
                   ),
                 if (service.searchView != null)
                   IconButton(
@@ -84,6 +99,12 @@ class HomeHeader extends StatelessWidget {
                 HeaderAvatar(
                   url: user?.avatar,
                   onTap: () => showAccountSheet(context, _controller),
+                  onLongPress: user == null || service.socialView == null
+                      ? null
+                      : () {
+                          unawaited(HapticFeedback.mediumImpact());
+                          openProfile(context, service, id: '${user.id}');
+                        },
                 ),
               ],
             ),
@@ -99,6 +120,14 @@ class HomeHeader extends StatelessWidget {
                         context,
                         MediaListScreen(service: service, anime: true),
                       ),
+                      onLongPress: service.socialView == null
+                          ? null
+                          : () => openProfile(
+                              context,
+                              service,
+                              id: '${user.id}',
+                              tab: 2,
+                            ),
                     ),
                     const SizedBox(width: 8),
                     HeaderStatPill(
@@ -108,6 +137,14 @@ class HomeHeader extends StatelessWidget {
                         context,
                         MediaListScreen(service: service, anime: false),
                       ),
+                      onLongPress: service.socialView == null
+                          ? null
+                          : () => openProfile(
+                              context,
+                              service,
+                              id: '${user.id}',
+                              tab: 2,
+                            ),
                     ),
                   ],
                 ),

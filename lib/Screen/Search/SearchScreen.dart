@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+
+import '../../Utils/Extensions/ClickCursor.dart';
 import 'package:get/get.dart' hide ContextExtensionss;
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -30,6 +32,8 @@ import '../../Widgets/Shelf/MediaRows.dart';
 import '../../Widgets/Shelf/PosterCard.dart';
 import '../Detail/DetailScreen.dart';
 import '../Feed/FeedNavigation.dart';
+import '../Social/Components/UserCard.dart';
+import '../Social/SocialNavigation.dart';
 import 'Components/SearchFilterSheet.dart';
 import '../../Widgets/Components/EmptyState.dart';
 import '../Detail/ListEditorSheet.dart';
@@ -233,6 +237,10 @@ class _SearchScreenState extends BaseScreen<SearchScreen> {
       return;
     }
     final service = find<MediaServiceController>().currentService.value;
+    if (service.entityView != null && item is Studio) {
+      openEntity(context, service, EntityKind.studio, item.id, name: item.name);
+      return;
+    }
     if (service.entityView != null && (item is Character || item is Author)) {
       final character = item is Character ? item : null;
       final staff = item is Author ? item : null;
@@ -243,6 +251,15 @@ class _SearchScreenState extends BaseScreen<SearchScreen> {
         (character?.id ?? staff!.id),
         name: character?.name ?? staff?.name,
         image: character?.image ?? staff?.image,
+      );
+      return;
+    }
+    if (service.socialView != null && item is User) {
+      openProfile(
+        context,
+        service,
+        id: '${item.id}',
+        user: UserBrief(id: '${item.id}', name: item.name, avatar: item.pfp),
       );
       return;
     }
@@ -345,6 +362,7 @@ class _SearchScreenState extends BaseScreen<SearchScreen> {
             itemCount: types.length,
             separatorBuilder: (_, _) => const SizedBox(width: 8),
             itemBuilder: (_, i) => ChoiceChip(
+              mouseCursor: kClickCursor,
               label: Text(_label(types[i])),
               selected: selected == types[i],
               showCheckmark: false,
@@ -358,6 +376,7 @@ class _SearchScreenState extends BaseScreen<SearchScreen> {
 
   Widget _checkbox(String label, bool value, ValueChanged<bool> onChanged) =>
       InkWell(
+        mouseCursor: kClickCursor,
         borderRadius: BorderRadius.circular(12),
         onTap: () => onChanged(!value),
         child: Padding(
@@ -420,6 +439,7 @@ class _SearchScreenState extends BaseScreen<SearchScreen> {
                           itemCount: chips.length,
                           separatorBuilder: (_, _) => const SizedBox(width: 6),
                           itemBuilder: (_, i) => InputChip(
+                            mouseCursor: kClickCursor,
                             label: Text(chips[i].text.replaceAll('_', ' ')),
                             onDeleted: () => _removeChip(chips[i]),
                             visualDensity: VisualDensity.compact,
@@ -640,7 +660,19 @@ class _SearchScreenState extends BaseScreen<SearchScreen> {
         subtitle: s.favourites == null ? null : '${s.favourites} favourites',
         onTap: () => _open(s, ''),
       ),
-      User u => _userTile(u),
+      User u =>
+        find<MediaServiceController>().currentService.value.socialView != null
+            ? UserCard(
+                wide: true,
+                service: find<MediaServiceController>().currentService.value,
+                user: UserBrief(
+                  id: '${u.id}',
+                  name: u.name,
+                  avatar: u.pfp,
+                  banner: u.banner,
+                ),
+              )
+            : _userTile(u),
       _ => const SizedBox.shrink(),
     };
   }
@@ -753,7 +785,7 @@ class _SearchScreenState extends BaseScreen<SearchScreen> {
             padding: padding,
             gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
               maxCrossAxisExtent: 360,
-              mainAxisExtent: 72,
+              mainAxisExtent: _type.value == SearchType.USER ? 92 : 72,
               crossAxisSpacing: Dimens.gap,
               mainAxisSpacing: Dimens.gapSm,
             ),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../Core/Services/MediaService.dart';
+import '../../../../Screen/Social/SocialNavigation.dart';
 import '../../../../Core/Services/Model/Media.dart';
 import '../../../../Core/Services/Model/User.dart';
 import '../../../../Utils/Extensions/ContextExtensions.dart';
@@ -14,12 +16,14 @@ class FollowersShelf extends StatelessWidget {
   final Media media;
   final List<User> users;
   final String? me;
+  final MediaService? service;
 
   const FollowersShelf({
     super.key,
     required this.media,
     required this.users,
     this.me,
+    this.service,
   });
 
   @override
@@ -43,6 +47,18 @@ class FollowersShelf extends StatelessWidget {
               user: ordered[i],
               media: media,
               isMe: ordered[i].name == me,
+              onTap: service == null
+                  ? null
+                  : () => openProfile(
+                      context,
+                      service!,
+                      id: '${ordered[i].id}',
+                      user: UserBrief(
+                        id: '${ordered[i].id}',
+                        name: ordered[i].name,
+                        avatar: ordered[i].pfp,
+                      ),
+                    ),
             ),
           ),
         ),
@@ -55,11 +71,13 @@ class _Follower extends StatelessWidget {
   final User user;
   final Media media;
   final bool isMe;
+  final VoidCallback? onTap;
 
   const _Follower({
     required this.user,
     required this.media,
     required this.isMe,
+    this.onTap,
   });
 
   String get _status => user.status == 'CURRENT'
@@ -71,7 +89,7 @@ class _Follower extends StatelessWidget {
     final scheme = context.colorScheme;
     final score = user.score ?? 0;
     return DpadFocusable(
-      onSelect: () {},
+      onSelect: onTap ?? () {},
       builder: dpadScaleFocus,
       child: SizedBox(
         width: 92,

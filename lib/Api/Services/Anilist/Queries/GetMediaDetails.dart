@@ -40,7 +40,7 @@ String _queryMediaDetails(Media media) =>
   Media(id: ${media.id}) {
     id idMal favourites popularity meanScore episodes chapters duration
     isFavourite siteUrl source countryOfOrigin format season seasonYear
-    bannerImage genres synonyms description(asHtml: false)
+    bannerImage genres synonyms description(asHtml: true)
     coverImage { large extraLarge }
     title { english romaji userPreferred native }
     startDate { year month day }

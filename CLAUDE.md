@@ -31,8 +31,7 @@ on live AniList GraphQL. The service read/write surface was split into `main`-st
 subfolder.
 `flutter analyze` clean; `flutter build linux` + `flutter run -d linux` verified each step. `ExtensionService` is still
 an id/name/icon shell → every screen renders `NotImplemented`. **Not built:** watch/read
-(extension sources, player, reader), MAL/Simkl subclasses, calendar, profile/character pages,
-offline. The worktree usually carries large **uncommitted WIP ahead of the committed
+(extension sources, player, reader), MAL/Simkl subclasses, calendar, offline. The worktree usually carries large **uncommitted WIP ahead of the committed
 branch** — run `git status` first.
 
 ## Commands
@@ -291,9 +290,21 @@ Entry flow: `OnboardingScreen` (welcome / theme / sync) → `LoginScreen` (drive
   (shared) = a search field over `SettingsAdaptor` — the top screen searches every category at
   once (flat, headered), a sub-screen just its own.
 
+### Social (profiles, activity, stories)
+
+`MediaService.socialView` (`SocialScreenView`, data-only, in `ServiceScreens.dart`; models in
+`Core/Services/Model/Social.dart`) serves user profiles, favourites, follows, activity feeds,
+replies, likes, posting, stats and stories; `AnilistSocialView` implements it over
+`AnilistQueries`/`AnilistMutations` (`Queries/GetSocialData.dart`, `Mutations/Social.dart`,
+`Data/Social.dart`). UI lives in `Screen/Social/`: `ProfileScreen` (collapsing header + Profile /
+Feed / Stats tabs), `ActivityFeedScreen`, `FollowScreen`, `Components/` (`ActivityCard`,
+`ActivityList`, `ActivityComposer`, `RepliesSheet`, `UserListSheet`) and `Stories/`
+(`StoriesRow` on Home, `StoryViewer`, `StorySeen`). Navigate with `SocialNavigation.dart`
+(`openProfile`, `openFollows`, `openActivityFeed`, `openAppLink`). Studios are the third
+`EntityKind` next to character and staff.
+
 **Not built yet:** watch/read (extension sources, player, reader), MAL / Simkl services
-(the abstraction is ready — they're just unwritten subclasses), calendar, character/staff/
-profile pages, offline.
+(the abstraction is ready — they're just unwritten subclasses), calendar, offline.
 
 ### Models
 
@@ -420,6 +431,15 @@ defines `handleError(e, st, {softCrash})` (called from the zone handler in `main
   bare Material widgets**: `AppSegmented<T>` (+ `AppSegment<T>`), `LabeledSlider`,
   `AppChoiceChips<T>`, `LabeledField` (label above a child). Used by the card-style screen,
   search Anime/Manga toggle, settings theme-mode, list editor.
+- **`Widgets/Components/AniHtml.dart`** — **the** renderer for any AniList-style rich text
+  (bios, activities, replies, character/staff/media descriptions, story text). Feed it the
+  service's *HTML* (`about(asHtml: true)`, aliased `html:` next to the raw markdown that edits
+  need). Handles images (px / % widths), links, spoilers (inline + block), headings, lists, code,
+  quotes, `<center>`, YouTube/video tiles, media-link cards (`aniLinkCards(service)`) and a
+  built-in "Read more" via `collapsedHeight`. `MarkupText` stays only for raw markdown (composer
+  preview, services without HTML).
+- **`Widgets/Charts/`** — `DonutChart`, `ColumnChart`, `LineChart`, `RadarChart`, `ActivityHeatmap`
+  (custom-painted, animated, hover/tap tooltips); used by the profile Stats tab.
 - **`Widgets/Shelf/ShelfFrame.dart`** — the panel + title row every horizontal shelf sits
   in (trending media, the viewer's lists, characters, staff, relations, recommendations). One
   chrome so a feed / detail page reads as a single stack. `MediaSection` and `PeopleShelf`

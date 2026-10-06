@@ -4,6 +4,7 @@ import 'package:get/get.dart' hide ContextExtensionss;
 import '../../Core/Services/MediaService.dart';
 import '../Feed/FeedNavigation.dart';
 import '../Feed/ScreenWidgetList.dart';
+import '../Social/Stories/StoriesRow.dart';
 import 'Components/LoginPrompt.dart';
 import 'HomeHeader.dart';
 import '../Detail/ListEditorSheet.dart';
@@ -29,6 +30,11 @@ class HomeFeed extends StatelessWidget {
         children: [
           const HomeHeader(),
           if (!signedIn && service.auth != null) LoginPrompt(service: service),
+          if (signedIn && (service.socialView?.hasStories ?? false))
+            StoriesRow(
+              key: ValueKey('stories-${service.id}'),
+              service: service,
+            ),
         ],
       ),
       loader: view.screenStream,

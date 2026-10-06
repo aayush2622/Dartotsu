@@ -21,11 +21,15 @@ import '../../Widgets/Components/AppTabs.dart';
 class MediaListScreen extends StatefulWidget {
   final MediaService service;
   final bool anime;
+  final String? userId;
+  final String? userName;
 
   const MediaListScreen({
     super.key,
     required this.service,
     required this.anime,
+    this.userId,
+    this.userName,
   });
 
   @override
@@ -61,7 +65,7 @@ class _MediaListScreenState extends BaseScreen<MediaListScreen>
     try {
       final lists = await queries.getMediaLists(
         anime: widget.anime,
-        userId: user?.id,
+        userId: widget.userId == null ? user?.id : int.tryParse(widget.userId!),
       );
       if (!mounted) return;
       setState(() {
@@ -95,9 +99,9 @@ class _MediaListScreenState extends BaseScreen<MediaListScreen>
 
   @override
   Widget buildContent(BuildContext context) {
-    final user = widget.service.auth?.user.value;
+    final owner = widget.userName ?? widget.service.auth?.user.value?.name;
     final kind = widget.anime ? 'Anime' : 'Manga';
-    final title = user == null ? '$kind list' : "${user.name}'s $kind list";
+    final title = owner == null ? '$kind list' : "$owner's $kind list";
     return Scaffold(
       backgroundColor: Colors.transparent,
       appBar: AppScreenBar(title: title),

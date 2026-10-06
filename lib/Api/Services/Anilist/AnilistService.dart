@@ -8,6 +8,7 @@ import 'Screens/Home.dart';
 import 'Screens/Notifications.dart';
 import 'Screens/Search.dart';
 import 'Screens/Settings.dart';
+import 'Screens/Social.dart';
 
 const anilistServiceId = 'anilist';
 
@@ -51,6 +52,9 @@ class AnilistService extends MediaService {
 
   @override
   EntityScreenView get entityView => AnilistEntityView(this);
+
+  @override
+  SocialScreenView get socialView => AnilistSocialView(this);
 
   @override
   NotificationScreenView get notificationView => AnilistNotificationView();

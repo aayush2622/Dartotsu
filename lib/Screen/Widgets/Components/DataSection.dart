@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+
+import '../../../Utils/Extensions/ClickCursor.dart';
 import 'package:get/get.dart' hide ContextExtensionss;
 
-import '../../../Core/Services/Screens/ScreenWidget.dart';
 import '../../../Utils/Extensions/ContextExtensions.dart';
 import '../../../Utils/Extensions/Responsive.dart';
 import '../../Detail/Components/StatusChip.dart';
+import '../../../Widgets/Components/AniHtml.dart';
+import '../../../Core/Services/MediaServiceController.dart';
+import '../../../Utils/Functions/GetXFunctions.dart';
+import '../../Social/Components/AniMediaCard.dart';
+import '../../Social/SocialNavigation.dart';
 import 'ExpandableText.dart';
 
 const kStatusRowLabel = 'Status';
@@ -15,6 +21,9 @@ class DataSection extends StatelessWidget {
   final _expanded = false.obs;
 
   DataSection({super.key, this.title, required this.data});
+
+  MediaService get _service =>
+      find<MediaServiceController>().currentService.value;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +42,15 @@ class DataSection extends StatelessWidget {
             ),
             SizedBox(height: Dimens.gapSm),
           ],
-          if (text.isNotEmpty) ExpandableText(text: text),
+          if (data.html != null && data.html!.trim().isNotEmpty)
+            AniHtml(
+              html: data.html!,
+              collapsedHeight: 150,
+              onLink: (url) => openAppLink(context, _service, url),
+              linkCard: aniLinkCards(_service),
+            )
+          else if (text.isNotEmpty)
+            ExpandableText(text: text),
           if (data.chips.isNotEmpty) _chips(context),
           if (data.rows.isNotEmpty) _grid(context),
         ],
@@ -98,6 +115,7 @@ class DataSection extends StatelessWidget {
         children: [
           for (final chip in shown)
             ActionChip(
+              mouseCursor: kClickCursor,
               label: Text(chip),
               labelStyle: context.textTheme.labelLarge,
               visualDensity: VisualDensity.compact,

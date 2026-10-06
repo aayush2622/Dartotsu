@@ -14,10 +14,15 @@ import '../../Extension/ExtensionScreen.dart';
 import '../../Feed/FeedNavigation.dart';
 import '../../Login/LoginScreen.dart';
 import '../../Settings/SettingsScreen.dart';
+import '../../Social/ActivityFeedScreen.dart';
+import '../../Social/ProfileScreen.dart';
 import 'BellButton.dart';
 import 'HeaderAvatar.dart';
 
 void showAccountSheet(BuildContext context, MediaServiceController controller) {
+  final service = controller.currentService.value;
+  final me = service.socialView?.currentUserId;
+  final social = service.socialView != null && service.isLoggedIn && me != null;
   showCustomBottomDialog(
     context,
     CustomBottomDialog(
@@ -29,6 +34,20 @@ void showAccountSheet(BuildContext context, MediaServiceController controller) {
           padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
           child: _Group(
             children: [
+              if (social) ...[
+                _Destination(
+                  icon: Icons.person_rounded,
+                  title: 'Your profile',
+                  sheetContext: context,
+                  open: ProfileScreen(service: service, id: me),
+                ),
+                _Destination(
+                  icon: Icons.forum_rounded,
+                  title: 'Activity',
+                  sheetContext: context,
+                  open: ActivityFeedScreen(service: service),
+                ),
+              ],
               _Destination(
                 icon: Icons.extension_rounded,
                 title: 'Extensions',

@@ -10,6 +10,7 @@ enum ScreenWidgetType { media, character, staff, data, settings, extra }
 
 class ScreenData {
   final String? text;
+  final String? html;
   final List<String> chips;
   final int chipLimit;
   final List<(String, String)> rows;
@@ -20,6 +21,7 @@ class ScreenData {
     this.onChipTap,
     this.columns,
     this.text,
+    this.html,
     this.chips = const [],
     this.chipLimit = 12,
     this.rows = const [],

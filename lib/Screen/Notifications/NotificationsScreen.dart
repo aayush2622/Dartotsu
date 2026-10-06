@@ -16,6 +16,7 @@ import '../../Widgets/Components/BaseScreen.dart';
 import '../../Widgets/Components/CachedNetworkImage.dart';
 import '../../Widgets/Components/SectionCard.dart';
 import '../Detail/DetailScreen.dart';
+import '../Social/SocialNavigation.dart';
 import '../../Widgets/Components/ScrollConfig.dart';
 import '../../Widgets/Components/EmptyState.dart';
 
@@ -37,8 +38,41 @@ class _NotificationsScreenState extends BaseScreen<NotificationsScreen> {
     _load();
   }
 
+  var _page = 1;
+  var _hasMore = true;
+  final _loadingMore = false.obs;
+
+  Future<void> _more() async {
+    if (_loadingMore.value || _loading.value || !_hasMore) return;
+    _loadingMore.value = true;
+    try {
+      final next = await widget.view.notifications(page: _page + 1);
+      final known = {for (final n in _items) n.id};
+      final fresh = next.where((n) => !known.contains(n.id)).toList();
+      if (fresh.isEmpty) {
+        _hasMore = false;
+      } else {
+        _items.addAll(fresh);
+        _page++;
+      }
+    } catch (_) {
+      _hasMore = false;
+    } finally {
+      _loadingMore.value = false;
+    }
+  }
+
+  bool _onScroll(ScrollNotification n) {
+    if (n.metrics.axis == Axis.vertical && n.metrics.extentAfter < 500) {
+      unawaited(_more());
+    }
+    return false;
+  }
+
   Future<void> _load() async {
     _loading.value = true;
+    _page = 1;
+    _hasMore = true;
     try {
       _items.value = await widget.view.notifications();
       final auth = find<MediaServiceController>().currentService.value.auth;
@@ -64,34 +98,42 @@ class _NotificationsScreenState extends BaseScreen<NotificationsScreen> {
               title: 'Nothing new',
             );
           }
-          return ScrollConfig(
-            context,
-            child: ListView(
-              padding: EdgeInsets.fromLTRB(
-                Dimens.gap,
-                Dimens.gapXs,
-                Dimens.gap,
-                Dimens.gapXl,
-              ),
-              children: [
-                for (final group in _grouped()) ...[
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(
-                      Dimens.gapSm,
-                      Dimens.gap,
-                      Dimens.gapSm,
-                      Dimens.gapSm,
-                    ),
-                    child: Text(
-                      group.$1,
-                      style: context.textTheme.labelLarge?.copyWith(
-                        color: context.colorScheme.primary,
+          return NotificationListener<ScrollNotification>(
+            onNotification: _onScroll,
+            child: ScrollConfig(
+              context,
+              child: ListView(
+                padding: EdgeInsets.fromLTRB(
+                  Dimens.gap,
+                  Dimens.gapXs,
+                  Dimens.gap,
+                  Dimens.gapXl,
+                ),
+                children: [
+                  for (final group in _grouped()) ...[
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(
+                        Dimens.gapSm,
+                        Dimens.gap,
+                        Dimens.gapSm,
+                        Dimens.gapSm,
+                      ),
+                      child: Text(
+                        group.$1,
+                        style: context.textTheme.labelLarge?.copyWith(
+                          color: context.colorScheme.primary,
+                        ),
                       ),
                     ),
-                  ),
-                  for (final n in group.$2) _row(n),
+                    for (final n in group.$2) _row(n),
+                  ],
+                  if (_loadingMore.value)
+                    const Padding(
+                      padding: EdgeInsets.all(24),
+                      child: Center(child: CircularProgressIndicator()),
+                    ),
                 ],
-              ],
+              ),
             ),
           );
         }),
@@ -111,7 +153,9 @@ class _NotificationsScreenState extends BaseScreen<NotificationsScreen> {
           clipBehavior: Clip.antiAlias,
           child: DpadTap(
             borderRadius: Dimens.border,
-            onTap: n.mediaId == null ? null : () => _open(n),
+            onTap: n.mediaId == null && n.activityId == null && n.userId == null
+                ? null
+                : () => _open(n),
             child: Padding(
               padding: EdgeInsets.all(Dimens.gapSm + 2),
               child: Row(
@@ -173,6 +217,15 @@ class _NotificationsScreenState extends BaseScreen<NotificationsScreen> {
 
   void _open(ServiceNotification n) {
     final service = find<MediaServiceController>().currentService.value;
+    if (n.mediaId == null) {
+      if (n.activityId != null) {
+        return openActivityFeed(context, service, activityId: n.activityId);
+      }
+      if (n.userId != null) {
+        return openProfile(context, service, id: n.userId);
+      }
+      return;
+    }
     navigateToPage(
       context,
       DetailScreen(

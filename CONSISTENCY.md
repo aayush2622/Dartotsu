@@ -26,6 +26,14 @@ call is usually a sign a wrapper was skipped, not that one doesn't exist.
   button row) → `CustomBottomDialog` / `showCustomBottomDialog<T>()`
   (`Widgets/Components/CustomBottomDialog.dart`). Don't hand-roll a `ThemedContainer` +
   manual drag handle + manual title `Text` — that's exactly what this widget is.
+- A sheet that owns its scroll body or a text field (composer, replies, user lists, option
+  pickers) → `AppSheet` (`Widgets/Components/AppSheet.dart`): same handle + title chrome, keyboard
+  inset aware, optional fixed `heightFactor`. Use it with `showCustomBottomDialog`; don't copy the
+  chrome again.
+- Anything custom that is tappable (avatars, story cards, text links built from a
+  `GestureDetector`) → `Clickable` (`Widgets/Components/Clickable.dart`): mouse click cursor +
+  a subtle press scale. `DpadFocusable` and `DpadTap` already set the click cursor; a bare
+  `GestureDetector` never does, so don't use one for something the user can tap.
 - A selectable row inside a sheet (language picker, font picker, any "pick one of these"
   list) → `SheetTile` (`Widgets/Components/SheetTile.dart`), not a bare `ListTile`. It already
   handles the selected-pill background, M3 colors, and the trailing check icon.
