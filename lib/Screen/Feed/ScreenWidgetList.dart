@@ -373,7 +373,9 @@ class _ScreenWidgetListState extends State<ScreenWidgetList>
                   SliverToBoxAdapter(
                     key: ValueKey('spotlight-${item.title}'),
                     child: _chipLoading.value
-                        ? const MediaSection(data: MediaSectionData.loading())
+                        ? const MediaSection(
+                            data: MediaSectionData(type: 1, loading: true),
+                          )
                         : MediaSection(
                             data: MediaSectionData(
                               type: 1,

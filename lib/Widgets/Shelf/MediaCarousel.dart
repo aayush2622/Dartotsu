@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../Core/Services/Model/Media.dart';
 import '../../Core/ThemeManager/ThemeController.dart';
@@ -65,14 +66,26 @@ class _MediaCarouselState extends State<MediaCarousel> {
   Widget build(BuildContext context) {
     final scheme = context.colorScheme;
     final items = _items;
-    if (widget.data.loading || items.isEmpty) {
-      return widget.data.loading
-          ? SizedBox(
+    if (widget.data.loading) {
+      return Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: Dimens.pagePad,
+          vertical: Dimens.gapSm,
+        ),
+        child: Skeletonizer(
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(Dimens.radius),
+            child: SizedBox(
               height: _height,
-              child: ColoredBox(color: scheme.surfaceContainerHigh),
-            )
-          : const SizedBox.shrink();
+              child: Skeleton.leaf(
+                child: ColoredBox(color: scheme.surfaceContainerHigh),
+              ),
+            ),
+          ),
+        ),
+      );
     }
+    if (items.isEmpty) return const SizedBox.shrink();
 
     return Padding(
       padding: EdgeInsets.symmetric(
