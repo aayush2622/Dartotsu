@@ -60,13 +60,6 @@ class HomeHeader extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        _timeGreeting(),
-                        style: context.textTheme.labelMedium?.copyWith(
-                          color: context.colorScheme.onSurfaceVariant,
-                        ),
-                      ),
-                      const SizedBox(height: 2),
-                      Text(
                         greeting,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
@@ -123,12 +116,5 @@ class HomeHeader extends StatelessWidget {
         );
       },
     );
-  }
-
-  static String _timeGreeting() {
-    final h = DateTime.now().hour;
-    if (h < 12) return 'Good morning';
-    if (h < 18) return 'Good afternoon';
-    return 'Good evening';
   }
 }
