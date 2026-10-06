@@ -7,10 +7,9 @@ import '../Core/Services/ServiceSwitcher.dart';
 import '../Utils/Animation/WidgetAnimations.dart';
 import '../Utils/Extensions/ContextExtensions.dart';
 import '../Utils/Functions/GetXFunctions.dart';
-import '../Utils/Functions/NavigateToScreen.dart';
 import '../Widgets/Components/LoadSvg.dart';
 import '../Widgets/Components/ThemedContainer.dart';
-import 'Settings/SettingsScreen.dart';
+import 'Home/Components/AccountSheet.dart';
 
 class FloatingBottomNavBar extends StatefulWidget {
   final int selectedIndex;
@@ -118,7 +117,7 @@ class _FloatingBottomNavBarState extends State<FloatingBottomNavBar> {
               if (!widget.standalone)
                 _navButton(
                   context: context,
-                  onTap: () => navigateToPage(context, const SettingsScreen()),
+                  onTap: () => showAccountSheet(context, _services),
                   iconBuilder: () => Icon(
                     Icons.settings_rounded,
                     size: 24,

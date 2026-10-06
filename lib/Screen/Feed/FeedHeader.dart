@@ -17,23 +17,25 @@ class FeedHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final services = find<MediaServiceController>();
+    final phone = context.isPhone;
     return Padding(
-      padding: const EdgeInsets.fromLTRB(12, 18, 12, 2),
+      padding: EdgeInsets.fromLTRB(phone ? 12 : 24, 18, 12, 2),
       child: Row(
         children: [
-          Obx(
-            () => IconButton(
-              tooltip: services.currentService.value.name,
-              icon: loadSvg(
-                services.currentService.value.iconPath,
-                width: 28,
-                height: 28,
-                color: context.colorScheme.onSurface,
+          if (phone)
+            Obx(
+              () => IconButton(
+                tooltip: services.currentService.value.name,
+                icon: loadSvg(
+                  services.currentService.value.iconPath,
+                  width: 28,
+                  height: 28,
+                  color: context.colorScheme.onSurface,
+                ),
+                onPressed: () => serviceSwitcher(context),
               ),
-              onPressed: () => serviceSwitcher(context),
             ),
-          ),
-          const SizedBox(width: 4),
+          if (phone) const SizedBox(width: 4),
           Expanded(
             child: Text(
               title,
@@ -47,10 +49,11 @@ class FeedHeader extends StatelessWidget {
               icon: const Icon(Icons.search_rounded),
               onPressed: onSearch,
             ),
-          IconButton(
-            icon: const Icon(Icons.settings_rounded),
-            onPressed: () => showAccountSheet(context, services),
-          ),
+          if (phone)
+            IconButton(
+              icon: const Icon(Icons.settings_rounded),
+              onPressed: () => showAccountSheet(context, services),
+            ),
         ],
       ),
     );
