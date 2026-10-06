@@ -57,41 +57,58 @@ class _MarkupTextState extends State<MarkupText> {
     return text.trim();
   }
 
-  List<InlineSpan> _inline(String text, TextStyle base) {
+  List<InlineSpan> _inline(
+    String text,
+    TextStyle base, [
+    GestureRecognizer? tap,
+  ]) {
     final spans = <InlineSpan>[];
     var cursor = 0;
     for (final m in _bold.allMatches(text)) {
       if (m.start > cursor) {
-        spans.addAll(_italics(text.substring(cursor, m.start), base));
+        spans.addAll(_italics(text.substring(cursor, m.start), base, tap));
       }
       spans.addAll(
-        _italics(m.group(2)!, base.copyWith(fontWeight: FontWeight.w700)),
+        _italics(m.group(2)!, base.copyWith(fontWeight: FontWeight.w700), tap),
       );
       cursor = m.end;
     }
     if (cursor < text.length) {
-      spans.addAll(_italics(text.substring(cursor), base));
+      spans.addAll(_italics(text.substring(cursor), base, tap));
     }
     return spans;
   }
 
-  List<InlineSpan> _italics(String text, TextStyle base) {
+  List<InlineSpan> _italics(
+    String text,
+    TextStyle base, [
+    GestureRecognizer? tap,
+  ]) {
     final spans = <InlineSpan>[];
     var cursor = 0;
     for (final m in _italic.allMatches(text)) {
       if (m.start > cursor) {
-        spans.add(TextSpan(text: text.substring(cursor, m.start), style: base));
+        spans.add(
+          TextSpan(
+            text: text.substring(cursor, m.start),
+            style: base,
+            recognizer: tap,
+          ),
+        );
       }
       spans.add(
         TextSpan(
           text: m.group(2),
           style: base.copyWith(fontStyle: FontStyle.italic),
+          recognizer: tap,
         ),
       );
       cursor = m.end;
     }
     if (cursor < text.length) {
-      spans.add(TextSpan(text: text.substring(cursor), style: base));
+      spans.add(
+        TextSpan(text: text.substring(cursor), style: base, recognizer: tap),
+      );
     }
     return spans;
   }
@@ -113,8 +130,8 @@ class _MarkupTextState extends State<MarkupText> {
             alpha: shown ? 0.12 : 0.35,
           ),
         ),
+        recognizer,
       ),
-      recognizer: recognizer,
     );
   }
 

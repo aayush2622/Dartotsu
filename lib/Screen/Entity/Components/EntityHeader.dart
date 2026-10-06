@@ -4,77 +4,151 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../../Core/Services/Screens/EntityHost.dart';
-import '../../../Core/ThemeManager/ThemeController.dart';
 import '../../../Utils/Extensions/ContextExtensions.dart';
 import '../../../Utils/Extensions/Responsive.dart';
 import '../../../Utils/Function.dart';
 import '../../../Utils/Functions/CopyToClip.dart';
-import '../../../Utils/Functions/GetXFunctions.dart';
 import '../../../Widgets/Components/AppBars.dart';
 import '../../../Widgets/Components/CachedNetworkImage.dart';
 
-class EntityHeader extends StatelessWidget {
-  static const _bannerHeight = 190.0;
+const _toolbarHeight = 56.0;
+
+class EntityHeaderDelegate extends SliverPersistentHeaderDelegate {
+  static const _contentHeight = 252.0;
+  static const collapseRange = _contentHeight;
   static const _portraitWidth = 128.0;
   static const _portraitHeight = 186.0;
 
   final EntityHost host;
+  final double top;
+  final bool glass;
   final bool canFavourite;
   final RxBool togglingFavourite;
   final VoidCallback onToggleFavourite;
 
-  const EntityHeader({
-    super.key,
+  EntityHeaderDelegate({
     required this.host,
+    required this.top,
+    required this.glass,
     required this.canFavourite,
     required this.togglingFavourite,
     required this.onToggleFavourite,
   });
 
   @override
-  Widget build(BuildContext context) {
+  double get maxExtent => top + _toolbarHeight + _contentHeight;
+
+  @override
+  double get minExtent => top + _toolbarHeight;
+
+  @override
+  bool shouldRebuild(EntityHeaderDelegate old) =>
+      old.top != top ||
+      old.glass != glass ||
+      old.host != host ||
+      old.canFavourite != canFavourite;
+
+  @override
+  Widget build(
+    BuildContext context,
+    double shrinkOffset,
+    bool overlapsContent,
+  ) {
+    final range = maxExtent - minExtent;
+    final t = (shrinkOffset / range).clamp(0.0, 1.0);
+    final scheme = context.colorScheme;
+    final width = MediaQuery.sizeOf(context).width;
+    final slideP = (t * 1.6).clamp(0.0, 1.0);
+    final labelP = ((t - 0.5) * 2).clamp(0.0, 1.0);
+
     return Obx(() {
       final profile = host.profile.value;
-      final glass = find<ThemeController>().useGlassMode.value;
-      final top = MediaQuery.paddingOf(context).top;
-      return Stack(
-        children: [
-          if (!glass && profile.image != null)
+      return ClipRect(
+        child: Stack(
+          clipBehavior: Clip.none,
+          children: [
+            Positioned.fill(
+              child: ColoredBox(
+                color: scheme.surface.withValues(
+                  alpha: glass ? 0.85 * ((t - 0.9) * 10).clamp(0.0, 1.0) : t,
+                ),
+              ),
+            ),
+            if (!glass && profile.image != null)
+              Positioned.fill(
+                child: Opacity(
+                  opacity: 1 - t,
+                  child: _banner(context, profile.image!),
+                ),
+              ),
             Positioned(
-              top: 0,
               left: 0,
               right: 0,
-              height: _bannerHeight + top,
-              child: _banner(context, profile.image!),
+              bottom: 0,
+              height: _contentHeight,
+              child: Opacity(
+                opacity: 1 - slideP,
+                child: Transform.translate(
+                  offset: Offset(-width * slideP, 0),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: Dimens.pagePad),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _portrait(context, profile.image),
+                        SizedBox(width: Dimens.gap),
+                        Expanded(
+                          child: SingleChildScrollView(
+                            physics: const NeverScrollableScrollPhysics(),
+                            child: _info(context, profile),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
             ),
-          Padding(
-            padding: EdgeInsets.only(top: top + 56),
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: Dimens.pagePad),
+            Positioned(
+              left: 56,
+              right: 56,
+              top: top,
+              height: _toolbarHeight,
+              child: IgnorePointer(
+                child: Opacity(
+                  opacity: labelP,
+                  child: Transform.translate(
+                    offset: Offset(48 * (1 - labelP), 0),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        profile.name,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: context.textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Positioned(
+              top: top,
+              left: 6,
+              right: 6,
+              height: _toolbarHeight,
               child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _portrait(context, profile.image),
-                  SizedBox(width: Dimens.gap),
-                  Expanded(child: _info(context, profile)),
+                  const AppBackButton(),
+                  const Spacer(),
+                  if (profile.url != null) _menu(context, profile.url!),
                 ],
               ),
             ),
-          ),
-          Positioned(
-            top: top,
-            left: 6,
-            right: 6,
-            height: 56,
-            child: Row(
-              children: [
-                const AppBackButton(),
-                const Spacer(),
-                if (profile.url != null) _menu(context, profile.url!),
-              ],
-            ),
-          ),
-        ],
+          ],
+        ),
       );
     });
   }
@@ -84,9 +158,23 @@ class EntityHeader extends StatelessWidget {
     return Stack(
       fit: StackFit.expand,
       children: [
-        ImageFiltered(
-          imageFilter: ImageFilter.blur(sigmaX: 14, sigmaY: 14),
-          child: cachedNetworkImage(imageUrl: url, fit: BoxFit.cover),
+        Positioned(
+          left: -40,
+          right: -40,
+          top: -40,
+          bottom: -40,
+          child: ImageFiltered(
+            imageFilter: ImageFilter.blur(
+              sigmaX: 14,
+              sigmaY: 14,
+              tileMode: TileMode.clamp,
+            ),
+            child: cachedNetworkImage(
+              imageUrl: url,
+              fit: BoxFit.cover,
+              cacheWidth: 720,
+            ),
+          ),
         ),
         DecoratedBox(
           decoration: BoxDecoration(
@@ -126,7 +214,7 @@ class EntityHeader extends StatelessWidget {
   Widget _info(BuildContext context, EntityProfile profile) {
     final scheme = context.colorScheme;
     return Padding(
-      padding: const EdgeInsets.only(top: _bannerHeight - 108),
+      padding: const EdgeInsets.only(top: 40),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

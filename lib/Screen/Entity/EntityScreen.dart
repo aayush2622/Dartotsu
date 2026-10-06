@@ -5,6 +5,7 @@ import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../Core/Services/MediaService.dart';
 import '../../Core/ThemeManager/ThemeController.dart';
+import '../../Utils/Animation/WidgetAnimations.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Extensions/Responsive.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
@@ -46,6 +47,8 @@ class _EntityScreenState extends BaseScreen<EntityScreen> {
   final _error = RxnString();
   final _toggling = false.obs;
   final _spoilerNames = false.obs;
+  final _scroll = ScrollController();
+  Timer? _snapTimer;
 
   MediaService get _service => widget.view.service;
 
@@ -83,6 +86,7 @@ class _EntityScreenState extends BaseScreen<EntityScreen> {
       ),
       search: (q) => openSearch(context, _service, query: q),
     );
+    _scroll.addListener(_scheduleSnap);
     final theme = find<ThemeController>();
     theme.cover.set(this, _host.profile.value.image);
     unawaited(_load());
@@ -90,8 +94,31 @@ class _EntityScreenState extends BaseScreen<EntityScreen> {
 
   @override
   void dispose() {
+    _snapTimer?.cancel();
+    _scroll.dispose();
     find<ThemeController>().cover.clear(this);
     super.dispose();
+  }
+
+  void _scheduleSnap() {
+    _snapTimer?.cancel();
+    _snapTimer = Timer(const Duration(milliseconds: 140), _snapHeader);
+  }
+
+  void _snapHeader() {
+    if (!mounted || !_scroll.hasClients) return;
+    final position = _scroll.position;
+    if (position.isScrollingNotifier.value) return _scheduleSnap();
+    const range = EntityHeaderDelegate.collapseRange;
+    final pixels = position.pixels;
+    if (pixels <= 0 || pixels >= range) return;
+    unawaited(
+      _scroll.animateTo(
+        pixels < range / 2 ? 0 : range,
+        duration: const Duration(milliseconds: 180),
+        curve: Curves.easeOut,
+      ),
+    );
   }
 
   Future<void> _load() async {
@@ -146,20 +173,26 @@ class _EntityScreenState extends BaseScreen<EntityScreen> {
         onRefresh: _load,
         child: ScrollConfig(
           context,
-          child: CustomScrollView(
-            physics: const AlwaysScrollableScrollPhysics(),
-            slivers: [
-              SliverToBoxAdapter(
-                child: EntityHeader(
-                  host: _host,
-                  canFavourite: widget.view.canFavourite(widget.kind),
-                  togglingFavourite: _toggling,
-                  onToggleFavourite: _toggleFavourite,
+          child: Obx(
+            () => CustomScrollView(
+              controller: _scroll,
+              physics: const AlwaysScrollableScrollPhysics(),
+              slivers: [
+                SliverPersistentHeader(
+                  pinned: true,
+                  delegate: EntityHeaderDelegate(
+                    host: _host,
+                    top: MediaQuery.paddingOf(context).top,
+                    glass: find<ThemeController>().useGlassMode.value,
+                    canFavourite: widget.view.canFavourite(widget.kind),
+                    togglingFavourite: _toggling,
+                    onToggleFavourite: _toggleFavourite,
+                  ),
                 ),
-              ),
-              SliverToBoxAdapter(child: Obx(() => _body(context))),
-              const SliverToBoxAdapter(child: SizedBox(height: 48)),
-            ],
+                SliverToBoxAdapter(child: Obx(() => _body(context))),
+                const SliverToBoxAdapter(child: SizedBox(height: 48)),
+              ],
+            ),
           ),
         ),
       ),
@@ -176,9 +209,15 @@ class _EntityScreenState extends BaseScreen<EntityScreen> {
       children: [
         SizedBox(height: Dimens.gapLg),
         if (profile.tags.isNotEmpty)
-          _section(DataSection(data: ScreenData(chips: profile.tags))),
+          _section(
+            'tags',
+            0,
+            DataSection(data: ScreenData(chips: profile.tags)),
+          ),
         if (profile.facts.isNotEmpty)
           _section(
+            'facts',
+            1,
             DataSection(
               title: 'Details',
               data: ScreenData(rows: profile.facts),
@@ -186,13 +225,13 @@ class _EntityScreenState extends BaseScreen<EntityScreen> {
           ),
         if (profile.alternatives.isNotEmpty ||
             profile.spoilerAlternatives.isNotEmpty)
-          _section(_names(context, profile)),
+          _section('names', 2, _names(context, profile)),
         if (profile.description?.trim().isNotEmpty ?? false)
-          _section(_about(context, profile.description!)),
+          _section('about', 3, _about(context, profile.description!)),
         if (loadingFirst)
           for (var i = 0; i < 2; i++)
             const MediaSection(data: MediaSectionData.loading()),
-        for (final item in widgets) ..._item(item),
+        for (var i = 0; i < widgets.length; i++) ..._item(widgets[i], i),
         if (failed)
           SizedBox(
             height: 340,
@@ -208,21 +247,38 @@ class _EntityScreenState extends BaseScreen<EntityScreen> {
     );
   }
 
-  List<Widget> _item(ScreenWidget item) => [
+  List<Widget> _item(ScreenWidget item, int index) => [
     SizedBox(height: Dimens.gapLg),
-    ScreenWidgetView(
-      item,
-      heroPrefix: 'entity:${widget.id}',
-      onMediaTap: (media, _) => _host.openMedia(media),
-      onCharacterTap: (c) =>
-          _host.openCharacter(c.id, name: c.name, image: c.image),
-      onStaffTap: (s) => _host.openStaff(s.id, name: s.name, image: s.image),
+    _slide(
+      'item-${item.title ?? index}',
+      index + 4,
+      ScreenWidgetView(
+        item,
+        heroPrefix: 'entity:${widget.id}',
+        onMediaTap: (media, _) => _host.openMedia(media),
+        onCharacterTap: (c) =>
+            _host.openCharacter(c.id, name: c.name, image: c.image),
+        onStaffTap: (s) => _host.openStaff(s.id, name: s.name, image: s.image),
+      ),
     ),
   ];
 
-  Widget _section(Widget child) => Padding(
-    padding: EdgeInsets.only(bottom: Dimens.gapLg),
-    child: child,
+  Widget _slide(String key, int index, Widget child) => KeyedSubtree(
+    key: ValueKey(key),
+    child: child.animateFadeUp(
+      begin: 0.06,
+      delay: Duration(milliseconds: 40 * index),
+      duration: 350,
+    ),
+  );
+
+  Widget _section(String key, int index, Widget child) => _slide(
+    key,
+    index,
+    Padding(
+      padding: EdgeInsets.only(bottom: Dimens.gapLg),
+      child: child,
+    ),
   );
 
   Widget _about(BuildContext context, String description) {
