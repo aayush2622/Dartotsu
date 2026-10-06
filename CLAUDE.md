@@ -460,6 +460,8 @@ defines `handleError(e, st, {softCrash})` (called from the zone handler in `main
 
 ## Conventions / gotchas
 
+- **Reuse shared UI** — `CONSISTENCY.md` lists the shared app bar / tabs / empty state / sheet
+  components and rules; read it before building any screen chrome.
 - **Directory casing**: top-level `lib/` folders are PascalCase (`Core`, `Api`, `Screen`,
   `Model`, `Utils`, `Widgets`). `file_names` / `non_constant_identifier_names` lints are off
   (`analysis_options.yaml`) — match the PascalCase file/identifier style. `camel_case_types`,

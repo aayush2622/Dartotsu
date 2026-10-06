@@ -156,41 +156,44 @@ class AlertDialogBuilder {
               child: ThemedContainer(
                 padding: const EdgeInsets.all(20),
                 borderRadius: BorderRadius.circular(32),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    if (_titleWidget != null || _title != null)
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 16),
-                        child:
-                            _titleWidget ??
-                            Text(
-                              _title ?? '',
-                              style: context.textTheme.titleLarge?.copyWith(
-                                color: theme.primary,
+                child: Material(
+                  type: MaterialType.transparency,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (_titleWidget != null || _title != null)
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 16),
+                          child:
+                              _titleWidget ??
+                              Text(
+                                _title ?? '',
+                                style: context.textTheme.titleLarge?.copyWith(
+                                  color: theme.primary,
+                                ),
                               ),
-                            ),
-                      ),
-                    Flexible(
-                      fit: FlexFit.loose,
-                      child: ConstrainedBox(
-                        constraints: BoxConstraints(
-                          maxHeight: MediaQuery.of(context).size.height * 0.6,
                         ),
-                        child: StatefulBuilder(
-                          builder:
-                              (BuildContext context, StateSetter setState) =>
-                                  _buildContent(setState),
+                      Flexible(
+                        fit: FlexFit.loose,
+                        child: ConstrainedBox(
+                          constraints: BoxConstraints(
+                            maxHeight: MediaQuery.of(context).size.height * 0.6,
+                          ),
+                          child: StatefulBuilder(
+                            builder:
+                                (BuildContext context, StateSetter setState) =>
+                                    _buildContent(setState),
+                          ),
                         ),
                       ),
-                    ),
-                    const SizedBox(height: 20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: _buildActions(),
-                    ),
-                  ],
+                      const SizedBox(height: 20),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: _buildActions(),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

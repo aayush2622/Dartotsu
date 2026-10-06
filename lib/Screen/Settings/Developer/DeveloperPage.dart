@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
+import '../../../Widgets/Components/AppBars.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
-import '../../../Utils/Extensions/ContextExtensions.dart';
 import '../../../Utils/Extensions/Responsive.dart';
-import '../../../Utils/Functions/NavigateToScreen.dart';
 import '../../../Widgets/Components/BaseScreen.dart';
 import '../../../Widgets/Components/ScrollConfig.dart';
 import 'Components/DeveloperCard.dart';
 import 'Developer.dart';
+import '../../../Widgets/Components/EmptyState.dart';
 
 const _skeletonDeveloper = Developer(
   name: 'Loading name',
@@ -45,27 +45,7 @@ class _DeveloperPageState extends BaseScreen<DeveloperPage> {
           final grid = CustomScrollConfig(
             context,
             children: [
-              SliverAppBar.medium(
-                backgroundColor: Colors.transparent,
-                titleSpacing: 4,
-                leading: Skeleton.keep(
-                  child: IconButton(
-                    icon: Icon(
-                      Icons.arrow_back_ios_new_rounded,
-                      size: 20,
-                      color: context.colorScheme.primary,
-                    ),
-                    onPressed: () => popPage(context),
-                  ),
-                ),
-                title: Text(
-                  getString.contributors,
-                  style: context.textTheme.titleLarge?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: context.colorScheme.primary,
-                  ),
-                ),
-              ),
+              AppSliverBar(title: getString.contributors),
               if (!loading && items.isEmpty)
                 SliverFillRemaining(child: _empty(context))
               else
@@ -99,26 +79,9 @@ class _DeveloperPageState extends BaseScreen<DeveloperPage> {
     );
   }
 
-  Widget _empty(BuildContext context) {
-    final scheme = context.colorScheme;
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(
-            Icons.cloud_off_rounded,
-            size: 44,
-            color: scheme.onSurfaceVariant,
-          ),
-          SizedBox(height: Dimens.gap),
-          Text(
-            getString.contributorsLoadFailed,
-            style: context.textTheme.bodyMedium?.copyWith(
-              color: scheme.onSurfaceVariant,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+  Widget _empty(BuildContext context) => EmptyState(
+    icon: Icons.cloud_off_rounded,
+    title: getString.contributorsLoadFailed,
+    failed: true,
+  );
 }

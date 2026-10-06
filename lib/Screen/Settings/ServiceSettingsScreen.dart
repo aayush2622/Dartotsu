@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../Core/Services/MediaServiceController.dart';
 import '../../Core/ThemeManager/LanguageSwitcher.dart';
-import '../../Utils/Extensions/ContextExtensions.dart';
-import '../../Utils/Extensions/Responsive.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
-import '../../Utils/Functions/NavigateToScreen.dart';
+import '../../Widgets/Components/AppBars.dart';
 import '../../Widgets/Components/BaseScreen.dart';
 import '../../Widgets/Components/LoadSvg.dart';
 import 'Components/ServiceSettingsBody.dart';
@@ -46,54 +44,23 @@ class _ServiceSettingsScreenState extends BaseScreen<ServiceSettingsScreen>
 
   @override
   Widget buildContent(BuildContext context) {
-    final scheme = context.colorScheme;
-
     return Scaffold(
       backgroundColor: Colors.transparent,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        titleSpacing: 4,
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back_ios_new_rounded,
-            size: 20,
-            color: scheme.primary,
-          ),
-          onPressed: () => popPage(context),
-        ),
-        title: Text(
-          getString.settings,
-          style: context.textTheme.titleLarge?.copyWith(
-            fontWeight: FontWeight.bold,
-            color: scheme.primary,
-          ),
-        ),
+      appBar: AppScreenBar(
+        title: getString.settings,
         bottom: _services.length < 2
             ? null
-            : TabBar(
+            : AppTabs(
                 controller: _tab,
-                isScrollable: true,
-                tabAlignment: TabAlignment.start,
-                labelColor: scheme.primary,
-                unselectedLabelColor: scheme.onSurfaceVariant,
-                tabs: [
+                items: [
                   for (final service in _services)
-                    Tab(
-                      child: Builder(
-                        builder: (context) => Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            loadSvg(
-                              service.iconPath,
-                              width: 18,
-                              height: 18,
-                              color: IconTheme.of(context).color,
-                            ),
-                            SizedBox(width: Dimens.gapXs),
-                            Text(service.name),
-                          ],
-                        ),
+                    AppTabItem(
+                      service.name,
+                      icon: (color) => loadSvg(
+                        service.iconPath,
+                        width: 18,
+                        height: 18,
+                        color: color,
                       ),
                     ),
                 ],

@@ -11,11 +11,13 @@ import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Extensions/Responsive.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Utils/Functions/NavigateToScreen.dart';
+import '../../Widgets/Components/AppBars.dart';
 import '../../Widgets/Components/BaseScreen.dart';
 import '../../Widgets/Components/CachedNetworkImage.dart';
 import '../../Widgets/Components/SectionCard.dart';
 import '../Detail/DetailScreen.dart';
 import '../../Widgets/Components/ScrollConfig.dart';
+import '../../Widgets/Components/EmptyState.dart';
 
 class NotificationsScreen extends StatefulWidget {
   final NotificationScreenView view;
@@ -51,28 +53,15 @@ class _NotificationsScreenState extends BaseScreen<NotificationsScreen> {
   Widget buildContent(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        title: const Text('Notifications'),
-      ),
+      appBar: const AppScreenBar(title: 'Notifications'),
       body: RefreshIndicator(
         onRefresh: _load,
         child: Obx(() {
           if (_loading.value && _items.isEmpty) return _skeleton();
           if (_items.isEmpty) {
-            return Center(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(
-                    Icons.notifications_off_rounded,
-                    size: 44,
-                    color: context.colorScheme.onSurfaceVariant,
-                  ),
-                  const SizedBox(height: 12),
-                  Text('Nothing new', style: context.textTheme.bodyMedium),
-                ],
-              ),
+            return const EmptyState(
+              icon: Icons.notifications_off_rounded,
+              title: 'Nothing new',
             );
           }
           return ScrollConfig(

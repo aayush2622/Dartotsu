@@ -16,11 +16,13 @@ import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Extensions/Responsive.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Widgets/Components/AppControls.dart';
+import '../../Widgets/Components/AppBars.dart';
 import '../../Widgets/Components/BaseScreen.dart';
 import '../../Widgets/Components/CachedNetworkImage.dart';
 import '../../Widgets/Components/ScrollConfig.dart';
 import '../../Widgets/Shelf/PosterCard.dart';
 import '../Feed/FeedNavigation.dart';
+import '../../Widgets/Components/EmptyState.dart';
 
 enum SourceFeed { saved, popular, latest }
 
@@ -126,11 +128,8 @@ class _SourceBrowseScreenState extends BaseScreen<SourceBrowseScreen> {
     final scheme = context.colorScheme;
     return Scaffold(
       backgroundColor: Colors.transparent,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        scrolledUnderElevation: 0,
-        titleSpacing: 0,
-        title: Row(
+      appBar: AppScreenBar(
+        titleWidget: Row(
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(10),
@@ -321,70 +320,25 @@ class _SourceBrowseScreenState extends BaseScreen<SourceBrowseScreen> {
   ];
 
   Widget _empty() {
-    final scheme = context.colorScheme;
     final failed = _error.value != null;
-    return Center(
-      child: Padding(
-        padding: EdgeInsets.all(Dimens.gapXl),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              width: 72,
-              height: 72,
-              decoration: BoxDecoration(
-                color: failed
-                    ? scheme.errorContainer
-                    : scheme.secondaryContainer,
-                shape: BoxShape.circle,
-              ),
-              child: Icon(
-                failed ? Icons.cloud_off_rounded : Icons.inbox_rounded,
-                size: 32,
-                color: failed
-                    ? scheme.onErrorContainer
-                    : scheme.onSecondaryContainer,
-              ),
-            ),
-            SizedBox(height: Dimens.gap),
-            Text(
-              failed
-                  ? "Couldn't load this source"
-                  : _searching.value
-                  ? 'Nothing matched'
-                  : _feed.value == SourceFeed.saved
-                  ? 'Nothing saved from this source yet'
-                  : 'This source returned nothing',
-              textAlign: TextAlign.center,
-              style: context.textTheme.titleSmall?.copyWith(
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-            SizedBox(height: Dimens.gapSm),
-            Text(
-              failed
-                  ? 'Check your connection or try another source.'
-                  : _searching.value
-                  ? 'Try a different search term.'
-                  : _feed.value == SourceFeed.saved
-                  ? 'Titles you add to your list appear here.'
-                  : 'Try the other feed or search instead.',
-              textAlign: TextAlign.center,
-              style: context.textTheme.bodyMedium?.copyWith(
-                color: scheme.onSurfaceVariant,
-              ),
-            ),
-            if (failed) ...[
-              SizedBox(height: Dimens.gap),
-              FilledButton.tonalIcon(
-                onPressed: _reload,
-                icon: const Icon(Icons.refresh_rounded, size: 18),
-                label: const Text('Retry'),
-              ),
-            ],
-          ],
-        ),
-      ),
+    return EmptyState(
+      icon: failed ? Icons.cloud_off_rounded : Icons.inbox_rounded,
+      failed: failed,
+      title: failed
+          ? "Couldn't load this source"
+          : _searching.value
+          ? 'Nothing matched'
+          : _feed.value == SourceFeed.saved
+          ? 'Nothing saved from this source yet'
+          : 'This source returned nothing',
+      message: failed
+          ? 'Check your connection or try another source.'
+          : _searching.value
+          ? 'Try a different search term.'
+          : _feed.value == SourceFeed.saved
+          ? 'Titles you add to your list appear here.'
+          : 'Try the other feed or search instead.',
+      onAction: failed ? _reload : null,
     );
   }
 }

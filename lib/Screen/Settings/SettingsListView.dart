@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import '../../Widgets/Components/AppBars.dart';
 import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../Model/Setting.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Extensions/Responsive.dart';
-import '../../Utils/Functions/NavigateToScreen.dart';
 import '../../Widgets/Components/ScrollConfig.dart';
 import 'Widgets/SettingsAdaptor.dart';
 import 'Widgets/SettingsSearchField.dart';
@@ -44,26 +44,7 @@ class _SettingsListViewState extends State<SettingsListView> {
     return CustomScrollConfig(
       context,
       children: [
-        if (widget.title != null)
-          SliverAppBar.medium(
-            backgroundColor: Colors.transparent,
-            titleSpacing: 4,
-            leading: IconButton(
-              icon: Icon(
-                Icons.arrow_back_ios_new_rounded,
-                size: 20,
-                color: context.colorScheme.primary,
-              ),
-              onPressed: () => popPage(context),
-            ),
-            title: Text(
-              widget.title!,
-              style: context.textTheme.titleLarge?.copyWith(
-                fontWeight: FontWeight.bold,
-                color: context.colorScheme.primary,
-              ),
-            ),
-          ),
+        if (widget.title != null) AppSliverBar(title: widget.title!),
         SliverPadding(
           padding: EdgeInsets.fromLTRB(
             Dimens.pagePad,

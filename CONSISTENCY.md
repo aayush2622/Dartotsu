@@ -29,8 +29,42 @@ call is usually a sign a wrapper was skipped, not that one doesn't exist.
 - A selectable row inside a sheet (language picker, font picker, any "pick one of these"
   list) → `SheetTile` (`Widgets/Components/SheetTile.dart`), not a bare `ListTile`. It already
   handles the selected-pill background, M3 colors, and the trailing check icon.
+- Switches in sheets and cards → `SwitchListTile` (radius 14 in sheets, `contentPadding: zero`
+  in cards).
 - A modal with title/message/buttons (confirm, radio choice, checkbox list, reorderable list)
   → `AlertDialogBuilder` (`Widgets/Components/AlertDialogBuilder.dart`).
+
+## Screen chrome
+
+All in `Widgets/Components/AppBars.dart`:
+
+- App bar with a back button → `AppScreenBar(title:, actions:, bottom:)`. The nested `Scaffold`
+  inside `BaseScreen` does not imply a back button, so a bare `AppBar` has no way back.
+- Back button anywhere → `AppBackButton`. Collapsing header in a `CustomScrollView` →
+  `AppSliverBar(title:)`. Title text → `AppScreenTitle`.
+- Tabs → `AppTabs` (label / count / icon-builder items; follows the controller and shows the
+  D-pad focus colour). Use `AppTabBar` + `AppTab` only when each tab needs its own `Obx`.
+  Never a stock `TabBar` + `Tab`.
+- Tab icons are builders (`(color) => widget`) so SVGs get tinted; an SVG ignores `IconTheme`.
+
+## Empty / error states and loading
+
+- "Nothing here" / "couldn't load" → `EmptyState(icon:, title:, message:, failed:, onAction:)`
+  (`Widgets/Components/EmptyState.dart`). Don't draw an icon + text column by hand.
+- Loading → `Skeletonizer` over the real widget built from `Media.skeleton()` / placeholder
+  items, not a spinner, wherever the final layout is known. Keep chrome with `Skeleton.keep`.
+
+## Scrolling
+
+Every scrollable (list, grid, `TabBarView`, tab bar) is wrapped in `ScrollConfig(context, child:)`
+or built with `CustomScrollConfig`, so mouse/trackpad drags work and scrollbars stay off.
+
+## Tiles inside coloured containers
+
+A `ListTile` / `SwitchListTile` / `CheckboxListTile` paints on the nearest `Material`. Inside a
+coloured `Container`/`ThemedContainer` that hides ink and logs "ListTile background color…
+invisible". `CustomBottomDialog` and `AlertDialogBuilder` already provide a transparent `Material`;
+anywhere else, wrap the group in `Material(color: …)` instead of a decorated `Container`.
 
 ## Paths / storage
 

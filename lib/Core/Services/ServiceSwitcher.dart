@@ -14,7 +14,7 @@ void serviceSwitcher(BuildContext context) {
 
   void openServiceSettings(MediaService service) {
     if (service.settingsView == null) return;
-    Navigator.pop(context);
+    popPage(context);
     navigateToPage(context, ServiceSettingsScreen(initial: service));
   }
 
@@ -31,7 +31,7 @@ void serviceSwitcher(BuildContext context) {
                 selected: mediaServices.currentService.value.id == service.id,
                 onTap: () {
                   mediaServices.switchService(service.id);
-                  Navigator.pop(context);
+                  popPage(context);
                 },
                 onSettings: service.settingsView == null
                     ? null

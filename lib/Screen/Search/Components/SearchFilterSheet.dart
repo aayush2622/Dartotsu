@@ -8,6 +8,7 @@ import '../../../Utils/Extensions/StringExtensions.dart';
 import '../Widgets/AppDropdown.dart';
 import '../../../Widgets/Components/CustomBottomDialog.dart';
 import '../../../Widgets/Components/ScrollConfig.dart';
+import '../../../Utils/Functions/NavigateToScreen.dart';
 
 /// Edits [current] against [spec] in a bottom sheet; [onApply] gets the new
 /// query (page reset to 1). Every control is driven by the service's spec.
@@ -73,7 +74,7 @@ class _FilterBodyState extends State<_FilterBody> {
       ..excludedTags = _noTags.isEmpty ? null : _noTags.toList()
       ..page = 1;
     widget.onApply(q);
-    Navigator.pop(context);
+    popPage(context);
   }
 
   void _clear() => setState(() {
@@ -184,7 +185,7 @@ class _FilterBodyState extends State<_FilterBody> {
               children: [
                 Expanded(
                   child: OutlinedButton(
-                    onPressed: () => Navigator.pop(context),
+                    onPressed: () => popPage(context),
                     child: const Text('Cancel'),
                   ),
                 ),

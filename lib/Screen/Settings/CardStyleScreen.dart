@@ -7,8 +7,8 @@ import '../../Utils/Extensions/CardStyleMetrics.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Extensions/Responsive.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
-import '../../Utils/Functions/NavigateToScreen.dart';
 import '../../Widgets/Components/AppControls.dart';
+import '../../Widgets/Components/AppBars.dart';
 import '../../Widgets/Components/BaseScreen.dart';
 import '../../Widgets/Components/ScrollConfig.dart';
 import '../../Widgets/Components/SectionCard.dart';
@@ -34,28 +34,10 @@ class _CardStyleScreenState extends BaseScreen<CardStyleScreen> {
 
   @override
   Widget buildContent(BuildContext context) {
-    final scheme = context.colorScheme;
     return Scaffold(
       backgroundColor: Colors.transparent,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        titleSpacing: 4,
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back_ios_new_rounded,
-            size: 20,
-            color: scheme.primary,
-          ),
-          onPressed: () => popPage(context),
-        ),
-        title: Text(
-          'Card style',
-          style: context.textTheme.titleLarge?.copyWith(
-            fontWeight: FontWeight.bold,
-            color: scheme.primary,
-          ),
-        ),
+      appBar: AppScreenBar(
+        title: 'Card style',
         actions: [
           TextButton(
             onPressed: () => _set(const CardStyle()),

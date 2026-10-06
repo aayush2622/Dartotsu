@@ -6,6 +6,7 @@ import '../../Core/Services/Screens/ServiceScreens.dart';
 import '../../Utils/Functions/SnackBar.dart';
 import '../../Widgets/Components/CustomBottomDialog.dart';
 import '../Widgets/ScreenWidgetView.dart';
+import '../../Utils/Functions/NavigateToScreen.dart';
 
 void showListEditor(
   BuildContext context, {
@@ -17,7 +18,7 @@ void showListEditor(
   final draft = ListEditorDraft(media, customLists: view.customLists(media));
 
   Future<void> run(Future<void> Function() action, String done) async {
-    if (context.mounted) Navigator.pop(context);
+    if (context.mounted) popPage(context);
     try {
       await action();
       await onSaved();
