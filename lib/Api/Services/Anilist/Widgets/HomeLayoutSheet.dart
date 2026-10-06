@@ -1,28 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide ContextExtensionss;
 
+import '../../../../Core/ThemeManager/ThemeController.dart';
 import '../../../../Utils/Extensions/ContextExtensions.dart';
+import '../../../../Utils/Extensions/Responsive.dart';
+import '../../../../Utils/Functions/GetXFunctions.dart';
 import '../../../../Widgets/Components/CustomBottomDialog.dart';
 import '../../../../Widgets/Components/ThemedContainer.dart';
-import '../AnilistPrefs.dart';
+import '../../../../Core/Preferences/PrefManager.dart';
 
 class HomeLayoutSheet extends StatefulWidget {
-  const HomeLayoutSheet({super.key});
+  final String title;
+  final Pref<Map<String, bool>> pref;
+
+  const HomeLayoutSheet({
+    super.key,
+    this.title = 'Home sections',
+    required this.pref,
+  });
 
   @override
   State<HomeLayoutSheet> createState() => _HomeLayoutSheetState();
 }
 
 class _HomeLayoutSheetState extends State<HomeLayoutSheet> {
-  late final _entries = AnilistPref.homeLayout.value.entries
+  late final _entries = widget.pref.value.entries
       .map((e) => MapEntry(e.key, e.value))
       .toList()
       .obs;
 
   void _save() {
-    AnilistPref.homeLayout.rx.value = {
-      for (final e in _entries) e.key: e.value,
-    };
+    widget.pref.rx.value = {for (final e in _entries) e.key: e.value};
   }
 
   void _toggle(int index, bool value) {
@@ -64,7 +72,7 @@ class _HomeLayoutSheetState extends State<HomeLayoutSheet> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(24, 0, 24, 4),
                 child: Text(
-                  'Home sections',
+                  widget.title,
                   style: context.textTheme.titleMedium,
                   textAlign: TextAlign.center,
                 ),
@@ -80,43 +88,73 @@ class _HomeLayoutSheetState extends State<HomeLayoutSheet> {
                 ),
               ),
               Flexible(
-                child: Obx(
-                  () => ReorderableListView.builder(
+                child: Obx(() {
+                  final glass = find<ThemeController>().useGlassMode.value;
+                  final fill = glass
+                      ? scheme.surface.withValues(alpha: 0.28)
+                      : scheme.surfaceContainerLow;
+                  return ReorderableListView.builder(
                     shrinkWrap: true,
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    buildDefaultDragHandles: false,
+                    padding: EdgeInsets.symmetric(horizontal: Dimens.pagePad),
                     itemCount: _entries.length,
                     onReorder: _reorder,
                     itemBuilder: (context, i) {
                       final entry = _entries[i];
-                      return Padding(
+                      final first = i == 0;
+                      final last = i == _entries.length - 1;
+                      return ClipRRect(
                         key: ValueKey(entry.key),
-                        padding: const EdgeInsets.symmetric(vertical: 2),
+                        borderRadius: BorderRadius.vertical(
+                          top: Radius.circular(first ? Dimens.radius : 0),
+                          bottom: Radius.circular(last ? Dimens.radius : 0),
+                        ),
                         child: Material(
-                          color: Colors.transparent,
-                          borderRadius: BorderRadius.circular(14),
-                          child: SwitchListTile(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(14),
-                            ),
-                            title: Text(
-                              entry.key,
-                              style: context.textTheme.bodyLarge,
-                            ),
-                            value: entry.value,
-                            onChanged: (v) => _toggle(i, v),
-                            secondary: ReorderableDragStartListener(
-                              index: i,
-                              child: Icon(
-                                Icons.drag_handle_rounded,
-                                color: scheme.onSurfaceVariant,
+                          color: fill,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              if (!first)
+                                Divider(
+                                  height: 1,
+                                  indent: 56,
+                                  color: scheme.outlineVariant.withValues(
+                                    alpha: 0.5,
+                                  ),
+                                ),
+                              ListTile(
+                                contentPadding: const EdgeInsets.symmetric(
+                                  horizontal: 16,
+                                  vertical: 2,
+                                ),
+                                leading: ReorderableDragStartListener(
+                                  index: i,
+                                  child: Icon(
+                                    Icons.drag_indicator_rounded,
+                                    color: scheme.onSurfaceVariant,
+                                  ),
+                                ),
+                                title: Text(
+                                  entry.key,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: context.textTheme.bodyLarge?.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                trailing: Switch(
+                                  value: entry.value,
+                                  onChanged: (v) => _toggle(i, v),
+                                ),
+                                onTap: () => _toggle(i, !entry.value),
                               ),
-                            ),
+                            ],
                           ),
                         ),
                       );
                     },
-                  ),
-                ),
+                  );
+                }),
               ),
             ],
           ),
@@ -126,8 +164,14 @@ class _HomeLayoutSheetState extends State<HomeLayoutSheet> {
   }
 }
 
-Future<void> showHomeLayoutSheet(BuildContext context) =>
-    showCustomBottomDialog<void>(
-      context,
-      const FractionallySizedBox(heightFactor: 0.8, child: HomeLayoutSheet()),
-    );
+Future<void> showHomeLayoutSheet(
+  BuildContext context, {
+  String title = 'Home sections',
+  required Pref<Map<String, bool>> pref,
+}) => showCustomBottomDialog<void>(
+  context,
+  FractionallySizedBox(
+    heightFactor: 0.8,
+    child: HomeLayoutSheet(title: title, pref: pref),
+  ),
+);

@@ -26,6 +26,9 @@ class DetailHeaderScope extends InheritedWidget {
   bool updateShouldNotify(DetailHeaderScope oldWidget) => false;
 }
 
+double detailHeaderCollapseRange() =>
+    196.0 + Dimens.detailPosterH * 0.42 + _actionsHeight - _toolbarHeight;
+
 class DetailHeaderDelegate extends SliverPersistentHeaderDelegate {
   final DetailHost host;
   final double top;
@@ -53,7 +56,7 @@ class DetailHeaderDelegate extends SliverPersistentHeaderDelegate {
 
   double get _coverH => Dimens.detailPosterH;
 
-  double get _bannerH => glass ? _coverH * 0.66 : 196.0;
+  double get _bannerH => 196.0;
 
   double get _overhang => _coverH * 0.42;
 
@@ -96,7 +99,9 @@ class DetailHeaderDelegate extends SliverPersistentHeaderDelegate {
             children: [
               Positioned.fill(
                 child: ColoredBox(
-                  color: scheme.surface.withValues(alpha: glass ? 0.85 * t : t),
+                  color: scheme.surface.withValues(
+                    alpha: glass ? 0.85 * ((t - 0.9) * 10).clamp(0.0, 1.0) : t,
+                  ),
                 ),
               ),
               if (!glass)

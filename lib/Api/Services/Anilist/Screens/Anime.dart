@@ -8,8 +8,16 @@ class AnilistAnimeFeed extends AnilistTypeFeed {
   MediaType get type => MediaType.anime;
 
   @override
-  SearchResults? sectionQuery(SearchResults base, String section) =>
-      switch (section) {
+  int typeOf(String title) => switch (title) {
+    'Trending Now' => 1,
+    'Popular Anime' => 3,
+    _ => 0,
+  };
+
+  @override
+  SearchResults? sectionQuery(SearchResults base, String title) =>
+      switch (title) {
+        'Trending Now' => base..sort = 'TRENDING_DESC',
         'Popular Anime' => base..sort = 'POPULARITY_DESC',
         'Top Rated Series' => base..sort = 'SCORE_DESC',
         'Most Favourite Series' => base..sort = 'FAVOURITES_DESC',

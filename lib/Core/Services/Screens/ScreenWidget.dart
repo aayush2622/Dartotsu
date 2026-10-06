@@ -1,11 +1,12 @@
 import 'package:flutter/widgets.dart';
 
+import '../../../Model/Setting.dart';
 import '../../../Widgets/Shelf/MediaSection.dart';
 import '../Model/Author.dart';
 import '../Model/Character.dart';
 import '../Model/Media.dart';
 
-enum ScreenWidgetType { media, character, staff, data, extra }
+enum ScreenWidgetType { media, character, staff, data, settings, extra }
 
 class ScreenData {
   final String? text;
@@ -32,18 +33,23 @@ class ScreenWidget {
   final List<Character>? characters;
   final List<Author>? staff;
   final ScreenData? data;
+  final List<Setting>? settings;
   final Widget? widget;
   final Future<List<Media>?> Function(int page)? onLoadMore;
   final MediaSection Function(MediaSectionData data)? section;
-  final bool spotlight;
+
+  /// How a media section renders: 0 card shelf, 1 carousel, 2 list rows,
+  /// 3 banner rows (see `MediaSection`).
+  final int sectionType;
 
   const ScreenWidget.media(
     this.title,
     this.media, {
     this.onLoadMore,
     this.section,
-    this.spotlight = false,
+    this.sectionType = 0,
   }) : type = ScreenWidgetType.media,
+       settings = null,
        characters = null,
        staff = null,
        data = null,
@@ -51,36 +57,51 @@ class ScreenWidget {
 
   const ScreenWidget.characters(this.title, this.characters)
     : type = ScreenWidgetType.character,
+      settings = null,
       media = null,
       staff = null,
       data = null,
       widget = null,
       onLoadMore = null,
       section = null,
-      spotlight = false;
+      sectionType = 0;
 
   const ScreenWidget.staff(this.title, this.staff)
     : type = ScreenWidgetType.staff,
+      settings = null,
       media = null,
       characters = null,
       data = null,
       widget = null,
       onLoadMore = null,
       section = null,
-      spotlight = false;
+      sectionType = 0;
 
   const ScreenWidget.data(this.title, this.data)
     : type = ScreenWidgetType.data,
+      settings = null,
       media = null,
       characters = null,
       staff = null,
       widget = null,
       onLoadMore = null,
       section = null,
-      spotlight = false;
+      sectionType = 0;
+
+  const ScreenWidget.settings(this.title, this.settings)
+    : type = ScreenWidgetType.settings,
+      media = null,
+      characters = null,
+      staff = null,
+      data = null,
+      widget = null,
+      onLoadMore = null,
+      section = null,
+      sectionType = 0;
 
   const ScreenWidget.extra(this.widget)
     : type = ScreenWidgetType.extra,
+      settings = null,
       title = null,
       media = null,
       characters = null,
@@ -88,7 +109,11 @@ class ScreenWidget {
       data = null,
       onLoadMore = null,
       section = null,
-      spotlight = false;
+      sectionType = 0;
 
   bool get isMedia => type == ScreenWidgetType.media;
+
+  bool get isCarousel => sectionType == 1;
+
+  bool get isRows => sectionType == 2 || sectionType == 3;
 }

@@ -1,5 +1,6 @@
 import '../../../../Core/Services/MediaService.dart';
 import '../AnilistAuth.dart';
+import '../AnilistPrefs.dart';
 
 class AnilistHomeView extends HomeScreenView {
   AnilistHomeView(super.service);
@@ -9,7 +10,7 @@ class AnilistHomeView extends HomeScreenView {
     if (!anilistAuth.isLoggedIn) return super.screenStream();
     return sectionWidgets(
       anilistAuth.queries.homeJobs(),
-      parallel: false,
+      parallel: AnilistPref.queryLoadMode.value == QueryLoadMode.sequential,
       build: ScreenWidget.media,
     );
   }

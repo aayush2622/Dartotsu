@@ -6,8 +6,6 @@
 ///   hold the title on the same surface.
 enum CardMode { normal, onCard, inCard }
 
-enum CardLayout { grid, list, banner }
-
 /// Preset card widths. [custom] uses [CardStyle.customScale].
 enum CardSize { small, medium, large, custom }
 
@@ -22,7 +20,6 @@ enum CardCorner { none, topLeft, topRight, bottomLeft, bottomRight }
 /// can reference it — metrics live in `CardStyleMetrics`.
 class CardStyle {
   final String preset;
-  final CardLayout layout;
   final CardMode mode;
   final CardSize size;
 
@@ -42,7 +39,6 @@ class CardStyle {
 
   const CardStyle({
     this.preset = 'poster',
-    this.layout = CardLayout.grid,
     this.mode = CardMode.onCard,
     this.size = CardSize.medium,
     this.customScale = 1.0,
@@ -57,7 +53,6 @@ class CardStyle {
 
   CardStyle copyWith({
     String? preset,
-    CardLayout? layout,
     CardMode? mode,
     CardSize? size,
     double? customScale,
@@ -70,7 +65,6 @@ class CardStyle {
     bool? airingDot,
   }) => CardStyle(
     preset: preset ?? this.preset,
-    layout: layout ?? this.layout,
     mode: mode ?? this.mode,
     size: size ?? this.size,
     customScale: customScale ?? this.customScale,
@@ -95,8 +89,6 @@ class CardStyle {
     CardSize.custom => customScale,
   };
 
-  bool get isGrid => layout == CardLayout.grid;
-
   int get lines => compact ? 1 : titleLines;
   bool get showScore => !compact && scoreCorner != CardCorner.none;
   bool get showAiring => !compact && airingDot;
@@ -104,9 +96,7 @@ class CardStyle {
   /// On-card mode has nothing "outside" the poster, so [CardProgressStyle.outside]
   /// resolves to the pill there.
   CardProgressStyle get effectiveProgress =>
-      (isGrid &&
-          mode == CardMode.onCard &&
-          progress == CardProgressStyle.outside)
+      (mode == CardMode.onCard && progress == CardProgressStyle.outside)
       ? CardProgressStyle.pill
       : progress;
 
@@ -122,7 +112,6 @@ class CardStyle {
       !compact && effectiveProgress != CardProgressStyle.none;
 
   bool get bottomCornersUsable =>
-      isGrid &&
       mode == CardMode.normal &&
       effectiveProgress != CardProgressStyle.bar &&
       effectiveProgress != CardProgressStyle.pill;
@@ -131,7 +120,6 @@ class CardStyle {
 
   Map<String, dynamic> toJson() => {
     'preset': preset,
-    'layout': layout.name,
     'mode': mode.name,
     'size': size.name,
     'customScale': customScale,
@@ -152,7 +140,6 @@ class CardStyle {
         : pick(CardProgressStyle.values, j['progress'], CardProgressStyle.pill);
     return CardStyle(
       preset: j['preset'] as String? ?? 'custom',
-      layout: pick(CardLayout.values, j['layout'], CardLayout.grid),
       mode: pick(CardMode.values, j['mode'], CardMode.onCard),
       size: pick(CardSize.values, j['size'], CardSize.medium),
       customScale: (j['customScale'] as num?)?.toDouble() ?? 1.0,

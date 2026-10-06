@@ -7,8 +7,16 @@ class AnilistMangaFeed extends AnilistTypeFeed {
   MediaType get type => MediaType.manga;
 
   @override
-  SearchResults? sectionQuery(SearchResults base, String section) =>
-      switch (section) {
+  int typeOf(String title) => switch (title) {
+    'Trending Now' => 1,
+    'Popular Manga' => 3,
+    _ => 0,
+  };
+
+  @override
+  SearchResults? sectionQuery(SearchResults base, String title) =>
+      switch (title) {
+        'Trending Now' => base..sort = 'TRENDING_DESC',
         'Popular Manga' => base..sort = 'POPULARITY_DESC',
         'Top Rated Manga' => base..sort = 'SCORE_DESC',
         'Most Favourite Manga' => base..sort = 'FAVOURITES_DESC',

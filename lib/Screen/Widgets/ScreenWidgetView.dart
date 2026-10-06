@@ -7,6 +7,8 @@ import '../../Core/Services/Model/Character.dart';
 import '../../Utils/Extensions/StringExtensions.dart';
 import '../../Widgets/Shelf/MediaSection.dart';
 import '../../Widgets/Shelf/PeopleShelf.dart';
+import '../../Utils/Extensions/Responsive.dart';
+import '../Settings/Widgets/SettingsAdaptor.dart';
 import 'Components/DataSection.dart';
 
 class ScreenWidgetView extends StatelessWidget {
@@ -52,6 +54,10 @@ class ScreenWidgetView extends StatelessWidget {
       ],
     ),
     ScreenWidgetType.data => DataSection(title: item.title, data: item.data!),
+    ScreenWidgetType.settings => Padding(
+      padding: EdgeInsets.symmetric(horizontal: Dimens.pagePad),
+      child: SettingsAdaptor(settings: item.settings ?? const []),
+    ),
     ScreenWidgetType.extra => item.widget!,
   };
 

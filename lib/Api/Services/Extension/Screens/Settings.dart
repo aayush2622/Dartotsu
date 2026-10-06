@@ -8,7 +8,7 @@ import '../../../../Widgets/Components/AppControls.dart';
 import '../ExtensionServices.dart';
 import '../Widgets/ExtensionServiceSheet.dart';
 
-class ExtensionSettingsView implements SettingsScreenView {
+class ExtensionSettingsView extends SettingsScreenView {
   @override
   List<Setting> build(BuildContext context) => [
     const Setting.header('Services'),

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../../Core/Services/Model/Media.dart';
+import '../../Utils/Extensions/Responsive.dart';
 import 'CardShelf.dart';
+import 'MediaCarousel.dart';
+import 'MediaRows.dart';
 import 'CardShelfState.dart';
 
 class MediaSectionData {
@@ -168,8 +171,41 @@ class MediaSection extends StatelessWidget {
     return [for (final (index, m) in media.indexed) toItem(context, index, m)];
   }
 
+  Widget _rows(BuildContext context, {required bool banner}) {
+    final media = data.mediaList ?? const <Media>[];
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: Dimens.pagePad),
+      child: Column(
+        children: [
+          for (final (index, m) in media.indexed)
+            Padding(
+              padding: EdgeInsets.only(bottom: Dimens.gapSm),
+              child: rowFor(context, index, m, banner: banner),
+            ),
+        ],
+      ),
+    );
+  }
+
+  Widget rowFor(
+    BuildContext context,
+    int index,
+    Media media, {
+    required bool banner,
+  }) {
+    final tag = 'row:${data.heroPrefix}:${data.title}:$index:${media.id}';
+    void tap() => data.onMediaTap?.call(context, index, media, tag);
+    void hold() => data.onMediaLongPress?.call(context, index, media);
+    return banner
+        ? MediaBannerTile(media: media, tag: tag, onTap: tap, onLongPress: hold)
+        : MediaListTile(media: media, tag: tag, onTap: tap, onLongPress: hold);
+  }
+
   @override
   Widget build(BuildContext context) {
+    if (data.type == 1) return MediaCarousel(data: data);
+    if (data.type == 2) return _rows(context, banner: false);
+    if (data.type == 3) return _rows(context, banner: true);
     return CardShelf(
       title: data.title,
       trailingIcon: data.trailingIcon,

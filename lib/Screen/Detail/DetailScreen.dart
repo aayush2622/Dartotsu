@@ -61,6 +61,7 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
   final _error = RxnString();
   bool _focusedOnce = false;
   final _scroll = ScrollController();
+  Timer? _snapTimer;
   final _actionFocus = FocusNode();
   final _lanes = <GlobalKey<DpadRegionState>>[];
   final _navLane = GlobalKey<DpadRegionState>();
@@ -108,12 +109,14 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
   void initState() {
     super.initState();
     FocusManager.instance.addListener(_keepFocusVisible);
+    _scroll.addListener(_scheduleSnap);
     unawaited(_load());
   }
 
   @override
   void dispose() {
     FocusManager.instance.removeListener(_keepFocusVisible);
+    _snapTimer?.cancel();
     _scroll.dispose();
     _actionFocus.dispose();
     super.dispose();
@@ -196,6 +199,27 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
     ),
     hero: true,
   );
+
+  void _scheduleSnap() {
+    _snapTimer?.cancel();
+    _snapTimer = Timer(const Duration(milliseconds: 140), _snapHeader);
+  }
+
+  void _snapHeader() {
+    if (!mounted || !_scroll.hasClients) return;
+    final position = _scroll.position;
+    if (position.isScrollingNotifier.value) return _scheduleSnap();
+    final range = detailHeaderCollapseRange();
+    final pixels = position.pixels;
+    if (pixels <= 0 || pixels >= range) return;
+    unawaited(
+      _scroll.animateTo(
+        pixels < range / 2 ? 0 : range,
+        duration: const Duration(milliseconds: 180),
+        curve: Curves.easeOut,
+      ),
+    );
+  }
 
   @override
   Widget buildContent(BuildContext context) {
@@ -281,9 +305,10 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
 
   Widget _sheet(BuildContext context) {
     final scheme = context.colorScheme;
+    final glass = find<ThemeController>().useGlassMode.value;
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: scheme.surface,
+        color: glass ? scheme.surface.withValues(alpha: 0.5) : scheme.surface,
         borderRadius: BorderRadius.vertical(
           top: Radius.circular(Dimens.radius),
         ),
@@ -436,6 +461,7 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
     showListEditor(
       context,
       media: _host.media.value,
+      view: widget.view.listEditor,
       mutations: mutations,
       onSaved: _load,
     );

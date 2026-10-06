@@ -13,6 +13,36 @@ const kAnilistHomeSections = <String, bool>{
   'Hidden Media': false,
 };
 
+const kAnilistAnimeSections = <String, bool>{
+  'Recent Updates': true,
+  'Trending Now': true,
+  'Popular This Season': true,
+  'Trending Movies': true,
+  'Top Rated Series': true,
+  'Most Favourite Series': true,
+  'Popular Anime': true,
+};
+
+const kAnilistMangaSections = <String, bool>{
+  'Trending Now': true,
+  'Trending Manhwa': true,
+  'Trending Novels': true,
+  'Top Rated Manga': true,
+  'Most Favourite Manga': true,
+  'Popular Manga': true,
+};
+
+Pref<Map<String, bool>> _layoutPref(String key, Map<String, bool> defaults) =>
+    Pref<Map<String, bool>>.coded(
+      key,
+      defaults,
+      PrefLocation.OTHER,
+      encode: (v) => Map<String, dynamic>.from(v),
+      decode: (raw) => raw is Map
+          ? {for (final e in raw.entries) e.key.toString(): e.value == true}
+          : defaults,
+    );
+
 class AnilistPref {
   AnilistPref._();
 
@@ -33,6 +63,16 @@ class AnilistPref {
     decode: (raw) => raw is Map
         ? {for (final e in raw.entries) e.key.toString(): e.value == true}
         : kAnilistHomeSections,
+  );
+
+  static final animeLayout = _layoutPref(
+    'anilistAnimeLayout',
+    kAnilistAnimeSections,
+  );
+
+  static final mangaLayout = _layoutPref(
+    'anilistMangaLayout',
+    kAnilistMangaSections,
   );
 
   static const removeList = Pref<List<String>>(

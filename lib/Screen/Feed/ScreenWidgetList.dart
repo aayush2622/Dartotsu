@@ -6,6 +6,7 @@ import 'package:get/get.dart' hide ContextExtensionss;
 import '../../Core/Services/Model/Media.dart';
 import '../../Core/Services/Screens/ScreenWidget.dart';
 import '../../Core/Services/SectionCache.dart';
+import '../../Widgets/Shelf/MediaRows.dart';
 import '../../Utils/Animation/WidgetAnimations.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Extensions/IntExtensions.dart';
@@ -16,7 +17,6 @@ import '../../Widgets/Components/ScrollConfig.dart';
 import '../../Widgets/Components/SectionCard.dart';
 import '../../Widgets/Shelf/MediaSection.dart';
 import '../Widgets/ScreenWidgetView.dart';
-import 'Widgets/StackedCarousel.dart';
 
 class ScreenWidgetList extends StatefulWidget {
   final Stream<List<ScreenWidget>> Function() loader;
@@ -24,6 +24,7 @@ class ScreenWidgetList extends StatefulWidget {
   final Widget? header;
   final void Function(Media media, String? heroTag)? onMediaTap;
   final Stream<Object?>? reloadOn;
+  final int Function(String title)? sectionTypeOf;
 
   const ScreenWidgetList({
     super.key,
@@ -32,6 +33,7 @@ class ScreenWidgetList extends StatefulWidget {
     this.header,
     this.onMediaTap,
     this.reloadOn,
+    this.sectionTypeOf,
   });
 
   @override
@@ -47,8 +49,11 @@ class _ScreenWidgetListState extends State<ScreenWidgetList>
   final _mediaByTitle = <String, List<Media>>{};
   final _pages = <String, int>{};
   final _sectionBuilders = <String, MediaSection Function(MediaSectionData)>{};
-  final _spotlight = <String>{};
+  final _types = <String, int>{};
   final _loadMoreFns = <String, Future<List<Media>?> Function(int)>{};
+  final _tailDone = <String>{};
+  bool _tailLoading = false;
+  String? _tailTitle;
 
   String get _heroPrefix => widget.cacheId ?? identityHashCode(this).toString();
 
@@ -88,8 +93,12 @@ class _ScreenWidgetListState extends State<ScreenWidgetList>
     if (!mounted || cached == null || cached.isEmpty || _loaded.value) return;
     _mediaByTitle.addAll(cached);
     _order.addAll(cached.keys);
+    for (final title in cached.keys) {
+      _types[title] = widget.sectionTypeOf?.call(title) ?? 0;
+    }
     _current.value = [
-      for (final e in cached.entries) ScreenWidget.media(e.key, e.value),
+      for (final e in cached.entries)
+        ScreenWidget.media(e.key, e.value, sectionType: _types[e.key] ?? 0),
     ];
   }
 
@@ -142,13 +151,11 @@ class _ScreenWidgetListState extends State<ScreenWidgetList>
       previous = title;
       final incoming = item.media!;
       _mediaByTitle[title] = incoming;
+      _pages.remove(title);
+      _tailDone.remove(title);
       _remember(_loadMoreFns, title, item.onLoadMore);
       _remember(_sectionBuilders, title, item.section);
-      if (item.spotlight) {
-        _spotlight.add(title);
-      } else {
-        _spotlight.remove(title);
-      }
+      _types[title] = item.sectionType;
     }
     _composeThrottled(list);
     _cacheTimer?.cancel();
@@ -181,7 +188,7 @@ class _ScreenWidgetListState extends State<ScreenWidgetList>
     _mediaByTitle.removeWhere((t, _) => !keep.contains(t));
     _loadMoreFns.removeWhere((t, _) => !keep.contains(t));
     _sectionBuilders.removeWhere((t, _) => !keep.contains(t));
-    _spotlight.removeWhere((t) => !keep.contains(t));
+    _types.removeWhere((t, _) => !keep.contains(t));
     _composeTimer?.cancel();
     _composeTimer = null;
     _pendingCompose = null;
@@ -216,9 +223,33 @@ class _ScreenWidgetListState extends State<ScreenWidgetList>
         ScreenWidget.media(
           title,
           _mediaByTitle[title]!,
-          spotlight: _spotlight.contains(title),
+          sectionType: _types[title] ?? 0,
         ),
     ];
+  }
+
+  Future<void> _loadTail(String title) async {
+    if (_tailLoading || _tailDone.contains(title)) return;
+    _tailLoading = true;
+    try {
+      final more = await _loadMoreSection(title);
+      if (!mounted) return;
+      final known = {
+        for (final m in _mediaByTitle[title] ?? const <Media>[]) m.id,
+      };
+      final fresh = [
+        for (final m in more ?? const <Media>[])
+          if (known.add(m.id)) m,
+      ];
+      if (fresh.isEmpty) {
+        _tailDone.add(title);
+      } else {
+        _mediaByTitle[title] = [...?_mediaByTitle[title], ...fresh];
+      }
+      _compose(_current.toList());
+    } finally {
+      _tailLoading = false;
+    }
   }
 
   Future<List<Media>?> _loadMoreSection(String title) async {
@@ -243,43 +274,131 @@ class _ScreenWidgetListState extends State<ScreenWidgetList>
         final showEmpty = empty && !showError && _loaded.value;
         final showSkeleton = empty && !showError && !showEmpty;
 
-        return CustomScrollConfig(
-          context,
-          physics: const AlwaysScrollableScrollPhysics(),
-          children: [
-            if (widget.header != null)
-              SliverToBoxAdapter(child: widget.header!),
-            for (final item in list.where((e) => e.spotlight))
-              if (item.media!.isNotEmpty)
-                SliverToBoxAdapter(
-                  key: ValueKey('spotlight-${item.title}'),
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: Dimens.gapSm),
-                    child: StackedCarousel(
-                      items: item.media!.take(10).toList(),
-                      heroPrefix: _heroPrefix,
-                      onTap: (m, tag) => widget.onMediaTap?.call(m, tag),
+        _tailTitle = null;
+        return NotificationListener<ScrollNotification>(
+          onNotification: _onScroll,
+          child: CustomScrollConfig(
+            context,
+            physics: const AlwaysScrollableScrollPhysics(),
+            children: [
+              if (widget.header != null)
+                SliverToBoxAdapter(child: widget.header!),
+              for (final item in list.where((e) => e.isCarousel))
+                if (item.media!.isNotEmpty)
+                  SliverToBoxAdapter(
+                    key: ValueKey('spotlight-${item.title}'),
+                    child: MediaSection(
+                      data: MediaSectionData(
+                        type: 1,
+                        title: item.title,
+                        mediaList: item.media!.take(10).toList(),
+                        heroPrefix: _heroPrefix,
+                        onMediaTap: (_, _, m, tag) =>
+                            widget.onMediaTap?.call(m, tag),
+                      ),
                     ),
                   ),
-                ),
-            const SliverToBoxAdapter(child: SizedBox(height: 8)),
-            if (showSkeleton)
-              for (var i = 0; i < 4; i++)
-                SliverToBoxAdapter(
-                  key: ValueKey('skeleton-$i'),
-                  child: const MediaSection(data: MediaSectionData.loading()),
-                )
-            else if (showError)
-              SliverToBoxAdapter(child: _errorBox(_error.value!))
-            else if (showEmpty)
-              SliverToBoxAdapter(child: _emptyBox())
-            else
-              _sectionList(list.where((e) => !e.spotlight).toList()),
-            SliverToBoxAdapter(child: SizedBox(height: 120.bottomBar())),
-          ],
+              const SliverToBoxAdapter(child: SizedBox(height: 8)),
+              if (showSkeleton)
+                for (var i = 0; i < 4; i++)
+                  SliverToBoxAdapter(
+                    key: ValueKey('skeleton-$i'),
+                    child: const MediaSection(data: MediaSectionData.loading()),
+                  )
+              else if (showError)
+                SliverToBoxAdapter(child: _errorBox(_error.value!))
+              else if (showEmpty)
+                SliverToBoxAdapter(child: _emptyBox())
+              else
+                ..._sections(list.where((e) => !e.isCarousel).toList()),
+              SliverToBoxAdapter(child: SizedBox(height: 120.bottomBar())),
+            ],
+          ),
         );
       }),
     );
+  }
+
+  bool _isPaged(ScreenWidget item) =>
+      _loaded.value &&
+      item.isMedia &&
+      item.isRows &&
+      _loadMoreFns[item.title] != null;
+
+  List<Widget> _sections(List<ScreenWidget> sections) {
+    final out = <Widget>[];
+    var chunk = <ScreenWidget>[];
+    void flush() {
+      if (chunk.isEmpty) return;
+      out.add(_sectionList(chunk));
+      chunk = [];
+    }
+
+    for (final item in sections) {
+      if (_isPaged(item)) {
+        flush();
+        out.addAll(_paged(item));
+      } else {
+        chunk.add(item);
+      }
+    }
+    flush();
+    return out;
+  }
+
+  List<Widget> _paged(ScreenWidget item) {
+    final title = item.title!;
+    final media = item.media!;
+    final banner = item.sectionType == 3;
+    _tailTitle = _tailDone.contains(title) ? null : title;
+    return [
+      SliverToBoxAdapter(
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(
+            Dimens.pagePad,
+            Dimens.gapSm,
+            Dimens.pagePad,
+            Dimens.gapSm,
+          ),
+          child: SectionHeader(title: title),
+        ),
+      ),
+      SliverPadding(
+        padding: EdgeInsets.symmetric(horizontal: Dimens.pagePad),
+        sliver: SliverList.separated(
+          itemCount: media.length,
+          separatorBuilder: (_, _) => SizedBox(height: Dimens.gapSm),
+          itemBuilder: (context, i) {
+            final m = media[i];
+            final tag = 'row:$_heroPrefix:$title:${m.id}';
+            void tap() => widget.onMediaTap?.call(m, tag);
+            return banner
+                ? MediaBannerTile(media: m, tag: tag, onTap: tap)
+                : MediaListTile(media: m, tag: tag, onTap: tap);
+          },
+        ),
+      ),
+      if (_tailTitle == title)
+        SliverToBoxAdapter(
+          child: Padding(
+            padding: EdgeInsets.all(Dimens.gapLg),
+            child: const Center(
+              child: CircularProgressIndicator(strokeWidth: 2),
+            ),
+          ),
+        ),
+    ];
+  }
+
+  bool _onScroll(ScrollNotification n) {
+    final title = _tailTitle;
+    if (title != null &&
+        n.depth == 0 &&
+        n.metrics.extentAfter < 600 &&
+        (n is ScrollUpdateNotification || n is ScrollEndNotification)) {
+      unawaited(_loadTail(title));
+    }
+    return false;
   }
 
   Widget _sectionList(List<ScreenWidget> sections) {
@@ -308,7 +427,7 @@ class _ScreenWidgetListState extends State<ScreenWidgetList>
     final title = item.title!;
     final firstSeen = _seen.add(title) && index < 4;
     final data = MediaSectionData(
-      type: 0,
+      type: item.sectionType,
       title: title,
       mediaList: item.media,
       heroPrefix: _heroPrefix,

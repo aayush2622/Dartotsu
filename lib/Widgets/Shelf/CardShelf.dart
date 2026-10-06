@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../Core/ThemeManager/CardStyleController.dart';
-import '../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../Model/CardStyle.dart';
 import '../../Utils/Animation/WidgetAnimations.dart';
 import '../../Utils/Extensions/CardStyleMetrics.dart';
@@ -140,8 +139,6 @@ class _CardShelfState extends State<CardShelf> {
   }
 
   Widget _buildBody() {
-    if (!_style.isGrid) return _buildVerticalRows();
-
     if (_loading) {
       return SizedBox(
         height: _railH,
@@ -202,60 +199,6 @@ class _CardShelfState extends State<CardShelf> {
         ),
       ),
     );
-  }
-
-  EdgeInsets get _rowPadding => EdgeInsets.fromLTRB(_inset, 0, _inset, _gap);
-
-  Widget _buildVerticalRows() {
-    if (_loading) {
-      return Column(
-        children: [
-          for (var i = 0; i < 4; i++)
-            Padding(
-              padding: _rowPadding,
-              child: _cardFor(i, ShelfCardItem.skeleton()),
-            ),
-        ],
-      );
-    }
-    return Obx(() {
-      final list = state.items;
-      final canLoadMore = widget.onLoadMore != null && state.canLoadMore.value;
-      return Column(
-        children: [
-          for (final (i, item) in list.indexed)
-            Padding(
-              key: ValueKey('item:${item.id}'),
-              padding: _rowPadding,
-              child: _cardFor(i, item),
-            ),
-          if (canLoadMore) _loadMoreRow(),
-        ],
-      );
-    });
-  }
-
-  Widget _loadMoreRow() {
-    return Obx(() {
-      final isLoadingMore = state.isLoadingMore.value;
-      return Padding(
-        padding: _rowPadding,
-        child: Center(
-          child: TextButton(
-            onPressed: isLoadingMore
-                ? null
-                : () => state.loadMore(widget.onLoadMore),
-            child: isLoadingMore
-                ? const SizedBox(
-                    width: 18,
-                    height: 18,
-                    child: CircularProgressIndicator(strokeWidth: 2),
-                  )
-                : Text(getString.loadMore),
-          ),
-        ),
-      );
-    });
   }
 
   Widget _loadMoreTrailer() {
@@ -327,8 +270,6 @@ class _CardShelfState extends State<CardShelf> {
     );
     final card = item.cardBuilder?.call(defaultCard) ?? defaultCard;
     if (index > 7) return card;
-    return _style.isGrid
-        ? card.animateHorizontalEntrance()
-        : card.animateFadeUp(begin: 0.08, duration: 240);
+    return card.animateHorizontalEntrance();
   }
 }

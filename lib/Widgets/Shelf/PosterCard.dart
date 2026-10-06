@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import '../../Utils/Nav/DpadNav.dart';
 import 'package:flutter/material.dart';
 
@@ -80,14 +78,10 @@ class _PosterCardState extends State<PosterCard> {
         tryFind<CardStyleController>()?.current ??
         const CardStyle();
     _style = s;
-    final card = switch (s.layout) {
-      CardLayout.list => _listRow(s),
-      CardLayout.banner => _bannerRow(s),
-      CardLayout.grid => switch (s.mode) {
-        CardMode.onCard => _onCard(s),
-        CardMode.normal => _normal(s),
-        CardMode.inCard => _inCard(s),
-      },
+    final card = switch (s.mode) {
+      CardMode.onCard => _onCard(s),
+      CardMode.normal => _normal(s),
+      CardMode.inCard => _inCard(s),
     };
 
     final visual = MouseRegion(
@@ -376,181 +370,6 @@ class _PosterCardState extends State<PosterCard> {
       flightShuttleBuilder: (_, _, _, _, toContext) =>
           (toContext.widget as Hero).child,
       child: image,
-    );
-  }
-
-  Widget _listRow(CardStyle s) {
-    final thumbW = s.rowThumbWidth;
-    final thumbH = s.rowThumbHeight;
-    final hasScore = s.showScore && widget.score != null;
-    final showSub =
-        (!s.compact &&
-            (s.progress != CardProgressStyle.none || s.preset == 'people')) &&
-        (widget.subtitle?.isNotEmpty ?? false);
-    return Container(
-      padding: const EdgeInsets.all(8),
-      decoration: BoxDecoration(
-        color: _cardSurface(),
-        borderRadius: BorderRadius.circular(s.radius),
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(s.radius - 4),
-            child: SizedBox(
-              width: thumbW,
-              height: thumbH,
-              child: Stack(
-                fit: StackFit.expand,
-                children: [
-                  _heroImage(),
-                  if (s.showAiring && widget.airing)
-                    _corner(CardCorner.topRight, const _AiringDot()),
-                ],
-              ),
-            ),
-          ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  widget.title,
-                  maxLines: s.lines,
-                  overflow: TextOverflow.ellipsis,
-                  style: context.textTheme.bodyLarge,
-                ),
-                if (showSub) ...[
-                  const SizedBox(height: 4),
-                  Text(
-                    widget.subtitle!,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: context.textTheme.labelMedium?.copyWith(
-                      color: _scheme.onSurfaceVariant,
-                    ),
-                  ),
-                ],
-                if (_barOn) ...[
-                  const SizedBox(height: 8),
-                  _Bar(
-                    fraction: widget.progress!,
-                    color: _scheme.primary,
-                    height: 4,
-                  ),
-                ],
-              ],
-            ),
-          ),
-          if (hasScore) ...[
-            const SizedBox(width: 10),
-            _ScoreBadge(score: widget.score!, highlight: widget.scoreHighlight),
-          ],
-        ],
-      ),
-    );
-  }
-
-  Widget _bannerRow(CardStyle s) {
-    final thumbW = s.rowThumbWidth;
-    final thumbH = s.rowThumbHeight;
-    final hasScore = s.showScore && widget.score != null;
-    final showSub =
-        (!s.compact &&
-            (s.progress != CardProgressStyle.none || s.preset == 'people')) &&
-        (widget.subtitle?.isNotEmpty ?? false);
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(s.radius),
-      child: SizedBox(
-        height: thumbH + 24,
-        child: Stack(
-          fit: StackFit.expand,
-          children: [
-            ImageFiltered(
-              imageFilter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
-              child: _image(_scheme),
-            ),
-            DecoratedBox(
-              decoration: BoxDecoration(
-                color: _cardSurface().withValues(alpha: 0.82),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(12),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Stack(
-                    clipBehavior: Clip.none,
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(s.radius - 4),
-                        child: SizedBox(
-                          width: thumbW,
-                          height: thumbH,
-                          child: _heroImage(),
-                        ),
-                      ),
-                      if (s.showAiring && widget.airing)
-                        const Positioned(
-                          top: -4,
-                          right: -4,
-                          child: _AiringDot(),
-                        ),
-                      if (hasScore)
-                        Positioned(
-                          right: -6,
-                          bottom: -6,
-                          child: _ScoreBadge(
-                            score: widget.score!,
-                            highlight: widget.scoreHighlight,
-                          ),
-                        ),
-                    ],
-                  ),
-                  const SizedBox(width: 14),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          widget.title,
-                          maxLines: s.lines,
-                          overflow: TextOverflow.ellipsis,
-                          style: context.textTheme.titleMedium,
-                        ),
-                        if (showSub) ...[
-                          const SizedBox(height: 6),
-                          Text(
-                            widget.subtitle!,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: context.textTheme.bodyMedium?.copyWith(
-                              color: _scheme.onSurfaceVariant,
-                            ),
-                          ),
-                        ],
-                        if (_barOn) ...[
-                          const SizedBox(height: 10),
-                          _Bar(
-                            fraction: widget.progress!,
-                            color: _scheme.primary,
-                            height: 4,
-                          ),
-                        ],
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 

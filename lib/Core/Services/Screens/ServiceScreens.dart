@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 
 import '../../../Model/SearchResults.dart';
 import '../../../Model/Setting.dart';
+import '../../../Widgets/Components/ListEditorFields.dart';
 import '../../../Screen/Detail/DetailWidgets.dart';
 import '../Model/Media.dart';
 import '../MediaService.dart';
@@ -9,6 +10,7 @@ import '../MediaService.dart';
 export '../../../Model/MediaType.dart';
 export '../Api/SectionJobs.dart';
 export 'DetailHost.dart';
+export 'ListEditorDraft.dart';
 export 'ScreenWidget.dart';
 
 class HomeScreenView {
@@ -37,6 +39,10 @@ class FeedScreenView {
   final MediaService service;
 
   FeedScreenView(this.service);
+
+  /// How the list called [title] renders (see `ScreenWidget.sectionType`).
+  /// Also used to paint the cached lists before the first fetch lands.
+  int sectionType(MediaType type, String title) => 0;
 
   Stream<List<ScreenWidget>> screenStream(MediaType type) async* {
     final anime = type.isVideo;
@@ -110,6 +116,45 @@ class DetailScreenView {
   Stream<List<ScreenWidget>> screenStream(DetailHost host) async* {
     yield defaultDetailWidgets(host);
   }
+
+  ListEditorScreenView get listEditor => ListEditorScreenView(service);
+}
+
+/// The list-entry editor as data: the fields it shows for a [Media], bound to a
+/// [ListEditorDraft]. A service overrides this to add or drop fields.
+class ListEditorScreenView {
+  final MediaService service;
+
+  ListEditorScreenView(this.service);
+
+  bool get advanced => false;
+
+  Map<String, String> statuses({required bool anime}) => {
+    'CURRENT': anime ? 'Watching' : 'Reading',
+    'PLANNING': 'Planning',
+    'COMPLETED': 'Completed',
+    'PAUSED': 'Paused',
+    'DROPPED': 'Dropped',
+    'REPEATING': anime ? 'Rewatching' : 'Rereading',
+  };
+
+  Map<String, bool> customLists(Media media) => const {};
+
+  List<ScreenWidget> build(Media media, ListEditorDraft draft) => [
+    ScreenWidget.extra(
+      ListStatusField(
+        draft: draft,
+        statuses: statuses(anime: media.isAnime),
+      ),
+    ),
+    ScreenWidget.extra(
+      ListProgressField(draft: draft, total: media.totalUnits),
+    ),
+    ScreenWidget.extra(ListScoreField(draft: draft)),
+    if (advanced) ScreenWidget.extra(ListDatesField(draft: draft)),
+    ScreenWidget.extra(ListPrivateField(draft: draft)),
+    if (advanced) ScreenWidget.extra(ListOtherSection(draft: draft)),
+  ];
 }
 
 abstract class NotificationScreenView {
@@ -119,4 +164,9 @@ abstract class NotificationScreenView {
 /// The service's own settings, folded into the app's Settings screen.
 abstract class SettingsScreenView {
   List<Setting> build(BuildContext context);
+
+  /// The same rows as [ScreenWidget]s, for the service's own settings page.
+  List<ScreenWidget> widgets(BuildContext context) => [
+    ScreenWidget.settings(null, build(context)),
+  ];
 }

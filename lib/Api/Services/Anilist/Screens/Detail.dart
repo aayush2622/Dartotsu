@@ -2,11 +2,15 @@ import '../../../../Core/Services/MediaService.dart';
 import '../../../../Core/Services/Model/Media.dart';
 import '../../../../Utils/Extensions/StringExtensions.dart';
 import '../AnilistAuth.dart';
+import '../AnilistMedia.dart';
 import '../Widgets/DetailStats.dart';
 import '../Widgets/FollowersShelf.dart';
 
 class AnilistDetailView extends DetailScreenView {
   AnilistDetailView(super.service);
+
+  @override
+  ListEditorScreenView get listEditor => AnilistListEditorView(service);
 
   @override
   Stream<List<ScreenWidget>> screenStream(DetailHost host) async* {
@@ -128,4 +132,15 @@ class AnilistDetailView extends DetailScreenView {
       ),
     ];
   }
+}
+
+class AnilistListEditorView extends ListEditorScreenView {
+  AnilistListEditorView(super.service);
+
+  @override
+  bool get advanced => true;
+
+  @override
+  Map<String, bool> customLists(Media media) =>
+      media is AnilistMedia ? media.inCustomListsOf : const {};
 }

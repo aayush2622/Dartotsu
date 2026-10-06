@@ -19,7 +19,16 @@ class _BrowseRail {
 
 extension on AnilistQueries {
   List<SectionJob> _browseJobs({required bool anime}) {
-    final rails = anime ? _animeRails() : _mangaRails();
+    final all = anime ? _animeRails() : _mangaRails();
+    final layout =
+        (anime ? AnilistPref.animeLayout : AnilistPref.mangaLayout).value;
+    final byTitle = {for (final r in all) r.title: r};
+    final rails = [
+      for (final e in layout.entries)
+        if (e.value && byTitle.containsKey(e.key)) byTitle[e.key]!,
+      for (final r in all)
+        if (!layout.containsKey(r.title)) r,
+    ];
     if (AnilistPref.queryLoadMode.value == QueryLoadMode.stacked) {
       return [() => _fetchRails(rails)];
     }

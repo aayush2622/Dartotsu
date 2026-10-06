@@ -25,6 +25,7 @@ class BrowseFeed extends StatelessWidget {
             : () => openSearch(context, service, type: type),
       ),
       loader: () => view.screenStream(type),
+      sectionTypeOf: (title) => view.sectionType(type, title),
       cacheId: '${service.id}/${type.name}',
       reloadOn: service.auth?.user.stream,
       onMediaTap: (m, tag) => openDetail(context, service, m, heroTag: tag),

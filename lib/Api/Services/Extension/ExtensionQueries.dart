@@ -59,11 +59,16 @@ class ExtensionQueries extends Queries {
 
   List<SectionJob> browseJobsFor(ItemType type) {
     final anime = type == ItemType.anime;
+    final latest = extensionDefaultFeedPref.rx.value == 'latest';
     return [
-      for (final source in loadedSources(type)) ...[
-        () => _rail(source, anime, _popularTitle(source), 1, popular: true),
-        () => _rail(source, anime, _latestTitle(source), 1, popular: false),
-      ],
+      for (final source in loadedSources(type))
+        () => _rail(
+          source,
+          anime,
+          latest ? _latestTitle(source) : _popularTitle(source),
+          1,
+          popular: !latest,
+        ),
     ];
   }
 

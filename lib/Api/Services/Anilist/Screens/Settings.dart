@@ -9,7 +9,7 @@ import '../AnilistPrefs.dart';
 import '../Widgets/HomeLayoutSheet.dart';
 import '../AnilistAuth.dart';
 
-class AnilistSettingsView implements SettingsScreenView {
+class AnilistSettingsView extends SettingsScreenView {
   @override
   List<Setting> build(BuildContext context) {
     final auth = anilistAuth;
@@ -39,8 +39,25 @@ class AnilistSettingsView implements SettingsScreenView {
         icon: Icons.dashboard_customize_rounded,
         isActivity: true,
         isVisible: auth.isLoggedIn,
-        onClick: () => showHomeLayoutSheet(context),
+        onClick: () =>
+            showHomeLayoutSheet(context, pref: AnilistPref.homeLayout),
       ),
+      for (final (label, pref, icon) in [
+        ('Anime', AnilistPref.animeLayout, Icons.movie_filter_rounded),
+        ('Manga', AnilistPref.mangaLayout, Icons.menu_book_rounded),
+      ])
+        Setting.normal(
+          name: '$label sections',
+          description:
+              '${pref.rx.value.values.where((v) => v).length} of ${pref.rx.value.length} shown — tap to pick and reorder',
+          icon: icon,
+          isActivity: true,
+          onClick: () => showHomeLayoutSheet(
+            context,
+            title: '$label sections',
+            pref: pref,
+          ),
+        ),
       Setting.switchType(
         name: 'Hide private entries',
         description: 'Keep entries marked private on AniList out of the feed',

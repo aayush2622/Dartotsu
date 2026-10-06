@@ -88,63 +88,16 @@ class _CardStyleScreenState extends BaseScreen<CardStyleScreen> {
   }
 
   List<Widget> _bodyChildren(CardStyle s) {
-    final grid = s.isGrid;
     return [
       _preview(s),
       SizedBox(height: Dimens.gap),
-      _layoutType(s),
-      if (grid) ...[SizedBox(height: Dimens.gap), _presets(s)],
+      _presets(s),
       SizedBox(height: Dimens.gap),
       _layout(s),
       SizedBox(height: Dimens.gap),
       _shape(s),
       if (!s.compact) ...[SizedBox(height: Dimens.gap), _overlays(s)],
     ];
-  }
-
-  Widget _layoutType(CardStyle s) {
-    return SectionCard(
-      title: 'Layout',
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          AppSegmented<CardLayout>(
-            value: s.layout,
-            onChanged: (v) => _edit((c) => c.copyWith(layout: v)),
-            segments: const [
-              AppSegment(
-                CardLayout.grid,
-                label: 'Card',
-                icon: Icons.grid_view_rounded,
-              ),
-              AppSegment(
-                CardLayout.list,
-                label: 'List',
-                icon: Icons.view_list_rounded,
-              ),
-              AppSegment(
-                CardLayout.banner,
-                label: 'Banner',
-                icon: Icons.view_agenda_rounded,
-              ),
-            ],
-          ),
-          SizedBox(height: Dimens.gapXs),
-          Text(
-            switch (s.layout) {
-              CardLayout.grid => 'A horizontal shelf of poster cards.',
-              CardLayout.list =>
-                'A compact, top-to-bottom list — thumbnail and title in a row.',
-              CardLayout.banner =>
-                'A wide, top-to-bottom list with a blurred banner behind each row.',
-            },
-            style: context.textTheme.bodySmall?.copyWith(
-              color: context.colorScheme.onSurfaceVariant,
-            ),
-          ),
-        ],
-      ),
-    );
   }
 
   List<Widget> _previewCards(CardStyle s) => [
@@ -171,19 +124,6 @@ class _CardStyleScreenState extends BaseScreen<CardStyleScreen> {
 
   Widget _preview(CardStyle s) {
     final cards = _previewCards(s);
-    if (!s.isGrid) {
-      return SectionCard(
-        title: 'Preview',
-        child: Column(
-          children: [
-            for (final (i, c) in cards.indexed) ...[
-              c,
-              if (i != cards.length - 1) SizedBox(height: Dimens.cardGap),
-            ],
-          ],
-        ),
-      );
-    }
     return SectionCard(
       title: 'Preview',
       child: SizedBox(
@@ -239,7 +179,7 @@ class _CardStyleScreenState extends BaseScreen<CardStyleScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (s.isGrid) ...[
+          ...[
             LabeledField(
               label: 'Mode',
               child: AppSegmented<CardMode>(
@@ -372,7 +312,7 @@ class _CardStyleScreenState extends BaseScreen<CardStyleScreen> {
               segments: [
                 const AppSegment(CardProgressStyle.pill, label: 'Pill'),
                 const AppSegment(CardProgressStyle.bar, label: 'Bar'),
-                if (!(s.isGrid && s.mode == CardMode.onCard))
+                if (s.mode != CardMode.onCard)
                   const AppSegment(CardProgressStyle.outside, label: 'Outside'),
                 const AppSegment(CardProgressStyle.none, label: 'Off'),
               ],
