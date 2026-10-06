@@ -17,6 +17,7 @@ class AnilistSettingsView extends SettingsScreenView {
     final layout = AnilistPref.homeLayout.rx.value;
     final shown = layout.values.where((v) => v).length;
     return [
+      const Setting.header('Loading'),
       segmentedSetting<QueryLoadMode>(
         name: 'Query size',
         description:
@@ -24,7 +25,7 @@ class AnilistSettingsView extends SettingsScreenView {
             'send a small request per row: each is quick and rows appear as '
             'they arrive.',
         icon: Icons.bolt_rounded,
-        label: 'Queries',
+        label: 'Query size',
         value: AnilistPref.queryLoadMode.rx.value,
         onChanged: (v) => AnilistPref.queryLoadMode.rx.value = v,
         segments: const [
@@ -32,6 +33,7 @@ class AnilistSettingsView extends SettingsScreenView {
           AppSegment(QueryLoadMode.sequential, label: 'Split'),
         ],
       ),
+      const Setting.header('Feed layout'),
       Setting.normal(
         name: 'Home sections',
         description:
@@ -58,6 +60,7 @@ class AnilistSettingsView extends SettingsScreenView {
             pref: pref,
           ),
         ),
+      const Setting.header('Privacy'),
       Setting.switchType(
         name: 'Hide private entries',
         description: 'Keep entries marked private on AniList out of the feed',
@@ -65,6 +68,7 @@ class AnilistSettingsView extends SettingsScreenView {
         isChecked: AnilistPref.hidePrivate.rx.value,
         onSwitchChange: (v) => AnilistPref.hidePrivate.rx.value = v,
       ),
+      const Setting.header('Account'),
       Setting.normal(
         name: 'AniList profile',
         description: user?.name ?? 'Not signed in',

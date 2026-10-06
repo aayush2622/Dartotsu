@@ -32,24 +32,41 @@ Setting segmentedSetting<T>({
     name: name,
     description: description,
     onDirection: onDirection,
-    builder: (context) => Row(
+    builder: (context) => Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Icon(icon, size: 22, color: context.colorScheme.primary),
-        const SizedBox(width: 20),
-        Expanded(
-          child: Text(
-            label,
-            style: context.textTheme.bodyLarge?.copyWith(
-              fontWeight: FontWeight.w600,
+        Row(
+          children: [
+            Icon(icon, size: 22, color: context.colorScheme.primary),
+            const SizedBox(width: 20),
+            Expanded(
+              child: Text(
+                label,
+                style: context.textTheme.bodyLarge?.copyWith(
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+            AppSegmented<T>(
+              expand: false,
+              value: value,
+              onChanged: onChanged,
+              segments: segments,
+            ),
+          ],
+        ),
+        if (description != null) ...[
+          const SizedBox(height: 8),
+          Padding(
+            padding: const EdgeInsets.only(left: 42),
+            child: Text(
+              description,
+              style: context.textTheme.bodySmall?.copyWith(
+                color: context.colorScheme.onSurfaceVariant,
+              ),
             ),
           ),
-        ),
-        AppSegmented<T>(
-          expand: false,
-          value: value,
-          onChanged: onChanged,
-          segments: segments,
-        ),
+        ],
       ],
     ),
   );
