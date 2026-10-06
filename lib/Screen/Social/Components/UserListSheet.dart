@@ -7,6 +7,7 @@ import '../../../Widgets/Components/AppSheet.dart';
 import '../../../Widgets/Components/SheetTile.dart';
 import '../SocialNavigation.dart';
 import 'UserAvatar.dart';
+import '../../../Utils/Functions/NavigateToScreen.dart';
 
 String followLabel(UserBrief user) {
   if (user.isFollowing && user.isFollower) return 'Mutual';
@@ -47,7 +48,7 @@ Future<void> showUserListSheet(
                       ? null
                       : Text(followLabel(user)),
                   onTap: () {
-                    Navigator.of(context).pop();
+                    popPage(context);
                     openProfile(context, service, id: user.id, user: user);
                   },
                 ),

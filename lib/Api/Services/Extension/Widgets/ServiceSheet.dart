@@ -10,6 +10,7 @@ import '../../../../Widgets/Components/CachedNetworkImage.dart';
 import '../../../../Widgets/Components/CustomBottomDialog.dart';
 import '../../../../Widgets/Components/SheetTile.dart';
 import '../../../../Widgets/Components/ThemedContainer.dart';
+import '../../../../Screen/Settings/ExtensionSourceSettingsScreen.dart';
 import '../Services.dart';
 
 class ExtensionServiceSheet extends StatelessWidget {
@@ -79,6 +80,7 @@ class ExtensionServiceSheet extends StatelessWidget {
                             ),
                           ),
                           title: Text(service.name),
+                          trailing: extensionSettingsButton(context, service),
                           onTap: () {
                             setExtensionService(type, service.id);
                             tryFind<RefreshController>()?.all();

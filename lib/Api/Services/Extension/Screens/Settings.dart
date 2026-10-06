@@ -1,10 +1,13 @@
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../Core/Services/MediaService.dart';
 import '../../../../Model/Setting.dart';
 import '../../../../Screen/Settings/Widgets/SegmentedSetting.dart';
 import '../../../../Widgets/Components/AppControls.dart';
+import '../../../../Core/Services/MediaService.dart';
+import '../../../../Screen/Settings/Widgets/ListTransferSheet.dart';
+import '../../../../Screen/Settings/ExtensionSourceSettingsScreen.dart';
+import '../ExtensionImport.dart';
 import '../Services.dart';
 import '../Widgets/ServiceSheet.dart';
 
@@ -24,6 +27,33 @@ class ExtensionSettingsView extends SettingsScreenView {
         isActivity: true,
         onClick: () => showExtensionServiceSheet(context, type),
       ),
+    for (final service in _bridgeServices(context))
+      Setting.normal(
+        name: '${service.name} settings',
+        description: 'Options from the ${service.name} extension bridge',
+        icon: Icons.settings_rounded,
+        isActivity: true,
+        onClick: () => openExtensionSettings(context, service),
+      ),
+    const Setting.header('Lists'),
+    Setting.normal(
+      name: 'Import lists',
+      description: 'From Aniyomi, Mihon / Tachiyomi or Kotatsu backups',
+      icon: Icons.download_rounded,
+      isActivity: true,
+      onClick: () => showListImportSheet(
+        context,
+        extensionService(),
+        sourceFor: resolveImportedSource,
+      ),
+    ),
+    Setting.normal(
+      name: 'Export lists',
+      description: 'To an Aniyomi, Mihon or Kotatsu backup',
+      icon: Icons.upload_rounded,
+      isActivity: true,
+      onClick: () => showListExportSheet(context, extensionService()),
+    ),
     const Setting.header('Browse'),
     segmentedSetting<String>(
       name: 'Reading tab',
@@ -50,6 +80,16 @@ class ExtensionSettingsView extends SettingsScreenView {
       onChanged: (v) => extensionDefaultFeedPref.rx.value = v,
     ),
   ];
+
+  List<Extension> _bridgeServices(BuildContext context) {
+    final seen = <String>{};
+    return [
+      for (final type in ItemType.values)
+        if (extensionServiceFor(type) case final service?
+            when service.settings(context).isNotEmpty && seen.add(service.id))
+          service,
+    ];
+  }
 
   String _description(ItemType type) {
     final service = extensionServiceFor(type);

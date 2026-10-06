@@ -1,9 +1,14 @@
+import 'dart:convert';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:html/dom.dart' as dom;
 import 'package:html/parser.dart' as html_parser;
 
+import '../../Core/NetworkManager/NetworkManager.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
+import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Utils/Function.dart';
 import 'Clickable.dart';
 
@@ -285,6 +290,12 @@ class _AniHtmlState extends State<AniHtml> {
     return result;
   }
 
+  bool _isCentered(dom.Element e) {
+    if ((e.attributes['align'] ?? '').toLowerCase() == 'center') return true;
+    final style = (e.attributes['style'] ?? '').replaceAll(' ', '');
+    return style.contains('text-align:center');
+  }
+
   Widget? _block(
     dom.Element e,
     TextStyle style,
@@ -309,15 +320,24 @@ class _AniHtmlState extends State<AniHtml> {
           ),
         );
       case 'p':
-        final children = _blocks(e.nodes, style, align, centered: centered);
+        final here = centered || _isCentered(e);
+        final children = _blocks(
+          e.nodes,
+          style,
+          here ? TextAlign.center : align,
+          centered: here,
+        );
         if (children.isEmpty) return null;
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 4),
-          child: Column(
-            crossAxisAlignment: centered
-                ? CrossAxisAlignment.center
-                : CrossAxisAlignment.start,
-            children: children,
+          child: SizedBox(
+            width: double.infinity,
+            child: Column(
+              crossAxisAlignment: here
+                  ? CrossAxisAlignment.center
+                  : CrossAxisAlignment.start,
+              children: children,
+            ),
           ),
         );
       case 'div':
@@ -327,13 +347,22 @@ class _AniHtmlState extends State<AniHtml> {
             children: _blocks(e.nodes, style, align, centered: centered),
           );
         }
-        final children = _blocks(e.nodes, style, align, centered: centered);
+        final here = centered || _isCentered(e);
+        final children = _blocks(
+          e.nodes,
+          style,
+          here ? TextAlign.center : align,
+          centered: here,
+        );
         if (children.isEmpty) return null;
-        return Column(
-          crossAxisAlignment: centered
-              ? CrossAxisAlignment.center
-              : CrossAxisAlignment.start,
-          children: children,
+        return SizedBox(
+          width: double.infinity,
+          child: Column(
+            crossAxisAlignment: here
+                ? CrossAxisAlignment.center
+                : CrossAxisAlignment.start,
+            children: children,
+          ),
         );
       case 'details':
         return _SpoilerBlock(
@@ -504,7 +533,7 @@ class _AniHtmlState extends State<AniHtml> {
     if (node is dom.Text) {
       final text = node.text.replaceAll(RegExp(r'\s+'), ' ');
       if (text.isEmpty) return const [];
-      return [_textSpan(text, style, href)];
+      return _markdownLinks(text, style, href);
     }
     if (node is! dom.Element) return const [];
     if (descend) {
@@ -578,6 +607,38 @@ class _AniHtmlState extends State<AniHtml> {
   List<InlineSpan> _children(dom.Element e, TextStyle style, String? href) => [
     for (final c in e.nodes) ..._inlineSpans(c, style, href),
   ];
+
+  static final _mdLink = RegExp(r'\[([^\]\n]+)\]\((https?://[^)\s]+)\)');
+
+  List<InlineSpan> _markdownLinks(String text, TextStyle style, String? href) {
+    if (href != null || !text.contains('](')) {
+      return [_textSpan(text, style, href)];
+    }
+    final scheme = context.colorScheme;
+    final out = <InlineSpan>[];
+    var last = 0;
+    for (final m in _mdLink.allMatches(text)) {
+      if (m.start > last) {
+        out.add(_textSpan(text.substring(last, m.start), style, null));
+      }
+      out.add(
+        _textSpan(
+          m.group(1)!,
+          style.copyWith(
+            color: scheme.primary,
+            decoration: TextDecoration.underline,
+            decorationColor: scheme.primary.withValues(alpha: 0.5),
+          ),
+          m.group(2),
+        ),
+      );
+      last = m.end;
+    }
+    if (last < text.length) {
+      out.add(_textSpan(text.substring(last), style, null));
+    }
+    return out;
+  }
 
   TextSpan _textSpan(String text, TextStyle style, String? href) {
     TapGestureRecognizer? recognizer;
@@ -659,10 +720,14 @@ class _AniHtmlState extends State<AniHtml> {
                       ),
                     ),
                   ),
-            errorBuilder: (context, _, _) => _BrokenImage(
+            errorBuilder: (context, _, _) => _RemoteSvg(
               url: src,
-              label: alt,
-              onTap: () => openLinkInBrowser(href ?? src),
+              width: px != null || fraction != null ? max : null,
+              fallback: _BrokenImage(
+                url: src,
+                label: alt,
+                onTap: () => openLinkInBrowser(href ?? src),
+              ),
             ),
           ),
         );
@@ -868,4 +933,63 @@ class _SpoilerBlockState extends State<_SpoilerBlock> {
       ),
     );
   }
+}
+
+class _RemoteSvg extends StatefulWidget {
+  final String url;
+  final double? width;
+  final Widget fallback;
+
+  const _RemoteSvg({required this.url, this.width, required this.fallback});
+
+  @override
+  State<_RemoteSvg> createState() => _RemoteSvgState();
+}
+
+class _RemoteSvgState extends State<_RemoteSvg> {
+  late final Future<String?> _svg = _load();
+
+  Future<String?> _load() async {
+    try {
+      final res = await find<NetworkManager>().get(widget.url);
+      if (!res.isOk) return null;
+      final raw = res.data;
+      final text = raw is String
+          ? raw
+          : (res.rawBytes == null ? null : utf8.decode(res.rawBytes!));
+      if (text == null || !text.contains('<svg')) return null;
+      if (text.contains('<foreignObject')) return null;
+      return text;
+    } catch (_) {
+      return null;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) => FutureBuilder<String?>(
+    future: _svg,
+    builder: (context, snap) {
+      if (snap.connectionState != ConnectionState.done) {
+        return const SizedBox(
+          width: 48,
+          height: 48,
+          child: Center(
+            child: SizedBox(
+              width: 18,
+              height: 18,
+              child: CircularProgressIndicator(strokeWidth: 2),
+            ),
+          ),
+        );
+      }
+      final svg = snap.data;
+      if (svg == null) return widget.fallback;
+      return SvgPicture.string(
+        svg,
+        width: widget.width,
+        fit: BoxFit.contain,
+        errorBuilder: (context, _, _) => widget.fallback,
+      );
+    },
+  );
 }

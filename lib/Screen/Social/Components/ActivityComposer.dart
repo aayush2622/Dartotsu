@@ -6,6 +6,7 @@ import '../../../Utils/Functions/SnackBar.dart';
 import '../../../Widgets/Components/AppSheet.dart';
 import '../../../Widgets/Components/CustomBottomDialog.dart';
 import '../../../Widgets/Components/MarkupText.dart';
+import '../../../Utils/Functions/NavigateToScreen.dart';
 
 enum ComposerKind { activity, message, reply }
 
@@ -94,7 +95,7 @@ class _ActivityComposerState extends State<ActivityComposer> {
     if (!mounted) return;
     if (ok) {
       snackString(edit == null ? 'Posted' : 'Saved');
-      Navigator.of(context).pop(true);
+      popPage(context, true);
     } else {
       setState(() => _busy = false);
       snackString('Could not post');
@@ -169,6 +170,9 @@ class _ActivityComposerState extends State<ActivityComposer> {
             if (widget.kind == ComposerKind.message)
               SwitchListTile(
                 contentPadding: EdgeInsets.zero,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(14),
+                ),
                 title: const Text('Private message'),
                 value: _private,
                 onChanged: (v) => setState(() => _private = v),

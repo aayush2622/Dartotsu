@@ -12,6 +12,7 @@ import '../../Widgets/Components/AppBars.dart';
 import '../../Widgets/Components/AppTabs.dart';
 import '../../Widgets/Components/BaseScreen.dart';
 import '../../Widgets/Components/EmptyState.dart';
+import '../../Widgets/Components/ScrollConfig.dart';
 import '../MediaList/MediaListScreen.dart';
 import 'Components/ActivityComposer.dart';
 import 'Components/ActivityList.dart';
@@ -171,74 +172,77 @@ class _ProfileScreenState extends BaseScreen<ProfileScreen>
       body: Obx(() {
         final glass = find<ThemeController>().useGlassMode.value;
         final userId = _user.value?.id ?? widget.id ?? _seed.id;
-        return NestedScrollView(
-          controller: _scroll,
-          headerSliverBuilder: (context, _) => [
-            SliverPersistentHeader(
-              pinned: true,
-              delegate: ProfileHeaderDelegate(
-                service: widget.service,
-                seed: _seed,
-                user: _user,
-                top: top,
-                glass: glass,
-                isSelf: _isSelf,
-                canFollow: _view.canInteract,
-                followBusy: _followBusy,
-                onFollow: _toggleFollow,
-                onFollowers: () => openFollows(
-                  context,
-                  widget.service,
-                  userId,
-                  followers: true,
-                  title: _user.value?.name,
+        return ScrollConfig(
+          context,
+          child: NestedScrollView(
+            controller: _scroll,
+            headerSliverBuilder: (context, _) => [
+              SliverPersistentHeader(
+                pinned: true,
+                delegate: ProfileHeaderDelegate(
+                  service: widget.service,
+                  seed: _seed,
+                  user: _user,
+                  top: top,
+                  glass: glass,
+                  isSelf: _isSelf,
+                  canFollow: _view.canInteract,
+                  followBusy: _followBusy,
+                  onFollow: _toggleFollow,
+                  onFollowers: () => openFollows(
+                    context,
+                    widget.service,
+                    userId,
+                    followers: true,
+                    title: _user.value?.name,
+                  ),
+                  onFollowing: () => openFollows(
+                    context,
+                    widget.service,
+                    userId,
+                    followers: false,
+                    title: _user.value?.name,
+                  ),
+                  onAnime: () => _openList(true),
+                  onManga: () => _openList(false),
                 ),
-                onFollowing: () => openFollows(
-                  context,
-                  widget.service,
-                  userId,
-                  followers: false,
-                  title: _user.value?.name,
-                ),
-                onAnime: () => _openList(true),
-                onManga: () => _openList(false),
               ),
-            ),
-            SliverPersistentHeader(
-              pinned: true,
-              delegate: _TabsDelegate(
-                controller: _tabs,
-                items: const [
-                  AppTabItem('Profile'),
-                  AppTabItem('Feed'),
-                  AppTabItem('Stats'),
-                ],
-                glass: glass,
-              ),
-            ),
-          ],
-          body: userId.isEmpty
-              ? const Center(child: CircularProgressIndicator())
-              : TabBarView(
+              SliverPersistentHeader(
+                pinned: true,
+                delegate: _TabsDelegate(
                   controller: _tabs,
-                  children: [
-                    ProfileInfoTab(
-                      service: widget.service,
-                      user: _user.value,
-                      userId: userId,
-                    ),
-                    ActivityList(
-                      service: widget.service,
-                      scope: ActivityScope.user,
-                      userId: userId,
-                      filterable: true,
-                      composer: _isSelf
-                          ? ComposerKind.activity
-                          : ComposerKind.message,
-                    ),
-                    ProfileStatsTab(service: widget.service, userId: userId),
+                  items: const [
+                    AppTabItem('Profile'),
+                    AppTabItem('Feed'),
+                    AppTabItem('Stats'),
                   ],
+                  glass: glass,
                 ),
+              ),
+            ],
+            body: userId.isEmpty
+                ? const Center(child: CircularProgressIndicator())
+                : TabBarView(
+                    controller: _tabs,
+                    children: [
+                      ProfileInfoTab(
+                        service: widget.service,
+                        user: _user.value,
+                        userId: userId,
+                      ),
+                      ActivityList(
+                        service: widget.service,
+                        scope: ActivityScope.user,
+                        userId: userId,
+                        filterable: true,
+                        composer: _isSelf
+                            ? ComposerKind.activity
+                            : ComposerKind.message,
+                      ),
+                      ProfileStatsTab(service: widget.service, userId: userId),
+                    ],
+                  ),
+          ),
         );
       }),
     );

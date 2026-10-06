@@ -6,8 +6,6 @@ import '../../../Core/Preferences/PrefManager.dart';
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../../Model/Setting.dart';
 import '../../../Utils/Functions/GetXFunctions.dart';
-import '../../../Utils/Functions/NavigateToScreen.dart';
-import '../../../Utils/Functions/SnackBar.dart';
 import '../../Extension/Widgets/ExtensionManagerSheet.dart';
 import '../ExtensionSourceSettingsScreen.dart';
 
@@ -33,17 +31,7 @@ List<Setting> extensionSettings(BuildContext context) {
           description: '${type.name.capitalizeFirst} extensions',
           icon: Icons.settings_rounded,
           isActivity: true,
-          onClick: () {
-            final current = manager[type];
-            if (current.settings(context).isEmpty) {
-              snackString("${current.name} doesn't provide any settings.");
-              return;
-            }
-            navigateToPage(
-              context,
-              ExtensionSourceSettingsScreen(extension: current),
-            );
-          },
+          onClick: () => openExtensionSettings(context, manager[type]),
         ),
     ],
     Setting.header(getString.sectionOptions),

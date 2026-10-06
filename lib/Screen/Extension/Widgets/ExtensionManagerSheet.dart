@@ -11,6 +11,7 @@ import '../../../Utils/Functions/SnackBar.dart';
 import '../../../Widgets/Components/AlertDialogBuilder.dart';
 import '../../../Widgets/Components/CustomBottomDialog.dart';
 import '../../../Widgets/Components/ThemedContainer.dart';
+import '../../Settings/ExtensionSourceSettingsScreen.dart';
 import '../ExtensionScreen.dart';
 
 void showExtensionManagerSheet(BuildContext context, ItemType type) {
@@ -85,11 +86,28 @@ Widget _serviceTile(
               fontWeight: FontWeight.w600,
             ),
           ),
-          trailing: _serviceTrailing(context, m, installed, availableInRepo),
+          trailing: _withSettings(
+            context,
+            m,
+            _serviceTrailing(context, m, installed, availableInRepo),
+            installed,
+          ),
         ),
       ),
     ),
   );
+}
+
+Widget? _withSettings(
+  BuildContext context,
+  Extension m,
+  Widget? trailing,
+  bool installed,
+) {
+  final settings = installed ? extensionSettingsButton(context, m) : null;
+  if (settings == null) return trailing;
+  if (trailing == null) return settings;
+  return Row(mainAxisSize: MainAxisSize.min, children: [settings, trailing]);
 }
 
 Widget? _serviceTrailing(

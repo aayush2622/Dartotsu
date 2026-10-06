@@ -36,6 +36,7 @@ import 'Utils/Functions/DeepLink.dart';
 import 'Utils/Functions/GetXFunctions.dart';
 import 'Utils/Functions/NavigateToScreen.dart';
 import 'Utils/Functions/SnackBar.dart';
+import 'Widgets/Components/ScrollConfig.dart';
 import 'l10n/app_localizations.dart';
 
 void main(List<String> args) async {
@@ -202,6 +203,7 @@ class _MyAppState extends State<MyApp> {
                 debugShowCheckedModeBanner: false,
                 enableLog: true,
                 builder: _appBuilder,
+                scrollBehavior: const AppScrollBehavior(),
                 localizationsDelegates: const [
                   AppLocalizations.delegate,
                   GlobalMaterialLocalizations.delegate,

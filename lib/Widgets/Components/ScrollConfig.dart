@@ -15,6 +15,20 @@ const _dragDevices = {
   PointerDeviceKind.mouse,
 };
 
+class AppScrollBehavior extends CupertinoScrollBehavior {
+  const AppScrollBehavior();
+
+  @override
+  Set<PointerDeviceKind> get dragDevices => _dragDevices;
+
+  @override
+  Widget buildScrollbar(
+    BuildContext context,
+    Widget child,
+    ScrollableDetails details,
+  ) => child;
+}
+
 Widget ScrollConfig(
   BuildContext context, {
   required Widget child,
