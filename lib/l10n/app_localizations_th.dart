@@ -442,6 +442,16 @@ class AppLocalizationsTh extends AppLocalizations {
   String get logFileCopied => 'Log path copied';
 
   @override
+  String get donateSheetTitle => 'Enjoying Dartotsu?';
+
+  @override
+  String get donateSheetMessage =>
+      'Dartotsu is built and maintained by one person. If it is useful to you, consider supporting development.';
+
+  @override
+  String get donateLater => 'Maybe later';
+
+  @override
   String get glassBackground => 'Glass background';
 
   @override

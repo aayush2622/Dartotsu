@@ -61,7 +61,7 @@ List<Setting> aboutSettings(BuildContext context) => [
     description: getString.donateDesc,
     icon: Icons.favorite_rounded,
     trailingIcon: Icons.open_in_new_rounded,
-    onClick: () => openLinkInBrowser('https://www.buymeacoffee.com/aayush262'),
+    onClick: () => openLinkInBrowser(kDonateUrl),
   ),
 ];
 

@@ -977,6 +977,24 @@ abstract class AppLocalizations {
   /// **'Log path copied'**
   String get logFileCopied;
 
+  /// No description provided for @donateSheetTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Enjoying Dartotsu?'**
+  String get donateSheetTitle;
+
+  /// No description provided for @donateSheetMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Dartotsu is built and maintained by one person. If it is useful to you, consider supporting development.'**
+  String get donateSheetMessage;
+
+  /// No description provided for @donateLater.
+  ///
+  /// In en, this message translates to:
+  /// **'Maybe later'**
+  String get donateLater;
+
   /// No description provided for @glassBackground.
   ///
   /// In en, this message translates to:

@@ -12,6 +12,7 @@ import '../../Widgets/Components/ThemedContainer.dart';
 import 'SettingsListView.dart';
 import 'SettingsCategories.dart';
 import 'SettingsCategoryScreen.dart';
+import 'Widgets/DonateSheet.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -24,6 +25,9 @@ class _SettingsScreenState extends BaseScreen<SettingsScreen> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) maybeShowDonateSheet(context);
+    });
     if (settingsAppVersion.value.isEmpty) {
       PackageInfo.fromPlatform().then(
         (i) => settingsAppVersion.value = 'v${i.version}+${i.buildNumber}',

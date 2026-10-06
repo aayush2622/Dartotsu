@@ -36,6 +36,8 @@ Future<String?> loadEnv(String prop) async {
   }
 }
 
+const kDonateUrl = 'https://www.buymeacoffee.com/aayush262';
+
 String formatBytes(int bytes) {
   if (bytes < 1024) return '$bytes B';
   if (bytes < 1024 * 1024) return '${(bytes / 1024).toStringAsFixed(1)} KB';
