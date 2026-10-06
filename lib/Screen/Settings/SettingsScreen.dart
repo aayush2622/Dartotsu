@@ -87,49 +87,44 @@ class _CategoryRow extends StatelessWidget {
     void onTap() =>
         navigateToPage(context, SettingsCategoryScreen(category: c));
 
-    return DpadFocusable(
-      onSelect: onTap,
-      tapToSelect: false,
-      builder: dpadFocusHighlight,
-      child: InkWell(
-        onTap: onTap,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-          child: Row(
-            children: [
-              Icon(c.icon, size: 22, color: scheme.primary),
-              const SizedBox(width: 16),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      c.title,
-                      style: context.textTheme.bodyLarge?.copyWith(
-                        fontWeight: FontWeight.w600,
-                      ),
+    return DpadTap(
+      onTap: onTap,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        child: Row(
+          children: [
+            Icon(c.icon, size: 22, color: scheme.primary),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    c.title,
+                    style: context.textTheme.bodyLarge?.copyWith(
+                      fontWeight: FontWeight.w600,
                     ),
-                    const SizedBox(height: 2),
-                    Text(
-                      c.description,
-                      style: context.textTheme.bodySmall?.copyWith(
-                        color: scheme.onSurfaceVariant,
-                      ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
+                  ),
+                  const SizedBox(height: 2),
+                  Text(
+                    c.description,
+                    style: context.textTheme.bodySmall?.copyWith(
+                      color: scheme.onSurfaceVariant,
                     ),
-                  ],
-                ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
               ),
-              const SizedBox(width: 8),
-              Icon(
-                Icons.chevron_right_rounded,
-                color: scheme.onSurfaceVariant,
-                size: 20,
-              ),
-            ],
-          ),
+            ),
+            const SizedBox(width: 8),
+            Icon(
+              Icons.chevron_right_rounded,
+              color: scheme.onSurfaceVariant,
+              size: 20,
+            ),
+          ],
         ),
       ),
     );

@@ -73,44 +73,40 @@ class _ExtensionSourcesRailState extends State<ExtensionSourcesRail> {
     void open() =>
         navigateToPage(context, SourceBrowseScreen(source: source, type: type));
 
-    return DpadFocusable(
-      onSelect: open,
-      builder: dpadFocusHighlight,
-      child: InkWell(
-        onTap: open,
-        borderRadius: BorderRadius.circular(16),
-        child: SizedBox(
-          width: 76,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(14),
-                child: Container(
-                  width: 48,
-                  height: 48,
-                  color: scheme.surfaceContainerHighest,
-                  child: cachedNetworkImage(
-                    imageUrl: source.iconUrl ?? '',
-                    fit: BoxFit.cover,
-                    errorWidget: (_, _, _) => Icon(
-                      Icons.extension_rounded,
-                      color: scheme.onSurfaceVariant,
-                      size: 22,
-                    ),
+    return DpadTap(
+      onTap: open,
+      borderRadius: BorderRadius.circular(16),
+      child: SizedBox(
+        width: 76,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(14),
+              child: Container(
+                width: 48,
+                height: 48,
+                color: scheme.surfaceContainerHighest,
+                child: cachedNetworkImage(
+                  imageUrl: source.iconUrl ?? '',
+                  fit: BoxFit.cover,
+                  errorWidget: (_, _, _) => Icon(
+                    Icons.extension_rounded,
+                    color: scheme.onSurfaceVariant,
+                    size: 22,
                   ),
                 ),
               ),
-              const SizedBox(height: 6),
-              Text(
-                source.name ?? '',
-                maxLines: 2,
-                textAlign: TextAlign.center,
-                overflow: TextOverflow.ellipsis,
-                style: context.textTheme.labelSmall,
-              ),
-            ],
-          ),
+            ),
+            const SizedBox(height: 6),
+            Text(
+              source.name ?? '',
+              maxLines: 2,
+              textAlign: TextAlign.center,
+              overflow: TextOverflow.ellipsis,
+              style: context.textTheme.labelSmall,
+            ),
+          ],
         ),
       ),
     );

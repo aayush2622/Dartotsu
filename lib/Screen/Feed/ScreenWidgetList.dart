@@ -96,6 +96,7 @@ class _ScreenWidgetListState extends State<ScreenWidgetList>
   @override
   void dispose() {
     _composeTimer?.cancel();
+    _cacheTimer?.cancel();
     _reloadSub?.cancel();
     _signalWorker?.dispose();
     super.dispose();
@@ -130,10 +131,15 @@ class _ScreenWidgetListState extends State<ScreenWidgetList>
   }
 
   void _patch(List<ScreenWidget> list) {
+    String? previous;
     for (final item in list) {
       if (!item.isMedia) continue;
       final title = item.title!;
-      if (!_order.contains(title)) _order.add(title);
+      if (!_order.contains(title)) {
+        final at = previous == null ? -1 : _order.indexOf(previous);
+        _order.insert(at < 0 ? 0 : at + 1, title);
+      }
+      previous = title;
       final incoming = item.media!;
       _mediaByTitle[title] = incoming;
       _remember(_loadMoreFns, title, item.onLoadMore);
@@ -145,6 +151,12 @@ class _ScreenWidgetListState extends State<ScreenWidgetList>
       }
     }
     _composeThrottled(list);
+    _cacheTimer?.cancel();
+    _cacheTimer = Timer(const Duration(milliseconds: 900), () {
+      if (mounted && _mediaByTitle.isNotEmpty) {
+        unawaited(_cache?.write(_mediaByTitle));
+      }
+    });
   }
 
   void _remember<T>(Map<String, T> map, String title, T? value) {
@@ -160,7 +172,12 @@ class _ScreenWidgetListState extends State<ScreenWidgetList>
       for (final item in finalList)
         if (item.isMedia) item.title!,
     };
-    _order.removeWhere((t) => !keep.contains(t));
+    _order
+      ..clear()
+      ..addAll([
+        for (final item in finalList)
+          if (item.isMedia) item.title!,
+      ]);
     _mediaByTitle.removeWhere((t, _) => !keep.contains(t));
     _loadMoreFns.removeWhere((t, _) => !keep.contains(t));
     _sectionBuilders.removeWhere((t, _) => !keep.contains(t));
@@ -168,10 +185,12 @@ class _ScreenWidgetListState extends State<ScreenWidgetList>
     _composeTimer?.cancel();
     _composeTimer = null;
     _pendingCompose = null;
+    _cacheTimer?.cancel();
     _compose(finalList);
     if (_mediaByTitle.isNotEmpty) unawaited(_cache?.write(_mediaByTitle));
   }
 
+  Timer? _cacheTimer;
   Timer? _composeTimer;
   List<ScreenWidget>? _pendingCompose;
 
@@ -255,15 +274,7 @@ class _ScreenWidgetListState extends State<ScreenWidgetList>
             else if (showEmpty)
               SliverToBoxAdapter(child: _emptyBox())
             else
-              for (final (i, item) in list.where((e) => !e.spotlight).indexed)
-                SliverToBoxAdapter(
-                  key: ValueKey(
-                    item.isMedia ? 'section-${item.title}' : 'extra-$i',
-                  ),
-                  child: item.isMedia
-                      ? _section(i, item)
-                      : ScreenWidgetView(item),
-                ),
+              _sectionList(list.where((e) => !e.spotlight).toList()),
             SliverToBoxAdapter(child: SizedBox(height: 120.bottomBar())),
           ],
         );
@@ -271,9 +282,31 @@ class _ScreenWidgetListState extends State<ScreenWidgetList>
     );
   }
 
+  Widget _sectionList(List<ScreenWidget> sections) {
+    String keyOf(int i) =>
+        sections[i].isMedia ? 'section-${sections[i].title}' : 'extra-$i';
+    final indexByKey = {for (var i = 0; i < sections.length; i++) keyOf(i): i};
+    return SliverList(
+      delegate: SliverChildBuilderDelegate(
+        (context, i) {
+          final item = sections[i];
+          return item.isMedia
+              ? _section(i, item)
+              : KeyedSubtree(
+                  key: ValueKey(keyOf(i)),
+                  child: ScreenWidgetView(item),
+                );
+        },
+        childCount: sections.length,
+        findChildIndexCallback: (key) =>
+            key is ValueKey<String> ? indexByKey[key.value] : null,
+      ),
+    );
+  }
+
   Widget _section(int index, ScreenWidget item) {
     final title = item.title!;
-    final firstSeen = _seen.add(title);
+    final firstSeen = _seen.add(title) && index < 4;
     final data = MediaSectionData(
       type: 0,
       title: title,

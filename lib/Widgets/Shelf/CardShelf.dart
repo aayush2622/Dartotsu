@@ -326,6 +326,7 @@ class _CardShelfState extends State<CardShelf> {
       focusable: item.focusable,
     );
     final card = item.cardBuilder?.call(defaultCard) ?? defaultCard;
+    if (index > 7) return card;
     return _style.isGrid
         ? card.animateHorizontalEntrance()
         : card.animateFadeUp(begin: 0.08, duration: 240);

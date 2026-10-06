@@ -15,6 +15,7 @@ class ExtensionSettingsView implements SettingsScreenView {
     for (final (label, type, icon) in const [
       ('Anime', ItemType.anime, Icons.movie_filter_rounded),
       ('Manga', ItemType.manga, Icons.menu_book_rounded),
+      ('Novel', ItemType.novel, Icons.auto_stories_rounded),
     ])
       Setting.normal(
         name: '$label service',
@@ -24,6 +25,18 @@ class ExtensionSettingsView implements SettingsScreenView {
         onClick: () => showExtensionServiceSheet(context, type),
       ),
     const Setting.header('Browse'),
+    segmentedSetting<String>(
+      name: 'Reading tab',
+      description: 'Which extensions the third tab shows',
+      icon: Icons.menu_book_rounded,
+      label: 'Reading tab',
+      value: extensionReadTypePref.rx.value,
+      segments: const [
+        AppSegment('manga', label: 'Manga'),
+        AppSegment('novel', label: 'Novel'),
+      ],
+      onChanged: (v) => extensionReadTypePref.rx.value = v,
+    ),
     segmentedSetting<String>(
       name: 'Default feed',
       description: 'Which list a source opens with',

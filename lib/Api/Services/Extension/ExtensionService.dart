@@ -23,7 +23,7 @@ class ExtensionService extends MediaService {
   Queries get getQueries => _queries;
 
   @override
-  List<MediaType> get feedTypes => const [MediaType.anime, MediaType.manga];
+  List<MediaType> get feedTypes => [MediaType.anime, extensionReadType()];
 
   @override
   FeedScreenView get feedView => ExtensionFeedView(this, _queries);

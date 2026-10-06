@@ -1,3 +1,4 @@
+import '../../Utils/Nav/DpadNav.dart';
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -119,7 +120,8 @@ class _NotificationsScreenState extends BaseScreen<NotificationsScreen> {
           color: Colors.transparent,
           borderRadius: Dimens.border,
           clipBehavior: Clip.antiAlias,
-          child: InkWell(
+          child: DpadTap(
+            borderRadius: Dimens.border,
             onTap: n.mediaId == null ? null : () => _open(n),
             child: Padding(
               padding: EdgeInsets.all(Dimens.gapSm + 2),

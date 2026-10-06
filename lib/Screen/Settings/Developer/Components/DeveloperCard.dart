@@ -1,3 +1,4 @@
+import '../../../../Utils/Nav/DpadNav.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../Utils/Extensions/ContextExtensions.dart';
@@ -39,7 +40,7 @@ class DeveloperCard extends StatelessWidget {
     return ThemedContainer(
       padding: EdgeInsets.zero,
       borderRadius: Dimens.border,
-      child: InkWell(
+      child: DpadTap(
         onTap: skeleton ? null : () => openLinkInBrowser(dev.uri),
         borderRadius: Dimens.border,
         child: Column(

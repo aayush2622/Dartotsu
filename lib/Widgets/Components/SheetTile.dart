@@ -1,3 +1,4 @@
+import '../../Utils/Nav/DpadNav.dart';
 import 'package:flutter/material.dart';
 
 import '../../Utils/Extensions/ContextExtensions.dart';
@@ -32,7 +33,7 @@ class SheetTile extends StatelessWidget {
       child: Material(
         color: selected ? scheme.secondaryContainer : Colors.transparent,
         borderRadius: BorderRadius.circular(14),
-        child: InkWell(
+        child: DpadTap(
           onTap: enabled ? onTap : null,
           borderRadius: BorderRadius.circular(14),
           child: Padding(

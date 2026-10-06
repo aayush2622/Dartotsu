@@ -69,7 +69,7 @@ class MainScreenState extends BaseScreen<MainScreen> {
           for (final (i, t) in tabs.indexed)
             _built.contains(i)
                 ? KeyedSubtree(
-                    key: ValueKey('${service.id}-$i'),
+                    key: ValueKey('${service.id}-$i-${t.type?.name}'),
                     child: Obx(() {
                       if (i == index) find<CardStyleController>().epoch.value;
                       return t.build(service);

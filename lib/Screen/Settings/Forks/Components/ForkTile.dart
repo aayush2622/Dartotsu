@@ -1,3 +1,4 @@
+import '../../../../Utils/Nav/DpadNav.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../Utils/Extensions/ContextExtensions.dart';
@@ -30,7 +31,7 @@ class ForkTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final scheme = context.colorScheme;
 
-    return InkWell(
+    return DpadTap(
       onTap: skeleton ? null : () => openLinkInBrowser(fork.uri),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),

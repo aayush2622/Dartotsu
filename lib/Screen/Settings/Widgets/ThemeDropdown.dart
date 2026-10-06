@@ -1,3 +1,4 @@
+import '../../../Utils/Nav/DpadNav.dart';
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -106,7 +107,9 @@ class _ThemePickerSheet extends StatelessWidget {
                                             customColor.toARGB32(),
                                           ))
                                     .colorScheme;
-                          return GestureDetector(
+                          return DpadTap(
+                            scale: true,
+                            ripple: false,
                             onTap: () async {
                               unawaited(HapticFeedback.selectionClick());
                               final picked = await openColorPicker(
@@ -133,7 +136,9 @@ class _ThemePickerSheet extends StatelessWidget {
                             )
                             .colorScheme;
                         final selected = !isCustom && t.name == current;
-                        return GestureDetector(
+                        return DpadTap(
+                          scale: true,
+                          ripple: false,
                           onTap: () {
                             HapticFeedback.selectionClick();
                             controller.setTheme(t.name);

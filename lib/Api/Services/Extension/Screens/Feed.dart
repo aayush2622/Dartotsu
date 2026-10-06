@@ -12,7 +12,7 @@ class ExtensionFeedView extends FeedScreenView {
   Stream<List<ScreenWidget>> screenStream(MediaType type) async* {
     await ensureSourcesReady(itemTypeOf(type));
     yield* sectionWidgets(
-      queries.browseJobs(anime: type.isVideo),
+      queries.browseJobsFor(itemTypeOf(type)),
       build: (title, media) => ScreenWidget.media(
         title,
         media,

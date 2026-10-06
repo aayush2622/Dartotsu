@@ -54,12 +54,18 @@ class ExtensionQueries extends Queries {
   ];
 
   @override
-  List<SectionJob> browseJobs({required bool anime}) => [
-    for (final source in loadedSources(itemTypeFor(anime: anime))) ...[
-      () => _rail(source, anime, _popularTitle(source), 1, popular: true),
-      () => _rail(source, anime, _latestTitle(source), 1, popular: false),
-    ],
-  ];
+  List<SectionJob> browseJobs({required bool anime}) =>
+      browseJobsFor(itemTypeFor(anime: anime));
+
+  List<SectionJob> browseJobsFor(ItemType type) {
+    final anime = type == ItemType.anime;
+    return [
+      for (final source in loadedSources(type)) ...[
+        () => _rail(source, anime, _popularTitle(source), 1, popular: true),
+        () => _rail(source, anime, _latestTitle(source), 1, popular: false),
+      ],
+    ];
+  }
 
   Future<SectionMap> _rail(
     Source source,
@@ -119,7 +125,9 @@ class ExtensionQueries extends Queries {
     if (results == null) return null;
     final anime =
         results.type != SearchType.MANGA && results.type != SearchType.NOVEL;
-    final itemType = itemTypeFor(anime: anime);
+    final itemType = results.type == SearchType.NOVEL
+        ? ItemType.novel
+        : itemTypeFor(anime: anime);
     final term = results.search?.trim() ?? '';
 
     await ensureSourcesReady(itemType);

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import '../../../Logger.dart';
 import '../Model/Media.dart';
 import '../Screens/ScreenWidget.dart';
@@ -6,7 +8,10 @@ typedef SectionMap = Map<String, List<Media>>;
 
 typedef SectionJob = Future<SectionMap> Function();
 
-Stream<SectionMap> runSectionJobs(
+/// Runs [jobs] and yields `(jobIndex, patch)` as each one finishes — in
+/// completion order when [parallel], so a slow source never blocks the fast
+/// ones behind it.
+Stream<(int, SectionMap)> runSectionJobsIndexed(
   List<SectionJob> jobs, {
   bool parallel = true,
 }) async* {
@@ -27,13 +32,28 @@ Stream<SectionMap> runSectionJobs(
     }
   }
 
-  final started = parallel ? [for (final job in jobs) guarded(job)] : null;
-
-  for (var i = 0; i < jobs.length; i++) {
-    final patch = await (started?[i] ?? guarded(jobs[i]));
-    if (patch.isEmpty) continue;
-    delivered = true;
-    yield patch;
+  if (parallel) {
+    final controller = StreamController<(int, SectionMap)>();
+    var pending = jobs.length;
+    for (var i = 0; i < jobs.length; i++) {
+      unawaited(
+        guarded(jobs[i]).then((patch) {
+          if (patch.isNotEmpty) {
+            delivered = true;
+            controller.add((i, patch));
+          }
+          if (--pending == 0) unawaited(controller.close());
+        }),
+      );
+    }
+    yield* controller.stream;
+  } else {
+    for (var i = 0; i < jobs.length; i++) {
+      final patch = await guarded(jobs[i]);
+      if (patch.isEmpty) continue;
+      delivered = true;
+      yield (i, patch);
+    }
   }
 
   if (!delivered && failure != null) {
@@ -41,14 +61,26 @@ Stream<SectionMap> runSectionJobs(
   }
 }
 
+Stream<SectionMap> runSectionJobs(
+  List<SectionJob> jobs, {
+  bool parallel = true,
+}) => runSectionJobsIndexed(jobs, parallel: parallel).map((e) => e.$2);
+
 Stream<List<ScreenWidget>> sectionWidgets(
   List<SectionJob> jobs, {
   bool parallel = true,
   required ScreenWidget Function(String title, List<Media> media) build,
 }) async* {
-  final acc = <String, List<Media>>{};
-  await for (final patch in runSectionJobs(jobs, parallel: parallel)) {
-    acc.addAll(patch);
-    yield [for (final e in acc.entries) build(e.key, e.value)];
+  final slots = List<SectionMap?>.filled(jobs.length, null);
+  await for (final (index, patch) in runSectionJobsIndexed(
+    jobs,
+    parallel: parallel,
+  )) {
+    slots[index] = patch;
+    yield [
+      for (final slot in slots)
+        if (slot != null)
+          for (final e in slot.entries) build(e.key, e.value),
+    ];
   }
 }

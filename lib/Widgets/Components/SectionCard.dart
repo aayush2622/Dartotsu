@@ -1,3 +1,4 @@
+import '../../Utils/Nav/DpadNav.dart';
 import 'package:flutter/material.dart';
 
 import '../../Utils/Extensions/ContextExtensions.dart';
@@ -73,11 +74,7 @@ class SectionHeader extends StatelessWidget {
         Expanded(
           child: onTap == null
               ? text
-              : GestureDetector(
-                  behavior: HitTestBehavior.opaque,
-                  onTap: onTap,
-                  child: text,
-                ),
+              : DpadTap(ripple: false, onTap: onTap, child: text),
         ),
         ?trailing,
       ],

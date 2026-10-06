@@ -1,3 +1,4 @@
+import '../../../Utils/Nav/DpadNav.dart';
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -129,7 +130,9 @@ class _StackedCarouselState extends State<StackedCarousel> {
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8),
-      child: GestureDetector(
+      child: DpadTap(
+        scale: true,
+        ripple: false,
         onTap: () => widget.onTap(m, tag),
         child: Container(
           decoration: BoxDecoration(

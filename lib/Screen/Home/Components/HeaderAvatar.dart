@@ -41,12 +41,7 @@ class HeaderAvatar extends StatelessWidget {
     if (onTap == null) return child;
     return DpadFocusable(
       onSelect: onTap,
-      builder: (_, state, child) => AnimatedScale(
-        scale: kDpadFocused(state) ? 1.06 : 1.0,
-        duration: Durations.short3,
-        curve: Curves.easeOutBack,
-        child: child,
-      ),
+      builder: dpadScaleFocus,
       child: child,
     );
   }

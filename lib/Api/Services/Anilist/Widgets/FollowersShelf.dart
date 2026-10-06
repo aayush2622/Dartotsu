@@ -68,12 +68,7 @@ class _Follower extends StatelessWidget {
     final score = user.score ?? 0;
     return DpadFocusable(
       onSelect: () {},
-      builder: (_, state, child) => AnimatedScale(
-        scale: kDpadFocused(state) ? 1.06 : 1.0,
-        duration: Durations.short3,
-        curve: Curves.easeOutBack,
-        child: child,
-      ),
+      builder: dpadScaleFocus,
       child: SizedBox(
         width: 92,
         child: Column(

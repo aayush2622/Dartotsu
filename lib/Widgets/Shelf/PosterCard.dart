@@ -128,7 +128,7 @@ class _PosterCardState extends State<PosterCard> {
       s,
       round: true,
       overlays: [
-        const _Scrim(kind: _ScrimKind.full),
+        _Scrim(kind: pill ? _ScrimKind.full : _ScrimKind.short),
         ..._cornerMarks(s, bottomTaken: true),
         ..._sourceMark(bottom: pill ? 32 : 10),
         if (_barOn)
@@ -267,7 +267,7 @@ class _PosterCardState extends State<PosterCard> {
                 s,
                 round: false,
                 overlays: [
-                  const _Scrim(kind: _ScrimKind.short),
+                  if (pill) const _Scrim(kind: _ScrimKind.short),
                   ..._sourceMark(bottom: pill ? 32 : 6),
                   if (s.showAiring && widget.airing)
                     _corner(_airingCorner(posterCorner), const _AiringDot()),

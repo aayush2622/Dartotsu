@@ -1,5 +1,6 @@
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/material.dart';
+import '../../Core/ThemeManager/ThemeController.dart';
 import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../Core/Preferences/PrefManager.dart';
@@ -599,11 +600,15 @@ class _SourceCardShellState extends State<_SourceCardShell> {
         onFocusChange: (focused) {
           if (mounted) setState(() => _focused = focused);
         },
-        child: Container(
-          color: highlighted
-              ? scheme.secondaryContainer
-              : scheme.surfaceContainerLow,
-          child: widget.child,
+        child: Obx(
+          () => Container(
+            color: highlighted
+                ? scheme.secondaryContainer
+                : find<ThemeController>().useGlassMode.value
+                ? scheme.surface.withValues(alpha: 0.28)
+                : scheme.surfaceContainerLow,
+            child: widget.child,
+          ),
         ),
       ),
     );

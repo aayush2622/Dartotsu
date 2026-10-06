@@ -34,6 +34,16 @@ const extensionDefaultFeedPref = Pref(
   PrefLocation.OTHER,
 );
 
+const extensionReadTypePref = Pref(
+  'extensionReadType',
+  'manga',
+  PrefLocation.OTHER,
+);
+
+MediaType extensionReadType() => extensionReadTypePref.rx.value == 'novel'
+    ? MediaType.novel
+    : MediaType.manga;
+
 List<Extension> extensionServicesFor(ItemType type) =>
     tryFind<ExtensionManager>()?.managers
         .where((e) => e.supports(type))
@@ -55,8 +65,16 @@ void setExtensionService(ItemType type, String id) {
 List<Source> installedSources(ItemType type) =>
     extensionServiceFor(type)?.state(type).installed.value ?? const [];
 
+final _langSuffix = RegExp(
+  r'\s*[\(\[]\s*[a-z]{2,3}(?:[-_][a-z0-9]+)?\s*[\)\]]$',
+);
+
 String _sourceGroup(Source source) {
-  final name = (source.name ?? '').trim().toLowerCase();
+  final name = (source.name ?? '')
+      .trim()
+      .toLowerCase()
+      .replaceFirst(_langSuffix, '')
+      .trim();
   return name.isEmpty ? 'id:${source.id}' : name;
 }
 
@@ -75,11 +93,23 @@ List<Source> _onePerName(List<Source> sources) {
   ];
 }
 
+const initialSourceLimit = 5;
+
+Pref<bool> sourcesConfiguredPref(String serviceId, ItemType type) => Pref(
+  'extensionSourcesConfigured/$serviceId/${type.name}',
+  false,
+  PrefLocation.OTHER,
+);
+
+bool _isConfigured(String serviceId, ItemType type) =>
+    sourcesConfiguredPref(serviceId, type).rx.value ||
+    mutedSourcesPref(serviceId, type).rx.value.isNotEmpty;
+
 List<Source> loadedSources(ItemType type) {
   final service = extensionServiceFor(type);
   if (service == null) return const [];
   final muted = mutedSourcesPref(service.id, type).rx.value.toSet();
-  return _onePerName(
+  final sources = _onePerName(
     service
         .state(type)
         .installed
@@ -87,6 +117,9 @@ List<Source> loadedSources(ItemType type) {
         .where((s) => !muted.contains(s.id))
         .toList(),
   );
+  return _isConfigured(service.id, type)
+      ? sources
+      : sources.take(initialSourceLimit).toList();
 }
 
 bool isSourceLoaded(ItemType type, Source source) =>
@@ -98,6 +131,14 @@ void setSourceLoaded(ItemType type, Source source, bool loaded) {
   if (service == null || id == null) return;
   final pref = mutedSourcesPref(service.id, type);
   final muted = pref.rx.value.toSet();
+  if (!_isConfigured(service.id, type)) {
+    final active = loadedSources(type).map((s) => s.id).toSet();
+    muted.addAll([
+      for (final s in service.state(type).installed.value)
+        if (s.id != null && !active.contains(s.id)) s.id!,
+    ]);
+    sourcesConfiguredPref(service.id, type).rx.value = true;
+  }
   final siblings = [
     for (final s in service.state(type).installed.value)
       if (s.id != null && s.id != id && _sourceGroup(s) == _sourceGroup(source))

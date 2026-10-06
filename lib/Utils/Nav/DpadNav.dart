@@ -27,6 +27,75 @@ Widget dpadFocusHighlight(
   );
 }
 
+Widget dpadScaleFocus(
+  BuildContext context,
+  DpadFocusState state,
+  Widget child, {
+  double scale = 1.06,
+}) => AnimatedScale(
+  scale: kDpadFocused(state) ? scale : 1.0,
+  duration: Durations.short3,
+  curve: Curves.easeOutBack,
+  child: child,
+);
+
+class DpadTap extends StatelessWidget {
+  final VoidCallback? onTap;
+  final VoidCallback? onLongPress;
+  final BorderRadius? borderRadius;
+  final bool ripple;
+  final bool scale;
+  final bool autofocus;
+  final Widget child;
+
+  const DpadTap({
+    super.key,
+    required this.child,
+    this.onTap,
+    this.onLongPress,
+    this.borderRadius,
+    this.ripple = true,
+    this.scale = false,
+    this.autofocus = false,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    if (onTap == null && onLongPress == null) return child;
+    final radius = borderRadius ?? BorderRadius.circular(14);
+    return DpadFocusable(
+      onSelect: onTap,
+      onLongSelect: onLongPress,
+      autofocus: autofocus,
+      tapToSelect: false,
+      builder: (context, state, inner) => scale
+          ? dpadScaleFocus(context, state, inner)
+          : Container(
+              decoration: BoxDecoration(
+                color:
+                    dpadHighlightColor(context, state.focused) ??
+                    Colors.transparent,
+                borderRadius: radius,
+              ),
+              child: inner,
+            ),
+      child: ripple
+          ? InkWell(
+              onTap: onTap,
+              onLongPress: onLongPress,
+              borderRadius: radius,
+              child: child,
+            )
+          : GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onTap: onTap,
+              onLongPress: onLongPress,
+              child: child,
+            ),
+    );
+  }
+}
+
 class DpadLane extends StatelessWidget {
   final Widget child;
   final String? memoryKey;

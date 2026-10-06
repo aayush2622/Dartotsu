@@ -36,6 +36,7 @@ class ShelfFrame extends StatelessWidget {
     final scheme = Theme.of(context).colorScheme;
     return RepaintBoundary(
       child: ThemedContainer(
+        blur: false,
         margin: EdgeInsets.symmetric(
           horizontal: Dimens.gap,
           vertical: Dimens.gapSm / 2,

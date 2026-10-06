@@ -123,7 +123,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 320),
           child: Obx(
-            () => InkWell(
+            () => DpadTap(
               onTap: () => openThemePicker(context),
               borderRadius: BorderRadius.circular(12),
               child: Padding(

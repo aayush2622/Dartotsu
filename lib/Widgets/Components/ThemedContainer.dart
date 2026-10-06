@@ -14,6 +14,7 @@ class ThemedContainer extends StatelessWidget {
   final EdgeInsetsGeometry? padding;
   final EdgeInsetsGeometry? margin;
   final AlignmentGeometry? alignment;
+  final bool blur;
 
   const ThemedContainer({
     super.key,
@@ -25,6 +26,7 @@ class ThemedContainer extends StatelessWidget {
     this.padding,
     this.margin,
     this.alignment,
+    this.blur = true,
   });
 
   @override
@@ -35,6 +37,27 @@ class ThemedContainer extends StatelessWidget {
     final pad = padding ?? const EdgeInsets.all(8);
 
     return Obx(() {
+      if (controller.useGlassMode.value && !blur) {
+        return Container(
+          margin: margin,
+          padding: pad,
+          alignment: alignment,
+          decoration: BoxDecoration(
+            color: scheme.surface.withValues(alpha: 0.28),
+            border:
+                border ??
+                Border.all(
+                  color: scheme.onSurface.withValues(alpha: 0.14),
+                  width: 0.75,
+                ),
+            borderRadius: radius,
+          ),
+          child: Material(
+            color: Colors.transparent,
+            child: glassChild ?? child,
+          ),
+        );
+      }
       if (controller.useGlassMode.value) {
         return Container(
           margin: margin,

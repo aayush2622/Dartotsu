@@ -101,22 +101,16 @@ class SettingItem extends StatelessWidget {
       setting.onClick?.call();
     }
 
-    return DpadFocusable(
-      onSelect: setting.onClick == null ? null : onTap,
-      onLongSelect: setting.onLongClick,
-      tapToSelect: false,
-      builder: dpadFocusHighlight,
-      child: InkWell(
-        onTap: setting.onClick == null ? null : onTap,
-        onLongPress: setting.onLongClick,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-          child: _Label(
-            setting: setting,
-            trailing: trailing,
-            iconContainerColor: iconContainerColor,
-            iconOnColor: iconOnColor,
-          ),
+    return DpadTap(
+      onTap: setting.onClick == null ? null : onTap,
+      onLongPress: setting.onLongClick,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        child: _Label(
+          setting: setting,
+          trailing: trailing,
+          iconContainerColor: iconContainerColor,
+          iconOnColor: iconOnColor,
         ),
       ),
     );
@@ -144,25 +138,19 @@ class SettingSwitchItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DpadFocusable(
-      onSelect: _toggle,
-      onLongSelect: setting.onLongClick,
-      tapToSelect: false,
-      builder: dpadFocusHighlight,
-      child: InkWell(
-        onTap: _toggle,
-        onLongPress: setting.onLongClick,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          child: _Label(
-            setting: setting,
-            trailing: Switch(
-              value: setting.isChecked,
-              onChanged: setting.onSwitchChange,
-            ),
-            iconContainerColor: iconContainerColor,
-            iconOnColor: iconOnColor,
+    return DpadTap(
+      onTap: _toggle,
+      onLongPress: setting.onLongClick,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        child: _Label(
+          setting: setting,
+          trailing: Switch(
+            value: setting.isChecked,
+            onChanged: setting.onSwitchChange,
           ),
+          iconContainerColor: iconContainerColor,
+          iconOnColor: iconOnColor,
         ),
       ),
     );
