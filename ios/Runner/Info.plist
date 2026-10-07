@@ -110,6 +110,30 @@
           <string>sugoireads</string>
         </array>
       </dict>
+      <dict>
+        <key>CFBundleURLName</key>
+        <string>ireader</string>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>ireader</string>
+        </array>
+      </dict>
+      <dict>
+        <key>CFBundleURLName</key>
+        <string>legado</string>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>legado</string>
+        </array>
+      </dict>
+      <dict>
+        <key>CFBundleURLName</key>
+        <string>yuedu</string>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>yuedu</string>
+        </array>
+      </dict>
     </array>
     <key>UISupportedInterfaceOrientations</key>
     <array>

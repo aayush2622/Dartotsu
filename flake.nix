@@ -164,7 +164,7 @@
           desktopItems = [
             (pkgs.makeDesktopItem {
               name = exe;
-              exec = exe;
+              exec = "${exe} %U";
               icon = exe;
               desktopName = "Dartotsu" + pkgs.lib.optionalString (channel != "stable") " (${channel})";
               genericName = "Anilist client";
@@ -180,6 +180,12 @@
                 "x-scheme-handler/anymex"
                 "x-scheme-handler/sugoireads"
                 "x-scheme-handler/mangayomi"
+                "x-scheme-handler/dartotsu"
+                "x-scheme-handler/aniyomi"
+                "x-scheme-handler/tachiyomi"
+                "x-scheme-handler/ireader"
+                "x-scheme-handler/legado"
+                "x-scheme-handler/yuedu"
               ];
             })
           ];

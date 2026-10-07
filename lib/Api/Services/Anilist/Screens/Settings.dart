@@ -1,3 +1,4 @@
+import '../../../../Utils/Functions/LinkSettings.dart';
 import '../../../../Core/Preferences/PrefManager.dart';
 import 'package:flutter/material.dart';
 
@@ -53,6 +54,14 @@ class AnilistSettingsView extends SettingsScreenView {
         icon: Icons.notifications_active_rounded,
         isChecked: PrefName.activityAlerts.rx.value,
         onSwitchChange: (v) => PrefName.activityAlerts.rx.value = v,
+      ),
+      Setting.normal(
+        name: 'Open AniList links in Dartotsu',
+        description: 'Turn on link handling so anilist.co links open the app',
+        icon: Icons.link_rounded,
+        isActivity: true,
+        isVisible: canOpenLinkSettings,
+        onClick: openLinkSettings,
       ),
       const Setting.header('Feed layout'),
       Setting.normal(

@@ -16,6 +16,7 @@ import '../../Login/LoginScreen.dart';
 import '../../Settings/SettingsScreen.dart';
 import '../../Social/ActivityFeedScreen.dart';
 import '../../Social/ProfileScreen.dart';
+import '../../Social/SocialNavigation.dart';
 import 'BellButton.dart';
 import 'HeaderAvatar.dart';
 
@@ -130,6 +131,15 @@ class _Profile extends StatelessWidget {
                 ],
               ),
             ),
+            if (user != null && service.socialView != null)
+              IconButton(
+                tooltip: 'Activity',
+                icon: const Icon(Icons.forum_outlined),
+                onPressed: () {
+                  popPage(sheet);
+                  openActivityFeed(context, service);
+                },
+              ),
             if (user != null && service.notificationView != null)
               BellButton(
                 unread: user.unreadNotifications,

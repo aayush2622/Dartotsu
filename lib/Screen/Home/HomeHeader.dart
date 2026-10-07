@@ -14,7 +14,6 @@ import '../../Utils/Functions/NavigateToScreen.dart';
 import '../MediaList/MediaListScreen.dart';
 import '../Social/SocialNavigation.dart';
 import 'Components/AccountSheet.dart';
-import 'Components/BellButton.dart';
 import 'Components/HeaderAvatar.dart';
 import 'Components/HeaderBanner.dart';
 import 'Components/HeaderStatPill.dart';
@@ -87,22 +86,6 @@ class HomeHeader extends StatelessWidget {
                     ],
                   ),
                 ),
-                if (user != null && service.notificationView != null)
-                  BellButton(
-                    unread: user.unreadNotifications,
-                    onOpen: () => openNotifications(context, service),
-                    onLongPress: service.socialView == null
-                        ? null
-                        : () => openActivityFeed(context, service),
-                  ),
-                if (user != null && service.socialView != null)
-                  IconButton(
-                    tooltip: 'Activity',
-                    icon: const Icon(Icons.forum_outlined),
-                    onPressed: () => openActivityFeed(context, service),
-                    onLongPress: () =>
-                        openProfile(context, service, id: '${user.id}', tab: 1),
-                  ),
                 if (service.searchView != null)
                   IconButton(
                     icon: const Icon(Icons.search_rounded),

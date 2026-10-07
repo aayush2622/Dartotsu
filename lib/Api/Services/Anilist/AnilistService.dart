@@ -24,6 +24,9 @@ class AnilistService extends MediaService {
   @override
   String get iconPath => 'assets/svg/anilist.svg';
 
+  @override
+  Set<String> get linkHosts => const {'anilist.co', 'www.anilist.co'};
+
   AnilistAuth get _auth => find();
 
   @override

@@ -110,9 +110,10 @@ void openActivityFeed(
 Future<void> openAppLink(
   BuildContext context,
   MediaService service,
-  String url,
-) async {
-  final link = service.socialView?.parseLink(url);
+  String url, {
+  AppLink? link,
+}) async {
+  link ??= service.socialView?.parseLink(url);
   if (link == null) return openLinkInBrowser(url);
   switch (link.kind) {
     case AppLinkKind.anime:

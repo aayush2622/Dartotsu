@@ -128,6 +128,68 @@
                     android:scheme="tachiyomi" />
             </intent-filter>
 
+            <intent-filter android:label="Open in Dartotsu">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="dartotsu" />
+
+            </intent-filter>
+
+            <intent-filter android:label="Add Repo">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="add-repo"
+                    android:scheme="ireader" />
+            </intent-filter>
+
+            <intent-filter android:label="Add Repo">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="add-repo"
+                    android:scheme="legado" />
+            </intent-filter>
+
+            <intent-filter android:label="Add Repo">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="add-repo"
+                    android:scheme="yuedu" />
+            </intent-filter>
+
+            <intent-filter android:label="Open in Dartotsu">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="https" />
+                <data android:scheme="http" />
+                <data android:host="anilist.co" />
+                <data android:host="www.anilist.co" />
+                <data android:pathPrefix="/anime/" />
+                <data android:pathPrefix="/manga/" />
+                <data android:pathPrefix="/user/" />
+                <data android:pathPrefix="/character/" />
+                <data android:pathPrefix="/staff/" />
+                <data android:pathPrefix="/studio/" />
+                <data android:pathPrefix="/activity/" />
+            </intent-filter>
+
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -157,15 +219,6 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data android:scheme="dantotsu" />
-            </intent-filter>
-
-            <intent-filter android:label="Login for Dartotsu">
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="dartotsu" />
             </intent-filter>
 
         </activity>

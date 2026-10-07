@@ -1,3 +1,5 @@
+import 'package:get/get.dart';
+
 import 'Api/Mutations.dart';
 import 'Api/Queries.dart';
 import 'Local/LocalListStore.dart';
@@ -66,4 +68,22 @@ abstract class MediaService {
   NotificationScreenView? get notificationView => null;
 
   SettingsScreenView? get settingsView => null;
+
+  /// Web hosts whose links this service opens, e.g. `anilist.co`.
+  Set<String> get linkHosts => const {};
+
+  /// Extra custom URL schemes this service owns, e.g. `myservice`.
+  Set<String> get linkSchemes => const {};
+
+  /// Resolves an incoming link to an in-app destination. The default reads
+  /// `/<kind>/<value>` (`/anime/1`, also `dartotsu://<id>/anime/1`); override
+  /// for other shapes.
+  AppLink? parseUri(Uri uri) {
+    final segments = uri.pathSegments.where((s) => s.isNotEmpty).toList();
+    if (segments.length < 2) return null;
+    final kind = AppLinkKind.values.firstWhereOrNull(
+      (k) => k.name == segments[0],
+    );
+    return kind == null ? null : AppLink(kind, segments[1]);
+  }
 }

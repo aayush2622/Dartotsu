@@ -33,6 +33,7 @@ import 'Screen/MainScreen.dart';
 import 'Screen/Onboarding/OnboardingScreen.dart';
 import 'Utils/Functions/AppShortcuts.dart';
 import 'Utils/Functions/DeepLink.dart';
+import 'Utils/Functions/LinkSettings.dart';
 import 'Utils/Functions/GetXFunctions.dart';
 import 'Utils/Functions/NavigateToScreen.dart';
 import 'Api/Discord/DiscordPresenceController.dart';
@@ -117,6 +118,7 @@ Future<void> init(List<String> args) async {
 /// Work that can safely run after the first frame.
 Future<void> _postInit(List<String> args) async {
   DeepLink.init();
+  unawaited(refreshLinkHandling());
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
     DeepLink.initVideoIntentListener(args);
   }

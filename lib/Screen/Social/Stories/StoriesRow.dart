@@ -63,9 +63,22 @@ class _StoriesRowState extends State<StoriesRow> {
     );
   }
 
+  static final _cache =
+      <String, ({List<StoryGroup> groups, StoryGroup? own, DateTime at})>{};
+  static const _fresh = Duration(minutes: 2);
+
+  String get _cacheKey =>
+      '${widget.service.id}:${widget.service.auth?.user.value?.name}';
+
   @override
   void initState() {
     super.initState();
+    final cached = _cache[_cacheKey];
+    if (cached != null) {
+      _groups = cached.groups;
+      _own = cached.own;
+      if (DateTime.now().difference(cached.at) < _fresh) return;
+    }
     unawaited(_load());
   }
 
@@ -94,6 +107,7 @@ class _StoriesRowState extends State<StoriesRow> {
           mine.isEmpty ? const [] : mine.first.activities,
         );
       }
+      _cache[_cacheKey] = (groups: others, own: own, at: DateTime.now());
       if (!mounted) return;
       setState(() {
         _groups = others;

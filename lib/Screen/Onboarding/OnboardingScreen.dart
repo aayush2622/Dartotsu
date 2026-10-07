@@ -10,6 +10,7 @@ import '../../Core/ThemeManager/ThemeController.dart';
 import '../../Utils/Animation/WidgetAnimations.dart';
 import '../../Utils/Extensions/NumExtensions.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
+import '../../Utils/Functions/LinkSettings.dart';
 import '../../Widgets/Components/CachedNetworkImage.dart';
 import '../../Widgets/Components/ScrollConfig.dart';
 import '../Login/LoginScreen.dart';
@@ -171,10 +172,53 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     titleWidget: const Text(
       'Sync your library',
     ).animateFadeUp(target: _page == 2, duration: 700),
-    bodyWidget: const Text(
-      'Sign in with AniList to bring your lists, progress and scores '
-      'with you. Or skip and browse as a guest.',
-      textAlign: TextAlign.center,
+    bodyWidget: Obx(
+      () => Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Text(
+            'Sign in with AniList to bring your lists, progress and scores '
+            'with you. Or skip and browse as a guest.',
+            textAlign: TextAlign.center,
+          ),
+          if (canOpenLinkSettings) ...[
+            const SizedBox(height: 20),
+            ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 360),
+              child: DpadTap(
+                onTap: openLinkSettings,
+                borderRadius: BorderRadius.circular(12),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 12,
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(
+                        Icons.link_rounded,
+                        size: 22,
+                        color: theme.colorScheme.primary,
+                      ),
+                      const SizedBox(width: 12),
+                      const Flexible(
+                        child: Text('Open AniList and repo links in Dartotsu'),
+                      ),
+                      const SizedBox(width: 6),
+                      Icon(
+                        Icons.chevron_right_rounded,
+                        size: 18,
+                        color: theme.colorScheme.onSurfaceVariant,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ],
+      ),
     ).animateFadeUp(target: _page == 2, begin: 0.4, delay: 150.ms),
   );
 

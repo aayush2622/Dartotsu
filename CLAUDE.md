@@ -388,8 +388,9 @@ carry timestamps that shift after a pause). `BaseDiscordRPC` is just `show(prese
 (`DesktopRPC` over IPC with lazy reconnect, `MobileRPC` over the headless-sessions API with the user's
 Discord token). `DiscordPresenceController` (lazyPut, `start()` in `_postInit`) owns the presence stack,
 debounces updates, clears on app background / `hold()` and re-shows on resume / `release()`, and goes quiet
-for the `discordRpc` pref, `discordBrowsing` pref and incognito. Screens publish what you are doing with
-`PresenceScope(presence:, child:)` (top of the stack wins); the player/reader should push
+for the `discordRpc` pref, `discordBrowsing` pref and incognito. A `BaseScreen` publishes what it is doing by overriding
+`DiscordPresence? get presence` (call `refreshPresence()` when it depends on changing state); other widgets can
+use `PresenceScope(presence:, child:)` directly (top of the stack wins); the player/reader should push
 `DiscordPresence.consuming(...)` and call `hold()` / `release()` on pause / resume. Settings live in
 Account › Discord Rich Presence sub-screen (`Screen/Settings/Categories/DiscordSettings.dart`: enable, browsing activity, activity type, covers, timer, buttons, hide titles, mobile token; the look prefs are applied by `DiscordPresence.styled`).
 
@@ -400,6 +401,10 @@ Account › Discord Rich Presence sub-screen (`Screen/Settings/Categories/Discor
 `show(title, body, {id, payload})`, `cancel`, `cancelAll` and a `tapped` payload observable over
 `flutter_local_notifications`. Its only caller is `Core/Services/ActivityAlerts` (unread AniList
 notifications → system notifications). Add helpers only when a feature needs them.
+
+### Deep links
+
+`Utils/Functions/DeepLink.dart` receives every incoming URI (app_links; Android intent filters, iOS/macOS `CFBundleURLTypes`, Windows registry via `registerProtocolHandler`, Linux `x-scheme-handler` in the installer's `.desktop`) and hands it to the first matching `DeepLinkHandler` in `DeepLink.handlers` (`DeepLinkHandlers.dart`): `ExtensionRepoLinks` (`<scheme>://add-repo`) and `ServiceLinks`. A service claims links by overriding `MediaService.linkHosts` (web hosts, e.g. `anilist.co`), `linkSchemes` (own custom schemes) and, if its URLs aren't `/<kind>/<value>`, `parseUri(Uri)`; `dartotsu://<serviceId>/<kind>/<value>` always reaches that service. New features add their own handler with `DeepLink.register(...)`; the future player sets `DeepLink.playFiles` (files opened with the app, `dartotsu://play`-style handlers). Register a new scheme in `AndroidManifest.xml`, both `Info.plist`s and `scripts/install.sh`; Windows registers `appSchemes`, bridge schemes and service `linkSchemes` at startup.
 
 ### Logging
 
@@ -473,7 +478,7 @@ defines `handleError(e, st, {softCrash})` (called from the zone handler in `main
   `GenreItem`, `NotImplemented`.
 - `Widgets/Shelf/` — `MediaSection` + `MediaSectionState` (horizontal media shelf in
   a `ShelfFrame` with skeleton loading — `MediaSectionData.loading()` → `Skeletonizer` — and
-  overscroll-to-load-more + haptics). `PosterCard` items in a `SuperSliverList`, keyed by
+  overscroll-to-load-more + haptics; every titled shelf gets a → arrow (and a tappable title) that opens `Screen/Feed/ShelfScreen` — a full-page `PosterCard` grid that keeps paging through the section's `onLoadMore` as you scroll; opt out with `MediaSectionData(fullPage: false)`). `PosterCard` items in a `SuperSliverList`, keyed by
   `media.id` (+ `findChildIndexCallback`) so a cache patch touches only what changed.
 - `Utils/Animation/WidgetAnimations.dart` — `extension WidgetAnimations on Widget` built on
   `flutter_animate`: `animateFadeUp`, `animateDropIn`, `animatePageTransition`, `animateNav*`,

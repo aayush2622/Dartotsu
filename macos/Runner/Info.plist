@@ -62,6 +62,54 @@
                 <string>sugoireads</string>
             </array>
         </dict>
+        <dict>
+            <key>CFBundleURLName</key>
+            <string>dartotsu</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>dartotsu</string>
+            </array>
+        </dict>
+        <dict>
+            <key>CFBundleURLName</key>
+            <string>aniyomi</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>aniyomi</string>
+            </array>
+        </dict>
+        <dict>
+            <key>CFBundleURLName</key>
+            <string>tachiyomi</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>tachiyomi</string>
+            </array>
+        </dict>
+        <dict>
+            <key>CFBundleURLName</key>
+            <string>ireader</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>ireader</string>
+            </array>
+        </dict>
+        <dict>
+            <key>CFBundleURLName</key>
+            <string>legado</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>legado</string>
+            </array>
+        </dict>
+        <dict>
+            <key>CFBundleURLName</key>
+            <string>yuedu</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>yuedu</string>
+            </array>
+        </dict>
     </array>
 </dict>
 </plist>

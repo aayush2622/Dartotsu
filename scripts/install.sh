@@ -815,21 +815,12 @@ esac
 [Desktop Entry]
 Name=$APP_NAME
 Comment=The Ultimate Anime & Manga Experience
-Exec=$LINK
+Exec=$LINK %U
 Icon=$ICON_FILE
 Type=Application
 Categories=AudioVideo;Player
 
-MimeType=
-video/mp4;
-video/x-matroska;
-video/webm;
-audio/mpeg;
-audio/flac;
-x-scheme-handler/dar;
-x-scheme-handler/anymex;
-x-scheme-handler/sugoireads;
-x-scheme-handler/mangayomi;
+MimeType=video/mp4;video/x-matroska;video/webm;audio/mpeg;audio/flac;x-scheme-handler/dartotsu;x-scheme-handler/dar;x-scheme-handler/anymex;x-scheme-handler/sugoireads;x-scheme-handler/mangayomi;x-scheme-handler/aniyomi;x-scheme-handler/tachiyomi;x-scheme-handler/ireader;x-scheme-handler/legado;x-scheme-handler/yuedu;
 EOL
     chmod +x "$DESKTOP_FILE"
 
